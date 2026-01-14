@@ -17,8 +17,8 @@ from google.genai import types
 API_KEY = "YOUR_API_KEY_HERE"
 
 # 1. 核心文件配置
-SOURCE_EN_JSON_PATH = "pf2e-beginner-box.adventures.json"
-TARGET_JSON_PATH = "pf2e-beginner-box_CN.json"
+SOURCE_EN_JSON_PATH = "pf2e-beginner-box-en.json"
+TARGET_JSON_PATH = "pf2e-beginner-box.adventures.json"
 
 # 2. 术语表配置
 GLOBAL_GLOSSARY_PATH = "术语译名对照表.csv" 
@@ -515,7 +515,7 @@ def main():
                         
             except Exception as e: pass
 
-    with open(OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
+    with open(TARGET_JSON_PATH, 'w', encoding='utf-8') as f:
         json.dump(en_data, f, ensure_ascii=False, indent=2)
     
     save_logs()
