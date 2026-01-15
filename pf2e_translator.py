@@ -355,6 +355,14 @@ def smart_format_bilingual(cn, en):
     clean_cn = re.sub(r'[\s\W]', '', cn).lower()
     if clean_en in clean_cn:
         return cn
+    # 短文本：如果译文里已包含英文，避免再次追加原文导致重复
+    if en and len(en) <= 80 and re.search(r'[A-Za-z]', cn):
+        return cn
+    # 短文本：如果译文已包含原文中的任一关键英文词，也视为已含原文
+    if en and len(en) <= 80:
+        for w in re.findall(r"[A-Za-z][A-Za-z']{2,}", en):
+            if re.search(rf"\b{re.escape(w)}\b", cn, flags=re.IGNORECASE):
+                return cn
     # 长文本用换行分隔，短文本用空格
     sep = "<br><br><hr><b>原文:</b><br>" if (len(en) > 80 or "<p>" in en) else " "
     return f"{cn}{sep}{en}"

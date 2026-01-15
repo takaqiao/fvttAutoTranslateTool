@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Backups
+backups/
+*.bak
+
+# Logs and reports
+运行日志.txt
+失败漏翻记录.txt
+翻译审查报告.xlsx
+~$*.xlsx
+
+# Generated glossary/history
+术语表_本地提取.csv
+translation_history.json
+
+# OS
+.DS_Store
+Thumbs.db
