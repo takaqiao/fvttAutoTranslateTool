@@ -55,6 +55,9 @@ MISSED_LOG_PATH = Path("失败漏翻记录.txt")
 HISTORY_FILE_PATH = Path("translation_history.json")
 BACKUP_DIR = Path("backups")
 
+# 7. 日志输出
+PRINT_LOG_TO_TERMINAL = True  # 同步输出到终端，便于实时观察
+
 # 目标字段白名单
 TARGET_KEYS = {
     "name", "description", "text", "label", "caption", "value", 
@@ -97,7 +100,10 @@ def write_process_log(msg):
     """线程安全的日志写入"""
     with log_lock:
         timestamp = time.strftime("%H:%M:%S", time.localtime())
-        process_log_buffer.append(f"[{timestamp}] {msg}")
+        line = f"[{timestamp}] {msg}"
+        process_log_buffer.append(line)
+        if PRINT_LOG_TO_TERMINAL:
+            print(line)
         # 每100条日志自动刷盘一次
         if len(process_log_buffer) >= 100:
             _flush_process_log()
@@ -135,6 +141,7 @@ def call_ai_with_fallback(sys_prompt, user_prompt, path_str):
         
         for attempt in range(MAX_RETRIES):
             try:
+                write_process_log(f"🧠 调用模型: {model_id} | 第{attempt+1}次 | {path_str}")
                 if provider == "google":
                     response = google_client.models.generate_content(
                         model=model_id,
@@ -143,6 +150,7 @@ def call_ai_with_fallback(sys_prompt, user_prompt, path_str):
                     )
                     if not response.text:
                         raise ValueError("Empty Google Response")
+                    write_process_log(f"✅ 模型完成: {model_id} | {path_str}")
                     return response.text
                 elif provider == "openai":
                     if "gpt-5" in model_id or "o1" in model_id or "o3" in model_id:
@@ -153,6 +161,7 @@ def call_ai_with_fallback(sys_prompt, user_prompt, path_str):
                             input=user_prompt,
                             reasoning={"effort": "none"}
                         )
+                        write_process_log(f"✅ 模型完成: {model_id} | {path_str}")
                         return response.output_text
                     else:
                         # 使用 Chat Completions
@@ -164,9 +173,11 @@ def call_ai_with_fallback(sys_prompt, user_prompt, path_str):
                             ],
                             temperature=0.1
                         )
+                        write_process_log(f"✅ 模型完成: {model_id} | {path_str}")
                         return response.choices[0].message.content
             except Exception as e:
                 last_error = e
+                write_process_log(f"⚠️ 模型失败: {model_id} | {path_str} | {e}")
                 # 遇到速率限制立即重试下一个模型
                 if "429" in str(e) or "Resource Unavailable" in str(e):
                     break
@@ -189,6 +200,7 @@ def backup_existing_files():
             try:
                 backup_path = BACKUP_DIR / f"{timestamp}_{file_path.name}.bak"
                 backup_path.write_bytes(file_path.read_bytes())
+                write_process_log(f"✅ 备份完成: {file_path.name} -> {backup_path}")
             except Exception as e:
                 write_process_log(f"备份失败: {file_path.name} - {e}")
 
@@ -413,6 +425,23 @@ def cleanup_injection_tags(text):
     text = re.sub(r'⟪(.*?)\|原文:.*?⟫', r'\1', text)
     return text
 
+def collapse_duplicate_cn_prefix(text):
+    """清理短文本开头的重复中文词组
+
+    例: "属性值 属性值 Ability Scores" -> "属性值 Ability Scores"
+    """
+    if not text:
+        return text
+    parts = text.split()
+    if len(parts) < 2:
+        return text
+    if parts[0] == parts[1] and re.search(r'[\u4e00-\u9fff]', parts[0]):
+        i = 1
+        while i < len(parts) and parts[i] == parts[0]:
+            i += 1
+        return " ".join([parts[0]] + parts[i:])
+    return text
+
 protector = CodeProtector()
 
 def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
@@ -433,6 +462,8 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
         return en_text, None
     if not re.search(r'[a-zA-Z]', en_text):
         return en_text, None
+
+    write_process_log(f"🧩 处理任务: {task_type} | {path_str}")
     
     # 代码保护和术语注入
     prot = CodeProtector()
@@ -459,6 +490,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
         trans = clean_response_text(res_text)
         final_trans = prot.unmask(trans, code_ph)
         final_trans = cleanup_injection_tags(final_trans)
+        final_trans = collapse_duplicate_cn_prefix(final_trans)
 
         # 确定状态
         status = "New"
@@ -470,6 +502,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
                 status = "Fixed"
 
         log_report(status, path_str, en_text, final_trans, terms)
+        write_process_log(f"✅ 任务完成: {status} | {path_str}")
         return smart_format_bilingual(final_trans, en_text), status
 
     except Exception as e:
@@ -646,6 +679,7 @@ def main():
     global history_cache
     history_cache = load_history()
     print(f"🧠 已加载缓存: {len(history_cache)} 条记录")
+    write_process_log(f"缓存条目: {len(history_cache)}")
 
     # 加载源文件
     with SOURCE_EN_JSON_PATH.open('r', encoding='utf-8-sig') as f:
@@ -658,6 +692,7 @@ def main():
             print("🔄 加载目标文件...")
             with TARGET_JSON_PATH.open('r', encoding='utf-8-sig') as f:
                 cn_data = json.load(f)
+            write_process_log(f"目标文件加载成功: {TARGET_JSON_PATH}")
         except Exception as e:
             print(f"❌ 加载目标文件失败: {e}")
             if SYNC_MODE == "TARGET_MASTER":
@@ -672,6 +707,7 @@ def main():
 
     extract_local_glossary(en_data, cn_data, LOCAL_GLOSSARY_EXPORT_PATH)
     glossary = GlossaryManager(GLOBAL_GLOSSARY_PATH, LOCAL_GLOSSARY_EXPORT_PATH)
+    write_process_log(f"术语库加载完成: {len(glossary.sorted_keys)} 条")
     
     print("构建任务队列...")
     
@@ -684,6 +720,12 @@ def main():
         all_tasks = collect_tasks_source_master(en_data, cn_data)
         
     print(f"待处理任务: {len(all_tasks)}")
+    # 统计任务类型
+    type_counts = {"NEW": 0, "AUDIT": 0}
+    for t in all_tasks:
+        if t["type"] in type_counts:
+            type_counts[t["type"]] += 1
+    write_process_log(f"任务统计: NEW={type_counts['NEW']}, AUDIT={type_counts['AUDIT']}")
     
     if not all_tasks: 
         print("🎉 没有需要更新的内容！")
@@ -691,6 +733,7 @@ def main():
 
     rl = RateLimiter(TARGET_RPM)
     print("🚀 引擎启动...")
+    write_process_log(f"线程池启动: workers={MAX_WORKERS}, RPM={TARGET_RPM}")
     
     # 使用线程池并发处理任务
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as exe:
@@ -724,6 +767,7 @@ def main():
     # 保存翻译结果
     with TARGET_JSON_PATH.open('w', encoding='utf-8') as f:
         json.dump(output_obj, f, ensure_ascii=False, indent=2)
+    write_process_log(f"写入目标文件: {TARGET_JSON_PATH}")
     
     # 保存遗漏日志
     if missed_log_buffer:
@@ -750,8 +794,10 @@ def main():
             break
 
     save_history()
+    write_process_log("历史缓存已保存")
     # 刷新日志缓冲区
     _flush_process_log()
+    write_process_log("日志已刷新")
     
     # 生成总结报告
     print("\n" + "="*50)
