@@ -42,6 +42,7 @@ MODEL_PRIORITY_LIST = [
 MAX_WORKERS = 16    
 TARGET_RPM = 450   
 MAX_RETRIES = 5     
+MAX_AUDIT_ROUNDS = 1  # 校对最多轮数
 
 # 5. [核心开关] 暴力防漏模式 (仅在翻译内容判断时生效)
 BRUTE_FORCE_MODE = True 
@@ -57,6 +58,7 @@ BACKUP_DIR = Path("backups")
 
 # 7. 日志输出
 PRINT_LOG_TO_TERMINAL = True  # 同步输出到终端，便于实时观察
+USE_TQDM_WRITE = True         # 使用 tqdm.write 避免打断进度条
 
 # 目标字段白名单
 TARGET_KEYS = {
@@ -83,7 +85,7 @@ if any(p == "openai" for p, m in MODEL_PRIORITY_LIST) and OPENAI_API_KEY:
     openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 log_lock = Lock()
-report_data = {"New": [], "Fixed": [], "Kept": []}
+report_data = {"New": [], "Fixed": [], "Kept": [], "TermAdjusted": []}
 process_log_buffer = []
 missed_log_buffer = [] 
 history_cache = set()
@@ -103,7 +105,10 @@ def write_process_log(msg):
         line = f"[{timestamp}] {msg}"
         process_log_buffer.append(line)
         if PRINT_LOG_TO_TERMINAL:
-            print(line)
+            if USE_TQDM_WRITE:
+                tqdm.write(line)
+            else:
+                print(line)
         # 每100条日志自动刷盘一次
         if len(process_log_buffer) >= 100:
             _flush_process_log()
@@ -382,6 +387,7 @@ def smart_format_bilingual(cn, en):
 def extract_local_glossary(en_data, cn_data, output_path):
     """从翻译数据中提取本地术语表"""
     print("正在扫描本地术语...")
+    write_process_log("开始提取本地术语表")
     extracted = []
     
     def traverse(en_node, cn_node):
@@ -396,6 +402,8 @@ def extract_local_glossary(en_data, cn_data, output_path):
         elif isinstance(en_node, str) and isinstance(cn_node, str):
             if len(en_node) < 60 and len(cn_node) > 0 and en_node != cn_node:
                 clean_cn = smart_format_bilingual(cn_node, "")
+                clean_cn = strip_english_tokens(clean_cn)
+                clean_cn = collapse_duplicate_numeric_suffix(clean_cn)
                 if clean_cn and re.search(r'[\u4e00-\u9fff]', clean_cn):
                     extracted.append({'Source': en_node, 'Target': clean_cn})
     
@@ -405,8 +413,11 @@ def extract_local_glossary(en_data, cn_data, output_path):
             df = pd.DataFrame(extracted).drop_duplicates(subset=['Source'])
             output_path = Path(output_path)
             df.to_csv(output_path, index=False, encoding='utf-8-sig')
+            write_process_log(f"本地术语表导出完成: {output_path} | 条目: {len(df)}")
         except Exception as e:
             write_process_log(f"⚠️ 导出术语表失败: {e}")
+    else:
+        write_process_log("本地术语表为空：未导出")
 
 def clean_response_text(text):
     """清理AI响应文本"""
@@ -423,6 +434,12 @@ def cleanup_injection_tags(text):
         return text
     # 移除注入标签，保留翻译
     text = re.sub(r'⟪(.*?)\|原文:.*?⟫', r'\1', text)
+    # 清理残留的“|原文:”碎片（含缺失左括号的情况）
+    text = re.sub(r'\s*\d+\|原文:[^⟫]*', '', text)
+    text = re.sub(r'\s*\|原文:[^⟫]*', '', text)
+    # 清理残留注入符号与代码块标记
+    text = text.replace('⟪', '').replace('⟫', '')
+    text = text.replace('```', '')
     return text
 
 def collapse_duplicate_cn_prefix(text):
@@ -442,9 +459,42 @@ def collapse_duplicate_cn_prefix(text):
         return " ".join([parts[0]] + parts[i:])
     return text
 
+def collapse_duplicate_numeric_suffix(text):
+    """清理末尾重复数字（如: 01 01 / 2 2）"""
+    if not text:
+        return text
+    parts = text.split()
+    while len(parts) >= 2 and parts[-1] == parts[-2] and re.fullmatch(r"\d+", parts[-1]):
+        parts.pop()
+    return " ".join(parts)
+
+def strip_english_tokens(text):
+    """移除文本中的英文词，保留中文与数字
+
+    用于本地术语提取，避免术语表携带英文尾巴。
+    """
+    if not text:
+        return text
+    cleaned = re.sub(r"[A-Za-z][A-Za-z0-9'\-]*", "", text)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned if cleaned else text
+
+def normalize_for_compare(text):
+    return re.sub(r'\s', '', text or '')
+
+def detect_adjusted_terms(output_text, injected_terms):
+    """检测术语是否被改动（输出中缺失术语译名）"""
+    adjusted = []
+    if not output_text or not injected_terms:
+        return adjusted
+    for en, target in injected_terms:
+        if target and target not in output_text:
+            adjusted.append((en, target))
+    return adjusted
+
 protector = CodeProtector()
 
-def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
+def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, audit_mode=None):
     """处理单个翻译项
     
     Args:
@@ -470,13 +520,25 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
     masked, code_ph = prot.mask(en_text)
     injected, terms = glossary_mgr.pre_inject_text(masked, path_str)
     
-    # 清理初稿
-    clean_draft_txt = cn_draft
-    if cn_draft and "<hr>" in cn_draft:
-        clean_draft_txt = cn_draft.split("<hr>")[0].strip()
+    # 构建审校初稿
+    clean_draft_txt = cn_draft or ""
+    if task_type == "AUDIT" and audit_mode == "AUDIT_CN_APPEND":
+        clean_draft_txt = smart_format_bilingual(clean_draft_txt, en_text)
     
     # 构建提示词
-    sys_prompt = "You are a professional Pathfinder 2e translator. Output ONLY Chinese. Keep HTML/Codes."
+    sys_prompt = (
+        "You are a professional Pathfinder 2e translator. "
+        "Output ONLY Simplified Chinese. Keep HTML/Foundry codes unchanged. "
+        "Do NOT output notes, tags like ⟪⟫ or |原文:, "
+        "do NOT add markdown fences or comments, and do NOT repeat words. "
+        "Keep numbers and units exactly as in the source."
+    )
+    audit_prompt = (
+        "You are a professional Pathfinder 2e editor. "
+        "Keep the Draft format unchanged. If the Draft contains English (e.g., after <hr>原文), "
+        "preserve the English segment as-is. Only fix Chinese wording/grammar. "
+        "Do NOT add/remove HTML or Foundry codes. Output the corrected Draft only."
+    )
     if task_type == "AUDIT":
         prompt = (
             f"Original:\n```\n{injected}\n```\nDraft:\n```\n{clean_draft_txt}\n```\n"
@@ -486,24 +548,46 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
         prompt = f"Translate:\n```\n{injected}\n```"
 
     try:
+        # 译文/校对
+        if task_type == "AUDIT":
+            draft = clean_draft_txt
+            changed = False
+            final_trans = draft
+            for _ in range(MAX_AUDIT_ROUNDS):
+                res_text = call_ai_with_fallback(audit_prompt, (
+                    f"Original:\n```\n{injected}\n```\n"
+                    f"Draft:\n```\n{draft}\n```\n"
+                    f"Task: Review draft. If correct, output it. If wrong, correct it."
+                ), path_str)
+                trans = clean_response_text(res_text)
+                final_trans = prot.unmask(trans, code_ph)
+                final_trans = cleanup_injection_tags(final_trans)
+                final_trans = collapse_duplicate_cn_prefix(final_trans)
+                final_trans = collapse_duplicate_numeric_suffix(final_trans)
+
+                if normalize_for_compare(final_trans) == normalize_for_compare(draft):
+                    break
+                changed = True
+                draft = final_trans
+
+            status = "Fixed" if changed else "Kept"
+            adjusted_terms = detect_adjusted_terms(final_trans, terms)
+            log_report(status, path_str, en_text, final_trans, terms, adjusted_terms)
+            write_process_log(f"✅ 任务完成: {status} | {path_str}")
+            return final_trans, status
+
+        # NEW 翻译
         res_text = call_ai_with_fallback(sys_prompt, prompt, path_str)
         trans = clean_response_text(res_text)
         final_trans = prot.unmask(trans, code_ph)
         final_trans = cleanup_injection_tags(final_trans)
         final_trans = collapse_duplicate_cn_prefix(final_trans)
+        final_trans = collapse_duplicate_numeric_suffix(final_trans)
 
-        # 确定状态
-        status = "New"
-        if task_type == "AUDIT":
-            # 对比前后去空格
-            if re.sub(r'\s', '', final_trans) == re.sub(r'\s', '', clean_draft_txt):
-                status = "Kept"
-            else:
-                status = "Fixed"
-
-        log_report(status, path_str, en_text, final_trans, terms)
-        write_process_log(f"✅ 任务完成: {status} | {path_str}")
-        return smart_format_bilingual(final_trans, en_text), status
+        adjusted_terms = detect_adjusted_terms(final_trans, terms)
+        log_report("New", path_str, en_text, final_trans, terms, adjusted_terms)
+        write_process_log(f"✅ 任务完成: New | {path_str}")
+        return smart_format_bilingual(final_trans, en_text), "New"
 
     except Exception as e:
         write_process_log(f"❌ 所有模型失败 {path_str}: {e}")
@@ -511,12 +595,21 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str):
         fallback = smart_format_bilingual(cn_draft, en_text) if cn_draft else f"【FAIL】{en_text}"
         return fallback, None
 
-def log_report(status, path, original, translated, injected_terms):
+def log_report(status, path, original, translated, injected_terms, adjusted_terms=None):
     term_str = " | ".join([f"{e}->{c}" for e, c in injected_terms])
-    row = {"JSON Path": path, "Involved Terms": term_str, "Original": original, "Translation": translated}
+    adjusted_str = " | ".join([f"{e}->{c}" for e, c in (adjusted_terms or [])])
+    row = {
+        "JSON Path": path,
+        "Involved Terms": term_str,
+        "Adjusted Terms": adjusted_str,
+        "Original": original,
+        "Translation": translated
+    }
     with log_lock:
         if status in report_data:
             report_data[status].append(row)
+        if adjusted_terms:
+            report_data["TermAdjusted"].append(row)
 
 # === V32 核心：任务收集分流 ===
 
@@ -558,7 +651,11 @@ def collect_tasks_source_master(en_data, cn_data, path_str="root"):
         if should_translate:
             if cn_v and get_content_hash(v, cn_v) in history_cache: continue
             tt = 'AUDIT' if (cn_v and isinstance(cn_v, str) and len(cn_v) > 0 and cn_v != v) else 'NEW'
-            tasks.append({'type': tt, 'ref': en_data, 'k': k, 'en_v': v, 'cn_v': cn_v if tt=='AUDIT' else None, 'path': cur_path})
+            mode = None
+            if tt == 'AUDIT' and isinstance(cn_v, str):
+                has_en = bool(re.search(r'[a-zA-Z]', cn_v))
+                mode = 'AUDIT_BILINGUAL' if has_en else 'AUDIT_CN_APPEND'
+            tasks.append({'type': tt, 'mode': mode, 'ref': en_data, 'k': k, 'en_v': v, 'cn_v': cn_v if tt=='AUDIT' else None, 'path': cur_path})
             
         elif isinstance(v, (dict, list)):
             new_cn = cn_v if isinstance(cn_v, (dict, list)) else {}
@@ -594,19 +691,23 @@ def collect_tasks_target_master(cn_data, en_data, path_str="root"):
         
         # 判断逻辑
         should_translate = False
-        # 我们检查 v (Target里的值)。如果它是字符串，且包含英文，我们就得翻。
-        # 不管它是不是在白名单里，只要在 Target 文件里出现了，通常都意味着要保留。
+        mode = None
+        # 我们检查 v (Target里的值)。如果它是字符串，且包含英文/中文，我们分别处理。
         if isinstance(v, str) and len(v) > 1:
-            has_letters = bool(re.search(r'[a-zA-Z]', v))
-            if has_letters:
-                # 依然应用一些基础过滤，防止翻译 ID 或 路径
-                is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
-                is_target_key = False
-                if isinstance(cn_data, dict) and k in TARGET_KEYS: is_target_key = True
-                
-                # 在 TargetMaster 模式下，如果 key 在白名单里，或者看起来像句子（有空格），就翻
-                if not is_file and (is_target_key or " " in v):
-                     should_translate = True
+            has_en = bool(re.search(r'[a-zA-Z]', v))
+            has_cn = bool(re.search(r'[\u4e00-\u9fff]', v))
+            # 依然应用一些基础过滤，防止翻译 ID 或 路径
+            is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
+            is_target_key = False
+            if isinstance(cn_data, dict) and k in TARGET_KEYS: is_target_key = True
+            # 1) 含英文：需要翻译/校对
+            if has_en and not is_file and (is_target_key or " " in v):
+                should_translate = True
+                mode = 'AUDIT_BILINGUAL' if has_cn else None
+            # 2) 纯中文但有英文对应：补原文并校对
+            elif (not has_en) and has_cn and isinstance(en_v, str) and en_v != v and (not is_file) and (is_target_key or " " in v):
+                should_translate = True
+                mode = 'AUDIT_CN_APPEND'
 
         if should_translate:
             # 如果 Source 里找不到对应的 en_v (因为结构不同)，我们就把当前 Target 里的 v 当作原文
@@ -622,6 +723,7 @@ def collect_tasks_target_master(cn_data, en_data, path_str="root"):
             # 注意：这里的 ref 是 cn_data，因为我们要回写到 Target
             tasks.append({
                 'type': task_type,
+                'mode': mode,
                 'ref': cn_data, 
                 'k': k,
                 'en_v': original_text, # 送给 AI 的参考原文
@@ -739,13 +841,13 @@ def main():
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as exe:
         fut_map = {}
         # 提交任务
-        for t in tqdm(all_tasks, desc="分发"):
+        for t in tqdm(all_tasks, desc="分发", position=0, leave=True, dynamic_ncols=True):
             rl.wait_for_slot()
-            future = exe.submit(process_single_item, t['type'], t['en_v'], t['cn_v'], glossary, t['path'])
+            future = exe.submit(process_single_item, t['type'], t['en_v'], t['cn_v'], glossary, t['path'], t.get('mode'))
             fut_map[future] = t
         
         # 收集结果
-        for f in tqdm(concurrent.futures.as_completed(fut_map), total=len(all_tasks), desc="回收"):
+        for f in tqdm(concurrent.futures.as_completed(fut_map), total=len(all_tasks), desc="回收", position=1, leave=True, dynamic_ncols=True):
             task = fut_map[f]
             try:
                 res, st = f.result(timeout=30)  # 单个任务超时30秒
@@ -783,6 +885,7 @@ def main():
                 pd.DataFrame(report_data["New"]).to_excel(w, sheet_name="New", index=False)
                 pd.DataFrame(report_data["Fixed"]).to_excel(w, sheet_name="Fixed", index=False)
                 pd.DataFrame(report_data["Kept"]).to_excel(w, sheet_name="Kept", index=False)
+                pd.DataFrame(report_data["TermAdjusted"]).to_excel(w, sheet_name="TermAdjusted", index=False)
             break
         except PermissionError:
             if attempt < max_retry - 1:
