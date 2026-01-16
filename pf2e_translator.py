@@ -4,6 +4,8 @@ import time
 import re
 import hashlib
 import concurrent.futures
+import difflib
+from html import escape
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
@@ -15,6 +17,11 @@ from tqdm import tqdm
 from google import genai
 from google.genai import types
 from openai import OpenAI
+try:
+    from opencc import OpenCC
+    _opencc_t2s = OpenCC("t2s")
+except Exception:
+    _opencc_t2s = None
 
 # ================= 配置区域 =================
 
@@ -53,16 +60,23 @@ MAX_AUDIT_PASSES = 2
 SAFE_MODE = True
 
 # 4.6 测试模式（不调用AI，仅验证格式一致性）
-TEST_MODE = True
-TEST_MODE_WRITE = True  # True 时输出到 TEST_OUTPUT_PATH
+TEST_MODE = False
+TEST_MODE_WRITE = False  # True 时输出到 TEST_OUTPUT_PATH
 TEST_OUTPUT_PATH = Path("pf2e-beginner-box.adventures.test.json")
 # 是否模拟完整处理流程（不调用AI，但会走清洗/规范化等流程）
 # 注意：该模式不会落盘，仅统计可能改动的条目数量
-TEST_MODE_SIMULATE_PIPELINE = True
+TEST_MODE_SIMULATE_PIPELINE = False
 SIMULATE_AI = False
 
 # 5. [核心开关] 暴力防漏模式 (仅在翻译内容判断时生效)
 BRUTE_FORCE_MODE = False
+
+# 5.1 后处理：强制简体中文（需要 opencc 可用）
+FORCE_SIMPLIFIED_POST = True
+
+# 5.2 差异报告输出
+DIFF_REPORT_ENABLED = True
+DIFF_REPORT_PATH = Path("translation_diff_report.html")
 
 # 8. 输出风格配置
 # - FULL_BILINGUAL_MODE: 全字段双语（自动补全英文）
@@ -107,15 +121,9 @@ SPECIAL_CONTAINERS = {
 
 # ===========================================
 
-# 初始化客户端
+# 初始化客户端（延迟到配置加载后）
 google_client = None
 openai_client = None
-
-if any(p == "google" for p, m in MODEL_PRIORITY_LIST) and GOOGLE_API_KEY:
-    google_client = genai.Client(api_key=GOOGLE_API_KEY)
-
-if any(p == "openai" for p, m in MODEL_PRIORITY_LIST) and OPENAI_API_KEY:
-    openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 log_lock = Lock()
 report_data = {"New": [], "Fixed": [], "Kept": [], "TermAdjusted": [], "FormatAnomaly": []}
@@ -124,6 +132,140 @@ missed_log_buffer = []
 history_cache = set()
 new_history_entries = set()
 audit_history = {}
+_opencc_warned = False
+
+CONFIG_PATH = Path("translator_config.json")
+
+DEFAULT_CONFIG = {
+    "GOOGLE_API_KEY": GOOGLE_API_KEY,
+    "OPENAI_API_KEY": OPENAI_API_KEY,
+    "OPENAI_BASE_URL": OPENAI_BASE_URL,
+    "SYNC_MODE": SYNC_MODE,
+    "SOURCE_EN_JSON_PATH": str(SOURCE_EN_JSON_PATH),
+    "TARGET_JSON_PATH": str(TARGET_JSON_PATH),
+    "MODEL_PRIORITY_LIST": MODEL_PRIORITY_LIST,
+    "MAX_WORKERS": MAX_WORKERS,
+    "TARGET_RPM": TARGET_RPM,
+    "MAX_RETRIES": MAX_RETRIES,
+    "MAX_AUDIT_ROUNDS": MAX_AUDIT_ROUNDS,
+    "MAX_AUDIT_PASSES": MAX_AUDIT_PASSES,
+    "SAFE_MODE": SAFE_MODE,
+    "TEST_MODE": TEST_MODE,
+    "TEST_MODE_WRITE": TEST_MODE_WRITE,
+    "TEST_OUTPUT_PATH": str(TEST_OUTPUT_PATH),
+    "TEST_MODE_SIMULATE_PIPELINE": TEST_MODE_SIMULATE_PIPELINE,
+    "SIMULATE_AI": SIMULATE_AI,
+    "BRUTE_FORCE_MODE": BRUTE_FORCE_MODE,
+    "FULL_BILINGUAL_MODE": FULL_BILINGUAL_MODE,
+    "BILINGUAL_KEYS": list(BILINGUAL_KEYS),
+    "CN_ONLY_KEYS": list(CN_ONLY_KEYS),
+    "LONG_TEXT_KEYS": list(LONG_TEXT_KEYS),
+    "TRANSLATE_MACROS": TRANSLATE_MACROS,
+    "SKIP_CONTAINERS": list(SKIP_CONTAINERS),
+    "GLOBAL_GLOSSARY_PATH": str(GLOBAL_GLOSSARY_PATH),
+    "LOCAL_GLOSSARY_EXPORT_PATH": str(LOCAL_GLOSSARY_EXPORT_PATH),
+    "REPORT_XLSX_PATH": str(REPORT_XLSX_PATH),
+    "PROCESS_LOG_PATH": str(PROCESS_LOG_PATH),
+    "MISSED_LOG_PATH": str(MISSED_LOG_PATH),
+    "HISTORY_FILE_PATH": str(HISTORY_FILE_PATH),
+    "AUDIT_HISTORY_PATH": str(AUDIT_HISTORY_PATH),
+    "BACKUP_DIR": str(BACKUP_DIR),
+    "PRINT_LOG_TO_TERMINAL": PRINT_LOG_TO_TERMINAL,
+    "USE_TQDM_WRITE": USE_TQDM_WRITE,
+    "TARGET_KEYS": list(TARGET_KEYS),
+    "SPECIAL_CONTAINERS": list(SPECIAL_CONTAINERS),
+    "FORCE_SIMPLIFIED_POST": FORCE_SIMPLIFIED_POST,
+    "DIFF_REPORT_ENABLED": DIFF_REPORT_ENABLED,
+    "DIFF_REPORT_PATH": str(DIFF_REPORT_PATH),
+}
+
+def load_config():
+    cfg = deepcopy(DEFAULT_CONFIG)
+    if CONFIG_PATH.exists():
+        try:
+            with CONFIG_PATH.open("r", encoding="utf-8") as f:
+                user_cfg = json.load(f)
+            if isinstance(user_cfg, dict):
+                cfg.update(user_cfg)
+        except Exception as e:
+            print(f"⚠️ 配置文件读取失败: {e}")
+    return cfg
+
+def _coerce_set(val):
+    if isinstance(val, set):
+        return val
+    if isinstance(val, list):
+        return set([str(x).strip() for x in val if str(x).strip()])
+    if isinstance(val, str):
+        parts = re.split(r"[\n,]", val)
+        return set([p.strip() for p in parts if p.strip()])
+    return set()
+
+def apply_config(cfg):
+    global GOOGLE_API_KEY, OPENAI_API_KEY, OPENAI_BASE_URL
+    global SYNC_MODE, SOURCE_EN_JSON_PATH, TARGET_JSON_PATH
+    global MODEL_PRIORITY_LIST, MAX_WORKERS, TARGET_RPM, MAX_RETRIES
+    global MAX_AUDIT_ROUNDS, MAX_AUDIT_PASSES, SAFE_MODE
+    global TEST_MODE, TEST_MODE_WRITE, TEST_OUTPUT_PATH
+    global TEST_MODE_SIMULATE_PIPELINE, SIMULATE_AI, BRUTE_FORCE_MODE
+    global FULL_BILINGUAL_MODE, BILINGUAL_KEYS, CN_ONLY_KEYS, LONG_TEXT_KEYS
+    global TRANSLATE_MACROS, SKIP_CONTAINERS
+    global GLOBAL_GLOSSARY_PATH, LOCAL_GLOSSARY_EXPORT_PATH, REPORT_XLSX_PATH
+    global PROCESS_LOG_PATH, MISSED_LOG_PATH, HISTORY_FILE_PATH, AUDIT_HISTORY_PATH, BACKUP_DIR
+    global PRINT_LOG_TO_TERMINAL, USE_TQDM_WRITE, TARGET_KEYS, SPECIAL_CONTAINERS
+    global FORCE_SIMPLIFIED_POST, DIFF_REPORT_ENABLED, DIFF_REPORT_PATH
+
+    GOOGLE_API_KEY = cfg.get("GOOGLE_API_KEY", GOOGLE_API_KEY)
+    OPENAI_API_KEY = cfg.get("OPENAI_API_KEY", OPENAI_API_KEY)
+    OPENAI_BASE_URL = cfg.get("OPENAI_BASE_URL", OPENAI_BASE_URL)
+    SYNC_MODE = cfg.get("SYNC_MODE", SYNC_MODE)
+    SOURCE_EN_JSON_PATH = Path(cfg.get("SOURCE_EN_JSON_PATH", str(SOURCE_EN_JSON_PATH)))
+    TARGET_JSON_PATH = Path(cfg.get("TARGET_JSON_PATH", str(TARGET_JSON_PATH)))
+    model_list = cfg.get("MODEL_PRIORITY_LIST", MODEL_PRIORITY_LIST)
+    if isinstance(model_list, list):
+        MODEL_PRIORITY_LIST = [tuple(x) for x in model_list]
+    MAX_WORKERS = int(cfg.get("MAX_WORKERS", MAX_WORKERS))
+    TARGET_RPM = int(cfg.get("TARGET_RPM", TARGET_RPM))
+    MAX_RETRIES = int(cfg.get("MAX_RETRIES", MAX_RETRIES))
+    MAX_AUDIT_ROUNDS = int(cfg.get("MAX_AUDIT_ROUNDS", MAX_AUDIT_ROUNDS))
+    MAX_AUDIT_PASSES = int(cfg.get("MAX_AUDIT_PASSES", MAX_AUDIT_PASSES))
+    SAFE_MODE = bool(cfg.get("SAFE_MODE", SAFE_MODE))
+    TEST_MODE = bool(cfg.get("TEST_MODE", TEST_MODE))
+    TEST_MODE_WRITE = bool(cfg.get("TEST_MODE_WRITE", TEST_MODE_WRITE))
+    TEST_OUTPUT_PATH = Path(cfg.get("TEST_OUTPUT_PATH", str(TEST_OUTPUT_PATH)))
+    TEST_MODE_SIMULATE_PIPELINE = bool(cfg.get("TEST_MODE_SIMULATE_PIPELINE", TEST_MODE_SIMULATE_PIPELINE))
+    SIMULATE_AI = bool(cfg.get("SIMULATE_AI", SIMULATE_AI))
+    BRUTE_FORCE_MODE = bool(cfg.get("BRUTE_FORCE_MODE", BRUTE_FORCE_MODE))
+    FULL_BILINGUAL_MODE = bool(cfg.get("FULL_BILINGUAL_MODE", FULL_BILINGUAL_MODE))
+    BILINGUAL_KEYS = _coerce_set(cfg.get("BILINGUAL_KEYS", BILINGUAL_KEYS))
+    CN_ONLY_KEYS = _coerce_set(cfg.get("CN_ONLY_KEYS", CN_ONLY_KEYS))
+    LONG_TEXT_KEYS = _coerce_set(cfg.get("LONG_TEXT_KEYS", LONG_TEXT_KEYS))
+    TRANSLATE_MACROS = bool(cfg.get("TRANSLATE_MACROS", TRANSLATE_MACROS))
+    SKIP_CONTAINERS = _coerce_set(cfg.get("SKIP_CONTAINERS", SKIP_CONTAINERS))
+    GLOBAL_GLOSSARY_PATH = Path(cfg.get("GLOBAL_GLOSSARY_PATH", str(GLOBAL_GLOSSARY_PATH)))
+    LOCAL_GLOSSARY_EXPORT_PATH = Path(cfg.get("LOCAL_GLOSSARY_EXPORT_PATH", str(LOCAL_GLOSSARY_EXPORT_PATH)))
+    REPORT_XLSX_PATH = Path(cfg.get("REPORT_XLSX_PATH", str(REPORT_XLSX_PATH)))
+    PROCESS_LOG_PATH = Path(cfg.get("PROCESS_LOG_PATH", str(PROCESS_LOG_PATH)))
+    MISSED_LOG_PATH = Path(cfg.get("MISSED_LOG_PATH", str(MISSED_LOG_PATH)))
+    HISTORY_FILE_PATH = Path(cfg.get("HISTORY_FILE_PATH", str(HISTORY_FILE_PATH)))
+    AUDIT_HISTORY_PATH = Path(cfg.get("AUDIT_HISTORY_PATH", str(AUDIT_HISTORY_PATH)))
+    BACKUP_DIR = Path(cfg.get("BACKUP_DIR", str(BACKUP_DIR)))
+    PRINT_LOG_TO_TERMINAL = bool(cfg.get("PRINT_LOG_TO_TERMINAL", PRINT_LOG_TO_TERMINAL))
+    USE_TQDM_WRITE = bool(cfg.get("USE_TQDM_WRITE", USE_TQDM_WRITE))
+    TARGET_KEYS = _coerce_set(cfg.get("TARGET_KEYS", TARGET_KEYS))
+    SPECIAL_CONTAINERS = _coerce_set(cfg.get("SPECIAL_CONTAINERS", SPECIAL_CONTAINERS))
+    FORCE_SIMPLIFIED_POST = bool(cfg.get("FORCE_SIMPLIFIED_POST", FORCE_SIMPLIFIED_POST))
+    DIFF_REPORT_ENABLED = bool(cfg.get("DIFF_REPORT_ENABLED", DIFF_REPORT_ENABLED))
+    DIFF_REPORT_PATH = Path(cfg.get("DIFF_REPORT_PATH", str(DIFF_REPORT_PATH)))
+
+def init_clients():
+    global google_client, openai_client
+    google_client = None
+    openai_client = None
+    if any(p == "google" for p, m in MODEL_PRIORITY_LIST) and GOOGLE_API_KEY:
+        google_client = genai.Client(api_key=GOOGLE_API_KEY)
+    if any(p == "openai" for p, m in MODEL_PRIORITY_LIST) and OPENAI_API_KEY:
+        openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 GOOGLE_SAFETY = [
     types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="BLOCK_NONE"),
@@ -815,6 +957,99 @@ def validate_format_consistency(cn_node, en_node=None):
     walk(cn_node, en_node)
     return results
 
+def _diff_inline(a, b):
+    if a == b:
+        return escape(a or "")
+    sm = difflib.SequenceMatcher(None, a or "", b or "")
+    parts = []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            parts.append(escape((a or "")[i1:i2]))
+        elif tag == "delete":
+            parts.append(f"<del>{escape((a or "")[i1:i2])}</del>")
+        elif tag == "insert":
+            parts.append(f"<ins>{escape((b or "")[j1:j2])}</ins>")
+        else:
+            parts.append(f"<del>{escape((a or "")[i1:i2])}</del><ins>{escape((b or "")[j1:j2])}</ins>")
+    return "".join(parts)
+
+def generate_diff_report(old_data, new_data, output_path):
+    """生成变更差异报告（路径 + A→B + 高亮差异）"""
+    changes = []
+
+    def walk(old_n, new_n, path_str="root"):
+        if isinstance(new_n, dict):
+            for k, v in new_n.items():
+                old_v = old_n.get(k) if isinstance(old_n, dict) else None
+                walk(old_v, v, f"{path_str}.{k}")
+        elif isinstance(new_n, list):
+            for i, v in enumerate(new_n):
+                old_v = old_n[i] if isinstance(old_n, list) and i < len(old_n) else None
+                walk(old_v, v, f"{path_str}[{i}]")
+        else:
+            if isinstance(old_n, str) and isinstance(new_n, str) and old_n != new_n:
+                changes.append({
+                    "path": path_str,
+                    "before": old_n,
+                    "after": new_n,
+                    "diff": _diff_inline(old_n, new_n)
+                })
+
+    walk(old_data, new_data)
+    if not changes:
+        return 0
+
+    rows = []
+    for c in changes:
+        rows.append(
+            "<tr>"
+            f"<td class='path'>{escape(c['path'])}</td>"
+            f"<td class='before'>{escape(c['before'])}</td>"
+            f"<td class='after'>{escape(c['after'])}</td>"
+            f"<td class='diff'>{c['diff']}</td>"
+            "</tr>"
+        )
+
+    html = """
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>翻译差异报告</title>
+<style>
+body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:20px;}
+table{border-collapse:collapse;width:100%;table-layout:fixed;}
+th,td{border:1px solid #ddd;padding:8px;vertical-align:top;word-break:break-word;}
+th{background:#f5f5f5;}
+del{background:#ffecec;color:#b00020;text-decoration:line-through;}
+ins{background:#eaffea;color:#0a7a0a;text-decoration:none;}
+.path{width:22%;}
+.before{width:26%;}
+.after{width:26%;}
+.diff{width:26%;}
+</style>
+</head>
+<body>
+<h1>翻译差异报告</h1>
+<p>共 {count} 条变更</p>
+<table>
+<thead><tr><th>路径</th><th>原值 A</th><th>新值 B</th><th>差异</th></tr></thead>
+<tbody>
+{rows}
+</tbody>
+</table>
+</body>
+</html>
+""".format(count=len(changes), rows="\n".join(rows))
+
+    try:
+        output_path = Path(output_path)
+        output_path.write_text(html, encoding="utf-8")
+        return len(changes)
+    except Exception as e:
+        write_process_log(f"⚠️ 差异报告写入失败: {e}")
+        return 0
+
 def translate_html_segments(en_text, glossary_mgr, path_str):
     """将HTML文本拆分为文本段落翻译，再按原标签拼接"""
     if not en_text:
@@ -840,7 +1075,8 @@ def translate_html_segments(en_text, glossary_mgr, path_str):
         "Translate ONLY the text between segment markers. "
         "Keep all segment markers EXACTLY as given. "
         "Keep all codes like @UUID[...] and [[...]] unchanged. "
-        "Output ONLY Simplified Chinese, no notes, no comments."
+        "Output ONLY Simplified Chinese (简体中文 only). Do NOT use Traditional Chinese. "
+        "No notes, no comments."
     )
     prompt = "\n".join(seg_payload)
 
@@ -902,7 +1138,7 @@ def normalize_output_text(cn_text, en_text, path_str):
             fixed_html = repair_html_tags_by_source(en_text, fixed_html)
         if fixed_html != cn_text and not is_html_structure_changed(en_text, fixed_html):
             cn_text = fixed_html
-        return cn_text.strip()
+        return enforce_simplified(cn_text.strip())
     if style == "cn_only":
         cn_text = strip_original_block(cn_text)
         if FULL_BILINGUAL_MODE and en_text and not has_html:
@@ -915,7 +1151,7 @@ def normalize_output_text(cn_text, en_text, path_str):
                 return normalize_bilingual_short(cn_text, en_for_append).strip()
         if contains_chinese(cn_text) and contains_english(cn_text):
             cn_text = strip_trailing_english(cn_text)
-        return cn_text.strip()
+        return enforce_simplified(cn_text.strip())
 
     cn_text = strip_original_block(cn_text)
     if en_text and not has_html:
@@ -926,7 +1162,24 @@ def normalize_output_text(cn_text, en_text, path_str):
             return cn_text.strip()
         if isinstance(en_for_append, str) and en_for_append:
             return normalize_bilingual_short(cn_text, en_for_append).strip()
-    return cn_text.strip()
+    return enforce_simplified(cn_text.strip())
+
+def enforce_simplified(text):
+    """强制简体中文后处理（需要 opencc 可用）"""
+    global _opencc_warned
+    if not FORCE_SIMPLIFIED_POST:
+        return text
+    if not isinstance(text, str) or not text:
+        return text
+    if _opencc_t2s is None:
+        if not _opencc_warned:
+            write_process_log("⚠️ opencc 未安装，跳过简繁转换后处理")
+            _opencc_warned = True
+        return text
+    try:
+        return _opencc_t2s.convert(text)
+    except Exception:
+        return text
 
 def normalize_output_inplace(cn_node, en_node=None, path_str="root"):
     """全量规范化输出格式（不触发AI）"""
@@ -1130,7 +1383,8 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
     # 构建提示词
     sys_prompt = (
         "You are a professional Pathfinder 2e translator. "
-        "Output ONLY Simplified Chinese. Keep HTML/Foundry codes unchanged. "
+        "Output ONLY Simplified Chinese (简体中文 only). Do NOT use Traditional Chinese. "
+        "Keep HTML/Foundry codes unchanged. "
         "Do NOT alter any placeholders like __CODE_0__. "
         "Do NOT output notes, tags like ⟪⟫ or |原文:, "
         "do NOT add markdown fences or comments, and do NOT repeat words. "
@@ -1138,6 +1392,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
     )
     audit_prompt = (
         "You are a professional Pathfinder 2e editor. "
+        "Output ONLY Simplified Chinese (简体中文 only). Do NOT use Traditional Chinese. "
         "Keep the Draft format unchanged. If the Draft contains English (e.g., after <hr>原文), "
         "preserve the English segment as-is. Only fix Chinese wording/grammar. "
         "Glossary terms in the Draft should be kept unless they are contextually incorrect; "
@@ -1409,6 +1664,9 @@ def check_environment():
 
 def main():
     """主函数：协调整个翻译流程"""
+    cfg = load_config()
+    apply_config(cfg)
+    init_clients()
     print(f"PF2e 汉化脚本 V32 (同步模式: {SYNC_MODE})")
     print(f"源文件: {SOURCE_EN_JSON_PATH.name if SOURCE_EN_JSON_PATH.exists() else '(不存在)'}")
     print(f"目标文件: {TARGET_JSON_PATH.name if TARGET_JSON_PATH.exists() else '(不存在)'}")
@@ -1455,6 +1713,8 @@ def main():
             return
         # Source Master 模式可以从空开始
         cn_data = {}
+
+    original_cn_snapshot = deepcopy(cn_data)
 
     extract_local_glossary(en_data, cn_data, LOCAL_GLOSSARY_EXPORT_PATH)
     glossary = GlossaryManager(GLOBAL_GLOSSARY_PATH, LOCAL_GLOSSARY_EXPORT_PATH)
@@ -1576,6 +1836,12 @@ def main():
     with TARGET_JSON_PATH.open('w', encoding='utf-8') as f:
         json.dump(output_obj, f, ensure_ascii=False, indent=2)
     write_process_log(f"写入目标文件: {TARGET_JSON_PATH}")
+
+    # 差异报告
+    if DIFF_REPORT_ENABLED:
+        changed_cnt = generate_diff_report(original_cn_snapshot, cn_data, DIFF_REPORT_PATH)
+        if changed_cnt:
+            write_process_log(f"差异报告生成: {DIFF_REPORT_PATH} | 变更: {changed_cnt}")
 
     # 全量格式检查（不做任何修改，仅记录）
     scan_format_anomalies(cn_data, en_data)
