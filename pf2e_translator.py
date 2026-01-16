@@ -45,7 +45,22 @@ MAX_RETRIES = 5
 MAX_AUDIT_ROUNDS = 1  # 校对最多轮数
 
 # 5. [核心开关] 暴力防漏模式 (仅在翻译内容判断时生效)
-BRUTE_FORCE_MODE = True 
+BRUTE_FORCE_MODE = False
+
+# 8. 输出风格配置
+# - FULL_BILINGUAL_MODE: 全字段双语（自动补全英文）
+# - BILINGUAL_KEYS: 输出“中文 英文”
+# - CN_ONLY_KEYS: 仅输出中文（当 FULL_BILINGUAL_MODE=True 时也会补英文）
+# - LONG_TEXT_KEYS: 长文本（当 FULL_BILINGUAL_MODE=True 时追加原文块）
+FULL_BILINGUAL_MODE = True
+BILINGUAL_KEYS = {"name", "label", "navName", "header", "tooltip"}
+CN_ONLY_KEYS = {"tokenName", "caption"}
+LONG_TEXT_KEYS = {"description", "text", "content", "gm_notes", "gm_description", "publicnotes", "publicNotes"}
+
+# 9. 容器翻译策略
+# - TRANSLATE_MACROS: 宏名称是否翻译
+TRANSLATE_MACROS = True
+SKIP_CONTAINERS = set()
 
 # 6. 术语表与日志 (自动转换为Path对象)
 GLOBAL_GLOSSARY_PATH = Path("术语译名对照表.csv") 
@@ -354,35 +369,137 @@ class GlossaryManager:
         return text, inj
 
 def smart_format_bilingual(cn, en):
-    """智能格式化双语文本
-    
-    Args:
-        cn: 中文文本
-        en: 英文原文
-    
-    Returns:
-        格式化后的文本（按需添加原文）
-    """
+    """兼容旧逻辑的双语格式化（仅用于术语提取/兜底）"""
     if not cn:
         return en
-    # 清理注入标签
+    if not en:
+        return cn
     cn = re.sub(r'⟪(.*?)\|原文:.*?⟫', r'\1', cn)
-    # 检查中文是否已包含英文内容
-    clean_en = re.sub(r'[\s\W]', '', en).lower()
-    clean_cn = re.sub(r'[\s\W]', '', cn).lower()
-    if clean_en in clean_cn:
-        return cn
-    # 短文本：如果译文里已包含英文，避免再次追加原文导致重复
-    if en and len(en) <= 80 and re.search(r'[A-Za-z]', cn):
-        return cn
-    # 短文本：如果译文已包含原文中的任一关键英文词，也视为已含原文
-    if en and len(en) <= 80:
-        for w in re.findall(r"[A-Za-z][A-Za-z']{2,}", en):
-            if re.search(rf"\b{re.escape(w)}\b", cn, flags=re.IGNORECASE):
-                return cn
-    # 长文本用换行分隔，短文本用空格
-    sep = "<br><br><hr><b>原文:</b><br>" if (len(en) > 80 or "<p>" in en) else " "
-    return f"{cn}{sep}{en}"
+    return cn
+
+def extract_last_key(path_str):
+    """从 JSON 路径中提取最后一个 key（忽略数组下标）"""
+    if not path_str:
+        return ""
+    # 去掉数组下标
+    cleaned = re.sub(r"\[\d+\]", "", path_str)
+    return cleaned.split(".")[-1] if "." in cleaned else cleaned
+
+def strip_codes_for_lang_detect(text):
+    if not text:
+        return ""
+    text = re.sub(r'@UUID\[[^\]]+\]', ' ', text)
+    text = re.sub(r'@Compendium\[[^\]]+\]', ' ', text)
+    text = re.sub(r'\[\[.*?\]\]', ' ', text)
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = re.sub(r'&[a-zA-Z0-9#]+;', ' ', text)
+    return text
+
+def contains_english(text):
+    return bool(re.search(r'[A-Za-z]', strip_codes_for_lang_detect(text)))
+
+def contains_chinese(text):
+    return bool(re.search(r'[\u4e00-\u9fff]', text or ''))
+
+def get_value_style(path_str, key):
+    path_segments = path_str.split('.')
+    if any(seg in SKIP_CONTAINERS for seg in path_segments):
+        return "skip"
+    if "macros" in path_segments and not TRANSLATE_MACROS:
+        return "skip"
+    if "notes" in path_segments:
+        return "cn_only"
+    if "folders" in path_segments:
+        return "bilingual"
+    if key in CN_ONLY_KEYS:
+        return "cn_only"
+    if key in BILINGUAL_KEYS:
+        return "bilingual"
+    if key in LONG_TEXT_KEYS:
+        return "cn_only"
+    return "cn_only"
+
+def strip_original_block(text):
+    if not text:
+        return text
+    text = re.sub(r'<br><br><hr><b>(原文|Original):</b><br>.*$', '', text, flags=re.DOTALL)
+    return text
+
+def normalize_bilingual_short(cn_text, en_text):
+    if not cn_text:
+        return en_text or cn_text
+    if not en_text:
+        return cn_text
+    clean_cn = strip_english_tokens(cn_text)
+    clean_cn = collapse_duplicate_cn_prefix(clean_cn)
+    clean_cn = collapse_duplicate_numeric_suffix(clean_cn)
+    return f"{clean_cn} {en_text}" if clean_cn else en_text
+
+def strip_trailing_english(text, min_len=30, min_words=4):
+    if not text:
+        return text
+    prot = CodeProtector()
+    masked, ph = prot.mask(text)
+    m = re.search(r"(\s+[A-Za-z][A-Za-z0-9'’\-\s]*)$", masked)
+    if m:
+        tail = m.group(1)
+        words = re.findall(r"[A-Za-z][A-Za-z0-9'’\-]*", tail)
+        if len(words) >= min_words or len(tail) >= min_len:
+            masked = masked[:m.start()].strip()
+    return prot.unmask(masked, ph)
+
+def normalize_output_text(cn_text, en_text, path_str):
+    if not cn_text:
+        return cn_text
+    key = extract_last_key(path_str)
+    style = get_value_style(path_str, key)
+    if style == "skip":
+        return cn_text
+
+    cn_text = cleanup_injection_tags(cn_text)
+    if style == "cn_only":
+        cn_text = strip_original_block(cn_text)
+        if FULL_BILINGUAL_MODE and en_text:
+            return normalize_bilingual_short(cn_text, en_text).strip()
+        if contains_chinese(cn_text) and contains_english(cn_text):
+            cn_text = strip_trailing_english(cn_text)
+        return cn_text.strip()
+
+    cn_text = strip_original_block(cn_text)
+    if en_text:
+        return normalize_bilingual_short(cn_text, en_text).strip()
+    return cn_text.strip()
+
+def normalize_output_inplace(cn_node, en_node=None, path_str="root"):
+    """全量规范化输出格式（不触发AI）"""
+    fixed = 0
+    if isinstance(cn_node, dict):
+        for k, v in cn_node.items():
+            cur_path = f"{path_str}.{k}"
+            en_v = None
+            if isinstance(en_node, dict):
+                en_v = en_node.get(k)
+            if isinstance(v, str):
+                new_v = normalize_output_text(v, en_v, cur_path)
+                if new_v != v:
+                    cn_node[k] = new_v
+                    fixed += 1
+            elif isinstance(v, (dict, list)):
+                fixed += normalize_output_inplace(v, en_v, cur_path)
+    elif isinstance(cn_node, list):
+        for i, v in enumerate(cn_node):
+            cur_path = f"{path_str}[{i}]"
+            en_v = None
+            if isinstance(en_node, list) and i < len(en_node):
+                en_v = en_node[i]
+            if isinstance(v, str):
+                new_v = normalize_output_text(v, en_v, cur_path)
+                if new_v != v:
+                    cn_node[i] = new_v
+                    fixed += 1
+            elif isinstance(v, (dict, list)):
+                fixed += normalize_output_inplace(v, en_v, cur_path)
+    return fixed
 
 def extract_local_glossary(en_data, cn_data, output_path):
     """从翻译数据中提取本地术语表"""
@@ -426,6 +543,8 @@ def clean_response_text(text):
     text = re.sub(r'^```[a-zA-Z]*\n', '', text)
     text = re.sub(r'\n```$', '', text)
     text = re.sub(r'^(Here is|Below is|以下是).*?(\n|$)', '', text, flags=re.IGNORECASE).strip()
+    # 移除模型输出的注释行（例如 // ...）
+    text = re.sub(r'^\s*//.*$', '', text, flags=re.MULTILINE)
     return text.strip()
 
 def cleanup_injection_tags(text):
@@ -522,8 +641,6 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
     
     # 构建审校初稿
     clean_draft_txt = cn_draft or ""
-    if task_type == "AUDIT" and audit_mode == "AUDIT_CN_APPEND":
-        clean_draft_txt = smart_format_bilingual(clean_draft_txt, en_text)
     
     # 构建提示词
     sys_prompt = (
@@ -564,6 +681,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
                 final_trans = cleanup_injection_tags(final_trans)
                 final_trans = collapse_duplicate_cn_prefix(final_trans)
                 final_trans = collapse_duplicate_numeric_suffix(final_trans)
+                final_trans = normalize_output_text(final_trans, en_text, path_str)
 
                 if normalize_for_compare(final_trans) == normalize_for_compare(draft):
                     break
@@ -583,16 +701,17 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
         final_trans = cleanup_injection_tags(final_trans)
         final_trans = collapse_duplicate_cn_prefix(final_trans)
         final_trans = collapse_duplicate_numeric_suffix(final_trans)
+        final_trans = normalize_output_text(final_trans, en_text, path_str)
 
         adjusted_terms = detect_adjusted_terms(final_trans, terms)
         log_report("New", path_str, en_text, final_trans, terms, adjusted_terms)
         write_process_log(f"✅ 任务完成: New | {path_str}")
-        return smart_format_bilingual(final_trans, en_text), "New"
+        return final_trans, "New"
 
     except Exception as e:
         write_process_log(f"❌ 所有模型失败 {path_str}: {e}")
         write_missed_log(path_str, en_text, "All Models Failed")
-        fallback = smart_format_bilingual(cn_draft, en_text) if cn_draft else f"【FAIL】{en_text}"
+        fallback = cn_draft if cn_draft else f"【FAIL】{en_text}"
         return fallback, None
 
 def log_report(status, path, original, translated, injected_terms, adjusted_terms=None):
@@ -636,17 +755,17 @@ def collect_tasks_source_master(en_data, cn_data, path_str="root"):
         # 判断逻辑
         should_translate = False
         if isinstance(v, str) and len(v) > 1:
-            has_letters = bool(re.search(r'[a-zA-Z]', v))
-            if has_letters:
-                is_target_key = False
-                if isinstance(en_data, dict) and k in TARGET_KEYS: is_target_key = True
-                elif any(c in path_str.split('.') for c in SPECIAL_CONTAINERS): is_target_key = True
-                is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
-                has_space = " " in v
+            has_en = contains_english(v)
+            has_cn = contains_chinese(v)
+            is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
+            is_target_key = isinstance(en_data, dict) and k in TARGET_KEYS
+            is_in_container = any(c in path_str.split('.') for c in SPECIAL_CONTAINERS)
+            if has_en and not has_cn and not is_file:
                 if BRUTE_FORCE_MODE:
-                    if not is_file and (is_target_key or has_space): should_translate = True
+                    should_translate = True
                 else:
-                    if is_target_key: should_translate = True
+                    if is_target_key or is_in_container:
+                        should_translate = True
 
         if should_translate:
             if cn_v and get_content_hash(v, cn_v) in history_cache: continue
@@ -692,22 +811,14 @@ def collect_tasks_target_master(cn_data, en_data, path_str="root"):
         # 判断逻辑
         should_translate = False
         mode = None
-        # 我们检查 v (Target里的值)。如果它是字符串，且包含英文/中文，我们分别处理。
         if isinstance(v, str) and len(v) > 1:
-            has_en = bool(re.search(r'[a-zA-Z]', v))
-            has_cn = bool(re.search(r'[\u4e00-\u9fff]', v))
-            # 依然应用一些基础过滤，防止翻译 ID 或 路径
-            is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
-            is_target_key = False
-            if isinstance(cn_data, dict) and k in TARGET_KEYS: is_target_key = True
-            # 1) 含英文：需要翻译/校对
-            if has_en and not is_file and (is_target_key or " " in v):
-                should_translate = True
-                mode = 'AUDIT_BILINGUAL' if has_cn else None
-            # 2) 纯中文但有英文对应：补原文并校对
-            elif (not has_en) and has_cn and isinstance(en_v, str) and en_v != v and (not is_file) and (is_target_key or " " in v):
-                should_translate = True
-                mode = 'AUDIT_CN_APPEND'
+            style = get_value_style(cur_path, k)
+            if style != "skip":
+                has_en = contains_english(v)
+                has_cn = contains_chinese(v)
+                is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
+                if has_en and not has_cn and not is_file:
+                    should_translate = True
 
         if should_translate:
             # 如果 Source 里找不到对应的 en_v (因为结构不同)，我们就把当前 Target 里的 v 当作原文
@@ -716,9 +827,7 @@ def collect_tasks_target_master(cn_data, en_data, path_str="root"):
             # 检查缓存
             if get_content_hash(original_text, v) in history_cache: continue
             
-            # 如果 v 已经是中文了，或者含中文，我们标记为 AUDIT；如果是纯英文，标记为 NEW
-            is_translated = bool(re.search(r'[\u4e00-\u9fff]', v))
-            task_type = 'AUDIT' if is_translated else 'NEW'
+            task_type = 'NEW'
             
             # 注意：这里的 ref 是 cn_data，因为我们要回写到 Target
             tasks.append({
@@ -865,6 +974,12 @@ def main():
     # Target Master 模式：保持Target结构，只更新值
     # Source Master 模式：使用Source结构，强制补全Target
     output_obj = cn_data if SYNC_MODE == "TARGET_MASTER" else en_data
+
+    # 规范化输出风格（短字段双语/中文、去除原文块）
+    if SYNC_MODE == "TARGET_MASTER":
+        fixed_cnt = normalize_output_inplace(cn_data, en_data)
+        if fixed_cnt:
+            write_process_log(f"🧹 输出规范化: {fixed_cnt} 项")
     
     # 保存翻译结果
     with TARGET_JSON_PATH.open('w', encoding='utf-8') as f:
