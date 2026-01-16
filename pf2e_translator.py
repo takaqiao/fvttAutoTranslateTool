@@ -7,6 +7,7 @@ import concurrent.futures
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
+from copy import deepcopy
 from threading import Lock
 from tqdm import tqdm
 
@@ -43,6 +44,22 @@ MAX_WORKERS = 16
 TARGET_RPM = 450   
 MAX_RETRIES = 5     
 MAX_AUDIT_ROUNDS = 1  # 校对最多轮数
+# 校对次数上限（同一条目达到次数后不再校对）
+MAX_AUDIT_PASSES = 2
+
+# 4.5 稳定模式（优先保证格式不炸）
+# - HTML 文本走安全分段翻译
+# - 若检测到占位符泄漏或HTML结构异常，回退为原文/草稿
+SAFE_MODE = True
+
+# 4.6 测试模式（不调用AI，仅验证格式一致性）
+TEST_MODE = True
+TEST_MODE_WRITE = True  # True 时输出到 TEST_OUTPUT_PATH
+TEST_OUTPUT_PATH = Path("pf2e-beginner-box.adventures.test.json")
+# 是否模拟完整处理流程（不调用AI，但会走清洗/规范化等流程）
+# 注意：该模式不会落盘，仅统计可能改动的条目数量
+TEST_MODE_SIMULATE_PIPELINE = True
+SIMULATE_AI = False
 
 # 5. [核心开关] 暴力防漏模式 (仅在翻译内容判断时生效)
 BRUTE_FORCE_MODE = False
@@ -69,6 +86,7 @@ REPORT_XLSX_PATH = Path("翻译审查报告.xlsx")
 PROCESS_LOG_PATH = Path("运行日志.txt")
 MISSED_LOG_PATH = Path("失败漏翻记录.txt")
 HISTORY_FILE_PATH = Path("translation_history.json")
+AUDIT_HISTORY_PATH = Path("audit_history.json")
 BACKUP_DIR = Path("backups")
 
 # 7. 日志输出
@@ -100,11 +118,12 @@ if any(p == "openai" for p, m in MODEL_PRIORITY_LIST) and OPENAI_API_KEY:
     openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 
 log_lock = Lock()
-report_data = {"New": [], "Fixed": [], "Kept": [], "TermAdjusted": []}
+report_data = {"New": [], "Fixed": [], "Kept": [], "TermAdjusted": [], "FormatAnomaly": []}
 process_log_buffer = []
 missed_log_buffer = [] 
 history_cache = set()
 new_history_entries = set()
+audit_history = {}
 
 GOOGLE_SAFETY = [
     types.SafetySetting(category="HARM_CATEGORY_HATE_SPEECH", threshold="BLOCK_NONE"),
@@ -152,6 +171,11 @@ def call_ai_with_fallback(sys_prompt, user_prompt, path_str):
     2. OpenAI GPT-5-mini  
     3. Google Gemini-3-flash-preview
     """
+    if SIMULATE_AI:
+        m = re.search(r"```\n(.*?)\n```", user_prompt, flags=re.S)
+        if m:
+            return m.group(1).strip()
+        return user_prompt
     last_error = None
     for provider, model_id in MODEL_PRIORITY_LIST:
         if provider == "google" and not google_client:
@@ -246,6 +270,52 @@ def save_history():
     except Exception as e:
         write_process_log(f"⚠️ 保存历史文件失败: {e}")
 
+def load_audit_history():
+    """加载校对次数历史"""
+    if not AUDIT_HISTORY_PATH.exists():
+        return {}
+    try:
+        with AUDIT_HISTORY_PATH.open('r', encoding='utf-8') as f:
+            data = json.load(f)
+            # 兼容旧格式：int
+            if isinstance(data, dict):
+                for k, v in list(data.items()):
+                    if isinstance(v, int):
+                        data[k] = {"passes": v, "kept": False}
+            return data
+    except Exception as e:
+        write_process_log(f"⚠️ 加载校对历史失败: {e}")
+        return {}
+
+def save_audit_history():
+    """保存校对次数历史"""
+    try:
+        with AUDIT_HISTORY_PATH.open('w', encoding='utf-8') as f:
+            json.dump(audit_history, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        write_process_log(f"⚠️ 保存校对历史失败: {e}")
+
+def can_audit(task_hash):
+    if not task_hash:
+        return True
+    entry = audit_history.get(task_hash, {"passes": 0, "kept": False})
+    if isinstance(entry, int):
+        entry = {"passes": entry, "kept": False}
+    if entry.get("kept"):
+        return False
+    return entry.get("passes", 0) < MAX_AUDIT_PASSES
+
+def record_audit(task_hash, status=None):
+    if not task_hash:
+        return
+    entry = audit_history.get(task_hash, {"passes": 0, "kept": False})
+    if isinstance(entry, int):
+        entry = {"passes": entry, "kept": False}
+    entry["passes"] = entry.get("passes", 0) + 1
+    if status == "Kept":
+        entry["kept"] = True
+    audit_history[task_hash] = entry
+
 class RateLimiter:
     def __init__(self, rpm):
         self.interval = 60.0 / rpm
@@ -257,13 +327,14 @@ class RateLimiter:
         self.last_dispatch_time = time.time()
 
 class CodeProtector:
-    def __init__(self):
+    def __init__(self, mask_html=True):
         self.patterns = [
             re.compile(r'(@[a-zA-Z0-9]+\[[^\]]*\])'),
             re.compile(r'(\[\[.*?\]\])'),
-            re.compile(r'(<[^>]+>)'),
             re.compile(r'(&[a-zA-Z0-9#]+;)'),
         ]
+        if mask_html:
+            self.patterns.insert(2, re.compile(r'(<[^>]+>)'))
     def mask(self, text):
         if not text: return text, {}
         ph, ctr = {}, 0
@@ -279,7 +350,18 @@ class CodeProtector:
         if not text: return text
         for k, v in ph.items():
             text = text.replace(k, v)
-            if k not in text: text = re.sub(k.replace('_', r'\s*_\s*'), v, text)
+            if k not in text:
+                text = re.sub(k.replace('_', r'\s*_\s*'), v, text)
+            # 容错：修复被模型破坏的占位符（如 ___1__ / __CODE1__ 等）
+            if k not in text:
+                m = re.search(r'__CODE_(\d+)__', k)
+                if m:
+                    idx = re.escape(m.group(1))
+                    text = re.sub(r'_{2,}CODE_?\s*' + idx + r'_{1,}', v, text, flags=re.IGNORECASE)
+                    text = re.sub(r'_{2,}\s*' + idx + r'_{1,}', v, text)
+                    text = re.sub(r'__\s*CODE_?\s*' + idx + r'\b', v, text, flags=re.IGNORECASE)
+                    text = re.sub(r'\bCODE_?\s*' + idx + r'__\b', v, text, flags=re.IGNORECASE)
+                    text = re.sub(r'\bCODE_?\s*' + idx + r'\b', v, text, flags=re.IGNORECASE)
         return text
 
 class GlossaryManager:
@@ -430,6 +512,9 @@ def normalize_bilingual_short(cn_text, en_text):
         return en_text or cn_text
     if not en_text:
         return cn_text
+    if contains_html_tags(cn_text) or (isinstance(en_text, str) and contains_html_tags(en_text)):
+        clean_cn = cn_text
+        return f"{clean_cn} {en_text}" if clean_cn else en_text
     clean_cn = strip_english_tokens(cn_text)
     clean_cn = collapse_duplicate_cn_prefix(clean_cn)
     clean_cn = collapse_duplicate_numeric_suffix(clean_cn)
@@ -448,6 +533,350 @@ def strip_trailing_english(text, min_len=30, min_words=4):
             masked = masked[:m.start()].strip()
     return prot.unmask(masked, ph)
 
+def contains_html_tags(text):
+    if not isinstance(text, str):
+        return False
+    return bool(re.search(r'<[^>]+>', text or ''))
+
+def extract_english_portion(text):
+    if not isinstance(text, str) or not text:
+        return ""
+    # 仅移除中文字符，保留英文、数字、符号、占位符
+    cleaned = re.sub(r'[\u4e00-\u9fff]', ' ', text)
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    return cleaned
+
+def is_cn_only_token(token):
+    return bool(re.search(r'[\u4e00-\u9fff]', token)) and not re.search(r'[A-Za-z]', token)
+
+def cleanup_noise_parens(text):
+    if not isinstance(text, str) or not text:
+        return text
+    text = re.sub(r'\b\d+\s*\(\)\b', '', text)
+    text = re.sub(r'\s{2,}', ' ', text).strip()
+    return text
+
+def cleanup_short_cn_duplicates(text, max_len=120):
+    if not isinstance(text, str) or not text:
+        return text
+    if contains_html_tags(text):
+        return text
+    if len(text) > max_len:
+        return text
+    tokens = text.split()
+    if len(tokens) < 2:
+        return text
+    out = []
+    i = 0
+    while i < len(tokens):
+        cur = tokens[i]
+        nxt = tokens[i + 1] if i + 1 < len(tokens) else None
+        if nxt and is_cn_only_token(cur) and is_cn_only_token(nxt):
+            if cur == nxt:
+                out.append(cur)
+                i += 2
+                continue
+            if cur in nxt:
+                out.append(nxt)
+                i += 2
+                continue
+            if nxt in cur:
+                out.append(cur)
+                i += 2
+                continue
+            if len(cur) <= 6 and len(nxt) <= 6 and set(cur) == set(nxt):
+                out.append(cur)
+                i += 2
+                continue
+        out.append(cur)
+        i += 1
+    return " ".join(out)
+
+def has_placeholder_leak(text):
+    if not isinstance(text, str):
+        return False
+    return bool(re.search(r'__CODE_\d+__|__CODE_\d+\b|\bCODE_\d+__|\bCODE_\d+\b|_{2,}\d+_{1,}', text))
+
+def is_garbled_html(text):
+    if not text:
+        return False
+    if re.search(r'<\s*>', text) or re.search(r'</\s*>', text):
+        return True
+    if re.search(r'<\s*=', text) or re.search(r'</\s*=', text):
+        return True
+    if text.count('<') != text.count('>'):
+        return True
+    return False
+
+def extract_html_tags(text):
+    if not text:
+        return []
+    return re.findall(r'<[^>]+>', text)
+
+def _normalize_html_tag_for_compare(tag):
+    if not tag:
+        return tag
+    m = re.match(r'<\s*(/?)\s*([^\s>/]+)([^>]*)>', tag)
+    if not m:
+        return tag.strip()
+    slash, name, attr_blob = m.groups()
+    name = name.lower()
+    if slash:
+        return f"</{name}>"
+    attrs = []
+    for am in re.finditer(r'([a-zA-Z_:][\w:.-]*)(?:\s*=\s*("[^"]*"|\'[^\']*\'|[^\s"\'>]+))?', attr_blob):
+        a_name = am.group(1).lower()
+        if a_name == "title":
+            continue
+        a_val = am.group(2) or ""
+        if a_val.startswith(('"', "'")) and a_val.endswith(('"', "'")):
+            a_val = a_val[1:-1]
+        attrs.append((a_name, a_val))
+    attrs.sort(key=lambda x: x[0])
+    if attrs:
+        attr_str = " ".join([f"{k}={v}" if v != "" else k for k, v in attrs])
+        return f"<{name} {attr_str}>"
+    return f"<{name}>"
+
+def extract_html_tags_for_compare(text):
+    return [_normalize_html_tag_for_compare(t) for t in extract_html_tags(text)]
+
+def repair_html_tags_by_source(src_text, out_text):
+    if not isinstance(src_text, str) or not isinstance(out_text, str):
+        return out_text
+    if not contains_html_tags(src_text) or not contains_html_tags(out_text):
+        return out_text
+    src_tags = extract_html_tags(src_text)
+    out_tags = extract_html_tags(out_text)
+    if len(src_tags) != len(out_tags):
+        return out_text
+    src_parts = re.split(r'(<[^>]+>)', src_text)
+    out_parts = re.split(r'(<[^>]+>)', out_text)
+    if len(src_parts) != len(out_parts):
+        return out_text
+    rebuilt = []
+    for sp, op in zip(src_parts, out_parts):
+        if sp.startswith('<') and sp.endswith('>'):
+            rebuilt.append(sp)
+        else:
+            rebuilt.append(op)
+    return "".join(rebuilt)
+
+def repair_placeholders_by_source(src_text, out_text):
+    if not isinstance(src_text, str) or not isinstance(out_text, str):
+        return out_text
+    if not contains_html_tags(src_text):
+        return out_text
+    if not has_placeholder_leak(out_text):
+        return out_text
+    en_tags = extract_html_tags(src_text)
+    cn_tags = extract_html_tags(out_text)
+    missing = []
+    i = j = 0
+    while i < len(en_tags) and j < len(cn_tags):
+        if en_tags[i] == cn_tags[j]:
+            i += 1
+            j += 1
+        else:
+            missing.append(en_tags[i])
+            i += 1
+    while i < len(en_tags):
+        missing.append(en_tags[i])
+        i += 1
+
+    def repl(m):
+        return missing.pop(0) if missing else ""
+
+    text = re.sub(r'__CODE_\d+.*?CODE_\d+__', repl, out_text, flags=re.DOTALL)
+    text = re.sub(r'__CODE_\d+__', repl, text)
+    text = re.sub(r'\bCODE_\d+__', repl, text)
+    text = re.sub(r'__CODE_\d+\b', repl, text)
+    text = re.sub(r'\bCODE_\d+\b', repl, text)
+    return text
+
+def rebuild_html_by_source_structure(src_text, out_text):
+    if not isinstance(src_text, str) or not isinstance(out_text, str):
+        return out_text
+    if not contains_html_tags(src_text):
+        return out_text
+    src_parts = re.split(r'(<[^>]+>)', src_text)
+    out_parts = re.split(r'(<[^>]+>)', out_text)
+    src_text_parts = [p for p in src_parts if not (p.startswith('<') and p.endswith('>'))]
+    out_text_parts = [p for p in out_parts if not (p.startswith('<') and p.endswith('>'))]
+    if len(src_text_parts) != len(out_text_parts):
+        if len(out_text_parts) < len(src_text_parts):
+            out_text_parts = out_text_parts + [""] * (len(src_text_parts) - len(out_text_parts))
+        else:
+            out_text_parts = out_text_parts[:len(src_text_parts) - 1] + ["".join(out_text_parts[len(src_text_parts) - 1:])]
+    rebuilt = []
+    text_iter = iter(out_text_parts)
+    for part in src_parts:
+        if part.startswith('<') and part.endswith('>'):
+            rebuilt.append(part)
+        else:
+            rebuilt.append(next(text_iter, ""))
+    return "".join(rebuilt)
+
+def is_html_structure_changed(src_text, out_text):
+    if not src_text:
+        return False
+    src_tags = extract_html_tags_for_compare(src_text)
+    out_tags = extract_html_tags_for_compare(out_text)
+    return src_tags != out_tags
+
+def log_format_anomaly(path, original, translated, reason):
+    row = {
+        "JSON Path": path,
+        "Reason": reason,
+        "Original": original,
+        "Translation": translated
+    }
+    with log_lock:
+        report_data["FormatAnomaly"].append(row)
+
+def scan_format_anomalies(cn_node, en_node=None, path_str="root", seen=None):
+    if seen is None:
+        seen = set()
+    if isinstance(cn_node, dict):
+        for k, v in cn_node.items():
+            cur_path = f"{path_str}.{k}"
+            en_v = en_node.get(k) if isinstance(en_node, dict) else None
+            if isinstance(v, str):
+                if isinstance(en_v, str) and contains_html_tags(en_v):
+                    if (not contains_html_tags(v)) or is_garbled_html(v) or is_html_structure_changed(en_v, v):
+                        if cur_path not in seen:
+                            seen.add(cur_path)
+                            log_format_anomaly(cur_path, en_v, v, "HTML structure changed")
+            elif isinstance(v, (dict, list)):
+                scan_format_anomalies(v, en_v, cur_path, seen)
+    elif isinstance(cn_node, list):
+        for i, v in enumerate(cn_node):
+            cur_path = f"{path_str}[{i}]"
+            en_v = en_node[i] if isinstance(en_node, list) and i < len(en_node) else None
+            if isinstance(v, str):
+                if isinstance(en_v, str) and contains_html_tags(en_v):
+                    if (not contains_html_tags(v)) or is_garbled_html(v) or is_html_structure_changed(en_v, v):
+                        if cur_path not in seen:
+                            seen.add(cur_path)
+                            log_format_anomaly(cur_path, en_v, v, "HTML structure changed")
+            elif isinstance(v, (dict, list)):
+                scan_format_anomalies(v, en_v, cur_path, seen)
+
+def validate_format_consistency(cn_node, en_node=None):
+    """对比原文与译文的格式一致性"""
+    results = {
+        "html_missing": 0,
+        "html_changed": 0,
+        "html_garbled": 0,
+        "placeholder_leak": 0,
+        "uuid_mismatch": 0,
+        "compendium_mismatch": 0,
+        "roll_mismatch": 0,
+    }
+
+    def extract_uuids(text):
+        return re.findall(r'@UUID\[[^\]]+\]', text) if isinstance(text, str) else []
+
+    def extract_compendium(text):
+        return re.findall(r'@Compendium\[[^\]]+\]', text) if isinstance(text, str) else []
+
+    def extract_rolls(text):
+        return re.findall(r'\[\[/r[^\]]+\]\]', text) if isinstance(text, str) else []
+
+    def walk(cn_n, en_n):
+        if isinstance(cn_n, dict):
+            for k, v in cn_n.items():
+                en_v = en_n.get(k) if isinstance(en_n, dict) else None
+                walk(v, en_v)
+        elif isinstance(cn_n, list):
+            for i, v in enumerate(cn_n):
+                en_v = en_n[i] if isinstance(en_n, list) and i < len(en_n) else None
+                walk(v, en_v)
+        else:
+            if isinstance(en_n, str) and "<" in en_n and ">" in en_n:
+                en_tags = extract_html_tags_for_compare(en_n)
+                cn_tags = extract_html_tags_for_compare(cn_n) if isinstance(cn_n, str) else []
+                if not cn_tags:
+                    results["html_missing"] += 1
+                elif en_tags != cn_tags:
+                    results["html_changed"] += 1
+                if isinstance(cn_n, str) and is_garbled_html(cn_n):
+                    results["html_garbled"] += 1
+            if isinstance(cn_n, str) and has_placeholder_leak(cn_n):
+                results["placeholder_leak"] += 1
+            if isinstance(en_n, str) and isinstance(cn_n, str):
+                if sorted(extract_uuids(en_n)) != sorted(extract_uuids(cn_n)):
+                    results["uuid_mismatch"] += 1
+                if sorted(extract_compendium(en_n)) != sorted(extract_compendium(cn_n)):
+                    results["compendium_mismatch"] += 1
+                if sorted(extract_rolls(en_n)) != sorted(extract_rolls(cn_n)):
+                    results["roll_mismatch"] += 1
+
+    walk(cn_node, en_node)
+    return results
+
+def translate_html_segments(en_text, glossary_mgr, path_str):
+    """将HTML文本拆分为文本段落翻译，再按原标签拼接"""
+    if not en_text:
+        return en_text
+    if SIMULATE_AI:
+        return en_text
+    parts = re.split(r'(<[^>]+>)', en_text)
+    text_segs = [p for p in parts if p and not p.startswith('<')]
+    if not text_segs:
+        return en_text
+
+    seg_payload = []
+    seg_meta = []
+    for i, seg in enumerate(text_segs):
+        prot = CodeProtector(mask_html=False)
+        masked, code_ph = prot.mask(seg)
+        injected, terms = glossary_mgr.pre_inject_text(masked, path_str)
+        seg_payload.append(f"⟦SEG{i}⟧{injected}⟦/SEG{i}⟧")
+        seg_meta.append((code_ph, terms, prot))
+
+    sys_prompt = (
+        "You are a professional Pathfinder 2e translator. "
+        "Translate ONLY the text between segment markers. "
+        "Keep all segment markers EXACTLY as given. "
+        "Keep all codes like @UUID[...] and [[...]] unchanged. "
+        "Output ONLY Simplified Chinese, no notes, no comments."
+    )
+    prompt = "\n".join(seg_payload)
+
+    try:
+        res_text = call_ai_with_fallback(sys_prompt, prompt, path_str)
+        trans = clean_response_text(res_text)
+        seg_map = {}
+        for m in re.finditer(r'⟦SEG(\d+)⟧(.*?)⟦/SEG\1⟧', trans, flags=re.S):
+            idx = int(m.group(1))
+            seg_map[idx] = m.group(2)
+        if len(seg_map) != len(text_segs):
+            return en_text
+
+        out_parts = []
+        seg_idx = 0
+        for p in parts:
+            if p.startswith('<') and p.endswith('>'):
+                out_parts.append(p)
+            else:
+                if p == "":
+                    out_parts.append(p)
+                    continue
+                code_ph, terms, prot = seg_meta[seg_idx]
+                seg_idx += 1
+                seg_text = seg_map.get(seg_idx - 1, p)
+                seg_text = prot.unmask(seg_text, code_ph)
+                seg_text = cleanup_injection_tags(seg_text)
+                seg_text = collapse_duplicate_cn_prefix(seg_text)
+                seg_text = collapse_duplicate_numeric_suffix(seg_text)
+                out_parts.append(seg_text)
+
+        return "".join(out_parts)
+    except Exception as e:
+        write_process_log(f"⚠️ HTML分段翻译失败: {path_str} | {e}")
+        return en_text
+
 def normalize_output_text(cn_text, en_text, path_str):
     if not cn_text:
         return cn_text
@@ -457,17 +886,46 @@ def normalize_output_text(cn_text, en_text, path_str):
         return cn_text
 
     cn_text = cleanup_injection_tags(cn_text)
+    cn_text = cleanup_noise_parens(cn_text)
+    cn_text = cleanup_short_cn_duplicates(cn_text)
+    has_html = contains_html_tags(cn_text) or (isinstance(en_text, str) and contains_html_tags(en_text))
+    if has_html and isinstance(en_text, str) and contains_html_tags(en_text):
+        cn_text = repair_placeholders_by_source(en_text, cn_text)
+        fixed_html = cn_text
+        if is_html_structure_changed(en_text, fixed_html):
+            if len(extract_html_tags(en_text)) == len(extract_html_tags(fixed_html)):
+                fixed_html = repair_html_tags_by_source(en_text, fixed_html)
+            else:
+                fixed_html = rebuild_html_by_source_structure(en_text, fixed_html)
+                fixed_html = repair_html_tags_by_source(en_text, fixed_html)
+        else:
+            fixed_html = repair_html_tags_by_source(en_text, fixed_html)
+        if fixed_html != cn_text and not is_html_structure_changed(en_text, fixed_html):
+            cn_text = fixed_html
+        return cn_text.strip()
     if style == "cn_only":
         cn_text = strip_original_block(cn_text)
-        if FULL_BILINGUAL_MODE and en_text:
-            return normalize_bilingual_short(cn_text, en_text).strip()
+        if FULL_BILINGUAL_MODE and en_text and not has_html:
+            en_for_append = en_text
+            if isinstance(en_for_append, str) and contains_chinese(en_for_append):
+                en_for_append = extract_english_portion(en_for_append)
+            if isinstance(en_for_append, str) and en_for_append in cn_text:
+                return cn_text.strip()
+            if isinstance(en_for_append, str) and en_for_append:
+                return normalize_bilingual_short(cn_text, en_for_append).strip()
         if contains_chinese(cn_text) and contains_english(cn_text):
             cn_text = strip_trailing_english(cn_text)
         return cn_text.strip()
 
     cn_text = strip_original_block(cn_text)
-    if en_text:
-        return normalize_bilingual_short(cn_text, en_text).strip()
+    if en_text and not has_html:
+        en_for_append = en_text
+        if isinstance(en_for_append, str) and contains_chinese(en_for_append):
+            en_for_append = extract_english_portion(en_for_append)
+        if isinstance(en_for_append, str) and en_for_append in cn_text:
+            return cn_text.strip()
+        if isinstance(en_for_append, str) and en_for_append:
+            return normalize_bilingual_short(cn_text, en_for_append).strip()
     return cn_text.strip()
 
 def normalize_output_inplace(cn_node, en_node=None, path_str="root"):
@@ -613,7 +1071,7 @@ def detect_adjusted_terms(output_text, injected_terms):
 
 protector = CodeProtector()
 
-def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, audit_mode=None):
+def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, audit_mode=None, task_hash=None):
     """处理单个翻译项
     
     Args:
@@ -633,9 +1091,36 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
         return en_text, None
 
     write_process_log(f"🧩 处理任务: {task_type} | {path_str}")
+
+    # 稳定模式：HTML 走安全分段翻译，避免标签被改写
+    if SAFE_MODE and contains_html_tags(en_text):
+        try:
+            html_trans = translate_html_segments(en_text, glossary_mgr, path_str)
+            html_trans = cleanup_injection_tags(html_trans)
+            html_trans = collapse_duplicate_cn_prefix(html_trans)
+            html_trans = collapse_duplicate_numeric_suffix(html_trans)
+            final_trans = normalize_output_text(html_trans, en_text, path_str)
+
+            if is_garbled_html(final_trans) or not contains_html_tags(final_trans) or is_html_structure_changed(en_text, final_trans):
+                log_format_anomaly(path_str, en_text, final_trans, "HTML structure changed")
+                final_trans = cn_draft if cn_draft else en_text
+            if has_placeholder_leak(final_trans):
+                log_format_anomaly(path_str, en_text, final_trans, "Placeholder leaked")
+                final_trans = cn_draft if cn_draft else en_text
+
+            status = "Fixed" if (cn_draft and final_trans != cn_draft) else "New"
+            adjusted_terms = []
+            log_report(status, path_str, en_text, final_trans, [], adjusted_terms)
+            write_process_log(f"✅ 任务完成: {status} | {path_str}")
+            if task_type == "AUDIT":
+                record_audit(task_hash, status)
+            return final_trans, status
+        except Exception as e:
+            write_process_log(f"⚠️ HTML安全翻译失败: {path_str} | {e}")
+            return (cn_draft if cn_draft else en_text), None
     
-    # 代码保护和术语注入
-    prot = CodeProtector()
+    # 代码保护和术语注入（强制屏蔽HTML标签，避免模型改动标签）
+    prot = CodeProtector(mask_html=True)
     masked, code_ph = prot.mask(en_text)
     injected, terms = glossary_mgr.pre_inject_text(masked, path_str)
     
@@ -646,6 +1131,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
     sys_prompt = (
         "You are a professional Pathfinder 2e translator. "
         "Output ONLY Simplified Chinese. Keep HTML/Foundry codes unchanged. "
+        "Do NOT alter any placeholders like __CODE_0__. "
         "Do NOT output notes, tags like ⟪⟫ or |原文:, "
         "do NOT add markdown fences or comments, and do NOT repeat words. "
         "Keep numbers and units exactly as in the source."
@@ -654,6 +1140,8 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
         "You are a professional Pathfinder 2e editor. "
         "Keep the Draft format unchanged. If the Draft contains English (e.g., after <hr>原文), "
         "preserve the English segment as-is. Only fix Chinese wording/grammar. "
+        "Glossary terms in the Draft should be kept unless they are contextually incorrect; "
+        "if incorrect, replace with a better Chinese term. "
         "Do NOT add/remove HTML or Foundry codes. Output the corrected Draft only."
     )
     if task_type == "AUDIT":
@@ -683,6 +1171,18 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
                 final_trans = collapse_duplicate_numeric_suffix(final_trans)
                 final_trans = normalize_output_text(final_trans, en_text, path_str)
 
+                if contains_html_tags(en_text):
+                    final_trans = repair_placeholders_by_source(en_text, final_trans)
+                    if is_garbled_html(final_trans) or not contains_html_tags(final_trans) or is_html_structure_changed(en_text, final_trans):
+                        rebuilt = rebuild_html_by_source_structure(en_text, final_trans)
+                        repaired = repair_html_tags_by_source(en_text, rebuilt)
+                        if repaired != final_trans and not is_html_structure_changed(en_text, repaired):
+                            final_trans = repaired
+                        else:
+                            log_format_anomaly(path_str, en_text, final_trans, "HTML structure changed")
+                if has_placeholder_leak(final_trans):
+                    log_format_anomaly(path_str, en_text, final_trans, "Placeholder leaked")
+
                 if normalize_for_compare(final_trans) == normalize_for_compare(draft):
                     break
                 changed = True
@@ -692,6 +1192,7 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
             adjusted_terms = detect_adjusted_terms(final_trans, terms)
             log_report(status, path_str, en_text, final_trans, terms, adjusted_terms)
             write_process_log(f"✅ 任务完成: {status} | {path_str}")
+            record_audit(task_hash, status)
             return final_trans, status
 
         # NEW 翻译
@@ -702,6 +1203,18 @@ def process_single_item(task_type, en_text, cn_draft, glossary_mgr, path_str, au
         final_trans = collapse_duplicate_cn_prefix(final_trans)
         final_trans = collapse_duplicate_numeric_suffix(final_trans)
         final_trans = normalize_output_text(final_trans, en_text, path_str)
+
+        if contains_html_tags(en_text):
+            final_trans = repair_placeholders_by_source(en_text, final_trans)
+            if is_garbled_html(final_trans) or not contains_html_tags(final_trans) or is_html_structure_changed(en_text, final_trans):
+                rebuilt = rebuild_html_by_source_structure(en_text, final_trans)
+                repaired = repair_html_tags_by_source(en_text, rebuilt)
+                if repaired != final_trans and not is_html_structure_changed(en_text, repaired):
+                    final_trans = repaired
+                else:
+                    log_format_anomaly(path_str, en_text, final_trans, "HTML structure changed")
+        if has_placeholder_leak(final_trans):
+            log_format_anomaly(path_str, en_text, final_trans, "Placeholder leaked")
 
         adjusted_terms = detect_adjusted_terms(final_trans, terms)
         log_report("New", path_str, en_text, final_trans, terms, adjusted_terms)
@@ -756,11 +1269,10 @@ def collect_tasks_source_master(en_data, cn_data, path_str="root"):
         should_translate = False
         if isinstance(v, str) and len(v) > 1:
             has_en = contains_english(v)
-            has_cn = contains_chinese(v)
             is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
             is_target_key = isinstance(en_data, dict) and k in TARGET_KEYS
             is_in_container = any(c in path_str.split('.') for c in SPECIAL_CONTAINERS)
-            if has_en and not has_cn and not is_file:
+            if has_en and not is_file:
                 if BRUTE_FORCE_MODE:
                     should_translate = True
                 else:
@@ -768,13 +1280,21 @@ def collect_tasks_source_master(en_data, cn_data, path_str="root"):
                         should_translate = True
 
         if should_translate:
-            if cn_v and get_content_hash(v, cn_v) in history_cache: continue
-            tt = 'AUDIT' if (cn_v and isinstance(cn_v, str) and len(cn_v) > 0 and cn_v != v) else 'NEW'
-            mode = None
-            if tt == 'AUDIT' and isinstance(cn_v, str):
-                has_en = bool(re.search(r'[a-zA-Z]', cn_v))
-                mode = 'AUDIT_BILINGUAL' if has_en else 'AUDIT_CN_APPEND'
-            tasks.append({'type': tt, 'mode': mode, 'ref': en_data, 'k': k, 'en_v': v, 'cn_v': cn_v if tt=='AUDIT' else None, 'path': cur_path})
+            tt = 'NEW'
+            if isinstance(cn_v, str) and contains_english(cn_v) and contains_chinese(cn_v):
+                tt = 'AUDIT'
+            if isinstance(v, str) and isinstance(cn_v, str) and contains_html_tags(v):
+                if (not contains_html_tags(cn_v)) or is_garbled_html(cn_v) or is_html_structure_changed(v, cn_v):
+                    tt = 'NEW'
+            if isinstance(cn_v, str) and has_placeholder_leak(cn_v):
+                tt = 'NEW'
+
+            task_hash = get_content_hash(v, cn_v if isinstance(cn_v, str) else "")
+            if tt == 'AUDIT' and not can_audit(task_hash):
+                continue
+            if tt == 'NEW' and cn_v and get_content_hash(v, cn_v) in history_cache:
+                continue
+            tasks.append({'type': tt, 'mode': None, 'ref': en_data, 'k': k, 'en_v': v, 'cn_v': cn_v if tt=='AUDIT' else None, 'path': cur_path, 'hash': task_hash})
             
         elif isinstance(v, (dict, list)):
             new_cn = cn_v if isinstance(cn_v, (dict, list)) else {}
@@ -810,34 +1330,47 @@ def collect_tasks_target_master(cn_data, en_data, path_str="root"):
         
         # 判断逻辑
         should_translate = False
-        mode = None
         if isinstance(v, str) and len(v) > 1:
             style = get_value_style(cur_path, k)
             if style != "skip":
                 has_en = contains_english(v)
-                has_cn = contains_chinese(v)
                 is_file = v.lower().endswith(('.png', '.webp', '.jpg', '.mp3', '.ogg', '.m4a', '.webm'))
-                if has_en and not has_cn and not is_file:
+                if has_en and not is_file:
                     should_translate = True
 
         if should_translate:
             # 如果 Source 里找不到对应的 en_v (因为结构不同)，我们就把当前 Target 里的 v 当作原文
             original_text = en_v if (en_v and isinstance(en_v, str)) else v
-            
-            # 检查缓存
-            if get_content_hash(original_text, v) in history_cache: continue
-            
-            task_type = 'NEW'
+            if isinstance(original_text, str) and isinstance(v, str) and en_v is None:
+                if contains_chinese(original_text) and contains_english(original_text) and not contains_html_tags(original_text):
+                    eng_only = extract_english_portion(original_text)
+                    if eng_only:
+                        original_text = eng_only
+            task_hash = get_content_hash(original_text, v)
+
+            task_type = 'AUDIT' if (contains_chinese(v) and contains_english(v)) else 'NEW'
+            if isinstance(original_text, str) and isinstance(v, str) and contains_html_tags(original_text):
+                if (not contains_html_tags(v)) or is_garbled_html(v) or is_html_structure_changed(original_text, v):
+                    task_type = 'NEW'
+                if SAFE_MODE:
+                    task_type = 'NEW'
+            if isinstance(v, str) and has_placeholder_leak(v):
+                task_type = 'NEW'
+            if task_type == 'AUDIT' and not can_audit(task_hash):
+                continue
+            if task_type == 'NEW' and get_content_hash(original_text, v) in history_cache:
+                continue
             
             # 注意：这里的 ref 是 cn_data，因为我们要回写到 Target
             tasks.append({
                 'type': task_type,
-                'mode': mode,
+                'mode': None,
                 'ref': cn_data, 
                 'k': k,
                 'en_v': original_text, # 送给 AI 的参考原文
                 'cn_v': v,             # 送给 AI 的现有译文（用于校对）
-                'path': cur_path
+                'path': cur_path,
+                'hash': task_hash
             })
             
         elif isinstance(v, (dict, list)):
@@ -885,12 +1418,19 @@ def main():
     if not check_environment():
         return
 
+    if TEST_MODE:
+        global SIMULATE_AI
+        SIMULATE_AI = True
+
     # 备份现有文件
     backup_existing_files()
     global history_cache
     history_cache = load_history()
+    global audit_history
+    audit_history = load_audit_history()
     print(f"🧠 已加载缓存: {len(history_cache)} 条记录")
     write_process_log(f"缓存条目: {len(history_cache)}")
+    write_process_log(f"校对历史条目: {len(audit_history)}")
 
     # 加载源文件
     with SOURCE_EN_JSON_PATH.open('r', encoding='utf-8-sig') as f:
@@ -919,6 +1459,57 @@ def main():
     extract_local_glossary(en_data, cn_data, LOCAL_GLOSSARY_EXPORT_PATH)
     glossary = GlossaryManager(GLOBAL_GLOSSARY_PATH, LOCAL_GLOSSARY_EXPORT_PATH)
     write_process_log(f"术语库加载完成: {len(glossary.sorted_keys)} 条")
+
+    if TEST_MODE:
+        print("🧪 测试模式：不调用AI，仅做格式一致性检查...")
+        test_cn = deepcopy(cn_data)
+
+        if TEST_MODE_SIMULATE_PIPELINE:
+            print("🧪 测试模式：模拟处理流程（不落盘）...")
+            all_tasks = collect_tasks_target_master(test_cn, en_data) if SYNC_MODE == "TARGET_MASTER" else collect_tasks_source_master(en_data, test_cn)
+            rl = RateLimiter(TARGET_RPM)
+            changed_paths = []
+            with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as exe:
+                fut_map = {}
+                for t in tqdm(all_tasks, desc="分发(测试-模拟)", position=0, leave=True, dynamic_ncols=True):
+                    rl.wait_for_slot()
+                    future = exe.submit(process_single_item, t['type'], t['en_v'], t['cn_v'], glossary, t['path'], t.get('mode'), t.get('hash'))
+                    fut_map[future] = t
+                for f in tqdm(concurrent.futures.as_completed(fut_map), total=len(all_tasks), desc="回收(测试-模拟)", position=1, leave=True, dynamic_ncols=True):
+                    task = fut_map[f]
+                    try:
+                        res, _ = f.result(timeout=30)
+                        original_v = task['ref'][task['k']]
+                        if isinstance(original_v, str) and isinstance(res, str) and original_v != res:
+                            changed_paths.append(task['path'])
+                    except Exception as e:
+                        write_process_log(f"❌ 测试任务失败: {task['path']} - {e}")
+
+            print(f"🧪 模拟流程产生改动条目数: {len(changed_paths)}")
+            if changed_paths:
+                sample = changed_paths[:20]
+                print("🧪 改动样例(最多20条):")
+                for p in sample:
+                    print(f"   {p}")
+
+        # 测试模式下也执行与正式流程一致的输出规范化
+        fixed_cnt = normalize_output_inplace(test_cn, en_data)
+        if fixed_cnt:
+            write_process_log(f"🧹 测试输出规范化: {fixed_cnt} 项")
+
+        if TEST_MODE_WRITE:
+            with TEST_OUTPUT_PATH.open('w', encoding='utf-8') as f:
+                json.dump(test_cn, f, ensure_ascii=False, indent=2)
+            write_process_log(f"测试输出写入: {TEST_OUTPUT_PATH}")
+
+        scan_format_anomalies(test_cn, en_data)
+        stats = validate_format_consistency(test_cn, en_data)
+        print("\n" + "="*50)
+        print("🧪 测试模式格式检查:")
+        for k, v in stats.items():
+            print(f"   {k}: {v}")
+        print("="*50)
+        return
     
     print("构建任务队列...")
     
@@ -952,7 +1543,7 @@ def main():
         # 提交任务
         for t in tqdm(all_tasks, desc="分发", position=0, leave=True, dynamic_ncols=True):
             rl.wait_for_slot()
-            future = exe.submit(process_single_item, t['type'], t['en_v'], t['cn_v'], glossary, t['path'], t.get('mode'))
+            future = exe.submit(process_single_item, t['type'], t['en_v'], t['cn_v'], glossary, t['path'], t.get('mode'), t.get('hash'))
             fut_map[future] = t
         
         # 收集结果
@@ -985,6 +1576,9 @@ def main():
     with TARGET_JSON_PATH.open('w', encoding='utf-8') as f:
         json.dump(output_obj, f, ensure_ascii=False, indent=2)
     write_process_log(f"写入目标文件: {TARGET_JSON_PATH}")
+
+    # 全量格式检查（不做任何修改，仅记录）
+    scan_format_anomalies(cn_data, en_data)
     
     # 保存遗漏日志
     if missed_log_buffer:
@@ -1001,6 +1595,7 @@ def main():
                 pd.DataFrame(report_data["Fixed"]).to_excel(w, sheet_name="Fixed", index=False)
                 pd.DataFrame(report_data["Kept"]).to_excel(w, sheet_name="Kept", index=False)
                 pd.DataFrame(report_data["TermAdjusted"]).to_excel(w, sheet_name="TermAdjusted", index=False)
+                pd.DataFrame(report_data["FormatAnomaly"]).to_excel(w, sheet_name="FormatAnomaly", index=False)
             break
         except PermissionError:
             if attempt < max_retry - 1:
@@ -1013,6 +1608,8 @@ def main():
 
     save_history()
     write_process_log("历史缓存已保存")
+    save_audit_history()
+    write_process_log("校对历史已保存")
     # 刷新日志缓冲区
     _flush_process_log()
     write_process_log("日志已刷新")
