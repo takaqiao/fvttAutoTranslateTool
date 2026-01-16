@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-01-17
+- 测试模式新增完整流程模拟与规范化输出。
+- HTML 比对更稳定（忽略 `title`，属性归一）。
+- 含 HTML 文本在修复后直接返回，避免误改。
+- 修复测试模式下的非字符串崩溃问题。
+
 ## 2026-01-15
 ### Added
 - Multi-round audit flow with configurable `MAX_AUDIT_ROUNDS`.

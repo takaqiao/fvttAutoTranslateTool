@@ -1,114 +1,51 @@
 # Foundry VTT 模组智能汉化脚本
 
-该脚本面向 Foundry VTT（Babele JSON 结构）模组汉化工作流，提供可控的结构同步、术语一致性、自动审校与日志审计能力，适用于长期维护型项目。
+面向 Foundry VTT（Babele JSON）模组汉化的自动化脚本，支持结构安全同步、术语一致性、自动审校与格式保护，适合长期维护。
 
-## 1. 功能概览
+## 1. 一句话特性
 
-- **双向结构同步**：支持以目标文件为准或以源文件为准的同步策略，确保结构安全与补全能力可按需切换。
-- **术语一致性注入**：加载全局术语与本地提取术语，优先保证同一模组内专名一致。
-- **多轮审校与缓存**：对已确认条目进行哈希缓存，审校最多多轮直到稳定。
-- **格式与代码保护**：自动保护 HTML、Foundry 代码标记（如 `@UUID`、`[[/r ...]]`），避免翻译破坏结构。
-- **日志与审查报告**：输出审校结果 Excel 与运行日志，便于追踪与回溯。
+- 结构不乱：可选以目标结构为准或以源结构补全。
+- 术语统一：全局术语 + 本地术语自动注入。
+- 格式稳定：保护 HTML、`@UUID`、`[[/r ...]]` 等标记。
+- 审校可控：多轮审校 + 缓存减少重复翻译。
 
-## 2. 工作流程
+## 2. 快速使用
 
-1. **加载配置与环境**：读取 API Key 与文件路径配置。
-2. **备份快照**：将关键文件备份至 `backups/`。
-3. **加载源/目标 JSON**：按同步模式加载或初始化目标文件。
-4. **本地术语提取**：从已有译文中提取短词，生成本地术语表。
-5. **构建任务队列**：遍历 JSON，筛选需翻译/审校字段。
-6. **并发翻译与审校**：按模型优先级调用翻译服务。
-7. **写入与产出**：输出目标 JSON、审查报告、日志与缓存。
+1. 配置环境变量：`OPENAI_API_KEY` 或 `GOOGLE_API_KEY`。
+2. 确认文件路径：`SOURCE_EN_JSON_PATH` / `TARGET_JSON_PATH`。
+3. 运行：`python pf2e_translator.py`。
 
-## 3. 配置说明（核心参数）
+## 3. 核心配置（只看这些）
 
-- **同步策略**
-  - `SYNC_MODE = "TARGET_MASTER"`：以目标文件结构为准，仅更新已有键。
-  - `SYNC_MODE = "SOURCE_MASTER"`：以源文件结构为准，自动补全缺失键。
+- `SYNC_MODE`
+  - `TARGET_MASTER`：只改已有键，结构最安全。
+  - `SOURCE_MASTER`：按英文结构补全，可能增键。
+- `MODEL_PRIORITY_LIST`：模型优先级与自动降级。
+- `MAX_WORKERS` / `TARGET_RPM`：并发与速率控制。
+- `SAFE_MODE`：HTML 分段翻译 + 结构保护。
+- `TEST_MODE`：不调用 AI，仅格式检查。
+- `TEST_MODE_SIMULATE_PIPELINE`：模拟完整流程（不落盘）。
 
-- **模型优先级**（自动降级）
-  - `MODEL_PRIORITY_LIST` 支持多提供方与多模型的顺序回退。
+## 4. 输出与文件
 
-- **性能配置**
-  - `MAX_WORKERS`：并发线程数。
-  - `TARGET_RPM`：请求速率上限。
-  - `MAX_RETRIES`：单模型重试次数。
+- 目标文件：`pf2e-beginner-box.adventures.json`
+- 测试输出：`pf2e-beginner-box.adventures.test.json`
+- 审查报告：`翻译审查报告.xlsx`
+- 运行日志：`运行日志.txt`
+- 历史缓存：`translation_history.json`
+- 校对历史：`audit_history.json`
+- 备份目录：`backups/`
 
-- **输出与日志**
-  - `PRINT_LOG_TO_TERMINAL`：是否同步输出运行日志到终端。
-  - `USE_TQDM_WRITE`：使用 tqdm.write 输出日志，避免打断进度条。
-  - `MAX_AUDIT_ROUNDS`：审校最多轮数（直到不再改动）。
+## 5. 术语表
 
-## 4. 术语一致性机制
+- 全局：`术语译名对照表.csv`
+- 本地：自动生成 `术语表_本地提取.csv`
+- 优先级：本地 > 全局 > 模型输出
 
-- **全局术语表**：来自 `术语译名对照表.csv`。
-- **本地术语表**：由现有译文自动提取生成 `术语表_本地提取.csv`。
-- **优先级**：本地术语 > 全局术语 > AI 结果。
-- **匹配策略**：大小写敏感或忽略由术语自身大小写决定。
+## 6. 工具
 
-## 5. 智能格式与去重
+`glossary_cleaner.py`：清洗术语表并输出冲突/剔除结果。
 
-- **双语输出策略**
-  - 若译文已包含英文，保留原样。
-  - 若为纯中文文本，追加标准原文段落。
-- **短文本重复清理**
-  - 自动压缩开头重复中文，如：
-    - `"属性值 属性值 Ability Scores"` → `"属性值 Ability Scores"`
+## 7. 致谢
 
-## 6. 结构识别与字段白名单
-
-仅翻译关键字段（如 `name`, `description`, `text`, `label`, `caption`, `value` 等），并对以下结构进行递归穿透：
-
-- `notes`
-- `folders`
-- `journal` / `journals`
-- `scenes`
-- `actors` / `items` / `pages`
-
-## 7. 输出文件说明
-
-- **目标汉化文件**：`pf2e-beginner-box.adventures.json`
-- **审查报告**：`翻译审查报告.xlsx`（New / Fixed / Kept / TermAdjusted 四个 sheet）
-- **运行日志**：`运行日志.txt`
-- **漏翻记录**：`失败漏翻记录.txt`
-- **历史缓存**：`translation_history.json`
-- **备份快照**：`backups/` 目录
-
-## 8. 日志策略
-
-日志记录覆盖：
-
-- 模型调用与回退
-- 任务开始与结束
-- 文件加载与保存
-- 备份与统计信息
-
-通过 `PRINT_LOG_TO_TERMINAL` 可控制终端可视日志输出。
-
-## 9. 运行要求
-
-- Python 3.10+
-- 依赖：`google-genai`, `openai`, `pandas`, `openpyxl`, `tqdm`
-
-## 10. 快速开始
-
-1. 设置环境变量：
-   - `GOOGLE_API_KEY` 或 `OPENAI_API_KEY`
-2. 确保 `SOURCE_EN_JSON_PATH` 与 `TARGET_JSON_PATH` 指向正确文件。
-3. 运行脚本：
-   - `python pf2e_translator.py`
-
-## 11. 术语表清洗工具
-
-`glossary_cleaner.py` 可对术语表进行清洗与冲突检测，输出：
-
-- `术语表_已清洗.csv`
-- `术语表_冲突项.csv`
-- `术语表_已剔除.csv`
-
-## 12. 备注
-
-该脚本面向大体量模组翻译场景，建议配合版本控制与定期备份使用。
-
-## 13. 致谢与数据来源
-本项目的核心术语表数据来源于 **[开拓者2版中文维基 (灰机Wiki)](https://pf2.huijiwiki.com/wiki/%E6%9C%AF%E8%AF%AD%E7%B4%A2%E5%BC%95)**。
+核心术语表来源：**[开拓者2版中文维基 (灰机Wiki)](https://pf2.huijiwiki.com/wiki/%E6%9C%AF%E8%AF%AD%E7%B4%A2%E5%BC%95)**。
