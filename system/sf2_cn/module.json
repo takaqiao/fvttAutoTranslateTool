@@ -1,0 +1,54 @@
+{
+    "id": "sf2_cn",
+    "title": "Translation: 中文 [SF2e]",
+    "description": "本模组为 FVTT 的 SF2e 系统提供了中文翻译。",
+    "authors": [
+        {
+            "name": "Taka",
+            "email": "532236728@qq.com"
+        }
+    ],
+    "compatibility": {
+        "minimum": "12",
+        "verified": "13"
+    },
+    "systems": [
+        "sf2e"
+    ],
+    "languages": [
+        {
+            "lang": "cn",
+            "name": "系统主体（中文）",
+            "path": "./zh_Hans/zh_Hans.json"
+        },
+        {
+            "lang": "cn",
+            "name": "动作元素（中文）",
+            "path": "./zh_Hans/action-zh_Hans.json"
+        },
+        {
+            "lang": "cn",
+            "name": "拥王者元素（中文）",
+            "path": "./zh_Hans/kingmaker-zh_Hans.json"
+        },
+        {
+            "lang": "cn",
+            "name": "规则元素（中文）",
+            "path": "./zh_Hans/re-zh_Hans.json"
+        }
+    ],
+    "relationships": {
+        "systems": [
+            {
+                "id": "sf2e",
+                "type": "system",
+                "manifest": "https://github.com/foundryvtt/pf2e/blob/v13-dev/system.sf2e.json"
+            }
+        ]
+    },
+    "changelog": "https://github.com/losyky/sf2e_cn/releases/tag/0.0.1",
+    "version": "0.0.1",
+    "url": "https://github.com/losyky/sf2e_cn",
+    "manifest": "https://github.com/losyky/sf2e_cn/releases/latest/download/module.json",
+    "download": "https://github.com/losyky/sf2e_cn/releases/download/0.0.1/sf2_cn.zip"
+}

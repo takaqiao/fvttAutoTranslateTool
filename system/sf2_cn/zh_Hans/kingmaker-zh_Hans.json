@@ -1,0 +1,445 @@
+{
+    "PF2E.Kingmaker": {
+        "Abilities": {
+            "culture": "文化",
+            "economy": "经济",
+            "loyalty": "忠诚",
+            "stability": "稳定"
+        },
+        "AbilityScores": "属性值",
+        "Army": {
+            "Adjustment": "改修",
+            "Alliance": {
+                "Enemy": "敌军",
+                "Kingdom": "王国",
+                "Info": "军队当前的敌我状态。这取决于该军队是否被玩家所拥有。",
+                "Linked": "该军队指示物目前已与对应军队相关联，更新后应该能够正常保存",
+                "LinkError": "这支军队无法与指示物相关联。请在角色侧边栏进行关联后，再将新的军队指示物拖入。",
+                "UnlinkedError": "王国军队应当与角色数据相关联才能正常运行。点击此处以启用此功能。"
+            },
+            "Ammunition": "弹药",
+            "Armor": "护甲",
+            "BasicWarActions": "基础战争动作",
+            "Condition": {
+                "concealed": {
+                    "name": "隐蔽"
+                }
+            },
+            "Description": "描述",
+            "Error": {
+                "InvalidTacticType": "战术 {name} 不受 {type} 军队支持"
+            },
+            "Gear": {
+                "GearInfo": "显示装备信息",
+                "ItemLevel": "物品 {level}",
+                "Label": "装备",
+                "LevelLabel": "等级 {level}",
+                "AdditionalWeapon": {
+                    "Name": "额外武器",
+                    "Description": "大部分军队只有一种武器——一种近战武器或一种远程武器。该装备作为一种额外的武器类型配发给军队。军队获得相应的近战或远程打击，调整值基于等级。"
+                },
+                "MagicWeapons": {
+                    "Name": "({type}) 魔法武器",
+                    "Description": "军队拥有魔法武器。如果军队同时具有近战和远程武器，选择当武器升级时需要选择其中一种。你能为军队升级两次武器，一次给近战一次给远程。如果你配发了更强的版本，它会取代旧装备，并且新装备的 RP 成本要扣除旧装备的。",
+                    "rank1": {
+                        "Name": "魔法武器",
+                        "Description": "该装备能让军队使用该武器进行打击时的攻击调整值+1。"
+                    },
+                    "rank2": {
+                        "Name": "高等魔法武器",
+                        "Description": "该装备能让军队使用该武器进行打击时的攻击调整值+2。"
+                    },
+                    "rank3": {
+                        "Name": "上等魔法武器",
+                        "Description": "该装备能让军队使用该武器进行打击时的攻击调整值+3。"
+                    }
+                },
+                "Potions": {
+                    "Name": "治疗药水",
+                    "Description": "装备了治疗药水的军队（如果你配发的是炼金治疗灵药，在这里的规则上是相同的），能将使用一剂药水作为机动（Maneuver）动作的一个部分。当军队使用一剂治疗药水时，它恢复 1 点生命值。一支军队不能同时携带超过 3 剂治疗药水；和远程打击的弹药不同，治疗药水不会在战争遭遇结束后自动补充，必须重新购买新的剂量。"
+                },
+                "Armor": {
+                    "Name": "魔法护甲",
+                    "Description": "魔法盔甲被魔法强化，以增强对士兵的保护。",
+                    "rank1": {
+                        "Name": "魔法护甲",
+                        "Description": "护甲增加军队 1 点 AC。"
+                    },
+                    "rank2": {
+                        "Name": "高等魔法护甲",
+                        "Description": "护甲增加军队 2 点 AC。"
+                    },
+                    "rank3": {
+                        "Name": "上等魔法护甲",
+                        "Description": "护甲增加军队 3 点 AC。"
+                    }
+                }
+            },
+            "Label": "军队",
+            "NamePlaceholder": "军队名称",
+            "Potency": "潜力",
+            "Potions": {
+                "FullHP": "军队的生命值已经满了",
+                "Label": "药水",
+                "OutOfPotions": "没有更多的药水可用",
+                "UsePotion": "使用药水 (+1 生命值)",
+                "UsedPotionHeader": "药水消耗",
+                "UsedPotionContent": "军队恢复+1生命值，可以作为机动动作的一个部分。"
+            },
+            "RecruitmentDC": "征召 DC",
+            "RoutedDescription": "军队的生命值低于溃败阈值！",
+            "RoutThreshold": "溃败阈值",
+            "Save": {
+                "maneuver": "机动",
+                "morale": "士气"
+            },
+            "Scouting": "侦查",
+            "SendToChat": "发送至聊天",
+            "Stats": "数据",
+            "Strikes": {
+                "CurrentAmmo": "{current} / {max} 弹药<br/>在战争遭遇结束后补充",
+                "None": "这只军队没有武器，在装备界面添加一个。",
+                "Label": "攻击",
+                "OutOfAmmo": "在这场战争中已经没有弹药了",
+                "RestoreAmmunition": "恢复弹药",
+                "proficiency": "熟练",
+                "melee": "近战",
+                "ranged": "远程"
+            },
+            "Tactics": "战术",
+            "TacticsFree": "战术 (自由)",
+            "Toggles": {
+                "LiveOffTheLand": "六角格内没有定居点",
+                "KeepUpThePressure": "攻击同一目标"
+            },
+            "TacticalWarActions": "战术战争动作"
+        },
+        "Confirm": "确认",
+        "Consumption": {
+            "Base": "基础",
+            "Label": "消耗",
+            "Reduction": "减少"
+        },
+        "Event": {
+            "Details": "正在进行的活动详情",
+            "Random": "随机事件"
+        },
+        "GrantedBy": "此特征由 {granter} 赋予无法删除",
+        "KingdomBuilder": {
+            "ActivationMessage": "要开始创建国家了吗？请确保你的玩家已经准备好了（本操作无法撤回，王国无法删除，请确定你的玩家准备好了）。",
+            "Aspiration": "志向",
+            "AssignBoostsHeader": "分配你的提升",
+            "Boost": "提升",
+            "BoostsLabel": "属性提升",
+            "Builder": "编辑器",
+            "CancelCreation": "取消创建",
+            "Complete": "完成",
+            "Feat": "王国专长",
+            "FinalizeHeader": "最终王国",
+            "Flaw": "缺陷",
+            "FlawLabel": "属性缺陷",
+            "Free": "自由",
+            "Skills": "王国技能",
+            "ManualToggle": "使用手动修正",
+            "Missing": {
+                "Charter": "选择一个特许状来进行提升。",
+                "Heartland": "选择一个核心地域来进行提升。",
+                "Government": "选择一个政府来进行提升。"
+            },
+            "None": "无",
+            "NotSelected": "未选择",
+            "SaveAndContinue": "保存并继续",
+            "Tabs": {
+                "Charter": "特许状",
+                "Heartland": "核心地域",
+                "Government": "政府",
+                "AbilityScores": "属性值"
+            },
+            "Title": "开始建立王国"
+        },
+        "Kingdom": {
+            "Activities": "王国行动",
+            "ArmyConsumption": "军队损耗",
+            "Aspiration": {
+                "fame": "美名",
+                "infamy": "恶名"
+            },
+            "BuildHeader": "王国建造",
+            "BuildElement": {
+                "Charter": "特许状",
+                "Heartland": "核心地域",
+                "Government": "政府"
+            },
+            "Capital": "首都",
+            "CapitalPlaceholder": "城市名称",
+            "CollectDialog": {
+                "Title": "收集资源",
+                "Header": "维护：资源收集",
+                "Description": "扔 {dice} 资源骰并生成以下内容？",
+                "Disclaimer": "这将取代你当前的资源点（应该已经转化为经验值），多余的资源点将会消失，只有GM才能收集资源。",
+                "NewResourcePoints": "新资源点"
+            },
+            "Commodity": {
+                "food": "食物",
+                "lumber": "木材",
+                "luxuries": "奢侈品",
+                "ore": "矿石",
+                "stone": "石材"
+            },
+            "ControlDC": "控制DC",
+            "Invested": "聚焦",
+            "InvestedBonus": "{ability}的属性调整值",
+            "ImportDialog": {
+                "Title": "导入行动",
+                "Content": "{added}行动将会被添加并且{updated}行动将会被更新；没问题吗？"
+            },
+            "FeatSlot": {
+                "Features": "王国特性",
+                "Feats": "王国专长",
+                "Bonus": "奖励专长"
+            },
+            "Leaders": "领导",
+            "LeaderMissing": "无人在岗（拖入一个角色来让他上岗）",
+            "LeadershipRole": {
+                "ruler": "元首",
+                "counselor": "参事",
+                "general": "将军",
+                "emissary": "特使",
+                "magister": "魔导师",
+                "treasurer": "司库",
+                "viceroy": "总督",
+                "warden": "卫队长"
+            },
+            "NamePlaceholder": "王国名称",
+            "NationType": {
+                "territory": "领",
+                "province": "省",
+                "state": "邦",
+                "country": "国",
+                "dominion": "帝国"
+            },
+            "Phases": {
+                "commerce": {
+                    "Header": "商贸阶段",
+                    "Description": "商贸阶段是指王国创造收入或签订贸易协议的阶段。",
+                    "Step1": "<strong>收集税款:</strong> 可以在每个王国回合进行一次。如果你不执行收集税款行动，你可以选择尝试一次 DC 11纯骰检定；如果成功，则减少 1 点动荡",
+                    "Step2": "<strong>批准支出:</strong> 你可以尝试改善生活（Improve Lifestyle）活动，利用王国的支出来提高公民的生活水平，或者你可以尝试挪用国库（Tap Treasury）行动，从国库中提取资金。",
+                    "Step3": "<strong>出售商品:</strong> 如果你的王国有商品库存，你可以尝试交易商品（Trade Commodities）行动，来增加本回合的可用 RP。",
+                    "Step4": "<strong>管理贸易协定:</strong> 如果你已建立贸易协定，可以使用管理贸易协定（Manage Trade Agreements）行动。"
+                },
+                "leadership": {
+                    "Header": "行动阶段：领导行动",
+                    "Description": "如果你的王国首都里有城堡、宫殿或市政厅，则每个担任领导职务的 PC 最多可以尝试三项领导行动。如果你的首都没有这些建筑，则每个 PC 在本步骤中最多可以尝试两项领导行动。你的队伍在进行领导行动时可以自行决定顺序。除非行动另有说明，否则每个领袖在每个王国回合中不能多次尝试相同的领导行动。"
+                },
+                "region": {
+                    "Header": "行动阶段：区域行动",
+                    "Description": "PC领导人可以总共尝试最多三项区域行动。"
+                },
+                "civic": {
+                    "Header": "行动阶段：公民行动",
+                    "Description": "PC领导人可以每个定居点尝试一项公民行动。"
+                },
+                "army": {
+                    "Header": "军队行动",
+                    "Description": "在PC完成王国回合的公民行动步骤后，他们可以进行军队行动步骤，在这个步骤中，王国当前维持的每一支军队可以进行一次军队行动。"
+                }
+            },
+            "Resources": {
+                "Collect": "收集",
+                "Dice": "资源骰",
+                "Header": "资源和商品",
+                "Points": "资源点",
+                "RP": "RP"
+            },
+            "Ruin": {
+                "corruption": "腐化",
+                "crime": "犯罪",
+                "decay": "衰退",
+                "strife": "冲突"
+            },
+            "Size": "体型",
+            "Storage": "储物",
+            "Tabs": {
+                "Main": "主要",
+                "Activities": "行动",
+                "World": "世界",
+                "Features": "特征",
+                "Ongoing": "持续进行"
+            },
+            "Unrest": "动乱",
+            "VacancyPenalty": {
+                "ruler": "所有检定-1（这可以与任何其他空职减值叠加）；在王国回合开始时获得1d4的动荡；控制DC增加2点",
+                "counselor": "-1 对所有基于文化的检定",
+                "general": "-4 对战争行动",
+                "emissary": "-1 对所有基于忠诚的检定",
+                "magister": "-4 对战争行动",
+                "treasurer": "-1 对所有基于经济的检定",
+                "viceroy": "-1 对所有基于稳定的检定",
+                "warden": "-4 对区域行动"
+            },
+            "Vacant": "空缺",
+            "VacantRole": "空缺({role})"
+        },
+        "Feature": {
+            "Categories": {
+                "army-tactic": "军队战术",
+                "army-war-action": "陆军战争行动",
+                "kingdom-activity": "王国行动",
+                "kingdom-feat": "王国专长",
+                "kingdom-feature": "王国特征"
+            },
+            "Tactic": "战术"
+        },
+        "Penalty": "减值",
+        "Settlement": {
+            "Blocks": "街区",
+            "Details": "定居点明细",
+            "Header": "王国定居点",
+            "Label": "定居点",
+            "LevelRange": "等级范围",
+            "Name": "定居点名称",
+            "Overcrowded": "过度拥挤",
+            "Population": "人口",
+            "Type": {
+                "village": "村庄",
+                "town": "镇子",
+                "city": "城市",
+                "metropolis": "大都会"
+            },
+            "TypeLabel": "类型"
+        },
+        "Skills": {
+            "agriculture": "农业",
+            "arts": "艺术",
+            "boating": "驾船",
+            "defense": "防御",
+            "engineering": "工程",
+            "exploration": "拓荒",
+            "folklore": "民俗",
+            "industry": "工业",
+            "intrigue": "密谋",
+            "magic": "魔法",
+            "politics": "政治",
+            "scholarship": "学识",
+            "statecraft": "政务",
+            "trade": "贸易",
+            "warfare": "战争",
+            "wilderness": "荒野"
+        },
+        "WorkSites": {
+            "food": {
+                "Name": "农田",
+                "Description": "在维护阶段减少消耗。需要在区域阶段使用收获庄稼、钓鱼或者畜牧来采集食物。使用\"建立农田\"创造。"
+            },
+            "lumber": {
+                "Name": "木材营地",
+                "Description": "增加在维护阶段获得的木材。使用\"建立工地\"创造。"
+            },
+            "luxuries": {
+                "Name": "矿井 (宝石)",
+                "Description": "非常少见的工地。在维护阶段提供奢侈品。"
+            },
+            "ore": {
+                "Name": "矿井",
+                "Description": "增加在维护阶段获得的矿石数量。使用\"建立工地\"创造。"
+            },
+            "stone": {
+                "Name": "采石场",
+                "Description": "增加在维护阶段获得的石材。使用\"建立工地\"创造。"
+            },
+            "Label": "工地",
+            "Resource": "如果工地建在一个人口稠密或利润丰厚的产地上，请在这里标出。这些会产量比通常多一倍。"
+        },
+        "Charter": {
+            "conquest": {
+                "Name": "征服",
+                "Description": "你的赞助人已经征服了一个地区，它的前领导人流亡甚至被杀。这份特许状让你可以统治这片被征服的领土（或被敌人遗弃的土地）的一部分，并以你赞助人的名义持有并平定它。人民特别忠诚并支持你的统治（可能部分出于恐惧），但潜在的战争威胁持续阻碍了艺术发展，让公民难以真正放松。如果你选择此特许状，你将被要求建立王国以对抗皮塔克斯"
+            },
+            "expansion": {
+                "Name": "扩张",
+                "Description": "你的赞助人让你掌管与已经被殖民的地区相邻的区域，并期望你的国家成为一个强大的盟友。来自你赞助人国家的更大支持有助于你强化自己王国的社会，但这种依赖意味着你盟友命运的波动可能会影响到你自己王国的安全。如果你选择此特许状，嘉曼蒂女士希望你和雷斯托夫保持更加牢固的盟友关系。"
+            },
+            "exploration": {
+                "Name": "拓荒",
+                "Description": "你的赞助人希望你开拓、清理以及殖民他领土周边的荒野。该特许状有助于快速进行初期建设（并获取所需的物资），但会产生债务。"
+            },
+            "grant": {
+                "Name": "援助",
+                "Description": "你的赞助人在不限制你往过发展的前提下提供大量资金和其他资源——但这不可避免地需要你雇佣大量它的公民和盟友。你国家的财富和物资供应得到保障，但你王国的一部分居民在你的国家和你的赞助商之间存在分歧。"
+            },
+            "open": {
+                "Name": "开放",
+                "Description": "如果你更愿意成为镇子的自由代理人和开拓者，你可以简单地选择一个没有限制但也没有支持的开放式特许状。在这种情况下，嘉曼蒂女士为你的勇敢和自信鼓掌，但警告说，建立一个王国并非易事。开放特许状赋予任意单一属性提升，并且新国家没有预设的属性缺陷。"
+            }
+        },
+        "Heartland": {
+            "forestOrSwamp": {
+                "Name": "森林或沼泽",
+                "Description": "你的国家始于林地或沼泽地，因此并不缺乏自然资源或自然奇景，可以激发的公民的想象力和心性。"
+            },
+            "hillOrPlain": {
+                "Name": "丘陵或平原",
+                "Description": "你的国家始于交通便利的区域。这体现在你的公民的气质上；他们感谢你的选择使他们的生活更加轻松。"
+            },
+            "lakeOrRiver": {
+                "Name": "湖泊或河流",
+                "Description": "在湖泊或河流的岸边建立国家可以确保一条天然的商路。甚至在大道建成之前，商人和旅行者就可以相对轻松地乘船到达您的定居点。"
+            },
+            "mountainOrRuins": {
+                "Name": "山脉或废墟",
+                "Description": "你的国家建立在山脉中或某个规模较大的废墟之上，它能使用这些自燃或人工屏障来加强防御。你的公民健壮且顽强，只是有点固执己见。"
+            }
+        },
+        "Government": {
+            "despotism": {
+                "Name": "专制独裁",
+                "Description": "你的国家统治以某个夺取或继承统治权的个人为核心，其拥有绝对的权威。这样的统治者依然需要保留顾问和副手，但前提是他们服从统治者的个人决断。"
+            },
+            "feudalism": {
+                "Name": "封建主义",
+                "Description": "贵国的统治权由王朝皇室赐予，但大部分真正的权力分散在他们的附庸和封地中。"
+            },
+            "oligarchy": {
+                "Name": "寡头政治",
+                "Description": "你国家的统治权掌握在一群代表全体人民的富有影响力的领导所组成的议会手中。"
+            },
+            "republic": {
+                "Name": "共和政体",
+                "Description": "你的国家从本国公民那里获得领导权。由选举所产生的代表们在国会中开会来治理国家。"
+            },
+            "thaumocracy": {
+                "Name": "魔导国家",
+                "Description": "你的国家由最擅长魔法的人统治，他们利用他们的知识和力量来决定最好的统治方式。虽然国家统治者使用的魔法根源可以让其主题产生相应变化（甚至其名称——例如，由神术施法者统治的魔导国家将是神权政体），无论是奥术、神术、原能还是异能，还是四种根源的任意组合，以下奖励都没有细节上的区别。"
+            },
+            "yeomanry": {
+                "Name": "自由邦联",
+                "Description": "你的国家是松散的，依靠地方领导人和公民来处理政府问题，根据需要相互派代表来处理涉及多个地方的问题。"
+            }
+        },
+        "SIDEBAR": {
+            "CreateKingdom": "创建王国",
+            "OpenSheet": "打开王国卡"
+        },
+        "Trait": {
+            "army": "军队",
+            "cavalry": "骑兵",
+            "civic": "公民",
+            "commerce": "商业",
+            "infantry": "步兵",
+            "kingdom": "王国",
+            "leadership": "领导力",
+            "maneuver": "计谋",
+            "morale": "士气",
+            "region": "区域",
+            "siege": "围攻",
+            "skirmisher": "散兵",
+            "upkeep": "保养"
+        },
+        "TraitDescription": {
+            "cavalry": "骑兵主要由骑乘作战的部队组成。",
+            "infantry": "步兵主要由步行的生物或士兵组成。",
+            "siege": "攻城部队专注于攻城器械的部署，而非个人作战。",
+            "skirmisher": "散兵主要有少数高机动部队组成。"
+        }
+    }
+}

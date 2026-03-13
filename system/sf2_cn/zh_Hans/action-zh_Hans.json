@@ -1,0 +1,1228 @@
+{
+    "PF2E": {
+        "Action": {
+            "ApplyEffect": "应用效果",
+            "ExpandDescription": "扩展描述",
+            "Range": {
+                "IncrementN": "射程增量{n} ft。",
+                "MaxN": "射程{n} ft。"
+            },
+            "Use": "使用"
+        },
+        "Actions": {
+            "AccessInfosphere": {
+                "Description": "<p>你尝试接入本地信息网络（通称信息圈）以获取特定主题的情报。这通常需要10分钟的研究时间来查找信息，结果类似于对某个主题回忆知识。更大规模的研究或主题可能需要数小时，而常见于该聚居地信息圈的简单答案可能只需一分钟，具体由GM决定。重大且长期的研究应使用研究子系统（见《主持人核心》）。GM根据你研究的主题确定DC。这可能受到当地信息圈质量、它可能拥有的关于该主题的信息以及其组织程度的影响。</p><p><strong>大成功</strong> 你查找到了你正在搜寻的信息。若该主题的信息本可以通过回忆知识来获取，则你查找信息的时间缩短至1分钟。<br><strong>成功</strong> 你查找到了你正在搜寻的信息。<br><strong>大失败</strong> 由于错误数据或网络恶作剧，你查找到了误导性信息。GM会向你提供关于调查主题的错误信息（或者决定不给你任何信息，如同失败一样）。</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 由于错误数据或网络恶作剧，你查找到了误导性信息。GM会向你提供关于调查主题的错误信息（或者决定不给你任何信息，如同失败一样）。",
+                    "criticalSuccess": "<strong>大成功</strong> 你查找到了你正在搜寻的信息。若该主题的信息本可以通过回忆知识来获取，则你查找信息的时间缩短至1分钟。",
+                    "success": "<strong>成功</strong> 你查找到了你正在搜寻的信息。"
+                },
+                "Title": "访问信息圈"
+            },
+            "AdministerFirstAid": {
+                "Description": "<p><strong>Requirements</strong> You're wearing or holding a @UUID[Compendium.sf2e.equipment.Item.s1vB3HdXjMigYAnY]{Healer's Toolkit}.</p><hr /><p>You perform first aid on an adjacent creature that is @UUID[Compendium.sf2e.conditions.Item.yZRUzMqrMmfLu0V1]{Dying} or @UUID[Compendium.sf2e.conditions.Item.lDVqvLKA6eF3Df60]{Bleeding}. If a creature is both dying and bleeding, choose which ailment you're trying to treat before you roll. You can Administer First Aid again to attempt to remedy the other effect.</p><ul><li><strong>Stabilize</strong> Attempt a [[/act administer-first-aid variant=stabilize]]{Medicine} check on a creature that has 0 Hit Points and the dying condition. The DC is equal to 5 + that creature's recovery roll DC (typically 15 + its dying value).</li><li><strong>Stop Bleeding</strong> Attempt a [[/act administer-first-aid variant=stop-bleeding]]{Medicine} check on a creature that is taking persistent bleed damage. The DC is usually the DC of the effect that caused the bleed.</li></ul><hr /><p><strong>Success</strong> If you're trying to stabilize, the target loses the dying condition (but remains @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf]{Unconscious}). If you're trying to stop bleeding, the target benefits from an assisted recovery with the lowered DC for particularly appropriate help.</p>\n<p><strong>Critical Failure</strong> If you were trying to stabilize, the target's dying value increases by 1. If you were trying to stop bleeding, the target immediately takes an amount of damage equal to its persistent bleed damage.</p>",
+                "Stabilize": {
+                    "Description": "<p>Attempt a [[/act administer-first-aid variant=stabilize]]{Medicine} check on a creature that has 0 Hit Points and the dying condition. The DC is equal to 5 + that creature's recovery roll DC (typically 15 + its dying value).</p><p><strong>Success</strong> The target loses the dying condition (but remains @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf]{Unconscious}).<br><strong>Critical Failure</strong> The target's dying value increases by 1.</p>",
+                    "DifficultyClass": {
+                        "Label": "进行急救DC"
+                    },
+                    "Notes": {
+                        "criticalFailure": "<strong>大失败</strong> 目标的濒死值+1。",
+                        "success": "<strong>成功</strong> 目标不再处于濒死状态（但仍然失去意识）。"
+                    },
+                    "Title": "进行急救- 稳定伤势"
+                },
+                "StopBleeding": {
+                    "Description": "<p>Attempt a [[/act administer-first-aid variant=stop-bleeding]]{Medicine} check on a creature that is taking persistent bleed damage. The DC is usually the DC of the effect that caused the bleed.</p><p><strong>Success</strong> The target benefits from an assisted recovery with the lowered DC for particularly appropriate help.<br><strong>Critical Failure</strong> The target immediately takes an amount of damage equal to its persistent bleed damage.</p>",
+                    "Notes": {
+                        "criticalFailure": "<strong>大失败</strong> 目标立即承受一次等于他承受的持续流血伤害数值的伤害。",
+                        "success": "<strong>成功</strong> 目标受到协助恢复的增益，由于得到了特别合适且合理的帮助而降低DC。"
+                    },
+                    "Title": "进行急救-止血"
+                },
+                "Title": "进行急救",
+                "Warning": {
+                    "TargetNotDying": "目标生物没有陷入濒死。",
+                    "UnknownVariant": "进行急救所使用的变体{variant}未知，请使用{variants}之一。"
+                }
+            },
+            "AffixATalisman": {
+                "Description": "<p><strong>Requirements</strong> You must use a @UUID[Compendium.sf2e.equipment.Item.vLGDUFrg4yGzpTQX]{Repair Toolkit}</p><hr /><p>You spend 10 minutes affixing a talisman to an item, placing the item on a stable surface and using the repair toolkit with both hands. You can also use this activity to remove a talisman. Attaching more than one talisman to an item deactivates all the talismans. They must be removed and re-affixed before they can be used again.</p>",
+                "Title": "附着护符"
+            },
+            "Aid": {
+                "Description": "<p><strong>Trigger</strong> An ally is about to use an action that requires a skill check or attack roll.</p>\n<p><strong>Requirements</strong> The ally is willing to accept your aid, and you have prepared to help (see below).</p>\n<hr />\n<p>You try to help your ally with a task. To use this reaction, you must first prepare to help, usually by using an action during your turn. You must explain to the GM exactly how you're trying to help, and they determine whether you can Aid your ally.</p>\n<p>When you use your Aid reaction, attempt a skill check or attack roll of a type decided by the GM. The typical DC is 15, but the GM might adjust this DC for particularly hard or easy tasks. The GM can add any relevant traits to your preparatory action or to your Aid reaction depending on the situation, or even allow you to Aid checks other than skill checks and attack rolls.</p>\n<hr />\n<p><strong>Critical Success</strong> You grant your ally a +2 circumstance bonus to the triggering check. If you're a master with the check you attempted, the bonus is +3, and if you're legendary, it's +4.</p>\n<p><strong>Success</strong> You grant your ally a +1 circumstance bonus to the triggering check.</p>\n<p><strong>Critical Failure</strong> Your ally takes a –1 circumstance penalty to the triggering check.</p>\n<p>@UUID[Compendium.sf2e.other-effects.Item.AHMUpMbaVkZ5A1KX]{Effect: Aid}</p>",
+                "Notes": {
+                    "criticalFailure": "你的盟友在触发检定上获得-1环境减值。",
+                    "criticalSuccess": "你的盟友在触发检定上获得+2环境加值。若你在自己尝试的检定上熟练度为大师，你给与盟友的加值为+3。若你为传奇，则给与的加值为+4。",
+                    "success": "你的盟友在触发检定上获得+1环境加值。"
+                },
+                "Title": "协助",
+                "Warning": {
+                    "NoStatistic": "协助行动可以与不同数据一起使用，并且没有特定数据。"
+                }
+            },
+            "ArcaneSlam": {
+                "Modifier": {
+                    "SizeDifference": "体型差异"
+                },
+                "Notes": {
+                    "NoTarget": "<strong>体型差异</strong>如果目标体型比你大一级，你将在检定中受到-2环境减值，如果体型更大，将受到-4环境减值。如果目标体型比你小一级，你将在检定中受到+2环境加值，如果体型更小，将受到+4环境加值。",
+                    "criticalFailure": "<strong>Critical Failure</strong> The creature breaks free and is no longer @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} by you.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You slam the foe down and the magical energy overwhelms it. The creature is knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}, becomes @UUID[Compendium.sf2e.conditions.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round, and takes damage equal to [[/r 2d6 + @abilities.str.mod # Damage: Arcane Slam]]{2d6 plus your Strength modifier}. The foe is no longer @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} by you.",
+                    "failure": "<strong>失败</strong> 你无法摔倒敌人，但是你依然抓住它。",
+                    "success": "<strong>Success</strong> You slam the foe down. The creature is knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} and takes damage equal to your [[/r @abilities.str.mod # Damage: Arcane Slam]]{Strength modifier}. The foe is no longer @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} by you."
+                },
+                "Title": "奥术摔砸"
+            },
+            "AreaFire": {
+                "Description": "你瞄准指定区域内的每个目标，该区域为武器的射程增量（对于锥形或线形）或指定爆炸的爆发范围（对于爆发）。对于爆发，你能将其中心放置在第一个射程增量内。区域内的所有生物都必须通过基础反射豁免，DC为你的职业DC+你武器的追踪值，你不必进行攻击骰。该伤害为区域伤害。豁免大失败的生物都会承受武器重击的附带效果，包括武器的重击专精效果。区域射击的耗弹量同武器列出的耗弹量相同。",
+                "Title": "区域射击 Area Fire"
+            },
+            "ArrestAFall": {
+                "Description": "<p><strong>触发</strong> 你处于坠落中。</p>\n<p><strong>需求</strong>你拥有飞行速度。</p>\n<hr />\n<p>你选择尝试一次特技检定或反射豁免来缓冲坠落。DC通常为15，但空气湍流或因素可能会导致DC提高。</p>\n<hr />\n<p><strong>成功</strong> 你不会受到本次坠落伤害。</p>",
+                "Notes": {
+                    "success": "<strong>成功</strong> 你不会受到本次坠落伤害。"
+                },
+                "Title": "着陆 Arrest A Fall"
+            },
+            "AutoFire": {
+                "Description": "你尝试攻击锥形区域内的每个目标，锥形的范围等于你武器射程增量的一半，不必进行攻击骰。区域内的所有生物都必须通过基础反射豁免，DC为你的职业DC+你武器的追踪值。该伤害为区域伤害。豁免大失败的生物都会承受武器重击的附带效果，包括武器的重击专精效果。自动射击会耗用目标数量×2的弹药量。",
+                "Title": "自动射击 Auto-Fire"
+            },
+            "AvertGaze": {
+                "Description": "<p>你将目光从危险上移开，比如美杜莎的凝视。在对抗如美杜莎的石化凝视这种需要你看着某生物或物体的视觉能力的豁免中，你获得+2环境加值。你的转移目光会持续到你下一回合开始。</p>",
+                "Title": "转移目光 Avert Gaze"
+            },
+            "AvoidNotice": {
+                "Description": "<p>You attempt a [[/act avoid-notice]]{Stealth} check to avoid notice while traveling at half speed. If you're Avoiding Notice at the start of an encounter, you usually roll a Stealth check instead of a Perception check both to determine your initiative and to see if the enemies notice you (based on their Perception DCs, as normal for @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}, regardless of their initiative check results).</p>",
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> You're @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} by the creature during your movement and remain undetected by the creature at the end of it.<br/>See the @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} action for details.",
+                    "success": "<strong>Success</strong> You're @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} by the creature during your movement and remain undetected by the creature at the end of it.<br/>See the @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} action for details."
+                },
+                "Title": "避人耳目"
+            },
+            "Balance": {
+                "Description": "<p><strong>Requirements</strong> You are in a square that contains a narrow surface, uneven ground, or another similar feature.</p><hr /><p>You move across a narrow surface or uneven ground, attempting an [[/act balance]]{Acrobatics} check against its Balance DC. You are @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} while on a narrow surface or uneven ground.</p><hr /><p><strong>Critical Success</strong> You move up to your Speed.</p>\n<p><strong>Success</strong> You move up to your Speed, treating it as difficult terrain (every 5 feet costs 10 feet of movement).</p>\n<p><strong>Failure</strong> You must remain stationary to keep your balance (wasting the action) or you fall. If you fall, your turn ends.</p>\n<p><strong>Critical Failure</strong> You fall and your turn ends.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你将会摔倒，你的回合结束。",
+                    "criticalSuccess": "<strong>大成功</strong> 你以你的正常速度前进。",
+                    "failure": "<strong>失败</strong> 你必须保持静止以保持平衡（浪费这次动作），否则你将会摔倒。如果你摔倒，你的回合会结束。",
+                    "success": "<strong>成功</strong> 你以你的正常速度前进，但会将其视为困难地形（每5尺移动算为10尺）。"
+                },
+                "SampleTasks": {
+                    "Untrained": "满地老树根，遍布大小岩块的石地",
+                    "Trained": "木制脚手架",
+                    "Expert": "一坑松散的小碎石",
+                    "Master": "钢丝，冰面",
+                    "Legendary": "剃刀之缘，正在半空坠落中的建筑物残片"
+                },
+                "Title": "平衡"
+            },
+            "BonMot": {
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> Your quip is atrocious. You take the same penalty an enemy would take had you succeeded. This ends after 1 minute or if you issue another Bon Mot and succeed. @UUID[Compendium.sf2e.feat-effects.Item.GoSls6SKCFmSoDxT]{Effect: Bon Mot}",
+                    "criticalSuccess": "<strong>Critical Success</strong> The target is distracted and takes a -3 status penalty to Perception and Will saves for 1 minute. The target can end the effect early with a retort to your Bon Mot. This can either be a single action that has the concentrate trait or an appropriate skill action to frame their retort. The GM determines which skill actions qualify, though they must take at least 1 action. Typically, the retort needs to use a linguistic Charisma-based skill action. @UUID[Compendium.sf2e.feat-effects.Item.GoSls6SKCFmSoDxT]{Effect: Bon Mot}",
+                    "success": "<strong>Success</strong> The target is distracted and takes a -2 status penalty to Perception and Will saves for 1 minute. The target can end the effect early with a retort to your Bon Mot. This can either be a single action that has the concentrate trait or an appropriate skill action to frame their retort. The GM determines which skill actions qualify, though they must take at least 1 action. Typically, the retort needs to use a linguistic Charisma-based skill action. @UUID[Compendium.sf2e.feat-effects.Item.GoSls6SKCFmSoDxT]{Effect: Bon Mot}"
+                },
+                "Title": "当头棒喝"
+            },
+            "Burrow": {
+                "Description": "<p><strong>需求</strong> 你拥有掘地速度</p>\n<hr />\n<p>你在泥地、沙地或类似软性地面中掘地前进，最多移动等于你掘地速度的距离。你无法掘地穿越岩石地面或类似比泥地更密实的地面，除非你有能力允许你在这种地面下掘地前进。</p>",
+                "Title": "掘地 Burrow"
+            },
+            "Climb": {
+                "Description": "<p><strong>Requirements</strong> You have both hands free</p><hr /><p>You attempt an [[/act climb]]{Athletics} check to move a maximum distance of 5 feet up, down, or across an incline. You're @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} while climbing unless you have a climb Speed. The GM determines the DC based on the nature of the incline and environmental circumstances; you might get an automatic critical success on an incline that's trivial to climb. If your land Speed is 40 feet or higher, increase the maximum distance by 5 feet for every 20 feet of Speed above 20 feet.</p><hr /><p><strong>Critical Success</strong> You move along the incline, increasing the maximum distance by 5 feet.</p>\n<p><strong>Success</strong> You move along the incline.</p>\n<p><strong>Critical Failure</strong> You fall. If you began the climb on stable ground, you fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Modifier": {
+                    "ClimbSpeed": "攀爬速度"
+                },
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You fall. If you began the climb on stable ground, you fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "criticalSuccess": "<strong>大成功</strong> 你沿着斜坡移动，最大移动距离增加5尺。",
+                    "success": "<strong>成功</strong> 你沿着斜坡移动。"
+                },
+                "SampleTasks": {
+                    "Untrained": "梯子，陡坡，低矮多枝桠的树",
+                    "Trained": "船帆索具，绳子，普通的树",
+                    "Expert": "有一些细小支撑点和坑洼的墙壁",
+                    "Master": "有抓手处的天花板，普通石墙",
+                    "Legendary": "光可鉴人的墙壁"
+                },
+                "Title": "攀爬"
+            },
+            "Coerce": {
+                "Description": "<p>With threats either veiled or overt, you attempt to bully a creature into doing what you want. You must spend at least 1 minute of conversation with the creature. At the end of the conversation, attempt an [[/act coerce]]{Intimidation} check against the target's Will DC, modified by any circumstances the GM determines.</p><hr /><p><strong>Critical Success</strong> The target gives you the information you seek or agrees to follow your directives so long as they aren't likely to harm the target in any way. The target continues to comply for an amount of time determined by the GM but not exceeding 1 day, at which point the target becomes unfriendly (if it wasn't already unfriendly or hostile). However, the target is too scared of you to retaliate—at least in the short term.</p>\n<p><strong>Success</strong> As critical success, but once the target becomes unfriendly, they might decide to act against you—for example, by reporting you to the authorities or assisting your enemies.</p>\n<p><strong>Failure</strong> The target doesn't do what you say, and if they were not already unfriendly or hostile, they become unfriendly.</p>\n<p><strong>Critical Failure</strong> The target refuses to comply, becomes hostile if they weren't already, and is temporarily immune to your Coercion for at least 1 week.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 对方没有被你吓住，并且对你的态度转为敌对（如果还没有处于敌对），并在接下来一周时间内临时免疫你的胁迫。",
+                    "criticalSuccess": "<strong>大成功</strong> 对方吐露了你希望知道的信息，或是按照你的指示去进行一些行动——底线是它们不太可能因此而去伤害其他任何生物。目标会被你胁迫而行动的时间长度由GM决定，但通常不超过1天时间。在此之后，对方对你的态度转为不友善（如果还没有已经处于不友善或是敌对态度）。不过，它们被你完全吓住了，以至于不会（在短期内，至少）想要报复你。",
+                    "failure": "<strong>失败</strong> 对方没有被你吓住，并且对你的态度转为不友善（如果还没有已经处于不友善或是敌对态度）。",
+                    "success": "<strong>成功</strong> 同大成功结果，但当目标对你的态度转为不友善以后，它们会积极地想要报复你——比如报告官方机构你的恶质行为，或是和你的敌人结盟。"
+                },
+                "Title": "胁迫"
+            },
+            "CommandAnAnimal": {
+                "Description": "<p>You issue an order to an animal. Attempt a [[/act command-an-animal]]{Nature} check against the animal's Will DC. The GM might adjust the DC if the animal has a good attitude toward you, you suggest a course of action it was predisposed toward, or you offer it a treat.</p>\n<p>You automatically fail if the animal is hostile or unfriendly to you. If the animal is helpful to you, increase your degree of success by one step. You might be able to Command an Animal more easily with a feat like @UUID[Compendium.sf2e.feats.Item.Rq5wkA8DtsmbzoGV]{Ride}.</p>\n<p>Most animals know the @UUID[Compendium.sf2e.actions.Item.HYNhdaPtF1QmQbR3]{Drop Prone}, @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap}, @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek}, @UUID[Compendium.sf2e.actions.Item.OdIUybJ3ddfL7wzj]{Stand}, @UUID[Compendium.sf2e.actions.Item.Bcxarzksqt9ezrs6]{Stride}, and @UUID[Compendium.sf2e.actions.Item.VjxZFuUXrCU94MWR]{Strike} basic actions. If an animal knows an activity, such as a horse's Gallop, you can Command the Animal to perform the activity, but you must spend as many actions on Command an Animal as the activity's number of actions. You can also spend multiple actions to Command the Animal to perform that number of basic actions on its next turn; for instance, you could spend 3 actions to Command an Animal to Stride three times or to Stride twice and then make a Strike.</p><hr /><p><strong>Success</strong> The animal does as you command on its next turn.</p>\n<p><strong>Failure</strong> The animal is hesitant or resistant, and it does nothing.</p>\n<p><strong>Critical Failure</strong> The animal misbehaves or misunderstands, and it takes some other action determined by the GM.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>动物误解了你的指令。GM决定它会做什么怪事。",
+                    "failure": "<strong>失败</strong> 动物对你没有兴趣或是抵抗，什么都不做。",
+                    "success": "<strong>成功</strong> 动物会按照你指令的内容在它的下回合行动。"
+                },
+                "Title": "指挥动物"
+            },
+            "ConcealAnObject": {
+                "Description": "<p>You hide a small object on your person (such as a weapon of light Bulk). When you try to sneak a concealed object past someone who might notice it, the GM rolls your [[/act conceal-an-object]]{Stealth} check and compares it to this passive observer's Perception DC. Once the GM rolls your check for a concealed object, that same result is used no matter how many passive observers you try to sneak it past. If a creature is specifically searching you for an item, it can attempt a Perception check against your Stealth DC (finding the object on success).</p>\n<p>You can also conceal an object somewhere other than your person, such as among undergrowth or in a secret compartment within a piece of furniture. In this case, characters Seeking in an area compare their Perception check results to your Stealth DC to determine whether they find the object.</p><hr /><p><strong>Success</strong> The object remains undetected.</p>\n<p><strong>Failure</strong> The searcher finds the object.</p>",
+                "Notes": {
+                    "failure": "<strong>失败</strong> 搜查者发现了你带着的物品。",
+                    "success": "<strong>成功</strong> 你隐秘地随身藏着这件物品。"
+                },
+                "Title": "隐藏物件"
+            },
+            "CoverTracks": {
+                "Description": "<p>You cover your tracks, moving up to half your travel Speed, using the @UUID[Compendium.sf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.DUOb8QrlC5t0adkL]{Travel Speed} rules. You don't need to attempt a Survival check to cover your tracks, but anyone tracking you must succeed at a Survival check against your Survival DC if it is higher than the normal DC to @UUID[Compendium.sf2e.actions.Item.EA5vuSgJfiHH7plD]{Track}.</p>\n<p>In some cases, you might Cover Tracks in an encounter. In this case, Cover Tracks is a single action and doesn't have the exploration trait.</p>",
+                "Title": "掩盖行踪 Cover Tracks"
+            },
+            "Craft": {
+                "Details": {
+                    "DaysForNoCost": "可减免额外花销的天数：",
+                    "Discount": "每日折扣:",
+                    "LostMaterials": "Lose {cost} of Materials",
+                    "PayFull": "支付{cost}全部成本和手艺",
+                    "PayMaterials": "支付 {cost} 材料成本和手艺",
+                    "ReceiveItem": "获得物品"
+                },
+                "Error": {
+                    "ItemReferenceMismatch": "仅允许合集包或世界物品目录中的实体物品制作。"
+                },
+                "Information": {
+                    "LoseMaterials": "{actorName} 失去 {cost} 的材料.",
+                    "PayAndReceive": "{actorName}支付{cost}的制作成本，并获得了{quantity}x{itemName}。",
+                    "ReceiveItem": "{actorName} 收到了 {quantity}x {itemName}."
+                },
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你没有做成物品，而且你浪费了你准备的原材料总价格的10%。如果你想要重试制作这件物品，你必须从头开始整个过程。",
+                    "criticalSuccess": "<strong>大成功</strong> 你成功的制作了你想要的物品，并且如果你花费额外的工作天数以节省材料，在计算你每天节约的材料价格时，使用你的角色等级+1和你在手艺技能上的熟练等级计算。",
+                    "failure": "<strong>失败</strong> 你没有做成物品，但你也没有浪费任何准备的原材料。如果你想要重试制作这件物品，你必须从头开始整个过程。",
+                    "success": "<strong>成功</strong> 你成功的制作了你想要的物品，并且如果你花费额外的工作天数以节省材料，在计算你每天节约的材料价格时，使用你的角色等级和你在手艺技能上的熟练等级计算。"
+                },
+                "SelectItemDialog": {
+                    "CancelButtonLabel": "取消",
+                    "CraftButtonLabel": "制造",
+                    "DropItemZoneLabel": "将物品拖放至此...",
+                    "Title": "选择要制作的物品"
+                },
+                "SelectSpellDialog": {
+                    "CraftButtonLabel": "制作",
+                    "Title": "选择法术"
+                },
+                "Title": "制作",
+                "Warning": {
+                    "CantAddItem": "无法添加物品",
+                    "InsufficientCoins": "硬币不足",
+                    "MissingItem": "无法创建ID为{uuid}的未知物品。",
+                    "NotPhysicalItem": "指定的物品 {item} 不是实体物品。"
+                }
+            },
+            "Crawl": {
+                "Description": "<p><strong>Requirements</strong> You are prone and your Speed is at least 10 feet.</p>\n<hr />\n<p>You move 5 feet by crawling and continue to stay @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Title": "爬行"
+            },
+            "CreateADiversion": {
+                "Description": "<p>With a [[/act create-a-diversion variant=gesture]]{gesture}, a [[/act create-a-diversion variant=trick]]{trick}, or some [[/act create-a-diversion variant=distracting-words]]{distracting words}, you can create a diversion that draws creatures' attention elsewhere. If you use a gesture or trick, this action gains the manipulate trait. If you use distracting words, it gains the auditory and linguistic traits.</p>\n<p>Attempt a single Deception check and compare it to the Perception DCs of the creatures whose attention you're trying to divert. Whether or not you succeed, creatures you attempt to divert gain a +4 circumstance bonus to their Perception DCs against your attempts to Create a Diversion for 1 minute.</p><hr /><p><strong>Success</strong> You become @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} to each creature whose Perception DC is less than or equal to your result. (The hidden condition allows you to @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} away.) This lasts until the end of your turn or until you do anything except Step or use the Stealth skill to Hide or Sneak. If you Strike a creature, the creature remains @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against that attack, and you then become observed. If you do anything else, you become observed just before you act unless the GM determines otherwise.</p>\n<p><strong>Failure</strong> You don't divert the attention of any creatures whose Perception DC exceeds your result, and those creatures are aware you were trying to trick them.</p>",
+                "DistractingWords": {
+                    "Title": "分心话语"
+                },
+                "Gesture": {
+                    "Title": "姿势"
+                },
+                "Notes": {
+                    "failure": "<strong>失败</strong> 如果你的检定结果未能超过其他生物的察觉DC，则你不能使他们分神，并且这些生物立刻意识到你在尝试欺骗他们。",
+                    "success": "<strong>Success</strong> You become @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} to each creature whose Perception DC is less than or equal to your result. (The hidden condition allows you to @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} away.) This lasts until the end of your turn or until you do anything except @UUID[Compendium.sf2e.actions.Item.UHpkTuCtyaPqiCAB]{Step} or use the Stealth skill to @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide} or Sneak. If you @UUID[Compendium.sf2e.actions.Item.VjxZFuUXrCU94MWR]{Strike} a creature, the creature remains @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against that attack, and you then become @UUID[Compendium.sf2e.conditions.Item.1wQY3JYyhMYeeV2G]{Observed}. If you do anything else, you become observed just before you act unless the GM determines otherwise."
+                },
+                "Title": "分神",
+                "Trick": {
+                    "Title": "花招"
+                },
+                "Warning": {
+                    "UnknownVariant": "让敌人分神所使用的变体{variant}未知，请使用{variants}之一。"
+                }
+            },
+            "CreateForgery": {
+                "Description": "<p><strong>Requirements</strong> You provide the proper writing materials for your forgery.</p><hr /><p>You create a forged document, usually over the course of a day or a week. The GM rolls a secret DC 20 [[/act create-forgery]]{Society} check. If you need to forge a specific person's handwriting, you need a sample of that person's handwriting. Otherwise, you need only to have seen a similar document, and you gain up to a +4 circumstance bonus to the check (the GM determines the bonus).</p><hr /><p><strong>Success</strong> The forgery is of good enough quality that passive observers can't notice the fake (but see Examining Forgeries).</p>\n<p><strong>Failure</strong> The forgery has some obvious signs of being a fake, potentially allowing passive observers to detect it. Each time a passive observer sees the document, the GM compares your check result to the observer's Perception DC or Society DC, whichever is higher. If your result doesn't exceed a passive observer's DC, that observer knows the document is a forgery.</p><hr /><h2>Examining Forgeries</h2><p>A creature on the lookout for forgeries, even one who was fooled on a passive glance, can take time to closely examine a document to see if it's a forgery. They apply different techniques and analysis methods to look beyond the surface elements and attempt a secret Perception or Society check against the forger's Society DC; any bonus you had to create the forgery initially applies to this DC. On a success, the examiner knows the document is a forgery. On a failure, they think the document is genuine and can't try again unless they get a new reason to be suspicious of the document. If a PC examines a genuine document, the GM might still pretend to roll a secret check before revealing the document is genuine.</p>",
+                "ForgedDocument": {
+                    "Description": "<p>A creature on the lookout for forgeries, even one who was fooled on a passive glance, can take time to closely examine a document to see if it's a forgery. They apply different techniques and analysis methods to look beyond the surface elements and attempt a secret @Check[perception|dc:{societyDC}|traits:secret] or @Check[society|dc:{societyDC}|traits:secret]; any bonus you had to create the forgery initially applies to this DC. On a success, the examiner knows the document is a forgery. On a failure, they think the document is genuine and can't try again unless they get a new reason to be suspicious of the document. If a PC examines a genuine document, the GM might still pretend to roll a secret check before revealing the document is genuine.</p>",
+                    "FailureGmNote": "<p>这些文书存在一些明显的问题，GM会允许任何读者在阅读它时被动进行一个察觉检定或是社群技能检定（取其高者）与结果{total}对抗，从而看出它的漏洞，成功或失败情况见下。一旦GM为伪造的文书进行了一次检定，无论多少读者观察了这份文件和他们的察觉DC，他们都会对抗这单次检定的结果。</p>\n<p>{success}</p>\n<p>{failure}</p>",
+                    "Name": "伪造文书",
+                    "SuccessGmNote": "<p>The forgery is of good enough quality that passive observers can't notice the fake. Only those who carefully examine the document and attempt a @Check[perception|dc:{societyDC}|showDC:gm] or @Check[society|dc:{societyDC}|showDC:gm] check against your Society DC can do so.</p>"
+                },
+                "ForgedDocumentCreatedNotification": "伪造的文书已经添加至{name}的仓库。",
+                "Notes": {
+                    "criticalFailure": "<strong>失败</strong> 读者发现你的文书是伪造的。",
+                    "criticalSuccess": "<strong>成功</strong> 读者看不出你的文书是伪造的。",
+                    "failure": "<strong>失败</strong> 读者发现你的文书是伪造的。",
+                    "success": "<strong>成功</strong> 读者看不出你的文书是伪造的。"
+                },
+                "Title": "进行伪造",
+                "UnspecificHandwriting": "非特定手写"
+            },
+            "DecipherWriting": {
+                "Description": "<p>You attempt to decipher complicated writing or literature on an obscure topic. This usually takes 1 minute per page of text, but might take longer (typically an hour per page for decrypting ciphers or the like). The text must be in a language you can read, though the GM might allow you to attempt to decipher text written in an unfamiliar language using [[/act decipher-writing statistic=society]]{Society} instead.</p>\n<p>The DC is determined by the GM based on the state or complexity of the document. The GM might have you roll one check for a short text or a check for each section of a larger text.</p><hr /><p><strong>Critical Success</strong> You understand the true meaning of the text.</p>\n<p><strong>Success</strong> You understand the true meaning of the text. If it was a coded document, you know the general meaning but might not have a word-for-word translation.</p>\n<p><strong>Failure</strong> You can't understand the text and take a –2 circumstance penalty to further checks to decipher it.</p>\n<p><strong>Critical Failure</strong> You believe you understand the text on that page, but you have in fact misconstrued its message.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你认为你理解了文本的正确含义，但事实上你读错了其中的信息。",
+                    "criticalSuccess": "<strong>大成功</strong> 你理解了文本的确切含义。",
+                    "failure": "<strong>失败</strong> 你看不懂文本的意思，并且在接下来对该文本的解译文书尝试中承受-2环境减值。",
+                    "success": "<strong>成功</strong> 你理解了文本的正确含义。但如果你是在解读加密的文本，那么你知道的是文本的大意，而非百分之百逐字逐句意义的翻译。"
+                },
+                "SampleTasks": {
+                    "Trained": "入门级的哲学论文",
+                    "Expert": "复杂的密文，比如暗语",
+                    "Master": "间谍大师使用的密文或高端研究笔记",
+                    "Legendary": "一位远古天族用神秘的位面文字写下的暗喻"
+                },
+                "Title": "解译文书",
+                "Warning": {
+                    "NoSkill": "解译文书时会使用到不同的技能，但没有明确指定。用于解译文书的技能以及它们通常解读的文本类型是：用奥法技能解译科学或魔法文献，用神秘技能解译秘传和哲学文本，用宗教技能解译教会经文，用社交技能解译密码或是古代书写等。"
+                }
+            },
+            "Delay": {
+                "Description": "<p><strong>Trigger</strong> Your turn begins.</p>\n<hr />\n<p>You wait for the right moment to act. The rest of your turn doesn't happen yet. Instead, you're removed from the initiative order. You can return to the initiative order as a free action triggered by the end of any other creature's turn. This permanently changes your initiative to the new position. You can't use reactions until you return to the initiative order. If you Delay an entire round without returning to the initiative order, the actions from the Delayed turn are lost, your initiative doesn't change, and your next turn occurs at your original position in the initiative order.</p>\n<p>When you Delay, any @UUID[Compendium.sf2e.conditions.Item.lDVqvLKA6eF3Df60]{Persistent Damage} or other negative effects that normally occur at the start or end of your turn occur immediately when you use the Delay action. Any beneficial effects that would end at any point during your turn also end. The GM might determine that other effects end when you Delay as well. Essentially, you can't Delay to avoid negative consequences that would happen on your turn or to extend beneficial effects that would end on your turn.</p>",
+                "Title": "延迟"
+            },
+            "Demoralize": {
+                "Description": "<p>With a sudden shout, a well-timed taunt, or a cutting put-down, you can shake an enemy's resolve. Choose a creature within 30 feet of you who you're aware of. Attempt an [[/act demoralize]]{Intimidation} check against that target's Will DC. If the target doesn't understand the language you are speaking, or you're not speaking a language, you take a –4 circumstance penalty to the check. Regardless of your result, the target is temporarily immune to your attempts to Demoralize it for 10 minutes.</p><hr /><p><strong>Critical Success</strong> The target becomes @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 2}.</p>\n<p><strong>Success</strong> The target becomes @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>",
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> The target becomes @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 2}.",
+                    "success": "<strong>Success</strong> The target becomes @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 1}."
+                },
+                "Title": "挫败士气",
+                "Unintelligible": "无法沟通"
+            },
+            "DisableDevice": {
+                "Description": "<p>This action allows you to disarm a trap or another complex device. Often, a device requires numerous successes before becoming disabled, depending on its construction and complexity. A @UUID[Compendium.sf2e.equipment.Item.zvLyCVD8g2PdHJAc]{Thieves' Toolkit} is helpful and sometimes even required to Disable a Device, as determined by the GM, and sometimes a device requires a higher proficiency rank in Thievery to disable it.</p>\n<p>Your [[/act disable-device]]{Thievery} check result determines your progress.</p>\n<hr>\n<p><strong>Critical Success</strong> You disable the device, or you achieve two successes toward disabling a device requiring more than one success. You leave no trace of your tampering, and you can rearm the device later, if that type of device can be rearmed.</p>\n<p><strong>Success</strong> You disable the device, or you achieve one success toward disabling a device that requires more than one success.</p>\n<p><strong>Critical Failure</strong> You trigger the device.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>装置被你触发了。",
+                    "criticalSuccess": "<strong>大成功</strong> 你成功解除了该装置，或者你在解除一个需要多次成功的装置时取得了两次成功。你不会留下任何改动痕迹，如果该类型的装置能够重新启动，你可以在稍后重新启动该设备。",
+                    "success": "<strong>成功</strong> 你成功解除了该装置，或者你在解除一个需要多次成功的装置时取得了一次成功。"
+                },
+                "Title": "解除装置"
+            },
+            "Disarm": {
+                "Description": "<p><strong>Requirements</strong> You have at least one hand free. The target can't be more than one size larger than you.</p><hr /><p>You try to knock an item out of a creature's grasp. Attempt an [[/act disarm]]{Athletics} check against the target's Reflex DC.</p><hr /><p><strong>Critical Success</strong> You knock the item out of the target's grasp. It falls to the ground in the target's space.</p>\n<p><strong>Success</strong> You weaken your target's grasp on the item. Further attempts to Disarm the target of that item gain a +2 circumstance bonus, and the target takes a –2 circumstance penalty to attacks with the item or other checks requiring a firm grasp on the item. The creature can end the effect by Interacting to change its grip on the item; otherwise, it lasts as long as the creature holds the item.</p>\n<p>@UUID[Compendium.sf2e.other-effects.Item.PuDS0DEq0CnaSIFV]{Effect: Disarm (Success)}</p>\n<p><strong>Critical Failure</strong> You lose your balance and become @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You lose your balance and become @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of your next turn.",
+                    "criticalSuccess": "<strong>大成功</strong> 你将该物品从目标手中击落。它会掉落在目标占据空间的地面上。",
+                    "success": "<strong>Success</strong> You weaken your target's grasp on the item. Further attempts to Disarm the target of that item gain a +2 circumstance bonus, and the target takes a –2 circumstance penalty to attacks with the item or other checks requiring a firm grasp on the item. The creature can end the effect by Interacting to change its grip on the item; otherwise, it lasts as long as the creature holds the item.<br>@UUID[Compendium.sf2e.other-effects.Item.PuDS0DEq0CnaSIFV]{Effect: Disarm (Success)}"
+                },
+                "Title": "卸武"
+            },
+            "Dismiss": {
+                "Description": "<p>你使一个你能够解消的效果结束。除非另有说明，否则解消会使整个效果结束。</p>",
+                "Title": "解消 Dismiss"
+            },
+            "Drive": {
+                "Description": "<p><strong>需求</strong> 你正在驾驶一辆载具。</p>\n<p>你驾驶载具移动。在开始驱动前决定你打算消耗几个动作。驱动效果取决于你消耗的动作数。你不能驱动穿过被生物占据的空间，即便占据者是你的盟友。</p>\n<p><span class=\"action-glyph\">1</span> 尝试一次驾驶检定。若成功，载具移动至多其速度的距离，且可正常转向。若失败，载具直线移动等同于其速度的距离。若大失败，载具直线移动等同于其速度的距离，并陷入失控。</p>\n<p><span class=\"action-glyph\">2</span>（鲁莽）载具沿当前朝向，直线移动至多其两倍速度的距离。</p>\n<p><span class=\"action-glyph\">3</span>（鲁莽）你在保持对载具控制的驾驶检定上承受-5减值。载具沿当前朝向，直线移动至多其三倍速度的距离。</p>",
+                "Drive1": {
+                    "Description": "<p>尝试一次驾驶检定。若成功，载具移动至多其速度的距离，且可正常转向。若失败，载具直线移动等同于其速度的距离。若大失败，载具直线移动等同于其速度的距离，并陷入失控。</p>",
+                    "Notes": {
+                        "criticalFailure": "<strong>大失败</strong> 载具直线移动等同于其速度的距离，并陷入失控。",
+                        "failure": "<strong>失败</strong> 载具直线移动等同于其速度的距离。",
+                        "success": "<strong>成功</strong> 载具移动至多其速度的距离，且可正常转向。"
+                    },
+                    "Title": "驱动（1动作）"
+                },
+                "Drive2": {
+                    "Description": "<p>（鲁莽）载具沿当前朝向，直线移动至多其两倍速度的距离。</p>",
+                    "Notes": {
+                        "failure": "<strong>Failure</strong> The vehicle moves its Speed in a straight line along its most recent heading, drifting up to 45 degrees at the GM's discretion, and becomes uncontrolled.",
+                        "success": "<strong>成功</strong> 载具沿当前朝向，直线移动至多其两倍速度的距离。"
+                    },
+                    "Title": "驱动（2动作）"
+                },
+                "Drive3": {
+                    "Description": "<p>（鲁莽）你在保持对载具控制的驾驶检定上承受-5减值。载具沿当前朝向，直线移动至多其三倍速度的距离。</p>",
+                    "Notes": {
+                        "failure": "<strong>Failure</strong> The vehicle moves its Speed in a straight line along its most recent heading, drifting up to 45 degrees at the GM's discretion, and becomes uncontrolled.",
+                        "success": "<strong>Success</strong> The vehicle moves up to three times its Speed in a straight line at the vehicle's current heading."
+                    },
+                    "Title": "驱动（3动作）"
+                },
+                "Title": "驱动"
+            },
+            "DropProne": {
+                "Description": "<p>You fall @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Title": "趴下"
+            },
+            "EarnIncome": {
+                "Description": "<p>你使用一项技能在休整期尝试赚钱。GM会设定一个代表最有利可图的工作的任务等级。你可以寻找较低级别的任务，由GM决定能否找到。有时你可以尝试找到比一开始提供的那份报酬更好的工作，但需要花费时间，并且需要使用交涉技能搜集信息，或者进行一些研究和社交方面的努力。</p>\n<p>如果你接受一份工作，GM就会秘密设置你的技能检定DC。你需要在第一天工作后进行检定来确定收入。根据检定结果、任务等级和熟练度（如所赚收入表所示），你将获得一定的收入。</p>\n<p>你可以在接下来几天继续执行该任务，无需再次检定。第一天之后的每一天收入都与第一天相同，直至任务完成。GM决定你可以在该任务中工作多次时间。大多数任务持续一两周，但有些任务可能需要几个月甚至几年的时间。</p><hr /><p><strong>大成功</strong> 你工作得非常出色。获得任务等级+1且对应你技能熟练度的现金数量。</p>\n<p><strong>成功</strong> 你工作得很称职。获得任务等级且对应你技能熟练度的现金数量。</p>\n<p><strong>失败</strong> 你工作得敷衍潦草，只能在这段时间里得到最低限度的报酬。获得任务等级且对应失败所列出的现金数量。GM可能会降低你继续进行任务的时间。</p>\n<p><strong>大失败</strong> 你在工作中一无所获并且立刻会被解雇。你无法再继续进行该任务。你的声誉受损，可能导致未来很难在这个社区找到回报可观的工作。</p>",
+                "ShortDescription": "You use one of your skills to make money during downtime. The GM assigns a task level representing the most lucrative job available. You can search for lower-level tasks, with the GM determining whether you find any.",
+                "Result": {
+                    "DaysSpent": {
+                        "Label": "Days Spent",
+                        "one": "1日",
+                        "other": "{days}日"
+                    },
+                    "IncomeEarned": "赚取收入",
+                    "PerDay": "每日 {income}",
+                    "TaskLevel": "任务等级",
+                    "Title": "赚取收入结果"
+                },
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你在工作中一无所获并且立刻会被解雇。你无法再继续进行该任务。你的声誉受损，可能导致未来很难在这个社区找到回报可观的工作。",
+                    "criticalSuccess": "<strong>大成功</strong> 你工作得非常出色。获得任务等级+1且对应你技能熟练度的现金数量。",
+                    "failure": "<strong>失败</strong> 你工作得敷衍潦草，只能在这段时间里得到最低限度的报酬。获得任务等级且对应失败所列出的现金数量。GM可能会降低你继续进行任务的时间。",
+                    "success": "<strong>成功</strong> 你工作得很称职。获得任务等级且对应你技能熟练度的现金数量。"
+                },
+                "SampleTasks": {
+                    "Caption": "以下范例使用酒类学识在酒吧工作，或使用法律学识从事法律工作。",
+                    "Trained": "调酒师，从事法律研究",
+                    "Expert": "进行饮料选择策划，在法庭上处理小案件",
+                    "Master": "管理一家大型酿酒厂，在法庭上处理重要案件",
+                    "Legendary": "管理一家国际酿酒特许经营公司，在地狱法庭上提起诉讼"
+                },
+                "Submit": "掷骰",
+                "Title": "赚取收入 Earn Income"
+            },
+            "EncouragingWords": {
+                "BadArgs": "此操作只能用一个玩家角色或NPC执行。",
+                "Cancel": "取消",
+                "ContentLabel1": "交涉DC：",
+                "ContentLabel2": "DC调整值：",
+                "ContentMain": "设定目标DC。记住，你不能尝试超过你熟练等级的医疗。尝试这样做将会使DC和治疗量降低到你的最高水平。",
+                "ContentOption1": "受训 DC 15",
+                "ContentOption2": "专家 DC 20, +5 耐力",
+                "ContentOption3": "大师 DC 30, +15 耐力",
+                "ContentOption4": "传奇 DC 40, +25 耐力",
+                "CritFailure": "大失败",
+                "CritSuccess": "大成功",
+                "Damage": "伤害",
+                "Failure": "失败",
+                "NotTrained": "{name} 在交涉上的未受训，也不知道如何使用激励言语。",
+                "Recovery": "耐力恢复",
+                "StaminaNotEnabled": "耐力变体未启用。",
+                "Success": "成功",
+                "Title": "激励言语"
+            },
+            "EndCover": {
+                "TowerShield": {
+                    "Description": "{actor}从{weapon}后现身。",
+                    "Title": "结束掩蔽"
+                },
+                "ShortTitle": "结束掩蔽",
+                "Title": "结束掩蔽"
+            },
+            "Escape": {
+                "Description": "<p>You attempt to escape from being @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.sf2e.conditions.Item.eIcWbB5o3pP6OIMe]{Immobilized}, or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained}. Choose one creature, object, spell effect, hazard, or other impediment imposing any of those conditions on you. Attempt a check using your [[/act escape statistic=unarmed]]{unarmed attack modifier} against the DC of the effect. This is typically the Athletics DC of a creature grabbing you, the Thievery DC of a creature who tied you up, the spell DC for a spell effect, or the listed Escape DC of an object, hazard, or other impediment. You can attempt an [[/act escape statistic=acrobatics]]{Acrobatics} or [[/act escape statistic=athletics]]{Athletics} check instead of using your attack modifier if you choose (but this action still has the attack trait).</p><hr /><p><strong>Critical Success</strong> You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. You can then Stride up to 5 feet.</p>\n<p><strong>Success</strong> You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target.</p>\n<p><strong>Critical Failure</strong> You don't get free, and you can't attempt to Escape again until your next turn.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你没有获得自由，且直到你的下一轮你无法再进行逃脱尝试。",
+                    "criticalSuccess": "<strong>大成功</strong>你获得自由，移除目标对你施加的擒抱、禁足或束缚状态。你还能立刻行走至多5尺。",
+                    "success": "<strong>成功</strong>你获得自由，移除目标对你施法的擒抱、禁足或束缚状态。"
+                },
+                "Title": "逃脱"
+            },
+            "Feint": {
+                "Description": "<p><strong>Requirements</strong> You are within melee reach of the target you attempt to Feint.</p><hr /><p>With a misleading flourish, you leave an opponent unprepared for your real attack. Attempt a [[/act feint]]{Deception} check against your target's Perception DC.</p><hr /><p><strong>Critical Success</strong> You throw your enemy's defenses against you entirely off. The target is @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against melee attacks that you attempt against it until the end of your next turn.</p>\n<p><strong>Success</strong> Your foe is fooled, but only momentarily. The target is off-guard against the next melee attack that you attempt against it before the end of your current turn.</p>\n<p><strong>Critical Failure</strong> Your feint backfires. You are off-guard against melee attacks the target attempts against you until the end of your next turn.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> Your feint backfires. You are @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against melee attacks the target attempts against you until the end of your next turn.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You throw your enemy's defenses against you entirely off. The target is @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against melee attacks that you attempt against it until the end of your next turn.",
+                    "success": "<strong>Success</strong> Your foe is fooled, but only momentarily. The target is @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against the next melee attack that you attempt against it before the end of your current turn."
+                },
+                "Title": "虚招"
+            },
+            "Fly": {
+                "Description": "<p><strong>需求</strong> 你有飞行速度。</p>\n<hr />\n<p>你在空中飞行至多等于飞行速度的距离。向上飞行（垂直向上或斜向上）使用在困难地形移动的规则。每消耗5尺速度可以垂直向下移动10尺距离。若你飞行到地面上，你不会受到坠落伤害。你可以使用该动作飞行0尺来保持悬停在空中。若你在回合结束时处于空中而本回合没有使用过飞行动作，你会坠落。</p>",
+                "Title": "飞行 Fly"
+            },
+            "ForceOpen": {
+                "Description": "<p>Using your body, a lever, or some other tool, you attempt to forcefully open a door, window, container or heavy gate. With a high enough result, you can even smash through walls. Without a crowbar, prying something open takes a –2 item penalty to the [[/act force-open]]{Athletics} check to Force Open.</p><hr /><p><strong>Critical Success</strong> You open the door, window, container, or gate and can avoid damaging it in the process.</p>\n<p><strong>Success</strong> You break the door, window, container, or gate open, and it gains the @UUID[Compendium.sf2e.conditions.Item.6dNUvdb1dhToNDj3]{Broken} condition. If it's especially sturdy, the GM might have it take damage but not be broken.</p>\n<p><strong>Critical Failure</strong> Your attempt jams the door, window, container, or gate shut, imposing a –2 circumstance penalty on future attempts to Force it Open.</p>",
+                "NoCrowbarPenalty": "没有撬棍",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你把门，窗或锁弄卡住了。在之后的破拆检定上承受-2环境减值。",
+                    "criticalSuccess": "<strong>大成功</strong>你强行弄开了门，窗或是容器，并且可以选择不损坏它们。",
+                    "success": "<strong>Success</strong> You break the door, window, container, or gate open, and it gains the @UUID[Compendium.sf2e.conditions.Item.6dNUvdb1dhToNDj3]{Broken} condition. If it's especially sturdy, the GM might have it take damage but not be broken."
+                },
+                "SampleTasks": {
+                    "Untrained": "织物，易碎的玻璃",
+                    "Trained": "冰块，结实的玻璃",
+                    "Expert": "脆弱的木门，木质吊闸",
+                    "Master": "坚固的木门，铁质吊闸，金属栏杆",
+                    "Legendary": "石门或铁门"
+                },
+                "Title": "破拆"
+            },
+            "GatherInformation": {
+                "Description": "<p>You canvass local markets, taverns, and gathering places in an attempt to learn about a specific individual or topic. The GM determines the DC of the [[/act gather-information]]{Diplomacy} check and the amount of time it takes (typically 2 hours, but sometimes more), along with any benefit you might be able to gain by spending coin on bribes, drinks, or gifts.</p>\n<p><strong>Success</strong> You collect information about the individual or topic. The GM determines the specifics.</p>\n<p><strong>Critical Failure</strong> You collect incorrect information about the individual or topic.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>你收集的有关个体或话题的信息不正确。",
+                    "success": "<strong>成功</strong> 你搜集到了关于你需要的某人或某事的信息，具体内容由GM设计。"
+                },
+                "SampleTasks": {
+                    "Untrained": "街谈巷议的话题",
+                    "Trained": "常见流言",
+                    "Expert": "含糊其辞的流言，保守不力的秘密",
+                    "Master": "被严格保密或极其隐秘的信息",
+                    "Legendary": "只有极少数人，或者只有地位非凡的人所知的信息"
+                },
+                "Title": "收集信息"
+            },
+            "GrabAnEdge": {
+                "Description": "<p><strong>Trigger</strong> You fall from or past an edge or handhold.</p>\n<p><strong>Requirements</strong> Your hands are not tied behind your back or otherwise @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained}.</p>\n<hr />\n<p>When you fall off or past an edge or other handhold, you can try to grab it, potentially stopping your fall. You must succeed at your choice of an Acrobatics check or a Reflex save, usually at the Climb DC. If you grab the edge or handhold, you can then @UUID[Compendium.sf2e.actions.Item.pprgrYQ1QnIDGZiy]{Climb} up using Athletics.</p>\n<hr />\n<p><strong>Critical Success</strong> You grab the edge or handhold, whether or not you have a hand free, typically by using a suitable held item to catch yourself (catching a battle axe on a ledge, for example). You still take damage from the distance fallen so far, but you treat the fall as though it were 30 feet shorter.</p>\n<p><strong>Success</strong> If you have at least one hand free, you grab the edge or handhold, stopping your fall. You still take damage from the distance fallen so far, but you treat the fall as though it were 20 feet shorter. If you have no hands free, you continue to fall as if you had failed the check.</p>\n<p><strong>Critical Failure</strong> You continue to fall, and if you've fallen 20 feet or more before you use this reaction, you take @Damage[10[bludgeoning]|options:fall-damage] damage from the impact for every 20 feet fallen.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You continue to fall, and if you've fallen 20 feet or more before you use this reaction, you take @Damage[10[bludgeoning]|options:fall-damage] damage from the impact for every 20 feet fallen.",
+                    "criticalSuccess": "<strong>大成功</strong> 无论你是否有空闲手，你都抓住了边缘或把手，典型的比如用合适的持握物品挂住了你自己（例如用战斧卡在了横栏上）。你仍然会受到已坠落距离导致的伤害，但视为坠落距离减少30尺来计算。",
+                    "success": "<strong>成功</strong> 若你至少有一只空闲手，你就抓住了边缘或把手，阻止了坠落。你仍然会受到已坠落距离导致的伤害，但视为坠落距离减少20尺来计算。若你没有空闲手，你会如同检定失败一般继续坠落。"
+                },
+                "Title": "抓住边缘 Grab An Edge"
+            },
+            "Grapple": {
+                "Description": "<p><strong>Requirements</strong> You have at least one free hand and your target is no more than one size larger than you.</p><hr /><p>You attempt to grab a creature or object with your free hand. Attempt an [[/act grapple]]{Athletics} check against the target's Fortitude DC. You can grapple a target you already have @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} without having a hand free.</p><hr /><p><strong>Critical Success</strong> Your target is restrained until the end of your next turn unless you move or your target Escapes.</p>\n<p><strong>Success</strong> Your target is grabbed until the end of your next turn unless you move or your target Escapes.</p>\n<p><strong>Failure</strong> You fail to grab your target. If you already had the target grabbed or restrained using a Grapple, those conditions on the target end.</p>\n<p><strong>Critical Failure</strong> If you already had the target grabbed or restrained, it breaks free. Your target can either grab you, as if it succeeded at using the Grapple action against you, or force you to fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> If you already had the target @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained}, it breaks free. Your target can either grab you, as if it succeeded at using the Grapple action against you, or force you to fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "criticalSuccess": "<strong>Critical Success</strong> Your target is @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} until the end of your next turn unless you move or your target @UUID[Compendium.sf2e.actions.Item.SkZAQRkLLkmBQNB9]{Escapes}.",
+                    "failure": "<strong>Failure</strong> You fail to grab your target. If you already had the target @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} using a Grapple, those conditions on the target end.",
+                    "success": "<strong>Success</strong> Your target is @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} until the end of your next turn unless you move or your target @UUID[Compendium.sf2e.actions.Item.SkZAQRkLLkmBQNB9]{Escapes}."
+                },
+                "Title": "擒拿"
+            },
+            "Hack": {
+                "Description": "<p>You try to access, control, or make changes to an active, secured system. In most cases, this is going to be an attempt made against a local computer system that you access directly or indirectly through the use of a hacking toolkit. Attempt a Computers check to determine if you can access the targeted system. Computers with improved systems might require multiple successes to access.</p><p><strong>Critical Success</strong> You access the system, or you achieve two successes toward accessing a system requiring more than one success. You leave no trace of your tampering.<br><strong>Success</strong> You access the system, or you achieve one success toward accessing a system that requires more than one success.<br><strong>Failure</strong> You fail to access the system or achieve any success toward accessing a system that requires more than one success. Some computerized systems might have security measures that activate on a failure.<br><strong>Critical Failure</strong> You activate specially ingrained security protocols or completely lock yourself out of the system. Being locked out of a system prevents you from attempting another check to access it for the next hour.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You activate specially ingrained security protocols or completely lock yourself out of the system. Being locked out of a system prevents you from attempting another check to access it for the next hour.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You access the system, or you achieve two successes toward accessing a system requiring more than one success. You leave no trace of your tampering.",
+                    "failure": "<strong>Failure</strong> You fail to access the system or achieve any success toward accessing a system that requires more than one success. Some computerized systems might have security measures that activate on a failure.",
+                    "success": "<strong>Success</strong> You access the system, or you achieve one success toward accessing a system that requires more than one success."
+                },
+                "Title": "骇入"
+            },
+            "Hide": {
+                "Description": "<p>You huddle behind cover or greater cover or deeper into concealment to become @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden}, rather than @UUID[Compendium.sf2e.conditions.Item.1wQY3JYyhMYeeV2G]{Observed}. The GM rolls your [[/act hide]]{Stealth} check in secret and compares the result to the Perception DC of each creature you're observed by but that you have cover or greater cover against or are @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{Concealed} from. You get a +2 circumstance bonus to your check if you have standard cover (or +4 from greater cover).</p><hr /><p><strong>Success</strong> If the creature could see you, you're now @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} from it instead of observed. If you were hidden from or @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} by the creature, you retain that condition.</p>\n<p>If you successfully become hidden to a creature but then cease to have cover or greater cover against it or be concealed from it, you become observed again. You cease being hidden if you do anything except Hide, @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}, or @UUID[Compendium.sf2e.actions.Item.UHpkTuCtyaPqiCAB]{Step}. If you attempt to Strike a creature, the creature remains off-guard against that attack, and you then become observed. If you do anything else, you become observed just before you act unless the GM determines otherwise. The GM might allow you to perform a particularly unobtrusive action without being noticed, possibly requiring another Stealth check.</p>\n<p>If a creature uses @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek} to make you observed by it, you must successfully Hide to become hidden from it again.</p>",
+                "Notes": {
+                    "success": "<strong>Success</strong> If the creature could see you, you're now @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} from it instead of observed. If you were hidden from or @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} by the creature, you retain that condition."
+                },
+                "Title": "躲藏"
+            },
+            "HighJump": {
+                "Description": "<p>You Stride, then attempt a DC 30 [[/act high-jump]]{Athletics} check to jump vertically. If you didn't Stride at least 10 feet, you automatically fail. This DC might be increased or decreased due to the situation, as determined by the GM.</p><hr /><p><strong>Critical Success</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} up to 8 feet vertically and 10 feet horizontally.</p>\n<p><strong>Success</strong> You Leap up to 5 feet vertically and 5 feet horizontally.</p>\n<p><strong>Failure</strong> You Leap normally.</p>\n<p><strong>Critical Failure</strong> You fall @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} in your space.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You fall @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} in your space.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} up to 8 feet vertically and 10 feet horizontally.",
+                    "failure": "<strong>Failure</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} normally.",
+                    "success": "<strong>Success</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} up to 5 feet vertically and 5 feet horizontally."
+                },
+                "Title": "跳高"
+            },
+            "IdentifyAlchemy": {
+                "Description": "<p><strong>Requirements</strong> You're holding or wearing an @UUID[Compendium.sf2e.equipment.Item.4ftXXUCBHcf4b0MH]{Alchemist's Toolkit}.</p>\n<hr />\n<p>You can identify the nature of an alchemical item with 10 minutes of testing using alchemist's toolkit. If your attempt is interrupted in any way, you must start over.</p>\n<hr />\n<p><strong>Success</strong> You identify the item and the means of activating it.</p>\n<p><strong>Failure</strong> You fail to identify the item but can try again.</p>\n<p><strong>Critical Failure</strong> You misidentify the item as another item of the GM's choice.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你错误地将该物品辨认成了GM选择的另一件物品。",
+                    "failure": "<strong>失败</strong> 你无法辨认该物品，但可以重新尝试。",
+                    "success": "<strong>成功</strong> 你辨认出了这件物品，以及启动它的方式。"
+                },
+                "Title": "辨识炼金术"
+            },
+            "IdentifyMagic": {
+                "Description": "<p>如果你发现一件物品，一个地点或是一个持续效果具有魔法性质，你就可以花费10分钟来尝试判断其中的魔法特质。如果你的尝试遭到打断就必须重新开始。GM会为你的检定设置DC。诅咒魔法或极为神秘的物品通常具有更高的DC，甚至可能无法单独依靠该行动进行辨识。升阶过的法术不会增加对其辨识的DC。</p>\n<hr />\n<p><strong>大成功</strong> 你了解了该魔法的全部属性，包括它的名称（如果是一种效果）、它的作用、启动它的所有方法（如果是物品或地点），以及它是否遭到诅咒。</p>\n<p><strong>成功</strong> 如果它是一件物品或一个地点，你能够了解它的作用，并掌握启动它的所有方法。如果它是持续效果（例如有持续时间的法术），你可以得知该效果的名称和作用。你不能重新进行尝试来获取大成功。</p>\n<p><strong>失败</strong> 你无法辨识这种魔法，并且在1天内无法重试。</p>\n<p><strong>大失败</strong> 你把该魔法误认成了GM选择的另外一种魔法。</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你把该魔法误认成了GM选择的另外一种魔法。",
+                    "criticalSuccess": "<strong>大成功</strong> 你了解了该魔法的全部属性，包括它的名称（如果是一种效果）、它的作用、启动它的所有方法（如果是物品或地点），以及它是否遭到诅咒。",
+                    "failure": "<strong>失败</strong> 你无法辨识这种魔法，并且在1天内无法重试。",
+                    "success": "<strong>成功</strong> 如果它是一件物品或一个地点，你能够了解它的作用，并掌握启动它的所有方法。如果它是持续效果（例如有持续时间的法术），你可以得知该效果的名称和作用。你不能重新进行尝试来获取大成功。"
+                },
+                "Title": "辨识魔法 Identify Magic",
+                "Warning": {
+                    "NoStatistic": "辨识魔法动作可使用多种技能进行，但具体使用何种并未明确。"
+                }
+            },
+            "Impersonate": {
+                "Description": "<p>You create a disguise to pass yourself off as someone or something you are not. Assembling a convincing disguise takes 10 minutes and requires a @UUID[Compendium.sf2e.equipment.Item.Jvp0x2Sc82WVpExT]{Disguise Kit}, but a simpler, quicker disguise might do the job if you're not trying to imitate a specific individual, at the GM's discretion.</p>\n<p>In most cases, creatures have a chance to detect your deception only if they use the @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek} action to attempt Perception checks against your Deception DC. If you attempt to directly interact with someone while disguised, the GM rolls a secret [[/act impersonate]]{Deception} check for you against that creature's Perception DC instead.</p>\n<p>If you're disguised as a specific individual, the GM might give creatures you interact with a circumstance bonus based on how well they know the person you're imitating, or the GM might roll a secret Deception check even if you aren't directly interacting with others.</p><hr /><p><strong>Success</strong> You trick the creature into thinking you're the person you're disguised as. You might have to attempt a new check if your behavior changes.</p>\n<p><strong>Failure</strong> The creature can tell you're not who you claim to be.</p>\n<p><strong>Critical Failure</strong> The creature can tell you're not who you claim to be, and it recognizes you if it would know you without a disguise.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 对方不相信你伪装的身份。如果他认识你，他立刻知道是你在冒充他人。",
+                    "failure": "<strong>失败</strong> 对方不相信你伪装的身份。",
+                    "success": "<strong>成功</strong> 你成功蒙骗了对方，让他误以为你是你乔装的那个人。如果你的行为在之后产生显著的变化，你可能会需要进行新的欺骗检定。"
+                },
+                "Title": "模仿"
+            },
+            "Interact": {
+                "Description": "<p>你用手操作物体或地形。你可以抓起无主的或收纳起来的物体、拔出武器、将手中持握的物品换成另一个物品、开门、进行类似的行动。在极少数情况下可能需要进行技能检定来决定交互是否能成功。</p>",
+                "Draw": {
+                    "Title": "拔出"
+                },
+                "Draw1H": {
+                    "Description": "{actor} 拔出他们的 {weapon}。",
+                    "Title": "拔出(1H)"
+                },
+                "Draw2H": {
+                    "Description": "{actor} 拔出他们的 {weapon}。",
+                    "Title": "拔出 (2H)"
+                },
+                "ExchangeItems": {
+                    "Description": "{actor}和{other}交换了物品。",
+                    "Title": "交换物品"
+                },
+                "GiveItem": {
+                    "AnItem": "一个物品",
+                    "Description": "{actor}把{item}交给了{other}。",
+                    "Title": "给予物品"
+                },
+                "Grip": {
+                    "Description": "{actor} 将 {weapon} 的持握方式变为双手。",
+                    "Title": "改变持握 (2H)"
+                },
+                "Modular": {
+                    "Description": "{actor}调整他的{weapon}来{modularConfig}。",
+                    "Title": "模块化"
+                },
+                "Parenthetical": "交互 {purpose}",
+                "PickUp1H": {
+                    "Description": "{actor} 从地上拾起了 {weapon} 。",
+                    "Title": "拾起(1H)"
+                },
+                "PickUp2H": {
+                    "Description": "{actor} 从地上拾起了 {weapon} 。",
+                    "Title": "拾起(2H)"
+                },
+                "Reload": {
+                    "Description": "{actor}为{weapon}装填{ammo}。",
+                    "Title": "装填"
+                },
+                "Retrieve1H": {
+                    "Description": "{actor} 取回了他们的 {weapon}。",
+                    "Title": "取回(1H)"
+                },
+                "Retrieve2H": {
+                    "Description": "{actor} 取回了他们的 {weapon}。",
+                    "Title": "取回 (2H)"
+                },
+                "Sheathe": {
+                    "Description": "{actor} 收起了他们的 {weapon}。",
+                    "Title": "收起"
+                },
+                "Title": "交互"
+            },
+            "Leap": {
+                "Description": "<p>You take a short horizontal or vertical jump. Jumping a greater distance requires using the Athletics skill for a @UUID[Compendium.sf2e.actions.Item.2HJ4yuEFY1Cast4h]{High Jump} or @UUID[Compendium.sf2e.actions.Item.JUvAvruz7yRQXfz2]{Long Jump}.</p><ul><li><strong>Horizontal</strong> Jump up to 10 feet horizontally if your Speed is at least 15 feet, or up to 15 feet horizontally if your speed is at least 30 feet. You land in the space where your Leap ends (meaning you can typically clear a 5-foot gap, or a 10-foot gap if your Speed is 30 feet or more). You can't make a horizontal Leap if your Speed is less than 15 feet.</li><li><strong>Vertical</strong> Jump up to 3 feet vertically and 5 feet horizontally onto an elevated surface.</li></ul>",
+                "Title": "跳跃"
+            },
+            "LearnASpell": {
+                "Description": "<p><strong>需求</strong> 你拥有施法职业特性，并且你想要学习的法术在你职业对应魔法根源的法术列表之中。</p><hr /><p>你可以向掌握某个法术的人请教，或者从法术书或卷轴等魔法文本中学习属于你根源的新法术。如果你能施放多个根源的法术，你就能学习其中任意一种根源的法术，前提是必须使用对应的技能。例如，如果你是一名具有吟游诗人变体的牧师，你就不能使用宗教技能为你的吟游诗人法术库中增添一个异能法术。</p>\n<p>要学习法术，你必须进行以下操作：</p><ul><li>每个法术环级花费1小时，你需要和掌握该法术的人保持交流，或者持续持有该魔法文本。</li><li> 拥有学习法术表中所对应价格的材料。</li><li>尝试使用对应你根源的技能进行检定（DC由GM决定，通常与学习法术表上的DC相近）。罕见或稀有法术拥有更高的DC。</li></ul><hr /><p><strong>大成功</strong> 你消耗一半的材料就学会了法术。</p>\n<p><strong>成功</strong> 你消耗掉了材料，并且学会了法术。</p>\n<p><strong>失败</strong> 你没能学会这个法术，但你可以在升到下一级后再试一次。学习法术的材料没有消耗掉。</p>\n<p><strong>大失败</strong> 类似失败，但你消耗掉了一半的材料。</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 类似失败，但你消耗掉了一半的材料。",
+                    "criticalSuccess": "<strong>大成功</strong> 你消耗一半的材料就学会了法术。",
+                    "failure": "<strong>失败</strong> 你没能学会这个法术，但你可以在升到下一级后再试一次。学习法术的材料没有消耗掉。",
+                    "success": "<strong>成功</strong> 你消耗掉了材料，并且学会了法术。"
+                },
+                "Title": "学习法术 Learn A Spell",
+                "Warning": {
+                    "NoSkill": "学习法术动作可使用多种技能进行，但具体使用何种并未明确。每种魔法根源都有对应的技能：奥术根源对应奥法技能，神术根源对应宗教技能，异能根源对应神秘技能，原能根源对应自然技能。"
+                }
+            },
+            "Lie": {
+                "Description": "<p>You try to fool someone with an untruth. Doing so takes at least 1 round, or longer if the lie is elaborate. You roll a single [[/act lie]]{Deception} check and compare it against the Perception DC of every creature you are trying to fool. The GM might give them a circumstance bonus based on the situation and the nature of the lie you are trying to tell. Elaborate or highly unbelievable lies are much harder to get a creature to believe than simpler and more believable lies, and some lies are so big that it's impossible to get anyone to believe them.</p>\n<p>At the GM's discretion, if a creature initially believes your lie, it might attempt a Perception check later to @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} against your Deception DC to realize it's a lie. This usually happens if the creature discovers enough evidence to counter your statements.</p><hr /><p><strong>Success</strong> The target believes your lie.</p>\n<p><strong>Failure</strong> The target doesn't believe your lie and gains a +4 circumstance bonus against your attempts to Lie for the duration of your conversation. The target is also more likely to be suspicious of you in the future.</p>",
+                "Notes": {
+                    "failure": "<strong>失败</strong> 对方不相信你的说辞，并且在接下来的整个对话中都在对抗你的说谎尝试时获得+4环境加值。在此之后，这个生物也会更怀疑你。",
+                    "success": "<strong>成功</strong>目标相信你了的谎言。"
+                },
+                "Title": "说谎"
+            },
+            "LongJump": {
+                "Description": "<p>You Stride, then attempt a DC 15 [[/act long-jump]]{Athletics} check to make a long jump in the direction you were Striding. If you didn't Stride at least 10 feet, you automatically fail your check. The GM might increase or decrease this DC depending on the situation.</p><hr /><p><strong>Success</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} up to a distance equal to your check result rounded down to the nearest 5 feet. You can't jump farther than your land Speed.</p>\n<p><strong>Failure</strong> You make a normal horizontal Leap.</p>\n<p><strong>Critical Failure</strong> You make a normal horizontal Leap, then fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You make a normal horizontal @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap}, then fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "failure": "<strong>Failure</strong> You make a normal horizontal @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap}.",
+                    "success": "<strong>Success</strong> You @UUID[Compendium.sf2e.actions.Item.d5I6018Mci2SWokk]{Leap} up to a distance equal to your check result rounded down to the nearest 5 feet. You can't jump farther than your land Speed."
+                },
+                "Title": "跳远"
+            },
+            "LowerShield": {
+                "Content": "{actor} 放下了 {shield}。",
+                "ShortTitle": "放下",
+                "Title": "放下盾牌"
+            },
+            "MakeAnImpression": {
+                "Description": "<p>With at least 1 minute of conversation, during which you engage in charismatic overtures, flattery, and other acts of goodwill, you seek to make a good impression on someone to make them temporarily agreeable. At the end of the conversation, attempt a [[/act make-an-impression]]{Diplomacy} check against the Will DC of one target. You can instead choose up to five targets if you take a –2 penalty. The GM might add other bonuses or penalties based on the situation. Any impression you make lasts for only the current social interaction unless the GM decides otherwise.</p><hr /><p><strong>Critical Success</strong> The target's attitude toward you improves by two steps.</p>\n<p><strong>Success</strong> The target's attitude toward you improves by one step.</p>\n<p><strong>Critical Failure</strong> The target's attitude toward you decreases by one step.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>目标对你的态度降低一级。",
+                    "criticalSuccess": "<strong>大成功</strong>目标对你的态度提高了两级。",
+                    "success": "<strong>成功</strong>目标对你的态度提高了一级。"
+                },
+                "Title": "建立印象"
+            },
+            "ManeuverInFlight": {
+                "Description": "<p><strong>Requirements</strong> You have a fly Speed.</p><hr /><p>You try a difficult maneuver while flying. Attempt an [[/act maneuver-in-flight]]{Acrobatics} check. The GM determines what maneuvers are possible, but they rarely allow you to move farther than your fly Speed.</p><hr /><p><strong>Success</strong> You succeed at the maneuver.</p>\n<p><strong>Failure</strong> Your maneuver fails. The GM chooses if you simply can't move or if some other detrimental effect happens. The outcome should be appropriate for the maneuver you attempted (for instance, being blown off course if you were trying to fly against a strong wind).</p>\n<p><strong>Critical Failure</strong> As failure, but the consequence is more dire.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>如同失败，但后果更加恐怖。",
+                    "failure": "<strong>失败</strong> 你未能成功机动。GM会根据你原本希望使用的机动动作来决定失败造成的后果（比如，尝试顶着强风飞行如果失败，会让你被吹飞到别的地方）。",
+                    "success": "<strong>成功</strong> 你的战技成功了。"
+                },
+                "SampleTasks": {
+                    "Trained": "大角度爬升或俯冲",
+                    "Expert": "逆风飞行",
+                    "Master": "掉转航向",
+                    "Legendary": "穿越强风飞行"
+                },
+                "Title": "空中机动"
+            },
+            "Mount": {
+                "Description": "<p><strong>需求</strong> 你与一个体型至少大于你一级，且自愿成为你坐骑的生物相邻。</p>\n<hr />\n<p>你移动到该生物身上并且骑乘上该生物。若你已处于骑乘中，你可以使用该动作脱离骑乘，离开坐骑移动到与它相邻的空间。</p>",
+                "Title": "骑乘 Mount"
+            },
+            "Navigate": {
+                "Description": "<p>You plan a short journey. While this is most often used when traveling with a mech, vehicle, or starship, the same skill can be used to determine the optimal route to take while traveling on foot. This lets you plan a general heading on a planetoid or guide your starship on an in-system voyage. If you are navigating a short journey, you typically attempt a Piloting check only once per day, but some environments or changes might necessitate rolling more often. The GM determines the DC and how long this activity takes (usually just a minute or so). More unusual locales or those you're unfamiliar with might require you to have a minimum proficiency rank to Navigate.</p><p><strong>Critical Success</strong> You get an excellent sense of where you are. If you are in an environment with cardinal directions, you know them exactly.<br><strong>Success</strong> You gain enough orientation to avoid becoming hopelessly lost. If you are in an environment with cardinal directions, you have a sense of those directions.</p>",
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> You get an excellent sense of where you are. If you are in an environment with cardinal directions, you know them exactly.",
+                    "success": "<strong>Success</strong> You gain enough orientation to avoid becoming hopelessly lost. If you are in an environment with cardinal directions, you have a sense of those directions."
+                },
+                "Title": "导航"
+            },
+            "OperateDevice": {
+                "Description": "<p>You perform a basic task using a digital device, such as operating a basic program or playing a vidgame. You might also use this if the device you're using has a physical component, such as 3D-tracking or requiring specific motions to activate features. The GM determines the DC based on the action you're taking.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You fail to access the game or make a mistake that prevents you from accessing the program (such as forgetting a password and locking yourself out of the program) for the next day.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You excel at what you are doing, learning secrets from the program or advanced functionality. If it's a game, then you win it with record timing based on average completion rates.",
+                    "failure": "<strong>Failure</strong> You can't understand the program or game and take a –2 circumstance penalty to further attempts to access or play it for the next day.",
+                    "success": "<strong>Success</strong> You manage to operate the device in the necessary manner, including getting basic functionality. You gain general information from the program."
+                },
+                "Title": "操作设备"
+            },
+            "PalmAnObject": {
+                "Description": "<p>You pick up a small, unattended object and try not to be noticed. Roll a single [[/act palm-an-object]]{Thievery} check against the Perception DCs of all creatures who are currently observing you. You can typically only Palm Objects of negligible Bulk, though the GM might determine otherwise depending on the situation.</p><hr /><p><strong>Success</strong> The creature doesn't notice you Palming the Object.</p>\n<p><strong>Failure</strong> The creature notices you Palming the Object.</p>",
+                "Notes": {
+                    "failure": "<strong>失败</strong> 其他生物注意到你在掌中藏有物品，GM会决定它们将因此而做出何种反应。",
+                    "success": "<strong>成功</strong> 其他生物没有注意到你在手心藏有物品。"
+                },
+                "Title": "手上功夫"
+            },
+            "Parry": {
+                "ShortTitle": "格挡",
+                "Content": "{actor}开始格挡。",
+                "Title": "格挡"
+            },
+            "Perform": {
+                "Description": "<p>你可以在进行简短的表演时（唱一首歌、跳一段快舞或讲几个笑话）使用演出动作。这个动作在你想快速证明自己的能力或给人留下深刻印象时尤为有用。表演本身基本不能影响他人，但它可能会改变随后对观众进行交涉检定时的DC，甚至在合适的情况下GM也会直接改变观众的态度。</p><hr /><p><strong>大成功</strong> 你的表演给观众留下了深刻印象，他们可能会四处传扬你的才能。</p>\n<p><strong>成功</strong> 你证明了自己，观众对你的表演质量表示欣赏。</p>\n<p><strong>失败</strong> 你的表演未能达到预期效果。</p>\n<p><strong>大失败</strong> 你展现了自己的无能。</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>成功的展现了自己有多废。",
+                    "criticalSuccess": "<strong>大成功</strong> 你的表演震撼人心，观众可能在之后四处表扬你的才能。",
+                    "failure": "<strong>失败</strong>你的表演什么效果都没有。",
+                    "success": "<strong>成功</strong> 你完全地展现了自己的才华，观众们感谢你的演技。"
+                },
+                "SampleTasks": {
+                    "Untrained": "平民观众",
+                    "Trained": "工匠观众",
+                    "Expert": "商人或小贵族观众",
+                    "Master": "高阶贵族或皇室次要成员观众",
+                    "Legendary": "皇室主要成员和来自其他世界的观众"
+                },
+                "Acting": {
+                    "Title": "戏剧"
+                },
+                "Comedy": {
+                    "Title": "喜剧"
+                },
+                "Dance": {
+                    "Title": "舞蹈"
+                },
+                "Keyboards": {
+                    "Title": "演奏键盘乐器"
+                },
+                "Oratory": {
+                    "Title": "演说"
+                },
+                "Percussion": {
+                    "Title": "演奏打击乐器"
+                },
+                "Singing": {
+                    "Title": "歌唱"
+                },
+                "Strings": {
+                    "Title": "演奏弦乐乐器"
+                },
+                "Winds": {
+                    "Title": "演奏管乐器"
+                },
+                "Title": "表演",
+                "Warning": {
+                    "UnknownVariant": "用于表演的变体“{variant}”未知，请使用戏剧、喜剧、舞蹈、键盘、演讲、打击乐、歌唱、弦乐或管乐。"
+                }
+            },
+            "PickALock": {
+                "Description": "<p><strong>Requirements</strong> You're holding or wearing a @UUID[Compendium.sf2e.equipment.Item.zvLyCVD8g2PdHJAc]{Thieves' Toolkit}.</p><hr /><p>Opening a lock without a key is very similar to @UUID[Compendium.sf2e.actions.Item.cYdz2grcOcRt4jk6]{Disabling a Device}, but the DC of the check is determined by the complexity and construction of the lock you are attempting to pick. Locks of higher quality might require multiple successes to unlock. If you lack the proper tools, the GM might let you use improvised picks, which are treated as a shoddy toolkit.</p><hr /><p><strong>Critical Success</strong> You unlock the lock, or you achieve two successes toward opening a lock that requires more than one success. You leave no trace of your tampering.</p>\n<p><strong>Success</strong> You open the lock, or you achieve one success toward opening a lock that requires more than one success. You leave behind damage that indicates the lock was picked on close scrutiny.</p>\n<p><strong>Critical Failure</strong> You break your toolkit and leave behind obvious damage. Fixing a broken toolkit requires using Crafting to @UUID[Compendium.sf2e.actions.Item.bT3skovyLUtP22ME]{Repair} it or else swapping in @UUID[Compendium.sf2e.equipment.Item.Sw7MBLASN3xK4Y44]{replacement picks} (costing 3 sp, or 3 gp for an @UUID[Compendium.sf2e.equipment.Item.BznmPaRjI4Orb0IH]{infiltrator thieves' toolkit}).</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You break your toolkit and leave behind obvious damage. Fixing a broken toolkit requires using Crafting to @UUID[Compendium.sf2e.actions.Item.bT3skovyLUtP22ME]{Repair} it or else swapping in @UUID[Compendium.sf2e.equipment.Item.Sw7MBLASN3xK4Y44]{replacement picks}.",
+                    "criticalSuccess": "<strong>大成功</strong> 你直接解打开了面前的锁，或是在尝试打开需要一次以上成功的锁时视为获得了两次成功结果。你不会留下你曾经撬过过这把锁的痕迹。",
+                    "success": "<strong>成功</strong> 你打开了这把锁，或者你在打开一把需要多次成功的锁时取得了一次成功。你没有留下任何改动痕迹。仔细检查会发现你留下的撬锁痕迹。"
+                },
+                "Title": "撬锁"
+            },
+            "PlotCourse": {
+                "Description": "<p>You prepare for a longer journey into the stars, likely making use of your starship's Drift Engine (or similar FTL device). Attempt a Piloting check to determine if you can chart a suitable path to your ultimate destination. The GM determines how long this activity takes and the DC.</p><p><strong>Critical Success</strong> You manage to reach your destination in half the expected time (minimum 1 day).<br><strong>Success</strong> You create a usable navigational plan that gets you to your intended destination on time.<br><strong>Failure</strong> Your plan has several problems, and you end up reaching your destination late.<br><strong>Critical Failure</strong> You arrive in an unfamiliar star system, requiring you to plot a new course to your destination (likely at an increased DC due to the unfamiliar starting point).</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You arrive in an unfamiliar star system, requiring you to plot a new course to your destination (likely at an increased DC due to the unfamiliar starting point).",
+                    "criticalSuccess": "<strong>Critical Success</strong> You manage to reach your destination in half the expected time (minimum 1 day).",
+                    "failure": "<strong>Failure</strong> Your plan has several problems, and you end up reaching your destination late.",
+                    "success": "<strong>Success</strong> You create a usable navigational plan that gets you to your intended destination on time."
+                },
+                "Title": "制定航线"
+            },
+            "PointOut": {
+                "Description": "<p><strong>Requirements</strong> A creature is undetected by one or more of your allies but isn't undetected by you.</p>\n<hr />\n<p>You indicate a creature that you can see to one or more allies, gesturing in a direction and describing the distance verbally. That creature is @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} to your allies, rather than @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected}. This works only for allies who can see you and are in a position where they could potentially detect the target. If your allies can't hear or understand you, they must succeed at a @Check[perception|defense:stealth]{Perception} check against the creature's Stealth DC or they misunderstand and believe the target is in a different location.</p>",
+                "Title": "指出位置 Point OUt"
+            },
+            "RaiseAShield": {
+                "BadArgs": "此操作只能用一个玩家角色或NPC执行。",
+                "Content": "{actor} 举起{shield}.",
+                "Description": "<p><strong>需求</strong> 你正持握一面盾牌</p>\n<hr />\n<p>你举起盾牌保护自己。当你举起盾牌时，你获得盾牌所列出的AC环境加值。你的盾牌会一直保持举起直到你的下一回合开始。</p>",
+                "NoShieldEquipped": "{actor} 必须装备盾牌。",
+                "ReactionTitle": "反射持盾",
+                "ShieldIsBroken": "{actor}的 {shield} 已损坏.",
+                "ShieldIsDestroyed": "{actor}的 {shield} 已损毁。",
+                "ShortTitle": "举起",
+                "SingleActionTitle": "举起盾牌",
+                "Title": "举起盾牌"
+            },
+            "Ready": {
+                "Description": "<p>你准备在自己回合外进行一个动作。选择一个你能使用的单动作或自由动作，并设置一个触发条件。你的回合立刻结束。若你设置的触发条件在你的下一回合开始前发生，你可用一个反应动作使用选定的动作（被选定的动作此时已然必须满足所有需求）。你无法准备一个已有触发条件的自由动作。</p>\n<p>若你已有多重攻击减值且被准备的动作是一个攻击动作，你所准备的攻击会受到你使用准备时的多重攻击减值的影响。这是少数几个多重攻击减值会影响到你回合外的状况之一。</p>",
+                "Title": "准备"
+            },
+            "RecallKnowledge": {
+                "Description": "<p>你尝试进行技能检定来回想起与该技能主题相关的一些知识。向GM提议你想使用的技能，并向其询问一个问题。GM会决定DC的数值。你可能需要与GM就如何缩小问题和技能的范围来达成一致，如果可供选择的范围不如你意，你也可以决定在采取行动之前取消回忆知识。</p>\n<p><strong>大成功</strong> 你准确回忆到了相关知识。GM会如实回答你的问题，接着要么告诉你额外信息或背景，要么再回答一个后续问题。</p>\n<p><strong>成功</strong> 你准确回忆到了相关知识。GM会如实回答你的问题。</p>\n<p><strong>大失败</strong> 你回忆到了不正确的信息。GM会告诉你一个错误答案（或者决定不提供任何信息给你，类似失败）。</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你回忆到了不正确的信息。GM会告诉你一个错误答案（或者决定不提供任何信息给你，类似失败）。",
+                    "criticalSuccess": "<strong>大成功</strong> 你准确回忆到了相关知识。GM会如实回答你的问题，接着要么告诉你额外信息或背景，要么再回答一个后续问题。",
+                    "success": "<strong>成功</strong> 你准确回忆到了相关知识。GM会如实回答你的问题。"
+                },
+                "SampleTasks": {
+                    "Caption": "以下范例使用社群或宗教技能。",
+                    "Untrained": "统治者、国家元首、关键贵族或主要神祇的名字",
+                    "Trained": "上级贵族的家族继承人，主要神祇的核心教义",
+                    "Expert": "下级贵族的族谱，古代牧师的教典",
+                    "Master": "精灵宫廷的等级制度，某个神祇在其他位面的主要神殿",
+                    "Legendary": "一个杳无音信的贵族继承人是否存在，某个宗教的秘密教义"
+                },
+                "Title": "回忆知识",
+                "Warning": {
+                    "NoSkill": "可用不同技能进行回忆知识，无需限定为某一技能。"
+                }
+            },
+            "Release": {
+                "Description": "<p>You release something you're holding in your hand or hands. This might mean dropping an item, removing one hand from your weapon while continuing to hold it in another hand, releasing a rope suspending a chandelier, or performing a similar action. Unlike most manipulate actions, Release does not trigger reactions that can be triggered by actions with the manipulate trait (such as Reactive Strike).</p>\n<p>If you want to prepare to Release something outside of your turn, use the @UUID[Compendium.sf2e.actions.Item.dLgAMt3TbkmLkUqE]{Ready} activity.</p>",
+                "Drop": {
+                    "Description": "{actor} 将他们的 {weapon} 放在了地上。",
+                    "Title": "放下"
+                },
+                "Grip": {
+                    "Description": "{actor} 从他们的 {weapon} 上松开了一只手。",
+                    "Title": "改变持握(1H)"
+                },
+                "Title": "放开"
+            },
+            "Repair": {
+                "Chat": {
+                    "ItemDamaged": "{itemName} was dealt {damageDealt} points of damage for a total of {afterDamageHitPoints} out of {maximumHitPoints} hit points.",
+                    "ItemRepaired": "{itemName}被修复了 {repairedDamage} 点伤害，目前生命值为{afterRepairHitPoints}/ {maximumHitPoints} 。"
+                },
+                "Error": {
+                    "ItemReferenceMismatch": "只允许角色对实体物品进行修复。"
+                },
+                "Labels": {
+                    "DamageMitigatedByHardness": "大失败的修理检定因硬度而没有对物品造成伤害。",
+                    "DealItemDamage": "对物品造成{value}点伤害",
+                    "Hardness": "硬度",
+                    "ItemLevelRepairDC": "物品等级{level}修理DC",
+                    "RestoreItemHitPoints": "恢复物品{value}点生命值",
+                    "RollItemDamage": "掷骰{value}伤害"
+                },
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你对物品造成了2d6点伤害，但物品的硬度仍然可以用于抵抗这个伤害。",
+                    "criticalSuccess": "<strong>大成功</strong>你为一件物品恢复了10+（10x你的每个手艺技能的熟练等级）的生命值（如果你是受训等级，总值为20；如果你是专家等级，总值为30；如果你是大师等级，总值为40；如果你是传奇等级，总值为50）。",
+                    "success": "<strong>成功</strong> 你为一件物品恢复了5+（5x你的每个手艺技能的熟练等级）的生命值（如果你是受训等级，总值为10；如果你是专家等级，总值为15；如果你是大师等级，总值为20；如果你是传奇等级，总值为25）。"
+                },
+                "SelectItemDialog": {
+                    "CancelButtonLabel": "取消",
+                    "DropItemZoneLabel": "将物品拖到此处...",
+                    "RepairButtonLabel": "修理",
+                    "Title": "选择要修复的物品"
+                },
+                "Title": "修理",
+                "Warning": {
+                    "NotPhysicalItem": "选定的物品{item}不是实体物品。"
+                }
+            },
+            "Reposition": {
+                "Description": "<p><strong>Requirements</strong> You either have at least one hand free, or you're grabbing or restraining the target. The target can't be more than one size larger than you.</p><hr /><p>You muscle a creature or object around. Attempt an [[/act reposition]]{Athletics} check against the target's Fortitude DC.</p><hr /><p><strong>Critical Success</strong> You move the creature up to 10 feet. It must remain within your reach during this movement, and you can't move it into or through obstacles.</p>\n<p><strong>Success</strong> You move the target up to 5 feet. It must remain within your reach during this movement, and you can't move it into or through obstacles.</p>\n<p><strong>Critical Failure</strong> The target can move you up to 5 feet as though it successfully Repositioned you.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 目标可以将你移动5尺。视作它成功对你进行了移位。",
+                    "criticalSuccess": "<strong>大成功</strong> 你成功将该生物移动10尺。移动过程中必须将其保持在你的触及范围内，你不能将其移动到障碍物内或使其穿过障碍物。",
+                    "success": "<strong>成功</strong> 你成功将该生物移动5尺。移动过程中必须将其保持在你的触及范围内，你不能将其移动到障碍物内或使其穿过障碍物。"
+                },
+                "Title": "移位"
+            },
+            "Request": {
+                "Description": "<p>You can make a request of a creature that's friendly or helpful to you. You must couch the request in terms that the target would accept given their current attitude toward you. The GM sets the DC of the [[/act request]]{Diplomacy} check based on the difficulty of the request. Some requests are unsavory or impossible, and even a helpful NPC would never agree to them.</p><hr /><p><strong>Critical Success</strong> The target agrees to your request without qualifications.</p>\n<p><strong>Success</strong> The target agrees to your request, but they might demand added provisions or alterations to the request.</p>\n<p><strong>Failure</strong> The target refuses the request, though they might propose an alternative that is less extreme.</p>\n<p><strong>Critical Failure</strong> Not only does the target refuse the request, but their attitude toward you decreases by one step due to the temerity of the request.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 对方不仅会拒绝你的请求，而且他们对你的态度也会因为这个请求的冒失而降低一个等级。",
+                    "criticalSuccess": "<strong>大成功</strong>目标可以无条件同意您的请求。",
+                    "failure": "<strong>失败</strong> 目标拒绝了这个请求，不过他们也许会提出一个不那么极端的方案。",
+                    "success": "<strong>成功</strong> 目标同意您的请求，但他们可能要求添加条款或更改请求。"
+                },
+                "Title": "提出请求"
+            },
+            "RunOver": {
+                "Description": "<p><strong>Requirements</strong> You are piloting a vehicle.</p>\n<p>(reckless) You try to run over creatures with your vehicle, possibly also ramming one larger creature or object. If you maintain control of your vehicle, the vehicle moves up to twice its Speed in a straight line at the vehicle's current heading. You attempt to run over any creatures in your path two sizes smaller than the vehicle or smaller, and you can attempt to ram one target creature or object in your path one size smaller than the vehicle or larger.</p>\n<p>Each creature in your path, including a rammed target, takes the vehicle's collision damage (basic Reflex save at vehicle's collision DC). If the rammed target is a vehicle, its pilot can attempt a piloting check in place of this Reflex save, with the same results. If the target of your ram takes damage, you and your vehicle each take collision damage (no save) and your movement ends.</p>",
+                "Notes": {
+                    "failure": "<strong>Failure</strong> The vehicle moves its Speed in a straight line along its most recent heading, drifting up to 45 degrees at the GM's discretion, and becomes uncontrolled."
+                },
+                "Title": "冲撞"
+            },
+            "Seek": {
+                "Description": "<p>You scan an area for signs of creatures or objects, possibly including secret doors or hazards. Choose an area to scan. The GM determines the area you can scan with one Seek action—almost always 30 feet or less in any dimension. The GM might impose a penalty if you search far away from you or adjust the number of actions it takes to Seek a particularly cluttered area.</p>\n<p>The GM attempts a single secret [[/act seek]]{Perception} check for you and compares the result to the Stealth DCs of any @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} or @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} creatures in the area, or the DC to detect each object in the area (as determined by the GM or by someone @UUID[Compendium.sf2e.actions.Item.qVNVSmsgpKFGk9hV]{Concealing the Object}). A creature you detect might remain hidden, rather than becoming @UUID[Compendium.sf2e.conditions.Item.1wQY3JYyhMYeeV2G]{Observed}, if you're using an imprecise sense or if an effect (such as @UUID[Compendium.sf2e.spells.Item.XXqE1eY3w3z6xJCB]{Invisibility}) prevents the subject from being observed.</p><hr /><p><strong>Critical Success</strong> Any undetected or hidden creature you critically succeeded against becomes observed by you. You learn the location of objects in the area you critically succeeded against.</p>\n<p><strong>Success</strong> Any undetected creature you suceeded against becomes hidden from you instead of undetected, and any hidden creature you succeeded against becomes observed by you. You learn the location of any object or get a clue to its whereabouts, as determined by the GM.</p>",
+                "Notes": {
+                    "criticalSuccess": "<strong>Critical Success</strong> Any @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} or @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} creature you critically succeeded against becomes @UUID[Compendium.sf2e.conditions.Item.1wQY3JYyhMYeeV2G]{Observed} by you. You learn the location of objects in the area you critically succeeded against.",
+                    "success": "<strong>Success</strong> Any @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} creature you succeeded against becomes @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} from you instead of undetected, and any hidden creature you succeeded against becomes @UUID[Compendium.sf2e.conditions.Item.1wQY3JYyhMYeeV2G]{Observed} by you. You learn the location of any object or get a clue to its whereabouts, as determined by the GM."
+                },
+                "Title": "搜索"
+            },
+            "SenseDirection": {
+                "Description": "<p>Using the stars, the position of the sun, traits of the geography or flora, or the behavior of fauna, you can stay oriented in the wild. Typically, you attempt a [[/act sense-direction]]{Survival} check only once per day, but some environments or changes might necessitate rolling more often. The GM determines the DC and how long this activity takes (usually just a minute or so). More unusual locales or those you're unfamiliar with might require you to have a minimum proficiency rank to Sense Direction. Without a @UUID[Compendium.sf2e.equipment.Item.wob6DB1FFdWs0mbp]{Compass}, you take a –2 item penalty to checks to Sense Direction.</p><hr /><p><strong>Critical Success</strong> You get an excellent sense of where you are. If you are in an environment with cardinal directions, you know them exactly.</p>\n<p><strong>Success</strong> You gain enough orientation to avoid becoming hopelessly lost. If you are in an environment with cardinal directions, you have a sense of those directions.</p>",
+                "Modifier": {
+                    "NoCompass": "没有指南针"
+                },
+                "Notes": {
+                    "criticalSuccess": "<strong>大成功</strong> 你清楚无疑地了解自己身处的位置。如果你所处的地理区域拥有东南西北四极，你很清楚东南西北的具体方向。",
+                    "success": "<strong>成功</strong> 你还算清楚自己的位置，至少不会迷失方向。如果你所处的地理区域拥有东南西北四极，你大致知道东南西北的方向。"
+                },
+                "SampleTasks": {
+                    "Untrained": "通过太阳确定基本方位",
+                    "Trained": "在森林中找到一条杂草丛生的小路",
+                    "Expert": "在树篱迷宫中穿行",
+                    "Master": "穿过错综复杂的迷宫或没有明显地标的沙漠",
+                    "Legendary": "在不断变化的梦境国度中导航"
+                },
+                "Title": "辨别方向 Sense Direction"
+            },
+            "SenseMotive": {
+                "Description": "<p>You try to tell whether a creature's behavior is abnormal. Choose one creature and assess it for odd body language, signs of nervousness, and other indicators that it might be trying to deceive someone. The GM attempts a single secret [[/act sense-motive]]{Perception} check for you and compares the result to the Deception DC of the creature, the DC of a spell affecting the creature's mental state, or another appropriate DC determined by the GM. You typically can't try to Sense the Motive of the same creature again until the situation changes significantly.</p><hr /><p><strong>Critical Success</strong> You determine the creature's true intentions and get a solid idea of any mental magic affecting it.</p>\n<p><strong>Success</strong> You can tell whether the creature is behaving normally, but you don't know its exact intentions or what magic might be affecting it.</p>\n<p><strong>Failure</strong> You detect what a deceptive creature wants you to believe. If they're not being deceptive, you believe they're behaving normally.</p>\n<p><strong>Critical Failure</strong> You get a false sense of the creature's intentions.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>你完全错判了目标的意图。",
+                    "criticalSuccess": "<strong>大成功</strong> 你得知目标真实的意图，能确定是否有心智魔法正影响着目标。",
+                    "failure": "<strong>失败</strong> 你判断到了目标想让你相信的事。若目标没有进行欺骗，你会相信目标的行为是正常的。",
+                    "success": "<strong>成功</strong> 你能辨明目标行为是否反常，但你无法得知其真实意图，也无法确定目标是否受魔法影响。"
+                },
+                "Title": "察言观色"
+            },
+            "ShieldBlock": {
+                "SelectAShield": "选择一个盾牌"
+            },
+            "Shove": {
+                "Description": "<p><strong>Requirements</strong> You have at least one hand free. The target can't be more than one size larger than you.</p><hr /><p>You push a creature away from you. Attempt an [[/act shove]]{Athletics} check against your target's Fortitude DC.</p><hr /><p><strong>Critical Success</strong> You push your target up to 10 feet away from you. You can Stride after it, but you must move the same distance and in the same direction.</p>\n<p><strong>Success</strong> You push your target back 5 feet. You can Stride after it, but you must move the same distance and in the same direction.</p>\n<p><strong>Critical Failure</strong> You lose your balance, fall, and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You lose your balance, fall, and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "criticalSuccess": "<strong>大成功</strong> 你成功将目标推撞至10尺外。你可以立刻跟随它行走，但必须在同一方向上移动相同的距离。",
+                    "success": "<strong>成功</strong> 你成功将目标推撞至5尺外。你可以立刻跟随它行走，但必须在同一方向上移动相同的距离。"
+                },
+                "Title": "猛推"
+            },
+            "Sneak": {
+                "Description": "<p>You attempt to move to another place while becoming or staying undetected. Stride up to half your Speed. (You can use Sneak while Burrowing, Climbing, Flying, or Swimming instead of Striding if you have the corresponding movement type; you must move at half that Speed.)</p>\n<p>At the end of your movement, the GM rolls your [[/act sneak]] check in secret and compares the result to the Perception DC of each creature you were @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} from or @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} by at the start of your movement. If you have cover or greater cover from the creature throughout your Stride, you gain the +2 circumstance bonus from cover (or +4 from greater cover) to your Stealth check. Because you're moving, the bonus increase from Taking Cover doesn't apply. You don't get to roll against a creature if, at the end of your movement, you neither are @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{Concealed} from it nor have cover or greater cover against it. You automatically become observed by such a creature.</p>\n<hr />\n<p><strong>Success</strong> You're undetected by the creature during your movement and remain undetected by the creature at the end of it.</p>\n<p>You become observed as soon as you do anything other than Hide, Sneak, or Step. If you attempt to Strike a creature, the creature remains @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against that attack, and you then become observed. If you do anything else, you become observed just before you act unless the GM determines otherwise. The GM might allow you to perform a particularly unobtrusive action without being noticed, possibly requiring another Stealth check. If you speak or make a deliberate loud noise, you become hidden instead of undetected.</p>\n<p>If a creature uses @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek} and you become hidden to it as a result, you must Sneak if you want to become undetected by that creature again.</p>\n<p><strong>Failure</strong> A telltale sound or other sign gives your position away, though you still remain unseen. You're hidden from the creature throughout your movement and remain so.</p>\n<p><strong>Critical Failure</strong> You're spotted! You're observed by the creature throughout your movement and remain so. If you're @UUID[Compendium.sf2e.conditions.Item.zJxUflt9np0q4yML]{Invisible} and were hidden from the creature, instead of being observed you're hidden throughout your movement and remain so.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你被发现了！在你的移动期间和结束移动后你都对对方视为可见状态。如果你处于隐形状态且对观察你的生物视为拥有隐匿，那么在你的移动期间和结束移动后你都对对方视为藏匿而非可见状态。",
+                    "failure": "<strong>失败</strong> 你发出的声响或其他蛛丝马迹会暴露你的位置，但你仍然未被发现。你在移动过程中和移动结束后都对该生物藏匿。",
+                    "success": "<strong>成功</strong> 你在移动过程中不会被生物发现，在移动结束时也不会。"
+                },
+                "Title": "潜行"
+            },
+            "Squeeze": {
+                "Description": "<p>You contort yourself to [[/act squeeze]]{squeeze} through a space so small you can barely fit through. This action is for exceptionally small spaces; many tight spaces are difficult terrain that you can move through more quickly and without a check.</p><hr /><p><strong>Critical Success</strong> You squeeze through the tight space in 1 minute per 10 feet of squeezing.</p>\n<p><strong>Success</strong> You squeeze through in 1 minute per 5 feet.</p>\n<p><strong>Critical Failure</strong> You become stuck in the tight space. While you're stuck, you can spend 1 minute attempting another Acrobatics check at the same DC. Any result on that check other than a critical failure causes you to become unstuck.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你被卡住了。如果是这样，你可以花费1分钟时间尝试另一次特技技能检定（DC不变）。只要你不继续骰出大失败，你就不再被卡在原地。",
+                    "criticalSuccess": "<strong>大成功</strong> 你可以以每分钟10尺的速度挤过去。",
+                    "success": "<strong> 成功</strong> 你可以以每分钟5尺的速度挤过去。"
+                },
+                "SampleTasks": {
+                    "Trained": "挤入与你肩膀差不多宽的空间",
+                    "Master": "挤入与你的头差不多宽的空间"
+                },
+                "Title": "挤入"
+            },
+            "Stand": {
+                "Description": "<p>You stand up from @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>",
+                "Title": "站立"
+            },
+            "Steal": {
+                "Description": "<p>You try to take a small object from another creature without being noticed. Typically, you can Steal only an object of negligible Bulk, you must have a free hand, and you automatically fail if the creature who has the object is in combat or on guard.</p>\n<p>Attempt a [[/act steal]]{Thievery} check to determine if you successfully Steal the object. The DC is usually the Perception DC of the creature wearing the object. It's easiest to steal an object that is worn but not closely guarded (like a loosely carried pouch filled with coins, or an object within such a pouch). The GM might increase the DC if the object is protected or if the nature of the object makes it harder to steal (such as a very small item in a large pack, or a sheet of parchment mixed in with other documents). For instance, the DC is typically 5 higher if the object is in a pocket, held in a creature's hand, or similarly protected.</p>\n<p>You might also need to compare your Thievery check result against the Perception DCs of observers other than the person wearing the object. The GM might impose a circumstance penalty to the DCs of observers who are distracted.</p><hr /><p><strong>Success</strong> You steal the item without the bearer noticing, or an observer doesn't see you take or attempt to take the item.</p>\n<p><strong>Failure</strong> The item's bearer notices your attempt before you can take the object, or an observer sees you take or attempt to take the item. The GM determines the response of any creature that notices your theft.</p>",
+                "Notes": {
+                    "failure": "<strong>失败</strong> 受害者注意到你的偷窃或是旁观者发现你在偷东西，GM会决定它们将因此而做出何种反应。",
+                    "success": "<strong>成功</strong> 你成功偷走了物品而未被发觉，或是旁观者没有注意到你的偷窃行为。"
+                },
+                "Pocketed": "物品被随身携带或被严密保护",
+                "Title": "盗窃"
+            },
+            "SteelYourResolve": {
+                "BadArgs": "此操作只能用一个玩家角色或NPC执行。",
+                "Content": "消耗决心点数来恢复耐力？",
+                "NoStamina": "{name} 累了，需要睡觉！没有剩余的决心点数。",
+                "RecoverStamina": "{name} 拥有{ratio} SP并消耗一个决心点数，恢复其最大耐力的一半。",
+                "StaminaNotEnabled": "耐力变体未启用。",
+                "Title": "坚定你的决心"
+            },
+            "Step": {
+                "Description": "<p><strong>Requirements</strong> Your Speed is at least 10 feet.</p>\n<hr />\n<p>You carefully move 5 feet. Unlike most types of movement, Stepping doesn't trigger reactions, such as @UUID[Compendium.sf2e.actions.Item.KAVf7AmRnbCAHrkT]{Reactive Strike}, that can be triggered by move actions or upon leaving or entering a square.</p>\n<p>You can't Step into difficult terrain, and you can't Step using a Speed other than your land Speed.</p>",
+                "Title": "快步"
+            },
+            "Stop": {
+                "Description": "<p><strong>Requirements</strong> You are piloting a vehicle in motion.</p>\n<p>You bring the vehicle to a stop.</p>",
+                "Title": "停止"
+            },
+            "Stride": {
+                "Description": "<p>你移动至多等于速度的距离。</p>",
+                "Title": "行走"
+            },
+            "Strike": {
+                "Description": "<p>你使用自己持用的一件武器或无武装进行一次攻击，目标是你触及内（若为近战攻击）或射程内（若为远程攻击）的一个生物。根据使用的武器或无武装攻击的攻击调整值掷攻击骰，将结果和目标生物的AC进行比较以确定结果。</p>\n<hr />\n<p><strong>大成功</strong> 根据武器或无武装攻击掷伤害骰，并且造成双倍伤害。</p>\n<p><strong>成功</strong> 根据武器或无武装攻击掷伤害骰，并且造成伤害。</p>",
+                "Notes": {
+                    "criticalSuccess": "<strong>大成功</strong> 根据武器或无武装攻击掷伤害骰，并且造成双倍伤害。",
+                    "success": "<strong>成功</strong> 根据武器或无武装攻击掷伤害骰，并且造成伤害。"
+                },
+                "Title": "打击 Strike"
+            },
+            "Stunt": {
+                "BackOff": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed backwards."
+                    },
+                    "Title": "后退"
+                },
+                "BarrelRoll": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed to gain a +2 status bonus to AC."
+                    },
+                    "Title": "滚筒"
+                },
+                "Description": "<p>You perform a stunt while Driving your vehicle, temporarily improving its effective capabilities at the risk of losing control. Drive your vehicle and choose a stunt. All Piloting checks attempted as part of your Stunt receive the listed penalty, including Piloting checks made to take a reckless action. If the Drive action and Stunt are both reckless, you must attempt the Piloting check to keep control of the vehicle twice.</p>\n<table class=\"pf2e\"><caption>Stunts</caption><thead><tr><th>Stunt</th><th>Penalty</th><th>Benefit</th></tr></thead><tbody><tr><td>Back Off</td><td>–1</td><td>Move half Speed backwards.</td></tr><tr><td>Evade</td><td>–1</td><td>Move half Speed to gain a +1 status bonus to AC.</td></tr><tr><td>Flip and Burn</td><td>–1</td><td>Move half Speed, then turn any direction.</td></tr><tr><td>Barrel Roll</td><td>–2</td><td>Move half Speed to gain a +2 status bonus to AC.</td></tr><tr><td>Flyby</td><td>–2</td><td>Move half Speed through an enemy square.</td></tr><tr><td>Drift</td><td>–2</td><td>Move half Speed sideways without turning.</td></tr><tr><td>Turn in Place</td><td>–2</td><td>Turn, then move full Speed.</td></tr></tbody></table>",
+                "Drift": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed sideways without turning."
+                    },
+                    "Title": "漂移"
+                },
+                "Evade": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed to gain a +1 status bonus to AC."
+                    },
+                    "Title": "闪避"
+                },
+                "FlipAndBurn": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed, then turn any direction."
+                    },
+                    "Title": "翻滚推进"
+                },
+                "Flyby": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Move half Speed through an enemy square."
+                    },
+                    "Title": "飞越"
+                },
+                "Modifiers": {
+                    "RecklessPiloting": "Reckless Piloting"
+                },
+                "Notes": {
+                    "failure": "<strong>Failure</strong> The vehicle moves its Speed in a straight line along its most recent heading, drifting up to 45 degrees at the GM's discretion, and becomes uncontrolled."
+                },
+                "Title": "特技驾驶",
+                "TurnInPlace": {
+                    "Notes": {
+                        "success": "<strong>Success</strong> Turn, then move full Speed."
+                    },
+                    "Title": "原地转向"
+                }
+            },
+            "Subsist": {
+                "AfterExplorationPenalty": "探索后",
+                "Description": "<p>You try to provide food and shelter for yourself, and possibly others as well, with a standard of living. This typically uses [[/act subsist statistic=society]]{Society} if you're in a settlement or [[/act subsist statistic=survival]]{Survival} if you're in the wild. The GM determines the DC based on the nature of the place where you're trying to Subsist. You might need a minimum proficiency rank to Subsist in particularly strange environments. Unlike most downtime activities, you can Subsist after 8 hours or less of exploration, but if you do, you take a –5 penalty.</p><hr /><p><strong>Critical Success</strong> You either provide a subsistence living for yourself and one additional creature, or you improve your own food and shelter, granting yourself a comfortable living.</p>\n<p><strong>Success</strong> You find enough food and shelter with basic protection from the elements to provide you a subsistence living.</p>\n<p><strong>Failure</strong> You're exposed to the elements and don't get enough food, becoming @UUID[Compendium.sf2e.conditions.Item.HL2l2VRSaQHu9lUw]{Fatigued} until you attain sufficient food and shelter.</p>\n<p><strong>Critical Failure</strong> You attract trouble, eat something you shouldn't, or otherwise worsen your situation. You take a –2 circumstance penalty to checks to Subsist for 1 week. You don't find any food at all; if you don't have any stored up, you're in danger of starving or dying of thirst if you continue failing.</p>\n<p>@UUID[Compendium.sf2e.other-effects.Item.wHWWHkjDXmJl4Ia6]{Effect: Adverse Subsist Situation}</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You attract trouble, eat something you shouldn't, or otherwise worsen your situation. You take a –2 circumstance penalty to checks to Subsist for 1 week. You don't find any food at all; if you don't have any stored up, you're in danger of starving or dying of thirst if you continue failing. @UUID[Compendium.sf2e.other-effects.Item.wHWWHkjDXmJl4Ia6]{Effect: Adverse Subsist Situation}",
+                    "criticalSuccess": "<strong>大成功</strong> 你可以为自己加上另一个生物提供足以维生程度的饮食和住所，或是为自己一个人提供舒适生活标准程度的食物和住所。",
+                    "failure": "<strong>Failure</strong> You're exposed to the elements and don't get enough food, becoming @UUID[Compendium.sf2e.conditions.Item.HL2l2VRSaQHu9lUw]{Fatigued} until you attain sufficient food and shelter.",
+                    "success": "<strong>成功</strong> 你为自己找到了足以保证基本生活和遮风避雨的食物及住所。"
+                },
+                "SampleTasks": {
+                    "Untrained": "天气稳定的茂密树林或资源丰富的大城市",
+                    "Trained": "常见的山坡或村镇",
+                    "Expert": "常见的山脉或与世隔绝的小村庄",
+                    "Master": "常见的沙漠或被围困的城市",
+                    "Legendary": "贫瘠的荒地或不死生物之城"
+                },
+                "Title": "求生",
+                "Warning": {
+                    "NoSkill": "求生行动可使用不同的技能，但目前未指定任何技能。如果你在定居点，这通常使用社群，如果你在野外，则使用生存。"
+                }
+            },
+            "Sustain": {
+                "Description": "<p>选择一个持续时间为维持，或者列出了维持时会获得特殊增益的效果。大多数类似效果来自法术或激活魔法物品。如果该效果的持续时间为维持，它的持续时间会延长到你的下一回合结束（在同一回合维持一次以上不会继续延长持续时间）。如果一项能力可以维持，但没有列出持续时间，则最多可以维持10分钟。</p>\n<p>一项效果可能会列出你维持它时才会获得的额外增益，这种情况有可能出现在持续时间不为维持效果上。如果该效果具有特殊增益且持续时间为维持，那么你的维持动作会延长持续时间并获得特殊增益。</p>\n<p>如果你的维持动作被打断，该能力结束。</p>",
+                "Title": "维持 Sustain"
+            },
+            "Swim": {
+                "Description": "<p>You attempt an [[/act swim]]{Athletics} check to move a maximum distance of 10 feet through water. The GM determines the DC based on the turbulence or danger of the water; in most instances of calm water, you get an automatic critical success. If your land Speed is 40 feet or higher, increase the maximum possible distance by 5 feet for every 20 feet of Speed above 20 feet.</p>\n<p>If you end your turn in water and haven't succeeded at a Swim action that turn, you sink 10 feet or get moved by the current, as determined by the GM. This doesn't apply if your last action on your turn was to enter the water.</p><hr /><p><strong>Critical Success</strong> You move through the water, increasing the maximum distance by 5 feet.</p>\n<p><strong>Success</strong> You move through the water.</p>\n<p><strong>Critical Failure</strong> You make no progress. If you're holding your breath, you lose 1 round of air.</p>",
+                "Modifier": {
+                    "SwimSpeed": "游泳速度"
+                },
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong> 你是一条咸鱼，没有游动。如果你在屏息，你还会失去1轮憋气。",
+                    "criticalSuccess": "<strong>大成功</strong> 你在水中移动，最大移动距离增加5尺。",
+                    "success": "<strong>成功</strong> 你在水中移动。"
+                },
+                "SampleTasks": {
+                    "Untrained": "湖泊或其他平静水域",
+                    "Trained": "流淌的水域，比如河流",
+                    "Expert": "湍急河流",
+                    "Master": "惊涛骇浪",
+                    "Legendary": "旋涡、瀑布"
+                },
+                "Title": "游泳"
+            },
+            "TakeControl": {
+                "Description": "<p><strong>Requirements</strong> You are aboard the vehicle and adjacent to its controls.</p>\n<p>You grab the reins, the wheel, or some other mechanism to control the vehicle. Attempt a piloting check; on a success, you become the vehicle's pilot, or regain control of the vehicle if it was uncontrolled. Some vehicles have complicated controls that cause this action to become a multi-action activity.</p>",
+                "Notes": {
+                    "success": "<strong>Success</strong> You become the vehicle's pilot, or regain control of the vehicle if it was uncontrolled."
+                },
+                "Title": "接管"
+            },
+            "TakeCover": {
+                "Description": "<p><strong>Requirements</strong> You are benefiting from cover, are near a feature that allows you to take cover, or are @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>\n<hr />\n<p>You press yourself against a wall or duck behind an obstacle to take better advantage of cover. If you would have standard cover, you instead gain greater cover, which provides a +4 circumstance bonus to AC; to Reflex saves against area effects; and to Stealth checks to @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide}, @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}, or otherwise avoid detection. Otherwise, you gain the benefits of standard cover (a +2 circumstance bonus instead). This lasts until you move from your current space, use an attack action, become @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf]{Unconscious}, or end this effect as a free action.</p>",
+                "TowerShield": {
+                    "Description": "{actor}在{shield}后寻找掩蔽。"
+                },
+                "ShortTitle": "寻找掩蔽",
+                "Title": "寻找掩蔽"
+            },
+            "Tamper": {
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> Your tampering backfires dramatically, creating a small explosion from your own tools or gear. You take [[/r (@actor.level)[fire] #Tamper Backfire]]{fire damage equal to your level}.",
+                    "criticalSuccess": "<strong>Critical Success</strong> Your tampering is incredibly effective. If you tampered with a weapon, the enemy takes a -2 circumstance penalty to attack rolls and damage rolls with that weapon. If you tampered with armor, the armor hampers the enemy's movement, making the enemy off-guard and inflicting a -10-foot penalty to its Speeds. The effect lasts until the enemy Interacts to remove it, regardless of which one you used. @UUID[Compendium.sf2e.feat-effects.Item.rzcpTJU9MvW1x1gz]{Effect: Armor Tampered With (Critical Success)} @UUID[Compendium.sf2e.feat-effects.Item.o7qm13OmaYOMwgib]{Effect: Weapon Tampered With (Critical Success)}",
+                    "success": "<strong>Success</strong> Your tampering is temporarily effective. As critical success, but the effect ends at the start of your next turn, even if the enemy doesn't Interact to end it. @UUID[Compendium.sf2e.feat-effects.Item.IfRkgjyh0JzGalIy]{Effect: Armor Tampered With (Success)} @UUID[Compendium.sf2e.feat-effects.Item.4QWayYR3JSL9bk2T]{Effect: Weapon Tampered With (Success)}"
+                },
+                "Title": "篡改"
+            },
+            "Track": {
+                "Description": "<p>You follow tracks, moving at up to half your travel Speed, using the @UUID[Compendium.sf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.DUOb8QrlC5t0adkL]{Travel Speed} rules. After a successful check to Track, you can continue following the tracks at half your Speed without attempting additional checks for up to 1 hour.</p>\n<p>In some cases, you might Track in an encounter. In this case, Track is a single action and doesn't have the exploration trait, but you might need to roll more often because you're in a tense situation. The GM determines how often you must attempt this check.</p>\n<p>You attempt your [[/act track]]{Survival} check when you start Tracking, once every hour you continue tracking, and any time something significant changes in the trail. The GM determines the DCs for such checks, depending on the freshness of the trail, the weather, and the type of ground.</p<hr /><p><strong>Success</strong> You find the trail or continue to follow the one you're already following.</p>\n<p><strong>Failure</strong> You lose the trail but can try again after a 1-hour delay.</p>\n<p><strong>Critical Failure</strong> You lose the trail and can't try again for 24 hours.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>大失败</strong>你完全搞丢了目标，必须等24小时后才能再次尝试追踪。",
+                    "failure": "<strong>失败</strong> 你搞丢了目标留下的行踪，必须等1小时后才能再次尝试追踪。",
+                    "success": "<strong>成功</strong> 你找到了某些踪迹，或是能够继续稳定地追踪手头上的踪迹。"
+                },
+                "SampleTasks": {
+                    "Untrained": "沿着道路行进的军队留下的踪迹",
+                    "Trained": "一头熊在平原上横冲直撞留下的相对较新的痕迹",
+                    "Expert": "一只敏捷的黑豹穿过丛林，但被雨水遮挡住了的踪迹",
+                    "Master": "被冬雪遮盖的痕迹，老鼠或体型更小的生物留下的痕迹，或者光秃的岩石这类难以留下痕迹的表面上的踪迹",
+                    "Legendary": "风沙肆虐的沙漠中的旧踪迹，被大暴雪或飓风遮挡住的痕迹"
+                },
+                "Title": "追踪"
+            },
+            "TreatDisease": {
+                "Description": "<p><strong>Requirements</strong> You're wearing or holding a @UUID[Compendium.sf2e.equipment.Item.s1vB3HdXjMigYAnY]{Healer's Toolkit}</p><hr /><p>You spend at least 8 hours caring for a diseased creature. Attempt a [[/act treat-disease]]{Medicine} check against the disease's DC. After you attempt to Treat a Disease for a creature, you can't try again until after that creature's next save against the disease.</p><hr /><p><strong>Critical Success</strong> You grant the creature a +4 circumstance bonus to its next saving throw against the disease.</p>\n<p><strong>Success</strong> You grant the creature a +2 circumstance bonus to its next saving throw against the disease.</p>\n<p><strong>Critical Failure</strong> Your efforts cause the creature to take a −2 circumstance penalty to its next save against the disease.</p>\n<p>@UUID[Compendium.sf2e.other-effects.Item.TGGdM7XnjQkkijK7]{Effect: Treat Disease}</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> Your efforts cause the creature to take a −2 circumstance penalty to its next save against the disease.<br/>@UUID[Compendium.sf2e.other-effects.Item.TGGdM7XnjQkkijK7]{Effect: Treat Disease}",
+                    "criticalSuccess": "<strong>Critical Success</strong> You grant the creature a +4 circumstance bonus to its next saving throw against the disease.<br/>@UUID[Compendium.sf2e.other-effects.Item.TGGdM7XnjQkkijK7]{Effect: Treat Disease}",
+                    "success": "<strong>Success</strong> You grant the creature a +2 circumstance bonus to its next saving throw against the disease.<br/>@UUID[Compendium.sf2e.other-effects.Item.TGGdM7XnjQkkijK7]{Effect: Treat Disease}"
+                },
+                "Title": "治疗疾病"
+            },
+            "TreatPoison": {
+                "Description": "<p><strong>Requirements</strong> You're wearing or holding a @UUID[Compendium.sf2e.equipment.Item.s1vB3HdXjMigYAnY]{Healer's Toolkit}</p><hr /><p>You treat a patient to prevent the spread of poison. Attempt a [[/act treat-poison]]{Medicine} check against the poison's DC. After you attempt to Treat a Poison for a creature, you can't try again until after the next time that creature attempts a save against the poison.</p><hr /><p><strong>Critical Success</strong> You grant the creature a +4 circumstance bonus to its next saving throw against the poison.</p>\n<p><strong>Success</strong> You grant the creature a +2 circumstance bonus to its next saving throw against the poison.</p>\n<p><strong>Critical Failure</strong> Your efforts cause the creature to take a −2 circumstance penalty to its next save against the poison.</p>\n<p>@UUID[Compendium.sf2e.other-effects.Item.1FrAlPeNseApVrX3]{Effect: Treat Poison}</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> Your efforts cause the creature to take a −2 circumstance penalty to its next save against the poison.<br/>@UUID[Compendium.sf2e.other-effects.Item.1FrAlPeNseApVrX3]{Effect: Treat Poison}",
+                    "criticalSuccess": "<strong>Critical Success</strong> You grant the creature a +4 circumstance bonus to its next saving throw against the poison.<br/>@UUID[Compendium.sf2e.other-effects.Item.1FrAlPeNseApVrX3]{Effect: Treat Poison}",
+                    "success": "<strong>Success</strong> You grant the creature a +2 circumstance bonus to its next saving throw against the poison.<br/>@UUID[Compendium.sf2e.other-effects.Item.1FrAlPeNseApVrX3]{Effect: Treat Poison}"
+                },
+                "Title": "治疗中毒"
+            },
+            "TreatWounds": {
+                "Content": "选择目标DC。注意你不能尝试超过你熟练度等级的治疗行动。若你这样做，DC和治疗量会降级到你的最高熟练度等级。",
+                "DC": {
+                    "Expert": "专家 DC 20, +10 治疗",
+                    "Legendary": "传奇 DC 40, +50 治疗",
+                    "Master": "大师 DC 30, +30 治疗",
+                    "Mod": "DC 调整值:",
+                    "Trained": "受训 DC 15"
+                },
+                "Error": "{name}在{skill}上未受训。",
+                "Feats": {
+                    "MortalHealing": "致命治疗",
+                    "RiskySurgery": "激进手术"
+                },
+                "Label": "治疗伤势",
+                "Rolls": {
+                    "RiskySurgery": "伤害骰: 激进手术",
+                    "TreatWounds": "治疗骰: 治疗伤势",
+                    "TreatWoundsCriticalFailure": "伤害骰: 治疗伤势"
+                },
+                "SkillSelect": "治疗伤势技能:"
+            },
+            "Trip": {
+                "Description": "<p><strong>Requirements</strong> You have at least one hand free. Your target can't be more than one size larger than you.</p><hr /><p>You try to knock a creature to the ground. Attempt an [[/act trip]]{Athletics} check against the target's Reflex DC.</p><hr /><p><strong>Critical Success</strong> The target falls, lands @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}, and takes @Damage[1d6[bludgeoning]] damage.</p>\n<p><strong>Success</strong> The target falls and lands prone.</p>\n<p><strong>Critical Failure</strong> You lose your balance, fall, and land prone.</p>",
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You lose your balance and fall and land @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "criticalSuccess": "<strong>Critical Success</strong> The target falls and lands @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} and takes @Damage[1d6[bludgeoning]] damage.",
+                    "success": "<strong>Success</strong> The target falls and lands @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}."
+                },
+                "Title": "摔绊"
+            },
+            "TumbleThrough": {
+                "Description": "<p>You Stride up to your Speed. During this movement, you can try to move through the space of one enemy. Attempt an [[/act tumble-through]]{Acrobatics} check against the enemy's Reflex DC as soon as you try to enter its space. You can Tumble Through using Climb, Fly, Swim, or another action instead of Stride in the appropriate environment.</p>\n<p><strong>Success</strong> You move through the enemy's space, treating the squares in its space as difficult terrain (every 5 feet costs 10 feet of movement). If you don't have enough Speed to move all the way through its space, you get the same effect as a failure.</p>\n<p><strong>Failure</strong> Your movement ends, and you trigger reactions as if you had moved out of the square you started in.</p>",
+                "Notes": {
+                    "failure": "<strong>失败</strong> 你的移动结束，你将触发反应动作就好像你已经离开了你的起始方格。",
+                    "success": "<strong>成功</strong> 你通过敌人占据的空间，这个空间中的方格被视为困难地形(每5尺需要10尺的移动)。如果你没有足够的速度在空间中移动，你会得到和失败一样的结果。"
+                },
+                "Title": "翻滚"
+            },
+            "WhirlingThrow": {
+                "Notes": {
+                    "criticalFailure": "<strong>Critical Failure</strong> You don't throw the creature, and it's no longer @UUID[Compendium.sf2e.conditions.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.sf2e.conditions.Item.VcDeM8A5oI6VqhbM]{Restrained} by you.",
+                    "criticalSuccess": "<strong>Critical Success</strong> You throw the creature [[/r 10+(5*@actor.abilities.str.mod)]] feet, dealing @Damage[((floor((10+(5*@actor.abilities.str.mod))/10))d6 + @actor.abilities.str.mod)[bludgeoning]] damage, and it lands @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.",
+                    "failure": "<strong>失败</strong> 你没能投掷生物。",
+                    "success": "<strong>Success</strong> You throw the creature [[/r 10+(5*@actor.abilities.str.mod)]] feet and deal @Damage[((floor((10+(5*@actor.abilities.str.mod))/10))d6 + @actor.abilities.str.mod)[bludgeoning]] damage."
+                },
+                "Title": "回旋抛投"
+            }
+        },
+        "ActionsCheck": {
+            "acrobatics": "特技检定",
+            "arcana": "奥法检定",
+            "athletics": "运动检定",
+            "computers": "计算机检定",
+            "crafting": "手艺检定",
+            "deception": "欺骗检定",
+            "diplomacy": "交涉检定",
+            "fortitude": "强韧豁免",
+            "intimidation": "威吓检定",
+            "medicine": "医疗检定",
+            "nature": "自然检定",
+            "occultism": "神秘检定",
+            "perception": "察觉检定",
+            "performance": "表演检定",
+            "piloting": "驾驶检定",
+            "reflex": "反射豁免",
+            "religion": "宗教检定",
+            "society": "社群检定",
+            "spell": "{type} 法术攻击",
+            "stealth": "隐秘检定",
+            "survival": "生存检定",
+            "thievery": "贼活检定",
+            "unarmed": "无武装攻击骰",
+            "will": "意志豁免",
+            "x-attack-roll": "{type} 攻击骰",
+            "x": "{type} 检定"
+        },
+        "ActionsSampleTasks": {
+            "Title": "{action}范例任务"
+        },
+        "ActionsWarning": {
+            "NoActor": "掷骰前至少选择一个角色，或指定一个默认角色。",
+            "NoStatistic": "角色{name} ({id})没有{statistic}的数据。",
+            "Variants": {
+                "None": "行动“{action}”没有变体，但需要变体“{variant}”。",
+                "Multiple": "行动“{action}”有多个变体，但未需求任何变体。",
+                "Nonexistent": "'{action}'动作中不存在特定变体'{variant}'"
+            }
+        }
+    }
+}
