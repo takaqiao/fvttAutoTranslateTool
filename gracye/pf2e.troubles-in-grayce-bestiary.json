@@ -111,7 +111,7 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				},
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Dominate": {
 					"name": "支配术 Dominate",
@@ -178,7 +178,7 @@
 					"name": "矿工学识 Mining Lore"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Hazard Finder": {
 					"name": "危机搜寻者 Hazard Finder",
@@ -204,7 +204,7 @@
 			"publicNotes": "<p>不像其他对让少数人受苦或不适感到满足的格瑞姆林，德尔提克的志向远大。它们沉迷于过度复杂的计划与精巧装置，常常导致混乱。德尔提克栖身于具备伟大工程造诣的社会的边缘，搜罗技术知识与专长。它们以这些汇集的技艺建造精心设计的死亡陷阱。德尔提克会乐意花上数年时间打造一台逐步啃噬山体的装置，最终引发雪崩摧毁村庄。幸运的是，对于附近的文明来说，德尔提克的计划几乎从不实现；妖精精灵厌恶简洁与直接，坚持复杂与宏伟，使其计划易于被破坏。这些计划往往因忽略了一处关键细节或回避了某些基本真相，在中途失败崩溃，附近镇上无人知晓还曾有过计划。然而这种自我破坏的倾向并不让德尔提克变得不那么危险。它们对宏大破坏的渴望使其在格瑞姆林中独具感召力。常能看到一只德尔提克身边围绕着被其愿景所感召的其他格瑞姆林，即便那些追随者并不完全理解。这些格瑞姆林会一直跟随，直到失去兴趣或计划失败为止。在那之前，德尔提克与其团队集中其混乱并散布大量厄运，以推行其命运多舛的图谋。</p><h2>比你更聪明</h2><p>由于德尔提克常常比身边其他格瑞姆林更聪明，它们认为无论身在何处自己都是房间里最聪明的人。意识到这点的精明冒险者可以以浮夸恭维奉承它们，分散德尔提克注意力，使其更易意外泄露信息。</p>",
 			"items": {
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Shortsword": {
 					"name": "短剑 Shortsword",
@@ -232,7 +232,7 @@
 					"description": "<p>你召唤出一段嗡嗡作响的带电锋利铜线攻击你的敌人。基于你攻击骰对抗目标的AC的结果，该铜线造成1d4挥砍伤害和1d4电击伤害。</p><hr /><p><strong>大成功</strong> 目标承受双倍伤害外加@Damage[(ceil(@item.rank / 2))d4[persistent,electricity]]伤害。</p>\n<p><strong>成功</strong> 目标承受全部伤害。</p>\n<p><strong>失败</strong> 目标承受电击伤害，但不承受挥砍伤害。</p>\n<p><strong>大失败</strong> 目标不受影响。</p><hr /><p><strong>升阶（+2）</strong> 挥砍伤害、初始电击伤害和大成功时的持续电击伤害都增加1d4。</p>"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				},
 				"Highly Confusing Scheme": {
@@ -264,7 +264,7 @@
 			"publicNotes": "<p>如同许多神秘动物，连帕斯河剥皮怪的名号本身都众说纷纭。有人说该生物得名于其受害者尸体，常常被剥光皮肤但其余部分完好无损。另一些人则称这种状态的尸体只是例外。更多时候，剥皮怪的受害者根本无迹可寻——也许这些被剥皮的尸体只是剥皮怪还没吃完就抛弃的。持此观点者主张，更合适的名号应是\"长啸怪（Pealer）\"，源于此兽行猎时发出的回响呼啸。但既然人人皆知巨响是驱赶怪兽的最佳办法，称之为长啸怪又有何意义？争论循环往复，似无止境。</p>\n<p>剥皮怪最常出没于格雷斯以北一片名为战栗悬崖的荒野之地，多无人迹。格雷斯多数人——除了拥有少年时代故事的老者——都觉得剥皮怪只不过是吓唬孩子的故事，用以解释那些被狼或其他猎食者所杀或失踪的羊群。即便如此，每个在格雷斯长大的人，都能哼上几句当地孩子玩耍跳绳时唱的童谣。</p><h2>墓爪</h2><p>关于帕斯河剥皮怪的目击常常伴随着墓爪疫情：一种罕见的、携带疾病的真菌，触感冰冷且会摧毁附近植被。墓爪疫情让某些热心的学者推测，神秘动物本身就是真菌之源。一种更可能的理论是，剥皮怪与墓爪共享冥府位面的栖息地，前者只是在毛糙的兽皮上携带后者的孢子。</p>",
 			"items": {
 				"Echolocation": {
-					"name": "回声定位",
+					"name": "回声定位 Echolocation",
 					"description": "<p>帕斯河剥皮怪可使用其听觉作为列出射程的精确感官。</p>"
 				},
 				"Otherworldly Cry": {
@@ -272,7 +272,7 @@
 					"description": "<p>帕斯河剥皮怪发出令人毛骨悚然的鬼魅嘶啸，可在一英里外听到。@Template[type:emanation|distance:60] 内每个生物必须尝试一次 @Check[will|dc:20|options:area-effect,inflicts:frightened,inflicts:fleeing] 豁免。无论结果如何，生物在10分钟内对剥皮怪的异界惊啸临时免疫。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}。</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 1轮。</p>"
 				},
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Rend": {
 					"name": "撕裂 Rend",
@@ -305,15 +305,15 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				},
 				"Spear": {
-					"name": "力竭状态持续2轮。",
+					"name": "矛 Spear",
 					"description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
 				},
 				"Spear (lZsF)": {
-					"name": "力竭状态持续2轮。"
+					"name": "矛 Spear"
 				},
 				"Raise a Shield": {
 					"name": "举起盾牌 Raise a Shield",
@@ -332,7 +332,7 @@
 					"description": "<p>如同木盾，钢盾也有多种形状和尺寸。虽然比木盾昂贵，但也更加耐用。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
 				},
 				"Spear (cUre)": {
-					"name": "力竭状态持续2轮。"
+					"name": "矛 Spear"
 				}
 			},
 			"data": {
@@ -370,7 +370,7 @@
 					"description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
 				},
 				"Darkness": {
-					"name": "在黑暗中",
+					"name": "在黑暗中 Darkness",
 					"description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
 				},
 				"Padded Armor": {
@@ -393,7 +393,7 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				},
 				"Shortsword (Yj53)": {
 					"name": "短剑 Shortsword"
@@ -411,14 +411,14 @@
 					"description": "<p>由黑暗组成的触须从你的指尖喷涌而出。你对在射线上的活物造成2d4虚能伤害和@Damage[(@item.level)[bleed]]伤害。每个射线上的活物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半虚能伤害，并且不受持续流血伤害。</p>\n<p><strong>失败</strong> 该生物承受完整伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍虚能伤害和双倍持续流血伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该虚能伤害增加2d4，持续流血伤害增加1。</p>"
 				},
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Swift Leap": {
 					"name": "迅捷跳跃 Swift Leap",
 					"description": "<p>该食尸鬼跳跃至多其速度的一半。此移动不会触发反应动作。</p>"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				}
 			},
@@ -463,11 +463,11 @@
 			"stealthdetails": "<p>（受训）</p>",
 			"items": {
 				"Spear": {
-					"name": "力竭状态持续2轮。",
+					"name": "矛 Spear",
 					"description": "<p><strong>触发</strong> 压力施加于地砖。</p>\n<hr />\n<p><strong>效果</strong> 该陷阱发射一支矛,对地砖上的生物或物体进行一次打击。</p>"
 				},
 				"Spear (qNyw)": {
-					"name": "力竭状态持续2轮。"
+					"name": "矛 Spear"
 				}
 			},
 			"data": {
@@ -574,7 +574,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Soul Fragment": {
 					"name": "灵魂碎片 Soul Fragment",
@@ -584,11 +584,11 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Telekinetic Hand": {
-					"name": "念动之手",
+					"name": "念动之手 Telekinetic Hand",
 					"description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Alarm": {
@@ -596,7 +596,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃",
+					"name": "点燃 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Bitter Invective": {
@@ -627,7 +627,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Soul Fragment": {
 					"name": "灵魂碎片 Soul Fragment",
@@ -637,11 +637,11 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Telekinetic Hand": {
-					"name": "念动之手",
+					"name": "念动之手 Telekinetic Hand",
 					"description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Alarm": {
@@ -653,7 +653,7 @@
 					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家以其速度快步行动，且不触发反应动作。该移动结束时与管家相邻的任何生物必须成功通过 @Check[reflex|dc:20|options:area-effect] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，直至管家下回合开始。</p>"
 				},
 				"Light": {
-					"name": "点燃",
+					"name": "点燃 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -716,7 +716,7 @@
 					"name": "吐枣 Spit Dates"
 				},
 				"Motion Sense": {
-					"name": "动态感知",
+					"name": "动态感知 Motion Sense",
 					"description": "<p>黏糊太妃糖犬可通过振动与气流感知周围生物。</p>"
 				},
 				"Water Soluble": {
@@ -732,7 +732,7 @@
 					"description": "<p>被黏糊太妃糖犬撞头打击命中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				}
 			},
 			"data": {
@@ -776,7 +776,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Soul Fragment": {
 					"name": "灵魂碎片 Soul Fragment",
@@ -786,11 +786,11 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Telekinetic Hand": {
-					"name": "念动之手",
+					"name": "念动之手 Telekinetic Hand",
 					"description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Alarm": {
@@ -798,7 +798,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃",
+					"name": "点燃 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -819,7 +819,7 @@
 					"description": "<p>当黑信徒被毁灭时，它以一次3动作的 @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术} 法术效果引爆为虚空能量波（@Check[fortitude|dc:22]）。</p>\n<p>黑信徒被摧毁，因此从此次<em>伤害术</em>使用中不获得任何生命值，也无需保留<em>伤害术</em>余次以使用此能力。</p>"
 				},
 				"Harm": {
-					"name": "伤害术",
+					"name": "伤害术 Harm",
 					"description": "<p>你引导虚能，以伤害活物或者治疗不死生物。如果目标是活物，你对其造成1d8虚能伤害，并且它可以进行基础强韧豁免。如果目标是自愿不死生物，你回复这个数量的生命值。你在施放该法术时花费的动作数量决定其目标，范围，区域和其他参数。</p>\n<p><span class=\"action-glyph\">1</span> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 该法术的射程为30尺。如果你在治疗一个不死生物，回复的生命值增加8。</p>\n<p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 你在@Template[emanation|distance:30]内释放虚能。这会以区域中所有活物和不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或者伤害的量增加1d8，2动作版本的额外治疗增加8。</p>"
 				},
 				"Cleric Domain Spells": {
@@ -932,10 +932,10 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				},
 				"Crossbow": {
-					"name": "若被重击的目标与一个平面相邻，它会被导弹钉住，效果同弓的重击专精效果。"
+					"name": "弩 Crossbow"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				},
 				"Shortsword": {
@@ -947,7 +947,7 @@
 					"description": "<p><strong>需求</strong> 该狗头人战士邻接至少一名敌人</p>\n<hr />\n<p><strong>效果</strong> 该狗头人战士以至多其速度加 5 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。其必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Crossbow (sypc)": {
-					"name": "若被重击的目标与一个平面相邻，它会被导弹钉住，效果同弓的重击专精效果。",
+					"name": "弩 Crossbow",
 					"description": "<p>这种远程武器有一个类似弓形的组件，安装在一个被称为舵柄的框架上。舵柄有一个将弓弦锁定在适当位置的机件，并与一个释放张力并发射矢的扳机相连。</p>"
 				},
 				"Shortsword (eAwH)": {
@@ -967,7 +967,7 @@
 					"description": "<p>这把巨大的战斧太重了，单手无法使用。许多巨斧都有两头 \"胡须\"般的刃，底部有一个钩子以增加它们的切割力。</p>"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				},
 				"Leather Armor": {
 					"name": "皮甲 Leather Armor",
@@ -1045,7 +1045,7 @@
 					"description": "<p>该真菌树灵变化为一株巨大蘑菇或一片真菌。此能力其余规则同@UUID[Compendium.pf2e.spells-srd.Item.dileJ0Yxqg76LMvu]{融身化树 One with Plants}的效果。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				}
 			},
 			"data": {
@@ -1177,7 +1177,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Soul Fragment": {
 					"name": "灵魂碎片 Soul Fragment",
@@ -1187,11 +1187,11 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Telekinetic Hand": {
-					"name": "念动之手",
+					"name": "念动之手 Telekinetic Hand",
 					"description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Alarm": {
@@ -1203,7 +1203,7 @@
 					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家从错误中学习。如果管家上一动作是对一个目标的拳击打击未命中（但不是大失败），则管家对同一目标进行一次拳击打击。该目标对此攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，命中时管家额外造成1d6精准伤害。</p>"
 				},
 				"Light": {
-					"name": "点燃",
+					"name": "点燃 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -1274,7 +1274,7 @@
 					"description": "<p>虽然被称为胸甲，但这类护甲其实是由几块保护躯干、胸部、颈部，有时还有臀部和小腿的板甲或@UUID[Compendium.pf2e.equipment-srd.Item.pRoikbRo5HFW6YUB]{半身甲 Half Plate}部件组成的。它既提供了一部分板甲的保护，同时兼顾了更大的灵活性和速度。</p>"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				},
 				"Inheritor's Kiss": {
@@ -1285,14 +1285,14 @@
 					"description": "<p>这种宽刃剑——有时被称为手半剑——握柄稍长，可单手持握，亦可双手挥舞以提供额外的挥砍之力。</p>"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				},
 				"Ghoul Whispers": {
 					"name": "食尸鬼低语 Ghoul Whispers",
 					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{瘫痪}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
 				},
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Reactive Strike": {
 					"name": "反应打击 Reactive Strike",
@@ -1312,18 +1312,18 @@
 					"description": "<p>你通过一股猛烈的念动力移动一个敌人或者其携带的事物。你可以对目标尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}，使用法术攻击骰，而不是运动检定。</p>"
 				},
 				"Staff": {
-					"name": "双手使用杖",
+					"name": "双手使用杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Dagger": {
 					"name": "匕首 Dagger"
 				},
 				"Detect Magic": {
-					"name": "侦测魔法",
+					"name": "侦测魔法 Detect Magic",
 					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级,由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高阶魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Daze": {
-					"name": "晕眩术",
+					"name": "晕眩术 Daze",
 					"description": "<p>你侵入目标的精神，利用精神冲击令目标晕眩。该冲击造成1d6心灵伤害，具有基础意志豁免。如果目标在豁免中大失败，它获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d6。</p>"
 				},
 				"Ill Omen": {
@@ -1335,7 +1335,7 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Fear": {
@@ -1362,14 +1362,14 @@
 					"description": "<p>你令目标精神迟钝，基于其意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1分钟。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}，持续1分钟。</p>"
 				},
 				"Staff (cZRI)": {
-					"name": "双手使用杖"
+					"name": "双手使用杖 Staff (cZRI)"
 				},
 				"Dagger (b8VS)": {
 					"name": "匕首 Dagger",
 					"description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
 				},
 				"Shield": {
-					"name": "护盾术",
+					"name": "护盾术 Shield",
 					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Blood Vendetta": {
@@ -1430,7 +1430,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Fist": {
-					"name": "拳头"
+					"name": "拳头 Fist"
 				},
 				"Soul Fragment": {
 					"name": "灵魂碎片 Soul Fragment",
@@ -1440,11 +1440,11 @@
 					"name": "内在秘能法术 Occult Innate Spells"
 				},
 				"Telekinetic Hand": {
-					"name": "念动之手",
+					"name": "念动之手 Telekinetic Hand",
 					"description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
 				},
 				"Telekinetic Projectile": {
-					"name": "念动射弹",
+					"name": "念动射弹 Telekinetic Projectile",
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Alarm": {
@@ -1452,7 +1452,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃",
+					"name": "点燃 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -1479,7 +1479,7 @@
 					"description": "<p>血裔者凭直觉以其攻击加剧活物身上的伤口。血裔者的爪击对承受持续流血伤害的活物额外造成1点精准伤害。</p>"
 				},
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Void Healing": {
 					"name": "虚能治疗 Void Healing",
@@ -1512,7 +1512,7 @@
 					"description": "<p>20尺 @Check[will|dc:15|options:inflicts:frightened]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				},
 				"Void Healing": {
 					"name": "虚能治疗 Void Healing",
@@ -1551,7 +1551,7 @@
 					"description": "<p>这种短小的、弯曲的、粗糙的临时刀片通常钻有孔洞以减轻重量。它是地精最喜欢的武器。</p>"
 				},
 				"Sling": {
-					"name": "若目标豁免失败，其移动速度1轮内获得-10尺的减值。",
+					"name": "投石索 Sling",
 					"description": "<p>仅仅是一块皮革附着在一根带子上，投石索可以在远程用来投掷光滑的石头或者投石索弹丸。</p>"
 				},
 				"Sling Bullets": {
@@ -1570,7 +1570,7 @@
 					"description": "<p><strong>触发</strong> 一名地精盟友以邻接该地精的位置结束移动动作。</p>\n<hr />\n<p><strong>效果</strong> 该地精突击者@UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]{快步 Steps}。</p>"
 				},
 				"Sling (iNws)": {
-					"name": "若目标豁免失败，其移动速度1轮内获得-10尺的减值。"
+					"name": "投石索 Sling"
 				},
 				"Pent-Up Taunt": {
 					"name": "蓄势嘲讽 Pent-Up Taunt",
@@ -1612,7 +1612,7 @@
 					"description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
 				},
 				"Sneak Attack": {
-					"name": "偷袭",
+					"name": "偷袭 Sneak Attack",
 					"description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
 				},
 				"Shortsword (wNhb)": {
@@ -1637,7 +1637,7 @@
 			"blurb": "雄性奥克食尸鬼首领",
 			"items": {
 				"Claw": {
-					"name": "爪击"
+					"name": "爪击 Claw"
 				},
 				"Orc Necksplitter": {
 					"name": "兽人斩首斧 Orc Necksplitter",
@@ -1656,7 +1656,7 @@
 					"description": "<p>10尺，@Check[fortitude|dc:18|options:area-effect,inflicts:sickened,inflicts:slowed]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
 				},
 				"Jaws": {
-					"name": "噬咬"
+					"name": "噬咬 Jaws"
 				},
 				"Reactive Strike": {
 					"name": "反应打击 Reactive Strike",
@@ -1712,11 +1712,11 @@
 					"description": "<p>幻象将光线绕过目标,使其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}。这使其对所有生物都为@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected},虽然这些生物可尝试找到目标,使其对它们变为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden}。如果目标使用敌对动作,该法术在该敌对动作完成后结束。</p>\n<hr />\n<p><strong>升阶(4环)</strong> 该法术持续 1 分钟,但若目标使用敌对动作,法术不会结束。</p>"
 				},
 				"Staff": {
-					"name": "双手使用杖",
+					"name": "双手使用杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Daze": {
-					"name": "晕眩术",
+					"name": "晕眩术 Daze",
 					"description": "<p>你侵入目标的精神，利用精神冲击令目标晕眩。该冲击造成1d6心灵伤害，具有基础意志豁免。如果目标在豁免中大失败，它获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d6。</p>"
 				},
 				"Inspiring Display": {
@@ -1728,7 +1728,7 @@
 					"description": "<p>你令目标精神迟钝，基于其意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1分钟。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}，持续1分钟。</p>"
 				},
 				"Staff (AfbH)": {
-					"name": "双手使用杖"
+					"name": "双手使用杖 Staff (AfbH)"
 				},
 				"Occult Spontaneous Spells": {
 					"name": "自发秘能法术 Occult Spontaneous Spells"
@@ -1746,7 +1746,7 @@
 					"description": "<p>你保护一个生物免受伤害。目标在AC和豁免骰上获得+1状态加值。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以选择让该好处也会影响目标@Template[emanation|distance:10]范围内的所有的你的盟友。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RawLEPwyT5CtCZ4D]{法术效果：防护术}</p>"
 				},
 				"Darkness": {
-					"name": "在黑暗中",
+					"name": "在黑暗中 Darkness",
 					"description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
 				},
 				"Enfeeble": {
@@ -1762,7 +1762,7 @@
 					"description": "<p><strong>需求</strong> 该狗头人洞穴法师邻接至少一名敌人</p>\n<hr />\n<p><strong>效果</strong> 该狗头人洞穴法师以至多其速度加 5 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。其必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Shield": {
-					"name": "护盾术",
+					"name": "护盾术 Shield",
 					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Void Warp": {
