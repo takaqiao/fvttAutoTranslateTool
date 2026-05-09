@@ -1,5 +1,5 @@
 {
-	"label": "新手包 Beginner Box Bestiary",
+	"label": "新手礼盒 Beginner Box Bestiary",
 	"mapping": {
 		"name": "name",
 		"portrait": {
@@ -62,7 +62,7 @@
 					"name": "爪击 Claw"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Mud Pit": {
@@ -78,7 +78,7 @@
 					"description": "<p>你唤来一团强力的高压水流，撞击目标并令其后退。尝试一次远程法术攻击骰。</p>\n<hr />\n<p><strong>大成功</strong> 目标承受6d6钝击伤害，并且被击退10尺。</p>\n<p><strong>成功</strong> 目标承受3d6钝击伤害，并且被击退5尺。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该钝击伤害增加2d6。</p>"
 				},
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"+1 Status to All Saves vs. Magic": {
@@ -371,7 +371,7 @@
 					"name": "双手使用杖 Staff"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Force Barrage": {
@@ -406,7 +406,7 @@
 					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Wizard Spells": {
@@ -468,7 +468,7 @@
 				},
 				"Final Night": {
 					"name": "终结之夜 Final Night",
-					"description": "<p>当卡利格尼潜行者死亡时，其尸身化为一团漆黑迷雾。@Template[emanation|distance:20]{20尺} 内的所有光源熄灭，区域内的光亮法术失效1轮。</p>"
+					"description": "<p>当卡利尼潜行者死亡时，其尸身化为一团漆黑迷雾。@Template[emanation|distance:20]{20尺} 内的所有光源熄灭，区域内的光亮法术失效1轮。</p>"
 				},
 				"Dagger (59cV)": {
 					"name": "匕首 Dagger"
@@ -526,7 +526,7 @@
 					"name": "尖牙 Fangs"
 				},
 				"Web": {
-					"name": "蛛网 Web"
+					"name": "蛛网术 Web"
 				},
 				"Web Trap": {
 					"name": "网捕 Web Trap",
@@ -572,8 +572,8 @@
 			}
 		},
 		"Caligni Hunter (BB)": {
-			"name": "卡利格尼猎手 Caligni Hunter (BB)",
-			"publicNotes": "<p>卡利格尼栖身于地底城市中，乐于在夜间偷溜上地表，盗取资源、窥探地表居民或单纯捣乱使坏。</p>",
+			"name": "卡利尼猎手 Caligni Hunter (BB)",
+			"publicNotes": "<p>卡利尼栖身于地底城市中，乐于在夜间偷溜上地表，盗取资源、窥探地表居民或单纯捣乱使坏。</p>",
 			"items": {
 				"See the Unseen (At Will)": {
 					"name": "识破无形 See the Unseen",
@@ -599,7 +599,7 @@
 					"description": "<p>该猎手下次以短剑打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态,持续1轮。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Light Blindness": {
@@ -608,13 +608,13 @@
 				},
 				"Final Fate": {
 					"name": "终末命运 Final Fate",
-					"description": "<p>当卡利格尼猎手死亡时，其尸身爆裂。@Template[emanation|distance:20]{20尺} 内每个生物必须尝试一次 @Check[reflex|dc:19|basic|options:area-effect] 豁免，承受 @Damage[5d6[fire]|options:area-damage] 伤害。</p>"
+					"description": "<p>当卡利尼猎手死亡时，其尸身爆裂。@Template[emanation|distance:20]{20尺} 内每个生物必须尝试一次 @Check[reflex|dc:19|basic|options:area-effect] 豁免，承受 @Damage[5d6[fire]|options:area-damage] 伤害。</p>"
 				},
 				"Shortsword (27mM)": {
 					"name": "短剑 Shortsword"
 				}
 			},
-			"prototypeToken": "卡利格尼猎手",
+			"prototypeToken": "卡利尼猎手",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -635,7 +635,7 @@
 					"description": "<p>变形怪呈现出他所见过并记住的任何小型或中型类人生物的特定外貌。这不会改变变形怪的速度、攻击加值及伤害加值，但可能会改变其打击造成的伤害类型（通常是钝击）。</p>"
 				},
 				"Mind Reading": {
-					"name": "读心 Mind Reading",
+					"name": "读心术 Mind Reading",
 					"description": "<p>变形怪尝试读取一个30尺以内生物的表层想法。目标可以通过一个成功的@Check[will|dc:21]豁免来抵抗。</p>"
 				}
 			},
@@ -658,7 +658,7 @@
 					"name": "象牙钥匙 Iron Key"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术}</p>"
 				},
 				"Staff": {
@@ -687,7 +687,7 @@
 					"name": "蛋壳项链 Eggshell Necklace"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Detect Magic": {
@@ -796,7 +796,7 @@
 			"publicNotes": "<p>狼成群结队地生活和捕猎，但与人们普遍认为的相反，狼群中的领头者并非是最强壮的狼，而是通常由一对狼、它们的幼崽和以前交配季节的幼崽组成。孩子们通常在成年后离开父母的狼群，然后他们会寻找自己的伴侣去其他地方组建自己的狼群。类人动物一般不被狼视为猎物，但特殊的环境会导致这些动物攻击他们，特别是在冬季和其他传统猎物（主要是鹿和麋鹿）稀少的情况下。一些生物，比如强大的吸血鬼，可以召唤狼来帮助战斗。狼在森林、山丘和其他荒野上游荡，成群结队地捕猎围攻，然后再杀死猎物。像大多数食肉动物一样，狼更喜欢攻击它们能找到的最无力或最脆弱的猎物。</p>",
 			"items": {
 				"Pack Attack": {
-					"name": "成群袭击 Pack Attack",
+					"name": "群起攻之 Pack Attack",
 					"description": "<p>对于触及范围内至少有两名狼盟友的生物，狼的打击造成1d4额外伤害。</p>"
 				},
 				"Jaws": {
@@ -873,7 +873,7 @@
 					"name": "双手使用杖 Staff"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Scamper": {
@@ -911,7 +911,7 @@
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				}
 			},
@@ -1043,7 +1043,7 @@
 					"description": "<p>盾牌拥有20生命值。如果盾牌承受了10点或更高伤害，它变得@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}。破损的盾牌无法用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}，但你仍可以@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部20生命值，它被完全破坏。</p>"
 				},
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"Heal": {
@@ -1075,7 +1075,7 @@
 					"description": "<p>生命能量将目标从鬼门关拉回。目标失去 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死 Dying} 状态，但它仍然 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}，并为0生命值。</p>"
 				},
 				"Shield (aUt2)": {
-					"name": "护盾术 Shield",
+					"name": "钢盾 Shield",
 					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害,则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部 20 点生命值,则被彻底摧毁。</p>"
 				},
 				"Hand Crossbow": {
@@ -1094,7 +1094,7 @@
 					"description": "<p>细剑有着细长的剑刃和笼手，它被许多人视为决斗武器。</p>"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你大喊一道难以忽略的命令。你可命令目标接近你、逃离(就像它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态)、释放它持有之物、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}或停留原地。在它服从你的命令前,它不能延迟或采取任何反应动作。效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下回合的第一个动作上,该生物必须使用一个动作按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下回合所有动作上服从你的命令。</p>\n<hr /><p><strong>升阶(5环)</strong> 你最多可以以 10 个生物为目标。</p>"
 				},
 				"Guidance": {
@@ -1170,7 +1170,7 @@
 					"description": "<p>元素护盾保护一个生物免受某一种类型能量的伤害。选择酸蚀，寒冷，电击，火焰或者音波伤害。目标和其装备获得对你所选择伤害类型的抗力5。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.con2Hzt47JjpuUej]{法术效果：抵抗能量伤害}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 该抗力增加到10，并且你能以至多两个生物为目标。</p>\n<p><strong>升阶（7环级）</strong> 该抗力增加到15，并且你能以至多五个生物为目标。</p>"
 				},
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"Blazing Bolt": {
@@ -1252,8 +1252,8 @@
 			}
 		},
 		"Goblin Igniter (BB)": {
-			"name": "哥布林点火者 Goblin Igniter (BB)",
-			"publicNotes": "<p>哥布林发现火非常迷人。它发光。非常适合烹饪。这是一个有趣的玩具！有些地精对火的崇拜有点过头了，进入了致命的痴迷领域。</p>\n<p>将注意力转向魔法以便学会从无到有生火的哥布林被称为哥布林点火者。这些火焰狂热者可以成为一群渴望点燃敌人并造成破坏的地精袭击者的一大福音。然而，更多时候，它们的存在是一把双刃剑。在一时冲动下，地精点火者有时会忘记他们的目标，只是放火烧掉任何会燃烧的东西——包括他们自己的盟友！</p>",
+			"name": "地精点火者 Goblin Igniter (BB)",
+			"publicNotes": "<p>地精发现火非常迷人。它发光。非常适合烹饪。这是一个有趣的玩具！有些地精对火的崇拜有点过头了，进入了致命的痴迷领域。</p>\n<p>将注意力转向魔法以便学会从无到有生火的地精被称为地精点火者。这些火焰狂热者可以成为一群渴望点燃敌人并造成破坏的地精袭击者的一大福音。然而，更多时候，它们的存在是一把双刃剑。在一时冲动下，地精点火者有时会忘记他们的目标，只是放火烧掉任何会燃烧的东西——包括他们自己的盟友！</p>",
 			"items": {
 				"Torch": {
 					"name": "火把（炸弹或短刃） Torch",
@@ -1268,15 +1268,15 @@
 					"description": "<p>一团火焰从你的口中喷出。你对区域内的每个生物造成2d6火焰伤害，基础反射豁免。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加2d6点。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Torch (dk9C)": {
 					"name": "火把 Torch"
 				},
 				"Goblin Scuttle": {
-					"name": "哥布林快跑 Goblin Scuttle",
-					"description": "<p>如果一个哥布林的盟友在哥布林点火者旁边的格子结束一个移动动作，点火者可以用反应动作来快步。</p>"
+					"name": "地精快跑 Goblin Scuttle",
+					"description": "<p>如果一个地精的盟友在地精点火者旁边的格子结束一个移动动作，点火者可以用反应动作来快步。</p>"
 				},
 				"Fire Lore": {
 					"name": "火焰学识 Fire Lore"
@@ -1289,7 +1289,7 @@
 					"name": "聚能法术 Spells"
 				}
 			},
-			"prototypeToken": "哥布林点火者",
+			"prototypeToken": "地精点火者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1527,7 +1527,7 @@
 					"description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Force Barrage (nXy3)": {
@@ -1539,7 +1539,7 @@
 					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Staff (EauG)": {
@@ -1589,7 +1589,7 @@
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
@@ -1609,7 +1609,7 @@
 					"description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Wizard Spells": {
@@ -1638,7 +1638,7 @@
 					"name": "噬咬 Jaws"
 				},
 				"Pack Attack": {
-					"name": "群体攻之 Pack Attack",
+					"name": "群起攻之 Pack Attack",
 					"description": "<p>你已经精通了结伴狩猎的技巧。若你对生物造成打击伤害，且该生物位于至少2名你的盟友的触及范围之内时，你能额外造成1d4点精准伤害。</p>"
 				}
 			},
@@ -1677,12 +1677,12 @@
 			}
 		},
 		"Caligni Dancer (BB)": {
-			"name": "卡利格尼舞者 Caligni Dancer (BB)",
-			"publicNotes": "<p>卡利格尼栖身于地底城市中，乐于在夜间偷溜上地表，盗取资源、窥探地表居民或单纯捣乱使坏。</p>",
+			"name": "卡利尼舞者 Caligni Dancer (BB)",
+			"publicNotes": "<p>卡利尼栖身于地底城市中，乐于在夜间偷溜上地表，盗取资源、窥探地表居民或单纯捣乱使坏。</p>",
 			"items": {
 				"Final Dance": {
 					"name": "终结之舞 Final Dance",
-					"description": "<p>当卡利格尼舞者死亡时，其尸身化为一团黑暗与光的旋舞。@Template[emanation|distance:10]{10尺} 内的所有生物必须成功通过 @Check[will|dc:17] 豁免，否则在1轮内所有攻击骰承受-2环境减值。</p>"
+					"description": "<p>当卡利尼舞者死亡时，其尸身化为一团黑暗与光的旋舞。@Template[emanation|distance:10]{10尺} 内的所有生物必须成功通过 @Check[will|dc:17] 豁免，否则在1轮内所有攻击骰承受-2环境减值。</p>"
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
@@ -1707,7 +1707,7 @@
 					"description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
 				}
 			},
-			"prototypeToken": "卡利格尼舞者",
+			"prototypeToken": "卡利尼舞者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1887,7 +1887,7 @@
 					"description": "<p>发出魔法光亮的物品在攻击幽影时视为具有魔法特征。</p>"
 				},
 				"Steal Shadow": {
-					"name": "窃影 Steal Shadow",
+					"name": "偷阴窃影 Steal Shadow",
 					"description": "<p>若幽影在前一个动作中以幽影之手打击命中一个活物，幽影可以抽出目标的影子，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。这能和幽影造成的其他力竭效果相叠加，最大达到力竭4。此能力造成的力竭效果每小时减少1状态值。</p>"
 				},
 				"Incorporeal": {
@@ -1977,7 +1977,7 @@
 					"description": "<p>当僵尸成功用拳头打击命中一个生物时，它可以用这个动作自动让目标陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，直到它下一回合结束。</p>"
 				},
 				"Slow": {
-					"name": "缓慢 Slow",
+					"name": "缓慢术 Slow",
 					"description": "<p>丧尸在它的回合中只能使用两个动作，且无法使用反应动作。</p>"
 				},
 				"Jaws": {
@@ -2033,7 +2033,7 @@
 			"name": "卢康 Lukahn",
 			"items": {
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"Shadow Blast": {
@@ -2083,7 +2083,7 @@
 				},
 				"Laughing Fit": {
 					"name": "狂笑发作 Laughing Fit",
-					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
+					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
 				},
 				"Light Vulnerability": {
 					"name": "光辉弱点 Light Vulnerability",
@@ -2117,7 +2117,7 @@
 			"languagesDetails": "蜘蛛语",
 			"items": {
 				"Web": {
-					"name": "蛛网 Web"
+					"name": "蛛网术 Web"
 				},
 				"Spider Speak": {
 					"name": "蛛语者 Spider Speak",
@@ -2208,8 +2208,8 @@
 			}
 		},
 		"Goblin Warrior (BB)": {
-			"name": "哥布林勇士 Goblin Warrior (BB)",
-			"publicNotes": "<p>牠们是哥布林部落的前线战士，偏好大团队作战，最好是人数可以超过敌人的三倍之多。成为哥布林勇士不需要高强度的训练或强大的韧性。 任何人都可以渴望担任这个角色，或者在紧急情况下被征召入伍。</p>\n<p>哥布林勇士以制造破坏为乐。他们对屠宰牲畜、偷窃婴儿或纯粹为了一时的快乐而烧毁建筑物毫不在意。他们沉迷于对更高的类人生物（他们称之为“长腿”）恶作剧。哥布林缺乏一致性、长期计划和良好的判断力，他们用纯粹的勇敢和承诺来弥补。</p>",
+			"name": "地精勇士 Goblin Warrior (BB)",
+			"publicNotes": "<p>牠们是地精部落的前线战士，偏好大团队作战，最好是人数可以超过敌人的三倍之多。成为地精勇士不需要高强度的训练或强大的韧性。 任何人都可以渴望担任这个角色，或者在紧急情况下被征召入伍。</p>\n<p>地精勇士以制造破坏为乐。他们对屠宰牲畜、偷窃婴儿或纯粹为了一时的快乐而烧毁建筑物毫不在意。他们沉迷于对更高的类人生物（他们称之为“长腿”）恶作剧。地精缺乏一致性、长期计划和良好的判断力，他们用纯粹的勇敢和承诺来弥补。</p>",
 			"items": {
 				"Shortbow": {
 					"name": "短弓 Shortbow"
@@ -2234,11 +2234,11 @@
 					"description": "<p>这些箭头是弓的弹药。箭杆是木制的。一端是羽毛保持飞行中的平稳，另一端是金属头。</p>"
 				},
 				"Goblin Scuttle": {
-					"name": "哥布林快跑 Goblin Scuttle",
-					"description": "<p>如果一个哥布林的盟友在哥布林勇士旁边的格子结束一个移动动作，哥布林勇士可以用反应动作来快步。</p>"
+					"name": "地精快跑 Goblin Scuttle",
+					"description": "<p>如果一个地精的盟友在地精勇士旁边的格子结束一个移动动作，地精勇士可以用反应动作来快步。</p>"
 				}
 			},
-			"prototypeToken": "哥布林战士",
+			"prototypeToken": "地精战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2439,7 +2439,7 @@
 					"description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
@@ -2466,7 +2466,7 @@
 					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Command": {
-					"name": "命令 Command",
+					"name": "命令术 Command",
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				}
 			},
@@ -2512,11 +2512,11 @@
 				},
 				"Petrifying Glance": {
 					"name": "石化扫视 Petrifying Glance",
-					"description": "<p>石化蜥蜴在它的回合开始时能看见30尺内的一个生物时，石化蜥蜴能用反应动作扫视生物。</p>\n<p>目标必须通过@Check[fortitude|dc:20|options:inflicts:slowed]检定。如果失败，它的身体慢慢变硬，获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}效果。</p>"
+					"description": "<p>石化蜥蜴在它的回合开始时能看见30尺内的一个生物时，石化蜥蜴能用反应动作扫视生物。</p>\n<p>目标必须通过@Check[fortitude|dc:20|options:inflicts:slowed]检定。如果失败，它的身体慢慢变硬，获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}效果。</p>"
 				},
 				"Petrifying Gaze": {
 					"name": "石化凝视 Petrifying Gaze",
-					"description": "<p>石化蜥蜴瞪视它30尺内的一个生物。目标必须通过@Check[fortitude|dc:22|options:inflicts:slowed,inflicts:petrified]检定。</p>\n<p>如果失败且没有被石化扫视能力及本能力影响，则获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。如果目标已经被石化扫视或此能力影响过，则目标永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>通过这种方式被石化的生物，可以通过往表面淋新鲜的石化蜥蜴血（从死亡不超过1小时的石化蜥蜴身体里提取）可以立即恢复肉身。一只石化蜥蜴的血足够使两只中型生物恢复肉身。</p>"
+					"description": "<p>石化蜥蜴瞪视它30尺内的一个生物。目标必须通过@Check[fortitude|dc:22|options:inflicts:slowed,inflicts:petrified]检定。</p>\n<p>如果失败且没有被石化扫视能力及本能力影响，则获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}，持续1分钟。如果目标已经被石化扫视或此能力影响过，则目标永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>通过这种方式被石化的生物，可以通过往表面淋新鲜的石化蜥蜴血（从死亡不超过1小时的石化蜥蜴身体里提取）可以立即恢复肉身。一只石化蜥蜴的血足够使两只中型生物恢复肉身。</p>"
 				}
 			},
 			"prototypeToken": "蜥怪",
@@ -2669,8 +2669,8 @@
 			}
 		},
 		"Goblin Commando (BB)": {
-			"name": "哥布林指挥官 Goblin Commando (BB)",
-			"publicNotes": "<p>这些小型的类人生物有着绿或灰色的皮肤，大大的头颅与招风耳。虽然有些哥布林有教养，工作勤奋被类人社群承认为优秀的一员，但大部分的哥布林是冲动又邪恶的生物，为了愉悦而发洩破坏欲。这些哥布林为了刹那间的愉悦去屠宰家畜、偷小孩或烧房子没什么问题。牠们热衷对高大的人类生物（牠们称这些人为「长脚」)恶劣的恶作剧。</p>\n<p>牠们是哥布林在抢劫时理论上的领袖。可实际上，在战斗打响后哥布林指挥官很少会继续管牠的战友。牠们往往把责任抛在脑后，更喜欢冲到前线在自己部落成员的面前赢得更多荣耀。</p>",
+			"name": "地精指挥官 Goblin Commando (BB)",
+			"publicNotes": "<p>这些小型的类人生物有着绿或灰色的皮肤，大大的头颅与招风耳。虽然有些地精有教养，工作勤奋被类人社群承认为优秀的一员，但大部分的地精是冲动又邪恶的生物，为了愉悦而发洩破坏欲。这些地精为了刹那间的愉悦去屠宰家畜、偷小孩或烧房子没什么问题。牠们热衷对高大的人类生物（牠们称这些人为「长脚」)恶劣的恶作剧。</p>\n<p>牠们是地精在抢劫时理论上的领袖。可实际上，在战斗打响后地精指挥官很少会继续管牠的战友。牠们往往把责任抛在脑后，更喜欢冲到前线在自己部落成员的面前赢得更多荣耀。</p>",
 			"items": {
 				"Arrows": {
 					"name": "箭 Arrows",
@@ -2685,8 +2685,8 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				},
 				"Goblin Scuttle": {
-					"name": "哥布林快跑 Goblin Scuttle",
-					"description": "<p>如果一个哥布林的盟友在哥布林指挥官旁边的格子结束一个移动动作，指挥官可以用反应动作来快步。</p>"
+					"name": "地精快跑 Goblin Scuttle",
+					"description": "<p>如果一个地精的盟友在地精指挥官旁边的格子结束一个移动动作，指挥官可以用反应动作来快步。</p>"
 				},
 				"Shortbow (oi2Q)": {
 					"name": "短弓 Shortbow"
@@ -2699,7 +2699,7 @@
 					"description": "<p>这把巨大的双手剑几乎和它的使用者一样高。它的下刃一般较钝，以便在近距离格斗中获得额外的杠杆作用力。</p>"
 				}
 			},
-			"prototypeToken": "哥布林突击兵",
+			"prototypeToken": "地精突击兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2947,7 +2947,7 @@
 		},
 		"Warg (BB)": {
 			"name": "座狼 Warg (BB)",
-			"publicNotes": "<p>座狼常被误认作普通狼，但它们具有狡黠的智慧与言语能力。座狼常与奥克和大地精组成狩猎队。多数座狼对此安排感到满意，但若食物匮乏，它们也乐于把哥布林族肉纳入餐单。</p>",
+			"publicNotes": "<p>座狼常被误认作普通狼，但它们具有狡黠的智慧与言语能力。座狼常与奥克和大地精组成狩猎队。多数座狼对此安排感到满意，但若食物匮乏，它们也乐于把地精族肉纳入餐单。</p>",
 			"items": {
 				"Grab": {
 					"name": "擒获 Grab",
@@ -2958,7 +2958,7 @@
 					"description": "<p>如果该座狼有一名生物处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态,它可消耗一个动作以其牙齿撕裂目标。该生物承受@Damage[1d6[slashing]]伤害,并可进行一次@Check[fortitude|dc:18|basic]豁免。</p>"
 				},
 				"Pack Attack": {
-					"name": "群体攻之 Pack Attack",
+					"name": "群起攻之 Pack Attack",
 					"description": "<p>你已经精通了结伴狩猎的技巧。若你对生物造成打击伤害，且该生物位于至少2名你的盟友的触及范围之内时，你能额外造成1d4点精准伤害。</p>"
 				},
 				"Avenging Bite": {

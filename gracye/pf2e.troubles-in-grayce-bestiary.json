@@ -370,7 +370,7 @@
 					"description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
 				},
 				"Darkness": {
-					"name": "在黑暗中 Darkness",
+					"name": "黑暗术 Darkness",
 					"description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
 				},
 				"Padded Armor": {
@@ -596,7 +596,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Bitter Invective": {
@@ -653,7 +653,7 @@
 					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家以其速度快步行动，且不触发反应动作。该移动结束时与管家相邻的任何生物必须成功通过 @Check[reflex|dc:20|options:area-effect] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，直至管家下回合开始。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -798,7 +798,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -1203,7 +1203,7 @@
 					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家从错误中学习。如果管家上一动作是对一个目标的拳击打击未命中（但不是大失败），则管家对同一目标进行一次拳击打击。该目标对此攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，命中时管家额外造成1d6精准伤害。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -1339,11 +1339,11 @@
 					"description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
 				},
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"Bane": {
-					"name": "破敌 Bane",
+					"name": "绝望术 Bane",
 					"description": "<p>你以怀疑充满敌人的心灵。范围内的敌人必须成功通过一次意志豁免,否则在其位于范围内时,其攻击骰承受 -1 状态减值。在后续回合每轮一次,你可维持该法术以将散发半径增加 10 尺,并强制范围内尚未受影响的敌人尝试再一次豁免。</p>\n<p>厄运可破解@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术 Bless}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果:绝望术 Spell Effect: Bane}</p>"
 				},
 				"Occult Spontaneous Spells": {
@@ -1452,7 +1452,7 @@
 					"description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
 				},
 				"Light": {
-					"name": "点燃 Light",
+					"name": "光亮术 Light",
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
@@ -1544,7 +1544,7 @@
 		},
 		"Zini": {
 			"name": "兹尼 Zini",
-			"blurb": "变体哥布林突击兵",
+			"blurb": "变体地精突击兵",
 			"items": {
 				"Dogslicer": {
 					"name": "屠狗刀 Dogslicer",
@@ -1708,7 +1708,7 @@
 			"blurb": "雄性变体狗头人洞穴法师",
 			"items": {
 				"Invisibility": {
-					"name": "隐形 Invisibility",
+					"name": "隐形术 Invisibility",
 					"description": "<p>幻象将光线绕过目标,使其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}。这使其对所有生物都为@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected},虽然这些生物可尝试找到目标,使其对它们变为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden}。如果目标使用敌对动作,该法术在该敌对动作完成后结束。</p>\n<hr />\n<p><strong>升阶(4环)</strong> 该法术持续 1 分钟,但若目标使用敌对动作,法术不会结束。</p>"
 				},
 				"Staff": {
@@ -1734,7 +1734,7 @@
 					"name": "自发秘能法术 Occult Spontaneous Spells"
 				},
 				"Fear": {
-					"name": "{item} vs 恐惧",
+					"name": "恐惧术 Fear",
 					"description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
 				},
 				"Grim Tendrils": {
@@ -1746,7 +1746,7 @@
 					"description": "<p>你保护一个生物免受伤害。目标在AC和豁免骰上获得+1状态加值。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以选择让该好处也会影响目标@Template[emanation|distance:10]范围内的所有的你的盟友。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RawLEPwyT5CtCZ4D]{法术效果：防护术}</p>"
 				},
 				"Darkness": {
-					"name": "在黑暗中 Darkness",
+					"name": "黑暗术 Darkness",
 					"description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
 				},
 				"Enfeeble": {
@@ -1754,7 +1754,7 @@
 					"description": "<p>你抽走目标的力量，基于其强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，直到你的下个回合开始。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}，持续1分钟</p>"
 				},
 				"Figment": {
-					"name": "幻影 Figment",
+					"name": "虚构幻术 Figment",
 					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术}</p>"
 				},
 				"Scamper": {
