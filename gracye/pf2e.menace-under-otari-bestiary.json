@@ -394,7 +394,7 @@
 					"description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
 				},
 				"Staff (EauG)": {
-					"name": "双手使用杖 Staff (EauG)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Force Barrage (fFIl)": {
@@ -670,7 +670,7 @@
 					"description": "<p>佐尔甘对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6伤害。</p>"
 				},
 				"Staff (oSDn)": {
-					"name": "双手使用杖 Staff (oSDn)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Force Barrage": {
@@ -884,7 +884,7 @@
 					"name": "龙类学识 Dragon Lore"
 				},
 				"Staff (EauG)": {
-					"name": "双手使用杖 Staff (EauG)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Force Barrage (SM24)": {
@@ -1055,7 +1055,7 @@
 					"description": "<p>当初次暴露在明亮光照下时，该怪物将会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]直至其下一回合。在初次暴露后，亮光不再使怪物失明，除非其又在黑暗中呆了1小时。然而，只要怪物还处于明亮光照下，它就会保持目眩。</p>"
 				},
 				"Heal (DUff)": {
-					"name": "治疗术 Heal (DUff)",
+					"name": "治疗术 Heal",
 					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Chain Shirt": {
@@ -1075,7 +1075,7 @@
 					"description": "<p>生命能量将目标从鬼门关拉回。目标失去 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死 Dying} 状态，但它仍然 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}，并为0生命值。</p>"
 				},
 				"Shield (aUt2)": {
-					"name": "护盾术 Shield (aUt2)",
+					"name": "护盾术 Shield",
 					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害,则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部 20 点生命值,则被彻底摧毁。</p>"
 				},
 				"Hand Crossbow": {
@@ -1086,7 +1086,7 @@
 					"name": "手弩 Hand Crossbow"
 				},
 				"Heal (IZFt)": {
-					"name": "治疗术 Heal (IZFt)",
+					"name": "治疗术 Heal",
 					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Rapier (rjX4)": {
@@ -1272,7 +1272,7 @@
 					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Torch (dk9C)": {
-					"name": "火把（炸弹或短刃） Torch (dk9C)"
+					"name": "火把 Torch"
 				},
 				"Goblin Scuttle": {
 					"name": "哥布林快跑 Goblin Scuttle",
@@ -1543,7 +1543,7 @@
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Staff (EauG)": {
-					"name": "双手使用杖 Staff (EauG)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Detect Magic": {
@@ -1593,7 +1593,7 @@
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
-					"name": "双手使用杖 Staff (EauG)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Shield": {
@@ -2443,7 +2443,7 @@
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
-					"name": "双手使用杖 Staff (EauG)",
+					"name": "杖 Staff",
 					"description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
 				},
 				"Detect Magic": {
