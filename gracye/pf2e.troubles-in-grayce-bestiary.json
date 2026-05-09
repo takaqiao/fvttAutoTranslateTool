@@ -987,7 +987,7 @@
 				},
 				"Swallow Whole": {
 					"name": "活吞 Swallow Whole",
-					"description": "<p>[Listed Size]，@Damage[(0)[bludgeoning]]，破裂值[0]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+					"description": "<p>小型,@Damage[(2d4+4)[bludgeoning]],破裂值 18</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
 				},
 				"Glutton's Feast": {
 					"name": "饕餮盛宴 Glutton's Feast",
@@ -1600,7 +1600,7 @@
 					"description": "<p>这种利器有多种形状和风格，但通常2英尺长。</p>"
 				},
 				"Dart (Coated with Giant Viper Venom)": {
-					"name": "基础持续流血伤害提升为@Damage[2d6[persistent,bleed]]。",
+					"name": "飞镖(涂有巨型蛇毒) Dart (Coated with Giant Viper Venom)",
 					"description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
 				},
 				"Tinker": {
@@ -1619,7 +1619,7 @@
 					"name": "短剑 Shortsword"
 				},
 				"Dart": {
-					"name": "基础持续流血伤害提升为@Damage[2d6[persistent,bleed]]。",
+					"name": "飞镖 Dart",
 					"description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
 				},
 				"Blowgun (IWA2)": {
