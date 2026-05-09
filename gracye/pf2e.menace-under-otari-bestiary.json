@@ -116,9 +116,7 @@
 					"name": "尖牙"
 				}
 			},
-			"prototypeToken": {
-				"name": "蝰蛇"
-			},
+			"prototypeToken": "蝰蛇",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -179,9 +177,7 @@
 					"description": "<p>狗头人陷阱大师对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人陷阱大师"
-			},
+			"prototypeToken": "狗头人陷阱大师",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -196,9 +192,7 @@
 					"description": "<p>任何地砖受到压力时，走廊两边的门落下并关闭。石板会对其下方区域或相邻的任何生物造成@Damage[3d8[bludgeoning]]伤害，并将它们按随机方向推离其所在空间。成功通过@Check[reflex|dc:17|traits:damaging-effect]豁免的生物不受伤害，并沿随机方向滚出。如果该生物大成功，它可以选择翻滚的方向。</p>\n<p>抬起落下的石板需要进行成功的@Check[athletics|dc:25|traits:hazard]检定。命中压力板会触发陷阱，石板与陷阱的AC和豁免相同，但是它拥有硬度12，HP48（BT24）。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "瓮中捉鳖"
-			},
+			"prototypeToken": "瓮中捉鳖",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -232,9 +226,7 @@
 					"name": "你可以击退目标最多15尺远。"
 				}
 			},
-			"prototypeToken": {
-				"name": "地蜥人战士"
-			},
+			"prototypeToken": "地蜥人战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -258,9 +250,7 @@
 					"name": "爪击"
 				}
 			},
-			"prototypeToken": {
-				"name": "枝节妖"
-			},
+			"prototypeToken": "枝节妖",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -306,9 +296,7 @@
 					"description": "<p>当绊线被拉动或被切断，两片镰刃同时向下摆动，每片镰刃都用巨镰打击攻击天花板凹槽下的所有生物。这些攻击没有多重攻击减值。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "摆镰"
-			},
+			"prototypeToken": "摆镰",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -325,9 +313,7 @@
 					"name": "噬咬"
 				}
 			},
-			"prototypeToken": {
-				"name": "断头"
-			},
+			"prototypeToken": "断头",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -369,9 +355,7 @@
 					"description": "<p>这把巨大的战斧太重了，单手无法使用。许多巨斧都有两头 \"胡须\"般的刃，底部有一个钩子以增加它们的切割力。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "地蜥人首领"
-			},
+			"prototypeToken": "地蜥人首领",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -433,9 +417,7 @@
 					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人法师（蓝）"
-			},
+			"prototypeToken": "狗头人法师（蓝）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -456,9 +438,7 @@
 					"description": "<p>下水道泥怪释放出一波秽物，覆盖了@Template[emanation|distance:20]区域内所有生物。区域内的每个生物必须通过一次@Check[reflex|dc:17|options:area-effect,damaging-effect]豁免，否则受到@Damage[1d4[acid]|options:area-damage]伤害并且于1分钟内在速度上承受-10减值（在大失败时，生物还会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]）。生物可以花费一个交互动作来清理其他人，每次动作能够将速度减值减少5尺。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Qomp2EujVCbzJb4X]</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "下水道泥怪"
-			},
+			"prototypeToken": "下水道泥怪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -494,9 +474,7 @@
 					"name": "匕首 Dagger"
 				}
 			},
-			"prototypeToken": {
-				"name": "卡利尼匿行者"
-			},
+			"prototypeToken": "卡利尼匿行者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -535,9 +513,7 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "熊地精徘徊者"
-			},
+			"prototypeToken": "熊地精徘徊者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -568,9 +544,7 @@
 			"data": {
 				"placeHolder": "placeHolder"
 			},
-			"prototypeToken": {
-				"name": "巨蛛"
-			}
+			"prototypeToken": "巨蛛"
 		},
 		"Giant Viper (BB)": {
 			"name": "巨蝰 Giant Viper (BB)",
@@ -592,9 +566,7 @@
 					"description": "<p>一个被巨蝰的尖牙打击成功伤害的生物必须通过一次成功的@Check[fortitude|dc:17]豁免，否则承受@Damage[1d8[poison]]伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "巨蝰蛇"
-			},
+			"prototypeToken": "巨蝰蛇",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -642,9 +614,7 @@
 					"name": "短剑 Shortsword"
 				}
 			},
-			"prototypeToken": {
-				"name": "卡利格尼猎手"
-			},
+			"prototypeToken": "卡利格尼猎手",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -669,9 +639,7 @@
 					"description": "<p>变形怪尝试读取一个30尺以内生物的表层想法。目标可以通过一个成功的@Check[will|dc:21]豁免来抵抗。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "易容怪"
-			},
+			"prototypeToken": "易容怪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -731,9 +699,7 @@
 					"description": "<p>你无声地念出言语，这段言语会直接送到目标耳中，而不是从你的嘴中念出。其他人听起来顶多是你与它们正常说话，但法术目标会如同正站在你身边一般听到你的言语。目标可以通过一个反应动作做出一段简要回应，或者根据其意愿，也可以通过其下个回合的自由动作来回应，但它如此做时必须能看见你，并且在射程内。如果它做出回应，它的回应会直接送达你的耳中，如同最初的信息一般。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 法术的射程增加到500尺。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人头领佐尔格兰"
-			},
+			"prototypeToken": "狗头人头领佐尔格兰",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -772,9 +738,7 @@
 					"name": "匕首 Dagger"
 				}
 			},
-			"prototypeToken": {
-				"name": "大地精虐刑者"
-			},
+			"prototypeToken": "大地精虐刑者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -790,9 +754,7 @@
 					"description": "<p>如果一个生物踩上活板门，除非在@Check[reflex|dc:16]豁免中成功抓住边缘，否则生物坠入陷坑。陷坑20尺深，对任何坠入底部的生物造成@Damage[10[bludgeoning]|options:fall-damage]伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "隐藏陷坑"
-			},
+			"prototypeToken": "隐藏陷坑",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -824,9 +786,7 @@
 					"name": "力竭状态持续2轮。"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人战士"
-			},
+			"prototypeToken": "狗头人战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -847,9 +807,7 @@
 					"description": "<p>当该狼以颚部打击攻击成功时,它可在此后立即使用此动作尝试[[/act trip]]目标。此摔绊不施加,也不计入该狼的多重攻击减值。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狼"
-			},
+			"prototypeToken": "狼",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -874,9 +832,7 @@
 					"description": "<p>拟形怪使用拟形能力变成的物品时，如果一个生物接触它或与之进行身体互动，生物自动被拟形怪的粘合剂粘住（无豁免）。然后拟形怪对相邻的任何一个生物进行一次伪足打击。该能力无法再次使用，直到拟形怪逃走并进行一次新的伪装。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "仿生怪"
-			},
+			"prototypeToken": "仿生怪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -897,9 +853,7 @@
 					"name": "铁手套 Armored Fist"
 				}
 			},
-			"prototypeToken": {
-				"name": "自走盔甲"
-			},
+			"prototypeToken": "自走盔甲",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -961,9 +915,7 @@
 					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人法师（红）"
-			},
+			"prototypeToken": "狗头人法师（红）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -991,9 +943,7 @@
 					"description": "<p>当厉鬼以其爪击或匕首打击对活物造成伤害时，厉鬼回复 @Damage[2[void,healing]|shortLabel] 生命值，目标必须成功通过 @Check[fortitude|dc:17] 豁免，否则承受2点不可治疗的伤害。厉鬼可多次使用污损妒恨，但单一生物不会承受超过8点不可治疗伤害。</p>\n<p>每完整夜晚的休息可愈合2点不可治疗伤害，整日卧床休息则可恢复至4点。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "厉鬼"
-			},
+			"prototypeToken": "厉鬼",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1060,9 +1010,7 @@
 					"name": "重弩 Heavy Crossbow"
 				}
 			},
-			"prototypeToken": {
-				"name": "暗影侏儒战士"
-			},
+			"prototypeToken": "暗影侏儒战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1165,9 +1113,7 @@
 					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "卓尔女祭司"
-			},
+			"prototypeToken": "卓尔女祭司",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1258,9 +1204,7 @@
 					"description": "<p>你呼唤一道伴随着雷鸣之声的闪电，对目标造成1d12点电击伤害和1d4点音波伤害，基础反射豁免。穿戴金属护甲或者由金属构成的生物在豁免中承受-1环境减值，若它们受到该法术的伤害，会陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续1轮。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d12点电击以及1d4点音波。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "暗影侏儒岩石守护者"
-			},
+			"prototypeToken": "暗影侏儒岩石守护者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1281,9 +1225,7 @@
 					"description": "<p>盐鲨突然垂直下潜，用它的两倍速度垂直向下直线前进。它能在@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]一个生物的时候使用此能力。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "盐水鲨"
-			},
+			"prototypeToken": "盐水鲨",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1304,9 +1246,7 @@
 					"name": "獠牙"
 				}
 			},
-			"prototypeToken": {
-				"name": "野猪"
-			},
+			"prototypeToken": "野猪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1349,9 +1289,7 @@
 					"name": "聚能法术"
 				}
 			},
-			"prototypeToken": {
-				"name": "哥布林点火者"
-			},
+			"prototypeToken": "哥布林点火者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1380,9 +1318,7 @@
 					"description": "<p>幽灵为自身的命运而哀悼，迫使@Template[emanation|distance:30]内的每个活物尝试一次@Check[will|dc:21|options:area-effect,inflicts:frightened]豁免。豁免失败时，该生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（大失败则为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}）。</p>\n<p>豁免成功时，该生物会在1分钟内临时免疫幽灵的骇人悲叹。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "鬼魂平民"
-			},
+			"prototypeToken": "鬼魂平民",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1399,9 +1335,7 @@
 					"description": "<p>被巨蜈蚣的虫颚打击命中并承受穿刺伤害的生物必须尝试一次@Check[fortitude|dc:14]豁免，失败则受到@Damage[1d6[poison]]伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "巨蜈蚣"
-			},
+			"prototypeToken": "巨蜈蚣",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1450,9 +1384,7 @@
 					"description": "<p>如果该大地精在其上回合后@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raised a Shield},该大地精可消耗其反应动作格挡一次打击。将伤害减少 5,但该大地精与盾牌都承受剩余伤害,可能损坏或摧毁该盾牌。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "大地精士兵"
-			},
+			"prototypeToken": "大地精士兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1491,9 +1423,7 @@
 					"description": "<p>大声吼叫的兽人酋长会为自身以及@Template[emanation|distance:60]内的所有兽人盟友在攻击和伤害检定上提供+1状态加值，直至兽人酋长的下个回合开始为止。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Yqq4AkZ9lrm4CcID]</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "奥克指挥官"
-			},
+			"prototypeToken": "奥克指挥官",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1533,9 +1463,7 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人侦察兵"
-			},
+			"prototypeToken": "狗头人侦察兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1568,9 +1496,7 @@
 					"description": "<p>长有利爪的手突然出现，抓住并以魔法的强酸灼烧目标。目标承受2d8酸蚀伤害，以及@Damage[floor(@item.level/2)d6[persistent,acid]]伤害，基于其反射豁免。由于此法术承受持续伤害的生物在速度上获得-10尺状态减值。@UUID[Compendium.pf2e.spell-effects.Item.6TGcfVyzzVHEo7ke]</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong>该生物承受一半伤害，并且不承受持续伤害，飞爪可以按照你的选择往一个方向移动它至多5尺。</p>\n<p><strong>失败</strong> 该生物承受完整伤害和持续伤害，飞爪可以按照你的选择往一个方向移动它至多10尺。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害和完整持续伤害，飞爪可以按照你的选择往一个方向移动它至多20尺。</p><hr /><p><strong>升阶（+2）</strong> 初始伤害增加2d8、持续酸蚀伤害增加1d6。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "水之顽童"
-			},
+			"prototypeToken": "水之顽童",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1632,9 +1558,7 @@
 					"name": "法师法术 Wizard Spells"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人法师（绿）"
-			},
+			"prototypeToken": "狗头人法师（绿）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1696,9 +1620,7 @@
 					"description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人法师（黑）"
-			},
+			"prototypeToken": "狗头人法师（黑）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1720,9 +1642,7 @@
 					"description": "<p>你已经精通了结伴狩猎的技巧。若你对生物造成打击伤害，且该生物位于至少2名你的盟友的触及范围之内时，你能额外造成1d4点精准伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "地狱犬"
-			},
+			"prototypeToken": "地狱犬",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1751,9 +1671,7 @@
 					"description": "<p>当该礁爪以爪击打击攻击成功时,它可在此后立即使用此动作尝试@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}目标。此擒拿不施加,也不计入该礁爪的多重攻击减值。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "礁爪"
-			},
+			"prototypeToken": "礁爪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1789,9 +1707,7 @@
 					"description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "卡利格尼舞者"
-			},
+			"prototypeToken": "卡利格尼舞者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1837,9 +1753,7 @@
 					"description": "<p>爬行之手可感知30尺内活物与不死生物的生命精华。这种感官能区分驱动活物的活力能量与驱动不死生物的虚空能量,正如视觉区分颜色一般。然而,爬行之手无法看见,因此依赖视觉或观看的效果对它无效。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "爬行之手"
-			},
+			"prototypeToken": "爬行之手",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1867,9 +1781,7 @@
 					"description": "<p>这种护甲混合了毛皮、结实的皮革，有时还有成型的熟皮，它的多层皮革提供了保护，尽管它的笨重会降低穿戴者的速度和活动性。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "食人魔战士"
-			},
+			"prototypeToken": "食人魔战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1889,9 +1801,7 @@
 					"description": "<p>女妖凝视一个生物，使其产生恶兆缠身的吞噬之感。结果取决于其 @Check[will|dc:20|options:inflicts:frightened,inflicts:slowed] 豁免。目标无需看见海女妖。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物惊惧1并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}，持续1轮。</p>\n<p><strong>大失败</strong> 同失败，但生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2} 并迟缓1，持续1分钟。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "海女妖"
-			},
+			"prototypeToken": "海女妖",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1933,9 +1843,7 @@
 					"name": "战斧 Battle Axe"
 				}
 			},
-			"prototypeToken": {
-				"name": "奥克老兵"
-			},
+			"prototypeToken": "奥克老兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1961,9 +1869,7 @@
 					"description": "<p>苔犬能感觉到60尺内的水晶或宝石。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "草皮猎犬"
-			},
+			"prototypeToken": "草皮猎犬",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -1992,9 +1898,7 @@
 					"name": "暗影之手 Shadow Hand"
 				}
 			},
-			"prototypeToken": {
-				"name": "幽影血脉"
-			},
+			"prototypeToken": "幽影血脉",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2031,9 +1935,7 @@
 					"description": "<p>当巨龙以打击大成功时，重新充能其毒液吐息。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "角龙（幼龙）"
-			},
+			"prototypeToken": "角龙（幼龙）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2061,9 +1963,7 @@
 					"description": "<p>枭熊进行高声尖叫来吓退敌人。@Template[emanation|distance:80]范围内的所有生物都必须进行@Check[will|dc:20]检定。无论结果如何，生物在1分钟之内对此能力临时免疫。大成功时生物不受影响；成功时生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}；失败时生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}；大失败时生物获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}，并且下一回合必须全力从枭熊身边逃走。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "鸮熊"
-			},
+			"prototypeToken": "鸮熊",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2124,9 +2024,7 @@
 					"description": "<p>这些斧子被明确设计成武器，而不是工具。它们通常重量较轻，轴由金属带或螺栓加固，刀片更锋利，非常适合切碎四肢而不是木头。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "奥克斗士"
-			},
+			"prototypeToken": "奥克斗士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2208,9 +2106,7 @@
 					"name": "落石 Falling Block"
 				}
 			},
-			"prototypeToken": {
-				"name": "坠落天花板"
-			},
+			"prototypeToken": "坠落天花板",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2242,9 +2138,7 @@
 					"name": "尖牙"
 				}
 			},
-			"prototypeToken": {
-				"name": "网潜伏者"
-			},
+			"prototypeToken": "网潜伏者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2284,9 +2178,7 @@
 					"description": "<p>这种小型弓由单独一块木头做成，受到散兵和骑兵的青睐。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "帕格旺皮"
-			},
+			"prototypeToken": "帕格旺皮",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2310,9 +2202,7 @@
 					"name": "噬咬"
 				}
 			},
-			"prototypeToken": {
-				"name": "石像怪"
-			},
+			"prototypeToken": "石像怪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2348,9 +2238,7 @@
 					"description": "<p>如果一个哥布林的盟友在哥布林勇士旁边的格子结束一个移动动作，哥布林勇士可以用反应动作来快步。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "哥布林战士"
-			},
+			"prototypeToken": "哥布林战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2371,9 +2259,7 @@
 					"description": "<p>铁蝶刃般的翅膀造成可怕的伤口持续流血。任何因铁蝶翅膀攻击而获得持续流血伤害的生物在伤口止住前对挥砍伤害有2点弱点。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Eecbbol29eIP3zvf]{效果：千刃创伤}</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "铁蝶"
-			},
+			"prototypeToken": "铁蝶",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2402,9 +2288,7 @@
 					"description": "<p>森林食人妖针对欺瞒检定的感知DC承受-4环境减值。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "森林食人妖"
-			},
+			"prototypeToken": "森林食人妖",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2417,9 +2301,7 @@
 					"name": "噬咬"
 				}
 			},
-			"prototypeToken": {
-				"name": "巨鼠"
-			},
+			"prototypeToken": "巨鼠",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2451,9 +2333,7 @@
 					"description": "<p>该食尸鬼跳跃至多其速度的一半。此移动不会触发反应动作。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "食尸鬼跟踪者"
-			},
+			"prototypeToken": "食尸鬼跟踪者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2496,9 +2376,7 @@
 					"name": "力竭状态持续2轮。"
 				}
 			},
-			"prototypeToken": {
-				"name": "中央长矛"
-			},
+			"prototypeToken": "中央长矛",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2530,9 +2408,7 @@
 					"description": "<p>花豹对被它@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的生物用爪抓进行两次打击。这两次打击都计入它的多重攻击减值，但在两次打击完成后才生效。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "豹"
-			},
+			"prototypeToken": "豹",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2594,9 +2470,7 @@
 					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "狗头人法师（白）"
-			},
+			"prototypeToken": "狗头人法师（白）",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2624,9 +2498,7 @@
 					"description": "<p>因巨蚁尾刺打击而承受穿刺伤害的目标必须成功通过 @Check[fortitude|dc:18|traits:damaging-effect] 豁免，否则承受 @Damage[1d10[poison]] 伤害。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "巨蚁"
-			},
+			"prototypeToken": "巨蚁",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2647,9 +2519,7 @@
 					"description": "<p>石化蜥蜴瞪视它30尺内的一个生物。目标必须通过@Check[fortitude|dc:22|options:inflicts:slowed,inflicts:petrified]检定。</p>\n<p>如果失败且没有被石化扫视能力及本能力影响，则获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。如果目标已经被石化扫视或此能力影响过，则目标永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>通过这种方式被石化的生物，可以通过往表面淋新鲜的石化蜥蜴血（从死亡不超过1小时的石化蜥蜴身体里提取）可以立即恢复肉身。一只石化蜥蜴的血足够使两只中型生物恢复肉身。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "蜥怪"
-			},
+			"prototypeToken": "蜥怪",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2706,9 +2576,7 @@
 					"name": "聚能法术"
 				}
 			},
-			"prototypeToken": {
-				"name": "暗影侏儒侦察兵"
-			},
+			"prototypeToken": "暗影侏儒侦察兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2730,9 +2598,7 @@
 			"data": {
 				"placeHolder": "placeHolder"
 			},
-			"prototypeToken": {
-				"name": "涂毒之锁"
-			}
+			"prototypeToken": "涂毒之锁"
 		},
 		"String Slime (BB)": {
 			"name": "丝状粘液 String Slime (BB)",
@@ -2753,9 +2619,7 @@
 					"name": "伪足"
 				}
 			},
-			"prototypeToken": {
-				"name": "丝状粘液"
-			},
+			"prototypeToken": "丝状粘液",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2799,9 +2663,7 @@
 					"name": "短剑 Shortsword"
 				}
 			},
-			"prototypeToken": {
-				"name": "大地精弓手"
-			},
+			"prototypeToken": "大地精弓手",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2837,9 +2699,7 @@
 					"description": "<p>这把巨大的双手剑几乎和它的使用者一样高。它的下刃一般较钝，以便在近距离格斗中获得额外的杠杆作用力。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "哥布林突击兵"
-			},
+			"prototypeToken": "哥布林突击兵",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2856,9 +2716,7 @@
 					"description": "<p>西风之鹰以一半的速度飞行，进行两次翼拍打击，然后再以半速飞行，回到初始地点。第二段移动不触发反应动作（比如反应打击），这两次打击都使用第一次攻击的多重攻击减值，但之后的攻击它必须承受-8的多重攻击减值。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "微风鹰"
-			},
+			"prototypeToken": "微风鹰",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2890,9 +2748,7 @@
 					"name": "角抵 Horns"
 				}
 			},
-			"prototypeToken": {
-				"name": "骷髅巨人"
-			},
+			"prototypeToken": "骷髅巨人",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2943,9 +2799,7 @@
 					"description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "卓尔战士"
-			},
+			"prototypeToken": "卓尔战士",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2966,9 +2820,7 @@
 					"description": "<p><strong>触发</strong> 巨蝇被一名能看见它的攻击者以近战或远程攻击为目标</p><hr /><p><strong>效果</strong> 巨蝇对触发攻击的AC获得+2环境加值。如果攻击未命中，巨虫可以以其飞行速度飞行至多其飞行速度。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "巨蝇"
-			},
+			"prototypeToken": "巨蝇",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -2999,9 +2851,7 @@
 					"description": "<p>单手曲刃刀。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "骷髅守卫"
-			},
+			"prototypeToken": "骷髅守卫",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3025,9 +2875,7 @@
 					"description": "<p>来到该鹰身女妖30尺范围内并能闻到该鹰身女妖气味的生物必须尝试一次@Check[fortitude|dc:21]豁免。失败时,该生物对所有检定与DC承受-1状态减值,直至其使用一个动作干呕为止。豁免成功的生物在1分钟内不受任何鹰身女妖气息的影响。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "鹰身女妖"
-			},
+			"prototypeToken": "鹰身女妖",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3042,9 +2890,7 @@
 					"name": "喷射 Spray"
 				}
 			},
-			"prototypeToken": {
-				"name": "美人鱼喷泉"
-			},
+			"prototypeToken": "美人鱼喷泉",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3076,9 +2922,7 @@
 					"description": "<p>牛头人在以求生进行 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{方向感知} 或 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 检定时自动大成功。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "牛头人猎手"
-			},
+			"prototypeToken": "牛头人猎手",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3096,9 +2940,7 @@
 					"name": "力竭状态持续2轮。"
 				}
 			},
-			"prototypeToken": {
-				"name": "长矛发射器"
-			},
+			"prototypeToken": "长矛发射器",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3127,9 +2969,7 @@
 					"name": "噬咬"
 				}
 			},
-			"prototypeToken": {
-				"name": "座狼"
-			},
+			"prototypeToken": "座狼",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3173,9 +3013,7 @@
 					"description": "<p>当初次暴露在明亮光照下时，该怪物将会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]直至其下一回合。在初次暴露后，亮光不再使怪物失明，除非其又在黑暗中呆了1小时。然而，只要怪物还处于明亮光照下，它就会保持目眩。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "卓尔潜行者"
-			},
+			"prototypeToken": "卓尔潜行者",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
@@ -3197,9 +3035,7 @@
 					"description": "<p>煤渣鼠无视烟雾带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]效果。</p>"
 				}
 			},
-			"prototypeToken": {
-				"name": "灰烬鼠"
-			},
+			"prototypeToken": "灰烬鼠",
 			"data": {
 				"placeHolder": "placeHolder"
 			}
