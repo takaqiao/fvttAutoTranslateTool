@@ -1746,7 +1746,7 @@
 				},
 				"Throat Grab": {
 					"name": "锁喉 Throat Grab",
-					"description": "<p>当爬行之手以爪击成功命中中型或更小生物时，它可以立即使用此动作尝试 [[/act grapple]] 该目标。该擒抱不施加爬行之手的多重攻击减值，也不计入。以此被 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱} 的生物难以说话，所有需要发声的动作（包括施展法术）都需多花一个动作。</p>"
+					"description": "<p>当爬行之手以爪击成功命中中型或更小生物时，它可以立即使用此动作尝试 [[/act grapple]] 该目标。该擒抱不施加爬行之手的多重攻击减值，也不计入。以此被 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed} 的生物难以说话，所有需要发声的动作（包括施展法术）都需多花一个动作。</p>"
 				},
 				"Lifesense": {
 					"name": "生命感知 Lifesense",
@@ -1798,7 +1798,7 @@
 				},
 				"Dread Gaze": {
 					"name": "恐惧凝视 Dread Gaze",
-					"description": "<p>女妖凝视一个生物，使其产生恶兆缠身的吞噬之感。结果取决于其 @Check[will|dc:20|options:inflicts:frightened,inflicts:slowed] 豁免。目标无需看见海女妖。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物惊惧1并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}，持续1轮。</p>\n<p><strong>大失败</strong> 同失败，但生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2} 并迟缓1，持续1分钟。</p>"
+					"description": "<p>女妖凝视一个生物，使其产生恶兆缠身的吞噬之感。结果取决于其 @Check[will|dc:20|options:inflicts:frightened,inflicts:slowed] 豁免。目标无需看见海女妖。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物惊惧1并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>大失败</strong> 同失败，但生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2} 并迟缓1，持续1分钟。</p>"
 				}
 			},
 			"prototypeToken": "海女妖",
@@ -2566,7 +2566,7 @@
 				},
 				"Hidden Movement": {
 					"name": "隐秘行动 Hidden Movement",
-					"description": "<p>如果暗影侏儒侦察兵开始其回合时对一个生物处于 @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{未察觉} 或 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{隐匿} 状态，则该生物在该回合结束前对暗影侏儒侦察兵的攻击为 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}。</p>"
+					"description": "<p>如果暗影侏儒侦察兵开始其回合时对一个生物处于 @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected} 或 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden} 状态，则该生物在该回合结束前对暗影侏儒侦察兵的攻击为 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>"
 				},
 				"Sling (9lzO)": {
 					"name": "投石索 Sling",
@@ -2813,7 +2813,7 @@
 				},
 				"Fly Pox": {
 					"name": "蝇痘 Fly Pox",
-					"description": "<p>巨蝇可能携带任何疾病，但多数通过咬伤传播称为蝇痘的感染。被巨蝇颚部大成功命中的角色必须成功通过 @Check[fortitude|dc:16|options:inflicts:enfeebled] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1} 1天。</p>"
+					"description": "<p>巨蝇可能携带任何疾病，但多数通过咬伤传播称为蝇痘的感染。被巨蝇颚部大成功命中的角色必须成功通过 @Check[fortitude|dc:16|options:inflicts:enfeebled] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} 1天。</p>"
 				},
 				"Avoid the Swat": {
 					"name": "避免拍打 Avoid the Swat",
@@ -3057,7 +3057,7 @@
 				},
 				"Unsteadying Magnetism": {
 					"name": "失稳磁力 Unsteadying Magnetism",
-					"description": "<p>石龙子放大其磁场，并试图将20尺内某生物身上的金属拉走。如果该生物穿戴金属盔甲或持有金属物件，必须尝试一次 @Check[fortitude|dc:15] 豁免。失败时，该生物在石龙子下回合开始前为 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}。</p>"
+					"description": "<p>石龙子放大其磁场，并试图将20尺内某生物身上的金属拉走。如果该生物穿戴金属盔甲或持有金属物件，必须尝试一次 @Check[fortitude|dc:15] 豁免。失败时，该生物在石龙子下回合开始前为 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>"
 				}
 			},
 			"data": {
