@@ -1,0 +1,1796 @@
+{
+  "label": "格雷斯之患 Troubles in Grayce",
+  "mapping": {
+    "name": "name",
+    "portrait": {
+      "path": "img",
+      "converter": "npc-portrait-path"
+    },
+    "token": {
+      "path": "prototypeToken",
+      "converter": "npc-token-translation"
+    },
+    "data": {
+      "path": "system",
+      "converter": "npc-data-translation"
+    },
+    "items": {
+      "path": "items",
+      "converter": "npc-item-translation"
+    },
+    "publicNotes": "system.details.publicNotes",
+    "privateNotes": "system.details.privateNotes",
+    "dr": "system.traits.dr",
+    "allSaves": "system.attributes.allSaves.value",
+    "senses": "system.traits.senses.value",
+    "hp": "system.attributes.hp.details",
+    "disable": "system.details.disable",
+    "hazarddescription": "system.details.description",
+    "reset": "system.details.reset",
+    "routine": "system.details.routine",
+    "blurb": "system.details.blurb",
+    "speed": "system.attributes.speed.details",
+    "languages": "system.traits.languages.custom",
+    "stealthdetails": "system.attributes.stealth.details",
+    "ac": "system.attributes.ac.details",
+    "di": "system.traits.di.custom",
+    "prototypeToken": {
+      "path": "prototypeToken",
+      "converter": "structured",
+      "cardinality": "one",
+      "mapping": {
+        "name": "name"
+      }
+    },
+    "perceptionDetails": "system.perception.details",
+    "languagesDetails": "system.details.languages.details"
+  },
+  "folders": {
+    "1 - The Path River Peeler": "1 - 帕斯河剥皮怪 The Path River Peeler",
+    "3 - They Hunger Below": "3 - 饥饿藏于下 They Hunger Below",
+    "2 - Sabotage!": "2 - 破坏！ Sabotage!",
+    "4 - The Disgraced Dollmaker": "4 - 蒙羞造偶师 The Disgraced Dollmaker",
+    "5 - Sweet Tooth": "5 - 嗜甜 Sweet Tooth",
+    "6 - The Count of Petals": "6 - 花瓣伯爵 The Count of Petals"
+  },
+  "entries": {
+    "Trial by Ice Trap": {
+      "name": "寒冰陷阱试炼 Trial by Ice Trap",
+      "disable": "<p>@Check[thievery|dc:23]（受训）以堵塞通风口，或 @Check[arcana|dc:26]（专家）或 @Check[occultism|dc:26]（专家）解除附近的魔法感应器</p>",
+      "hazarddescription": "<p>天花板上一处隐藏通风口连接到一处装满冷冻炼金试剂的储池，可制造出彻骨的寒雾。</p>",
+      "reset": "<p>当 <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆时陷阱重置。陷阱每分钟仅能重置一次。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Frozen Mist": {
+          "name": "寒霜迷雾 Frozen Mist",
+          "description": "<p><strong>触发</strong> <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆</p><hr /><p><strong>效果</strong> 天花板上的通风口打开，喷出寒雾迅速填满地图标记区域。区域内每个生物承受 @Damage[6d8[cold]|options:area-damage] 伤害（@Check[fortitude|dc:26|basic|options:area-effect] 豁免）。豁免失败的生物还承受 @Damage[1d8[persistent,cold]|options:area-damage] 伤害（大失败时承受 @Damage[2d8[persistent,cold]|options:area-damage] 伤害）。该区域在接下来的1分钟内保持寒冷，对在该区域结束回合的生物造成 @Damage[2d6[cold]|options:area-damage] 伤害（@Check[fortitude|dc:22|basic|options:area-effect] 豁免）。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "The Count of Petals": {
+      "name": "花瓣伯爵 The Count of Petals",
+      "hp": "棺木修复, 快速治疗 7, 虚空治疗",
+      "blurb": "变体吸血鬼伯爵",
+      "items": {
+        "Children of the Night": {
+          "name": "暗夜子嗣 Children of the Night",
+          "description": "<p>在这群邪恶弑神者构成的万神殿中，\"信任\"似乎是最不可能存在的特质——但对暗夜子嗣的信徒而言，这恰恰是核心教义。尽管成员彼此猜忌，但他们明白必须为更高目标暂时搁置疑虑。这个松散联盟的终极使命，是庇护那些必须隐藏真面目的存在：刺客、吸血鬼、狼人及其他暗影生物。该万神殿的信徒（无论凡人或不朽者）极度重视忠诚，叛徒会迅速被清除。因此信徒通常讳言万神殿存在，入教者多为现有成员的密友或血亲。 </p>\n<p><strong>万神殿成员</strong> 卡马佐茨、宁、乌加托亚、衙刑、祖拉</p>\n<p><strong>关注范畴</strong> 暗杀、隐秘、以杀戮自保、吸血鬼</p>\n<p><strong>典范</strong> 给予信仰之敌应得的终结，勿让旁人窥见真容，将自身需求置于他人之上</p>\n<p><strong>禁忌</strong> 施舍超出自身所持之物，主动泄露吸血鬼的秘密</p>\n<p><strong>圣徽</strong> 带血爪痕的蝠翼</p>"
+        },
+        "Rapier": {
+          "name": "细剑 Rapier"
+        },
+        "Turn to Mist": {
+          "name": "化为迷雾 Turn to Mist",
+          "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你化作一团雾气，获得@UUID[Compendium.pf2e.spells-srd.Item.V8wXOsoejQhe6CyG]{汽化形体 Vapor Form}的效果。</p>"
+        },
+        "Soporific Stench": {
+          "name": "催眠之臭 Soporific Stench",
+          "description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}。</p>"
+        },
+        "Rapier (BSWr)": {
+          "name": "细剑 Rapier",
+          "description": "<p>细剑有着细长的剑刃和笼手，它被许多人视为决斗武器。</p>"
+        },
+        "Drink Blood": {
+          "name": "饮血 Drink Blood",
+          "description": "<p><strong>需求</strong> 一名被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}、或自愿的生物在你的触及范围内</p>\n<hr />\n<p><strong>效果</strong> 你将尖牙刺入这名生物，吸吮他的鲜血。如果受害者被擒抱中，该能力需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC，在其他的情况下则自动成功。如果你成功了，该生物将变为@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，并且你将获得等同于目标等级的临时生命，持续10分钟。继续对目标使用该能力不会增加流失状态值，也不会赋予你更多的临时生命。</p>"
+        },
+        "Change Shape": {
+          "name": "<p>怪物无限期地改变了其形态。它能够使用此动作恢复原形或是改为一个新的形态。除非另有说明，否则怪物无法使用变身能力呈现出某个特定个体。使用变身也被视为使用欺骗技能的@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{乔装 Impersonate}来伪装自身。在判别所变化形态的生物族裔或是生物类型时，怪物的变形将自动成功对抗察觉DC，并且在防止从其他方面识破其伪装的欺骗DC上获得+4状态加值。变身能力指定了怪物能够变化的形态。怪物仅能变化其生理形态，并不会获得新形态的特殊能力。例如，在每个形态下，它都会替换其正常速度与打击，并且可能改变其感官或体型。所有变更都会在数据栏中列出。</p>",
+          "description": "<p>你变化成自然形态，或按照动作来源的描述获得一种新形态。</p>"
+        },
+        "Coffin Restoration": {
+          "name": "棺椁复生 Coffin Restoration",
+          "description": "<p>与其他不死生物不同，吸血鬼在生命值降至0时不会被毁灭，而是陷入 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷}。如果其躯体在棺木中休息1小时，吸血鬼回复1点生命值，之后其快速治疗开始正常运作。</p>"
+        },
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Claw": {
+          "name": "爪击"
+        },
+        "Dominate": {
+          "name": "支配术 Dominate",
+          "description": "<p>你操控目标，强行令其服从你的命令。如果你赋予一项明显是自灭的命令，目标不会行动，直到你下达新的命令。该效果基于其意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}以抵抗你的命令。</p>\n<p><strong>失败</strong> 你控制了目标，其获得@UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]状态，但在每轮结束时可以尝试一次意志豁免。成功时，法术结束。</p>\n<p><strong>大失败</strong> 如同失败，但是仅当你施加违抗其天性的命令，例如杀害其盟友时，才会获得新的豁免。</p>\n<hr />\n<p><strong>升阶（10环级）</strong> 该持续时间为无限。</p>"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Fast Healing 7": {
+          "name": "快速治疗 7 Fast Healing 7",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+        },
+        "Create Servitor": {
+          "name": "创造仆从 Create Servitor",
+          "description": "<p>如果一个生物因吸血鬼的吸食生命降至0生命值后死亡，花瓣伯爵可以将受害者转化为吸血鬼仆役——他将自身一部分血液献给受害者，并将其埋在土中3晚。吸血鬼仆役被强制服从其创造者，但若花瓣伯爵同时控制过多的吸血鬼仆役（由GM决定），或仆役等级高于创造它的吸血鬼，意志坚定的仆役可通过对吸血鬼意志DC的成功意志豁免摆脱控制。</p>"
+        },
+        "Grab": {
+          "name": "击中后你可以立即花费一个动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒抱}目标",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        },
+        "Vampire Vulnerabilities": {
+          "name": "吸血鬼弱点 Vampire Vulnerabilities",
+          "description": "<p>所有吸血鬼具有以下弱点。</p>\n<ul>\n<li><strong>强迫</strong> 吸血鬼具有奇怪而难以理解的强迫行为。典型吸血鬼无法自愿越过流水，除非藏在棺木中被搬运；也无法进入私人居所，除非被有权限者邀请进入。由你裁定，吸血鬼可能有不同强迫行为——例如海盗吸血鬼可能未经邀请就无法踏上坚实陆地。吸血鬼仍可被强迫做这些事，并可能像克服厌恶一样克服强迫行为。</li>\n<li><strong>厌恶</strong> 吸血鬼无法自愿来到挥舞着大蒜或挥舞着具有圣定选项的神祇宗教标志的物品10尺范围内。挥舞大蒜或宗教标志需要生物用一次互动动作进行操作，效果维持1轮（与举盾相似）。如果吸血鬼非自愿地来到其厌恶物体的10尺内，它获得 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 状态，逃离厌恶物体，直到它在距离厌恶物超过10尺处结束动作。在持续暴露1轮后，吸血鬼可使用一次单一动作（具有专注特征）尝试 @Check[will|dc:25] 豁免。成功时它克服厌恶 [[/gmr 1d6 #轮]]{1d6 轮}（大成功时1小时）。</li>\n<li><strong>木桩</strong> 一根穿透吸血鬼心脏的木桩使其降至0HP，并阻止其在棺木中也回复至0HP以上。钉桩需要3个动作，且仅当吸血鬼 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷} 时才生效。如果木桩被拔除，吸血鬼可再次回复至0HP以上；若它在棺木中，则1小时休息期从拔桩时开始。如在木桩仍在时砍下吸血鬼之头并涂以圣水，吸血鬼即被毁灭。</li>\n<li><strong>阳光</strong> 暴露在直射阳光下时，吸血鬼立即 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}。每当吸血鬼在阳光中结束回合时，迟缓数值+1，直至离开阳光时该状态终止。若吸血鬼以此失去全部动作，则被毁灭。出于其超自然的厌光特性，吸血鬼不投阴影也不在镜中显像。\n</li>\n</ul>"
+        },
+        "Mist Escape": {
+          "name": "化雾脱身 Mist Escape",
+          "description": "<p><strong>触发</strong> 你的生命值被降低到0。</p>\n<hr />\n<p>在你倒下时，你的身体将自动做出反应来保护自己。你化为迷雾。这并不需要使用化为迷雾，并且即使你已经在当日内使用过化为迷雾，你依旧能够使用化雾脱身。尽管你的生命值为0，你依旧能够使用移动动作径直向着你的棺材移动，不过你仍然不具有意识，也无法控制你来如何做到这点。当处于这种0生命值的状态下，你不会进一步受到伤害。如果你到达了你的棺材，或者在1小时后被摧毁时（以先发生者为准），你自动恢复到物质形态并且@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Bristles": {
+      "name": "鬃毛 Bristles",
+      "blurb": "变体自走扫帚",
+      "items": {
+        "Dust": {
+          "name": "扬尘 Dust",
+          "description": "<p>被自走扫帚的鬃毛打击命中的生物必须成功通过 @Check[fortitude|dc:19] 豁免，否则下一动作用于咳嗽。即使被多次鬃毛攻击命中，该生物也只需花费1个动作咳嗽以咳净尘埃。无需呼吸的生物对此效果免疫。</p>"
+        },
+        "Construct Armor (Hardness 4)": {
+          "name": "建构甲胄（硬度 4） Construct Armor (Hardness 4)",
+          "description": "<p>如同普通物体，自走扫帚具有硬度。该硬度将其承受的伤害减少等同于硬度的数值。一旦自走扫帚生命值降至一半以下，或被大成功攻击立即损坏，其建构甲胄破裂，且AC降至13。</p>"
+        },
+        "Bristles": {
+          "name": "鬃毛 Bristles"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Ecaterina Tache": {
+      "name": "艾卡特琳娜·塔切 Ecaterina Tache",
+      "blurb": "女精灵督察",
+      "items": {
+        "Last Second Warning": {
+          "name": "最后警告 Last Second Warning",
+          "description": "<p><strong>触发</strong> 艾卡特琳娜能看见的一个生物触发了一处危害</p><hr /><p><strong>效果</strong> 艾卡特琳娜在危害激活前的瞬间察觉危险，向触发者高声示警。如果该生物能听见并理解她的警示，则它对危害发起的攻击的AC获得+1环境加值，对触发危害的豁免也同样获得加值。</p>"
+        },
+        "Mining Lore": {
+          "name": "矿工学识 Mining Lore"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Hazard Finder": {
+          "name": "危机搜寻者 Hazard Finder",
+          "description": "<p>你拥有天然的危险感知能力。你在寻找陷阱和危机的察觉检定，对抗它们攻击的AC，以及对抗它们效果的豁免上获得+1环境加值。你可以在没有进行@UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]的情况下找到那些通常需要你进行搜寻的陷阱。</p>"
+        },
+        "Perception +15 to Seek or Search": {
+          "name": "搜寻或查找时感知+15 Perception +15 to Seek or Search"
+        },
+        "Engineering Lore": {
+          "name": "工程学识 Engineering Lore"
+        },
+        "Destroyed Explorer's Clothing": {
+          "name": "破损探险者服装 Destroyed Explorer's Clothing",
+          "description": "<p>不穿盔甲的冒险者穿着耐用衣物。虽然这并非盔甲且使用你的无甲防御熟练度，但它仍有敏捷上限值，且若以效力符文蚀刻则可给予AC物品加值。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Durtik": {
+      "name": "德尔提克 Durtik",
+      "publicNotes": "<p>不像其他对让少数人受苦或不适感到满足的格瑞姆林，德尔提克的志向远大。它们沉迷于过度复杂的计划与精巧装置，常常导致混乱。德尔提克栖身于具备伟大工程造诣的社会的边缘，搜罗技术知识与专长。它们以这些汇集的技艺建造精心设计的死亡陷阱。德尔提克会乐意花上数年时间打造一台逐步啃噬山体的装置，最终引发雪崩摧毁村庄。幸运的是，对于附近的文明来说，德尔提克的计划几乎从不实现；妖精精灵厌恶简洁与直接，坚持复杂与宏伟，使其计划易于被破坏。这些计划往往因忽略了一处关键细节或回避了某些基本真相，在中途失败崩溃，附近镇上无人知晓还曾有过计划。然而这种自我破坏的倾向并不让德尔提克变得不那么危险。它们对宏大破坏的渴望使其在格瑞姆林中独具感召力。常能看到一只德尔提克身边围绕着被其愿景所感召的其他格瑞姆林，即便那些追随者并不完全理解。这些格瑞姆林会一直跟随，直到失去兴趣或计划失败为止。在那之前，德尔提克与其团队集中其混乱并散布大量厄运，以推行其命运多舛的图谋。</p><h2>比你更聪明</h2><p>由于德尔提克常常比身边其他格瑞姆林更聪明，它们认为无论身在何处自己都是房间里最聪明的人。意识到这点的精明冒险者可以以浮夸恭维奉承它们，分散德尔提克注意力，使其更易意外泄露信息。</p>",
+      "items": {
+        "Fist": {
+          "name": "拳头"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2英尺长。</p>"
+        },
+        "Mechanized Animus": {
+          "name": "机械驭灵 Mechanized Animus",
+          "description": "<p>德尔提克将其对他者的厌恶与轻视引导至60尺内的一具建构上，夺取其控制或令其活化。德尔提克对该建构的意志DC（或其控制者意志DC，若有，取较高者）尝试 @Check[crafting|against:will|options:inflicts:stupefied,inflicts:stunned] 检定。德尔提克 [[/gmr 1d4 #机械驭灵重充能]]{1d4 轮} 内不能再次使用机械驭灵。</p><hr /><p><strong>大成功</strong> 该建构立即采取德尔提克选择的两个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 2}。</p>\n<p><strong>成功</strong> 该建构立即采取德尔提克选择的一个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}。</p>\n<p><strong>大失败</strong> 破坏的厌恶反弹回来，德尔提克 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}，持续1分钟。</p>"
+        },
+        "Shortbow": {
+          "name": "短弓 Shortbow"
+        },
+        "Shortsword (hNrr)": {
+          "name": "短剑 Shortsword"
+        },
+        "Primal Innate Spells": {
+          "name": "原能内在法术 Primal Innate Spells"
+        },
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Live Wire": {
+          "name": "电缆鞭 Live Wire",
+          "description": "<p>你召唤出一段嗡嗡作响的带电锋利铜线攻击你的敌人。基于你攻击骰对抗目标的AC的结果，该铜线造成1d4挥砍伤害和1d4电击伤害。</p><hr /><p><strong>大成功</strong> 目标承受双倍伤害外加@Damage[(ceil(@item.rank / 2))d4[persistent,electricity]]伤害。</p>\n<p><strong>成功</strong> 目标承受全部伤害。</p>\n<p><strong>失败</strong> 目标承受电击伤害，但不承受挥砍伤害。</p>\n<p><strong>大失败</strong> 目标不受影响。</p><hr /><p><strong>升阶（+2）</strong> 挥砍伤害、初始电击伤害和大成功时的持续电击伤害都增加1d4。</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        },
+        "Highly Confusing Scheme": {
+          "name": "高度迷惑的计谋 Highly Confusing Scheme",
+          "description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次以欺瞒的 [[/act feint]] 检定。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防} 减值适用。</p>"
+        },
+        "Shortbow (ELUM)": {
+          "name": "短弓 Shortbow",
+          "description": "<p>这种小型弓由单独一块木头做成，受到散兵和骑兵的青睐。</p>"
+        },
+        "Arrows": {
+          "name": "箭 Arrows",
+          "description": "<p>这些箭头是弓的弹药。箭杆是木制的。一端是羽毛保持飞行中的平稳，另一端是金属头。</p>"
+        },
+        "Engineering Lore": {
+          "name": "工程学识 Engineering Lore"
+        },
+        "Grease": {
+          "name": "油腻术 Grease",
+          "description": "<p>你创造一片油，选择区域或是目标。</p>\n<ul>\n<li><strong>区域</strong> <strong>[4个连续的5尺方格]</strong> 区域中的所有坚实地面覆盖上一层油。在油滑的表面上站立的生物必须尝试成功通过一次对抗你法术DC的反射或者特技检定，否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。在法术持续时间内，使用动作移动到油滑表面上的生物必须尝试一次反射豁免或者特技检定来@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]。快步或者爬行的生物无需尝试检定或者豁免。</li>\n<li><strong>目标</strong> <strong>[一个1负载或者更低的物体]</strong> 如果你对无主物品施放该法术，任何尝试捡起该物体的人必须成功尝试一次对抗你法术DC的特技检定或者反射豁免才能如此做。如果你以被持有的物品为目标，拥有该物品的生物必须尝试一次特技检定或者反射豁免。失败时，持握者或者持用者在使用该物体的所有检定上承受-2环境减值；在大失败时，持握者或者持用者会掉落该物品。该物品会掉落在一个由GM选择的相邻方格内。如果你对一个穿戴物品施放该法术，穿戴者在对抗擒拿他的强韧豁免上获得+2环境加值。</li>\n</ul>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Path River Peeler": {
+      "name": "帕斯河剥皮怪 Path River Peeler",
+      "publicNotes": "<p>如同许多神秘动物，连帕斯河剥皮怪的名号本身都众说纷纭。有人说该生物得名于其受害者尸体，常常被剥光皮肤但其余部分完好无损。另一些人则称这种状态的尸体只是例外。更多时候，剥皮怪的受害者根本无迹可寻——也许这些被剥皮的尸体只是剥皮怪还没吃完就抛弃的。持此观点者主张，更合适的名号应是\"长啸怪（Pealer）\"，源于此兽行猎时发出的回响呼啸。但既然人人皆知巨响是驱赶怪兽的最佳办法，称之为长啸怪又有何意义？争论循环往复，似无止境。</p>\n<p>剥皮怪最常出没于格雷斯以北一片名为战栗悬崖的荒野之地，多无人迹。格雷斯多数人——除了拥有少年时代故事的老者——都觉得剥皮怪只不过是吓唬孩子的故事，用以解释那些被狼或其他猎食者所杀或失踪的羊群。即便如此，每个在格雷斯长大的人，都能哼上几句当地孩子玩耍跳绳时唱的童谣。</p><h2>墓爪</h2><p>关于帕斯河剥皮怪的目击常常伴随着墓爪疫情：一种罕见的、携带疾病的真菌，触感冰冷且会摧毁附近植被。墓爪疫情让某些热心的学者推测，神秘动物本身就是真菌之源。一种更可能的理论是，剥皮怪与墓爪共享冥府位面的栖息地，前者只是在毛糙的兽皮上携带后者的孢子。</p>",
+      "items": {
+        "Echolocation": {
+          "name": "回声定位",
+          "description": "<p>当你使用@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]动作时，你能使用听觉作为40尺射程的精确感官，持续至你的下个回合开始。你还能在@UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]时使用该感官。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.8uXXaQ3Y5FP2mwn6]</p>"
+        },
+        "Otherworldly Cry": {
+          "name": "异界惊啸 Otherworldly Cry",
+          "description": "<p>帕斯河剥皮怪发出令人毛骨悚然的鬼魅嘶啸，可在一英里外听到。@Template[type:emanation|distance:60] 内每个生物必须尝试一次 @Check[will|dc:20|options:area-effect,inflicts:frightened,inflicts:fleeing] 豁免。无论结果如何，生物在10分钟内对剥皮怪的异界惊啸临时免疫。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}。</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 1轮。</p>"
+        },
+        "Claw": {
+          "name": "爪击"
+        },
+        "Rend": {
+          "name": "<p>撕裂条目中会列出一项怪物所拥有的打击。</p>\n<p><strong>要求</strong>怪物在同一轮中连续两次使用在条目中列的打击类型命中同一名生物。</p>\n<hr />\n<p><strong>效果</strong> 怪物自动对此敌人造成打击伤害。</p>",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
+        },
+        "Sensitive Ears": {
+          "name": "敏锐之耳 Sensitive Ears",
+          "description": "<p>帕斯河剥皮怪硕大的耳朵使其对巨响特别敏感。试图通过呼喊、敲击盾牌或类似手段对剥皮怪 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{威吓} 的生物，无须承受不与剥皮怪共享语言的-4环境减值。每当剥皮怪承受音波伤害时，必须成功通过 @Check[will|dc:16|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。</p>"
+        },
+        "Blood Run Cold": {
+          "name": "血液冷凝 Blood Run Cold",
+          "description": "<p>帕斯河剥皮怪向60尺内一个能看见的生物伸出骨指，从其体内抽取热量并削弱其肌肉力量。该生物承受 @Damage[4d6[cold]] 伤害（@Check[will|dc:20|basic|options:inflicts:enfeebled] 豁免）。失败时，该生物还 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1} 持续10分钟（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 2} 持续1小时）。剥皮怪 [[/gmr 1d4 #血液冷凝重充能]]{1d4 轮} 内不能再次使用血液冷凝。</p>"
+        },
+        "Flight Response": {
+          "name": "逃逸反应 Flight Response",
+          "description": "<p><strong>触发</strong> 帕斯河剥皮怪获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态或其惊惧值增加</p><hr /><p><strong>效果</strong> 剥皮怪以其速度快步行动或攀爬。剥皮怪对此次移动触发的反应动作的AC获得+2环境加值。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Zoti": {
+      "name": "佐提 Zoti",
+      "blurb": "变体狗头人战士",
+      "ac": "举盾时20",
+      "items": {
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        },
+        "Spear": {
+          "name": "力竭状态持续2轮。",
+          "description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
+        },
+        "Spear (lZsF)": {
+          "name": "力竭状态持续2轮。"
+        },
+        "Raise a Shield": {
+          "name": "举起盾牌 Raise a Shield",
+          "description": "<p><strong>需求</strong> 你正持握盾牌。</p>\n<hr />\n<p>你举起盾牌保护自己。当你举起盾牌时，你将盾牌所列的环境加值添加到自己的AC上。你的盾牌会一直保持举起直到你的下一回合开始。</p>"
+        },
+        "Shield Block": {
+          "name": "<p><strong>触发</strong> 怪物已经举起了盾牌，并且受到一次物理攻击的伤害。</p>\n<hr />\n<p><strong>效果</strong>怪物挺起盾牌格挡了攻击。盾牌使得怪物所受的伤害减少最多等同于盾牌硬度的数值。怪物和盾牌同时承受剩余的伤害，并且这也可能损坏或摧毁盾牌。</p>",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ShieldBlock]</p>"
+        },
+        "Scamper": {
+          "name": "惊惶逃窜 Scamper",
+          "description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+        },
+        "Steel Shield": {
+          "name": "钢盾 Steel Shield",
+          "description": "<p>如同木盾，钢盾也有多种形状和尺寸。虽然比木盾昂贵，但也更加耐用。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
+        },
+        "Spear (cUre)": {
+          "name": "力竭状态持续2轮。"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Nether Rift": {
+      "name": "冥界裂隙 Nether Rift",
+      "disable": "<p>对每堵进行 @Check[arcana|dc:18]、@Check[nature|dc:18]、@Check[occultism|dc:18] 或 @Check[religion|dc:18]（受训）以封闭裂隙，共需3次成功；或 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法}（3环；解消DC 17）</p>",
+      "hazarddescription": "<p>冷风从洞壁上的一道裂隙中吹出。</p>",
+      "reset": "<p>裂隙在 [[/gmr 2d10 #重开年数]] 年后重开。杀死帕斯河剥皮怪可永久封闭裂隙。</p>",
+      "routine": "<p>（2个动作）该危害以第一动作再次使用其冥界之风反应。如果还有任何墓爪斑块残留，由GM选择的其中一块释放孢子云。孢子充满该墓爪所占空间，持续到危害下回合开始。位于孢子内的生物 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{遮蔽}，孢子外的所有生物对孢子内的生物均为遮蔽。</p><p>进入孢子或在区域内开始其回合的生物承受 @Damage[1d6[persistent,cold]] 伤害，直至以一次互动动作刷掉孢子。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Wind from the Netherworld": {
+          "name": "冥界之风 Wind from the Netherworld",
+          "description": "<p><strong>触发</strong> 帕斯河剥皮怪进入洞穴</p><hr /><p><strong>效果</strong> 一阵刺骨寒风从冥界裂隙中喷出，呈 @Template[type:cone|distance:15] 锥形。区域内生物承受 @Damage[2d4[cold]|options:area-damage] 伤害（@Check[fortitude|dc:20|basic|options:area-effect] 豁免）。该危害随后掷先攻。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Carexilia": {
+      "name": "卡瑞克西利娅 Carexilia",
+      "hp": "虚空治疗",
+      "blurb": "女精灵食尸鬼阴谋家",
+      "items": {
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2英尺长。</p>"
+        },
+        "Grab": {
+          "name": "击中后你可以立即花费一个动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒抱}目标",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        },
+        "Darkness": {
+          "name": "在黑暗中",
+          "description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+        },
+        "Padded Armor": {
+          "name": "布甲 Padded Armor",
+          "description": "<p>这种护甲只是一件厚重的，有衬芯的衣服，但因为很便宜，也时常会被用到。布甲比其他类型的护甲更容易被损害和破坏。重型护甲的价格中包含了一件内衬布甲，但将它穿在重型护甲下时会失去舒适特征。如果你的重型护甲被破坏或者你不穿全套重型护甲时，你可以只穿那件内衬布甲睡觉。这种方法允许你保有任何附着在重型护甲上的符文的力量，没有人可以不用内衬布甲就穿着你的重甲。</p>"
+        },
+        "Stench": {
+          "name": "<p>任何生物若进入此灵光范围或在灵光范围内开始其回合的话，则必须进行一次强韧豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1 Sickened 1}（大失败时额外再加上@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1 Slowed 1}）。豁免成功或从状态中恢复的生物会在一分钟内临时免疫尸臭。</p>",
+          "description": "<p>@Check[fortitude|dc:]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 你与小型或更大的生物尸体相邻，且该生物的死亡时间为在过去1小时内</p>\n<hr />\n<p>你狼吞虎咽地啃下一大块尸体。你的饥渴在一小时内处于满足状态。</p>"
+        },
+        "Void Warp": {
+          "name": "虚能噬 Void Warp",
+          "description": "<p>你唤来虚能伤害生命力量。该目标承受2d4虚能伤害，这有一次基础强韧豁免. 如果该生物在豁免中大失败，他也会@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}直到你得下个回合开始。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d4。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        },
+        "Shortsword (Yj53)": {
+          "name": "短剑 Shortsword"
+        },
+        "Ghoul Whispers": {
+          "name": "食尸鬼低语 Ghoul Whispers",
+          "description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{瘫痪}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:20|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+        },
+        "Grave Knowledge": {
+          "name": "坟墓知识 Grave Knowledge",
+          "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 食尸鬼调用其在过去7天吞食的某个生物所留存的知识，以受吞食生物受过训练的某项技能尝试一次检定（若不清楚该生物是否受训，由GM决定）。食尸鬼被视为受训，并使用其等级的高阶技能调整值（[[/r 1d20+10]]）。这与正常该检定花费相同的动作或时间。</p>\n<p>食尸鬼也可改为自动获知其过去7天吞食的某个生物所知的特定事项，例如某处隐藏宝藏或心爱之人的姓名。无论吞食了多少肉，食尸鬼对同一个生物只能这样做一次。</p>"
+        },
+        "Grim Tendrils": {
+          "name": "邪影触须 Grim Tendrils",
+          "description": "<p>由黑暗组成的触须从你的指尖喷涌而出。你对在射线上的活物造成2d4虚能伤害和@Damage[(@item.level)[bleed]]伤害。每个射线上的活物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半虚能伤害，并且不受持续流血伤害。</p>\n<p><strong>失败</strong> 该生物承受完整伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍虚能伤害和双倍持续流血伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该虚能伤害增加2d4，持续流血伤害增加1。</p>"
+        },
+        "Claw": {
+          "name": "爪击"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>你的不死之身让你能够更快地跳跃，无论是向着敌人跳还是从敌人身边逃离。你@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}。这种移动不会触发反应动作。</p>\n<p>当你处于满足状态时，你能够选择结束满足状态，用@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}来取代跳跃并且不会触发反应动作，由于你的动作很快，所以可以在敌人对你的动作产生反应之前远远地跳开。</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Unstable Overlook": {
+      "name": "不稳眺台 Unstable Overlook",
+      "disable": "<p>@Check[acrobatics|dc:20] 以轻步穿过眺台至更稳固之地。永久解除该危害需要数小时工作并成功通过 @Check[crafting|dc:23] 检定（受训）。</p>",
+      "hazarddescription": "<p>一处壁台俯瞰着深渊。</p>",
+      "items": {
+        "Collapse": {
+          "name": "崩溃 Collapse",
+          "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p><strong>触发</strong> 一个敌人的打击重击了你</p>\n<hr />\n<p>你崩溃成了一摊骨头，减轻你可能遭受的严重伤害。触发的攻击只造成命中时的伤害（通常是完整伤害，而非翻倍伤害）。任何由重击造成的效果仍然存在。当你崩溃后，你陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，你不能使用除了站立动作以外的动作，进行站立会重新成为一个站姿的骷髅。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Hampering Web (Troubles in Grayce)": {
+      "name": "阻碍蛛网 Hampering Web (Troubles in Grayce)",
+      "disable": "<p>@Check[survival|dc:17]（受训）以挪开蛛网</p>",
+      "hazarddescription": "<p>地下室中战略性铺设着半透明的丝网，准备捕获小型昆虫或阻碍较大穿过此处的生物。</p>",
+      "stealthdetails": "<p>（专家）</p>",
+      "items": {
+        "Ensnare": {
+          "name": "缠绕 Ensnare",
+          "description": "<p><strong>触发</strong> 一个非蜘蛛的生物走入网中</p><hr /><p><strong>效果</strong> 蛛网缠绕触发生物之身，黏附其肢体。触发生物必须成功通过 @Check[reflex|dc:20|options:inflicts:sickened] 豁免，否则其所有速度均承受-10尺环境减值，直到 [[/act escape dc=20]]{挣脱} 蛛网。大失败时，蛛网还粘住该生物面部，使其 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}，且在挣脱蛛网前无法尝试降低此状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Spear Launcher (Troubles in Grayce)": {
+      "name": "长矛发射器 Spear Launcher (Troubles in Grayce)",
+      "disable": "<p>对地砖或墙缝进行 @Check[thievery|dc:18|name:Disable Thievery]（受训）</p>",
+      "hazarddescription": "<p>一处装填着长矛的墙缝连接着一片5尺方格的地砖。</p>",
+      "reset": "<p>发射器需要手动重新装填。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Spear": {
+          "name": "力竭状态持续2轮。",
+          "description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
+        },
+        "Spear (qNyw)": {
+          "name": "力竭状态持续2轮。"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Bittersweet Surprise": {
+      "name": "苦甜惊喜 Bittersweet Surprise",
+      "disable": "<p>如果将三块作为该危害钥匙的魔法软糖摆放在魔法阵正确点位，其附魔解除。判断正确位置需成功通过 @Check[arcana|dc:20] 或 @Check[occultism|dc:20] 检定；大失败时，单纯放置软糖即激活恶意变形反应。一旦附魔解除，魔法阵可如普通糖霜般擦除。</p>",
+      "hazarddescription": "<p>一道由皇家糖霜画成的魔法阵将地窖暗门封闭，并对未集齐三块软糖钥匙便试图开启暗门者使出可怕戏弄。</p>",
+      "reset": "<p>如果在不破坏魔法阵的情况下关闭暗门，附魔恢复如常。</p>",
+      "stealthdetails": "<p>@Check[arcana|dc:22] 或 @Check[occultism|dc:22] 以解开魔法阵的含义而不触发其反应。</p>",
+      "items": {
+        "Malicious Metamorphosis": {
+          "name": "恶意变形 Malicious Metamorphosis",
+          "description": "<p><strong>触发</strong> 一个生物在未先将三枚附魔软糖钥匙置于正确位置的情况下接触暗门</p><hr /><p><strong>效果</strong> 魔法阵阻止暗门开启，并恶意变换触发生物身体的一部分。效果根据触发生物的 @Check[fortitude|dc:18|options:forced-movement,inflicts:clumsy,inflicts:off-guard,inflicts:prone,inflicts:slowed] 豁免结果而定。</p><hr /><p><strong>大成功</strong> 触发生物被吹离暗门10尺，被击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}，但未受其他影响。</p>\n<p><strong>成功</strong> 目标被吹离暗门10尺、被击倒地，并且其一只手的三根手指变成姜饼。变形持续期间它们无法使用具有双手或孪生特征的武器。</p>\n<p><strong>失败</strong> 同成功，但变形也延伸至该生物整只手及部分相邻手臂。受影响生物在变形持续期间 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>\n<p><strong>大失败</strong> 同失败，但变形还波及触发生物一条腿。变形持续期间，所有速度承受-10尺环境减值、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1} 并 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，外加上述效果。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Death of the Dollmaker": {
+      "name": "玩偶师之死 Death of the Dollmaker",
+      "disable": "<p>@Check[occultism|dc:21]（受训）以熄灭四支幽灵蜡烛中的一支，或 @Check[religion|dc:23]（受训）三次以平息塔留斯破碎之灵的余烬</p>",
+      "hazarddescription": "<p>塔留斯·琼格里姆死亡的场景——他在床上、被仪式器具围绕——以幽灵之态重现。</p>",
+      "reset": "<p>该惊魂在所有活物离开房间1分钟后停止。1小时后或被解除后，惊魂准备再度触发。让塔留斯之灵安息可永久摧毁该惊魂。</p>",
+      "routine": "<p>（1个动作）惊魂重现塔留斯死亡的瞬间，导致仪式失控。这释放出一波虚空能量，从床周以 @Template[type:emanation|distance:10] 范围造成 @Damage[4d8[void]|options:area-damage] 伤害（@Check[fortitude|dc:21|basic|options:area-effect] 豁免）。每熄灭一支幽灵蜡烛，伤害减少1d8。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Deathbed Ritual": {
+          "name": "临终仪式 Deathbed Ritual",
+          "description": "<p><strong>触发</strong> 一个活物与床相邻</p><hr /><p><strong>效果</strong> 床的四角各出现一支幽灵蜡烛，随后是塔留斯虚弱身影从厚厚一本古籍上颤抖朗读的透明影像。每个能听到这些话语的活物必须成功通过 @Check[will|dc:23|options:area-effect,inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。该惊魂随后掷先攻。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Old Murder Holes": {
+      "name": "旧弑杀洞 Old Murder Holes",
+      "disable": "<p>@Check[thievery|dc:20]（受训）以解除地板上的触发器，或 @Check[athletics|dc:23] 以撬起地砖将其从触发器上脱开。</p>",
+      "hazarddescription": "<p>洞壁两侧排列着数十个长矛孔，由部分铺装石面中一块假石板触发。然而，多数用以装填陷阱的长矛已折断，长久遗忘在尘土覆盖的洞底。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Spear Volley": {
+          "name": "长矛齐射 Spear Volley"
+        },
+        "Spear Launcher": {
+          "name": "长矛发射器 Spear Launcher",
+          "description": "<p><strong>触发</strong> 假石板被向下施压（如脚踏其上）</p><hr /><p><strong>效果</strong> 陷阱射出数支长矛，对石板上的触发生物或物体进行一次攻击。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Rolling Death": {
+      "name": "滚动死亡 Rolling Death",
+      "disable": "<p>@Check[thievery|dc:22]（受训）将绊线绑到不同锚点而不改变张力</p>",
+      "hazarddescription": "<p>地板中点处尘土中藏有的绊线一旦松开，便释放一块大圆石从西北通道向 <strong>A4</strong> 滚动，碾碎沿途一切。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Tumbling Boulder": {
+          "name": "滚翻巨石 Tumbling Boulder",
+          "description": "<p><strong>触发</strong> 绊线被拉扯或切断</p><hr /><p><strong>效果</strong> 巨石从其放置处冲出，碾碎其路径上的一切。位于 <strong>A3</strong> 路径中的任何人承受 @Damage[(2d12+4)[bludgeoning]] 伤害（@Check[reflex|dc:25|basic] 豁免）。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "The Dig Beast": {
+      "name": "掘地兽 The Dig Beast",
+      "items": {
+        "Crashing Ram": {
+          "name": "撞击冲撞 Crashing Ram",
+          "description": "<p>掘地兽冲向一个目标并撞击它。掘地兽快步行动两次，并对每个相邻目标进行一次铲齿攻击。这些攻击计入其多重攻击减值，但多重攻击减值在所有攻击完成后才增加。</p>"
+        },
+        "Wild Curse": {
+          "name": "狂野诅咒 Wild Curse",
+          "description": "<p>掘地兽充满受诅能量但难以控制。在其回合开始时，掷 [[/gmr 1d6 #狂野诅咒]]。1-2时它 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1} 直至其回合结束；3-4时既不迟缓也不 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速}（除非其他效果造成）；5-6时加速直至其回合结束。</p>"
+        },
+        "Shovel Teeth": {
+          "name": "铲齿 Shovel Teeth"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Bitter Butler": {
+      "name": "苦涩管家 Bitter Butler",
+      "publicNotes": "<p>自动管家是一种魔法建构，外形如木质人形人台，通常身着简单的黑色西服与领带。其圆形头部仅有最简略的面孔轮廓，但下颚以铰链开合，模拟其讲话时的口部动作。其声音常常平静又克制，措辞颇有礼。它服从其创造者所下的指令（或创造者授权下令的他人），通常包括取物、维持房间整洁或送客。如果不速之客起冲突，自动管家可以以击打或运用其内在魔法以致命之力投掷物体来自卫。一场战斗结束后，自动管家通常花上一个小时左右收拾残局。自动管家的设计与魂缚玩偶相似。如同其他魂缚建构，自动管家由一名已故凡人灵魂的碎片驱动。该碎片可来自自愿捐献者或不情愿的受害者——后者可通过对创造者制造DC的成功意志豁免抵抗这一过程。抵抗可破坏建构，但灵魂提取过程往往致命，无论如何那人都会死去。与其他魂缚建构不同，自动管家所用灵魂的人格被完全压制，自动管家以刻板仆人之姿行事。一些自动管家被赋予略不同的技能集——能掌握创造者母语之外的更多语言，使其成为可接待外宾的家族外交家；或被训练以应对需特殊技能的任务，如教导家中孩童或裁制家庭成员的衣物。侧栏列出更多构成全套家务建构仆人队伍的选项。</p><h2>自动厨师与园丁</h2><p>若制造自动管家的设计流入更广泛的世界，自然会有人创造出此魔法建构的变体。这类生物使用与自动管家相同的基础数值，仅做小幅改动。自动厨师可能拥有<em>洁净餐食</em>作为内在法术、刀片打击与喷射沸水的能力。自动园丁可能拥有<em>散布碎石</em>及其他具备土系或植物特征的法术作为内在法术，并以锄头或铁铲打击，远程以种子轰击敌人。</p>",
+      "blurb": "变体自动管家",
+      "languagesDetails": "其创造者所说的一种语言（通常为通用语）",
+      "items": {
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Soul Fragment": {
+          "name": "灵魂碎片 Soul Fragment",
+          "description": "<p>如同其他魂缚建构，自动管家由灵魂能量驱动，但捐献者灵魂的人格被压制，仅保留简单的举止——或客气助益、或冷峻务实。它也不持有原生物的记忆。该灵魂碎片解除了大多数建构对灵能伤害的免疫，但因自动管家的人格凌驾于原生物之上，其对灵能伤害仍有一定抗性。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Telekinetic Hand": {
+          "name": "念动之手",
+          "description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Alarm": {
+          "name": "警报术 Alarm",
+          "description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
+        },
+        "Light": {
+          "name": "点燃",
+          "description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+        },
+        "Bitter Invective": {
+          "name": "苦涩斥骂 Bitter Invective",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家对其能看见的30尺内一个生物喷出令人意外的恶毒训斥，对方必须尝试一次 @Check[will|dc:20|options:inflicts:stupefied] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}）。无论结果如何，该生物随后24小时内对此能力临时免疫。</p>"
+        },
+        "Right This Way": {
+          "name": "这边请 Right This Way",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Whimsical Butler": {
+      "name": "任性管家 Whimsical Butler",
+      "publicNotes": "<p>自动管家是一种魔法建构，外形如木质人形人台，通常身着简单的黑色西服与领带。其圆形头部仅有最简略的面孔轮廓，但下颚以铰链开合，模拟其讲话时的口部动作。其声音常常平静又克制，措辞颇有礼。它服从其创造者所下的指令（或创造者授权下令的他人），通常包括取物、维持房间整洁或送客。如果不速之客起冲突，自动管家可以以击打或运用其内在魔法以致命之力投掷物体来自卫。一场战斗结束后，自动管家通常花上一个小时左右收拾残局。自动管家的设计与魂缚玩偶相似。如同其他魂缚建构，自动管家由一名已故凡人灵魂的碎片驱动。该碎片可来自自愿捐献者或不情愿的受害者——后者可通过对创造者制造DC的成功意志豁免抵抗这一过程。抵抗可破坏建构，但灵魂提取过程往往致命，无论如何那人都会死去。与其他魂缚建构不同，自动管家所用灵魂的人格被完全压制，自动管家以刻板仆人之姿行事。一些自动管家被赋予略不同的技能集——能掌握创造者母语之外的更多语言，使其成为可接待外宾的家族外交家；或被训练以应对需特殊技能的任务，如教导家中孩童或裁制家庭成员的衣物。侧栏列出更多构成全套家务建构仆人队伍的选项。</p><h2>自动厨师与园丁</h2><p>若制造自动管家的设计流入更广泛的世界，自然会有人创造出此魔法建构的变体。这类生物使用与自动管家相同的基础数值，仅做小幅改动。自动厨师可能拥有<em>洁净餐食</em>作为内在法术、刀片打击与喷射沸水的能力。自动园丁可能拥有<em>散布碎石</em>及其他具备土系或植物特征的法术作为内在法术，并以锄头或铁铲打击，远程以种子轰击敌人。</p>",
+      "blurb": "变体自动管家",
+      "languagesDetails": "其创造者所说的一种语言（通常为通用语）",
+      "items": {
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Soul Fragment": {
+          "name": "灵魂碎片 Soul Fragment",
+          "description": "<p>如同其他魂缚建构，自动管家由灵魂能量驱动，但捐献者灵魂的人格被压制，仅保留简单的举止——或客气助益、或冷峻务实。它也不持有原生物的记忆。该灵魂碎片解除了大多数建构对灵能伤害的免疫，但因自动管家的人格凌驾于原生物之上，其对灵能伤害仍有一定抗性。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Telekinetic Hand": {
+          "name": "念动之手",
+          "description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Alarm": {
+          "name": "警报术 Alarm",
+          "description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
+        },
+        "Whimsical Twirl": {
+          "name": "任性旋舞 Whimsical Twirl",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家以其速度快步行动，且不触发反应动作。该移动结束时与管家相邻的任何生物必须成功通过 @Check[reflex|dc:20|options:area-effect] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，直至管家下回合开始。</p>"
+        },
+        "Light": {
+          "name": "点燃",
+          "description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+        },
+        "Right This Way": {
+          "name": "这边请 Right This Way",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Floor Chute Trap": {
+      "name": "地板滑槽陷阱 Floor Chute Trap",
+      "disable": "<p>@Check[thievery|dc:22]（受训）以阻止地板转动</p>",
+      "hazarddescription": "<p>看似普通走廊的一处可旋转地板段化为滑槽，将受害者倾倒进更危险的房间。</p>",
+      "reset": "<p>只要无生物在滑道上，陷阱在1分钟后重置，使走廊地板恢复至看似普通无奇的状态。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Look Out Below": {
+          "name": "当心脚下 Look Out Below",
+          "description": "<p><strong>触发</strong> 一个生物试图打开走廊尽头的门</p><hr /><p><strong>效果</strong> 地图上标记的地板段下沉，变成一道陡峭斜坡。位于最东方格的生物坠落5尺，位于中间方格的生物坠落10尺，位于西方格的生物坠落15尺（DC 21 [[/act grab-an-edge dc=21]]）。按此顺序，所有坠落生物被移动到 <strong>A11</strong> 区域中标记方格紧靠东侧的某一方格。如果任何目的方格已被占据，该方格中的生物被向东推5尺以让位给第二个生物，且两个生物都额外承受 @Damage[2d6[bludgeoning]|traits:nonlethal]{2d6 非致命钝击伤害}（@Check[reflex|dc:21|basic] 豁免）。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Trial by Flame Trap": {
+      "name": "烈焰陷阱试炼 Trial by Flame Trap",
+      "disable": "<p>@Check[thievery|dc:23]（受训）以解除喷嘴，或 @Check[arcana|dc:26]（专家）或 @Check[occultism|dc:26]（专家）解除附近的魔法感应器</p>",
+      "hazarddescription": "<p>地板压实泥土下藏有连接到炼金师之火储池的喷嘴，准备在部署时喷出燃烧之射。</p>",
+      "reset": "<p>当 <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆时陷阱重置。陷阱每分钟仅能重置一次。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Flame Jet": {
+          "name": "烈焰喷射 Flame Jet",
+          "description": "<p>无多重攻击减值</p>"
+        },
+        "Burning Jets": {
+          "name": "炽烈喷射 Burning Jets",
+          "description": "<p><strong>触发</strong> <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆</p><hr /><p><strong>效果</strong> 三处隐藏喷嘴从地面升起，每个对地图上标记区域中的一个生物进行一次火焰喷射打击。如目标少于三个，单一生物可被多次命中。大成功时，目标承受1d10持续火焰伤害。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Sticky Toffee Hound": {
+      "name": "黏糊太妃糖犬 Sticky Toffee Hound",
+      "publicNotes": "<p>甜女妖嗜烘焙，乐于腐化所有甜美可口之物。如同多数烘焙师，每位女妖都会培育自己最喜爱的私房食谱。对于在达米拉烘焙坊作祟的拉敏来说，她最忠诚的招牌作品就是黏糊太妃糖犬。</p>\n<p>虽以高贵猎犬为模板设计，但魔法对将海绵蛋糕和太妃糖酱黏合成大致犬形也只能做到这般程度。这些黏糊糊的甜蜜创作便兼具了狗的忠诚与黏液的多变，几乎是凭着对其创造者的虔诚之力将自身维持在一起。然而，这些过分甜腻的猎犬几乎不知其创造者亦有死期；若拉敏哪日去世，格雷斯将连续数周夜夜被她哀恸宠物的咕嘟般嚎叫所环绕。事实上，太妃糖黏液最终可能因绝望寻求关注而黏住毫无防备的平民，甚至在绝望渴求关爱中将其新（不知情）主人窒息。</p>\n<p>黏糊太妃糖犬对昆虫是无可抗拒的陷阱——昆虫的聚集会暴露黏液的存在。但黏犬的躯体最终是致命的，会像琥珀困住蚊虫一般将动物困在其黏糊外皮中。</p><h2>半成品造物</h2><p>黏糊太妃糖犬并非进取心强的甜女妖创造伴侣的唯一选择。这类生物可以是任何形态与造型，但动物形态与行为最常被模仿。甜女妖也可以用面包、面团及其他甜点制作伴侣，提供一桌危险又可能美味的盟友自助餐。</p>",
+      "items": {
+        "Headbutt": {
+          "name": "撞头 Headbutt"
+        },
+        "Sticky Paws": {
+          "name": "黏糊爪 Sticky Paws",
+          "description": "<p>黏糊太妃糖犬留下的足迹被甜糊残留物覆盖。@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 该犬的生物可以以 [[/act track skill=cooking-lore]]{烹饪学识} 或 [[/act track skill=crafting]]{工艺} 检定代替求生检定。生物可对此检定应用任何与识别或准备食物相关的修正值，例如 @UUID[Compendium.pf2e.feats-srd.Item.1Eceqc6zbMj2x0q9]{老练} 技能专长或 @UUID[Compendium.pf2e.feats-srd.Item.fOIUmDGa9gkeCHA0]{超级品鉴} 通用专长所给予的。</p>"
+        },
+        "Spit Dates": {
+          "name": "吐枣 Spit Dates"
+        },
+        "Motion Sense": {
+          "name": "动态感知",
+          "description": "<p>黏糊太妃糖犬可通过振动与气流感知周围生物。</p>"
+        },
+        "Water Soluble": {
+          "name": "水溶性 Water Soluble",
+          "description": "<p>当暴露于至少1负载的水或具有水特征的法术或效果（即使该效果通常不造成任何伤害）时，黏糊太妃糖犬承受 @Damage[10[acid]] 伤害——构成其身体的糖分熔化——附加于通常会造成的任何伤害之上。</p>"
+        },
+        "Overcooked": {
+          "name": "过度烤焙 Overcooked",
+          "description": "<p><strong>触发</strong> 黏糊太妃糖犬以非水溶性弱点之外的方式生命值降至0</p><hr /><p><strong>效果</strong> 黏糊太妃糖犬爆裂，在 @Template[type:emanation|distance:15] 范围内造成 @Damage[1d4[bludgeoning],1d4[fire]|options:area-damage] 伤害（@Check[reflex|dc:15|basic|options:area-effect] 豁免）。</p>"
+        },
+        "Toffee Sauce": {
+          "name": "太妃糖酱 Toffee Sauce",
+          "description": "<p>被黏糊太妃糖犬撞头打击命中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Haunted Doll Cabinet": {
+      "name": "闹鬼玩偶橱柜 Haunted Doll Cabinet",
+      "hp": "每层架",
+      "disable": "<p>@Check[occultism|dc:16]（受训）或 @Check[religion|dc:16]（受训）以平息橱柜三层架之一上的灵体</p>",
+      "hazarddescription": "<p>积尘橱柜的三层架上每层都摆着一排注入了玩偶屋恶意灵能的玩偶。</p>",
+      "reset": "<p>该惊魂在所有活物离开区域1分钟后停止，或当西北橱柜中的魂缚玩偶被摧毁时停止。1小时后惊魂准备再度触发。让塔留斯之灵安息可永久摧毁该惊魂。</p>",
+      "routine": "<p>（3个动作）每剩一层架，惊魂以1个动作锁定房间内一个非建构活物为目标。幻影玩偶从橱柜冲出，攀附其身、对其拳打脚踢与啃咬。该目标承受 @Damage[(1d6+2)[spirit]] 伤害（@Check[reflex|dc:17|basic] 豁免）。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "On Display": {
+          "name": "展示中 On Display",
+          "description": "<p><strong>触发</strong> 至少有两个活物在房间中超过1分钟</p><hr /><p><strong>效果</strong> 橱柜中的玩偶开始震颤摇晃，整个区域弥漫着对接下来可能发生之事的压倒性恐惧感。每个能看见橱柜的活物必须成功通过 @Check[will|dc:20|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。该惊魂随后掷先攻。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Cruel Automatic Butler": {
+      "name": "残忍自动管家 Cruel Automatic Butler",
+      "publicNotes": "<p>自动管家是一种魔法建构，外形如木质人形人台，通常身着简单的黑色西服与领带。其圆形头部仅有最简略的面孔轮廓，但下颚以铰链开合，模拟其讲话时的口部动作。其声音常常平静又克制，措辞颇有礼。它服从其创造者所下的指令（或创造者授权下令的他人），通常包括取物、维持房间整洁或送客。如果不速之客起冲突，自动管家可以以击打或运用其内在魔法以致命之力投掷物体来自卫。一场战斗结束后，自动管家通常花上一个小时左右收拾残局。自动管家的设计与魂缚玩偶相似。如同其他魂缚建构，自动管家由一名已故凡人灵魂的碎片驱动。该碎片可来自自愿捐献者或不情愿的受害者——后者可通过对创造者制造DC的成功意志豁免抵抗这一过程。抵抗可破坏建构，但灵魂提取过程往往致命，无论如何那人都会死去。与其他魂缚建构不同，自动管家所用灵魂的人格被完全压制，自动管家以刻板仆人之姿行事。一些自动管家被赋予略不同的技能集——能掌握创造者母语之外的更多语言，使其成为可接待外宾的家族外交家；或被训练以应对需特殊技能的任务，如教导家中孩童或裁制家庭成员的衣物。侧栏列出更多构成全套家务建构仆人队伍的选项。</p><h2>自动厨师与园丁</h2><p>若制造自动管家的设计流入更广泛的世界，自然会有人创造出此魔法建构的变体。这类生物使用与自动管家相同的基础数值，仅做小幅改动。自动厨师可能拥有<em>洁净餐食</em>作为内在法术、刀片打击与喷射沸水的能力。自动园丁可能拥有<em>散布碎石</em>及其他具备土系或植物特征的法术作为内在法术，并以锄头或铁铲打击，远程以种子轰击敌人。</p>",
+      "blurb": "精英自动管家",
+      "languagesDetails": "其创造者所说的一种语言（通常为通用语）",
+      "items": {
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Cruel Bash": {
+          "name": "残忍重击 Cruel Bash",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家进行一次拳击打击。如果命中，则额外造成2d6钝击伤害。这对自动管家的多重攻击减值计算视作两次攻击。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Soul Fragment": {
+          "name": "灵魂碎片 Soul Fragment",
+          "description": "<p>如同其他魂缚建构，自动管家由灵魂能量驱动，但捐献者灵魂的人格被压制，仅保留简单的举止——或客气助益、或冷峻务实。它也不持有原生物的记忆。该灵魂碎片解除了大多数建构对灵能伤害的免疫，但因自动管家的人格凌驾于原生物之上，其对灵能伤害仍有一定抗性。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Telekinetic Hand": {
+          "name": "念动之手",
+          "description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Alarm": {
+          "name": "警报术 Alarm",
+          "description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
+        },
+        "Light": {
+          "name": "点燃",
+          "description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+        },
+        "Right This Way": {
+          "name": "这边请 Right This Way",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Genevye": {
+      "name": "吉妮维 Genevye",
+      "blurb": "变体黑信徒",
+      "items": {
+        "Final Blasphemy": {
+          "name": "终末渎神 Final Blasphemy",
+          "description": "<p>当黑信徒被毁灭时，它以一次3动作的 @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术} 法术效果引爆为虚空能量波（@Check[fortitude|dc:22]）。</p>\n<p>黑信徒被摧毁，因此从此次<em>伤害术</em>使用中不获得任何生命值，也无需保留<em>伤害术</em>余次以使用此能力。</p>"
+        },
+        "Harm": {
+          "name": "伤害术",
+          "description": "<p>你引导虚能，以伤害活物或者治疗不死生物。如果目标是活物，你对其造成1d8虚能伤害，并且它可以进行基础强韧豁免。如果目标是自愿不死生物，你回复这个数量的生命值。你在施放该法术时花费的动作数量决定其目标，范围，区域和其他参数。</p>\n<p><span class=\"action-glyph\">1</span> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 该法术的射程为30尺。如果你在治疗一个不死生物，回复的生命值增加8。</p>\n<p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 你在@Template[emanation|distance:30]内释放虚能。这会以区域中所有活物和不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或者伤害的量增加1d8，2动作版本的额外治疗增加8。</p>"
+        },
+        "Cleric Domain Spells": {
+          "name": "牧师领域法术 Cleric Domain Spells"
+        },
+        "Longsword": {
+          "name": "长剑 Longsword",
+          "description": "<p>长剑，也被称为武装剑，可以是单刃或双刃，其刀刃很重，长约3到4英尺之间。</p>"
+        },
+        "Weapon Surge": {
+          "name": "激发武器 Weapon Surge",
+          "description": "<p>你高举武器，并将神圣能量充满其中。在你下个回合开始前，你下一次使用该武器的打击中，你在攻击骰上获得+1状态加值，并且该武器额外1d6精魂伤害，且此次打击具有受祝特征。如果你完成了此次打击或该目标武器不再为你所有，<em>激发武器</em>立即结束。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 此次打击造成2d6额外精魂伤害。</p>\n<p><strong>升阶（9环级）</strong> 此次打击造成3d6额外精魂伤害。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr]{法术效果：激发武器}</p>"
+        },
+        "Divine Prepared Spells": {
+          "name": "准备神能法术 Divine Prepared Spells"
+        },
+        "Defiled Religios Symbol of Iomedae": {
+          "name": "玷污的伊欧梅黛圣徽 Defiled Religios Symbol of Iomedae"
+        },
+        "Heretic's Smite": {
+          "name": "异端制裁 Heretic's Smite",
+          "description": "<p>挥舞长剑时，吉妮维的打击对具有圣洁特征的生物额外造成 @Damage[1d6[spirit]] 伤害。</p>"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Longsword (7pbU)": {
+          "name": "长剑 Longsword"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Trial by Poison Trap": {
+      "name": "毒液陷阱试炼 Trial by Poison Trap",
+      "disable": "<p>@Check[thievery|dc:23]（受训）以解除发射器，或 @Check[arcana|dc:26]（专家）或 @Check[occultism|dc:26]（专家）解除附近的魔法感应器</p>",
+      "hazarddescription": "<p>嵌入天花板的飞镖发射器装载着一筒涂有致命毒液的飞镖。</p>",
+      "reset": "<p>当 <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆时陷阱重置。陷阱每分钟仅能重置一次。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Toxic Barrage": {
+          "name": "剧毒齐射 Toxic Barrage",
+          "description": "<p><strong>触发</strong> <strong>A13</strong> 区域迷宫控制台的操作员拉下相应拉杆</p><hr /><p><strong>效果</strong> 一处飞镖发射器从天花板浮现，对地图上标记区域中两个不同的生物进行毒液飞镖打击。同一生物不能被打击多于一次。</p>"
+        },
+        "Poison Dart": {
+          "name": "毒液飞镖 Poison Dart",
+          "description": "<p>无多重攻击减值</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Unstable Floor": {
+      "name": "不稳地板 Unstable Floor",
+      "disable": "<p>@Check[engineering-lore|dc:20]、@Check[mining-lore|dc:20] 或 @Check[survival|dc:23] 以确定不稳地面的精确范围，并可选择使其安全坍塌至下方 <strong>A2</strong> 区域</p>",
+      "hazarddescription": "<p>一段不稳的石灰岩在踏上者重压下崩裂。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Deeper into the Darkness": {
+          "name": "沉入黑暗 Deeper into the Darkness",
+          "description": "<p><strong>触发</strong> 一个小型或更大生物走上脆弱石灰岩</p><hr /><p><strong>效果</strong> 地面坍塌，触发生物坠落15尺至下方 <strong>A2</strong> 区域。该生物可尝试 [[/act grab-an-edge dc=23]] 以避免坠落，否则坠落造成 @Damage[7[bludgeoning]] 伤害，外加 @Damage[(4d6+3)[bludgeoning]] 坠石伤害（@Check[reflex|dc:23|basic] 豁免）。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Spitting Hot Candy Pot": {
+      "name": "喷射热糖锅 Spitting Hot Candy Pot",
+      "disable": "<p>打破糖锅可在其破裂反应解决后立即解除。</p>",
+      "hazarddescription": "<p>炉上沸腾着一只装满熔糖的巨大青铜大锅，向四面八方喷出黏糊糊的热焦糖。</p>",
+      "routine": "<p>（2个动作）糖锅在每个动作中以30尺范围内一个对拉敏怀有敌意的生物为目标，吐出一团熔糖造成 @Damage[(1d8+4)[fire]] 伤害；目标必须尝试一次 @Check[reflex|dc:16|options:damaging-effect,inflicts:slowed] 豁免。</p><hr><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标承受半额伤害。</p><p><strong>失败</strong> 目标承受全额伤害并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}，因黏糊熔糖将其黏在地上。</p><p><strong>大失败</strong> 目标承受双倍伤害、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 2}，并因热糖黏附其外露皮肤承受 @Damage[1d4[persistent,fire]] 伤害。</p>",
+      "items": {
+        "Rupture": {
+          "name": "破裂 Rupture",
+          "description": "<p><strong>触发</strong> 喷射热糖锅破损</p><hr /><p><strong>效果</strong> 锅炸裂，将剩余内容物洒入 @Template[type:cone|distance:15] 范围，造成 @Damage[2d12[fire]|options:area-damage] 伤害（@Check[reflex|dc:20|options:area-effect,damaging-effect] 豁免）。该反应覆盖区域在剩余战斗中持续作为困难地形。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受半额伤害。</p>\n<p><strong>失败</strong> 该生物承受全额伤害，并陷入热糖黏稠混乱，所有速度承受-10尺环境减值，直至离开破裂效果区域。在离开效果区域前，它还承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}（DC 18 [[/act escape dc=18]]），其后所有速度承受-10尺环境减值并承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害（同失败）。</p>"
+        },
+        "Bubble Bubble": {
+          "name": "沸沸扬扬 Bubble Bubble",
+          "description": "<p><strong>触发</strong> 拉敏掷先攻</p><hr /><p><strong>效果</strong> 拉敏挥手，立即将糖锅煮沸至剧烈翻腾。糖锅炸开锅盖，对其20尺内所有对拉敏怀敌意的生物造成 @Damage[2d8[fire]|options:area-damage] 伤害（@Check[reflex|dc:16|basic|options:area-effect] 豁免）。大失败时，目标生物还因热糖黏附其外露皮肤承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害。喷射热糖锅随后掷先攻。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Collapsing Ceiling": {
+      "name": "坍塌天花板 Collapsing Ceiling",
+      "disable": "<p>@Check[crafting|dc:21]（受训）以加固受损区域以防坍塌</p>",
+      "hazarddescription": "<p>天花板上一处5尺方格区段有坍塌之险。角色可使用工艺检定代替感知检定来察觉此危害。</p>",
+      "items": {
+        "Falling Rocks": {
+          "name": "坠石 Falling Rocks",
+          "description": "<p><strong>触发</strong> 一个生物进入天花板结构脆弱的方格</p><hr /><p><strong>效果</strong> 岩石坠落到方格中，对该方格内的任何人造成 @Damage[(4d8+10)[bludgeoning]|options:area-damage] 伤害（@Check[reflex|dc:25|basic|options:area-effect] 豁免）。该方格还变成更困难地形。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Shiverscale Kobold": {
+      "name": "战栗鳞狗头人 Shiverscale Kobold",
+      "blurb": "变体狗头人战士",
+      "items": {
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Crossbow": {
+          "name": "若被重击的目标与一个平面相邻，它会被导弹钉住，效果同弓的重击专精效果。"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2英尺长。</p>"
+        },
+        "Scamper": {
+          "name": "惊惶逃窜 Scamper",
+          "description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+        },
+        "Crossbow (sypc)": {
+          "name": "若被重击的目标与一个平面相邻，它会被导弹钉住，效果同弓的重击专精效果。",
+          "description": "<p>这种远程武器有一个类似弓形的组件，安装在一个被称为舵柄的框架上。舵柄有一个将弓弦锁定在适当位置的机件，并与一个释放张力并发射矢的扳机相连。</p>"
+        },
+        "Shortsword (eAwH)": {
+          "name": "短剑 Shortsword"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Aezar": {
+      "name": "艾扎 Aezar",
+      "blurb": "变体精英食人魔饕餮者",
+      "items": {
+        "Greataxe": {
+          "name": "巨斧 Greataxe",
+          "description": "<p>这把巨大的战斧太重了，单手无法使用。许多巨斧都有两头 \"胡须\"般的刃，底部有一个钩子以增加它们的切割力。</p>"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        },
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Gummy Hands": {
+          "name": "黏糖手 Gummy Hands",
+          "description": "<p>糖果残留物给艾扎对其大斧的格外牢固握持力，对她的反射DC给予+2环境加值，以抵抗 @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{缴械} 她的尝试。</p>"
+        },
+        "Glutton's Rush": {
+          "name": "饕餮之冲 Glutton's Rush",
+          "description": "<p>艾扎快步行动两次并进行一次颚部打击。如果她以此打击伤害一个活物，她从饕餮盛宴获得的临时生命值增加至2d6。</p>"
+        },
+        "Tooth Decay": {
+          "name": "蛀牙 Tooth Decay",
+          "description": "<p>频繁食糖让艾扎本就糟糕的牙齿健康更加恶化。如果她从单一攻击或效果承受10或以上钝击伤害，必须尝试一次 @Check[fortitude|dc:25] 豁免。</p><hr /><p><strong>成功</strong> 艾扎痛叫，但未受其他影响。</p>\n<p><strong>失败</strong> 艾扎数颗牙折断。她对颚部打击的伤害以及作为 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{抓握} 与 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]{整吞} 能力一部分进行的运动检定承受-2减值。这些减值持续至艾扎被治疗到生命值上限。</p>\n<p><strong>大失败</strong> 同失败，但艾扎更多牙折断，使减值增加至-3，并承受 @Damage[(1d6-2)[persistent,bleed]] 伤害。</p>"
+        },
+        "Swallow Whole": {
+          "name": "<p>怪物尝试吞下一只已被其口嘴所受擒或束缚的体型等于或小于所列体型的生物。如果被吞下的生物的体型已经达到了所列体型的最大值，怪物便无法再次使用活吞。如果生物的体型比最大值要小，则怪物通常而言便还能吞下更多的生物；其具体的极限由GM判断。怪物尝试一次@Check[athletics|defense:reflex]检定对抗被擒抱生物的反射DC。如果检定成功，则能吞下该生物。怪物的口嘴不再擒抱被其吞下的生物，所以怪物能够用其再次进行打击或擒获。怪物无法攻击被其吞下的生物。</p>\n<p>被活吞的生物视为被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]，且获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，同时必须屏住呼吸，否则便会开始窒息。被吞下的生物在初次被吞以及被吞后的每一轮结束时受到所列出的伤害。如果受害者从这一能力的擒抱状态中@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9] ，则他会从怪物的嘴里钻出来。这会同时解放怪物口嘴中所擒抱的其他任何生物。被吞下的生物可以攻击那只吞食它的怪物，但是仅能以无武装攻击或是轻负载及更小的武器进行攻击。吞食中的生物在对抗此攻击时@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。如果怪物于单次攻击或法术中受到的穿刺或挥砍伤害等于或超过所列的破裂Rupture值，那个被吞的生物便重获自由。通过这些法脱困的生物可以立即开始呼吸，并且离开吞食他们的怪物的占据空间。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.1cbIe569UD6paXad]</p>\n<p>如果怪物死亡，邻近尸体的生物们可以花费总计3个动作使用武器或者无武装攻击对怪物造成穿刺或挥砍伤害，以此切开怪物并且解放被活吞的生物。</p>",
+          "description": "<p>[Listed Size]，@Damage[(0)[bludgeoning]]，破裂值[0]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+        },
+        "Glutton's Feast": {
+          "name": "饕餮盛宴 Glutton's Feast",
+          "description": "<p>如果艾扎以颚部打击伤害一个活物，她在1分钟内获得1d6临时生命值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LWFDNwi3iJuf476A]{效果：饕餮盛宴（艾扎）}</p>"
+        },
+        "Grab": {
+          "name": "击中后你可以立即花费一个动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒抱}目标",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        },
+        "Sticky Axe": {
+          "name": "黏糊之斧 Sticky Axe",
+          "description": "<p><strong>触发</strong> 艾扎对一个生物的大斧打击成功</p><hr /><p><strong>效果</strong> 艾扎的斧上有打击各种甜点留下的残留，黏糊的斧刃黏住其最近的受害者，给艾扎暂时的杠杆。艾扎可以利用大斧的触及距尝试 [[/act reposition]] 或 [[/act trip]] 该目标，即使她没有空闲手。</p>\n<p>另外，她也可以放弃任一招式，将目标拽向她张开的大口，授予她的颚部徒手打击在该目标上的攻击至她回合结束前具有敏锐特征。</p>"
+        },
+        "Greataxe (454K)": {
+          "name": "巨斧 Greataxe"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Barrow Claw Leshy": {
+      "name": "墓爪雷西 Barrow Claw Leshy",
+      "blurb": "变体真菌雷西",
+      "languagesDetails": "与植物交流（仅真菌）",
+      "items": {
+        "Spore Pod": {
+          "name": "孢子荚 Spore Pod"
+        },
+        "Constant Spells": {
+          "name": "<p>一个恒定法术将持续对怪物生效而无需怪物施放之，并且法术的持续时间为永久。如果一个恒定法术被反制，则怪物可以花费此法术正常情况下所要求的施法动作来将其重新激活。</p>",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+        },
+        "Spores": {
+          "name": "孢子 Spores",
+          "description": "<p>从真菌雷西的孢子荚打击受到伤害的生物必须以同样DC（@Check[fortitude|dc:16]）和与其孢子云能力相同效果尝试一次豁免。</p>"
+        },
+        "Spore Cloud": {
+          "name": "孢子云 Spore Cloud",
+          "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p>你释放一团花粉或类似的孢子。你周围@Template[emanation|distance:10]{10尺弥漫}内的生物都必须对接下来的效果尝试一次@Check[fortitude|against:class-spell|options:area-effect,inflicts:blinded,inflicts:dazzled]豁免，DC为你的职业DC或者法术DC（使用其中高者）。植物和真菌免疫这种效果。</p>\n<hr />\n<p><strong>大成功</strong> 不受影响。</p>\n<p><strong>成功</strong> 此生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。</p>\n<p><strong>失败</strong>此生物目眩并且只能够看见10尺范围内的事物，效果持续1轮。</p>\n<p><strong>大失败</strong> 此生物@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1轮。</p>"
+        },
+        "Primal Innate Spells": {
+          "name": "原能内在法术 Primal Innate Spells"
+        },
+        "Verdant Burst": {
+          "name": "葱郁爆发 Verdant Burst",
+          "description": "<p>当一个真菌雷西死亡时，原能能量从其身上爆发，恢复 @Damage[2d8[healing]] 生命值给 @Template[emanation|distance:30] 内每个真菌生物。该区域被真菌填满，化为困难地形。</p>\n<p>如果该地形对此真菌不适宜，它们会在24小时后枯萎。</p>"
+        },
+        "Speak with Plants (Constant, Fungi Only)": {
+          "name": "植物交谈 Speak with Plants",
+          "description": "<p>你能向植物和真菌提出问题和得到回答，但是法术不会让植物变得比平时更加友善或获得更高的智能。大多数植物和真菌对周遭的世界都具有独特的视点，因此它们不会意识到生物的具体细节，也不会知晓附近地区以外的大千世界。狡猾的植物或真菌怪物的沟通表现得简短且模棱两可，而缺乏智能的植物通常会发表无意义的意见。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 持续时间为8小时。</p>"
+        },
+        "Change Shape": {
+          "name": "<p>怪物无限期地改变了其形态。它能够使用此动作恢复原形或是改为一个新的形态。除非另有说明，否则怪物无法使用变身能力呈现出某个特定个体。使用变身也被视为使用欺骗技能的@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{乔装 Impersonate}来伪装自身。在判别所变化形态的生物族裔或是生物类型时，怪物的变形将自动成功对抗察觉DC，并且在防止从其他方面识破其伪装的欺骗DC上获得+4状态加值。变身能力指定了怪物能够变化的形态。怪物仅能变化其生理形态，并不会获得新形态的特殊能力。例如，在每个形态下，它都会替换其正常速度与打击，并且可能改变其感官或体型。所有变更都会在数据栏中列出。</p>",
+          "description": "<p>你变化成自然形态，或按照动作来源的描述获得一种新形态。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Balance Point": {
+      "name": "平衡支点 Balance Point",
+      "disable": "<p>@Check[thievery|dc:20]（受训）以将平衡石地砖固定在实际地板上并锁住，或 @Check[crafting|dc:23]（受训）以临时搭建额外支撑以防地板倾斜</p>",
+      "hazarddescription": "<p>40尺深的陷坑被设置在单一平衡支点上的假地板所遮蔽。东侧或西侧任何一侧的压力都会让占用者跌入下方深渊。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Tipping Floor": {
+          "name": "倾斜地板 Tipping Floor",
+          "description": "<p><strong>触发</strong> 一个生物走上假地板的一侧</p><hr /><p><strong>效果</strong> 触发生物坠入陷坑并因坠落承受 @Damage[20[bludgeoning]] 伤害，除非通过 [[/act grab-an-edge dc=23]]。@Check[athletics|dc:20] 检定以攀爬陷坑壁。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Animated Wardrobe": {
+      "name": "自走衣柜 Animated Wardrobe",
+      "blurb": "变体自动物体",
+      "ac": "（破损时17）",
+      "items": {
+        "Clothes Grab": {
+          "name": "衣物抓取 Clothes Grab",
+          "description": "<p>被自走衣柜的衣物鞭打击命中的生物被自走衣柜 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱}。该生物未 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}，但无法移动到衣柜衣物鞭触及距之外。生物可对AC 15进行打击并造成至少5挥砍伤害以割断衣物鞭。这对自走衣柜不造成伤害。</p>"
+        },
+        "Clothes Whip": {
+          "name": "衣物鞭 Clothes Whip"
+        },
+        "Door": {
+          "name": "推门 Door"
+        },
+        "Construct Armor (Hardness  7)": {
+          "name": "建构甲胄（硬度 7） Construct Armor (Hardness 7)",
+          "description": "<p>如同普通物体，自走衣柜具有硬度。该硬度将其承受的伤害减少等同于硬度的数值。一旦自走衣柜生命值降至一半以下，或被大成功攻击立即损坏，其建构甲胄破裂，移除硬度并将AC降至17。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Enchanted Sweets": {
+      "name": "魔法甜点 Enchanted Sweets",
+      "disable": "<p>@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法}（3环；解消DC 20）；摧毁玻璃柜及其内容物也会粉碎附魔，阻止进一步的强迫或中毒。</p>",
+      "hazarddescription": "<p>摆放在这只精美玻璃柜中的附魔饼干与糕点散发出超自然美味的香气，迫使被其香味影响者大吃特吃。无论吃了多少，柜中总会再装满。</p>",
+      "routine": "<p>（1个动作）在该危害的回合，如果有任何生物在可食诱惑的范围内既未被强迫也不对其免疫，则魔法甜点以同样效果以该生物为目标。否则，它以一种使腹烂的魔法毒液对所有已食用其内容物的生物为目标。任何已食用一些魔法甜点的生物承受 @Damage[2d12[poison]] 伤害（@Check[fortitude|dc:22|basic] 豁免）。</p>",
+      "stealthdetails": "<p>（专家）</p>",
+      "items": {
+        "Eatable Enticement": {
+          "name": "可食诱惑 Eatable Enticement",
+          "description": "<p><strong>触发</strong> 一个生物经过玻璃展示柜敞开北侧的5尺范围内</p><hr /><p><strong>效果</strong> 魔法甜点诱人的香气压制目标的嗅觉。目标必须尝试一次 @Check[will|dc:24|options:inflicts:sickened] 豁免。失败或大失败时，魔法甜点掷先攻。</p><hr /><p><strong>大成功</strong> 目标不受影响、对魔法甜点1分钟内免疫，并意识到该危害试图迫使它。</p>\n<p><strong>成功</strong> 目标不受影响，但仍未意识到魔法甜点试图迫使它。</p>\n<p><strong>失败</strong> 目标在下回合被迫留在玻璃柜旁，并花费至少2个动作食用魔法甜点。它可在每个回合结束时重做意志豁免，成功时终止效果。如被强迫食用甜点连续超过2轮，目标 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。</p>\n<p><strong>大失败</strong> 目标被迫将所有动作用于食用魔法甜点，并立即恶心1。它可在每个回合结束时重做意志豁免，成功时终止强迫。</p>\n<p>恶心状态每持续一回合被迫将所有动作用于食用甜点而增加1，最高至 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Wall Blades Trap": {
+      "name": "墙刃陷阱 Wall Blades Trap",
+      "hp": "摧毁一面墙的机械装置",
+      "disable": "<p>@Check[thievery|dc:20]（受训）以解除一面墙中操控刃片的机械装置</p>",
+      "hazarddescription": "<p>一系列旋转的锯齿刃片连接在长杆上，定期从切刻在石墙上的凹槽中切出。</p>",
+      "reset": "<p>当房间空无一人时陷阱停止，并在1分钟后重置。</p>",
+      "routine": "<p>（3个动作）每解除或摧毁一面墙的机械装置，该危害减少1个动作。每个动作中，该危害对距西、东或南墙10尺内一个生物进行一次锯齿刃打击。每组墙刃每回合作用一次。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Slide and Dice": {
+          "name": "切片机 Slide and Dice",
+          "description": "<p><strong>触发</strong> 一个生物在陷阱墙10尺内</p><hr /><p><strong>效果</strong> 该危害对距西、东或南墙10尺内所有生物进行一次锯齿刃打击；这些打击不承受多重攻击减值。该危害随后掷先攻。</p>"
+        },
+        "Serrated Blade": {
+          "name": "锯齿刃 Serrated Blade",
+          "description": "<p>无多重攻击减值</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Unlucky Collapsing Tunnel": {
+      "name": "不幸坍塌隧道 Unlucky Collapsing Tunnel",
+      "disable": "<p>@Check[nature|dc:18] 检定以抵消弥漫隧道1分钟的不幸光环，或 @Check[survival|dc:20] 以正确支撑隧道顶而不引发坍塌</p>",
+      "hazarddescription": "<p>在最不幸的时刻，支撑潦草的隧道壁向内坍塌，泥土与岩石淹没整条隧道。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Collapse": {
+          "name": "崩溃 Collapse",
+          "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p><strong>触发</strong> 一个敌人的打击重击了你</p>\n<hr />\n<p>你崩溃成了一摊骨头，减轻你可能遭受的严重伤害。触发的攻击只造成命中时的伤害（通常是完整伤害，而非翻倍伤害）。任何由重击造成的效果仍然存在。当你崩溃后，你陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，你不能使用除了站立动作以外的动作，进行站立会重新成为一个站姿的骷髅。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Grasping Gems": {
+      "name": "抓握宝石 Grasping Gems",
+      "hp": "每颗宝石",
+      "disable": "<p>@Check[arcana|dc:22]（受训）、@Check[occultism|dc:22]（受训）或 @Check[nature|dc:22]（受训）以平息四颗抓握宝石中的一颗</p>",
+      "hazarddescription": "<p>四颗用于储存灵魂碎片的魔法处理宝石开始散发出阴森的恶意光辉。</p>",
+      "reset": "<p>该惊魂在所有活物离开房间1分钟后停止。1小时后或被解除后，惊魂准备再度触发。让塔留斯之灵安息可永久摧毁该惊魂。</p>",
+      "routine": "<p>（2个动作）该惊魂的第一动作中，抓握宝石尝试一次以运动的检定（[[/r 1d20+4#运动]]{+14 调整}）以 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒抱} 房间中每个非 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动} 的活物。掷一次并将结果与每个目标的强韧DC对比。每被解除或摧毁一颗宝石，该危害对此检定承受累积-1环境减值。该惊魂第二动作中，宝石的幻影之手挤压其受害者。每个被惊魂无法移动的生物承受 @Damage[(2d8+5)[bludgeoning]] 伤害（@Check[fortitude|dc:21|basic] 豁免）。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Phantom Hands": {
+          "name": "幻影之手 Phantom Hands",
+          "description": "<p><strong>触发</strong> 一个活物与一颗抓握宝石所在层架相邻</p><hr /><p><strong>效果</strong> 房间被阴森光辉所笼罩，幻影之手从四面八方伸出。每个房间内的活物必须尝试一次 @Check[fortitude|dc:24|options:area-effect,inflicts:immobilized] 豁免。该惊魂随后掷先攻。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 幻影之手干扰该生物的移动。该生物对其先攻骰承受-2状态减值。</p>\n<p><strong>失败</strong> 幻影之手将该生物固定原地。该生物对其先攻骰承受-2状态减值，并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}（[[/act escape dc=24]]）首回合。</p>\n<p><strong>大失败</strong> 同失败，但如该生物在首回合尝试挣脱，必须掷两次取较差结果。这是一种厄运效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aBtlxHM9ChGywyrH]{效果：幻影之手}</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Studious Butler": {
+      "name": "勤学管家 Studious Butler",
+      "publicNotes": "<p>自动管家是一种魔法建构，外形如木质人形人台，通常身着简单的黑色西服与领带。其圆形头部仅有最简略的面孔轮廓，但下颚以铰链开合，模拟其讲话时的口部动作。其声音常常平静又克制，措辞颇有礼。它服从其创造者所下的指令（或创造者授权下令的他人），通常包括取物、维持房间整洁或送客。如果不速之客起冲突，自动管家可以以击打或运用其内在魔法以致命之力投掷物体来自卫。一场战斗结束后，自动管家通常花上一个小时左右收拾残局。自动管家的设计与魂缚玩偶相似。如同其他魂缚建构，自动管家由一名已故凡人灵魂的碎片驱动。该碎片可来自自愿捐献者或不情愿的受害者——后者可通过对创造者制造DC的成功意志豁免抵抗这一过程。抵抗可破坏建构，但灵魂提取过程往往致命，无论如何那人都会死去。与其他魂缚建构不同，自动管家所用灵魂的人格被完全压制，自动管家以刻板仆人之姿行事。一些自动管家被赋予略不同的技能集——能掌握创造者母语之外的更多语言，使其成为可接待外宾的家族外交家；或被训练以应对需特殊技能的任务，如教导家中孩童或裁制家庭成员的衣物。侧栏列出更多构成全套家务建构仆人队伍的选项。</p><h2>自动厨师与园丁</h2><p>若制造自动管家的设计流入更广泛的世界，自然会有人创造出此魔法建构的变体。这类生物使用与自动管家相同的基础数值，仅做小幅改动。自动厨师可能拥有<em>洁净餐食</em>作为内在法术、刀片打击与喷射沸水的能力。自动园丁可能拥有<em>散布碎石</em>及其他具备土系或植物特征的法术作为内在法术，并以锄头或铁铲打击，远程以种子轰击敌人。</p>",
+      "blurb": "变体自动管家",
+      "languagesDetails": "其创造者所说的一种语言（通常为通用语）",
+      "items": {
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Soul Fragment": {
+          "name": "灵魂碎片 Soul Fragment",
+          "description": "<p>如同其他魂缚建构，自动管家由灵魂能量驱动，但捐献者灵魂的人格被压制，仅保留简单的举止——或客气助益、或冷峻务实。它也不持有原生物的记忆。该灵魂碎片解除了大多数建构对灵能伤害的免疫，但因自动管家的人格凌驾于原生物之上，其对灵能伤害仍有一定抗性。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Telekinetic Hand": {
+          "name": "念动之手",
+          "description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Alarm": {
+          "name": "警报术 Alarm",
+          "description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
+        },
+        "Studious Strike": {
+          "name": "勤学打击 Studious Strike",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家从错误中学习。如果管家上一动作是对一个目标的拳击打击未命中（但不是大失败），则管家对同一目标进行一次拳击打击。该目标对此攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}，命中时管家额外造成1d6精准伤害。</p>"
+        },
+        "Light": {
+          "name": "点燃",
+          "description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+        },
+        "Right This Way": {
+          "name": "这边请 Right This Way",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Cursed Digging Machine": {
+      "name": "受诅挖掘机 Cursed Digging Machine",
+      "disable": "<p>对推车进行 @Check[thievery|dc:18]（受训）两次以拆卸核心相连部件，或 @Check[nature|dc:20] 或 @Check[occultism|dc:20]（受训）检定以暂时解除金喀斯的诅咒，使机器1小时内不动作</p>",
+      "hazarddescription": "<p>一辆装有轮子的大推车，中央立着一根多段杆。每段杆上伸出几把铁铲，宛如临时拼凑的手臂。</p>",
+      "routine": "<p>（3个动作）挖掘机以一个动作向最近生物移动20尺。如果它已与某生物相邻，则向次近生物移动20尺。然后它对10尺内的任何生物进行两次挥铲攻击。</p>",
+      "items": {
+        "Crash and Slash": {
+          "name": "撞击横扫 Crash and Slash",
+          "description": "<p><strong>触发</strong> 一个生物来到挖掘机30尺范围内</p><hr /><p><strong>效果</strong> 挖掘机咔嗒作响活化，向触发生物滚去。它向该生物移动30尺，对10尺内每个生物以挥铲发动攻击。机器随后掷先攻。</p>"
+        },
+        "Slashing Shovels": {
+          "name": "挥铲 Slashing Shovels"
+        },
+        "Speed 20 Feet": {
+          "name": "速度 20 尺 Speed 20 Feet"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Krethark": {
+      "name": "克瑞萨克 Krethark",
+      "hp": "虚空治疗",
+      "blurb": "雄性大地精食尸鬼弃徒",
+      "items": {
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 你与小型或更大的生物尸体相邻，且该生物的死亡时间为在过去1小时内</p>\n<hr />\n<p>你狼吞虎咽地啃下一大块尸体。你的饥渴在一小时内处于满足状态。</p>"
+        },
+        "Stench": {
+          "name": "<p>任何生物若进入此灵光范围或在灵光范围内开始其回合的话，则必须进行一次强韧豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1 Sickened 1}（大失败时额外再加上@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1 Slowed 1}）。豁免成功或从状态中恢复的生物会在一分钟内临时免疫尸臭。</p>",
+          "description": "<p>@Check[fortitude|dc:]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
+        },
+        "Grab": {
+          "name": "击中后你可以立即花费一个动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒抱}目标",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        },
+        "Frightful Snarl": {
+          "name": "惊惧咆哮 Frightful Snarl",
+          "description": "<p>克瑞萨克对其能看见的30尺内一个生物咆哮怒视，然后尝试 [[/act demoralize]] 该生物；如果生物不懂他的语言，他不承受减值。被惊惧咆哮致使惊惧的生物 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防} 直至其回合开始。</p>"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Grave Knowledge": {
+          "name": "坟墓知识 Grave Knowledge",
+          "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 食尸鬼调用其在过去7天吞食的某个生物所留存的知识，以受吞食生物受过训练的某项技能尝试一次检定（若不清楚该生物是否受训，由GM决定）。食尸鬼被视为受训，并使用其等级的高阶技能调整值（[[/r 1d20+12]]）。这与正常该检定花费相同的动作或时间。</p>\n<p>食尸鬼也可改为自动获知其过去7天吞食的某个生物所知的特定事项，例如某处隐藏宝藏或心爱之人的姓名。无论吞食了多少肉，食尸鬼对同一个生物只能这样做一次。</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>你的不死之身让你能够更快地跳跃，无论是向着敌人跳还是从敌人身边逃离。你@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}。这种移动不会触发反应动作。</p>\n<p>当你处于满足状态时，你能够选择结束满足状态，用@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}来取代跳跃并且不会触发反应动作，由于你的动作很快，所以可以在敌人对你的动作产生反应之前远远地跳开。</p>"
+        },
+        "Breastplate": {
+          "name": "胸甲 Breastplate",
+          "description": "<p>虽然被称为胸甲，但这类护甲其实是由几块保护躯干、胸部、颈部，有时还有臀部和小腿的板甲或@UUID[Compendium.pf2e.equipment-srd.Item.pRoikbRo5HFW6YUB]{半身甲 Half Plate}部件组成的。它既提供了一部分板甲的保护，同时兼顾了更大的灵活性和速度。</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        },
+        "Inheritor's Kiss": {
+          "name": "继承者之吻 Inheritor's Kiss"
+        },
+        "Inheritor's Kiss (eEpi)": {
+          "name": "继承者之吻 Inheritor's Kiss",
+          "description": "<p>这种宽刃剑——有时被称为手半剑——握柄稍长，可单手持握，亦可双手挥舞以提供额外的挥砍之力。</p>"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        },
+        "Ghoul Whispers": {
+          "name": "食尸鬼低语 Ghoul Whispers",
+          "description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{瘫痪}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+        },
+        "Claw": {
+          "name": "爪击"
+        },
+        "Reactive Strike": {
+          "name": "<p><strong>触发</strong> 位于怪物触及范围内的一个生物使用操作动作、移动动作、远程攻击，或是在一次移动动作中离开了该方格。</p>\n<hr />\n<p><strong>效果</strong> 怪物尝试对触发的生物发动一次近战打击。如果这次攻击是一次重击，并且是由操作动作触发，则怪物打断了该动作。这次打击不会计算多重攻击减值，并且多重攻击减值也不适用于这次打击。</p>",
+          "description": "<p><strong>触发</strong> 你触及范围内的一个生物使用操作或移动动作，进行远程攻击，或者使用移动动作时离开一个方格。</p>\n<hr />\n<p>你攻击露出破绽的敌人。对触发此动作的目标进行一次近战打击。如果该攻击为重击，并且触发此动作的是一个操作动作，则打断此动作。这次打击不计入你的多重攻击减值，你的多重攻击减值也不应用于此次打击。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Damarys": {
+      "name": "达玛丽斯 Damarys",
+      "blurb": "女妖换生灵",
+      "items": {
+        "Telekinetic Maneuver": {
+          "name": "念动战技 Telekinetic Maneuver",
+          "description": "<p>你通过一股猛烈的念动力移动一个敌人或者其携带的事物。你可以对目标尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}，使用法术攻击骰，而不是运动检定。</p>"
+        },
+        "Staff": {
+          "name": "双手使用杖",
+          "description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
+        },
+        "Dagger": {
+          "name": "匕首 Dagger"
+        },
+        "Detect Magic": {
+          "name": "侦测魔法",
+          "description": "<p>你会定期施放@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]。这要以旅行速度的一半或更慢的速度进行移动。在以最高300尺/分钟的速度旅行时，你不会意外忽略魔法灵光；但是只有在你的速度不超过150尺/分钟时，才能够在队伍移动到魔法灵光之内以前侦测到魔法灵光。</p>"
+        },
+        "Daze": {
+          "name": "晕眩术",
+          "description": "<p>你侵入目标的精神，利用精神冲击令目标晕眩。该冲击造成1d6心灵伤害，具有基础意志豁免。如果目标在豁免中大失败，它获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d6。</p>"
+        },
+        "Ill Omen": {
+          "name": "凶兆 Ill Omen",
+          "description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆}</p>"
+        },
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Fear": {
+          "name": "{item} vs 恐惧",
+          "description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
+        },
+        "Bane": {
+          "name": "破敌 Bane",
+          "description": "<p>破敌符文可以增加你对某种特定类型生物的理解，从对它们造成更多的伤害。符文的制造者可以选择以下生物类型：异怪、动物、魔兽、天族、构装体、龙、元素、精类、魔族、巨人、观察者、泥怪，或同时选择真菌和植物。该武器对所选的特定类型的生物造成1d6额外伤害。如果对应类型的生物伪装成其他类型的生物，则此效果不生效。如果其他生物伪装成对应类型的生物，则由GM裁定效果是否生效。</p>\n<p>GM可以允许破敌符文选择其他生物特征，例如星界、梦境或恶魔。但是，类人生物、不死以及某种具体的类人生物（例如精灵）则不能被允许。</p>"
+        },
+        "Occult Spontaneous Spells": {
+          "name": "自发秘能法术 Occult Spontaneous Spells"
+        },
+        "Force Barrage": {
+          "name": "力场飞弹 Force Barrage",
+          "description": "<p>你发射出一道固态的魔力碎片，射向一个你能看见的生物。它自动命中，并造成1d4+1力场伤害。你施放该法术时每额外使用一个动作，你射出的碎片增加一个，最大为3个动作发射三个碎片。你为每个碎片分别选择目标。如果你对同一个目标射击超过1个碎片，将伤害合计后再计算伤害加值，减值，抗力，弱点等。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你花费的每个动作额外射出一枚碎片。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Stupefy": {
+          "name": "愚者之思 Stupefy",
+          "description": "<p>你令目标精神迟钝，基于其意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1分钟。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}，持续1分钟。</p>"
+        },
+        "Staff (cZRI)": {
+          "name": "双手使用杖"
+        },
+        "Dagger (b8VS)": {
+          "name": "匕首 Dagger",
+          "description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
+        },
+        "Shield": {
+          "name": "护盾术",
+          "description": "<p>在物质宇宙中，盾即是防御的象征，能够抵挡多种效果，并与监护，警惕，引导这些职能紧密相关。你只能选择一面负载不大于1的盾牌作为你的盾奇具，这允许你在架盾时仍能管理你的秘藏。盾奇具关联于哈罗牌中的盾之牌组（The Harrow Suit of Shields）以及灯护座（The Lantern Bearer），桥梁座（The Bridge）以及族长座（The Patriarch）。</p><h3><strong>初始增益 Initiate Benefit</strong></h3><p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长。如果你的盾奇具将降至0生命值，它会改为降至1生命值，且你在举起盾牌时，它给予你的在AC上的环境加值-1（无法令该加值低于0），而且你无法使用你的盾奇具进行盾牌格挡，直到它失去破损状态。即使你的盾牌具有破损状态，你仍然可以将其当作奇具使用。</p>\n<p>5级时，当你使用@UUID[Compendium.pf2e.actionspf2e.Item.fodJ3zuwQsYnBbtk]，你也可以以一个自由动作举起盾牌。</p><h3><strong>行家增益 Adept Benefit</strong></h3><p>当你举起了盾奇具，你在针对法术和其他魔法效果的豁免上获得状态加值，其数值等同于你的AC从盾牌中获得的环境加值。另外，当你举起盾牌时，你因为法术或魔法效果而承受的伤害也可以触发你的盾牌格挡反应，即使该伤害并非物理伤害。</p><h3><strong>弱点加剧 Intensify Vulnerability</strong></h3><p>在你的盾牌上洒落的每一滴血都让盾牌变得更加牢固。如果你成功打击了你弱点发掘的目标，你的盾牌恢复等同于你等级一半的生命值。如果你的盾牌已经拥有满额的生命值，则盾牌的硬度会在你的下一回合开始之前获得提升，数值等同于你的魅力调整值。即使你多次打击命中，这些效果也不会叠加。</p><h3><strong>模范增益 Paragon Benefit</strong></h3><p>当你举起了你的盾奇具，从你的盾牌上获得的环境加值（无论是给予AC的还是给予针对法术和其他魔法效果的豁免的）都能应用在15尺内的所有盟友身上。你可以使用盾牌格挡反应保护你自己或15尺内的任何盟友。</p>"
+        },
+        "Blood Vendetta": {
+          "name": "溢血深仇 Blood Vendetta",
+          "description": "<p><strong>需求</strong> 你能流血。</p>\n<p><strong>触发</strong> 一个生物对你造成了穿刺，挥砍或者持续流血伤害</p>\n<hr />\n<p>你诅咒目标，惩罚其妄图杀害你的冲动。该目标承受2d6持续流血伤害，并且必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受一半流血伤害。</p>\n<p><strong>失败</strong> 目标承受完整流血伤害。直到流血停止，目标具有对穿刺和挥砍伤害的弱点1。 @UUID[Compendium.pf2e.spell-effects.Item.buXx8Azr4BYWPtFg]</p>\n<p><strong>大失败</strong> 如同失败，但目标承受双倍的持续流血伤害。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 持续伤害增加2d6。</p>"
+        },
+        "Claws": {
+          "name": "利爪 Claws"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Acid Spray Trap": {
+      "name": "酸液喷射陷阱 Acid Spray Trap",
+      "hp": "每个喷嘴",
+      "disable": "<p>@Check[thievery|dc:20]（受训）以解除两个喷射酸液喷嘴中的一个，或 @Check[crafting|dc:21]（受训）以为两个喷嘴中的一个搭建临时塞子</p>",
+      "hazarddescription": "<p>天花板上隐藏的喷嘴喷出从附近储池泵入的酸液，意在摧毁书桌及其上所有文件，以及任何试图取得这些文件之人。</p>",
+      "reset": "<p>陷阱在1分钟后停止。要重置，必须重新填充陷阱储罐中的酸液。</p>",
+      "routine": "<p>（1个动作）喷嘴从天花板向桌旁每个生物喷出酸液。每个受影响生物承受 @Damage[4d6[acid]|options:area-damage] 伤害（@Check[reflex|dc:20|basic|options:area-effect] 豁免）。每损坏一个喷嘴，该伤害减少2d6。</p>",
+      "stealthdetails": "<p>（受训）</p>",
+      "items": {
+        "Ooze Surprise": {
+          "name": "黏液突袭 Ooze Surprise",
+          "description": "<p><strong>触发</strong> 一个生物以错误顺序拨动桌底开关，或一个生物在未先解除陷阱的情况下尝试打开桌抽屉</p><hr /><p><strong>效果</strong> 天花板上一处舱口打开，将一只丝状粘液释放到桌上。丝状粘液在掷先攻前对触及距内一个生物进行一次伪足打击。陷阱随后掷先攻。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Spiked Walls": {
+      "name": "尖刺墙 Spiked Walls",
+      "disable": "<p>[[/act disable-device dc=15]]{窃术}（受训）以剪断绊线或卡住面板</p>",
+      "hazarddescription": "<p>一根低矮绊线连接到覆盖着木尖刺的格栅面板。</p>",
+      "items": {
+        "Spiked Wall": {
+          "name": "尖刺墙 Spiked Wall",
+          "description": "<p><strong>触发</strong> 一个生物触发绊线</p><hr /><p><strong>效果</strong> 缠绕木尖刺的格栅面板横扫通道关闭。触发生物承受 @Damage[3d6[piercing]] 伤害（@Check[reflex|dc:17|basic] 豁免）。该面板提供较小的 @UUID[Compendium.pf2e.other-effects.Item.I9lfZUiCwMiGogVi]{掩护} 并阻止沿通道移动。可像门一样用一次互动动作推开面板，但除非用重物楔住，否则它会再次摇摆关闭。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Automatic Butler": {
+      "name": "自动管家 Automatic Butler",
+      "publicNotes": "<p>自动管家是一种魔法建构，外形如木质人形人台，通常身着简单的黑色西服与领带。其圆形头部仅有最简略的面孔轮廓，但下颚以铰链开合，模拟其讲话时的口部动作。其声音常常平静又克制，措辞颇有礼。它服从其创造者所下的指令（或创造者授权下令的他人），通常包括取物、维持房间整洁或送客。如果不速之客起冲突，自动管家可以以击打或运用其内在魔法以致命之力投掷物体来自卫。一场战斗结束后，自动管家通常花上一个小时左右收拾残局。自动管家的设计与魂缚玩偶相似。如同其他魂缚建构，自动管家由一名已故凡人灵魂的碎片驱动。该碎片可来自自愿捐献者或不情愿的受害者——后者可通过对创造者制造DC的成功意志豁免抵抗这一过程。抵抗可破坏建构，但灵魂提取过程往往致命，无论如何那人都会死去。与其他魂缚建构不同，自动管家所用灵魂的人格被完全压制，自动管家以刻板仆人之姿行事。一些自动管家被赋予略不同的技能集——能掌握创造者母语之外的更多语言，使其成为可接待外宾的家族外交家；或被训练以应对需特殊技能的任务，如教导家中孩童或裁制家庭成员的衣物。侧栏列出更多构成全套家务建构仆人队伍的选项。</p><h2>自动厨师与园丁</h2><p>若制造自动管家的设计流入更广泛的世界，自然会有人创造出此魔法建构的变体。这类生物使用与自动管家相同的基础数值，仅做小幅改动。自动厨师可能拥有<em>洁净餐食</em>作为内在法术、刀片打击与喷射沸水的能力。自动园丁可能拥有<em>散布碎石</em>及其他具备土系或植物特征的法术作为内在法术，并以锄头或铁铲打击，远程以种子轰击敌人。</p>",
+      "languagesDetails": "其创造者所说的一种语言（通常为通用语）",
+      "items": {
+        "Mending": {
+          "name": "修复术 Mending",
+          "description": "<p>你修复目标物品。你回复目标每法术环级5点生命值，并且如果修复达到了物品的破损阈值，会移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken} 状态。你无法代替丢失的组成部分，或者修复已经完全损毁的物体。</p>\n<hr />\n<p><strong>升阶（2环级）</strong> 你能以1负载或者更低的非魔法物品为目标。</p>\n<p><strong>升阶（3环级）</strong> 你能以2负载或者更低的非魔法物品为目标，或者1负载或者更低的魔法物品为目标。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Fist": {
+          "name": "拳头"
+        },
+        "Soul Fragment": {
+          "name": "灵魂碎片 Soul Fragment",
+          "description": "<p>如同其他魂缚建构，自动管家由灵魂能量驱动，但捐献者灵魂的人格被压制，仅保留简单的举止——或客气助益、或冷峻务实。它也不持有原生物的记忆。该灵魂碎片解除了大多数建构对灵能伤害的免疫，但因自动管家的人格凌驾于原生物之上，其对灵能伤害仍有一定抗性。</p>"
+        },
+        "Occult Innate Spells": {
+          "name": "内在秘能法术 Occult Innate Spells"
+        },
+        "Telekinetic Hand": {
+          "name": "念动之手",
+          "description": "<p>你创造出一只漂浮着的魔法手掌，它可以隐形或者宛如幽灵，它能抓住目标物体并向着任意方向缓慢漂浮至多20尺。当你维持法术时，你能够将物体移动额外20尺。若物体位于空中之时法术结束，那么该物体便会坠落。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（5环级）</strong> 法术射程增加至60尺，而且你能以一个1负载或更轻的无主物体为目标。</p>\n<p><strong>升阶（7环级）</strong> 法术射程增加至60尺，而且你能以一个2负载或更轻的无主物体为目标。</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹",
+          "description": "<p>你向目标射出区域中一个未固定的，无主的，1负载1以下的物体。对目标尝试一次法术攻击骰。如果你命中，你造成2d6的钝击，穿刺，或者挥砍伤害（对应于你所扔出的物体）。射出物体的特殊特征或者魔法特性不会影响该攻击或者伤害。</p>\n<hr />\n<p><strong>大成功</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成完整伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d6。</p>"
+        },
+        "Alarm": {
+          "name": "警报术 Alarm",
+          "description": "<p>你保护一个区域，未经许可的生物进入该区域时会警示你。当你施放警报术时，设置一个密语。当小型或者更大的实体生物进入法术的区域，且没有说出密码时，警报术会根据你的选择，发送给你心灵警报（此时该法术获得心灵特征）并惊醒你，或者发出手铃一般音色与响度的声音警报（此时法术获得听觉特征）。无论哪种都会自动唤醒你，并且铃铛的声音令在区域内的所有生物都可以尝试@Check[perception|dc:15]检定以醒来。发现警报术的生物必须成功通过对抗法术DC的隐秘检定，否则会在移动进入区域时触发警报术。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以指定一个触发器，针对生物类型引发警报。</p>"
+        },
+        "Light": {
+          "name": "点燃",
+          "description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+        },
+        "Right This Way": {
+          "name": "这边请 Right This Way",
+          "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Sangrist": {
+      "name": "血裔者 Sangrist",
+      "publicNotes": "<p>血裔者诞生于完全失血而亡之人的躯体，常常是被遗弃在虚空能量浸染之地、未受妥善葬仪者，但虚空能量的强烈存在并非必要条件。一些受难者升起为血裔者乃是因为在偏远地区遭遇事故或袭击，从未被找到与妥善安葬——可能是清理猎物时刀子打滑，或被野猪撞死。</p>\n<p>这些悲惨生物作为不死生物升起后，会被过往血腥之地的腐臭与死气吸引。最常发现于战乱的拉斯特沃兰、闹鬼废墟乌斯塔拉夫、与受诅战场盖博，体现着对其失去之生的执着饥渴。</p>\n<p>血裔者依赖隐秘与伏击，夜晚更为活跃。在不活动的时段，它们陷入怪异昏滞中。这种状态下，它们前后摇晃并频繁抽搐，有时发出令人毛骨悚然的低哼。</p>\n<p>有些血裔者是孤独猎手，常常对单一目标跟踪数小时甚至数日。其他则成群结队，特别是若它们生前结过羁绊。这些群体表现出令人心寒、协调精明，似猎食的狼。血裔者是耐心的猎手，有时跟踪受害者数英里或观察数小时再行动。它们以弱者与孤立者为目标，挑选易于伤害以使其在逃脱时也因失血而死的对象。仅保留前世的影子的血裔者很少说出超过单字的句子，通常用以表达对生者的恨意、永不休止的饥饿，或受害者所在之处。</p>\n<p>虽然血裔者无法饮血也无法从中获取营养，但有时会将血液聚积于双手并洒于面颊与身躯。也可能躺在被屠之敌身旁。这种阴森仪式似乎是对所失之生的绝望联系尝试。这种对血液、夜间活动以及对前生的渴求，让某些血裔者与吸血鬼为伍。吸血鬼通常不觉血裔者讨厌，并发现这些不死生物易于操纵以做守护者与侍从。</p><h2>对血液的渴望</h2><p>这些罕见生物常被对不死形态了解不深的士兵与冒险者误认作野化吸血鬼或痴血僵尸。熟悉血裔者并欲猎杀者通常以血液（常为猪血）为诱饵。</p>",
+      "hp": "虚空治疗",
+      "perceptionDetails": "嗅血 30尺",
+      "items": {
+        "Blood Vigor": {
+          "name": "血之活力 Blood Vigor",
+          "description": "<p>当与一个承受持续流血伤害的生物相邻时，血裔者获得快速治疗3并 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速} 直至其下回合开始。血裔者只能用其额外动作进行单步或快步行动。</p>"
+        },
+        "Bloodletter": {
+          "name": "放血者 Bloodletter",
+          "description": "<p>血裔者凭直觉以其攻击加剧活物身上的伤口。血裔者的爪击对承受持续流血伤害的活物额外造成1点精准伤害。</p>"
+        },
+        "Claw": {
+          "name": "爪击"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Blood Scent": {
+          "name": "嗅血 Blood Scent",
+          "description": "<p>血裔者可在所列范围内将承受持续流血伤害的生物作为不精确感官探察。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Gauntling": {
+      "name": "嶙峋兽 Gauntling",
+      "publicNotes": "<p>在如墓葬地这样的地方，不死渗透了大地土壤本身。这种邪秽污染可在数代时间内对当地动植物产生显著影响，使植物变得扭曲病态，并污染野生动物使其残骸自动升起为无心智的不死生物。</p>\n<p>但在某些情况下，特别是那些主要以食腐为生的兽类，吞食不死之肉可在数月内产生截然不同的效果。动物受影响的速度取决于它食用的是不死生物被毁灭后留下的残骸，还是出于绝望饥饿\"新鲜\"地从不死生物身上吞食。假设这不幸生物挺过其鬼魅大餐引发的疾病或其他恶疾，这些食腐者有时会经历一次转变，化为扭曲、贪婪的兽类——名为嶙峋兽。</p>\n<p>多数嶙峋兽源于食腐者、肉食者或杂食者，但在某些情况下，绝望的食草动物也可能转化——这些生物或许是嶙峋兽中最令人不安的类型，因为其行为发生重大改变，转向新鲜肉食。一旦动物变成嶙峋兽，这些生物便弃其原本的野外栖息地，倾向于更靠近人类聚居区，常选下水道或其他地下场所作为巢穴，从中出来狩猎。无论原本饮食偏好如何，所有嶙峋兽都共有一种恐怖的渴望——智慧人形生物的肉。嶙峋兽外形仍与转化前相似，但拥有大而尖锐的獠牙，且身躯瘦削得令人痛苦——无论吃多少都是如此。</p>\n<p>本嶙峋兽（如同《格雷斯之患》中遇到的所有同类）原是野猪，但你可使用此数据代表任何屈服于此邪秽转化的陆栖中型动物。无论原始形态如何，所有嶙峋兽都共有一嘴尖锐扭曲的獠牙。</p><h2>其他嶙峋兽</h2><p>本处呈现的嶙峋兽来自一只中型陆栖动物（具体来说是野猪），但其他动物也可通过吞食不死之肉以这种方式转化。要表现来自游泳或飞行的中型动物，仅需赋予其等同于基础速度的游泳或飞行速度。要表现更小或更大的生物，以本处呈现的数据为起点，然后使用《GMC》第112页起的建造生物指南重建数据。</p>",
+      "hp": "虚空治疗",
+      "items": {
+        "Soul Ravage": {
+          "name": "灵魂蹂躏 Soul Ravage",
+          "description": "<p>嶙峋兽的獠牙携带强力的诅咒，急切渗入活肉。每轮第一次因嶙峋兽颚部打击受到伤害时，目标必须尝试一次 @Check[fortitude|dc:18|options:inflicts:sickened] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}，且1分钟内无法将恶心值降至1以下。</p>\n<p><strong>大失败</strong> 同失败，但持续1小时。在该诅咒效果下死亡的生物在24小时内升起为僵尸。</p>"
+        },
+        "Rend": {
+          "name": "<p>撕裂条目中会列出一项怪物所拥有的打击。</p>\n<p><strong>要求</strong>怪物在同一轮中连续两次使用在条目中列的打击类型命中同一名生物。</p>\n<hr />\n<p><strong>效果</strong> 怪物自动对此敌人造成打击伤害。</p>",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
+        },
+        "Frightful Presence": {
+          "name": "<p>首次进入灵光的生物必须进行一次意志豁免。</p>\n<p>无论结果如何，该生物都将在1分钟内免疫此怪物的气势凶猛。</p>\n<hr />\n<p><strong>大成功</strong>该生物不受气势凶猛的影响。</p>\n<p><strong>成功</strong>该生物受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 该生物受到 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong>该生物受到 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 4}.</p>",
+          "description": "<p>0尺，@Check[will|dc:|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Hot Oven": {
+      "name": "炽热烤炉 Hot Oven",
+      "disable": "<p>1次互动动作并 @Check[athletics|dc:18] 检定以在烤炉门被打开后将其关闭。</p>",
+      "hazarddescription": "<p>这只热气腾腾的烤炉需要特别大才能跟得上烘焙坊的需求——大到足以让中型生物爬入。或被推入。</p>",
+      "reset": "<p>烤炉门可如上所述在整场战斗中自由开关。如不加干预，烤炉燃尽燃料并在点燃后约1小时熄灭。</p>",
+      "items": {
+        "Hot to the Touch": {
+          "name": "触之灼热 Hot to the Touch",
+          "description": "<p><strong>触发</strong> 一个生物在没有烤炉手套防护的情况下试图打开关闭的烤炉门</p><hr /><p><strong>效果</strong> 触发生物承受 @Damage[(1d10+3)[fire]] 伤害（@Check[reflex|dc:22|basic] 豁免）。</p>"
+        },
+        "In You Go!": {
+          "name": "进去吧! In You Go!",
+          "description": "<p><strong>触发</strong> 一个生物移动或被强行移入开启的烤炉</p><hr /><p><strong>效果</strong> 触发生物承受 @Damage[3d10[fire]] 伤害（@Check[fortitude|dc:25|basic] 豁免）和 @Damage[2d6[persistent,fire]] 伤害。该伤害在生物回合开始时重复，只要它仍在烤炉内。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Zini": {
+      "name": "兹尼 Zini",
+      "blurb": "变体哥布林突击兵",
+      "items": {
+        "Dogslicer": {
+          "name": "屠狗刀 Dogslicer",
+          "description": "<p>这种短小的、弯曲的、粗糙的临时刀片通常钻有孔洞以减轻重量。它是地精最喜欢的武器。</p>"
+        },
+        "Sling": {
+          "name": "若目标豁免失败，其移动速度1轮内获得-10尺的减值。",
+          "description": "<p>仅仅是一块皮革附着在一根带子上，投石索可以在远程用来投掷光滑的石头或者投石索弹丸。</p>"
+        },
+        "Sling Bullets": {
+          "name": "投石索弹丸 Sling Bullets",
+          "description": "<p>这些小金属球，通常是铁球或铅球，设计作为投石索的弹药。</p>"
+        },
+        "Dogslicer (Yc94)": {
+          "name": "屠狗刀 Dogslicer"
+        },
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Goblin Scuttle": {
+          "name": "地精快步 Goblin Scuttle",
+          "description": "<p><strong>触发</strong> 盟友在邻接你的格子结束一个移动行动。</p>\n<hr />\n<p>你利用盟友的移动来调整自己的位置。你使用快步。</p>"
+        },
+        "Sling (iNws)": {
+          "name": "若目标豁免失败，其移动速度1轮内获得-10尺的减值。"
+        },
+        "Pent-Up Taunt": {
+          "name": "蓄势嘲讽 Pent-Up Taunt",
+          "description": "<p>兹尼对她能观察到的30尺内的艾扎或格里泽进行嘲讽。她以+2环境加值对该生物的意志DC尝试一次 @Check[deception|against:will] 检定。兹尼在花至少10分钟思索值得的第二轮侮辱前，无法对该生物再次使用此能力。</p><hr /><p><strong>大成功</strong> 同成功，但目标还承受 @Damage[(1d4+2)[mental]] 伤害。</p>\n<p><strong>成功</strong> 目标对兹尼下回合开始前盟友尝试的下一次攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防}。</p>\n<p><strong>失败</strong> 目标不受影响。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Crumbrunk": {
+      "name": "克隆布伦克 Crumbrunk",
+      "blurb": "变体金喀斯",
+      "items": {
+        "Primal Innate Spells": {
+          "name": "原能内在法术 Primal Innate Spells"
+        },
+        "Blowgun": {
+          "name": "吹箭 Blowgun"
+        },
+        "Giant Viper Venom": {
+          "name": "巨蝰蛇毒液 Giant Viper Venom",
+          "description": "<p><strong>豁免</strong> @Check[fortitude|dc:17|options:damaging-effect,inflicts:drained]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>第一阶段</strong> @Damage[1d6[poison]] 伤害（1轮）</p>\n<p><strong>第二阶段</strong> @Damage[1d6[poison]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流血 1}（1轮）</p>"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2英尺长。</p>"
+        },
+        "Dart (Coated with Giant Viper Venom)": {
+          "name": "基础持续流血伤害提升为@Damage[2d6[persistent,bleed]]。",
+          "description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
+        },
+        "Tinker": {
+          "name": "修补匠 Tinker",
+          "description": "<p>你制造五花八门的小发明来解决问题。你的工程技术别出心裁，没人知道你下一次会冒出来什么样的点子。它可能会是个具有巨大潜力的天才装置……也有可能爆炸。</p>\n<p>选择两项属性提升。一项必须是<strong>敏捷</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺技能和工程（Engineering）学识技能上受训。你获得技能专长：@UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{独门手艺 Specialty Crafting}。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭",
+          "description": "<p>该生物的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外1d6精准伤害。</p>"
+        },
+        "Shortsword (wNhb)": {
+          "name": "短剑 Shortsword"
+        },
+        "Dart": {
+          "name": "基础持续流血伤害提升为@Damage[2d6[persistent,bleed]]。",
+          "description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
+        },
+        "Blowgun (IWA2)": {
+          "name": "吹箭 Blowgun",
+          "description": "<p>这条又长又窄的管子用来射击吹箭镖，仅仅需要强力呼气的力量。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Alendreu": {
+      "name": "阿伦德鲁 Alendreu",
+      "hp": "虚空治疗",
+      "blurb": "雄性奥克食尸鬼首领",
+      "items": {
+        "Claw": {
+          "name": "爪击"
+        },
+        "Orc Necksplitter": {
+          "name": "兽人斩首斧 Orc Necksplitter",
+          "description": "<p>这把单刃的胡须状斧子有着锯齿状的刃，非常适合将骨头与肌腱和软骨分开。</p>"
+        },
+        "Chopping Frenzy": {
+          "name": "劈砍狂乱 Chopping Frenzy",
+          "description": "<p><strong>条件</strong> 阿伦德鲁双手各持一把奥克斩颈斧</p><hr /><p><strong>效果</strong> 阿伦德鲁双斧齐挥。他尝试两次打击，每柄斩颈斧一次，每次使用其当前的多重攻击减值。两次打击必须以同一目标为对象，且第二次打击承受-2减值。</p>\n<p>如果两次都命中，将其伤害合并并仅应用一次抗性与弱点，且该目标因这猛烈一击而 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{失防} 至其下回合开始。这在计算阿伦德鲁多重攻击减值时计为两次攻击。</p>"
+        },
+        "Grave Knowledge": {
+          "name": "坟墓知识 Grave Knowledge",
+          "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 食尸鬼调用其在过去7天吞食的某个生物所留存的知识，以受吞食生物受过训练的某项技能尝试一次检定（若不清楚该生物是否受训，由GM决定）。食尸鬼被视为受训，并使用其等级的高阶技能调整值（[[/r 1d20+12]]）。这与正常该检定花费相同的动作或时间。</p>\n<p>食尸鬼也可改为自动获知其过去7天吞食的某个生物所知的特定事项，例如某处隐藏宝藏或心爱之人的姓名。无论吞食了多少肉，食尸鬼对同一个生物只能这样做一次。</p>"
+        },
+        "Stench": {
+          "name": "<p>任何生物若进入此灵光范围或在灵光范围内开始其回合的话，则必须进行一次强韧豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1 Sickened 1}（大失败时额外再加上@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1 Slowed 1}）。豁免成功或从状态中恢复的生物会在一分钟内临时免疫尸臭。</p>",
+          "description": "<p>@Check[fortitude|dc:]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
+        },
+        "Jaws": {
+          "name": "噬咬"
+        },
+        "Reactive Strike": {
+          "name": "<p><strong>触发</strong> 位于怪物触及范围内的一个生物使用操作动作、移动动作、远程攻击，或是在一次移动动作中离开了该方格。</p>\n<hr />\n<p><strong>效果</strong> 怪物尝试对触发的生物发动一次近战打击。如果这次攻击是一次重击，并且是由操作动作触发，则怪物打断了该动作。这次打击不会计算多重攻击减值，并且多重攻击减值也不适用于这次打击。</p>",
+          "description": "<p><strong>触发</strong> 你触及范围内的一个生物使用操作或移动动作，进行远程攻击，或者使用移动动作时离开一个方格。</p>\n<hr />\n<p>你攻击露出破绽的敌人。对触发此动作的目标进行一次近战打击。如果该攻击为重击，并且触发此动作的是一个操作动作，则打断此动作。这次打击不计入你的多重攻击减值，你的多重攻击减值也不应用于此次打击。</p>"
+        },
+        "Ghoul Whispers": {
+          "name": "食尸鬼低语 Ghoul Whispers",
+          "description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{瘫痪}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 你与小型或更大的生物尸体相邻，且该生物的死亡时间为在过去1小时内</p>\n<hr />\n<p>你狼吞虎咽地啃下一大块尸体。你的饥渴在一小时内处于满足状态。</p>"
+        },
+        "Void Healing": {
+          "name": "虚能治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Grab": {
+          "name": "击中后你可以立即花费一个动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒抱}目标",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        },
+        "Javelin": {
+          "name": "标枪 Javelin",
+          "description": "<p>这种细矛在投掷中能保持平衡，但并非设计用于近战。</p>"
+        },
+        "Doubling Rings": {
+          "name": "双持对戒 Doubling Rings",
+          "description": "<p>这件物品包含了两只通过魔法相连的戒指：一只精细锃亮的金戒指，上面镶嵌着一颗切割成方形的红宝石，以及一只厚重朴素的铁戒指。当你用戴着金戒指的手持用着一件近战武器，这件武器的基础符文会被复制到你戴着铁戒指的那只手所持用的任何近战武器上。（基础符文包括<em>武器潜能符文</em> 和 <em>强击符文</em>，分别能够在攻击骰上提供物品加值以及增加额外的武器伤害骰。）带着铁戒指的手所持握的武器上面原本的所有基础符文都会被压制。</p>\n<p>复制的效果只会在你同时戴着两只戒指的时候发生，并在你停止持用一只手上的近战武器时消失。因此，复制的增益无法用于投掷攻击，也无法作用于你持握但未持用的武器上（例如用单手持握一件需要双手持用的武器）。</p>"
+        },
+        "Orc Necksplitter (BrQF)": {
+          "name": "兽人斩首斧 Orc Necksplitter"
+        },
+        "Breastplate": {
+          "name": "胸甲 Breastplate",
+          "description": "<p>虽然被称为胸甲，但这类护甲其实是由几块保护躯干、胸部、颈部，有时还有臀部和小腿的板甲或@UUID[Compendium.pf2e.equipment-srd.Item.pRoikbRo5HFW6YUB]{半身甲 Half Plate}部件组成的。它既提供了一部分板甲的保护，同时兼顾了更大的灵活性和速度。</p>"
+        },
+        "Orc Necksplitter (yjjV)": {
+          "name": "兽人斩首斧 Orc Necksplitter",
+          "description": "<p>这把单刃的胡须状斧子有着锯齿状的刃，非常适合将骨头与肌腱和软骨分开。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Zurkurk": {
+      "name": "楚库尔克 Zurkurk",
+      "publicNotes": "<p>狗头人洞穴法师天生而非后天养成，从吸收了大量原能土系能量的卵中孵化。虽然有许多元素生物乃至自然地形可孕育出洞穴法师，但多数与栖身洞穴的土系沼泽女妖（即拉姆帕德）相关。这些孤独又任性的妖精精灵欢迎狗头人部落的陪伴，狗头人也乐于得到对方的庇护。</p>\n<hr />\n<p>狗头人是娇小的爬虫人形生物。它们藏身于黑暗之地，常在地表之下的隧道与矿坑中——或为自行设计的洞穴群，或为被原建造者遗弃后开拓的复合洞窟。狗头人远比勇敢更为务实，但善用其每一寸狡黠以拉平与其他更强生物之间的实力差距。它们从黑暗中、从远距离发动攻击，狗头人工匠与工程师精通简单却有效的陷阱以保卫巢穴。狗头人因生存所需而善于团队协作，常布置伏击或打了就跑的突袭，以最大伤害地击溃敌人而自身不受损。</p>\n<p>狗头人是勤勉努力的生物。一些狗头人生活在与周围生物保持中立关系的共同体中，但也可被轻易劝诱去服侍邪恶之力或夸大狂的领袖。这部分由于狗头人天生的实用主义——它们宁可服从奴役也不愿冒身死之险，但也部分由于对其通常缺乏的力量的崇拜。值得注意的是，留在魔法生物或场所附近的狗头人卵会从此暴露中吸收类似特征。由此产生的体征变化标志了每个部落的外观，但少数幸运的狗头人也天生具备反映其部落守护者的魔法力量。</p>",
+      "blurb": "雄性变体狗头人洞穴法师",
+      "items": {
+        "Invisibility": {
+          "name": "隐形 Invisibility",
+          "description": "<p>光线仿佛有部分穿过了这件护甲。</p>\n<p><strong>启动-隐去身形</strong> <span class=\"action-glyph\">1</span> （专注）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 在一念之间，你变为隐身，持续1分钟，获得相当于2环级@UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{隐形术 Invisibility} 法术的效果。</p>\n<p><strong>制作需求</strong> 提供一次<em>隐形术</em>施法</p>"
+        },
+        "Staff": {
+          "name": "双手使用杖",
+          "description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
+        },
+        "Daze": {
+          "name": "晕眩术",
+          "description": "<p>你侵入目标的精神，利用精神冲击令目标晕眩。该冲击造成1d6心灵伤害，具有基础意志豁免。如果目标在豁免中大失败，它获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d6。</p>"
+        },
+        "Inspiring Display": {
+          "name": "炫咒鼓劲 Inspiring Display",
+          "description": "<p><strong>条件</strong> 楚库尔克前一动作为施展法术</p><hr /><p><strong>效果</strong> 楚库尔克以其魔法之姿激励30尺内另一狗头人。该狗头人获得4点临时生命值，持续至楚库尔克下回合开始。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.smk2cD6M3dsEPBCY]{效果：鼓舞之姿}</p>"
+        },
+        "Stupefy": {
+          "name": "愚者之思 Stupefy",
+          "description": "<p>你令目标精神迟钝，基于其意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1分钟。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}，持续1分钟。</p>"
+        },
+        "Staff (AfbH)": {
+          "name": "双手使用杖"
+        },
+        "Occult Spontaneous Spells": {
+          "name": "自发秘能法术 Occult Spontaneous Spells"
+        },
+        "Fear": {
+          "name": "{item} vs 恐惧",
+          "description": "<p>你将恐惧植入目标；它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}.</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}.</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮.</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你能以至多五个生物为目标。</p>"
+        },
+        "Grim Tendrils": {
+          "name": "邪影触须 Grim Tendrils",
+          "description": "<p>由黑暗组成的触须从你的指尖喷涌而出。你对在射线上的活物造成2d4虚能伤害和@Damage[(@item.level)[bleed]]伤害。每个射线上的活物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半虚能伤害，并且不受持续流血伤害。</p>\n<p><strong>失败</strong> 该生物承受完整伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍虚能伤害和双倍持续流血伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该虚能伤害增加2d4，持续流血伤害增加1。</p>"
+        },
+        "Protection": {
+          "name": "防护术 Protection",
+          "description": "<p>你保护一个生物免受伤害。目标在AC和豁免骰上获得+1状态加值。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以选择让该好处也会影响目标@Template[emanation|distance:10]范围内的所有的你的盟友。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RawLEPwyT5CtCZ4D]{法术效果：防护术}</p>"
+        },
+        "Darkness": {
+          "name": "在黑暗中",
+          "description": "<p>你创造一片黑暗的帷幕，光线无法穿透，并且光源无法在区域中发光。光线无法进入该区域，并且任何非魔法光源，例如火炬或者提灯，在区域中不会发出任何光线，即使其光照可能到达黑暗术之外也是如此。这也会压制等于或低于你的黑暗术环级的魔法光亮。光线无法穿透，所以在区域中的生物无法看到外面。对于外面，这看起来如同一团纯粹黑暗的球。</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 即使具有黑暗视觉的生物（但不包括高等黑暗视觉）也几乎无法看穿这黑暗。它们透过黑暗看到的生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+        },
+        "Enfeeble": {
+          "name": "衰弱术 Enfeeble",
+          "description": "<p>你抽走目标的力量，基于其强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，直到你的下个回合开始。</p>\n<p><strong>失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，持续1分钟。</p>\n<p><strong>大失败</strong> 目标获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}，持续1分钟</p>"
+        },
+        "Figment": {
+          "name": "当你增幅法术时，你可以在其正常效果的基础上创建一个特别分散注意力的幻术。选择法术范围内的一个未被占据的方格。该方格中的幻术为在你下一个回合开始前的单次近战攻击提供夹击。如果你维持法术，幻术的细节变化和转移，让你的敌人不安；夹击幻术的持续时间延长到你下一个回合开始，并且你可以将其移动到法术范围内的任何未被占据的方格。已经识破幻术的生物，夹击幻术不能提供其效果。",
+          "description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术}</p>"
+        },
+        "Scamper": {
+          "name": "惊惶逃窜 Scamper",
+          "description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+        },
+        "Shield": {
+          "name": "护盾术",
+          "description": "<p>在物质宇宙中，盾即是防御的象征，能够抵挡多种效果，并与监护，警惕，引导这些职能紧密相关。你只能选择一面负载不大于1的盾牌作为你的盾奇具，这允许你在架盾时仍能管理你的秘藏。盾奇具关联于哈罗牌中的盾之牌组（The Harrow Suit of Shields）以及灯护座（The Lantern Bearer），桥梁座（The Bridge）以及族长座（The Patriarch）。</p><h3><strong>初始增益 Initiate Benefit</strong></h3><p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长。如果你的盾奇具将降至0生命值，它会改为降至1生命值，且你在举起盾牌时，它给予你的在AC上的环境加值-1（无法令该加值低于0），而且你无法使用你的盾奇具进行盾牌格挡，直到它失去破损状态。即使你的盾牌具有破损状态，你仍然可以将其当作奇具使用。</p>\n<p>5级时，当你使用@UUID[Compendium.pf2e.actionspf2e.Item.fodJ3zuwQsYnBbtk]，你也可以以一个自由动作举起盾牌。</p><h3><strong>行家增益 Adept Benefit</strong></h3><p>当你举起了盾奇具，你在针对法术和其他魔法效果的豁免上获得状态加值，其数值等同于你的AC从盾牌中获得的环境加值。另外，当你举起盾牌时，你因为法术或魔法效果而承受的伤害也可以触发你的盾牌格挡反应，即使该伤害并非物理伤害。</p><h3><strong>弱点加剧 Intensify Vulnerability</strong></h3><p>在你的盾牌上洒落的每一滴血都让盾牌变得更加牢固。如果你成功打击了你弱点发掘的目标，你的盾牌恢复等同于你等级一半的生命值。如果你的盾牌已经拥有满额的生命值，则盾牌的硬度会在你的下一回合开始之前获得提升，数值等同于你的魅力调整值。即使你多次打击命中，这些效果也不会叠加。</p><h3><strong>模范增益 Paragon Benefit</strong></h3><p>当你举起了你的盾奇具，从你的盾牌上获得的环境加值（无论是给予AC的还是给予针对法术和其他魔法效果的豁免的）都能应用在15尺内的所有盟友身上。你可以使用盾牌格挡反应保护你自己或15尺内的任何盟友。</p>"
+        },
+        "Void Warp": {
+          "name": "虚能噬 Void Warp",
+          "description": "<p>你唤来虚能伤害生命力量。该目标承受2d4虚能伤害，这有一次基础强韧豁免. 如果该生物在豁免中大失败，他也会@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}直到你得下个回合开始。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d4。</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法帮你完成杂物。只要你维持该法术，你就可以产生简单的魔法效果。每当你维持该法术时，你可以选择四个选项中的一个。</p><ul><li><strong>烹饪</strong> 为1磅非活物材料冷却，加热，或者调味。</li><li><strong>抬起</strong> 将一件轻负载或者更低的无主物品缓慢抬离地面。</li><li><strong>创造</strong> 创造一个负载可忽略的临时物体，它由凝结的魔法物质组成。该物体看起来粗糙且非常脆弱——它无法被用做工具，武器，法器或法术开销。</li><li><strong>整理</strong> 为一件轻负载或者更低的物体染色，清洁，或者弄脏它。你可以通过10轮专注来影响一件1负载的物体，对于更大的物体为每负载1分钟。</li></ul><p><em>魔法伎俩</em>无法造成伤害或者负面效果。对一件物体的任何改变（在上述内容之外的）只会在你仍维持该法术时持续。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    },
+    "Rope Pull": {
+      "name": "拉绳 Rope Pull",
+      "disable": "<p>@Check[thievery|dc:20]（受训）以将绳索系在更稳固的支架上</p>",
+      "hazarddescription": "<p>这个陷阱看起来像一处明显的10尺深陷坑，坑壁倾斜以阻止轻易逃脱，但真正的危险并非地洞，而是天花板上的一组松动石块。一根打结的绳索从上方横梁悬挂下来，似乎提供荡过陷坑的选择，但绳上的任何重量都会拉下大量重叠的高悬巨石。</p>",
+      "items": {
+        "Boulders from Above": {
+          "name": "巨石从天 Boulders from Above",
+          "description": "<p><strong>触发</strong> 一个小型或更大生物，或等同重量物，拉动绳索</p><hr /><p><strong>效果</strong> 陷坑内或与陷坑相邻的所有生物承受 @Damage[(4d6+10)[bludgeoning]] 伤害（@Check[reflex|dc:23|basic] 豁免），来自从上方坠下的岩石。</p>"
+        }
+      },
+      "data": {
+        "placeHolder": "placeHolder"
+      }
+    }
+  }
+}
