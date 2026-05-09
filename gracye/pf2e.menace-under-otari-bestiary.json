@@ -86,7 +86,7 @@
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Message": {
 					"name": "传讯术",
@@ -274,7 +274,7 @@
 				},
 				"Shadow Veil": {
 					"name": "隐匿之纱 Veil",
-					"description": "<p>你将目标伪装为另一个身形相似身高相仿体重相近的生物。该伪装能够隐藏目标的身份，或者令其如同其他族裔，但这不足以令其扮作另一个特定个人。该法术不会改变声音，气味，或者仪态。你为每个目标分别选择伪装；例如，你可以令一个目标看起来是矮人，另一个看起来是精灵。施放隐匿之纱视为乔装动作的设立伪装。这令目标忽视任何可能会从扮作不熟悉生物中获得的减值，并且会赋予其在避免他人看破你的伪装的欺骗检定上+4状态加值，并且即使你未受训你也加上其等级。你可以解消任一或者所有这些伪装。</p>\n<hr />\n<p><strong>升阶 （5环级）</strong> 该法术也会伪装目标的声音和气味；并获得听觉特征。</p>\n<p><strong>升阶 （7环级）</strong> 该目标外观上可以是任何相同体型的生物，甚至是特定个人。你必须曾见过特定个人，才能重现其外观。该法术也会伪装目标的声音和气味；并获得听觉特征。</p>"
+					"description": "<p>如果该暗影祭司成为一次近战攻击的目标,他可使用反应动作在对抗触发该攻击时对 AC 获得 +2 环境加值。</p>"
 				},
 				"Shadow Hand": {
 					"name": "暗影之手 Shadow Hand"
@@ -345,7 +345,7 @@
 				},
 				"Swipe": {
 					"name": "横扫 Swipe",
-					"description": "<p>你挥出一记大开大合的弧线。进行一次近战打击，用此次攻击掷骰的结果对抗至多两名在你触及范围内且彼此相邻的敌人的AC。掷一次伤害骰，应用于每个命中的敌人身上。在计算多重攻击减值时，一次横扫算作两次攻击。</p>\n<p>如果你使用的武器具有横扫特征，其调整值会应用到你所有的横扫攻击上。</p>"
+					"description": "<p>该地蜥人首领以其大斧对两名邻接的敌人进行两次打击,两名敌人都必须在其触及范围内,获得 +1 环境加值。第二次攻击使用与第一次相同的多重攻击减值,但该地蜥人首领此后进行的攻击承受 -10 多重攻击减值(对其爪击为 -8 多重攻击减值)。</p>"
 				},
 				"Javelin (cwyE)": {
 					"name": "标枪 Javelin"
@@ -396,7 +396,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -423,14 +423,14 @@
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				}
 			},
 			"prototypeToken": {
@@ -476,7 +476,7 @@
 				},
 				"Darkening Poison": {
 					"name": "渐暗毒 Darkening Poison",
-					"description": "<p>该匿行者下次以匕首打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{蔽身 Concealed}状态,持续1轮。</p>"
+					"description": "<p>该匿行者下次以匕首打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态,持续1轮。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭",
@@ -605,7 +605,7 @@
 			"items": {
 				"See the Unseen (At Will)": {
 					"name": "识破无形 See the Unseen",
-					"description": "<p>你的注视刺穿幻象,并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物,仿佛它们并非隐形,虽然其轮廓模糊不清,使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{蔽身 Concealed}状态且难以辨识。你也能看见非实体生物,如鬼魂,在物体表面10尺范围内穿过物体时,呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果:洞悉无形 Spell Effect: See the Unseen}</p>"
+					"description": "<p>你的注视刺穿幻象,并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物,仿佛它们并非隐形,虽然其轮廓模糊不清,使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态且难以辨识。你也能看见非实体生物,如鬼魂,在物体表面10尺范围内穿过物体时,呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果:洞悉无形 Spell Effect: See the Unseen}</p>"
 				},
 				"Occult Innate Spells": {
 					"name": "内在秘能法术 Occult Innate Spells"
@@ -624,11 +624,11 @@
 				},
 				"Darkening Poison": {
 					"name": "渐暗毒 Darkening Poison",
-					"description": "<p>该猎手下次以短剑打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{蔽身 Concealed}状态,持续1轮。</p>"
+					"description": "<p>该猎手下次以短剑打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态,持续1轮。</p>"
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
@@ -762,7 +762,7 @@
 				},
 				"Twin Feint": {
 					"name": "双重虚招 Twin Feint",
-					"description": "<p><strong>需求</strong> 你双手各持用一件近战武器。</p>\n<hr />\n<p>你利用第一次攻击干扰你的敌人，令他无法防御来自不同角度的第二次攻击。使用你的两把近战武器中的每一把，对同一个目标各进行一次打击。目标对抗第二次攻击时自动@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。正常应用每次打击的多重攻击减值。</p>"
+					"description": "<p>该熊地精施虐者使用两件武器进行一系列眼花缭乱的攻击,以第一次攻击使其敌人@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}以应对从不同角度而来的第二次攻击。该熊地精施虐者用两件近战武器各进行一次打击,两次都对同一目标。目标对第二次攻击自动处于措手不及状态。该熊地精施虐者将其多重攻击减值正常应用于这些打击。</p>"
 				},
 				"Chain Shirt": {
 					"name": "链甲衫 Chain Shirt",
@@ -807,7 +807,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -924,7 +924,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -950,7 +950,7 @@
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹",
@@ -958,7 +958,7 @@
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				}
 			},
 			"prototypeToken": {
@@ -1054,7 +1054,7 @@
 				},
 				"Raise a Shield": {
 					"name": "举起盾牌 Raise a Shield",
-					"description": "<p><strong>需求</strong> 你正持握盾牌。</p>\n<hr />\n<p>你举起盾牌保护自己。当你举起盾牌时，你将盾牌所列的环境加值添加到自己的AC上。你的盾牌会一直保持举起直到你的下一回合开始。</p>"
+					"description": "<p>该暗影侏儒战士举起盾牌,在下回合开始前对 AC 获得 +2 环境加值。</p>"
 				},
 				"Heavy Crossbow (GBCY)": {
 					"name": "重弩 Heavy Crossbow"
@@ -1077,7 +1077,7 @@
 				},
 				"Message": {
 					"name": "传讯术",
-					"description": "<p>你无声地念出言语，这段言语会直接送到目标耳中，而不是从你的嘴中念出。其他人听起来顶多是你与它们正常说话，但法术目标会如同正站在你身边一般听到你的言语。目标可以通过一个反应动作做出一段简要回应，或者根据其意愿，也可以通过其下个回合的自由动作来回应，但它如此做时必须能看见你，并且在射程内。如果它做出回应，它的回应会直接送达你的耳中，如同最初的信息一般。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 法术的射程增加到500尺。</p>"
+					"description": "<p>你轻声咬合发音,但话语并非从你口中传出,而是直接传到目标的耳中。其他人无法比你正常咬合发音时更清楚地听到你的话语,但目标可以听到你的话语,仿佛它就站在你身边。</p>\n<p>目标可以以反应动作做出简短回应,或在其下回合作为自由动作回应,但目标必须能看到你且在射程内。如果它回应,其回应也以同样的方式直接送达你的耳中。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 该法术的射程提升至 500 尺。</p>"
 				},
 				"Magic Weapon": {
 					"name": "魔化武器 Magic Weapon",
@@ -1100,7 +1100,7 @@
 				},
 				"Heal": {
 					"name": "治疗术",
-					"description": "<p>你引导命能，以治疗活物或者伤害不死生物。如果目标是自愿活物 ，你回复这个数量的生命值。如果目标是不死生物，你对其造成1d8命能伤害，并且它可以进行基础强韧豁免。你在施放该法术时花费的动作数量决定其目标，范围，区域和其他参数。</p>\n<p><span class=\"action-glyph\">1</span> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 该法术的射程为30尺。如果你在治疗一个活物，回复的生命值增加8。</p>\n<p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 你在@Template[emanation|distance:30]内释放命能。这会以区域中所有活物和不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或者伤害的量增加1d8，两个动作版本的额外治疗增加8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
@@ -1108,7 +1108,7 @@
 				},
 				"Heal (DUff)": {
 					"name": "治疗术",
-					"description": "<p>你引导命能，以治疗活物或者伤害不死生物。如果目标是自愿活物 ，你回复这个数量的生命值。如果目标是不死生物，你对其造成1d8命能伤害，并且它可以进行基础强韧豁免。你在施放该法术时花费的动作数量决定其目标，范围，区域和其他参数。</p>\n<p><span class=\"action-glyph\">1</span> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 该法术的射程为30尺。如果你在治疗一个活物，回复的生命值增加8。</p>\n<p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 你在@Template[emanation|distance:30]内释放命能。这会以区域中所有活物和不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或者伤害的量增加1d8，两个动作版本的额外治疗增加8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Chain Shirt": {
 					"name": "链甲衫 Chain Shirt",
@@ -1128,7 +1128,7 @@
 				},
 				"Shield (aUt2)": {
 					"name": "护盾术",
-					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害,则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修补 Repair}它。如果盾牌失去全部 20 点生命值,则被彻底摧毁。</p>"
+					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害,则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部 20 点生命值,则被彻底摧毁。</p>"
 				},
 				"Hand Crossbow": {
 					"name": "手弩 Hand Crossbow",
@@ -1139,7 +1139,7 @@
 				},
 				"Heal (IZFt)": {
 					"name": "治疗术",
-					"description": "<p>你引导命能，以治疗活物或者伤害不死生物。如果目标是自愿活物 ，你回复这个数量的生命值。如果目标是不死生物，你对其造成1d8命能伤害，并且它可以进行基础强韧豁免。你在施放该法术时花费的动作数量决定其目标，范围，区域和其他参数。</p>\n<p><span class=\"action-glyph\">1</span> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 该法术的射程为30尺。如果你在治疗一个活物，回复的生命值增加8。</p>\n<p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 你在@Template[emanation|distance:30]内释放命能。这会以区域中所有活物和不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或者伤害的量增加1d8，两个动作版本的额外治疗增加8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Rapier (rjX4)": {
 					"name": "细剑 Rapier",
@@ -1147,7 +1147,7 @@
 				},
 				"Command": {
 					"name": "命令",
-					"description": "<p>你大喊一道难以忽略的命令。你可命令目标接近你、逃离(就像它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃离 Fleeing}状态)、释放它持有之物、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}或停留原地。在它服从你的命令前,它不能延迟或采取任何反应动作。效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下回合的第一个动作上,该生物必须使用一个动作按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下回合所有动作上服从你的命令。</p>\n<hr /><p><strong>升阶(5环)</strong> 你最多可以以 10 个生物为目标。</p>"
+					"description": "<p>你大喊一道难以忽略的命令。你可命令目标接近你、逃离(就像它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态)、释放它持有之物、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}或停留原地。在它服从你的命令前,它不能延迟或采取任何反应动作。效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下回合的第一个动作上,该生物必须使用一个动作按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下回合所有动作上服从你的命令。</p>\n<hr /><p><strong>升阶(5环)</strong> 你最多可以以 10 个生物为目标。</p>"
 				},
 				"Guidance": {
 					"name": "神导术",
@@ -1178,7 +1178,7 @@
 			"items": {
 				"Detect Magic": {
 					"name": "侦测魔法",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级,由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高阶魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Scythe": {
 					"name": "巨镰 Scythe",
@@ -1194,7 +1194,7 @@
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Sling": {
 					"name": "若目标豁免失败，其移动速度1轮内获得-10尺的减值。"
@@ -1443,11 +1443,11 @@
 				},
 				"Raise a Shield": {
 					"name": "举起盾牌 Raise a Shield",
-					"description": "<p><strong>需求</strong> 你正持握盾牌。</p>\n<hr />\n<p>你举起盾牌保护自己。当你举起盾牌时，你将盾牌所列的环境加值添加到自己的AC上。你的盾牌会一直保持举起直到你的下一回合开始。</p>"
+					"description": "<p>该大地精士兵举起盾牌,在下回合开始前对 AC 获得 +2 环境加值</p>"
 				},
 				"Shield Block": {
 					"name": "盾牌格挡 Shield Block",
-					"description": "<p>如果该大地精在其上回合后@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾 Raised a Shield},该大地精可消耗其反应动作格挡一次打击。将伤害减少 5,但该大地精与盾牌都承受剩余伤害,可能损坏或摧毁该盾牌。</p>"
+					"description": "<p>如果该大地精在其上回合后@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raised a Shield},该大地精可消耗其反应动作格挡一次打击。将伤害减少 5,但该大地精与盾牌都承受剩余伤害,可能损坏或摧毁该盾牌。</p>"
 				}
 			},
 			"prototypeToken": {
@@ -1511,7 +1511,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -1591,7 +1591,7 @@
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -1602,7 +1602,7 @@
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Force Barrage (nXy3)": {
 					"name": "力场飞弹 Force Barrage",
@@ -1610,7 +1610,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Command": {
 					"name": "命令",
@@ -1658,7 +1658,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹",
@@ -1666,7 +1666,7 @@
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "双手使用杖",
@@ -1674,7 +1674,7 @@
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Detect Magic": {
 					"name": "侦测魔法",
@@ -2146,7 +2146,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级,由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高阶魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Concordant Choir": {
 					"name": "协音合唱 Concordant Choir",
@@ -2162,7 +2162,7 @@
 				},
 				"Shadow Veil": {
 					"name": "隐匿之纱 Veil",
-					"description": "<p>你将目标伪装为另一个身形相似身高相仿体重相近的生物。该伪装能够隐藏目标的身份，或者令其如同其他族裔，但这不足以令其扮作另一个特定个人。该法术不会改变声音，气味，或者仪态。你为每个目标分别选择伪装；例如，你可以令一个目标看起来是矮人，另一个看起来是精灵。施放隐匿之纱视为乔装动作的设立伪装。这令目标忽视任何可能会从扮作不熟悉生物中获得的减值，并且会赋予其在避免他人看破你的伪装的欺骗检定上+4状态加值，并且即使你未受训你也加上其等级。你可以解消任一或者所有这些伪装。</p>\n<hr />\n<p><strong>升阶 （5环级）</strong> 该法术也会伪装目标的声音和气味；并获得听觉特征。</p>\n<p><strong>升阶 （7环级）</strong> 该目标外观上可以是任何相同体型的生物，甚至是特定个人。你必须曾见过特定个人，才能重现其外观。该法术也会伪装目标的声音和气味；并获得听觉特征。</p>"
+					"description": "<p><strong>触发</strong> 卢卡恩成为一次近战攻击的目标</p><hr /><p><strong>效果</strong> 卢卡恩在对抗触发该攻击时对 AC 获得 +2 环境加值。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹",
@@ -2434,7 +2434,7 @@
 				},
 				"Consume Flesh": {
 					"name": "啃食尸体 Consume Flesh",
-					"description": "<p><strong>需求</strong> 你与小型或更大的生物尸体相邻，且该生物的死亡时间为在过去1小时内</p>\n<hr />\n<p>你狼吞虎咽地啃下一大块尸体。你的饥渴在一小时内处于满足状态。</p>"
+					"description": "<p>该食尸鬼吞食一名死于过去 1 小时内的生物的一块躯体,并恢复@Damage[1d6[healing]]生命值。</p>\n<p>该食尸鬼对同一具尸体只能恢复一次生命值。</p>"
 				},
 				"Claw": {
 					"name": "爪击"
@@ -2564,7 +2564,7 @@
 				},
 				"Figment": {
 					"name": "幻影 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{制造分心 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "双手使用杖",
@@ -2580,14 +2580,14 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p><strong>需求</strong> 你邻接于至少一名敌人</p><hr /><p>你至多以自身速度进行行走，此时你在速度上具有+5尺状态加值，且在对抗由于此次移动而触发的反应动作时，你的AC会获得+2环境加值。你必须在与任何敌人都不邻接的一处空间内结束此次移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
 				},
 				"Shield": {
 					"name": "护盾术",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:盾 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:盾免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Command": {
 					"name": "命令",
