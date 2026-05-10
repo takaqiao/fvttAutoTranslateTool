@@ -1029,7 +1029,7 @@
 				},
 				"Magic Weapon": {
 					"name": "魔化武器 Magic Weapon",
-					"description": "<p>该武器闪烁着魔法与能量的光芒。目标变为+1强击武器，在攻击骰上获得+1物品加值，并且增加伤害骰子到两个。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.GnWkI3T3LYRlm3X8]{法术效果：魔化武器}</p>"
+					"description": "<p>该武器闪烁着魔法与能量的光芒。目标变为+1强击武器，在攻击骰上获得+1物品加值，并且增加伤害骰子到两个。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.GnWkI3T3LYRlm3X8]{法术效果：符文武器 Runic Weapon}</p>"
 				},
 				"Resist Energy": {
 					"name": "抵抗能量伤害 Resist Energy",
@@ -1798,7 +1798,7 @@
 				},
 				"Dread Gaze": {
 					"name": "恐惧凝视 Dread Gaze",
-					"description": "<p>女妖凝视一个生物，使其产生恶兆缠身的吞噬之感。结果取决于其 @Check[will|dc:20|options:inflicts:frightened,inflicts:slowed] 豁免。目标无需看见海女妖。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物惊惧1并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>大失败</strong> 同失败，但生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2} 并迟缓1，持续1分钟。</p>"
+					"description": "<p>女妖凝视一个生物，使其产生恶兆缠身的吞噬之感。结果取决于其 @Check[will|dc:20|options:inflicts:frightened,inflicts:slowed] 豁免。目标无需看见海女妖。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1 Frightened 2}。</p>\n<p><strong>失败</strong> 该生物惊惧1并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>大失败</strong> 同失败，但生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2 Frightened 2} 并迟缓1，持续1分钟。</p>"
 				}
 			},
 			"prototypeToken": "海女妖",
