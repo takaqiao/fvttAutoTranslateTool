@@ -18,8 +18,8 @@
 			"description": "<p>这一簇灵敏的金属丝胡须要装在鼻子上或者鼻口部位，当它对附近的气味或者其他味道产生反应时，能够提供感觉信息。戴着嗅觉刺激器的生物会获得嗅觉，其嗅觉的灵敏程度相当于与自己同种族的平均水平，若与其同种族的大部分成员都具有灵敏嗅觉特殊能力的话，此时该生物也会获得。嗅觉刺激器可以安置在动物伙伴身上，具有智能的生物也可以佩戴它；刺激器若安置在动物伙伴身上，则会具有伙伴特征。</p>"
 		},
 		"Perfection's First Step": {
-			"name": "Perfection's First Step",
-			"description": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> (concentrate)</p><hr /><p>This palm-leaf manuscript contains an incomplete philosophical treatise about perfection, which you must complete and provide written commentaries upon before you can activate it. This activity takes 10 minutes, but can occur at any time before you activate the treatise.</p>\n<p>When you activate <em>perfection's first step</em>, you cast @UUID[Compendium.pf2e.spells-srd.Item.ytboJsyZEbE1MLeV]{Unbreaking Wave Advance} with a save DC of 19. You are then temporarily immune to benefiting from further copies of <em>perfection's first step</em> until your next daily preparations.</p>"
+			"name": "至善初步 Perfection's First Step",
+			"description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（专注）</p><hr /><p>这本贝叶手稿包含一篇关于至善的不完整哲学论著，你必须先完成它并提供书面注释才能启动它。此活动需要 10 分钟，但可在启动论著之前任何时间进行。</p>\n<p>启动 <em>至善初步</em> 时，你以豁免 DC 19 施放 @UUID[Compendium.pf2e.spells-srd.Item.ytboJsyZEbE1MLeV]{永涛推进 Unbreaking Wave Advance}。然后你暂时对其他 <em>至善初步</em> 副本的益处免疫，直到下次每日准备。</p>"
 		},
 		"Staff of Summoning (Major)": {
 			"name": "上等召唤法杖 Staff of Summoning (Major)",
@@ -119,8 +119,8 @@
 			"description": "<p>这对吊坠的每一枚都是用半颗泪滴形状的紫色宝石制作的。这些吊坠只能成对使用，并且必须同时制造。如果其中一个吊坠碎了，另一个也会碎成不带魔法的碎片。上面所列的价格是一整对吊坠的。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 你说话，你的声音会被投射到另一枚吊坠的佩戴者身上。另一枚吊坠的佩戴者无论距离多远都能听到你的声音，只要吊坠和佩戴者绑定，并且佩戴者和你位于同一位面。持续启动吊坠能允许你随时和另一枚吊坠的佩戴者交流，只要你愿意。</p>"
 		},
 		"Rite of Reinforcement Exoskeleton": {
-			"name": "Rite of Reinforcement Exoskeleton",
-			"description": "<p><strong>Note</strong> Conrasu Rite of Reinforcement Heritage Only</p>\n<hr />\n<p>Your woven exoskeleton rivals the hardest armors that can be found. Your exoskeleton is medium armor in the plate armor group that grants a +4 item bonus to AC, a Dex cap of +1, a check penalty of -2, a speed penalty of -5 feet, and a Strength value of +3, and has the comfort trait. You can never wear other armor or remove your exoskeleton. You can etch armor runes onto your exoskeleton as normal.</p>"
+			"name": "强化仪式外骨骼 Rite of Reinforcement Exoskeleton",
+			"description": "<p><strong>注</strong> 仅限空塑人强化仪式血裔。</p>\n<hr />\n<p>你的编织外骨骼可与最坚硬的盔甲相媲美。你的外骨骼是甲板组中的中型护甲，提供 +4 AC 物品加值、+1 敏捷上限、-2 检定减值、-5 尺速度减值、+3 力量值，并具有舒适特征。你永远无法穿戴其他盔甲或脱下你的外骨骼。你可以正常在外骨骼上铭刻护甲符文。</p>"
 		},
 		"Elixir of Gender Transformation (Moderate)": {
 			"name": "中等性转灵药 Elixir of Gender Transformation (Moderate)",
@@ -492,8 +492,8 @@
 			"description": "<p>在一口泉源中，你将你的血交给了一股自然力量，换取了一只装着泉源之心的瓶子。每10分钟一次，当你的濒死值即将增长至3，你改为@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}并不再濒死；这不能防止你被死亡效果或毁灭状态杀死。每日一次，无论距离多远，持有你的<em>交易合同</em>的实体可以支配你并控制你的行动，而且你也不知道发生了什么。这种支配是自动成功的，无论你做了什么样的对策。如果在战斗中，这通常只持续1轮；在探索中，这通常不会超过几分钟。然而，你越依赖泉源之心的力量逃离死亡，他下一次选择支配你时就可以支配得越久；每次使用，都会将支配的时间翻倍，最大到1天的持续时间。一旦实体支配了你，这个持续时间重置。</p><hr /><p><strong>启动—生命之泉（Spring of Life）</strong> <span class=\"action-glyph\">2</span> （专注）</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你饮用签订了你的<em>交易合同</em>的瓶中的水。你获得9环级2动作版的@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]法术效果。</p>"
 		},
 		"Pallid Crystal": {
-			"name": "Pallid Crystal",
-			"description": "<p><strong>Requirements</strong> You're a follower of Urgathoa.</p><hr /><p>This finger-shaped crystal on a thin strip of leather bridges the worlds of life and undeath, shifting from a pale opaque pink when worn by a living creature to a deep translucent purple when worn by an undead creature. While wearing the necklace, rotten food and drink taste as if they were fresh and can be eaten with no ill effects. If you're healed by healing vitality effects, you gain void resistance 5, but if you're healed by void effects, you instead gain vitality resistance 5.</p>"
+			"name": "苍白水晶 Pallid Crystal",
+			"description": "<p><strong>需求</strong> 你是厄加图娅的信徒。</p><hr /><p>这枚手指状的水晶系于细皮带上，连接生与死的世界，活物佩戴时呈苍白不透明的粉红色，不死生物佩戴时呈深沉透明的紫色。佩戴此项链时，腐烂的食物和饮品尝起来如同新鲜，可以食用而无副作用。若你被活力治疗效果治愈，你获得虚空抗力 5；若你被虚空效果治愈，则改为获得活力抗力 5。</p>"
 		},
 		"Watcher's Armband": {
 			"name": "巡察官臂章 Watcher's Armband",
@@ -4943,8 +4943,8 @@
 			"description": "<p>疫鸟是招魂者们的抄写员和信使。它们很少离开骨园，因此对于准备前往其他位面的招魂者来说，携带疫鸟符咒来帮助旅行是很常见的。戴着面具的乌鸦小图标发出叽叽喳喳的声音，为你的表演提供完美的伴奏。你在演奏乐器、祈祷或歌唱的表演检定上获得+2物品加值，你能以神术内在法术的形式施展@UUID[Compendium.pf2e.spells-srd.Item.R9xqCBblkS5KE4y7]，每日一次。</p><hr /><p><strong>启动</strong> <span class=\"action-glyph\">3</span> 交互</p><hr /><p><strong>效果</strong> 你扭动咒符底部，它的叽叽喳喳有助于增强你的论点。你失去表演检定上的物品加值，转而在提出请求的交涉检定上获得+2物品加值，直到你再次使用此启动能力。</p><hr /><p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 只要你持握着疫鸟咒符，你获得30尺生命感知（模糊），持续一小时。这允许你感知活物的生命力场和死者的邪恶力场，但你无法区别这两者。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.VVWvXiNudYYGV9sJ]</p>"
 		},
 		"Shacklebreaker": {
-			"name": "Shacklebreaker",
-			"description": "<p>This bracelet has three charms depicting a dagger, a shield, and a rose. While wearing this bracelet, you gain a +1 item bonus to Thievery checks. Whenever you roll a success to free someone from manacles, it counts as two successes (three on a critical success).</p>\n<p><strong>Activate—No Chains</strong> <span class=\"action-glyph\">r</span> (manipulate)</p><hr /><p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> A creature attempts to @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{Grapple} you</p>\n<p><strong>Requirements</strong> You are aware of the creature and aren't @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}</p><hr /><p><strong>Effect</strong> The bracelet yanks your body in one direction, attempting to throw off your attacker's grip. You gain a +1 circumstance bonus to your Fortitude DC against the triggering Grapple.</p>"
+			"name": "破镣手镯 Shacklebreaker",
+			"description": "<p>此手镯有匕首、盾牌、玫瑰三个挂坠图案。佩戴此手镯时，你获得贼活检定 +1 物品加值。每当你成功释放某人脱离手铐时，视作两次成功（大成功视作三次）。</p>\n<p><strong>启动——挣脱锁链</strong> <span class=\"action-glyph\">r</span>（操作）</p><hr /><p><strong>频率</strong> 每天一次</p>\n<p><strong>触发</strong> 一个生物尝试 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple} 你</p>\n<p><strong>需求</strong> 你察觉到该生物且未 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}</p><hr /><p><strong>效果</strong> 手镯将你的身体猛拉向一个方向，试图甩开攻击者的擒拿。你在对抗触发该擒拿的强韧 DC 上获得 +1 环境加值。</p>"
 		},
 		"Reaper's Grasp": {
 			"name": "死神之握 Reaper's Grasp",
@@ -5553,8 +5553,8 @@
 			"description": "<p>在你绑定这些刺绣的布带时，你必须慢慢仔细地将其包裹住你的双手。这些缠手带可以附加武器符文，为你的无武装攻击提供符文带来的增益，使其如魔法武器一般起效。例如，<em>+1强击重拳缠手带</em>能够为你的无武装攻击的攻击骰提供+1物品加值，并将你的无武装攻击的伤害从一个武器骰提升至两个（通常是从1d4提升至2d4，但如果你的拳头有着不同的武器伤害骰，或者你有其他类型的无武装攻击，则使用那个武器伤害骰）。</p>\n<p>你可以升级或添加缠手带上的符文，你也可以将符文转移到缠手带上，或将其从缠手带上转移出去，就如你处理一件武器一样。你也可以在缠手带上附加护符。在这些情况下，你需要将缠手带视为一件近战武器，属于搏击武器组，并具有轻负载。性能符文只能应用在你所使用的符合条件的无武装攻击上。例如，一个必须应用在挥砍武器上的性能符文不会作用于你的拳头攻击，但如果你使用爪击或其他挥砍无武装攻击，你就能得到该符文的增益。</p>"
 		},
 		"Star Chart Tattoo": {
-			"name": "Star Chart Tattoo",
-			"description": "<p>This tattoo consists of numerous asterisks at regular intervals along the fingers of one hand, perfect for measuring stars against the horizon. When used against a clear night sky, the tattoo grants a +2 circumstance bonus to Survival checks to Sense Direction and counts as a compass for the purpose of that action.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact (divination, spellshape)</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The dots of the tattoo turn to points of light and fly above the head of a creature within 30 feet, where they form a three-star constellation that guides your spells further than they could normally travel. The constellation sheds dim light and remains visible even if the creature hides, aiding in locating it. Furthermore, while the constellation lasts, if you @UUID[Compendium.pf2e.actionspf2e.Item.aBQ8ajvEBByv45yz]{Cast a Spell} that has a range and that spell would affect only the marked creature, the spell's range is increased by 30 feet. As is standard for increasing spell ranges, if the spell normally has a range of touch, you extend its range to 30 feet. Each time you use this benefit, one of the stars above the creature's head winks out; when all three have winked out or after 1 minute has passed, the effect ends.</p>"
+			"name": "星图刺青 Star Chart Tattoo",
+			"description": "<p>此刺青在一只手的手指上以规则间距分布着许多星号，非常适合在地平线上测量星辰。在晴朗的夜空下使用时，刺青给予求生检定以 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向 Sense Direction} +2 环境加值，且在该动作上视为指南针。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 互动（占卜、塑形咒）</p>\n<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p><strong>效果</strong> 刺青上的圆点变为光点，飞至 30 尺内一名生物头顶上方，在那里组成三星星座，引导你的法术超越其正常射程。星座散发昏暗光线，即使该生物躲藏也保持可见，有助于定位它。此外，星座持续期间，若你 @UUID[Compendium.pf2e.actionspf2e.Item.aBQ8ajvEBByv45yz]{施放法术 Cast a Spell} 而该法术具有射程且只会影响被标记的生物，该法术射程增加 30 尺。按提升法术射程的标准做法，若该法术射程为接触，则将其射程延伸至 30 尺。每使用此益处一次，该生物头上的一颗星熄灭；当三颗星全部熄灭或 1 分钟过后，效果结束。</p>"
 		},
 		"Armbands of Athleticism (Greater)": {
 			"name": "高等运动护臂 Armbands of Athleticism (Greater)",
@@ -5939,8 +5939,8 @@
 			"description": "<p>当你使用蚀刻的武器进行疾风连击，且你的第一次打击将一个生物降至0 HP时，你可以使用该武器的余波进行你的第二次打击，将这次触及提升至30尺。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> （专注，力场）</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 该武器施展一次@UUID[Compendium.pf2e.spells-srd.Item.WPu3UE3kTXSLqO40]法术。这把幽灵武器的外观和蚀刻武器类似。这把武器使用你正常的攻击加值和伤害，而非法术中列出的伤害，但在决定伤害时使用你的感知调整值而非力量调整值。在<em>灵能武装</em>攻击时，你可以选择以疾风连击替换打击；这仍然算作你在本回合使用的绝技。你可以以和该法术相同的方式维持启动。</p>"
 		},
 		"Horned Dragon Breath Potion": {
-			"name": "Horned Dragon Breath Potion",
-			"description": "<p>This liquid contains blood from a juvenile horned dragon. For 1 hour after you drink the potion, you can unleash a cloud of poison. Exhaling this dragon breath uses a single action. The cloud of poison deals @Damage[2d6[poison]|options:area-damage] damage in a @Template[cone|distance:15], and each creature in the area must attempt a @Check[fortitude|dc:19|basic|showDC:all|options:area-effect] save. After you use the breath weapon, you can't do so again for [[/r 1d4 #rounds]]{1d4 rounds}.</p>"
+			"name": "有角龙息药水 Horned Dragon Breath Potion",
+			"description": "<p>此液体含有幼年角龙的血液。饮下药水后 1 小时内，你可以释放一团毒云。呼出此龙息使用单一动作。毒云在 @Template[cone|distance:15] 区域内造成 @Damage[2d6[poison]|options:area-damage] 伤害，区域内每个生物必须尝试一次 @Check[fortitude|dc:19|basic|showDC:all|options:area-effect] 豁免。使用此吐息武器后，[[/r 1d4 #rounds]]{1d4 轮} 内不能再次使用。</p>"
 		},
 		"Abrogail I Script": {
 			"name": "Abrogail I Script",
@@ -6405,8 +6405,8 @@
 			"description": "<p>这种帽子可能有许多种不同外形，譬如五彩斑斓的头巾或是尖顶宽檐的帽子，在它上面装点着各类符文或魔印。它会在奥法检定上赋予你+2物品加值且允许你以奥术内在戏法的形式施放@UUID[Compendium.pf2e.spells-srd.Item.Qw3fnUlaUbnn7ipC]{魔法伎俩 Prestidigitation}。</p>\n<p>这顶时尚大帽子可以被启动。每顶<em>高等魔术师之帽</em>当中都被编入了一个奥术列表中的4环级召唤法术，通常为@UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]{召唤动物 Summon Animal}或@UUID[Compendium.pf2e.spells-srd.Item.lpT6LotUaQPfinjj]{召唤元素 Summon Elemental}。若你准备了奥术法术，你可以在绑定是用另一个你所知的4环级奥术召唤法术替换其中存储的法术。</p>\n<hr />\n<p><strong>启动——魔帽施法</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>效果</strong> 你脱帽示意，令魔法能量从中倾泻而出。你可以施放帽子当中存储的法术。</p>"
 		},
 		"Conductor's Instrument": {
-			"name": "Conductor's Instrument",
-			"description": "<p>This item can be found in the form of any variety of handheld musical instruments. The instrument grants you a +1 item bonus to Performance checks while playing music with it. Once per day, you can use the following activity.</p><hr /><p><strong>Activate—Command Performance</strong> <span class=\"action-glyph\">2</span> (manipulate) You play a special tune on the instrument, causing it to cast a DC 17 @UUID[Compendium.pf2e.spells-srd.Item.aIHY2DArKFweIrpf]{Command} bard spell.</p>"
+			"name": "指挥乐器 Conductor's Instrument",
+			"description": "<p>此物品可以是任何手持乐器形式。该乐器在你以其演奏音乐时给予你表演检定 +1 物品加值。每天一次，你可以使用以下活动。</p><hr /><p><strong>启动——指挥演奏</strong> <span class=\"action-glyph\">2</span>（操作）你在乐器上演奏特殊曲调，使其施放 DC 17 的 @UUID[Compendium.pf2e.spells-srd.Item.aIHY2DArKFweIrpf]{命令术 Command} 吟游诗人法术。</p>"
 		},
 		"Dragon's Breath (8th Level Spell)": {
 			"name": "8环级法术龙息 Dragon's Breath (8th Level Spell)",
@@ -7279,8 +7279,8 @@
 			"description": ""
 		},
 		"Obsidian Goggles": {
-			"name": "黑耀目镜 Obsidian Goggles",
-			"description": "<p>这对目镜闪着黑光的镜片经过特别打制，使得透过它看到的一切都仿佛被照亮一般。当穿戴这对目镜时，你在与视觉相关的察觉检定上获得+1物品加值。</p>\n<hr />\n<p><strong>启动——黑暗视觉</strong> <span class=\"action-glyph\">1</span> （操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>效果</strong> 你调节目镜，在1小时内获得黑暗视觉。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.KSvkfMqMQ8mlGLiz]{效果：黑耀目镜}</p>"
+			"name": "黑曜石护目镜 Obsidian Goggles",
+			"description": "<p>这对目镜闪着黑光的镜片经过特别打制，使得透过它看到的一切都仿佛被照亮一般。当穿戴这对目镜时，你在与视觉相关的察觉检定上获得+1物品加值。</p>\n<hr />\n<p><strong>启动——黑暗视觉</strong> <span class=\"action-glyph\">1</span> （操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>效果</strong> 你调节目镜，在1小时内获得黑暗视觉。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.KSvkfMqMQ8mlGLiz]{效果：黑曜石护目镜}</p>"
 		},
 		"Wand of Mercy (7th-rank)": {
 			"name": "7环级慈悲魔杖 Wand of Mercy (7th-rank)",
@@ -8116,8 +8116,8 @@
 			"description": "<p>这口中等大小的银色坩埚在那些很难找到新鲜食物的地区是个好东西，因为它可以让自己填满丰盛而美味的蔬菜乱炖。它也可以在制造特定物品时起到帮助。当用它来制造炼金物品、药水或油时，慷慨坩埚对该手艺检定提供+2 环境加值。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">T</span> 命令，交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你搅拌坩埚，它会施放一次4环级@UUID[Compendium.pf2e.spells-srd.Item.Mt6ZzkVX8Q4xigFq]{造粮术 Create Food}，里面装满了足够喂饱 12 个中型生物的美味炖菜。</p>"
 		},
 		"Guardian Rose": {
-			"name": "Guardian Rose",
-			"description": "<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> (concentrate)</p>\n<p><strong>Trigger</strong> You would be reduced to 0 Hit Points but not immediately killed.</p><hr /><p>This rose-shaped crystal brooch is a translucent bloodred. These talismans have saved the lives of many a soldier on the field of battle. When you activate a <em>guardian rose</em>, you avoid being knocked out and regain @Damage[(2d8+5)[healing]] Hit Points. However, this puts a strain on your body and you are @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} until the end of your next turn.</p>"
+			"name": "守护玫瑰 Guardian Rose",
+			"description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你将被降至 0 生命值但不会立刻死亡。</p><hr /><p>这枚玫瑰造型的水晶胸针呈半透明的血红色。这些护符曾在战场上挽救了许多士兵的性命。当你启动 <em>守护玫瑰</em> 时，你避免被击昏并恢复 @Damage[(2d8+5)[healing]] 生命值。然而这会令你的身体承受压力，你直到下回合结束前 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 Enfeebled 1}。</p>"
 		},
 		"Olfactory Obfuscator (Greater)": {
 			"name": "高等嗅觉扰断剂 Olfactory Obfuscator (Greater)",
@@ -10513,8 +10513,8 @@
 			"description": "<p>蝰蛇毒液是强化武器的一种简单却有效的方式。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> （操作）</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:18]</p>\n<p><strong>最大持续时间</strong> 3轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d8[poison]]伤害（1轮）</p>"
 		},
 		"Robe of the Erinys": {
-			"name": "Robe of the Erinys",
-			"description": "<p>This exquisite scarlet robe embroidered with golden depictions of fiends and their weapons is fashioned after the garb of the cloistered Sisters of the Golden Erinys. The robe's belt is embroidered to look like a snake, complete with metal fangs.</p>\n<p><strong>Activate—Biting Belt</strong> <span class=\"action-glyph\">2</span> (concentrate, manipulate)</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> You remove the robe's belt and snap it at an enemy within your reach. As you do, it briefly animates to bite that foe, dealing @Damage[2d8[poison]] damage with a @Check[fortitude|dc:18|basic|options:inflicts:sickened|traits:concentrate,manipulate] save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}.</p>"
+			"name": "狂怒魔长袍 Robe of the Erinys",
+			"description": "<p>这件精美的猩红色长袍上以金色绣满恶魔及其武器的图案，仿照金色狂怒魔隐修姊妹会的服饰制作。长袍的腰带绣成蛇形，配以金属毒牙。</p>\n<p><strong>启动——咬噬腰带</strong> <span class=\"action-glyph\">2</span>（专注、操作）</p>\n<p><strong>频率</strong> 每天一次</p><hr /><p><strong>效果</strong> 你解下长袍腰带并向你触及范围内的敌人挥击。挥击之时，腰带短暂活化以咬噬该敌，造成 @Damage[2d8[poison]] 伤害，以 @Check[fortitude|dc:18|basic|options:inflicts:sickened|traits:concentrate,manipulate] 豁免。大失败时，目标还会 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
 		},
 		"Chromatic Jellyfish Oil (Greater)": {
 			"name": "高等繁彩水母精油 Chromatic Jellyfish Oil (Greater)",
@@ -10929,7 +10929,7 @@
 			"description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span> （操作）</p><hr /><p>小丑皇的受害者总是令人忍俊不禁，他们会一直像个戏剧演员一样摔个屁股蹲儿。这种毒药会破坏受害者的平衡感。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:22]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> 陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]状态，并必须在站立动作中通过@Check[flat|dc:5]检定，否则失去这个动作（1轮）</p>\n<p><strong>阶段2</strong> 同阶段1，但DC为10（@Check[flat|dc:10]）（1轮）</p>\n<p><strong>阶段3</strong> 同阶段1，但DC为15（@Check[flat|dc:15]）（1轮）</p>"
 		},
 		"Obsidian Goggles (Greater)": {
-			"name": "高等黑耀目镜 Obsidian Goggles (Greater)",
+			"name": "高等黑曜石护目镜 Obsidian Goggles (Greater)",
 			"description": "<p>这对目镜闪着黑光的镜片经过特别打制，使得透过它看到的一切都仿佛被照亮一般。当穿戴这对目镜时，你在与视觉相关的察觉检定上获得+2物品加值。</p><hr /><p><strong>启动——黑暗视觉</strong> <span class=\"action-glyph\">1</span> （操作）</p>\n<p><strong>频率</strong> 不限次数</p>\n<p><strong>效果</strong> 你调节目镜，获得黑暗视觉，直到你用一个交互动作解除启动或其不再被你绑定，取决于何者为先。</p>"
 		},
 		"General's Word": {
@@ -11693,8 +11693,8 @@
 			"description": "<p><strong>启动</strong> 1分钟（交互）</p>\n<hr />\n<p>绯红救国团以能干涉不死生物感官的药草，熬制而成的独门浓郁煲汤。终焉之墙浓汤含有一餐分的营养。</p>\n<p>在你摄入一碗浓汤后1小时内，你在对抗不死生物的隐秘检定与DC上获得+2物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.6A8jsLR7upLGuRiv]{效果：终焉之墙浓汤}</p>"
 		},
 		"Whispering Wire": {
-			"name": "Whispering Wire",
-			"description": "<p>This coiled cord of brightly colored wire can be twisted neatly into any shape.</p>\n<p><strong>Activate—Words on the Wind</strong> <span class=\"action-glyph\">1</span> (concentrate)</p>\n<p><strong>Frequency</strong> once per 10 minutes</p><hr /><p><strong>Effect</strong> You quietly mouth words to the wire, which sends them to a target with the effects of the @UUID[Compendium.pf2e.spells-srd.Item.vLzFcIaSXs7YTIqJ]{Message} cantrip.</p>"
+			"name": "私语之线 Whispering Wire",
+			"description": "<p>这卷色彩明亮的线圈可整齐地扭成任意形状。</p>\n<p><strong>启动——风中私语</strong> <span class=\"action-glyph\">1</span>（专注）</p>\n<p><strong>频率</strong> 每 10 分钟一次</p><hr /><p><strong>效果</strong> 你对线圈无声地默念话语，它将以 @UUID[Compendium.pf2e.spells-srd.Item.vLzFcIaSXs7YTIqJ]{讯息术 Message} 戏法的效果发送给目标。</p>"
 		},
 		"Rounds (Axe Musket)": {
 			"name": "弹药（滑膛枪斧） Rounds (Axe Musket)",
@@ -13533,8 +13533,8 @@
 			"description": "<p><strong>Activate</strong> @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek}</p>\n<hr />\n<p>These drops are made from luminescent mushrooms and refined into eye drops, which simulates a creature's natural night vision. When you attempt a Perception check to Seek, you can draw and apply a dose of drowsy sun to your eyes as part of the same action, which grants you darkvision to a range of 30 feet for 1 round. If you do, your Seek action gains the manipulate trait, due to drawing and applying the eye drops.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.vX8SE5SXnspdzMYZ]{Effect: Drowsy Sun Eye Drops}</p>"
 		},
 		"Shaping Sweet": {
-			"name": "Shaping Sweet",
-			"description": "<p>Many inhabitants of the First World can shape their environment around them; weaker creatures can only make minor changes, while powerful entities such as the Eldest can remake entire landscapes. A <em>shaping sweet</em> is a gelatinous, fruit-flavored candy that confers a whisper of this ability on you when you eat it. For 1 hour after eating a <em>shaping sweet</em>, you can make each of the following changes to your surroundings with an Interact action. You can make each change only once.</p><ul><li><strong>Alter Weather</strong> You create or eliminate minor precipitation in a @Template[type:emanation|distance:30].</li><li><strong>Fairy Ring</strong> A ring of flowers and mushrooms appears in a @Template[type:burst|distance:10] around you, restoring 1 Hit Point at the start of each of your turns to a randomly chosen fey creature within. The ring lasts for 1 minute.</li><li><strong>Foliate Vegetation</strong> grows around you in a 10-foot radius burst, creating light undergrowth that lasts for 1 minute.</li><li><strong>Terrain Shift</strong> The ground in your space rises or falls by 5 feet, remaining at that height for 1 minute.</li></ul>"
+			"name": "塑形糖 Shaping Sweet",
+			"description": "<p>第一世界的许多居民可以塑造周围环境；较弱的生物只能做小幅改变，而强大的存在如始祖可以重塑整片地貌。<em>塑形糖</em> 是一种水果味的胶状糖果，吃下后赋予你这种能力的一缕。食用 <em>塑形糖</em> 后 1 小时内，你可以用一次互动动作做以下每项变更。每项变更只能进行一次。</p><ul><li><strong>改变天气</strong> 你在 @Template[type:emanation|distance:30] 内创造或消除轻微降水。</li><li><strong>仙环</strong> 你周围 @Template[type:burst|distance:10] 区域内出现一圈花朵和蘑菇，每回合开始时为环内随机选择的妖精生物恢复 1 生命值。环持续 1 分钟。</li><li><strong>叶状植被</strong> 你周围 10 尺爆发区域内生长出叶状植被，形成持续 1 分钟的轻量灌木。</li><li><strong>地形位移</strong> 你所在方格的地面升高或降低 5 尺，在该高度保持 1 分钟。</li></ul>"
 		},
 		"Waffle Iron": {
 			"name": "华夫饼机 Waffle Iron",
@@ -16633,8 +16633,8 @@
 			"description": "<p>洪水休战期是一个相对和平的季节，这个河流刺青可以在你发怒的时候安抚你的情绪。你对遵守洪水休战的兽人进行交涉检定时，获得+1物品加值。</p>\n<p><strong>启动—表现休战</strong> <span class=\"action-glyph\">r</span> （专注）</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 一个心灵效果将要迫使你伤害一名盟友或旁观者</p><hr /><p><strong>效果</strong> 以4环级的反制环级尝试一次反制检定以结束效果。</p>"
 		},
 		"Beekeeper's Smoker": {
-			"name": "Beekeeper's Smoker",
-			"description": "<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> (manipulate)</p>\n<hr />\n<p>This device resembles a teapot with a trigger. When filled with cloth fuel (worth 1 cp) and lit, it smolders and gradually fills with smoke for 10 minutes, during which time you can squeeze the trigger to spray smoke.</p>\n<hr />\n<p><strong>Spray Smoke</strong> <span class=\"action-glyph\">1</span> (manipulate)</p>\n<p><strong>Frequency</strong> once per minute</p>\n<hr />\n<p><strong>Effect</strong> You expel smoke into an adjacent 5-foot square. All creatures in that area are @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}, and other creatures are concealed to them. The smoke lasts for [[/gmr 1d4 #rounds]]{1d4 rounds} or until dispersed by strong wind.</p>"
+			"name": "养蜂人烟熏器 Beekeeper's Smoker",
+			"description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<hr />\n<p>此装置形似带扳机的茶壶。装入布质燃料（值 1 cp）并点燃后，会燃烧 10 分钟并逐渐充满烟雾，期间你可以扣动扳机喷射烟雾。</p>\n<hr />\n<p><strong>喷射烟雾</strong> <span class=\"action-glyph\">1</span>（操作）</p>\n<p><strong>频率</strong> 每分钟一次</p>\n<hr />\n<p><strong>效果</strong> 你向相邻 5 尺方格内喷出烟雾。该区域内所有生物 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}，且其他生物对它们也隐蔽。烟雾持续 [[/gmr 1d4 #rounds]]{1d4 轮} 或被强风驱散。</p>"
 		},
 		"Weapon Shot (Major)": {
 			"name": "强效武装弹 Weapon Shot (Major)",
@@ -17364,8 +17364,8 @@
 			"description": "<p>当你绑定这颗石头时，你获得15点临时生命值。如果石头的效果被压制，你失去剩余的所有临时生命值，直到石头的效果回来。临时生命值会在你进行每日准备时刷新；但在下一次每日准备之前，临时生命值不会在你重新绑定这颗石头，或绑定其他<em>粉色斜方体万古石</em>时刷新。</p>\n<p>共鸣能力让你可以以神术内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.SnjhtQYexDtNDdEg]戏法。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.HcUltKEnhktxcp4T]</p>"
 		},
 		"Whispering Wire (Greater)": {
-			"name": "Whispering Wire (Greater)",
-			"description": "<p>This coiled cord of brightly colored wire can be twisted neatly into any shape.</p>\n<p><strong>Activate—Words on the Wind</strong> <span class=\"action-glyph\">1</span> (concentrate)</p>\n<p><strong>Frequency</strong> once per 10 minutes</p><hr /><p><strong>Effect</strong> You quietly mouth words to the wire, which sends them to a target with the effects of the 3rd-rank @UUID[Compendium.pf2e.spells-srd.Item.vLzFcIaSXs7YTIqJ]{Message} cantrip.</p>"
+			"name": "高等私语之线 Whispering Wire (Greater)",
+			"description": "<p>这卷色彩明亮的线圈可整齐地扭成任意形状。</p>\n<p><strong>启动——风中私语</strong> <span class=\"action-glyph\">1</span>（专注）</p>\n<p><strong>频率</strong> 每 10 分钟一次</p><hr /><p><strong>效果</strong> 你对线圈无声地默念话语，它将以 3 环 @UUID[Compendium.pf2e.spells-srd.Item.vLzFcIaSXs7YTIqJ]{讯息术 Message} 戏法的效果发送给目标。</p>"
 		},
 		"Belkzen Deadsmasher (Greater)": {
 			"name": "高等贝尔克赞摧亡者 Belkzen Deadsmasher (Greater)",
@@ -19640,7 +19640,7 @@
 			"description": ""
 		},
 		"Obsidian Goggles (Major)": {
-			"name": "上等黑耀目镜 Obsidian Goggles (Major)",
+			"name": "上等黑曜石护目镜 Obsidian Goggles (Major)",
 			"description": "<p>这对目镜闪着黑光的镜片经过特别打制，使得透过它看到的一切都仿佛被照亮一般。当穿戴这对目镜时，你在与视觉相关的察觉检定上获得+3物品加值。</p><hr /><p><strong>启动——黑暗视觉</strong> <span class=\"action-glyph\">1</span> （操作）</p>\n<p><strong>频率</strong> 不限次数</p>\n<p><strong>效果</strong> 你调节目镜，获得<em>高等黑暗视觉</em>，直到你用一个交互动作解除启动或其不再被你绑定，取决于何者为先。</p>"
 		},
 		"Clothing (High-Fashion Fine)": {
