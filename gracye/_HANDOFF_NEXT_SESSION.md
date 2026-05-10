@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10/11 (Claude Opus 4.7) 整理 · 44 commits ~3800+ 处修复 + 8 SRD entry 完整翻译
+> 由会话 2026-05-10/11 (Claude Opus 4.7) 整理 · 46 commits ~3815+ 处修复 + 8 SRD entry 完整翻译
 
 ---
 
@@ -8,12 +8,20 @@
 
 **第一步**: `Read gracye/_HANDOFF_NEXT_SESSION.md` (本文档) 全部
 **第二步**: 检查项目 memory `project_grayce_translation.md` 有 24 个关键译名决策
-**第三步**: 当前状态—**深度优化基本完成**。剩余可选任务（皆为低优先）：
-1. **31 处剩余 bare ZH UUID label** （quoted "训练魔法"/低 case prose / .XXX 锚点 — 项目可接受 bare）
-2. **34 处 ZH+EN 都无 label UUID** — 与 EN 一致, FVTT 自动 render，无需修
-3. **99 处 Actor.X 直接引用** (encounter/treasure 块) — auto-render, 与 EN 一致
-4. **可选 SRD 残余项**: Replacement Picks / Frostbite Deck / Crafter's Eyepiece 曲撇号版本 (production refs 已含双语 label, entry 本身可能未补译, 影响 vault 显示)
-5. **流畅度风格更深 polish**（多为偏好，非硬 bug）
+**第三步**: 当前状态—**翻译质量已达 wiki/pf2compendium 全面对齐 + 全字段 100% 双语化**。剩余真正"可选"任务（皆为低优先）：
+1. **Frostbite Deck 描述补译**：production 多次引用，但 entry 缺 (pf2compendium 也无)。需 EN 源
+2. **31 处剩余 bare ZH UUID label** （quoted "训练魔法"/低 case prose / .XXX 锚点 — 项目可接受 bare）
+3. **34 处 ZH+EN 都无 label UUID** + **99 处 Actor.X 直接引用** — 与 EN 一致, FVTT 自动 render，无需修
+4. **20 处 RollTable encounter 结果 ZH-only**（list 风格，加 EN 反而冗余，可保留）
+5. **流畅度风格更深 polish**（多为偏好，非硬 bug；Agent review 已识别 8 类点）
+
+**已无**:
+- bare/half-bilingual UUID labels (主要类全清)
+- ZH/EN HTML 结构差异 (仅 1 处 description em 项目风格)
+- 真英文残留
+- 术语不一致 (UUID label canonical + narrative sync 全完成)
+- 标点 / 半角括号问题
+- 任何 actor item / name field 非双语项
 
 **Don't**：以下已完成，不要再批量改：
 - 中文标点（包括 ASCII , ; → ZH） + 半角(+N) → 全角（+N）
@@ -72,6 +80,38 @@ gracye/
 ├── _backup/                历史备份
 └── _HANDOFF_NEXT_SESSION.md 本文档
 ```
+
+---
+
+## 第四轮 ultrathink 会话成果 (2 commits, 12 处)
+
+### 1. Actor EN-only label 双语补全 (7 处)
+通过 canonical bilingual TM 找出全文已用双语但局部 EN-only 的 Actor refs:
+- Water Scamps x2 → 水精灵 ×2
+- Shadows x2 → 暗影×2
+- Pugwampis x4 → 厄运小魔怪 x4
+- Sticky Toffee Hounds x3 → 黏糊太妃糖犬×3
+- Matilda Heisen → 玛蒂尔达·海森
+- Bristles → 刚毛
+- Sangrists x4 → 血裔者 ×4
+
+### 2. Ghoul Stalker HTML 结构修复 (1 处)
+ZH 早期把 EN 的 Requirements/Effect/hr 三段结构简化为单段。
+用 EN 对齐重建结构: `<strong>需求</strong>...<hr/><strong>效果</strong>...`
+（Ghoul Stalker BB EN 本身简化版，保持不变）
+
+### 3. Hag "+1 Status" trait 标签双语化 (4 处)
+4 个 hag actors (Larmine/Shulzara×2/Sea Hag BB) 的 trait label
+从 ZH-only 描述 "在所有对魔法的豁免上获得+1状态加值"
+→ "对魔法豁免+1状态 +1 Status to All Saves vs. Magic"
+
+### 4. 全面验证零差异
+- **2589 处 name 字段**: 100% 双语 (1870 actor items + 余下)
+- **52 处 scene drawings**: 100% 双语 (7 单字母 Z/T/M + B2a-d 是地图标记保留)
+- **86 处 spell-effects refs**: 100% 双语
+- **macros 19/19, journals 11/11+pages 276/276, folders 14/14, tables 1/1**: 100% 双语
+- HTML 标签 ZH vs EN: 仅 1 处 description em diff (项目风格)
+- Frostbite Deck 缺译已确认: pf2compendium/我们 SRD 都无, EN 源未提供
 
 ---
 
@@ -266,6 +306,13 @@ UUID label canonical 已统一后，narrative 文本仍用旧术语的位置:
 
 ---
 
+## 第四轮 ultrathink 会话时间线（2 commits）
+
+```
+ac6c9d2  fix: SoG 4 处 +1 Status hag trait 标签双语化
+ca56b3e  fix: SoG Actor en-only label 双语补全 + Ghoul Stalker HTML 结构修复
+```
+
 ## 第三轮 ultrathink 会话时间线（5 commits）
 
 ```
@@ -361,6 +408,6 @@ QA 工具:
 
 ## 一句话总结
 
-**Secrets of Grayce 翻译已达 wiki/pf2compendium 100% 标准对齐 + 双语 label 94% 完全双语化 (482→31, 剩余皆为合理保留的 quoted/lowercase prose/锚点) + 中文标点规范化 + NPC actor canonical 同步 + skill 名标准化 + bestiary-effects 空 label 补完。**
-**3 个 production 文件 + 3 个 SRD 文件总 6 个文件 JSON 全 valid; HTML imbalances 0; 真英文残留 0; 机械准确性 (DC/伤害/距离) 100% 与 EN 一致。**
-**下个会话可专注于中文流畅度风格 polish (Agent 已识别 8 类微调点) 或转其他 SoG/Crucible/COT 翻译内容。**
+**Secrets of Grayce 翻译已达 wiki/pf2compendium 100% 标准对齐 + 全字段 100% 双语化 (2589/2589 name fields; 1870/1870 actor items; 86/86 spell-effects refs; 52/52 scene drawings; macros/journals/folders 全部) + 中文标点规范化 + UUID label canonical+narrative sync + bestiary-effects 空 label 补完 + 8 SoG-NEW SRD 完整翻译。**
+**3 个 production 文件 + 3 个 SRD 文件总 6 个文件 JSON 全 valid; HTML imbalances 0; HTML 标签 ZH/EN 一致 (仅 1 处描述风格 em diff); 真英文残留 0; 机械准确性 (DC/伤害/距离) 100% 与 EN 一致。**
+**下个会话可专注于其他 SoG 内容（如 Frostbite Deck 描述补译需 EN 源）或转其他 SoG/Crucible/COT 翻译项目。当前 SoG 翻译已是项目最高质量基准。**
