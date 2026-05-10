@@ -831,7 +831,7 @@
 				},
 				"Weapon Surge": {
 					"name": "激发武器 Weapon Surge",
-					"description": "<p>你高举武器，并将神圣能量充满其中。在你下个回合开始前，你下一次使用该武器的打击中，你在攻击骰上获得+1状态加值，并且该武器额外1d6精魂伤害，且此次打击具有受祝特征。如果你完成了此次打击或该目标武器不再为你所有，<em>激发武器</em>立即结束。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 此次打击造成2d6额外精魂伤害。</p>\n<p><strong>升阶（9环级）</strong> 此次打击造成3d6额外精魂伤害。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr]{法术效果：激发武器}</p>"
+					"description": "<p>你高举武器，并将神圣能量充满其中。在你下个回合开始前，你下一次使用该武器的打击中，你在攻击骰上获得+1状态加值，并且该武器额外1d6精魂伤害，且此次打击具有受祝特征。如果你完成了此次打击或该目标武器不再为你所有，<em>激发武器</em>立即结束。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 此次打击造成2d6额外精魂伤害。</p>\n<p><strong>升阶（9环级）</strong> 此次打击造成3d6额外精魂伤害。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr]{法术效果：激发武器 Weapon Surge}</p>"
 				},
 				"Divine Prepared Spells": {
 					"name": "准备神能法术 Divine Prepared Spells"
@@ -991,7 +991,7 @@
 				},
 				"Glutton's Feast": {
 					"name": "饕餮盛宴 Glutton's Feast",
-					"description": "<p>如果艾扎以颚部打击伤害一个活物，她在1分钟内获得1d6临时生命值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LWFDNwi3iJuf476A]{效果：饕餮盛宴（艾扎）}</p>"
+					"description": "<p>如果艾扎以颚部打击伤害一个活物，她在1分钟内获得1d6临时生命值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LWFDNwi3iJuf476A]{效果：饕餮盛宴（艾扎） Glutton's Feast (Aezar)}</p>"
 				},
 				"Grab": {
 					"name": "擒获 Grab",
@@ -1155,7 +1155,7 @@
 			"items": {
 				"Phantom Hands": {
 					"name": "幻影之手 Phantom Hands",
-					"description": "<p><strong>触发</strong> 一个活物与一颗抓握宝石所在层架相邻</p><hr /><p><strong>效果</strong> 房间被阴森光辉所笼罩，幻影之手从四面八方伸出。每个房间内的活物必须尝试一次 @Check[fortitude|dc:24|options:area-effect,inflicts:immobilized] 豁免。该惊魂随后掷先攻。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 幻影之手干扰该生物的移动。该生物对其先攻骰承受-2状态减值。</p>\n<p><strong>失败</strong> 幻影之手将该生物固定原地。该生物对其先攻骰承受-2状态减值，并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}（[[/act escape dc=24]]）首回合。</p>\n<p><strong>大失败</strong> 同失败，但如该生物在首回合尝试挣脱，必须掷两次取较差结果。这是一种厄运效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aBtlxHM9ChGywyrH]{效果：幻影之手}</p>"
+					"description": "<p><strong>触发</strong> 一个活物与一颗抓握宝石所在层架相邻</p><hr /><p><strong>效果</strong> 房间被阴森光辉所笼罩，幻影之手从四面八方伸出。每个房间内的活物必须尝试一次 @Check[fortitude|dc:24|options:area-effect,inflicts:immobilized] 豁免。该惊魂随后掷先攻。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 幻影之手干扰该生物的移动。该生物对其先攻骰承受-2状态减值。</p>\n<p><strong>失败</strong> 幻影之手将该生物固定原地。该生物对其先攻骰承受-2状态减值，并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}（[[/act escape dc=24]]）首回合。</p>\n<p><strong>大失败</strong> 同失败，但如该生物在首回合尝试挣脱，必须掷两次取较差结果。这是一种厄运效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aBtlxHM9ChGywyrH]{效果：幻影之手 Phantom Hands}</p>"
 				}
 			},
 			"data": {
@@ -1409,7 +1409,7 @@
 			"items": {
 				"Spiked Wall": {
 					"name": "尖刺墙 Spiked Wall",
-					"description": "<p><strong>触发</strong> 一个生物触发绊线</p><hr /><p><strong>效果</strong> 缠绕木尖刺的格栅面板横扫通道关闭。触发生物承受 @Damage[3d6[piercing]] 伤害（@Check[reflex|dc:17|basic] 豁免）。该面板提供较小的 @UUID[Compendium.pf2e.other-effects.Item.I9lfZUiCwMiGogVi]{掩护} 并阻止沿通道移动。可像门一样用一次互动动作推开面板，但除非用重物楔住，否则它会再次摇摆关闭。</p>"
+					"description": "<p><strong>触发</strong> 一个生物触发绊线</p><hr /><p><strong>效果</strong> 缠绕木尖刺的格栅面板横扫通道关闭。触发生物承受 @Damage[3d6[piercing]] 伤害（@Check[reflex|dc:17|basic] 豁免）。该面板提供较小的 @UUID[Compendium.pf2e.other-effects.Item.I9lfZUiCwMiGogVi]{掩护 Take Cover} 并阻止沿通道移动。可像门一样用一次互动动作推开面板，但除非用重物楔住，否则它会再次摇摆关闭。</p>"
 				}
 			},
 			"data": {
@@ -1743,7 +1743,7 @@
 				},
 				"Protection": {
 					"name": "防护术 Protection",
-					"description": "<p>你保护一个生物免受伤害。目标在AC和豁免骰上获得+1状态加值。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以选择让该好处也会影响目标@Template[emanation|distance:10]范围内的所有的你的盟友。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RawLEPwyT5CtCZ4D]{法术效果：防护术}</p>"
+					"description": "<p>你保护一个生物免受伤害。目标在AC和豁免骰上获得+1状态加值。</p>\n<hr />\n<p><strong>升阶（3环级）</strong> 你可以选择让该好处也会影响目标@Template[emanation|distance:10]范围内的所有的你的盟友。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RawLEPwyT5CtCZ4D]{法术效果：防护术 Protection}</p>"
 				},
 				"Darkness": {
 					"name": "黑暗术 Darkness",
