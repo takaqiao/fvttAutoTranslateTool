@@ -4,6 +4,31 @@
 
 ---
 
+## ⚡ 下次会话快速起手
+
+**第一步**: `Read gracye/_HANDOFF_NEXT_SESSION.md` (本文档) 全部
+**第二步**: 检查项目 memory `project_grayce_translation.md` 有 24 个关键译名决策
+**第三步**: 选起手任务（建议）：
+1. **清扫剩余 ~160 处 bare ZH UUID label** （多为 1-2 occurrences SoG-specific）
+2. **2 处空标签 bestiary-effects** (Qomp + Yqq, menace bestiary, 需查 pf2e 系统数据库)
+3. **Ecaterina/卡特琳娜 vs 艾卡特琳娜** 决定是否统一短称
+4. **更深的语义/流畅度 review** （已修主要 bug，剩余靠手工 review）
+
+**Don't**：不要再重复以下已完成且不变的工作：
+- 中文标点修正（442 处已修）
+- skill 名标准化（44 处已修，欺骗→欺瞒/隐秘→潜行/杂技→特技）
+- NPC actor canonical sync (Krethark→克瑞萨克 / Damarys→达玛丽斯)
+- 永光/永明/永恒光晶→长明水晶
+- 治疗者手套→医者手套 / 黄铁矿鼠→黄铁老鼠
+- bare condition label 双语化（措手不及 Off-Guard / 倒地 Prone / 恶心 Sickened N 等已批量补完）
+
+**重要工具**:
+- `python "翻译流程/scripts/audit_translations.py" gracye/` — HTML/UUID/英文残留 QA
+- `python "翻译流程/scripts/scan_residue.py" gracye/` — 真英文残留扫描
+- 编辑 JSON 大批量改用 `python << 'PYEOF' ... PYEOF` inline (auto-classifier 不允许 _tmp_*.py)
+
+---
+
 ## 译名优先级（关键!）
 
 ```
