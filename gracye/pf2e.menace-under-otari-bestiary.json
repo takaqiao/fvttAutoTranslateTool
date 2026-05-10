@@ -86,7 +86,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Message": {
 					"name": "传讯术 Message",
@@ -264,7 +264,7 @@
 				},
 				"Shadow Veil": {
 					"name": "隐匿之纱 Veil",
-					"description": "<p>如果该暗影祭司成为一次近战攻击的目标,他可使用反应动作在对抗触发该攻击时对 AC 获得 +2 环境加值。</p>"
+					"description": "<p>如果该暗影祭司成为一次近战攻击的目标，他可使用反应动作在对抗触发该攻击时对 AC 获得 +2 环境加值。</p>"
 				},
 				"Shadow Hand": {
 					"name": "暗影之手 Shadow Hand"
@@ -331,7 +331,7 @@
 				},
 				"Swipe": {
 					"name": "横扫 Swipe",
-					"description": "<p>该地蜥人首领以其大斧对两名邻接的敌人进行两次打击,两名敌人都必须在其触及范围内,获得 +1 环境加值。第二次攻击使用与第一次相同的多重攻击减值,但该地蜥人首领此后进行的攻击承受 -10 多重攻击减值(对其爪击为 -8 多重攻击减值)。</p>"
+					"description": "<p>该地蜥人首领以其大斧对两名邻接的敌人进行两次打击，两名敌人都必须在其触及范围内，获得 +1 环境加值。第二次攻击使用与第一次相同的多重攻击减值，但该地蜥人首领此后进行的攻击承受 -10 多重攻击减值(对其爪击为 -8 多重攻击减值)。</p>"
 				},
 				"Javelin (cwyE)": {
 					"name": "标枪 Javelin"
@@ -342,7 +342,7 @@
 				},
 				"Stench": {
 					"name": "恶臭 Stench",
-					"description": "<p>来到该地蜥人@Template[emanation|distance:30]范围内并能闻到该地蜥人气味的生物必须尝试一次@Check[fortitude|dc:19]豁免。失败时,该生物对所有检定与DC承受-1状态减值,直至其使用一个动作干呕为止。豁免成功的生物在1分钟内不受任何地蜥人气息的影响 <em>(使用@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1})</em>。</p>"
+					"description": "<p>来到该地蜥人@Template[emanation|distance:30]范围内并能闻到该地蜥人气味的生物必须尝试一次@Check[fortitude|dc:19]豁免。失败时，该生物对所有检定与DC承受-1状态减值，直至其使用一个动作干呕为止。豁免成功的生物在1分钟内不受任何地蜥人气息的影响 <em>(使用@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1})</em>。</p>"
 				},
 				"Jaws": {
 					"name": "噬咬 Jaws"
@@ -380,7 +380,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -403,18 +403,18 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				}
 			},
 			"prototypeToken": "狗头人法师（蓝）",
@@ -449,14 +449,14 @@
 			"items": {
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
-					"description": "<p>当该卡利尼第一次暴露于明亮光线时,直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形,且其感知检定承受-4状态减值。如其试图攻击一名生物,除非其通过一次@Check[flat|dc:11]检定,否则攻击失败。1小时内光线不会再次使其致盲。</p>"
+					"description": "<p>当该卡利尼第一次暴露于明亮光线时，直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形，且其感知检定承受-4状态减值。如其试图攻击一名生物，除非其通过一次@Check[flat|dc:11]检定，否则攻击失败。1小时内光线不会再次使其致盲。</p>"
 				},
 				"Dagger": {
 					"name": "匕首 Dagger"
 				},
 				"Darkening Poison": {
 					"name": "渐暗毒 Darkening Poison",
-					"description": "<p>该匿行者下次以匕首打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态,持续1轮。</p>"
+					"description": "<p>该匿行者下次以匕首打击造成伤害时，目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免，否则承受@Damage[1d8[poison]]伤害，并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态，持续1轮。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -577,7 +577,7 @@
 			"items": {
 				"See the Unseen (At Will)": {
 					"name": "识破无形 See the Unseen",
-					"description": "<p>你的注视刺穿幻象,并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物,仿佛它们并非隐形,虽然其轮廓模糊不清,使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态且难以辨识。你也能看见非实体生物,如鬼魂,在物体表面10尺范围内穿过物体时,呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果：识破无形 See the Unseen}</p>"
+					"description": "<p>你的注视刺穿幻象，并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物，仿佛它们并非隐形，虽然其轮廓模糊不清，使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态且难以辨识。你也能看见非实体生物，如鬼魂，在物体表面10尺范围内穿过物体时，呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果：识破无形 See the Unseen}</p>"
 				},
 				"Occult Innate Spells": {
 					"name": "内在秘能法术 Occult Innate Spells"
@@ -596,15 +596,15 @@
 				},
 				"Darkening Poison": {
 					"name": "渐暗毒 Darkening Poison",
-					"description": "<p>该猎手下次以短剑打击造成伤害时,目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免,否则承受@Damage[1d8[poison]]伤害,并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态,持续1轮。</p>"
+					"description": "<p>该猎手下次以短剑打击造成伤害时，目标必须成功通过一次@Check[fortitude|dc:16|traits:damaging-effect]豁免，否则承受@Damage[1d8[poison]]伤害，并将所有生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态，持续1轮。</p>"
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
-					"description": "<p>当该卡利尼第一次暴露于明亮光线时,直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形,且其感知检定承受-4状态减值。如其试图攻击一名生物,除非其通过一次@Check[flat|dc:11]检定,否则攻击失败。1小时内光线不会再次使其致盲。</p>"
+					"description": "<p>当该卡利尼第一次暴露于明亮光线时，直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形，且其感知检定承受-4状态减值。如其试图攻击一名生物，除非其通过一次@Check[flat|dc:11]检定，否则攻击失败。1小时内光线不会再次使其致盲。</p>"
 				},
 				"Final Fate": {
 					"name": "终末命运 Final Fate",
@@ -692,7 +692,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Message": {
 					"name": "传讯术 Message",
@@ -728,7 +728,7 @@
 				},
 				"Twin Feint": {
 					"name": "双重虚招 Twin Feint",
-					"description": "<p>该熊地精施虐者使用两件武器进行一系列眼花缭乱的攻击,以第一次攻击使其敌人@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}以应对从不同角度而来的第二次攻击。该熊地精施虐者用两件近战武器各进行一次打击,两次都对同一目标。目标对第二次攻击自动处于措手不及状态。该熊地精施虐者将其多重攻击减值正常应用于这些打击。</p>"
+					"description": "<p>该熊地精施虐者使用两件武器进行一系列眼花缭乱的攻击，以第一次攻击使其敌人@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}以应对从不同角度而来的第二次攻击。该熊地精施虐者用两件近战武器各进行一次打击，两次都对同一目标。目标对第二次攻击自动处于措手不及状态。该熊地精施虐者将其多重攻击减值正常应用于这些打击。</p>"
 				},
 				"Chain Shirt": {
 					"name": "链甲衫 Chain Shirt",
@@ -769,7 +769,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -804,7 +804,7 @@
 				},
 				"Knockdown": {
 					"name": "击倒 Knockdown",
-					"description": "<p>当该狼以颚部打击攻击成功时,它可在此后立即使用此动作尝试[[/act trip]]目标。此摔绊不施加,也不计入该狼的多重攻击减值。</p>"
+					"description": "<p>当该狼以颚部打击攻击成功时，它可在此后立即使用此动作尝试[[/act trip]]目标。此摔绊不施加，也不计入该狼的多重攻击减值。</p>"
 				}
 			},
 			"prototypeToken": "狼",
@@ -878,7 +878,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -893,7 +893,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Force Barrage (cYMX)": {
 					"name": "力场飞弹 Force Barrage",
@@ -904,7 +904,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹 Telekinetic Projectile",
@@ -912,7 +912,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				}
 			},
 			"prototypeToken": "狗头人法师（红）",
@@ -973,7 +973,7 @@
 				},
 				"Shield Block": {
 					"name": "盾牌格挡 Shield Block",
-					"description": "<p>如该暗影侏儒战士已举起盾牌,他可消耗反应动作格挡一次物理攻击。将所受伤害减少5,但随后该暗影侏儒战士与其盾牌都承受任何剩余的伤害。这可能损坏或摧毁盾牌。该盾牌至多有20点治疗生命值。</p>"
+					"description": "<p>如该暗影侏儒战士已举起盾牌，他可消耗反应动作格挡一次物理攻击。将所受伤害减少5,但随后该暗影侏儒战士与其盾牌都承受任何剩余的伤害。这可能损坏或摧毁盾牌。该盾牌至多有20点治疗生命值。</p>"
 				},
 				"Primal Innate Spells": {
 					"name": "原能内在法术 Primal Innate Spells"
@@ -1004,7 +1004,7 @@
 				},
 				"Raise a Shield": {
 					"name": "举起盾牌 Raise a Shield",
-					"description": "<p>该暗影侏儒战士举起盾牌,在下回合开始前对 AC 获得 +2 环境加值。</p>"
+					"description": "<p>该暗影侏儒战士举起盾牌，在下回合开始前对 AC 获得 +2 环境加值。</p>"
 				},
 				"Heavy Crossbow (GBCY)": {
 					"name": "重弩 Heavy Crossbow"
@@ -1025,7 +1025,7 @@
 				},
 				"Message": {
 					"name": "传讯术 Message",
-					"description": "<p>你轻声咬合发音,但话语并非从你口中传出,而是直接传到目标的耳中。其他人无法比你正常咬合发音时更清楚地听到你的话语,但目标可以听到你的话语,仿佛它就站在你身边。</p>\n<p>目标可以以反应动作做出简短回应,或在其下回合作为自由动作回应,但目标必须能看到你且在射程内。如果它回应,其回应也以同样的方式直接送达你的耳中。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 该法术的射程提升至 500 尺。</p>"
+					"description": "<p>你轻声咬合发音，但话语并非从你口中传出，而是直接传到目标的耳中。其他人无法比你正常咬合发音时更清楚地听到你的话语，但目标可以听到你的话语，仿佛它就站在你身边。</p>\n<p>目标可以以反应动作做出简短回应，或在其下回合作为自由动作回应，但目标必须能看到你且在射程内。如果它回应，其回应也以同样的方式直接送达你的耳中。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 该法术的射程提升至 500 尺。</p>"
 				},
 				"Magic Weapon": {
 					"name": "魔化武器 Magic Weapon",
@@ -1048,7 +1048,7 @@
 				},
 				"Heal": {
 					"name": "治疗术 Heal",
-					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物，你恢复 1d8 生命值。如果目标是不死生物，你对其造成该数值的命能伤害，且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言，姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物，回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质，姿势，语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
@@ -1056,7 +1056,7 @@
 				},
 				"Heal (DUff)": {
 					"name": "治疗术 Heal",
-					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物，你恢复 1d8 生命值。如果目标是不死生物，你对其造成该数值的命能伤害，且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言，姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物，回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质，姿势，语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Chain Shirt": {
 					"name": "链甲衫 Chain Shirt",
@@ -1076,7 +1076,7 @@
 				},
 				"Shield (aUt2)": {
 					"name": "钢盾 Shield",
-					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害,则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部 20 点生命值,则被彻底摧毁。</p>"
+					"description": "<p>盾牌具有 20 点生命值。如果盾牌曾受到 10 点或更多伤害，则它变为@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}状态。处于破损状态的盾牌不能用于@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}或@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block},但你仍可@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}它。如果盾牌失去全部 20 点生命值，则被彻底摧毁。</p>"
 				},
 				"Hand Crossbow": {
 					"name": "手弩 Hand Crossbow",
@@ -1087,7 +1087,7 @@
 				},
 				"Heal (IZFt)": {
 					"name": "治疗术 Heal",
-					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物,你恢复 1d8 生命值。如果目标是不死生物,你对其造成该数值的命能伤害,且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言, 姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物,回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质, 姿势, 语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
+					"description": "<p>你引导命能以治疗活物或伤害不死生物。如果目标是自愿的活物，你恢复 1d8 生命值。如果目标是不死生物，你对其造成该数值的命能伤害，且其可进行一次基础强韧豁免。你在施放该法术时花费的动作数量决定其目标、射程、范围与其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(语言，姿势)</strong> 该法术的射程为 30 尺。如果你在治疗一个活物，回复的生命值增加 8</p>\n<p><span class=\"action-glyph\">3</span> <strong>(物质，姿势，语言)</strong> 你在 30 尺散发内释放命能。这以爆发范围内所有活物与不死生物为目标。</p>\n<hr />\n<p><strong>升阶(+1)</strong> 治疗或伤害的量增加 1d8,两动作版本的额外治疗增加 8。</p>"
 				},
 				"Rapier (rjX4)": {
 					"name": "细剑 Rapier",
@@ -1095,7 +1095,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你大喊一道难以忽略的命令。你可命令目标接近你、逃离(就像它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态)、释放它持有之物、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}或停留原地。在它服从你的命令前,它不能延迟或采取任何反应动作。效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下回合的第一个动作上,该生物必须使用一个动作按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下回合所有动作上服从你的命令。</p>\n<hr /><p><strong>升阶(5环)</strong> 你最多可以以 10 个生物为目标。</p>"
+					"description": "<p>你大喊一道难以忽略的命令。你可命令目标接近你、逃离(就像它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态)、释放它持有之物、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}或停留原地。在它服从你的命令前，它不能延迟或采取任何反应动作。效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下回合的第一个动作上，该生物必须使用一个动作按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下回合所有动作上服从你的命令。</p>\n<hr /><p><strong>升阶(5环)</strong> 你最多可以以 10 个生物为目标。</p>"
 				},
 				"Guidance": {
 					"name": "神导术 Guidance",
@@ -1110,7 +1110,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				}
 			},
 			"prototypeToken": "卓尔女祭司",
@@ -1124,7 +1124,7 @@
 			"items": {
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级,由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高阶魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级，由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高阶魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Scythe": {
 					"name": "巨镰 Scythe",
@@ -1140,7 +1140,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Sling": {
 					"name": "投石索 Sling"
@@ -1369,7 +1369,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>与木盾类似,钢盾也有多种形状与尺寸。虽然较木盾昂贵,但耐用得多。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
+					"description": "<p>与木盾类似，钢盾也有多种形状与尺寸。虽然较木盾昂贵，但耐用得多。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
 				},
 				"Breastplate": {
 					"name": "胸甲 Breastplate",
@@ -1377,11 +1377,11 @@
 				},
 				"Raise a Shield": {
 					"name": "举起盾牌 Raise a Shield",
-					"description": "<p>该大地精士兵举起盾牌,在下回合开始前对 AC 获得 +2 环境加值</p>"
+					"description": "<p>该大地精士兵举起盾牌，在下回合开始前对 AC 获得 +2 环境加值</p>"
 				},
 				"Shield Block": {
 					"name": "盾牌格挡 Shield Block",
-					"description": "<p>如果该大地精在其上回合后@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raised a Shield},该大地精可消耗其反应动作格挡一次打击。将伤害减少 5,但该大地精与盾牌都承受剩余伤害,可能损坏或摧毁该盾牌。</p>"
+					"description": "<p>如果该大地精在其上回合后@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raised a Shield},该大地精可消耗其反应动作格挡一次打击。将伤害减少 5,但该大地精与盾牌都承受剩余伤害，可能损坏或摧毁该盾牌。</p>"
 				}
 			},
 			"prototypeToken": "大地精士兵",
@@ -1441,7 +1441,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -1517,7 +1517,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -1528,7 +1528,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				},
 				"Force Barrage (nXy3)": {
 					"name": "力场飞弹 Force Barrage",
@@ -1536,7 +1536,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Command": {
 					"name": "命令术 Command",
@@ -1548,7 +1548,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Force Barrage (9TMi)": {
 					"name": "力场飞弹 Force Barrage",
@@ -1582,7 +1582,7 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹 Telekinetic Projectile",
@@ -1590,7 +1590,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "杖 Staff",
@@ -1598,11 +1598,11 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Force Barrage (sUgS)": {
 					"name": "力场飞弹 Force Barrage",
@@ -1656,7 +1656,7 @@
 				},
 				"Constrict": {
 					"name": "紧勒 Constrict",
-					"description": "<p>如该礁爪有一名生物处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}状态,它可消耗一个动作以其卷须挤压目标。该生物根据其@Check[fortitude|dc:17|basic]豁免承受@Damage[1d6[bludgeoning]]伤害。</p>"
+					"description": "<p>如该礁爪有一名生物处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}状态，它可消耗一个动作以其卷须挤压目标。该生物根据其@Check[fortitude|dc:17|basic]豁免承受@Damage[1d6[bludgeoning]]伤害。</p>"
 				},
 				"Death Frenzy": {
 					"name": "临死狂乱 Death Frenzy",
@@ -1668,7 +1668,7 @@
 				},
 				"Grab": {
 					"name": "擒获 Grab",
-					"description": "<p>当该礁爪以爪击打击攻击成功时,它可在此后立即使用此动作尝试@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}目标。此擒拿不施加,也不计入该礁爪的多重攻击减值。</p>"
+					"description": "<p>当该礁爪以爪击打击攻击成功时，它可在此后立即使用此动作尝试@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}目标。此擒拿不施加，也不计入该礁爪的多重攻击减值。</p>"
 				}
 			},
 			"prototypeToken": "礁爪",
@@ -1686,7 +1686,7 @@
 				},
 				"Light Blindness": {
 					"name": "强光致盲 Light Blindness",
-					"description": "<p>当该卡利尼第一次暴露于明亮光线时,直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形,且其感知检定承受-4状态减值。如其试图攻击一名生物,除非其通过一次@Check[flat|dc:11]检定,否则攻击失败。1小时内光线不会再次使其致盲。</p>"
+					"description": "<p>当该卡利尼第一次暴露于明亮光线时，直至其下回合结束前都无法视物。所有方格对其而言皆为艰难地形，且其感知检定承受-4状态减值。如其试图攻击一名生物，除非其通过一次@Check[flat|dc:11]检定，否则攻击失败。1小时内光线不会再次使其致盲。</p>"
 				},
 				"Dagger": {
 					"name": "匕首 Dagger"
@@ -1728,7 +1728,7 @@
 				},
 				"Echolocation": {
 					"name": "回声定位 Echolocation",
-					"description": "<p>该蝙蝠可使用其听觉以列出射程「看见」周围,使其在黑暗中也能正常活动。</p>"
+					"description": "<p>该蝙蝠可使用其听觉以列出射程「看见」周围，使其在黑暗中也能正常活动。</p>"
 				}
 			},
 			"data": {
@@ -1750,7 +1750,7 @@
 				},
 				"Lifesense": {
 					"name": "生命感知 Lifesense",
-					"description": "<p>爬行之手可感知30尺内活物与不死生物的生命精华。这种感官能区分驱动活物的活力能量与驱动不死生物的虚空能量,正如视觉区分颜色一般。然而,爬行之手无法看见,因此依赖视觉或观看的效果对它无效。</p>"
+					"description": "<p>爬行之手可感知30尺内活物与不死生物的生命精华。这种感官能区分驱动活物的活力能量与驱动不死生物的虚空能量，正如视觉区分颜色一般。然而，爬行之手无法看见，因此依赖视觉或观看的效果对它无效。</p>"
 				}
 			},
 			"prototypeToken": "爬行之手",
@@ -1823,7 +1823,7 @@
 				},
 				"Ferocity": {
 					"name": "凶猛 Ferocity",
-					"description": "<p>当该奥克生命值降至0时,他可使用其反应动作以1点生命值保持清醒,但获得@UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{受伤 Wounded 1}状态(若其已具有该状态,则将受伤数值增加1)。该奥克在受伤3时无法使用此能力。</p>"
+					"description": "<p>当该奥克生命值降至0时，他可使用其反应动作以1点生命值保持清醒，但获得@UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{受伤 Wounded 1}状态(若其已具有该状态，则将受伤数值增加1)。该奥克在受伤3时无法使用此能力。</p>"
 				},
 				"Battle Axe": {
 					"name": "战斧 Battle Axe",
@@ -2044,7 +2044,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级,由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高阶魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。你只在该幻象魔法效果的阶级低于你的<em>侦测魔法</em>法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如<em>隐形术药水</em>)通常可被正常侦测。</p><hr /><p><strong>升阶(3环)</strong> 你了解该法术侦测到的最强魔法效果的阶级或等级，由 GM 决定。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高阶魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Concordant Choir": {
 					"name": "协音合唱 Concordant Choir",
@@ -2281,7 +2281,7 @@
 				},
 				"Rend": {
 					"name": "撕裂 Rend",
-					"description": "<p>如该食人妖在同回合内对同一生物以两次爪击打击攻击成功,它可使用此能力对该生物自动再造成爪击打击伤害。</p>"
+					"description": "<p>如该食人妖在同回合内对同一生物以两次爪击打击攻击成功，它可使用此能力对该生物自动再造成爪击打击伤害。</p>"
 				},
 				"Easily Misled": {
 					"name": "轻信易骗 Easily Misled",
@@ -2316,7 +2316,7 @@
 				},
 				"Consume Flesh": {
 					"name": "啃食尸体 Consume Flesh",
-					"description": "<p>该食尸鬼吞食一名死于过去 1 小时内的生物的一块躯体,并恢复@Damage[1d6[healing]]生命值。</p>\n<p>该食尸鬼对同一具尸体只能恢复一次生命值。</p>"
+					"description": "<p>该食尸鬼吞食一名死于过去 1 小时内的生物的一块躯体，并恢复@Damage[1d6[healing]]生命值。</p>\n<p>该食尸鬼对同一具尸体只能恢复一次生命值。</p>"
 				},
 				"Claw": {
 					"name": "爪击 Claw"
@@ -2326,7 +2326,7 @@
 				},
 				"Stench": {
 					"name": "恶臭 Stench",
-					"description": "<p>来到该食尸鬼10尺范围内并能闻到该食尸鬼气味的生物必须尝试一次@Check[fortitude|dc:14]豁免。失败时,该生物对所有检定与DC承受-1状态减值,直至其使用一个动作干呕为止(@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1})。豁免成功的生物在1分钟内不受任何食尸鬼气息的影响。</p>"
+					"description": "<p>来到该食尸鬼10尺范围内并能闻到该食尸鬼气味的生物必须尝试一次@Check[fortitude|dc:14]豁免。失败时，该生物对所有检定与DC承受-1状态减值，直至其使用一个动作干呕为止(@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1})。豁免成功的生物在1分钟内不受任何食尸鬼气息的影响。</p>"
 				},
 				"Swift Leap": {
 					"name": "迅捷跳跃 Swift Leap",
@@ -2440,7 +2440,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征,且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征,大小不超过 5 尺立方体,且如在 15 尺距离内观看,会显得明显粗糙且无细节。当你施放或维持此法术时,你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败,则该生物识破<em>幻象</em>。</p>"
+					"description": "<p>你创造一个简单的幻觉声响或景象。声响为该法术添加听觉特征，且声响不能包含可被理解的字词或精巧的乐曲。景象为法术添加视觉特征，大小不超过 5 尺立方体，且如在 15 尺距离内观看，会显得明显粗糙且无细节。当你施放或维持此法术时，你可尝试以幻象@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion},获得 +2 环境加值至你的欺骗检定。如果尝试对一名生物失败，则该生物识破<em>幻象</em>。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "杖 Staff",
@@ -2448,7 +2448,7 @@
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
-					"description": "<p>你发出一道脉冲,记录魔法的存在。除了魔法的存在或不存在外,你不会获得任何信息。你可选择忽略你完全知晓的魔法,例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而,具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环,但你也精确定位最高等级魔法的来源。如不精确感官一般,你不会了解确切位置,但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
+					"description": "<p>你发出一道脉冲，记录魔法的存在。除了魔法的存在或不存在外，你不会获得任何信息。你可选择忽略你完全知晓的魔法，例如你与盟友的魔法物品和持续中的法术。</p>\n<p>你只在该幻象魔法效果的等级低于你的侦测魔法法术阶级时才能侦测到该幻象魔法。然而，具有幻象灵光但外观并不具欺骗性的物品(例如隐形药水)通常可被正常侦测。</p>\n<hr />\n<p><strong>升阶(3环)</strong> 你了解射程内最高等级效果的法术学派。如果存在多个同样强度的效果,GM 决定你了解哪一个。</p>\n<p><strong>升阶(4环)</strong> 同 3 环，但你也精确定位最高等级魔法的来源。如不精确感官一般，你不会了解确切位置，但能将来源缩小至 5 尺立方体范围内(若来源大于该范围则缩小至最近)。</p>"
 				},
 				"Force Barrage (0QQD)": {
 					"name": "力场飞弹 Force Barrage",
@@ -2456,14 +2456,14 @@
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
-					"description": "<p>如果该狗头人邻接至少一名敌人,该狗头人以至多 30 尺行走,并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
+					"description": "<p>如果该狗头人邻接至少一名敌人，该狗头人以至多 30 尺行走，并在对抗由此移动触发的反应动作时对 AC 获得 +2 环境加值。该狗头人必须以未邻接任何敌人的空间结束此移动。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Command": {
 					"name": "命令术 Command",
@@ -2481,7 +2481,7 @@
 			"items": {
 				"Grab": {
 					"name": "擒获 Grab",
-					"description": "<p>当该蚂蚁以颚部打击攻击成功时,它可在此后立即使用此动作尝试[[/act grapple]]目标。此擒拿不施加,也不计入该蚂蚁的多重攻击减值。</p>"
+					"description": "<p>当该蚂蚁以颚部打击攻击成功时，它可在此后立即使用此动作尝试[[/act grapple]]目标。此擒拿不施加，也不计入该蚂蚁的多重攻击减值。</p>"
 				},
 				"Haul Away": {
 					"name": "搬走 Haul Away",
@@ -2613,7 +2613,7 @@
 				},
 				"Tag Team": {
 					"name": "和另一个秘密结社成员夹击 Tag Team",
-					"description": "<p>该粘液沿一条直线向30尺内另一只丝状粘液发射酸性原生质弧。该直线上每名生物承受@Damage[3d6[acid]]伤害,并进行一次@Check[reflex|dc:16|basic|options:area-effect,inflicts:prone]豁免。豁免失败的生物还会被击倒为@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}状态。</p>"
+					"description": "<p>该粘液沿一条直线向30尺内另一只丝状粘液发射酸性原生质弧。该直线上每名生物承受@Damage[3d6[acid]]伤害，并进行一次@Check[reflex|dc:16|basic|options:area-effect,inflicts:prone]豁免。豁免失败的生物还会被击倒为@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}状态。</p>"
 				},
 				"Pseudopod": {
 					"name": "伪足 Pseudopod"
@@ -2734,7 +2734,7 @@
 				},
 				"Half Plate": {
 					"name": "半身甲 Half Plate",
-					"description": "<p>半身板由全身板上半身的大部分护甲板组成,手臂与腿部以更轻或更稀疏的钢板防护。这提供了部分全身板的防护,同时具有更高的灵活性与速度。该护甲附带一件软甲衬垫与一对铁手套。</p>"
+					"description": "<p>半身板由全身板上半身的大部分护甲板组成，手臂与腿部以更轻或更稀疏的钢板防护。这提供了部分全身板的防护，同时具有更高的灵活性与速度。该护甲附带一件软甲衬垫与一对铁手套。</p>"
 				},
 				"Greataxe (MY4B)": {
 					"name": "巨斧 Greataxe",
@@ -2872,7 +2872,7 @@
 				},
 				"Stench": {
 					"name": "恶臭 Stench",
-					"description": "<p>来到该鹰身女妖30尺范围内并能闻到该鹰身女妖气味的生物必须尝试一次@Check[fortitude|dc:21]豁免。失败时,该生物对所有检定与DC承受-1状态减值,直至其使用一个动作干呕为止。豁免成功的生物在1分钟内不受任何鹰身女妖气息的影响。</p>"
+					"description": "<p>来到该鹰身女妖30尺范围内并能闻到该鹰身女妖气味的生物必须尝试一次@Check[fortitude|dc:21]豁免。失败时，该生物对所有检定与DC承受-1状态减值，直至其使用一个动作干呕为止。豁免成功的生物在1分钟内不受任何鹰身女妖气息的影响。</p>"
 				}
 			},
 			"prototypeToken": "鹰身女妖",
@@ -2951,11 +2951,11 @@
 			"items": {
 				"Grab": {
 					"name": "擒获 Grab",
-					"description": "<p>当该座狼以颚部打击攻击成功时,它可在此后立即使用此动作尝试[[/act grapple]]目标。此擒拿不施加,也不计入该座狼的多重攻击减值。</p>"
+					"description": "<p>当该座狼以颚部打击攻击成功时，它可在此后立即使用此动作尝试[[/act grapple]]目标。此擒拿不施加，也不计入该座狼的多重攻击减值。</p>"
 				},
 				"Shred": {
 					"name": "肢解 Shred",
-					"description": "<p>如果该座狼有一名生物处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态,它可消耗一个动作以其牙齿撕裂目标。该生物承受@Damage[1d6[slashing]]伤害,并可进行一次@Check[fortitude|dc:18|basic]豁免。</p>"
+					"description": "<p>如果该座狼有一名生物处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，它可消耗一个动作以其牙齿撕裂目标。该生物承受@Damage[1d6[slashing]]伤害，并可进行一次@Check[fortitude|dc:18|basic]豁免。</p>"
 				},
 				"Pack Attack": {
 					"name": "群起攻之 Pack Attack",
