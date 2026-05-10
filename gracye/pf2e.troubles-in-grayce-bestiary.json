@@ -88,7 +88,7 @@
 				},
 				"Soporific Stench": {
 					"name": "催眠之臭 Soporific Stench",
-					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
 				},
 				"Rapier (BSWr)": {
 					"name": "细剑 Rapier",
@@ -280,7 +280,7 @@
 				},
 				"Sensitive Ears": {
 					"name": "敏锐之耳 Sensitive Ears",
-					"description": "<p>帕斯河剥皮怪硕大的耳朵使其对巨响特别敏感。试图通过呼喊、敲击盾牌或类似手段对剥皮怪 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{威吓} 的生物，无须承受不与剥皮怪共享语言的-4环境减值。每当剥皮怪承受音波伤害时，必须成功通过 @Check[will|dc:16|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。</p>"
+					"description": "<p>帕斯河剥皮怪硕大的耳朵使其对巨响特别敏感。试图通过呼喊、敲击盾牌或类似手段对剥皮怪 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize} 的生物，无须承受不与剥皮怪共享语言的-4环境减值。每当剥皮怪承受音波伤害时，必须成功通过 @Check[will|dc:16|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。</p>"
 				},
 				"Blood Run Cold": {
 					"name": "血液冷凝 Blood Run Cold",
@@ -549,7 +549,7 @@
 				},
 				"Wild Curse": {
 					"name": "狂野诅咒 Wild Curse",
-					"description": "<p>掘地兽充满受诅能量但难以控制。在其回合开始时，掷 [[/gmr 1d6 #狂野诅咒]]。1-2时它 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 直至其回合结束；3-4时既不迟缓也不 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速}（除非其他效果造成）；5-6时加速直至其回合结束。</p>"
+					"description": "<p>掘地兽充满受诅能量但难以控制。在其回合开始时，掷 [[/gmr 1d6 #狂野诅咒]]。1-2时它 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 直至其回合结束；3-4时既不迟缓也不 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened}（除非其他效果造成）；5-6时加速直至其回合结束。</p>"
 				},
 				"Shovel Teeth": {
 					"name": "铲齿 Shovel Teeth"
@@ -601,7 +601,7 @@
 				},
 				"Bitter Invective": {
 					"name": "苦涩斥骂 Bitter Invective",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家对其能看见的30尺内一个生物喷出令人意外的恶毒训斥，对方必须尝试一次 @Check[will|dc:20|options:inflicts:stupefied] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}）。无论结果如何，该生物随后24小时内对此能力临时免疫。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家对其能看见的30尺内一个生物喷出令人意外的恶毒训斥，对方必须尝试一次 @Check[will|dc:20|options:inflicts:stupefied] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}）。无论结果如何，该生物随后24小时内对此能力临时免疫。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
@@ -898,7 +898,7 @@
 			"items": {
 				"Rupture": {
 					"name": "破裂 Rupture",
-					"description": "<p><strong>触发</strong> 喷射热糖锅破损</p><hr /><p><strong>效果</strong> 锅炸裂，将剩余内容物洒入 @Template[type:cone|distance:15] 范围，造成 @Damage[2d12[fire]|options:area-damage] 伤害（@Check[reflex|dc:20|options:area-effect,damaging-effect] 豁免）。该反应覆盖区域在剩余战斗中持续作为困难地形。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受半额伤害。</p>\n<p><strong>失败</strong> 该生物承受全额伤害，并陷入热糖黏稠混乱，所有速度承受-10尺环境减值，直至离开破裂效果区域。在离开效果区域前，它还承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}（DC 18 [[/act escape dc=18]]），其后所有速度承受-10尺环境减值并承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害（同失败）。</p>"
+					"description": "<p><strong>触发</strong> 喷射热糖锅破损</p><hr /><p><strong>效果</strong> 锅炸裂，将剩余内容物洒入 @Template[type:cone|distance:15] 范围，造成 @Damage[2d12[fire]|options:area-damage] 伤害（@Check[reflex|dc:20|options:area-effect,damaging-effect] 豁免）。该反应覆盖区域在剩余战斗中持续作为困难地形。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受半额伤害。</p>\n<p><strong>失败</strong> 该生物承受全额伤害，并陷入热糖黏稠混乱，所有速度承受-10尺环境减值，直至离开破裂效果区域。在离开效果区域前，它还承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}（DC 18 [[/act escape dc=18]]），其后所有速度承受-10尺环境减值并承受 @Damage[1d4[persistent,fire]|options:area-damage] 伤害（同失败）。</p>"
 				},
 				"Bubble Bubble": {
 					"name": "沸沸扬扬 Bubble Bubble",
@@ -975,7 +975,7 @@
 				},
 				"Gummy Hands": {
 					"name": "黏糖手 Gummy Hands",
-					"description": "<p>糖果残留物给艾扎对其大斧的格外牢固握持力，对她的反射DC给予+2环境加值，以抵抗 @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{缴械} 她的尝试。</p>"
+					"description": "<p>糖果残留物给艾扎对其大斧的格外牢固握持力，对她的反射DC给予+2环境加值，以抵抗 @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm} 她的尝试。</p>"
 				},
 				"Glutton's Rush": {
 					"name": "饕餮之冲 Glutton's Rush",
@@ -983,7 +983,7 @@
 				},
 				"Tooth Decay": {
 					"name": "蛀牙 Tooth Decay",
-					"description": "<p>频繁食糖让艾扎本就糟糕的牙齿健康更加恶化。如果她从单一攻击或效果承受10或以上钝击伤害，必须尝试一次 @Check[fortitude|dc:25] 豁免。</p><hr /><p><strong>成功</strong> 艾扎痛叫，但未受其他影响。</p>\n<p><strong>失败</strong> 艾扎数颗牙折断。她对颚部打击的伤害以及作为 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{抓握} 与 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]{整吞} 能力一部分进行的运动检定承受-2减值。这些减值持续至艾扎被治疗到生命值上限。</p>\n<p><strong>大失败</strong> 同失败，但艾扎更多牙折断，使减值增加至-3，并承受 @Damage[(1d6-2)[persistent,bleed]] 伤害。</p>"
+					"description": "<p>频繁食糖让艾扎本就糟糕的牙齿健康更加恶化。如果她从单一攻击或效果承受10或以上钝击伤害，必须尝试一次 @Check[fortitude|dc:25] 豁免。</p><hr /><p><strong>成功</strong> 艾扎痛叫，但未受其他影响。</p>\n<p><strong>失败</strong> 艾扎数颗牙折断。她对颚部打击的伤害以及作为 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]{擒获 Grab} 与 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]{活吞 Swallow Whole} 能力一部分进行的运动检定承受-2减值。这些减值持续至艾扎被治疗到生命值上限。</p>\n<p><strong>大失败</strong> 同失败，但艾扎更多牙折断，使减值增加至-3，并承受 @Damage[(1d6-2)[persistent,bleed]] 伤害。</p>"
 				},
 				"Swallow Whole": {
 					"name": "活吞 Swallow Whole",
@@ -1074,7 +1074,7 @@
 			"items": {
 				"Clothes Grab": {
 					"name": "衣物抓取 Clothes Grab",
-					"description": "<p>被自走衣柜的衣物鞭打击命中的生物被自走衣柜 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}。该生物未 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}，但无法移动到衣柜衣物鞭触及距之外。生物可对AC 15进行打击并造成至少5挥砍伤害以割断衣物鞭。这对自走衣柜不造成伤害。</p>"
+					"description": "<p>被自走衣柜的衣物鞭打击命中的生物被自走衣柜 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}。该生物未 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}，但无法移动到衣柜衣物鞭触及距之外。生物可对AC 15进行打击并造成至少5挥砍伤害以割断衣物鞭。这对自走衣柜不造成伤害。</p>"
 				},
 				"Clothes Whip": {
 					"name": "衣物鞭 Clothes Whip"
@@ -1150,12 +1150,12 @@
 			"disable": "<p>@Check[arcana|dc:22]（受训）、@Check[occultism|dc:22]（受训）或 @Check[nature|dc:22]（受训）以平息四颗抓握宝石中的一颗</p>",
 			"hazarddescription": "<p>四颗用于储存灵魂碎片的魔法处理宝石开始散发出阴森的恶意光辉。</p>",
 			"reset": "<p>该惊魂在所有活物离开房间1分钟后停止。1小时后或被解除后，惊魂准备再度触发。让塔留斯之灵安息可永久摧毁该惊魂。</p>",
-			"routine": "<p>（2个动作）该惊魂的第一动作中，抓握宝石尝试一次以运动的检定（[[/r 1d20+4#运动]]{+14 调整}）以 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒抱} 房间中每个非 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动} 的活物。掷一次并将结果与每个目标的强韧DC对比。每被解除或摧毁一颗宝石，该危害对此检定承受累积-1环境减值。该惊魂第二动作中，宝石的幻影之手挤压其受害者。每个被惊魂无法移动的生物承受 @Damage[(2d8+5)[bludgeoning]] 伤害（@Check[fortitude|dc:21|basic] 豁免）。</p>",
+			"routine": "<p>（2个动作）该惊魂的第一动作中，抓握宝石尝试一次以运动的检定（[[/r 1d20+4#运动]]{+14 调整}）以 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple} 房间中每个非 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized} 的活物。掷一次并将结果与每个目标的强韧DC对比。每被解除或摧毁一颗宝石，该危害对此检定承受累积-1环境减值。该惊魂第二动作中，宝石的幻影之手挤压其受害者。每个被惊魂无法移动的生物承受 @Damage[(2d8+5)[bludgeoning]] 伤害（@Check[fortitude|dc:21|basic] 豁免）。</p>",
 			"stealthdetails": "<p>（受训）</p>",
 			"items": {
 				"Phantom Hands": {
 					"name": "幻影之手 Phantom Hands",
-					"description": "<p><strong>触发</strong> 一个活物与一颗抓握宝石所在层架相邻</p><hr /><p><strong>效果</strong> 房间被阴森光辉所笼罩，幻影之手从四面八方伸出。每个房间内的活物必须尝试一次 @Check[fortitude|dc:24|options:area-effect,inflicts:immobilized] 豁免。该惊魂随后掷先攻。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 幻影之手干扰该生物的移动。该生物对其先攻骰承受-2状态减值。</p>\n<p><strong>失败</strong> 幻影之手将该生物固定原地。该生物对其先攻骰承受-2状态减值，并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{无法移动}（[[/act escape dc=24]]）首回合。</p>\n<p><strong>大失败</strong> 同失败，但如该生物在首回合尝试挣脱，必须掷两次取较差结果。这是一种厄运效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aBtlxHM9ChGywyrH]{效果：幻影之手}</p>"
+					"description": "<p><strong>触发</strong> 一个活物与一颗抓握宝石所在层架相邻</p><hr /><p><strong>效果</strong> 房间被阴森光辉所笼罩，幻影之手从四面八方伸出。每个房间内的活物必须尝试一次 @Check[fortitude|dc:24|options:area-effect,inflicts:immobilized] 豁免。该惊魂随后掷先攻。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 幻影之手干扰该生物的移动。该生物对其先攻骰承受-2状态减值。</p>\n<p><strong>失败</strong> 幻影之手将该生物固定原地。该生物对其先攻骰承受-2状态减值，并 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}（[[/act escape dc=24]]）首回合。</p>\n<p><strong>大失败</strong> 同失败，但如该生物在首回合尝试挣脱，必须掷两次取较差结果。这是一种厄运效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aBtlxHM9ChGywyrH]{效果：幻影之手}</p>"
 				}
 			},
 			"data": {
@@ -1344,7 +1344,7 @@
 				},
 				"Bane": {
 					"name": "绝望术 Bane",
-					"description": "<p>你以怀疑充满敌人的心灵。范围内的敌人必须成功通过一次意志豁免,否则在其位于范围内时,其攻击骰承受 -1 状态减值。在后续回合每轮一次,你可维持该法术以将散发半径增加 10 尺,并强制范围内尚未受影响的敌人尝试再一次豁免。</p>\n<p>厄运可破解@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术 Bless}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果:绝望术 Spell Effect: Bane}</p>"
+					"description": "<p>你以怀疑充满敌人的心灵。范围内的敌人必须成功通过一次意志豁免,否则在其位于范围内时,其攻击骰承受 -1 状态减值。在后续回合每轮一次,你可维持该法术以将散发半径增加 10 尺,并强制范围内尚未受影响的敌人尝试再一次豁免。</p>\n<p>厄运可破解@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术 Bless}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果：绝望术 Bane}</p>"
 				},
 				"Occult Spontaneous Spells": {
 					"name": "自发秘能法术 Occult Spontaneous Spells"
@@ -1370,7 +1370,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Blood Vendetta": {
 					"name": "溢血深仇 Blood Vendetta",
@@ -1472,7 +1472,7 @@
 			"items": {
 				"Blood Vigor": {
 					"name": "血之活力 Blood Vigor",
-					"description": "<p>当与一个承受持续流血伤害的生物相邻时，血裔者获得快速治疗3并 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速} 直至其下回合开始。血裔者只能用其额外动作进行单步或快步行动。</p>"
+					"description": "<p>当与一个承受持续流血伤害的生物相邻时，血裔者获得快速治疗3并 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened} 直至其下回合开始。血裔者只能用其额外动作进行单步或快步行动。</p>"
 				},
 				"Bloodletter": {
 					"name": "放血者 Bloodletter",
@@ -1763,7 +1763,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Void Warp": {
 					"name": "虚能噬 Void Warp",

@@ -86,7 +86,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Message": {
 					"name": "传讯术 Message",
@@ -271,7 +271,7 @@
 				},
 				"Incorporeal": {
 					"name": "启用需求目标为虚体的能力 Incorporeal",
-					"description": "<p>暗影祭司没有实体，可以穿过实体物体，但不能在其中结束回合。多数依赖力量与实体的检定，例如 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒抱} 与 @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推挤}，对暗影祭司无效，且暗影祭司也无法使用它们。</p>"
+					"description": "<p>暗影祭司没有实体，可以穿过实体物体，但不能在其中结束回合。多数依赖力量与实体的检定，例如 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple} 与 @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}，对暗影祭司无效，且暗影祭司也无法使用它们。</p>"
 				},
 				"Light Vulnerability": {
 					"name": "光辉弱点 Light Vulnerability",
@@ -372,7 +372,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Force Barrage": {
 					"name": "力场飞弹 Force Barrage",
@@ -414,7 +414,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				}
 			},
 			"prototypeToken": "狗头人法师（蓝）",
@@ -577,7 +577,7 @@
 			"items": {
 				"See the Unseen (At Will)": {
 					"name": "识破无形 See the Unseen",
-					"description": "<p>你的注视刺穿幻象,并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物,仿佛它们并非隐形,虽然其轮廓模糊不清,使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态且难以辨识。你也能看见非实体生物,如鬼魂,在物体表面10尺范围内穿过物体时,呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果:洞悉无形 Spell Effect: See the Unseen}</p>"
+					"description": "<p>你的注视刺穿幻象,并发现@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的生物与灵体。你能看见隐形生物,仿佛它们并非隐形,虽然其轮廓模糊不清,使它们处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态且难以辨识。你也能看见非实体生物,如鬼魂,在物体表面10尺范围内穿过物体时,呈现为透过物体可见的模糊轮廓。其他细微线索还使你在用以识破幻象的检定上获得+2状态加值。</p>\n<hr />\n<p><strong>升阶(5环)</strong> 此法术持续时间为8小时。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.T5bk6UH7yuYog1Fp]{法术效果：识破无形 See the Unseen}</p>"
 				},
 				"Occult Innate Spells": {
 					"name": "内在秘能法术 Occult Innate Spells"
@@ -688,7 +688,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
@@ -874,7 +874,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
@@ -904,7 +904,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Telekinetic Projectile": {
 					"name": "念动射弹 Telekinetic Projectile",
@@ -1140,7 +1140,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Sling": {
 					"name": "投石索 Sling"
@@ -1517,7 +1517,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Dragon Lore": {
 					"name": "龙类学识 Dragon Lore"
@@ -1540,7 +1540,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "杖 Staff",
@@ -1598,7 +1598,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
@@ -1610,7 +1610,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
@@ -2079,11 +2079,11 @@
 				},
 				"Incorporeal": {
 					"name": "启用需求目标为虚体的能力 Incorporeal",
-					"description": "<p>卢康没有实体，可以穿过实体物体，但不能在其中结束回合。多数依赖力量与实体的检定，例如 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒抱} 与 @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推挤}，对卢康无效，且他也无法使用它们。</p>"
+					"description": "<p>卢康没有实体，可以穿过实体物体，但不能在其中结束回合。多数依赖力量与实体的检定，例如 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple} 与 @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}，对卢康无效，且他也无法使用它们。</p>"
 				},
 				"Laughing Fit": {
 					"name": "狂笑发作 Laughing Fit",
-					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
+					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
 				},
 				"Light Vulnerability": {
 					"name": "光辉弱点 Light Vulnerability",
@@ -2463,11 +2463,11 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果:护盾术 Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果:护盾术免疫 Effect: Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作,使你在下回合开始前对 AC 获得 +1 环境加值,但不需要使用一只手。</p>\n<p>该法术持续期间,你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害,即使该效果不造成物理伤害。在你使用盾牌格挡后,法术结束,且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延后 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				}
 			},
 			"prototypeToken": "狗头人法师（白）",
@@ -2512,11 +2512,11 @@
 				},
 				"Petrifying Glance": {
 					"name": "石化扫视 Petrifying Glance",
-					"description": "<p>石化蜥蜴在它的回合开始时能看见30尺内的一个生物时，石化蜥蜴能用反应动作扫视生物。</p>\n<p>目标必须通过@Check[fortitude|dc:20|options:inflicts:slowed]检定。如果失败，它的身体慢慢变硬，获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}效果。</p>"
+					"description": "<p>石化蜥蜴在它的回合开始时能看见30尺内的一个生物时，石化蜥蜴能用反应动作扫视生物。</p>\n<p>目标必须通过@Check[fortitude|dc:20|options:inflicts:slowed]检定。如果失败，它的身体慢慢变硬，获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}效果。</p>"
 				},
 				"Petrifying Gaze": {
 					"name": "石化凝视 Petrifying Gaze",
-					"description": "<p>石化蜥蜴瞪视它30尺内的一个生物。目标必须通过@Check[fortitude|dc:22|options:inflicts:slowed,inflicts:petrified]检定。</p>\n<p>如果失败且没有被石化扫视能力及本能力影响，则获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢术 Slowed 1}，持续1分钟。如果目标已经被石化扫视或此能力影响过，则目标永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>通过这种方式被石化的生物，可以通过往表面淋新鲜的石化蜥蜴血（从死亡不超过1小时的石化蜥蜴身体里提取）可以立即恢复肉身。一只石化蜥蜴的血足够使两只中型生物恢复肉身。</p>"
+					"description": "<p>石化蜥蜴瞪视它30尺内的一个生物。目标必须通过@Check[fortitude|dc:22|options:inflicts:slowed,inflicts:petrified]检定。</p>\n<p>如果失败且没有被石化扫视能力及本能力影响，则获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。如果目标已经被石化扫视或此能力影响过，则目标永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>通过这种方式被石化的生物，可以通过往表面淋新鲜的石化蜥蜴血（从死亡不超过1小时的石化蜥蜴身体里提取）可以立即恢复肉身。一只石化蜥蜴的血足够使两只中型生物恢复肉身。</p>"
 				}
 			},
 			"prototypeToken": "蜥怪",
@@ -2919,7 +2919,7 @@
 				},
 				"Perfect Orienteering": {
 					"name": "完美方向感 Perfect Orienteering",
-					"description": "<p>牛头人在以求生进行 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{方向感知} 或 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 检定时自动大成功。</p>"
+					"description": "<p>牛头人在以求生进行 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向 Sense Direction} 或 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 检定时自动大成功。</p>"
 				}
 			},
 			"prototypeToken": "牛头人猎手",
