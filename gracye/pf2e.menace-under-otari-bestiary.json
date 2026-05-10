@@ -106,7 +106,7 @@
 			"items": {
 				"Viper Venom": {
 					"name": "蝰蛇毒液 Viper Venom",
-					"description": "<p>被蝰蛇的尖牙打击命中并承受伤害的生物必须成功通过@Check[fortitude|dc:16]豁免，否则承受@Damage[1d10[poison]]伤害。</p>"
+					"description": "<p>被蝰蛇的尖牙击中并承受伤害的生物必须成功通过@Check[fortitude|dc:16]豁免，否则承受@Damage[1d10[poison]]伤害。</p>"
 				},
 				"Slink": {
 					"name": "偷溜 Slink",
@@ -530,7 +530,7 @@
 				},
 				"Web Trap": {
 					"name": "网捕 Web Trap",
-					"description": "<p>被巨蜘蛛蛛网打击命中的生物，会被困在最近的地面上。他无法移动，除非成功进行[[/act escape dc=17]]检定。</p>"
+					"description": "<p>被巨蜘蛛蛛网击中的生物，会被困在最近的地面上。他无法移动，除非成功进行[[/act escape dc=17]]检定。</p>"
 				},
 				"Descend on a Web": {
 					"name": "蛛网垂降 Descend on a Web",
@@ -1332,7 +1332,7 @@
 				},
 				"Giant Centipede Venom": {
 					"name": "巨蜈蚣毒 Giant Centipede Venom",
-					"description": "<p>被巨蜈蚣的虫颚打击命中并承受穿刺伤害的生物必须尝试一次@Check[fortitude|dc:14]豁免，失败则受到@Damage[1d6[poison]]伤害。</p>"
+					"description": "<p>被巨蜈蚣的虫颚击中并承受穿刺伤害的生物必须尝试一次@Check[fortitude|dc:14]豁免，失败则受到@Damage[1d6[poison]]伤害。</p>"
 				}
 			},
 			"prototypeToken": "巨蜈蚣",
@@ -1888,7 +1888,7 @@
 				},
 				"Steal Shadow": {
 					"name": "偷阴窃影 Steal Shadow",
-					"description": "<p>若幽影在前一个动作中以幽影之手打击命中一个活物，幽影可以抽出目标的影子，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。这能和幽影造成的其他力竭效果相叠加，最大达到力竭4。此能力造成的力竭效果每小时减少1状态值。</p>"
+					"description": "<p>若幽影在前一个动作中以幽影之手击中一个活物，幽影可以抽出目标的影子，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。这能和幽影造成的其他力竭效果相叠加，最大达到力竭4。此能力造成的力竭效果每小时减少1状态值。</p>"
 				},
 				"Incorporeal": {
 					"name": "虚体 Incorporeal",
@@ -1974,7 +1974,7 @@
 			"items": {
 				"Grab": {
 					"name": "擒获 Grab",
-					"description": "<p>当僵尸成功用拳头打击命中一个生物时，它可以用这个动作自动让目标陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，直到它下一回合结束。</p>"
+					"description": "<p>当僵尸成功用拳头击中一个生物时，它可以用这个动作自动让目标陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，直到它下一回合结束。</p>"
 				},
 				"Slow": {
 					"name": "缓慢术 Slow",
@@ -2125,7 +2125,7 @@
 				},
 				"Web Lurker Venom": {
 					"name": "伏网怪毒 Web Lurker Venom",
-					"description": "<p>被伏网怪的尖牙打击命中并承受伤害的生物必须成功通过@Check[fortitude|dc:19]豁免，否则承受@Damage[1d12[poison]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，持续1轮。</p>"
+					"description": "<p>被伏网怪的尖牙击中并承受伤害的生物必须成功通过@Check[fortitude|dc:19]豁免，否则承受@Damage[1d12[poison]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，持续1轮。</p>"
 				},
 				"Web Trap": {
 					"name": "蛛网陷阱 Web Trap",
@@ -2387,7 +2387,7 @@
 			"items": {
 				"Grab": {
 					"name": "擒获 Grab",
-					"description": "<p>当丧尸成功以啃咬打击命中目标，它能以此动作自动让陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，直到它的下一回合结束。</p>"
+					"description": "<p>当丧尸成功以啃咬击中目标，它能以此动作自动让陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}状态，直到它的下一回合结束。</p>"
 				},
 				"Sneak Attack": {
 					"name": "偷袭 Sneak Attack",
@@ -2742,7 +2742,7 @@
 				},
 				"Terrifying Charge": {
 					"name": "恐怖冲锋 Terrifying Charge",
-					"description": "<p>巨人行走并且使用角抵打击，这次角抵打击在伤害上拥有+4环境加值。</p>\n<p>如果打击命中，巨人对目标尝试一次[[/act demoralize]]。</p>"
+					"description": "<p>巨人行走并且使用角抵打击，这次角抵打击在伤害上拥有+4环境加值。</p>\n<p>如果击中，巨人对目标尝试一次[[/act demoralize]]。</p>"
 				},
 				"Horns": {
 					"name": "角抵 Horns"

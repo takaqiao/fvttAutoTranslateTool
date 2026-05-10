@@ -152,7 +152,7 @@
 			"items": {
 				"Dust": {
 					"name": "扬尘 Dust",
-					"description": "<p>被自走扫帚的鬃毛打击命中的生物必须成功通过 @Check[fortitude|dc:19] 豁免，否则下一动作用于咳嗽。即使被多次鬃毛攻击命中，该生物也只需花费1个动作咳嗽以咳净尘埃。无需呼吸的生物对此效果免疫。</p>"
+					"description": "<p>被自走扫帚的鬃毛击中的生物必须成功通过 @Check[fortitude|dc:19] 豁免，否则下一动作用于咳嗽。即使被多次鬃毛攻击命中，该生物也只需花费1个动作咳嗽以咳净尘埃。无需呼吸的生物对此效果免疫。</p>"
 				},
 				"Construct Armor (Hardness 4)": {
 					"name": "建构甲胄（硬度 4） Construct Armor (Hardness 4)",
@@ -237,7 +237,7 @@
 				},
 				"Highly Confusing Scheme": {
 					"name": "高度迷惑的计谋 Highly Confusing Scheme",
-					"description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次欺瞒检定 [[/act feint]]。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 减值适用。</p>"
+					"description": "<p>德尔提克详尽描述其令人困惑的计谋，使目标难以应对。德尔提克对至多30尺外的对手尝试一次欺瞒检定 [[/act feint]]。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 减值适用。</p>"
 				},
 				"Shortbow (ELUM)": {
 					"name": "短弓 Shortbow",
@@ -729,7 +729,7 @@
 				},
 				"Toffee Sauce": {
 					"name": "太妃糖酱 Toffee Sauce",
-					"description": "<p>被黏糊太妃糖犬撞头打击命中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+					"description": "<p>被黏糊太妃糖犬撞头击中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
 				},
 				"Jaws": {
 					"name": "噬咬 Jaws"
@@ -1074,7 +1074,7 @@
 			"items": {
 				"Clothes Grab": {
 					"name": "衣物抓取 Clothes Grab",
-					"description": "<p>被自走衣柜的衣物鞭打击命中的生物被自走衣柜 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}。该生物未 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}，但无法移动到衣柜衣物鞭触及距之外。生物可对AC 15进行打击并造成至少5挥砍伤害以割断衣物鞭。这对自走衣柜不造成伤害。</p>"
+					"description": "<p>被自走衣柜的衣物鞭击中的生物被自走衣柜 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}。该生物未 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}，但无法移动到衣柜衣物鞭触及距之外。生物可对AC 15进行打击并造成至少5挥砍伤害以割断衣物鞭。这对自走衣柜不造成伤害。</p>"
 				},
 				"Clothes Whip": {
 					"name": "衣物鞭 Clothes Whip"
