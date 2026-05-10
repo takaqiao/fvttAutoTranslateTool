@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 26 commits ~2200+ 处修复
+> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 31 commits ~2900+ 处修复
 
 ---
 
@@ -172,9 +172,13 @@ gracye/
 
 ---
 
-## 26 commits 时间线
+## 31 commits 时间线
 
 ```
+0e5400e  ★★★ Batch 8: bare action label 双语化二轮 (~57, 含 威逼→胁迫 UUID 修正)
+a982af9  ★★★ Batch 7: production 同步 pf2compendium (38, 含 永光/永明→长明)
+2f364dd  ★★★ Batch 6b: SRD 13 项 SoG-NEW 装备 + Obsidian 黑耀→黑曜 typo + Sneak Attack 补
+9e71549  ★★★ Batch 6a: SRD 文件补译 (12 项 production 引用对应)
 2e624ae  ★ Batch 5: bare action/spell label 双语化 + 译名对齐 (~54)
 3b5d09b  ★ Batch 4: 中文标点 442 处
 9d482ee  docs: handoff
