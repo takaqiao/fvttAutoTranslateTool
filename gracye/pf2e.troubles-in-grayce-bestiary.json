@@ -77,7 +77,7 @@
 			"items": {
 				"Children of the Night": {
 					"name": "暗夜子嗣 Children of the Night",
-					"description": "<p>该吸血鬼的存在召来夜晚的生物听从其命令。这些通常包括@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6wPW2dvpt86Ou6bL]{鼠群 Rat Swarms}、@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{蝠群 Bat Swarms}和@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.BN5Lb6IsQ9Wyu3rL]{狼 Wolves},但也可包括其他生物。</p>\n<p>只要这些生物在 100 尺范围内，该吸血鬼可向其下达心灵感应命令，但它们不能回应。</p>"
+					"description": "<p>该吸血鬼的存在召来夜晚的生物听从其命令。这些通常包括@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6wPW2dvpt86Ou6bL]{鼠群 Rat Swarms}、@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{蝠群 Bat Swarms}和@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.BN5Lb6IsQ9Wyu3rL]{狼 Wolves}，但也可包括其他生物。</p>\n<p>只要这些生物在 100 尺范围内，该吸血鬼可向其下达心灵感应命令，但它们不能回应。</p>"
 				},
 				"Rapier": {
 					"name": "细剑 Rapier"
@@ -96,7 +96,7 @@
 				},
 				"Drink Blood": {
 					"name": "饮血 Drink Blood",
-					"description": "<p><strong>需求</strong> 一名处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}状态或自愿的生物处于该吸血鬼的触及范围内。</p>\n<hr />\n<p><strong>效果</strong> 该吸血鬼将尖牙刺入该生物以吸吮其鲜血。如果受害者处于受擒状态，需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC;若受害者处于其他状态之一，则自动成功。</p>\n<p>受害者获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}状态，且该吸血鬼恢复@Damage[10[healing]]{10 HP}生命值，任何超出生命值上限的部分获得为临时生命值。对一个已处于流失状态的生物吸血不能为该吸血鬼恢复任何生命值，但会使受害者的流失数值增加1,当其达到流失5时受害者死亡。该吸血鬼也可饮用已被收集到容器中的血液作为养料，但不会因此获得任何生命值。</p>\n<p>受害者的流失状态每周减少1。血液输送可使流失数值减少1,需要进行一次@Check[medicine|dc:20|name:Blood Transfusion]检定以及足够的血液或一名献血者,10分钟后生效。</p>"
+					"description": "<p><strong>需求</strong> 一名处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}状态或自愿的生物处于该吸血鬼的触及范围内。</p>\n<hr />\n<p><strong>效果</strong> 该吸血鬼将尖牙刺入该生物以吸吮其鲜血。如果受害者处于受擒状态，需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC；若受害者处于其他状态之一，则自动成功。</p>\n<p>受害者获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}状态，且该吸血鬼恢复@Damage[10[healing]]{10 HP}生命值，任何超出生命值上限的部分获得为临时生命值。对一个已处于流失状态的生物吸血不能为该吸血鬼恢复任何生命值，但会使受害者的流失数值增加1，当其达到流失5时受害者死亡。该吸血鬼也可饮用已被收集到容器中的血液作为养料，但不会因此获得任何生命值。</p>\n<p>受害者的流失状态每周减少1。血液输送可使流失数值减少1，需要进行一次@Check[medicine|dc:20|name:Blood Transfusion]检定以及足够的血液或一名献血者,10分钟后生效。</p>"
 				},
 				"Change Shape": {
 					"name": "变身 Change Shape",
@@ -115,7 +115,7 @@
 				},
 				"Dominate": {
 					"name": "支配术 Dominate",
-					"description": "<p>花瓣伯爵可作为神术内在法术随意施展@UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]{支配术 Dominate}。施放需注视目标双眼，使该法术获得视觉特征。此能力的豁免 DC 为 22,豁免成功的生物在 24 小时内对其支配暂时免疫。彻底摧毁花瓣伯爵将结束支配，但仅将该吸血鬼降至 0 HP 不足以打破该法术。</p>"
+					"description": "<p>花瓣伯爵可作为神术内在法术随意施展@UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]{支配术 Dominate}。施放需注视目标双眼，使该法术获得视觉特征。此能力的豁免 DC 为 22，豁免成功的生物在 24 小时内对其支配暂时免疫。彻底摧毁花瓣伯爵将结束支配，但仅将该吸血鬼降至 0 HP 不足以打破该法术。</p>"
 				},
 				"Void Healing": {
 					"name": "虚能治疗 Void Healing",
@@ -139,7 +139,7 @@
 				},
 				"Mist Escape": {
 					"name": "化雾脱身 Mist Escape",
-					"description": "<p><strong>触发</strong> 花瓣伯爵被降至 0 HP</p><hr /><p><strong>效果</strong> 花瓣伯爵使用 Turn to Mist 化雾。即使他处于 0 HP 状态，他也可以采取移动动作向他的棺材移动。在此形态下处于 0 HP 期间，伯爵不受进一步伤害的影响。如果他到达棺材或经过 2 小时(以先达成者为准),他自动恢复至实体形态，处于@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}状态。</p>"
+					"description": "<p><strong>触发</strong> 花瓣伯爵被降至 0 HP</p><hr /><p><strong>效果</strong> 花瓣伯爵使用 Turn to Mist 化雾。即使他处于 0 HP 状态，他也可以采取移动动作向他的棺材移动。在此形态下处于 0 HP 期间，伯爵不受进一步伤害的影响。如果他到达棺材或经过 2 小时（以先达成者为准），他自动恢复至实体形态，处于@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}状态。</p>"
 				}
 			},
 			"data": {
@@ -182,7 +182,7 @@
 				},
 				"Hazard Finder": {
 					"name": "危机搜寻者 Hazard Finder",
-					"description": "<p>艾卡特琳娜在察觉检定上获得 +1 环境加值以发现陷阱或环境危险(但不包括寻找鬼祟),并在对抗陷阱所做攻击的 AC 上以及对抗陷阱的豁免上也获得 +1 环境加值。</p>"
+					"description": "<p>艾卡特琳娜在察觉检定上获得 +1 环境加值以发现陷阱或环境危险(但不包括寻找鬼祟)，并在对抗陷阱所做攻击的 AC 上以及对抗陷阱的豁免上也获得 +1 环境加值。</p>"
 				},
 				"Perception +15 to Seek or Search": {
 					"name": "搜寻或查找时感知+15 Perception +15 to Seek or Search"
@@ -987,7 +987,7 @@
 				},
 				"Swallow Whole": {
 					"name": "活吞 Swallow Whole",
-					"description": "<p>小型,@Damage[(2d4+4)[bludgeoning]],破裂值 18</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+					"description": "<p>小型,@Damage[(2d4+4)[bludgeoning]]，破裂值 18</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
 				},
 				"Glutton's Feast": {
 					"name": "饕餮盛宴 Glutton's Feast",
@@ -1370,7 +1370,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Blood Vendetta": {
 					"name": "溢血深仇 Blood Vendetta",
@@ -1709,7 +1709,7 @@
 			"items": {
 				"Invisibility": {
 					"name": "隐形术 Invisibility",
-					"description": "<p>幻象将光线绕过目标，使其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}。这使其对所有生物都为@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected},虽然这些生物可尝试找到目标，使其对它们变为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden}。如果目标使用敌对动作，该法术在该敌对动作完成后结束。</p>\n<hr />\n<p><strong>升阶(4环)</strong> 该法术持续 1 分钟，但若目标使用敌对动作，法术不会结束。</p>"
+					"description": "<p>幻象将光线绕过目标，使其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}。这使其对所有生物都为@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected}，虽然这些生物可尝试找到目标，使其对它们变为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden}。如果目标使用敌对动作，该法术在该敌对动作完成后结束。</p>\n<hr />\n<p><strong>升阶(4环)</strong> 该法术持续 1 分钟，但若目标使用敌对动作，法术不会结束。</p>"
 				},
 				"Staff": {
 					"name": "双手使用杖 Staff",
@@ -1763,7 +1763,7 @@
 				},
 				"Shield": {
 					"name": "护盾术 Shield",
-					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶(+2)</strong> 该盾的硬度提升 5。</p>"
+					"description": "<p>你举起一面魔法力场盾。这视为使用举盾动作，使你在下回合开始前对 AC 获得 +1 环境加值，但不需要使用一只手。</p>\n<p>该法术持续期间，你可对你的魔法盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡 Shield Block}反应动作。该盾的硬度为 5。你可使用该法术的反应动作以减少来自任何法术或魔法效果的伤害，即使该效果不造成物理伤害。在你使用盾牌格挡后，法术结束，且你在 10 分钟内不能再次施放它。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术 Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫 Shield Immunity}</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该盾的硬度提升 5。</p>"
 				},
 				"Void Warp": {
 					"name": "虚能噬 Void Warp",
