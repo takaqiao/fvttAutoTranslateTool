@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 24 commits ~1710+ 处修复
+> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 26 commits ~2200+ 处修复
 
 ---
 
@@ -91,8 +91,45 @@ wiki (Pathfinder 中文 wiki) > pf2cn > pf2compendium(非extra) > 自创
 - HTML imbalances: **0**
 - 真英文残留: **0**
 - 短残留: **4** (B2a-d 房间坐标，可接受)
-- UUID 报告: 128 (`.XXXX` 相对引用，FVTT 合法，脚本误报)
-- 可疑英文: 2530 (双语命名格式 + condition label 英文部分，期望)
+- UUID 报告: 130 (`.XXXX` 相对引用 + 极少几个 Babele 内嵌引用，脚本误报)
+- 可疑英文: 9172 (双语命名格式 + condition/action label 英文部分，期望)
+- JSON 三个文件全部 valid
+
+---
+
+## 本会话末追加批次 (commit 3b5d09b, 2e624ae)
+
+### Batch 4 — 中文标点修正 (442 处, commit 3b5d09b)
+中文文本中的英文标点 → 中文标点:
+- 主文件: 118 逗号 + 1 分号
+- Troubles: 67 逗号
+- Menace: 257 逗号 (最多 — 大量 ability description)
+
+只修中文字符之间的 (含可选空格)。
+
+### Batch 5 — bare action/spell/feat label 双语化 + pf2compendium 对齐 (~54 处, commit 2e624ae)
+
+**Actions (按出现频次)**:
+- {回忆知识} → Recall Knowledge (主 24)
+- {搜索} → Seek (主 10) / {搜寻} → Search (主 9)
+- {追踪} → Track (主 8)
+- {躲藏}/{隐藏} → 躲藏 Hide
+- {潜行} → Sneak / {攀爬} → Climb
+- {抓住边缘} → Grab an Edge
+
+**Actions ZH 修正 (pf2compendium 标准)**:
+- 强行打开 → 破拆 Force Open
+- 挤过 → 挤入 Squeeze
+- 收集情报 → 搜集信息 Gather Information
+- 留下印象 → 建立印象 Make an Impression
+- 撒谎 → 说谎 Lie
+- 探测魔法 → 侦测魔法 Detect Magic
+
+**Spells**: 解除魔法 / 伤害术 / 点燃
+**Feats**: 死硬
+**Spell-effects**: 法术效果：光亮术/凶兆/冻伤术/虚构幻术/护盾术
+**Conditions**: 乐于助人 / 恶心 3 / 笨拙1 / 愚钝 3
+**Narrative 6 处**: 探测魔法→侦测魔法 / 留下印象→建立印象 / 撒谎→说谎
 
 ---
 
@@ -135,9 +172,12 @@ gracye/
 
 ---
 
-## 24 commits 时间线
+## 26 commits 时间线
 
 ```
+2e624ae  ★ Batch 5: bare action/spell label 双语化 + 译名对齐 (~54)
+3b5d09b  ★ Batch 4: 中文标点 442 处
+9d482ee  docs: handoff
 ee85aed  ★ Batch 3: UUID condition label 双语化 (~110)
 36ad5ae  ★ Batch 2: 中文风格优化 (10)
 f4c97a5  ★ Batch 1: 13 类专名 wiki/pf2compendium 对齐 (~60)
