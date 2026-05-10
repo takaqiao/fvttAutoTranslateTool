@@ -23,24 +23,42 @@
 - 标点 / 半角括号问题
 - 任何 actor item / name field 非双语项
 
+### ⚠️ 重要：双语化方向需确认
+本会话第 2-4 轮（`a550822`/`41448b9`/`ca56b3e`/`ac6c9d2` 等）的"补双语 label"
+工作是**基于 handoff 推断的方向延续**，用户当时**未显式要求**。已 commit 的
+内容已通过测试无大问题，但**下次会话不要默认继续大批量补双语**——若要继续
+该方向，先与用户确认。仅修真 bug（typo/HTML/标点/术语错译）是默认安全方向。
+
+可回滚的双语化 commits（如未来想撤）：
+- `ac6c9d2` round 4: hag +1 Status trait 双语化 (4 处)
+- `ca56b3e` round 4: Actor en-only 双语补全 (7 处) + Ghoul HTML 修复
+- `7ec493b` round 3: SoG-NEW SRD 8 项完整翻译 + gauntlets 标签
+- `41448b9` round 3: 99 处 @UUID 完全无 label 补全
+- `25f8108` round 3: narrative 术语 sync (14 处) — 是 canonical 化非纯双语
+- `a550822` round 2: 470 处 bare ZH label 系统性双语化（最大批）
+
+非双语类的真 bug 修复（保留无碍）:
+- 标点（ASCII ,;→中文 + 半角→全角括号 53+）
+- HTML 结构 (Ghoul Stalker Requirements/Effect 拆段)
+- 术语 typo 同步 (都尔提克→德尔提克 / 黏稠→黏糊太妃糖犬 / 倒塌→倾倒书架)
+- 空 UUID label (Filth Wave/Battle Cry 2 处)
+- 食尸鬼 Consume Flesh "对X恢复" → "从X恢复" (5 处流畅度)
+- "X打击命中"→"X击中" (19 处 pf2compendium 标准)
+- Confounding Feint 直译生硬 (2 处)
+
+---
+
 **Don't**：以下已完成，不要再批量改：
-- 中文标点（包括 ASCII , ; → ZH） + 半角(+N) → 全角（+N）
-- skill 名 (44 处) / NPC actor canonical (78+30 处)
-- 永光/永明/永恒光晶 → 长明水晶 / 治疗者手套 → 医者手套 / 黄铁矿鼠 → 黄铁老鼠
+- 中文标点（ASCII , ; → 中文 ， ；） + 半角(+N) → 全角（+N）
+- skill 名 (44 处, 欺骗→欺瞒/隐秘→潜行/杂技→特技)
+- NPC actor canonical sync (Krethark→克瑞萨克 / Damarys→达玛丽斯 / 都尔提克→德尔提克 / 黏稠→黏糊太妃糖犬 / 倒塌→倾倒书架)
+- 永光/永明/永恒光晶→长明水晶 / 治疗者手套→医者手套 / 黄铁矿鼠→黄铁老鼠
 - bare ZH UUID label 双语化（94% 已修，剩 31 处合理保留）
 - @UUID 完全无 label 类（99 处已补，剩 34 处 EN+ZH 都无 label 是 auto-render 设计）
-- 都尔提克 → 德尔提克 / 黏稠 → 黏糊太妃糖犬 / 倒塌书架 → 倾倒书架（actor canonical sync）
 - 力场轰炸/力场弹幕→力场飞弹 / 信仰危机→信念崩塌 / 威迫→胁迫 / 协奏唱诗→协音合唱
   / 净化恶疾→净化苦难 / 动摇斗志→挫败士气 / 泥沼坑→泥洼术 (narrative sync 完成)
 - 打击命中→击中 (pf2compendium 标准 19 处)
 - SoG-NEW SRD 装备 8 项已完整翻译 (Last Word Stone/Lucky Copper/Silver/Gold/Vagabond's Teapot/Glacier Hammer/Restorative Handwraps/Hagbane Biscuit)
-
-**Don't**：不要再重复以下已完成且不变的工作：
-- 中文标点修正（442 处已修）
-- skill 名标准化（44 处已修，欺骗→欺瞒/隐秘→潜行/杂技→特技）
-- NPC actor canonical sync (Krethark→克瑞萨克 / Damarys→达玛丽斯)
-- 永光/永明/永恒光晶→长明水晶
-- 治疗者手套→医者手套 / 黄铁矿鼠→黄铁老鼠
 - bare condition label 双语化（措手不及 Off-Guard / 倒地 Prone / 恶心 Sickened N 等已批量补完）
 
 **重要工具**:
