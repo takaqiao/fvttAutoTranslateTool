@@ -372,7 +372,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Force Barrage": {
 					"name": "力场飞弹 Force Barrage",
@@ -435,7 +435,7 @@
 				},
 				"Filth Wave": {
 					"name": "秽物之潮 Filth Wave",
-					"description": "<p>下水道泥怪释放出一波秽物，覆盖了@Template[emanation|distance:20]区域内所有生物。区域内的每个生物必须通过一次@Check[reflex|dc:17|options:area-effect,damaging-effect]豁免，否则受到@Damage[1d4[acid]|options:area-damage]伤害并且于1分钟内在速度上承受-10减值（在大失败时，生物还会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]）。生物可以花费一个交互动作来清理其他人，每次动作能够将速度减值减少5尺。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Qomp2EujVCbzJb4X]{效果：秽物之潮 Filth Wave}</p>"
+					"description": "<p>下水道泥怪释放出一波秽物，覆盖了@Template[emanation|distance:20]区域内所有生物。区域内的每个生物必须通过一次@Check[reflex|dc:17|options:area-effect,damaging-effect]豁免，否则受到@Damage[1d4[acid]|options:area-damage]伤害并且于1分钟内在速度上承受-10减值（在大失败时，生物还会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}）。生物可以花费一个交互动作来清理其他人，每次动作能够将速度减值减少5尺。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Qomp2EujVCbzJb4X]{效果：秽物之潮 Filth Wave}</p>"
 				}
 			},
 			"prototypeToken": "下水道泥怪",
@@ -688,7 +688,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Detect Magic": {
 					"name": "侦测魔法 Detect Magic",
@@ -874,7 +874,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
@@ -1159,7 +1159,7 @@
 				},
 				"Acid Grip": {
 					"name": "强酸爪 Acid Grip",
-					"description": "<p>长有利爪的手突然出现，抓住并以魔法的强酸灼烧目标。目标承受2d8酸蚀伤害，以及@Damage[floor(@item.level/2)d6[persistent,acid]]伤害，基于其反射豁免。由于此法术承受持续伤害的生物在速度上获得-10尺状态减值。@UUID[Compendium.pf2e.spell-effects.Item.6TGcfVyzzVHEo7ke]</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong>该生物承受一半伤害，并且不承受持续伤害，飞爪可以按照你的选择往一个方向移动它至多5尺。</p>\n<p><strong>失败</strong> 该生物承受完整伤害和持续伤害，飞爪可以按照你的选择往一个方向移动它至多10尺。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害和完整持续伤害，飞爪可以按照你的选择往一个方向移动它至多20尺。</p><hr /><p><strong>升阶（+2）</strong> 初始伤害增加2d8、持续酸蚀伤害增加1d6。</p>"
+					"description": "<p>长有利爪的手突然出现，抓住并以魔法的强酸灼烧目标。目标承受2d8酸蚀伤害，以及@Damage[floor(@item.level/2)d6[persistent,acid]]伤害，基于其反射豁免。由于此法术承受持续伤害的生物在速度上获得-10尺状态减值。@UUID[Compendium.pf2e.spell-effects.Item.6TGcfVyzzVHEo7ke]{法术：强酸爪 Acid Grip}</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong>该生物承受一半伤害，并且不承受持续伤害，飞爪可以按照你的选择往一个方向移动它至多5尺。</p>\n<p><strong>失败</strong> 该生物承受完整伤害和持续伤害，飞爪可以按照你的选择往一个方向移动它至多10尺。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害和完整持续伤害，飞爪可以按照你的选择往一个方向移动它至多20尺。</p><hr /><p><strong>升阶（+2）</strong> 初始伤害增加2d8、持续酸蚀伤害增加1d6。</p>"
 				},
 				"Caustic Blast": {
 					"name": "酸液喷溅 Caustic Blast",
@@ -1493,7 +1493,7 @@
 				},
 				"Acid Grip": {
 					"name": "强酸爪 Acid Grip",
-					"description": "<p>长有利爪的手突然出现，抓住并以魔法的强酸灼烧目标。目标承受2d8酸蚀伤害，以及@Damage[floor(@item.level/2)d6[persistent,acid]]伤害，基于其反射豁免。由于此法术承受持续伤害的生物在速度上获得-10尺状态减值。@UUID[Compendium.pf2e.spell-effects.Item.6TGcfVyzzVHEo7ke]</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong>该生物承受一半伤害，并且不承受持续伤害，飞爪可以按照你的选择往一个方向移动它至多5尺。</p>\n<p><strong>失败</strong> 该生物承受完整伤害和持续伤害，飞爪可以按照你的选择往一个方向移动它至多10尺。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害和完整持续伤害，飞爪可以按照你的选择往一个方向移动它至多20尺。</p><hr /><p><strong>升阶（+2）</strong> 初始伤害增加2d8、持续酸蚀伤害增加1d6。</p>"
+					"description": "<p>长有利爪的手突然出现，抓住并以魔法的强酸灼烧目标。目标承受2d8酸蚀伤害，以及@Damage[floor(@item.level/2)d6[persistent,acid]]伤害，基于其反射豁免。由于此法术承受持续伤害的生物在速度上获得-10尺状态减值。@UUID[Compendium.pf2e.spell-effects.Item.6TGcfVyzzVHEo7ke]{法术：强酸爪 Acid Grip}</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong>该生物承受一半伤害，并且不承受持续伤害，飞爪可以按照你的选择往一个方向移动它至多5尺。</p>\n<p><strong>失败</strong> 该生物承受完整伤害和持续伤害，飞爪可以按照你的选择往一个方向移动它至多10尺。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害和完整持续伤害，飞爪可以按照你的选择往一个方向移动它至多20尺。</p><hr /><p><strong>升阶（+2）</strong> 初始伤害增加2d8、持续酸蚀伤害增加1d6。</p>"
 				}
 			},
 			"prototypeToken": "水之顽童",
@@ -1540,7 +1540,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Staff (EauG)": {
 					"name": "杖 Staff",
@@ -1610,7 +1610,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				},
 				"Wizard Spells": {
 					"name": "法师法术 Wizard Spells"
@@ -2056,7 +2056,7 @@
 				},
 				"Haunting Hymn": {
 					"name": "颂歌萦绕 Haunting Hymn",
-					"description": "<p>你制造一段只有区域内的生物才能听到的尖锐颂歌。此颂歌造成1d8点音波伤害，进行基础强韧豁免。如果目标在豁免中大失败，他还会@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1分钟。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d8。</p>"
+					"description": "<p>你制造一段只有区域内的生物才能听到的尖锐颂歌。此颂歌造成1d8点音波伤害，进行基础强韧豁免。如果目标在豁免中大失败，他还会@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened}1分钟。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 该伤害增加1d8。</p>"
 				},
 				"Shadow Veil": {
 					"name": "隐匿之纱 Veil",
@@ -2072,7 +2072,7 @@
 				},
 				"Noise Blast": {
 					"name": "噪鸣爆 Noise Blast",
-					"description": "<p>刺耳的噪音迸裂而出，造成2d10音波伤害。每个生物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半伤害。</p>\n<p><strong>失败</strong> 该生物承受完整伤害，并且@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1轮。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害，耳聋1分钟，并且@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d10。</p>"
+					"description": "<p>刺耳的噪音迸裂而出，造成2d10音波伤害。每个生物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半伤害。</p>\n<p><strong>失败</strong> 该生物承受完整伤害，并且@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened}1轮。</p>\n<p><strong>大失败</strong> 该生物承受双倍伤害，耳聋1分钟，并且@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该伤害增加1d10。</p>"
 				},
 				"Shadow Hand": {
 					"name": "暗影之手 Shadow Hand"
@@ -2083,7 +2083,7 @@
 				},
 				"Laughing Fit": {
 					"name": "狂笑发作 Laughing Fit",
-					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
+					"description": "<p>目标突然充满无法控制的笑意。它必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受苦于失控的笑意。它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，并且无法使用反应动作。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，并且无法使用动作或反应动作，持续1轮。之后它承受失败的效果。</p>"
 				},
 				"Light Vulnerability": {
 					"name": "光亮弱点 Light Vulnerability",
@@ -2467,7 +2467,7 @@
 				},
 				"Command": {
 					"name": "命令术 Command",
-					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
+					"description": "<p>你喊出一句难以被忽视的命令。你可以命令目标接近你，逃离你（如同获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}状态），扔下持有物，俯卧@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，或者站立在原地。它不能@UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟 Delay}或者使用任何反应动作，直到它服从你的命令为止。法术效果基于目标的意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 作为该生物下个回合的第一个动作，其必须用一个单动作来完成你的命令。</p>\n<p><strong>大失败</strong> 目标必须使用其下个回合的全部动作来完成你的命令。</p>\n<hr />\n<p><strong>升阶（5环级）</strong> 你能以至多10个生物为目标。</p>"
 				}
 			},
 			"prototypeToken": "狗头人法师（白）",
