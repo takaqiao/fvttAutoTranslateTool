@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 39 commits ~3650+ 处修复
+> 由会话 2026-05-10/11 (Claude Opus 4.7) 整理 · 44 commits ~3800+ 处修复 + 8 SRD entry 完整翻译
 
 ---
 
@@ -8,17 +8,24 @@
 
 **第一步**: `Read gracye/_HANDOFF_NEXT_SESSION.md` (本文档) 全部
 **第二步**: 检查项目 memory `project_grayce_translation.md` 有 24 个关键译名决策
-**第三步**: 当前状态—**主要清理工作完成**。剩余可选任务：
-1. **31 处剩余 bare ZH label** （quoted "训练魔法"/低 case prose / .XXX 锚点 — 项目可接受 bare）
-2. **更深的中文流畅度风格优化**（Agent 报告已识别 8 类风格点：失败时/被X打击命中/它代词/严肃形式词语等 — 多为偏好，非硬 bug）
-3. **可选: SoG SRD 内更多 production 引用项翻译**（看 production 引用列表 vs SRD 翻译状态）
+**第三步**: 当前状态—**深度优化基本完成**。剩余可选任务（皆为低优先）：
+1. **31 处剩余 bare ZH UUID label** （quoted "训练魔法"/低 case prose / .XXX 锚点 — 项目可接受 bare）
+2. **34 处 ZH+EN 都无 label UUID** — 与 EN 一致, FVTT 自动 render，无需修
+3. **99 处 Actor.X 直接引用** (encounter/treasure 块) — auto-render, 与 EN 一致
+4. **可选 SRD 残余项**: Replacement Picks / Frostbite Deck / Crafter's Eyepiece 曲撇号版本 (production refs 已含双语 label, entry 本身可能未补译, 影响 vault 显示)
+5. **流畅度风格更深 polish**（多为偏好，非硬 bug）
 
 **Don't**：以下已完成，不要再批量改：
 - 中文标点（包括 ASCII , ; → ZH） + 半角(+N) → 全角（+N）
 - skill 名 (44 处) / NPC actor canonical (78+30 处)
 - 永光/永明/永恒光晶 → 长明水晶 / 治疗者手套 → 医者手套 / 黄铁矿鼠 → 黄铁老鼠
 - bare ZH UUID label 双语化（94% 已修，剩 31 处合理保留）
+- @UUID 完全无 label 类（99 处已补，剩 34 处 EN+ZH 都无 label 是 auto-render 设计）
 - 都尔提克 → 德尔提克 / 黏稠 → 黏糊太妃糖犬 / 倒塌书架 → 倾倒书架（actor canonical sync）
+- 力场轰炸/力场弹幕→力场飞弹 / 信仰危机→信念崩塌 / 威迫→胁迫 / 协奏唱诗→协音合唱
+  / 净化恶疾→净化苦难 / 动摇斗志→挫败士气 / 泥沼坑→泥洼术 (narrative sync 完成)
+- 打击命中→击中 (pf2compendium 标准 19 处)
+- SoG-NEW SRD 装备 8 项已完整翻译 (Last Word Stone/Lucky Copper/Silver/Gold/Vagabond's Teapot/Glacier Hammer/Restorative Handwraps/Hagbane Biscuit)
 
 **Don't**：不要再重复以下已完成且不变的工作：
 - 中文标点修正（442 处已修）
@@ -65,6 +72,39 @@ gracye/
 ├── _backup/                历史备份
 └── _HANDOFF_NEXT_SESSION.md 本文档
 ```
+
+---
+
+## 第三轮 ultrathink 会话成果 (5 commits, 144 处 + 8 entries)
+
+### 1. @UUID 完全无 label 类补全 (99 处)
+之前漏掉的 bug 类：@UUID[X] 完全无 {label} 大括号 (vs 之前修的 @UUID[X]{中文} 有 label 缺英文)。
+- pfcomp 标准 lookup 命中 58 处（条件/动作/法术: Prone/Concealed/Hidden/Off-Guard/Deafened/Fatigued/Confused/Dazzled/Encumbered/Rage/Demoralize/Force Barrage/Detect Magic 等）
+- EN-only 回退 10 处 (Actor/SoG-NEW)
+- 31 处其他
+
+### 2. 流畅度精修 (21 处)
+- 19 处 "X打击命中" → "X击中" (pf2compendium 标准)
+- 2 处 "对其令人困惑的计谋提供大量细节" → "详尽描述..." (Highly Confusing Scheme)
+
+### 3. 主文本术语 narrative sync (14 处)
+UUID label canonical 已统一后，narrative 文本仍用旧术语的位置:
+- 力场轰炸/力场弹幕 → 力场飞弹 Force Barrage (5)
+- 信仰危机卷轴 → 信念崩塌卷轴 (2)
+- 威迫 → 胁迫 / 协奏唱诗 → 协音合唱 / 净化恶疾,净除苦状 → 净化苦难 / 动摇斗志 → 挫败士气 / 泥沼坑 → 泥洼术
+- 跳过的普通中文词: 援助/辅助/支援/修缮/探查/博学/老练/疲惫 (经上下文判断为通用词)
+
+### 4. SRD 8 项 SoG-NEW 装备完整翻译 (gracye/pf2e.equipment-srd.json)
+之前漏掉的 entry name + description 均未翻译条目:
+- **遗言之石 Last Word Stone** (13 refs, 2522 chars desc)
+- **幸运铜/银/金币 Lucky Copper/Silver/Gold** (Lucky Coin 系列 lvl 2/5/8)
+- **浪人之壶 Vagabond's Teapot** (5 refs)
+- **冰川锤 Glacier Hammer** / **恢复缠手带 Restorative Handwraps** / **克妖饼干 Hagbane Biscuit**
+- 2 处 production bare {gauntlets} → {护手 Gauntlets}
+
+### 5. 已验证零差异（无需修复）
+- `<em>` 标签 ZH vs EN 仅 1 处差异 (项目描述 italic 选择，无碍)
+- Ecaterina 命名 100% 统一 (16+4 处全为艾卡特琳娜子串)
 
 ---
 
@@ -225,6 +265,16 @@ gracye/
 9. 清理 `_tmp_*` 临时脚本
 
 ---
+
+## 第三轮 ultrathink 会话时间线（5 commits）
+
+```
+7ec493b  fix: SoG SRD 8 项 SoG-NEW 装备完整翻译 + gauntlets 标签
+25f8108  fix: SoG narrative 术语标准化 (14 处)
+faf435b  fix: SoG 流畅度精修 (21 处)
+41448b9  fix: SoG @UUID 完全无 label 类补全 (99 处)
+ec3f13d  docs: SoG handoff 第二轮 ultrathink 会话总结
+```
 
 ## 第二轮 ultrathink 会话时间线（4 commits）
 
