@@ -212,7 +212,7 @@
 				},
 				"Mechanized Animus": {
 					"name": "机械驭灵 Mechanized Animus",
-					"description": "<p>德尔提克将其对他者的厌恶与轻视引导至60尺内的一具建构上，夺取其控制或令其活化。德尔提克对该建构的意志DC（或其控制者意志DC，若有，取较高者）尝试 @Check[crafting|against:will|options:inflicts:stupefied,inflicts:stunned] 检定。德尔提克 [[/gmr 1d4 #机械驭灵重充能]]{1d4 轮} 内不能再次使用机械驭灵。</p><hr /><p><strong>大成功</strong> 该建构立即采取德尔提克选择的两个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 2}。</p>\n<p><strong>成功</strong> 该建构立即采取德尔提克选择的一个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}。</p>\n<p><strong>大失败</strong> 破坏的厌恶反弹回来，德尔提克 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}，持续1分钟。</p>"
+					"description": "<p>德尔提克将其对他者的厌恶与轻视投射到60尺内的一具建构上，夺取其控制或令其活化。德尔提克对该建构的意志DC（或其控制者意志DC，若有，取较高者）尝试 @Check[crafting|against:will|options:inflicts:stupefied,inflicts:stunned] 检定。德尔提克 [[/gmr 1d4 #机械驭灵重充能]]{1d4 轮} 内不能再次使用机械驭灵。</p><hr /><p><strong>大成功</strong> 该建构立即采取德尔提克选择的两个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 2}。</p>\n<p><strong>成功</strong> 该建构立即采取德尔提克选择的一个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}。</p>\n<p><strong>大失败</strong> 破坏的厌恶反弹回来，德尔提克 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}，持续1分钟。</p>"
 				},
 				"Shortbow": {
 					"name": "短弓 Shortbow"
@@ -237,7 +237,7 @@
 				},
 				"Highly Confusing Scheme": {
 					"name": "高度迷惑的计谋 Highly Confusing Scheme",
-					"description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次以欺瞒的 [[/act feint]] 检定。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 减值适用。</p>"
+					"description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次欺瞒检定 [[/act feint]]。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 减值适用。</p>"
 				},
 				"Shortbow (ELUM)": {
 					"name": "短弓 Shortbow",
@@ -252,7 +252,7 @@
 				},
 				"Grease": {
 					"name": "油腻术 Grease",
-					"description": "<p>你创造一片油，选择区域或是目标。</p>\n<ul>\n<li><strong>区域</strong> <strong>[4个连续的5尺方格]</strong> 区域中的所有坚实地面覆盖上一层油。在油滑的表面上站立的生物必须尝试成功通过一次对抗你法术DC的反射或者特技检定，否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。在法术持续时间内，使用动作移动到油滑表面上的生物必须尝试一次反射豁免或者特技检定来@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]。快步或者爬行的生物无需尝试检定或者豁免。</li>\n<li><strong>目标</strong> <strong>[一个1负载或者更低的物体]</strong> 如果你对无主物品施放该法术，任何尝试捡起该物体的人必须成功尝试一次对抗你法术DC的特技检定或者反射豁免才能如此做。如果你以被持有的物品为目标，拥有该物品的生物必须尝试一次特技检定或者反射豁免。失败时，持握者或者持用者在使用该物体的所有检定上承受-2环境减值；在大失败时，持握者或者持用者会掉落该物品。该物品会掉落在一个由GM选择的相邻方格内。如果你对一个穿戴物品施放该法术，穿戴者在对抗擒拿他的强韧豁免上获得+2环境加值。</li>\n</ul>"
+					"description": "<p>你创造一片油，选择区域或是目标。</p>\n<ul>\n<li><strong>区域</strong> <strong>[4个连续的5尺方格]</strong> 区域中的所有坚实地面覆盖上一层油。在油滑的表面上站立的生物必须成功通过一次对抗你法术DC的反射或特技检定，否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。在法术持续时间内，使用动作移动到油滑表面上的生物必须尝试一次反射豁免或者特技检定来@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]。快步或者爬行的生物无需尝试检定或者豁免。</li>\n<li><strong>目标</strong> <strong>[一个1负载或者更低的物体]</strong> 如果你对无主物品施放该法术，任何尝试捡起该物体的人必须成功通过一次对抗你法术DC的特技检定或反射豁免才能如此做。如果你以被持有的物品为目标，拥有该物品的生物必须尝试一次特技检定或者反射豁免。失败时，持握者或者持用者在使用该物体的所有检定上承受-2环境减值；在大失败时，持握者或者持用者会掉落该物品。该物品会掉落在一个由GM选择的相邻方格内。如果你对一个穿戴物品施放该法术，穿戴者在对抗擒拿他的强韧豁免上获得+2环境加值。</li>\n</ul>"
 				}
 			},
 			"data": {
