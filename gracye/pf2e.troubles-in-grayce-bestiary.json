@@ -88,7 +88,7 @@
 				},
 				"Soporific Stench": {
 					"name": "催眠之臭 Soporific Stench",
-					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
 				},
 				"Rapier (BSWr)": {
 					"name": "细剑 Rapier",
@@ -135,7 +135,7 @@
 				},
 				"Vampire Vulnerabilities": {
 					"name": "吸血鬼弱点 Vampire Vulnerabilities",
-					"description": "<p>所有吸血鬼具有以下弱点。</p>\n<ul>\n<li><strong>强迫</strong> 吸血鬼具有奇怪而难以理解的强迫行为。典型吸血鬼无法自愿越过流水，除非藏在棺木中被搬运；也无法进入私人居所，除非被有权限者邀请进入。由你裁定，吸血鬼可能有不同强迫行为——例如海盗吸血鬼可能未经邀请就无法踏上坚实陆地。吸血鬼仍可被强迫做这些事，并可能像克服厌恶一样克服强迫行为。</li>\n<li><strong>厌恶</strong> 吸血鬼无法自愿来到挥舞着大蒜或挥舞着具有圣定选项的神祇宗教标志的物品10尺范围内。挥舞大蒜或宗教标志需要生物用一次互动动作进行操作，效果维持1轮（与举盾相似）。如果吸血鬼非自愿地来到其厌恶物体的10尺内，它获得 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 状态，逃离厌恶物体，直到它在距离厌恶物超过10尺处结束动作。在持续暴露1轮后，吸血鬼可使用一次单一动作（具有专注特征）尝试 @Check[will|dc:25] 豁免。成功时它克服厌恶 [[/gmr 1d6 #轮]]{1d6 轮}（大成功时1小时）。</li>\n<li><strong>木桩</strong> 一根穿透吸血鬼心脏的木桩使其降至0HP，并阻止其在棺木中也回复至0HP以上。钉桩需要3个动作，且仅当吸血鬼 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 时才生效。如果木桩被拔除，吸血鬼可再次回复至0HP以上；若它在棺木中，则1小时休息期从拔桩时开始。如在木桩仍在时砍下吸血鬼之头并涂以圣水，吸血鬼即被毁灭。</li>\n<li><strong>阳光</strong> 暴露在直射阳光下时，吸血鬼立即 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。每当吸血鬼在阳光中结束回合时，迟缓数值+1，直至离开阳光时该状态终止。若吸血鬼以此失去全部动作，则被毁灭。出于其超自然的厌光特性，吸血鬼不投阴影也不在镜中显像。\n</li>\n</ul>"
+					"description": "<p>所有吸血鬼具有以下弱点。</p>\n<ul>\n<li><strong>强迫</strong> 吸血鬼具有奇怪而难以理解的强迫行为。典型吸血鬼无法自愿越过流水，除非藏在棺木中被搬运；也无法进入私人居所，除非被有权限者邀请进入。由你裁定，吸血鬼可能有不同强迫行为——例如海盗吸血鬼可能未经邀请就无法踏上坚实陆地。吸血鬼仍可被强迫做这些事，并可能像克服厌恶一样克服强迫行为。</li>\n<li><strong>厌恶</strong> 吸血鬼无法自愿来到挥舞着大蒜或挥舞着具有圣定选项的神祇宗教标志的物品10尺范围内。挥舞大蒜或宗教标志需要生物用一次互动动作进行操作，效果维持1轮（与举盾相似）。如果吸血鬼非自愿地来到其厌恶物体的10尺内，它获得 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 状态，逃离厌恶物体，直到它在距离厌恶物超过10尺处结束动作。在持续暴露1轮后，吸血鬼可使用一次单一动作（具有专注特征）尝试 @Check[will|dc:25] 豁免。成功时它克服厌恶 [[/gmr 1d6 #轮]]{1d6 轮}（大成功时1小时）。</li>\n<li><strong>木桩</strong> 一根穿透吸血鬼心脏的木桩使其降至0HP，并阻止其在棺木中也回复至0HP以上。钉桩需要3个动作，且仅当吸血鬼 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 时才生效。如果木桩被拔除，吸血鬼可再次回复至0HP以上；若它在棺木中，则1小时休息期从拔桩时开始。如在木桩仍在时砍下吸血鬼之头并涂以圣水，吸血鬼即被毁灭。</li>\n<li><strong>阳光</strong> 暴露在直射阳光下时，吸血鬼立即 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。每当吸血鬼在阳光中结束回合时，迟缓数值+1，直至离开阳光时该状态终止。若吸血鬼以此失去全部动作，则被毁灭。出于其超自然的厌光特性，吸血鬼不投阴影也不在镜中显像。\n</li>\n</ul>"
 				},
 				"Mist Escape": {
 					"name": "化雾脱身 Mist Escape",
@@ -212,7 +212,7 @@
 				},
 				"Mechanized Animus": {
 					"name": "机械驭灵 Mechanized Animus",
-					"description": "<p>德尔提克将其对他者的厌恶与轻视投射到60尺内的一具建构上，夺取其控制或令其活化。德尔提克对该建构的意志DC（或其控制者意志DC，若有，取较高者）尝试 @Check[crafting|against:will|options:inflicts:stupefied,inflicts:stunned] 检定。德尔提克 [[/gmr 1d4 #机械驭灵重充能]]{1d4 轮} 内不能再次使用机械驭灵。</p><hr /><p><strong>大成功</strong> 该建构立即采取德尔提克选择的两个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 2}。</p>\n<p><strong>成功</strong> 该建构立即采取德尔提克选择的一个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}。</p>\n<p><strong>大失败</strong> 破坏的厌恶反弹回来，德尔提克 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}，持续1分钟。</p>"
+					"description": "<p>德尔提克将其对他者的厌恶与轻视投射到60尺内的一具建构上，夺取其控制或令其活化。德尔提克对该建构的意志DC（或其控制者意志DC，若有，取较高者）尝试 @Check[crafting|against:will|options:inflicts:stupefied,inflicts:stunned] 检定。德尔提克 [[/gmr 1d4 #机械驭灵重充能]]{1d4 轮} 内不能再次使用机械驭灵。</p><hr /><p><strong>大成功</strong> 该建构立即采取德尔提克选择的两个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}。</p>\n<p><strong>成功</strong> 该建构立即采取德尔提克选择的一个基本动作，然后 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>大失败</strong> 破坏的厌恶反弹回来，德尔提克 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 2}，持续1分钟。</p>"
 				},
 				"Shortbow": {
 					"name": "短弓 Shortbow"
@@ -237,7 +237,7 @@
 				},
 				"Highly Confusing Scheme": {
 					"name": "高度迷惑的计谋 Highly Confusing Scheme",
-					"description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次欺瞒检定 [[/act feint]]。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 减值适用。</p>"
+					"description": "<p>德尔提克对其令人困惑的计谋提供大量细节，使目标难以应对。德尔提克对至多30尺外的对手尝试一次欺瞒检定 [[/act feint]]。如成功，则当德尔提克或其以机械驭灵控制的建构对该敌进行近战或远程打击时，@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 减值适用。</p>"
 				},
 				"Shortbow (ELUM)": {
 					"name": "短弓 Shortbow",
@@ -269,7 +269,7 @@
 				},
 				"Otherworldly Cry": {
 					"name": "异界惊啸 Otherworldly Cry",
-					"description": "<p>帕斯河剥皮怪发出令人毛骨悚然的鬼魅嘶啸，可在一英里外听到。@Template[type:emanation|distance:60] 内每个生物必须尝试一次 @Check[will|dc:20|options:area-effect,inflicts:frightened,inflicts:fleeing] 豁免。无论结果如何，生物在10分钟内对剥皮怪的异界惊啸临时免疫。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}。</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 1轮。</p>"
+					"description": "<p>帕斯河剥皮怪发出令人毛骨悚然的鬼魅嘶啸，可在一英里外听到。@Template[type:emanation|distance:60] 内每个生物必须尝试一次 @Check[will|dc:20|options:area-effect,inflicts:frightened,inflicts:fleeing] 豁免。无论结果如何，生物在10分钟内对剥皮怪的异界惊啸临时免疫。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing} 1轮。</p>"
 				},
 				"Claw": {
 					"name": "爪击 Claw"
@@ -280,7 +280,7 @@
 				},
 				"Sensitive Ears": {
 					"name": "敏锐之耳 Sensitive Ears",
-					"description": "<p>帕斯河剥皮怪硕大的耳朵使其对巨响特别敏感。试图通过呼喊、敲击盾牌或类似手段对剥皮怪 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize} 的生物，无须承受不与剥皮怪共享语言的-4环境减值。每当剥皮怪承受音波伤害时，必须成功通过 @Check[will|dc:16|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。</p>"
+					"description": "<p>帕斯河剥皮怪硕大的耳朵使其对巨响特别敏感。试图通过呼喊、敲击盾牌或类似手段对剥皮怪 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize} 的生物，无须承受不与剥皮怪共享语言的-4环境减值。每当剥皮怪承受音波伤害时，必须成功通过 @Check[will|dc:16|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。</p>"
 				},
 				"Blood Run Cold": {
 					"name": "血液冷凝 Blood Run Cold",
@@ -288,7 +288,7 @@
 				},
 				"Flight Response": {
 					"name": "逃逸反应 Flight Response",
-					"description": "<p><strong>触发</strong> 帕斯河剥皮怪获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态或其惊惧值增加</p><hr /><p><strong>效果</strong> 剥皮怪以其速度快步行动或攀爬。剥皮怪对此次移动触发的反应动作的AC获得+2环境加值。</p>"
+					"description": "<p><strong>触发</strong> 帕斯河剥皮怪获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened} 状态或其惊惧值增加</p><hr /><p><strong>效果</strong> 剥皮怪以其速度快步行动或攀爬。剥皮怪对此次移动触发的反应动作的AC获得+2环境加值。</p>"
 				}
 			},
 			"data": {
@@ -400,7 +400,7 @@
 				},
 				"Ghoul Whispers": {
 					"name": "食尸鬼低语 Ghoul Whispers",
-					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:20|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:20|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
 				},
 				"Grave Knowledge": {
 					"name": "坟墓知识 Grave Knowledge",
@@ -448,7 +448,7 @@
 			"items": {
 				"Ensnare": {
 					"name": "缠绕 Ensnare",
-					"description": "<p><strong>触发</strong> 一个非蜘蛛的生物走入网中</p><hr /><p><strong>效果</strong> 蛛网缠绕触发生物之身，黏附其肢体。触发生物必须成功通过 @Check[reflex|dc:20|options:inflicts:sickened] 豁免，否则其所有速度均承受-10尺环境减值，直到 [[/act escape dc=20]]{挣脱} 蛛网。大失败时，蛛网还粘住该生物面部，使其 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}，且在挣脱蛛网前无法尝试降低此状态。</p>"
+					"description": "<p><strong>触发</strong> 一个非蜘蛛的生物走入网中</p><hr /><p><strong>效果</strong> 蛛网缠绕触发生物之身，黏附其肢体。触发生物必须成功通过 @Check[reflex|dc:20|options:inflicts:sickened] 豁免，否则其所有速度均承受-10尺环境减值，直到 [[/act escape dc=20]]{挣脱} 蛛网。大失败时，蛛网还粘住该生物面部，使其 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，且在挣脱蛛网前无法尝试降低此状态。</p>"
 				}
 			},
 			"data": {
@@ -483,7 +483,7 @@
 			"items": {
 				"Malicious Metamorphosis": {
 					"name": "恶意变形 Malicious Metamorphosis",
-					"description": "<p><strong>触发</strong> 一个生物在未先将三枚附魔软糖钥匙置于正确位置的情况下接触暗门</p><hr /><p><strong>效果</strong> 魔法阵阻止暗门开启，并恶意变换触发生物身体的一部分。效果根据触发生物的 @Check[fortitude|dc:18|options:forced-movement,inflicts:clumsy,inflicts:off-guard,inflicts:prone,inflicts:slowed] 豁免结果而定。</p><hr /><p><strong>大成功</strong> 触发生物被吹离暗门10尺，被击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}，但未受其他影响。</p>\n<p><strong>成功</strong> 目标被吹离暗门10尺、被击倒地，并且其一只手的三根手指变成姜饼。变形持续期间它们无法使用具有双手或孪生特征的武器。</p>\n<p><strong>失败</strong> 同成功，但变形也延伸至该生物整只手及部分相邻手臂。受影响生物在变形持续期间 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>\n<p><strong>大失败</strong> 同失败，但变形还波及触发生物一条腿。变形持续期间，所有速度承受-10尺环境减值、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 并 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}，外加上述效果。</p>"
+					"description": "<p><strong>触发</strong> 一个生物在未先将三枚附魔软糖钥匙置于正确位置的情况下接触暗门</p><hr /><p><strong>效果</strong> 魔法阵阻止暗门开启，并恶意变换触发生物身体的一部分。效果根据触发生物的 @Check[fortitude|dc:18|options:forced-movement,inflicts:clumsy,inflicts:off-guard,inflicts:prone,inflicts:slowed] 豁免结果而定。</p><hr /><p><strong>大成功</strong> 触发生物被吹离暗门10尺，被击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}，但未受其他影响。</p>\n<p><strong>成功</strong> 目标被吹离暗门10尺、被击倒地，并且其一只手的三根手指变成姜饼。变形持续期间它们无法使用具有双手或孪生特征的武器。</p>\n<p><strong>失败</strong> 同成功，但变形也延伸至该生物整只手及部分相邻手臂。受影响生物在变形持续期间 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>\n<p><strong>大失败</strong> 同失败，但变形还波及触发生物一条腿。变形持续期间，所有速度承受-10尺环境减值、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 并 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}，外加上述效果。</p>"
 				}
 			},
 			"data": {
@@ -500,7 +500,7 @@
 			"items": {
 				"Deathbed Ritual": {
 					"name": "临终仪式 Deathbed Ritual",
-					"description": "<p><strong>触发</strong> 一个活物与床相邻</p><hr /><p><strong>效果</strong> 床的四角各出现一支幽灵蜡烛，随后是塔留斯虚弱身影从厚厚一本古籍上颤抖朗读的透明影像。每个能听到这些话语的活物必须成功通过 @Check[will|dc:23|options:area-effect,inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。该惊魂随后掷先攻。</p>"
+					"description": "<p><strong>触发</strong> 一个活物与床相邻</p><hr /><p><strong>效果</strong> 床的四角各出现一支幽灵蜡烛，随后是塔留斯虚弱身影从厚厚一本古籍上颤抖朗读的透明影像。每个能听到这些话语的活物必须成功通过 @Check[will|dc:23|options:area-effect,inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。该惊魂随后掷先攻。</p>"
 				}
 			},
 			"data": {
@@ -601,11 +601,11 @@
 				},
 				"Bitter Invective": {
 					"name": "苦涩斥骂 Bitter Invective",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家对其能看见的30尺内一个生物喷出令人意外的恶毒训斥，对方必须尝试一次 @Check[will|dc:20|options:inflicts:stupefied] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 2}）。无论结果如何，该生物随后24小时内对此能力临时免疫。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家对其能看见的30尺内一个生物喷出令人意外的恶毒训斥，对方必须尝试一次 @Check[will|dc:20|options:inflicts:stupefied] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 2}）。无论结果如何，该生物随后24小时内对此能力临时免疫。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
 				}
 			},
 			"data": {
@@ -650,7 +650,7 @@
 				},
 				"Whimsical Twirl": {
 					"name": "任性旋舞 Whimsical Twirl",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家以其速度快步行动，且不触发反应动作。该移动结束时与管家相邻的任何生物必须成功通过 @Check[reflex|dc:20|options:area-effect] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}，直至管家下回合开始。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家以其速度快步行动，且不触发反应动作。该移动结束时与管家相邻的任何生物必须成功通过 @Check[reflex|dc:20|options:area-effect] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}，直至管家下回合开始。</p>"
 				},
 				"Light": {
 					"name": "光亮术 Light",
@@ -658,7 +658,7 @@
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
 				}
 			},
 			"data": {
@@ -729,7 +729,7 @@
 				},
 				"Toffee Sauce": {
 					"name": "太妃糖酱 Toffee Sauce",
-					"description": "<p>被黏糊太妃糖犬撞头打击命中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>"
+					"description": "<p>被黏糊太妃糖犬撞头打击命中的生物被浸润其身体的黏糊太妃糖酱所溅，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直至其下回合结束。大成功时，该生物改为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
 				},
 				"Jaws": {
 					"name": "噬咬 Jaws"
@@ -750,7 +750,7 @@
 			"items": {
 				"On Display": {
 					"name": "展示中 On Display",
-					"description": "<p><strong>触发</strong> 至少有两个活物在房间中超过1分钟</p><hr /><p><strong>效果</strong> 橱柜中的玩偶开始震颤摇晃，整个区域弥漫着对接下来可能发生之事的压倒性恐惧感。每个能看见橱柜的活物必须成功通过 @Check[will|dc:20|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}）。该惊魂随后掷先攻。</p>"
+					"description": "<p><strong>触发</strong> 至少有两个活物在房间中超过1分钟</p><hr /><p><strong>效果</strong> 橱柜中的玩偶开始震颤摇晃，整个区域弥漫着对接下来可能发生之事的压倒性恐惧感。每个能看见橱柜的活物必须成功通过 @Check[will|dc:20|options:inflicts:frightened] 豁免，否则 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。该惊魂随后掷先攻。</p>"
 				}
 			},
 			"data": {
@@ -803,7 +803,7 @@
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
 				}
 			},
 			"data": {
@@ -1100,7 +1100,7 @@
 			"items": {
 				"Eatable Enticement": {
 					"name": "可食诱惑 Eatable Enticement",
-					"description": "<p><strong>触发</strong> 一个生物经过玻璃展示柜敞开北侧的5尺范围内</p><hr /><p><strong>效果</strong> 魔法甜点诱人的香气压制目标的嗅觉。目标必须尝试一次 @Check[will|dc:24|options:inflicts:sickened] 豁免。失败或大失败时，魔法甜点掷先攻。</p><hr /><p><strong>大成功</strong> 目标不受影响、对魔法甜点1分钟内免疫，并意识到该危害试图迫使它。</p>\n<p><strong>成功</strong> 目标不受影响，但仍未意识到魔法甜点试图迫使它。</p>\n<p><strong>失败</strong> 目标在下回合被迫留在玻璃柜旁，并花费至少2个动作食用魔法甜点。它可在每个回合结束时重做意志豁免，成功时终止效果。如被强迫食用甜点连续超过2轮，目标 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。</p>\n<p><strong>大失败</strong> 目标被迫将所有动作用于食用魔法甜点，并立即恶心1。它可在每个回合结束时重做意志豁免，成功时终止强迫。</p>\n<p>恶心状态每持续一回合被迫将所有动作用于食用甜点而增加1，最高至 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}。</p>"
+					"description": "<p><strong>触发</strong> 一个生物经过玻璃展示柜敞开北侧的5尺范围内</p><hr /><p><strong>效果</strong> 魔法甜点诱人的香气压制目标的嗅觉。目标必须尝试一次 @Check[will|dc:24|options:inflicts:sickened] 豁免。失败或大失败时，魔法甜点掷先攻。</p><hr /><p><strong>大成功</strong> 目标不受影响、对魔法甜点1分钟内免疫，并意识到该危害试图迫使它。</p>\n<p><strong>成功</strong> 目标不受影响，但仍未意识到魔法甜点试图迫使它。</p>\n<p><strong>失败</strong> 目标在下回合被迫留在玻璃柜旁，并花费至少2个动作食用魔法甜点。它可在每个回合结束时重做意志豁免，成功时终止效果。如被强迫食用甜点连续超过2轮，目标 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 目标被迫将所有动作用于食用魔法甜点，并立即恶心1。它可在每个回合结束时重做意志豁免，成功时终止强迫。</p>\n<p>恶心状态每持续一回合被迫将所有动作用于食用甜点而增加1，最高至 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}。</p>"
 				}
 			},
 			"data": {
@@ -1200,7 +1200,7 @@
 				},
 				"Studious Strike": {
 					"name": "勤学打击 Studious Strike",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家从错误中学习。如果管家上一动作是对一个目标的拳击打击未命中（但不是大失败），则管家对同一目标进行一次拳击打击。该目标对此攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}，命中时管家额外造成1d6精准伤害。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家从错误中学习。如果管家上一动作是对一个目标的拳击打击未命中（但不是大失败），则管家对同一目标进行一次拳击打击。该目标对此攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}，命中时管家额外造成1d6精准伤害。</p>"
 				},
 				"Light": {
 					"name": "光亮术 Light",
@@ -1208,7 +1208,7 @@
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
 				}
 			},
 			"data": {
@@ -1255,7 +1255,7 @@
 				},
 				"Frightful Snarl": {
 					"name": "惊惧咆哮 Frightful Snarl",
-					"description": "<p>克瑞萨克对其能看见的30尺内一个生物咆哮怒视，然后尝试 [[/act demoralize]] 该生物；如果生物不懂他的语言，他不承受减值。被惊惧咆哮致使惊惧的生物 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 直至其回合开始。</p>"
+					"description": "<p>克瑞萨克对其能看见的30尺内一个生物咆哮怒视，然后尝试 [[/act demoralize]] 该生物；如果生物不懂他的语言，他不承受减值。被惊惧咆哮致使惊惧的生物 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 直至其回合开始。</p>"
 				},
 				"Void Healing": {
 					"name": "虚能治疗 Void Healing",
@@ -1289,7 +1289,7 @@
 				},
 				"Ghoul Whispers": {
 					"name": "食尸鬼低语 Ghoul Whispers",
-					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
 				},
 				"Claw": {
 					"name": "爪击 Claw"
@@ -1457,7 +1457,7 @@
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
-					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
+					"description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 自动管家在帮人脱衣的同时尝试将其引导出去。自动管家对触及距内的大型或更小生物尝试一次以运动的 [[/act reposition]] 检定。成功时，目标也 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（大成功时 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}），因为自动管家在拽其衣物或装备的某部分。目标可通过一次互动动作移除该状态。</p>"
 				}
 			},
 			"data": {
@@ -1501,7 +1501,7 @@
 			"items": {
 				"Soul Ravage": {
 					"name": "灵魂蹂躏 Soul Ravage",
-					"description": "<p>嶙峋兽的獠牙携带强力的诅咒，急切渗入活肉。每轮第一次因嶙峋兽颚部打击受到伤害时，目标必须尝试一次 @Check[fortitude|dc:18|options:inflicts:sickened] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}，且1分钟内无法将恶心值降至1以下。</p>\n<p><strong>大失败</strong> 同失败，但持续1小时。在该诅咒效果下死亡的生物在24小时内升起为僵尸。</p>"
+					"description": "<p>嶙峋兽的獠牙携带强力的诅咒，急切渗入活肉。每轮第一次因嶙峋兽颚部打击受到伤害时，目标必须尝试一次 @Check[fortitude|dc:18|options:inflicts:sickened] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}，且1分钟内无法将恶心值降至1以下。</p>\n<p><strong>大失败</strong> 同失败，但持续1小时。在该诅咒效果下死亡的生物在24小时内升起为僵尸。</p>"
 				},
 				"Rend": {
 					"name": "撕裂 Rend",
@@ -1574,7 +1574,7 @@
 				},
 				"Pent-Up Taunt": {
 					"name": "蓄势嘲讽 Pent-Up Taunt",
-					"description": "<p>兹尼对她能观察到的30尺内的艾扎或格里泽进行嘲讽。她以+2环境加值对该生物的意志DC尝试一次 @Check[deception|against:will] 检定。兹尼在花至少10分钟思索值得的第二轮侮辱前，无法对该生物再次使用此能力。</p><hr /><p><strong>大成功</strong> 同成功，但目标还承受 @Damage[(1d4+2)[mental]] 伤害。</p>\n<p><strong>成功</strong> 目标对兹尼下回合开始前盟友尝试的下一次攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>\n<p><strong>失败</strong> 目标不受影响。</p>"
+					"description": "<p>兹尼对她能观察到的30尺内的艾扎或格里泽进行嘲讽。她以+2环境加值对该生物的意志DC尝试一次 @Check[deception|against:will] 检定。兹尼在花至少10分钟思索值得的第二轮侮辱前，无法对该生物再次使用此能力。</p><hr /><p><strong>大成功</strong> 同成功，但目标还承受 @Damage[(1d4+2)[mental]] 伤害。</p>\n<p><strong>成功</strong> 目标对兹尼下回合开始前盟友尝试的下一次攻击 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}。</p>\n<p><strong>失败</strong> 目标不受影响。</p>"
 				}
 			},
 			"data": {
@@ -1645,7 +1645,7 @@
 				},
 				"Chopping Frenzy": {
 					"name": "劈砍狂乱 Chopping Frenzy",
-					"description": "<p><strong>条件</strong> 阿伦德鲁双手各持一把奥克斩颈斧</p><hr /><p><strong>效果</strong> 阿伦德鲁双斧齐挥。他尝试两次打击，每柄斩颈斧一次，每次使用其当前的多重攻击减值。两次打击必须以同一目标为对象，且第二次打击承受-2减值。</p>\n<p>如果两次都命中，将其伤害合并并仅应用一次抗性与弱点，且该目标因这猛烈一击而 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 至其下回合开始。这在计算阿伦德鲁多重攻击减值时计为两次攻击。</p>"
+					"description": "<p><strong>条件</strong> 阿伦德鲁双手各持一把奥克斩颈斧</p><hr /><p><strong>效果</strong> 阿伦德鲁双斧齐挥。他尝试两次打击，每柄斩颈斧一次，每次使用其当前的多重攻击减值。两次打击必须以同一目标为对象，且第二次打击承受-2减值。</p>\n<p>如果两次都命中，将其伤害合并并仅应用一次抗性与弱点，且该目标因这猛烈一击而 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 至其下回合开始。这在计算阿伦德鲁多重攻击减值时计为两次攻击。</p>"
 				},
 				"Grave Knowledge": {
 					"name": "坟墓知识 Grave Knowledge",
@@ -1664,7 +1664,7 @@
 				},
 				"Ghoul Whispers": {
 					"name": "食尸鬼低语 Ghoul Whispers",
-					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
+					"description": "<p><strong>条件</strong> 食尸鬼触及距内有 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained} 或 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious} 的生物</p><hr /><p><strong>效果</strong> 食尸鬼向该生物耳中低语暗念与污秽渴求。该生物必须对禁忌渴求诅咒进行豁免。</p>\n<p><strong>禁忌渴求</strong>（诅咒）受此诅咒恶心的生物仍可吃喝</p>\n<p><strong>豁免</strong> @Check[will|dc:21|traits:curse]，使用该食尸鬼等级的高阶法术DC</p>\n<p><strong>第一阶段</strong> 携带者，无不良影响（1天）</p>\n<p><strong>第二阶段</strong> @Damage[2d6[void]] 伤害，并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} 直至吃下生肉（1天）</p>\n<p><strong>第三阶段</strong> 同第二阶段</p>\n<p><strong>第四阶段</strong> 同第二阶段，除非该目标在过去24小时吃过生肉，那么它承受 @Damage[4d6[void]] 伤害并 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2} 直至再吃生肉</p>\n<p><strong>第五阶段</strong> 如果该生物过去24小时内吃过生肉，则它死去并升起为食尸鬼；否则回到第四阶段</p>"
 				},
 				"Consume Flesh": {
 					"name": "啃食尸体 Consume Flesh",
