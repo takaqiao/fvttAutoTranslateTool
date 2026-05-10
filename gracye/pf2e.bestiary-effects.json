@@ -1,0 +1,2574 @@
+{
+	"label": "怪物图鉴效果 Bestiary Effects",
+	"mapping": {
+		"prerequisites": {
+			"path": "system.prerequisites.value",
+			"converter": "structured",
+			"cardinality": "many",
+			"mapping": {
+				"value": "value"
+			}
+		},
+		"gmnote": "system.description.gm"
+	},
+	"folders": {},
+	"entries": {
+		"Effect: Drain Blood": {
+			"name": "效果：吸血 Drain Blood",
+			"description": "<p>你获得4d4临时生命值。</p>"
+		},
+		"Effect: Swarming Bites": {
+			"name": "效果：集群噬咬 Swarming Bites",
+			"description": "<p>你陷入笨拙1。当你受到该效果影响，并且尝试带有专注或操作特征的动作，你必须通过@Check[flat|dc:5|showDC:all]检定否则会丢失该动作；该纯骰检定在动作结束之后，效果生效之前进行。</p>"
+		},
+		"Effect: Consume Memories": {
+			"name": "效果：吞噬记忆 Consume Memories",
+			"description": "<p>作为吞噬记忆的结果，沃达凯于1分钟内在所有的技能检定中获得+1状态加值。</p>"
+		},
+		"Effect: Oceanic Armor": {
+			"name": "Effect: Oceanic Armor",
+			"description": "<p>The creature gains a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Nature's Infusion": {
+			"name": "效果：自然注能 Nature's Infusion",
+			"description": "<p>布劳德韦德获得15点临时生命值。</p>"
+		},
+		"Effect: Fanatical Frenzy": {
+			"name": "效果：狂热激怒 Fanatical Frenzy",
+			"description": "<p>你的攻击检定获得+1状态加值，伤害检定获得+2状态加值，AC获得-2状态减值。</p>"
+		},
+		"Effect: Deny Fate": {
+			"name": "Effect: Deny Fate",
+			"description": "<p>When you roll initiative, you automatically roll a 1.</p>"
+		},
+		"Effect: Despair": {
+			"name": "效果：绝望灵光 Despair",
+			"description": "<p>灵光范围内活着的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。它无法从这种恐惧中自然恢复，但只要离开灵光范围就能立即恢复。</p>"
+		},
+		"Effect: Engulf and Swallow Whole": {
+			"name": "效果：包卷和活吞 Engulf and Swallow Whole",
+			"description": "<p>效果来自@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.zU3Ovaet4xQ5Gmvy]或@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]</p>\n<p>你陷入受擒，缓慢1，并且必须屏住呼吸，否则便会开始窒息。你可以攻击效果来源，但是仅能以无武装攻击或是轻负载及更小的武器进行攻击。来源的生物在对抗此攻击时视为措手不及。如果效果来源于单次攻击或法术中受到的穿刺或挥砍伤害等于或超过所列的破裂值（Rupture），你重获自由。</p>"
+		},
+		"Effect: Resonance": {
+			"name": "效果：共鸣 Resonance",
+			"description": "<p>你在具有选定特征的效果上的攻击骰和伤害骰获得+1状态加值；具有元素和选定特征的生物在所有攻击和伤害骰上获得该加值。</p>"
+		},
+		"Effect: Absorb Memories": {
+			"name": "效果：吸取记忆 Absorb Memories",
+			"description": "<p>生物所有技能检定中获得+1状态加值。</p>"
+		},
+		"Effect: Darivan's Bloodline Magic": {
+			"name": "效果：达利梵的血统奥秘 Darivan's Bloodline Magic",
+			"description": "<p>达利梵的血统奥秘被激活时，他的动作变得超自然的优雅和使人分神，他于1轮内在交涉检定上获得+1状态加值，或者一个目标于1轮内在意志豁免上承受-1状态减值。</p>"
+		},
+		"Effect: Sacrifice Armor": {
+			"name": "效果：牺牲护甲 Sacrifice Armor",
+			"description": "<p>孽生废品的AC在24小时之内降低2点。孽生废品的AC不能以此方式降低至16以下。</p>"
+		},
+		"Effect: Divine Frenzy": {
+			"name": "Effect: Divine Frenzy",
+			"description": "<p>You take a –2 penalty to Perception checks and Will saves and gain a +2 status bonus to your spell DC and spell attack modifier. You can't use actions with the concentrate trait unless you're Casting a Spell or Seeking.</p>"
+		},
+		"Effect: Asper's Elemental Aura": {
+			"name": "Effect: Asper's Elemental Aura",
+			"description": "<p>You gain resistance 10 to damage of the chosen element (electricity for air, fire, or cold for water). If air, you double your speed. If fire, any creature within 30 feet of you who receives fire damage receives an extra 2d10 persistent fire damage. If water, you gain fast healing 20.</p>"
+		},
+		"Effect: Stay Strong!": {
+			"name": "Effect: Stay Strong!",
+			"description": "<p>You gain a +1 circumstance bonus to the save.</p>"
+		},
+		"Effect: Manipulate Luck (Good)": {
+			"name": "效果：操纵运势-好运 Manipulate Luck (Good)",
+			"description": "<p>生物可以在接下来的1分钟内为一个d20骰投掷两次并选用更高的点数。</p>"
+		},
+		"Effect: Venator's Mark": {
+			"name": "Effect: Venator's Mark",
+			"description": "<p>You take a –1 status penalty to all attacks against aeons, as well as to saving throws against efects from aeons.</p>"
+		},
+		"Effect: Technology Control": {
+			"name": "Effect: Technology Control",
+			"description": "<p>The target takes a -2 circumstance penalty to its attack rolls and DCs against a creature it would not normally attack.</p>\n<hr />\n<p><em>Note: This effect applies a penalty to all rolls and DCs while active.</em></p>"
+		},
+		"Effect: Hunter's Onslaught": {
+			"name": "Effect: Hunter's Onslaught",
+			"description": "<p>You become fascinated by the marked creature and you gain 10 temporary Hit Points that last as long as the onslaught does. You gain a +8 status bonus to damage rolls against the marked enemy, and allies in a 30-foot aura around the hunter gain half that bonus.</p>"
+		},
+		"Effect: Skin Net": {
+			"name": "Effect: Skin Net",
+			"description": "<p>You take a –10-foot circumstance penalty to your Speeds.</p>"
+		},
+		"Effect: Harmonizing Aura (Allies)": {
+			"name": "效果：调音灵光 - 盟友 Harmonizing Aura (Allies)",
+			"description": "<p>生物在音波伤害获得+2状态加值，AC以及所有豁免在对抗音波和听觉效果时获得+1状态加值。。</p>"
+		},
+		"Effect: Fed by Water": {
+			"name": "Effect: Fed by Water",
+			"description": "<p>You gain temporary Hit Points.</p>"
+		},
+		"Effect: Adaptive Strike": {
+			"name": "效果：自适应打击 Adaptive Strike",
+			"description": "<p>生物特选择精金、寒铁或银；他的近战打击被视为该类型的材质。</p>"
+		},
+		"Effect: Lantern of Hope": {
+			"name": "效果：希望之灯 Lantern of Hope",
+			"description": "<p>生物在伤害骰和对抗@UUID[Compendium.pf2e.spells-srd.Item.GaRQlC9Yw1BGKHfN]{极潮绝望 Wave of Despair}法术的豁免骰上获得+1状态加值。</p>"
+		},
+		"Effect: Near-Death Experience": {
+			"name": "效果：濒死体验 Near-Death Experience",
+			"description": "<p>你的复苏检定的DC减少2。</p>"
+		},
+		"Effect: Aura of Corruption": {
+			"name": "效果：腐化灵光 Aura of Corruption",
+			"description": "<p>对于那些相较其他生物，对植物生物能造成更多伤害或麻烦的效果来说，那些在豁免检定中失败的生物会被上述效果视为植物，但这些生物不会由于被视同为植物生物而获得任何好处。</p>"
+		},
+		"Effect: Demon-Touched Weapon": {
+			"name": "Effect: Demon-Touched Weapon",
+			"description": "<p>Shenga deals an additional 1d6 bleed damage with her melee Strikes.</p>"
+		},
+		"Effect: Fanatical Frenzy (Legacy)": {
+			"name": "Effect: Fanatical Frenzy (Legacy)",
+			"description": "<p>You gain a +1 status bonus to attack rolls and a +2 status bonus to damage rolls, and you take a –2 status penalty to AC.</p>"
+		},
+		"Effect: Hampering Fusillade": {
+			"name": "效果：阻碍射击 Hampering Fusillade",
+			"description": "<p>你的速度受到-10尺环境减值。</p>"
+		},
+		"Effect: Field of Unholy Undeath": {
+			"name": "Effect: Field of Unholy Undeath",
+			"description": "<p>Undead allies within the aura gain a +1 status bonus to attack rolls and saving throws. If the ally has void healing, they also gain fast healing 5.</p>"
+		},
+		"Effect: Claim Corpse - Skeletal": {
+			"name": "效果：占据尸体 - 骷髅 Claim Corpse - Skeletal",
+			"description": ""
+		},
+		"Effect: Aura of Disquietude": {
+			"name": "效果：不安灵光 Aura of Disquietude",
+			"description": "<p>由于灵光而陷入惊惧的生物不能夹击。</p>"
+		},
+		"Effect: Primal Sink": {
+			"name": "Effect: Primal Sink",
+			"description": "<p>You gain a +1 status bonus to attack rolls, saving throws, skill checks, and sap saving throw DC.</p>"
+		},
+		"Effect: Feel No Pain": {
+			"name": "Effect: Feel No Pain",
+			"description": "<p>The swarm gains 10 temporary Hit Points.</p>"
+		},
+		"Effect: Fed by Wood": {
+			"name": "效果：由木所生 Fed by Wood",
+			"description": "<p>龙的颚咬附带的火焰伤害增加一个伤害骰。</p>"
+		},
+		"Effect: Bittersweet Dreams": {
+			"name": "效果：苦乐交织之梦 Bittersweet Dreams",
+			"description": "<p>根据豁免成功等级不同，生物在攻击骰、豁免检定、技能检定上受到状态减值。</p>"
+		},
+		"Effect: Blood Magic": {
+			"name": "效果：血统奥秘 Blood Magic",
+			"description": "<p>生物在意志豁免上获得+2状态加值。</p>"
+		},
+		"Effect: Undead Mastery": {
+			"name": "效果：不死统御 Undead Mastery",
+			"description": "<p>生物在攻击检定、伤害检定、AC、豁免和技能检定上获得+1环境加值。</p>"
+		},
+		"Effect: Cataclysm Brand": {
+			"name": "Effect: Cataclysm Brand",
+			"description": "<p>Your strikes deal an additional 1d10 fire damage.</p>"
+		},
+		"Effect: Apprentice's Ambition": {
+			"name": "Effect: Apprentice's Ambition",
+			"description": "<p>The apprentice gains a +2 circumstance bonus to attack rolls, damage rolls, saving throws, and skill checks.</p>"
+		},
+		"Effect: Vomit Tar": {
+			"name": "效果：呕吐焦油 Vomit Tar",
+			"description": "<p>该生物缓慢1并获得5点火焰弱点。</p>"
+		},
+		"Effect: Bond in Light": {
+			"name": "Effect: Bond in Light",
+			"description": "<p>The creature glows with bright light in a 20-foot emanation and dim light to 40 feet and has fast healing 10.</p>"
+		},
+		"Effect: Enliven Foliage": {
+			"name": "Effect: Enliven Foliage",
+			"description": "<p>You take a –10-foot circumstance penalty to your Speeds.</p>"
+		},
+		"Effect: Tooth Tug": {
+			"name": "Effect: Tooth Tug",
+			"description": "<p>You take a –1 status penalty to Charisma-based skill checks and must succeed at a DC 5 flat check to Cast a Spell unless that spell has the subtle trait.</p>"
+		},
+		"Effect: Bastion Aura": {
+			"name": "效果：要塞灵光 Bastion Aura",
+			"description": "<p>灵光内的善良生物只要处于此范围内便拥有@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.fJSNOw4zHGbIm4bZ]{快速治疗 Fast Healing}30，并在攻击骰和伤害骰上获得+2状态加值。</p>"
+		},
+		"Effect: Fold Form": {
+			"name": "效果：折叠形态 Fold Form",
+			"description": "<p>金折灵迅速展开并重新折叠自己的身体，从@UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{动物形态 Animal Form}中选择一个新形态。这赋予她所选形态的移动速度和打击，但没有其他好处。它的攻击加值不变，伤害加值为+3。</p>"
+		},
+		"Effect: Guard's Parry (Liege)": {
+			"name": "Effect: Guard's Parry (Liege)",
+			"description": "<p>The liege gains a +2 circumstance bonus to AC against the triggering attack.</p>"
+		},
+		"Effect: Invoke Rune": {
+			"name": "效果：祈祷符文 Invoke Rune",
+			"description": "<p>一个发光的符文副本出现在巨人持有的一件武器上，给与该武器所选的效果。</p>"
+		},
+		"Effect: Vitriolic Miasma": {
+			"name": "Effect: Vitriolic Miasma",
+			"description": "<p>You take a -2 circumstance penalty to saves against poison effects and gain weakness 10 to poison damage.</p>"
+		},
+		"Effect: Caustic Drool": {
+			"name": "Effect: Caustic Drool",
+			"description": "<p>The abyssal warhound's jaws Strike deals an additional 2 points of acid damage on a successful attack, or 4 points on a critical success.</p>"
+		},
+		"Effect: Commander's Aura": {
+			"name": "效果：指挥灵光 Commander's Aura",
+			"description": "<p>生物在攻击检定、伤害检定、AC、豁免和技能检定上获得+1环境加值。</p>"
+		},
+		"Effect: Mist Cloud": {
+			"name": "效果：迷雾灵光 Mist Cloud",
+			"description": "<p>灵光内的生物为隐蔽。</p>"
+		},
+		"Effect: Conductive Downpour": {
+			"name": "效果：导电暴雨 Conductive Downpour",
+			"description": "<p>灵光内的生物获得10点电击弱点。</p>"
+		},
+		"Effect: Dirty Bomb": {
+			"name": "效果：脏弹 Dirty Bomb",
+			"description": "<p>目标对抗同一个炼金师的脏弹而进行的额外强韧豁免时，获得-2的环境减值。</p>"
+		},
+		"Effect: Hobgoblin Phalanx": {
+			"name": "Effect: Hobgoblin Phalanx",
+			"description": "<p>The regiment gains a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Mangling Rend": {
+			"name": "效果：压碎 Mangling Rend",
+			"description": "<p>目标在任何速度上都有-20尺状态减值，直到下一回合。</p>"
+		},
+		"Effect: Invigorating Passion": {
+			"name": "效果：激情洋溢 Invigorating Passion",
+			"description": "<p>生物在10分钟内获得攻击骰上的+1状态加值和10点临时生命。</p>"
+		},
+		"Effect: Flesh Mutation": {
+			"name": "Effect: Flesh Mutation",
+			"description": "<p>You are affected by a mutation according to the result.</p>\n<p><strong>1 Spongy Flesh</strong> You have weakness 5 to physical damage.</p>\n<p><strong>2 Caustic Blood</strong> You take 2d4 persistent acid damage that can't be removed normally, but ends when the mutation does.</p>\n<p><strong>3 Sprouting Eyes</strong> You are dazzled, but also immune to flanking.</p>\n<p><strong>4 Mutated Mind</strong> You are confused. You can still recover as noted in the condition, but if you do you remain off-guard until the mutation ends.</p>"
+		},
+		"Effect: Death Gasp (Etioling)": {
+			"name": "效果：死亡一息 Death Gasp （衰变灵）",
+			"description": "<p>衰变灵屏住呼吸时还额外获得虚体特征、25尺飞行速度、对全部伤害的10点抗力（除了力场、幽冥、命能；对抗非魔法伤害时抗力翻倍）。</p>"
+		},
+		"Effect: War Leader": {
+			"name": "效果：战争领袖 War Leader",
+			"description": "<p>生物在攻击骰和技能检定上就能获得+1状态加值。</p>"
+		},
+		"Effect: Breach the Outer Rifts": {
+			"name": "Effect: Breach the Outer Rifts",
+			"description": "<p>The weapon deals an extra 2d6 damage. Roll 1d20 to determine the type: 1–7 acid, 8–9 cold, 10–11 electricity, 12–18 fire, 19–20 void.</p>"
+		},
+		"Effect: Lurker's Glow (Critical Failure)": {
+			"name": "效果：伏光闪烁 Lurker's Glow （大失败）",
+			"description": "<p>生物在效果持续时间内在20尺弥漫范围内散发明亮光照。</p>"
+		},
+		"Effect: Burned Fingers": {
+			"name": "Effect: Burned Fingers",
+			"description": "<p>You take –1 circumstance penalty to Thievery checks.</p>"
+		},
+		"Effect: Sting of the Lash": {
+			"name": "效果：鞭笞之刺 Sting of the Lash",
+			"description": "<p>生物获得5点临时生命。</p>"
+		},
+		"Effect: Beacon of the Rowan Guard": {
+			"name": "效果：花楸守卫信标 Beacon of the Rowan Guard",
+			"description": "<p>在灵光的弥漫范围中时，具有元素特征以及具有植物或木特征的生物获得10点快速治疗、且攻击骰和伤害骰有+2环境加值。</p>"
+		},
+		"Effect: Powder Burst": {
+			"name": "效果：粉末爆发 Powder Burst",
+			"description": "<p>在察觉检定和对抗心灵效果的豁免上承受-2状态减值。</p>"
+		},
+		"Effect: Distracting Giggle": {
+			"name": "Effect: Distracting Giggle",
+			"description": "<p>Creatures take a –1 status penalty to Will saves.</p>"
+		},
+		"Effect: Diabolic Certitude": {
+			"name": "Effect: Diabolic Certitude",
+			"description": "<p>When Gredress publicly espouses the superiority of Hell, she gains a +1 status bonus to skill checks, AC, and saves for 1 day. These bonuses don't apply against devils.</p>"
+		},
+		"Effect: Venomous Aura": {
+			"name": "Effect: Venomous Aura",
+			"description": "<p>You gain weakness 10 to poison (weakness 15 on a critical failure).</p>"
+		},
+		"Effect: Destructive Vengeance": {
+			"name": "Effect: Destructive Vengeance",
+			"description": "<p>The champion deals 2 extra spirit or void damage with their Strikes against the triggering creature.</p>"
+		},
+		"Effect: Graveknight's Curse": {
+			"name": "效果：死墓骑士诅咒 Graveknight's Curse",
+			"description": "<p>生物速度降低10。</p>"
+		},
+		"Effect: Invigorating Spores": {
+			"name": "Effect: Invigorating Spores",
+			"description": "<p>You gain temporary Hit Points equal to your level, and you gain resistance to bludgeoning, piercing, and slashing damage equal to half your level.</p>"
+		},
+		"Effect: Belief Fortification": {
+			"name": "Effect: Belief Fortification",
+			"description": "<p>Members of the garrholdion's faction gain a +1 status bonus to saving throws against emotion effects while within the aura.</p>"
+		},
+		"Effect: Spray Toxic Oil": {
+			"name": "效果：毒油喷射 Spray Toxic Oil",
+			"description": "<p>生物获得火焰弱点5，并且当生物以持握的武器进行攻击检定，得到大失败的结果时，武器掉落原地。</p>"
+		},
+		"Effect: Reactive Detach": {
+			"name": "Effect: Reactive Detach",
+			"description": "<p>The sarcovalt gains resistance 5 to the triggering slashing damage.</p>"
+		},
+		"Effect: Drain Life (Wight Spell Sniper)": {
+			"name": "Effect: Drain Life (Wight Spell Sniper)",
+			"description": "<p>You gain 2d6 temporary Hit Points.</p>"
+		},
+		"Effect: Crush Chitin": {
+			"name": "效果：碾碎甲壳 Crush Chitin",
+			"description": "<p>生物的AC获得-2环境减值。</p>"
+		},
+		"Effect: Harrowing Misfortune": {
+			"name": "效果：哈罗厄运 Harrowing Misfortune",
+			"description": "<p>生物在下一次进行某个具体种类的掷骰时掷骰两次并取更低的结果，种类由卡片的花色决定。一个生物同时只能被哈罗厄运的一种效应所诅咒，新的诅咒会覆盖先前的诅咒。诅咒会在1分钟后或是该具体掷骰被进行之后结束，取其先者。花色与其对应的效应是：锤（近战攻击骰），匙（反射豁免），盾（强韧豁免），书（技能检定），星（意志豁免），冕（法术攻击骰）。</p>"
+		},
+		"Effect: Interpose": {
+			"name": "效果：介入 Interpose",
+			"description": "<p>生物的AC获得+2环境加值。</p>"
+		},
+		"Effect: Radiate Cold": {
+			"name": "Effect: Radiate Cold",
+			"description": "<p><strong>Success</strong> You take a –5-foot status penalty to your Speeds.</p>\n<p><strong>Failure</strong> You take a –10-foot status penalty to your Speeds and are enfeebled 1.</p>\n<p><strong>Critical Failure</strong> You are immobilized and enfeebled 2.</p>"
+		},
+		"Effect: Siphon Life": {
+			"name": "Effect: Siphon Life",
+			"description": "<p>You gain temporary Hit Points.</p>"
+		},
+		"Effect: Volcanic Purge": {
+			"name": "效果：火山洗礼 Volcanic Purge",
+			"description": "<p>你承受此持续火焰伤害期间，你的速度承受-10状态减值。</p>"
+		},
+		"Effect: Viscous Breath": {
+			"name": "Effect: Viscous Breath",
+			"description": "<p>Creatures in the aura take a –2 status penalty to any non-magical physical attacks they attempt.</p>"
+		},
+		"Effect: Focused Assault": {
+			"name": "效果：聚焦突袭 Focused Assault",
+			"description": "<p>生物造成额外伤害，数额取决于它正持握的武器数量。</p>"
+		},
+		"Effect: Brutal Rally": {
+			"name": "效果：残忍激励 Brutal Rally",
+			"description": "<p>你的攻击检定获得+1环境加值。</p>"
+		},
+		"Effect: Countered by Water": {
+			"name": "效果：为水所克 Countered by Water",
+			"description": "<p>生物的攻击骰承受-1环境惩罚，他们的颚咬攻击不再造成火焰伤害。</p>"
+		},
+		"Effect: Recount Epic": {
+			"name": "Effect: Recount Epic",
+			"description": "<p>You gain a +1 circumstance bonus to Acrobatics, Athletics, and Performance checks.</p>"
+		},
+		"Effect: Splintered Ground": {
+			"name": "效果：粉碎地面 Splintered Ground",
+			"description": "<p>生物所有速度都受到-10尺环境减值。</p>"
+		},
+		"Effect: Funereal Dirge": {
+			"name": "Effect: Funereal Dirge",
+			"description": "<p>The creature takes a –2 status penalty to saving throws against drain life.</p>"
+		},
+		"Effect: Quicken the Rot": {
+			"name": "Effect: Quicken the Rot",
+			"description": "<p>You gain 30 Temporary Hit Points.</p>"
+		},
+		"Effect: Aura of Smoke": {
+			"name": "Effect: Aura of Smoke",
+			"description": "<p>Every creature within the aura is concealed.</p>"
+		},
+		"Effect: Read the Cards": {
+			"name": "Effect: Read the Cards",
+			"description": "<p>Roll 1d6 to determine a suit. The harrowkin gains the effects of the suit for 1 minute. If the suit matches the harrowkin's suit, the value is doubled.</p>\n<p><strong>Hammers</strong> The harrowkin gains a +2 status bonus to damage rolls.</p>\n<p><strong>Keys</strong> The harrowkin gains a +1 status bonus to AC.</p>\n<p><strong>Shields</strong> The harrowkin gains fast healing 5.</p>\n<p><strong>Books</strong> The harrowkin gains a +1 status bonus to skill checks.</p>\n<p><strong>Stars</strong> The harrowkin gains a +1 status bonus to saving throws.</p>\n<p><strong>Crown</strong> The harrowkin can reroll 1 check within the next minute and take the higher result. This is a fortune effect.</p>"
+		},
+		"Effect: Black Cat Curse": {
+			"name": "效果：黑猫诅咒 Black Cat Curse",
+			"description": "<p>每当你试图进行攻击骰或豁免时，你必须掷骰两次并使用较低的结果。</p>"
+		},
+		"Effect: Consecration Vulnerability": {
+			"name": "Effect: Consecration Vulnerability",
+			"description": "<p>You gain weakness 30 to holy.</p>"
+		},
+		"Effect: Scent of Blood": {
+			"name": "Effect: Scent of Blood",
+			"description": "<p>You 10 temporary HP and a +4 status bonus to damage rolls with your unarmed attacks, but become off-guard.</p>"
+		},
+		"Effect: War Cry": {
+			"name": "Effect: War Cry",
+			"description": "<p>You deal an additional 1d6 damage with your Strikes.</p>"
+		},
+		"Effect: Sinful Bite": {
+			"name": "效果：原罪之噬 Sinful Bite",
+			"description": "<p>你在速度上承受-10尺状态减值。</p>"
+		},
+		"Effect: Hunt Will": {
+			"name": "Effect: Hunt Will",
+			"description": "<p>The steed gains a +2 circumstance bonus to Perception checks to Seek the prey and to Survival checks to Track the prey. The first time the steed hits its designated prey in a round, it deals an additional 1d8 precision damage.</p>"
+		},
+		"Effect: Surgical Rend": {
+			"name": "Effect: Surgical Rend",
+			"description": "<p>Until the creature is restored to its maximum Hit Points, thus closing the wound, Strikes against the creature deal 1d6 extra precision damage.</p>"
+		},
+		"Effect: Serpent Mode": {
+			"name": "Effect: Serpent Mode",
+			"description": "<p>The clockwork serpent transforms into a different mode. Roll 1d3 and consult the options below.</p>\n<p><strong>1 Cobra Mode</strong> The clockwork serpent can use Intimidating Hood.</p>\n<p><strong>2 Constrictor Mode</strong> The clockwork serpent can use its coils Strike and can Constrict.</p>\n<p><strong>3 Rattlesnake Mode</strong> The clockwork serpent can use Shattering Rattle.</p>"
+		},
+		"Effect: Noxious Smog": {
+			"name": "Effect: Noxious Smog",
+			"description": "<p>Creatures within the aura are concealed.</p>"
+		},
+		"Effect: Guardian's Aegis": {
+			"name": "效果：向导之护 Guardian's Aegis",
+			"description": "<p>在羽熊30尺范围内的所有盟友获在对抗魔法效果的豁免掷骰上获得+1状态加值。若效果来源为魔族，则该加值增加至+2。</p>"
+		},
+		"Effect: Inhale Light": {
+			"name": "Effect: Inhale Light",
+			"description": "<p>The torcheater gains a reach of 10 feet, a +5 foot status bonus to Speed, and fast healing 2. Its resistance to physical damage reduces to 2.</p>"
+		},
+		"Effect: Susceptible to Mockery (Critical Failure)": {
+			"name": "Effect: Susceptible to Mockery (Critical Failure)",
+			"description": "<p>The creature gains a +1 status bonus to Strikes and damage rolls against foes.</p>"
+		},
+		"Effect: Song of Freedom": {
+			"name": "Effect: Song of Freedom",
+			"description": "<p>The troop's Will saves increase to +29 against all mental effects.</p>"
+		},
+		"Effect: Disturbing Vision": {
+			"name": "效果：扰心乱视 Disturbing Vision",
+			"description": "<p>幻视持续[[/gmr 1d4 #Disturbing Visions Duration]]{1d4轮}，并且在此期间，罗刹王和该范围内的所有邪恶生物在所有的检定骰上获得+1状态加值。</p>"
+		},
+		"Effect: Swig (Clumsy)": {
+			"name": "Effect: Swig (Clumsy)",
+			"description": "<p>You gain a +2 item bonus to melee damage rolls and saving throws against fear but are clumsy 1.</p>"
+		},
+		"Effect: Revealing Hypothesis": {
+			"name": "Effect: Revealing Hypothesis",
+			"description": "<p>Your strikes against a target creature deal an additional 2d6 precision damage.</p>"
+		},
+		"Effect: Winter's Bite": {
+			"name": "Effect: Winter's Bite",
+			"description": "<p>You gain weakness to cold.</p>"
+		},
+		"Effect: Bravado Aversion": {
+			"name": "Effect: Bravado Aversion",
+			"description": "<p>A gargarthezul can't stand to be shown up. The first time each round a creature successfully Demoralizes, Shoves, or Trips a gargarthezul, it takes @Damage[1d6[mental]] damage.</p>"
+		},
+		"Effect: Bloom Regeneration": {
+			"name": "Effect: Bloom Regeneration",
+			"description": "<p>For the next 4 rounds, the creature gains regeneration 10; this regeneration can be deactivated by cold iron or holy.</p>"
+		},
+		"Effect: Uncanny Tinker": {
+			"name": "效果：俺寻思 Uncanny Tinker",
+			"description": "<p>生物的攻击检定获得+1环境加值。</p>"
+		},
+		"Effect: Divine Weapon (Chelaxian Cleric)": {
+			"name": "Effect: Divine Weapon (Chelaxian Cleric)",
+			"description": "<p>The Chelaxian cleric's Strikes gain the unholy trait and deal an additional 1d4 spirit damage; this damage increases to 2d4 against creatures with the holy trait.</p>"
+		},
+		"Effect: Align the Stars (Ephemeral)": {
+			"name": "Effect: Align the Stars (Ephemeral)",
+			"description": "<p>Ephemeral Effect</p>\n<p>You gain a +4 circumstance bonus to damage rolls.</p>"
+		},
+		"Effect: Brand of the Impenitent": {
+			"name": "效果：冥顽烙印 Brand of the Impenitent",
+			"description": "<p>生物的AC和豁免会承受-1状态减值，抗力降低2点，并且在对抗圣洁伤害时获得2点弱点。</p>"
+		},
+		"Effect: Aura of Reflection": {
+			"name": "Effect: Aura of Reflection",
+			"description": "<p>You are dazzled and take a –2 penalty to Will saves against the ninkonda's abilities.</p>"
+		},
+		"Effect: Defensive Slam": {
+			"name": "Effect: Defensive Slam",
+			"description": "<p>The creature gains a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Crystalline Dust Form": {
+			"name": "效果：晶尘形态 Crystalline Dust Form",
+			"description": "<p>生物获得40尺飞行速度。</p>"
+		},
+		"Effect: Pest Haven": {
+			"name": "Effect: Pest Haven",
+			"description": "<p>Any animal swarm sharing a space with a skinstitch gains fast healing 3.</p>"
+		},
+		"Effect: One for All": {
+			"name": "Effect: One for All",
+			"description": "<p>You gain a +1 circumstance bonus to AC. If you would benefit from more than one creature's One for All ability, the bonus is +2 instead of +1.</p>"
+		},
+		"Effect: Curse of Boiling Blood": {
+			"name": "效果：沸血诅咒 Curse of Boiling Blood",
+			"description": "<p>生物获得火焰20的弱点并处于@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+		},
+		"Effect: Warshard Healing": {
+			"name": "Effect: Warshard Healing",
+			"description": "<p>You gain fast healing 5.</p>"
+		},
+		"Effect: Dire Warning": {
+			"name": "效果：惩戒警告 Dire Warning",
+			"description": "<p>生物在攻击骰与伤害骰上获得+1状态加值。</p>"
+		},
+		"Effect: Inspirational Presence": {
+			"name": "效果：激励学生 Inspirational Presence",
+			"description": "<p>教师灵光范围内的所有学生在进行回忆知识时获得+1环境加值。</p>"
+		},
+		"Effect: Gleaming Armor": {
+			"name": "效果：耀目宝甲 Gleaming Armor",
+			"description": "<p>龙在AC上获得+2状态修正以及取决于具体生物的抗力以对抗能量伤害。</p>"
+		},
+		"Effect: Slithering Vine": {
+			"name": "Effect: Slithering Vine",
+			"description": "<p>The stelemora increases the reach of their vine Strike by 10 feet until the end of their turn.</p>"
+		},
+		"Effect: Enraging Whistle": {
+			"name": "Effect: Enraging Whistle",
+			"description": "<p>Animals gain a +1 status bonus to attacks and damage.</p>"
+		},
+		"Effect: Mammoth Land Star Limbs": {
+			"name": "效果：猛犸陆星肢体 Mammoth Land Star Limbs",
+			"description": "<p>猛犸陆星目前拥有的肢体数量。</p>"
+		},
+		"Effect: Leader's Command": {
+			"name": "Effect: Leader's Command",
+			"description": "<p>The creatures gains the leader's choice of a +2 status bonus to attack rolls or a +10-foot status bonus to their Speeds.</p>"
+		},
+		"Effect: Air of Authority": {
+			"name": "Effect: Air of Authority",
+			"description": "<p>You take a –2 status penalty to your Will DC against the origin's attempts to Coerce or Demoralize you.</p>"
+		},
+		"Effect: Capture Magic": {
+			"name": "Effect: Capture Magic",
+			"description": "<p>The blade magus gains a +2 status bonus to damage from Arcane Cascade until the end of their next turn.</p>"
+		},
+		"Effect: Distracting Frolic": {
+			"name": "效果：分神嬉闹 Distracting Frolic",
+			"description": "<p>目标盟友能够投掷2次豁免检定并取较好的结果。</p>"
+		},
+		"Effect: Drain Luck (Critical Failure)": {
+			"name": "Effect: Drain Luck (Critical Failure)",
+			"description": "<p>Granted by Drain Luck.</p>\n<p>You must roll twice and take the worse result on all checks.</p>"
+		},
+		"Effect: Eat a Pickle": {
+			"name": "Effect: Eat a Pickle",
+			"description": "<p>You gain 4 temporary Hit Points.</p>"
+		},
+		"Effect: Yobnobby Overdrive": {
+			"name": "Effect: Yobnobby Overdrive",
+			"description": "<p>Yobnobby deals additional damage on her strikes.</p>"
+		},
+		"Effect: Follow Me": {
+			"name": "Effect: Follow Me",
+			"description": "<p>You gain a +2 circumstance bonus to Deception and Stealth checks.</p>"
+		},
+		"Effect: Inspired Feast": {
+			"name": "效果：盛宴 Inspired Feast",
+			"description": "<p>生物的攻击骰获得+1状态加值，伤害骰获得+2状态加值。</p>"
+		},
+		"Effect: Temper Armament": {
+			"name": "Effect: Temper Armament",
+			"description": "<p>Tempering armor or a shield increases its Hardness by 1. Tempering a weapon grants the weapon a +1 circumstance bonus to damage rolls.</p>"
+		},
+		"Effect: Remember, You're Under Oath": {
+			"name": "Effect: Remember, You're Under Oath",
+			"description": "<p>You take a status penalty to Deception checks to Lie.</p>"
+		},
+		"Effect: Still Got It!": {
+			"name": "Effect: Still Got It!",
+			"description": "<p>The retired creature gains temporary Hit Points equal to its level that last until the end of the encounter. The retired creature also suppresses the effects of being rusty until the end of the encounter.</p>"
+		},
+		"Effect: A Thousand Cuts": {
+			"name": "效果：千刃创伤 Effect: A Thousand Cuts",
+			"description": "<p>在受到持续流血伤害的影响时，你获得对挥砍伤害的弱点 2。</p>"
+		},
+		"Effect: Field of Slaughter (Bleed)": {
+			"name": "Effect: Field of Slaughter (Bleed)",
+			"description": "<p>Critical hits within the aura deal 3d6 persistent bleed damage.</p>"
+		},
+		"Effect: Shields Up!": {
+			"name": "Effect: Shields Up!",
+			"description": "<p>You gain a +2 circumstance bonus to AC and Reflex saves.</p>"
+		},
+		"Effect: Haunting Wail": {
+			"name": "Effect: Haunting Wail",
+			"description": "<p>You gain sonic weakness 10.</p>"
+		},
+		"Effect: Bloodline Magic (Stirvyn Banyan)": {
+			"name": "效果：血统奥秘 Bloodline Magic （斯特尔凡·榕木）",
+			"description": "<p>当斯特尔凡施放血统法术时，先祖记忆的喷涌会让他或是一个法术目标在技能检定上获得+1状态加值，维持1轮。</p>"
+		},
+		"Effect: Defensive Slice": {
+			"name": "效果：寓守于攻 Defensive Slice",
+			"description": "<p>德雷勒夫男爵使用他的武器摆出防御姿态，然后尝试一次近战打击。直到他的下个回合开始前，他在所有打击中承受-2状态减值（包括本次打击），并且在他的AC上获得+2状态加值。</p>"
+		},
+		"Effect: Dual Mind": {
+			"name": "Effect: Dual Mind",
+			"description": "<p>You are clumsy 2 and take a –10-foot circumstance penalty to your Speed.</p>"
+		},
+		"Effect: Commanding Shout": {
+			"name": "效果：指挥之吼 Commanding Shout",
+			"description": "<p>古拉姆步兵团的发射弩箭！及放平长剑！的DC增加到33，且他们的豁免检定获得+2状态加值。</p>"
+		},
+		"Effect: Word of Heroism": {
+			"name": "Effect: Word of Heroism",
+			"description": "<p>You gain a status bonus to attack rolls, Perception checks, saving throws, and skill checks.</p>"
+		},
+		"Effect: Damned Restoration": {
+			"name": "Effect: Damned Restoration",
+			"description": "<p>You gain a +2 status bonus to damage rolls.</p>"
+		},
+		"Stance: Hunter's Precision": {
+			"name": "Stance: Hunter's Precision",
+			"description": "<p>Your Strikes deal an additional 2d8 precision damage, and the range increment for your ranged weapon Strikes is 20 feet longer than normal. On a critical hit with a weapon Strike, the target also takes 2d6 persistent bleed damage.</p>"
+		},
+		"Effect: Timely Advice": {
+			"name": "效果：及时忠告 Timely Advice",
+			"description": "<p>你在触发的投骰上获得+2环境加值。</p>"
+		},
+		"Effect: Fettering Fedora": {
+			"name": "Effect: Fettering Fedora",
+			"description": "<p>The creature takes a –10-foot circumstance penalty to their Speeds.</p>"
+		},
+		"Effect: Artificer's Command": {
+			"name": "效果：工匠之令 Artificer's Command",
+			"description": "<p>生物的攻击骰、伤害骰和豁免检定获得+1状态加值。</p>"
+		},
+		"Effect: Steward of the Faithful": {
+			"name": "Effect: Steward of the Faithful",
+			"description": "<p>Each ally in the aura who worships Pharasma gains resistance 5 to void and a +1 status bonus to Will saves, Diplomacy checks, and Medicine checks.</p>"
+		},
+		"Effect: Cooperative Hunting": {
+			"name": "Effect: Cooperative Hunting",
+			"description": "<p>You gain a +2 circumstance bonus to your next strike attack roll.</p>"
+		},
+		"Effect: Spill Secrets": {
+			"name": "Effect: Spill Secrets",
+			"description": "<p>You gain a +1 circumstance bonus to AC and saving throws against the marked creature.</p>"
+		},
+		"Effect: Noxious Exhalation": {
+			"name": "Effect: Noxious Exhalation",
+			"description": "<p>The creature gains weakness to mental 10 and a –1 status penalty to Will saves.</p>"
+		},
+		"Effect: Extract Bones": {
+			"name": "Effect: Extract Bones",
+			"description": "<p>You gain 50 temporary HP.</p>"
+		},
+		"Effect: Sea Chantey": {
+			"name": "Effect: Sea Chantey",
+			"description": "<p>All fiends within 60 feet gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>"
+		},
+		"Effect: Pulse of Rage": {
+			"name": "效果：狂暴脉冲 Pulse of Rage",
+			"description": "<p>生物的AC获得-1状态减值。</p>"
+		},
+		"Effect: Biggest Fan!": {
+			"name": "Effect: Biggest Fan!",
+			"description": "<p>You gain 1d6 temporary Hit Points.</p>"
+		},
+		"Effect: Spear Parry": {
+			"name": "Effect: Spear Parry",
+			"description": "<p>You gain a +1 circumstance bonus to AC until the start of your next turn.</p>"
+		},
+		"Effect: Words of Encouragement": {
+			"name": "Effect: Words of Encouragement",
+			"description": "<p>You ignore any circumstance and status penalties you have.</p>"
+		},
+		"Effect: Fickle Prophecy": {
+			"name": "Effect: Fickle Prophecy",
+			"description": "<p>You gain 1d8+4 temporary Hit Points.</p>"
+		},
+		"Effect: Troop Harrowing": {
+			"name": "Effect: Troop Harrowing",
+			"description": "<p>You take a status penalty to your saving throw or AC against a spell.</p>"
+		},
+		"Effect: Thaw the Heart": {
+			"name": "Effect: Thaw the Heart",
+			"description": "<p>You lose your emotion immunity and become slowed 1</p>"
+		},
+		"Effect: Dematerialize": {
+			"name": "Effect: Dematerialize",
+			"description": "<p>You gain the incorporeal trait, resistance to all damage (except force, ghost touch, and spirit) equal to half your level (double against non-magical damage), and immunity to precision damage.</p>\n<p>If you attempt a Strike against a creature with any circumstance bonus to AC, reduce that bonus by 2.</p>"
+		},
+		"Effect: Hallucinogenic Pollen (Failure)": {
+			"name": "效果：致幻花粉（失败） Hallucinogenic Pollen (Failure)",
+			"description": "<p>生物对察觉检定和对心灵效果的豁免受到-2状态减值。</p>"
+		},
+		"Effect: Blistering Touch": {
+			"name": "Effect: Blistering Touch",
+			"description": "<p>The aurocan funnels some of the steam powering it into its body, heating up its metal frame. For the next minute, its melee Strikes deal an additional 1d6 fire damage.</p>"
+		},
+		"Effect: Fiery Form": {
+			"name": "效果：火焰形态 Fiery Form",
+			"description": "<p>血鬼婆获得火焰特征以及60尺飞行速度，变得免疫火焰，并如同火炬一样发光。</p>"
+		},
+		"Effect: Swig": {
+			"name": "效果：痛饮 Swig",
+			"description": "<p>You gain a +2 item bonus to melee damage rolls and saving throws against fear but are off-guard.</p>"
+		},
+		"Effect: Prepare Fangs": {
+			"name": "Effect: Prepare Fangs",
+			"description": "<p>Daggers deals additional poison damage equal to the counter value.</p>"
+		},
+		"Effect: Hurtful Critique": {
+			"name": "效果：损人恶评 Hurtful Critique",
+			"description": "<p>生物在攻击检定中承受-1环境减值（大失败为-2点）</p>"
+		},
+		"Effect: Alchemical Embalming": {
+			"name": "Effect: Alchemical Embalming",
+			"description": "<p>You take a –10‐foot penalty to all your Speeds.</p>"
+		},
+		"Effect: Eye Pluck": {
+			"name": "Effect: Eye Pluck",
+			"description": "<p>You take a –4 circumstance penalty on all sight-based Perception checks.</p>"
+		},
+		"Effect: Barbed Net": {
+			"name": "效果：倒钩网 Barbed Net",
+			"description": "<p>你获得笨拙1，速度获得-10尺环境减值。如果打击是一次重击，你还被禁足。</p>"
+		},
+		"Effect: Fox's Wager": {
+			"name": "Effect: Fox's Wager",
+			"description": "<p>The target gains a +1 status bonus to attack rolls and a +5 status bonus to damage against constructs, objects, and structures constructed by humanoids. It also gains a +2 status bonus to Stealth checks against humanoids.</p>"
+		},
+		"Effect: Sepulchral Drain": {
+			"name": "效果：坟墓汲取 Sepulchral Drain",
+			"description": "<p>该生物获得对虚能伤害的2点弱点。</p>"
+		},
+		"Effect: Spiteful Eye": {
+			"name": "Effect: Spiteful Eye",
+			"description": "",
+			"gmnote": "<p>The knight of malice takes a –2 circumstance penalty to Reflex saving throws and their Strikes deal an extra 1d6 mental damage.</p>"
+		},
+		"Effect: Brimstone Blessing": {
+			"name": "Effect: Brimstone Blessing",
+			"description": "<p>The trident deals an extra 2d6 fire damage, gains the unholy trait, and gains the effects of a returning rune.</p>"
+		},
+		"Effect: Vent Energy": {
+			"name": "Effect: Vent Energy",
+			"description": "<p>The hadrinnex's weapon arm strikes deal an extra 2d6 energy damage according to the damage type in the energy gland.</p>"
+		},
+		"Effect: Bark Orders": {
+			"name": "Effect: Bark Orders",
+			"description": "<p>All kobold allies within 30 feet of him gain a +1 status bonus on attack rolls and saving throws against fear effects until the start of Chief Sootscale's next turn.</p>"
+		},
+		"Effect: Grasp of the Deep": {
+			"name": "效果：深渊抓握 Grasp of the Deep",
+			"description": "<p>生物获得寒冷弱点10，并在强韧豁免上承受-2状态减值。</p>"
+		},
+		"Effect: Conduct": {
+			"name": "效果：指挥演奏 Conduct",
+			"description": "<p>其中一只小蛙开始唱歌，给予奏鸣蛙和所有在60尺范围内的盟友三种效果中的一种，效果持续到奏鸣蛙的下一个回合开始。</p>\n<ul>\n<li><strong>红色</strong> 给予速度+10尺的状态加值。</li>\n<li><strong>Blue</strong> 给予AC和强韧豁免+1的状态加值。</li>\n<li><strong>Yellow</strong> 盟友在攻击检定上获得+1的状态加值，并成功的近战打击会额外造成@Damage[1d4[sonic]]伤害，因为它们的攻击会产生共鸣。</li>\n</ul>"
+		},
+		"Effect: Aura of Righteousness": {
+			"name": "Effect: Aura of Righteousness",
+			"description": "<p>You gain a +2 status bonus to AC against unholy creatures and a +2 status bonus to damage rolls against unholy creatures.</p>"
+		},
+		"Effect: Create Opening": {
+			"name": "Effect: Create Opening",
+			"description": "<p>You take a –2 status penalty to AC against the next Strike made against you.</p>"
+		},
+		"Effect: Bodyguard's Defense": {
+			"name": "效果：保镖的护卫 Bodyguard's Defense",
+			"description": "<p>你在AC上获得+2环境加值。</p>"
+		},
+		"Effect: Pinpoint Weakness": {
+			"name": "Effect: Pinpoint Weakness",
+			"description": "<p>Tsimaan points out a weakness of a creature within 30 feet. Tsimaan and all allies that can see and hear her gain a +1 status bonus to their attack and damage rolls against that creature until the beginning of her next turn.</p>"
+		},
+		"Effect: Reminder of Doom": {
+			"name": "Effect: Reminder of Doom",
+			"description": "<p>The creature gains a +2 status bonus to attack rolls and damage rolls.</p>"
+		},
+		"Effect: Roast": {
+			"name": "效果：烤制 Roast",
+			"description": "<p>被烤制生物在1分钟内对抗上菜的强韧豁免有-2环境减值。</p>"
+		},
+		"Effect: Stoke the Fervent (High Tormentor)": {
+			"name": "Effect: Stoke the Fervent (High Tormentor)",
+			"description": "<p>Each ally that hears the call gains a +4 status bonus to attack rolls and damage rolls, a +2 status bonus to saving throws, and takes a -2 status penalty to AC. Affected allies must use at least one of their actions to Strike each round, if they are able (even if it means attacking an ally, object, or thin air).</p>\n<p><em>The effect duration has been set to the average duration of [[/gmr 2d4 #rounds]]{2d4 rounds}. Set the duration to the correct value when the effect is added.</em></p>"
+		},
+		"Effect: Subservience Kill": {
+			"name": "Effect: Subservience Kill",
+			"description": "<p>You take a –1 circumstance penalty to its Reflex save against Grasping Claws.</p>"
+		},
+		"Effect: Beseech the Spirits": {
+			"name": "Effect: Beseech the Spirits",
+			"description": "<p>You gain lifesense 60 feet and all-around vision.</p>"
+		},
+		"Effect: Hasty Traps": {
+			"name": "Effect: Hasty Traps",
+			"description": "<p>You take a –5-foot status penalty to your Speeds as long you take persistent bleed damage.</p>"
+		},
+		"Effect: Archon's Protection": {
+			"name": "效果：圣使护卫 Archon's Protection",
+			"description": "<p>你获得针对触发伤害的所有伤害类型的抗力。</p>"
+		},
+		"Effect: Soul Lock (Healing)": {
+			"name": "效果：魂锁 Soul Lock （治疗）",
+			"description": "<p>该魔族获得快速治疗5，持续1分钟。</p>"
+		},
+		"Effect: Aura of Sophistry (Unholy)": {
+			"name": "Effect: Aura of Sophistry (Unholy)",
+			"description": "<p>You take a –1 penalty to checks to @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{Recall Knowledge} and gain the effects of the @UUID[Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P]{Dubious Knowledge} feat when Recalling Knowledge; whenever an affected creature Recalls Knowledge, they become @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} and gain weakness 4 to mental damage for [[/gmr 1d4 #rounds]]{1d4 rounds}.</p>"
+		},
+		"Effect: Swell": {
+			"name": "Effect: Swell",
+			"description": "<p>The creature grows to Huge size, and its reach increases to 15 feet. It also gains 12 temporary Hit Points, resistance 5 to bludgeoning, and a +2 status bonus to damage rolls</p>"
+		},
+		"Effect: Divine Weapon": {
+			"name": "Effect: Divine Weapon",
+			"description": "<p>Sister Maeri's sawtooth saber deals an additional 1d4 spirit damage.</p>"
+		},
+		"Effect: Stick a Fork in It": {
+			"name": "效果：一叉了之 Effect: Stick a Fork in It",
+			"description": "<p>目标的速度受到-10尺环境减值。</p>"
+		},
+		"Effect: Queen Sorshen's Aid (Indulgent Arcana)": {
+			"name": "Effect: Queen Sorshen's Aid (Indulgent Arcana)",
+			"description": "<p>The next spell you cast with the mental trait has its save DC increased by 2 and removes the incapacitation trait, if any.</p>"
+		},
+		"Effect: Circle of Horns": {
+			"name": "Effect: Circle of Horns",
+			"description": "<p>The herd gains a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Cite Precedent": {
+			"name": "效果：援引判例 Cite Precedent",
+			"description": "<p>你在下一轮法庭辩论中的交涉检定承受-2减值。</p>"
+		},
+		"Effect: Phalanx Fighter": {
+			"name": "效果：方阵步兵 Phalanx Fighter",
+			"description": "<p>生物在AC上获得+1环境加值。</p>"
+		},
+		"Effect: Furious Possession": {
+			"name": "效果：狂怒附体 Furious Possession",
+			"description": "<p>被占据的生物获得12临时生命值，在解除占据时失去。在被占据时，此生物获得狂暴脉冲灵光。每当被附身的生物进行近战攻击时，嗔怒之魂可以用其虚幻之爪的攻击调整值、伤害值或它们两者来代替该生物自己打击的数值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.GC5441z8i7N8swk1]{效果：狂暴脉冲}</p>"
+		},
+		"Effect: Challenge Foe": {
+			"name": "Effect: Challenge Foe",
+			"description": "<p>You gain a circumstance bonus to damage equal to your number of weapon damage dice against your designated foe but take an equivalent circumstance penalty to damage against any other creature.</p>"
+		},
+		"Effect: Verdant Aria": {
+			"name": "Effect: Verdant Aria",
+			"description": "<p>You gain a +2 status bonus to AC and saving throws.</p>"
+		},
+		"Effect: Exalted Retributive Strike": {
+			"name": "Effect: Exalted Retributive Strike",
+			"description": "<p>You gain resistance 14 to all damage against the triggering damage.</p>"
+		},
+		"Effect: Witchflame (Failure)": {
+			"name": "效果：巫焰 Witchflame （失败）",
+			"description": "<p>生物获得火焰弱点5。</p>"
+		},
+		"Effect: Field of Slaughter (Keen)": {
+			"name": "Effect: Field of Slaughter (Keen)",
+			"description": "<p>Your weapons and unarmed strikes gain the <em>keen</em> rune.</p>"
+		},
+		"Effect: False Flag": {
+			"name": "Effect: False Flag",
+			"description": "<p>Hellbreakers in the area take a –1 circumstance penalty to saving throws and DCs vs. effects that give the frightened or confused condition.</p>"
+		},
+		"Effect: Aura of the All-Seeing Eye": {
+			"name": "Effect: Aura of the All-Seeing Eye",
+			"description": "<p>You gain a +1 status bonus to saving throws against spells.</p>"
+		},
+		"Effect: Blood Fury": {
+			"name": "效果：血怒 Blood Fury",
+			"description": "<p>生物的攻击骰获得+1状态加值。</p>"
+		},
+		"Effect: Drain Life": {
+			"name": "Effect: Drain Life",
+			"description": "<p>You gain temporary Hit Points.</p>"
+		},
+		"Effect: Binding Oath": {
+			"name": "Effect: Binding Oath",
+			"description": "<p>You automatically critically succeed on basic saving throws against the origin's abilities and spells.</p>"
+		},
+		"Effect: Glutton's Feast (Aezar)": {
+			"name": "效果：饕餮盛宴（艾扎） Effect: Glutton's Feast (Aezar)",
+			"description": "<p>你获得临时生命值。</p>"
+		},
+		"Effect: Absorb Shock": {
+			"name": "Effect: Absorb Shock",
+			"description": "<p>The stormdrinker gains 10 temporary HP, is quickened, and increases the reach of its vine Strikes by 5 feet.</p>"
+		},
+		"Effect: Hair Snare": {
+			"name": "Effect: Hair Snare",
+			"description": "<p><strong>Failure</strong> You take a –10‐foot circumstance penalty to all of your Speeds.</p>\n<p><strong>Critical Failure</strong> You are immobilized.</p>"
+		},
+		"Effect: Drink Life": {
+			"name": "Effect: Drink Life",
+			"description": "<p>You gain 25 temporary HP.</p>"
+		},
+		"Effect: Loathsome Bite": {
+			"name": "Effect: Loathsome Bite",
+			"description": "<p>You take a status penalty to Charisma-based checks.</p>"
+		},
+		"Effect: Engaging Duel": {
+			"name": "Effect: Engaging Duel",
+			"description": "<p>You gain a +1 circumstance bonus to Strike attack rolls and DCs against the marked creature. You take a –1 circumstance penalty to all checks and DCs against any creature other than the marked creature.</p>"
+		},
+		"Effect: Raise Guard": {
+			"name": "效果：举刃护身 Raise Guard",
+			"description": "<p>该生物的AC获得+2环境加值。</p>"
+		},
+		"Effect: Static Field": {
+			"name": "效果：静电场 Static Field",
+			"description": "<p>植物生物获得5点临时生命值。</p>"
+		},
+		"Effect: Debilitating Sneak Attack": {
+			"name": "Effect: Debilitating Sneak Attack",
+			"description": "<p>You either become enfeebled 1 or take a –10-foot status penalty to your Speeds.</p>"
+		},
+		"Effect: Inspire Defense (Love Siktempora)": {
+			"name": "效果：集结颂歌 Rallying Anthem （亲爱癔时妖）",
+			"description": "<p>生物在AC和豁免上获得+2状态加值，对所有物理伤害获得4点抗力。</p>"
+		},
+		"Effect: Align the Stars": {
+			"name": "Effect: Align the Stars",
+			"description": "<p>If you are an ally, you gain a +2 circumstance bonus to AC. If you are an enemy, other creatures gain a +4 circumstance bonus to damage rolls against you.</p>"
+		},
+		"Effect: On Guard": {
+			"name": "Effect: On Guard",
+			"description": "<p>You gain a +2 circumstance bonus to your initiative roll.</p>"
+		},
+		"Effect: Thus Always to Tyrants": {
+			"name": "Effect: Thus Always to Tyrants",
+			"description": "<p><strong>Ally</strong>: You gain a +1 status bonus to attack rolls.</p>\n<p><strong>Enemy</strong>: You take a –1 penalty to attack rolls.</p>"
+		},
+		"Effect: Queen Sorshen's Aid (Aid Ally)": {
+			"name": "Effect: Queen Sorshen's Aid (Aid Ally)",
+			"description": "<p>You gain a +4 circumstance bonus to attack rolls.</p>"
+		},
+		"Effect: Inspired Recitation": {
+			"name": "效果：激励复诵 Inspired Recitation",
+			"description": "<p>60尺内的所有盟友在豁免骰上获得+1状态加值，并且获得10点临时生命值。</p>"
+		},
+		"Effect: Witchflame (Critical Failure)": {
+			"name": "效果：巫焰 Witchflame （大失败）",
+			"description": "<p>生物获得火焰弱点10。</p>"
+		},
+		"Effect: Gloom Aura": {
+			"name": "效果：忧郁灵光 Gloom Aura",
+			"description": "<p>生物在对抗情绪效果时的豁免受-1环境减值。</p>"
+		},
+		"Effect: Icy Protection": {
+			"name": "Effect: Icy Protection",
+			"description": "<p>You gain resistance to cold.</p>"
+		},
+		"Effect: Unsettling Attention": {
+			"name": "Effect: Unsettling Attention",
+			"description": "<p><strong>失败</strong> The creature becomes unsettled and suffers a -2 penalty to all saves against fear effects as long as they remain within the hex containing Candlemere.</p>"
+		},
+		"Effect: Lightning Powered": {
+			"name": "Effect: Lightning Powered",
+			"description": "<p>For each shock zombie within 30 feet, the shock zombie gains fast healing 2 (to a maximum of fast healing 10).</p>"
+		},
+		"Effect: Musk": {
+			"name": "效果：麝香 Musk",
+			"description": "<p>生物的隐秘检定有-2减值。</p>"
+		},
+		"Effect: Will Not Falter": {
+			"name": "Effect: Will Not Falter",
+			"description": "<p>You gain a +2 status bonus to attack rolls and saving throws against fear.</p>"
+		},
+		"Effect: Root in Place": {
+			"name": "Effect: Root in Place",
+			"description": "<p>Your Speed is reduced to 0 and you gain a +1 circumstance bonus to AC and 2 temporary Hit Points.</p>"
+		},
+		"Effect: Witchflame (Success)": {
+			"name": "效果：巫焰 Witchflame （成功）",
+			"description": "<p>生物获得火焰弱点5。</p>"
+		},
+		"Effect: Competitive Taunt": {
+			"name": "Effect: Competitive Taunt",
+			"description": "<p>You get a +2 circumstance bonus to your damage against the creature made off-guard by your taunt.</p>"
+		},
+		"Effect: Remove Face": {
+			"name": "效果：移脸 Remove Face",
+			"description": "<p>生物的魅力检定以及以魅力为基础的技能检定获得永久的-4状态减值。只有在受害者从无面屠夫那里取回它的脸皮并对其施放@UUID[Compendium.pf2e.spells-srd.Item.SnaLVgxZ9ryUFmUr]{复原术 Restoration}，该减值才能被移除。</p>"
+		},
+		"Effect: Weeping Aura": {
+			"name": "Effect: Weeping Aura",
+			"description": "<p>You take a status penalty to Survival checks to Sense Direction.</p>"
+		},
+		"Effect: Living Shields": {
+			"name": "Effect: Living Shields",
+			"description": "<p>You gain a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Deceptive Heads": {
+			"name": "Effect: Deceptive Heads",
+			"description": "<p>The number of deceptive heads the tyrafdir currently has.</p>"
+		},
+		"Effect: Energy Ward": {
+			"name": "Effect: Energy Ward",
+			"description": "<p>The cascader gains resistance 15 to the triggering damage, replacing any other resistance gained from this ability. The cascader's melee strikes also deal an additional 4d10 damage of this type.</p>"
+		},
+		"Effect: Don Mask": {
+			"name": "Effect: Don Mask",
+			"description": "<p>The mummer gains a primal boon:</p><ul><li><strong>Fiery Akkarok</strong> The mummer's melee Strikes deal an additional 2d6 fire damage.</li><li><strong>Hazi Zephyr-Borne</strong> The mummer gains a fly Speed of 20 feet.</li><li><strong>King of Storms</strong> The mummer gains the Reactive Strike reaction that can be used only with their tail.</li><li><strong>Nessek, the Wave Dancer</strong> The mummer's claw Strikes deal an additional 2d4 persistent bleed damage.</li><li><strong>Zalok, Who was Called to Black Harbor</strong> The mummer gains a +10-foot status bonus to their land Speed and swim Speed.</li></ul>"
+		},
+		"Effect: Magnificent…!": {
+			"name": "Effect: Magnificent…!",
+			"description": "<p>You gain a +1 status bonus to attack and damage rolls against the marked creature.</p>\n<p>The origin deals an extra 3d6 precision damage with their weapon and unarmed Strikes that hit that creature.</p>"
+		},
+		"Effect: Fed by Metal": {
+			"name": "效果：由金而生 Fed by Metal",
+			"description": "<p>龙在AC上获得+1物品加值。</p>"
+		},
+		"Effect: Aura of Command": {
+			"name": "效果：指挥灵光 Aura of Command",
+			"description": "<p>你的攻击检定获得+1状态加值，意志检定获得+2状态加值。</p>"
+		},
+		"Effect: Runic Resistance": {
+			"name": "效果：符文抗力 Runic Resistance",
+			"description": "<p>生物获得一种伤害类型的5点抗力。</p>"
+		},
+		"Effect: Vicious Bluster": {
+			"name": "Effect: Vicious Bluster",
+			"description": "<p>When a gargarthezul successfully @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralizes} a foe, it gains 1d6 temporary Hit Points (2d6 on a critical success) that last for 1 minute.</p>"
+		},
+		"Effect: Ganzi Resistance": {
+			"name": "效果：混沌裔抗性 Ganzi Resistance",
+			"description": "<p>混沌裔获得酸蚀、电击或音波的1点抗性（每日随机选择）。</p>"
+		},
+		"Effect: Choose Weakness": {
+			"name": "效果：选择弱点 Choose Weakness",
+			"description": "<p>伽乐可以将他的能量抗性变为这些能量类型中的一种</p>\n<p>他还可以将他的能量抗性变为这些能量类型中的一种（可以和打击所选的不同）。</p>"
+		},
+		"Effect: Aura of Growth": {
+			"name": "效果：滋长灵光 Aura of Growth",
+			"description": "<p>其他植物生物位于此效果范围内时获得快速治疗20。</p>"
+		},
+		"Effect: Phytohydra Heads": {
+			"name": "Effect: Phytohydra Heads",
+			"description": "<p>The number of heads the hydra currently has.</p>"
+		},
+		"Effect: Perfect Formation": {
+			"name": "Effect: Perfect Formation",
+			"description": "<p>The troop gains a +2 item bonus to AC and a +2 status bonus to Reflex saves.</p>"
+		},
+		"Effect: Smeltable": {
+			"name": "Effect: Smeltable",
+			"description": "<p>You take a –10-foot status penalty to your Speeds, and your strikes deal an extra 1d6 fire damage. You also lose your weakness to slashing damage and resistance to electricity damage.</p>"
+		},
+		"Effect: Bark Orders (Hold Sergeant)": {
+			"name": "Effect: Bark Orders (Hold Sergeant)",
+			"description": "<p>You gain a +1 status bonus to attack and damage rolls.</p>"
+		},
+		"Effect: Towering Stance (Disbelieved)": {
+			"name": "效果：高耸姿态-不相信 Towering Stance (Disbelieved)",
+			"description": "<p>生物体型变为中型。</p>"
+		},
+		"Effect: Unbelievable Connection": {
+			"name": "Effect: Unbelievable Connection",
+			"description": "<p>The marked creature is off-guard against your attacks until it is no longer stupefied.</p>"
+		},
+		"Effect: Bogwid Fever": {
+			"name": "Effect: Bogwid Fever",
+			"description": "<p>You are enfeebled, and the DC to recover from persistent bleed damage increases based on the stage of disease.</p>"
+		},
+		"Effect: Sylvan Wine": {
+			"name": "效果：森林珍酿 Sylvan Wine",
+			"description": "<p>生物在意志豁免上获得+1物品加值，在对抗恐惧的意志豁免上获得+3物品加值。</p>"
+		},
+		"Effect: Symbol of Loyalty": {
+			"name": "Effect: Symbol of Loyalty",
+			"description": "<p>Allies in the aura who are 14th level and lower and are loyal to the grand inquisitor's cause get a +3 status bonus to Will saves.</p>"
+		},
+		"Effect: Ectoplasmic Form (Physical)": {
+			"name": "效果：灵质形态 Ectoplasmic Form （实体）",
+			"description": "<p>生物失去它的虚体特征，失去对精准伤害的免疫和全部抗力。它根据生物类型获得AC增加，并且近战打击造成挥砍和穿刺而不是虚能伤害。</p>"
+		},
+		"Effect: Wrath of Fate": {
+			"name": "效果：命运之怒 Wrath of Fate",
+			"description": "<p>受影响的生物在尝试攻击，豁免，技能检定时，掷骰两次，并取较低的结果。之后效果终止。</p>"
+		},
+		"Effect: Drunken Stumble": {
+			"name": "Effect: Drunken Stumble",
+			"description": "<p>You take a -1 circumstance penalty to AC for 1 round.</p>"
+		},
+		"Effect: Consume Organ": {
+			"name": "效果：吞噬器官 Consume Organ",
+			"description": "<p>生物15点临时生命值以及在攻击与伤害掷骰上的+1状态加值。</p>"
+		},
+		"Effect: Imbue Righteousness": {
+			"name": "Effect: Imbue Righteousness",
+			"description": "<p>Your strikes with that weapon gain the holy trait and deal an additional 1d6 spirit damage to unholy creatures.</p>"
+		},
+		"Effect: Curl Up": {
+			"name": "效果：卷曲 Curl Up",
+			"description": "<p>生物的AC获得+2环境加值。</p>"
+		},
+		"Effect: Partial Armor": {
+			"name": "Effect: Partial Armor",
+			"description": "<p>Ephemeral effect</p>\n<p>Strikes made with ranged or reach weapons gain a +1 circumstance bonus to attack rolls against Marguk.</p>"
+		},
+		"Effect: Filth Wave": {
+			"name": "效果：秽物之潮 Filth Wave",
+			"description": "<p>你在速度上承受减值。</p>"
+		},
+		"Effect: Aura of Misfortune": {
+			"name": "效果：灾祸灵光 Aura of Misfortune",
+			"description": "<p>活着的生物在所有基于d20的检定中必须投掷两次，并且取较低的结果。</p>"
+		},
+		"Effect: Devour Soul": {
+			"name": "效果：噬魂 Devour Soul",
+			"description": "<p>生物获得10点临时生命值并且攻击检定和伤害检定获得获得+2状态加值。</p>"
+		},
+		"Effect: Tail Lash": {
+			"name": "Effect: Tail Lash",
+			"description": "<p>You take a –2 circumstance penalty to the triggering roll.</p>"
+		},
+		"Effect: Riding Zogototaru": {
+			"name": "Effect: Riding Zogototaru",
+			"description": "<p>You take a –2 circumstance penalty to your Reflex saves against Zogototaru's Thrashing.</p>"
+		},
+		"Effect: Crush of Hundreds": {
+			"name": "Effect: Crush of Hundreds",
+			"description": "<p>The creature takes a –10-foot penalty to all Speeds.</p>"
+		},
+		"Effect: Hallucinogenic Pollen (Critical Failure)": {
+			"name": "效果：致幻花粉（大失败） Hallucinogenic Pollen (Critical Failure)",
+			"description": "<p>生物对察觉检定和对心灵效果的豁免受到-4状态减值。</p>"
+		},
+		"Effect: Rapid Evolution - Energy Gland": {
+			"name": "Effect: Rapid Evolution - Energy Gland",
+			"description": "<p>The creature gains energy damage resistance similar to the triggering type.</p>"
+		},
+		"Effect: Warning Hoot": {
+			"name": "Effect: Warning Hoot",
+			"description": "<p>Targets gain a +1 circumstance bonus to their initiative roll.</p>"
+		},
+		"Effect: Aura of Vitality": {
+			"name": "效果：生命灵光 Aura of Vitality",
+			"description": "<p>生命神使灵光范围内的盟友在所有豁免骰上获得+1状态加值，对命能和虚能伤害的抗力10，以及免受位面的具有命能和虚能特征的效果影响。灵光范围内12级及以下的动物无法攻击生命神使和神使的盟友，除非它们被控制或以其他方式强制攻击。</p>"
+		},
+		"Effect: Regression": {
+			"name": "效果：衰退 Regression",
+			"description": "<p>生物会缩小一个体型。此外，生物所有专家以上的熟练度将会减少为受训。</p>"
+		},
+		"Effect: Aura of Sophistry (Weakness)": {
+			"name": "Effect: Aura of Sophistry (Weakness)",
+			"description": "<p>You become @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} and gain weakness 4 to mental damage.</p>"
+		},
+		"Effect: All Are One": {
+			"name": "效果：众成一 All Are One",
+			"description": "<p>生物光大漩涡的范围和其触手触手打击的触及范围提高10尺，最高到额外30尺。</p>"
+		},
+		"Effect: Tactical Command": {
+			"name": "Effect: Tactical Command",
+			"description": "<p>The creature gains a +2 status bonus to their Strike if the veteran noble has dealt with that creature or an organization that creature belongs to before, as the veteran offers hard-earned tactical advice.</p>"
+		},
+		"Effect: Devour Soul (Victim Level 15 or Higher)": {
+			"name": "效果：噬魂 Devour Soul （受害者等级为15或更高）",
+			"description": "<p>生物获得10点临时生命值，并且攻击检定和伤害检定获得获得+2状态加值。</p>"
+		},
+		"Effect: Commanding Aura": {
+			"name": "Effect: Commanding Aura",
+			"description": "<p>You gain 8 temporary Hit Points.</p>"
+		},
+		"Effect: Revert Form": {
+			"name": "效果：现形 Revert Form",
+			"description": "<p>生物的攻击检定、伤害检定、豁免检定和技能检定都获得+2状态加值。</p>"
+		},
+		"Effect: Keeper's Ward": {
+			"name": "Effect: Keeper's Ward",
+			"description": "<p>You gain a +1 status bonus to saves against magical effects. The bonus increases to +2 if the effect originated from an aquatic creature.</p>"
+		},
+		"Effect: Forgiven Defaced Naiad Queen's Thanks": {
+			"name": "Effect: Forgiven Defaced Naiad Queen's Thanks",
+			"description": "<p>You gain a +3 status bonus to Lore checks and saves against fear effects.</p>"
+		},
+		"Effect: Curse Trespassers": {
+			"name": "Effect: Curse Trespassers",
+			"description": "<p>You take a –2 penalty to Will saves.</p>"
+		},
+		"Effect: Lunar Blaze": {
+			"name": "Effect: Lunar Blaze",
+			"description": "<p>Diskah becomes immune to fire damage and her melee Strikes deal an additional 1d6 persistent fire damage.</p>"
+		},
+		"Effect: Blood Frenzy": {
+			"name": "效果：血之狂乱 Blood Frenzy",
+			"description": "<p>生物获得临时生命值和其他效果，取决于生物种类。</p>"
+		},
+		"Effect: Fiery Rhetoric": {
+			"name": "Effect: Fiery Rhetoric",
+			"description": "<p>You take a –2 status penalty to Perception and Will saves.</p>"
+		},
+		"Effect: Soul Siphon": {
+			"name": "效果：灵魂虹吸 Soul Siphon",
+			"description": "<p>生物获得5临时生命值，并且攻击检定和伤害检定获得+1状态加值。</p>"
+		},
+		"Effect: Soul Roar (Ally)": {
+			"name": "Effect: Soul Roar (Ally)",
+			"description": "<p>You gain temporary Hit Points equal to the origin's level.</p>"
+		},
+		"Effect: Kharna's Blessing": {
+			"name": "Effect: Kharna's Blessing",
+			"description": ""
+		},
+		"Effect: Stab it! Stab it! Stab it!": {
+			"name": "Effect: Stab it! Stab it! Stab it!",
+			"description": "<p>Your attacks against the marked target deal 1 additional damage dice.</p>"
+		},
+		"Effect: Overdrive Engine": {
+			"name": "Effect: Overdrive Engine",
+			"description": "<p>Reginald gains 200 temporary Hit Points, a +15-foot status bonus to Speed, and a +2 status bonus to melee attack rolls.</p>"
+		},
+		"Effect: Interest is Due!": {
+			"name": "Effect: Interest is Due!",
+			"description": "<p>Your Strike deals an an additional 1d6 mental damage.</p>"
+		},
+		"Effect: Infectious Aura": {
+			"name": "效果：传染灵光 Infectious Aura",
+			"description": "<p>你在对抗疾病的豁免上承受-2减值。</p>"
+		},
+		"Effect: Harness Wickedness": {
+			"name": "Effect: Harness Wickedness",
+			"description": "<p>Your Strikes deal an additional die of damage and gain the unholy trait. You also gains 10 temporary Hit Points, a +5-foot status bonus to Speed, and weakness 5 to holy.</p>"
+		},
+		"Effect: Under Command": {
+			"name": "效果：指挥下 Under Command",
+			"description": "<p>你受卫队长指挥。</p>"
+		},
+		"Effect: Instinctual Tinker (Critical Success)": {
+			"name": "效果：修修补补 Instinctual Tinker （大成功）",
+			"description": "<p>生物的攻击检定有+1环境加值。</p>"
+		},
+		"Effect: Keep Up With Me!": {
+			"name": "Effect: Keep Up With Me!",
+			"description": "<p>You gain a +3 status bonus to your attack roll on the next Strike you make, or to the DC of your next offensive ability if you're a troop.</p>"
+		},
+		"Effect: Shadow Rapier": {
+			"name": "效果：暗影细剑 Shadow Rapier",
+			"description": "<p>浪客用虚能包裹它的剑刃，将它的伤害类型变为虚能。</p>"
+		},
+		"Effect: Caustic Mucus": {
+			"name": "效果：腐蚀粘液 Caustic Mucus",
+			"description": "<p>生物的速度承受-5尺状态减值。这种速度减值会随着持续酸蚀伤害的一同结束。</p>"
+		},
+		"Effect: Stink Sap": {
+			"name": "Effect: Stink Sap",
+			"description": "<p>Creatures and their equipment coated in the sap smell horrible. Creatures in the aura must attempt a @Check[fortitude|dc:16] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}, and on a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}. While within the aura, the creature takes a -2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is immune to stink sap for 1 minute. Creatures don't save against this effect in exploration mode and don't become temporarily immune, but creatures with stink sap on them must roll against their own aura when they roll initiative in encounter mode. The sap dissipates after 10 hours; spending 10 minutes scrubbing the sap off with soap and water reduces the duration by 1 hour.</p>"
+		},
+		"Effect: No Quarter!": {
+			"name": "效果：毫不留情！ No Quarter!",
+			"description": "<p>你在攻击检定和伤害检定上获得+1状态加值。</p>"
+		},
+		"Effect: Curse of the Baneful Venom": {
+			"name": "效果：邪毒诅咒 Curse of the Baneful Venom",
+			"description": "<p>生物立即尝试一次对毒素的豁免检定，并承受-2状态减值。</p>"
+		},
+		"Effect: Rally": {
+			"name": "Effect: Rally",
+			"description": "<p>You gain a +1 circumstance bonus to your AC and saving throws.</p>"
+		},
+		"Effect: Scream of Despair": {
+			"name": "Effect: Scream of Despair",
+			"description": "<p>You gain weakness to mental 15.</p>"
+		},
+		"Effect: Vicious Bluster (Critical Success)": {
+			"name": "Effect: Vicious Bluster (Critical Success)",
+			"description": "<p>When a gargarthezul successfully @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralizes} a foe, it gains 1d6 temporary Hit Points (2d6 on a critical success) that last for 1 minute.</p>"
+		},
+		"Effect: Crushing Spirits": {
+			"name": "Effect: Crushing Spirits",
+			"description": "<p>The creature takes a –10-foot circumstance penalty to all its Speeds.</p>"
+		},
+		"Effect: Bad Deal": {
+			"name": "Effect: Bad Deal",
+			"description": "<p>You must roll your next attack roll, saving throw, or skill check twice and use the worse result.</p>"
+		},
+		"Effect: Electric Surge": {
+			"name": "Effect: Electric Surge",
+			"description": "<p>The shambler gains 12 temporary HP and is quickened.</p>"
+		},
+		"Effect: Crocodile Form": {
+			"name": "效果：鳄鱼形态 Crocodile Form",
+			"description": "<p>水兽可以选择变出短小的鳄鱼腿，地面移动速度增加为20尺，但它的嘴咬失去持续流血伤害。</p>"
+		},
+		"Effect: Solidarity": {
+			"name": "Effect: Solidarity",
+			"description": "<p>While leading a demonstration, the union organizer grants themself and their allies a +1 circumstance bonus to saving throws against fatigue and mental effects.</p>"
+		},
+		"Stance: Bite of the Asp Stance": {
+			"name": "Stance: Bite of the Asp Stance",
+			"description": "<p>Your asp coil loses the reach weapon property, but you can make asp coil Strikes instead of fist Strikes when you uses Flurry of Blows. Claw of pain also applies to these asp coil Strikes when in this stance.</p>"
+		},
+		"Effect: Curse of Stone": {
+			"name": "效果：岩石诅咒 Curse of Stone",
+			"description": "<p>该生物在AC上获得+1状态加值。</p>"
+		},
+		"Effect: Guide's Warning": {
+			"name": "效果：向导的警告 Guide's Warning",
+			"description": "<p>You gain a +1 circumstance bonus to your initiative rolls. This bonus increases to +2 if the guide was Scouting.</p>"
+		},
+		"Effect: Totems of the Past": {
+			"name": "效果：昔日图腾 Totems of the Past",
+			"description": "<p>区域内的任何蜥蜴人盟友将受到启迪，攻击骰获得+1状态加值。</p>"
+		},
+		"Effect: Waterlogged": {
+			"name": "效果：满溢 Waterlogged",
+			"description": "<p>你的体型变为巨型并且速度承受-15尺减值。</p>"
+		},
+		"Effect: Inspiring Presence": {
+			"name": "效果：鼓舞人心 Inspiring Presence",
+			"description": "<p>生物在对抗恐惧效果时的豁免检定有+2 环境加值。</p>"
+		},
+		"Effect: Never Enough": {
+			"name": "Effect: Never Enough",
+			"description": "<p>Your spell DC increases by 1, and your spell attacks gain a +1 circumstance bonus.</p>"
+		},
+		"Effect: Vulnerable to Curved Space": {
+			"name": "Effect: Vulnerable to Curved Space",
+			"description": "<p>When a hound of Tindalos is not adjacent to a structural angle of 90º (or more acute), its resistance to physical damage is suppressed and it becomes sickened 1.</p>"
+		},
+		"Effect: Curse of Fire": {
+			"name": "效果：火之诅咒 Curse of Fire",
+			"description": "<p>生物获得火焰15的弱点。</p>"
+		},
+		"Effect: Dagger Defense": {
+			"name": "Effect: Dagger Defense",
+			"description": "<p>The archer regiment gains a +1 circumstance bonus to AC until the beginning of their next turn.</p>"
+		},
+		"Effect: Gird in Prayer": {
+			"name": "Effect: Gird in Prayer",
+			"description": "<p>The creature gains a +2 status bonus to saving throws against death, mental, and possession effects.</p>"
+		},
+		"Effect: Bolster Torag's Chosen": {
+			"name": "Effect: Bolster Torag's Chosen",
+			"description": "<p>You gain a +1 status bonus to AC and Will saves.</p>"
+		},
+		"Effect: Word of Vigor": {
+			"name": "Effect: Word of Vigor",
+			"description": "<p>You gain regeneration 25.</p>"
+		},
+		"Effect: Heart Break": {
+			"name": "Effect: Heart Break",
+			"description": "<p>Until the end of her next turn, each enemy within 60 feet of Narcela takes a -1 item penalty to Will saves.</p>"
+		},
+		"Effect: Compel Courage": {
+			"name": "Effect: Compel Courage",
+			"description": "<p>You gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects. If you're not a velstrac, you take 1 persistent bleed damage and can't attempt a flat check to end this damage as long as you're compelled.</p>"
+		},
+		"Effect: Stay in the Fight!": {
+			"name": "Effect: Stay in the Fight!",
+			"description": "<p>You gain 10 temporary Hit Points.</p>"
+		},
+		"Effect: Sight Prey (Speed Penalty)": {
+			"name": "Effect: Sight Prey (Speed Penalty)",
+			"description": "<p>You take a penalty to your Speeds.</p>"
+		},
+		"Effect: Manipulate Luck - Drusilla (Good)": {
+			"name": "Effect: Manipulate Luck - Drusilla (Good)",
+			"description": "<p>The affected creature can roll twice on one d20 roll within the next day and use the higher result.</p>"
+		},
+		"Effect: Dematerialize (Ephemeral)": {
+			"name": "Effect: Dematerialize (Ephemeral)",
+			"description": "<p>Your circumstance bonus to AC is reduced by 2.</p>"
+		},
+		"Effect: Aggravating Aura": {
+			"name": "Effect: Aggravating Aura",
+			"description": "<p>The creature gains weakness to all damage.</p>"
+		},
+		"Effect: Jury-Rig": {
+			"name": "Effect: Jury-Rig",
+			"description": "<p>The target gains 10 temporary Hit Points.</p>"
+		},
+		"Effect: Bosun's Command": {
+			"name": "Effect: Bosun's Command",
+			"description": "<p>You gain a +2 status bonus to your attack rolls or a +10 status bonus to your Speeds.</p>"
+		},
+		"Effect: Ravenous Young": {
+			"name": "Effect: Ravenous Young",
+			"description": "<p>Once a larva is attached, the target becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}. While the larva remains attached, the target cannot recover from persistent bleed.</p>"
+		},
+		"Effect: Howl of Vengeful Fury": {
+			"name": "效果：复仇怒嚎 Howl of Vengeful Fury",
+			"description": "<p>草人获得5点临时生命值，并在打击和豁免骰上获得+1状态加值。</p>"
+		},
+		"Effect: Avenge the Fallen": {
+			"name": "Effect: Avenge the Fallen",
+			"description": "<p>You roll the attack roll twice and use the higher result.</p>"
+		},
+		"Effect: Kingpin's Presence": {
+			"name": "Effect: Kingpin's Presence",
+			"description": "<p>You gain a +2 status bonus to saving throws against mental effects.</p>"
+		},
+		"Effect: Replenishment of War (Endlo)": {
+			"name": "Effect: Replenishment of War (Endlo)",
+			"description": "<p>When Endlo damages a creature with a greatsword Strike, he gains 6 temporary Hit Points until the start of his next turn. If the Strike was a critical hit, he instead gains 12 temporary Hit Points.</p>"
+		},
+		"Effect: Motivating Assault": {
+			"name": "Effect: Motivating Assault",
+			"description": "<p>You gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>"
+		},
+		"Effect: Slime Trap": {
+			"name": "效果：黏液陷阱 Slime Trap",
+			"description": "<p>生物的速度受到-10尺环境减值。</p>"
+		},
+		"Effect: Air of Sickness": {
+			"name": "效果：呕逆瘴气 Air of Sickness",
+			"description": "<p>生物抵抗疾病和移除恶心的骰点获得-2状态减值。</p>"
+		},
+		"Effect: Haywire": {
+			"name": "效果：发生故障 Haywire",
+			"description": "<p>生物的攻击受到-1环境减值，但会造成额外@Damage[1d6[bludgeoning]]伤害且@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.BCLvAx4Pz4MLa2pu]{击倒 Knockdown}。</p>"
+		},
+		"Effect: You'll Pay for That": {
+			"name": "Effect: You'll Pay for That",
+			"description": "<p>You gain a +5 status bonus to your next damage roll against the marked enemy.</p>"
+		},
+		"Effect: Living Shield": {
+			"name": "Effect: Living Shield",
+			"description": "<p>The rekhep grants an adjacent ally a +2 circumstance bonus to AC until they're no longer adjacent or until the start of the archon's next turn, whichever comes first.</p>"
+		},
+		"Effect: Greased Palms": {
+			"name": "Effect: Greased Palms",
+			"description": "<p>You gain a +2 status bonus to Gather Information in the sheriff's settlement.</p>"
+		},
+		"Effect: Rockfall Critical Failure": {
+			"name": "Effect: Rockfall Critical Failure",
+			"description": "<p>The affected creature takes a –20-foot circumstance penalty to its movement speeds for 2 rounds.</p>"
+		},
+		"Effect: Inspire Envoy": {
+			"name": "效果：激励特使 Inspire Envoy",
+			"description": "<p>龙会从攻击骰，AC，或下列全部：察觉，意志豁免，和所有基于魅力的技能检定上选择让其获得状态加值，具体数额取决于龙的种类。</p>"
+		},
+		"Effect: Body Shield": {
+			"name": "Effect: Body Shield",
+			"description": "<p>You gain a +1 circumstance bonus to AC. This bonus stacks with the circumstance bonus from cover.</p>"
+		},
+		"Effect: Snake Form": {
+			"name": "效果：蛇形态 Snake Form",
+			"description": "<p>水兽可以选择变化出一条更长的蛇尾，这让它的尾巴打击获得10尺触及和@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]特征，但它的嘴咬失去持续流血伤害。</p>"
+		},
+		"Effect: Silent Aura": {
+			"name": "Effect: Silent Aura",
+			"description": "<p>A silent stalker makes no sound, preventing creatures from noticing them using hearing or a similar sense alone. This silence stops all sound within it or passing through. The silent stalker and all creatures in the aura can't use sonic attacks or actions that have the auditory trait; this prevents creatures from casting spells with verbal components or activating items with command components.</p>"
+		},
+		"Effect: Consume Soul": {
+			"name": "Effect: Consume Soul",
+			"description": "<p>The obcisidaemon chooses one of the following effects.</p>\n<p><em>Empower Spell</em> The obcisidaemon gains a +2 status bonus to its spell DCs and spell attack rolls until the end of its next turn.</p>\n<p><em>Empower Weapon</em> The obcisidaemon's weapon gains the effects of a greater flaming, greater frost, greater shock, or wounding rune until the end of its next turn.</p>"
+		},
+		"Effect: Compelled Performance": {
+			"name": "效果：强令表演 Compelled Performance",
+			"description": "<p>目标在表演检定上的+2状态加值，持续一周。</p>"
+		},
+		"Effect: Battle Cry": {
+			"name": "效果：战吼 Battle Cry",
+			"description": "<p>生物在攻击和伤害检定上获得+1状态加值。</p>"
+		},
+		"Effect: Incendiary Dollop": {
+			"name": "效果：引火油层 Incendiary Dollop",
+			"description": "<p>在接下来的1分钟内，或直到生物以一个单独的交互动作擦去油脂，否则生物从持续火焰伤害中恢复的DC增加2点。</p>"
+		},
+		"Effect: Cloak in Embers": {
+			"name": "效果：余烬斗篷 Cloak in Embers",
+			"description": "<p>你获得10点火焰抗力以对抗即将到来的攻击。</p>"
+		},
+		"Effect: Bob": {
+			"name": "Effect: Bob",
+			"description": "<p>The longlegs gains a +2 status bonus to its Armor Class.</p>"
+		},
+		"Effect: Consume Flesh": {
+			"name": "Effect: Consume Flesh",
+			"description": "<p>You gain a +1 status bonus to all skill checks.</p>"
+		},
+		"Effect: Spell Break": {
+			"name": "Effect: Spell Break",
+			"description": "<p>You gain a +4 status bonus to damage rolls.</p>"
+		},
+		"Effect: Bully's Rage": {
+			"name": "Effect: Bully's Rage",
+			"description": "<p>The bully gains a +2 status bonus to Intimidation checks and damage until the end of its turn.</p>"
+		},
+		"Effect: Queen's Presence": {
+			"name": "Effect: Queen's Presence",
+			"description": "<p>You gain a +2 status bonus to saving throws against emotion effects.</p>"
+		},
+		"Effect: Countered by Fire": {
+			"name": "效果：为火所克 Countered by Fire",
+			"description": "<p>生物在攻击骰和AC上承受-1环境修正，且他们的颚咬攻击不再造成电击伤害。</p>"
+		},
+		"Effect: Phantom Hands": {
+			"name": "效果：幻影之手 Effect: Phantom Hands",
+			"description": "<p>你的先攻骰承受 -2 状态减值。</p>"
+		},
+		"Effect: Hellfire": {
+			"name": "Effect: Hellfire",
+			"description": "<p>You gain a +1 status bonus to hit and deal 1d4 extra fire damage on a hit.</p>"
+		},
+		"Effect: Blade Barrage": {
+			"name": "Effect: Blade Barrage",
+			"description": "<p>They gain a cumulative +2 circumstance bonus to damage for each successful Strike.</p>"
+		},
+		"Effect: Surge Forward": {
+			"name": "Effect: Surge Forward",
+			"description": "<p>You take a –1 circumstance penalty to your next skill check to overcome a task during the Dreaded Downpour event. On a critical failure this penalty is –2.</p>"
+		},
+		"Effect: Unsettled Aura": {
+			"name": "效果：干扰力场 Unsettled Aura",
+			"description": "<p>高斯瑞格投射出不和谐的能量场，这能扰乱正在思维的生物的心智。任何位于距离高斯瑞格30尺内的非无心智生物都会在意志豁免中承受-1状态减值。</p>"
+		},
+		"Effect: Close Ranks": {
+			"name": "Effect: Close Ranks",
+			"description": "<p>You gain a +2 circumstance bonus to AC and Reflex saves.</p>"
+		},
+		"Effect: Incessant Yammering": {
+			"name": "Effect: Incessant Yammering",
+			"description": "<p>You take a –1 status penalty to Perception checks and Will saves.</p>"
+		},
+		"Effect: Claim Corpse - Fleshy": {
+			"name": "效果：占据尸体 - 血肉 Claim Corpse - Fleshy",
+			"description": ""
+		},
+		"Effect: Lawbringer": {
+			"name": "Effect: Lawbringer",
+			"description": "<p>The shieldmarshal marks a foe for judgment.</p>"
+		},
+		"Effect: Grab Debris": {
+			"name": "Effect: Grab Debris",
+			"description": "<p>The scroungefeather gains access to the listed abilities until it uses Tossed Scraps to discard the debris or until it Releases the debris. The scroungefeather can't use its beak attack while it is using its beak to Grab Debris.</p><ol><li><p><strong>Armor scrap</strong> The scroungefeather gains a +2 circumstance bonus to its AC.</p></li><li><p><strong>Shattered blade</strong> The scroungefeather gains a broken blade melee Strike with a +12 attack modifier that deals 2d10+6 slashing damage.</p></li><li><p><strong>Unexploded bomb</strong> When the scroungefeather throws this with Tossed Scraps, all the damage is fire damage, and the bomb also deals 3 fire splash damage.</p></li><li><p><strong>Faulty wand</strong> The scroungefeather gains a magic bolt ranged Strike with a +14 attack modifier that deals 2d6+6 force damage.</p></li></ol>"
+		},
+		"Effect: Vitality of Hell": {
+			"name": "Effect: Vitality of Hell",
+			"description": "<p>You gain 1d6 temporary Hit Points that last for 1 round.</p>"
+		},
+		"Effect: Whisper Earworm (Critical Failure)": {
+			"name": "Effect: Whisper Earworm (Critical Failure)",
+			"description": "<p>You become stupefied 2 and take a –4 status penalty to Will saves against effects from unholy creatures.</p>"
+		},
+		"Effect: Drain Luck (Success)": {
+			"name": "Effect: Drain Luck (Success)",
+			"description": "<p>Granted by Drain Luck.</p>\n<p>You must roll twice and take the worse result on all checks.</p>"
+		},
+		"Effect: Predator's Advantage": {
+			"name": "Effect: Predator's Advantage",
+			"description": "<p>You take a –2 circumstance penalty to Reflex saves against a deinonychus pack's Jaws and Claws.</p>"
+		},
+		"Effect: Protean Anatomy": {
+			"name": "效果：幻蛇体质 Protean Anatomy",
+			"description": "<p>当幻蛇承受酸蚀、电击、或音波伤害后，它会立即获得抗力数据中所列数值的对应伤害抗力。</p>"
+		},
+		"Effect: Numbing Strike": {
+			"name": "Effect: Numbing Strike",
+			"description": "<p>You become clumsy 1 and take a –10 foot status penalty to all your Speeds.</p>"
+		},
+		"Spell Effect: Courageous Anthem (Kanya)": {
+			"name": "Spell Effect: Courageous Anthem (Kanya)",
+			"description": "<p>Granted by a Kanya's @UUID[Compendium.pf2e.spells-srd.Item.IAjvwqgiDr3qGYxY]{Courageous Anthem}</p>\n<p>You gain a +2 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>"
+		},
+		"Effect: Blood Siphon (Critical Failure)": {
+			"name": "效果：鲜血虹吸-大失败 Blood Siphon (Critical Failure)",
+			"description": "<p>生物的AC和豁免检定获得+2状态加值并获得迅捷状态。该迅捷获得的额外动作只能用来打击。</p>"
+		},
+		"Effect: Goblin Song": {
+			"name": "效果：地精之歌 Goblin Song",
+			"description": "<p>生物在察觉检定和意志豁免上承受-1状态减值。</p>"
+		},
+		"Effect: Droning Wings": {
+			"name": "Effect: Droning Wings",
+			"description": "<p>The coloxus gains immunity to sonic damage.</p>"
+		},
+		"Effect: Depth Charge": {
+			"name": "Effect: Depth Charge",
+			"description": "<p>You take a –2 circumstance penalty to Acrobatics checks to Balance and Athletics checks to Swim. If you critically failed the save you are also deafened.</p>"
+		},
+		"Effect: Bound in Death": {
+			"name": "Effect: Bound in Death",
+			"description": "<p>Your melee Strikes deal 1d6 persistent void damage.</p>"
+		},
+		"Effect: Snack": {
+			"name": "Effect: Snack",
+			"description": "<p>You gain a +1 status bonus to attack rolls and saving throws.</p>"
+		},
+		"Effect: Banner Bearer": {
+			"name": "Effect: Banner Bearer",
+			"description": "<p>All allies in the area gain a +1 status bonus to saves and DCs against devils and Hellknights.</p>"
+		},
+		"Effect: Warded Casting": {
+			"name": "Effect: Warded Casting",
+			"description": "<p>Emaliza gains 20 temporary Hit Points and resistance 20 to either acid, cold, electricity, or fire damage.</p>"
+		},
+		"Effect: Entangling Train": {
+			"name": "效果：纠缠裙裢 Entangling Train",
+			"description": "<p>生物速度受到-15尺的环境减值。</p>"
+		},
+		"Effect: Moon Frenzy": {
+			"name": "效果：满月狂乱 Moon Frenzy",
+			"description": "<p>化形生物体型增大1阶，触及增加5尺，啃咬伤害增加2点。</p>"
+		},
+		"Effect: Guildmaster's Lead": {
+			"name": "效果：行会首领的领导 Guildmaster's Lead",
+			"description": "<p>The member of the Copper Hand deals an additional 1d6 precision damage the first time they deal damage.</p>"
+		},
+		"Effect: Gift of Hospitality": {
+			"name": "Effect: Gift of Hospitality",
+			"description": "<p>The creature gains a +2 status bonus to Society and Diplomacy checks.</p>\n<p>The gift ends if the target acts hostile, or if the faydhaan renounces the recipient.</p>"
+		},
+		"Effect: Song of the Skies": {
+			"name": "效果：天空之歌 Song of the Skies",
+			"description": "<p>你获得60尺飞行速度。</p>"
+		},
+		"Effect: Grasping Tendrils": {
+			"name": "Effect: Grasping Tendrils",
+			"description": "<p>The akata gains a +2 circumstance bonus to attack rolls against targets within the area of its grasping tendrils.</p>"
+		},
+		"Effect: Aura of Sophistry (Holy)": {
+			"name": "Effect: Aura of Sophistry (Holy)",
+			"description": "<p>You gain a +1 status bonus to check to Recall Knowledge and resistance 4 to mental damage.</p>"
+		},
+		"Effect: Void Tendrils": {
+			"name": "Effect: Void Tendrils",
+			"description": "<p>When you would be healed by a vitality effect, the healing is reduced by 15.</p>"
+		},
+		"Effect: Rage of the Sky Father": {
+			"name": "Effect: Rage of the Sky Father",
+			"description": "<p>You gain the electricity trait, immunity to electricity damage, and your attacks deal an additional 1d6 electricity damage.</p>"
+		},
+		"Effect: Zinba Restoration": {
+			"name": "Effect: Zinba Restoration",
+			"description": "<p>The creature gains fast healing 5 for 1 minute.</p>"
+		},
+		"Effect: Red Tape": {
+			"name": "Effect: Red Tape",
+			"description": "<p>You take a -2 status penalty to saving throws against linguistic effects.</p>"
+		},
+		"Effect: Divine Aegis": {
+			"name": "效果：呼神护卫 Divine Aegis",
+			"description": "<p>You gain a +1 circumstance bonus to saving throws against non-divine magical effects and a -1 circumstance penalty to saves against divine effects.</p>"
+		},
+		"Effect: Stoke the Fervent": {
+			"name": "Effect: Stoke the Fervent",
+			"description": "<p>Each ally that hears the call gains a +1 status bonus to attack rolls, damage rolls, and saving throws, and takes a –1 status penalty to AC. Affected allies must use at least one of their actions to Strike each round, if they are able (even if it means attacking an ally, object, or thin air).</p>\n<p><em>The effect duration has been set to the average duration of [[/gmr 2d4 #rounds]]{2d4 rounds}. Set the duration to the correct value when the effect is added.</em></p>"
+		},
+		"Effect: Restorative Halo": {
+			"name": "Effect: Restorative Halo",
+			"description": "<p>You gain fast healing equal to half the origin's level.</p>"
+		},
+		"Effect: Glowing Spores": {
+			"name": "效果：发光孢子 Glowing Spores",
+			"description": "<p>生物在隐秘检定上承受-4减值。</p>"
+		},
+		"Effect: Thesis Shield": {
+			"name": "Effect: Thesis Shield",
+			"description": "<p>You gain a +2 circumstance bonus to AC and gain the concealed condition.</p>"
+		},
+		"Effect: Near-Death Experience Healing": {
+			"name": "Effect: Near-Death Experience Healing",
+			"description": "<p>You gain fast healing.</p>"
+		},
+		"Effect: Tenacious Flames": {
+			"name": "Effect: Tenacious Flames",
+			"description": "<p>Creatures in the emanation cannot recover from persistent fire damage.</p>"
+		},
+		"Effect: Frill Defense": {
+			"name": "Effect: Frill Defense",
+			"description": "<p>You gain a +2 circumstance bonus to AC.</p>"
+		},
+		"Effect: Ride the Moonbeams": {
+			"name": "Effect: Ride the Moonbeams",
+			"description": "<p>You gain a 25-foot fly Speed.</p>"
+		},
+		"Effect: Harrow Burst": {
+			"name": "Effect: Harrow Burst",
+			"description": "<p>A creature that fails its save rolls 1d6 to determine a suit of cards: 1 = hammers (Strength), 2 = keys (Dexterity), 3 = shields (Constitution), 4 = books (Intelligence), 5 = stars (Wisdom), 6 = crowns (Charisma). The creature takes a –1 status penalty to all checks related to that ability score for 1 round (–2 status penalty on a critical failure)</p>"
+		},
+		"Effect: Super Qi Blast": {
+			"name": "Effect: Super Qi Blast",
+			"description": "<p>For your next casting of the two-action version of <em>qi blast</em>, the size of the cone increases to 120 feet and the damage increases to 16d6. You also become one size category larger, dealing an additional +9 damage with your melee Strikes.</p>"
+		},
+		"Effect: Play Scape": {
+			"name": "Effect: Play Scape",
+			"description": "<p>Your Strikes and other damaging effects gain the nonlethal trait.</p>"
+		},
+		"Effect: Elemental Field": {
+			"name": "效果：元素场 Elemental Field",
+			"description": ""
+		},
+		"Effect: Sandstorm": {
+			"name": "效果：沙尘暴 Sandstorm",
+			"description": "<p>生物的察觉检定受到-4环境减值。</p>"
+		},
+		"Effect: Drain Luck": {
+			"name": "效果：吸命吮运 Drain Luck",
+			"description": "<p>该生物对所有检定获得状态减值。</p>"
+		},
+		"Effect: Bloodletting": {
+			"name": "Effect: Bloodletting",
+			"description": "<p>Father Skinsaw gains 40 temporary hit points.</p>"
+		},
+		"Effect: Ensnare": {
+			"name": "效果：诱捕 Ensnare",
+			"description": "<p>目标受到-10尺移动速度减值。</p>"
+		},
+		"Effect: Sticky Spores": {
+			"name": "效果：粘性孢子 Sticky Spores",
+			"description": "<p>该生物的所有移动速度承受-10尺状态减值。</p>"
+		},
+		"Effect: Profane Gift": {
+			"name": "效果：亵渎之赐 Profane Gift",
+			"description": "<p>生物在攻击检定、技能检定和豁免骰上获得+1状态加值。</p>"
+		},
+		"Effect: Emotion Vulnerability": {
+			"name": "Effect: Emotion Vulnerability",
+			"description": "<p>The furnerico gains weakness to mental 15.</p>"
+		},
+		"Effect: Bully the Departed": {
+			"name": "效果：霸凌死者 Bully the Departed",
+			"description": "<p>生物获得再生15（力场或善良使之失效），并且他的打击造成额外@Damage[1d8[spirit]]伤害。</p>"
+		},
+		"Effect: Pollution Infusion": {
+			"name": "Effect: Pollution Infusion",
+			"description": ""
+		},
+		"Effect: Assured Fate": {
+			"name": "Effect: Assured Fate",
+			"description": "<p>When you roll initiative, you can choose to have a result equal to 13 + your initiative modifier.</p>"
+		},
+		"Effect: Impaling Chain": {
+			"name": "Effect: Impaling Chain",
+			"description": "<p>The target is impaled and anchored in place, becoming grabbed by the chain. The creature is unable to recover from persistent bleed damage until it gets free.</p>"
+		},
+		"Effect: Inextinguishable Aura": {
+			"name": "Effect: Inextinguishable Aura",
+			"description": "<p>When you attempt a flat check to end persistent fire damage, it must roll twice and take the worst result.</p>"
+		},
+		"Effect: Rime Shield": {
+			"name": "Effect: Rime Shield",
+			"description": "<p>You gain a +2 circumstance bonus to AC and temporary Hit Points.</p>"
+		},
+		"Effect: Ancestral Response": {
+			"name": "Effect: Ancestral Response",
+			"description": "<p>The creature gains a +2 circumstance bonus on saving throws.</p>"
+		},
+		"Effect: Clinging Smoke": {
+			"name": "Effect: Clinging Smoke",
+			"description": "<p><strong>Success</strong> You take a –5-foot status penalty to all Speeds.</p>\n<p><strong>Failure</strong> As success, except –10 feet to speed and you are also clumsy 1.</p>\n<p><strong>Critical Failure</strong> As failure, except you are also slowed 1.</p>"
+		},
+		"Effect: Never off the Hook": {
+			"name": "Effect: Never off the Hook",
+			"description": "<p>You take a –3 circumstance penalty to your Will DC against the origin's attempts to Demoralize or Coerce you.</p>"
+		},
+		"Effect: Putrid Blast": {
+			"name": "效果：腐液爆发 Putrid Blast",
+			"description": "<p>生物在1分钟内对地蜥人胆液进行的强韧豁免受到-2环境减值。</p>"
+		},
+		"Effect: Tip the Scales": {
+			"name": "Effect: Tip the Scales",
+			"description": "<p>You roll twice on your next d20 roll before the end of your next turn and take the better result.</p>"
+		},
+		"Effect: Splintered Ground (Critical Failure)": {
+			"name": "效果：粉碎地面 Splintered Ground （大失败）",
+			"description": "<p>生物所有速度都受到-15尺环境减值。</p>"
+		},
+		"Effect: Lantern of Hope (Gestalt)": {
+			"name": "效果：希望之灯（格式塔） Lantern of Hope (Gestalt)",
+			"description": "<p>生物在伤害骰和对抗@UUID[Compendium.pf2e.spells-srd.Item.GaRQlC9Yw1BGKHfN]{极潮绝望 Wave of Despair}法术的豁免骰上获得+3状态加值。</p>"
+		},
+		"Effect: Wrath of Spurned Hospitality": {
+			"name": "效果：款待被拒绝的愤怒 Wrath of Spurned Hospitality",
+			"description": "<p>奈克精拳头打击的攻击和伤害检定会获得+2状态加值。</p>"
+		},
+		"Effect: Light of Truth": {
+			"name": "Effect: Light of Truth",
+			"description": "<p>Against creatures affected by this light, the zoaem and their allies gain a +1 status bonus to damage rolls and Recall Knowledge checks.</p>"
+		},
+		"Effect: Song of the Swamp": {
+			"name": "效果：沼泽之歌 Song of the Swamp",
+			"description": "<p>生物在伤害骰、对抗恐惧效果的豁免检定上获得+2状态加值。</p>"
+		},
+		"Effect: Accursed Breath (Critical Failure)": {
+			"name": "效果：诅咒喷吐 Accursed Breath（大失败）",
+			"description": "<p>你在所有检定上承受–2状态减值。</p>"
+		},
+		"Effect: Void Shroud": {
+			"name": "效果：虚无寿衣 Void Shroud",
+			"description": "<p>活物会在对抗恐惧和死亡效果时，豁免检定承受-2状态减值。</p>"
+		},
+		"Effect: Feed": {
+			"name": "效果：吞食 Feed",
+			"description": "<p>取决于生物使用吞食能力的次数，该生物获得检定和DC上的状态加值。</p>"
+		},
+		"Effect: Draining Bite": {
+			"name": "Effect: Draining Bite",
+			"description": "<p>You gain 10 temporary Hit Points.</p>"
+		},
+		"Effect: Commanding Aura (Quara)": {
+			"name": "效果：指挥灵光 Commanding Aura （库娅拉）",
+			"description": "<p>效果来自@UUID[Compendium.pf2e.abomination-vaults-bestiary.Actor.JrowrtDilEG8dN2s]{库娅拉·奥申迪尔 Quara Orshendiel}</p>\n<p>库娅拉周围的卓尔被她激励。灵光范围内的卓尔盟友在攻击骰和技能检定上有+1状态加值。</p>"
+		},
+		"Effect: Wild Calm": {
+			"name": "Effect: Wild Calm",
+			"description": "<p>You gain a +1 circumstance bonus on saves against emotion effects.</p>"
+		},
+		"Effect: Shroud of Burning Pages": {
+			"name": "Effect: Shroud of Burning Pages",
+			"description": "<p>You are concealed and take a –2 circumstance penalty to Perception checks.</p>"
+		},
+		"Effect: Pray to the Rotting God": {
+			"name": "Effect: Pray to the Rotting God",
+			"description": "<p>You gain a +1 status bonus on attack rolls.</p>"
+		},
+		"Effect: Nymph Queen's Inspiration": {
+			"name": "效果：宁芙仙后启迪灵感 Nymph Queen's Inspiration",
+			"description": "<p>生物在所有手艺检定、表演检定和意志豁免上获得+1状态加值。</p>\n<p>吟游诗人获得额外好处：</p>\n<p>如果宁芙仙后将她的启迪灵感赋予一位吟游诗人，同时这位宁芙仙后还是这名吟游诗人的缪斯，那么宁芙仙后选择一项额外的信物增益：在所有学识检定中+1状态加值，在所有决定组曲法术效果的表演检定中+2状态加值，在所有未受训技能检定中+4状态加值，或在对抗精类的意志豁免中+4状态加值。</p>"
+		},
+		"Effect: Word of Advice": {
+			"name": "Effect: Word of Advice",
+			"description": "<p>Your Strike deals additional fire damage.</p>"
+		},
+		"Effect: Viscous Trap": {
+			"name": "效果：粘液陷阱 Viscous Trap",
+			"description": "<p>生物的所有速度承受-15尺环境减值。</p>"
+		},
+		"Effect: Share Pain": {
+			"name": "效果：分担痛苦 Share Pain",
+			"description": "<p>生物的速度受到状态减值，具体数值取决于豁免结果。</p>"
+		},
+		"Effect: Drain Luck (Failure)": {
+			"name": "Effect: Drain Luck (Failure)",
+			"description": "<p>Granted by Drain Luck.</p>\n<p>You must roll twice and take the worse result on all checks.</p>"
+		},
+		"Effect: Infernal Wound": {
+			"name": "Effect: Infernal Wound",
+			"description": "<p>The flat check to stop the bleeding starts at DC 20. The DC is reduced to 15 only if the bleeding creature or an ally successfully assists with the recovery.</p>"
+		},
+		"Effect: Flammable": {
+			"name": "效果：易燃 Flammable",
+			"description": "<p>燃烧期间，化猫的打击造成额外1d6火焰伤害。</p>"
+		},
+		"Effect: Spotlight": {
+			"name": "Effect: Spotlight",
+			"description": "<p>The target gains a +2 status bonus to Performance checks and resistance 10 to mental damage.</p>"
+		},
+		"Effect: Repentant Defiance": {
+			"name": "Effect: Repentant Defiance",
+			"description": "<p>You gain resistance 3 to physical damage.</p>"
+		},
+		"Effect: Exalt the Little Ones": {
+			"name": "Effect: Exalt the Little Ones",
+			"description": "<p>Creatures with the animal trait gain a +1 status bonus to attack rolls, damage rolls, and saving throws. If the animals have the swarm trait, the saving throw DCs to resist their damaging actions gain a +1 status bonus. This bonus increases to +2 for allies whose level is 2 or lower.</p>"
+		},
+		"Effect: Parry Dance": {
+			"name": "效果：招架舞步 Parry Dance",
+			"description": "<p>它的AC获得+2环境加值，直到它的下个回合结束。</p>"
+		},
+		"Effect: Despoiler": {
+			"name": "效果：掠夺者 Despoiler",
+			"description": "<p>生物在对抗毒素、疾病以及药物的所有豁免上承受-2环境减值。</p>"
+		},
+		"Effect: Rapid Evolution - Husk": {
+			"name": "Effect: Rapid Evolution - Husk",
+			"description": "<p>The creature gains physical damage resistance similar to the triggering type.</p>"
+		},
+		"Effect: Denounce": {
+			"name": "Effect: Denounce",
+			"description": "<p>Until the start of Lefranek's next turn, any Strikes she or her allies make against the creature do an additional 1d4 precision damage.</p>"
+		},
+		"Effect: Extend Neck": {
+			"name": "Effect: Extend Neck",
+			"description": "<p>The reach of your jaws Strike increases to 20 feet.</p>"
+		},
+		"Effect: Siphoning Grip": {
+			"name": "Effect: Siphoning Grip",
+			"description": "<p>You gain temporary hit points.</p>"
+		},
+		"Effect: Word of Caution": {
+			"name": "Effect: Word of Caution",
+			"description": "<p>You gain immunity to the origin's Powerful Utterance and resistance to all other damage.</p>"
+		},
+		"Effect: Entangling Slime": {
+			"name": "效果：纠缠粘液 Entangling Slime",
+			"description": "<p>你获得笨拙1，移动速度承受-5尺减值。</p>"
+		},
+		"Effect: Chaotic Spawning": {
+			"name": "Effect: Chaotic Spawning",
+			"description": "<p>The vescavor swarm becomes Huge and quickened. It can only use the extra action each round for the Ravenous Bites action.</p>"
+		},
+		"Effect: Five Color Dance": {
+			"name": "Effect: Five Color Dance",
+			"description": "<p>Your worn or held clothing and equipment has its Hardness increased by 3, Hit Points increased by 20, and Broken Threshold increased by 10.</p>"
+		},
+		"Effect: Feast on Illness": {
+			"name": "Effect: Feast on Illness",
+			"description": "<p>The furnerico gains 30 temporary hit points.</p>"
+		},
+		"Effect: Shackling Cold": {
+			"name": "Effect: Shackling Cold",
+			"description": "<p>You take a –10 circumstance penalty to your Speed.</p>"
+		},
+		"Effect: Blasphemous Utterances": {
+			"name": "效果：亵渎之语 Blasphemous Utterances",
+			"description": "<p>生物在对抗心灵效果的豁免检定中均会受到-2环境减值。</p>\n<p>而且除非能成功通过@Check[flat|dc:10]检定，否则无法在该灵光范围内执行具有专注特征的动作。检定失败意味着浪费该动作。</p>"
+		},
+		"Effect: Pall of Silence": {
+			"name": "Effect: Pall of Silence",
+			"description": "<p>You can't use sonic attacks, use auditory actions, or Cast a Spell without the subtle trait.</p>"
+		},
+		"Effect: Soul Anchor": {
+			"name": "效果：灵魂锚定 Soul Anchor",
+			"description": "<p>你获得等于效果来源等级的快速治疗。</p>"
+		},
+		"Effect: Transfer Protection": {
+			"name": "效果：屏障扩展 Transfer Protection",
+			"description": "<p>生物能把自愿的卡塞申当做头盔佩戴在头上。若这么做，卡塞申无法行动，但卡塞申能将AC以及豁免在对抗邪秽生物时获得的+1状态加值延伸至其穿戴者身上。无论何时，卡塞申都能够以单动作来将自己从佩戴者身上脱下来。</p>"
+		},
+		"Effect: Metallify": {
+			"name": "Effect: Metallify",
+			"description": "<p>The ooze gains resistance 5 to physical damage (except adamantine), it has a –5-foot penalty to its Speed, and its pseudopod Strikes gain the versatile S or P weapon trait.</p>"
+		},
+		"Effect: Spiritual Warden": {
+			"name": "效果：灵魂看护 Spiritual Warden",
+			"description": "<p>盟友对抗死亡效果，和以其灵魂为目标或控制其灵魂的效果时，在豁免骰上+2状态加值。</p>"
+		},
+		"Effect: Harden Chitin": {
+			"name": "Effect: Harden Chitin",
+			"description": "<p>The horde gains resistance 10 to all damage (except mental and spirit).</p>"
+		},
+		"Effect: Call to Action": {
+			"name": "效果：行动号召 Call to Action",
+			"description": "<p>生物在攻击检定和伤害检定上获得+1状态加值。</p>"
+		},
+		"Effect: Devil's Cursed Breath": {
+			"name": "Effect: Devil's Cursed Breath",
+			"description": "<p>The cursed creature takes a –2 status penalty to all attacks.</p>"
+		},
+		"Effect: Necrotic Field": {
+			"name": "效果：暗蚀场 Necrotic Field",
+			"description": "<p>在该灵光范围内的不死生物会在天生攻击中额外造成@Damage[1d6[void]]伤害。</p>"
+		},
+		"Effect: Impersonated Ability": {
+			"name": "效果：模仿能力 Impersonated Ability",
+			"description": "<p>无面鬼模仿者获得可模仿能力之一。</p>"
+		},
+		"Effect: Form a Phalanx": {
+			"name": "效果：结阵 Form a Phalanx",
+			"description": "<p>生物的AC获得+2环境加值。</p>"
+		},
+		"Effect: Consumed by Bloodlust": {
+			"name": "Effect: Consumed by Bloodlust",
+			"description": "<p>You gain a +2 status bonus to attacks and damage with your dagger, but are stupefied 2.</p>"
+		},
+		"Effect: Untamed Shift (Oaksteward)": {
+			"name": "Effect: Untamed Shift (Oaksteward)",
+			"description": "<p>The Oaksteward gains a claw strike.</p>"
+		},
+		"Effect: Fetid Screech (Critical Failure)": {
+			"name": "Effect: Fetid Screech (Critical Failure)",
+			"description": "<p>The creature takes a -5 foot status penalty to its Speeds.</p>"
+		},
+		"Effect: Draconic Breath Weapon Aura": {
+			"name": "效果：巨龙吐息灵光 Draconic Breath Weapon Aura",
+			"description": "<p>在龙使用吐息之后的1轮里，它的身体被灵光环绕。</p>"
+		},
+		"Effect: Inspiring Aura": {
+			"name": "Effect: Inspiring Aura",
+			"description": "<p>You gain a +1 status bonus to initiative rolls and saves against fear effects.</p>"
+		},
+		"Effect: Dust Eternal": {
+			"name": "Effect: Dust Eternal",
+			"description": "<p>Everything within the aura is concealed.</p>"
+		},
+		"Effect: Dueling Dance": {
+			"name": "Effect: Dueling Dance",
+			"description": "<p>You gain a +2 circumstance bonus to your AC.</p>"
+		},
+		"Effect: Engaging Duel (Unengaged Target)": {
+			"name": "Effect: Engaging Duel (Unengaged Target)",
+			"description": "<p>The bonus from engaging duel increases to +2.</p>"
+		},
+		"Effect: Construct Trap": {
+			"name": "Effect: Construct Trap",
+			"description": "<p>You take a –5 status penalty to all Speeds.</p>"
+		},
+		"Effect: Hope Vulnerability": {
+			"name": "Effect: Hope Vulnerability",
+			"description": "<p>The first time each round that a creature critically fails at an attack or skill check against the elegecide, it experiences a burst of hope that leaves it @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>"
+		},
+		"Effect: Lost Plates": {
+			"name": "效果：装甲板脱落 Lost Plates",
+			"description": "<p>生物的AC受到等同于脱落装甲板数量的减值。</p>"
+		},
+		"Effect: Hobble Pursuit": {
+			"name": "Effect: Hobble Pursuit",
+			"description": "<p>You take a circumstance penalty to your Speeds. On a Failure or Critical Failure, you are Slowed 1</p>"
+		},
+		"Effect: Death Gasp": {
+			"name": "效果：死亡一息 Death Gasp",
+			"description": "<p>生物获得不死特征，并免疫流血、死亡效果、疾病、麻痹、毒素、睡眠。</p>"
+		},
+		"Effect: Posse's Edge": {
+			"name": "Effect: Posse's Edge",
+			"description": "<p>You gain a +1 circumstance bonus on initiative rolls.</p>"
+		},
+		"Effect: Conduct the Experiment": {
+			"name": "Effect: Conduct the Experiment",
+			"description": "<p>Your melee Strikes deal an extra 2d8 precision damage against the marked creature.</p>"
+		},
+		"Effect: Medical Malpractice": {
+			"name": "Effect: Medical Malpractice",
+			"description": "<p>The surgeon's melee Strikes deal extra precision damage against the marked creature.</p>"
+		},
+		"Effect: Stone Flesh (Weakened)": {
+			"name": "Effect: Stone Flesh (Weakened)",
+			"description": "<p>You lose your resistance to physical damage.</p>"
+		},
+		"Effect: Fetid Fumes": {
+			"name": "Effect: Fetid Fumes",
+			"description": "<p>Everything within the aura is concealed by smoke.</p>"
+		},
+		"Effect: Hunted Fear": {
+			"name": "效果：猎杀恐惧 Hunted Fear",
+			"description": "<p>生物在避免迷路的生存检定上承受-2环境减值。</p>"
+		},
+		"Effect: No Fight Fair": {
+			"name": "Effect: No Fight Fair",
+			"description": "<p>You take a status penalty to your speed.</p>"
+		},
+		"Effect: Discerning Aura": {
+			"name": "Effect: Discerning Aura",
+			"description": "<p>All undead within the aura glow blue, shedding dim light in a 5-foot radius.</p>"
+		},
+		"Effect: Wreath of Holy Light": {
+			"name": "Effect: Wreath of Holy Light",
+			"description": "<p>You gain the holy trait, your Strikes do an additional 1d10 fire damage, and if you critically Strike an enemy, the enemy also takes 1d6 persistent fire damage.</p>"
+		},
+		"Effect: Liberating Step": {
+			"name": "Effect: Liberating Step",
+			"description": "<p>You gain resistance 10 to all damage against the triggering damage.</p>"
+		},
+		"Effect: Smash Kneecaps": {
+			"name": "Effect: Smash Kneecaps",
+			"description": "<p>The creature's Speed is reduced by 10 feet.</p>"
+		},
+		"Effect: Ironblood Stance": {
+			"name": "Effect: Ironblood Stance",
+			"description": "<p>Nakasha enters a stance of impenetrable iron. As long as she's in this stance, Nakasha can make iron sweep Strikes with her fists and gains resistance 2 to all damage.</p>"
+		},
+		"Effect: Vainglorious Whispers": {
+			"name": "Effect: Vainglorious Whispers",
+			"description": "<p>You gain a +2 status bonus to saving throws against fear effects and a –2 penalty to attack rolls and skill checks.</p>"
+		},
+		"Effect: Sanguine Rain": {
+			"name": "Effect: Sanguine Rain",
+			"description": "<p>A creature that benefits from consuming blood (such as bloodseekers or vampires) gains fast healing 10 while in the area.</p>"
+		},
+		"Effect: Paired Spikes": {
+			"name": "效果：成对尖刺 Paired Spikes",
+			"description": "<p>生物获得电击伤害弱点15。</p>"
+		},
+		"Effect: Rope Snare": {
+			"name": "效果：绳套 Rope Snare",
+			"description": "<p>生物的速度受到-10环境减值。</p>"
+		},
+		"Effect: Sic 'Em!": {
+			"name": "Effect: Sic 'Em!",
+			"description": "<p>You gain a +1 status bonus to attack rolls and a +2 status bonus to damage rolls.</p>"
+		},
+		"Effect: Wolf Shape": {
+			"name": "效果：狼形态 Wolf Shape",
+			"description": "<p>当犬魔变形为狼的时候，速度变为40尺并且啃咬获得@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.BCLvAx4Pz4MLa2pu]{击倒 Knockdown}能力。</p>"
+		},
+		"Effect: Heartening Aura": {
+			"name": "Effect: Heartening Aura",
+			"description": "<p>You gain a status bonus to attack and damage rolls. A bonded companion also gains fast healing.</p>"
+		},
+		"Effect: Soul Crush (Healing)": {
+			"name": "Effect: Soul Crush (Healing)",
+			"description": "<p>The thanadaemon gains fast healing 15 for 1 minute.</p>"
+		},
+		"Effect: Blood Wake": {
+			"name": "效果：血潮涌动 Blood Wake",
+			"description": "<p>生物在游泳的运动检定中获得-4状态减值。</p>"
+		},
+		"Effect: Utter Despair": {
+			"name": "效果：语述绝望 Utter Despair",
+			"description": "<p>在语述绝望灵光内的活物会@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。在区域内，他们无法正常地从这个惊惧状态中恢复，但只要一离开灵光区域就能立刻失去这个惊惧状态。</p>"
+		},
+		"Effect: Fog of Chance": {
+			"name": "Effect: Fog of Chance",
+			"description": "<ul><li><p><strong>Fortune</strong> The first time you attempt an attack roll or skill check, you roll twice and use the better result.</p></li><li><p><strong>Misfortune</strong> The first time you attempt an attack roll or skill check, you must roll twice and use the worse result.</p></li></ul>"
+		},
+		"Effect: Dragonhide": {
+			"name": "Effect: Dragonhide",
+			"description": "<p>You gain a +1 circumstance bonus to AC.</p>"
+		},
+		"Effect: Hamstring": {
+			"name": "效果：断筋 Hamstring",
+			"description": "<p>目标的速度承受-10尺状态减值。</p>"
+		},
+		"Effect: Reflective Arrows (Penalty)": {
+			"name": "Effect: Reflective Arrows (Penalty)",
+			"description": "<p>You take a –1 circumstance penalty to the Reflective Arrows save.</p>"
+		},
+		"Effect: Defensive Assault": {
+			"name": "效果：防御攻击 Defensive Assault",
+			"description": "<p>生物的AC获得环境加值，取决于该轮未使用武器数量。</p>"
+		},
+		"Effect: Beguiling Presence": {
+			"name": "Effect: Beguiling Presence",
+			"description": "<p>Creatures in the area that can observe the courtesan take a –2 status penalty on their Will DC against the courtesan's attempts to make a Request of them.</p>"
+		},
+		"Effect: Reef Armor": {
+			"name": "Effect: Reef Armor",
+			"description": "<p>You gain 50 temporary Hit Points and resistance 10 to piercing and slashing damage.</p>"
+		},
+		"Effect: Cloud of Allergens": {
+			"name": "Effect: Cloud of Allergens",
+			"description": "<p>You take a –1 circumstance penalty to skill checks that have the concentration trait and all Perception checks while inside the cloud.</p>"
+		},
+		"Effect: Owe Money": {
+			"name": "Effect: Owe Money",
+			"description": "<p>You owe money.</p>"
+		},
+		"Effect: Sage's Analysis": {
+			"name": "Effect: Sage's Analysis",
+			"description": "<p>You gain a +2 circumstance bonus to attack rolls and AC against the marked creature and deal an additional 2d6 damage to the creature with weapon attacks.</p>"
+		},
+		"Effect: Calming Bioluminescence": {
+			"name": "效果：平静微光 Calming Bioluminescence",
+			"description": "<p>生物对情绪特征的效果的豁免检定有+2环境加值。</p>"
+		},
+		"Effect: Natural Disguise": {
+			"name": "Effect: Natural Disguise",
+			"description": "<p>You gain a +2 item bonus to Stealth checks while in a natural environment until your next daily preparations or until its disguise is ruined, whichever comes first.</p>"
+		},
+		"Effect: Call to Halt (Success)": {
+			"name": "效果：站住！ Call to Halt （成功）",
+			"description": "<p>目标在1分钟内的所有速度受到–10尺减值。</p>"
+		},
+		"Effect: Monologue": {
+			"name": "Effect: Monologue",
+			"description": "<p>You gain a +1 status bonus to Will saves and a +2 status bonus to damage rolls with your spells. Each time you take this action again, the bonuses increase by 1 and 2, respectively.</p>"
+		},
+		"Effect: Hurl Net": {
+			"name": "Effect: Hurl Net",
+			"description": "<p>On a hit, you are off-guard and take a –10-foot circumstance penalty to your Speeds. On a critical hit, you are restrained instead.</p>"
+		},
+		"Effect: Hypnotic Stare": {
+			"name": "效果：催眠凝视 Hypnotic Stare",
+			"description": "<p>目标的意志豁免受到-2减值。</p>"
+		},
+		"Effect: Curse the Intruders": {
+			"name": "Effect: Curse the Intruders",
+			"description": "<p>You take a –2 status penalty to Fortitude saves.</p>"
+		},
+		"Effect: Guard Charge": {
+			"name": "Effect: Guard Charge",
+			"description": "<p>You gains a +2 circumstance bonus to you AC, Reflex saves, and saves against fear when you are adjacent to the viking guard.</p>"
+		},
+		"Effect: Praise Adachros": {
+			"name": "效果：赞美位面残晶 Praise Adachros",
+			"description": "<p>该生物的攻击骰、豁免骰、察觉和技能检定在1轮内有+1状态加值。</p>"
+		},
+		"Effect: Toxic Effluvium": {
+			"name": "Effect: Toxic Effluvium",
+			"description": "<p>Kanker's melee Strikes deal an additional 2d6 poison damage.</p>"
+		},
+		"Effect: Matting Paint": {
+			"name": "Effect: Matting Paint",
+			"description": "<p>You become Clumsy 1 and take a –5-foot circumstance penalty to your Speed.</p>"
+		},
+		"Effect: Distracting Whisper": {
+			"name": "效果：干扰低语 Distracting Whisper",
+			"description": "<p>你在攻击上承受-2环境减值。</p>"
+		},
+		"Effect: Nanite Surge (Glow)": {
+			"name": "效果：纳米机械激增-发光 Nanite Surge (Glow)",
+			"description": "<p>生物10尺弥漫范围内发出昏暗光照。</p>"
+		},
+		"Effect: Evoke Fault": {
+			"name": "Effect: Evoke Fault",
+			"description": "<p>Brakknap gains a +1 status bonus to the attack roll of his next Strike against that target, and that Strike deals an extra 1d6 precision damage.</p>"
+		},
+		"Effect: Read the Stars (Critical Success)": {
+			"name": "效果：占星 Read the Stars （大成功）",
+			"description": "<p>生物的所有豁免检定获得+1环境加值。</p>"
+		},
+		"Effect: Diplomatic Immunity": {
+			"name": "Effect: Diplomatic Immunity",
+			"description": "<p>The attacker gains weakness 2 to all damage from the envoy's allies while Diplomatic Immunity lasts, whether their attack was disrupted or not.</p>"
+		},
+		"Effect: Whirlwind Form": {
+			"name": "效果：旋风形态 Whirlwind Form",
+			"description": "<p>生物对物理伤害获得10点抗力。</p>"
+		},
+		"Effect: Dirty Bomb (Critical Failure)": {
+			"name": "效果：脏弹 Dirty Bomb （大失败）",
+			"description": "<p>目标对抗同一个炼金师的脏弹而进行的额外强韧豁免时，获得-3的环境减值。</p>"
+		},
+		"Effect: Aura of Protection (Solar)": {
+			"name": "效果：守护灵光 Aura of Protection （恒阳天使）",
+			"description": "<p>恒阳天使灵光范围内的盟友在对抗邪恶生物时在AC上+2状态加值，在对抗来自邪恶生物的效果时候在豁免上+2状态加值。该加值在对抗邪恶生物的控制效果，以及邪恶召唤生物的攻击时提升为+4 。</p>"
+		},
+		"Effect: Chemical Fertilizer": {
+			"name": "Effect: Chemical Fertilizer",
+			"description": "<p>Gains a +15-foot status bonus to its Speed until the end of its next turn.</p>"
+		},
+		"Effect: Lost Red Cap": {
+			"name": "效果：失去红帽子 Lost Red Cap",
+			"description": "<p>生物在伤害检定遭受-4状态减值。</p>"
+		},
+		"Effect: Electricity Absorption": {
+			"name": "Effect: Electricity Absorption",
+			"description": "<p>After taking electricity damage, a shock zombie loses its usual slowed 1 condition, gains the ability to use reactions, and gains a +10-foot status bonus to its Speed.</p>"
+		},
+		"Effect: Curse of Frost": {
+			"name": "效果：寒之诅咒 Curse of Frost",
+			"description": "<p>生物获得寒冷15的弱点。</p>"
+		},
+		"Effect: Fan Bolt": {
+			"name": "效果：减速伞弩矢 Fan Bolt",
+			"description": "<p>目标的游泳速度承受-10尺状态减值。</p>"
+		},
+		"Effect: Inspiring Display": {
+			"name": "效果：炫咒鼓劲 Inspiring Display",
+			"description": "<p>目标获得4点临时生命值，持续至洞穴术师的下个回合开始为止。</p>"
+		},
+		"Effect: Raise Defenses": {
+			"name": "Effect: Raise Defenses",
+			"description": "<p>You gain a +2 circumstances bonus to AC.</p>"
+		},
+		"Effect: Assimilate Lava": {
+			"name": "Effect: Assimilate Lava",
+			"description": "<p>An obsidian golem that submerges itself in lava or magma takes no damage from it, and for as long as it remains submerged, it becomes slowed 2 and gains fast healing 15.</p>"
+		},
+		"Effect: Pain Frenzy": {
+			"name": "效果：痛苦狂怒 Pain Frenzy",
+			"description": "<p>生物的攻击和伤害检定有+2状态加值。</p>"
+		},
+		"Effect: Harmonizing Aura (Enemies)": {
+			"name": "效果：调音灵光 - 敌人 Harmonizing Aura (Enemies)",
+			"description": "<p>生物的音波伤害检定承受-2状态减值，AC和所有豁免在对抗音波和听觉效果时承受-1状态减值。</p>"
+		},
+		"Effect: Dero Medicine (Deg)": {
+			"name": "Effect: Dero Medicine (Deg)",
+			"description": "<p>You gain weakness 5 to slashing.</p>"
+		},
+		"Effect: Inspiring Presence (Empyreal Dragon)": {
+			"name": "Effect: Inspiring Presence (Empyreal Dragon)",
+			"description": "<p>Creatures within the aura gain a +1 status bonus to saving throws and skill checks.</p>"
+		},
+		"Effect: Belief Fortification (Mark)": {
+			"name": "Effect: Belief Fortification (Mark)",
+			"description": "<p>Mark members of the garrholdion's faction.</p>"
+		},
+		"Effect: Sight Prey": {
+			"name": "Effect: Sight Prey",
+			"description": "<p>The warmonger's ranged Strikes against the marked creature gain a +1 circumstance bonus to the attack roll and deal an extra 3d6 precision damage. Each time the warmonger hits that creature with a ranged Strike, the creature takes a –10-foot penalty to its Speeds for 1 minute and falls 20 feet if it's flying.</p>"
+		},
+		"Effect: My Turn!": {
+			"name": "Effect: My Turn!",
+			"description": "<p>Kar gains a +1 status bonus to attack rolls, saving throws, and skill checks.</p>"
+		},
+		"Effect: Bloodline Magic": {
+			"name": "效果：血脉法术 Bloodline Magic",
+			"description": "<p>生物在欺骗检定上获得+1状态加值。</p>"
+		},
+		"Effect: Take Them Down!": {
+			"name": "效果：拿下他们！ Take Them Down!",
+			"description": "<p>生物的攻击检定与伤害检定获得+1状态加值。</p>"
+		},
+		"Effect: Poison Frenzy": {
+			"name": "Effect: Poison Frenzy",
+			"description": "<p>The poison eater flies into a frenzy that lasts for 1 minute. While in a frenzy, the poison eater gains a +1 status bonus to attack rolls with melee Strikes, gains a +4 status bonus to damage rolls with melee Strikes, gains 20 temporary Hit Points until the end of the frenzy, and takes a -2 status penalty to AC.</p>"
+		},
+		"Effect: Pyre's Mercy": {
+			"name": "Effect: Pyre's Mercy",
+			"description": "<p>You gain fire weakness 5 while frightened.</p>"
+		},
+		"Effect: Tempest Rage": {
+			"name": "Effect: Tempest Rage",
+			"description": "<p>Akki gains 5 temporary Hit Points and deals an additional 1d4 electricity damage with her weapon Strikes.</p>"
+		},
+		"Effect: Xulgath Stench": {
+			"name": "效果：地蜥人恶臭 Xulgath Stench",
+			"description": "<p>生物的速度承受-5尺状态减值。</p>"
+		},
+		"Effect: Inspire Courage (Love Siktempora)": {
+			"name": "效果：英勇颂歌 Inspire Courage （亲爱癔时妖）",
+			"description": "<p>生物的攻击、伤害和对抗恐惧效果的豁免检定获得+2状态加值。</p>"
+		},
+		"Effect: Shared Confidence": {
+			"name": "Effect: Shared Confidence",
+			"description": "<p>You gain a +1 status bonus to Will saves.</p>"
+		},
+		"Effect: Winning Smile": {
+			"name": "Effect: Winning Smile",
+			"description": "<p>Your attacks against the origin become nonlethal.</p>"
+		},
+		"Effect: Hydra Heads": {
+			"name": "效果：多头蛇之头 Hydra Heads",
+			"description": "<p>多头蛇目前拥有的头数。</p>"
+		},
+		"Effect: Alchemical Crossbow": {
+			"name": "效果：炼金弩 Alchemical Crossbow",
+			"description": "<p>炼金弩将额外造成该种炸弹可以造成的伤害类型1D6点。</p>"
+		},
+		"Effect: Inspiring Presence (Augustana's Pride)": {
+			"name": "Effect: Inspiring Presence (Augustana's Pride)",
+			"description": "<p>You gain a +1 status bonus to attack rolls, damage rolls, and saves against fear for 1 round.</p>"
+		},
+		"Effect: Siphon Will": {
+			"name": "Effect: Siphon Will",
+			"description": "<p>The steed gains 20 temporary Hit Points.</p>"
+		},
+		"Effect: Iron Command (Extra Damage)": {
+			"name": "Effect: Iron Command (Extra Damage)",
+			"description": "<p>Seldeg's Strikes against the triggering creature deal an additional 3 damage until the end of his next turn. Seldeg chooses whether the additional damage is spirit or void each time he uses this reaction.</p>"
+		},
+		"Effect: Guiding Words": {
+			"name": "效果：引导之语 Guiding Words",
+			"description": "<p>You gain a +1 status bonus to attack and damage rolls against the marked creature.</p>"
+		},
+		"Effect: Sylvan Wine (Horned Hunter)": {
+			"name": "Effect: Sylvan Wine (Horned Hunter)",
+			"description": "<p>The creature gains a +3 item bonus to Will saves.</p>"
+		},
+		"Effect: Shielding Wing": {
+			"name": "Effect: Shielding Wing",
+			"description": "<p>You gain a +2 circumstance bonus to AC against the triggering attack.</p>"
+		},
+		"Effect: Cloak of Subversion": {
+			"name": "Effect: Cloak of Subversion",
+			"description": "<p>Any creature that touches the sporescout or damages them with an unarmed attack or melee weapon without the reach trait takes @Damage[3d6[mental]].</p>"
+		},
+		"Effect: Call to Blood": {
+			"name": "效果：渴求鲜血 Call to Blood",
+			"description": "<p>生物在对抗@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物时，攻击检定会获得+2状态加值。</p>"
+		},
+		"Effect: Guard's Parry (Guard)": {
+			"name": "Effect: Guard's Parry (Guard)",
+			"description": "<p>The palace guard gains a +2 circumstance bonus to attack and damage rolls until the end of their next turn.</p>"
+		},
+		"Effect: Mortal Reflection": {
+			"name": "效果：凡胎反思 Mortal Reflection",
+			"description": "<p>不完美灵导械汲取目标的情感模拟出表面的情绪，它的速度获得+5尺速度加值，持续1分钟。</p>"
+		},
+		"Effect: To Shreds (AC Penalty)": {
+			"name": "Effect: To Shreds (AC Penalty)",
+			"description": "<p>You take a –2 circumstance penalty to your AC.</p>"
+		},
+		"Effect: Deceitful Feast (Failure)": {
+			"name": "效果：欺诈盛宴 Deceitful Feast （失败）",
+			"description": "<p>生物在对抗狡蟾精的任何能力或是法术时的意志豁免获得-1环境减值，这个减值会在每次失败时增加，最大为-5。</p>"
+		},
+		"Effect: Dero Medicine": {
+			"name": "效果：癫儒医疗 Dero Medicine",
+			"description": "<p>你获得2点挥砍弱点。</p>"
+		},
+		"Effect: Rockfall Failure": {
+			"name": "Effect: Rockfall Failure",
+			"description": "<p>The affected creature takes a –10-foot circumstance penalty to its movement speeds for 1 round.</p>"
+		},
+		"Effect: Archon's Aegis": {
+			"name": "Effect: Archon's Aegis",
+			"description": "<p>You gain resistance 20 to all damage against the triggering damage.</p>"
+		},
+		"Effect: Drain Vigor": {
+			"name": "Effect: Drain Vigor",
+			"description": "<p>You gain 20 temporary HP.</p>"
+		},
+		"Effect: Active Mutagen": {
+			"name": "Effect: Active Mutagen",
+			"description": "<p>Darius has an active mutagen.</p>"
+		},
+		"Effect: Psychic Daze": {
+			"name": "Effect: Psychic Daze",
+			"description": ""
+		},
+		"Effect: Catchy Slogan": {
+			"name": "Effect: Catchy Slogan",
+			"description": "<p>You gain a +1 status bonus to attack and damage rolls.</p>"
+		},
+		"Effect: Ancestral Journey": {
+			"name": "效果：祖先旅程 Ancestral Journey",
+			"description": "<p>生物在意志豁免和一切技能检定中获得+1状态加值。</p>"
+		},
+		"Effect: Fiddle": {
+			"name": "效果：提琴奏鸣 Fiddle",
+			"description": "<p>一段动听的小提琴曲调迫使生物跳起舞来。</p>\n<p><strong>失败</strong> 措手不及并受到10尺速度减值</p>\n<p><strong>大失败</strong> 如同失败，并缓慢1</p>"
+		},
+		"Effect: Drink Emotions": {
+			"name": "Effect: Drink Emotions",
+			"description": "<p>While excited, the unfeeling empath takes a –1 penalty to AC, gains a +1 status bonus to attack rolls, and deals an additional 1d4 mental damage with its melee Strikes.</p>"
+		},
+		"Effect: Cleansing Earth": {
+			"name": "Effect: Cleansing Earth",
+			"description": "<p>You gain 20 temporary Hit Points.</p>"
+		},
+		"Effect: Blood Soak": {
+			"name": "效果：浸血 Blood Soak",
+			"description": "<p>The redcap brigade gains a status bonus to damage rolls for 1 minute. The bonus is +2 if they spend one action on Bloody Reaping, +6 if they spend two actions, or +8 if they spend 3 actions. They gain a +4 status bonus to damage rolls with Bowl Over and Stomp.</p>"
+		},
+		"Effect: Ghonhatine Feed": {
+			"name": "效果：地蜥兽啃食 Ghonhatine Feed",
+			"description": "<p>生物获得快速治疗5，并且在伤害检定中获得+2状态加值。</p>"
+		},
+		"Effect: Stench": {
+			"name": "效果：恶臭 Stench",
+			"description": "<p>生物在对抗疾病以及从@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened}状态中恢复的豁免检定中会承受-2环境减值。</p>"
+		},
+		"Effect: Scraping Clamor": {
+			"name": "效果：刮擦喧闹 Scraping Clamor",
+			"description": "<p>You gain a +1 circumstance bonus to any saves to resist auditory spells or abilities.</p>"
+		},
+		"Effect: In Our Wake, Hell Will Break!": {
+			"name": "Effect: In Our Wake, Hell Will Break!",
+			"description": "<p>Each allied creature in the aura gains a +1 circumstance bonus to saving throws against mental effects.</p>"
+		},
+		"Effect: Glutton's Feast": {
+			"name": "Effect: Glutton's Feast",
+			"description": "<p>The ogre glutton gains 1d4 temporary hit points, or 2d4 following glutton's rush.</p>"
+		},
+		"Effect: Push My Luck (Misfortune)": {
+			"name": "Effect: Push My Luck (Misfortune)",
+			"description": "<p>You must roll twice and use the lower result for your next 3 checks.</p>"
+		},
+		"Effect: Guiding Words (Guide)": {
+			"name": "Effect: Guiding Words (Guide)",
+			"description": "<p>You gain a +1 circumstance bonus to attack rolls against the marked creature.</p>"
+		},
+		"Effect: Field of Undeath": {
+			"name": "Effect: Field of Undeath",
+			"description": "<p>Allies within the aura who have void healing gain fast healing.</p>"
+		},
+		"Effect: Wallow": {
+			"name": "Effect: Wallow",
+			"description": "<p>The war pig gains temporary hit points.</p>"
+		},
+		"Effect: Champion's Aura (Champion of Rovagug)": {
+			"name": "Effect: Champion's Aura (Champion of Rovagug)",
+			"description": "<p>You take a –1 circumstance penalty to saves against fear.</p>"
+		},
+		"Effect: Aura of Good Cheer": {
+			"name": "Effect: Aura of Good Cheer",
+			"description": "<p>Allies within the aura gain a +1 status bonus to Will saves against emotion effects.</p>"
+		},
+		"Effect: Rotting Stench": {
+			"name": "Effect: Rotting Stench",
+			"description": "<p>While within the aura, creatures also take a -2 circumstance penalty to saves against fear and to recover from the sickened condition.</p>"
+		},
+		"Effect: Vamollaroth Stench": {
+			"name": "Effect: Vamollaroth Stench",
+			"description": "<p>The creature takes a -2 circumstance penalty to saves against poison and to recover from the @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened} condition.</p>"
+		},
+		"Effect: Overtake Soul": {
+			"name": "Effect: Overtake Soul",
+			"description": ""
+		},
+		"Effect: Putrid Stench": {
+			"name": "效果：腐烂恶臭 Putrid Stench",
+			"description": "<p>生物速度-5尺状态减值。</p>"
+		},
+		"Effect: I Am the Law!": {
+			"name": "Effect: I Am the Law!",
+			"description": "<p>You can use your reaction to Grapple, Strike, or Trip with a +2 status bonus.</p>"
+		},
+		"Effect: Field of Past Regrets": {
+			"name": "Effect: Field of Past Regrets",
+			"description": "<p>PCs gain a +1 status bonus to saving throws against mental effects. Living, non-nindoru creatures gain weakness 3 to mental damage.</p>"
+		},
+		"Effect: PFS Level Bump (NPC)": {
+			"name": "Effect: PFS Level Bump (NPC)",
+			"description": "<p>Scenarios and quests are designed to challenge PCs whose average level is the lower of the two levels in a given Level Range (i.e., Level Range 1–2 is built to challenge 1st-level PCs, and Level Range 3–4 is built to challenge 3rd-level PCs). Normally, when the Challenge Point total determines that the group's overall power is equivalent to the higher level in a Level Range (e.g. 2nd level in Level Range 1–2), the scenario's scaling will adjust for this.</p>\n<p>However, sometimes it is necessary to add a level bump, such as when the scenario's scaling is based on the number of players, or if the scenario lacks a low tier 16-18 scaling.</p>\n<ul>\n<li>Increase the attack modifiers, attack damage, spell damage, saving throw modifiers, skill modifiers, Perception modifiers, and ACs by 1.</li>\n<li>Increase the Hit Point total by 10 or by 10%, whichever is higher.</li>\n</ul>"
+		},
+		"Effect: Mark of Fate": {
+			"name": "Effect: Mark of Fate",
+			"description": "<p>You gain weakness 10 to unholy and take a –2 circumstance penalty to Charisma-based skill checks against followers of Urgathoa.</p>"
+		},
+		"Effect: Fortune's Favor": {
+			"name": "效果：命运青睐 Fortune's Favor",
+			"description": "<p>当哈罗玩偶进行一次某个具体种类的豁免骰时，它掷骰两次并取更高的结果。适用的豁免骰种类由哈罗玩偶最近一次解读哈罗牌时的花色对应的最契合的种类决定，强韧（锤或盾），反射（匙或书），意志（星或冕）。</p>"
+		},
+		"Effect: Chant of Dominance": {
+			"name": "Effect: Chant of Dominance",
+			"description": "<p>Any creature damaged this turn also takes 1d6 persistent spirit damage.</p>"
+		},
+		"Effect: Life Burn Aura": {
+			"name": "Effect: Life Burn Aura",
+			"description": "<p>You are surrounded by a 30-foot emanation. While Life Burn Aura is active, your fist Strikes deal 2 additional die of weapon damage.</p>"
+		},
+		"Effect: Activate Defenses": {
+			"name": "效果：激活防御 Activate Defenses",
+			"description": "<p>生物在AC上获得+2环境加值。</p>"
+		},
+		"Effect: Fueled by Spite": {
+			"name": "Effect: Fueled by Spite",
+			"description": "<p>The battalion gains 6 temporary Hit Points.</p>"
+		},
+		"Effect: Invigorating Spores (Resistance)": {
+			"name": "Effect: Invigorating Spores (Resistance)",
+			"description": "<p>You gain resistance to bludgeoning, piercing, and slashing damage equal to half your level.</p>"
+		},
+		"Effect: Alchemical Strike": {
+			"name": "效果：炼金打击 Alchemical Strike",
+			"description": "<p>选择酸蚀，寒冷，电击或是火焰伤害，并允许炼金苦工将这种能量伤害灌输到拳击当中。</p>\n<p>每一次打击都将造成和它们体内盛装的炸弹同类型的伤害1D6点。每个炸弹内有着可以施展10次这种打击的液体。</p>"
+		},
+		"Effect: Fiendish Order": {
+			"name": "Effect: Fiendish Order",
+			"description": "<p>Each allied ort in the aura gains a +1 circumstance bonus to attack and damage rolls.</p>"
+		},
+		"Effect: Unluck Aura": {
+			"name": "效果：厄运光环 Unluck Aura",
+			"description": "<p>生物必须在所有检定中投掷2次并取较差的结果。</p>"
+		},
+		"Effect: Chug": {
+			"name": "效果：一口闷 Chug",
+			"description": "<p>生物在运动技能检定、伤害骰和对抗恐惧的豁免骰上获得+2物品加值。</p>"
+		},
+		"Effect: Phantasmagoric Fog": {
+			"name": "Effect: Phantasmagoric Fog",
+			"description": "<p>The hall fills with violet fog that imposes a -2 circumstance penalty to Perception checks to all creatures within it and exposes anyone who enters it to phantasmagoric fog.</p>"
+		},
+		"Effect: Vengeful Fibers": {
+			"name": "效果：仇讨纤丝 Vengeful Fibers",
+			"description": "<p>目标速度受到-10尺环境减值</p>"
+		},
+		"Effect: Kettle Up (Boiling)": {
+			"name": "效果：围成壶状 Kettle Up（沸腾）",
+			"description": "<p>除飞壶兽之外，你在源自听觉的察觉检定上承受-2减值。</p>"
+		},
+		"Effect: Break Legs!": {
+			"name": "Effect: Break Legs!",
+			"description": "<p>You become clumsy 1, take a –5‐foot penalty to your Speeds, and have weakness 5 to the origin's Strikes.</p>"
+		},
+		"Effect: Cat Sith's Mark": {
+			"name": "效果：猫妖精标记 Cat Sith's Mark",
+			"description": "<p>当被诅咒的生物在技能检定或是豁免骰获得大成功结果时，它将被转变为成功的结果。每一天，一个被诅咒的生物可以尝试一次@Check[flat|dc:10|traits:curse,misfortune|name:Break Cat Sith's Mark]来打破这个诅咒。</p>"
+		},
+		"Effect: Sixfold Flurry": {
+			"name": "效果：六臂乱舞 Sixfold Flurry",
+			"description": "<p>六臂神卫在AC上获得环境加值，等于他们不进行的打击数量。</p>"
+		},
+		"Effect: Ill Omen": {
+			"name": "效果：不幸预兆 Ill Omen",
+			"description": "<p>生物在不幸预兆灵光内的攻击检定，技能检定，豁免骰或获得-1减值，并且免疫幸运效应，为时一天。</p>"
+		},
+		"Effect: Downcast": {
+			"name": "Effect: Downcast",
+			"description": "<p>The creature takes a –1 status penalty to attack rolls</p>"
+		},
+		"Effect: Share Defenses": {
+			"name": "Effect: Share Defenses",
+			"description": "<p>The creature gains cold resistance 10.</p>"
+		},
+		"Effect: Sentinel's Aura": {
+			"name": "Effect: Sentinel's Aura",
+			"description": "<p>You gain a +1 status bonus to AC.</p>"
+		},
+		"Effect: Pilgrim's Ward": {
+			"name": "Effect: Pilgrim's Ward",
+			"description": "<p>You gain a +1 status bonus to all Religion checks and Will saves.</p>"
+		},
+		"Effect: Manipulate Luck (Bad)": {
+			"name": "效果：操纵运势-霉运 Manipulate Luck (Bad)",
+			"description": "<p>生物必须在投下一个d20骰的时候投掷两次并选用更低的点数。</p>"
+		},
+		"Effect: Hypnotic Gaze": {
+			"name": "Effect: Hypnotic Gaze",
+			"description": "<p>Creatures in the aura take a –1 status penalty to Perception checks to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} and Perception DCs against Ezio.</p>"
+		}
+	}
+}
