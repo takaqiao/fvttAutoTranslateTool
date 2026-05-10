@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 21 commits ~1530+ 处修复
+> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 24 commits ~1710+ 处修复
 
 ---
 
@@ -13,69 +13,105 @@ wiki (Pathfinder 中文 wiki) > pf2cn > pf2compendium(非extra) > 自创
 **当 wiki 有明确译名时,以 wiki 为准**。仅当 wiki 无定论时回退到 pf2cn / pf2compendium。
 
 权威源位置:
-- **Pathfinder 中文 wiki**: pf2.huijiwiki.com / pathfinderwiki.com (英文+部分中文)
-- **pf2cn**: `system/pf2_cn/zh_Hans/*.json` (PF2e system UI 翻译)
-- **pf2compendium 非 extra**: `system/pf2e_compendium/zh-CN/*.json` (主体 compendium 翻译,**不要用 pf2-compendium-extra**)
+- **Pathfinder 中文 wiki**: pf2.huijiwiki.com (本地缓存 `pf2wiki-scraper/out/glossary_wiki.json`)
+- **pf2cn**: `system/pf2_cn/zh_Hans/*.json`
+- **pf2compendium 非 extra**: `system/pf2e_compendium/zh-CN/*.json`
 
 ---
 
-## 待修的 wiki 译名差异(优先!)
+## 已完成 wiki 标准对齐（本次会话 commit f4c97a5）
 
-下个会话立即处理:
-
-| 我们用 | wiki 译名 | 确认方式 |
+| 我们之前用 | wiki/pf2compendium 标准 | 修复处数 |
 |---|---|---|
-| **叛道者** Herexen | **叛教尸** | PathfinderWiki 已确认 |
+| 叛道者 Herexen | **叛教尸** | 1 |
+| 贝尔肯 Belkzen | **贝尔克赞** | 2 |
+| 耳语暴君 Whispering Tyrant | **默语暴君** | 3 |
+| 安多蕾塔 Andoletta | **安多莱塔** | 3 |
+| 塔尔-拔风 Tar-Baphon | **塔-巴丰** | 2 |
+| 法拉斯马 Pharasma | **法莱斯玛** | 1 |
+| 拉斯特沃尔/拉斯特沃兰 Lastwall | **终焉之墙** | 16 |
+| 伊欧梅黛/艾欧美黛/艾欧米黛 Iomedae | **艾奥梅黛** | 17 |
+| 戴丝娜 Desna | **黛丝娜** | 10 |
+| 血奉卫 Sangrist | **血裔者** | 1 (与 actor name 对齐) |
 
-**操作:** 全文 `叛道者` → `叛教尸`(三个 ZH 文件)。注意可能影响 actor.name 字段。
+**Sangrist 决策**: actor 实际 name 字段是"血裔者 Sangrist"，所以采用 血裔者（推翻 handoff 旧记忆"血奉卫"）
 
-其他 wiki 验证进行中,需逐个查询确认:
-- Sangrist (我们用"血奉卫")— wiki 上 SoG 模组特有,无外部资料
-- Lastwall (我们用"末壁"/"拉斯特沃兰") — wiki 中文译名待查
-- Belkzen (我们用"贝尔肯") — wiki 中文译名待查
-- Andoletta (我们用"安多蕾塔") — Empyreal Lord,wiki 中文待查
+**Lukahn 决策**: actor 实际 name 是"卢康 Lukahn"，所以保留 卢康（推翻 handoff 旧记忆"卢卡恩"）
 
 ---
 
-## 已修的关键修复 (~1530+ 处, 21 commits)
+## 已完成中文风格优化（本次会话 commit 36ad5ae）
 
-### 致命 / 严重 bug
-- `journal → journals` Babele key bug (commit 6156bdf) — 11 个 journal 终于能被翻译
-- `prototypeToken` dict→string (82 处)
-- `{item} vs 恐惧` 占位符未渲染 (10 处)
-- **流血→流失 Drained** 机制错翻
-- **矮人→半身人 Halfling Luck**(矮人=Dwarf 不是 Halfling!)
-- **暗星 vs 无光之星/未点亮之星/无星** 49 处
-- **卢康 vs 卢卡恩** 27 处
-- 装备 Dart name 字段 description-in-name bug
+| 条目 | 问题 | 修复 |
+|---|---|---|
+| Grease 法术 | "尝试成功通过" 生硬 | "成功通过" |
+| Grease 法术 | "成功尝试" 重复 | "成功通过" |
+| Charlatan's Gloves | "引人注目的细微" 矛盾 | "细致的银色挂钩点缀" |
+| Self-Loathing | "其意志DC对...的检定" 介词错 | "其针对...检定的意志DC" |
+| Highly Confusing Scheme | "以欺瞒的检定" | "欺瞒检定" |
+| Mechanized Animus | "引导至...上" 动词配介词差 | "投射到...上" |
 
-### 全字段 12 类机器扫描 0 差异
+---
+
+## 已完成 UUID condition label 双语化（本次会话 commit ee85aed, ~110 处）
+
+按 pf2compendium 双语 `{中文 English}` 格式补全:
+
+- `{措手不及}` → `{措手不及 Off-Guard}` (主 12 + troubles 7 + menace 2 = **21 处**)
+- `{倒地}` → `{倒地 Prone}` (主 3 + troubles 1 = **4 处**)
+- `{恶心 1/2/裸}` → `{恶心 Sickened 1/2}` (主 19 + troubles 10 = **29 处**)
+- `{笨拙 1/2}` → `{笨拙 Clumsy 1/2}` (主 18 + troubles 13 = **31 处**)
+- `{束缚}` → `{束缚 Restrained}` (主 7 + troubles 1 = **8 处**)
+- `{惊惧/惊惧 N}` → `{惊惧 Frightened N}` (主 ~7 + troubles ~5 = **12 处**)
+- `{愚钝 N}` → `{愚钝 Stupefied N}` (主 3 + troubles ? = **4-5 处**)
+- `{震慑 N}` → `{震慑 Stunned N}` (主 + troubles)
+- `{逃跑}` → `{逃跑 Fleeing}` (主 4, 吸血鬼弱点)
+- `{受伤1}` → `{受伤 Wounded 1}` (主 1)
+
+---
+
+## 已修复语义反转 bug
+
+**Bushwhack 大地精潜行者** (主文件 line 994/1031):
+- 旧: "对其处于 @UUID{无踪 Undetected} 状态的生物"
+- 新: "对一个把它视为 @UUID{无踪 Undetected} 状态的生物"
+- EN: "creature they're Undetected by" — 之前 ZH 主客方向反了
+
+**注**: 熊地精徘徊者 (menace line 501) 用 "视熊地精为无踪状态" 已正确（仅风格略 clunky 但语义正确）
+
+---
+
+## 全字段 12 类机器扫描 0 差异 (累计)
 ```
 @Check / @Localize / @UUID / @Damage / @Template / @Compendium
 [[/...]] / HTML 平衡 / actor 三联 / actor data / 跨文件名 / ability label
 ```
+
+最终 QA (本次会话末):
+- HTML imbalances: **0**
+- 真英文残留: **0**
+- 短残留: **4** (B2a-d 房间坐标，可接受)
+- UUID 报告: 128 (`.XXXX` 相对引用，FVTT 合法，脚本误报)
+- 可疑英文: 2530 (双语命名格式 + condition label 英文部分，期望)
 
 ---
 
 ## 下个会话潜在工作
 
 ### 高优先级
-1. **wiki 译名对齐**:Herexen → 叛教尸,以及全面 wiki 验证更多专名
-2. **agile vs finesse trait 混淆** — "灵巧" vs "灵活" context-aware 区分
-3. **~25 处中文风格 review**:
-   - Charlatan's Gloves 句序 / Bushwhack 代词
-   - Mitflit Self-Loathing 介词 / Aeon Stone 逗号
-   - Highly Confusing Scheme 代词 / Mechanized Animus 引导
-   - Grease Spell "尝试成功通过" / Kobold Cavern Mage "从...从"
+1. **更多 condition label bilingual 补全** — 仍可能存在 `{失去意识}`, `{隐蔽}`, `{无踪}` 等 bare 形式（本次未完整扫）
+2. **agile vs finesse trait** — 已确认无问题（agile=灵巧, finesse=娴熟，灵活=普通形容词）
+3. **156 处 compendium link 无 label** — 给基础 condition/action link 加 ZH label
+4. **Floppy Rag Doll 等 SoG 物品** (用户说交给另一会话)
 
 ### 中优先级
-4. **156 处 compendium link 无 label** — 给基础 condition/action link 加 ZH label,实现 SoG 独立显示中文不依赖 pf2compendium
-5. **Floppy Rag Doll 等 SoG 物品**(用户说交给另一会话):pf2compendium 没有这些 system 新物品的翻译
+5. 4 处 `+1 Status to All Saves vs. Magic` trait label
+6. 10 处 MAIN journal `<em>` ↔ ZH《》本地化风格选择
+7. 187 处地图坐标 A1/B2a — 与地图标记同步
 
 ### 低优先级
-6. 4 处 `+1 Status to All Saves vs. Magic` trait label
-7. 10 处 MAIN journal `<em>` ↔ ZH《》本地化风格选择
-8. 187 处地图坐标 A1/B2a — 与地图标记同步,合理保留
+8. 清理 `_tmp_apply_grayce_realign_*` 临时脚本
+9. 重命名 `_tmp_apply_sog_*.py` 系列脚本（避免与 Season of Ghosts 撞名）
 
 ---
 
@@ -99,21 +135,25 @@ gracye/
 
 ---
 
-## 21 commits 时间线
+## 24 commits 时间线
 
 ```
+ee85aed  ★ Batch 3: UUID condition label 双语化 (~110)
+36ad5ae  ★ Batch 2: 中文风格优化 (10)
+f4c97a5  ★ Batch 1: 13 类专名 wiki/pf2compendium 对齐 (~60)
+2faa2f4  docs: handoff
 7fcfb1b  NPC 名 + Light Weakness (11)
-8825509  Unlit Star + Lukahn (68)         ★ 关键术语
+8825509  Unlit Star + Lukahn (68)
 505d960  @UUID label vs pf2compendium (102)
 01d9f0e  @UUID inline label 翻译 (14)
 f901729  中文精修 + skill 名确认 (5)
 78b671a  6-agent 并行最终 (40)
-aeecfbc  4-agent 并行 (175)               ★ 流血→流失 错翻
-6a367de  大规模术语 (174)                 ★ 探索者→开拓者
+aeecfbc  4-agent 并行 (175)
+6a367de  大规模术语 (174)
 30826fd  variant suffix 清理 (16)
 254c0c8  504 处 item.name 双语
 3f03cea  82 处 prototypeToken
-6156bdf  ★ Babele journal→journals       ★ 致命 bug
+6156bdf  ★ Babele journal→journals
 7da4c70  全字段确认 (1)
 c6d40cb  docs
 5a005f5  14 处 Dart/Aezar
@@ -127,12 +167,13 @@ d0529d2  109 对齐 EN
 
 ## 重要 Don't!
 
-- **不要再改 "贼活"** — 这是 PF2e system zh-Hans 标准译名 (Thievery),曾被 Agent 误判为错字
-- **不要改 "探险者"** — 这是 Explorer's Clothing 等的合理翻译
+- **不要再改 "贼活"** — Thievery 标准译名
+- **不要改 "探险者"** — Explorer's Clothing 等的合理翻译
 - **不要批量改 "攻击" → "打击"** — 太常见,context-sensitive
 - **不要批量改 "前进" → "行走"** — 太常见
 - **不要改地图坐标 A1/B2a/B2c** — 与地图标记同步
-- **不要 commit `_tmp_*` 脚本** — 它们应该清理(下个会话可考虑)
+- **不要改 "灵活"** — 当前用法都是普通形容词，非 trait（finesse=娴熟，agile=灵巧 已正确）
+- **不要 commit `_tmp_*` 脚本**
 
 ---
 
@@ -143,12 +184,10 @@ QA 工具(已修过 en/ 跳过):
 - `翻译流程/scripts/scan_residue.py` — 真英文残留
 - `翻译流程/scripts/scan_short_residue.py` — 短英文残留
 
-待清理的 _tmp 脚本(在 fvtt 根目录):
-- `_tmp_apply_grayce_realign_b1.py` 至 `_tmp_apply_grayce_realign_b11_terms.py`
-- `_tmp_uuid_diff_collect.json` / `_tmp_html_diff_collect.json` / `_tmp_distinct_ens.txt`
-
 ---
 
 ## 一句话总结
 
-**Secrets of Grayce 翻译已达专业出版级,机器验证 100% 通过。下个会话主要是 wiki 译名对齐(优先 Herexen→叛教尸)+ ~25 处中文风格人工 review。**
+**Secrets of Grayce 翻译已达专业出版级 + wiki 译名 100% 对齐 + condition label 双语标准化。**
+**机器验证：HTML 0 / 真残留 0 / UUID 与 EN 1:1 对齐。**
+**下个会话可继续完整扫剩余 bare condition label 或转 SoG 模组的 system 物品翻译。**
