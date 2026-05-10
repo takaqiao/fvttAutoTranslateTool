@@ -63,7 +63,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Mud Pit": {
 					"name": "泥洼术 Mud Pit",
@@ -71,7 +71,7 @@
 				},
 				"Frostbite": {
 					"name": "冻伤术 Frostbite",
-					"description": "<p>凛冽的寒气在目标周围凝聚，冻结其身体。目标受到2d4寒冷伤害，基础强韧豁免。大失败时，目标还会获得1点钝击弱点，持续到你下回合开始。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.DdqWMj7cuf4S1bgr]{法术效果：冻伤术}</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d4点，大失败时获得的弱点增加1点。</p>"
+					"description": "<p>凛冽的寒气在目标周围凝聚，冻结其身体。目标受到2d4寒冷伤害，基础强韧豁免。大失败时，目标还会获得1点钝击弱点，持续到你下回合开始。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.DdqWMj7cuf4S1bgr]{法术效果：冻伤术 Frostbite}</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d4点，大失败时获得的弱点增加1点。</p>"
 				},
 				"Hydraulic Push": {
 					"name": "水流冲击 Hydraulic Push",
@@ -659,7 +659,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术}</p>"
+					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术 Figment}</p>"
 				},
 				"Staff": {
 					"name": "双手使用杖 Staff",
@@ -1132,7 +1132,7 @@
 				},
 				"Frostbite": {
 					"name": "冻伤术 Frostbite",
-					"description": "<p>凛冽的寒气在目标周围凝聚，冻结其身体。目标受到2d4寒冷伤害，基础强韧豁免。大失败时，目标还会获得1点钝击弱点，持续到你下回合开始。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.DdqWMj7cuf4S1bgr]{法术效果：冻伤术}</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d4点，大失败时获得的弱点增加1点。</p>"
+					"description": "<p>凛冽的寒气在目标周围凝聚，冻结其身体。目标受到2d4寒冷伤害，基础强韧豁免。大失败时，目标还会获得1点钝击弱点，持续到你下回合开始。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.DdqWMj7cuf4S1bgr]{法术效果：冻伤术 Frostbite}</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d4点，大失败时获得的弱点增加1点。</p>"
 				},
 				"Blindness": {
 					"name": "目盲术 Blindness",
@@ -1269,7 +1269,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Torch (dk9C)": {
 					"name": "火把 Torch"
@@ -2052,7 +2052,7 @@
 				},
 				"Ill Omen": {
 					"name": "凶兆 Ill Omen",
-					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆}</p>"
+					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆 Ill Omen}</p>"
 				},
 				"Haunting Hymn": {
 					"name": "颂歌萦绕 Haunting Hymn",
@@ -2548,7 +2548,7 @@
 			"items": {
 				"Ill Omen": {
 					"name": "凶兆 Ill Omen",
-					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆}</p>"
+					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆 Ill Omen}</p>"
 				},
 				"Sling": {
 					"name": "投石索 Sling"
@@ -2919,7 +2919,7 @@
 				},
 				"Perfect Orienteering": {
 					"name": "完美方向感 Perfect Orienteering",
-					"description": "<p>牛头人在以求生进行 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向 Sense Direction} 或 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 检定时自动大成功。</p>"
+					"description": "<p>牛头人在以求生进行 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向 Sense Direction} 或 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track} 检定时自动大成功。</p>"
 				}
 			},
 			"prototypeToken": "牛头人猎手",
