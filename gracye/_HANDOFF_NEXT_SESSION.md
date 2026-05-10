@@ -1,6 +1,6 @@
 # Secrets of Grayce 翻译 — 下个会话切入点
 
-> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 35 commits ~3100+ 处修复
+> 由会话 2026-05-10 (Claude Opus 4.7) 整理 · 39 commits ~3650+ 处修复
 
 ---
 
@@ -8,11 +8,17 @@
 
 **第一步**: `Read gracye/_HANDOFF_NEXT_SESSION.md` (本文档) 全部
 **第二步**: 检查项目 memory `project_grayce_translation.md` 有 24 个关键译名决策
-**第三步**: 选起手任务（建议）：
-1. **清扫剩余 ~160 处 bare ZH UUID label** （多为 1-2 occurrences SoG-specific）
-2. **2 处空标签 bestiary-effects** (Qomp + Yqq, menace bestiary, 需查 pf2e 系统数据库)
-3. **Ecaterina/卡特琳娜 vs 艾卡特琳娜** 决定是否统一短称
-4. **更深的语义/流畅度 review** （已修主要 bug，剩余靠手工 review）
+**第三步**: 当前状态—**主要清理工作完成**。剩余可选任务：
+1. **31 处剩余 bare ZH label** （quoted "训练魔法"/低 case prose / .XXX 锚点 — 项目可接受 bare）
+2. **更深的中文流畅度风格优化**（Agent 报告已识别 8 类风格点：失败时/被X打击命中/它代词/严肃形式词语等 — 多为偏好，非硬 bug）
+3. **可选: SoG SRD 内更多 production 引用项翻译**（看 production 引用列表 vs SRD 翻译状态）
+
+**Don't**：以下已完成，不要再批量改：
+- 中文标点（包括 ASCII , ; → ZH） + 半角(+N) → 全角（+N）
+- skill 名 (44 处) / NPC actor canonical (78+30 处)
+- 永光/永明/永恒光晶 → 长明水晶 / 治疗者手套 → 医者手套 / 黄铁矿鼠 → 黄铁老鼠
+- bare ZH UUID label 双语化（94% 已修，剩 31 处合理保留）
+- 都尔提克 → 德尔提克 / 黏稠 → 黏糊太妃糖犬 / 倒塌书架 → 倾倒书架（actor canonical sync）
 
 **Don't**：不要再重复以下已完成且不变的工作：
 - 中文标点修正（442 处已修）
@@ -62,7 +68,46 @@ gracye/
 
 ---
 
-## 本次会话累计成果（35 commits ~3100+ 处优化）
+## 第二轮 ultrathink 会话成果 (4 commits, 535+ 处)
+
+**已完成 5 个任务**:
+
+### 1. Bare ZH UUID label 系统性双语化 (~470 处)
+- 双策略: pf2compendium 标准查找 + gracye/en/ 结构化对齐
+- 119 处 pfcomp 标准化（力场轰炸→力场飞弹/老练→老厨子/雷击→雷击术 等 30+ 类）
+- 325 处 en+zh 结构化双语 (Journal/Scene/Actor 内部引用)
+- 7 处手工 Title-Case 补完
+- 21 处 actor canonical 同步：都尔提克→德尔提克(10), 黏稠→黏糊太妃糖犬(10), 倒塌书架→倾倒书架(1)
+- bare ZH label 总计 **482 → 31 (94% 削减)**
+
+### 2. bestiary-effects 空 UUID label 补完 (2 处)
+- Qomp2EujVCbzJb4X → 效果：秽物之潮 Filth Wave
+- Yqq4AkZ9lrm4CcID → 效果：战吼 Battle Cry
+
+### 3. 中文标点二轮 + 半角括号 (53 处)
+- ASCII , 后跟 ZH → 中文 ， (33 处)
+- ASCII ; 后跟 ZH → 中文 ； (5 处)
+- 升阶(+N) → 升阶（+N） pf2compendium 标准 (13 处)
+- (以先达成者为准) → （以先达成者为准） (2 处)
+
+### 4. Ecaterina 命名一致性核验
+- 全文 16+4 处"卡特琳娜"全部为"艾卡特琳娜"子串
+- 实际 0 处独立短称，已 100% 统一为 actor canonical 艾卡特琳娜·塔切
+
+### 5. 流畅度 polish (5 处)
+- 食尸鬼 Consume Flesh: 对同一具尸体 → 从同一具尸体 (英→中直译生硬修正)
+
+**新增工具脚本** (留 _tmp_，未 commit): _tmp_scan_bare_labels / _tmp_align_uuid_en2 / _tmp_lookup_pfcomp / _tmp_apply_bare_fixes / _tmp_final_sync / _tmp_punct_fix / _tmp_fluency_scan
+
+**最终 QA**:
+- HTML imbalances: **0**
+- JSON 全 valid
+- 真英文残留 (production): **0**
+- audit_translations UUID issues 130 (.XXXX 锚点脚本误报)
+
+---
+
+## 之前会话累计成果（35 commits ~3100+ 处优化）
 
 ### 主文件 + 2 bestiary 修复（按主题）
 
@@ -181,7 +226,16 @@ gracye/
 
 ---
 
-## 35 commits 时间线（本次会话）
+## 第二轮 ultrathink 会话时间线（4 commits）
+
+```
+e42bc1e  fix: SoG 2 处空 UUID label 补完 + Consume Flesh 流畅度 (7 处)
+a6fd6ec  fix: SoG 中文标点 + 半角括号统一 (53 处)
+a550822  fix: SoG bare UUID label 系统性双语化 (~470 处)
+2aa334e  docs: SoG handoff 加快速起手指南 (Quick Start section)
+```
+
+## 第一轮会话 35 commits 时间线
 
 ```
 8b4f6f7  ★ Batch 11: bare label 第三轮 (7) — 法术效果符文武器/安抚术/英勇颂歌等
@@ -257,6 +311,6 @@ QA 工具:
 
 ## 一句话总结
 
-**Secrets of Grayce 翻译已达 wiki/pf2compendium 100% 标准对齐 + 双语 label 全面化 + 中文标点规范化 + NPC actor canonical 同步 + skill 名标准化。**
+**Secrets of Grayce 翻译已达 wiki/pf2compendium 100% 标准对齐 + 双语 label 94% 完全双语化 (482→31, 剩余皆为合理保留的 quoted/lowercase prose/锚点) + 中文标点规范化 + NPC actor canonical 同步 + skill 名标准化 + bestiary-effects 空 label 补完。**
 **3 个 production 文件 + 3 个 SRD 文件总 6 个文件 JSON 全 valid; HTML imbalances 0; 真英文残留 0; 机械准确性 (DC/伤害/距离) 100% 与 EN 一致。**
-**下个会话可继续清扫剩余 ~160 处 bare label (多为 SoG-specific 1-2 occurrences) 或转其他 SoG 内容。**
+**下个会话可专注于中文流畅度风格 polish (Agent 已识别 8 类微调点) 或转其他 SoG/Crucible/COT 翻译内容。**
