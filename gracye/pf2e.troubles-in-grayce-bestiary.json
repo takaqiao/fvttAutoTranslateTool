@@ -88,7 +88,7 @@
 				},
 				"Soporific Stench": {
 					"name": "催眠之臭 Soporific Stench",
-					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+					"description": "<p>10尺。3轮内，花瓣伯爵散发腐花的甜腻香气，使他人迟钝而困惑。进入光环或在其中开始回合的生物必须尝试一次 @Check[fortitude|dc:22|options:area-effect,inflicts:stupefied,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>\n<p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 2}</p>\n<p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{愚钝 Stupefied 3} 并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
 				},
 				"Rapier (BSWr)": {
 					"name": "细剑 Rapier",
@@ -341,7 +341,7 @@
 		},
 		"Nether Rift": {
 			"name": "冥界裂隙 Nether Rift",
-			"disable": "<p>对每堵进行 @Check[arcana|dc:18]、@Check[nature|dc:18]、@Check[occultism|dc:18] 或 @Check[religion|dc:18]（受训）以封闭裂隙，共需3次成功；或 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法}（3环；解消DC 17）</p>",
+			"disable": "<p>对每堵进行 @Check[arcana|dc:18]、@Check[nature|dc:18]、@Check[occultism|dc:18] 或 @Check[religion|dc:18]（受训）以封闭裂隙，共需3次成功；或 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}（3环；解消DC 17）</p>",
 			"hazarddescription": "<p>冷风从洞壁上的一道裂隙中吹出。</p>",
 			"reset": "<p>裂隙在 [[/gmr 2d10 #重开年数]] 年后重开。杀死帕斯河剥皮怪可永久封闭裂隙。</p>",
 			"routine": "<p>（2个动作）该危害以第一动作再次使用其冥界之风反应。如果还有任何墓爪斑块残留，由GM选择的其中一块释放孢子云。孢子充满该墓爪所占空间，持续到危害下回合开始。位于孢子内的生物 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}，孢子外的所有生物对孢子内的生物均为遮蔽。</p><p>进入孢子或在区域内开始其回合的生物承受 @Damage[1d6[persistent,cold]] 伤害，直至以一次互动动作刷掉孢子。</p>",
@@ -597,7 +597,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Bitter Invective": {
 					"name": "苦涩斥骂 Bitter Invective",
@@ -654,7 +654,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
@@ -710,7 +710,7 @@
 				},
 				"Sticky Paws": {
 					"name": "黏糊爪 Sticky Paws",
-					"description": "<p>黏糊太妃糖犬留下的足迹被甜糊残留物覆盖。@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 该犬的生物可以以 [[/act track skill=cooking-lore]]{烹饪学识} 或 [[/act track skill=crafting]]{工艺} 检定代替求生检定。生物可对此检定应用任何与识别或准备食物相关的修正值，例如 @UUID[Compendium.pf2e.feats-srd.Item.1Eceqc6zbMj2x0q9]{老练} 技能专长或 @UUID[Compendium.pf2e.feats-srd.Item.fOIUmDGa9gkeCHA0]{超级品鉴} 通用专长所给予的。</p>"
+					"description": "<p>黏糊太妃糖犬留下的足迹被甜糊残留物覆盖。@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track} 该犬的生物可以以 [[/act track skill=cooking-lore]]{烹饪学识} 或 [[/act track skill=crafting]]{工艺} 检定代替求生检定。生物可对此检定应用任何与识别或准备食物相关的修正值，例如 @UUID[Compendium.pf2e.feats-srd.Item.1Eceqc6zbMj2x0q9]{老练} 技能专长或 @UUID[Compendium.pf2e.feats-srd.Item.fOIUmDGa9gkeCHA0]{超级品鉴} 通用专长所给予的。</p>"
 				},
 				"Spit Dates": {
 					"name": "吐枣 Spit Dates"
@@ -799,7 +799,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
@@ -816,7 +816,7 @@
 			"items": {
 				"Final Blasphemy": {
 					"name": "终末渎神 Final Blasphemy",
-					"description": "<p>当黑信徒被毁灭时，它以一次3动作的 @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术} 法术效果引爆为虚空能量波（@Check[fortitude|dc:22]）。</p>\n<p>黑信徒被摧毁，因此从此次<em>伤害术</em>使用中不获得任何生命值，也无需保留<em>伤害术</em>余次以使用此能力。</p>"
+					"description": "<p>当黑信徒被毁灭时，它以一次3动作的 @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术 Harm} 法术效果引爆为虚空能量波（@Check[fortitude|dc:22]）。</p>\n<p>黑信徒被摧毁，因此从此次<em>伤害术</em>使用中不获得任何生命值，也无需保留<em>伤害术</em>余次以使用此能力。</p>"
 				},
 				"Harm": {
 					"name": "伤害术 Harm",
@@ -1093,14 +1093,14 @@
 		},
 		"Enchanted Sweets": {
 			"name": "魔法甜点 Enchanted Sweets",
-			"disable": "<p>@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法}（3环；解消DC 20）；摧毁玻璃柜及其内容物也会粉碎附魔，阻止进一步的强迫或中毒。</p>",
+			"disable": "<p>@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}（3环；解消DC 20）；摧毁玻璃柜及其内容物也会粉碎附魔，阻止进一步的强迫或中毒。</p>",
 			"hazarddescription": "<p>摆放在这只精美玻璃柜中的附魔饼干与糕点散发出超自然美味的香气，迫使被其香味影响者大吃特吃。无论吃了多少，柜中总会再装满。</p>",
 			"routine": "<p>（1个动作）在该危害的回合，如果有任何生物在可食诱惑的范围内既未被强迫也不对其免疫，则魔法甜点以同样效果以该生物为目标。否则，它以一种使腹烂的魔法毒液对所有已食用其内容物的生物为目标。任何已食用一些魔法甜点的生物承受 @Damage[2d12[poison]] 伤害（@Check[fortitude|dc:22|basic] 豁免）。</p>",
 			"stealthdetails": "<p>（专家）</p>",
 			"items": {
 				"Eatable Enticement": {
 					"name": "可食诱惑 Eatable Enticement",
-					"description": "<p><strong>触发</strong> 一个生物经过玻璃展示柜敞开北侧的5尺范围内</p><hr /><p><strong>效果</strong> 魔法甜点诱人的香气压制目标的嗅觉。目标必须尝试一次 @Check[will|dc:24|options:inflicts:sickened] 豁免。失败或大失败时，魔法甜点掷先攻。</p><hr /><p><strong>大成功</strong> 目标不受影响、对魔法甜点1分钟内免疫，并意识到该危害试图迫使它。</p>\n<p><strong>成功</strong> 目标不受影响，但仍未意识到魔法甜点试图迫使它。</p>\n<p><strong>失败</strong> 目标在下回合被迫留在玻璃柜旁，并花费至少2个动作食用魔法甜点。它可在每个回合结束时重做意志豁免，成功时终止效果。如被强迫食用甜点连续超过2轮，目标 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 目标被迫将所有动作用于食用魔法甜点，并立即恶心1。它可在每个回合结束时重做意志豁免，成功时终止强迫。</p>\n<p>恶心状态每持续一回合被迫将所有动作用于食用甜点而增加1，最高至 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}。</p>"
+					"description": "<p><strong>触发</strong> 一个生物经过玻璃展示柜敞开北侧的5尺范围内</p><hr /><p><strong>效果</strong> 魔法甜点诱人的香气压制目标的嗅觉。目标必须尝试一次 @Check[will|dc:24|options:inflicts:sickened] 豁免。失败或大失败时，魔法甜点掷先攻。</p><hr /><p><strong>大成功</strong> 目标不受影响、对魔法甜点1分钟内免疫，并意识到该危害试图迫使它。</p>\n<p><strong>成功</strong> 目标不受影响，但仍未意识到魔法甜点试图迫使它。</p>\n<p><strong>失败</strong> 目标在下回合被迫留在玻璃柜旁，并花费至少2个动作食用魔法甜点。它可在每个回合结束时重做意志豁免，成功时终止效果。如被强迫食用甜点连续超过2轮，目标 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 目标被迫将所有动作用于食用魔法甜点，并立即恶心1。它可在每个回合结束时重做意志豁免，成功时终止强迫。</p>\n<p>恶心状态每持续一回合被迫将所有动作用于食用甜点而增加1，最高至 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 3}。</p>"
 				}
 			},
 			"data": {
@@ -1204,7 +1204,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
@@ -1328,7 +1328,7 @@
 				},
 				"Ill Omen": {
 					"name": "凶兆 Ill Omen",
-					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆}</p>"
+					"description": "<p>目标遭受厄运，令其难以保持状态。目标必须尝试一次意志豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在持续时间中，目标第一次尝试攻击骰或者技能检定时，它必须骰两次并使用较差的效果。</p>\n<p><strong>大失败</strong> 在持续时间中，每当目标尝试攻击骰或者技能检定时，它必须骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.AmsVO5Q6078mEvNt]{法术效果：凶兆 Ill Omen}</p>"
 				},
 				"Leather Armor": {
 					"name": "皮甲 Leather Armor",
@@ -1453,7 +1453,7 @@
 				},
 				"Light": {
 					"name": "光亮术 Light",
-					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
+					"description": "<p>你创造一个光球，它发出由你选择的颜色的光芒，在20尺半径内产生明亮光照（以及接下来的20尺产生昏暗光照）。如果你在一个自愿的生物身上施法，你可以将光球连结到该生物，这使得光球会跟随该生物一起移动。你可以维持法术以移动光球至多60尺，作为这个移动的一部分，你可以将光球连结到一个生物或是从一个生物上解除连结。</p>\n<p>你可以解消该法术。如果你在你已经有4个<em>光亮术</em>激活时施放该法术的话，你必须结束一个已存在的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术 Light}</p>\n<hr />\n<p><strong>升阶（4环级）</strong> 光球在60尺半径内产生明亮光照（并在接下来的60尺产生昏暗光照）。</p>"
 				},
 				"Right This Way": {
 					"name": "这边请 Right This Way",
@@ -1755,7 +1755,7 @@
 				},
 				"Figment": {
 					"name": "虚构幻术 Figment",
-					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术}</p>"
+					"description": "<p>你创造出简单的声音或图像的幻术。声音会为法术添加听觉特征，且不能包含能被理解的单词或复杂的音乐。图像会为法术添加视觉特征，但是它不能大于5尺边长的立方体，且在15尺的距离内观察会发现它的构造明显很粗糙且缺乏细节。当你施放或维持该法术时，你能尝试用幻术让人@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}，这会为你的欺骗检定提供+2环境加值。若对某个生物进行的此尝试失败了，该生物就不会相信<em>虚构幻术</em>。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.2Hg3a06gZCSnUgSA]{法术效果：虚构幻术 Figment}</p>"
 				},
 				"Scamper": {
 					"name": "惊惶逃窜 Scamper",
