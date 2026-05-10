@@ -23,28 +23,38 @@
 - 标点 / 半角括号问题
 - 任何 actor item / name field 非双语项
 
-### ⚠️ 重要：双语化方向需确认
-本会话第 2-4 轮（`a550822`/`41448b9`/`ca56b3e`/`ac6c9d2` 等）的"补双语 label"
-工作是**基于 handoff 推断的方向延续**，用户当时**未显式要求**。已 commit 的
-内容已通过测试无大问题，但**下次会话不要默认继续大批量补双语**——若要继续
-该方向，先与用户确认。仅修真 bug（typo/HTML/标点/术语错译）是默认安全方向。
+### ⚠️ 重要：双语化方向（用户偏好已澄清）
 
-可回滚的双语化 commits（如未来想撤）：
-- `ac6c9d2` round 4: hag +1 Status trait 双语化 (4 处)
-- `ca56b3e` round 4: Actor en-only 双语补全 (7 处) + Ghoul HTML 修复
-- `7ec493b` round 3: SoG-NEW SRD 8 项完整翻译 + gauntlets 标签
+**用户标准工作流**：
+- ✅ **entry 的 `name` 字段** 双语 "中文 English"（Babele 标准格式）
+- ✅ 参考格式：`pf2e_compendium_chn/compendium/*.json` 的 `entries.X.name`
+- ❌ 其他地方（@UUID label / description / 内文 prose）**不需要补 EN**
+  - `@UUID[X]` 无 label 时 FVTT auto-render 拉被引 entry 的 `name`（已是双语）
+  - 加 label 反而冗余（链接显示 + hover 都是中英）
+- 工具：用户 FVTT 端有给 entry name 加双语的脚本（本 repo 外）；
+  反向清理过多 EN: `清洗修复工具/strip_bilingual_english.py`
+
+**本会话超出标准范围的工作（用户测试 OK 故保留）**：
+本会话第 2-4 轮做了大量 @UUID label 双语化（与上述偏好相反）。已 commit
+通过测试无大问题，**但下次会话不要默认继续这种大批量补 label EN 的方向**。
+
+如未来想反向撤回多余双语 label，可回滚以下 commits：
+- `ac6c9d2` round 4: hag +1 Status trait 双语化 (4)
+- `ca56b3e` round 4: Actor en-only 双语补全 (7) + Ghoul HTML 修复
 - `41448b9` round 3: 99 处 @UUID 完全无 label 补全
-- `25f8108` round 3: narrative 术语 sync (14 处) — 是 canonical 化非纯双语
 - `a550822` round 2: 470 处 bare ZH label 系统性双语化（最大批）
+- 部分 round 2-3 commit 含混合改动（双语+真 bug），需 cherry-pick
 
-非双语类的真 bug 修复（保留无碍）:
-- 标点（ASCII ,;→中文 + 半角→全角括号 53+）
-- HTML 结构 (Ghoul Stalker Requirements/Effect 拆段)
+**应保留的真 bug 修复（与双语化方向无关，确定有用）**:
+- 标点（ASCII ,;→中文 + 半角→全角括号 53+ 处）
+- HTML 结构 (Ghoul Stalker Requirements/Effect 拆段对齐 EN)
 - 术语 typo 同步 (都尔提克→德尔提克 / 黏稠→黏糊太妃糖犬 / 倒塌→倾倒书架)
-- 空 UUID label (Filth Wave/Battle Cry 2 处)
-- 食尸鬼 Consume Flesh "对X恢复" → "从X恢复" (5 处流畅度)
+- 空 UUID label 补 (Filth Wave/Battle Cry 2 处)
+- 食尸鬼 Consume Flesh "对 X 恢复" → "从 X 恢复" (5 处流畅度)
 - "X打击命中"→"X击中" (19 处 pf2compendium 标准)
 - Confounding Feint 直译生硬 (2 处)
+- narrative 术语错译 sync (信仰危机→信念崩塌等 PF2e 术语校对，非纯双语化)
+- SoG-NEW SRD 8 项完整翻译 (Last Word Stone 等 entry 本身无 ZH，必须翻译)
 
 ---
 
@@ -64,7 +74,20 @@
 **重要工具**:
 - `python "翻译流程/scripts/audit_translations.py" gracye/` — HTML/UUID/英文残留 QA
 - `python "翻译流程/scripts/scan_residue.py" gracye/` — 真英文残留扫描
+- `python "清洗修复工具/strip_bilingual_english.py"` — 反向清理冗余双语 EN（在 description HTML 中）
 - 编辑 JSON 大批量改用 `python << 'PYEOF' ... PYEOF` inline (auto-classifier 不允许 _tmp_*.py)
+
+**Babele entry name 双语标准格式参考**: `pf2e_compendium_chn/compendium/clerics.clerics-feats.json`
+```json
+{
+  "entries": {
+    "Canvas the Layfolk": {
+      "name": "披布俗人 Canvas the Layfolk",   // ← name 字段 双语
+      "description": "<p>发掘信息是你的第二天性...</p>"  // ← description 纯中文
+    }
+  }
+}
+```
 
 ---
 
