@@ -14,7 +14,7 @@ paizo.com
 | 第 1 章：寇兰廷（Corentyn） | 10 | Rigby Bendele |
 | 第 2 章：破钥行动（Operation Broken Key） | 30 | Rigby Bendele |
 | 第 3 章：地狱海岸异端（Hellcoast Heresies） | 50 | Cole Kronewitter |
-| 第 4 章：卡里之眼（The Eye of Khari） | 70 | Cole Kronewitter |
+| 第 4 章：卡利之眼（The Eye of Khari） | 70 | Cole Kronewitter |
 | 第 5 章：招纳盟友（Gathering Allies） | 88 | Michael Bramnik |
 | 第 6 章：矛尖（Tip of the Spear） | 106 | Michael Bramnik |
 | 第 7 章：战争即地狱（War Is Hell） | 122 | Michael Bramnik |
