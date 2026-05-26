@@ -15,16 +15,16 @@
 |---|---|
 | 角色选项（Character Options） | 225 |
 | 怪物（Creatures） | 234 |
-| 　- 阿沃达扎（Advodaza） | 234 |
+| 　- 阿德沃达扎（Advodaza） | 234 |
 | 　- 比德拉维特拉斯（Bdellavritra） | 235 |
-| 　- 多塔里折磨者分队（Dottari Excruciator Division） | 236 |
-| 　- 梦溺者（Dream Drowner） | 237 |
-| 　- 地狱骑士龙骑兵小队（Hellknight Dragoon Squad） | 238 |
-| 　- 地狱骑士猎人小队（Hellknight Hunter Squad） | 239 |
-| 　- 地狱潮（Infernal Tide） | 240 |
-| 　- 梅尔兹托雷贡（Merztorlegon） | 241 |
-| 　- 誓嚎者（Oath Howler） | 242 |
-| 　- 奥基亚斯提斯（Ochiastis） | 243 |
+| 　- 多塔里刑罚分队（Dottari Excruciator Division） | 236 |
+| 　- 梦境溺者（Dream Drowner） | 237 |
+| 　- 地狱骑士龙骑兵分队（Hellknight Dragoon Squad） | 238 |
+| 　- 地狱骑士猎手分队（Hellknight Hunter Squad） | 239 |
+| 　- 地狱浪潮（Infernal Tide） | 240 |
+| 　- 梅尔托雷贡（Merztorlegon） | 241 |
+| 　- 嚎天精（Oath Howler） | 242 |
+| 　- 奎伦特（Ochiastis） | 243 |
 | 　- 门槛凯鲁卡贡（Threshold Kerulkagon） | 244 |
 | 　- 文库拉提（Vinculatti） | 245 |
 | NPC | 246 |

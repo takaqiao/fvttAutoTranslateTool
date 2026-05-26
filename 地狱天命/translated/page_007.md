@@ -44,7 +44,7 @@ _（地图标尺：250 英里）_
 - 欧斯坦索（Ostenso）
 - 艾利迪尔（Elidir，依斯嘉首都）
 - 金塔戈（Kintargo，拉沃努尔）
-- 潘戈莱斯（Pangolais，奈多）
+- 邦戈莱（Pangolais，奈多）
 - 佩扎克（Pezzack）
 - 塞纳拉（Senara）
 - 罗加斯（Logas）

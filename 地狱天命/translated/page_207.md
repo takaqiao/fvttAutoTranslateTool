@@ -16,8 +16,9 @@
 >
 > **北部周边**
 > - 内海（INNER SEA）
-> - 拉沃努尔（RAVOUNEL）：金塔戈（Kintargo）/ 旺达（Vyre）/ 邦戈莱（Pangolais）/ 艾里迪尔（Elidir）
-> - 奈多（NIDAL）：庞戈莱（Pangolais）/ 里德万（Ridwan）/ 内斯洛克（Nisroch）
+> - 拉沃努尔（RAVOUNEL）：金塔戈（Kintargo）/ 维里（Vyre）
+> - 奈多（NIDAL）：邦戈莱（Pangolais）/ 瑞德万（Ridwan）/ 尼斯洛克（Nisroch）
+> - 依斯嘉（ISGER）首府：艾利迪尔（Elidir）
 > - 啁啾家园（Chitterhome）—— 啁啾林（Chitterwood）
 > - 依斯嘉（ISGER）：洛加斯（Logas）/ 布拉斯特沃克（Brastlewark）/ 寻者沟（Finder's Gulch）/ 吉拉莫尔（Gillamoor）
 >
@@ -26,11 +27,11 @@
 > - 西冠城（Westcrown）
 > - 佩札克（Pezzack）
 > - 塞纳拉（Senara）
-> - 阿斯波丹山脉（Aspodell Mountains）
-> - 沉言林（Whisperwood）/ 巴罗伍德（Barrowood）
+> - 阿斯珀德尔山脉（Aspodell Mountains）
+> - 沉言林（Whisperwood）/ 巴罗林（Barrowood）
 > - 梅纳多山脉（Menador Mountains）
 > - 阴沉绝望湾（Dismal Nitch）
-> - 妖林（Uskwood，奈多境内）
+> - 乌斯克森林（Uskwood，奈多境内）
 >
 > **南部周边**
 > - 寇兰廷（Corentyn，独立城邦）
