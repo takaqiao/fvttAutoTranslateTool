@@ -16,7 +16,7 @@
 >
 > **北部周边**
 > - 内海（INNER SEA）
-> - 瑞瓦诺（RAVOUNEL）：金塔戈（Kintargo）/ 旺达（Vyre）/ 邦戈莱（Pangolais）/ 艾里迪尔（Elidir）
+> - 拉沃努尔（RAVOUNEL）：金塔戈（Kintargo）/ 旺达（Vyre）/ 邦戈莱（Pangolais）/ 艾里迪尔（Elidir）
 > - 奈多（NIDAL）：庞戈莱（Pangolais）/ 里德万（Ridwan）/ 内斯洛克（Nisroch）
 > - 啁啾家园（Chitterhome）—— 啁啾林（Chitterwood）
 > - 依斯嘉（ISGER）：洛加斯（Logas）/ 布拉斯特沃克（Brastlewark）/ 寻者沟（Finder's Gulch）/ 吉拉莫尔（Gillamoor）
@@ -48,7 +48,7 @@
 >
 > 比例尺：250 英里
 >
-> 颜色区分：切利亚斯 / 安多兰 / 啁啾家园 / 依斯嘉 / 奈多 / 瑞瓦诺 / 寇兰廷
+> 颜色区分：切利亚斯 / 安多兰 / 啁啾家园 / 依斯嘉 / 奈多 / 拉沃努尔 / 寇兰廷
 
 <details><summary>English Source</summary>
 
