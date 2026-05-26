@@ -30,7 +30,7 @@
 | NPC | 246 |
 | 　- 阿斯佩西娅·鲁加托恩（Aspexia Rugatonn） | 246 |
 | 　- 戈索克莱克（Gorthoklek） | 248 |
-| 　- 塔尔曼多（Talmandor） | 250 |
+| 　- 塔尔曼铎（Talmandor） | 250 |
 | 　- 厄登·砾掌（Urdun Gravelhands） | 252 |
 
 <details><summary>English Source</summary>
