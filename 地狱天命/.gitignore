@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 一次性 QA 脚本（用完即弃，不入库）
+_qa_phase_*.py
+_qa_*.py
+
+# 大文件 / 源 PDF（不应入 git）
+*.pdf
+
+# 中间产物（可重生）
+extracted/
+output/
+reference/
+
+# 离线 wiki 镜像（外部数据）
+_wiki_full_v2/

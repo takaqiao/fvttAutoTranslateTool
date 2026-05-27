@@ -663,7 +663,7 @@ _wiki 离线 grep：`lookup_wiki.py <term>` 查询 _wiki_full_v2/pages/_
 | vitality damage | 元气伤害 | 1 | pf2_cn | 伤害类型 |
 | void damage | 虚能伤害 | 1 | pf2_cn | 伤害类型 |
 | Vordia | 沃迪亚 | 3 | c71c1ec7 |  |
-| vordine | 沃迪内 | 3 | AP-confirmed,pf2_cn | 攻城魔鬼操作员（s10 frozen） |
+| vordine | 军团魔 | 3 | AP-confirmed,pf2_cn | AP 实际使用 23x；s13 L4 QA 统一 (pp.182/242 4 处 沃迪内 已改回) |
 | Vyre | 维里 | 4 | wiki |  |
 | Wait For It… | 等候时机… | 5 | self | 指挥官战术 |
 | War Is Hell | 战争即地狱 | 3 | seed |  |
