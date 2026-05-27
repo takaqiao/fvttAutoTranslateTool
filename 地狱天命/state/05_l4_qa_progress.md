@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 60 |
+| 已完成 | 70 |
 | 进行中 | 0 |
-| 待处理 | 198 |
-| 最后批次 | Batch 12 pp.056-060 |
-| 下次起始页 | 061 |
+| 待处理 | 188 |
+| 最后批次 | Batch 14 pp.066-070 |
+| 下次起始页 | 071 |
 
 ## 处理顺序
 
@@ -39,8 +39,8 @@
 ### pp.050-099（Ch3-4 + Ch5 开篇）
 ```
 050:✅ 051:✅ 052:✅ 053:✅ 054:✅ 055:✅ 056:✅ 057:✅ 058:✅ 059:✅
-060:✅ 061:⏸ 062:⏸ 063:⏸ 064:⏸ 065:⏸ 066:⏸ 067:⏸ 068:⏸ 069:⏸
-070:⏸ 071:⏸ 072:⏸ 073:⏸ 074:⏸ 075:⏸ 076:⏸ 077:⏸ 078:⏸ 079:⏸
+060:✅ 061:✅ 062:✅ 063:✅ 064:✅ 065:✅ 066:✅ 067:✅ 068:✅ 069:✅
+070:✅ 071:⏸ 072:⏸ 073:⏸ 074:⏸ 075:⏸ 076:⏸ 077:⏸ 078:⏸ 079:⏸
 080:⏸ 081:⏸ 082:⏸ 083:⏸ 084:⏸ 085:⏸ 086:⏸ 087:⏸ 088:⏸ 089:⏸
 090:⏸ 091:⏸ 092:⏸ 093:⏸ 094:⏸ 095:⏸ 096:⏸ 097:⏸ 098:⏸ 099:⏸
 ```
@@ -181,6 +181,44 @@
 - 「真实之语药剂」（potion of truespeech）保留——canonical「实言药水」但项目其他页面 truespeech 能力一律用「真实之语」，AP 内部一致优先
 - 安弗里塔石柱群 / 御风者灯塔 / 加勒鲁斯 / 雷玛斯 / 灰萎 / 雾犬 等专名 project-specific OK
 
+### Batch 14 (pp.066-070, 2026-05-27 s15)
+- p068 深度复核 clean（伊格拉拉/地狱矛号/活体投石机/遗产号/混淆背叛作祟/F 被遗忘之泪之井开篇）；术语 canonical：阈值/段/小规模冲突遭遇/Edge Point 优势点 一致
+- p069 深度复核 clean（F 区事件 / 灵魂撕裂者作祟 / 精灵浪骑分队 / 塞达克西人战团 / 冥河海蛇）
+- **p066**：4 处条目修正（B3 canonical 同步紊传畸体异能术语）
+  - 「失稳之场」→「失衡之域」（Destabilizing Field, pf2e_compendium B3 canonical）
+  - 「失稳生物」→「失衡生物」
+  - 「失稳状态」→「失衡状态」
+  - 「失稳」（其他）→「失衡」
+  - 项目仅 p066/p067 出现失稳系列共 2 页，localized 修复
+- **p067**：2 处修正
+  - 「失稳生物」→「失衡生物」（Transpose 异能内）
+  - 「地狱潮汐分队」→「地狱浪潮分队」（infernal tide troop, p004 + p241 canonical 地狱浪潮）
+- **p070**：2 处修正
+  - 「凶悍（Ferocity）」→「凶猛（Ferocity）」（pf2e_compendium ability glossary canonical, 项目仅 1 处用凶悍）
+  - 5 环 法术「滑溜」→「黑缠蛇」（Slither, pf2e_compendium spells-srd canonical）
+- 其他 spell list 全部 canonical 一致：洞烛机先（True Target）/心灵扭曲（Warp Mind）/闪电链/解除魔法/放逐术/唤起魂灵/飞行/行动无碍/火墙术/火球术/加速术/回避帷幕（Veil of Privacy）/识破无形/料敌机先（Sure Strike）/侦测魔法/引火术（Ignition）/护盾术/念动之手/虚能噬（Void Warp）/瞬时洞见（Flash of Insight）
+- 其他 stat block 术语 canonical：紊传畸体异能名 Reposition 移位 / Transpose 移调转置 / Displace 位移（B3 用调换，feats-srd 用移位/移调转置；项目沿用 feats-srd canonical，与 B3 名词级差异保留——已记录待决议题）
+
+### 跨页统一（与 Batch 14 同步）
+- **page_069**：3 处「地狱潮汐」→「地狱浪潮」（title summary + 主文 + stat block 名）
+- **page_128**：1 处「地狱潮汐」→「地狱浪潮」（infernal tide troop 主文引用）
+- **page_129**：1 处「地狱潮汐」→「地狱浪潮」（stat block heading）
+- p186 line 39「这地狱潮汐」描述性比喻保留（非 troop 名引用）
+
+### Batch 13 (pp.061-065, 2026-05-27 s15)
+- p061/062 深度复核 clean（B5 续/雷玛斯豆罐边栏/纳罗纳废墟/14 道门/煤烬姊妹/奥拉克斯背景）；术语 canonical：副执棒官卡琳娜·寇尔、Order of the Pyre 焚烧骑士团、Abrogail I 阿波罗盖一世、Recall Knowledge 回忆知识
+- p065 仅地图标签，clean
+- **p063**：4 处修正
+  - **「鬼婆三联 14 级」→「鬼婆三联 13 级」**（英文 LEVEL 13，clear typo 数字 off by 1）
+  - 「成年余烬龙」→「成年灰烬龙」（adult cinder dragon, pf2e_compendium MC2 line 11108 canonical）
+  - 「砒霜」→「蜜糖与砒霜」（Poisoned Candy, pf2e_compendium MC 189 canonical 双关名）
+  - 「鬼婆团」→「巫团」（Coven, pf2e_compendium MC 189 canonical, 与 page_149 一致）
+- **p064**：2 处修正
+  - 「鬼婆团（Coven）」stat block ability + 「鬼婆团法术列表」→ 「巫团」（同上 canonical）
+  - 「砒霜（Poisoned Candy）」→「蜜糖与砒霜」（同 p063）
+- 其他 sweet hag 异能（背叛之触/变身/昏睡之触）+ NPC 名（煤姊妹/烬姊妹/灰姊妹）+ 红帽精/失智术/虫颚打击/拐杖糖爪 全部 canonical 一致
+- 记录但不改：p061「察觉检定察觉动机」省连接词读起来略生涩但不算错；p063/064「拐杖糖爪 candy cane claw」vs pf2_compendium「棒糖爪」——「拐杖糖」更字面，保留
+
 ## 已知待决议题（需用户决策后再批量改）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
@@ -209,5 +247,19 @@
    - canonical=「精通擒获」（pf2e_compendium bestiary-ability-glossary）
    - 项目用「改良擒拿」（p043/p044）+ 「擒拿」/ 「擒抱」（23 文件 38 处）
    - 项目早期已定型，全面替换风险高。需用户判断是否统一为 canonical。
+
+6. **难度等级 MODERATE / SEVERE 译名撞名**（项目大规模问题，Batch 14 发现）
+   - 项目实际使用：MODERATE → 「严峻」 + SEVERE → 「严峻」（两个等级被压扁到同一中文词）
+   - canonical：MODERATE = 中等 / SEVERE = 严峻
+   - 已确认 MODERATE 被译为「严峻」的页面：p012, p022 (x2), p028, p029, p030, p040, p042, p044, p046, p049, p050, p054 (x2), p056, p057 (x2), p058, p060 (x2), p067 (D 召唤圆环), p074
+   - 已确认 SEVERE 被译为「严峻」的页面（实际正确）：p048, p064 (C 倾塌之塔), p068 (F 被遗忘之泪之井) 等
+   - 影响范围：~20+ 页。需用户判断：是否批量改 MODERATE 系列为「中等」（保留 SEVERE 为「严峻」）
+
+7. **Amalgamite「融合体」vs 紊传畸体（B3 canonical）**
+   - 项目 pp.066/067/068 用「融合体」13 处，建立 project-internal canonical
+   - pf2e_compendium B3 canonical=「紊传畸体」（Pathfinder Bestiary 3）
+   - 异能名同步差异：项目「失稳之场/失稳生物」→ Batch 14 已改为「失衡之域/失衡生物」（B3 一致）
+   - 但「融合体」生物名本身未改（避免破坏项目内部统一）；其他异能（位移/移位/移调转置 vs B3 调换/移形/易位）也保留项目用法（feats-srd canonical 一致）
+   - 需用户判断：是否将 13 处「融合体」改为「紊传畸体」（B3 canonical）
 
 ---
