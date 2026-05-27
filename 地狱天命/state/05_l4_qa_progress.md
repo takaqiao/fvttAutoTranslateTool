@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 30 |
+| 已完成 | 40 |
 | 进行中 | 0 |
-| 待处理 | 228 |
-| 最后批次 | Batch 6 pp.026-030 |
-| 下次起始页 | 031 |
+| 待处理 | 218 |
+| 最后批次 | Batch 8 pp.036-040 |
+| 下次起始页 | 041 |
 
 ## 处理顺序
 
@@ -32,7 +32,7 @@
 001:✅ 002:✅ 003:✅ 004:✅ 005:✅ 006:⚠ 007:✅ 008:✅ 009:✅ 010:✅
 011:✅ 012:✅ 013:✅ 014:✅ 015:✅ 016:✅ 017:✅ 018:✅ 019:✅ 020:✅
 021:✅ 022:✅ 023:✅ 024:✅ 025:✅ 026:✅ 027:✅ 028:✅ 029:✅ 030:✅
-031:⏸ 032:⏸ 033:⏸ 034:⏸ 035:⏸ 036:⏸ 037:⏸ 038:⏸ 039:⏸ 040:⏸
+031:✅ 032:✅ 033:✅ 034:✅ 035:✅ 036:✅ 037:✅ 038:✅ 039:✅ 040:✅
 041:⏸ 042:⏸ 043:⏸ 044:⏸ 045:⏸ 046:⏸ 047:⏸ 048:⏸ 049:⏸
 ```
 
@@ -126,6 +126,23 @@
 - p027: 「圣记官」（signifer）保留——与 p208「旗使」不一致，但 term_map「Hellknight signifer」= 地狱骑士圣记官，**记录跨页统一问题待决**
 - p028: 「阴间登录官」→「地狱注册官」(Infernal registrar, term_map canonical; pp.148/208 已用 地狱注册官)
 
+### Batch 7 (pp.031-035, 2026-05-27 s14)
+- p031/032/034: 深度复核 clean，术语全部与 term_map 一致（傲世号 Imperious/Impervious、卡蒂利娅、铃花会/碎冠者/锁链骑士团/细缕者/破狱者、自审 Reckoning、Khari contingent 卡利联络组、Vidric revolution 维德瑞克革命、Kintargan Revolution 金塔戈革命）
+- **p033**：1 处「地狱骑士遗骨骑士」→「地狱骑士死墓骑士」(graveknight canonical 死墓骑士；全本 7 文件 11 处用死墓骑士，仅 p033 一处用遗骨骑士)
+- **p035**：1 处「阈空之门」→「阈限门径」(Liminal Doorway, pf2e_compendium + wiki canonical)
+
+### 跨批次额外修复（与 Batch 7 同步）
+- **p198 line 45**：「邪秽不死墓骑士」→「邪秽不死的死墓骑士」（缺一个「死」字 typo，全本死墓骑士 canonical 单字漏字修正）
+
+### Batch 8 (pp.036-040, 2026-05-27 s14)
+- p036/037: 漫长攀登障碍 + 地面层地图。深度复核 clean
+- **p038**：2 处「警视画像」→「警惕肖像」(Watchful Portrait, pf2e_compendium canonical)
+- **p039**：3 处修正
+  - 「谜港」→「里德尔波特」(Riddleport, term_map line 524 + wiki canonical)
+  - 「护手缠绕」→「缠手带」(handwraps, pf2e_compendium canonical)
+- **p040**：1 处「强力出击护手缠绕」→「重拳缠手带」(Handwraps of Mighty Blows, pf2e_compendium canonical)
+- p038/p039 records 衰弱 1（enfeebled 1/drained 1）+ 疲倦（fatigued）使用——与 pf2_cn/pf2e_compendium/wiki canonical（力竭/流失/疲乏）不一致，全本广泛使用，加入待决议题
+
 ## 已知待决议题（需用户决策后再批量改）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
@@ -137,5 +154,11 @@
    - p027 用「圣记官」
    - p208 用「旗使」
    - term_map：Hellknight signifer = 地狱骑士圣记官，signifer 单用 = 旗使（B 阶段所设，可能需对齐）
+
+3. **条件状态译名**（pf2_cn / pf2e_compendium / wiki canonical vs 项目实际用法）
+   - **Enfeebled** canonical=「力竭」，项目用「衰弱」（18 文件含 enfeebled 上下文的多数）
+   - **Drained** canonical=「流失」，项目用「衰弱」（p039/p120/p178/p250 等，与 enfeebled 同字撞名）
+   - **Fatigued** canonical=「疲乏」，项目用「疲倦」（7 文件）
+   - 涉及范围广（衰弱 18 文件、疲倦 7 文件）；项目早期翻译惯例与官方 canonical 偏离。需用户判断是否批量统一为 canonical。
 
 ---
