@@ -17,7 +17,7 @@
 | 怪物（Creatures） | 234 |
 | 　- 阿德沃达扎（Advodaza） | 234 |
 | 　- 比德拉维特拉斯（Bdellavritra） | 235 |
-| 　- 多塔里刑罚分队（Dottari Excruciator Division） | 236 |
+| 　- 多塔里折磨者分队（Dottari Excruciator Division） | 236 |
 | 　- 梦境溺者（Dream Drowner） | 237 |
 | 　- 地狱骑士龙骑兵分队（Hellknight Dragoon Squad） | 238 |
 | 　- 地狱骑士猎手分队（Hellknight Hunter Squad） | 239 |

@@ -6,12 +6,12 @@
 
 总体而言，这种升级机制的目标是营造一场紧张的入侵序列：PC 渗透城市、完成关键目标、一路打穿街巷。**不必拘泥于建议的遭遇组合**——若 PC 苦战可调低难度，若你希望入侵以高潮收尾则可调高。
 
-**阿斯摩蒂斯神选者（CHAMPION OF ASMODEUS）　CREATURE 12**
+**阿斯摩蒂斯神卫（CHAMPION OF ASMODEUS）　CREATURE 12**
 同旺达·喷毒鞭（见 p.74）
 先攻 察觉 +19
-**物品**　该神选者没有 _毒蛇之牙（viper's fang）_。
+**物品**　该神卫没有 _毒蛇之牙（viper's fang）_。
 
-**多塔里行刑队（DOTTARI EXCRUCIATOR DIVISION）　CREATURE 9**
+**多塔里折磨者分队（DOTTARI EXCRUCIATOR DIVISION）　CREATURE 9**
 见 p.236
 先攻 察觉 +21
 
