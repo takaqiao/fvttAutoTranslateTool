@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 80 |
+| 已完成 | 85 |
 | 进行中 | 0 |
-| 待处理 | 178 |
-| 最后批次 | Batch 16 pp.076-080 |
-| 下次起始页 | 081 |
+| 待处理 | 173 |
+| 最后批次 | Batch 17 pp.081-085 |
+| 下次起始页 | 086 |
 
 ## 处理顺序
 
@@ -41,7 +41,7 @@
 050:✅ 051:✅ 052:✅ 053:✅ 054:✅ 055:✅ 056:✅ 057:✅ 058:✅ 059:✅
 060:✅ 061:✅ 062:✅ 063:✅ 064:✅ 065:✅ 066:✅ 067:✅ 068:✅ 069:✅
 070:✅ 071:✅ 072:✅ 073:✅ 074:✅ 075:✅ 076:✅ 077:✅ 078:✅ 079:✅
-080:✅ 081:⏸ 082:⏸ 083:⏸ 084:⏸ 085:⏸ 086:⏸ 087:⏸ 088:⏸ 089:⏸
+080:✅ 081:✅ 082:✅ 083:✅ 084:✅ 085:✅ 086:⏸ 087:⏸ 088:⏸ 089:⏸
 090:⏸ 091:⏸ 092:⏸ 093:⏸ 094:⏸ 095:⏸ 096:⏸ 097:⏸ 098:⏸ 099:⏸
 ```
 
@@ -180,6 +180,45 @@
 - 多数装备/船只/法术 canonical 一致：狱火战靴、大海蛇、帆船、登船擒拿、高等治疗药水、高等游泳药水
 - 「真实之语药剂」（potion of truespeech）保留——canonical「实言药水」但项目其他页面 truespeech 能力一律用「真实之语」，AP 内部一致优先
 - 安弗里塔石柱群 / 御风者灯塔 / 加勒鲁斯 / 雷玛斯 / 灰萎 / 雾犬 等专名 project-specific OK
+
+### Batch 17 (pp.081-085, 2026-05-27 s15)
+- **p081**：2 处 heading 英文 difficulty 漏译修正
+  - 「MODERATE 13」→「**严峻 13**」（D5 恐惧花园；项目 de facto pattern）
+  - 「LOW 13」→「**低 13**」（D6 支配礼拜堂）
+  - p081 其他术语 canonical：仙德拉/成年珊瑚龙 / 奈米拉/木林仙后变体 / 蝰蛇藤 / 支配矩阵 / 痛感珊瑚 作祟 / 系于海
+- **p082**：4 处修正
+  - 「MODERATE 13」→「**严峻 13**」（D8 苦痛使徒）
+  - 「大型解毒剂（major antidote）」→「上等解毒剂」（pf2e_compendium equipment-srd canonical）
+  - 「高级生命药水（greater elixir of life）」→「高等生命灵药」（canonical Elixir of Life Greater）
+  - 「死帽菇粉（deathcap powder）」→「死帽粉」（canonical）
+  - p082 其他 canonical：奎伦特 Quelaunt / 奥克腾 Aucturn / 黑色支配者（待决议题 #4 第 4 种变体）/ 巨章鱼/支配术杖
+- **p083**：3 处修正
+  - 「SEVERE 13」→「**严峻 13**」（D10 哀痛之厅 heading）
+  - 「纱幕尊主级阿果尔苏」→「幕后尊主级阿果尔苏」（Veiled Master, pf2e_compendium B1 canonical）
+  - 「化形（Change Shape）」→「变身（Change Shape）」（pf2e_compendium canonical, 与 p064 蜜鬼婆 stat block 同步）
+- **p084**：12 处法术名 + heading + 装备 canonical 同步
+  - 「LOW 13」→「**低 13**」（D11 梦境宝库 heading）
+  - Xoxren stat block spell list 11 处 canonical 同步（与 p070 Oourax stat block 一致）：
+    - 滑行术 → 黑缠蛇（Slither）
+    - 死亡视界 → 魅影杀机（Vision of Death）
+    - 致盲术 → 目盲术（Blindness）
+    - 迅捷术 → 加速术（Haste）
+    - 察形辨象 → 识破无形（See the Unseen）
+    - 心灵之手 → 念动之手（Telekinetic Hand）
+    - 心灵投射物 → 念动射弹（Telekinetic Projectile）
+    - 祸难术 → 绝望术（Bane）
+    - 偏执 → 狂乱偏执（Paranoia）
+    - 盾击术 → 护盾术（Shield）
+    - 高级生命药水 ×2 → 高等生命灵药 ×2（Elixir of Life Greater）
+  - p084 Xoxren 整个 spell list 此前用了旧 D&D / 非 PF2 通译；与 Oourax (p070) 已是 canonical 形成对比；现统一为 canonical
+- **p085**：2 处修正
+  - 「多塔里行刑队」×2 → 「多塔里折磨者分队」（与 5 页 7+ 实例 canonical 同步）
+  - 「阿斯摩蒂斯神选者」→「阿斯摩蒂斯神卫」（pf2e_compendium classes.json Champion=神卫 canonical, 与 p075/p127 项目内一致）
+  - p085 其他术语 canonical：警觉点/优势点/游骑要员/眼之仆从/沉眠者护身符/萨格拉贡魔/元素海啸/法术冲击箭/斯戎特工/不死灯塔/泰莎被俘 等
+
+### 跨页统一（与 Batch 17 同步）
+- **p004 ToC**：「多塔里刑罚分队」→「多塔里折磨者分队」（Batch 1 误改纠正：当时声称对齐 stat block，但实际 stat block pp.012/018/030 全部用「折磨者分队」；现项目 7 页 8+ 实例统一）
+- **p086**：3 处「多塔里行刑队/神选者」→「多塔里折磨者分队/神卫」（Batch 18 之前先做掉，避免再次发现）
 
 ### Batch 16 (pp.076-080, 2026-05-27 s15)
 - p076 深度复核 clean（罗特罗维奥 14 级 stat block；spell list 全部 canonical：神圣裁决/噬星爆发/处死一指/伤害术/圣刃护球/召唤魔族/真视术/清神醒脑/神圣魂焰/飞行/法术解除结界/行动无碍/束缚死灵/目盲术/水中呼吸/水面行走/侦测魔法/圣枪术/指路术/传讯术/虚能噬/激现骸骨/将军令/卡利步兵/纯净军团小队/纯净之披风/船员）
