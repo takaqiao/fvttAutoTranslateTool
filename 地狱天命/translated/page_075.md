@@ -16,7 +16,7 @@
 
 > **旺达·喷毒鞭（VANDA SPITELASH）**　**生物 12**
 > 独特　中型　人类　类人生物　邪秽
-> 伊欧梅黛神卫变体（variant deific champion of Iomedae，Pathfinder NPC Core 第 36 页）
+> 艾欧曼狄神卫变体（variant deific champion of Iomedae，Pathfinder NPC Core 第 36 页）
 > **先攻 察觉** +19
 > **物品** 阿斯摩蒂斯圣徽、蝰蛇之牙
 > **神卫灵光（Champion's Aura）**（灵光、神圣）15 英尺。**灵光内任何阿斯摩蒂斯的追随者都知道旺达是阿斯摩蒂斯的神卫**。**灵光内的敌人在抵抗恐惧的豁免上承受 -1 环境减值**。**此外**——**在她灵光内结束回合的敌人无法将其恐惧值降至 1 以下**。
