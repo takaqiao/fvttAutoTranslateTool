@@ -47,7 +47,7 @@
 > **先攻 察觉** +21；卓越黑暗视觉
 
 > **图里尼奥·梅扎福（TOURINIO METZAPHO）**　　**生物 10**
-> 阴间登录官（Infernal registrar，Pathfinder NPC Core 119）
+> 地狱注册官（Infernal registrar，Pathfinder NPC Core 119）
 > **先攻 察觉** +19（察觉动机 +33）
 
 **宝藏**：在卷轴堆中埋藏着一件 **高级雄辩颈环**（greater choker of elocution），可使佩戴者流利使用通用语、魔鬼语与至上界语（Empyrean）。
