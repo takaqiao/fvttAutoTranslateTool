@@ -654,7 +654,17 @@
 - p203/p204 深度复核 clean（章节插页 + 战役之外开篇 + 后续与新版图 + 安多兰）
 - **p205** (1 处)：「**黑暗王子**」→「**黑暗亲王**」（Prince of Darkness wiki canonical, B32 sync p160 canonical, p205 单页 outlier）
 
-## 已知待决议题（需用户决策后再批量改）
+## ~~已知待决议题~~ 全部 22 项已应用术语优先级解决（2026-05-28 s22 收尾）
+
+**决策**：用户授权按 pf2_cn > pf2e_compendium > 地狱破灭 PDF > wiki 优先级机械应用（排除 sf2e_compendium）。
+
+### 应用结果
+- A 类（11 项）pure mechanical：A1 旗使 / A2 改进擒抱 / A3 紊传畸体 / A4 艾奥梅黛 / A5 真景术 / A6 真实之语 / A7 次元移位 / A8 占卜/启示/探知 / A9 迷障术·惊骇假面 / A10 呆滞 / A11 贼活·神秘
+- B 类（5 项）widespread habit fix：B1 力竭/流失/疲乏/惊惧 / B2 MODERATE→中等 / B3 魔鬼语回退 / B4 察觉/特技/戈拉里翁 / B5 critical→极佳
+- C 类（4 项）narrative reconciled：C1 异端魁首 + p213 etymology 改写 / C2 暗域之主保留（sf2e 排除）/ C3 嚎天精统一 / C4 缚体魔鬼统一
+- D 类（2 项）disambiguation：D1 Quelaunt 奎伦特 (异怪) vs Ochiastis 奥奇阿斯提斯 (刺客魔鬼) 拆分 / D2 精良逐处按 major→上等 / greater→高等 拆分
+
+### 原 22 项历史记录（保留参考）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
    - 异端魁首：8 文件 19 处（Ch1-Ch5）

@@ -18,7 +18,7 @@
 
 此外，**燔林精**伏诛之后，原本损害士气的烈焰与浓烟也已消散。
 
-**战利品**：若玩家角色们妥善安葬了遗体，橡树将赠予玩家角色们一柄**精良暴雨杖**（major staff of the tempest；《玩家核心 2》308 页）、一具**精良太初槲寄生**（greater primeval mistletoe），以及一颗**萌芽宙之石**（sprouting aeon stone）。
+**战利品**：若玩家角色们妥善安葬了遗体，橡树将赠予玩家角色们一柄**上等暴雨杖**（major staff of the tempest；《玩家核心 2》308 页）、一具**高等太初槲寄生**（greater primeval mistletoe），以及一颗**萌芽宙之石**（sprouting aeon stone）。
 
 ---
 

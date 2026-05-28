@@ -39,7 +39,7 @@
 
 ---
 
-> **魔鬼增援（FIENDISH REINFORCEMENTS）**　**严峻 10**
+> **魔鬼增援（FIENDISH REINFORCEMENTS）**　**中等 10**
 >
 > **生物**：在 PC 们击败多塔里或毁坏傲世号 30 分钟之后，恶魔海军的援军抵达。**警戒法师中队**（watchmage squadrons）由契约魔（phistophilus）带领，使用其远程魔法；轻甲的**军团魔水手**（vordine marines）小队则像尽职的步兵般向前突击。
 >

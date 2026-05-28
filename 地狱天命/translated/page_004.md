@@ -24,7 +24,7 @@
 | 　- 地狱浪潮（Infernal Tide） | 240 |
 | 　- 梅尔托雷贡（Merztorlegon） | 241 |
 | 　- 嚎天精（Oath Howler） | 242 |
-| 　- 奎伦特（Ochiastis） | 243 |
+| 　- 奥奇阿斯提斯（Ochiastis） | 243 |
 | 　- 门槛凯鲁卡贡（Threshold Kerulkagon） | 244 |
 | 　- 文库拉提（Vinculatti） | 245 |
 | NPC | 246 |
