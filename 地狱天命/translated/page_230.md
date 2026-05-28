@@ -10,7 +10,7 @@
 
 ### 新高级同伴（New Advanced Companion）
 
-本——高级同伴——使用——《探路者 荒野咆哮》（Pathfinder Howl of the Wild）——第 93 页——所——给的规则。
+本——高级同伴——使用——《探路者荒野之嚎》（Pathfinder Howl of the Wild）——第 93 页——所——给的规则。
 
 #### 斯戎暴龙（THRUNEOSAURUS REX）　【**14 级**】
 
