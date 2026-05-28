@@ -28,7 +28,7 @@
 
 **速度** 25 英尺，飞行 25 英尺，游泳 30 英尺；部队移动（《战吼！》217）
 
-**神圣天生法术** DC 30，攻击 +22；6 环——「**水力激流**」（hydraulic torrent）；5 环——「**控水**」（control water）、「**异位**」（translocate）；4 环——「**水力激流**」（hydraulic torrent）、「**异位**」（translocate，任意）、「**畅行无阻**」（unfettered movement）；**持续（2 环）** 洞察无形
+**神圣天生法术** DC 30，攻击 +22；6 环——「**水力激流**」（hydraulic torrent）；5 环——「**控水**」（control water）、「**次元移位**」（translocate）；4 环——「**水力激流**」（hydraulic torrent）、「**次元移位**」（translocate，任意）、「**畅行无阻**」（unfettered movement）；**持续（2 环）** 洞察无形
 
 **仪式** DC 30；地狱契约（《探路者 怪物核心》364 页）
 
