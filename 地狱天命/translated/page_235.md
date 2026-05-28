@@ -30,7 +30,7 @@
 
 **远程** [1 个动作] 亵渎之爆 +31（火、魔法、射程 120 英尺、精神、邪秽），**伤害** 4d8 精神——加 4d8 火
 
-**神圣天生法术** DC 40，攻击 +32；9 环——「**解咒**」（dispel magic，×2）；8 环——「**神圣谕令**」（divine decree）、「**传送**」（teleport）；6 环——「**治疗术**」（heal，×3）、「**热忱信念**」（zealous conviction）；4 环——「**入迷**」（enthrall，意志）、「**隐形**」（invisibility，×3）、「**蒸汽形态**」（vapor form，意志）；**戏法（9 环）** 「**侦测魔法**」（detect magic）、「**传讯**」（message）
+**神圣天生法术** DC 40，攻击 +32；9 环——「**解咒**」（dispel magic，×2）；8 环——「**神圣谕令**」（divine decree）、「**传送**」（teleport）；6 环——「**治疗术**」（heal，×3）、「**热忱信念**」（zealous conviction）；4 环——「**入迷**」（enthrall，任意）、「**隐形**」（invisibility，×3）、「**蒸汽形态**」（vapor form，任意）；**戏法（9 环）** 「**侦测魔法**」（detect magic）、「**传讯**」（message）
 
 **领域法术** 3 专注点，DC 40，攻击 +32；9 环——「**伪神现形**」（see false divinity）
 

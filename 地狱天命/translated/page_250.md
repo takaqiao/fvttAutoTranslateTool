@@ -22,7 +22,7 @@
 
 **近战** [1 个动作] 翼 +37（魔法、可达 15 英尺、邪秽），**伤害** 4d6+19 挥砍
 
-**神圣天生法术** DC 44；10 环——「**坠星术**」（falling stars）、「**显灵**」（manifestation）；9 环——「**解咒**」（dispel magic）、「**夺魂**」（seize soul，意志）；8 环——「**解咒**」（dispel magic，意志）、「**神圣谕令**」（divine decree，意志）、「**火球**」（fireball，意志）、「**预知占视**」（scrying）、「**火墙**」（wall of fire，意志）；5 环——「**异位**」（translocate）；4 环——「**异位**」（translocate，意志）；**持续（9 环）** 真实视觉
+**神圣天生法术** DC 44；10 环——「**坠星术**」（falling stars）、「**显灵**」（manifestation）；9 环——「**解咒**」（dispel magic）、「**夺魂**」（seize soul，任意）；8 环——「**解咒**」（dispel magic，任意）、「**神圣谕令**」（divine decree，任意）、「**火球**」（fireball，任意）、「**预知占视**」（scrying）、「**火墙**」（wall of fire，任意）；5 环——「**异位**」（translocate）；4 环——「**异位**」（translocate，任意）；**持续（9 环）** 真实视觉
 
 **仪式** DC 44；地狱契约
 
