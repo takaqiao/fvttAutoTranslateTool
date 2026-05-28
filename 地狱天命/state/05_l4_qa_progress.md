@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 165 |
+| 已完成 | 175 |
 | 进行中 | 0 |
-| 待处理 | 93 |
-| 最后批次 | Batch 33 pp.161-165 |
-| 下次起始页 | 166 |
+| 待处理 | 83 |
+| 最后批次 | Batch 35 pp.171-175 |
+| 下次起始页 | 176 |
 
 ## 处理顺序
 
@@ -57,8 +57,8 @@
 ### pp.150-199（Ch8-10）
 ```
 150:✅ 151:✅ 152:✅ 153:✅ 154:✅ 155:✅ 156:✅ 157:✅ 158:✅ 159:✅
-160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:⏸ 167:⏸ 168:⏸ 169:⏸
-170:⏸ 171:⏸ 172:⏸ 173:⏸ 174:⏸ 175:⏸ 176:⏸ 177:⏸ 178:⏸ 179:⏸
+160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:✅ 167:✅ 168:✅ 169:✅
+170:✅ 171:✅ 172:✅ 173:✅ 174:✅ 175:✅ 176:⏸ 177:⏸ 178:⏸ 179:⏸
 180:⏸ 181:⏸ 182:⏸ 183:⏸ 184:⏸ 185:⏸ 186:⏸ 187:⏸ 188:⏸ 189:⏸
 190:⏸ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
 ```
@@ -435,6 +435,42 @@
 ### 跨页统一（与 Batch 32 同步：greater healing potion canonical）
 - **p080**：1 处「3 瓶高级治疗药水」→「**3 瓶高等治疗药水**」（与 p157 同步，project canonical 高等治疗药水 per p060/p068 主流）
 
+### Batch 34 (pp.166-170, 2026-05-28 s19)
+- p166/p167 深度复核 clean（Garius Henderthane 接触 / A 皇宫地图标签）
+- **p168** (1 处)：「**精良坚固盾**」→「**高等坚固盾**」（greater sturdy shield, B23 greater = 高等 canonical sync；项目 sturdy shield = 坚固盾 AP-internal canonical 保留，仅修等阶 qualifier）
+- **p169** (1 处)：「**精良力场之带**」→「**上等力场手环**」（major bands of force, pf2e_compendium canonical 力场手环 + major = 上等；p169 唯一一处 major 等阶）
+- **p170** (2 处)：2x「**阿因加沃尔魔**」→「**安加沃尔魔**」（Ayngavhaul devil 项目 canonical, p052/p055 establish 同步；p170 narrative + stat block 单页 outlier）
+- 记录但不改：「奈非利姆」（nephilim, project canonical 18+ 文件）/「半魔之裔」（cambion 单页 p168 唯一用例 AP-internal OK）
+
+### Batch 35 (pp.171-175, 2026-05-28 s19)
+- **p171** (4 处)：stat block 法术名 canonical sync
+  - 「扭曲心智」→「**心灵扭曲**」（Warp Mind, pf2e_compendium + p067/p070/p106 项目 canonical 3 页一致，p171 单页 outlier）
+  - 「心智失忆」→「**失智术**」（Never Mind, pf2e_compendium canonical, p063 项目 canonical 同步）
+  - 「虚象」→「**虚构幻术**」（Figment, pf2e_compendium canonical + p064 项目 canonical 同步）
+  - 「附有精良翼振符文之符文石」→「**附有高等翼振符文之符文石**」（greater winged rune, B23 greater = 高等 canonical）
+- **p172** (5 处)：装备符文等阶 + 法杖等阶 canonical
+  - 「**+3 高级银制 精良畏惧 精良强击 精良雷鸣 三叉戟**」→「**+3 高等银制 高等畏惧 高等强击 高等雷鸣 三叉戟**」（greater × 3 fearsome/striking/thundering runes + high-grade silver = 高等银制 material grade）
+  - 「**精良奥能威力之杖**」→「**上等奥能威力之杖**」（major staff of arcane might, B17 major = 上等 canonical）
+- **p173** (1 处)：「**智识王冠**」→「**聪智皇冠**」（crown of intellect canonical, B31 + B32 sync p155/p158）
+- **p174** (2 处)：
+  - 「心传讯」→「**传讯术**」（Message cantrip canonical 传讯术 per pf2e_compendium; p050/p064/p076 项目 cantrip 列表 canonical 已用）
+  - 「**严酷 18 级**」→「**严峻 18**」（SEVERE 18 待决议题 #6 canonical）
+- p175 深度复核 clean（Mareshiah stat block 跨页 + p176 续）
+
+### 重要回退（B29/B33 sending sync 错误纠正）
+**问题**：B29 (p144) + B33 (p161) 将 5 处「短讯术」改为「传讯术」，理由是「sending canonical 传讯术 per pf2_cn」——**统计错**。实测 pf2e_compendium：
+- **Message**（戏法/cantrip）= **传讯术** canonical
+- **Sending**（3 环法术）= **短讯术** canonical（pf2e_compendium 明列）
+- B29/B33 将 sending 改为 message 译名是 backward — 项目原 stat block 用「短讯术」实为 pf2e_compendium canonical
+
+**回退**：
+- **p144** (4 处 ROLLBACK to pre-B29)：3x「传讯术（sending）」→「**短讯术**」+ 1x「掌旗官的传讯」→「**掌旗官的短讯**」（THE SIGNIFER'S SENDING）
+- **p161** (2 处 ROLLBACK to pre-B33)：2x「传讯术卷轴」→「**短讯术卷轴**」（scroll of sending）
+- **p176** stat block 5 环 「**短讯术**」（sending at will）= canonical ✓ 保持（验证后无误）
+
+### 跨页统一（与 Batch 35 同步：never mind canonical）
+- **p201**：1 处「**心智失忆**」→「**失智术**」（与 p171 同步，Never Mind canonical 项目 3 页 canonical 已用 p063）
+
 ## 已知待决议题（需用户决策后再批量改）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
@@ -544,5 +580,21 @@
     - **绝佳成功 vs 极佳成功**（critical success）：7 文件 Ch9+ 绝佳 vs 8 文件 Ch7-8 极佳（50/50 split）
     - **格拉利昂 vs 戈拉里翁**（Golarion）：7 文件 用 格拉利昂 vs 17 文件 戈拉里翁（term_map canonical 戈拉里翁）
     - 均为 widespread Ch9+ translator habit；项目早期 Ch1-8 与晚期 Ch9-11 译者习惯差异；需用户判断是否批量统一为 canonical
+
+18. **法术名 widespread 项目 habit vs pf2e_compendium canonical**（B35 暴露）
+    - **困境术**（Quandary canonical = 迷障术）：项目 3 页 p171/p174/p199 用「困境术」vs 1 页 p205 用「迷障术」canonical
+    - **恐怖之面**（Mask of Terror canonical = 惊骇假面）：项目 2 页 p171/p199 用「恐怖之面」vs 0 页 canonical
+    - 项目早期建立 project-internal canonical 用「困境术/恐怖之面」，与 pf2e_compendium 偏离；需用户判断
+
+19. **stupefied 条件状态 widespread 项目 habit**（B35 扩展待决议题 #3）
+    - canonical = **呆滞**（pf2e_compendium / pf2_cn / wiki 三源一致）
+    - 项目用「**迷糊**」5 文件 p171/p184/p194/p201/p238（widespread 项目 habit）
+    - 项目用「**目眩**」1 文件 p238（B14 已 note stupefied 用法）
+    - 与待决议题 #3（衰弱/疲倦/恐惧）同性质 widespread translator habit；需用户判断
+
+20. **Skill 译名 widespread 项目 habit**（B35 暴露；扩展待决议题 #17）
+    - **盗术**（Thievery canonical = 贼活，pf2_cn / wiki）：项目 9 文件 p176/p178/p188/p189/p190/p191/p228/p244/p254 用「盗术」（widespread）vs 0 页 canonical
+    - **神秘学**（Occultism canonical = 神秘，pf2_cn）：项目 10 文件用「神秘学」vs 10+ 文件用「神秘」（split usage; 神秘 在 p178 等多页 stat block 出现）
+    - 项目早期翻译 skill name 习惯添加「学」/「术」后缀，pf2_cn canonical 简化无后缀；需用户判断
 
 ---
