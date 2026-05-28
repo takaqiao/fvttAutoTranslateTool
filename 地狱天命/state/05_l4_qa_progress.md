@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 175 |
+| 已完成 | 185 |
 | 进行中 | 0 |
-| 待处理 | 83 |
-| 最后批次 | Batch 35 pp.171-175 |
-| 下次起始页 | 176 |
+| 待处理 | 73 |
+| 最后批次 | Batch 37 pp.181-185 |
+| 下次起始页 | 186 |
 
 ## 处理顺序
 
@@ -58,8 +58,8 @@
 ```
 150:✅ 151:✅ 152:✅ 153:✅ 154:✅ 155:✅ 156:✅ 157:✅ 158:✅ 159:✅
 160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:✅ 167:✅ 168:✅ 169:✅
-170:✅ 171:✅ 172:✅ 173:✅ 174:✅ 175:✅ 176:⏸ 177:⏸ 178:⏸ 179:⏸
-180:⏸ 181:⏸ 182:⏸ 183:⏸ 184:⏸ 185:⏸ 186:⏸ 187:⏸ 188:⏸ 189:⏸
+170:✅ 171:✅ 172:✅ 173:✅ 174:✅ 175:✅ 176:✅ 177:✅ 178:✅ 179:✅
+180:✅ 181:✅ 182:✅ 183:✅ 184:✅ 185:✅ 186:⏸ 187:⏸ 188:⏸ 189:⏸
 190:⏸ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
 ```
 
@@ -470,6 +470,30 @@
 
 ### 跨页统一（与 Batch 35 同步：never mind canonical）
 - **p201**：1 处「**心智失忆**」→「**失智术**」（与 p171 同步，Never Mind canonical 项目 3 页 canonical 已用 p063）
+
+### Batch 36 (pp.176-180, 2026-05-28 s19)
+- p176/p177 深度复核 clean（Mareshiah 完整 stat block 续 + 地狱契约阅读 + 第十章开篇）
+  - 验证：p176 stat block 5 环「短讯术」（sending at will）= canonical ✓ 保持（与 B35 sending 回退一致）
+- p178/p179/p180 深度复核 clean（皇宫逃脱障碍系统 + 坎达鲁现身 + 地狱火龙卷 + 安全屋）
+- 记录但不改（widespread 项目 habit 加入待决议题 #18-#20）：
+  - 困境术 / 恐怖之面（spell name habit; B35 sync）
+  - 平直检定 vs 硬性检定（flat check, 2 vs 5 文件 split; canonical 纯骰检定 neither）
+  - 擒抱（grabbed canonical = 受擒, 23 文件 widespread）
+  - 迟滞（slowed canonical = 缓慢, p180/p184 等使用）
+
+### Batch 37 (pp.181-185, 2026-05-28 s19)
+- **p181** (2 处)：2x「**亚罗登**」→「**奥罗登**」（Aroden 项目 28 文件 majority canonical, p181 单页 outlier）
+- p182 深度复核 clean（梅尔托雷贡 ×2 街上遭遇 + 天罚灵魂之潮拱门危害）
+- **p183** (6 处)：装备等阶 + 5 法术 canonical sync（Grachius Alazario stat block）
+  - 「**+2 高级强击 高级火焰之杖**」→「**+2 高等强击 上等火焰之杖**」（greater striking + major staff of fire）
+  - 6 环「**虚行**」→「**假像术**」（Mislead canonical, p050 项目 canonical）
+  - 5 环「**召唤亡灵**」→「**唤起魂灵**」（Invoke Spirits canonical, p070 项目 canonical）
+  - 4 环「**消除阻碍**」→「**行动无碍**」（Unfettered Movement canonical, p070/p076 项目 canonical）
+  - 2 环「**显形之光**」→「**显光尘**」（Revealing Light canonical pf2e_compendium, p183 唯一一处）
+  - 戏法「**虚能蚀**」→「**虚能噬**」（Void Warp canonical, p050/p070/p076/p084 项目 canonical 4 页）
+- p184 深度复核 clean（神圣守卫大军 stat block + 集结）
+  - 记录但不改：「虚弱 1」（enfeebled 1, 待决议题 #3）+「迷糊 1」（stupefied, 待决议题 #19）
+- **p185** (1 处)：「**+3 高级强击神圣长剑**」→「**+3 上等强击神圣长剑**」（major striking longsword, B17 major = 上等 sync）
 
 ## 已知待决议题（需用户决策后再批量改）
 
