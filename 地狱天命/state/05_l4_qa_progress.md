@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 185 |
+| 已完成 | 190 |
 | 进行中 | 0 |
-| 待处理 | 73 |
-| 最后批次 | Batch 37 pp.181-185 |
-| 下次起始页 | 186 |
+| 待处理 | 68 |
+| 最后批次 | Batch 38 pp.186-190 |
+| 下次起始页 | 191 |
 
 ## 处理顺序
 
@@ -59,8 +59,8 @@
 150:✅ 151:✅ 152:✅ 153:✅ 154:✅ 155:✅ 156:✅ 157:✅ 158:✅ 159:✅
 160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:✅ 167:✅ 168:✅ 169:✅
 170:✅ 171:✅ 172:✅ 173:✅ 174:✅ 175:✅ 176:✅ 177:✅ 178:✅ 179:✅
-180:✅ 181:✅ 182:✅ 183:✅ 184:✅ 185:✅ 186:⏸ 187:⏸ 188:⏸ 189:⏸
-190:⏸ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
+180:✅ 181:✅ 182:✅ 183:✅ 184:✅ 185:✅ 186:✅ 187:✅ 188:✅ 189:✅
+190:✅ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
 ```
 
 ### pp.200-258（Ch11 + 战役之外 + 寇兰廷续 + 贵族 + 工具箱）
@@ -494,6 +494,19 @@
 - p184 深度复核 clean（神圣守卫大军 stat block + 集结）
   - 记录但不改：「虚弱 1」（enfeebled 1, 待决议题 #3）+「迷糊 1」（stupefied, 待决议题 #19）
 - **p185** (1 处)：「**+3 高级强击神圣长剑**」→「**+3 上等强击神圣长剑**」（major striking longsword, B17 major = 上等 sync）
+
+### Batch 38 (pp.186-190, 2026-05-28 s19)
+- p186/p187 深度复核 clean（斯戎广场之战 stat block + 莱瓦洛克营队 + 午夜神殿地图）
+- **p188** (4 处)：Golden Fiend Sisters stat block 装备 canonical sync
+  - 「**力场之带**」→「**力场手环**」（bands of force, pf2e_compendium canonical, B34 sync）
+  - 「**+2 高级强击 巨力手缠**」→「**+2 高等强击 重拳缠手带**」（greater striking handwraps of mighty blows; greater + B8 重拳缠手带 canonical sync）
+  - 「**+2 高级强击 锡杖**」→「**+2 高等强击 锡杖**」（greater striking khakkara; 锡杖 项目 internal 保留, 待决议题 #21 候选）
+  - 「**+2 高级强击 回归飞镖**」→「**+2 高等强击 回力飞镖**」（greater striking returning dart; greater + B19 回力 canonical sync）
+- **p189** (5 处)：Golden Fiend + Hellknight paralictor stat block 装备 canonical sync
+  - 「+3 高级强击 巨力手缠」→「**+3 上等强击 重拳缠手带**」（major striking handwraps; major + 重拳缠手带 canonical）
+  - 「**顶级加固高级精金盾**」→「**上等加固高等精金盾**」（major reinforcing high-grade adamantine shield; major = 上等 + high-grade = 高等 per B35 p172 sync）
+  - 「+2 高级强击 钉头锤」→「**+2 高等强击 钉头锤**」（greater striking mace; greater = 高等）
+- **p190** (1 处)：「**反魔法之油**」→「**反魔油**」（antimagic oil canonical pf2e_compendium, p190 唯一一处）
 
 ## 已知待决议题（需用户决策后再批量改）
 
