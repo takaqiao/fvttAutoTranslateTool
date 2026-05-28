@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 135 |
+| 已完成 | 145 |
 | 进行中 | 0 |
-| 待处理 | 123 |
-| 最后批次 | Batch 27 pp.131-135 |
-| 下次起始页 | 136 |
+| 待处理 | 113 |
+| 最后批次 | Batch 29 pp.141-145 |
+| 下次起始页 | 146 |
 
 ## 处理顺序
 
@@ -50,8 +50,8 @@
 100:✅ 101:✅ 102:✅ 103:✅ 104:✅ 105:✅ 106:✅ 107:✅ 108:✅ 109:✅
 110:✅ 111:✅ 112:✅ 113:✅ 114:✅ 115:✅ 116:✅ 117:✅ 118:✅ 119:✅
 120:✅ 121:✅ 122:✅ 123:✅ 124:✅ 125:✅ 126:✅ 127:✅ 128:✅ 129:✅
-130:✅ 131:✅ 132:✅ 133:✅ 134:✅ 135:✅ 136:⏸ 137:⏸ 138:⏸ 139:⏸
-140:⏸ 141:⏸ 142:⏸ 143:⏸ 144:⏸ 145:⏸ 146:⏸ 147:⏸ 148:⏸ 149:⏸
+130:✅ 131:✅ 132:✅ 133:✅ 134:✅ 135:✅ 136:✅ 137:✅ 138:✅ 139:✅
+140:✅ 141:✅ 142:✅ 143:✅ 144:✅ 145:✅ 146:⏸ 147:⏸ 148:⏸ 149:⏸
 ```
 
 ### pp.150-199（Ch8-10）
@@ -380,6 +380,21 @@
 - p135 深度复核 clean（沉言林之战渗透子系统 + BP 规则；阿雷戈堡 Fort Arego 项目内 canonical 一致）
 - 记录但不改：「誓嚎风灵」p134（oath howler；vs canonical「嚎天精」p004 ToC + p243 stat block；p112 Ch6 narrative 5+ 处用「誓嚎风灵」已建立 narrative variant；加入待决议题 #13——是否将 narrative variant 统一回 stat block canonical）/「精良连枷」/「精良反魔法半身板甲」/「精良生命药剂」p133（major elixir of life；待决议题 #12 精良 ambiguity）
 
+### Batch 28 (pp.136-140, 2026-05-28 s17)
+- p136/p137 深度复核 clean（沉言林之战渗透阶段 3-4 / AP 阈值 / 复杂情况）
+- **p138** (1 处)：「《派斯凡 怪物核心 2》354」→「《**探路者怪物核心 2**》」（血棘藤 wemmuth stat block）
+- **p139** (3 处)：「《派斯凡 怪物核心》113」→「《**探路者怪物核心**》」（成年邪魔之龙）+ 2x「《战吼！》216/217」→「《**探路者战吼！**》」（部队防御/部队移动 references）
+- **p140** (1 处)：「严重至极限 16」→「**严峻至极端 16**」（SEVERE TO EXTREME 16, 项目 p030/p052 canonical 极端 + 待决议题 #6 SEVERE→严峻 project canonical）
+- 记录但不改：「虚空低语术」p140（whispers of the void，AP 内部唯一用例，无 cross-page reference 验证）/「地震术」p140（earthquake，likely pf2_cn canonical）
+
+### Batch 29 (pp.141-145, 2026-05-28 s17)
+- **p141** (2 处)：「圣域」→「**圣洁**」（holy trait canonical, 项目 7+ 文件圣洁 vs 1 文件圣域）+「《派斯凡 战吼！》178」→「《**探路者战吼！**》」（龙兽飞群 drake flight）
+- **p142** (4 处)：3x「《派斯凡 战吼！》180」/「《战吼！》217」→「《**探路者战吼！**》」（一等骑兵队/一等军团魔 variant references）+「**抗性** 火 10」→「**抗性** 火焰 10」（项目 stat block fire canonical 火焰）
+- **p143** (1 处)：「《战吼！》137」→「《**探路者战吼！**》」（greater toothy knife talisman）
+- **p144** (3 处)：「短讯术（sending）」→「**传讯术**」+「掌旗官的短讯」→「**掌旗官的传讯**」+「短讯术（sending spell）」→「**传讯术**」（sending canonical 传讯术，项目 9+ 文件 p050/p064/p076/p108/p169/p174/p176/p184/p185 一致 vs p144 单页 outlier）
+- p145 深度复核 clean（detect scrying = 侦测探知 / translocate = 次元移位 / 警报术 alarm spell / Anabeth/Tareth/Ivirno/Sons of the Tear/灰烬区 全部 canonical）
+- 记录但不改：「掌旗官」p144（signifer 单用 第三变体，待决议题 #2 扩展为 3 译法 圣记官/旗使/掌旗官）/「慕位者」p144（status seeker，AP-internal 翻译 OK）
+
 ## 已知待决议题（需用户决策后再批量改）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
@@ -387,10 +402,12 @@
    - 大异教官：6 文件 12 处（寇兰廷城邦志 pp.212-218）
    - 同人 Kettermaul Charthagnion 的官职头衔。 page_213 etymology 段落明确用「大异教官（arch-heathen）」做来源解释——若改成「异端魁首」需重写该段。需用户判断。
 
-2. **「signifer」单用**（与 Hellknight signifer 复合用法关系）
+2. **「signifer」单用**（与 Hellknight signifer 复合用法关系；B29 暴露第三变体）
    - p027 用「圣记官」
    - p208 用「旗使」
+   - **p144 用「掌旗官」**（新 B29 发现，Signifer Ukun + Signifer Telzinah 描述用语）
    - term_map：Hellknight signifer = 地狱骑士圣记官，signifer 单用 = 旗使（B 阶段所设，可能需对齐）
+   - 3 译法并存：圣记官/旗使/掌旗官——需用户判断 canonical
 
 3. **条件状态译名**（pf2_cn / pf2e_compendium / wiki canonical vs 项目实际用法）
    - **Enfeebled** canonical=「力竭」，项目用「衰弱」（18 文件含 enfeebled 上下文的多数）
