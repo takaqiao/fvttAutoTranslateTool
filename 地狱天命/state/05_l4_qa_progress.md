@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 120 |
+| 已完成 | 135 |
 | 进行中 | 0 |
-| 待处理 | 138 |
-| 最后批次 | Batch 24 pp.116-120 |
-| 下次起始页 | 121 |
+| 待处理 | 123 |
+| 最后批次 | Batch 27 pp.131-135 |
+| 下次起始页 | 136 |
 
 ## 处理顺序
 
@@ -49,8 +49,8 @@
 ```
 100:✅ 101:✅ 102:✅ 103:✅ 104:✅ 105:✅ 106:✅ 107:✅ 108:✅ 109:✅
 110:✅ 111:✅ 112:✅ 113:✅ 114:✅ 115:✅ 116:✅ 117:✅ 118:✅ 119:✅
-120:✅ 121:⏸ 122:⏸ 123:⏸ 124:⏸ 125:⏸ 126:⏸ 127:⏸ 128:⏸ 129:⏸
-130:⏸ 131:⏸ 132:⏸ 133:⏸ 134:⏸ 135:⏸ 136:⏸ 137:⏸ 138:⏸ 139:⏸
+120:✅ 121:✅ 122:✅ 123:✅ 124:✅ 125:✅ 126:✅ 127:✅ 128:✅ 129:✅
+130:✅ 131:✅ 132:✅ 133:✅ 134:✅ 135:✅ 136:⏸ 137:⏸ 138:⏸ 139:⏸
 140:⏸ 141:⏸ 142:⏸ 143:⏸ 144:⏸ 145:⏸ 146:⏸ 147:⏸ 148:⏸ 149:⏸
 ```
 
@@ -356,6 +356,30 @@
 - **p120** (4 处)：「琐碎 15」→「轻微 15」+ 2x 探路者书名 + 「短距挪移」→「**远转**」（translocate, 项目 2 处 canonical 远转, p120 异变 1 处同步）
 - 记录但不改：「精良畏惧药剂」（待决议题 #12）/「枯竭」（drained, 待决议题 #3）
 
+### Batch 25 (pp.121-125, 2026-05-28 s17)
+- **p121** (2 处)：「《Pathfinder 怪物核心》219 页」→「《**探路者怪物核心**》」+「《Pathfinder 怪物核心 2》266 页」→「《**探路者怪物核心 2**》」（B22/B23 探路者 canonical sync）
+- **p122** (3 处)：3x「《**战吼！**》130/124/140 页」→「《**探路者战吼！**》」（Pathfinder Battlecry! canonical sync，项目 19+ 页累计「战吼！」需后续 sync）
+- p123 深度复核 clean（塔尔曼铎/天界使 agathion/celestial chainmail 全部 canonical 一致）
+- **p124** (2 处)：2x「《战吼！》第 216/217 页」→「《**探路者战吼！**》」
+- **p125** (5 处)：「《派斯凡 NPC 核心》第 95 页」→「《**探路者 NPC 核心**》」+ 2x「《派斯凡 元素之怒》第 196/71 页」→「《**探路者元素之怒**》」+「侦测占视」→「**侦测探知**」（s8 + p145 canonical detect scrying）+「滑行（slither）」→「**黑缠蛇**（slither）」（B14 canonical, p070/p084 项目内已 canonical）
+- 记录但不改：「精良奥能威力之杖」p121/「精良鹰击之刃」p122/「精良坚守者之旗」p122/「精良战祭司之披饰」p122（待决议题 #12 精良 ambiguity）/「暗域之主」p121（待决议题 #4）
+
+### Batch 26 (pp.126-130, 2026-05-28 s17)
+- **p126** (6 处)：「琐碎至低 16」→「**轻微至低 16**」（TRIVIAL canonical, p119/p120 sync）+「《战吼！》第 158 页」→「《**探路者战吼！**》」+ 2x「《派斯凡 战吼！》178/184」→「《探路者战吼！》」+ 2x「《派斯凡 翻转图：仪式场所/巨大森林》」→「《**探路者翻图**：仪式场所/巨大森林》」（项目 p161/p164/p182 已 canonical 探路者翻图）
+- **p127** (7 处)：2x「《派斯凡 NPC 核心》163/135」→「《**探路者 NPC 核心**》」+「《战吼！》第 178 页」→「《**探路者战吼！**》」+ 2x「《派斯凡 战吼！》177/186」→「《探路者战吼！》」+「琐碎 16」→「**轻微 16**」（TRIVIAL 16 canonical）
+- **p128** (3 处)：「虚空之触」→「**虚能之触**」（touch of the void canonical, p075/p190 已 canonical 虚能之触）+「《派斯凡 怪物核心》90」→「《**探路者怪物核心**》」+「《派斯凡 战吼！》193」→「《**探路者战吼！**》」
+- **p129** (10 处)：「《派斯凡 失落希望 不可能领域》325」→「《**探路者失落希望 不可能领域**》」+「《派斯凡 战吼！》180」→「《**探路者战吼！**》」+「《派斯凡 NPC 核心》121」→「《**探路者 NPC 核心**》」+ 4x「司令官刀鞘《派斯凡 战吼！》149 / 精良防火手套《战吼！》149 / 凤焰勋章《战吼！》151 / 精良反击锁甲《战吼！》122」→「《**探路者战吼！**》」+「《派斯凡 元素之怒》71」→「《**探路者元素之怒**》」+「**4 瓶高级生命药剂**（greater elixir of life）」→「**4 瓶高等生命灵药**」（B17 高等生命灵药 canonical sync）
+- **p130** (2 处)：「《派斯凡 元素之怒》71」→「《**探路者元素之怒**》」+「**4 瓶高级生命药剂**」→「**4 瓶高等生命灵药**」（p129 sync）
+- 记录但不改：「转移术」p127-130（translocate；项目 4 译法：p092「远转」/ p127-130「转移术」/ p145/p155/p169/p174/p201/p245「次元移位」/ p241/p242/p244/p245「异位」——加入待决议题 #14；原 B19 记录「19 文件 远转 canonical」实测仅 1 文件，统计错）/「幻象集」p129/p130（phantasmagoria 待决议题）
+
+### Batch 27 (pp.131-135, 2026-05-28 s17)
+- **p131** (2 处)：「《派斯凡 怪物核心》238」→「《**探路者怪物核心**》」+「《派斯凡 NPC 核心》86」→「《**探路者 NPC 核心**》」
+- **p132** (1 处)：「《战吼！》140」→「《**探路者战吼！**》」（major blazing banner，p122 sync）
+- **p133** (1 处)：「《派斯凡 怪物核心 2》102」→「《**探路者怪物核心 2**》」（叛教魔 deimavigga stat block）
+- **p134** (2 处)：「《派斯凡 NPC 核心》142」→「《**探路者 NPC 核心**》」+「《派斯凡 怪物核心》91」→「《**探路者怪物核心**》」
+- p135 深度复核 clean（沉言林之战渗透子系统 + BP 规则；阿雷戈堡 Fort Arego 项目内 canonical 一致）
+- 记录但不改：「誓嚎风灵」p134（oath howler；vs canonical「嚎天精」p004 ToC + p243 stat block；p112 Ch6 narrative 5+ 处用「誓嚎风灵」已建立 narrative variant；加入待决议题 #13——是否将 narrative variant 统一回 stat block canonical）/「精良连枷」/「精良反魔法半身板甲」/「精良生命药剂」p133（major elixir of life；待决议题 #12 精良 ambiguity）
+
 ## 已知待决议题（需用户决策后再批量改）
 
 1. **「异端魁首」vs「大异教官」**（Archheathen 同英文异译）
@@ -425,11 +449,24 @@
     - 需用户判断：是否批量改为「真实之语」
 
 12. **「精良」一词等阶冲突**（major/greater conflated，B23 暴露）
-    - 项目用「精良」既翻译 Major（major staff of tempest p113 / major dread ampoules p120 / major stalwart's banner p122 / major warpriest's cascade p122 / major antidote 早期改为「上等」B17）
-    - 也翻译 Greater（greater talonstrike blade p122 / greater staff of arcane might p121 / greater masquerade scarf p148 / greater nightmares p131 / greater swallow-spike leather B23 已改为「高等」）
+    - 项目用「精良」既翻译 Major（major staff of tempest p113 / major dread ampoules p120 / major stalwart's banner p122 / major warpriest's cascade p122 / major antidote 早期改为「上等」B17 / major elixir of life p133 / major resilient antimagic half-plate p133 / major blazing banner p132）
+    - 也翻译 Greater（greater talonstrike blade p122 / greater staff of arcane might p121 / greater masquerade scarf p148 / greater nightmares p131 / greater fireproof gloves p129 / greater striking flail p133 / greater swallow-spike leather B23 已改为「高等」）
     - 项目早期 B17 已将「大型解毒剂」（major antidote）改为「上等解毒剂」（major canonical = 上等）
     - 项目 B17-B23 已将「高级 X」（greater X）改为「高等 X」（greater canonical = 高等）
     - 但「精良」一词全本约 ~15 处仍并存（指 major 或 greater，需逐处看英文判断）
     - 需用户判断：是否将「精良」逐处按 major→上等 / greater→高等 拆分
+
+13. **Oath Howler 译名 narrative vs stat block 不一致**（B27 暴露）
+    - canonical「嚎天精」：p004 ToC + p243 stat block（B1 ToC 修正确立）
+    - narrative variant「誓嚎风灵」：p112 Ch6（5+ 处：题目/引介/stat block heading/treasure/development）+ p134（Ch7 BP 列表 1 处）
+    - 同一生物在 Ch6 narrative 与 Ch9 stat block 用不同译名
+    - 需用户判断：是否将「誓嚎风灵」统一回「嚎天精」（stat block canonical）
+
+14. **Translocate 法术译名多版本并存**（B26 暴露；原 B19 statistics 错误重新统计）
+    - 「远转」：p092 单文件（B19 记录称「19 文件项目惯例」实测仅 1 文件，统计错）
+    - 「次元移位」：p145/p155/p169/p174/p201/p245 共 6 文件（pf2_cn TM canonical）
+    - 「转移术」：p127/p128/p129/p130 共 4 文件（Ch7 phistophilus + Vorrea 法术列表）
+    - 「异位」：p241/p242/p244/p245 共 4 文件（魔鬼天生法术列表，部分附 translocate 注音）
+    - 4 种译法并存，pf2_cn canonical 是「次元移位」。需用户判断是否统一
 
 ---
