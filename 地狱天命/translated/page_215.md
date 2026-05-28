@@ -20,7 +20,7 @@
 
 **编号标记**（详见后页 216-218 文字描述）：
 
-- 1 — 大异教官守备宅（Archheathen's Garrison）
+- 1 — 异端魁首守备宅（Archheathen's Garrison）
 - 2 — 奥罗登要塞（Aroden's Redoubt）
 - 3 — 贝尔维里奥堡（Castle Belverio）
 - 4 — 伊索诺堡（Castle Issono）

@@ -28,11 +28,11 @@
 
 **祭司专注法术** 2 专注点，DC 41；10 环——「**号令之鞭**」（commanding lash，《探路者 玩家核心》380）、「**屈服之触**」（touch of obedience，《探路者 玩家核心》380）
 
-**已准备神圣法术** DC 41，攻击 +33；10 环——「**化身**」（avatar）、「**伤害术**」（harm，×6）；9 环——「**大屠杀**」（massacre）、「**亡者之嗥**」（wails of the damned）；8 环——「**神圣谕令**」（divine decree）、「**神圣自燃**」（divine immolation，×2）；7 环——「**蚀爆**」（eclipse burst）、「**能量护佑**」（energy aegis）、「**处决**」（execute）；6 环——「**误引**」（mislead）、「**斥力场**」（repulsion）、「**真实视觉**」（truesight）；5 环——「**放逐**」（banishment）、「**神圣自燃**」（divine immolation）、「**精灵守卫**」（spiritual guardian）；4 环——「**神圣之怒**」（divine wrath）、「**弃儿诅咒**」（outcast's curse）、「**暗示**」（suggestion）；3 环——「**致盲**」（blindness）、「**寒霜暗影**」（chilling darkness）、「**信仰危机**」（crisis of faith）；2 环——「**血仇**」（blood vendetta）、「**黑暗视觉**」（darkvision）、「**洞察无形**」（see the unseen）；1 环——「**祸患**」（bane）、「**魅惑**」（charm）、「**衰弱**」（enfeeble）；**戏法（10 环）** 「**眩晕**」（daze）、「**侦测魔法**」（detect magic）、「**神圣枪矛**」（divine lance）、「**护盾**」（shield）、「**虚能扭曲**」（void warp）
+**已准备神圣法术** DC 41，攻击 +33；10 环——「**化身**」（avatar）、「**伤害术**」（harm，×6）；9 环——「**大屠杀**」（massacre）、「**亡者之嗥**」（wails of the damned）；8 环——「**神圣谕令**」（divine decree）、「**神圣自燃**」（divine immolation，×2）；7 环——「**蚀爆**」（eclipse burst）、「**能量护佑**」（energy aegis）、「**处决**」（execute）；6 环——「**误引**」（mislead）、「**斥力场**」（repulsion）、「**真实视觉**」（truesight）；5 环——「**放逐**」（banishment）、「**神圣自燃**」（divine immolation）、「**精灵守卫**」（spiritual guardian）；4 环——「**神圣之怒**」（divine wrath）、「**弃儿诅咒**」（outcast's curse）、「**暗示**」（suggestion）；3 环——「**致盲**」（blindness）、「**寒霜暗影**」（chilling darkness）、「**信仰危机**」（crisis of faith）；2 环——「**血仇**」（blood vendetta）、「**黑暗视觉**」（darkvision）、「**洞察无形**」（see the unseen）；1 环——「**祸患**」（bane）、「**魅惑**」（charm）、「**力竭**」（enfeeble）；**戏法（10 环）** 「**眩晕**」（daze）、「**侦测魔法**」（detect magic）、「**神圣枪矛**」（divine lance）、「**护盾**」（shield）、「**虚能扭曲**」（void warp）
 
 **焚天打击**（Cast Down in Flames）　[1 个动作]（专注、法术塑形） 阿斯佩西娅——把——她——纯粹——的——信仰——之——力量——撞——下来——压向——一名敌人。如果——她——下一个——动作——是——施放——「**伤害术**」——以——伤害——一只生物——只要——目标——自——该法术——承受——任何伤害——便——会被——击为——「**伏地**」。如果——目标——在——抗——该法术——的——豁免——上——失败——它——也——会——承受 3d6 持续火焰伤害。
 
-**导引神圣打击**（Channel Smite）　[2 个动作]（神圣）；**所需** 阿斯佩西娅——耗去——一项——「**伤害术**」法术；**效果** 阿斯佩西娅——发起——一次——近战——一击。如果——命中——她——以——一项——1 个动作的——「**伤害术**」法术——伤害——目标。目标——自动——「**失败**」（如果——这——一击——是——重击——则——「**重击失败**」）。法术——以——这种方式——施放之时——不——具有——「**操控**」特征。
+**导引神圣打击**（Channel Smite）　[2 个动作]（神圣）；**所需** 阿斯佩西娅——耗去——一项——「**伤害术**」法术；**效果** 阿斯佩西娅——发起——一次——近战——一击。如果——命中——她——以——一项——1 个动作的——「**伤害术**」法术——伤害——目标。目标——自动——「**失败**」（如果——这——一击——是——重击——则——「**极佳失败**」）。法术——以——这种方式——施放之时——不——具有——「**操控**」特征。
 
 **致命简捷**（Deadly Simplicity） 阿斯佩西娅——以——她——的——钉头锤——造成 1d8 伤害——而非 1d6。
 
