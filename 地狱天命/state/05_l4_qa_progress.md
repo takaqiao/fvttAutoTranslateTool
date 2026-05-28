@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 150 |
+| 已完成 | 165 |
 | 进行中 | 0 |
-| 待处理 | 108 |
-| 最后批次 | Batch 30 pp.146-150 |
-| 下次起始页 | 151 |
+| 待处理 | 93 |
+| 最后批次 | Batch 33 pp.161-165 |
+| 下次起始页 | 166 |
 
 ## 处理顺序
 
@@ -56,8 +56,8 @@
 
 ### pp.150-199（Ch8-10）
 ```
-150:✅ 151:⏸ 152:⏸ 153:⏸ 154:⏸ 155:⏸ 156:⏸ 157:⏸ 158:⏸ 159:⏸
-160:⏸ 161:⏸ 162:⏸ 163:⏸ 164:⏸ 165:⏸ 166:⏸ 167:⏸ 168:⏸ 169:⏸
+150:✅ 151:✅ 152:✅ 153:✅ 154:✅ 155:✅ 156:✅ 157:✅ 158:✅ 159:✅
+160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:⏸ 167:⏸ 168:⏸ 169:⏸
 170:⏸ 171:⏸ 172:⏸ 173:⏸ 174:⏸ 175:⏸ 176:⏸ 177:⏸ 178:⏸ 179:⏸
 180:⏸ 181:⏸ 182:⏸ 183:⏸ 184:⏸ 185:⏸ 186:⏸ 187:⏸ 188:⏸ 189:⏸
 190:⏸ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
@@ -400,8 +400,40 @@
 - **p147** (2 处)：2x「琐碎 17」→「**轻微 17**」（TRIVIAL canonical, A4 图书馆 + A5 大公市长办公室 headings）
 - **p148** (2 处)：「地狱注册官（《派斯凡 NPC 核心》119）」→「《**探路者 NPC 核心**》」+「精英千贼（《派斯凡 怪物核心 2》6、313）」→「《**探路者怪物核心 2**》」
 - p149 深度复核 clean（伊维诺真身 swarm strider 千贼 / 烟囱危害 / 邪灵语 = TM canonical + 项目 6 文件 majority 一致，不是 outlier）
-- **p150** (1 处)：「两瓶高级解毒剂、四瓶高级生命药剂」→「**两瓶上等解毒剂、四瓶上等生命灵药**」（major antidote/elixir of life canonical, B17 上等 sync + greater elixir of life canonical 高等生命灵药 reasoning 也适用 major → 上等生命灵药）
+- **p150** (1 处)：「两瓶高级解毒剂、四瓶高级生命药剂」→「**两瓶上等解毒剂、四瓶上等生命灵药**」(major antidote/elixir of life canonical, B17 上等 sync + greater elixir of life canonical 高等生命灵药 reasoning 也适用 major → 上等生命灵药)
 - 记录但不改：「精良易容围巾」p148（greater masquerade scarf, 待决议题 #12）/ p116 「艾克洛语」实际是 outlier（B24 笔记关于 9 文件 habit 应改正为「邪灵语」6+ 文件 canonical）
+
+### Batch 31 (pp.151-155, 2026-05-28 s18)
+- p151 深度复核 clean（西冠城/Tolsis Ruvadorn/Aroden/玛门/盗贼议会/凯森提娅/阿尔卡巴诺斯 全部 canonical；Diabolic = 魔鬼语 与 term_map line 183 一致——B23 sync 11 页改为「地狱语」可能 backward，全本实测「魔鬼语」22+ stat block 主流，待决议题 #15）
+- p152 深度复核 clean（凯森提娅+阿尔卡巴诺斯背景 / 金活 Living Gold / Make an Impression = 建立印象 = pf2e_compendium canonical ✓ / Courtly Graces = 贵族风范 ✓ / Asmodean / 戈拉里翁 / 多塔里 ✓）
+- **p153** (1 处)：「**陪她做影**」→「**陪她做影子**」（漏字 typo，shadowing 意为做伴随影；做影 不成中文短语）
+- p154 深度复核 clean（丝缕信徒/封禁术=Sequester project-internal/心灵联络=mentally contact OK/Vapor Form = 汽化形体 ✓ / 杀人时装人偶 project-specific）
+- **p155** (1 处)：「**智识王冠**（crown of intellect）」→「**聪智皇冠**」（pf2e_compendium canonical 聪智皇冠）
+- 记录但不改：p155 effect trait 占视/揭示/探查（divination/revelation/scrying）vs pf2e_compendium canonical 占卜/启示/探知；项目 p052 用 侦测/揭示/窥伺，p118 用 占视，p155 用 占视/揭示/探查——3 套并存，待决议题 #16
+
+### Batch 32 (pp.156-160, 2026-05-28 s18)
+- p156 深度复核 clean（衣线卡缠/丝缕信徒袖与针/杀人时装人偶 stat / 配饰武装 全部 project-internal canonical；语言列表 邪灵语/通用语/魔鬼语 ✓ term_map）
+- **p157** (4 处)：「莉安娜·楚奇」→「**莉安妮·楚奇**」（项目 3 文件 canonical 莉安妮，p157 source 含 typo Lianna）+「阿伐斯坦（Avistan）」→「**阿维斯坦**」（term_map line 85）+「琐碎 17」→「**轻微 17**」（B4 工坊 heading TRIVIAL canonical B30 sync）+「**高级治疗药剂**（greater healing potions）」→「**高等治疗药水**」（pf2e_compendium canonical Healing Potion Greater，B17 + B30 sync）
+- **p158** (1 处)：「智识王冠」→「**聪智皇冠**」（与 p155 同步 crown of intellect canonical）
+- p159 深度复核 clean（卡尔泰萨·伊伊斯 Kaltessa Iyis 新 NPC 开篇 / 玛门高阶女祭司 20）
+- **p160** (2 处)：「忆识」→「**回忆知识**」（Recall Knowledge canonical, B19 sync）+「黑暗之王」→「**黑暗亲王**」（Prince of Darkness wiki canonical, 项目仅 p160 单页 outlier）
+- 记录但不改：p158 Alcabanoth 领域法术名「点燃野心/武器涌动/斗志狂热」vs pf2_compendium canonical「燃起野心/激发武器/狂热待战」（仅 p156/p158 出现的 stat block project-internal，与 p234 Advodaza 主 stat 同步性待 B47 检查时核）
+
+### Batch 33 (pp.161-165, 2026-05-28 s18)
+- **p161** (2 处)：2x「**短讯术卷轴**」→「**传讯术卷轴**」（scroll of sending；sending canonical 传讯术 per pf2_cn，B29 sync）
+- p162 深度复核 clean（埃戈里安城/斯戎登基/阿迪维安河/哀愁湖/议和圆环/MODERATE 18=中等 18 canonical 正确）
+- p163 深度复核 clean（追逐遭遇 6 障碍 / 拉多尔佛 / 长市集 / 琳奈塔 / 市长大人格拉吉乌斯·阿拉扎里奥 全部 project-internal）
+- p164 深度复核 clean（FORCE AND FLAME 陷阱 / 玛伊蕾·费兰 / 黛丝娜 / 地狱火多头蛇）
+- p165 深度复核 clean（地狱火多头蛇 stat / Hellfire Hydra 19 / 头部再生+地狱火再生 异能 / 反应之头 / 邪秽之热 全部 project canonical）
+- 记录但不改：5 项 widespread Ch9-onwards translator habit 加入待决议题 #17：
+  - **知觉 vs 察觉**（Perception）：p161/p162/p163/p165/p168-p202 共 15 文件用「知觉」，canonical「察觉」
+  - **体操 vs 特技**（Acrobatics）：p109/p117/p122/p163/p165/p169/p176/p178/p186/p188/p194/p196/p198/p201 共 14 文件用「体操」，canonical「特技」
+  - **绝佳成功 vs 极佳成功**（critical success）：p160/p162/p164/p165/p169/p171/p174 共 7 文件用「绝佳成功」 vs 8 文件用「极佳成功」（split 50/50）
+  - **格拉利昂 vs 戈拉里翁**（Golarion）：p008/p161/p188/p193/p198/p200/p202 共 7 文件用「格拉利昂」 vs 17 文件用「戈拉里翁」（term_map canonical 戈拉里翁）
+  - 4 项均为 Ch9+ 译者习惯漂移，逐项 batch fix 风险高 + 量大；记录后等用户判断是否批量统一
+
+### 跨页统一（与 Batch 32 同步：greater healing potion canonical）
+- **p080**：1 处「3 瓶高级治疗药水」→「**3 瓶高等治疗药水**」（与 p157 同步，project canonical 高等治疗药水 per p060/p068 主流）
 
 ## 已知待决议题（需用户决策后再批量改）
 
@@ -493,5 +525,24 @@
     - 「转移术」：p127/p128/p129/p130 共 4 文件（Ch7 phistophilus + Vorrea 法术列表）
     - 「异位」：p241/p242/p244/p245 共 4 文件（魔鬼天生法术列表，部分附 translocate 注音）
     - 4 种译法并存，pf2_cn canonical 是「次元移位」。需用户判断是否统一
+
+15. **Diabolic 语言译名**（B31 暴露；B23 sync 可能 backward）
+    - 「魔鬼语」：term_map line 183 canonical (wiki)；实际项目 22+ stat block (p014/p028/p038/p043/p046/p049/p050/p064/p076/p156/p165/p168-p251 等) 主流
+    - 「地狱语」：B23 sync 改 11 narrative 页（p046/p049/p050/p064/p076/p097/p105/p114/p116/p128/p129/p133/p139）
+    - 项目主流是 term_map canonical「魔鬼语」，B23 narrative sync 可能反向；需用户判断是否回退 11 narrative 页至「魔鬼语」（恢复全本一致）
+
+16. **effect trait 占视/揭示/探查 三套并存**（B31 暴露 p155）
+    - p155 用 占视（divination）/ 揭示（revelation）/ 探查（scrying）
+    - p052 用 侦测（detection）/ 揭示（revelation）/ 窥伺（scrying）
+    - p118 用 占视（Telescopic Scrying 法术）
+    - pf2e_compendium canonical：占卜（divination 学派）/ 启示（revelation）/ 探知（scrying，B30 detect scrying = 侦测探知 已 sync）
+    - 项目 effect trait 翻译完全分散，需用户判断 canonical 形式（特别是 scrying = 探知 vs 窥伺 vs 探查）
+
+17. **Ch9+ 译者习惯漂移 4 项**（B33 暴露；均 widespread 7-15 文件单字差异）
+    - **知觉 vs 察觉**（Perception）：15 文件 Ch9-onwards 用「知觉」 vs canonical「察觉」
+    - **体操 vs 特技**（Acrobatics）：14 文件用「体操」 vs canonical「特技」
+    - **绝佳成功 vs 极佳成功**（critical success）：7 文件 Ch9+ 绝佳 vs 8 文件 Ch7-8 极佳（50/50 split）
+    - **格拉利昂 vs 戈拉里翁**（Golarion）：7 文件 用 格拉利昂 vs 17 文件 戈拉里翁（term_map canonical 戈拉里翁）
+    - 均为 widespread Ch9+ translator habit；项目早期 Ch1-8 与晚期 Ch9-11 译者习惯差异；需用户判断是否批量统一为 canonical
 
 ---
