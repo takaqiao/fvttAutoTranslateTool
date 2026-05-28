@@ -13,11 +13,11 @@
 | 指标 | 数 |
 |---|---|
 | 总页数 | 258 |
-| 已完成 | 190 |
+| 已完成 | 195 |
 | 进行中 | 0 |
-| 待处理 | 68 |
-| 最后批次 | Batch 38 pp.186-190 |
-| 下次起始页 | 191 |
+| 待处理 | 63 |
+| 最后批次 | Batch 39 pp.191-195 |
+| 下次起始页 | 196 |
 
 ## 处理顺序
 
@@ -60,7 +60,7 @@
 160:✅ 161:✅ 162:✅ 163:✅ 164:✅ 165:✅ 166:✅ 167:✅ 168:✅ 169:✅
 170:✅ 171:✅ 172:✅ 173:✅ 174:✅ 175:✅ 176:✅ 177:✅ 178:✅ 179:✅
 180:✅ 181:✅ 182:✅ 183:✅ 184:✅ 185:✅ 186:✅ 187:✅ 188:✅ 189:✅
-190:✅ 191:⏸ 192:⏸ 193:⏸ 194:⏸ 195:⏸ 196:⏸ 197:⏸ 198:⏸ 199:⏸
+190:✅ 191:✅ 192:✅ 193:✅ 194:✅ 195:✅ 196:⏸ 197:⏸ 198:⏸ 199:⏸
 ```
 
 ### pp.200-258（Ch11 + 战役之外 + 寇兰廷续 + 贵族 + 工具箱）
@@ -507,6 +507,15 @@
   - 「**顶级加固高级精金盾**」→「**上等加固高等精金盾**」（major reinforcing high-grade adamantine shield; major = 上等 + high-grade = 高等 per B35 p172 sync）
   - 「+2 高级强击 钉头锤」→「**+2 高等强击 钉头锤**」（greater striking mace; greater = 高等）
 - **p190** (1 处)：「**反魔法之油**」→「**反魔油**」（antimagic oil canonical pf2e_compendium, p190 唯一一处）
+
+### Batch 39 (pp.191-195, 2026-05-28 s19)
+- **p191** (2 处)：「+3 高级 韧性 胸甲」→「**+3 上等 韧性 胸甲**」（major resilient breastplate, major = 上等）+ 「**严酷 19**」→「**严峻 19**」（SEVERE 19 canonical 待决议题 #6）
+- p192/p193 深度复核 clean（B8 宝藏巢穴坎达鲁决战 + 通往地狱门户 + 第十一章开篇）
+- **p194** (1 处)：「**亚罗登信徒**」→「**奥罗登信徒**」（Aroden 项目 28 文件 majority canonical, p194 single instance outlier per B37 sync）
+- **p195** (5 处)：4 项 Daidian Ruel 背景资讯 + Aroden 一致性 + Recall Knowledge canonical
+  - 3x「**亚罗登**」→「**奥罗登**」（Aroden 项目 canonical, p195 三处 narrative outlier per B37 sync）
+  - 「**忆识**」→「**回忆知识**」（Recall Knowledge canonical, B19 sync, p195 single instance outlier）
+  - 「**琐碎**」→「**轻微**」（TRIVIAL canonical, B19 sync 数页 heading 已修, p195 单字 narrative 同步）
 
 ## 已知待决议题（需用户决策后再批量改）
 
