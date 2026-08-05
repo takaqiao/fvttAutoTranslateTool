@@ -18,6 +18,22 @@
 4. 转 ember：lang 47 key + 6 个零汉化小包 → 发 1.1.0
 5. ember 战役正文（分多会话）
 
+### git 状态（2026-08-06）
+
+两个插件仓库的改造与汉化**已合入各自 main，但尚未 push**。
+
+| 仓库 | main 现在 | 改造前的 main（还原点） | 保留的分支 |
+|---|---|---|---|
+| `2-Crucible汉化插件` | `ea8783e` | **`085bfe6`** | `feat/babele-2.9.1-crucible-0.10.1` |
+| `1-Ember汉化插件` | `ffe7f19` | **`cf58b4f`** | `feat/babele-2.9.1-pipeline` |
+
+要回退到改造前：`git reset --hard <还原点>`。
+
+**发版流程只由 tag 触发**（`0.9.0` / `v1.1.0` 这类），push main **不会**发布任何东西。
+所以 push 是安全的；但**打 tag 前必须先做冒烟验证**。
+
+项目本身（PROJECT.md + 脚本 + 术语表）已提交进 `Desktop\fvtt` 仓库 `b17a5f4`。
+
 **翻译时必须遵守的既定译名**（避免和已完成的 11 个包冲突）：
 `Kinesis`念力 · `Warden`守林者 · `Guardian`守护者 · `Swarm`(archetype)群集 · `Tier`阶 ·
 `Electricity`电力 · `Bludgeoning`钝击 · `Fire`火焰 · `Corruption`腐化 · `Fortitude`坚韧防御 ·
