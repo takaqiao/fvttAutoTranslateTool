@@ -1,0 +1,121 @@
+{
+  "_note": "旧译文把 enricher 写成裸文字时用过的各种说法 → 应还原成的 enricher。restore_enrichers.py 在按 lang 译名匹配失败后会试这里的写法。键是译文里的原样片段（含标签），顺序从长到短匹配。",
+  "@Action[default reactiveStrike]": [
+    "<strong>脱离交战打击</strong>",
+    "<strong>脱离打击</strong>",
+    "<strong>脱离攻击</strong>",
+    "脱离交战打击",
+    "脱离打击"
+  ],
+  "@Action[default recover]": [
+    "<strong>恢复</strong>动作",
+    "<strong>恢复</strong>"
+  ],
+  "@Action[default rest]": [
+    "<strong>休息</strong>动作",
+    "<strong>休息</strong>"
+  ],
+  "@Action[default defend]": [
+    "<strong>防御</strong>动作"
+  ],
+  "@Condition[insane]": [
+    "<strong>疯狂</strong>",
+    "疯狂状态"
+  ],
+  "@Condition[incapacitated]": [
+    "<strong>失能</strong>",
+    "失能状态"
+  ],
+  "@Condition[restrained]": [
+    "<strong>受缚</strong>",
+    "受缚状态"
+  ],
+  "@Condition[prone]": [
+    "<strong>倒地</strong>",
+    "倒地状态"
+  ],
+  "@Condition[weakened]": [
+    "<strong>减弱</strong>",
+    "<strong>虚弱</strong>"
+  ],
+  "@Condition[stunned]": [
+    "<strong>震慑</strong>",
+    "震慑状态"
+  ],
+  "@Condition[blinded]": [
+    "<strong>目盲</strong>",
+    "目盲状态"
+  ],
+  "@Condition[flying]": [
+    "<strong>飞行</strong>",
+    "飞行状态"
+  ],
+  "@Condition[irradiated]": [
+    "<strong>辐照</strong>",
+    "辐照状态"
+  ],
+  "@Rule[action.difficult]": [
+    "<strong>困难</strong>"
+  ],
+  "@Rule[action.weakened]": [
+    "<strong>虚弱</strong>",
+    "<strong>减弱</strong>"
+  ],
+  "@Rule[action.thrown]": [
+    "<strong>投掷</strong>"
+  ],
+  "@ref[actor.name]{生物}": [
+    "该<strong>生物</strong>",
+    "<strong>该生物</strong>"
+  ],
+  "@Rule[condition.stunned]": [
+    "<strong>眩晕</strong>"
+  ],
+  "_note2": "12 个符文熟练度天赋的「试玩测试说明」里都引用了该符文的动作，译文一律写成了加粗裸文字",
+  "@Action[Compendium.crucible.talent.Item.runeControl00000 motivate]": [
+    "<strong>激励</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeDeath0000000 ennervate]": [
+    "<strong>失神术</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeEarth0000000 mould]": [
+    "<strong>塑形</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeFlame0000000 enkindle]": [
+    "<strong>引燃</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeFrost0000000 condense]": [
+    "<strong>凝结</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeIllumination reveal]": [
+    "<strong>揭示</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeIllusion0000 seeming]": [
+    "<strong>表象</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeKinesis00000 propel]": [
+    "<strong>推进</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeLife00000000 bloom]": [
+    "<strong>绽放 </strong>",
+    "<strong>绽放</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeOblivion0000 erase]": [
+    "<strong>擦除 </strong>",
+    "<strong>擦除</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.runeSoul00000000 evoke]": [
+    "<strong>引发 </strong>",
+    "<strong>引发</strong>"
+  ],
+  "@Action[Compendium.crucible.talent.Item.counterspell0000 counterspell]": [
+    "反制法术尝试"
+  ],
+  "_note3": "Gesture: Create / Conjure 的试玩说明里，召唤物链接被写成了加粗的中文名",
+  "@UUID[Compendium.crucible.summons.Actor.RuNh1bFGiHKdHeKI]": [
+    "<strong>火焰精灵</strong>"
+  ],
+  "@UUID[Compendium.crucible.summons.Actor.AlwoqQKoL1BnnZjd]": [
+    "<strong>火焰访客</strong>"
+  ]
+}

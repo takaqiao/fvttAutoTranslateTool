@@ -1,0 +1,121 @@
+[
+  {
+    "term": "Shocked(状态) 让位",
+    "en": "[Ss]hocked",
+    "canonical": "感电",
+    "variants_re": [
+      "电击(?=效果)",
+      "电击(?=状态)",
+      "(?<=施加)电击",
+      "(?<=陷入)电击"
+    ],
+    "note": "Electricity 定为「电击」后，状态 Shocked 必须改名，否则伤害类型与状态撞名。必须排在 Electricity 前面。"
+  },
+  {
+    "term": "Electricity",
+    "en": "\\bElectricity\\b",
+    "canonical": "电击",
+    "variants_re": [
+      "电力(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "电能(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "闪电(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "(?<=<strong>)(?:电力|电能|闪电)(?=</strong>)",
+      "(?<=<p>)(?:电力|电能|闪电)(?=</p>)"
+    ],
+    "note": "只在「伤害类型」搭配里替换。`原始电能的混沌之力` 里的电能译自 electrical energy，不能动；`一道闪电冲击` 译自 a blast of lighting，也不能动。"
+  },
+  {
+    "term": "Radiant",
+    "en": "\\bRadiant\\b",
+    "canonical": "光耀",
+    "variants_re": [
+      "(?:辉光|光辉)(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "(?<=<strong>)(?:辉光|光辉)(?=</strong>)",
+      "(?<=<p>)(?:辉光|光辉)(?=</p>)"
+    ],
+    "note": "正文多数用光耀；辉光/光辉两个词互相太像"
+  },
+  {
+    "term": "Psychic",
+    "en": "\\bPsychic\\b",
+    "canonical": "灵能",
+    "variants_re": [
+      "(?:心灵|精神)(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "(?<=<strong>)(?:心灵|精神)(?=</strong>)",
+      "(?<=<p>)(?:心灵|精神)(?=</p>)",
+      "^心灵(?=啃咬|肢|巨口)"
+    ],
+    "note": "`针对其心灵的攻击` 里的心灵译自 mind，不能动；只改伤害类型搭配与条目名"
+  },
+  {
+    "term": "Poison(伤害类型)",
+    "en": "\\bPoison\\b",
+    "canonical": "毒素",
+    "variants_re": [
+      "毒药(?=\\s*(?:</strong>)?\\s*(?:伤害|抗性|抗力|转换|转化|吸收|易伤))",
+      "(?<=<strong>)毒药(?=</strong>)",
+      "(?<=<p>)毒药(?=</p>)"
+    ],
+    "note": "毒药指物（Poison Vial 毒药瓶 保持不动），只有伤害类型改成毒素；状态 Poisoned 保持「中毒」"
+  },
+  {
+    "term": "Tier",
+    "en": "\\bTier",
+    "canonical": "阶",
+    "variants": [
+      "阶级",
+      "阶位"
+    ],
+    "note": "第 8 节既定：阶"
+  },
+  {
+    "term": "Tier·行文收尾（N个阶）",
+    "en": "\\bTier",
+    "canonical": "\\1 阶",
+    "variants_re": [
+      "([0-9一二三四五六]+)个阶(?=</strong>)"
+    ],
+    "note": "「1个阶」读着别扭，改成「1 阶」"
+  },
+  {
+    "term": "Tier·行文收尾（每个阶）",
+    "en": "\\bTier",
+    "canonical": "每",
+    "variants_re": [
+      "每个(?=<strong>阶</strong>)"
+    ],
+    "note": "「每个阶」→「每阶」"
+  },
+  {
+    "term": "Presence",
+    "en": "\\bPresence\\b",
+    "canonical": "存在",
+    "variants": [
+      "魅力",
+      "风度",
+      "灵识"
+    ],
+    "exclude_paths": [
+      "formidablePresence"
+    ],
+    "note": "第 1 节既定：存在。条目名 Formidable Presence 里的 presence 是「气场」的日常义，单独处理（Dread Lord 的 formidablePresence 动作名单独改成「威严气场」）"
+  },
+  {
+    "term": "essence",
+    "en": "[Ee]ssence",
+    "canonical": "精华",
+    "variants": [
+      "精髓"
+    ],
+    "note": "第 8 节既定：精华"
+  },
+  {
+    "term": "Wisdom",
+    "en": "\\bWisdom\\b",
+    "canonical": "感知",
+    "variants": [
+      "智慧"
+    ],
+    "note": "第 1 节既定：感知"
+  }
+]
