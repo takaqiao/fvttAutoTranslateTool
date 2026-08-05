@@ -894,6 +894,31 @@ lang 侧独立处理：`DAMAGE.*` 三个标签、`Tier` 名词形态统一为**�
 
 ---
 
+### 2026-08-06 · 阶段 9：ember.character 收尾（自动循环第 2 轮）
+
+**做完的**：`ember.character` 274 条 → **100%**。漂移 0，外来文字 0。
+内容是 11 个同调 × 5 阶（含阶位效果）、16 个血统、16 种文化、77 项特性/道途，以及 9 条描述。
+
+**判断与决议**
+
+1. **同调阶位命名格式**定为 `灵气 5：飓风 Aura 5: Hurricane` —— 中文用全角冒号，
+   英文原名整体后缀，与 §8「专有名词双语并列」一致。
+2. **血统与文化沿用 compendium 已有的双语译名**（阿尔提拉 Altyra / 龙裔 Drakon /
+   印记裔 Signborn / 荆芽灵 Thornling / 疾行者 Strider …），没有另起炉灶。
+3. **上游有两处拼写笔误**：`Heart 4: Verdant` 的效果键是 `Verdent`，
+   `Orbis 3: Frenzied` 的效果键是 `Frenizied`。键必须照抄，否则 babele 匹配不上；
+   译文按正确词义给（苍翠 / 狂乱）。
+4. **补齐了上一轮的风格不一致**：阶段 8 那四个包的条目名当时写成了纯中文，
+   而 ember 既有译文（以及 crucible）的惯例是条目名双语并列。已把 44 个条目名改为双语
+   （`万花筒困惑 Kaleidoscopic Confusion` 这种形式）。子字段如 `adjective` 保持纯中文，
+   与 crucible.affixes 的做法一致。
+5. 文件夹名服从既定术语，而非 compendium 里的旧写法：`Ancestries` 用**血统**（不是祖裔）、
+   `Attunements` 用**同调**（不是调谐）—— 战役包里还残留着旧写法，列入后续清扫。
+
+**ember 进度**：13594 / 35157 = 39%；6 个小包里已完成 5 个。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -918,11 +943,13 @@ lang 侧独立处理：`DAMAGE.*` 三个标签、`Tier` 名词形态统一为**�
 | 9 | **真实 Foundry 世界冒烟验证**（管线改造后必做） | ⬜ **下一步** |
 | 7 | ember_cn **`lang/cn.json`** 47 新 key + 3 未译 | ✅ 完成（阶段 7，486 键缺口 0） |
 | 7a | └ ember 小包：effects ×2 / affixes / items | ✅ 完成（4 包 100%） |
-| 7a2 | └ ember 小包：character(274) / crucible-character(80) / crucible-adversary(99) | ⬜ **下一步** |
+| 7a2 | └ ember 小包：character(274) | ✅ 完成（100%） |
+| 7a3 | └ ember 小包：crucible-character(80) / crucible-adversary(99) | ⬜ **下一步** |
 | 7b | └ **Ember 硬编码字符串补丁**（148 条 / 13 类，babele 够不到） | ⬜ 新工作项，见阶段 7 |
 | 7c | └ **字体替换**：Pirate Scroll / Vollkorn 均无 CJK 字形，中文标题会崩 | ⬜ 新工作项，发版前必做 |
 | 8 | ember 战役正文分批翻译 | ⬜ 分多会话 |
 | 8a | └ 已译 65% 的历史缺陷修复（LINK 827 / BLOCK 592 / TRUNCATED 80） | ⬜ 工具可复用 crucible 那套 |
+| 8b | └ 战役包里 祖裔→血统 / 调谐→同调 的残留清扫 | ⬜ 可用 unify_terms.py |
 
 ### crucible compendium：✅ 已完成，不必再动
 
