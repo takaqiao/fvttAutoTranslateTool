@@ -7,16 +7,18 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**当前状态**：阶段 0–4 完成。管线已改造到 babele 2.9.1 声明式映射，工具链就绪，
-**crucible 的 15 个合集包全部译完（残余 0）**。
+**当前状态**：阶段 0–6 完成。管线已改造到 babele 2.9.1 声明式映射，工具链就绪，
+**crucible 的 15 个合集包全部译完（残余 0）**，**`lang/cn.json` 1842 键全部译完（缺口 0）**。
+crucible-cn 侧只剩冒烟验证与发版。
 
 **下一步**（按顺序）：
-1. **crucible `lang/cn.json`** —— 补 293 个新 key + 11 处英文改动 + 15 条未译。
-   明细：`5-其他内容/reports/crucible/lang_gap.json`
-2. **冒烟验证** —— 见本节末尾。这是唯一无法靠脚本证实的环节。
-3. 发 crucible-cn **0.9.0**
-4. 转 ember：lang 47 key + 6 个零汉化小包 → 发 1.1.0
-5. ember 战役正文（分多会话）
+1. **冒烟验证** —— 见本节末尾。这是唯一无法靠脚本证实的环节，只能在真实 Foundry 世界里做。
+2. 发 crucible-cn **0.9.0**
+3. 转 ember：lang 47 key + 6 个零汉化小包 → 发 1.1.0
+4. ember 战役正文（分多会话）
+
+全库术语已统一，规则正文的整段漏译已补齐（见阶段 6）。剩下的 BLOCK / INLINE 漂移属观感层面，
+不影响功能，可与冒烟验证一起决定要不要在本版处理。
 
 ### git 状态（2026-08-06）
 
@@ -45,6 +47,12 @@
 
 ```powershell
 $P = "C:\Users\Taka\Desktop\fvtt\Ember-Crucible Translation Project"
+$SYS = "$env:LOCALAPPDATA\FoundryVTT\Data\systems\crucible"
+
+# 0. lang 缺口（与 compendium 相互独立的一条线；当前为 0）
+python "$P\3-常用脚本\qa\lang_gap.py" --repo "$P\2-Crucible汉化插件" --package $SYS --out "$P\5-其他内容\reports\crucible"
+#    翻完回写： apply_lang.py --repo <repo> --package $SYS --batch <batch.json> [--clean-stale]
+#    翻完之后再 lang_gap.py --sync-baseline，把 <repo>\lang\en.json 更新成新版基准
 
 # 1. 看当前缺口 + 生成待译清单
 python "$P\3-常用脚本\qa\validate_translations.py" --repo "$P\2-Crucible汉化插件" --out "$P\5-其他内容\reports\crucible"
@@ -107,15 +115,17 @@ crucible 侧两条都用；ember 侧两条也都用。
 
 **crucible 0.10.1**
 
-| 项 | 数量 |
-|---|---|
-| lang 新增 key | 293 |
-| lang 英文原文改动 | 11 |
-| lang 未译（cn == en） | 15 |
-| compendium 新增条目 | 132（含整包 `adversary-equipment` 53 条） |
-| compendium 失效条目 | 4 |
-| compendium 叶级覆盖率 | 88%（4238 串中 3745 已译） |
-| **compendium 待译** | **493 串 / 7.8 万字符** |
+| 项 | 数量 | 现状 |
+|---|---|---|
+| lang 新增 key | 293 | ✅ 阶段 5 已补 |
+| lang 英文原文改动 | 11 | ✅ 阶段 5 已重翻 |
+| lang 未译（cn == en） | 15 | ✅ 13 条已译，2 条有意保留 |
+| compendium 新增条目 | 132（含整包 `adversary-equipment` 53 条） | ✅ 阶段 3–4 已补 |
+| compendium 失效条目 | 4 | ✅ |
+| compendium 叶级覆盖率 | 88%（4238 串中 3745 已译） | → 97%（4556/4717），真实残余 0 |
+| **compendium 待译** | **493 串 / 7.8 万字符** | ✅ 完成 |
+
+> 这张表是阶段 0 的初测数据，保留用于对照。用完整基准重算后的准确数字见阶段 3 的关键发现 2。
 
 **ember 0.6.0**（战役包 `ember.crucible-adventure`，16065 条可译串，已完成 39%）
 
@@ -254,6 +264,11 @@ Ember-Crucible Translation Project\
 | `release/generate_runtime.mjs` | 由上面两个文件**生成**两个仓库的 `babele-mappings.js` | `node generate_runtime.mjs` |
 | `tm/build_glossary.py` | 合成 `glossary_ec.json`，并产出待裁决 / 待补清单 | `python build_glossary.py` |
 | `qa/validate_translations.py` | **核心验收**：拿英文基准逐路径核对译文，输出覆盖率 + 机读待译清单 | `python validate_translations.py --repo <repo> --out <报告目录>` |
+| `qa/lang_gap.py` | `lang/cn.json` 的三方 diff：NEW / DRIFT / UNTRANSLATED / STALE | `python lang_gap.py --repo <repo> --package <foundry包> --out <报告目录> [--sync-baseline]` |
+| `qa/apply_lang.py` | lang 批次回写。四道闸：key 不存在 / 占位符 / HTML 标签 / 行内标记；`--clean-stale` 清上游已删的 key | `python apply_lang.py --repo <repo> --package <foundry包> --batch <batch.json> [--clean-stale] [--dry]` |
+| `qa/unify_terms.py` | 按规则表统一术语。只在**英文原文确实出现该术语**时才改，支持正则搭配限定 | `python unify_terms.py --repo <repo> [--package <foundry包>] --rules <rules.json> [--review <md>] [--write]` |
+| `qa/scan_markup_drift.py` | 扫译文与英文的标记差异：LINK / BLOCK / INLINE / PLACEHOLDER / TRUNCATED | `python scan_markup_drift.py --repo <repo> [--kind LINK,TRUNCATED] [--out <json>]` |
+| `qa/restore_enrichers.py` | 把被写成裸中文的 `@Condition[...]` 等标记还原回去 | `python restore_enrichers.py --repo <repo> --package <foundry包> --surface-forms <json> [--write]` |
 | `qa/resolve_generic_fallback.py` | 从待译数字里**扣掉 babele 会自动解析的部分**。翻译前必跑，否则重复劳动 | `python resolve_generic_fallback.py --repo <repo>` |
 | `qa/apply_translations.py` | 批量回写译文。三道闸：英文源漂移 / 无中文 / 标记破损 一律拒 | `python apply_translations.py --repo <repo> --pack <pack.json> --batch <batch.json> [--force] [--dry]` |
 | `qa/scan_foreign_script.py` | 扫外来文字污染（西里尔 / 亚美尼亚 / 希伯来 / 泰文等机翻残留） | `python scan_foreign_script.py --repo <repo> [--repo <另一个>] [--fix]` |
@@ -331,7 +346,13 @@ python "$P\3-常用脚本\qa\resolve_generic_fallback.py"   --repo <repo>
 python "$P\3-常用脚本\qa\scan_foreign_script.py"        --repo <repo>
 # 3. 孤儿译文（上游改名/删除后失效的条目）
 python "$P\3-常用脚本\qa\port_orphans.py"               --repo <repo> --rules <rules.json> --dry
+# 4. lang 缺口（NEW/DRIFT/UNTRANSLATED/STALE 应全为 0）
+python "$P\3-常用脚本\qa\lang_gap.py"                   --repo <repo> --package <foundry包> --out <reportDir>
 ```
+
+> `port_orphans.py` 只搬路径、不改译文内容。上游改名后**译文里的旧名字不会自动更新** ——
+> `Rune: Lightning`→`Rune: Storm` 就是这么留下 28 处「闪电」的。改名类 drift 处理完必须回头
+> 搜一遍旧名字。
 
 ### 5.5 发版
 
@@ -632,6 +653,247 @@ Longbow…）都能在已 100% 的 `crucible.talent` / `equipment` 里找到，
 
 ---
 
+### 2026-08-06 · 阶段 5：crucible lang 收官 + 一批硬错误
+
+**范围**：把 `lang/cn.json` 补齐到 0 缺口；顺带清掉 lang 与 compendium 里几处会真正出错的东西。
+
+**做了什么**
+
+*工具*
+- 新增 `3-常用脚本/qa/lang_gap.py`（lang 的三方 diff，此前只有一次性探针，结果无法复现）
+  与 `3-常用脚本/qa/apply_lang.py`（lang 版的回写闸门）。
+  `2-Crucible汉化插件/lang/lang_keep_english.json` 记录**有意保留英文**的 key（DC / ∞ / ??? 等），
+  避免它们每轮都被报成「未译」。
+
+*lang 翻译*
+- NEW 293 条、DRIFT 11 条、UNTRANSLATED 15 条（其中 2 条判定为有意保留）全部处理完
+- STALE 32 条清除。其中 22 条是上游把 `ACTION.TABS.Description` 之类改成小写键
+  （`ACTION.TABS.description`），旧译文可直接复用
+- `<repo>/lang/en.json` 基准同步到 0.10.1。复验：1842 键，四类缺口全为 0
+
+*本轮新译里值得记的判断*
+- `DEFENSES.Madness`/`Wounds` 上游改名为 `Rallying Threshold`/`Healing Threshold`
+  → 集结阈值 / 治疗阈值（`RESOURCES.Madness`/`Wounds` 仍是疯狂 / 创伤，两者是不同的东西）
+- 新增的 `HAZARD.*`（38 条）按 compendium 既有译法用「危害」；`Danger Level` = 危险等级
+- `ITEM.COMPOSED_NAME` 前后缀改成中文语序：前缀 `{prefixes}{name}`、后缀 `{name}·{suffixes}`
+
+*lang 既有缺陷清扫（58 条）*
+- 垃圾标记：`授予里程碑"}`、`Crucible 血统卡##`、`受训#endregion`
+- 日文汉字：`支配状態` → 支配
+- 半汉化：三条资源提示里的 `Toughness/Strength/Presence/Wisdom` 仍是英文
+- 硬伤误译：`Major`→少校（军衔）、`Block {block}`→区、`Affix`→镶嵌、`Glance`→一瞥、
+  `Brute`→蛮汉、`Consume`→吞吃、`Engaging`→啮合、`Composed`（作曲）、`Repellent`→驱避剂、
+  `Attractive`→迷人的、`Crucible Skill`→坩埚技能
+- `SPELL.INFLECTIONS.NegateAdj` 的值是**一整段效果描述**（英文只是 "Negated"）
+- 既定译名回归：`Restrained` 受拘束→受缚、`Signature` 签名→招牌、critical hit 重击→暴击、
+  `Fortitude` 坚韧→**坚韧防御**（根治与 `Toughness` 的撞名）
+
+*compendium 硬错误（49 条 / 89 处替换，脚本见 `4-临时脚本/2026-08-06/fix_storm_inflection_batches.py`）*
+1. **rules「符文」页的 `@Embed[...runeLightning000...]` 是坏链** —— 上游已把该物品改名为
+   `runeStorm0000000`，译文里的 id 从未跟着改，玩家看到的是一个加载不出来的嵌入块
+2. **Surgeweaver 的 Shocked 持续时间译错**：英文 3 Rounds，译文写成 1 轮（4 处，规则数值错误）
+3. **`six-foot radius` 译成「六码 / 六码尺」**（3 处，单位错误）
+4. `Storm Proficiency` 的译文把 `@Action[...]` 链接替换成了 `<strong>充能</strong>`，链接丢失
+5. `Rune: Lightning`→`Rune: Storm` 改名的遗留：8 个条目名仍写着「符文：闪电 Rune: Lightning」，
+   20 处正文仍称「闪电符文」
+6. `Inflection` 在 talent 包被译成「词缀」，与 `Affix`（词缀）完全撞名 —— 11 个条目名，
+   统一为「屈折：X」，X 采用 affixes 包 `adjective` 的用词（编构/限定/遁避/延展/否定/拉拽/推挤/迅捷/反应/重塑）
+7. `Gesture: Sense` 译文末尾多一段英文早已删除的「试玩测试说明」
+8. rules「施法总览」页机翻残留「加速 箭头 of 火焰」
+
+**关键发现**
+
+1. **`port_orphans.py` 只搬路径、不改内容。** 改名类 drift 处理完，译文里的旧名字会原样留下 ——
+   `Rune: Storm` 这一处就留了 28 个「闪电」和 8 个 `Rune: Lightning` 后缀。已写进第 5.4 节例行检查。
+2. **markup 闸门能倒查出既有译文的缺陷。** 这轮 `--force` 回写时被拦下 4 条，全是**本来就坏的**：
+   多包一层 `<strong>`、丢掉 `@Action` 链接、多一段英文没有的正文。
+   → 用 apply 工具重写一遍旧译文，本身就是一次结构体检。
+3. **`lang_gap.py` 的 UNTRANSLATED 判据需要白名单**，否则 `DC`、`∞`、`???` 这类
+   本就不该翻的会永远挂在报告里，掩盖真正的漏翻。
+
+**复验**
+
+| 项 | 结果 |
+|---|---|
+| `lang_gap.py` | NEW 0 / DRIFT 0 / UNTRANSLATED 0 / STALE 0（1842 键） |
+| `validate_translations.py` | 4556 / 4717 = 97%，与阶段 4 持平（未回退） |
+| `resolve_generic_fallback.py` | 真实残余 **0** |
+| `scan_foreign_script.py` | 0 处 |
+| 新译文残留英文 / 长度异常 | 0 / 0 |
+
+*顺带修掉的一个发版阻塞*
+
+`module.json` 的 `download` 写的是 `.../0.9.0/crucible-cn-0.9.0.zip`，而 `release.yml`
+既打包 `module.zip`，又有一步 **校验 download 必须匹配 `.../<tag>/module.zip`** ——
+照原样打 `0.9.0` 的 tag，工作流会在校验步直接失败，release 根本不会产出。
+已把 download 改为 `.../0.9.0/module.zip`。同时按第 5.5 节的既定策略给打包加了两条排除：
+`compendium/en/*`（1.1 MB 英文基准，运行时永远不会被 fetch）与 `lang/lang_keep_english.json`。
+
+**遗留**
+
+- **冒烟验证仍未做** —— crucible-cn 发版前唯一的硬门槛
+- 全库术语统一未做：`Tier`/`Presence`/`essence`/`Wisdom` 约 142 条（已有决议，机械清扫）；
+  `Electricity` 33 条（三种写法各占三分之一，需先裁决）。
+  数据见 `5-其他内容/reports/crucible/terminology_sweep_pending.md`
+- 26 处孤儿译文仍在原地（无害）
+
+---
+
+### 2026-08-06 · 阶段 6：全库术语统一 + 一场没预料到的体检
+
+**范围**：把第 8 节已裁决的术语在全库落实；顺带发现并修掉一批「覆盖率看不见」的缺陷。
+
+**新增工具**
+
+| 脚本 | 干什么 |
+|---|---|
+| `qa/unify_terms.py` | 按规则表做术语统一。**只在英文原文确实出现该术语时才替换**，并支持正则搭配（`电力(?=伤害\|抗性…)`），避免把 `原始电能的混沌之力`、`针对其心灵的攻击`（译自 mind）这类误伤 |
+| `qa/scan_markup_drift.py` | 扫译文与英文之间的**标记**差异，分 LINK / BLOCK / INLINE / PLACEHOLDER / TRUNCATED 五类 |
+| `qa/restore_enrichers.py` | 把被写成裸中文的 enricher 还原回去，四级策略：lang 译名 → 搭配变体 → 人工对照表 → 段落对齐 |
+
+规则与对照表进 git：`5-其他内容/glossary/unify_rules.2026-08-06.json`、
+`5-其他内容/glossary/enricher_surface_forms.json`。
+
+**术语统一（183 条译文）**
+
+伤害类型是玩家在角色卡上天天看的词，9 个里 4 个不一致，本轮全部定名：
+
+| 术语 | 定为 | 理由 |
+|---|---|---|
+| `Electricity` | **电击** | 电力像市电、电能像物理量。连带把状态 `Shocked` 改为**感电**，否则伤害类型与状态撞名 |
+| `Radiant` | **光耀** | 正文多数已用；辉光/光辉两个词互相太像 |
+| `Poison` | **毒素** | 毒药指物（`Poison Vial 毒药瓶` 保持不动）；状态 `Poisoned` 仍是中毒 |
+| `Psychic` | **灵能** | lang 与正文多数已一致，清掉 心灵/精神 |
+
+外加已有决议的机械清扫：`Tier`→阶（74 处，另把「1个阶」「每个阶」顺成「1 阶」「每阶」）、
+`Presence`→存在（35 处）、`essence`→精华（15 处）、`Wisdom`→感知（2 处）。
+lang 侧独立处理：`DAMAGE.*` 三个标签、`Tier` 名词形态统一为**阶数**、
+以及 `ABILITIES.*Abbr` 六个缩写（`Pre`→「预备」、`Tou`→「图」这种机翻）改为 敏/智/存/力/韧/感。
+
+**关键发现：覆盖率 100% 不等于内容完整**
+
+`validate_translations.py` 是**按路径**算覆盖率的 —— 一条路径只要有中文值就算已译，
+哪怕译文把英文十段里的六段直接丢了。新增的 TRUNCATED 检测按纯文本长度比抓这类漏译
+（本库译文/英文长度比中位数 0.31，低于 0.22 判为整段漏译），一抓抓出 12 条、约 2700 中文字：
+
+- `Combat/Movement`：整节「生物碰撞」「强制移动」没译，`Burrow` 移动类型也没有
+- `Adversaries/Overview`：「重要对手」「天赋成长」「技能成长」「装备成长」四节全缺，
+  威胁类别表还少一整列（额外专注）
+- `Equipment/Equipment Overview`：「注入」「物品堆叠」两节没译，
+  且价值公式被写成 `(1 + 稀有度^3)`，英文是 `((1 + 稀有度)^3)` —— **算错了**
+- `Conditions/Invisible`：英文整页规则被替换成一句「更进阶规则计划在未来更新中推出」
+- `Overwatch` 天赋的译文，内容其实是 `Inquisitor` 的描述（串了）
+
+以上全部补译完毕。
+
+**关键发现：163 处 enricher 在翻译时被写成了裸文字**
+
+`@Condition[exposed]` 这类标记不带标签，渲染出来的就是 lang 里的译名 —— 但旧译文把它们
+直接写成了「暴露」两个字，于是玩家看到的是一段没法点、没有说明浮窗的普通文字。
+`restore_enrichers.py` 逐级还原，163 → **3**（剩下 3 条在结构差异较大的规则页里，留待下一轮）。
+顺带修掉的具体问题：
+
+- `Resources` 页的「恢复 / 休息」链接指向的是**某个预设角色身上的动作实例**
+  （`@Action[Compendium.crucible.pregens.Actor.iPMperuo6ZvBLnp9 recover]`），应为默认动作
+- `Reactive Strike` 在译文里有 脱离打击 / 脱离交战打击 / 脱离攻击 / 反击 四种写法，全部归一到 enricher
+- `Heroism` 页的法术名是机翻残留「组合 射线 of 生命」，英文那里是 `@Spell[life.ray.compose]` 链接
+- 12 个符文熟练度天赋引用的动作链接，全被写成了加粗中文
+
+**复验**
+
+| 项 | 阶段 5 末 | 现在 |
+|---|---|---|
+| lang 四类缺口 | 0 | 0 |
+| compendium 真实残余 | 0 | 0 |
+| 外来文字 | 0 | 0 |
+| 术语规则复跑 | — | **0 处待改** |
+| LINK（坏链） | 163 | **3** |
+| TRUNCATED（整段漏译） | 12 | **0** |
+| BLOCK（段落数不符） | 73 | 64 |
+| INLINE（加粗漂移） | 338 | 294 |
+
+**遗留**
+
+- **冒烟验证仍未做**
+- BLOCK 64 / INLINE 294：段落合并、多包一层 `<strong>` 之类，不影响功能，观感层面的清扫
+- 剩余 3 处 LINK 在 `Initiative and Turn Order` / `Skills` / `Adversaries Overview` 页
+- ember 尚未开工
+
+---
+
+### 2026-08-06 · 阶段 7：ember lang 收官 + 法语社区包侦察
+
+**ember `lang/cn.json` 补齐**：NEW 47 + UNTRANSLATED 3（`X` / `Y` / `uniqueMilestoneIdentifier`
+判定为有意保留，进 `1-Ember汉化插件/lang/lang_keep_english.json`），并顺手统一了
+`Attunement` 的译名（原本 同调 / 调谐 混用 → 一律**同调**）。
+现在 486 键，四类缺口全 0，基准已同步。
+
+11 个同调的译名沿用 compendium 既有写法：深渊 / 阿肯 / 灵气 / 科拉 / 余烬之心 /
+卢克萨鲁姆 / 玛伊斯 / 奥比斯 / 普里莫迪斯 / 拉根 / 西格纳拉。
+
+**法语社区包 `ember-fr` + `outils` 的评估**
+
+结论：**译文没用，侦察结果很有用**。
+
+*没有借鉴价值的部分*
+- 他们的英文基准**比我们旧**：还写着 `Rune of Lightning`（我们已是 `Rune of Storm`），
+  我们的基准多出 1423 串新内容（Crystallath、Juggernaut、新页面等）。不能当基准。
+- 他们走的是**手写转换器**路线（`ember_journals_converter` / `ember_scene_levels_converter` …），
+  正是第 8 节决议要避开的；我们的声明式 `registerMapping` 更好，不回头。
+- 法语译文本身与中文无关。
+
+*有借鉴价值的部分（已抽成英文清单存进 `5-其他内容/reference/ember-fr-recon/`）*
+
+1. **`ember-hardcoded-strings-en.json` —— 148 条 babele 够不到的硬编码字符串，分 13 类**
+   （prefixes / attunements / languages / soundscapes / advantages / criticals / knowledge /
+   tooltips / ageAbbreviations / sectionHeaders / actionButtons / actionTooltips / dialogTitles）。
+   这些写死在 Ember 的 `scripts/ember.mjs` 与模板里（例如 `"Day {DayOfCampaign}"`、
+   `"Ancestry Details"`、`"Culture Details"`），babele 完全碰不到，只能靠 monkey-patch。
+   **这是我们此前完全没盘点过的一整类内容** —— 不看这个包，只能靠一遍遍开世界慢慢发现。
+   他们的补丁点：`EmberCalendar` 的日期/时间格式化器、TextEditor enrichers、section headers、
+   action buttons、GM headers、`ui.notifications`、`DialogV2`、adventure importer、tag labels、
+   calendar 时间按钮，以及 `crucible.CONFIG.knowledge / languageCategories / languages`。
+2. **字体问题（已实测确认，对中文比对法语严重得多）**
+   Ember 的 `styles/ember.css` 把 `--font-header` 设为 `Pirate Scroll`，h1/h2/h3 全用它。
+   实测字形表：`PirateScroll.otf` 99 个码位、**CJK 0 个**；`Vollkorn.ttf` 1222 个码位、**CJK 0 个**。
+   → 中文标题会整片走 fallback 甚至豆腐块。法语包的做法是换成 Cinzel；
+   中文必须换成带 CJK 的字体（且不能依赖 Google Fonts CDN，国内取不到）。
+3. `ember-terms-en.json`（412 条 Ember 专名）与 `ember-auto-terms-en.json`（3889 条名词/标题）
+   —— 只取英文键，作为中文术语表 Ember 部分的待译底稿。
+4. 他们的 `verificateur-glossaire.html` 是术语校验器，我们已有 Python 版，不需要。
+
+**遗留**
+
+- ember 6 个零汉化小包（`character` 164 串 / `crucible-effects` 42 / `dnd5e-effects` 42 /
+  `crucible-affixes` 4 / `crucible-adversary` 94 / `crucible-character` 115）
+- 硬编码字符串（148 条）与字体替换：需要在 `ember_cn` 里加一个补丁脚本，属新工作项
+- ember 战役正文
+
+---
+
+### 2026-08-06 · 阶段 8：ember 四个小包收尾（自动循环第 1 轮）
+
+**做完的**：`crucible-effects`(47) · `dnd5e-effects`(47) · `crucible-affixes`(6) · `crucible-items`(8)
+—— 四个包全部 **100%**，标记漂移 0，外来文字 0。
+
+- 两个 effects 包路径完全相同、47 条里 37 条内容一致，10 条按各自机制分叉
+  （crucible 用 @Condition / [[/counterspell]]，dnd5e 用 &amp;reference[] / 长休 / 劣势）。
+  一次翻译覆盖两包，分叉的 10 条各自另译。
+- 11 个同调的祝福沿用既定译名：深渊 / 阿肯 / 灵气 / 科拉 / 余烬之心 / 卢克萨鲁姆 /
+  玛伊斯 / 奥比斯 / 普里莫迪斯 / 拉根 / 西格纳拉。
+
+**顺手查明的一件事，会显著影响第 8 项的排期**
+
+`ember.crucible-adventure` 虽然显示 65% 已译，但它带着和 crucible 一模一样的那几类历史缺陷，
+而且规模大约是 5 倍：**LINK 827 · BLOCK 592 · INLINE 721 · TRUNCATED 80**。
+`ember.crucible-character` 另有 LINK 44 / INLINE 27。
+
+→ 也就是说战役正文不是「翻剩下的 35%」那么简单，已译的 65% 还得过一遍
+`restore_enrichers.py` + TRUNCATED 补译。好消息是 crucible 那轮的工具与
+`enricher_surface_forms.json` 可以直接复用。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -643,14 +905,24 @@ Longbow…）都能在已 100% 的 `crucible.talent` / `equipment` 里找到，
 | 5 | babele 2.9.1 管线改造（两个模块） | ✅ 完成 |
 | 5a | └ 用新基准重算 diff | ✅ 完成（见阶段 3） |
 | 6 | crucible-cn **compendium** 全量补齐 | ✅ 完成（残余 0） |
-| 6a | └ crucible **`lang/cn.json`** 补 293 新 key + 11 drift + 15 未译 | ⬜ **下一步** |
+| 6a | └ crucible **`lang/cn.json`** 补 293 新 key + 11 drift + 15 未译 | ✅ 完成（1842 键，缺口 0） |
 | 6b | └ 清理 26 处孤儿译文（可选，无害） | ⬜ |
 | 6c | └ 发 crucible-cn 0.9.0 | ⬜ 待冒烟验证后 |
 | 5b | 修复已发布译文的格式类缺陷（2817+209 可脚本归一） | ⬜ |
 | 5c | 裁决剩余真实术语分歧（59 处同名异译 + 20 处基底冲突） | ⬜ 部分已裁决，见第 8 节 |
-| 7 | ember_cn lang 47 key + 小包补齐 → 发 1.1.0 | ⬜ |
-| 9 | **真实 Foundry 世界冒烟验证**（管线改造后必做） | ⬜ |
+| 5d | 全库术语统一：Tier/Presence/essence/Wisdom | ✅ 完成（阶段 6） |
+| 5e | 伤害类型定名 Electricity/Radiant/Poison/Psychic | ✅ 完成（阶段 6，见第 8 节） |
+| 5f | 还原被写成裸文字的 enricher | ✅ 163 → 3 |
+| 5g | 补译被整段丢掉的规则正文（TRUNCATED） | ✅ 12 条 / 约 2700 字 |
+| 5h | 段落结构与加粗漂移清扫（BLOCK 64 / INLINE 294） | ⬜ 观感层面，不影响功能 |
+| 9 | **真实 Foundry 世界冒烟验证**（管线改造后必做） | ⬜ **下一步** |
+| 7 | ember_cn **`lang/cn.json`** 47 新 key + 3 未译 | ✅ 完成（阶段 7，486 键缺口 0） |
+| 7a | └ ember 小包：effects ×2 / affixes / items | ✅ 完成（4 包 100%） |
+| 7a2 | └ ember 小包：character(274) / crucible-character(80) / crucible-adversary(99) | ⬜ **下一步** |
+| 7b | └ **Ember 硬编码字符串补丁**（148 条 / 13 类，babele 够不到） | ⬜ 新工作项，见阶段 7 |
+| 7c | └ **字体替换**：Pirate Scroll / Vollkorn 均无 CJK 字形，中文标题会崩 | ⬜ 新工作项，发版前必做 |
 | 8 | ember 战役正文分批翻译 | ⬜ 分多会话 |
+| 8a | └ 已译 65% 的历史缺陷修复（LINK 827 / BLOCK 592 / TRUNCATED 80） | ⬜ 工具可复用 crucible 那套 |
 
 ### crucible compendium：✅ 已完成，不必再动
 
@@ -664,29 +936,24 @@ Longbow…）都能在已 100% 的 `crucible.talent` / `equipment` 里找到，
 python "$P\3-常用脚本\qa\resolve_generic_fallback.py" --repo "$P\2-Crucible汉化插件"
 ```
 
-### crucible lang/cn.json 缺口（与 compendium 相互独立的一条工作线）
+### crucible lang/cn.json：✅ 已完成
 
-明细在 `5-其他内容/reports/crucible/lang_gap.json`：
-
-| 项 | 数量 |
-|---|---|
-| NEW 新增 key（0.9.1→0.10.1） | 293 |
-| DRIFT 英文原文改动 | 11 |
-| UNTRANSLATED（cn 与 en 完全相同） | 15 |
-| STALE 上游已删除 | 32（可清） |
-
-`ACTION.TAG.MovementBurrow` 的亚美尼亚字符污染已修（`掘穴 շարժ作` → `掘穴`）。
+1842 键全部有中文，`lang_gap.py` 四类缺口均为 0，基准已同步到 0.10.1。
+有意保留英文的 key 记在 `2-Crucible汉化插件/lang/lang_keep_english.json`（`DICE.DC`、`∞`、`???`），
+清单会被 `lang_gap.py` 与 `apply_lang.py` 同时读取，不会再被误报成漏翻。
 
 ### 待清扫的既有缺陷（不阻塞发版，但发版前应处理）
 
 | # | 问题 | 范围 |
 |---|---|---|
 | A | ~~`lang/cn.json` 的 `Burrow` 含亚美尼亚字符 `շարժ`~~ | ✅ 已修 |
-| B | `Toughness` / `Fortitude` 同译「坚韧」 | lang + 全库正文 |
-| C | `Electricity`：lang「电力」vs 词缀名「电击」 | 词缀名 3 条 |
-| D | `Tier` 有 阶/阶级/阶位 三种；essence 有 精髓/精华 两种 | 全库正文 |
+| B | `Toughness` / `Fortitude` 同译「坚韧」 | lang ✅ 已改「坚韧防御」；正文仍有 35 条 |
+| C | `Electricity`：电击 14 / 电能 12 / 电力 14 / 闪电 7 | ⬜ 需先裁决，见 `terminology_sweep_pending.md` |
+| D | `Tier` 有 阶/阶级/阶位；essence 有 精髓/精华 | lang ✅ 已统一；正文 76 + 15 条待清 |
 | E | 已发布译文双语格式不一致 209 处、同名异译 59 处 | 见 `glossary_ec.disputes.json` |
 | F | 26 处孤儿译文（上游已删除的物品） | 无害，可清 |
+| G | ~~`Rune: Lightning`→`Storm` 改名后译文仍写「闪电」~~ | ✅ 已修（28 处 + 8 个条目名） |
+| H | ~~`Inflection` 在 talent 包译作「词缀」，与 `Affix` 撞名~~ | ✅ 已修（11 个条目名 + 正文 3 处） |
 
 ember 战役正文的批次划分待 crucible 收尾后确定。
 
@@ -702,6 +969,15 @@ game.babele.cacheDiagnostics()
 ```
 重点确认：① 合集里天赋/装备显示中文；② 导入 playtest 冒险后，角色身上的内嵌物品也是中文
 （这条验证的是源包回退）；③ 控制台无 `TypeError`。
+
+阶段 5 之后补充四个要看的点（都是这轮改动可能出问题的地方）：
+
+- **动作卡上的消耗标签**：`{action}动` / `{focus}专` / `{heroism}英` / `武{action}动`
+  原本是 `2A`/`1F`/`W2A`，改成中文后字更宽，确认没有换行或截断
+- **物品名拼装**：品质/词缀会拼成「精良长剑」「长剑·腐蚀」，看一眼语序是否可接受
+  （`ITEM.COMPOSED_NAME.Prefix` / `.Suffix`）
+- **法术名拼装**：`迅捷的 燃烧的打击` —— 屈折形容词与法术名之间的空格是系统硬编码的，改不掉
+- **rules「符文」页**：那个原本坏掉的 `@Embed` 现在应该能正常渲染出「符文：风暴」
 
 ---
 
@@ -727,3 +1003,20 @@ game.babele.cacheDiagnostics()
 | 2026-08-06 | `Swarm`（archetype）→ **群集**，非「虫群」 | 该 archetype 描述是「多个生物以单一群集实体行动」，并不限于虫类；具体生物名如 Insect Swarm 仍用「虫群」 |
 | 2026-08-06 | 新增译名：`Automaton` 自动人偶 / `Dust Devil` 尘卷风 / `Mud Elemental` 泥浆元素 / `Stone Elemental` 岩石元素 / `Constrictor` 绞杀者 / `Juggernaut` 碾压者 / `Telekinetic` 念力者 / `Deep Behemoth` 深层巨兽 / `Lightweaver` 织光者 / `Prankster` 恶作剧者 / `Ancestral Guardian` 先祖守护者 / `Ancestral Ward` 先祖庇护 / `Ancestral Spirit` 先祖之灵 / `Rune: Storm` 符文：风暴 | 对齐既有 taxonomy 风格（土元素/火元素/冰霜元素、元素微粒）与 archetype 风格（成年龙兽/狂战士/掘穴者） |
 | 2026-08-06 | crucible-cn 的 `i18nInit` 里 `sort = "tri"` 改为「排序」 | "tri" 是法语，抄 crucible-fr 时的遗留 |
+| 2026-08-06 | `DEFENSES.Madness`/`Wounds` → **集结阈值 / 治疗阈值** | 上游 0.10.1 把这两个防御改名为 Rallying/Healing Threshold；`RESOURCES.Madness`/`Wounds`（疯狂 / 创伤）是另一组东西，不动 |
+| 2026-08-06 | `Hazard` → **危害**，`Danger Level` → 危险等级 | 服从 compendium 既有的「环境危害 / 配置危害」 |
+| 2026-08-06 | `Inflection` → **屈折**，且 talent 条目名统一为「屈折：X」 | 原译「词缀」与 `Affix`（词缀）完全撞名，玩家无法区分 |
+| 2026-08-06 | 屈折/施法构件用词以 `crucible.affixes` 的 `adjective` 为准：编构 / 限定 / 遁避 / 延展 / 否定 / 拉拽 / 推挤 / 迅捷 / 反应 / 重塑 | 那一组 10 条是唯一内部自洽的；talent 侧原本是作曲 / 判定 / 闪避 / 推开 / 迅捷化，且「闪避」与 `Dodge` 撞名 |
+| 2026-08-06 | `Critical Hit` → **暴击**（lang 里原有的「重击」改掉） | glossary 与 compendium 正文都是暴击，只有 lang 一处例外；且「重击」易与 `Strike`（打击）混淆 |
+| 2026-08-06 | `Fortitude` 的 lang 标签由「坚韧」改为「**坚韧防御**」 | 根治与 `Toughness`（坚韧）的撞名；正文一直就写作「坚韧防御」 |
+| 2026-08-06 | `Signature`（天赋树）→ **招牌**，非「签名」 | `TALENT.WARNINGS.Banned` 早已写作「招牌天赋」，节点标签却是「签名」 |
+| 2026-08-06 | 紧凑标签译成中文：`{action}A`→`{action}动`、`F`→专、`H`→英、`W`→武、`{value}R`→`{value}轮` | 目标是完整汉化；但字宽会变，列入冒烟验证清单 |
+| 2026-08-06 | `DC` / `∞` / `???` 有意保留原样，记入 `lang/lang_keep_english.json` | DC 是中文桌游圈通用写法；后两个是符号。不进白名单的话每轮都会被报成漏翻 |
+| 2026-08-06 | 物品名拼装：前缀 `{prefixes}{name}`、后缀 `{name}·{suffixes}` | 英文的 "Sword of Flame" 语序在中文里不成立；间隔号是国内游戏常见写法，且不会与词缀名内部的字冲突 |
+| 2026-08-06 | 中文没有 zero/two/few/many 复数形态，这些键一律填与 `other` 相同的值 | Intl.PluralRules 对 zh 只会取 other；填上只是为了让 `lang_gap.py` 不再报缺口 |
+| 2026-08-06 | `Electricity` → **电击**，状态 `Shocked` 连带改为 **感电** | 电力像市电、电能像物理量；伤害类型与状态不能同名 |
+| 2026-08-06 | `Radiant` → **光耀**；`Poison`（伤害类型）→ **毒素**；`Psychic` → **灵能** | 都是正文多数写法；辉光/光辉太像，毒药指物不指伤害类型 |
+| 2026-08-06 | `Tier` 作独立名词时用 **阶数**（最低阶数 / 阶数配置 / 附魔阶数），计数时用 **阶**（1 阶 / 每阶） | 单说「阶」在 UI 标签里不成词，但正文计数必须与 compendium 的「1 阶」一致 |
+| 2026-08-06 | `ABILITIES.*Abbr` 六个缩写定为 敏 / 智 / 存 / 力 / 韧 / 感 | 原本是机翻（`Pre`→「预备」、`Tou`→「图」）；属性框位置窄，单字最合适 |
+| 2026-08-06 | `Formidable Presence` 译作 **威严气场**，不套用 `Presence`＝存在 | 这里的 presence 是「气场」的日常义，不是属性值 |
+| 2026-08-06 | 被写成裸中文的 enricher 一律还原成 `@Condition[...]` / `@Action[...]` 等标记 | 这类标记不带标签、渲染出来就是 lang 译名；写成裸字等于让玩家失去可点链接与说明浮窗 |
