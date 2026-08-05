@@ -1,0 +1,19 @@
+# 这个项目目录位于 Desktop\fvtt 这个 git 仓库内部。
+# 只有「人写的、小的、长期有效的」东西值得进 fvtt 仓库：
+#   PROJECT.md、3-常用脚本、4-临时脚本、5-其他内容/glossary、5-其他内容/reference
+# 其余要么有自己的 git 远端，要么是可重新生成的派生物。
+
+# 两个汉化插件是独立仓库，各有自己的 GitHub 远端，不要嵌进来
+1-Ember汉化插件/
+2-Crucible汉化插件/
+
+# 英文基准约 50 MB，由 3-常用脚本/extract/extract_en.mjs 从 Foundry 的 packs 重新抽即可
+5-其他内容/english-baseline/
+
+# 验收报告与待译清单每次跑 validate_translations.py 都会重新生成
+5-其他内容/reports/
+
+__pycache__/
+*.pyc
+*.log
+*.tmp
