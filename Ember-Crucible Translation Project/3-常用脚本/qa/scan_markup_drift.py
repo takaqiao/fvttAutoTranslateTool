@@ -29,7 +29,9 @@ INLINE_CMD = re.compile(r'\[\[[^\]]*\]\]')
 PLACEHOLDER = re.compile(r'\{[A-Za-z_][A-Za-z0-9_.\-]*\}')
 # @UUID[目标]{标签} / [[/cmd]]{标签} 的标签是给玩家看的文字，本来就该翻译，
 # 不能当成占位符去比对，否则每条 @ref[actor.name]{creature} 都会被误报
-LABEL_AFTER_MARKUP = re.compile(r'(?:@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\])\s*\{[^}]*\}')
+# dnd5e 的 &Reference[x]{标签} 与 Foundry 的 @UUID[…]{标签} 同理，标签都是给玩家看的文字
+LABEL_AFTER_MARKUP = re.compile(
+    r'(?:@[A-Za-z]+\[[^\]]*\]|&(?:amp;)?[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\])\s*\{[^}]*\}')
 
 
 def strip_labels(s):
