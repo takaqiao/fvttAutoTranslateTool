@@ -956,6 +956,54 @@ crucible-effects / dnd5e-effects / crucible-affixes / crucible-items）。
 
 ---
 
+### 2026-08-06 · 阶段 11：Ember 运行时补丁 —— 硬编码字符串与字体（自动循环第 4 轮）
+
+**7b + 7c 一并完成**，两者同属「babele 与 i18n 都够不到」的同一类问题。
+
+**新增 `scripts/ember-hardcoded-cn.mjs`**
+
+先核对了法语包给出的 148 条清单对 ember 0.6.0 是否仍然成立：62 条能在源码里直接搜到，
+其余是运行时拼出来的（`` `Attunement: ${attunement.name}` `` 这种）。查清了它们的来源 ——
+Ember 注册了一批 TextEditor 富文本增强器（`[[/attunement X]]`、`[[/language X]]`、
+`[[/knowledge X]]`、`[[/soundscape X]]`、`@Advantage[N]`、`@Critical…` 等），
+标签在 JS 里拼好，两条汉化通道都碰不到。
+
+补丁分三个层次，都是**只读不写**（不改 Ember 的数据，停用模块即恢复）：
+
+1. **包装增强器** —— 只包 Ember 自己注册的那些，翻译其返回节点里的文本与 tooltip 属性；
+2. **改写 `crucible.CONFIG.languages / knowledge`** —— Ember 往里塞的条目 label 是硬编码英文，
+   会出现在角色卡下拉框里，这是唯一能改的地方；
+3. **渲染钩子** —— 对 Ember 自己的界面根元素做一次 DOM 遍历，处理分节标题与按钮。
+
+用桩环境跑了覆盖测试：**143 / 147**。未覆盖的 4 条是纪年缩写 `AC / AB / AT / AS`，
+**有意保留** —— 它们是 Ember 历法的纪元代号，和 DC 一样属于记号，译开反而认不出来。
+
+译名复用既有决议：11 个同调沿用 compendium 译名；34 个知识领域里有 30 条直接对齐
+crucible lang 的 `KNOWLEDGE.*`（改一处要两边一起改，已在文件里注明）；
+`Arcden` 用第 8 节裁定的**奥克登语**。
+
+顺带发现 crucible lang 的 `LANGUAGES.Sign` 译作「标记」是错的 —— 那是**手语**（sign language），
+补丁里按手语处理，crucible 侧的 lang 待下轮一并改。
+
+**新增 `styles/ember-cn.css`**
+
+实测过 Ember 的两个字体文件里一个 CJK 字形都没有（PirateScroll.otf 99 码位、
+Vollkorn.ttf 1222 码位，CJK 均为 0），而回退链末端只有一个 `serif`。
+
+做法是**不替换原字体**，只在回退链后面补中文字体。浏览器的字体回退是逐字形的，
+所以拉丁字母仍由 Pirate Scroll / Vollkorn 渲染，只有中文字符落到后面，Ember 的视觉风格得以保留。
+不打包字体文件（一套中文字体动辄 10 MB 以上），也不挂 Google Fonts（国内取不到会静默失败），
+只用系统已有字体，按 Windows / macOS / Linux 排列。
+
+另外压掉了标题 0.2em 的字距（那是为拉丁小型大写设计的，中文会散开），
+并把正文行高提到 1.7。
+
+**冒烟验证清单增补**：这两项都**无法靠脚本证实**，必须在真实世界里看：
+① 同调/语言/知识的富文本标签是否变中文；② 角色卡分节标题与事件按钮；
+③ 中文标题是否还掉进宋体默认样式；④ 控制台有无本模块的警告。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -983,8 +1031,9 @@ crucible-effects / dnd5e-effects / crucible-affixes / crucible-items）。
 | 7a2 | └ ember 小包：character(274) | ✅ 完成（100%） |
 | 7a3 | └ ember 小包：crucible-character / crucible-adversary | ✅ 完成 |
 | 7a4 | └ 小包内 13 条占位译文补译 + 38 处 @Embed 参数还原 | ✅ 完成 |
-| 7b | └ **Ember 硬编码字符串补丁**（148 条 / 13 类，babele 够不到） | ⬜ **下一步** |
-| 7c | └ **字体替换**：Pirate Scroll / Vollkorn 均无 CJK 字形，中文标题会崩 | ⬜ 新工作项，发版前必做 |
+| 7b | └ **Ember 硬编码字符串补丁** | ✅ 完成（143/147，4 条纪年缩写有意保留） |
+| 7c | └ **字体回退链**：补中文字体，不替换原字体 | ✅ 完成（styles/ember-cn.css） |
+| 7d | └ crucible `LANGUAGES.Sign` 误译「标记」，应为**手语** | ⬜ 下轮随手改 |
 | 8 | ember 战役正文分批翻译 | ⬜ 分多会话 |
 | 8a | └ 已译 65% 的历史缺陷修复（LINK 827 / BLOCK 592 / TRUNCATED 80） | ⬜ 工具可复用 crucible 那套 |
 | 8b | └ 战役包里 祖裔→血统 / 调谐→同调 的残留清扫 | ⬜ 可用 unify_terms.py |
