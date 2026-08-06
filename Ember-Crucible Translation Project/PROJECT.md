@@ -919,6 +919,43 @@ lang 侧独立处理：`DAMAGE.*` 三个标签、`Tier` 名词形态统一为**�
 
 ---
 
+### 2026-08-06 · 阶段 10：ember 小包全系列收官（自动循环第 3 轮）
+
+**7a 完成**：`crucible-character`(80) 与 `crucible-adversary`(99) 译完，
+至此 ember 的 **7 个小包全部 100%**（character / crucible-character / crucible-adversary /
+crucible-effects / dnd5e-effects / crucible-affixes / crucible-items）。
+
+**顺带修掉的三类历史缺陷**
+
+1. **13 条描述是 v1.0.15 时代的占位译文** —— 内容写着「BETA TWO：该天赋尚未按 Crucible 机制更新」，
+   而英文侧早已补全。包括全部 11 个同调的阶位说明（每个都是 5 阶的完整增益表，
+   带 2 个 `@Action` 链接）、`Lunar Tattoos` 与 `Exceptional Taste`。全部按英文重译，约 1800 字。
+   —— 这类缺陷 `validate_translations.py` 看不见（路径有中文值就算 100%），
+   是 TRUNCATED 检测抓出来的。
+2. **`@Embed[... inline overview]` 里的 `overview` 被当成正文译成了「概览」** ——
+   那是段落 id，不是可译文本，译错等于嵌入块加载不出来。
+   38 处（crucible-character 32 + 战役包 6），按英文 token 还原。
+3. `Ashka Lineage` 的描述丢了两个 `@Condition` 链接，并多出一段英文早已删除的
+   「ALPHA ONE：此特性尚未自动化」。已重译。
+
+**判断**
+
+- 同调阶位说明的行文统一为「阶位 N：……」，与 `ember.character` 里
+  「灵气 5：飓风」的阶位命名呼应。
+- 术语一律服从 crucible 侧：Empowered 强化 / Weakened 虚弱 / Deadly 致命 /
+  Void 虚空 / Psychic 灵能 / Radiant 光耀 / Electricity 电击 / Fortitude 坚韧防御 /
+  Healing Threshold 治疗阈值 / Lineage 血统 / Attunement 同调。
+- **只有 @Embed / @Action 里的 `{标签}` 该翻译，方括号内的目标与参数一律照抄** ——
+  这条已经被踩到两次（crucible 的 `runeLightning000`、ember 的 `inline overview`），
+  写进第 8 节决议。
+
+**7 个小包的漂移**：48 → **15**（1 BLOCK + 14 INLINE，都是加粗数量差，观感层面）。
+外来文字 0，JSON 全部可解析。
+
+**ember 总进度**：13740 / 35157 = 39%。剩下的几乎全在战役包。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -944,8 +981,9 @@ lang 侧独立处理：`DAMAGE.*` 三个标签、`Tier` 名词形态统一为**�
 | 7 | ember_cn **`lang/cn.json`** 47 新 key + 3 未译 | ✅ 完成（阶段 7，486 键缺口 0） |
 | 7a | └ ember 小包：effects ×2 / affixes / items | ✅ 完成（4 包 100%） |
 | 7a2 | └ ember 小包：character(274) | ✅ 完成（100%） |
-| 7a3 | └ ember 小包：crucible-character(80) / crucible-adversary(99) | ⬜ **下一步** |
-| 7b | └ **Ember 硬编码字符串补丁**（148 条 / 13 类，babele 够不到） | ⬜ 新工作项，见阶段 7 |
+| 7a3 | └ ember 小包：crucible-character / crucible-adversary | ✅ 完成 |
+| 7a4 | └ 小包内 13 条占位译文补译 + 38 处 @Embed 参数还原 | ✅ 完成 |
+| 7b | └ **Ember 硬编码字符串补丁**（148 条 / 13 类，babele 够不到） | ⬜ **下一步** |
 | 7c | └ **字体替换**：Pirate Scroll / Vollkorn 均无 CJK 字形，中文标题会崩 | ⬜ 新工作项，发版前必做 |
 | 8 | ember 战役正文分批翻译 | ⬜ 分多会话 |
 | 8a | └ 已译 65% 的历史缺陷修复（LINK 827 / BLOCK 592 / TRUNCATED 80） | ⬜ 工具可复用 crucible 那套 |
@@ -1047,3 +1085,4 @@ game.babele.cacheDiagnostics()
 | 2026-08-06 | `ABILITIES.*Abbr` 六个缩写定为 敏 / 智 / 存 / 力 / 韧 / 感 | 原本是机翻（`Pre`→「预备」、`Tou`→「图」）；属性框位置窄，单字最合适 |
 | 2026-08-06 | `Formidable Presence` 译作 **威严气场**，不套用 `Presence`＝存在 | 这里的 presence 是「气场」的日常义，不是属性值 |
 | 2026-08-06 | 被写成裸中文的 enricher 一律还原成 `@Condition[...]` / `@Action[...]` 等标记 | 这类标记不带标签、渲染出来就是 lang 译名；写成裸字等于让玩家失去可点链接与说明浮窗 |
+| 2026-08-06 | enricher 方括号内的**目标与参数一律照抄**，只有 `{标签}` 可译 | 已经踩到两次：crucible 的 `@Embed[...runeLightning000...]`、ember 的 `@Embed[... inline overview]` 被译成「概览」。两次都是链接/嵌入块直接失效，且 diff 里看不出来 |
