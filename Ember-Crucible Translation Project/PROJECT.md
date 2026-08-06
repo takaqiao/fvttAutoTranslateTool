@@ -7,15 +7,18 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**当前状态**：阶段 0–6 完成。管线已改造到 babele 2.9.1 声明式映射，工具链就绪，
-**crucible 的 15 个合集包全部译完（残余 0）**，**`lang/cn.json` 1842 键全部译完（缺口 0）**。
-crucible-cn 侧只剩冒烟验证与发版。
+**当前状态**：阶段 0–19 完成。管线已改造到 babele 2.9.1 声明式映射，工具链就绪。
+**crucible 侧全部译完**（15 个合集包残余 0、`lang/cn.json` 1842 键缺口 0），只剩冒烟验证与发版。
+**ember 侧**：lang 486 键缺口 0，7 个小包 100%，运行时补丁（硬编码字符串 + 中文字体回退）已就位；
+战役包 12955 / 19605 = **66%**，76 组 journal 里 3 组完成（Ushna Dredging Docks / Arcturel Dives /
+Arcturel Tradeway）。
 
 **下一步**（按顺序）：
 1. **冒烟验证** —— 见本节末尾。这是唯一无法靠脚本证实的环节，只能在真实 Foundry 世界里做。
 2. 发 crucible-cn **0.9.0**
-3. 转 ember：lang 47 key + 6 个零汉化小包 → 发 1.1.0
-4. ember 战役正文（分多会话）
+3. 发 ember_cn **1.1.0**
+4. ember 战役正文继续（分多会话）。挑下一组 journal 前**先跑一遍孤儿清单**（第 8g 项）——
+   阶段 19 就是这样发现整整一卷 28 页译文躺在改名前的旧路径上的。
 
 全库术语已统一，规则正文的整段漏译已补齐（见阶段 6）。剩下的 BLOCK / INLINE 漂移属观感层面，
 不影响功能，可与冒烟验证一起决定要不要在本版处理。
@@ -268,6 +271,7 @@ Ember-Crucible Translation Project\
 | `qa/apply_lang.py` | lang 批次回写。四道闸：key 不存在 / 占位符 / HTML 标签 / 行内标记；`--clean-stale` 清上游已删的 key | `python apply_lang.py --repo <repo> --package <foundry包> --batch <batch.json> [--clean-stale] [--dry]` |
 | `qa/unify_terms.py` | 按规则表统一术语。只在**英文原文确实出现该术语**时才改，支持正则搭配限定 | `python unify_terms.py --repo <repo> [--package <foundry包>] --rules <rules.json> [--review <md>] [--write]` |
 | `qa/scan_markup_drift.py` | 扫译文与英文的标记差异：LINK / BLOCK / INLINE / PLACEHOLDER / TRUNCATED | `python scan_markup_drift.py --repo <repo> [--kind LINK,TRUNCATED] [--out <json>]` |
+| `qa/scan_markup_targets.py` | 扫**方括号内部**被译成中文的标记（链接/嵌入块会静默失效，覆盖率与漂移检查都看不见）。分 BROKEN / by-design 两类 | `python scan_markup_targets.py --repo <repo> [--repo <另一个>] [--json <out>]` |
 | `qa/restore_enrichers.py` | 把被写成裸中文的 `@Condition[...]` 等标记还原回去 | `python restore_enrichers.py --repo <repo> --package <foundry包> --surface-forms <json> [--write]` |
 | `qa/resolve_generic_fallback.py` | 从待译数字里**扣掉 babele 会自动解析的部分**。翻译前必跑，否则重复劳动 | `python resolve_generic_fallback.py --repo <repo>` |
 | `qa/apply_translations.py` | 批量回写译文。三道闸：英文源漂移 / 无中文 / 标记破损 一律拒 | `python apply_translations.py --repo <repo> --pack <pack.json> --batch <batch.json> [--force] [--dry]` |
@@ -344,6 +348,8 @@ python "$P\3-常用脚本\qa\validate_translations.py"      --repo <repo> --out 
 python "$P\3-常用脚本\qa\resolve_generic_fallback.py"   --repo <repo>
 # 2. 外来文字污染（西里尔/亚美尼亚/希伯来/泰文等机翻残留）
 python "$P\3-常用脚本\qa\scan_foreign_script.py"        --repo <repo>
+# 2b. 方括号里被译成中文的标记（链接/嵌入块静默失效，BROKEN 应为 0 或全部有已知原因）
+python "$P\3-常用脚本\qa\scan_markup_targets.py"        --repo <repo>
 # 3. 孤儿译文（上游改名/删除后失效的条目）
 python "$P\3-常用脚本\qa\port_orphans.py"               --repo <repo> --rules <rules.json> --dry
 # 4. lang 缺口（NEW/DRIFT/UNTRANSLATED/STALE 应全为 0）
@@ -1202,6 +1208,108 @@ crucible 侧复扫确认不受影响（仍为 0）。
 
 ---
 
+### 2026-08-06 · 阶段 19：Arcturel Dives 收官 + 一整卷被改名埋掉的旧译文（自动循环第 12 轮）
+
+**做完的**
+
+1. `Arcturel Dives` 最后两页（区域总览 8.0K、最后的矿坑 7.8K），**40/40**，回写零拒绝。
+2. 查出并修掉 **18 处「译文把标记内部的目标译成了中文」** —— 一整类此前无人检测的失效。
+3. 发现 `Arcturel Upper` 是今天 `Arcturel Tradeway` 的旧名，**28 页译文一直躺在孤儿路径上**，
+   移植后该 journal 待译归零（约 5 万英文字符不必重译）。
+
+**关键发现 1：覆盖率把「没有可译文本的条目」也算成了待译**
+
+`<p>@Embed[JournalEntry.x.JournalEntryPage.y inline]</p>` 这类条目整条都是机械标记，
+永远不可能含中文，却被 `validate_translations.py` 一直记为待译 —— 全库 298 条。
+`ember.crucible-character` 因此长期显示 90%，其实早已做完。
+
+已给 `validate_translations.py` 加 `translatable()` 判据（剥掉标签与标记后还有没有拉丁字母；
+`{标签}` **不**剥，因为标签是可见文字），这类条目改记为 `n/a` 一列，不进 leaves、不进待译清单。
+crucible 侧复跑 4717/4556 与 n/a 0 完全未变，说明判据没有误伤。
+
+**关键发现 2：13 条译文把中文写进了标记内部，且所有既有检查都看不见**
+
+剥离 n/a 那批时，反查出 11 条「英文是纯标记、中文却有字」的条目 —— 全是把
+`@Embed[JournalEntry…]` 的 **`JournalEntry` 这个文档类型关键字**译成了「日志条目」
+（有一条连 `JournalEntryPage` 都成了「日志条目Page」）。嵌入块直接加载不出来。
+
+为什么一直没被发现：路径上有中文 → 覆盖率算 100%；`apply_translations.py` 的标记闸只作用于
+**经它写入**的值，v1.0.15 时代的旧译文从没过过闸。
+
+新增 `qa/scan_markup_targets.py`（全库扫「方括号里有中文」，第 8 节那条决议的机械化形式），
+并按严重度分两类，否则报告没法读：
+
+| 判定 | 数量 | 说明 |
+|---|---|---|
+| BROKEN | 33 → **15** | 标识符被译：`@Embed[日志条目…]`、`@Condition[目盲/失聪/恐慌/倒地/受拘束/失能/破碎/未察觉]`、`[[/language 径道语]]` |
+| by-design | 79 | `readaloud="中文"`（可见旁白）、`[[/r …#分身被摧毁]]`（掷骰说明）、`[[/item 战镐]]`（dnd5e 按角色身上**已被翻译**的物品名解析，中文才是运行时存在的那个名字） |
+
+修复走 `4-临时脚本/2026-08-06/fix_translated_markup_targets.py`：拿英文基准按**同类同序**
+对齐后把英文原文抄回，再经 `apply_translations.py` 的标记闸复核。加了一道形状判据
+（中文段只能顶替一个不含空格的 token），否则会把 `swoopingStrike00}和@UUID[` 里的「和」
+换成英文的 ` and `、把 `readaloud= "卡莉…"` 整段吃掉 —— 两处都真的被拦下了。
+
+剩下的 15 条各有原因，不是漏修：11 条在 `crucible-character` 的孤儿条目上（英文侧已无该条目，
+babele 永远不会应用）、2 条同类孤儿在战役包、1 条是**上游自己的错**
+（`@UUID[…swoopingStrike00}` 英文侧就是 `}`）、1 条所在页缺整块内容被闸拦下（属第 8c 项）。
+
+顺带把 `apply_translations.py` 的「无中文则拒」改为**只对有可译文本的条目生效** ——
+否则纯标记条目的正确值（不含中文）永远写不进去，这 10 条根本没法修。
+
+**关键发现 3：`Arcturel Upper` / `Arcturel Lower` 是两卷被改名埋掉的旧译文**
+
+`compendium/cn` 里有两个英文基准中不存在的 journal，共 47 页、6.4 万字符，一直计在 611 条孤儿里。
+逐页比对后查明是 0.6.0 的改名：
+
+| 旧名 | 今名 | 页数 | 处置 |
+|---|---|---|---|
+| `Arcturel Lower` | `Arcturel Dives` | 19 | 本轮已全部重译，**移植时被「目标已有译文」闸拦下 33 条**，不覆盖 |
+| `Arcturel Upper` | `Arcturel Tradeway` | 28 | **移植** |
+
+决定移植的依据不是「有译文」，而是**结构逐段对得上**：28 页里 27 页的
+`<p>`/`<li>`/`<section>` 计数与今天的英文完全一致，全卷 `<p>` 238/240。
+这与阶段 13 那批「已译 65% 却缺 2200 个 `<li>`」的情况**不是一回事**，所以不会把
+「看起来 100%、实则缺整块」的问题引进来。抽读 `Rallyhome` 全页确认译文质量可用。
+
+移植后逐项清理（每一步都过标记闸）：
+
+- **5 处结构漂移**：`Scene.emberArcturelUnd` 已被上游换成 `emberArcturelLow`（升降机/悬空大道/
+  安保室 3 处，其中安保室的两个标签还互相串了），`Silver Beam Foyer` 缺一整个
+  `complex-check` 列表与两个文化链接（该页正是唯一结构对不上的那页）
+- **6 处旧译残留**：整句英文没译（`都 eager to draw a crowd…`）、三个英文书名、
+  两处 dnd5e 分支里漏译的 `check`、`gold/silver` 没译成金币/银币。
+  这批是靠新写的残留英文探针抓出来的 —— `gp/sp`、`CG`、`he/him`、`&amp;reference[…]`
+  是全库既有写法，要先排除掉才看得见真的漏译
+- **术语统一**：`Rallyhome` 拉力之家→**聚归馆**（阶段 16 定名）13 处、
+  `Arcturian` 阿克图瑞安→**阿克图里安**（对齐文化页条目名）10 处。
+  另有 4 处因所在条目**本来就**与英文结构不符被闸拦下（`Arctus Plateau Gazetteer.Arcturel`
+  一页 CN 有 85 个 `<p>`、EN 只有 48），留给第 8c 项
+- 补 5 个分类名（总览 / 聚归馆 / 银光束总部 / 贸易道各处 / 底腹区各处）
+
+**复验**
+
+| 项 | 阶段 18 末 | 现在 |
+|---|---|---|
+| 战役包覆盖 | 12900 / 19826 | **12955 / 19605 = 66%**（分母减 221 条 n/a） |
+| 待译字符 | 1,236,195 | **1,159,596**（−7.7 万） |
+| LINK | 707 | **689** |
+| BLOCK / INLINE / TRUNCATED / PLACEHOLDER | 584 / 265 / 69 / 1 | 584 / 265 / 69 / 1（移植零净增） |
+| 外来文字 | 0 | 0 |
+| markup targets BROKEN | （无此检查） | 15，全部有已知原因 |
+
+**遗留**
+
+- `Arcturel Tradeway` 的 28 页是**移植来的旧译文**，已过全部机械检查并抽读一页，
+  但没有逐页通读。列为第 8f 项。
+- 其余 995 条孤儿（场景注记、actor 内嵌物品）没有改名规则可套，仍留在原地
+- `The Tunnels`、`Waterborne Family Distillery` 两页今天已无同名页，未移植
+- 上游自身缺陷两处，未跟改：`@Condition[exhaustion` 少右括号（2 处）、
+  `@UUID[…swoopingStrike00}` 用了 `}`。照抄英文，等上游修
+- `The Clever Fox (Engraved Sign)` 的 `description.private`：英文已被上游清空成
+  `<p></p><p></p>`，中文还留着一整段旧版描述。无害（玩家看到的是更多内容），未删，留档待定
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -1234,10 +1342,12 @@ crucible 侧复扫确认不受影响（仍为 0）。
 | 7d | └ crucible `LANGUAGES.Sign` 误译「标记」 | ✅ 已改为手语 |
 | 8 | ember 战役正文分批翻译（按 journal 切批，76 组 / 约 148 万字符） | ⬜ 进行中 |
 | 8d | └ `Ushna Dredging Docks` 21 条 | ✅ 21/21 |
-| 8e | └ `Arcturel Dives` 40 条 | 🔶 36/40，余「区域总览」「最后一坑」两页 |
+| 8e | └ `Arcturel Dives` 40 条 | ✅ 40/40（阶段 19 收官） |
+| 8f | └ `Arcturel Tradeway` 28 页 | ✅ 待译归零，但内容是移植来的旧译文，**逐页通读未做** |
 | 8a | └ 机械可修的部分（加粗 734→265、enricher 还原） | ✅ 完成 |
 | 8c | └ **已译 65% 里缺失的整块内容**：少 2207 个 `<li>`、7458 个 `<p>` | ⬜ 需逐页比对补齐，机械工具无解 |
 | 8b | └ 战役包里 祖裔→血统 / 调谐→同调 的残留清扫 | ⬜ 可用 unify_terms.py |
+| 8g | └ 剩余 995 条孤儿译文：有无别的改名可套？（阶段 19 只处理了 Arcturel 两卷） | ⬜ |
 
 ### crucible compendium：✅ 已完成，不必再动
 
@@ -1338,3 +1448,8 @@ game.babele.cacheDiagnostics()
 | 2026-08-06 | enricher 方括号内的**目标与参数一律照抄**，只有 `{标签}` 可译 | 已经踩到两次：crucible 的 `@Embed[...runeLightning000...]`、ember 的 `@Embed[... inline overview]` 被译成「概览」。两次都是链接/嵌入块直接失效，且 diff 里看不出来 |
 | 2026-08-06 | `Globlin` → **格布林**（音译），不用意译「泥砾精」 | 遇到 `Mud Globlin` / `Paint Globlin` 这类前缀构词时意译没法组合；战役包里还有一处误译成「绘画地精」，而地精是另一种生物 |
 | 2026-08-06 | `Waterborne` 作家族名时音译为**沃特伯恩** | 该家族经营酿酒坊；原有一处 `Waterborne Whiskey` 被当普通词译作「水运威士忌」，应改为沃特伯恩威士忌 |
+| 2026-08-06 | `The Last Pit` → **最后的矿坑**（此前记为「最后一坑」） | 与同组的 `The Empty Pit` 空矿坑 / `The Active Mine Pit` 在采矿坑 用同一个「矿坑」构词；「最后一坑」的量词读不顺 |
+| 2026-08-06 | `Bright Lord` → **辉耀领主** | 沿用 v1.0.15 旧译文里的写法（该角色只在书信中被这样称呼）。`For Other Fortunes` 则保持英文原样，与战役包已译各页一致 |
+| 2026-08-06 | 「没有可译文本」的条目（整条都是 `@Embed`/`@UUID` 之类）不计入覆盖率分母 | 它们永远不可能含中文，计进去等于让每个包都永远显示未完成，并把死条目塞进驱动翻译批次的待译清单。全库 298 条 |
+| 2026-08-06 | `[[/item 中文名]]` 属**正常**，不算标记被译坏 | dnd5e 的 `/item` 按角色身上的物品名解析，而 babele 已经把那些名字翻成中文了 —— 此处英文反而会失配。`readaloud="…"`、`[[/r …#掷骰说明]]` 同理 |
+| 2026-08-06 | 孤儿译文是否移植，看**结构是否逐段对得上**，而不是看有没有译文 | `Arcturel Upper` 28 页 `<p>` 238/240 与今天的英文一致 → 移植；若像阶段 13 那批缺 2200 个 `<li>`，移植只会制造「显示 100% 实则缺整块」的新债 |

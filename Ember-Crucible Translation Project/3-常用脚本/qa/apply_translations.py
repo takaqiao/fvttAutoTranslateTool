@@ -33,6 +33,21 @@ MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]')
 # machinery and must survive verbatim, the {label} is prose.
 INLINE_CMD = re.compile(r'\[\[[^\]]*\]\]')
 TAGNAME = re.compile(r'<\s*(/?)([a-zA-Z][a-zA-Z0-9]*)')
+TAG = re.compile(r'<[^>]+>')
+LATIN = re.compile(r'[A-Za-z]')
+
+
+def translatable(en: str) -> bool:
+    """False when the English holds no visible prose at all, e.g.
+    `<p>@Embed[JournalEntry.x.JournalEntryPage.y inline]</p>`.
+
+    Such a value still needs to be writable -- a broken target inside the
+    markup has to be repairable -- but demanding Chinese in it would be
+    demanding that machinery be translated, which is what broke it.
+    """
+    rest = MARKUP.sub(' ', TAG.sub(' ', en)).replace('&amp;', ' ')
+    rest = INLINE_CMD.sub(' ', rest)
+    return bool(LATIN.search(rest))
 
 
 def load(p):
@@ -144,7 +159,7 @@ def main():
             problems.append({'path': path, 'issue': 'no English source at this path'})
             continue
 
-        if not CJK.search(value):
+        if not CJK.search(value) and translatable(src):
             no_cjk += 1
             problems.append({'path': path, 'issue': 'translation contains no Chinese'})
             continue

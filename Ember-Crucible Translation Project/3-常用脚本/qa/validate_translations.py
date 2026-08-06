@@ -27,8 +27,24 @@ import re
 
 CJK = re.compile(r'[一-鿿]')
 TAG = re.compile(r'<[^>]+>')
+# Foundry machinery with no visible prose: `@Embed[...]`, `@UUID[...]`,
+# `[[/skillCheck ...]]`. A trailing `{label}` is NOT consumed -- labels are
+# visible text and must stay in the prose check.
+MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]')
+LATIN = re.compile(r'[A-Za-z]')
 # Paths that are structural keys rather than prose (folders map EN->CN names).
 PLAIN_MAP_FIELDS = {'folders', 'categories'}
+
+
+def translatable(en: str) -> bool:
+    """False for leaves that are pure markup, e.g. `<p>@Embed[JournalEntry.x]</p>`.
+
+    Such a leaf can never hold Chinese, so counting it as outstanding work makes
+    every pack look permanently unfinished and pushes dead entries into the todo
+    lists that drive translation batches.
+    """
+    rest = MARKUP.sub(' ', TAG.sub(' ', en)).replace('&amp;', ' ')
+    return bool(LATIN.search(rest))
 
 
 def load(p):
@@ -59,6 +75,9 @@ def walk(en, cn, path, todo, covered, residue, stats):
             walk(v, sub_cn, path + [str(i)], todo, covered, residue, stats)
     elif isinstance(en, str):
         if not en.strip():
+            return
+        if not translatable(en):
+            stats['untranslatable'] += 1
             return
         stats['leaves'] += 1
         stats['chars'] += textlen(en)
@@ -116,9 +135,10 @@ def main():
             if stale.endswith('.todo.json'):
                 os.remove(os.path.join(todo_dir, stale))
     report = {}
-    grand = dict(leaves=0, chars=0, covered=0, todo=0, todo_chars=0, orphans=0, residue=0)
+    grand = dict(leaves=0, chars=0, covered=0, todo=0, todo_chars=0, orphans=0,
+                 residue=0, untranslatable=0)
 
-    print(f"{'pack':<34}{'leaves':>8}{'done':>8}{'cov%':>6}{'todo':>7}{'todo chars':>12}{'orphan':>8}{'residue':>8}")
+    print(f"{'pack':<34}{'leaves':>8}{'done':>8}{'cov%':>6}{'todo':>7}{'todo chars':>12}{'orphan':>8}{'residue':>8}{'n/a':>6}")
     for fn in files:
         en = load(os.path.join(en_dir, fn))
         cn_path = os.path.join(cn_dir, fn)
@@ -126,7 +146,7 @@ def main():
 
         todo, residue, orphans = [], [], []
         covered = [0]
-        stats = dict(leaves=0, chars=0)
+        stats = dict(leaves=0, chars=0, untranslatable=0)
         walk(en.get('entries', {}), cn.get('entries', {}), [], todo, covered, residue, stats)
         walk(en.get('folders', {}), cn.get('folders', {}), ['(folders)'], todo, covered, residue, stats)
         find_orphans(en.get('entries', {}), cn.get('entries', {}), [], orphans)
@@ -134,12 +154,13 @@ def main():
         pct = 100.0 * covered[0] / stats['leaves'] if stats['leaves'] else 0.0
         todo_chars = sum(t['chars'] for t in todo)
         print(f"{fn:<34}{stats['leaves']:>8}{covered[0]:>8}{pct:>5.0f}%{len(todo):>7}"
-              f"{todo_chars:>12}{len(orphans):>8}{len(residue):>8}")
+              f"{todo_chars:>12}{len(orphans):>8}{len(residue):>8}{stats['untranslatable']:>6}")
 
         report[fn] = {
             'leaves': stats['leaves'], 'chars': stats['chars'],
             'covered': covered[0], 'coverage_pct': round(pct, 1),
             'todo': len(todo), 'todo_chars': todo_chars,
+            'untranslatable': stats['untranslatable'],
             'orphans': len(orphans), 'orphan_paths': orphans[:80],
             'residue': len(residue), 'residue_samples': residue[:40],
             'cn_file_present': os.path.exists(cn_path),
@@ -147,7 +168,7 @@ def main():
         grand['leaves'] += stats['leaves']; grand['chars'] += stats['chars']
         grand['covered'] += covered[0]; grand['todo'] += len(todo)
         grand['todo_chars'] += todo_chars; grand['orphans'] += len(orphans)
-        grand['residue'] += len(residue)
+        grand['residue'] += len(residue); grand['untranslatable'] += stats['untranslatable']
 
         if todo:
             dump(os.path.join(out_dir, 'todo', f'{fn[:-5]}.todo.json'),
@@ -156,7 +177,9 @@ def main():
 
     pct = 100.0 * grand['covered'] / grand['leaves'] if grand['leaves'] else 0
     print(f"{'TOTAL':<34}{grand['leaves']:>8}{grand['covered']:>8}{pct:>5.0f}%{grand['todo']:>7}"
-          f"{grand['todo_chars']:>12}{grand['orphans']:>8}{grand['residue']:>8}")
+          f"{grand['todo_chars']:>12}{grand['orphans']:>8}{grand['residue']:>8}{grand['untranslatable']:>6}")
+    print("\nn/a = leaves with no translatable prose (pure @Embed/@UUID markup); "
+          "excluded from leaves & todo")
 
     name = os.path.basename(os.path.normpath(a.repo))
     dump(os.path.join(out_dir, f'validate.{name}.json'), {'总计': grand, 'packs': report})

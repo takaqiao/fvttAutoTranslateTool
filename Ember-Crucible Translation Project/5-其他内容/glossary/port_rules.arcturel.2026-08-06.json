@@ -1,0 +1,7 @@
+{
+  "_note": "Ember 0.6.0 拆分并改名了阿克图瑞尔的两组 journal：Arcturel Upper -> Arcturel Tradeway、Arcturel Lower -> Arcturel Dives。v1.0.15 的译文留在旧路径上成了孤儿（babele 永远取不到）。Arcturel Upper 的 28 页与今天的英文结构几乎逐段对齐（<p> 238/240），值得移植；Arcturel Lower 的页面本轮已重译，移植会被 port_orphans.py 的『目标已有译文』闸拦下，列在这里只是为了让报告把它们显式记一笔而不是静默留着。",
+  "substitutions": [
+    ["Arcturel Upper", "Arcturel Tradeway"],
+    ["Arcturel Lower", "Arcturel Dives"]
+  ]
+}
