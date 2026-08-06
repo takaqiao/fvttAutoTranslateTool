@@ -7,7 +7,10 @@ Reads the residual list so items Babele resolves for free are never handed out.
 import json, os, re, sys, collections
 
 P = r"C:\Users\Taka\Desktop\fvtt\Ember-Crucible Translation Project"
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "parallel")
+# 单元工作目录是会话级临时件，不进仓库。用环境变量指过去：
+#   $env:EMBER_PARALLEL_ROOT = "<scratchpad>\parallel"
+ROOT = os.environ.get("EMBER_PARALLEL_ROOT") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "parallel")
 RES = os.path.join(P, "5-其他内容", "reports", "ember", "todo", "_residual_after_fallback.json")
 CNP = os.path.join(P, "1-Ember汉化插件", "compendium", "cn", "ember.crucible-adventure.json")
 CJK = re.compile(r"[一-鿿]")
@@ -18,7 +21,13 @@ CJ = cn["entries"]["Ember Early Access"]["journals"]
 
 
 def slug(s):
-    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    out = re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    # 全中文的名字会被剥成空串，os.path.join(ROOT, "") 就等于 ROOT 本身 ——
+    # todo.json 会被写进并行根目录，而 agent 按 ROOT\<名字> 去找，什么都找不到。
+    # 踩过一次（「小卷合集」），这里必须兜底。
+    if not out:
+        raise SystemExit(f"单元名 {s!r} 生成不出 ASCII 目录名，请改用带拉丁字母的名字")
+    return out
 
 
 def journal_of(p):
