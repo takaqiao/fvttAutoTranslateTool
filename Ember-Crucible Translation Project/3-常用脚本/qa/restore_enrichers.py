@@ -103,6 +103,30 @@ def aligned_pairs(en_s, cn_s):
     return list(zip(a, b)) if len(a) == len(b) > 1 else None
 
 
+def ember_candidates(token):
+    """Ember 自己的增强器：按 token 现算候选写法。
+
+    这些增强器渲染出来一律是 <strong>…</strong>：
+      @Advantage[2]        → <strong>+2 Boons</strong>   → 译文多半是「+2 恩惠骰」
+      @Advantage[-2]       → <strong>-2 Banes</strong>   → 「-2 祸骰」
+      @CriticalSuccess[13] → <strong>Critical Success</strong>
+    注意 CriticalSuccess 的 DC **不出现在渲染结果里**，所以译文那侧没有任何线索，
+    只能靠段落对齐从英文同一段里取回 N —— 这也是为什么必须先做段落对齐再落到这里。
+    """
+    out = []
+    m = re.fullmatch(r"@Advantage\[(-?\d+)\]", token)
+    if m:
+        n = int(m.group(1))
+        body = f"+{n} 恩惠骰" if n > 0 else f"{n} 祸骰"
+        alt = f"+{n} 恩惠" if n > 0 else f"{n} 祸"
+        out += [f"<strong>{body}</strong>", f"<strong>{alt}</strong>", body]
+    m = re.fullmatch(r"@Critical(Success|Failure)\[\d+\]", token)
+    if m:
+        body = "重大成功" if m.group(1) == "Success" else "重大失败"
+        out += [f"<strong>{body}</strong>", body]
+    return out
+
+
 def candidate_forms(word):
     """译文里同一个状态可能写成「被夹击」「处于倒地状态」「<strong>暴露</strong>」等。
     按从具体到宽泛的顺序试，第一个数量对得上的就用它 —— 顺带把多包的 <strong> 一起收掉。"""
@@ -116,11 +140,16 @@ def main():
     ap.add_argument("--package", required=True)
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--surface-forms", help="旧译文的各种裸写法 → enricher 的对照表")
+    ap.add_argument("--lang-repo", help="术语表取自另一个仓库的 lang/cn.json（修 ember 时要指向 crucible-cn，"
+                                        "因为 @Condition / @Action 的名字都归 crucible 管）")
+    ap.add_argument("--lang-package", help="与 --lang-repo 配套的 Foundry 包目录")
     args = ap.parse_args()
 
     repo = Path(args.repo)
-    lang_en = flatten(json.loads((Path(args.package) / "lang" / "en.json").read_text(encoding="utf-8-sig")))
-    lang_cn = flatten(json.loads((repo / "lang" / "cn.json").read_text(encoding="utf-8-sig")))
+    lang_pkg = Path(args.lang_package or args.package)
+    lang_repo = Path(args.lang_repo or args.repo)
+    lang_en = flatten(json.loads((lang_pkg / "lang" / "en.json").read_text(encoding="utf-8-sig")))
+    lang_cn = flatten(json.loads((lang_repo / "lang" / "cn.json").read_text(encoding="utf-8-sig")))
     terms = build_terms(lang_en, lang_cn)
     surface = {}
     if args.surface_forms:
@@ -162,6 +191,7 @@ def main():
                     for token, n in seg_missing.items():
                         word = terms.get(token)
                         cands = (candidate_forms(word) if word else []) \
+                            + ember_candidates(token) \
                             + surface.get(token, []) + surface.get(token + "{生物}", [])
                         form = next((c for c in cands if out_seg.count(c) == n), None)
                         if form:
@@ -193,6 +223,7 @@ def main():
                 # lang 里没有对应译名的（@Action[Compendium…] 这类指向具体物品的），
                 # 只能靠 surface-forms 对照表
                 cands = (candidate_forms(word) if word else []) \
+                    + ember_candidates(token) \
                     + surface.get(token, []) + surface.get(token + "{生物}", [])
                 if not cands:
                     unresolved.append(f"{token} ×{n}（没有对应中文词，也没有 surface-forms 条目）")

@@ -119,7 +119,41 @@ def main():
             elif new != t:
                 unresolved.append((name, p, ne, count_strong(new)))
 
+    # ── 第三步：反向补加粗（英文有、译文没有）────────────────
+    # 同一张对应表反过来用：英文加粗的词映射成中文，若该中文词在译文里恰好出现一次
+    # 且当前没被加粗，就给它包上。数量同样必须正好落到英文的值，否则整条不动。
+    added = Counter()
+    for name, (en, cn_doc) in packs.items():
+        cn = dict(leaves(cn_doc))
+        for p, s in en.items():
+            t = cn.get(p)
+            if t is None or p in fixed.get(name, {}):
+                continue
+            ne, nc = count_strong(s), count_strong(t)
+            if nc >= ne:
+                continue
+            already = {w.strip() for w in STRONG.findall(t)}
+            new = t
+            for w in STRONG.findall(s):
+                if count_strong(new) >= ne:
+                    break
+                cw = table.get(w.strip())
+                if not cw or cw in already:
+                    continue
+                # 只在「未被任何标签包裹、且全文恰好出现一次」时才动
+                if new.count(cw) != 1 or f"<strong>{cw}</strong>" in new:
+                    continue
+                new = new.replace(cw, f"<strong>{cw}</strong>", 1)
+                already.add(cw)
+                added[cw] += 1
+            if count_strong(new) == ne and new != t:
+                fixed[name][p] = new
+
     total = sum(len(v) for v in fixed.values())
+    if added:
+        print(f"反向补加粗 {sum(added.values())} 处，top：")
+        for w, n in added.most_common(8):
+            print(f"    {n:>3}  {w}")
     print(f"可自动修 {total} 条；拆掉的多余加粗 top：")
     for w, n in stats.most_common(12):
         print(f"    {n:>3}  {w}")
