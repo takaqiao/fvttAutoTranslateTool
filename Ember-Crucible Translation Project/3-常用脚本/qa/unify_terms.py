@@ -162,14 +162,27 @@ def main():
         for f, items in by_file.items():
             doc = json.loads(f.read_text(encoding="utf-8-sig"))
             for path, new in items.items():
-                node = doc
                 parts = re.findall(r"[^.\[\]]+", path)
-                for p in parts[:-1]:
-                    node = node[int(p)] if isinstance(node, list) else node[p]
+                node, i = doc, 0
+                # 条目名本身可能带点（`Patch 0.5` 之类），拼路径时被拆开了。
+                # 逐级下探时，若当前段找不到，就把后续段用 '.' 接回去再试。
+                while i < len(parts) - 1:
+                    if isinstance(node, list):
+                        node = node[int(parts[i])]
+                        i += 1
+                        continue
+                    for j in range(len(parts) - 1, i - 1, -1):
+                        key = ".".join(parts[i:j + 1])
+                        if key in node:
+                            node, i = node[key], j + 1
+                            break
+                    else:
+                        raise KeyError(f"{path} 里的 {parts[i]!r} 在文档中不存在")
+                last = ".".join(parts[i:])
                 if isinstance(node, list):
-                    node[int(parts[-1])] = new
+                    node[int(last)] = new
                 else:
-                    node[parts[-1]] = new
+                    node[last] = new
             f.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             print(f"    写入 {f.name}  ({len(items)} 条)")
 

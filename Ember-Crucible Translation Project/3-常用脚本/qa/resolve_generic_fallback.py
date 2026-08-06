@@ -57,14 +57,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--repo', required=True)
     ap.add_argument('--also', nargs='*', default=[])
+    ap.add_argument('--reports', help='报告目录；不给则按仓库目录名推断')
     a = ap.parse_args()
 
     resolvable = translated_names([a.repo, *a.also])
     print(f'names resolvable from translated packs: {len(resolvable)}\n')
 
-    todo_dir = os.path.join(a.repo, '..', '5-其他内容', 'reports',
-                            'crucible' if 'Crucible' in a.repo else 'ember', 'todo')
+    # 必须只看仓库**目录名**：项目根目录本身就叫 "Ember-Crucible Translation Project"，
+    # 拿整条路径判断会让 ember 仓库也命中 'Crucible'，静默去读 crucible 的清单。
+    if a.reports:
+        todo_dir = os.path.join(a.reports, 'todo')
+    else:
+        leaf = os.path.basename(os.path.normpath(a.repo))
+        todo_dir = os.path.join(a.repo, '..', '5-其他内容', 'reports',
+                                'crucible' if 'Crucible' in leaf else 'ember', 'todo')
     todo_dir = os.path.normpath(todo_dir)
+    print(f'todo dir: {todo_dir}\n')
     if not os.path.isdir(todo_dir):
         print(f'no todo dir at {todo_dir}')
         return

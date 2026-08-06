@@ -1,0 +1,51 @@
+[
+  {
+    "term": "Attunement",
+    "en": "(?i)\\battun",
+    "canonical": "同调",
+    "variants": ["调谐"],
+    "note": "第 8b 项。阶段 7 已把 lang/cn.json(486 键)与 character/crucible-character 定为『同调』，玩家在角色卡上看到的就是它；战役包却还有 418 处『调谐』。UI 与正文必须一致，所以清扫方向是 调谐→同调，而不是反过来。"
+  },
+  {
+    "term": "Ancestry",
+    "en": "(?i)\\bancest",
+    "canonical": "血统",
+    "variants": ["祖裔"],
+    "note": "第 8b 项。阶段 9 已定名血统（ember.character 16 个血统条目名），战役包残留 149 处祖裔。"
+  },
+  {
+    "term": "The Dives",
+    "en": "\\bDives\\b",
+    "canonical": "矿渊",
+    "variants": ["底层区"],
+    "note": "阶段 16 定名，且 journal 名/场景名/分类名都是『阿克图瑞尔矿渊』『矿渊』(45 处)；『底层区』21 处是旧译，作为专名它把名字译丢了。glossary_ec 里的 The Dives→底层区 需同步改。"
+  },
+  {
+    "term": "Rallyhome",
+    "en": "\\bRallyhome\\b",
+    "canonical": "聚归馆",
+    "variants": ["拉力之家"],
+    "note": "阶段 19 已统一 13 处，仍剩 3 处（当时因条目本身与英文结构不符被闸拦下）。"
+  },
+  {
+    "term": "Amalthea",
+    "en": "\\bAmalthea\\b",
+    "canonical": "阿玛尔忒亚",
+    "variants": ["阿玛尔忒娅"],
+    "note": "演员条目名就是『阿玛尔忒亚·石艺』，全库 161 : 13。并行第 1 批的跨卷核对查出的分叉。"
+  },
+  {
+    "term": "Inkaro (pearl 语境)",
+    "en": "(?i)\\bpearl",
+    "canonical": "因卡罗",
+    "variants": ["印卡罗"],
+    "note": "有 7 处英文只说 pearl 不带 Inkaro（物品描述、拉丽莎传记等），上一条的 en 闸放行不了，用 pearl 兜底。"
+  },
+  {
+    "term": "Inkaro",
+    "en": "\\bInkaro\\b",
+    "canonical": "因卡罗",
+    "variants": ["印卡罗"],
+    "note": "全库 因卡罗 126 : 印卡罗 39，glossary_ec 亦作因卡罗；只有 4 个物品条目名写『印卡罗珍珠』。改 4 个条目名比改 126 处正文便宜，且统一后 @UUID 标签与物品名自然对齐。（并行第 1 批的跨卷核对当时按我写错的 BRIEF 选了印卡罗，此处纠正。）"
+  }
+]
