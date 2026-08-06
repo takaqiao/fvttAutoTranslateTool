@@ -151,12 +151,23 @@ def set_at(root, parts, value, shape=None):
         node[parts[-1]] = value
 
 
+# Quoted parameter VALUES inside markup are visible prose, not machinery:
+# `@Embed[Actor.x readaloud="A radiant figure stands…"]` renders that sentence to
+# the player. Comparing it verbatim made the whole @Embed immutable, so those
+# read-aloud blocks could never be translated -- even though 22 of them already
+# were. Only the value is blanked; the parameter NAME and everything outside the
+# quotes still has to match.
+QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
+
+
 def markup_signature(s: str):
     """Order-insensitive multiset of the markup that must be preserved.
 
     `@UUID[target]{label}` compares on `@UUID[target]` only: the label is the
-    visible text and must be translated, not preserved.
+    visible text and must be translated, not preserved. Same for `key="value"`
+    parameters inside a marker.
     """
+    s = QUOTED_PARAM.sub('="~"', s)
     return (Counter(MARKUP.findall(s))
             + Counter(INLINE_CMD.findall(s))
             + Counter(f'<{slash}{name.lower()}' for slash, name in TAGNAME.findall(s)))
