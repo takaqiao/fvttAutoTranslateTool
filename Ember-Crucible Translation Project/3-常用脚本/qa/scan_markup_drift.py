@@ -34,7 +34,14 @@ LABEL_AFTER_MARKUP = re.compile(
     r'(?:@[A-Za-z]+\[[^\]]*\]|&(?:amp;)?[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\])\s*\{[^}]*\}')
 
 
+# 标记里 key="value" 形式的参数值同样是给玩家看的散文
+# （`@Embed[Actor.x readaloud="…"]` 会把那段话念出来），译了不算链接坏。
+# 不抹掉的话，每翻一段 readaloud 就多报一条 LINK。
+QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
+
+
 def strip_labels(s):
+    s = QUOTED_PARAM.sub('="~"', s)
     return LABEL_AFTER_MARKUP.sub(lambda m: m.group(0).split("{")[0], s)
 TAGNAME = re.compile(r'<\s*(/?)([a-zA-Z][a-zA-Z0-9]*)')
 BLOCK_TAGS = {"p", "li", "ul", "ol", "table", "tr", "td", "th", "h1", "h2", "h3", "h4",
@@ -88,9 +95,11 @@ def main():
             t = cn.get(p)
             if not t:
                 continue
+            # 比对链接前先把 key="value" 参数值抹平：那是散文，不是目标
+            sl, tl = QUOTED_PARAM.sub('="~"', s), QUOTED_PARAM.sub('="~"', t)
             checks = {
-                "LINK": diff(Counter(MARKUP.findall(s)) + Counter(INLINE_CMD.findall(s)),
-                             Counter(MARKUP.findall(t)) + Counter(INLINE_CMD.findall(t))),
+                "LINK": diff(Counter(MARKUP.findall(sl)) + Counter(INLINE_CMD.findall(sl)),
+                             Counter(MARKUP.findall(tl)) + Counter(INLINE_CMD.findall(tl))),
                 "BLOCK": diff(tag_counter(s, BLOCK_TAGS), tag_counter(t, BLOCK_TAGS)),
                 "INLINE": diff(tag_counter(s, INLINE_TAGS), tag_counter(t, INLINE_TAGS)),
                 "PLACEHOLDER": diff(Counter(PLACEHOLDER.findall(strip_labels(s))),
