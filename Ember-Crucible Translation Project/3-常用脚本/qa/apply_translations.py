@@ -76,6 +76,42 @@ def get_at(node, parts):
     return node
 
 
+def split_path(root, path):
+    """Split a dotted path into keys, tolerating keys that contain dots.
+
+    Journal page keys such as `Patch 0.5.1` are shredded by a naive
+    `path.split('.')`, so every leaf under them looks like it has no English
+    source. The naive split is still tried first (unchanged behaviour); only
+    when it resolves to nothing do we walk `root` preferring the longest
+    matching key.
+    """
+    naive = path.split('.')
+    if get_at(root, naive) is not None:
+        return naive
+    parts, node, rest = [], root, path
+    while rest:
+        if isinstance(node, dict):
+            cands = [k for k in node if rest == k or rest.startswith(k + '.')]
+            if cands:
+                k = max(cands, key=len)
+                parts.append(k)
+                node = node[k]
+                rest = rest[len(k) + 1:]
+                continue
+        head, _, rest = rest.partition('.')
+        parts.append(head)
+        if isinstance(node, list):
+            try:
+                node = node[int(head)]
+            except (ValueError, IndexError):
+                node = None
+        elif isinstance(node, dict):
+            node = node.get(head)
+        else:
+            node = None
+    return parts
+
+
 def set_at(root, parts, value, shape=None):
     """Write `value` at `parts`, creating containers that MIRROR the English
     structure.
@@ -152,6 +188,7 @@ def main():
         root_cn = cn.setdefault('folders', {}) if parts[0] == '(folders)' else cn.setdefault('entries', {})
         if parts[0] == '(folders)':
             parts = parts[1:]
+        parts = split_path(root_en, '.'.join(parts))
 
         src = get_at(root_en, parts)
         if not isinstance(src, str):

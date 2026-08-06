@@ -25,20 +25,34 @@ def sig(s):
             + Counter(f'<{a}{b.lower()}' for a, b in TAGNAME.findall(s)))
 
 
-def convert(node, stats, samples):
+DASH = re.compile(r' *—— *')
+
+
+def fix(s, mode):
+    if mode == 'quotes':
+        return s.replace('「', '“').replace('」', '”')
+    # 破折号：全库 3798 无空格 : 127 带空格，带空格的那批是后来一轮按风格说明写的
+    return DASH.sub('——', s)
+
+
+def hit(s, mode):
+    return ('「' in s or '」' in s) if mode == 'quotes' else bool(re.search(r' ——| —— |—— ', s))
+
+
+def convert(node, stats, samples, mode='quotes'):
     if isinstance(node, dict):
-        return {k: convert(v, stats, samples) for k, v in node.items()}
+        return {k: convert(v, stats, samples, mode) for k, v in node.items()}
     if isinstance(node, list):
-        return [convert(v, stats, samples) for v in node]
-    if isinstance(node, str) and ('「' in node or '」' in node):
-        new = node.replace('「', '“').replace('」', '”')
+        return [convert(v, stats, samples, mode) for v in node]
+    if isinstance(node, str) and hit(node, mode):
+        new = fix(node, mode)
         if sig(new) != sig(node):                      # 不可能发生，发生就是有别的东西被动了
             stats['refused'] += 1
             return node
         stats['changed'] += 1
-        stats['pairs'] += node.count('「')
+        stats['pairs'] += node.count('「') if mode == 'quotes' else len(DASH.findall(node))
         if len(samples) < 6:
-            i = node.index('「')
+            i = node.index('「') if mode == 'quotes' else node.index('——')
             samples.append(node[max(0, i - 30):i + 40])
         return new
     return node
@@ -47,6 +61,7 @@ def convert(node, stats, samples):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--repo', required=True)
+    ap.add_argument('--mode', choices=['quotes', 'dashes'], default='quotes')
     ap.add_argument('--write', action='store_true')
     a = ap.parse_args()
 
@@ -58,7 +73,7 @@ def main():
         with open(p, encoding='utf-8') as f:
             doc = json.load(f)
         before = stats['changed']
-        out = convert(doc, stats, samples)
+        out = convert(doc, stats, samples, a.mode)
         if stats['changed'] > before:
             print(f'{fn:<38}{stats["changed"] - before:>5} 条')
             if a.write:
