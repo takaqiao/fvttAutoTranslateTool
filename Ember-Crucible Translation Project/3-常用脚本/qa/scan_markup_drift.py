@@ -51,7 +51,13 @@ def leaves(obj, prefix=""):
         yield prefix, obj
 
 
+EMPTY_P = re.compile(r"<p>\s*</p>")
+
+
 def tag_counter(s, which):
+    # 英文原文里散着一些空的 <p></p>（排版留白），译文普遍没有照抄。
+    # 那不是漏译，先剔掉再数，免得淹没真正的段落差异。
+    s = EMPTY_P.sub("", s)
     return Counter(f"{slash}{name.lower()}" for slash, name in TAGNAME.findall(s)
                    if name.lower() in which)
 
