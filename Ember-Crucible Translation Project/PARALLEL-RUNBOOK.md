@@ -18,6 +18,23 @@ $WORK = <本会话 scratchpad>\parallel            ← 每个单元的 todo.json
 `C:\Users\Taka\AppData\Local\Temp\claude\C--Users-Taka-Desktop-fvtt\<会话id>\scratchpad\parallel`。
 **发 workflow 时提示词里写的是绝对路径**，所以同一会话内一直有效；换了会话要重新 prep。
 
+### 换会话时怎么接手（重要）
+
+新会话拿不到旧会话的 scratchpad，也**没有旧 workflow 的 runId**，所以：
+
+1. **上一批必须先落盘再换会话**。batch 是临时件，只有落进 `compendium/cn` 并 commit 才算数。
+   如果换会话时还有没落盘的 batch，那批就得重做 —— 交接前先确认 `git log` 里有它。
+2. 新会话开局照做：读 `PROJECT.md` 第 1 节 → 读本文件 → 跑手册第 1 节的三条命令查状态。
+   **不需要**旧会话的任何东西，仓库里的东西是自足的。
+3. 重新 prep 时把 `$env:EMBER_PARALLEL_ROOT` 指到新会话的 scratchpad，例如：
+   ```powershell
+   $base = "$env:LOCALAPPDATA\Temp\claude\C--Users-Taka-Desktop-fvtt\<新会话id>\scratchpad\parallel"
+   $env:EMBER_PARALLEL_ROOT = $base
+   ```
+   然后按第 4 节切单元、发 workflow。`3-常用脚本\parallel\` 下的脚本与 `BRIEF.md` 都在仓库里，
+   跟着 clone 走，不依赖会话。
+4. **不要试图 resume 旧会话的 workflow** —— runId 是会话内的，新会话只能重发。
+
 ## 1. 先判断做到哪一步（每次唤醒的第一件事）
 
 按顺序查这三样，不要凭印象：
@@ -68,7 +85,13 @@ Workflow({ scriptPath: "<上一轮返回的 Script file 路径>", resumeFromRunI
 ```powershell
 # 3.1 逐个 --dry，必须全部 0 拒绝；有拒绝就先修，别硬写
 python "$P\3-常用脚本\qa\apply_translations.py" --repo "$REPO" --pack ember.crucible-adventure.json --batch "$WORK\<单元>\batch.json" --dry
-# 3.2 全部干净后去掉 --dry 落盘（跨卷核对改过的 batch 要加 --force）
+# 3.2 全部干净后去掉 --dry 落盘
+#     ⚠ **补缺块(fill-*)与跨卷核对改过的 batch 必须加 --force**。
+#       第 8c 项的目标路径本来就有中文(那正是它的定义)，不加 --force 会被
+#       「已有中文则跳过」闸**静默跳过**，apply 报 skipped(existing) 而不是报错。
+#       第 5 批就这么踩过：8 个 fill 单元一条没写进去，而覆盖率因为同批其它单元
+#       在涨，看不出异常 —— **是标记漂移一动不动才暴露的**。
+#       补缺块落盘后 BLOCK / TRUNCATED 必须明显下降，没降就是没写进去。
 # 3.3 跨卷术语核对：如果 workflow 里的 cross-check agent 挂了，单独补一个 Agent 跑
 #     （提示词见第 6 节），它改的是 batch.json，改完用 --force 重新落盘
 # 3.4 风格归一
@@ -128,13 +151,33 @@ python "$PAR\attach_orphans.py" <manifest 文件名>
 矿渊 / 聚归馆 / 异缘会 / 玛伊斯 / 基希尔 / 为了他人的财富 / 引号 “” / 破折号无空格）。
 它改 batch.json，改完每个动过的 batch 重跑 `--dry`（已落盘的加 `--force`）必须 0 拒绝。
 
+## 6.5 下一批（第 6 批）该做什么
+
+第 5 批落盘后，战役包的**常规待译清零**，剩下的都是「覆盖率看不见」的欠账。按优先级：
+
+1. **第 8c 项剩余**（补缺块，约 26 万字符）。用
+   `python "$PAR\prep_8c.py" 32000 --min 300` 重新切 —— 它读的是
+   `reports/ember/missing_blocks.json`，**必须先重跑 `4-临时脚本/2026-08-06/measure_8c.py`**
+   刷新那份报告，否则会把第 5 批已经补好的又发一遍。
+2. **第 8j 项**（译文里留着英文早已删除的内容，189 条 / 约 4.8 万字符）。
+   清单在 `reports/ember/stale_extra_blocks.json`，由 `measure_stale_extra.py` 生成。
+   这一类要**删**不要补，提示词得反过来写。
+3. **孪生包 `ember.adventure`**：先写 `tm/fill_twin.py`（88% 可由精确匹配 TM 直接填，
+   见 `4-临时脚本/2026-08-06/measure_twin_tm.py` 的实测），填完再看剩多少需要真翻。
+   独有部分只有 14.2 万字符。
+4. **第 8p 项**：世界地图专名重定（Break→破坏、Crown→王冠、Mordant→腐蚀性的、
+   WINDBARE→光秃秃的 等，把专名当普通词译掉了）。量小但显眼。
+
 ## 7. 剩余工作量（随每轮更新）
+
+截至第 5 批落盘（2026-08-08）：
 
 | 项 | 字符 | 状态 |
 |---|---|---|
-| 战役包常规待译 | 69.1 万 | 第 3 批进行中（30.8 万） |
-| 第 8c 项：中文缺块 | 53.3 万 | 未开始，`measure_8c.py` 出清单 |
-| 第 8j 项：中文多出内容 | 4.8 万 | 未开始，`measure_stale_extra.py` 出清单 |
+| 战役包常规待译 | **4.8 万** | 覆盖率 98%，剩的多是 babele 会自动解析的内嵌物品 |
+| 第 8c 项：中文缺块 | **26.0 万** | 已做掉 27.2 万；重切前**先重跑** `measure_8c.py` |
+| 第 8j 项：中文多出内容 | 4.8 万 | 未开始，`measure_stale_extra.py` 出清单；这一类要**删**不要补 |
 | dnd5e 孪生包独有 | 14.2 万 | 未开始；另有 88% 可由 TM 脚本直接填，需写 `tm/fill_twin.py` |
 
-按每轮 27–30 万算，常规待译还需 2–3 轮，之后 8c/8j 与孪生包各 1–2 轮。
+五轮实测：**7000 余条 / 约 140 万英文字符**落盘零拒绝，标记漂移五轮全部只降不升
+（LINK 689→624、BLOCK 584→519、INLINE 265→230、TRUNCATED 69→51）。
