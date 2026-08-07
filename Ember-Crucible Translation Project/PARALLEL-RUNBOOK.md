@@ -55,7 +55,11 @@ cd "$REPO"; git status --short; git log --oneline -3
 Workflow({ scriptPath: "<上一轮返回的 Script file 路径>", resumeFromRunId: "<上一轮的 Run ID>" })
 ```
 已完成的 agent 从缓存回放（不重跑、不烧额度），失败的重跑。
-**实测过两次，磁盘上不会留半截 batch** —— 失败的译者是一个字都没写，不是写了一半。
+
+**resume 之前先跑一次 `batch_status.py`，把「不完整」的 batch 挪走。**
+多数失败的译者是一个字都没写，但**第 5 批出现了写到一半就被掐断的**（fill-8 写了 12 条里的 4 条）。
+留着的话，重跑的 agent 可能在半截文件上接着写，最后既不是旧的也不是新的。
+挪走（改名成 `batch.partial.bak`，别删）再 resume。
 
 ## 3. 落盘流程（batch 齐了之后）
 
