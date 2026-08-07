@@ -1,0 +1,38 @@
+[
+  {
+    "term": "Kinesis",
+    "en": "(?i)\\bkinesis\\b|\\bKineturge\\b",
+    "canonical": "念力",
+    "variants": ["念动力"],
+    "note": "crucible 包 53 处/14 个条目名用念力（含念力术师 Kineturge、念力熟练度），ember 包 58 处/11 个条目名用念动力，两边各自内部一致、互相打架。按 PROJECT.md 第 8 节 2026-08-06 的既有决议取念力。**crucible lang 的 SPELL.RUNES.Kinesis 还写着念动力，要一并改**，否则法术构筑界面与天赋列表两个称呼。"
+  },
+  {
+    "term": "Gesture: Aspect",
+    "en": "\\bAspect\\b",
+    "canonical": "化相",
+    "variants": ["形相"],
+    "note": "条目名两个包合计 18 个都是「手势：化相」，是最强证据。描述正文里另有形相 12 处。**注意没有把「形态」列进 variants** —— 那个词在库里 578 处，绝大多数是普通义的『形态/外形』，机械替换必然误伤。crucible lang 的 SPELL.GESTURES.Aspect 写「相位」，要一并改。"
+  },
+  {
+    "term": "Glyphweaving",
+    "en": "\\bGlyphweav",
+    "canonical": "符文编织",
+    "variants": ["符纹编织"],
+    "note": "UI 技能标签 SKILL.LABELS.glyphweaving 就是符文编织，全库 18 : 3。现状是同一张角色卡上「符纹编织新手」与「符文编织熟练工」并列。"
+  },
+  {
+    "term": "Willpower（防御）",
+    "en": "\\bWillpower\\b",
+    "canonical": "意志力防御",
+    "variants": ["意志防御"],
+    "note": "lang 的 DEFENSES.Willpower = 意志力。改成「意志力防御」而不是光「意志力」，是为了与既定的『坚韧防御 Fortitude』构词一致（那条是为避开 Toughness=坚韧 才加的『防御』二字；Willpower 没有撞名问题，但保持同一套构词更好认）。仅 crucible 包 8 处。"
+  },
+  {
+    "term": "Rune: Storm 被误译成闪电",
+    "en": "\\bStorm\\b",
+    "unless": "\\bLightning\\b",
+    "canonical": "风暴",
+    "variants": ["闪电"],
+    "note": "**这条是错译不是风格问题**。上游早已把 Rune: Lightning 改名为 Rune: Storm（PROJECT.md 阶段 5 已在 crucible 侧修过），ember 包的 Rune: Earth 描述里还有 9 处写着『闪电』——而闪电在本世界观里另有所指。unless 闸挡住同时出现 Lightning 的条目，避免误伤。"
+  }
+]
