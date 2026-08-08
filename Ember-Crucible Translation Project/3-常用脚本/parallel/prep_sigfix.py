@@ -74,52 +74,64 @@ def walk(en, cn, path, out):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("weight", type=int, nargs="?", default=90000)
-    ap.add_argument("--pack", default="ember.crucible-adventure.json")
+    ap.add_argument("--pack", default="ember.crucible-adventure.json",
+                    help='包名；"*" 表示仓库里所有包')
     ap.add_argument("--repo", default=os.path.join(P, "1-Ember汉化插件"))
+    ap.add_argument("--prefix", default="sigfix")
     ap.add_argument("--min", type=int, default=0)
     a = ap.parse_args()
 
-    en = json.load(open(os.path.join(a.repo, 'compendium', 'en', a.pack),
-                        encoding='utf-8'))['entries']
-    cn = json.load(open(os.path.join(a.repo, 'compendium', 'cn', a.pack),
-                        encoding='utf-8'))['entries']
-    o = []
-    walk(en, cn, [], o)
+    en_dir = os.path.join(a.repo, 'compendium', 'en')
+    cn_dir = os.path.join(a.repo, 'compendium', 'cn')
+    packs = ([f for f in sorted(os.listdir(en_dir))
+              if f.endswith('.json') and os.path.exists(os.path.join(cn_dir, f))]
+             if a.pack == "*" else [a.pack])
 
     rows = []
-    for path, e, c in o:
-        if not (c and CJK.search(c)):
-            continue
-        se, sc = markup_signature(e), markup_signature(c)
-        if se == sc:
-            continue
-        if len(TAG.sub(' ', e)) < a.min:
-            continue
-        diff = {k: (se.get(k, 0), sc.get(k, 0))
-                for k in set(se) | set(sc) if se.get(k, 0) != sc.get(k, 0)}
-        rows.append({
-            "path": path, "en": e, "cn": c, "diff": diff,
-            # missing = English has it and Chinese does not; those usually mean
-            # a whole branch or link was dropped and must be written back
-            "missing": sum(max(0, w - g) for w, g in diff.values()),
-            "surplus": sum(max(0, g - w) for w, g in diff.values()),
-            "weight": round(0.15 * (len(e) + len(c))),
-        })
+    for pack in packs:
+        o = []
+        walk(json.load(open(os.path.join(en_dir, pack), encoding='utf-8'))['entries'],
+             json.load(open(os.path.join(cn_dir, pack), encoding='utf-8'))['entries'], [], o)
+        for path, e, c in o:
+            if not (c and CJK.search(c)):
+                continue
+            se, sc = markup_signature(e), markup_signature(c)
+            if se == sc:
+                continue
+            if len(TAG.sub(' ', e)) < a.min:
+                continue
+            diff = {k: (se.get(k, 0), sc.get(k, 0))
+                    for k in set(se) | set(sc) if se.get(k, 0) != sc.get(k, 0)}
+            rows.append({
+                "pack": pack, "path": path, "en": e, "cn": c, "diff": diff,
+                # missing = English has it and Chinese does not; those usually mean
+                # a whole branch or link was dropped and must be written back
+                "missing": sum(max(0, w - g) for w, g in diff.values()),
+                "surplus": sum(max(0, g - w) for w, g in diff.values()),
+                "weight": round(0.15 * (len(e) + len(c))),
+            })
 
-    rows.sort(key=lambda r: -r["weight"])
-    n = max(1, round(sum(r["weight"] for r in rows) / a.weight))
-    units = [[] for _ in range(n)]
-    load = [0] * n
-    for r in rows:
-        i = load.index(min(load))
-        units[i].append(r)
-        load[i] += r["weight"]
+    # A unit must never mix packs: `collect_realign.py` emits one batch.json and
+    # `apply_translations.py --pack` lands exactly one pack. Chunk within a pack.
+    units = []
+    for pack in packs:
+        pr = sorted([r for r in rows if r["pack"] == pack], key=lambda r: -r["weight"])
+        if not pr:
+            continue
+        n = max(1, round(sum(r["weight"] for r in pr) / a.weight))
+        buckets = [[] for _ in range(n)]
+        load = [0] * n
+        for r in pr:
+            i = load.index(min(load))
+            buckets[i].append(r)
+            load[i] += r["weight"]
+        units += [b for b in buckets if b]
 
     manifest = []
     for i, ch in enumerate(units, 1):
         if not ch:
             continue
-        name = f"sigfix-{i}"
+        name = f"{a.prefix}-{i}"
         d = os.path.join(ROOT, name)
         pages = os.path.join(d, "pages")
         os.makedirs(pages, exist_ok=True)
@@ -131,17 +143,17 @@ def main():
                     f.write(r[side])
             index.append({"id": j, "path": r["path"], "diff": r["diff"],
                           "missing": r["missing"], "surplus": r["surplus"]})
-        json.dump({"unit": name, "pack": a.pack, "pages": index},
+        json.dump({"unit": name, "pack": ch[0]["pack"], "pages": index},
                   open(os.path.join(d, "index.json"), "w", encoding="utf-8"),
                   ensure_ascii=False, indent=2)
         json.dump({str(r["id"]): ch[k]["cn"] for k, r in enumerate(index)},
                   open(os.path.join(d, "_original_cn.json"), "w", encoding="utf-8"),
                   ensure_ascii=False)
-        manifest.append({"unit": name, "dir": d, "pages": len(ch),
-                         "weight": load[i - 1],
+        manifest.append({"unit": name, "dir": d, "pack": ch[0]["pack"],
+                         "pages": len(ch),
                          "missing": sum(r["missing"] for r in ch),
                          "surplus": sum(r["surplus"] for r in ch)})
-        print(f'{name:<12}{len(ch):>4} 条  权重 {load[i-1]:>7}  '
+        print(f'{name:<12}{len(ch):>4} 条  {ch[0]["pack"]:<30} '
               f'缺标记 {sum(r["missing"] for r in ch):>4} / 多标记 {sum(r["surplus"] for r in ch):>4}')
 
     out = os.path.join(ROOT, "manifest.sigfix.json")
