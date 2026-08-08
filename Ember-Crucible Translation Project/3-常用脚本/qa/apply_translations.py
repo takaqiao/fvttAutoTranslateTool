@@ -250,4 +250,8 @@ def main():
     raise SystemExit(1 if problems else 0)
 
 
-main()
+# Guarded so `split_path` / `markup_signature` can be imported by the prep and
+# collect scripts instead of being reimplemented (and drifting) there.
+# CLI behaviour is unchanged.
+if __name__ == '__main__':
+    main()
