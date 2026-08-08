@@ -159,6 +159,12 @@ def set_at(root, parts, value, shape=None):
 # quotes still has to match.
 QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
 
+# dnd5e 的规则引用。`MARKUP` 只认 `@` 开头，于是 `&Reference[Restrained]` 长期不进签名 ——
+# 方括号里的键被译成中文（`&Reference[受拘束]`）时，闸门照样报 0 拒绝，而 enricher
+# 查不到这个键，玩家看到的是裸文本而不是规则链接。全库积了 77 条，2026-08-09 补上。
+# 按 BRIEF 第 2 节：方括号里是引用键不是正文，照抄；渲染时 dnd5e 自己出中文名。
+REFERENCE = re.compile(r'&(?:amp;)?[Rr]eference\[[^\]]*\]')
+
 
 def markup_signature(s: str):
     """Order-insensitive multiset of the markup that must be preserved.
@@ -166,10 +172,14 @@ def markup_signature(s: str):
     `@UUID[target]{label}` compares on `@UUID[target]` only: the label is the
     visible text and must be translated, not preserved. Same for `key="value"`
     parameters inside a marker.
+
+    `&Reference[key]` is normalised to a single entity form first, so a change of
+    `&amp;` to `&` alone is not treated as a markup change.
     """
     s = QUOTED_PARAM.sub('="~"', s)
     return (Counter(MARKUP.findall(s))
             + Counter(INLINE_CMD.findall(s))
+            + Counter(m.replace('&amp;', '&') for m in REFERENCE.findall(s))
             + Counter(f'<{slash}{name.lower()}' for slash, name in TAGNAME.findall(s)))
 
 
