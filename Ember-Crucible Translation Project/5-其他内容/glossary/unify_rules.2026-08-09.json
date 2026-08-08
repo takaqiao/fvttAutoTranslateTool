@@ -1,0 +1,69 @@
+[
+ {
+  "term": "Electricity（伤害类型）· 电能",
+  "en": "\\bElectricity\\b",
+  "unless": "(?i)electrical energy",
+  "canonical": "电击",
+  "variants": ["电能"],
+  "note": "PROJECT.md 第 8 节 2026-08-06 已裁定电击，2026-08-09 复核确认。英文确实是 Electricity 的条目里：电击 70 : 电能 26。两道排除：①**没有把「电力」列进来** —— 全库 8 处「电力」所在条目的英文里根本没有 Electricity（是普通义的电力供应）。②`unless: electrical energy` —— `Rune: Storm` 的引导句是『The chaotic force of raw **electrical energy**』，中文「原始电能的混沌之力」翻的是这个散文短语，而同一条里的伤害类型『deals **Electricity** damage』中文**已经**是「电击」。评审时抽查抓到的：不加这道守卫会把本来正确的译文改坏。"
+ },
+ {
+  "term": "Electricity 被误译成「闪电」",
+  "en": "\\bElectricity\\b",
+  "unless": "\\bLightning\\b",
+  "canonical": "电击",
+  "variants": ["闪电"],
+  "note": "全库 167 处「闪电」里，123 处英文确实是 Lightning（忠实翻译）、44 处是「闪电般迅捷」这类比喻，**只有英文写 Electricity 且不含 Lightning 的 23 处是真错**。unless 守卫是必须的：同一条里两个词都出现时（例：『承受闪电爆炸…它的电击抗性翻倍』）无法机械判断，宁可跳过。"
+ },
+ {
+  "term": "Concluding the Event",
+  "en": "\\bConcluding the Event\\b",
+  "canonical": "事件结束",
+  "variants": ["事件结尾", "事件收尾", "事件结算", "事件收束", "事件结语"],
+  "note": "第 1 批既有裁决。英文对得上的条目里 事件结束 852 : 结尾76 : 收尾41 : 结算14 : 收束12 : 结语7。**「事件结局」不在本条 variants 里**，另立一条带 unless 处理 —— 因为 Concluding the Event 与 Event Outcome 在同一条目里大量共现（Event Outcome 的 61 条里就有 134 处「事件结束」），不隔开会把 Outcome 的译文误改。"
+ },
+ {
+  "term": "Concluding the Event 被误译成「事件结局」",
+  "en": "\\bConcluding the Event\\b",
+  "unless": "\\bEvent Outcome",
+  "canonical": "事件结束",
+  "variants": ["事件结局"],
+  "note": "只在英文有 Concluding the Event、且**没有** Event Outcome 时才改，避免动到 Outcome 的译名。两者同时出现的条目一律跳过，宁可漏改不可错改。"
+ },
+ {
+  "term": "Event Outcome",
+  "en": "\\bEvent Outcome",
+  "unless": "\\bConcluding the Event\\b",
+  "canonical": "事件结果",
+  "variants": ["事件结局"],
+  "note": "跨单元核对裁决（全库 70:6）。与上一条互为镜像：只在英文有 Event Outcome、且没有 Concluding the Event 时才改。注意 Event Outcome ≠ Concluding the Event，是两个词。"
+ },
+ {
+  "term": "Marlstone Manor",
+  "en": "\\bMarlstone Manor\\b",
+  "canonical": "马尔斯通庄园",
+  "variants": ["马尔石庄园"],
+  "note": "journal 与 scene 的 name 字段都是马尔斯通庄园，英文对得上的条目里 161 : 22。**variants 特意写全「马尔石庄园」而不是裸「马尔石」** —— 街区名另有其用（跨单元核对已确认），裸词替换会误伤。"
+ },
+ {
+  "term": "Fernis Ossa",
+  "en": "\\bFernis\\b",
+  "canonical": "费尔尼斯",
+  "variants": ["费尼斯"],
+  "note": "actor 的 name 字段是「费尔尼斯·奥萨」，英文对得上的条目里 204 : 50。「费尔尼斯」不含子串「费尼斯」（中间多一个「尔」），所以不会自我重复替换。"
+ },
+ {
+  "term": "Young Cheliceraeth",
+  "en": "\\bYoung Cheliceraeth",
+  "canonical": "幼年螯蛛艾斯",
+  "variants": ["幼年螯蛛以太兽"],
+  "note": "依据阶梯此处**不取 name 字段**：actor name 写「幼年螯蛛以太兽」只有 8 处，而 archetype name 是「螯蛛艾斯 Cheliceraeth」、macro 是「切换螯蛛艾斯」、正文 44 处也是艾斯。孤立的一个 actor name 与同族的 archetype/macro/正文三方冲突，改它一处比改 44 处便宜（「改动面小的那边优先」）。**该 actor 的 name 字段要连带改**。"
+ },
+ {
+  "term": "Horrendor",
+  "en": "\\bHorrendor",
+  "canonical": "霍伦多尔",
+  "variants": ["惊惧者"],
+  "note": "actor name 字段是「霍伦多尔 Horrendor」，英文对得上的条目里 82 : 13。**「惊惧者」是另一个 actor `Harrower` 的名字**，挂到 Horrendor 上属挂错名（跨单元核对查实）。glossary_ec 里 Horrendor 写作「惊惧者」是错的，要一并改。"
+ }
+]
