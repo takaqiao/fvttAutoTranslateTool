@@ -1776,6 +1776,54 @@ TM 忠实地复制了过来 —— 也就是说 **`TRUNCATED` 可以当「内容
 
 ---
 
+### 2026-08-09 · 阶段 25：按新政策自行裁决并统一 9 组术语
+
+**范围**：项目所有者定下「不一致由主控自行裁决、不必上报」后的第一轮执行。
+
+**结果**：两个仓库共 **236 处替换 / 221 条目**落盘，QA **零回归**
+（覆盖率、标记漂移 232/26/112/29、外来文字 0、class 漂移 49 全部与统一前一致 ——
+术语替换只动中文词、不动结构，本就该如此）。
+
+| 组 | 裁决 | 处置 |
+|---|---|---|
+| `Electricity` 电能 | 电击 | 13（加 `electrical energy` 守卫后） |
+| `Electricity` 误译成闪电 | 电击 | 17 + crucible 6 |
+| `Concluding the Event` | 事件结束 | 146 + 7 |
+| `Event Outcome` | 事件结果 | 2 |
+| `Marlstone Manor` | 马尔斯通庄园 | 4 |
+| `Fernis Ossa` | 费尔尼斯 | 16 |
+| `Young Cheliceraeth` | 幼年螯蛛艾斯 | 8 |
+| `Horrendor` | 霍伦多尔 | 8 |
+| `Yakoshta` | 雅科什塔 | 19 |
+| 四个 `Vista:` 场景 name | 见第 8 节 | 8（两个包各 4） |
+
+**评审这一步救回两次误伤**（都是 `--review` 抽查发现的，不是事后补救）：
+
+1. `原始电能的混沌之力` 差点被改成「原始电击」—— 那句翻的是英文 `raw electrical energy`
+   这个散文短语，而同一条里的伤害类型本来就已经是「电击」。加 `unless` 守卫后
+   ember 少改 5 处、crucible 从 7 处降到 0。
+2. `Concluding the Event` 与 `Event Outcome` 在同一条目里大量共现，
+   不互加 `unless` 会把对方的译名改坏。
+
+**修掉 `unify_terms.py` 的两个缺陷**
+
+1. **`readaloud="…"` 里的专名会让整批统一自我中止**。`MARKUP` 把整个
+   `@Embed[Actor.x readaloud="……"]` 当一个标记，于是「费尼斯·奥萨」出现在旁白里时，
+   替换后签名对不上，脚本报「标记被改动了，中止」。
+   阶段 22 已裁定那段旁白**要翻译**，并同源修了 `apply_translations.markup_signature`
+   与 `scan_markup_drift` 的 LINK 判据 —— **本文件是第三处，当时漏了**。已补 `QUOTED_PARAM` 抹平。
+2. **JSON 里的 `\b` 是退格符，不是正则单词边界**。规则写成 `"\bYakoshta\b"`（少一个反斜杠）时
+   正则变成 `'\x08Yakoshta\x08'`，一条也匹配不上，而脚本**只安静地报「0 处」**——
+   看起来就像「本来就没有要改的」。已加载入时校验，直接报错拦下并说明原因。
+
+**15 条被既有漂移挡住**：这些条目的中文标记与英文本来就对不上（`[[/skill …]]` vs `[[/check …]]`、
+`<sup>/<sub>` 计数、`@CriticalSuccess[12]` 等），与本次替换无关 ——
+**拿未修改的现值过闸，同样 15 条全拒**，据此确认是存量缺陷。
+残留的 事件结尾 6 / 费尼斯 7 / 惊惧者 4 全部落在这 15 条里，数字自洽。
+它们属 LINK 232 / INLINE 112 的一部分，修完漂移后重跑本轮规则即可收尾。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
@@ -1944,3 +1992,9 @@ game.babele.cacheDiagnostics()
 | **2026-08-09** | **术语与前后不一致由主控自行裁决并统一，不上报项目所有者** | 项目所有者明示。此前「不静默择一、列进 `glossary_ec.disputes.json` 待裁决」的做法降级为**仅证据不足时**适用。裁决仍走既定依据阶梯，且必须写进本表 + 用 `unify_terms.py` 执行 + 复跑 QA |
 | 2026-08-09 | `Electricity` → **电击** 再次确认；`Lightning` → 闪电，两者**不是同一个词** | 第 1 节此前误记为「电力」，与本表 2026-08-06 的裁决及 `BRIEF.md` 冲突，已更正。实测：库内 电击 97 / 电能 48 / 电力 8；crucible `lang/cn.json` 里**一个含「电」的键都没有**，所以旧理由「以 lang 的 UI 标签为准」已不成立，改按决议＋库内多数。待刷的是**英文写 `Electricity` 却译成「闪电」的 23 处** ＋ 电能 48 ＋ 电力 8 |
 | 2026-08-09 | 库内 167 处「闪电」中，**123 处不动** | 那 123 处英文确实是 `Lightning`（忠实翻译），另有 44 处是「闪电般迅捷」这类比喻。`Rune: Lightning→Storm` 的改名只作用于**英文写 Storm** 的地方。**先查英文再判中文**，否则机械替换会误伤大片 |
+| 2026-08-09 | `Electricity` 的「电能」替换加 `unless: electrical energy` | `Rune: Storm` 引导句是 `The chaotic force of raw **electrical energy**`，中文「原始电能的混沌之力」翻的是这个散文短语，而同条里的伤害类型 `deals **Electricity** damage` 中文**本来就是**「电击」。评审抽查抓到的；不加守卫会把正确译文改坏（ember 5 处、crucible 全部 7 处都属此类） |
+| 2026-08-09 | `Concluding the Event` → **事件结束**；`Event Outcome` → **事件结果**；两者互加 `unless` | 是两个不同的词组，但在同一条目里大量共现（`Event Outcome` 的 61 条里就有 134 处「事件结束」）。不互相排除就会把对方的译名改坏。同时出现的条目一律跳过 —— 宁可漏改不可错改 |
+| 2026-08-09 | `Marlstone Manor` → **马尔斯通庄园**（变体写全「马尔石庄园」而非裸「马尔石」） | name 字段即马尔斯通庄园，英文对得上的条目里 161:22。裸「马尔石」另有街区名之用，替换会误伤 |
+| 2026-08-09 | `Fernis Ossa` → **费尔尼斯**；`Horrendor` → **霍伦多尔**；`Yakoshta` → **雅科什塔** | 均以 name 字段为准（204:50、82:13、6 处 name 对 2）。**「惊惧者」是另一个 actor `Harrower` 的名字**，挂在 Horrendor 上属挂错名，`glossary_ec` 里那条也是错的，已改 |
+| 2026-08-09 | `Young Cheliceraeth` → **幼年螯蛛艾斯**，**不取 name 字段** | 这是依据阶梯的例外：孤立的 actor name「幼年螯蛛以太兽」只有 8 处，而 archetype name「螯蛛艾斯」、macro「切换螯蛛艾斯」、正文 44 处三方一致。改这一处 name 比改 44 处正文便宜（「改动面小的那边优先」） |
+| 2026-08-09 | 四个 `Vista:` 场景 name 定名 | `Ordain Streets` 授命街道→**奥尔丹街道**（同一份场景清单里 `Ordain Overview`/`Ordain Interiors` 都作奥尔丹，「授命」是把 ordain 当动词的机翻）；`Yakoshta`、`Arbore Sanctorus` 原本整个没译 → **雅科什塔** / **圣树庇护所**（后者取自既有 name 字段）；`Ordain Interiors` 室内装潢→**室内景**（interiors 指室内场景，上下文是「舒适休息室」「神秘者公寓」这类构图，不是装潢） |

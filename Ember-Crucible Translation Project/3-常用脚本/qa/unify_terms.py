@@ -27,6 +27,7 @@ MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]')
 INLINE_CMD = re.compile(r'\[\[[^\]]*\]\]')
 TAGNAME = re.compile(r'<\s*(/?)([a-zA-Z][a-zA-Z0-9]*)')
 PLACEHOLDER = re.compile(r'\{[A-Za-z_][A-Za-z0-9_.\-]*\}')
+QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
 
 
 def markup_signature(s):
@@ -34,7 +35,14 @@ def markup_signature(s):
 
     注意基线是旧译文而不是英文：库里本来就有一批多包一层 <strong> 的旧译文，
     拿英文当基线会把它们全拦下来，而那和本次替换无关。
+
+    `key="value"` 的**值先抹平**再比对。`MARKUP` 会把整个
+    `@Embed[Actor.x readaloud="……"]` 当成一个标记，而阶段 22 已裁定那段要念给玩家听的
+    旁白**是要翻译的**（当时同源修了 `apply_translations.markup_signature` 与
+    `scan_markup_drift` 的 LINK 判据）。本文件是第三处，当时漏了：于是「费尼斯·奥萨」
+    这类专名只要出现在 readaloud 里，整批统一就会被自己的守卫中止。
     """
+    s = QUOTED_PARAM.sub('="~"', s)
     return (Counter(MARKUP.findall(s)) + Counter(INLINE_CMD.findall(s))
             + Counter(PLACEHOLDER.findall(s))
             + Counter(f'<{slash}{name.lower()}' for slash, name in TAGNAME.findall(s)))
@@ -80,6 +88,16 @@ def main():
     repo = Path(args.repo)
     rules = json.loads(Path(args.rules).read_text(encoding="utf-8-sig"))
     for r in rules:
+        # JSON 的 \b 是**退格符 0x08**，不是正则的单词边界 —— 规则文件里必须写 "\\bWord\\b"。
+        # 少写一个反斜杠时，正则会变成 '\x08Word\x08'，一条也匹配不上，
+        # 而脚本只会安静地报「0 处」，看起来像「本来就没有要改的」。踩过一次，直接拦掉。
+        for field in ("en", "unless"):
+            pat = r.get(field)
+            if pat and any(ch in pat for ch in "\b\f\v\r\t"):
+                raise SystemExit(
+                    f'规则 {r.get("term")!r} 的 {field} 里含控制字符 —— '
+                    f'八成是把 "\\\\b" 写成了 "\\b"（JSON 会解析成退格符）。\n'
+                    f'  实际解析结果: {pat!r}')
         r["_en"] = re.compile(r["en"])
         r["_unless"] = re.compile(r["unless"]) if r.get("unless") else None
         # variants 是字面量；variants_re 是正则，用来把替换限制在「伤害类型」这类搭配里
