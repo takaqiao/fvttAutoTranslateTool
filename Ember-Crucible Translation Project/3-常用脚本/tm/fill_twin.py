@@ -20,9 +20,12 @@ Two things it is careful about:
 * **Same English, different Chinese.** A naive `dict[en] = cn` takes whichever
   leaf was walked first. Stage 23 established that `.name` fields follow three
   different conventions depending on where they sit (item name / action name /
-  effect name), so the lookup is keyed on `(最后一段路径, 英文)` first and falls
-  back to the English alone. Where a key still has competing Chinese, the
-  majority wins and the conflict is reported rather than silently resolved.
+  effect name), so the lookup is keyed on `(结构路径, 英文)` -- see `shape_of` --
+  and falls back to the English alone. Keying on the LAST SEGMENT is not enough:
+  it collapses all three `.name` populations back together, which is the very
+  mistake stage 23 warned about. Switching from last-segment to structural path
+  cut ambiguous keys from 697 to 530. Where a key still has competing Chinese,
+  the majority wins and the conflict is reported rather than silently resolved.
 * **Markup.** A TM hit whose markup multiset differs from the twin's English is
   dropped, not filled. The two systems' pages differ exactly where the rules
   differ (`[[/skillCheck …]]` vs `[[/check …]]`), and those are the leaves where
@@ -46,6 +49,33 @@ _spec = importlib.util.spec_from_file_location(
 _apply = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_apply)
 markup_signature = _apply.markup_signature
+
+
+# Structural segments; everything else in a path is an entity/action/effect id.
+STRUCT = {
+    'journals', 'pages', 'actors', 'items', 'actions', 'effects', 'folders',
+    'macros', 'scenes', 'tables', 'results', 'text', 'content', 'system',
+    'description', 'public', 'private', 'name', 'biography', 'prototypeToken',
+    'overview', 'exposition', 'summary', 'terrain', 'gamemaster', 'subtitle',
+    'pronunciation', 'caption', 'label', 'outcomes', 'notes', 'journal',
+}
+
+
+def shape_of(path):
+    """The structural skeleton of a path, with entity names dropped.
+
+    Stage 23 established that `.name` obeys three different conventions
+    depending on where it sits -- `items.X.name` (item name),
+    `items.X.actions.<id>.name` (action name) and `effects[].name` are separate
+    populations, and grouping them together yields the wrong majority. Keying TM
+    on the last segment alone ('name') does exactly that, so the key is the
+    filtered structural path instead:
+
+        actors.Kalasak the Cutter.items.Caustic Phial.actions.causticPhial.name
+        -> actors.items.actions.name
+    """
+    return '.'.join(p for p in path.split('.')
+                    if p in STRUCT or p.isdigit())
 
 
 def leaves(en, cn, path, out):
@@ -80,14 +110,13 @@ def main():
     leaves(load(en_dir, SRC_PACK).get('entries', {}),
            load(cn_dir, SRC_PACK).get('entries', {}), [], src)
 
-    # (shape, english) -> Counter of Chinese; shape = last path segment
+    # (structural shape, english) -> Counter of candidate Chinese
     shaped = defaultdict(Counter)
     plain = defaultdict(Counter)
     for path, e, c in src:
         if not (c and CJK.search(c)):
             continue
-        shape = path.rsplit('.', 1)[-1]
-        shaped[(shape, e.strip())][c] += 1
+        shaped[(shape_of(path), e.strip())][c] += 1
         plain[e.strip()][c] += 1
 
     conflicts = [{'key': list(k), 'variants': len(v),
@@ -107,7 +136,7 @@ def main():
             stat['already'] += 1
             continue
         key = e.strip()
-        shape = path.rsplit('.', 1)[-1]
+        shape = shape_of(path)
         hit = shaped.get((shape, key)) or plain.get(key)
         if not hit:
             stat['no_tm'] += 1
