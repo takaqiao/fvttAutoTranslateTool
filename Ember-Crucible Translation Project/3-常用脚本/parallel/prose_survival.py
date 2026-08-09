@@ -110,7 +110,10 @@ def main():
         print(f'  低于 {thr:.2f} 的页 {len(flagged)}（丢失句数 vs 本页应删块数）:')
         for r, lost, page in sorted(flagged, key=lambda x: (x[0], -x[1]))[:20]:
             tail = '.'.join(page['path'].split('.')[-3:-1])
-            print(f'    {r:.2f}  丢 {lost:>3} 句 / 应删 {page["extra_blocks"]:>3} 块   {tail}')
+            # 兼容两套 index.json 键名：prep_realign 写 extra_blocks（块数），
+            # prep_sigfix 写 surplus（标记数）。硬编码前者会在 sigfix 单元上 KeyError。
+            exp = page.get('extra_blocks', page.get('surplus', 0))
+            print(f'    {r:.2f}  丢 {lost:>3} 句 / 应删 {exp:>3}   {tail}')
     if show:
         for r, lost, page in sorted(flagged, key=lambda x: (x[0], -x[1]))[:5]:
             i = str(page['id'])

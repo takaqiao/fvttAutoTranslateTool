@@ -41,6 +41,18 @@ def squash(s, n=110):
     return s if len(s) <= n else s[:n - 1] + '…'
 
 
+def expected(page):
+    """(应补, 应删)，兼容两套 index.json 键名。
+
+    `prep_realign.py` 写 `missing_blocks`/`extra_blocks`（块数），
+    `prep_sigfix.py` 写 `missing`/`surplus`（标记数）。硬编码前一套会让本脚本
+    在 sigfix 单元上直接 KeyError —— crucible 那批的审校 agent 就是被这个挡住、
+    自己在 scratchpad 打了补丁才跑通的。
+    """
+    return (page.get('missing_blocks', page.get('missing', 0)),
+            page.get('extra_blocks', page.get('surplus', 0)))
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     stat = '--stat' in sys.argv
@@ -99,13 +111,14 @@ def main():
         tot_add += add
         tot_del += dele
         tot_mod += mod
+        exp_add, exp_del = expected(page)
         flag = ''
         if not (add or dele or mod):
             flag = '   ← 未动过'
-        elif mod and not page.get('extra_blocks') and not page.get('missing_blocks'):
+        elif mod and not exp_del and not exp_add:
             flag = '   ← 只有修改，可疑'
         head = (f'[{i}] +{add} -{dele} ~{mod}  '
-                f'(应补 {page["missing_blocks"]} / 应删 {page["extra_blocks"]})'
+                f'(应补 {exp_add} / 应删 {exp_del})'
                 f'  {page["path"].split(".journals.")[-1][:60]}{flag}')
         print(head)
         if not stat:

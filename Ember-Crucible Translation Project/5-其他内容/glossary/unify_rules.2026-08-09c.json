@@ -1,0 +1,9 @@
+[
+ {
+  "term": "Ancestry（crucible 侧补漏）",
+  "en": "\\bAncestr(?:y|ies)\\b",
+  "canonical": "血统",
+  "variants": ["祖裔"],
+  "note": "阶段 9 定名血统、阶段 20 在 ember 侧把 祖裔 149→0，但**那一轮没跑 crucible 仓库**，于是 crucible.rules.json 留了 10 处「祖裔」对 32 处「血统」。由 crucible sigfix 批次的审校在正文里读到 `自定义祖裔` 才暴露出来 —— 提醒：跨仓库的术语统一要两个仓库都跑，只跑一个会留下这种半统一状态。"
+ }
+]
