@@ -63,6 +63,22 @@
 **发版流程只由 tag 触发**（`0.9.0` / `v1.1.0` 这类），push main **不会**发布任何东西。
 所以 push 是安全的；但**打 tag 前必须先做冒烟验证**。
 
+### ⚑ 优先级与 dnd5e 来源的作用域（2026-08-09 项目所有者定）
+
+**Ember 是世界包，同时支持 Crucible 与 dnd5e 两套规则。**
+
+- **主线是 `crucible` 系统 + Ember 的 crucible 侧**（`2-Crucible汉化插件` 与
+  `ember.crucible-adventure`）。这是项目真正要交付的东西，质量与进度都以它为准。
+- **dnd5e 侧（`ember.adventure`）是附带项** —— 顺带一起翻，但**不得为它牺牲主线**。
+
+由此得出一条硬性作用域：
+**`dnd-simplified-chinese-babele-patch` 之类的 dnd5e 中文来源，只能作用于 dnd5e 侧。**
+它对 `crucible.*` 与 `ember.crucible-adventure` **没有任何权威**。
+这不是保守，是规则体系不同：拿模块比对我们已译的 name，752 条不一致里有 **542 条**落在
+Crucible 侧 —— 那些英文只是碰巧同名（`Dagger`/`Longbow`），条目却是 Crucible 自己的。
+整包照搬会把主线污染掉。`tm/fill_twin_names.py` 因此只填 `ember.adventure` 的**空槽**，
+从不覆盖既有译文。
+
 ### ⚑ 术语与前后不一致：由主控自行裁决，不要来问（2026-08-09 项目所有者定）
 
 **任何上下文 / 前后译文不一致的情况，反复核对译文、词义、上下文之后自行统一即可，不必上报。**
