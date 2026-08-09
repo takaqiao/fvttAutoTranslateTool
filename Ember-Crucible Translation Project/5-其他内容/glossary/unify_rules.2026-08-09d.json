@@ -1,0 +1,51 @@
+[
+ {
+  "term": "Chessman construct",
+  "en": "\\bChessman",
+  "canonical": "棋士",
+  "variants": ["棋兵"],
+  "note": "第 1 批已裁决「棋士」，但落库不彻底。英文对得上的条目里 棋士 351（含 11 个 name 字段）对 棋兵 53（0 个 name）。"
+ },
+ {
+  "term": "Draconfang",
+  "en": "\\bDraconfang\\b",
+  "canonical": "龙牙巨剑",
+  "variants": ["龙牙匕首"],
+  "note": "item 的 name 字段是「龙牙巨剑」（3 处 name 对 0）。「龙牙匕首」是把 greatsword 当成匕首的旧译，crucible 侧还留着同名孤儿条目。"
+ },
+ {
+  "term": "Elder God",
+  "en": "\\bElder God",
+  "canonical": "上古之神",
+  "variants": ["远古神祇", "上古神祇", "远古之神"],
+  "note": "name 字段是「上古之神 Elder God」。英文对得上的条目里 上古之神 21（3 个 name）对 上古神祇 14 / 远古神祇 7。同一位神在同一角色的传记里被叫三种名字。"
+ },
+ {
+  "term": "Silver Beam",
+  "en": "\\bSilver Beam\\b",
+  "canonical": "银光束",
+  "variants": ["白银光束", "银色光束"],
+  "note": "银光束 751（17 个 name）对 白银光束 95 / 银色光束 74。四个 Silver Beam actor 的 name 字段互不一致（工程师=银光束、仆从=银光束、卫兵=银色光束、哨卫=白银光束），本条一并抹平。"
+ },
+ {
+  "term": "Censer",
+  "en": "\\bCenser\\b",
+  "canonical": "香炉",
+  "variants": ["香炉挥击"],
+  "note": "「香炉挥击」是从 dnd5e 官方中文包抄来的 —— 那边的 name 被**活动名**污染了（它自己的 description 写的是「通常与香块一起使用，使空气芳香」）。crucible 侧同条目就是「香炉」。这条也说明外部来源要核验，不能整包照抄。"
+ },
+ {
+  "term": "Tauric（人名）",
+  "en": "\\bTauric\\b",
+  "canonical": "陶里克",
+  "variants": ["牛族", "牛类的"],
+  "note": "Tauric 是个赫尔格伦年轻人的**人名**，正文 161 处都作「陶里克」；而 actor 的 name 字段写「牛族 Tauric」、tokenName 写「牛类的」，是把 tauric 当成「牛头人的」这个形容词的机翻。**这次是 name 字段错、正文对**，所以反过来改 name。"
+ },
+ {
+  "term": "Reaper Ocean",
+  "en": "\\bReaper Ocean\\b",
+  "canonical": "收割者海洋",
+  "variants": ["劫掠者海洋", "收割者之洋"],
+  "note": "**不采纳本批 agent 提的「劫掠者海洋」**：Reaper 是收割者，劫掠者对应的是 Raider（同世界观里另有 Wind Raider），译成劫掠者会与之撞车。且收割者系 6 处对劫掠者 2 处本就是多数。在「收割者之洋 / 收割者海洋」之间取后者，与其余海域名的构词一致。"
+ }
+]
