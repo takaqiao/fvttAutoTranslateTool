@@ -12,12 +12,17 @@ P = r"C:\Users\Taka\Desktop\fvtt\Ember-Crucible Translation Project"
 ROOT = os.environ.get("EMBER_PARALLEL_ROOT") or os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "parallel")
 RES = os.path.join(P, "5-其他内容", "reports", "ember", "todo", "_residual_after_fallback.json")
-CNP = os.path.join(P, "1-Ember汉化插件", "compendium", "cn", "ember.crucible-adventure.json")
+# 包名可切换：dnd5e 孪生包 `ember.adventure` 用的是同一套残余清单与目录结构。
+#   $env:EMBER_PACK = "ember.adventure"
+PACK = os.environ.get("EMBER_PACK", "ember.crucible-adventure")
+CNP = os.path.join(P, "1-Ember汉化插件", "compendium", "cn", f"{PACK}.json")
 CJK = re.compile(r"[一-鿿]")
 
-items = json.load(open(RES, encoding="utf-8"))["packs"]["ember.crucible-adventure"]
+items = json.load(open(RES, encoding="utf-8"))["packs"][PACK]
 cn = json.load(open(CNP, encoding="utf-8"))
-CJ = cn["entries"]["Ember Early Access"]["journals"]
+# 孪生包的残余几乎都在 actors 桶里，没有 journals 分支；取不到就给空表，
+# 免得 bucket 模式被一个用不到的键卡死。
+CJ = cn.get("entries", {}).get("Ember Early Access", {}).get("journals", {})
 
 
 def slug(s):
