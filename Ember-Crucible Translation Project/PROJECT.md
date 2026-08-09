@@ -1880,6 +1880,52 @@ TM 忠实地复制了过来 —— 也就是说 **`TRUNCATED` 可以当「内容
 
 ---
 
+### 2026-08-09 · 阶段 27：crucible-cn 侧签名失配清零 + 一批包级收尾
+
+**范围**：把第 7 批的同一判据施加到 crucible 仓库（此前从未按签名判据测过），并处理审校上报的包级问题。
+
+| 项 | 之前 | 之后 |
+|---|---|---|
+| crucible 签名失配 | 78 条 | **0** |
+| crucible LINK / BLOCK / INLINE / TRUNCATED | — | **全 0** |
+| crucible class 漂移 | — | **0** |
+
+78 条落盘零拒绝，9 单元全部 GOOD/FIXABLE、critical 0，
+`rewrites_reverted` 与 `wrong_deletions_fixed` **均为 0**（审校第一条检查项就是「删对了吗」——
+这批删除多，**误删比不删更糟**）。
+
+**顺带修好的规则错误**（旧译停在废弃规则上，玩家会照错的打）：
+`Subtle Extrication` 旧译「不获得 2 个恩惠」而今日英文是 `+1 Bane`（**方向与数值都反**）；
+`Executioner's Strike` 旧译无条件致命+流血，今日以「目标生命值低于一半」为前提；
+`Strong Grip` 旧译「空出一只手」而今日是「施放需要双手的法术」（**语义相反**）且整段缺失；
+`Rallying Cry` 旧译要掷一个今天已不存在的威吓检定。
+
+**包级收尾**：删 2 个死条目（`Lightning Potency`/`Spellcraft`，上游改名 Storm 后 babele 永远匹配不到）；
+3 条 `Spellcraft` 名漏「施法」（依据同条目 `adjective`，`Arrow` 的 adjective 本就是「箭形」，
+name 却写「箭头」）；「合集包 包」双重翻译 9 处；`资料库`→`合集包` 11 处；
+合集 `label` 两处（`祖裔`→`血统`、`adversary-equipment` 整个没译）；
+`池塘地表`→`池塘水面`（地表 = 陆地表面）。
+
+**两条操作教训**
+
+1. **替换有先后依赖**：先做 `资料库→合集包`、后做「合集包 包」清理，会**新造出** 3 处
+   「合集包包」。我第一遍就这么错了，是复验步骤抓回来的 —— 机械替换后必须复验，
+   不能只看「应改的都改了」。
+2. **跨仓库的术语统一要两个仓库都跑**：阶段 20 的 `祖裔→血统` 只跑了 ember，
+   crucible 留下 10 处，直到本批审校在正文里读到「自定义祖裔」才暴露。
+
+**修掉自己引入的工具缺陷**：`prep_sigfix.py` 写的 index 键是 `missing`/`surplus`，
+而 `diff_realign.py` / `prose_survival.py` 硬编码读 `missing_blocks`/`extra_blocks` ——
+两者在 sigfix 单元上直接 KeyError 崩溃（crucible 那批的审校 agent 是自己在 scratchpad
+打补丁才跑通的）。已改成兼容两套键名。
+
+**闸门仍有一个已知盲区**（审校证实，本轮未修）：`<strong>` **数量相等但加粗压在错词上**
+—— 签名是多重集，看不见落点；`tagseq.py` 比的是块骨架，也看不见行内标记落点。
+建议补一个「行内 `<strong>` 落点」检查：把中英各自被 `<strong>` 包裹的词按序取出比对，
+或至少标出「中文有 `</strong><strong>` 相邻而英文没有」的条目。
+
+---
+
 ## 7. 待办与排期
 
 | # | 事项 | 状态 |
