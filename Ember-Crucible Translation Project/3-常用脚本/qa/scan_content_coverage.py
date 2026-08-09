@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """不靠长度、靠「跨语言不变量」找出中文没跟上英文的条目。
 
+⚠ **优先用 `scan_en_drift.py`。** 有旧版英文基准时，`EN_old != EN_new` 是直接证据，
+比本脚本的启发式准得多。本脚本是**没有旧基准时的兜底**（例如上游第一次发版就没归档）。
+
   python scan_content_coverage.py --repo <repo> [--pack <name>] [--out <json>] [--top N]
 
 为什么需要它
@@ -33,6 +36,9 @@
 --------------------------
 * 英文用英文数词（"four"、"a dozen"）而中文写「四」—— 本脚本只看阿拉伯数字，不会误判；
   反过来英文写 `4` 中文写「四」会被报出来，属**真实**的风格不一致，值得看。
+* **专名检查默认关闭**（`--with-terms` 才开）。实测 `glossary_ec` 里混着大量通用词
+  （`Shield→盾牌`、`Counter→反制`、`blocked→屏蔽`、`Goblin→地精语`），拿它去扫散文
+  命中的几乎全是噪声：crucible 上报 284 条，逐条看没有一条是真的。数字检查则只报 14 条。
 * 同一数字在英文里出现多次、中文合并成一次表述 —— 本脚本按**集合**比对，不按次数，已规避。
 """
 from __future__ import annotations
@@ -44,7 +50,10 @@ import re
 CJK = re.compile(r'[一-鿿]')
 TAG = re.compile(r'<[^>]+>')
 MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]|&(?:amp;)?[Rr]eference\[[^\]]*\]')
-NUM = re.compile(r'(?<![\w.])(\d+(?:\.\d+)?)(?![\w.])')
+# 只防「数字被切成两半」，**不能**用 \w 做边界：中文里数字紧贴汉字（「其AC为17，HP为25」），
+# 而汉字在 Python 正则里算 \w，`(?<![\w.])` 会把中文侧的每个数字都挡掉 ——
+# 结果英文侧数字全被判成「缺失」，首版就是这么跑出 49% 命中率的假警报。
+NUM = re.compile(r'(?<!\d)(\d+(?:\.\d+)?)(?!\d)')
 
 
 def plain(s: str) -> str:
@@ -72,6 +81,9 @@ def main():
     ap.add_argument('--min-en', type=int, default=120,
                     help='英文纯文本短于此长度的条目不查（名字、标签噪声大）')
     ap.add_argument('--top', type=int, default=25)
+    ap.add_argument('--with-terms', action='store_true',
+                    help='顺带查定译专名。**默认关**：glossary_ec 里混着通用词'
+                         '（Shield→盾牌、Counter→反制、blocked→屏蔽），命中全是噪声')
     a = ap.parse_args()
 
     P = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -106,8 +118,9 @@ def main():
             checked += 1
             miss_num = sorted(set(NUM.findall(pe)) - set(NUM.findall(pc)),
                               key=lambda x: -len(x))
-            miss_term = [f'{k}→{v}' for k, v in gloss.items()
-                         if re.search(r'\b' + re.escape(k) + r'\b', pe) and v not in pc]
+            miss_term = ([f'{k}→{v}' for k, v in gloss.items()
+                          if re.search(r'\b' + re.escape(k) + r'\b', pe) and v not in pc]
+                         if a.with_terms else [])
             if miss_num or miss_term:
                 rows.append({'pack': pack, 'path': path,
                              'missing_numbers': miss_num,
