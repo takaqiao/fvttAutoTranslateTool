@@ -7,46 +7,31 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**当前状态**：阶段 0–24 完成。管线已改造到 babele 2.9.1 声明式映射，工具链就绪。
-**crucible 侧全部译完**（15 个合集包残余 0、`lang/cn.json` 1842 键缺口 0），只剩冒烟验证与发版。
-**ember 侧**：lang 486 键缺口 0，7 个小包 100%，运行时补丁（硬编码字符串 + 中文字体回退）已就位；
-战役包 19253 / 19605 = **98%**，dnd5e 孪生包 12981 / 14359 = **90%**。
+**翻译已全部完成。唯一阻塞发版的是冒烟验证。**
 
-**那三块「覆盖率看不见」的欠账已在阶段 24 做完**：第 8c 项（补缺块）与第 8j 项（中文多出内容）
-合并成「页面重对齐」一次做掉 493 页，两项**双双归零**；dnd5e 孪生包 `ember.adventure`
-由 TM 脚本填充 **0% → 90%**（12981 条 / 817 万字符，零拒绝）。
+| | 覆盖 | **真实残余** | LINK/BLOCK/INLINE | 签名失配 | 外来文字 | class 漂移 |
+|---|---|---|---|---|---|---|
+| crucible-cn | 97% | **0** | **0 / 0 / 0** | **0** | 0 | **0** |
+| ember_cn | 99% | **0** | **0 / 0 / 0** | **0** | 0 | 3 |
 
-**翻译已改为并行推进**（阶段 20 起）：一轮 10–12 个单元、约 30 万英文字符，
-译者自检闸门 + 对抗式审校 + 跨单元术语核对。做法与硬约束见阶段 20 日志，
-**每次唤醒的操作手册是 `PARALLEL-RUNBOOK.md`**（自动循环也读它）。
-六轮实测：约 7500 条 / **170 万英文字符**落盘**零拒绝**，标记漂移六轮**只降不升**
-（LINK 689→232 / BLOCK 584→26 / INLINE 265→112 / TRUNCATED 69→20；
-第 6 批一次就把 BLOCK 从 519 降到 26）。
-
-**全库 58% → 95%**（33271 / 34859），待译字符 **836 万 → 19.4 万**。
-战役包 `ember.crucible-adventure` 的**真实残余为 0**（352 条待译全部由 babele 自动解析）。
-剩下的基本只有**孪生包独有的 `actors` 桶**：1,019 条 / 11.9 万字符（dnd5e 版专属的能力与数据块）。
+「覆盖 97%/99%」与「残余 0」不矛盾：那 436 条待译**全部**由 babele 通用回退自动取译文，
+详见第 7 节开头的警告。crucible `lang` 1842 键、ember `lang` 486 键均缺口 0；
+ember 的运行时补丁（硬编码字符串 + 中文字体回退）已就位。
 
 **下一步**（按顺序）：
-1. **冒烟验证** —— 见本节末尾。这是唯一无法靠脚本证实的环节，只能在真实 Foundry 世界里做。
-   阶段 24 后新增两个要看的点：孪生包 cn 文件有 **9.09 MB**，确认 Crucible 世界里 babele 不会白 fetch 它；
-   以及补缺块补回来的 `<section class="block gamemaster">` 段落是否正常对玩家隐藏。
-2. 发 crucible-cn **0.9.0**
-3. 发 ember_cn **1.1.0**
-4. 剩余清理见 `PARALLEL-RUNBOOK.md` 第 7 节（孪生包独有 / 既有残留 `{标签}` /
-   全库术语 unify / 几个 name 字段本身要改的 / class 漂移残余 49）。
-   开新一轮前**先跑一遍孤儿清单**（第 8g 项）—— 阶段 19 靠它发现整整一卷 28 页译文躺在
-   改名前的旧路径上，阶段 20 又靠标记指纹找出 42 个孤儿页面。
 
-规则正文的整段漏译已补齐（见阶段 6）。**「全库术语已统一」这句以前写得太满，现更正**：
-主干术语（伤害类型 / 属性 / 防御 / 血统 / 同调等）确实统一了，但仍有**一批既有译文的分叉待刷**，
-清单见 `PARALLEL-RUNBOOK.md` 第 7 节第 3–5 项（`Concluding the Event` 七种写法、
-`Electricity` 电击/电能/电力/闪电 并存、`Marlstone Manor`、`Fernis Ossa`、几个 `name` 字段本身要改的）。
-这些**全是存量**，第 6 批一处新的都没引入，且按上面那条 ⚑ 由主控自行裁决执行。
+1. **冒烟验证** —— 清单在第 7 节末尾「冒烟验证怎么做」。这是唯一无法靠脚本证实的环节。
+2. 发 crucible-cn **0.9.0** → 3. 发 ember_cn **1.1.0**
+4. 发版后再清的零碎见第 7 节「待清扫的既有缺陷」，都不阻塞。
 
-剩下的 BLOCK / INLINE 漂移**多数**属观感层面，但**不要一概当成观感**：
-阶段 24 查出 `class` 属性漂移（`ul.complex-check` / `li.advantage` / `sup.system-swap-inline`）
-是**功能性**的，而闸门的签名只取标签名、看不见它 —— 用 `qa/scan_class_drift.py` 单独扫。
+**怎么干活**：一轮 10–12 个并行单元、约 30 万英文字符，译者自检闸门 + 对抗式审校 +
+跨单元术语核对。**操作手册是 `PARALLEL-RUNBOOK.md`**，做法与硬约束见阶段 20 日志。
+八轮实测约 9000 条 / 190 万英文字符落盘**零拒绝**，标记漂移全程只降不升
+（LINK 689→0 / BLOCK 584→0 / INLINE 265→0）。
+
+> **别把 BLOCK / INLINE 漂移一概当观感问题。** 阶段 24 查出 `class` 属性漂移
+> （`section.block gamemaster` / `ul.complex-check` / `sup.system-swap-inline`）是**功能性**的，
+> 而闸门的签名只取标签名、看不见 class —— 用 `qa/scan_class_drift.py` 单独扫。
 
 ### git 状态（2026-08-09）
 
@@ -54,9 +39,9 @@
 
 | 仓库 | main 现在 | 改造前的 main（还原点） | 保留的分支 |
 |---|---|---|---|
-| `2-Crucible汉化插件` | `d9414fc` | **`085bfe6`** | `feat/babele-2.9.1-crucible-0.10.1` |
-| `1-Ember汉化插件` | `80571e7` | **`cf58b4f`** | `feat/babele-2.9.1-pipeline` |
-| `Desktop\fvtt`（文档+脚本+术语表） | `1551f75` | — | — |
+| `2-Crucible汉化插件` | `73872d4` | **`085bfe6`** | `feat/babele-2.9.1-crucible-0.10.1` |
+| `1-Ember汉化插件` | `dd54bdd` | **`cf58b4f`** | `feat/babele-2.9.1-pipeline` |
+| `Desktop\fvtt`（文档+脚本+术语表） | `6fddc86` | — | — |
 
 要回退到改造前：`git reset --hard <还原点>`。
 
@@ -1954,16 +1939,16 @@ name 却写「箭头」）；「合集包 包」双重翻译 9 处；`资料库`
 | 5a | └ 用新基准重算 diff | ✅ 完成（见阶段 3） |
 | 6 | crucible-cn **compendium** 全量补齐 | ✅ 完成（残余 0） |
 | 6a | └ crucible **`lang/cn.json`** 补 293 新 key + 11 drift + 15 未译 | ✅ 完成（1842 键，缺口 0） |
-| 6b | └ 清理 26 处孤儿译文（可选，无害） | ⬜ |
+| 6b | └ 清理孤儿译文（babele 匹配不到 key 的死文本） | ⬜ crucible 24 / ember 622，无害但占体积，见下表 F |
 | 6c | └ 发 crucible-cn 0.9.0 | ⬜ 待冒烟验证后 |
-| 5b | 修复已发布译文的格式类缺陷（2817+209 可脚本归一） | ⬜ |
-| 5c | 裁决剩余真实术语分歧（59 处同名异译 + 20 处基底冲突） | ⬜ 部分已裁决，见第 8 节 |
-| 5d | 全库术语统一：Tier/Presence/essence/Wisdom | ✅ 完成（阶段 6） |
-| 5e | 伤害类型定名 Electricity/Radiant/Poison/Psychic | ✅ 完成（阶段 6，见第 8 节） |
+| 5b | 修复已发布译文的格式类缺陷（2817+209 可脚本归一） | ⬜ 见下表 E |
+| 5c | 裁决剩余真实术语分歧 | 🔶 大批已裁决（第 8 节 2026-08-07/08/09 共 20 余组）；`disputes.json` 里仍有 20 条待裁 |
+| 5d | 全库术语统一：Tier/Presence/essence/Wisdom | ✅ 完成（阶段 6；2026-08-09 复查 `阶级`/`阶位` 已为 0） |
+| 5e | 伤害类型定名 Electricity/Radiant/Poison/Psychic | ✅ 完成（阶段 25 执行完毕，`电能`/`电力` 归零） |
 | 5f | 还原被写成裸文字的 enricher | ✅ 163 → 3 |
-| 5g | 补译被整段丢掉的规则正文（TRUNCATED） | ✅ 12 条 / 约 2700 字 |
-| 5h | 段落结构与加粗漂移清扫（BLOCK 64 / INLINE 294） | ⬜ 观感层面，不影响功能 |
-| 9 | **真实 Foundry 世界冒烟验证**（管线改造后必做） | ⬜ **下一步** |
+| 5g | 补译被整段丢掉的规则正文（TRUNCATED） | 🔶 阶段 5 修过 12 条；2026-08-09 复查仍有 23 条，已另开批次 |
+| 5h | 段落结构与加粗漂移清扫（BLOCK / INLINE） | ✅ 阶段 26/27 归零（BLOCK 584→0、INLINE 265→0） |
+| 9 | **真实 Foundry 世界冒烟验证**（管线改造后必做） | ⬜ **下一步，唯一阻塞发版的事** |
 | 7 | ember_cn **`lang/cn.json`** 47 新 key + 3 未译 | ✅ 完成（阶段 7，486 键缺口 0） |
 | 7a | └ ember 小包：effects ×2 / affixes / items | ✅ 完成（4 包 100%） |
 | 7a2 | └ ember 小包：character(274) | ✅ 完成（100%） |
@@ -1972,7 +1957,7 @@ name 却写「箭头」）；「合集包 包」双重翻译 9 处；`资料库`
 | 7b | └ **Ember 硬编码字符串补丁** | ✅ 完成（143/147，4 条纪年缩写有意保留） |
 | 7c | └ **字体回退链**：补中文字体，不替换原字体 | ✅ 完成（styles/ember-cn.css） |
 | 7d | └ crucible `LANGUAGES.Sign` 误译「标记」 | ✅ 已改为手语 |
-| 8 | ember 战役正文分批翻译（按 journal 切批，76 组 / 约 148 万字符） | ⬜ 进行中 |
+| 8 | ember 战役正文分批翻译（按 journal 切批，76 组 / 约 148 万字符） | ✅ 完成 —— 扣掉 babele 回退后**真实残余 0** |
 | 8d | └ `Ushna Dredging Docks` 21 条 | ✅ 21/21 |
 | 8e | └ `Arcturel Dives` 40 条 | ✅ 40/40（阶段 19 收官） |
 | 8f | └ `Arcturel Tradeway` 28 页 | ✅ 待译归零，但内容是移植来的旧译文，**逐页通读未做** |
@@ -1983,48 +1968,38 @@ name 却写「箭头」）；「合集包 包」双重翻译 9 处；`资料库`
 | 8r | └ **并行第 6 批**：8c+8j 合并「页面重对齐」×12（493 页） | ✅ 512 条零拒绝，覆盖 98%，BLOCK 519→26 |
 | 8n | └ Ember/Crucible 跨包术语分裂 6 组（Kinesis/Aspect/Glyphweaving/Willpower/Storm 误译） | ✅ 完成，两个包 + crucible lang 一并改 |
 | 8o | └ **并行第 5 批**：战役收尾 ×3 + 补缺块 ×8 | ✅ 完成（阶段 23） |
-| 8p | └ **世界地图专名重定**：Break/Catch/Hoist/Wheel/Sail/Crown/Mordant/WINDBARE 等被当普通词译掉 | ⬜ 2026-08-09 复查仍在，scenes 里约 17 处 |
+| 8p | └ **世界地图专名重定**：Break/Catch/Hoist/Wheel/Sail/Crown/Mordant/WINDBARE 等被当普通词译掉 | ⬜ 2026-08-09 复查仍在，scenes 里约 17 处（唯一还没做的正文类缺陷） |
 | 8q | └ scene notes 键被上游改成随机 ID，298 条旧译成死键 | ✅ 第 5 批已按新键重新落 |
 | 8j | └ **译文多出内容**（英文已删、中文还留着） | ✅ 阶段 24 归零（与 8c 合并为「页面重对齐」） |
 | 8k | └ **中文坐在错误活路径上**：2 处已确认（Spellbreaker `Storage`、Mythspire `Ancient Lift`） | ✅ 两页均已重译；`detect_swapped_pages.py` 现报候选 0 |
 | 8a | └ 机械可修的部分（加粗 734→265、enricher 还原） | ✅ 完成 |
 | 8c | └ **已译页里缺失的整块内容** | ✅ 阶段 24 归零（339 条 / 1772 块 / 26.0 万字符） |
 | 8b | └ 战役包里 祖裔→血统 / 调谐→同调 的残留清扫 | ✅ 完成（阶段 20，含 The Dives/Inkaro/Amalthea/引号共 6 组） |
-| 8g | └ 孤儿译文：整卷改名 ✅（阶段 19）；**页级改名** 42 个已用标记指纹配对，2 个强匹配已进第 2 批 | 🔶 |
-| 10 | **dnd5e 孪生包 `ember.adventure`** | 🔶 阶段 24 已 TM 填充 0%→90%（12981 条 / 817 万字符）；剩独有 1280 条 / 14 万字符 + 弃填 143 条 |
+| 8g | └ 孤儿译文：整卷改名 ✅（阶段 19）；页级改名 42 个已用标记指纹配对、2 个强匹配已移植 | ✅ 待译已归零；剩下的死键归入 6b |
+| 10 | **dnd5e 孪生包 `ember.adventure`**（附带项） | ✅ 99%，真实残余 0。TM 填 12981 条 + dnd5e 官方中文包填 510 条 + 译者补 641 条 |
 
-### crucible compendium：✅ 已完成，不必再动
+> ⚠️ **不要拿 `validate_translations.py` 的百分比当真实缺口。**
+> crucible 显示 97%、ember 显示 99%，但那 436 条待译**全部**由 babele 通用回退
+> 从已译包按名字自动取译文。动手前先跑：
+> ```powershell
+> python "$P\3-常用脚本\qa\resolve_generic_fallback.py" --repo <repo> --also <另一个 repo>
+> ```
+> 重复翻译只会制造同名异译。**两个包的真实残余都是 0。**
 
-15 个包中 13 个内联 100%；`playtest` / `pregens` 剩下的 161 条是 actor 内嵌物品，
-**由 babele 通用回退从已译包按名字自动取译文，残余为 0**。
+### 待清扫的既有缺陷（2026-08-09 逐条复查过，均不阻塞发版）
 
-> ⚠️ 不要因为 `validate_translations.py` 还显示 97% 就去补那 161 条。
-> 先跑 `resolve_generic_fallback.py` 看真实残余。重复翻译会制造同名异译。
-
-```powershell
-python "$P\3-常用脚本\qa\resolve_generic_fallback.py" --repo "$P\2-Crucible汉化插件"
-```
-
-### crucible lang/cn.json：✅ 已完成
-
-1842 键全部有中文，`lang_gap.py` 四类缺口均为 0，基准已同步到 0.10.1。
-有意保留英文的 key 记在 `2-Crucible汉化插件/lang/lang_keep_english.json`（`DICE.DC`、`∞`、`???`），
-清单会被 `lang_gap.py` 与 `apply_lang.py` 同时读取，不会再被误报成漏翻。
-
-### 待清扫的既有缺陷（不阻塞发版，但发版前应处理）
-
-| # | 问题 | 范围 |
+| # | 问题 | 现状 |
 |---|---|---|
-| A | ~~`lang/cn.json` 的 `Burrow` 含亚美尼亚字符 `շարժ`~~ | ✅ 已修 |
-| B | `Toughness` / `Fortitude` 同译「坚韧」 | lang ✅ 已改「坚韧防御」；正文仍有 35 条 |
-| C | `Electricity`：电击 97 / 电能 48 / 电力 8（另有「闪电」23 处英文其实是 Electricity） | ✅ 已裁决为**电击**（见第 8 节 2026-08-09）；⬜ 执行待做，约 79 处 |
-| D | `Tier` 有 阶/阶级/阶位；essence 有 精髓/精华 | lang ✅ 已统一；正文 76 + 15 条待清 |
-| E | 已发布译文双语格式不一致 209 处、同名异译 59 处 | 见 `glossary_ec.disputes.json` |
-| F | 26 处孤儿译文（上游已删除的物品） | 无害，可清 |
-| G | ~~`Rune: Lightning`→`Storm` 改名后译文仍写「闪电」~~ | ✅ 已修（28 处 + 8 个条目名） |
-| H | ~~`Inflection` 在 talent 包译作「词缀」，与 `Affix` 撞名~~ | ✅ 已修（11 个条目名 + 正文 3 处） |
-
-ember 战役正文的批次划分待 crucible 收尾后确定。
+| A | `lang/cn.json` 的 `Burrow` 含亚美尼亚字符 | ✅ 已修 |
+| B | `Toughness` / `Fortitude` 同译「坚韧」 | 🔶 lang 已改「坚韧防御」；正文里英文含 `Fortitude` 的条目仍有 135 处裸「坚韧」**混着** Toughness 的 81 处，两者同段共现，机械替换会误伤 —— 要逐条读才能分 |
+| C | `Electricity` 三种写法 | ✅ 阶段 25 执行完毕，`电能`/`电力` 归零 |
+| D | `Tier` 阶/阶级/阶位；essence 精髓/精华 | 🔶 `阶级`/`阶位` 已 0；`精髓` 还剩 8 处（对 `精华` 132） |
+| E | 已发布译文双语格式不一致、同名异译 | 🔶 `glossary_ec.disputes.json` 里仍有 20 条待裁；格式类可脚本归一 |
+| F | 孤儿译文（babele 匹配不到 key 的死文本） | ⬜ **crucible 24 / ember 622**。crucible 那 24 条多是上游把 `Rune: Lightning` 改名 `Storm` 后留下的死译文，还有一条是条目键本身被译成中文（`items.吞噬思维 Devour Thoughts`）；ember 那 611 条集中在 `scenes`，是阶段 23 上游把 scene notes 键换成随机 ID 后遗留的旧键。**无害（渲染不到），但占发布包体积** |
+| G | `Rune: Lightning`→`Storm` 改名后译文仍写「闪电」 | ✅ 已修 |
+| H | `Inflection` 与 `Affix` 撞名 | ✅ 已修 |
+| I | `TRUNCATED` 23 条（中文是照更早英文写的缩写版） | 🔶 2026-08-09 已开批次补译，见下 |
+| J | 世界地图专名被当普通词译掉（第 8p 项） | ⬜ scenes 里约 17 处 |
 
 ### 冒烟验证怎么做（第 9 项）
 
@@ -2047,6 +2022,18 @@ game.babele.cacheDiagnostics()
   （`ITEM.COMPOSED_NAME.Prefix` / `.Suffix`）
 - **法术名拼装**：`迅捷的 燃烧的打击` —— 屈折形容词与法术名之间的空格是系统硬编码的，改不掉
 - **rules「符文」页**：那个原本坏掉的 `@Embed` 现在应该能正常渲染出「符文：风暴」
+
+阶段 24–27 之后再补三个（都是这几轮大改动的直接产物）：
+
+- **GM 专属块是否仍对玩家隐藏**：第 6 批补回了大量
+  `<section class="block gamemaster">`。以玩家身份看一页 `Area Overview`，
+  确认「游戏主持人摘要」没有暴露出来。
+- **双系统分支只显示当前系统那一支**：第 7 批补回了大量
+  `<sup class="system-swap-inline">`。在 Crucible 世界里看一段带检定的正文，
+  确认只出现 `[[/skillCheck …]]` 那一支，不会两套规则并排显示。
+- **孪生包不会被白 fetch**：`compendium/cn/ember.adventure.json` 有约 **9 MB**。
+  在 **Crucible** 世界里开控制台看 Network，确认 babele 没有去拉它
+  （dnd5e 版的包在 Crucible 世界里根本不存在，拉了就是纯浪费流量）。
 
 ---
 
