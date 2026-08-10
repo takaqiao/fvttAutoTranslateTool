@@ -20,14 +20,46 @@ ember 的运行时补丁（硬编码字符串 + 中文字体回退）已就位�
 
 **下一步**（按顺序）：
 
-> ⚑ **项目所有者定：把当前已知问题全部解决之后，才考虑发版。**
-> 不做「先发版、零碎留到下个版本」那一套。所以下面第 1 步是清欠账，不是发版。
+> **已发首版**（2026-08-10，应项目所有者要求提前发）：
+> `crucible-cn 0.9.0` 与 `ember_cn_unofficial 1.1.0` 均已推上 GitHub 并建好 release，
+> manifest 与 zip 实测 HTTP 200。**冒烟验证仍未做** —— 装上后建议先开个世界看一眼。
+>
+> ⚑ 原定「所有已知问题清完才发版」的方针**对下一版继续有效**：
+> 第 7 节缺陷表里的 ⬜ / 🔶 项（B / D / E / F / J / K / L / M）要在下个版本前清完。
 
-1. **清掉第 7 节「待清扫的既有缺陷」里所有 ⬜ / 🔶 项** —— 目前是 B / D / E / F / J / K / L / M 八项。
-   其中 **K（英文变过、中文没跟上，crucible 44 + ember 280）是最要紧的**，
-   它直接影响玩家读到的内容是否与今天的规则一致。
-2. **冒烟验证** —— 清单在第 7 节末尾「冒烟验证怎么做」。唯一无法靠脚本证实的环节。
-3. 发 crucible-cn **0.9.0** → 4. 发 ember_cn **1.1.0**
+1. **冒烟验证** —— 清单在第 7 节末尾。唯一无法靠脚本证实的环节，已发版但没验过。
+2. **清掉第 7 节「待清扫的既有缺陷」里所有 ⬜ / 🔶 项**。
+   其中 **K（英文变过、中文没跟上）最要紧** —— ember 侧 378 条已在 2026-08-10 做完，
+   crucible 侧 53 条尚未做。
+3. 清完后发下一版。
+
+### 发版怎么做（Actions 目前跑不了，只能手工）
+
+GitHub Actions **因账户计费问题被锁**（`your account is locked due to a billing issue`），
+tag 触发的 release 流程会直接失败。在恢复之前按下面手工发：
+
+```powershell
+# 1. 打包（排除 compendium/en —— 那是英文基准，装进去让用户白下一倍体积）
+python - <<'EOF'
+import os,zipfile,fnmatch
+EX=['.git/*','.github/*','.gitignore','release/*','compendium/en/*',
+    'lang/lang_keep_english.json','scripts/__pycache__/*','*.zip','*.bak']
+for repo in ('2-Crucible汉化插件','1-Ember汉化插件'):
+    out=os.path.join(repo,'module.zip')
+    with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+        for root,dirs,files in os.walk(repo):
+            dirs[:]=[d for d in dirs if d not in ('.git','.github')]
+            for f in files:
+                rel=os.path.relpath(os.path.join(root,f),repo).replace(os.sep,'/')
+                if any(fnmatch.fnmatch(rel,p) or rel.startswith(p.rstrip('*')) for p in EX): continue
+                z.write(os.path.join(root,f),rel)
+EOF
+# 2. 推 main、打 tag（crucible 不带 v，ember 带 v —— 两边 module.json 的 download 就是这么写的）
+# 3. gh release create <tag> module.json module.zip --notes-file .github/release-body-template.md
+```
+
+两个仓库都已备好 tag 触发的 `.github/workflows/release.yml`，计费问题解决后自动生效，
+不必再手工打包。
 
 **怎么干活**：一轮 10–12 个并行单元、约 30 万英文字符，译者自检闸门 + 对抗式审校 +
 跨单元术语核对。**操作手册是 `PARALLEL-RUNBOOK.md`**，做法与硬约束见阶段 20 日志。
