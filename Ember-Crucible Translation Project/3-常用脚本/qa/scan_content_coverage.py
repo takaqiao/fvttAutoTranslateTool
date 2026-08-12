@@ -55,10 +55,67 @@ MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]|&(?:amp;)?[Rr]eference
 # 结果英文侧数字全被判成「缺失」，首版就是这么跑出 49% 命中率的假警报。
 NUM = re.compile(r'(?<!\d)(\d+(?:\.\d+)?)(?!\d)')
 
+# HTML 实体里带数字：`Jeweler&#x27;s` 的 `&#x27;` 会被当成数字 27 报缺失。
+ENTITY = re.compile(r'&#?\w{1,8};')
 
-def plain(s: str) -> str:
-    """剥掉标记与标签，只留给人读的正文。"""
-    return TAG.sub(' ', MARKUP.sub(' ', s))
+CN_DIGIT = {'零': 0, '〇': 0, '一': 1, '二': 2, '两': 2, '三': 3, '四': 4, '五': 5,
+            '六': 6, '七': 7, '八': 8, '九': 9}
+CN_NUM = re.compile(r'[零〇一二三四五六七八九十百千两]+')
+
+
+def cn_numerals_to_digits(s: str) -> str:
+    """中文数字折算成阿拉伯数字后再比对。
+
+    **不做这一步，本检查就会逼出坏中文。** 中文侧本来就该写「三层矿井」（全库 16 处）、
+    「第一军团」（1st Host）、「二十年」（2 decades）；只认阿拉伯数字的话，
+    这些全都会被报成「英文里的数字中文没有」，逼着译者改成「3 层矿井」「第 1 军团」。
+    是规则错了，不是译文错了 —— check_catchup.py 上一次就是这么踩的坑，同源修在这里。
+
+    只做粗折算（够用即可）：十=10、二十=20、三层=3、第一=1。
+    """
+    def conv(m):
+        t = m.group()
+        if t == '十':
+            return '10'
+        if len(t) == 2 and t[0] == '十':          # 十一 .. 十九
+            return str(10 + CN_DIGIT.get(t[1], 0))
+        if len(t) == 2 and t[1] == '十':          # 二十 .. 九十
+            return str(CN_DIGIT.get(t[0], 0) * 10)
+        if len(t) == 3 and t[1] == '十':          # 二十五
+            return str(CN_DIGIT.get(t[0], 0) * 10 + CN_DIGIT.get(t[2], 0))
+        if len(t) == 1:
+            return str(CN_DIGIT.get(t, ''))
+        return t
+    return CN_NUM.sub(lambda m: ' ' + conv(m) + ' ', s)
+
+
+def plain(s: str, cn: bool = False) -> str:
+    """剥掉标记与标签，只留给人读的正文。cn=True 时顺带折算中文数字。"""
+    out = TAG.sub(' ', ENTITY.sub(' ', MARKUP.sub(' ', s)))
+    return cn_numerals_to_digits(out) if cn else out
+
+
+# 带倍数的量词：英文的「2 decades」在中文里无论写「二十年」还是「20 年」，
+# 那个独立的 2 都保不住 —— 这是语言差异，不是漏译。硬要让 2 出现，
+# 只能逼出「2 个十年」这种坏中文（库里真的出现过，已订正）。
+# 所以英文侧遇到这类量词时，把换算后的值也算作可接受写法。
+SCALED = re.compile(r'(?<!\d)(\d+(?:\.\d+)?)\s+(decades?|dozens?|scores?|centur(?:y|ies)|'
+                    r'millennia|millenniums?)\b', re.I)
+SCALE = {'decade': 10, 'dozen': 12, 'score': 20, 'centur': 100,
+         'millennia': 1000, 'millennium': 1000}
+
+
+def acceptable_forms(pe: str):
+    """英文正文里每个数字 -> 中文侧可接受的写法集合。"""
+    forms = {n: {n} for n in NUM.findall(pe)}
+    for num, unit in SCALED.findall(pe):
+        u = unit.lower().rstrip('s')
+        mult = next((v for k, v in SCALE.items() if u.startswith(k)), None)
+        if mult:
+            scaled = float(num) * mult
+            forms.setdefault(num, {num}).add(
+                str(int(scaled)) if scaled == int(scaled) else str(scaled))
+    return forms
 
 
 def walk(en, cn, path, out):
@@ -112,11 +169,13 @@ def main():
         for path, e, c in o:
             if not (c and CJK.search(c)):
                 continue
-            pe, pc = plain(e), plain(c)
+            pe, pc = plain(e), plain(c, cn=True)
             if len(pe) < a.min_en:
                 continue
             checked += 1
-            miss_num = sorted(set(NUM.findall(pe)) - set(NUM.findall(pc)),
+            cn_nums = set(NUM.findall(pc))
+            miss_num = sorted((n for n, ok in acceptable_forms(pe).items()
+                               if not (ok & cn_nums)),
                               key=lambda x: -len(x))
             miss_term = ([f'{k}→{v}' for k, v in gloss.items()
                           if re.search(r'\b' + re.escape(k) + r'\b', pe) and v not in pc]

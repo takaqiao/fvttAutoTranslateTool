@@ -203,8 +203,14 @@ function extractDocument(doc, documentType, mappings) {
       case 'textCollection': {
         const map = {};
         for (const it of toArray(value)) {
-          const key = it?._id ?? it?.text;
-          if (!isNonEmptyString(key) || !isNonEmptyString(it?.text)) continue;
+          // 键**必须**是 text 本身，不能用 _id。Babele 的 textCollection 就是
+          // fieldCollection("text")，运行时查的是 `translations[data.text]`
+          // （converter/converters.js: fieldCollection）。这里一度写成
+          // `it?._id ?? it?.text`，于是英文基线按 ID 建键、中文包按文本建键 ——
+          // 中文其实一直在正常生效，但任何拿两边比键的扫描都会把 284 条活的
+          // scene note 判成「死键」，差点被 prune_dead 全删。
+          const key = it?.text;
+          if (!isNonEmptyString(key)) continue;
           map[key] ??= it.text;
         }
         if (Object.keys(map).length) out[field] = map;

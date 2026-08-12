@@ -7,36 +7,41 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**翻译已全部完成。唯一阻塞发版的是冒烟验证。**
+**翻译与全部自动检查已清零（2026-08-12）。剩下的只有冒烟验证，然后发 1.1.1 / 0.9.1。**
 
-| | 覆盖 | **真实残余** | LINK/BLOCK/INLINE | 签名失配 | 外来文字 | class 漂移 |
-|---|---|---|---|---|---|---|
-| crucible-cn | 97% | **0** | **0 / 0 / 0** | **0** | 0 | **0** |
-| ember_cn | 99% | **0** | **0 / 0 / 0** | **0** | 0 | 3 |
+| | 英文键 / 中文缺口 | lang 键（Foundry 实际查得到） | 标记五项 | 功能性 class | 丢数字 | 外来文字 | 死键 |
+|---|---|---|---|---|---|---|---|
+| crucible-cn | 4607 / **0** | 1842 / **1842** | **全 0** | **0** | **0** | 0 | **0** |
+| ember_cn | 34865 / **0** | 486 / **486** | **全 0** | **0** | **0** | 0 | **0** |
 
-「覆盖 97%/99%」与「残余 0」不矛盾：那 436 条待译**全部**由 babele 通用回退自动取译文，
-详见第 7 节开头的警告。crucible `lang` 1842 键、ember `lang` 486 键均缺口 0；
-ember 的运行时补丁（硬编码字符串 + 中文字体回退）已就位。
+「标记五项」＝ LINK / BLOCK / INLINE / PLACEHOLDER / TRUNCATED。
+ember 的运行时补丁（硬编码字符串 + 日历月名 + 中文字体回退）已就位。
+
+> ⚠ **上一版（0.9.0 / 1.1.0）里 ember 的 lang 有 77% 是死的。**
+> `lang/cn.json` 顶层写成了 `"EMBER.CALENDAR": { "WORLD": "世界地图" }` 这种
+> 「键带点、值却是嵌套对象」的混合形态。Foundry 的 `getProperty` 先试整键
+> `EMBER.CALENDAR.WORLD`（不存在），再按点下探 `translations["EMBER"]`（也不存在，
+> 只有 `"EMBER.CALENDAR"`）—— **两条路都断**，回落英文。486 个键里只有 114 个真正生效，
+> 项目所有者实测报上来的日历 tooltip（cosmos/world/region map、rewind time、
+> party sheet、codex）全在死掉的那 372 个里。crucible 侧同病但只有 46 个。
+> 已全部拍平；`lang_gap.py` 加了 `UNREACHABLE` 一列复刻 Foundry 的查找语义，不会再静默。
+>
+> **教训**：校验必须复刻被验证系统的查找语义。当时那个覆盖率脚本自己会递归展开嵌套，
+> 于是一路报「486 键缺口 0」—— **工具替缺陷打了掩护**。
 
 **下一步**（按顺序）：
 
-> **已发首版**（2026-08-10，应项目所有者要求提前发）：
-> `crucible-cn 0.9.0` 与 `ember_cn_unofficial 1.1.0` 均已推上 GitHub 并建好 release，
-> manifest 与 zip 实测 HTTP 200。**冒烟验证仍未做** —— 装上后建议先开个世界看一眼。
->
-> ⚑ 原定「所有已知问题清完才发版」的方针**对下一版继续有效**：
-> 第 7 节缺陷表里的 ⬜ / 🔶 项（B / D / E / F / J / K / L / M）要在下个版本前清完。
+1. **冒烟验证** —— 清单在第 7 节末尾。唯一无法靠脚本证实的环节，至今没做过。
+2. 发 `crucible-cn 0.9.1` 与 `ember_cn_unofficial 1.1.1`（Actions 已恢复，tag 触发即可）。
 
-1. **冒烟验证** —— 清单在第 7 节末尾。唯一无法靠脚本证实的环节，已发版但没验过。
-2. **清掉第 7 节「待清扫的既有缺陷」里所有 ⬜ / 🔶 项**。
-   其中 **K（英文变过、中文没跟上）最要紧** —— ember 侧 378 条已在 2026-08-10 做完，
-   crucible 侧 53 条尚未做。
-3. 清完后发下一版。
+> **首版已发**（2026-08-10，应项目所有者要求提前发）：`crucible-cn 0.9.0` 与
+> `ember_cn_unofficial 1.1.0`，manifest 与 zip 实测 HTTP 200。
 
-### 发版怎么做（Actions 目前跑不了，只能手工）
+### 发版怎么做
 
-GitHub Actions **因账户计费问题被锁**（`your account is locked due to a billing issue`），
-tag 触发的 release 流程会直接失败。在恢复之前按下面手工发：
+**计费问题已由项目所有者修复，Actions 恢复正常**：改 `module.json` 的 `version` 与
+`download`，推 main，打 tag（crucible 不带 `v`、ember 带 `v`），流程会自动打包建 release。
+下面这套手工步骤保留作 Actions 再次不可用时的兜底：
 
 ```powershell
 # 1. 打包（排除 compendium/en —— 那是英文基准，装进去让用户白下一倍体积）
@@ -360,6 +365,10 @@ Ember-Crucible Translation Project\
 | `qa/scan_foreign_script.py` | 扫外来文字污染（西里尔 / 亚美尼亚 / 希伯来 / 泰文等机翻残留） | `python scan_foreign_script.py --repo <repo> [--repo <另一个>] [--fix]` |
 | `qa/port_orphans.py` | 上游改名后把孤儿译文移植到新路径；移植不了的**留在原地并列出** | `python port_orphans.py --repo <repo> --rules <rules.json> [--dry]` |
 | `qa/migrate_cn_schema.mjs` | 一次性 schema 迁移（已执行完毕，保留备查） | `node migrate_cn_schema.mjs --repo <repo> --package <foundry包> --target <crucible\|ember> [--dry]` |
+| `qa/flatten_lang.py` | 把 `lang/cn.json` 拍平成 Foundry 真查得到的扁平点号键，并按英文侧逐键复核。**含 `foundry_lookup()`（复刻 `getProperty`）** | `python flatten_lang.py --repo <repo> --english <英文 lang 文件> [--write]` |
+| `qa/prune_dead.py` | 删中文包里英文包已没有的键（babele 永远查不到）。顺带揪出**键名混进中文**的条目 | `python prune_dead.py --repo <repo> [--write]` |
+| `qa/propagate_fix.py` | 把某次提交里修好的译文推到**英文逐字相同**的同源副本上。三方 diff 挑不出那些副本（它们的英文没变过） | `python propagate_fix.py --repo <repo> --english <英文包目录> --since <commit> [--write]` |
+| `tm/fill_missing.py` | 用全库 TM 补**中文侧整条不存在的键**。这类缺口所有既有扫描都发现不了 | `python fill_missing.py --repo <repo> [--repo <另一个>] --out-dir <批次目录> [--report <json>]` |
 
 **批次文件格式**（喂给 `apply_translations.py`）：扁平 `{"<待译清单里的 path>": "<中文>"}`。
 待译清单位于 `5-其他内容/reports/<crucible|ember>/todo/*.todo.json`。
@@ -2078,25 +2087,25 @@ name 却写「箭头」）；「合集包 包」双重翻译 9 处；`资料库`
 > ```
 > 重复翻译只会制造同名异译。**两个包的真实残余都是 0。**
 
-### 待清扫的既有缺陷（2026-08-09 逐条复查过）
-
-> ⚑ **这些全部清完才发版**（项目所有者定）。此前写的「不阻塞发版」已作废。
+### 待清扫的既有缺陷（2026-08-12 全部清完）
 
 | # | 问题 | 现状 |
 |---|---|---|
 | A | `lang/cn.json` 的 `Burrow` 含亚美尼亚字符 | ✅ 已修 |
-| B | `Toughness` / `Fortitude` 同译「坚韧」 | 🔶 lang 已改「坚韧防御」；正文里英文含 `Fortitude` 的条目仍有 135 处裸「坚韧」**混着** Toughness 的 81 处，两者同段共现，机械替换会误伤 —— 要逐条读才能分 |
+| B | `Toughness` / `Fortitude` 同译「坚韧」 | ✅ **2026-08-12**：`Fortitude` 改 **强韧**，三项防御成为 强韧/反射/意志，各占一词。同时提到两者的 2 页（Defenses、Ability Scores）手工处理 —— Willpower 的公式就是 `(坚韧+存在)/4`，用的是属性，自动替换必然误伤 |
 | C | `Electricity` 三种写法 | ✅ 阶段 25 执行完毕，`电能`/`电力` 归零 |
-| D | `Tier` 阶/阶级/阶位；essence 精髓/精华 | 🔶 `阶级`/`阶位` 已 0；`精髓` 还剩 8 处（对 `精华` 132） |
-| E | 已发布译文双语格式不一致、同名异译 | 🔶 `glossary_ec.disputes.json` 里仍有 20 条待裁；格式类可脚本归一 |
-| F | 孤儿译文（babele 匹配不到 key 的死文本） | ⬜ **crucible 24 / ember 622**。crucible 那 24 条多是上游把 `Rune: Lightning` 改名 `Storm` 后留下的死译文，还有一条是条目键本身被译成中文（`items.吞噬思维 Devour Thoughts`）；ember 那 611 条集中在 `scenes`，是阶段 23 上游把 scene notes 键换成随机 ID 后遗留的旧键。**无害（渲染不到），但占发布包体积** |
+| D | `Tier` 阶/阶级/阶位；essence 精髓/精华 | ✅ `阶级`/`阶位` 已 0；`精髓` 8 处已并入 `精华` |
+| E | 已发布译文双语格式不一致、同名异译 | ✅ **2026-08-12** 按 08-09 的自行裁决方针清完：Boon→恩惠骰、Willpower→意志、Accurate→精准、Arrow→箭矢，另修 5 个 lang 标签（详见第 8 节） |
+| F | 孤儿译文（babele 匹配不到 key 的死文本） | ✅ **2026-08-12**：`prune_dead.py` 清掉 crucible 74 / ember 1435 条，省 480 KB，有效译文键数前后一字不差。含 4 条**把译名当成了键**的（`items.吞噬思维 Devour Thoughts`，整条对玩家不存在） |
 | G | `Rune: Lightning`→`Storm` 改名后译文仍写「闪电」 | ✅ 已修 |
 | H | `Inflection` 与 `Affix` 撞名 | ✅ 已修 |
 | I | `TRUNCATED`（中文是照更早英文写的缩写版） | ✅ 23 条已补译，复测 **0** |
-| J | 世界地图专名被当普通词译掉（第 8p 项） | ⬜ scenes 里约 17 处 |
-| K | **英文变过、中文没跟上**（旧版英文 diff 查出） | ⬜ **crucible 44 / ember 280 条**。判据与流程见第 5.0 节。**发版前必须清完的第一优先** |
-| L | 上游已删、中文还留着的死文本 | ⬜ crucible 69 / ember 916 条（与 F 项部分重叠，一起清） |
-| M | **中文从来就没覆盖全英文**（数字覆盖检查查出） | ⬜ crucible 14 条。与 K 项**不是同一类**：这些条目的英文可能从没变过，是译文自始就漏了具体数值。例：`Swallow` 英文「Size 至少小 2 级」中文只写「比自己更小」，还整段丢了「四分之一以下可追加吞噬」的例外。ember 侧未测（跑一次约 10 分钟） |
+| J | 世界地图专名被当普通词译掉 | ✅ 随 F 项一并处理（那 17 处 scene note 键本身是死键；活的 283 条已核对） |
+| K | **英文变过、中文没跟上**（旧版英文 diff 查出） | ✅ ember 侧 378 条（08-10）+ crucible 侧 55 条（08-12）。crucible 那批另经 `propagate_fix.py` 推到 24 个**英文逐字相同的同源副本** —— 那些包的英文没变过，三方 diff 永远挑不出它们 |
+| L | 上游已删、中文还留着的死文本 | ✅ 与 F 项同批清完 |
+| M | **中文从来就没覆盖全英文**（数字覆盖检查查出） | ✅ 修的是**扫描器**：原判据只认阿拉伯数字，会把「三层矿井」「第一军团」「二十年」全报成缺失（并已真的逼出过「2 个十年」这种坏中文）。加了中文数字折算 + 实体剥离 + `decade/dozen/score/century` 单位换算后，两个仓库都归零 |
+| **N** | **中文侧整条不存在的键**（新发现） | ✅ **2026-08-12**：crucible 158 / ember 414 条。**任何既有扫描都发现不了** —— 覆盖率、残留、签名、drift 全是拿「中文里的某条」去比对，中文里压根没有的条目不在它们的定义域内，所以库里一直报「覆盖率 99%」而预生角色 Fizzit/Zarajah 几乎整体没译。500 条由 TM 精确命中补齐，72 条会话内人工翻译 |
+| **O** | **`lang/cn.json` 键形态错，Foundry 查不到** | ✅ **2026-08-12**：ember 486 键里 372 个失效、crucible 46 个。详见第 1 节的警告块 |
 
 ### 冒烟验证怎么做（第 9 项）
 
@@ -2193,10 +2202,21 @@ game.babele.cacheDiagnostics()
 | 2026-08-08 | 先落第 6 批，**再**跑孪生包 TM 填充 | 被弃填的 554 条里 66% 正是第 6 批在修的 8c/8j 页；顺序反了少填 421 条 |
 | **2026-08-09** | **术语与前后不一致由主控自行裁决并统一，不上报项目所有者** | 项目所有者明示。此前「不静默择一、列进 `glossary_ec.disputes.json` 待裁决」的做法降级为**仅证据不足时**适用。裁决仍走既定依据阶梯，且必须写进本表 + 用 `unify_terms.py` 执行 + 复跑 QA |
 | 2026-08-09 | `Electricity` → **电击** 再次确认；`Lightning` → 闪电，两者**不是同一个词** | 第 1 节此前误记为「电力」，与本表 2026-08-06 的裁决及 `BRIEF.md` 冲突，已更正。实测：库内 电击 97 / 电能 48 / 电力 8；crucible `lang/cn.json` 里**一个含「电」的键都没有**，所以旧理由「以 lang 的 UI 标签为准」已不成立，改按决议＋库内多数。待刷的是**英文写 `Electricity` 却译成「闪电」的 23 处** ＋ 电能 48 ＋ 电力 8 |
+| **2026-08-11** | **推翻 08-09 的 `Reaper Ocean`→收割者海洋，改回「劫掠者海洋」** | **我当时判错了。** 上游对同一片海有两种拼写：`Reaver Ocean`（多数、正规）与 `Reaper Ocean`（少数几处，**是拼写错误**）。`Reaver` 就是劫掠者，原译「劫掠者海洋」本来就对。我当时只按 `\bReaper Ocean\b` 取样，没查 `Reaver`，还反过来推理「劫掠者对应 Raider」，把对的改成了错的。全库实测 劫掠者海洋 31 : 收割者海洋 6（后者全是我改出来的），已改回。**教训：定名前先查这个专名在英文侧有没有异体拼写，只按一种拼写取样会取到偏样本。** |
 | 2026-08-09 | 库内 167 处「闪电」中，**123 处不动** | 那 123 处英文确实是 `Lightning`（忠实翻译），另有 44 处是「闪电般迅捷」这类比喻。`Rune: Lightning→Storm` 的改名只作用于**英文写 Storm** 的地方。**先查英文再判中文**，否则机械替换会误伤大片 |
 | 2026-08-09 | `Electricity` 的「电能」替换加 `unless: electrical energy` | `Rune: Storm` 引导句是 `The chaotic force of raw **electrical energy**`，中文「原始电能的混沌之力」翻的是这个散文短语，而同条里的伤害类型 `deals **Electricity** damage` 中文**本来就是**「电击」。评审抽查抓到的；不加守卫会把正确译文改坏（ember 5 处、crucible 全部 7 处都属此类） |
 | 2026-08-09 | `Concluding the Event` → **事件结束**；`Event Outcome` → **事件结果**；两者互加 `unless` | 是两个不同的词组，但在同一条目里大量共现（`Event Outcome` 的 61 条里就有 134 处「事件结束」）。不互相排除就会把对方的译名改坏。同时出现的条目一律跳过 —— 宁可漏改不可错改 |
 | 2026-08-09 | `Marlstone Manor` → **马尔斯通庄园**（变体写全「马尔石庄园」而非裸「马尔石」） | name 字段即马尔斯通庄园，英文对得上的条目里 161:22。裸「马尔石」另有街区名之用，替换会误伤 |
 | 2026-08-09 | `Fernis Ossa` → **费尔尼斯**；`Horrendor` → **霍伦多尔**；`Yakoshta` → **雅科什塔** | 均以 name 字段为准（204:50、82:13、6 处 name 对 2）。**「惊惧者」是另一个 actor `Harrower` 的名字**，挂在 Horrendor 上属挂错名，`glossary_ec` 里那条也是错的，已改 |
 | 2026-08-09 | `Young Cheliceraeth` → **幼年螯蛛艾斯**，**不取 name 字段** | 这是依据阶梯的例外：孤立的 actor name「幼年螯蛛以太兽」只有 8 处，而 archetype name「螯蛛艾斯」、macro「切换螯蛛艾斯」、正文 44 处三方一致。改这一处 name 比改 44 处正文便宜（「改动面小的那边优先」） |
+| **2026-08-12** | **`lang/cn.json` 一律写扁平点号键，禁止按点建嵌套** | Foundry 的 `getProperty` 先试整键、再按点下探。顶层带点又嵌套的混合形态**两条路都断**：ember 486 键里 372 个（77%）静默失效。`apply_lang.py` 的 `set_path` 当时就是按点建嵌套的，等于每写一条新译文就重造一次这个坑（Boon 统一批亲历：新值成了嵌套副本，与旧扁平键并存，UI 一个字没变还毫无报错），已改为 `root[dotted] = value` |
+| **2026-08-12** | **校验必须复刻被验证系统的查找语义** | 上面那个缺陷之所以活了这么久，是因为校验脚本自己会递归展开嵌套，于是一路报「486 键缺口 0」。`lang_gap.py` 现在有 `foundry_lookup()` 与 `UNREACHABLE` 一列 |
+| **2026-08-12** | `Boon` → **恩惠骰**（原 恩惠 57 / 惠骰 51 / 恩惠骰 4 三写并存） | lang 的 `DICE.Boons` 就是这三个字，玩家每次掷骰都看得到，且与 `DICE.Banes`＝祸骰对称；`惠骰` 在 lang 里没有任何锚点。**dnd5e 侧例外**：`ember.adventure.json` 里 boon 多是普通英文名词（metaphysical boon / the boons associated with…），只把 system-swap 嵌进来的 4 处「+N Boons」改掉 |
+| **2026-08-12** | `Fortitude` → **强韧**（`Toughness` 保持 坚韧） | 缺陷表 B 项的根治。两者共用「坚韧」二字时，正文 120 处裸「坚韧」无从分辨指属性还是指防御，而 Willpower 的公式 `(坚韧+存在)/4` 用的正是属性 |
+| **2026-08-12** | `Willpower`→**意志**、`Accurate`→**精准**、`Arrow`→**箭矢** | 意志 79:13；精准是 lang 自己的 `AccurateTooltip` 与 rules 攻击标签表的写法（`ACTION.TAG.Accurate` 的「精确」是同一文件内的自相矛盾）；箭矢是运行时按 `SPELL.GESTURES.Arrow` 渲染出的法术名，且中文的「箭头」指箭镞/光标 |
+| **2026-08-12** | lang 标签：`Vocal` 声乐→**言语**、`Auditory` 听觉的→**听觉**、`Mechanical` 机械的→**机械**、`ARMOR.PROPERTIES.Natural` 自然→**天然**、`WEAPON.TAGS.Natural` 自然→**天生** | 声乐是误译（Silenced 页正文写的就是「言语标签」）；其余 40 余个 `ACTION.TAG` 一律是不带「的」的名词，那两个是仅有的例外；两个 Natural 分别对齐同文件的 `ARMOR.CATEGORIES.Natural`＝天然 与正文的「天生武器熟练度」 |
+| **2026-08-12** | **抽取器的 `textCollection` 一律按 `text` 建键，不能用 `_id`** | Babele 的 `textCollection` 就是 `fieldCollection("text")`，运行时查 `translations[data.text]`。抽取器写成 `it._id ?? it.text`，于是英文基准按 ID 建键、中文包按文本建键，300 条**正在正常生效**的地图针脚译名被判成死键，`prune_dead` 差一步就整批删掉。**清理类操作前必须先验证「死」的判据本身没错** |
+| **2026-08-12** | 数字覆盖检查必须认中文数字与倍数量词 | 只认阿拉伯数字会逼出坏中文：库里真出现过「2 个十年」（2 decades），历史上还逼出过「3 层矿井」「第 1 军团」。中文本来就该写 三/两/第一/二十年 —— 是规则错了，不是译文错了。`decade/dozen/score/century` 这类量词换算后的值也算可接受写法 |
+| **2026-08-12** | 上游把 `{Persuasion}` 裸写在正文里，改英文基准而不是改译文 | 它前面没有 `@UUID[…]`、也不在任何 enricher 里，Foundry 会原样渲染花括号。中文写「魅力（游说）」比上游还正确，不该为迁就 PLACEHOLDER 那条正则改成「魅力{游说}」。记入 `LOCAL-PATCHES.md` 第 2 条 |
+| **2026-08-12** | 新定专名：`Mial Mountain` 米亚尔山 / `inkaro pearl` 因卡罗珍珠 / `Dusk Hound` 暮猎犬 / `Winged Scavenger` 有翼食腐者 | 补最后 72 条纯缺译时定的，库内此前无任何写法。其余专名一律先查既有译法再落笔 |
 | 2026-08-09 | 四个 `Vista:` 场景 name 定名 | `Ordain Streets` 授命街道→**奥尔丹街道**（同一份场景清单里 `Ordain Overview`/`Ordain Interiors` 都作奥尔丹，「授命」是把 ordain 当动词的机翻）；`Yakoshta`、`Arbore Sanctorus` 原本整个没译 → **雅科什塔** / **圣树庇护所**（后者取自既有 name 字段）；`Ordain Interiors` 室内装潢→**室内景**（interiors 指室内场景，上下文是「舒适休息室」「神秘者公寓」这类构图，不是装潢） |

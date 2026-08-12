@@ -40,18 +40,25 @@ def flatten(obj, prefix=""):
 
 
 def set_path(root, dotted, value):
-    parts = dotted.split(".")
-    node = root
-    for p in parts[:-1]:
-        nxt = node.get(p)
-        if not isinstance(nxt, dict):
-            nxt = {}
-            node[p] = nxt
-        node = nxt
-    node[parts[-1]] = value
+    """**必须写成扁平点号键，绝不能按点建嵌套。**
+
+    Foundry 的 getProperty 先试整键、再按点逐级下探。我们的 cn.json 是扁平的
+    （顶层就是 `"EMBER.CALENDAR.WORLD"` 这样的键），此处若按点建出
+    `{"EMBER": {"CALENDAR": {"WORLD": …}}}`，就会与原来的扁平键**并存**，
+    而整键那条路先命中扁平旧值 —— 新译文永远不生效，且没有任何报错。
+
+    这正是 ember 侧 372 个键集体失效的成因（见 flatten_lang.py 的说明）。
+    此函数一度把那个坑重新挖了一遍：Boon 统一批的两条 lang 改动写成了嵌套副本，
+    文件里同时存在 423 行的旧「恩惠」与 1846 行的新「恩惠骰」，UI 显示的是旧的。
+    """
+    root[dotted] = value
 
 
 def del_path(root, dotted):
+    """扁平键优先删；旧的嵌套形态仍兜底处理，顺带清掉空父节点。"""
+    if dotted in root:
+        del root[dotted]
+        return True
     parts = dotted.split(".")
     stack = [root]
     node = root
