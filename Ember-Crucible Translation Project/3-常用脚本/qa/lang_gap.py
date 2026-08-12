@@ -36,6 +36,26 @@ def flatten(obj, prefix=""):
     return out
 
 
+def foundry_lookup(tr, key):
+    """复刻 `foundry.utils.getProperty`：先整键命中，否则按点逐级下探。
+
+    **不要用 flatten() 判断译文有没有生效。** flatten 会把
+    `"EMBER.CALENDAR": {"WORLD": "世界地图"}` 展开成 `EMBER.CALENDAR.WORLD`，
+    看着齐全，但 Foundry 查的是「整键」或「逐级下探」，这种顶层带点、值是嵌套对象
+    的混合形态**两条路都断**。ember 侧 486 键里 372 个就这么死掉，而校验一路报「缺口 0」。
+    校验必须复刻被验证系统的查找语义。
+    """
+    if key in tr:
+        v = tr[key]
+        return v if isinstance(v, str) else None
+    node = tr
+    for p in key.split('.'):
+        if not isinstance(node, dict) or p not in node:
+            return None
+        node = node[p]
+    return node if isinstance(node, str) else None
+
+
 def load(p):
     return json.loads(Path(p).read_text(encoding="utf-8-sig"))
 
@@ -54,12 +74,16 @@ def main():
     new_en = flatten(load(Path(args.package) / "lang" / args.lang_file))
     old_en_path = repo / "lang" / "en.json"
     old_en = flatten(load(old_en_path)) if old_en_path.exists() else {}
-    cn = flatten(load(repo / "lang" / "cn.json"))
+    cn_raw = load(repo / "lang" / "cn.json")
+    cn = flatten(cn_raw)
 
     keep_path = repo / "lang" / "lang_keep_english.json"
     keep_english = set(load(keep_path)) if keep_path.exists() else set()
 
-    report = {"new": {}, "drift": {}, "untranslated": {}, "stale": []}
+    report = {"new": {}, "drift": {}, "untranslated": {}, "stale": [], "unreachable": []}
+
+    # 有中文、但 Foundry 按自己的查找语义**取不到** → 键形态错了，等同于没译。
+    report["unreachable"] = sorted(k for k in new_en if k in cn and not foundry_lookup(cn_raw, k))
 
     for k, en in new_en.items():
         if k not in cn:
@@ -85,6 +109,7 @@ def main():
     print(f"  DRIFT        {len(report['drift'])}")
     print(f"  UNTRANSLATED {len(report['untranslated'])}")
     print(f"  STALE        {len(report['stale'])}")
+    print(f"  UNREACHABLE  {len(report['unreachable'])}   ← 有中文但 Foundry 查不到（键形态错）")
     print(f"  → {outdir / 'lang_gap.json'}")
 
     if args.sync_baseline:

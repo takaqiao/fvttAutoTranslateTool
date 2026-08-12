@@ -35,3 +35,21 @@
 
 **同时改的**：`compendium/cn/ember.crucible-adventure.json` 同一路径的中文里
 那个照抄来的坏标记也补了 `]`。
+
+---
+
+## 2. `Unfinished Business / Answers From On High` 把 `{Persuasion}` 裸写在正文里
+
+- **日期**：2026-08-12
+- **影响包**：`ember.crucible-adventure.json`、`ember.adventure.json`
+- **路径**：`Ember Early Access.journals.Unfinished Business.pages.Answers From On High.text`
+- **上游原文**：`Agraband automatically succeeds on the Charisma {Persuasion} check.`
+- **补成**：`… on the Charisma (Persuasion) check.`
+
+**为什么要修**：这里的 `{Persuasion}` 前面**没有** `@UUID[…]`，也不在任何 enricher 里 ——
+作者多半是想写个链接、只留下了标签。Foundry 会把花括号原样渲染给玩家看。
+
+而 `scan_markup_drift` 的 PLACEHOLDER 判据（`\{[A-Za-z_][A-Za-z0-9_.\-]*\}`）分不清
+「真占位符」和「作者手滑留下的花括号」，于是把这条永远报成缺失。中文写的是
+「魅力（游说）」——比上游还正确，不该为了迁就一条正则改成「魅力{游说}」。
+把英文基准补成圆括号，两边就都对了。
