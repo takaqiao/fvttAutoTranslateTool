@@ -1,1175 +1,1195 @@
 {
-  "_meta": {
-    "count": 20,
-    "note": "基底术语表与已发布译文对同一英文给出了不同中文（非双语格式差异）。当前一律先保留已发布值（玩家现在看到的），但每条都需要人工/上下文裁决。裁决后写回 glossary_ec.json 并记入 PROJECT.md 第 8 节。"
-  },
-  "disputes": {
-    "Aberin's Folly": {
-      "base": "阿伯林的愚举",
-      "shipped": "阿贝林的愚举 Aberin's Folly"
-    },
-    "Agrimage": {
-      "base": "农法师",
-      "shipped": "农艺法师 Agrimage"
-    },
-    "Arcturian Liquor": {
-      "base": "阿克图里安烈酒",
-      "shipped": "阿克图瑞安烈酒 Arcturian Liquor"
-    },
-    "Attunement": {
-      "base": "调谐",
-      "shipped": "同调 Attunement"
-    },
-    "Chapter 3 Events": {
-      "base": "第3章事件",
-      "shipped": "第3章 事件 Chapter 3 Events"
-    },
-    "Formidable Presence": {
-      "base": "威严气场",
-      "shipped": "威严魅力 Formidable Presence"
-    },
-    "Golden Weapon": {
-      "base": "金色武器",
-      "shipped": "黄金武器 Golden Weapon"
-    },
-    "House Cevher Mausoleum": {
-      "base": "杰夫赫尔家族陵墓",
-      "shipped": "杰夫赫家族陵墓 House Cevher Mausoleum"
-    },
-    "House Cevher Signet Ring": {
-      "base": "杰夫赫尔家族印戒",
-      "shipped": "切夫赫尔家族印戒 House Cevher Signet Ring"
-    },
-    "Hulg'run Lineage": {
-      "base": "赫尔格伦血统",
-      "shipped": "Hulg'run血统 Hulg'run Lineage"
-    },
-    "Kinesis Proficiency": {
-      "base": "念动力熟练度",
-      "shipped": "念力熟练度 Kinesis Proficiency"
-    },
-    "Kineturge": {
-      "base": "念动力术师",
-      "shipped": "念力术师 Kineturge"
-    },
-    "Kithil": {
-      "base": "奇希尔",
-      "shipped": "基希尔 Kithil"
-    },
-    "Ordain Gazetteer": {
-      "base": "奥尔丹地志",
-      "shipped": "奥丹地志 Ordain Gazetteer"
-    },
-    "Quickwater": {
-      "base": "激流水",
-      "shipped": "急流水 Quickwater"
-    },
-    "Reliquary": {
-      "base": "圣物室",
-      "shipped": "圣髑匣 Reliquary"
-    },
-    "Thornling": {
-      "base": "荆棘裔",
-      "shipped": "荆芽灵 Thornling"
-    },
-    "Welcome To Crucible": {
-      "base": "欢迎来到Crucible",
-      "shipped": "欢迎来到 Welcome To Crucible"
-    },
-    "What is Crucible": {
-      "base": "什么是《Crucible》",
-      "shipped": "什么是《 What is Crucible"
-    },
-    "Wind Raiders": {
-      "base": "风掠者",
-      "shipped": "风袭劫掠者 Wind Raiders"
-    }
-  },
-  "shippedBilingualFormatInconsistency": {
-    "_note": "同一专名的中文相同，但双语后缀（\" English\"）时加时不加。属于格式问题，可脚本批量归一。",
-    "count": 209,
-    "terms": {
-      "Aburyx": {
-        "阿布里克斯 Aburyx": 2,
-        "阿布里克斯": 1
-      },
-      "Abyss-Warped Undaunted": {
-        "深渊扭曲的无畏者 Abyss-Warped Undaunted": 1,
-        "深渊扭曲的无畏者": 1
-      },
-      "Abyssal Echo": {
-        "深渊回响 Abyssal Echo": 1,
-        "深渊回响": 1
-      },
-      "Abyssal Eel": {
-        "深渊鳗鱼 Abyssal Eel": 1,
-        "深渊鳗鱼": 1
-      },
-      "Abyssal Eye": {
-        "深渊之眼 Abyssal Eye": 1,
-        "深渊之眼": 1
-      },
-      "Acid Spit": {
-        "酸液喷吐 Acid Spit": 6,
-        "酸液喷吐": 2
-      },
-      "Acid Spray": {
-        "酸液喷射": 2,
-        "酸液喷射 Acid Spray": 1
-      },
-      "Adelyne Goss": {
-        "阿德琳·戈斯 Adelyne Goss": 1,
-        "阿德琳·戈斯": 1
-      },
-      "Agnath": {
-        "阿格纳斯 Agnath": 2,
-        "阿格纳斯": 2
-      },
-      "Agraband Swift": {
-        "阿格拉班德·斯威夫特 Agraband Swift": 1,
-        "阿格拉班德·斯威夫特": 1
-      },
-      "Agrimage": {
-        "农艺法师 Agrimage": 1,
-        "农艺法师": 1
-      },
-      "Alar": {
-        "阿拉尔 Alar": 2,
-        "阿拉尔": 1
-      },
-      "Amalthea Stonecraft": {
-        "阿玛尔忒亚·石艺 Amalthea Stonecraft": 1,
-        "阿玛尔忒亚·石艺": 1
-      },
-      "Anachraenum Adventurer": {
-        "阿纳克雷努姆冒险者 Anachraenum Adventurer": 1,
-        "阿纳克雷努姆冒险者": 1
-      },
-      "Anachraenum Aetherial": {
-        "阿纳克瑞纽姆 以太灵 Anachraenum Aetherial": 1,
-        "阿纳克瑞纽姆 以太灵": 1
-      },
-      "Ancara": {
-        "安卡拉 Ancara": 2,
-        "安卡拉": 1
-      },
-      "Animated Rune Tome": {
-        "活化符文典籍 Animated Rune Tome": 1,
-        "活化符文典籍": 1
-      },
-      "Ankarist": {
-        "安卡里斯特 Ankarist": 1,
-        "安卡里斯特": 1
-      },
-      "Ankarist's Caravan": {
-        "安卡里斯特的商队 Ankarist's Caravan": 1,
-        "安卡里斯特的商队": 1
-      },
-      "Anydrath": {
-        "安伊德拉斯 Anydrath": 1,
-        "安伊德拉斯": 1
-      },
-      "Aqueous Transmission": {
-        "水相传导 Aqueous Transmission": 10,
-        "水相传导": 1
-      },
-      "Arcturian Miner": {
-        "阿克图里安矿工 Arcturian Miner": 1,
-        "阿克图里安矿工": 1
-      },
-      "Avwynn Taol": {
-        "阿芙温·陶尔 Avwynn Taol": 2,
-        "阿芙温·陶尔": 1
-      },
-      "Aythorn": {
-        "艾索恩 Aythorn": 2,
-        "艾索恩": 1
-      },
-      "Baradom": {
-        "巴拉多姆 Baradom": 2,
-        "巴拉多姆": 1
-      },
-      "Blue Block Inmate": {
-        "蓝区囚犯 Blue Block Inmate": 1,
-        "蓝区囚犯": 1
-      },
-      "Brackus von Tet": {
-        "布拉库斯·冯·泰特 Brackus von Tet": 1,
-        "布拉库斯·冯·泰特": 1
-      },
-      "Brigand": {
-        "强盗 Brigand": 1,
-        "强盗": 1
-      },
-      "Broken Aedir Sentinel": {
-        "损坏的艾迪尔哨兵 Broken Aedir Sentinel": 1,
-        "损坏的艾迪尔哨兵": 1
-      },
-      "Burnished Hand Protector": {
-        "辉手守卫者 Burnished Hand Protector": 1,
-        "辉手守卫者": 1
-      },
-      "Cherish Ellerie": {
-        "切瑞什·艾勒里 Cherish Ellerie": 1,
-        "切瑞什·艾勒里": 1
-      },
-      "Chessman": {
-        "棋士 Chessman": 1,
-        "棋士": 1
-      },
-      "Cindaric Adherent": {
-        "辛达里克信徒 Cindaric Adherent": 1,
-        "辛达里克信徒": 1
-      },
-      "Clipper": {
-        "克利珀 Clipper": 1,
-        "克利珀": 1
-      },
-      "Conaris Haid": {
-        "科纳里斯·海德 Conaris Haid": 1,
-        "科纳里斯·海德": 1
-      },
-      "Constructed Companion": {
-        "构装同伴 Constructed Companion": 3,
-        "构装同伴": 1
-      },
-      "Corpuleth": {
-        "尸团怪 Corpuleth": 1,
-        "尸团怪": 1
-      },
-      "Corrupted Cadrithor": {
-        "腐化的卡德里索尔 Corrupted Cadrithor": 2,
-        "腐化的卡德里索尔": 1
-      },
-      "Corrupted Kezus Jelly": {
-        "腐化凯祖斯水母 Corrupted Kezus Jelly": 1,
-        "腐化凯祖斯水母": 1
-      },
-      "Crevvet": {
-        "克雷维特 Crevvet": 2,
-        "克雷维特": 1
-      },
-      "Crumbling Skallith": {
-        "崩塌的斯卡利斯 Crumbling Skallith": 1,
-        "崩塌的斯卡利斯": 1
-      },
-      "Del Kalais": {
-        "德尔·卡莱斯 Del Kalais": 1,
-        "德尔·卡莱斯": 1
-      },
-      "Dereth Erekos": {
-        "德雷斯·埃雷科斯 Dereth Erekos": 1,
-        "德雷斯·埃雷科斯": 1
-      },
-      "Duurath": {
-        "杜拉斯 Duurath": 2,
-        "杜拉斯": 2
-      },
-      "Eamon Mariflor": {
-        "伊蒙·玛里弗洛尔 Eamon Mariflor": 1,
-        "伊蒙·玛里弗洛尔": 1
-      },
-      "Earth Sprite": {
-        "土精灵": 1,
-        "土精灵 Earth Sprite": 1
-      },
-      "Eliorwen": {
-        "艾利奥文 Eliorwen": 2,
-        "艾利奥文": 2
-      },
-      "Evesso": {
-        "埃维索 Evesso": 1,
-        "埃维索": 1
-      },
-      "Falar": {
-        "法拉尔 Falar": 1,
-        "法拉尔": 1
-      },
-      "Fernis Ossa": {
-        "费尔尼斯·奥萨 Fernis Ossa": 1,
-        "费尔尼斯·奥萨": 1
-      },
-      "Fire Sprite": {
-        "火焰精灵 Fire Sprite": 1,
-        "火焰精灵": 1
-      },
-      "Flameguard Firebrand": {
-        "焰卫火使": 2,
-        "焰卫火使 Flameguard Firebrand": 1
-      },
-      "Frost Sprite": {
-        "寒霜精灵": 1,
-        "寒霜精灵 Frost Sprite": 1
-      },
-      "Fulgurite Blades": {
-        "雷纹刃 Fulgurite Blades": 2,
-        "雷纹刃": 1
-      },
-      "Gastern Faviyos": {
-        "加斯特恩·法维约斯 Gastern Faviyos": 1,
-        "加斯特恩·法维约斯": 1
-      },
-      "Giant Corrupted Kezus Jelly": {
-        "巨型堕化凯祖斯水母 Giant Corrupted Kezus Jelly": 1,
-        "巨型堕化凯祖斯水母": 1
-      },
-      "Giant Kezus Jelly": {
-        "巨型凯祖斯果冻 Giant Kezus Jelly": 1,
-        "巨型凯祖斯果冻": 1
-      },
-      "Giant Luminous Ooze": {
-        "巨型发光软泥怪 Giant Luminous Ooze": 1,
-        "巨型发光软泥怪": 1
-      },
-      "Gohema": {
-        "戈赫玛 Gohema": 1,
-        "戈赫玛": 1
-      },
-      "Gohema's Eye": {
-        "戈赫玛之眼 Gohema's Eye": 1,
-        "戈赫玛之眼": 1
-      },
-      "Gohema's Tail": {
-        "戈赫玛的尾巴 Gohema's Tail": 1,
-        "戈赫玛的尾巴": 1
-      },
-      "Gohema's Tendril": {
-        "戈赫玛的触须 Gohema's Tendril": 1,
-        "戈赫玛的触须": 1
-      },
-      "Grim Assembly": {
-        "严酷集会 Grim Assembly": 1,
-        "严酷集会": 1
-      },
-      "Gumtoad": {
-        "胶蟾 Gumtoad": 1,
-        "胶蟾": 1
-      },
-      "Harbinger of Fear": {
-        "恐惧先驱 Harbinger of Fear": 1,
-        "恐惧先驱": 1
-      },
-      "Harrower": {
-        "惊惧者 Harrower": 1,
-        "惊惧者": 1
-      },
-      "Helice Korsos": {
-        "赫利刻·科索斯 Helice Korsos": 1,
-        "赫利刻·科索斯": 1
-      },
-      "Hephiss Wandren": {
-        "赫菲丝·万德伦 Hephiss Wandren": 1,
-        "赫菲丝·万德伦": 1
-      },
-      "Hew": {
-        "休 Hew": 1,
-        "休": 1
-      },
-      "Horrendor": {
-        "霍伦多尔 Horrendor": 2,
-        "霍伦多尔": 1
-      },
-      "Hydroxol": {
-        "羟氧醇": 2,
-        "羟氧醇 Hydroxol": 2
-      },
-      "Ifton Shepp": {
-        "伊夫顿·谢普 Ifton Shepp": 1,
-        "伊夫顿·谢普": 1
-      },
-      "Issa Sunsword": {
-        "伊萨·阳剑 Issa Sunsword": 1,
-        "伊萨·阳剑": 1
-      },
-      "Janix Mance": {
-        "贾尼克斯·曼斯 Janix Mance": 1,
-        "贾尼克斯·曼斯": 1
-      },
-      "Jasper": {
-        "贾斯珀 Jasper": 1,
-        "贾斯珀": 1
-      },
-      "Jobri": {
-        "乔布里 Jobri": 1,
-        "乔布里": 1
-      },
-      "Jon Vastil": {
-        "乔恩·瓦斯提尔 Jon Vastil": 1,
-        "乔恩·瓦斯提尔": 1
-      },
-      "Jorey Swift": {
-        "乔里·斯威夫特 Jorey Swift": 1,
-        "乔里·斯威夫特": 1
-      },
-      "Juro Wandren": {
-        "朱罗·万德伦 Juro Wandren": 1,
-        "朱罗·万德伦": 1
-      },
-      "Jurtak Champion": {
-        "尤尔塔克勇士 Jurtak Champion": 1,
-        "尤尔塔克勇士": 1
-      },
-      "Jurtak Geomancer": {
-        "尤尔塔克地占师 Jurtak Geomancer": 1,
-        "尤尔塔克地占师": 1
-      },
-      "Jurtak Hunter": {
-        "尤尔塔克猎手": 2,
-        "尤尔塔克猎手 Jurtak Hunter": 1
-      },
-      "Jurtak Warrior": {
-        "尤尔塔克战士 Jurtak Warrior": 1,
-        "尤尔塔克战士": 1
-      },
-      "Juvenile Garganthus": {
-        "幼年加甘萨斯 Juvenile Garganthus": 1,
-        "幼年加甘萨斯": 1
-      },
-      "Kaftor Brenk": {
-        "卡夫托尔·布伦克 Kaftor Brenk": 1,
-        "卡夫托尔·布伦克": 1
-      },
-      "Kalasak the Cutter": {
-        "卡拉萨克·切割者 Kalasak the Cutter": 1,
-        "卡拉萨克·切割者": 1
-      },
-      "Kali Andrella": {
-        "卡莉·安德蕾拉 Kali Andrella": 1,
-        "卡莉·安德蕾拉": 1
-      },
-      "Katerin Bastilla": {
-        "卡特琳·巴斯蒂拉 Katerin Bastilla": 1,
-        "卡特琳·巴斯蒂拉": 1
-      },
-      "Katu": {
-        "卡图 Katu": 2,
-        "卡图": 1
-      },
-      "Kendral Lowd": {
-        "肯德拉尔·洛德 Kendral Lowd": 1,
-        "肯德拉尔·洛德": 1
-      },
-      "Kern": {
-        "克恩 Kern": 1,
-        "克恩": 1
-      },
-      "Ketral": {
-        "凯特拉 Ketral": 1,
-        "凯特拉": 1
-      },
-      "Kezus Jelly": {
-        "凯祖斯果冻 Kezus Jelly": 2,
-        "凯祖斯果冻": 1
-      },
-      "Koy Rent": {
-        "科伊·伦特 Koy Rent": 1,
-        "科伊·伦特": 1
-      },
-      "Ku'arta": {
-        "库阿塔 Ku'arta": 2,
-        "库阿塔": 1
-      },
-      "Kynryth": {
-        "肯瑞斯 Kynryth": 1,
-        "肯瑞斯": 1
-      },
-      "Kynryth Husk": {
-        "肯瑞斯空壳 Kynryth Husk": 1,
-        "肯瑞斯空壳": 1
-      },
-      "Laeora": {
-        "莱欧拉 Laeora": 2,
-        "莱欧拉": 1
-      },
-      "Larissa Toth": {
-        "拉丽莎·托斯 Larissa Toth": 1,
-        "拉丽莎·托斯": 1
-      },
-      "Leeph": {
-        "利夫 Leeph": 1,
-        "利夫": 1
-      },
-      "Liestra Grann": {
-        "莉耶丝特拉·格兰 Liestra Grann": 1,
-        "莉耶丝特拉·格兰": 1
-      },
-      "Light Energy Turret": {
-        "光能炮塔 Light Energy Turret": 1,
-        "光能炮塔": 1
-      },
-      "Light Mote": {
-        "光微粒 Light Mote": 1,
-        "光微粒": 1
-      },
-      "Lilla Arien": {
-        "莉拉·艾瑞恩 Lilla Arien": 1,
-        "莉拉·艾瑞恩": 1
-      },
-      "Loris Tezran": {
-        "洛里斯·特兹兰 Loris Tezran": 1,
-        "洛里斯·特兹兰": 1
-      },
-      "Lucent": {
-        "辉耀 Lucent": 1,
-        "辉耀": 1
-      },
-      "Luminous Copper Ooze": {
-        "发光铜软泥怪 Luminous Copper Ooze": 1,
-        "发光铜软泥怪": 1
-      },
-      "Luminous Gold Ooze": {
-        "发光金软泥怪 Luminous Gold Ooze": 1,
-        "发光金软泥怪": 1
-      },
-      "Luminous Iron Ooze": {
-        "发光铁软泥怪 Luminous Iron Ooze": 1,
-        "发光铁软泥怪": 1
-      },
-      "Luminous Silver Ooze": {
-        "发光银软泥怪 Luminous Silver Ooze": 1,
-        "发光银软泥怪": 1
-      },
-      "Luna Karrowrath": {
-        "露娜·卡罗拉斯 Luna Karrowrath": 2,
-        "露娜·卡罗拉斯": 1
-      },
-      "Luxaroth": {
-        "卢克萨罗斯 Luxaroth": 1,
-        "卢克萨罗斯": 1
-      },
-      "Lyla Cevher": {
-        "莱拉 Lyla Cevher": 1,
-        "莱拉": 1
-      },
-      "Lyla's Caravan": {
-        "莱拉的商队 Lyla's Caravan": 1,
-        "莱拉的商队": 1
-      },
-      "Meri": {
-        "梅里 Meri": 1,
-        "梅里": 1
-      },
-      "Mica Valaston": {
-        "米卡·瓦拉斯顿 Mica Valaston": 1,
-        "米卡·瓦拉斯顿": 1
-      },
-      "Mioroth": {
-        "米奥罗斯 Mioroth": 1,
-        "米奥罗斯": 1
-      },
-      "Mira Wavehorn": {
-        "米拉·波角 Mira Wavehorn": 1,
-        "米拉·波角": 1
-      },
-      "Mootap": {
-        "穆塔普 Mootap": 2,
-        "穆塔普": 1
-      },
-      "Moriah Foxhaven": {
-        "莫赖亚·福克斯黑文 Moriah Foxhaven": 1,
-        "莫赖亚·福克斯黑文": 1
-      },
-      "Mutagist Excisor": {
-        "嬗变师切除者 Mutagist Excisor": 1,
-        "嬗变师切除者": 1
-      },
-      "Mutagist Grenadier": {
-        "突变投弹手 Mutagist Grenadier": 1,
-        "突变投弹手": 1
-      },
-      "Mutagist Vivisector": {
-        "突变派活体解剖师 Mutagist Vivisector": 1,
-        "突变派活体解剖师": 1
-      },
-      "Mutated Ultra Drake": {
-        "变异究极龙兽 Mutated Ultra Drake": 1,
-        "变异究极龙兽": 1
-      },
-      "Mythspire Guardian": {
-        "神话尖塔守护者 Mythspire Guardian": 1,
-        "神话尖塔守护者": 1
-      },
-      "Nadin": {
-        "纳丁 Nadin": 1,
-        "纳丁": 1
-      },
-      "Oozeling": {
-        "软泥幼体 Oozeling": 1,
-        "软泥幼体": 1
-      },
-      "Orb of Lantyr": {
-        "兰提尔法珠 Orb of Lantyr": 1,
-        "兰提尔法珠": 1
-      },
-      "Ordani": {
-        "奥尔达尼 Ordani": 5,
-        "奥尔达尼": 1
-      },
-      "Pale Whisperer": {
-        "苍白低语者 Pale Whisperer": 1,
-        "苍白低语者": 1
-      },
-      "Pale Whisperer Tendril": {
-        "苍白低语者触须 Pale Whisperer Tendril": 1,
-        "苍白低语者触须": 1
-      },
-      "Pallid Drake": {
-        "苍白龙兽 Pallid Drake": 2,
-        "苍白龙兽": 2
-      },
-      "Pallid Drakeling": {
-        "苍白幼龙 Pallid Drakeling": 1,
-        "苍白幼龙": 1
-      },
-      "Pyix": {
-        "派伊克斯 Pyix": 1,
-        "派伊克斯": 1
-      },
-      "Radiant Ultra Drake": {
-        "辉耀究极龙兽 Radiant Ultra Drake": 1,
-        "辉耀究极龙兽": 1
-      },
-      "Rask": {
-        "拉斯克 Rask": 2,
-        "拉斯克": 1
-      },
-      "Rask Juvenile": {
-        "拉斯克幼体 Rask Juvenile": 1,
-        "拉斯克幼体": 1
-      },
-      "Red Block Inmate": {
-        "红区囚犯 Red Block Inmate": 1,
-        "红区囚犯": 1
-      },
-      "Regus Halamattrix": {
-        "雷古斯·哈拉玛特里克斯 Regus Halamattrix": 1,
-        "雷古斯·哈拉玛特里克斯": 1
-      },
-      "Rider": {
-        "骑手 Rider": 1,
-        "骑手": 1
-      },
-      "Rorhim Iron-Cask": {
-        "罗希姆·铁桶 Rorhim Iron-Cask": 1,
-        "罗希姆·铁桶": 1
-      },
-      "Sadri Zhalimorne": {
-        "萨德里·扎利莫恩 Sadri Zhalimorne": 1,
-        "萨德里·扎利莫恩": 1
-      },
-      "Salara, Queen of Scales": {
-        "萨拉拉，鳞后 Salara, Queen of Scales": 1,
-        "萨拉拉，鳞后": 1
-      },
-      "Sarracenias": {
-        "萨拉塞尼亚斯 Sarracenias": 1,
-        "萨拉塞尼亚斯": 1
-      },
-      "Scalemaw": {
-        "鳞颚 Scalemaw": 1,
-        "鳞颚": 1
-      },
-      "Scout": {
-        "侦察兵 Scout": 1,
-        "侦察兵": 1
-      },
-      "Sellen": {
-        "塞伦 Sellen": 1,
-        "塞伦": 1
-      },
-      "Serethus": {
-        "塞雷苏斯 Serethus": 1,
-        "塞雷苏斯": 1
-      },
-      "Sigil": {
-        "西吉尔 Sigil": 2,
-        "西吉尔": 1
-      },
-      "Silver Beam Engineer": {
-        "银光束工程师 Silver Beam Engineer": 1,
-        "银光束工程师": 1
-      },
-      "Silver Beam Guard": {
-        "银色光束卫兵 Silver Beam Guard": 1,
-        "银色光束卫兵": 1
-      },
-      "Silver Beam Sentinel": {
-        "白银光束哨卫 Silver Beam Sentinel": 1,
-        "白银光束哨卫": 1
-      },
-      "Silver Beam Servitor": {
-        "银光束仆从 Silver Beam Servitor": 1,
-        "银光束仆从": 1
-      },
-      "Sin Marmot": {
-        "辛·旱獭 Sin Marmot": 1,
-        "辛·旱獭": 1
-      },
-      "Sionia": {
-        "希俄尼娅 Sionia": 2,
-        "希俄尼娅": 1
-      },
-      "Skallith": {
-        "斯卡利斯 Skallith": 1,
-        "斯卡利斯": 1
-      },
-      "Skallith Warrior": {
-        "斯卡利斯战士 Skallith Warrior": 1,
-        "斯卡利斯战士": 1
-      },
-      "Skeletal Archer": {
-        "骷髅弓箭手 Skeletal Archer": 1,
-        "骷髅弓箭手": 1
-      },
-      "Skeletal Spearman": {
-        "持矛骷髅 Skeletal Spearman": 1,
-        "持矛骷髅": 1
-      },
-      "Skither": {
-        "斯基瑟 Skither": 2,
-        "斯基瑟": 1
-      },
-      "Sockets": {
-        "插孔 Sockets": 2,
-        "插孔": 1
-      },
-      "Sodden Corpse": {
-        "浸透的尸体 Sodden Corpse": 1,
-        "浸透的尸体": 1
-      },
-      "Spectra": {
-        "光谱 Spectra": 2,
-        "光谱": 1
-      },
-      "Steros Kraver": {
-        "斯特罗斯·克拉弗 Steros Kraver": 1,
-        "斯特罗斯·克拉弗": 1
-      },
-      "Sticks": {
-        "斯蒂克斯 Sticks": 1,
-        "斯蒂克斯": 1
-      },
-      "Storm Sprite": {
-        "风暴精灵 Storm Sprite": 1,
-        "风暴精灵": 1
-      },
-      "Strayhearth Caravan": {
-        "迷炉商队 Strayhearth Caravan": 2,
-        "迷炉商队": 1
-      },
-      "Suarrok": {
-        "苏阿罗克 Suarrok": 2,
-        "苏阿罗克": 1
-      },
-      "Suarrok Juvenile": {
-        "幼年苏阿罗克 Suarrok Juvenile": 1,
-        "幼年苏阿罗克": 1
-      },
-      "Surge Walker": {
-        "奔涌行者 Surge Walker": 1,
-        "奔涌行者": 1
-      },
-      "Svala Bronwen": {
-        "斯瓦拉·布朗温 Svala Bronwen": 1,
-        "斯瓦拉·布朗温": 1
-      },
-      "Temple Invader": {
-        "神殿入侵者 Temple Invader": 1,
-        "神殿入侵者": 1
-      },
-      "Tethra Shùl": {
-        "泰斯拉·舒尔 Tethra Shùl": 1,
-        "泰斯拉·舒尔": 1
-      },
-      "The Cube": {
-        "方块 The Cube": 1,
-        "方块": 1
-      },
-      "The Device": {
-        "该装置 The Device": 1,
-        "该装置": 1
-      },
-      "Toothbreaker Scaletamer": {
-        "碎齿驯鳞者 Toothbreaker Scaletamer": 1,
-        "碎齿驯鳞者": 1
-      },
-      "Toothbreaker Thug": {
-        "碎齿暴徒 Toothbreaker Thug": 1,
-        "碎齿暴徒": 1
-      },
-      "Toron": {
-        "托隆 Toron": 1,
-        "托隆": 1
-      },
-      "Triss Carpel": {
-        "特里丝·卡佩尔 Triss Carpel": 1,
-        "特里丝·卡佩尔": 1
-      },
-      "Ulfen": {
-        "乌尔芬 Ulfen": 2,
-        "乌尔芬": 2
-      },
-      "Undaunted Adept": {
-        "无畏修习者 Undaunted Adept": 1,
-        "无畏修习者": 1
-      },
-      "Undaunted Trainee": {
-        "无畏受训者 Undaunted Trainee": 1,
-        "无畏受训者": 1
-      },
-      "Vampyre Spawn": {
-        "吸血孽裔 Vampyre Spawn": 1,
-        "吸血孽裔": 1
-      },
-      "Vanexis": {
-        "瓦内克西斯 Vanexis": 2,
-        "瓦内克西斯": 1
-      },
-      "Vartholomew Chess": {
-        "瓦索洛缪·切斯 Vartholomew Chess": 1,
-        "瓦索洛缪·切斯": 1
-      },
-      "Veiled Chain Agent": {
-        "帷幕锁链特工 Veiled Chain Agent": 1,
-        "帷幕锁链特工": 1
-      },
-      "Vespian Hydral": {
-        "维斯皮安九头蛇 Vespian Hydral": 1,
-        "维斯皮安九头蛇": 1
-      },
-      "Vespian Hydral Head": {
-        "维斯皮安九头蛇头颅 Vespian Hydral Head": 1,
-        "维斯皮安九头蛇头颅": 1
-      },
-      "Vhismara's Claw": {
-        "维斯玛拉之爪 Vhismara's Claw": 1,
-        "维斯玛拉之爪": 1
-      },
-      "Vinarith": {
-        "维纳里斯 Vinarith": 1,
-        "维纳里斯": 1
-      },
-      "Vitt Wandren": {
-        "维特·万德伦 Vitt Wandren": 1,
-        "维特·万德伦": 1
-      },
-      "Vorg": {
-        "沃格 Vorg": 2,
-        "沃格": 1
-      },
-      "Wandren Tracer": {
-        "万德伦追踪者 Wandren Tracer": 1,
-        "万德伦追踪者": 1
-      },
-      "Wandren Watcher": {
-        "流浪注视者 Wandren Watcher": 1,
-        "流浪注视者": 1
-      },
-      "Water Mote": {
-        "水微粒 Water Mote": 1,
-        "水微粒": 1
-      },
-      "Water Sprite": {
-        "水妖精 Water Sprite": 1,
-        "水妖精": 1
-      },
-      "Water Visitor": {
-        "水访客 Water Visitor": 1,
-        "水访客": 1
-      },
-      "Water Wanderer": {
-        "涉水者 Water Wanderer": 1,
-        "涉水者": 1
-      },
-      "Woven Construct": {
-        "编织构装体 Woven Construct": 1,
-        "编织构装体": 1
-      },
-      "Writhing Whisperer": {
-        "蠕动低语者 Writhing Whisperer": 1,
-        "蠕动低语者": 1
-      },
-      "Writhing Whisperer Tendril": {
-        "蠕动低语者触须 Writhing Whisperer Tendril": 1,
-        "蠕动低语者触须": 1
-      },
-      "Yarnac": {
-        "亚纳克 Yarnac": 2,
-        "亚纳克": 1
-      },
-      "Yarnac Juvenile": {
-        "亚纳克幼体 Yarnac Juvenile": 1,
-        "亚纳克幼体": 1
-      },
-      "Yeela Drevvin": {
-        "叶拉·德雷文 Yeela Drevvin": 1,
-        "叶拉·德雷文": 1
-      },
-      "Yellow Block Inmate": {
-        "黄区囚犯 Yellow Block Inmate": 1,
-        "黄区囚犯": 1
-      },
-      "Young Cheliceraeth": {
-        "幼年螯蛛以太兽 Young Cheliceraeth": 1,
-        "幼年螯蛛以太兽": 1
-      },
-      "Zarajah": {
-        "扎拉贾 Zarajah": 2,
-        "扎拉贾": 2
-      },
-      "Zira Hestidero": {
-        "齐拉·赫斯提德罗 Zira Hestidero": 1,
-        "齐拉·赫斯提德罗": 1
-      },
-      "Zodi Trask": {
-        "佐迪·特拉斯克 Zodi Trask": 1,
-        "佐迪·特拉斯克": 1
-      }
-    }
-  },
-  "shippedTermInconsistency": {
-    "_note": "同一专名在已发布译文里被译成了不同的中文。必须裁决后统一。",
-    "count": 59,
-    "terms": {
-      "Afflicted Pallid Drake": {
-        "受苦的苍白龙兽 Afflicted Pallid Drake": 2,
-        "变异苍白龙兽": 1
-      },
-      "Afflicted Pallid Drakeling": {
-        "受难苍白幼龙 Afflicted Pallid Drakeling": 1,
-        "变异苍白幼龙": 1
-      },
-      "Anvil": {
-        "铁砧 Anvil": 1,
-        "铁砧 铁砧": 1
-      },
-      "Aquatic Breathing": {
-        "水生呼吸 Aquatic Breathing": 1,
-        "水下呼吸 Aquatic Breathing": 1
-      },
-      "Aqueous Camouflage": {
-        "水相伪装 Aqueous Camouflage": 1,
-        "水生伪装 Aqueous Camouflage": 1
-      },
-      "Arcos Sarinland": {
-        "阿科斯·萨林兰德 Arcos Sarinland": 1,
-        "阿尔科斯·萨林兰德": 1
-      },
-      "Arcturian": {
-        "阿克图里安 Arcturian": 2,
-        "阿克图里亚人 Arcturian": 2,
-        "阿克图里安": 1
-      },
-      "Armor Crusher": {
-        "碎甲者 Armor Crusher": 1,
-        "护甲粉碎者 Armor Crusher": 1
-      },
-      "Bite": {
-        "啃咬 Bite": 24,
-        "噬咬 Bite": 1
-      },
-      "Cascillian Marine": {
-        "卡斯奇利亚海军 Cascillian Marine": 1,
-        "卡斯奇利安海军陆战队员": 1
-      },
-      "Cascillian Marine Officer": {
-        "卡斯奇利安海军军官 Cascillian Marine Officer": 1,
-        "卡斯奇利亚海军军官": 1
-      },
-      "Chamberlain": {
-        "总管 Chamberlain": 1,
-        "侍从官": 1
-      },
-      "Chessman Plating": {
-        "棋士镀层 Chessman Plating": 4,
-        "棋士装甲板 Chessman Plating": 1
-      },
-      "Cindaric Sage": {
-        "辛达里克贤者 Cindaric Sage": 2,
-        "辛达里克信徒": 1
-      },
-      "Claw Hammer": {
-        "爪锤 Claw Hammer": 4,
-        "羊角锤 Claw Hammer": 2
-      },
-      "Corvana Vortest": {
-        "科瓦娜·沃尔特斯特 Corvana Vortest": 1,
-        "法师": 1
-      },
-      "Gafto the Howler": {
-        "嚎叫者加夫托 Gafto the Howler": 1,
-        "加夫托": 1
-      },
-      "Gore Bird": {
-        "血鸟 Gore Bird": 1,
-        "血鸟群": 1
-      },
-      "Hammer": {
-        "锤子 Hammer": 3,
-        "锤 Hammer": 2,
-        "锤": 1
-      },
-      "Harbinger of Disease": {
-        "疫病先驱 Harbinger of Disease": 1,
-        "疫病先驱 疫病先驱": 1
-      },
-      "Harbinger of Madness": {
-        "疯狂先驱者 Harbinger of Madness": 1,
-        "疯狂先驱者 先驱者 of 疯狂": 1
-      },
-      "Headbutt": {
-        "头槌 Headbutt": 1,
-        "头槌攻击 Headbutt": 1
-      },
-      "Huiana": {
-        "惠安娜 Huiana": 1,
-        "惠安娜 惠安娜": 1
-      },
-      "Hulg'run Lineage": {
-        "Hulg'run血统 Hulg'run Lineage": 5,
-        "赫尔格伦血统 Hulg'run Lineage": 1
-      },
-      "Improvisational Expertise": {
-        "即兴专长 Improvisational Expertise": 3,
-        "即兴专精 Improvisational Expertise": 3
-      },
-      "Inflection: Compose": {
-        "屈折：作曲 Inflection: Compose": 14,
-        "词缀：作曲 Inflection: Compose": 1
-      },
-      "Inflection: Elude": {
-        "屈折：闪避 Inflection: Elude": 5,
-        "词缀：闪避 Inflection: Elude": 1
-      },
-      "Inflection: Extend": {
-        "屈折：延展 Inflection: Extend": 6,
-        "词缀：延展 Inflection: Extend": 1
-      },
-      "Inflection: Negate": {
-        "屈折：否定 Inflection: Negate": 3,
-        "词缀：否定 Inflection: Negate": 1
-      },
-      "Inflection: Pull": {
-        "屈折：拉拽 Inflection: Pull": 3,
-        "词缀：拉拽 Inflection: Pull": 2
-      },
-      "Inflection: Quicken": {
-        "屈折：迅捷化 Inflection: Quicken": 5,
-        "词缀：迅捷化 Inflection: Quicken": 1
-      },
-      "Inflection: React": {
-        "词缀：反应 Inflection: React": 1,
-        "屈折：反应 Inflection: React": 1
-      },
-      "Inflection: Reshape": {
-        "屈折：重塑 Inflection: Reshape": 2,
-        "词缀：重塑 Inflection: Reshape": 1
-      },
-      "Ix'erax": {
-        "伊克斯埃拉克斯 Ix'erax": 1,
-        "伊克斯艾拉克斯": 1
-      },
-      "Jonico Daridane": {
-        "乔尼科·达里丹ე Jonico Daridane": 1,
-        "乔尼科·达里丹": 1
-      },
-      "Kadhana Lizard": {
-        "卡达娜蜥蜴 Kadhana Lizard": 1,
-        "卡达纳蜥蜴": 1
-      },
-      "Kinesis Proficiency": {
-        "念力熟练度 Kinesis Proficiency": 1,
-        "念动力熟练度 Kinesis Proficiency": 1
-      },
-      "Liestra's Bracer of Appraisal": {
-        "莉埃斯特拉的鉴定护腕 Liestra's Bracer of Appraisal": 1,
-        "列斯特拉的鉴定护臂 Liestra's Bracer of Appraisal": 1
-      },
-      "Local Color": {
-        "地域风貌": 1,
-        "地方色彩 Local Color": 1
-      },
-      "Mistress Caberi": {
-        "卡贝丽夫人 Mistress Caberi": 1,
-        "卡贝里夫人": 1
-      },
-      "Natural Invisibility": {
-        "天然隐形 Natural Invisibility": 2,
-        "天生隐形 Natural Invisibility": 1
-      },
-      "Orcish": {
-        "兽人语 Orcish": 3,
-        "兽人语血统 Orcish": 1
-      },
-      "Orivech": {
-        "奥里维奇 Orivech": 1,
-        "奥里维奇 奥里维奇": 1
-      },
-      "Paint Globlin": {
-        "绘画地精 Paint Globlin": 1,
-        "绘制地精布林": 1
-      },
-      "Party": {
-        "队伍 Party": 2,
-        "队伍 队伍": 1,
-        "队伍": 1
-      },
-      "Raster Thorn": {
-        "栅格荆棘 Raster Thorn": 1,
-        "栅格棘刺": 1
-      },
-      "Rune: Kinesis": {
-        "符文：念动力 Rune: Kinesis": 7,
-        "符文：念力 Rune: Kinesis": 5
-      },
-      "Shade of Agaseros": {
-        "阿加瑟洛斯之影 Shade of Agaseros": 1,
-        "阿加塞洛斯的幽影": 1
-      },
-      "Shimz Shimring": {
-        "希姆兹 希姆林 Shimz Shimring": 1,
-        "希姆兹": 1
-      },
-      "Sin's Caravan": {
-        "辛的商队 Sin's Caravan": 1,
-        "辛恩的商队": 1
-      },
-      "Sitherian": {
-        "西瑟里安 Sitherian": 2,
-        "西希拉之子": 1
-      },
-      "Spellbreaker Guard": {
-        "破咒守卫 Spellbreaker Guard": 1,
-        "破法卫士": 1
-      },
-      "Spellbreaker Riot Guard": {
-        "破法者防暴卫队 Spellbreaker Riot Guard": 1,
-        "破咒暴动卫兵": 1
-      },
-      "Sporix Host": {
-        "孢体宿主 Sporix Host": 1,
-        "受折磨的荆棘幼体": 1
-      },
-      "Swarm of Cave Wasps": {
-        "洞穴黄蜂虫群 Swarm of Cave Wasps": 1,
-        "洞穴黄蜂群": 1
-      },
-      "Tauric": {
-        "牛族 Tauric": 1,
-        "牛类的": 1
-      },
-      "Thayloc Courser": {
-        "赛洛克疾奔兽 Thayloc Courser": 1,
-        "非玩家角色": 1
-      },
-      "To Fall and Fall Again": {
-        "坠落，又再度坠落 To Fall and Fall Again": 1,
-        "一再坠落 To Fall and Fall Again": 1
-      },
-      "Wandren Patroller": {
-        "巡逻者旺德伦 Wandren Patroller": 1,
-        "万德伦巡逻者": 1
-      }
-    }
+ "_meta": {
+  "count": 0,
+  "note": "2026-08-12 全部裁决完毕并已落库，本文件转为**裁决记录**。依据阶梯：同名条目/物品的 name 字段 > 同卷已译页 > 全库多数写法 > glossary_ec。每条裁决的理由见 resolved；同时记入 PROJECT.md 第 8 节。"
+ },
+ "shippedBilingualFormatInconsistency": {
+  "_note": "同一专名的中文相同，但双语后缀（\" English\"）时加时不加。属于格式问题，可脚本批量归一。",
+  "count": 209,
+  "terms": {
+   "Aburyx": {
+    "阿布里克斯 Aburyx": 2,
+    "阿布里克斯": 1
+   },
+   "Abyss-Warped Undaunted": {
+    "深渊扭曲的无畏者 Abyss-Warped Undaunted": 1,
+    "深渊扭曲的无畏者": 1
+   },
+   "Abyssal Echo": {
+    "深渊回响 Abyssal Echo": 1,
+    "深渊回响": 1
+   },
+   "Abyssal Eel": {
+    "深渊鳗鱼 Abyssal Eel": 1,
+    "深渊鳗鱼": 1
+   },
+   "Abyssal Eye": {
+    "深渊之眼 Abyssal Eye": 1,
+    "深渊之眼": 1
+   },
+   "Acid Spit": {
+    "酸液喷吐 Acid Spit": 6,
+    "酸液喷吐": 2
+   },
+   "Acid Spray": {
+    "酸液喷射": 2,
+    "酸液喷射 Acid Spray": 1
+   },
+   "Adelyne Goss": {
+    "阿德琳·戈斯 Adelyne Goss": 1,
+    "阿德琳·戈斯": 1
+   },
+   "Agnath": {
+    "阿格纳斯 Agnath": 2,
+    "阿格纳斯": 2
+   },
+   "Agraband Swift": {
+    "阿格拉班德·斯威夫特 Agraband Swift": 1,
+    "阿格拉班德·斯威夫特": 1
+   },
+   "Agrimage": {
+    "农艺法师 Agrimage": 1,
+    "农艺法师": 1
+   },
+   "Alar": {
+    "阿拉尔 Alar": 2,
+    "阿拉尔": 1
+   },
+   "Amalthea Stonecraft": {
+    "阿玛尔忒亚·石艺 Amalthea Stonecraft": 1,
+    "阿玛尔忒亚·石艺": 1
+   },
+   "Anachraenum Adventurer": {
+    "阿纳克雷努姆冒险者 Anachraenum Adventurer": 1,
+    "阿纳克雷努姆冒险者": 1
+   },
+   "Anachraenum Aetherial": {
+    "阿纳克瑞纽姆 以太灵 Anachraenum Aetherial": 1,
+    "阿纳克瑞纽姆 以太灵": 1
+   },
+   "Ancara": {
+    "安卡拉 Ancara": 2,
+    "安卡拉": 1
+   },
+   "Animated Rune Tome": {
+    "活化符文典籍 Animated Rune Tome": 1,
+    "活化符文典籍": 1
+   },
+   "Ankarist": {
+    "安卡里斯特 Ankarist": 1,
+    "安卡里斯特": 1
+   },
+   "Ankarist's Caravan": {
+    "安卡里斯特的商队 Ankarist's Caravan": 1,
+    "安卡里斯特的商队": 1
+   },
+   "Anydrath": {
+    "安伊德拉斯 Anydrath": 1,
+    "安伊德拉斯": 1
+   },
+   "Aqueous Transmission": {
+    "水相传导 Aqueous Transmission": 10,
+    "水相传导": 1
+   },
+   "Arcturian Miner": {
+    "阿克图里安矿工 Arcturian Miner": 1,
+    "阿克图里安矿工": 1
+   },
+   "Avwynn Taol": {
+    "阿芙温·陶尔 Avwynn Taol": 2,
+    "阿芙温·陶尔": 1
+   },
+   "Aythorn": {
+    "艾索恩 Aythorn": 2,
+    "艾索恩": 1
+   },
+   "Baradom": {
+    "巴拉多姆 Baradom": 2,
+    "巴拉多姆": 1
+   },
+   "Blue Block Inmate": {
+    "蓝区囚犯 Blue Block Inmate": 1,
+    "蓝区囚犯": 1
+   },
+   "Brackus von Tet": {
+    "布拉库斯·冯·泰特 Brackus von Tet": 1,
+    "布拉库斯·冯·泰特": 1
+   },
+   "Brigand": {
+    "强盗 Brigand": 1,
+    "强盗": 1
+   },
+   "Broken Aedir Sentinel": {
+    "损坏的艾迪尔哨兵 Broken Aedir Sentinel": 1,
+    "损坏的艾迪尔哨兵": 1
+   },
+   "Burnished Hand Protector": {
+    "辉手守卫者 Burnished Hand Protector": 1,
+    "辉手守卫者": 1
+   },
+   "Cherish Ellerie": {
+    "切瑞什·艾勒里 Cherish Ellerie": 1,
+    "切瑞什·艾勒里": 1
+   },
+   "Chessman": {
+    "棋士 Chessman": 1,
+    "棋士": 1
+   },
+   "Cindaric Adherent": {
+    "辛达里克信徒 Cindaric Adherent": 1,
+    "辛达里克信徒": 1
+   },
+   "Clipper": {
+    "克利珀 Clipper": 1,
+    "克利珀": 1
+   },
+   "Conaris Haid": {
+    "科纳里斯·海德 Conaris Haid": 1,
+    "科纳里斯·海德": 1
+   },
+   "Constructed Companion": {
+    "构装同伴 Constructed Companion": 3,
+    "构装同伴": 1
+   },
+   "Corpuleth": {
+    "尸团怪 Corpuleth": 1,
+    "尸团怪": 1
+   },
+   "Corrupted Cadrithor": {
+    "腐化的卡德里索尔 Corrupted Cadrithor": 2,
+    "腐化的卡德里索尔": 1
+   },
+   "Corrupted Kezus Jelly": {
+    "腐化凯祖斯水母 Corrupted Kezus Jelly": 1,
+    "腐化凯祖斯水母": 1
+   },
+   "Crevvet": {
+    "克雷维特 Crevvet": 2,
+    "克雷维特": 1
+   },
+   "Crumbling Skallith": {
+    "崩塌的斯卡利斯 Crumbling Skallith": 1,
+    "崩塌的斯卡利斯": 1
+   },
+   "Del Kalais": {
+    "德尔·卡莱斯 Del Kalais": 1,
+    "德尔·卡莱斯": 1
+   },
+   "Dereth Erekos": {
+    "德雷斯·埃雷科斯 Dereth Erekos": 1,
+    "德雷斯·埃雷科斯": 1
+   },
+   "Duurath": {
+    "杜拉斯 Duurath": 2,
+    "杜拉斯": 2
+   },
+   "Eamon Mariflor": {
+    "伊蒙·玛里弗洛尔 Eamon Mariflor": 1,
+    "伊蒙·玛里弗洛尔": 1
+   },
+   "Earth Sprite": {
+    "土精灵": 1,
+    "土精灵 Earth Sprite": 1
+   },
+   "Eliorwen": {
+    "艾利奥文 Eliorwen": 2,
+    "艾利奥文": 2
+   },
+   "Evesso": {
+    "埃维索 Evesso": 1,
+    "埃维索": 1
+   },
+   "Falar": {
+    "法拉尔 Falar": 1,
+    "法拉尔": 1
+   },
+   "Fernis Ossa": {
+    "费尔尼斯·奥萨 Fernis Ossa": 1,
+    "费尔尼斯·奥萨": 1
+   },
+   "Fire Sprite": {
+    "火焰精灵 Fire Sprite": 1,
+    "火焰精灵": 1
+   },
+   "Flameguard Firebrand": {
+    "焰卫火使": 2,
+    "焰卫火使 Flameguard Firebrand": 1
+   },
+   "Frost Sprite": {
+    "寒霜精灵": 1,
+    "寒霜精灵 Frost Sprite": 1
+   },
+   "Fulgurite Blades": {
+    "雷纹刃 Fulgurite Blades": 2,
+    "雷纹刃": 1
+   },
+   "Gastern Faviyos": {
+    "加斯特恩·法维约斯 Gastern Faviyos": 1,
+    "加斯特恩·法维约斯": 1
+   },
+   "Giant Corrupted Kezus Jelly": {
+    "巨型堕化凯祖斯水母 Giant Corrupted Kezus Jelly": 1,
+    "巨型堕化凯祖斯水母": 1
+   },
+   "Giant Kezus Jelly": {
+    "巨型凯祖斯果冻 Giant Kezus Jelly": 1,
+    "巨型凯祖斯果冻": 1
+   },
+   "Giant Luminous Ooze": {
+    "巨型发光软泥怪 Giant Luminous Ooze": 1,
+    "巨型发光软泥怪": 1
+   },
+   "Gohema": {
+    "戈赫玛 Gohema": 1,
+    "戈赫玛": 1
+   },
+   "Gohema's Eye": {
+    "戈赫玛之眼 Gohema's Eye": 1,
+    "戈赫玛之眼": 1
+   },
+   "Gohema's Tail": {
+    "戈赫玛的尾巴 Gohema's Tail": 1,
+    "戈赫玛的尾巴": 1
+   },
+   "Gohema's Tendril": {
+    "戈赫玛的触须 Gohema's Tendril": 1,
+    "戈赫玛的触须": 1
+   },
+   "Grim Assembly": {
+    "严酷集会 Grim Assembly": 1,
+    "严酷集会": 1
+   },
+   "Gumtoad": {
+    "胶蟾 Gumtoad": 1,
+    "胶蟾": 1
+   },
+   "Harbinger of Fear": {
+    "恐惧先驱 Harbinger of Fear": 1,
+    "恐惧先驱": 1
+   },
+   "Harrower": {
+    "惊惧者 Harrower": 1,
+    "惊惧者": 1
+   },
+   "Helice Korsos": {
+    "赫利刻·科索斯 Helice Korsos": 1,
+    "赫利刻·科索斯": 1
+   },
+   "Hephiss Wandren": {
+    "赫菲丝·万德伦 Hephiss Wandren": 1,
+    "赫菲丝·万德伦": 1
+   },
+   "Hew": {
+    "休 Hew": 1,
+    "休": 1
+   },
+   "Horrendor": {
+    "霍伦多尔 Horrendor": 2,
+    "霍伦多尔": 1
+   },
+   "Hydroxol": {
+    "羟氧醇": 2,
+    "羟氧醇 Hydroxol": 2
+   },
+   "Ifton Shepp": {
+    "伊夫顿·谢普 Ifton Shepp": 1,
+    "伊夫顿·谢普": 1
+   },
+   "Issa Sunsword": {
+    "伊萨·阳剑 Issa Sunsword": 1,
+    "伊萨·阳剑": 1
+   },
+   "Janix Mance": {
+    "贾尼克斯·曼斯 Janix Mance": 1,
+    "贾尼克斯·曼斯": 1
+   },
+   "Jasper": {
+    "贾斯珀 Jasper": 1,
+    "贾斯珀": 1
+   },
+   "Jobri": {
+    "乔布里 Jobri": 1,
+    "乔布里": 1
+   },
+   "Jon Vastil": {
+    "乔恩·瓦斯提尔 Jon Vastil": 1,
+    "乔恩·瓦斯提尔": 1
+   },
+   "Jorey Swift": {
+    "乔里·斯威夫特 Jorey Swift": 1,
+    "乔里·斯威夫特": 1
+   },
+   "Juro Wandren": {
+    "朱罗·万德伦 Juro Wandren": 1,
+    "朱罗·万德伦": 1
+   },
+   "Jurtak Champion": {
+    "尤尔塔克勇士 Jurtak Champion": 1,
+    "尤尔塔克勇士": 1
+   },
+   "Jurtak Geomancer": {
+    "尤尔塔克地占师 Jurtak Geomancer": 1,
+    "尤尔塔克地占师": 1
+   },
+   "Jurtak Hunter": {
+    "尤尔塔克猎手": 2,
+    "尤尔塔克猎手 Jurtak Hunter": 1
+   },
+   "Jurtak Warrior": {
+    "尤尔塔克战士 Jurtak Warrior": 1,
+    "尤尔塔克战士": 1
+   },
+   "Juvenile Garganthus": {
+    "幼年加甘萨斯 Juvenile Garganthus": 1,
+    "幼年加甘萨斯": 1
+   },
+   "Kaftor Brenk": {
+    "卡夫托尔·布伦克 Kaftor Brenk": 1,
+    "卡夫托尔·布伦克": 1
+   },
+   "Kalasak the Cutter": {
+    "卡拉萨克·切割者 Kalasak the Cutter": 1,
+    "卡拉萨克·切割者": 1
+   },
+   "Kali Andrella": {
+    "卡莉·安德蕾拉 Kali Andrella": 1,
+    "卡莉·安德蕾拉": 1
+   },
+   "Katerin Bastilla": {
+    "卡特琳·巴斯蒂拉 Katerin Bastilla": 1,
+    "卡特琳·巴斯蒂拉": 1
+   },
+   "Katu": {
+    "卡图 Katu": 2,
+    "卡图": 1
+   },
+   "Kendral Lowd": {
+    "肯德拉尔·洛德 Kendral Lowd": 1,
+    "肯德拉尔·洛德": 1
+   },
+   "Kern": {
+    "克恩 Kern": 1,
+    "克恩": 1
+   },
+   "Ketral": {
+    "凯特拉 Ketral": 1,
+    "凯特拉": 1
+   },
+   "Kezus Jelly": {
+    "凯祖斯果冻 Kezus Jelly": 2,
+    "凯祖斯果冻": 1
+   },
+   "Koy Rent": {
+    "科伊·伦特 Koy Rent": 1,
+    "科伊·伦特": 1
+   },
+   "Ku'arta": {
+    "库阿塔 Ku'arta": 2,
+    "库阿塔": 1
+   },
+   "Kynryth": {
+    "肯瑞斯 Kynryth": 1,
+    "肯瑞斯": 1
+   },
+   "Kynryth Husk": {
+    "肯瑞斯空壳 Kynryth Husk": 1,
+    "肯瑞斯空壳": 1
+   },
+   "Laeora": {
+    "莱欧拉 Laeora": 2,
+    "莱欧拉": 1
+   },
+   "Larissa Toth": {
+    "拉丽莎·托斯 Larissa Toth": 1,
+    "拉丽莎·托斯": 1
+   },
+   "Leeph": {
+    "利夫 Leeph": 1,
+    "利夫": 1
+   },
+   "Liestra Grann": {
+    "莉耶丝特拉·格兰 Liestra Grann": 1,
+    "莉耶丝特拉·格兰": 1
+   },
+   "Light Energy Turret": {
+    "光能炮塔 Light Energy Turret": 1,
+    "光能炮塔": 1
+   },
+   "Light Mote": {
+    "光微粒 Light Mote": 1,
+    "光微粒": 1
+   },
+   "Lilla Arien": {
+    "莉拉·艾瑞恩 Lilla Arien": 1,
+    "莉拉·艾瑞恩": 1
+   },
+   "Loris Tezran": {
+    "洛里斯·特兹兰 Loris Tezran": 1,
+    "洛里斯·特兹兰": 1
+   },
+   "Lucent": {
+    "辉耀 Lucent": 1,
+    "辉耀": 1
+   },
+   "Luminous Copper Ooze": {
+    "发光铜软泥怪 Luminous Copper Ooze": 1,
+    "发光铜软泥怪": 1
+   },
+   "Luminous Gold Ooze": {
+    "发光金软泥怪 Luminous Gold Ooze": 1,
+    "发光金软泥怪": 1
+   },
+   "Luminous Iron Ooze": {
+    "发光铁软泥怪 Luminous Iron Ooze": 1,
+    "发光铁软泥怪": 1
+   },
+   "Luminous Silver Ooze": {
+    "发光银软泥怪 Luminous Silver Ooze": 1,
+    "发光银软泥怪": 1
+   },
+   "Luna Karrowrath": {
+    "露娜·卡罗拉斯 Luna Karrowrath": 2,
+    "露娜·卡罗拉斯": 1
+   },
+   "Luxaroth": {
+    "卢克萨罗斯 Luxaroth": 1,
+    "卢克萨罗斯": 1
+   },
+   "Lyla Cevher": {
+    "莱拉 Lyla Cevher": 1,
+    "莱拉": 1
+   },
+   "Lyla's Caravan": {
+    "莱拉的商队 Lyla's Caravan": 1,
+    "莱拉的商队": 1
+   },
+   "Meri": {
+    "梅里 Meri": 1,
+    "梅里": 1
+   },
+   "Mica Valaston": {
+    "米卡·瓦拉斯顿 Mica Valaston": 1,
+    "米卡·瓦拉斯顿": 1
+   },
+   "Mioroth": {
+    "米奥罗斯 Mioroth": 1,
+    "米奥罗斯": 1
+   },
+   "Mira Wavehorn": {
+    "米拉·波角 Mira Wavehorn": 1,
+    "米拉·波角": 1
+   },
+   "Mootap": {
+    "穆塔普 Mootap": 2,
+    "穆塔普": 1
+   },
+   "Moriah Foxhaven": {
+    "莫赖亚·福克斯黑文 Moriah Foxhaven": 1,
+    "莫赖亚·福克斯黑文": 1
+   },
+   "Mutagist Excisor": {
+    "嬗变师切除者 Mutagist Excisor": 1,
+    "嬗变师切除者": 1
+   },
+   "Mutagist Grenadier": {
+    "突变投弹手 Mutagist Grenadier": 1,
+    "突变投弹手": 1
+   },
+   "Mutagist Vivisector": {
+    "突变派活体解剖师 Mutagist Vivisector": 1,
+    "突变派活体解剖师": 1
+   },
+   "Mutated Ultra Drake": {
+    "变异究极龙兽 Mutated Ultra Drake": 1,
+    "变异究极龙兽": 1
+   },
+   "Mythspire Guardian": {
+    "神话尖塔守护者 Mythspire Guardian": 1,
+    "神话尖塔守护者": 1
+   },
+   "Nadin": {
+    "纳丁 Nadin": 1,
+    "纳丁": 1
+   },
+   "Oozeling": {
+    "软泥幼体 Oozeling": 1,
+    "软泥幼体": 1
+   },
+   "Orb of Lantyr": {
+    "兰提尔法珠 Orb of Lantyr": 1,
+    "兰提尔法珠": 1
+   },
+   "Ordani": {
+    "奥尔达尼 Ordani": 5,
+    "奥尔达尼": 1
+   },
+   "Pale Whisperer": {
+    "苍白低语者 Pale Whisperer": 1,
+    "苍白低语者": 1
+   },
+   "Pale Whisperer Tendril": {
+    "苍白低语者触须 Pale Whisperer Tendril": 1,
+    "苍白低语者触须": 1
+   },
+   "Pallid Drake": {
+    "苍白龙兽 Pallid Drake": 2,
+    "苍白龙兽": 2
+   },
+   "Pallid Drakeling": {
+    "苍白幼龙 Pallid Drakeling": 1,
+    "苍白幼龙": 1
+   },
+   "Pyix": {
+    "派伊克斯 Pyix": 1,
+    "派伊克斯": 1
+   },
+   "Radiant Ultra Drake": {
+    "辉耀究极龙兽 Radiant Ultra Drake": 1,
+    "辉耀究极龙兽": 1
+   },
+   "Rask": {
+    "拉斯克 Rask": 2,
+    "拉斯克": 1
+   },
+   "Rask Juvenile": {
+    "拉斯克幼体 Rask Juvenile": 1,
+    "拉斯克幼体": 1
+   },
+   "Red Block Inmate": {
+    "红区囚犯 Red Block Inmate": 1,
+    "红区囚犯": 1
+   },
+   "Regus Halamattrix": {
+    "雷古斯·哈拉玛特里克斯 Regus Halamattrix": 1,
+    "雷古斯·哈拉玛特里克斯": 1
+   },
+   "Rider": {
+    "骑手 Rider": 1,
+    "骑手": 1
+   },
+   "Rorhim Iron-Cask": {
+    "罗希姆·铁桶 Rorhim Iron-Cask": 1,
+    "罗希姆·铁桶": 1
+   },
+   "Sadri Zhalimorne": {
+    "萨德里·扎利莫恩 Sadri Zhalimorne": 1,
+    "萨德里·扎利莫恩": 1
+   },
+   "Salara, Queen of Scales": {
+    "萨拉拉，鳞后 Salara, Queen of Scales": 1,
+    "萨拉拉，鳞后": 1
+   },
+   "Sarracenias": {
+    "萨拉塞尼亚斯 Sarracenias": 1,
+    "萨拉塞尼亚斯": 1
+   },
+   "Scalemaw": {
+    "鳞颚 Scalemaw": 1,
+    "鳞颚": 1
+   },
+   "Scout": {
+    "侦察兵 Scout": 1,
+    "侦察兵": 1
+   },
+   "Sellen": {
+    "塞伦 Sellen": 1,
+    "塞伦": 1
+   },
+   "Serethus": {
+    "塞雷苏斯 Serethus": 1,
+    "塞雷苏斯": 1
+   },
+   "Sigil": {
+    "西吉尔 Sigil": 2,
+    "西吉尔": 1
+   },
+   "Silver Beam Engineer": {
+    "银光束工程师 Silver Beam Engineer": 1,
+    "银光束工程师": 1
+   },
+   "Silver Beam Guard": {
+    "银色光束卫兵 Silver Beam Guard": 1,
+    "银色光束卫兵": 1
+   },
+   "Silver Beam Sentinel": {
+    "白银光束哨卫 Silver Beam Sentinel": 1,
+    "白银光束哨卫": 1
+   },
+   "Silver Beam Servitor": {
+    "银光束仆从 Silver Beam Servitor": 1,
+    "银光束仆从": 1
+   },
+   "Sin Marmot": {
+    "辛·旱獭 Sin Marmot": 1,
+    "辛·旱獭": 1
+   },
+   "Sionia": {
+    "希俄尼娅 Sionia": 2,
+    "希俄尼娅": 1
+   },
+   "Skallith": {
+    "斯卡利斯 Skallith": 1,
+    "斯卡利斯": 1
+   },
+   "Skallith Warrior": {
+    "斯卡利斯战士 Skallith Warrior": 1,
+    "斯卡利斯战士": 1
+   },
+   "Skeletal Archer": {
+    "骷髅弓箭手 Skeletal Archer": 1,
+    "骷髅弓箭手": 1
+   },
+   "Skeletal Spearman": {
+    "持矛骷髅 Skeletal Spearman": 1,
+    "持矛骷髅": 1
+   },
+   "Skither": {
+    "斯基瑟 Skither": 2,
+    "斯基瑟": 1
+   },
+   "Sockets": {
+    "插孔 Sockets": 2,
+    "插孔": 1
+   },
+   "Sodden Corpse": {
+    "浸透的尸体 Sodden Corpse": 1,
+    "浸透的尸体": 1
+   },
+   "Spectra": {
+    "光谱 Spectra": 2,
+    "光谱": 1
+   },
+   "Steros Kraver": {
+    "斯特罗斯·克拉弗 Steros Kraver": 1,
+    "斯特罗斯·克拉弗": 1
+   },
+   "Sticks": {
+    "斯蒂克斯 Sticks": 1,
+    "斯蒂克斯": 1
+   },
+   "Storm Sprite": {
+    "风暴精灵 Storm Sprite": 1,
+    "风暴精灵": 1
+   },
+   "Strayhearth Caravan": {
+    "迷炉商队 Strayhearth Caravan": 2,
+    "迷炉商队": 1
+   },
+   "Suarrok": {
+    "苏阿罗克 Suarrok": 2,
+    "苏阿罗克": 1
+   },
+   "Suarrok Juvenile": {
+    "幼年苏阿罗克 Suarrok Juvenile": 1,
+    "幼年苏阿罗克": 1
+   },
+   "Surge Walker": {
+    "奔涌行者 Surge Walker": 1,
+    "奔涌行者": 1
+   },
+   "Svala Bronwen": {
+    "斯瓦拉·布朗温 Svala Bronwen": 1,
+    "斯瓦拉·布朗温": 1
+   },
+   "Temple Invader": {
+    "神殿入侵者 Temple Invader": 1,
+    "神殿入侵者": 1
+   },
+   "Tethra Shùl": {
+    "泰斯拉·舒尔 Tethra Shùl": 1,
+    "泰斯拉·舒尔": 1
+   },
+   "The Cube": {
+    "方块 The Cube": 1,
+    "方块": 1
+   },
+   "The Device": {
+    "该装置 The Device": 1,
+    "该装置": 1
+   },
+   "Toothbreaker Scaletamer": {
+    "碎齿驯鳞者 Toothbreaker Scaletamer": 1,
+    "碎齿驯鳞者": 1
+   },
+   "Toothbreaker Thug": {
+    "碎齿暴徒 Toothbreaker Thug": 1,
+    "碎齿暴徒": 1
+   },
+   "Toron": {
+    "托隆 Toron": 1,
+    "托隆": 1
+   },
+   "Triss Carpel": {
+    "特里丝·卡佩尔 Triss Carpel": 1,
+    "特里丝·卡佩尔": 1
+   },
+   "Ulfen": {
+    "乌尔芬 Ulfen": 2,
+    "乌尔芬": 2
+   },
+   "Undaunted Adept": {
+    "无畏修习者 Undaunted Adept": 1,
+    "无畏修习者": 1
+   },
+   "Undaunted Trainee": {
+    "无畏受训者 Undaunted Trainee": 1,
+    "无畏受训者": 1
+   },
+   "Vampyre Spawn": {
+    "吸血孽裔 Vampyre Spawn": 1,
+    "吸血孽裔": 1
+   },
+   "Vanexis": {
+    "瓦内克西斯 Vanexis": 2,
+    "瓦内克西斯": 1
+   },
+   "Vartholomew Chess": {
+    "瓦索洛缪·切斯 Vartholomew Chess": 1,
+    "瓦索洛缪·切斯": 1
+   },
+   "Veiled Chain Agent": {
+    "帷幕锁链特工 Veiled Chain Agent": 1,
+    "帷幕锁链特工": 1
+   },
+   "Vespian Hydral": {
+    "维斯皮安九头蛇 Vespian Hydral": 1,
+    "维斯皮安九头蛇": 1
+   },
+   "Vespian Hydral Head": {
+    "维斯皮安九头蛇头颅 Vespian Hydral Head": 1,
+    "维斯皮安九头蛇头颅": 1
+   },
+   "Vhismara's Claw": {
+    "维斯玛拉之爪 Vhismara's Claw": 1,
+    "维斯玛拉之爪": 1
+   },
+   "Vinarith": {
+    "维纳里斯 Vinarith": 1,
+    "维纳里斯": 1
+   },
+   "Vitt Wandren": {
+    "维特·万德伦 Vitt Wandren": 1,
+    "维特·万德伦": 1
+   },
+   "Vorg": {
+    "沃格 Vorg": 2,
+    "沃格": 1
+   },
+   "Wandren Tracer": {
+    "万德伦追踪者 Wandren Tracer": 1,
+    "万德伦追踪者": 1
+   },
+   "Wandren Watcher": {
+    "流浪注视者 Wandren Watcher": 1,
+    "流浪注视者": 1
+   },
+   "Water Mote": {
+    "水微粒 Water Mote": 1,
+    "水微粒": 1
+   },
+   "Water Sprite": {
+    "水妖精 Water Sprite": 1,
+    "水妖精": 1
+   },
+   "Water Visitor": {
+    "水访客 Water Visitor": 1,
+    "水访客": 1
+   },
+   "Water Wanderer": {
+    "涉水者 Water Wanderer": 1,
+    "涉水者": 1
+   },
+   "Woven Construct": {
+    "编织构装体 Woven Construct": 1,
+    "编织构装体": 1
+   },
+   "Writhing Whisperer": {
+    "蠕动低语者 Writhing Whisperer": 1,
+    "蠕动低语者": 1
+   },
+   "Writhing Whisperer Tendril": {
+    "蠕动低语者触须 Writhing Whisperer Tendril": 1,
+    "蠕动低语者触须": 1
+   },
+   "Yarnac": {
+    "亚纳克 Yarnac": 2,
+    "亚纳克": 1
+   },
+   "Yarnac Juvenile": {
+    "亚纳克幼体 Yarnac Juvenile": 1,
+    "亚纳克幼体": 1
+   },
+   "Yeela Drevvin": {
+    "叶拉·德雷文 Yeela Drevvin": 1,
+    "叶拉·德雷文": 1
+   },
+   "Yellow Block Inmate": {
+    "黄区囚犯 Yellow Block Inmate": 1,
+    "黄区囚犯": 1
+   },
+   "Young Cheliceraeth": {
+    "幼年螯蛛以太兽 Young Cheliceraeth": 1,
+    "幼年螯蛛以太兽": 1
+   },
+   "Zarajah": {
+    "扎拉贾 Zarajah": 2,
+    "扎拉贾": 2
+   },
+   "Zira Hestidero": {
+    "齐拉·赫斯提德罗 Zira Hestidero": 1,
+    "齐拉·赫斯提德罗": 1
+   },
+   "Zodi Trask": {
+    "佐迪·特拉斯克 Zodi Trask": 1,
+    "佐迪·特拉斯克": 1
+   }
   }
+ },
+ "shippedTermInconsistency": {
+  "_note": "同一专名在已发布译文里被译成了不同的中文。必须裁决后统一。",
+  "count": 59,
+  "terms": {
+   "Afflicted Pallid Drake": {
+    "受苦的苍白龙兽 Afflicted Pallid Drake": 2,
+    "变异苍白龙兽": 1
+   },
+   "Afflicted Pallid Drakeling": {
+    "受难苍白幼龙 Afflicted Pallid Drakeling": 1,
+    "变异苍白幼龙": 1
+   },
+   "Anvil": {
+    "铁砧 Anvil": 1,
+    "铁砧 铁砧": 1
+   },
+   "Aquatic Breathing": {
+    "水生呼吸 Aquatic Breathing": 1,
+    "水下呼吸 Aquatic Breathing": 1
+   },
+   "Aqueous Camouflage": {
+    "水相伪装 Aqueous Camouflage": 1,
+    "水生伪装 Aqueous Camouflage": 1
+   },
+   "Arcos Sarinland": {
+    "阿科斯·萨林兰德 Arcos Sarinland": 1,
+    "阿尔科斯·萨林兰德": 1
+   },
+   "Arcturian": {
+    "阿克图里安 Arcturian": 2,
+    "阿克图里亚人 Arcturian": 2,
+    "阿克图里安": 1
+   },
+   "Armor Crusher": {
+    "碎甲者 Armor Crusher": 1,
+    "护甲粉碎者 Armor Crusher": 1
+   },
+   "Bite": {
+    "啃咬 Bite": 24,
+    "噬咬 Bite": 1
+   },
+   "Cascillian Marine": {
+    "卡斯奇利亚海军 Cascillian Marine": 1,
+    "卡斯奇利安海军陆战队员": 1
+   },
+   "Cascillian Marine Officer": {
+    "卡斯奇利安海军军官 Cascillian Marine Officer": 1,
+    "卡斯奇利亚海军军官": 1
+   },
+   "Chamberlain": {
+    "总管 Chamberlain": 1,
+    "侍从官": 1
+   },
+   "Chessman Plating": {
+    "棋士镀层 Chessman Plating": 4,
+    "棋士装甲板 Chessman Plating": 1
+   },
+   "Cindaric Sage": {
+    "辛达里克贤者 Cindaric Sage": 2,
+    "辛达里克信徒": 1
+   },
+   "Claw Hammer": {
+    "爪锤 Claw Hammer": 4,
+    "羊角锤 Claw Hammer": 2
+   },
+   "Corvana Vortest": {
+    "科瓦娜·沃尔特斯特 Corvana Vortest": 1,
+    "法师": 1
+   },
+   "Gafto the Howler": {
+    "嚎叫者加夫托 Gafto the Howler": 1,
+    "加夫托": 1
+   },
+   "Gore Bird": {
+    "血鸟 Gore Bird": 1,
+    "血鸟群": 1
+   },
+   "Hammer": {
+    "锤子 Hammer": 3,
+    "锤 Hammer": 2,
+    "锤": 1
+   },
+   "Harbinger of Disease": {
+    "疫病先驱 Harbinger of Disease": 1,
+    "疫病先驱 疫病先驱": 1
+   },
+   "Harbinger of Madness": {
+    "疯狂先驱者 Harbinger of Madness": 1,
+    "疯狂先驱者 先驱者 of 疯狂": 1
+   },
+   "Headbutt": {
+    "头槌 Headbutt": 1,
+    "头槌攻击 Headbutt": 1
+   },
+   "Huiana": {
+    "惠安娜 Huiana": 1,
+    "惠安娜 惠安娜": 1
+   },
+   "Hulg'run Lineage": {
+    "Hulg'run血统 Hulg'run Lineage": 5,
+    "赫尔格伦血统 Hulg'run Lineage": 1
+   },
+   "Improvisational Expertise": {
+    "即兴专长 Improvisational Expertise": 3,
+    "即兴专精 Improvisational Expertise": 3
+   },
+   "Inflection: Compose": {
+    "屈折：作曲 Inflection: Compose": 14,
+    "词缀：作曲 Inflection: Compose": 1
+   },
+   "Inflection: Elude": {
+    "屈折：闪避 Inflection: Elude": 5,
+    "词缀：闪避 Inflection: Elude": 1
+   },
+   "Inflection: Extend": {
+    "屈折：延展 Inflection: Extend": 6,
+    "词缀：延展 Inflection: Extend": 1
+   },
+   "Inflection: Negate": {
+    "屈折：否定 Inflection: Negate": 3,
+    "词缀：否定 Inflection: Negate": 1
+   },
+   "Inflection: Pull": {
+    "屈折：拉拽 Inflection: Pull": 3,
+    "词缀：拉拽 Inflection: Pull": 2
+   },
+   "Inflection: Quicken": {
+    "屈折：迅捷化 Inflection: Quicken": 5,
+    "词缀：迅捷化 Inflection: Quicken": 1
+   },
+   "Inflection: React": {
+    "词缀：反应 Inflection: React": 1,
+    "屈折：反应 Inflection: React": 1
+   },
+   "Inflection: Reshape": {
+    "屈折：重塑 Inflection: Reshape": 2,
+    "词缀：重塑 Inflection: Reshape": 1
+   },
+   "Ix'erax": {
+    "伊克斯埃拉克斯 Ix'erax": 1,
+    "伊克斯艾拉克斯": 1
+   },
+   "Jonico Daridane": {
+    "乔尼科·达里丹ე Jonico Daridane": 1,
+    "乔尼科·达里丹": 1
+   },
+   "Kadhana Lizard": {
+    "卡达娜蜥蜴 Kadhana Lizard": 1,
+    "卡达纳蜥蜴": 1
+   },
+   "Kinesis Proficiency": {
+    "念力熟练度 Kinesis Proficiency": 1,
+    "念动力熟练度 Kinesis Proficiency": 1
+   },
+   "Liestra's Bracer of Appraisal": {
+    "莉埃斯特拉的鉴定护腕 Liestra's Bracer of Appraisal": 1,
+    "列斯特拉的鉴定护臂 Liestra's Bracer of Appraisal": 1
+   },
+   "Local Color": {
+    "地域风貌": 1,
+    "地方色彩 Local Color": 1
+   },
+   "Mistress Caberi": {
+    "卡贝丽夫人 Mistress Caberi": 1,
+    "卡贝里夫人": 1
+   },
+   "Natural Invisibility": {
+    "天然隐形 Natural Invisibility": 2,
+    "天生隐形 Natural Invisibility": 1
+   },
+   "Orcish": {
+    "兽人语 Orcish": 3,
+    "兽人语血统 Orcish": 1
+   },
+   "Orivech": {
+    "奥里维奇 Orivech": 1,
+    "奥里维奇 奥里维奇": 1
+   },
+   "Paint Globlin": {
+    "绘画地精 Paint Globlin": 1,
+    "绘制地精布林": 1
+   },
+   "Party": {
+    "队伍 Party": 2,
+    "队伍 队伍": 1,
+    "队伍": 1
+   },
+   "Raster Thorn": {
+    "栅格荆棘 Raster Thorn": 1,
+    "栅格棘刺": 1
+   },
+   "Rune: Kinesis": {
+    "符文：念动力 Rune: Kinesis": 7,
+    "符文：念力 Rune: Kinesis": 5
+   },
+   "Shade of Agaseros": {
+    "阿加瑟洛斯之影 Shade of Agaseros": 1,
+    "阿加塞洛斯的幽影": 1
+   },
+   "Shimz Shimring": {
+    "希姆兹 希姆林 Shimz Shimring": 1,
+    "希姆兹": 1
+   },
+   "Sin's Caravan": {
+    "辛的商队 Sin's Caravan": 1,
+    "辛恩的商队": 1
+   },
+   "Sitherian": {
+    "西瑟里安 Sitherian": 2,
+    "西希拉之子": 1
+   },
+   "Spellbreaker Guard": {
+    "破咒守卫 Spellbreaker Guard": 1,
+    "破法卫士": 1
+   },
+   "Spellbreaker Riot Guard": {
+    "破法者防暴卫队 Spellbreaker Riot Guard": 1,
+    "破咒暴动卫兵": 1
+   },
+   "Sporix Host": {
+    "孢体宿主 Sporix Host": 1,
+    "受折磨的荆棘幼体": 1
+   },
+   "Swarm of Cave Wasps": {
+    "洞穴黄蜂虫群 Swarm of Cave Wasps": 1,
+    "洞穴黄蜂群": 1
+   },
+   "Tauric": {
+    "牛族 Tauric": 1,
+    "牛类的": 1
+   },
+   "Thayloc Courser": {
+    "赛洛克疾奔兽 Thayloc Courser": 1,
+    "非玩家角色": 1
+   },
+   "To Fall and Fall Again": {
+    "坠落，又再度坠落 To Fall and Fall Again": 1,
+    "一再坠落 To Fall and Fall Again": 1
+   },
+   "Wandren Patroller": {
+    "巡逻者旺德伦 Wandren Patroller": 1,
+    "万德伦巡逻者": 1
+   }
+  }
+ },
+ "resolved": {
+  "Aberin's Folly": {
+   "base": "阿伯林的愚举",
+   "shipped": "阿贝林的愚举 Aberin's Folly",
+   "resolved": "阿伯林的愚举（库内 216:31）"
+  },
+  "Agrimage": {
+   "base": "农法师",
+   "shipped": "农艺法师 Agrimage",
+   "resolved": "农艺法师（284:180:12，且是 name 字段；英文闸要不区分大小写，正文大量小写 agrimage）"
+  },
+  "Arcturian Liquor": {
+   "base": "阿克图里安烈酒",
+   "shipped": "阿克图瑞安烈酒 Arcturian Liquor",
+   "resolved": "阿克图里安烈酒（248:3）"
+  },
+  "Attunement": {
+   "base": "调谐",
+   "shipped": "同调 Attunement",
+   "resolved": "同调（1440:10，2026-08-06 已裁）"
+  },
+  "Chapter 3 Events": {
+   "base": "第3章事件",
+   "shipped": "第3章 事件 Chapter 3 Events",
+   "resolved": "格式类，非术语分歧，无需裁决"
+  },
+  "Formidable Presence": {
+   "base": "威严气场",
+   "shipped": "威严魅力 Formidable Presence",
+   "resolved": "威严气场（2026-08-06 已裁；库内已无「威严魅力」）"
+  },
+  "Golden Weapon": {
+   "base": "金色武器",
+   "shipped": "黄金武器 Golden Weapon",
+   "resolved": "黄金武器（库内 2:0，base 值从未使用）"
+  },
+  "House Cevher Mausoleum": {
+   "base": "杰夫赫尔家族陵墓",
+   "shipped": "杰夫赫家族陵墓 House Cevher Mausoleum",
+   "resolved": "杰夫赫尔家族陵墓（913:6:4）"
+  },
+  "House Cevher Signet Ring": {
+   "base": "杰夫赫尔家族印戒",
+   "shipped": "切夫赫尔家族印戒 House Cevher Signet Ring",
+   "resolved": "杰夫赫尔家族印戒（同上）"
+  },
+  "Hulg'run Lineage": {
+   "base": "赫尔格伦血统",
+   "shipped": "Hulg'run血统 Hulg'run Lineage",
+   "resolved": "赫尔格伦血统（库里原有 7 处专名整个留成英文，已译）"
+  },
+  "Kinesis Proficiency": {
+   "base": "念动力熟练度",
+   "shipped": "念力熟练度 Kinesis Proficiency",
+   "resolved": "念力熟练度。**注意**：库内的「念动力」译的是 Telekinesis，不是 Kinesis，两者是不同的词，不能合并"
+  },
+  "Kineturge": {
+   "base": "念动力术师",
+   "shipped": "念力术师 Kineturge",
+   "resolved": "念力术师（同上）"
+  },
+  "Kithil": {
+   "base": "奇希尔",
+   "shipped": "基希尔 Kithil",
+   "resolved": "基希尔（285:0，base 值从未使用）"
+  },
+  "Ordain Gazetteer": {
+   "base": "奥尔丹地志",
+   "shipped": "奥丹地志 Ordain Gazetteer",
+   "resolved": "奥尔丹地志。城市名 奥尔丹 3062 : 奥丹 225，后者全部改掉"
+  },
+  "Quickwater": {
+   "base": "激流水",
+   "shipped": "急流水 Quickwater",
+   "resolved": "急流水（18:0，base 值从未使用）"
+  },
+  "Reliquary": {
+   "base": "圣物室",
+   "shipped": "圣髑匣 Reliquary",
+   "resolved": "圣髑匣（29:10）。但库内 10 处「圣物室」所在条目的英文并无 Reliquary，属另一个词，未动"
+  },
+  "Thornling": {
+   "base": "荆棘裔",
+   "shipped": "荆芽灵 Thornling",
+   "resolved": "荆芽灵（313:148，且是 taxonomy name 字段）"
+  },
+  "Welcome To Crucible": {
+   "base": "欢迎来到Crucible",
+   "shipped": "欢迎来到 Welcome To Crucible",
+   "resolved": "「欢迎来到 Crucible」。原 shipped 值「欢迎来到 Welcome To Crucible」的中文半截是空的；库内系统名一律保留英文 Crucible，中文里已含该词，故不再缀英文尾巴"
+  },
+  "What is Crucible": {
+   "base": "什么是《Crucible》",
+   "shipped": "什么是《 What is Crucible",
+   "resolved": "「什么是 Crucible」。原 shipped 值「什么是《 What is Crucible」残留了一个孤立的书名号"
+  },
+  "Wind Raiders": {
+   "base": "风掠者",
+   "shipped": "风袭劫掠者 Wind Raiders",
+   "resolved": "风袭劫掠者（26:2，前者是 actor name 字段）"
+  }
+ }
 }
