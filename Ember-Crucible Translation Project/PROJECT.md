@@ -7,15 +7,41 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**2026-08-14：第十三～十四轮。当前已发布 `crucible-cn 0.9.7` / `ember_cn_unofficial v1.1.10`
-（v1.1.8 / v1.1.9 是两条阻断的紧急修复，见第 8 节第十三轮）。
-第十四轮把第十三轮遗留的 270 条 finding **逐条对当前 HEAD 重新复核**（OPEN 203 / FIXED 63 /
-UPSTREAM 2 / INVALID 1），再按「一个文件只归一个 agent」切成 13 个工作包全部处理完，
-落盘 **266 叶 + lang 21 键 + 孪生同步 67 叶**，5.4 全套复验回到全 0。**
+**2026-08-15：第十五轮。当前已发布 `crucible-cn 0.9.8` / `ember_cn_unofficial v1.1.15`。**
 
-> ⚠ **第十四轮有三条明确「本轮不做」的项，别当成已完成**：
-> `Region Map`/`Area Map` 全库拆分（159 叶，72 叶无法机械对齐）· `[[/language moiré]]` 4 处 ·
-> dnd5e 侧两条管线阻断。理由与数据全在 `4-临时脚本/2026-08-14-round14/RESOLUTIONS.md`。
+> ⚠ **这一行的版本号历史上漂过两次**（停在 0.9.6/1.1.7 与 0.9.7/1.1.10 各一次）。
+> 现已由断言 `R-version-matrix` 机械守住 —— 与 `module.json` 不符会直接失败，
+> 不要再靠人记得改。
+> ⚠ **但断言只抓「含『发版状态 / 当前已发布 / 当前版本』字样的行」与第 2 节版本矩阵行**。
+> 正文别处再写一次版本号，就是一处无人看守的第二真相（第十五轮实测：§1 的「发版状态」
+> 行曾停在 0.9.4/1.1.4 达四个发布版）。**结论：版本号只写在抬头与版本矩阵两处，别处一律指过去。**
+
+**第十五轮开了四个此前没有任何判据的方向**（前十四轮的判据单位**全是「叶」**）：
+
+| 方向 | 结果 |
+|---|---|
+| ① 按「一场戏」读，不按「一片叶」读 | 30 条**跨叶指代断裂**，全部出自「两侧英文串本来就不同」，同串比对定义域之外 |
+| ② 中文可读性（与保真度无关的独立轴） | 按具名翻译腔润色三本玩家通读物：长定语 53 / 词序照搬 30 / 被字滥用 30 等 |
+| ③ 词表**内容**审计 | **4 条阻断，全是 `source='base'`** —— 词表把错误洗成权威的机制被抓了现行 |
+| ④ **决议断言化** | `qa/assert_resolutions.py`，首版 16 条 → **现 24 条**（条数以 `5-其他内容/RESOLUTIONS.assertions.json` 为准，别在正文里再抄一个数），进 §5.4 |
+
+> ⚠ **①②③ 的四组计数（30 / 53·30·30 / 4）当时没落盘，事后无法复算。**
+> `4-临时脚本/2026-08-15-round15/` 下只有 batches*/twin*/qa*/results.json 与本轮补的
+> `findings/`（doc_audit 等），没有 ①②③ 的 findings 产物。③ 的「4 条阻断」可由
+> `glossary_ec.json` 与 base 层的当前值间接佐证（`Kinesis`念力 / `Fortitude`强韧 /
+> `Rank`阶位 / `Region Map`地区地图 四键两层均已改对），①② 的数字**只能存疑**。
+> **通则：每轮的 findings 必须落一份到 `4-临时脚本/<日期>-<轮>/findings/`**，否则下一轮复核时会和这里一样卡住。
+
+第十三～十四轮：270 条遗留 finding 逐条对当前 HEAD 重核（OPEN 203 / FIXED 63 /
+UPSTREAM 2 / INVALID 1），按「一个文件只归一个 agent」切 13 包全部处理完；
+补完 `encounterTokens` 894 处内容缺口；`Region Map`/`Area Map` 全库拆分。
+
+> ⚠ **第十四轮曾有三条「本轮不做」，其中两条后来做掉了，只剩一条**：
+> ~~`Region Map`/`Area Map` 全库拆分~~ **已完成**（第十四轮 C 段推翻，两包 187 叶，
+> 现由断言 `R-region-area-map` 守住）· ~~`[[/language moiré]]` 4 处~~ **已完成**
+> （改我们自己的兜底正则，compendium 一个字未改，见 §8 2026-08-14f）·
+> **dnd5e 侧两条管线阻断仍未做，且项目所有者已裁「先不管」**（不是待办，是已裁决不做）。
+> 理由与数据全在 `4-临时脚本/2026-08-14-round14/RESOLUTIONS.md`。
 
 > 上一版抬头：第八～十二轮，`crucible-cn 0.9.6` / `ember_cn_unofficial v1.1.7`。
 第十二轮把**所有仍非零的报告清到零或清成有据可查的永久豁免**（123 条，现 125 条，全表在
@@ -71,7 +97,10 @@ dnd5e 侧两条管线阻断项目所有者已定「先不管」。**
 
 **主控自己另查出并已修**：`Confused` 4 处（compendium 写「神志混乱」而 crucible lang 与条件页
 都是「混乱」）· `Charged Bite` 4 处（英文 storm energy，权威条目是「带电啃咬」）·
-`@UUID{标签}` 首尾空格 6 处（英文侧无空格的那些）。新判据 `probes/scan_status_name.py` 已入库。
+`@UUID{标签}` 首尾空格 6 处（英文侧无空格的那些）。新判据
+`4-临时脚本/2026-08-13-round8/probes/scan_status_name.py` 已进 §5.4（第 17 项）。
+⚠ **它仍在 `probes/` 下，没有搬进 `3-常用脚本/qa/`** —— 写相对路径 `probes/...` 对新会话没有落点，
+引用它一律用全路径。
 
 **落盘**：43 个批次经三方合并（681 条路径、24 条被多组认领、20 条自动合并、2 条人工裁决）
 ＋ 后续 2 叶修正 = **683 叶**。复验 5.4 全套（含新判据）见下。
@@ -89,7 +118,8 @@ dnd5e 侧两条管线阻断项目所有者已定「先不管」。**
    看着像 `Electricity`/`Tier` 的残留，加英文闸才看出它们译的是 `electrical energy` 与 `Rank`。
    工具：`4-临时脚本/2026-08-12-fix/term_gate.py`（三桶 gated_hit / cn_only / en_only）。
 3. **「多数派」和「name 字段」都可能是错的那一边。** 标签↔name 的 153 组分歧里，
-   **41% 是 name 错**（`Raster Thorn` 的 name「栅格荆棘」是逐词机翻，他是碎牙帮帮主）。
+   **41% 是 name 错**（`Raster Thorn` 的 name「栅格荆棘」是逐词机翻，他是碎牙帮帮主
+   —— **该例已修，现为「拉斯特·索恩 Raster Thorn」，全库「栅格荆棘」0 处**，别去库里搜）。
    依据阶梯要用，但用之前先看那个 name 本身译得对不对。
 4. **逐句通读也会漏。** 27 个单元读完 35 本 journal 报了 507 条，挂在后面的复核 agent
    **又补出 188 条**（召回率约 73%），而漏的几乎全是**可以机械化**的一类。
@@ -107,7 +137,11 @@ dnd5e 侧两条管线阻断项目所有者已定「先不管」。**
    对称计数一眼就知道是「兄弟姐妹」同叶并列）。假阳性成因永远是同一个：**这片叶里有好几个人**。
    可用的形态是**实体锚定 + 最近先行词**：先用原文自带的 `(NG, Ordani Keth, he/him)` 声明
    （本库有 977 处，比任何推断都硬）给专名定性，再要求代词的最近先行词就是这个人 —— 做到了 0 假阳性。
-   同理：中文代词不能裸匹配，裸「他」会扫进 其他/他们/他人/排他/利他，全库 15449 → 清洗后 10699。
+   同理：中文代词不能裸匹配，裸「他」会扫进 其他/他们/他人/排他/利他。
+   ⚠ **原记的「全库 15449 → 清洗后 10699」里前一个数复现不出来**：两仓 cn 全部叶子里「他」的
+   原始出现数实测 **33034**（清洗后 10729，与 10699 只差 0.3%，可由噪声词表不同解释）。
+   当时用的是哪一仓、哪批叶没写下来，**「15449」这个口径待验证**。
+   要点在做法不在数字：**清洗后再判**。
 
 7. **（第八轮新增）数值类判据有「中文数词」盲区。** 穷举用阿拉伯数字锚定的判据，
    会漏掉中文写成「六轮」「三层」的那些。第八轮就有一条 `lasts for six turns`→「持续六轮」
@@ -120,8 +154,8 @@ dnd5e 侧两条管线阻断项目所有者已定「先不管」。**
 必须先做三方合并：以 `compendium/cn` 现值为 base，把每个批次的编辑当 diff 重放。
 
 ```powershell
-python "$P-临时脚本6-08-12-fix\merge_batches.py" --manifest <manifest.json> --scan
-python "$P-临时脚本6-08-12-fix\merge_batches.py" --manifest <manifest.json> --merge --out-dir <merged>
+python "$P\4-临时脚本\2026-08-12-fix\merge_batches.py" --manifest <manifest.json> --scan
+python "$P\4-临时脚本\2026-08-12-fix\merge_batches.py" --manifest <manifest.json> --merge --out-dir <merged>
 # 真冲突逐条人工裁决，写进 resolutions.json（附理由），再逐包 apply_translations --force
 ```
 
@@ -131,46 +165,49 @@ manifest 的产法见 `4-临时脚本/2026-08-12-audit3/prep_manifest*.py`；
 **顺序**：主线（crucible 侧）全部落完之后，**最后**才跑 `qa/sync_twin_packs.py`
 —— 主线每落一批就会制造新的孪生分叉。
 
-### ⚑⚑ 第八轮查出的两条 dnd5e 侧管线阻断（**需项目所有者决策，主控没动 `mappings.mjs`**）
+### ⚑⚑ 第八轮查出的两条 dnd5e 侧管线阻断（**项目所有者 2026-08-14 已裁「先不管」**）
 
 **约 85 万字符的 dnd5e 侧内容从未进过管线，而覆盖率报 100%。**
 这是盲区表第 9 项（「抽取器根本没抽的字段」）的又一次命中，也再次证明它是本项目最高产的一类。
 
 | # | 缺口 | 实测 | 根因 |
 |---|---|---|---|
-| 1 | **dnd5e 侧物品正文** | `ember.adventure` 453 个顶层物品 **0 个**有 description；actor 内嵌物品 **0 个字段**。crucible 侧同批对照：顶层 15.9 万字符/479 字段、内嵌 13.1 万字符/848 字段 | `CRUCIBLE_ITEM` 的 `description` 键**按键覆盖**掉了 babele 内建默认 `Item.description = "system.description.value"`（`mergeObject` 里字符串被对象整个顶替），而 `crucibleDescription` 转换器只认 `string` 与 `{public,private}`，dnd5e 的 `{value, chat}` 落不进任何分支 |
-| 2 | **dnd5e 侧 NPC 传记主字段** | 只抽到 `biography.public`（258 actor / 19.7 万字符），`.value` 主传记约 **55.7 万字符**零抽取。crucible 侧对照 `biography.private` 51.1 万字符已译完 | `crucibleNested` 的 extract 白名单是 `['name','description','public','private','appearance']`，**不含 `value`**；且 `BABELE_DEFAULTS` 里根本没有 `Actor` 条目，运行时在查一个抽取器永远不产出的键 |
+| 1 | **dnd5e 侧物品正文** | `ember.adventure` 453 个顶层物品 **0 个**有 description；actor 内嵌物品 **0 个字段**（2026-08-15 复测仍是 0）。⚠ crucible 侧对照的那两个数（15.9 万/479、13.1 万/848）**复现不出来**（今天的基线实测顶层 479 字段 / 17.3 万字符、内嵌 3166 字段 / 99.0 万字符），原始口径已不可考，**只当量级参考** | `CRUCIBLE_ITEM` 的 `description` 键**按键覆盖**掉了 babele 内建默认 `Item.description = "system.description.value"`（`mergeObject` 里字符串被对象整个顶替）。⚠ **translate 方向已修**：`release/runtime-converters.js:48` 现有专门的 `{value, chat}` 分支（否则会把第三方 dnd5e 汉化包的 Item 顶坏）；**extract 方向刻意未动**（`:65-72` 注明理由是 Z1 已裁「先不管」），所以英文基线里 dnd5e 侧 description 仍为 0 |
+| 2 | **dnd5e 侧 NPC 传记主字段** | 只抽到 `biography.public`（258 actor / 19.7 万字符，复测一致），`.value` 主传记约 **55.7 万字符**零抽取 | `crucibleNested` 的 extract 白名单是 `['name','description','public','private','appearance']`，**不含 `value`**（`runtime-converters.js:94` 与 `extract_en.mjs:243` 均如此）。⚠ **「`BABELE_DEFAULTS` 里根本没有 `Actor` 条目」已过期**：`extract/mappings.mjs:497` 现有完整的 `Actor` 块（name/items/effects/tokenName），`:467-473` 明确写着 `Actor.description` 是**刻意不写**、等这条裁决；`:458-460` 还声明该表不进运行时。缺口仍在，但根因描述要按现状读 |
 
 两条都落在**你 2026-08-09 定的「dnd5e 是附带项」那一侧**，所以是不是要补，是优先级问题不是对错问题。
 参照先例：`Scene.levels` 那次你定的是「优先完整汉化，补管线」，但那条在**主线**上。
 一个缓解因素：内嵌自 dnd5e 官方合集的物品，babele 源包回退**可能**从 dnd5e 中文模块免费取到译文；
 Ember 自有物品与 NPC 传记不会。
 
-另有一条 g07 顺带查出的**新管线错**（不在原 finding 里）：`mappings.mjs` 的 `BABELE_DEFAULTS`
-自称「与 babele 默认保持同步」，实测与 babele 2.9.1 真默认有三处偏差，其中一处是活的 bug。
-详见 `4-临时脚本/2026-08-13-round8/findings/ESCALATIONS.md` 的 g07 段。
+> ✅ **裁决结果：2026-08-14 项目所有者定「先不管」**（`4-临时脚本/2026-08-14-round14/RESOLUTIONS.md`）。
+> 代码里也落了这个裁决：`release/runtime-converters.js:45-47` 与 `extract/mappings.mjs:467-473`
+> 都注明 extract 方向刻意保持原样。**这一段现在是背景资料，不是待办**。
 
-**下一步**（按顺序）：
+~~另有一条 g07 顺带查出的新管线错：`BABELE_DEFAULTS` 与 babele 2.9.1 真默认有三处偏差。~~
+✅ **已于 2026-08-14 逐块对齐修完**（当时实为 **6 处出入** + Actor/Item/Cards/Card/Folder
+五个整块缺失，不是三处）。`extract/mappings.mjs:450-474` 的注释现在写着「逐块对齐
+`babele/script/mapping/default-mappings.js` (2.9.1)；最后核对 2026-08-14」。
+⚠ **文件里现存的三处是「刻意偏离」并逐条写了理由**（`Macro.command` / `Actor.description` /
+`Scene` 无 `levels`）—— **别顺手补齐**。原始记录见 `4-临时脚本/2026-08-13-round8/findings/ESCALATIONS.md` 的 g07 段。
 
-1. **冒烟验证** —— 清单在第 7 节末尾。**只有项目所有者能做**，已积压五轮。
-   第八轮又新增两项（`id` 锚点、`Round`/`Turn`），见清单末尾。
-2. **裁决上面两条 dnd5e 管线阻断** —— 补 / 不补 / 只补传记。
-3. **裁决 13 组升级事项** —— 全表在 `4-临时脚本/2026-08-13-round8/findings/ESCALATIONS.md`
-   （22 KB）。最要紧的是「知识领域 7 个术语」三通道分叉：compendium 表格 / `lang/cn.json` /
-   `ember-hardcoded-cn.mjs` 三方不一致，且**探针建议的「按 lang 拉齐」被复核推翻**
-   —— glossary_ec 有 26 个 `knowledge X` 键，其中 4 条站表格那边；`Undeath` 更有 25 叶同卷散文
-   （裁决阶梯第 2 档，压过 lang）站「不死」。方向清楚的只有 `Forensics`。
-4. **继续查缺补漏** —— 从本节末的「下一轮从哪开始」表往下走。
+**下一步**（2026-08-15 第十五轮收尾时重写；旧版是第八轮的遗留，四项里三项状态已变）：
 
-**发版状态**：`crucible-cn 0.9.4` / `ember_cn_unofficial v1.1.4`（2026-08-13，**未做冒烟验证**）。
-发版后已按第 5.5 节做下载回包核对：manifest 与 zip 实测 HTTP 200；
-**crucible 0.30 MB / 24 文件、ember 7.22 MB / 21 文件**；`compendium/en`、`release/`、
-`lang/en.json`、`lang_keep_english.json`、`.git`、`.bak`、嵌套 zip 均未混入；
-manifest 声明的每个 `esmodules`/`languages`/`styles` 文件包内都在；
-包内抽查确认场景层名已中文、`Thayloc Courser` 的 token 名已由占位符改为「赛洛克疾奔兽」、
-地名志 `<dt>` 错位已修、`.mjs` 的两条机制修复与 `Scene.levels` 映射都在包里。
-更早的 0.9.0–0.9.3 见第 6 节年表。发版怎么做见第 5.5 节；发版前**必做**
-`flatten_lang.py`（不加 `--write`）确认两个仓库「拍平前 == 拍平后 == 英文键数」三者相等
+1. **冒烟验证** —— 清单在第 7 节末尾。**只有项目所有者能做**。
+   自 `0.9.3` / `v1.1.3` 起**每一次发版都没做过**（crucible 0.9.3→0.9.8、ember v1.1.3→v1.1.15，
+   合计 11 次），已积压六轮。清单末尾按轮次分组，第十四轮 B 段那两条是最新加的。
+2. ~~裁决两条 dnd5e 管线阻断~~ **已裁：项目所有者定「先不管」**（见上文第八轮那段与
+   `runtime-converters.js:45`）。不再是待办，除非上游或所有者改主意。
+3. ~~裁决 13 组升级事项~~ **点名的五件已全部裁完并执行**：知识领域 7 词（§8 2026-08-13g，
+   最终是 `Forensics`→**法证学**，不是「法医学」，照旧文理解会做反）· `Marlstone`→马尔石（有断言
+   `R-marlstone`）· `Hallows` 城区/组织分名（§8 2026-08-12b）· `Mazira` 音译已归一 ·
+   手势模板同源串分叉已归零。**`ESCALATIONS.md` 里 g00–g12 是否还有未闭环项，需要重新逐条过一遍再定**。
+4. **继续查缺补漏** —— 从本节末的「下一轮从哪开始」表往下走（那一块每轮收尾重写，见其开头的铁律）。
+
+**发版状态见本节抬头与第 2 节版本矩阵**（那两处由断言 `R-version-matrix` 守住），
+历次发版的回包核对结果见第 6 节年表 —— **本行不再复写版本号**。
+发版怎么做见第 5.5 节；发版前**必做** `flatten_lang.py`（不加 `--write`）确认两个仓库
+「拍平前 == 拍平后 == 英文键数」三者相等（现 ember 486 / crucible 1842）
 —— 这一步就是为了挡住 1.1.0 那次 lang 有 77% 静默失效。
 
 **怎么干活**：一轮 10–12 个并行单元，译者自检闸门 + 对抗式审校 + 跨单元术语核对。
@@ -208,8 +245,11 @@ Crucible 侧 —— 那些英文只是碰巧同名（`Dagger`/`Longbow`），条
 另外三条实测出来的注意事项：
 
 - **先查英文再判中文**。中文写法不同不等于错 —— 英文本来就不同的场合很多。
-  例：库里 167 处「闪电」，其中 123 处英文确实是 `Lightning`（忠实），44 处是「闪电般迅捷」这类比喻，
-  真正错的只有**英文写 `Electricity` 却译成「闪电」的 23 处**。不做这一步会误伤大片。
+  例（**2026-08-12 当时的实测，那 23 处早已修完**）：库里 167 处「闪电」，其中 123 处英文确实是
+  `Lightning`（忠实），44 处是「闪电般迅捷」这类比喻，真正错的只有**英文写 `Electricity` 却译成
+  「闪电」的 23 处**。不做这一步会误伤大片。
+  **今天的实况**：含「闪电」的叶 184 片，英文侧含 `[Ll]ightning` 的 181 片、含 `[Ee]lectric` 的 **0** 片
+  —— 这一类现由断言 `R-electricity-lightning` 守住（**区分大小写**：大写是伤害类型、小写是普通名词）。
 - **改动面小的那边优先**（阶段 20 的 `Inkaro`：改 4 个物品条目名而不是 126 处正文）。
 - **`name` 字段与正文冲突时，多数情况该改 `name`**，因为正文改动面通常大得多；
   但要连 `lang/cn.json` 一起看 —— 阶段 23 的教训是 crucible 自己的 lang 与 compendium 条目名就不一致。
@@ -217,7 +257,8 @@ Crucible 侧 —— 那些英文只是碰巧同名（`Dagger`/`Longbow`），条
 裁决后**必须**：① 写进第 8 节决议记录（附证据与计数）；② 用 `qa/unify_terms.py` 执行
 （它只在**英文原文确实出现该术语**时才改，正是上面第一条的机械保障）；③ 复跑 QA 全套。
 
-**翻译时必须遵守的既定译名**（避免和已完成的 11 个包冲突）：
+**翻译时必须遵守的既定译名**（避免和已落盘的全部 25 个 compendium 包冲突 ——
+ember 侧 10 个 / crucible 侧 15 个，两仓覆盖率均 100%）：
 `Kinesis`念力 · `Warden`守林者 · `Guardian`守护者 · `Swarm`(archetype)群集 · `Tier`阶 ·
 `Electricity`**电击**（状态 `Shocked` 作**感电**；`Lightning` 才是闪电，别混）·
 `Bludgeoning`钝击 · `Fire`火焰 · `Corruption`腐化 · `Fortitude`**强韧** ·
@@ -260,77 +301,97 @@ python "$P\4-临时脚本\2026-08-06\crosscheck_vs_crucible_fr.py"   # 交叉校
 
 | # | 覆盖不到的东西 | 为什么现有检查看不见 | 状态 / 怎么下手 |
 |---|---|---|---|
-| 1 | **运行时行为**（译文写对了但玩家看不到 / 数据被写坏） | 全部检查都是静态比对 JSON，不加载 Foundry | ⬜ **仍是最高优先级**。**冒烟验证**，第 7 节末尾清单。terrain / 词缀拼装名 / `_packs-folders` 已随 0.9.3 发出去；第三轮又加了 `.mjs` 的两条机制修复（`data-tooltip-text` / DialogV2 标题）与 P-9 待决补丁 |
+| 1 | **运行时行为**（译文写对了但玩家看不到 / 数据被写坏） | 全部检查都是静态比对 JSON，不加载 Foundry | ⬜ **仍是最高优先级**。**冒烟验证**，第 7 节末尾清单。terrain / 词缀拼装名 / `_packs-folders` 已随 0.9.3 发出去；第三轮又加了 `.mjs` 的两条机制修复（`data-tooltip-text` / DialogV2 标题，两者均在库，`grep` 各命中 2 / 9 处）。⚠ **P-9 补丁不再是待决项**：世界时钟改走 `patchCalendarFormatters()`（`ember-hardcoded-cn.mjs:1770`，包住 `CONFIG.time.formatters.emberDay`）绕开了 `animate()` 直写 innerText 的问题，且 **P-9 的补丁原文已随会话丢失**（全盘 `find` 零命中 `H1_patch.md`），真要落必须重写 |
 | 2 | **35 本 journal 的逐句准确性**（占 journal 正文 51%） | 覆盖率只看「有没有中文」，标记闸只看标记，长度比只是启发式 —— 已知的两条凭空增删里有一条比值 0.377 完全正常 | ✅ **第四轮做完**：27 个并行单元实读 458 万英文字符，507 条确认缺陷（2 阻断）。**但复核 agent 又补出 188 条**，说明单次通读召回率约 73% —— 见第 1 节教训 4 |
 | 3 | **同一目标的标签命名不一致 226 处** | `scan_uuid_swap` 的 UNCERTAIN 档：不是错位（BROKEN 已 0），是同一文档在不同处用了不同中文标签 | ✅ 第三轮逐条裁完。**方法教训**：`findings` 里的 `en_label` **不可信**（它只取该目标在叶内的第一个英文标签，而同一叶对同一目标用两个英文标签是常态），必须逐位对齐取本处的真实英文标签，否则会把正确译文改坏 |
 | 4 | **lang ↔ compendium 的术语一致性** | `scan_cross_channel.py` 的 A/C 段词对齐是坏的（见 3.6） | ✅ A/C 段已重写：候选来源从 n-gram 滑动窗口换成**叶级对照**（整叶等值 / name 字段 / `@UUID` 标签配对 / lang / glossary / `.mjs` / 双语并列锚），四道过滤。回测 13/13：三个坏例消失，且把 lang 换回历史错值能重新报出 |
-| 5 | **HTML 属性里的可见文本** | 唯一触及属性的检查用多重集相等，结构上只能发现「译坏」不能发现「根本没译」 | ✅ 新增 `qa/scan_attr_text.py`。本库实际只出现 26 个属性名，**任务当初凭空拟的 `title`/`alt`/`aria-label` 一个都没有**，真正有的是 `@Embed[...]` 体内的 `label=` 与 `readaloud=` —— 先普查再定白名单。ground truth 122 处，修前已译 50（41%），现 **122/122** |
+| 5 | **HTML 属性里的可见文本** | 唯一触及属性的检查用多重集相等，结构上只能发现「译坏」不能发现「根本没译」 | ✅ 新增 `qa/scan_attr_text.py`。本库实际只出现 26 个属性名，**任务当初凭空拟的 `title`/`alt`/`aria-label` 一个都没有**，真正有的是 `@Embed[...]` 体内的 `label=` 与 `readaloud=`（命中最多的其实是 `readaloud` 48 / `label` 46 / `data-tooltip` 16 / `data-tooltip-text` 14）—— 先普查再定白名单。修前已译 50/122（41%），**现 124/124 = 100%**（分母随上游 `label=` 增减而变，跑一遍看当期数，别记死） |
 | 6 | **RollTable 结果名 / 场景针脚 与目标文档名是否同名** | `scan_markup_targets` 只管 `@UUID` 方括号，管不到用 `entryId` 绑定、标签独立存放的 Note 与 table result | ✅ 新增 `qa/scan_name_binding.py` + `qa/dump_bindings.mjs`。**关键发现：`entryId`/`documentUuid` 根本不在 babele 译文文件里，只在 LevelDB packs 里**，所以旧探针只能拿「英文标签逐字节等于某文档英文名」当代理判据（实测多报 10 / 漏报 3）。新闸从 packs 导出真实绑定。570 针脚 + 697 表结果，BROKEN 由 16 → **0** |
-| 7 | **`ember-hardcoded-cn.mjs` 的中文质量** | `qa/` 下只有 `scan_cross_channel.py` 的 B 段按键比对它，**没有人审过它的中文本身** | ✅ 177 条全部逐条审完。**最重要的结论不是译文错，而是 31 个键在当前 Foundry v14 + ember 0.6.x 上根本不生效**（详见第 8 节三条阻断） |
-| 8 | **英文变过、中文没跟上**（跨版本 drift） | 只要上游一升级就立刻回来 | ✅ 第三轮全量复核了 `stale` 桶 278 条。**但要知道它的假阳性率极高**（见第 1 节）。**命门仍是先把当前英文归档到 `english-baseline/`** |
+| 7 | **`ember-hardcoded-cn.mjs` 的中文质量** | `qa/` 下只有 `scan_cross_channel.py` 的 B 段按键比对它，**没有人审过它的中文本身** | 🔶 **第三轮把当时的 177 条逐条审完**（结论不是译文错，而是 **31 个键在 Foundry v14 + ember 0.6.x 上根本不生效**，详见第 8 节三条阻断）。⚠ **此后 v1.1.5 / v1.1.10 / v1.1.11 / v1.1.12 又加了约 320 条，现共约 500 条中文映射，新增那批从没被逐条审过** —— 别按 ✅ 跳过这个盲区 |
+| 8 | **英文变过、中文没跟上**（跨版本 drift） | 只要上游一升级就立刻回来 | ✅ 第三轮全量复核了 `stale` 桶 **278 条（当轮数）**；按今天的基准复跑是 **258**（crucible 22 + ember 236），差额是此后重译掉的。**但要知道它的假阳性率极高**（§8 2026-08-13：两个单元 23/23、51/51 全假阳性，长度比在短叶子上零鉴别力）。**命门仍是先把当前英文归档到 `english-baseline/`** |
 | **9** | **抽取器根本没抽的字段** | 所有静态检查都以「英文基准里有这一条」为起点；**基准里压根没有的字段不在任何检查的定义域内**，与 08-12 的「中文侧整条不存在」是同一类盲区的另一侧 | ✅ 2026-08-13b 补齐 Scene 的三个字段（`levels`/`tokens`/`navName`，见第 7 节第 13 项）。**发现手段值得复用：外部第二实现对照** —— 是拿 crucible-fr 的 `compendium/en` 与我们逐路径比才看见的。**下次上游升级后应重跑这个对照**，它是唯一能发现「我们没抽的字段」的手段 |
 
 ---
 
-#### 📌 下一轮从哪开始（2026-08-13b 收尾时的实况）
+#### 📌 下一轮从哪开始（**2026-08-15 第十五轮收尾时实测重写**）
 
-> ### ✅ 第十二轮之后的收口状态（新会话从这里判断「还剩什么」）
+> ⚑⚑ **本块的铁律：每轮收尾必须按实测重写，不许誊抄上一轮。**
 >
-> **所有判据当前非零的只剩两项，且都已归档为永久豁免**：
-> - `scan_same_en_split` **14 组 / 133 叶** —— 全部在
->   `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json` 里逐条带证据
->   （`Shield` 法术/装备、`Light` 戏法/负重分级、`Water`·`Ooze` 地形/生物分类、
->   `West`·`East` 地点分区/方向表、`Aura` 天体/手势、`Adelyne` 上游硬编码同名等）
-> - `scan_label_vs_name` **2 处** —— `Maziran` 马兹兰人 vs 马兹兰，已核实是有意保留的族称
+> 这一块记的全是「还剩什么」，而每一轮恰恰在消灭「剩下的」。
+> 第十二轮写的这一块被原样誊抄到了第十五轮，结果 15 条过期里有 9 条挂在同一个根因，
+> 同一节里还对同一件事给出了两套数（`uuid_swap` 6 vs 22、`name_splits` 5 vs 7）。
+> 这正是本项目自己那条方法教训的适用场景 —— **标 ✅ 的项必须拿数据复验，不能照抄上一版状态**。
 >
-> 其余全部为 0：标记五项 / 方括号内标记 / class 漂移 / 数字覆盖 / 外来文字 / **死键（两仓均 0）** /
-> 中文侧缺键 / `tokenName` / 状态名 / HTML 属性 / 裸英文专名 / **锚点缺口** / 孪生包分叉 /
-> `uuid_swap` BROKEN / `name_binding` BROKEN / lang 四项且拍平三数相等（486 / 1842）。
->
-> **75 本 journal 全部逐句对读过**，其中 7 本高产的又做过一轮独立重读。
->
-> ⚠ **仍未做的只有两件**：① 真实世界验证（第 7 节清单，项目所有者定「打磨完再统一验证」）；
-> ② dnd5e 侧两条管线阻断约 85 万字符（缺陷表 Z1，项目所有者定「先不管」）。
+> 重写前**必须先跑完**（三分钟的事）：
+> ```powershell
+> $Q = "$P\3-常用脚本\qa"
+> python "$Q\scan_same_en_split.py"      --repo <r1> --repo <r2> --out <tmp>
+> python "$Q\scan_uuid_swap.py"          --repo <r1> --repo <r2> --out <tmp>
+> python "$Q\scan_name_splits.py"        --repo <r1> --repo <r2> --out <tmp>
+> python "$Q\scan_bare_english_names.py" --repo <r1> --repo <r2> --min-words 2 --out <tmp>
+> python "$Q\assert_resolutions.py"
+> ```
+> 外加第 5.4 节全套。**下面每一个数字都是这么来的，改动它之前先把对应的脚本跑一遍。**
 
-**已经有判据、且当前为 0 的**（跑一遍确认即可，别重复投入）：
-5.4 全套十四项、`scan_label_vs_name`（剩 2 处是有意保留的族称 `Maziran`＝马兹兰人）、
-`scan_name_binding` BROKEN、`scan_renamed_terms`、`sync_twin_packs`、
-`scan_attr_text` 的属性名与 enricher 标签、**`scan_status_name`（新，371 一致 / 0 不一致）**、
-`scan_token_name`、`scan_name_splits`（剩 5 个已逐个查实为合法分裂，别再裁）。
+##### ✅ 第十五轮收尾时的收口状态（新会话从这里判断「还剩什么」）
 
-> ✅ **第八轮那两个「不是 0 但也不要动」的，第九轮已经从判据层解决**（不要再按旧注记理解）：
-> ① `scan_attr_text` 的 113 处 `gained {id}` —— 判据加了 **`id` 净增加白名单**（净减少仍报），现为 **0**。
->    `--strict-id` 可关掉白名单复现 113，证明只是不报、没有丢数据。
-> ② `scan_uuid_swap` UNCERTAIN 68 —— 判据改为**逐位对齐**（同一 target 按出现序号配对英中标签），
->    现为 **6**。⚠ 代价记在 §8：这一改**把一处真缺陷一起消掉了**（`Sunalins` 三分），
->    幸而被同轮的同源串统稿覆盖到。**改判据降噪时必须逐条核对消失的那些里有没有真缺陷。**
+**第 5.4 节全套 + 全部新判据，当前非零的只有下面这些，且每一条都已归因**：
 
-**第八、九轮已经排除掉的方向**（做过了，已清零，别重做）：
-`bare_english` **37 → 0**。第八轮误判为「全是假阳性」，**第九轮证明这个判断是错的** ——
-三类假阳性（双语并列语序倒装 `沙纳山脉南部 Southern Shana Mountains` · 出版商名 `Mage Hand Press` ·
-enricher 方括号内 `&Reference[Difficult Terrain]`）共 17 处已由判据排掉，
-**剩下的 20 处是真缺陷**（Patch 页的本作内容名），已修。灵敏度回测 13/13。
+| 判据 | 当前值 | 性质 |
+|---|---|---|
+| `scan_same_en_split` | **15 组 / 140 叶**（英文唯一串 14191） | ✅ 全部已逐条归档为永久豁免，**125 条**全表在 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`，由断言 `R-exclusions-closed` 守住。分档：≤20 字符 13 组 / 131 叶、81–300 字符 2 组 / 9 叶、**>300 字符 0 组**（长正文那一档早已清零） |
+| `scan_name_splits` | **5 个**（唯一英文名 5449） | 🔶 `Shield` 护盾术 23 : 盾牌 8 · `Luminous` 明光 4 : 辉耀 1 · `Spirited` 昂扬 1 : 精神焕发 1 —— 这三条是**合法分裂**，逐条留证见 §8 2026-08-13f。⚠ **`Arcturian`（阿克图里安 8 : 阿克图里安人 2）与 `Color Commentary`（彩色解说 2 : 精彩解说 2）不在那份留证里**，前者是族名单复数、后者是「战场解说 vs 壁画」两义，**仍待人裁**，别当合法分裂跳过 |
+| `scan_uuid_swap` UNCERTAIN | **6 处 / 2 叶**（BROKEN 0） | 🔶 **不是 by-design**：脚本自标 `[same-en-label]`，`Kessia`→凯西亚（库内多数凯西安）、`Ordain`→奥尔丹（库内多数奥尔达尼），全在 `Character Classes.pages.Cleric.text` 上（两包孪生）。按 §8 术语裁决收口即可 |
+| `scan_label_vs_name` | **2 处** | ✅ `Maziran` 马兹兰人 vs 马兹兰，已核实是有意保留的族称 |
+| `scan_name_binding` UNCERTAIN | **199**（BROKEN 0） | 🔶 必须带 `--bindings` 跑；不带会退回代理判据、数字虚高四倍（旧报告的 824 就是这么来的）。§8 2026-08-13k 已证「都是目标没中文名」的说法是错的（实为 2/199），其余各有成因但全部良性 |
+| `scan_cross_channel` | A 段 ORPHAN 2 / MINORITY 5 / SPLIT 1、**B 段 MJS_LANG_DRIFT 33**、C 段 FAMILY_SPLIT 2 | 🔶 **B 段是当前最实在的一条未处理线索**：`.mjs` 语料从 177 条涨到约 500 条，B 段随之从首测的 4 条涨到 33 条，**这 33 条没人看过**。A/C 段是「要人看」不是「有错」 |
+| `scan_en_drift` | changed **1217**（crucible 295 + ember 922）/ stale **258** / 非 stale **959** | 🔶 stale 桶第三轮已全量复核（假阳性率极高）；changed 桶 §8 2026-08-13k 已按「新英文独有 token 在不在中文里」正经做完一遍。残余风险只剩纯散文改写 |
 
-> ⚠ **但闸归 0 ≠ 那几页干净**（方法教训 1 的又一实例）：Patch `0.4.2/0.4.3/0.4.7` 上仍有十几处
-> **单词**专名裸英文（`Ancara` / `Ortarec Cube` / `Magical Forces` / `Cartographer` / `First Soulmark` …），
-> `--min-words 2` **结构性地看不见**；0.4.x 之外还有十几个 Patch 页没人看过。见下表 Z4。
+**其余全部为 0**（2026-08-15 逐条实跑）：lang 五档（NEW/DRIFT/UNTRANSLATED/STALE/UNREACHABLE，
+两仓）且拍平三数相等（ember 486 / crucible 1842）· 标记五项 · 方括号内标记（BROKEN 0）·
+class 漂移 · 数字覆盖 · 外来文字 · 死键（两仓 0，`_legacyActions` 已按 §8 2026-08-13k 删净）·
+中文侧缺键（`fill_missing` 0）· `tokenName` 0 · 状态名 371 一致 / 0 不一致 ·
+HTML 属性 **124/124** 且属性名多重集 0 · 裸英文专名 `--min-words 2` **0 处** ·
+锚点缺口 · 孪生包分叉 0 · `uuid_swap` BROKEN 0 · `name_binding` BROKEN 0 ·
+`validate_translations` 两仓 **100% / todo 0** · **决议断言 24 条全通过**。
 
-**还没有判据 / 判据有覆盖洞的**（按预估价值排序）：
+**75 本 journal 全部逐句对读过**，其中 7 本高产的又做过一轮独立重读（§8 2026-08-13k 另补完
+J00《Ordain Gazetteer》漏读的 22 页）。
+
+> ⚠ **两件「客观没做但不进工作面」的**：① 真实世界冒烟验证（第 7 节清单，自 0.9.3 起 11 次发版都没做，
+> **只有项目所有者能做**）；② dnd5e 侧两条管线阻断约 85 万字符（**已裁「先不管」，不是待办**）。
+> 除此之外**仍开着的工作面见下面的 Z 表**（Z1 `.mjs` 新增未审 · Z2 单词级裸英文 ·
+> Z3/Z4 两条小术语收口 · Z5 词表 base 层写回）—— 别再写成「只剩两件」。
+
+> ⚠ **「全 0」的正确读法**（方法教训 1）：它只说明**已知的那几类**错误不存在。
+> 两个反例都出在本项目自己身上 —— `bare_english` 闸归 0 之后，把 `--min-words` 降到 1
+> 立刻多出 70 处；`.mjs` 的 B 段闸也是语料一涨就从 4 条变 33 条。
+> 看到全 0 时正确的问题永远是「**哪一类错误现在还没有对应的判据**」。
+
+**还没有判据 / 判据有覆盖洞的**（按预估价值排序，2026-08-15 重排）：
 
 | # | 方向 | 现状与下手方式 |
 |---|---|---|
-| **Z1** | **dnd5e 侧两条管线阻断** | 🔴 **第八轮新查出，最高优先级的「有内容缺口」项**。约 85 万字符。详见第 1 节 ⚑⚑ 那一段。**需项目所有者先裁「补不补」** |
-| **Z2** | **13 组升级事项** | 🔴 全表 `4-临时脚本/2026-08-13-round8/findings/ESCALATIONS.md`。最要紧：知识领域 7 词三通道分叉 · `Marlstone` 复合专名词根（~130 叶）· `Hallows` 组织/城区共不共用词根（~40 处）· `Mazira` 音译二分（马齐拉 17 : 马兹拉 14）· 手势模板 61 份同英文副本各译各的 |
-| ~~Z3~~ | ~~英文基准里的上游笔误挡住回写~~ | ✅ **第九轮已修**。`Yakoshta Mine / Elevator` 的 `[[/skillCheck athletics 15 check.` 补上 `]]`，已记为 `LOCAL-PATCHES.md` 第 3 条，中文补译完成。**惯例已确认：补丁只打 `compendium/en`，`english-baseline/` 快照保持上游原样** |
-| **Z4** | **Patch 页的单词专名裸英文** | 🔶 十几处 `Ancara` / `Ortarec Cube` / `Magical Forces` / `Cartographer` / `First Soulmark` 等，`scan_bare_english_names --min-words 2` **结构性看不见**（单词专名）。0.4.x 之外还有十几个 Patch 页从没人看过。需要一条独立单元，或把闸的 `--min-words` 降到 1 并配一份白名单 |
-| **Z5** | **同源串分叉的剩余 470 组 / 2561 叶** | 🔶 第九轮从 1514 组压到 470 组。剩下的 **429 组是 ≤20 字符短标签**（`Overview` 一组就 165 叶），agent 按「短串默认合法分叉」保守留下的。要收口得逐条查语境，性价比中等。长正文那一档（>300 字符）**已经是 0** |
-| **A** | ~~中文正文里的裸英文专名~~ | ✅ **第九轮真正收口**：37 → **0**。第八轮判「全是假阳性」是**错的**，其中 20 处是真缺陷（见上）|闸 `qa/scan_bare_english_names.py --min-words 2`（词典 3255 条），报告 `5-其他内容/reports/bare_english.json`。剩下的 63 处是四单元一致 deferred 的 Patch 页条目与假阳性。**闸的已知假阳性模式**：`Mage Hand` 命中的其实是出版商 `Mage Hand Press` —— 交替正则里没有更长的那个名字，短的赢了。修法：把「命中后紧跟大写词」也排除 |
-| B | `scan_en_drift` 的 `changed` 非 stale 桶 | 1216 条至今只做过抽查。**但它已被机械闸扫过一遍**（LINK / BLOCK / 数字覆盖 / class / 改名残留都是全库判据且为 0），残余风险只剩「结构与标记都没变的纯散文改写」 |
-| C | 剩下约 40 本 journal | 设定集 / 地名志 / 规则页，前几轮读过但**不是逐句**。地名志那一批已被证明有系统性缺陷（70 处 NPC 名整个没译、一条 `<dt>` 错位阻断） |
-| D | `scan_uuid_swap` 的 UNCERTAIN | ✅ 226 → 98 → **22**。剩下的是英文标签本来就与文档名不同的（换称呼／代词式简称／`#锚点` 指小节），属 by-design |
-| E | `scan_label_vs_name` 自己的覆盖洞 | ✅ **2026-08-13e 已补**。对齐改成「按同一 target 的出现序号」，跳过数 **120 → 20**，捞回 7 条真缺陷；统计口径也修了 —— 原本「目标 id 不在表里 1969」看着像巨大覆盖洞，实际 **1697 条是 dnd5e 系统自己的合集引用**（本项目不负责），真覆盖洞只有 270 |
-| F | `scan_name_binding` 的 UNCERTAIN 824 | 目标没有中文 name 的那一档。多数是合理的（目标本来就没条目），但值得抽样确认 |
-| **H** | **同一个英文 `name` 有两套中文名** | ✅ 新闸 `qa/scan_name_splits.py`：5449 个英文名里 54 个分裂，已裁到 **7**。剩下的 7 个是**合法分裂**（`Shield` 既是法术护盾术又是装备盾牌、`Luminous`/`Spirited` 分属两套永不同载的规则），判据看不出词义，必须人排除 |
+| **Z1** | **`.mjs` 新增的约 320 条中文从没被审过** | 🔶 **本表当前最高优先级**。第三轮逐条审的是当时的 177 条，此后 v1.1.5/1.1.10/1.1.11/1.1.12 又加了约 320 条，现共约 500 条。旁证：`scan_cross_channel` B 段随之从 4 条涨到 **33 条 MJS_LANG_DRIFT**。下手方式：先跑 B 段拿 33 条，再对新增部分做一轮逐条审（当年那轮最有价值的产出是「31 个键根本不生效」，不是译文错 —— **先验键还能不能被匹配上，再谈译文**） |
+| **Z2** | **单词级裸英文专名**（`--min-words 1`） | 🔶 `--min-words 2` 已归零，降到 1 实测 **70 处 / 31 个专名**（词典 4458 条）。⚠ **旧版本记的「Patch 0.4.2/0.4.3/0.4.7 上十几处」已过期**：点名的 `Ortarec Cube`/`Magical Forces`/`Cartographer`/`First Soulmark` 全库 0 命中，`Ancara` 剩的 4 处是合法双语并列 name。落在 Patch 页的只剩 **6 处 / 3 页**（`Patch 0.3.0` 的 Party、`0.4.2` 的 Artificer、`0.4.3` 的 Yakoshta，各 ×2 孪生），其余 64 处在 folders / Character Classes 等处（`Dragons` 8、`Attunement` 6、`Cyclonic` 4 …）。**收口做法是给 `--min-words 1` 配白名单，不是重读 Patch 页** |
+| **Z3** | **`scan_name_splits` 剩下 5 个里的 2 个** | 🔶 `Arcturian` 与 `Color Commentary` 仍待裁（见上表）。其余 3 个是合法分裂 |
+| **Z4** | **`scan_uuid_swap` 剩下 6 处** | 🔶 `Kessia` / `Ordain` 的译法不统一，按依据阶梯裁一次即可（见上表） |
+| **Z5** | **词表 base 层的写回从未执行** | 🔴 §8 2026-08-13k 记「197 条争议裁完 / 181 条 pending 清零」，实查**两侧写回一条都没做**：G2 的 `base_fixes` 0/188 落地（base 里 `Attunement` 仍「调谐」、`Sockets` 仍「插孔」、`Thornling` 仍「荆棘裔」）、G3 的 174 条仍全躺在 `glossary_ec.pending.json`（现 181 条）、`disputes.json` 现 200 条。产物侧暂由 harvest 层兜住，**一旦某键失去 harvest 证据就会反向回灌** —— 这正是第十五轮 ③ 抓到的那类阻断 |
+| ~~Z6~~ | ~~英文基准里的上游笔误挡住回写~~ | ✅ **第九轮已修**。`Yakoshta Mine / Elevator` 的 `[[/skillCheck athletics 15 check.` 补上 `]]`，已记为 `LOCAL-PATCHES.md` 第 3 条。**惯例已确认：补丁只打 `compendium/en`，`english-baseline/` 快照保持上游原样** |
+| ~~Z7~~ | ~~dnd5e 侧两条管线阻断~~ | ⬜ 约 85 万字符。**项目所有者 2026-08-14 已裁「先不管」**（`round14/RESOLUTIONS.md`）。除非上游或所有者改主意，不再进工作面 |
+| ~~Z8~~ | ~~13 组升级事项~~ | ✅ 点名的五件全部已裁并执行（知识领域 7 词 / `Marlstone` / `Hallows` / `Mazira` / 手势模板，见上文「下一步」第 3 条）。`ESCALATIONS.md` 的 g00–g12 若还有未闭环项，需重新逐条过一遍再定 |
+| ~~Z9~~ | ~~同源串分叉 470 组 / 2561 叶~~ | ✅ 第九～十二轮从 1514 组压到 **15 组 / 140 叶**，全部归档为永久豁免（EXCLUSIONS.json 125 条 + 断言 `R-exclusions-closed`）。**别再当大活重做** |
+| ~~A~~ | ~~中文正文里的裸英文专名~~ | ✅ 第九轮收口：37 → **0**（`--min-words 2`，词典 3255 条）。第八轮判「全是假阳性」是**错的**，其中 20 处是真缺陷。三类假阳性（双语并列语序倒装 · 出版商名 `Mage Hand Press` · enricher 方括号内）已写进判据，灵敏度回测 13/13。单词级的另开一项，见 Z2 |
+| ~~C~~ | ~~剩下约 40 本 journal~~ | ✅ **第十轮补齐最后 40 本 380 万字符，75 本已全部逐句读完**；§8 2026-08-13k 另补完 J00 未读的 22 页。⚠ 「读过」≠「读干净」：高产单元重读的召回率约 73%，要再压一轮成本最低的是机械核查而不是再读一遍 |
+| ~~E~~ | ~~`scan_label_vs_name` 自己的覆盖洞~~ | ✅ **2026-08-13e 已补**。对齐改成「按同一 target 的出现序号」，跳过数 **120 → 20**，捞回 7 条真缺陷；统计口径也修了 —— 原本「目标 id 不在表里 1969」看着像巨大覆盖洞，实际 **1697 条是 dnd5e 系统自己的合集引用**（本项目不负责），真覆盖洞只有 270 |
+
+> ✅ **第八轮那两个「不是 0 但也不要动」的，第九轮已从判据层解决**（不要再按旧注记理解）：
+> ① `scan_attr_text` 的 `gained {id}` —— 判据加了 **`id` 净增加白名单**（净减少仍报），现为 **0**。
+>    ⚠ **别记「`--strict-id` 复现 113」这个数**：锚点 id 一直在增补，当前默认模式打印的白名单放行量
+>    已是**净增 1630 个 id / 3 个包**。要点是「**净减少仍报**」，不是某个具体数字。
+> ② `scan_uuid_swap` UNCERTAIN 68 → **6**（判据改逐位对齐）。⚠ 代价记在 §8：这一改
+>    **把一处真缺陷一起消掉了**（`Sunalins` 三分），幸而被同轮的同源串统稿覆盖到。
+>    **改判据降噪时必须逐条核对消失的那些里有没有真缺陷。**
 
 ---
 
@@ -345,8 +406,8 @@ enricher 方括号内 `&Reference[Difficult Terrain]`）共 17 处已由判据�
 | crucible | 系统 | **0.10.1** | `%LOCALAPPDATA%\FoundryVTT\Data\systems\crucible` |
 | ember | 模块（**付费/protected**） | **0.6.0** | `…\Data\modules\ember` |
 | babele | 模块（翻译框架） | **2.9.1** | `…\Data\modules\babele` |
-| crucible-cn | 汉化模块（本项目） | **0.9.7**（2026-08-14 发布） | `2-Crucible汉化插件\` |
-| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.10**（2026-08-14 发布；v1.1.8/v1.1.9 为阻断急修） | `1-Ember汉化插件\` |
+| crucible-cn | 汉化模块（本项目） | **0.9.8**（2026-08-14 发布） | `2-Crucible汉化插件\` |
+| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.16**（2026-08-15；v1.1.8/v1.1.9 为阻断急修，v1.1.11–15 为第十四～十五轮） | `1-Ember汉化插件\` |
 
 两个汉化仓库：
 - https://github.com/takaqiao/crucible-cn
@@ -363,24 +424,27 @@ crucible 侧两条都用；ember 侧两条也都用。
 
 ## 3. 须知（踩过的坑与硬约束）
 
-### 3.1 babele 2.9.1 的三个真实故障
+### 3.1 babele 2.9.1 的三个真实故障（**三条都已修完，此处保留为病理记录**）
 
-1. **`crucible-cn/babele-register.js` 有真 bug**
-   `adventure_items_converter` 内部调 `game.babele.converters.actions_converter(items, translations)`。
-   2.9.1 的 `.converters` getter 返回的是 `ConverterRegistry.snapshot()` —— 值是 **`FunctionalConverter` 对象**，不是函数。
-   → 冒险模组里带 `actions` 的内嵌物品会抛 `TypeError: not a function`。
+1. ~~**`crucible-cn/babele-register.js` 有真 bug**~~ ✅ **已修**
+   `adventure_items_converter` 曾内部调 `game.babele.converters.actions_converter(items, translations)`，
+   而 2.9.1 的 `.converters` getter 返回的是 `ConverterRegistry.snapshot()` —— 值是
+   **`FunctionalConverter` 对象**，不是函数 → 带 `actions` 的内嵌物品会抛 `TypeError: not a function`。
+   现在内嵌物品改走 babele 自己的递归 `document` 转换器（见 `babele-register.js:18-24` 的文件头注释）；
+   全仓 `grep actions_converter(` 只剩历史说明注释，无实际调用。
 
-2. **`crucible-cn` 的 `SUPPORTED_PACKS` / `DEFAULT_MAPPINGS.ActiveEffect` 补丁已是死代码**
-   2.9.1 的默认 mapping 原生支持 `ActiveEffect`（还带 `changes` 的 `structured` 转换器）。该补丁块可删。
+2. ~~**`crucible-cn` 的 `SUPPORTED_PACKS` / `DEFAULT_MAPPINGS.ActiveEffect` 补丁是死代码**~~ ✅ **已删**
+   2.9.1 的默认 mapping 原生支持 `ActiveEffect`（还带 `changes` 的 `structured` 转换器）。
+   两仓现在只剩 `babele-register.js:14-16` 一句「the monkey-patch is gone」的注释。
 
-3. **`ember_cn/register.js` 的 `_tableResults` 补丁全是死代码**
+3. ~~**`ember_cn/register.js` 的 `_tableResults` 补丁全是死代码**~~ ✅ **已删，且 table results 已 100%**
    2.9.1 已无 `_tableResults` 转换器，改由 `document` + `documentType: "TableResult"` 处理，identity 是
    `_identity: {export: ["range","_id"], match: ["_id","range"]}`。
-   这正是 table results 至今 0% 的原因。
+   补丁静默空转正是当年 table results 停在 0% 的原因；现两仓 `results[].text|name` **660/660 全含中文**。
 
 ### 3.2 babele 2.9.1 的关键能力（务必用上）
 
-- **注册钩子是 `babele.init`**，不是 Foundry 的 `init`。babele 在自己的 `init` 里 `game.babele = …` 然后同步 `Hooks.callAll('babele.init')`。现在两个模块都挂在 Foundry `init` 上，靠模块加载顺序侥幸能跑 —— 要迁走。
+- **注册钩子是 `babele.init`**，不是 Foundry 的 `init`。babele 在自己的 `init` 里 `game.babele = …` 然后同步 `Hooks.callAll('babele.init')`。✅ **两仓已迁完**（`2-Crucible汉化插件/babele-register.js:35`、`1-Ember汉化插件/register.js:702` 都是 `Hooks.once('babele.init', …)`），不要再挂回 Foundry `init`。
 - **`window.Babele` 仍然存在**（`babele.js` 末尾 `window.Babele = BabeleFacade`），旧的 `typeof Babele !== 'undefined'` 守卫不会失效。
 - **`registerMapping(mapping)`** —— 声明式追加/覆盖全局文档 mapping 层，比手写转换器好得多。
 - **`_variants` + `_when`** —— 按字段值分支 mapping，正好对应 ember 的 13 种 page 子类型：
@@ -389,7 +453,7 @@ crucible 侧两条都用；ember 侧两条也都用。
   ```
 - **递归 `document` 转换器 + 源包回退**（见第 1 节事实 1）。`fallbackPolicy` 可选
   `source-first`（默认）/ `owner-package-before-generic` / `owner-package-first`。
-- **`_packs-folders.json`** —— 能翻合集**文件夹名**。crucible-cn 完全没做，Crucible-FR 做了。
+- **`_packs-folders.json`** —— 能翻合集**文件夹名**。✅ **crucible-cn 已补**（`2-Crucible汉化插件/compendium/cn/crucible._packs-folders.json`，5 条 entries 已译）；ember 侧本来就没有这个文件。⚠ babele 的这个能力**至今没在真实世界里验过**，见第 7 节冒烟清单。
 - **多源优先级** —— 同一个 collection 有多份译文文件时可设优先级（`setSourcePriority`）。
 - **诊断接口** —— `game.babele.inspectMapping(type)`、`await game.babele.sourceDiagnostics()`、`cacheDiagnostics()`。验收时用。
 - **损坏的译文文件不会拖垮整体**：`TranslationLoader.#loadJsonFile` 有 try/catch，只 `console.error` 并跳过该 collection。
@@ -426,6 +490,20 @@ ember 的正文**不在 `text.content` 里**。13 种子类型及其正文字段
   `<span class="reference">⬢ s.3204.2870</span>`、`<figure>/<figcaption>` 等。
   这些是 Foundry 的功能性标记，改坏了会导致链接失效或样式崩。
 
+### 3.5 其他约束
+
+- **ember 是付费模块**（上游商店按付费/protected 分发）。⚠ **别拿 `module.json` 当依据** ——
+  本机 `…\Data\modules\ember\module.json` 实际写的是 `"protected": false`。
+  `ember_cn_unofficial` 公开仓库放着整部战役的完整中文正文；
+  Padhiver 的 Crucible-FR 有 Ember 转换器但**没有公开发布 Ember 译文**，大概率就是这个原因。
+  是否改私有/只发 diff 由项目所有者决定，此处仅记录。
+- ~~**`ember_cn` v1.0.15 发布包里 `ember.crucible-adventure-en.json` 是损坏 JSON**~~（第 44 行多一个 `}`，
+  躺在 `compendium/cn/` 里每次开世界白 fetch 11.4 MB）。✅ **已移出并重新生成**：全库
+  `*/compendium/cn/*-en.json` 现为空，`1-Ember汉化插件/compendium/en/` 下 9 个包 + `_source.json` 全部可正常解析。
+- ~~**`ember_cn` 的译文里有 1447 个页面条目带垃圾字段 `path: {}`**~~ ✅ **已清**（两仓递归实测 0 处）。
+  成因记着备查：mapping 保留字 `path` 被当成翻译字段写进去了。
+- Windows 目录名不能含 `/`，所以项目目录用连字符：`Ember-Crucible Translation Project`。
+
 ### 3.6 ⚑ 检查器自己的盲区（2026-08-12 第二轮查出并已修）
 
 **`0.9.2 / 1.1.2` 发版时 5.4 全套确实每项都是 0，而全库仍有 8 条阻断缺陷。**
@@ -438,7 +516,8 @@ ember 的正文**不在 `text.content` 里**。13 种子类型及其正文字段
 | （无）@UUID 标签/目标错位 | — | 每叶的目标多重集与标签多重集都与英文**相等**，标记五项 / class / `[[ ]]` 全过；中文散文本身通顺，人工通读也发现不了 | 新增 `qa/scan_uuid_swap.py` |
 | （无）跨通道一致性 | — | lang / compendium / `.mjs` 三条通道互不校验，玩家却同屏看到 | 新增 `qa/scan_cross_channel.py`（**仅 B 段可信，见下**） |
 
-> ✅ **A/C 段已于 2026-08-13 重写**（下面这段警告保留为病理记录，判据本身已经换掉）。
+> ✅ **A/C 段已于 2026-08-12 重写**（脚本自述与产物目录 `4-临时脚本/2026-08-12-audit3` 均为 08-12；
+> 文档此前两处写成 08-13，已订正。下面这段警告保留为病理记录，判据本身已经换掉）。
 > 新做法：候选来源从 n-gram 滑动窗口换成**叶级对照**（整叶等值 / name 字段 / `@UUID` 标签配对 /
 > lang / glossary / `.mjs` / 双语并列锚），再加互斥度、特异度 lift、通用词 df 上限、归属反查四道过滤。
 > 回测 13/13：三个坏例连同「爆炸瓶 / 裂的弧形 / 尺锥 / 奔涌」全部消失；
@@ -446,7 +525,9 @@ ember 的正文**不在 `text.content` 里**。13 种子类型及其正文字段
 > （只测特异度的话「全判 AGREE」也能过，这一半是防自己交假修复的）。硬判据由 197 条降到 31 条。
 >
 > ⚠ **以下是重写前的病理（留档）：A 段与 C 段曾经不可信。**
-> B 段（`.mjs` ↔ lang，按键精确比对）是可靠的，实测抓到 4 条真漂移。
+> B 段（`.mjs` ↔ lang，按键精确比对）是可靠的，**首测**抓到 4 条真漂移
+> （⚠ **2026-08-15 重跑已是 `MJS_LANG_DRIFT` 33 / `MJS_ORPHAN_CN` 12 / `MJS_NO_LANG` 439** ——
+> `.mjs` 语料从 177 条涨到约 500 条，**新报的 33 条没人看过**，见「下一轮从哪开始」的 Z1）。
 > 但 A/C 段用滑动窗口从 compendium 里取「对应中文」，取出来的是 n-gram 碎片而非词 ——
 > 实测 `Ward` 的 compendium 多数被报成「神殿区」、`Aspect` 报成「会替」、`Shoddy` 报成「品质」
 > （这是「粗糙品质」的后两字）。**要用它做 A/C 段结论，得先把词对齐换成真正的术语抽取。**
@@ -456,15 +537,6 @@ ember 的正文**不在 `text.content` 里**。13 种子类型及其正文字段
 新会话看到 5.4 全 0 时，正确的下一步是问「哪一类错误现在还没有对应的判据」，
 而不是宣布库是干净的。第 7 节的覆盖盲区清单就是回答这个问题用的。
 
-### 3.5 其他约束
-
-- **ember 是付费模块**（`module.json` 里 `"protected": true`）。`ember_cn_unofficial` 公开仓库放着整部战役的完整中文正文。
-  Padhiver 的 Crucible-FR 有 Ember 转换器但**没有公开发布 Ember 译文**，大概率就是这个原因。是否改私有/只发 diff 由项目所有者决定，此处仅记录。
-- **`ember_cn` v1.0.15 发布包里 `ember.crucible-adventure-en.json` 是损坏 JSON**（第 44 行多一个 `}`）。
-  它躺在 `compendium/cn/` 里，每次开世界都会被 fetch + 解析失败（11.4 MB 白流量）。要移出到 `compendium/en/` 并重新生成。
-- **`ember_cn` 的译文里有 1447 个页面条目带垃圾字段 `path: {}`** —— 是 mapping 保留字 `path` 被当成翻译字段写进去了，要清掉。
-- Windows 目录名不能含 `/`，所以项目目录用连字符：`Ember-Crucible Translation Project`。
-
 ---
 
 ## 4. 目录与脚本索引
@@ -472,19 +544,28 @@ ember 的正文**不在 `text.content` 里**。13 种子类型及其正文字段
 ```
 Ember-Crucible Translation Project\
 ├── PROJECT.md                  ← 本文件
+├── PARALLEL-RUNBOOK.md         ← 并行翻译管线的操作手册（29 KB，在项目根，不在 parallel/ 下）
 ├── 1-Ember汉化插件\            ← ember_cn_unofficial 的 git clone（可直接发版）
 ├── 2-Crucible汉化插件\         ← crucible-cn 的 git clone（可直接发版）
 ├── 3-常用脚本\
 │   ├── extract\   从 LevelDB packs 抽英文原版
 │   ├── tm\        翻译记忆库构建 / 预填 / 去重
-│   ├── qa\        术语校验 / markup 完整性 / 残留英文 / 覆盖率
+│   ├── qa\        术语校验 / markup 完整性 / 残留英文 / 覆盖率 / 决议断言（35 个文件）
+│   ├── parallel\  切单元 / 收批次 / 逐单元核对（17 个 .py + 3 份 BRIEF），说明见 PARALLEL-RUNBOOK.md
 │   └── release\   打包 zip / 改 module.json / 发 GitHub release
 ├── 4-临时脚本\<日期>\          ← 一次性探针，按日期归档，不删（可复现结论）
+│                                  每轮的 findings 必须落在 <日期>-<轮>\findings\
+├── 4-工作区\                   ← 各轮跑脚本时的中间产物（fill-missing / lang-recheck / qa /
+│                                  release-check / unify-* 等 12 个子目录）。**纯中间态，不是真源**，
+│                                  可以整个删掉重跑；不要往里写需要长期保留的东西
 └── 5-其他内容\
     ├── glossary\          glossary_ec.json + 来源谱系 + 冲突裁决
-    ├── english-baseline\  历史版本英文快照（跨版本算 drift）
-    ├── reports\           每阶段 diff / QA 报告
-    └── reference\         babele 2.9.1 API 要点、Crucible-FR 参考实现摘录
+    ├── english-baseline\  历史版本英文快照（跨版本算 drift）+ LOCAL-PATCHES.md
+    ├── reports\           每阶段 diff / QA 报告（含 all_ids.json 等现役输入）
+    ├── reference\         ember 与 Crucible-FR 的术语抽取（`ember-fr-recon/` 三份 json）
+    │                      ⚠ FR 的**参考实现快照**不在这里，在 4-临时脚本\2026-08-13-round8\fr-ref\
+    ├── RESOLUTIONS.assertions.json  ← 决议断言闸的规则文件（现 24 条），qa/assert_resolutions.py 读它
+    └── STAGE-LOG.md       阶段 0–27 的完整原始记录（1518 行）
 ```
 
 ### 脚本索引
@@ -522,23 +603,40 @@ Ember-Crucible Translation Project\
 | `4-临时脚本/2026-08-12-fix/merge_batches.py` | **并行批次的三方合并**。多 agent 同时基于同一 base 产出的批次会互相整叶覆盖；它以现值为 base 重放各批次的编辑，冲突落 `resolutions.json` 人工裁决 | `python merge_batches.py --scan` / `--merge` |
 | `4-临时脚本/2026-08-12-fix/term_gate.py` | **英文闸术语计数**，三桶 gated_hit / cn_only（英文是别的词，多半不是残留）/ en_only（英文是该词但中文换了译法）。术语类结论的机械保障 | `python term_gate.py --repo <repo> --en "\bBoon\b" --cn "恩惠骰,恩惠"` |
 | `4-临时脚本/2026-08-12-fix/pair_dump.py` | 成对导出英中叶子，带 `batch_path`（批次文件直接可用的键形态）。`--slice i/k` 可确定性分片，`--grep-path` 可按 journal 切 | `python pair_dump.py --repo <repo> --pack <包> --grep-en <正则> --full` |
-| `qa/scan_attr_text.py` | **新（2026-08-13）**。HTML 属性里的**可见文本**没译。先普查库里实际出现的属性名再定白名单（本库 26 个，`title`/`alt`/`aria-label` 一个都没有，真正有的是 `@Embed[]` 体内的 `label=` 与 `readaloud=`）。另报**属性名本身被译成中文**（`target=`→`目标=`，浏览器整个忽略） | `python scan_attr_text.py --repo <repo> [--repo <另一个>] --out <json>` |
+| `qa/scan_attr_text.py` | **新（2026-08-13）**。HTML 属性里的**可见文本**没译。先普查库里实际出现的属性名再定白名单 —— ⚠ **「26 个」这个数复现不出来，别当校验值**（口径没写清：HTML 标签属性实测 22 个，加 `@Embed[]` 体内 6 个＝28，再算 `[[/…]]` 命令体里的 key 则 42）。**可复现的结论是**：`title`/`alt`/`aria-label` 一个都没有；真正有可见文本的是 `readaloud=` 48 / `label=` 46 / `data-tooltip=` 16 / `data-tooltip-text=` 14，共 124 处。另报**属性名本身被译成中文**（`target=`→`目标=`，浏览器整个忽略） | `python scan_attr_text.py --repo <repo> [--repo <另一个>] --out <json>` |
 | `qa/scan_name_binding.py` + `qa/dump_bindings.mjs` | **新（2026-08-13）**。表结果名 / 场景针脚名 ↔ 它 id 绑定的目标文档名。**绑定关系只在 LevelDB packs 里，不在译文文件里**，所以要先用 `dump_bindings.mjs` 导出。分 BROKEN / UNCERTAIN / BY_DESIGN / NOT_BOUND | `node dump_bindings.mjs --package <foundry包> --out <json>` 然后 `python scan_name_binding.py --repo <repo> --bindings <json> --out <json>` |
 | `qa/scan_name_splits.py` | **新（2026-08-13e）**。同一个英文 `name` 在库里有**两套以上中文名**（玩家会在两处看到同一样东西叫两个名字）。只报分裂、**不给建议** —— 实测多数派常常是错的那边（`Signborn Lineage` 星兆血统 3:1 胜出，但 §8 已裁 Signborn＝印记裔）。也有**合法分裂**（`Shield` 既是法术护盾术又是装备盾牌），要人排除。首测 5449 个英文名里 **54 个分裂** | `python scan_name_splits.py --repo <repo> [--repo <另一个>] --out <json>` |
 | `qa/scan_token_name.py` | **新（2026-08-13d）**。`tokenName` 与 `name` 的中文不一致 —— **玩家在地图上直接看到的就是 tokenName**，而它不在任何既有判据的配对范围里。判据取严格版：**英文侧 `name` 与 `tokenName` 逐字节相同**时中文侧也必须一致（英文侧本就不同的是作者有意的短称，不算）。首测 481 个同名 actor 里 **32 个不一致** | `python scan_token_name.py --repo <repo> [--repo <另一个>] [--fix-batch-dir <目录>] --out <json>` |
 | `qa/scan_bare_english_names.py` | **新（2026-08-13d）**。中文正文里留着的**裸英文专名**（有译名却没用上）。先从 `name` 字段成对提取「英文专名→中文译名」词典，再把全部专名编成**一条**交替正则每叶扫一遍（朴素的 O(专名×叶子) 在本库跑不完）。排除双语并列、标记内部、HTML 属性值，并要求该叶英文里确实有这个专名。首测 `--min-words 2`：词典 3255 条，**160 处 / 55 个专名** | `python scan_bare_english_names.py --repo <repo> [--repo <另一个>] --min-words 2 --out <json>` |
 | `qa/scan_same_en_split.py` | **新（2026-08-13 第九轮）**。全库**同一条英文串有 N 种中文**。既有判据的三重盲区：`sync_twin_packs` 只比两包的**同一路径**、`propagate_fix` 只推 `--since` 之后的增量、`scan_name_splits` 只比 `name` 字段 —— 而**同一英文串出现在不同路径上**（`Gesture: Influence.description` 挂在 23 个 actor 上）从来没人比过。首测 **1514 组 / 8308 叶**。**只报分叉不给建议**：实测多数派常是错的那边（`lunge` 的 16 份写「具有灵巧属性的武器」，英文是 `scales using Dexterity`＝以敏捷成长）。带 `--flagged-only` 只看术语分歧/裸英文那 569 组 | `python scan_same_en_split.py --repo <repo> [--repo <另一个>] [--min-en-len 300] [--flagged-only] --out <json>` |
 | `qa/sync_twin_packs.py` | **新（2026-08-13b）**。孪生包全库对齐：`ember.crucible-adventure` 与 `ember.adventure` 中**英文逐字节相同、中文却不同**的路径一次性统一到主线。`propagate_fix.py` 只推 `--since` 之后改过的，**存量分叉从没被清过** —— 首测 484 条 | `python sync_twin_packs.py --repo <repo> --out-dir <批次目录>` |
-| `qa/scan_label_vs_name.py` | **新（2026-08-13b）**。`@UUID[目标]{标签}` 的中文标签 ≠ 目标文档的中文 `name`。**严格判据**：只报「英文标签本来就等于目标英文 name」的（作者换称呼、代词式简称、`#锚点` 指小节的一律排除）。首测 ember 490 / crucible 14，塌缩成 **153 组唯一配对**。⚠ **方向要逐组判，`name` 也可能是错的那一边**（`拉斯特·索恩`→name`栅格荆棘` 就是 name 机翻） | `node dump_ids.mjs --package <包> --out ids.json` 然后 `python scan_label_vs_name.py --repo <repo> --ids ids.json --out x.json` |
+| `qa/scan_label_vs_name.py` | **新（2026-08-13b）**。`@UUID[目标]{标签}` 的中文标签 ≠ 目标文档的中文 `name`。**严格判据**：只报「英文标签本来就等于目标英文 name」的（作者换称呼、代词式简称、`#锚点` 指小节的一律排除）。首测 ember 490 / crucible 14，塌缩成 **153 组唯一配对**。⚠ **方向要逐组判，`name` 也可能是错的那一边**（`拉斯特·索恩`→name`栅格荆棘` 就是 name 机翻） | ⚠ **`dump_ids.mjs` 不在 `qa/`**，全项目只有一份：`node "$P\4-临时脚本\2026-08-12-fix\dump_ids.mjs" --package <包> --out ids.json`；或直接用现成的 `5-其他内容/reports/all_ids.json`（是旧快照，改过条目名后要重导）。然后 `python scan_label_vs_name.py --repo <repo> [--repo <另一个>] --ids ids.json --out x.json` |
 | `qa/scan_renamed_terms.py` | **新（2026-08-13）**。上游改名/删掉的英文专名，**旧译名还留在中文里**。两个探测器：中文里写着的英文串在当前基准 0 次 / 旧基准有而当前 0 次的专名其中文译名仍在库里。必须带英文闸排除同形常用词 | `python scan_renamed_terms.py --repo <repo> --old <旧基准目录> [--ids <id表>] --out <json>` |
 | `4-临时脚本/2026-08-12-audit3/drift_dump.py` | 把 `scan_en_drift` 报出的条目按**旧英文 / 新英文 / 现有中文**三元组完整导出（报告里三段都截到 220 字符，只够排序不够判断） | `python drift_dump.py --drift <报告> --repo <repo> --baseline <旧基准> --start N --limit N` |
+| `qa/assert_resolutions.py` | **新（2026-08-15 第十五轮）**。把第 8 节的裁决当**闸**跑：规则在 `5-其他内容/RESOLUTIONS.assertions.json`（现 24 条 / 8 种类型）。⚠ **失败时不要只改断言让它变绿** —— 要么改回来，要么显式推翻那条裁决并同时改断言。已知局限写在脚本头（`term_gated` 是叶级的 / `cn_absent` 可能误伤 / 方法性裁决表达不成断言） | `python assert_resolutions.py`（裸跑即全量，`--rules` 有默认值）；`[--repo <repo>] [--verbose] [--max-show N] [--selftest] [--root <副本>]` |
+| `qa/scan_en_drift.py` | **跨版本 drift 的主判据**（§5.0 整节建立在它上面）。旧英文 vs 新英文直接 diff，分 `stale` / `changed` / `gone` / `new` 四档 | `python scan_en_drift.py --repo <repo> --baseline "5-其他内容/english-baseline/<包>-<旧版本>" --out <json>` |
+| `qa/scan_class_drift.py` | `class` 属性漂移（`section.block gamemaster` / `ul.complex-check` / `sup.system-swap-inline` 都是**功能性**的，而标记闸的签名只取标签名、看不见 class） | `python scan_class_drift.py --repo <repo> --out <json>` |
+| `qa/scan_en_residue.py` | 残留英文普查（早期用，不在 5.4 常备集） | `python scan_en_residue.py --repo <repo> [--min-words N] [--show N] [--out <json>]` |
+| `qa/scan_enricher_vocab.py` | enricher 词汇普查（早期用，不在 5.4 常备集） | `python scan_enricher_vocab.py --repo <repo> [--system <pkg>] [--show-upstream] [--selftest] [--out <json>]` |
+| `qa/scan_missing_bilingual_tail.py` | 双语并列尾巴缺失普查（早期用，不在 5.4 常备集；同类判据现由 `assert_resolutions` 的双语尾巴那条覆盖） | `python scan_missing_bilingual_tail.py --repo <repo> [--limit N] [--out <json>]` |
+| `tm/fill_twin_names.py` | 只填 `ember.adventure` 的**空槽** name，从不覆盖既有译文（见 §1「dnd5e 来源作用域」那条硬约束） | `python fill_twin_names.py [--out <batch.json>] [--report <json>]` |
 
 ### 第八轮新判据脚本（`4-临时脚本/2026-08-13-round8/probes/`）
 
-12 类全新判据，各自带**双向回测**（`inject_*.py` / `backtest_*.py` 是灵敏度注入器，
-只在 `%TEMP%` 副本上跑，从不碰 `compendium/`）。想复现结论直接重跑对应脚本。
-**其中只有 `scan_status_name.py` 建议进常备判据集**（371 一致 / 0 不一致，0 假阳性，秒级）；
-`scan_pronoun_gender.py` 的 **G 臂**（实体锚定）也是 0 假阳性、全库约 70 秒，值得常备，A–F 六臂不要单独跑。
+**13 类全新判据 + 1 项交叉校验**（目录里实有 14 个 `scan_*.py`，比下表多一个表外的
+`scan_negation_scope.py`）。⚠ **「各自带双向回测」这句是错的** —— `inject_*.py` / `backtest_*.py`
+（灵敏度注入器，只在 `%TEMP%` 副本上跑，从不碰 `compendium/`）实际只覆盖 **8 类**
+（typography / body_name_splits / list_alignment / negation / orientation / relation_direction /
+modal_strength / pronoun_gender）；**`scan_status_name` · `scan_unmapped_fields` · `scan_dup_block` ·
+`scan_enricher_arg_vs_prose` · `scan_uuid_deadlink` 这五类只有单向首测，没做灵敏度注入，脚本里也没有 `--selftest`**。
+想复现结论直接重跑对应脚本。
+**其中 `scan_status_name.py` 已进常备判据集**（§5.4 第 17 项；复测 371 一致 / 0 不一致，0 假阳性，秒级
+—— 注意它**仍留在 `probes/` 下没有搬进 `qa/`**，引用请用全路径）；
+`scan_pronoun_gender.py` 的 **G 臂**（实体锚定）也值得常备 —— 两仓一起跑
+`--arm G` **实测约 10 秒**（不是旧文写的 70 秒），A–F 六臂不要单独跑：
+```powershell
+python "$P\4-临时脚本\2026-08-13-round8\probes\scan_pronoun_gender.py" --repo <r1> --repo <r2> --arm G
+```
 
 | 脚本 | 查什么 | 首测 |
 |---|---|---|
@@ -547,20 +645,29 @@ Ember-Crucible Translation Project\
 | `scan_body_name_splits.py` | **正文**里的专名分裂（`scan_name_splits` 只比 `name` 字段） | raw 188 → 确认 23 |
 | `scan_cn_typography.py` | 排版约定；**标记功能区混入全角字符是功能性的** | raw 64 → 确认 13 |
 | `scan_unmapped_fields.py` + `census_pack_fields.mjs` | 从 LevelDB packs 枚举全部字符串叶，减去 `mappings.mjs` 的覆盖集 | raw 91 → 确认 12（**2 阻断**） |
-| `scan_dup_block.py` | 叶内重复块：中文两块相同而英文两块不同＝丢了一整块 | raw 43 → 确认 11 |
+| `scan_dup_block.py` | 叶内重复块：中文两块相同而英文两块不同＝丢了一整块 | raw 43 → 确认 11 ⚠ 待验证 |
 | `scan_enricher_arg_vs_prose.py` | enricher 方括号参数渲染出的中文 ↔ 相邻正文术语 | raw 52 → 确认 10 |
 | `scan_uuid_deadlink.py` + `dump_uuid_index.mjs` | 死链（含 `#锚点`）；**判据关键是英文侧同路径对照** | raw 1277 → 确认 9 |
-| `scan_modal_strength.py` | `must`/`should`/`may` 跨档冲突 + 施动者错位 | raw 45 → 确认 7 |
-| `scan_list_alignment.py` | `<dt>/<dd>/<li>/<th>/<td>` 行列错位（地名志阻断的通用化） | raw 36 → 确认 6 |
+| `scan_modal_strength.py` | `must`/`should`/`may` 跨档冲突 + 施动者错位 | raw 45 → 确认 7 ⚠ 待验证 |
+| `scan_list_alignment.py` | `<dt>/<dd>/<li>/<th>/<td>` 行列错位（地名志阻断的通用化） | raw 36 → 确认 6 ⚠ 待验证 |
 | `scan_negation_drift.py` | 否定/条件从句被丢或反转 | raw 254 → 确认 3（噪声极大） |
 | `scan_pronoun_gender.py` | 代词性别错配（实体锚定 + 最近先行词） | raw 19 → 确认 3 |
 | `scan_orientation.py` | 方位/方向/序数 | raw 23 → 确认 3 |
 | `crosscheck_vs_crucible_fr_r8.py` | 与 Crucible-FR 的 `compendium/en` 逐路径比，找「它有我们没有」的字段 | 盲区表第 9 项的复用手段 |
 
-`3-常用脚本/parallel/` 下的 20 余个脚本（切单元 / 收批次 / 逐单元核对）**统一由 `PARALLEL-RUNBOOK.md` 说明**，此处不重复。
+> ⚠ **标「待验证」的三行，`findings/` 里对不上号**：`dup_block.json` 是 8 条（另有
+> `dup_block_R4_ladder.json`）、`list_alignment.json` 是 5 条（另有 `inline_alignment.json`）、
+> `modal_strength_v2.json` 是 92 hits（另有 v1/v3、`modal_actor*.json`、`modal_invented_v3.json`）。
+> **多版本产物并存，无法判定表里的数出自哪一份** —— 要引用这三个数，先补上依据的文件名。
+
+`3-常用脚本/parallel/` 下的 **17 个 .py 脚本 + 3 份 BRIEF**（切单元 / 收批次 / 逐单元核对）
+**统一由项目根的 `PARALLEL-RUNBOOK.md` 说明**（注意手册在根目录，不在 `parallel/` 下），此处不重复。
 
 **批次文件格式**（喂给 `apply_translations.py`）：扁平 `{"<待译清单里的 path>": "<中文>"}`。
-待译清单位于 `5-其他内容/reports/<crucible|ember>/todo/*.todo.json`。
+待译清单由 `validate_translations.py --out <reportDir>` 生成在 `<reportDir>/todo/*.todo.json`。
+⚠ **文档此前写的 `5-其他内容/reports/<crucible|ember>/todo/*.todo.json` 是错的**：那两个目录下
+只有 `_residual_after_fallback.json`；而**两仓现在都是 100% / todo 0**，所以 `5-其他内容/reports/todo/`
+现在是空的 —— 没有待译清单是正常状态，不是路径找错了。
 
 **运行前提**：`node` 能从 `C:/Users/Taka/Desktop/fvtt` 解析到 `classic-level`；Python 3.14。
 PowerShell 写批次文件会带 BOM，`apply_translations.py` 已按 `utf-8-sig` 读取。
@@ -568,12 +675,15 @@ PowerShell 写批次文件会带 BOM，`apply_translations.py` 已按 `utf-8-sig
 ### 外部参考实现
 
 **Padhiver/Crucible-FR** — https://github.com/Padhiver/Crucible-FR
-法语社区汉化，已对齐 crucible 0.10.1，值得抄的地方：
+法语社区汉化。⚠ **「已对齐 crucible 0.10.1」无仓库内证据**：他们 `module.json` 的
+`relationships.requires` 里 crucible 写的是 `minimum: 0.7.7`，`version` 是 CI 占位符。
+要坐实得逐包 diff 他们的 `compendium/en` 与 0.10.1 的抽取结果。
+（本机 `systems/crucible/system.json` 确为 0.10.1。）值得抄的地方：
 
 - `Hooks.once("babele.init")` + `game.modules.get("babele")?.active` 守卫
 - `module.json` 里 babele 依赖直接写 `minimum: 2.9.1`，`compatibility.maximum: 14.999`
 - 仓库里同时有 `compendium/en` 和 `compendium/fr`（英文基准进 git —— 与本项目做法一致）
-- **`crucible._packs-folders.json`**（翻合集文件夹名，本项目缺）
+- ~~**`crucible._packs-folders.json`**（翻合集文件夹名，本项目缺）~~ ✅ **本项目已补齐**（`2-Crucible汉化插件/compendium/cn/crucible._packs-folders.json`，5 条 entries 已译）
 - 转换器拆成独立 ES 模块 `scripts/converters-crucible.js` / `converters-ember-core.js`
 - 他们的 `compendium/en` 可用来**交叉校验本项目抽取器有没有漏字段**
 - 他们也做了 Ember 转换器（`emberPages`/`emberTables`/`emberSceneLevels`/`emberTableResults` 等），
@@ -588,7 +698,9 @@ PowerShell 写批次文件会带 BOM，`apply_translations.py` 已按 `utf-8-sig
 不会出现「转换器读 A 键、抽取器写 B 键」的漂移。另外作者在 `converters-ember-core.js` 文件头自注
 「本轮没在游戏里重测过」，所以他们的实现不宜盲信。
 
-GitHub 上除本项目外**没有任何其他语言的 Ember 翻译**。
+GitHub 上除本项目外**没有任何其他语言的 Ember 翻译**（**全网否定断言，本地数据证伪不了；
+截至 2026-08-15 未见反例**。可核的旁证只有一条：Crucible-FR 的 `compendium/fr/` 里 16 个文件
+全是 `crucible.*`、没有任何 `ember.*`，即上一条「他们没公开发布 Ember 译文」是实证成立的）。
 
 ---
 
@@ -672,18 +784,30 @@ python "$P\3-常用脚本\qa\scan_en_drift.py" --repo <repo> --baseline "5-其�
 - **R1 术语一致性** —— 对照 `glossary_ec.json` 强制校验，命中即替换/告警
 - **R2 上下文一致性** —— 同一地点/人物/任务在不同页面的措辞对齐；
   `@UUID` / `@Check` / `<section class>` / `<span class="reference">` 标记完整性
-- **R3 机械扫描** —— 残留英文、markup 漂移、长度异常（中译文长度通常为英文 0.4–0.7 倍，超出范围要看）
+- **R3 机械扫描** —— 残留英文、markup 漂移、长度异常。⚠ **长度比用 0.31 这条口径，不是 0.4–0.7**：
+  本库译文/英文纯文本长度比**中位数实测 0.31**（>0.44 疑增、<0.20 疑漏），代码里也是 0.31
+  （`scan_en_drift.py:126-129`、`scan_markup_drift.py:118/124`；`TRUNCATED` 的实际阈值是
+  `plain_cn < 0.22 * plain_en`，见 `scan_markup_drift.py:120`）。按 0.4–0.7 当正常区间，
+  全库绝大多数正常译文都会被误判成长度异常。（`scan_markup_drift.py` 自己 docstring 第 12 行
+  也还留着 0.4–0.7 这句旧话，一并当过期内容看。）
 
 ### 5.4 全库验证（发版前必跑，也是新会话做全局核查的入口）
 
-一次跑完，**每一项都应为 0**。`<repo>` 取 `1-Ember汉化插件` / `2-Crucible汉化插件`，
+一次跑完。`<repo>` 取 `1-Ember汉化插件` / `2-Crucible汉化插件`，
 `<pkg>` 取对应的 Foundry 包目录（`…\Data\systems\crucible` / `…\Data\modules\ember`）。
+
+> ⚠ **不是「每一项都应为 0」，是「每一项都应为 0，或落进已归档的 125 条永久豁免」。**
+> 说成全 0 会让下一轮走 §8 2026-08-13f 那条教训的反面：要么把合法分叉当缺陷改掉，
+> 要么反过来把真缺陷当豁免放过。**已知非零基线（2026-08-15 实测）见第 1 节
+> 「第十五轮收尾时的收口状态」那张表** —— 跑完拿它对账，只有超出那张表的才是新东西。
+> 豁免全表在 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`。
 
 ```powershell
 $P = "C:\Users\Taka\Desktop\fvtt\Ember-Crucible Translation Project"
 $Q = "$P\3-常用脚本\qa"
 
-# 1. lang —— 必须四项全 0，尤其 UNREACHABLE（有中文但 Foundry 查不到＝键形态错）
+# 1. lang —— 必须五档全 0（NEW / DRIFT / UNTRANSLATED / STALE / UNREACHABLE），
+#    尤其 UNREACHABLE（有中文但 Foundry 查不到＝键形态错）
 python "$Q\lang_gap.py"      --repo <repo> --package <pkg> --out <reportDir>
 #    另跑一遍拍平自检：拍平前 == 拍平后 == 英文键数，三者相等才算过
 python "$Q\flatten_lang.py"  --repo <repo> --english <pkg>\lang\en.json
@@ -709,7 +833,7 @@ python "$P\3-常用脚本\tm\fill_missing.py" --repo <repo> --out-dir <批次目
 python "$Q\scan_uuid_swap.py"      --repo <repo> --out <reportDir>\uuid_swap.json
 
 # 8. 跨通道：lang / compendium / ember-hardcoded-cn.mjs 三方对表
-#    A/C 段已于 2026-08-13 重写（叶级对照替代 n-gram 窗口），三档：硬判据 /
+#    A/C 段已于 2026-08-12 重写（叶级对照替代 n-gram 窗口），三档：硬判据 /
 #    LANG_WEAK_SIGNAL / LANG_NO_SUPPORT。后两档是「要人看」不是「有错」
 python "$Q\scan_cross_channel.py"  --repo <repo> --package <pkg> \
        --mjs "$P\1-Ember汉化插件\scripts\ember-hardcoded-cn.mjs" --out <reportDir>\cross.json
@@ -720,7 +844,10 @@ python "$Q\scan_attr_text.py"      --repo <repo> --out <reportDir>\attr_text.jso
 # 10. 表结果名 / 场景针脚名 ↔ 目标文档名（绑定在 LevelDB packs 里，先导出）
 node   "$Q\dump_bindings.mjs"      --package <pkg> --out <reportDir>\bindings.json
 python "$Q\scan_name_binding.py"   --repo <repo> --bindings <reportDir>\bindings.json \
-       --out <reportDir>\name_binding.json     # 只看 BROKEN，UNCERTAIN 是没有中文名的目标
+       --out <reportDir>\name_binding.json     # 只看 BROKEN
+#    ⚠ --bindings 必须带：不带会退回代理判据、UNCERTAIN 数虚高四倍（824 vs 真值 199）
+#    ⚠ 「UNCERTAIN 都是没有中文名的目标」这个说法已被 §8 2026-08-13k 证伪（实为 2/199），
+#       其余各有成因但全部良性、已归类归档
 
 # 11. 上游已删的专名，旧译名还留在中文里（改名类 drift 的残留）
 python "$Q\scan_renamed_terms.py"  --repo <repo> --old "5-其他内容\english-baseline\<旧版本>" \
@@ -728,44 +855,55 @@ python "$Q\scan_renamed_terms.py"  --repo <repo> --old "5-其他内容\english-b
 
 # 12. @UUID 标签 ≠ 目标文档的中文 name（**2026-08-13b 实测最高产的机械核查**）
 #     英文侧本来就不同名的已被判据排除；报出来的要逐组判方向，name 也可能是错的那一边
+#     ⚠ --ids 是必填输入，本节此前没有任何一步产它。生成器不在 qa/ 下：
+node   "$P\4-临时脚本\2026-08-12-fix\dump_ids.mjs" --package <pkg> --out <reportDir>\all_ids.json
+#     （或直接用现成的 5-其他内容\reports\all_ids.json —— 那是旧快照，改过条目名后要重导）
 python "$Q\scan_label_vs_name.py" --repo <repo> --ids <reportDir>\all_ids.json \
        --out <reportDir>\label_vs_name.json
 
 # 13. 地名志 <dt> 条目：NPC 名整个没译（叶子里有大量中文，覆盖率算它已译，所有闸门全盲）
 python "$P\4-临时脚本\2026-08-12-audit3\fix_gazetteer_dt.py"   # 判据即扫描器，产批次
 
-# 13b. 同一个英文 name 有两套中文名（只报分裂，方向要逐条判）
-python "$Q\scan_name_splits.py"   --repo <repo> --out <reportDir>
-ame_splits.json
+# 14. 同一个英文 name 有两套中文名（只报分裂，方向要逐条判）
+python "$Q\scan_name_splits.py"   --repo <repo> --out <reportDir>\name_splits.json
 
-# 14a. tokenName 与 name 的中文不一致（玩家在地图上看到的名字与角色卡对不上）
-python "$Q\scan_token_name.py"    --repo <repo> --out <reportDir>	oken_name.json
+# 15. tokenName 与 name 的中文不一致（玩家在地图上看到的名字与角色卡对不上）
+python "$Q\scan_token_name.py"    --repo <repo> --out <reportDir>\token_name.json
 
-# 14. 中文正文里的裸英文专名（有译名却没用上）
-python "$Q\scan_bare_english_names.py" --repo <repo> --min-words 2 --out <reportDir>are_en.json
+# 16. 中文正文里的裸英文专名（有译名却没用上）
+python "$Q\scan_bare_english_names.py" --repo <repo> --min-words 2 --out <reportDir>\bare_en.json
+#     ⚠ --min-words 2 结构性看不见单词级专名；降到 1 另有 70 处待白名单（见第 1 节 Z2）
 
-# 14b. crucible 系统状态名：compendium 的中文须与 lang 的状态译名逐字相同（2026-08-13f 新增）
-#      玩家在 token 状态条上看到的是 lang，在效果名/表结果行上看到的是 compendium，两者必须同字
+# 17. crucible 系统状态名：compendium 的中文须与 lang 的状态译名逐字相同（2026-08-13f 新增）
+#     玩家在 token 状态条上看到的是 lang，在效果名/表结果行上看到的是 compendium，两者必须同字
 python "$P\4-临时脚本\2026-08-13-round8\probes\scan_status_name.py" --repo <repo> \
        --lang-en <pkg>\lang\en.json --lang-cn 2-Crucible汉化插件\lang\cn.json
 
-# 16. ⚑ 决议断言 —— 把第 8 节的裁决当**闸**跑，而不是当散文读
+# 18. 全库同一条英文串有 N 种中文（第九轮查出的最大系统性缺陷，**此前漏在本清单外**）
+#     现值 15 组 / 140 叶，全部已归档为永久豁免；超出那 15 组的才是新东西
+python "$Q\scan_same_en_split.py" --repo <repo> [--repo <另一个>] --out <reportDir>\same_en_split.json
+
+# 19. ⚑ 决议断言 —— 把第 8 节的裁决当**闸**跑，而不是当散文读
 #     十四轮里已经出过好几次「悄悄推翻既定裁决」的险，全靠人当场想起来才没出事。
 #     这一条把一致性从「靠记忆维持」变成「靠闸维持」。**失败时不要只改断言让它变绿。**
-python "$Qssert_resolutions.py"            # 全量；加 --verbose 看每条
-python "$Qssert_resolutions.py" --selftest # 判据自身的正反例回测
+python "$Q\assert_resolutions.py"            # 全量；加 --verbose 看每条
+python "$Q\assert_resolutions.py" --selftest # 判据自身的正反例回测
 
-# 15. 孪生包对齐 —— 英文逐字相同、中文却不同（**最后一步跑**，主线一改就会重新分叉）
+# 20. 孪生包对齐 —— 英文逐字相同、中文却不同（**必须是最后一步**，主线一改就会重新分叉）
 python "$Q\sync_twin_packs.py" --repo 1-Ember汉化插件 --out-dir <批次目录>
 ```
 
-> ⚠ **第 12–14 项有先后顺序**：先把 crucible 侧（主线）改完并落盘，**最后**才跑第 14 项，
-> 否则主线每落一批就会制造新的孪生分叉。本轮实测：第五轮开始前分叉 286 条，
-> 主线改完之后变成 502 条。
+> ⚠ **顺序**：先把 crucible 侧（主线）全部改完并落盘，**最后**才跑第 20 项 `sync_twin_packs`，
+> 否则主线每落一批就会制造新的孪生分叉。第五轮实测：开始前分叉 286 条，主线改完变成 502 条。
+> （旧文写「最后才跑第 14 项」是编号乱序留下的错 —— 第 14 项是 `name_splits`，与孪生分叉无关；
+> 编号已于 2026-08-15 理顺成单调的 1–20。）
 
-> ⚠ **第 5 项 `prune_dead` 现在会报出 ember 的 8 条 `_legacyActions`，那是有意寄存的内容，别删。**
-> `_` 前缀是项目既有约定（`validate_translations.py:97` 明确跳过）。
-> 清理类操作前先 `--show 200` 逐条核对判据 —— 教训见第 8 节 2026-08-12 的 textCollection 那条。
+> ⚠ ~~**第 5 项 `prune_dead` 会报出 ember 的 8 条 `_legacyActions`，那是有意寄存的内容，别删。**~~
+> **这条已被 §8 2026-08-13k 证伪并执行**：那 8 条的英文条目已被上游删掉、`_legacyActions` 不在任何
+> mapping 里、同内容早已在三处按 id 建键译好 —— 已删，`prune_dead` 现两仓均为 **0**。
+> 仍然有效的两句是：`_` 前缀是既有的**格式**约定（`validate_translations.py:97` 明确跳过，
+> 但**跳过不等于内容有效**）；清理类操作前先 `--show 200` 逐条核对判据
+> —— 教训见第 8 节 2026-08-12 的 textCollection 那条。
 
 > ⚠ **第 6 项是 2026-08-12 才补上的盲区。** 第 1–5 项全都以「中文里的某条」为起点，
 > 中文里压根没有的条目不在它们的定义域内 —— 所以库里一度报「覆盖率 99%」，
@@ -780,24 +918,39 @@ python "$Q\sync_twin_packs.py" --repo 1-Ember汉化插件 --out-dir <批次目�
 **两个仓库都有 tag 触发的 `.github/workflows/release.yml`，正常情况不需要手工打包。**
 
 1. 先跑 5.4 全套 + 冒烟验证
-2. 改 `module.json` 的 `version` 与 `download`
-   —— **tag 形态不同**：crucible 不带 `v`（`0.9.2`），ember 带 `v`（`v1.1.2`），
+2. 改 `module.json` 的 `version`、`download` **与 `changelog`** —— **三个都要改**。
+   `changelog` 必须指向本 tag（`https://github.com/<repo>/releases/tag/<tag>`）；
+   ⚠ **只有 crucible 的 workflow 有这道校验闸**，ember 的 workflow 没有，
+   所以 **ember 侧 `changelog` 写错不会被构建拦下、会静默漂**（现两仓都有该字段）。
+   —— **tag 形态不同**：crucible 不带 `v`（`<x.y.z>`），ember 带 `v`（`v<x.y.z>`），
    两边 `module.json` 的 `download` 就是这么写的，workflow 会逐字校验，写错直接失败
 3. 更新 `.github/release-body-template.md`（Actions 拿它当 release 正文）
 4. 推 main → 打 tag → push tag，Actions 自动打包建 release
-5. 发完**下载回包核对**：manifest/zip HTTP 200；`unzip -l` 确认没有 `compendium/en/`
-   与嵌套的上一版副本（1.1.0 就因为 `zip -r` 是**追加**而不是重建，把 22 MB 陈旧副本发了出去）
-6. 在第 6 节年表补一行
+5. 发完**下载回包核对**：manifest/zip HTTP 200；确认没有 `compendium/en/`
+   与嵌套的上一版副本（1.1.0 就因为 `zip -r` 是**追加**而不是重建，把 22 MB 陈旧副本发了出去）。
+   ⚠ **必须用 `unzip -Z1`（只列成员名），不能用 `unzip -l`** —— 后者第一行是 `Archive:  module.zip`，
+   会被 `\.zip$` 这一条**匹配到自己的表头**、断言恒失败（0.9.8 第一次构建就是这么挂的）：
+   ```bash
+   unzip -Z1 module.zip | grep -E "^compendium/en/|^lang/en\.json|^scripts/|\.py$|\.zip$"
+   ```
+6. **在第 6 节年表补一行** —— ⚠ 这一步历史上连续 11 次没执行（0.9.5–0.9.8 / v1.1.5–v1.1.15
+   一度全部缺记），2026-08-15 已回填。**发完就补，别攒。**
 
-Actions 不可用时的兜底手工流程：`zip -r` 前先 `rm -f module.zip`，排除
-`.git/* .github/* release/* compendium/en/* lang/lang_keep_english.json *.zip *.bak`，
+Actions 不可用时的兜底手工流程：`zip -r` 前先 `rm -f module.zip`，
+**排除清单直接照抄本仓 `release.yml` 里的 `-x` 串**（别照抄文档里的旧清单：两仓的实际清单
+都比早期版本长，至少还多排 `.gitignore` / **`lang/en.json`** / `untranslated-*-report.json` /
+`__pycache__` 等，漏排会把约 110 KB 的 `lang/en.json` 和维护脚本打进发布包），
 然后 `gh release create <tag> module.json module.zip --notes-file .github/release-body-template.md`。
+
+> ⚠ **两仓的 `scripts/` 含义相反，`-x` 清单绝不能互抄**：ember 的 `module.json` esmodules 含
+> `scripts/ember-hardcoded-cn.mjs`（**必须进包**），crucible 的 `scripts/` 才全是维护脚本。
+> 第十四轮就因为把 crucible 的 `^scripts/` 抄进 ember 差点让下一次 ember 发版直接失败。
 
 ---
 
 ## 6. 阶段年表
 
-> **完整记录已归档到 `5-其他内容/STAGE-LOG.md`**（1509 行，阶段 0–27 的原始测量、
+> **完整记录已归档到 `5-其他内容/STAGE-LOG.md`**（阶段 0–27 的原始测量、
 > 走过的弯路、被推翻的判断）。这里只留一句话年表，用来定位「哪一步发生在什么时候」。
 > 仍然生效的硬约束看第 3 节，仍然生效的裁决看第 8 节 —— 不要回头去日志里翻结论，
 > 那里的数字是当时的状态。
@@ -820,7 +973,7 @@ Actions 不可用时的兜底手工流程：`zip -r` 前先 `rm -f module.zip`�
 | 28 | 08-12 | **多 agent 全面审计**（13 路并行 + 逐条对抗验证 + 盲区批判，27 agent）：201 条原始 findings → **143 条确认**（8 阻断 / 62 严重）。查出的不只是译文错误，还有**检查器自己的四个盲区**（见 3.6）与**覆盖盲区**（35 本 journal 从未逐句复核，占 journal 正文 51%） |
 | 29 | 08-12 | **多 agent 修复**（16 路修复 + 16 路独立复核，32 agent）：8 条阻断全修；工具盲区补齐并新增两个检测器；59 个批次经三方合并（350 条路径冲突、19 条人工裁决）落盘 **2516 叶 + lang 163 键**；复验 5.4 全套 + 新增两项全 0 |
 | — | 08-12 | 发 `crucible-cn 0.9.3` / `ember_cn_unofficial v1.1.3`。**冒烟验证仍未做**（项目所有者明示先发） |
-| — | 08-13 | **发 `crucible-cn 0.9.4` / `ember_cn_unofficial v1.1.4`**。发版前 5.4 全套 + `flatten_lang` 三数相等（486/1842）全部通过；下载回包核对无混入、抽查正确。**⚠ 冒烟验证仍未做**，且本轮首次改动 Scene 层 mapping。踩到一个坑：crucible 的 `module.json` 除 `version`/`download` 外**还有 `changelog` 字段要指向本 tag**，漏改导致第一次构建 8 秒即失败（ember 没有该字段），删 tag 补提交后重发成功 |
+| — | 08-13 | **发 `crucible-cn 0.9.4` / `ember_cn_unofficial v1.1.4`**。发版前 5.4 全套 + `flatten_lang` 三数相等（486/1842）全部通过；下载回包核对无混入、抽查正确。**⚠ 冒烟验证仍未做**，且本轮首次改动 Scene 层 mapping。踩到一个坑：crucible 的 `module.json` 除 `version`/`download` 外**还有 `changelog` 字段要指向本 tag**，漏改导致第一次构建 8 秒即失败，删 tag 补提交后重发成功。⚠ **括号里原写「ember 没有该字段」已过期**：ember 的 `module.json` 现在也有 `changelog`；真正的不对称是 **ember 的 `release.yml` 没有这道校验步骤**（crucible 有 4 个 Verify/Build 步骤 + Foundry registry 发布，ember 只有 3 个），所以 ember 侧改错 changelog 不会被拦、会静默漂 |
 | 36 | 08-13 | **第九轮：全库同源串统稿**（13 agent）：主目标是第八轮顺带发现的最大系统性缺陷 —— **同一条英文串有 N 种中文**（1514 组 / 8308 叶），三重盲区（`sync_twin_packs` 只比同路径 · `propagate_fix` 只推增量 · `scan_name_splits` 只比 name 字段）导致它从没被查过。11 路分片统稿 **1068 组统一 / 483 组判为合法分叉 / 4652 叶落盘**，报出 **225 条实质缺陷**（定译译错 201 叶 / 语义误译 301 叶 / 裸英文 83 叶 / 标记丢失 63 叶）。结果：1514→**470 组**，8308→**2561 叶**，术语分歧 25→**0**，>300 字符长正文分叉 357 组→**0**。另两路：修上游笔误 + 给三个判据收口（`bare_english` 37→0、`attr_text` 113→0、`uuid_swap` 68→6），三个都做了双向灵敏度回测 |
 | 35 | 08-13 | **第八轮：多维度新判据探矿**（12 探针 + 13 对抗式复核，25 agent）：不跑现有检查，改为**每路发明一个至今没有判据的错误类别**并做双向回测。121 confirmed → 复核后**存活 136 / 推翻 63**。43 批次经三方合并（681 路径 / 24 条多组认领 / 2 条人工裁决）落 **683 叶**。最大产出是盲区表第 9 项的又一次命中：**dnd5e 侧约 85 万字符从未进过管线**（物品 description + NPC 传记 `.value`），两条阻断都需项目所有者决策。主控另自查出 `Confused` / `Charged Bite` / 标签空格三类共 14 叶，并新增判据 `scan_status_name.py`。**`scan_uuid_swap` 的 UNCERTAIN 档实测 97% 假阳性，判定为已到极限** |
 | 34 | 08-13 | **裸英文专名 + tokenName**（5+5 agent）：① `scan_bare_english_names` 报的 160 处逐个判「真缺陷 / Patch 页通则 / 假阳性」，修到 **63 处**（典型：`Del Kalais` 那处**下一句中文就写「德尔随和却技艺高超」**）；② 新写 `qa/scan_token_name.py`，查出 **32 条 tokenName 与 name 不一致**（`Thayloc Courser` 的 token 名是「非玩家角色」这种占位符）；③ `Patch 0.4.7` 整页补全 16 处 —— 主控先按四单元多数剔了 B3，拿到完整复核数据后**改判**（见第 8 节 2026-08-13e） |
@@ -829,15 +982,40 @@ Actions 不可用时的兜底手工流程：`zip -r` 前先 `rm -f module.zip`�
 | 31 | 08-13 | **35 本 journal 逐句复核**（27 单元 + 27 对抗式复核，54 agent）：实读 **458 万英文字符**，**507 条确认缺陷**（2 阻断 / 78 严重），复核另补 188 条、驳回 4 条（其中 2 条是**部分**驳回 —— 同叶别的改动是对的，只回退一处）。553 叶经三方合并（12 条冲突、11 条人工裁决）落盘，另 **581 条推送到孪生包**。同批：U1 的 @UUID 标签 43 处 + 复核补漏 12 处、`Critical Success/Failure` 全库统一、lang 4 键对齐 `.mjs` |
 | 30 | 08-13 | **第三轮多维度查缺补漏**（15 单元并行 + 逐单元对抗式复核，30 agent）：走**旧英/新英 diff** 这条路复核 `stale` 桶 278 条，另做 226 条 `@UUID` 标签裁决、四个新判据、`.mjs` 177 条逐条审、crucible-fr 交叉校验。**161 条确认缺陷（3 阻断 / 44 严重）**，复核驳回 5 条。24 条路径冲突经三方合并（2 条人工裁决）落盘 **448 叶 + lang 4 键 + .mjs 补丁**。查出的最大新盲区是**抽取器根本没抽 `Scene.levels[].name`**（195 场景 517 处），由 E1 与 H2 两个单元各自独立撞到 |
 
-## 7. 现状与唯一未做项
+### 发版一览（2026-08-15 按 `git tag` + `module.json` 回填）
+
+> 上面的年表里 0.9.5–0.9.8 与 v1.1.5–v1.1.15 **曾连续 11 次漏记**（§5.5 第 6 步没人执行）。
+> 这张表是权威索引；每次发版**必须**在这里补一行，回包核对的细节写进第 8 节对应轮次。
+
+| tag | 日期 | 说明 |
+|---|---|---|
+| `0.9.0` / `1.1.0` | 08-10 | 首版发布 |
+| `0.9.1` / `1.1.1` · `0.9.2` / `1.1.2` · `0.9.3` / `v1.1.3` · `0.9.4` / `v1.1.4` | 08-12 ~ 08-13 | 见上表 |
+| `0.9.5` / `v1.1.5` | 08-13 | 第十一轮（锚点全线修复、122 术语族统一），详见 §8 |
+| `0.9.6` / `v1.1.6` → `v1.1.7` | 08-13 | 第十二轮；v1.1.7 是「施工中」样板句按英文分三组统一的补发（crucible 无改动故不跟版） |
+| `v1.1.8` · `v1.1.9` | 08-14 | 第十三轮的两条**阻断急修**（`[object Object]` · 重导入丢 items/effects） |
+| `0.9.7` / `v1.1.10` | 08-14 | 第十三轮严重档第一批 |
+| `0.9.8` / `v1.1.11` | 08-14 | 第十四轮 + B 段。⚠ 踩了两个 CI 坑（`unzip -l` 匹配到自己的表头 · `^scripts/` 两仓含义相反），见 §8 |
+| `v1.1.12` | 08-14 | 第十四轮 C 段（crucible 无改动故不跟版） |
+| `v1.1.13` → `v1.1.15` | 08-15 | 第十五轮①②③ 与 D 段（crucible 无改动故不跟版） |
+
+---
+
+## 7. 现状与未做项
 
 **排期表已并入第 6 节年表**（原表 48 行全部 ✅，只是历史）。当前状态见第 1 节。
 
+⚠ **本节标题原为「唯一未做项」，不成立** —— 除冒烟验证外还有已裁决的与仍开着的项，一并列在下表。
+
 | # | 事项 | 状态 |
 |---|---|---|
-| 9 | **真实 Foundry 世界冒烟验证** | ⬜ **最高优先级**。脚本证不了，必须开世界看。清单见本节末，**阶段 29 又加了三项，而 0.9.3 / v1.1.3 已经在没做它的情况下发出去了** |
+| 9 | **真实 Foundry 世界冒烟验证** | ⬜ **最高优先级**。脚本证不了，必须开世界看。清单见本节末。⚠ **自 `0.9.3` / `v1.1.3` 起共 11 次发版全都是在没做它的情况下发出去的**（crucible 0.9.3→0.9.8、ember v1.1.3→v1.1.15），已积压六轮 |
+| 14 | **dnd5e 侧两条管线阻断**（约 85 万字符） | ⬜ **已裁「先不管」**（项目所有者 2026-08-14，`4-临时脚本/2026-08-14-round14/RESOLUTIONS.md`）。不是待办，但也不是已完成 —— 内容缺口客观存在，记在这里免得下一轮以为库是满的 |
+| 15 | **`.mjs` 新增的约 320 条中文从没被审过** | 🔶 见第 1 节「下一轮从哪开始」Z1；`scan_cross_channel` B 段现报 33 条 |
+| 16 | **词表 base 层的写回从未执行** | 🔴 见第 1 节 Z5（`base_fixes` 0/188、`addToGlossary` 0/174、pending 181 / disputes 200 未清） |
+| 17 | ~~`Region Map`/`Area Map` 全库拆分~~ · ~~`[[/language moiré]]` 4 处~~ | ✅ 两项均已于第十四轮 C 段完成，别再当「本轮不做」抄下去 |
 | 10 | **35 本 journal 从未逐句复核** | ✅ **2026-08-13 做完**。27 个并行单元逐句读完 458 万英文字符，**507 条确认缺陷**（2 阻断 / 78 严重），另由对抗式复核补出 188 条。详见第 1 节。**注意**：这不等于这 35 本从此干净 —— 复核 agent 的补漏率说明单次通读的召回率约 73%，真要再压一轮，成本最低的做法是**机械核查**（@UUID 标签 ↔ 目标 name 全量对照）而不是再读一遍 |
-| 11 | `scan_cross_channel.py` 的 A/C 段词对齐是坏的 | ✅ **2026-08-13 重写**。见第 1 节盲区表第 4 项 |
+| 11 | `scan_cross_channel.py` 的 A/C 段词对齐是坏的 | ✅ **2026-08-12 重写**（脚本自述与产物目录 `2026-08-12-audit3` 都是 08-12；文档此前写 08-13）。见第 1 节盲区表第 4 项 |
 | 12 | `@UUID` 标签命名不一致 226 处 | ✅ **2026-08-13 逐条裁完**。见第 1 节盲区表第 3 项（含 `en_label` 不可信这个方法坑） |
 | **13** | **Scene 的三个字段完全没被抽取** | ✅ **2026-08-13b 补齐管线**（项目所有者定：优先完整汉化）。三个字段是同一个改造点，一起做的：`levels[].name`（195 场景 / 517 处 / **255 个唯一层名**，玩家在层级选择器里看到的永远是英文）· `tokens[].name`（**已摆在场景上**的 token 的覆盖名，18 处；不能假设「actor 名翻了 token 就跟着变」——实测 3 个 token 名里 2 个与 actor 名不是同一个字符串）· `navName`（画布顶部导航条，2 处）。根因：`Scene` mapping 照抄 babele 2.9.1 默认，而默认里只有 `name/drawings/notes/regions`。**做法**见第 8 节 2026-08-13b 那条：用内建 `nameCollection` 而不是 FR 那样的自定义转换器 |
 | 8f | `Arcturel Tradeway` 28 页 | ✅ 2026-08-12 已逐页通读（阶段 28），并修掉了「英文尾巴写着上游已删除的旧名 Arcturel Upper/Lower」那批 |
@@ -854,13 +1032,14 @@ Redwalk Ramble / Oldcraft Lodge / Ushna Dredging Docks / Pit Trap / Chapter 3 Ev
 > 阶段 29 已按「汉字数/英文字符数」比值（本库中位数 0.31，>0.44 疑增、<0.20 疑漏）在这 35 本里筛过一遍并修了命中的，
 > **但比值只是候选筛**：已知的两条阻断里有一条比值就在正常区间内（0.377）。逐句对读没有替代品。
 
-> ⚠️ **不要拿 `validate_translations.py` 的百分比当真实缺口。**
-> crucible 显示 97%、ember 显示 99%，但那 436 条待译**全部**由 babele 通用回退
-> 从已译包按名字自动取译文。动手前先跑：
+> ⚠️ **两仓现在都是 100% / todo 0**（2026-08-15 实跑 `validate_translations.py`：
+> crucible 4726/4726、ember 35739/35739）。下面这段留作**方法教训**，别再引它的数字：
+> 历史上百分比曾把「由 babele 通用回退自动取到译文」的条目算成缺口（crucible 显示 97%、
+> ember 显示 99%、共 436 条），照着翻只会制造同名异译。碰到百分比不满时先跑：
 > ```powershell
 > python "$P\3-常用脚本\qa\resolve_generic_fallback.py" --repo <repo> --also <另一个 repo>
 > ```
-> 重复翻译只会制造同名异译。**两个包的真实残余都是 0。**
+> 把 babele 会自动解析的那部分扣掉，再看真实缺口。
 
 ### 待清扫的既有缺陷（2026-08-12 全部清完，A–O 共 15 项）
 
@@ -920,11 +1099,14 @@ game.babele.cacheDiagnostics()
   这一条验的是放行原生 DialogV2（15 个确认框的根元素 class 只有 `dialog`、类名就是 `DialogV2`，
   原先被 ember 闸整个挡掉）。**顺带确认别的模块的窗口标题没有被误改**——闸已收窄到 DialogV2 一档，
   但 `EXACT` 里确实有 `Path` / `Culture` / `Events` 这类通用词。
-- **世界时钟**：日期串应是「第 43 天 - 12:00」。若**推进时间后变回英文**，
-  说明需要落 `H1_patch.md` 的 **P-9**（`EmberCalendarNavigation.animate()` 直接重写 `innerText`
-  且不重渲染，只挂 render 钩子的话第一次时间推进就被刷掉）。P-9 因为要猴补丁第三方原型、
-  且作者自己标注「需冒烟验证」，本轮**没有落**，补丁原文在
-  `4-临时脚本/2026-08-12-audit3/`（会话产物 `findings/H1_patch.md`）。
+- **世界时钟**：日期串应是「第 43 天 - 12:00」，且**推进时间后仍是中文**。
+  ⚠ **这一条的排查方向已变，别再去找 P-9**：根因（`EmberCalendarNavigation.animate()` 直接重写
+  `innerText` 且不重渲染，只挂 render 钩子的话第一次推进就被刷掉）现在是用
+  `patchCalendarFormatters()`（`ember-hardcoded-cn.mjs:1770`）绕开的 —— 它包住
+  `CONFIG.time.formatters.emberDay`，让 `Day 43` 这个英文串**根本不产生**，时钟条与法典日志的
+  日期表头两处一起解决。若仍变回英文，查这个函数有没有生效，**不是**去落 P-9。
+  ⚠ **P-9 的补丁原文已随会话丢失**（全盘 `find` 零命中 `H1_patch.md`，
+  `4-临时脚本/2026-08-12-audit3/` 下也没有 `findings/` 子目录），真要落必须重写。
 - **场景层级选择器**（2026-08-13b 补了管线，这条现在是**验新功能**而不是验现状）：
   随便开一张有多层的 Vista（例 `Vista: Ordain Interiors`），确认：
   ① 层级选择器里的层名是**中文**；② 切换层级正常、地图内容没错位
@@ -941,8 +1123,10 @@ game.babele.cacheDiagnostics()
   `#prison-doors` 13 处），确认**跳到对应小节而不是页首**。若不跳，说明 Foundry 的 TOC 构建
   不认显式 `id`，那 112 叶的 `id` 要撤掉、改走别的路。
 - **`Round`/`Turn` 改动后的规则读起来对不对**：本轮把若干处互换的「轮 / 回合」改正
-  （`Round`＝轮、`Turn`＝回合）。挑一条改过的怪物能力（例 `Helkas Drake Moments` 6-6
-  「持续接下来的六个回合」）与英文对读一遍。
+  （`Round`＝轮、`Turn`＝回合）。挑一条**已改对**的怪物能力与英文对读确认方向即可 ——
+  例 `Helkas Drake Moments` 6-6 现文是「持续接下来的**六轮**战斗」，英文
+  `which lasts for the following six rounds of combat`。
+  ⚠ 旧文引的「持续接下来的六个回合」是**修改前**的字，库里已经没有了，别去搜、更别改回去。
 
 阶段 24–27 之后再补三个（都是这几轮大改动的直接产物）：
 
@@ -955,6 +1139,18 @@ game.babele.cacheDiagnostics()
 - **孪生包不会被白 fetch**：`compendium/cn/ember.adventure.json` 有约 **9 MB**。
   在 **Crucible** 世界里开控制台看 Network，确认 babele 没有去拉它
   （dnd5e 版的包在 Crucible 世界里根本不存在，拉了就是纯浪费流量）。
+
+第十四轮 B 段之后必须补的两个（**2026-08-15 补入**；这两条都是运行时机制改动，
+§8 记的三个回测都是**离线**的 —— 离线回测证不了它们在 Foundry 里真挂上了）：
+
+- **Region 行为配置表单是中文**：打开一个 Region 的 behavior 配置，确认
+  `ember.trapTrigger` / `areaEffect` / `footstepSurface` 三个子类型的字段 `label`/`hint`/`choices`
+  都是中文。这一条验的是第十四轮 B 段新增的 `patchRegionBehaviorSchemas()`
+  （`ember-hardcoded-cn.mjs:1615`，在 `applyOnce` 注册表里）。
+- **天气档位名与日历条上的天气串是中文**：切换天气看一遍。这一条验的是
+  `patchWeatherLabels()`（`:1693`）那次**空转修复** —— 它此前走错取值链（写 `slice.weather`，
+  真实链路是 `slices[x].config.weather[type]`），`n` 恒为 0 且**0 条时不告警**，所以一直没人发现。
+  ⚠ 风向里的 `(12 mph)` 是拼接串，仍是英文，属已知不做。
 
 ---
 
@@ -1049,8 +1245,8 @@ game.babele.cacheDiagnostics()
 | **2026-08-12b** | **`Arcturian` 维持「阿克图里安」**，1090 处「阿克图里亚」全部统一过去 | 08-12 上一轮记的比数（248:3）与实况不符，本轮重裁。全库英文闸下 阿克图里亚 1090 处/557 叶 : 阿克图里安 248 处/181 叶，**但 `name`/`tokenName` 字段是 40:16（14 个条目名 : 6 个）**，且 `Cultures/Arcturian` 页 name＝「阿克图里安 Arcturian」、同页 pronunciation 自写「阿克-图里-安（ark-TOOR-ian）」。依据阶梯 name > 同卷 > 全库多数，多数派在此让位。英文侧另有两种拼写 `Acturian(s)` 8 / `Arcturains` 2（上游漏字），闸要一并覆盖 |
 | **2026-08-12b** | **`Warden`（宗教/文化义）→ 新定「典守者」**，prison warden 保留典狱长 | 英文闸 52 叶里 35 处确为狱政语境。宗教义（`Wardens of Flame` 章标题、`the Flame Warden` 卢梅尊号 ×13、`Wardens, Priests, Sorcerers`）需另名，而 守护者=Guardian、守望者=Keeper（68 叶中 51 叶）、守林者=Warden(archetype) 三个都已被占用。「典守」＝保管掌管之职，对应 Warden 的 custodian 义，全库 0 次使用无碰撞 |
 | **2026-08-12b** | `Sockets`（上古死神）→ **萨克茨**（音译），改 390 处 | 原译「插孔」是把专名当普通名词机翻。同页 `pronunciation` 英文 `SAH-kets`、中文早已写「萨-克茨（SAH-kets）」——库里本来就知道它是专名。英文小写 `sockets`（眼窝）3 叶被闸排除 |
-| **2026-08-12b** | `Shard God`（通称）→ **碎片之神**；`Shard Goddess` 才作碎片女神 | 原译一律「碎片女神」，造成「碎片女神贾纳尔…**他**所斩杀」。英文侧 `Shard God(s)` 826 处 vs `Shard Goddess` 127 处，是两个词。308 叶只出现 God → 整叶替换；48 叶只出现 Goddess → 不动；13 叶混合 → 逐处按英文语序改。「碎片之神」是库内既有写法（13 处） |
-| **2026-08-12b** | `Steading`（历法季节名）→ **耕耘**，不是「庄园」 | 页内自述 `Season of Industry`、「人们以劳作与产出为乐」，与另五季 播种/绽放/拾取/凋零/寂止 同为二字名词。「庄园」在本库已被 `Grange`/`Manor` 占用。**三处必须同改**：compendium、`lang/cn.json` 的 `EMBER.CALENDAR.SEASONS.STEADING`、`scripts/ember-hardcoded-cn.mjs` 的 `CALENDAR_MONTHS`——世界时钟读的是最后那张表 |
+| **2026-08-12b** | `Shard God`（通称）→ **碎片之神**；`Shard Goddess` 才作碎片女神。⚠ **2026-08-15 复测：库内实为三种写法并存** —— 碎片之神 254 叶 / **碎片诸神 161 叶** / 碎片女神 26 叶（另有 100 叶英文命中而两词皆无，多是整段改写）。「碎片诸神」很可能是**复数 `Shard Gods` 的合法译法**，但第 8 节从没提过它，等于把一个 161 叶的形态留在判据之外。**下一轮要么补一条「复数作碎片诸神」的裁决并落成断言，要么明确把它列为统一对象** —— 现状既会被照多数派乱统一，也会被当新缺陷重报 | 原译一律「碎片女神」，造成「碎片女神贾纳尔…**他**所斩杀」。英文侧 `Shard God(s)` 826 处 vs `Shard Goddess` 127 处，是两个词。308 叶只出现 God → 整叶替换；48 叶只出现 Goddess → 不动；13 叶混合 → 逐处按英文语序改。「碎片之神」是库内既有写法（13 处） |
+| **2026-08-12b** | `Steading`（历法季节名）→ **耕耘**，不是「庄园」 | 页内自述 `Season of Industry`、「人们以劳作与产出为乐」，与另五季 播种/绽放/拾取/凋零/寂止 同为二字名词。「庄园」在本库已被 `Grange`/`Manor` 占用。⚠ **「三处必须同改」已过期，现在只有两处**：compendium + `lang/cn.json` 的 `EMBER.CALENDAR.SEASONS.STEADING`。第三处那张 `CALENDAR_MONTHS` 表**已随第十四轮删除**（`ember-hardcoded-cn.mjs` 里 grep `CALENDAR_MONTHS` 命中 0；第 834 行注释写明原先有 `CALENDAR_MONTHS`/`CALENDAR_DAYS`/`CALENDAR_DAY_ABBR` 三张表，第 840-868 行给出可复跑的判据证明**月名表零读者**），世界时钟读的是 `SEASONS` 那组 i18n 键。译名本身仍成立：英文闸 `\bSteading\b` 命中 14 叶，中文 14 叶全含「耕耘」、0 叶「庄园」 |
 | **2026-08-12b** | `Aura`（月亮专名）→ **奥拉**（音译）；手势 `Gesture: Aura` 保持「灵气」 | 同一份月亮清单里 Mayis 玛伊斯 / Cora 科拉 / Ragen 拉根 / Orbis 奥比斯 / Akon 阿肯 全是音译，只有 Aura 意译；且「灵气」正是 `Aura Spellcraft` 的 adjective，月亮与施法构件同名重演了 Inflection/Affix 撞名。按英文逐处分类：月亮标记改，手势与小写 `aura`（Fear Aura）不改 |
 | **2026-08-12b** | `Ordinate` → **审序院**（弃「法序议会」）；`The Hallows` 城区＝**圣堂区**、组织＝**幽圣所** | 都按 name 字段（最强证据层）：组织页 name＝审序院 Ordinate（全库 369:149，UUID 标签 31:1）；城区页 name＝圣堂区、组织页 name＝幽圣所，是两个实体各有其名 |
 | **2026-08-12b** | `River Destine` → **德斯廷**（音译，弃「天命河/命运河」） | 该河无独立条目、无 name 可仲裁。英文闸下 德斯廷 38 : 德斯汀 28 : 天命河 11 : 命运河 4，按「专名音译」惯例取多数音译式 |
@@ -1059,7 +1255,7 @@ game.babele.cacheDiagnostics()
 | **2026-08-12b** | `Arcturel Upper` / `Lower` 的双语英文尾巴按现行英文改为 `Tradeway` / `Dives` | 上游早已改名，`Arcturel Upper/Lower` 在今天的英文基准里一个字都不存在——译文却把这两个**已不存在的名字**写在双语并列的英文侧。这是 `port_orphans` 只搬路径不改内容的遗留（第 5.4 节的警告） |
 | **2026-08-12b** | `Critical Success/Failure`：`.mjs` 一律服从 crucible `lang` | 英文闸 大成功 74 : 重大成功 15。`.mjs` 文件自己的注释就写着「译名与 crucible lang 逐条对齐」，所以按 lang 改（大成功 / 严重失败）。**遗留**：lang 自身 `大成功` 与 `严重失败` 不对称，是否统一为 大成功/大失败 待定 |
 | **2026-08-12b** | **并行批次落盘前必须做三方合并**，不能靠调整落盘顺序 | 16 路 agent 同时基于同一 base 产出 59 个批次，而 `apply_translations.py` 是**整叶覆盖**。实测 350 条路径被 1 个以上批次认领——按任何顺序直接落，都会有一批修复被静默回滚。工具与做法见第 1 节 |
-| **2026-08-12b** | `_` 前缀键是**有意寄存**，`prune_dead` 不得删 | `validate_translations.py:97` 明确跳过 `_` 前缀，`migrate_cn_schema.mjs` 把抢救不了的内容 park 在 `_legacyActions` 等键下「留待后续人工抢救」。`prune_dead` 学会下钻数组后第一次报出这 8 条，它们不是死键 |
+| ~~**2026-08-12b**~~ | ~~`_` 前缀键是**有意寄存**，`prune_dead` 不得删~~ **→ 已被 2026-08-13k 证伪并推翻，那 8 条已删（`prune_dead` 现两仓均 0）。别按本行行事** | 当时的理由：`validate_translations.py:97` 明确跳过 `_` 前缀，`migrate_cn_schema.mjs` 把抢救不了的内容 park 在 `_legacyActions` 等键下「留待后续人工抢救」。⚠ 实查表明抢救早就完成了（英文条目已被上游删、`_legacyActions` 不在任何 mapping 里、同内容已在三处按 id 建键译好）。`validate_translations.py:97` 的跳过逻辑仍在，但**跳过是格式约定，不代表内容有效** |
 | **2026-08-12b** | `prune_dead` 删数组元素时**只做尾部截断** | 删掉数组中间的元素会让其后每个元素索引前移一位，等于把一批**正在生效**的译文整体挪到别人的键上——比留着死键坏得多 |
 | **2026-08-13e** | **`tokenName` 是独立的一档，必须单独设闸** | 玩家在地图上直接看到的是 `tokenName`，比角色卡上的 `name` 还显眼，而它**不在任何既有判据的配对范围里**（`scan_label_vs_name` 只比 `@UUID{标签}`↔`name`、`scan_name_binding` 只比表结果/针脚、其余闸只看单个叶子自身）。首测：英文侧 `name==tokenName` 的 481 个 actor 里 **32 个中文不一致**，其中 `Thayloc Courser` 的 tokenName 是「非玩家角色」（占位符没删）、`Sporix Host` 是「受折磨的荆棘幼体」（完全另一种生物）、`Raster Thorn` 是「栅格棘刺」（**name 已按 2026-08-13c 改成「拉斯特·索恩」，token 没跟上**）。判据必须取严格版：只在英文侧逐字节相同时才要求中文一致，否则会误伤作者有意的短称（`Kalasak the Cutter` 的 token 就叫 `Kalasak`） |
 | **2026-08-13e** | **「同页多数是英文」不能直接当作「该页有意保留英文」** | `Patch 0.4.7` 一页 13 中文 : 15 英文，四个单元据此判「整页 deferred」，只有 B3 主张补。**B3 对**：那 15 个英文里有真实人名（`Jess Levine`）与第三方产品名（`going rogue 2e` / `PLANET FIST`）——**本来就不该译**，把它们计进分母就把比例算反了。判「该不该译」要先按**类别**拆（本作内容名 / 外部专名 / 真实人物），再看同类的比例。补全后该页 13 个 `<em>` 里 10 个中文，剩下 3 个正是那三个产品名 |
@@ -1080,7 +1276,7 @@ game.babele.cacheDiagnostics()
 | **2026-08-13** | **`.mjs` 里三条阻断：31 个键此前根本不生效** | 逐条审 177 条时查出的**不是译文错，是机制不通**：① 事件状态浮窗写在 `data-tooltip-text` 上，而属性白名单只有 `data-tooltip`/`title`/`aria-label`（v14 的取值顺序是 tooltipHtml > tooltipText > tooltip）；② 15 个对话框标题 + 3 条 Attunement 正则走的是**原生 DialogV2**，被 `patchRenderedApplications` 的 ember 闸整个挡掉；③ `MOODS` 五个键全是凭空的，ember 只有 calm/tension 两档。**教训：审一张运行时替换表，先验「这个键还能不能被匹配上」，再谈译文对不对。** |
 | **2026-08-13** | 表结果名 / 针脚名的**绑定关系不在译文文件里** | `entryId`/`documentUuid` 只存在于 LevelDB packs，Babele 译文文件里根本没有。所以两个一次性探针只能拿「英文标签逐字节等于某文档英文名」当代理判据 —— 实测对本轮 16 条真缺陷**多报 10 条、漏报 3 条**。`scan_name_binding.py` 从 packs 导出真实绑定后才能用 |
 | **2026-08-13** | 属性白名单**先普查再定**，不要凭空拟 | 本库实际只出现 26 个属性名，当初凭印象拟的 `title` / `alt` / `aria-label` / `placeholder` / `data-label` **一个都没有**，而真正有可见文本的是 `@Embed[...]` 方括号体内的 `label=` 与 `readaloud=` —— 凭空拟名单会把这两个漏掉。ground truth 122 处、修前只译了 50 处（41%） |
-| **2026-08-13** | `Install Junction Wheel` → **安装路口轮盘**（原「安装道岔轮」） | 又一次裸词频翻车：原依据是「道岔＝库内 28 处」，加英文闸后 `\bJunction\b` 命中 11 行、**道岔 gated_hit=0**（那 22 处「道岔」译的是 `Switch(es)`，见条目名「雅科什塔矿井轨道道岔」）。目标物品的 `name` 字段两个包里都是「雅科什塔路口轮盘 Yakoshta Junction Wheel」 |
+| **2026-08-13** | `Install Junction Wheel` → **安装路口轮盘**（原「安装道岔轮」）。⚠ **这条已被静默推翻，且库内现在自相矛盾** —— 2026-08-15 实测两包 `items.Yakoshta Junction Wheel.name` 已是「雅科什塔**枢纽**轮盘」，正文 枢纽轮盘 14 处（含 3 处 `@UUID` 标签）: 路口轮盘 2 处（只剩 `Patch 0.5.1`），`glossary_ec` 也已 harvest 成「枢纽轮盘」。**第 8 节没有任何一行记录这次改名，也没有断言。下一轮必须择一收口**（补一条「改判＝枢纽轮盘」并清掉那 2 处，或按原裁决改回 14 处），**无论哪边都要补一条 `term_gated` 断言（`en: \bJunction Wheel\b`）锁住**，否则还会再翻一次 | 又一次裸词频翻车：原依据是「道岔＝库内 28 处」，加英文闸后 `\bJunction\b` 命中 11 行、**道岔 gated_hit=0**（那 22 处「道岔」译的是 `Switch(es)`，见条目名「雅科什塔矿井轨道道岔」）。当时目标物品的 `name` 字段两个包里都是「雅科什塔路口轮盘」 |
 | **2026-08-13** | 表结果行的中文**要与目标文档的中文 name 逐字相同** | 英文侧行名与文档名本来就逐字相同（`Spear` == `Spear`），中文侧不同名就是不一致。10 条已对齐（含 `长矛`→`矛 Spear`，条目 name 即「矛 Spear」）。双语并列的英文尾巴也要带上——玩家背包里看到的就是「毯子 Blanket」 |
 | **2026-08-12b** | 数字覆盖改多重集后必须配三条宽容规则 | 只换多重集会让假警报暴涨（crucible 2→50、ember 0→374）。三条：块内邻近折叠（**只折叠英文侧**，中文长度只有英文 0.35 倍，同 window 在中文侧等于放宽 3 倍；且要认块边界，否则 `<td>3</td><td>3</td>` 被折成一份需求，真缺陷重新被掩盖）、单/双＝1/2、`A/B` 分母豁免（`patrolled 24/7`） |
 
@@ -1112,7 +1308,7 @@ game.babele.cacheDiagnostics()
 | **2026-08-13g** | 上游笔误补丁只打 `compendium/en`，**`english-baseline/` 快照保持上游原样** | `Yakoshta Mine / Elevator` 的 `[[/skillCheck athletics 15 check.` 缺 `]]`，会让 `INLINE_CMD` 从这个 `[[` 吞到下一个 `]]`，**任何译法都必被判 markup mismatch**。补成 `...15]] check.`（形态取自同一 `<sup>` 里的 dnd5e 兄弟节点）。已记为 `LOCAL-PATCHES.md` 第 3 条。惯例与前两条补丁一致：`en` 里是修好的、快照里仍是坏的 |
 | **2026-08-13g** | ⚠ **带 `suggested` 的判据，落盘前必须先过一遍定译表的英文闸** | 旧 `scan_uuid_swap` 对 `Shard God` 的建议是「碎片之神 → 碎片诸神」，而定译表写死 `Shard God`＝**碎片之神**。**判据在建议一个违反定译表的改动** —— 谁照它的 `suggested` 批量改就会把 30 叶正确译文改坏 |
 | **2026-08-13g** | **知识领域 7 词三通道裁完并已执行**（`lang/cn.json` + `ember-hardcoded-cn.mjs` 各改 6 键，compendium 侧走批次） | 第八轮曾建议「一律按 lang 拉齐」，**第九轮推翻**：新发现**第四个通道** —— `crucible.rules.json :: Character Mechanics.pages.Background.text` 的背景示例表也逐格列了知识领域名，`Forensics` 在两张 compendium 表里就是两个词，所以「compendium 表格自洽」这个前提不成立。逐词按英文闸重裁：`Crime` 罪行→**犯罪**(60叶:40叶) · `Forensics` 法医学→**法证学**（151 处 `[[/knowledge forensics]]` 的渲染语境是石祭坛/霉变食物/字条这类**痕迹勘验，不是尸检**，且「法医学」全库 0 叶）· `Intrigue` 阴谋→**权谋**（「阴谋」已被 `conspiracy` 占用 22 叶 42 处，撞车）· `Legends` 传奇→**传说**(232叶:83叶) · `Machines` 机械装置→**机械**(84叶:13叶) · `Undeath` 亡灵化→**不死**(94叶:4叶，「亡灵化」全库仅 4 叶) · `Artifacts` **保持神器**（「遗物」已被 `Relic` 占死 182 叶 500 处）。改完复验 lang 四项全 0、拍平三数相等 1842、lang↔mjs 逐条一致 |
-| **2026-08-13g** | `glossary_ec.json` 有三处待同步订正（**尚未做**） | `knowledge artifacts` 古器物知识→神器知识 · `knowledge forensics` 法医知识→法证学知识 · `knowledge undeath` 亡灵知识→不死知识；另 `Marlstone` 相关键凡值含「马尔斯通」的要改「马尔石」，否则**下一轮会被当权威反向回灌**。这是本轮唯一明确留下的尾巴 |
+| ~~**2026-08-13g**~~ | ~~`glossary_ec.json` 有三处待同步订正（尚未做）~~ **→ ✅ 已于第十一轮两层同改完成**（见下方 2026-08-13j 那条）。2026-08-15 复测：base（`glossary_crucible_merged.json`）与产物（`glossary_ec.json`）逐键相同 —— `knowledge artifacts`＝神器知识 · `knowledge forensics`＝法证学知识 · `knowledge undeath`＝不死知识 · `Marlstone`＝马尔石 | 当时的订正内容：`knowledge artifacts` 古器物知识→神器知识 · `knowledge forensics` 法医知识→法证学知识 · `knowledge undeath` 亡灵知识→不死知识；另 `Marlstone` 相关键凡值含「马尔斯通」的要改「马尔石」，否则**下一轮会被当权威反向回灌** |
 
 ### 第十轮 A 段（2026-08-13）新增决议
 
@@ -1143,7 +1339,7 @@ game.babele.cacheDiagnostics()
 
 | 日期 | 决议 | 理由 |
 |---|---|---|
-| **2026-08-13j** | **标题锚点全线修复：全库 1491 个 `<hN>` 补显式 `id="<英文slug>"`** | Foundry 的 `#anchor` 由**标题文本 slugify** 而来，标题一译成中文 slug 就变了 —— 全库 257 个被引用锚点里 **187 个中文侧解析不了（590 次引用）**，全部落到页首。做法是英中标题**逐位对齐**后给中文标题补上英文 slug。修后我们的缺口 **187 → 0**；剩余 39 个（98 次）**英文侧同样解析不了**，是上游自己的死链。⚠ 这套 id 必须保住：任何后续改标题文字的批次都要**原样保留 `id` 属性**，删掉就会让 590 处链接重新断掉（第十一轮已把这条写进 agent 铁律，F1 还做了「骨架字符串逐叶比对」自证未破坏） |
+| **2026-08-13j** | **标题锚点全线修复：本轮给 1491 个 `<hN>` 补了显式 `id="<英文slug>"`**（⚠ **1491 是「当轮补了多少」，不是校验值** —— 第十二轮之后还在继续加，2026-08-15 全库 `<h[1-6][^>]*\sid=` 实测 **1630 个**：ember 1625 / crucible 5。锚点健康度由断言 `R-anchor-ids` 守住） | Foundry 的 `#anchor` 由**标题文本 slugify** 而来，标题一译成中文 slug 就变了 —— 全库 257 个被引用锚点里 **187 个中文侧解析不了（590 次引用）**，全部落到页首。做法是英中标题**逐位对齐**后给中文标题补上英文 slug。修后我们的缺口 **187 → 0**；剩余 39 个（98 次）**英文侧同样解析不了**，是上游自己的死链。⚠ 这套 id 必须保住：任何后续改标题文字的批次都要**原样保留 `id` 属性**，删掉就会让 590 处链接重新断掉（第十一轮已把这条写进 agent 铁律，F1 还做了「骨架字符串逐叶比对」自证未破坏） |
 | **2026-08-13j** | ⚑ **`glossary_ec.json` 是构建产物，手改会被 `build_glossary.py` 冲掉** | 这是本轮最有价值的机制发现。词表 = base 层（`fvtt\glossary_crucible_merged.json`）+ harvest 层（从两仓 `compendium/cn` 逐叶收割），**harvest 压过 base**。所以词表里的错值其实是「上一次构建时包的状态」的化石。**正确顺序**：① 包侧批次全部落库 → ② 跑 `build_glossary.py`（大批键自动自愈）→ ③ 只手改「孤儿键」（harvest 层没有证据的），且**必须两个文件都改**，只改 `glossary_ec.json` 下次构建就退回去。实测：我先前手改的 `knowledge forensics/undeath/artifacts` 三条在重建后**全部被打回**，正是因为只改了产物没改 base |
 | **2026-08-13j** | 孤儿键 12 条已在两层同时改定 | `Luma`卢玛语（与 `Draconic`龙语**分开**，这是 A 段那条阻断的根因）· `Evidence`证据（不是「证据值」，29 叶坏替换的源头）· `Otherhood`异姊会 · `thornling`荆芽灵 · `Sanguinary`赤血会 · `Cascal Arcden`卡斯卡尔奥克登语 · `Elder Goddess Spectra`上古女神斯佩克特拉 · `Mutagist Contingent`突变学派分队 · 知识领域三条。⚠ 重建会把 `Luma`/`Draconic` 的双语尾巴去掉（format-only），**值本身正确且两者已区分**，可接受 |
 | **2026-08-13j** | 跨单元术语统一（122 个术语族） | `Signborn`印记裔 · `Anachraenum`阿纳克瑞纽姆（三种音译，814:38）· `Spectra`斯佩克特拉（原「光谱」作女神名读成普通名词）· `Akonites`阿肯体（词表原作**「乌头属植物」**，把阿肯的构装体当成了植物学 aconite）· `The Armarium`阿玛留姆（是**杂货店**，原译「军械库」与真军械库 `The Armory` 撞名）· `Mutagist`突变学派（六种）· `Toothbreaker`碎牙帮（五种）· `House Cevher`杰夫赫尔（四种）· `Warlock`**邪术师**（与 `Sorcerer`术士 撞名的阻断，含 lang 两键与 `.mjs`）· `Altyran`阿尔提拉 · `Young Cheliceraeth`幼年螯蛛艾斯 |
@@ -1158,11 +1354,11 @@ game.babele.cacheDiagnostics()
 | 日期 | 决议 | 理由 |
 |---|---|---|
 | **2026-08-13k** | **`scan_same_en_split` 加双语尾巴归一：479 组 → 14 组** | 本库既定约定是**同一个词按字段类型写两种形态**：`name`＝「螯蛛艾斯 Cheliceraeth」（双语并列）、`tokenName`/表结果行/`levels`＝「螯蛛艾斯」（裸中文）。原判据逐字节比中文，把这条约定整个当缺陷报 —— **479 组里 463 组纯粹是「一处带英文尾巴、一处不带」**，`裸英文残留` 旗标因此在 467 组上无差别亮着，**等于没有信号**。归一规则保守：只剥「与该叶英文值逐字相同」的尾巴，剥完须剩含汉字的头部，`cn==en`（整条未译）不剥。新增 `--raw` 复现旧数字、`--selftest` 注入真分裂（`Monstrosities` 怪物/畸怪）与约定分裂各一条做双向断言 |
-| **2026-08-13k** | **123 条永久豁免已归档**，以后不要重裁 | 全表 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`，每条都带可复现的硬证据。典型：`Shield`（带 `Imperceptible Barrier` 效果的 23 个＝法术护盾术，裸的 11 个＝装备盾牌，**1:1 无一例外**）· `Light`（actor 身上的戏法＝光 / `crucible.equipment` 的负重分级＝轻型）· `Water`·`Ooze`（场景 `regions` 地形 vs 生物分类 folders）· `West`/`East`（地点分区「西部」vs 随机方向表「西」，两表各自自洽）· `Aura`（天体专名奥拉 vs Crucible 手势灵气）· `Adelyne` 三份（**上游把同一效果复制到三个 actor 且硬编码同一个名字，中文按各自 actor 本地化是对的，统一反而会把上游 bug 复刻给玩家**）|
+| **2026-08-13k** | **永久豁免已归档，以后不要重裁**（当时 123 条，**现 125 条** —— 第十四轮的 `Scout` 那条加了 2，见下方 2026-08-14d） | 全表 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`，每条都带可复现的硬证据。典型：`Shield`（带 `Imperceptible Barrier` 效果的 23 个＝法术护盾术，裸的 11 个＝装备盾牌，**1:1 无一例外**）· `Light`（actor 身上的戏法＝光 / `crucible.equipment` 的负重分级＝轻型）· `Water`·`Ooze`（场景 `regions` 地形 vs 生物分类 folders）· `West`/`East`（地点分区「西部」vs 随机方向表「西」，两表各自自洽）· `Aura`（天体专名奥拉 vs Crucible 手势灵气）· `Adelyne` 三份（**上游把同一效果复制到三个 actor 且硬编码同一个名字，中文按各自 actor 本地化是对的，统一反而会把上游 bug 复刻给玩家**）|
 | **2026-08-13k** | ⚑ **`build_glossary.py` 的 `harvest()` 从不采顶层 `folders`** | 只走 `en_doc['entries']`，导致所有 `crucible.*` 包与 `ember.character`/`crucible-adversary`/`crucible-items` 的**文件夹名永远进不了 harvest 层**，只能被 base 层的陈旧值覆盖 —— 包里 `folders.Monstrosities` 早已是「畸怪」而词表还是「怪物」就是这么来的。已补 `walk_pairs(en_folders, cn_folders, got)`。补完重建后 `Celestial` 自动带出「天界生物 Celestial」，这类孤儿键不必再手改 base |
 | **2026-08-13k** | **`prune_dead` 的 8 条死键：「`_legacyActions` 有意寄存」这个说法被证伪，已删** | 2026-08-12b 记的是「`migrate_cn_schema` 把抢救不了的内容 park 在此，留待人工抢救」。实查：这 8 条全在 `actors.Jurtak {Hunter,Warrior}.items.Jurtak Poison._legacyActions` 下，而 **① 该 item 的英文条目现在是 `null`（上游已删）② `_legacyActions` 不在任何 mapping 里，Babele 永不读取 ③ 同一段内容「摄入毒药 Ingest Poison」早已在 `crucible.equipment`/`playtest`/`pregens` 三处按 id 建键译好且有活的英文对照**。抢救早就完成了，寄存说法是过期状态。`prune_dead` 现两仓均为 0 |
 | **2026-08-13k** | `scan_name_binding` 的 UNCERTAIN「都是目标没有中文 name 那一档」也被证伪 | 实为 **2/199**，其余各有别的成因，但全部良性，已逐类归因并归档。**「据称」的东西一律要拿数据验** —— 本轮两项「据称合法」一项证实（`Maziran` 族称）一项证伪（`_legacyActions`）|
-| **2026-08-13k** | 词表 197 条 base↔shipped 争议全部裁完；181 条 pending 清零 | 174 条补进词表 / 6 条判为机械枚举须删 / 1 条待裁。⚠ **孤儿键必须 base 与产物两处同改**，只改产物下次 `build_glossary.py` 就退回去 |
+| **2026-08-13k** | 词表 197 条 base↔shipped 争议**裁决全部给出**，但 ⚠ **两侧写回一条都没执行** | 裁决结果在 `4-临时脚本/2026-08-13-round12/G2.glossary_resolution.json` 与 `G3.glossary-escalate.json` 里，**落地情况（2026-08-15 实测）**：① G2 的 `base_fixes` **0/188** 应用到 `fvtt\glossary_crucible_merged.json`（base 里 `Attunement` 仍「调谐」、`Sockets` 仍「插孔」、`Thornling` 仍「荆棘裔」）；② G3 的 `addToGlossary` **0/174** 进 `glossary_ec.json`，174 条**全部仍躺在** `glossary_ec.pending.json`（现 181 条，与「清零」相反）；③ `glossary_ec.disputes.json` 现有 **200** 条待裁形态的条目。产物侧暂由 harvest 层兜住，**所以是潜伏风险不是现行错译 —— 但一旦某键失去 harvest 证据就会反向回灌**。⚠ **孤儿键必须 base 与产物两处同改**，只改产物下次 `build_glossary.py` 就退回去。**这是一条未完成项，见第 1 节 Z5** |
 | **2026-08-13k** | `scan_en_drift` 的 `changed` 桶（缺陷表 B 项）首次正经做完 | 判据按 §8 2026-08-13 的结论选「**新英文独有的 token（enricher/数字/专名）在不在中文里**」，不用长度比（后者在短叶子上零鉴别力，实测两个单元 23/23、51/51 全假阳性）|
 | **2026-08-13k** | J00《Ordain Gazetteer》未读的 22 页补完 | 第十轮那本只读了 54 页里的 32 页。补读这 22 页又查出 27 条 —— **「读过」与「读完」是两件事，scope 里写的百分比要当真** |
 | **2026-08-13k** | 7 个高产单元对抗式复核，又出 100 条 | 第十轮报最高的 7 个单元独立重读，K5 又出 27 条、K1 22 条、J01 13 条、K4 12 条。**再次印证单次通读召回率约 73%** —— 高产单元读完不等于读干净 |
@@ -1182,7 +1378,7 @@ game.babele.cacheDiagnostics()
 | **2026-08-14b** | ⚑ **重导入冒险时 actor 的 `items`/`effects` 被静默丢弃**（已发 `v1.1.9`） | `patchActorUpdateDocuments` 里 `initialPayload = importMode ? prepareSafeActorUpdatesForImport(sanitized) : sanitized`，而后者 `= updates.map(degradeActorUpdatePayload)`，直接 `delete update.items / effects`。**降级被无条件前置到 happy path**，不是注释说的「出错时兜底」——那句注释描述的是下面逐 actor 隔离的循环，**注释与实现不符**，这条因此很容易被读漏。`isAdventureImportInvocation()` 匹配核心 `Adventure.importContent`，任何冒险导入都命中；已存在的 actor 走 `toUpdate` → 内嵌集合被剥。**Ember 的怪物战斗块/天赋/装备全是内嵌 item**，等于把上游推送更新的通道关死一半。修法：第一次尝试用完整载荷，只有单个 actor 确实失败才对它降级并告警。回测 8/8 |
 | **2026-08-14c** | **S1/S2 改同一文件的合并裁决**：取 S2 打底 + 手工并入 S1 增量 | 29 处编辑对原文单独匹配全部命中，顺序套用时 7 处失败 —— 两片都看到了同一批问题。取 S2 是因为它把对话框标题重构成 `DIALOG_TITLES`，**既做翻译又做「认框」**（认出是 Ember 弹的框才解锁正文+按钮翻译），与它自己的闸修复耦合；还补了 S1 漏的 `Talent`（crucible 68 处）。S1 独有的 `ARRANGEMENTS` 表 + `Music`/`Environment` 前缀（音景 23 颗按钮里 21 颗）+ hex-hud 四条 tooltip 已手工并回 |
 | **2026-08-14c** | **否决「把英文裸词当 i18n key」的修法** | S4 想把 `"Boss"`/`"Broken"`/`"Special"` 等 7 个英文串本身当 key 塞进 `lang/cn.json`。**Foundry 的 i18n 表是全局合并的** —— 任何模块调 `localize("Broken")` 都会拿到「破碎」。风险大于收益。这类「i18n 通道上的无键裸串」应走 `.mjs` 的 `EXACT` 表（有 Ember 宿主闸限定作用域）。已隔离待改 |
-| **2026-08-14c** | ⚑ **崩掉的 workflow 会在盘上留下未验证的批次** | 12 路修复轮全部撞额度上限失败，返回 `handled=0`，**但批次文件已经落盘**。这些 agent 从没跑过 `--dry` 闸、也没返回结果，**不能当成成果套用**。已全部隔离到 `4-临时脚本/2026-08-14-fix/unverified/`（25 个）。**通则：只套用 agent 在结构化结果里声明过、且报了 `gate_clean` 的批次**，别扫目录 |
+| **2026-08-14c** | ⚑ **崩掉的 workflow 会在盘上留下未验证的批次** | 12 路修复轮全部撞额度上限失败，返回 `handled=0`，**但批次文件已经落盘**。这些 agent 从没跑过 `--dry` 闸、也没返回结果，**不能当成成果套用**。已全部隔离到 `4-临时脚本/2026-08-14-fix/unverified/`（当时记 25 个，**实为 27 个** —— S4.2 的 2 个是事后补入的）。**通则：只套用 agent 在结构化结果里声明过、且报了 `gate_clean` 的批次**，别扫目录 |
 | **2026-08-14c** | 修复面外溢到工具本身 | 74 处编辑里有 22 处落在 `fill_missing.py` / `fill_twin.py` / `build_glossary.py` / 两份 `normalize_adventure_translation.py` —— 那些是会**持续制造回归**的源头（如 `build_glossary` 的分类器把「绝对不能归一的角色约定」判成「可脚本批量归一」）。改 `mappings.mjs` 后已按规矩重跑 `generate_runtime.mjs`，新增 `crucibleTokenName` / `emberEncounterTokenNames` 两个转换器 |
 
 ### 第十四轮（2026-08-14）复核 + 修复
@@ -1230,7 +1426,7 @@ OPEN 分档：严重 13 / 一般 135 / 观感 55；落点**压倒性在代码面
 
 | 日期 | 决议 | 理由 |
 |---|---|---|
-| **2026-08-14f** | ⚑ **推翻 R4 的「本轮不做」** —— `Region Map`/`Area Map` 全库拆分**已完成**（两包 187 叶）| 上一段判「做不了」是**建立在错的测量上**：探针正则 `\b(Region\|Area) Maps?\b` **区分大小写**，而英文正文里小写 `region map` / `area map` 很多，英文侧计数系统性偏小，于是 72 叶被误报成「需人判」。改 `IGNORECASE` 后：可机械对齐 115→**169 叶**，需人判 72→**12 叶**。**四路人判单元各自独立发现并报了这个问题** —— 分片 agent 撞到判据本身的毛病时会说话，这是本轮最有价值的一次回报 |
+| **2026-08-14f** | ⚑ **推翻 R4 的「本轮不做」** —— `Region Map`/`Area Map` 全库拆分**已完成**（当轮改了 187 叶；**可复算的现状量是「含『地区地图』的叶 181 片」**，差额来自 C 段又反向订正的 4 叶 + 1 条假阳性。⚠ 「改了 N 叶」这类量事后重建不了，以后一律附一个可复算的现状量）| 上一段判「做不了」是**建立在错的测量上**：探针正则 `\b(Region\|Area) Maps?\b` **区分大小写**，而英文正文里小写 `region map` / `area map` 很多，英文侧计数系统性偏小，于是 72 叶被误报成「需人判」。改 `IGNORECASE` 后：可机械对齐 115→**169 叶**，需人判 72→**12 叶**。**四路人判单元各自独立发现并报了这个问题** —— 分片 agent 撞到判据本身的毛病时会说话，这是本轮最有价值的一次回报 |
 | **2026-08-14f** | 逐位对齐是**筛子不是判据**，已知失效形态是「中文把 in addition to X 提到句首」 | 新写的方向验证器逐位配对 221 叶，报错 1 叶（`Patch 0.3.2`）—— 而那正是人判单元**事先点名**「逐位对齐会判反」的那一叶：英文 `for vistas and area maps in addition to the region map`，中文语序相反但**两处都译对了**。所以真实正确率是 **221/221**，报错的是验证器自己。221 叶里出现 1 次，比例低但必须有人判兜底 |
 | **2026-08-14f** | 全库 5 叶原本已含「地区地图」，**4 叶方向是反的、1 叶是绝不能动的假阳性** | 脚本只数「区域地图」，**看不见已经写着「地区地图」的叶子**——这是同一个探针的第二个盲区。`Verdant Paths`/`Crystal Carving Cavern`/`Redrak Fields` 英文是 `area map` 却写「地区地图」，`Emergence` 两处正好互换，均已订正。⚠ `Trident's Point` 是**假阳性**：中文「一幅本**地区**+**地图**」（英文 `a map of the local region`），「地区地图」只是碰巧的子串，机械替换会把意思改坏 |
 | **2026-08-14f** | `moiré` 换修法：**不动 compendium，放宽我们自己的兜底正则** | R7 判「改字面量要绕标记闸 + 加永久豁免，不划算」——但那个前提可以绕开。`.mjs` 里本来就有一条兜底 PATTERN 接「增强器没接管的 `[[/language …]]`」，而它**照抄了上游的 `\w`**，所以同样接不住 `é`。改成 `([\p{L}\w-]+)` + `u` 标志即可，compendium 一个字未改、不绕闸、不加豁免。⚠ 加 `u` 之后裸 `]` 是语法错误，必须写 `\]\]` |
@@ -1277,3 +1473,21 @@ OPEN 分档：严重 13 / 一般 135 / 观感 55；落点**压倒性在代码面
 | **2026-08-15d** | **dnd5e 侧独有的叶，主线批次与孪生同步都够不到** | `actors.Pallid Drakeling.biography.public` 在两包里**英文本就不同**（dnd5e 侧多一段 readaloud），所以 `sync_twin_packs` 正确地不动它，而单元只产主线批次 —— 这一叶因此漏改，是**断言**抓出来的。以后凡是全库术语统一，都要单独扫一遍 dnd5e 侧独有路径 |
 
 | — | 08-15 | **发 `ember_cn_unofficial v1.1.15`**。回包核对：7.3 MB / 21 文件、无混入；包内「快剪手 / 因卡罗池 / 受苦的苍白 / 悬空走道 / 木板步道 / 悬道」**全部为 0**，猫道 35 / 木栈道 11 / 幼龙兽 82 / 因卡罗水潭 46 / 克利珀 98。决议断言扩到 **23 条**（新增 5 条锁住本轮裁决），判据自检 10/10 |
+
+### 第十五轮 E 段（2026-08-15）PROJECT.md 全文对账 + 词表 base 层收口
+
+**6 路并行把 PROJECT.md 逐条对仓库实况复验：165 条结论**
+（过期 71 / 错误 15 / 悬空引用 9 / 无法验证 8 / 仍成立 62），其中 **49 条会误导下一轮**。
+订正 101 条 + 6 处整块重写，另配一路**没参与改动**的独立复核。
+
+| 日期 | 决议 | 理由 |
+|---|---|---|
+| **2026-08-15e** | ⚑ **「下一轮从哪开始」那一块必须每轮按实测重写，不许誊抄** | 15 条过期里 **9 条同一根因**：「第十二轮之后的收口状态」那个框从第十二轮誊到第十五轮，而它记的全是「还剩什么」。更糟的是同一节对同一件事给了**两套数**（`uuid_swap` 6 vs 22、`name_splits` 5 vs 7）。已整块重写并在块首写死这条铁律 + 贴上重跑命令 |
+| **2026-08-15e** | ⚑ **§5.4 里 6 处命令被反斜杠转义吃掉**，其中包括第十五轮刚加的 `assert_resolutions.py` 两行 | `\a`→BEL · `\b`→退格 · `\t`→TAB · `\n`→真换行（`name_splits.json` 被劈成两行）。**那道闸在文档里根本调不出来。** 与 `R-catwalk` 的 `\bcatwalk` 被 JSON 当退格符吃掉是**同一类错误**：写进数据/文档的正则与路径，反斜杠会被两层解释各吃一次 |
+| **2026-08-15e** | `R-version-matrix` 的覆盖面自己就是盲区，已扩并收窄 | 第一版只查前 40 行与矩阵行，正文第 178 行的「**发版状态**：0.9.4 / v1.1.4」漂了 **11 个版本**仍全绿。扩成全文扫之后立刻在 §1 的「上一版抬头」等**有意保留**的历史引用上误报 8 处 —— 最终判据取「**只查声称「当前」的行**」（含「当前已发布/发版状态/当前版本」字样）。双向验过 |
+| **2026-08-15e** | ⚑ **词表 base 层的写回从未执行**，已补：disputes **200 → 0** | §8 `2026-08-13k` 记「197 条争议裁完」，实查 base 一条没落。产物侧靠 harvest 兜着所以没出事，**但一旦某键失去 harvest 证据就会反向回灌** —— 正是第十五轮 ③ 抓到的那类阻断。做法：把已裁决的 shipped 值剥掉双语尾巴写回 base，200 + 7 条，重建后 disputes 归零 |
+| **2026-08-15e** | ⚠ **写回是 shipped→base，所以「shipped 本身错」时会把错误洗回去** | 实测就撞上一次：`Undeathly Fortitude` 被从「不死强韧」推回「不死坚韧」。查实后**是我第十五轮 ③ 改错了**：`Undead/Undeathly Fortitude` 只存在于 **dnd5e 侧**，是 D&D 特性名，「亡灵坚韧/不死坚韧」是 5e 通行译法；而 `Fortitude`=强韧 的定译**只管 crucible 侧**（该侧 `Undying Fortitude`=不死强韧 本来就是对的）。§1 的作用域裁决在这里被我自己违反了。**已撤销那次越界改动，未落盘任何 pack 批次** |
+| **2026-08-15e** | **`Junction Wheel` 改判为「枢纽轮盘」**（原裁「路口轮盘」，被静默推翻且无记录） | 物品 `name` 就是「雅科什塔枢纽轮盘」（阶梯第 1 档），英文闸下 14:2，`glossary_ec` 也已 harvest 成枢纽轮盘。词义上也更对：这是矿车道岔，「路口」是地面街道的 register。剩余 2 处（`Patch 0.5.1`）已清，并补断言 `R-junction-wheel` |
+| **2026-08-15e** | **`Shard God` 三种写法**（碎片之神 254 / 碎片诸神 161 / 碎片女神 26）**不是缺陷** | `name` 字段完全自洽：`Shard God`→碎片之神 · `Shard Gods`→碎片诸神 · `Shard Goddess`→碎片女神 · `Shard God Devotee`→碎片之神信徒。计数看着乱只是因为一叶里可同时出现多种形态。**记在这里就是为了防止下一轮按多数派把它们「统一」掉**，并补 `R-shard-god` 三分断言 |
+| **2026-08-15e** | **P-9 补丁原文已丢失，但也不再需要** | `H1_patch.md` 被引用两处、全项目零命中、`2026-08-12-audit3/findings/` 目录不存在。世界时钟现已改走 `patchCalendarFormatters()`（`ember-hardcoded-cn.mjs`），冒烟清单那条的排查方向已整条重写。**通则：`4-临时脚本/` 下的会话产物存在「文档引用了但文件没落盘」的风险**，第十五轮 ①②③ 就差点重蹈（已补落 findings/） |
+| **2026-08-15e** | 两条新写进文档的通则 | ① **每轮 findings 必须落一份到 `4-临时脚本/<日期>-<轮>/findings/`**；② 「改了 N 叶」这类量事后重建不了，**以后一律附一个可复算的现状量** |
