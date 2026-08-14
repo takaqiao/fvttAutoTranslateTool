@@ -124,13 +124,23 @@ class Ctx:
 # ----------------------------------------------------------------- 断言实现
 
 def a_term_gated(rule, ctx):
-    en_re = re.compile(rule["en"])
+    # ⚠ 大小写不敏感是**默认**。本项目已经被同一个坑咬过两次：
+    # `split_region_area_map.py` 的 `\b(Region|Area) Maps?\b` 漏掉小写形态，
+    # 导致 72 叶被误判成「需人判」、主控据此判定「全库拆分做不了」——判据错了结论就跟着错。
+    # 专名的大小写在本库里从来不是判据的一部分，所以默认忽略，要区分请显式写 "case_sensitive": true。
+    flags = 0 if rule.get("case_sensitive") else re.IGNORECASE
+    en_re = re.compile(rule["en"], flags)
     req = rule["cn_required"]
     forbid = rule.get("cn_forbidden", [])
+    # 有意的例外（例：`Drakeling Scales`=幼龙鳞片 —— 材料名不是生物指称，
+    # 「龙兽鳞」不是中文词而「龙鳞」是。登记在这里，免得下一轮「顺手统一」）
+    except_re = re.compile("|".join(rule["except_paths"])) if rule.get("except_paths") else None
     bad = []
     hits = 0
     for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
         if not en_re.search(ev):
+            continue
+        if except_re and except_re.search(path):
             continue
         hits += 1
         if req not in cv:
@@ -140,6 +150,16 @@ def a_term_gated(rule, ctx):
             if f in cv:
                 bad.append((repo, pack, path, f"中文同时出现禁用写法「{f}」"))
                 break
+
+    # ⚑ **命中 0 叶不是「通过」，是「这条断言根本没在跑」。**
+    # 实测代价：`R-catwalk` 的 `en` 在 JSON 里写成了 `"\bcatwalk"`（单反斜杠），
+    # 被 JSON 当成**退格符**吃掉，正则变成 `\x08catwalk`，匹配不到任何东西 ——
+    # 断言一路报绿，而库里实际有 10 叶违规。这正是本项目「静默全绿」那一类失败。
+    min_hits = rule.get("min_hits", 1)
+    if hits < min_hits:
+        bad.append(("-", "-", rule["en"],
+                    f"英文闸只命中 {hits} 叶（要求 ≥{min_hits}）—— 这条断言在空转，"
+                    f"多半是正则被 JSON 转义吃掉了（`\\b` 要写成 `\\\\b`），或上游改了措辞"))
     return bad, f"英文闸命中 {hits} 叶"
 
 

@@ -12,16 +12,19 @@
       "why": "两者撞名曾是阻断：玩家在两处看到「术士」指的是两个职业",
       "kind": "term_gated",
       "en": "\\bWarlock\\b",
-      "cn_required": "邪术师"
+      "cn_required": "邪术师",
+      "min_hits": 1
     },
     {
       "id": "R-electricity-lightning",
       "title": "Electricity=电击，Lightning 才是闪电",
       "decision": "2026-08-09 / 2026-08-12",
-      "why": "库里 167 处「闪电」中真正错的是英文写 Electricity 却译成闪电的那 23 处；混用会让玩家分不出伤害类型",
+      "why": "库里 167 处「闪电」中真正错的是英文写 Electricity 却译成闪电的那 23 处；混用会让玩家分不出伤害类型。⚠ 这一条**必须区分大小写**：伤害类型是大写 `Electricity`，而小写 `electricity` 是普通名词（a jolt of electricity / crackling like electricity），库里 37 叶正确译作「电流/电能」，按不敏感判会全部误报",
       "kind": "term_gated",
       "en": "\\bElectricity\\b",
-      "cn_required": "电击"
+      "cn_required": "电击",
+      "min_hits": 1,
+      "case_sensitive": true
     },
     {
       "id": "R-round-turn",
@@ -186,7 +189,7 @@
       "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看",
       "kind": "exclusions_closed",
       "exclusions": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json",
-      "report": "4-临时脚本/2026-08-14-round14/qa/same_en3.json"
+      "report": "4-临时脚本/2026-08-15-round15/qa2/same_en_final.json"
     },
     {
       "id": "R-glossary-not-laundering",
@@ -215,8 +218,60 @@
       "decision": "2026-08-15c",
       "why": "第十五轮 ① 查出这条通道有猫道/栈道/栈桥/高架走道四种译名，分裂线正好落在「GM 朗读文本 vs GM 指令段」之间 —— 同一场戏里 GM 念一个词、看另一个词。统一到猫道（改动面最小：21 处不动、只改离群叶）。⚠ 单元制审计只改了自己那本 journal，全库还剩 3 叶在别的 journal 里，是靠发版后回包核对才发现的（2026-08-13i 那条教训的又一次命中）",
       "kind": "term_gated",
-      "en": "\bcatwalk",
+      "en": "\\bcatwalk",
       "cn_required": "猫道",
+      "scope": [
+        "ember"
+      ],
+      "min_hits": 1
+    },
+    {
+      "id": "R-drakeling",
+      "title": "Drakeling = 幼龙兽（Drake=龙兽 的同族构词）",
+      "decision": "2026-08-15d",
+      "kind": "term_gated",
+      "why": "Drake 全族 name 字段无一例外是「龙兽」（龙兽巢穴/苍白龙兽/究极龙兽/成年龙兽），裸 Drakeling 的 name 就是「幼龙兽」。作「幼龙」会让玩家认不出是同一族。⚠ 计数陷阱：「幼龙」是「幼龙兽」的子串，裸「幼龙」实际只有 74 处不是 131",
+      "en": "\\bDrakelings?\\b",
+      "cn_required": "幼龙兽",
+      "scope": [
+        "ember"
+      ],
+      "except_paths": [
+        "Drakeling Scales"
+      ]
+    },
+    {
+      "id": "R-afflicted",
+      "title": "Afflicted = 受难（不带「的」）",
+      "decision": "2026-08-15d",
+      "kind": "cn_absent",
+      "cn": "受苦的苍白",
+      "why": "依据不是词频（受难 40 : 受苦 38 持平）而是**构词**：该族修饰语全是裸二字（苍白/变异/辉耀/病弱/成年/究极），只有「受苦的」多一个「的」，形态上是唯一例外"
+    },
+    {
+      "id": "R-inkaro-pool",
+      "title": "Inkaro Pool = 因卡罗水潭",
+      "decision": "2026-08-15d",
+      "kind": "cn_absent",
+      "cn": "因卡罗池",
+      "why": "两条依据同向：地点条目 name 就是「因卡罗水潭 Inkaro Pools」（阶梯第 1 档），全库 67:20。注意 Inkaro Pearl 是另一样东西，不要牵连"
+    },
+    {
+      "id": "R-clipper-name",
+      "title": "Clipper 一律作「克利珀」，「快剪手」已废",
+      "decision": "2026-08-15d",
+      "kind": "cn_absent",
+      "cn": "快剪手",
+      "why": "actor 的 name 字段是「克利珀 Clipper」（阶梯第 1 档），而物品 Clipper's Endless Scroll 曾译作「快剪手的无尽卷轴」—— 同一专名两种中文，玩家认不出是同一个人的东西"
+    },
+    {
+      "id": "R-boardwalk",
+      "title": "boardwalk = 木栈道",
+      "decision": "2026-08-15c",
+      "kind": "term_gated",
+      "why": "全库 14:6，且「木栈道」是 boardwalk 的标准对应词。catwalk 让出「栈道」之后这条才成立。⚠ 替换必须用 (?<!木)栈道 保护，否则会把 boardwalk 一起改坏",
+      "en": "\\bboardwalks?\\b",
+      "cn_required": "木栈道",
       "scope": [
         "ember"
       ]
