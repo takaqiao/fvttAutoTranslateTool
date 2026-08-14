@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
+    "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
+    "created": "2026-08-15（第十五轮）"
+  },
+  "assertions": [
+    {
+      "id": "R-warlock-sorcerer",
+      "title": "Warlock=邪术师，不得与 Sorcerer=术士 混用",
+      "decision": "2026-08-13j",
+      "why": "两者撞名曾是阻断：玩家在两处看到「术士」指的是两个职业",
+      "kind": "term_gated",
+      "en": "\\bWarlock\\b",
+      "cn_required": "邪术师"
+    },
+    {
+      "id": "R-electricity-lightning",
+      "title": "Electricity=电击，Lightning 才是闪电",
+      "decision": "2026-08-09 / 2026-08-12",
+      "why": "库里 167 处「闪电」中真正错的是英文写 Electricity 却译成闪电的那 23 处；混用会让玩家分不出伤害类型",
+      "kind": "term_gated",
+      "en": "\\bElectricity\\b",
+      "cn_required": "电击"
+    },
+    {
+      "id": "R-round-turn",
+      "title": "Round=轮 / Turn=回合，两者被互换过",
+      "decision": "2026-08-13（第八轮）",
+      "why": "数值关系词判据里最高产的一类，直接影响持续时间规则",
+      "kind": "distinct_terms",
+      "terms": [
+        {
+          "en": "Round",
+          "cn": "轮"
+        },
+        {
+          "en": "Turn",
+          "cn": "回合"
+        }
+      ]
+    },
+    {
+      "id": "R-tier-rank-level",
+      "title": "Tier=阶 / Rank=阶位 / level=等级 三者必须区分",
+      "decision": "2026-08-09 + 2026-08-14d",
+      "why": "第十四轮实测同屏出现过「阶位 1」与「等级 1（次等魂印）」指同一件事",
+      "kind": "distinct_terms",
+      "terms": [
+        {
+          "en": "Tier",
+          "cn": "阶"
+        },
+        {
+          "en": "Rank",
+          "cn": "阶位"
+        },
+        {
+          "en": "level",
+          "cn": "等级"
+        }
+      ]
+    },
+    {
+      "id": "R-region-area-map",
+      "title": "Region Map=地区地图 / Area Map=区域地图",
+      "decision": "2026-08-14f",
+      "why": "两者曾都叫「区域地图」，升降机下拉框里并排出现两个一模一样的选项",
+      "kind": "distinct_terms",
+      "terms": [
+        {
+          "en": "Region Map",
+          "cn": "地区地图"
+        },
+        {
+          "en": "Area Map",
+          "cn": "区域地图"
+        }
+      ]
+    },
+    {
+      "id": "R-tridents-point-falsepositive",
+      "title": "Trident's Point 的「本地区地图」是假阳性，绝不能替换",
+      "decision": "2026-08-14f",
+      "why": "中文是「本地区」+「地图」（英文 a map of the local region），「地区地图」只是碰巧的子串。机械替换会改成「本区域地图」，意思全变",
+      "kind": "leaf_literal",
+      "pack": "ember.crucible-adventure.json",
+      "path": "Ember Early Access.journals.Ordain Gazetteer.pages.Trident's Point.text",
+      "must_contain": [
+        "本地区地图"
+      ],
+      "must_not_contain": [
+        "本区域地图"
+      ]
+    },
+    {
+      "id": "R-soulbound-progression",
+      "title": "Soulbound Progression = 魂缚进阶，「魂缚进程」已废",
+      "decision": "2026-08-14d",
+      "why": "glossary_ec 定稿是「进阶」，而 DIALOG_TITLES 早前写「进程」，同屏两种说法",
+      "kind": "cn_absent",
+      "cn": "魂缚进程"
+    },
+    {
+      "id": "R-highgate",
+      "title": "Highgate = 高门，「海门」是把 High 听成了 Hai",
+      "decision": "2026-08-13h",
+      "why": "英文三处明说它是通往内陆的北方陆上门户，与海无关；错译曾渗透 name 字段与 glossary",
+      "kind": "cn_absent",
+      "cn": "海门"
+    },
+    {
+      "id": "R-otherhood",
+      "title": "Otherhood of Fortune = 幸运异姊会，「异缘会」已废",
+      "decision": "2026-08-13i",
+      "why": "全库 186 处曾只改了 3 叶，剩下的叶子里同段同时出现两种说法，比不改还糟",
+      "kind": "cn_absent",
+      "cn": "异缘会"
+    },
+    {
+      "id": "R-marlstone",
+      "title": "Marlstone = 马尔石，「马尔斯通」已废",
+      "decision": "2026-08-13g",
+      "why": "城区得名于该石材，「铺着马尔石」靠「石」字成立；8 个复合专名统一到马尔石",
+      "kind": "cn_absent",
+      "cn": "马尔斯通"
+    },
+    {
+      "id": "R-evidence-value",
+      "title": "Evidence = 证据，不是「证据值」",
+      "decision": "2026-08-13j",
+      "why": "「证据值」是 29 叶坏替换的源头",
+      "kind": "cn_absent",
+      "cn": "证据值"
+    },
+    {
+      "id": "R-presence-wisdom",
+      "title": "Presence=存在，不得译成「感知力」（Wisdom 的定译才是感知）",
+      "decision": "2026-08-13g",
+      "why": "把 Presence 译成「感知力」等于把两个属性混成一个，玩家算不出 (坚韧+存在)/4 那类公式",
+      "kind": "cn_absent",
+      "cn": "感知力"
+    },
+    {
+      "id": "R-lang-parity",
+      "title": "两仓 lang/cn.json 的键数必须等于英文侧",
+      "decision": "2026-08-12（1.1.0 事故）",
+      "why": "1.1.0 那次 lang 有 77% 静默失效，就是键形态错导致 Foundry 查不到",
+      "kind": "lang_parity",
+      "packages": {
+        "crucible": "%LOCALAPPDATA%\\FoundryVTT\\Data\\systems\\crucible",
+        "ember": "%LOCALAPPDATA%\\FoundryVTT\\Data\\modules\\ember"
+      }
+    },
+    {
+      "id": "R-anchor-ids",
+      "title": "标题上的显式 id= 不得减少",
+      "decision": "2026-08-13j",
+      "why": "全库 1491 个 <hN> 补了英文 slug 的 id，撑着 590 处 #锚点 链接。任何改标题文字的批次都必须原样保留 id，删掉就断",
+      "kind": "anchor_ids",
+      "min": 900,
+      "scope": [
+        "ember"
+      ]
+    },
+    {
+      "id": "R-bare-cn-fields",
+      "title": "tokenName / encounterTokens / levels 一律裸中文，不带双语尾巴",
+      "decision": "2026-08-13j + 2026-08-14e",
+      "why": "既定书写约定：name 字段写「中文 English」，这几类字段写裸中文。写错会让 scan_same_en_split 整批报警",
+      "kind": "no_bilingual_tail",
+      "fields": [
+        "tokenName",
+        "encounterTokens",
+        "levels",
+        "navName"
+      ],
+      "scope": [
+        "ember"
+      ]
+    },
+    {
+      "id": "R-exclusions-closed",
+      "title": "same_en_split 的分叉组必须全部已归档豁免",
+      "decision": "2026-08-13k + 2026-08-14d",
+      "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看",
+      "kind": "exclusions_closed",
+      "exclusions": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json",
+      "report": "4-临时脚本/2026-08-14-round14/qa/same_en3.json"
+    },
+    {
+      "id": "R-glossary-not-laundering",
+      "title": "词表不得把错值洗成权威（base 与产物两层同查）",
+      "decision": "2026-08-15b（第十五轮 ③ 查出 4 条阻断）",
+      "why": "词表是构建产物，harvest 压过 base；base 层的陈旧错值从不被覆盖，下一轮有人拿词表当依据反向回灌就会把包改坏。实测 4 条全是 source='base'：Kinesis=念动力（与 Telekinesis 撞车）· Fortitude=坚韧（与 Toughness 撞车）· Rank=等级（Rank/level 不可分）· Region Map=区域地图（会把刚拆开的 地区地图 洗回去）",
+      "kind": "glossary_value",
+      "files": {
+        "base": "..\\glossary_crucible_merged.json",
+        "product": "5-其他内容/glossary/glossary_ec.json"
+      },
+      "entries": {
+        "Kinesis": "念力",
+        "Telekinesis": "念动力",
+        "Fortitude": "强韧",
+        "Toughness": "坚韧",
+        "Rank": "阶位",
+        "Tier": "阶",
+        "Level": "等级",
+        "Region Map": "地区地图"
+      }
+    },
+    {
+      "id": "R-catwalk",
+      "title": "catwalk = 猫道（boardwalk 才是木栈道）",
+      "decision": "2026-08-15c",
+      "why": "第十五轮 ① 查出这条通道有猫道/栈道/栈桥/高架走道四种译名，分裂线正好落在「GM 朗读文本 vs GM 指令段」之间 —— 同一场戏里 GM 念一个词、看另一个词。统一到猫道（改动面最小：21 处不动、只改离群叶）。⚠ 单元制审计只改了自己那本 journal，全库还剩 3 叶在别的 journal 里，是靠发版后回包核对才发现的（2026-08-13i 那条教训的又一次命中）",
+      "kind": "term_gated",
+      "en": "\bcatwalk",
+      "cn_required": "猫道",
+      "scope": [
+        "ember"
+      ]
+    }
+  ]
+}
