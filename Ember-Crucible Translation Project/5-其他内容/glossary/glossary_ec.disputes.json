@@ -1,1195 +1,4059 @@
 {
- "_meta": {
-  "count": 0,
-  "note": "2026-08-12 全部裁决完毕并已落库，本文件转为**裁决记录**。依据阶梯：同名条目/物品的 name 字段 > 同卷已译页 > 全库多数写法 > glossary_ec。每条裁决的理由见 resolved；同时记入 PROJECT.md 第 8 节。"
- },
- "shippedBilingualFormatInconsistency": {
-  "_note": "同一专名的中文相同，但双语后缀（\" English\"）时加时不加。属于格式问题，可脚本批量归一。",
-  "count": 209,
-  "terms": {
-   "Aburyx": {
-    "阿布里克斯 Aburyx": 2,
-    "阿布里克斯": 1
-   },
-   "Abyss-Warped Undaunted": {
-    "深渊扭曲的无畏者 Abyss-Warped Undaunted": 1,
-    "深渊扭曲的无畏者": 1
-   },
-   "Abyssal Echo": {
-    "深渊回响 Abyssal Echo": 1,
-    "深渊回响": 1
-   },
-   "Abyssal Eel": {
-    "深渊鳗鱼 Abyssal Eel": 1,
-    "深渊鳗鱼": 1
-   },
-   "Abyssal Eye": {
-    "深渊之眼 Abyssal Eye": 1,
-    "深渊之眼": 1
-   },
-   "Acid Spit": {
-    "酸液喷吐 Acid Spit": 6,
-    "酸液喷吐": 2
-   },
-   "Acid Spray": {
-    "酸液喷射": 2,
-    "酸液喷射 Acid Spray": 1
-   },
-   "Adelyne Goss": {
-    "阿德琳·戈斯 Adelyne Goss": 1,
-    "阿德琳·戈斯": 1
-   },
-   "Agnath": {
-    "阿格纳斯 Agnath": 2,
-    "阿格纳斯": 2
-   },
-   "Agraband Swift": {
-    "阿格拉班德·斯威夫特 Agraband Swift": 1,
-    "阿格拉班德·斯威夫特": 1
-   },
-   "Agrimage": {
-    "农艺法师 Agrimage": 1,
-    "农艺法师": 1
-   },
-   "Alar": {
-    "阿拉尔 Alar": 2,
-    "阿拉尔": 1
-   },
-   "Amalthea Stonecraft": {
-    "阿玛尔忒亚·石艺 Amalthea Stonecraft": 1,
-    "阿玛尔忒亚·石艺": 1
-   },
-   "Anachraenum Adventurer": {
-    "阿纳克雷努姆冒险者 Anachraenum Adventurer": 1,
-    "阿纳克雷努姆冒险者": 1
-   },
-   "Anachraenum Aetherial": {
-    "阿纳克瑞纽姆 以太灵 Anachraenum Aetherial": 1,
-    "阿纳克瑞纽姆 以太灵": 1
-   },
-   "Ancara": {
-    "安卡拉 Ancara": 2,
-    "安卡拉": 1
-   },
-   "Animated Rune Tome": {
-    "活化符文典籍 Animated Rune Tome": 1,
-    "活化符文典籍": 1
-   },
-   "Ankarist": {
-    "安卡里斯特 Ankarist": 1,
-    "安卡里斯特": 1
-   },
-   "Ankarist's Caravan": {
-    "安卡里斯特的商队 Ankarist's Caravan": 1,
-    "安卡里斯特的商队": 1
-   },
-   "Anydrath": {
-    "安伊德拉斯 Anydrath": 1,
-    "安伊德拉斯": 1
-   },
-   "Aqueous Transmission": {
-    "水相传导 Aqueous Transmission": 10,
-    "水相传导": 1
-   },
-   "Arcturian Miner": {
-    "阿克图里安矿工 Arcturian Miner": 1,
-    "阿克图里安矿工": 1
-   },
-   "Avwynn Taol": {
-    "阿芙温·陶尔 Avwynn Taol": 2,
-    "阿芙温·陶尔": 1
-   },
-   "Aythorn": {
-    "艾索恩 Aythorn": 2,
-    "艾索恩": 1
-   },
-   "Baradom": {
-    "巴拉多姆 Baradom": 2,
-    "巴拉多姆": 1
-   },
-   "Blue Block Inmate": {
-    "蓝区囚犯 Blue Block Inmate": 1,
-    "蓝区囚犯": 1
-   },
-   "Brackus von Tet": {
-    "布拉库斯·冯·泰特 Brackus von Tet": 1,
-    "布拉库斯·冯·泰特": 1
-   },
-   "Brigand": {
-    "强盗 Brigand": 1,
-    "强盗": 1
-   },
-   "Broken Aedir Sentinel": {
-    "损坏的艾迪尔哨兵 Broken Aedir Sentinel": 1,
-    "损坏的艾迪尔哨兵": 1
-   },
-   "Burnished Hand Protector": {
-    "辉手守卫者 Burnished Hand Protector": 1,
-    "辉手守卫者": 1
-   },
-   "Cherish Ellerie": {
-    "切瑞什·艾勒里 Cherish Ellerie": 1,
-    "切瑞什·艾勒里": 1
-   },
-   "Chessman": {
-    "棋士 Chessman": 1,
-    "棋士": 1
-   },
-   "Cindaric Adherent": {
-    "辛达里克信徒 Cindaric Adherent": 1,
-    "辛达里克信徒": 1
-   },
-   "Clipper": {
-    "克利珀 Clipper": 1,
-    "克利珀": 1
-   },
-   "Conaris Haid": {
-    "科纳里斯·海德 Conaris Haid": 1,
-    "科纳里斯·海德": 1
-   },
-   "Constructed Companion": {
-    "构装同伴 Constructed Companion": 3,
-    "构装同伴": 1
-   },
-   "Corpuleth": {
-    "尸团怪 Corpuleth": 1,
-    "尸团怪": 1
-   },
-   "Corrupted Cadrithor": {
-    "腐化的卡德里索尔 Corrupted Cadrithor": 2,
-    "腐化的卡德里索尔": 1
-   },
-   "Corrupted Kezus Jelly": {
-    "腐化凯祖斯水母 Corrupted Kezus Jelly": 1,
-    "腐化凯祖斯水母": 1
-   },
-   "Crevvet": {
-    "克雷维特 Crevvet": 2,
-    "克雷维特": 1
-   },
-   "Crumbling Skallith": {
-    "崩塌的斯卡利斯 Crumbling Skallith": 1,
-    "崩塌的斯卡利斯": 1
-   },
-   "Del Kalais": {
-    "德尔·卡莱斯 Del Kalais": 1,
-    "德尔·卡莱斯": 1
-   },
-   "Dereth Erekos": {
-    "德雷斯·埃雷科斯 Dereth Erekos": 1,
-    "德雷斯·埃雷科斯": 1
-   },
-   "Duurath": {
-    "杜拉斯 Duurath": 2,
-    "杜拉斯": 2
-   },
-   "Eamon Mariflor": {
-    "伊蒙·玛里弗洛尔 Eamon Mariflor": 1,
-    "伊蒙·玛里弗洛尔": 1
-   },
-   "Earth Sprite": {
-    "土精灵": 1,
-    "土精灵 Earth Sprite": 1
-   },
-   "Eliorwen": {
-    "艾利奥文 Eliorwen": 2,
-    "艾利奥文": 2
-   },
-   "Evesso": {
-    "埃维索 Evesso": 1,
-    "埃维索": 1
-   },
-   "Falar": {
-    "法拉尔 Falar": 1,
-    "法拉尔": 1
-   },
-   "Fernis Ossa": {
-    "费尔尼斯·奥萨 Fernis Ossa": 1,
-    "费尔尼斯·奥萨": 1
-   },
-   "Fire Sprite": {
-    "火焰精灵 Fire Sprite": 1,
-    "火焰精灵": 1
-   },
-   "Flameguard Firebrand": {
-    "焰卫火使": 2,
-    "焰卫火使 Flameguard Firebrand": 1
-   },
-   "Frost Sprite": {
-    "寒霜精灵": 1,
-    "寒霜精灵 Frost Sprite": 1
-   },
-   "Fulgurite Blades": {
-    "雷纹刃 Fulgurite Blades": 2,
-    "雷纹刃": 1
-   },
-   "Gastern Faviyos": {
-    "加斯特恩·法维约斯 Gastern Faviyos": 1,
-    "加斯特恩·法维约斯": 1
-   },
-   "Giant Corrupted Kezus Jelly": {
-    "巨型堕化凯祖斯水母 Giant Corrupted Kezus Jelly": 1,
-    "巨型堕化凯祖斯水母": 1
-   },
-   "Giant Kezus Jelly": {
-    "巨型凯祖斯果冻 Giant Kezus Jelly": 1,
-    "巨型凯祖斯果冻": 1
-   },
-   "Giant Luminous Ooze": {
-    "巨型发光软泥怪 Giant Luminous Ooze": 1,
-    "巨型发光软泥怪": 1
-   },
-   "Gohema": {
-    "戈赫玛 Gohema": 1,
-    "戈赫玛": 1
-   },
-   "Gohema's Eye": {
-    "戈赫玛之眼 Gohema's Eye": 1,
-    "戈赫玛之眼": 1
-   },
-   "Gohema's Tail": {
-    "戈赫玛的尾巴 Gohema's Tail": 1,
-    "戈赫玛的尾巴": 1
-   },
-   "Gohema's Tendril": {
-    "戈赫玛的触须 Gohema's Tendril": 1,
-    "戈赫玛的触须": 1
-   },
-   "Grim Assembly": {
-    "严酷集会 Grim Assembly": 1,
-    "严酷集会": 1
-   },
-   "Gumtoad": {
-    "胶蟾 Gumtoad": 1,
-    "胶蟾": 1
-   },
-   "Harbinger of Fear": {
-    "恐惧先驱 Harbinger of Fear": 1,
-    "恐惧先驱": 1
-   },
-   "Harrower": {
-    "惊惧者 Harrower": 1,
-    "惊惧者": 1
-   },
-   "Helice Korsos": {
-    "赫利刻·科索斯 Helice Korsos": 1,
-    "赫利刻·科索斯": 1
-   },
-   "Hephiss Wandren": {
-    "赫菲丝·万德伦 Hephiss Wandren": 1,
-    "赫菲丝·万德伦": 1
-   },
-   "Hew": {
-    "休 Hew": 1,
-    "休": 1
-   },
-   "Horrendor": {
-    "霍伦多尔 Horrendor": 2,
-    "霍伦多尔": 1
-   },
-   "Hydroxol": {
-    "羟氧醇": 2,
-    "羟氧醇 Hydroxol": 2
-   },
-   "Ifton Shepp": {
-    "伊夫顿·谢普 Ifton Shepp": 1,
-    "伊夫顿·谢普": 1
-   },
-   "Issa Sunsword": {
-    "伊萨·阳剑 Issa Sunsword": 1,
-    "伊萨·阳剑": 1
-   },
-   "Janix Mance": {
-    "贾尼克斯·曼斯 Janix Mance": 1,
-    "贾尼克斯·曼斯": 1
-   },
-   "Jasper": {
-    "贾斯珀 Jasper": 1,
-    "贾斯珀": 1
-   },
-   "Jobri": {
-    "乔布里 Jobri": 1,
-    "乔布里": 1
-   },
-   "Jon Vastil": {
-    "乔恩·瓦斯提尔 Jon Vastil": 1,
-    "乔恩·瓦斯提尔": 1
-   },
-   "Jorey Swift": {
-    "乔里·斯威夫特 Jorey Swift": 1,
-    "乔里·斯威夫特": 1
-   },
-   "Juro Wandren": {
-    "朱罗·万德伦 Juro Wandren": 1,
-    "朱罗·万德伦": 1
-   },
-   "Jurtak Champion": {
-    "尤尔塔克勇士 Jurtak Champion": 1,
-    "尤尔塔克勇士": 1
-   },
-   "Jurtak Geomancer": {
-    "尤尔塔克地占师 Jurtak Geomancer": 1,
-    "尤尔塔克地占师": 1
-   },
-   "Jurtak Hunter": {
-    "尤尔塔克猎手": 2,
-    "尤尔塔克猎手 Jurtak Hunter": 1
-   },
-   "Jurtak Warrior": {
-    "尤尔塔克战士 Jurtak Warrior": 1,
-    "尤尔塔克战士": 1
-   },
-   "Juvenile Garganthus": {
-    "幼年加甘萨斯 Juvenile Garganthus": 1,
-    "幼年加甘萨斯": 1
-   },
-   "Kaftor Brenk": {
-    "卡夫托尔·布伦克 Kaftor Brenk": 1,
-    "卡夫托尔·布伦克": 1
-   },
-   "Kalasak the Cutter": {
-    "卡拉萨克·切割者 Kalasak the Cutter": 1,
-    "卡拉萨克·切割者": 1
-   },
-   "Kali Andrella": {
-    "卡莉·安德蕾拉 Kali Andrella": 1,
-    "卡莉·安德蕾拉": 1
-   },
-   "Katerin Bastilla": {
-    "卡特琳·巴斯蒂拉 Katerin Bastilla": 1,
-    "卡特琳·巴斯蒂拉": 1
-   },
-   "Katu": {
-    "卡图 Katu": 2,
-    "卡图": 1
-   },
-   "Kendral Lowd": {
-    "肯德拉尔·洛德 Kendral Lowd": 1,
-    "肯德拉尔·洛德": 1
-   },
-   "Kern": {
-    "克恩 Kern": 1,
-    "克恩": 1
-   },
-   "Ketral": {
-    "凯特拉 Ketral": 1,
-    "凯特拉": 1
-   },
-   "Kezus Jelly": {
-    "凯祖斯果冻 Kezus Jelly": 2,
-    "凯祖斯果冻": 1
-   },
-   "Koy Rent": {
-    "科伊·伦特 Koy Rent": 1,
-    "科伊·伦特": 1
-   },
-   "Ku'arta": {
-    "库阿塔 Ku'arta": 2,
-    "库阿塔": 1
-   },
-   "Kynryth": {
-    "肯瑞斯 Kynryth": 1,
-    "肯瑞斯": 1
-   },
-   "Kynryth Husk": {
-    "肯瑞斯空壳 Kynryth Husk": 1,
-    "肯瑞斯空壳": 1
-   },
-   "Laeora": {
-    "莱欧拉 Laeora": 2,
-    "莱欧拉": 1
-   },
-   "Larissa Toth": {
-    "拉丽莎·托斯 Larissa Toth": 1,
-    "拉丽莎·托斯": 1
-   },
-   "Leeph": {
-    "利夫 Leeph": 1,
-    "利夫": 1
-   },
-   "Liestra Grann": {
-    "莉耶丝特拉·格兰 Liestra Grann": 1,
-    "莉耶丝特拉·格兰": 1
-   },
-   "Light Energy Turret": {
-    "光能炮塔 Light Energy Turret": 1,
-    "光能炮塔": 1
-   },
-   "Light Mote": {
-    "光微粒 Light Mote": 1,
-    "光微粒": 1
-   },
-   "Lilla Arien": {
-    "莉拉·艾瑞恩 Lilla Arien": 1,
-    "莉拉·艾瑞恩": 1
-   },
-   "Loris Tezran": {
-    "洛里斯·特兹兰 Loris Tezran": 1,
-    "洛里斯·特兹兰": 1
-   },
-   "Lucent": {
-    "辉耀 Lucent": 1,
-    "辉耀": 1
-   },
-   "Luminous Copper Ooze": {
-    "发光铜软泥怪 Luminous Copper Ooze": 1,
-    "发光铜软泥怪": 1
-   },
-   "Luminous Gold Ooze": {
-    "发光金软泥怪 Luminous Gold Ooze": 1,
-    "发光金软泥怪": 1
-   },
-   "Luminous Iron Ooze": {
-    "发光铁软泥怪 Luminous Iron Ooze": 1,
-    "发光铁软泥怪": 1
-   },
-   "Luminous Silver Ooze": {
-    "发光银软泥怪 Luminous Silver Ooze": 1,
-    "发光银软泥怪": 1
-   },
-   "Luna Karrowrath": {
-    "露娜·卡罗拉斯 Luna Karrowrath": 2,
-    "露娜·卡罗拉斯": 1
-   },
-   "Luxaroth": {
-    "卢克萨罗斯 Luxaroth": 1,
-    "卢克萨罗斯": 1
-   },
-   "Lyla Cevher": {
-    "莱拉 Lyla Cevher": 1,
-    "莱拉": 1
-   },
-   "Lyla's Caravan": {
-    "莱拉的商队 Lyla's Caravan": 1,
-    "莱拉的商队": 1
-   },
-   "Meri": {
-    "梅里 Meri": 1,
-    "梅里": 1
-   },
-   "Mica Valaston": {
-    "米卡·瓦拉斯顿 Mica Valaston": 1,
-    "米卡·瓦拉斯顿": 1
-   },
-   "Mioroth": {
-    "米奥罗斯 Mioroth": 1,
-    "米奥罗斯": 1
-   },
-   "Mira Wavehorn": {
-    "米拉·波角 Mira Wavehorn": 1,
-    "米拉·波角": 1
-   },
-   "Mootap": {
-    "穆塔普 Mootap": 2,
-    "穆塔普": 1
-   },
-   "Moriah Foxhaven": {
-    "莫赖亚·福克斯黑文 Moriah Foxhaven": 1,
-    "莫赖亚·福克斯黑文": 1
-   },
-   "Mutagist Excisor": {
-    "嬗变师切除者 Mutagist Excisor": 1,
-    "嬗变师切除者": 1
-   },
-   "Mutagist Grenadier": {
-    "突变投弹手 Mutagist Grenadier": 1,
-    "突变投弹手": 1
-   },
-   "Mutagist Vivisector": {
-    "突变派活体解剖师 Mutagist Vivisector": 1,
-    "突变派活体解剖师": 1
-   },
-   "Mutated Ultra Drake": {
-    "变异究极龙兽 Mutated Ultra Drake": 1,
-    "变异究极龙兽": 1
-   },
-   "Mythspire Guardian": {
-    "神话尖塔守护者 Mythspire Guardian": 1,
-    "神话尖塔守护者": 1
-   },
-   "Nadin": {
-    "纳丁 Nadin": 1,
-    "纳丁": 1
-   },
-   "Oozeling": {
-    "软泥幼体 Oozeling": 1,
-    "软泥幼体": 1
-   },
-   "Orb of Lantyr": {
-    "兰提尔法珠 Orb of Lantyr": 1,
-    "兰提尔法珠": 1
-   },
-   "Ordani": {
-    "奥尔达尼 Ordani": 5,
-    "奥尔达尼": 1
-   },
-   "Pale Whisperer": {
-    "苍白低语者 Pale Whisperer": 1,
-    "苍白低语者": 1
-   },
-   "Pale Whisperer Tendril": {
-    "苍白低语者触须 Pale Whisperer Tendril": 1,
-    "苍白低语者触须": 1
-   },
-   "Pallid Drake": {
-    "苍白龙兽 Pallid Drake": 2,
-    "苍白龙兽": 2
-   },
-   "Pallid Drakeling": {
-    "苍白幼龙 Pallid Drakeling": 1,
-    "苍白幼龙": 1
-   },
-   "Pyix": {
-    "派伊克斯 Pyix": 1,
-    "派伊克斯": 1
-   },
-   "Radiant Ultra Drake": {
-    "辉耀究极龙兽 Radiant Ultra Drake": 1,
-    "辉耀究极龙兽": 1
-   },
-   "Rask": {
-    "拉斯克 Rask": 2,
-    "拉斯克": 1
-   },
-   "Rask Juvenile": {
-    "拉斯克幼体 Rask Juvenile": 1,
-    "拉斯克幼体": 1
-   },
-   "Red Block Inmate": {
-    "红区囚犯 Red Block Inmate": 1,
-    "红区囚犯": 1
-   },
-   "Regus Halamattrix": {
-    "雷古斯·哈拉玛特里克斯 Regus Halamattrix": 1,
-    "雷古斯·哈拉玛特里克斯": 1
-   },
-   "Rider": {
-    "骑手 Rider": 1,
-    "骑手": 1
-   },
-   "Rorhim Iron-Cask": {
-    "罗希姆·铁桶 Rorhim Iron-Cask": 1,
-    "罗希姆·铁桶": 1
-   },
-   "Sadri Zhalimorne": {
-    "萨德里·扎利莫恩 Sadri Zhalimorne": 1,
-    "萨德里·扎利莫恩": 1
-   },
-   "Salara, Queen of Scales": {
-    "萨拉拉，鳞后 Salara, Queen of Scales": 1,
-    "萨拉拉，鳞后": 1
-   },
-   "Sarracenias": {
-    "萨拉塞尼亚斯 Sarracenias": 1,
-    "萨拉塞尼亚斯": 1
-   },
-   "Scalemaw": {
-    "鳞颚 Scalemaw": 1,
-    "鳞颚": 1
-   },
-   "Scout": {
-    "侦察兵 Scout": 1,
-    "侦察兵": 1
-   },
-   "Sellen": {
-    "塞伦 Sellen": 1,
-    "塞伦": 1
-   },
-   "Serethus": {
-    "塞雷苏斯 Serethus": 1,
-    "塞雷苏斯": 1
-   },
-   "Sigil": {
-    "西吉尔 Sigil": 2,
-    "西吉尔": 1
-   },
-   "Silver Beam Engineer": {
-    "银光束工程师 Silver Beam Engineer": 1,
-    "银光束工程师": 1
-   },
-   "Silver Beam Guard": {
-    "银色光束卫兵 Silver Beam Guard": 1,
-    "银色光束卫兵": 1
-   },
-   "Silver Beam Sentinel": {
-    "白银光束哨卫 Silver Beam Sentinel": 1,
-    "白银光束哨卫": 1
-   },
-   "Silver Beam Servitor": {
-    "银光束仆从 Silver Beam Servitor": 1,
-    "银光束仆从": 1
-   },
-   "Sin Marmot": {
-    "辛·旱獭 Sin Marmot": 1,
-    "辛·旱獭": 1
-   },
-   "Sionia": {
-    "希俄尼娅 Sionia": 2,
-    "希俄尼娅": 1
-   },
-   "Skallith": {
-    "斯卡利斯 Skallith": 1,
-    "斯卡利斯": 1
-   },
-   "Skallith Warrior": {
-    "斯卡利斯战士 Skallith Warrior": 1,
-    "斯卡利斯战士": 1
-   },
-   "Skeletal Archer": {
-    "骷髅弓箭手 Skeletal Archer": 1,
-    "骷髅弓箭手": 1
-   },
-   "Skeletal Spearman": {
-    "持矛骷髅 Skeletal Spearman": 1,
-    "持矛骷髅": 1
-   },
-   "Skither": {
-    "斯基瑟 Skither": 2,
-    "斯基瑟": 1
-   },
-   "Sockets": {
-    "插孔 Sockets": 2,
-    "插孔": 1
-   },
-   "Sodden Corpse": {
-    "浸透的尸体 Sodden Corpse": 1,
-    "浸透的尸体": 1
-   },
-   "Spectra": {
-    "光谱 Spectra": 2,
-    "光谱": 1
-   },
-   "Steros Kraver": {
-    "斯特罗斯·克拉弗 Steros Kraver": 1,
-    "斯特罗斯·克拉弗": 1
-   },
-   "Sticks": {
-    "斯蒂克斯 Sticks": 1,
-    "斯蒂克斯": 1
-   },
-   "Storm Sprite": {
-    "风暴精灵 Storm Sprite": 1,
-    "风暴精灵": 1
-   },
-   "Strayhearth Caravan": {
-    "迷炉商队 Strayhearth Caravan": 2,
-    "迷炉商队": 1
-   },
-   "Suarrok": {
-    "苏阿罗克 Suarrok": 2,
-    "苏阿罗克": 1
-   },
-   "Suarrok Juvenile": {
-    "幼年苏阿罗克 Suarrok Juvenile": 1,
-    "幼年苏阿罗克": 1
-   },
-   "Surge Walker": {
-    "奔涌行者 Surge Walker": 1,
-    "奔涌行者": 1
-   },
-   "Svala Bronwen": {
-    "斯瓦拉·布朗温 Svala Bronwen": 1,
-    "斯瓦拉·布朗温": 1
-   },
-   "Temple Invader": {
-    "神殿入侵者 Temple Invader": 1,
-    "神殿入侵者": 1
-   },
-   "Tethra Shùl": {
-    "泰斯拉·舒尔 Tethra Shùl": 1,
-    "泰斯拉·舒尔": 1
-   },
-   "The Cube": {
-    "方块 The Cube": 1,
-    "方块": 1
-   },
-   "The Device": {
-    "该装置 The Device": 1,
-    "该装置": 1
-   },
-   "Toothbreaker Scaletamer": {
-    "碎齿驯鳞者 Toothbreaker Scaletamer": 1,
-    "碎齿驯鳞者": 1
-   },
-   "Toothbreaker Thug": {
-    "碎齿暴徒 Toothbreaker Thug": 1,
-    "碎齿暴徒": 1
-   },
-   "Toron": {
-    "托隆 Toron": 1,
-    "托隆": 1
-   },
-   "Triss Carpel": {
-    "特里丝·卡佩尔 Triss Carpel": 1,
-    "特里丝·卡佩尔": 1
-   },
-   "Ulfen": {
-    "乌尔芬 Ulfen": 2,
-    "乌尔芬": 2
-   },
-   "Undaunted Adept": {
-    "无畏修习者 Undaunted Adept": 1,
-    "无畏修习者": 1
-   },
-   "Undaunted Trainee": {
-    "无畏受训者 Undaunted Trainee": 1,
-    "无畏受训者": 1
-   },
-   "Vampyre Spawn": {
-    "吸血孽裔 Vampyre Spawn": 1,
-    "吸血孽裔": 1
-   },
-   "Vanexis": {
-    "瓦内克西斯 Vanexis": 2,
-    "瓦内克西斯": 1
-   },
-   "Vartholomew Chess": {
-    "瓦索洛缪·切斯 Vartholomew Chess": 1,
-    "瓦索洛缪·切斯": 1
-   },
-   "Veiled Chain Agent": {
-    "帷幕锁链特工 Veiled Chain Agent": 1,
-    "帷幕锁链特工": 1
-   },
-   "Vespian Hydral": {
-    "维斯皮安九头蛇 Vespian Hydral": 1,
-    "维斯皮安九头蛇": 1
-   },
-   "Vespian Hydral Head": {
-    "维斯皮安九头蛇头颅 Vespian Hydral Head": 1,
-    "维斯皮安九头蛇头颅": 1
-   },
-   "Vhismara's Claw": {
-    "维斯玛拉之爪 Vhismara's Claw": 1,
-    "维斯玛拉之爪": 1
-   },
-   "Vinarith": {
-    "维纳里斯 Vinarith": 1,
-    "维纳里斯": 1
-   },
-   "Vitt Wandren": {
-    "维特·万德伦 Vitt Wandren": 1,
-    "维特·万德伦": 1
-   },
-   "Vorg": {
-    "沃格 Vorg": 2,
-    "沃格": 1
-   },
-   "Wandren Tracer": {
-    "万德伦追踪者 Wandren Tracer": 1,
-    "万德伦追踪者": 1
-   },
-   "Wandren Watcher": {
-    "流浪注视者 Wandren Watcher": 1,
-    "流浪注视者": 1
-   },
-   "Water Mote": {
-    "水微粒 Water Mote": 1,
-    "水微粒": 1
-   },
-   "Water Sprite": {
-    "水妖精 Water Sprite": 1,
-    "水妖精": 1
-   },
-   "Water Visitor": {
-    "水访客 Water Visitor": 1,
-    "水访客": 1
-   },
-   "Water Wanderer": {
-    "涉水者 Water Wanderer": 1,
-    "涉水者": 1
-   },
-   "Woven Construct": {
-    "编织构装体 Woven Construct": 1,
-    "编织构装体": 1
-   },
-   "Writhing Whisperer": {
-    "蠕动低语者 Writhing Whisperer": 1,
-    "蠕动低语者": 1
-   },
-   "Writhing Whisperer Tendril": {
-    "蠕动低语者触须 Writhing Whisperer Tendril": 1,
-    "蠕动低语者触须": 1
-   },
-   "Yarnac": {
-    "亚纳克 Yarnac": 2,
-    "亚纳克": 1
-   },
-   "Yarnac Juvenile": {
-    "亚纳克幼体 Yarnac Juvenile": 1,
-    "亚纳克幼体": 1
-   },
-   "Yeela Drevvin": {
-    "叶拉·德雷文 Yeela Drevvin": 1,
-    "叶拉·德雷文": 1
-   },
-   "Yellow Block Inmate": {
-    "黄区囚犯 Yellow Block Inmate": 1,
-    "黄区囚犯": 1
-   },
-   "Young Cheliceraeth": {
-    "幼年螯蛛以太兽 Young Cheliceraeth": 1,
-    "幼年螯蛛以太兽": 1
-   },
-   "Zarajah": {
-    "扎拉贾 Zarajah": 2,
-    "扎拉贾": 2
-   },
-   "Zira Hestidero": {
-    "齐拉·赫斯提德罗 Zira Hestidero": 1,
-    "齐拉·赫斯提德罗": 1
-   },
-   "Zodi Trask": {
-    "佐迪·特拉斯克 Zodi Trask": 1,
-    "佐迪·特拉斯克": 1
-   }
+  "_meta": {
+    "count": 0,
+    "note": "基底术语表与已发布译文对同一英文给出了不同中文（非双语格式差异）。当前一律先保留已发布值（玩家现在看到的），但每条都需要人工/上下文裁决。裁决后写回 glossary_ec.json 并记入 PROJECT.md 第 8 节。"
+  },
+  "disputes": {},
+  "crossRoleFormDifference": {
+    "_note": "同一英文在不同**字段角色**里形态不同（一边双语并列、一边裸中文）。⚠ 这是**约定正确**的表现，不是缺陷，**不得归一**：`name` 用「护盾术 Shield」，`tokenName` / `adjective` / `levels` / `folders` / 表结果行用裸中文。adjective 归一后会被 crucible item-physical.mjs:324 拼进物品名，玩家看到「决心 Determination护符」。列在这里只为让人看见这条英文横跨了几个角色。",
+    "count": 375,
+    "terms": {
+      "Aburyx": {
+        "name": {
+          "cn": "阿布里克斯 Aburyx",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿布里克斯",
+          "form": "bare"
+        }
+      },
+      "Abyss-Warped Undaunted": {
+        "name": {
+          "cn": "深渊扭曲的无畏者 Abyss-Warped Undaunted",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "深渊扭曲的无畏者",
+          "form": "bare"
+        }
+      },
+      "Abyssal Echo": {
+        "name": {
+          "cn": "深渊回响 Abyssal Echo",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "深渊回响",
+          "form": "bare"
+        }
+      },
+      "Abyssal Eel": {
+        "name": {
+          "cn": "深渊鳗 Abyssal Eel",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "深渊鳗",
+          "form": "bare"
+        }
+      },
+      "Abyssal Eye": {
+        "name": {
+          "cn": "深渊之眼 Abyssal Eye",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "深渊之眼",
+          "form": "bare"
+        }
+      },
+      "Accessories": {
+        "folders": {
+          "cn": "配件",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "配件 Accessories",
+          "form": "bilingual"
+        }
+      },
+      "Actions": {
+        "categories": {
+          "cn": "动作 Actions",
+          "form": "bilingual"
+        },
+        "folders": {
+          "cn": "动作",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "动作 Actions",
+          "form": "bilingual"
+        }
+      },
+      "Activating": {
+        "adjective": {
+          "cn": "启动",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "启动 Activating",
+          "form": "bilingual"
+        }
+      },
+      "Adelyne Goss": {
+        "name": {
+          "cn": "阿德琳·戈斯 Adelyne Goss",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿德琳·戈斯",
+          "form": "bare"
+        }
+      },
+      "Afflicted Pallid Drake": {
+        "name": {
+          "cn": "受难苍白龙兽 Afflicted Pallid Drake",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "受难苍白龙兽",
+          "form": "bare"
+        }
+      },
+      "Afflicted Pallid Drakeling": {
+        "name": {
+          "cn": "受难苍白幼龙兽 Afflicted Pallid Drakeling",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "受难苍白幼龙兽",
+          "form": "bare"
+        }
+      },
+      "Agnath": {
+        "name": {
+          "cn": "阿格纳斯 Agnath",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿格纳斯",
+          "form": "bare"
+        }
+      },
+      "Agraband Swift": {
+        "name": {
+          "cn": "阿格拉班德·斯威夫特 Agraband Swift",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿格拉班德·斯威夫特",
+          "form": "bare"
+        }
+      },
+      "Agrimage": {
+        "name": {
+          "cn": "农艺法师 Agrimage",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "农艺法师",
+          "form": "bare"
+        }
+      },
+      "Alar": {
+        "name": {
+          "cn": "阿拉尔 Alar",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿拉尔",
+          "form": "bare"
+        }
+      },
+      "Amalthea Stonecraft": {
+        "name": {
+          "cn": "阿玛尔忒亚·石艺 Amalthea Stonecraft",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿玛尔忒亚·石艺",
+          "form": "bare"
+        }
+      },
+      "Anachraenum Adventurer": {
+        "name": {
+          "cn": "阿纳克瑞纽姆冒险者 Anachraenum Adventurer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿纳克瑞纽姆冒险者",
+          "form": "bare"
+        }
+      },
+      "Anachraenum Aetherial": {
+        "name": {
+          "cn": "阿纳克瑞纽姆以太灵 Anachraenum Aetherial",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿纳克瑞纽姆以太灵",
+          "form": "bare"
+        }
+      },
+      "Ancara": {
+        "name": {
+          "cn": "安卡拉 Ancara",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "安卡拉",
+          "form": "bare"
+        }
+      },
+      "Ancestral Guardian": {
+        "name": {
+          "cn": "先祖守护者 Ancestral Guardian",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "先祖守护者",
+          "form": "bare"
+        }
+      },
+      "Ancestries": {
+        "categories": {
+          "cn": "血统",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "血统 Ancestries",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "血统 Ancestries",
+          "form": "bilingual"
+        }
+      },
+      "Animated Rune Tome": {
+        "name": {
+          "cn": "活化符文典籍 Animated Rune Tome",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "活化符文典籍",
+          "form": "bare"
+        }
+      },
+      "Ankarist": {
+        "name": {
+          "cn": "安卡里斯特 Ankarist",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "安卡里斯特",
+          "form": "bare"
+        }
+      },
+      "Ankarist's Caravan": {
+        "name": {
+          "cn": "安卡里斯特的商队 Ankarist's Caravan",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "安卡里斯特的商队",
+          "form": "bare"
+        }
+      },
+      "Anvil": {
+        "name": {
+          "cn": "铁砧 Anvil",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "铁砧",
+          "form": "bare"
+        }
+      },
+      "Anydrath": {
+        "name": {
+          "cn": "安伊德拉斯 Anydrath",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "安伊德拉斯",
+          "form": "bare"
+        }
+      },
+      "Arcane": {
+        "adjective": {
+          "cn": "奥术",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "奥术 Arcane",
+          "form": "bilingual"
+        }
+      },
+      "Arcos Sarinland": {
+        "name": {
+          "cn": "阿科斯·萨林兰德 Arcos Sarinland",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿科斯·萨林兰德",
+          "form": "bare"
+        }
+      },
+      "Arcturel": {
+        "categories": {
+          "cn": "阿克图瑞尔",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "阿克图瑞尔 Arcturel",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "阿克图瑞尔 Arcturel",
+          "form": "bilingual"
+        }
+      },
+      "Arcturian": {
+        "folders": {
+          "cn": "阿克图里安 Arcturian",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "阿克图里安 Arcturian",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿克图里安",
+          "form": "bare"
+        }
+      },
+      "Arcturian Miner": {
+        "name": {
+          "cn": "阿克图里安矿工 Arcturian Miner",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿克图里安矿工",
+          "form": "bare"
+        }
+      },
+      "Armor": {
+        "folders": {
+          "cn": "护甲",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "护甲 Armor",
+          "form": "bilingual"
+        }
+      },
+      "Arrow": {
+        "adjective": {
+          "cn": "箭矢",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "箭矢 Arrow",
+          "form": "bilingual"
+        }
+      },
+      "Attunement": {
+        "folders": {
+          "cn": "同调",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "同调 Attunement",
+          "form": "bilingual"
+        }
+      },
+      "Aura": {
+        "adjective": {
+          "cn": "灵气",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "奥拉 Aura",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "奥拉 Aura",
+          "form": "bilingual"
+        }
+      },
+      "Avwynn Taol": {
+        "name": {
+          "cn": "阿芙温·陶尔 Avwynn Taol",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿芙温·陶尔",
+          "form": "bare"
+        }
+      },
+      "Aythorn": {
+        "name": {
+          "cn": "艾索恩 Aythorn",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "艾索恩",
+          "form": "bare"
+        }
+      },
+      "Baizaz": {
+        "name": {
+          "cn": "拜扎兹 Baizaz",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拜扎兹",
+          "form": "bare"
+        }
+      },
+      "Baradom": {
+        "name": {
+          "cn": "巴拉多姆 Baradom",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "巴拉多姆",
+          "form": "bare"
+        }
+      },
+      "Belladonna": {
+        "name": {
+          "cn": "颠茄 Belladonna",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "颠茄",
+          "form": "bare"
+        }
+      },
+      "Bewilderment": {
+        "adjective": {
+          "cn": "迷惘",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "迷惘 Bewilderment",
+          "form": "bilingual"
+        }
+      },
+      "Biomes": {
+        "categories": {
+          "cn": "生物群系",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "生物群系 Biomes",
+          "form": "bilingual"
+        }
+      },
+      "Bites": {
+        "folders": {
+          "cn": "啃咬",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "啃咬 Bites",
+          "form": "bilingual"
+        }
+      },
+      "Blue Block Inmate": {
+        "name": {
+          "cn": "蓝区囚犯 Blue Block Inmate",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "蓝区囚犯",
+          "form": "bare"
+        }
+      },
+      "Brackus von Tet": {
+        "name": {
+          "cn": "布拉库斯·冯·泰特 Brackus von Tet",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "布拉库斯·冯·泰特",
+          "form": "bare"
+        }
+      },
+      "Brigand": {
+        "name": {
+          "cn": "强盗 Brigand",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "强盗",
+          "form": "bare"
+        }
+      },
+      "Broken Aedir Sentinel": {
+        "name": {
+          "cn": "损坏的艾迪尔哨兵 Broken Aedir Sentinel",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "损坏的艾迪尔哨兵",
+          "form": "bare"
+        }
+      },
+      "Burnished Hand Protector": {
+        "name": {
+          "cn": "辉手守卫者 Burnished Hand Protector",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辉手守卫者",
+          "form": "bare"
+        }
+      },
+      "Cascillian Marine": {
+        "name": {
+          "cn": "卡斯奇利亚海军陆战队员 Cascillian Marine",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡斯奇利亚海军陆战队员",
+          "form": "bare"
+        }
+      },
+      "Cascillian Marine Officer": {
+        "name": {
+          "cn": "卡斯奇利亚海军陆战队军官 Cascillian Marine Officer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡斯奇利亚海军陆战队军官",
+          "form": "bare"
+        }
+      },
+      "Chamberlain": {
+        "name": {
+          "cn": "总管 Chamberlain",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "总管",
+          "form": "bare"
+        }
+      },
+      "Character Creation": {
+        "categories": {
+          "cn": "角色创建",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "角色创建 Character Creation",
+          "form": "bilingual"
+        }
+      },
+      "Charge": {
+        "folders": {
+          "cn": "冲锋",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "冲锋 Charge",
+          "form": "bilingual"
+        }
+      },
+      "Cheliceraeth": {
+        "name": {
+          "cn": "螯蛛艾斯 Cheliceraeth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "螯蛛艾斯",
+          "form": "bare"
+        }
+      },
+      "Cherish Ellerie": {
+        "name": {
+          "cn": "切瑞什·艾勒里 Cherish Ellerie",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "切瑞什·艾勒里",
+          "form": "bare"
+        }
+      },
+      "Chessman": {
+        "name": {
+          "cn": "棋士 Chessman",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "棋士",
+          "form": "bare"
+        }
+      },
+      "Cindaric Adherent": {
+        "name": {
+          "cn": "辛达里克信徒 Cindaric Adherent",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辛达里克信徒",
+          "form": "bare"
+        }
+      },
+      "Cindaric Sage": {
+        "name": {
+          "cn": "辛达里克贤者 Cindaric Sage",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辛达里克贤者",
+          "form": "bare"
+        }
+      },
+      "Clarion Fork": {
+        "label": {
+          "cn": "谐鸣叉",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "谐鸣叉 Clarion Fork",
+          "form": "bilingual"
+        }
+      },
+      "Claws": {
+        "folders": {
+          "cn": "爪",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "爪 Claws",
+          "form": "bilingual"
+        }
+      },
+      "Clipper": {
+        "name": {
+          "cn": "克利珀 Clipper",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克利珀",
+          "form": "bare"
+        }
+      },
+      "Clodmarl": {
+        "name": {
+          "cn": "克洛德马尔 Clodmarl",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克洛德马尔",
+          "form": "bare"
+        }
+      },
+      "Collapsed Ruins": {
+        "categories": {
+          "cn": "坍塌废墟",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "坍塌废墟 Collapsed Ruins",
+          "form": "bilingual"
+        }
+      },
+      "Conaris Haid": {
+        "name": {
+          "cn": "科纳里斯·海德 Conaris Haid",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "科纳里斯·海德",
+          "form": "bare"
+        }
+      },
+      "Construct": {
+        "folders": {
+          "cn": "构装体",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "构装体 Construct",
+          "form": "bilingual"
+        }
+      },
+      "Constructed Companion": {
+        "name": {
+          "cn": "构装同伴 Constructed Companion",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "构装同伴",
+          "form": "bare"
+        }
+      },
+      "Constructs": {
+        "categories": {
+          "cn": "构装体",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "构装体 Constructs",
+          "form": "bilingual"
+        }
+      },
+      "Consumables": {
+        "folders": {
+          "cn": "消耗品",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "消耗品 Consumables",
+          "form": "bilingual"
+        }
+      },
+      "Control Potency": {
+        "adjective": {
+          "cn": "控制强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "控制强度 Control Potency",
+          "form": "bilingual"
+        }
+      },
+      "Corpuleth": {
+        "name": {
+          "cn": "尸团怪 Corpuleth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尸团怪",
+          "form": "bare"
+        }
+      },
+      "Corrupted Cadrithor": {
+        "name": {
+          "cn": "腐化的卡德里索尔 Corrupted Cadrithor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "腐化的卡德里索尔",
+          "form": "bare"
+        }
+      },
+      "Corrupted Kezus Jelly": {
+        "name": {
+          "cn": "腐化凯祖斯果冻 Corrupted Kezus Jelly",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "腐化凯祖斯果冻",
+          "form": "bare"
+        }
+      },
+      "Corvana Vortest": {
+        "name": {
+          "cn": "科瓦娜·沃特斯特 Corvana Vortest",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "科瓦娜·沃特斯特",
+          "form": "bare"
+        }
+      },
+      "Creatures": {
+        "categories": {
+          "cn": "生物",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "生物 Creatures",
+          "form": "bilingual"
+        }
+      },
+      "Crevvet": {
+        "name": {
+          "cn": "克雷维特 Crevvet",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克雷维特",
+          "form": "bare"
+        }
+      },
+      "Crumbling Skallith": {
+        "name": {
+          "cn": "崩塌的斯卡利斯 Crumbling Skallith",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "崩塌的斯卡利斯",
+          "form": "bare"
+        }
+      },
+      "Crystallath": {
+        "name": {
+          "cn": "晶巉巨像 Crystallath",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "晶巉巨像",
+          "form": "bare"
+        }
+      },
+      "Death Potency": {
+        "adjective": {
+          "cn": "死亡强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "死亡强度 Death Potency",
+          "form": "bilingual"
+        }
+      },
+      "Defenses": {
+        "categories": {
+          "cn": "防御 Defenses",
+          "form": "bilingual"
+        },
+        "folders": {
+          "cn": "防御",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "防御 Defenses",
+          "form": "bilingual"
+        }
+      },
+      "Deflection": {
+        "adjective": {
+          "cn": "偏斜",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "偏斜 Deflection",
+          "form": "bilingual"
+        }
+      },
+      "Del Kalais": {
+        "name": {
+          "cn": "德尔·卡莱斯 Del Kalais",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "德尔·卡莱斯",
+          "form": "bare"
+        }
+      },
+      "Dereth Erekos": {
+        "name": {
+          "cn": "德雷斯·埃雷科斯 Dereth Erekos",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "德雷斯·埃雷科斯",
+          "form": "bare"
+        }
+      },
+      "Determination": {
+        "adjective": {
+          "cn": "决心",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "决心 Determination",
+          "form": "bilingual"
+        }
+      },
+      "Dirt Globlin": {
+        "name": {
+          "cn": "泥土格布林 Dirt Globlin",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "泥土格布林",
+          "form": "bare"
+        }
+      },
+      "Disguise": {
+        "adjective": {
+          "cn": "伪装",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "伪装 Disguise",
+          "form": "bilingual"
+        }
+      },
+      "Dormitories": {
+        "categories": {
+          "cn": "宿舍区",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "宿舍区 Dormitories",
+          "form": "bilingual"
+        }
+      },
+      "Dripstones": {
+        "categories": {
+          "cn": "滴石笋",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "滴石笋 Dripstones",
+          "form": "bilingual"
+        }
+      },
+      "Dual Wield": {
+        "folders": {
+          "cn": "双持",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "双持 Dual Wield",
+          "form": "bilingual"
+        }
+      },
+      "Dust Mote": {
+        "name": {
+          "cn": "尘埃微粒 Dust Mote",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尘埃微粒",
+          "form": "bare"
+        }
+      },
+      "Duurath": {
+        "name": {
+          "cn": "杜拉斯 Duurath",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "杜拉斯",
+          "form": "bare"
+        }
+      },
+      "Eamon Mariflor": {
+        "name": {
+          "cn": "伊蒙·玛里弗洛尔 Eamon Mariflor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "伊蒙·玛里弗洛尔",
+          "form": "bare"
+        }
+      },
+      "Earth Potency": {
+        "adjective": {
+          "cn": "大地效能",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "大地效能 Earth Potency",
+          "form": "bilingual"
+        }
+      },
+      "Earth Sprite": {
+        "name": {
+          "cn": "大地精灵 Earth Sprite",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "大地精灵",
+          "form": "bare"
+        }
+      },
+      "Elder Gods": {
+        "categories": {
+          "cn": "上古诸神",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "上古诸神 Elder Gods",
+          "form": "bilingual"
+        }
+      },
+      "Eliorwen": {
+        "name": {
+          "cn": "艾利奥文 Eliorwen",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "艾利奥文",
+          "form": "bare"
+        }
+      },
+      "Evasion": {
+        "adjective": {
+          "cn": "闪避",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "闪避 Evasion",
+          "form": "bilingual"
+        }
+      },
+      "Evesso": {
+        "name": {
+          "cn": "埃维索 Evesso",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "埃维索",
+          "form": "bare"
+        }
+      },
+      "Exterior": {
+        "categories": {
+          "cn": "外部",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "外部 Exterior",
+          "form": "bilingual"
+        }
+      },
+      "Falar": {
+        "name": {
+          "cn": "法拉尔 Falar",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "法拉尔",
+          "form": "bare"
+        }
+      },
+      "Fernis Ossa": {
+        "name": {
+          "cn": "费尔尼斯·奥萨 Fernis Ossa",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "费尔尼斯·奥萨",
+          "form": "bare"
+        }
+      },
+      "Fire Sprite": {
+        "name": {
+          "cn": "火焰精灵 Fire Sprite",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "火焰精灵",
+          "form": "bare"
+        }
+      },
+      "Fizzit": {
+        "name": {
+          "cn": "菲兹特 Fizzit",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "菲兹特",
+          "form": "bare"
+        }
+      },
+      "Flame Potency": {
+        "adjective": {
+          "cn": "火焰强效",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "火焰强效 Flame Potency",
+          "form": "bilingual"
+        }
+      },
+      "Flameguard Firebrand": {
+        "name": {
+          "cn": "焰卫火使 Flameguard Firebrand",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "焰卫火使",
+          "form": "bare"
+        }
+      },
+      "Flight": {
+        "folders": {
+          "cn": "飞行",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "飞行 Flight",
+          "form": "bilingual"
+        }
+      },
+      "Focusing": {
+        "adjective": {
+          "cn": "专注",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "专注 Focusing",
+          "form": "bilingual"
+        }
+      },
+      "Fogbound Caverns": {
+        "categories": {
+          "cn": "雾缚洞窟",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "雾缚洞窟 Fogbound Caverns",
+          "form": "bilingual"
+        }
+      },
+      "Freezing": {
+        "adjective": {
+          "cn": "冰冻",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "冰冻 Freezing",
+          "form": "bilingual"
+        }
+      },
+      "Frost Potency": {
+        "adjective": {
+          "cn": "霜冻强效",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "霜冻强效 Frost Potency",
+          "form": "bilingual"
+        }
+      },
+      "Frost Sprite": {
+        "name": {
+          "cn": "寒霜精灵 Frost Sprite",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "寒霜精灵",
+          "form": "bare"
+        }
+      },
+      "Fulgurite Blades": {
+        "folders": {
+          "cn": "雷纹刃 Fulgurite Blades",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "雷纹刃 Fulgurite Blades",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "雷纹刃",
+          "form": "bare"
+        }
+      },
+      "Gafto the Howler": {
+        "name": {
+          "cn": "嚎叫者加夫托 Gafto the Howler",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "嚎叫者加夫托",
+          "form": "bare"
+        }
+      },
+      "Gastern Faviyos": {
+        "name": {
+          "cn": "加斯特恩·法维约斯 Gastern Faviyos",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "加斯特恩·法维约斯",
+          "form": "bare"
+        }
+      },
+      "Gesture: Aspect": {
+        "folders": {
+          "cn": "手势：化相",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：化相 Gesture: Aspect",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Aura": {
+        "folders": {
+          "cn": "手势：灵气",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：灵气 Gesture: Aura",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Conjure": {
+        "folders": {
+          "cn": "手势：召唤",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：召唤 Gesture: Conjure",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Create": {
+        "folders": {
+          "cn": "手势：创造",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：创造 Gesture: Create",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Pulse": {
+        "folders": {
+          "cn": "手势：脉冲",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：脉冲 Gesture: Pulse",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Sense": {
+        "folders": {
+          "cn": "手势：感知",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：感知 Gesture: Sense",
+          "form": "bilingual"
+        }
+      },
+      "Gesture: Strike": {
+        "folders": {
+          "cn": "手势：打击",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势：打击 Gesture: Strike",
+          "form": "bilingual"
+        }
+      },
+      "Gestures": {
+        "folders": {
+          "cn": "手势",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "手势 Gestures",
+          "form": "bilingual"
+        }
+      },
+      "Giant": {
+        "folders": {
+          "cn": "巨人",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "巨人 Giant",
+          "form": "bilingual"
+        }
+      },
+      "Giant Corrupted Kezus Jelly": {
+        "name": {
+          "cn": "巨型腐化凯祖斯果冻 Giant Corrupted Kezus Jelly",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "巨型腐化凯祖斯果冻",
+          "form": "bare"
+        }
+      },
+      "Giant Kezus Jelly": {
+        "name": {
+          "cn": "巨型凯祖斯果冻 Giant Kezus Jelly",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "巨型凯祖斯果冻",
+          "form": "bare"
+        }
+      },
+      "Giant Luminous Ooze": {
+        "name": {
+          "cn": "巨型发光软泥怪 Giant Luminous Ooze",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "巨型发光软泥怪",
+          "form": "bare"
+        }
+      },
+      "Gliding": {
+        "adjective": {
+          "cn": "滑翔",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "滑翔 Gliding",
+          "form": "bilingual"
+        }
+      },
+      "Gohema": {
+        "folders": {
+          "cn": "戈赫玛 Gohema",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "戈赫玛",
+          "form": "bare"
+        }
+      },
+      "Gohema's Eye": {
+        "name": {
+          "cn": "戈赫玛之眼 Gohema's Eye",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "戈赫玛之眼",
+          "form": "bare"
+        }
+      },
+      "Gohema's Tail": {
+        "name": {
+          "cn": "戈赫玛的尾巴 Gohema's Tail",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "戈赫玛的尾巴",
+          "form": "bare"
+        }
+      },
+      "Gohema's Tendril": {
+        "name": {
+          "cn": "戈赫玛的触须 Gohema's Tendril",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "戈赫玛的触须",
+          "form": "bare"
+        }
+      },
+      "Golden Flats": {
+        "categories": {
+          "cn": "金色平原",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "金色平原 Golden Flats",
+          "form": "bilingual"
+        }
+      },
+      "Gore Bird": {
+        "name": {
+          "cn": "血鸟 Gore Bird",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "血鸟",
+          "form": "bare"
+        }
+      },
+      "Gore Bird Ravage": {
+        "name": {
+          "cn": "血鸟劫群 Gore Bird Ravage",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "血鸟劫群",
+          "form": "bare"
+        }
+      },
+      "Grim Assembly": {
+        "name": {
+          "cn": "严酷集会 Grim Assembly",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "严酷集会",
+          "form": "bare"
+        }
+      },
+      "Guarding": {
+        "adjective": {
+          "cn": "守护",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "守护 Guarding",
+          "form": "bilingual"
+        }
+      },
+      "Gumtoad": {
+        "name": {
+          "cn": "胶蟾 Gumtoad",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "胶蟾",
+          "form": "bare"
+        }
+      },
+      "Hale": {
+        "adjective": {
+          "cn": "健壮",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "健壮 Hale",
+          "form": "bilingual"
+        }
+      },
+      "Hammer": {
+        "name": {
+          "cn": "锤 Hammer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "锤",
+          "form": "bare"
+        }
+      },
+      "Harbinger of Disease": {
+        "name": {
+          "cn": "疫病先驱 Harbinger of Disease",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "疫病先驱",
+          "form": "bare"
+        }
+      },
+      "Harbinger of Fear": {
+        "name": {
+          "cn": "恐惧先驱 Harbinger of Fear",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "恐惧先驱",
+          "form": "bare"
+        }
+      },
+      "Harbinger of Madness": {
+        "name": {
+          "cn": "疯狂先驱 Harbinger of Madness",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "疯狂先驱",
+          "form": "bare"
+        }
+      },
+      "Harrower": {
+        "name": {
+          "cn": "惊惧者 Harrower",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "惊惧者",
+          "form": "bare"
+        }
+      },
+      "Health": {
+        "categories": {
+          "cn": "生命值 Health",
+          "form": "bilingual"
+        },
+        "folders": {
+          "cn": "生命值",
+          "form": "bare"
+        }
+      },
+      "Helice Korsos": {
+        "name": {
+          "cn": "赫利刻·科索斯 Helice Korsos",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "赫利刻·科索斯",
+          "form": "bare"
+        }
+      },
+      "Hephiss Wandren": {
+        "name": {
+          "cn": "赫菲丝·万德伦 Hephiss Wandren",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "赫菲丝·万德伦",
+          "form": "bare"
+        }
+      },
+      "Heroism": {
+        "folders": {
+          "cn": "英雄气概",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "英雄气概 Heroism",
+          "form": "bilingual"
+        }
+      },
+      "Hew": {
+        "name": {
+          "cn": "休 Hew",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "休",
+          "form": "bare"
+        }
+      },
+      "Horrendor": {
+        "name": {
+          "cn": "霍伦多尔 Horrendor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "霍伦多尔",
+          "form": "bare"
+        }
+      },
+      "Huiana": {
+        "name": {
+          "cn": "惠安娜 Huiana",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "惠安娜",
+          "form": "bare"
+        }
+      },
+      "Hydroxol": {
+        "name": {
+          "cn": "羟氧醇 Hydroxol",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "羟氧醇",
+          "form": "bare"
+        }
+      },
+      "Ifton Shepp": {
+        "name": {
+          "cn": "伊夫顿·谢普 Ifton Shepp",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "伊夫顿·谢普",
+          "form": "bare"
+        }
+      },
+      "Illumination Potency": {
+        "adjective": {
+          "cn": "照明强效",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "照明强效 Illumination Potency",
+          "form": "bilingual"
+        }
+      },
+      "Illusion Potency": {
+        "adjective": {
+          "cn": "幻象强效",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "幻象强效 Illusion Potency",
+          "form": "bilingual"
+        }
+      },
+      "Inflections": {
+        "folders": {
+          "cn": "屈折",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "屈折 Inflections",
+          "form": "bilingual"
+        }
+      },
+      "Ingredients": {
+        "folders": {
+          "cn": "材料",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "材料 Ingredients",
+          "form": "bilingual"
+        }
+      },
+      "Introduction": {
+        "categories": {
+          "cn": "引言",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "引言 Introduction",
+          "form": "bilingual"
+        }
+      },
+      "Issa Sunsword": {
+        "name": {
+          "cn": "伊萨·阳剑 Issa Sunsword",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "伊萨·阳剑",
+          "form": "bare"
+        }
+      },
+      "Ix'erax": {
+        "name": {
+          "cn": "伊克斯埃拉克斯 Ix'erax",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "伊克斯埃拉克斯",
+          "form": "bare"
+        }
+      },
+      "Janix Mance": {
+        "name": {
+          "cn": "贾尼克斯·曼斯 Janix Mance",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "贾尼克斯·曼斯",
+          "form": "bare"
+        }
+      },
+      "Jasper": {
+        "name": {
+          "cn": "贾斯珀 Jasper",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "贾斯珀",
+          "form": "bare"
+        }
+      },
+      "Jobri": {
+        "name": {
+          "cn": "乔布里 Jobri",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "乔布里",
+          "form": "bare"
+        }
+      },
+      "Jon Vastil": {
+        "name": {
+          "cn": "乔恩·瓦斯提尔 Jon Vastil",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "乔恩·瓦斯提尔",
+          "form": "bare"
+        }
+      },
+      "Jonico Daridane": {
+        "name": {
+          "cn": "乔尼科·达里丹 Jonico Daridane",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "乔尼科·达里丹",
+          "form": "bare"
+        }
+      },
+      "Jorey Swift": {
+        "name": {
+          "cn": "乔里·斯威夫特 Jorey Swift",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "乔里·斯威夫特",
+          "form": "bare"
+        }
+      },
+      "Juro Wandren": {
+        "name": {
+          "cn": "朱罗·万德伦 Juro Wandren",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "朱罗·万德伦",
+          "form": "bare"
+        }
+      },
+      "Jurtak Champion": {
+        "name": {
+          "cn": "尤尔塔克勇士 Jurtak Champion",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尤尔塔克勇士",
+          "form": "bare"
+        }
+      },
+      "Jurtak Geomancer": {
+        "name": {
+          "cn": "尤尔塔克地占师 Jurtak Geomancer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尤尔塔克地占师",
+          "form": "bare"
+        }
+      },
+      "Jurtak Hunter": {
+        "name": {
+          "cn": "尤尔塔克猎手 Jurtak Hunter",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尤尔塔克猎手",
+          "form": "bare"
+        }
+      },
+      "Jurtak Warrior": {
+        "name": {
+          "cn": "尤尔塔克战士 Jurtak Warrior",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "尤尔塔克战士",
+          "form": "bare"
+        }
+      },
+      "Juvenile Garganthus": {
+        "name": {
+          "cn": "幼年加甘萨斯 Juvenile Garganthus",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "幼年加甘萨斯",
+          "form": "bare"
+        }
+      },
+      "Kadhana Lizard": {
+        "name": {
+          "cn": "卡达纳蜥蜴 Kadhana Lizard",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡达纳蜥蜴",
+          "form": "bare"
+        }
+      },
+      "Kaftor Brenk": {
+        "name": {
+          "cn": "卡夫托尔·布伦克 Kaftor Brenk",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡夫托尔·布伦克",
+          "form": "bare"
+        }
+      },
+      "Kagura": {
+        "name": {
+          "cn": "神乐 Kagura",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "神乐",
+          "form": "bare"
+        }
+      },
+      "Kalasak the Cutter": {
+        "name": {
+          "cn": "卡拉萨克·切割者 Kalasak the Cutter",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡拉萨克·切割者",
+          "form": "bare"
+        }
+      },
+      "Kaleidoscope Caverns": {
+        "categories": {
+          "cn": "万花筒洞窟",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "万花筒洞窟",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "万花筒洞窟 Kaleidoscope Caverns",
+          "form": "bilingual"
+        }
+      },
+      "Kali Andrella": {
+        "name": {
+          "cn": "卡莉·安德蕾拉 Kali Andrella",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡莉·安德蕾拉",
+          "form": "bare"
+        }
+      },
+      "Katerin Bastilla": {
+        "name": {
+          "cn": "卡特琳·巴斯蒂拉 Katerin Bastilla",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡特琳·巴斯蒂拉",
+          "form": "bare"
+        }
+      },
+      "Katu": {
+        "name": {
+          "cn": "卡图 Katu",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡图",
+          "form": "bare"
+        }
+      },
+      "Keen": {
+        "adjective": {
+          "cn": "敏锐",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "敏锐 Keen",
+          "form": "bilingual"
+        }
+      },
+      "Kendral Lowd": {
+        "name": {
+          "cn": "肯德拉尔·洛德 Kendral Lowd",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "肯德拉尔·洛德",
+          "form": "bare"
+        }
+      },
+      "Kern": {
+        "name": {
+          "cn": "克恩 Kern",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克恩",
+          "form": "bare"
+        }
+      },
+      "Ketral": {
+        "name": {
+          "cn": "凯特拉 Ketral",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "凯特拉",
+          "form": "bare"
+        }
+      },
+      "Kezus Jelly": {
+        "name": {
+          "cn": "凯祖斯果冻 Kezus Jelly",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "凯祖斯果冻",
+          "form": "bare"
+        }
+      },
+      "Kinesis Potency": {
+        "adjective": {
+          "cn": "念力强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "念力强度 Kinesis Potency",
+          "form": "bilingual"
+        }
+      },
+      "Koy Rent": {
+        "name": {
+          "cn": "科伊·伦特 Koy Rent",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "科伊·伦特",
+          "form": "bare"
+        }
+      },
+      "Krafton Lilifeld": {
+        "name": {
+          "cn": "克拉夫顿·莉莉菲尔德 Krafton Lilifeld",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克拉夫顿·莉莉菲尔德",
+          "form": "bare"
+        }
+      },
+      "Krafton's Caravan": {
+        "name": {
+          "cn": "克拉夫顿的商队 Krafton's Caravan",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "克拉夫顿的商队",
+          "form": "bare"
+        }
+      },
+      "Ku'arta": {
+        "name": {
+          "cn": "库阿塔 Ku'arta",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "库阿塔",
+          "form": "bare"
+        }
+      },
+      "Kynryth": {
+        "name": {
+          "cn": "肯瑞斯 Kynryth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "肯瑞斯",
+          "form": "bare"
+        }
+      },
+      "Kynryth Husk": {
+        "name": {
+          "cn": "肯瑞斯空壳 Kynryth Husk",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "肯瑞斯空壳",
+          "form": "bare"
+        }
+      },
+      "Laeora": {
+        "name": {
+          "cn": "莱欧拉 Laeora",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莱欧拉",
+          "form": "bare"
+        }
+      },
+      "Larissa Toth": {
+        "name": {
+          "cn": "拉丽莎·托斯 Larissa Toth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拉丽莎·托斯",
+          "form": "bare"
+        }
+      },
+      "Leeph": {
+        "name": {
+          "cn": "利夫 Leeph",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "利夫",
+          "form": "bare"
+        }
+      },
+      "Liestra Grann": {
+        "name": {
+          "cn": "莉耶丝特拉·格兰 Liestra Grann",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莉耶丝特拉·格兰",
+          "form": "bare"
+        }
+      },
+      "Life Potency": {
+        "adjective": {
+          "cn": "生命强效",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "生命强效 Life Potency",
+          "form": "bilingual"
+        }
+      },
+      "Light": {
+        "folders": {
+          "cn": "轻型",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "光 Light",
+          "form": "bilingual"
+        }
+      },
+      "Light Energy Turret": {
+        "name": {
+          "cn": "光能炮塔 Light Energy Turret",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "光能炮塔",
+          "form": "bare"
+        }
+      },
+      "Light Mote": {
+        "name": {
+          "cn": "光微粒 Light Mote",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "光微粒",
+          "form": "bare"
+        }
+      },
+      "Lilla Arien": {
+        "name": {
+          "cn": "莉拉·艾瑞恩 Lilla Arien",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莉拉·艾瑞恩",
+          "form": "bare"
+        }
+      },
+      "Locations": {
+        "categories": {
+          "cn": "地点",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "地点 Locations",
+          "form": "bilingual"
+        }
+      },
+      "Loris Tezran": {
+        "name": {
+          "cn": "洛里斯·特兹兰 Loris Tezran",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "洛里斯·特兹兰",
+          "form": "bare"
+        }
+      },
+      "Lucent": {
+        "name": {
+          "cn": "辉耀 Lucent",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辉耀",
+          "form": "bare"
+        }
+      },
+      "Luminary": {
+        "adjective": {
+          "cn": "辉耀",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "辉耀 Luminary",
+          "form": "bilingual"
+        }
+      },
+      "Luminous": {
+        "adjective": {
+          "cn": "明光",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "明光 Luminous",
+          "form": "bilingual"
+        }
+      },
+      "Luminous Copper Ooze": {
+        "name": {
+          "cn": "发光铜软泥怪 Luminous Copper Ooze",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "发光铜软泥怪",
+          "form": "bare"
+        }
+      },
+      "Luminous Gold Ooze": {
+        "name": {
+          "cn": "发光金软泥怪 Luminous Gold Ooze",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "发光金软泥怪",
+          "form": "bare"
+        }
+      },
+      "Luminous Iron Ooze": {
+        "name": {
+          "cn": "发光铁软泥怪 Luminous Iron Ooze",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "发光铁软泥怪",
+          "form": "bare"
+        }
+      },
+      "Luminous Silver Ooze": {
+        "name": {
+          "cn": "发光银软泥怪 Luminous Silver Ooze",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "发光银软泥怪",
+          "form": "bare"
+        }
+      },
+      "Luna Karrowrath": {
+        "name": {
+          "cn": "露娜·卡罗拉斯 Luna Karrowrath",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "露娜·卡罗拉斯",
+          "form": "bare"
+        }
+      },
+      "Luxaroth": {
+        "name": {
+          "cn": "卢克萨罗斯 Luxaroth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卢克萨罗斯",
+          "form": "bare"
+        }
+      },
+      "Lyla Cevher": {
+        "name": {
+          "cn": "莱拉·杰夫赫尔 Lyla Cevher",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莱拉·杰夫赫尔",
+          "form": "bare"
+        }
+      },
+      "Lyla's Caravan": {
+        "name": {
+          "cn": "莱拉的商队 Lyla's Caravan",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莱拉的商队",
+          "form": "bare"
+        }
+      },
+      "Mage": {
+        "name": {
+          "cn": "法师 Mage",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "法师",
+          "form": "bare"
+        }
+      },
+      "Mending": {
+        "adjective": {
+          "cn": "修补",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "修补 Mending",
+          "form": "bilingual"
+        }
+      },
+      "Meri": {
+        "name": {
+          "cn": "梅里 Meri",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "梅里",
+          "form": "bare"
+        }
+      },
+      "Mica Valaston": {
+        "name": {
+          "cn": "米卡·瓦拉斯顿 Mica Valaston",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "米卡·瓦拉斯顿",
+          "form": "bare"
+        }
+      },
+      "Mioroth": {
+        "name": {
+          "cn": "米奥罗斯 Mioroth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "米奥罗斯",
+          "form": "bare"
+        }
+      },
+      "Mira Wavehorn": {
+        "name": {
+          "cn": "米拉·波角 Mira Wavehorn",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "米拉·波角",
+          "form": "bare"
+        }
+      },
+      "Mistress Caberi": {
+        "name": {
+          "cn": "卡贝丽夫人 Mistress Caberi",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "卡贝丽夫人",
+          "form": "bare"
+        }
+      },
+      "Mootap": {
+        "name": {
+          "cn": "穆塔普 Mootap",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "穆塔普",
+          "form": "bare"
+        }
+      },
+      "Morale": {
+        "categories": {
+          "cn": "士气 Morale",
+          "form": "bilingual"
+        },
+        "folders": {
+          "cn": "士气",
+          "form": "bare"
+        }
+      },
+      "Moriah Foxhaven": {
+        "name": {
+          "cn": "莫赖亚·福克斯黑文 Moriah Foxhaven",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "莫赖亚·福克斯黑文",
+          "form": "bare"
+        }
+      },
+      "Movement": {
+        "categories": {
+          "cn": "移动 Movement",
+          "form": "bilingual"
+        },
+        "folders": {
+          "cn": "移动",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "移动 Movement",
+          "form": "bilingual"
+        }
+      },
+      "Mud Globlin": {
+        "name": {
+          "cn": "泥浆格布林 Mud Globlin",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "泥浆格布林",
+          "form": "bare"
+        }
+      },
+      "Mutagist Excisor": {
+        "name": {
+          "cn": "突变学派切除者 Mutagist Excisor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "突变学派切除者",
+          "form": "bare"
+        }
+      },
+      "Mutagist Grenadier": {
+        "name": {
+          "cn": "突变学派投弹手 Mutagist Grenadier",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "突变学派投弹手",
+          "form": "bare"
+        }
+      },
+      "Mutagist Vivisector": {
+        "name": {
+          "cn": "突变学派活体解剖师 Mutagist Vivisector",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "突变学派活体解剖师",
+          "form": "bare"
+        }
+      },
+      "Mutated Ultra Drake": {
+        "name": {
+          "cn": "变异究极龙兽 Mutated Ultra Drake",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "变异究极龙兽",
+          "form": "bare"
+        }
+      },
+      "Mythspire Guardian": {
+        "name": {
+          "cn": "神话尖塔守护者 Mythspire Guardian",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "神话尖塔守护者",
+          "form": "bare"
+        }
+      },
+      "Nadin": {
+        "name": {
+          "cn": "纳丁 Nadin",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "纳丁",
+          "form": "bare"
+        }
+      },
+      "Nimbleness": {
+        "adjective": {
+          "cn": "轻捷",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "轻捷 Nimbleness",
+          "form": "bilingual"
+        }
+      },
+      "Nonchalant": {
+        "adjective": {
+          "cn": "漠然",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "漠然 Nonchalant",
+          "form": "bilingual"
+        }
+      },
+      "Oblivion Potency": {
+        "adjective": {
+          "cn": "湮灭强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "湮灭强度 Oblivion Potency",
+          "form": "bilingual"
+        }
+      },
+      "Obsidian Vine Outgrowth": {
+        "name": {
+          "cn": "黑曜石藤蔓新枝 Obsidian Vine Outgrowth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "黑曜石藤蔓新枝",
+          "form": "bare"
+        }
+      },
+      "Oozeling": {
+        "name": {
+          "cn": "软泥幼体 Oozeling",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "软泥幼体",
+          "form": "bare"
+        }
+      },
+      "Orb of Lantyr": {
+        "name": {
+          "cn": "兰提尔法珠 Orb of Lantyr",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "兰提尔法珠",
+          "form": "bare"
+        }
+      },
+      "Ordain": {
+        "categories": {
+          "cn": "奥尔丹",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "奥尔丹 Ordain",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "奥尔丹 Ordain",
+          "form": "bilingual"
+        }
+      },
+      "Ordain Flats": {
+        "categories": {
+          "cn": "奥尔丹平原",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "奥尔丹平原 Ordain Flats",
+          "form": "bilingual"
+        }
+      },
+      "Ordain Spires": {
+        "categories": {
+          "cn": "奥尔丹尖塔区",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "奥尔丹尖塔区 Ordain Spires",
+          "form": "bilingual"
+        }
+      },
+      "Ordain Waterfront": {
+        "categories": {
+          "cn": "奥尔丹滨水区",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "奥尔丹滨水区 Ordain Waterfront",
+          "form": "bilingual"
+        }
+      },
+      "Ordani": {
+        "folders": {
+          "cn": "奥尔达尼 Ordani",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "奥尔达尼 Ordani",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "奥尔达尼",
+          "form": "bare"
+        }
+      },
+      "Orivech": {
+        "name": {
+          "cn": "奥里维奇 Orivech",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "奥里维奇",
+          "form": "bare"
+        }
+      },
+      "Outer Gods": {
+        "categories": {
+          "cn": "外神",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "外神 Outer Gods",
+          "form": "bilingual"
+        }
+      },
+      "Overview": {
+        "categories": {
+          "cn": "概览",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "概览 Overview",
+          "form": "bilingual"
+        }
+      },
+      "Paint Globlin": {
+        "name": {
+          "cn": "颜料格布林 Paint Globlin",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "颜料格布林",
+          "form": "bare"
+        }
+      },
+      "Pale Whisperer": {
+        "name": {
+          "cn": "苍白低语者 Pale Whisperer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "苍白低语者",
+          "form": "bare"
+        }
+      },
+      "Pale Whisperer Tendril": {
+        "name": {
+          "cn": "苍白低语者触须 Pale Whisperer Tendril",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "苍白低语者触须",
+          "form": "bare"
+        }
+      },
+      "Pallid Drake": {
+        "name": {
+          "cn": "苍白龙兽 Pallid Drake",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "苍白龙兽",
+          "form": "bare"
+        }
+      },
+      "Pallid Drakeling": {
+        "name": {
+          "cn": "苍白幼龙兽 Pallid Drakeling",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "苍白幼龙兽",
+          "form": "bare"
+        }
+      },
+      "Parry": {
+        "folders": {
+          "cn": "招架",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "招架 Parry",
+          "form": "bilingual"
+        }
+      },
+      "Party": {
+        "name": {
+          "cn": "队伍 Party",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "队伍",
+          "form": "bare"
+        }
+      },
+      "Pathways": {
+        "categories": {
+          "cn": "通路",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "通路 Pathways",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "通路 Pathways",
+          "form": "bilingual"
+        }
+      },
+      "Potency": {
+        "folders": {
+          "cn": "效力",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "效力 Potency",
+          "form": "bilingual"
+        }
+      },
+      "Promenade": {
+        "categories": {
+          "cn": "步道",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "步道 Promenade",
+          "form": "bilingual"
+        }
+      },
+      "Pyix": {
+        "name": {
+          "cn": "派伊克斯 Pyix",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "派伊克斯",
+          "form": "bare"
+        }
+      },
+      "Radiant Ultra Drake": {
+        "name": {
+          "cn": "辉耀究极龙兽 Radiant Ultra Drake",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辉耀究极龙兽",
+          "form": "bare"
+        }
+      },
+      "Rala Ushna": {
+        "name": {
+          "cn": "拉拉·乌什纳 Rala Ushna",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拉拉·乌什纳",
+          "form": "bare"
+        }
+      },
+      "Rallyhome": {
+        "categories": {
+          "cn": "聚归馆",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "聚归馆 Rallyhome",
+          "form": "bilingual"
+        }
+      },
+      "Rallying": {
+        "adjective": {
+          "cn": "集结",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "集结 Rallying",
+          "form": "bilingual"
+        }
+      },
+      "Rask": {
+        "name": {
+          "cn": "拉斯克 Rask",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拉斯克",
+          "form": "bare"
+        }
+      },
+      "Rask Juvenile": {
+        "name": {
+          "cn": "拉斯克幼体 Rask Juvenile",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拉斯克幼体",
+          "form": "bare"
+        }
+      },
+      "Raster Thorn": {
+        "name": {
+          "cn": "拉斯特·索恩 Raster Thorn",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "拉斯特·索恩",
+          "form": "bare"
+        }
+      },
+      "Red Block Inmate": {
+        "name": {
+          "cn": "红区囚犯 Red Block Inmate",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "红区囚犯",
+          "form": "bare"
+        }
+      },
+      "Regus Halamattrix": {
+        "name": {
+          "cn": "雷古斯·哈拉玛特里克斯 Regus Halamattrix",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "雷古斯·哈拉玛特里克斯",
+          "form": "bare"
+        }
+      },
+      "Reinforcement": {
+        "adjective": {
+          "cn": "强化",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "强化 Reinforcement",
+          "form": "bilingual"
+        }
+      },
+      "Reliable": {
+        "adjective": {
+          "cn": "可靠",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "可靠 Reliable",
+          "form": "bilingual"
+        }
+      },
+      "Resources": {
+        "folders": {
+          "cn": "资源",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "资源 Resources",
+          "form": "bilingual"
+        }
+      },
+      "Rest": {
+        "condition": {
+          "cn": "休息",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "休息 Rest",
+          "form": "bilingual"
+        }
+      },
+      "Returning": {
+        "adjective": {
+          "cn": "归来",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "归来 Returning",
+          "form": "bilingual"
+        }
+      },
+      "Rider": {
+        "name": {
+          "cn": "骑手 Rider",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "骑手",
+          "form": "bare"
+        }
+      },
+      "Rorhim Iron-Cask": {
+        "name": {
+          "cn": "罗希姆·铁桶 Rorhim Iron-Cask",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "罗希姆·铁桶",
+          "form": "bare"
+        }
+      },
+      "Runes": {
+        "folders": {
+          "cn": "符文",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "符文 Runes",
+          "form": "bilingual"
+        }
+      },
+      "Rustvar Valleys": {
+        "categories": {
+          "cn": "鲁斯特瓦尔山谷",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "鲁斯特瓦尔山谷 Rustvar Valleys",
+          "form": "bilingual"
+        }
+      },
+      "Sadri Zhalimorne": {
+        "name": {
+          "cn": "萨德里·扎利莫恩 Sadri Zhalimorne",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "萨德里·扎利莫恩",
+          "form": "bare"
+        }
+      },
+      "Salara, Queen of Scales": {
+        "name": {
+          "cn": "萨拉拉，鳞后 Salara, Queen of Scales",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "萨拉拉，鳞后",
+          "form": "bare"
+        }
+      },
+      "Sarracenias": {
+        "name": {
+          "cn": "萨拉塞尼亚斯 Sarracenias",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "萨拉塞尼亚斯",
+          "form": "bare"
+        }
+      },
+      "Scalemaw": {
+        "name": {
+          "cn": "鳞颚兽 Scalemaw",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "鳞颚兽",
+          "form": "bare"
+        }
+      },
+      "Scout": {
+        "name": {
+          "cn": "侦察兵 Scout",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斥候",
+          "form": "bare"
+        }
+      },
+      "Sellen": {
+        "name": {
+          "cn": "塞伦 Sellen",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "塞伦",
+          "form": "bare"
+        }
+      },
+      "Serethus": {
+        "name": {
+          "cn": "塞雷苏斯 Serethus",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "塞雷苏斯",
+          "form": "bare"
+        }
+      },
+      "Shade of Agaseros": {
+        "name": {
+          "cn": "阿加瑟罗斯之影 Shade of Agaseros",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "阿加瑟罗斯之影",
+          "form": "bare"
+        }
+      },
+      "Shard Gods": {
+        "categories": {
+          "cn": "碎片诸神",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "碎片诸神 Shard Gods",
+          "form": "bilingual"
+        }
+      },
+      "Shimz Shimring": {
+        "name": {
+          "cn": "希姆兹·希姆林 Shimz Shimring",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "希姆兹·希姆林",
+          "form": "bare"
+        }
+      },
+      "Sigil": {
+        "name": {
+          "cn": "西吉尔 Sigil",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "西吉尔",
+          "form": "bare"
+        }
+      },
+      "Silver Beam Engineer": {
+        "name": {
+          "cn": "银光束工程师 Silver Beam Engineer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "银光束工程师",
+          "form": "bare"
+        }
+      },
+      "Silver Beam Guard": {
+        "name": {
+          "cn": "银光束卫兵 Silver Beam Guard",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "银光束卫兵",
+          "form": "bare"
+        }
+      },
+      "Silver Beam Sentinel": {
+        "name": {
+          "cn": "银光束哨卫 Silver Beam Sentinel",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "银光束哨卫",
+          "form": "bare"
+        }
+      },
+      "Silver Beam Servitor": {
+        "name": {
+          "cn": "银光束仆从 Silver Beam Servitor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "银光束仆从",
+          "form": "bare"
+        }
+      },
+      "Sin Marmot": {
+        "name": {
+          "cn": "辛·旱獭 Sin Marmot",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辛·旱獭",
+          "form": "bare"
+        }
+      },
+      "Sin's Caravan": {
+        "name": {
+          "cn": "辛的商队 Sin's Caravan",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "辛的商队",
+          "form": "bare"
+        }
+      },
+      "Sionia": {
+        "name": {
+          "cn": "希俄尼娅 Sionia",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "希俄尼娅",
+          "form": "bare"
+        }
+      },
+      "Sitherian": {
+        "name": {
+          "cn": "西瑟里安 Sitherian",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "西瑟里安",
+          "form": "bare"
+        }
+      },
+      "Skallith": {
+        "name": {
+          "cn": "斯卡利斯 Skallith",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯卡利斯",
+          "form": "bare"
+        }
+      },
+      "Skallith Warrior": {
+        "name": {
+          "cn": "斯卡利斯战士 Skallith Warrior",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯卡利斯战士",
+          "form": "bare"
+        }
+      },
+      "Skeletal Archer": {
+        "name": {
+          "cn": "骷髅弓箭手 Skeletal Archer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "骷髅弓箭手",
+          "form": "bare"
+        }
+      },
+      "Skeletal Spearman": {
+        "name": {
+          "cn": "持矛骷髅 Skeletal Spearman",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "持矛骷髅",
+          "form": "bare"
+        }
+      },
+      "Skills": {
+        "folders": {
+          "cn": "技能",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "技能 Skills",
+          "form": "bilingual"
+        }
+      },
+      "Skither": {
+        "name": {
+          "cn": "斯基瑟 Skither",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯基瑟",
+          "form": "bare"
+        }
+      },
+      "Slaith": {
+        "name": {
+          "cn": "斯莱斯 Slaith",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯莱斯",
+          "form": "bare"
+        }
+      },
+      "Sockets": {
+        "name": {
+          "cn": "萨克茨 Sockets",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "萨克茨",
+          "form": "bare"
+        }
+      },
+      "Sodden Corpse": {
+        "name": {
+          "cn": "浸透的尸体 Sodden Corpse",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "浸透的尸体",
+          "form": "bare"
+        }
+      },
+      "Soul Potency": {
+        "adjective": {
+          "cn": "灵魂强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "灵魂强度 Soul Potency",
+          "form": "bilingual"
+        }
+      },
+      "Spectra": {
+        "name": {
+          "cn": "斯佩克特拉 Spectra",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯佩克特拉",
+          "form": "bare"
+        }
+      },
+      "Spellbreaker Guard": {
+        "name": {
+          "cn": "破咒守卫 Spellbreaker Guard",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "破咒守卫",
+          "form": "bare"
+        }
+      },
+      "Spellbreaker Riot Guard": {
+        "name": {
+          "cn": "破法者防暴卫兵 Spellbreaker Riot Guard",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "破法者防暴卫兵",
+          "form": "bare"
+        }
+      },
+      "Spellcraft": {
+        "folders": {
+          "cn": "施法",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "施法 Spellcraft",
+          "form": "bilingual"
+        }
+      },
+      "Splinter Canyons": {
+        "categories": {
+          "cn": "碎裂峡谷",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "碎裂峡谷 Splinter Canyons",
+          "form": "bilingual"
+        }
+      },
+      "Sporix Host": {
+        "name": {
+          "cn": "孢体宿主 Sporix Host",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "孢体宿主",
+          "form": "bare"
+        }
+      },
+      "Steros Kraver": {
+        "name": {
+          "cn": "斯特罗斯·克拉弗 Steros Kraver",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯特罗斯·克拉弗",
+          "form": "bare"
+        }
+      },
+      "Sticks": {
+        "name": {
+          "cn": "斯蒂克斯 Sticks",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯蒂克斯",
+          "form": "bare"
+        }
+      },
+      "Storm Potency": {
+        "adjective": {
+          "cn": "风暴强度",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "风暴强度 Storm Potency",
+          "form": "bilingual"
+        }
+      },
+      "Storm Sprite": {
+        "name": {
+          "cn": "风暴精灵 Storm Sprite",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "风暴精灵",
+          "form": "bare"
+        }
+      },
+      "Strayhearth Caravan": {
+        "folders": {
+          "cn": "迷炉商队 Strayhearth Caravan",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "迷炉商队 Strayhearth Caravan",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "迷炉商队",
+          "form": "bare"
+        }
+      },
+      "Suarrok": {
+        "name": {
+          "cn": "苏阿罗克 Suarrok",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "苏阿罗克",
+          "form": "bare"
+        }
+      },
+      "Suarrok Juvenile": {
+        "name": {
+          "cn": "幼年苏阿罗克 Suarrok Juvenile",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "幼年苏阿罗克",
+          "form": "bare"
+        }
+      },
+      "Surge Walker": {
+        "name": {
+          "cn": "涌动行者 Surge Walker",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "涌动行者",
+          "form": "bare"
+        }
+      },
+      "Svala Bronwen": {
+        "name": {
+          "cn": "斯瓦拉·布朗温 Svala Bronwen",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "斯瓦拉·布朗温",
+          "form": "bare"
+        }
+      },
+      "Swarm of Cave Wasps": {
+        "name": {
+          "cn": "洞穴黄蜂虫群 Swarm of Cave Wasps",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "洞穴黄蜂虫群",
+          "form": "bare"
+        }
+      },
+      "Tail": {
+        "folders": {
+          "cn": "尾巴",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "尾巴 Tail",
+          "form": "bilingual"
+        }
+      },
+      "Talents": {
+        "folders": {
+          "cn": "天赋",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "天赋 Talents",
+          "form": "bilingual"
+        }
+      },
+      "Tauric": {
+        "name": {
+          "cn": "陶里克 Tauric",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "陶里克",
+          "form": "bare"
+        }
+      },
+      "Temple Invader": {
+        "name": {
+          "cn": "神殿入侵者 Temple Invader",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "神殿入侵者",
+          "form": "bare"
+        }
+      },
+      "Tenacity": {
+        "adjective": {
+          "cn": "顽强",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "顽强 Tenacity",
+          "form": "bilingual"
+        }
+      },
+      "Terrane": {
+        "name": {
+          "cn": "泰兰 Terrane",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "泰兰",
+          "form": "bare"
+        }
+      },
+      "Tethra Shùl": {
+        "name": {
+          "cn": "泰斯拉·舒尔 Tethra Shùl",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "泰斯拉·舒尔",
+          "form": "bare"
+        }
+      },
+      "Thayloc Courser": {
+        "name": {
+          "cn": "赛洛克弓手 Thayloc Courser",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "赛洛克弓手",
+          "form": "bare"
+        }
+      },
+      "The Cube": {
+        "name": {
+          "cn": "方块 The Cube",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "方块",
+          "form": "bare"
+        }
+      },
+      "The Device": {
+        "name": {
+          "cn": "该装置 The Device",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "该装置",
+          "form": "bare"
+        }
+      },
+      "The Dives": {
+        "categories": {
+          "cn": "矿渊",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "矿渊 The Dives",
+          "form": "bilingual"
+        }
+      },
+      "Toothbreaker Scaletamer": {
+        "name": {
+          "cn": "碎牙帮驯鳞者 Toothbreaker Scaletamer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "碎牙帮驯鳞者",
+          "form": "bare"
+        }
+      },
+      "Toothbreaker Thug": {
+        "name": {
+          "cn": "碎牙帮暴徒 Toothbreaker Thug",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "碎牙帮暴徒",
+          "form": "bare"
+        }
+      },
+      "Toron": {
+        "name": {
+          "cn": "托隆 Toron",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "托隆",
+          "form": "bare"
+        }
+      },
+      "Towering Obsidian Vine": {
+        "name": {
+          "cn": "高耸黑曜石藤蔓 Towering Obsidian Vine",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "高耸黑曜石藤蔓",
+          "form": "bare"
+        }
+      },
+      "Triss Carpel": {
+        "name": {
+          "cn": "特里丝·卡佩尔 Triss Carpel",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "特里丝·卡佩尔",
+          "form": "bare"
+        }
+      },
+      "Ulfen": {
+        "name": {
+          "cn": "乌尔芬 Ulfen",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "乌尔芬",
+          "form": "bare"
+        }
+      },
+      "Undaunted Adept": {
+        "name": {
+          "cn": "无畏修习者 Undaunted Adept",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "无畏修习者",
+          "form": "bare"
+        }
+      },
+      "Undaunted Trainee": {
+        "name": {
+          "cn": "无畏受训者 Undaunted Trainee",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "无畏受训者",
+          "form": "bare"
+        }
+      },
+      "Undead": {
+        "categories": {
+          "cn": "不死生物",
+          "form": "bare"
+        },
+        "folders": {
+          "cn": "不死生物 Undead",
+          "form": "bilingual"
+        }
+      },
+      "Underforge": {
+        "categories": {
+          "cn": "底部熔炉",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "底部熔炉 Underforge",
+          "form": "bilingual"
+        }
+      },
+      "Unshakeable": {
+        "adjective": {
+          "cn": "不可动摇",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "不可动摇 Unshakeable",
+          "form": "bilingual"
+        }
+      },
+      "Vampyre Spawn": {
+        "name": {
+          "cn": "吸血孽裔 Vampyre Spawn",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "吸血孽裔",
+          "form": "bare"
+        }
+      },
+      "Vanexis": {
+        "name": {
+          "cn": "瓦内克西斯 Vanexis",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "瓦内克西斯",
+          "form": "bare"
+        }
+      },
+      "Vartholomew Chess": {
+        "name": {
+          "cn": "瓦索洛缪·切斯 Vartholomew Chess",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "瓦索洛缪·切斯",
+          "form": "bare"
+        }
+      },
+      "Veiled Chain Agent": {
+        "name": {
+          "cn": "帷幕锁链特工 Veiled Chain Agent",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "帷幕锁链特工",
+          "form": "bare"
+        }
+      },
+      "Verdant Paths": {
+        "categories": {
+          "cn": "翠绿径",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "翠绿径 Verdant Paths",
+          "form": "bilingual"
+        }
+      },
+      "Vespian Hydral": {
+        "name": {
+          "cn": "维斯皮安九头蛇 Vespian Hydral",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "维斯皮安九头蛇",
+          "form": "bare"
+        }
+      },
+      "Vespian Hydral Head": {
+        "name": {
+          "cn": "维斯皮安九头蛇头颅 Vespian Hydral Head",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "维斯皮安九头蛇头颅",
+          "form": "bare"
+        }
+      },
+      "Vhismara's Claw": {
+        "name": {
+          "cn": "维斯玛拉之爪 Vhismara's Claw",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "维斯玛拉之爪",
+          "form": "bare"
+        }
+      },
+      "Vicious": {
+        "adjective": {
+          "cn": "凶残",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "凶残 Vicious",
+          "form": "bilingual"
+        }
+      },
+      "Vinarith": {
+        "name": {
+          "cn": "维纳里斯 Vinarith",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "维纳里斯",
+          "form": "bare"
+        }
+      },
+      "Vitt Wandren": {
+        "name": {
+          "cn": "维特·万德伦 Vitt Wandren",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "维特·万德伦",
+          "form": "bare"
+        }
+      },
+      "Vorg": {
+        "name": {
+          "cn": "沃格 Vorg",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "沃格",
+          "form": "bare"
+        }
+      },
+      "Wandren Patroller": {
+        "name": {
+          "cn": "万德伦巡逻者 Wandren Patroller",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "万德伦巡逻者",
+          "form": "bare"
+        }
+      },
+      "Wandren Tracer": {
+        "name": {
+          "cn": "万德伦追踪者 Wandren Tracer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "万德伦追踪者",
+          "form": "bare"
+        }
+      },
+      "Wandren Watcher": {
+        "name": {
+          "cn": "万德伦注视者 Wandren Watcher",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "万德伦注视者",
+          "form": "bare"
+        }
+      },
+      "Water": {
+        "folders": {
+          "cn": "水元素 Water",
+          "form": "bilingual"
+        },
+        "name": {
+          "cn": "水域",
+          "form": "bare"
+        }
+      },
+      "Water Mote": {
+        "name": {
+          "cn": "水微粒 Water Mote",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "水微粒",
+          "form": "bare"
+        }
+      },
+      "Water Sprite": {
+        "name": {
+          "cn": "水妖精 Water Sprite",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "水妖精",
+          "form": "bare"
+        }
+      },
+      "Water Visitor": {
+        "name": {
+          "cn": "水访客 Water Visitor",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "水访客",
+          "form": "bare"
+        }
+      },
+      "Water Wanderer": {
+        "name": {
+          "cn": "涉水者 Water Wanderer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "涉水者",
+          "form": "bare"
+        }
+      },
+      "Weapons": {
+        "folders": {
+          "cn": "武器",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "武器 Weapons",
+          "form": "bilingual"
+        }
+      },
+      "Wedgelands": {
+        "categories": {
+          "cn": "楔地",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "楔地 Wedgelands",
+          "form": "bilingual"
+        }
+      },
+      "Wild Gods": {
+        "categories": {
+          "cn": "荒野诸神",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "荒野诸神 Wild Gods",
+          "form": "bilingual"
+        }
+      },
+      "Wilderness": {
+        "folders": {
+          "cn": "荒野",
+          "form": "bare"
+        },
+        "name": {
+          "cn": "荒野 Wilderness",
+          "form": "bilingual"
+        }
+      },
+      "Woven Construct": {
+        "name": {
+          "cn": "编织构装体 Woven Construct",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "编织构装体",
+          "form": "bare"
+        }
+      },
+      "Writhing Whisperer": {
+        "name": {
+          "cn": "蠕动低语者 Writhing Whisperer",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "蠕动低语者",
+          "form": "bare"
+        }
+      },
+      "Writhing Whisperer Tendril": {
+        "name": {
+          "cn": "蠕动低语者触须 Writhing Whisperer Tendril",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "蠕动低语者触须",
+          "form": "bare"
+        }
+      },
+      "Yarnac": {
+        "name": {
+          "cn": "亚纳克 Yarnac",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "亚纳克",
+          "form": "bare"
+        }
+      },
+      "Yarnac Juvenile": {
+        "name": {
+          "cn": "亚纳克幼体 Yarnac Juvenile",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "亚纳克幼体",
+          "form": "bare"
+        }
+      },
+      "Yeela Drevvin": {
+        "name": {
+          "cn": "叶拉·德雷文 Yeela Drevvin",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "叶拉·德雷文",
+          "form": "bare"
+        }
+      },
+      "Yellow Block Inmate": {
+        "name": {
+          "cn": "黄区囚犯 Yellow Block Inmate",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "黄区囚犯",
+          "form": "bare"
+        }
+      },
+      "Young Cheliceraeth": {
+        "name": {
+          "cn": "幼年螯蛛艾斯 Young Cheliceraeth",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "幼年螯蛛艾斯",
+          "form": "bare"
+        }
+      },
+      "Zarajah": {
+        "name": {
+          "cn": "扎拉贾 Zarajah",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "扎拉贾",
+          "form": "bare"
+        }
+      },
+      "Zira Hestidero": {
+        "name": {
+          "cn": "齐拉·赫斯提德罗 Zira Hestidero",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "齐拉·赫斯提德罗",
+          "form": "bare"
+        }
+      },
+      "Zodi Trask": {
+        "name": {
+          "cn": "佐迪·特拉斯克 Zodi Trask",
+          "form": "bilingual"
+        },
+        "tokenName": {
+          "cn": "佐迪·特拉斯克",
+          "form": "bare"
+        }
+      }
+    }
+  },
+  "sameRoleMissingTail": {
+    "_note": "**同一个角色内部**，同一英文的中文相同、只是双语后缀时加时不加。这才是真漏加后缀，可按该角色的约定统一。",
+    "count": 31,
+    "terms": {
+      "Adventuring Gear": {
+        "folders": {
+          "冒险装备 Adventuring Gear": 2,
+          "冒险装备": 1
+        }
+      },
+      "Armor": {
+        "folders": {
+          "护甲": 3,
+          "护甲 Armor": 2
+        }
+      },
+      "Beast": {
+        "folders": {
+          "野兽": 2,
+          "野兽 Beast": 1
+        }
+      },
+      "Beasts": {
+        "folders": {
+          "野兽 Beasts": 3,
+          "野兽": 1
+        }
+      },
+      "Constructs": {
+        "folders": {
+          "构装体 Constructs": 3,
+          "构装体": 1
+        }
+      },
+      "Consumables": {
+        "folders": {
+          "消耗品": 2,
+          "消耗品 Consumables": 2
+        }
+      },
+      "Darkness": {
+        "name": {
+          "黑暗": 10,
+          "黑暗 Darkness": 7
+        }
+      },
+      "Dragon": {
+        "folders": {
+          "巨龙": 1,
+          "巨龙 Dragon": 1
+        }
+      },
+      "Dragons": {
+        "folders": {
+          "巨龙 Dragons": 3,
+          "巨龙": 1
+        }
+      },
+      "Elemental": {
+        "folders": {
+          "元素生物": 1,
+          "元素生物 Elemental": 1
+        }
+      },
+      "Elementals": {
+        "folders": {
+          "元素生物 Elementals": 3,
+          "元素生物": 1
+        }
+      },
+      "Elevator": {
+        "name": {
+          "升降机": 6,
+          "升降机 Elevator": 4
+        }
+      },
+      "Equipment": {
+        "folders": {
+          "装备 Equipment": 2,
+          "装备": 1
+        }
+      },
+      "Flasks": {
+        "folders": {
+          "瓶子 Flasks": 2,
+          "瓶子": 1
+        }
+      },
+      "Focus": {
+        "folders": {
+          "专注 Focus": 2,
+          "专注": 1
+        }
+      },
+      "General": {
+        "folders": {
+          "常规": 1,
+          "常规 General": 1
+        }
+      },
+      "Humanoid": {
+        "folders": {
+          "人型生物": 1,
+          "人型生物 Humanoid": 1
+        }
+      },
+      "Humanoids": {
+        "folders": {
+          "人型生物 Humanoids": 3,
+          "人型生物": 1
+        }
+      },
+      "Ingredients": {
+        "folders": {
+          "材料": 2,
+          "材料 Ingredients": 2
+        }
+      },
+      "Jewelry": {
+        "folders": {
+          "珠宝 Jewelry": 2,
+          "珠宝": 1
+        }
+      },
+      "Miscellaneous": {
+        "folders": {
+          "杂项 Miscellaneous": 2,
+          "杂项": 1
+        }
+      },
+      "Monstrosity": {
+        "folders": {
+          "畸怪": 1,
+          "畸怪 Monstrosity": 1
+        }
+      },
+      "Ocean": {
+        "name": {
+          "海洋 Ocean": 2,
+          "海洋": 2
+        }
+      },
+      "Overview": {
+        "categories": {
+          "概览": 120,
+          "概览 Overview": 1
+        }
+      },
+      "Shield": {
+        "folders": {
+          "盾牌 Shield": 2,
+          "盾牌": 1
+        }
+      },
+      "Talents": {
+        "folders": {
+          "天赋": 1,
+          "天赋 Talents": 1
+        }
+      },
+      "Tools": {
+        "folders": {
+          "工具": 2,
+          "工具 Tools": 2
+        }
+      },
+      "Toxins": {
+        "folders": {
+          "毒素 Toxins": 2,
+          "毒素": 1
+        }
+      },
+      "Treasure": {
+        "folders": {
+          "宝藏 Treasure": 2,
+          "宝藏": 1
+        }
+      },
+      "Undead": {
+        "folders": {
+          "不死生物 Undead": 3,
+          "不死生物": 2
+        }
+      },
+      "Weapons": {
+        "folders": {
+          "武器": 3,
+          "武器 Weapons": 2
+        }
+      }
+    }
+  },
+  "shippedTermInconsistency": {
+    "_note": "同一专名在同一角色里被译成了不同的中文。必须裁决后统一。",
+    "count": 5,
+    "terms": {
+      "Arcturian": {
+        "name": {
+          "阿克图里安 Arcturian": 8,
+          "阿克图里安人 Arcturian": 2
+        },
+        "tokenName": {
+          "阿克图里安": 3,
+          "阿克图里安人": 2
+        }
+      },
+      "Color Commentary": {
+        "name": {
+          "彩色解说 Color Commentary": 2,
+          "精彩解说": 2
+        }
+      },
+      "Luminous": {
+        "name": {
+          "明光 Luminous": 4,
+          "辉耀 Luminous": 1
+        }
+      },
+      "Shield": {
+        "name": {
+          "护盾术 Shield": 23,
+          "盾牌 Shield": 8
+        }
+      },
+      "Spirited": {
+        "name": {
+          "精神焕发 Spirited": 1,
+          "昂扬 Spirited": 1
+        }
+      }
+    }
+  },
+  "unresolvedRoleTies": {
+    "_note": "该 (英文, 角色) 桶里两个及以上中文票数相同，且按角色约定的形态也分不出唯一胜者。**没有硬选**，这些英文没有进 harvest 层。以前是靠 sorted 的稳定性（即文件遍历顺序）默默定的。",
+    "count": 1,
+    "terms": {
+      "Spirited": {
+        "name": [
+          "精神焕发 Spirited",
+          "昂扬 Spirited"
+        ]
+      }
+    }
   }
- },
- "shippedTermInconsistency": {
-  "_note": "同一专名在已发布译文里被译成了不同的中文。必须裁决后统一。",
-  "count": 59,
-  "terms": {
-   "Afflicted Pallid Drake": {
-    "受苦的苍白龙兽 Afflicted Pallid Drake": 2,
-    "变异苍白龙兽": 1
-   },
-   "Afflicted Pallid Drakeling": {
-    "受难苍白幼龙 Afflicted Pallid Drakeling": 1,
-    "变异苍白幼龙": 1
-   },
-   "Anvil": {
-    "铁砧 Anvil": 1,
-    "铁砧 铁砧": 1
-   },
-   "Aquatic Breathing": {
-    "水生呼吸 Aquatic Breathing": 1,
-    "水下呼吸 Aquatic Breathing": 1
-   },
-   "Aqueous Camouflage": {
-    "水相伪装 Aqueous Camouflage": 1,
-    "水生伪装 Aqueous Camouflage": 1
-   },
-   "Arcos Sarinland": {
-    "阿科斯·萨林兰德 Arcos Sarinland": 1,
-    "阿尔科斯·萨林兰德": 1
-   },
-   "Arcturian": {
-    "阿克图里安 Arcturian": 2,
-    "阿克图里亚人 Arcturian": 2,
-    "阿克图里安": 1
-   },
-   "Armor Crusher": {
-    "碎甲者 Armor Crusher": 1,
-    "护甲粉碎者 Armor Crusher": 1
-   },
-   "Bite": {
-    "啃咬 Bite": 24,
-    "噬咬 Bite": 1
-   },
-   "Cascillian Marine": {
-    "卡斯奇利亚海军 Cascillian Marine": 1,
-    "卡斯奇利安海军陆战队员": 1
-   },
-   "Cascillian Marine Officer": {
-    "卡斯奇利安海军军官 Cascillian Marine Officer": 1,
-    "卡斯奇利亚海军军官": 1
-   },
-   "Chamberlain": {
-    "总管 Chamberlain": 1,
-    "侍从官": 1
-   },
-   "Chessman Plating": {
-    "棋士镀层 Chessman Plating": 4,
-    "棋士装甲板 Chessman Plating": 1
-   },
-   "Cindaric Sage": {
-    "辛达里克贤者 Cindaric Sage": 2,
-    "辛达里克信徒": 1
-   },
-   "Claw Hammer": {
-    "爪锤 Claw Hammer": 4,
-    "羊角锤 Claw Hammer": 2
-   },
-   "Corvana Vortest": {
-    "科瓦娜·沃尔特斯特 Corvana Vortest": 1,
-    "法师": 1
-   },
-   "Gafto the Howler": {
-    "嚎叫者加夫托 Gafto the Howler": 1,
-    "加夫托": 1
-   },
-   "Gore Bird": {
-    "血鸟 Gore Bird": 1,
-    "血鸟群": 1
-   },
-   "Hammer": {
-    "锤子 Hammer": 3,
-    "锤 Hammer": 2,
-    "锤": 1
-   },
-   "Harbinger of Disease": {
-    "疫病先驱 Harbinger of Disease": 1,
-    "疫病先驱 疫病先驱": 1
-   },
-   "Harbinger of Madness": {
-    "疯狂先驱者 Harbinger of Madness": 1,
-    "疯狂先驱者 先驱者 of 疯狂": 1
-   },
-   "Headbutt": {
-    "头槌 Headbutt": 1,
-    "头槌攻击 Headbutt": 1
-   },
-   "Huiana": {
-    "惠安娜 Huiana": 1,
-    "惠安娜 惠安娜": 1
-   },
-   "Hulg'run Lineage": {
-    "Hulg'run血统 Hulg'run Lineage": 5,
-    "赫尔格伦血统 Hulg'run Lineage": 1
-   },
-   "Improvisational Expertise": {
-    "即兴专长 Improvisational Expertise": 3,
-    "即兴专精 Improvisational Expertise": 3
-   },
-   "Inflection: Compose": {
-    "屈折：作曲 Inflection: Compose": 14,
-    "词缀：作曲 Inflection: Compose": 1
-   },
-   "Inflection: Elude": {
-    "屈折：闪避 Inflection: Elude": 5,
-    "词缀：闪避 Inflection: Elude": 1
-   },
-   "Inflection: Extend": {
-    "屈折：延展 Inflection: Extend": 6,
-    "词缀：延展 Inflection: Extend": 1
-   },
-   "Inflection: Negate": {
-    "屈折：否定 Inflection: Negate": 3,
-    "词缀：否定 Inflection: Negate": 1
-   },
-   "Inflection: Pull": {
-    "屈折：拉拽 Inflection: Pull": 3,
-    "词缀：拉拽 Inflection: Pull": 2
-   },
-   "Inflection: Quicken": {
-    "屈折：迅捷化 Inflection: Quicken": 5,
-    "词缀：迅捷化 Inflection: Quicken": 1
-   },
-   "Inflection: React": {
-    "词缀：反应 Inflection: React": 1,
-    "屈折：反应 Inflection: React": 1
-   },
-   "Inflection: Reshape": {
-    "屈折：重塑 Inflection: Reshape": 2,
-    "词缀：重塑 Inflection: Reshape": 1
-   },
-   "Ix'erax": {
-    "伊克斯埃拉克斯 Ix'erax": 1,
-    "伊克斯艾拉克斯": 1
-   },
-   "Jonico Daridane": {
-    "乔尼科·达里丹ე Jonico Daridane": 1,
-    "乔尼科·达里丹": 1
-   },
-   "Kadhana Lizard": {
-    "卡达娜蜥蜴 Kadhana Lizard": 1,
-    "卡达纳蜥蜴": 1
-   },
-   "Kinesis Proficiency": {
-    "念力熟练度 Kinesis Proficiency": 1,
-    "念动力熟练度 Kinesis Proficiency": 1
-   },
-   "Liestra's Bracer of Appraisal": {
-    "莉埃斯特拉的鉴定护腕 Liestra's Bracer of Appraisal": 1,
-    "列斯特拉的鉴定护臂 Liestra's Bracer of Appraisal": 1
-   },
-   "Local Color": {
-    "地域风貌": 1,
-    "地方色彩 Local Color": 1
-   },
-   "Mistress Caberi": {
-    "卡贝丽夫人 Mistress Caberi": 1,
-    "卡贝里夫人": 1
-   },
-   "Natural Invisibility": {
-    "天然隐形 Natural Invisibility": 2,
-    "天生隐形 Natural Invisibility": 1
-   },
-   "Orcish": {
-    "兽人语 Orcish": 3,
-    "兽人语血统 Orcish": 1
-   },
-   "Orivech": {
-    "奥里维奇 Orivech": 1,
-    "奥里维奇 奥里维奇": 1
-   },
-   "Paint Globlin": {
-    "绘画地精 Paint Globlin": 1,
-    "绘制地精布林": 1
-   },
-   "Party": {
-    "队伍 Party": 2,
-    "队伍 队伍": 1,
-    "队伍": 1
-   },
-   "Raster Thorn": {
-    "栅格荆棘 Raster Thorn": 1,
-    "栅格棘刺": 1
-   },
-   "Rune: Kinesis": {
-    "符文：念动力 Rune: Kinesis": 7,
-    "符文：念力 Rune: Kinesis": 5
-   },
-   "Shade of Agaseros": {
-    "阿加瑟洛斯之影 Shade of Agaseros": 1,
-    "阿加塞洛斯的幽影": 1
-   },
-   "Shimz Shimring": {
-    "希姆兹 希姆林 Shimz Shimring": 1,
-    "希姆兹": 1
-   },
-   "Sin's Caravan": {
-    "辛的商队 Sin's Caravan": 1,
-    "辛恩的商队": 1
-   },
-   "Sitherian": {
-    "西瑟里安 Sitherian": 2,
-    "西希拉之子": 1
-   },
-   "Spellbreaker Guard": {
-    "破咒守卫 Spellbreaker Guard": 1,
-    "破法卫士": 1
-   },
-   "Spellbreaker Riot Guard": {
-    "破法者防暴卫队 Spellbreaker Riot Guard": 1,
-    "破咒暴动卫兵": 1
-   },
-   "Sporix Host": {
-    "孢体宿主 Sporix Host": 1,
-    "受折磨的荆棘幼体": 1
-   },
-   "Swarm of Cave Wasps": {
-    "洞穴黄蜂虫群 Swarm of Cave Wasps": 1,
-    "洞穴黄蜂群": 1
-   },
-   "Tauric": {
-    "牛族 Tauric": 1,
-    "牛类的": 1
-   },
-   "Thayloc Courser": {
-    "赛洛克疾奔兽 Thayloc Courser": 1,
-    "非玩家角色": 1
-   },
-   "To Fall and Fall Again": {
-    "坠落，又再度坠落 To Fall and Fall Again": 1,
-    "一再坠落 To Fall and Fall Again": 1
-   },
-   "Wandren Patroller": {
-    "巡逻者旺德伦 Wandren Patroller": 1,
-    "万德伦巡逻者": 1
-   }
-  }
- },
- "resolved": {
-  "Aberin's Folly": {
-   "base": "阿伯林的愚举",
-   "shipped": "阿贝林的愚举 Aberin's Folly",
-   "resolved": "阿伯林的愚举（库内 216:31）"
-  },
-  "Agrimage": {
-   "base": "农法师",
-   "shipped": "农艺法师 Agrimage",
-   "resolved": "农艺法师（284:180:12，且是 name 字段；英文闸要不区分大小写，正文大量小写 agrimage）"
-  },
-  "Arcturian Liquor": {
-   "base": "阿克图里安烈酒",
-   "shipped": "阿克图瑞安烈酒 Arcturian Liquor",
-   "resolved": "阿克图里安烈酒（248:3）"
-  },
-  "Attunement": {
-   "base": "调谐",
-   "shipped": "同调 Attunement",
-   "resolved": "同调（1440:10，2026-08-06 已裁）"
-  },
-  "Chapter 3 Events": {
-   "base": "第3章事件",
-   "shipped": "第3章 事件 Chapter 3 Events",
-   "resolved": "格式类，非术语分歧，无需裁决"
-  },
-  "Formidable Presence": {
-   "base": "威严气场",
-   "shipped": "威严魅力 Formidable Presence",
-   "resolved": "威严气场（2026-08-06 已裁；库内已无「威严魅力」）"
-  },
-  "Golden Weapon": {
-   "base": "金色武器",
-   "shipped": "黄金武器 Golden Weapon",
-   "resolved": "黄金武器（库内 2:0，base 值从未使用）"
-  },
-  "House Cevher Mausoleum": {
-   "base": "杰夫赫尔家族陵墓",
-   "shipped": "杰夫赫家族陵墓 House Cevher Mausoleum",
-   "resolved": "杰夫赫尔家族陵墓（913:6:4）"
-  },
-  "House Cevher Signet Ring": {
-   "base": "杰夫赫尔家族印戒",
-   "shipped": "切夫赫尔家族印戒 House Cevher Signet Ring",
-   "resolved": "杰夫赫尔家族印戒（同上）"
-  },
-  "Hulg'run Lineage": {
-   "base": "赫尔格伦血统",
-   "shipped": "Hulg'run血统 Hulg'run Lineage",
-   "resolved": "赫尔格伦血统（库里原有 7 处专名整个留成英文，已译）"
-  },
-  "Kinesis Proficiency": {
-   "base": "念动力熟练度",
-   "shipped": "念力熟练度 Kinesis Proficiency",
-   "resolved": "念力熟练度。**注意**：库内的「念动力」译的是 Telekinesis，不是 Kinesis，两者是不同的词，不能合并"
-  },
-  "Kineturge": {
-   "base": "念动力术师",
-   "shipped": "念力术师 Kineturge",
-   "resolved": "念力术师（同上）"
-  },
-  "Kithil": {
-   "base": "奇希尔",
-   "shipped": "基希尔 Kithil",
-   "resolved": "基希尔（285:0，base 值从未使用）"
-  },
-  "Ordain Gazetteer": {
-   "base": "奥尔丹地志",
-   "shipped": "奥丹地志 Ordain Gazetteer",
-   "resolved": "奥尔丹地志。城市名 奥尔丹 3062 : 奥丹 225，后者全部改掉"
-  },
-  "Quickwater": {
-   "base": "激流水",
-   "shipped": "急流水 Quickwater",
-   "resolved": "急流水（18:0，base 值从未使用）"
-  },
-  "Reliquary": {
-   "base": "圣物室",
-   "shipped": "圣髑匣 Reliquary",
-   "resolved": "圣髑匣（29:10）。但库内 10 处「圣物室」所在条目的英文并无 Reliquary，属另一个词，未动"
-  },
-  "Thornling": {
-   "base": "荆棘裔",
-   "shipped": "荆芽灵 Thornling",
-   "resolved": "荆芽灵（313:148，且是 taxonomy name 字段）"
-  },
-  "Welcome To Crucible": {
-   "base": "欢迎来到Crucible",
-   "shipped": "欢迎来到 Welcome To Crucible",
-   "resolved": "「欢迎来到 Crucible」。原 shipped 值「欢迎来到 Welcome To Crucible」的中文半截是空的；库内系统名一律保留英文 Crucible，中文里已含该词，故不再缀英文尾巴"
-  },
-  "What is Crucible": {
-   "base": "什么是《Crucible》",
-   "shipped": "什么是《 What is Crucible",
-   "resolved": "「什么是 Crucible」。原 shipped 值「什么是《 What is Crucible」残留了一个孤立的书名号"
-  },
-  "Wind Raiders": {
-   "base": "风掠者",
-   "shipped": "风袭劫掠者 Wind Raiders",
-   "resolved": "风袭劫掠者（26:2，前者是 actor name 字段）"
-  }
- }
 }

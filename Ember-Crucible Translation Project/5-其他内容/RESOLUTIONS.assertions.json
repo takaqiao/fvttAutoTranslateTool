@@ -275,6 +275,68 @@
       "scope": [
         "ember"
       ]
+    },
+    {
+      "id": "R-version-matrix",
+      "title": "PROJECT.md 抬头与版本矩阵必须与 module.json 一致",
+      "decision": "2026-08-15e",
+      "why": "这一行历史上漂过两次（停在 0.9.6/1.1.7 与 0.9.7/1.1.10）。每次都是发完版、追加了本轮小节、但没回头改抬头。新会话第一件事就是读抬头判断现状，读到过期版本会直接判断错「现在到哪一步」",
+      "kind": "version_matrix",
+      "doc": "PROJECT.md",
+      "tag_prefix": {
+        "crucible": "",
+        "ember": "v"
+      }
+    },
+    {
+      "id": "R-junction-wheel",
+      "title": "Junction Wheel = 枢纽轮盘（改判，原裁「路口轮盘」）",
+      "decision": "2026-08-15e",
+      "kind": "term_gated",
+      "why": "物品 name 就是「雅科什塔枢纽轮盘」（阶梯第 1 档），英文闸 14:2，glossary 也已 harvest 成枢纽轮盘。词义上也更对：矿车道岔，「路口」是地面街道的 register。原裁决被静默推翻过且无记录 —— 这条断言就是为了不再翻第三次",
+      "en": "\\bJunction Wheel\\b",
+      "cn_required": "枢纽轮盘",
+      "scope": [
+        "ember"
+      ]
+    },
+    {
+      "id": "R-shard-god",
+      "title": "Shard God 三分：之神 / 诸神 / 女神，不许统一",
+      "decision": "2026-08-15e",
+      "kind": "distinct_terms",
+      "why": "name 字段完全自洽：Shard God→碎片之神、Shard Gods→碎片诸神、Shard Goddess→碎片女神。三者各有各的英文，看着像分裂只是因为一叶里可同时出现多种形态。这条断言防的是下一轮按多数派把它们「统一」掉",
+      "terms": [
+        {
+          "en": "Shard God",
+          "cn": "碎片之神"
+        },
+        {
+          "en": "Shard Gods",
+          "cn": "碎片诸神"
+        },
+        {
+          "en": "Shard Goddess",
+          "cn": "碎片女神"
+        }
+      ]
+    },
+    {
+      "id": "R-fortitude-scope",
+      "title": "Fortitude=强韧 只管 crucible 侧；dnd5e 的 Undead/Undeathly Fortitude 保持坚韧",
+      "decision": "2026-08-15e",
+      "kind": "glossary_value",
+      "why": "第十五轮 ③ 曾把 dnd5e 的特性名一并改成「强韧」——越界。§1 明定 dnd5e 侧不受 crucible 定译辖制，「亡灵坚韧/不死坚韧」是 5e 通行译法。这条把两侧同时钉住，防止再被任一方向拉平",
+      "files": {
+        "base": "..\\glossary_crucible_merged.json",
+        "product": "5-其他内容/glossary/glossary_ec.json"
+      },
+      "entries": {
+        "Fortitude": "强韧",
+        "Toughness": "坚韧",
+        "Undeathly Fortitude": "不死坚韧"
+      },
+      "require_present": false
     }
   ]
 }

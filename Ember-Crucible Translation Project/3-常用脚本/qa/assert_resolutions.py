@@ -23,6 +23,7 @@
 `exclusions_closed` `same_en_split` 的分组必须全部在已归档豁免表内
 `leaf_literal`    指定叶必须/不得包含某个字面串（用于登记「绝不能动」的假阳性）
 `glossary_value`  词表的 base 层与产物层都必须是某个值（防「词表把错误洗成权威」）
+`version_matrix`  PROJECT.md 抬头与版本矩阵必须与两仓 module.json 一致（这一行漂过两次）
 
 每条断言都带 `decision`（对应第 8 节哪一天的裁决）与 `why`，失败时一并打印 ——
 让下一个人看到的不是「断言 R-xx 挂了」，而是「你违反了 2026-08-13j 定的那条，理由是……」。
@@ -278,6 +279,61 @@ def a_glossary_value(rule, ctx):
     return bad, f"两层合计核对 {checked} 条"
 
 
+def a_version_matrix(rule, ctx):
+    """PROJECT.md 抬头与版本矩阵里的版本号，必须与两仓 `module.json` 一致。
+
+    为什么值得一条断言：这一行**历史上漂过两次**（停在 0.9.6/1.1.7 与 0.9.7/1.1.10 各一次）。
+    每次都是「发了版、追加了本轮小节、但没回头改抬头」——纯粹靠人记得，就一定会漏。
+    新会话第一件事就是读抬头判断现状，读到过期版本会直接判断错「现在到哪一步了」。
+    """
+    import re as _re
+    doc_p = os.path.join(ROOT, rule.get("doc", "PROJECT.md"))
+    if not os.path.exists(doc_p):
+        return [("-", "-", doc_p, "找不到 PROJECT.md")], "跳过"
+    doc = open(doc_p, encoding="utf-8").read()
+    bad = []
+    detail = []
+    for name, repo in ctx.repos.items():
+        mj = os.path.join(repo, "module.json")
+        if not os.path.exists(mj):
+            continue
+        manifest = json.load(open(mj, encoding="utf-8"))
+        ver = manifest.get("version")
+        pkg = manifest.get("id", name)
+        prefix = rule["tag_prefix"].get(name, "")
+        want = f"{prefix}{ver}"
+        detail.append(f"{name}={want}")
+        # 抬头段（前 40 行）里必须出现当前版本
+        head = "\n".join(doc.splitlines()[:40])
+        if want not in head:
+            bad.append((name, "PROJECT.md", "抬头段",
+                        f"抬头没有写当前版本 {want}（module.json 是 {ver}）—— 抬头又漂了"))
+
+        # ⚑ 只查抬头是不够的：正文里还有「发版状态：…」那一行，它停在 0.9.4 / v1.1.4
+        # 漂了四个版本仍然全绿 —— 断言自己的覆盖面就是个盲区。
+        #
+        # ⚠ 但**不能全文乱扫**：§1 有大量**有意保留**的历史引用（「上一版抬头：… 0.9.5 / v1.1.5」）、
+        # §6 年表更是逐版记录。第一版按「§6 之前都算正文」扫，立刻在那些历史行上报了 8 处假阳性。
+        # 正确的判据是**只查声称「现在」的那些行** —— 由 current_markers 明确列出。
+        markers = rule.get("current_markers", ["当前已发布", "发版状态", "当前版本"])
+        for i, line in enumerate(doc.splitlines(), 1):
+            if not any(mk in line for mk in markers):
+                continue
+            for m in _re.finditer(rf"{_re.escape(pkg)}[` ]+v?(\d+\.\d+\.\d+)", line):
+                if m.group(1) != ver:
+                    bad.append((name, "PROJECT.md", f"第 {i} 行",
+                                f"这一行声称的是**当前状态**，却写着 {pkg} {m.group(1)}，"
+                                f"而 module.json 是 {ver}"))
+        # 版本矩阵那一行
+        row = _re.search(rf"^\|\s*{_re.escape(pkg)}\s*\|.*$", doc, _re.MULTILINE)
+        if not row:
+            bad.append((name, "PROJECT.md", "版本矩阵", f"矩阵里没有 {pkg} 这一行"))
+        elif want not in row.group(0):
+            bad.append((name, "PROJECT.md", "版本矩阵",
+                        f"矩阵写的不是 {want}：{row.group(0)[:90]}"))
+    return bad, " | ".join(detail)
+
+
 def a_leaf_literal(rule, ctx):
     bad = []
     checked = 0
@@ -306,6 +362,7 @@ KINDS = {
     "exclusions_closed": a_exclusions_closed,
     "leaf_literal": a_leaf_literal,
     "glossary_value": a_glossary_value,
+    "version_matrix": a_version_matrix,
 }
 
 
