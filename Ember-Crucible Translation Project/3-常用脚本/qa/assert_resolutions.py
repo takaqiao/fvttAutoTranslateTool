@@ -28,6 +28,11 @@
 `block_sense_gate`   同上，但块内做机制义／普通名词义分类，块内单一义项时上正向闸
 `enricher_slot_gate` **槽位级**判据：按 (动词,目标) 把两侧 `@X[…]{标签}` 配对，逐个比标签里的术语
                      （第十九轮 Y6 新增，补 `split_blocks` 把标签连花括号一起涂空留下的洞）
+`enricher_text_coverage` **段级**判据：`@Embed[… readaloud="…"]` 里那整段朗读正文的中文
+                     有没有跟上英文（缺失／中英字符比／段内定译专名／句数四支）。
+                     第二十二轮新增 —— 那 16966 字符上一轮**已经进了口径却没有任何闸**：
+                     英文 48 段里阿拉伯数字 0 个，默认的数字判据对它必然 0 命中，
+                     实测把最长的一段中文删空也一声不响。见 `a_enricher_text_coverage`。
 `glossary_value`  词表的 base 层与产物层都必须是某个值（防「词表把错误洗成权威」）
 `version_matrix`  PROJECT.md 抬头与版本矩阵必须与两仓 module.json 一致（这一行漂过两次）
 
@@ -1413,6 +1418,325 @@ def a_enricher_slot_gate(rule, ctx):
     return bad, detail
 
 
+# --------------------------------------------- 增强器可见正文的覆盖闸（第二十二轮新增）
+#
+# 为什么要单开一个类型（**先读这段再改判据**）
+# --------------------------------------------
+# 第二十一轮把 `@Embed[… readaloud="…"]` 的整段朗读正文纳入了 `scan_content_coverage`
+# 的正文（EN 48 段 / 16966 字符、CN 48 段 / 5392 字符，落在 30 叶）。**纳入是真的，
+# 但纳入之后没有任何判据能判它**，第二十二轮复核逐条实测：
+#   · `scan_content_coverage` 的默认判据是**数字多重集**，而这 48 段英文里
+#     **一个阿拉伯数字都没有（0/48，本文件现读复算同值）** ⇒ 产出必然 0 命中；
+#   · 复核把全库最长的一段中文朗读正文（`ember.adventure ::
+#     The Winding Trail / Dusktide Destruction`，311 字）**整段删空**，默认口径**仍报 0 条**；
+#   · `--with-terms` 不成立：把该叶单独喂进去，**干净时**就报缺定译 39 条、删空后 43 条 ——
+#     两侧都远远非零，**没有判别力**（那是全库开专名闸的固有噪声，模块 docstring 早写过）。
+# 也就是说这 16966 字符处在「已经进了统计口径、却没有任何闸」的状态 —— 比全盲更坏，
+# 因为口径行会让人以为它被查过了。
+#
+# 为什么做成断言（本文件），而不是给 `scan_content_coverage` 加作用域开关
+# ---------------------------------------------------------------------
+# 两条路都试算过，选断言的理由有三条，逐条可证伪：
+# 1. **判别力来自「限定在本段范围内」，而不是来自开关。** 专名闸的噪声是**叶级**的：
+#    一叶散文里随便就能命中 39 条锚点，中文当然不会条条照搬。把范围收到**这一段
+#    朗读正文**之后，本次现读实测：48 段命中锚点 **36 段 / 102 条，缺定译 0 条** ——
+#    信噪比从「两侧都 39+」变成「干净侧 0」。这个收缩靠的是**槽位切分**，
+#    而槽位切分（按 (动词,目标) 配对、`_enr_slots` 取参数值）已经写在本文件里了。
+#    在 `scan_content_coverage` 那边重做一份等于开第二个判据，两份迟早分叉
+#    （`_run_same_en_split` 的注释里记着同一个教训）。
+# 2. **`scan_content_coverage` 是启发式扫描器，不是闸。** 它自己的 docstring 第一句就写着
+#    「优先用 scan_en_drift」，日常没人跑它、跑了也没人看 0 条以外的输出；而本项目的
+#    「不许跑红」纪律挂在 `assert_resolutions.py` 上。要让这 30 叶**真的守住**，
+#    判据必须在这套里。
+# 3. 断言这边已经有反空转的全套护栏（`min_*` / `_unused_exempt` / `--selftest`），
+#    重造一遍只会多一处可空转的地方。
+# ⇒ 但 `scan_content_coverage` 的 docstring 里那句「想真的判这部分，请加 `--with-terms`」
+#    是**已经被证伪的建议**，本轮同时把它改成指向本条断言（那是本轮唯一改动它的地方）。
+#
+# 判据：四条**互相独立**的信号，每条各报各的
+# ------------------------------------------
+# （中英字符比的全库中位数是 0.31，这 48 段是 0.318 —— 两者一致，说明比值这个信号在
+#  朗读正文上与在普通正文上同分布，可以拿全库经验定阈值。）
+# A. **缺失／无汉字**：英文槽有正文而中文槽整个没有、或有而一个汉字都没有。
+#    这一条是绝对的，不看阈值。
+# B. **段级中英字符比**低于 `min_ratio`。本次现读实测 48 段的比值区间是
+#    **[0.263, 0.406]，中位 0.313**（分布很紧）。取 0.20 ⇒ 距最小值仍有 31% 富余。
+# C. **本段范围内的定译专名**：英文段命中词表锚点的，中文段必须出现对应定译。
+#    实测 36 段命中 / 102 条 / 缺 0 条。**范围限定是这条能用的全部理由**，
+#    不要把它放大回叶级（那边噪声 39 条起步）。
+# D. **句数**：中文句号级标点数不得低于 `floor(英文句数 × min_sentence_frac)`。
+#    实测 48 段的「中文句数 ÷ 英文句数」取值只有 {1.0, 1.17, 1.25, 1.33, 2.0} ——
+#    **一段都没有低于 1.0**。取 0.75 ⇒ 每一档都留着余量（英文 4 句只要求中文 ≥3 句），
+#    留余量是为了不把「两句英文合成一句中文」这种合法译法判红。
+# E/F. **数字**与**段内标记**两支照样实现了，但本次现读：含阿拉伯数字的英文段 **0 段**、
+#    含 `<tag>`／`@X[…]` 的英文段 **0 段** ⇒ 这两支现在是**「无从查起」而不是「查过了没问题」**，
+#    detail 行会把这个 0 明说出来。写在这里是因为上游随时可能往朗读框里塞一句
+#    「DC 18」，那一天它们自动开始有信号，而不必再有人想起来补。
+#
+# 双向回测（第二十二轮实测，探针落盘在 `4-临时脚本/2026-08-16-round22/`）
+# ---------------------------------------------------------------------
+# · **特异度**：当前库 48 段，四条信号**合计 0 条违规**（48 段全部非空、比值最低 0.263、
+#   36 段锚点 102 条定译一条不缺、句数一段都不低于英文）。
+# · **灵敏度（全删）**：逐段把中文朗读正文删空 → **48/48 报**。
+# · **灵敏度（删一半）**：逐段把中文朗读正文按字符截掉后一半 → **46/48 报**。
+#   跑不掉的那 2 个槽是**同一段孪生两包各一份**：`Gamemaster's Guide / Main Quest Overview`
+#   的 EN 219 字 / 1 句、CN 89 字（全库中文最丰的一段，比值 0.406），砍一半后比值 0.201 ——
+#   **刚好在 0.20 上面 0.001**，且它英文只有 1 句所以句数闸也够不着。同一段砍 51% 就报。
+#   把 `min_ratio` 提到 0.22 能把这 2 个也收进来（实测 48/48），代价是距最小值只剩 20% 富余，
+#   **本轮选择留富余**：这条闸守的是「整段没跟上」，不是「少译一句」。这是判据边界，写在这里。
+_CN_SENT = re.compile(r"[。！？]")
+_EN_SENT = re.compile(r"[.!?](?:\s|$)")
+_CJK_RE = re.compile(r"[一-鿿]")
+_SEG_NUM = re.compile(r"(?<!\d)(\d+(?:\.\d+)?)(?!\d)")
+_SEG_MARKUP = re.compile(r"@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]|<[^>]+>")
+
+
+def _load_anchors(rule):
+    """锚点表 = 词表里「多字英文键 → 纯中文多字值」的那些条目。返回 (表 或 None, 说明)。
+
+    与 `scan_content_coverage.py` 取锚点的规则同源同值（`len(k) >= 5` 且中文值 ≥2 字、
+    值里不含拉丁字母），本次现读得 **7601 条**。单字中文与含拉丁的值误报率太高，不要放宽。
+
+    ⚠ **表拿不到时必须返回 None 让调用方判失败，不许静静地跑成空表。**
+    那正是本文件 docstring 里的空转形态 (e)：`scan_renamed_terms` 的 `--glossary` 默认空串，
+    不显式传就 `glossary={}`、每个候选静默 continue、最后打印一份漂亮的「0 条问题」，
+    而主控**拿那个 0 当过一次证据**。
+    `anchors` 内联字段**只给 `--selftest` 用**（自检不该依赖磁盘上的词表）。
+    """
+    inline = rule.get("anchors")
+    if inline is not None:
+        return dict(inline), "内联锚点（自检用）"
+    rel = rule.get("glossary")
+    if not rel:
+        return None, "规则里没有 glossary 字段 —— 定译专名这一支无从查起"
+    path = rel if os.path.isabs(rel) else os.path.join(ROOT, rel)
+    if not os.path.exists(path):
+        return None, f"词表文件不存在：{path}"
+    try:
+        raw = json.load(open(path, encoding="utf-8"))
+    except Exception as exc:                       # noqa: BLE001
+        return None, f"词表读不动：{exc!r}"
+    min_key = rule.get("min_anchor_key_len", 5)
+    min_cn = rule.get("min_anchor_cn_len", 2)
+    out = {}
+    for k, v in raw.items():
+        zh = v.split(" ")[0].strip() if isinstance(v, str) else ""
+        if (len(k) >= min_key and len(zh) >= min_cn and _CJK_RE.search(zh)
+                and not re.search("[A-Za-z]", zh)):
+            out[k] = zh
+    return out, f"{os.path.basename(path)} 取锚点 {len(out)} 条"
+
+
+def _seg_anchor_hits(anchors, text, cache):
+    """本段英文里命中的锚点 [(英文键, 中文定译), …]。按段缓存 —— 孪生两包是同一段文本。"""
+    got = cache.get(text)
+    if got is None:
+        got = [(k, v) for k, v in anchors.items()
+               if re.search(r"\b" + re.escape(k) + r"\b", text)]
+        cache[text] = got
+    return got
+
+
+def a_enricher_text_coverage(rule, ctx):
+    """增强器**可见正文**（`readaloud=` 一类整段朗读文本）的覆盖闸。
+
+    与 `enricher_slot_gate` 的分工（**不许做成它的重复**）
+    ----------------------------------------------------
+    `enricher_slot_gate` 判的是「这个槽里的**术语**有没有串行」——它只在英文槽命中某个
+    已裁术语类时才有话说，一段没有任何已裁术语的朗读正文它**完全沉默**（48 段里
+    能被那 7 条标签断言碰到的只是零星几段）。
+    本条判的是「这段正文的**中文有没有跟上英文**」，与具体术语无关。两者正交。
+
+    判据 A–F、阈值取值与双向回测结论，全部写在上面那段块注释里，**改阈值前先读它**。
+
+    反空转
+    ------
+    · `min_leaves` / `min_slots` / `min_gated`：闸下叶数、在册槽数、真正判过的段数；
+    · `min_anchor_terms` / `min_anchor_hits` / `min_anchor_slots`：锚点表条数、
+      本次命中的锚点条数、命中锚点的段数 —— **专门防「词表没读到／锚点规则被改坏」
+      导致 C 支静默失效**（形态 (e)）。锚点表拿不到直接判失败，不跑成空表。
+    · detail 必报「判了多少段 / 多少字 / 比值区间 / 含数字段 / 含标记段 / 豁免」，
+      其中**含数字段与含标记段现在是 0**，这个 0 的含义是「无从查起」不是「查过了」。
+    · `max_unused_exempt` 默认 0，与另外三个类型共用 `_unused_exempt`。
+    """
+    slots_want = rule.get("slots") or ["param:readaloud"]
+    params = tuple(s.split(":", 1)[1] for s in slots_want if s.startswith("param:"))
+    if not params:
+        params = _ENR_TEXT_PARAMS
+    min_en = rule.get("min_en_chars", 60)
+    min_ratio = rule.get("min_ratio", 0.20)
+    sent_frac = rule.get("min_sentence_frac", 0.75)
+    exc = _paths_matcher(rule.get("except_paths"))
+    anchors, anchor_note = _load_anchors(rule)
+
+    bad = []
+    n_leaf = n_pair = n_unpaired = n_slot = n_short = n_cn_only = n_gated = n_ok = 0
+    n_anchor_slot = n_anchor_hit = n_num_slot = n_mark_slot = n_exempt = 0
+    en_chars = cn_chars = 0
+    ratios = []
+    used = [0] * len(rule.get("except_slots", []))
+    cache = {}
+
+    if anchors is None or not anchors:
+        bad.append(("-", "配置", rule["id"],
+                    f"定译专名这一支**无从查起**：{anchor_note}。"
+                    f"闸的其余三支还能跑，但这条断言不许在锚点表缺失时装作全绿"
+                    f"（空转形态 (e)：输入缺失而判据照跑）"))
+        anchors = {}
+
+    for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
+        if "@" not in ev and "@" not in cv:
+            continue
+        if exc and exc(path):
+            continue
+        n_leaf += 1
+        pairs, unpaired = _enr_pairs(ev, cv, params)
+        n_pair += len(pairs)
+        if unpaired:
+            n_unpaired += unpaired
+            bad.append((repo, pack, path,
+                        f"有 {unpaired} 个增强器两侧按 (动词,目标) 配不上对 —— 本条判不了它们"))
+        for tgt, es, cs in pairs:
+            for slot in slots_want:
+                if slot not in es and slot not in cs:
+                    continue
+                n_slot += 1
+                et, ct = es.get(slot), cs.get(slot)
+                if et is None:
+                    n_cn_only += 1          # 中文侧独有的可见正文：没有英文可比，不是缺陷
+                    continue
+                if len(et) < min_en:
+                    n_short += 1            # 短到不该用比值判（标签、一个词的 label）
+                    continue
+                n_gated += 1
+                en_chars += len(et)
+                cn_chars += len(ct or "")
+                why = []
+
+                # A 缺失／无汉字
+                if not ct or not _CJK_RE.search(ct):
+                    why.append(f"中文侧这段可见正文{'整个没有' if not ct else '一个汉字都没有'}"
+                               f"（英文 {len(et)} 字）")
+                else:
+                    ratio = len(ct) / len(et)
+                    ratios.append(round(ratio, 3))
+                    # B 段级中英字符比
+                    if ratio < min_ratio:
+                        why.append(f"中英字符比 {ratio:.3f} < {min_ratio}"
+                                   f"（EN {len(et)} / CN {len(ct)}；全库这类段实测区间 "
+                                   f"[0.263, 0.406]）")
+                    # D 句数
+                    en_s = len(_EN_SENT.findall(et))
+                    cn_s = len(_CN_SENT.findall(ct))
+                    need_s = int(en_s * sent_frac)
+                    if en_s and cn_s < need_s:
+                        why.append(f"中文句数 {cn_s} < 英文 {en_s} 句 × {sent_frac} = {need_s}")
+                # C 本段范围内的定译专名
+                hits = _seg_anchor_hits(anchors, et, cache) if anchors else []
+                if hits:
+                    n_anchor_slot += 1
+                    n_anchor_hit += len(hits)
+                    miss = [f"{k}→{v}" for k, v in hits if v not in (ct or "")]
+                    if miss:
+                        why.append(f"本段英文命中 {len(hits)} 条词表锚点，中文缺 {len(miss)} 条："
+                                   f"{miss[:6]}")
+                # E 数字（现读：含数字的英文段 0 段 ⇒ 这一支无从查起，不是查过了）
+                nums = list(dict.fromkeys(_SEG_NUM.findall(et)))
+                if nums:
+                    n_num_slot += 1
+                    lost = [n for n in nums if n not in (ct or "")]
+                    if lost:
+                        why.append(f"英文段里的阿拉伯数字中文没有：{lost[:6]}")
+                # F 段内标记（现读：含标记的英文段 0 段，同上）
+                marks = _SEG_MARKUP.findall(et)
+                if marks:
+                    n_mark_slot += 1
+                    if len(_SEG_MARKUP.findall(ct or "")) != len(marks):
+                        why.append(f"段内标记数两侧不同（EN {len(marks)} / "
+                                   f"CN {len(_SEG_MARKUP.findall(ct or ''))}）")
+                if not why:
+                    n_ok += 1
+                    continue
+                head = et[:40]
+                j = None
+                for k2, e2 in enumerate(rule.get("except_slots", [])):
+                    if (path.endswith(e2["path"]) and e2.get("slot", slot) == slot
+                            and e2.get("en_head", head) == head):
+                        j = k2
+                        break
+                if j is not None:
+                    used[j] += 1
+                    n_exempt += 1
+                else:
+                    bad.append((repo, pack, f"{path} → {tgt[:30]} [{slot}]",
+                                "；".join(why) + f"：EN {et[:48]!r} / CN {(ct or '')[:32]!r}"))
+
+    dead_rows, n_dead = _unused_exempt(rule, used, "except_slots", "槽 ")
+    bad.extend(dead_rows)
+    band = (f"[{min(ratios):.3f}, {max(ratios):.3f}] 中位 {sorted(ratios)[len(ratios) // 2]:.3f}"
+            if ratios else "（无）")
+    detail = (f"闸下 {n_leaf} 叶 · 配对增强器 {n_pair} 个（配不上 {n_unpaired}）· "
+              f"在册可见正文槽 {n_slot}（英文太短跳过 {n_short} · 中文独有 {n_cn_only}）· "
+              f"**判过 {n_gated} 段**（一致 {n_ok}）· EN {en_chars} 字 / CN {cn_chars} 字 · "
+              f"比值 {band} · 锚点：{anchor_note}，命中 {n_anchor_slot} 段 / {n_anchor_hit} 条 · "
+              f"含阿拉伯数字的英文段 {n_num_slot} · 含段内标记的英文段 {n_mark_slot}"
+              + ("（这两支 = 0 ⇒ **无从查起**，不是查过了没问题）"
+                 if not n_num_slot and not n_mark_slot else "")
+              + f" · 已登记豁免 {len(used)} 条 / 命中 {n_exempt} / 死豁免 {n_dead}")
+    for field, got, txt in (("min_leaves", n_leaf, "闸下叶数"),
+                            ("min_slots", n_slot, "在册可见正文槽数"),
+                            ("min_gated", n_gated, "真正判过的段数"),
+                            ("min_anchor_terms", len(anchors), "锚点表条数"),
+                            ("min_anchor_slots", n_anchor_slot, "命中锚点的段数"),
+                            ("min_anchor_hits", n_anchor_hit, "命中的锚点条数")):
+        want = rule.get(field)
+        if want is not None and got < want:
+            bad.append(("-", "配置", rule["id"],
+                        f"{txt}只数到 {got}（要求 ≥{want}）—— 这条断言在空转："
+                        f"上游把 readaloud 改名了？词表路径变了？`_enr_slots` 被改坏了？"
+                        f"（改过判据就必须跑 --selftest，光跑主闸抓不到这一类）"))
+    if n_unpaired > rule.get("max_unpaired", 0):
+        bad.append(("-", "配置", rule["id"],
+                    f"配不上对的增强器有 {n_unpaired}（上限 {rule.get('max_unpaired', 0)}）"))
+    return bad, detail
+
+
+
+def a_twin_files(rule, ctx):
+    """两份**必须逐字节相同**的文件。
+
+    起因：自检面板那份 `.mjs` 在 ember 与 crucible 两个汉化模块里各存一份 —— 复制而不是
+    跨模块 import，是因为只装其中一个的用户那边没有对方的文件，跨模块 import 会 404。
+    代价是**两份会漂**，而本项目已经因为「两处讲同一件事、改了一边忘了另一边」栽过多次
+    （最近一次：`R-moon-hollow` 的 why 与 `scan_renamed_terms.py` 的 docstring 同仓互相打脸）。
+
+    ⚠ 判据本身要能说出「我比了几对文件」——比不到（路径不存在）必须**失败**而不是静默通过，
+    否则就是空转形态 (e)「输入缺失但判据照跑」。
+    """
+    import hashlib
+    bad, pairs = [], 0
+    for pair in rule["pairs"]:
+        # ⚠ 路径按**仓**解析，不用全局 root —— 这样 `--root <副本>` 的灵敏度回测
+        #   才能作用到副本树上（ctx.repos 里存的就是各仓在当前 root 下的实际目录）。
+        a = os.path.join(ctx.repos.get(pair["repo_a"], pair["repo_a"]), pair["path_a"])
+        b = os.path.join(ctx.repos.get(pair["repo_b"], pair["repo_b"]), pair["path_b"])
+        if not os.path.isfile(a) or not os.path.isfile(b):
+            bad.append(("-", "-", pair["path_a"],
+                        f"配对文件缺失（a 在={os.path.isfile(a)} b 在={os.path.isfile(b)}）"
+                        f" —— 这一条**没比成**，不是通过"))
+            continue
+        pairs += 1
+        ha = hashlib.sha256(open(a, "rb").read()).hexdigest()
+        hb = hashlib.sha256(open(b, "rb").read()).hexdigest()
+        if ha != hb:
+            bad.append(("-", "-", pair["path_a"],
+                        f"与 {pair['repo_b']}/{pair['path_b']} **不是逐字节相同**（{ha[:12]} vs {hb[:12]}）"
+                        f" —— 改了一边忘了另一边"))
+    if pairs < rule.get("min_pairs", 1):
+        bad.append(("-", "-", "-",
+                    f"只比成 {pairs} 对（要求 ≥{rule.get('min_pairs', 1)}）—— 这条断言在空转"))
+    return bad, f"比对 {pairs} 对文件"
+
 KINDS = {
     "term_gated": a_term_gated,
     "cn_absent": a_cn_absent,
@@ -1427,8 +1751,10 @@ KINDS = {
     "block_aligned_gate": a_block_aligned_gate,
     "block_sense_gate": a_block_sense_gate,
     "enricher_slot_gate": a_enricher_slot_gate,
+    "enricher_text_coverage": a_enricher_text_coverage,
     "glossary_value": a_glossary_value,
     "version_matrix": a_version_matrix,
+    "twin_files": a_twin_files,
 }
 
 
@@ -1749,6 +2075,91 @@ SLOT_SELFTEST = [
 ]
 
 
+# ⚑ 增强器**可见正文**覆盖闸（第二十二轮）的正反例。
+#
+# 这一套要钉的不是「术语比得对不对」（那在 enricher_slot_gate 那边钉过），而是
+# **「这段朗读正文的中文有没有跟上英文」这件事本身判不判得动** —— 上一轮的教训正是
+# 「文本进了口径、却没有任何判据能判它」，所以这里每一条信号都要有自己的正反例。
+#
+# 样本是照真库的形状造的：英文 3 句 / 99 字，中文 3 句 / 31 字（比值 0.313，
+# 正落在真库那 48 段的 [0.263, 0.406] 区间中位附近）。
+_RA_EN = ("The smoke clears over Dusktide. Ash falls across the broken road. "
+          "Nothing moves in the ruins beyond.")
+_RA_CN = "暮潮上空的烟尘散去。灰烬洒落在破碎的道路上。废墟深处一片死寂。"
+
+
+def _RA(en_val, cn_val):
+    """造一对只差 readaloud 值的叶。`None` = 该侧连这个参数都没有（裸增强器）。"""
+    def side(v):
+        return ("<p>@Embed[Actor.z]</p>" if v is None
+                else f'<p>@Embed[Actor.z readaloud="{v}"]</p>')
+    return _P(side(en_val), side(cn_val))
+
+
+_TEXT_RULE = {
+    "id": "SELFTEST-ratext", "kind": "enricher_text_coverage",
+    "slots": ["param:readaloud"],
+    "min_en_chars": 60, "min_ratio": 0.20, "min_sentence_frac": 0.75,
+    "min_leaves": 1, "min_slots": 1, "min_gated": 1,
+    # ⚠ 自检不读磁盘上的词表：内联两条锚点。真断言走 `glossary` 字段。
+    "anchors": {"Dusktide": "暮潮", "Arcturel": "阿克图瑞尔"},
+    "min_anchor_terms": 2, "min_anchor_slots": 1, "min_anchor_hits": 1,
+}
+# ⚠ 这两张「放宽护栏」表是必需的，理由与 SLOT_SELFTEST 里那两条同源：本来就该
+#   「一个槽都不在册 / 一段都判不到」的用例，不放宽的话响的是反空转护栏本身，
+#   于是被测的那件事测了个寂寞（第一版三条就是这么假红的）。
+_NO_ANCHOR_GUARD = {"min_anchor_slots": 0, "min_anchor_hits": 0}
+_NO_SLOT_GUARD = dict(_NO_ANCHOR_GUARD, min_slots=0, min_gated=0)
+
+TEXT_COV_SELFTEST = [
+    ("中文朗读正文完整 → 不响", None, _RA(_RA_EN, _RA_CN), 0),
+    ("⚑ **中文朗读正文删空（整个参数没了）→ 要响**（这正是上一轮默认口径一声不响的那一刀）",
+     None, _RA(_RA_EN, None), 1),
+    ("⚑ 中文朗读正文是空串 → 要响", None, _RA(_RA_EN, ""), 1),
+    ("⚑ 中文只剩没有汉字的占位 → 要响", None, _RA(_RA_EN, "..."), 1),
+    ("⚑ **只删一半（中文只剩第一句）→ 要响**（比值 0.101 < 0.20，句数 1 < 2）",
+     None, _RA(_RA_EN, "暮潮上空的烟尘散去。"), 1),
+    ("⚑ 字数够、**句子塌成一句** → 要响（句数支单独立得住：比值 0.293 是过得了的）",
+     None, _RA(_RA_EN, "暮潮上空的烟尘散去，灰烬洒落在破碎的道路上而废墟深处一片死寂"), 1),
+    ("⚑ **本段定译专名缺失** → 要响（比值与句数都正常，只有锚点支能看见）",
+     None, _RA(_RA_EN, "暮汐上空的烟尘散去。灰烬洒落在破碎的道路上。废墟深处一片死寂。"), 1),
+    # ↓ 边界与不该判的东西
+    ("英文段短于 min_en_chars → 不判（标签、一个词的 label 不该用比值判）",
+     dict(_NO_ANCHOR_GUARD, min_gated=0),
+     _RA("Smoke clears.", "烟散了。"), 0),
+    ("`label=` 不在 slots 里 → 不判（本条只管整段朗读正文）", _NO_SLOT_GUARD,
+     _P('<p>@Embed[Actor.z label="The Dusktide Warden of the Broken Road Beyond"]</p>',
+        '<p>@Embed[Actor.z label="断路彼端的暮潮守望"]</p>'), 0),
+    ("方括号里的机器参数（count= / classes= / 目标 id）不进本条", _NO_SLOT_GUARD,
+     _P('<p>@Embed[Actor.99887766 count="5" classes="pf2e"]</p>',
+        '<p>@Embed[Actor.99887766 count="5" classes="pf2e"]</p>'), 0),
+    ("中文独有的可见正文（英文侧裸增强器）→ 不响（没有英文可比，不是缺陷）",
+     dict(_NO_ANCHOR_GUARD, min_gated=0), _RA(None, _RA_CN), 0),
+    # ↓ 反空转护栏本身的正反例
+    ("⚑ 一段都没判到 → min_gated 把空转抓出来（只放宽 min_slots，响的必须是 min_gated 那一条）",
+     dict(_NO_ANCHOR_GUARD, min_slots=0),
+     _P("<p>@UUID[JournalEntry.a]{Dusktide}</p>", "<p>@UUID[JournalEntry.a]{暮潮}</p>"), 1),
+    ("⚑ **锚点表拿不到 → 要响**（形态 (e)：输入缺失而判据照跑，不许装作全绿）",
+     {"anchors": None, "glossary": "5-其他内容/NO-SUCH-GLOSSARY.json",
+      "min_anchor_terms": 0, "min_anchor_slots": 0, "min_anchor_hits": 0},
+     _RA(_RA_EN, _RA_CN), 1),
+    ("⚑ 锚点一条都没命中 → min_anchor_hits 抓出来（词表在、但锚点规则被改坏时是这个形态）",
+     {"anchors": {"Nowhere At All": "根本没有"}, "min_anchor_terms": 1},
+     _RA(_RA_EN, _RA_CN), 2),
+    ("登记过的槽不再报（登记的是已裁的合法例外）",
+     {"except_slots": [{"path": "j.Some Page.text", "en_head": _RA_EN[:40],
+                        "why": "自检：这条真命中"}]},
+     _RA(_RA_EN, "暮潮上空的烟尘散去。"), 0),
+    ("⚑ 豁免一条都没命中 → 要响（死豁免闸在本类型这一侧也要有自己的用例）",
+     {"except_slots": [{"path": "j.Nowhere.text", "en_head": "x", "why": "自检：永远匹配不到"}]},
+     _RA(_RA_EN, _RA_CN), 1),
+    ("把上限显式放宽到 1 → 同一条死豁免不再响（证明响的是「未命中」本身）",
+     {"except_slots": [{"path": "j.Nowhere.text", "en_head": "x", "why": "自检：永远匹配不到"}],
+      "max_unused_exempt": 1},
+     _RA(_RA_EN, _RA_CN), 0),
+]
+
+
 def run_selftest():
     bad = 0
     for value, want in SELFTEST:
@@ -1825,7 +2236,30 @@ def run_selftest():
         print(f"  {'ok  ' if ok else 'FAIL'} {note}")
         print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
     print(f"\nenricher_slot_gate：{len(SLOT_SELFTEST) - ebad} / {len(SLOT_SELFTEST)} 通过")
-    return 1 if (bad or gbad or sbad or vbad or abad or bbad or ebad) else 0
+
+    # ⚠ 先证明「探针真的在验」：不做这一步，下面十几条正反例全可能是在一个
+    #   **根本没取到 readaloud 值**的空判据上比 0==0。与 scan_content_coverage
+    #   的 --selftest 头两条同一个用意。
+    print("\n增强器可见正文覆盖闸（enricher_text_coverage）正反例：")
+    tbad = 0
+    _probe, _pd = a_enricher_text_coverage(_TEXT_RULE, _FakeCtx(pairs=_RA(_RA_EN, _RA_CN)))
+    _live = ("判过 1 段" in _pd and "命中 1 段 / 1 条" in _pd)
+    if not _live:
+        tbad += 1
+    print(f"  {'ok  ' if _live else 'FAIL'} 前置：readaloud 的值真的被取出来判了"
+          f"（detail 必须报「判过 1 段」与锚点「命中 1 段 / 1 条」）")
+    print(f"        {_pd}")
+    for note, override, pairs, want_b in TEXT_COV_SELFTEST:
+        rule = dict(_TEXT_RULE, **(override or {}))
+        b, detail = a_enricher_text_coverage(rule, _FakeCtx(pairs=pairs))
+        ok = len(b) == want_b
+        if not ok:
+            tbad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
+    print(f"\nenricher_text_coverage：{len(TEXT_COV_SELFTEST) + 1 - tbad} / "
+          f"{len(TEXT_COV_SELFTEST) + 1} 通过")
+    return 1 if (bad or gbad or sbad or vbad or abad or bbad or ebad or tbad) else 0
 
 
 def main():
