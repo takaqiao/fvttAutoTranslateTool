@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""不靠长度、靠「跨语言不变量」找出中文没跟上英文的条目。
+r"""不靠长度、靠「跨语言不变量」找出中文没跟上英文的条目。
+
+（本 docstring 用 r-string：里面引了 `@[A-Za-z]+\[` 这样的正则片段，
+不加 r 会被 Python 当成非法转义警告，且下一次抄改时容易被吃掉一个反斜杠。）
 
 ⚠ **优先用 `scan_en_drift.py`。** 有旧版英文基准时，`EN_old != EN_new` 是直接证据，
 比本脚本的启发式准得多。本脚本是**没有旧基准时的兜底**（例如上游第一次发版就没归档）。
@@ -68,13 +71,60 @@
 **判据的敏感度**：严格多重集（`--merge-window 0`）在两个仓库共报 9 条，
 逐条核对后 8 条是上面 4–6 覆盖的正常中文、1 条是真缺陷（`Level Advancement` 的天赋点）。
 加上 4–6 之后 crucible 报 1 / ember 报 0，即真缺陷一条不漏、假警报归零。
+
+增强器里的可见文本参数（2026-08-15 第二十一轮改）
+------------------------------------------------
+原先 `MARKUP` 把整个 `@X[…]` 一并剥掉，理由是「方括号里是机关参数」。对 `@UUID[…]`、
+`@Check[athletics|dc:17]` 这类成立，对 `@Embed[… readaloud="…"]` **不成立** ——
+`readaloud=` 里塞的是**整段朗读正文**：EN 侧 48 段 / 16966 字符（最长 951 字）、
+CN 侧 48 段 / 5392 字符，散在 **30 叶**（`@Embed[` 46 处 + `@embed[` 2 处，
+`@[A-Za-z]+\[` 两种拼写都吃）。这 16966 字符**过去一个字都没进过本脚本的数字闸**。
+
+同一段正文在块级通道那边也是盲的（`assert_resolutions.split_blocks` 把 `@X[…]` 涂成等长
+空格），所以它是**两条通道同时看不见**的一块，不是「另有闸看着」。
+
+现在改成：`@X[…]` 整体仍然剥掉，但把其中 `label=` / `readaloud=` 两个参数的**值**留下来
+当正文。参数白名单 `ENR_TEXT_PARAMS` 与 `assert_resolutions.py` 的 `_ENR_TEXT_PARAMS`
+同源、同值。
+
+⚠ **白名单只能是这两个，不能图省事把方括号里的东西整个留下**：`@Embed[Actor.xxx]` 的
+目标 id、`@Check[athletics|dc:17]` 的技能名与 DC、`count=` / `classes=` 都是照抄英文的
+机器参数，计入覆盖率会造出一整片假缺口（`dc:17` 会立刻变成「中文缺 17」）。
+实测全库参数名只有三种：`readaloud` 96 · `label` 90 · `classes` 8，白名单外的只有 `classes`。
+
+留下来的值两端各补一个 `BOUND` 哨兵：朗读框与它周围的 GM 正文是**两个信息单元**，
+不该让 `--merge-window` 的邻近折叠跨过这条边界（折叠只减需求，跨边界折就是掩盖）。
+
+`--no-enricher-text` 恢复旧口径，**只为出「纳入前 / 纳入后」的可比数字**，不要日常用。
+
+⚠⚠ **纳入 ≠ 判得到（2026-08-15 实测，务必读完再下结论）**
+实测这 48 段英文朗读正文里**一个阿拉伯数字都没有**（0/48）。也就是说：纳入之后，
+本脚本的**默认判据（数字多重集）对这 16966 字符的产出必然是 0 命中** —— 这个 0
+是「无从查起」，不是「查过了没问题」。把它当成「查过了，干净」就是第四种空转形态
+（闸在跑，但可判集合是空的）。
+对这批纯散文**真正有信号的是定译专名闸**：48 段里 36 段命中词表锚点（7601 条锚点口径），
+其中中文缺对应定译的 0 段 —— 这才是「查过了没问题」。所以要判这部分请 `--with-terms`，
+并且只看增强器所在的那些叶（全库开专名闸噪声极大，见上面「误报来源」）。
+
+反空转：本脚本每次都打印「增强器可见文本：捞到 N 个参数 / 计入 X 字符 /
+**其中带阿拉伯数字 K 个** / 落在 Y 叶」。N=0 打印「无从查起」；N>0 而 K=0 打印
+「计入了但数字闸咬不到」。「0 条问题」有两种含义，判据有义务把
+「查过了没问题」和「压根没东西可查」分开。另有 `--selftest` 做双向变异回测
+（合成样本上：删掉中文朗读正文必须报；不删必须不报；旧口径下两种都不报 = 证明洞真的存在）。
+真库上的变异回测在 `4-临时脚本/2026-08-15-round21/regress_readaloud.py`。
 """
 from __future__ import annotations
 import argparse
 import json
 import os
 import re
+import sys
 from collections import Counter
+
+# ⚠ 本轮新加的告警行里有 U+26A0（⚠）。Windows 默认控制台是 GBK，编不出这个字符：
+#   不加这一行，脚本会在**印完口径行、印出结论行之前**抛 UnicodeEncodeError 退出（实测 exit=1、
+#   报告体一行不印）。qa/ 下另外 18 个脚本都带这一行，本脚本此前缺，是因为它以前不印非 GBK 字符。
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 CJK = re.compile(r'[一-鿿]')
 TAG = re.compile(r'<[^>]+>')
@@ -86,7 +136,20 @@ BLOCK_TAG = re.compile(
     r'ul|ol|li|dl|dt|dd|h[1-6]|section|article|aside|header|footer|'
     r'blockquote|pre|figure|figcaption|form|fieldset)\b[^>]*>', re.I)
 BOUND = '\x1f'   # 块边界哨兵。与空格等长，不影响 en_len/cn_len 与 \b 词边界
-MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]|&(?:amp;)?[Rr]eference\[[^\]]*\]')
+MARKUP = re.compile(r'@[A-Za-z]+\[(?P<enr>[^\]]*)\]|\[\[[^\]]*\]\]'
+                    r'|&(?:amp;)?[Rr]eference\[[^\]]*\]')
+# 增强器里**玩家能看见的文本参数**，与 assert_resolutions.py 的 `_ENR_TEXT_PARAMS` 同源同值。
+# 只认这两个：其余参数（`count=` `classes=`）和方括号里的目标 id / 技能名 / DC 都是照抄
+# 英文的机器值，计入覆盖率只会造假缺口。加白名单前请先数一遍全库参数名（见模块 docstring）。
+ENR_TEXT_PARAMS = ('label', 'readaloud')
+# ⚠ **必须同时吃带引号与不带引号的值。** 上一版只认双引号 —— 库里
+# `@Embed[Actor.LUptsqBgGJVWcg9v label=Squish]`（**无引号**，只在 EN 侧、孪生 2 叶）
+# 因此永远不进纯文本，而中文侧写的是 `label="挤压"`（带引号）会进，
+# 造成 EN 44 : CN 46 的不对称假象。
+# ⚠ 顺带订正「全库参数名只有三种」那句 —— **不全**：还有无引号的
+# `count` 166 · `rollable` 20 · `cite` 4 · `label` 2（第二十一轮全库复算）。
+# 前三个是机器参数、被白名单排掉是对的，但 `label=Squish` 是**可见文本**。
+ENR_PARAM = re.compile(r'\b([A-Za-z][\w-]*)\s*=\s*(?:"([^"]*)"|([^\s\]"]+))')
 # 只防「数字被切成两半」，**不能**用 \w 做边界：中文里数字紧贴汉字（「其AC为17，HP为25」），
 # 而汉字在 Python 正则里算 \w，`(?<![\w.])` 会把中文侧的每个数字都挡掉 ——
 # 结果英文侧数字全被判成「缺失」，首版就是这么跑出 49% 命中率的假警报。
@@ -129,13 +192,55 @@ def cn_numerals_to_digits(s: str) -> str:
     return CN_NUM.sub(lambda m: ' ' + conv(m) + ' ', s)
 
 
-def plain(s: str, cn: bool = False) -> str:
+def _markup_repl(m, keep_enr: bool, stats):
+    """`MARKUP` 的替换体：`@X[…]` 里的可见文本参数留下来当正文，其余一律涂成空格。
+
+    `stats` 是可选的 `{参数名: [个数, 字符数]}`，用来支撑「我这次捞到多少」那行反空转输出。
+    """
+    inner = m.group('enr')
+    if inner is None or not keep_enr:
+        return ' '
+    vals = []
+    for pm in ENR_PARAM.finditer(inner):
+        name = pm.group(1).lower()
+        if name in ENR_TEXT_PARAMS:
+            val = pm.group(2) if pm.group(2) is not None else pm.group(3)
+            vals.append(val)
+            if stats is not None:
+                s = stats.setdefault(name, [0, 0, 0])
+                s[0] += 1
+                s[1] += len(val)
+                # 第三格＝这段文本里有没有阿拉伯数字。**默认判据只看数字**，
+                # 所以「捞到了」不等于「判得到」：捞到 100 段全无数字，数字闸依旧是 0 命中。
+                s[2] += 1 if NUM.search(val) else 0
+    if not vals:
+        return ' '
+    # 两端补 BOUND：朗读框 / 标签与周围正文是不同的信息单元，邻近折叠不该跨过去。
+    return BOUND + BOUND.join(vals) + BOUND
+
+
+def strip_markup(s: str, keep_enr: bool = True, stats=None) -> str:
+    """剥标记。留下来的参数值里理论上可能再嵌标记（当前库实测 0 处：`[[` `<` `@` 全 0），
+    嵌了就再剥一层 —— `re.sub` 不会回扫自己的替换结果，所以这里显式跑到不动点（至多 3 趟）。
+    """
+    for _ in range(3):
+        out = MARKUP.sub(lambda m: _markup_repl(m, keep_enr, stats), s)
+        if out == s:
+            return out
+        s, stats = out, None   # 第二趟起不再计数，免得同一个参数被数两遍
+    return s
+
+
+def plain(s: str, cn: bool = False, keep_enr: bool = True, stats=None) -> str:
     """剥掉标记与标签，只留给人读的正文。cn=True 时顺带折算中文数字。
 
     块级标签换成 `BOUND` 哨兵而不是空格（同样是 1 个字符，长度统计不变），
     这样 `counted()` 能分清「同一句里说了两遍」和「表格两行各有一个」。
+
+    `keep_enr=True`（默认）时，`@Embed[… readaloud="…"]` 这类增强器的可见文本参数
+    会被留下来算作正文 —— 见模块 docstring「增强器里的可见文本参数」。
     """
-    out = ENTITY.sub(' ', MARKUP.sub(' ', s))
+    out = ENTITY.sub(' ', strip_markup(s, keep_enr, stats))
     out = TAG.sub(lambda m: BOUND if BLOCK_TAG.fullmatch(m.group()) else ' ', out)
     return cn_numerals_to_digits(out) if cn else out
 
@@ -222,6 +327,67 @@ def number_multiset(pe: str, pc: str, window: int = 60):
     return missing
 
 
+def selftest() -> bool:
+    """双向变异回测（不读库，秒回）。
+
+    证明三件事，缺一不可：
+    1. **能报** —— 中文朗读正文里的数字被删掉，新口径必须报出缺失；
+    2. **不误报** —— 中文朗读正文完整时，新口径必须一声不响；
+    3. **洞是真的** —— 同样两个样本喂给旧口径（`--no-enricher-text`），**两次都报 0**。
+       第 3 条是本轮存在的理由：它把「本来就没问题」和「本来就看不见」区分开。
+    另加两条护栏：方括号里的机器参数（目标 id / `dc:17` / `count=` / `classes=`）
+    绝不能被计入，否则会造出一整片假缺口。
+    """
+    en = ('<p>The vault door is sealed.</p>'
+          '<p>@Embed[JournalEntryPage.abc123 readaloud="Three sigils burn along the rim, '
+          'and the lock demands 4 keys turned within 12 seconds." label="Vault Warden"]</p>')
+    cn_ok = ('<p>金库大门已被封死。</p>'
+             '<p>@Embed[JournalEntryPage.abc123 readaloud="轮缘上燃着三道符文，'
+             '这把锁要求在 12 秒内转动 4 把钥匙。" label="金库守卫"]</p>')
+    cn_bad = ('<p>金库大门已被封死。</p>'
+              '<p>@Embed[JournalEntryPage.abc123 readaloud="轮缘上燃着三道符文。" '
+              'label="金库守卫"]</p>')
+
+    def miss(e, c, keep):
+        return number_multiset(plain(e, keep_enr=keep),
+                               plain(c, cn=True, keep_enr=keep))
+
+    ok = True
+
+    def check(cond, msg):
+        nonlocal ok
+        print(('  PASS  ' if cond else '  FAIL  ') + msg)
+        ok = ok and bool(cond)
+
+    print('scan_content_coverage --selftest')
+    # 先证明「探针真的在验」：新口径下英文正文里必须真的出现朗读文本，否则后面全是空转
+    pe = plain(en)
+    check('12 seconds' in pe and 'Vault Warden' in pe,
+          f'新口径下 readaloud/label 的正文进了纯文本（EN 纯文本 {len(pe)} 字）')
+    check('12 seconds' not in plain(en, keep_enr=False),
+          '旧口径下同一段正文确实不在纯文本里（洞的直接证据）')
+
+    m_bad = miss(en, cn_bad, True)
+    check([n for n, _ in m_bad] and set(n for n, _ in m_bad) >= {'4', '12'},
+          f'① 删掉中文朗读正文 → 新口径报缺失 {m_bad}')
+    check(miss(en, cn_ok, True) == [],
+          f'② 中文朗读正文完整 → 新口径不报（实得 {miss(en, cn_ok, True)}）')
+    check(miss(en, cn_bad, False) == [] and miss(en, cn_ok, False) == [],
+          '③ 旧口径对①②**都报 0** —— 证明这个洞过去是真的全盲，不是「另有闸看着」')
+
+    # 机器参数护栏：dc:17 / 目标 id 里的数字 / count= / classes= 都不许进覆盖率
+    mech_en = '<p>Force the door with @Check[athletics|dc:17] or @Embed[Actor.99887766 count="5" classes="pf2e"] to proceed.</p>'
+    mech_cn = '<p>用 @Check[athletics|dc:17] 撬门，或 @Embed[Actor.99887766 count="5" classes="pf2e"] 后继续。</p>'
+    check(miss(mech_en, mech_cn, True) == [],
+          '④ 方括号里的机器参数（dc:17 / 目标 id / count= / classes=）不计入')
+    check('17' not in plain(mech_en) and '99887766' not in plain(mech_en)
+          and 'pf2e' not in plain(mech_en),
+          '⑤ 机器参数连纯文本都进不去（不是靠比对碰巧对上）')
+
+    print('  => ' + ('全绿' if ok else '**有失败**'))
+    return ok
+
+
 def walk(en, cn, path, out):
     if isinstance(en, dict):
         for k, v in en.items():
@@ -236,7 +402,7 @@ def walk(en, cn, path, out):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--repo', required=True)
+    ap.add_argument('--repo', help='仓库根（`--selftest` 时不需要）')
     ap.add_argument('--pack')
     ap.add_argument('--out')
     ap.add_argument('--min-en', type=int, default=120,
@@ -245,10 +411,20 @@ def main():
     ap.add_argument('--merge-window', type=int, default=60,
                     help='英文侧同一块内、多少字符内的重复算一份信息（只折英文需求，'
                          '不折中文供给，且跨块不折）。设 0 = 严格多重集，一次不差；调大 = 更宽容')
+    ap.add_argument('--no-enricher-text', action='store_true',
+                    help='恢复旧口径：把 @X[…] 整段剥掉，连 readaloud=/label= 的正文一起丢。'
+                         '**只用来出「纳入前 / 纳入后」的可比数字**，日常不要开')
+    ap.add_argument('--selftest', action='store_true',
+                    help='双向变异回测：合成样本上证明「删掉中文朗读正文会报、不删不报、'
+                         '旧口径下两种都不报」。不读库，秒回')
     ap.add_argument('--with-terms', action='store_true',
                     help='顺带查定译专名。**默认关**：glossary_ec 里混着通用词'
                          '（Shield→盾牌、Counter→反制、blocked→屏蔽），命中全是噪声')
     a = ap.parse_args()
+    if a.selftest:
+        raise SystemExit(0 if selftest() else 1)
+    if not a.repo:
+        ap.error('--repo 是必需的（除非 --selftest）')
 
     P = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     gloss = {}
@@ -266,8 +442,12 @@ def main():
         f for f in os.listdir(en_dir)
         if f.endswith('.json') and os.path.exists(os.path.join(cn_dir, f)))
 
+    keep_enr = not a.no_enricher_text
     rows = []
     checked = 0
+    en_chars = cn_chars = 0
+    enr_leaves = 0
+    enr_en, enr_cn = {}, {}          # 参数名 -> [个数, 字符数]，只统计**真被查过的**叶
     for pack in packs:
         o = []
         walk(json.load(open(os.path.join(en_dir, pack), encoding='utf-8')).get('entries', {}),
@@ -276,10 +456,21 @@ def main():
         for path, e, c in o:
             if not (c and CJK.search(c)):
                 continue
-            pe, pc = plain(e), plain(c, cn=True)
+            se, sc = {}, {}
+            pe = plain(e, keep_enr=keep_enr, stats=se)
+            pc = plain(c, cn=True, keep_enr=keep_enr, stats=sc)
             if len(pe) < a.min_en:
                 continue
             checked += 1
+            en_chars += len(pe)
+            cn_chars += len(pc)
+            if se or sc:
+                enr_leaves += 1
+            for src, dst in ((se, enr_en), (sc, enr_cn)):
+                for k, v in src.items():
+                    d = dst.setdefault(k, [0, 0, 0])
+                    for i in range(3):
+                        d[i] += v[i]
             # 多重集比对（2026-08-12）。原先是 set，`3 Talent Points`→「2点天赋点」
             # 会被同页别处的 3 掩盖 —— 全书最核心的成长规则错一级而本脚本报 0。
             miss_num = [f'{n}×{k}' if k > 1 else n
@@ -296,6 +487,35 @@ def main():
                              'ratio': round(len(pc) / max(len(pe), 1), 2)})
 
     rows.sort(key=lambda r: -(len(r['missing_numbers']) * 2 + len(r['missing_terms'])))
+
+    # 反空转：先报「我这次捞到多少增强器正文」，再报「查出多少问题」。
+    # 捞到 0 个而口径是开着的 —— 那 0 条问题的含义是「无从查起」，不是「查过了没问题」。
+    def _fmt(d):
+        return ' · '.join(f'{k}= {v[0]} 个 / {v[1]} 字 / 其中带阿拉伯数字 {v[2]} 个'
+                          for k, v in sorted(d.items())) or '（无）'
+    if keep_enr:
+        en_numful = sum(v[2] for v in enr_en.values())
+        print(f'增强器可见文本（白名单 {"/".join(ENR_TEXT_PARAMS)}）已计入覆盖率：')
+        print(f'  EN: {_fmt(enr_en)}')
+        print(f'  CN: {_fmt(enr_cn)}')
+        print(f'  落在 {enr_leaves} 条被查的叶上')
+        if not enr_en and not enr_cn:
+            print('  ⚠ **无从查起**：一个可见文本参数都没捞到。'
+                  '这不等于「没问题」——先确认库里确实没有 readaloud=/label=，'
+                  '再确认 ENR_PARAM / MARKUP 没被改坏（跑 --selftest）')
+        elif en_numful == 0:
+            print('  ⚠ **计入了但数字闸咬不到**：捞到的英文可见文本里**一个阿拉伯数字都没有**，'
+                  '所以默认判据（数字多重集）对这部分文本的产出必然是 0 命中 ——'
+                  '这属于「无从查起」，不是「查过了没问题」。'
+                  '想真的判这部分，请加 `--with-terms`（定译专名闸对纯散文有信号）。')
+        if a.with_terms:
+            print('  （--with-terms 已开：这部分散文由定译专名闸判，'
+                  '注意全库范围的专名闸噪声大，只看增强器所在的那些叶）')
+    else:
+        print('⚠ 旧口径（--no-enricher-text）：@X[…] 整段剥掉，'
+              f'readaloud=/label= 的正文**不进覆盖率**。仅供 A/B 对比')
+    print(f'口径：{checked} 条叶 / EN 正文 {en_chars} 字 / CN 正文 {cn_chars} 字'
+          f'（中英比 {cn_chars / max(en_chars, 1):.3f}）')
     print(f'查了 {checked} 条已译且英文正文 ≥ {a.min_en} 字符的条目')
     print(f'  其中中文丢了英文里的数字或定译专名：**{len(rows)}** 条')
     hard = [r for r in rows if r['missing_numbers']]
@@ -309,7 +529,11 @@ def main():
             print(f'      缺专名: {r["missing_terms"][:4]}')
     if a.out:
         json.dump({'checked': checked, 'flagged': len(rows),
-                   'with_missing_numbers': len(hard), 'items': rows},
+                   'with_missing_numbers': len(hard),
+                   'enricher_text': {'enabled': keep_enr, 'en': enr_en, 'cn': enr_cn,
+                                     'leaves': enr_leaves},
+                   'plain_chars': {'en': en_chars, 'cn': cn_chars},
+                   'items': rows},
                   open(a.out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         print(f'\n-> {a.out}')
 
