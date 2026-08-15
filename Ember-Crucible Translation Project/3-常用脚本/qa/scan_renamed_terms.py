@@ -76,6 +76,10 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SKIP_KEYS = {"_id", "path", "_variants", "_when"}
 
 # leaves whose content is legitimately Latin / not prose
+DEFAULT_GLOSSARY = os.path.normpath(os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "..",
+    "5-其他内容", "glossary", "glossary_ec.json"))
+
 SKIP_PATH_RX = re.compile(
     r"(?:^|\.)(?:pronunciation|img|src|texture|type|folder|sort|uuid|id|_id"
     r"|scale|width|height|elevation|key|mode|priority|value|formula)$", re.I)
@@ -798,7 +802,11 @@ def main():
                          "harder bar; 2 is the conservative default.")
     ap.add_argument("--mode", default="both",
                     choices=["both", "en-tail", "cn-term"])
-    ap.add_argument("--glossary", default="")
+    ap.add_argument("--glossary", default=DEFAULT_GLOSSARY,
+                    help="词表路径。默认指向项目词表 5-其他内容/glossary/glossary_ec.json。"
+                         "⚠ 上一版这里是 default='' —— 不显式传就静默跑成 glossary={}，"
+                         "探测器 B 一条都配不出来，却照样打印一份漂亮的 findings 0。"
+                         "2026-08-15 第二十轮踩过：月亮尊号的 A/B 回测因此假绿了一次。")
     ap.add_argument("--ids", default="",
                     help="id -> {name} table from dump_ids.mjs.  With it a stale "
                          "@UUID label is settled by the target's CURRENT name "
@@ -855,6 +863,15 @@ def main():
     if a.glossary and os.path.isfile(a.glossary):
         glossary = json.load(open(a.glossary, encoding="utf-8-sig"))
         print(f"glossary: {len(glossary)} entries")
+    if not glossary and a.mode in ("both", "cn-term"):
+        # ⚠ 探测器 B **完全**建立在词表上：没有词表就配不出任何中文写法，
+        #   每个候选都走 `renderings` 为空 → 静默 continue，最后打印 `findings 0`。
+        #   那个 0 是「我没东西可查」不是「查过了没问题」—— 必须吵，不能静默降级。
+        print("!! 探测器 B 没有词表：--glossary 指向的文件不存在或为空 "
+              f"({a.glossary!r})。本次 [B cn-term] 的结果**不可用** —— "
+              "它会恒为 findings 0，那是「无从查起」不是「干净」。", file=sys.stderr)
+        if getattr(a, "strict_coverage", False):
+            sys.exit(3)
 
     findings, excluded = [], []
     if a.mode in ("both", "en-tail"):
