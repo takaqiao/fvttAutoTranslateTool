@@ -3816,194 +3816,424 @@
       }
     }
   },
-  "sameRoleMissingTail": {
-    "_note": "**同一个角色内部**，同一英文的中文相同、只是双语后缀时加时不加。这才是真漏加后缀，可按该角色的约定统一。",
-    "count": 31,
+  "crossConventionFormDifference": {
+    "_note": "同一英文、同一角色，中文相同、只差双语后缀，但两种形态分别落在**不同的约定单元格**里，各自单元格内部是一致的 —— 也就是说没人漏加后缀，只是这个 `(英文, 角色)` 键横跨了一条真实的约定边界。`axis` 指出是哪条：「模块」= crucible-cn 的 `folders` 裸中文（150/151）对上 ember_cn 的 `folders` 双语并列（337/355），两个分开发布的产品各有各的行文风格；「约定槽」= `regions.X.name` 该裸而 `pages.X.name` 该双语（CONVENTION_PARENTS 早就知道，但 role_of 把它们并进同一个 `name` 桶，见模块 docstring 的 known limit）。⚠ **不是缺陷，不要按票数归一。** 列在这里只为让人看见边界；真要统一，那是一次产品级裁决（同一个世界里两个包的侧边栏文件夹会一个「护甲」一个「护甲 Armor」并排显示），不是脚本能定的。",
+    "count": 24,
     "terms": {
       "Adventuring Gear": {
         "folders": {
-          "冒险装备 Adventuring Gear": 2,
-          "冒险装备": 1
-        }
-      },
-      "Armor": {
-        "folders": {
-          "护甲": 3,
-          "护甲 Armor": 2
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "冒险装备": 1
+            },
+            "ember/bare": {
+              "冒险装备 Adventuring Gear": 2
+            }
+          }
         }
       },
       "Beast": {
         "folders": {
-          "野兽": 2,
-          "野兽 Beast": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "野兽": 2
+            },
+            "ember/bare": {
+              "野兽 Beast": 1
+            }
+          }
         }
       },
       "Beasts": {
         "folders": {
-          "野兽 Beasts": 3,
-          "野兽": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "野兽": 1
+            },
+            "ember/bare": {
+              "野兽 Beasts": 3
+            }
+          }
         }
       },
       "Constructs": {
         "folders": {
-          "构装体 Constructs": 3,
-          "构装体": 1
-        }
-      },
-      "Consumables": {
-        "folders": {
-          "消耗品": 2,
-          "消耗品 Consumables": 2
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "构装体": 1
+            },
+            "ember/bare": {
+              "构装体 Constructs": 3
+            }
+          }
         }
       },
       "Darkness": {
         "name": {
-          "黑暗": 10,
-          "黑暗 Darkness": 7
+          "axis": "约定槽",
+          "cells": {
+            "ember/bare": {
+              "黑暗": 10
+            },
+            "ember/bilingual": {
+              "黑暗 Darkness": 7
+            }
+          }
         }
       },
       "Dragon": {
         "folders": {
-          "巨龙": 1,
-          "巨龙 Dragon": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "巨龙": 1
+            },
+            "ember/bare": {
+              "巨龙 Dragon": 1
+            }
+          }
         }
       },
       "Dragons": {
         "folders": {
-          "巨龙 Dragons": 3,
-          "巨龙": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "巨龙": 1
+            },
+            "ember/bare": {
+              "巨龙 Dragons": 3
+            }
+          }
         }
       },
       "Elemental": {
         "folders": {
-          "元素生物": 1,
-          "元素生物 Elemental": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "元素生物": 1
+            },
+            "ember/bare": {
+              "元素生物 Elemental": 1
+            }
+          }
         }
       },
       "Elementals": {
         "folders": {
-          "元素生物 Elementals": 3,
-          "元素生物": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "元素生物": 1
+            },
+            "ember/bare": {
+              "元素生物 Elementals": 3
+            }
+          }
         }
       },
       "Elevator": {
         "name": {
-          "升降机": 6,
-          "升降机 Elevator": 4
-        }
-      },
-      "Equipment": {
-        "folders": {
-          "装备 Equipment": 2,
-          "装备": 1
+          "axis": "约定槽",
+          "cells": {
+            "ember/bare": {
+              "升降机": 6
+            },
+            "ember/bilingual": {
+              "升降机 Elevator": 4
+            }
+          }
         }
       },
       "Flasks": {
         "folders": {
-          "瓶子 Flasks": 2,
-          "瓶子": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "瓶子": 1
+            },
+            "ember/bare": {
+              "瓶子 Flasks": 2
+            }
+          }
         }
       },
       "Focus": {
         "folders": {
-          "专注 Focus": 2,
-          "专注": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "专注": 1
+            },
+            "ember/bare": {
+              "专注 Focus": 2
+            }
+          }
         }
       },
       "General": {
         "folders": {
-          "常规": 1,
-          "常规 General": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "常规": 1
+            },
+            "ember/bare": {
+              "常规 General": 1
+            }
+          }
         }
       },
       "Humanoid": {
         "folders": {
-          "人型生物": 1,
-          "人型生物 Humanoid": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "人型生物": 1
+            },
+            "ember/bare": {
+              "人型生物 Humanoid": 1
+            }
+          }
         }
       },
       "Humanoids": {
         "folders": {
-          "人型生物 Humanoids": 3,
-          "人型生物": 1
-        }
-      },
-      "Ingredients": {
-        "folders": {
-          "材料": 2,
-          "材料 Ingredients": 2
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "人型生物": 1
+            },
+            "ember/bare": {
+              "人型生物 Humanoids": 3
+            }
+          }
         }
       },
       "Jewelry": {
         "folders": {
-          "珠宝 Jewelry": 2,
-          "珠宝": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "珠宝": 1
+            },
+            "ember/bare": {
+              "珠宝 Jewelry": 2
+            }
+          }
         }
       },
       "Miscellaneous": {
         "folders": {
-          "杂项 Miscellaneous": 2,
-          "杂项": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "杂项": 1
+            },
+            "ember/bare": {
+              "杂项 Miscellaneous": 2
+            }
+          }
         }
       },
       "Monstrosity": {
         "folders": {
-          "畸怪": 1,
-          "畸怪 Monstrosity": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "畸怪": 1
+            },
+            "ember/bare": {
+              "畸怪 Monstrosity": 1
+            }
+          }
         }
       },
       "Ocean": {
         "name": {
-          "海洋 Ocean": 2,
-          "海洋": 2
+          "axis": "约定槽",
+          "cells": {
+            "ember/bare": {
+              "海洋": 2
+            },
+            "ember/bilingual": {
+              "海洋 Ocean": 2
+            }
+          }
         }
       },
       "Overview": {
         "categories": {
-          "概览": 120,
-          "概览 Overview": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "概览 Overview": 1
+            },
+            "ember/bare": {
+              "概览": 120
+            }
+          }
         }
       },
       "Shield": {
         "folders": {
-          "盾牌 Shield": 2,
-          "盾牌": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "盾牌": 1
+            },
+            "ember/bare": {
+              "盾牌 Shield": 2
+            }
+          }
         }
       },
       "Talents": {
         "folders": {
-          "天赋": 1,
-          "天赋 Talents": 1
-        }
-      },
-      "Tools": {
-        "folders": {
-          "工具": 2,
-          "工具 Tools": 2
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "天赋": 1
+            },
+            "ember/bare": {
+              "天赋 Talents": 1
+            }
+          }
         }
       },
       "Toxins": {
         "folders": {
-          "毒素 Toxins": 2,
-          "毒素": 1
-        }
-      },
-      "Treasure": {
-        "folders": {
-          "宝藏 Treasure": 2,
-          "宝藏": 1
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "毒素": 1
+            },
+            "ember/bare": {
+              "毒素 Toxins": 2
+            }
+          }
         }
       },
       "Undead": {
         "folders": {
-          "不死生物 Undead": 3,
-          "不死生物": 2
+          "axis": "模块",
+          "cells": {
+            "crucible/bare": {
+              "不死生物": 2
+            },
+            "ember/bare": {
+              "不死生物 Undead": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  "sameRoleMissingTail": {
+    "_note": "**同一个角色、同一个 `(模块, 约定)` 单元格内部**，同一英文的中文相同、只是双语后缀时加时不加 —— 单元格内部自相矛盾，这才是真漏加，可按该单元格的约定统一。`splitWithinCell` 直接给出是哪个单元格裂了。⚠ 判据从前只看 `(英文, 角色)`，那个键看不见模块边界和约定槽边界，把两群各自守规矩的叶子报成了缺陷：2026-08-15 第十七轮把当时的 31 条逐条落到叶子上核过，**0 条**是同一约定内忘加后缀，24 条跨边界（已移入 crossConventionFormDifference），余下 7 条全是 ember 的冒险文件夹（双语，290/290）对上 ember 镜像包 `crucible-items` 的包文件夹（裸，8/8）—— 每个文件内部 100% 自洽，一条越界的叶子都没有。这个桶的数字只有在判据不吃约定边界时才有意义。",
+    "count": 7,
+    "terms": {
+      "Armor": {
+        "folders": {
+          "candidates": {
+            "护甲": 3,
+            "护甲 Armor": 2
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "护甲 Armor": 2,
+              "护甲": 1
+            }
+          }
+        }
+      },
+      "Consumables": {
+        "folders": {
+          "candidates": {
+            "消耗品": 2,
+            "消耗品 Consumables": 2
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "消耗品 Consumables": 2,
+              "消耗品": 1
+            }
+          }
+        }
+      },
+      "Equipment": {
+        "folders": {
+          "candidates": {
+            "装备 Equipment": 2,
+            "装备": 1
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "装备 Equipment": 2,
+              "装备": 1
+            }
+          }
+        }
+      },
+      "Ingredients": {
+        "folders": {
+          "candidates": {
+            "材料": 2,
+            "材料 Ingredients": 2
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "材料 Ingredients": 2,
+              "材料": 1
+            }
+          }
+        }
+      },
+      "Tools": {
+        "folders": {
+          "candidates": {
+            "工具": 2,
+            "工具 Tools": 2
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "工具 Tools": 2,
+              "工具": 1
+            }
+          }
+        }
+      },
+      "Treasure": {
+        "folders": {
+          "candidates": {
+            "宝藏 Treasure": 2,
+            "宝藏": 1
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "宝藏 Treasure": 2,
+              "宝藏": 1
+            }
+          }
         }
       },
       "Weapons": {
         "folders": {
-          "武器": 3,
-          "武器 Weapons": 2
+          "candidates": {
+            "武器": 3,
+            "武器 Weapons": 2
+          },
+          "splitWithinCell": {
+            "ember/bare": {
+              "武器 Weapons": 2,
+              "武器": 1
+            }
+          }
         }
       }
     }
