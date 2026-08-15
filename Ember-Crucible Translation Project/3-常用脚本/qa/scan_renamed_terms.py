@@ -34,9 +34,40 @@ MANDATORY EXCLUSIONS (each one is a real lesson, do not remove):
 Precision beats recall here: 5 true findings are worth more than 200 with 190
 false ones.
 
+⚠ 基准缺包 = 探测器 B 静默不扫（第十九轮 Y5 的同型盲区，第二十轮补上）
+----------------------------------------------------------------------
+探测器 B 的候选**全部**来自 `--old` 基准目录里的包（`load_pack_leaves(a.old)`）。
+基准里没有的包，其旧英文专名从来没进过候选表 —— 而报告长得和「扫过、干净」一样。
+实测 2026-08-15：`--repo 1-Ember汉化插件 --old ember-cn-v1.0.15-shipped-en`
+→ `old-en 14878` 叶，只来自 **3** 个包（`_repaired.json` + adversary + character），
+仓里却有 10 个 en 包 / 9 个有中文，A/B 两段各报 0。
+这条尤其要紧：本闸是 §5.4 第 11 项，**多条断言在 `why` 里点名依赖它兜底**
+（如 `R-moon-hollow`：「`cn_absent` 抓不到上游换了尊号而中文没跟，那要靠
+`scan_renamed_terms`」）—— 那句依赖此前对 ember 的另外 6 个包**不成立**。
+⚠⚠ **第二十轮已补上出口，别再照旧结论说「补不回来」**：那 6 个包的正确基准不是
+`ember-cn-v1.0.15-shipped-en/`（v1.0.15 那会儿模块只有 3 个 crucible 侧包），而是
+**`ember-cn-v1.1.0-shipped-en/`** —— 它们是 v1.1.0 才加进来的，而 v1.1.0 的 `compendium/en/`
+一直躺在 `1-Ember汉化插件` 自己的 git 历史里。拿 v1.1.0 那份跑：**扫 10 包 / 缺 0 / 零告警**。
+⚠ **但只换基准还不够**（第二十轮 A/B 实证）：本探测器还要求该术语**挖得成候选、且配得出中文写法**。
+月亮尊号的散文形态 `{Aura}, The Hollow Moon,` 根本进不了候选；标签形态
+`{Aura - The Hollow Moon}` 进得了，但词表里只有裸键 `The Hollow Moon`、配不出整串中文，
+于是 `renderings` 为空、**静默 continue**。第二十轮已往 base 词表补了三条整串键
+（`Aura - The Hollow Moon` = 奥拉 - 空洞之月，等三条），兜底这才真正成立。
+**通则：说「某某闸兜着」之前，要把「基准覆盖得到」和「术语配得出中文」两个前提都验一遍。**
+
+现在每次运行都印「本次扫 N 个包 / 仓里共 M 个包 / 缺 K 个」以及缺掉的中文叶数；
+`--strict-coverage` 让缺包直接以退出码 3 结束。语义与
+`scan_number_drift.py` / `scan_dropped_terms.py` / `scan_marker_followup.py` /
+`scan_en_drift.py` 完全一致。
+
+范围注记：**探测器 A 不受基准缺包影响** —— 它扫的是当前 `compendium/cn` 全部包、
+对照当前 `compendium/en` 全部包，`--old` 只用来给结论标注 `in_old_baseline`。
+覆盖行报的是**探测器 B 的定义域**（也就是 `--old` 的包覆盖）。
+
 Usage:
   python scan_renamed_terms.py --repo "<repoDir>" --old "<baselineDir>" \
-         [--mode both|en-tail|cn-term] [--out x.json] [--show 40]
+         [--mode both|en-tail|cn-term] [--out x.json] [--show 40] \
+         [--strict-coverage]
 """
 import argparse, json, os, re, sys, collections
 
@@ -96,6 +127,68 @@ def load_pack_leaves(d):
         leaves(j.get("entries", {}), ["entries"], out)
         res[key] = out
     return res
+
+
+# ----------------------------------------------------------- 基准覆盖了几个包
+def cjk_leaf_count(rows):
+    """一个 cn 包里**含中文**的叶数 —— 探测器 B 能追的残留就住在这些叶里。"""
+    return sum(1 for _p, s in (rows or []) if CJK_RX.search(s))
+
+
+def coverage(repo, baseline, old_packs, cn_packs):
+    """扫了几个包 / 仓里共几个包 / 基准缺几个包（连带缺掉多少条中文叶）。
+
+    ⚠ **反空转第 (d) 型的探针**。前三种空转形态（判据写坏 / 压根不读库 / 读旧报告
+    快照）的防法对它全部无效：判据没问题、库也读了、报告是当场生成的 —— 只是基准
+    目录里**压根没有那个包**，它的旧英文专名一个也没进过探测器 B 的候选表，报告上
+    一片绿，实情是没扫。
+
+    与 `scan_number_drift.coverage()` / `scan_dropped_terms.coverage()` /
+    `scan_marker_followup.coverage()` / `scan_en_drift.coverage()` 同一套语义。
+
+    与那四条的**唯一实现差异**（有意为之）：`scanned` 不是从目录列表推的，而是取
+    `load_pack_leaves(--old)` **真正读成功**的包名。理由是本脚本的 loader 比它们多
+    一条 fallback —— `_repaired.json` 若读不出来会回落到 `ember.*-en.json`，
+    再照目录推一遍就会与实情脱节。取「真读进来的那些」才是不可空转的口径。
+    """
+    en_dir = os.path.join(repo, "compendium", "en")
+    cn_dir = os.path.join(repo, "compendium", "cn")
+    repo_packs = sorted(f for f in os.listdir(en_dir)
+                        if f.endswith(".json") and f != "_source.json")
+    scanned, missing = [], []
+    for f in repo_packs:
+        if f in old_packs:
+            scanned.append(f)
+        else:
+            missing.append({"pack": f,
+                            "cn_present": os.path.exists(os.path.join(cn_dir, f)),
+                            "cn_cjk_leaves": cjk_leaf_count(cn_packs.get(f))})
+    return {
+        "baseline": os.path.abspath(baseline),
+        "repo_en_packs": len(repo_packs),
+        "scanned_packs": scanned,
+        "missing_packs": missing,
+        "cn_cjk_leaves_uncovered": sum(m["cn_cjk_leaves"] for m in missing),
+        # 基准里有、仓里已经没有的包（上游删包 / 改名）。不影响本次结果，但要看得见。
+        "baseline_only_packs": [f for f in sorted(old_packs) if f not in repo_packs],
+    }
+
+
+def print_coverage(cov):
+    print(f"  包覆盖（探测器 B 的定义域）：本次扫 {len(cov['scanned_packs'])} 个包 / "
+          f"仓里 en 共 {cov['repo_en_packs']} 个包 / 基准缺 {len(cov['missing_packs'])} 个")
+    if cov["missing_packs"]:
+        print("  ⚠ 下列包**基准里没有，探测器 B 一条也没看** —— 它们的 0 告警不是「干净」，是「没扫」：")
+        for m in cov["missing_packs"]:
+            tail = "" if m["cn_present"] else "（无 cn 文件）"
+            print(f"       {m['pack']}  含中文的叶 {m['cn_cjk_leaves']}{tail}")
+        print(f"     合计未进闸的中文叶 {cov['cn_cjk_leaves_uncovered']}")
+        print("     ⚠ 有断言在 why 里写「靠 scan_renamed_terms 兜底」—— 那句话对上列包不成立。")
+        print("     历史快照补不回来（那些包发版当时就没捕获）；将来靠 "
+              "3-常用脚本/qa/capture_baseline.py 在**升级前**截全包基准。")
+    if cov["baseline_only_packs"]:
+        print(f"  ⚠ 基准里有、仓里 en 已没有的包 {len(cov['baseline_only_packs'])} 个："
+              f"{'、'.join(cov['baseline_only_packs'])}")
 
 
 # ------------------------------------------------------------ text normalising
@@ -718,6 +811,9 @@ def main():
                          "explained >= ratio x the remaining hits")
     ap.add_argument("--out", default="")
     ap.add_argument("--show", type=int, default=40)
+    ap.add_argument("--strict-coverage", action="store_true",
+                    help="基准缺包时以退出码 3 结束（默认只告警：回测脚本会拿单包小仓跑，"
+                         "默认非零会把它们全打红）")
     a = ap.parse_args()
 
     en_dir = os.path.join(a.repo, "compendium", "en")
@@ -732,6 +828,12 @@ def main():
           f"cur-cn {sum(len(v) for v in cur_cn.values())} / "
           f"old-en {sum(len(v) for v in old_en.values())}"
           + (f" / old-cn {sum(len(v) for v in old_cn.values())}" if old_cn else ""))
+    cov = coverage(a.repo, a.old, old_en, cur_cn)
+    print_coverage(cov)
+    for pk in cov["scanned_packs"]:
+        print(f"     · {pk}  基准叶 {len(old_en.get(pk, ()))}"
+              f"  当前英文叶 {len(cur_en.get(pk, ()))}"
+              f"  含中文的叶 {cjk_leaf_count(cur_cn.get(pk))}")
 
     cur = Corpus(cur_en)
     old = Corpus(old_en)
@@ -777,13 +879,21 @@ def main():
         for h in d["hits"][:3]:
             print(f"        {h['pack']} :: {h['path']}")
 
+    # 报告里必须带覆盖口径：只写「findings 0」的报告，事后分不清是「干净」还是「没扫」。
+    meta = {"tool": os.path.basename(__file__), "repo": os.path.abspath(a.repo),
+            "coverage": cov, "argv": sys.argv}
     if a.out:
         os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
-        json.dump({"repo": a.repo, "old": a.old, "mode": a.mode,
+        json.dump({"meta": meta, "repo": a.repo, "old": a.old, "mode": a.mode,
                    "findings": findings, "excluded": excluded},
                   open(a.out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         print(f"-> {a.out}")
+    if a.strict_coverage and cov["missing_packs"]:
+        print(f"✗ --strict-coverage：基准缺 {len(cov['missing_packs'])} 个包，"
+              f"本次结果不构成全库结论。")
+        return 3
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

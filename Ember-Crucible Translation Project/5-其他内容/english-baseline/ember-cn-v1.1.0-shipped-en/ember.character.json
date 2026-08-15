@@ -1,0 +1,921 @@
+{
+  "label": "Ember Character Options",
+  "folders": {
+    "Akon": "Akon",
+    "Heart": "Heart",
+    "Aura": "Aura",
+    "Signara": "Signara",
+    "Orbis": "Orbis",
+    "Luxarum": "Luxarum",
+    "Ragen": "Ragen",
+    "Mayis": "Mayis",
+    "Cora": "Cora",
+    "Abyss": "Abyss",
+    "Ancestries": "Ancestries",
+    "Ancestry Features": "Ancestry Features",
+    "Attunements": "Attunements",
+    "Culture Features": "Culture Features",
+    "Cultures": "Cultures",
+    "Paths": "Paths",
+    "Soulbound": "Soulbound",
+    "Primordis": "Primordis"
+  },
+  "entries": {
+    "Aura 5: Hurricane": {
+      "name": "Aura 5: Hurricane",
+      "effects": {
+        "Hurricane": {
+          "name": "Hurricane"
+        }
+      }
+    },
+    "Aura 3: Cyclone": {
+      "name": "Aura 3: Cyclone",
+      "effects": {
+        "Cyclone": {
+          "name": "Cyclone"
+        }
+      }
+    },
+    "Heart 1: Spirited": {
+      "name": "Heart 1: Spirited",
+      "effects": {
+        "Spirited": {
+          "name": "Spirited"
+        }
+      }
+    },
+    "Cora 1: Grounded": {
+      "name": "Cora 1: Grounded",
+      "effects": {
+        "Grounded": {
+          "name": "Grounded"
+        }
+      }
+    },
+    "Ragen 3: Burning": {
+      "name": "Ragen 3: Burning",
+      "effects": {
+        "Burning": {
+          "name": "Burning"
+        }
+      }
+    },
+    "Aura 4: Whirlwind": {
+      "name": "Aura 4: Whirlwind",
+      "effects": {
+        "Whirlwind": {
+          "name": "Whirlwind"
+        }
+      }
+    },
+    "Impassioned Revelry": {
+      "name": "Impassioned Revelry"
+    },
+    "Heart 4: Verdant": {
+      "name": "Heart 4: Verdant",
+      "effects": {
+        "Verdent": {
+          "name": "Verdent"
+        }
+      }
+    },
+    "Ember Blaze": {
+      "name": "Ember Blaze",
+      "effects": {
+        "Ember Blaze": {
+          "name": "Ember Blaze"
+        }
+      }
+    },
+    "Orbis 4: Manic": {
+      "name": "Orbis 4: Manic",
+      "effects": {
+        "Manic": {
+          "name": "Manic"
+        }
+      }
+    },
+    "Luxarum 2: Bright": {
+      "name": "Luxarum 2: Bright",
+      "effects": {
+        "Flickering": {
+          "name": "Flickering"
+        }
+      }
+    },
+    "Abyss 1: Whispered": {
+      "name": "Abyss 1: Whispered",
+      "effects": {
+        "Whispered": {
+          "name": "Whispered"
+        }
+      }
+    },
+    "Inheritors of Chaos": {
+      "name": "Inheritors of Chaos"
+    },
+    "Mayis 5: Glacial": {
+      "name": "Mayis 5: Glacial",
+      "effects": {
+        "Glacial": {
+          "name": "Glacial"
+        }
+      }
+    },
+    "Urban Resourcefulness": {
+      "name": "Urban Resourcefulness"
+    },
+    "Mayis 4: Serene": {
+      "name": "Mayis 4: Serene",
+      "effects": {
+        "Serene": {
+          "name": "Serene"
+        }
+      }
+    },
+    "Cleansing Flame": {
+      "name": "Cleansing Flame"
+    },
+    "Orbis 3: Frenzied": {
+      "name": "Orbis 3: Frenzied",
+      "effects": {
+        "Frenizied": {
+          "name": "Frenizied"
+        }
+      }
+    },
+    "Constructed Companion": {
+      "name": "Constructed Companion"
+    },
+    "Personalized Crafting": {
+      "name": "Personalized Crafting"
+    },
+    "Oaken": {
+      "name": "Oaken"
+    },
+    "Munitions Training": {
+      "name": "Munitions Training"
+    },
+    "Prescient Reflection": {
+      "name": "Prescient Reflection"
+    },
+    "Abyss 2: Nightmare": {
+      "name": "Abyss 2: Nightmare",
+      "effects": {
+        "Nightmare": {
+          "name": "Nightmare"
+        }
+      }
+    },
+    "Luxarum 5: Luminous": {
+      "name": "Luxarum 5: Luminous",
+      "effects": {
+        "Luminous": {
+          "name": "Luminous"
+        }
+      }
+    },
+    "Amphibious Adaptability": {
+      "name": "Amphibious Adaptability"
+    },
+    "Signara 4: Inquisitory": {
+      "name": "Signara 4: Inquisitory",
+      "effects": {
+        "Inquisitory": {
+          "name": "Inquisitory"
+        }
+      }
+    },
+    "Keth Bite": {
+      "name": "Keth Bite"
+    },
+    "Cora 3: Resolute": {
+      "name": "Cora 3: Resolute",
+      "effects": {
+        "Resolute": {
+          "name": "Resolute"
+        }
+      }
+    },
+    "Regulated Rhythm": {
+      "name": "Regulated Rhythm",
+      "effects": {
+        "Regulated Rhythm": {
+          "name": "Regulated Rhythm"
+        }
+      }
+    },
+    "Ethereal Appendages": {
+      "name": "Ethereal Appendages"
+    },
+    "Akon 2: Precise": {
+      "name": "Akon 2: Precise",
+      "effects": {
+        "Precise": {
+          "name": "Precise"
+        }
+      }
+    },
+    "Signara 3: Quizzical": {
+      "name": "Signara 3: Quizzical",
+      "effects": {
+        "Quizzical": {
+          "name": "Quizzical"
+        }
+      }
+    },
+    "Orbis 2: Excited": {
+      "name": "Orbis 2: Excited",
+      "effects": {
+        "Excited": {
+          "name": "Excited"
+        }
+      }
+    },
+    "Primordis 3: Hidden": {
+      "name": "Primordis 3: Hidden",
+      "effects": {
+        "Hidden": {
+          "name": "Hidden"
+        }
+      }
+    },
+    "Heart 3: Vibrant": {
+      "name": "Heart 3: Vibrant",
+      "effects": {
+        "Vibrant": {
+          "name": "Vibrant"
+        }
+      }
+    },
+    "Resolute Legacy": {
+      "name": "Resolute Legacy"
+    },
+    "Abyssal Resistance": {
+      "name": "Abyssal Resistance",
+      "effects": {
+        "Abyssal Resistance": {
+          "name": "Abyssal Resistance"
+        }
+      }
+    },
+    "Heart 5: Sacred": {
+      "name": "Heart 5: Sacred",
+      "effects": {
+        "Sacred": {
+          "name": "Sacred"
+        }
+      }
+    },
+    "Mayis 1: Misted": {
+      "name": "Mayis 1: Misted",
+      "effects": {
+        "Misted": {
+          "name": "Misted"
+        }
+      }
+    },
+    "Signara 2: Investigative": {
+      "name": "Signara 2: Investigative",
+      "effects": {
+        "Investigative": {
+          "name": "Investigative"
+        }
+      }
+    },
+    "Primordis 2: Canny": {
+      "name": "Primordis 2: Canny",
+      "effects": {
+        "Canny": {
+          "name": "Canny"
+        }
+      }
+    },
+    "Fireborn": {
+      "name": "Fireborn",
+      "effects": {
+        "Submerged": {
+          "name": "Submerged",
+          "description": "<p>You have disadvantage on attack rolls and ability checks until the end of your next turn. If you remain submerged, you repeat the saving throw at the start of each of your turns.</p>"
+        }
+      }
+    },
+    "Preeminent Survivalist": {
+      "name": "Preeminent Survivalist"
+    },
+    "Cora 2: Hardened": {
+      "name": "Cora 2: Hardened",
+      "effects": {
+        "Hardened": {
+          "name": "Hardened"
+        }
+      }
+    },
+    "Ragen 1: Kindled": {
+      "name": "Ragen 1: Kindled",
+      "effects": {
+        "Kindled": {
+          "name": "Kindled"
+        }
+      }
+    },
+    "Luxarum 3: Shining": {
+      "name": "Luxarum 3: Shining",
+      "effects": {
+        "Shining": {
+          "name": "Shining"
+        }
+      }
+    },
+    "Implacable Hunter": {
+      "name": "Implacable Hunter",
+      "effects": {
+        "Mark Quarry": {
+          "name": "Mark Quarry"
+        }
+      }
+    },
+    "Extreme Metabolism": {
+      "name": "Extreme Metabolism",
+      "effects": {
+        "Speed +10": {
+          "name": "Speed +10"
+        }
+      }
+    },
+    "Academy Dropout": {
+      "name": "Academy Dropout"
+    },
+    "Wintersoul": {
+      "name": "Wintersoul",
+      "effects": {
+        "Wintersoul": {
+          "name": "Wintersoul"
+        }
+      }
+    },
+    "Anchorite Marine": {
+      "name": "Anchorite Marine"
+    },
+    "Ragen 5: Supernova": {
+      "name": "Ragen 5: Supernova",
+      "effects": {
+        "Combustion Burning": {
+          "name": "Combustion Burning",
+          "description": "<p>The target suffers [[/damage 1d6 fire]] at the start of every Turn until using an Action to douse the flames.</p>"
+        },
+        "Supernova": {
+          "name": "Supernova"
+        }
+      }
+    },
+    "Leviathan Form": {
+      "name": "Leviathan Form",
+      "effects": {
+        "Leviathan Form": {
+          "name": "Leviathan Form"
+        }
+      }
+    },
+    "Luxarum 4: Blinding": {
+      "name": "Luxarum 4: Blinding",
+      "effects": {
+        "Blinding": {
+          "name": "Blinding"
+        }
+      }
+    },
+    "Focused Reactivity": {
+      "name": "Focused Reactivity"
+    },
+    "Exceptional Taste": {
+      "name": "Exceptional Taste"
+    },
+    "Caravanner": {
+      "name": "Caravanner"
+    },
+    "Cindaric Initiate": {
+      "name": "Cindaric Initiate"
+    },
+    "Primordis 1: Blurred": {
+      "name": "Primordis 1: Blurred",
+      "effects": {
+        "Blurred": {
+          "name": "Blurred"
+        }
+      }
+    },
+    "Nimble Leap": {
+      "name": "Nimble Leap"
+    },
+    "Cosmopolitan Fashionista": {
+      "name": "Cosmopolitan Fashionista"
+    },
+    "Crown Apothecary": {
+      "name": "Crown Apothecary"
+    },
+    "Akon 5: Intense": {
+      "name": "Akon 5: Intense",
+      "effects": {
+        "Potent": {
+          "name": "Potent"
+        }
+      }
+    },
+    "Heart 2: Graceful": {
+      "name": "Heart 2: Graceful",
+      "effects": {
+        "Graceful": {
+          "name": "Graceful"
+        }
+      }
+    },
+    "Signara 1: Gloomy": {
+      "name": "Signara 1: Gloomy",
+      "effects": {
+        "Gloomy": {
+          "name": "Gloomy"
+        }
+      }
+    },
+    "Akon 3: Methodical": {
+      "name": "Akon 3: Methodical",
+      "effects": {
+        "Methodical": {
+          "name": "Methodical"
+        }
+      }
+    },
+    "Orbis 1: Chaotic": {
+      "name": "Orbis 1: Chaotic",
+      "effects": {
+        "Chaotic": {
+          "name": "Chaotic"
+        }
+      }
+    },
+    "Tactical Planner": {
+      "name": "Tactical Planner"
+    },
+    "Altyra": {
+      "name": "Altyra"
+    },
+    "Ashka": {
+      "name": "Ashka"
+    },
+    "Cor'ak": {
+      "name": "Cor'ak"
+    },
+    "Drakon": {
+      "name": "Drakon"
+    },
+    "Fej": {
+      "name": "Fej"
+    },
+    "Hulg'run": {
+      "name": "Hulg'run"
+    },
+    "Human": {
+      "name": "Human"
+    },
+    "Keth": {
+      "name": "Keth"
+    },
+    "Kiska": {
+      "name": "Kiska"
+    },
+    "Kivahr": {
+      "name": "Kivahr"
+    },
+    "Nir'ae": {
+      "name": "Nir'ae"
+    },
+    "Signborn": {
+      "name": "Signborn"
+    },
+    "Thornling": {
+      "name": "Thornling"
+    },
+    "Vrjnhar": {
+      "name": "Vrjnhar"
+    },
+    "Wirrun": {
+      "name": "Wirrun"
+    },
+    "Zeph": {
+      "name": "Zeph"
+    },
+    "Aster": {
+      "name": "Aster"
+    },
+    "Arcturian": {
+      "name": "Arcturian"
+    },
+    "Bejak": {
+      "name": "Bejak"
+    },
+    "Cascilian": {
+      "name": "Cascilian"
+    },
+    "Kelmezian": {
+      "name": "Kelmezian"
+    },
+    "Kessian": {
+      "name": "Kessian"
+    },
+    "Kithil": {
+      "name": "Kithil"
+    },
+    "Lumek": {
+      "name": "Lumek"
+    },
+    "Maziran": {
+      "name": "Maziran"
+    },
+    "Ordani": {
+      "name": "Ordani"
+    },
+    "Railen": {
+      "name": "Railen"
+    },
+    "Rhivan": {
+      "name": "Rhivan"
+    },
+    "Strider": {
+      "name": "Strider"
+    },
+    "Tayan": {
+      "name": "Tayan"
+    },
+    "Waerd": {
+      "name": "Waerd"
+    },
+    "Wardcall": {
+      "name": "Wardcall"
+    },
+    "Lesser Soulmark": {
+      "name": "Lesser Soulmark",
+      "effects": {
+        "Lesser Soulbound": {
+          "name": "Lesser Soulbound",
+          "description": "<p>You have died and are now Soulbound.</p>"
+        }
+      }
+    },
+    "Greater Soulmark": {
+      "name": "Greater Soulmark",
+      "effects": {
+        "Greater Soulmark": {
+          "name": "Greater Soulmark"
+        }
+      }
+    },
+    "Deathly Soulmark": {
+      "name": "Deathly Soulmark",
+      "effects": {
+        "Deathly Soulmark": {
+          "name": "Deathly Soulmark"
+        }
+      }
+    },
+    "Beard Guard": {
+      "name": "Beard Guard"
+    },
+    "Flameguard Militia": {
+      "name": "Flameguard Militia"
+    },
+    "Tyraphic Transformation": {
+      "name": "Tyraphic Transformation",
+      "effects": {
+        "Tyraphic Transformation": {
+          "name": "Tyraphic Transformation",
+          "description": "<p>The Altyra undergoes an otherworldly transformation assuming a visage that is unnerving to behold. Its metallic body forms mechanical parts and defensive plating which radiate with celestial energy.</p>"
+        }
+      }
+    },
+    "Undaunted Warrior": {
+      "name": "Undaunted Warrior"
+    },
+    "Thornbark": {
+      "name": "Thornbark"
+    },
+    "Formidable Stamina": {
+      "name": "Formidable Stamina"
+    },
+    "Passionate Trader": {
+      "name": "Passionate Trader"
+    },
+    "Weirded Eyes": {
+      "name": "Weirded Eyes"
+    },
+    "Ragen 2: Ignition": {
+      "name": "Ragen 2: Ignition",
+      "effects": {
+        "Ignition": {
+          "name": "Ignition"
+        }
+      }
+    },
+    "Spiritual Recuperation": {
+      "name": "Spiritual Recuperation"
+    },
+    "Imperial Conscript": {
+      "name": "Imperial Conscript"
+    },
+    "Shadowmeld": {
+      "name": "Shadowmeld"
+    },
+    "Sudden Bite": {
+      "name": "Sudden Bite"
+    },
+    "Windborn Spellcraft": {
+      "name": "Windborn Spellcraft"
+    },
+    "Intrepid Sailor": {
+      "name": "Intrepid Sailor"
+    },
+    "Ragen 4: Combustion": {
+      "name": "Ragen 4: Combustion",
+      "effects": {
+        "Combustion": {
+          "name": "Combustion"
+        },
+        "Combustion Burning": {
+          "name": "Combustion Burning",
+          "description": "<p>The target suffers [[/damage 1d6 fire]] at the start of every Turn until using an Action to douse the flames.</p>"
+        }
+      }
+    },
+    "Muscle Machinery": {
+      "name": "Muscle Machinery",
+      "effects": {
+        "Muscle Machinery": {
+          "name": "Muscle Machinery"
+        }
+      }
+    },
+    "Glyphspeak": {
+      "name": "Glyphspeak"
+    },
+    "Lightsworn": {
+      "name": "Lightsworn"
+    },
+    "Lunar Empath": {
+      "name": "Lunar Empath"
+    },
+    "Primordis 4: Devious": {
+      "name": "Primordis 4: Devious",
+      "effects": {
+        "Devious": {
+          "name": "Devious"
+        }
+      }
+    },
+    "Mayis 2: Calm": {
+      "name": "Mayis 2: Calm",
+      "effects": {
+        "Calm": {
+          "name": "Calm"
+        }
+      }
+    },
+    "Metallic Blood": {
+      "name": "Metallic Blood"
+    },
+    "Akon 4: Potent": {
+      "name": "Akon 4: Potent",
+      "effects": {
+        "Potent": {
+          "name": "Potent"
+        }
+      }
+    },
+    "Monster Hunter": {
+      "name": "Monster Hunter"
+    },
+    "Natural Artisan": {
+      "name": "Natural Artisan"
+    },
+    "Nightwatch": {
+      "name": "Nightwatch"
+    },
+    "Primordis 5: Predatory": {
+      "name": "Primordis 5: Predatory",
+      "effects": {
+        "Predatory": {
+          "name": "Predatory"
+        }
+      }
+    },
+    "Obsidian Antiquary": {
+      "name": "Obsidian Antiquary"
+    },
+    "Arcane Countenance": {
+      "name": "Arcane Countenance",
+      "effects": {
+        "Menacing Visage": {
+          "name": "Menacing Visage",
+          "description": "<p>You have advantage on Intimidation checks.</p>"
+        },
+        "Inscrutable Visage": {
+          "name": "Inscrutable Visage",
+          "description": "<p>You have advantage to Deception checks.</p>"
+        },
+        "Beguiling Visage": {
+          "name": "Beguiling Visage",
+          "description": "<p>You have advantage on Persuasion checks.</p>"
+        }
+      }
+    },
+    "Primalist Disciple": {
+      "name": "Primalist Disciple"
+    },
+    "Mistrust of Magic": {
+      "name": "Mistrust of Magic"
+    },
+    "Living Stone": {
+      "name": "Living Stone",
+      "effects": {
+        "Living Stone": {
+          "name": "Living Stone"
+        }
+      }
+    },
+    "Hot Tempered": {
+      "name": "Hot Tempered"
+    },
+    "Crystalize Wounds": {
+      "name": "Crystalize Wounds"
+    },
+    "Scion of Darkness": {
+      "name": "Scion of Darkness"
+    },
+    "Shadow Walker": {
+      "name": "Shadow Walker"
+    },
+    "Shard God Devotee": {
+      "name": "Shard God Devotee"
+    },
+    "Sky Wanderer": {
+      "name": "Sky Wanderer"
+    },
+    "Star Dreamer": {
+      "name": "Star Dreamer"
+    },
+    "Sunfire Descendant": {
+      "name": "Sunfire Descendant"
+    },
+    "Abyss 3: Corrupted": {
+      "name": "Abyss 3: Corrupted",
+      "effects": {
+        "Corrupted": {
+          "name": "Corrupted"
+        }
+      }
+    },
+    "Akon 1: Hushed": {
+      "name": "Akon 1: Hushed",
+      "effects": {
+        "Hushed": {
+          "name": "Hushed"
+        }
+      }
+    },
+    "Ritual Cooking": {
+      "name": "Ritual Cooking",
+      "effects": {
+        "Ritual Cooking": {
+          "name": "Ritual Cooking"
+        }
+      }
+    },
+    "Cora 5: Monolith": {
+      "name": "Cora 5: Monolith",
+      "effects": {
+        "Monolith": {
+          "name": "Monolith"
+        }
+      }
+    },
+    "Orbis 5: Overwhelming": {
+      "name": "Orbis 5: Overwhelming",
+      "effects": {
+        "Overwhelming": {
+          "name": "Overwhelming"
+        }
+      }
+    },
+    "Abyss 4: Despair": {
+      "name": "Abyss 4: Despair",
+      "effects": {
+        "Despair": {
+          "name": "Despair"
+        }
+      }
+    },
+    "Luxarum 1: Flickering": {
+      "name": "Luxarum 1: Flickering",
+      "effects": {
+        "Flickering": {
+          "name": "Flickering"
+        }
+      }
+    },
+    "Underworld Mechanic": {
+      "name": "Underworld Mechanic"
+    },
+    "Imperial Ambition": {
+      "name": "Imperial Ambition"
+    },
+    "Thermal Vision": {
+      "name": "Thermal Vision"
+    },
+    "Abyss 5: Torment": {
+      "name": "Abyss 5: Torment",
+      "effects": {
+        "Torment": {
+          "name": "Torment"
+        },
+        "Radiant Sensitivity": {
+          "name": "Radiant Sensitivity"
+        }
+      }
+    },
+    "Fibrous Resilience": {
+      "name": "Fibrous Resilience",
+      "effects": {
+        "Fibrous Resilience": {
+          "name": "Fibrous Resilience",
+          "description": "<p>The fibrous biology of Thornlings is incredibly resilient.</p>"
+        }
+      }
+    },
+    "Lunar Tattoos": {
+      "name": "Lunar Tattoos",
+      "effects": {
+        "Akon Lunar Reflection": {
+          "name": "Akon Lunar Reflection"
+        },
+        "Aura Lunar Resonance": {
+          "name": "Aura Lunar Resonance"
+        },
+        "Orbis Lunar Reflection": {
+          "name": "Orbis Lunar Reflection"
+        },
+        "Mayis Lunar Reflection": {
+          "name": "Mayis Lunar Reflection"
+        },
+        "Ragen Lunar Reflection": {
+          "name": "Ragen Lunar Reflection"
+        },
+        "Cora Lunar Reflection": {
+          "name": "Cora Lunar Reflection"
+        }
+      }
+    },
+    "Mayis 3: Tranquil": {
+      "name": "Mayis 3: Tranquil",
+      "effects": {
+        "Tranquil": {
+          "name": "Tranquil"
+        }
+      }
+    },
+    "Aura 2: Gale": {
+      "name": "Aura 2: Gale",
+      "effects": {
+        "Gale": {
+          "name": "Gale"
+        }
+      }
+    },
+    "Cora 4: Compressed": {
+      "name": "Cora 4: Compressed",
+      "effects": {
+        "Compressed": {
+          "name": "Compressed"
+        }
+      }
+    },
+    "Aura 1: Zephyr": {
+      "name": "Aura 1: Zephyr",
+      "effects": {
+        "Zephyr": {
+          "name": "Zephyr"
+        }
+      }
+    },
+    "Drakonfire": {
+      "name": "Drakonfire"
+    },
+    "Signara 5: Darkness": {
+      "name": "Signara 5: Darkness",
+      "effects": {
+        "Darkness": {
+          "name": "Darkness"
+        }
+      }
+    }
+  }
+}

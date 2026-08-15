@@ -1,0 +1,96 @@
+{
+  "label": "Ember Effects",
+  "folders": {
+    "Attunement": "Attunement",
+    "Blessings": "Blessings",
+    "Curses": "Curses",
+    "Kaleidoscope Caverns": "Kaleidoscope Caverns",
+    "Wards": "Wards"
+  },
+  "entries": {
+    "The Bewilderment": {
+      "name": "The Bewilderment",
+      "description": "<p>The afflicted creature's mind is gripped by @UUID[JournalEntry.pod4PApXHuZgXwHo.JournalEntryPage.jw0mOUcqhJPRajUY]{The Bewilderment}, a creeping arcane confusion that does not relent.</p><ul><li><p>The afflicted suffers the @Condition[disoriented] condition for as long as the curse persists.</p></li><li><p>The afflicted creature's maximum <strong>Morale</strong> is reduced by half.</p></li><li><p>The mind's fraying defenses leave the afflicted <strong>Vulnerable</strong> to <strong>Corruption</strong> damage, suffering -5 resistance.</p></li></ul>"
+    },
+    "Blessing of Abyss": {
+      "name": "Blessing of Abyss",
+      "description": "<p>You are blessed by the power of Abyss. While this blessing endures, your attunement to Abyss is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Abyss attunement to a higher rank.</p>"
+    },
+    "Blessing of Akon": {
+      "name": "Blessing of Akon",
+      "description": "<p>You are blessed by the power of Akon. While this blessing endures, your attunement to Akon is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Akon attunement to a higher rank.</p>"
+    },
+    "Blessing of Aura": {
+      "name": "Blessing of Aura",
+      "description": "<p>You are blessed by the power of Aura. While this blessing endures, your attunement to Aura is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Aura attunement to a higher rank.</p>"
+    },
+    "Blessing of Cora": {
+      "name": "Blessing of Cora",
+      "description": "<p>You are blessed by the power of Cora. While this blessing endures, your attunement to Cora is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Cora attunement to a higher rank.</p>"
+    },
+    "Blessing of Heart": {
+      "name": "Blessing of Heart",
+      "description": "<p>You are blessed by the power of Heart. While this blessing endures, your attunement to Heart is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Heart attunement to a higher rank.</p>"
+    },
+    "Blessing of Luxarum": {
+      "name": "Blessing of Luxarum",
+      "description": "<p>You are blessed by the power of Luxarum. While this blessing endures, your attunement to Luxarum is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Luxarum attunement to a higher rank.</p>"
+    },
+    "Blessing of Mayis": {
+      "name": "Blessing of Mayis",
+      "description": "<p>You are blessed by the power of Mayis. While this blessing endures, your attunement to Mayis is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Mayis attunement to a higher rank.</p>"
+    },
+    "Blessing of Orbis": {
+      "name": "Blessing of Orbis",
+      "description": "<p>You are blessed by the power of Orbis. While this blessing endures, your attunement to Orbis is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Orbis attunement to a higher rank.</p>"
+    },
+    "Blessing of Primordis": {
+      "name": "Blessing of Primordis",
+      "description": "<p>You are blessed by the power of Primordis. While this blessing endures, your attunement to Primordis is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Primordis attunement to a higher rank.</p>"
+    },
+    "Blessing of Ragen": {
+      "name": "Blessing of Ragen",
+      "description": "<p>You are blessed by the power of Ragen. While this blessing endures, your attunement to Ragen is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Ragen attunement to a higher rank.</p>"
+    },
+    "Blessing of Signara": {
+      "name": "Blessing of Signara",
+      "description": "<p>You are blessed by the power of Signara. While this blessing endures, your attunement to Signara is heightened, granting <strong>+5</strong> attunement points toward your effective rank, which may temporarily elevate your Signara attunement to a higher rank.</p>"
+    },
+    "Kaleidoscopic Confusion": {
+      "name": "Kaleidoscopic Confusion",
+      "description": "<p>You are befuddled, your thoughts clouded, and words jumbled. You have trouble speaking coherently. You are affected by the @Condition[disoriented] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Kaleidoscopic Fatigue": {
+      "name": "Kaleidoscopic Fatigue",
+      "description": "<p>The light from the crystal saps all of your energy. You are overtaken by an unnatural wave of lethargy and you gain the @Condition[exhausted] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Kaleidoscopic Focus": {
+      "name": "Kaleidoscopic Focus",
+      "description": "<p>Your mind becomes sharp and resilient against distractions. You gain the benefits of the @Condition[resolute] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Kaleidoscopic Glare": {
+      "name": "Kaleidoscopic Glare",
+      "description": "<p>All light becomes painful and overwhelming for your eyes. You suffer the effects of the @Condition[blinded] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Kaleidoscopic Haunting": {
+      "name": "Kaleidoscopic Haunting",
+      "description": "<p>You hear ominous whispers in the shadows all around you. These voices are all you can hear and you suffer the effects of the @Condition[deafened] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Kaleidoscopic Intoxication": {
+      "name": "Kaleidoscopic Intoxication",
+      "description": "<p>You feel unsteady on your feet, your limbs are sluggish, and your mind is dulled. You are affected by the @Condition[exposed] condition.</p><p>This effect lasts until the affected character completes a Rest. It can be removed early by using [[/counterspell rune=control gesture=influence inflection=push dc=14]].</p>"
+    },
+    "Luminous Crystallization": {
+      "name": "Luminous Crystallization",
+      "description": "<p>The afflicted creature's flesh is slowly transmuted into a luminous, crystalline substance by the touch of an Uncanny Relic. The transformation is painful and spreading, hardening the limbs and creeping inexorably toward the core.</p><ul><li><p>The afflicted suffers the @Condition[slowed] condition as crystalline rigidity takes hold of their body.</p></li><li><p>The brittle crystal is easily shattered and corroded: the afflicted is <strong>Vulnerable</strong> to <strong>Bludgeoning</strong> and <strong>Acid</strong> damage, suffering -5 resistance to each.</p></li><li><p>Conversely, the luminous crystal drinks in light, granting +10 <strong>Radiant</strong> resistance.</p></li></ul>"
+    },
+    "Ward of Stabilization": {
+      "name": "Ward of Stabilization",
+      "description": "<p>This protective ward calls upon the earth below to provide +5 <strong>Resistance</strong> to <strong>Acid</strong> damage by causing the elements needed to neutralize the corrosive liquid to spontaneously manifest when the warded individual is struck.</p>"
+    },
+    "Ward of Thunder": {
+      "name": "Ward of Thunder",
+      "description": "<p>This retributive ward calls upon the sky above to cause a booming thunder clap to resound back upon any enemy who strikes the warded character with a melee attack.</p><p> [[/hazard 6 fortitude lightning morale]]{Retributive Thunderclap}</p>"
+    }
+  }
+}

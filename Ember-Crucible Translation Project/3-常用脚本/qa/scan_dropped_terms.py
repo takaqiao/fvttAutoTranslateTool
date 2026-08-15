@@ -31,12 +31,31 @@
 
 **二、基准目录选哪个 —— 别用 `english-baseline/ember-0.6.0/`**
 --------------------------------------------------------------
-`5-其他内容/english-baseline/` 下有四份，用途完全不同，本闸要的是**发版当时的旧英文**：
+`5-其他内容/english-baseline/` 下有六份，用途完全不同，本闸要的是**发版当时的旧英文**：
 
-    ember-cn-v1.0.15-shipped-en/_repaired.json   ← ember 侧本闸的基准（就是它）
-    crucible-0.9.1-legacy/                       ← crucible 侧本闸的基准
+    ember-cn-v1.0.15-shipped-en/_repaired.json   ← ember 侧本闸的基准（就是它；只有 3 个包，见下）
+    crucible-0.9.1-legacy/                       ← crucible 侧本闸的基准（14 包，缺 0.10.1 才有的 adversary-equipment）
     crucible-0.10.1/                             ← 当前上游英文，不是基准
     ember-0.6.0/                                 ← **当前上游英文的镜像，拿来 diff 等于没 diff**
+    ember-0.6.0-preupgrade-2026-08-15/           ← 第十九轮新截的**全包**快照（10 包），给**下一次**升级用
+    crucible-0.10.1-preupgrade-2026-08-15/       ← 同上（15 包）
+
+**三、基准缺包 = 静默不扫（第十九轮 Y5）**
+------------------------------------------
+本闸只扫**基准目录里存在**的包：`scan()` 里 `if not os.path.exists(cur_p): continue`
+会静默跳过，报告长得和「扫过、干净」一模一样。实测 2026-08-15：
+`ember-cn-v1.0.15-shipped-en/` 只有 **3** 个包（`_repaired.json`＋adversary＋character），
+仓里 10 个 en 包 / 9 个有中文，另外 **6 个包 15 147 条有中文的叶从未进过本闸**。
+现在每次运行都印「本次扫 N 个包 / 仓里共 M 个包 / 缺 K 个」＋缺掉的中文叶数＋逐包对数，
+并写进 `meta.coverage` / `meta.per_pack`；`--strict-coverage` 让缺包直接以退出码 3 结束
+（默认只告警 —— 回测脚本会拿只有一个包的小仓跑，默认非零会把它们全打红）。
+
+**这个洞补不了「过去」，只补得了「将来」**：基准是历史快照，那 6 个包在 v1.0.15
+发版当时就没被捕获，「上游从那时到现在改了什么」对它们**根本无法回答**，不是脚本的错。
+所以第十九轮的做法是**升级前先截全包快照**
+（`3-常用脚本/qa/capture_baseline.py`，命名里写死上游版本号）。
+拿 `*-preupgrade-2026-08-15/` 跑**今天**恒为 0 告警（它们就是当前英文），
+那是对的、不是闸坏了 —— 它们的用途是下一次上游升级之后当「旧英文」。
 
 `ember-0.6.0/` 与当前 `compendium/en/` 逐叶几乎相同：34,483 叶里**只有 10 叶英文变过**
 （其余差异全是新增叶，本闸只看路径相同的对）。拿它当基准，「英文变过且有中文」
@@ -427,13 +446,82 @@ def baseline_packs(bdir):
     return out
 
 
+# ----------------------------------------------------------- 基准覆盖了几个包
+def cjk_leaf_count(path):
+    """一个 cn 包里**含中文**的叶数 —— 本闸的定义域就是这些叶。"""
+    if not os.path.exists(path):
+        return 0
+    d = {}
+    leaves(load_json(path).get("entries", {}), [], d)
+    return sum(1 for v in d.values() if CJK.search(v))
+
+
+def coverage(repo, baseline):
+    """扫了几个包 / 仓里共几个包 / 基准缺几个包（连带缺掉多少条中文叶）。
+
+    ⚠ **反空转第 (d) 型的探针**。前三种空转形态（判据写坏 / 压根不读库 /
+    读旧报告快照）的防法对它全部无效：判据没问题、库也读了、报告是当场生成的 ——
+    只是基准目录里**压根没有那个包**，`scan()` 里 `if not os.path.exists(cur_p):
+    continue` 会**静默**跳过，报告上一片绿，实情是没扫。
+
+    第十九轮实测：ember 侧基准 `ember-cn-v1.0.15-shipped-en/` 只装了 3 个包
+    （`_repaired.json` + adversary + character），而仓里有 10 个 en 包 / 9 个有中文，
+    另外 6 个包 **15 147 条有中文的叶**从未进过这三条闸 —— 三条闸却都报 0 告警。
+    所以这三个数必须每次跟着结果一起印，不能只印告警数。
+
+    补法在 `capture_baseline.py`（第十九轮）：**上游升级之前**从当前 `compendium/en`
+    截一份全包快照，命名里写死上游版本号。已截：
+    `english-baseline/ember-0.6.0-preupgrade-2026-08-15/`（10 包）与
+    `english-baseline/crucible-0.10.1-preupgrade-2026-08-15/`（15 包）。
+    """
+    en_dir = os.path.join(repo, "compendium", "en")
+    cn_dir = os.path.join(repo, "compendium", "cn")
+    bmap = baseline_packs(baseline)
+    repo_packs = sorted(f for f in os.listdir(en_dir)
+                        if f.endswith(".json") and f != "_source.json")
+    scanned, missing = [], []
+    for f in repo_packs:
+        p = bmap.get(f)
+        if p and os.path.exists(p):
+            scanned.append(f)
+        else:
+            cnp = os.path.join(cn_dir, f)
+            missing.append({"pack": f, "cn_present": os.path.exists(cnp),
+                            "cn_cjk_leaves": cjk_leaf_count(cnp)})
+    return {
+        "baseline": os.path.abspath(baseline),
+        "repo_en_packs": len(repo_packs),
+        "scanned_packs": scanned,
+        "missing_packs": missing,
+        "cn_cjk_leaves_uncovered": sum(m["cn_cjk_leaves"] for m in missing),
+        # 基准里有、仓里已经没有的包（上游删包 / 改名）。不影响本次结果，但要看得见。
+        "baseline_only_packs": [f for f in sorted(bmap) if f not in repo_packs],
+    }
+
+
+def print_coverage(cov):
+    print(f"  包覆盖：本次扫 {len(cov['scanned_packs'])} 个包 / 仓里 en 共 "
+          f"{cov['repo_en_packs']} 个包 / 基准缺 {len(cov['missing_packs'])} 个")
+    if cov["missing_packs"]:
+        print("  ⚠ 下列包**基准里没有，本闸一条也没看** —— 它们的 0 告警不是「干净」，是「没扫」：")
+        for m in cov["missing_packs"]:
+            tail = "" if m["cn_present"] else "（无 cn 文件）"
+            print(f"       {m['pack']}  含中文的叶 {m['cn_cjk_leaves']}{tail}")
+        print(f"     合计未进闸的中文叶 {cov['cn_cjk_leaves_uncovered']}")
+        print("     历史快照补不回来（那些包发版当时就没捕获）；将来靠 "
+              "3-常用脚本/qa/capture_baseline.py 在**升级前**截全包基准。")
+    if cov["baseline_only_packs"]:
+        print(f"  ⚠ 基准里有、仓里 en 已没有的包 {len(cov['baseline_only_packs'])} 个："
+              f"{'、'.join(cov['baseline_only_packs'])}")
+
+
 def norm_ws(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
 # --------------------------------------------------------------------- 主流程
 def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None,
-         block_filter=True):
+         block_filter=True, per_pack=None):
     en_dir = os.path.join(repo, "compendium", "en")
     cn_dir = os.path.join(repo, "compendium", "cn")
     findings = []
@@ -449,6 +537,9 @@ def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None,
         cnp = os.path.join(cn_dir, pack)
         if os.path.exists(cnp):
             leaves(load_json(cnp).get("entries", {}), [], c)
+        if per_pack is not None:
+            per_pack[pack] = {"baseline_leaves": len(o), "cur_en_leaves": len(n),
+                              "cn_leaves": len(c), "changed_pairs": 0, "findings": 0}
 
         for path, new_en in n.items():
             old_en = o.get(path)
@@ -458,6 +549,8 @@ def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None,
             if norm_ws(old_en) == norm_ws(new_en):
                 continue
             stats["changed_pairs"] += 1
+            if per_pack is not None:
+                per_pack[pack]["changed_pairs"] += 1
             old_words = WORD.findall(strip_machinery(old_en, idmap))
             new_words = WORD.findall(strip_machinery(new_en, idmap))
             sm = difflib.SequenceMatcher(
@@ -580,6 +673,8 @@ def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None,
                 stats["clean"] += 1
                 continue
             stats["DROPPED_TERM_KEPT"] += 1
+            if per_pack is not None:
+                per_pack[pack]["findings"] += 1
             findings.append({
                 "verdict": "DROPPED_TERM_KEPT", "repo": os.path.basename(repo),
                 "pack": pack, "path": path, "dropped": hits,
@@ -606,6 +701,9 @@ def main():
     ap.add_argument("--no-block-filter", action="store_true",
                     help="关掉逐位对齐过滤，退回整叶计数口径（实测假阳性会从 12 涨回 77，"
                          "只在与旧轮对数时用）")
+    ap.add_argument("--strict-coverage", action="store_true",
+                    help="基准缺包时以退出码 3 结束（默认只告警：回测脚本会拿单包小仓跑，"
+                         "默认非零会把它们全打红）")
     ap.add_argument("--out")
     ap.add_argument("--md")
     ap.add_argument("--show", type=int, default=30)
@@ -631,11 +729,18 @@ def main():
 
     gloss = load_glossary(a.glossary)
     idmap = load_idmap(a.bindings)
+    cov = coverage(a.repo, a.baseline)
+    per_pack = {}
     findings, stats = scan(a.repo, a.baseline, gloss, not a.all_case, a.min_sim, idmap,
-                           block_filter=not a.no_block_filter)
+                           block_filter=not a.no_block_filter, per_pack=per_pack)
     print(f"{os.path.basename(a.repo)}  基准 {os.path.basename(a.baseline)}  "
           f"词表单词条目 {len(gloss)}  id→名 {len(idmap)}")
     print(f"  baseline = {baseline_abs}")
+    # 反空转 (d)：基准缺包时 scan() 会静默跳过，报告与「扫过、干净」长得一模一样。
+    print_coverage(cov)
+    for pk, d in per_pack.items():
+        print(f"     · {pk}  基准叶 {d['baseline_leaves']}  当前英文叶 {d['cur_en_leaves']}"
+              f"  中文叶 {d['cn_leaves']}  英文变过 {d['changed_pairs']}  告警 {d['findings']}")
     print(f"  英文变过且有中文的条目 {stats['changed_pairs']}"
           f"  ·  整段重写跳过 {stats['rewritten_skipped']}  ·  无删词残留 {stats['clean']}")
     # 反空转：逐位对齐这一层必须自报「扫了多少叶、多少块、压掉多少条、放行多少条」，
@@ -662,6 +767,9 @@ def main():
         "baseline": baseline_abs,
         "baseline_packs": {k: os.path.abspath(v)
                            for k, v in baseline_packs(a.baseline).items()},
+        # 缺包时报告要能自证「0 告警是没扫出来、还是根本没扫」。
+        "coverage": cov,
+        "per_pack": per_pack,
         "glossary": os.path.abspath(a.glossary),
         "bindings": [os.path.abspath(p) for p in a.bindings],
         "idmap_size": len(idmap),
@@ -678,6 +786,9 @@ def main():
         with open(a.md, "w", encoding="utf-8") as fh:
             fh.write(f"# 删除型漂移（scan_dropped_terms.py）— {os.path.basename(a.repo)}\n\n")
             fh.write(f"- baseline：`{meta['baseline']}`\n")
+            fh.write(f"- 包覆盖：扫 {len(cov['scanned_packs'])} / 仓里 {cov['repo_en_packs']} / "
+                     f"缺 {len(cov['missing_packs'])}"
+                     f"（未进闸的中文叶 {cov['cn_cjk_leaves_uncovered']}）\n")
             fh.write(f"- bindings：{'、'.join(f'`{p}`' for p in meta['bindings']) or '**无（结果不可用）**'}\n")
             fh.write(f"- glossary：`{meta['glossary']}`\n")
             fh.write(f"- 英文变过且有中文 {stats['changed_pairs']} 条，**告警 {len(findings)}**\n\n")
@@ -699,6 +810,10 @@ def main():
                     fh.write("\n")
                 fh.write(f"\n- 旧英文：{f['old_en']}\n- 新英文：{f['new_en']}\n- 中文：{f['cn']}\n\n")
         print(f"  -> {a.md}")
+    if a.strict_coverage and cov["missing_packs"]:
+        print(f"✗ --strict-coverage：基准缺 {len(cov['missing_packs'])} 个包，"
+              f"本次结果不构成全库结论。")
+        return 3
     return 0
 
 

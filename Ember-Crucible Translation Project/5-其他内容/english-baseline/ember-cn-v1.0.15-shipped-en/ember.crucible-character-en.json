@@ -1,0 +1,526 @@
+{
+    "label": "Character Options",
+    "mapping": {
+        "name": "name",
+        "actionname": "system.actions.name",
+        "actiondesc": "system.actions.description",
+        "actioneffectname": "system.actions.effects.name"
+    },
+    "folders": {
+        "Ancestries": "Ancestries",
+        "Attunements": "Attunements",
+        "Cultures": "Cultures",
+        "Paths": "Paths",
+        "Soulbound": "Soulbound",
+        "Ancestry Features": "Ancestry Features",
+        "Attunement Features": "Attunement Features",
+        "Culture Features": "Culture Features"
+    },
+    "entries": {
+        "Oaken": {
+            "name": "Oaken",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.k7bsL7HRGcz4P314 inline overview]</p>"
+        },
+        "Academy Dropout": {
+            "name": "Academy Dropout",
+            "description": "<p>The Star Academy of the Rhivan accepts students from across the world, and you can be admitted with even the barest glimmer of magical potential. Some, however, find the strict and unrelenting study unbearable and only last a short while before leaving to find their fortunes elsewhere. You likely picked up a few things, learning just enough to get by in any situation that requires magical knowledge.</p><p>You are a capable magical adept, at least from a knowledge perspective, and you are aware of numerous magical theories and phenomena.</p>"
+        },
+        "Anchorite Marine": {
+            "name": "Anchorite Marine",
+            "description": "<p>You have spent time training as a sailor or marine in the Cascilian Republic’s Navy. This has given you a deep understanding of ships and sailing across Ember's vast seas and oceans, and you know a great deal of information about navigation and charts. In a pinch, you could also repair or even construct a small vessel or react on your own, given enough time to cross small bodies of water such as rivers or lakes. During your service, you may have engaged the Undead attempting to invade across the Golden Bay.</p><p>You understand how to operate ocean vessels of varying sizes in a limited fashion and also how to navigate the seas using charts. You may also have some knowledge of the different types of Undead and their weaknesses<br /></p>"
+        },
+        "Caravanner": {
+            "name": "Caravanner",
+            "description": "<p>Trade between the many cities of Ember and across its varied and scattered cultures is often undertaken by the never-ending march of diverse and assorted overland caravans. You may have traveled over long distances with a caravan in the past, picking up how to twirl a coin in your hand or regal a group with a tale. You are also likely to be keen-eyed, and after years of looking for dangers on the horizon, you can smell trouble from a mile away.</p><p>You have a keen eye and can spot hidden dangers around you both close and far. You have a keen sense of survival and can also keep yourself alive while traveling in the wilderness.</p>"
+        },
+        "Cindaric Initiate": {
+            "name": "Cindaric Initiate",
+            "description": "<p>The Cindaric Sages of Ordain are well known to send their members out into the world, teaching others about the Heart of Ember and its wonderous, life-giving energy. You may have been taught by a wandering sage while a child in your homeland and always dreamt of visiting the Cindaric Temple itself, or perhaps your family are from Ordain originally and have a close connection to the sages through your upbringing. You are likely well-versed in religious ideas and believe strongly that the Heart of Ember is a force for good, imbuing all creatures with life and purpose. </p><p>Your faith has granted you knowledge of the Heart of Ember, the life-imbuing energy of Lifeforce, and you may also have a strong connection to nature and the cycles of life and death.<br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Cosmopolitan Fashionista": {
+            "name": "Cosmopolitan Fashionista",
+            "description": "<p>You have spent some time in great city of Ordain, and while you may not have been born in the city, you have acclimatized to its bustling and cosmopolitan attitudes and trends. You may be able to gather information more easily and have a great visual memory for the people around you.  Your sense of style is impeccable, and you can recognize minute details about a person simply by studying them for a few moments. You may also be keen to immerse yourself into social events and use the knowledge you discover to your own advantage. </p><p>You understand fashion to such an extent that you can uncover personal details simply by studying what people are wearing. You may have a talent for intrigue, diplomacy, and making social connections. </p>"
+        },
+        "Crown Apothecary": {
+            "name": "Crown Apothecary",
+            "description": "<p>You have spent time visiting or learning from Ember's finest alchemists in Crown on the southern island of Vita'ri. Your time there gave you an enhanced knowledge of the reagents, infusions, and essences necessary to create potent alchemical elixirs. Your knowledge in this area enables you to more easily recognize alchemical ingredients and their properties, or to understand the effects of alchemically created substances.</p><p>The alchemists of Crown are renowned for infusing creations with elemental energy, heightening and enhancing their potency. This art requires significant knowledge of elementals and their capabilities. As a byproduct of your experiences in Crown, you have some unusual knowledge regarding Elementals, their various types, and their inherent attributes.</p>"
+        },
+        "Abyss Attunement": {
+            "name": "Abyss Attunement",
+            "description": "<p>Your soul is vacant of resonance with Ember's cosmological forces, instead you are attuned to the unsettling pull of @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.06I8t0GPggrMVnGV]{The Abyss} and its philosophical ideal of <strong>Nihilism</strong>.</p><p>You gain resistance to <strong>Void</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Akon Attunement": {
+            "name": "Akon Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.3Oywe0peo57dQT9j]{Akon}, The Shattered Moon, and its philosophical ideal of <strong>Discipline</strong>.</p><p>You gain resistance to <strong>Bludgeoning</strong>, <strong>Piercing</strong>, and <strong>Slashing </strong>damage equal to your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Altyra Lineage": {
+            "name": "Altyra Lineage",
+            "description": "<p>You are immune to the <strong>Diseased</strong> condition which otherwise prevents you from regaining <strong>Health</strong>.</p>",
+            "actionname": "Tyraphic Transformation",
+            "actiondesc": "<p>You can imbue yourself with the temporary visage and capabilities of Tyraphem, assuming an otherworldly visage. While transformed, you gain the following benefits.</p><ul><li><p>You gain resistance to <strong>Radiant</strong> damage equal to 2 times your level.</p></li><li><p>Your attacks deal additional <strong>Radiant</strong> damage equal to half your <strong>Presence</strong>.</p></li><li><p>You gain <strong>+2 Boons </strong>to your use of the <strong>Intimidation</strong> skill.</p></li></ul><p>You may end this transformation prior to its full duration on your turn at no cost.</p>",
+            "actioneffectname": "Tyraphic Transformation"
+        },
+        "Altyra": {
+            "name": "Altyra",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.tkGzfnJkkLZ3cgpG inline overview]</p>"
+        },
+        "Ashka": {
+            "name": "Ashka",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.QIC15zfqh4Ndzgha inline overview]</p>"
+        },
+        "Cor'ak": {
+            "name": "Cor'ak",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.blm7nVaaSYLZX3C9 inline overview]</p>"
+        },
+        "Drakon": {
+            "name": "Drakon",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.GRs2vgeVsDpWPqjh inline overview]</p>"
+        },
+        "Fej": {
+            "name": "Fej",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.fmhP7pxXIXV0BM2r inline overview]</p>"
+        },
+        "Hulg'run": {
+            "name": "Hulg'run",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.K28cb1q6tvU8FP8B inline overview]</p>"
+        },
+        "Human": {
+            "name": "Human",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.p7n66fVhfJCkGd4z inline overview]</p>"
+        },
+        "Keth": {
+            "name": "Keth",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.bOPreM2lwc0iB46X inline overview]</p>"
+        },
+        "Kiska": {
+            "name": "Kiska",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.tyum0IGWIODRfitO inline overview]</p>"
+        },
+        "Kivahr": {
+            "name": "Kivahr",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.rl7QgGAIaYqAxLYq inline overview]</p>"
+        },
+        "Nir'ae": {
+            "name": "Nir'ae",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.QgnKHUryvNrNqRfN inline overview]</p>"
+        },
+        "Signborn": {
+            "name": "Signborn",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.p6DGVnaLHZfLvGem inline overview]</p>"
+        },
+        "Thornling": {
+            "name": "Thornling",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.3s9YujjWpwPJntGa inline overview]</p>"
+        },
+        "Vrjnhar": {
+            "name": "Vrjnhar",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.0YvoRkcs1BxtRiQz inline overview]</p>"
+        },
+        "Wirrun": {
+            "name": "Wirrun",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.PYCLsQgKclg5toxT inline overview]</p>"
+        },
+        "Zeph": {
+            "name": "Zeph",
+            "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.eyvVaX4c1rMos0ws inline overview]</p>"
+        },
+        "Ashka Lineage": {
+            "name": "Ashka Lineage",
+            "description": "<p>Your <strong>Stride</strong> is not penalized while in water. You can hold your breath while underwater for up to twenty minutes.</p><p>You can detect subtle differences in temperature with precision, allowing you to locate creatures which are warm-blooded or otherwise emit heat up to 60 feet away as long as they are not behind total cover and you are not <strong>Blinded</strong> or <strong>Incapacitated</strong>. A creature detected using Thermal Vision is treated as visible for the purposes of actions which require you to see your target.</p><p><strong>ALPHA ONE: </strong>This feature is not yet automated.</p>"
+        },
+        "Aster": {
+            "name": "Aster",
+            "description": "<p>Your alteration sets you apart from others of your ancestry, You may show phsycial signs of your transformation, or your differences may lie hidden within, shaping you are at a fundamental level. No two Aster are alike, and your form is entirely your own.</p>"
+        },
+        "Aura Attunement": {
+            "name": "Aura Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.smc0OuMxsxfcSdhR]{Aura}, The Hollow Moon, and its philosophical ideal of <strong>Individualism</strong>.</p><p>You gain resistance to <strong>Electricity</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Abyss": {
+            "name": "Abyss",
+            "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.06I8t0GPggrMVnGV inline overview]</p>"
+        },
+        "Akon": {
+            "name": "Akon",
+            "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.3Oywe0peo57dQT9j inline overview]</p>"
+        },
+        "Arcturian": {
+            "name": "Arcturian",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.8cGPxMRewkagoIvc inline overview]</p>"
+        },
+        "Aura": {
+            "name": "Aura",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.smc0OuMxsxfcSdhR inline overview]</p>"
+        },
+        "Bejak": {
+            "name": "Bejak",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.A1uPGhtaDifW8Sph inline overview]</p>"
+        },
+        "Cascilian": {
+            "name": "Cascilian",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.Ed7ttdIwKm95IdUG inline overview]</p>"
+        },
+        "Cora": {
+            "name": "Cora",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.5pD8lxiilJJXOgoa inline overview]</p>"
+        },
+        "Heart": {
+            "name": "Heart",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.0anKTKgOav9sXox1 inline overview]</p>"
+        },
+        "Kelmezian": {
+            "name": "Kelmezian",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.SySGCB7QdgeKowkD inline overview]</p>"
+        },
+        "Kessian": {
+            "name": "Kessian",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.1WoH2TVw0gngrgWL inline overview]</p>"
+        },
+        "Kithil": {
+            "name": "Kithil",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.IOBQMGUigqxn3UkM inline overview]</p>"
+        },
+        "Lumek": {
+            "name": "Lumek",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.f52WC5ZzNSK0yKOz inline overview]</p>"
+        },
+        "Luxarum": {
+            "name": "Luxarum",
+            "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.pPU6VZV7WFubtcSR inline overview]</p>"
+        },
+        "Mayis": {
+            "name": "Mayis",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.RkdBtFQk7STvMbV2 inline overview]</p>"
+        },
+        "Maziran": {
+            "name": "Maziran",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.cYMQIQFugpO79L9f inline overview]</p>"
+        },
+        "Orbis": {
+            "name": "Orbis",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.zkmWSB32y8Fbc4UL inline overview]</p>"
+        },
+        "Ordani": {
+            "name": "Ordani",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.RxhlhTWqJqB1cZxY inline overview]</p>"
+        },
+        "Primordis": {
+            "name": "Primordis",
+            "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.16sqn71JsCkghaTt inline overview]</p>"
+        },
+        "Ragen": {
+            "name": "Ragen",
+            "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.LKptgmc56euSOb0G inline overview]</p>"
+        },
+        "Railen": {
+            "name": "Railen",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.y4WHE3TEr6Of13SL inline overview]</p>"
+        },
+        "Rhivan": {
+            "name": "Rhivan",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.emFVgDaCDq0lWY2b inline overview]</p>"
+        },
+        "Signara": {
+            "name": "Signara",
+            "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.3OvueRrGcFnwtnmw inline overview]</p>"
+        },
+        "Strider": {
+            "name": "Strider",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.VHQNztu45XEHuvtY inline overview]</p>"
+        },
+        "Tayan": {
+            "name": "Tayan",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.bG3kuSiwqMnIHSrH inline overview]</p>"
+        },
+        "Waerd": {
+            "name": "Waerd",
+            "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.MsiM0222IPxjGTQQ inline overview]</p>"
+        },
+        "Wardcall": {
+            "name": "Wardcall",
+            "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.xImbz6Nf4mMxtKF1 inline overview]</p>"
+        },
+        "Cleansing Flame": {
+            "name": "Cleansing Flame",
+            "description": "<p>You are a champion of Lumé in the perpetual war against undeath. You gain <strong>+1 Boon</strong> on any attack against enemies of the <strong>Undead</strong> type.</p>"
+        },
+        "Constructed Companion": {
+            "name": "Constructed Companion",
+            "description": "<p>You may spend 1 hour creating a tiny @UUID[Actor.oLu6qs3AYUu8eitR] from a natural material that comes from or grows in the ground, for example clay, stone, wood, or straw. The Constructed Companion is an animated construct which becomes a creature under your control, surviving for 8 hours or until it is reduced to 0 health or morale.</p><p>While the Constructed Companion is animated, you can provide it with basic verbal instructions to issue simple commands, such as \"fetch a key\", \"stand watch\", or \"stack some books\". If you issue no commands the Constructed Companion will do nothing other than defend itself against hostile creatures, performing the Defend action whenever appropriate. Once given an order, the Companion continues to follow that order until its task is complete or alternative instructions are given.</p><p>You may only have one Constructed Companion active at a time, creating a second companion causes the magic which animated your prior Constructed Companion to immediately fade.</p>",
+            "actionname": "Construct Companion",
+            "actiondesc": "<p>You spend 1 hour creating a Constructed Companion which follows your basic verbal instructions.</p>"
+        },
+        "Cora Attunement": {
+            "name": "Cora Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.5pD8lxiilJJXOgoa]{Cora}, The Blasted Moon, and its philosophical ideal of <strong>Pragmatism</strong>.</p><p>You gain resistance to <strong>Acid </strong>damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Cor'ak Lineage": {
+            "name": "Cor'ak Lineage",
+            "description": "<p>Your thick and partially-metallic hide provides natural protection from blows. While you are unarmored, you gain an <strong>Armor</strong> bonus equal to your <strong>Toughness </strong>ability score.</p>",
+            "actionname": "Crystalize Wounds",
+            "actiondesc": "<p>When you become <strong>Weakened </strong>or suffer damage while <strong>Weakened</strong>, a crystalline carapace forms over your body. For a short period of time you gain resistance to <strong>Bludgeoning</strong>, <strong>Piercing</strong>, and <strong>Slashing</strong> damage equal to your <strong>Toughness</strong> modifier. You also immediately gain an amount of <strong>Health</strong> equal to two times your <strong>Level</strong>.</p>",
+            "actioneffectname": "Crystalize Wounds"
+        },
+        "Personalized Crafting": {
+            "name": "Personalized Crafting",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Drakon Lineage": {
+            "name": "Drakon Lineage",
+            "description": "<p>You are extraordinarily resistant to the influence of Necromancy and death magic. Spells using the <strong>Rune of Death</strong> have <strong>+2 Banes</strong> to their spell attack rolls against you.</p><p>You instinctually know the <strong>Rune of Flame</strong> and can use it for basic spellcraft.</p>",
+            "actionname": "Drakonfire",
+            "actiondesc": "<p>During moments of great duress, you can harness this power to expel flame in a cone, searing all creatures in your path. You expel draconic flame in a conical area.</p><p>This <strong>Deadly</strong> attack scales using your <strong>Toughness</strong> and targets the <strong>Reflex</strong> defense of affected creatures. This action counts as a <strong>Natural</strong> weapon with which the Drakon is, at least, trained.</p>"
+        },
+        "Explosives Training": {
+            "name": "Explosives Training",
+            "description": "<p>You have familiarity with explosives. When using a consumable of the <strong>Bomb</strong> type you always count as at least <strong>Trained</strong> in the relevant skill. If you are already trained in that skill, you instead gain <strong>+1 Boon</strong> to any involved checks.</p>"
+        },
+        "Fej Lineage": {
+            "name": "Fej Lineage",
+            "description": "<p>Your Ancestry's resistance to <strong>Fire</strong> damage is further increased by your character <strong>Level</strong>. If you are submersed in water for longer than 6 seconds or begin your turn submersed in water you must test your resolve using the <strong>Water Aversion</strong> action.</p>",
+            "actionname": [
+                "Extreme Metabolism",
+                "Water Aversion"
+            ],
+            "actiondesc": [
+                "<p>You activate your fiery metabolism to engage a burst of supernatural speed.</p><ul><li><p>Your <strong>Stride</strong> increases by +2.</p></li><li><p>You gain a bonus to <strong>Dodge</strong> equal to half your <strong>Dexterity</strong>.</p></li><li><p>You gain +1 to both your current and maximum <strong>Action</strong>.</p></li></ul>",
+                "<p>When submersed in water for longer than 6 seconds, or when you begin your turn submersed in water, you must test your own resolve.</p><p><strong>ALPHA ONE</strong>: This action needs further balancing.</p>"
+            ],
+            "actioneffectname": "Extreme Metabolism"
+        },
+        "Heart Attunement": {
+            "name": "Heart Attunement",
+            "description": "<p>Your soul resonates with the Lifeforce energy of the @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.0anKTKgOav9sXox1]{Heart of Ember} and its philosophical ideal of <strong>Vitalism</strong>.</p><p>You gain resistance to <strong>Corruption </strong>damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Hot Tempered": {
+            "name": "Hot Tempered",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Hulg'run Lineage": {
+            "name": "Hulg'run Lineage",
+            "description": "<p>You are immune to the <strong>Asleep</strong> condition. </p><p>You can commune with the essence of Ember when you <strong>Rest</strong>. If you are resting upon solid ground, you do not require sleep and can remain conscious. You may not engage in any strenuous activity in order to gain the benefits of the rest.</p>",
+            "actionname": "Living Stone",
+            "actiondesc": "<p>Your form temporarily calcifies, providing enhanced protection against physical blows.</p><ul><li><p>You gain resistance to <strong>Bludgeoning</strong>, <strong>Piercing</strong>, and <strong>Slashing</strong> damage equal to your <strong>Level + 1</strong>.</p></li><li><p>Your <strong>Stride</strong> is reduced by -2.</p></li><li><p>You are immune to the <strong>Prone</strong> condition and cannot be involuntarily moved.</p></li></ul>",
+            "actioneffectname": "Living Stone"
+        },
+        "Human Lineage": {
+            "name": "Human Lineage",
+            "description": "<p>When you perform a <strong>Reaction</strong> which involves a <strong>Focus</strong> cost, you gain <strong>+1 Boon</strong> on any associated roll.</p>",
+            "actionname": "Ember Blaze",
+            "actiondesc": "<p>When you become <strong>Weakened </strong>or sustain damage while <strong>Weakened</strong>, you can activate a burst of extraordinary adrenaline called Blaze. You immediately replenish your <strong>Action</strong> and <strong>Focus</strong> pools to their maximum value.</p>"
+        },
+        "Impassioned Revelry": {
+            "name": "Impassioned Revelry",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Imperial Ambition": {
+            "name": "Imperial Ambition",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Intrepid Sailor": {
+            "name": "Intrepid Sailor",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Keth Lineage": {
+            "name": "Keth Lineage",
+            "description": "<p>You thrive on unpredictability and you have a penchant for turning a bad situation into an advantageous one.</p><ul><li><p>If you fail using a <strong>Skill</strong> action, your next action gains the benefit of <strong>+1 Boon </strong>until the start of your next <strong>Turn</strong>.</p></li><li><p>If you miss on an <strong>Attack</strong> action, your next action gains the benefit of <strong>+1 Boon</strong> until the start of your next <strong>Turn</strong>.</p></li></ul>",
+            "actionname": "Sudden Bite",
+            "actiondesc": "<p>In extraordinary or desperate circumstances, you can make a vicious attack with your sharp teeth. You gnash viciously with your extended jaw of sharp teeth, making a <strong>Natural</strong> weapon attack with the <strong>Deadly</strong> property which deals <strong>Piercing</strong> damage.</p>"
+        },
+        "Kiska Lineage": {
+            "name": "Kiska Lineage",
+            "description": "<p>Your blend effortlessly into the darkness. While standing within dim light or darkness you gain <strong>+2 Boons</strong> to any usage of the <strong>Stealth</strong> skill.</p><p>You instinctually know the <strong>Rune of Illusion</strong> and can use it for spellcraft.</p>",
+            "actionname": "Nimble Leap",
+            "actiondesc": "<p>You draw on a limited reserve of energy to make a spectacular bounding leap. You may immediately <strong>Jump</strong> up to three times your <strong>Stride</strong>. Movement made in this way is so sudden that it affords no opportunity for <strong>Disengagement</strong> attacks.</p>"
+        },
+        "Kivahr Lineage": {
+            "name": "Kivahr Lineage",
+            "description": "<p>Your body is strengthened with the lineage of giants. Your mind and your body work in harmony to solve problems and withstand physical strain. </p><p>You gain a bonus to your <strong>Fortitude</strong> and <strong>Willpower</strong> defenses equal to your <strong>Level</strong> divided by 4.</p><p></p><p></p><p></p>",
+            "actionname": "Regulated Rhythm",
+            "actiondesc": "<p>You engage your supernatural ability to harmonize your mind and body. You enter a trance-like state which provides the following benefits at the start of your <strong>Turn</strong>.</p><ul><li><p>You gain +1 <strong>Focus</strong>.</p></li><li><p>If your Morale is higher than your Health, you transfer up to your <strong>Presence </strong>ability score reducing <strong>Morale</strong> and gaining <strong>Health</strong>.</p></li><li><p>If your Health is higher than your Morale, you transfer up to your <strong>Toughness </strong>ability score, reducing <strong>Health</strong> and gaining <strong>Morale</strong>.</p></li></ul><p>These transfers will not cause any resource to exceed it's maximum value.</p>",
+            "actioneffectname": "Regulated Rhythm"
+        },
+        "Lunar Tattoos": {
+            "name": "Lunar Tattoos",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Luxarum Attunement": {
+            "name": "Luxarum Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.pPU6VZV7WFubtcSR]{Luxarum}, the Realm of Endless War and its philosophical ideal of <strong>Ambition</strong>.</p><p>You gain resistance to <strong>Radiant</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Mayis Attunement": {
+            "name": "Mayis Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.RkdBtFQk7STvMbV2]{Mayis}, The Tempest Moon, and its philosophical ideal of <strong>Patience</strong>.</p><p>You gain resistance to <strong>Cold</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Mistrust of Magic": {
+            "name": "Mistrust of Magic",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Nir'ae Lineage": {
+            "name": "Nir'ae Lineage",
+            "description": "<p>You know the <strong>Rune of Illumination</strong> and may use it for spellcraft.</p><p>Your iridescent birthmarks provide you with a remarkable ability to evade or instinctually redirect hostile magic. Spell attacks against you suffer from <strong>+2 Banes</strong>.</p>",
+            "actionname": "Prescient Reflection",
+            "actiondesc": "<p>When a spell which targets you directly is resisted with a critical failure, you can instinctually redirect the energy of the spell, causing it to instead dissipate or affect an alternative target within range of the spell other than its original caster.</p><p>The alternative target must defend against the spell instead and any effects of the spell are applied to that target instead. If no alternative target is chosen, the energy of the spell dissipates harmlessly.</p>"
+        },
+        "Orbis Attunement": {
+            "name": "Orbis Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.zkmWSB32y8Fbc4UL]{Orbis}, The Spirit Moon, and its philosophical ideal of <strong>Spontaneity</strong>.</p><p>You gain resistance to <strong>Psychic</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Passionate Trader": {
+            "name": "Passionate Trader",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Preeminent Survivalist": {
+            "name": "Preeminent Survivalist",
+            "description": "<p>You are always treated as at least <strong>Trained</strong> in both the <strong>Awareness</strong> and <strong>Wilderness</strong> skills. If you are already trained, such skill checks will be made with <strong>+1 Boon</strong>.</p><p>Additionally, you cannot be caught @Condition[unaware] unless you are <strong>Incapacitated</strong>, <strong>Deafened</strong>, or <strong>Blinded</strong>.</p>"
+        },
+        "Primordis Attunement": {
+            "name": "Primordis Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.16sqn71JsCkghaTt]{Primordis}, the Realm of Capricious Sorcery, and its philosophical ideal of <strong>Cunning</strong>.</p><p>You gain resistance to <strong>Poison </strong>damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Ragen Attunement": {
+            "name": "Ragen Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.LKptgmc56euSOb0G]{Ragen}, The Charred Moon, and its philosophical ideal of <strong>Directness</strong>.</p><p>You gain resistance to <strong>Fire</strong> damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Resolute Legacy": {
+            "name": "Resolute Legacy",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Ritual Cooking": {
+            "name": "Ritual Cooking",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Signara Attunement": {
+            "name": "Signara Attunement",
+            "description": "<p>Your soul resonates with attunement to @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.3OvueRrGcFnwtnmw]{Signara}, the Realm of Insatiable Curiosity, and its philosophical ideal of <strong>Curiosity</strong>.</p><p>You gain resistance to <strong>Void </strong>damage equal to 2 times your attunement strength.</p><p><em>Further effects will be unlocked at higher attunement ranks.</em></p>"
+        },
+        "Signborn Lineage": {
+            "name": "Signborn Lineage",
+            "description": "<p>You have two ethereal arms in addition to your corporeal limbs. These arms may not wield weapons, shields, or other equipment. They can be used, however, to quickly manipulate items in addition to your regular limbs. Once per <strong>Round</strong> you may equip an Item from your inventory without spending any <strong>Action</strong> points to do so.</p><p>Using special Signborn language and physiology, you synchronize your ethereal limbs into the weaving of spellcraft to effortlessly perform feats of magic. You know the unique <strong>Glyphspeak</strong> inflection which can be added to spells. A spell augmented with Glyphspeak costs <strong>+1 Heroism</strong> to cast, but can be performed at a reduced cost of <strong>-2 Action</strong>.</p>"
+        },
+        "Soulbound": {
+            "name": "Soulbound",
+            "description": "<p>You have died and are now Soulbound, afflicted by a magical tether called a Soulmark that prevents your spirit from passing on according to the typical Soul Cycle of Ember. You are not undead and you retain the features you had during life, but your continued existence is subject to additional rules with consequences that worsen as the strength of your Soulmark grows.</p><p>There are three Soulbound ranks which impose the following Soulmarks in sequence: \"Lesser\", \"Greater\", and \"Deathly\". Each rank imposes progressively more severe effects.</p><p>Your maximum <strong>Madness</strong> value is reduced as you are more susceptible to the mind-consuming influence of undeath.</p><ul><li><p><strong>Lesser Soulmark:</strong> Reduced by 2 per Level</p></li><li><p><strong>Greater Soulmark</strong>: Reduced by 4 per Level</p></li><li><p><strong>Deathly Soulmark</strong>: Reduced by 6 per Level</p></li></ul><p>Your <strong>Morale Threshold</strong> and <strong>Healing Threshold</strong> defenses increase, making you harder to heal.</p><ul><li><p><strong>Lesser Soulmark:</strong> Increased by 2</p></li><li><p><strong>Greater Soulmark</strong>: Increased by 4</p></li><li><p><strong>Deathly Soulmark</strong>: Increased by 6</p></li></ul><p>Creatures of the <strong>Outsider</strong>, <strong>Undead</strong>, and <strong>Monstrosity</strong> types gain Boons to <strong>Awareness</strong> checks to sense you.</p><ul><li><p><strong>Lesser Soulmark:</strong> 1 Boon</p></li><li><p><strong>Greater Soulmark</strong>: 2 Boons and you can be seen while @Condition[invisible]</p></li><li><p><strong>Deathly Soulmark</strong>: 3 Boons and you can be seen while @Condition[invisible]</p></li></ul><p>All <strong>Skill</strong> actions which target a creature of the <strong>Beast</strong> type incur one bane as animals are inherently wary and distrusting of you.</p><ul><li><p><strong>Lesser Soulmark:</strong> 1 Bane</p></li><li><p><strong>Greater Soulmark</strong>: 2 Banes</p></li><li><p><strong>Deathly Soulmark</strong>: 3 Banes</p></li></ul><p>Uses of the <strong>Diplomacy</strong> skill towards creatures of the <strong>Humanoid</strong> type incur banes resulting from your gruesome nature:</p><ul><li><p><strong>Lesser Soulmark:</strong> 1 Bane</p></li><li><p><strong>Greater Soulmark</strong>: 2 Banes</p></li><li><p><strong>Deathly Soulmark</strong>: 3 Banes</p></li></ul><p>When you die, your Soulbound Rank increases by one, progressing from Lesser to Greater or from Greater to Deathly. If you die while bearing a <strong>Deathly Soulmark</strong>, you become an undead creature under the Gamemaster's control.</p>"
+        },
+        "Tactical Planner": {
+            "name": "Tactical Planner",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Exceptional Taste": {
+            "name": "Exceptional Taste",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Thornling Lineage": {
+            "name": "Thornling Lineage",
+            "description": "<p>The fibrous biology of Thornlings is incredibly resilient, providing the following benefits:</p><ul><li><p>Your <strong>Armor</strong> defense cannot be below 6 regardless of what type of equipment you are wearing.</p></li><li><p>Damage taken from <strong>Falling </strong>is reduced by half before other resistances apply.</p></li></ul>",
+            "actionname": "Thornbark",
+            "actiondesc": "<p>When you are targeted by a melee attack, you can cause thorny barbs to extrude from your body. For one minute you gain the following benefits.</p><ul><li><p>Melee attacks which <strong>Hit</strong> or <strong>Glance</strong> you wound the attacker in retaliation who suffers damage equal to your <strong>Toughness</strong> ability score.</p></li><li><p>Attempts to <strong>Grapple</strong> or <strong>Push</strong> you suffer <strong>+2 Banes</strong>.</p></li></ul><p>The effects of this Action apply to the attack which triggered the reaction.</p><p><strong>ALPHA ONE</strong>: The effects of Thornbark are not yet fully automated.</p>",
+            "actioneffectname": "Thornbark"
+        },
+        "Undaunted Warrior": {
+            "name": "Undaunted Warrior",
+            "description": "<p>You have extraordinary bravery and training for facing monstrous foes. You gain <strong>+1 Boon</strong> on any attack against enemies of the <strong>Monstrosity</strong> type.</p>"
+        },
+        "Urban Resourcefulness": {
+            "name": "Urban Resourcefulness",
+            "description": "<p><strong>BETA TWO</strong>: This talent is not updated with Crucible mechanics yet.</p>"
+        },
+        "Vrjnhar Lineage": {
+            "name": "Vrjnhar Lineage",
+            "description": "<p>When an attack against you results in a <strong>Glance</strong>, you protect yourself by taking the blow upon your magnificent beard which fully protects you from the damage otherwise dealt by a glancing blow.</p>",
+            "actionname": "Formidable Stamina",
+            "actiondesc": "<p>You draw upon incredible reserves of energy to keep fighting past the point of exhaustion. For a period of time, whenever you exhaust your pool of <strong>Action</strong> points, you have a 25% chance to immediately recover one <strong>Action </strong>point.</p>",
+            "actioneffectname": "Formidable Stamina"
+        },
+        "Wirrun Lineage": {
+            "name": "Wirrun Lineage",
+            "description": "<p>You are immune to the effects of extreme cold. Your vision is not impaired by fog, mist, snow, or other atmospheric effects.</p><p><strong>Alpha One:</strong> This vision effect is not yet automated.</p>",
+            "actionname": "Implacable Hunter",
+            "actiondesc": "<p>You designate one creature you can see as your quarry.</p><ul><li><p>You gain <strong>+2 Boons </strong>to any <strong>Awareness </strong>or <strong>Wilderness </strong>roll which pertains to identifying its location.</p></li><li><p>When you move closer to your quarry on your turn, you gain <strong>+2 Boons</strong> on the next attack roll made against your quarry on that same turn.</p></li></ul>",
+            "actioneffectname": "Implacable Hunter"
+        },
+        "Zeph Lineage": {
+            "name": "Zeph Lineage",
+            "description": "<p>You know the <strong>Rune of Lightning</strong> and can use it to weave Spellcraft.</p><p>A Zeph’s mask is capable of a limited amount of supernatural malleability. You can alter your mask slightly for regular communication and emotional expressiveness. When you die, only your mask remains. Your mask counts as your physical remains for the purposes of spells or magical effects which target a deceased creature.</p><p>The inscrutable nature of your mask makes reading your intentions difficult. During social challenges, <strong>Awareness</strong> checks to read your motives suffer <strong>+2 Banes</strong>.</p>",
+            "actionname": [
+                "Inscrutable Visage",
+                "Menacing Visage",
+                "Beguiling Visage"
+            ],
+            "actiondesc": [
+                "<p>Your mask assumes an inscrutable expression.</p><ul><li><p>You gain <strong>+2 Boons</strong> to all uses of the <strong>Deception </strong>skill.</p></li><li><p>Your <strong>Reflex </strong>defense increases by +2.</p></li></ul><p>You may only have one active mask expression at a given time.</p>",
+                "<p>Your mask assumes a menacing expression.</p><ul><li><p>You gain <strong>+2 Boons</strong> to all uses of the <strong>Intimidation </strong>skill.</p></li><li><p>Your <strong>Fortitude </strong>defense increases by +2.</p></li></ul><p>You may only have one active mask expression at a given time.</p>",
+                "<p>Your mask assumes a beguiling expression.</p><ul><li><p>You gain <strong>+2 Boons</strong> to all uses of the <strong>Persuasion</strong> skill.</p></li><li><p>Your <strong>Willpower</strong> defense increases by +2.</p></li></ul><p>You may only have one active mask expression at a given time.</p>"
+            ],
+            "actioneffectname": [
+                "Inscrutable Visage",
+                "Menacing Visage",
+                "Beguiling Visage"
+            ]
+        },
+        "Flameguard Militia": {
+            "name": "Flameguard Militia",
+            "description": "<p>The fight against the undead pouring from the Moiran lands and attacking the Lumek Homelands affects the entire world. Nations across the world send capable fighters and soldiers to help assist the beleaguered Flameguard. You may have never seen combat, and instead focused on organizing the defenses and training. It's likely, however, that you stood your ground against the never-ending hordes of undead on the front lines with a torch in one hand and a shield in the other.</p><p>You have some knowledge of the different types of Undead, their weaknesses, and a general ability to conduct yourself well in combat. Due to your exposure to undeath, you likely also have some extremely limited awareness of the Abyss.</p>"
+        },
+        "Imperial Conscript": {
+            "name": "Imperial Conscript",
+            "description": "<p>Visiting or living in the Tayan Empire can be perilous, as they care little about where their conscripts come from. You may have been forcibly conscripted or spent time training with the military only to escape and cross oceans as a deserter, or perhaps you were injured and discharged from service after an intense battle. You have all the basic knowledge of a conscript or soldier, how to handle a weapon, strategize, and how to survive the horrors of a battlefield. You may also have some limited knowledge of Dragons from your brief encounters with one or more of the Tayan Dragon riders, such as the Empress yourself or one of the other rare Kirargy Knights who managed to bond with one.</p><p>You have a deep knowledge of warfare, can quickly recognize logistical and organizational problems, and can strategize and plan for various situations. In addition, you have some knowledge of Dragons and are aware of the different types and their traits.</p>"
+        },
+        "Lightsworn": {
+            "name": "Lightsworn",
+            "description": "<p>The shining distant light of Luxarum has filled your soul with glorious songs since you were a child, and you may have sworn to discover its secrets. You may have even met one of the shining beings known as Tyraphem from Luxarum in a rare but blinding event that left you awestruck and swore to serve them directly. Upon your death in this mortal realm after serving the desires of your master or mistress or learning more about the light, you know with absolute certainty that you will be rewarded with eternal life in the Golden Realm above.</p><p>You have limited knowledge of the Inner Realm of Luxarum, the Tyraphem who rule over and their servants, the celestials. This knowledge may be warped by your own perception or zeal and may differ from the truth you find in the world.</p>"
+        },
+        "Lunar Empath": {
+            "name": "Lunar Empath",
+            "description": "<p>You are deeply connected to the people around you, able to sense a person's mood or emotions with a mere glance. You have such an uncanny ability to read people that some believe you can read their innermost thoughts. You may have also used your abilities to become akin to a local mystic, perhaps reading palms or decks of cards to tell people's fortunes.</p><p>You understand other mortal beings empathically, able to put yourself directly in other people's shoes and see through their eyes. You also have some knowledge of the Elemental moons and the effects their cycles and orbits have upon the surface world.</p>"
+        },
+        "Monster Hunter": {
+            "name": "Monster Hunter",
+            "description": "<p>You may have once led a simple life, but everything changed when the monsters in the darkness broke through your community defenses and destroyed everything you held dear. You may now hate the aberrations of Ember with a burning fury and hunt them across the world. Alternatively, you may have been taught from an early age how to hunt monsters and know exactly how to track and destroy them wherever they may appear.</p><p>You are a capable survivalist, spending days or even weeks scouring the wilderness and understand the tracks of many different creatures and monsters. You can identify Aberrations more easily than others and may even know some of their weaknesses. </p><p><br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Natural Artisan": {
+            "name": "Natural Artisan",
+            "description": "<p>There are many skilled and experienced crafters throughout the known world, but none are more renowned for their dedication and legacy than the Arcturians of the Arctus Plateau. You have spent many years learning from their techniques and traditional knowledge. You know how to handcraft items from wood and other natural materials like fibers and loam to produce practical yet beautiful forms; in addition, you understand construction and how buildings are assembled.</p><p>You understand how to build and craft items traditionally using wood and natural materials from the earth. You also have some understanding of plant life and the natural world.</p>"
+        },
+        "Nightwatch": {
+            "name": "Nightwatch",
+            "description": "<p>The colossal and ancient Kalmezan city-states are mortal-made mountains, built in layers atop one another to create individual self-contained settlements with vast populations. Most of their layers are almost ungovernable, especially as you delve deeper, and only the furious dedication of the Nightwatch who prowl the causeways and alleyways have any hope of keeping the peace. You may have once trained with members of the Nightwatch or helped with their endless forrays into the depths, learning how to blend into the darkness and move like lightning through an urban environment.</p><p>You understand how to investigate all manner of strange occurrences like crimes or follow threads of conspiracy. You may also have some innate ability to gather information from corpses or bodies of mortals and determine what killed them.</p>"
+        },
+        "Obsidian Antiquary": {
+            "name": "Obsidian Antiquary",
+            "description": "<p>The distant sun-bathed continent of Kessia, which lies far to the south, is a place of dangerous wonder and ancient secrets. Those who travel the windswept depths of the corrupted Obsidian Desert are brave and foolish in equal measure. You may have a fascination with ancient, terrible secrets and the artifacts unearthed in the black sands. You may have spent years traversing the desert searching for answers or collecting and studying the desert and its secrets from afar. You have likely discovered terrifying truths from your research and have been mentally scarred by their effects. </p><p>You are aware of the Abyss in an extremely limited fashion, though you likely call it by a different name. You are capable of determining the properties of some ancient magical artifacts. You are also aware of the healing and radiant energy of Lantyr that seems to oppose Abyssal energies.<br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Primalist Disciple": {
+            "name": "Primalist Disciple",
+            "description": "<p>Deep beneath the colossal trees of the Corebright Forest at the center of the known world prowl the shapeshifting and nature-worshipping Primalists. You may have spent time wandering the edges of the forest, and you may have even encountered a Primalist who taught you about their beliefs and how to commune with animals in some fashion. In addition, you may have learned about the numerous ancient Leviathans that still rule over vast sections of the world, and through your connection to nature, you can sense and understand them more than the average mortal.</p><p>You are able to understand animals and beasts to some degree and have an innate connection to the natural world. In addition, you have some knowledge of Leviathans.</p><p><br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Scion of Darkness": {
+            "name": "Scion of Darkness",
+            "description": "<p>Some say that darkness is simply the absence of light, but those people are fools, and you know better. Darkness is a force as powerful and seductive as any other, and you have found yourself drawn to lightless places. In search of understanding, you may have come across ways to summon a Fiend and make a pact with them in return for knowledge and power and are committed to serving its goals while you prowl the mortal world. Your pact means that upon your death, you will be granted eternal life upon the dark realm of Signara and will be able to study mysteries or engage in endless feuds and games to your heart's content. </p><p>You have limited knowledge of the Inner Realm of Signara, the Daemos who rule its darkened halls, and their servants, the Fiends. This knowledge may be warped by your own perception or twisted understanding and may differ from the truth you find in the world.</p><p><br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Shadow Walker": {
+            "name": "Shadow Walker",
+            "description": "<p>Wherever light and darkness exist, so do shadows, and ever since you were young, you have found stalking silently between trees or buildings to be as natural as breathing. You find yourself particularly at peace during dusk and dawn, where the twilight light is comforting and alluring. At some point in your life, you may have come across another being in the shadows, a mysterious Fae that taught you even greater abilities in return for whispered servitude, or you found yourself in front of a glimmering portal that you could not pass through despite your desperate pleas. Nevertheless, you believe that you will be granted access and rewarded with eternal life in the Shadowlands upon your death.</p><p>You have limited knowledge of the Inner Realm of Primordis, the Casia stalk the shadow thickets, and their servants, the Fae. This knowledge may be warped by your own perception or illusions and may differ from the truth you find in the world.</p>"
+        },
+        "Shard God Devotee": {
+            "name": "Shard God Devotee",
+            "description": "<p>Enthralled by the stories of Shards Gods who walk the world along with their followers, you have been obsessed with becoming a servant of the gods one day. You may be deeply religious and hold to the tenets and teachings of a particular deity, hailing from the commune of a distant Shard God or one of their temples. Alternatively, you may just want to worship a particular Shard God directly and meet them in the flesh, and you are searching for meaning and faith in a dangerous world.</p><p>Your faith has granted you knowledge of many different deities, god-like beings, and powerful entities, as well as their varied religious practices.</p>"
+        },
+        "Sky Wanderer": {
+            "name": "Sky Wanderer",
+            "description": "<p>You are driven ever onwards to explore the distant horizon, a powerful sense of freedom and neverending skies fills your soul. You are a trader of exceptional skill, able to travel across vast distances without care nor worry, and you have an innate appreciation and understanding of material items and their worth. You may draw your free spirit from the ancient legends of myths of the Vaznor and their flying cities of clouds and sail.</p><p>You have extremely limited knowledge of the lost Vaznor culture. You are also a skilled trader who can barter for almost any available goods or wares, and you have an innate understanding of weather.<br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Star Dreamer": {
+            "name": "Star Dreamer",
+            "description": "<p>You have always found yourself enamored with the dreaming worlds that you find yourself in when sleeping. The Sea of Stars reaches out to warp you in its embrace and the glittering Stars themselves murmur softly with strange stories, granting you visions of distant places, times, and events. You may have even been guided in these dreams by giant figures who give you mysterious portents or signs that draw beautiful shining runes within the air around them. You may have spent time studying these dreams and discovered that the giant figures could well be the remaining ancient memories of the Shent, a lost people that met their end thousands of years ago.  </p><p>Your dreams and studying have granted you some knowledge of the ancient Shent Culture, and you have excellent knowledge of the Stars in the night sky and their patterns. You may also have some knowledge of prophecy and may have some limited future sight yourself. <br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Sunfire Descendant": {
+            "name": "Sunfire Descendant",
+            "description": "<p>Your family has kept a long and shameful secret for uncounted generations; you are descended from the infamous legacy of the ancient Aedir. Your family may have once served the Aedir or been part of the culture in some way, or your Ancestors may have somehow remarkably survived the events of the Shattering. You now hold on to ancient secrets of the Sunfire Empire of the Aedir when it once ruled over the world of Ember and can recognize the ruins and artifacts left behind after it fell. You may hold a family heirloom yourself or have been taught an ancient secret phrase. </p><p>You have limited knowledge of the lost Aedir culture, are capable of determining the properties of some ancient magical artifacts, and you are highly adept at keeping secrets and intrigue.</p><p><br class=\"Apple-interchange-newline\" /></p>"
+        },
+        "Underworld Mechanic": {
+            "name": "Underworld Mechanic",
+            "description": "<p>You have survived or spent time in the underbelly of one of the world's greatest mysteries, the colossal city structure known as the Sphere. You learned how to repair, maintain, and construct all manner of machines, devices, and contraptions. This includes constructs but also devices that produce power or perform wondrous engineering feats akin to magic. Unfortunately, you may have also lived a life of crime, doing anything to survive the gang-based politics that plague the murky darkness you once called home, and learned some more questionable skills along the way. <br /><br />You have knowledge of many different types of machines, and you can fix, repair, or maintain them more easily than other mortals. In addition, you can recognize traps and have an innate ability to handle yourself in dangerous situations.</p>"
+        }
+    }
+}

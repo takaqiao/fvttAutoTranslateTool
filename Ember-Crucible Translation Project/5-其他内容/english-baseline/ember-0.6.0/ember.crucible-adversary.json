@@ -1,0 +1,514 @@
+{
+  "label": "Ember Adversary Options",
+  "folders": {
+    "Fey": "Fey",
+    "Oozes": "Oozes",
+    "Beasts": "Beasts",
+    "Undead": "Undead",
+    "Elemental": "Elemental",
+    "Archetypes": "Archetypes",
+    "Constructs": "Constructs",
+    "Beast": "Beast",
+    "Elementals": "Elementals",
+    "Fiend": "Fiend",
+    "Humanoid": "Humanoid",
+    "Dragon": "Dragon",
+    "Humanoids": "Humanoids",
+    "Taxonomies": "Taxonomies",
+    "Monstrosity": "Monstrosity",
+    "Monstrosities": "Monstrosities",
+    "Abyssal": "Abyssal",
+    "Abyssals": "Abyssals",
+    "Celestials": "Celestials",
+    "Talents": "Talents",
+    "Dragons": "Dragons",
+    "Celestial": "Celestial"
+  },
+  "entries": {
+    "Aburyx": {
+      "name": "Aburyx",
+      "description": "<p>Aburyx are sometimes described as soldiers of flame and light, and can be found in several historical and mythical texts across Ember. From the work of scholars on these creatures, it is believed that their role (whether actual or metaphorical) is primarily as ground troops in larger battles on Luxarum, but descriptions of them as aides and messengers suggest that they have some way of elevating themselves in status by distinguishing themselves on and off the battlefield.</p>"
+    },
+    "Abyssal Harbinger": {
+      "name": "Abyssal Harbinger",
+      "description": "<p>Abyssal creatures which specialize in psychic manipulation and mental torment.</p>"
+    },
+    "Abyssal Protection": {
+      "name": "Abyssal Protection",
+      "description": "<p>While in an area of dim light or darkness, the @ref[actor.name]{creature} gains a +2 bonus to their <strong>Armor</strong> defense and is @Condition[guarded].</p><p>This is implemented via an <strong>Active Effect</strong> which can easily be toggled to enable or disable the benefit.</p>",
+      "effects": {
+        "Abyssal Protection": {
+          "name": "Abyssal Protection",
+          "description": "<p>The creature gains a +2 bonus to their <strong>Armor </strong>defense and is @Condition[guarded].</p>"
+        }
+      }
+    },
+    "Abyssal Remains": {
+      "name": "Abyssal Remains",
+      "description": "<p>Upon death, the @ref[actor.name]{creature} dissolves into a thick liquid often described as a \"melted shadow,\" which spreads in an oozing pour from the place where it died, soaking the area around it in abyssal corruption.</p>",
+      "actions": {
+        "abyssalRemains": {
+          "name": "Abyssal Remains",
+          "description": "<p>Upon death, the @ref[actor.name]{creature} spreads into a melted pool of shadow spreading in a 4 foot radius from its position. This residue remains in place for one month or unless otherwise cleansed.</p><p>Any creature within the area or who enters it upon a subsequent turn must withstand an attack against their <strong>Reflex</strong> defense or suffer <strong>Corruption</strong> damage which also afflicts them with Cursed Vision.</p><p>While affected by Cursed Vision, they cannot perceive sources of dim light and sources of bright light appear dim.</p><p><strong>Playtest Notes</strong>: Cursed Vision is not yet automated, but will be some time after Foundry VTT version 14 becomes stable.</p>",
+          "condition": "Immediately upon death",
+          "effects": [
+            {
+              "name": "Cursed Vision"
+            }
+          ]
+        }
+      }
+    },
+    "Abyssal Whip": {
+      "name": "Abyssal Whip",
+      "description": "<p>A horrifyingly elongated tendril of darkness extends out from the @ref[actor.name]{creature} and strikes a distant target.</p>",
+      "actions": {
+        "abyssalWhip": {
+          "name": "Abyssal Whip",
+          "description": "<p>An elongated whip of darkness strikes a creature that can be sensed and physically reached. It deals <strong>Cold</strong> damage if not resisted and grasps its target, knocking it @Condition[prone] and dragging it up to 30 feet closer to the creature.</p>",
+          "effects": [
+            {
+              "name": "Abyssal Whip"
+            }
+          ]
+        }
+      }
+    },
+    "Abyssal Whispers": {
+      "name": "Abyssal Whispers",
+      "description": "<p>The @ref[actor.name]{creature} telepathically intrudes into a creature's mind, and floods it with thoughts and images of the Abyss. It must be able to sense the creature, and not be incapacitated to do this.</p>",
+      "actions": {
+        "abyssalWhispers": {
+          "name": "Abyssal Whispers",
+          "description": "<p>The creature penetrates the mind of its target, dealing <strong>Psychic</strong> damage to <strong>Morale</strong> and inflicting the @Condition[disoriented] condition.</p><p>On a <strong>Critical Hit</strong> the target is compelled to move towards the @ref[actor.name]{creature} immediately upon the beginning of its next turn, spending 2 Action to do so.</p>",
+          "effects": [
+            {
+              "name": "Abyssal Whispers"
+            },
+            {
+              "name": "Compelled Movement"
+            }
+          ]
+        }
+      }
+    },
+    "Afflicted Pallid Drake": {
+      "name": "Afflicted Pallid Drake",
+      "description": "<p>These creatures have only recently been encountered on Ember, and their origins are wholly unknown. Despite their close resemblance to Vile Dragons, they do not possess the same abilities, and only limited biological similarities. They appear to be a chimerical blend of snake and dragon, perhaps indicating they are of magical origin. This newfound presence has stirred considerable intrigue and concern among researchers and adventurers alike, as these new creatures could indicate a change in the norm, and a rise of new, dangerous, draconic foes.</p>"
+    },
+    "Agrimage": {
+      "name": "Agrimage",
+      "description": "<p>Agrimages use magic to support the tending and farming of the land by local communities, from helping crops grow faster and more productively to attracting and corralling livestock to making towns safer from the dangers of the wilderness around them. The scale of this work varies from one agrimage to the next; while the Agrimage Consortium focuses on massive agricultural endeavors, traveling agrimages serve the farms, towns, and small cities of the Arctus Plateau, helping a variety of Arcturians survive and thrive on the land around them.</p>"
+    },
+    "Aedir Sentinel": {
+      "name": "Aedir Sentinel",
+      "description": "<p>Formidable four-armed constructs that served the Aedir as terrible warriors in the vanguard of their imperial armies.</p>"
+    },
+    "Cheliceraeth": {
+      "name": "Cheliceraeth",
+      "description": "<p>An arachnid monstrosity native to Ember’s crystal-laced subterranea that resembles a giant spider made of faceted purple moonstone.</p>"
+    },
+    "Metallic Ooze": {
+      "name": "Metallic Ooze",
+      "description": "<p>Metallic oozes, belonging to the slime family, have a high internal composition of heavy metals.</p>"
+    },
+    "Hydroxol": {
+      "name": "Hydroxol",
+      "description": "<p>Large amphibious beasts native to Ember's watery areas.</p>"
+    },
+    "Suarrok": {
+      "name": "Suarrok",
+      "description": "<p>Monstrous winged predators that nest in high, rocky crags. Suarrok are exceeding strange creatures, with singular eye, feathers, bat-like wings, two tails, and a long, piercing beak. They are surprisingly agile despite their strange form, and their eyes possess considerable magical power, capable of harming creatures through simple stares alone.</p>"
+    },
+    "Baradom": {
+      "name": "Baradom",
+      "description": "<p>The Baradom is a massive, lethargic lizard, both awe-inspiring and oddly endearing due to its prodigious size and laid-back demeanor. It often lies sprawled out in the darkness of the pathways, its enormous pot-belly rising and falling with each leisurely breath. Its dark, thick scales seem almost impenetrable, each one an armor plate rather than typical reptilian skin.</p>"
+    },
+    "Bewildering Gaze": {
+      "name": "Bewildering Gaze",
+      "description": "<p>The @ref[actor.name]{creature} is capable of mesmerizing and bewildering its prey with it's gaze.</p>",
+      "actions": {
+        "bewilderingGaze": {
+          "name": "Bewildering Gaze",
+          "description": "<p>The creature focuses its supernatural gaze on a single target it can see within 60 feet which can also see it.</p><p>The target faces a <strong>Willpower</strong> attack which deals <strong>Void</strong> damage to <strong>Morale</strong> and inflicts the @Condition[confused] condition.</p>",
+          "effects": [
+            {
+              "name": "Bewildering Gaze"
+            }
+          ]
+        }
+      }
+    },
+    "Call Skither": {
+      "name": "Call Skither",
+      "description": "<p>The @ref[actor.name]{creature} controls nearby Skither which act as its bound servitors.</p>",
+      "actions": {
+        "callSkither": {
+          "name": "Call Skither",
+          "description": "<p>The @ref[actor.name]{creature} calls for a servitor Skither which flies in from somewhere nearby, summoning the creature within 10 feet of the creature's location.</p>"
+        }
+      }
+    },
+    "Cindaric Initiate": {
+      "name": "Cindaric Initiate",
+      "description": "<p>Healers and scholars who are members of the Cindaric Sages in Ordain, but not yet themselves full sages.</p>"
+    },
+    "Cindaric Sage": {
+      "name": "Cindaric Sage",
+      "description": "<p>Healers and scholars who are members of the Cindaric Sages in Ordain and who have attained the full rank of Sage within that order.</p>"
+    },
+    "Corrupted Cadrithor": {
+      "name": "Corrupted Cadrithor",
+      "description": "<p>Colloquially known as a Dusk Hound, the Corrupted Cadrithor is a vicious spectral predator made of pure shadow. These loathsome, four-eyed creatures bear resemblance to a decayed canine with wicked horns, wreathed in a terrible shroud of black flame.</p>"
+    },
+    "Crevvet": {
+      "name": "Crevvet",
+      "description": "<section class=\"block readaloud\"><p>This tiny, six-legged rodent is covered in light gray fur and has four beady eyes the color of glittering emeralds. Its front limbs end in rather prodigious claws (especially for its size), which it uses to burrow to and fro through the crumbling earth.</p></section>"
+    },
+    "Crystallath": {
+      "name": "Crystallath",
+      "description": "<p>Towering crystalline elementals of dark stone threaded with veins of living gem: intelligent, patient, and rare. A Crystallath has no true anatomy, only mineral, and the magical energy held in its facets blunts incoming spells. It bends earth and gravity to hurl stone, hold foes, and crush them from afar.</p>"
+    },
+    "Echo": {
+      "name": "Echo",
+      "description": "<p>Abyssal Echoes are monsters of pure evil, beings of twisted hatred from beyond the world of Ember. They possess a cruel basic intelligence that enables them to seek out and hunt natural creatures of Ember, ambushing them in the darkness and tearing them apart.</p>"
+    },
+    "Elemental Summoning": {
+      "name": "Elemental Summoning",
+      "description": "<p>The @ref[actor.name]{creature} is able to call forth other lesser elementals to join them as allies.</p>",
+      "actions": {
+        "elementalSummonSprite": {
+          "name": "Summon Sprite",
+          "description": "<p>The @ref[actor.name]{creature} summons a @UUID[Actor.sVnMPbEj5P18Yo8V]{Water Sprite} in a space it can perceive within 60 feet which contains or is adjacent to water.</p><p>The @ref[actor.name]{creature} may only have one Sprite summoned in this way at a given time.</p>"
+        },
+        "elementalSummonVisitor": {
+          "name": "Summon Visitor",
+          "description": "<p>The @ref[actor.name]{creature} summons a @UUID[Actor.cIX3WXHAZ0gAXCNS]{Water Visitor} in a space it can perceive within 60 feet which contains or is adjacent to water.</p><p>The @ref[actor.name]{creature} may only have one Visitor summoned in this way at a given time.</p>"
+        }
+      }
+    },
+    "Extrude Tendril": {
+      "name": "Extrude Tendril",
+      "description": "<p>The @ref[actor.name]{creature} can reach through intervening space and extrude an independent copy of one if its tendrils which separates from the body of its progenitor.</p>",
+      "actions": {
+        "extrudeTendril": {
+          "name": "Extrude Tendril",
+          "description": "<p>The @ref[actor.name]{creature} summons a @UUID[Actor.UXpL07GsaMzGCUVh]{Writhing Whisperer Tendril} which appears within a vacant space within 60 feet.</p><p>The @ref[actor.name]{creature} may possess up to a maximum of 3 extruded tendrils at a given time and may dismiss any number of its tendrils for free upon its own turn.</p>"
+        }
+      }
+    },
+    "Frenzied Claws": {
+      "name": "Frenzied Claws",
+      "description": "<p>The @ref[actor.name]{creature} attacks rapidly with its claws, dealing multiple raking blows against a single target.</p>",
+      "actions": {
+        "frenziedClaws": {
+          "name": "Frenzied Claws",
+          "description": "<p>The @ref[actor.name]{creature} attacks in a frenzied flurry of sharp claws. It performs three Strikes with its claws. If any results in a Critical Success, it inflicts the @Condition[bleeding] condition.</p>",
+          "effects": [
+            {
+              "name": "Frenzied Claws"
+            }
+          ]
+        }
+      }
+    },
+    "Globlin": {
+      "name": "Globlin",
+      "description": "<p>Small, chaotic elementals of loose dirt, mud, or gravel held together by elemental magic from Cora. Among the weakest of Cora's host, but crafty, mischievous, and genuinely dangerous in large packs.</p>"
+    },
+    "Gore Bird": {
+      "name": "Gore Bird",
+      "description": "<p>Swift, carnivorous carrion birds found all across Ember. Though they primarily feed on carcasses, they have been known to aggressively hunt down prey in great flocks when food is scarce.</p>"
+    },
+    "Grasping Form": {
+      "name": "Grasping Form",
+      "description": "<p>The @ref[actor.name]{creature} causes the ground surrounding it to erupt in countless clinging and coiling tendrils of shadow that trip and slow nearby creatures.</p>",
+      "actions": {
+        "graspingForm": {
+          "name": "Grasping Form",
+          "description": "<p>The creature grasps all nearby creatures with a myriad mass of tendrils whose touch fills you with dreadful despair dealing <strong>Cold</strong> damage to <strong>Morale</strong>. Each target must use <strong>Reflex</strong> to elude their grasp or become @Condition[restrained]] (escape 4 Action or [[/skillCheck athletics 17]]).</p><p>If the creature moves while it has targets grappled in this way, those targets are also moved to remain within 15 feet of the creature.</p>",
+          "effects": [
+            {
+              "name": "Grasping Form"
+            }
+          ]
+        }
+      }
+    },
+    "Grave Mark": {
+      "name": "Grave Mark",
+      "description": "<p>When the @ref[actor.name]{creature} achieves a Critical Hit with a melee attack, it leaves a baleful Grave Mark upon its target.</p>",
+      "actions": {
+        "graveMark": {
+          "name": "Grave Mark",
+          "description": "<p>After achieving a <strong>Critical Hit</strong> with a melee attack, the @ref[actor.name]{creature} attacks the target's <strong>Willpower</strong> defense, leaving a Grave Mark upon a success that inflicts the @Condition[exhausted] condition that persists until the target completes a <strong>Rest</strong>.</p><p>If a humanoid creature bearing a Grave Mark dies while under the effects of the mark, it rises from death on its subsequent Turn as a terrible @UUID[Actor.e67w5IOBScYtJKXr]{Horrendor}.</p>",
+          "condition": "When achieving a Critical Hit with a melee attack."
+        },
+        "graveMarkHorrendor": {
+          "name": "Horrendor Transformation",
+          "description": "<p>A humanoid creature that has died while under the effects of a Grave Mark rises on its next turn as a Horrendor.</p>"
+        }
+      }
+    },
+    "Horrendor": {
+      "name": "Horrendor",
+      "description": "<p>Horrendor, a type of @UUID[Compendium.crucible.taxonomy.Item.ghoul00000000000]{Ghoul}, are cruel undying creatures brought to life by wicked abstruse magic. No mere animated skeleton or shambling zombie, a Horrendor is driven by a ceaseless desire to wreak fearful havoc, and its very existence seems like an affront to life on Ember. Indeed, a Horrendor's malicious words can often be as deadly as its toothy bite or prodigious claws.</p>"
+    },
+    "Inscrutable": {
+      "name": "Inscrutable",
+      "description": "<p>The @ref[actor.name]{creature} is an unknowable abyssal entity. It is immune to any effect or spell that would sense its emotions or read its thoughts. Any skill check to ascertain this creature's intentions is made with +4 <strong>Banes</strong>.</p>"
+    },
+    "Jahud": {
+      "name": "Jahud",
+      "description": "<p>Otherworldly hunters and emissaries grown by Signaran biomancers in a laboratory environment, and their physical alterations preside on a genetic scale.</p>"
+    },
+    "Jurtak": {
+      "name": "Jurtak",
+      "description": "<p>Saurian humanoids that have become horribly warped by abyssal energies. They possess six eyes perfectly attuned to darkness, and their slender bodies are covered in scales that allow them to easily blend into the shadows of their surroundings.</p>"
+    },
+    "Mootap": {
+      "name": "Mootap",
+      "description": "<p>Curious aquatic monstrosities that dwell in pools of the Sinkhole Depths below Arcturel and other subterranean areas of the Pathways.</p>"
+    },
+    "Mutagenic Affliction": {
+      "name": "Mutagenic Affliction",
+      "description": "<p>This @ref[actor.name]{creature} is afflicted by a wasting mutation that makes it  behave erratically. It is stronger and more aggressive but has been rendered @Condition[blinded].</p>",
+      "effects": {
+        "Mutagenic Blindness": {
+          "name": "Mutagenic Blindness"
+        }
+      }
+    },
+    "Obsidian Brood": {
+      "name": "Obsidian Brood",
+      "description": "<p>The towering vine seeds the battlefield with lesser offshoots of itself and goads them to lash out as an extension of its own will.</p>",
+      "actions": {
+        "spawnOffshoot": {
+          "name": "Spawn Offshoot",
+          "description": "<p>The @ref[actor.name]{vine} forces a lesser <strong>Obsidian Outgrowth</strong> to erupt from the earth within 30 feet. The offshoot fights as a bound servitor and persists until destroyed.</p>"
+        },
+        "directTheBrood": {
+          "name": "Direct the Brood",
+          "description": "<p>The @ref[actor.name]{vine} sends a commanding pulse through the earth. Each allied <strong>Obsidian Outgrowth</strong> within 20 feet gains the @Condition[hastened] condition until the start of the vine's next turn, spurred to strike and reposition with unnatural speed.</p>",
+          "effects": [
+            {
+              "name": "Directed"
+            }
+          ]
+        }
+      }
+    },
+    "Obsidian Vine": {
+      "name": "Obsidian Vine",
+      "description": "<p>A mindless, towering tendril of black volcanic glass that bursts from the earth, studded down its length with razor obsidian thorns. It has no eyes, no breath, and no mind: only the instinct to whip, wrap, and crush. Hard but brittle, it shatters under a heavy enough blow, yet shrugs off acid and poison entirely.</p>"
+    },
+    "Bewildering Gleam": {
+      "name": "Bewildering Gleam",
+      "description": "<p>The @ref[actor.name]{ooze} spreads itself into a gelatinous sheet that coats every nearby surface.</p>",
+      "actions": {
+        "oozeBewilderingGleam": {
+          "name": "Bewildering Gleam",
+          "description": "<p>The ooze rapidly spreads itself to cover every surface within a 15 foot radius. Creatures other than oozes within this area must defend an attack against their <strong>Willpower</strong> or be overcome with a bewildering languor dealing <strong>Radiant</strong> damage to <strong>Morale</strong> and inflicting the <strong>Disoriented</strong> condition.</p>",
+          "effects": [
+            {
+              "name": "Bewildering Gleam"
+            }
+          ]
+        }
+      }
+    },
+    "Electrified Pseudopod": {
+      "name": "Electrified Pseudopod",
+      "description": "<p>This @ref[actor.name]{ooze} courses with currents of electricity which it can emanate in a violent blast of electrical force.</p>",
+      "actions": {
+        "oozeElectrifiedPseudopod": {
+          "name": "Electrified Pseudopod",
+          "description": "<p>A Strike which targets <strong>Fortitude</strong> and arcs between up to three targets that are within 3 feet of each other. This attack deals <strong>Electricity</strong> damage to <strong>Morale</strong>.</p><p>On a Critical Hit it inflicts the <strong>Shocked</strong> condition for 2 Turns.</p>"
+        }
+      }
+    },
+    "Magnetic Disarm": {
+      "name": "Magnetic Disarm",
+      "description": "<p>The @ref[actor.name]{ooze} uses it's magnetically charged body to disarm an attacker of their metal weapon.</p>",
+      "actions": {
+        "oozeMagneticDisarm": {
+          "name": "Magnetic Disarm",
+          "description": "<p>When struck in melee by a metal weapon, the ooze can react to wrench the weapon free of its wielder's grasp using its magnetized body. It performs an <strong>Athletics</strong> skill attack against the target's <strong>Fortitude</strong>. On a success, the weapon is dropped and absorbed into the ooze's body.</p><p>The ooze gains its <strong>Toughness</strong> score in <strong>Health</strong> and the weapon cannot be retrieved unless the ooze is defeated.</p>",
+          "condition": "Struck in melee by a metal weapon."
+        }
+      }
+    },
+    "Pallid Drake": {
+      "name": "Pallid Drake",
+      "description": "<p>These creatures have only recently been encountered on Ember, and their origins are wholly unknown. Despite their close resemblance to Vile Dragons, they do not possess the same abilities, and only limited biological similarities. They appear to be a chimerical blend of snake and dragon, perhaps indicating they are of magical origin. This newfound presence has stirred considerable intrigue and concern among researchers and adventurers alike, as these new creatures could indicate a change in the norm, and a rise of new, dangerous, draconic foes.</p>"
+    },
+    "Pestilent Retch": {
+      "name": "Pestilent Retch",
+      "description": "<p>The @ref[actor.name]{creature} is able to spew corrupting bile at targets in front of it.</p>",
+      "actions": {
+        "corruptionVomit": {
+          "name": "Pestilent Retch",
+          "description": "<p>The @ref[actor.name]{creature} spews foul bile that covers creatures in front of it with corruption and decay.</p><p>On a <strong>Critical Hit</strong>, this attack causes the @Condition[decaying] condition for <strong>3 Turns</strong>.</p>",
+          "effects": [
+            {
+              "name": "Pestilent Retch"
+            }
+          ]
+        }
+      }
+    },
+    "Primordial Guardian": {
+      "name": "Primordial Guardian",
+      "description": "<p>Protectors of Primordis and servants of the Casia.</p>"
+    },
+    "Rask": {
+      "name": "Rask",
+      "description": "<p>A lean mammal with features both canine and feline in nature, the large creature is marked by feathery tufts of fur, and appears as strong as it is dexterous. A striped pelt crowns the beast's regal head, and a short fluffy tail sways behind it with graceful intention.</p><p>@ref[name]s are domesticated four-legged mammals who frequent various biomes of the Arctus Plateau. Often used as animal companions and beasts of burden, @ref[name]s are known to be some of the region's most beloved and skillful animal mounts. They're known to be noble beasts, both generous of heart and direct of intention.</p>"
+    },
+    "Searing Stare": {
+      "name": "Searing Stare",
+      "description": "<p>The @ref[actor.name] channels the mysterious power of its singular eye into a penetrating beam which damages and temporarily blinds its prey.</p>",
+      "actions": {
+        "searingStare": {
+          "name": "Searing Stare",
+          "description": "<p>The Suarrok gazes intensely at a single target which it can see within 60 feet. This stare attacks the target's <strong>Fortitude</strong>, dealing <strong>Fire</strong> damage and causing the @Condition[blinded] condition which lasts for 6 Rounds or until the Suarrok concentrates its gaze on a different target.</p>",
+          "effects": [
+            {
+              "name": "Searing Stare"
+            }
+          ]
+        }
+      }
+    },
+    "Repelling Kick": {
+      "name": "Repelling Kick",
+      "description": "<p>The @ref[actor.name] unleashes an alchemically fueled kick with ruthless concussive force.</p>",
+      "actions": {
+        "sentinelKick": {
+          "name": "Repelling Kick",
+          "description": "<p>The sentinel slams a single target with a concussive boot of force, dealing <strong>Bludgeoning</strong> damage, knocking the target backwards up to 15 feet, and leaving the target @Condition[staggered].</p>",
+          "effects": [
+            {
+              "name": "Repelling Kick"
+            }
+          ]
+        }
+      }
+    },
+    "Alchemical Recharge": {
+      "name": "Alchemical Recharge",
+      "description": "<p>The @ref[actor.name] interfaces with an Alchemical Charging Station to recover its supply of internal alchemical fluid.</p>",
+      "actions": {
+        "sentinelRecharge": {
+          "name": "Alchemical Recharge",
+          "description": "<p>The Sentinel connects with an Alchemical Charging Station that is powered and operational. Once connected, the construct becomes @Condition[restrained] but at the beginning of its next turn will recover up to 4 <strong>Focus</strong> if the charging process is not interrupted.</p>",
+          "effects": [
+            {
+              "name": "Alchemical Recharge"
+            }
+          ]
+        }
+      }
+    },
+    "Powered Spin": {
+      "name": "Powered Spin",
+      "description": "<p>The @ref[actor.name] unleashes an alchemically fueled spinning attack which strikes all nearby enemies.</p>",
+      "actions": {
+        "sentinelSpin": {
+          "name": "Powered Spin",
+          "description": "<p>The Sentinel sweeps its Greatsword in a lighting-fast circular arc, striking all nearby foes.</p>"
+        }
+      }
+    },
+    "Enhanced Shielding": {
+      "name": "Enhanced Shielding",
+      "description": "<p>The @ref[actor.name] channels alchemical fluid through its shielding plates, temporarily super-heating and reinforcing them against physical damage.</p>",
+      "actions": {
+        "sentinelShielding": {
+          "name": "Enhanced Shielding",
+          "description": "<p>You gain the @Condition[guarded] condition and your <strong>Armor</strong> defense increases by +3 until the start of your next turn.</p>",
+          "effects": [
+            {
+              "name": "Enhanced Shielding"
+            }
+          ]
+        }
+      }
+    },
+    "Sight Without": {
+      "name": "Sight Without",
+      "description": "<p>The @ref[actor.name]{creature} has no eyes, ears, or mouth. It cannot be @Condition[blinded], @Condition[silenced], or @Condition[deafened]. It has 60ft of blindsight and can speak telepathically to any one or all creatures within 120 feet of it.</p>"
+    },
+    "Sitherian": {
+      "name": "Sitherian",
+      "description": "<p>A @ref[name] is an arachnid beast descended from their namesake — Sitheera, the Watcher. Heralded by the vibrations of their intricate lattice of webs, Sitherian are capable of injecting a potent venom from their chelicerae fangs, and can extrude silk from spinnerets located at the rear of their immense ovoid abdomens.</p>"
+    },
+    "Skither": {
+      "name": "Skither",
+      "description": "<p>Often used as a particularly destructive breed of messengers among tyraphem, who deploy them to leave burning messages on the property and bodies of their enemies, skithers use their small size and ability to camouflage themselves, putting themselves into positions where their chosen target will not be able to put up a defense. Dedicated to creating carnage where they can for the more powerful creatures they serve, skithers have known to follow a target for miles and will overload their bodies with radiant energy when they believe they have lost a fight, determined to harm the target even if they have to give up their own lives in the process.</p>"
+    },
+    "Stalagmaw": {
+      "name": "Stalagmaw",
+      "description": "<p>Hulking quadrupedal colossi of living cave-stone, their crumbling skeletons bound together by fields of elemental gravity. A Stalagmaw drags its vast bulk through the deep earth and erupts to crush and devour whatever crosses its path.</p>"
+    },
+    "Subterranean Vine": {
+      "name": "Subterranean Vine",
+      "description": "<p>While entombed beneath the surface the great vine knits its shattered glass back together and surges through the earth to erupt anew from one of its own offshoots.</p>",
+      "actions": {
+        "vineMend": {
+          "name": "Subterranean Regrowth",
+          "description": "<p>While @Condition[burrowing], the @ref[actor.name]{vine} draws raw material from the surrounding earth to mend its fractured length, recovering a substantial amount of <strong>Health</strong>.</p>",
+          "condition": "While burrowing."
+        },
+        "eruptiveRecall": {
+          "name": "Eruptive Recall",
+          "description": "<p>When one of its <strong>Obsidian Outgrowths</strong> is destroyed while the @ref[actor.name]{vine} is @Condition[burrowing], the vine is wrenched through the earth to the fallen offshoot, surging across elevations and levels as needed and erupting from the ground in its place. The destroyed offshoot is consumed and the vine emerges, ending the @Condition[burrowing] condition.</p>",
+          "condition": "Reaction: an Obsidian Outgrowth is destroyed while you are burrowing."
+        }
+      }
+    },
+    "Swallowed Screams": {
+      "name": "Swallowed Screams",
+      "description": "<p>The @ref[actor.name]{creature} fixates upon a specific target, removing their ability to speak or hear.</p>",
+      "actions": {
+        "swallowedScreams": {
+          "name": "Swallowed Screams",
+          "description": "<p>The @ref[actor.name]{creature} makes a <strong>Performance</strong> attack against the <strong>Willpower</strong> of a single target within 30 feet, unless the attack is resisted the target becomes @Condition[silenced] for 1 minute.</p>",
+          "effects": [
+            {
+              "name": "Swallowed Screams"
+            }
+          ]
+        }
+      }
+    },
+    "Garganthus": {
+      "name": "Garganthus",
+      "description": "<p>Malicious, hulking, quadrupedal Pathways predators known for their tenebrous, scaly flesh, six limbs, vicious claws, and spear-like fangs.</p>"
+    },
+    "Tyraphem": {
+      "name": "Tyraphem",
+      "description": "<p>Tyraphem are the powerful beings that reside upon the Inner Realm of Luxarum. Not only are the Tyraphem powerful but they are extremely numerous and combined with an incredibly warlike and martial nature they could become a major threat to the entire Cosmos. Thankfully they have been engaged in a never-ending war with themselves since Creation.</p>"
+    },
+    "Tyraphic Asset": {
+      "name": "Tyraphic Asset",
+      "description": "<p>The @ref[actor.name] contains control runes and symbols integrated into its innermost parts, making it susceptible to control. Celestial creatures from Luxarum that can speak or otherwise communicate with the construct can give it orders which it will follow to the best of its ability.</p><p>If it must choose between multiple conflicting orders, it always sides with orders that it perceives as originating from Luxarum or wielding greater authority among them.</p>"
+    },
+    "Vanexis": {
+      "name": "Vanexis",
+      "description": "<p>Offshoots of the Casia of Primordis, these guardians were created to be the ultimate protectors of knowledge. Among the beings of Primordis, they are broadly considered to have the keenest minds, sharpest senses, and most sound of judgement. While less openly inquisitive and prone to flights of fancy as other Casia, they are no less hungry for knowledge, and often learn all they can about whatever place they are asked to protect, becoming an expert in the site's layout and history.</p>"
+    },
+    "Vorg": {
+      "name": "Vorg",
+      "description": "<p>Vorg are centipede-like creatures whose metal carapace surrounds an endlessly glowing radiant light. Hot to the touch, and capable of climbing up walls, burrowing into the ground, and pulling themselves along the surface, they are often an unwelcome surprise to those who come across them in caves, caverns, and other subterranean locations.</p>"
+    },
+    "Whisperer": {
+      "name": "Whisperer",
+      "description": "<p>A swirling mass of living darkness and shadow that slithers and writhes into and around itself with an unsettling impossibility.</p>"
+    },
+    "Yarnac": {
+      "name": "Yarnac",
+      "description": "<p>Huge, crest-horned creatures known as Yarnac are one of the Arctus Plateau's most reliable beasts of burden.</p>"
+    }
+  }
+}

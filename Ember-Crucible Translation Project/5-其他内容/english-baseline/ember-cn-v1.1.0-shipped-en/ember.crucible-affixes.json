@@ -1,0 +1,16 @@
+{
+  "label": "Ember Affixes",
+  "folders": {},
+  "entries": {
+    "Bewilderment": {
+      "name": "Bewilderment",
+      "description": "<p>This item bears a hidden curse. While invested, the bearer's mind is gripped by @UUID[JournalEntry.pod4PApXHuZgXwHo.JournalEntryPage.jw0mOUcqhJPRajUY]{The Bewilderment}, a creeping confusion that does not relent.</p><ul><li><p>The bearer suffers the @Condition[disoriented] condition for as long as the item remains invested.</p></li><li><p>The bearer's maximum <strong>Morale</strong> is reduced by 25% per tier of this affix.</p></li></ul><h4 class=\"divider\">Playtesting</h4><p>Cursed affixes do not yet have a mechanism to conceal their nature from players. Until the curse is revealed through gameplay, the bearer's player should roleplay ignorance of its presence and effects.</p>",
+      "adjective": "Bewilderment"
+    },
+    "Lunar Shield": {
+      "name": "Lunar Shield",
+      "description": "<p>While invested, you are surrounded by a defensive buffer powered by cosmological energy that fluctuates according to the phases of Ember's elemental moons. For each moon, you gain resistance equal to this prefix's <strong>Tier</strong> while that moon is <strong>Waxing</strong> or <strong>Waning</strong>, or twice the <strong>Tier</strong> while it is <strong>Full</strong>:</p><ul><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.smc0OuMxsxfcSdhR]{Aura} - Lightning</p></li><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.5pD8lxiilJJXOgoa]{Cora} - Acid</p></li><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.LKptgmc56euSOb0G]{Ragen} - Fire</p></li><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.RkdBtFQk7STvMbV2]{Mayis} - Cold</p></li><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.zkmWSB32y8Fbc4UL]{Orbis} - Psychic</p></li><li><p>@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.3Oywe0peo57dQT9j]{Akon} - Piercing</p></li></ul>",
+      "adjective": "Lunar"
+    }
+  }
+}

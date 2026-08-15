@@ -1,0 +1,237 @@
+{
+    "label": "Adversary Options",
+    "mapping": {
+        "name": "name",
+        "actionname": "system.actions.name",
+        "actiondesc": "system.actions.description",
+        "actioneffectname": "system.actions.effects.name"
+    },
+    "folders": {
+        "Fey": "Fey",
+        "Oozes": "Oozes",
+        "Beasts": "Beasts",
+        "Undead": "Undead",
+        "Archetypes": "Archetypes",
+        "Constructs": "Constructs",
+        "Beast": "Beast",
+        "Elementals": "Elementals",
+        "Humanoid": "Humanoid",
+        "Dragon": "Dragon",
+        "Humanoids": "Humanoids",
+        "Taxonomies": "Taxonomies",
+        "Monstrosity": "Monstrosity",
+        "Monstrosities": "Monstrosities",
+        "Abyssal": "Abyssal",
+        "Abyssals": "Abyssals",
+        "Celestials": "Celestials",
+        "Talents": "Talents",
+        "Dragons": "Dragons",
+        "Celestial": "Celestial"
+    },
+    "entries": {
+        "Aburyx": {
+            "name": "Aburyx",
+            "description": "<p>Aburyx are sometimes described as soldiers of flame and light, and can be found in several historical and mythical texts across Ember. From the work of scholars on these creatures, it is believed that their role (whether actual or metaphorical) is primarily as ground troops in larger battles on Luxarum, but descriptions of them as aides and messengers suggest that they have some way of elevating themselves in status by distinguishing themselves on and off the battlefield.</p>"
+        },
+        "Abyssal Harbinger": {
+            "name": "Abyssal Harbinger",
+            "description": "<p>Abyssal creatures which specialize in psychic manipulation and mental torment.</p>"
+        },
+        "Abyssal Protection": {
+            "name": "Abyssal Protection",
+            "description": "<p>While in an area of dim light or darkness, the @ref[actor.name]{creature} gains a +2 bonus to their <strong>Armor</strong> defense and is @Condition[guarded].</p><p>This is implemented via an <strong>Active Effect</strong> which can easily be toggled to enable or disable the benefit.</p>"
+        },
+        "Abyssal Remains": {
+            "name": "Abyssal Remains",
+            "description": "<p>Upon death, the @ref[actor.name]{creature} dissolves into a thick liquid often described as a \"melted shadow,\" which spreads in an oozing pour from the place where it died, soaking the area around it in abyssal corruption.</p>"
+        },
+        "Abyssal Whip": {
+            "name": "Abyssal Whip",
+            "description": "<p>A horrifyingly elongated tendril of darkness extends out from the @ref[actor.name]{creature} and strikes a distant target.</p>"
+        },
+        "Abyssal Whispers": {
+            "name": "Abyssal Whispers",
+            "description": "<p>The @ref[actor.name]{creature} telepathically intrudes into a creature's mind, and floods it with thoughts and images of the Abyss. It must be able to sense the creature, and not be incapacitated to do this.</p>"
+        },
+        "Afflicted Pallid Drake": {
+            "name": "Afflicted Pallid Drake",
+            "description": "<p>These creatures have only recently been encountered on Ember, and their origins are wholly unknown. Despite their close resemblance to Vile Dragons, they do not possess the same abilities, and only limited biological similarities. They appear to be a chimerical blend of snake and dragon, perhaps indicating they are of magical origin. This newfound presence has stirred considerable intrigue and concern among researchers and adventurers alike, as these new creatures could indicate a change in the norm, and a rise of new, dangerous, draconic foes.</p>"
+        },
+        "Aedir Sentinel": {
+            "name": "Aedir Sentinel",
+            "description": "<p>Formidable four-armed constructs that served the Aedir as terrible warriors in the vanguard of their imperial armies.</p>"
+        },
+        "Cheliceraeth": {
+            "name": "Cheliceraeth",
+            "description": "<p>An arachnid monstrosity native to Ember’s crystal-laced subterranea that resembles a giant spider made of faceted purple moonstone.</p>"
+        },
+        "Metallic Ooze": {
+            "name": "Metallic Ooze",
+            "description": "<p>Metallic oozes, belonging to the slime family, have a high internal composition of heavy metals.</p>"
+        },
+        "Hydroxol": {
+            "name": "Hydroxol",
+            "description": "<p>Large amphibious beasts native to Ember's watery areas.</p>"
+        },
+        "Suarrok": {
+            "name": "Suarrok",
+            "description": "<p>Monstrous winged predators that nest in high, rocky crags. Suarrok are exceeding strange creatures, with singular eye, feathers, bat-like wings, two tails, and a long, piercing beak. They are surprisingly agile despite their strange form, and their eyes possess considerable magical power, capable of harming creatures through simple stares alone.</p>"
+        },
+        "Baradom": {
+            "name": "Baradom",
+            "description": "<p>The Baradom is a massive, lethargic lizard, both awe-inspiring and oddly endearing due to its prodigious size and laid-back demeanor. It often lies sprawled out in the darkness of the pathways, its enormous pot-belly rising and falling with each leisurely breath. Its dark, thick scales seem almost impenetrable, each one an armor plate rather than typical reptilian skin.</p>"
+        },
+        "Bewildering Gaze": {
+            "name": "Bewildering Gaze",
+            "description": "<p>The @ref[actor.name]{creature} is capable of mesmerizing and bewildering its prey with it's gaze.</p>"
+        },
+        "Call Skither": {
+            "name": "Call Skither",
+            "description": "<p>The @ref[actor.name]{creature} controls nearby Skither which act as its bound servitors.</p>"
+        },
+        "Cindaric Initiate": {
+            "name": "Cindaric Initiate",
+            "description": "<p>Healers and scholars who are members of the Cindaric Sages in Ordain, but not yet themselves full sages.</p>"
+        },
+        "Cindaric Sage": {
+            "name": "Cindaric Sage",
+            "description": "<p>Healers and scholars who are members of the Cindaric Sages in Ordain and who have attained the full rank of Sage within that order.</p>"
+        },
+        "Corrupted Cadrithor": {
+            "name": "Corrupted Cadrithor",
+            "description": "<p>Colloquially known as a Dusk Hound, the Corrupted Cadrithor is a vicious spectral predator made of pure shadow. These loathsome, four-eyed creatures bear resemblance to a decayed canine with wicked horns, wreathed in a terrible shroud of black flame.</p>"
+        },
+        "Crevvet": {
+            "name": "Crevvet",
+            "description": "<section class=\"block readaloud\"><p>This tiny, six-legged rodent is covered in light gray fur and has four beady eyes the color of glittering emeralds. Its front limbs end in rather prodigious claws (especially for its size), which it uses to burrow to and fro through the crumbling earth.</p></section>"
+        },
+        "Echo": {
+            "name": "Echo",
+            "description": "<p>Abyssal Echoes are monsters of pure evil, beings of twisted hatred from beyond the world of Ember. They possess a cruel basic intelligence that enables them to seek out and hunt natural creatures of Ember, ambushing them in the darkness and tearing them apart.</p>"
+        },
+        "Elemental Summoning": {
+            "name": "Elemental Summoning",
+            "description": "<p>The @ref[actor.name]{creature} is able to call forth other lesser elementals to join them as allies.</p>"
+        },
+        "Extrude Tendril": {
+            "name": "Extrude Tendril",
+            "description": "<p>The @ref[actor.name]{creature} can reach through intervening space and extrude an independent copy of one if its tendrils which separates from the body of its progenitor.</p>"
+        },
+        "Frenzied Claws": {
+            "name": "Frenzied Claws",
+            "description": "<p>The @ref[actor.name]{creature} attacks rapidly with its claws, dealing multiple raking blows against a single target.</p>"
+        },
+        "Grasping Form": {
+            "name": "Grasping Form",
+            "description": "<p>The @ref[actor.name]{creature} causes the ground surrounding it to erupt in countless clinging and coiling tendrils of shadow that trip and slow nearby creatures.</p>"
+        },
+        "Grave Mark": {
+            "name": "Grave Mark",
+            "description": "<p>When the @ref[actor.name]{creature} achieves a Critical Hit with a melee attack, it leaves a baleful Grave Mark upon its target.</p>"
+        },
+        "Horrendor": {
+            "name": "Horrendor",
+            "description": "<p>Horrendor, a type of @UUID[Compendium.crucible.taxonomy.Item.ghoul00000000000]{Ghoul}, are cruel undying creatures brought to life by wicked abstruse magic. No mere animated skeleton or shambling zombie, a Horrendor is driven by a ceaseless desire to wreak fearful havoc, and its very existence seems like an affront to life on Ember. Indeed, a Horrendor's malicious words can often be as deadly as its toothy bite or prodigious claws.</p>"
+        },
+        "Inscrutable": {
+            "name": "Inscrutable",
+            "description": "<p>The @ref[actor.name]{creature} is an unknowable abyssal entity. It is immune to any effect or spell that would sense its emotions or read its thoughts. Any skill check to ascertain this creature's intentions is made with +4 <strong>Banes</strong>.</p>"
+        },
+        "Jurtak": {
+            "name": "Jurtak",
+            "description": "<p>Saurian humanoids that have become horribly warped by abyssal energies. They possess six eyes perfectly attuned to darkness, and their slender bodies are covered in scales that allow them to easily blend into the shadows of their surroundings.</p>"
+        },
+        "Mootap": {
+            "name": "Mootap",
+            "description": "<p>Curious aquatic monstrosities that dwell in pools of the Sinkhole Depths below Arcturel and other subterranean areas of the Pathways.</p>"
+        },
+        "Mutagenic Affliction": {
+            "name": "Mutagenic Affliction",
+            "description": "<p>This @ref[actor.name]{creature} is afflicted by a wasting mutation that makes it  behave erratically. It is stronger and more aggressive but has been rendered @Condition[blinded].</p>"
+        },
+        "Bewildering Gleam": {
+            "name": "Bewildering Gleam",
+            "description": "<p>The @ref[actor.name]{ooze} spreads itself into a gelatinous sheet that coats every nearby surface.</p>"
+        },
+        "Electrified Pseudopod": {
+            "name": "Electrified Pseudopod",
+            "description": "<p>This @ref[actor.name]{ooze} courses with currents of electricity which it can emanate in a violent blast of electrical force.</p>"
+        },
+        "Magnetic Disarm": {
+            "name": "Magnetic Disarm",
+            "description": "<p>The @ref[actor.name]{ooze} uses it's magnetically charged body to disarm an attacker of their metal weapon.</p>"
+        },
+        "Pallid Drake": {
+            "name": "Pallid Drake",
+            "description": "<p>These creatures have only recently been encountered on Ember, and their origins are wholly unknown. Despite their close resemblance to Vile Dragons, they do not possess the same abilities, and only limited biological similarities. They appear to be a chimerical blend of snake and dragon, perhaps indicating they are of magical origin. This newfound presence has stirred considerable intrigue and concern among researchers and adventurers alike, as these new creatures could indicate a change in the norm, and a rise of new, dangerous, draconic foes.</p>"
+        },
+        "Pestilent Retch": {
+            "name": "Pestilent Retch",
+            "description": "<p>The @ref[actor.name]{creature} is able to spew corrupting bile at targets in front of it.</p>"
+        },
+        "Primordial Guardian": {
+            "name": "Primordial Guardian",
+            "description": "<p>Protectors of Primordis and servants of the Casia.</p>"
+        },
+        "Rask": {
+            "name": "Rask",
+            "description": "<p>A lean mammal with features both canine and feline in nature, the large creature is marked by feathery tufts of fur, and appears as strong as it is dexterous. A striped pelt crowns the beast's regal head, and a short fluffy tail sways behind it with graceful intention.</p><p>@ref[name]s are domesticated four-legged mammals who frequent various biomes of the Arctus Plateau. Often used as animal companions and beasts of burden, @ref[name]s are known to be some of the region's most beloved and skillful animal mounts. They're known to be noble beasts, both generous of heart and direct of intention.</p>"
+        },
+        "Searing Stare": {
+            "name": "Searing Stare",
+            "description": "<p>The @ref[actor.name] channels the mysterious power of its singular eye into a penetrating beam which damages and temporarily blinds its prey.</p>"
+        },
+        "Repelling Kick": {
+            "name": "Repelling Kick",
+            "description": "<p>The @ref[actor.name] unleashes an alchemically fueled kick with ruthless concussive force.</p>"
+        },
+        "Alchemical Recharge": {
+            "name": "Alchemical Recharge",
+            "description": "<p>The @ref[actor.name] interfaces with an Alchemical Charging Station to recover its supply of internal alchemical fluid.</p>"
+        },
+        "Powered Spin": {
+            "name": "Powered Spin",
+            "description": "<p>The @ref[actor.name] unleashes an alchemically fueled spinning attack which strikes all nearby enemies.</p>"
+        },
+        "Enhanced Shielding": {
+            "name": "Enhanced Shielding",
+            "description": "<p>The @ref[actor.name] channels alchemical fluid through its shielding plates, temporarily super-heating and reinforcing them against physical damage.</p>"
+        },
+        "Sight Without": {
+            "name": "Sight Without",
+            "description": "<p>The @ref[actor.name]{creature} has no eyes, ears, or mouth. It cannot be @Condition[blinded], @Condition[silenced], or @Condition[deafened]. It has 60ft of blindsight and can speak telepathically to any one or all creatures within 120 feet of it.</p>"
+        },
+        "Sitherian": {
+            "name": "Sitherian",
+            "description": "<p>A @ref[name] is an arachnid beast descended from their namesake — Sitheera, the Watcher. Heralded by the vibrations of their intricate lattice of webs, Sitherian are capable of injecting a potent venom from their chelicerae fangs, and can extrude silk from spinnerets located at the rear of their immense ovoid abdomens.</p>"
+        },
+        "Skither": {
+            "name": "Skither",
+            "description": "<p>Often used as a particularly destructive breed of messengers among tyraphem, who deploy them to leave burning messages on the property and bodies of their enemies, skithers use their small size and ability to camouflage themselves, putting themselves into positions where their chosen target will not be able to put up a defense. Dedicated to creating carnage where they can for the more powerful creatures they serve, skithers have known to follow a target for miles and will overload their bodies with radiant energy when they believe they have lost a fight, determined to harm the target even if they have to give up their own lives in the process.</p>"
+        },
+        "Swallowed Screams": {
+            "name": "Swallowed Screams",
+            "description": "<p>The @ref[actor.name]{creature} fixates upon a specific target, removing their ability to speak or hear.</p>"
+        },
+        "Tyraphem": {
+            "name": "Tyraphem",
+            "description": "<p>Tyraphem are the powerful beings that reside upon the Inner Realm of Luxarum. Not only are the Tyraphem powerful but they are extremely numerous and combined with an incredibly warlike and martial nature they could become a major threat to the entire Cosmos. Thankfully they have been engaged in a never-ending war with themselves since Creation.</p>"
+        },
+        "Tyraphic Asset": {
+            "name": "Tyraphic Asset",
+            "description": "<p>The @ref[actor.name] contains control runes and symbols integrated into its innermost parts, making it susceptible to control. Celestial creatures from Luxarum that can speak or otherwise communicate with the construct can give it orders which it will follow to the best of its ability.</p><p>If it must choose between multiple conflicting orders, it always sides with orders that it perceives as originating from Luxarum or wielding greater authority among them.</p>"
+        },
+        "Vanexis": {
+            "name": "Vanexis",
+            "description": "<p>Offshoots of the Casia of Primordis, these guardians were created to be the ultimate protectors of knowledge. Among the beings of Primordis, they are broadly considered to have the keenest minds, sharpest senses, and most sound of judgement. While less openly inquisitive and prone to flights of fancy as other Casia, they are no less hungry for knowledge, and often learn all they can about whatever place they are asked to protect, becoming an expert in the site's layout and history.</p>"
+        },
+        "Vorg": {
+            "name": "Vorg",
+            "description": "<p>Vorg are centipede-like creatures whose metal carapace surrounds an endlessly glowing radiant light. Hot to the touch, and capable of climbing up walls, burrowing into the ground, and pulling themselves along the surface, they are often an unwelcome surprise to those who come across them in caves, caverns, and other subterranean locations.</p>"
+        },
+        "Whisperer": {
+            "name": "Whisperer",
+            "description": "<p>A swirling mass of living darkness and shadow that slithers and writhes into and around itself with an unsettling impossibility.</p>"
+        }
+    }
+}
