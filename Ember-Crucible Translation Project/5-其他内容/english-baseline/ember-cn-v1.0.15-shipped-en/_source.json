@@ -1,0 +1,1 @@
+﻿{ "note": "ember_cn v1.0.15 曾经错误地把英文基准放在 compendium/cn/ 里，babele 会在每次开世界时 fetch 它们（其中 ember.crucible-adventure-en.json 是损坏 JSON，第 44 行多一个 })。此处仅作历史留存，权威基准见 ember-0.6.0/。" }

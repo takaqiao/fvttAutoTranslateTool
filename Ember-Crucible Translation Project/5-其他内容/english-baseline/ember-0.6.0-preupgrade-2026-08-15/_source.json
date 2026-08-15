@@ -1,0 +1,172 @@
+{
+ "kind": "pre-upgrade-snapshot",
+ "capturedAt": "2026-08-15T18:33:49",
+ "capturedBy": "4-临时脚本/2026-08-15-round19/capture_baseline.py",
+ "capturedFrom": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\1-Ember汉化插件\\compendium\\en",
+ "upstream": {
+  "packageId": "ember",
+  "packageVersion": "0.6.0",
+  "packageType": "module"
+ },
+ "includesLocalPatches": true,
+ "note": "上游 ember 0.6.0 + 本地补丁(LOCAL-PATCHES.md 1-4 条) + 当前 mappings.mjs 抽取口径。今天拿它 diff 恒为 0（它就是当前英文）；它的用途是下一次上游升级后当'旧英文'。",
+ "packs": [
+  {
+   "file": "ember.adventure.json",
+   "en_leaves": 14844,
+   "cn_leaves": 14819,
+   "cn_present": true
+  },
+  {
+   "file": "ember.character.json",
+   "en_leaves": 256,
+   "cn_leaves": 256,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-adventure.json",
+   "en_leaves": 20266,
+   "cn_leaves": 20178,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-adversary.json",
+   "en_leaves": 199,
+   "cn_leaves": 199,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-affixes.json",
+   "en_leaves": 6,
+   "cn_leaves": 6,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-character.json",
+   "en_leaves": 317,
+   "cn_leaves": 317,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-effects.json",
+   "en_leaves": 42,
+   "cn_leaves": 42,
+   "cn_present": true
+  },
+  {
+   "file": "ember.crucible-items.json",
+   "en_leaves": 0,
+   "cn_leaves": 0,
+   "cn_present": true
+  },
+  {
+   "file": "ember.dnd5e-effects.json",
+   "en_leaves": 42,
+   "cn_leaves": 42,
+   "cn_present": true
+  },
+  {
+   "file": "ember.dnd5e-items.json",
+   "en_leaves": 0,
+   "cn_leaves": 0,
+   "cn_present": false
+  }
+ ],
+ "totals": {
+  "packs": 10,
+  "en_leaves": 35972,
+  "cn_leaves": 35859
+ },
+ "upstreamSourceMeta": {
+  "packageId": "ember",
+  "packageVersion": "0.6.0",
+  "packageType": "module",
+  "mappingTarget": "ember",
+  "extractedAt": "2026-08-05T18:47:09.728Z",
+  "extractedBy": "Ember-Crucible Translation Project / 3-常用脚本/extract/extract_en.mjs",
+  "packs": [
+   {
+    "pack": "character",
+    "documentType": "Item",
+    "documents": 164,
+    "mergedDuplicates": 0,
+    "entries": 164,
+    "folders": 18
+   },
+   {
+    "pack": "adventure",
+    "documentType": "Adventure",
+    "documents": 1,
+    "mergedDuplicates": 0,
+    "entries": 1,
+    "folders": 0
+   },
+   {
+    "pack": "crucible-adversary",
+    "documentType": "Item",
+    "documents": 62,
+    "mergedDuplicates": 0,
+    "entries": 62,
+    "folders": 22
+   },
+   {
+    "pack": "crucible-character",
+    "documentType": "Item",
+    "documents": 101,
+    "mergedDuplicates": 0,
+    "entries": 101,
+    "folders": 7
+   },
+   {
+    "pack": "crucible-adventure",
+    "documentType": "Adventure",
+    "documents": 1,
+    "mergedDuplicates": 0,
+    "entries": 1,
+    "folders": 0
+   },
+   {
+    "pack": "crucible-affixes",
+    "documentType": "ActiveEffect",
+    "documents": 2,
+    "mergedDuplicates": 0,
+    "entries": 2,
+    "folders": 0
+   },
+   {
+    "pack": "crucible-effects",
+    "documentType": "ActiveEffect",
+    "documents": 21,
+    "mergedDuplicates": 0,
+    "entries": 21,
+    "folders": 5
+   },
+   {
+    "pack": "dnd5e-effects",
+    "documentType": "ActiveEffect",
+    "documents": 21,
+    "mergedDuplicates": 0,
+    "entries": 21,
+    "folders": 5
+   },
+   {
+    "pack": "crucible-items",
+    "documentType": "Item",
+    "documents": 0,
+    "mergedDuplicates": 0,
+    "entries": 0,
+    "folders": 8
+   },
+   {
+    "pack": "dnd5e-items",
+    "documentType": "Item",
+    "documents": 0,
+    "mergedDuplicates": 0,
+    "entries": 0,
+    "folders": 0
+   }
+  ],
+  "declaredPacks": 10,
+  "extractedPacks": 10
+ }
+}

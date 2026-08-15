@@ -6,6 +6,11 @@
 这里只收录**上游英文自身写坏、且坏到会卡住翻译流程**的地方。
 上游把它修好之后，对应行可以删掉（重抽后发现不再匹配即说明已修）。
 
+> **正表现有 5 条**（2026-08-15 第二十轮从上游 LevelDB 重抽逐叶对照坐实：
+> 孪生两包各 5 叶值不同、无第六叶，命令与实测表见第 5 条末尾）。
+> 校验这张表是否还全的唯一办法就是**重抽再逐叶 diff** ——
+> **别靠「闸是绿的」判断补丁齐不齐**：第 5 条就是补完闸变绿、然后被漏登记了整整四轮。
+
 ---
 
 ## 读这张表之前：两个孪生包**不是**同一份英文
@@ -150,9 +155,110 @@ the correct key with a successful …` 就被吞进了同一个标记 token 里�
 
 ---
 
+## 5. `Paralyzing Bolt / Paralyzed` 的 `reference[Paralyzed]` 缺开头的 `&`
+
+- **日期**：**2026-08-09**，与第 1 条**同一个提交**
+  `1-Ember汉化插件` 的 `dd54bdd`「fix(markup): 补上游两处缺字符 + 修最后 10 条丢失的 &Reference」。
+  **本条 2026-08-15 第二十轮补登记**（漏登记了六天 / 四轮），见下面「为什么漏了」。
+- **影响包**：`ember.adventure.json`、`ember.crucible-adventure.json`
+  （**该路径上**两包英文逐字节相同 —— 本轮逐条实测过；别据此以为两包整体相同，见抬头的表）
+- **路径**：`Ember Early Access.items.Paralyzing Bolt.effects.Paralyzed.description`
+- **上游原文**（重抽出来就是这个，**没有 `&`**）：
+
+  ```html
+  <p>The target is reference[Paralyzed] for 1 minute. </p>
+  ```
+
+- **补成**（JSON 里存的是字面量 `&amp;`，渲染成 `&`）：
+
+  ```html
+  <p>The target is &amp;reference[Paralyzed] for 1 minute. </p>
+  ```
+
+**这是手打补丁，不是抽取口径变化。** `extract_en.mjs` 全文不做任何 HTML 转义
+（本轮 grep 过：整份文件里没有 escape / 实体替换逻辑），所以重抽出来是什么样，
+`compendium/en` 里就该是什么样 —— 现在两者不一样，只可能是有人手改过。
+全库 en 侧 `&amp;Reference[` 994 处、`&amp;reference[` 234 处，
+**无一例外都带 `&amp;`**（本轮 grep 计数；大小写两种写法上游都在用，
+`gi` 下都能被 enricher 认，所以小写不是问题、缺 `&` 才是）。
+另可对照第 1 条那一叶里的兄弟节点 `<sub data-system="dnd5e">&amp;Reference[exhaustion]</sub>`
+—— 那是**另一叶**，但同样带 `&amp;`。唯独本条这一处不带，是上游漏打。
+
+**为什么非修不可（两条，都实测过）**：
+
+1. **不带 `&` 渲染不出规则链接。** dnd5e 5.3.3 的 enricher 是
+   `/&(?<type>Reference)\[(?<config>[^\]]+)](?:{(?<label>[^}]+)})?/gi`
+   （`systems/dnd5e/dnd5e.mjs:20163`）—— 前导 `&` 是**必需**的（`gi` 所以小写
+   `reference` 没问题，缺 `&` 才是问题）。缺了它玩家看到的是裸字面量 `reference[Paralyzed]`。
+2. **重抽后不重打，这一叶的中文会被闸门拒收。** `apply_translations.py:199` 的
+   `REFERENCE = &(?:amp;)?[Rr]eference\[[^\]]*\]` 同样要求 `&`。中文按硬约束照抄了
+   `&amp;reference[Paralyzed]`；英文一旦退回裸写法，英文侧签名里这个记号数为 0、
+   中文侧为 1 → **markup mismatch，任何译法都过不了**。本轮用真闸（import
+   `markup_signature`，不复写正则）验过，两包各 1 叶，中文多出的记号都是
+   `{'&reference[Paralyzed]': 1}`；探针见 `4-临时脚本/2026-08-15-round20/probe_signature.py`。
+
+**为什么漏了（有据可查，不是猜）**：`dd54bdd` 的提交信息里白纸黑字写着
+
+> 上游英文的两处笔误(临时本地补丁,**已记入 english-baseline/LOCAL-PATCHES.md**):
+>   * Toothbreaker Hideout/Prison  `@Condition[exhaustion` 缺右方括号
+>   * Paralyzing Bolt/Paralyzed    `reference[Paralyzed]` 缺开头的 `&`
+
+—— **作者以为两条都登记了，实际只写进去了第一条。** 该提交在 en 侧只动了 2 叶
+（本轮 `git show dd54bdd^:… vs dd54bdd:…` 逐叶验过：正好这两叶，无第三叶），
+第二叶就此从表里消失了六天。
+
+会漏的结构性原因：这条被顺手归进了同一提交里「修最后 10 条丢失的 `&Reference`」那一**批**
+（那批是**中文侧**补标记），于是它看起来像"批量作业的一员"而不是"一条独立的英文基准补丁"。
+加上它和第 1/3 条不同型 —— 那两条会把闸**报红**逼人去查，这一条补完闸就是**绿**的，
+再没人回头看。
+
+**两条可复用的教训**：
+1. **「闸绿」不等于「已登记」**；「提交信息说已登记」更不等于已登记 —— 要去表里数一遍。
+2. **英文基准改动不要和中文批量作业混在同一个提交里**，混了就会被当成批量的一部分漏掉。
+
+**复现命令**（本轮实跑，别照抄结论、自己跑一遍）：
+
+```bash
+cd "<项目根>"
+node 3-常用脚本/extract/extract_en.mjs \
+  --package <FoundryData>/modules/ember \
+  --out 4-临时脚本/<本轮>/reextract --pack adventure
+node 3-常用脚本/extract/extract_en.mjs \
+  --package <FoundryData>/modules/ember \
+  --out 4-临时脚本/<本轮>/reextract --pack crucible-adventure
+python 4-临时脚本/2026-08-15-round20/diff_leaves.py \
+  1-Ember汉化插件/compendium/en/ember.adventure.json \
+  4-临时脚本/<本轮>/reextract/ember.adventure.json
+```
+
+**2026-08-15 实测结果**（两包各跑一次，数字应当**完全一致**）：
+
+| 包 | 当前叶 | 重抽叶 | 仅一侧有 | 值不同 |
+|---|---|---|---|---|
+| `ember.adventure.json` | 14 844 | 14 844 | 0 | **5** |
+| `ember.crucible-adventure.json` | 20 266 | 20 266 | 0 | **5** |
+
+那 5 叶就是正表的 1-5 条（本条 + `C0nsortium` + `Condition[exhaustion` +
+`{Persuasion}` + `skillCheck`），**再无第六条**。
+旁证：`english-baseline/ember-0.6.0/`（旧 mappings 的原始抽取）与当前 en 的**值差**
+也正好是这 5 叶 × 孪生两包 = 10 叶，与本表条数吻合。
+
+⚠ **别被「3 条」绊到**：`english-baseline/ember-cn-v1.1.0-shipped-en/README.md` 说
+「v1.1.0 → 当前，英文变过的叶只有 **3** 条」。**那句话是对的，和本表的 5 条不矛盾** ——
+第 1 条与第 5 条同在 `dd54bdd`（2026-08-09），而 `v1.1.0` 是 2026-08-11 才打的 tag
+（`git merge-base --is-ancestor dd54bdd v1.1.0` 成立，本轮验过），
+**这两条已经烘进 v1.1.0 的英文里了**，所以从 v1.1.0 起算只剩第 2/3/4 条会显示为差异。
+换算关系：**从上游 LevelDB 重抽起算 = 5 条；从 v1.1.0 起算 = 3 条。**
+比较基准不同，数字就不同 —— 报数时必须说清是拿哪一侧当基准。
+
+**中文侧不需要改**：cn 两包同一路径本来就照抄着 `&amp;reference[Paralyzed]`，
+补的是英文基准，补完两侧一致。
+
+---
+
 # 附录 A：已核实但**尚未落地**的候选补丁
 
-> 上面 1-4 条是**已经打进英文基准**的补丁，重抽后必须照打。
+> 上面 1-5 条是**已经打进英文基准**的补丁，重抽后必须照打。
 > 本附录**不是**那种东西：这里的条目一处都还没改，重抽时**不要**照着打。
 > 它们与正表的区别在于：**不卡翻译流程**（EN/CN 两侧同错，所有闸门恒为 0），
 > 但会让玩家在正文里看到裸标记。要不要修、怎么修，需要裁决人先定。

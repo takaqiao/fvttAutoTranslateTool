@@ -3,7 +3,7 @@
   "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
   "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
   "created": "2026-08-15（第十五轮）",
-  "updated": "2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
+  "updated": "2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
   "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
   "idle_forms": {
    "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
@@ -529,7 +529,7 @@
    "decision": "2026-08-15f（第十八轮 Y2：补 R-arcturel-vs-arcturian 自己在 why 里写死的覆盖洞）",
    "kind": "block_aligned_gate",
    "mode": "sequence",
-   "why": "R-arcturel-vs-arcturian 的 why 写着它抓不到的东西：「叶级判据分不出**一叶之内**某一处该写城名还是族名 —— 96% 的叶两个词都有，这条能抓的是整支被改名，抓不到叶内单处串行」。本条把判据下沉到块：**实测闸下 903 叶 / 1714 有词块，其中 1707 块两侧类别序列逐位相等，4 条登记豁免命中 7 块，0 处未决**。⚠ 2026-08-15 收尾订正：此处原写「905 叶 / 1705 块」，复核实跑是 **903 叶 / 1707 块** —— 数字是这条断言的取证，写错就等于没取证，两个数已按本次实跑改正。**这一沉真的抓出过两处叶级判据看不见的缺陷**（`actors.Sadri Zhalimorne` 块21 把 Arctus Plateau 写成「阿克图里安高原」，全库 阿克图斯高原 1048 : 阿克图里安高原 1 · `actors.Constructed Companion` 块7 整处漏译族名），当时以 ESCALATED 豁免登记、译文已由主控修复；欠账还清之后这 2 条豁免就变成了**死豁免**，本轮逐条实跑确认 0 命中后删除，并加 `max_unused_exempt: 0` 让下一条死豁免自己吵出来 —— 在此之前**豁免不命中不会让任何断言变红**，只让 detail 里的命中数变小，全套照样全绿，只能靠人记（`R-dives-mine` 形态）。⚠ **`Arcturelian` 单列一类 `L`，不并进族名 `Arcturian` 的 `I` 类**（2026-08-15 主控补裁）：§8 既有裁决是 `Arcturel`(城)=阿克图瑞尔 / `Arcturian`(族)=阿克图里安，而 `Arcturelian` **派生自 `Arcturel` 不是 `Arcturian`**，作定语取「阿克图瑞尔」。本条原先用 `\\bArcturel?ians?\\b` 一条正则把两者归成同一类 —— 那是**判据替裁决做了主**，正是「**两个英文词就该给两个中文词**」这条通则（通则写在 R-kessia-vs-kessian 的 why 里，本项目四组同型二分共用）要防的形态。取证：全库 `Arcturelian` **共 3 处**，全部是 `the famed Arcturelian artificer Vartholomew Chess` 这同一句，落在 `actors.Chessman` / `Constructed Companion` / `Woven Construct` 的 biography.private 上（**只在 ember.crucible-adventure，无孪生**），且三叶里 `Arcturian` 与 `Arcturelian` **并存**（`Arcturian humanoids` 对 `Arcturelian artificer`），前者的「阿克图里安」是对的。⚠ `L` 类的中文闸写成 `阿克图瑞尔工匠` 而**不是**裸「阿克图瑞尔」：中文侧 `Arcturel` 与 `Arcturelian` 落到同一个中文串，裸串在 `sequence` 模式下无法与 `E` 类区分，只能靠搭配词分开。⚠ **不能放宽成「阿克图瑞尔的?工匠」**：实测 `Glitter in the Dark.pages.Surface Matters.text` 块161 的英文是 `the artificer Vartholomew Chess, who lives in Arcturel`（城名，`E` 类），中文正是「居住在阿克图瑞尔的工匠」—— 放宽一个「的」就当场造出一处假阳性。代价是 `L` 类**钉死了搭配**：将来 `Arcturelian` 换个中心词或新增出现处，本条会红一次要人重判 —— 与 except_blocks 同一取舍，宁可红一次让人重判。⚠ 上游另有五种拼写变体，全部实测存在，不进 token 表就变成假阳性：城名 `Acturel`(漏 r) / `Arctural` / `Arcurel` / `Arturel`；族名 `Acturian`(漏 r，Golden Flats / Talei / Brevin 各 1)。⚠ `Arcturel Dives` 是整体专名「阿克图瑞尔矿渊」，中文含「阿克图瑞尔」，两侧各出一个 E，天然对齐，不必单列一类。⚠ **判据边界①（本条最大的一片盲区，本轮已量化并实测覆盖）**：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空（取舍理由见脚本里 split_blocks 的注释），代价是**标签里的译名整条不进本条的闸**。实测：全库中文「阿克图瑞尔|阿克图里安」共 **2218 处，其中 278 处（12.5%）落在增强器内**，本条**一处都看不见**（另 1940 处在闸内可见）。⚠ 此处原写「标签另由 R-arcturian-split 的 `{Arcturians}` 域 / R-arcturian-actor-card / scan_uuid_swap 看着」——**这句话经实测不成立，已按实测改写**。回测形态：把这 278 处**逐处改错**（阿克图瑞尔↔阿克图里安）后重跑全套断言，只有 **89 处**会让某条断言变红（`R-arcturel-vs-arcturian` 69 · 两条同时响 12 · `R-arcturian-split` 8），**其余 189 处改错后全套依旧全绿 —— 这 189 处目前无闸**。逐条落实：`R-arcturian-actor-card` **一处都盖不到**（它只钉 `actors.Arcturian` 的 name/tokenName 四叶，那四叶里根本没有增强器）；`scan_uuid_swap` **不在本断言套里**（它是独立扫描器，且自己的 docstring 写明「术语裁决没执行到位（阿克图里亚／阿克图里安）」这类落进 UNCERTAIN、「不是本检测器负责的缺陷」）；能响的那 89 处也全是**叶级**的间接覆盖 —— 只有当该叶里这一处是唯一带该词的地方时才会响，**不是逐处覆盖**。要真正盖住这 189 处，得再加一条**标签级**闸（按 `@UUID` 目标逐处比中英标签），本轮没做，登记在此。⚠ **判据边界②**：逐位相等对**语序调换**敏感，实测 1714 块里只有 1 块是这一类（Vartholomew Chess），已登记；③ 中文的**代词化**（第三次提到时写「它」）也会不齐，实测 1 条豁免（孪生两包共 2 块），已登记",
+   "why": "R-arcturel-vs-arcturian 的 why 写着它抓不到的东西：「叶级判据分不出**一叶之内**某一处该写城名还是族名 —— 96% 的叶两个词都有，这条能抓的是整支被改名，抓不到叶内单处串行」。本条把判据下沉到块：**实测闸下 903 叶 / 1714 有词块，其中 1707 块两侧类别序列逐位相等，4 条登记豁免命中 7 块，0 处未决**。⚠ 2026-08-15 收尾订正：此处原写「905 叶 / 1705 块」，复核实跑是 **903 叶 / 1707 块** —— 数字是这条断言的取证，写错就等于没取证，两个数已按本次实跑改正。**这一沉真的抓出过两处叶级判据看不见的缺陷**（`actors.Sadri Zhalimorne` 块21 把 Arctus Plateau 写成「阿克图里安高原」，全库 阿克图斯高原 1048 : 阿克图里安高原 1 · `actors.Constructed Companion` 块7 整处漏译族名），当时以 ESCALATED 豁免登记、译文已由主控修复；欠账还清之后这 2 条豁免就变成了**死豁免**，本轮逐条实跑确认 0 命中后删除，并加 `max_unused_exempt: 0` 让下一条死豁免自己吵出来 —— 在此之前**豁免不命中不会让任何断言变红**，只让 detail 里的命中数变小，全套照样全绿，只能靠人记（`R-dives-mine` 形态）。⚠ **`Arcturelian` 单列一类 `L`，不并进族名 `Arcturian` 的 `I` 类**（2026-08-15 主控补裁）：§8 既有裁决是 `Arcturel`(城)=阿克图瑞尔 / `Arcturian`(族)=阿克图里安，而 `Arcturelian` **派生自 `Arcturel` 不是 `Arcturian`**，作定语取「阿克图瑞尔」。本条原先用 `\\bArcturel?ians?\\b` 一条正则把两者归成同一类 —— 那是**判据替裁决做了主**，正是「**两个英文词就该给两个中文词**」这条通则（通则写在 R-kessia-vs-kessian 的 why 里，本项目四组同型二分共用）要防的形态。取证：全库 `Arcturelian` **共 3 处**，全部是 `the famed Arcturelian artificer Vartholomew Chess` 这同一句，落在 `actors.Chessman` / `Constructed Companion` / `Woven Construct` 的 biography.private 上（**只在 ember.crucible-adventure，无孪生**），且三叶里 `Arcturian` 与 `Arcturelian` **并存**（`Arcturian humanoids` 对 `Arcturelian artificer`），前者的「阿克图里安」是对的。⚠ `L` 类的中文闸写成 `阿克图瑞尔工匠` 而**不是**裸「阿克图瑞尔」：中文侧 `Arcturel` 与 `Arcturelian` 落到同一个中文串，裸串在 `sequence` 模式下无法与 `E` 类区分，只能靠搭配词分开。⚠ **不能放宽成「阿克图瑞尔的?工匠」**：实测 `Glitter in the Dark.pages.Surface Matters.text` 块161 的英文是 `the artificer Vartholomew Chess, who lives in Arcturel`（城名，`E` 类），中文正是「居住在阿克图瑞尔的工匠」—— 放宽一个「的」就当场造出一处假阳性。代价是 `L` 类**钉死了搭配**：将来 `Arcturelian` 换个中心词或新增出现处，本条会红一次要人重判 —— 与 except_blocks 同一取舍，宁可红一次让人重判。⚠ 上游另有五种拼写变体，全部实测存在，不进 token 表就变成假阳性：城名 `Acturel`(漏 r) / `Arctural` / `Arcurel` / `Arturel`；族名 `Acturian`(漏 r，Golden Flats / Talei / Brevin 各 1)。⚠ `Arcturel Dives` 是整体专名「阿克图瑞尔矿渊」，中文含「阿克图瑞尔」，两侧各出一个 E，天然对齐，不必单列一类。⚠ **判据边界①（本条最大的一片盲区，本轮已量化并实测覆盖）**：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空（取舍理由见脚本里 split_blocks 的注释），代价是**标签里的译名整条不进本条的闸**。实测：全库中文「阿克图瑞尔|阿克图里安」共 **2218 处，其中 278 处（12.5%）落在增强器内**，本条**一处都看不见**（另 1940 处在闸内可见）。⚠ 此处原写「标签另由 R-arcturian-split 的 `{Arcturians}` 域 / R-arcturian-actor-card / scan_uuid_swap 看着」——**这句话经实测不成立，已按实测改写**。回测形态：把这 278 处**逐处改错**（阿克图瑞尔↔阿克图里安）后重跑全套断言，只有 **89 处**会让某条断言变红（`R-arcturel-vs-arcturian` 69 · 两条同时响 12 · `R-arcturian-split` 8），**其余 189 处改错后全套依旧全绿 —— 这 189 处目前无闸**。逐条落实：`R-arcturian-actor-card` **一处都盖不到**（它只钉 `actors.Arcturian` 的 name/tokenName 四叶，那四叶里根本没有增强器）；`scan_uuid_swap` **不在本断言套里**（它是独立扫描器，且自己的 docstring 写明「术语裁决没执行到位（阿克图里亚／阿克图里安）」这类落进 UNCERTAIN、「不是本检测器负责的缺陷」）；能响的那 89 处也全是**叶级**的间接覆盖 —— 只有当该叶里这一处是唯一带该词的地方时才会响，**不是逐处覆盖**。要真正盖住这 189 处，得再加一条**标签级**闸（按 `@UUID` 目标逐处比中英标签）。⚠⚠ **2026-08-15h（第十九轮 Y6）已做，并重做了同一次逐处变异回测：`R-arcturel-arcturian-labels`（新类型 `enricher_slot_gate`）上线后，278 处逐处改错、每处重跑全部读 ctx.pairs 的断言，有闸 278 / **无闸 0**（旧套复现为有闸 89 / 无闸 189，分布 `R-arcturel-vs-arcturian` 81 · `R-arcturian-split` 20 · 两条同时响 12，与第十八轮逐字吻合）。本条的这一片盲区**已闭合**，但盲区本身仍在（split_blocks 照旧涂空标签，是它该做的），闭合它的是另一条断言 —— 别把这两件事混起来。**新增术语时要同时想到标签那一格。**⚠ **判据边界②**：逐位相等对**语序调换**敏感，实测 1714 块里只有 1 块是这一类（Vartholomew Chess），已登记；③ 中文的**代词化**（第三次提到时写「它」）也会不齐，实测 1 条豁免（孪生两包共 2 块），已登记",
    "leaf_gate": "\\b(?:Arcturel|Arcturel?ians?|Arcturians?|Acturel|Acturians?|Arctural|Arcurel|Arturel)\\b",
    "en_tokens": [
     {
@@ -1054,7 +1054,7 @@
    "id": "R-moon-hollow",
    "title": "The Hollow Moon = 空洞之月，「空心之月」已废",
    "decision": "2026-08-15g（第十七轮，主控裁）",
-   "why": "Ember 的月亮各有一个英文尊号，中文此前三个都在分叉，且**分叉横跨同一本 journal 的不同页**（`Cosmos.pages.Attunement.text` 写「焦炭之月」，而同卷 `Cosmos.pages.Ragen.text/.subtitle` 写「焦灼之月」）。依据阶梯第 1 档：三组的 `Cosmos.pages.<月名>.subtitle` 叶（尊号的规范字段）全部站统一后的写法，且都是多数 —— 空洞 14:7 · 焦灼 12:3 · 风暴 19:1。**三条同族，成组定的，别单独推翻其中一条。** ⚠ **「空心之月」那 7 处是第十六轮批次 `ac-aura-moon-crucible-character.json` 自己写进去的**，属自伤：那一批本意只改 `Aura`（灵气→奥拉），却顺手把同叶的月亮尊号一起动了。**通则：整叶替换的批次，落盘前要单独核一遍它有没有顺手改掉同叶的别的术语。** ⚠ 判据边界：`cn_absent` 只抓旧写法回潮，抓不到「上游换了尊号而中文没跟」——那要靠 `scan_renamed_terms`。",
+   "why": "Ember 的月亮各有一个英文尊号，中文此前三个都在分叉，且**分叉横跨同一本 journal 的不同页**（`Cosmos.pages.Attunement.text` 写「焦炭之月」，而同卷 `Cosmos.pages.Ragen.text/.subtitle` 写「焦灼之月」）。依据阶梯第 1 档：三组的 `Cosmos.pages.<月名>.subtitle` 叶（尊号的规范字段）全部站统一后的写法，且都是多数 —— 空洞 14:7 · 焦灼 12:3 · 风暴 19:1。**三条同族，成组定的，别单独推翻其中一条。** ⚠ **「空心之月」那 7 处是第十六轮批次 `ac-aura-moon-crucible-character.json` 自己写进去的**，属自伤：那一批本意只改 `Aura`（灵气→奥拉），却顺手把同叶的月亮尊号一起动了。**通则：整叶替换的批次，落盘前要单独核一遍它有没有顺手改掉同叶的别的术语。** ⚠ 判据边界：`cn_absent` 只抓旧写法回潮，抓不到「上游换了尊号而中文没跟」。那一档以前写作「那要靠 `scan_renamed_terms`」—— **2026-08-15 第二十一轮实测改写：这句兜底要成立得同时满足两个前提，当前只满足第一个，所以这一档现在实际上是无闸的，别把它当成已有覆盖。** **前提①（基准要覆盖该包）**：探测器 B 的候选**全部**来自 `--old` 基准目录里的包，基准里没有的包连候选都进不去，而报告长得和「扫过、干净」一模一样。ember 侧要用 `5-其他内容/english-baseline/ember-cn-v1.1.0-shipped-en`（实跑覆盖行：本次扫 10 个包 / 仓里 en 共 10 个包 / 基准缺 0 个，退出码 0），**不能用 `ember-cn-v1.0.15-shipped-en`**：后者只覆盖 3 个 crucible 侧包（`ember.adventure` 等是 v1.1.0 才加进模块的，v1.0.15 那会儿根本没有那些包），另 7 包共 15147 条中文叶从未进过候选表，`ember.adventure.json` 一家就 14801 条。**这条对本断言尤其要命：月亮尊号的主场正是被漏掉的那个包** —— 全库 56 处中文尊号里 **26 处在 `ember.adventure.json`**（另 27 处在孪生的 `ember.crucible-adventure.json`、3 处在 `ember.crucible-character.json`）。跑法：`python 3-常用脚本/qa/scan_renamed_terms.py --repo 1-Ember汉化插件 --old 5-其他内容/english-baseline/ember-cn-v1.1.0-shipped-en --strict-coverage`（`--strict-coverage` 让缺包以退出码 3 结束，免得把「没扫」读成「干净」）。 **前提②（探测器 B 还得给候选配出一个中文写法）—— 当前不成立**：尊号在英文里有两种形态，两种都过不去。**散文形态**（`…{Aura}, The Hollow Moon, and its…`，见 `ember.crucible-character` 三条同调物品）**根本进不了候选** —— 候选只取基准的 `.name`/`.tokenName` 叶与 `@Verb[…]{标签}`。**标签形态**是整串 `{Aura - The Hollow Moon}`，**进得了候选**（拿 v1.1.0 复现候选挖掘：5974 个候选里确有 `Aura - The Hollow Moon` / `Ragen - The Charred Moon` / `Mayis - The Tempest Moon`，各自从孪生两包各来 2 次；拿 v1.0.15 只从 `ember.crucible-adventure.json` 来 1 次，孪生那包整包缺席），但下一步「配中文写法」落空：`build_name_map` 只按 name 叶配对，而尊号不是 name 叶（实测这三条的 `old_map` 全是 `{}`），glossary_ec 里又只有裸键 `The Hollow Moon`＝空洞之月、**没有** `Aura - The Hollow Moon`，于是 `renderings` 为空、`continue` 静默跳过。**A/B 实跑取证**：把当前英文里 19 叶的 `Hollow Moon` 全改成 `Void Moon`（模拟上游改尊号、中文不动），拿 v1.1.0 基准跑探测器 B —— 用现役 glossary **findings 0**；**只**往 glossary 的副本里加 `Aura - The Hollow Moon`＝空洞之月 等 3 条整串键、其余一字不动，同一次变异**报出 1 条**（`cn=空洞之月 · hits=15 · gated_out=0`）。两次只差那 3 个键，所以那个 0 不是装置空转，是真没闸。⇒ 要让这句兜底成真，得给 glossary 补这类**整串标签键**，或另立一条尊号断言；补上之前别再写「有 `scan_renamed_terms` 兜着」。⚠ 顺带记一条**做同类回测必踩的坑**：拿「原地改英文」模拟上游改名对**本身就是 name 叶**的东西是**无效装置** —— 真实改名会连叶路径一起改（路径键里就是名字），原地改只动值不动键，于是 `build_name_map(当前英文, 当前中文)` 把**新英文**配上**旧中文**，叶级英文闸当场判定「本叶英文解释得了这个中文」，把命中全滤光（实测 `Hollowed Dagger`→`Voided Dagger`：13 叶命中、13 叶全被闸掉、findings 0，连一条 `excluded` 都不留）。上面那个月亮 A/B 之所以有效，正因为尊号不是 name 叶、配不出这种假解释，且对照组只动 glossary 不动装置。⚠ 这段新说法**自己也是可证伪断言**，上述命令与 A/B 都实跑过；日后 ember 升级前须先用 `3-常用脚本/qa/capture_baseline.py` 截全包基准，否则前提①会重新变假。",
    "kind": "cn_absent",
    "cn": "空心之月"
   },
@@ -1073,6 +1073,262 @@
    "why": "三个月亮尊号成组裁决之一，**完整依据与通则见 `R-moon-hollow` 的 why**。本条守的是「狂澜之月」不得回潮。",
    "kind": "cn_absent",
    "cn": "狂澜之月"
+  },
+  {
+   "id": "R-arcturel-arcturian-labels",
+   "title": "Arcturel/Arcturian 的**增强器标签级**闸：补块级闸涂空标签留下的 189 处无闸",
+   "decision": "2026-08-15h（第十九轮 Y6）",
+   "kind": "enricher_slot_gate",
+   "why": "**这条是 `R-arcturel-arcturian-blocks` 自己 why 里量化过的那片盲区的正解。** `split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空（取舍理由在脚本注释里，是对的），代价是标签里的译名整条不进块级闸。取证：全库中文「阿克图瑞尔|阿克图里安」共 **2218 处，其中 278 处（12.5%）落在增强器内**。第十八轮把这 278 处**逐处改错、每处重跑全部读库断言**，只有 **89 处**会让某条断言变红（且全是叶级间接覆盖：只有该叶里这一处是唯一带该词的地方时才响），**其余 189 处改错后全套依旧全绿**。第十九轮重做同一次回测，本条上线后 **189 → 4**（详见本条末尾「剩下的 4 处」）。⚠ **第十八轮原写「标签另有 R-arcturian-split 的 `{Arcturians}` 域 / R-arcturian-actor-card / scan_uuid_swap 看着」这句话经逐处变异回测证伪**：`R-arcturian-actor-card` 只钉 `actors.Arcturian` 的 name/tokenName 四叶、那四叶里根本没有增强器，一处都盖不到；`scan_uuid_swap` 根本不在断言套里。**教训：why 里写「另有 X 闸看着」是可证伪断言，写之前必须逐处变异回测。** ⚠ **与 `scan_label_vs_name` 分工明确、不是它的重复**：那条比的是「`@UUID{标签}` 的中文 ↔ **目标文档的中文 name**」，且只报「英文标签本来就等于目标英文 name」的；本条比的是**标签里的术语与既定译名**，标签本身允许与目标 name 不同。`{Arcturel Dives}` 译成「阿克图里安矿渊」时，scan_label_vs_name 一声不吭（英文标签本来就不等于目标 name），本条报红。 ⚠ **配对不按出现序号，按 (动词, 目标) 分组后组内取序** —— 这是实测改的：按整叶序号配对时 **30650 对里 1388 对（4.5%）配歪**（中文「定语在前」把增强器整个搬位），造出 `EN=Arcturel/CN=杰夫赫尔家族`、`EN=Arcturian/CN=奥尔丹`、`EN=Arcturian Liquor/CN=烧瓶` 这四类**幻影缺陷**；改按目标分组后全库 30650 个增强器 **0 个配不上**，四类幻影同时消失。 ⚠ **槽位不只花括号标签**：`@Embed[… label=\"…\" readaloud=\"…\"]` 的这两个参数里塞的是**整段朗读正文**（实测 46+46 处，最长 300+ 字），同样被 split_blocks 整段涂空，是本洞里最大的单块。 ⚠ **中文独有槽**（英文侧是裸 `@UUID`、Foundry 渲染目标名，中文补了标签；实测 582 个）退回反向闸：中文槽里的类必须在「本叶英文 ∪ 同一目标在全库别处的英文标签」里出现过。**正向回退试过，当场 70 条假阳性**（一叶英文里提到 Arcturian，不代表这叶每个中文标签都得带族名）；只认本叶英文也不行，会误报 `{阿克图里安小饰品}`（本叶英文无 Arctur 字样，但同一个 RollTable 全库别处 28 次写着 `{Arcturian Trinkets}`）。 ⚠ **剩下的 4 处**（回测里改错后仍然全绿的）：`Delivered from Evil`／`The Ballad of Dres` 两页的中文独有槽，孪生共 4 槽 —— 它们的中文标签整串等于目标文档名，改错后反向闸仍然放行，因为「同一目标别处的英文标签」两类都出现过。要抓这 4 处得引入目标文档的**中文 name**作仲裁，那正是 `scan_label_vs_name` 的判据，本条不重复造。 ⚠ 大小写：**IGNORECASE**。`Arcturel`／`Arcturian` 是专名，本库没有同形的小写普通词（与 `R-dives-mine` 的小写 `dives`＝动词正相反）；上游的五种拼写变体 `Acturel`/`Arctural`/`Arcurel`/`Arturel`/`Acturian` 一并进类，不进就是假阳性。 ⚠ `Arcturelian` 派生自 `Arcturel` 归 E 类（2026-08-15 主控补裁），本条按集合判不按序列判，所以不必像 `R-arcturel-arcturian-blocks` 那样为它单列 `L` 类钉死搭配。 ⚠ `except_slots` 的 2 槽是**已裁的合法例外**，与 `R-arcturel-vs-arcturian` 的 `except_paths` 同一处、同一理由：上游标签与目标错配（英文标签写 `{Lower Arcturel Mine Effect}`，它指向的 RollTable 名字却是 `The Dives Mine Effects`），中文跟着**目标名**译成「矿渊矿井效应」。只在 ember.crucible-adventure 一包，不是漏钉孪生。 ⚠ **本族七条的共同边界（量过、当前为空，不是漏了）**：只认 `@Verb[…]{标签}`，不认 `[[/verb …]]{标签}` —— 后者中文侧实测 20318 个、带花括号标签的 349 个（含中文 344 个），拿七条断言的**全部已裁术语**去扫那 349 个标签**一处都不命中**（内容是伤害类型／灾害名／法术名）。哪天已裁术语进了那一格，判据要跟着扩。 ⚠ **本条上线后的回测口径**：278 处逐处改错、每处重跑全部读 ctx.pairs 的断言 —— **有闸 278 / 无闸 0**；同一套回测在旧的 52 条上复现为有闸 89 / 无闸 189，分布 `R-arcturel-vs-arcturian` 81 · `R-arcturian-split` 20（两条同时响 12），与第十八轮记下的数字逐字吻合 —— 回测本身可信。⚠ 回测**不含** `exclusions_closed` / `glossary_value` / `version_matrix` 三条：它们从磁盘或子进程取数，内存变异看不见，算进来只会稀释口径。 ⚠ **回测口径本身也验过**：278 处逐处跑的是「只含该叶的子集 ctx」（整库口径每处要 40 秒，278 处要 6 小时）。为证明这个捷径不失真，另按 stride 14 摊开取 20 处用**整库 ctx** 重跑，两种口径 **20/20 判定完全一致**（脚本见 4-临时脚本/2026-08-15-round19/backtest_mutations.py 的 --full）。 ⚠ **反空转护栏实测会咬**：把 7 条的英文正则按 `R-catwalk` 那次真实事故的形态弄坏（JSON 里 `\b` 被当成退格符）以及换成库里不存在的词，两种形态下 **7/7 全部变红**（探针见同目录 idle_probe.py）—— 不是「写了 min_gated 就算有护栏」，是实跑过它确实响。",
+   "case_sensitive": false,
+   "forbid_absent": true,
+   "cn_only_leaf_fallback": true,
+   "en_tokens": [
+    {
+     "re": "\\b(?:Arcturel|Acturel|Arctural|Arcurel|Arturel)\\w*",
+     "cls": "E"
+    },
+    {
+     "re": "\\b(?:Arcturian|Acturian)s?\\b",
+     "cls": "I"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "阿克图瑞尔",
+     "cls": "E"
+    },
+    {
+     "re": "阿克图里安",
+     "cls": "I"
+    }
+   ],
+   "except_slots": [
+    {
+     "path": "actors.The Device.items.Powered Effect.description",
+     "en": "Lower Arcturel Mine Effect",
+     "cn": "矿渊矿井效应"
+    },
+    {
+     "path": "actors.The Device.items.Powered Effect.actions.poweredEffect.description",
+     "en": "Lower Arcturel Mine Effect",
+     "cn": "矿渊矿井效应"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 250,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-dives-labels",
+   "title": "the Dives = 矿渊 的**增强器标签级**闸",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-dives-mine，2026-08-16d）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 本条守的是 `R-dives-mine`（the Dives＝矿渊）在标签里的那一半：`R-dives-mine` 是**叶级**的，一叶里提到 5 次只错标签那 1 次它不会响。实测英文槽命中 28 个（`{The Dives}`／`{Arcturel Dives}`／`{The Dives Mine Effects}`），28/28 含「矿渊」。 ⚠ **必须 case_sensitive，与 R-dives-mine 同一理由且这条理由是逐条单判出来的**：小写 `dives` 是动词（`Jasper dives for cover`），而本条的槽位里**包含 readaloud 整段朗读正文**，动词形态在那里出现的概率比在标签里高得多，按 IGNORECASE 判会直接造出假阳性。 ⚠ **不开 `forbid_absent`**：中文槽里出现「矿渊」而英文槽没有 `Dives` 是**合法**的 —— `{Lower Arcturel Mine Effect}`→「矿渊矿井效应」是跟着目标名译的（见 R-arcturel-arcturian-labels 的 except_slots）。 ⚠ scope 只有 ember：crucible 系统侧没有这个地名。",
+   "case_sensitive": true,
+   "scope": [
+    "ember"
+   ],
+   "en_tokens": [
+    {
+     "re": "\\bDives\\b",
+     "cls": "D"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "矿渊",
+     "cls": "D"
+    }
+   ],
+   "min_leaves": 4500,
+   "min_slots": 19000,
+   "min_gated": 24,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-kessia-labels",
+   "title": "Kessia=凯西亚 / Kessian=凯西安 的**增强器标签级**闸",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-kessia-vs-kessian，2026-08-16e）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 本条是「专名 vs 文化形容词」四组二分里 Kessia 那组的标签级版本 —— `R-kessia-vs-kessian` 的 why 自陈「叶级判据分不出**一叶之内**某一处该写专名还是写形容词」，标签正是「一处」的最小单位。实测英文槽命中 52 个（`{Kessia}` 26 · `{Kessian}` 18 · `{Kessians}` 6），除登记的 1 槽（孪生 2 处）外全部一致。 ⚠ `except_slots` 的 `Deities.pages.Sunalin.text` 是**已裁的合法形态不是欠账**：英文 `{Kessian} continent`、中文「凯西亚大陆」—— `R-kessia-vs-kessian` 的 why 里**逐字点名** `Kessian continent` 属于「散文里作定语表来源时写凯西亚…是对的」那一支（凯西亚商人＝来自凯西亚的商人）。孪生两包各一槽。 ⚠ 大小写 IGNORECASE：`Kessia`/`Kessian` 是专名，无小写同形普通词。",
+   "case_sensitive": false,
+   "en_tokens": [
+    {
+     "re": "\\bKessians?\\b",
+     "cls": "KI"
+    },
+    {
+     "re": "\\bKessia\\b",
+     "cls": "KE"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "凯西安",
+     "cls": "KI"
+    },
+    {
+     "re": "凯西亚",
+     "cls": "KE"
+    }
+   ],
+   "except_slots": [
+    {
+     "path": "journals.Deities.pages.Sunalin.text",
+     "en": "Kessian",
+     "cn": "凯西亚"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 45,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-ordain-labels",
+   "title": "Ordain=奥尔丹 / Ordani=奥尔达尼 的**增强器标签级**闸",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-ordain-vs-ordani，2026-08-16e）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 「专名 vs 文化形容词」四组二分里 Ordain 那组的标签级版本，与 `R-kessia-labels` 同型。实测英文槽命中 348 个，348/348 一致，零豁免。 ⚠ 大小写 **IGNORECASE**，与 `R-ordain-vs-ordani` 同一理由（上游有 8 叶把城名写成小写 `ordain`，全是城名不是动词）—— 与同族的 `R-dives-labels` 必须 case_sensitive **正相反**，**每条闸都要单独判一次「大小写是不是判据的一部分」，没有全局默认可抄**。 ⚠ `\\bOrdani\\w*` 写在 `\\bOrdain\\w*` 前面：交替式最左优先，顺序即优先级。`Ordan's Key` 两条都匹配不到（词边界不成立），不必也不该动它。",
+   "case_sensitive": false,
+   "en_tokens": [
+    {
+     "re": "\\bOrdani\\w*",
+     "cls": "OI"
+    },
+    {
+     "re": "\\bOrdain\\w*",
+     "cls": "OE"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "奥尔达尼",
+     "cls": "OI"
+    },
+    {
+     "re": "奥尔丹",
+     "cls": "OE"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 300,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-shard-god-labels",
+   "title": "Shard God 三分（之神／诸神／女神）的**增强器标签级**闸",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-shard-god，2026-08-15e）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 `R-shard-god` 的 why 写着它两处判据边界，本条补的是其中一处：叶级的负向先行断言（只查「整叶只含单数／只含复数」的叶）把**同叶单复数并存的 70 叶**整叶排除，而标签是逐处的、没有这个问题。实测英文槽命中 115 个：`{Shard Gods}` 75→碎片诸神 · `{Shard God}` 28→碎片之神 · `{Shard Goddess}` 6→碎片女神 · 小写 `{shard god}` 2 · 带尾空格 2 · `{Shard God Devotee}` 2，**115/115 一致**。 ⚠ 这里能对单复数逐处上闸，而块级的 `R-shard-god-blocks` 明确**不把单复数进类**（那里 779 块有 46 块不齐、逐条看过全是合法中文，是判据不成立）—— 差别在于**标签是专名式的短串**，中文不会把 `{Shard Gods}` 铺开成「三位火焰之碎片之神和四位战斗之碎片之神」。**同一个术语在不同粒度上判据强度可以不同，这一条要记住。** ⚠ 类的顺序 Goddess → Gods → God，交替式最左优先；中文侧同理女神 → 诸神 → 之神。 ⚠ 大小写 IGNORECASE：库里实有小写 `{shard god}` 2 处，按 case_sensitive 判会漏看。",
+   "case_sensitive": false,
+   "en_tokens": [
+    {
+     "re": "\\bShard Goddess(?:es)?\\b",
+     "cls": "GS"
+    },
+    {
+     "re": "\\bShard Gods\\b",
+     "cls": "GP"
+    },
+    {
+     "re": "\\bShard God\\b",
+     "cls": "G1"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "碎片女神",
+     "cls": "GS"
+    },
+    {
+     "re": "碎片诸神",
+     "cls": "GP"
+    },
+    {
+     "re": "碎片之神",
+     "cls": "G1"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 100,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-moon-epithet-labels",
+   "title": "三个月亮尊号（空洞／焦灼／风暴）的**增强器标签级正向闸**",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-moon-hollow/charred/tempest，2026-08-15g）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 三条月亮裁决现在只有 `cn_absent`（守废写法不回潮），**一条正向闸都没有** —— `R-moon-hollow` 的 why 自己写着「抓不到上游换了尊号而中文没跟」。本条在标签这一格补上正向：英文槽出现 `Hollow/Charred/Tempest Moon` → 中文槽必须是对应的空洞／焦灼／风暴之月。实测英文槽命中 12 个（`{Aura - The Hollow Moon}` 4 · `{Ragen - The Charred Moon}` 4 · `{Mayis - The Tempest Moon}` 4），12/12 一致。 ⚠ 只有 12 个槽，`min_gated` 定在 10 —— **这条的反空转护栏比同族其它条紧得多**，因为基数小、正则一写坏就直接归零而不会「掉一点」。 ⚠ 另三个月亮（`Shattered`／`Blasted`／`Spirit`）标签里也有（破碎／爆裂／灵魂之月），但 §8 只成组裁了三个，本条只钉已裁的三个 —— **判据不替裁决做主**。",
+   "case_sensitive": false,
+   "en_tokens": [
+    {
+     "re": "\\bHollow Moon\\b",
+     "cls": "H"
+    },
+    {
+     "re": "\\bCharred Moon\\b",
+     "cls": "C"
+    },
+    {
+     "re": "\\bTempest Moon\\b",
+     "cls": "T"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "空洞之月",
+     "cls": "H"
+    },
+    {
+     "re": "焦灼之月",
+     "cls": "C"
+    },
+    {
+     "re": "风暴之月",
+     "cls": "T"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 10,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-token-rank-labels",
+   "title": "Token=指示物 / Rank N=阶位 的**增强器标签级正向闸**",
+   "decision": "2026-08-15h（第十九轮 Y6；裁决本体见 R-token-foundry-ui 2026-08-15f 与 R-rank-sense-compendium）",
+   "kind": "enricher_slot_gate",
+   "why": "**本条与另外 6 条 `enricher_slot_gate` 同族，共同的取证与判据说明写在 `R-arcturel-arcturian-labels` 的 why 里，先读那条。** 一句话：`split_blocks` 把 `@X[…]{标签}` 连花括号一起涂空，标签里的译名整条不进任何块级闸；本族断言按 **(动词, 目标)** 把两侧增强器配对，逐个「英文槽 ↔ 中文槽」比既定译名。 两个术语合一条，因为两者在标签里的实测面都只有 4 个槽，各自单列一条的`min_gated` 会低到失去反空转意义。 ① **Token**：`R-token-foundry-ui` 是 `cn_absent`，只守「令牌／代币」不回潮，**没有任何正向闸**要求 `Token` 一定译成「指示物」。本条在标签里补上：实测 `{Dynamic Token}`→「动态指示物」4 槽，4/4。 ② **Rank**：`R-rank-sense-compendium`／`R-rank-sense-blocks` 都要先做机制义／普通名词义分类，而标签里两种义项都真实存在 —— `{Rank 1 Soulmark}`／`{Cora Attunement (Rank IV)}` 是机制义（4 槽），而 readaloud 槽里的 `join the ranks of the benevolent Sindaric sages` 是普通名词义（4 槽，中文正确地写成「行列」不是「阶位」）。**本条只钉形态明确的机制义** `\\bRank\\s+(?:\\d+|[IVXLC]+)\\b`（Rank 后面直接跟数字或罗马数字），普通名词义那 4 槽根本不进类，不判 —— **收窄判据，不是放宽闸**。 ⚠ 不开 `forbid_absent`：中文槽里出现「指示物」「阶位」而英文槽没有对应词的情形没核过，开之前要先在当前库实跑一遍。",
+   "case_sensitive": false,
+   "en_tokens": [
+    {
+     "re": "\\bTokens?\\b",
+     "cls": "TK"
+    },
+    {
+     "re": "\\bRank\\s+(?:\\d+|[IVXLC]+)\\b",
+     "cls": "RK"
+    }
+   ],
+   "cn_tokens": [
+    {
+     "re": "指示物",
+     "cls": "TK"
+    },
+    {
+     "re": "阶位",
+     "cls": "RK"
+    }
+   ],
+   "min_leaves": 5000,
+   "min_slots": 20000,
+   "min_gated": 6,
+   "max_unpaired": 0
   }
  ]
 }

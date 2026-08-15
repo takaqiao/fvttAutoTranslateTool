@@ -1,0 +1,250 @@
+{
+ "kind": "pre-upgrade-snapshot",
+ "capturedAt": "2026-08-15T18:34:00",
+ "capturedBy": "4-临时脚本/2026-08-15-round19/capture_baseline.py",
+ "capturedFrom": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\2-Crucible汉化插件\\compendium\\en",
+ "upstream": {
+  "packageId": "crucible",
+  "packageVersion": "0.10.1",
+  "packageType": "system"
+ },
+ "includesLocalPatches": true,
+ "note": "上游 crucible 0.10.1 + 当前 mappings.mjs 抽取口径。与已有的 crucible-0.10.1/ 只差 9 叶（playtest 的 encounterTokens，mappings 变更带来的新路径）；单独截一份是为了与 ember 侧同一套规则：升级前必截、升级后拿它当旧英文。",
+ "packs": [
+  {
+   "file": "crucible.adversary-equipment.json",
+   "en_leaves": 106,
+   "cn_leaves": 106,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.adversary-talents.json",
+   "en_leaves": 268,
+   "cn_leaves": 268,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.affixes.json",
+   "en_leaves": 416,
+   "cn_leaves": 416,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.ancestry.json",
+   "en_leaves": 16,
+   "cn_leaves": 16,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.archetype.json",
+   "en_leaves": 90,
+   "cn_leaves": 90,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.background.json",
+   "en_leaves": 18,
+   "cn_leaves": 18,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.equipment.json",
+   "en_leaves": 460,
+   "cn_leaves": 460,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.macros.json",
+   "en_leaves": 5,
+   "cn_leaves": 5,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.playtest.json",
+   "en_leaves": 1014,
+   "cn_leaves": 1014,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.pregens.json",
+   "en_leaves": 660,
+   "cn_leaves": 660,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.rules.json",
+   "en_leaves": 245,
+   "cn_leaves": 245,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.spell.json",
+   "en_leaves": 69,
+   "cn_leaves": 69,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.summons.json",
+   "en_leaves": 170,
+   "cn_leaves": 170,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.talent.json",
+   "en_leaves": 983,
+   "cn_leaves": 983,
+   "cn_present": true
+  },
+  {
+   "file": "crucible.taxonomy.json",
+   "en_leaves": 56,
+   "cn_leaves": 56,
+   "cn_present": true
+  }
+ ],
+ "totals": {
+  "packs": 15,
+  "en_leaves": 4576,
+  "cn_leaves": 4576
+ },
+ "upstreamSourceMeta": {
+  "packageId": "crucible",
+  "packageVersion": "0.10.1",
+  "packageType": "system",
+  "mappingTarget": "crucible",
+  "extractedAt": "2026-08-05T18:47:09.169Z",
+  "extractedBy": "Ember-Crucible Translation Project / 3-常用脚本/extract/extract_en.mjs",
+  "packs": [
+   {
+    "pack": "adversary-equipment",
+    "documentType": "Item",
+    "documents": 53,
+    "mergedDuplicates": 0,
+    "entries": 53,
+    "folders": 6
+   },
+   {
+    "pack": "adversary-talents",
+    "documentType": "Item",
+    "documents": 76,
+    "mergedDuplicates": 0,
+    "entries": 76,
+    "folders": 19
+   },
+   {
+    "pack": "affixes",
+    "documentType": "ActiveEffect",
+    "documents": 135,
+    "mergedDuplicates": 0,
+    "entries": 135,
+    "folders": 18
+   },
+   {
+    "pack": "ancestry",
+    "documentType": "Item",
+    "documents": 8,
+    "mergedDuplicates": 0,
+    "entries": 8,
+    "folders": 0
+   },
+   {
+    "pack": "archetype",
+    "documentType": "Item",
+    "documents": 45,
+    "mergedDuplicates": 0,
+    "entries": 45,
+    "folders": 5
+   },
+   {
+    "pack": "background",
+    "documentType": "Item",
+    "documents": 9,
+    "mergedDuplicates": 0,
+    "entries": 9,
+    "folders": 0
+   },
+   {
+    "pack": "equipment",
+    "documentType": "Item",
+    "documents": 166,
+    "mergedDuplicates": 0,
+    "entries": 166,
+    "folders": 31
+   },
+   {
+    "pack": "macros",
+    "documentType": "Macro",
+    "documents": 5,
+    "mergedDuplicates": 0,
+    "entries": 5,
+    "folders": 0
+   },
+   {
+    "pack": "rules",
+    "documentType": "JournalEntry",
+    "documents": 11,
+    "mergedDuplicates": 0,
+    "entries": 11,
+    "folders": 2
+   },
+   {
+    "pack": "playtest",
+    "documentType": "Adventure",
+    "documents": 1,
+    "mergedDuplicates": 0,
+    "entries": 1,
+    "folders": 0
+   },
+   {
+    "pack": "pregens",
+    "documentType": "Actor",
+    "documents": 16,
+    "mergedDuplicates": 8,
+    "entries": 8,
+    "folders": 2
+   },
+   {
+    "pack": "spell",
+    "documentType": "Item",
+    "documents": 14,
+    "mergedDuplicates": 0,
+    "entries": 14,
+    "folders": 7
+   },
+   {
+    "pack": "summons",
+    "documentType": "Actor",
+    "documents": 10,
+    "mergedDuplicates": 0,
+    "entries": 10,
+    "folders": 3
+   },
+   {
+    "pack": "talent",
+    "documentType": "Item",
+    "documents": 325,
+    "mergedDuplicates": 0,
+    "entries": 325,
+    "folders": 47
+   },
+   {
+    "pack": "taxonomy",
+    "documentType": "Item",
+    "documents": 28,
+    "mergedDuplicates": 0,
+    "entries": 28,
+    "folders": 10
+   }
+  ],
+  "declaredPacks": 16,
+  "extractedPacks": 15,
+  "skippedPacks": [
+   {
+    "pack": "crafting",
+    "type": "Item",
+    "reason": "missing pack directory",
+    "detail": "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\crucible\\packs\\crafting"
+   }
+  ]
+ }
+}

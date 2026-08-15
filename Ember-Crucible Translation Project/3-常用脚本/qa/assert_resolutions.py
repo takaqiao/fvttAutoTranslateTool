@@ -26,6 +26,8 @@
 `leaf_literal`    指定叶必须/不得包含某个字面串（用于登记「绝不能动」的假阳性）
 `block_aligned_gate` **叶内**判据：按块级标签把中英切块后逐块比术语类别（第十八轮 Y2 新增）
 `block_sense_gate`   同上，但块内做机制义／普通名词义分类，块内单一义项时上正向闸
+`enricher_slot_gate` **槽位级**判据：按 (动词,目标) 把两侧 `@X[…]{标签}` 配对，逐个比标签里的术语
+                     （第十九轮 Y6 新增，补 `split_blocks` 把标签连花括号一起涂空留下的洞）
 `glossary_value`  词表的 base 层与产物层都必须是某个值（防「词表把错误洗成权威」）
 `version_matrix`  PROJECT.md 抬头与版本矩阵必须与两仓 module.json 一致（这一行漂过两次）
 
@@ -695,8 +697,12 @@ def _block_exempt(rule, path, i, en_sig="", cn_sig=""):
     return None
 
 
-def _unused_exempt(rule, used):
+def _unused_exempt(rule, used, field="except_blocks", label="块"):
     """**死豁免闸**：`except_blocks` 里一次都没命中的条目要当场吵出来。返回 (违规行, 死豁免条数)。
+
+    `field` / `label` 只是为了让第十九轮新增的 `enricher_slot_gate` 复用同一套逻辑
+    （它的豁免表叫 `except_slots`、单位是「槽」）—— **不许把这段判据复制第二份**，
+    两份判据迟早分叉，那正是本项目反复吃亏的形态（见 `_run_same_en_split` 的注释）。
 
     这是本文件通则的**第四种空转形态**（前三种写在模块 docstring 里：判据写坏 / 没读库 /
     读的是库的过期快照）。这一种最隐蔽，因为**闸本身照常在跑、照常全绿**：
@@ -714,12 +720,12 @@ def _unused_exempt(rule, used):
     默认上限 **0**：豁免一旦不再命中就必须由人决定「删掉」还是「块号漂了要重判」，
     不许静静地留着。`max_unused_exempt` 可以调高，但调高就要在 `why` 里说明为什么。
     """
-    dead = [(j, e) for j, e in enumerate(rule.get("except_blocks", [])) if not used[j]]
+    dead = [(j, e) for j, e in enumerate(rule.get(field, [])) if not used[j]]
     cap = rule.get("max_unused_exempt", 0)
     if len(dead) <= cap:
         return [], len(dead)
-    return ([("-", "配置", f"{rule['id']} except_blocks[{j}]",
-              f"这条豁免一次都没命中（{e['path']} 块{e['block']}）—— **死豁免**："
+    return ([("-", "配置", f"{rule['id']} {field}[{j}]",
+              f"这条豁免一次都没命中（{e['path']} {label}{e.get('block', e.get('en', ''))}）—— **死豁免**："
               f"要么它登记的内容欠账已经修完了、该删掉，要么块号／类串漂了、该重新判一次。"
               f"留着它只会遮住同一处将来的回潮（R-dives-mine 形态）"
               + (f"；本条允许 {cap} 条未命中，实有 {len(dead)} 条" if cap else ""))
@@ -1140,6 +1146,242 @@ def a_leaf_literal(rule, ctx):
     return bad, f"命中 {checked} 叶（要求 ≥{want}）"
 
 
+# ====================================================== 增强器槽位（第十九轮 Y6）
+#
+# 为什么要有这一层：`split_blocks`（见上面它的注释）把 `@X[…]{标签}` **连花括号一起涂空**，
+# 于是标签里的译名整条不进任何块级闸。第十八轮把这个洞量化过，第十九轮又逐处复核了一遍：
+#
+#   全库中文「阿克图瑞尔|阿克图里安」共 **2218 处，其中 278 处（12.5%）落在增强器内**。
+#   把那 278 处逐个改错、每处重跑全部读库断言 —— **只有 89 处**会让某条断言变红，
+#   且全是**叶级间接覆盖**（只有该叶里这一处是唯一带该词的地方时才响）；**其余 189 处无闸**。
+#
+# ⚠ 第十八轮那句「标签另有 R-arcturian-split 的 `{Arcturians}` 域 / R-arcturian-actor-card /
+# scan_uuid_swap 看着」**逐条落实全不成立**，已在第十八轮末尾按实测改写：
+# `R-arcturian-actor-card` 只钉 `actors.Arcturian` 的 name/tokenName 四叶，那四叶里根本没有增强器；
+# `scan_uuid_swap` 根本不在断言套里（是独立扫描器），它自己的 docstring 也写明这类不归它管。
+# **教训：`why` 里写「另有 X 闸看着」是可证伪断言，写之前必须逐处变异回测。**
+#
+# 本闸与 `scan_label_vs_name` 的分工（**不许做成它的重复**）
+# ------------------------------------------------------
+# `scan_label_vs_name` 比的是「`@UUID{标签}` 的中文 ↔ **目标文档的中文 name**」，
+# 且只报「英文标签本来就等于目标英文 name」的那些 —— 它管的是**标签与目标是否同名**。
+# 本闸管的是另一件事：标签里的**术语**（地名／族名／专名）与既定译名是否一致，
+# 而标签本身**可以**与目标 name 不同（作者有意换称呼时 scan_label_vs_name 直接不看）。
+# 举例：`@UUID[…]{Arcturel Dives}` 的中文写成「阿克图里安矿渊」——
+# 标签与目标 name 的关系没变（都不是目标名），scan_label_vs_name 一声不吭，本闸报红。
+#
+# 做成断言（新 kind）而不是独立扫描器的理由
+# ----------------------------------------
+# 判据要用的两侧叶文本 `ctx.pairs` 已经在内存里；独立扫描器要**重读一遍 4 万叶**
+# 再走一次子进程。`a_exclusions_closed` 走子进程是因为分组逻辑本来就写在
+# `scan_same_en_split.main()` 里、复制一份就等于开第二个判据 —— 本条没有这个前提。
+#
+# ⚠ 配对不按「出现序号」，按 **(动词, 目标)** 分组后组内取序 —— 这是实测改的
+# ------------------------------------------------------------------------
+# 第一版按整叶出现序号逐个配对（Y6 任务书里写的做法），实测 **30650 对里有 1388 对
+# （4.5%）配歪**：中文「定语在前」经常把整个增强器搬到另一位置
+# （`Lake Jinro Lunar Shrine` / `Mythspire Observatory` 成片如此）。配歪的后果不是漏报而是
+# **假阳性**：`EN=Arcturel / CN=杰夫赫尔家族`、`EN=Arcturian / CN=奥尔丹`、
+# `EN=Arcturian Liquor / CN=烧瓶` 这些「一眼看去像串行」的条目，全部是配对错位造出来的幻影。
+# 改成按 (动词, 目标) 分组后，全库 **30650 个增强器 0 个配不上**，那 4 类幻影同时消失。
+# 目标相同的多个增强器（同一目标在一叶里出现多次）在组内仍按出现序取，位置精度不丢。
+_AT_ENR = re.compile(r"@([A-Za-z]+)\[([^\]]*)\](?:\{([^{}]*)\})?")
+_ENR_PARAM = re.compile(r'\b([A-Za-z][\w-]*)\s*=\s*"([^"]*)"')
+# 增强器里**玩家能看见的文本**：花括号标签，以及 `@Embed[… label="…" readaloud="…"]`
+# 的这两个参数 —— 实测 `readaloud=` 里塞的是整段朗读正文（**48 处**，
+# EN 侧 16966 字符 / 最长 **951** 字，CN 侧 5392 字符 / 最长 311 字），
+# ⚠ 上一版写「46 处，最长 300+ 字」两处都不准：漏的 2 处在**小写** `@embed[` 里
+# （本文件的 `_AT_ENR` 是 `@([A-Za-z]+)\[`，吃小写，所以那 2 处一样在定义域内）；
+# 「最长 300+」只对 CN 侧成立，EN 侧最长是 951。
+# 那整段同样被 split_blocks 涂空，是本洞里最大的单块。其余参数（`count=` `classes=`）
+# 是机械值，不进槽位。
+_ENR_TEXT_PARAMS = ("label", "readaloud")
+
+
+def _enr_key(m):
+    """(动词小写, 目标) —— 目标取方括号内第一个空格前的串（`@Embed` 后面还跟着参数）。"""
+    return m.group(1).lower(), m.group(2).split(" ", 1)[0]
+
+
+def _enr_slots(m, wanted):
+    out = {}
+    if m.group(3) is not None:
+        out["label"] = m.group(3)
+    for pm in _ENR_PARAM.finditer(m.group(2)):
+        n = pm.group(1).lower()
+        if n in wanted:
+            out["param:" + n] = pm.group(2)
+    return out
+
+
+def _enr_pairs(ev, cv, wanted):
+    """按 (动词,目标) 分组、组内取序配对。返回 (配对列表, 配不上的个数)。"""
+    eg, cg = {}, {}
+    for m in _AT_ENR.finditer(ev):
+        eg.setdefault(_enr_key(m), []).append(m)
+    for m in _AT_ENR.finditer(cv):
+        cg.setdefault(_enr_key(m), []).append(m)
+    pairs, unpaired = [], 0
+    for k in set(eg) | set(cg):
+        a, b = eg.get(k, []), cg.get(k, [])
+        n = min(len(a), len(b))
+        for x, y in zip(a[:n], b[:n]):
+            pairs.append((k[1], _enr_slots(x, wanted), _enr_slots(y, wanted)))
+        unpaired += abs(len(a) - len(b))
+    return pairs, unpaired
+
+
+def a_enricher_slot_gate(rule, ctx):
+    """增强器**槽位级**的术语闸：逐个「英文标签 ↔ 中文标签」比既定译名。
+
+    判据（正向为主，反向可选）
+    --------------------------
+    * `en_tokens` / `cn_tokens` 与 `block_aligned_gate` 同一套有序交替式（`_class_re`），
+      **顺序即优先级**，所以派生词要写在词根前面。
+    * 正向：英文槽里出现某一类 → 中文槽必须出现同一类。**这一条就能抓住全部串行**
+      （把 `Arcturel` 的中文写成族名，正向闸立刻少一个 E 类）。
+    * 反向 `forbid_absent`：中文槽出现了英文槽里没有的类 → 违规。抓的是「凭空多出一个专名」。
+      默认**关**：中文标签合法地补上下文的情形不少（`{Trinkets}`→「阿克图里安小饰品」），
+      开之前必须先在当前库上实跑一遍看假阳性。
+
+    覆盖不到的地方（照本项目规矩写死，不许含糊）
+    -------------------------------------------
+    * **中文有标签而英文那一侧是裸增强器**的槽（实测 582 个）没有英文槽可比
+      （Foundry 对裸 `@UUID` 渲染目标文档名，中文侧补个标签是**正当做法**）。
+      `cn_only_leaf_fallback` 打开后退回**整叶英文**，且**只做反向闸**：
+      中文槽里出现的类，整叶英文里必须出现过；反过来**不要求**中文槽含整叶英文的类。
+      ⚠ 这个方向是实测逼出来的：第一版写成正向（整叶英文只有一类 → 中文槽必须含该类），
+      当场造出 **70 条假阳性** —— 一叶英文里提到 Arcturian，不代表这叶里每个
+      中文标签（`{月华花}` `{拉斯克}` `{迷惘}`）都得带族名。反向则站得住：
+      中文标签凭空冒出一个整叶英文里根本没有的专名，那要么是串行要么是加戏。
+      ⚠ 反向闸的合法英文依据有**两个来源**，缺一个就还会假阳性（也是实测出来的）：
+      ① 本叶英文；② **同一目标在全库别处的英文标签**。裸 `@UUID` 由 Foundry 渲染
+      目标文档名，中文补个标签正是在写那个名字 —— `@UUID[RollTable.BUurPyycyDIuox5L]`
+      在本叶英文里一个 Arctur 字样都没有，而全库别处 28 次写着 `{Arcturian Trinkets}`，
+      中文写「阿克图里安小饰品」当然是对的。只认来源 ① 会把这 4 槽误报。
+    * 方括号**内部**不判：那是机器参数，既定约定要求照抄英文（`[[/culture Ordani]]`）。
+    * **只认 `@Verb[…]` 形态，不认 `[[/verb …]]{标签}`。** 后者实测中文侧 20318 个、
+      带花括号标签的 349 个（含中文 344 个），拿七条断言的全部已裁术语去扫这 349 个标签
+      **一处都不命中**（伤害类型／灾害名／法术名居多）。所以这不是「漏了」而是**量过、当前为空**；
+      哪天已裁术语进了那一格，这里要跟着扩。
+    * 增强器配不上对的（实测 0 个）**报出来**，不静默跳过。
+
+    反空转：`min_leaves` / `min_slots`（英文侧有类命中的槽数）双护栏，
+    detail 必报「扫了多少叶 / 配了多少对 / 判了多少槽」。
+    `max_unused_exempt` 默认 0，与两个块级闸共用 `_unused_exempt`。
+    """
+    flags = 0 if rule.get("case_sensitive") else re.IGNORECASE
+    en_rx, en_names = _class_re(rule["en_tokens"], flags)
+    cn_rx, cn_names = _class_re(rule["cn_tokens"], 0)
+    wanted = tuple(rule.get("params", _ENR_TEXT_PARAMS))
+    slot_filter = set(rule["slots"]) if rule.get("slots") else None
+    exc = _paths_matcher(rule.get("except_paths"))
+    fallback = rule.get("cn_only_leaf_fallback", False)
+
+    bad = []
+    n_leaf = n_pair = n_unpaired = n_slot = n_gated = n_ok = 0
+    n_cn_only = n_fb_gated = n_exempt = 0
+    used = [0] * len(rule.get("except_slots", []))
+
+    # 预扫：目标 -> 全库英文标签里出现过的类。只有 `cn_only_leaf_fallback` 用得上，
+    # 所以不开就不扫（省一遍 4 万叶）。
+    tgt_cls = {}
+    if fallback:
+        for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
+            if "@" not in ev:
+                continue
+            for m in _AT_ENR.finditer(ev):
+                for txt in _enr_slots(m, wanted).values():
+                    c = _classes(en_rx, en_names, txt)
+                    if c:
+                        tgt_cls.setdefault(_enr_key(m)[1], set()).update(c)
+
+    for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
+        if "@" not in ev and "@" not in cv:
+            continue
+        if exc and exc(path):
+            continue
+        n_leaf += 1
+        pairs, unpaired = _enr_pairs(ev, cv, wanted)
+        n_pair += len(pairs)
+        if unpaired:
+            n_unpaired += unpaired
+            bad.append((repo, pack, path,
+                        f"有 {unpaired} 个增强器两侧按 (动词,目标) 配不上对 —— 本条判不了它们，"
+                        f"该先由 scan_markup_drift / scan_markup_targets 处理"))
+        leaf_en_cls = None
+        for tgt, es, cs in pairs:
+            for slot in set(es) | set(cs):
+                if slot_filter and slot not in slot_filter:
+                    continue
+                n_slot += 1
+                et, ct = es.get(slot), cs.get(slot)
+                if ct is None:
+                    continue                       # 英文有标签、中文裸 —— 中文侧没字可判
+                cc = _classes(cn_rx, cn_names, ct)
+                if et is None:
+                    n_cn_only += 1
+                    if not fallback or not cc:
+                        continue
+                    if leaf_en_cls is None:
+                        leaf_en_cls = set(_classes(en_rx, en_names, ev))
+                    allow = leaf_en_cls | tgt_cls.get(tgt, set())
+                    ee, src = sorted(allow), "整叶英文+同目标别处英文标签"
+                    n_fb_gated += 1
+                    miss, extra = [], [c for c in dict.fromkeys(cc) if c not in allow]
+                else:
+                    ee, src = _classes(en_rx, en_names, et), "英文槽"
+                    # ⚠ 英文槽一个类都没命中时**不能直接跳过** —— 反向闸要抓的正是
+                    #   「英文槽里没有、中文槽里冒出来」这一形态（`{the Tradeway}`→
+                    #   「阿克图里安贸易道」）。第一版写成 `if not ee: continue`，
+                    #   于是 forbid_absent 在最该响的那一格永远响不了，自检当场抓出来。
+                    if not ee and not (rule.get("forbid_absent") and cc):
+                        continue
+                    n_gated += 1
+                    miss = [c for c in dict.fromkeys(ee) if c not in cc]
+                    extra = ([c for c in dict.fromkeys(cc) if c not in ee]
+                             if rule.get("forbid_absent") else [])
+                if not miss and not extra:
+                    n_ok += 1
+                    continue
+                why = (f"{src}是 {'/'.join(dict.fromkeys(ee))} 类，中文槽是 "
+                       f"{'/'.join(dict.fromkeys(cc)) or '∅'} 类"
+                       + (f"（缺 {'/'.join(miss)}）" if miss else "")
+                       + (f"（多出 {'/'.join(extra)}）" if extra else "")
+                       + f"：EN {(et or '（英文侧裸增强器）')[:60]!r} / CN {ct[:40]!r}")
+                j = None
+                for k2, e2 in enumerate(rule.get("except_slots", [])):
+                    if (path.endswith(e2["path"]) and e2.get("slot", slot) == slot
+                            and e2.get("en", et) == et and e2.get("cn", ct) == ct):
+                        j = k2
+                        break
+                if j is not None:
+                    used[j] += 1
+                    n_exempt += 1
+                else:
+                    bad.append((repo, pack, f"{path} → {tgt[:34]} [{slot}]", why))
+
+    dead_rows, n_dead = _unused_exempt(rule, used, "except_slots", "槽 ")
+    bad.extend(dead_rows)
+    detail = (f"闸下 {n_leaf} 叶 · 配对增强器 {n_pair} 个（配不上 {n_unpaired}）· "
+              f"可见文本槽 {n_slot}（英文槽有类命中 {n_gated}"
+              + (f" + 整叶回退 {n_fb_gated}" if fallback else "")
+              + f" · 中文独有槽 {n_cn_only} · 判过 {n_gated + n_fb_gated} 一致 {n_ok}）· "
+              f"已登记豁免 {len(used)} 条 / 命中 {n_exempt} 槽 / 死豁免 {n_dead} 条")
+    for field, got, txt in (("min_leaves", n_leaf, "闸下叶数"),
+                            ("min_slots", n_slot, "可见文本槽数"),
+                            ("min_gated", n_gated + n_fb_gated, "真正判过的槽数")):
+        want = rule.get(field)
+        if want is not None and got < want:
+            bad.append(("-", "配置", rule["id"],
+                        f"{txt}只数到 {got}（要求 ≥{want}）—— 这条断言在空转："
+                        f"正则被 JSON 转义吃掉了？上游改了标签措辞？增强器切法被改坏了？"))
+    if n_unpaired > rule.get("max_unpaired", 0):
+        bad.append(("-", "配置", rule["id"],
+                    f"配不上对的增强器有 {n_unpaired}（上限 {rule.get('max_unpaired', 0)}）"))
+    return bad, detail
+
+
 KINDS = {
     "term_gated": a_term_gated,
     "cn_absent": a_cn_absent,
@@ -1153,6 +1395,7 @@ KINDS = {
     "leaf_literal": a_leaf_literal,
     "block_aligned_gate": a_block_aligned_gate,
     "block_sense_gate": a_block_sense_gate,
+    "enricher_slot_gate": a_enricher_slot_gate,
     "glossary_value": a_glossary_value,
     "version_matrix": a_version_matrix,
 }
@@ -1405,6 +1648,76 @@ BLOCK_SENSE_SELFTEST = [
 ]
 
 
+_SLOT_RULE = {
+    "id": "SELFTEST-slot", "kind": "enricher_slot_gate", "forbid_absent": True,
+    "min_leaves": 1, "min_slots": 1, "min_gated": 1,
+    "en_tokens": [{"re": r"\bArcturel\w*", "cls": "E"}, {"re": r"\bArcturians?\b", "cls": "I"}],
+    "cn_tokens": [{"re": "阿克图瑞尔", "cls": "E"}, {"re": "阿克图里安", "cls": "I"}],
+}
+
+# ⚑ 增强器槽位闸（第十九轮 Y6）的正反例。
+#
+# 这一套的重点不是「术语比得对不对」（那和 block_aligned_gate 同一套 `_class_re`，
+# 已经在那边钉过），而是**这个类型特有的三件事**，每一件都是实测踩出来的：
+#   ① 配对按 (动词, 目标) 而不是出现序号 —— 全库 4.5% 的增强器被中文语序搬过位；
+#   ② 中文独有槽的回退方向是**反向**，且合法英文依据有两个来源（本叶英文 + 同目标别处的英文标签）；
+#   ③ 方括号内部不判、`@Embed` 的 label/readaloud 参数要判。
+SLOT_SELFTEST = [
+    ("标签两侧一致 → 不响", None,
+     _P("<p>@UUID[JournalEntry.a]{Arcturel} and @UUID[JournalEntry.b]{Arcturians}</p>",
+        "<p>@UUID[JournalEntry.a]{阿克图瑞尔}与@UUID[JournalEntry.b]{阿克图里安人}</p>"), 0),
+    ("⚑ **标签里单处串行** → 要响（这正是块级闸看不见的：split_blocks 把标签整条涂空）", None,
+     _P("<p>@UUID[JournalEntry.a]{Arcturel} and @UUID[JournalEntry.b]{Arcturians}</p>",
+        "<p>@UUID[JournalEntry.a]{阿克图里安}与@UUID[JournalEntry.b]{阿克图里安人}</p>"), 1),
+    ("⚑ **中文把两个增强器搬了位** → 不响（按 (动词,目标) 配对；按出现序号配会造出 2 条幻影）", None,
+     _P("<p>@UUID[JournalEntry.a]{Arcturel} shops of @UUID[JournalEntry.b]{Arcturians}</p>",
+        "<p>@UUID[JournalEntry.b]{阿克图里安}的@UUID[JournalEntry.a]{阿克图瑞尔}商铺</p>"), 0),
+    # ⚠ 这两条把 `min_gated` 显式放到 0：它们本来就该「一个类都判不到」，
+    #   不放宽的话响的是反空转护栏而不是被测的那件事，测了个寂寞。
+    ("方括号**内部**不判：目标串里出现术语也不看（既定约定要求照抄英文）", {"min_gated": 0},
+     _P("<p>@UUID[Compendium.ember.x.Arcturel]{the city}</p>",
+        "<p>@UUID[Compendium.ember.x.Arcturel]{这座城}</p>"), 0),
+    ("`@Embed` 的 readaloud 参数是可见正文，要判 → 中文串行时要响", None,
+     _P('<p>@Embed[Actor.z readaloud="These Arcturians are wary."]</p>',
+        '<p>@Embed[Actor.z readaloud="这些阿克图瑞尔人心存戒备。"]</p>'), 1),
+    ("反向闸 forbid_absent：英文槽没有的类中文槽冒出来 → 要响", None,
+     _P("<p>@UUID[JournalEntry.a]{the Tradeway}</p>", "<p>@UUID[JournalEntry.a]{阿克图里安贸易道}</p>"), 1),
+    ("英文有标签、中文裸增强器 → 不响（中文侧没字可判，不是缺陷）", {"min_gated": 0},
+     _P("<p>@UUID[JournalEntry.a]{Arcturel}</p>", "<p>@UUID[JournalEntry.a]</p>"), 0),
+    # ↓ 中文独有槽（英文裸 @UUID、Foundry 渲染目标名）的三条。回退**只做反向**。
+    ("⚑ 中文独有槽：回退关着 → 不响", None,
+     _P("<p>Arcturel: @UUID[JournalEntry.a] @UUID[JournalEntry.c]{Arcturel}</p>",
+        "<p>阿克图瑞尔：@UUID[JournalEntry.a]{阿克图里安} @UUID[JournalEntry.c]{阿克图瑞尔}</p>"), 0),
+    ("⚑ 中文独有槽：回退开着、类不在本叶英文里 → 要响", {"cn_only_leaf_fallback": True},
+     _P("<p>Arcturel: @UUID[JournalEntry.a] @UUID[JournalEntry.c]{Arcturel}</p>",
+        "<p>阿克图瑞尔：@UUID[JournalEntry.a]{阿克图里安} @UUID[JournalEntry.c]{阿克图瑞尔}</p>"), 1),
+    ("⚑ 中文独有槽：类不在本叶英文里，但**同一目标在别处的英文标签**是这一类 → 不响",
+     {"cn_only_leaf_fallback": True},
+     [("e", "p.json", "j.A.text", "<p>Arcturel: @UUID[JournalEntry.a]</p>",
+       "<p>阿克图瑞尔：@UUID[JournalEntry.a]{阿克图里安小饰品}</p>"),
+      ("e", "p.json", "j.B.text", "<p>@UUID[JournalEntry.a]{Arcturian Trinkets}</p>",
+       "<p>@UUID[JournalEntry.a]{阿克图里安小饰品}</p>")], 0),
+    ("⚑ 正向回退是错的：本叶英文有 I 类，不代表每个中文标签都得带族名 → 不响",
+     {"cn_only_leaf_fallback": True},
+     _P("<p>Arcturians live here. @UUID[JournalEntry.a] @UUID[JournalEntry.c]{Arcturel}</p>",
+        "<p>阿克图里安人住在这里。@UUID[JournalEntry.a]{月华花} @UUID[JournalEntry.c]{阿克图瑞尔}</p>"), 0),
+    ("英文槽一个类都没命中 → min_gated 把空转抓出来", None,
+     _P("<p>@UUID[JournalEntry.a]{Nothing}</p>", "<p>@UUID[JournalEntry.a]{什么都没有}</p>"), 1),
+    ("登记过的槽不再报（登记的是已裁的合法例外）",
+     {"except_slots": [{"path": "j.Some Page.text", "en": "Arcturel", "cn": "阿克图里安",
+                        "why": "自检：这条真命中"}]},
+     _P("<p>@UUID[JournalEntry.a]{Arcturel} @UUID[JournalEntry.b]{Arcturians}</p>",
+        "<p>@UUID[JournalEntry.a]{阿克图里安} @UUID[JournalEntry.b]{阿克图里安人}</p>"), 0),
+    ("⚑ 豁免一条都没命中 → 要响（死豁免闸在本类型这一侧也要有自己的用例）",
+     {"except_slots": [{"path": "j.Nowhere.text", "en": "x", "cn": "y", "why": "自检：永远匹配不到"}]},
+     _P("<p>@UUID[JournalEntry.a]{Arcturel}</p>", "<p>@UUID[JournalEntry.a]{阿克图瑞尔}</p>"), 1),
+    ("把上限显式放宽到 1 → 同一条死豁免不再响（证明响的是「未命中」本身）",
+     {"except_slots": [{"path": "j.Nowhere.text", "en": "x", "cn": "y", "why": "自检：永远匹配不到"}],
+      "max_unused_exempt": 1},
+     _P("<p>@UUID[JournalEntry.a]{Arcturel}</p>", "<p>@UUID[JournalEntry.a]{阿克图瑞尔}</p>"), 0),
+]
+
+
 def run_selftest():
     bad = 0
     for value, want in SELFTEST:
@@ -1469,7 +1782,19 @@ def run_selftest():
         print(f"  {'ok  ' if ok else 'FAIL'} {note}")
         print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
     print(f"\nblock_sense_gate：{len(BLOCK_SENSE_SELFTEST) - bbad} / {len(BLOCK_SENSE_SELFTEST)} 通过")
-    return 1 if (bad or gbad or sbad or vbad or abad or bbad) else 0
+
+    print("\n增强器槽位闸（enricher_slot_gate）正反例：")
+    ebad = 0
+    for note, override, pairs, want_b in SLOT_SELFTEST:
+        rule = dict(_SLOT_RULE, **(override or {}))
+        b, detail = a_enricher_slot_gate(rule, _FakeCtx(pairs=pairs))
+        ok = len(b) == want_b
+        if not ok:
+            ebad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
+    print(f"\nenricher_slot_gate：{len(SLOT_SELFTEST) - ebad} / {len(SLOT_SELFTEST)} 通过")
+    return 1 if (bad or gbad or sbad or vbad or abad or bbad or ebad) else 0
 
 
 def main():
