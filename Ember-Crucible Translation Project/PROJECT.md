@@ -7,7 +7,7 @@
 
 ## 1. 快速跟进（新会话必读）
 
-**2026-08-16：第二十二～二十三轮已发版。当前已发布 `crucible-cn 0.9.10` / `ember_cn_unofficial v1.1.20`。**
+**2026-08-16：第二十三轮（含自检面板）已发版。当前已发布 `crucible-cn 0.9.11` / `ember_cn_unofficial v1.1.21`。**
 
 > ⚠ crucible 第十七～二十**四轮均 0 改动**，工作树干净、HEAD 就在 `0.9.9` tag 上，**故不跟版** —— 
 > 两个模块的版本号本来就不同步，别看到只发了 ember 就以为漏发了 crucible。
@@ -528,8 +528,8 @@ J00《Ordain Gazetteer》漏读的 22 页）。
 | crucible | 系统 | **0.10.1** | `%LOCALAPPDATA%\FoundryVTT\Data\systems\crucible` |
 | ember | 模块（**付费/protected**） | **0.6.0** | `…\Data\modules\ember` |
 | babele | 模块（翻译框架） | **2.9.1** | `…\Data\modules\babele` |
-| crucible-cn | 汉化模块（本项目） | **0.9.10**（2026-08-15 发布） | `2-Crucible汉化插件\` |
-| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.20**（2026-08-15；v1.1.8/v1.1.9 为阻断急修，v1.1.11–15 为第十四～十五轮，v1.1.16–17 为第十五～十六轮，v1.1.18 为第十七轮，**v1.1.19 为第十八～二十轮**） | `1-Ember汉化插件\` |
+| crucible-cn | 汉化模块（本项目） | **0.9.11**（2026-08-15 发布） | `2-Crucible汉化插件\` |
+| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.21**（2026-08-15；v1.1.8/v1.1.9 为阻断急修，v1.1.11–15 为第十四～十五轮，v1.1.16–17 为第十五～十六轮，v1.1.18 为第十七轮，**v1.1.19 为第十八～二十轮**） | `1-Ember汉化插件\` |
 
 两个汉化仓库：
 - https://github.com/takaqiao/crucible-cn
