@@ -3,7 +3,7 @@
   "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
   "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
   "created": "2026-08-15（第十五轮）",
-  "updated": "2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
+  "updated": "2026-08-16（第二十二轮：新增断言类型 `enricher_text_coverage` 与 1 条 `R-readaloud-coverage` —— 上一轮把 `@Embed[… readaloud=\"…\"]` 的整段朗读正文纳入了 `scan_content_coverage` 的正文口径，但**纳入 ≠ 判得到**：那 48 段英文里阿拉伯数字 0 个，默认的数字多重集判据必然 0 命中，实测把最长的一段中文删空也一声不响；`--with-terms` 干净时就报 39 条、删空 43 条，两侧非零没有判别力。本轮改用**段级**四支判据（缺失／中英字符比／段内定译专名／句数），现读 48 段 0 违规，删空回测 48/48 报、删一半 46/48 报，判据边界写在 R-readaloud-coverage 的 why 里）｜ 2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
   "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
   "idle_forms": {
    "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
@@ -1329,6 +1329,43 @@
    "min_slots": 20000,
    "min_gated": 6,
    "max_unpaired": 0
+  },
+  {
+   "id": "R-readaloud-coverage",
+   "title": "增强器朗读正文（`@Embed[… readaloud=\"…\"]`）的**段级覆盖闸**：中文必须跟上英文",
+   "decision": "2026-08-16（第二十二轮；上一轮 2026-08-15 第二十一轮只做到「纳入口径」，没有判据）",
+   "kind": "enricher_text_coverage",
+   "why": "**这一条补的是第二十一轮留下的半个洞：`@Embed[… readaloud=\"…\"]` 里那整段朗读正文上一轮被纳入了 `scan_content_coverage` 的正文口径（EN 48 段 / 16966 字符、CN 48 段 / 5392 字符，落在 30 叶），却没有任何判据能判它。** 第二十二轮逐条复核实测（现读复算同值）：① 这 48 段英文里**阿拉伯数字 0 个**，而 `scan_content_coverage` 的默认判据是数字多重集 ⇒ 对这 16966 字符的产出**必然是 0 命中**；② 把全库最长的一段中文朗读正文（`ember.adventure :: The Winding Trail / Dusktide Destruction`，311 字）整段删空，默认口径**仍报 0 条**；③ `--with-terms` 不成立 —— 把该叶单独喂进去，**干净时**就报缺定译 39 条、删空后 43 条，两侧都远远非零，没有判别力。也就是说那 16966 字符处在「已进统计口径、却无闸」的状态，比全盲更坏：口径行会让人以为查过了。 判据是**段级**四支，互相独立、各报各的（阈值取值与取证见 `a_enricher_text_coverage` 上方的块注释）：**A 缺失**（中文槽整个没有 / 没有一个汉字，绝对判据）· **B 段级中英字符比** < 0.20（现读 48 段实测区间 [0.263, 0.406]、中位 0.313，与全库正文中英比中位数 0.31 同分布；阈值距实测最小值留 31% 富余）· **C 本段范围内的定译专名**（现读 36 段命中 102 条、缺 0 条 —— **范围限定在这一段是这一支唯一能用的理由**，放回叶级就是 39 条起步的噪声）· **D 句数**：中文句末标点数 ≥ floor(英文句数 × 0.75)（现读 48 段的中／英句数比只取 {1.0, 1.17, 1.25, 1.33, 2.0}，一段都不低于 1.0，留余量是为了不把「两句英文合成一句中文」判红）。 **双向回测（第二十二轮实测，探针落盘在 `4-临时脚本/2026-08-16-round22/`）**：特异度 —— 当前库 48 段合计 **0 条违规**；灵敏度 —— 逐段把中文删空 **48/48 报**，逐段按字符砍掉后一半 **46/48 报**。 ⚠ **判据边界（别把绿读成全覆盖）**：跑掉的那 2 个槽是同一段的孪生两份 —— `Gamemaster's Guide / Main Quest Overview` 的 EN 219 字 / **1 句**、CN 89 字（全库中文最丰的一段，比值 0.406），砍一半后 0.201 卡在阈值上方 0.001，英文只有 1 句所以句数支也够不着；同一段砍 51% 就报。把 `min_ratio` 提到 0.22 能收进来（实测 48/48），代价是距实测最小值只剩 20% 富余 —— 本轮**选择留富余**：这条闸守的是「整段没跟上」，不是「少译一句」。 ⚠ 另有两支已经实现但**现在无从查起**，detail 行会把这个 0 明说出来：含阿拉伯数字的英文段 **0 段**、含段内标记（`<tag>` / `@X[…]`）的英文段 **0 段**。上游哪天往朗读框里塞一句「DC 18」，它们自动开始有信号 —— 这个 0 是「没东西可查」，不是「查过了没问题」。 ⚠ 与 `enricher_slot_gate` 那 7 条**不重复**：那 7 条只在英文槽命中某个已裁术语类时才有话说，一段没有已裁术语的朗读正文它们完全沉默；本条判的是「中文有没有跟上」，与具体术语无关，两者正交。 ⚠ 不限 scope：现读 48 段全在 ember，crucible 侧一段都没有 —— 但闸下着，上游哪天往 crucible 加朗读框会自动纳入。",
+   "slots": [
+    "param:readaloud"
+   ],
+   "glossary": "5-其他内容/glossary/glossary_ec.json",
+   "min_en_chars": 60,
+   "min_ratio": 0.2,
+   "min_sentence_frac": 0.75,
+   "min_leaves": 4500,
+   "min_slots": 40,
+   "min_gated": 40,
+   "min_anchor_terms": 7000,
+   "min_anchor_slots": 30,
+   "min_anchor_hits": 80,
+   "max_unpaired": 0
+  },
+  {
+   "id": "R-selfcheck-twin",
+   "title": "自检面板那份 .mjs 在两个汉化模块里必须逐字节相同",
+   "decision": "2026-08-16（第二十三轮，主控裁）",
+   "why": "自检面板的主体 `cn-selfcheck.mjs` 在 `ember_cn_unofficial/scripts/` 与 `crucible-cn/selfcheck/` **各存一份**。之所以复制而不是跨模块 import：只装其中一个模块的用户那边没有对方的文件，跨模块 import 会直接 404、面板等于不存在。代价是**两份会漂** —— 而本项目已经因为「两处讲同一件事、改了一边忘了另一边」栽过多次（最近一次是 `R-moon-hollow` 的 why 与 `scan_renamed_terms.py` 的 docstring 同仓互相打脸，第二十一轮的复核才抓出来）。所以这条用机械比对钉死，不靠人记。⚠ 路径提醒：**两仓的 `scripts/` 含义相反** —— ember 的 `scripts/` 要进发布包，crucible 的 `scripts/` 全是维护脚本、CI 里被 `-x \"scripts/*\"` 排掉。所以 crucible 侧那份放在 `selfcheck/` 而不是 `scripts/`，否则打包时会被丢掉。⚠ 判据边界：只比字节，不比语义 —— 两份都改错成一样的，它照样绿。",
+   "kind": "twin_files",
+   "min_pairs": 1,
+   "pairs": [
+    {
+     "repo_a": "1-Ember汉化插件",
+     "path_a": "scripts/ember-cn-selfcheck.mjs",
+     "repo_b": "2-Crucible汉化插件",
+     "path_b": "selfcheck/cn-selfcheck.mjs"
+    }
+   ]
   }
  ]
 }
