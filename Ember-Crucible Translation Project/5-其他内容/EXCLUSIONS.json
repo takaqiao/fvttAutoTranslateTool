@@ -7,7 +7,7 @@
   "account_matches_repo": "⚠ 本表的每一条 `count` / `what` 都是**对库的断言**，不是对历史的记录。库改了、这里没改，就是账实不符 —— 第十六轮终段实测到一例（`P-token-story-souvenir` 写 4 叶、库里只剩 1 叶，另两处早已正确改成「纪念章」「木牌」）。**下一轮读本表前先按 `what` 里的路径数一遍**，对不上就订正条目而不是迁就它。",
   "scope": "本表收 scan_uuid_swap / 词表 pending / scan_name_splits / 术语裁决的逐叶豁免 四类。`scan_same_en_split` 的 125 条分叉组豁免另有专表，见 sibling_registers。",
   "sibling_registers": {
-   "same_en_split": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json（125 条，由断言 R-exclusions-closed 守着）",
+   "same_en_split": "5-其他内容/EXCLUSIONS.same_en_split.json（125 条，由断言 R-exclusions-closed 守着）。⚠ 2026-08-15（第十七轮 A7）从 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json` 挪来 —— 原位置被 `.gitignore` 的 `4-临时脚本/**/*.json` 挡在仓库外，换台机器 clone 就没有它，而 R-exclusions-closed 拿它当运行时输入。**两张表故意不合并**：那张是裸 list、逐分叉组、只给判据吃（判据靠反引号包住的英文串做子串匹配）；本表是 `{meta, exclusions}`、逐条带 id/scanner/count、给人每轮读。合并会同时改坏判据的取值形状和本表的可读性",
    "glossary_pending": "5-其他内容/glossary/glossary_ec.pending.json 的 permanentlyExempt 节（与本表 P-terrain-enum 同源，两处必须同时改）",
    "upstream_defects": "5-其他内容/english-baseline/LOCAL-PATCHES.md 的「已知但不修」栏（上游自身写坏、我方不修的）"
   }

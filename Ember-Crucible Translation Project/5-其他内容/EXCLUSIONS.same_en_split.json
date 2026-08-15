@@ -1,0 +1,627 @@
+[
+ {
+  "slug": "G1",
+  "what": "`Shield` 护盾术(23) / 盾牌(11)",
+  "why": "已裁定合法，本轮复核证实判别完全准确：34 个 items.Shield 里，英文侧带 Imperceptible Barrier 效果（＝法术护盾术）的 23 个中文全是「护盾术 Shield」，裸 {\"name\":\"Shield\"}（＝装备盾牌）的 11 个全是「盾牌 Shield」，1:1 无一例外；folders.Shield、tables.Corpse Loot 战利品行、crucible.talent 盾牌天赋文件夹也都在盾牌那一边。以后不必再裁。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Light` 光(26) / 轻型(1)",
+  "why": "26 处是挂在 actor 身上的 items.Light（戏法「光」）；1 处是 crucible.equipment.json 的 folders.Light，同族兄弟 Heavy 重型 / Medium 中型 —— 装备负重分级，且该包另有独立的 Light Sources 光源文件夹。两者不是一个东西。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Arcturian` 阿克图里安(13) / 阿克图里安人(4)",
+  "why": "任务已注明的既定裁决。复核：13 处是文化/血统/传承名与 journal 页名；4 处是名叫 Arcturian 的 actor 本体及其 tokenName（＝一个阿克图里安人），孪生包各两份。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Water` 水域(10) / 水元素(2)",
+  "why": "10 处是场景 regions.Water（地形区域，behaviors 为 Footstep Surface 脚步地表，同族 Impassable Terrain 不可通行地形 / Cavern 洞窟 / Ooze 软泥）；2 处是 folders.Water，同族兄弟 Air 气元素 / Earth 土元素 / Fire 火元素 —— 元素类别文件夹。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Luminous` 明光(6) / 辉耀(1)",
+  "why": "任务已注明的既定裁决。辉耀那处在 ember.character.json（Luxarum 5: Luminous 的效果）＝dnd5e 侧包；明光在 crucible.affixes / crucible.equipment＝Crucible 侧。两侧永不同载。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Spirited` 精神焕发(2) / 昂扬(1)",
+  "why": "同上：昂扬那处在 ember.character.json（Heart 1: Spirited）＝dnd5e 侧包，精神焕发在 crucible.affixes＝Crucible 侧，永不同载。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Color Commentary` 彩色解说(2) / 精彩解说(2)",
+  "why": "任务已注明的既定裁决。journals.Local Color.pages.Color Commentary（壁画/地方色彩页）与 tables.Helkas Drake Moments 的表结果行（吟游诗人解说）是两码事，孪生包各两份。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Hallows` 幽圣所(2) / 圣堂区(2)",
+  "why": "正是既定术语规则本身：Hallows 组织＝幽圣所（journals.Organizations.pages.Hallows），城区＝圣堂区（scenes.Vista: The Hallows.levels.Hallows，同场景另一层是 Alleyway 小巷，场景名已译「远景：圣堂区」）。分裂是规则要求的结果，不是缺陷。"
+ },
+ {
+  "slug": "G1",
+  "what": "`West` 西部(2)/西(2)、`East` 东部(2)/东(2)",
+  "why": "journals.Steed's Point.categories 是地点分区，同族 Overview 概览 / Center 中央，用「西部/东部」；tables.Change of Direction 是随机方向表，同族 North 北 / Northeast 东北 / Southwest 西南，用「西/东」。两套各自表内自洽，混用反而会错。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Aura` 奥拉(3) / 灵气(1)",
+  "why": "奥拉是 Ember 宇宙学天体专名（journals.Cosmos.pages.Aura，英文正文自述 The Hollow Moon / The Veiled Sphere；ember.character.json folders.Aura 与 Akon/Cora/Mayis/Orbis/Primordis/Ragen/Luxarum/Signara 同族＝同调球体文件夹）。灵气是 Crucible 的 Aura 手势（crucible.affixes 的 Aura Spellcraft.adjective），全库该手势一律「灵气」：手势：灵气 Gesture: Aura（talent/spell 及 9 个 actor）、灵气施法 Aura Spellcraft。同形异义。"
+ },
+ {
+  "slug": "G1",
+  "what": "`Ooze` 软泥(2) / 软泥怪(2)",
+  "why": "软泥是场景 regions.Ooze 地形（behaviors 为 Footstep Surface，与 Water 水域同族，另有 Spawn Zone - Ooze 1 出生区 - 软泥 1）；软泥怪是生物分类文件夹（crucible.taxonomy / crucible.adversary-talents，同族 Beast 野兽 / Construct 构装体 / Undead 不死生物 / Monstrosity 畸怪）。"
+ },
+ {
+  "slug": "G1",
+  "what": "`<p>Adelyne gains resistance to necrotic damage…` 三种中文：莫赖亚 / 伊萨 / 阿德琳",
+  "why": "上游英文的错，不是译文的错：Abyssal Sensitivity 的 Abyssal Resistance 效果被作者复制粘贴到 Moriah Foxhaven、Issa Sunsword、Adelyne Goss 三个 actor 上，英文一律硬编码 Adelyne。中文按各自 actor 本地化，GM 在每张卡上读到的都是对的人；统一成「阿德琳」只会把上游 bug 原样复刻给玩家。孪生包各一份共 6 叶。按「宁可少改不可错改」保持现状。"
+ },
+ {
+  "slug": "G1",
+  "what": "`<p>While [[lookup @name]] … his AC includes his Charisma modifier.</p>` 他(2) / 她(1)",
+  "why": "同类：英文对 Brackus von Tet、Grim Assembly、Zira Hestidero 三个 actor 一律写 his，中文按各自性别写「他/她」（Zira 用她）。代词随 actor 性别是常规本地化，[[lookup @name]] 机械部分逐字保留。"
+ },
+ {
+  "slug": "G6",
+  "what": "卡特通道 Cutter's Passage（城区名音译，未改为「石匠通道」）",
+  "why": "术语表已定 'Cutter\\'s Passage'->卡特通道 Cutter's Passage；概览首句已明写「以最早定居于石工谷地的早期石匠而得名」，起源信息不丢。且该音译被其他页面依赖（Kalion Stadium 一页有队伍名「卡特粉碎者」）。本轮只修掉依赖语义名才成立的「同名石匠」表述"
+ },
+ {
+  "slug": "G6",
+  "what": "铸币财富高地 Coinwealth Heights / 大道 Throughway / 最后之门 Lastgate / 汇流厅 The Concourse / 奥尔丹平原 Ordain Flats（城区名）",
+  "why": "均为术语表已定条目，且与地图注记/相邻页交叉引用一致（Lastgate 与 高门 Highgate、西门区 Westgate 同族；Exile's Landing 在 Coinwealth Heights 的 Lore 里被正确回指为「流放者登陆点」）。译名可再斟酌但不属缺陷，改动会波及 19～11 处并牵动术语表 base 层"
+ },
+ {
+  "slug": "G6",
+  "what": "「队长」用于船长 Captain（Ember's Bounty 的 Captain Stonne Torish 等）",
+  "why": "术语表已定 'Captain'->队长，全库 41 处（含 阿克图里安海船队长、海盗队长、漂亮队长、军衔表「高级军官/队长」）。属全库级决策而非本页缺陷——已写入 escalate 请求裁定，不在 G6 内单点改动造成新的分叉"
+ },
+ {
+  "slug": "G6",
+  "what": "「乐曲教师」译 music teacher（Lastgate 戈尔迪·格林费瑟）",
+  "why": "「乐曲」是全库对 music 的既定译法（102 处，含 GM 专属块标题「乐曲：平静」「乐曲：安卡里斯特的主题」）。局部改成「音乐教师」反而制造分叉"
+ },
+ {
+  "slug": "G6",
+  "what": "「灵气」译 aura（破法者之塔「反魔法灵气」「神圣灵气」）",
+  "why": "「灵气」是全库既定译法（52 处），且包含 Crucible 机制术语「灵气手势 Aura gesture」「5 尺灵气范围」。改成「光环」会撞机制词"
+ },
+ {
+  "slug": "G6",
+  "what": "「人类阿克图里安人」这类族裔字段的冗余「人」（Foxlairs 多林等）",
+  "why": "英文 'Human Arcturian' 直译，全库 17 处同型；「阿克图里安人」本身也作独立族称使用，读法不产生歧义，仅略啰嗦，非错译"
+ },
+ {
+  "slug": "G6",
+  "what": "「撕裂者」译姓氏 Thrasher / 「三叶草」译 Cloverleaf / 「半盔」译 Halfhelm",
+  "why": "本书对有含义的姓氏一贯采语义译（三叶草与其经营的「三叶草住宿加早餐旅店」互为呼应、半盔、格雷费尔德等），撕裂者与之同型且条目内两处一致，属风格选择不属错译"
+ },
+ {
+  "slug": "G6",
+  "what": "「石谷地震」（Spellbreaker Tower / Stonework Hollow）与「大石工地震」（Palisade Cross）并存",
+  "why": "英文原文本身分叉：'the Stonehollow Quake' 与 'the Great Stonework Quake of 2503'。中文如实反映原文两种写法，统一反而是对原文的擅改"
+ },
+ {
+  "slug": "G6",
+  "what": "Lourd's Depot「其东侧支流…而另一条东侧支流」",
+  "why": "英文原文即 'the eastern branch… while the eastern branch'（第二处应为 western，属原文 bug）。中文以「另一条东侧支流」如实保留，不擅自订正世界设定方位"
+ },
+ {
+  "slug": "G6",
+  "what": "「焰卫」（69 处）与「火焰卫队」（9 处）并存（Embassy Rise 的「焰卫守护者」）",
+  "why": "英文原文即 Flameguard（71）/ Flame Guard（9）两种写法，中文分别对应，页内一致。统一属全库级决策，已列入 escalate"
+ },
+ {
+  "slug": "G2",
+  "what": "Water（base 水元素 / shipped 水域）",
+  "why": "同一英文词在两类字段各有正确译法：`folders.Water`（元素分类夹，与 Fire/Earth 并列）＝水元素 Water；`scenes.*.regions.Water.name`（Verdant Paths / Keeper's Crossing / Writhing Grave / Forgotten Cistern / Flotsam Canal Market 五张场景的水面区域）＝水域。两边都不该改，词表键本身歧义，产物保留 shipped=水域 即可。"
+ },
+ {
+  "slug": "G2",
+  "what": "Night（base 夜晚 / shipped 奈特（Night））",
+  "why": "shipped 值只来自 `journals.Deities.pages.Nite.pronunciation` 一片叶——碎片之神 Nite 的读音注记，英文侧恰好写 \"Night\"。它跟普通名词 night（14 叶＝夜晚）不是一个键。神祇名已定「奈特 Nite」，读音注记译「奈特（Night）」正确。"
+ },
+ {
+  "slug": "G2",
+  "what": "Warden（base 典狱长 / shipped 守林者 Warden）",
+  "why": "三种语境三种正确译法：Spellbreaker Tower 的 `Warden's Office`＝典狱长办公室（监狱，19 叶）；`crucible.talent.json entries.Warden` 及 Eamon Mariflor / Rala Ushna 身上的同名 talent＝守林者 Warden（11 叶，配套 Ancestral Guardian 先祖守护者）；Flame Warden＝火焰典守者。词表单键装不下，不必再裁。"
+ },
+ {
+  "slug": "G2",
+  "what": "Trader（base 商人 / shipped 贸易商 Trader）",
+  "why": "商人＝Ordain 的 `Trader's Corner` 城区名与 Vekalla 的 \"Trader's Goddess\"（商人女神）；贸易商＝`crucible.archetype.json entries.Trader` 这个 Crucible 原型（Sadri Zhalimorne / Salara / Clipper / Sellen / Krafton Lilifeld 五个 actor 的 archetype.name）。普通名词与机制专名分开，两边都对。"
+ },
+ {
+  "slug": "G2",
+  "what": "Swarm（base 虫群 / shipped 群集 Swarm）",
+  "why": "虫群/鸟群＝生物名里的 Swarm（`Swarm of Cave Wasps`＝洞穴黄蜂虫群）；群集＝Crucible 的 archetype/item `Swarm`（`Gore Bird Ravage.archetype.name`，描述为 \"multiple creatures that move as a single swarming entity\"）。机制名与生物名分开是对的。"
+ },
+ {
+  "slug": "G2",
+  "what": "Shard God（base 碎片女神 / shipped 碎片之神 Shard God）",
+  "why": "这条根本不是异译冲突：英文侧独立存在 `Shard Goddess` 49 处，碎片女神就是它的译法（卢梅、维卡拉等女性神祇）。Shard God＝碎片之神（已裁）。base 那个值属于另一个键 `Shard Goddess`，把它挪过去即可，别再当冲突。"
+ },
+ {
+  "slug": "G2",
+  "what": "Reliquary（base 圣物室 / shipped 圣髑匣 Reliquary）",
+  "why": "容器与场所两义：圣髑匣＝物品（`Orphic Reliquary`＝俄耳甫斯圣匣、dnd5e 的 Reliquary 装备、Kalion Stadium 的 Reliquary 库房，23 叶）；圣物室＝场所语境（\"a reliquary of sacred tomes and tools\"、\"the Circle's reliquary\"，6 叶）。产物取 shipped 即可，两者都不是错译。"
+ },
+ {
+  "slug": "G11",
+  "what": "第十一轮注入的带标点 hN id：本路线的 id=\"garganthus-attack!\"，以及 Redwalk Ramble 的 5 个 id=\"hallucinatory-terrain:-…\"",
+  "why": "不是脏 slug，是正确值。英文源自身的跳转就写作 @UUID[JournalEntry.5sSPjtjFWhTo8dmZ.JournalEntryPage.CUBZWXArz36FtriO#garganthus-attack!]{Garganthus Attack!}（位于 Book Of Tales > The Moon Child of Lake Jinro.text），锚点逐字带感叹号；hallucinatory-terrain 那 5 个同理带冒号。把标点「规范化」掉反而会重新打断 590 处页内跳转里的 12 处。全库 1642 个注入 id 中只有这 12 个含非 slug 字符，已逐一比对英文锚点，全部一致。以后不必重裁。"
+ },
+ {
+  "slug": "G11",
+  "what": "<strong> 成对次序在中英之间翻转：Lookout Post.text 的 Fog of War / Region Map；Entrance Alcove.text 的 Trap Trigger / Scene Region",
+  "why": "不是位置错，是汉语语序必然。EN 'clears the <strong>Fog of War</strong> … on the <strong>Region Map</strong>' → CN「会清除<strong>区域地图</strong>上…的<strong>战争迷雾</strong>」；两个术语各自加粗正确，只是先后被中文语法调换。硬按英文次序排会写出病句。"
+ },
+ {
+  "slug": "G11",
+  "what": "CN 中保留的 &Reference[blinded] / &reference[poisoned] / @Condition[prone] / @Condition[broken] / @Condition[weakened]",
+  "why": "均为 Foundry enricher 宏，方括号内目标照抄不译（铁律 2）。裸拉丁扫描会把 Reference/blinded/poisoned/prone 报成漏译，属误报。"
+ },
+ {
+  "slug": "G11",
+  "what": "The Cliff Face.text 的 <strong>Transition: Descend to Basement</strong> 保留英文",
+  "why": "它指的是场景 region 标题，但两包的 scenes.Aedir Signalpost.regions 下根本没有名为 Descend to Basement 的 region（只有 Transition: Basement Stairs / Cliffside / Elevator）。英文源就是一处失效引用，译成中文只会让 GM 更找不到。全库仅此一处 'Scene Region titled'。"
+ },
+ {
+  "slug": "G11",
+  "what": "两个 cn 为 null 的叶子：Aedir Signalpost.pages.Gazetteer Reference.text 与 Arcturel Tradeway.pages.Area Overview.text",
+  "why": "整叶内容就是 <p>@Embed[JournalEntry.…inline]</p>，没有任何可译文本，留空等价于恒等翻译，不是覆盖洞。"
+ },
+ {
+  "slug": "G11",
+  "what": "「当地人物」作为 locals 的译法（本路线 Underbelly Alleys.text 两处）",
+  "why": "全库 228 处，其中 96 处是地名志固定小节标题 <h3 class=\"divider\">当地人物</h3>，是既定统一约定（该小节列的是具名 NPC，故用「人物」）。只改本路线两处反而制造新分叉；要动须整库一起动，属另案。"
+ },
+ {
+  "slug": "G11",
+  "what": "折返小径旋向：地名志导语说 clockwise（顺时针），攻略页 Switchback Path 说 counterclockwise（逆时针）",
+  "why": "英文源自相矛盾，两侧中文各自忠实。是原文缺陷而非翻译缺陷，擅自统一等于替作者改设定。"
+ },
+ {
+  "slug": "G11",
+  "what": "Generator Room.text 里 @UUID[.ndbokyeEFn2XBDSf#recharge-station]{充能站} 的锚点在中文页找不到对应标题",
+  "why": "英文页同样找不到——Recharge Stations 页的标题是 Station Labels / Recharging Generator Cells，页名是复数 Recharge Stations，锚点却是单数 recharge-station。中英一致地落到页首。不要为此凭空造 id（会让中文行为与英文不一致）。"
+ },
+ {
+  "slug": "G11",
+  "what": "Rotating Elevator.text 表格「左转→顺时针旋转」「右转→逆时针旋转」",
+  "why": "读着别扭，但与 EN 'Left Turn → Rotate Clockwise' / 'Right Turn → Rotate Counter-Clockwise' 逐字一致，是原文设定（符文名与实际效果错位构成谜题感）。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Shield` 护盾术(23) / 盾牌(10)",
+  "why": "合法。逐个 actor 核对 items 结构：Sionia、Larissa Toth、Tethra Shùl(Pact Magic)、Corvana Vortest、Harrower 等 15 个施法者的 Shield 是法术（其 effects 为『无法察觉的屏障』，+5 AC 且免疫魔法飞弹）→ 护盾术；Svala Bronwen、Skallith Warrior、Anachraenum Adventurer、Spellbreaker Riot Guard、Burnished Hand Protector 5 个无施法能力的战士配 Chain Mail/Splint Armor + Shield Bash → 盾牌。20 条全部判对，无一例外，包括看似反例的 Tethra Shùl（有 Pact Magic）。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Water` 水域(10) / 水元素 Water(2)",
+  "why": "合法。水域 = `scenes.*.regions.Water.name`（Verdant Paths / Keeper's Crossing / Writhing Grave / Forgotten Cistern / Flotsam Canal Market 五个场景的地形区域）；水元素 = `folders.Water`（伤害/元素类型分组文件夹）。两个不同游戏对象。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `East` 东部/东 与 `West` 西部/西",
+  "why": "合法。东部/西部 = `journals.Steed's Point.categories.East|West`（村庄东半/西半的页面分组）；东/西 = `tables.Change of Direction.results.3-3|7-7.name`（改变方向骰表上的罗盘方位）。分组标签与方位词本就该分开译。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Color Commentary` 彩色解说(2) / 精彩解说(2)",
+  "why": "合法，且是双关的正确处理。彩色解说 = 支线任务《地方色彩 Local Color》里的一页——该任务讲颜料元素从壁画里爬出来，标题是 color 的双关，中文保留「彩色」；精彩解说 = `tables.Helkas Drake Moments` 骰表结果，指飞龙竞速的现场解说，用体育播报本义。两处语义确实不同。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Luminous` 明光(6) / 辉耀(1)",
+  "why": "合法。辉耀 = ember.character.json 的 `Luxarum 5: Luminous`，它是一条五级阶梯的第五级：微闪/明亮/耀眼/致盲/辉耀，改任何一级都会打乱梯度；明光 = crucible.affixes / crucible.equipment 的装备词缀，属另一产品的独立命名空间。两者互不引用。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Spirited` 精神焕发(2) / 昂扬(2)",
+  "why": "合法，与 Luminous 同构。昂扬 = ember.character.json 的 `Heart 1: Spirited`，同属五级阶梯 昂扬/优雅/蓬勃/苍翠/神圣；精神焕发 = crucible.affixes 的装备词缀。另有 `Spirited Revelations`→灵启真相 是完全不同的短语，不参与本项。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Aura` 奥拉(2) / 灵气(1)",
+  "why": "合法（沿用既有裁决）。奥拉 = Cosmos 页与角色文件夹里的月亮专名 Aura；灵气 = crucible.affixes `Aura Spellcraft.adjective` 的手势/施法学派。"
+ },
+ {
+  "slug": "G3",
+  "what": "dispute `Arcturian` 阿克图里安(系) / 阿克图里安人(系)",
+  "why": "合法（沿用既有裁决）。阿克图里安 = 文化页 / 文件夹 / 血统 item 名（形容词与文化名）；阿克图里安人 = `actors.Arcturian` 这个具体生物及其 tokenName（指人）。"
+ },
+ {
+  "slug": "G3",
+  "what": "6 条小写枚举 bluffs / canyon / difficult / extreme / normal / water",
+  "why": "`pages.*.terrain` 的机械枚举值，模块代码读取，绝不可译；且当前发布包已 purge 掉该字段，属陈旧基线的死条目。应从 pending 直接删除，以后不必再裁。"
+ },
+ {
+  "slug": "G3",
+  "what": "语序/近义差异一类：Northern Shana Mountains 沙纳山脉北部 vs 北部沙纳山脉；Southern Corebright Forest 南部辉核森林 vs 辉核森林南部；Awakened Savanna 觉醒草原 vs 觉醒大草原；Briar Peaks 荆棘峰 vs 荆棘群峰；Last Grove 最后林地 vs 最后树林；The Leviathan Preserve 利维坦禁猎区 vs 利维坦保留地",
+  "why": "判为合法、本轮不改。这六组两侧共享同一核心词（沙纳山脉/辉核森林/草原/荆棘/最后/利维坦），读者一眼能认出是同一地点，不构成指称断裂；改动要重写 6 个大 HTML 叶子，风险高于收益。与上面 12 条真缺陷（不同音译字、意译 vs 音译）性质不同，后者读者认不出是同一处。以后再扫到可直接跳过。"
+ },
+ {
+  "slug": "G10",
+  "what": "Skybrush.text「由迷惘之诅咒所引发的困惑效果」中的「困惑」",
+  "why": "EN 是 \"the Confusion effect\"，指 dnd5e 法术/能力 Confusion，而非 Confused 状态。包内权威译名分离得很清楚：actors.Kern/Nadin.items.Confusion.name = 「困惑 Confusion」，其 effects.Confused.name = 「混乱 Confused」；A Brush With Death 里该诅咒引用的正是 @UUID[Compendium.dnd5e.spells.Item.9hQXdMSmerkTsHDe]{Confusion}。定译 Confused=混乱 不适用于此处，现状正确，以后不必再裁。"
+ },
+ {
+  "slug": "G10",
+  "what": "Skybrush 的 {符文刻印腰带}/{符文纹环带}/{符文刻印箭头} 三个不同构词",
+  "why": "三者是三件不同物品，标签与 items 权威名逐字一致（Rune-Marked Sash=符文刻印腰带、Rune-Marked Band=符文纹环带、Rune-Marked Arrowhead=符文刻印箭头，两包同）。不是不一致，是三个专名。"
+ },
+ {
+  "slug": "G10",
+  "what": "EN 自身不一致处，CN 已按角色标签/权威名统一或忠实照抄",
+  "why": "计有：Brevin 的 \"Landmarks - Bloomspray\" vs \"Notable Characters - Bloomways\"（CN 绽雾区/绽路区，忠实照抄源文本）；The Dives 的 Wrest Repairs 正文用 him、人物条却是 Renneri Wrest she/her（CN 统一作「她」，与权威人物标签一致）；Skybrush 的 Long Haul 列在 Canopy 却被 Grann 简介称 Understory storefront；Reaver Ocean / Reaper Ocean（CN 一律劫掠者海洋，与 Kadísos Gazetteer 的页名「劫掠者海洋 Reaver Ocean」一致）；地震「十年前 / 二十年前」；Cindaric / Cindarin。这些是源文缺陷，CN 处理均已定案。"
+ },
+ {
+  "slug": "G10",
+  "what": "The Bleak Archive.text 保留原文 \"Ebbok Zhùr\"",
+  "why": "EN 即 \"Known as Ebbok Zhùr by the ancient Shent artificers\" —— 申特语原名，作为外语名保留原文是合理呈现，无对应权威中译。"
+ },
+ {
+  "slug": "G10",
+  "what": "Aparon Bay.text「浩劫号 The Havoc」有双语、「利维坦之牙」无双语",
+  "why": "纯装饰性不对称，两种写法都不产生误读；正文（非页名）内是否附英文全库本就不统一，不构成缺陷。"
+ },
+ {
+  "slug": "G10",
+  "what": "Vortest Tower.text「许多月相之前」(many moons ago)",
+  "why": "全库该习语共 3 处且译法各异（许多月相之前 / 许多个月亮之前 / 许多月前），属跨日志一致性议题，非 J02 单条可决；且在多月设定下不产生事实误导。若要统一需另开一路。"
+ },
+ {
+  "slug": "G10",
+  "what": "Lilifeld Vineyard / Dradley Grange 的 GM 模板占位符被译（[生物群系]、[远景：地点名称]、[另一处地标]）",
+  "why": "这些不是 @UUID 目标也不是 [[/...]] 参数，而是官方尚未填写的模板文案；同段的 [[/eventState {Location Name Event/Quest}]] 与 s.hex.hex 已原样保留。铁律 2 针对的是链接与参数，此处不适用。"
+ },
+ {
+  "slug": "G10",
+  "what": "「斯托尔萨河滩 Storsa's Strand」（实为米斯拉湖畔而非河畔）",
+  "why": "该名在两包 J02 内外共出现 20+ 处（含页名、多页 GM 摘要交叉引用），改名成本与外溢风险远大于收益，且「河滩」在中文里可泛指水边平地，不产生事实错误。"
+ },
+ {
+  "slug": "G10",
+  "what": "CN 给 EN 无标签的 @UUID 补了 4 个标签",
+  "why": "Redrak Fields 的 iWZG0gUGUL76Dd3r→{奥里亚尔湖}、The Bleak Archive 的 fzbl7UQ5W82mFnbd→{泰斯拉·舒尔}、e67w5IOBScYtJKXr→{霍伦多尔}、TxHL5k4PNCu9NvXV→{西希拉之子}。已按同 id 在全库其他处的标签逐一核对（Lake Orial / Tethra Shùl / Horrendor / Child of Sitheera 的既有中译完全一致），裸 @UUID 本就会渲染出同一译名，等价且无害。"
+ },
+ {
+  "slug": "G9",
+  "what": "Geography/Ordain 货币表里 Scant / Astral / Seal / Bast / Solar 及换算列「(1/100 Gold Bast)」保留英文",
+  "why": "这五个币名全库仅此一表出现，没有任何其他中文对应可依；换算列与名称列互相引用（Gold Bast），只译名称列会造成表内自相矛盾，全译则等于现造五个货币术语。风险大于收益，判为合法保留。"
+ },
+ {
+  "slug": "G9",
+  "what": "Geography/Sinkhole Depths.pronunciation =「辛克-霍尔（Sink-hole）」",
+  "why": "pronunciation 字段全库既定格式就是「音译（原文）」，且对英文普通词也照此办理——Ancestries/Human 的 pronunciation 即为「休-曼（hu-man）」。与页名「天坑深渊」并存不构成缺陷。"
+ },
+ {
+  "slug": "G9",
+  "what": "Geography/Arctus Plateau 把 Aediri 译作「艾迪里」，而 Aedir 作「艾迪尔」",
+  "why": "英文本身就是两个词形；物品名「艾迪里战刀 Aediri War Knife」「古代艾迪里硬币 Ancient Aediri Coin」已把 Aediri=艾迪里 定死。"
+ },
+ {
+  "slug": "G9",
+  "what": "Repurposed Quarry 把 Drakeling 译作「幼龙」而非「幼龙兽」（Drake=龙兽）",
+  "why": "与 actor 名一致：Pallid Drakeling=苍白幼龙、Afflicted Pallid Drakeling=受难苍白幼龙。改本 journal 反而与怪物名脱节。"
+ },
+ {
+  "slug": "G9",
+  "what": "Untouched Wilds 里 Kazra 佩戴「神明西吉尔」的象征，而 Lightning in a Bottle 说她是「斯佩克特拉」的女祭司",
+  "why": "英文原文自相矛盾（the god Sigil vs priestess of Spectra）。Sigil→西吉尔、Spectra→斯佩克特拉 两个译名都与 Deities 页名一致，翻译无错。"
+ },
+ {
+  "slug": "G9",
+  "what": "Lunar Awakenings 中 @UUID[JournalEntry.dCExfRYP8KRVogO2] 一处标签作「申特水神殿」、他处作「申特月神殿」",
+  "why": "英文标签本身就是 Shent Water Temple / Shent Moon Temple 指向同一条目，中文照译；改动会偏离原文。"
+ },
+ {
+  "slug": "G9",
+  "what": "Flooded Pit 里「@UUID[...swoopingStrike00} and @UUID[...ruthlessmomentum]{无情动量}」保留了英文 and",
+  "why": "英文原文该链接缺右方括号，enricher 会把 \" and \" 整段吞进方括号内当作 UUID 目标；按铁律 2「方括号内目标与参数照抄不译」不动。这是英文侧的坏链，应由上游修。"
+ },
+ {
+  "slug": "G9",
+  "what": "Creature Pens「站在他们一边对抗巨龙」（场上其实是 drakes 龙兽）",
+  "why": "英文原文写的就是 the dragons，属作者用词不严谨；已定译名 Dragons=巨龙，照译不改。"
+ },
+ {
+  "slug": "G9",
+  "what": "Arctus Plateau / Gameplay Details / Over The Moon 各页中文独有的 <hN ... id=\"...\"> 属性",
+  "why": "第十一轮为修 @UUID[...#slug] 页内跳转有意补的锚点，英文侧没有属于正常。本批全部原样保留（改后 id=\" 计数与改前逐叶相等）。"
+ },
+ {
+  "slug": "G9",
+  "what": "Introduction/Foreword.text 的 NUM 差异（英文有 1、中文无）",
+  "why": "英文 \"a few 1st-person notes\"，中文「第一人称笔记」，数字不该出现。"
+ },
+ {
+  "slug": "G8",
+  "what": "pages.*.name 字段的「中文 English」双语并列 vs 正文/表格里的纯中文（Elder Gods / Outer Gods / Shard Gods / Wild Gods / Laeora 共 5 组）",
+  "why": "专名双语并列是本项目对 name 字段的既定格式，正文与表格单元格按约定只写中文。scan_same_en_split 之类的同源串扫描会永远把这 5 组报出来，属设计性差异，以后不必再裁"
+ },
+ {
+  "slug": "G8",
+  "what": "Kerastes → 角盔蛇 Kerastes（十六位戴莫斯之一，兄弟 Nalgomith 却是音译「纳尔戈弥斯」）",
+  "why": "Kerastes 本身是有含义的希腊词（角蝰/有角之蛇），语义译法站得住；glossary_ec 已收录该词条且全库仅此一处、无冲突。宁可少改，保留"
+ },
+ {
+  "slug": "G8",
+  "what": "pages.Sokali.text 的「将维卡拉作为牧师或圣武士的神祇」出现在「将索卡莉作为神祇使用」标题之下",
+  "why": "英文原文自己就写成 Using Vekalla as a deity（源文 bug）。中文是逐字忠实翻译，不属于译文缺陷；改了反而与英文对不上。以后重裁请直接跳过"
+ },
+ {
+  "slug": "G8",
+  "what": "整个 Deities journal 没有任何 <hN id=\"...\">，也没有任何 @UUID[JournalEntry.emberDeities0000...#slug] 形式的页内锚点指向它",
+  "why": "已用正则在 EN/CN 两侧核实：hN 属性只有 class=\"divider\" / 空 / data-anchor=\"under-construction\" 三种，id= 计数为 0；全仓搜 emberDeities0000 带 #anchor 的链接命中 0。第十一轮的『改标题必须保留 id』硬约束对本 journal 不适用，后续会话不必在这里检查"
+ },
+ {
+  "slug": "G8",
+  "what": "「Domains: Air」→「气元素」（同表 Water→水、Fire→火焰）",
+  "why": "全库仅此一处，不构成同源串分叉；单独改成「气」在中文里读不通。留作已知的轻微不齐，不必重裁"
+ },
+ {
+  "slug": "G8",
+  "what": "Adair / Volta / Orvaath / Kyasifer 页使用「祂」",
+  "why": "逐页核对过：这些页的正文要么没有对应人称（Volta、Orvaath 正文无代词），要么「他」全部出现在「其他」一词中（Kyasifer 的 bare-他 计数为 0，7 处「他们」都指凡人信徒而非神），与「祂」不冲突。属正确用法，不是漏改"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_uuid_swap UNCERTAIN 6 处（改后剩余全部）：Cleric 页的 {Kessia}→凯西亚 ×4、{Ordain}→奥尔丹 ×2",
+  "why": "上游把页面挂在了「相关但不同名」的英文标签上，中文照译标签是对的。1WoH2TVw0gngrgWL 是 ember.culture 页 **Kessian**，但英文原文写 \"the Obsidian Antiquaries of {Kessia}\"（Kessia 是 2eLAE5AF2iAMlc0e 那块地名）；RxhlhTWqJqB1cZxY 是 ember.culture 页 **Ordani**，英文原文写 \"to the shores of {Ordain}\"。所以中文写凯西亚/奥尔丹是逐字忠实，库内多数派凯西安/奥尔达尼来自英文标签是 Kessian/Ordani 的那 16 条和 39 条。结构性成因：(目标 id, 英文标签) 这个语境键在此只有 1 票 < min-support 3，判据退回只按目标 id 统计，于是拿另一个英文标签下形成的多数去比。改成多数派就会把英文里明明写着 Kessia/Ordain 的地方译错。**这 6 处永远非零。**"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_label_vs_name 2 处：Giant Moonstone 页 {Maziran} → 马兹兰人（目标文档中文 name 是马兹兰）",
+  "why": "英文 Maziran 在此作人称名词（\"an enthusiastic Maziran aspiring to mercantile greatness\"），中文必须加「人」；另 5 处标作马兹兰的全是定语用法。判据的硬条件是「英文标签==文档英文名」，它无法区分同一个词的名词/定语用法，所以这一条永远响。**改掉就是把「一位马兹兰人」写成「一位马兹兰」。**"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_name_splits：Shield 护盾术×23 | 盾牌×8",
+  "why": "同形异义。23 处是法术（英文侧带 \"An imperceptible barrier of magical force protects you\" 描述 / Imperceptible Barrier 效果），8 处是装备（英文侧只有 {\"name\":\"Shield\"} 空壳，挂在 Svala Bronwen / Burnished Hand Protector / Skallith Warrior / Anachraenum Adventurer / Spellbreaker Riot Guard 这些近战单位上，另加 Corpse Loot 的战利品条目）。判据按英文 name 聚合，看不出词义，永远非零。"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_name_splits：Arcturian 阿克图里安×8 | 阿克图里安人×2",
+  "why": "与 Maziran 同一条语法规律：文化页 + ember.character 祖裔条目 + 角色卡上的文化字段 = 阿克图里安（49 条 @UUID 标签佐证）；NPC 角色卡「一名阿克图里安人」= 阿克图里安人（46 条 @UUID 标签 + tokenName 佐证）。**已实测：把角色卡改成阿克图里安会让 scan_label_vs_name 从 2 处涨到 20 处。**以后不要再试。"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_name_splits：Luminous 明光×4 | 辉耀×1、Spirited 精神焕发×1 | 昂扬×1",
+  "why": "分属两套系统的两种机制，且中文的**语法角色不同**。crucible.affixes 的 Luminous/Spirited 是装备词缀，条目里另有 adjective 字段（\"adjective\": \"明光\" / \"精神焕发\"），会被拼到物品名前面当形容词；ember.character 的 Luxarum 5: Luminous / Heart 1: Spirited 是角色进阶路线的等级特性名，独立成词。两者从不在同一屏出现，统一反而会让其中一侧读不通。永远非零。"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_name_splits：Color Commentary 彩色解说×2 | 精彩解说×2",
+  "why": "英文是一语双关，两处指向完全无关的东西。journals.Local Color（地方色彩）下的页面讲的是批判城市的**壁画**，取 color 的颜料义，译彩色解说；tables.Helkas Drake Moments 6-6 是吟游诗人阿格拉班德在战斗中现场演唱助威，取 color commentary 的**体育解说**义，译精彩解说。互相取代都会丢义。永远非零。"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_name_binding UNCERTAIN 199 处（全部）",
+  "why": "三类，都不是译文缺陷：①114 条 RollTable 结果指向 Compendium.dnd5e.items / equipment24，中文来自 dnd5e 系统自己的模块，本项目不负责——脚本 docstring 已点名这个盲区；②73 条指向 Compendium.crucible.equipment，只是没给 crucible 的 id 表（跑的是 bindings_ember.json）——我已离线逐条核对，74/75 条标签与装备文档中文 name 逐字相同，唯一例外 Prybar 本轮已修；③10 条场景针脚的 pageId 在两份 id 表里都不存在（上游删了目标页，针脚会落到条目首页），属上游缺陷，改译文无用。要真正压低这个数，得补 dnd5e / crucible 两份 id 表（见 escalate）。"
+ },
+ {
+  "slug": "G5",
+  "what": "scan_en_residue 2 处：Rumors in Rock Bottom 页残留 [Recap of description of Entropic Pearl from item here]",
+  "why": "上游作者留在正式发布版里的**编辑批注占位符**，英文侧逐字就是这一串（\"...when they first see it. [Recap of description of Entropic Pearl from item here].\"）。中文照抄是忠实：翻译它等于替上游补内容，删掉它等于凭空删减。⚠ 这一条我标为**暂缓而非铁定豁免**——若项目愿意改善 GM 阅读体验，escalate 里给了可直接用的中文值。"
+ },
+ {
+  "slug": "G4",
+  "what": "T3 档整档：只有 B 信号（旧英文独有的专名／数字仍留在中文里）的 60 个叶子，除 The Chained Door 外全部合法",
+  "why": "逐条核过，成因就三种，都不是缺陷：(1) 上游把 `@UUID[x]{Label}` 的显示标签摘掉只留裸 UUID，中文保留自己的标签完全合法——裸 UUID 本来也渲染成目标的中文名（已在筛子里自动排除了一批，剩下的是变体）；(2) 上游改写句子把专名挪走／换成代称，中文写得更明确；(3) 中文命中是子串巧合（「炼金充能」命中于「炼金充能站」、「内界」命中于「卢克萨鲁姆内界」）。结论：**B 信号在本库没有鉴别力，以后 G4 类扫描可以只跑 A 信号**。"
+ },
+ {
+  "slug": "G4",
+  "what": "B_num 12 条（除 The Chained Door）：上游把散文里的小数字从阿拉伯数字改成英文单词拼写，中文仍用阿拉伯数字",
+  "why": "`5 relics→five relics`、`7 mirrors→seven mirrors`、`50 feet→fifty feet`、`100 tons→one hundred tons`、`3 wagons→three wagons`、`4 x→4x`。中文用阿拉伯数字表达同一数值零语义差异，且全库中文本就以阿拉伯数字为主（尤其距离/DC 这类要速读的机制值）。只有 The Chained Door 例外——那一句中文自己已用「二十／五／十五」，留个「90」是同句自相矛盾，故单独改。"
+ },
+ {
+  "slug": "G4",
+  "what": "A_prop 里由 glossary_ec 孤儿键造成的假阳性 8 处：Water Sprites / Attunement Progression / Sea Captain / Moon Blossoms / Construct Fluid / Interactive Element / Interactable Objects / Ancient Door",
+  "why": "中文其实都对，错的是术语表。逐个查了包内权威名与全库计数：水妖精（actor 名，38 次；术语表的「水元素精灵」0 次）、同调进阶（70 次；「调谐进阶」0 次）、阿克图里安海船队长（actor 名）、月华花（82 次 vs「月之花」4 次）、艾迪尔构装流体（item 名）、可交互元素（两个英文词条中文都用它）。`Ancient Door` 是键碰撞：Forest of Stone 的 `Ancient Door`＝远古之门、Over The Moon 的 `An Ancient Door`＝一扇古老的门，是两个页面，中文各自正确。这些键 harvest 层收不到（复数/词组形态），需改 base 表——已列入 escalate。"
+ },
+ {
+  "slug": "G4",
+  "what": "A_prop『The Hallows』@ Crumbling Sanctuary / The Blockaded Bridge",
+  "why": "CAPSEQ 子跨度伪影：英文原文是 `The Hallows Official`，被切出子跨度 `The Hallows` 而查到术语表的「圣堂区」。该页英文通篇用裸 `Hallows`（Hallows inspectors / Hallows Official）指**组织**，中文作「幽圣所」正确，符合定译（组织＝幽圣所／城区＝圣堂区）。"
+ },
+ {
+  "slug": "G4",
+  "what": "A_prop 其余 12 处措辞变体：First/Second Floor（中文「一层／二层」）、Hit Points（「33 点魔法伤害」）、Taken Captive（「被俘为囚」）、Primordial Bastion（上下文内简称「堡垒」）、Raster's Vault（散文「拉斯特宝库」vs 页名「拉斯特的宝库」）、Level 3 Mine（「三层矿井」）等",
+  "why": "中文均已跟上新英文，只是措辞与术语表字面不同而含义无误、上下文无歧义。按「宁可少改不可错改」不动。（Level 3 Mine 那条还暴露了筛子的一个已知盲区：中文用汉字数字时 A_num 看不见，属可接受漏报。）"
+ },
+ {
+  "slug": "G4",
+  "what": "A_prop『Talent Progression』@ crucible.rules / Adversaries.pages.Overview（中文标题「天赋成长」）",
+  "why": "全库只有两种写法：此处标题 1 次「天赋成长」，ember 的 Patch 0.5.2 页 2 次「天赋进阶」。2:1 不构成规范；且该标题紧接的上一句正用「……随威胁等级提升而成长」，「天赋成长」在上下文里读得通。改动收益近零、风险非零，不改。（另核：全库无 `#talent-progression` 链接指向它，不涉及 id。）"
+ },
+ {
+  "slug": "G7",
+  "what": "Verdant Paths.text 里小写 `wurm` 译作「巨蠕虫」，未按第十一轮的 Wyrms=古龙 统一",
+  "why": "英文此处拼的是小写 wurm（全库仅此 1 叶，×2 包），与大写专名 `Wyrms`（Bestiary 有独立词条：阿肯之月上、大破裂后已灭绝的神话蛇形生物）是不同 token；同页 exposition 的 `Wurmwood Trees` 已定为「蠕木树」，译「蠕虫」能保住这一对的构词关系。按「宁可少改不可错改」保留原状。若设定层认定它就是 Wyrm，则属设定裁决而非翻译错误——已同时列入 escalate 请求一次性定性。"
+ },
+ {
+  "slug": "G7",
+  "what": "Helkas.text 的 `Magistrate` 作「地方执政官」，而 actors.Sadri Zhalimorne.biography.public 作「执政官」",
+  "why": "指同一职位，「地方执政官」是「执政官」的加限定说法，不产生歧义也不误导，属行文变体而非术语分叉。（同一角色的 biography.private 另作「地方官」，三者均可读通。）不值得为 1 个字动叶子。"
+ },
+ {
+  "slug": "G7",
+  "what": "Abyssal Horrors.contentGamemaster 的 `Other Names: Zairoths, Xaré'ans` 保留英文未音译",
+  "why": "这两个别名在全库仅此一处出现，没有任何其他上下文可据以定音译；保留原文反而便于玩家检索原著。与「专名双语并列」的精神不冲突（双语并列的前提是已有中文定名）。"
+ },
+ {
+  "slug": "G7",
+  "what": "Ember's Bounty 内 NPC 有的用双语（「菲斯特拉·图利奥斯 Phestra Thulios」「伯尔·哈沃克 Burl Havoc」），多数只用中文（「佩林·普雷斯特」「安东·斯特莱德」等）",
+  "why": "全库既有惯例是 `name` 类叶子走双语并列、正文内联提及以中文为主，本单元与《Helkas》《Yakoshta》等既有页的处理方式一致。属排版风格差异，非错译，统一它会波及全库上百叶。"
+ },
+ {
+  "slug": "G7",
+  "what": "Perlin's Powders.text 把 `Cheliceraeth Eyes` 译作「螯肢眼」而非按生物名「螯蛛艾斯」",
+  "why": "这是 @UUID[Item.7ltA4b7LI3KqyKfS] 的链接标签，必须与被链物品 `items.Cheliceraeth Eye.name`（现译「螯肢眼 Cheliceraeth Eye」）一致，否则链接文字与打开后的物品名对不上。物品名本身与生物名不同源，是跨单元问题，已列入 escalate。"
+ },
+ {
+  "slug": "G7",
+  "what": "Gameplay Details.text 的 `there's a 1 in [[/roll 1d2]] chance` 译作「有 1/[[/roll 1d2]] 的概率」",
+  "why": "英文原文写法本就别扭（把掷骰宏塞进「1 in N」句式），中文照搬既保住了掷骰宏又没有替原文擅自解释成「50%」。同页另有 EN 自身的重复笔误 `[[/skill stealth 18]] 或 [[/skill stealth 18]]`（Secondhand Rugs）与 Falling Overboard 段「避免伤害/伤害减半」自相矛盾，中文均忠实照搬，属原文缺陷不属译文缺陷。"
+ },
+ {
+  "slug": "G7",
+  "what": "Bestiary 里 26 个「Under Construction」样板叶存在两种译法：「Beta 版暂无更多信息可用」与「Beta 版本暂无更多信息可用」",
+  "why": "两种译法各自对应英文源里两种不同的 HTML 包裹结构（`<section class=\"content\">…` 深嵌套 vs `<div><section class=\"block wip\">` 浅结构），成对分布、非随机；语义完全等价，读者不可能察觉。改动收益为零而要动 26 个叶子。"
+ },
+ {
+  "slug": "G7",
+  "what": "Bestiary 里 `sentience/sapience` 译作「感性/理性」",
+  "why": "EN 紧接着给了自定义：\"Sentience is the ability to experience feelings…\" / \"Sapience is the ability to think…\"，中文照定义走「感性/理性」可读且不矛盾。虽非学界标准译法（有情/有智），但原文自带释义句，不会误导。"
+ },
+ {
+  "slug": "G7",
+  "what": "Helkas.text 把 `patron of her own alchemical arts` 译作「炼金技艺的资助者」",
+  "why": "英文 patron 在此两义皆通（自家产品的主顾 / 该技艺的支持者），无法从上下文判定，且不涉及事实、阵营或机制。按「宁可少改不可错改」保留。"
+ },
+ {
+  "slug": "G13",
+  "what": "Vortest Tower / Primary Bedroom.text：EN「trapped in a state of suspended animation along with two Jahud Assassins」，中文作「与 3 名贾胡德刺客一同」",
+  "why": "EN 自身矛盾：同页 readaloud 写 a trio of fiendish assailants、@Embed[Actor.MaUAJFmggmFalVeK count=3]、「The 3 Jahud Assassins here」、「All 3 jahud are positioned around Corvana」。3 是唯一自洽且与场景一致的数字，中文是有意订正上游笔误。这是全刊数字多重集比对中唯一一处差异——以后再扫到不要回改成「两名」。"
+ },
+ {
+  "slug": "G13",
+  "what": "Vortest Tower / Northern Sitting Room.text 小节写「尝试搜索西侧起居室的角色」；Western Sitting Room.text 写「从这株蕨类植物上采收泰拉树叶」",
+  "why": "EN 原文分别就是 \"search the western sitting room\"（作者从 Western Sitting Room 复制粘贴）和 \"from the fern\"（该房间植物实为 Terra Tree）。中文照译属忠实，改成「北侧」「泰拉树」反而是脱离原文的私自订正。"
+ },
+ {
+  "slug": "G13",
+  "what": "Mythspire Observatory / Area Overview.text 出现「杰刻罗卡别墅钥匙」「阿纳克瑞纽姆行会成员」",
+  "why": "EN 原文即 \"unless an Anachraenum Guild Member with the Jekeroka Villa Key is present\"——上游从 Jekeroka Villa 页复制来的样板段落，与神话尖塔无关。属上游内容缺陷，中文照译。"
+ },
+ {
+  "slug": "G13",
+  "what": "Carnal Dragon 译「肉欲龙」而全库另有大量「残酷龙」",
+  "why": "「残酷龙」对应的是另一个物种 Cruel Dragons（Bestiary.pages.Cruel Dragons）。二者仅因同现于同一长叶而被叶级扫描误判为分叉。Carnal Dragons→肉欲龙 有 glossary_ec 背书，无分叉。"
+ },
+ {
+  "slug": "G13",
+  "what": "actors.*.tokenName 无双语、journals.*.categories.* 无双语，而 *.name 一律双语",
+  "why": "全库统计 tokenName 双语 0 / 裸 575，actor .name 双语 557 / 裸 0——是 100% 一致的既定约定（令牌名与分类标签求短）。同源串扫描把 'Avwynn Taol'、'Luna Karrowrath'、'Overview' 报成分叉，皆为此约定的假阳性。"
+ },
+ {
+  "slug": "G13",
+  "what": "Critical failure → 「严重失败」",
+  "why": "全库 13/13 一致，无第二种写法。"
+ },
+ {
+  "slug": "G13",
+  "what": "Eonic → 「永世语」（第十轮 K4 曾提议改为「伊欧尼克语」）",
+  "why": "全库 Eonic 8/8 均作永世语，与 Pathward=径道语 的意译风格一致。第十轮该项提议已被后续轮次否决，现值正确——不要再按第十轮记录回改。"
+ },
+ {
+  "slug": "G13",
+  "what": "Drevin Markus 著名作品切成《历史大全》、《大破裂之后》两本",
+  "why": "EN \"The Complete Works of History, Post Shattering by Drevin Markus\" 可读作一本也可读作两本；第十轮已裁决为两本并落地。保持现状，不再重裁。"
+ },
+ {
+  "slug": "G13",
+  "what": "Service Room 中 EN 标签 {Chamber Overlook} 译作「中庭俯瞰处」",
+  "why": "该 UUID 目标页 PWM9H3I4Hk79Rxll 的实名是 Atrium Overlook（中庭俯瞰处），EN 标签本身与目标页名不符。中文按真实目标页名统一，是有意订正，正确。"
+ },
+ {
+  "slug": "G13",
+  "what": "Central Room crucible 分支 @UUID[...Item.protectiveMirage]{护佑幻影}——EN 该处无 {label}",
+  "why": "新增的标签与目标动作实名「护佑幻影 Protective Mirage」完全一致，显示效果与不加标签相同，无害。"
+ },
+ {
+  "slug": "G13",
+  "what": "Mythspire Observatory / Shent Moon Temple 的 Gazetteer Reference.text 无中文（cn=None）",
+  "why": "叶内容为纯 <p>@Embed[...inline]</p>，无任何可译文本；apply_translations 的 translatable() 亦判定为非可译。覆盖率扫描若报缺失属误报。"
+ },
+ {
+  "slug": "G13",
+  "what": "Shent Moon Temple / Central Lunarium.text 内 6 处写作「拥有 [[/knowledge X]] 的角色在此次检定中获得 @Advantage[2]。」，与全库通行的「[[/knowledge X]]：该角色在此检定上获得@Advantage[2]。」句式不同",
+  "why": "语义完全等同，宏与参数一致，只是句式改写。属可接受的行文变体，不值得为统一而重写 6 处。"
+ },
+ {
+  "slug": "G13",
+  "what": "「神殿室内 Temple Interior」/「神殿外部 Temple Exterior」中文不对称",
+  "why": "页名与全部 4 处引用标签一律为「神殿室内」，全库自洽。改动需连页名一起动并同步两包全部引用，收益低于风险。"
+ },
+ {
+  "slug": "G13",
+  "what": "Central Room crucible 分支 <strong>reduce</strong> → <strong>可以削弱</strong>（标签内多包了「可以」）",
+  "why": "位置正确、强调对象正确、语义等同；中文不宜把「可以」拆到标签外。"
+ },
+ {
+  "slug": "G13",
+  "what": "Notable Figures / Viola Key.contentOverview「阿卡杰里斯武僧团」未采用第十轮 T4 提议的「阿卡杰里斯 Arcageris 武僧战团」",
+  "why": "同轮 K4 条目给出的落地值即「阿卡杰里斯武僧团」，且 EN 为 warrior monks（武僧团），现值正确。两条第十轮记录互相冲突时以 K4 条目为准。"
+ },
+ {
+  "slug": "G13",
+  "what": "Vortest Tower / Tower Antechamber 把 ash-colored wood 译作「灰烬色木材」，而同刊 petrified ashwood 作「石化白蜡木」",
+  "why": "EN 用了 ash 的双关（白蜡木／灰烬），两种读法都成立；「灰烬色木材」是对 ash-colored 的直译，不构成错误，二选一反而丢信息。"
+ },
+ {
+  "slug": "G13",
+  "what": "Primary Bedroom「一盆西格纳拉植物」（EN: a potted Signaran plant），而同刊他处形容词用「西格纳兰」",
+  "why": "「西格纳拉植物」可读作「来自西格纳拉的植物」，与 Tower Antechamber「辨认这些植物源自西格纳拉」的处理同源，不是错译。"
+ },
+ {
+  "slug": "G12",
+  "what": "三个 Gazetteer Reference 页（Helkas / Steed's Point / Yakoshta Mine）的 .text 中文侧为空",
+  "why": "英文侧只有一行 @Embed[...JournalEntryPage... inline] 富文本嵌入，没有任何可译文字；嵌入目标本身另有译文。此为正常，历轮已判定，不必再裁。"
+ },
+ {
+  "slug": "G12",
+  "what": "页名「卡迪索斯之牙 The Teeth」把英文 The Teeth 扩写成了地名全称",
+  "why": "该页 overview 与正文本身就写 “Teeth of Kadisos”/「卡迪索斯之牙」，glossary_ec 键 `The Teeth`＝「卡迪索斯之牙 The Teeth」已固化，全本引用一致。属刻意消歧，不是漂移。"
+ },
+ {
+  "slug": "G12",
+  "what": "页名「瀑桥 Waterfall Bridge」用了生造词而非「瀑布桥」",
+  "why": "glossary_ec 已收 `Waterfall Bridge`＝瀑桥，全库仅 2 处引用且完全一致，改名的收益小于打散既有一致性的代价。"
+ },
+ {
+  "slug": "G12",
+  "what": "Excavation Pit 挖掘坑 / Glowing Ore Pit 发光矿坑 / Old Ore Pit 旧矿坑 三个矿井房间的译名",
+  "why": "全库逐叶复查：21 / 20 / 12 个叶子，命中率 100%，无一处混用或漏译（脚本 NO-MATCH 列表为空）。第十轮的地点混淆修复已完全生效，以后不必重裁这一组。"
+ },
+ {
+  "slug": "G12",
+  "what": "dim light 译作「微光」（Yakoshta Mine）而 Helkas 作「昏暗光照」",
+  "why": "全库 微光 208 次 / 126 叶、昏暗光照 46 次 / 36 叶，两者都已大面积铺开，且都能被读懂；这是全库级用词偏好问题，不是 K5 的局部缺陷，单独改 K5 反而会制造新的局部分叉。已列入 escalate 供主控全库决策。"
+ },
+ {
+  "slug": "G12",
+  "what": "Kadísos 地名志各页无 <dt>/<dd> 结构",
+  "why": "该地名志用 h3 分节而非定义列表；K5 内唯一的 dt/dd 在 Yakoshta Mine.Old Ore Pit（Valka / Danith 两条），已逐字核对：dt 的「瓦尔卡（混乱善良，阿克图里安赫尔格伦，she/her）」与 dd 正文的「赫尔格伦」「她」完全一致，无上半段译名、下半段英文名的分裂。"
+ },
+ {
+  "slug": "G12",
+  "what": "K5 全部 148 叶的阵营字母、身份、代词标签",
+  "why": "脚本对八种阵营逐叶比对 EN 出现次数与 CN 对应词次数、she/her|he/him|they/them 逐叶比对：全部 0 处不符。含 GM 专属块在内无任何阵营被改写或泄底。"
+ },
+ {
+  "slug": "G12",
+  "what": "K5 全部 148 叶的标记与占位符",
+  "why": "标签多重集（strong/em/sup/sub/dt/dd/h1-6/section/div/ul/ol/li/p/blockquote/table/tr/figure）逐叶相等；class=\"block gamemaster|readaloud|hazard|social|exploration|qna|wip\"、system-swap-inline/block、complex-check、data-system=\"dnd5e|crucible\" 逐叶计数相等；@UUID/@Embed/@Condition/@Advantage/@Spell/@CriticalSuccess/[[/…]]/&reference[…] 令牌多重集逐叶相等；<strong> 还做了按块位置比对（不只多重集）——全部 0 处不符。数字多重集仅 3 处差异，逐条查证均为 10ft→10 英尺 / 1st→1环 / one turn→1 个回合 的正常译法，非缺陷。"
+ },
+ {
+  "slug": "G12",
+  "what": "K5 与全库的同源串分叉",
+  "why": "以英文全串为键做全库分组扫描（40,058 叶），凡有一侧落在 K5 四本内的同英文多中文组：0 组。"
+ },
+ {
+  "slug": "attr-order|section.secret",
+  "what": "`<section class=\"secret\" id=\"secret-XXX\">` 属性顺序与英文侧相反，9 处",
+  "why": "2026-08-14 第十四轮复验：ember.adventure.json CN class-first 8 / id-first 0，EN class-first 4 / id-first 4（4 处翻转）；ember.crucible-adventure.json CN 31/10，EN 26/15（5 处翻转）；合计 9 处。HTML 属性顺序无语义，Foundry 的 secret 显隐按 `section.secret` + `id` 解析，功能影响为零。保留作为『这 9 条译文经过非本项目 DOM 序列化器往返』的指纹，不再当缺陷重开。"
+ },
+ {
+  "slug": "G15",
+  "what": "`Scout` 侦察兵(3, name 字段) / 斥候(2, tokenName)",
+  "why": "第十四轮新出现的第 15 组，逐条查实为**合法分叉**，不是缺陷。两侧各自内部一致：① 权威条目 `crucible.archetype.json::entries.Scout.name` 是「侦察兵 Scout」，`actors.Tauric.archetype.name` 与 `actors.Mutagist Scout.archetype.name` 跟它一致 —— 这一侧指的是 crucible 的**角色原型**；② `actors.Mutagist Scout.tokenName`（英文侧就是裸 `Scout`）是「斥候」，与同卷 `Ancient Paths / Missing Scouts` 正文里 `Scout(s)` 的 62 处译法逐处一致，0 处例外 —— 这一侧指的是**故事里的敌方斥候**。同页 `scouting party` 另译「侦察队」，也忠实（英文 `<h4>Mutagist Scouts` 对「斥候」、正文 `Mutagist scouting party` 对「侦察队」）。⚠ `scan_token_name` 结构性看不见这一组：它的判据要求英文 `name` 与 `tokenName` 逐字节相同，而这里 actor 名是 `Mutagist Scout`、tokenName 是 `Scout`。以后不必再裁。"
+ }
+]

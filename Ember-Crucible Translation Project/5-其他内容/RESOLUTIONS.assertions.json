@@ -220,9 +220,9 @@
    "id": "R-exclusions-closed",
    "title": "same_en_split 的分叉组必须全部已归档豁免（现场重跑扫描器）",
    "decision": "2026-08-13k + 2026-08-14d，判据形态 2026-08-16 改",
-   "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看。⚠ **这条断言本身被抓到在空转**（第三种空转形态）：原判据读的是磁盘上的 `4-临时脚本/2026-08-15-round15/qa2/same_en_final.json`，那是**第十五轮的产物、15 组**，而第十六轮库里实跑 `scan_same_en_split` 是 **14 组 / 123 叶**。也就是说它只与「上次谁跑过扫描并写了那个文件」一样新 —— 库里新分叉出来它不会变红，而这正是它存在的唯一理由。`min_hits` 与 `scan` 两道护栏都防不住这一类：它「读了库」，只不过读的是库的一张过期照片。现改为**每次现场子进程重跑扫描器**，并把「英文唯一串多少条 → 分叉多少组多少叶」打进 detail；扫描器跑不起来一律判失败。`min_en_strings` 是这一类的反空转护栏（实测 14191 条）",
+   "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看。⚠ **这条断言本身被抓到在空转**（第三种空转形态）：原判据读的是磁盘上的 `4-临时脚本/2026-08-15-round15/qa2/same_en_final.json`，那是**第十五轮的产物、15 组**，而第十六轮库里实跑 `scan_same_en_split` 是 **14 组 / 123 叶**。也就是说它只与「上次谁跑过扫描并写了那个文件」一样新 —— 库里新分叉出来它不会变红，而这正是它存在的唯一理由。`min_hits` 与 `scan` 两道护栏都防不住这一类：它「读了库」，只不过读的是库的一张过期照片。现改为**每次现场子进程重跑扫描器**，并把「英文唯一串多少条 → 分叉多少组多少叶」打进 detail；扫描器跑不起来一律判失败。`min_en_strings` 是这一类的反空转护栏（实测 14191 条）。⚠ **2026-08-15 第十七轮 A7 改了 `exclusions` 的路径**：那份 125 条豁免表原本躺在 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`，而 `.gitignore` 的 `4-临时脚本/**/*.json` **把它挡在仓库外** —— 换台机器 clone 下来这份表就不存在，本断言会走「找不到归档豁免表」那条分支报失败（它确实报失败、不是静默放行，但那是**判据环境坏了**，不是库坏了，会浪费下一轮一整段时间去查一个不存在的缺陷）。现已挪到 `5-其他内容/EXCLUSIONS.same_en_split.json`（那里默认进仓）。**它与同目录的 `EXCLUSIONS.json` 是两张表，不要合并**：本表是 `scan_same_en_split` 的逐分叉组专表（裸 list，元素形如 `{slug, what, why}`，本判据靠 `` `英文串` `` 反引号在 what/why 里做子串匹配），`EXCLUSIONS.json` 是给人每轮读的项目级登记表（`{meta, exclusions:[…]}` 另一种形状，收 scan_uuid_swap / 词表 pending / scan_name_splits / 术语逐叶豁免四类）；合并会同时改坏本判据的取值形状和那张表的可读性",
    "kind": "exclusions_closed",
-   "exclusions": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json",
+   "exclusions": "5-其他内容/EXCLUSIONS.same_en_split.json",
    "scanner": "scan_same_en_split.py",
    "min_en_strings": 10000,
    "short_len": 40,
@@ -235,7 +235,7 @@
    "id": "R-glossary-not-laundering",
    "title": "词表不得把错值洗成权威（base 与产物两层同查）",
    "decision": "2026-08-15b（第十五轮 ③ 查出 4 条阻断）",
-   "why": "词表是构建产物，harvest 压过 base；base 层的陈旧错值从不被覆盖，下一轮有人拿词表当依据反向回灌就会把包改坏。实测 4 条全是 source='base'：Kinesis=念动力（与 Telekinesis 撞车）· Fortitude=坚韧（与 Toughness 撞车）· Rank=等级（Rank/level 不可分）· Region Map=区域地图（会把刚拆开的 地区地图 洗回去）。第十六轮补进本轮已在 base 与产物**两层同时就位**的 9 条：Cyclonic/Corla/Point/Dynamic Token/Lantyr's Blade/Temple Lunarium/Orb Destroyed 是本轮 9 条裁决的词表侧落地；`Hex`=妖术 与 `Hexes`=六边格 则是**同形异义**的词表侧看守 —— 见 R-hex-homograph，下一轮若有人为「统一裁决 6」把词表的 Hex 一起改成六边格，重建后立刻产生一条真 dispute（3 个 actor 的法术 name 会被改坏）。⚠ 只登记两层都已就位的条目：本轮实测 base 的 `Arcturians`=阿克图里亚人（该是阿克图里安人）、`Cosmological Attunement`=宇宙调谐（Attunement 的定译是同调）两条**尚未就位**，故意不进这张表，先记在交接里等落盘。第十六轮收尾（2026-08-16e）再补 **14 条**，分两批：① 本轮已在 base 与产物**两层同时就位**的 9 条 —— `Arcturel` / `Arcturian` / `Arcturians`、`Cosmological Attunement`（这两条正是上一版记下的「尚未就位、先记在交接里」的欠账，**已还**）、`The Dives` / `the Dives`（大小写两种写法库里都出现，两条都登）、`Cosmos` / `Cosmic` / `Cosmological`；② 与本轮新裁的两组二分配套的 5 条 —— `Cosmology`、`Kessia` / `Kessian` / `Kessian Sand Knife`（见 R-kessia-vs-kessian）、`Ordani`（见 R-ordain-vs-ordani）。⚠ **`Cosmology` 必须登 want=「宇宙观」，登「宇宙」会立刻把这条断言打红** —— 不是裁决变了，是判据形状：`a_glossary_value` 比的是 `want in (got, got.split(\" \")[0])`，产物是「宇宙观 Cosmology」，取到的头部就是「宇宙观」，「宇宙」不等于它。锚点页名本身就是「宇宙观 Cosmology」，所以「宇宙观」才是这个**词表键**的正确值；R-cosmology-cosmos 里那条「Cosmological/Cosmology＝宇宙」管的是**正文里的泛指用法**（作普通名词/形容词的 cosmology、cosmological），两者不冲突，别互相回灌。⚠ **`Ordain` 故意不登**：base 里它是多义 list `[\"奥尔丹\",\"授命\"]`（城名／动词两义），`build_glossary` 的 base 层只收 str 直接跳过它，而 `a_glossary_value` 拿到 list 会判失败。同形的还有 `Shield`。多义词的看守归 R-ordain-vs-ordani 那种读库闸，不归词表值断言。⚠ 这 14 条能登的前提是 2026-08-16e 把 `build_glossary.py` 的 `format_only` 收紧了：旧判据含一个纯子串子句 `(b in cn_s)`，凡 base 值是 shipped 值的子串就被静默判成「只是双语格式差异」，3174 条 `baseVsShipped` 里因此**吃掉了 11 条真 dispute**（`Cosmology` 宇宙→宇宙观 · `Axe` 斧→斧头 · `Buckler` 圆盾→小圆盾 · `Pallid Drakeling` 幼龙→幼龙兽 · `Lyla Cevher` 莱拉→莱拉·杰夫赫尔 · `Ooze` 软泥怪→软泥 · `Elemental` 元素→元素生物 等）。收紧成「base 值 + 空格 + 英文」**整串相等**后 12 条 dispute 全部现形并逐条裁掉（多数是 shipped 对，base 改成 shipped 的裸中文；`Ooze` 按 name 叶裁 —— `scenes.Verdant Paths.regions.Ooze.name`＝软泥 是地表/区域，生物类别那一支仍由 base 的 `Oozes`＝软泥怪 与 byrole 的 `folders` 桶承担），产物 `glossary_ec.json` **一个值都没变**（7971 条逐键比对，差异 0）—— 也就是说这次收紧纯粹是把 11 条本该被人看见一次的裁决从判据里放出来，没有改动任何已发布译名。**`disputes` 现在是真 0，不是被判据吃掉的 0**",
+   "why": "词表是构建产物，harvest 压过 base；base 层的陈旧错值从不被覆盖，下一轮有人拿词表当依据反向回灌就会把包改坏。实测 4 条全是 source='base'：Kinesis=念动力（与 Telekinesis 撞车）· Fortitude=坚韧（与 Toughness 撞车）· Rank=等级（Rank/level 不可分）· Region Map=区域地图（会把刚拆开的 地区地图 洗回去）。第十六轮补进本轮已在 base 与产物**两层同时就位**的 9 条：Cyclonic/Corla/Point/Dynamic Token/Lantyr's Blade/Temple Lunarium/Orb Destroyed 是本轮 9 条裁决的词表侧落地；`Hex`=妖术 与 `Hexes`=六边格 则是**同形异义**的词表侧看守 —— 见 R-hex-homograph，下一轮若有人为「统一裁决 6」把词表的 Hex 一起改成六边格，重建后立刻产生一条真 dispute（3 个 actor 的法术 name 会被改坏）。⚠ 只登记两层都已就位的条目：本轮实测 base 的 `Arcturians`=阿克图里亚人（该是阿克图里安人）、`Cosmological Attunement`=宇宙调谐（Attunement 的定译是同调）两条**尚未就位**，故意不进这张表，先记在交接里等落盘。第十六轮收尾（2026-08-16e）再补 **14 条**，分两批：① 本轮已在 base 与产物**两层同时就位**的 9 条 —— `Arcturel` / `Arcturian` / `Arcturians`、`Cosmological Attunement`（这两条正是上一版记下的「尚未就位、先记在交接里」的欠账，**已还**）、`The Dives` / `the Dives`（大小写两种写法库里都出现，两条都登）、`Cosmos` / `Cosmic` / `Cosmological`；② 与本轮新裁的两组二分配套的 5 条 —— `Cosmology`、`Kessia` / `Kessian` / `Kessian Sand Knife`（见 R-kessia-vs-kessian）、`Ordani`（见 R-ordain-vs-ordani）。⚠ **`Cosmology` 必须登 want=「宇宙观」，登「宇宙」会立刻把这条断言打红** —— 不是裁决变了，是判据形状：`a_glossary_value` 比的是 `want in (got, got.split(\" \")[0])`，产物是「宇宙观 Cosmology」，取到的头部就是「宇宙观」，「宇宙」不等于它。锚点页名本身就是「宇宙观 Cosmology」，所以「宇宙观」才是这个**词表键**的正确值；R-cosmology-cosmos 里那条「Cosmological/Cosmology＝宇宙」管的是**正文里的泛指用法**（作普通名词/形容词的 cosmology、cosmological），两者不冲突，别互相回灌。⚠ **`Ordain` 故意不登**：base 里它是多义 list `[\"奥尔丹\",\"授命\"]`（城名／动词两义），`build_glossary` 的 base 层只收 str 直接跳过它，而 `a_glossary_value` 拿到 list 会判失败。同形的还有 `Shield`。多义词的看守归 R-ordain-vs-ordani 那种读库闸，不归词表值断言。⚠ 这 14 条能登的前提是 2026-08-16e 把 `build_glossary.py` 的 `format_only` 收紧了：旧判据含一个纯子串子句 `(b in cn_s)`，凡 base 值是 shipped 值的子串就被静默判成「只是双语格式差异」，3174 条 `baseVsShipped` 里因此**吃掉了 11 条真 dispute**（`Cosmology` 宇宙→宇宙观 · `Axe` 斧→斧头 · `Buckler` 圆盾→小圆盾 · `Pallid Drakeling` 幼龙→幼龙兽 · `Lyla Cevher` 莱拉→莱拉·杰夫赫尔 · `Ooze` 软泥怪→软泥 · `Elemental` 元素→元素生物 等）。收紧成「base 值 + 空格 + 英文」**整串相等**后共 **12** 条 dispute 现形并逐条裁掉（⚠ **11 与 12 不是同一口径，别当前后矛盾**：11 条是纯子串子句**独家**吃掉的，第 12 条 `Kessian Sand Knife` 本轮已另案在办、收紧后一并进桶）（多数是 shipped 对，base 改成 shipped 的裸中文；`Ooze` 按 name 叶裁 —— `scenes.Verdant Paths.regions.Ooze.name`＝软泥 是地表/区域，生物类别那一支仍由 base 的 `Oozes`＝软泥怪 与 byrole 的 `folders` 桶承担），产物 `glossary_ec.json` **一个值都没变**（7971 条逐键比对，差异 0）—— 也就是说这次收紧纯粹是把 11 条本该被人看见一次的裁决从判据里放出来，没有改动任何已发布译名。**`disputes` 现在是真 0，不是被判据吃掉的 0**",
    "kind": "glossary_value",
    "files": {
     "base": "..\\glossary_crucible_merged.json",
@@ -882,6 +882,30 @@
      ]
     }
    ]
+  },
+  {
+   "id": "R-moon-hollow",
+   "title": "The Hollow Moon = 空洞之月，「空心之月」已废",
+   "decision": "2026-08-15g（第十七轮，主控裁）",
+   "why": "Ember 的月亮各有一个英文尊号，中文此前三个都在分叉，且**分叉横跨同一本 journal 的不同页**（`Cosmos.pages.Attunement.text` 写「焦炭之月」，而同卷 `Cosmos.pages.Ragen.text/.subtitle` 写「焦灼之月」）。依据阶梯第 1 档：三组的 `Cosmos.pages.<月名>.subtitle` 叶（尊号的规范字段）全部站统一后的写法，且都是多数 —— 空洞 14:7 · 焦灼 12:3 · 风暴 19:1。**三条同族，成组定的，别单独推翻其中一条。** ⚠ **「空心之月」那 7 处是第十六轮批次 `ac-aura-moon-crucible-character.json` 自己写进去的**，属自伤：那一批本意只改 `Aura`（灵气→奥拉），却顺手把同叶的月亮尊号一起动了。**通则：整叶替换的批次，落盘前要单独核一遍它有没有顺手改掉同叶的别的术语。** ⚠ 判据边界：`cn_absent` 只抓旧写法回潮，抓不到「上游换了尊号而中文没跟」——那要靠 `scan_renamed_terms`。",
+   "kind": "cn_absent",
+   "cn": "空心之月"
+  },
+  {
+   "id": "R-moon-charred",
+   "title": "The Charred Moon = 焦灼之月，「焦炭之月」已废",
+   "decision": "2026-08-15g（第十七轮，主控裁）",
+   "why": "三个月亮尊号成组裁决之一，**完整依据与通则见 `R-moon-hollow` 的 why**。本条守的是「焦炭之月」不得回潮。",
+   "kind": "cn_absent",
+   "cn": "焦炭之月"
+  },
+  {
+   "id": "R-moon-tempest",
+   "title": "The Tempest Moon = 风暴之月，「狂澜之月」已废",
+   "decision": "2026-08-15g（第十七轮，主控裁）",
+   "why": "三个月亮尊号成组裁决之一，**完整依据与通则见 `R-moon-hollow` 的 why**。本条守的是「狂澜之月」不得回潮。",
+   "kind": "cn_absent",
+   "cn": "狂澜之月"
   }
  ]
 }

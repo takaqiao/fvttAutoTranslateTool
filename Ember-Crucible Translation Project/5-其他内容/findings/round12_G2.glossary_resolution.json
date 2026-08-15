@@ -1,0 +1,1354 @@
+{
+ "_meta": {
+  "who": "G2 / 第十二轮",
+  "what": "glossary_ec.disputes.json 的 197 条 base↔shipped 争议逐条裁决结果",
+  "how": "对每条用英文闸统计全库分布（en_leaves / shipped_gated），并以 `.name` 字段为权威",
+  "action_required": "把 base 层 C:\\Users\\Taka\\Desktop\\fvtt\\glossary_crucible_merged.json 里 base_fixes 的每个键改成 base_new；base_right 的两个键需要在产物侧压过 harvest；context_split 的 7 个键不要再进争议表"
+ },
+ "base_fixes": {
+  "Attunement": {
+   "base_old": "调谐",
+   "base_new": "同调 Attunement",
+   "en_leaves": 324,
+   "shipped_gated": 324,
+   "name_field": "同调 Attunement"
+  },
+  "Ancestries": {
+   "base_old": "祖裔",
+   "base_new": "血统 Ancestries",
+   "en_leaves": 132,
+   "shipped_gated": 132,
+   "name_field": "血统 Ancestries"
+  },
+  "Sockets": {
+   "base_old": "插孔",
+   "base_new": "萨克茨 Sockets",
+   "en_leaves": 127,
+   "shipped_gated": 127,
+   "name_field": "萨克茨 Sockets"
+  },
+  "Thornling": {
+   "base_old": "荆棘裔",
+   "base_new": "荆芽灵 Thornling",
+   "en_leaves": 116,
+   "shipped_gated": 116,
+   "name_field": "荆芽灵 Thornling"
+  },
+  "Spectra": {
+   "base_old": "光谱",
+   "base_new": "斯佩克特拉 Spectra",
+   "en_leaves": 103,
+   "shipped_gated": 103,
+   "name_field": "斯佩克特拉 Spectra"
+  },
+  "Kithil": {
+   "base_old": "奇希尔",
+   "base_new": "基希尔 Kithil",
+   "en_leaves": 99,
+   "shipped_gated": 99,
+   "name_field": "基希尔 Kithil"
+  },
+  "Marlstone Manor": {
+   "base_old": "马尔斯通庄园",
+   "base_new": "马尔石庄园 Marlstone Manor",
+   "en_leaves": 98,
+   "shipped_gated": 98,
+   "name_field": "马尔石庄园 Marlstone Manor"
+  },
+  "Agrimage": {
+   "base_old": "农法师",
+   "base_new": "农艺法师 Agrimage",
+   "en_leaves": 74,
+   "shipped_gated": 74,
+   "name_field": "农艺法师 Agrimage"
+  },
+  "Ragen Attunement": {
+   "base_old": "拉根调谐",
+   "base_new": "拉根同调 Ragen Attunement",
+   "en_leaves": 73,
+   "shipped_gated": 73,
+   "name_field": "拉根同调 Ragen Attunement"
+  },
+  "Warlock": {
+   "base_old": "术士",
+   "base_new": "邪术师 Warlock",
+   "en_leaves": 73,
+   "shipped_gated": 73,
+   "name_field": "邪术师 Warlock"
+  },
+  "Cora Attunement": {
+   "base_old": "科拉调谐",
+   "base_new": "科拉同调 Cora Attunement",
+   "en_leaves": 71,
+   "shipped_gated": 71,
+   "name_field": "科拉同调 Cora Attunement"
+  },
+  "Arrow": {
+   "base_old": "箭头",
+   "base_new": "箭矢 Arrow",
+   "en_leaves": 68,
+   "shipped_gated": 60,
+   "name_field": "箭矢 Arrow"
+  },
+  "Toothbreakers": {
+   "base_old": "碎牙者",
+   "base_new": "碎牙帮 Toothbreakers",
+   "en_leaves": 68,
+   "shipped_gated": 68,
+   "name_field": null
+  },
+  "Primordis Attunement": {
+   "base_old": "普里莫迪斯调谐",
+   "base_new": "普里莫迪斯同调 Primordis Attunement",
+   "en_leaves": 63,
+   "shipped_gated": 63,
+   "name_field": "普里莫迪斯同调 Primordis Attunement"
+  },
+  "Akon Attunement": {
+   "base_old": "阿肯调谐",
+   "base_new": "阿肯同调 Akon Attunement",
+   "en_leaves": 57,
+   "shipped_gated": 57,
+   "name_field": "阿肯同调 Akon Attunement"
+  },
+  "Heart Attunement": {
+   "base_old": "心之调谐",
+   "base_new": "心之同调 Heart Attunement",
+   "en_leaves": 57,
+   "shipped_gated": 57,
+   "name_field": "心之同调 Heart Attunement"
+  },
+  "Abyss Attunement": {
+   "base_old": "深渊调谐",
+   "base_new": "深渊同调 Abyss Attunement",
+   "en_leaves": 55,
+   "shipped_gated": 55,
+   "name_field": "深渊同调 Abyss Attunement"
+  },
+  "Cursed Vision": {
+   "base_old": "受诅视觉",
+   "base_new": "诅咒视觉 Cursed Vision",
+   "en_leaves": 52,
+   "shipped_gated": 52,
+   "name_field": "诅咒视觉 Cursed Vision"
+  },
+  "Luxarum Attunement": {
+   "base_old": "卢克萨鲁姆调谐",
+   "base_new": "卢克萨鲁姆同调 Luxarum Attunement",
+   "en_leaves": 51,
+   "shipped_gated": 51,
+   "name_field": "卢克萨鲁姆同调 Luxarum Attunement"
+  },
+  "Signara Attunement": {
+   "base_old": "西格纳拉调谐",
+   "base_new": "西格纳拉同调 Signara Attunement",
+   "en_leaves": 51,
+   "shipped_gated": 51,
+   "name_field": "西格纳拉同调 Signara Attunement"
+  },
+  "Aura Attunement": {
+   "base_old": "灵气调谐",
+   "base_new": "奥拉同调 Aura Attunement",
+   "en_leaves": 49,
+   "shipped_gated": 49,
+   "name_field": "奥拉同调 Aura Attunement"
+  },
+  "Mayis Attunement": {
+   "base_old": "梅伊丝调谐",
+   "base_new": "玛伊斯同调 Mayis Attunement",
+   "en_leaves": 47,
+   "shipped_gated": 47,
+   "name_field": "玛伊斯同调 Mayis Attunement"
+  },
+  "The Dives": {
+   "base_old": "底层区",
+   "base_new": "矿渊",
+   "en_leaves": 40,
+   "shipped_gated": 40,
+   "name_field": "矿渊 The Dives"
+  },
+  "Corvana Vortest": {
+   "base_old": "科瓦娜·沃尔特斯特",
+   "base_new": "科瓦娜·沃特斯特 Corvana Vortest",
+   "en_leaves": 38,
+   "shipped_gated": 38,
+   "name_field": "科瓦娜·沃特斯特 Corvana Vortest"
+  },
+  "Agrimage Circle": {
+   "base_old": "农法师环会",
+   "base_new": "农艺法师环会 Agrimage Circle",
+   "en_leaves": 37,
+   "shipped_gated": 35,
+   "name_field": "农艺法师环会 Agrimage Circle"
+  },
+  "Orbis Attunement": {
+   "base_old": "奥比斯调谐",
+   "base_new": "奥比斯同调 Orbis Attunement",
+   "en_leaves": 35,
+   "shipped_gated": 35,
+   "name_field": "奥比斯同调 Orbis Attunement"
+  },
+  "Rallyhome": {
+   "base_old": "拉力之家",
+   "base_new": "聚归馆",
+   "en_leaves": 35,
+   "shipped_gated": 35,
+   "name_field": "聚归馆 Rallyhome"
+  },
+  "Carrow": {
+   "base_old": "卡罗ว์",
+   "base_new": "卡罗 Carrow",
+   "en_leaves": 31,
+   "shipped_gated": 31,
+   "name_field": "卡罗 Carrow"
+  },
+  "Toothbreaker Thug": {
+   "base_old": "碎齿暴徒",
+   "base_new": "碎牙帮暴徒 Toothbreaker Thug",
+   "en_leaves": 30,
+   "shipped_gated": 30,
+   "name_field": "碎牙帮暴徒 Toothbreaker Thug"
+  },
+  "The Ordinate": {
+   "base_old": "法序议会",
+   "base_new": "审序院 The Ordinate",
+   "en_leaves": 26,
+   "shipped_gated": 26,
+   "name_field": "审序院 The Ordinate"
+  },
+  "Lake Jinro Lunar Shrine": {
+   "base_old": "锦露湖月神殿",
+   "base_new": "金罗湖月神殿 Lake Jinro Lunar Shrine",
+   "en_leaves": 24,
+   "shipped_gated": 24,
+   "name_field": "金罗湖月神殿 Lake Jinro Lunar Shrine"
+  },
+  "Traveler's Rest Key": {
+   "base_old": "旅者歇息所钥匙",
+   "base_new": "旅者歇脚处钥匙 Traveler's Rest Key",
+   "en_leaves": 22,
+   "shipped_gated": 22,
+   "name_field": "旅者歇脚处钥匙 Traveler's Rest Key"
+  },
+  "Yawning Sea": {
+   "base_old": "哈欠之海",
+   "base_new": "巨口之海 Yawning Sea",
+   "en_leaves": 21,
+   "shipped_gated": 4,
+   "name_field": "巨口之海 Yawning Sea"
+  },
+  "Mutagist Vivisector": {
+   "base_old": "突变派活体解剖师",
+   "base_new": "突变学派活体解剖师 Mutagist Vivisector",
+   "en_leaves": 18,
+   "shipped_gated": 18,
+   "name_field": "突变学派活体解剖师 Mutagist Vivisector"
+  },
+  "Silver Beam Sentinel": {
+   "base_old": "白银光束哨卫",
+   "base_new": "银光束哨卫 Silver Beam Sentinel",
+   "en_leaves": 18,
+   "shipped_gated": 18,
+   "name_field": "银光束哨卫 Silver Beam Sentinel"
+  },
+  "Electricity Absorption": {
+   "base_old": "电能吸收",
+   "base_new": "电击吸收 Electricity Absorption",
+   "en_leaves": 16,
+   "shipped_gated": 16,
+   "name_field": "电击吸收 Electricity Absorption"
+  },
+  "Mutagist Grenadier": {
+   "base_old": "突变投弹手",
+   "base_new": "突变学派投弹手 Mutagist Grenadier",
+   "en_leaves": 16,
+   "shipped_gated": 16,
+   "name_field": "突变学派投弹手 Mutagist Grenadier"
+  },
+  "Stiletto": {
+   "base_old": "细剑",
+   "base_new": "锥刺匕首 Stiletto",
+   "en_leaves": 16,
+   "shipped_gated": 16,
+   "name_field": "锥刺匕首 Stiletto"
+  },
+  "Hephiss' Keys": {
+   "base_old": "赫菲斯的钥匙",
+   "base_new": "赫菲丝的钥匙 Hephiss' Keys",
+   "en_leaves": 15,
+   "shipped_gated": 13,
+   "name_field": "赫菲丝的钥匙 Hephiss' Keys"
+  },
+  "Highgate": {
+   "base_old": "海门",
+   "base_new": "高门 Highgate",
+   "en_leaves": 14,
+   "shipped_gated": 14,
+   "name_field": "高门 Highgate"
+  },
+  "Shadowbox Alley": {
+   "base_old": "影匣小巷",
+   "base_new": "暗箱小巷",
+   "en_leaves": 14,
+   "shipped_gated": 12,
+   "name_field": null
+  },
+  "Steading": {
+   "base_old": "庄园",
+   "base_new": "耕耘 Steading",
+   "en_leaves": 14,
+   "shipped_gated": 14,
+   "name_field": "耕耘 Steading"
+  },
+  "Toothbreaker Scaletamer": {
+   "base_old": "碎齿驯鳞者",
+   "base_new": "碎牙帮驯鳞者 Toothbreaker Scaletamer",
+   "en_leaves": 14,
+   "shipped_gated": 14,
+   "name_field": "碎牙帮驯鳞者 Toothbreaker Scaletamer"
+  },
+  "Otherhood Raider": {
+   "base_old": "同袍会劫掠者",
+   "base_new": "异姊会劫掠者 Otherhood Raider",
+   "en_leaves": 13,
+   "shipped_gated": 12,
+   "name_field": "异姊会劫掠者 Otherhood Raider"
+  },
+  "Shocked": {
+   "base_old": "电击",
+   "base_new": "感电 Shocked",
+   "en_leaves": 13,
+   "shipped_gated": 13,
+   "name_field": "感电 Shocked"
+  },
+  "Anachraenum Member": {
+   "base_old": "阿纳克雷努姆成员",
+   "base_new": "阿纳克瑞纽姆成员 Anachraenum Member",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "阿纳克瑞纽姆成员 Anachraenum Member"
+  },
+  "Corrupted Kezus Jelly": {
+   "base_old": "腐化凯祖斯水母",
+   "base_new": "腐化凯祖斯果冻 Corrupted Kezus Jelly",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "腐化凯祖斯果冻 Corrupted Kezus Jelly"
+  },
+  "Mutagist Bombardier": {
+   "base_old": "突变派爆击手",
+   "base_new": "突变学派爆击手 Mutagist Bombardier",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "突变学派爆击手 Mutagist Bombardier"
+  },
+  "Ordani Ruffian": {
+   "base_old": "奥达尼恶棍",
+   "base_new": "奥尔达尼恶棍 Ordani Ruffian",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "奥尔达尼恶棍 Ordani Ruffian"
+  },
+  "Silver Beam Guard": {
+   "base_old": "银色光束卫兵",
+   "base_new": "银光束卫兵 Silver Beam Guard",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "银光束卫兵 Silver Beam Guard"
+  },
+  "Toothbreaker Prison Key": {
+   "base_old": "碎齿者监牢钥匙",
+   "base_new": "碎牙帮监牢钥匙 Toothbreaker Prison Key",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "碎牙帮监牢钥匙 Toothbreaker Prison Key"
+  },
+  "Toothbreaker Security Key": {
+   "base_old": "碎齿者安保钥匙",
+   "base_new": "碎牙帮安保钥匙 Toothbreaker Security Key",
+   "en_leaves": 12,
+   "shipped_gated": 12,
+   "name_field": "碎牙帮安保钥匙 Toothbreaker Security Key"
+  },
+  "Mutagist Excisor": {
+   "base_old": "嬗变师切除者",
+   "base_new": "突变学派切除者 Mutagist Excisor",
+   "en_leaves": 11,
+   "shipped_gated": 11,
+   "name_field": "突变学派切除者 Mutagist Excisor"
+  },
+  "Anachraenum Medallion": {
+   "base_old": "阿纳克拉埃努姆徽章",
+   "base_new": "阿纳克瑞纽姆徽章 Anachraenum Medallion",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "阿纳克瑞纽姆徽章 Anachraenum Medallion"
+  },
+  "Gore Bird Swarm": {
+   "base_old": "血食鸟群",
+   "base_new": "血鸟群",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "血鸟群"
+  },
+  "Helkas Green": {
+   "base_old": "赫尔卡斯·格林",
+   "base_new": "赫尔卡斯绿地 Helkas Green",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "赫尔卡斯绿地 Helkas Green"
+  },
+  "Hephiss' Study": {
+   "base_old": "赫菲斯的书房",
+   "base_new": "赫菲丝的书房 Hephiss' Study",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "赫菲丝的书房 Hephiss' Study"
+  },
+  "Scalemaw Training": {
+   "base_old": "鳞颚训练",
+   "base_new": "鳞颚兽训练 Scalemaw Training",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "鳞颚兽训练 Scalemaw Training"
+  },
+  "Temple of Ku'arta Key": {
+   "base_old": "库阿尔塔神殿钥匙",
+   "base_new": "库阿塔神殿钥匙 Temple of Ku'arta Key",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "库阿塔神殿钥匙 Temple of Ku'arta Key"
+  },
+  "The Marlstone Gala": {
+   "base_old": "马尔斯通晚会",
+   "base_new": "马尔石晚会 The Marlstone Gala",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "马尔石晚会 The Marlstone Gala"
+  },
+  "The Waterworks": {
+   "base_old": "水务办公室",
+   "base_new": "水务工程",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": null
+  },
+  "Toothbreaker Planning Key": {
+   "base_old": "碎齿者规划室钥匙",
+   "base_new": "碎牙帮规划室钥匙 Toothbreaker Planning Key",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "碎牙帮规划室钥匙 Toothbreaker Planning Key"
+  },
+  "Venomous Bite": {
+   "base_old": "剧毒噬咬",
+   "base_new": "剧毒啃咬 Venomous Bite",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": "剧毒啃咬 Venomous Bite"
+  },
+  "Wind Raiders": {
+   "base_old": "风掠者",
+   "base_new": "风袭劫掠者 Wind Raiders",
+   "en_leaves": 10,
+   "shipped_gated": 10,
+   "name_field": null
+  },
+  "Waterborne Whiskey": {
+   "base_old": "水运威士忌",
+   "base_new": "沃特伯恩威士忌 Waterborne Whiskey",
+   "en_leaves": 9,
+   "shipped_gated": 9,
+   "name_field": "沃特伯恩威士忌 Waterborne Whiskey"
+  },
+  "Anachraenum Adventurer": {
+   "base_old": "阿纳克雷努姆冒险者",
+   "base_new": "阿纳克瑞纽姆冒险者 Anachraenum Adventurer",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "阿纳克瑞纽姆冒险者 Anachraenum Adventurer"
+  },
+  "Breaking the Tower": {
+   "base_old": "摧毁高塔",
+   "base_new": "破塔而出 Breaking the Tower",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "破塔而出 Breaking the Tower"
+  },
+  "Cascillian Rebreather": {
+   "base_old": "卡斯奇利安再呼吸器",
+   "base_new": "卡斯奇利亚再呼吸器 Cascillian Rebreather",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "卡斯奇利亚再呼吸器 Cascillian Rebreather"
+  },
+  "Checkmate for Chessmen": {
+   "base_old": "棋子的将死",
+   "base_new": "棋士的将死 Checkmate for Chessmen",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "棋士的将死 Checkmate for Chessmen"
+  },
+  "Garganthus Hide": {
+   "base_old": "加甘图斯兽皮",
+   "base_new": "加甘萨斯兽皮 Garganthus Hide",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "加甘萨斯兽皮 Garganthus Hide"
+  },
+  "Mutagist Scout": {
+   "base_old": "变异学者斥候",
+   "base_new": "突变学派斥候 Mutagist Scout",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "突变学派斥候 Mutagist Scout"
+  },
+  "Signarans": {
+   "base_old": "希格纳兰人",
+   "base_new": "西格纳兰人 Signarans",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": null
+  },
+  "The Moon Child of Lake Jinro": {
+   "base_old": "锦露湖的月之子",
+   "base_new": "金罗湖的月之子 The Moon Child of Lake Jinro",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "金罗湖的月之子 The Moon Child of Lake Jinro"
+  },
+  "Tomb of Spectra's Chosen": {
+   "base_old": "光谱之选民的坟墓",
+   "base_new": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen"
+  },
+  "Traveler's Rest Itinerant": {
+   "base_old": "旅者歇息处旅人",
+   "base_new": "旅者歇脚处旅人 Traveler's Rest Itinerant",
+   "en_leaves": 8,
+   "shipped_gated": 8,
+   "name_field": "旅者歇脚处旅人 Traveler's Rest Itinerant"
+  },
+  "Focused Reactivity": {
+   "base_old": "聚焦反应性",
+   "base_new": "专注反应 Focused Reactivity",
+   "en_leaves": 7,
+   "shipped_gated": 7,
+   "name_field": "专注反应 Focused Reactivity"
+  },
+  "Kivahr Lineage": {
+   "base_old": "基瓦赫血统",
+   "base_new": "基瓦尔血统 Kivahr Lineage",
+   "en_leaves": 7,
+   "shipped_gated": 7,
+   "name_field": "基瓦尔血统 Kivahr Lineage"
+  },
+  "Assembly Area": {
+   "base_old": "集结区域",
+   "base_new": "装配区 Assembly Area",
+   "en_leaves": 6,
+   "shipped_gated": 4,
+   "name_field": "装配区 Assembly Area"
+  },
+  "Barrel Room Key": {
+   "base_old": "桶间钥匙",
+   "base_new": "木桶房钥匙 Barrel Room Key",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "木桶房钥匙 Barrel Room Key"
+  },
+  "Carmin Anther": {
+   "base_old": "卡尔敏花药",
+   "base_new": "卡尔敏·安瑟 Carmin Anther",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "卡尔敏·安瑟 Carmin Anther"
+  },
+  "Cascillian Autotool": {
+   "base_old": "卡斯奇利安自动工具",
+   "base_new": "卡斯奇利亚自动工具 Cascillian Autotool",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "卡斯奇利亚自动工具 Cascillian Autotool"
+  },
+  "Charged Bite": {
+   "base_old": "充能啃咬",
+   "base_new": "带电啃咬 Charged Bite",
+   "en_leaves": 6,
+   "shipped_gated": 5,
+   "name_field": "带电啃咬 Charged Bite"
+  },
+  "Electrocharge Ampoule": {
+   "base_old": "电荷安瓿瓶",
+   "base_new": "电荷安瓿 Electrocharge Ampoule",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "电荷安瓿 Electrocharge Ampoule"
+  },
+  "Elevator Glyphstone": {
+   "base_old": "电梯符石",
+   "base_new": "升降机符石 Elevator Glyphstone",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "升降机符石 Elevator Glyphstone"
+  },
+  "Firebug's Leather": {
+   "base_old": "萤火虫的皮革",
+   "base_new": "纵火虫的皮革 Firebug's Leather",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "纵火虫的皮革 Firebug's Leather"
+  },
+  "Garganthus Tunnel": {
+   "base_old": "加冈瑟斯隧道",
+   "base_new": "加甘萨斯隧道 Garganthus Tunnel",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "加甘萨斯隧道 Garganthus Tunnel"
+  },
+  "Giant Corrupted Kezus Jelly": {
+   "base_old": "巨型堕化凯祖斯水母",
+   "base_new": "巨型腐化凯祖斯果冻 Giant Corrupted Kezus Jelly",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "巨型腐化凯祖斯果冻 Giant Corrupted Kezus Jelly"
+  },
+  "Giant Moonstone": {
+   "base_old": "巨型月长石",
+   "base_new": "巨型月石 Giant Moonstone",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "巨型月石 Giant Moonstone"
+  },
+  "Grave Blade Shore": {
+   "base_old": "墓刃海岸",
+   "base_new": "墓刃湖岸 Grave Blade Shore",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "墓刃湖岸 Grave Blade Shore"
+  },
+  "Hephiss' Chambers": {
+   "base_old": "赫菲斯的寝室",
+   "base_new": "赫菲丝的寝室 Hephiss' Chambers",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "赫菲丝的寝室 Hephiss' Chambers"
+  },
+  "Hephiss' Downstairs Closet": {
+   "base_old": "赫菲斯的楼下壁橱",
+   "base_new": "赫菲丝的楼下壁橱 Hephiss' Downstairs Closet",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "赫菲丝的楼下壁橱 Hephiss' Downstairs Closet"
+  },
+  "Letter from Sigil": {
+   "base_old": "来自希吉尔的信",
+   "base_new": "来自西吉尔的信 Letter from Sigil",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "来自西吉尔的信 Letter from Sigil"
+  },
+  "Marlstone Manor Entrance": {
+   "base_old": "马尔斯通庄园入口",
+   "base_new": "马尔石庄园入口 Marlstone Manor Entrance",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "马尔石庄园入口 Marlstone Manor Entrance"
+  },
+  "Mine Elevator": {
+   "base_old": "矿井电梯",
+   "base_new": "矿井升降机 Mine Elevator",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "矿井升降机 Mine Elevator"
+  },
+  "Ordain Gazetteer": {
+   "base_old": "奥尔丹地志",
+   "base_new": "奥尔丹地名志 Ordain Gazetteer",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "奥尔丹地名志 Ordain Gazetteer"
+  },
+  "Otherhood Brigand": {
+   "base_old": "异域母性强盗",
+   "base_new": "异姊会强盗 Otherhood Brigand",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "异姊会强盗 Otherhood Brigand"
+  },
+  "Pestilent Retch": {
+   "base_old": "瘟疫呕吐",
+   "base_new": "疫病呕吐 Pestilent Retch",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "疫病呕吐 Pestilent Retch"
+  },
+  "Poolside Predicaments": {
+   "base_old": "泳池边的困境",
+   "base_new": "水潭边的困境 Poolside Predicaments",
+   "en_leaves": 6,
+   "shipped_gated": 4,
+   "name_field": "水潭边的困境 Poolside Predicaments"
+  },
+  "Precise": {
+   "base_old": "精确的",
+   "base_new": "精准 Precise",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "精准 Precise"
+  },
+  "Primalist Disciple": {
+   "base_old": "原始信徒弟子",
+   "base_new": "原始主义弟子 Primalist Disciple",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "原始主义弟子 Primalist Disciple"
+  },
+  "Quickwater": {
+   "base_old": "激流水",
+   "base_new": "急流水 Quickwater",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "急流水 Quickwater"
+  },
+  "Silver Beam Uniform": {
+   "base_old": "银色光束制服",
+   "base_new": "银光束制服 Silver Beam Uniform",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "银光束制服 Silver Beam Uniform"
+  },
+  "Southern Sitting Room": {
+   "base_old": "南会客室",
+   "base_new": "南侧起居室 Southern Sitting Room",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "南侧起居室 Southern Sitting Room"
+  },
+  "Stone Life": {
+   "base_old": "石料生命",
+   "base_new": "石之生命 Stone Life",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "石之生命 Stone Life"
+  },
+  "Sunfire Descendant": {
+   "base_old": "烈阳后裔",
+   "base_new": "阳炎后裔 Sunfire Descendant",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "阳炎后裔 Sunfire Descendant"
+  },
+  "Terracini's Tavern": {
+   "base_old": "泰拉奇尼酒馆",
+   "base_new": "特拉奇尼酒馆 Terracini's Tavern",
+   "en_leaves": 6,
+   "shipped_gated": 4,
+   "name_field": "特拉奇尼酒馆 Terracini's Tavern"
+  },
+  "The Armarium": {
+   "base_old": "军械库",
+   "base_new": "阿玛留姆 The Armarium",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "阿玛留姆 The Armarium"
+  },
+  "The Signborn's Secret": {
+   "base_old": "印记者的秘密",
+   "base_new": "印记裔的秘密 The Signborn's Secret",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "印记裔的秘密 The Signborn's Secret"
+  },
+  "Underworld Mechanic": {
+   "base_old": "冥界机修师",
+   "base_new": "地下机械师 Underworld Mechanic",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "地下机械师 Underworld Mechanic"
+  },
+  "Western Storage Alcove": {
+   "base_old": "西侧储物壁龛",
+   "base_new": "西部储藏壁龛 Western Storage Alcove",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "西部储藏壁龛 Western Storage Alcove"
+  },
+  "Yakoshta Junction Wheel": {
+   "base_old": "亚科什塔路口轮盘",
+   "base_new": "雅科什塔路口轮盘 Yakoshta Junction Wheel",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "雅科什塔路口轮盘 Yakoshta Junction Wheel"
+  },
+  "Young Cheliceraeth": {
+   "base_old": "幼年螯蛛以太兽",
+   "base_new": "幼年螯蛛艾斯 Young Cheliceraeth",
+   "en_leaves": 6,
+   "shipped_gated": 6,
+   "name_field": "幼年螯蛛艾斯 Young Cheliceraeth"
+  },
+  "Heater Shield": {
+   "base_old": "鸢形盾",
+   "base_new": "熨斗盾 Heater Shield",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "熨斗盾 Heater Shield"
+  },
+  "Lumarin Steel": {
+   "base_old": "鲁玛林钢",
+   "base_new": "卢马林钢 Lumarin Steel",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "卢马林钢 Lumarin Steel"
+  },
+  "Lunar Tattoos": {
+   "base_old": "月纹身",
+   "base_new": "月相纹身 Lunar Tattoos",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "月相纹身 Lunar Tattoos"
+  },
+  "Orcish": {
+   "base_old": "兽人语",
+   "base_new": "兽人 Orcish",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "兽人 Orcish"
+  },
+  "Passionate Trader": {
+   "base_old": "热情的商人",
+   "base_new": "热忱商贩 Passionate Trader",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "热忱商贩 Passionate Trader"
+  },
+  "Pestilent Bite": {
+   "base_old": "疫病之咬",
+   "base_new": "疫病啃咬 Pestilent Bite",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "疫病啃咬 Pestilent Bite"
+  },
+  "Radiant Absorption": {
+   "base_old": "辉光吸收",
+   "base_new": "光耀吸收 Radiant Absorption",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "光耀吸收 Radiant Absorption"
+  },
+  "Sionia's Blessing": {
+   "base_old": "西奥妮娅的祝福",
+   "base_new": "希俄尼娅的祝福 Sionia's Blessing",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "希俄尼娅的祝福 Sionia's Blessing"
+  },
+  "Thornling Lineage": {
+   "base_old": "荆棘裔血统",
+   "base_new": "荆芽灵血统 Thornling Lineage",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "荆芽灵血统 Thornling Lineage"
+  },
+  "Toothbreaker Throne Room Key": {
+   "base_old": "碎齿者王座室钥匙",
+   "base_new": "碎牙帮王座室钥匙 Toothbreaker Throne Room Key",
+   "en_leaves": 5,
+   "shipped_gated": 5,
+   "name_field": "碎牙帮王座室钥匙 Toothbreaker Throne Room Key"
+  },
+  "Aedir Wellstone": {
+   "base_old": "艾狄尔井石",
+   "base_new": "艾迪尔井石 Aedir Wellstone",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "艾迪尔井石 Aedir Wellstone"
+  },
+  "Agraband's Kithara": {
+   "base_old": "阿格拉班德的西萨拉琴",
+   "base_new": "阿格拉班德的基萨拉琴 Agraband's Kithara",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "阿格拉班德的基萨拉琴 Agraband's Kithara"
+  },
+  "Amaranthine Archives Artifacts": {
+   "base_old": "安玛兰辛档案馆神器",
+   "base_new": "绛华档案库古器 Amaranthine Archives Artifacts",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "绛华档案库古器 Amaranthine Archives Artifacts"
+  },
+  "Bloody Gorge": {
+   "base_old": "血腥峡谷",
+   "base_new": "血腥吞噬 Bloody Gorge",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "血腥吞噬 Bloody Gorge"
+  },
+  "Call Skither": {
+   "base_old": "呼唤斯基瑟尔",
+   "base_new": "呼唤斯基瑟 Call Skither",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "呼唤斯基瑟 Call Skither"
+  },
+  "Copy of Hephiss' Keys": {
+   "base_old": "赫菲斯钥匙的副本",
+   "base_new": "赫菲丝钥匙的副本 Copy of Hephiss' Keys",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "赫菲丝钥匙的副本 Copy of Hephiss' Keys"
+  },
+  "Duskmaw's Gavel": {
+   "base_old": "暮颚的法槌",
+   "base_new": "暮噬的法槌 Duskmaw's Gavel",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "暮噬的法槌 Duskmaw's Gavel"
+  },
+  "Elvish": {
+   "base_old": "精灵语",
+   "base_new": "精灵 Elvish",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "精灵 Elvish"
+  },
+  "Ethereal Appendages": {
+   "base_old": "灵体附肢",
+   "base_new": "灵界肢体 Ethereal Appendages",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "灵界肢体 Ethereal Appendages"
+  },
+  "Excellent Evidence Collection": {
+   "base_old": "优秀证据收集",
+   "base_new": "证据收集：优秀",
+   "en_leaves": 4,
+   "shipped_gated": 2,
+   "name_field": null
+  },
+  "Gala Security To-Dos": {
+   "base_old": "庆典安保待办事项",
+   "base_new": "晚会安保待办清单",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "晚会安保待办清单"
+  },
+  "Glyphweaving Novice": {
+   "base_old": "符纹编织新手",
+   "base_new": "符文编织新手 Glyphweaving Novice",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "符文编织新手 Glyphweaving Novice"
+  },
+  "Good Evidence Collection": {
+   "base_old": "良好证据收集",
+   "base_new": "证据收集：良好",
+   "en_leaves": 4,
+   "shipped_gated": 2,
+   "name_field": null
+  },
+  "Hydroxol Stomach Contents": {
+   "base_old": "羟胃龙的胃内容物",
+   "base_new": "羟氧醇的胃内容物 Hydroxol Stomach Contents",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "羟氧醇的胃内容物 Hydroxol Stomach Contents"
+  },
+  "Impossible Skin": {
+   "base_old": "无形皮肤",
+   "base_new": "不可能之皮 Impossible Skin",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "不可能之皮 Impossible Skin"
+  },
+  "Justiciar": {
+   "base_old": "审判官",
+   "base_new": "执法官 Justiciar",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "执法官 Justiciar"
+  },
+  "Loot-Lined Hollow": {
+   "base_old": "藏宝空谷",
+   "base_new": "藏宝树洞 Loot-Lined Hollow",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "藏宝树洞 Loot-Lined Hollow"
+  },
+  "Multifaceted": {
+   "base_old": "多面手",
+   "base_new": "多面棱晶 Multifaceted",
+   "en_leaves": 4,
+   "shipped_gated": 2,
+   "name_field": "多面棱晶 Multifaceted"
+  },
+  "Mutagist Clothing": {
+   "base_old": "变异师服装",
+   "base_new": "突变学派服装 Mutagist Clothing",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "突变学派服装 Mutagist Clothing"
+  },
+  "Poor Evidence Collection": {
+   "base_old": "低劣证据收集",
+   "base_new": "证据收集：低劣",
+   "en_leaves": 4,
+   "shipped_gated": 2,
+   "name_field": null
+  },
+  "Rumors in Rock Bottom": {
+   "base_old": "岩底流言",
+   "base_new": "石底镇流言 Rumors in Rock Bottom",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "石底镇流言 Rumors in Rock Bottom"
+  },
+  "Sanguinary Druid": {
+   "base_old": "血腥德鲁伊",
+   "base_new": "赤血会德鲁伊",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": null
+  },
+  "Satchel of Marlstone Decor": {
+   "base_old": "马尔斯通装饰挎包",
+   "base_new": "马尔石装饰挎包 Satchel of Marlstone Decor",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "马尔石装饰挎包 Satchel of Marlstone Decor"
+  },
+  "Shrouded Borehole Challenges": {
+   "base_old": "幽蔽钻孔挑战",
+   "base_new": "隐蔽钻孔挑战 Shrouded Borehole Challenges",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "隐蔽钻孔挑战 Shrouded Borehole Challenges"
+  },
+  "Signborn Lineage": {
+   "base_old": "星兆血统",
+   "base_new": "印记裔血统 Signborn Lineage",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "印记裔血统 Signborn Lineage"
+  },
+  "Silver Beam Sentinel Moments": {
+   "base_old": "银色光束哨兵时刻",
+   "base_new": "银光束哨卫时刻 Silver Beam Sentinel Moments",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "银光束哨卫时刻 Silver Beam Sentinel Moments"
+  },
+  "Toothbreaker Storage Key": {
+   "base_old": "碎齿者储藏室钥匙",
+   "base_new": "碎牙帮储藏室钥匙 Toothbreaker Storage Key",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "碎牙帮储藏室钥匙 Toothbreaker Storage Key"
+  },
+  "Well of Orbis Echoes": {
+   "base_old": "欧比斯回声之井",
+   "base_new": "奥比斯回声之井 Well of Orbis Echoes",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "奥比斯回声之井 Well of Orbis Echoes"
+  },
+  "Wirrun Lineage": {
+   "base_old": "维伦血统",
+   "base_new": "威伦血统 Wirrun Lineage",
+   "en_leaves": 4,
+   "shipped_gated": 4,
+   "name_field": "威伦血统 Wirrun Lineage"
+  },
+  "Boons and Banes": {
+   "base_old": "恩惠与祸骰",
+   "base_new": "恩惠骰与祸骰 Boons and Banes",
+   "en_leaves": 3,
+   "shipped_gated": 3,
+   "name_field": "恩惠骰与祸骰 Boons and Banes"
+  },
+  "Resilient": {
+   "base_old": "坚韧",
+   "base_new": "复原体质 Resilient",
+   "en_leaves": 3,
+   "shipped_gated": 2,
+   "name_field": "复原体质 Resilient"
+  },
+  "Altar of Orbis": {
+   "base_old": "欧比斯祭坛",
+   "base_new": "奥比斯祭坛 Altar of Orbis",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "奥比斯祭坛 Altar of Orbis"
+  },
+  "Bleak Archive Relic": {
+   "base_old": "黯晦档案遗物",
+   "base_new": "黯淡秘库遗物 Bleak Archive Relic",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "黯淡秘库遗物 Bleak Archive Relic"
+  },
+  "Burnished Hand Plate": {
+   "base_old": "抛光手部板甲",
+   "base_new": "辉手板甲 Burnished Hand Plate",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "辉手板甲 Burnished Hand Plate"
+  },
+  "Disarming Toolkit": {
+   "base_old": "解除武装工具包",
+   "base_new": "解除陷阱工具包 Disarming Toolkit",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "解除陷阱工具包 Disarming Toolkit"
+  },
+  "Earth Sprite": {
+   "base_old": "土精灵",
+   "base_new": "大地精灵",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "大地精灵 Earth Sprite"
+  },
+  "Golden Weapon": {
+   "base_old": "金色武器",
+   "base_new": "黄金武器 Golden Weapon",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "黄金武器 Golden Weapon"
+  },
+  "Guard Mess": {
+   "base_old": "警卫餐厅",
+   "base_new": "守卫餐厅 Guard Mess",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "守卫餐厅 Guard Mess"
+  },
+  "Hephiss' Bathroom": {
+   "base_old": "赫菲斯的浴室",
+   "base_new": "赫菲丝的浴室 Hephiss' Bathroom",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "赫菲丝的浴室 Hephiss' Bathroom"
+  },
+  "Hephiss' Closet": {
+   "base_old": "赫菲斯的衣橱",
+   "base_new": "赫菲丝的衣橱 Hephiss' Closet",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "赫菲丝的衣橱 Hephiss' Closet"
+  },
+  "In League with Silver Beam": {
+   "base_old": "与银色光束结盟",
+   "base_new": "与银光束结盟 In League with Silver Beam",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "与银光束结盟 In League with Silver Beam"
+  },
+  "Kinesis Proficiency": {
+   "base_old": "念动力熟练度",
+   "base_new": "念力熟练度 Kinesis Proficiency",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "念力熟练度 Kinesis Proficiency"
+  },
+  "Kineturge": {
+   "base_old": "念动力术师",
+   "base_new": "念力术师 Kineturge",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "念力术师 Kineturge"
+  },
+  "Looking Into Lilifeld Station": {
+   "base_old": "调查莉莉菲尔德站",
+   "base_new": "调查莉莉菲尔德驿站 Looking Into Lilifeld Station",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "调查莉莉菲尔德驿站 Looking Into Lilifeld Station"
+  },
+  "Marlstone Staff Key": {
+   "base_old": "马尔斯通职员钥匙",
+   "base_new": "马尔石职员钥匙 Marlstone Staff Key",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "马尔石职员钥匙 Marlstone Staff Key"
+  },
+  "Masterwork Jeweled Ring": {
+   "base_old": "精制珠宝戒指",
+   "base_new": "大师级珠宝戒指 Masterwork Jeweled Ring",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "大师级珠宝戒指 Masterwork Jeweled Ring"
+  },
+  "Pathways Gazetteer": {
+   "base_old": "《通途公报》",
+   "base_new": "通路地名志 Pathways Gazetteer",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "通路地名志 Pathways Gazetteer"
+  },
+  "Pit Trap Bouncer": {
+   "base_old": "坑陷阱弹跳器",
+   "base_new": "陷坑打手",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": null
+  },
+  "Rotating Elevator": {
+   "base_old": "旋转电梯",
+   "base_new": "旋转升降机 Rotating Elevator",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "旋转升降机 Rotating Elevator"
+  },
+  "Sanguinary Correspondence": {
+   "base_old": "血书往来",
+   "base_new": "赤血会信函 Sanguinary Correspondence",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "赤血会信函 Sanguinary Correspondence"
+  },
+  "Shrine to Spectra": {
+   "base_old": "光谱圣祠",
+   "base_new": "斯佩克特拉圣祠 Shrine to Spectra",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "斯佩克特拉圣祠 Shrine to Spectra"
+  },
+  "Smoldering Shelter": {
+   "base_old": "闷燃庇护所",
+   "base_new": "阴燃庇护所 Smoldering Shelter",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "阴燃庇护所 Smoldering Shelter"
+  },
+  "Tactical Planner": {
+   "base_old": "战术规划师",
+   "base_new": "战术策划者 Tactical Planner",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "战术策划者 Tactical Planner"
+  },
+  "The Arcageris": {
+   "base_old": "奥术巨龙",
+   "base_new": "阿卡杰里斯 The Arcageris",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "阿卡杰里斯 The Arcageris"
+  },
+  "The Barracks": {
+   "base_old": "营房",
+   "base_new": "兵营 The Barracks",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "兵营 The Barracks"
+  },
+  "The Situation in Skybrush": {
+   "base_old": "天刷城的局势",
+   "base_new": "天刷镇的局势 The Situation in Skybrush",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "天刷镇的局势 The Situation in Skybrush"
+  },
+  "Toothbreaker Rumors": {
+   "base_old": "碎牙传闻",
+   "base_new": "碎牙帮传闻 Toothbreaker Rumors",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "碎牙帮传闻 Toothbreaker Rumors"
+  },
+  "Urban Resourcefulness": {
+   "base_old": "都市机敏",
+   "base_new": "市井机变 Urban Resourcefulness",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "市井机变 Urban Resourcefulness"
+  },
+  "Vrjnhar Lineage": {
+   "base_old": "Vrjnhar 血统",
+   "base_new": "弗尔金哈尔血统 Vrjnhar Lineage",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "弗尔金哈尔血统 Vrjnhar Lineage"
+  },
+  "Yakoshta Mine Track Switches": {
+   "base_old": "雅科什塔矿井轨道道岔",
+   "base_new": "雅科什塔矿井轨道切换器 Yakoshta Mine Track Switches",
+   "en_leaves": 2,
+   "shipped_gated": 2,
+   "name_field": "雅科什塔矿井轨道切换器 Yakoshta Mine Track Switches"
+  },
+  "Afflicted Thornling": {
+   "base_old": "受折磨的荆棘裔",
+   "base_new": "受折磨的荆芽灵",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": null
+  },
+  "Amulet of Nimbleness": {
+   "base_old": "灵巧护符",
+   "base_new": "轻捷护符 Amulet of Nimbleness",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": "轻捷护符 Amulet of Nimbleness"
+  },
+  "Charm of Tenacity": {
+   "base_old": "坚韧护符",
+   "base_new": "顽强护符 Charm of Tenacity",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": "顽强护符 Charm of Tenacity"
+  },
+  "Frost Visitor": {
+   "base_old": "霜访者",
+   "base_new": "寒霜访客 Frost Visitor",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": "寒霜访客 Frost Visitor"
+  },
+  "Welcome To Crucible": {
+   "base_old": "欢迎来到Crucible",
+   "base_new": "欢迎来到 Crucible",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": "欢迎来到 Crucible"
+  },
+  "What is Crucible": {
+   "base_old": "什么是《Crucible》",
+   "base_new": "什么是 Crucible",
+   "en_leaves": 1,
+   "shipped_gated": 1,
+   "name_field": "什么是 Crucible"
+  }
+ },
+ "base_right_needs_override": {
+  "Frost": {
+   "value": "霜冻",
+   "why": "shipped 的 霜寒 只来自 crucible.affixes.json entries.Cold Damage.adjective 这 1 片叶（词缀前缀，刻意与 Cold Conversion=冰冻 区分）；元素/符文侧 115 叶都是 霜冻（Rune: Frost=符文：霜冻 / Frost Potency=霜冻强效 / 'element of Frost'=霜冻元素）。harvest 层压过 base 导致产物取了那个 1 叶异读。"
+  },
+  "Lesser Soulmark": {
+   "value": "次等魂印 Lesser Soulmark",
+   "why": "规则正文（crucible-character.json entries.Soulbound.description）明写三级为“次等”“高等”“死亡”，且 Greater Soulmark=高等魂印；shipped 的 次级魂印 只在 2 片 name 叶。G2 批次已把那 2 叶改成 次等魂印，重建后 harvest 自会给出 次等魂印，base 无需改。"
+  }
+ },
+ "context_split_permanently_excluded": {
+  "Water": "folders.Water（元素分类夹）=水元素 Water；scenes.*.regions.Water.name（地图水面区域）=水域。两处都对，键本身歧义。产物保留 shipped=水域，base 的 水元素 只属于元素分类夹那一处。",
+  "Night": "shipped 值来自 Deities.pages.Nite.pronunciation（神祇 Nite 的读音注记，EN 恰好是 Night）；普通名词 night=夜晚（14 叶）。不是同一个键。",
+  "Warden": "典狱长=Spellbreaker Tower 的 Warden's Office（监狱长，19 叶）；守林者=Crucible 的 talent/archetype `Warden`（crucible.talent.json entries.Warden，11 叶）。另有 Flame Warden=火焰典守者。三处各自正确。",
+  "Trader": "商人=Trader's Corner 城区名 / Trader's Goddess；贸易商=Crucible archetype `Trader`（crucible.archetype.json entries.Trader，6 叶）。",
+  "Swarm": "虫群/鸟群=生物名里的 Swarm（Swarm of Cave Wasps=洞穴黄蜂虫群）；群集=Crucible 的 archetype/item `Swarm`（Gore Bird Ravage.archetype.name）。",
+  "Shard God": "base 的 碎片女神 其实是 `Shard Goddess` 的译法（英文侧 49 处 Shard Goddess），不是 Shard God 的异译。Shard God=碎片之神（已裁）。属于两个不同的键。",
+  "Reliquary": "圣髑匣=容器/物品（Orphic Reliquary、dnd5e Reliquary 装备，23 叶）；圣物室=场所（'a reliquary of sacred tomes'、'the Circle's reliquary'，6 叶）。产物取 shipped=圣髑匣 即可。"
+ },
+ "pack_fixed_this_round": {
+  "Yawning Sea": "巨口之海（page name 权威）；17 片正文里的 哈欠之海（yawn 的字面误译）已在批次里改掉",
+  "Shadowbox Alley": "暗箱小巷（categories 名权威）；Disgraced House 正文 9 处 影匣小巷 已改",
+  "Poolside Predicaments": "水潭边的困境（page name 权威）；Patch 0.5.0 正文 2 处 泳池边的困境 已改",
+  "Terracini's Tavern": "特拉奇尼酒馆（page name 权威）；Lantern Roads 正文 7 处 泰拉奇尼 已改",
+  "Agrimage Circle": "农艺法师环会；Eamon Mariflor.biography.public 里 EN 明写 Agrimage Circle 却译成 农艺法师联合会，已改（其余 联合会 对应 EN 的 Agrimage Consortium，未动）",
+  "Gore Bird Swarm": "血鸟群（actor/table name 权威）；Climbing Hazards 描述里同一段又写 血食鸟群，已改",
+  "Otherhood Raider": "异姊会劫掠者（actor name 权威）；7 片叶里的 袭击者 已改成 劫掠者"
+ }
+}

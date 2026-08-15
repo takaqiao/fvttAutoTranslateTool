@@ -140,7 +140,9 @@ def bilingual_tail(base_cn: str, en: str, shipped: str) -> bool:
     ⚠ 判据必须是**整串相等**，绝不能退回子串包含。第十六轮收尾实测：旧判据写作
     `(cn_s.startswith(b) and en_s in cn_s) or (b in cn_s) or (cn_s in b)`，
     那个纯子串子句让「凡 base 值是 shipped 值的子串」全部被静默判成「只是双语格式差异」，
-    3174 条 `baseVsShipped` 里因此吃掉了 **11 条真 dispute**：
+    `baseVsShipped` 里因此吃掉了 **11 条真 dispute**（当时报 3174 条，收紧后实读 **3172**；
+    ⚠ 别把这两个数当同一口径的前后值 —— 差的 2 条是 `Ooze` / `Elemental`，
+    它们改对之后完全不再进 baseVsShipped）：
       `Cosmology` 宇宙→宇宙观 · `Axe` 斧→斧头 · `Buckler` 圆盾→小圆盾 ·
       `Pallid Drakeling` 幼龙→幼龙兽 · `Afflicted Pallid Drakeling` 同上 ·
       `Lyla Cevher` 莱拉→莱拉·杰夫赫尔 · `Funar Cevher` 杰夫赫→杰夫赫尔 ·
@@ -213,8 +215,13 @@ def walk_pairs(en, cn, out, path=(), root_role='name'):
         out.append((en, cn, dotted, role))
 
 
-def harvest(en_dir, cn_dir, label, pairs, pending, conv):
-    """Mine EN->CN term pairs from a baseline/translation directory pair."""
+def harvest(en_dir, cn_dir, label, pairs, pending, conv, cells=None):
+    """Mine EN->CN term pairs from a baseline/translation directory pair.
+
+    `cells` is the same pool sliced one level finer, by `(模块, 约定)` -- see
+    `main`'s sameRoleMissingTail block for why the role key alone cannot tell a
+    dropped suffix from a convention boundary.
+    """
     if not (os.path.isdir(en_dir) and os.path.isdir(cn_dir)):
         return 0
     found = 0
@@ -254,8 +261,11 @@ def harvest(en_dir, cn_dir, label, pairs, pending, conv):
         for en_s, cn_s, path, role in got:
             if not is_term(en_s) or not CJK.search(cn_s):
                 continue
+            convention = convention_of(path, role)
             pairs[(en_s, role)][cn_s] += 1
-            conv[(en_s, role)][convention_of(path, role)] += 1
+            conv[(en_s, role)][convention] += 1
+            if cells is not None:
+                cells[(en_s, role)][(label, convention)][cn_s] += 1
             found += 1
     return found
 
@@ -301,14 +311,17 @@ def main():
     # ---- layer 2: harvest from shipped translations ------------------------
     pairs = defaultdict(Counter)          # (en, role) -> Counter(cn)
     conv = defaultdict(Counter)           # (en, role) -> Counter(convention)
+    # (en, role) -> (模块, 约定) -> Counter(cn). Report-only: `pick` never reads
+    # it, so slicing here cannot move a single glossary value.
+    cells = defaultdict(lambda: defaultdict(Counter))
     pending_src: dict[str, set] = {}
     n = harvest(os.path.join(BASE_DIR, 'crucible-0.10.1'),
                 os.path.join(P, '2-Crucible汉化插件', 'compendium', 'cn'),
-                'crucible', pairs, pending_src, conv)
+                'crucible', pairs, pending_src, conv, cells)
     print(f'harvest: crucible {n} pair-hits')
     n = harvest(os.path.join(BASE_DIR, 'ember-0.6.0'),
                 os.path.join(P, '1-Ember汉化插件', 'compendium', 'cn'),
-                'ember', pairs, pending_src, conv)
+                'ember', pairs, pending_src, conv, cells)
     print(f'harvest: ember    {n} pair-hits')
 
     # 每个 (英文, 角色) 桶各自定胜负；平票不靠排序稳定性，退到该角色的约定形态。
@@ -415,21 +428,49 @@ def main():
     #   sameRoleMissingTail —— **同一个角色内部**后缀时加时不加。这才是真漏加，可动。
     #   termInconsistency —— 剥掉后缀后中文本身就不同，必须裁决。
     cross_role_form, same_role_missing_tail, term_inconsistent = {}, {}, {}
+    cross_convention_form = {}
     for en_s, per_role in byrole.items():
         forms = {r: form_of(c, en_s) for r, c in per_role.items()}
         if len(set(forms.values())) > 1:
             cross_role_form[en_s] = {r: {'cn': per_role[r], 'form': forms[r]}
                                      for r in sorted(per_role)}
+    # 「同角色内漏加后缀」以前是拿 `(英文, 角色)` 直接判的 —— 那个键看不见两条
+    # **真实存在的约定边界**，于是把「两群各自守规矩的叶子」报成了缺陷：
+    #   模块边界 —— crucible-cn 的 `folders` 是裸中文（150/151），
+    #     ember_cn 的 `folders` 是双语并列（337/355）。两个分开发布的产品，
+    #     各自内部近乎全一致；把 crucible 的「护甲」和 ember 的「护甲 Armor」
+    #     放一起比，比出来的是产品间风格差异，不是谁漏了后缀。
+    #   约定槽边界 —— `convention_of` 早就知道 `regions.X.name` 该裸、
+    #     `pages.X.name` 该双语（CONVENTION_PARENTS），但 role_of 把两者并进
+    #     同一个 `name` 桶（模块 docstring 里的 known limit）。Darkness /
+    #     Elevator / Ocean 三条就是这么来的：region 名裸、页/物品/场景名双语，
+    #     **两边都是对的**。
+    # 2026-08-15 第十七轮实测：31 条里 0 条是「一个译者在同一约定内忘了后缀」。
+    # 现在按 `(模块, 约定)` 单元格判：只有**同一单元格内部**同时出现两种形态才
+    # 算真漏加；跨单元格的挪到 crossConventionFormDifference，边界写在条目里，
+    # 不是删掉不报。
     for en_s, per_role_cands in conflicts_by_role.items():
         for role, cands in per_role_cands.items():
             if len(cands) < 2:
                 continue
-            if len({bare(c, en_s) for c in cands}) == 1:
-                same_role_missing_tail.setdefault(en_s, {})[role] = cands
-            else:
+            if len({bare(c, en_s) for c in cands}) != 1:
                 term_inconsistent.setdefault(en_s, {})[role] = cands
+                continue
+            cell = cells[(en_s, role)]
+            split = {f'{m}/{cv}': dict(c.most_common())
+                     for (m, cv), c in sorted(cell.items()) if len(c) > 1}
+            if split:
+                same_role_missing_tail.setdefault(en_s, {})[role] = {
+                    'candidates': cands, 'splitWithinCell': split}
+            else:
+                cross_convention_form.setdefault(en_s, {})[role] = {
+                    'axis': '模块' if len({m for m, _ in cell}) > 1 else '约定槽',
+                    'cells': {f'{m}/{cv}': dict(c.most_common())
+                              for (m, cv), c in sorted(cell.items())},
+                }
     print(f'shipped: 跨角色形态差异（约定正确，勿归一）    : {len(cross_role_form)}')
-    print(f'shipped: 同角色内漏加双语后缀（可动）          : {len(same_role_missing_tail)}')
+    print(f'shipped: 跨模块/跨约定槽形态差异（各自守规矩）: {len(cross_convention_form)}')
+    print(f'shipped: 同角色同单元格内漏加双语后缀（可动）  : {len(same_role_missing_tail)}')
     print(f'shipped: same term translated differently    : {len(term_inconsistent)}')
 
     dump(os.path.join(OUT, 'glossary_ec.disputes.json'), {
@@ -450,9 +491,34 @@ def main():
             'count': len(cross_role_form),
             'terms': dict(sorted(cross_role_form.items())),
         },
+        'crossConventionFormDifference': {
+            '_note': '同一英文、同一角色，中文相同、只差双语后缀，但两种形态分别落在'
+                     '**不同的约定单元格**里，各自单元格内部是一致的 —— 也就是说没人'
+                     '漏加后缀，只是这个 `(英文, 角色)` 键横跨了一条真实的约定边界。'
+                     '`axis` 指出是哪条：'
+                     '「模块」= crucible-cn 的 `folders` 裸中文（150/151）对上 '
+                     'ember_cn 的 `folders` 双语并列（337/355），两个分开发布的产品'
+                     '各有各的行文风格；'
+                     '「约定槽」= `regions.X.name` 该裸而 `pages.X.name` 该双语'
+                     '（CONVENTION_PARENTS 早就知道，但 role_of 把它们并进同一个 '
+                     '`name` 桶，见模块 docstring 的 known limit）。'
+                     '⚠ **不是缺陷，不要按票数归一。** 列在这里只为让人看见边界；'
+                     '真要统一，那是一次产品级裁决（同一个世界里两个包的侧边栏文件夹'
+                     '会一个「护甲」一个「护甲 Armor」并排显示），不是脚本能定的。',
+            'count': len(cross_convention_form),
+            'terms': dict(sorted(cross_convention_form.items())),
+        },
         'sameRoleMissingTail': {
-            '_note': '**同一个角色内部**，同一英文的中文相同、只是双语后缀时加时不加。'
-                     '这才是真漏加后缀，可按该角色的约定统一。',
+            '_note': '**同一个角色、同一个 `(模块, 约定)` 单元格内部**，同一英文的中文'
+                     '相同、只是双语后缀时加时不加 —— 单元格内部自相矛盾，这才是真漏加，'
+                     '可按该单元格的约定统一。`splitWithinCell` 直接给出是哪个单元格裂了。'
+                     '⚠ 判据从前只看 `(英文, 角色)`，那个键看不见模块边界和约定槽边界，'
+                     '把两群各自守规矩的叶子报成了缺陷：2026-08-15 第十七轮把当时的 31 条'
+                     '逐条落到叶子上核过，**0 条**是同一约定内忘加后缀，24 条跨边界'
+                     '（已移入 crossConventionFormDifference），余下 7 条全是 ember 的'
+                     '冒险文件夹（双语，290/290）对上 ember 镜像包 '
+                     '`crucible-items` 的包文件夹（裸，8/8）—— 每个文件内部 100% 自洽，'
+                     '一条越界的叶子都没有。这个桶的数字只有在判据不吃约定边界时才有意义。',
             'count': len(same_role_missing_tail),
             'terms': dict(sorted(same_role_missing_tail.items())),
         },

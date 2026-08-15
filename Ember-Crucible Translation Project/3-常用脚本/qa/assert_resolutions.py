@@ -643,10 +643,24 @@ def a_exclusions_closed(rule, ctx):
     现在的形态：每次都子进程跑一遍 `scan_same_en_split.py`（跑在 `--root` 指定的那棵树上），
     并把「扫到多少条英文唯一串 / 报出多少组多少叶」打进 detail —— 满足本文件的通则
     「任何断言都必须能说出我这次扫了多少」。扫描器跑不起来一律**判失败**，不判通过。
+
+    ⚠ 第十七轮（2026-08-15，A7）**只动了豁免表的位置**，判据形态没变：
+    那份 125 条的表原本在 `4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json`，
+    被 `.gitignore` 的 `4-临时脚本/**/*.json` 挡在仓库外 —— 换台机器 clone 下来它就不存在，
+    本函数会走下面「找不到归档豁免表」那条分支报失败。**那是判据环境坏了，不是库坏了**，
+    而报出来的样子和真缺陷一模一样。现已挪到 `5-其他内容/EXCLUSIONS.same_en_split.json`
+    （路径写在规则的 `exclusions` 字段里，不在本文件里硬编码）。
+    ⚠ 它与 `5-其他内容/EXCLUSIONS.json` **是两张不同的表，别合并**：本函数吃的是**裸 list**，
+    靠 `` `英文串` `` 这种反引号写法在每条的 what/why 里做子串匹配；那一张是
+    `{meta, exclusions:[…]}`，给人每轮读的项目级登记表。合并会当场把本判据打瘸。
     """
     exc_p = os.path.join(ROOT, rule["exclusions"])
     if not os.path.exists(exc_p):
-        return [("-", "-", exc_p, "找不到归档豁免表，无法核对")], "跳过"
+        # 非空 bad ⇒ 本条判**失败**（不是 skipped）。有意如此：表没了就等于没设防，
+        # 而「没设防」必须吵出来。detail 里点明这多半是判据环境问题而非库的问题。
+        return ([("-", "-", exc_p,
+                  "找不到归档豁免表，无法核对 —— 先确认它是不是又被挪回 4-临时脚本/ 被 .gitignore 挡掉了")],
+                "归档豁免表缺失（判据环境问题，不是库的问题）")
     exc = json.load(open(exc_p, encoding="utf-8"))
     blob = " ".join(f"{e.get('what','')} {e.get('why','')}" for e in exc)
 

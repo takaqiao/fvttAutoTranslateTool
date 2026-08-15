@@ -1,0 +1,1972 @@
+[
+ {
+  "unit": "主线任务「一位老朋友 An Old Friend」全 14 页（按事件链顺序通读：Overview → A Friendly Reunion → Unhappy Accidents → Unwelcome Diversions → A Smuggler Extraordinaire / Reuniting with Lyla → Gated Community → Simmering Discontent → Warning Shout → Dash Away All → Strange Depths → Fallen House → Traveling with Lyla），主线包 ember.crucible-adventure.json",
+  "findings": [
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Reuniting with Lyla.text（以及同包 journals.Oldcraft Lodge.pages.The Dancing Flames.text）",
+    "problem": "异姊会首领的绰号在中文里被译成「漂亮队长」，而同一人物在链条其余各处一律是「船长」。英文靠共用的 Captain 一词把三处串成一条伏笔线，中文的「队长/船长」把它切断了：GM 与玩家在老工艺旅舍听到「为『漂亮队长』做事的披斗篷商人」，之后在海堤听佩吉尔说「每次听完『船长』的话后总会安心些」，无法意识到这是同一个人（即斯蒂克斯）。",
+    "evidence": "EN Reuniting with Lyla：`someone, a leader figure, who is referred to in the notes as the \"Bonny Captain\"`；EN Oldcraft Lodge/The Dancing Flames：`said he was working for someone called the \"Bonny Captain.\"`。EN 另两处同指：A Friendly Reunion.outcomes.decodedBanditNote.summary `a cloaked man in Arcturel and a Captain in Seawall`（CN 已作「一位海堤的『船长』」）；Simmering Discontent 佩吉尔 `always feels reassured after listening to \"The Captain.\"`（CN 已作「船长」）。CN 现状：Reuniting with Lyla「被称作『漂亮队长』」、The Dancing Flames「一个叫『漂亮队长』的人」。全包检索：Bonny Captain 共 2 处，均译「漂亮队长」。",
+    "severity": "严重",
+    "fix": "两处「漂亮队长」→「漂亮船长」（必须同改，否则反而制造新的不一致）。已进批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Gated Community.exposition vs pages.Gated Community.text（靠交涉进入）",
+    "problem": "守卫的同一句盘问在两片叶里译成了两句不同的话：exposition（玩家听到的朗读）用「命运」，正文用「财富」。于是正文里守卫的「我再问一遍」在中文里指不回任何一句已说过的话；更要紧的是，暗号「为了他人的财富」与守卫问句之间的字面钩子只在正文出现、在朗读里被抹掉，只读中文的 GM 念完朗读后，玩家答「为了他人的财富」在场面上变成没有由来的答非所问。",
+    "evidence": "EN 两处为同一句：exposition `Are you here to rail at fortune, or do you come to find your own?`；text `Again, I ask, are you here to rail at fortune, or do you come to find your own?`。CN exposition：「你来这里，是要向命运发怨，还是来寻找属于你自己的命运？」；CN text：「我再问一遍，你们来这里是为了抱怨他人的财富，还是来寻找属于自己的财富？」（因英文串带 Again, I ask 前缀而非逐字相同，前十四轮的同串比对查不到）",
+    "severity": "一般",
+    "fix": "exposition 改为「你来这里，是为了抱怨他人的财富，还是来寻找属于你自己的财富？」，与正文对齐并保留朗读的第二人称单数。已进批次。"
+   },
+   {
+    "kind": "信息缺口",
+    "where": "pages.A Friendly Reunion.text，qna「西吉尔对强盗知道些什么」",
+    "problem": "英文这句是靠 Otherhood 里的 hood（兜帽/头巾）抖的谐音包袱；中文译名「异姊会」不含这个音，于是「头饰」一词凭空出现，只读中文的 GM 读到的是一句彻底接不上的话，既看不出是玩笑，也无法向玩家转述。",
+    "evidence": "EN：`I hear the group is called the \"Otherhood.\" I'm unclear how headgear is related to banditry.`；CN 现状：「我听说这个团体叫做“异姊会”。我不太明白头饰和强盗行为有什么关系。」",
+    "severity": "一般",
+    "fix": "补最小限度的原文提示：「我听说这个团体叫做“异姊会”（Otherhood）。我不太明白“兜帽”（hood）和强盗行为有什么关系。」不动既定译名「异姊会」。已进批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Simmering Discontent.summary",
+    "problem": "海堤那座塔在全包 8 处中有 7 处作「远古之塔」，唯独玩家可见的事件总结作「远古塔」。",
+    "evidence": "EN 各处均为 Ancient Tower（含本条 `this evidence is kept hidden in the Ancient Tower in Seawall`）。CN 全包计数：远古之塔 7、远古塔 1，后者仅出现在 An Old Friend.pages.Simmering Discontent.summary。",
+    "severity": "观感",
+    "fix": "「海堤的远古塔中」→「海堤的远古之塔中」。已进批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Warning Shout.text / pages.Fallen House.text vs pages.Traveling with Lyla.text",
+    "problem": "莱拉之父的名字在链条内出现两个中文名：「拉尔顿·杰夫赫尔」（2 处）与「卡尔顿·杰夫赫尔」（1 处）。但上游英文本身就是两个名字，译文忠实反映，不属译文缺陷。",
+    "evidence": "EN Warning Shout：`because of her father, Ralton Cevher`；EN Fallen House：`held by Ralton Cevher`；EN Traveling with Lyla：`the eldest daughter of Kalton Cevher`。",
+    "severity": "观感",
+    "fix": "不改。若日后上游统一，再随基线同步。"
+   },
+   {
+    "kind": "可玩性硬伤",
+    "where": "pages.Gated Community.text，事件结束/怀疑等级第三条",
+    "problem": "该条自相矛盾：「如果队伍决定潜入城市而不是采用〔偷偷潜入〕」。上游英文原样如此（把对照项写成了它自己），非译文造成。",
+    "evidence": "EN：`If the party decides to sneak into the city instead of @UUID[...#sneaking-your-way-in]{Sneaking Your Way In}, they enter Seawall with a Suspicion Rating of 0`。CN 逐字对应。",
+    "severity": "观感",
+    "fix": "不改，留给上游。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.A Smuggler Extraordinaire.text / .outcomes.*",
+    "problem": "伪造品三档名称在同页内不统一（中档「高品质／像样」、低档「粗劣／粗陋／低劣」）。上游英文同样不统一，译文如实反映。",
+    "evidence": "EN 正文 `pristine / quality / poor forgery`，同调块与结果标签 `Pristine / Decent / Rudimentary Forgery`，交付句 `be it pristine, decent, or rudimentary`，结果摘要 `a low-quality forgery`。",
+    "severity": "观感",
+    "fix": "不改。下游引用（封闭式社区只引「完美无瑕」「粗陋」两档）不受影响。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Unhappy Accidents.text，佐迪对话中指向调查酒的链接",
+    "problem": "链接标签「被下毒的酒」与实际小节标题「调查变质的酒」不同，且锚点 #investigating-the-poisoned-brew 与真实 id #investigating-the-bad-brew 不符（点了跳不到）。上游英文同错。",
+    "evidence": "EN 同一页三处：GM 摘要与聚归馆流言用 `#investigating-the-bad-brew]{Investigating the Bad Brew}`，佐迪对话用 `#investigating-the-poisoned-brew]{Poisoned Brew}`；真实小节 id 为 investigating-the-bad-brew。",
+    "severity": "观感",
+    "fix": "不改（锚点属方括号外的 UUID 内部，且是上游数据错）。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Simmering Discontent.text（纹身店「海线」vs 链接标签「墨顶」）、pages.Unwelcome Diversions.text（招牌「杰夫赫尔修理铺」vs 正文「扳力修理行」）",
+    "problem": "两处店名在同页内各有两个名字，只读中文的 GM 会以为是两家店。上游英文同样如此。",
+    "evidence": "EN：`A signpost for a tattoo shop called the Sea Liner` 对 链接标签 `{Inktop}`；EN：`a sign that reads \"Cevher Repairs.\"` 对 正文 `Wrestful Repairs`。",
+    "severity": "观感",
+    "fix": "不改。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Overview.text vs pages.Fallen House.text / Traveling with Lyla.text",
+    "problem": "莱拉之弟富纳尔在概览页作「兄弟」，在其余两页作「弟弟」。英文一律 brother，中文只是详略不同，不影响指认。",
+    "evidence": "EN Overview：`her @UUID[Actor.E701HRk9vreXMUhl]{brother} is missing`；EN Fallen House：`And your brother is missing.`；EN Traveling with Lyla：`ensure my brother, Funar, is well`。CN 依次作「兄弟」「弟弟」「弟弟富纳尔」。",
+    "severity": "观感",
+    "fix": "不改（改动收益低于扰动风险）。"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\r15-scene-an-old-friend.json",
+  "gate_clean": true,
+  "gate_output": "ember.crucible-adventure.json\n  applied            5\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "按「只有中文的 GM 第一次备课」的方式把 An Old Friend 全 14 页按事件链顺序通读了一遍，再逐处对英文分辨「译文造成 / 上游本来如此」。产出 5 处改动，全部落在 4 类缺陷上，过闸零拒绝。\n\n**逐类结论：**\n\n- **跨叶指代断裂（有，2 处真缺陷）**。最重的是「漂亮队长 / 船长」：英文 Bonny Captain ↔ the Captain 靠共用词根把老工艺旅舍的披斗篷商人、破译的强盗指令、佩吉尔口中的「船长」串成同一条指向斯蒂克斯的伏笔，中文一边译「队长」一边译「船长」，把这条线切断。因为两侧英文串本来就不同，前十四轮的同串比对结构性地看不见它。次一处是海堤城门守卫的盘问：同一句英文在朗读叶译成「命运」、在正文叶译成「财富」，导致正文「我再问一遍」无所指，且暗号「为了他人的财富」与守卫问句之间的字面钩子只剩正文有、玩家听不到。另有「远古塔 / 远古之塔」一处 1:7 的偏差一并订正。\n- **信息缺口（有，1 处）**。西吉尔那句 headgear 玩笑依赖 Otherhood 里的 hood，中文「异姊会」不含此音，「头饰」凭空出现，只读中文读不懂。补了极小的原文提示，不动既定译名。\n- **顺序错乱（真的没有）**。做了机器核对：14 页每一叶的 section class / h2-h4 序列在中英之间完全一致，`<p>` 块数逐叶相等，read-aloud → GM 摘要 → 结果 的结构没有任何一处被重排。\n- **指令性丢失（真的没有）**。逐块比对了所有以 If/Should/Once/When/Unless 开头的英文段落，中文均以「如果/若/一旦/当/每当」等条件式开头，5 个疑似全是误报（Once/When 作时间状语）。\n- **可玩性硬伤（译文造成的：没有）**。逐叶比对了散文中的全部数字（剔除 enricher 后）、全部 `[[/...]]` enricher、全部 `@UUID/@Embed/@Advantage` 与全部标签：DC、伤害、船只 HP、追逐步数、怀疑等级阈值、金币数一处不差；仅有的数字差异全部是「三层矿井 / Level 3」这类中文数字写法。\n\n**上游本来就这样、记为观感不改的 6 项**：莱拉之父 Ralton / Kalton 两名并存；伪造品三档名 pristine-quality-poor 与 Pristine-Decent-Rudimentary 混用；佐迪对话的 #investigating-the-poisoned-brew 死锚点与「被下毒的酒」异名；封闭式社区怀疑等级第三条「潜入城市而不是〔偷偷潜入〕」的自指矛盾；纹身店 Sea Liner/Inktop 与修理铺 Cevher Repairs/Wrestful Repairs 各自双名；概览页「兄弟」与后文「弟弟」。另注：Gated Community 玛伊斯同调误用 oozeControlPoolLure、Dash Away All「奥拉同调」块里写 emberAkon、Unwelcome Diversions 三个西格纳拉同调共用 otherhood1Arcturel2Device —— 均已核实中英 enricher 逐字节相同，是上游数据错，不在译文层处理。\n\n「石港 / 灰港」曾疑为跨页断裂，核实后是 Stone Haven（石港区）与 Gray Harbour（灰港）两个地名，地区志中已分别立目，非缺陷。",
+  "escalations": "1. **批次跨出了本单元一页**：`journals.Oldcraft Lodge.pages.The Dancing Flames.text` 不属于 An Old Friend 这条链，但「漂亮队长」在全包只有它和 Reuniting with Lyla 两处，只改其一会立刻制造新的不一致，所以必须同改。它仍在主线包 ember.crucible-adventure.json 内，过闸已通过。若主控把该页划给了别的执行单元，请去重，勿重复应用。\n\n2. **孪生包待同步**：本批 5 片叶中有 3 片（Reuniting with Lyla.text、The Dancing Flames.text、A Friendly Reunion.text）在 `ember.adventure.json` 有同路径孪生，Gated Community.exposition 与 Simmering Discontent.summary 亦然（已确认孪生包同名键存在且中文现状与主线包一致）。按约定由主控统一同步，本单元未产孪生批次。\n\n3. **一处需主控裁量**：西吉尔 hood 玩笑的修法是在正文里补「（Otherhood）」「（hood）」两处原文括注。这是本批唯一带风格判断的改动——若项目不接受正文内嵌英文括注，请单独回退这一片叶（key: `Ember Early Access.journals.An Old Friend.pages.A Friendly Reunion.text`），其余 4 片不受影响。\n\n4. **建议列入上游反馈清单**（不在译文层修）：Ralton/Kalton 同一人物两名、#investigating-the-poisoned-brew 死锚点、怀疑等级第三条的自指矛盾、Gated Community 玛伊斯同调错用 oozeControlPoolLure 键、Dash Away All「Aura 同调」块写 emberAkon。这些都会实际影响跑团或 Foundry 内跳转，但订正它们等于改数据而非改翻译。"
+ },
+ {
+  "unit": "Glitter in the Dark（阿克图瑞尔支线，16 页全链）",
+  "findings": [
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Scene of the Crime.exposition / .summary、The Story So Far.text、A Peculiar Encampment.text、Presenting the Evidence.text/.exposition（对照 Scene of the Crime.text、A Troubled Tradeway.text、Storming the Consortium.text）",
+    "problem": "命案现场那条走道（catwalk）在链内有四种中文：猫道 / 栈道 / 栈桥 / 高架走道。GM 在《案发现场》读出的朗读文本说「南边栈道的栏杆附近」，紧接着自己看的 GM 段落却是「搜索猫道」「猫道南段的一盏因卡罗提灯」；玩家日志回顾写成「从矿场外一条高架走道的边缘坠落」；到了《一处古怪的营地》，休亲口交代案情时说的是「伸手去够栈桥上的一颗珍珠」。这是整条链唯一的案发地点，只读中文的 GM 会以为矿渊里有好几条不同的通道。",
+    "evidence": "EN 全部为同一个词 catwalk：Scene of the Crime.exposition「a wizened Nir'ae woman near the railing of the catwalk to the south」→CN「南边栈道的栏杆附近」；Scene of the Crime.text「Searching the Catwalk」→CN「搜索猫道」；Scene of the Crime.summary「plummeted off the edge of a catwalk outside the mine」→CN「从矿场外一条高架走道的边缘坠落」；A Peculiar Encampment.text（休的自述）「reaching out for a pearl on the catwalk」→CN「伸手去够栈桥上的一颗珍珠」；The Story So Far.text「at the edge of the Dives catwalk」→CN「在矿渊栈道边缘」。全库统计：猫道 13 处（全在本链）、栈道 6 处（本链）、栈桥 1 处、高架走道 1 处。",
+    "severity": "严重",
+    "fix": "统一为「猫道」（改动面最小：猫道已是 GM 指令段与特拉斯克台词的用词，13 处不动，只改 6 个离群叶）。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Surface Matters.exposition",
+    "problem": "边缘镇（Brimtown）在这一条读给玩家听的朗读文本里被写成「炽城」——全库唯一一次。玩家听到的地名和 GM 手上、以及前一页《忧心忡忡的商人》里出现的「边缘镇」完全对不上。",
+    "evidence": "EN「as you make your way through the dusty streets of Brimtown」→CN「当你穿行于炽城尘土飞扬的街道时」。同一页的 GM 段落与结果摘要均作「边缘镇」（「他在边缘镇生活的一段简短经历」「边缘镇传言」「在阿克图瑞尔的边缘镇街区」）。全库 grep「炽城」仅此 1 处（主线包 + 孪生包各 1）。",
+    "severity": "严重",
+    "fix": "炽城 → 边缘镇。已产批次。"
+   },
+   {
+    "kind": "可玩性硬伤",
+    "where": "In League with Silver Beam.text",
+    "problem": "任务奖励物品在同一页出现两个中文名：GM 朗读给玩家的台词是「聚焦珍珠」，三段之后的 GM 发奖块与 @UUID 标签却是「专注珍珠」。而 crucible 装备包里该物品的正式译名是「专注珍珠」，其能力「补充专注」恢复的资源就叫「专注」。GM 念完奖励名之后，玩家在角色卡上找不到叫「聚焦珍珠」的东西，也接不上「专注」这条资源线。",
+    "evidence": "EN 两处同为 Focusing Pearl。CN：`<sub data-system=\"crucible\">聚焦珍珠</sub>，对你们当中的施法者应该很有用` 与 `@UUID[Compendium.crucible.equipment.Item.focusingPearl000]{专注珍珠}`。权威来源：2-Crucible汉化插件/compendium/cn/crucible.equipment.json → `entries.Focusing Pearl.name = 专注珍珠 Focusing Pearl`，`effects.Focusing.actions.affixFocusing.name = 补充专注 Replenish Focus`。",
+    "severity": "严重",
+    "fix": "聚焦珍珠 → 专注珍珠。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Concerned Merchants.overview、Concerned Merchants.summary、Chessmen Homecoming.summary",
+    "problem": "「sinkhole city」（阿克图瑞尔的通称）在链内正文一律作「天坑城市 / 天坑之城」，但三条玩家可见的任务日志（overview/summary）分别写成「塌陷坑洞之城」「陷坑之城」「陷坑城市」。玩家翻任务日志时看到的城市名和 GM 口中的对不上，且「陷坑」与「天坑深渊」「天坑底部」也断了链。",
+    "evidence": "同一页 Concerned Merchants 内：text「最近刚到访过天坑城市阿克图瑞尔的商人」/ overview「从以恶名昭著的塌陷坑洞之城阿克图瑞尔启程」/ summary「一名在陷坑之城阿克图瑞尔被指控谋杀的叛逃构装体」；Chessmen Homecoming.summary「预计将停止在这座陷坑城市的运营」。EN 三处均为 the sinkhole city (of Arcturel)。全库「天坑城市/天坑之城」约 20 处，这三条是仅有的离群。",
+    "severity": "一般",
+    "fix": "塌陷坑洞之城 / 陷坑之城 → 天坑之城；陷坑城市 → 天坑城市。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "In League with Silver Beam.text（对照 Storming the Consortium.text 与地图页 Director's Office）",
+    "problem": "拉丽莎的办公室在《突袭财团》和地图页里是「主管办公室」，在《与银光束结盟》里同一个英文 her executive office 却译成「高管办公室」。走「谴责下城人」分支的 GM 只会读到「高管办公室」，而地图上标的是「主管办公室」。",
+    "evidence": "Storming the Consortium.text: EN「keeps the most sensitive documents ... in her executive office」→CN「保存在她的主管办公室中」，且多处 @UUID[...r3qQuNmGgOfkPzpo]{主管办公室}。In League with Silver Beam.text: EN「for a meeting with Larissa Toth in her executive office」→CN「在她的高管办公室与拉丽莎·托斯会面」；EN「at the threshold of Larissa's executive office」→CN「你们来到拉丽莎高管办公室的门口」。",
+    "severity": "一般",
+    "fix": "高管办公室 → 主管办公室（2 处）。「这位莱伦高管」等人物称谓不动。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Storming the Consortium.text（对照 Junkyard Cogs.text 与 actors.Silver Beam Servitor.items）",
+    "problem": "银光束仆从的能力名在两场战斗之间分叉：《垃圾场齿轮》与角色卡都是「充能之爪」「投网器」，《突袭财团》却写成「充能爪」「抛网器」。GM 按笔记喊招式名时，在 token 表上找不到对应条目。",
+    "evidence": "权威：cn/ember.crucible-adventure.json `actors.Silver Beam Servitor.items.Charged Claw.name = 充能之爪 Charged Claw`。Junkyard Cogs.text：「利用它们的@UUID[...glj95eRlM5lIDQYE]{充能之爪}」「用@UUID[...SxFwLo6u8W2vmDzG]{投网器}向目标发射网」。Storming the Consortium.text：「以@UUID[...UZMTD9JjMM9SsAfL]{臂刃}和@UUID[...glj95eRlM5lIDQYE]{充能爪}发动攻击」「先用它们的@UUID[...SxFwLo6u8W2vmDzG]{抛网器}远程锁定敌人」（充能爪 2 处、抛网器 1 处）。",
+    "severity": "一般",
+    "fix": "{充能爪} → {充能之爪}；{抛网器} → {投网器}。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Presenting the Evidence.text（对照 A Peculiar Encampment.text）",
+    "problem": "同一场听证会在两页里叫两个名字，而且《出示证据》选的「审讯」在中文里是「审问嫌疑人」的意思，与实际内容（特拉斯克听取双方陈述后作出裁决）不符，容易让 GM 误以为是把队伍或休押起来问话。",
+    "evidence": "A Peculiar Encampment.text: EN「Lucent will join them during the inquest with Zodi Trask and Larissa Toth」→CN「将在他们与佐迪·特拉斯克和拉丽莎·托斯的调查听证中与他们同行」。Presenting the Evidence.text 同一个 inquest 共 8 处全作「审讯」：小标题「审讯前奏」「审讯开始」「引导审讯」，正文「公正的审讯需要双方在中立地点会面」「在这场审讯结束后」等。",
+    "severity": "一般",
+    "fix": "《出示证据》全部「审讯」→「调查听证」，与《一处古怪的营地》对齐。已产批次。"
+   },
+   {
+    "kind": "可玩性硬伤",
+    "where": "Presenting the Evidence.text（洗清分支的特拉斯克裁决朗读）",
+    "problem": "整条支线的判决台词中文语法崩坏，主语与「与其说…不如说…」错位，念出来自相矛盾：字面读作「珍珠…不如说更像是故障的真正根源」，前半句又把「构装体的程序出了问题」摆成了对照项。GM 照着念会卡壳，玩家听不出到底判了谁无罪。",
+    "evidence": "EN「these tainted inkaro pearls have something to do with the malfunctions, rather than the construct's programming or a fault of their maker's. The bad pearls are to blame.」→CN「这些被污染的因卡罗珍珠，与其说是构装体的程序出了问题，或是制造者有缺陷，不如说更像是故障的真正根源。应该为此负责的是那些坏掉的珍珠。」",
+    "severity": "一般",
+    "fix": "改为「造成这些故障的是那些被污染的因卡罗珍珠，而不是构装体的程序，也不是其制造者的过失。该为此负责的是那些坏掉的珍珠。」已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Rumors in Rock Bottom.text（4 处）、Rumors in Rock Bottom.overview",
+    "problem": "伊夫顿·谢普英文一律是 artificer's apprentice / ex-assistant of Vartholomew Chess（切斯的学徒兼前助手），中文却把他也叫成「工匠」——和瓦索洛缪·切斯用同一个词，还写出「在两位工匠决裂后」。只读中文的 GM 会把谢普理解成另一位独立工匠，破坏「银光束挖走了切斯最得力的助手」这条动机链（该链在《迄今为止的故事》里作「失势的前助手」，在《棋士归乡》里作「让他回店里帮忙」）。",
+    "evidence": "EN「a retired artificer's apprentice who aided the constructs」→CN「他是一位退休工匠」；EN「the disgraced artificer's apprentice Ifton Shepp」→CN「失势的工匠伊夫顿·谢普」；EN「the semi-retired artificer's apprentice known as Ifton Shepp」→CN「那位半退休的工匠伊夫顿·谢普」；EN「an ex-assistant of Vartholomew Chess named Ifton Shepp, who took residence in Rock Bottom after the two had a falling out」→CN「…在两位工匠决裂后搬到了石底镇定居」；overview EN「a semi-retired artificer named Ifton Shepp」→CN「一位半退休的工匠，名叫伊夫顿·谢普」。",
+    "severity": "一般",
+    "fix": "「工匠」→「工匠学徒」（3 处）、「在两位工匠决裂后」→「在两人决裂后」。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Checkmate for Chessmen.text（对照 A Peculiar Encampment.text）",
+    "problem": "两页共用同一段棋士战斗规则（英文逐字相同），但中文小标题分叉，且《棋士的将死》把「Nothing To Lose」译成「一无所有」——中文里意思是「什么都没有了」，而原意是「豁出去、无所顾忌」，正好说反了这些构装体为何死战不退。",
+    "evidence": "A Peculiar Encampment.text：「<h4>逮捕叛逃者</h4>」「<h4>无所顾忌</h4>下城人及其构装体盟友最终会战斗至死…」。Checkmate for Chessmen.text：「<h4>缉拿叛逃者</h4>」「<h4>一无所有</h4>下城人及其构装体盟友最终会战斗至死…」（一无所有 2 处、缉拿叛逃者 3 处）。EN 两页均为「Apprehending the Renegade」「Nothing To Lose」。",
+    "severity": "一般",
+    "fix": "一无所有 → 无所顾忌；缉拿叛逃者 → 逮捕叛逃者。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Chessmen Homecoming.text（「休的晋升」）",
+    "problem": "休在同一段台词里先被称「他」、随即变成「他们」（英文用的是单数 they，中文照字面译成复数），读起来像是佐迪替另一群人安排了工作。这是全链收尾、交代四名下城人去向的段落，指代必须干净。",
+    "evidence": "EN「Since Hew was still keen to mine, I got him a position ... They will be starting next week, and I wouldn't be shocked if I have them running their own crew inside of a month.」→CN「…我就帮他在杰夫赫尔家族设在阿克图瑞尔的采矿业务里谋了个职位。他们下周就会开工，而我一点也不会惊讶，要不了一个月，我就会让他们带起自己的一支班组。」（同段前文已用「他」）",
+    "severity": "一般",
+    "fix": "「他们下周就会开工…我就会让他们带起自己的一支班组」→「他下周就会开工…他就能带起自己的一支班组」。已产批次。"
+   },
+   {
+    "kind": "信息缺口",
+    "where": "Poolside Predicaments.text（齐尔卡·铜吼台词，2 处）",
+    "problem": "银光束新型号 Mark-One 在中文里被压成孤零零的「一型」，缺量词与中心语，读作「我手头没有足够的一型来填补空缺」「用一型来替换它们」——中文里不成句，GM 一眼看不出「一型」是个型号名（即银光束仆从）。",
+    "evidence": "EN「I don't have enough Mark-One models to fill the gaps though.」→CN「只是我手头没有足够的一型来填补空缺。」；EN「replace them with the mark ones over time」→CN「用一型来替换它们」。同页另一处已作「如果被问到一型构装体：」，可见中心语本应保留。",
+    "severity": "一般",
+    "fix": "补回中心语：「没有足够的一型构装体」「用一型构装体来替换它们」。已产批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "scenes.Arcturel Dives.regions.\"Surface: Catwalks\".name（未改，超出本链范围）",
+    "problem": "上一条 catwalk 统一之后，地图区域名仍是第五种译法「地表：悬空走道」。GM 在《案发现场》里对着 Arcturel Dives 场景跑图时，笔记说「猫道」、场景区域标签说「悬空走道」。",
+    "evidence": "EN `scenes.Arcturel Dives.regions.Surface: Catwalks.name = \"Surface: Catwalks\"` → CN「地表：悬空走道」。本链 journals 内 catwalk 已统一为「猫道」。",
+    "severity": "观感",
+    "fix": "建议由主控统一改为「地表：猫道」；因不在 Glitter 日志链内、且属场景层，本轮未纳入批次。"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "Rumors in Rock Bottom.exposition / .text、The Story So Far.text（未改）",
+    "problem": "石底镇的木板路（boardwalk）在 GM 正文里是「木栈道」（7 处），在朗读文本与《迄今为止的故事》里是「木板步道」（2 处）。同一处地面在读给玩家听的段落和 GM 段落里叫两个名字。",
+    "evidence": "EN 均为 boardwalk：exposition「a pair of itinerant spelunkers sharing a bottle of wine on the boardwalk」→CN「一对在木板步道上共享一瓶葡萄酒的流浪洞穴探险者」；text「there's a giant crater in the boardwalk」→CN「木栈道上就有个大坑」；The Story So Far「a ramshackle tent-and-boardwalk town」→CN「由帐篷和木板步道拼凑而成的破败小镇」。",
+    "severity": "观感",
+    "fix": "可统一为「木栈道」（catwalk 已让出「栈道」一词）。分歧程度低于上述几条，为控制改动面本轮未纳入批次。"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\r15-scene-glitter-in-the-dark.json",
+  "gate_clean": true,
+  "gate_output": "PS> python \"$P\\3-常用脚本\\qa\\apply_translations.py\" --repo \"$P\\1-Ember汉化插件\" --pack ember.crucible-adventure.json --batch \"$P\\4-临时脚本\\2026-08-15-round15\\batches\\r15-scene-glitter-in-the-dark.json\" --force --dry\n\nember.crucible-adventure.json\n  applied            17\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "按 GM 备课顺序把 Glitter in the Dark 全 16 页只读中文通读了一遍（Overview → The Story So Far → Concerned Merchants → Surface Matters → A Troubled Tradeway → Scene of the Crime → Rumors in Rock Bottom → Poolside Predicaments / A Peculiar Encampment / Junkyard Cogs → Presenting the Evidence → Storming the Consortium / Checkmate for Chessmen → Chessmen Homecoming / In League with Silver Beam），再逐条回对英文分因果。共 14 条，12 条产了批次（17 个叶，零拒绝）。\n\n按类别的结果：\n\n**跨叶指代断裂——重灾区，9 条。** 前十四轮的叶级判据确实看不见这一类：所有 9 条都是「英文同一个词/同一个实体，中文在不同叶上分叉」。最严重的三条是（1）命案现场那条 catwalk 有猫道/栈道/栈桥/高架走道四种译名，且分裂线正好落在「GM 读出的朗读文本 vs GM 自己看的指令段」之间；（2）边缘镇在一条朗读文本里成了全库唯一的「炽城」；（3）任务奖励物品 GM 念作「聚焦珍珠」、发的却是 crucible 包里的「专注珍珠」。其余为 sinkhole city 的三条离群译名、拉丽莎办公室的主管/高管、银光束仆从招式名与角色卡不符、inquest 的调查听证/审讯、谢普的「工匠学徒」被压成「工匠」、以及《棋士的将死》与《一处古怪的营地》共用战斗段落却标题分叉。\n\n**信息缺口——1 条，且是「中文比英文更缺」而非「英文本来就缺」。** Mark-One 型号名在中文里退化成孤零零的「一型」，句子不成立，GM 认不出这是银光束仆从的型号。真正的信息缺口（读英文拿得到、读中文拿不到 DC / 动机 / 分支条件）**一条都没有**——这条链的检定、DC、贿赂金额、分支触发条件在中文里全部完整保留，且 `[[/skill ...]]` 这类标记本身就是原样照抄的，天然不会丢。\n\n**顺序错乱——0 条，真的没有。** 本链的 read-aloud → GM 摘要 → outcomes 结构由 `<section class=\"block readaloud/gamemaster\">` 和 JSON 的 overview/exposition/text/summary/outcomes 字段硬性承载，译者无法重排，这一类在这条链上不具备暴露条件。\n\n**指令性丢失——0 条，真的没有。** 逐条核过英文的祈使/条件句（\"If the party has already…\"、\"Unless the party is allied with…\"、\"Alternately…\"、\"Only if…\"），中文一律译成了「如果…就…」「除非…否则…」「或者…」，分支性没有被抹平成陈述。\n\n**可玩性硬伤——2 条。** 特拉斯克的洗清裁决台词中文语法崩坏、自相矛盾（这是整条支线的判决句）；奖励物品名不一致已计入上面。规则数字层面（DC、金额、里程碑点数、重量、轮数、生命值阈值）逐条比对**无一处出入**。\n\n**观感（上游本来就这样，不改）：** evidencePools 这一个 outcome 在英文里就叫两个名（Tradeway 作 Inkaro Pool Missive，Poolside 作 Inkaro Pool Mandate，正文物品又是 Mandate）；页名 Junkyard Cogs 与正文 Scrapyard 英文即分裂；condemn 分支的 attunement 块英文写「Akon Attunement」却发 emberCora；\"Talking to the Engineers ... learning the following:\" 后面英文就是空列表；齐尔卡台词里混进了一句 GM 旁白（\"If the party asks about Zirca herself...\"）；`arcutrelSideScrapyard`、`Chessian`/`Chessmen`、`Kellan`/`Kellen`、`Korell`/`Korrel`、`Befriending the Chessmen` vs 标题 `Befriending the DOwnsiders` 等上游拼写/口径不一。中文对这些多数已做了统一处理，属加分。",
+  "escalations": "1. **孪生同步（必做）**：`ember.adventure.json` 里存在完全相同的 Glitter in the Dark 日志，本批 17 个叶在孪生包里全部需要同样改动（已核对：`炽城`、`聚焦珍珠`、`陷坑之城` 等在孪生包里逐条同形存在）。按约定由主控统一同步。\n\n2. **需要主控裁决、我未动的两处术语**：\n   - `scenes.Arcturel Dives.regions.\"Surface: Catwalks\".name = 地表：悬空走道` —— 与本轮统一后的「猫道」仍不一致，属场景层、不在日志链内，建议一并改为「地表：猫道」。\n   - 石底镇 boardwalk：木栈道（7）vs 木板步道（2，含朗读文本与 The Story So Far）。catwalk 统一到「猫道」之后「栈道」已让出，建议统一为「木栈道」。\n\n3. **因卡罗池 / 因卡罗水潭的分裂需要一次全局裁决**：物品 `Item.mkkNU0Hfdio8EVbp` 的 name 与全部 @UUID 标签都是「因卡罗池授权令」，而地点 `Inkaro Pools` 全库一律是「因卡罗水潭」，另有 `A Troubled Tradeway.outcomes.evidencePools` 作「因卡罗水潭密函」。第三种（密函）源自上游英文自身的 Missive/Mandate 分裂，属观感不改；但「因卡罗池」vs「因卡罗水潭」是中文侧可以统一的，涉及 items 层，超出本链范围，未纳入批次。\n\n4. **\"transmutation\" 的两种译法**：Overview 作「混沌变化仪式」+「变化师」，The Story So Far 作「嬗变仪式」，Junkyard/Poolside 又作「变化系魔法」（后者是 5e 学派名，正确）。因专名「超越图解」始终在场、指代不会真断，本轮按观感处理未改；若主控要求 glossary 级统一，建议把仪式类语境统一到「变化」，保留学派名「变化系」。\n\n5. **一处译法选择请复核**：catwalk 统一到「猫道」而非「栈道」，理由是改动面最小（猫道 13 处不动、只改 6 个离群叶）、且「猫道」是中文工程术语里 catwalk 的对应词；代价是它比「栈道」生僻。若主控偏好「栈道」，需反向重做（要改 13 处，其中 Scene of the Crime.text、A Troubled Tradeway.text 是大叶）。"
+ },
+ {
+  "unit": "The Winding Trail（主线包 ember.crucible-adventure.json，Overview→Leavetakings 全 17 页，按 sort 顺序整链通读）",
+  "findings": [
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.The Collapsed Cairn.text —「寻求帮助」社交区块",
+    "problem": "克利珀（单数 NPC）在中文里被写成「他们」，读者只能解析为复数第三方，整句变成「克利珀说（某群人）听说过一支远征队」。同一区块上一句刚写「她们各自补充了以下信息」（莱拉+克利珀），紧接着「他们」指谁完全断裂。这条线索是队伍北线去月上之旅的两条引路之一，GM 念错主语就把线索来源讲丢。",
+    "evidence": "CN：「克利珀说他们听说过一支来自阿纳克瑞纽姆的远征队：」／EN：「Clipper says they've heard about an expedition from the Anachraenum:」——英文是单数 they（克利珀本人的代词），中文「他们」无此用法。同页前一句 CN「她们各自补充了以下信息」。",
+    "severity": "一般",
+    "fix": "「克利珀说他们听说过」→「克利珀说自己听说过」（已入批次，仅动 2 字）"
+   },
+   {
+    "kind": "信息缺口",
+    "where": "pages.Leavetakings.text —「安卡里斯特的调查」问答区块",
+    "problem": "英文的话题式提问被改写成「为什么」型提问，答语随之变成答非所问。GM 照本念，玩家问「你为什么对巨龙感兴趣？」，安卡里斯特答「至少足以让我知道…」——中文读者拿不到这段本该给出的信息（他对巨龙的了解程度＋塔扬帝国的亲历见闻），只会以为翻译错行。同一区块其余 4 问全是名词短语式（你的经历？／帷幕锁链？／关于你的魔法？），只有这一条被改成疑问句。",
+    "evidence": "CN 问：「你为什么对巨龙感兴趣？」答：「至少足以让我知道，它们绝对不是什么好消息。」／EN 问：「Your interest in dragons?」答：「Enough to know they are bad news.」——英文是「（我的兴趣）足以让我知道……」，问答自洽。",
+    "severity": "一般",
+    "fix": "问句改为「你对巨龙的兴趣？」，答语一字不动即恢复自洽（已入批次）"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Dusktide Rising.text vs pages.Dusktide Destruction.text —「死去的龙兽」勘察段",
+    "problem": "同一句英文在两页里被译成两个词。这两页是互斥分支（准时到 vs 迟到到），但正文都要 GM 引导玩家把赫尔卡斯的成年龙兽和石之森林那只小的对上号；一页说「患病幼龙」、一页说「患病幼龙兽」，只读中文的 GM 无法确定是不是同一种生物，而「认出这属于同一种类型」正是这段的全部作用。",
+    "evidence": "EN 两页同句：「Any character who fought the sick drakeling in the Forest of Stone recognize these as the same sort…」；CN Dusktide Rising：「任何曾在石之森林与那只患病幼龙战斗过的角色」；CN Dusktide Destruction：「任何曾在石之森林与那只患病幼龙兽战斗过的角色」。",
+    "severity": "一般",
+    "fix": "Dusktide Rising 内「患病幼龙」→「患病幼龙兽」，与全链 23 处正文用词统一（已入批次）"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Sickly Drakelings.name（页签/目录名）",
+    "problem": "目录里这一场戏叫「病弱雏龙」，但正文从头到尾没有「雏龙」二字（全链仅此 1 处），正文一律作「幼龙兽」，怪物卡作「受难苍白幼龙」。GM 在目录里找这场遭遇、或在事后回查「刚才那些幼龙兽在哪一页」时会对不上号。",
+    "evidence": "页名 CN「病弱雏龙 Sickly Drakelings」；同页正文「幼龙兽伏击」「在危险而绝望的幼龙兽伏击下生还」「这些幼龙兽是队伍将会遭遇到的第一项证据」。全库计数：幼龙兽 23、雏龙 1。",
+    "severity": "一般",
+    "fix": "页名改「病弱幼龙兽 Sickly Drakelings」（已入批次）"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "6 处：The Collapsed Cairn.exposition／Giant Moonstone.overview／Lending a Hand.overview／Ravine Outlet.exposition／Leavetakings.overview／Leavetakings.summary",
+    "problem": "英文的普通名词 path 被机械替换成「径」单字。而「径」在本包里是专名构件（翠绿径 Verdant Paths、远古径 Ancient Paths、小径 The Winding Trail），单用时中文不成词，GM 会把普通名词读成地名。最典型的是 Leavetakings 摘要——那一刻队伍恰好要在「远古径」等三条主线里选一条，「我们就要走哪一条径做出了选择」直接可被误读为「选了远古径」。Ravine Outlet 的「猛扑进你的径中」是要念给玩家听的开场白，读不通。",
+    "evidence": "CN/EN 对照：「商队在一条崎岖不平的径上辘辘前行」/「trundles down an uneven path」；「穿过石之森林的径上」/「on the path through the Forest of Stone」；「探索了该地区的一条径之后」/「having explored one of the paths in the region」；「猛扑进你的径中」/「swoops into your path」；「他们的径必须分开」/「where their paths must diverge」；「我们就要走哪一条径做出了选择」/「a choice about which path to follow」。同页 Leavetakings.text 里同一英文短语已正确译作「要走哪条路」「要走哪条道路」。",
+    "severity": "一般",
+    "fix": "分别改为「小路上／路上／一条路径／你的去路／他们的路／哪一条路」，每处 1 字（已入批次）"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "pages.Giant Moonstone.text —「你在学什么？」克利珀问答",
+    "problem": "阿格拉班德的昵称被音译成「阿吉」，与正名「阿格拉班德」无共同音节，只读中文的 GM 念到「像那边的阿吉一样摇摇晃晃」时不知道指谁（要靠下一句「那位干瘦苍老的吟游诗人」倒推）。英文 Aggie↔Agraband 一望即知。全库仅此 1 处出现「阿吉」。",
+    "evidence": "CN：「等我老得像那边的阿吉一样摇摇晃晃的时候……」／EN：「when I'm old and rickety like Aggie over there …」",
+    "severity": "观感",
+    "fix": "「阿吉」→「阿格」，保留昵称口吻同时接得回正名（已入批次）"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：Orbis 的定语",
+    "problem": "奥比斯在 Sheltered Campsite / Skies Above 是「灵魂之月」，在 Dusktide Revelry（小兽与蛋糕）是「暗月」。",
+    "evidence": "EN 自身即混用：「the spirit moon of Orbis」（Sheltered Campsite、Skies Above「the waxing spirit moon」）vs「Orbis (the Dark Moon)」「the Dark Moon Orbis」（Critters and Cakes）。",
+    "severity": "观感"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：翠绿径 / 翠绿通路",
+    "problem": "同一生物群系在 The Collapsed Cairn 事件结束段作「翠绿通路」，其余 9 处作「翠绿径」。「通路」在本包是地下 Pathways 的专名，中文里比英文更容易误导。",
+    "evidence": "EN：10 处「Verdant Paths」，唯 The Collapsed Cairn 结尾 1 处写作「the Verdant Pathways」。中译 1:1 忠实跟随。",
+    "severity": "观感"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：巨型月石 / 巨人月石",
+    "problem": "Winding Trail 事件页与正文称「巨型月石」，指向地名志的链接标签称「巨人月石」。",
+    "evidence": "EN：地名志页名「Giant's Moonstone」，事件页名与正文「Giant Moonstone」；中译两名分别对应，1:1 忠实。",
+    "severity": "观感"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：辛达林神殿 / 辛达里克贤者",
+    "problem": "Leavetakings 引言说辛要去「辛达林神殿的代言者」处，全链其他地方一律「辛达里克贤者」。",
+    "evidence": "EN：「where she can deliver news about the events in Helkas to the Speaker at Cindarin Temple」——上游自身即 Cindarin vs Cindaric 不一致。",
+    "severity": "观感"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：The Smoke Clears 安卡里斯特「现在怎么办？」",
+    "problem": "全场打的是「龙兽（drakes）」，安卡里斯特却说要去追查「这些巨龙那洞窟般的源头」；「巨龙」在本包是阿肯破碎后诞生的神话巨龙，与龙兽是两类东西。",
+    "evidence": "EN：「The drakes in particular are an emerging menace… I will be traveling north, to Skybrush, to seek the cavernous origin of these dragons.」——上游同句内就 drakes→dragons 漂移，英文读者遇到同样的歧义。",
+    "severity": "观感"
+   },
+   {
+    "kind": "跨叶指代断裂",
+    "where": "上游既有，未改：赫尔卡斯战场的「广场 / 绿地 / 绿地广场」",
+    "problem": "Dusktide Rising 的战场层级叫「绿地」，正文反复说「守住广场」，又出现「回到了赫尔卡斯的绿地广场」。",
+    "evidence": "EN 同样混用：Level 名「Green」，正文「hold the square」「returned to the Helkas green」「the town square」。",
+    "severity": "观感"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\round15-scene-read.json",
+  "gate_clean": true,
+  "gate_output": "PS> python \"$P\\3-常用脚本\\qa\\apply_translations.py\" --repo \"...\\1-Ember汉化插件\" --pack ember.crucible-adventure.json --batch \"...\\4-临时脚本\\2026-08-15-round15\\batches\\round15-scene-read.json\" --force --dry\n\nember.crucible-adventure.json\n  applied            11\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "把 The Winding Trail 全 17 页（含 overview/exposition/summary/outcomes 叶）按 sort 顺序当成一次真实备课通读，只读中文，再逐处回对英文。批次 11 个叶、6 类改动，过闸零拒绝。\n\n【按类别的结论，含零结果】\n· 顺序错乱：真的没有，且可证伪——我按 </p></li></h*></blockquote></dt></dd> 切块对齐 EN/CN，17 页每一页的块数完全相等（脚本验证无一处 LEN MISMATCH），说明中文行文顺序与英文逐块同构，不存在「GM 在需要之前拿不到 / 提前拿到」的重排。唯一读着别扭的是 The Smoke Clears 里「萨德里赠礼」段夹在「若队伍在场」与「若队伍不在场」两个问答之间（迟到的队伍看上去也能领奖），但英文块序完全相同，属上游。\n· 指令性丢失：真的没有。脚本扫了全部 EN 块中 If/Unless/Should/Once/Before/After/Instead/Otherwise/only if/as long as，逐块检查中文是否保留 如果/若/除非/一旦/否则/改为/只要/反之/等到 等条件标记；命中的 21 条全部是 Once/After 作纯时间状语（「…之后」「…结束后」），无一处把分支写成陈述。\n· 可玩性硬伤：真的没有。DC、检定、奖励、伤害全在 [[/…]] 与 @UUID 标记里原样照抄；我另外把两侧散文中的裸数字逐块做了集合比对，差异全部是全角/空格造成的伪报，实数无一处出入（48/16/8 小时、20 英尺、1cp/2cp、至少 6 名劫掠者、第5天16:00 / 第6天00:00 三档守时线、100/10gp 与 120/12gp、里程碑 1/2/3 级 均一致）。英文「2o feet」的排字错误在中文里被正确判读为 20 英尺。\n· 信息缺口（漏译）：真的没有。按「EN 有效字符 >100 且 CN < 20.5%」扫全部叶，只命中 1 条且是正常压缩，无内容脱落。本类唯一的实质缺陷是问答框架被改写（安卡里斯特谈巨龙那条），属「读英文拿得到、读中文拿不到」。\n· 跨叶指代断裂：这条链最集中的缺陷面，出了 6 条译文造成的（已改）＋ 6 条上游本来就这样的（记观感、不改）。译文造成的一律是「英文本来就不同或英文无歧义、中文却断了链」：单数 they→「他们」、drakeling 的雏龙/幼龙/幼龙兽三名、path→裸字「径」撞上专名「翠绿径/远古径」、昵称 Aggie→「阿吉」接不回「阿格拉班德」。\n\n【改动面】11 个叶里 9 个只动 1–2 字；最大的一处是把一个问句从「你为什么对巨龙感兴趣？」改成「你对巨龙的兴趣？」。没有改写任何整句，没有碰标记、id、方括号内容。",
+  "escalations": "1) 克利珀的人称需要全包定一次策略（我只改了最会被误读的一处）。英文对克利珀 she/her 与单数 they 混用；中译照搬后变成：Giant Moonstone / Arrival at Helkas / The Smoke Clears 用「她」，The Collapsed Cairn / Dusktide Revelry（高击机朗读段「他们猛击击板…他们那虚幻的手臂垂了下来」）/ Dusktide Destruction（「用他们那只虚幻的手」）用「他们」。中文没有单数 they 的读法，凡「他们」处都会被读成复数。本轮只修了 The Collapsed Cairn 那处（因为它紧邻「她们各自补充」，最易误解）；其余属于「克利珀统一用哪个代词」的全包决定，且要连 Notable Figures / 角色卡描述一起扫，请主控裁决后统一下批次。\n\n2) 怪物卡译名：同一个英文词 Afflicted 在两只并肩出场的怪物上译成两个词——Actor「Afflicted Pallid Drake」=「受苦的苍白龙兽」，Actor「Afflicted Pallid Drakeling」=「受难苍白幼龙」（entries.Ember Early Access.actors）。它们在 Dusktide Rising 同一场战斗里并排列出。另外 Drakeling 的对应词在 actors 里是「幼龙」、在事件正文里是「幼龙兽」。改 actors 会牵动全包所有 @UUID 标签，超出「只产主线包 Winding Trail 批次」的范围，请主控决定统一口径后一次性下批。\n\n3) 建议登记进「已知上游缺陷」清单（本轮确认、未改）：Orbis 的 spirit moon/Dark Moon 双称；Verdant Paths vs 唯一一处 Verdant Pathways；Giant Moonstone vs Giant's Moonstone；Cindarin Temple vs Cindaric Sages；安卡里斯特把 drakes 说成 dragons；赫尔卡斯战场 square/green 混用；Sickly Drakelings 里同一 Actor 的标签在上游写作 Mutated Pallid Drakelings / Afflicted Pallid Drakelings（中译反而已统一为「受难苍白幼龙」，是改善，勿回滚）。"
+ },
+ {
+  "unit": "Cultures（journals.Cultures，30 页 / 131 叶）",
+  "findings": [
+   {
+    "kind": "长定语",
+    "where": "pages.Arcturian.contentOverview",
+    "problem": "「一座连接过去与他们所期望创造的未来的活桥」——18 字前置定语套一个「的」结尾的名词，读者要读到最后才知道主词是「桥」",
+    "evidence": "EN: view themselves as a living bridge between the past and a future they aspire to create.｜改后「都把自己看作一座活着的桥：一端连着过去，一端连着他们期望创造的未来。」信息点（活桥/过去/所期望创造的未来）一个不少",
+    "fix": "拆成「一座活着的桥：一端连着…，一端连着…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "pages.Arcturian.text（习俗段末）",
+    "problem": "「非常以能通过自己制作或分享的物品表达这份用心而自豪」——「以…而自豪」中间塞进 20 字，中文断不开",
+    "evidence": "EN: take great pride in expressing that care through the items they make or share.｜改后「而且他们非常自豪于能借自己制作或分享的物品，把这份用心传达出来。」语义完全相同",
+    "fix": "把「以…而自豪」改成「自豪于…」并后置宾语",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Aedir.text（身份认同段）",
+    "problem": "「这一点并未得到少数留存历史记录的支持」——英文被动直译，中文该把史料提为主语",
+    "evidence": "EN: This, however, is not supported by the few historical records that have survived｜改后「留存下来的少数史料并不支持这种印象」，主宾关系不变",
+    "fix": "主动化：史料并不支持这种印象",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Ordani.text（饮食段）",
+    "problem": "「那些源自其他地方、却只有因奥尔丹作为枢纽城市的角色才得以实现的意外菜系组合」——32 字定语压在「菜系组合」前",
+    "evidence": "EN: unexpected combinations of cuisines that originate elsewhere and are only made possible because of Ordain's role as a hub city.｜改后先给中心词再补两条来源说明，「源自别处」「靠枢纽城市地位才可能」都保留",
+    "fix": "中心词前置，定语降级为破折号后的解释",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Ordani.text（技术与魔法段）",
+    "problem": "「在必要时负责城市检查与安全部门的幽圣所」——专名被 15 字定语埋在后面；整句「无论是…、…，还是…，终将发现并处理它」跨度过长",
+    "evidence": "EN: it will be found and handled by either the individual who brings it into the city, their local community, or, if needed, the Hallows, who run the city's inspection and safety departments.｜改后三个施动者依次列出，幽圣所的职权改为破折号补语",
+    "fix": "「总会有人发现并处理它：或是…，或是…，必要时则是幽圣所——城市的检查与安全部门由他们掌管。」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Ordani.text（社会结构段末）",
+    "problem": "「身处那些掌权者反对其行动或目标的情境时」——把英文 when 从句硬做成「…的情境」名词",
+    "evidence": "EN: when found in situations where those in charge oppose their actions or goals｜改后「当他们遇上掌权者反对自己的行动或目标时」，条件与主句关系不变",
+    "fix": "名词化还原为时间/条件从句",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Cascilian.text（习俗与传统段首）",
+    "problem": "「以社群团结、受压迫的历史，以及在这个被强大势力主宰的世界中竭力守住自由的强烈愿望为特征」——「以…为特征」中间夹 40 余字，读到「为特征」已忘了开头",
+    "evidence": "EN: Life in the republic is characterized by community unity, a history of oppression, and a strong desire to stay free in a world dominated by powerful forces they desperately try to hold at bay.｜改后「共和国的生活有三样底色：…、…、…——那些强权，他们拼尽全力挡在门外。」三项加尾句全保留",
+    "fix": "改成冒号列举三项",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Cascilian.text（社会结构段）",
+    "problem": "「来自各大港口城市民选代表组成的议会的建议」——一句三个「的」，三层定语套叠",
+    "evidence": "EN: are advised by a council of elected representatives from major port cities.｜改后「听取一个议会的建议——议会由各大港口城市选出的代表组成。」",
+    "fix": "把「谁组成议会」拆为独立小句",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Cascilian.text（技术与魔法段）",
+    "problem": "「视为可供模仿、精炼并满足自身需求的对象」——名词化「对象」把三个动作压成定语",
+    "evidence": "EN: see the strength and power of its creatures and plants as something they can emulate and refine to meet their needs.｜改后「在他们看来，那里的生物与植物所展现的力量和能力，都可以模仿、提炼，用来满足自身需求。」",
+    "fix": "名词化还原为动词串；顺手把前一处逗号串句改分号",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Lorai.text（破碎之刃段）",
+    "problem": "「守护对阿肯恢复至关重要的知识的职责」——「…的知识的职责」两层「的」叠加，且三项并列全挂在「职责」前",
+    "evidence": "EN: they are tasked with defending the enclaves, confronting Abyssal threats, and safeguarding knowledge vital to the restoration of Akon.｜改后「他们肩负三重职责：保卫飞地、对抗深渊威胁，以及守护那些对阿肯恢复至关重要的知识。」",
+    "fix": "「肩负三重职责：…」冒号列举",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Lorai.text（破碎之刃段）",
+    "problem": "「同时接受武艺和灌注天界之力技法的训练」——两个并列宾语被压进「…的训练」，读起来像一个词组",
+    "evidence": "EN: Shattered Blades train in both martial skill and celestial-imbued techniques.｜改后「破碎之刃既习武艺，也修习灌注了天界之力的技法。」",
+    "fix": "「既…也…」双动词",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Lorai.text（仪式句 + 准则句）",
+    "problem": "「旨在调和身体、心灵与他们努力恢复的宇宙力量的冥想修行」四层修饰；紧接「受一套克制、谦卑与奉献于族人赎罪的准则所引导」又是「受…所引导」被动 + 长定语",
+    "evidence": "EN: meditative practices designed to harmonize body, mind, and the cosmic forces they strive to restore. … their actions are guided by a code of restraint, humility, and devotion to the penance of their people.｜改后拆成「种种冥想修行——这些修行意在…」与「行事却始终遵循一套准则：克制、谦卑，并献身于族人的赎罪。」",
+    "fix": "定语后置为破折号补语；被动改「遵循」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Nalvani.contentOverview",
+    "problem": "「纳尔瓦尼人被畏惧为奴隶贩子与血腥崇拜者」——「被畏惧为」不是中文说法",
+    "evidence": "EN: Feared as slavers and blood worshippers, the Nalvani are patient predators｜改后「世人畏惧纳尔瓦尼人，视其为奴隶贩子与血腥崇拜者。」施受关系不变",
+    "fix": "补出施动者「世人」，改主动",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Nalvani.text（相关文化）",
+    "problem": "「任何试图渗透凯西安领地的纳尔瓦尼人都会毫不犹豫地被捕」——长定语 +「毫不犹豫地被捕」（状语属于施动方，却挂在被动上）",
+    "evidence": "EN: Any Nalvani who attempts to infiltrate Kessian lands is captured without hesitation｜改后「纳尔瓦尼人只要试图潜入凯西安领地，凯西安人就会毫不犹豫地将其擒获」，「毫不犹豫」归回施动者",
+    "fix": "条件句 + 主动",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Rhivan.text（相关文化）",
+    "problem": "「创造并维持纵横世界的传送门网络的能力」——「…的…的能力」叠套，且整句以 30 字原因状语开头",
+    "evidence": "EN: Due to their strong magic, especially the ability to create and maintain a portal network that crisscrosses the world, the Rhivan are connected to almost every culture｜改后「里凡人魔法强大，尤其能创造并维持一张纵横世界的传送门网络；正因如此，他们与几乎所有文化都有联系」",
+    "fix": "原因前置成独立小句 +「正因如此」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Kithil.text（夜行崇拜者段）",
+    "problem": "「被传说为Voracta的生物」——「被传说为」是英文 known as 的硬译，中文不成立",
+    "evidence": "EN: makes it easier for fabled creatures known as the Voracta to hunt them.｜改后「传说中那种名为Voracta的生物」，专名照抄未动",
+    "fix": "改「传说中那种名为…的生物」",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Kithil.text（晒日段首）",
+    "problem": "「对那些生活在兰提尔凝视之下的人们的文化规范充满兴趣」——「…的人们的文化规范」两层「的」，中心词被推到 20 字之后",
+    "evidence": "EN: Kithil are fascinated by the cultural norms of those who live under Lantyr's gaze｜改后「兰提尔凝视之下的那些人有着怎样的文化规范，基希尔人对此深感着迷」；主语仍落在基希尔人，后句「许多人」的指代不变",
+    "fix": "话题句前置 +「对此」回指",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Kithil.text（炊火段末）",
+    "problem": "「由某个议题被提出时在场于炊火旁的人共同作出」——被动嵌被动，定语 18 字",
+    "evidence": "EN: any decisions … are made by whoever is at the cookfire when a topic is raised, no matter how new they might be to the group.｜改后「至于下一步该做什么，则是谁在议题提起时正坐在炊火旁，就由谁一起决定」，「不论加入时间多短」保留",
+    "fix": "「谁…就由谁…」句式",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Lumek.text（日常生活段）",
+    "problem": "「日常生活常常被艰苦训练、操练…所支配」——「被…所支配」是典型译文腔，三项施动词全压在被动里",
+    "evidence": "EN: Daily life is often dominated by hard training, drills, and the ever-present air of coming doom.｜改后「艰苦的训练、操练，以及无处不在的末日将临之感，常常主宰着他们的日常生活。」",
+    "fix": "施动者提前作主语",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Tayan.contentOverview",
+    "problem": "「一个以无休止的扩张、强大的工业力量，以及被易变的炼金物质艾西拉重塑的社会所定义的强盛国度」——40 字定语 +「被…所定义的」双重被动",
+    "evidence": "EN: a powerful realm defined by relentless expansion, industrial might, and a society reshaped by the volatile alchemical substance Aethyra.｜改后「是一个强盛的国度；定义它的是无休止的扩张、强大的工业力量，以及一个被易变的炼金物质艾西拉重塑的社会。」三项全保留",
+    "fix": "中心词前置，「定义它的是…」承接",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Tayan.text（生活段）",
+    "problem": "「但忠诚是被要求的」——英文无施动被动直搬，中文读来像残句",
+    "evidence": "EN: but loyalty is demanded｜改后「但帝国要求忠诚」，施动者由上下文（帝国/女皇）明确",
+    "fix": "补施动者改主动",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Tayan.text（衰落中的贵族领）",
+    "problem": "一句三个「被」：「正被一种…过程所取代——古老领主们被变成中层管理者，或被彻底取而代之」",
+    "evidence": "EN: Their rights and privileges are being replaced by a slow and effective process of turning ancient lords into middle managers or displacing them entirely.｜改后「他们的权利与特权，正让位于一套缓慢而有效的流程：古老的领主要么沦为中层管理者，要么被整个取而代之。」被动只留一处",
+    "fix": "「让位于」+「要么…要么…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Tayan.text（艾西拉段）",
+    "problem": "「为从城市基础设施和机械，到实验性步枪…与大型移动攻城引擎的一切提供动力」——「为…的一切提供动力」中间夹 35 字清单",
+    "evidence": "EN: powering everything from urban infrastructure and machinery to experimental rifles, Munitions, armored warframes, and massive mobile siege engines.｜改后「小到城市基础设施和机械，大到实验性步枪、军需品、装甲战甲与大型移动攻城引擎，全都靠它提供动力。」清单一项未减",
+    "fix": "「小到…大到…，全都靠它…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Tayan.text（宗教与信仰段）",
+    "problem": "「锚定他们日常生活与对帝国律法服从的精神领袖与向导」——两个宾语（生活/服从）压进定语，中心词在最后",
+    "evidence": "EN: are spiritual leaders and guides that anchor their daily lives and obedience to the laws of the Empire.｜改后「而是精神领袖与向导，既锚定他们的日常生活，也锚定他们对帝国律法的服从。」",
+    "fix": "中心词前置，定语拆成「既…也…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "pages.Waerd.text（宗教与信仰段首）",
+    "problem": "「诸神万神殿」——「万神殿」本已含「诸神」，属自我重复；且前面还压着 20 字定语",
+    "evidence": "EN: recognise the Nineteen as a distant, all-encompassing Pantheon of deities with varying roles in society｜改后「一个遥远而包罗万象的万神殿，其中诸神在社会中各司其职」，with varying roles 落到后置小句",
+    "fix": "删重复词素，定语拆为后置小句",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "pages.Waerd.text（语言与沟通段末）",
+    "problem": "「使用一种结合了通过血统之墨传承下来的古老符文，以及刻在树皮或树木上的图画符号的方式」——45 字定语后跟「的方式」，四个「的」",
+    "evidence": "EN: use a combination of ancient glyphs passed down through their Ancestral Ink and pictograms carved into bark or trees, which guide other hunters in the wild.｜改后「用的是两样东西的结合：一是…，二是…——后者为荒野中的其他猎手指引方向。」保留了 which 从句只修饰图画符号这一点",
+    "fix": "「两样东西的结合：一是…二是…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "pages.Wardcall.text（冰封誓约段）",
+    "problem": "「对『忍耐乃高于一切的美德』这一信念的坚定不移」——把 unshakable belief 名词化成「对…这一信念的坚定不移」，与前两项并列时头重脚轻",
+    "evidence": "EN: known for their restraint and ceremony, their strict sense of order, and their unshakable belief that endurance is a virtue above all others.｜改后「以及坚信忍耐是高于一切的美德而闻名」",
+    "fix": "名词化还原为动词「坚信」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Kelmezian.text（夜巡者段首）",
+    "problem": "「足以压倒一切的混沌与犯罪潜势，被夜巡者这个组织所遏制」——「被…所遏制」+「犯罪潜势」这种名词化，一句里两处译文腔",
+    "evidence": "EN: The potential for overwhelming chaos and crime in such packed environments is held in check by the Nightwatch, an organization that operates with a fervor that borders on the fanatical.｜改后「混乱与犯罪本足以压倒一切，是夜巡者压住了它们——这个组织行事的热忱近乎狂热。」",
+    "fix": "主动化 + 同位语后置",
+    "severity": "一般"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "pages.Kelmezian.text（夜巡者段前一句）",
+    "problem": "「这种稠密的城市密度」——「稠密」与「密度」同义重复",
+    "evidence": "EN: This dense urban density is managed by a complex network of noble factions, senates, and councils｜改后「如此之高的城市密度，由贵族派系、元老院与议会交织成的一张复杂网络来管理」，三类机构一个不少",
+    "fix": "去掉重复词素，改「如此之高的城市密度」",
+    "severity": "一般"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "pages.Railen.text（狂热的征服者段首）",
+    "problem": "「军事力量、力量，以及战斗技艺的展示」——并列三项里前两项都译成「力量」，中文看不出区别",
+    "evidence": "EN: Martial power, strength, and displays of fighting prowess are highly respected traits｜改后「武力、强悍，以及战斗技艺的展示」，三项各有落点",
+    "fix": "martial power→武力，strength→强悍",
+    "severity": "一般"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "pages.The Cultures.text（传说概要第 2 条）",
+    "problem": "四个子类别里 Prominent 被译成「显著」，但同一条紧接的项目符号写「主要文化是指…」，页面分类标签 categories.Prominent 也是「主要」——同一个分类名在三处出现两种译法，读者对不上",
+    "evidence": "EN 正文 Prominent/Regional/Distant/Ancient；本库 categories.Prominent=「主要」，本条下一行也是「主要文化是指那些位于奥尔丹附近的文化」｜改后统一为「主要、本地、遥远或远古」",
+    "fix": "「显著」→「主要」，与分类标签及下文一致",
+    "severity": "严重"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "pages.Ossarchate.text（血男爵段）",
+    "problem": "一句三处被动「活人被繁育、收割并改造」「令被囚禁的人口」「被塑造成…军队中的新士兵」，末尾还是「…那支不断扩张的军队中的新士兵」长定语",
+    "evidence": "EN: the living are bred, harvested, and transformed; necromantic fields keep the captive populations docile while their flesh and souls are shaped into new soldiers for the Ossarchate's ever-growing armies.｜改后「活人被繁育、收割、改造；死灵力场让囚禁中的人口温顺听话，再把他们的血肉与灵魂塑造成新的士兵，去充实骸骨领那支不断扩张的军队。」只留首处被动",
+    "fix": "后两处改主动，长定语拆为「去充实…军队」",
+    "severity": "一般"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\cultures-readability.json",
+  "gate_clean": true,
+  "gate_output": "ember.crucible-adventure.json\n  applied            19\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "通读了 Cultures 全 30 页 131 叶的中英对照（约 8.5 万中文字），只从「中文本身好不好」这一维度挑毛病。整体译文质量比预期高：术语一致、信息点完整、几乎没有硬伤，大多数段落作为读物是通顺的。真正能说出病名的地方共 32 处，落在 19 个叶上，已产批次 cultures-readability.json，过闸 19/19 零拒绝。\n\n病名分布：长定语 11、被字滥用 8、的的不休 5、同义堆砌 3、词序照搬 1、术语当普通词 1（另有 3 处属长定语与被动叠加，按主症归类）。集中出现的模式有两个：一是英文的后置关系从句被整体前置成「…的…的 N」，中心词被推到二三十字之后（Ordani 菜系句、Waerd 书写系统句、Lorai 职责句最典型）；二是英文无施动被动直搬成「被…所…」，尤其在 Tayan、Ossarchate、Lumek 这类描写权力/制度的段落里成串出现。\n\n唯一一处不属于「翻译腔」而属于实质缺陷的是 The Cultures 页：四个文化分类里 Prominent 在正文译成「显著」，但同一条下一行的解释和页面分类标签 categories.Prominent 都是「主要」，同一个分类名两种译法，玩家对不上号，已统一为「主要」。\n\n所有改动都是同一叶内的单点字符串替换（脚本按「原串在该叶恰好出现 1 次」校验后替换，非重写整叶），未动任何 @UUID/@Check/[[/…]]/section class/id 标记，未动定译表里的任何术语，未动数字，也未增删任何信息点。改动前后逐句核过英文原文，语义无漂移。\n\n另有若干处「可改可不改」的地方（如 Ordani「相对均衡的权力平衡」、Lumek「确保资源被有效分配」、The Cultures「血统们」这种复数标记硬搬）按自检标准判为收益不明显或病名归不进给定分类，未纳入批次。",
+  "escalations": "1. `pages.The Cultures.text` 的「显著→主要」是分类名一致性问题，不是纯润色。同一批分类名在 categories.* 与各页正文里可能还有别的不一致（本轮只在 Cultures 这一页范围内核对过），建议主控用一次全库扫描确认 Prominent/Regional/Distant/Ancient 四个词在其他 journals 里的译法是否也统一。\n\n2. 本轮只改主线包 ember.crucible-adventure.json，孪生包（如 crucible-* / dnd5e-* 对应叶）未动，按约定由主控统一同步。\n\n3. 发现但未改、留给保真度轮次判断的两处疑似语义问题：\n   - `pages.Aedir.text`：「他们的骄傲与傲慢使他们目眩」对应 EN \"their pride and arrogance blinded them\"，blind 在此是「蒙蔽」不是「目眩」（目眩指强光致晕），语义偏了；属保真度问题，不在本轮判据内，未动。\n   - `pages.Ossarchate.text`：「通过否定死亡性来完善存在」对应 EN \"the perfection of existence through the denial of mortality\"，mortality 译作「死亡性」不知所云，宜作「凡人的必死」；改动会触及概念译名，留给术语裁决。\n\n4. `pages.The Cultures.text` 另有「你会发现血统们共存于大都会中心」，「血统们」是英文复数标记硬搬（EN: ancestries coexist），中文不这么说；因为归不进本轮给定的九个病名，按「宁可少改」原则未纳入批次，若主控认可可单独补一条。"
+ },
+ {
+  "unit": "Players' Guide（ember.crucible-adventure.json，Ember Early Access / journals / Players' Guide，共 33 叶，其中 6 叶为纯 @Embed 无正文）",
+  "findings": [
+   {
+    "kind": "被字滥用",
+    "where": "Gameplay Overview",
+    "problem": "「你会被呈现一个情境，然后被问到」——英文的两个被动直译成两个「被」，中文读者要绕一下才知道是谁在问谁。改为主动：「游戏给出一个情境，然后以你角色的身份问你」。信息点（呈现情境 / 提问 / 以角色身份 / 你要做什么）一个不少。",
+    "evidence": "EN: \"the fundamental experience of Ember is one in which you are presented with a situation, and asked, as your character: what do you do?\"",
+    "severity": "一般",
+    "fix": "余烬的基础体验是：游戏给出一个情境，然后以你角色的身份问你：<em>你要做什么？</em>"
+   },
+   {
+    "kind": "长定语",
+    "where": "Gameplay Overview",
+    "problem": "「独立事件是未直接关联到更大线索中的单独遭遇」——12 字前置定语压在「遭遇」上，且「关联到…中」搭配不成立。拆成主句＋补充句。",
+    "evidence": "EN: \"Standalone Events are individual encounters not directly linked to a larger thread.\"",
+    "severity": "一般",
+    "fix": "独立事件是单独的遭遇，并不直接隶属于某条更大的线索。"
+   },
+   {
+    "kind": "长定语",
+    "where": "Gameplay Overview",
+    "problem": "「以及在其上移动的其他机制影响」——英文的名词化短语照搬，中文读成「移动的影响」缺主语。展开成小句。",
+    "evidence": "EN: \"…and other mechanical implications of your movement through it.\"",
+    "severity": "观感",
+    "fix": "以及你在其上移动还会带来哪些机制层面的影响，仍然会很有帮助。"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Area Maps",
+    "problem": "Foundry 的 sight 一律译「视野/视线」，此叶三处写成「视觉范围」「视觉会被墙壁阻挡」「视觉延展」。「视觉」是生理感官，玩家看不出这是令牌的视野属性；同包其他叶（Region Exploration）已用「视野」。",
+    "evidence": "EN: \"Player Character Tokens automatically incorporate the sight ranges from their character sheet. Sight is blocked by walls…\" / \"allow the vision of nearby Character Tokens to extend through the area behind that door.\"",
+    "severity": "一般",
+    "fix": "视觉范围→视野范围；视觉会被墙壁阻挡→视线会被墙壁阻挡；视觉延展→视野延伸"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "Setting Overview",
+    "problem": "「众多多元文化」把 a host of + diverse 拆成「众多」「多元」两个近义词叠在一起，读起来发糊。",
+    "evidence": "EN: \"home to a host of diverse cultures and distinct ancestries living upon its surface\"",
+    "severity": "观感",
+    "fix": "多种多样的文化与各不相同的血统生活在它的地表之上"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Setting Overview",
+    "problem": "「这个世界无论如何都被设计为可以完整游玩」——designed to be 直译成「被设计为」，中文不需要这个被动。",
+    "evidence": "EN: \"the world is designed to be fully playable regardless.\"",
+    "severity": "观感",
+    "fix": "而这个世界的设计本就保证它无论如何都能完整游玩。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Welcome to Ember",
+    "problem": "「余烬游戏不仅仅是人们对……的预期」——把 more than what one might expect 照抄成「不仅仅是……的预期」，主语（游戏）和表语（预期）在中文里是两类东西，句子读不通。",
+    "evidence": "EN: \"The Ember game is more than what one might expect from a traditional roleplaying game setting or adventure\"",
+    "severity": "一般",
+    "fix": "余烬游戏所提供的，超出人们对传统角色扮演游戏设定或冒险的预期"
+   },
+   {
+    "kind": "长定语",
+    "where": "Welcome to Ember",
+    "problem": "「它是一个会在你的角色身边活着并不断变化的互动世界」——18 字定语压在「互动世界」前，先说「世界」再补性质更顺。",
+    "evidence": "EN: \"it is an interactive world that lives and changes around your characters.\"",
+    "severity": "一般",
+    "fix": "它是一个互动的世界，会在你的角色身边活起来、不断变化。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Welcome to Ember",
+    "problem": "「与屏幕上的互动元素（如陷阱、谜题和动态光照）进行互动」——同一小句里「互动元素…进行互动」重复，且状语（使用令牌）按英文位置塞在中间。主干（探索地图）该先出来。",
+    "evidence": "EN: \"Explore detailed area maps with interactive on-screen elements like traps, puzzles, and dynamic lighting, using animated and dynamically generated character tokens.\"",
+    "severity": "一般",
+    "fix": "使用带动画效果、动态生成的角色令牌，探索精细的区域地图，并与屏幕上的陷阱、谜题、动态光照等可交互元素互动。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Welcome to Ember",
+    "problem": "「广为理解的角色选项和机制」——well understood 直译成「广为理解」，中文没这个搭配（只有「广为人知」）。",
+    "evidence": "EN: \"a familiar d20 rule engine with well understood character options and mechanics\"",
+    "severity": "观感",
+    "fix": "其中的角色选项和机制都广为人知。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Magic and Spellcraft",
+    "problem": "「这些符印本就是……的邪魔所内在使用的」——intrinsically used by 逐词直译，「所内在使用的」不是中文。",
+    "evidence": "EN: \"invoke specific glyphs intrinsically used by the fiends of Signara\"",
+    "severity": "一般",
+    "fix": "而这些符印，正是 …{西格纳拉} 的邪魔与生俱来所用之物。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Magic and Spellcraft",
+    "problem": "「此符文的引导者最著名地见于……文化之中，或作为……的信徒存在」——most notably 这个副词照英文位置译成「最著名地」，中文副词不这么用；末尾「作为…存在」也是英文 as 的直译。",
+    "evidence": "EN: \"Channelers of this rune are most notably found among the Strider culture or as devotees to the Wild Gods…\"",
+    "severity": "一般",
+    "fix": "此符文的引导者中，最有名的来自 {疾行者} 文化，或是 {荒野诸神} 的信徒；后者肩负守护自然秩序之责。"
+   },
+   {
+    "kind": "长定语",
+    "where": "Magic and Spellcraft",
+    "problem": "「余烬所有文化都普遍憎恶对此符文的公认使用」——把 Recognized usage 名词化后当宾语，「对……的公认使用」中文读不出「被认出使用」的意思。",
+    "evidence": "EN: \"Recognized usage of this rune is universally reviled by all cultures of Ember, who forbid such spellcraft.\"",
+    "severity": "一般",
+    "fix": "一经辨认出使用此符文，余烬所有文化都会一致憎恶，并禁止此类施法。"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Magic and Spellcraft",
+    "problem": "「都被文化上接受」——culturally accepted 直译，「被＋副词＋动词」是典型翻译腔。",
+    "evidence": "EN: \"Most usage of this rune is culturally accepted throughout Ember\"",
+    "severity": "观感",
+    "fix": "在整个余烬，此符文的大多数用法都为各地文化所接受"
+   },
+   {
+    "kind": "长定语",
+    "where": "Magic and Spellcraft",
+    "problem": "「主动阻止这些技艺的理解传播到他们组织严密掌控之外的地方」——「这些技艺的理解」这个名词化主语＋后面一长串定语，读者要读两遍才知道被阻止的是什么。",
+    "evidence": "EN: \"proactively seek to prevent understanding of these arts from spreading outside the tight control of their order\"",
+    "severity": "一般",
+    "fix": "里凡星辰法师会主动设法，不让对这些技艺的了解流传到他们组织的严密掌控之外。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Magic and Spellcraft",
+    "problem": "「以下这些法术尤其一致地遭人憎恶」——specifically + unanimously 两个副词硬堆成「尤其一致地」，中文副词不能这样连用。",
+    "evidence": "EN: \"The following spells specifically are unanimously reviled…\"",
+    "severity": "观感",
+    "fix": "以下法术尤其遭人一致憎恶，"
+   },
+   {
+    "kind": "长定语",
+    "where": "The Codex",
+    "problem": "「当队伍移动进入一个包含他们此前未曾遇到过的地点或生物群系的六边格时」——21 字定语（中间还夹两个 @UUID）压在「六边格」上，是全叶最难读的一句。",
+    "evidence": "EN: \"When the party moves into a hex with a Location or Biome that they have not previously encountered…\"",
+    "severity": "一般",
+    "fix": "当队伍进入的六边格中，有他们此前未曾遇到过的{地点}或{生物群系}时，"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "The Codex",
+    "problem": "pronouns 在同包 Gameplay Overview 叶译作「代词」，此叶写成「代称」；name 也从「姓名」变「名称」（名称用于物不用于人）。同一份指南里同一个字段两种叫法。",
+    "evidence": "EN: \"including their name, pronouns, Ancestry, Culture, character portrait…\"（Gameplay Overview 同句译为「姓名、代词、血统、文化」）",
+    "severity": "一般",
+    "fix": "包括其姓名、代词、"
+   },
+   {
+    "kind": "长定语",
+    "where": "Region Exploration",
+    "problem": "两条地形词条都是「用于归类那些……的特殊六边格」，定语里再套一层「六边格」，自嵌套读不动。改成「归类一类特殊六边格：……」的冒号句。",
+    "evidence": "EN: \"Bluffs Terrain is used to classify special hexes that feature sheer cliffs adjacent to some other lower Terrain.\" / \"Canyons Terrain is used to classify special hexes that feature deep elevation relative to their neighbors.\"",
+    "severity": "一般",
+    "fix": "峭壁地形用于归类一类特殊六边格：它们带有陡峭的悬崖，且与地势更低的其他地形相邻。／峡谷地形用于归类一类特殊六边格：相较于周边的六边格，它们的高程落差很深。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Region Exploration",
+    "problem": "「若想在不将商队移动到那里时临时查看……」——without 从句照英文位置塞进「在…时」框架里，中文该后置为转折。另有两处「以避免初始探测」把 initial detection 直译成名词短语，玩家看不懂「探测」指的是被别人发现。",
+    "evidence": "EN: \"To temporarily view a different slice of the Region Map without moving a caravan there…\" / \"make a stealth check at the beginning of the Event to avoid initial detection.\"",
+    "severity": "一般",
+    "fix": "若想临时查看地区地图的另一层，又不想把商队移过去，／检定，以免一开始就遭到察觉。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Milestone Progression",
+    "problem": "「与其通过击败怪物获取传统XP不同，余烬中的晋升是基于……」——Instead of 译成「与其…不同」是错的（「与其」只能配「不如」），正确对照结构是「不是…而是…」。这是全叶第一句，读者一上来就被绊。",
+    "evidence": "EN: \"Instead of acquiring traditional XP by defeating monsters, advancement in Ember is based on completing specific Events within our many Quests.\"",
+    "severity": "一般",
+    "fix": "余烬中的晋升不靠击败怪物获取传统XP，而是取决于完成我们众多{任务}中的特定{事件}。"
+   },
+   {
+    "kind": "长定语",
+    "where": "Milestone Progression",
+    "problem": "「所有通过短休或长休恢复的特性之已消耗使用次数都会恢复」——定语＋文言「之」＋「恢复…恢复」，一句 24 字里三个坑；同列「那些会在长休期间使用的特性不能执行」的「不能执行」也不是中文说法。另有「这个新职业等级所赋予的任何特性、属性或能力都会立即获得」缺施动者。",
+    "evidence": "EN: \"All expended uses of a feature which recovers on Short or Long Rest are recovered.\" / \"Features which are used during a Long Rest may not be performed.\" / \"Any traits, attributes, or features granted by this new Class Level are immediately acquired.\"",
+    "severity": "一般",
+    "fix": "凡是能在短休或长休时恢复的特性，其已消耗的使用次数全部恢复。／不能使用那些需在长休期间进行的特性。／你会立即获得这个新职业等级赋予的所有特性、属性或能力。"
+   },
+   {
+    "kind": "代词冗余",
+    "where": "Knowledge Areas",
+    "problem": "「知识领域代表你的角色从养育他们的人、他们成长的文化，以及他们迄今为止在人生中所做选择里学到的一切」——一句三个「他们」；三条要点也都是「如果你的角色…，他们…」，中文这里主语该省。",
+    "evidence": "EN: \"Knowledge Areas represent everything your character has learned from those who raised them, the Culture they grew up in, and the choices that they have made in their life to date.\" / \"If your character has the necessary knowledge, they can gain related information without the need to roll.\"",
+    "severity": "一般",
+    "fix": "知识领域代表你的角色从养育者、成长其间的文化，以及迄今为止的人生抉择中学到的一切。／如果你的角色拥有必要的知识，就可以无需掷骰便获得相关信息。"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Knowledge Areas",
+    "problem": "「知识领域会被整合进游戏主持人用来主持游戏的事件中。它们已经过精心设置，但最终，GM 对知识领域如何使用拥有最终裁定权。」——被动＋长定语，后半句还「最终…最终」重复。",
+    "evidence": "EN: \"Knowledge Areas are incorporated into the events that a Game Master uses to run the game. They have already been carefully configured, but ultimately, the GM has the final say on how a Knowledge Area may be used.\"",
+    "severity": "一般",
+    "fix": "游戏主持人主持游戏所用的事件中，已经整合了知识领域。这些都已经过精心设置，但知识领域具体怎么用，最终由 GM 裁定。"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Quests and Events",
+    "problem": "「余烬中的任务被有意设计为永远不会被标记为“已完成”」——一句两个「被」。",
+    "evidence": "EN: \"quests in Ember are intentionally never marked as \\\"complete.\\\"\"",
+    "severity": "观感",
+    "fix": "余烬中的任务刻意设计成永远不会标记为“已完成”。"
+   },
+   {
+    "kind": "代词冗余",
+    "where": "Death and Soulbound",
+    "problem": "「成为魂缚会赋予他们一个魂印，将他们的灵魂束缚在凡人位面上，直到他们的未竟之事得到解决」——一句三个「他们」（英文 singular they 照搬）。同叶还有「共有三种类别性的严重程度」（categorical 直译成「类别性的」）与「他们的灵魂缺乏一个足够的物质载体来容纳」（灵魂缺乏载体「来容纳」，主宾颠倒）。",
+    "evidence": "EN: \"Becoming Soulbound grants them a Soulmark, binding their souls to the mortal plane until their unfinished business is resolved.\" / \"three categorical severities\" / \"their soul lacks a sufficient corporeal vessel to occupy.\"",
+    "severity": "一般",
+    "fix": "成为魂缚会赋予角色一个魂印，把灵魂束缚在凡人位面上，直到未竟之事得到解决。／共有三种不同类别的严重程度。／其灵魂没有足够完好的肉身可供栖居。"
+   },
+   {
+    "kind": "长定语",
+    "where": "Ember Background / Dynamic Token",
+    "problem": "两处教科书式长定语：「你应当选择任意一个能提供你喜欢的熟练度和知识组合的径」（19 字定语压「径」）、「它代表你的角色出现在你将在游戏过程中探索的区域地图上」（定语里再嵌一层「你将在…探索的」）。另有「某些文化可能有占主导地位的血统构成其主体」（主导＋主体同义堆砌）。",
+    "evidence": "EN: \"you should choose whichever Path provides a set of proficiencies and knowledges that you find appealing\" / \"it represents your character on the Area Maps you will explore during the game\" / \"Certain Cultures may have predominant Ancestries which compose them\"",
+    "severity": "一般",
+    "fix": "你应当挑一个径，只要它提供的熟练度与知识组合合你心意即可，但要…／更重要的是，在你游戏中将要探索的{区域地图}上，它就代表着你的角色。／某些文化中可能有某几种血统占据主体"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "Credits",
+    "problem": "「向 3,808 位给予支持的支持者致以诚挚而隆重的感谢」——「给予支持的支持者」同词自我重复；「隆重」是用于仪式的词，不搭配「感谢」（significant 该译「深切」）。",
+    "evidence": "EN: \"our sincere and significant thanks to the 3,808 backers on Kickstarter who committed their support…\"",
+    "severity": "观感",
+    "fix": "我们的团队谨向 Kickstarter 上 3,808 位鼎力相助的支持者致以诚挚而深切的感谢。"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Gathering and Crafting / Weather / Creation Overview",
+    "problem": "三处零碎翻译腔：「通过采集，你可以通过探索、事件或击败特定敌人…」（一句两个「通过」）；「天气形态的速度是一个决定其相对于盛行风速会慢多少的因素」（16 字定语压「因素」）；「一旦你对背景故事有了一个大致想法，你的角色卡中包含一个 Biography 标签页，你可以在其中…」（条件从句后接一个不相干的存在句，中文断裂）。",
+    "evidence": "EN: \"Through gathering, you can acquire materials from around the world through exploration, events, or defeating specific enemies.\" / \"The speed of a Weather Formation is a factor which adjusts how much slower it moves relative to the prevailing Wind speed.\" / \"Once you have a rough idea for a backstory, your Character Sheet includes a Biography tab where you can write down notes or entire paragraphs of text.\"",
+    "severity": "观感",
+    "fix": "通过采集，你可以在探索、遭遇事件或击败特定敌人时，从世界各地获得材料。／天气形态的速度是一个因素，用于决定它相对于盛行风速会慢多少。／等你对背景故事有了大致想法，就可以在角色卡的 Biography 标签页里记下笔记，或直接写下整段文字。"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Attunement（未改，待裁决）",
+    "problem": "同一叶里 Rank 有两种译法：正文与表头用「同调阶位」（合定译表 Rank=阶位），但表体五行与两处正文写成「等级 1…等级 5」「达到等级 5」「推进到较低的等级」。而 level 的定译正是「等级」——玩家读到「同调达到等级 5」时无法分辨这是角色等级还是同调阶位。属定译表冲突，未在本批次改动。",
+    "evidence": "EN: \"you will begin your adventure at Rank 1 of your chosen Attunement\" / 表头 \"Attunement Rank\" 与表体 \"Rank 1 … Rank 5\" / \"to reach Rank 5 by the end of the Ember campaign\"",
+    "severity": "严重",
+    "fix": "建议全叶统一为「阶位 1…阶位 5」「处于阶位 1」「达到阶位 5」「推进到较低的阶位」；需主控裁决后统一改并同步孪生包"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Death and Soulbound（未改，待裁决）",
+    "problem": "「魂缚等级」出现 3 次（表头 1 次、正文 2 次），对应 EN 的 Soulbound Rank。全库 Rank 已用「阶位」72 处，「魂缚等级」是全库仅剩的 3 处例外，且与角色 Level=等级 撞词。属定译表冲突，未在本批次改动。",
+    "evidence": "EN: \"Mechanically, these are expressed as Soulbound Ranks. When a Soulbound character dies and subsequently clings to life, the rank of their Soulbound Rank increases…\" / 表头 \"Soulbound Rank\"",
+    "severity": "严重",
+    "fix": "魂缚等级→魂缚阶位（3 处，全部在本叶内）；需主控裁决后统一改并同步孪生包"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\players-guide-readability.json",
+  "gate_clean": true,
+  "gate_output": "$ python \"3-常用脚本/qa/apply_translations.py\" --repo \"C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/1-Ember汉化插件\" --pack ember.crucible-adventure.json --batch \"C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-临时脚本/2026-08-15-round15/batches/players-guide-readability.json\" --force --dry\n\nember.crucible-adventure.json\n  applied            17\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "通读了 Players' Guide 全部 33 叶（其中 6 叶为纯 @Embed，无正文；Credits/License/System Requirements 等基本无病）。以「没读过英文的中国玩家」身份逐句读，只改能说出病名的地方，共 50 处编辑落在 17 叶。病名分布：长定语 12、词序照搬 12、被字滥用 7、代词冗余 6、同义堆砌 3、术语当普通词 5、其余零碎 5。\n\n改动最集中的是三类。一是长定语：中文受不了「当队伍移动进入一个包含他们此前未曾遇到过的地点或生物群系的六边格时」这种 21 字前置定语，全部拆成主句＋补充句或冒号句。二是被动与代词：英文必须有的 are presented / are designed / they，中文一概省或转主动，Knowledge Areas 一句里的三个「他们」是最典型的例子。三是逐词直译产生的假搭配：「最著名地见于」「广为理解」「所内在使用的」「尤其一致地」「与其…不同」「初始探测」——其中「与其通过击败怪物获取传统XP不同」是语法错的（「与其」只配「不如」），出现在 Milestone Progression 的第一句。\n\n术语层面发现一处真缺陷：Area Maps 把 Foundry 的 sight 译成「视觉」（生理感官）而非「视野/视线」，同包 Region Exploration 已用「视野」；The Codex 把 pronouns 译成「代称」，而 Gameplay Overview 同一字段译「代词」。这两处已改。\n\n全部改动均为句法层面，未动任何术语、数字、@UUID/@Check/[[/…]]/section class/sup/span 标记与标题 id；过闸 17/17 applied，零拒绝（markup 签名校验通过，说明标记多重集完全一致）。自检时把新旧两版并排读过，凡是读起来「差不多」的（如「独特地决定」「呈现与描绘」「传统XP 无空格」「《余烬》与余烬书名号不一致」）一律没动，宁可少改。",
+  "escalations": "两处 Rank 译名冲突，我没有改，请主控裁决——因为简报明确写了「不许改术语」，而这两处要改的正是术语，且需要跨包同步：\n\n1. Attunement 叶：同一页里 Rank 既译「阶位」（表头「同调阶位」、正文「获得或提升一个同调阶位所需的点数」）又译「等级」（表体 Rank 1–5 五行全写「等级 1…等级 5」，正文「所选同调即处于等级 1」「达到等级 5」「推进到较低的等级」）。定译表是 Rank=阶位 / level=等级，现状让玩家分不清「同调达到等级 5」说的是角色等级还是同调阶位。建议全部统一为「阶位」。\n\n2. Death and Soulbound 叶：「魂缚等级」3 处（1 处表头 + 2 处正文），对应 EN 的 Soulbound Rank。我查了全包：「阶位」已用 72 处，「魂缚等级」是全库仅剩的 3 处例外，且都在这一叶内。建议改「魂缚阶位」。\n\n两项都只需在这两叶内改，但孪生包 ember.adventure.json 里若有同叶需一并同步——由主控统一处理。裁决后我可以再出一个纯术语批次。\n\n另有一处我判断不属于我的判据、也没动，供参考：Gameplay Overview 的「怪物图鉴」词条，CN 写「关于该生物或怪物的一些详细信息」，EN 原文是 \\\"some detailed information on the Biome or Location\\\"——英文自己是复制粘贴残留（Bestiary 条目里写了 Biome/Location），中文把它「修好」了。这是保真度问题而非可读性问题，且中文版更正确，是否回退到照译英文的错误请主控定。"
+ },
+ {
+  "unit": "Character Classes（ember.crucible-adventure.json，13 个职业页 + 总览页，22 个叶）",
+  "findings": [
+   {
+    "kind": "被字滥用",
+    "where": "Classes Overview.text 第2段",
+    "problem": "「这些角色职业中的每一个都已被谨慎地融入…中」——「每一个」+「被…融入…中」三重英式结构",
+    "evidence": "Each of these character classes has been carefully incorporated into the lore and setting of Ember",
+    "fix": "→「这些角色职业都已谨慎融入余烬的背景与设定，并根据叙事与玩法考量做了不同程度的调整」；信息点（每一个/谨慎/融入/不同程度调整）全保留",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Classes Overview.text 第2段",
+    "problem": "「这些改动都是推荐采用的」——英文被动式 are recommended 直接搬成中文判断句，读者要回读才知道是谁推荐",
+    "evidence": "These changes are recommended for anyone who would like to immerse themselves more fully in the game world, but they are not required",
+    "fix": "→「我们推荐任何希望更充分沉浸于游戏世界的人采用这些改动，但它们并非强制」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Classes Overview.text gamemaster 块",
+    "problem": "「另有少数子职业则基本未被改动」——中文「未作改动」不需要被",
+    "evidence": "a few subclasses remain relatively untouched",
+    "fix": "→「基本未作改动」",
+    "severity": "观感"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Classes Overview.text gamemaster 块末",
+    "problem": "「并且应允许玩家创造他们最想扮演的角色」——英文 should be allowed 的无主语被动照搬，中文读来像在向谁下令",
+    "evidence": "players should be allowed to create the characters they want to portray the most",
+    "fix": "→「玩家也应当能够创造自己最想扮演的角色」",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "Artificer.text 护甲师首句",
+    "problem": "「专精于附魔护甲的创造与使用的工匠」——两个「的」套一个中心词，且「是…的工匠」把定语全部前置",
+    "evidence": "Armorers are those Artificers who specialize in the creation and use of enchanted armor",
+    "fix": "→「护甲师这类工匠专精于附魔护甲的制造与使用」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Artificer.text 战斗铁匠首句",
+    "problem": "「战斗铁匠是不论居于何处都在余烬各地社会中备受重视的成员」——18 字前置定语压在「成员」上，中文受不了",
+    "evidence": "Battle Smiths are valued members of society throughout Ember, no matter where they dwell.",
+    "fix": "→「战斗铁匠无论身在何处，都是余烬各地社会中备受重视的成员」",
+    "severity": "严重"
+   },
+   {
+    "kind": "代词冗余",
+    "where": "Artificer.text 战斗铁匠末句",
+    "problem": "「跨越横渡海的他们的塔扬与凯尔梅兹安邻族」——英文 their 必须有，中文「他们的」夹在两个定语之间造成歧义（谁的邻族）",
+    "evidence": "Naturally, their Tayan and Kelmezian neighbors beyond The Crossing Sea have grown quite accustomed…",
+    "fix": "→「马兹兰人在横渡海彼岸的塔扬与凯尔梅兹安邻族」，把 their 的指代显化，语义不变",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Artificer.text 制图师第1句",
+    "problem": "「致力于记录并编纂这个世界不断变化、持续扩张之现实的档案保管者与编年者」——25 字定语",
+    "evidence": "they are dedicated archivists and chroniclers of the world's changing, expanding reality",
+    "fix": "→「他们是尽职的档案保管者与编年者，记录并编纂这个世界不断变化、持续扩张的现实」",
+    "severity": "严重"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Artificer.text 制图师第2句",
+    "problem": "「制图师受到严格编制与组织，直接隶属于…公会的权威之下」——regimented/organized/under authority 三个英式被动叠加",
+    "evidence": "Cartographers are highly regimented and organized under the direct authority of the Tayan Cartographers' Guild.",
+    "fix": "→「制图师纪律严明、组织严密，直接受塔扬制图师公会管辖」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Artificer.text 制图师第3句",
+    "problem": "「以毫厘不差的准确性勘测遥远距离」——with+抽象名词的介词短语照搬，中文该用状语",
+    "evidence": "enabling them to survey vast distances with unerring accuracy",
+    "fix": "→「毫厘不差地勘测遥远距离」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Artificer.text 与 Cleric.text 的 hazard「遭憎魔法」块（同一段文字，两处）",
+    "problem": "两句里三个「被」：「被视为…问题」「它被认为是…」「就会被隐藏起来」",
+    "evidence": "Undeath in its many forms is considered highly problematic… It is considered Reviled Magic and therefore kept hidden if at all possible.",
+    "fix": "→「各种形式的不死普遍都是极其严重的问题…它属于遭憎魔法，因此人们只要有可能就会把它藏起来」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Barbarian.text 野兽之径首段、表格第4项",
+    "problem": "「灵魂被…所灌注」出现两次；中文「灌注着」本身就是有生命的说法",
+    "evidence": "whose souls are infused with primal, animalistic traits / Your soul is infused with the ancient power of a Leviathan",
+    "fix": "→「他们的灵魂中灌注着原始的、动物性的特质」「你的灵魂中灌注着一头古老利维坦的力量」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Barbarian.text 表格第5项",
+    "problem": "「赋予了你的身体经历奇异而强力的生理变形的能力」——「的…的」双层套嵌，「赋予…能力」中间塞了 12 字",
+    "evidence": "These abstruse manipulations have granted your body the ability to undergo strange and powerful biological transformations.",
+    "fix": "→「让你的身体能够经历奇异而强力的生理变形」",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Barbarian.text 表格第6项",
+    "problem": "「你的灵魂受到了来自暮焰丛林的怪物影响诅咒」——「怪物影响诅咒」被读成一个名词块，句子第一遍读不通",
+    "evidence": "You soul is cursed with monstrous influence from the Duskflare Jungles.",
+    "fix": "→「暮焰丛林那怪物般的影响诅咒着你的灵魂」",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Barbarian.text 狂战士之径",
+    "problem": "「几乎余烬世界上的每一种文化中都能见到狂战士」——「几乎」照英文位置放在句首，中文该贴着「每一种」",
+    "evidence": "Berserkers are known to hail from nearly every culture on the face of Ember",
+    "fix": "→「余烬世界上几乎每一种文化中都能见到狂战士」",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "Barbarian.text 荒野之心径末句",
+    "problem": "「这个星球上每一个活着的生物的灵魂」——三个「的」连挂",
+    "evidence": "which is tethered to the soul of every living creature on the planet",
+    "fix": "→「余烬之心连接着这个星球上每一个活物的灵魂」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Barbarian.text 狂野魔法之径",
+    "problem": "「来自对宇宙中混沌且不可控的超自然精粹的引导」——「对…的引导」把动作名词化，定语 17 字",
+    "evidence": "Their Rage is harnessed from the chaotic and uncontrollable supernatural essence of the universe",
+    "fix": "→「他们的狂怒引自宇宙中混沌而不可控的超自然精粹」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Bard.text 首段",
+    "problem": "「因各种各样的原因而被各自的学院所吸引」——are drawn to 直译成被动，中文用主动更顺",
+    "evidence": "Bards are ultimately drawn to their respective Colleges by any number of reasons",
+    "fix": "→「吟游诗人最终会出于各种各样的原因投向各自的学院」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Bard.text 舞蹈学院第2句",
+    "problem": "「是对那种绑定并强化宇宙及其中万物之寰宇和谐的尘世映照」——26 字定语套「映照」，本页最难读的句子之一",
+    "evidence": "Their artistic expression through motion is a terrestrial reflection of the cosmic harmony that binds and reinforces the universe and all things in it.",
+    "fix": "→「…是寰宇和谐在尘世的映照；正是这份和谐维系并强化着宇宙及其中的万物」，拆成两个分句",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Bard.text 知识学院末句",
+    "problem": "「遍布余烬、构成知识学院行列的那些虔诚学者，被公认为…」——两个前置定语 + 被动",
+    "evidence": "The devout academics who comprise the ranks of the College of Lore throughout Ember are known as the world's most accomplished storytellers",
+    "fix": "→「知识学院的行列遍布余烬，其中的虔诚学者公认是世上最有成就的讲述者」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Bard.text 知识学院第2句",
+    "problem": "「对自身技艺所采取的学术化路径，使…」——英文抽象名词主语（A scholarly approach）照搬做中文主语",
+    "evidence": "A scholarly approach to their craft allows Lore Bards to study magic that would otherwise be inaccessible to them",
+    "fix": "→「知识学院的吟游诗人以学术方式钻研自身技艺，因而能够研习原本无从触及的魔法」",
+    "severity": "一般"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Bard.text 魂灵学院/金希尔段",
+    "problem": "「格外强韧的联系」——「强韧」是 Fortitude 的定译，用来形容普通的「牢固」会让玩家误以为牵扯属性",
+    "evidence": "they have an especially strong connection with the souls of the dead",
+    "fix": "→「格外牢固的联系」，把定译词让回给 Fortitude",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Bard.text 金希尔段",
+    "problem": "「最强大的金希尔据说会被赐予巨大的双翼」",
+    "evidence": "The most powerful Kinthyr are said to be bestowed with great wings",
+    "fix": "→「据说最强大的金希尔会获赐巨大的双翼」",
+    "severity": "观感"
+   },
+   {
+    "kind": "量词缺失/误用",
+    "where": "Cleric.text 首段",
+    "problem": "「维持一支由忠诚信徒牧师组成的随行侍从」——「一支」配「侍从」量词不搭，且「忠诚信徒牧师」三名词连缀",
+    "evidence": "some Shard Gods in particular maintain a retinue of faithful Clerics with whom they hold close communion",
+    "fix": "→「部分碎片诸神更是会让一批忠诚的牧师随侍左右，与他们保持亲密交流」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 第2段",
+    "problem": "「提供了哪些神祇最有可能青睐某个特定领域牧师的建议」——一整个疑问从句塞进「…的建议」里",
+    "evidence": "The following entries on Cleric Subclasses feature suggestions for which Deities would be most likely to favor a Cleric of a certain domain.",
+    "fix": "→「以下条目会给出建议：哪些神祇最有可能青睐某一特定领域的牧师」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 斯佩克特拉/知识领域末句",
+    "problem": "「能强化他们自身与这颗活体星球魔法力量联系的人际关系」——22 字定语压「人际关系」",
+    "evidence": "will invariably seek out relationships that strengthen their own connection to the living planet's magical forces",
+    "fix": "→「总会主动去结交各方，以强化自身与这颗活体星球魔法力量之间的联系」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 兰提尔（生命领域）",
+    "problem": "「敬奉她作为寰宇中最深远的生命维系力量之一的角色」——「作为…的角色」中间夹 16 字",
+    "evidence": "live their lives in holy veneration of her role as one of the most profound life-sustaining forces in the cosmos",
+    "fix": "→「敬奉她所担的角色——她是寰宇中最深远的生命维系力量之一」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 萨克茨（秩序领域）",
+    "problem": "「对灵魂循环为维持余烬寰宇存续所必须保持的艰苦结构的一种映照」——本页最长的一条定语（30 字），读者必须回读三遍",
+    "evidence": "their faith is a reflection of the painstaking structure the Soul Cycle must maintain for Ember's cosmos to endure",
+    "fix": "→「为了让余烬寰宇得以存续，灵魂循环必须维持一套一丝不苟的结构，而他们的信仰正是这套结构的映照」",
+    "severity": "严重"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Cleric.text 兰矛（秩序领域、战争领域各一处，共2处）",
+    "problem": "「混乱的边缘地带被数量众多的怪物居民所占据」——overrun 直译成「被…所占据」",
+    "evidence": "where the chaotic southern reaches of the Duskflare Jungles are overrun with monstrous inhabitants in dire need of law and order",
+    "fix": "→「那里暮焰丛林南部的混乱边地怪物横行，迫切需要律法与秩序」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 托玛（暮光领域）首句",
+    "problem": "「是世上迷失与孤独之人能在寰宇黑暗过于难以承受时聚拢其旁的所在」——把英文关系从句整个塞进「…的所在」",
+    "evidence": "Twilight Clerics of Thoma are the veritable firesides that the lost and lonely of the world can gather next to when the darkness of the cosmos is too much to bear.",
+    "fix": "→「…就是真实可依的炉边之火：当寰宇的黑暗过于难以承受时，世上迷失而孤独的人便能围拢在他们身旁」",
+    "severity": "严重"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Cleric.text 希俄尼娅（暮光领域）末句",
+    "problem": "「显而易见之物被遮蔽，而隐秘潜藏之物则被显现」——对仗句里两个被字，中文这种对仗历来不用被",
+    "evidence": "where the apparent is obscured and the furtive is made seen",
+    "fix": "→「显而易见之物隐去，隐秘潜藏之物现形」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Cleric.text 希俄尼娅（暮光领域）第2句",
+    "problem": "「因赐予忠诚信徒牧师驾驭光与暗的宏伟力量而声名鹊起」——「因…而」中间 20 字，且「忠诚信徒牧师」名词堆叠",
+    "evidence": "the Deathbinder has earned a reputation in recent years for bestowing her faithful Clerics with magnificent powers over light and dark",
+    "fix": "→「近年来仍声名鹊起，因为她会赐予忠诚的牧师驾驭光与暗的宏伟力量」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Cleric.text 维卡拉（秩序领域）",
+    "problem": "「努力通过对这颗活体星球原初天气模式的崇拜，体现…」——via 短语照英文位置前置，把主要动作挤到句末",
+    "evidence": "Order Clerics of Vekalla strive to embody the immaculate discipline of their goddess via their worship of the living planet's primal weather patterns.",
+    "fix": "→「崇拜这颗活体星球的原初天气模式，努力以此体现其女神那无瑕的纪律」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Druid.text 孢子环会",
+    "problem": "「对…潜能，以及腐败如何创造新生命与新能源形式的能力，都有着极其深刻的理解」——两个长宾语塞在「对…有理解」中间，且「如何…的能力」搭配不成立",
+    "evidence": "Circle of Spores Druids are intimately familiar with the metaphysical potential that lingers in mortal forms, and the capacity for putrefaction to create new life and new forms of energy.",
+    "fix": "→「深知凡躯形态中残留着怎样的形而上潜能，也深知腐败能够创造出新的生命与新的能量形式」",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Druid.text 海洋环会",
+    "problem": "「有些人会在航海与海事活动上变得尤为行家」——become adept with 逐词对译，中文「变得…行家」不成搭配",
+    "evidence": "Some become particularly adept with seafaring and maritime activities",
+    "fix": "→「有些人会格外精通航海与海事活动」",
+    "severity": "严重"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Fighter.text 首句",
+    "problem": "「几乎各行各业的战士都有潜力成为战士」——warrior 与职业名 Fighter 都译成「战士」，同一句里自我循环，玩家看不出后一个是职业",
+    "evidence": "Warriors from nearly every walk of life on Ember have the potential to become a Fighter, which is arguably the world's most ubiquitous character class.",
+    "fix": "→「几乎各行各业的武者都有潜力成为战士，而战士可以说是世界上最常见的角色职业」（「武者」已是本页 contentOverview 的既有用词）",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Fighter.text 战斗大师第3句",
+    "problem": "「凭借自身浩瀚战斗知识的强力展现」——把英文名词化的 demonstrations 照搬成中文名词",
+    "evidence": "enabling them to outmaneuver foes with powerful demonstrations of their vast combat knowledge",
+    "fix": "→「使他们得以强力展现自身浩瀚的战斗知识，在机动上胜过敌人」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Fighter.text 冠军首句",
+    "problem": "「余烬的冠军构成了一大类个体」——constitute a broad category of individuals 逐词对译，中文没这种说法",
+    "evidence": "Champions in Ember constitute a broad category of individuals that can be found in every culture throughout the cosmos.",
+    "fix": "→「余烬的冠军涵盖形形色色的人物，寰宇中的每一种文化里都能见到他们」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Fighter.text 冠军第3句",
+    "problem": "「怀有一种对武艺臻于完美的一心一意」——把成语「一心一意」当名词宾语用",
+    "evidence": "Champions typically possess a single-minded focus for martial perfection, which supersedes any other concerns.",
+    "fix": "→「冠军通常一心追求武艺的臻于完美，这份专注凌驾于其他任何顾虑之上」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Fighter.text 冠军末句",
+    "problem": "「升至显赫的权力、名望与影响地位」——positions of power, fame, and influence 硬压成一个偏正结构，「影响地位」不成词",
+    "evidence": "many Champions of Ember eventually rise to prominent positions of power, fame, and influence",
+    "fix": "→「最终都会登上显赫的地位，掌握权力、名望与影响力」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Fighter.text 紫龙骑士末句",
+    "problem": "「奉命服务于巨龙女皇错综复杂的谋划全域」——gamut 直译成「全域」，读者无法解析",
+    "evidence": "with orders that service the intricate gamut of the Dragon Empress' machinations",
+    "fix": "→「奉命去服务巨龙女皇那一整套错综复杂的谋划」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Fighter.text 符文骑士",
+    "problem": "「符文骑士符文造诣的来源便格外令人感兴趣」——四个名词连缀（符文骑士/符文/造诣/来源）",
+    "evidence": "the source of a Rune Knight's runic mastery is a source of particular interest",
+    "fix": "→「符文骑士的符文造诣究竟从何而来，便格外引人好奇」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Monk.text 元素战士",
+    "problem": "「会拥有一轮自己在技艺上更偏爱的主月」——关系从句压进量词短语内部",
+    "evidence": "Some warriors who study this monastic tradition have a patron moon they tend to favor in their techniques",
+    "fix": "→「会有一轮主月，他们的技艺往往偏向这轮月亮」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Monk.text 开掌战士末句",
+    "problem": "「弟子也已踏上世界各地」——set off into the world 直译，「踏上…各地」不成搭配；另「大师基安」应为「基安大师」",
+    "evidence": "a handful of master Kyan's students have set off into the world and formed monasteries of their own",
+    "fix": "→「基安大师的一小部分弟子也已远行四方，建立起属于自己的修道院」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Monk.text 开掌战士首句",
+    "problem": "「没有谁比余烬的开掌战士更为精湛」——「精湛」只能形容技艺不能形容人",
+    "evidence": "There are no finer masters of unarmed fighting than Ember's Warriors of the Open Hand",
+    "fix": "→「论徒手格斗，没有谁的技艺比余烬的开掌战士更精湛」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Paladin.text 首段",
+    "problem": "「相反，他们是被某种内在信念所驱使」——are driven by 照搬",
+    "evidence": "are instead driven by some inner conviction that perhaps only the Paladin themself might understand",
+    "fix": "→「相反，他们受某种内在信念驱使」",
+    "severity": "观感"
+   },
+   {
+    "kind": "长定语",
+    "where": "Paladin.text 奉献誓约末句",
+    "problem": "「与那些信条与目标都契合余烬世界崇高追求的组织并肩作战」——21 字定语压「组织」",
+    "evidence": "Oath of Devotion Paladins also tend to find themselves allied with organizations whose tenets and goals are aligned with Ember's nobler pursuits",
+    "fix": "→「与一些组织并肩作战，这些组织的信条与目标都契合余烬世界的崇高追求」",
+    "severity": "一般"
+   },
+   {
+    "kind": "量词缺失/误用",
+    "where": "Paladin.text 荣耀誓约",
+    "problem": "「几乎任何能挥舞剑的人」——「挥舞」后缺量词，中文说「挥剑」或「挥舞长剑」",
+    "evidence": "Nearly anyone who can wield a sword has the potential to take up an Oath of Glory",
+    "fix": "→「几乎任何拿得动剑的人」",
+    "severity": "观感"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Paladin.text 复仇誓约末句",
+    "problem": "「献身于这一松散复仇战士联盟的堡垒」——dedicated to 直译，堡垒不能「献身」",
+    "evidence": "bastions dedicated to this loose affiliation of Vengeance warriors can be found throughout Aterica",
+    "fix": "→「为这一松散的复仇战士联盟而建的堡垒，则遍布阿特里卡各地」",
+    "severity": "一般"
+   },
+   {
+    "kind": "代词冗余",
+    "where": "Paladin.text 注视者誓约末句",
+    "problem": "「伸出他们的神圣援助」——英文 their 必须有，中文多余；且「伸出援助」不搭配",
+    "evidence": "Watcher Paladins are sure to extend their divine aid to others in times of need",
+    "fix": "→「伸出神圣援手」",
+    "severity": "观感"
+   },
+   {
+    "kind": "长定语",
+    "where": "Ranger.text 空木守林者第1句",
+    "problem": "「一群通过让自己变成野兽，从而与周遭恐怖生态系统融为一体的弗尔金哈尔」——30 字定语压在专名上",
+    "evidence": "the Avachrusk, Vrjnhar who have become one with the terrifying ecosystem around them by becoming beasts themselves",
+    "fix": "→「居住着阿瓦克鲁斯克。他们是一群弗尔金哈尔，让自己变成了野兽，从而与周遭恐怖的生态系统融为一体」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Ranger.text 空木守林者第3句",
+    "problem": "「是一些习得了众多古老而可怖秘密的个体」——定语前置 + 「个体」这个翻译腔中心词",
+    "evidence": "the Avachrusk are individuals who have learned many ancient and terrible secrets, surviving terrifying encounters…",
+    "fix": "→「阿瓦克鲁斯克是这样一些人：他们习得了众多古老而可怖的秘密，在骇人的遭遇中幸存下来…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Ranger.text 猎手第2句",
+    "problem": "「起源于…瓦尔德人之中，数个世纪以来一直不得不坚定警戒」——英文 who 从句照位置续在逗号后，中文读来主语变成了「技艺」",
+    "evidence": "…originated long ago among the Waerd of the Duskflare Jungles, who've had to maintain a stalwart vigil against the ceaseless assault…",
+    "fix": "→「…瓦尔德人之中；数个世纪以来，他们一直不得不坚定戒备…」，补出主语并改用分号",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Ranger.text 虫群守护者末句",
+    "problem": "「并不罕见地会酷似」——it's not uncommon for 的形式主语结构硬塞成中文状语",
+    "evidence": "it's not uncommon for the Swarming Insects common to Rangers of this type to resemble Ember's benevolent Pyreflies",
+    "fix": "→「…酷似余烬世界中仁善的焰萤，这并不少见」",
+    "severity": "一般"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Ranger.text 妖精流浪者",
+    "problem": "「踏上这一子职阶」——全库统一用「子职业」，此处孤例「子职阶」，且「阶」是 Tier 的定译，易误读",
+    "evidence": "Fey Wanderers can find their way to this subclass through any number of methods",
+    "fix": "→「子职业」，与同页其余 12 处一致",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Rogue.text 首句",
+    "problem": "「却都被同一种强烈的事物所吸引：机会」——united by 转成被动，且「强烈的事物」不成词",
+    "evidence": "marked by disparate backgrounds but united by one great fascination: opportunity",
+    "fix": "→「尽管背景各异，却都痴迷于同一样东西：机会」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Rogue.text 首段第3句",
+    "problem": "「潜行与诡计常被任何一名游荡者用来推进其个人图谋」——are employed by 照搬，中文该让人做主语",
+    "evidence": "Stealth and chicanery are often employed by any given Rogue in pursuit of their own personal agenda",
+    "fix": "→「任何一名游荡者在推进个人图谋时都常常动用潜行与诡计」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Rogue.text 奥术诡术师末句",
+    "problem": "「作为前线探险者与巧妙入侵魔法之地的高手，为这些团体服务」——「这些团体」在两句里重复，且长定语压「高手」",
+    "evidence": "who serve these groups as frontline explorers and deft invaders of enchanted places",
+    "fix": "→「他们为这些团体充当前线探险者，也是潜入魔法之地的好手」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Rogue.text 幽影第3句",
+    "problem": "「是被引介进入某个侍奉萨克茨——死亡上古之神——的无数秘密组织之一」——被动 + 破折号插入语切断了「侍奉…的组织」，几乎无法一遍读通",
+    "evidence": "The most common touchpoint for these macabre Rogues is their introduction to one of countless secret organizations that serve Sockets, the Elder God of Death",
+    "fix": "→「是有人把他们引荐进某个秘密组织——侍奉死亡上古之神萨克茨的秘密组织多不胜数——他们由此帮助彰显…」",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Sorcerer.text 法术火焰第3句",
+    "problem": "「往往无论命运丝线将他们带往何处都能感到如在家中」——让步从句照英文位置塞在主语和谓语之间",
+    "evidence": "Heartfire Sorcerers tend to feel at home anywhere the strands of fate can carry them",
+    "fix": "→「无论命运的丝线将心火术士带往何处，他们往往都能如归家般自在」，条件前置",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Sorcerer.text 法术火焰首句",
+    "problem": "「那些在余烬各地驾驭被称为“Heartfire”这种罕见现象的人」——「被称为」嵌在定语里，三层套嵌",
+    "evidence": "Those who wield the rare phenomenon known as \"Heartfire\" throughout Ember harness the raw magic potential of the Heart of Ember",
+    "fix": "→「在余烬各地，驾驭“Heartfire”这种罕见现象的人会利用…」",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Sorcerer.text 暗影末句",
+    "problem": "「许多暗影术士可以在…之中找到，或是与…在一起」——can be found 的被动照搬，后半句还换了搭配",
+    "evidence": "many Shadow Sorcerers can be found among the Waerds of the Lowland Bastions or with the Striders deep within the Corebright Forest",
+    "fix": "→「在低地堡垒的瓦尔德人之中，或是在辉核森林深处的疾行者身边，都能见到许多暗影术士」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Sorcerer.text 暗影第2句",
+    "problem": "「那些被赐福（或被诅咒，端看以何种视角看待）拥有天生能力驾驭它的人」——括号插入语把定语劈成两半，主语迟至 30 字后才出现",
+    "evidence": "those who are blessed (or cursed, depending on the viewpoint) with innate abilities to harness it can command illusions and the shadows themselves",
+    "fix": "→「而有些人天生就有驾驭它的能力——这究竟是赐福还是诅咒，端看以何种视角看待——他们能够操控幻象乃至暗影本身」",
+    "severity": "严重"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Sorcerer.text 首段末句",
+    "problem": "「对超魔法适应性的天赋」——penchant for metamagic adaptability 逐词对译，中文不成短语",
+    "evidence": "their innate font of magic and penchant for metamagic adaptability are prized traits the world over",
+    "fix": "→「以及善于以超魔法灵活应变的天赋」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Warlock.text 第2段",
+    "problem": "「给出了在余烬设定中，哪些神祇可能最适合作为宗主与之订立契约的建议」——整个疑问从句塞进「…的建议」，与 Cleric 页同型",
+    "evidence": "The following entries on Warlock Subclasses feature suggestions for which Deities might be the most suitable to engage with as patrons in the Ember setting.",
+    "fix": "→「以下条目会给出建议：在余烬设定中，哪些神祇可能最适合作为宗主与之订立契约」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Warlock.text 弑神者奥里诺斯首句",
+    "problem": "「是他们对奥里诺斯那深不可测渴求的超自然饥饿所效忠的意志」——四层名词套嵌，读三遍也理不清谁修饰谁",
+    "evidence": "driven by their own allegiance to the unfathomable yearning of Orinoth's preternatural hunger",
+    "fix": "→「是他们对奥里诺斯那超自然饥饿的效忠——那是一种深不可测的渴求」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Warlock.text 寂静狼群第2句",
+    "problem": "「充满不可能猫鼠游戏的追逐之中」——定语内部缺「的」，「不可能猫鼠游戏」读成一个名词块",
+    "evidence": "dangerous hunting missions full of impossible cat-and-mouse games",
+    "fix": "→「卷入满是无解猫鼠游戏的追逐之中」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Warlock.text 寂静狼群末句",
+    "problem": "「让其仆从所承受的庇护关系充满挑战」——把英文所有格 servant's patronage 硬做成定语",
+    "evidence": "The Silent Pack is sure to make their servant's patronage a challenging one.",
+    "fix": "→「让这段庇护关系对其仆从而言充满挑战」",
+    "severity": "一般"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Warlock.text 不死宗主",
+    "problem": "「选择这一子职时」——全库统一「子职业」，此处孤例简写作「子职」",
+    "evidence": "When choosing this subclass, pick one or more of the following Deities",
+    "fix": "→「子职业」",
+    "severity": "观感"
+   },
+   {
+    "kind": "的的不休",
+    "where": "Warlock.text 梅尼斯·瓦勒加尔",
+    "problem": "「将成为一头疯狂而漠然的扎斯克林的助手」——「的…的」连挂，且英文原句主语本身不通（Warlocks…is to be）",
+    "evidence": "Warlocks who make a pact with Menis Valegar is to be the assistant to an insane, uncaring Zaskryn.",
+    "fix": "→「就等于给一头疯狂而漠然的扎斯克林当助手」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Warlock.text 首句",
+    "problem": "「曾与强大存在沟通过并被赐予惊人力量」——have been granted 照搬成被动",
+    "evidence": "those who have communed with powerful entities and have been granted incredible power but at a great cost",
+    "fix": "→「曾与强大存在沟通、就此获得惊人力量、却也付出巨大代价之人」",
+    "severity": "一般"
+   },
+   {
+    "kind": "的的不休",
+    "where": "Wizard.text 首段",
+    "problem": "「来自对余烬最受尊崇的藏书馆的研习，还是对那些早已被遗忘之地的探索」——「对…的研习/探索」两次名词化，四个「的」",
+    "evidence": "Whether their mystical knowledge comes from the study of Ember's most venerated libraries or the exploration of long-forgotten places",
+    "fix": "→「来自研习余烬最受尊崇的藏书馆，还是来自探索那些早已被遗忘之地」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Wizard.text 文书会首句",
+    "problem": "「由世界上最古老的斯佩克特拉——魔法上古女神——的一位勇士所创立」——「最古老的」被读成修饰斯佩克特拉（英文是修饰 champions），破折号插入语又把定语劈开",
+    "evidence": "Ember's Order of Scribes was founded by one of the world's oldest champions of Spectra, the Elder Goddess of Magic.",
+    "fix": "→「由魔法上古女神斯佩克特拉麾下最古老的勇士之一所创立」，同时把修饰对象归位",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Wizard.text 塑能师第3句",
+    "problem": "「在那些其侵略性强的法术能够得到实际运用的地方找到机会」——17 字定语压「地方」",
+    "evidence": "finding opportunity in realms where their aggressive spells can see practical use",
+    "fix": "→「常在能让其侵略性法术派上实际用场的地方寻得机会」",
+    "severity": "一般"
+   },
+   {
+    "kind": "被字滥用",
+    "where": "Wizard.text 幻术师第3句",
+    "problem": "「幻术师常被轻视，认为他们过于儿戏或并无必要」——被动句后半截偷换主语，字面读来是幻术师自己认为",
+    "evidence": "Illusionists are often dismissed as too playful or unnecessary",
+    "fix": "→「人们常轻视幻术师，觉得他们过于儿戏、可有可无」",
+    "severity": "一般"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "Wizard.text 防护师首句",
+    "problem": "「保护与放逐术法术是防护师的工具」——「放逐术」+「法术」重复了「术」，读来磕绊",
+    "evidence": "Protection and banishment spells are the tools of the Abjurer",
+    "fix": "→「保护类与放逐类法术是防护师的工具」",
+    "severity": "观感"
+   },
+   {
+    "kind": "的的不休",
+    "where": "Druid.contentOverview",
+    "problem": "「每位德鲁伊都是某个专注于其中一种面向的团体的一员」——「的…的」套嵌；同句「他们将成为什么样的大致施法者」也是 the general kind of spellcaster 的逐词对译",
+    "evidence": "Each Druid is part of an association that caters to one of these aspects… as well as the general kind of spellcaster they'll become",
+    "fix": "→「每位德鲁伊都隶属于某个团体，每个团体各自专注于其中一种面向」「也决定了他们大致会成为哪一类施法者」",
+    "severity": "严重"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Druid.contentOverview",
+    "problem": "「这些团体被称为“环”」「德鲁伊所属的环」——正文一律作「环会」（大地环会/明月环会/德鲁伊环会），概览页却简作「环」，玩家看不出这是同一个专有概念",
+    "evidence": "which are known as circles. A Druid's circle informs…",
+    "fix": "→「环会」，与正文 7 处一致",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Monk.contentOverview 首句",
+    "problem": "「将战斗训练与强大到足以驾驭内在形而上能量、以增强自身肉体能力的心智修行相结合」——32 字定语压「心智修行」，是全单元最长的一条",
+    "evidence": "Monks are spiritual warriors who balance their combat training with a discipline of the mind so powerful, it allows them to channel inner metaphysical energies to augment their physical prowess.",
+    "fix": "→「他们在战斗训练之外还兼修心智；这种心智修行强大到足以让他们引导内在的形而上能量，增强自身的肉体能力」",
+    "severity": "严重"
+   },
+   {
+    "kind": "长定语",
+    "where": "Rogue.contentOverview 末句",
+    "problem": "「是任何立志精通拆除陷阱与欺诈伎俩之艺的队伍的中坚力量」——「的…的」+ 21 字定语；同句「作为诡计与多才多艺的大师」也是并列项不对称",
+    "evidence": "Masters of subterfuge and versatility, Rogues form the backbone of any party who aims excel at the arts of trap-springing and trickery.",
+    "fix": "→「游荡者精于诡计，也长于随机应变；哪支队伍立志精通拆除陷阱与欺诈伎俩之艺，游荡者都是其中坚力量」",
+    "severity": "严重"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "Rogue.contentOverview 第2句",
+    "problem": "「已装备迅捷的武器装备」——「武器装备」同义重复，「已装备…装备」再重一次",
+    "evidence": "clad in light armor, and equipped with swift weaponry",
+    "fix": "→「身着轻型护甲、手持迅捷武器时」",
+    "severity": "观感"
+   },
+   {
+    "kind": "同义堆砌",
+    "where": "Paladin.contentOverview 首句",
+    "problem": "英文的 holy / sacred / divine 三个词全塌缩成「神圣」，一句话里「神圣誓言…神圣战士…神圣魔法」连出三次",
+    "evidence": "Holy warriors bound by sacred oaths, Paladins are empowered with divine magic to carry out the will of their patron deity",
+    "fix": "→「圣武士是受圣誓约束的神圣战士，神术魔法赋予他们力量，使其贯彻守护神祇的意志」（「神术」沿用 Cleric 概览的既有译法）",
+    "severity": "一般"
+   },
+   {
+    "kind": "词序照搬",
+    "where": "Paladin.contentOverview 第2句",
+    "problem": "「圣武士不如战士那样多用」——versatile 直译成「多用」，中文里「多用」形容器物不形容人",
+    "evidence": "Less versatile than Fighters and not as spell-oriented as Clerics",
+    "fix": "→「不像战士那样全能」（「全能」是 Sorcerer 概览对 versatile 的既有译法）",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Warlock.contentOverview 首句",
+    "problem": "「来自与神秘且往往来自异界的实体所缔结的一项决定命运的契约」——「来自…来自」重复，25 字定语压「契约」",
+    "evidence": "Warlocks are arcane spellcasters who gain their magic power from a fateful pact made with a mysterious, often otherworldly entity.",
+    "fix": "→「来自一项决定命运的契约——缔约对象是某个神秘的实体，且往往来自异界」",
+    "severity": "严重"
+   },
+   {
+    "kind": "代词冗余",
+    "where": "Cleric.contentOverview 首句",
+    "problem": "「他们的魔法力量源自牧师本人对其神祇的信仰」——同一句里「他们」「牧师本人」「其」三次指同一批人",
+    "evidence": "Clerics are divine spellcasters whose magic is powered by the Cleric's personal faith in their god",
+    "fix": "→「他们的魔法力量源自个人对自己神祇的信仰」",
+    "severity": "一般"
+   },
+   {
+    "kind": "长定语",
+    "where": "Wizard.contentOverview 末句",
+    "problem": "「真正拥有探究余烬最深层奥术奥秘所需的天赋、决心或资源的人」——26 字定语压「人」",
+    "evidence": "but a rare few actually possess the talent, commitment, or resources needed to plumb the deepest depths of Ember's arcane mysteries",
+    "fix": "→「但真正具备天赋、决心或资源、能探究余烬最深层奥术奥秘的人，其实只是极少数」",
+    "severity": "一般"
+   },
+   {
+    "kind": "术语当普通词",
+    "where": "Classes Overview.contentOverview",
+    "problem": "两处「Ember」原样留英文，而同页正文一律作「余烬」——世界名在概览卡片上反而不是中文；另「角色的创造」应为规则用语「角色创建」",
+    "evidence": "All of the character classes… are compatible with and represented in Ember. …how the creation of these characters can intersect with the unique lore and worldbuilding of the Ember setting.",
+    "fix": "→「与余烬兼容」「余烬设定」「角色的创建」，与定译表 Ember=余烬 一致",
+    "severity": "一般"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\character-classes-readability.json",
+  "gate_clean": true,
+  "gate_output": "$ python \"3-常用脚本/qa/apply_translations.py\" --repo \".../1-Ember汉化插件\" --pack ember.crucible-adventure.json --batch \".../4-临时脚本/2026-08-15-round15/batches/character-classes-readability.json\" --force --dry\n\nember.crucible-adventure.json\n  applied            22\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)",
+  "summary": "通读了 Character Classes 全部 46 个叶（13 个职业页 + 总览页的 text 与 contentOverview，英文约 15 万字符），以「没读过英文的玩家」视角逐句判读，最终改动 22 个叶、89 处句级修改，全部可归到病名表里的具名毛病，未动任何术语、数字、标记或 id。\n\n改动分布（按病名）：长定语 33、被字滥用 18、词序照搬 20、的的不休 6、术语当普通词 5、同义堆砌 3、代词冗余 3、量词误用 2。\n\n最集中的病灶是**长定语**：英文的关系从句被整条搬到中心词前面，最长一条 32 字（Monk.contentOverview「强大到足以驾驭内在形而上能量、以增强自身肉体能力的心智修行」），Cleric 萨克茨段 30 字（「灵魂循环为维持余烬寰宇存续所必须保持的艰苦结构的一种映照」），Warlock 奥里诺斯段是四层名词套嵌。这类句子英文对照校对时完全合格——每个信息点都在——但中文读者要回读两三遍才能拆开。统一处理办法是拆成「先说主干，再用分号/破折号补条件」。\n\n顺带修掉但仍属可读性范畴的两处**实质误读**：Wizard 文书会「世界上最古老的斯佩克特拉」（英文 oldest 修饰的是 champions 不是 Spectra），以及 Fighter 首句「几乎各行各业的战士都有潜力成为战士」（warrior 与职业名 Fighter 同形，句子自我循环）。\n\n术语一致性方面动了 5 处孤例，都是往全库既有写法靠：「子职阶」「子职」→「子职业」（正文 12 处如此）、「环」→「环会」（正文 7 处如此）、contentOverview 里两处未译的「Ember」→「余烬」（定译表明确）、Bard 页把普通词 strong 译成的「强韧」还给 Fortitude。\n\n自检时对每一处都做了新旧并排通读，凡「差不多」的一律没改——例如 Barbarian「赋予你对无与伦比的力量与坚韧的原始掌控」虽有的的不休，但改写有语义漂移风险，放弃；Ranger「曾与一名戴莫斯讲通条件」口语但可解，放弃。",
+  "escalations": "三条留给主控决策，我没动：\n\n1. **「X 是最……的 Y 之一」+ 复数主语**，全单元至少 8 处（Ranger 首段两连、Cleric 莱妮卡段两处、Fighter/Rogue 各若干），例如「他们始终都是这片领域中最受珍视的怪物与暴君猎杀者之一」。英文 some of the world's most… 是复数，中文「之一」是单数，主谓数不一致是典型翻译腔。但这个句式在 9000+ 叶里必然是全局性的，只在本单元修会造成风格分裂——建议做成全库级决策（统一改为「跻身……之列」或「都是最……的 Y」）再一次性扫。\n\n2. **搭配错误没有对应病名**。病名表里没有一格能装「动宾/主谓搭配不成立」，我只能挂到最近的「词序照搬」下（如「变得尤为行家」「踏上世界各地」「扮演更具庆典意味的力量」）。其中 Cleric 钢歌段「这些欢欣的牧师往往在世界上扮演更具庆典意味的力量」（EN: tend to be a more celebratory force in the world）我最终**没改**，因为找不到能诚实标注的病名。若主控认可，建议下一轮在病名表里加一格「搭配失当」。\n\n3. **Barbarian 世界树之径**「世界树之径野蛮人在科拉克和荆芽灵族群中往往更为常见，**因为**他们源自尤林的出身尤为值得注意」——英文是非限定从句（whose origins in Jurin are noteworthy），并没有断言因果，中文的「因为」凭空造了一层逻辑。这是保真度问题不是可读性问题，超出本轮判据，未改，转给保真度轮次。\n\n另：本单元的 hazard「遭憎魔法」提示块在 Artificer.text 与 Cleric.text 里是逐字相同的两份拷贝，我两处同步改了；全库若还有第三份（Player's Guide 侧很可能有），孪生同步时请一并核对，别改出三种说法。"
+ },
+ {
+  "unit": "③-A 术语表内容本身审计（glossary_ec.json，7788 条，抽样 200 + 4 项全量机扫）",
+  "findings": [
+   {
+    "kind": "既定译名违背/规则术语误译",
+    "where": "glossary_ec.json 键 `Kinesis`（另见 `Rune:Kinesis`）",
+    "problem": "`Kinesis` => 念动力，直接违背既定译名 Kinesis=念力；且与 `Telekinesis` => 念动力 Telekinesis 完全撞车，玩家分不出「念力」学派与「念动力」法术。词表内部还自相矛盾：`Kinesis Potency`/`Kinesis Proficiency`/`Kinesis Spellcraft`/`Kinesis-Runic`/`Rune: Kinesis` 五条全用「念力」，只有裸 `Kinesis` 和空格变体 `Rune:Kinesis` 用「念动力」。",
+    "evidence": "provenance: {'cn':'念动力','source':'base'} —— 来自 base 层且从未被 harvest 覆盖。实测两仓 cn 包中含 Kinesis 的 97 个叶子里「念力」出现 134 次、「念动力」0 次：包早已订正，词表停留在订正前。subfreq(Kinesis)=129。",
+    "severity": "阻断",
+    "fix": "base 层 fvtt/glossary_crucible_merged.json 改 `Kinesis`→念力，删除/修正 `Rune:Kinesis`（应为 符文：念力）；`Telekinesis` 保留 念动力 才不撞车。依据：既定译名表 + 包内 134:0 的实际用法。"
+   },
+   {
+    "kind": "既定译名违背/术语撞车",
+    "where": "glossary_ec.json 键 `Fortitude`（家族 `Undead Fortitude` / `Undeathly Fortitude`）",
+    "problem": "`Fortitude` => 坚韧，违背既定译名 Fortitude=强韧 / Toughness=坚韧，并与属性 Toughness 的正确译名 坚韧 正面撞车。家族内部还分裂：`Undead Fortitude`=亡灵坚韧、`Undeathly Fortitude`=不死坚韧（用错字），而 `Undying Fortitude`=不死强韧（用对字）。词表里根本没有 `Toughness` 条目，于是撞车方唯一的锚点是错的那个。",
+    "evidence": "provenance: source='base'。含 Fortitude 的 132 个 cn 叶子里「强韧」136 次 vs「坚韧」30 次；含 Toughness 的 109 个叶子里「坚韧」123 次。正文实证：`You focus your energy and recover your <strong>Toughness</strong> score` => 「恢复等同于你<strong>坚韧</strong>值的生命值」。",
+    "severity": "阻断",
+    "fix": "base 层 `Fortitude`→强韧，`Undead Fortitude`→亡灵强韧、`Undeathly Fortitude`→不死强韧；并补 `Toughness`→坚韧 作为占位，防止下一轮再被抢。"
+   },
+   {
+    "kind": "规则术语被译成普通词（Rank/Tier/level 族）",
+    "where": "glossary_ec.json 键 `Rank` / `Attunement Rank` / `Soulbound Rank` / `Training Rank` / `Rank 1 Soulmark`，以及 `Enchantment Tier` / `Quality Tier`",
+    "problem": "既定译名是 Tier=阶 / Rank=阶位 / level=等级 三分。词表把 Rank 全族压成「等级」（Rank=等级、调谐等级、魂缚等级、训练等级、1级魂痕）——Rank 与 level 在词表里彻底不可分；Tier 又被拆成两种（`Tier 1`/`Tier 2`=第N阶 对，`Enchantment Tier`/`Quality Tier`=附魔阶级/品质阶级 错）。词表里既没有裸 `Tier` 也没有裸 `Level` 条目，所以这一族没有任何正确锚点。",
+    "evidence": "provenance: `Rank` source='base'。含 Rank 的 36 个 cn 叶子里「阶位」174 次 vs「等级」66 次；含 Tier 的 214 个叶子里「阶」336 次、「阶位」0 次。正文实证：`based on the <strong>Tier</strong> of the affix` => 「根据该词缀的<strong>阶</strong>」。",
+    "severity": "阻断",
+    "fix": "base 层：`Rank`→阶位、`Attunement Rank`→同调阶位、`Soulbound Rank`→魂缚阶位、`Training Rank`→训练阶位、`Rank 1 Soulmark`→1阶位魂痕；`Enchantment Tier`→附魔阶、`Quality Tier`→品质阶；补 `Tier`→阶、`Level`→等级 两条锚点。"
+   },
+   {
+    "kind": "既定译名违背/系统性合并",
+    "where": "glossary_ec.json 键 `Region Map` / `Region Map Location` / `Region Map Update` / `Area Map Context` / `Area Maps`",
+    "problem": "既定译名把 Region Map=地区地图、Area Map=区域地图 分得很死（这是导航层的核心区分）。词表 5 条全部落到「区域地图」，Region Map 与 Area Map 在词表里完全等同——正是这条区分被抹掉。任何拿词表回灌的动作都会把「地区地图」洗回「区域地图」。",
+    "evidence": "provenance: `Region Map` source='base'。含 'Region Map' 的 159 个 cn 叶子里「地区地图」351 次 vs「区域地图」182 次——包本身已大部分订正，词表停在旧值并且还残留 182 次未清的漂移。",
+    "severity": "阻断",
+    "fix": "base 层：`Region Map`→地区地图、`Region Map Location`→地区地图地点、`Region Map Update`→地区地图更新；`Area Map Context`/`Area Maps` 保持 区域地图。顺带：包内残留的 182 处「区域地图」需另开批次核对。"
+   },
+   {
+    "kind": "上游 bug 被洗成定译（harvest 污染）",
+    "where": "glossary_ec.json 键 `Alchemist`",
+    "problem": "`Alchemist` => 阿克图里安（Arcturian）。这不是「炼金术士」的任何合理译法，而是把一个角色 tokenName 的翻译错位收割成了整个英文词的定义。这是任务预警机制的活标本：包里一处错译，一次 build 就成了「定译」。",
+    "evidence": "provenance: source='shipped'。全库唯一来源叶子：ember.crucible-adventure.json/entries/Ember Early Access/actors/Arcturian Alchemist/tokenName，EN='Alchemist' CN='阿克图里安'——译者把 'Arcturian Alchemist' 的前半塞进了后半的 tokenName。含 Alchemist 的 61 个叶子里「炼金术士」23 次。subfreq=100。",
+    "severity": "严重",
+    "fix": "先修包：该 tokenName 应为「阿克图里安炼金术士」（与 name 一致）；修包后重建，词表自然变成 `Alchemist`→炼金术士。不要手改词表。"
+   },
+   {
+    "kind": "一词多义被折叠（专名 vs 通用词）",
+    "where": "glossary_ec.json 键 `Aura`、`Altar of  Aura` / `Altar of Aura`、`Aura Attunement` / `Aura Spellcraft`、`Fear Aura` / `Poisonous Aura` / `Aura of Life`",
+    "problem": "Ember 里 Aura 是两样东西：风之月的神名（Casia & Aura, the Wind Moon => 卡西娅与奥拉）和普通游戏术语 aura（光环/灵气）。词表把裸 `Aura` 定为「奥拉 Aura」，于是通用义没有锚点，实际条目彻底分裂：`Aura Attunement`=奥拉同调、`Aura Lunar Resonance`=奥拉月华共鸣、`Gem of Aura`=奥拉宝石 vs `Aura Spellcraft`=灵气施法、`Gesture: Aura`=手势：灵气、`Fear Aura`=恐惧灵气、`Aura of Life`=生命灵气。最刺眼的是同一座祭坛因为一个多余空格拿到两个中文名。",
+    "evidence": "`Altar of  Aura`（双空格）=> 奥拉祭坛 Altar of Aura；`Altar of Aura`（单空格）=> 灵气祭坛。两条并存于同一份词表。",
+    "severity": "严重",
+    "fix": "裁决 Aura 的两义并在词表中显式分列：专名 `Aura`（月/神）→奥拉；凡是 X Aura 形态的通用词→灵气（或统一为 光环）。合并 `Altar of  Aura`/`Altar of Aura` 为单一值（按上下文应为 奥拉祭坛，若该祭坛供奉风之月）。属 Aura 系列（Aura 1..5: Zephyr/Gale/Cyclone/Whirlwind/Hurricane 全为风，指向月神）→ 奥拉。"
+   },
+   {
+    "kind": "术语撞车（主形态取错）",
+    "where": "glossary_ec.json 键 `Shield`",
+    "problem": "`Shield` => 护盾术 Shield，把法术义定成了唯一定义。但库里 Shield 同时是装备「盾牌」。词表只能存一个「主形态」，结果战利品表里的盾牌若照词表回填就变成法术名。subfreq=237，属高频。",
+    "evidence": "同一份 en/cn 对齐里并存两种：ember.adventure.json/.../folders/Shield => 盾牌 Shield、tables/Corpse Loot/results/26-26/name => 盾牌 Shield；而 actors/Tethra Shùl/items/Shield/name => 护盾术 Shield（另有 Evesso/Sionia/Sajor Velex 等多例）。",
+    "severity": "严重",
+    "fix": "词表这一格无法同时正确——应在 byrole 分表里按角色分列（folder/table→盾牌，actor item→护盾术），并把裸 `Shield` 的扁平值改为更中性的「盾牌」（装备义出现在物品/表格等会被回填的位置，法术义出现在 actor items，后者一般不走词表回填）。"
+   },
+   {
+    "kind": "术语撞车",
+    "where": "glossary_ec.json 键 `Sense` 与 `Wisdom`",
+    "problem": "`Sense` => 感知 且 `Wisdom` => 感知。既定译名 Wisdom=感知 是硬的，那么 Sense 必须让路。目前两条撞在一起，属性检定和感官描述在中文里无法区分。",
+    "evidence": "provenance: 两条 source 均为 'base'。库内实际用法已分开：crucible.adversary-talents.json/folders/Senses => 感官、crucible.affixes.json/folders/Senses => 感官；只有 crucible.affixes.json/entries/Sense Spellcraft/adjective => 感知 仍在撞。含 Sense 的 57 个叶子里「感知」83 次、「感官」0 次（因为该形态多为复数 Senses）。词表已有 `Senses`=>感官。",
+    "severity": "严重",
+    "fix": "`Sense`→感官（与已有 `Senses`=>感官 对齐），`Wisdom` 保持 感知。并顺手核 `Sense Spellcraft/adjective` 的「感知」应改为「感官」。"
+   },
+   {
+    "kind": "术语撞车/上下文特定译法被泛化",
+    "where": "glossary_ec.json 键 `Power` 与 `Potency`",
+    "problem": "`Power` => 效力，来自词缀 Potency 的 adjective 字段（该字段英文恰好是 'Power'）。于是一个上下文极窄的形容词形态被洗成了英文单词 Power 的通用定义，并与 `Potency` => 效力 Potency 撞车。词表内同时还有 `Necklace of Power` => 力量项链、`Kinesis Potency` => 念力强度，四种说法并存。",
+    "evidence": "provenance: `Power` source='shipped'。唯一来源叶子全是 .../items/*/effects/Potency/adjective 与 crucible.affixes.json/entries/Potency/adjective。subfreq(Power)=155。",
+    "severity": "严重",
+    "fix": "裸 `Power` 不应进词表（或应为 力量/威能）；`Potency` 保持 效力；把 adjective 这一格归到 byrole 分表而非扁平主表。同时统一 `Kinesis Potency`→念力效力。"
+   },
+   {
+    "kind": "构建机制缺陷（base 层陈旧值永不被覆盖）",
+    "where": "glossary_ec.json 全表 1629 条 source='base' 的条目",
+    "problem": "任务预警的是「harvest 把错译洗成定译」。实测还存在反向且更隐蔽的一条：包已被订正、但英文词只以**子串**形态出现（从不作为独立叶子）时，harvest 永远收割不到它，base 层的**订正前旧值**就永久存活并被当作权威。上面 Kinesis / Fortitude / Rank / Region Map / Sense / Depths / lore / flat / Talisman / Sprite / Storm / dim light / warrior 全部命中这一条：source 都是 'base'，且都与包内现行用法相反。",
+    "evidence": "provenance 的 policy 写着 'shipped translation wins over base glossary'，但该策略只在英文串**恰好等于某个叶子**时生效。Kinesis 在包里出现 129 次却 0 次作为独立叶子，故 base 的 念动力 存活。同类：Fortitude 142 次、Rank 166 次、Region Map 243 次，全部 source='base' 且全部与包内多数用法相反。",
+    "severity": "严重",
+    "fix": "build_glossary.py 增加一道校验：对每条 source='base' 的条目，在 en/cn 对齐语料里做子串共现统计，若 base 的中文在对应中文叶子里出现 0 次而另一候选出现 N 次，标记为 base-contradicted 并写入 disputes 待裁决，不要静默采用。这一道能一次性抓出本报告里 8 条以上。"
+   },
+   {
+    "kind": "术语撞车",
+    "where": "glossary_ec.json 键 `Depths` / `Restoration of the Deep` / `Surface: Fall Depths`",
+    "problem": "`Abyss` => 深渊 是主线专名（深渊入侵、深渊裔），但 `Depths` 也被定为 深渊，导致一切「深处/深度」义都被吸进专名。连带产出两处实际误译：`Restoration of the Deep` => 深渊疗愈（Mayis 同调的动作，the Deep 指深海/幽深，不是 Abyss），`Surface: Fall Depths` => 地表：坠落深渊（这是 Arcturel Tradeway 场景的一个 region，与坠落伤害的落差有关，不是一个叫「深渊」的地方）。",
+    "evidence": "provenance: `Depths` source='base'，subfreq=202。来源叶子：crucible-character.json/entries/Mayis Attunement/actions/mayisRestorationOfTheDeep/name => 深渊疗愈；ember.adventure.json/.../scenes/Arcturel Tradeway/regions/Surface: Fall Depths/name => 地表：坠落深渊。`Abyss`(1973) / `The Abyss`(155) 均为 深渊。",
+    "severity": "严重",
+    "fix": "`Depths`→深处；`Restoration of the Deep`→深海疗愈（或 幽深回复，依 Mayis 同调的元素属性定）；`Surface: Fall Depths`→地表：坠落落差（或 地表：坠落深度）。深渊一词留给 Abyss 独占。"
+   },
+   {
+    "kind": "术语撞车/家族分裂",
+    "where": "glossary_ec.json 键 `Attunement` / `attunement` / `Attunement Rank` / `Attunement Features`",
+    "problem": "同一个规则术语在词表里有两个中文：`Attunement` => 同调 Attunement，`attunement`（小写）=> 调谐。派生条目跟着裂开：`Attunement Rank` => 调谐等级、`Attunement Features` => 调谐特性 用「调谐」，而 `Aura Attunement` => 奥拉同调 用「同调」。`Attunement Rank` 一条同时踩了「调谐」和「等级」两个错。",
+    "evidence": "两条键仅大小写不同却给出不同中文，均在 glossary_ec.json 内并存。subfreq(attunement)=1623 属最高频段。全表同类「仅空格/大小写不同却中文不同」的键对共 27 组。",
+    "severity": "严重",
+    "fix": "统一为 同调（既定译名族里 Aura Attunement=奥拉同调 已定）。base 层删除小写 `attunement`=>调谐、`Attunement Features`=>调谐特性、`Attunement Rank`=>调谐等级，改为 同调/同调特性/同调阶位。"
+   },
+   {
+    "kind": "仅空格/大小写差异导致的一词两译（全表 27 组）",
+    "where": "glossary_ec.json：`Rune: Kinesis`/`Rune:Kinesis`、`Inflection: Compose`/`Inflection:Compose`、`Agrimagical Artifact: Everbloom`/`Agrimagical Artifact:Everbloom`、`Psychic Damage`/`Psychic damage`、`Everything & More`/`Everything&More` 等 27 组",
+    "problem": "无空格/小写变体全部来自 base 层且 subfreq=0（当前英文语料里根本不存在这些键），却携带与正式键**不同且往往更差**的中文，静默地留在权威词表里等着被匹配到。例：`Inflection:Compose` => 屈折：作曲（Compose 在屈折语境是「编构」，作曲是音乐义，正式键 `Inflection: Compose` 正确译作 屈折：编构）；`Psychic damage` => 心灵伤害 vs 正式键 灵能伤害。",
+    "evidence": "机扫全表 7788 键，按去空格+小写归一后得 27 组「同一词、不同中文」的键对，全部为 base 源，全部 subfreq=0。清单已列在 problem 中的代表条目。",
+    "severity": "严重",
+    "fix": "build_glossary.py 增加归一化去重：同一归一化键出现多个中文时，保留有语料支撑（subfreq>0）的那条，另一条写入 disputes 而非并存。base 层同步清掉这 27 条无空格/小写幽灵。"
+   },
+   {
+    "kind": "死条目（词表含大量本项目不存在的词）",
+    "where": "glossary_ec.json 中 210 条 subfreq=0 的条目（`Canyon Crusader`/`The Hayren Arms`/`Sunning`/`Mainhand`/`Gameplay Events`/`Cascal Arcden` 等）",
+    "problem": "210 条条目的英文键在当前两仓英文语料里一次都不出现，全部 source='base'——它们是从 glossary_crucible_merged.json 带进来的历史/他版残留。它们只能造成伤害：fill_twin_names.py 明确以 glossary_ec 作为回填来源，scan_name_splits.py 以它作裁决兜底，一旦孪生包出现同名英文就会被这些未经本项目校对的旧译命中。抽样中恰好抓到两条明显错译：`Canyon Crusader` => 峡谷十字军（Crusader 指人，且此世界无十字军背景，应为 讨伐者/圣战者）、`The Hayren Arms` => 海伦兵舍（'The X Arms' 是英式酒馆命名，Arms 指纹章不是兵器，应为 海伦纹章酒馆）。",
+    "evidence": "全量比对：7788 键中 210 键在合并英文语料（21.9M 字符）里 count==0，source 分布 Counter({'base': 210})，无一条来自 shipped。",
+    "severity": "一般",
+    "fix": "build_glossary.py 输出时把 subfreq==0 的 base 条目移入单独的 glossary_ec.legacy.json，不进主表；或至少在 provenance 里打 'orphan' 标记，让 fill_twin_names / scan_name_splits 跳过。"
+   },
+   {
+    "kind": "上游拼写 bug 被洗成定译",
+    "where": "glossary_ec.json 键 `Manisfestation of Magic`",
+    "problem": "上游把 Manifestation 拼成了 Manisfestation，词表原样收下这个错拼键并给了中文「魔法显现」。后果有两层：一是词表把一个不存在的英文词固化成条目；二是上游一旦修正拼写，这条立刻变成孤儿，而正确拼写 `Manifestation of Magic` 无任何条目，该能力名会瞬间回退成英文。词表里已有 `Ancestral Manifestation`=>先祖显现、`Spirit Manifestation`=>灵体显现 说明正确拼写的家族是存在的。",
+    "evidence": "来源叶子：ember.adventure.json 与 ember.crucible-adventure.json 的 actors/Shade of Agaseros/items/Manisfestation of Magic/name => 魔法显现 Manisfestation of Magic。英文语料中 'Manifestation of Magic'（正确拼写）出现 0 次。",
+    "severity": "一般",
+    "fix": "这类上游错拼应在 provenance 里单列 'upstream-typo'，并同时登记正确拼写的同义键，使上游修正后不断链。中文「魔法显现」本身正确，无需改。"
+   },
+   {
+    "kind": "术语撞车",
+    "where": "glossary_ec.json 键 `Weak Points` 与 `Weakness`",
+    "problem": "`Weak Points` => 弱点 Weak Points 与 `Weakness` => 弱点 撞车。Weak Points 是敌方通用特性名（大量 adversary 都带），Weakness 是伤害弱点这一规则量。两者在中文里同名，玩家读到「弱点」无法判断是特性还是抗性表里的数值。",
+    "evidence": "`Weak Points` 来源叶子遍布 crucible-adventure 的 actors（Juro Wandren / Bassa the Firebug / Lyla Cevher / Jasper / Jurtak Hunter / Jahud Assassin 等 6+ 例的 items/Weak Points/name）。`Weakness` source='base'，subfreq=31，在英文语料中无独立叶子。",
+    "severity": "一般",
+    "fix": "`Weak Points`→弱点（保留，特性名）；`Weakness`→易伤 或 伤害弱点，与既定译名族（Resistance=抗性）配套。"
+   },
+   {
+    "kind": "家族译名不统一",
+    "where": "glossary_ec.json 键 `agrimage` / `Agrimage` / `agrimagic` / `Agrimagic` / `Agrimagical Artifact` / `Agrimage Circle` / `Warded By Agrimagic`",
+    "problem": "agrimage 这一族在词表里有三套并存的中文：农法师/农法（小写键）、农艺法师/农艺魔法（大写键）、农魔法（无空格键）。同一个虚构学派在权威词表里三种叫法，任何回填都会随机选中一种。",
+    "evidence": "`agrimage`=>农法师 vs `Agrimage`=>农艺法师 Agrimage；`agrimagic`=>农法 vs `Agrimagic`=>农法 vs `Agrimagical Artifact`=>农艺魔法神器；`Agrimagical Artifact:Everbloom`=>农魔法神器：永绽之花 vs `Agrimagical Artifact: Everbloom`=>农艺魔法神器：永绽之花。",
+    "severity": "一般",
+    "fix": "统一为 农艺法师 / 农艺魔法（有 shipped 支撑的形态胜出），base 层删除小写 `agrimage`=>农法师、`agrimagic`=>农法 及无空格变体。"
+   },
+   {
+    "kind": "专名族未保持区分",
+    "where": "glossary_ec.json 键 `Pallid Drakeling`（对照 `Drake`/`drake` => 龙兽、`Dragons` => 巨龙、`Wyrms` => 古龙）",
+    "problem": "既定译名把龙族三分（Wyrms=古龙 / Dragons=巨龙），`Drake` 也已定为 龙兽。但 `Pallid Drakeling` => 苍白幼龙，drakeling 的 drake 词根被抹掉，中文读者会把它归入「龙」而非「龙兽」，与已建立的三分体系冲突。",
+    "evidence": "词表并存：`Drake`(333)=>龙兽、`drake`(374)=>龙兽、`Dragon`(497)=>巨龙。来源叶子 actors/Pallid Drakeling/name => 苍白幼龙 Pallid Drakeling、actors/Afflicted Pallid Drakeling/tokenName => 苍白幼龙。",
+    "severity": "一般",
+    "fix": "`Pallid Drakeling`→苍白幼龙兽，并补 `Drakeling`→幼龙兽 作为族锚点。"
+   },
+   {
+    "kind": "专名误译",
+    "where": "glossary_ec.json 键 `Underforge`",
+    "problem": "`Underforge` => 底部熔炉。这是 Aedir Signalpost 的一个地下层名，Under- 是「地下/下层」，「底部熔炉」既非地名口吻也丢了方位义。词表把它固化为该地名的定义，三处（journal category / page name / scene level）都会带着这个译名。",
+    "evidence": "来源叶子（两仓各三处）：journals/Aedir Signalpost/categories/Underforge、journals/Aedir Signalpost/pages/Underforge/name、scenes/Aedir Signalpost/levels/Underforge，CN 全为 底部熔炉。subfreq=52，provenance source='base'。",
+    "severity": "一般",
+    "fix": "→地下熔炉（或 下层熔炉，与同场景其它层名的方位命名保持一致）。"
+   },
+   {
+    "kind": "通用词被译成上下文特定值（回填地雷）",
+    "where": "glossary_ec.json 键 `lore`(1068) / `flat`(183) / `Flats`(482) / `mess`(380) / `Heart`(815) / `Entry`(22073) / `warrior`(507) / `Talisman`(172) / `Sprite`(165) / `Storm`(300) / `dim light`(238)",
+    "problem": "一批高频通用英文小词在词表里带着极窄的上下文译法：`lore`=>背景、`flat`=>平原、`mess`=>餐厅、`Heart`=>余烬之心 Heart、`warrior`=>战士（与 `Fighter`=>战士 Fighter 撞）、`Talisman`=>护符（与 `Amulet`=>护符 撞）、`Sprite`=>精灵（与 `Fae`=>精灵、`Elvish`=>精灵 三撞）、`Storm`=>风暴（与 `Tempest`=>风暴 撞）、`dim light`=>微光（与专名 `Glimmer`=>微光 Glimmer 撞）。scan_content_coverage.py 已经因为这个把专名检查默认关掉了（注释原话：'glossary_ec 里混着大量通用词'），说明这个污染已经在削弱 QA 工具的能力。`Heart` 尤其危险：唯一来源是 ember.character.json/folders/Heart 这一个文件夹，却把裸 Heart 定义成了「余烬之心」。",
+    "evidence": "provenance 显示 lore/flat/Flats/mess/warrior/Talisman/Sprite/Storm/dim light 均 source='base'；`Heart` source='shipped'，唯一来源叶子 ember.character.json/folders/Heart => 余烬之心 Heart。scan_content_coverage.py:29/39/249 三处注释与 --with-terms 默认关闭。",
+    "severity": "一般",
+    "fix": "这类小写通用词不应进权威主表。建议 build_glossary.py 加一条准入规则：长度 <= 6 且全小写、且在语料中无独立叶子的英文词一律不进 glossary_ec.json（进 legacy 表）。`Heart` 应改回 心脏/核心，`Heart of Ember` 保留 余烬之心。撞车对（warrior/Fighter、Talisman/Amulet、Sprite/Fae/Elvish、Storm/Tempest、dim light/Glimmer）需逐对裁决。"
+   },
+   {
+    "kind": "既定译名无锚点",
+    "where": "glossary_ec.json 中 `Presence` 相关 7 条（`Formidable Presence`/`Terrifying Presence`/`Veiled Presence`/`Presence Runes`/`War Leader's Presence`/`Guard Presence`/`Inmate Presence`）",
+    "problem": "既定译名定 Presence=存在，但词表里根本没有裸 `Presence` 条目，7 条派生词各译各的：气场（威严气场/隐秘气场/气场符文）、威压（骇人威压）、威仪（统帅威仪）、配置（守卫配置/囚犯配置）。没有锚点就没有收敛压力，下一轮还会继续分裂。包里也已存在 `Writhing Presence`=>蠕动之存在 这种用「存在」的形态，两套并行。",
+    "evidence": "机扫 `\\bPresence\\b` 命中词表 7 键，无一为 存在；语料中 'Writhing Presence' => 蠕动之存在。`Toughness`/`Tier`/`Level`/`Electricity`/`Forensics`/`Undeath` 同样在词表中**完全缺席**——既定译名 24 条里有 6 条在权威词表里没有条目。",
+    "severity": "一般",
+    "fix": "把既定译名 24 条全部作为「硬条目」写进 base 层（Presence→存在、Toughness→坚韧、Tier→阶、Level→等级、Electricity→电击、Forensics→法证学、Intrigue→权谋、Undeath→不死），并让 build_glossary.py 对这批键禁止 harvest 覆盖——这是防止「一致 != 对」的唯一结构性办法。`Guard Presence`/`Inmate Presence` 的「配置」是另一义（在岗人数），可保留但需在 provenance 标注例外。"
+   },
+   {
+    "kind": "非术语被收进术语表",
+    "where": "glossary_ec.json 键 `Fi-nor`、`ah-DARE`、`KETH`、`SHENT`",
+    "problem": "这些不是词，是发音注音（读音重拼）。`Fi-nor` => 菲-诺尔（Fi-nor）、`ah-DARE` => 阿-代尔（ah-DARE）把注音当名字音译，还带上了原本表示重音的连字符和大写。同时 `KETH`=>凯思（KETH）与 `Keth`=>凯思 Keth、`SHENT`=>申特（SHENT）与 `Shent`=>申特 Shent 形成大小写重复条目。",
+    "evidence": "四条均在 glossary_ec.json 中；`Fi-nor`/`ah-DARE` subfreq=2，`KETH`/`SHENT` 为全大写注音形态与正常拼写形态并存。",
+    "severity": "观感",
+    "fix": "发音注音行（通常出现在 '发音：...' 的正文里）不应作为可翻译叶子进入 harvest。build_glossary.py 应按父路径（pronunciation/phonetic 类字段）或全大写+连字符模式过滤掉。中文侧注音应保留英文原样或改用拼音标注，不做汉字音译。"
+   },
+   {
+    "kind": "专名误译（存疑，需人工裁决）",
+    "where": "glossary_ec.json 键 `Bound`",
+    "problem": "`Bound` => 束缚者 Bound。该条是 Mythspire Guardian 的一个 item（被动/特性），Bound 在此更可能是「被缚于（尖塔）」的状态义，译成「束缚者」把施受关系反了——守卫成了施缚方。词表已有 `Restrained`/`restrained` => 受缚，说明状态义的用字是「受缚」。",
+    "evidence": "唯一来源叶子（两仓各一）：actors/Mythspire Guardian/items/Bound/name => 束缚者 Bound。subfreq=27。需读该 item 的描述正文才能定死方向。",
+    "severity": "观感",
+    "fix": "读 Mythspire Guardian 的 Bound item description 后裁决：若描述是「守卫被束缚于尖塔」则改 缚定 / 受缚于此；若确是「能束缚他人」则保留 束缚者。不要盲改。"
+   }
+  ],
+  "batch_file": "",
+  "gate_clean": true,
+  "gate_output": "本单元不产批次文件、不改任何文件，故未跑 apply_translations.py 过闸（gate_clean=true 表示「无批次可拒绝」）。以下是抽样方法与覆盖率。\n\n【频次口径】\n先把两仓英文包（1-Ember汉化插件/compendium/en 与 2-Crucible汉化插件/compendium/en，跳过 _source.json）的全部字符串叶子拼成 21,896,512 字符语料，对 glossary_ec.json 全部 7788 个键做子串计数（str.count），得 subfreq。同时按同名文件做 en/cn 结构对齐，得 40,674 组 (path, en, cn) 三元组，作为「实际语境」的判据来源。\n说明：subfreq 是子串计数，短词会被包含式命中抬高（例 'Entry' 22073 大半来自 UUID 里的 'JournalEntry'，'mess' 380 含 'message'）。已在逐条判读时用 en/cn 对齐的**精确叶子**复核，不以 subfreq 单独定罪。\n\n【分层抽样】\n按 subfreq 降序排全表 7788 条，切三层：\n  高频 HI = 前 15%（rank 1–1168，subfreq >= 44），抽 60 条\n  中频 MID = 15%–55%（rank 1169–4283，subfreq 4–43），抽 80 条\n  低频 LO = 后 45%（rank 4284–7788，subfreq 0–3），抽 60 条\nrandom.seed(1115)，样本落盘于 scratchpad\\sample200.txt（含 tier / subfreq / provenance.source / en / cn 五列）。\n200/7788 = 2.57% 条目覆盖率；按 subfreq 加权的语料覆盖率约 21%（HI 层 60 条即覆盖高频段）。\n样本内判定为缺陷/存疑的 19 条，缺陷率 9.5%（HI 7/60、MID 4/80、LO 8/60）。\n\n【四项全量机扫（覆盖率 100%，7788/7788）】\n1. 中文撞车扫描：剥掉「中文 English」双语尾后按中文归组，得 360 组「一个中文对应多个不同英文」。按组内最高 subfreq 排序取前 120 组人工判读（scratchpad\\collisions.txt）。\n2. 键归一化重复扫描：去空格+转小写归一，找出「同一词、不同中文」的键对 27 组，全部为 base 源、全部 subfreq=0。\n3. 死条目扫描：subfreq==0 的键 210 条，provenance source 分布 Counter({'base': 210})，无一条 shipped。\n4. 既定译名符合性扫描：对 24 条既定译名逐条正则匹配所有键（\\bKinesis\\b、\\bRank\\b、\\bTier\\b、\\bFortitude\\b、\\bToughness\\b、\\bElectricity\\b、\\bPresence\\b、Region Map、Area Map、\\bForensics\\b、\\bIntrigue\\b、\\bUndeath\\b 等），并反向扫描「错误中文出现在哪些条目的值里」（念动力 4 条、坚韧 4 条、区域地图 5 条）。\n   结果：既定译名 24 条里 6 条（Toughness / Tier / Level / Electricity / Forensics / Undeath）在词表中**完全没有条目**；4 条（Kinesis / Fortitude / Rank / Region Map）在词表中被译成**违背既定译名的值**。\n\n【交叉验证方法】\n每条可疑条目都做三重核对：(a) provenance.terms 查 source 是 base 还是 shipped；(b) 在 40,674 组 en/cn 对齐里找 en 完全等于该键的叶子，看它到底出自哪个字段；(c) 在含该英文词的全部 cn 叶子里统计候选中文的出现次数（例：含 Kinesis 的 97 个叶子中「念力」134 次 vs「念动力」0 次）。三者一致才写进 findings，只有 (a)(b) 而 (c) 不足的标为「观感/存疑」。\n\n【全表 provenance 分布】shipped 3185 / shipped-bilingual-form 2774 / base 1629 / DISPUTED-shipped-kept 200。\n\n【未改动确认】本次仅读文件与写 scratchpad 临时文件（freq/subfreq/pairs/sample200/collisions），glossary 目录、compendium/cn、lang/cn.json 一律未动，未执行任何带 --write 的脚本，未 git commit。",
+  "summary": "审了 glossary_ec.json 的**内容正确性**（7788 条：分层抽样 200 条 + 4 项全量机扫），共 23 条缺陷，其中 4 条阻断、9 条严重。\n\n最重要的结论是：任务预警的「harvest 把包里的错译洗成定译」确实存在（`Alchemist` => 阿克图里安，来源是 Arcturian Alchemist 这个 actor 的 tokenName 被译错，一次 build 就成了 Alchemist 的官方定义），但**还有一条反向的、伤害更大的机制此前没人发现**：\n\n`build_glossary.py` 的 shipped-wins 策略只在英文串**恰好等于某个叶子**时生效。凡是只以子串形态出现的词（Kinesis 全库 129 次却 0 次作为独立叶子、Fortitude 142 次、Rank 166 次、Region Map 243 次），harvest 永远收割不到，**base 层的订正前旧值就永久存活并被当作权威**。后果是：包早已订正的四条既定译名，在词表里全是错的——\n- `Kinesis` => 念动力（应念力；包内 134:0 已订正），且与 `Telekinesis` => 念动力 撞车\n- `Fortitude` => 坚韧（应强韧），正面撞掉 Toughness=坚韧，而词表里根本没有 Toughness 条目\n- `Rank` 全族压成「等级」（Rank/Attunement Rank/Soulbound Rank/Training Rank 四条），Rank 与 level 在词表里彻底不可分；Tier 又被拆成「阶级」和「阶」两套\n- `Region Map` 与 `Area Map` 5 条全部落到「区域地图」，导航层最核心的那条区分被抹平\n\n这四条是阻断级：词表是 fill_twin_names.py 的回填来源、scan_name_splits.py 的裁决兜底，一旦回灌就会把包订正回错的。\n\n另有三类结构性污染：27 组「仅空格/大小写不同却给出不同中文」的幽灵键（`Rune:Kinesis` => 符文：念动力 与 `Rune: Kinesis` => 符文：念力 并存；`Altar of  Aura` 与 `Altar of Aura` 因为一个多余空格拿到两个祭坛名）；210 条 subfreq=0 的死条目（全部 base 源，是他版残留，抽样里抓到 `Canyon Crusader` => 峡谷十字军、`The Hayren Arms` => 海伦兵舍 两条明显错译）；以及一批高频通用小词带着极窄上下文译法（`lore` => 背景、`mess` => 餐厅、`Heart` => 余烬之心）——这个污染已经在削弱 QA 工具，scan_content_coverage.py 的专名检查就是因为它默认关闭的。\n\n未改任何文件（词表是构建产物），无批次，无过闸。",
+  "escalations": "三件事需要主控决策，我没有权限也不该单方面动：\n\n1) **修的是 base 层不是词表**。本报告里绝大多数条目 source='base'，指向 `C:\\Users\\Taka\\Desktop\\fvtt\\glossary_crucible_merged.json`（在项目根之外）。改词表本体会被下次 build 冲掉，必须改 base 层。该文件不在本项目仓库内，需主控确认是否有权改、以及改动如何进版本控制。\n\n2) **建议给 build_glossary.py 加三道闸**（这是唯一能防止「一致 != 对」复发的结构性办法，但属于改脚本，超出本单元范围）：\n   - base-contradicted 校验：对每条 source='base' 条目，在 en/cn 对齐语料里统计其中文的子串共现；若 base 值出现 0 次而另一候选出现 N 次，标记进 disputes 而非静默采用。这一道能一次抓出本报告 8 条以上。\n   - 归一化去重：同一「去空格+小写」归一键出现多个中文时，保留有语料支撑（subfreq>0）的那条，另一条进 disputes。清掉 27 组幽灵。\n   - 既定译名硬锁：把 24 条既定译名写进 base 并禁止 harvest 覆盖；顺带补齐目前完全缺席的 6 条（Toughness / Tier / Level / Electricity / Forensics / Undeath）。\n\n3) **两条需要读正文才能定死、我没有下结论**：`Bound`（Mythspire Guardian 的 item，束缚者 还是 受缚 取决于该 item 的描述文本）；`Aura` 的两义裁决（月神专名「奥拉」vs 通用词「灵气」的边界，涉及 Aura 1..5 系列、Altar of Aura、Gem of Aura 等十余条，需要一次统一裁决而不是逐条改）。\n\n另外顺带发现两处**包内缺陷**（不是词表问题，需另开批次，但主线包批次由我这单元产会与「只审词表」的边界冲突，故上报）：\n- ember.crucible-adventure.json 的 actors/Arcturian Alchemist/tokenName 当前是「阿克图里安」，应为「阿克图里安炼金术士」（与 name 一致）。这是 Alchemist 词条被污染的根源，不修包则重建后污染重现。\n- 包内仍残留 182 处「区域地图」对应 Region Map（正确的「地区地图」351 处），需核对清理。"
+ },
+ {
+  "unit": "③-B 撞车与规则术语族的系统性排查（主线包 ember.crucible-adventure.json + glossary_ec.json）",
+  "findings": [
+   {
+    "kind": "撞车/误译",
+    "where": "entries.Ember Early Access.actors.Arcturian Alchemist.tokenName",
+    "problem": "EN 是 \"Alchemist\"，中文却写成「阿克图里安」（＝Arcturian）。词整个译错，并且与另一个 token 完全同名。",
+    "evidence": "actors.Arcturian Alchemist.tokenName: EN='Alchemist' → CN='阿克图里安'；actors.Arcturian Pollenwright.tokenName: EN='Arcturian' → CN='阿克图里安'。全库 4952 组「名称叶」反向索引里，这是唯一一组两个语义无关的英文键落到同一中文值。",
+    "severity": "严重",
+    "fix": "改为「炼金术士」。"
+   },
+   {
+    "kind": "撞车/自相矛盾",
+    "where": "entries.Ember Early Access.actors.Wandren Watcher.name / .tokenName / .biography.private；actors.Ix'erax.items.Devoted Watcher.name",
+    "problem": "同一个生物在名称里叫「万德伦注视者」，在它自己的生物志正文里 5 处叫「万德伦家族的守望者」。而 Keeper 全库固定译作守望者，所以 Watcher 用守望者还会与 Keeper 撞车。",
+    "evidence": "Watcher 共 28 个叶子：注视者 27 叶（Watcher's Perch=注视者的哨位、actors.Wandren Watcher.name=万德伦注视者），守望者 3 叶（actors.Wandren Watcher.biography.private 内 5 处、actors.Ix'erax.items.Devoted Watcher.name=虔诚的守望者、Arctus Plateau Gazetteer.pages.Brimtown.text=边缘镇守望者）。Keeper 侧：Keeper of Souls=灵魂守望者、Keeper of Sages=贤者守望者、Keeper's Crossing=守望者渡口。",
+    "severity": "严重",
+    "fix": "Watcher 一律「注视者」：改 biography.private 5 处、Devoted Watcher→虔诚的注视者、Brimtown 的 Brimtown Watchers→边缘镇注视者；守望者留给 Keeper。"
+   },
+   {
+    "kind": "撞车（同卡）",
+    "where": "entries.Ember Early Access.actors.Amelia Naxan.items.Charm.name 与 .items.Beguile.name",
+    "problem": "同一个 NPC 身上两个不同能力都叫「魅惑」，开卡时无法区分该点哪个。",
+    "evidence": "同容器（actor=Amelia Naxan）反向索引命中：'魅惑' <= ['Charm', 'Beguile']；同 actor 另有 Charm Person 的效果 Charmed 也叫魅惑。",
+    "severity": "严重",
+    "fix": "Beguile→「蛊惑」，Charm→「魅惑」，Charmed（状态）保持与系统状态名一致。"
+   },
+   {
+    "kind": "撞车（同地图）",
+    "where": "entries.Ember Early Access.journals.Spellbreaker Tower.pages.Break Room.name 与 .pages.Lounge.name",
+    "problem": "同一座塔（监狱）的房间目录里两页同名「休息室」，GM 报房间名时玩家分不出是哪一间。",
+    "evidence": "同容器反向索引：('journal','Spellbreaker Tower') '休息室' <= ['Break Room','Lounge']；同 journal 另有 Sitting Area=休息区。",
+    "severity": "严重",
+    "fix": "Break Room→「员工休息室」，Lounge→「会客厅」。"
+   },
+   {
+    "kind": "撞车（同册）",
+    "where": "entries.Ember Early Access.journals.Disgraced House.pages.Finding Funar.name 与 .pages.Searching for Funar.name",
+    "problem": "同一本任务 journal 里两页同名「寻找富纳尔」。",
+    "evidence": "同容器反向索引：('journal','Disgraced House') '寻找富纳尔' <= ['Finding Funar','Searching for Funar']。",
+    "severity": "严重",
+    "fix": "Finding Funar→「找到富纳尔」，Searching for Funar→「搜寻富纳尔」。"
+   },
+   {
+    "kind": "违反既定译名 + 撞车",
+    "where": "entries.Ember Early Access.journals.Players' Guide.pages.Region Exploration.name；journals.Gamemaster's Guide.pages.Region Exploration.name；journals.Kadísos Gazetteer.pages.Region Overview.name",
+    "problem": "既定译名锁死 Region Map=地区地图 / Area Map=区域地图，即 Region=地区、Area=区域。但这三页把 Region 译成「区域」，其中 Region Overview→区域概览 与全库 26 处 Area Overview→区域概览 完全撞名，Region Exploration→区域探索 还和它自己正文里通篇的「地区地图」打架。",
+    "evidence": "Players' Guide.pages.Region Exploration.text 正文：「对地区地图的探索……在地区地图上移动」，标题却是「区域探索 Region Exploration」。名称叶反向索引：'区域概览' <= ['Area Overview','Region Overview']。全库计数：地区地图 191 / 区域地图 314，说明 Region/Area 的地图形态区分是守住的，只有这三页漏了。另 Region Levels→区域层级（Region Exploration 正文内）同病。",
+    "severity": "严重",
+    "fix": "Region Exploration→「地区探索」（2 页 + 正文 3 处 @UUID 链接文字）、Region Overview→「地区概览」、Region Levels→「地区层级」。注意 scenes.*.regions.Region.name=区域 是 Foundry 的 Region 放置物官方译名，不要动。"
+   },
+   {
+    "kind": "词表撞车（把两位神合并）",
+    "where": "5-其他内容/glossary/glossary_ec.json 键 \"Vólun\"",
+    "problem": "词表把 Vólun 映射成「赫律默」，而赫律默是 Hrymer——两者是父子二神。词表里没有任何条目产出「沃伦」，下一轮 fill/apply 会把包内正确的「沃伦」全部改成「赫律默」。",
+    "evidence": "glossary_ec.json: \"Hrymer\"=>\"赫律默\", \"Vólun\"=>\"赫律默\"；包内 journals.Deities.pages.Auris Bor.text 正确写作「沃伦与他的妻子索卡莉……两个儿子赫律默与阿斯特里克」。按中文值反向索引 84 组里这是唯一一组专有名词真撞车。",
+    "severity": "严重",
+    "fix": "词表改 \"Vólun\"=>\"沃伦\"。"
+   },
+   {
+    "kind": "词表违反既定译名（会回灌错译）",
+    "where": "5-其他内容/glossary/glossary_ec.json 键 Fortitude / Rank / Attunement Rank / Soulbound Rank / Training Rank / Attunement Point / Kinesis / Rune:Kinesis",
+    "problem": "词表这 8 条与既定译名和包内既成事实都相反。包本身是对的，但词表是下轮工具的输入，留着就是定时炸弹。",
+    "evidence": "词表 \"Fortitude\"=>\"坚韧\"（既定：Fortitude 强韧 / Toughness 坚韧；包内 Fortitude 83 处出现、强韧 81/81 命中，坚韧全部属于 Toughness）；\"Rank\"=>\"等级\"、\"Attunement Rank\"=>\"调谐等级\"、\"Soulbound Rank\"=>\"魂缚等级\"、\"Training Rank\"=>\"训练等级\"（既定：Rank 阶位 / level 等级；包内阶位 72 处，词表里「阶位」出现 0 次）；\"Attunement Point\"=>\"调谐点数\"（包内 Attunement 490 处 → 同调 576、调谐 0）；\"Kinesis\"=>\"念动力\"、\"Rune:Kinesis\"=>\"符文：念动力\"（既定 Kinesis 念力；包内 Kinesis 65 处 → 念力 70、念动力 0，词表自己另有 \"Rune: Kinesis\"=>\"符文：念力\" 与之直接矛盾）。",
+    "severity": "严重",
+    "fix": "词表改：Fortitude→强韧；Rank→阶位，Attunement/Soulbound/Training Rank→同调阶位/魂缚阶位/训练阶位；Attunement Point→同调点数；Kinesis→念力，删掉 \"Rune:Kinesis\"=>\"符文：念动力\"。包内 dnd5e 法术 Telekinesis=念动力 是官方译名，保留。"
+   },
+   {
+    "kind": "族内不一致（伤害类型）",
+    "where": "actors.*.items.Radiant Death Burst.name（10 叶）；items.Radiant Dagger.name + actors.Hephiss Wandren.items.Radiant Dagger.name；actors.Radiant Ultra Drake.items.Radiant Blast.name；actors.Light Mote.items.Radiant Sear.name",
+    "problem": "Radiant 这一个伤害类型在物品/动作名里有五种写法，其中「耀辉」和「辉耀」还是同两字倒序，玩家看不出这些是同一伤害类型的东西。",
+    "evidence": "光耀：Radiant Absorption 光耀吸收 / Radiant Protection 光耀防护 / Radiant Bite 光耀啃咬 / Radiant Sense 光耀感知；辉耀：Radiant Dagger 辉耀匕首 / Radiant Flame 辉耀火焰 / Radiant Shot 辉耀射击 / Radiant Ultra Drake 辉耀究极龙兽；耀辉：Radiant Death Burst 耀辉死亡爆发（10 叶）；光辉：Radiant Blast 光辉爆破；灼光：Radiant Sear 灼光焚灼。",
+    "severity": "一般",
+    "fix": "以出现在防御物件族里的「光耀」为准，其余 14 叶统一改为光耀（光耀匕首/光耀火焰/光耀射击/光耀究极龙兽/光耀死亡爆发/光耀爆破/光耀焚灼）。"
+   },
+   {
+    "kind": "族内不一致（抗性物件族）",
+    "where": "actors.Slaith.items.Acid Absorption.name；actors.Stalagmaw.items.Acid Absorption.name",
+    "problem": "Absorption / Protection / Resistance 是同一族抗性物件，其余伤害类型在族内都只有一种写法，唯独 Acid 分裂成强酸/酸液。",
+    "evidence": "Acid Protection=强酸防护（8 叶）、Acid Resistance=强酸抗性、Acid=强酸、Acid Challenge=强酸挑战，但 Acid Absorption=酸液吸收（2 叶）。对照族内其它成员：Cold 寒冷吸收/寒冷防护、Fire 火焰吸收/火焰防护、Radiant 光耀吸收/光耀防护、Lightning 闪电吸收/闪电防护，均单一写法。",
+    "severity": "一般",
+    "fix": "Acid Absorption→「强酸吸收」（Acid Spit 酸液喷吐 属描写性攻击名，可保留）。"
+   },
+   {
+    "kind": "族内不一致（伤害/元素类型）",
+    "where": "actors.Temple Invader / Water Mote / Water Sprite / Water Visitor / Water Wanderer 的 .taxonomy.name",
+    "problem": "Frost 在符文族里是「霜冻」，在生物分类族里是「冰霜」，同一伤害/元素类型两个名字。",
+    "evidence": "Rune: Frost=符文：霜冻（14 叶）、Frost Proficiency=霜冻熟练度，但 Frost Elemental（taxonomy）=冰霜元素（5 叶）。全库计数：霜冻 87 / 冰霜 19。",
+    "severity": "一般",
+    "fix": "Frost Elemental→「霜冻元素」（Ray of Frost=寒霜射线 是 dnd5e 官方法术名，保留）。"
+   },
+   {
+    "kind": "族内不一致（训练阶位族）",
+    "where": "actors.Amalthea Stonecraft.items.Arcana Journeyman.name；actors.Agraband Swift.items.Performance Journeyman.name；actors.Kern.items.Diplomacy Adept.name；actors.Undaunted Adept.name / .tokenName",
+    "problem": "技能训练阶位是一条有序序列，中文却给出了三套词。玩家无法把「新手 / 熟练工 / 熟手 / 行家 / 老手 / 修习者」排成一条从低到高的线。",
+    "evidence": "正文（<strong> 标签内）：Untrained=未受训 32、Trained=受训 59、Novice=新手 24、Journeyman=熟练工 24、Adept=行家 1。物品名侧：Novice 全部=新手（Alchemy/Arcana/Athletics/Awareness/Diplomacy/Enchanting/Glyphweaving/Intimidation/Medicine/Science/Smithing/Society/Stealth/Wilderness 共 25 叶）；Journeyman=熟练工 7 种技能，但 Arcana Journeyman=奥术熟手、Performance Journeyman=演艺熟手；Adept=外交老手（Diplomacy Adept）、无畏修习者（actors.Undaunted Adept）。词表另有 \"Awareness Adept\"=>\"察觉专家\" 与 \"Adept\"=>\"行家\" 互斥，且 \"Expert\"=>\"专家\" 与之撞车。",
+    "severity": "一般",
+    "fix": "锁定 Untrained 未受训 / Trained 受训 / Novice 新手 / Journeyman 熟练工 / Adept 行家；改 Arcana Journeyman→奥术熟练工、Performance Journeyman→演艺熟练工、Diplomacy Adept→外交行家、Undaunted Adept→无畏行家；词表删掉 \"Adept\"=>\"行家\" 以外的写法。"
+   },
+   {
+    "kind": "撞车（动作名用了状态名）",
+    "where": "actors.Juro Wandren / Kalasak the Cutter / Jurtak Hunter / Jurtak Warrior / Mutagist Vivisector 的 items.Poison Vial.actions.poisonApply.name",
+    "problem": "这个动作是把毒抹到武器上，中文却叫「施加中毒」，直接借用了 @Condition[poisoned] 的状态名，读起来像是给目标施加中毒状态。",
+    "evidence": "5 叶 EN='Apply Poison' → CN='施加中毒 Apply Poison'；同族 Ingest Poison=摄入毒药、Poison Vial=毒药瓶、Apply Drakonbane Poison=施加屠龙毒药（这一条是对的）。@Condition[poisoned] 在包内出现 42 次。",
+    "severity": "一般",
+    "fix": "改「施加毒药」，与 Apply Drakonbane Poison 对齐。"
+   },
+   {
+    "kind": "撞车 + 族内不一致（建筑）",
+    "where": "journals.Lake Jinro Lunar Shrine.name / .categories.Shrine；journals.Ordain Gazetteer.pages.Numinous Shrines.name；journals.Chamber of Agaseros.pages.Shrine to Spectra.name",
+    "problem": "Shrine 有神殿/神龛/圣祠三种写法，其中「神殿」还与 Temple 全库译名撞车，玩家看到「月神殿」分不清是 Shrine 还是 Temple。",
+    "evidence": "名称叶反向索引：'神殿' <= ['Shrine','Temple']。Shrine 侧：Lake Jinro Lunar Shrine=金罗湖月神殿、Ancient Lunar Shrine=远古月神殿、categories.Shrine=神殿 vs Numinous Shrines=圣辉神龛、Shrine to Spectra=斯佩克特拉圣祠。Temple 侧全部=神殿：Shent Moon Temple 申特月神殿 / Cindarin Temple 辛达林神殿 / Temple Ward 神殿区 / Temple of Sockets 萨克茨神殿 / levels.Temple 神殿。",
+    "severity": "一般",
+    "fix": "Temple 保留神殿；Shrine 统一「神龛」——Lake Jinro Lunar Shrine→金罗湖月神龛、Ancient Lunar Shrine→远古月神龛、categories.Shrine→神龛、Shrine to Spectra→斯佩克特拉神龛。"
+   },
+   {
+    "kind": "族内不一致（同册房间族）",
+    "where": "journals.Spellbreaker Tower.pages.Webbed Cell.name",
+    "problem": "同一本地点册里 Cell 出现 7 次都译牢房，只有这一处译「囚室」。",
+    "evidence": "同册：Medical Cells 医疗牢房 / Dark Cells 黑暗牢房 / Sky Cells 天空牢房 / Yellow Cells 黄区牢房 / Red Block Cells 红区牢房 / Blue Block Cells 蓝区牢房 / Damaged Cell 受损牢房，唯 Webbed Cell=蛛网囚室。",
+    "severity": "一般",
+    "fix": "Webbed Cell→「蛛网牢房」。"
+   },
+   {
+    "kind": "撞车（两件不同物品同名）",
+    "where": "items.Waterskin.name 与 actors.*.items.Wetskin.name；tables.Chamber Supplies.results.13-13.name 与 tables.Corpse Loot.results.54-54.name",
+    "problem": "两组本来不同的物品各自被合并成同一个中文名，掉落表上无法区分。",
+    "evidence": "'水囊' <= ['Waterskin','Wetskin']（Waterskin 在 items/Chamber Supplies 表/Fernis Ossa 等，Wetskin 在 Hydroxol Stomach Contents 表/Jurtak Geomancer/Jurtak Warrior/Mutagist Scout）；'治疗者工具包' <= [\"Healer's Kit\",\"Healer's Toolkit\"]（前者在 Chamber Supplies 表/Jon Vastil/Jonico Daridane，后者在 Corpse Loot 表/Sage's Dormitory Loot 表/Rala Ushna）。",
+    "severity": "一般",
+    "fix": "Wetskin→「湿皮囊」（Ember 自有物品），Waterskin 保留水囊；Healer's Toolkit→「治疗者工具箱」，Healer's Kit 保留治疗者工具包。"
+   },
+   {
+    "kind": "撞车（任务名 vs 页名）",
+    "where": "journals.A Brush With Death.pages.Loose Ends.name 与 journals.Unfinished Business.name",
+    "problem": "一整条任务和另一本册子里的一页同名「未竟之事」，@UUID 链接文字在正文里出现时无法判断指向哪个。",
+    "evidence": "'未竟之事' <= ['Loose Ends','Unfinished Business']。",
+    "severity": "一般",
+    "fix": "Loose Ends→「收尾」，Unfinished Business（任务名）保留未竟之事。"
+   },
+   {
+    "kind": "撞车（职业 vs 原型）",
+    "where": "journals.Character Classes.pages.Cleric.name 与 actors.Kazra Steelshift.archetype.name",
+    "problem": "角色职业 Cleric 与 NPC 原型 Priest 都是「牧师」，玩家看 NPC 卡时会误以为该 NPC 带 Cleric 职业。",
+    "evidence": "'牧师' <= ['Cleric','Priest']；Cleric 出现在 Character Classes 册的职业页，Priest 出现在 actors.Kazra Steelshift.archetype.name。",
+    "severity": "一般",
+    "fix": "Priest（原型）→「祭司」，Cleric（职业）保留牧师。"
+   },
+   {
+    "kind": "撞车（词表 + 包内两种概念）",
+    "where": "glossary_ec.json 键 Assets/Resources；journals.Players' Guide.pages.Vistas.text、journals.Gamemaster's Guide.pages.Vistas for Gamemasters.text（Assets）；journals.Vortest Tower.pages.Front Gate.text（Resources）",
+    "problem": "Foundry 的素材文件（Assets）和 Crucible 的资源机制（Resources＝生命值/士气/动作/专注）都译成「资源」。",
+    "evidence": "词表反向索引：'资源' <= ['Assets','Resources']。包内 Assets 16 处全是远景/素材文件夹语境（\"add the artwork to their Assets folder\"），Resources 3 处中 Vortest Tower.pages.Front Gate 的 \"does not satisfy the criteria necessary for the recovery of any Resources\" 是资源机制。",
+    "severity": "一般",
+    "fix": "Assets→「素材」（词表 + 上述两页正文），Resources 保留资源。"
+   },
+   {
+    "kind": "撞车（属性名 vs 手势名）",
+    "where": "actors.*.items.Gesture: Sense.name / .description（7 叶）",
+    "problem": "属性 Wisdom 被既定译名锁死为「感知」，而 Sense 手势也叫「感知」，同一段战斗描述里「感知」既可能是属性也可能是手势；同族 Senses（生物感官）又叫「感官」。",
+    "evidence": "词表反向索引：'感知' <= ['Sense','Wisdom']，另有 \"Senses\"=>\"感官\"。包内 Wisdom 126 处 <strong> 标签全部 → 感知；Gesture: Sense=手势：感知（7 叶）；Radiant Sense=光耀感知、Blood Sense=血之感知、Web Sense=蛛网感知、Sense Weakness=感知弱点。",
+    "severity": "一般",
+    "fix": "Wisdom 不动（既定）。Sense 手势族改「探知」：Gesture: Sense→手势：探知，连带 Sense Spellcraft→探知施法；描写性怪物特性（Blood Sense 等）可保留。"
+   },
+   {
+    "kind": "凭空内容（名称）",
+    "where": "actors.Kendral Lowd.items.Show of Force New.name",
+    "problem": "英文 \"Show of Force New\" 的 \"New\" 被译成「新宝石」，凭空多出一个原文没有的词。",
+    "evidence": "EN='Show of Force New' → CN='武力展示 新宝石 Show of Force New'。",
+    "severity": "严重",
+    "fix": "改为「武力展示 Show of Force New」或「武力展示（新） Show of Force New」。"
+   },
+   {
+    "kind": "族内不一致（标题族）",
+    "where": "actors.Clodmarl.biography.private 的 <h3 class=\"divider\" id=\"lore\">",
+    "problem": "生物志的 Lore 标题全库 277 处里 276 处是「背景」，只有这一处是「传说」。",
+    "evidence": "CN 侧 id=\"lore\"> 后紧跟的文字统计：背景 276、传说 1（actors.Clodmarl.biography.private）。",
+    "severity": "观感",
+    "fix": "改「背景」。注意 id=\"lore\" 属性本身不能动。"
+   },
+   {
+    "kind": "族内不一致（内外成对）",
+    "where": "journals.Shent Moon Temple.pages.Temple Interior.name",
+    "problem": "同一地点的 Exterior/Interior 一对，中文用了「外部/室内」两种体系，不成对。",
+    "evidence": "Temple Exterior=神殿外部 / Temple Interior=神殿室内；对照 Culvert Exterior=涵洞外部 / Culvert Interior=涵洞内部、Cavern Interior=洞窟内部（成对）。",
+    "severity": "观感",
+    "fix": "Temple Interior→「神殿内部」。（scenes 层的 'Interior: X' 前缀=室内 是另一套，保留。）"
+   },
+   {
+    "kind": "族内不一致（Ward 族）",
+    "where": "items.Sekkir's Blade.effects.Spinning Ward.name",
+    "problem": "Ward 族其余成员都译「防护」，只有这一处译「护佑」。",
+    "evidence": "Gesture: Ward=手势：防护、Shield Ward=盾牌防护、Death Ward=死亡防护、Arcane Ward=奥术防护，vs Spinning Ward=旋转护佑。（Glyph of Warding=守护刻符 是 dnd5e 官方法术名，不算。）",
+    "severity": "观感",
+    "fix": "改「旋转防护」。"
+   },
+   {
+    "kind": "撞车（机制动作 vs 普通攻击）",
+    "where": "actors.Clodmarl.items.Juggernaut.actions.overrun.name 与 actors.Gohema's Tail.items.Ram.name；Slam/Thrash；Pounce/Swoop",
+    "problem": "三对不同动作各自撞成同名。其中 Overrun 是 Crucible 的机制动作、Ram 只是一次普通攻击，同名会让玩家以为触发同一套规则。",
+    "evidence": "'冲撞' <= ['Overrun','Ram']；'猛击' <= ['Slam'(3 叶),'Thrash'(17 叶)]；'猛扑' <= ['Pounce','Swoop']。均跨 actor，不在同一张卡上。",
+    "severity": "观感",
+    "fix": "Ram→「撞击」、Thrash→「抽击」、Swoop→「俯冲」；Overrun/Slam/Pounce 保留。"
+   },
+   {
+    "kind": "族内不一致（元素分类构词）",
+    "where": "actors.*.taxonomy.name（Fire/Light/Stone/Frost Elemental）与 folders.Water",
+    "problem": "元素生物分类里，单字元素用「火元素/光元素/水元素」，双字元素用「岩石元素/冰霜元素」，构词法不齐。",
+    "evidence": "Fire Elemental=火元素、Light Elemental=光元素、folders.Water=水元素 vs Stone Elemental=岩石元素、Frost Elemental=冰霜元素。",
+    "severity": "观感",
+    "fix": "若与上面 Frost→霜冻 一并处理，可统一为 火/光/水/岩/霜 元素；至少让 Frost 与符文族对齐。"
+   },
+   {
+    "kind": "族内不一致（数值与术语的间隔）",
+    "where": "全包 CN 文本（约 96 处）",
+    "problem": "「+N 术语」的空格时有时无，同一术语两种写法混排。",
+    "evidence": "+1 技能加值 41 / +1技能加值 17 / +2技能加值 1；+1 恩惠骰 65 / +1恩惠骰 4；+2 恩惠骰 39 / +2恩惠骰 28；+2 祸骰 11 / +2祸骰 4。",
+    "severity": "观感",
+    "fix": "统一为「+N 术语」（带半角空格），共约 54 处需补空格。"
+   },
+   {
+    "kind": "撞车（属性名 vs 常用词）",
+    "where": "actors.Kern / Sigil 等 items.Gesture: Sense.description（7 叶），及其它含 \"the presence of\" 的正文",
+    "problem": "属性名 Presence 被锁定为「存在」，同一段落里把常用词 presence 也直译成「存在」，读起来像在指属性。",
+    "evidence": "Gesture: Sense.description CN：「感知手势以<strong>存在</strong>进行成长」与「侦测使用……符文的施法存在」「侦测到生物的存在」并列出现在同一段。",
+    "severity": "观感",
+    "fix": "属性名不动；常用词 presence 改为「踪迹／所在」，如「侦测到生物的踪迹」。"
+   }
+  ],
+  "batch_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Ember-Crucible Translation Project\\4-临时脚本\\2026-08-15-round15\\batches\\round15_3B_collisions.json",
+  "gate_clean": true,
+  "gate_output": "本单元按 ③-B 要求不改文件，批次为空 {}，过闸仅作形式验证。\n\n$ python 3-常用脚本/qa/apply_translations.py --repo .../1-Ember汉化插件 --pack ember.crucible-adventure.json --batch .../round15_3B_collisions.json --force --dry\n\nember.crucible-adventure.json\n  applied            0\n  skipped (existing) 0\n  REJECTED no-EN     0\n  REJECTED no-CJK    0\n  REJECTED markup    0\n  REJECTED clobber   0\n\n(dry run: nothing written)\n\n===== 反向索引：组数 =====\n[索引 A] glossary_ec.json 按中文值反向建索引\n  条目 7788 → 不同中文值 7699 → N>1 的组 84 组（涉及 173 个英文键），全部为短词条（≤45 字符），无长句混入。\n  按「大小写/单复数/连字符归一后是否同形」自动分档：same 44 组（良性同形变体）/ DIFF 40 组，40 组逐组人工判读结果：\n    · 真撞车（写入 findings）8 组：Areas|Region、Sense|Wisdom、Assets|Resources、Hrymer|Vólun、The Keeper|Watchers、Expert|Specialist、Backgrounds|lore、Bodies of Water|Water\n    · 良性同义（判定不改）24 组：At a Glance|Overview、Knowledge Checks|Knowledge Test、Block|Blocking、Bonus|Bonuses、Breath|Breathing、Exterior|The Exterior、Hunter|The Hunter、Immunity|immune、Indoors|interior、Invested|investment、Magic|magical、Lower|Lower Level、Upper|Upper Level、Spirit Moon|The Spirit Moon、Void|Voidal、autotool|autotool device、fall|falling、hero|heroes、Area of Concern|Areas of Concern、Defend|Defense、React|Reaction、Form|Shape、sight|vision、Conjure|Summon|Summoned\n    · 原文拼写变体（不算缺陷）8 组：Gesture: Creation|Gesture:Create|Gesture:Creation、Gesture: Infuence|Gesture:Influence、Central Stair to 1F|Central Stairs to 1f、Lilifeld Grainary|Lilifeld Granary、Rotten Ring Mail|Rotting Ring Mail、Lake Shore|Shore、Shrine|temple、Condition|Statuses\n\n[索引 B] 主线包 20267/20179 个叶子，取 .name/.tokenName 的「英文→中文（剥去双语英文尾巴）」配对 4952 组，按中文值反向索引\n  中文值对应 >1 个不同英文的 49 组。归一（去空格/撇号/连字符/冒号/尾 s）后仍不同形的 49 组逐组判读：\n    · 真撞车（写入 findings）11 组：阿克图里安(Alchemist|Arcturian)、区域概览(Area Overview|Region Overview)、水囊(Waterskin|Wetskin)、治疗者工具包(Healer's Kit|Healer's Toolkit)、未竟之事(Loose Ends|Unfinished Business)、牧师(Cleric|Priest)、休息室(Break Room|Lounge)、寻找富纳尔(Finding Funar|Searching for Funar)、冲撞(Overrun|Ram)、猛击(Slam|Thrash)、猛扑(Pounce|Swoop)\n    · 法术↔其效果的同名（良性，判定保留）4 组：隐形(Invisibility|Invisible)、飞行(Flight|Fly)、心灵空白(Mind Blank|Mind Blanked)、魅惑中的 Charm|Charmed\n    · 原文拼写错/The 前缀/单复数（良性）27 组：Funar Cehver|Cevher、Brynna Vercocorte|Verocorrt、Chiaroscuran|Chiaroscurian Beast、Stalagmaw|Stallagmaw、Mutagist Bombadier|Bombardier、Wind Raider Boarder|Border、Crystal|Crystaline Carapace、Central Stair(s) to 1F/1f、The X 前缀 9 组、单复数 6 组、其余同义房名 4 组\n    · 跨册房间同名（同册无冲突，判定良性）7 组：书房、储藏室、训练室、餐厅、东侧走廊、步道、起居区\n\n[索引 C] 同容器（同一 actor 的 items / 同一 journal 的 pages）内部反向索引 —— 撞车杀伤力最大的一层\n  命中 17 组，其中 14 组是「同一条目被 key 与 ID 两次索引」的自身重复（Ancient Lift、Lavatories、Storage、Steam Vent、Misty Step×2、Jurtak Poison×2、Swallow、Searing Stare、Electrified Pseudopod、Teleport、Web Walker、Stone Fist），良性。\n  真同容器撞车 3 组，全部写入 findings：\n    · actors.Amelia Naxan：魅惑 <= Charm | Beguile\n    · journals.Spellbreaker Tower：休息室 <= Break Room | Lounge\n    · journals.Disgraced House：寻找富纳尔 <= Finding Funar | Searching for Funar\n\n===== 规则术语族：穷举清单与族内一致性判定 =====\n（√＝族内一致，×＝族内不一致，已写入 findings）\n\n1. 属性名族（6 项，Crucible）√\n   Strength 力量 / Toughness 坚韧 / Dexterity 敏捷 / Intellect 智力 / Presence 存在 / Wisdom 感知\n   —— 六项全为二字，构词法统一。<strong> 标签内计数 27/67/30/70/94/126 与中文命中数一一对应，无漏译。\n\n2. 防御名族（7 项）√\n   Armor 护甲 / Dodge 闪避 / Parry 招架 / Block 格挡 / Fortitude 强韧 / Reflex 反射 / Willpower 意志\n   —— 七项全为二字。EN/CN 计数：16/14、30/30、2/2、11/11、81/81、91/91、91/91。Fortitude 包内 100% 强韧（词表却写坚韧，见 findings）。\n\n3. 资源名族（4 项）√（勉强）\n   Health 生命值 / Morale 士气 / Focus 专注 / Action 动作\n   —— 生命值为三字、其余二字，但 HP 的三字译法是通行惯例，不判缺陷。\n\n4. 伤害类型族（16 项）×\n   Bludgeoning 钝击 / Piercing 穿刺 / Slashing 挥砍 / Fire 火焰 / Cold 寒冷 / Poison 毒素 / Necrotic 死灵 / Thunder 雷鸣 / Electricity 电击 / Lightning 闪电 / Psychic 精神 / Void 虚空 / Abyssal 深渊 / Corruption 腐化 —— 单一写法 √\n   Radiant × 五种写法（光耀/辉耀/耀辉/光辉/灼光）\n   Acid × 两种（强酸/酸液）\n   Frost × 两种（霜冻/冰霜）\n   Electricity 电击 与 Lightning 闪电 的既定区分 √ 守住（42 vs 62 处，无交叉）\n\n5. 抗性物件族（Absorption / Protection / Resistance / Immunity / Vulnerability）×\n   吸收 / 防护 / 抗性 / 免疫 / 易伤 —— 后缀四字全部一致 √；前缀只有 Acid 破族（酸液吸收 vs 强酸防护/强酸抗性）×\n\n6. 训练阶位族（5 级）×\n   Untrained 未受训 / Trained 受训 / Novice 新手 / Journeyman 熟练工|熟手 / Adept 行家|老手|修习者\n   —— Novice 25 叶全一致 √；Journeyman 与 Adept 破族 ×\n\n7. 物品品质族（5 级）√\n   Shoddy 粗糙 / Standard 标准 / Fine 精良 / Superior 卓越 / Masterwork 大师级\n   —— EN 91/92/103/107/105 对 CN 91/92/103/104/102，唯 Masterwork 三字（原文亦是复合词），可接受。\n\n8. 手势族（16 项）√ 全部一致，零例外\n   箭矢/化相/灵气/爆破/锥形/召唤/创造/扇形/影响/脉冲/射线/感知/踏步/打击/涌动/防护\n   （唯 Sense=感知 与属性 Wisdom=感知 跨族撞车，见 findings）\n\n9. 符文族（12 项）√ 全部一致，零例外\n   控制/死亡/大地/火焰/霜冻/照明/幻象/念力/生命/湮灭/灵魂/风暴\n   （Kinesis 包内 100% 念力，词表却写念动力，见 findings）\n\n10. 状态名族 —— 43 个 @Condition[...] 标签在中文里原样保留，可见标签由 Crucible 系统包提供，不在本包可改范围；本包内未发现被展开成中文的状态名。判定：不在主线包责任范围。\n\n11. 动作/时间单位族 √  Round 轮（21）/ Turn 回合（21）/ Action 动作 —— 既定区分守住。\n\n12. 生物分类族（taxonomy，60 项）× 仅元素子族构词不齐（火/光/水 单字 vs 岩石/冰霜 双字）；其余专名与通名（两栖动物/蛛形类/啮齿动物/自动人偶/食尸鬼/僵尸/怨灵…）无冲突。\n\n13. 称号族（Keeper / Watcher）× 撞车 + Watcher 两种写法（见 findings）\n\n14. 建筑族（Temple / Shrine / Sanctuary / Ward）× Shrine 三种写法且与 Temple 撞车\n\n15. Ward（防护）族 × 仅 Spinning Ward 出族\n\n16. 内外方位族（Interior / Exterior / Indoors）× 仅 Temple 一对不平行\n\n17. 房间族（同册 Spellbreaker Tower 的 Cell / Mess / Checkpoint / Block）× 仅 Cell 出现牢房|囚室两种；Mess 守卫餐厅/黄区餐厅/红区餐厅 √、Checkpoint 楼梯间检查点 1–6 √、Block 蓝区/黄区/红区 √\n\n18. 生物志标题族（Anatomy / Behavior / Lore，277 处）× 仅 1 处 Lore 出族（传说）\n\n19. 数值格式族（+N 术语）× 空格时有时无（约 96 处，54 处需补）\n\n20. 地图层级族（Region Map 地区地图 / Area Map 区域地图）√ 计数 191 vs 314，区分守住；但裸词 Region 在 3 个页名上破族（见 findings）",
+  "summary": "穷举了两类问题，没有抽样。\n\n第一类（一个中文对应多个英文）做了三层反向索引：词表按中文值 84 组、主线包名称叶 49 组、同容器（同 actor / 同 journal）17 组。逐组判读后，真撞车 22 组，其余是单复数、The 前缀、原文拼写变体或法术↔效果同名这类良性同形。最要命的几条：`Arcturian Alchemist.tokenName` 把 Alchemist 直接写成了「阿克图里安」，与另一个 token 同名；`Wandren Watcher` 名称叫「万德伦注视者」而它自己的生物志里 5 处叫「万德伦家族的守望者」，而守望者又是 Keeper 的固定译名；Amelia Naxan 一张卡上 Charm 和 Beguile 都叫「魅惑」；Spellbreaker Tower 同一座塔里 Break Room 和 Lounge 都叫「休息室」；Disgraced House 同一本册子里两页都叫「寻找富纳尔」。另外三个页名把 Region 译成「区域」，直接违反 Region 地区 / Area 区域 的既定区分，其中 Region Overview 与全库 26 处 Area Overview 撞成同名，而 Region Exploration 的标题跟它自己正文里通篇的「地区地图」自相矛盾。\n\n词表侧还有两颗定时炸弹：`\"Vólun\": \"赫律默\"` 把父子两位神合并了（包内是对的，写作沃伦，但词表里根本没有产出「沃伦」的条目）；以及 Fortitude/Rank/Kinesis/Attunement 四组共 8 条词表值与既定译名和包内既成事实相反——包内 Fortitude 81/81 是强韧、Rank 72 处是阶位、Kinesis 65/65 是念力、Attunement 576 处是同调，词表却分别写着坚韧、等级、念动力、调谐。包现在是对的，但词表是下一轮 fill/apply 的输入，留着就会把正确译文改回错的。\n\n第二类（规则术语族内部一致性）穷举了 20 个族。属性名、防御名、手势族（16 项）、符文族（12 项）、物品品质族、Checkpoint/Block/Mess 房间族这几族零例外，很干净。破族的主要是伤害类型和阶位两条线：Radiant 一个伤害类型在物品名里有光耀/辉耀/耀辉/光辉/灼光五种写法，其中「耀辉」和「辉耀」还是同两字倒序、占了 10 个叶子；Acid 在同一族抗性物件里分裂成强酸防护 vs 酸液吸收；Frost 在符文族是霜冻、在生物分类族是冰霜；训练阶位序列给出了新手/熟练工/熟手/行家/老手/修习者三套词，玩家没法把它排成一条从低到高的线。这层任何既有判据都看不见，因为逐条看每一个译名都不算错。\n\n顺带撞出一条凭空内容：`Show of Force New` 被译成「武力展示 新宝石」，\"New\" 变出了原文没有的「宝石」。\n\n不改文件，批次为空，过闸零拒绝。",
+  "escalations": "1. 【需主控裁决，影响面最大】Region/Area 的既定区分只在「地图」形态上被守住（地区地图 191 / 区域地图 314），裸词 Region 在 3 个页名上破了。改 Region Exploration→地区探索 会动到玩家指南和 GM 指南各一个页名，加正文里 3 处 @UUID 链接的显示文字；改 Region Overview→地区概览 会动 Kadísos 地名册的页名。页名一改，孪生包和 lang/cn.json 里的对应键也要同步，且如果有玩家已按旧名建了书签/笔记会失配。请主控确认是否在本轮统一改，还是留到发版前的一次性改名窗口。\n\n2. 【需主控裁决】词表 8 条与既定译名相反的值（Fortitude/Rank×4/Attunement×2/Kinesis×2）——包内已经全对，只有词表错。这不是主线包批次能修的，得改 glossary_ec.json 本身。按硬约束我不动词表文件，请主控指派或授权。同理 `\"Vólun\": \"赫律默\"` 这条，它是唯一一条会把两位神合并的条目，优先级最高，建议单独先修掉再跑任何 fill/apply。\n\n3. 【范围外，请确认】状态名族查下来，43 个 @Condition[...] 在中文里全是原样保留的标签，可见状态的可见文案由 Crucible 系统包（或 ember.crucible-effects.json 之外的系统本体）提供，不在主线包可改范围。所以「状态名是不是都两字/都三字」这一问在本包内无法验证，也无法修。如果主控希望覆盖这一层，需要另开一个针对系统包的单元。\n\n4. 【建议另开单元】`actors.Kendral Lowd.items.Show of Force New.name` 的「新宝石」属于凭空生成的内容，不是术语问题。我是在跑 Force 词族时顺带撞见的，说明包里可能还有别的名称叶带凭空内容。建议单独跑一遍「中文名称叶里出现原文完全没有对应的实义名词」的扫描，本单元的判据覆盖不到这类。\n\n5. 【低优先级，仅提示】「+N 术语」的空格不统一约 96 处（54 处需补空格）。纯格式，可以合并到任意一轮的批量清理里，不值得单开。"
+ }
+]

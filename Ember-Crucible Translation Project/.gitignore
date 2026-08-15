@@ -27,6 +27,30 @@ __pycache__/
 #         —— 全部可由 3-常用脚本 重新生成。实测若全收会给仓库加 336 MB。
 # ⚠ 若某份 json 结论确实需要长期留存，把它挪到 `5-其他内容/` 下（那里默认进仓），
 #   或在本文件末尾用 `!路径` 显式反豁免，并写明为什么它不可再生。
+# ── 已按上面那条「挪到 5-其他内容」执行过的四份（2026-08-15 第十七轮 A7）──
+# 起因：这几份**都被本文件的 `4-临时脚本/**/*.json` 挡着**，也就是说它们只存在于这一台机器的
+# 工作副本里 —— 换台机器 clone 就消失，而它们**没有任何脚本能重新生成**（内容是人裁出来的）。
+# 前两份是这一轮审计发现的，第三第四份是顺着「还有没有别的」反查出来的：
+#   4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json
+#     → 5-其他内容/EXCLUSIONS.same_en_split.json
+#       125 条 `scan_same_en_split` 分叉组的人工豁免（每条带硬证据）。**断言 R-exclusions-closed
+#       在运行时读它**（路径写在 5-其他内容/RESOLUTIONS.assertions.json 的 `exclusions` 字段）。
+#       丢了这份，该断言会走「找不到归档豁免表」分支报失败，看起来像库出了缺陷，实则是判据环境坏了。
+#       ⚠ 它与 5-其他内容/EXCLUSIONS.json 是**两张表**（裸 list vs {meta,exclusions}），故意不合并。
+#   4-临时脚本/2026-08-15-round15/findings/round15_new_axes.json
+#     → 5-其他内容/findings/round15_new_axes.json
+#       第十五轮四个新方向 8 单元 / 237 条 finding 的全部结论，纯人工通读产出。
+#   4-临时脚本/2026-08-13-round12/G2.glossary_resolution.json
+#     → 5-其他内容/findings/round12_G2.glossary_resolution.json
+#   4-临时脚本/2026-08-13-round12/G3.glossary-escalate.json
+#     → 5-其他内容/findings/round12_G3.glossary-escalate.json
+#       第十二轮 197 条词表 base↔shipped 争议的逐条裁决 + 174 条 addToGlossary 升级清单。
+#       **PROJECT.md 第 1 节 Z5 把它们列为未完成项**（实测落地 0/188、0/174），
+#       也就是说有一项在办的工作直接依赖这两份文件的内容 —— 丢了就等于那项工作作废重来。
+# 通则（下一轮照办）：**判断标准不是「是不是 json」，而是「没了能不能重新跑出来」。**
+#   跑出来的转储（bind_*.json / idx_*.json / census_*.json / batches/…）留在 4-临时脚本，被 ignore 是对的；
+#   人裁出来的结论（豁免表 / 争议裁决 / 通读 findings）一律挪 5-其他内容。
+#   尤其是**被脚本或断言当运行时输入读的**那一类，必须挪 —— 它不在仓里就等于那道闸在别的机器上不存在。
 4-临时脚本/**/*.json
 4-临时脚本/**/*.jsonl
 4-临时脚本/**/*.txt
