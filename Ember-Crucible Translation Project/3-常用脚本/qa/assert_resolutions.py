@@ -24,6 +24,8 @@
 `no_bilingual_tail` 指定字段的中文不得带「中文 English」双语尾巴
 `exclusions_closed` `same_en_split` 的分组必须全部在已归档豁免表内
 `leaf_literal`    指定叶必须/不得包含某个字面串（用于登记「绝不能动」的假阳性）
+`block_aligned_gate` **叶内**判据：按块级标签把中英切块后逐块比术语类别（第十八轮 Y2 新增）
+`block_sense_gate`   同上，但块内做机制义／普通名词义分类，块内单一义项时上正向闸
 `glossary_value`  词表的 base 层与产物层都必须是某个值（防「词表把错误洗成权威」）
 `version_matrix`  PROJECT.md 抬头与版本矩阵必须与两仓 module.json 一致（这一行漂过两次）
 
@@ -54,6 +56,13 @@
        `compendium/cn` 的最新 mtime、不满足就判失败。**`min_hits` 与 `scan` 都防不住这一类** ——
        它「读了库」，只不过读的是库的一张过期照片。
 
+（d）**闸在跑，但豁免表已经空了** —— 第十八轮收尾实测：两条块级断言的 `except_blocks` 里
+     合计躺着 **7 条**再也匹配不到的条目（登记的内容欠账都已修完），而全套依旧 52/0 全绿。
+     豁免不命中只让 detail 里的 `n_exempt` 变小，**没有任何断言会因此变红，只能靠人记**。
+     后果与 `R-dives-mine` 一样：欠账还清了、豁免却留着，遮住了同一处未来的回潮。
+     ▸ 防法：`max_unused_exempt`（默认 0，见 `_unused_exempt`）。
+       **前三种防法对这一类全部无效** —— 它判据没写坏、读了本次运行时的库、命中数也正常。
+
 通则一句话：**任何断言都必须能说出「我这次扫了多少叶 / 多少个键」，说不出来的是自检不是断言。**
 推论：判据的数据来源必须是**本次运行时现读的库**；凡是从磁盘上另一个文件里拿结论的，
 都要能证明那个文件比库新，否则就是形态 (c)。
@@ -67,6 +76,11 @@
 1. `term_gated` 是**叶级**的：只要求该叶中文里**出现过**定译。一叶里提到该术语 5 次、
    只错 1 次的情况**它抓不到**。回测实测：把一叶里 3 处「邪术师」全改成「术士」才会响，
    只改 1 处不响。要抓叶内部分错译，得做逐位对齐（成本高得多），本轮没做。
+   ▸ **第十八轮 Y2 做了**：`block_aligned_gate` / `block_sense_gate` 两个新类型把「按块级
+     标签切块、再逐块对齐」固化下来，专门补三条断言各自 why 里写死的叶内盲区
+     （R-shard-god 的 70 叶 · R-arcturel-vs-arcturian 的叶内串行 · R-rank-sense-compendium
+     的混合叶／无法分类叶与缺失的正向闸）。见 `a_block_aligned_gate` 的 docstring。
+     ⚠ 它**不是万能的替代品**：叶级判据仍然管着「整叶一次都没提」这种情况，两者互补。
    ⚠ 反过来，叶级也会**假阳性**：一叶里同时出现 `Shard God` 与 `Shard Gods` 时，
    中文只要重写了其中一种说法，另一条闸就会误报。
    ▸ 第十六轮终段的**绕法**（`R-shard-god`）：不去做逐位对齐，而是把闸只下在
@@ -600,6 +614,310 @@ def _exc_key(en, rule):
     return m.group(0) if m else en[:30]
 
 
+# ============================================================ 块对齐（第十八轮 Y2）
+#
+# 为什么要有这一层：`term_gated` / `distinct_terms` / `sense_gated` 全是**叶级**的，
+# 而本项目最大的三块无闸区恰恰都在叶**内部**（三条的 why 里各自写着）：
+#   ① R-rank-sense-compendium：混合叶 8 / 无法分类叶 57 整叶不查，纯 GAME 叶不上正向闸
+#   ② R-shard-god：同叶单复数并存的 70 叶，负向先行断言结构上就不进闸
+#   ③ R-arcturel-vs-arcturian：96% 的叶两个词都有，叶级判据抓不到叶内单处串行
+#
+# 判据形态取自 `4-临时脚本/2026-08-15-round16/probes/split_dives.py`：标签是机械的、
+# 两侧逐字节相同，所以切出来的块数两侧应当相等；不等的**报出来**而不是静默跳过。
+#
+# ⚠ 与 split_dives 的两处**有意不同**，都是本轮实测逼出来的：
+#
+# 1. **只按块级标签切，行内标签剥成空格。** split_dives 按 `<[^>]+>` 全切，本轮实测那样太细：
+#    中文「定语在前」会把词搬过 `<strong>` 边界 —— `Cora Attunement.description` 的英文块
+#    「damage equal to 2 times your attunement rank」，中文的「同调阶位」搬到了前一块
+#    「你获得等同于同调阶位 2 倍的」。全切的话正向闸报出 42 处，其中成片是这一类；
+#    改成只按 p/li/td/h*/br… 切之后掉到 12 处。段落／列表项／表格格仍然比整叶细一个量级。
+#
+# 2. **富文本增强器连标签一起涂掉**（`@UUID[…]{标签}` 的花括号也涂）。
+#    实测 `A Brush With Death` 的英文是**裸** `@UUID[…]`（Foundry 渲染目标名），中文补了
+#    `{阿克图里安}`；不涂标签就是「EN 空 / CN 有」的假阳性。标签另有闸看着
+#    （R-arcturian-split 的 `\{Arcturians\}` 域 · R-arcturian-actor-card · scan_uuid_swap）。
+_BLOCK_TAG = re.compile(
+    r"</?(?:p|div|li|ul|ol|tr|td|th|table|thead|tbody|tfoot|caption|h[1-6]|br|hr|"
+    r"section|article|aside|header|footer|blockquote|figure|figcaption|dl|dt|dd|pre)\b[^>]*>",
+    re.IGNORECASE)
+_INLINE_TAG = re.compile(r"<[^>]+>")
+_ENRICHER = [re.compile(r"@[A-Za-z]+\[[^\]]*\](?:\{[^{}]*\})?"), re.compile(r"\[\[[^\]]*\]\]")]
+
+
+def split_blocks(s):
+    """按块级标签切块；每块内的行内标签与增强器涂成等长空格（保持位置，便于人对照）。"""
+    for p in _ENRICHER:
+        s = p.sub(lambda m: " " * len(m.group()), s)
+    return [_INLINE_TAG.sub(" ", b) for b in _BLOCK_TAG.split(s)]
+
+
+def _class_re(spec, flags):
+    """`[{"re": …, "cls": "X"}, …]` → (合并后的正则, 组名→类名)。
+
+    合并成一条带命名组的交替式，**顺序即优先级**（正则交替是最左优先），
+    所以 `Shard Goddess` 必须写在 `Shard Gods` 前面、`阿克图里安人` 写在 `阿克图里安` 前面。
+    ⚠ 不用 `m.lastgroup` 取类：条目自身可以带内层括号，内层组一旦参与匹配
+    `lastgroup` 就会变成 None。改为按插入顺序找第一个非 None 的命名组。
+    """
+    parts, names = [], {}
+    for i, item in enumerate(spec):
+        g = f"c{i}"
+        names[g] = item["cls"]
+        parts.append(f"(?P<{g}>{item['re']})")
+    return re.compile("|".join(parts), flags), names
+
+
+def _classes(rx, names, text):
+    out = []
+    for m in rx.finditer(text):
+        for g, cls in names.items():
+            if m.group(g) is not None:
+                out.append(cls)
+                break
+    return out
+
+
+def _block_exempt(rule, path, i, en_sig="", cn_sig=""):
+    """`except_blocks` 的每一条必须**四项全中**（路径后缀 + 块号 + 两侧类串）。
+
+    故意写这么死：块号会随译文改动漂移，漂了就重新报出来让人看 —— 这个方向是对的。
+    宁可将来红一次让人重判，也不要一条谁也不记得为什么存在的死豁免（R-dives-mine 的教训）。
+
+    命中返回该条在 `except_blocks` 里的**下标**，没命中返回 `None`。
+    ⚠ 返回下标而不是 True，是因为调用方要数**每条豁免各被用了几次** —— 见 `_unused_exempt`。
+    下标 0 是假值，所以调用方必须写 `is not None`，不能写 `if j:`。
+    """
+    for j, e in enumerate(rule.get("except_blocks", [])):
+        if (path.endswith(e["path"]) and e["block"] == i
+                and e.get("en", en_sig) == en_sig and e.get("cn", cn_sig) == cn_sig):
+            return j
+    return None
+
+
+def _unused_exempt(rule, used):
+    """**死豁免闸**：`except_blocks` 里一次都没命中的条目要当场吵出来。返回 (违规行, 死豁免条数)。
+
+    这是本文件通则的**第四种空转形态**（前三种写在模块 docstring 里：判据写坏 / 没读库 /
+    读的是库的过期快照）。这一种最隐蔽，因为**闸本身照常在跑、照常全绿**：
+    豁免不命中只让 detail 里的 `n_exempt` 变小一点，**没有任何断言会因此变红**。
+
+    实测代价（第十八轮收尾，复核单元实跑）：两条块级断言的豁免表里合计躺着 **7 条**
+    再也匹配不到的条目 —— `R-rank-sense-blocks` 5 条（Shine On 块 4/14/31 与
+    The Old Flame 块 264/268，都是升报后译文已经改对了）、`R-arcturel-arcturian-blocks`
+    2 条（Sadri Zhalimorne 块21 与 Constructed Companion 块7，同样已修复）——
+    而全套依旧 52 通过 / 0 失败，**只能靠人记**。
+
+    这正是 `R-dives-mine` 的形态：欠账还清了、豁免却留着，于是**遮住了未来的回潮** ——
+    下一轮同一个块再错回去，会被一条谁也不记得为什么存在的豁免直接吞掉。
+
+    默认上限 **0**：豁免一旦不再命中就必须由人决定「删掉」还是「块号漂了要重判」，
+    不许静静地留着。`max_unused_exempt` 可以调高，但调高就要在 `why` 里说明为什么。
+    """
+    dead = [(j, e) for j, e in enumerate(rule.get("except_blocks", [])) if not used[j]]
+    cap = rule.get("max_unused_exempt", 0)
+    if len(dead) <= cap:
+        return [], len(dead)
+    return ([("-", "配置", f"{rule['id']} except_blocks[{j}]",
+              f"这条豁免一次都没命中（{e['path']} 块{e['block']}）—— **死豁免**："
+              f"要么它登记的内容欠账已经修完了、该删掉，要么块号／类串漂了、该重新判一次。"
+              f"留着它只会遮住同一处将来的回潮（R-dives-mine 形态）"
+              + (f"；本条允许 {cap} 条未命中，实有 {len(dead)} 条" if cap else ""))
+             for j, e in dead], len(dead))
+
+
+def _iter_blocks(rule, ctx, leaf_re):
+    """产出 (repo, pack, path, 英文块, 中文块)；块数不等的直接算 shape 异常。"""
+    exc = _paths_matcher(rule.get("except_paths"))
+    n_leaf = n_shape = 0
+    shape_bad = []
+    rows = []
+    for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
+        if not leaf_re.search(ev):
+            continue
+        if exc and exc(path):
+            continue
+        n_leaf += 1
+        eb, cb = split_blocks(ev), split_blocks(cv)
+        if len(eb) != len(cb):
+            n_shape += 1
+            shape_bad.append((repo, pack, path,
+                              f"块级标签结构两侧不同（{len(eb)} vs {len(cb)}）——本条无法逐块判，"
+                              f"该由 scan_markup_drift 先处理"))
+            continue
+        rows.append((repo, pack, path, eb, cb))
+    return rows, n_leaf, n_shape, shape_bad
+
+
+def a_block_aligned_gate(rule, ctx):
+    """按块把英文与中文的**术语类别**对齐。两种 mode，各有各的适用面：
+
+    `sequence` —— 两侧类别**序列必须逐位相等**。最强的一档，能抓「叶内单处串行」
+        （城名写成族名）与「漏译一处」。代价是对语序调换敏感，所以只用在中文承载得住
+        逐位对应的那些二分上。实测 `Arcturel`/`Arcturian`：1714 块里 1705 块逐位相等。
+
+    `count_ge` —— 中文各类计数**不得少于**英文（可多不可少），另可对指定类加反向存在闸。
+        用在中文语法**扛不住**逐位对应的地方。实测 `Shard God`：按单／复数逐位对齐，
+        779 块里 46 块不齐，逐条看过**全部是合法中文** —— 中文不标复数，且惯于把
+        `the Shard God X` 译成「碎片诸神之一的 X」、把 `three Shard Gods of Fire and four of
+        Battle` 拆成「三位火焰之碎片之神和四位战斗之碎片之神」。**是判据不成立，不是译文错**，
+        所以单复数不进类。中文真正承载得住的是「女神 vs 神」，那一支用反向闸一处不许错。
+        「可多不可少」放过的是**代词还原**（英文 they → 中文点名），实测 13 块残差
+        无一例外是中文多；抓得住的是整块漏译一处、把女神并进神、把某一类整支改名。
+
+    反空转：`min_leaves`（闸下多少叶）与 `min_blocks`（有词块数）双护栏，
+    detail 里必报「扫了多少叶 / 多少块」——满足本文件通则。
+    `max_shape_mismatch` 默认 0：块级标签结构不齐的叶算失败，因为那等于**本条判不了它**，
+    而判不了必须吵出来，不能静静地算通过。
+    `max_unused_exempt` 默认 0：`except_blocks` 里一次都没命中的条目算失败 —— 理由与实测
+    代价见 `_unused_exempt` 的 docstring（那是**闸照常全绿**却已经不设防的第四种形态）。
+    """
+    flags = 0 if rule.get("case_sensitive") else re.IGNORECASE
+    leaf_re = re.compile(rule["leaf_gate"], flags)
+    en_rx, en_names = _class_re(rule["en_tokens"], flags)
+    cn_rx, cn_names = _class_re(rule["cn_tokens"], 0)
+    mode = rule.get("mode", "sequence")
+
+    rows, n_leaf, n_shape, bad = _iter_blocks(rule, ctx, leaf_re)
+    n_block = n_ok = n_exempt = 0
+    used = [0] * len(rule.get("except_blocks", []))
+    for repo, pack, path, eb, cb in rows:
+        for i, (e, c) in enumerate(zip(eb, cb)):
+            ee = _classes(en_rx, en_names, e)
+            cc = _classes(cn_rx, cn_names, c)
+            if not ee and not cc:
+                continue
+            n_block += 1
+            en_sig, cn_sig = "".join(ee), "".join(cc)
+            why = None
+            if mode == "sequence":
+                if ee != cc:
+                    why = f"块内类别序列不对齐：英文 {en_sig or '∅'} / 中文 {cn_sig or '∅'}"
+            elif mode == "count_ge":
+                ec, cnt = {}, {}
+                for k in ee:
+                    ec[k] = ec.get(k, 0) + 1
+                for k in cc:
+                    cnt[k] = cnt.get(k, 0) + 1
+                short = [f"「{k}」类英文 {n} 处、中文只有 {cnt.get(k, 0)} 处" for k, n in ec.items()
+                         if cnt.get(k, 0) < n]
+                back = [f"中文出现「{k}」类而英文块内没有" for k in rule.get("backward_classes", [])
+                        if cnt.get(k, 0) and not ec.get(k, 0)]
+                if short or back:
+                    why = "；".join(short + back) + f"（英文 {en_sig or '∅'} / 中文 {cn_sig or '∅'}）"
+            else:
+                why = f"未知 mode {mode!r}"
+            if why is None:
+                n_ok += 1
+                continue
+            j = _block_exempt(rule, path, i, en_sig, cn_sig)
+            if j is not None:
+                used[j] += 1
+                n_exempt += 1
+            else:
+                bad.append((repo, pack, f"{path} 块{i}", why))
+
+    dead_rows, n_dead = _unused_exempt(rule, used)
+    bad.extend(dead_rows)
+    detail = (f"{mode} 闸：闸下 {n_leaf} 叶（结构不齐 {n_shape}）· 有词块 {n_block} 块"
+              f"（对齐 {n_ok} · 已登记豁免 {len(used)} 条 / 命中 {n_exempt} 块 / 死豁免 {n_dead} 条）")
+    if n_shape > rule.get("max_shape_mismatch", 0):
+        bad.append(("-", "配置", rule["id"],
+                    f"块级标签结构不齐的叶有 {n_shape}（上限 {rule.get('max_shape_mismatch', 0)}）"))
+    for field, got, why in (("min_leaves", n_leaf, "闸下叶数"), ("min_blocks", n_block, "有词块数")):
+        want = rule.get(field)
+        if want is not None and got < want:
+            bad.append(("-", "配置", rule["id"],
+                        f"{why}只数到 {got}（要求 ≥{want}）—— 这条断言在空转："
+                        f"正则被 JSON 转义吃掉了？上游改了措辞？切块规则被改坏了？"))
+    return bad, detail
+
+
+def a_block_sense_gate(rule, ctx):
+    """`sense_gated` 的块级版：把义项分类的窗口从**整叶**收到**块内**，于是块内单一义项
+    的地方终于能上**正向闸**（叶级版明确写着「故意不做正向闸」，因为纯 GAME 的 230 叶里
+    有 13 叶中文正当地没有定译）。
+
+    块级带来两处判据修正，都是实测逼出来的，都是**收紧分类、不是放宽闸**：
+      · `strong_game`：块小了之后 COMMON 的 `ranks of` 会咬到 `Ranks of attunement
+        progression`（叶级时那一叶别处还有 GAME、落进 MIX 桶所以从没暴露）。同调／魂印／
+        `Rank N` 是本系统的机制专名，优先级必须高于 COMMON 的泛化措辞。
+      · `exempt`：`rank of exhaustion`（＝层）· `close ranks`（＝并肩结阵）·
+        `join their ranks`（＝加入他们）是**第三个义项**，本来就不归「阶位」那条裁决管。
+        块内出现即整块不判 —— 这是把它们从分类里摘出去，不是给它们放行。
+
+    ⚠ **判据边界**：块内混合义项（MIX）与无法分类（UNKNOWN）仍然不判 —— 但注意这里的
+    「不判」比叶级小得多：叶级是整叶 57 片不判，块级只是那一段落不判，同叶其它段落照判。
+    """
+    occ = re.compile(rule["occ"], re.IGNORECASE)
+    leaf_re = re.compile(rule.get("leaf_gate", rule["occ"]), re.IGNORECASE)
+    game = re.compile(rule["sense"]["game"], re.IGNORECASE)
+    common = re.compile(rule["sense"]["common"], re.IGNORECASE)
+    strong = re.compile(rule["sense"]["strong_game"], re.IGNORECASE)
+    exempt = re.compile(rule["sense"]["exempt"], re.IGNORECASE)
+    win = rule.get("window", 90)
+    need = rule["cn"]
+
+    rows, n_leaf, n_shape, bad = _iter_blocks(rule, ctx, leaf_re)
+    k = {"GAME": 0, "COMMON": 0, "MIX": 0, "UNKNOWN": 0, "EXEMPT": 0}
+    n_block = n_exempt = 0
+    used = [0] * len(rule.get("except_blocks", []))
+    for repo, pack, path, eb, cb in rows:
+        for i, (e, c) in enumerate(zip(eb, cb)):
+            ms = list(occ.finditer(e))
+            if not ms:
+                continue
+            n_block += 1
+            seen = set()
+            for m in ms:
+                w = e[max(0, m.start() - win): m.end() + win]
+                if exempt.search(w):
+                    seen.add("EXEMPT")
+                elif strong.search(w):
+                    seen.add("GAME")
+                elif common.search(w):
+                    seen.add("COMMON")
+                elif game.search(w):
+                    seen.add("GAME")
+                else:
+                    seen.add("UNKNOWN")
+            bucket = ("EXEMPT" if "EXEMPT" in seen else "UNKNOWN" if "UNKNOWN" in seen
+                      else seen.pop() if len(seen) == 1 else "MIX")
+            k[bucket] += 1
+            if bucket == "GAME" and need not in c and c.strip():
+                why = (f"块内 `{rule['occ']}` 全部是机制义，中文这一块却没有「{need}」："
+                       f"EN {e.strip()[:60]!r} / CN {c.strip()[:40]!r}")
+            elif bucket == "COMMON" and need in c:
+                why = (f"块内 `{rule['occ']}` 全部是普通名词义（组织层级／行列／军衔），"
+                       f"中文却用了机制义定译「{need}」：EN {e.strip()[:60]!r}")
+            else:
+                continue
+            j = _block_exempt(rule, path, i)
+            if j is not None:
+                used[j] += 1
+                n_exempt += 1
+            else:
+                bad.append((repo, pack, f"{path} 块{i}", why))
+
+    dead_rows, n_dead = _unused_exempt(rule, used)
+    bad.extend(dead_rows)
+    detail = (f"闸下 {n_leaf} 叶（结构不齐 {n_shape}）· 含 `{rule['occ']}` 的块 {n_block}"
+              f"（机制义 {k['GAME']} / 普通名词义 {k['COMMON']} / 混合 {k['MIX']} / "
+              f"无法分类 {k['UNKNOWN']} / 第三义项 {k['EXEMPT']}）· 已登记豁免 {len(used)} 条 / "
+              f"命中 {n_exempt} 块 / 死豁免 {n_dead} 条")
+    if n_shape > rule.get("max_shape_mismatch", 0):
+        bad.append(("-", "配置", rule["id"], f"块级标签结构不齐的叶有 {n_shape}"))
+    for field, got, why in (("min_leaves", n_leaf, "闸下叶数"),
+                            ("min_blocks", n_block, "含该词的块数"),
+                            ("min_game_blocks", k["GAME"], "机制义块数"),
+                            ("min_common_blocks", k["COMMON"], "普通名词义块数")):
+        want = rule.get(field)
+        if want is not None and got < want:
+            bad.append(("-", "配置", rule["id"],
+                        f"{why}只数到 {got}（要求 ≥{want}）—— 这条断言在空转"))
+    return bad, detail
+
+
 def _run_same_en_split(ctx, rule):
     """**现场**跑一遍 `scan_same_en_split.py`，返回 (分叉组, 扫到的英文唯一串数, 出错说明)。
 
@@ -833,6 +1151,8 @@ KINDS = {
     "no_bilingual_tail": a_no_bilingual_tail,
     "exclusions_closed": a_exclusions_closed,
     "leaf_literal": a_leaf_literal,
+    "block_aligned_gate": a_block_aligned_gate,
+    "block_sense_gate": a_block_sense_gate,
     "glossary_value": a_glossary_value,
     "version_matrix": a_version_matrix,
 }
@@ -953,6 +1273,138 @@ GLOSSARY_SELFTEST = [
 ]
 
 
+# 第十八轮 Y2 补：两个块对齐类型的正反例。
+#
+# 这两个类型比前面所有类型都更容易「看起来在跑、其实判不着」，因为它们有**四件**
+# 可以各自失效的东西：切块规则 · 类别正则的顺序 · 对齐判据本身 · 豁免匹配。
+# 下面把四件各钉一次，其中三条直接来自本轮实测踩到的坑：
+#   · 行内标签**不**切块（中文定语在前会把词搬过 `<strong>`，全切会造出成片假阳性）
+#   · `count_ge` 而非逐位对齐（中文不标复数，S/P 逐位对齐这个判据本身不成立）
+#   · 混合义项叶里的**单一义项块**必须判得动（这正是叶级 sense_gated 整叶放弃的那片）
+_ALIGN_RULE = {
+    "id": "SELFTEST-align", "kind": "block_aligned_gate", "mode": "sequence",
+    "leaf_gate": r"\bArctur", "min_leaves": 1, "min_blocks": 1,
+    "en_tokens": [{"re": r"\bArcturians?\b", "cls": "I"}, {"re": r"\bArcturel\b", "cls": "E"}],
+    "cn_tokens": [{"re": "阿克图里安人", "cls": "I"}, {"re": "阿克图里安", "cls": "I"},
+                  {"re": "阿克图瑞尔", "cls": "E"}],
+}
+_COUNT_RULE = {
+    "id": "SELFTEST-count", "kind": "block_aligned_gate", "mode": "count_ge",
+    "leaf_gate": r"\bShards? God", "min_leaves": 1, "min_blocks": 1,
+    "backward_classes": ["F"],
+    "en_tokens": [{"re": r"\bShards? Goddess(?:es)?\b", "cls": "F"},
+                  {"re": r"\bShards? Gods?\b", "cls": "G"}],
+    "cn_tokens": [{"re": "碎片女神", "cls": "F"}, {"re": "碎片诸神", "cls": "G"},
+                  {"re": "碎片之神", "cls": "G"}],
+}
+
+
+def _P(en, cn):
+    return [("e", "p.json", "j.Some Page.text", en, cn)]
+
+
+BLOCK_ALIGN_SELFTEST = [
+    ("逐块对齐、两侧一致 → 不响", _ALIGN_RULE,
+     _P("<p>Arcturel is a city.</p><p>Arcturian dwellings.</p>",
+        "<p>阿克图瑞尔是一座城。</p><p>阿克图里安住所。</p>"), 0),
+    ("⚑ **叶内单处串行** → 要响（这正是叶级判据看不见的：整叶两个中文都在，闸会放行）",
+     _ALIGN_RULE,
+     _P("<p>Arcturel is a city.</p><p>Arcturian dwellings.</p>",
+        "<p>阿克图瑞尔是一座城。</p><p>阿克图瑞尔住所。</p>"), 1),
+    ("语序调换会响 —— 这是逐位对齐**已知的代价**，实测 1714 块里只有 1 块，登记在 except_blocks",
+     _ALIGN_RULE, _P("<p>Arcturian shops of Arcturel</p>", "<p>阿克图瑞尔的阿克图里安商铺</p>"), 1),
+    ("行内标签**不**切块：`<strong>` 两侧的词算同一块（全切的话这条会假阳性）",
+     _ALIGN_RULE, _P("<p>the <strong>Arcturel</strong> Dives</p>", "<p>阿克图瑞尔矿渊</p>"), 0),
+    # ⚠ 这一条的 leaf_gate 必须真的在**英文原文**里命中，否则整叶根本不进闸、
+    #   测到的就只是 min_leaves 在响。实测第一版写成纯 @UUID 的英文，闸下 0 叶、假绿。
+    ("增强器标签两侧都涂掉：英文裸 @UUID、中文补了 {标签} → 不响",
+     _ALIGN_RULE, _P("<p>the @UUID[Actor.x] bard of Arcturel</p>",
+                     "<p>这位@UUID[Actor.x]{阿克图里安}吟游诗人来自阿克图瑞尔</p>"), 0),
+    # 结构不齐会**同时**从三个方向吵：该叶一条 + max_shape_mismatch 超限一条 +
+    # 该叶被跳过导致 min_blocks 掉到 0 一条。三条都该在 —— 判不了就是不能算通过。
+    ("块级标签结构两侧不同 → 要响（判不了必须吵出来，不能当通过）",
+     _ALIGN_RULE, _P("<p>Arcturel</p><p>Arcturian</p>", "<p>阿克图瑞尔 阿克图里安</p>"), 3),
+    ("英文闸一块都没命中 → min_blocks 把空转抓出来",
+     _ALIGN_RULE, _P("<p>Nothing here.</p>", "<p>这里什么都没有。</p>"), 2),
+    ("count_ge：单／复数**不进类**，`Shard Gods` 对「碎片之神」不响（中文不标复数）",
+     _COUNT_RULE, _P("<p>Shard Gods are mortal ascendants.</p>", "<p>碎片之神是飞升的凡人。</p>"), 0),
+    ("count_ge：代词还原让中文多出一处 → 不响（可多不可少）",
+     _COUNT_RULE, _P("<p>A Shard God arrived. They blessed it.</p>",
+                     "<p>一位碎片之神到来。碎片诸神赐下祝福。</p>"), 0),
+    ("count_ge：块内两处英文、中文只译了一处 → 要响",
+     _COUNT_RULE, _P("<p>Shard God A fought Shard God B.</p>", "<p>碎片之神 A 与 B 交战。</p>"), 1),
+    ("count_ge：把「碎片女神」并进「碎片之神」→ 要响（女神那一支中文扛得住，一处不许错）",
+     _COUNT_RULE, _P("<p>the shard goddess Scoris</p>", "<p>碎片之神斯科里斯</p>"), 1),
+    ("count_ge 反向闸：英文没有 Goddess 而中文写了「碎片女神」→ 要响",
+     _COUNT_RULE, _P("<p>the Shard Gods gathered</p>", "<p>碎片女神们聚集</p>"), 1),
+    # ⚑ 死豁免闸（`max_unused_exempt`，默认 0）。这两条钉的是**第四种空转形态**：
+    #    闸本身照常跑、照常全绿，只是豁免表里躺着再也匹配不到的条目。实测代价见
+    #    `_unused_exempt` 的 docstring（收尾时两条块级断言合计躺着 7 条，全套仍 52/0）。
+    ("⚑ 豁免一条都没命中 → 要响（死豁免自己吵出来，不再只能靠人记）",
+     dict(_ALIGN_RULE, except_blocks=[
+         {"path": "j.Nowhere At All.text", "block": 99, "why": "自检：故意留一条永远匹配不到的"}]),
+     _P("<p>Arcturel is a city.</p><p>Arcturian dwellings.</p>",
+        "<p>阿克图瑞尔是一座城。</p><p>阿克图里安住所。</p>"), 1),
+    ("同一条豁免真的命中 → 不响（证明上一条响的是「没命中」而不是「有豁免」）",
+     dict(_ALIGN_RULE, except_blocks=[
+         {"path": "j.Some Page.text", "block": 3, "en": "I", "cn": "E", "why": "自检：这条真命中"}]),
+     _P("<p>Arcturel is a city.</p><p>Arcturian dwellings.</p>",
+        "<p>阿克图瑞尔是一座城。</p><p>阿克图瑞尔住所。</p>"), 0),
+]
+
+_SENSE_BLOCK_RULE = {
+    "id": "SELFTEST-bsense", "kind": "block_sense_gate", "occ": r"\branks?\b",
+    "leaf_gate": r"\branks?\b", "cn": "阶位", "window": 90,
+    "min_leaves": 1, "min_blocks": 1,
+    "sense": {
+        "strong_game": r"(attunement|attuned|soulbound|soulmark|Rank\s*\d)",
+        "game": r"(Novice|training|skill|Attunement|Soulbound|exhaustion|Scale|Rank\s*\d|\bBonus\b)",
+        "common": r"(ranks? (depending|based) on|civic|social|ranks of|rank[- ]and[- ]file|rank as an? )",
+        "exempt": r"(ranks? of[^.]{0,40}?exhaust|close ranks|join(ing)? their ranks)",
+    },
+}
+
+# ⚠ 第二项是这一条自检往 `_SENSE_BLOCK_RULE` 上打的**规则覆盖**（`None` ＝不覆盖）。
+# 原来的写法是「note 里含 'except_blocks' 就塞一张表」，靠**注释文字**驱动判据 ——
+# 加第二条豁免用例时它当场就不够用了（几条都含那个词、却要各自不同的表），所以改成显式一列。
+BLOCK_SENSE_SELFTEST = [
+    ("⚑ **正向闸**：块内全机制义、中文没有「阶位」→ 要响（叶级 sense_gated 故意不做这个方向）",
+     None, _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手层级。</p>"), 1),
+    ("块内全机制义、中文有「阶位」→ 不响",
+     None, _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手阶位。</p>"), 0),
+    ("反向闸：块内全普通名词义、中文却用「阶位」→ 要响",
+     None, _P("<p>It denotes their civic rank.</p>", "<p>标示其公民阶位。</p>"), 1),
+    ("⚑ **混合义项叶里的单一义项块判得动** —— 叶级版对这一叶是 MIX、整叶放弃",
+     None, _P("<p>It denotes their civic rank.</p><p>You gain the Novice rank in Arcana.</p>",
+              "<p>标示其公民地位。</p><p>你在奥秘上获得新手层级。</p>"), 1),
+    ("第三义项 `rank of exhaustion`（＝层）不归这条裁决管 → 不响，哪怕中间夹着增强器",
+     None, _P("<p>Each character gains one rank of &amp;Reference[exhaustion] and must save.</p>",
+              "<p>每名角色获得一级力竭，并且必须豁免。</p>"), 0),
+    ("strong_game 压过 common：`Ranks of attunement progression` 是机制义，不是「行列」",
+     None, _P("<p>There are now five full Ranks of attunement progression.</p>",
+              "<p>现在同调进阶共有完整的五个阶位。</p>"), 0),
+    ("行内标签**不**切块：中文把「同调阶位」搬到了 `<strong>` 前面 → 不响（全切会假阳性）",
+     None, _P("<p>You gain resistance to <strong>Acid</strong> damage equal to 2 times "
+              "your attunement rank.</p>",
+              "<p>你获得等同于同调阶位 2 倍的<strong>强酸</strong>伤害抗性。</p>"), 0),
+    ("组织内部层级 `ranks depending on experience and skill` 判 COMMON，中文写「等级」不响",
+     None, _P("<p>Within the Guard there are a number of ranks depending on experience and skill.</p>",
+              "<p>卫队内部依照经验与技能设有多个等级。</p>"), 0),
+    ("登记过的块不再报（登记的是内容欠账，必须同时升报）",
+     {"except_blocks": [{"path": "j.Some Page.text", "block": 1, "why": "自检：这条真命中"}]},
+     _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手层级。</p>"), 0),
+    # ⚑ 死豁免闸在 block_sense_gate 这一侧的正反例。与 block_aligned_gate 那边成对，
+    #    因为两个类型各有一份自己的 `used` 计数，只钉一边等于另一边没测。
+    ("⚑ 豁免一条都没命中 → 要响（`max_unused_exempt` 默认 0，见 _unused_exempt）",
+     {"except_blocks": [{"path": "j.Nowhere.text", "block": 99, "why": "自检：永远匹配不到"}]},
+     _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手阶位。</p>"), 1),
+    ("把上限显式放宽到 1 → 同一条死豁免不再响（证明响的是「未命中」本身，不是「有豁免」）",
+     {"except_blocks": [{"path": "j.Nowhere.text", "block": 99, "why": "自检：永远匹配不到"}],
+      "max_unused_exempt": 1},
+     _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手阶位。</p>"), 0),
+]
+
+
 def run_selftest():
     bad = 0
     for value, want in SELFTEST:
@@ -994,7 +1446,30 @@ def run_selftest():
         print(f"  {'ok  ' if ok else 'FAIL'} {note}")
         print(f"        want={want!r} got={got!r} 期望 {expect}")
     print(f"\nglossary_value：{len(GLOSSARY_SELFTEST) - vbad} / {len(GLOSSARY_SELFTEST)} 通过")
-    return 1 if (bad or gbad or sbad or vbad) else 0
+
+    print("\n块对齐闸（block_aligned_gate）正反例：")
+    abad = 0
+    for note, rule, pairs, want_b in BLOCK_ALIGN_SELFTEST:
+        b, detail = a_block_aligned_gate(rule, _FakeCtx(pairs=pairs))
+        ok = len(b) == want_b
+        if not ok:
+            abad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
+    print(f"\nblock_aligned_gate：{len(BLOCK_ALIGN_SELFTEST) - abad} / {len(BLOCK_ALIGN_SELFTEST)} 通过")
+
+    print("\n块级义项闸（block_sense_gate）正反例：")
+    bbad = 0
+    for note, override, pairs, want_b in BLOCK_SENSE_SELFTEST:
+        rule = dict(_SENSE_BLOCK_RULE, **(override or {}))
+        b, detail = a_block_sense_gate(rule, _FakeCtx(pairs=pairs))
+        ok = len(b) == want_b
+        if not ok:
+            bbad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
+    print(f"\nblock_sense_gate：{len(BLOCK_SENSE_SELFTEST) - bbad} / {len(BLOCK_SENSE_SELFTEST)} 通过")
+    return 1 if (bad or gbad or sbad or vbad or abad or bbad) else 0
 
 
 def main():

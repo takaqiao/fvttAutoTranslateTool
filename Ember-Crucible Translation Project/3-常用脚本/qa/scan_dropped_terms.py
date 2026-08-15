@@ -5,6 +5,7 @@
                                  --bindings <dump_bindings.mjs 的输出>
                                  [--glossary <glossary_ec.json>] [--out <json>] [--md <md>]
                                  [--all-case] [--min-sim 0.75] [--show 30]
+                                 [--no-block-filter]
 
 ⚠ 两个口径必须照抄，跑偏过的都在这儿
 ====================================
@@ -79,6 +80,52 @@
    取译名开头那串汉字（库里的值常带中英对照尾巴，`'Skills' -> '技能 Skills'`）。
 4. 译名**长度 ≥ 2 个汉字**、且**中文里出现次数 > M** 时报 `DROPPED_TERM_KEPT`。
    长度门槛是必须的：一字译名（`阶`/`轮`）在中文里几乎必然撞上，报了也没法用。
+5. **逐位对齐过滤**（2026-08-15 第十八轮新增）：把第 4 步那条判据**缩到删除点所在的
+   那一块上再判一次**，两次都成立才报。详见下一节。
+
+⚠ 第 5 步：逐位对齐过滤（整叶计数的假阳性主类靠它压掉）
+========================================================
+
+第 1~4 步是**整叶**口径 —— 「英文这叶里 `event` 少了一次、中文这叶里『事件』还有 6 次」。
+一叶常有几百个块，于是「英文在 A 段删了词」和「中文在 F 段正当地用了同一个译名」
+分不开。第十六轮抽样 82 条里 **70 条**是这么来的（真缺陷 5 / 需先定译名 7）。
+
+做法照抄 `4-临时脚本/2026-08-15-round16/probes/split_dives.py` 的切块法：
+**按 HTML 标签切块，再逐块对齐**。
+
+    ① 新英文与中文各 `TAG_SPLIT.split()`，块号一一对应；
+    ② 旧英文→新英文用已有的 `SequenceMatcher` 逐词对齐，于是**每个旧词都能锚到
+       一个新英文块号**（`anchor_old_to_new_blocks`）；
+    ③ 对每个被删词干，取它所有删除点锚到的块，**逐块**重算 (旧 N, 新 M, 中 C)，
+       任意一块仍满足 `M < C <= N` 才放行。
+
+**为什么中文能跟新英文对齐（而不是跟旧英文）**：译文仓的中文一直被 markup 类闸
+逼着跟当前英文保持结构同步，所以中文是「结构已迁到新版、文字可能停在旧版」。
+2026-08-15 实测这条是硬的：告警叶 **77/77**（crucible 1/1）**新英文块数 == 中文块数**，
+而**旧英文块数 == 中文块数只有 16/77** —— 中文跟的确实是新英文。
+
+⚠ **对齐要用块数、不要用标签串**。同一批 77 叶里「标签串逐字节相同」只有 **20/77**
+（中文侧 `id=` 锚点、`data-*` 属性与英文侧不一致），拿标签串当判据会把 57 叶
+无谓地打回整叶口径。**块数才是干净的分界线。**
+
+⚠ **`delete` 的候选块必须取删除点前后两块**。纯删除在新侧塌成一个**点**，
+删除点正好在块尾时「后一个词」已经属于下一块了，只取后一块会把候选选歪、**漏报真缺陷**
+（回测 TP7 就是专门卡这条）。`replace` 不存在这个问题，取新段覆盖的那些块即可。
+
+⚠ **逐块单独判，不要把候选块并成一个集合再判**。并集等于在小一号的尺度上重新引入
+整叶那种稀释；实测并集 40 叶 / 逐块 39 叶，逐块既更细也更少。
+
+⚠ **块结构对不上时退回整叶口径，并计数**（`shape_mismatch_*`），不静默跳过。
+ember 侧 757 叶里有 **2 叶**退回，成因是上游脏数据：`@Condition[exhaustion`
+少了右方括号、又被 `</sub>` 从中间切开（`Toothbreaker Hideout.pages.Prison` /
+`Players' Guide.pages.Region Exploration`），切块后 enricher 断成两截，
+归一出来的词序列与整叶归一不一致。这两叶按整叶口径判，均未告警。
+
+⚠ **块粒度是这条路的下限，别再往细里收**。剩下的 9 叶弱告警（① 同义改写类）局部
+三元组是 `(旧2, 新1, 中2)` —— 与历史上那条真缺陷（`Ability, Skill, and Talent`
+→ `Ability and Talent`，同块内另一句还留着小写 `skill`，回测 TP1）**数值上完全同形**。
+所以「块内该词归零才报」之类的收紧必然连 TP1 一起杀掉。**第十八轮实测到此为止：
+77 → 39，不是估的 12；再降就要拿灵敏度换。**
 
 ⚠ **必须数次数，不能只看「还在不在」**（本闸第一版就栽在这里）
 --------------------------------------------------------------
@@ -92,22 +139,60 @@
 `Skill` / `Talent` / `Bane`）。`--all-case` 放开到全部小写词 —— 噪声会涨一个量级，
 只在专项复核时开。
 
-已知假阳性
-----------
-* **译名是常用词**：`Ability`→「能力」、`Level`→「等级」。上游把这一段里的
-  `ability` 删了，中文却因为在讲别的事仍然写着「能力」。这一类靠人核，报告里
-  一并给出旧/新/中三段原文就是为了两秒看完。
-* **同义改写**：上游把 `Skill` 换成 `Proficiency`，中文照旧写「技能」其实是对的
-  （两词在本项目的译名恰好相同）。判据看不出「换词」和「删词」的区别。
-* **词表里一词多义**：`glossary_ec` 只存一条主译名，撞上多义词时取的可能不是
-  这一处该用的那条。
+已知假阳性（第十八轮逐位对齐上线后，四类里三类已被压掉）
+--------------------------------------------------------
+第十六轮的四类成因，以及各自现在的下场：
+
+* ①**常用词撞名 / 同义改写**（当时 ≈46 条，最大头）：上游把 `characters` 改成
+  `party`、把 `In this event,` 改写成别的说法，而中文那些命中来自**同叶别处的正当用法**。
+  → **大部分被压掉**（删除点所在的中文块里没有那个译名）。**剩 9 叶压不掉**：
+  删除点就在中文那一块里，且中文在同一块内重复了名词（英文用代词、中文还原成名词）。
+  典型 `A Brush With Death.pages.Locating Kel Kornan`：英文
+  `This is a social event… This event steers…` 合并成 `This Social Event occurs… and steers…`，
+  局部 `event 旧3 新2`、中文「事件」3 次 —— 中文那 3 次全是对的。见上一节最后一条 ⚠。
+* ②**整块删除、中文已跟进**（当时 ≈18 条）：上游删掉整节，中文那些块早就不在。
+  → **全部被压掉**，因为删除点锚到的中文块里根本没有那个译名。
+* ③**同形异义**（当时 ≈4 条）：英文删的是 `Maximum Focus`、中文的「专注」是
+  「主要专注于…」的动词义；英文删的是表头 `Result: Critical Success`、中文的「成功」是
+  「成功通过一次检定」。→ **被压掉**（两处汉字落在别的块里）。实例已复核：
+  `The Winding Trail.pages.Giant Moonstone`（`Focus` 2→0）、
+  `The Winding Trail.pages.A Promised Exit`（`Success` 3→0）。
+* ④**词表一词多义**（当时 ≈2 条）：`glossary_ec` 只存一条主译名。→ **仍会报**，
+  这是词表的口径问题，不是对齐能解决的。`Jahud`→`assassin`（贾胡德/刺客本项目同指）。
 * 中文的**中英对照尾巴**（`天赋 Talent`）里本来就抄着英文，不影响本闸（只查汉字）。
 
-回测（2026-08-15，`4-临时脚本/2026-08-15-round16/qa/backtest_dropped_terms.py`）
---------------------------------------------------------------------------
+回测（两份，都要过；本闸自身没有 `--selftest`）
+------------------------------------------------
+**一、`4-临时脚本/2026-08-15-round16/qa/backtest_dropped_terms.py`**（第 1~4 步）
 双向 6/6 PASS。灵敏度 3/3：三项并列删中间一项（＝上一轮那条真缺陷，且同叶别处
 还留着同一个词的小写形式）、整句删一个术语、公式里换掉一个属性名。
 特异度 3/3 静默：裸词升级成 `@Condition[…]`、明文换成不带标签的 `@UUID`、整段重写。
+第十八轮加过滤器后**复跑仍 6/6**。
+
+**二、`4-临时脚本/2026-08-15-round18/backtest_block_filter.py`**（第 5 步）
+双向 **12/12 PASS**（灵敏度 7/7 · 特异度 5/5）。⚠ **每个用例跑两遍** ——
+带过滤器与 `--no-block-filter` —— 所以「结论是不是过滤器改的」有对照，不靠猜；
+判定键在**目标词干**上，不看整叶有没有告警（注入文本里的 `relic`/`paladin`
+在词表里也有译名，会自带无关命中）。
+
+    灵敏度（必须仍然 REPORT）
+      TP1 三项并列删中项，同块内另一句还留着小写形式  ← 卡「块内归零才报」这种过度收紧
+      TP2 整句删术语        TP3 公式换属性名
+      TP4 **整块删除、中文没跟**（块数不等 → 退回整叶口径，仍然报）
+      TP5 `a Skill Check` → `a check`（ember 侧真缺陷原形）
+      TP6 **别的块里有同名词的正当用法**（测锚点没把候选块选歪）
+      TP7 **删除点正好落在块边界**（测 delete 取前后两块；只取后一块会漏报）
+    特异度（必须 SILENT）
+      FP1 裸词升级成 enricher   FP2 明文换成裸 @UUID   FP3 整段重写
+      FP4 **整块删除、中文已跟进**  ← 带过滤器 SILENT，`--no-block-filter` 仍 REPORT
+      FP5 **同义改写、中文命中全在同叶别处**  ← 同上，两个 REPORT/SILENT 对照就是过滤器的功效证明
+
+注入走**副本树**，真库一个字节都不碰；跑完校验 4 个文件的 sha256（两份译文/基准 +
+被测脚本本身），**实测 0 改动**。
+
+⚠ 特异度还在**真库上逐条核过**，不是只看回测：第十八轮被压掉的 **38 叶 / 137 个候选块**
+全部摊开三方原文人看（`4-临时脚本/2026-08-15-round18/suppressed_ember.txt`，
+由 `probe_suppressed.py` 生成），**没有一条是压错的**。
 
 ⚠ 相似度门槛别用 `SequenceMatcher.ratio()`
 ------------------------------------------
@@ -116,24 +201,28 @@
 回测 TP2「整句删术语」第一次就是这么被漏掉的。现用 **匹配数 / 较短一侧长度**：
 纯删除 = 1.0，真重写才低。
 
-当前库基线（2026-08-15）
-------------------------
-* crucible（基准 crucible-0.9.1-legacy）：英文变过 295 条 → 整段重写跳过 24 →
-  **告警 8 叶**。逐叶人核：**7 真 1 假**。
-  真：`Surgeweaver` ×4 副本（`half your Intellect score` →
-  `half the ability score your Rune of Storm scales with`，中文仍写「你智力数值一半」）、
-  `Rimecaller` ×2 副本（`Wisdom` 同理，中文仍写「你感知属性值一半」）、
-  `Character Creation.pages.Overview`（上一轮那条 `Skill`）。
-  假：`Character Mechanics.pages.Skills`（上游删掉 `Skill Checks` 三节，
-  中文其实早就没有那三节，`训练`/`能力` 的计数来自保留下来的正文）。
-* ember（基准 `5-其他内容/english-baseline/ember-cn-v1.0.15-shipped-en`，
-  bindings 用 `4-临时脚本/2026-08-16-round16/seal-qa/bind_ember.json`）：
-  英文变过 933 条 → 整段重写跳过 174 → **告警 81 叶**
-  （2026-08-15 首跑记的是 82，其后译文侧改过一叶；不带 --bindings 会虚报成 98）。
-  抽核确认真缺陷形态存在（`Players' Guide.pages.Area Maps`：
-  `a Skill Check` → `a check`，中文仍写「一次技能检定」），也确认了常用词撞名的
-  假阳性形态（`Bickering Priests` 删掉、中文的「牧师」来自另一句「若牧师或圣武士」）。
-  完整清单在 `4-临时脚本/2026-08-15-round16/qa/drop_1-Ember汉化插件.md`，属**译文侧**工作。
+当前库基线（2026-08-15 第十八轮，bindings 为 ember+crucible+dnd5e 三包合导）
+--------------------------------------------------------------------------
+* **crucible**（基准 `crucible-0.9.1-legacy`）：英文变过 295 条 → 整段重写跳过 24 →
+  逐位对齐 271 叶 / 6950 块 → **告警 0 叶**（逐位对齐上线前是 1 叶）。
+  ⚠ 那 1 叶的归因写在这里，免得下一轮当成「闸坏了」：
+  `crucible.rules.json :: Character Mechanics.pages.Skills.text`，
+  `training` 9→4 而中文「训练」仍 7、`ability` 5→2 而中文「能力」仍 3。
+  **是同义改写造成的假阳性，不是缺陷** —— 上游删掉 `Skill Checks` 三节，
+  中文其实早就没有那三节，两个计数全来自保留下来的正文。逐位对齐后删除点锚到的
+  中文块里没有对应译名，两条都被压掉。**这一叶自动消失，正说明过滤器盖住了这一类；
+  它要是还在，就是过滤器没盖住 ②/① 类，回头查 `anchor_old_to_new_blocks`。**
+  历史上的真缺陷（`Surgeweaver` ×4 / `Rimecaller` ×2 / `Character Creation.pages.Overview`
+  那条 `Skill`）已在第十六轮修掉，所以现在是 0。
+* **ember**（基准 `5-其他内容/english-baseline/ember-cn-v1.0.15-shipped-en`）：
+  英文变过 933 条 → 整段重写跳过 174 → 逐位对齐 757 叶 / 84262 块（2 叶退回整叶）
+  → **告警 39 叶 / 43 条**（`--no-block-filter` 是 77 叶；不带 `--bindings` 会虚报成 98）。
+  过滤器压掉 55 条、放行 43 条；叶级 77 → 39，**且是单调的**（压掉 38 叶、没有新增 1 叶）。
+  43 条里 33 条局部 `新=0`（强：块内该词一个不剩，中文还留着译名），
+  10 条局部 `新≥1`（弱：集中在 9 叶，即上面 ① 类剩下的那批）。
+  报告 json 每条命中都带 `local` 字段（候选块号 + 局部 旧/新/中 三元组），
+  先看 `local` 再看原文，比看整叶计数快一个量级。
+  清单在 `4-临时脚本/2026-08-15-round18/on_ember.md`，属**译文侧**工作。
 """
 from __future__ import annotations
 import argparse
@@ -156,6 +245,8 @@ ID_MARKUP = re.compile(r"@(?:UUID|Embed)\[([^\]]*)\](?:\s*\{([^}]*)\})?", re.I)
 SEM_MARKUP = re.compile(r"@[A-Za-z]+\[([^\]]*)\]|&(?:amp;)?[A-Za-z]+\[([^\]]*)\]|\[\[([^\]]*)\]\]")
 HTML_TAG = re.compile(r"<[^>]+>")
 WORD = re.compile(r"[A-Za-z][A-Za-z'’]{2,}")
+# 逐位对齐用：按 HTML 标签切块。标签本身是机械，结构没变时两侧块数必然相等。
+TAG_SPLIT = re.compile(r"<[^>]+>")
 
 DEFAULT_GLOSSARY = os.path.normpath(os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "..", "..",
@@ -207,9 +298,65 @@ def strip_machinery(s: str, idmap=None) -> str:
     return HTML_TAG.sub(" ", s)
 
 
+def block_tokens(s, idmap=None):
+    """按 HTML 标签切块 → `(词表, 每词所属块号, 块串列表)`。
+
+    切法照抄 `4-临时脚本/2026-08-15-round16/probes/split_dives.py`：先 `TAG.split`，
+    再逐块归一到「玩家读到的词」。块比整叶细一个量级，而标签是机械、两侧逐字节相同，
+    所以结构没变时两侧块数必然相等；**不等的会被报出来（`shape_mismatch`）而不是静默跳过**。
+    """
+    parts = TAG_SPLIT.split(s)
+    words, owner = [], []
+    for bi, part in enumerate(parts):
+        for w in WORD.findall(strip_machinery(part, idmap)):
+            words.append(w)
+            owner.append(bi)
+    return words, owner, parts
+
+
+def anchor_old_to_new_blocks(opcodes, old_len, new_owner):
+    """旧英文的每个词 → 它在**新英文**里对应的块号集合。
+
+    · `equal`   逐位对应，单块，最准；
+    · `replace` 旧段整体对到新段覆盖的那些块；
+    · `delete`  新侧是一个**点**，删除点正好落在块边界时前后两词分属两块，
+                所以取 `{前一词的块, 后一词的块}` 两个候选 —— 少给会漏报真缺陷。
+    """
+    def blk(j):
+        if not new_owner:
+            return 0
+        return new_owner[min(max(j, 0), len(new_owner) - 1)]
+
+    anchor = [frozenset()] * old_len
+    for tag, i1, i2, j1, j2 in opcodes:
+        if tag == "equal":
+            for k in range(i2 - i1):
+                anchor[i1 + k] = frozenset({new_owner[j1 + k]})
+        elif tag == "replace":
+            s = frozenset(new_owner[j1:j2]) or frozenset({blk(j1)})
+            for k in range(i1, i2):
+                anchor[k] = s
+        elif tag == "delete":
+            s = frozenset({blk(j1 - 1), blk(j1)})
+            for k in range(i1, i2):
+                anchor[k] = s
+    return anchor
+
+
 def stem(w: str) -> str:
-    """极简单复数归一：只处理 -ies/-es/-s，够用且不会把 `bonus` 砍成 `bonu`。"""
+    """极简单复数归一：只处理 -ies/-es/-s，够用且不会把 `bonus` 砍成 `bonu`。
+
+    ⚠ **必须先剥所有格**。`WORD` 正则把撇号收进词里，所以 `manor's` 会被 -s 规则
+    砍成 `manor'`，与词表键 `manor` **不同桶**。第十八轮实测这一个 bug 同时造成两种错：
+      · 假阳性 27 块 —— 所有格全部进不了同一个计数桶，看着像「英文把这个词删了」；
+      · **漏报** —— 注入用例「上游删掉 `The Warden's`、中文仍写『守林者』」两边都不报，
+        而只把 `Warden's` 换成 `Warden`、其余一字不改，立刻就报得出来。
+    """
     w = w.lower()
+    if w.endswith(("'s", "’s")):        # ← 先剥所有格，再做复数归一
+        w = w[:-2]
+    elif w.endswith(("'", "’")):        # `Sages'` 这种复数所有格
+        w = w[:-1]
     if len(w) > 4 and w.endswith("ies"):
         return w[:-3] + "y"
     if len(w) > 4 and w.endswith(("ses", "xes", "zes", "ches", "shes")):
@@ -285,7 +432,8 @@ def norm_ws(s):
 
 
 # --------------------------------------------------------------------- 主流程
-def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None):
+def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None,
+         block_filter=True):
     en_dir = os.path.join(repo, "compendium", "en")
     cn_dir = os.path.join(repo, "compendium", "cn")
     findings = []
@@ -324,12 +472,34 @@ def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None)
             if sim < min_sim:
                 stats["rewritten_skipped"] += 1
                 continue
+            # ---- 逐位对齐：把新英文与中文各按 HTML 标签切块，块号一一对应 ----
+            # 块结构对不上（块数不等 / 切块后词序列与整叶归一不一致）时**不静默跳过**，
+            # 而是记 shape_mismatch 并退回整叶口径，让下一轮看得见有多少叶没盖住。
+            ow_b, _o_owner, _o_parts = block_tokens(old_en, idmap)
+            nw_b, n_owner, n_parts = block_tokens(new_en, idmap)
+            cn_parts = TAG_SPLIT.split(cn)
+            aligned = (block_filter and ow_b == old_words and nw_b == new_words
+                       and len(cn_parts) == len(n_parts))
+            if block_filter:
+                if aligned:
+                    stats["aligned_leaves"] += 1
+                    stats["aligned_blocks"] += len(n_parts)
+                elif len(cn_parts) != len(n_parts):
+                    stats["shape_mismatch_blockcount"] += 1
+                else:
+                    stats["shape_mismatch_tokenize"] += 1
+            anchor = (anchor_old_to_new_blocks(sm.get_opcodes(), len(old_words), n_owner)
+                      if aligned else None)
+
             # 只看**真正被删掉的那几段**里的词。整叶数词会把「中文本来就比英文多提
             # 几次这个名词」当信号，噪声压过信号（实测 245 → 个位数）。
             deleted, del_spans = set(), []
+            del_idx = collections.defaultdict(set)   # 词干 → 被删/被替换掉的旧词下标
             for tag, i1, i2, j1, j2 in sm.get_opcodes():
                 if tag in ("delete", "replace"):
                     deleted.update(stem(w) for w in old_words[i1:i2])
+                    for k in range(i1, i2):
+                        del_idx[stem(old_words[k])].add(k)
                     del_spans.append((
                         i1, i2,
                         " ".join(old_words[max(0, i1 - 6):i1]) + "  《删掉》 " +
@@ -359,12 +529,51 @@ def scan(repo, baseline, gloss, capitalized_only=True, min_sim=0.75, idmap=None)
                 #  （中文爱重复名词，英文用代词，cn_c > n_old 基本都是这个原因）
                 if not (n_new < cn_c <= n_old):
                     continue
+                # ---- 逐位对齐过滤：把同一条判据**缩到删除点所在的那几块**上重判一次 ----
+                # 整叶口径下「英文这里删了一个词」和「中文那边另一处正当地用了同一个译名」
+                # 分不开（实测 70/82 假阳性都是这一类）。块级重判后中文那些别处的命中
+                # 落在别的块里，不再参与，只剩「删除点对应的中文块里确实还留着译名」。
+                local = None
+                if aligned:
+                    cand = set()
+                    for k in del_idx.get(st, ()):
+                        cand |= anchor[k]
+                    # **逐块单独判**，不合并成一个大候选集：合并等于在小一号的尺度上
+                    # 重新引入整叶那种稀释（实测合并 40 叶 / 逐块 39 叶，逐块更细也更少）。
+                    residual = []
+                    for b in sorted(cand):
+                        g, gs = [b], {b}
+                        o_l = sum(1 for k, w in enumerate(old_words)
+                                  if stem(w) == st and (anchor[k] & gs))
+                        n_l = sum(1 for j, w in enumerate(new_words)
+                                  if stem(w) == st and n_owner[j] in gs)
+                        c_l = sum(cn_parts[b].count(term) for b in g)
+                        # ⚠ **块级只留下界。** 上界 `c_l <= o_l` 在块这个尺度上远比在叶尺度上
+                        # 苛刻：块级 o_l 通常就是 1，而「英文用代词、中文还原名词」是本脚本
+                        # 自己注释里写明的常态，一还原就 c_l=2 > o_l=1，整条被当假阳性压掉。
+                        # 第十八轮实测：拿历史真缺陷 Surgeweaver 的原形注入
+                        # （`half your Intellect score`→`half the ability score`，中文块内「智力」两次），
+                        # **不带过滤器报、带过滤器不报**。上界留在叶级即可。
+                        if n_l < c_l:
+                            residual.append({"blocks": g, "en_old_n": o_l,
+                                             "en_new_n": n_l, "cn_count": c_l})
+                    if not residual:
+                        stats["suppressed_by_block"] += 1
+                        continue
+                    stats["kept_by_block"] += 1
+                    local = residual[0] if len(residual) == 1 else {
+                        "blocks": sorted(cand),
+                        "en_old_n": sum(r["en_old_n"] for r in residual),
+                        "en_new_n": sum(r["en_new_n"] for r in residual),
+                        "cn_count": sum(r["cn_count"] for r in residual),
+                        "sites": residual}
                 ctx = [d[2] for d in del_spans
                        if any(stem(w) == st for w in old_words[d[0]:d[1]])][:2]
                 cn_ctx = [m for m in re.split(r"(?<=[。；！？])", re.sub(r"<[^>]+>", "", cn))
                           if term in m][:2]
                 hits.append({"en": surface[st], "en_old_n": n_old, "en_new_n": n_new,
                              "cn_term": term, "cn_count": cn_c, "similarity": round(sim, 3),
+                             "local": local,
                              "deleted_context": ctx, "cn_context": cn_ctx})
             hits.sort(key=lambda h: (h["en_new_n"] - h["cn_count"], -h["en_old_n"]))
             if not hits:
@@ -394,6 +603,9 @@ def main():
                     help="旧/新英文的词级相似度低于此值＝整段重写，逐词数次数没有意义，跳过")
     ap.add_argument("--all-case", action="store_true",
                     help="连小写词也查（噪声涨一个量级，专项复核才开）")
+    ap.add_argument("--no-block-filter", action="store_true",
+                    help="关掉逐位对齐过滤，退回整叶计数口径（实测假阳性会从 12 涨回 77，"
+                         "只在与旧轮对数时用）")
     ap.add_argument("--out")
     ap.add_argument("--md")
     ap.add_argument("--show", type=int, default=30)
@@ -419,12 +631,22 @@ def main():
 
     gloss = load_glossary(a.glossary)
     idmap = load_idmap(a.bindings)
-    findings, stats = scan(a.repo, a.baseline, gloss, not a.all_case, a.min_sim, idmap)
+    findings, stats = scan(a.repo, a.baseline, gloss, not a.all_case, a.min_sim, idmap,
+                           block_filter=not a.no_block_filter)
     print(f"{os.path.basename(a.repo)}  基准 {os.path.basename(a.baseline)}  "
           f"词表单词条目 {len(gloss)}  id→名 {len(idmap)}")
     print(f"  baseline = {baseline_abs}")
     print(f"  英文变过且有中文的条目 {stats['changed_pairs']}"
           f"  ·  整段重写跳过 {stats['rewritten_skipped']}  ·  无删词残留 {stats['clean']}")
+    # 反空转：逐位对齐这一层必须自报「扫了多少叶、多少块、压掉多少条、放行多少条」，
+    # 三个数任何一个是 0 都说明这一层根本没跑起来（本项目实测过三种空转形态）。
+    if a.no_block_filter:
+        print("  ⚠ --no-block-filter：整叶计数口径，假阳性主类（同义改写 / 整块删除）不会被压掉")
+    else:
+        print(f"  逐位对齐：对齐 {stats['aligned_leaves']} 叶 / {stats['aligned_blocks']} 块"
+              f"  ·  块数不等退回整叶 {stats['shape_mismatch_blockcount']} 叶"
+              f"  ·  切块后词序列不一致退回整叶 {stats['shape_mismatch_tokenize']} 叶")
+        print(f"    块级重判：压掉 {stats['suppressed_by_block']} 条  ·  放行 {stats['kept_by_block']} 条")
     print(f"  **DROPPED_TERM_KEPT {stats['DROPPED_TERM_KEPT']}**")
     for f in findings[:a.show]:
         print(f"  {f['pack']} :: {f['path'][-70:]}")
@@ -445,6 +667,7 @@ def main():
         "idmap_size": len(idmap),
         "min_sim": a.min_sim,
         "capitalized_only": not a.all_case,
+        "block_filter": not a.no_block_filter,
         "argv": sys.argv,
     }
     if a.out:
@@ -461,7 +684,19 @@ def main():
             for f in findings:
                 fh.write(f"## `{f['pack']}` `{f['path']}`\n\n")
                 for h in f["dropped"]:
-                    fh.write(f"- 英文删了 `{h['en']}` → 中文仍有 `{h['cn_term']}` ×{h['cn_count']}\n")
+                    fh.write(f"- 英文删了 `{h['en']}` → 中文仍有 `{h['cn_term']}` ×{h['cn_count']}")
+                    # 先看局部三元组再看下面的原文：整叶计数带着同叶别处的正当用法，
+                    # 局部才是「删除点所在的那一块」的实况。`新=0` 是强证据。
+                    L = h.get("local")
+                    if L:
+                        fh.write(f"（**局部** 块 {L['blocks']}：旧 {L['en_old_n']} → "
+                                 f"新 {L['en_new_n']}，中文 {L['cn_count']}"
+                                 f"{'，**强**' if L['en_new_n'] == 0 else ''}）")
+                    else:
+                        # 两种可能：跑了 --no-block-filter，或该叶块结构对不上退回整叶。
+                        # 哪一种看报告头部的 stats / meta.block_filter，别在这里猜。
+                        fh.write("（无局部口径，本条按**整叶**判）")
+                    fh.write("\n")
                 fh.write(f"\n- 旧英文：{f['old_en']}\n- 新英文：{f['new_en']}\n- 中文：{f['cn']}\n\n")
         print(f"  -> {a.md}")
     return 0
