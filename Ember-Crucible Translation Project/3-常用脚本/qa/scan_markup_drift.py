@@ -38,9 +38,14 @@ LABEL_AFTER_MARKUP = re.compile(
 # （`@Embed[Actor.x readaloud="…"]` 会把那段话念出来），译了不算链接坏。
 # 不抹掉的话，每翻一段 readaloud 就多报一条 LINK。
 QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
+# 同一个参数不带引号时（`@Embed[Actor.x label=Squish]`，Foundry 的 parseEmbedConfig
+# 允许）上面那条看不见 —— 于是翻译这个 label 必然被报成 LINK 漂移。
+# 与 apply_translations.py 的 BARE_TEXT_PARAM 保持一致，只放行确定是可见文本的三个名字。
+BARE_TEXT_PARAM = re.compile(r'\b(label|readaloud|caption)\s*=\s*(?!["\'])([^\s\]<>"\']+)')
 
 
 def strip_labels(s):
+    s = BARE_TEXT_PARAM.sub(r'\1="~"', s)
     s = QUOTED_PARAM.sub('="~"', s)
     return LABEL_AFTER_MARKUP.sub(lambda m: m.group(0).split("{")[0], s)
 TAGNAME = re.compile(r'<\s*(/?)([a-zA-Z][a-zA-Z0-9]*)')
@@ -96,7 +101,9 @@ def main():
             if not t:
                 continue
             # 比对链接前先把 key="value" 参数值抹平：那是散文，不是目标
-            sl, tl = QUOTED_PARAM.sub('="~"', s), QUOTED_PARAM.sub('="~"', t)
+            # （不带引号的 label=/readaloud=/caption= 同理，见 BARE_TEXT_PARAM）
+            sl, tl = (QUOTED_PARAM.sub('="~"', BARE_TEXT_PARAM.sub(r'\1="~"', s)),
+                      QUOTED_PARAM.sub('="~"', BARE_TEXT_PARAM.sub(r'\1="~"', t)))
             checks = {
                 "LINK": diff(Counter(MARKUP.findall(sl)) + Counter(INLINE_CMD.findall(sl)),
                              Counter(MARKUP.findall(tl)) + Counter(INLINE_CMD.findall(tl))),

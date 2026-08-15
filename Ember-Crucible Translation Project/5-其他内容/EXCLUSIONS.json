@@ -1,0 +1,128 @@
+{
+ "meta": {
+  "note": "项目级**永久豁免登记表**。凡是扫描器每轮都会重报、但已经查清「本来就该这样」的条目，登记在这里，下一轮不必重推。",
+  "rule": "登记一条的门槛是**硬证据**：说得出英文闸下的计数、或说得出上游代码的行号。凭印象写的「应该没事」不许进这张表。",
+  "created": "2026-08-15（第十六轮）",
+  "updated": "2026-08-16（第十六轮终段：Token 那条按库账从 4 叶订正为 1 叶；Color Commentary 的扫描器侧指针已补进 scan_name_splits.KNOWN_SPLITS，该条未了项了结）",
+  "account_matches_repo": "⚠ 本表的每一条 `count` / `what` 都是**对库的断言**，不是对历史的记录。库改了、这里没改，就是账实不符 —— 第十六轮终段实测到一例（`P-token-story-souvenir` 写 4 叶、库里只剩 1 叶，另两处早已正确改成「纪念章」「木牌」）。**下一轮读本表前先按 `what` 里的路径数一遍**，对不上就订正条目而不是迁就它。",
+  "scope": "本表收 scan_uuid_swap / 词表 pending / scan_name_splits / 术语裁决的逐叶豁免 四类。`scan_same_en_split` 的 125 条分叉组豁免另有专表，见 sibling_registers。",
+  "sibling_registers": {
+   "same_en_split": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json（125 条，由断言 R-exclusions-closed 守着）",
+   "glossary_pending": "5-其他内容/glossary/glossary_ec.pending.json 的 permanentlyExempt 节（与本表 P-terrain-enum 同源，两处必须同时改）",
+   "upstream_defects": "5-其他内容/english-baseline/LOCAL-PATCHES.md 的「已知但不修」栏（上游自身写坏、我方不修的）"
+  }
+ },
+ "exclusions": [
+  {
+   "id": "P-uuid-kessia-ordain",
+   "scanner": "scan_uuid_swap",
+   "kind": "上游 label↔target 错配，我方译文忠实",
+   "count": 6,
+   "what": "`Character Classes.pages.Cleric.text` 里 `{Kessia}` 与 `{Ordain}` 两个链接的目标 id 指错了页（孪生两包各 3 处 = 6 处）",
+   "evidence": [
+    "`{Kessia}`（中文标签「凯西亚」）挂到 `1WoH2TVw0gngrgWL` = Kessian **文化**页；按标签语义应指凯西亚**大陆**页 `2eLAE5AF2iAMlc0e`。实测：全库指向 2eLAE5AF2iAMlc0e 的链接 28 处，指向 1WoH2TVw0gngrgWL 的 27 处 —— 后者的标签除本页外全是「凯西安 / 凯西安人」（文化/族群），只有 Cleric 页这 2 处写「凯西亚」。",
+    "`{Ordain}`（中文标签「奥尔丹」）挂到 `RxhlhTWqJqB1cZxY` = Ordani **文化**页；按标签语义应指奥尔丹**城市**页 `4gRSL7Tq1pgccdIW`。实测：指向 4gRSL7Tq1pgccdIW 的 59 处，指向 RxhlhTWqJqB1cZxY 的 50 处 —— 后者标签除本页外全是「奥尔达尼」，只有 Cleric 页这 1 处写「奥尔丹」。",
+    "两处都是**英文侧就这样**：上游 `{Kessia}` / `{Ordain}` 的标签与目标本就对不上，中文只是照着标签译，译文忠实。"
+   ],
+   "why_not_fix": "改方括号**内部**的目标 id 等于改上游数据结构，超出汉化的职责边界；而且一旦上游自己修了，我们的改动会与之冲突。硬约束 2 也明写「方括号内部照抄英文」。",
+   "decision": "2026-08-15f（第十六轮主控裁「不做/归档」）",
+   "recheck_trigger": "上游 ember 升版后重抽英文，若这两个标签或目标 id 变了，本条作废、需重判"
+  },
+  {
+   "id": "P-terrain-enum",
+   "scanner": "词表 pending（glossary_ec.pending.json）",
+   "kind": "枚举 id，按设计不该有中文",
+   "count": 6,
+   "what": "`bluffs` / `canyon` / `difficult` / `extreme` / `normal` / `water` 六条永久 pending",
+   "evidence": [
+    "它们是 `ember.location` / `ember.biome` 的 `system.terrain` 枚举值，不是散文。",
+    "`mappings.mjs:235` 已用 `NOT translatable, do not add back` 明确登记。",
+    "上游 `ember.mjs:418` 把 terrain 定义成 `StringField({choices: terrainChoices, initial: \"normal\", blank: false})`；建六边格时 `ember.mjs:846` 用字面枚举键查注册表，`ember.mjs:847` 查不到**直接 throw**（`Terrain ... not defined in Region configuration data.`）。写中文进去要么校验失败退回 initial、要么直接抛错。"
+   ],
+   "why_not_fix": "「翻译它」在运行时是坏的，不是风格问题。pending 计数里的这 6 条**不是欠账**，`actionableCount` 已是 0。",
+   "decision": "2026-08-15f（第十六轮主控裁「不做/归档」）",
+   "recheck_trigger": "上游若给 terrain 加了独立的 label 键（那才是可译的那一层），本条作废"
+  },
+  {
+   "id": "P-name-split-shield",
+   "scanner": "scan_name_splits",
+   "kind": "同形异义，合法分裂",
+   "count": 1,
+   "what": "`Shield` → 护盾术(23) / 盾牌(8)",
+   "evidence": [
+    "英文侧带 `Imperceptible Barrier` 效果（描述为 “An imperceptible barrier of magical force protects you”，+5 AC 且免疫魔法飞弹）的 23 个是**法术**，中文全是「护盾术 Shield」。",
+    "裸 `{\"name\":\"Shield\"}` 空壳的 8 个是**装备**，挂在 Svala Bronwen / Burnished Hand Protector / Skallith Warrior / Anachraenum Adventurer / Spellbreaker Riot Guard 这些无施法能力的近战单位上，另加 `tables.Corpse Loot` 的战利品行，中文全是「盾牌 Shield」。",
+    "1:1 无一例外；连看似反例的 Tethra Shùl（有 Pact Magic）也判对。`folders.Shield`、`crucible.talent` 的盾牌天赋文件夹同在装备那一边。"
+   ],
+   "why_not_fix": "判据按英文 name 聚合，看不出词义，**永远非零**。统一到任一边都会让另一边读不通。",
+   "decision": "已裁定（第十二轮 G1/G3/G5 三次复核一致），第十六轮重申"
+  },
+  {
+   "id": "P-name-split-luminous-spirited",
+   "scanner": "scan_name_splits",
+   "kind": "跨产品命名空间，永不同载",
+   "count": 2,
+   "what": "`Luminous` → 明光(4~6) / 辉耀(1)；`Spirited` → 精神焕发(1~2) / 昂扬(1)",
+   "evidence": [
+    "「辉耀」「昂扬」在 `ember.character.json`，是**角色进阶阶梯的等级特性名**：`Luxarum 5: Luminous` 属 微闪/明亮/耀眼/致盲/辉耀 五级梯度，`Heart 1: Spirited` 属 昂扬/优雅/蓬勃/苍翠/神圣 五级梯度 —— 改任何一级都会打乱梯度。",
+    "「明光」「精神焕发」在 `crucible.affixes` / `crucible.equipment`，是**装备词缀**，条目里另有 `adjective` 字段（`\"adjective\": \"明光\"` / `\"精神焕发\"`），会被拼到物品名前面当形容词，语法角色也不同。",
+    "两套系统分属 dnd5e 侧包与 Crucible 侧包，从不在同一屏出现。",
+    "`Spirited Revelations`→灵启真相 是完全不同的短语，不参与本项。"
+   ],
+   "why_not_fix": "统一会让其中一侧读不通（词缀位置要形容词，阶梯位置要名词），且两侧互不引用。**永远非零**。",
+   "decision": "已裁定（第十二轮 G1/G3/G5），第十六轮重申"
+  },
+  {
+   "id": "P-name-split-arcturian",
+   "scanner": "scan_name_splits / scan_same_en_split",
+   "kind": "同形分工，合法分裂（定语 vs 指人的名词）",
+   "count": 1,
+   "what": "`Arcturian` → 阿克图里安（定语／文化标签）/ 阿克图里安人（指人的名词）",
+   "evidence": [
+    "**英文侧本来就是二分的**：`Arcturian` 作**定语**共 472 次（`Arcturian dwellings`，以及文化标签 `Arcturian Wirrun` / `Arcturian Human` / `Arcturian Fej`），作**指人的名词** 223 次（单数 86 + 复数 137）。中文侧 阿克图里安 388 : 阿克图里安人 311，**正好对应这个二分**。（同口径复核：不去孪生重复时英文定语形态 944 次、`Arcturians?` 合计 1354 次，中文 763 : 595 —— 比值一致。）",
+    "指人那一边的硬锚点有两处：① `@UUID[...]{Arcturians}` 复数标签**全库 38 叶，38/38 中文都是「阿克图里安人」**（零例外）；② `actors.Arcturian` 是一张**角色卡**（＝一个阿克图里安人），孪生两包各 name + tokenName 共 4 叶。",
+    "定语那一边：文化页 `journals.Cultures.pages.Arcturian.name`、`folders.Arcturian`、血统条目 `ember.character.json` 的 `entries.Arcturian.name`、以及挂在角色卡上的文化 item `items.Arcturian.name` —— 全是「阿克图里安 Arcturian」。",
+    "**已实测两次、结论一致**：第十二轮 G5 写下「把角色卡改成阿克图里安会让 `scan_label_vs_name` 从 2 处涨到 20 处。以后不要再试」；第十六轮第二段的 `4-临时脚本/2026-08-16-round16/batches/z3-arcturian.json` 照样把 `actors.Arcturian.name`/`.tokenName` 改成了「阿克图里安 Arcturian」，`scan_label_vs_name` **确实从 2 涨到 20**，与三轮前的预言逐字吻合。"
+   ],
+   "why_not_fix": "判据按英文 name 聚合，看不出「这一处是定语还是指人」，**永远非零**。统一到任一边都会让另一边读不通：文化标签带上「人」变成「阿克图里安人文化」，角色卡去掉「人」则与 18 处 `{Arcturians}` 标签自相矛盾（那正是 scan_label_vs_name 从 2 涨到 20 的机制）。",
+   "decision": "第十二轮 G1/G3/G5 三次复核一致；2026-08-16a 主控补裁 R-A 撤销第二段的「统一」批次并正式登记为合法分裂",
+   "guarded_by": "RESOLUTIONS.assertions.json 的 `R-arcturian-split`（{Arcturians} 38 叶 + 定语弱闸 111 叶）与 `R-arcturian-actor-card`（孪生 4 叶逐叶钉死）",
+   "recheck_trigger": "上游若把 actor `Arcturian` 改名、或给文化标签换了英文写法，本条需重判"
+  },
+  {
+   "id": "P-token-story-souvenir",
+   "scanner": "术语裁决 1（Token＝指示物，令牌/代币零容忍）的逐叶豁免",
+   "kind": "同形异义：故事内的实体信物，不是 Foundry 对象",
+   "count": 1,
+   "what": "全库仅 **1 叶**保留「代币」：`actors.Sellen.biography.private`（`ember.crucible-adventure.json` 独有的一叶，叶内 2 处）",
+   "evidence": [
+    "该叶英文 `she gives out small tokens ... they are worthless outside Yakoshta but are used as currency inside the mine` 是**普通名词义的 token（矿井内当货币用的实体小物件）**，与 Foundry 的 Token 对象无关。中文两处：「发放一些小代币」与「在代币统计上远远落后或遥遥领先的人」。",
+    "裁决 1 的依据是 Foundry 核心中文包 `foundry_chn/cn.json` 的 `TOKEN` 相关键 **指示物 53 : 令牌 0** —— 那是**玩家 UI 上的控件名**，管不到散文里的实体小物件。把这一处改成「指示物」会让读者以为矿工在发游戏指示物。",
+    "**「令牌」不在豁免范围**：2026-08-16 终段复核，全库 compendium 40674 叶 + lang 2328 键里「令牌」出现 **0 次**，这一叶也一次都没有。豁免只针对「代币」这一个词。",
+    "同口径复核：「指示物」285 叶 + 11 个 lang 键；「纪念章」2 叶；「木牌」15 叶。"
+   ],
+   "correction": "⚠ **2026-08-16 终段订正：本条原写「全库 4 叶保留代币」，与库账对不上 —— 实测只剩 1 叶。** 另两处早已被改成更贴切的中文，而**登记没跟着改**：① `Ordain Gazetteer.pages.Westgate.text`（孪生 2 叶）的 `souvenir tokens` 现为「**纪念章**」；② `actors.Jorey Swift.biography.private` 的 `wooden token` 现为「**木牌**」。**两处都改得对** —— 「纪念章」「木牌」比「纪念代币」「木制代币」更像中文里那个物件，也不会让读者往 Foundry 的 Token 上想。同时把 `R-token-foundry-ui` 的 `except_paths` 从 3 个路径片段收窄到 1 个：留着那两条不报错，但它们是「豁免一个已经不存在的东西」的空条目，会让下一轮以为库里还有 3 处代币。**登记表的价值全在账实相符**，所以订正而不是留着。",
+   "why_not_fix": "改了是错译，不是统一。零容忍的对象是「指代 Foundry Token 对象却写成令牌/代币」，不是「英文里出现过 token 这个词」。",
+   "decision": "2026-08-15f（第十六轮裁决 1）；2026-08-16 补登记进本表；2026-08-16 终段按库账订正为 1 叶",
+   "guarded_by": "RESOLUTIONS.assertions.json 的 `R-token-foundry-ui`，以 `except_paths` 的**按词豁免**形态写入（只豁免「代币」，这一叶的「令牌」照样零容忍）",
+   "recheck_trigger": "上游若改写这段散文、或新增别的散文用到实体 token，需要逐叶重判后再加路径；反过来，若哪天连 Sellen 这一叶也改了写法，本条应**整条删除**而不是留成空豁免"
+  },
+  {
+   "id": "P-name-split-color-commentary",
+   "scanner": "scan_name_splits",
+   "kind": "英文一语双关，两处所指无关",
+   "count": 1,
+   "what": "`Color Commentary` → 彩色解说(2) / 精彩解说(2)（孪生两包各两份）",
+   "evidence": [
+    "`journals.Local Color.pages.Color Commentary`：该 journal 页的语义是**《地方色彩 Local Color》任务里的壁画社评事件** —— 任务讲颜料元素从批判城市的壁画里爬出来，标题在 color =「颜料 / 地方色彩」上双关。中文取颜料义，作「彩色解说」。",
+    "`tables.Helkas Drake Moments` 6-6 骰表结果：吟游诗人阿格拉班德在飞龙竞速中现场演唱助威，取 color commentary 的**体育解说**本义，作「精彩解说」。",
+    "两处互相取代都会丢义。"
+   ],
+   "why_not_fix": "同一英文短语的两个义项，属合法分裂，**永远非零**。",
+   "correction": "⚠ 本条的旧留证措辞在 §1 被误读成「其中一种中文该是『壁画』」。**不是**。壁画是那条任务的**题材背景**，用来说明为什么这里取 color 的颜料义；页面标题本身不该译成「壁画」。第十六轮订正这一句。",
+   "decision": "已裁定（第十二轮 G1/G3/G5）；2026-08-16d 主控终段补裁 T-3 正式登记为合法分裂、Z3 就此清零，第十六轮订正留证措辞",
+   "guarded_by": "本表（论证）+ `3-常用脚本/qa/scan_name_splits.py` 的 `KNOWN_SPLITS`（指针，2026-08-16d 终段已落）",
+   "open_followup": "已了结。2026-08-16d 终段把指针补进 `KNOWN_SPLITS`：`'Color Commentary': {'彩色解说': 'journals.Local Color.pages.Color Commentary（颜料／地方色彩双关）', '精彩解说': 'tables.Helkas Drake Moments 6-6（体育解说本义）'}`。落盘后实测 `scan_name_splits --repo 两仓` = 「同名不同译 5 个 —— 已留证合法分裂 5 个，**待裁 0 个**」，Z3 清零。"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+actors.Conaris Haid.biography.private	main	BEFORE 奥尔丹->Sockets | 插孔神殿->Ordain	AFTER 奥尔丹->Ordain | 插孔神殿->Sockets
+actors.Evesso.biography.private	main	BEFORE 埃维索的密室->Profane Altar | 亵渎祭坛->Evesso's Chamber	AFTER 埃维索的密室->Evesso's Chamber | 亵渎祭坛->Profane Altar
+actors.Oozeling.biography.private	main	BEFORE 石之森林->Dripstones | 滴石笋->None	AFTER 石之森林->None | 滴石笋->Dripstones
+actors.Undaunted Trainee.biography.private	main	BEFORE 齐拉·赫斯提德罗->Maziran | 马兹兰->Zira Hestidero	AFTER 齐拉·赫斯提德罗->Zira Hestidero | 马兹兰->Maziran
+items.Barrel Room Key.description	main	BEFORE 余烬的恩赐->Barrel Room | 木桶房->Ember's Bounty	AFTER 余烬的恩赐->Ember's Bounty | 木桶房->Barrel Room
+items.Dreth Sap.description.private	main	BEFORE 赫尔卡斯->Leviathans | 利维坦->Helkas	AFTER 赫尔卡斯->Helkas | 利维坦->Leviathans
+items.Toothbreaker Throne Room Key.description.private	main	BEFORE 碎牙帮藏身处->Raster's Throne Room | 拉斯特的王座室->Toothbreaker Hideout	AFTER 碎牙帮藏身处->Toothbreaker Hideout | 拉斯特的王座室->Raster's Throne Room
+items.Yakoshta Blue Track Lever.description.private	main	BEFORE 雅科什塔矿井->Makeshift Barricade | 蓝轨道->Yakoshta Mine	AFTER 雅科什塔矿井->Yakoshta Mine | 蓝轨道->Makeshift Barricade
+journals.Ancestries.pages.Ashka.contentGamemaster	main+twin	BEFORE 斯科里斯->Jarn | 贾恩->Scoris	AFTER 斯科里斯->Scoris | 贾恩->Jarn
+journals.Ancient Paths.pages.Grim Findings.text	main+twin	BEFORE 圣堂区->Veiled Chain | 帷幕锁链->The Hallows | 无形皮肤->Molted Dragon Skin | 蜕下的龙皮->Impossible Skin	AFTER 圣堂区->The Hallows | 帷幕锁链->Veiled Chain | 无形皮肤->Impossible Skin | 蜕下的龙皮->Molted Dragon Skin
+journals.Arcturel Tradeway.pages.Warehousing.text	main+twin	BEFORE 垃圾场齿轮->The Scrapyard | 废料场->Junkyard Cogs	AFTER 垃圾场齿轮->Junkyard Cogs | 废料场->The Scrapyard
+journals.Arctus Plateau Gazetteer.pages.Corpin Sanctuary.text	twin	BEFORE 奥尔丹->Wedgelands | 楔地->Ordain Gazetteer	AFTER 奥尔丹->Ordain Gazetteer | 楔地->Wedgelands
+journals.Bestiary.pages.Leviathans.text	main+twin	BEFORE 奥布里西尔->Shard Gods | 碎片诸神->Obrisire	AFTER 奥布里西尔->Obrisire | 碎片诸神->Shard Gods
+journals.Chapter 2 Events.pages.Corrupted Depths.text	main+twin	BEFORE 雾缚洞窟->Lake of Whispers | 低语之湖->Fogbound Caverns	AFTER 雾缚洞窟->Fogbound Caverns | 低语之湖->Lake of Whispers
+journals.Character Classes.pages.Artificer.text	main+twin	BEFORE 艾迪尔->Lorai | 洛莱->Nalvani | 纳尔瓦尼->Aedir | 阿卡泽娅->Maziran | 马兹兰->Akazea	AFTER 艾迪尔->Aedir | 洛莱->Lorai | 纳尔瓦尼->Nalvani | 阿卡泽娅->Akazea | 马兹兰->Maziran
+journals.Character Classes.pages.Barbarian.text	main+twin	BEFORE 普里莫迪斯->Casia | Casia->Primordis | 西格纳拉->Daemos | 戴莫斯->Signara	AFTER 普里莫迪斯->Primordis | Casia->Casia | 西格纳拉->Signara | 戴莫斯->Daemos
+journals.Character Classes.pages.Monk.text	main+twin	BEFORE 低地堡垒->Waerd | 瓦尔德->Lowlands | 奥肯加德->Oaken | 奥肯->Oakengarde	AFTER 低地堡垒->Lowlands | 瓦尔德->Waerd | 奥肯加德->Oakengarde | 奥肯->Oaken
+journals.Character Classes.pages.Paladin.text	main+twin	BEFORE 辛达里克贤者->Burnished Hand | 辉手->Cindaric Sages	AFTER 辛达里克贤者->Cindaric Sages | 辉手->Burnished Hand
+journals.Character Classes.pages.Ranger.text	main+twin	BEFORE 血林->Sanguinaries | 赤血会->Bloodwoods | 辉核森林->Strider | 疾行者->Corebright Forest | 冰霜飘流->Fikost | 菲科斯特->Rimedrift	AFTER 血林->Bloodwoods | 赤血会->Sanguinaries | 辉核森林->Corebright Forest | 疾行者->Strider | 冰霜飘流->Rimedrift | 菲科斯特->Fikost
+journals.Character Classes.pages.Sorcerer.text	main+twin	BEFORE 血林->Sanguinaries | 赤血会->Bloodwoods	AFTER 血林->Bloodwoods | 赤血会->Sanguinaries
+journals.Cosmos.pages.Sea of Stars.contentGamemaster	main+twin	BEFORE 里凡->Star Mages | 星辰法师->Rhivan	AFTER 里凡->Rhivan | 星辰法师->Star Mages
+journals.Cosmos.pages.The Weave.contentGamemaster	main+twin	BEFORE 里凡->Star Mages | 星辰法师->Rhivan	AFTER 里凡->Rhivan | 星辰法师->Star Mages
+journals.Cosmos.pages.The Weave.text	main+twin	BEFORE 维恩阿薇->Elder Gods | 上古女神->Ven'avé	AFTER 维恩阿薇->Ven'avé | 上古女神->Elder Gods
+journals.Cosmos.pages.Wildsong.text	main+twin	BEFORE 奥尔丹->Cindaric Sages | 辛达里克贤者->Ordain	AFTER 奥尔丹->Ordain | 辛达里克贤者->Cindaric Sages
+journals.Deities.pages.Elder Gods.contentGamemaster	main+twin	BEFORE 艾迪尔->Theroch | Theroch->Aedir	AFTER 艾迪尔->Aedir | Theroch->Theroch
+journals.Deities.pages.Elder Gods.text	main+twin	BEFORE 里凡->Star Mages | 星辰法师->Rhivan	AFTER 里凡->Rhivan | 星辰法师->Star Mages
+journals.Deities.pages.Finor.contentGamemaster	main+twin	BEFORE 寰宇->Elder Gods | 上古之神->Cosmos | 阿肯->Wyrms | 巨龙->Akon | 卢克萨鲁姆->Celestials | 天界生物->Luxarum	AFTER 寰宇->Cosmos | 上古之神->Elder Gods | 阿肯->Akon | 巨龙->Wyrms | 卢克萨鲁姆->Luxarum | 天界生物->Celestials
+journals.Deities.pages.Kinalathi.contentGamemaster	main+twin	BEFORE 深渊裂斩->Outer Gods | 外神->Abyssal Shear	AFTER 深渊裂斩->Abyssal Shear | 外神->Outer Gods
+journals.Deities.pages.Ravela.text	main+twin	BEFORE 骸骨领->Lumek | 卢梅克->Ossarchate	AFTER 骸骨领->Ossarchate | 卢梅克->Lumek
+journals.Deities.pages.Spectra.text	main+twin	BEFORE 里瓦->Star Academy | 星辰学院->Rhivan | 西格纳拉->Daemos | 戴莫斯->Signara	AFTER 里瓦->Rhivan | 星辰学院->Star Academy | 西格纳拉->Signara | 戴莫斯->Daemos
+journals.Deities.pages.Vesper.text	main+twin	BEFORE 野兽时代->Zeph | 泽夫->Age of Beasts	AFTER 野兽时代->Age of Beasts | 泽夫->Zeph
+journals.Deities.pages.Vhismara.contentGamemaster	main+twin	BEFORE 深渊裂斩->Cosmos | 寰宇->Abyssal Shear	AFTER 深渊裂斩->Abyssal Shear | 寰宇->Cosmos
+journals.Ember's Bounty.pages.Gameplay Details.text	main+twin	BEFORE 游戏室->Wind Raider Boarder | 风袭者->The Game Room	AFTER 游戏室->The Game Room | 风袭者->Wind Raider Boarder
+journals.Ember's Bounty.pages.Kasta's Alterations.text	main+twin	BEFORE 修补->None | 狂热邪教徒->None	AFTER 修补->None | 狂热邪教徒->None
+journals.Gamemaster's Guide.pages.Death and Soulbound.text	main+twin	BEFORE 迷炉商队->Agraband Swift | 阿格拉班德·斯威夫特->Strayhearth Caravan	AFTER 迷炉商队->Strayhearth Caravan | 阿格拉班德·斯威夫特->Agraband Swift
+journals.Gamemaster's Guide.pages.Starting the Game.text	main+twin	BEFORE 蜿蜒小径->Sheltered Campsite | 有遮蔽的营地->The Winding Trail	AFTER 蜿蜒小径->The Winding Trail | 有遮蔽的营地->Sheltered Campsite
+journals.Glitter in the Dark.pages.The Story So Far.text	twin	BEFORE 泽拉尼丝->Inkaro Pearl, White | 因卡罗珍珠->House Cevher | 杰夫赫尔家族->JournalEntry.FYP2Af9bY4B9lSqi.JournalEntryPage.v6lXjfETDkrt0J7E	AFTER 泽拉尼丝->JournalEntry.FYP2Af9bY4B9lSqi.JournalEntryPage.v6lXjfETDkrt0J7E | 因卡罗珍珠->Inkaro Pearl, White | 杰夫赫尔家族->House Cevher
+journals.History.pages.Age of Rediscovery.contentGamemaster	main+twin	BEFORE 卢梅克->Leviathans | 利维坦->Lumek | Calyn Kariset->Corwin Kawn | Corwin Kawn->Calyn Kariset	AFTER 卢梅克->Lumek | 利维坦->Leviathans | Calyn Kariset->Calyn Kariset | Corwin Kawn->Corwin Kawn
+journals.History.pages.Age of Rediscovery.text	twin	BEFORE 野兽时代->Leviathans | 利维坦->Age of Beasts	AFTER 野兽时代->Age of Beasts | 利维坦->Leviathans
+journals.History.pages.Age of the Tower.contentGamemaster	main+twin	BEFORE 碎片诸神->Solaru | 艾迪尔万神殿->Shard Gods	AFTER 碎片诸神->Shard Gods | 艾迪尔万神殿->Solaru
+journals.History.pages.Night of Swords.text	main+twin	BEFORE 塔扬诸王国->Cruel Dragons | 残酷龙->Tayan	AFTER 塔扬诸王国->Tayan | 残酷龙->Cruel Dragons
+journals.History.pages.The First Dawn.text	main+twin	BEFORE 卢克萨鲁姆->Tyraphem | 提拉斐姆->Luxarum | 西格纳拉->Daemos | 戴莫斯->Fiend | 邪魔->Signara | 普里莫迪斯->Casia | Casia->Primordis	AFTER 卢克萨鲁姆->Luxarum | 提拉斐姆->Tyraphem | 西格纳拉->Signara | 戴莫斯->Daemos | 邪魔->Fiend | 普里莫迪斯->Primordis | Casia->Casia
+journals.History.pages.The Unveiling.contentGamemaster	main+twin	BEFORE 沙纳山脉->Trolls | Trolls->Shana Mountains	AFTER 沙纳山脉->Shana Mountains | Trolls->Trolls
+journals.Lightless Halls.pages.Mural of Volcanic Glass.text	twin	BEFORE 虚空之桥->Treasure Room | 宝藏室->Void Bridge	AFTER 虚空之桥->Void Bridge | 宝藏室->Treasure Room
+journals.Mythspire Observatory.pages.Central Room.text	main+twin	BEFORE 多重攻击->Bite | 啃咬->Claw | 爪->Multiattack	AFTER 多重攻击->Multiattack | 啃咬->Bite | 爪->Claw
+journals.Organizations.pages.Silver Beam Consortium.text	main+twin	BEFORE 奥尔丹->Ordani | 奥尔达尼->Ordain	AFTER 奥尔丹->Ordain | 奥尔达尼->Ordani
+journals.Players' Guide.pages.Creation Overview.text	main+twin	BEFORE 奥尔丹->Arcturian | 阿克图里亚人->Caravanner | 商队旅人->Ordain | 卡伦阿克->Tayan | 塔扬->Star Dreamer | 星辰逐梦者->Caren'ac	AFTER 奥尔丹->Ordain | 阿克图里亚人->Arcturian | 商队旅人->Caravanner | 卡伦阿克->Caren'ac | 塔扬->Tayan | 星辰逐梦者->Star Dreamer
+journals.Players' Guide.pages.The Codex.text	main+twin	BEFORE 区域地图->Quests and Events | 事件->Region Exploration	AFTER 区域地图->Region Exploration | 事件->Quests and Events
+journals.Smoldering Cinders.pages.Sagacious Initiation.text	twin	BEFORE 辛达林神殿->Cindaric Sages | 辛达里克贤者->Cindarin Temple	AFTER 辛达林神殿->Cindarin Temple | 辛达里克贤者->Cindaric Sages
+journals.Smoldering Cinders.pages.Sage Advice.text	main+twin	BEFORE 辛达林神殿->Lilla Arien | 莉拉·艾瑞恩->Cindarin Temple | 秘密尸检->Lilla Arien | 失职守卫者->The Secret Autopsy | 莉拉·艾瑞恩->The Derelict Protector	AFTER 辛达林神殿->Cindarin Temple | 莉拉·艾瑞恩->Lilla Arien | 秘密尸检->The Secret Autopsy | 失职守卫者->The Derelict Protector | 莉拉·艾瑞恩->Lilla Arien

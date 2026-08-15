@@ -15,6 +15,24 @@ Sources, in the project's evidence order (强 → 弱)
 
 Anything neither source covers is left alone and reported; those need a translator.
 
+Why the library TM is keyed on `(结构路径, 英文)` and not on the English alone
+---------------------------------------------------------------------------
+`.name` is not one population. `journals.pages.name` / `actors.items.name` follow
+the project's bilingual `中文 English` convention, while `scenes.regions.name`,
+`scenes.regions.behaviors.name` and `tables.results.name` are **bare Chinese**
+(they are rendered as-is into region banners and table rows). Keying the TM on
+`e.strip()` alone -- which is what this script used to do -- merges them and lets
+a full-library majority decide, so 532 keys resolved to a bare-Chinese value
+harvested purely from bare-convention roles and would have been poured into
+bilingual `.name` slots. `fill_twin.py` hit exactly this and wrote `shape_of` for
+it (see its module docstring); that one implementation is imported here rather
+than copied, so the two cannot drift apart.
+
+A structural miss does NOT fall back to the English-only key -- that fallback was
+deleted from `fill_twin.py` on 2026-08-14 for the same reason. A miss goes to the
+translator, and what the role-blind key *would* have suggested is recorded in the
+report under `roleblind_withheld`.
+
 Why the module is not applied blindly
 -------------------------------------
 Comparing the module against names we already translated: **997 agree, 752 differ**
@@ -32,10 +50,11 @@ The name format is the project's bilingual `中文 English`.
 """
 from __future__ import annotations
 import argparse
+import importlib.util
 import json
 import os
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 
 P = r"C:\Users\Taka\Desktop\fvtt\Ember-Crucible Translation Project"
 REPOS = ("1-Ember汉化插件", "2-Crucible汉化插件")
@@ -44,6 +63,24 @@ DND = (r"C:\Users\Taka\AppData\Local\FoundryVTT\Data\modules"
 PACK = "ember.adventure.json"
 CJK = re.compile(r'[一-鿿]')
 ID16 = re.compile(r'[A-Za-z0-9]{16}')
+
+# Single implementation of the structural key, imported from fill_twin.py so the
+# two scripts cannot drift (its STRUCT whitelist is maintained there).
+_spec = importlib.util.spec_from_file_location(
+    "_fill_twin", os.path.join(P, "3-常用脚本", "tm", "fill_twin.py"))
+_fill_twin = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_fill_twin)
+shape_of = _fill_twin.shape_of
+
+# Container segments whose child `name` is rendered verbatim (bare Chinese, no
+# English tail): scene region banners, region behaviour labels, table result
+# rows, level/category labels. Everything else follows the bilingual convention.
+BARE_CN_PARENTS = {'regions', 'results', 'levels', 'categories', 'behaviors', 'tokens'}
+
+
+def wants_bilingual(path: str) -> bool:
+    """True when this `.name` slot takes the project's `中文 English` form."""
+    return not (set(shape_of(path).split('.')[:-1]) & BARE_CN_PARENTS)
 
 
 def walk(en, cn, path, out):
@@ -107,16 +144,16 @@ def main():
         P, '5-其他内容', 'reports', 'ember', 'twin_names.report.json'))
     a = ap.parse_args()
 
-    # 1. library names, majority wins when the same English has several renderings
-    seen = Counter()
+    # 1. library names, majority wins when the same English has several renderings.
+    #    键 = (结构路径形状, 英文)。**不是**英文单独作键 —— 见文件头。
+    shaped = defaultdict(Counter)   # (shape, en) -> Counter(cn)
+    blind = defaultdict(Counter)    # en -> Counter(cn)，只用于报告「无角色键会建议什么」
     for repo in REPOS:
         for pack, path, e, c in load_pairs(repo):
             if path.endswith('.name') and c and CJK.search(c):
-                seen[(e.strip(), c)] += 1
-    lib = {}
-    for (e, c), n in seen.items():
-        if e not in lib or n > lib[e][1]:
-            lib[e] = (c, n)
+                shaped[(shape_of(path), e.strip())][c] += 1
+                blind[e.strip()][c] += 1
+    lib = {k: v.most_common(1)[0] for k, v in shaped.items()}
 
     core = dnd_core_tm()
 
@@ -136,7 +173,7 @@ def main():
     # 同一个词在 crucible.affixes 侧也错过一次（那里 Arrow 是法术形状，已按 adjective 改为箭形）。
     gloss.pop('Arrow', None)
 
-    batch, stat, todo, conflicts = {}, Counter(), [], []
+    batch, stat, todo, conflicts, roleblind = {}, Counter(), [], [], []
     for pack, path, e, c in load_pairs('1-Ember汉化插件'):
         if pack != PACK or not path.endswith('.name'):
             continue
@@ -144,35 +181,50 @@ def main():
             stat['already'] += 1
             continue
         key = e.strip()
-        if key in lib:
-            batch[path] = lib[key][0]
+        skey = (shape_of(path), key)
+        # glossary / dnd5e 两源给的是**裸中文词条**，接不接英文尾巴由槽位角色决定：
+        # regions / results 这类槽是裸中文约定，接上英文就是错的。
+        def render(zh):
+            return f'{zh} {e}'.strip() if wants_bilingual(path) else zh
+        if skey in lib:
+            batch[path] = lib[skey][0]
             stat['from_library'] += 1
         elif key in gloss:
-            batch[path] = f'{gloss[key]} {e}'.strip()
+            batch[path] = render(gloss[key])
             stat['from_glossary'] += 1
             if key in core and core[key] != gloss[key]:
                 conflicts.append({'en': e, 'glossary': gloss[key], 'dnd5e': core[key]})
         elif key in core:
-            batch[path] = f'{core[key]} {e}'.strip()
+            batch[path] = render(core[key])
             stat['from_dnd5e'] += 1
         else:
             stat['needs_translator'] += 1
             todo.append({'path': path, 'en': e})
+        # 结构键落空、但无角色的纯英文键有候选 —— 记下来，**不**据此写值。
+        if skey not in lib and key in blind:
+            stat['roleblind_withheld'] += 1
+            if len(roleblind) < 500:
+                roleblind.append({'path': path, 'shape': skey[0], 'en': key[:120],
+                                  'no_role_majority': blind[key].most_common(1)[0][0][:120]})
 
     os.makedirs(a.out, exist_ok=True)
     fp = os.path.join(a.out, f'twinnames.{PACK}')
     json.dump(batch, open(fp, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     json.dump({'stat': dict(stat), 'glossary_vs_dnd5e': conflicts,
-               'needs_translator': todo},
+               'needs_translator': todo, 'roleblind_withheld': roleblind},
               open(a.report, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
-    print(f'库内既有 .name TM {len(lib)} 条 | dnd5e 核心包 TM {len(core)} 条')
+    print(f'库内既有 .name TM {len(lib)} 条（按 (结构形状, 英文) 键；'
+          f'无角色的纯英文键只有 {len(blind)} 条，仅供报告参考）'
+          f' | dnd5e 核心包 TM {len(core)} 条')
     print(f'\n{PACK} 的 .name：')
     print(f'  已有中文        {stat["already"]:>5}')
     print(f'  ① 库内既有译名   {stat["from_library"]:>5}')
     print(f'  ② glossary_ec    {stat["from_glossary"]:>5}   （其中与 dnd5e 模块不同的 {len(conflicts)} 条已记进报告）')
     print(f'  ③ dnd5e 核心包   {stat["from_dnd5e"]:>5}')
     print(f'  ④ 仍需译者       {stat["needs_translator"]:>5}')
+    print(f'  （结构键落空、仅无角色键有候选，已拦下 {stat["roleblind_withheld"]:>5} 条'
+          f' ← 见报告 roleblind_withheld）')
     print(f'\nbatch  -> {fp}')
     print(f'report -> {a.report}')
 

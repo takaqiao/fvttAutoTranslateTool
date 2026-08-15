@@ -1,11 +1,12 @@
 {
   "_meta": {
-    "count": 6315,
+    "count": 6490,
     "note": "按 (英文, 字段角色) 给出的译名。角色 = 叶子路径最后一段非数字键名（与 qa/propagate_fix.py::role_of 同语义）。fill_twin_names.py / apply_tm 这类要按角色取形态的工具查这里；glossary_ec.json 只给「主形态」（有 name/label 桶就用它）。",
     "primaryRoleCounts": {
       "name": 5434,
       "label": 265,
       "folders": 183,
+      "notes": 175,
       "categories": 107,
       "pronunciation": 105,
       "adjective": 98,
@@ -317,6 +318,9 @@
     "Aberrations": {
       "folders": "异怪 Aberrations"
     },
+    "Abilas": {
+      "notes": "阿比拉斯 Abilas"
+    },
     "Ability Scores": {
       "name": "属性值 Ability Scores"
     },
@@ -366,6 +370,9 @@
     },
     "Abyssal Bargain": {
       "label": "深渊交易"
+    },
+    "Abyssal Desolation": {
+      "notes": "深渊荒芜 Abyssal Desolation"
     },
     "Abyssal Echo": {
       "name": "深渊回响 Abyssal Echo",
@@ -483,7 +490,8 @@
       "name": "侍僧 Acolyte"
     },
     "Acolyte Quarters": {
-      "name": "侍僧宿舍 Acolyte Quarters"
+      "name": "侍僧宿舍 Acolyte Quarters",
+      "notes": "侍僧宿舍 Acolyte Quarters"
     },
     "Acrid Earth": {
       "name": "蚀酸之土 Acrid Earth"
@@ -722,6 +730,9 @@
     "Alarm": {
       "name": "警报 Alarm"
     },
+    "Alavai": {
+      "notes": "阿拉瓦伊 Alavai"
+    },
     "Albine Amar": {
       "name": "阿尔拜因·阿马尔 Albine Amar"
     },
@@ -771,7 +782,8 @@
       "name": "炼金术士工具包 Alchemist's Toolkit"
     },
     "Alchemy": {
-      "name": "炼金术 Alchemy"
+      "name": "炼金术 Alchemy",
+      "notes": "炼金术 Alchemy"
     },
     "Alchemy Journeyman": {
       "name": "炼金术熟练工 Alchemy Journeyman"
@@ -1063,16 +1075,19 @@
       "name": "安卡里斯特的奥术长矛"
     },
     "Anrak Mausoleum": {
-      "name": "安拉克陵墓 Anrak Mausoleum"
+      "name": "安拉克陵墓 Anrak Mausoleum",
+      "notes": "安拉克陵墓 Anrak Mausoleum"
     },
     "Answers From On High": {
       "name": "来自高天的答案 Answers From On High"
     },
     "Antechamber": {
-      "name": "前厅 Antechamber"
+      "name": "前厅 Antechamber",
+      "notes": "前厅 Antechamber"
     },
     "Anterior Chamber": {
-      "name": "前房 Anterior Chamber"
+      "name": "前房 Anterior Chamber",
+      "notes": "前房 Anterior Chamber"
     },
     "Anticipate Harm": {
       "name": "预判伤害 Anticipate Harm"
@@ -1107,7 +1122,8 @@
       "name": "安尼德拉斯训练 Anydrath Training"
     },
     "Aparon Bay": {
-      "name": "阿帕隆湾 Aparon Bay"
+      "name": "阿帕隆湾 Aparon Bay",
+      "notes": "阿帕隆湾 Aparon Bay"
     },
     "Apex": {
       "categories": "顶点"
@@ -1234,7 +1250,8 @@
       "name": "奥术防护 Arcane Ward"
     },
     "Arcane Workshop": {
-      "name": "奥术工坊 Arcane Workshop"
+      "name": "奥术工坊 Arcane Workshop",
+      "notes": "奥术工坊 Arcane Workshop"
     },
     "Archer": {
       "name": "弓箭手 Archer"
@@ -1340,6 +1357,9 @@
     "Areyter": {
       "name": "阿雷特尔 Areyter"
     },
+    "Aris Peninsula": {
+      "notes": "阿里斯半岛 Aris Peninsula"
+    },
     "Arm Blade": {
       "name": "臂刃 Arm Blade"
     },
@@ -1369,7 +1389,8 @@
       "name": "装甲壳体 Armored Shell"
     },
     "Armory": {
-      "name": "军械库 Armory"
+      "name": "军械库 Armory",
+      "notes": "军械库 Armory"
     },
     "Arrival at Helkas": {
       "name": "抵达赫尔卡斯 Arrival at Helkas"
@@ -1408,6 +1429,12 @@
     "Ascendancy": {
       "name": "优势地位 Ascendancy"
     },
+    "Ash": {
+      "notes": "灰烬 Ash"
+    },
+    "Ash Guard Peaks": {
+      "notes": "灰烬卫峰群 Ash Guard Peaks"
+    },
     "Ashen Cloak": {
       "name": "灰烬斗篷 Ashen Cloak"
     },
@@ -1421,7 +1448,8 @@
       "name": "阿什卡血统 Ashka Lineage"
     },
     "Ashvale Mausoleum": {
-      "name": "灰谷陵墓 Ashvale Mausoleum"
+      "name": "灰谷陵墓 Ashvale Mausoleum",
+      "notes": "灰谷陵墓 Ashvale Mausoleum"
     },
     "Asleep": {
       "name": "睡眠 Asleep"
@@ -1555,8 +1583,14 @@
     "Auris Bor": {
       "name": "奥里斯·博尔 Auris Bor"
     },
+    "Aurtej": {
+      "notes": "奥尔泰杰 Aurtej"
+    },
     "Automaton": {
       "name": "自动人偶 Automaton"
+    },
+    "Avai": {
+      "notes": "阿瓦伊 Avai"
     },
     "Aversion to Radiance": {
       "name": "对辉耀的厌恶 Aversion to Radiance"
@@ -1566,6 +1600,9 @@
     },
     "Avir": {
       "name": "阿维尔"
+    },
+    "Avok": {
+      "notes": "阿沃克 Avok"
     },
     "Avwynn Exposed": {
       "label": "阿芙温被揭露"
@@ -1585,6 +1622,9 @@
     },
     "Awaken": {
       "name": "觉醒 Awaken"
+    },
+    "Awakened Savanna": {
+      "notes": "觉醒草原 Awakened Savanna"
     },
     "Awareness": {
       "name": "察觉 Awareness"
@@ -1614,8 +1654,14 @@
     "Azurite": {
       "name": "蓝铜矿 Azurite"
     },
+    "BARBLINGS": {
+      "notes": "巴布灵 BARBLINGS"
+    },
     "BAS-till-a": {
       "pronunciation": "巴斯-蒂-拉（BAS-till-a）"
+    },
+    "BJORDAN": {
+      "notes": "比约丹 BJORDAN"
     },
     "Back Alley": {
       "name": "后巷 Back Alley"
@@ -1755,10 +1801,12 @@
       "name": "地下室东侧 Basement East"
     },
     "Basement Entrance": {
-      "name": "地下室入口 Basement Entrance"
+      "name": "地下室入口 Basement Entrance",
+      "notes": "地下室入口 Basement Entrance"
     },
     "Basement Storage": {
-      "name": "地下室储藏室 Basement Storage"
+      "name": "地下室储藏室 Basement Storage",
+      "notes": "地下室储藏室 Basement Storage"
     },
     "Basement West": {
       "name": "地下室西侧 Basement West"
@@ -1785,7 +1833,8 @@
       "name": "堡垒残骸 Bastion Wreckage"
     },
     "Bathhouse": {
-      "name": "澡堂 Bathhouse"
+      "name": "澡堂 Bathhouse",
+      "notes": "澡堂 Bathhouse"
     },
     "Baths": {
       "name": "浴室 Baths"
@@ -2151,6 +2200,9 @@
     "Bloodwoods": {
       "name": "血林 Bloodwoods"
     },
+    "Bloodworm": {
+      "notes": "血虫 Bloodworm"
+    },
     "Bloody Gorge": {
       "name": "血腥吞噬 Bloody Gorge"
     },
@@ -2195,7 +2247,8 @@
       "name": "蓝色宝石项圈 Blue Gemstone Choker"
     },
     "Blue Track": {
-      "name": "蓝色轨道 Blue Track"
+      "name": "蓝色轨道 Blue Track",
+      "notes": "蓝色轨道 Blue Track"
     },
     "Blue Tracks": {
       "name": "蓝色轨道"
@@ -2272,6 +2325,12 @@
     "Boots of Elvenkind": {
       "name": "精灵靴 Boots of Elvenkind"
     },
+    "Border Heathlands": {
+      "notes": "边境荒原 Border Heathlands"
+    },
+    "Border Walls": {
+      "notes": "边境墙 Border Walls"
+    },
     "Borne Away": {
       "name": "冲流而下"
     },
@@ -2297,7 +2356,8 @@
       "name": "悬赏文书 Bounty Writ"
     },
     "Boxing Ring": {
-      "name": "拳击擂台 Boxing Ring"
+      "name": "拳击擂台 Boxing Ring",
+      "notes": "拳击擂台 Boxing Ring"
     },
     "Bracer": {
       "name": "护腕 Bracer"
@@ -2311,6 +2371,9 @@
     "Brackus von Tet": {
       "name": "布拉库斯·冯·泰特 Brackus von Tet",
       "tokenName": "布拉库斯·冯·泰特"
+    },
+    "Braken": {
+      "notes": "布拉肯 Braken"
     },
     "Bramble Gully": {
       "name": "荆棘沟壑 Bramble Gully"
@@ -2328,10 +2391,14 @@
       "name": "直面元素 Braving the Elements"
     },
     "Brazier Nook": {
-      "name": "火盆角落 Brazier Nook"
+      "name": "火盆角落 Brazier Nook",
+      "notes": "火盆角落 Brazier Nook"
     },
     "Breached Waterway": {
       "name": "破口水道 Breached Waterway"
+    },
+    "Break": {
+      "notes": "断口 Break"
     },
     "Break Room": {
       "name": "休息室 Break Room"
@@ -2360,6 +2427,12 @@
     },
     "Briana Brewer": {
       "name": "布里安娜·布鲁尔 Briana Brewer"
+    },
+    "Briar Peaks": {
+      "notes": "荆棘峰 Briar Peaks"
+    },
+    "Briarfur": {
+      "notes": "荆棘皮毛 Briarfur"
     },
     "Bridge - East": {
       "name": "桥梁 - 东"
@@ -2394,6 +2467,9 @@
     },
     "Brigandine": {
       "name": "布面甲 Brigandine"
+    },
+    "Brightcore": {
+      "notes": "辉核 Brightcore"
     },
     "Brimtown": {
       "name": "边缘镇 Brimtown"
@@ -2515,6 +2591,9 @@
     "Bust of Avilla": {
       "name": "阿维拉半身像 Bust of Avilla"
     },
+    "CASCAAL GOLDS": {
+      "notes": "卡斯卡尔金原 CASCAAL GOLDS"
+    },
     "COR-ah": {
       "pronunciation": "科-拉（COR-ah）"
     },
@@ -2580,6 +2659,9 @@
     },
     "Canal Water": {
       "name": "运河水域"
+    },
+    "Canasia": {
+      "notes": "卡纳西亚 Canasia"
     },
     "Candle": {
       "name": "蜡烛 Candle"
@@ -2700,11 +2782,17 @@
     "Casing the Joint": {
       "name": "踩点 Casing the Joint"
     },
+    "Casla-Brava": {
+      "notes": "卡斯拉-布拉瓦 Casla-Brava"
+    },
     "Cast a Spell": {
       "name": "施放法术 Cast a Spell"
     },
     "Caster Tusk": {
       "name": "卡斯特·塔斯克 Caster Tusk"
+    },
+    "Catch": {
+      "notes": "渔获 Catch"
     },
     "Caught": {
       "name": "被抓住"
@@ -2738,6 +2826,9 @@
     },
     "Caveway": {
       "name": "洞道 Caveway"
+    },
+    "Caxco": {
+      "notes": "卡克斯科 Caxco"
     },
     "Celestial": {
       "folders": "天界生物 Celestial"
@@ -2870,16 +2961,20 @@
       "name": "阿加瑟罗斯之室 - 蓄水池 Chamber of Agaseros - Reservoir"
     },
     "Chamber of Bargains": {
-      "name": "交易之室 Chamber of Bargains"
+      "name": "交易之室 Chamber of Bargains",
+      "notes": "交易之室 Chamber of Bargains"
     },
     "Chamber of Communion": {
-      "name": "共祭之室 Chamber of Communion"
+      "name": "共祭之室 Chamber of Communion",
+      "notes": "共祭之室 Chamber of Communion"
     },
     "Chamber of Reflection": {
-      "name": "反思之室 Chamber of Reflection"
+      "name": "反思之室 Chamber of Reflection",
+      "notes": "反思之室 Chamber of Reflection"
     },
     "Chamber of Remembrance": {
-      "name": "追忆之室 Chamber of Remembrance"
+      "name": "追忆之室 Chamber of Remembrance",
+      "notes": "追忆之室 Chamber of Remembrance"
     },
     "Chamberlain": {
       "name": "总管 Chamberlain",
@@ -2898,13 +2993,14 @@
       "name": "切换层级"
     },
     "Change Token Elevation": {
-      "name": "改变令牌高度"
+      "name": "改变指示物高度"
     },
     "Change of Direction": {
       "name": "方向改变 Change of Direction"
     },
     "Chantry": {
-      "name": "礼拜堂 Chantry"
+      "name": "礼拜堂 Chantry",
+      "notes": "礼拜堂 Chantry"
     },
     "Chaotic": {
       "name": "混乱 Chaotic"
@@ -3046,6 +3142,9 @@
     "Chimera": {
       "name": "奇美拉 Chimera"
     },
+    "Chimeras": {
+      "notes": "奇美拉 Chimeras"
+    },
     "Chimerists Collar": {
       "name": "嵌合师项圈 Chimerists Collar"
     },
@@ -3099,7 +3198,8 @@
       "name": "辛达里克入门者 Cindaric Initiate"
     },
     "Cindaric Lodging": {
-      "name": "辛达里克旅舍 Cindaric Lodging"
+      "name": "辛达里克旅舍 Cindaric Lodging",
+      "notes": "辛达里克旅舍 Cindaric Lodging"
     },
     "Cindaric Mint Tea": {
       "name": "辛达里克薄荷茶 Cindaric Mint Tea"
@@ -3111,6 +3211,9 @@
     "Cindaric Sages": {
       "folders": "辛达里克贤者 Cindaric Sages",
       "name": "辛达里克贤者 Cindaric Sages"
+    },
+    "Cindaric Threshold": {
+      "notes": "辛达里克阈限 Cindaric Threshold"
     },
     "Cindaric Writ": {
       "name": "辛达里克令状 Cindaric Writ"
@@ -3306,7 +3409,8 @@
       "name": "寒冷抗性 Cold Resistance"
     },
     "Cold Storage": {
-      "name": "冷藏库 Cold Storage"
+      "name": "冷藏库 Cold Storage",
+      "notes": "冷藏库 Cold Storage"
     },
     "Collapsed Archives": {
       "name": "坍塌档案馆 Collapsed Archives"
@@ -3706,14 +3810,23 @@
     "Cora Lunar Reflection": {
       "name": "科拉月华映照 Cora Lunar Reflection"
     },
+    "Coral": {
+      "notes": "珊瑚 Coral"
+    },
     "Coral Whistle": {
       "name": "珊瑚哨"
+    },
+    "Coran Spike": {
+      "notes": "科兰尖刺 Coran Spike"
     },
     "Core Classes": {
       "categories": "核心职业"
     },
     "Corebright Forest": {
       "name": "辉核森林 Corebright Forest"
+    },
+    "Corla": {
+      "notes": "科尔拉 Corla"
     },
     "Corpin Arrival": {
       "name": "科尔平抵达 Corpin Arrival"
@@ -3759,7 +3872,8 @@
       "name": "堕化 Corrupted"
     },
     "Corrupted Altar": {
-      "name": "腐化祭坛 Corrupted Altar"
+      "name": "腐化祭坛 Corrupted Altar",
+      "notes": "腐化祭坛 Corrupted Altar"
     },
     "Corrupted Cadrithor": {
       "name": "腐化的卡德里索尔 Corrupted Cadrithor",
@@ -3861,7 +3975,8 @@
       "name": "信使包 Courier Bag"
     },
     "Courtyard": {
-      "name": "庭院 Courtyard"
+      "name": "庭院 Courtyard",
+      "notes": "庭院 Courtyard"
     },
     "Covering Fire": {
       "name": "掩护射击 Covering Fire"
@@ -3986,8 +4101,14 @@
     "Crowds in Palisade Cross": {
       "name": "栅堡十字的人群 Crowds in Palisade Cross"
     },
+    "Crown": {
+      "notes": "王冠 Crown"
+    },
     "Crown Apothecary": {
       "name": "王室药剂师 Crown Apothecary"
+    },
+    "Crowning Peaks": {
+      "notes": "冠冕群峰 Crowning Peaks"
     },
     "Crucible Playtest": {
       "folders": "Crucible 试玩测试"
@@ -4003,6 +4124,9 @@
     },
     "Crumbling Corner": {
       "name": "坍塌街角 Crumbling Corner"
+    },
+    "Crumbling Mausoleum": {
+      "notes": "崩塌的陵墓 Crumbling Mausoleum"
     },
     "Crumbling Sanctuary": {
       "folders": "崩塌圣所 Crumbling Sanctuary",
@@ -4053,6 +4177,9 @@
     },
     "Crystal Staff": {
       "name": "水晶木杖 Crystal Staff"
+    },
+    "Crystal Tundra": {
+      "notes": "水晶苔原 Crystal Tundra"
     },
     "Crystal Wand": {
       "name": "水晶魔杖 Crystal Wand"
@@ -4186,13 +4313,16 @@
       "name": "气旋 Cyclone"
     },
     "Cyclonic": {
-      "name": "旋风的 Cyclonic"
+      "name": "气旋 Cyclonic"
     },
     "Cyclonic Displacement": {
       "name": "气旋位移"
     },
     "DRA-kon": {
       "pronunciation": "德拉-孔（DRA-kon）"
+    },
+    "DUSTRA": {
+      "notes": "尘灵 DUSTRA"
     },
     "Daemos": {
       "name": "戴莫斯 Daemos"
@@ -4270,7 +4400,8 @@
       "name": "黑暗：石底镇"
     },
     "Darkroom": {
-      "name": "暗室 Darkroom"
+      "name": "暗室 Darkroom",
+      "notes": "暗室 Darkroom"
     },
     "Darksteel Ring Mail": {
       "name": "暗钢环铠 Darksteel Ring Mail"
@@ -4899,7 +5030,8 @@
       "categories": "楼下地点"
     },
     "Downstairs Vestibule": {
-      "name": "楼下前厅 Downstairs Vestibule"
+      "name": "楼下前厅 Downstairs Vestibule",
+      "notes": "楼下前厅 Downstairs Vestibule"
     },
     "Dracanis Peaks": {
       "name": "德拉卡尼斯山脉 Dracanis Peaks"
@@ -4908,7 +5040,8 @@
       "name": "龙牙巨剑 Draconfang"
     },
     "Dradley Grange": {
-      "name": "德拉德利庄园 Dradley Grange"
+      "name": "德拉德利庄园 Dradley Grange",
+      "notes": "德拉德利庄园 Dradley Grange"
     },
     "Drag Victim": {
       "name": "拖拽猎物 Drag Victim"
@@ -4976,6 +5109,9 @@
     },
     "Drawing Attention": {
       "name": "吸引注意力 Drawing Attention"
+    },
+    "Dread Hills": {
+      "notes": "恐惧丘陵 Dread Hills"
     },
     "Dread Lord": {
       "name": "恐惧领主 Dread Lord"
@@ -5075,6 +5211,9 @@
     "Dusktide Rising": {
       "name": "暮潮崛起 Dusktide Rising"
     },
+    "Dust": {
+      "notes": "尘土 Dust"
+    },
     "Dust Devil": {
       "name": "尘卷风 Dust Devil"
     },
@@ -5093,6 +5232,9 @@
     },
     "Dustforge": {
       "name": "尘锻炉 Dustforge"
+    },
+    "Dustlands": {
+      "notes": "尘土荒原 Dustlands"
     },
     "Dustweed": {
       "name": "尘草 Dustweed"
@@ -5117,13 +5259,16 @@
       "name": "垂死之光 Dying Light"
     },
     "Dynamic Token": {
-      "name": "动态令牌 Dynamic Token"
+      "name": "动态指示物 Dynamic Token"
     },
     "ED-eer": {
       "pronunciation": "艾-迪尔（ED-eer）"
     },
     "EM-ber": {
       "pronunciation": "恩-伯（EM-ber）"
+    },
+    "EMEIR": {
+      "notes": "埃梅尔 EMEIR"
     },
     "Eamon Mariflor": {
       "name": "伊蒙·玛里弗洛尔 Eamon Mariflor",
@@ -5238,7 +5383,8 @@
       "name": "东侧环绕阳台 East Wraparound Balcony"
     },
     "Eastern Corridor": {
-      "name": "东侧走廊 Eastern Corridor"
+      "name": "东侧走廊 Eastern Corridor",
+      "notes": "东侧走廊 Eastern Corridor"
     },
     "Eastern Quarry": {
       "name": "东部采石场 Eastern Quarry"
@@ -5247,7 +5393,8 @@
       "name": "东部储藏壁龛 Eastern Storage Alcove"
     },
     "Eastern Treasure Chamber": {
-      "name": "东侧藏宝室 Eastern Treasure Chamber"
+      "name": "东侧藏宝室 Eastern Treasure Chamber",
+      "notes": "东侧藏宝室 Eastern Treasure Chamber"
     },
     "Eb Hargrove’s Tale": {
       "label": "埃布·哈格罗夫的故事"
@@ -5424,14 +5571,21 @@
     "Elusive Form": {
       "name": "飘忽形态 Elusive Form"
     },
+    "Elvan": {
+      "notes": "埃尔凡 Elvan"
+    },
     "Elvish": {
       "name": "精灵 Elvish"
     },
     "Elwin Davos": {
       "name": "埃尔温·达沃斯 Elwin Davos"
     },
+    "Elwin's Seat": {
+      "notes": "埃尔温之座 Elwin's Seat"
+    },
     "Embalming Room": {
-      "name": "防腐室 Embalming Room"
+      "name": "防腐室 Embalming Room",
+      "notes": "防腐室 Embalming Room"
     },
     "Embassy Rise": {
       "name": "使馆高地 Embassy Rise"
@@ -5626,7 +5780,8 @@
       "name": "入口凹室 Entrance Alcove"
     },
     "Entrance Hall": {
-      "name": "入口大厅 Entrance Hall"
+      "name": "入口大厅 Entrance Hall",
+      "notes": "入口大厅 Entrance Hall"
     },
     "Entrance Level": {
       "categories": "入口层"
@@ -5791,7 +5946,8 @@
       "name": "检查笔记 Examination Notes"
     },
     "Examination Room": {
-      "name": "检查室 Examination Room"
+      "name": "检查室 Examination Room",
+      "notes": "检查室 Examination Room"
     },
     "Examined Falar's Paint": {
       "label": "查验了法拉尔的颜料"
@@ -5854,7 +6010,8 @@
       "name": "力竭6（死亡） Exhaustion 6 (Dead)"
     },
     "Exile's Landing": {
-      "name": "流放者登陆点 Exile's Landing"
+      "name": "流放者登陆点 Exile's Landing",
+      "notes": "流放者登陆点 Exile's Landing"
     },
     "Exoskeleton": {
       "name": "外骨骼 Exoskeleton"
@@ -5895,6 +6052,9 @@
     "Exquisite Jeweled Ring": {
       "name": "精致宝石戒指 Exquisite Jeweled Ring"
     },
+    "Exten Peninsula": {
+      "notes": "埃克斯滕半岛 Exten Peninsula"
+    },
     "Extend": {
       "adjective": "延展"
     },
@@ -5909,7 +6069,8 @@
     },
     "Exterior": {
       "categories": "外部",
-      "name": "外部 Exterior"
+      "name": "外部 Exterior",
+      "notes": "外部 Exterior"
     },
     "Exterior Locations": {
       "categories": "外部地点"
@@ -5962,11 +6123,17 @@
     "Eyes in the Shadows": {
       "name": "暗影中的眼睛 Eyes in the Shadows"
     },
+    "FAR'RENT MOUNTAINS": {
+      "notes": "法尔伦特山脉 FAR'RENT MOUNTAINS"
+    },
     "FEE-ah-ra": {
       "pronunciation": "菲-亚-拉（FEE-ah-ra）"
     },
     "FEHJ": {
       "pronunciation": "费伊杰（FEHJ）"
+    },
+    "FENLINGS": {
+      "notes": "芬灵族 FENLINGS"
     },
     "Fabricate": {
       "name": "捏造 Fabricate"
@@ -6012,7 +6179,8 @@
       "name": "法拉尔的工作室笔记 Falar's Studio Notes"
     },
     "Fallbrook": {
-      "name": "福布鲁克 Fallbrook"
+      "name": "福布鲁克 Fallbrook",
+      "notes": "福布鲁克 Fallbrook"
     },
     "Fallen House": {
       "name": "堕落家族 Fallen House"
@@ -6287,6 +6455,9 @@
     "Fist": {
       "name": "拳击 Fist"
     },
+    "Fist's Landing": {
+      "notes": "拳之登陆点 Fist's Landing"
+    },
     "Fists": {
       "name": "铁拳 Fists"
     },
@@ -6430,7 +6601,8 @@
       "name": "被水淹没的坑 Flooded Pit"
     },
     "Flotsam": {
-      "name": "漂滓区 Flotsam"
+      "name": "漂滓区 Flotsam",
+      "notes": "漂滓区 Flotsam"
     },
     "Flotsam Canal Market": {
       "name": "漂滓区运河市场 Flotsam Canal Market"
@@ -6563,6 +6735,9 @@
     "Forgery Kit": {
       "name": "文书伪造工具 Forgery Kit"
     },
+    "Forgil": {
+      "notes": "福尔吉尔 Forgil"
+    },
     "Forgotten Cistern": {
       "name": "遗忘的蓄水池 Forgotten Cistern"
     },
@@ -6573,7 +6748,8 @@
       "name": "遗忘的屋顶 Forgotten Rooftop"
     },
     "Forgotten Wreckage": {
-      "name": "遗忘的残骸 Forgotten Wreckage"
+      "name": "遗忘的残骸 Forgotten Wreckage",
+      "notes": "遗忘的残骸 Forgotten Wreckage"
     },
     "Form": {
       "folders": "形态"
@@ -6676,7 +6852,8 @@
       "name": "前巷 Front Alley"
     },
     "Front Fountains": {
-      "name": "前方喷泉 Front Fountains"
+      "name": "前方喷泉 Front Fountains",
+      "notes": "前方喷泉 Front Fountains"
     },
     "Front Gate": {
       "name": "前门 Front Gate"
@@ -6764,7 +6941,8 @@
       "name": "正常切换器"
     },
     "Funeral Hall": {
-      "name": "葬礼大厅 Funeral Hall"
+      "name": "葬礼大厅 Funeral Hall",
+      "notes": "葬礼大厅 Funeral Hall"
     },
     "Funerary Cache Found": {
       "label": "发现葬仪藏匣"
@@ -6780,6 +6958,9 @@
     },
     "Fused Exoskeleton": {
       "name": "融合外骨骼 Fused Exoskeleton"
+    },
+    "GLITTERING MOUNTAINS": {
+      "notes": "闪耀山脉 GLITTERING MOUNTAINS"
     },
     "Gafto": {
       "tokenName": "加夫托"
@@ -6843,7 +7024,8 @@
       "name": "加甘萨斯兽皮 Garganthus Hide"
     },
     "Garganthus Tunnel": {
-      "name": "加甘萨斯隧道 Garganthus Tunnel"
+      "name": "加甘萨斯隧道 Garganthus Tunnel",
+      "notes": "加甘萨斯隧道 Garganthus Tunnel"
     },
     "Gaseous Form": {
       "name": "气化形体 Gaseous Form"
@@ -6853,7 +7035,8 @@
       "tokenName": "加斯特恩·法维约斯"
     },
     "Gate": {
-      "name": "异界之门 Gate"
+      "name": "异界之门 Gate",
+      "notes": "异界之门 Gate"
     },
     "Gated Community": {
       "name": "封闭式社区 Gated Community"
@@ -6883,28 +7066,35 @@
       "name": "召火宝石 Gem Of Conjured Flame"
     },
     "Gem of Akon": {
-      "name": "阿肯宝石 Gem of Akon"
+      "name": "阿肯宝石 Gem of Akon",
+      "notes": "阿肯宝石 Gem of Akon"
     },
     "Gem of Aura": {
-      "name": "奥拉宝石 Gem of Aura"
+      "name": "奥拉宝石 Gem of Aura",
+      "notes": "奥拉宝石 Gem of Aura"
     },
     "Gem of Cora": {
-      "name": "科拉宝石 Gem of Cora"
+      "name": "科拉宝石 Gem of Cora",
+      "notes": "科拉宝石 Gem of Cora"
     },
     "Gem of Illumination": {
       "name": "照明宝石 Gem of Illumination"
     },
     "Gem of Lantyr": {
-      "name": "兰提尔宝石 Gem of Lantyr"
+      "name": "兰提尔宝石 Gem of Lantyr",
+      "notes": "兰提尔宝石 Gem of Lantyr"
     },
     "Gem of Mayis": {
-      "name": "玛伊斯宝石 Gem of Mayis"
+      "name": "玛伊斯宝石 Gem of Mayis",
+      "notes": "玛伊斯宝石 Gem of Mayis"
     },
     "Gem of Orbis": {
-      "name": "奥比斯宝石 Gem of Orbis"
+      "name": "奥比斯宝石 Gem of Orbis",
+      "notes": "奥比斯宝石 Gem of Orbis"
     },
     "Gem of Ragen": {
-      "name": "拉根宝石 Gem of Ragen"
+      "name": "拉根宝石 Gem of Ragen",
+      "notes": "拉根宝石 Gem of Ragen"
     },
     "Gem of Shielding": {
       "name": "护盾宝石 Gem of Shielding"
@@ -7197,7 +7387,8 @@
       "categories": "类神存在"
     },
     "Godkiller Orinoth": {
-      "name": "弑神者奥里诺斯 Godkiller Orinoth"
+      "name": "弑神者奥里诺斯 Godkiller Orinoth",
+      "notes": "弑神者奥里诺斯 Godkiller Orinoth"
     },
     "Gohema": {
       "folders": "戈赫玛 Gohema",
@@ -7333,7 +7524,8 @@
       "name": "墓地任务 Grave Assignments"
     },
     "Grave Blade Shore": {
-      "name": "墓刃湖岸 Grave Blade Shore"
+      "name": "墓刃湖岸 Grave Blade Shore",
+      "notes": "墓刃湖岸 Grave Blade Shore"
     },
     "Grave Hound": {
       "name": "墓猎犬 Grave Hound"
@@ -7343,6 +7535,9 @@
     },
     "Grave Strike (Vampyre Form Only)": {
       "name": "墓击（仅限吸血鬼形态） Grave Strike (Vampyre Form Only)"
+    },
+    "Gravechill": {
+      "notes": "墓寒 Gravechill"
     },
     "Gravel Chute": {
       "name": "碎石滑道 Gravel Chute"
@@ -7382,6 +7577,9 @@
     },
     "Great Maul": {
       "name": "巨锤 Great Maul"
+    },
+    "Great Morenel": {
+      "notes": "大莫瑞内尔 Great Morenel"
     },
     "Greataxe": {
       "name": "巨斧 Greataxe"
@@ -7494,7 +7692,8 @@
       "name": "客用壁橱 Guest Closets"
     },
     "Guest Quarters": {
-      "name": "客房区 Guest Quarters"
+      "name": "客房区 Guest Quarters",
+      "notes": "客房区 Guest Quarters"
     },
     "Guidance": {
       "name": "指引 Guidance"
@@ -7550,19 +7749,23 @@
       "categories": "挑战大厅"
     },
     "Hall of Champions": {
-      "name": "冠军大厅 Hall of Champions"
+      "name": "冠军大厅 Hall of Champions",
+      "notes": "冠军大厅 Hall of Champions"
     },
     "Hall of Contest": {
       "categories": "竞赛大厅"
     },
     "Hall of Preparation": {
-      "name": "准备大厅 Hall of Preparation"
+      "name": "准备大厅 Hall of Preparation",
+      "notes": "准备大厅 Hall of Preparation"
     },
     "Hall of Records": {
-      "name": "档案大厅 Hall of Records"
+      "name": "档案大厅 Hall of Records",
+      "notes": "档案大厅 Hall of Records"
     },
     "Hall of Recovery": {
-      "name": "康复大厅 Hall of Recovery"
+      "name": "康复大厅 Hall of Recovery",
+      "notes": "康复大厅 Hall of Recovery"
     },
     "Hallow": {
       "name": "圣化 Hallow"
@@ -7662,6 +7865,9 @@
     "Haunted": {
       "name": "阴魂缠身"
     },
+    "Haxim": {
+      "notes": "哈克西姆 Haxim"
+    },
     "Haxwell Tailoring & Alterations": {
       "name": "哈克斯韦尔裁缝与修改衣物店 Haxwell Tailoring & Alterations"
     },
@@ -7741,6 +7947,9 @@
     "Heartblood Wisp": {
       "name": "心血幽光 Heartblood Wisp"
     },
+    "Hearth": {
+      "notes": "赫斯 Hearth"
+    },
     "Heartmoss": {
       "name": "心苔 Heartmoss"
     },
@@ -7805,7 +8014,11 @@
       "name": "树篱迷宫 Hedge Maze"
     },
     "Heel and Sole": {
-      "name": "脚跟与鞋底 Heel and Sole"
+      "name": "脚跟与鞋底 Heel and Sole",
+      "notes": "脚跟与鞋底 Heel and Sole"
+    },
+    "Hekkiro": {
+      "notes": "赫基罗 Hekkiro"
     },
     "Helice Korsos": {
       "name": "赫利刻·科索斯 Helice Korsos",
@@ -7936,7 +8149,8 @@
       "name": "隐匿 Hidden"
     },
     "Hidden Breach": {
-      "name": "隐秘裂口 Hidden Breach"
+      "name": "隐秘裂口 Hidden Breach",
+      "notes": "隐秘裂口 Hidden Breach"
     },
     "Hidden Campsite": {
       "name": "隐蔽营地 Hidden Campsite"
@@ -8000,6 +8214,9 @@
     },
     "Hobgoblin": {
       "name": "大地精 Hobgoblin"
+    },
+    "Hoist": {
+      "notes": "霍伊斯特 Hoist"
     },
     "Hold Breath": {
       "name": "屏住呼吸 Hold Breath"
@@ -8076,7 +8293,8 @@
       "name": "杰夫赫尔家族 House Cevher"
     },
     "House Cevher Mausoleum": {
-      "name": "杰夫赫尔家族陵墓 House Cevher Mausoleum"
+      "name": "杰夫赫尔家族陵墓 House Cevher Mausoleum",
+      "notes": "杰夫赫尔家族陵墓 House Cevher Mausoleum"
     },
     "House Cevher Signet Ring": {
       "name": "杰夫赫尔家族印戒 House Cevher Signet Ring"
@@ -8238,6 +8456,9 @@
     "Ignition": {
       "name": "点火 Ignition"
     },
+    "Iktae": {
+      "notes": "伊克泰 Iktae"
+    },
     "Ill Tidings": {
       "name": "凶兆 Ill Tidings"
     },
@@ -8393,6 +8614,9 @@
     "Increase Elevation": {
       "name": "提升高度"
     },
+    "Incursion of Ragen": {
+      "notes": "拉根的入侵 Incursion of Ragen"
+    },
     "Indifference": {
       "name": "冷漠 Indifference"
     },
@@ -8424,7 +8648,8 @@
       "name": "感染（感知） Infected (Wisdom)"
     },
     "Infirmary": {
-      "name": "医务室 Infirmary"
+      "name": "医务室 Infirmary",
+      "notes": "医务室 Infirmary"
     },
     "Inflection: Compose": {
       "name": "屈折：编构 Inflection: Compose"
@@ -8534,7 +8759,8 @@
       "name": "因卡罗水潭 Inkaro Pools"
     },
     "Inner Antechamber": {
-      "name": "内前厅 Inner Antechamber"
+      "name": "内前厅 Inner Antechamber",
+      "notes": "内前厅 Inner Antechamber"
     },
     "Inner Chamber": {
       "name": "内部密室 Inner Chamber"
@@ -8805,6 +9031,9 @@
     "Iron Wrench": {
       "name": "铁扳手 Iron Wrench"
     },
+    "Ironrow Hills": {
+      "notes": "铁脊丘陵 Ironrow Hills"
+    },
     "Irradiated": {
       "name": "辐照 Irradiated"
     },
@@ -8830,6 +9059,12 @@
     "Ix'erax": {
       "name": "伊克斯埃拉克斯 Ix'erax",
       "tokenName": "伊克斯埃拉克斯"
+    },
+    "Ixik": {
+      "notes": "伊西克 Ixik"
+    },
+    "JAEDITH": {
+      "notes": "贾迪思 JAEDITH"
     },
     "Jade Mountains": {
       "name": "翠玉山脉 Jade Mountains"
@@ -8906,7 +9141,8 @@
       "name": "杰克罗卡的账本 Jekeroka's Ledger"
     },
     "Jessa's Private Quarters": {
-      "name": "杰莎的私人寝室 Jessa's Private Quarters"
+      "name": "杰莎的私人寝室 Jessa's Private Quarters",
+      "notes": "杰莎的私人寝室 Jessa's Private Quarters"
     },
     "Jewelcraft": {
       "name": "珠宝制作 Jewelcraft"
@@ -9047,6 +9283,9 @@
     "KAH-too": {
       "pronunciation": "卡-图（KAH-too）"
     },
+    "KAUSTIC HINTERLANDS": {
+      "notes": "考斯提克腹地 KAUSTIC HINTERLANDS"
+    },
     "KETH": {
       "pronunciation": "凯思（KETH）"
     },
@@ -9061,7 +9300,8 @@
       "tokenName": "卡达纳蜥蜴"
     },
     "Kadra Zann": {
-      "name": "卡德拉赞恩 Kadra Zann"
+      "name": "卡德拉赞恩 Kadra Zann",
+      "notes": "卡德拉赞恩 Kadra Zann"
     },
     "Kadísos": {
       "name": "卡迪索斯 Kadísos"
@@ -9083,6 +9323,9 @@
       "name": "神乐 Kagura",
       "tokenName": "神乐"
     },
+    "Kakiro": {
+      "notes": "卡基罗 Kakiro"
+    },
     "Kalasak Captured": {
       "label": "卡拉萨克被捕"
     },
@@ -9098,6 +9341,9 @@
     },
     "Kalasak's Observations": {
       "name": "卡拉萨克的观察 Kalasak's Observations"
+    },
+    "Kalaxo": {
+      "notes": "卡拉克索 Kalaxo"
     },
     "Kaleidoscope Caverns": {
       "categories": "万花筒洞窟",
@@ -9159,6 +9405,9 @@
     "Karaxsus": {
       "name": "卡拉克苏斯 Karaxsus"
     },
+    "Karon Mounts": {
+      "notes": "卡隆山脉 Karon Mounts"
+    },
     "Kasarain": {
       "name": "卡萨莱因 Kasarain"
     },
@@ -9181,6 +9430,12 @@
     "Katu": {
       "name": "卡图 Katu",
       "tokenName": "卡图"
+    },
+    "Kawn": {
+      "notes": "考恩 Kawn"
+    },
+    "Kayhurn": {
+      "notes": "凯胡恩 Kayhurn"
     },
     "Kazra": {
       "tokenName": "卡兹拉"
@@ -9216,6 +9471,9 @@
     "Kelmezian": {
       "name": "凯尔梅兹安 Kelmezian"
     },
+    "Kemas Badlands": {
+      "notes": "凯马斯荒地 Kemas Badlands"
+    },
     "Ken Crystal": {
       "name": "肯水晶 Ken Crystal"
     },
@@ -9244,7 +9502,7 @@
       "name": "凯西安 Kessian"
     },
     "Kessian Sand Knife": {
-      "name": "凯西亚沙刀 Kessian Sand Knife"
+      "name": "凯西安沙刀 Kessian Sand Knife"
     },
     "Keth": {
       "name": "凯思 Keth"
@@ -9300,6 +9558,12 @@
     "Kirargy Knights": {
       "name": "基拉吉骑士 Kirargy Knights"
     },
+    "Kirike Wildlands": {
+      "notes": "基里克荒野 Kirike Wildlands"
+    },
+    "Kisen": {
+      "notes": "纪森 Kisen"
+    },
     "Kiska": {
       "name": "基斯卡 Kiska"
     },
@@ -9324,6 +9588,12 @@
     "Knowledge Areas": {
       "name": "知识领域 Knowledge Areas"
     },
+    "Koronda Barrens": {
+      "notes": "科隆达荒原 Koronda Barrens"
+    },
+    "Kortos Isle": {
+      "notes": "科托斯岛 Kortos Isle"
+    },
     "Koto Springs": {
       "name": "科托温泉区 Koto Springs"
     },
@@ -9342,8 +9612,17 @@
     "Kraken": {
       "name": "海怪 Kraken"
     },
+    "Kraken Port": {
+      "notes": "海妖港 Kraken Port"
+    },
+    "Krasarioc": {
+      "notes": "克拉萨里奥克 Krasarioc"
+    },
     "Krator's Hall": {
       "name": "克拉托尔大厅 Krator's Hall"
+    },
+    "Krenac": {
+      "notes": "克雷纳克 Krenac"
     },
     "Kryz": {
       "name": "克里兹 Kryz"
@@ -9357,6 +9636,12 @@
     },
     "Ku-ar-ta": {
       "pronunciation": "库-阿-塔（Ku-ar-ta）"
+    },
+    "Kula'me": {
+      "notes": "库拉梅 Kula'me"
+    },
+    "Kulrun": {
+      "notes": "库尔伦 Kulrun"
     },
     "Kyasifer": {
       "name": "基亚西弗 Kyasifer"
@@ -9423,6 +9708,9 @@
     "LOR-gee": {
       "pronunciation": "洛尔-吉（LOR-gee）"
     },
+    "LUNARAI": {
+      "notes": "卢纳莱 LUNARAI"
+    },
     "Lab Area": {
       "categories": "实验室区"
     },
@@ -9446,16 +9734,22 @@
       "tokenName": "莱欧拉"
     },
     "Lake Argath": {
-      "name": "阿加斯湖 Lake Argath"
+      "name": "阿加斯湖 Lake Argath",
+      "notes": "阿加斯湖 Lake Argath"
     },
     "Lake Jinro": {
-      "name": "金罗湖 Lake Jinro"
+      "name": "金罗湖 Lake Jinro",
+      "notes": "金罗湖 Lake Jinro"
     },
     "Lake Jinro Lunar Shrine": {
       "name": "金罗湖月神殿 Lake Jinro Lunar Shrine"
     },
+    "Lake Krena": {
+      "notes": "克雷纳湖 Lake Krena"
+    },
     "Lake Mithra": {
-      "name": "米斯拉湖 Lake Mithra"
+      "name": "米斯拉湖 Lake Mithra",
+      "notes": "米斯拉湖 Lake Mithra"
     },
     "Lake Orial": {
       "name": "奥里亚尔湖 Lake Orial"
@@ -9467,7 +9761,8 @@
       "name": "湖水"
     },
     "Lake Yrthain": {
-      "name": "伊尔赛恩湖 Lake Yrthain"
+      "name": "伊尔赛恩湖 Lake Yrthain",
+      "notes": "伊尔赛恩湖 Lake Yrthain"
     },
     "Lake of Whispers": {
       "name": "低语之湖 Lake of Whispers"
@@ -9482,7 +9777,11 @@
       "name": "灯 Lamp"
     },
     "Lamplighter's Rest": {
-      "name": "点灯人的安息所 Lamplighter's Rest"
+      "name": "点灯人的安息所 Lamplighter's Rest",
+      "notes": "点灯人的安息所 Lamplighter's Rest"
+    },
+    "Land of the Lost": {
+      "notes": "失落之地 Land of the Lost"
     },
     "Lanespear": {
       "name": "兰矛 Lanespear"
@@ -9510,7 +9809,7 @@
       "name": "兰提尔 Lantyr"
     },
     "Lantyr's Blade": {
-      "name": "兰蒂尔的刀刃 Lantyr's Blade"
+      "name": "兰提尔的刀刃 Lantyr's Blade"
     },
     "Lantyr's Flame": {
       "name": "兰提尔之焰 Lantyr's Flame"
@@ -9533,6 +9832,15 @@
     },
     "Lash": {
       "name": "鞭击 Lash"
+    },
+    "Last Grove": {
+      "notes": "最后林地 Last Grove"
+    },
+    "Last Port": {
+      "notes": "最后的港口 Last Port"
+    },
+    "Last Remiss": {
+      "notes": "最后的失职 Last Remiss"
     },
     "Last Stand": {
       "name": "背水一战 Last Stand"
@@ -9749,7 +10057,8 @@
       "name": "藏书馆 Librarium"
     },
     "Library": {
-      "name": "图书馆 Library"
+      "name": "图书馆 Library",
+      "notes": "图书馆 Library"
     },
     "Library Accolade": {
       "label": "图书馆嘉许"
@@ -9928,7 +10237,8 @@
       "name": "莉莉菲尔德餐券 Lilifeld Meal Ticket"
     },
     "Lilifeld Stations": {
-      "name": "莉莉菲尔德驿站 Lilifeld Stations"
+      "name": "莉莉菲尔德驿站 Lilifeld Stations",
+      "notes": "莉莉菲尔德驿站 Lilifeld Stations"
     },
     "Lilifeld Vineyard": {
       "name": "莉莉菲尔德葡萄园 Lilifeld Vineyard"
@@ -10051,7 +10361,8 @@
       "folders": "战利品 Loot"
     },
     "Loot-Lined Hollow": {
-      "name": "藏宝树洞 Loot-Lined Hollow"
+      "name": "藏宝树洞 Loot-Lined Hollow",
+      "notes": "藏宝树洞 Loot-Lined Hollow"
     },
     "Lor-ex": {
       "pronunciation": "洛-雷克斯（Lor-ex）"
@@ -10132,6 +10443,9 @@
     "Lower Water": {
       "name": "下层水域"
     },
+    "Lowland Bastions": {
+      "notes": "低地堡垒 Lowland Bastions"
+    },
     "Lowlands": {
       "name": "低地 Lowlands"
     },
@@ -10144,6 +10458,12 @@
     "Lucent": {
       "name": "辉耀 Lucent",
       "tokenName": "辉耀"
+    },
+    "Luen": {
+      "notes": "卢恩 Luen"
+    },
+    "Lumarin Homelands": {
+      "notes": "卢马林家园 Lumarin Homelands"
     },
     "Lumarin Steel": {
       "name": "卢马林钢 Lumarin Steel"
@@ -10420,13 +10740,15 @@
       "name": "主层 Main Floor"
     },
     "Main Gallery": {
-      "name": "主展厅 Main Gallery"
+      "name": "主展厅 Main Gallery",
+      "notes": "主展厅 Main Gallery"
     },
     "Main Level": {
       "categories": "主层"
     },
     "Main Office": {
-      "name": "总办公室 Main Office"
+      "name": "总办公室 Main Office",
+      "notes": "总办公室 Main Office"
     },
     "Main Plaza": {
       "name": "中央广场 Main Plaza"
@@ -10508,6 +10830,9 @@
     },
     "Mapping the Myth": {
       "name": "绘制神话地图 Mapping the Myth"
+    },
+    "Marben Hills": {
+      "notes": "马本丘陵 Marben Hills"
     },
     "Marine Crossbow": {
       "name": "海军十字弓 Marine Crossbow"
@@ -10652,7 +10977,8 @@
       "name": "医疗室 Medical"
     },
     "Medical Archives": {
-      "name": "医疗档案室 Medical Archives"
+      "name": "医疗档案室 Medical Archives",
+      "notes": "医疗档案室 Medical Archives"
     },
     "Medical Cells": {
       "name": "医疗牢房 Medical Cells"
@@ -10690,6 +11016,9 @@
     "Medium": {
       "folders": "中型"
     },
+    "Melcator's Refuge": {
+      "notes": "梅尔卡托的避难所 Melcator's Refuge"
+    },
     "Meld into Stone": {
       "name": "融入石料 Meld into Stone"
     },
@@ -10714,6 +11043,9 @@
     "Mending": {
       "adjective": "修补",
       "name": "修补 Mending"
+    },
+    "Menin Heights": {
+      "notes": "梅宁高地 Menin Heights"
     },
     "Menis Valegar": {
       "name": "梅尼斯·瓦勒加尔 Menis Valegar"
@@ -10900,7 +11232,11 @@
       "name": "失踪的斥候 Missing Scouts"
     },
     "Mist-Veiled Approach": {
-      "name": "迷雾遮蔽的小径 Mist-Veiled Approach"
+      "name": "迷雾遮蔽的小径 Mist-Veiled Approach",
+      "notes": "迷雾遮蔽的小径 Mist-Veiled Approach"
+    },
+    "Mistbound Narrows": {
+      "notes": "雾锁海峡 Mistbound Narrows"
     },
     "Misted": {
       "name": "薄雾 Misted"
@@ -10959,6 +11295,9 @@
     },
     "Moiran Warders": {
       "name": "莫伊兰守卫者 Moiran Warders"
+    },
+    "Moiran's Lament": {
+      "notes": "莫伊兰的哀歌 Moiran's Lament"
     },
     "Moldy Recipe Folder": {
       "name": "发霉的食谱文件夹 Moldy Recipe Folder"
@@ -11022,8 +11361,12 @@
       "categories": "士气 Morale",
       "folders": "士气"
     },
+    "Mordant": {
+      "notes": "莫丹特 Mordant"
+    },
     "Morgue": {
-      "name": "停尸房 Morgue"
+      "name": "停尸房 Morgue",
+      "notes": "停尸房 Morgue"
     },
     "Moriah Foxhaven": {
       "name": "莫赖亚·福克斯黑文 Moriah Foxhaven",
@@ -11047,6 +11390,18 @@
     "Mould Earth": {
       "name": "塑土术 Mould Earth"
     },
+    "Mount Fate": {
+      "notes": "命运山 Mount Fate"
+    },
+    "Mount K'Hente": {
+      "notes": "肯特山 Mount K'Hente"
+    },
+    "Mountains of the Sun": {
+      "notes": "太阳群山 Mountains of the Sun"
+    },
+    "Mourn": {
+      "notes": "哀悼 Mourn"
+    },
     "Mournax": {
       "name": "莫纳克斯 Mournax"
     },
@@ -11063,6 +11418,9 @@
       "categories": "移动 Movement",
       "folders": "移动",
       "name": "移动 Movement"
+    },
+    "Mt Claw": {
+      "notes": "爪山 Mt Claw"
     },
     "Mud Elemental": {
       "name": "泥浆元素 Mud Elemental"
@@ -11215,6 +11573,9 @@
     "NW Stairwell Up": {
       "name": "西北楼梯井上行"
     },
+    "Na'me": {
+      "notes": "奈姆 Na'me"
+    },
     "Nadin": {
       "name": "纳丁 Nadin",
       "tokenName": "纳丁"
@@ -11237,6 +11598,9 @@
     },
     "Narrow Ledges": {
       "name": "狭窄的岩架"
+    },
+    "Nasjar": {
+      "notes": "纳斯贾尔 Nasjar"
     },
     "Natural Alteration": {
       "origin": "自然变异"
@@ -11413,6 +11777,12 @@
     },
     "Northern Canals": {
       "name": "北部运河 Northern Canals"
+    },
+    "Northern Corebright Forest": {
+      "notes": "北部辉核森林 Northern Corebright Forest"
+    },
+    "Northern Shana Mountains": {
+      "notes": "沙纳山脉北部 Northern Shana Mountains"
     },
     "Northern Sitting Room": {
       "name": "北侧起居室 Northern Sitting Room"
@@ -11658,7 +12028,8 @@
       "name": "虹彩蛋白石 Opalix"
     },
     "Operating Theater": {
-      "name": "手术室 Operating Theater"
+      "name": "手术室 Operating Theater",
+      "notes": "手术室 Operating Theater"
     },
     "Operator": {
       "name": "操作者 Operator"
@@ -11808,11 +12179,18 @@
     "Orvaath": {
       "name": "奥尔瓦斯 Orvaath"
     },
+    "Oshclaw": {
+      "notes": "奥什爪 Oshclaw"
+    },
+    "Oshel": {
+      "notes": "奥谢尔 Oshel"
+    },
     "Ossarchate": {
       "name": "骸骨领 Ossarchate"
     },
     "Ossuary": {
-      "name": "骨库 Ossuary"
+      "name": "骨库 Ossuary",
+      "notes": "骨库 Ossuary"
     },
     "Ossuary Loot": {
       "name": "藏骨所战利品 Ossuary Loot"
@@ -11941,7 +12319,8 @@
       "tokenName": "苍白低语者触须"
     },
     "Palisade Cross": {
-      "name": "栅堡十字 Palisade Cross"
+      "name": "栅堡十字 Palisade Cross",
+      "notes": "栅堡十字 Palisade Cross"
     },
     "Pallid Drake": {
       "name": "苍白龙兽 Pallid Drake",
@@ -12384,6 +12763,9 @@
     "Plummeting Boulders": {
       "name": "坠落的巨石"
     },
+    "Point": {
+      "notes": "岬 Point"
+    },
     "Poison Blades": {
       "name": "毒刃 Poison Blades"
     },
@@ -12611,7 +12993,8 @@
       "name": "卷握舌头 Prehensile Tongues"
     },
     "Preparation Chamber": {
-      "name": "准备室 Preparation Chamber"
+      "name": "准备室 Preparation Chamber",
+      "notes": "准备室 Preparation Chamber"
     },
     "Prepare Vial": {
       "name": "准备药瓶 Prepare Vial"
@@ -12635,7 +13018,8 @@
       "name": "魔法伎俩 Prestidigitation"
     },
     "Prestyn Mausoleum": {
-      "name": "普雷斯廷陵墓 Prestyn Mausoleum"
+      "name": "普雷斯廷陵墓 Prestyn Mausoleum",
+      "notes": "普雷斯廷陵墓 Prestyn Mausoleum"
     },
     "Preternatural Instinct": {
       "name": "超自然直觉 Preternatural Instinct"
@@ -12701,6 +13085,9 @@
     "Prison Ready": {
       "label": "准备进入监狱"
     },
+    "Prison of Fiyara": {
+      "notes": "菲亚拉的监狱 Prison of Fiyara"
+    },
     "Pristine Otherhood Forgery": {
       "label": "完美无瑕的异姊会伪造文件"
     },
@@ -12714,7 +13101,8 @@
       "name": "私人密室 Private Sanctum"
     },
     "Private Surgery": {
-      "name": "私人手术室 Private Surgery"
+      "name": "私人手术室 Private Surgery",
+      "notes": "私人手术室 Private Surgery"
     },
     "Private Visitation": {
       "name": "私人探视 Private Visitation"
@@ -12951,6 +13339,12 @@
     },
     "RIV-un": {
       "pronunciation": "里-凡（RIV-un）"
+    },
+    "RUNA HIGHLANDS": {
+      "notes": "鲁纳高地 RUNA HIGHLANDS"
+    },
+    "Ra'vel": {
+      "notes": "拉维尔 Ra'vel"
     },
     "Rackela": {
       "name": "拉凯拉 Rackela"
@@ -13246,7 +13640,8 @@
       "subtitle": "永不满足的好奇之境"
     },
     "Rear Storage Vestibule": {
-      "name": "后部储物前室 Rear Storage Vestibule"
+      "name": "后部储物前室 Rear Storage Vestibule",
+      "notes": "后部储物前室 Rear Storage Vestibule"
     },
     "Reaver Ocean": {
       "name": "劫掠者海洋 Reaver Ocean"
@@ -13285,7 +13680,8 @@
       "label": "找回被窃的个人物品"
     },
     "Recreation": {
-      "name": "休憩室 Recreation"
+      "name": "休憩室 Recreation",
+      "notes": "休憩室 Recreation"
     },
     "Recruited Juro Wandren": {
       "label": "已招募朱罗·万德伦"
@@ -13309,8 +13705,12 @@
     "Red Cough": {
       "name": "赤咳"
     },
+    "Red Rhuin": {
+      "notes": "红鲁因 Red Rhuin"
+    },
     "Red Track": {
-      "name": "红色轨道 Red Track"
+      "name": "红色轨道 Red Track",
+      "notes": "红色轨道 Red Track"
     },
     "Red Tracks": {
       "name": "红色轨道"
@@ -13340,7 +13740,8 @@
       "name": "红行漫步园 Redwalk Ramble"
     },
     "Refectory": {
-      "name": "食堂 Refectory"
+      "name": "食堂 Refectory",
+      "notes": "食堂 Refectory"
     },
     "Refill Needle": {
       "name": "重填针管 Refill Needle"
@@ -13355,7 +13756,8 @@
       "name": "反照晶面 Reflective Facets"
     },
     "Reflector Array": {
-      "name": "反射阵列 Reflector Array"
+      "name": "反射阵列 Reflector Array",
+      "notes": "反射阵列 Reflector Array"
     },
     "Refocus": {
       "name": "重新聚焦 Refocus"
@@ -13374,6 +13776,9 @@
     },
     "Refused by Juro Wandren": {
       "label": "遭朱罗·万德伦拒绝"
+    },
+    "Regained Isle": {
+      "notes": "失而复得之岛 Regained Isle"
     },
     "Regarding Ebbok Zhùr": {
       "name": "关于艾博克·朱尔 Regarding Ebbok Zhùr"
@@ -13436,7 +13841,8 @@
       "name": "宗教指引 Religion Guidance"
     },
     "Reliquary": {
-      "name": "圣髑匣 Reliquary"
+      "name": "圣髑匣 Reliquary",
+      "notes": "圣髑匣 Reliquary"
     },
     "Remains Cleansed": {
       "label": "遗骸已净化"
@@ -13581,6 +13987,9 @@
     "Restaurant Unionization": {
       "name": "餐馆工会化"
     },
+    "Restless Bay": {
+      "notes": "躁动湾 Restless Bay"
+    },
     "Restless Dead": {
       "name": "躁动亡者 Restless Dead"
     },
@@ -13645,6 +14054,9 @@
     "Revivify": {
       "name": "回生术 Revivify"
     },
+    "Reysta": {
+      "notes": "雷斯塔 Reysta"
+    },
     "Rhivan": {
       "name": "里凡 Rhivan"
     },
@@ -13701,7 +14113,8 @@
       "name": "还击 Riposte"
     },
     "Ritual Chamber": {
-      "name": "仪式之室 Ritual Chamber"
+      "name": "仪式之室 Ritual Chamber",
+      "notes": "仪式之室 Ritual Chamber"
     },
     "Ritual Completed": {
       "label": "仪式完成"
@@ -13799,6 +14212,9 @@
     },
     "Ruined Home": {
       "name": "毁坏的家园 Ruined Home"
+    },
+    "Ruined Lunar Shrine": {
+      "notes": "毁坏的月神殿 Ruined Lunar Shrine"
     },
     "Ruined Mausoleum": {
       "name": "废弃陵墓 Ruined Mausoleum"
@@ -13926,19 +14342,29 @@
       "name": "无情动量 Ruthless Momentum"
     },
     "Ryleir": {
-      "name": "莱莱尔 Ryleir"
+      "name": "莱莱尔 Ryleir",
+      "notes": "莱莱尔 Ryleir"
     },
     "SAH-kets": {
       "pronunciation": "萨-克茨（SAH-kets）"
     },
+    "SALISKA": {
+      "notes": "萨利斯卡 SALISKA"
+    },
     "SAN-gwin-AIR-ies": {
       "pronunciation": "桑-圭恩-埃尔-伊斯（SAN-gwin-AIR-ies）"
+    },
+    "SAURVEK": {
+      "notes": "索维克 SAURVEK"
     },
     "SEV-air": {
       "pronunciation": "塞夫-埃尔（SEV-air）"
     },
     "SHA-ZOTH-ah": {
       "pronunciation": "沙-佐-萨（SHA-ZOTH-ah）"
+    },
+    "SHADEKIN": {
+      "notes": "影裔 SHADEKIN"
     },
     "SHENT": {
       "pronunciation": "申特（SHENT）"
@@ -13949,6 +14375,9 @@
     "SIGN-born": {
       "pronunciation": "赛恩-伯恩（SIGN-born）"
     },
+    "SKITARI": {
+      "notes": "斯基塔里 SKITARI"
+    },
     "SLIN-er-rak": {
       "pronunciation": "斯林-纳-拉克（SLIN-er-rak）"
     },
@@ -13958,8 +14387,14 @@
     "STEEL-song": {
       "pronunciation": "斯蒂尔-桑（STEEL-song）"
     },
+    "SUNARAE": {
+      "notes": "苏纳雷 SUNARAE"
+    },
     "Saboteur": {
       "name": "破坏者 Saboteur"
+    },
+    "Sacarath": {
+      "notes": "萨卡拉斯 Sacarath"
     },
     "Sacred": {
       "name": "神圣 Sacred"
@@ -14009,6 +14444,9 @@
     },
     "Sai": {
       "name": "钗 Sai"
+    },
+    "Sail": {
+      "notes": "帆 Sail"
     },
     "Sailed With Lyla": {
       "label": "与莱拉一同启航"
@@ -14198,6 +14636,9 @@
     "Scratch": {
       "name": "抓挠 Scratch"
     },
+    "Screaming Wasteland": {
+      "notes": "尖啸荒原 Screaming Wasteland"
+    },
     "Scrimshaw Dagger": {
       "name": "骨雕匕首 Scrimshaw Dagger"
     },
@@ -14238,7 +14679,8 @@
       "name": "封闭门道 Sealed Doorway"
     },
     "Sealed Entrance": {
-      "name": "封闭入口 Sealed Entrance"
+      "name": "封闭入口 Sealed Entrance",
+      "notes": "封闭入口 Sealed Entrance"
     },
     "Sealed Passage": {
       "name": "封闭通道 Sealed Passage"
@@ -14304,10 +14746,12 @@
       "name": "秘藏箱 Secret Chest"
     },
     "Secret Passage": {
-      "name": "秘密通道 Secret Passage"
+      "name": "秘密通道 Secret Passage",
+      "notes": "秘密通道 Secret Passage"
     },
     "Secret Vestibule": {
-      "name": "秘密前厅 Secret Vestibule"
+      "name": "秘密前厅 Secret Vestibule",
+      "notes": "秘密前厅 Secret Vestibule"
     },
     "Security Checkpoint": {
       "name": "安全检查站 Security Checkpoint"
@@ -14557,6 +15001,9 @@
     "Shattered Irrigation Terrace": {
       "name": "崩毁的灌溉梯田"
     },
+    "Shattered Keep": {
+      "notes": "破碎要塞 Shattered Keep"
+    },
     "Shattered One": {
       "name": "碎裂者 Shattered One"
     },
@@ -14565,6 +15012,9 @@
     },
     "Shattered Swipe": {
       "name": "碎裂挥击 Shattered Swipe"
+    },
+    "She'lu": {
+      "notes": "谢卢 She'lu"
     },
     "Sheltered Campsite": {
       "name": "有遮蔽的营地 Sheltered Campsite"
@@ -14654,6 +15104,9 @@
     },
     "Shifting Shard": {
       "name": "移形碎片 Shifting Shard"
+    },
+    "Shiftstone": {
+      "notes": "移位石 Shiftstone"
     },
     "Shillelagh": {
       "name": "橡棍术 Shillelagh"
@@ -14966,7 +15419,8 @@
       "name": "天坑深渊 Sinkhole Depths"
     },
     "Siodread": {
-      "name": "西奥德雷德 Siodread"
+      "name": "西奥德雷德 Siodread",
+      "notes": "西奥德雷德 Siodread"
     },
     "Sionia": {
       "name": "希俄尼娅 Sionia",
@@ -14980,6 +15434,9 @@
     },
     "Siphon Vitality": {
       "name": "虹吸活力 Siphon Vitality"
+    },
+    "Sirewood": {
+      "notes": "西尔伍德 Sirewood"
     },
     "Sitheera": {
       "name": "西希拉 Sitheera"
@@ -15266,6 +15723,9 @@
     "Sorcery Points": {
       "name": "术法点数 Sorcery Points"
     },
+    "Sorrow": {
+      "notes": "哀伤 Sorrow"
+    },
     "Soul Cycle": {
       "name": "灵魂循环 Soul Cycle"
     },
@@ -15303,6 +15763,12 @@
     },
     "Southern Clearing": {
       "name": "南部空地 Southern Clearing"
+    },
+    "Southern Corebright Forest": {
+      "notes": "南部辉核森林 Southern Corebright Forest"
+    },
+    "Southern Shana Mountains": {
+      "notes": "沙纳山脉南部 Southern Shana Mountains"
     },
     "Southern Sitting Room": {
       "name": "南侧起居室 Southern Sitting Room"
@@ -15620,6 +16086,9 @@
     "Spellwrought Pen": {
       "name": "法铸笔 Spellwrought Pen"
     },
+    "Sperun": {
+      "notes": "斯佩伦 Sperun"
+    },
     "Spider Brooch": {
       "name": "蜘蛛胸针"
     },
@@ -15646,6 +16115,9 @@
     },
     "Spiked Slam": {
       "name": "尖刺猛击 Spiked Slam"
+    },
+    "Spine of Ember": {
+      "notes": "余烬之脊 Spine of Ember"
     },
     "Spinebite": {
       "name": "脊咬者 Spinebite"
@@ -15698,6 +16170,9 @@
     "Splinter Canyons": {
       "categories": "碎裂峡谷",
       "name": "碎裂峡谷 Splinter Canyons"
+    },
+    "Splintis": {
+      "notes": "斯普林提斯 Splintis"
     },
     "Split": {
       "name": "分裂 Split"
@@ -15931,7 +16406,8 @@
       "name": "践踏 Stomp"
     },
     "Stone Altar": {
-      "name": "石祭坛 Stone Altar"
+      "name": "石祭坛 Stone Altar",
+      "notes": "石祭坛 Stone Altar"
     },
     "Stone Bowl": {
       "name": "石碗 Stone Bowl"
@@ -15994,7 +16470,8 @@
       "name": "储物区 Storage Area"
     },
     "Storage Closet": {
-      "name": "储物间 Storage Closet"
+      "name": "储物间 Storage Closet",
+      "notes": "储物间 Storage Closet"
     },
     "Storage Room": {
       "name": "储藏室 Storage Room"
@@ -16119,10 +16596,12 @@
       "name": "钻研反制 Studious Counter"
     },
     "Study": {
-      "name": "书房 Study"
+      "name": "书房 Study",
+      "notes": "书房 Study"
     },
     "Study Chamber": {
-      "name": "书房 Study Chamber"
+      "name": "书房 Study Chamber",
+      "notes": "书房 Study Chamber"
     },
     "Study Chamber Loot": {
       "name": "书房战利品 Study Chamber Loot"
@@ -16502,7 +16981,8 @@
       "name": "挥击 Swipe"
     },
     "Switchback Path": {
-      "name": "折返小径 Switchback Path"
+      "name": "折返小径 Switchback Path",
+      "notes": "折返小径 Switchback Path"
     },
     "Swoop": {
       "name": "猛扑 Swoop"
@@ -16528,6 +17008,9 @@
     "TAY-an": {
       "pronunciation": "塔-扬（TAY-an）"
     },
+    "TEMPAR": {
+      "notes": "坦帕尔 TEMPAR"
+    },
     "THEM-iss": {
       "pronunciation": "忒弥-斯（THEM-iss）"
     },
@@ -16536,6 +17019,9 @@
     },
     "THORN-ling": {
       "pronunciation": "索恩-灵（THORN-ling）"
+    },
+    "TOLVOR KOHATAI": {
+      "notes": "托尔沃尔·科哈泰 TOLVOR KOHATAI"
     },
     "Tactical Plan": {
       "name": "战术计划 Tactical Plan"
@@ -16679,25 +17165,25 @@
       "name": "传送 Teleport"
     },
     "Teleport Token": {
-      "name": "传送令牌"
+      "name": "传送指示物"
     },
     "Teleport Token L1": {
-      "name": "传送令牌（第1层）"
+      "name": "传送指示物（第1层）"
     },
     "Teleport Token L2": {
-      "name": "传送令牌（第2层）"
+      "name": "传送指示物（第2层）"
     },
     "Teleport Token L3": {
-      "name": "传送令牌（第3层）"
+      "name": "传送指示物（第3层）"
     },
     "Teleport Token L4": {
-      "name": "传送令牌（第4层）"
+      "name": "传送指示物（第4层）"
     },
     "Teleport Token L5": {
-      "name": "传送令牌（第5层）"
+      "name": "传送指示物（第5层）"
     },
     "Teleport Token L6": {
-      "name": "传送令牌（第6层）"
+      "name": "传送指示物（第6层）"
     },
     "Teleportation": {
       "name": "传送 Teleportation"
@@ -16722,7 +17208,8 @@
       "tokenName": "神殿入侵者"
     },
     "Temple Sanctum": {
-      "name": "神殿圣所 Temple Sanctum"
+      "name": "神殿圣所 Temple Sanctum",
+      "notes": "神殿圣所 Temple Sanctum"
     },
     "Temple Stone": {
       "name": "神殿石地"
@@ -16855,7 +17342,8 @@
       "name": "在采矿坑 The Active Mine Pit"
     },
     "The Ad-Hoc Kitchen": {
-      "name": "临时厨房 The Ad-Hoc Kitchen"
+      "name": "临时厨房 The Ad-Hoc Kitchen",
+      "notes": "临时厨房 The Ad-Hoc Kitchen"
     },
     "The Ailing Jon Vastil": {
       "name": "病中的乔恩·瓦斯提尔"
@@ -16892,6 +17380,9 @@
     },
     "The Barracks": {
       "name": "兵营 The Barracks"
+    },
+    "The Beast's Maw": {
+      "notes": "野兽之喉 The Beast's Maw"
     },
     "The Bewilderment": {
       "name": "迷惘 The Bewilderment"
@@ -16935,11 +17426,17 @@
     "The Bronze Rask Theater": {
       "name": "青铜拉斯克剧院 The Bronze Rask Theater"
     },
+    "The Bulwark": {
+      "notes": "壁垒 The Bulwark"
+    },
     "The Burnished Left Hand": {
       "label": "辉手的左手"
     },
     "The Burns": {
       "name": "伯恩斯 The Burns"
+    },
+    "The Carrow Ocean": {
+      "notes": "卡罗海洋 The Carrow Ocean"
     },
     "The Cauldron": {
       "name": "坩埚湖 The Cauldron"
@@ -16983,8 +17480,14 @@
     "The Cragside Tavern": {
       "name": "峭岩边酒馆 The Cragside Tavern"
     },
+    "The Crawler": {
+      "notes": "爬行者 The Crawler"
+    },
     "The Crawling Catacomb": {
       "name": "爬行的地下墓窟"
+    },
+    "The Crossing Sea": {
+      "notes": "横渡海 The Crossing Sea"
     },
     "The Crystal Quarryman": {
       "name": "水晶采石工 The Crystal Quarryman"
@@ -16995,6 +17498,9 @@
     },
     "The Cultures": {
       "name": "文化 The Cultures"
+    },
+    "The Cursed Continent": {
+      "notes": "被诅咒的大陆 The Cursed Continent"
     },
     "The Damaged Lantern": {
       "label": "受损的提灯"
@@ -17056,6 +17562,9 @@
     "The Fall's Gonna Kill You": {
       "name": "这次坠落会要了你的命 The Fall's Gonna Kill You"
     },
+    "The Far Southlands": {
+      "notes": "遥远的南方之地 The Far Southlands"
+    },
     "The Final Days of Daelin Lowd": {
       "name": "戴林·洛德的最后岁月 The Final Days of Daelin Lowd"
     },
@@ -17064,6 +17573,9 @@
     },
     "The First Dawn": {
       "name": "初曙 The First Dawn"
+    },
+    "The First Throne": {
+      "notes": "第一王座 The First Throne"
     },
     "The Flame Within": {
       "name": "内蕴之焰 The Flame Within"
@@ -17089,6 +17601,9 @@
     "The Glint of Gossamer": {
       "name": "纱光微烁 The Glint of Gossamer"
     },
+    "The Golden Bay": {
+      "notes": "黄金湾 The Golden Bay"
+    },
     "The Great Leopard": {
       "subtitle": "伟大的豹"
     },
@@ -17104,6 +17619,9 @@
     "The Hardened Heart": {
       "label": "铁石心肠"
     },
+    "The Harmonious Truth": {
+      "notes": "和谐真理 The Harmonious Truth"
+    },
     "The Hearthfire's Roar": {
       "subtitle": "炉火咆哮"
     },
@@ -17112,6 +17630,9 @@
     },
     "The History": {
       "name": "历史 The History"
+    },
+    "The Hoarfrost Edge": {
+      "notes": "霜冻之缘 The Hoarfrost Edge"
     },
     "The Hollow Moon": {
       "subtitle": "空洞之月"
@@ -17131,6 +17652,9 @@
     "The Insider": {
       "name": "知情者 The Insider"
     },
+    "The Jarn Peninsula": {
+      "notes": "雅恩半岛 The Jarn Peninsula"
+    },
     "The Jewel Merchant's Companion": {
       "label": "珠宝商的伙伴"
     },
@@ -17149,6 +17673,9 @@
     "The Last Satchel": {
       "name": "最后的挎包 The Last Satchel"
     },
+    "The Leviathan Preserve": {
+      "notes": "利维坦禁猎区 The Leviathan Preserve"
+    },
     "The Life Tyrant": {
       "subtitle": "生命暴君"
     },
@@ -17158,6 +17685,12 @@
     "The Lockers": {
       "name": "储物柜区 The Lockers"
     },
+    "The Lost Dale": {
+      "notes": "失落谷地 The Lost Dale"
+    },
+    "The Lost Realms": {
+      "notes": "失落诸域 The Lost Realms"
+    },
     "The Manuscript Awakens": {
       "name": "手稿觉醒了 The Manuscript Awakens"
     },
@@ -17166,6 +17699,9 @@
     },
     "The Mezzanine": {
       "categories": "夹层"
+    },
+    "The Middle Sea": {
+      "notes": "中央海 The Middle Sea"
     },
     "The Mill": {
       "name": "磨坊 The Mill"
@@ -17203,11 +17739,23 @@
     "The Pit Trap": {
       "name": "陷坑 The Pit Trap"
     },
+    "The Prowling Death": {
+      "notes": "潜行的死亡 The Prowling Death"
+    },
+    "The Radiant Continent": {
+      "notes": "辉耀大陆 The Radiant Continent"
+    },
+    "The Reaver Ocean": {
+      "notes": "劫掠者海洋 The Reaver Ocean"
+    },
     "The Rickety Man": {
       "name": "摇摇欲坠的人 The Rickety Man"
     },
     "The Ring of Valor": {
       "folders": "英勇之戒"
+    },
+    "The Roaring Edge": {
+      "notes": "咆哮之缘 The Roaring Edge"
     },
     "The Root Issue": {
       "name": "祸根 The Root Issue"
@@ -17221,6 +17769,9 @@
     "The Secret Autopsy": {
       "name": "秘密尸检 The Secret Autopsy"
     },
+    "The Shardstone Continent": {
+      "notes": "碎片石大陆 The Shardstone Continent"
+    },
     "The Shattered Moon": {
       "subtitle": "破碎之月"
     },
@@ -17232,6 +17783,9 @@
     },
     "The Silent Pack": {
       "name": "寂静狼群 The Silent Pack"
+    },
+    "The Silken Sea": {
+      "notes": "丝绸之海 The Silken Sea"
     },
     "The Silver Bowman": {
       "subtitle": "白银弓手"
@@ -17248,6 +17802,9 @@
     "The Sortilege": {
       "name": "咒术集 The Sortilege"
     },
+    "The Southern Ocean": {
+      "notes": "南大洋 The Southern Ocean"
+    },
     "The Spellbreaker": {
       "name": "破法者 The Spellbreaker"
     },
@@ -17260,8 +17817,12 @@
     "The Spirit Moon": {
       "subtitle": "灵魂之月"
     },
+    "The Spiritlands": {
+      "notes": "灵界 The Spiritlands"
+    },
     "The Starshield": {
-      "name": "星之盾 The Starshield"
+      "name": "星之盾 The Starshield",
+      "notes": "星之盾 The Starshield"
     },
     "The Storage Room": {
       "name": "储藏室 The Storage Room"
@@ -17274,6 +17835,12 @@
     },
     "The Sun": {
       "subtitle": "太阳"
+    },
+    "The Swirling Edge": {
+      "notes": "旋涡之缘 The Swirling Edge"
+    },
+    "The Sword Range": {
+      "notes": "剑锋山脉 The Sword Range"
     },
     "The Tanir": {
       "name": "塔尼尔 The Tanir"
@@ -17311,6 +17878,9 @@
     "The Two Faced Counselor": {
       "subtitle": "双面顾问"
     },
+    "The Untamed Edge": {
+      "notes": "蛮荒之缘 The Untamed Edge"
+    },
     "The Unveiling": {
       "name": "揭幕 The Unveiling"
     },
@@ -17343,6 +17913,9 @@
     },
     "The Weaver": {
       "subtitle": "织者"
+    },
+    "The Western Wilds": {
+      "notes": "西部荒野 The Western Wilds"
     },
     "The Whispering Wind": {
       "subtitle": "低语之风"
@@ -17429,6 +18002,9 @@
     },
     "Thread the Needle": {
       "name": "穿针引线 Thread the Needle"
+    },
+    "Three Eyes Island": {
+      "notes": "三眼岛 Three Eyes Island"
     },
     "Three Point Lift": {
       "name": "三点抬举 Three Point Lift"
@@ -17549,7 +18125,11 @@
       "name": "托兰的小小生灵 Tolan's Tiny Critters"
     },
     "Tomb of Spectra's Chosen": {
-      "name": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen"
+      "name": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen",
+      "notes": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen"
+    },
+    "Tome": {
+      "notes": "典籍 Tome"
     },
     "Tome of Abyssal Histories": {
       "name": "深渊史典 Tome of Abyssal Histories"
@@ -17619,6 +18199,9 @@
     "Toppling Pounce": {
       "name": "扑倒猛跃 Toppling Pounce"
     },
+    "Toraga": {
+      "notes": "托拉加 Toraga"
+    },
     "Torch": {
       "name": "火把 Torch"
     },
@@ -17626,7 +18209,8 @@
       "name": "火把 x8 Torch x8"
     },
     "Torment": {
-      "name": "折磨 Torment"
+      "name": "折磨 Torment",
+      "notes": "折磨 Torment"
     },
     "Tormented Threads": {
       "name": "折磨之线 Tormented Threads"
@@ -17657,7 +18241,8 @@
       "label": "全面胜利"
     },
     "Tower Antechamber": {
-      "name": "塔前室 Tower Antechamber"
+      "name": "塔前室 Tower Antechamber",
+      "notes": "塔前室 Tower Antechamber"
     },
     "Tower Descent": {
       "name": "塔之下降 Tower Descent"
@@ -17701,6 +18286,9 @@
     },
     "Tradeway Locations": {
       "categories": "贸易道各处"
+    },
+    "Trailing Hills": {
+      "notes": "丘陵尽头 Trailing Hills"
     },
     "Trained & Bonded": {
       "name": "受过训练且已建立羁绊 Trained & Bonded"
@@ -18046,7 +18634,7 @@
       "name": "水下伪装 Underwater Camouflage"
     },
     "Underwater Token Scale": {
-      "name": "水下令牌缩放"
+      "name": "水下指示物缩放"
     },
     "Underworks Guidestone": {
       "name": "地下设施引路石 Underworks Guidestone"
@@ -18222,8 +18810,17 @@
     "VAIR-a-door": {
       "pronunciation": "维-拉-多尔（VAIR-a-door）"
     },
+    "VARENA": {
+      "notes": "瓦雷娜 VARENA"
+    },
+    "VARTIC": {
+      "notes": "瓦提克 VARTIC"
+    },
     "VEIL-ed": {
       "pronunciation": "维尔-德（VEIL-ed）"
+    },
+    "VELLATAGÉ": {
+      "notes": "维拉塔热 VELLATAGÉ"
     },
     "VRIN-har": {
       "pronunciation": "弗林-哈尔（VRIN-har）"
@@ -18254,6 +18851,12 @@
     "Vanish": {
       "name": "消失 Vanish"
     },
+    "Vantol": {
+      "notes": "范托尔 Vantol"
+    },
+    "Varen Hills": {
+      "notes": "瓦伦丘陵 Varen Hills"
+    },
     "Varied": {
       "height": "不定",
       "lifespan": "不定"
@@ -18262,7 +18865,8 @@
       "name": "瓦琳娜的工作室（下层） Varinna's Studio (Lower)"
     },
     "Varinna's Studio (Upper)": {
-      "name": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)"
+      "name": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)",
+      "notes": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)"
     },
     "Varlo's": {
       "name": "瓦洛餐厅 Varlo's"
@@ -18282,6 +18886,12 @@
     },
     "Vasem": {
       "name": "瓦瑟姆 Vasem"
+    },
+    "Vathan": {
+      "notes": "瓦森 Vathan"
+    },
+    "Vathar Forests": {
+      "notes": "瓦萨尔森林 Vathar Forests"
     },
     "Vault": {
       "categories": "宝库"
@@ -18526,6 +19136,9 @@
     "Vistas for Gamemasters": {
       "name": "游戏主持人的远景 Vistas for Gamemasters"
     },
+    "Vita'ri": {
+      "notes": "维塔里 Vita'ri"
+    },
     "Vitt Wandren": {
       "name": "维特·万德伦 Vitt Wandren",
       "tokenName": "维特·万德伦"
@@ -18620,6 +19233,9 @@
     },
     "WEER-un": {
       "pronunciation": "威-伦（WEER-un）"
+    },
+    "WINDBARE": {
+      "notes": "温赤荒 WINDBARE"
     },
     "Waerd": {
       "name": "瓦尔德 Waerd"
@@ -18907,7 +19523,8 @@
       "name": "蛛网囚室 Webbed Cell"
     },
     "Webbed Mausoleum": {
-      "name": "蛛网陵墓 Webbed Mausoleum"
+      "name": "蛛网陵墓 Webbed Mausoleum",
+      "notes": "蛛网陵墓 Webbed Mausoleum"
     },
     "Wedgelands": {
       "categories": "楔地",
@@ -18993,7 +19610,8 @@
       "name": "西部运河 Western Canals"
     },
     "Western Corridor": {
-      "name": "西侧走廊 Western Corridor"
+      "name": "西侧走廊 Western Corridor",
+      "notes": "西侧走廊 Western Corridor"
     },
     "Western Quarry": {
       "name": "西部采石场 Western Quarry"
@@ -19005,7 +19623,8 @@
       "name": "西部储藏壁龛 Western Storage Alcove"
     },
     "Western Treasure Chamber": {
-      "name": "西侧藏宝室 Western Treasure Chamber"
+      "name": "西侧藏宝室 Western Treasure Chamber",
+      "notes": "西侧藏宝室 Western Treasure Chamber"
     },
     "Westgate": {
       "name": "西门区 Westgate"
@@ -19015,6 +19634,9 @@
     },
     "What is Crucible": {
       "name": "什么是 Crucible"
+    },
+    "Wheel": {
+      "notes": "轮子 Wheel"
     },
     "Where Evil Lurks": {
       "name": "邪恶潜伏之处 Where Evil Lurks"
@@ -19045,6 +19667,9 @@
     },
     "White Stone Rosary": {
       "name": "白石念珠 White Stone Rosary"
+    },
+    "Wick": {
+      "notes": "威克 Wick"
     },
     "Wicked Beak": {
       "name": "邪恶鸟喙 Wicked Beak"
@@ -19192,6 +19817,9 @@
     "World of Ember": {
       "name": "余烬世界 World of Ember"
     },
+    "World's End": {
+      "notes": "世界尽头 World's End"
+    },
     "Woven Construct": {
       "name": "编织构装体 Woven Construct",
       "tokenName": "编织构装体"
@@ -19265,6 +19893,9 @@
     "Yaphta's Warehouse Note": {
       "name": "雅弗塔的仓库便条 Yaphta's Warehouse Note"
     },
+    "Yarino": {
+      "notes": "亚里诺 Yarino"
+    },
     "Yarnac": {
       "name": "亚纳克 Yarnac",
       "tokenName": "亚纳克"
@@ -19305,6 +19936,9 @@
     },
     "ZEFF": {
       "pronunciation": "泽夫（ZEFF）"
+    },
+    "Zancol Expanse": {
+      "notes": "赞科尔广袤域 Zancol Expanse"
     },
     "Zarajah": {
       "name": "扎拉贾 Zarajah",

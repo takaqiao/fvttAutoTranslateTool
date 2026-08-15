@@ -1,0 +1,371 @@
+# 第十四轮工作包（机械聚类，203 条 OPEN）
+
+
+## hc-mjs —— 90 条 / 43 族
+
+- **[严重] 12 条** idx [266, 88, 117, 131, 148, 152, 170, 204, 218, 253, 260, 245]
+  - `266` CALENDAR_MONTHS/DAYS 20 条仍是零读者，且注释「seasons 走 i18n、months 不走」的因果仍写反
+  - `88` Playlists 侧栏的 #ember-mood 面板仍整块在闸外，英文串一条未译
+  - `117` 播放列表音乐面板 5 条裸英文仍无覆盖，闸按宿主拒绝
+  - `131` patchCalendarNames 仍在且仍是死码，注释仍把上游写反
+  - …另 8 条
+- **[严重] 4 条** idx [108, 50, 174, 203]
+  - `108` CALENDAR_AGES 四个纪元名与三个相对年份标签仍零覆盖
+  - `50` date 增强器 tooltip 仍全英文，CN 侧 213 处，替换表零对应键
+  - `174` date 增强器 tooltip 仍无 PATTERN，213 处纪年悬浮全英文
+  - `203` date 增强器在闸内、data-tooltip 也被访问，但三表仍无一条形状能命中 CALENDAR_AGES tooltip
+- **[严重] 2 条** idx [144, 158]
+  - `144` 通知条整面仍无入口，插件代码面 0 命中
+  - `158` ui.notifications 47 条裸英文仍零覆盖，插件里连 notifications 字样都没有
+- **[严重] 1 条** idx [156]
+  - `156` 结构性不可达已解除，但仍有 5 处正文/标题落在表外
+- **[严重] 1 条** idx [169]
+  - `169` 12 个被上游运行时覆写的天赋名仍无兜底：闸只放行 attunement 页签，天赋列表在闸外
+- **[一般] 9 条** idx [49, 102, 109, 118, 124, 133, 178, 184, 196]
+  - `49` patchCrucibleConfig 仍只遍历 languages/knowledge，languageCategories 未补
+  - `102` patchCrucibleConfig 仍只遍历 languages/knowledge，语言分类组头未补
+  - `109` patchCrucibleConfig 仍只枚举 languages/knowledge 两组
+  - `118` patchCrucibleConfig 仍只遍历 languages/knowledge，languageCategories 未纳入
+  - …另 5 条
+- **[一般] 9 条** idx [90, 130, 171, 176, 193, 217, 249, 55, 219]
+  - `90` 同一根因；另半条属性白名单缺 label 也仍在
+  - `130` 属性白名单仍缺 placeholder 与 alt，9 条实测串照旧翻不到
+  - `171` 同 133：languageCategories 未覆盖，两个英文组标题并排
+  - `176` 属性白名单仍是那 5 个，alt / placeholder 依旧结构性不可达
+  - …另 5 条
+- **[一般] 7 条** idx [132, 180, 254, 267, 186, 243, 246]
+  - `132` ui.windows 遍历 + #ember-calendar dispatch change 两条路仍在且仍是死的
+  - `180` 同 132：日历重画两条兜底仍在，未改
+  - `254` 两条重画路径原样未动：ui.windows 恒为空，change 事件无监听
+  - `267` 同 132：两条兜底均不可达，catch 结构上永不进入
+  - …另 3 条
+- **[一般] 5 条** idx [177, 197, 205, 97, 113]
+  - `177` EXACT 仍只有 ±1..±3 六条 Boons/Banes，@Advantage[-6] 两处照旧渲染英文
+  - `197` 同 idx177：EXACT 六条枚举未改，未加 Boons/Banes 正则
+  - `205` 同 idx177：枚举覆盖 6/18，Lantern Roads 那一处仍是「-6 Banes」
+  - `97` EXACT 仍只有 ±1/±2/±3，`-6 Banes` 未收，语料实有 2 处
+  - …另 1 条
+- **[一般] 3 条** idx [53, 125, 206]
+  - `53` Codex/事件页/创角 path 步 ~24 条模板裸英文仍无键
+  - `125` 法典与创角向导 15 条裸英文只补了 Exit，其余 14 条仍缺键
+  - `206` Attunement/Token 已补进 EXACT，同向导另 5+2 条仍裸英文
+- **[一般] 2 条** idx [87, 168]
+  - `87` 闸已修（认框后整树翻），仅剩 2 个框正文未覆盖
+  - `168` 闸已改成整树翻，但仍有 3 组对话框正文没进表
+- **[一般] 2 条** idx [137, 104]
+  - `137` 三个死语言键已删并改走 MISSING_LANGUAGES，但 knowledge 4 个 id + moiré 共 14 处裸标记仍在
+  - `104` KNOWLEDGE 表仍缺 Stars；crucible 侧更直接漏裸标记
+- **[一般] 2 条** idx [151, 265]
+  - `151` 认框机制已建成且覆盖绝大多数，但仍有 7 个对话框未被认出、正文按钮全英
+  - `265` 四条转手式 window.title 仍全部不在表里，认框也认不出
+- **[一般] 2 条** idx [164, 213]
+  - `164` "Save Changes" 两处已由 EXACT 收掉，actor-flags.hbs 的 {{localize "Anchor"}} 仍裸露
+  - `213` cn.json 与 EXACT 均无 Anchor 键，标签仍英文
+- **[一般] 1 条** idx [36]
+  - `36` 三类神祇标签前缀仍不在 PREFIXED，值也仍未进任何映射
+- **[一般] 1 条** idx [46]
+  - `46` Day N 半边已修（包住 emberDay 格式化函数），月亮 tooltip 半边仍在
+- **[一般] 1 条** idx [48]
+  - `48` 认框+全树翻译已补上，只剩两个插值正文仍是英文
+- **[一般] 1 条** idx [52]
+  - `52` patchCalendarNames 仍在，30 行前提注释仍写反：formatEmberDate 用的是 season 不是月名
+- **[一般] 1 条** idx [89]
+  - `89` NoteConfig 注入的 Ember Type 表单组仍在闸外，1 标签 + 8 选项全英文
+- **[一般] 1 条** idx [91]
+  - `91` ui.notifications 仍无任何补丁，65 处字面量英文全露
+- **[一般] 1 条** idx [92]
+  - `92` 两个仓库都没有 renderChatMessageHTML 钩子，聊天面零覆盖
+- **[一般] 1 条** idx [94]
+  - `94` 41 处 ancestry/culture/path 悬空 id 仍原样，叶子吐裸英文
+- **[一般] 1 条** idx [111]
+  - `111` secondaryContentTabs 8 个 label 里仍缺 Topic Overview / Overview / Secret Information
+- **[一般] 1 条** idx [114]
+  - `114` Play/Stop Animation 两条 tooltip 一条没补，且 #refresh 在 render 之后回写
+- **[一般] 1 条** idx [115]
+  - `115` #refreshWeather 两处 dataset.tooltip 写入无任何补丁，天气名与 mph 全英
+- **[一般] 1 条** idx [129]
+  - `129` Rarity:/Lifespan: 两个前缀仍不在 PREFIXED；ember.ancestry 页型也仍缺 bannerCaption 映射
+- **[一般] 1 条** idx [138]
+  - `138` KNOWLEDGE 31 条本体键在 Crucible 世界仍不可达，86-119 行注释的因果仍是反的
+- **[一般] 1 条** idx [146]
+  - `146` 画布滚动文字仍无任何补丁，Discovery! 等照旧英文
+- **[一般] 1 条** idx [147]
+  - `147` 设置面/按键面/场景控制栏 13 串仍被类名闸整面挡掉
+- **[一般] 1 条** idx [153]
+  - `153` 与 91 同一根因：通知面无宿主可挂，60+ 条英文全露
+- **[一般] 1 条** idx [157]
+  - `157` 35 条已补进 33 条，仍剩 2 条（Seal / Stealth Field 正文）
+- **[一般] 1 条** idx [159]
+  - `159` Show Tracks 仍是裸字面量，三条通道确实同时够不到
+- **[一般] 1 条** idx [160]
+  - `160` 同 92 的根因：聊天宿主无入口钩子，表头拼出「Abyss 同调」
+- **[一般] 1 条** idx [179]
+  - `179` 55 个「Abyss Rank 1」合成串与 11 个 optgroup 仍无任何规则可吃
+- **[一般] 1 条** idx [209]
+  - `209` 标题 35/37、按钮 30/34 已覆盖；Silver Beam 整框 + 4 个按钮仍英文
+- **[观感] 1 条** idx [98]
+  - `98` RESULTS 四键与 `^Result of` 正则原封未动，crucible 下确实零产出
+- **[观感] 1 条** idx [103]
+  - `103` Attunement/Token 已补进 EXACT，Class 与 placeholder 两条仍漏
+- **[观感] 1 条** idx [107]
+  - `107` 闸与按钮正文已全面修复，仅剩 Seal 等 6 条表单标签
+- **[观感] 1 条** idx [127]
+  - `127` 注释已承认包住 crucible 四个，但 dnd5e-lookup 仍被静默包住；闸仍在子串匹配别人的正则源串
+- **[观感] 1 条** idx [134]
+  - `134` core CONFIG 三处裸英文 label 仍无任何覆盖
+- **[观感] 1 条** idx [185]
+  - `185` 注释矛盾已消除，但子串闸判据未改，且新增关键字让它多包了 crucibleCounterspell
+- **[观感] 1 条** idx [241]
+  - `241` 仍按 label 英文值查表决定改谁，越界改 crucible 本体 32 条；Outsiders 是死键
+- **[观感] 1 条** idx [269]
+  - `269` applyOnce 仍传 crucible?.CONFIG ?? {}，幂等标记落在一次性对象上
+
+## compendium —— 38 条 / 38 族
+
+- **[严重] 1 条** idx [34]
+  - `34` 管线已接上，但英文基线从未重抽，764 处译文一条也没落盘
+- **[严重] 1 条** idx [41]
+  - `41` 映射与转换器都补上了，但英文基线未重跑、cn 包里 0 条 encounterTokens 译文，运行时仍是英文
+- **[严重] 1 条** idx [56]
+  - `56` 屠龙毒药仍作「8轮内造成6伤害」，与全库 8 处同句译法相反
+- **[严重] 1 条** idx [57]
+  - `57` Kali Andrella 的 Control Water 仍作「接下来的一个回合」，孪生两卡作「接下来一整轮」
+- **[严重] 1 条** idx [63]
+  - `63` 模板族译文碎片化仍在，逐族计数复现
+- **[严重] 1 条** idx [80]
+  - `80` Thayloc Courser 三套身份原样保留，两包各 4+21 处 + 3 处裸英文
+- **[一般] 1 条** idx [28]
+  - `28` 12 处 @Condition 用了 crucible 不存在的状态 id，CN=EN 逐条一致
+- **[一般] 1 条** idx [30]
+  - `30` 38 处上游写坏的 enricher token 仍在，EN/CN 同址同数
+- **[一般] 1 条** idx [47]
+  - `47` borel/kost 已修，moiré 仍以裸标记漏出（4 叶）
+- **[一般] 1 条** idx [58]
+  - `58` 裸「尺」159 处 / 「英尺」2361 处，与快照数字一字不差，未动
+- **[一般] 1 条** idx [59]
+  - `59` group check 中文仍有三套：团队 72 / 群体 16 / 群组 2
+- **[一般] 1 条** idx [60]
+  - `60` 「攀登危害」仍在，全库该表名作「攀爬危险」（16:1）
+- **[一般] 1 条** idx [61]
+  - `61` crucible.rules.json 里 Secondary Ability Score 仍是「副属性」3 : 「次要属性」3
+- **[一般] 1 条** idx [64]
+  - `64` 两处硬错译已修，但 Group/Heavy Armor/Mundane/Minion 四组与月相仍分叉
+- **[一般] 1 条** idx [65]
+  - `65` Token 三译仍在：compendium 令牌454/指示物123/代币37，lang 全用指示物
+- **[一般] 1 条** idx [67]
+  - `67` 「奥拉之祝福」同一句里仍是 奥拉/灵气/奥拉，与 08-12b 裁决冲突
+- **[一般] 1 条** idx [68]
+  - `68` Kinesis Potency 描述仍是「使使用…的法术的…」
+- **[一般] 1 条** idx [69]
+  - `69` 「你被治愈赤咳/空洞化寄生虫」两条被字句带宾语仍在
+- **[一般] 1 条** idx [70]
+  - `70` exhaustion 级数写法仍是 4 种：一级 18 / 1级 12 / 1 级 4 / 1 级加空格 2
+- **[一般] 1 条** idx [71]
+  - `71` 规则页 23 个公式框里 3 个仍有排版破损，三类全部复现
+- **[一般] 1 条** idx [82]
+  - `82` 8 组里 4 组确为真缺陷，另 4 组是 finding 读错数据的假阳性
+- **[一般] 1 条** idx [84]
+  - `84` 代词标注 4 种偏离写法全部原样保留，同一 NPC 跨页仍不一致
+- **[一般] 1 条** idx [85]
+  - `85` 阵营缩写两种写法仍并存：路径对齐实测 49 保留 / 20 展开
+- **[一般] 1 条** idx [223]
+  - `223` 脚本已改口径并加警示，但已发布的 disputes.json 仍写着「可脚本批量归一」
+- **[一般] 1 条** idx [256]
+  - `256` _packs-folders 里 Actors/Items 两个通用裸名仍在，会改名世界里同名文件夹
+- **[观感] 1 条** idx [6]
+  - `6` 两仓 pack label 写法仍分叉：crucible 15 个用 \n，ember 9 个用空格
+- **[观感] 1 条** idx [15]
+  - `15` 中文侧独有的 6 页重复 id 仍在（每包 6 叶，共 12 叶）
+- **[观感] 1 条** idx [16]
+  - `16` 该叶方括号仍不平衡（CN 119/118，EN 119/119），根因确在上游英文
+- **[观感] 1 条** idx [24]
+  - `24` crucible 打包步骤仍无自检断言，旧路径 build_zip.py 仍在
+- **[观感] 1 条** idx [38]
+  - `38` 分隔符分叉依旧：crucible 15/15 用 \n，ember 9/9 用空格
+- **[观感] 1 条** idx [40]
+  - `40` crucible.crafting 与 ember.dnd5e-items 两个包仍无 cn 译文文件
+- **[观感] 1 条** idx [43]
+  - `43` 9 处 section.secret 属性顺序翻转仍在，功能零影响
+- **[观感] 1 条** idx [62]
+  - `62` 坠落危害 2 处 / 坠落危险 6 处仍并存，未统一
+- **[观感] 1 条** idx [75]
+  - `75` 「也也许」叠字错字仍在，全库唯一 1 处
+- **[观感] 1 条** idx [76]
+  - `76` 「半数她年龄的人」仍在，两包各 1 处
+- **[观感] 1 条** idx [77]
+  - `77` 「力量,敏捷」4 个单元格仍在；EN 侧是 STR,DEX
+- **[观感] 1 条** idx [78]
+  - `78` 「1 点英雄气概点 / 9点属性点 / 3点天赋点」6 处原样保留
+- **[观感] 1 条** idx [79]
+  - `79` 「]]/} + 空格 + 全角标点」实测 38 处 / 30 叶仍在
+
+## cru-register —— 17 条 / 16 族
+
+- **[一般] 1 条** idx [162]
+  - `162` 5 个动作标签组 tooltip 裸串仍无覆盖，本仓已有同型修法的现成先例
+- **[一般] 1 条** idx [163]
+  - `163` crucible 合集来源设置窗的 Save Changes 仍无键
+- **[一般] 1 条** idx [212]
+  - `212` 「合集来源」页脚提交按钮仍无键，且 EXACT 那条够不到 crucible 的窗口
+- **[一般] 1 条** idx [231]
+  - `231` Sort/sort 两行仍在且无守卫，实测把 foundry_chn 的「排序」顶回英文
+- **[一般] 1 条** idx [242]
+  - `242` i18nInit 仍无条件把 Sort 写成英文，覆盖 foundry_chn 的「排序」；同函数里别的键都加了守卫
+- **[一般] 1 条** idx [255]
+  - `255` 同 231：sort 全栈 0 读取点，Sort 唯一读取点在 ember 不在 crucible
+- **[一般] 1 条** idx [262]
+  - `262` crucible validateJoint 5 条裸英文错误仍无覆盖，crucible-cn 的 i18nInit 注入未含它们
+- **[观感] 2 条** idx [181, 259]
+  - `181` babele-register.js:175-176 两行 Sort 覆盖仍在，仍是可证空操作
+  - `259` 与 idx 126 同一根因：Sort/sort 两个顶层键仍无判据写进共享 i18n 表
+- **[观感] 1 条** idx [126]
+  - `126` Sort/sort 两行仍在，注释断言的核心冲突四向核对确认不存在
+- **[观感] 1 条** idx [135]
+  - `135` Sort/sort 两行死写入仍在，且 Sort='Sort' 把键钉成英文
+- **[观感] 1 条** idx [139]
+  - `139` Sort/sort 两行仍在，四个上游确无该顶层键，注释依据不存在
+- **[观感] 1 条** idx [190]
+  - `190` crucible cn.json 无 `-- None -- ` 键，下拉首行仍英文
+- **[观感] 1 条** idx [221]
+  - `221` 两行 Sort/sort 写全局 i18n 字典仍在；Sort='Sort' 确为空转但有唯一上游读者
+- **[观感] 1 条** idx [239]
+  - `239` 两行无条件写入原封未动，且注释断言的键冲突四处查证均不存在
+- **[观感] 1 条** idx [248]
+  - `248` 同 idx 221 的两行代码；「键不存在」这一前提对 Sort 不成立
+- **[观感] 1 条** idx [252]
+  - `252` Sort/sort 两行死写仍在，且注释的「core 有撞车的 Sort 键」前提仍为假
+
+## lang —— 16 条 / 16 族
+
+- **[严重] 1 条** idx [8]
+  - `8` SPELL.RUNES.LifeAdj 仍是「至关重要的」，会合成出「至关重要的打击」
+- **[严重] 1 条** idx [261]
+  - `261` ui.notifications 裸英文一条键都没加，实测 29 条 miss
+- **[一般] 1 条** idx [7]
+  - `7` MilestoneTooltip 仍把分母 {required} 译成余量，数字含义反了
+- **[一般] 1 条** idx [9]
+  - `9` SPELL.RUNES.StormAdj 仍是「伏电」，全库零支持且唯一不带「的」
+- **[一般] 1 条** idx [10]
+  - `10` KinesisAdj 仍是「动能的」，名称通道 18/18 全是「念力」
+- **[一般] 1 条** idx [11]
+  - `11` IlluminationAdj 仍是「光照充足的」，全库 0 支持
+- **[一般] 1 条** idx [12]
+  - `12` Deathly=致命的 与 Deadly=致命 仍撞名，且 Deathly 全库实有三套中文
+- **[一般] 1 条** idx [66]
+  - `66` 两份 lang 仍有 15 组同英文多中文（ember 5 + crucible 10）
+- **[一般] 1 条** idx [211]
+  - `211` crucible 四处 _loc("None")/_loc("Unknown") 仍无键，cn.json 未加
+- **[一般] 1 条** idx [224]
+  - `224` blink.description 三方全缺，动作卡会吐裸键名
+- **[观感] 1 条** idx [14]
+  - `14` CostHealth 仍是「{health}生命值」，同族唯一未按单字方案译的
+- **[观感] 1 条** idx [73]
+  - `73` 三处「您」全部仍在，其余全库一律「你」
+- **[观感] 1 条** idx [74]
+  - `74` lang/cn.json 两处 hint 仍写「宇宙调谐」，与全库定译「同调」不一致
+- **[观感] 1 条** idx [149]
+  - `149` 三个 RegionBehavior 子类型的 25 label/hint + 5 choices 仍全英文
+- **[观感] 1 条** idx [165]
+  - `165` 两个未声明键仍未声明，界面上会显示裸键名
+- **[观感] 1 条** idx [191]
+  - `191` 场景控制按钮 title「Show Tracks」仍无键，加一条扁平键即可
+
+## ember-register —— 12 条 / 12 族
+
+- **[一般] 1 条** idx [0]
+  - `0` causticPhial 补丁仍挂 setup，晚于 initializeDocuments；那句英文注释仍在（已挪到 init 块上方）
+- **[一般] 1 条** idx [1]
+  - `1` causticPhial 迁移仍读 system.actions（prepared），未改成 _source
+- **[一般] 1 条** idx [86]
+  - `86` causticPhial 迁移仍读 prepared，仍会被 toObject() 吞掉并谎报成功
+- **[一般] 1 条** idx [183]
+  - `183` 注释仍与 v14 源码相反，setup 补丁盖不住世界加载那一趟
+- **[一般] 1 条** idx [187]
+  - `187` 12 条设置/键位裸英文串仍无任何键，两个配置块全英
+- **[一般] 1 条** idx [189]
+  - `189` 5 处 JS 侧 dataset.tooltip 裸英文仍无译文
+- **[一般] 1 条** idx [220]
+  - `220` register.js:264 仍把 force 翻成 true、reload 翻成 false，判据被取消
+- **[一般] 1 条** idx [229]
+  - `229` 已加一次性开关，但无作用域、读已初始化文档、判据恒不成立三点全在
+- **[一般] 1 条** idx [258]
+  - `258` 读派生写源数据 + 无判据全世界遍历，代码未变（潜伏）
+- **[一般] 1 条** idx [263]
+  - `263` 「Show Tracks」仍无任何译文，9 个 tool 注册里唯一裸串
+- **[一般] 1 条** idx [268]
+  - `268` || 第二分支仍恒假，兜底只靠 Adventure.importContent 一条
+- **[观感] 1 条** idx [154]
+  - `154` 4 条设置 + 2 条按键的 name/hint 共 12 串仍无任何译文通道
+
+## pipeline —— 9 条 / 8 族
+
+- **[一般] 1 条** idx [3]
+  - `3` RegionBehavior 仍只抄了 name，_variants 未补，滚动文字不在基线
+- **[一般] 1 条** idx [4]
+  - `4` BABELE_DEFAULTS 六处偏离一条未改，Actor/Item 等五个基础层仍缺
+- **[一般] 1 条** idx [5]
+  - `5` Item.description 覆写仍在，ember.character 164 条 description 依旧为 0
+- **[一般] 1 条** idx [35]
+  - `35` mappings.mjs 仍只映射 RegionBehavior.name，system.* 整档在管线外
+- **[一般] 1 条** idx [42]
+  - `42` crucibleNested 白名单仍无 value，dnd5e NPC 详情传记结构上不可译
+- **[一般] 1 条** idx [143]
+  - `143` BABELE_DEFAULTS 6 处出入全部仍在，RegionBehavior._variants 仍整块缺失
+- **[一般] 1 条** idx [250]
+  - `250` CRUCIBLE_ACTOR.actions 仍在；Actor schema 无该字段，两个方向恒空转
+- **[观感] 2 条** idx [37, 251]
+  - `37` Scene.sounds 仍未进映射，160 叶场景环境音名全英文
+  - `251` CRUCIBLE_ITEM.adjective 死声明仍在，Item 层数据面 0 命中
+
+## tooling —— 9 条 / 9 族
+
+- **[一般] 1 条** idx [33]
+  - `33` qa/ 仍无 enricher 参数取值表判据，32 个脚本无一覆盖
+- **[一般] 1 条** idx [199]
+  - `199` set_at 顶替中间层字符串的路径仍在，护栏仍只查叶子
+- **[一般] 1 条** idx [222]
+  - `222` 投票池仍无角色维度，只加了警告注释；词表里的双语/裸中文错项一条未变
+- **[一般] 1 条** idx [226]
+  - `226` 删除档/发音/无闸三处已修，但 ensure_bilingual 的形状判据仍会给 2010 叶（含整段散文）接英文
+- **[一般] 1 条** idx [228]
+  - `228` fix_word_leaks.py 一字未改，仍无英文闸、无 dry-run、直接落盘
+- **[一般] 1 条** idx [234]
+  - `234` resolve_generic_fallback.py 仍无 documentType 维度、仍用 search 取最外层内嵌段，两份报告仍写 residual 0
+- **[一般] 1 条** idx [235]
+  - `235` 归一与错误辖区交接仍在，name 缺双语尾巴无判据负责
+- **[一般] 1 条** idx [236]
+  - `236` fill_twin_names.py 仍用末段键+全库多数，532 条实测复现，当前潜伏
+- **[一般] 1 条** idx [238]
+  - `238` categories 整块 delete 与兄弟分支的「停放」政策仍并存，行号一字不差
+
+## docs —— 6 条 / 6 族
+
+- **[一般] 1 条** idx [26]
+  - `26` 收益陈述未订正，补 ] 后仍不会渲染出可点链接
+- **[一般] 1 条** idx [29]
+  - `29` 非法 enricher 参数一处未动，实测比原报告更多（skill 150 / skillCheck 9 / award 15 / knowledge 5）
+- **[一般] 1 条** idx [39]
+  - `39` 两仓库文件夹名写法相反且 ember 内部有 18 叶反例，跨仓 27 组同英文名分裂
+- **[一般] 1 条** idx [96]
+  - `96` 5 处 [[/knowledge]] 非法 id 一处未改，正文仍印裸标记
+- **[观感] 1 条** idx [13]
+  - `13` 51 个 lang 键在上游代码里确为零引用，但不能删（会破拍平三数相等）
+- **[观感] 1 条** idx [72]
+  - `72` 数字与单位间空格仍无约定，复测比例与 finding 基本一致
+
+## manifest —— 6 条 / 5 族
+
+- **[一般] 1 条** idx [20]
+  - `20` line-height 1.7 写在外层容器，被正文容器自身声明挡死
+- **[一般] 1 条** idx [22]
+  - `22` crucible-cn 仍无 styles，Crucible 中文标题无 CJK 回退
+- **[一般] 1 条** idx [23]
+  - `23` module.json 仍用弃用的字符串 styles，字距修正仍靠层级侥幸
+- **[观感] 2 条** idx [21, 142]
+  - `21` `.ember .ember-content` 仍在第 45 行，ember 0.6.0 内计数 0
+  - `142` `.ember .ember-content` 仍是死选择器，全库无此 class
+- **[观感] 1 条** idx [25]
+  - `25` 两个 module.json 元数据仍各缺一半，ember 无 bugs/changelog、title 无中文标识
+
+
+合计：{'严重': 28, '一般': 130, '观感': 45}

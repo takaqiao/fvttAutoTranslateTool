@@ -39,16 +39,53 @@
 * **专名检查默认关闭**（`--with-terms` 才开）。实测 `glossary_ec` 里混着大量通用词
   （`Shield→盾牌`、`Counter→反制`、`blocked→屏蔽`、`Goblin→地精语`），拿它去扫散文
   命中的几乎全是噪声：crucible 上报 284 条，逐条看没有一条是真的。数字检查则只报 14 条。
-* 同一数字在英文里出现多次、中文合并成一次表述 —— 本脚本按**集合**比对，不按次数，已规避。
+* 同一数字在英文里出现多次、中文合并成一次表述 —— 见下面「按次数比对」一节。
+  原先靠「整条按集合比」一刀切规避，代价是**任何次数差都看不见**，已改为邻近折叠。
+
+按次数比对（2026-08-12 改）
+--------------------------
+原先 `cn_nums = set(...)`，只问「这个数字在中文里出现过吗」，不问出现几次。
+于是 `3 Talent Points` → 「2点天赋点」被同页里程碑表里**别处的 3** 完全掩盖 ——
+全书最核心的成长规则错了一级，本脚本报 0。（审计 2026-08-12 第 1.1 条。）
+
+现在改成**多重集**：英文里出现 c 次的数字，中文侧必须能拿出 c 个可接受写法。
+多重集比集合敏感得多，所以原有的宽容规则一条都不能少（1–3），另补三条（4–6）。
+**4–6 每一条都是拿全库跑出来的假警报倒推的，不是预防性加的** —— 不要凭想象往这里加规则，
+每加一条就少看见一类真缺陷。
+
+1. 中文数字折算（`cn_numerals_to_digits`）—— 不做会逼出「3 层矿井」「第 1 军团」这种坏中文
+2. HTML 实体剥离（`ENTITY`）—— `&#x27;` 会被当成 27
+3. `decade/dozen/score/century/millennium` 量词换算（`SCALED`）—— 不做会逼出「2 个十年」
+4. **单/双**（新，`CN_DIGIT`）—— `2 Hands` / `Balanced 2H` 的正确中文是「双手」，
+   `a single …` 是「单次」。不认这两个字会把 `Gesture: Pulse`、`Acrobat` 这类报成缺 2
+5. **邻近折叠**（新，`--merge-window`，默认 60 字符）—— 同一个数字在**同一个块内**、
+   60 字符内重复出现，算一份信息（`no more than 6 boons and 6 banes` →
+   「恩惠骰与祸骰影响都不能超过 6 个」）。**只折英文侧的需求，不折中文侧的供给**，
+   且**跨块（表格单元/列表项/段落）不折** —— 两条约束都是踩出来的，见 `demanded()`
+6. **斜杠数对**（新，`SLASH_PAIR`）—— `24/7` 是英文成语，中文写「全天24小时」只留一个数；
+   分母整体豁免。`1/2` → 「一半」同理
+
+**判据的敏感度**：严格多重集（`--merge-window 0`）在两个仓库共报 9 条，
+逐条核对后 8 条是上面 4–6 覆盖的正常中文、1 条是真缺陷（`Level Advancement` 的天赋点）。
+加上 4–6 之后 crucible 报 1 / ember 报 0，即真缺陷一条不漏、假警报归零。
 """
 from __future__ import annotations
 import argparse
 import json
 import os
 import re
+from collections import Counter
 
 CJK = re.compile(r'[一-鿿]')
 TAG = re.compile(r'<[^>]+>')
+# 块级标签＝信息单元的边界。表格单元、列表项、段落之间的同一个数字是**两份**信息
+# （里程碑表的 `<td>3</td><td>3</td>` 是两行的数据），行内标签（strong/em/span/sup）不是。
+# 邻近折叠只在同一个块内进行，见 `counted()`。
+BLOCK_TAG = re.compile(
+    r'<\s*/?\s*(?:p|div|br|hr|table|thead|tbody|tfoot|tr|td|th|caption|'
+    r'ul|ol|li|dl|dt|dd|h[1-6]|section|article|aside|header|footer|'
+    r'blockquote|pre|figure|figcaption|form|fieldset)\b[^>]*>', re.I)
+BOUND = '\x1f'   # 块边界哨兵。与空格等长，不影响 en_len/cn_len 与 \b 词边界
 MARKUP = re.compile(r'@[A-Za-z]+\[[^\]]*\]|\[\[[^\]]*\]\]|&(?:amp;)?[Rr]eference\[[^\]]*\]')
 # 只防「数字被切成两半」，**不能**用 \w 做边界：中文里数字紧贴汉字（「其AC为17，HP为25」），
 # 而汉字在 Python 正则里算 \w，`(?<![\w.])` 会把中文侧的每个数字都挡掉 ——
@@ -58,9 +95,12 @@ NUM = re.compile(r'(?<!\d)(\d+(?:\.\d+)?)(?!\d)')
 # HTML 实体里带数字：`Jeweler&#x27;s` 的 `&#x27;` 会被当成数字 27 报缺失。
 ENTITY = re.compile(r'&#?\w{1,8};')
 
-CN_DIGIT = {'零': 0, '〇': 0, '一': 1, '二': 2, '两': 2, '三': 3, '四': 4, '五': 5,
-            '六': 6, '七': 7, '八': 8, '九': 9}
-CN_NUM = re.compile(r'[零〇一二三四五六七八九十百千两]+')
+# 单 / 双：`2 Hands`→「双手」、`Balanced 2H`→「平衡双手」、`a single section`→「单 1 区段」。
+# 这两个字在中文里就是一和二的量词形态，不认它们会把正确译文报成缺数字
+# （实测 crucible `Acrobat` / `Gesture: Pulse`、ember `Gesture: Cone` 三条全是这一类）。
+CN_DIGIT = {'零': 0, '〇': 0, '一': 1, '单': 1, '二': 2, '两': 2, '双': 2, '三': 3,
+            '四': 4, '五': 5, '六': 6, '七': 7, '八': 8, '九': 9}
+CN_NUM = re.compile(r'[零〇一二三四五六七八九十百千两单双]+')
 
 
 def cn_numerals_to_digits(s: str) -> str:
@@ -90,8 +130,13 @@ def cn_numerals_to_digits(s: str) -> str:
 
 
 def plain(s: str, cn: bool = False) -> str:
-    """剥掉标记与标签，只留给人读的正文。cn=True 时顺带折算中文数字。"""
-    out = TAG.sub(' ', ENTITY.sub(' ', MARKUP.sub(' ', s)))
+    """剥掉标记与标签，只留给人读的正文。cn=True 时顺带折算中文数字。
+
+    块级标签换成 `BOUND` 哨兵而不是空格（同样是 1 个字符，长度统计不变），
+    这样 `counted()` 能分清「同一句里说了两遍」和「表格两行各有一个」。
+    """
+    out = ENTITY.sub(' ', MARKUP.sub(' ', s))
+    out = TAG.sub(lambda m: BOUND if BLOCK_TAG.fullmatch(m.group()) else ' ', out)
     return cn_numerals_to_digits(out) if cn else out
 
 
@@ -118,6 +163,65 @@ def acceptable_forms(pe: str):
     return forms
 
 
+# 斜杠数对：`24/7`（英文成语，中文作「全天24小时」）、`1/2`（中文作「一半」）。
+# 中文只会留下其中一个数，分母整体豁免 —— 实测 Spellbreaker Tower 的
+# 「patrolled 24/7」就是这么被报成缺 7 的（同页另有真正的 `Level 7`，中文有）。
+SLASH_PAIR = re.compile(r'(?<!\d)(\d+(?:\.\d+)?)\s*/\s*(\d+(?:\.\d+)?)(?!\d)')
+
+
+def demanded(pe: str, window: int):
+    """英文侧**折叠后**的数字需求：同一块内、`window` 字符内的重复算一份信息。
+
+    英文一句里把同一个数字说两遍（`no more than 6 boons and 6 banes`），
+    中文合成一句说完（「恩惠骰与祸骰影响都不能超过 6 个」）是正常中文，不是漏译。
+
+    ⚠ **只折英文侧，且必须认块边界。** 两条都踩过：
+    * 中文侧也折 —— 中文长度只有英文的 0.35 倍，同一个 window 在中文侧等于放宽 3 倍，
+      crucible 一下从 2 条涨到 50 条假警报。折叠只减需求、不减供给才是安全方向。
+    * 不认块边界 —— 里程碑表 `<td>3</td><td>3</td>` 会被折成一份需求，
+      `3 Talent Points`→「2点天赋点」这条真缺陷立刻被重新掩盖，等于本次白修。
+    """
+    last, out = {}, Counter()
+    for m in NUM.finditer(pe):
+        n, at = m.group(1), m.start()
+        if n not in last or at - last[n] > window or BOUND in pe[last[n]:at]:
+            out[n] += 1
+        last[n] = at
+    return out
+
+
+def number_multiset(pe: str, pc: str, window: int = 60):
+    """多重集比对：英文里出现 c 次的数字，中文侧要拿得出 c 个可接受写法。
+
+    返回 `[(数字, 缺几次), ...]`。宽容规则见模块 docstring 的 1–6。
+    """
+    en_counts = demanded(pe, window)
+    for _, denom in SLASH_PAIR.findall(pe):      # 规则 6：斜杠分母豁免
+        if en_counts.get(denom):
+            en_counts[denom] -= 1
+    en_counts = +en_counts                       # 丢掉计数归零的项
+    if not en_counts:
+        return []
+
+    forms = acceptable_forms(pe)
+    pool = Counter(NUM.findall(pc))              # 中文侧按原样计数，不折叠
+
+    # 先分配「可接受写法最少」的数字：宽容项（decade 换算等）有备选，
+    # 让它先抢会把稀缺的中文数字用掉，制造假缺失。
+    missing = []
+    for n in sorted(en_counts, key=lambda x: (len(forms.get(x, {x})), -len(x))):
+        need, got = en_counts[n], 0
+        for f in sorted(forms.get(n, {n}), key=lambda f: (f != n, -pool[f])):
+            take = min(pool[f], need - got)
+            pool[f] -= take
+            got += take
+            if got == need:
+                break
+        if got < need:
+            missing.append((n, need - got))
+    return missing
+
+
 def walk(en, cn, path, out):
     if isinstance(en, dict):
         for k, v in en.items():
@@ -138,6 +242,9 @@ def main():
     ap.add_argument('--min-en', type=int, default=120,
                     help='英文纯文本短于此长度的条目不查（名字、标签噪声大）')
     ap.add_argument('--top', type=int, default=25)
+    ap.add_argument('--merge-window', type=int, default=60,
+                    help='英文侧同一块内、多少字符内的重复算一份信息（只折英文需求，'
+                         '不折中文供给，且跨块不折）。设 0 = 严格多重集，一次不差；调大 = 更宽容')
     ap.add_argument('--with-terms', action='store_true',
                     help='顺带查定译专名。**默认关**：glossary_ec 里混着通用词'
                          '（Shield→盾牌、Counter→反制、blocked→屏蔽），命中全是噪声')
@@ -173,10 +280,11 @@ def main():
             if len(pe) < a.min_en:
                 continue
             checked += 1
-            cn_nums = set(NUM.findall(pc))
-            miss_num = sorted((n for n, ok in acceptable_forms(pe).items()
-                               if not (ok & cn_nums)),
-                              key=lambda x: -len(x))
+            # 多重集比对（2026-08-12）。原先是 set，`3 Talent Points`→「2点天赋点」
+            # 会被同页别处的 3 掩盖 —— 全书最核心的成长规则错一级而本脚本报 0。
+            miss_num = [f'{n}×{k}' if k > 1 else n
+                        for n, k in sorted(number_multiset(pe, pc, a.merge_window),
+                                           key=lambda t: (-t[1], -len(t[0])))]
             miss_term = ([f'{k}→{v}' for k, v in gloss.items()
                           if re.search(r'\b' + re.escape(k) + r'\b', pe) and v not in pc]
                          if a.with_terms else [])

@@ -186,7 +186,12 @@ function extractDocument(doc, documentType, mappings) {
     const value = getPath(doc, spec.path ?? field);
 
     switch (spec.converter) {
-      case 'name': {
+      // `crucibleTokenName` 在**抽取方向**上与内建 `name` 完全一样：都读 spec.path
+      // （`prototypeToken.name`）的原值当英文基线。差别只在运行时，见
+      // mappings.mjs 里 `CRUCIBLE_ACTOR.tokenName` 的注释。所以两个 case 共用一段 ——
+      // 换转换器**不会**让英文基线产生任何 diff。
+      case 'name':
+      case 'crucibleTokenName': {
         if (isNonEmptyString(value)) out[field] = value;
         break;
       }
@@ -257,6 +262,20 @@ function extractDocument(doc, documentType, mappings) {
             if (eff.some((x) => x.name)) e.effects = eff;
           }
           if (Object.keys(e).length) map[a.id] ??= e;
+        }
+        if (Object.keys(map).length) out[field] = map;
+        break;
+      }
+
+      case 'emberEncounterTokenNames': {
+        // `system.encounter.tokens[].actors[].tokenData.name`：两层嵌套数组。
+        // 键取英文名本身（与 nameCollection 同构）；两个冒险包各 382 处 / 130 唯一串。
+        const map = {};
+        for (const token of toArray(value)) {
+          for (const actor of toArray(token?.actors)) {
+            const n = actor?.tokenData?.name;
+            if (isNonEmptyString(n)) map[n] ??= n;
+          }
         }
         if (Object.keys(map).length) out[field] = map;
         break;
@@ -350,8 +369,11 @@ const BUCKET_FOR = {
 async function processPack(pack, packsDir, mappings) {
   const packDir = path.join(packsDir, path.basename(pack.path ?? pack.name));
   if (!fs.existsSync(packDir)) {
-    console.warn(`  skip (missing dir): ${packDir}`);
-    return null;
+    // 只 warn 是不够的：manifest 声明了包、磁盘上没有目录，输出里就少一个 pack
+    // 文件，而 _source.json 只记录成功的那些 —— 差额没人看得见。crucible 0.10.1
+    // 的 `crafting` 就是这么静默漏了一整轮。返回 `_skipped` 让 main() 汇总并写进
+    // _source.json.skippedPacks，覆盖率/死键扫描才有据可依。
+    return { _skipped: 'missing pack directory', detail: packDir };
   }
   const buckets = await readPack(packDir);
 
@@ -371,8 +393,7 @@ async function processPack(pack, packsDir, mappings) {
 
   const bucketName = BUCKET_FOR[pack.type];
   if (!bucketName) {
-    console.warn(`  unsupported pack type: ${pack.type} (${pack.name})`);
-    return null;
+    return { _skipped: 'unsupported pack type', detail: pack.type };
   }
 
   const keyOf = makeKeyAllocator();
@@ -416,10 +437,18 @@ async function main() {
   console.log(`Output  : ${OUT_DIR}\n`);
 
   const summary = [];
+  const skipped = [];
+  let declared = 0;
   for (const pack of manifest.packs ?? []) {
     if (ONLY_PACKS.length && !ONLY_PACKS.includes(pack.name)) continue;
+    declared += 1;
     process.stdout.write(`- ${pack.name} (${pack.type})\n`);
     const result = await processPack(pack, packsDir, mappings);
+    if (result?._skipped) {
+      skipped.push({ pack: pack.name, type: pack.type, reason: result._skipped, detail: result.detail });
+      console.warn(`    !! SKIPPED (${result._skipped}): ${result.detail}`);
+      continue;
+    }
     if (!result) continue;
     const outFile = path.join(OUT_DIR, `${manifest.id}.${pack.name}.json`);
     const { _meta, ...payload } = result;
@@ -435,10 +464,22 @@ async function main() {
     mappingTarget: target,
     extractedAt: new Date().toISOString(),
     extractedBy: 'Ember-Crucible Translation Project / 3-常用脚本/extract/extract_en.mjs',
+    declaredPacks: declared,
+    extractedPacks: summary.length,
+    skippedPacks: skipped,
     packs: summary,
   });
 
   console.log(`\nDone. Wrote ${summary.length} pack files + _source.json`);
+  if (skipped.length) {
+    console.warn(`\n⚠ ${manifestPath && path.basename(manifestPath)} 声明了 ${declared} 个包，`
+      + `只抽出 ${summary.length} 个；下列 ${skipped.length} 个没有产物（已记入 _source.json.skippedPacks）：`);
+    for (const s of skipped) {
+      console.warn(`    - ${s.pack} (${s.type}): ${s.reason} -> ${s.detail}`);
+    }
+    console.warn('  上游加了包却没随包发数据、或本地未安装完整数据时会出现这一条；'
+      + '确认后要么补 cn 侧空壳译文，要么在上游确认该包本就不存在。');
+  }
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
