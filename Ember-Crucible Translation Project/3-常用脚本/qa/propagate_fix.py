@@ -36,6 +36,18 @@ def walk(obj, prefix=''):
         yield prefix, obj
 
 
+def role_of(path):
+    """路径的**字段角色** = 最后一段非数字的键名。
+
+    `name` / `adjective` / `text` / `public` 各有各的格式约定，跨角色传播必错 ——
+    见 index 处的注释。数组下标要跳过（`effects.0.name` 的角色是 `name`）。
+    """
+    for seg in reversed(path.split('.')):
+        if not seg.isdigit():
+            return seg
+    return path
+
+
 def load(p):
     with open(p, encoding='utf-8-sig') as f:
         return json.load(f)
@@ -71,13 +83,20 @@ def main():
         if os.path.exists(ep):
             en_data[p] = load(ep)
 
-    # 全库索引：英文原文 -> [(包, 路径, 中文)]
+    # 全库索引：(英文原文, 字段角色) -> [(包, 路径, 中文)]
+    #
+    # **角色必须进键**。只按英文原文配对会跨字段角色传播，而不同角色的**格式约定不同**：
+    #   `name`      是双语并列（「辉耀 Luminary」，见第 3.4 节）
+    #   `adjective` 是拼装用的裸中文（`{prefixes}{name}` → 「辉耀长剑」，见第 8 节）
+    # 两者英文都是 `Luminary`，不加这道闸就会把 name 推进 adjective，
+    # 运行时拼出「辉耀 Luminary长剑」；反方向则会把 name 的英文尾巴剥掉。
+    # 2026-08-13 实测：crucible 侧 10 条候选里有 7 条正是这种跨角色配对。
     index = {}
     for p, en in en_data.items():
         for path, en_text in walk(en.get('entries', en)):
             cn_text = get_at(cn_data[p].get('entries', cn_data[p]), path)
             if cn_text:
-                index.setdefault(en_text, []).append((p, path, cn_text))
+                index.setdefault((en_text, role_of(path)), []).append((p, path, cn_text))
 
     # 权威样本：--since 之后中文发生变化的条目
     changed = subprocess.run(
@@ -97,11 +116,11 @@ def main():
             new_cn = get_at(cn_data[pack].get('entries', cn_data[pack]), path)
             old_cn = get_at(old_json.get('entries', old_json), path)
             if new_cn and old_cn and new_cn != old_cn:
-                authority[en_text] = (new_cn, f'{pack}::{path}')
+                authority[(en_text, role_of(path))] = (new_cn, f'{pack}::{path}')
 
     hits = []
-    for en_text, (good_cn, src) in authority.items():
-        for p, path, cn_text in index.get(en_text, []):
+    for (en_text, role), (good_cn, src) in authority.items():
+        for p, path, cn_text in index.get((en_text, role), []):
             if cn_text == good_cn or f'{p}::{path}' == src:
                 continue
             # 闸门同款校验：标记签名必须一致，否则不推

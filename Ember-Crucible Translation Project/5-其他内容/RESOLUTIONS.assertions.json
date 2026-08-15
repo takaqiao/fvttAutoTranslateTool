@@ -1,342 +1,887 @@
 {
-  "meta": {
-    "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
-    "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
-    "created": "2026-08-15（第十五轮）"
+ "meta": {
+  "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
+  "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
+  "created": "2026-08-15（第十五轮）",
+  "updated": "2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
+  "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
+  "idle_forms": {
+   "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
+   "a_broken_pattern": "判据写坏了（R-catwalk：JSON 里单反斜杠 `\\b` 被当退格转义，正则永不命中，而库里有 10 叶违规）。→ `min_hits` 能防。",
+   "b_never_reads_repo": "判据压根没读库（R-region-area-map：旧 distinct_terms 自陈「纯配置自检」，于是 ember lang 的 EMBER.CALENDAR.REGION 反着写「区域地图」四个发布版没人发现）。→ `min_hits` 防不住，必须强制声明 `scan`。",
+   "c_stale_report": "读的是别人早先写下的报告快照（R-exclusions-closed：读第十五轮产物 same_en_final.json = 15 组，而当时库里实跑是 14 组 / 123 叶；库变了它不会变）。→ `min_hits` 与 `scan` 都防不住，必须现场调用扫描器，或至少校验报告 mtime 晚于两仓 compendium/cn 的最新 mtime、不满足即判失败。",
+   "corollary": "判据的数据来源必须是**本次运行现读的库**。凡是从磁盘上另一个文件里拿结论的，都要能证明那个文件比库新，否则就是形态 (c)。"
   },
-  "assertions": [
+  "new_rule_checklist": "每条新断言必须：① 带 `min_hits`（或 leaf_literal 的 `min_leaves`）；② 做**双向**灵敏度回测 —— `--root <副本树>` 里故意改反一处确认变红，再改回确认变绿；③ 在 `why` 里写明**判据边界**（这条绿了到底证明了什么、什么没被查），别让下一轮把全绿误读成全覆盖。",
+  "lang_sources": {
+   "ember": "%LOCALAPPDATA%\\FoundryVTT\\Data\\modules\\ember",
+   "crucible": "%LOCALAPPDATA%\\FoundryVTT\\Data\\systems\\crucible"
+  }
+ },
+ "assertions": [
+  {
+   "id": "R-warlock-sorcerer",
+   "title": "Warlock=邪术师，不得与 Sorcerer=术士 混用",
+   "decision": "2026-08-13j",
+   "why": "两者撞名曾是阻断：玩家在两处看到「术士」指的是两个职业",
+   "kind": "term_gated",
+   "en": "\\bWarlock\\b",
+   "cn_required": "邪术师",
+   "min_hits": 1
+  },
+  {
+   "id": "R-electricity-lightning",
+   "title": "Electricity=电击，Lightning 才是闪电",
+   "decision": "2026-08-09 / 2026-08-12",
+   "why": "库里 167 处「闪电」中真正错的是英文写 Electricity 却译成闪电的那 23 处；混用会让玩家分不出伤害类型。⚠ 这一条**必须区分大小写**：伤害类型是大写 `Electricity`，而小写 `electricity` 是普通名词（a jolt of electricity / crackling like electricity），库里 37 叶正确译作「电流/电能」，按不敏感判会全部误报",
+   "kind": "term_gated",
+   "en": "\\bElectricity\\b",
+   "cn_required": "电击",
+   "min_hits": 1,
+   "case_sensitive": true
+  },
+  {
+   "id": "R-round-turn",
+   "title": "Round=轮 / Turn=回合，两者被互换过",
+   "decision": "2026-08-13（第八轮）",
+   "why": "数值关系词判据里最高产的一类，直接影响持续时间规则",
+   "kind": "distinct_terms",
+   "scan": [
+    "lang"
+   ],
+   "min_hits": 14,
+   "terms": [
     {
-      "id": "R-warlock-sorcerer",
-      "title": "Warlock=邪术师，不得与 Sorcerer=术士 混用",
-      "decision": "2026-08-13j",
-      "why": "两者撞名曾是阻断：玩家在两处看到「术士」指的是两个职业",
-      "kind": "term_gated",
-      "en": "\\bWarlock\\b",
-      "cn_required": "邪术师",
-      "min_hits": 1
+     "en": "Round",
+     "cn": "轮",
+     "en_gate": "\\bRounds?\\b"
     },
     {
-      "id": "R-electricity-lightning",
-      "title": "Electricity=电击，Lightning 才是闪电",
-      "decision": "2026-08-09 / 2026-08-12",
-      "why": "库里 167 处「闪电」中真正错的是英文写 Electricity 却译成闪电的那 23 处；混用会让玩家分不出伤害类型。⚠ 这一条**必须区分大小写**：伤害类型是大写 `Electricity`，而小写 `electricity` 是普通名词（a jolt of electricity / crackling like electricity），库里 37 叶正确译作「电流/电能」，按不敏感判会全部误报",
-      "kind": "term_gated",
-      "en": "\\bElectricity\\b",
-      "cn_required": "电击",
-      "min_hits": 1,
-      "case_sensitive": true
-    },
-    {
-      "id": "R-round-turn",
-      "title": "Round=轮 / Turn=回合，两者被互换过",
-      "decision": "2026-08-13（第八轮）",
-      "why": "数值关系词判据里最高产的一类，直接影响持续时间规则",
-      "kind": "distinct_terms",
-      "terms": [
-        {
-          "en": "Round",
-          "cn": "轮"
-        },
-        {
-          "en": "Turn",
-          "cn": "回合"
-        }
-      ]
-    },
-    {
-      "id": "R-tier-rank-level",
-      "title": "Tier=阶 / Rank=阶位 / level=等级 三者必须区分",
-      "decision": "2026-08-09 + 2026-08-14d",
-      "why": "第十四轮实测同屏出现过「阶位 1」与「等级 1（次等魂印）」指同一件事",
-      "kind": "distinct_terms",
-      "terms": [
-        {
-          "en": "Tier",
-          "cn": "阶"
-        },
-        {
-          "en": "Rank",
-          "cn": "阶位"
-        },
-        {
-          "en": "level",
-          "cn": "等级"
-        }
-      ]
-    },
-    {
-      "id": "R-region-area-map",
-      "title": "Region Map=地区地图 / Area Map=区域地图",
-      "decision": "2026-08-14f",
-      "why": "两者曾都叫「区域地图」，升降机下拉框里并排出现两个一模一样的选项",
-      "kind": "distinct_terms",
-      "terms": [
-        {
-          "en": "Region Map",
-          "cn": "地区地图"
-        },
-        {
-          "en": "Area Map",
-          "cn": "区域地图"
-        }
-      ]
-    },
-    {
-      "id": "R-tridents-point-falsepositive",
-      "title": "Trident's Point 的「本地区地图」是假阳性，绝不能替换",
-      "decision": "2026-08-14f",
-      "why": "中文是「本地区」+「地图」（英文 a map of the local region），「地区地图」只是碰巧的子串。机械替换会改成「本区域地图」，意思全变",
-      "kind": "leaf_literal",
-      "pack": "ember.crucible-adventure.json",
-      "path": "Ember Early Access.journals.Ordain Gazetteer.pages.Trident's Point.text",
-      "must_contain": [
-        "本地区地图"
-      ],
-      "must_not_contain": [
-        "本区域地图"
-      ]
-    },
-    {
-      "id": "R-soulbound-progression",
-      "title": "Soulbound Progression = 魂缚进阶，「魂缚进程」已废",
-      "decision": "2026-08-14d",
-      "why": "glossary_ec 定稿是「进阶」，而 DIALOG_TITLES 早前写「进程」，同屏两种说法",
-      "kind": "cn_absent",
-      "cn": "魂缚进程"
-    },
-    {
-      "id": "R-highgate",
-      "title": "Highgate = 高门，「海门」是把 High 听成了 Hai",
-      "decision": "2026-08-13h",
-      "why": "英文三处明说它是通往内陆的北方陆上门户，与海无关；错译曾渗透 name 字段与 glossary",
-      "kind": "cn_absent",
-      "cn": "海门"
-    },
-    {
-      "id": "R-otherhood",
-      "title": "Otherhood of Fortune = 幸运异姊会，「异缘会」已废",
-      "decision": "2026-08-13i",
-      "why": "全库 186 处曾只改了 3 叶，剩下的叶子里同段同时出现两种说法，比不改还糟",
-      "kind": "cn_absent",
-      "cn": "异缘会"
-    },
-    {
-      "id": "R-marlstone",
-      "title": "Marlstone = 马尔石，「马尔斯通」已废",
-      "decision": "2026-08-13g",
-      "why": "城区得名于该石材，「铺着马尔石」靠「石」字成立；8 个复合专名统一到马尔石",
-      "kind": "cn_absent",
-      "cn": "马尔斯通"
-    },
-    {
-      "id": "R-evidence-value",
-      "title": "Evidence = 证据，不是「证据值」",
-      "decision": "2026-08-13j",
-      "why": "「证据值」是 29 叶坏替换的源头",
-      "kind": "cn_absent",
-      "cn": "证据值"
-    },
-    {
-      "id": "R-presence-wisdom",
-      "title": "Presence=存在，不得译成「感知力」（Wisdom 的定译才是感知）",
-      "decision": "2026-08-13g",
-      "why": "把 Presence 译成「感知力」等于把两个属性混成一个，玩家算不出 (坚韧+存在)/4 那类公式",
-      "kind": "cn_absent",
-      "cn": "感知力"
-    },
-    {
-      "id": "R-lang-parity",
-      "title": "两仓 lang/cn.json 的键数必须等于英文侧",
-      "decision": "2026-08-12（1.1.0 事故）",
-      "why": "1.1.0 那次 lang 有 77% 静默失效，就是键形态错导致 Foundry 查不到",
-      "kind": "lang_parity",
-      "packages": {
-        "crucible": "%LOCALAPPDATA%\\FoundryVTT\\Data\\systems\\crucible",
-        "ember": "%LOCALAPPDATA%\\FoundryVTT\\Data\\modules\\ember"
-      }
-    },
-    {
-      "id": "R-anchor-ids",
-      "title": "标题上的显式 id= 不得减少",
-      "decision": "2026-08-13j",
-      "why": "全库 1491 个 <hN> 补了英文 slug 的 id，撑着 590 处 #锚点 链接。任何改标题文字的批次都必须原样保留 id，删掉就断",
-      "kind": "anchor_ids",
-      "min": 900,
-      "scope": [
-        "ember"
-      ]
-    },
-    {
-      "id": "R-bare-cn-fields",
-      "title": "tokenName / encounterTokens / levels 一律裸中文，不带双语尾巴",
-      "decision": "2026-08-13j + 2026-08-14e",
-      "why": "既定书写约定：name 字段写「中文 English」，这几类字段写裸中文。写错会让 scan_same_en_split 整批报警",
-      "kind": "no_bilingual_tail",
-      "fields": [
-        "tokenName",
-        "encounterTokens",
-        "levels",
-        "navName"
-      ],
-      "scope": [
-        "ember"
-      ]
-    },
-    {
-      "id": "R-exclusions-closed",
-      "title": "same_en_split 的分叉组必须全部已归档豁免",
-      "decision": "2026-08-13k + 2026-08-14d",
-      "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看",
-      "kind": "exclusions_closed",
-      "exclusions": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json",
-      "report": "4-临时脚本/2026-08-15-round15/qa2/same_en_final.json"
-    },
-    {
-      "id": "R-glossary-not-laundering",
-      "title": "词表不得把错值洗成权威（base 与产物两层同查）",
-      "decision": "2026-08-15b（第十五轮 ③ 查出 4 条阻断）",
-      "why": "词表是构建产物，harvest 压过 base；base 层的陈旧错值从不被覆盖，下一轮有人拿词表当依据反向回灌就会把包改坏。实测 4 条全是 source='base'：Kinesis=念动力（与 Telekinesis 撞车）· Fortitude=坚韧（与 Toughness 撞车）· Rank=等级（Rank/level 不可分）· Region Map=区域地图（会把刚拆开的 地区地图 洗回去）",
-      "kind": "glossary_value",
-      "files": {
-        "base": "..\\glossary_crucible_merged.json",
-        "product": "5-其他内容/glossary/glossary_ec.json"
-      },
-      "entries": {
-        "Kinesis": "念力",
-        "Telekinesis": "念动力",
-        "Fortitude": "强韧",
-        "Toughness": "坚韧",
-        "Rank": "阶位",
-        "Tier": "阶",
-        "Level": "等级",
-        "Region Map": "地区地图"
-      }
-    },
-    {
-      "id": "R-catwalk",
-      "title": "catwalk = 猫道（boardwalk 才是木栈道）",
-      "decision": "2026-08-15c",
-      "why": "第十五轮 ① 查出这条通道有猫道/栈道/栈桥/高架走道四种译名，分裂线正好落在「GM 朗读文本 vs GM 指令段」之间 —— 同一场戏里 GM 念一个词、看另一个词。统一到猫道（改动面最小：21 处不动、只改离群叶）。⚠ 单元制审计只改了自己那本 journal，全库还剩 3 叶在别的 journal 里，是靠发版后回包核对才发现的（2026-08-13i 那条教训的又一次命中）",
-      "kind": "term_gated",
-      "en": "\\bcatwalk",
-      "cn_required": "猫道",
-      "scope": [
-        "ember"
-      ],
-      "min_hits": 1
-    },
-    {
-      "id": "R-drakeling",
-      "title": "Drakeling = 幼龙兽（Drake=龙兽 的同族构词）",
-      "decision": "2026-08-15d",
-      "kind": "term_gated",
-      "why": "Drake 全族 name 字段无一例外是「龙兽」（龙兽巢穴/苍白龙兽/究极龙兽/成年龙兽），裸 Drakeling 的 name 就是「幼龙兽」。作「幼龙」会让玩家认不出是同一族。⚠ 计数陷阱：「幼龙」是「幼龙兽」的子串，裸「幼龙」实际只有 74 处不是 131",
-      "en": "\\bDrakelings?\\b",
-      "cn_required": "幼龙兽",
-      "scope": [
-        "ember"
-      ],
-      "except_paths": [
-        "Drakeling Scales"
-      ]
-    },
-    {
-      "id": "R-afflicted",
-      "title": "Afflicted = 受难（不带「的」）",
-      "decision": "2026-08-15d",
-      "kind": "cn_absent",
-      "cn": "受苦的苍白",
-      "why": "依据不是词频（受难 40 : 受苦 38 持平）而是**构词**：该族修饰语全是裸二字（苍白/变异/辉耀/病弱/成年/究极），只有「受苦的」多一个「的」，形态上是唯一例外"
-    },
-    {
-      "id": "R-inkaro-pool",
-      "title": "Inkaro Pool = 因卡罗水潭",
-      "decision": "2026-08-15d",
-      "kind": "cn_absent",
-      "cn": "因卡罗池",
-      "why": "两条依据同向：地点条目 name 就是「因卡罗水潭 Inkaro Pools」（阶梯第 1 档），全库 67:20。注意 Inkaro Pearl 是另一样东西，不要牵连"
-    },
-    {
-      "id": "R-clipper-name",
-      "title": "Clipper 一律作「克利珀」，「快剪手」已废",
-      "decision": "2026-08-15d",
-      "kind": "cn_absent",
-      "cn": "快剪手",
-      "why": "actor 的 name 字段是「克利珀 Clipper」（阶梯第 1 档），而物品 Clipper's Endless Scroll 曾译作「快剪手的无尽卷轴」—— 同一专名两种中文，玩家认不出是同一个人的东西"
-    },
-    {
-      "id": "R-boardwalk",
-      "title": "boardwalk = 木栈道",
-      "decision": "2026-08-15c",
-      "kind": "term_gated",
-      "why": "全库 14:6，且「木栈道」是 boardwalk 的标准对应词。catwalk 让出「栈道」之后这条才成立。⚠ 替换必须用 (?<!木)栈道 保护，否则会把 boardwalk 一起改坏",
-      "en": "\\bboardwalks?\\b",
-      "cn_required": "木栈道",
-      "scope": [
-        "ember"
-      ]
-    },
-    {
-      "id": "R-version-matrix",
-      "title": "PROJECT.md 抬头与版本矩阵必须与 module.json 一致",
-      "decision": "2026-08-15e",
-      "why": "这一行历史上漂过两次（停在 0.9.6/1.1.7 与 0.9.7/1.1.10）。每次都是发完版、追加了本轮小节、但没回头改抬头。新会话第一件事就是读抬头判断现状，读到过期版本会直接判断错「现在到哪一步」",
-      "kind": "version_matrix",
-      "doc": "PROJECT.md",
-      "tag_prefix": {
-        "crucible": "",
-        "ember": "v"
-      }
-    },
-    {
-      "id": "R-junction-wheel",
-      "title": "Junction Wheel = 枢纽轮盘（改判，原裁「路口轮盘」）",
-      "decision": "2026-08-15e",
-      "kind": "term_gated",
-      "why": "物品 name 就是「雅科什塔枢纽轮盘」（阶梯第 1 档），英文闸 14:2，glossary 也已 harvest 成枢纽轮盘。词义上也更对：矿车道岔，「路口」是地面街道的 register。原裁决被静默推翻过且无记录 —— 这条断言就是为了不再翻第三次",
-      "en": "\\bJunction Wheel\\b",
-      "cn_required": "枢纽轮盘",
-      "scope": [
-        "ember"
-      ]
-    },
-    {
-      "id": "R-shard-god",
-      "title": "Shard God 三分：之神 / 诸神 / 女神，不许统一",
-      "decision": "2026-08-15e",
-      "kind": "distinct_terms",
-      "why": "name 字段完全自洽：Shard God→碎片之神、Shard Gods→碎片诸神、Shard Goddess→碎片女神。三者各有各的英文，看着像分裂只是因为一叶里可同时出现多种形态。这条断言防的是下一轮按多数派把它们「统一」掉",
-      "terms": [
-        {
-          "en": "Shard God",
-          "cn": "碎片之神"
-        },
-        {
-          "en": "Shard Gods",
-          "cn": "碎片诸神"
-        },
-        {
-          "en": "Shard Goddess",
-          "cn": "碎片女神"
-        }
-      ]
-    },
-    {
-      "id": "R-fortitude-scope",
-      "title": "Fortitude=强韧 只管 crucible 侧；dnd5e 的 Undead/Undeathly Fortitude 保持坚韧",
-      "decision": "2026-08-15e",
-      "kind": "glossary_value",
-      "why": "第十五轮 ③ 曾把 dnd5e 的特性名一并改成「强韧」——越界。§1 明定 dnd5e 侧不受 crucible 定译辖制，「亡灵坚韧/不死坚韧」是 5e 通行译法。这条把两侧同时钉住，防止再被任一方向拉平",
-      "files": {
-        "base": "..\\glossary_crucible_merged.json",
-        "product": "5-其他内容/glossary/glossary_ec.json"
-      },
-      "entries": {
-        "Fortitude": "强韧",
-        "Toughness": "坚韧",
-        "Undeathly Fortitude": "不死坚韧"
-      },
-      "require_present": false
+     "en": "Turn",
+     "cn": "回合",
+     "en_gate": "\\bTurns?\\b"
     }
-  ]
+   ]
+  },
+  {
+   "id": "R-tier-rank-level",
+   "title": "Tier=阶 / Rank=阶位 / level=等级 三者必须区分",
+   "decision": "2026-08-09 + 2026-08-14d",
+   "why": "第十四轮实测同屏出现过「阶位 1」与「等级 1（次等魂印）」指同一件事。⚠ `level` 的 cn_gate 放宽成「级」：lang 里 `Level {x}` 正当地写作「{x} 级」、`Level Up!` 写作「升级！」，要求整词「等级」会造出 20 多条假阳性；而「等级」本身含「级」，收紧的那一半由 `R-glossary-not-laundering` 的词表层守着。⚠⚠ **判据边界（2026-08-16 终段补记）：这条只扫 lang，实测只命中 62 个键。** compendium 侧那 40674 叶在本条下**一个字节都没查** —— 而第十六轮恰恰在 compendium 侧改了 176 叶（IGNORECASE 英文闸下 阶位 221 : 等级 51）。compendium 侧现在由 `R-rank-sense-compendium` 单独看守，因为那边不能照搬本条的判据：英文 `rank` 在 compendium 里有大片**普通名词义**（civic rank / ranks of / rank-and-file），硬要求含「阶位」会造出成片假阳性。看到本条绿**不等于** compendium 侧被查过",
+   "kind": "distinct_terms",
+   "scan": [
+    "lang"
+   ],
+   "min_hits": 50,
+   "terms": [
+    {
+     "en": "Tier",
+     "cn": "阶",
+     "en_gate": "\\bTiers?\\b"
+    },
+    {
+     "en": "Rank",
+     "cn": "阶位",
+     "en_gate": "\\bRanks?\\b"
+    },
+    {
+     "en": "level",
+     "cn": "等级",
+     "cn_gate": "级",
+     "en_gate": "\\blevels?\\b"
+    }
+   ]
+  },
+  {
+   "id": "R-region-area-map",
+   "title": "Region Map=地区地图 / Area Map=区域地图",
+   "decision": "2026-08-14f",
+   "why": "两者曾都叫「区域地图」，升降机下拉框里并排出现两个一模一样的选项。⚠ 这条正是「断言空转」的活标本：第十五轮它一直全绿，而 ember lang 的 `EMBER.CALENDAR.REGION` 等 5 个键反着写了「区域地图」，四个发布版没人发现 —— 因为旧版 distinct_terms 只比配置、不读库。scan 字段就是那次事故的补丁",
+   "kind": "distinct_terms",
+   "scan": [
+    "lang"
+   ],
+   "min_hits": 7,
+   "terms": [
+    {
+     "en": "Region Map",
+     "cn": "地区地图",
+     "en_gate": "\\bRegion Maps?\\b"
+    },
+    {
+     "en": "Area Map",
+     "cn": "区域地图",
+     "en_gate": "\\bArea Maps?\\b"
+    }
+   ]
+  },
+  {
+   "id": "R-tridents-point-falsepositive",
+   "title": "Trident's Point 的「本地区地图」是假阳性，绝不能替换",
+   "decision": "2026-08-14f",
+   "why": "中文是「本地区」+「地图」（英文 a map of the local region），「地区地图」只是碰巧的子串。机械替换会改成「本区域地图」，意思全变",
+   "kind": "leaf_literal",
+   "pack": "ember.crucible-adventure.json",
+   "path": "Ember Early Access.journals.Ordain Gazetteer.pages.Trident's Point.text",
+   "must_contain": [
+    "本地区地图"
+   ],
+   "must_not_contain": [
+    "本区域地图"
+   ]
+  },
+  {
+   "id": "R-soulbound-progression",
+   "title": "Soulbound Progression = 魂缚进阶，「魂缚进程」已废",
+   "decision": "2026-08-14d",
+   "why": "glossary_ec 定稿是「进阶」，而 DIALOG_TITLES 早前写「进程」，同屏两种说法",
+   "kind": "cn_absent",
+   "cn": "魂缚进程"
+  },
+  {
+   "id": "R-highgate",
+   "title": "Highgate = 高门，「海门」是把 High 听成了 Hai",
+   "decision": "2026-08-13h",
+   "why": "英文三处明说它是通往内陆的北方陆上门户，与海无关；错译曾渗透 name 字段与 glossary",
+   "kind": "cn_absent",
+   "cn": "海门"
+  },
+  {
+   "id": "R-otherhood",
+   "title": "Otherhood of Fortune = 幸运异姊会，「异缘会」已废",
+   "decision": "2026-08-13i",
+   "why": "全库 186 处曾只改了 3 叶，剩下的叶子里同段同时出现两种说法，比不改还糟",
+   "kind": "cn_absent",
+   "cn": "异缘会"
+  },
+  {
+   "id": "R-marlstone",
+   "title": "Marlstone = 马尔石，「马尔斯通」已废",
+   "decision": "2026-08-13g",
+   "why": "城区得名于该石材，「铺着马尔石」靠「石」字成立；8 个复合专名统一到马尔石",
+   "kind": "cn_absent",
+   "cn": "马尔斯通"
+  },
+  {
+   "id": "R-evidence-value",
+   "title": "Evidence = 证据，不是「证据值」",
+   "decision": "2026-08-13j",
+   "why": "「证据值」是 29 叶坏替换的源头",
+   "kind": "cn_absent",
+   "cn": "证据值"
+  },
+  {
+   "id": "R-presence-wisdom",
+   "title": "Presence=存在，不得译成「感知力」（Wisdom 的定译才是感知）",
+   "decision": "2026-08-13g",
+   "why": "把 Presence 译成「感知力」等于把两个属性混成一个，玩家算不出 (坚韧+存在)/4 那类公式",
+   "kind": "cn_absent",
+   "cn": "感知力"
+  },
+  {
+   "id": "R-lang-parity",
+   "title": "两仓 lang/cn.json 的键数必须等于英文侧",
+   "decision": "2026-08-12（1.1.0 事故）",
+   "why": "1.1.0 那次 lang 有 77% 静默失效，就是键形态错导致 Foundry 查不到",
+   "kind": "lang_parity",
+   "packages": {
+    "crucible": "%LOCALAPPDATA%\\FoundryVTT\\Data\\systems\\crucible",
+    "ember": "%LOCALAPPDATA%\\FoundryVTT\\Data\\modules\\ember"
+   }
+  },
+  {
+   "id": "R-anchor-ids",
+   "title": "标题上的显式 id= 不得减少",
+   "decision": "2026-08-13j",
+   "why": "全库 1491 个 <hN> 补了英文 slug 的 id，撑着 590 处 #锚点 链接。任何改标题文字的批次都必须原样保留 id，删掉就断",
+   "kind": "anchor_ids",
+   "min": 900,
+   "scope": [
+    "ember"
+   ]
+  },
+  {
+   "id": "R-bare-cn-fields",
+   "title": "tokenName / encounterTokens / levels 一律裸中文，不带双语尾巴",
+   "decision": "2026-08-13j + 2026-08-14e",
+   "why": "既定书写约定：name 字段写「中文 English」，这几类字段写裸中文。写错会让 scan_same_en_split 整批报警",
+   "kind": "no_bilingual_tail",
+   "fields": [
+    "tokenName",
+    "encounterTokens",
+    "levels",
+    "navName"
+   ],
+   "scope": [
+    "ember"
+   ]
+  },
+  {
+   "id": "R-exclusions-closed",
+   "title": "same_en_split 的分叉组必须全部已归档豁免（现场重跑扫描器）",
+   "decision": "2026-08-13k + 2026-08-14d，判据形态 2026-08-16 改",
+   "why": "125 条永久豁免每条都带硬证据；冒出新组说明要么是新缺陷、要么该补一条豁免——两种都要人看。⚠ **这条断言本身被抓到在空转**（第三种空转形态）：原判据读的是磁盘上的 `4-临时脚本/2026-08-15-round15/qa2/same_en_final.json`，那是**第十五轮的产物、15 组**，而第十六轮库里实跑 `scan_same_en_split` 是 **14 组 / 123 叶**。也就是说它只与「上次谁跑过扫描并写了那个文件」一样新 —— 库里新分叉出来它不会变红，而这正是它存在的唯一理由。`min_hits` 与 `scan` 两道护栏都防不住这一类：它「读了库」，只不过读的是库的一张过期照片。现改为**每次现场子进程重跑扫描器**，并把「英文唯一串多少条 → 分叉多少组多少叶」打进 detail；扫描器跑不起来一律判失败。`min_en_strings` 是这一类的反空转护栏（实测 14191 条）",
+   "kind": "exclusions_closed",
+   "exclusions": "4-临时脚本/2026-08-13-round12/findings/EXCLUSIONS.json",
+   "scanner": "scan_same_en_split.py",
+   "min_en_strings": 10000,
+   "short_len": 40,
+   "long_keys": [
+    "Adelyne",
+    "lookup @name"
+   ]
+  },
+  {
+   "id": "R-glossary-not-laundering",
+   "title": "词表不得把错值洗成权威（base 与产物两层同查）",
+   "decision": "2026-08-15b（第十五轮 ③ 查出 4 条阻断）",
+   "why": "词表是构建产物，harvest 压过 base；base 层的陈旧错值从不被覆盖，下一轮有人拿词表当依据反向回灌就会把包改坏。实测 4 条全是 source='base'：Kinesis=念动力（与 Telekinesis 撞车）· Fortitude=坚韧（与 Toughness 撞车）· Rank=等级（Rank/level 不可分）· Region Map=区域地图（会把刚拆开的 地区地图 洗回去）。第十六轮补进本轮已在 base 与产物**两层同时就位**的 9 条：Cyclonic/Corla/Point/Dynamic Token/Lantyr's Blade/Temple Lunarium/Orb Destroyed 是本轮 9 条裁决的词表侧落地；`Hex`=妖术 与 `Hexes`=六边格 则是**同形异义**的词表侧看守 —— 见 R-hex-homograph，下一轮若有人为「统一裁决 6」把词表的 Hex 一起改成六边格，重建后立刻产生一条真 dispute（3 个 actor 的法术 name 会被改坏）。⚠ 只登记两层都已就位的条目：本轮实测 base 的 `Arcturians`=阿克图里亚人（该是阿克图里安人）、`Cosmological Attunement`=宇宙调谐（Attunement 的定译是同调）两条**尚未就位**，故意不进这张表，先记在交接里等落盘。第十六轮收尾（2026-08-16e）再补 **14 条**，分两批：① 本轮已在 base 与产物**两层同时就位**的 9 条 —— `Arcturel` / `Arcturian` / `Arcturians`、`Cosmological Attunement`（这两条正是上一版记下的「尚未就位、先记在交接里」的欠账，**已还**）、`The Dives` / `the Dives`（大小写两种写法库里都出现，两条都登）、`Cosmos` / `Cosmic` / `Cosmological`；② 与本轮新裁的两组二分配套的 5 条 —— `Cosmology`、`Kessia` / `Kessian` / `Kessian Sand Knife`（见 R-kessia-vs-kessian）、`Ordani`（见 R-ordain-vs-ordani）。⚠ **`Cosmology` 必须登 want=「宇宙观」，登「宇宙」会立刻把这条断言打红** —— 不是裁决变了，是判据形状：`a_glossary_value` 比的是 `want in (got, got.split(\" \")[0])`，产物是「宇宙观 Cosmology」，取到的头部就是「宇宙观」，「宇宙」不等于它。锚点页名本身就是「宇宙观 Cosmology」，所以「宇宙观」才是这个**词表键**的正确值；R-cosmology-cosmos 里那条「Cosmological/Cosmology＝宇宙」管的是**正文里的泛指用法**（作普通名词/形容词的 cosmology、cosmological），两者不冲突，别互相回灌。⚠ **`Ordain` 故意不登**：base 里它是多义 list `[\"奥尔丹\",\"授命\"]`（城名／动词两义），`build_glossary` 的 base 层只收 str 直接跳过它，而 `a_glossary_value` 拿到 list 会判失败。同形的还有 `Shield`。多义词的看守归 R-ordain-vs-ordani 那种读库闸，不归词表值断言。⚠ 这 14 条能登的前提是 2026-08-16e 把 `build_glossary.py` 的 `format_only` 收紧了：旧判据含一个纯子串子句 `(b in cn_s)`，凡 base 值是 shipped 值的子串就被静默判成「只是双语格式差异」，3174 条 `baseVsShipped` 里因此**吃掉了 11 条真 dispute**（`Cosmology` 宇宙→宇宙观 · `Axe` 斧→斧头 · `Buckler` 圆盾→小圆盾 · `Pallid Drakeling` 幼龙→幼龙兽 · `Lyla Cevher` 莱拉→莱拉·杰夫赫尔 · `Ooze` 软泥怪→软泥 · `Elemental` 元素→元素生物 等）。收紧成「base 值 + 空格 + 英文」**整串相等**后 12 条 dispute 全部现形并逐条裁掉（多数是 shipped 对，base 改成 shipped 的裸中文；`Ooze` 按 name 叶裁 —— `scenes.Verdant Paths.regions.Ooze.name`＝软泥 是地表/区域，生物类别那一支仍由 base 的 `Oozes`＝软泥怪 与 byrole 的 `folders` 桶承担），产物 `glossary_ec.json` **一个值都没变**（7971 条逐键比对，差异 0）—— 也就是说这次收紧纯粹是把 11 条本该被人看见一次的裁决从判据里放出来，没有改动任何已发布译名。**`disputes` 现在是真 0，不是被判据吃掉的 0**",
+   "kind": "glossary_value",
+   "files": {
+    "base": "..\\glossary_crucible_merged.json",
+    "product": "5-其他内容/glossary/glossary_ec.json"
+   },
+   "entries": {
+    "Kinesis": "念力",
+    "Telekinesis": "念动力",
+    "Fortitude": "强韧",
+    "Toughness": "坚韧",
+    "Rank": "阶位",
+    "Tier": "阶",
+    "Level": "等级",
+    "Region Map": "地区地图",
+    "Cyclonic": "气旋",
+    "Corla": "科尔拉",
+    "Point": "岬",
+    "Dynamic Token": "动态指示物",
+    "Lantyr's Blade": "兰提尔的刀刃",
+    "Temple Lunarium": "神殿月辉宫",
+    "Orb Destroyed": "法珠已摧毁",
+    "Hex": "妖术",
+    "Hexes": "六边格",
+    "Arcturel": "阿克图瑞尔",
+    "Arcturian": "阿克图里安",
+    "Arcturians": "阿克图里安人",
+    "Cosmological Attunement": "宇宙同调",
+    "The Dives": "矿渊",
+    "the Dives": "矿渊",
+    "Cosmos": "寰宇",
+    "Cosmic": "宇宙",
+    "Cosmological": "宇宙",
+    "Cosmology": "宇宙观",
+    "Kessia": "凯西亚",
+    "Kessian": "凯西安",
+    "Kessian Sand Knife": "凯西安沙刀",
+    "Ordani": "奥尔达尼"
+   }
+  },
+  {
+   "id": "R-catwalk",
+   "title": "catwalk = 猫道（boardwalk 才是木栈道）",
+   "decision": "2026-08-15c",
+   "why": "第十五轮 ① 查出这条通道有猫道/栈道/栈桥/高架走道四种译名，分裂线正好落在「GM 朗读文本 vs GM 指令段」之间 —— 同一场戏里 GM 念一个词、看另一个词。统一到猫道（改动面最小：21 处不动、只改离群叶）。⚠ 单元制审计只改了自己那本 journal，全库还剩 3 叶在别的 journal 里，是靠发版后回包核对才发现的（2026-08-13i 那条教训的又一次命中）",
+   "kind": "term_gated",
+   "en": "\\bcatwalk",
+   "cn_required": "猫道",
+   "scope": [
+    "ember"
+   ],
+   "min_hits": 1
+  },
+  {
+   "id": "R-drakeling",
+   "title": "Drakeling = 幼龙兽（Drake=龙兽 的同族构词）",
+   "decision": "2026-08-15d",
+   "kind": "term_gated",
+   "why": "Drake 全族 name 字段无一例外是「龙兽」（龙兽巢穴/苍白龙兽/究极龙兽/成年龙兽），裸 Drakeling 的 name 就是「幼龙兽」。作「幼龙」会让玩家认不出是同一族。⚠ 计数陷阱：「幼龙」是「幼龙兽」的子串，裸「幼龙」实际只有 74 处不是 131",
+   "en": "\\bDrakelings?\\b",
+   "cn_required": "幼龙兽",
+   "scope": [
+    "ember"
+   ],
+   "except_paths": [
+    "Drakeling Scales"
+   ]
+  },
+  {
+   "id": "R-afflicted",
+   "title": "Afflicted = 受难（不带「的」）",
+   "decision": "2026-08-15d",
+   "kind": "cn_absent",
+   "cn": "受苦的苍白",
+   "why": "依据不是词频（受难 40 : 受苦 38 持平）而是**构词**：该族修饰语全是裸二字（苍白/变异/辉耀/病弱/成年/究极），只有「受苦的」多一个「的」，形态上是唯一例外"
+  },
+  {
+   "id": "R-inkaro-pool",
+   "title": "Inkaro Pool = 因卡罗水潭",
+   "decision": "2026-08-15d",
+   "kind": "cn_absent",
+   "cn": "因卡罗池",
+   "why": "两条依据同向：地点条目 name 就是「因卡罗水潭 Inkaro Pools」（阶梯第 1 档），全库 67:20。注意 Inkaro Pearl 是另一样东西，不要牵连"
+  },
+  {
+   "id": "R-clipper-name",
+   "title": "Clipper 一律作「克利珀」，「快剪手」已废",
+   "decision": "2026-08-15d",
+   "kind": "cn_absent",
+   "cn": "快剪手",
+   "why": "actor 的 name 字段是「克利珀 Clipper」（阶梯第 1 档），而物品 Clipper's Endless Scroll 曾译作「快剪手的无尽卷轴」—— 同一专名两种中文，玩家认不出是同一个人的东西"
+  },
+  {
+   "id": "R-boardwalk",
+   "title": "boardwalk = 木栈道",
+   "decision": "2026-08-15c",
+   "kind": "term_gated",
+   "why": "全库 14:6，且「木栈道」是 boardwalk 的标准对应词。catwalk 让出「栈道」之后这条才成立。⚠ 替换必须用 (?<!木)栈道 保护，否则会把 boardwalk 一起改坏",
+   "en": "\\bboardwalks?\\b",
+   "cn_required": "木栈道",
+   "scope": [
+    "ember"
+   ]
+  },
+  {
+   "id": "R-version-matrix",
+   "title": "PROJECT.md 抬头与版本矩阵必须与 module.json 一致",
+   "decision": "2026-08-15e",
+   "why": "这一行历史上漂过两次（停在 0.9.6/1.1.7 与 0.9.7/1.1.10）。每次都是发完版、追加了本轮小节、但没回头改抬头。新会话第一件事就是读抬头判断现状，读到过期版本会直接判断错「现在到哪一步」",
+   "kind": "version_matrix",
+   "doc": "PROJECT.md",
+   "tag_prefix": {
+    "crucible": "",
+    "ember": "v"
+   }
+  },
+  {
+   "id": "R-junction-wheel",
+   "title": "Junction Wheel = 枢纽轮盘（改判，原裁「路口轮盘」）",
+   "decision": "2026-08-15e",
+   "kind": "term_gated",
+   "why": "物品 name 就是「雅科什塔枢纽轮盘」（阶梯第 1 档），英文闸 14:2，glossary 也已 harvest 成枢纽轮盘。词义上也更对：矿车道岔，「路口」是地面街道的 register。原裁决被静默推翻过且无记录 —— 这条断言就是为了不再翻第三次",
+   "en": "\\bJunction Wheel\\b",
+   "cn_required": "枢纽轮盘",
+   "scope": [
+    "ember"
+   ]
+  },
+  {
+   "id": "R-shard-god",
+   "title": "Shard God 三分：之神 / 诸神 / 女神，不许统一",
+   "decision": "2026-08-15e",
+   "kind": "distinct_terms",
+   "why": "name 字段完全自洽：Shard God→碎片之神、Shard Gods→碎片诸神、Shard Goddess→碎片女神。三者各有各的英文，看着像分裂只是因为一叶里可同时出现多种形态。这条断言防的是下一轮按多数派把它们「统一」掉。⚠ **2026-08-16 终段：单复数不再是零字节检查了。** 原来单复数两支写着 `gate: false`（＝一个字节都没查），理由是「一叶里同时出现 a shard god 与 other shard gods 时叶级判据分不出是哪一处，硬上闸会造出 11 条假阳性」。绕法不是去做逐位对齐，而是**把闸只下在英文侧不含歧义的那些叶上**：`(?s)^(?!.*\\bShard Gods\\b).*\\bShard God\\b` 只命中「整叶只有单数」的叶，反之亦然。实测 **单数专属 264 叶 264/264 含「碎片之神」**、**复数专属 117 叶 114/117 含「碎片诸神」**、女神 77 叶 77/77 —— 合计 455 叶真的在被查。现在谁把之神／诸神按多数派统一掉，这条一定会红。⚠⚠ **判据边界（仍然要写清）**：① **同时含单复数两种形态的 70 叶不查**，那是叶级判据的死角，要抓得做逐位对齐（英文侧逐个出现位置对齐中文侧），成本另算；② 复数专属的 3 叶例外是**泛指全称**用法（`Shard Gods are mortal ascendants` / `equal in power to older Shard Gods`），中文不标复数、用「碎片之神」当类名，逐叶核过是既有译法不是被统一掉的痕迹，登记在 `except_paths` 里",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 400,
+   "terms": [
+    {
+     "en": "Shard God（只含单数的叶）",
+     "cn": "碎片之神",
+     "en_gate": "(?s)^(?!.*\\bShard Gods\\b).*\\bShard God\\b"
+    },
+    {
+     "en": "Shard Gods（只含复数的叶）",
+     "cn": "碎片诸神",
+     "en_gate": "(?s)^(?!.*\\bShard God\\b).*\\bShard Gods\\b",
+     "except_paths": [
+      "Deities.pages.Kinalathi.contentGamemaster",
+      "actors.Sigil.archetype.description"
+     ]
+    },
+    {
+     "en": "Shard Goddess",
+     "cn": "碎片女神",
+     "en_gate": "\\bShard Goddess(es)?\\b"
+    }
+   ]
+  },
+  {
+   "id": "R-rank-sense-compendium",
+   "title": "compendium 侧的 Rank：机制义＝阶位；普通名词义（公民地位／行列／军衔）不归这条裁决管",
+   "decision": "2026-08-14d（裁决本体）+ 2026-08-16d（第十六轮终段补 compendium 侧的闸）",
+   "why": "补的是一片**整块无闸区**：`R-tier-rank-level` 的 `scan` 只写了 `lang`、实测只命中 62 个键，而第十六轮在 compendium 侧改了 **176 叶**（IGNORECASE 英文闸下 阶位 221 : 等级 51）—— 那 176 叶此前没有任何断言看守。compendium 侧不能照搬 lang 的判据，因为英文 `rank` 在这里是**两个词**：机制义（`Novice rank in Arcana` / `Attunement Rank 1` / `Soulbound Rank` / `Bonus|Rank|Scale` 表头）与普通名词义（`denote their civic rank` 公民地位 / `within the ranks of Shard Gods` 行列 / `rank as a Commander` 军衔 / `rank-and-file` 普通一兵）。所以本条用 `sense_gated`：按**剥标签后的上下文窗口**把每一处出现分类成 GAME/COMMON（两张正则表与 `4-临时脚本/2026-08-15-round16/probes/split_rank.py` 同源，COMMON 优先），然后**只闸得住的那两个方向** —— ①反向闸：中文用了「阶位」而英文侧一个 `rank` 都没有（实测 221 叶全部有英文支撑，0 违规），抓的是「整词替换扫到了 Tier/level 的叶」；②普通名词义专属叶不得含「阶位」（实测 96 叶无一含，0 违规），抓的是「顺手全库统一」。⚠ **判据边界，别把绿读成全覆盖**：**故意不做**「GAME → 中文必须含阶位」的正向闸 —— 纯 GAME 的 230 叶里有 **13 叶**中文正当地没有「阶位」（`1 rank of exhaustion`＝1 层力竭 · `close ranks with enemy characters`＝并肩结阵 · `join their ranks`＝加入他们 · 更新日志里被整段改写的 `Soulbound (rank 1 only)`），那是分类器窗口太粗，不是译文错。所以本条**证明不了「每一处机制义都译对了」**，它证明的是「阶位没被刷到不该去的地方，也没从该在的地方被统一掉」。混合叶 8 / 无法分类叶 57 同样不查",
+   "kind": "sense_gated",
+   "en": "\\branks?\\b",
+   "cn": "阶位",
+   "window": 90,
+   "sense": {
+    "game": "(Novice|Journeyman|Adept|Master|Untrained|training|skill|Attunement|Attuned|Soulbound|Soulmark|talent|progress|superior to|exhaustion|Scale|Rank\\s*\\d|\\bBonus\\b)",
+    "common": "(civic|social|nobil|noble|militar|clerical|within the order|of the order|stripped of|full rank of|ranks of|swell(ing)? the ranks|rank[- ]and[- ]file|hierarch|station|office|through the ranks|within [^.]{0,30}\\branks\\b|beyond its ranks|rose to ranks|\\branks (after|and)\\b|rank as an? )"
+   },
+   "require_en_support": true,
+   "forbid_when_all_common": true,
+   "min_en_leaves": 300,
+   "min_cn_leaves": 150,
+   "min_common_leaves": 60
+  },
+  {
+   "id": "R-dives-mine",
+   "title": "the Dives = 矿渊（本来就定了的译名，不是待裁项）",
+   "decision": "2026-08-16d（第十六轮主控终段补裁 T-1）",
+   "why": "依据是**阶梯第 1 档的 name 叶**，共 8 个、彼此完全一致：`矿渊 The Dives`（Arctus 地名志页）· `阿克图瑞尔矿渊 Arcturel Dives`（journal 与 scene 各一）· `地表：矿渊 Surface: Dives` · `过渡：抵达矿渊` · `过渡：下行至矿渊` · `黑暗：矿渊` · `矿渊矿井效应 The Dives Mine Effects`。它从来不是待裁项，第十六轮某一段把它误升级成「7 叶待主控定译」是**漏看了 name 叶**；实际散文面是 **102 叶**（不是 7 叶也不是 30 叶）。⚠ **必须区分大小写**：小写 `dives` 是**动词**（`Jasper dives for cover` / `a tiny red-beaked bird which dives down` / `the Leviathan dives into the ocean`），仅小写形态的叶有 10 个，按 IGNORECASE 判会把它们全部误报。这是本项目里少数几个「大小写真的是判据一部分」的地方，与 `R-electricity-lightning` 同型。⚠ 上游有一处脏数据 `the DivesArcturel`（缺空格，`Chessmen Homecoming.text` 孪生 2 叶），`\\bDives\\b` 因为词边界不成立而**匹配不到它** —— 中文那两叶照英文原意写对了（矿渊×2），不必也不该去改英文。⚠ **`except_paths` 已于 2026-08-16e 收尾清空**：原先豁免的那一叶（`The Book Of Tales.pages.The Crystal Quarryman.overview`，中文整句漏掉了 `and then down to the Dives district`）是**内容欠账不是术语错**，已在第十六轮终段批次补进中文（现为「再下行至矿渊城区」，孪生两包各一份）。清空后实测英文闸命中 **102 叶、102/102 含「矿渊」、零违规**，闸面从 100 叶涨到 102 叶，`min_hits` 同步 90→100。⚠ 留下这条做法示范：**豁免表里的内容欠账一旦还清就要立刻删掉**，否则它会变成一条谁也不敢动、也没人记得为什么存在的死配置 —— 而豁免表越长，真例外与旧欠账就越分不开",
+   "kind": "term_gated",
+   "en": "\\bDives\\b",
+   "case_sensitive": true,
+   "cn_required": "矿渊",
+   "scope": [
+    "ember"
+   ],
+   "min_hits": 100
+  },
+  {
+   "id": "R-arcturel-vs-arcturian",
+   "title": "Arcturel=阿克图瑞尔（城）不得与 Arcturian=阿克图里安（族）混用",
+   "decision": "2026-08-16d（第十六轮主控终段补裁 T-1 的 ⚠ 项）",
+   "why": "这是**两个英文词**，只差一个音节，中文也只差两个字，而它们在同一批叶子里高频并排出现（`Arcturel Dives` 与 `Arcturian dwellings` 常在一段话里）—— 主控实测散文里两者串过。`R-arcturian-split` 管的是 `Arcturian` **内部**的定语/指人二分，管不到「写成了城名」这一类；本条补的正是那个方向：城名与族名各自过一道读库英文闸，`distinct_terms` 再保证两个中文两两不同。实测 `\\bArcturel\\b` 286 叶（除登记的 2 叶外 284/284 含「阿克图瑞尔」）· `\\bArcturians?\\b` 700 叶（700/700 含「阿克图里安」），合计 984 叶。⚠ **判据边界**：叶级判据分不出**一叶之内**某一处该写城名还是族名 —— 96% 的叶两个词都有。这条能抓的是「整支被改名／被换成另一个词」，抓不到叶内单处串行。⚠ `except_paths` 的 2 叶（`actors.The Device.items.Powered Effect` 的 description 与 actions 各一）是**上游标签与目标错配**：英文标签写 `{Lower Arcturel Mine Effect}`，而它指向的 RollTable 名字是 `The Dives Mine Effects`，中文跟着目标名译成「矿渊矿井效应」。同 `P-uuid-kessia-ordain` 那一类，方括号内不改。⚠ 反向还有 4 叶「中文有阿克图瑞尔而英文没有 Arcturel」，那是上游把城名拼成了 `Arcurel` / `Arturel`（各 2 叶孪生），中文译对了 —— 本条按英文闸单向判，不受影响；上游拼写已在终段升报。⚠ 2026-08-16e 起本项目共有**四组**同型的「专名 vs 文化形容词」二分（本条 · R-kessia-vs-kessian · R-ordain-vs-ordani · R-arcturian-split），**通则写在 R-kessia-vs-kessian 的 why 里**：见到这种分裂先按二分查英文侧，别按多数派统一",
+   "kind": "distinct_terms",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 900,
+   "terms": [
+    {
+     "en": "Arcturel",
+     "cn": "阿克图瑞尔",
+     "en_gate": "\\bArcturel\\b",
+     "except_paths": [
+      "actors.The Device.items.Powered Effect"
+     ]
+    },
+    {
+     "en": "Arcturian",
+     "cn": "阿克图里安",
+     "en_gate": "\\bArcturians?\\b"
+    }
+   ]
+  },
+  {
+   "id": "R-kessia-vs-kessian",
+   "title": "Kessia=凯西亚（大陆）不得与 Kessian=凯西安（文化/定语）混用",
+   "decision": "2026-08-16e（第十六轮收尾，主控裁）",
+   "why": "这是**两个英文词**：`Kessia` 是大陆／故土的专名，`Kessian` 是文化形容词与指人的名词，与 R-arcturel-vs-arcturian 形态完全一样。依据阶梯第 1 档的 name 叶自洽：`Kessian`＝「凯西安 Kessian」（×4）· `Kessia`＝「凯西亚 Kessia」（×2）· `Kessian Sand Knife`＝「凯西安沙刀 Kessian Sand Knife」（此条原为「凯西亚沙刀」，是全库唯一的 name 叶缺陷，主控已于 2026-08-16e 落盘修好，孪生 2 叶；词表 base 层同步改正，见 R-glossary-not-laundering）。散文面英文闸 `\\bKessia` 下中文 凯西亚 152 : 凯西安 102 —— **这是二分，不是分裂，别按多数派统一**。实测本条两道闸：`\\bKessia\\b` 65 叶（65/65 含「凯西亚」）· `\\bKessians?\\b` 64 叶（除登记的 3 叶外 61/61 含「凯西安」），合计 126 叶。⚠ **通则：本项目已经出现四组「专名 vs 文化形容词」二分** —— `Arcturel`（城）/`Arcturian`（族）· `Kessia`（大陆）/`Kessian` · `Ordain`（城）/`Ordani` · 以及 `Arcturian` **自身**的「定语／文化标签」对「指人的名词」二分（见 R-arcturian-split）。**下一轮再见到这种「中文侧看起来像分裂」的形态，先按二分去查英文侧，别按多数派统一**：第十六轮第二段就是按多数派把 `actors.Arcturian` 统一掉，让 `scan_label_vs_name` 从 2 处涨到 20 处，与第十二轮 G5 的预言逐字吻合。⚠ `except_paths` 的 3 叶**是两类东西，别混为一谈**：（a）`Ordain Gazetteer.pages.Sunhaven.text`（孪生 2 叶）**不是欠账，是已裁的合法形态**（主控 2026-08-15f 终裁）：`Kessian` 在**散文里作定语表来源**时（`Kessian traders` / `Kessian continent` / `a Kessian family`）写「凯西亚…」是对的 —— **凯西亚商人＝来自凯西亚的商人**，中文本就这么说，同 `美国人` 由 `美国` 派生。写「凯西安」的是另一支：**文化／血统标签这个游戏实体**（culture 页 name＝凯西安 · `<文化><血统>` 标签如 `Kessian Kiska` · 以该文化命名的物品如 `Kessian Sand Knife`＝凯西安沙刀）。这条二分与 `Arcturian` **自身**那条（定语＝阿克图里安／指人的名词＝阿克图里安人）是同一个机制的两个方向，全库 152:102 的分布正是它造成的。**所以这一叶永久豁免，不要再当欠账升报。**（b）`actors.Gastern Faviyos.items.Multiattack.description` 是 `[[/item Kessian Sand Knife]]` enricher —— 方括号内按既定约定照抄英文，中文侧本来就不该出现「凯西安」，这是**合法例外**不是欠账。⚠ 它**只有 crucible-adventure 一叶**：ember.adventure 里同一个 actor 没有 description 叶，不是漏钉了孪生的一半。⚠ **判据边界**：与 R-arcturel-vs-arcturian 同型 —— 叶级判据分不出**一叶之内**某一处该写专名还是写形容词，它能抓的是「整支被改名／被换成另一个词」。",
+   "kind": "distinct_terms",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 110,
+   "terms": [
+    {
+     "en": "Kessia",
+     "cn": "凯西亚",
+     "en_gate": "\\bKessia\\b"
+    },
+    {
+     "en": "Kessian",
+     "cn": "凯西安",
+     "en_gate": "\\bKessians?\\b",
+     "except_paths": [
+      "Ordain Gazetteer.pages.Sunhaven.text",
+      "actors.Gastern Faviyos.items.Multiattack"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-ordain-vs-ordani",
+   "title": "Ordain=奥尔丹（城）不得与 Ordani=奥尔达尼（文化/定语）混用",
+   "decision": "2026-08-16e（第十六轮收尾；§8 2026-08-12 已按 3062:225 裁定，本条是它的可执行版本）",
+   "why": "「专名 vs 文化形容词」二分的第三组（**通则写在 R-kessia-vs-kessian 的 why 里，先读那条**）：`Ordain` 是城名＝奥尔丹，`Ordani` 是文化／定语＝奥尔达尼。name 叶完全自洽：`Ordain Gazetteer`＝奥尔丹地名志 · `Ordain Spires`＝奥尔丹尖塔区 · `Ordain Waterfront`＝奥尔丹滨水区 · `Vista: Ordain Interiors`＝远景：奥尔丹室内景，对 `Ordani Skywalk`＝奥尔达尼天桥 · `Ordani Imports`＝奥尔达尼进口商行 · `Ordani Wine (Fine)`＝奥尔达尼葡萄酒（优质） · `Ordani Aristocrat`＝奥尔达尼贵族。实测 `\\bOrdain\\b` 1412 叶（除登记的 5 叶外 1407/1407 含「奥尔丹」）· `\\bOrdani\\b` 658 叶（除登记的 2 叶外 656/656 含「奥尔达尼」），合计 2063 叶。⚠ **`Ordan's Key` 不是缺陷，别去动它**：`Ordan` 是**人名所有格**（福布鲁克区那名失职的辉手守卫者），全库唯一一处，既不是 `Ordain` 也不是 `Ordani`，中文「奥尔丹的钥匙 Ordan's Key」是对的。它**不需要 except_paths** —— `\\bOrdain\\b` 与 `\\bOrdani\\b` 都匹配不到 `Ordan`（词边界不成立）；写在这里只是免得下一轮有人拿正则一扫就来「统一」。⚠ 大小写：**故意用 IGNORECASE**。上游有 8 叶把城名写成小写 `ordain`（`the ordain port` / `citizens of ordain` / `ordain locations` / `#ordain-rumors-table` 锚点），全是城名不是动词，按 case_sensitive 判会少看守这 8 叶。这与 R-dives-mine 那种「小写 `dives` 是动词、必须 case_sensitive」的情形**正相反** —— **每条闸都要单独判一次「大小写是不是判据的一部分」，没有全局默认可抄**。⚠ `except_paths` 的 5+2 叶分两类：（a）~~内容欠账~~ **已于 2026-08-15f 补上并删除豁免**：`Skycrest.exposition`（孪生 2 叶）补回城名「奥尔丹」· `Jon Vastil.biography.private`（仅 crucible-adventure）改为「出生在奥尔丹城中的铸币财富高地城区」。**豁免一还清就立刻删，这是 R-dives-mine 立的规矩。**（b）**合法例外**：`Traveler's Rest.pages.Downstairs Vestibule.text`（孪生 2 叶）里的 `<em>SWEET RELIEFS, EST. 2483. ORCHARD LANES - ORDAIN</em>` 是**木桶上的英文烙印**，与同段的 `WATER` / `WINE` / `HARD CIDER` 一样按既定约定原样保留 · `Local Color.pages.Outside the Lines.text`（孪生 2 叶）是 `[[/culture Ordani]]` enricher，方括号内照抄英文。⚠ **判据边界**：叶级，抓不到叶内单处串行 —— `\\bOrdain\\b` 命中的 1412 叶里绝大多数同时含 `Ordani`。它能抓的是整支被改名。",
+   "kind": "distinct_terms",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 2000,
+   "terms": [
+    {
+     "en": "Ordain",
+     "cn": "奥尔丹",
+     "en_gate": "\\bOrdain\\b",
+     "except_paths": [
+      "Traveler's Rest.pages.Downstairs Vestibule.text"
+     ]
+    },
+    {
+     "en": "Ordani",
+     "cn": "奥尔达尼",
+     "en_gate": "\\bOrdani\\b",
+     "except_paths": [
+      "Local Color.pages.Outside the Lines.text"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-fortitude-scope",
+   "title": "Fortitude=强韧 只管 crucible 侧；dnd5e 的 Undead/Undeathly Fortitude 保持坚韧",
+   "decision": "2026-08-15e",
+   "kind": "glossary_value",
+   "why": "第十五轮 ③ 曾把 dnd5e 的特性名一并改成「强韧」——越界。§1 明定 dnd5e 侧不受 crucible 定译辖制，「亡灵坚韧/不死坚韧」是 5e 通行译法。这条把两侧同时钉住，防止再被任一方向拉平",
+   "files": {
+    "base": "..\\glossary_crucible_merged.json",
+    "product": "5-其他内容/glossary/glossary_ec.json"
+   },
+   "entries": {
+    "Fortitude": "强韧",
+    "Toughness": "坚韧",
+    "Undeathly Fortitude": "不死坚韧"
+   },
+   "require_present": false
+  },
+  {
+   "id": "R-token-foundry-ui",
+   "title": "Token = 指示物，「令牌」「代币」零容忍",
+   "decision": "2026-08-15f（第十六轮裁决 1）",
+   "why": "依据是 foundry_chn 核心中文包：`TOKEN` 相关键 **指示物 53 : 令牌 0**（`FoundryVTT/Data/modules/foundry_chn/cn.json`）—— 玩家 UI 上写的就是「指示物」，正文写「令牌控制栏」玩家在界面上找不到那个控件。这压过全库裸词频（令牌 212 : 指示物 32），因为那 212 处几乎全挤在 GM 指南更新日志一处，而 lang 通道 11/11、compendium 里凡指代 Foundry 对象的 32/32 都是指示物。连带：Dynamic Token→动态指示物 · Token Maker→指示物制作器 · Teleport Token→传送指示物。「代币」是错译：`<h3>Dynamic Tokens</h3>` 曾译作「动态代币」而同叶正文写「动态令牌」，自相矛盾。⚠ 故事内的**实体信物**不在本裁决范围。⚠⚠ **2026-08-16 终段订正：这张 except_paths 与库账对不上，已收窄。** 原先按「全库 4 叶保留代币」列了 3 个路径片段（Westgate / Sellen / Jorey Swift），**实测库里只剩 1 叶**：`actors.Sellen.biography.private`（crucible-adventure 一包独有，「代币」出现 2 处 —— 发放的小代币 + 代币统计）。另两处早已被改成更贴切的中文：Westgate 的 `souvenir tokens` 现为「**纪念章**」（孪生 2 叶）、Jorey Swift 的 `wooden token` 现为「**木牌**」——**两处都改得对**，登记没跟着改，于是这两个路径片段变成了「豁免一个已经不存在的东西」的空条目：它们既不报错也不做事，还会让下一轮以为库里还有 3 处代币。复核口径：全库 compendium 40674 叶 + lang 2328 键里「代币」1 叶、「令牌」**0**、「指示物」285 叶 + 11 键",
+   "kind": "cn_absent",
+   "cn": [
+    "令牌",
+    "代币"
+   ],
+   "en": "\\bTokens?\\b",
+   "min_hits": 250,
+   "except_paths": {
+    "代币": [
+     "actors.Sellen.biography.private"
+    ]
+   }
+  },
+  {
+   "id": "R-aura-three-way",
+   "title": "Aura 三分不许统一：Ember 奥拉 / Crucible 灵气 / 泛用 灵气",
+   "decision": "2026-08-15f（第十六轮，沿用既定译名表）",
+   "why": "同一个英文词 `Aura` 在本库里是**三个东西**，中文侧看着像分裂，最容易被下一轮按多数派一刀切掉。三个域这样分：①**Ember 的月亮/同调/屈折**＝奥拉（lang `SPELL.INFLECTIONS.Aura`＝奥拉，形容词 `SPELL.INFLECTIONS.AuraAdj`＝英文 `Auric`＝奥拉的）；②**Crucible 的施法手势与目标类型**＝灵气（`SPELL.GESTURES.Aura` / `ACTION.TARGET_TYPES.Aura` / `ACTION.WARNINGS.AuraNoToken`）；③**泛用能力名** `Fear Aura` / `Command Aura` / `Aura of Life`＝灵气。每个 lang 域都带 cn_forbidden，即别域的中文不许渗进来。⚠ **判据边界 —— `Auric` 是本条的盲区，而且是故意留的盲区**：compendium 侧英文闸 `\\bAuric\\b` 命中的 **12 叶全部**是 Ember 的一种**矿物**，name 字段就是「金辉石 Auric」，与 lang 的 `SPELL.INFLECTIONS.AuraAdj`（英文也是 `Auric`，中文「奥拉的」）**同形不同义**。所以这条断言**只在 lang 通道查 AuraAdj，绝不给 compendium 的 `\\bAuric\\b` 上闸** —— 上了就是 12 条假阳性，而且下一轮很可能被「顺手统一」成把金辉石改成奥拉石。反过来说：本条的绿**不代表** compendium 里的 Auric 被检查过，它一个字节都没查那 12 叶。⚠ 第三域必须**区分大小写**：小写 `an aura of life and wildness`（艾索恩那叶）是散文里的普通名词，不是能力名",
+   "kind": "term_domains",
+   "term": "Aura",
+   "min_hits": 10,
+   "domains": [
+    {
+     "name": "Ember 月亮/同调/屈折＝奥拉",
+     "lang": {
+      "ember": {
+       "SPELL.INFLECTIONS.Aura": "奥拉",
+       "SPELL.INFLECTIONS.AuraAdj": "奥拉的"
+      }
+     },
+     "cn_forbidden": [
+      "灵气"
+     ]
+    },
+    {
+     "name": "Crucible 手势与目标类型＝灵气",
+     "lang": {
+      "crucible": {
+       "SPELL.GESTURES.Aura": "灵气",
+       "ACTION.TARGET_TYPES.Aura": "灵气",
+       "ACTION.WARNINGS.AuraNoToken": "灵气"
+      }
+     },
+     "cn_forbidden": [
+      "奥拉"
+     ]
+    },
+    {
+     "name": "泛用能力名＝灵气",
+     "gates": [
+      {
+       "en": "\\b(Fear|Command) Aura\\b",
+       "cn_required": "灵气"
+      },
+      {
+       "en": "\\bAura of Life\\b",
+       "cn_required": "灵气",
+       "case_sensitive": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-cyclonic",
+   "title": "Cyclonic = 气旋，且不得与 Whirlwind = 旋风 撞名",
+   "decision": "2026-08-15f（第十六轮裁决 2）",
+   "why": "原译「旋风的」与同叶的 `Whirlwind`「旋风」撞名，玩家在一段话里看到两个「旋风」指两种效果。词表里同词根的 `Cyclonic Displacement` 早已是「气旋位移」，改「气旋」既消歧又与词表一致。⚠ `actors.Fernis Ossa.items.Multiattack.description` 那叶豁免：中文是 `用 [[/item Cyclonic]] 以一个动作进行两次攻击`，方括号内按既定约定照抄英文，所以中文里不会有「气旋」——那是标记不是译文。cn_forbidden 只在 Cyclonic 闸内生效，库里另有 2 叶「拖曳着旋风的羽饰面具」（The Tanir）是正当中文，不受影响",
+   "kind": "distinct_terms",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 20,
+   "terms": [
+    {
+     "en": "Cyclonic",
+     "cn": "气旋",
+     "cn_forbidden": [
+      "旋风的"
+     ],
+     "except_paths": [
+      "actors.Fernis Ossa.items.Multiattack"
+     ]
+    },
+    {
+     "en": "Whirlwind",
+     "cn": "旋风"
+    }
+   ]
+  },
+  {
+   "id": "R-hex-tile",
+   "title": "Hex = 六边格，「六角格」已废",
+   "decision": "2026-08-15f（第十六轮裁决 6）",
+   "why": "glossary_ec 与 name 叶都站「六边格」，库内 六边格 62 : 六角格 38；`mappings.mjs` 已改，本轮把 compendium 那 38 叶补齐。⚠ 不能写成 term_gated：英文闸 `\\bhex(es)?\\b` 命中 160 叶，其中 60 叶的中文正当地没有「六边格」三个字（地名志里 `located in hex s.3201.2898` 被译成坐标写法、或整句改写），硬要求会造出 60 条假阳性。所以取「零容忍旧写法 + 英文闸只算命中数」的形态",
+   "kind": "cn_absent",
+   "cn": [
+    "六角格"
+   ],
+   "en": "\\bhex(es)?\\b",
+   "min_hits": 120
+  },
+  {
+   "id": "R-lantyr",
+   "title": "Lantyr = 兰提尔，「兰蒂尔」已废",
+   "decision": "2026-08-15f（第十六轮裁决 4）",
+   "why": "兰提尔 6 叶 : 兰蒂尔 4 叶，且多数派与 `mappings.mjs` 的登记一致；本轮改的是 `Lantyr's Blade` 那 4 叶。英文闸下 244 叶全部含「兰提尔」，是本轮最干净的一条",
+   "kind": "term_gated",
+   "en": "\\bLantyr",
+   "cn_required": "兰提尔",
+   "cn_forbidden": [
+    "兰蒂尔"
+   ],
+   "min_hits": 180
+  },
+  {
+   "id": "R-corla-cora",
+   "title": "Corla = 科尔拉，与人物 Cora = 科拉 拆开",
+   "decision": "2026-08-15f（第十六轮裁决 7）",
+   "why": "两者原先都叫「科拉」：Corla 是世界地图上的城镇，Cora 是人物。选择改 Corla 而不是改 Cora，理由是改动面最小 —— Corla 全库仅 4 处，Cora 有 233 叶。⚠ `Glitter in the Dark.pages.Presenting the Evidence` 那 2 叶豁免：那里的 `cora` 是 HTML 类名 `<section class=\"block attunement cora\">`，不是人名，中文侧当然没有「科拉」。判据是叶级的、不剥标签，所以只能按路径登记",
+   "kind": "distinct_terms",
+   "scan": [
+    "compendium"
+   ],
+   "min_hits": 150,
+   "terms": [
+    {
+     "en": "Corla",
+     "cn": "科尔拉"
+    },
+    {
+     "en": "Cora",
+     "cn": "科拉",
+     "except_paths": [
+      "Glitter in the Dark.pages.Presenting the Evidence"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-orb-destroyed",
+   "title": "Orb Destroyed = 法珠已摧毁",
+   "decision": "2026-08-15f（第十六轮裁决 3）",
+   "why": "库内 法珠已摧毁 4 : 法珠被摧毁 3 : 法珠已毁 0。`mappings.mjs` 原先写的「法珠已毁」库内零支持 —— 这是「声明式 mapping 与库内实际脱节」的又一例，三处统一到多数派",
+   "kind": "term_gated",
+   "en": "\\bOrb Destroyed\\b",
+   "cn_required": "法珠已摧毁",
+   "cn_forbidden": [
+    "法珠被摧毁",
+    "法珠已毁"
+   ],
+   "min_hits": 3
+  },
+  {
+   "id": "R-obsidian-antiquary",
+   "title": "Obsidian Antiquar* 前缀统一为「黑曜石」",
+   "decision": "2026-08-15f（第十六轮裁决 8）",
+   "why": "name 叶是「黑曜石古物学者」，而 Cleric 页正文写「黑曜古物学会」—— 同一组织两种中文。按 name 叶（阶梯第 1 档）统一到「黑曜石」前缀",
+   "kind": "term_gated",
+   "en": "\\bObsidian Antiquar\\w*",
+   "cn_required": "黑曜石",
+   "cn_forbidden": [
+    "黑曜古"
+   ],
+   "min_hits": 4
+  },
+  {
+   "id": "R-temple-lunarium",
+   "title": "Temple Lunarium = 神殿月辉宫",
+   "decision": "2026-08-15f（第十六轮裁决 5）",
+   "why": "`Lunarium` 的 name 叶一律「月辉宫」（`Central Lunarium`＝中央月辉宫），而 crucible-adventure 那 1 条正文写成「月神殿」。⚠ cn_forbidden 只在这 3 叶的闸内生效：全库另有 66 叶正当地含「月神殿」，那是 `Lunar Shrine` / `Moon Temple`（金罗湖月神殿 / 申特月神殿），与 Lunarium 无关，绝不能拿「月神殿」做全库替换",
+   "kind": "term_gated",
+   "en": "\\bTemple Lunarium\\b",
+   "cn_required": "神殿月辉宫",
+   "cn_forbidden": [
+    "月神殿"
+   ],
+   "min_hits": 2
+  },
+  {
+   "id": "R-point-cape",
+   "title": "世界地图地名 Point 改意译「岬」，音译「波因特」已废",
+   "decision": "2026-08-15f（第十六轮裁决 9）",
+   "why": "世界地图同一排城镇标签 10 个里 9 个是意译（Crown 王冠 / Dust 尘土 / Sail 帆 / Catch 渔获 / Break 断口 / Sorrow 哀伤 / Mourn 哀悼 / Tome 典籍 / Wheel 轮子），只有 `Point`→波因特 是音译孤例。按地图上的实际地形（海岬）定为「岬」，场景针脚 `scenes.The World of Ember.notes.Point` 现为「岬 Point」。⚠ **其余 9 个意译地名保持现状**，本轮不动；`Wheel`→轮子 尤其不许拿去做子串替换，`Junction Wheel` 是枢纽轮盘（见 R-junction-wheel）",
+   "kind": "cn_absent",
+   "cn": [
+    "波因特"
+   ],
+   "en": "\\bPoints?\\b",
+   "min_hits": 400
+  },
+  {
+   "id": "R-arcturian-split",
+   "title": "Arcturian 二分：定语／文化标签＝阿克图里安 · 指人的名词＝阿克图里安人",
+   "decision": "2026-08-16a（第十六轮主控补裁 R-A，推翻本轮第二段的「统一」批次）",
+   "why": "英文侧本来就是二分的：`Arcturian` 作**定语**（`Arcturian dwellings`、文化标签 `Arcturian Wirrun` / `Arcturian Human` / `Arcturian Fej`）472 次，作**指人的名词**（单数 86 + 复数 137）223 次；中文侧 阿克图里安 388 : 阿克图里安人 311 **正好对应这个二分**，不是分裂。本轮第二段的 `z3-arcturian.json` 把 `actors.Arcturian` 的 name/tokenName 从「阿克图里安人」改成「阿克图里安」，实测让 `scan_label_vs_name` 从 2 处涨到 20 处 —— 与第十二轮 G5 早已写下的预言逐字吻合（见 EXCLUSIONS.json 的 P-name-split-arcturian）。⚠ **判据边界**：定语域的闸是**弱闸**。因为「阿克图里安人」整串包含「阿克图里安」，叶级判据分不出一叶里的某一处该不该带「人」；111 叶里有 96 叶合法地同时含两种形态。定语域的闸只能证明「这一支没被整体改名（比如改成阿克图里亚）」，**证明不了逐处正确**。真正钉住二分的是另一半：复数标签 `{Arcturians}` 38 叶必须含「阿克图里安人」（实测 38/38），加上孪生 actor 卡由 `R-arcturian-actor-card` 逐叶钉死。⚠ `ember.character.json` 的 `entries.Arcturian.name`（血统条目）属**定语／文化**那一边，是「阿克图里安 Arcturian」，不要连坐",
+   "kind": "term_domains",
+   "term": "Arcturian",
+   "min_hits": 120,
+   "domains": [
+    {
+     "name": "指人的名词（复数 @UUID 标签 {Arcturians}）＝阿克图里安人",
+     "gates": [
+      {
+       "en": "\\{Arcturians\\}",
+       "cn_required": "阿克图里安人"
+      }
+     ]
+    },
+    {
+     "name": "定语／文化标签＝阿克图里安（弱闸，见 why）",
+     "gates": [
+      {
+       "en": "\\bArcturian (Wirrun|Humans?|Fej)\\b",
+       "cn_required": "阿克图里安"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-arcturian-actor-card",
+   "title": "actors.Arcturian 是一个「人」，name/tokenName 必须是阿克图里安人",
+   "decision": "2026-08-16a（第十六轮主控补裁 R-A）",
+   "why": "R-arcturian-split 的定语域是弱闸（叶级分不出带不带「人」），二分真正的锚点在这四叶上：`actors.Arcturian` 是**一张角色卡＝一个阿克图里安人**，不是文化标签。第十二轮 G5 已实测并写进豁免表：把这张卡改成「阿克图里安」会让 `scan_label_vs_name` 从 2 处涨到 20 处；第十六轮第二段照样又改了一次，所以这条断言的意义是**不要再改第三次**。孪生两包各 name + tokenName 共 4 叶，`min_leaves: 4` 保证只钉一包（或上游改名）时会红而不是静静放行",
+   "kind": "leaf_literal",
+   "pack": [
+    "ember.adventure.json",
+    "ember.crucible-adventure.json"
+   ],
+   "path": [
+    "Ember Early Access.actors.Arcturian.name",
+    "Ember Early Access.actors.Arcturian.tokenName"
+   ],
+   "must_contain": [
+    "阿克图里安人"
+   ],
+   "min_leaves": 4,
+   "scope": [
+    "ember"
+   ]
+  },
+  {
+   "id": "R-cosmology-cosmos",
+   "title": "Cosmological/Cosmology＝宇宙 · Cosmos＝寰宇，按英文词分裂，别统一",
+   "decision": "2026-08-16b（第十六轮主控补裁 R-B）",
+   "why": "两个英文词，两个中文，本项目的标准做法。锚点是 `Players' Guide.pages.Cosmology` 那一页 —— 它的中文 name 就是「宇宙观 Cosmology」，而正文里 `@UUID[...]{宇宙同调}` 正是指向它，**标签跟锚点走**。`Cosmos` 那一支（`TYPES.JournalEntryPage.ember.cosmos`＝余烬寰宇 / `EMBER.CALENDAR.COSMOS`＝寰宇地图 / 58 处 `{Cosmos}` 标签）保持「寰宇」不动。⚠ **绝不能拿 `\\bCosmolog\\w*` 给 compendium 全库上闸**：实测命中 135 叶、其中 54 叶假阳性，绝大多数是 `[[/knowledge cosmology]]` 这种 enricher —— 方括号内按既定约定照抄英文，中文正文里当然没有「宇宙」二字。同理 `\\bCosmos\\b` 命中 427 叶里有 2 叶假阳性，因为 `@UUID[JournalEntry.emberCosmos00000...]` 的 **id 里就含 Cosmos**。所以 compendium 侧只上两道窄闸（`Cosmological Attunement` 6 叶、`{Cosmos}` / `Cosmos Map` 78 叶），其余交给 lang 的具名键。（上一版记的落地欠账 —— `Attunement Mechanics.text` 孪生 2 叶与 ember lang 的 `EMBER.COSMOS.FIELDS.color.hint` / `.icon.hint` —— **已落盘**，本条现为绿。）⚠ **2026-08-16 终段补第三道窄闸**，因为前两道只看住了 `Cosmological Attunement` 与 `{Cosmology}` 标签，而主控 T-2 点名的**泛指同词根词**（`cosmic` / 单独出现的 `cosmology`）此前完全无闸：新闸取 `(?s)^(?!.*\\bcosmos\\b)(?=.*(\\bcosmic\\w*|\\bcosmolog\\w*))`，即「整叶英文有 cosmic/cosmolog 而**一个 `Cosmos` 都没有**」的叶，其中文**不得含「寰宇」**。用负向先行断言把 `Cosmos` 叶整片摘掉，是因为 `Cosmos` 是专名、那 425 叶里「寰宇」完全正当，叶级判据分不出同一叶里哪一处是哪个词。实测这道闸命中 **142 叶**，只用「不得含寰宇」这一个方向（**不要求含「宇宙」**：142 叶里有 49 叶中文正当地没有「宇宙」二字，绝大多数是 `[[/knowledge cosmology]]` 这种 enricher，方括号内照抄英文）。~~落地欠账：`The Winding Trail.pages.Sheltered Campsite.text` 与 `The Expedition Challenge.pages.Hidden Campsite.overview` 暂列 `except_paths`~~ **已于 2026-08-16d 主控终段 T-2 落盘并把 `except_paths` 整个删掉**，这道闸现在无例外地守着全部 142 叶。同批落的是全库泛指残留 43 叶（孪生两包各 21/22 叶，`寰宇`→`宇宙`）—— 判据是「整叶英文里 `cosmic\\w*`/`cosmolog\\w*` 的出现数 vs `Cosmos` 的出现数」，逐处比对后只改超出 `Cosmos` 计数的那些 `寰宇`，落盘后残留 43→0。⚠ 英文闸必须写 `cosmic\\w*` 而不是 `\\bcosmic\\b`：`Wizard.text` 的 `cosmically rooted` 是**副词**，窄闸看不见它，第十六轮终段核对时差点把这叶误判成过度修改。⚠ 同一叶里另有一处英文是 `Cosmological Force` 不是 Attunement，改之前先看英文。⚠ **2026-08-16e 收尾登记一条有意的边界状态**：`Mythspire Observatory.pages.Ancient Lift.text`（孪生 2 叶）英文是 `the cosmos gems must be activated in the correct order`，中文作「**宇宙宝石**」——**主控裁：保持「宇宙宝石」不改**。依据是依据阶梯第 1 档：该物品的 name 叶 `actors.Mythspire Guardian.items.Cosmic Gems.name`＝「宇宙宝石 Cosmic Gems」，同一册 `Central Room.text` 里的 `<h4>Cosmic Gems</h4>` 与 `{Cosmic Gems}` 标签也都是「宇宙宝石」；散文里的 `cosmos gems` 指的就是同一样东西，**跟物品名走，不跟词根走**（上游那句本身就是 `cosmic`／`cosmos` 混用）。量化过：「整叶英文只有 `cosmos`、一个 `cosmic`/`cosmolog` 都没有」的叶共 **304 叶**，其中中文含「宇宙」的只有 **4 叶** —— 就是这两处孪生，外加 `Gamemaster's Guide.pages.Patch 0.4.2.text` 孪生 2 叶（那里的「宇宙之力」译的是类别名 `Forces`，同叶的 `Cosmos` 仍是「寰宇」，不属本例外）。所以这是**全库唯一一处 EN `cosmos` → CN 宇宙**。**不需要 except_paths**：本条三道窄闸没有一道够得着它 —— `{Cosmos}` 与 `Cosmos Map` 两道要标签，`Cosmological` 那道有 `(?!.*\\bcosmos\\b)` 负向先行断言正好把它摘掉。写在这里，是为了让下一轮有人想拿 `cosmos→寰宇` 做全库整词替换时**先看见这条**，而不是替换完再来问为什么这两叶不一样",
+   "kind": "term_domains",
+   "term": "Cosmos",
+   "min_hits": 200,
+   "domains": [
+    {
+     "name": "Cosmological / Cosmology＝宇宙",
+     "lang": {
+      "ember": {
+       "EMBER.COSMOS.FIELDS.color.hint": "宇宙",
+       "EMBER.COSMOS.FIELDS.icon.hint": "宇宙",
+       "EMBER.COSMOS.FIELDS.portrait.hint": "宇宙",
+       "EMBER.ANCESTRY.FIELDS.origin.hint": "宇宙",
+       "EMBER.DEITY.FIELDS.overview.hint": "宇宙"
+      },
+      "crucible": {
+       "KNOWLEDGE.Cosmology": "宇宙"
+      }
+     },
+     "cn_forbidden": [
+      "寰宇"
+     ],
+     "gates": [
+      {
+       "en": "\\bCosmological Attunement\\b",
+       "cn_required": "宇宙同调",
+       "cn_forbidden": [
+        "寰宇同调"
+       ]
+      },
+      {
+       "en": "@UUID\\[[^\\]]*\\]\\{Cosmology\\}",
+       "cn_required": "宇宙"
+      },
+      {
+       "en": "(?s)^(?!.*\\bcosmos\\b)(?=.*(\\bcosmic\\w*|\\bcosmolog\\w*))",
+       "cn_forbidden": [
+        "寰宇"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Cosmos＝寰宇",
+     "lang": {
+      "ember": {
+       "TYPES.JournalEntryPage.ember.cosmos": "寰宇",
+       "EMBER.CALENDAR.COSMOS": "寰宇"
+      }
+     },
+     "cn_forbidden": [
+      "宇宙"
+     ],
+     "gates": [
+      {
+       "en": "\\{Cosmos\\}",
+       "cn_required": "寰宇"
+      },
+      {
+       "en": "\\bCosmos Map\\b",
+       "cn_required": "寰宇地图"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "R-hex-homograph",
+   "title": "Hex 同形异义：网格义＝六边格 · 法术名 Hex＝妖术",
+   "decision": "2026-08-16c（第十六轮，给裁决 6 补同形异义的护栏）",
+   "why": "裁决 6 只说了「Hex＝六边格，六角格已废」（见 R-hex-tile），**没说 `Hex` 是同形异义**。库里 3 个 actor（Zira Hestidero / Grim Assembly / Undaunted Adept）各带一件 `items.Hex`，英文叶值就是裸的 `Hex`，那是 5e 的**法术**「妖术」——描述是 `You place a curse on a creature...`，六个 `Hexed <属性>` 效果全译作「妖术：力量」等。孪生两包共 6 叶。不钉住的话，下一轮有人为「统一裁决 6」把词表的 `Hex` 从妖术改成六边格，`build_glossary` 重建后立刻产生一条**真 dispute**，再被回灌就会把这 3 张卡的法术名改坏。词表侧的看守在 `R-glossary-not-laundering`（`Hex`=妖术 / `Hexes`=六边格 两层同查），这一条守的是 compendium 侧。⚠ 网格域**不能**用 `\\bhex(es)?\\b` 做闸：那会命中 160 叶，其中 60 叶的中文正当地没有「六边格」（地名志里 `located in hex s.3201.2898` 译成坐标写法）——见 R-hex-tile 的同一条教训。这里只取 `\\bhexes\\b`（复数，36 叶实测 36/36 含六边格）与 `Hex Attributes`（2 叶）",
+   "kind": "term_domains",
+   "term": "Hex",
+   "min_hits": 40,
+   "scope": [
+    "ember"
+   ],
+   "domains": [
+    {
+     "name": "法术名 Hex＝妖术（3 个 actor 的 items.Hex，孪生共 6 叶）",
+     "gates": [
+      {
+       "en": "^Hex$",
+       "cn_required": "妖术",
+       "cn_forbidden": [
+        "六边格"
+       ],
+       "case_sensitive": true
+      }
+     ]
+    },
+    {
+     "name": "网格义 hex＝六边格",
+     "gates": [
+      {
+       "en": "\\bhexes\\b|\\bHex Attributes\\b",
+       "cn_required": "六边格",
+       "cn_forbidden": [
+        "妖术"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
 }

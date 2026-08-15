@@ -53,6 +53,8 @@ const stats = {
   mappingBlocksRemoved: 0,
   categoriesConverted: 0,
   categoriesUnmatched: 0,
+  categoriesParked: 0,
+  packDirsMissing: 0,
   pageKeysRenamed: 0,
   pathJunkRemoved: 0,
   actorsMigrated: 0,
@@ -62,6 +64,8 @@ const stats = {
 };
 /** Items whose action translations could not be re-keyed; parked, not dropped. */
 const unmatchedItems = [];
+/** `--package` subdirectories declared in the manifest but absent on disk. */
+const missingPackDirs = [];
 
 /* ---------- read journal category id -> EN name from the packs ---------- */
 async function categoryNamesFromPacks(pkgDir) {
@@ -71,7 +75,10 @@ async function categoryNamesFromPacks(pkgDir) {
   const byId = {};
   for (const pack of manifest.packs ?? []) {
     const dir = path.join(pkgDir, 'packs', path.basename(pack.path ?? pack.name));
-    if (!fs.existsSync(dir)) continue;
+    // A missing pack directory is the loud symptom of `--package` pointing at the
+    // wrong place. Silently skipping it left `idToName` empty, and every category
+    // then looked "unmatched" -- which used to mean deleted. Count it and say so.
+    if (!fs.existsSync(dir)) { stats.packDirsMissing += 1; missingPackDirs.push(path.basename(dir)); continue; }
     const db = new ClassicLevel(dir, { createIfMissing: false });
     for await (const [k, v] of db.iterator()) {
       const key = k.toString();
@@ -110,19 +117,33 @@ function migratePage(page) {
   return out;
 }
 
+/**
+ * Returns `{ out, unmatched }` -- never a bare `undefined`.
+ *
+ * The old signature could only say "nothing matched", and the caller answered
+ * that with `delete out.categories`, i.e. it threw away hand-written Chinese.
+ * That is the one thing the file header promises never to happen ("WITHOUT
+ * losing any existing Chinese"), and the sibling action path already does the
+ * right thing (`_legacyActions`, see migrateItem). Whatever cannot be re-keyed
+ * is handed back so the caller can park it the same way.
+ */
 function migrateCategories(cats, idToName) {
-  if (!cats || typeof cats !== 'object') return cats;
+  if (!cats || typeof cats !== 'object') return { out: cats, unmatched: null };
   // Already in nameCollection form ({"EN": "译名"})? leave alone.
-  if (Object.values(cats).every((v) => typeof v === 'string')) return cats;
+  if (Object.values(cats).every((v) => typeof v === 'string')) return { out: cats, unmatched: null };
   const out = {};
+  const unmatched = {};
   for (const [k, v] of Object.entries(cats)) {
     const cn = typeof v === 'string' ? v : v?.name;
     if (!isStr(cn)) continue;
     const enName = idToName[k] ?? (typeof v === 'object' ? null : k);
     if (enName) { out[enName] = cn; stats.categoriesConverted += 1; }
-    else { stats.categoriesUnmatched += 1; }
+    else { unmatched[k] = v; stats.categoriesUnmatched += 1; }
   }
-  return Object.keys(out).length ? out : undefined;
+  return {
+    out: Object.keys(out).length ? out : null,
+    unmatched: Object.keys(unmatched).length ? unmatched : null,
+  };
 }
 
 function migrateActor(actor, enActor = null) {
@@ -200,8 +221,16 @@ function migrateEntry(entry, enEntry, idToName) {
   const out = { ...entry };
 
   if (out.categories) {
-    const c = migrateCategories(out.categories, idToName);
-    if (c) out.categories = c; else delete out.categories;
+    const { out: c, unmatched } = migrateCategories(out.categories, idToName);
+    if (unmatched) {
+      // Park, never delete -- same contract as `_legacyActions` in migrateItem.
+      // Babele ignores keys it does not know, so this is inert at runtime and
+      // recoverable by hand.
+      out._legacyCategories = { ...(out._legacyCategories ?? {}), ...unmatched };
+      stats.categoriesParked += Object.keys(unmatched).length;
+    }
+    if (c) out.categories = c;
+    else delete out.categories;  // safe now: everything droppable was parked above
   }
   if (out.pages && typeof out.pages === 'object') {
     out.pages = Object.fromEntries(
@@ -228,6 +257,19 @@ function migrateEntry(entry, enEntry, idToName) {
 /* -------------------------------- main -------------------------------- */
 const idToName = await categoryNamesFromPacks(PKG);
 console.log(`journal categories resolved from packs: ${Object.keys(idToName).length}`);
+if (stats.packDirsMissing) {
+  console.error(`  ! ${stats.packDirsMissing} pack dir(s) declared in the manifest are missing under --package:`);
+  console.error(`    ${missingPackDirs.join(', ')}`);
+}
+// Resolving zero ids is not a benign "nothing to do": it is what a wrong
+// --package looks like, and it makes every category unmatched at once. Refuse
+// rather than rewrite every file on that basis.
+if (!Object.keys(idToName).length && !argv.includes('--allow-no-categories')) {
+  console.error('\n! 从 --package 里一个 journal category id->name 都没解析出来。');
+  console.error('  这几乎总是 --package 指错了目录。继续跑会把每一条 categories 判为 unmatched。');
+  console.error('  确认这就是预期（该包本来就没有 journal categories）时加 --allow-no-categories。');
+  process.exit(1);
+}
 
 for (const fn of fs.readdirSync(CN_DIR).filter((f) => f.endsWith('.json'))) {
   const cnPath = path.join(CN_DIR, fn);
@@ -252,5 +294,8 @@ for (const [k, v] of Object.entries(stats)) console.log(`  ${k.padEnd(26)} ${v}`
 if (unmatchedItems.length) {
   console.log(`\n  action translations parked under _legacyActions (no EN counterpart):`);
   for (const n of [...new Set(unmatchedItems)]) console.log(`    - ${n}`);
+}
+if (stats.categoriesParked) {
+  console.log(`\n  category translations parked under _legacyCategories (id not in packs): ${stats.categoriesParked}`);
 }
 if (DRY) console.log('\n(dry run: nothing written)');

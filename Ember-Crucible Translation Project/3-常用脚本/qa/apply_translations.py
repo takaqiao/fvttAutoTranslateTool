@@ -8,7 +8,12 @@ the `path` field emitted by `validate_translations.py` into
 Safety rails, because these files are large and hand-edited batches drift:
   - refuses to write a value whose English source no longer matches the baseline
     (the pack changed under us)
-  - refuses to overwrite an existing Chinese value unless --force
+  - refuses to overwrite an existing Chinese value unless --force -- and the
+    check walks EVERY level of the path, not just the leaf: a translated
+    `description` that lives as a plain string where English has an object is a
+    supported shape (see release/runtime-converters.js::crucibleDescription), so
+    writing `description.public` under it used to replace that whole string with
+    an empty dict, silently and uncounted
   - checks that inline markup (@UUID / @Check / HTML tags) survives the
     translation, and reports every mismatch instead of writing it
 
@@ -112,13 +117,32 @@ def split_path(root, path):
     return parts
 
 
-def set_at(root, parts, value, shape=None):
+class WouldClobber(Exception):
+    """`set_at` 拒绝把路径**中间层**上一个已有的字符串换成空容器。
+
+    为什么这不是脏数据：CN 侧在 EN 的 object 路径上放一个字符串是**受支持的写法** ——
+    `3-常用脚本/release/runtime-converters.js` 的 `crucibleDescription`（:19-26）明确
+    处理「源是对象、译文是字符串」这一形态。所以中间层的字符串是有人写的正文，
+    静默 `node[p] = {}` 会把整段既有中文吃掉，而且既不进 problems 也不计 skipped。
+    """
+
+    def __init__(self, prefix, existing):
+        super().__init__(prefix)
+        self.prefix = prefix
+        self.existing = existing
+
+
+def set_at(root, parts, value, shape=None, allow_clobber=False):
     """Write `value` at `parts`, creating containers that MIRROR the English
     structure.
 
     Without `shape` a missing `effects` array would be created as a dict keyed
     "0", which Babele would never read as an array. `shape` is the English node
     at the same position and decides list vs dict for each level created.
+
+    Raises `WouldClobber` instead of silently replacing an intermediate string
+    (see that exception's docstring). `allow_clobber=True` — wired to `--force` —
+    restores the old destructive behaviour for the rare deliberate reshape.
     """
     node = root
     for i, p in enumerate(parts[:-1]):
@@ -133,6 +157,8 @@ def set_at(root, parts, value, shape=None):
         if isinstance(node, list):
             node = node[int(p)]
             continue
+        if isinstance(node.get(p), str) and not allow_clobber:
+            raise WouldClobber('.'.join(parts[:i + 1]), node[p])
         if p not in node or not isinstance(node[p], (dict, list)):
             node[p] = [] if isinstance(nxt_shape, list) else {}
         node = node[p]
@@ -159,6 +185,13 @@ def set_at(root, parts, value, shape=None):
 # quotes still has to match.
 QUOTED_PARAM = re.compile(r'=\s*"[^"]*"')
 
+# ⚠ 2026-08-13：同一个参数**不带引号**时（Foundry 的 `parseEmbedConfig` 允许
+# `@Embed[Actor.x label=Squish]`），上面那条正则看不见它，于是签名里留着英文原值 ——
+# 结果是闸门**结构性地禁止**翻译这个 label：任何译法都会被报 markup mismatch。
+# 本库正有 2 处这样的 label，它们至今是英文，原因就在这儿而不在译者。
+# 只对确定是可见文本的三个参数名放行；`apply=false` 这类机械参数仍然逐字节比对。
+BARE_TEXT_PARAM = re.compile(r'\b(label|readaloud|caption)\s*=\s*(?!["\'])([^\s\]<>"\']+)')
+
 # dnd5e 的规则引用。`MARKUP` 只认 `@` 开头，于是 `&Reference[Restrained]` 长期不进签名 ——
 # 方括号里的键被译成中文（`&Reference[受拘束]`）时，闸门照样报 0 拒绝，而 enricher
 # 查不到这个键，玩家看到的是裸文本而不是规则链接。全库积了 77 条，2026-08-09 补上。
@@ -176,6 +209,7 @@ def markup_signature(s: str):
     `&Reference[key]` is normalised to a single entity form first, so a change of
     `&amp;` to `&` alone is not treated as a markup change.
     """
+    s = BARE_TEXT_PARAM.sub(r'\1="~"', s)
     s = QUOTED_PARAM.sub('="~"', s)
     return (Counter(MARKUP.findall(s))
             + Counter(INLINE_CMD.findall(s))
@@ -201,6 +235,7 @@ def main():
     items = batch.get('items', batch)
 
     applied = skipped_existing = missing_en = markup_bad = no_cjk = 0
+    clobber_bad = 0
     problems = []
 
     for path, value in items.items():
@@ -230,13 +265,39 @@ def main():
             problems.append({'path': path, 'issue': 'markup mismatch (want, got)', 'detail': diff})
             continue
 
-        cur = get_at(root_cn, parts)
-        if isinstance(cur, str) and CJK.search(cur) and not a.force:
+        # 护栏：路径上**任何一层**已经是字符串就不能直接写。
+        # 只查叶子（parts 全长）看不见「中间层是字符串」这一形态，而那正是
+        # set_at 会静默换成空容器的那一层 —— 见 WouldClobber 的 docstring。
+        existing_at = clobber_at = clobber_val = None
+        for n in range(1, len(parts) + 1):
+            cur = get_at(root_cn, parts[:n])
+            if not isinstance(cur, str):
+                continue
+            if CJK.search(cur):
+                existing_at = '.'.join(parts[:n])
+            elif n < len(parts):
+                # 叶子本身是非中文字符串 = 正常的覆盖写，放行；只有中间层要拦。
+                clobber_at, clobber_val = '.'.join(parts[:n]), cur
+            break
+        if existing_at is not None and not a.force:
             skipped_existing += 1
+            continue
+        if clobber_at is not None and not a.force:
+            clobber_bad += 1
+            problems.append({'path': path,
+                             'issue': 'would clobber intermediate string',
+                             'detail': {'at': clobber_at, 'existing': clobber_val[:120]}})
             continue
 
         if not a.dry:
-            set_at(root_cn, parts, value, root_en)
+            try:
+                set_at(root_cn, parts, value, root_en, allow_clobber=a.force)
+            except WouldClobber as e:
+                clobber_bad += 1
+                problems.append({'path': path,
+                                 'issue': 'would clobber intermediate string',
+                                 'detail': {'at': e.prefix, 'existing': e.existing[:120]}})
+                continue
         applied += 1
 
     if not a.dry and applied:
@@ -248,6 +309,7 @@ def main():
     print(f'  REJECTED no-EN     {missing_en}')
     print(f'  REJECTED no-CJK    {no_cjk}')
     print(f'  REJECTED markup    {markup_bad}')
+    print(f'  REJECTED clobber   {clobber_bad}')
     if problems:
         print('\n  problems:')
         for p in problems[:25]:

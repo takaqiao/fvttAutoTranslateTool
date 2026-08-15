@@ -1,11 +1,11 @@
 {
   "_meta": {
     "baseGlossary": "C:\\Users\\Taka\\Desktop\\fvtt\\glossary_crucible_merged.json",
-    "baseTerms": 4606,
-    "totalTerms": 7791,
-    "harvestedTerms": 6315,
-    "baseVsShippedDisagreements": 2997,
-    "pendingTerms": 181,
+    "baseTerms": 4788,
+    "totalTerms": 7971,
+    "harvestedTerms": 6490,
+    "baseVsShippedDisagreements": 3172,
+    "pendingTerms": 6,
     "policy": "shipped translation wins over base glossary; base glossary wins over nothing; PF2E master glossary NOT merged"
   },
   "baseVsShipped": {
@@ -94,6 +94,11 @@
       "shipped": "阿伯林的愚举 Aberin's Folly",
       "kind": "format"
     },
+    "Abilas": {
+      "base": "阿比拉斯",
+      "shipped": "阿比拉斯 Abilas",
+      "kind": "format"
+    },
     "Ability Scores": {
       "base": "属性值",
       "shipped": "属性值 Ability Scores",
@@ -122,6 +127,11 @@
     "Abyss-Warped Undaunted": {
       "base": "深渊扭曲的无畏者",
       "shipped": "深渊扭曲的无畏者 Abyss-Warped Undaunted",
+      "kind": "format"
+    },
+    "Abyssal Desolation": {
+      "base": "深渊荒芜",
+      "shipped": "深渊荒芜 Abyssal Desolation",
       "kind": "format"
     },
     "Abyssal Echo": {
@@ -325,7 +335,7 @@
       "kind": "format"
     },
     "Afflicted Pallid Drakeling": {
-      "base": "受难苍白幼龙",
+      "base": "受难苍白幼龙兽",
       "shipped": "受难苍白幼龙兽 Afflicted Pallid Drakeling",
       "kind": "format"
     },
@@ -412,6 +422,11 @@
     "Alarm": {
       "base": "警报",
       "shipped": "警报 Alarm",
+      "kind": "format"
+    },
+    "Alavai": {
+      "base": "阿拉瓦伊",
+      "shipped": "阿拉瓦伊 Alavai",
       "kind": "format"
     },
     "Alchemical Decisions": {
@@ -924,6 +939,11 @@
       "shipped": "阿克图瑞尔 Arcturel",
       "kind": "format"
     },
+    "Arcturian": {
+      "base": "阿克图里安",
+      "shipped": "阿克图里安 Arcturian",
+      "kind": "format"
+    },
     "Arcturian Automatons": {
       "base": "阿克图里安自动机工坊",
       "shipped": "阿克图里安自动机工坊 Arcturian Automatons",
@@ -989,6 +1009,11 @@
       "shipped": "阿雷特尔 Areyter",
       "kind": "format"
     },
+    "Aris Peninsula": {
+      "base": "阿里斯半岛",
+      "shipped": "阿里斯半岛 Aris Peninsula",
+      "kind": "format"
+    },
     "Arm Steel-Jaw Trap": {
       "base": "设置钢颚陷阱",
       "shipped": "设置钢颚陷阱 Arm Steel-Jaw Trap",
@@ -1047,6 +1072,16 @@
     "Ascendancy": {
       "base": "优势地位",
       "shipped": "优势地位 Ascendancy",
+      "kind": "format"
+    },
+    "Ash": {
+      "base": "灰烬",
+      "shipped": "灰烬 Ash",
+      "kind": "format"
+    },
+    "Ash Guard Peaks": {
+      "base": "灰烬卫峰群",
+      "shipped": "灰烬卫峰群 Ash Guard Peaks",
       "kind": "format"
     },
     "Ashen Cloak": {
@@ -1184,6 +1219,16 @@
       "shipped": "奥里斯·博尔 Auris Bor",
       "kind": "format"
     },
+    "Aurtej": {
+      "base": "奥尔泰杰",
+      "shipped": "奥尔泰杰 Aurtej",
+      "kind": "format"
+    },
+    "Avai": {
+      "base": "阿瓦伊",
+      "shipped": "阿瓦伊 Avai",
+      "kind": "format"
+    },
     "Aversion to Radiance": {
       "base": "对辉耀的厌恶",
       "shipped": "对辉耀的厌恶 Aversion to Radiance",
@@ -1194,6 +1239,11 @@
       "shipped": "阿维拉 Avilla",
       "kind": "format"
     },
+    "Avok": {
+      "base": "阿沃克",
+      "shipped": "阿沃克 Avok",
+      "kind": "format"
+    },
     "Avwynn Taol": {
       "base": "阿芙温·陶尔",
       "shipped": "阿芙温·陶尔 Avwynn Taol",
@@ -1202,6 +1252,11 @@
     "Awaken": {
       "base": "觉醒",
       "shipped": "觉醒 Awaken",
+      "kind": "format"
+    },
+    "Awakened Savanna": {
+      "base": "觉醒草原",
+      "shipped": "觉醒草原 Awakened Savanna",
       "kind": "format"
     },
     "Awareness": {
@@ -1230,7 +1285,7 @@
       "kind": "format"
     },
     "Axe": {
-      "base": "斧",
+      "base": "斧头",
       "shipped": "斧头 Axe",
       "kind": "format"
     },
@@ -1242,6 +1297,16 @@
     "Aythorn's Blessings": {
       "base": "艾索恩的祝福",
       "shipped": "艾索恩的祝福 Aythorn's Blessings",
+      "kind": "format"
+    },
+    "BARBLINGS": {
+      "base": "巴布灵",
+      "shipped": "巴布灵 BARBLINGS",
+      "kind": "format"
+    },
+    "BJORDAN": {
+      "base": "比约丹",
+      "shipped": "比约丹 BJORDAN",
       "kind": "format"
     },
     "Back Alley": {
@@ -1694,6 +1759,11 @@
       "shipped": "血林 Bloodwoods",
       "kind": "format"
     },
+    "Bloodworm": {
+      "base": "血虫",
+      "shipped": "血虫 Bloodworm",
+      "kind": "format"
+    },
     "Bloody Gorge": {
       "base": "血腥吞噬",
       "shipped": "血腥吞噬 Bloody Gorge",
@@ -1799,6 +1869,16 @@
       "shipped": "恩惠骰与祸骰 Boons and Banes",
       "kind": "format"
     },
+    "Border Heathlands": {
+      "base": "边境荒原",
+      "shipped": "边境荒原 Border Heathlands",
+      "kind": "format"
+    },
+    "Border Walls": {
+      "base": "边境墙",
+      "shipped": "边境墙 Border Walls",
+      "kind": "format"
+    },
     "Bottle of Shadowcap Wine": {
       "base": "影盖葡萄酒瓶",
       "shipped": "影盖葡萄酒瓶 Bottle of Shadowcap Wine",
@@ -1834,6 +1914,11 @@
       "shipped": "布拉库斯·冯·泰特 Brackus von Tet",
       "kind": "format"
     },
+    "Braken": {
+      "base": "布拉肯",
+      "shipped": "布拉肯 Braken",
+      "kind": "format"
+    },
     "Bramble Gully": {
       "base": "荆棘沟壑",
       "shipped": "荆棘沟壑 Bramble Gully",
@@ -1852,6 +1937,11 @@
     "Breached Waterway": {
       "base": "破口水道",
       "shipped": "破口水道 Breached Waterway",
+      "kind": "format"
+    },
+    "Break": {
+      "base": "断口",
+      "shipped": "断口 Break",
       "kind": "format"
     },
     "Break Room": {
@@ -1879,6 +1969,16 @@
       "shipped": "布雷文紧急情况 Brevin Emergency",
       "kind": "format"
     },
+    "Briar Peaks": {
+      "base": "荆棘峰",
+      "shipped": "荆棘峰 Briar Peaks",
+      "kind": "format"
+    },
+    "Briarfur": {
+      "base": "荆棘皮毛",
+      "shipped": "荆棘皮毛 Briarfur",
+      "kind": "format"
+    },
     "Bridging the Gap": {
       "base": "弥合差距",
       "shipped": "弥合差距 Bridging the Gap",
@@ -1902,6 +2002,11 @@
     "Brigandine": {
       "base": "布面甲",
       "shipped": "布面甲 Brigandine",
+      "kind": "format"
+    },
+    "Brightcore": {
+      "base": "辉核",
+      "shipped": "辉核 Brightcore",
       "kind": "format"
     },
     "Broken": {
@@ -1930,7 +2035,7 @@
       "kind": "format"
     },
     "Buckler": {
-      "base": "圆盾",
+      "base": "小圆盾",
       "shipped": "小圆盾 Buckler",
       "kind": "format"
     },
@@ -2009,6 +2114,11 @@
       "shipped": "阿维拉半身像 Bust of Avilla",
       "kind": "format"
     },
+    "CASCAAL GOLDS": {
+      "base": "卡斯卡尔金原",
+      "shipped": "卡斯卡尔金原 CASCAAL GOLDS",
+      "kind": "format"
+    },
     "Cadence": {
       "base": "节奏",
       "shipped": "节奏 Cadence",
@@ -2052,6 +2162,11 @@
     "Canal Path": {
       "base": "运河小径",
       "shipped": "运河小径 Canal Path",
+      "kind": "format"
+    },
+    "Canasia": {
+      "base": "卡纳西亚",
+      "shipped": "卡纳西亚 Canasia",
       "kind": "format"
     },
     "Candle": {
@@ -2134,9 +2249,19 @@
       "shipped": "踩点 Casing the Joint",
       "kind": "format"
     },
+    "Casla-Brava": {
+      "base": "卡斯拉-布拉瓦",
+      "shipped": "卡斯拉-布拉瓦 Casla-Brava",
+      "kind": "format"
+    },
     "Cast a Spell": {
       "base": "施放法术",
       "shipped": "施放法术 Cast a Spell",
+      "kind": "format"
+    },
+    "Catch": {
+      "base": "渔获",
+      "shipped": "渔获 Catch",
       "kind": "format"
     },
     "Caustic Phial": {
@@ -2152,6 +2277,11 @@
     "Caveway": {
       "base": "洞道",
       "shipped": "洞道 Caveway",
+      "kind": "format"
+    },
+    "Caxco": {
+      "base": "卡克斯科",
+      "shipped": "卡克斯科 Caxco",
       "kind": "format"
     },
     "Celestial": {
@@ -2389,6 +2519,11 @@
       "shipped": "寒意触碰 Chill Touch",
       "kind": "format"
     },
+    "Chimeras": {
+      "base": "奇美拉",
+      "shipped": "奇美拉 Chimeras",
+      "kind": "format"
+    },
     "Chipped Spinel": {
       "base": "碎裂尖晶石",
       "shipped": "碎裂尖晶石 Chipped Spinel",
@@ -2452,6 +2587,11 @@
     "Cindaric Sages": {
       "base": "辛达里克贤者",
       "shipped": "辛达里克贤者 Cindaric Sages",
+      "kind": "format"
+    },
+    "Cindaric Threshold": {
+      "base": "辛达里克阈限",
+      "shipped": "辛达里克阈限 Cindaric Threshold",
       "kind": "format"
     },
     "Cindarin Temple": {
@@ -2909,9 +3049,24 @@
       "shipped": "科拉同调 Cora Attunement",
       "kind": "format"
     },
+    "Coral": {
+      "base": "珊瑚",
+      "shipped": "珊瑚 Coral",
+      "kind": "format"
+    },
+    "Coran Spike": {
+      "base": "科兰尖刺",
+      "shipped": "科兰尖刺 Coran Spike",
+      "kind": "format"
+    },
     "Corebright Forest": {
       "base": "辉核森林",
       "shipped": "辉核森林 Corebright Forest",
+      "kind": "format"
+    },
+    "Corla": {
+      "base": "科尔拉",
+      "shipped": "科尔拉 Corla",
       "kind": "format"
     },
     "Corpin Sanctuary": {
@@ -2972,6 +3127,11 @@
     "Cosmic Gems": {
       "base": "宇宙宝石",
       "shipped": "宇宙宝石 Cosmic Gems",
+      "kind": "format"
+    },
+    "Cosmology": {
+      "base": "宇宙观",
+      "shipped": "宇宙观 Cosmology",
       "kind": "format"
     },
     "Cosmopolitan Fashionista": {
@@ -3114,9 +3274,19 @@
       "shipped": "栅堡十字的人群 Crowds in Palisade Cross",
       "kind": "format"
     },
+    "Crown": {
+      "base": "王冠",
+      "shipped": "王冠 Crown",
+      "kind": "format"
+    },
     "Crown Apothecary": {
       "base": "王室药剂师",
       "shipped": "王室药剂师 Crown Apothecary",
+      "kind": "format"
+    },
+    "Crowning Peaks": {
+      "base": "冠冕群峰",
+      "shipped": "冠冕群峰 Crowning Peaks",
       "kind": "format"
     },
     "Crude Javelin": {
@@ -3132,6 +3302,11 @@
     "Crumbling Corner": {
       "base": "坍塌街角",
       "shipped": "坍塌街角 Crumbling Corner",
+      "kind": "format"
+    },
+    "Crumbling Mausoleum": {
+      "base": "崩塌的陵墓",
+      "shipped": "崩塌的陵墓 Crumbling Mausoleum",
       "kind": "format"
     },
     "Crumbling Skallith": {
@@ -3182,6 +3357,11 @@
     "Crystal Staff": {
       "base": "水晶木杖",
       "shipped": "水晶木杖 Crystal Staff",
+      "kind": "format"
+    },
+    "Crystal Tundra": {
+      "base": "水晶苔原",
+      "shipped": "水晶苔原 Crystal Tundra",
       "kind": "format"
     },
     "Crystal Wand": {
@@ -3270,8 +3450,13 @@
       "kind": "format"
     },
     "Cyclonic": {
-      "base": "旋风的",
-      "shipped": "旋风的 Cyclonic",
+      "base": "气旋",
+      "shipped": "气旋 Cyclonic",
+      "kind": "format"
+    },
+    "DUSTRA": {
+      "base": "尘灵",
+      "shipped": "尘灵 DUSTRA",
       "kind": "format"
     },
     "Daemos": {
@@ -3864,6 +4049,11 @@
       "shipped": "龙焰 Drakonfire",
       "kind": "format"
     },
+    "Dread Hills": {
+      "base": "恐惧丘陵",
+      "shipped": "恐惧丘陵 Dread Hills",
+      "kind": "format"
+    },
     "Dread Lord": {
       "base": "恐惧领主",
       "shipped": "恐惧领主 Dread Lord",
@@ -3875,7 +4065,7 @@
       "kind": "format"
     },
     "Dress Clothing": {
-      "base": "礼服",
+      "base": "礼服服装",
       "shipped": "礼服服装 Dress Clothing",
       "kind": "format"
     },
@@ -3944,6 +4134,11 @@
       "shipped": "暮潮崛起 Dusktide Rising",
       "kind": "format"
     },
+    "Dust": {
+      "base": "尘土",
+      "shipped": "尘土 Dust",
+      "kind": "format"
+    },
     "Dust to Dust": {
       "base": "尘归尘",
       "shipped": "尘归尘 Dust to Dust",
@@ -3957,6 +4152,11 @@
     "Dustforge": {
       "base": "尘锻炉",
       "shipped": "尘锻炉 Dustforge",
+      "kind": "format"
+    },
+    "Dustlands": {
+      "base": "尘土荒原",
+      "shipped": "尘土荒原 Dustlands",
       "kind": "format"
     },
     "Dustweed": {
@@ -3980,8 +4180,13 @@
       "kind": "format"
     },
     "Dynamic Token": {
-      "base": "动态令牌",
-      "shipped": "动态令牌 Dynamic Token",
+      "base": "动态指示物",
+      "shipped": "动态指示物 Dynamic Token",
+      "kind": "format"
+    },
+    "EMEIR": {
+      "base": "埃梅尔",
+      "shipped": "埃梅尔 EMEIR",
       "kind": "format"
     },
     "Eamon Mariflor": {
@@ -4099,11 +4304,6 @@
       "shipped": "电荷安瓿 Electrocharge Ampoule",
       "kind": "format"
     },
-    "Elemental": {
-      "base": "元素",
-      "shipped": "元素生物",
-      "kind": "format"
-    },
     "Elemental Armor": {
       "base": "元素护甲",
       "shipped": "元素护甲 Elemental Armor",
@@ -4194,6 +4394,11 @@
       "shipped": "飘忽形态 Elusive Form",
       "kind": "format"
     },
+    "Elvan": {
+      "base": "埃尔凡",
+      "shipped": "埃尔凡 Elvan",
+      "kind": "format"
+    },
     "Elvish": {
       "base": "精灵",
       "shipped": "精灵 Elvish",
@@ -4202,6 +4407,11 @@
     "Elwin Davos": {
       "base": "埃尔温·达沃斯",
       "shipped": "埃尔温·达沃斯 Elwin Davos",
+      "kind": "format"
+    },
+    "Elwin's Seat": {
+      "base": "埃尔温之座",
+      "shipped": "埃尔温之座 Elwin's Seat",
       "kind": "format"
     },
     "Embalming Room": {
@@ -4519,6 +4729,11 @@
       "shipped": "精致宝石戒指 Exquisite Jeweled Ring",
       "kind": "format"
     },
+    "Exten Peninsula": {
+      "base": "埃克斯滕半岛",
+      "shipped": "埃克斯滕半岛 Exten Peninsula",
+      "kind": "format"
+    },
     "Extended Breath": {
       "base": "延长呼吸",
       "shipped": "延长呼吸 Extended Breath",
@@ -4552,6 +4767,16 @@
     "Eye of the Storm": {
       "base": "风暴之眼",
       "shipped": "风暴之眼 Eye of the Storm",
+      "kind": "format"
+    },
+    "FAR'RENT MOUNTAINS": {
+      "base": "法尔伦特山脉",
+      "shipped": "法尔伦特山脉 FAR'RENT MOUNTAINS",
+      "kind": "format"
+    },
+    "FENLINGS": {
+      "base": "芬灵族",
+      "shipped": "芬灵族 FENLINGS",
       "kind": "format"
     },
     "Fabricate": {
@@ -4814,6 +5039,11 @@
       "shipped": "钓竿 Fishing Pole",
       "kind": "format"
     },
+    "Fist's Landing": {
+      "base": "拳之登陆点",
+      "shipped": "拳之登陆点 Fist's Landing",
+      "kind": "format"
+    },
     "Fiyara": {
       "base": "菲亚拉",
       "shipped": "菲亚拉 Fiyara",
@@ -5059,6 +5289,11 @@
       "shipped": "伪造招募文件 Forged Recruitment Papers",
       "kind": "format"
     },
+    "Forgil": {
+      "base": "福尔吉尔",
+      "shipped": "福尔吉尔 Forgil",
+      "kind": "format"
+    },
     "Forgotten Cistern": {
       "base": "遗忘的蓄水池",
       "shipped": "遗忘的蓄水池 Forgotten Cistern",
@@ -5205,13 +5440,18 @@
       "kind": "format"
     },
     "Funar Cevher": {
-      "base": "富纳尔·杰夫赫",
+      "base": "富纳尔·杰夫赫尔",
       "shipped": "富纳尔·杰夫赫尔 Funar Cevher",
       "kind": "format"
     },
     "Funeral Hall": {
       "base": "葬礼大厅",
       "shipped": "葬礼大厅 Funeral Hall",
+      "kind": "format"
+    },
+    "GLITTERING MOUNTAINS": {
+      "base": "闪耀山脉",
+      "shipped": "闪耀山脉 GLITTERING MOUNTAINS",
       "kind": "format"
     },
     "Gallery": {
@@ -5624,6 +5864,11 @@
       "shipped": "墓击（仅限吸血鬼形态） Grave Strike (Vampyre Form Only)",
       "kind": "format"
     },
+    "Gravechill": {
+      "base": "墓寒",
+      "shipped": "墓寒 Gravechill",
+      "kind": "format"
+    },
     "Gravel Chute": {
       "base": "碎石滑道",
       "shipped": "碎石滑道 Gravel Chute",
@@ -5662,6 +5907,11 @@
     "Great Hammer": {
       "base": "巨锤",
       "shipped": "巨锤 Great Hammer",
+      "kind": "format"
+    },
+    "Great Morenel": {
+      "base": "大莫瑞内尔",
+      "shipped": "大莫瑞内尔 Great Morenel",
       "kind": "format"
     },
     "Greataxe": {
@@ -5939,6 +6189,11 @@
       "shipped": "加速 Hastened",
       "kind": "format"
     },
+    "Haxim": {
+      "base": "哈克西姆",
+      "shipped": "哈克西姆 Haxim",
+      "kind": "format"
+    },
     "Healer": {
       "base": "治疗者",
       "shipped": "治疗者 Healer",
@@ -5999,6 +6254,11 @@
       "shipped": "心血幽光 Heartblood Wisp",
       "kind": "format"
     },
+    "Hearth": {
+      "base": "赫斯",
+      "shipped": "赫斯 Hearth",
+      "kind": "format"
+    },
     "Heartmoss": {
       "base": "心苔",
       "shipped": "心苔 Heartmoss",
@@ -6047,6 +6307,11 @@
     "Heavy Weapon Training": {
       "base": "重型武器训练",
       "shipped": "重型武器训练 Heavy Weapon Training",
+      "kind": "format"
+    },
+    "Hekkiro": {
+      "base": "赫基罗",
+      "shipped": "赫基罗 Hekkiro",
       "kind": "format"
     },
     "Helice Korsos": {
@@ -6187,6 +6452,11 @@
     "Hobgoblin": {
       "base": "大地精",
       "shipped": "大地精 Hobgoblin",
+      "kind": "format"
+    },
+    "Hoist": {
+      "base": "霍伊斯特",
+      "shipped": "霍伊斯特 Hoist",
       "kind": "format"
     },
     "Hold Breath": {
@@ -6409,6 +6679,11 @@
       "shipped": "鉴定术 Identify",
       "kind": "format"
     },
+    "Iktae": {
+      "base": "伊克泰",
+      "shipped": "伊克泰 Iktae",
+      "kind": "format"
+    },
     "Ill Tidings": {
       "base": "凶兆",
       "shipped": "凶兆 Ill Tidings",
@@ -6487,6 +6762,11 @@
     "Incorporeal Movement": {
       "base": "虚体移动",
       "shipped": "虚体移动 Incorporeal Movement",
+      "kind": "format"
+    },
+    "Incursion of Ragen": {
+      "base": "拉根的入侵",
+      "shipped": "拉根的入侵 Incursion of Ragen",
       "kind": "format"
     },
     "Inexorable Flame": {
@@ -6714,6 +6994,11 @@
       "shipped": "铁质夹层平台 Iron Mezzanine",
       "kind": "format"
     },
+    "Ironrow Hills": {
+      "base": "铁脊丘陵",
+      "shipped": "铁脊丘陵 Ironrow Hills",
+      "kind": "format"
+    },
     "Irradiated": {
       "base": "辐照",
       "shipped": "辐照 Irradiated",
@@ -6732,6 +7017,16 @@
     "Issa Sunsword": {
       "base": "伊萨·阳剑",
       "shipped": "伊萨·阳剑 Issa Sunsword",
+      "kind": "format"
+    },
+    "Ixik": {
+      "base": "伊西克",
+      "shipped": "伊西克 Ixik",
+      "kind": "format"
+    },
+    "JAEDITH": {
+      "base": "贾迪思",
+      "shipped": "贾迪思 JAEDITH",
       "kind": "format"
     },
     "Jade Mountains": {
@@ -6939,6 +7234,11 @@
       "shipped": "幼年加甘萨斯 Juvenile Garganthus",
       "kind": "format"
     },
+    "KAUSTIC HINTERLANDS": {
+      "base": "考斯提克腹地",
+      "shipped": "考斯提克腹地 KAUSTIC HINTERLANDS",
+      "kind": "format"
+    },
     "Kadísos": {
       "base": "卡迪索斯",
       "shipped": "卡迪索斯 Kadísos",
@@ -6959,9 +7259,19 @@
       "shipped": "卡夫托尔的法术书 Kaftor's Spellbook",
       "kind": "format"
     },
+    "Kakiro": {
+      "base": "卡基罗",
+      "shipped": "卡基罗 Kakiro",
+      "kind": "format"
+    },
     "Kalasak the Cutter": {
       "base": "卡拉萨克·切割者",
       "shipped": "卡拉萨克·切割者 Kalasak the Cutter",
+      "kind": "format"
+    },
+    "Kalaxo": {
+      "base": "卡拉克索",
+      "shipped": "卡拉克索 Kalaxo",
       "kind": "format"
     },
     "Kaleidoscope Caverns": {
@@ -6999,6 +7309,11 @@
       "shipped": "卡尔瓦德 Kalvard",
       "kind": "format"
     },
+    "Karon Mounts": {
+      "base": "卡隆山脉",
+      "shipped": "卡隆山脉 Karon Mounts",
+      "kind": "format"
+    },
     "Kasarain": {
       "base": "卡萨莱因",
       "shipped": "卡萨莱因 Kasarain",
@@ -7029,6 +7344,16 @@
       "shipped": "卡图 Katu",
       "kind": "format"
     },
+    "Kawn": {
+      "base": "考恩",
+      "shipped": "考恩 Kawn",
+      "kind": "format"
+    },
+    "Kayhurn": {
+      "base": "凯胡恩",
+      "shipped": "凯胡恩 Kayhurn",
+      "kind": "format"
+    },
     "Keen Senses": {
       "base": "敏锐感官",
       "shipped": "敏锐感官 Keen Senses",
@@ -7042,6 +7367,11 @@
     "Kelmezian": {
       "base": "凯尔梅兹安",
       "shipped": "凯尔梅兹安 Kelmezian",
+      "kind": "format"
+    },
+    "Kemas Badlands": {
+      "base": "凯马斯荒地",
+      "shipped": "凯马斯荒地 Kemas Badlands",
       "kind": "format"
     },
     "Ken Crystal": {
@@ -7075,8 +7405,8 @@
       "kind": "format"
     },
     "Kessian Sand Knife": {
-      "base": "凯西亚沙刀",
-      "shipped": "凯西亚沙刀 Kessian Sand Knife",
+      "base": "凯西安沙刀",
+      "shipped": "凯西安沙刀 Kessian Sand Knife",
       "kind": "format"
     },
     "Keth": {
@@ -7129,6 +7459,16 @@
       "shipped": "基拉吉骑士 Kirargy Knights",
       "kind": "format"
     },
+    "Kirike Wildlands": {
+      "base": "基里克荒野",
+      "shipped": "基里克荒野 Kirike Wildlands",
+      "kind": "format"
+    },
+    "Kisen": {
+      "base": "纪森",
+      "shipped": "纪森 Kisen",
+      "kind": "format"
+    },
     "Kiska": {
       "base": "基斯卡",
       "shipped": "基斯卡 Kiska",
@@ -7169,14 +7509,39 @@
       "shipped": "知识领域 Knowledge Areas",
       "kind": "format"
     },
+    "Koronda Barrens": {
+      "base": "科隆达荒原",
+      "shipped": "科隆达荒原 Koronda Barrens",
+      "kind": "format"
+    },
+    "Kortos Isle": {
+      "base": "科托斯岛",
+      "shipped": "科托斯岛 Kortos Isle",
+      "kind": "format"
+    },
     "Koto Springs": {
       "base": "科托温泉区",
       "shipped": "科托温泉区 Koto Springs",
       "kind": "format"
     },
+    "Kraken Port": {
+      "base": "海妖港",
+      "shipped": "海妖港 Kraken Port",
+      "kind": "format"
+    },
+    "Krasarioc": {
+      "base": "克拉萨里奥克",
+      "shipped": "克拉萨里奥克 Krasarioc",
+      "kind": "format"
+    },
     "Krator's Hall": {
       "base": "克拉托尔大厅",
       "shipped": "克拉托尔大厅 Krator's Hall",
+      "kind": "format"
+    },
+    "Krenac": {
+      "base": "克雷纳克",
+      "shipped": "克雷纳克 Krenac",
       "kind": "format"
     },
     "Kryz": {
@@ -7187,6 +7552,16 @@
     "Ku'arta": {
       "base": "库阿塔",
       "shipped": "库阿塔 Ku'arta",
+      "kind": "format"
+    },
+    "Kula'me": {
+      "base": "库拉梅",
+      "shipped": "库拉梅 Kula'me",
+      "kind": "format"
+    },
+    "Kulrun": {
+      "base": "库尔伦",
+      "shipped": "库尔伦 Kulrun",
       "kind": "format"
     },
     "Kyasifer": {
@@ -7202,6 +7577,11 @@
     "Kynryth Husk": {
       "base": "肯瑞斯空壳",
       "shipped": "肯瑞斯空壳 Kynryth Husk",
+      "kind": "format"
+    },
+    "LUNARAI": {
+      "base": "卢纳莱",
+      "shipped": "卢纳莱 LUNARAI",
       "kind": "format"
     },
     "Labradorite Earring": {
@@ -7227,6 +7607,11 @@
     "Lake Jinro Lunar Shrine": {
       "base": "金罗湖月神殿",
       "shipped": "金罗湖月神殿 Lake Jinro Lunar Shrine",
+      "kind": "format"
+    },
+    "Lake Krena": {
+      "base": "克雷纳湖",
+      "shipped": "克雷纳湖 Lake Krena",
       "kind": "format"
     },
     "Lake Mithra": {
@@ -7259,6 +7644,11 @@
       "shipped": "点灯人的安息所 Lamplighter's Rest",
       "kind": "format"
     },
+    "Land of the Lost": {
+      "base": "失落之地",
+      "shipped": "失落之地 Land of the Lost",
+      "kind": "format"
+    },
     "Lanespear": {
       "base": "兰矛",
       "shipped": "兰矛 Lanespear",
@@ -7285,8 +7675,8 @@
       "kind": "format"
     },
     "Lantyr's Blade": {
-      "base": "兰蒂尔的刀刃",
-      "shipped": "兰蒂尔的刀刃 Lantyr's Blade",
+      "base": "兰提尔的刀刃",
+      "shipped": "兰提尔的刀刃 Lantyr's Blade",
       "kind": "format"
     },
     "Lantyr's Flame": {
@@ -7317,6 +7707,21 @@
     "Lash": {
       "base": "鞭击",
       "shipped": "鞭击 Lash",
+      "kind": "format"
+    },
+    "Last Grove": {
+      "base": "最后林地",
+      "shipped": "最后林地 Last Grove",
+      "kind": "format"
+    },
+    "Last Port": {
+      "base": "最后的港口",
+      "shipped": "最后的港口 Last Port",
+      "kind": "format"
+    },
+    "Last Remiss": {
+      "base": "最后的失职",
+      "shipped": "最后的失职 Last Remiss",
       "kind": "format"
     },
     "Last Stand": {
@@ -7759,9 +8164,24 @@
       "shipped": "下层平台 Lower Platforms",
       "kind": "format"
     },
+    "Lowland Bastions": {
+      "base": "低地堡垒",
+      "shipped": "低地堡垒 Lowland Bastions",
+      "kind": "format"
+    },
     "Lowlands": {
       "base": "低地",
       "shipped": "低地 Lowlands",
+      "kind": "format"
+    },
+    "Luen": {
+      "base": "卢恩",
+      "shipped": "卢恩 Luen",
+      "kind": "format"
+    },
+    "Lumarin Homelands": {
+      "base": "卢马林家园",
+      "shipped": "卢马林家园 Lumarin Homelands",
       "kind": "format"
     },
     "Lumarin Steel": {
@@ -7890,7 +8310,7 @@
       "kind": "format"
     },
     "Lyla Cevher": {
-      "base": "莱拉",
+      "base": "莱拉·杰夫赫尔",
       "shipped": "莱拉·杰夫赫尔 Lyla Cevher",
       "kind": "format"
     },
@@ -8047,6 +8467,11 @@
     "Mapping the Myth": {
       "base": "绘制神话地图",
       "shipped": "绘制神话地图 Mapping the Myth",
+      "kind": "format"
+    },
+    "Marben Hills": {
+      "base": "马本丘陵",
+      "shipped": "马本丘陵 Marben Hills",
       "kind": "format"
     },
     "Marine Crossbow": {
@@ -8214,6 +8639,11 @@
       "shipped": "医疗新手 Medicine Novice",
       "kind": "format"
     },
+    "Melcator's Refuge": {
+      "base": "梅尔卡托的避难所",
+      "shipped": "梅尔卡托的避难所 Melcator's Refuge",
+      "kind": "format"
+    },
     "Meld into Stone": {
       "base": "融入石料",
       "shipped": "融入石料 Meld into Stone",
@@ -8227,6 +8657,11 @@
     "Mending": {
       "base": "修补",
       "shipped": "修补 Mending",
+      "kind": "format"
+    },
+    "Menin Heights": {
+      "base": "梅宁高地",
+      "shipped": "梅宁高地 Menin Heights",
       "kind": "format"
     },
     "Menis Valegar": {
@@ -8374,6 +8809,11 @@
       "shipped": "失踪的斥候 Missing Scouts",
       "kind": "format"
     },
+    "Mistbound Narrows": {
+      "base": "雾锁海峡",
+      "shipped": "雾锁海峡 Mistbound Narrows",
+      "kind": "format"
+    },
     "Mistrust of Magic": {
       "base": "对魔法的不信任",
       "shipped": "对魔法的不信任 Mistrust of Magic",
@@ -8427,6 +8867,11 @@
     "Moiran Warders": {
       "base": "莫伊兰守卫者",
       "shipped": "莫伊兰守卫者 Moiran Warders",
+      "kind": "format"
+    },
+    "Moiran's Lament": {
+      "base": "莫伊兰的哀歌",
+      "shipped": "莫伊兰的哀歌 Moiran's Lament",
       "kind": "format"
     },
     "Moldy Recipe Folder": {
@@ -8484,6 +8929,11 @@
       "shipped": "穆塔普 Mootap",
       "kind": "format"
     },
+    "Mordant": {
+      "base": "莫丹特",
+      "shipped": "莫丹特 Mordant",
+      "kind": "format"
+    },
     "Morgue": {
       "base": "停尸房",
       "shipped": "停尸房 Morgue",
@@ -8509,6 +8959,26 @@
       "shipped": "塑形 Mould",
       "kind": "format"
     },
+    "Mount Fate": {
+      "base": "命运山",
+      "shipped": "命运山 Mount Fate",
+      "kind": "format"
+    },
+    "Mount K'Hente": {
+      "base": "肯特山",
+      "shipped": "肯特山 Mount K'Hente",
+      "kind": "format"
+    },
+    "Mountains of the Sun": {
+      "base": "太阳群山",
+      "shipped": "太阳群山 Mountains of the Sun",
+      "kind": "format"
+    },
+    "Mourn": {
+      "base": "哀悼",
+      "shipped": "哀悼 Mourn",
+      "kind": "format"
+    },
     "Move": {
       "base": "移动",
       "shipped": "移动 Move",
@@ -8517,6 +8987,11 @@
     "Movement": {
       "base": "移动",
       "shipped": "移动 Movement",
+      "kind": "format"
+    },
+    "Mt Claw": {
+      "base": "爪山",
+      "shipped": "爪山 Mt Claw",
       "kind": "format"
     },
     "Muddy Logbook": {
@@ -8649,6 +9124,11 @@
       "shipped": "马布盐 M’abb Salts",
       "kind": "format"
     },
+    "Na'me": {
+      "base": "奈姆",
+      "shipped": "奈姆 Na'me",
+      "kind": "format"
+    },
     "Nadin": {
       "base": "纳丁",
       "shipped": "纳丁 Nadin",
@@ -8667,6 +9147,11 @@
     "Nalvani": {
       "base": "纳尔瓦尼",
       "shipped": "纳尔瓦尼 Nalvani",
+      "kind": "format"
+    },
+    "Nasjar": {
+      "base": "纳斯贾尔",
+      "shipped": "纳斯贾尔 Nasjar",
       "kind": "format"
     },
     "Natural Artisan": {
@@ -8787,6 +9272,16 @@
     "Northern Canals": {
       "base": "北部运河",
       "shipped": "北部运河 Northern Canals",
+      "kind": "format"
+    },
+    "Northern Corebright Forest": {
+      "base": "北部辉核森林",
+      "shipped": "北部辉核森林 Northern Corebright Forest",
+      "kind": "format"
+    },
+    "Northern Shana Mountains": {
+      "base": "沙纳山脉北部",
+      "shipped": "沙纳山脉北部 Northern Shana Mountains",
       "kind": "format"
     },
     "Northern Sitting Room": {
@@ -8959,11 +9454,6 @@
       "shipped": "最后一件事 One Last Thing",
       "kind": "format"
     },
-    "Ooze": {
-      "base": "软泥怪",
-      "shipped": "软泥",
-      "kind": "format"
-    },
     "Ooze Control": {
       "base": "软泥控制",
       "shipped": "软泥控制 Ooze Control",
@@ -9134,6 +9624,16 @@
       "shipped": "奥尔瓦斯 Orvaath",
       "kind": "format"
     },
+    "Oshclaw": {
+      "base": "奥什爪",
+      "shipped": "奥什爪 Oshclaw",
+      "kind": "format"
+    },
+    "Oshel": {
+      "base": "奥谢尔",
+      "shipped": "奥谢尔 Oshel",
+      "kind": "format"
+    },
     "Ossarchate": {
       "base": "骸骨领",
       "shipped": "骸骨领 Ossarchate",
@@ -9245,7 +9745,7 @@
       "kind": "format"
     },
     "Pallid Drakeling": {
-      "base": "苍白幼龙",
+      "base": "苍白幼龙兽",
       "shipped": "苍白幼龙兽 Pallid Drakeling",
       "kind": "format"
     },
@@ -9549,6 +10049,11 @@
       "shipped": "玩家指南 Players' Guide",
       "kind": "format"
     },
+    "Point": {
+      "base": "岬",
+      "shipped": "岬 Point",
+      "kind": "format"
+    },
     "Poison Blades": {
       "base": "毒刃",
       "shipped": "毒刃 Poison Blades",
@@ -9794,6 +10299,11 @@
       "shipped": "监狱 Prison",
       "kind": "format"
     },
+    "Prison of Fiyara": {
+      "base": "菲亚拉的监狱",
+      "shipped": "菲亚拉的监狱 Prison of Fiyara",
+      "kind": "format"
+    },
     "Private Bathroom": {
       "base": "独立浴室",
       "shipped": "独立浴室 Private Bathroom",
@@ -9997,6 +10507,16 @@
     "Quiver": {
       "base": "箭袋",
       "shipped": "箭袋 Quiver",
+      "kind": "format"
+    },
+    "RUNA HIGHLANDS": {
+      "base": "鲁纳高地",
+      "shipped": "鲁纳高地 RUNA HIGHLANDS",
+      "kind": "format"
+    },
+    "Ra'vel": {
+      "base": "拉维尔",
+      "shipped": "拉维尔 Ra'vel",
       "kind": "format"
     },
     "Rackela": {
@@ -10269,6 +10789,11 @@
       "shipped": "红区餐厅 Red Block Mess",
       "kind": "format"
     },
+    "Red Rhuin": {
+      "base": "红鲁因",
+      "shipped": "红鲁因 Red Rhuin",
+      "kind": "format"
+    },
     "Redfiend's Leather": {
       "base": "赤邪魔的皮革",
       "shipped": "赤邪魔的皮革 Redfiend's Leather",
@@ -10307,6 +10832,11 @@
     "Refocus": {
       "base": "重新聚焦",
       "shipped": "重新聚焦 Refocus",
+      "kind": "format"
+    },
+    "Regained Isle": {
+      "base": "失而复得之岛",
+      "shipped": "失而复得之岛 Regained Isle",
       "kind": "format"
     },
     "Regenerate": {
@@ -10449,6 +10979,11 @@
       "shipped": "餐馆街 Restaurant Row",
       "kind": "format"
     },
+    "Restless Bay": {
+      "base": "躁动湾",
+      "shipped": "躁动湾 Restless Bay",
+      "kind": "format"
+    },
     "Restless Dead": {
       "base": "躁动亡者",
       "shipped": "躁动亡者 Restless Dead",
@@ -10502,6 +11037,11 @@
     "Revived": {
       "base": "复生者",
       "shipped": "复生者 Revived",
+      "kind": "format"
+    },
+    "Reysta": {
+      "base": "雷斯塔",
+      "shipped": "雷斯塔 Reysta",
       "kind": "format"
     },
     "Rhivan": {
@@ -10634,6 +11174,11 @@
       "shipped": "游移 Roving",
       "kind": "format"
     },
+    "Ruined Lunar Shrine": {
+      "base": "毁坏的月神殿",
+      "shipped": "毁坏的月神殿 Ruined Lunar Shrine",
+      "kind": "format"
+    },
     "Ruined Mausoleum": {
       "base": "废弃陵墓",
       "shipped": "废弃陵墓 Ruined Mausoleum",
@@ -10714,9 +11259,39 @@
       "shipped": "无情动量 Ruthless Momentum",
       "kind": "format"
     },
+    "SALISKA": {
+      "base": "萨利斯卡",
+      "shipped": "萨利斯卡 SALISKA",
+      "kind": "format"
+    },
+    "SAURVEK": {
+      "base": "索维克",
+      "shipped": "索维克 SAURVEK",
+      "kind": "format"
+    },
+    "SHADEKIN": {
+      "base": "影裔",
+      "shipped": "影裔 SHADEKIN",
+      "kind": "format"
+    },
+    "SKITARI": {
+      "base": "斯基塔里",
+      "shipped": "斯基塔里 SKITARI",
+      "kind": "format"
+    },
+    "SUNARAE": {
+      "base": "苏纳雷",
+      "shipped": "苏纳雷 SUNARAE",
+      "kind": "format"
+    },
     "Saboteur": {
       "base": "破坏者",
       "shipped": "破坏者 Saboteur",
+      "kind": "format"
+    },
+    "Sacarath": {
+      "base": "萨卡拉斯",
+      "shipped": "萨卡拉斯 Sacarath",
       "kind": "format"
     },
     "Sacred Flame": {
@@ -10772,6 +11347,11 @@
     "Sai": {
       "base": "钗",
       "shipped": "钗 Sai",
+      "kind": "format"
+    },
+    "Sail": {
+      "base": "帆",
+      "shipped": "帆 Sail",
       "kind": "format"
     },
     "Sajor Velex": {
@@ -10972,6 +11552,11 @@
     "Scout Journal": {
       "base": "侦察兵日志",
       "shipped": "侦察兵日志 Scout Journal",
+      "kind": "format"
+    },
+    "Screaming Wasteland": {
+      "base": "尖啸荒原",
+      "shipped": "尖啸荒原 Screaming Wasteland",
       "kind": "format"
     },
     "Scrimshaw Dagger": {
@@ -11319,9 +11904,19 @@
       "shipped": "分享火焰 Share Flame",
       "kind": "format"
     },
+    "Shattered Keep": {
+      "base": "破碎要塞",
+      "shipped": "破碎要塞 Shattered Keep",
+      "kind": "format"
+    },
     "Shattered One": {
       "base": "碎裂者",
       "shipped": "碎裂者 Shattered One",
+      "kind": "format"
+    },
+    "She'lu": {
+      "base": "谢卢",
+      "shipped": "谢卢 She'lu",
       "kind": "format"
     },
     "Sheltered Campsite": {
@@ -11422,6 +12017,11 @@
     "Shifting Shard": {
       "base": "移形碎片",
       "shipped": "移形碎片 Shifting Shard",
+      "kind": "format"
+    },
+    "Shiftstone": {
+      "base": "移位石",
+      "shipped": "移位石 Shiftstone",
       "kind": "format"
     },
     "Shillelagh": {
@@ -11687,6 +12287,11 @@
     "Sionia's Blessing": {
       "base": "希俄尼娅的祝福",
       "shipped": "希俄尼娅的祝福 Sionia's Blessing",
+      "kind": "format"
+    },
+    "Sirewood": {
+      "base": "西尔伍德",
+      "shipped": "西尔伍德 Sirewood",
       "kind": "format"
     },
     "Sitheera": {
@@ -11969,6 +12574,11 @@
       "shipped": "术法点数 Sorcery Points",
       "kind": "format"
     },
+    "Sorrow": {
+      "base": "哀伤",
+      "shipped": "哀伤 Sorrow",
+      "kind": "format"
+    },
     "Soul Cycle": {
       "base": "灵魂循环",
       "shipped": "灵魂循环 Soul Cycle",
@@ -11997,6 +12607,16 @@
     "South Hallways": {
       "base": "南侧走廊",
       "shipped": "南侧走廊 South Hallways",
+      "kind": "format"
+    },
+    "Southern Corebright Forest": {
+      "base": "南部辉核森林",
+      "shipped": "南部辉核森林 Southern Corebright Forest",
+      "kind": "format"
+    },
+    "Southern Shana Mountains": {
+      "base": "沙纳山脉南部",
+      "shipped": "沙纳山脉南部 Southern Shana Mountains",
       "kind": "format"
     },
     "Southern Sitting Room": {
@@ -12129,6 +12749,11 @@
       "shipped": "法铸笔 Spellwrought Pen",
       "kind": "format"
     },
+    "Sperun": {
+      "base": "斯佩伦",
+      "shipped": "斯佩伦 Sperun",
+      "kind": "format"
+    },
     "Spider Climb": {
       "base": "蛛行术",
       "shipped": "蛛行术 Spider Climb",
@@ -12157,6 +12782,11 @@
     "Spiked Slam": {
       "base": "尖刺猛击",
       "shipped": "尖刺猛击 Spiked Slam",
+      "kind": "format"
+    },
+    "Spine of Ember": {
+      "base": "余烬之脊",
+      "shipped": "余烬之脊 Spine of Ember",
       "kind": "format"
     },
     "Spinebite": {
@@ -12197,6 +12827,11 @@
     "Splinter Canyons": {
       "base": "碎裂峡谷",
       "shipped": "碎裂峡谷 Splinter Canyons",
+      "kind": "format"
+    },
+    "Splintis": {
+      "base": "斯普林提斯",
+      "shipped": "斯普林提斯 Splintis",
       "kind": "format"
     },
     "Sporix Host": {
@@ -12804,6 +13439,16 @@
       "shipped": "系统需求 System Requirements",
       "kind": "format"
     },
+    "TEMPAR": {
+      "base": "坦帕尔",
+      "shipped": "坦帕尔 TEMPAR",
+      "kind": "format"
+    },
+    "TOLVOR KOHATAI": {
+      "base": "托尔沃尔·科哈泰",
+      "shipped": "托尔沃尔·科哈泰 TOLVOR KOHATAI",
+      "kind": "format"
+    },
     "Tactical Plan": {
       "base": "战术计划",
       "shipped": "战术计划 Tactical Plan",
@@ -13099,6 +13744,11 @@
       "shipped": "兵营 The Barracks",
       "kind": "format"
     },
+    "The Beast's Maw": {
+      "base": "野兽之喉",
+      "shipped": "野兽之喉 The Beast's Maw",
+      "kind": "format"
+    },
     "The Bewilderment": {
       "base": "迷惘",
       "shipped": "迷惘 The Bewilderment",
@@ -13144,9 +13794,19 @@
       "shipped": "青铜拉斯克剧院 The Bronze Rask Theater",
       "kind": "format"
     },
+    "The Bulwark": {
+      "base": "壁垒",
+      "shipped": "壁垒 The Bulwark",
+      "kind": "format"
+    },
     "The Burns": {
       "base": "伯恩斯",
       "shipped": "伯恩斯 The Burns",
+      "kind": "format"
+    },
+    "The Carrow Ocean": {
+      "base": "卡罗海洋",
+      "shipped": "卡罗海洋 The Carrow Ocean",
       "kind": "format"
     },
     "The Cauldron": {
@@ -13199,6 +13859,16 @@
       "shipped": "峭岩边酒馆 The Cragside Tavern",
       "kind": "format"
     },
+    "The Crawler": {
+      "base": "爬行者",
+      "shipped": "爬行者 The Crawler",
+      "kind": "format"
+    },
+    "The Crossing Sea": {
+      "base": "横渡海",
+      "shipped": "横渡海 The Crossing Sea",
+      "kind": "format"
+    },
     "The Crystal Quarryman": {
       "base": "水晶采石工",
       "shipped": "水晶采石工 The Crystal Quarryman",
@@ -13207,6 +13877,11 @@
     "The Cube": {
       "base": "方块",
       "shipped": "方块 The Cube",
+      "kind": "format"
+    },
+    "The Cursed Continent": {
+      "base": "被诅咒的大陆",
+      "shipped": "被诅咒的大陆 The Cursed Continent",
       "kind": "format"
     },
     "The Death of Darius": {
@@ -13244,6 +13919,11 @@
       "shipped": "这次坠落会要了你的命 The Fall's Gonna Kill You",
       "kind": "format"
     },
+    "The Far Southlands": {
+      "base": "遥远的南方之地",
+      "shipped": "遥远的南方之地 The Far Southlands",
+      "kind": "format"
+    },
     "The Final Days of Daelin Lowd": {
       "base": "戴林·洛德的最后岁月",
       "shipped": "戴林·洛德的最后岁月 The Final Days of Daelin Lowd",
@@ -13252,6 +13932,11 @@
     "The First Dawn": {
       "base": "初曙",
       "shipped": "初曙 The First Dawn",
+      "kind": "format"
+    },
+    "The First Throne": {
+      "base": "第一王座",
+      "shipped": "第一王座 The First Throne",
       "kind": "format"
     },
     "The Game Room": {
@@ -13264,6 +13949,11 @@
       "shipped": "纱光微烁 The Glint of Gossamer",
       "kind": "format"
     },
+    "The Golden Bay": {
+      "base": "黄金湾",
+      "shipped": "黄金湾 The Golden Bay",
+      "kind": "format"
+    },
     "The Hallows": {
       "base": "圣堂区",
       "shipped": "圣堂区 The Hallows",
@@ -13272,6 +13962,16 @@
     "The Harborage": {
       "base": "港湾区",
       "shipped": "港湾区 The Harborage",
+      "kind": "format"
+    },
+    "The Harmonious Truth": {
+      "base": "和谐真理",
+      "shipped": "和谐真理 The Harmonious Truth",
+      "kind": "format"
+    },
+    "The Hoarfrost Edge": {
+      "base": "霜冻之缘",
+      "shipped": "霜冻之缘 The Hoarfrost Edge",
       "kind": "format"
     },
     "The House on Lonely Hill": {
@@ -13284,9 +13984,19 @@
       "shipped": "知情者 The Insider",
       "kind": "format"
     },
+    "The Jarn Peninsula": {
+      "base": "雅恩半岛",
+      "shipped": "雅恩半岛 The Jarn Peninsula",
+      "kind": "format"
+    },
     "The Last Satchel": {
       "base": "最后的挎包",
       "shipped": "最后的挎包 The Last Satchel",
+      "kind": "format"
+    },
+    "The Leviathan Preserve": {
+      "base": "利维坦禁猎区",
+      "shipped": "利维坦禁猎区 The Leviathan Preserve",
       "kind": "format"
     },
     "The Light Within": {
@@ -13294,9 +14004,24 @@
       "shipped": "内在之光 The Light Within",
       "kind": "format"
     },
+    "The Lost Dale": {
+      "base": "失落谷地",
+      "shipped": "失落谷地 The Lost Dale",
+      "kind": "format"
+    },
+    "The Lost Realms": {
+      "base": "失落诸域",
+      "shipped": "失落诸域 The Lost Realms",
+      "kind": "format"
+    },
     "The Marlstone Gala": {
       "base": "马尔石晚会",
       "shipped": "马尔石晚会 The Marlstone Gala",
+      "kind": "format"
+    },
+    "The Middle Sea": {
+      "base": "中央海",
+      "shipped": "中央海 The Middle Sea",
       "kind": "format"
     },
     "The Moon Child of Lake Jinro": {
@@ -13324,9 +14049,29 @@
       "shipped": "陷坑 The Pit Trap",
       "kind": "format"
     },
+    "The Prowling Death": {
+      "base": "潜行的死亡",
+      "shipped": "潜行的死亡 The Prowling Death",
+      "kind": "format"
+    },
+    "The Radiant Continent": {
+      "base": "辉耀大陆",
+      "shipped": "辉耀大陆 The Radiant Continent",
+      "kind": "format"
+    },
+    "The Reaver Ocean": {
+      "base": "劫掠者海洋",
+      "shipped": "劫掠者海洋 The Reaver Ocean",
+      "kind": "format"
+    },
     "The Rickety Man": {
       "base": "摇摇欲坠的人",
       "shipped": "摇摇欲坠的人 The Rickety Man",
+      "kind": "format"
+    },
+    "The Roaring Edge": {
+      "base": "咆哮之缘",
+      "shipped": "咆哮之缘 The Roaring Edge",
       "kind": "format"
     },
     "The Scrapyard": {
@@ -13337,6 +14082,11 @@
     "The Secret Autopsy": {
       "base": "秘密尸检",
       "shipped": "秘密尸检 The Secret Autopsy",
+      "kind": "format"
+    },
+    "The Shardstone Continent": {
+      "base": "碎片石大陆",
+      "shipped": "碎片石大陆 The Shardstone Continent",
       "kind": "format"
     },
     "The Shattering": {
@@ -13354,6 +14104,11 @@
       "shipped": "寂静狼群 The Silent Pack",
       "kind": "format"
     },
+    "The Silken Sea": {
+      "base": "丝绸之海",
+      "shipped": "丝绸之海 The Silken Sea",
+      "kind": "format"
+    },
     "The Situation in Skybrush": {
       "base": "天刷镇的局势",
       "shipped": "天刷镇的局势 The Situation in Skybrush",
@@ -13369,6 +14124,11 @@
       "shipped": "烟馆 The Smoke Hut",
       "kind": "format"
     },
+    "The Southern Ocean": {
+      "base": "南大洋",
+      "shipped": "南大洋 The Southern Ocean",
+      "kind": "format"
+    },
     "The Spellbreaker": {
       "base": "破法者",
       "shipped": "破法者 The Spellbreaker",
@@ -13377,6 +14137,11 @@
     "The Sphere": {
       "base": "天球",
       "shipped": "天球 The Sphere",
+      "kind": "format"
+    },
+    "The Spiritlands": {
+      "base": "灵界",
+      "shipped": "灵界 The Spiritlands",
       "kind": "format"
     },
     "The Starshield": {
@@ -13392,6 +14157,16 @@
     "The Storyteller of Nain": {
       "base": "奈因的说书人",
       "shipped": "奈因的说书人 The Storyteller of Nain",
+      "kind": "format"
+    },
+    "The Swirling Edge": {
+      "base": "旋涡之缘",
+      "shipped": "旋涡之缘 The Swirling Edge",
+      "kind": "format"
+    },
+    "The Sword Range": {
+      "base": "剑锋山脉",
+      "shipped": "剑锋山脉 The Sword Range",
       "kind": "format"
     },
     "The Tanir": {
@@ -13424,6 +14199,11 @@
       "shipped": "麻烦缠身的商队驭手 The Troubled Caravaneer",
       "kind": "format"
     },
+    "The Untamed Edge": {
+      "base": "蛮荒之缘",
+      "shipped": "蛮荒之缘 The Untamed Edge",
+      "kind": "format"
+    },
     "The Unveiling": {
       "base": "揭幕",
       "shipped": "揭幕 The Unveiling",
@@ -13442,6 +14222,11 @@
     "The Weave": {
       "base": "织幕",
       "shipped": "织幕 The Weave",
+      "kind": "format"
+    },
+    "The Western Wilds": {
+      "base": "西部荒野",
+      "shipped": "西部荒野 The Western Wilds",
       "kind": "format"
     },
     "The Winding Trail": {
@@ -13517,6 +14302,11 @@
     "Thread the Needle": {
       "base": "穿针引线",
       "shipped": "穿针引线 Thread the Needle",
+      "kind": "format"
+    },
+    "Three Eyes Island": {
+      "base": "三眼岛",
+      "shipped": "三眼岛 Three Eyes Island",
       "kind": "format"
     },
     "Three Point Lift": {
@@ -13619,6 +14409,11 @@
       "shipped": "斯佩克特拉之选民的坟墓 Tomb of Spectra's Chosen",
       "kind": "format"
     },
+    "Tome": {
+      "base": "典籍",
+      "shipped": "典籍 Tome",
+      "kind": "format"
+    },
     "Tome of Abyssal Histories": {
       "base": "深渊史典",
       "shipped": "深渊史典 Tome of Abyssal Histories",
@@ -13689,6 +14484,11 @@
       "shipped": "扑倒猛跃 Toppling Pounce",
       "kind": "format"
     },
+    "Toraga": {
+      "base": "托拉加",
+      "shipped": "托拉加 Toraga",
+      "kind": "format"
+    },
     "Torch": {
       "base": "火把",
       "shipped": "火把 Torch",
@@ -13747,6 +14547,11 @@
     "Tradeskills Overview": {
       "base": "制作技艺概览",
       "shipped": "制作技艺概览 Tradeskills Overview",
+      "kind": "format"
+    },
+    "Trailing Hills": {
+      "base": "丘陵尽头",
+      "shipped": "丘陵尽头 Trailing Hills",
       "kind": "format"
     },
     "Trained Security": {
@@ -14089,6 +14894,21 @@
       "shipped": "用户界面 User Interface",
       "kind": "format"
     },
+    "VARENA": {
+      "base": "瓦雷娜",
+      "shipped": "瓦雷娜 VARENA",
+      "kind": "format"
+    },
+    "VARTIC": {
+      "base": "瓦提克",
+      "shipped": "瓦提克 VARTIC",
+      "kind": "format"
+    },
+    "VELLATAGÉ": {
+      "base": "维拉塔热",
+      "shipped": "维拉塔热 VELLATAGÉ",
+      "kind": "format"
+    },
     "Vampiric Bite": {
       "base": "吸血咬噬",
       "shipped": "吸血咬噬 Vampiric Bite",
@@ -14124,6 +14944,16 @@
       "shipped": "消失 Vanish",
       "kind": "format"
     },
+    "Vantol": {
+      "base": "范托尔",
+      "shipped": "范托尔 Vantol",
+      "kind": "format"
+    },
+    "Varen Hills": {
+      "base": "瓦伦丘陵",
+      "shipped": "瓦伦丘陵 Varen Hills",
+      "kind": "format"
+    },
     "Varlo's": {
       "base": "瓦洛餐厅",
       "shipped": "瓦洛餐厅 Varlo's",
@@ -14142,6 +14972,16 @@
     "Vasem": {
       "base": "瓦瑟姆",
       "shipped": "瓦瑟姆 Vasem",
+      "kind": "format"
+    },
+    "Vathan": {
+      "base": "瓦森",
+      "shipped": "瓦森 Vathan",
+      "kind": "format"
+    },
+    "Vathar Forests": {
+      "base": "瓦萨尔森林",
+      "shipped": "瓦萨尔森林 Vathar Forests",
       "kind": "format"
     },
     "Vaznor": {
@@ -14269,6 +15109,11 @@
       "shipped": "远景 Vistas",
       "kind": "format"
     },
+    "Vita'ri": {
+      "base": "维塔里",
+      "shipped": "维塔里 Vita'ri",
+      "kind": "format"
+    },
     "Vitt's Balcony": {
       "base": "维特的阳台",
       "shipped": "维特的阳台 Vitt's Balcony",
@@ -14347,6 +15192,11 @@
     "Vrjnhar Lineage": {
       "base": "弗尔金哈尔血统",
       "shipped": "弗尔金哈尔血统 Vrjnhar Lineage",
+      "kind": "format"
+    },
+    "WINDBARE": {
+      "base": "温赤荒",
+      "shipped": "温赤荒 WINDBARE",
       "kind": "format"
     },
     "Waerd": {
@@ -14684,6 +15534,11 @@
       "shipped": "水囊 Wetskin",
       "kind": "format"
     },
+    "Wheel": {
+      "base": "轮子",
+      "shipped": "轮子 Wheel",
+      "kind": "format"
+    },
     "Where Evil Lurks": {
       "base": "邪恶潜伏之处",
       "shipped": "邪恶潜伏之处 Where Evil Lurks",
@@ -14707,6 +15562,11 @@
     "Whistle": {
       "base": "口哨",
       "shipped": "口哨 Whistle",
+      "kind": "format"
+    },
+    "Wick": {
+      "base": "威克",
+      "shipped": "威克 Wick",
       "kind": "format"
     },
     "Wicked Beak": {
@@ -14800,7 +15660,7 @@
       "kind": "format"
     },
     "Wingsuit": {
-      "base": "飞行服",
+      "base": "翼装飞行服",
       "shipped": "翼装飞行服 Wingsuit",
       "kind": "format"
     },
@@ -14857,6 +15717,11 @@
     "World of Ember": {
       "base": "余烬世界",
       "shipped": "余烬世界 World of Ember",
+      "kind": "format"
+    },
+    "World's End": {
+      "base": "世界尽头",
+      "shipped": "世界尽头 World's End",
       "kind": "format"
     },
     "Woven Construct": {
@@ -14919,6 +15784,11 @@
       "shipped": "雅科什塔矿井轨道切换器 Yakoshta Mine Track Switches",
       "kind": "format"
     },
+    "Yarino": {
+      "base": "亚里诺",
+      "shipped": "亚里诺 Yarino",
+      "kind": "format"
+    },
     "Yarnac": {
       "base": "亚纳克",
       "shipped": "亚纳克 Yarnac",
@@ -14952,6 +15822,11 @@
     "Young Cheliceraeth": {
       "base": "幼年螯蛛艾斯",
       "shipped": "幼年螯蛛艾斯 Young Cheliceraeth",
+      "kind": "format"
+    },
+    "Zancol Expanse": {
+      "base": "赞科尔广袤域",
+      "shipped": "赞科尔广袤域 Zancol Expanse",
       "kind": "format"
     },
     "Zarajah": {
@@ -15989,6 +16864,11 @@
         "folders": "异怪 Aberrations"
       }
     },
+    "Abilas": {
+      "cn": "阿比拉斯 Abilas",
+      "source": "shipped-bilingual-form",
+      "base_was": "阿比拉斯"
+    },
     "Ability": {
       "cn": "能力",
       "source": "base"
@@ -16114,6 +16994,11 @@
     "Abyssal Darkness": {
       "cn": "深渊黑暗",
       "source": "base"
+    },
+    "Abyssal Desolation": {
+      "cn": "深渊荒芜 Abyssal Desolation",
+      "source": "shipped-bilingual-form",
+      "base_was": "深渊荒芜"
     },
     "Abyssal Echo": {
       "cn": "深渊回响 Abyssal Echo",
@@ -16713,7 +17598,7 @@
     "Afflicted Pallid Drakeling": {
       "cn": "受难苍白幼龙兽 Afflicted Pallid Drakeling",
       "source": "shipped-bilingual-form",
-      "base_was": "受难苍白幼龙"
+      "base_was": "受难苍白幼龙兽"
     },
     "Afflicted Thornling": {
       "cn": "受折磨的荆芽灵",
@@ -16983,6 +17868,11 @@
     "Alarm States": {
       "cn": "警报状态",
       "source": "base"
+    },
+    "Alavai": {
+      "cn": "阿拉瓦伊 Alavai",
+      "source": "shipped-bilingual-form",
+      "base_was": "阿拉瓦伊"
     },
     "Albine Amar": {
       "cn": "阿尔拜因·阿马尔 Albine Amar",
@@ -18142,7 +19032,7 @@
       }
     },
     "Arcturel Investigation": {
-      "cn": "阿克图雷尔调查",
+      "cn": "阿克图瑞尔调查",
       "source": "base"
     },
     "Arcturel Playing Cards": {
@@ -18163,23 +19053,8 @@
     },
     "Arcturian": {
       "cn": "阿克图里安 Arcturian",
-      "source": "shipped",
-      "role": "name",
-      "byRole": {
-        "folders": "阿克图里安 Arcturian",
-        "name": "阿克图里安 Arcturian",
-        "tokenName": "阿克图里安"
-      },
-      "candidates": {
-        "name": {
-          "阿克图里安 Arcturian": 8,
-          "阿克图里安人 Arcturian": 2
-        },
-        "tokenName": {
-          "阿克图里安": 3,
-          "阿克图里安人": 2
-        }
-      }
+      "source": "shipped-bilingual-form",
+      "base_was": "阿克图里安"
     },
     "Arcturian Alchemist": {
       "cn": "阿克图里安炼金术士 Arcturian Alchemist",
@@ -18271,7 +19146,7 @@
       "base_was": "阿克图里安小饰品"
     },
     "Arcturians": {
-      "cn": "阿克图里亚人",
+      "cn": "阿克图里安人",
       "source": "base"
     },
     "Arctus Plateau": {
@@ -18345,6 +19220,11 @@
       "cn": "阿雷特尔 Areyter",
       "source": "shipped-bilingual-form",
       "base_was": "阿雷特尔"
+    },
+    "Aris Peninsula": {
+      "cn": "阿里斯半岛 Aris Peninsula",
+      "source": "shipped-bilingual-form",
+      "base_was": "阿里斯半岛"
     },
     "Arm Blade": {
       "cn": "臂刃 Arm Blade",
@@ -18497,6 +19377,16 @@
     "Ascendants": {
       "cn": "飞升者",
       "source": "base"
+    },
+    "Ash": {
+      "cn": "灰烬 Ash",
+      "source": "shipped-bilingual-form",
+      "base_was": "灰烬"
+    },
+    "Ash Guard Peaks": {
+      "cn": "灰烬卫峰群 Ash Guard Peaks",
+      "source": "shipped-bilingual-form",
+      "base_was": "灰烬卫峰群"
     },
     "Ashen Cloak": {
       "cn": "灰烬斗篷 Ashen Cloak",
@@ -18855,6 +19745,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "奥里斯·博尔"
     },
+    "Aurtej": {
+      "cn": "奥尔泰杰 Aurtej",
+      "source": "shipped-bilingual-form",
+      "base_was": "奥尔泰杰"
+    },
     "Automaton": {
       "cn": "自动人偶 Automaton",
       "source": "shipped",
@@ -18862,6 +19757,11 @@
       "byRole": {
         "name": "自动人偶 Automaton"
       }
+    },
+    "Avai": {
+      "cn": "阿瓦伊 Avai",
+      "source": "shipped-bilingual-form",
+      "base_was": "阿瓦伊"
     },
     "Aversion to Radiance": {
       "cn": "对辉耀的厌恶 Aversion to Radiance",
@@ -18884,6 +19784,11 @@
       "byRole": {
         "name": "阿维尔"
       }
+    },
+    "Avok": {
+      "cn": "阿沃克 Avok",
+      "source": "shipped-bilingual-form",
+      "base_was": "阿沃克"
     },
     "Avwynn Exposed": {
       "cn": "阿芙温被揭露",
@@ -18927,6 +19832,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "觉醒"
     },
+    "Awakened Savanna": {
+      "cn": "觉醒草原 Awakened Savanna",
+      "source": "shipped-bilingual-form",
+      "base_was": "觉醒草原"
+    },
     "Award Attunements": {
       "cn": "授予调谐",
       "source": "base"
@@ -18963,7 +19873,7 @@
     "Axe": {
       "cn": "斧头 Axe",
       "source": "shipped-bilingual-form",
-      "base_was": "斧"
+      "base_was": "斧头"
     },
     "Axebearer": {
       "cn": "持斧者",
@@ -18991,6 +19901,11 @@
         "name": "蓝铜矿 Azurite"
       }
     },
+    "BARBLINGS": {
+      "cn": "巴布灵 BARBLINGS",
+      "source": "shipped-bilingual-form",
+      "base_was": "巴布灵"
+    },
     "BAS-till-a": {
       "cn": "巴斯-蒂-拉（BAS-till-a）",
       "source": "shipped",
@@ -18998,6 +19913,11 @@
       "byRole": {
         "pronunciation": "巴斯-蒂-拉（BAS-till-a）"
       }
+    },
+    "BJORDAN": {
+      "cn": "比约丹 BJORDAN",
+      "source": "shipped-bilingual-form",
+      "base_was": "比约丹"
     },
     "Back Alley": {
       "cn": "后巷 Back Alley",
@@ -19322,7 +20242,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "地下室储藏室 Basement Storage"
+        "name": "地下室储藏室 Basement Storage",
+        "notes": "地下室储藏室 Basement Storage"
       }
     },
     "Basement West": {
@@ -20228,6 +21149,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "血林"
     },
+    "Bloodworm": {
+      "cn": "血虫 Bloodworm",
+      "source": "shipped-bilingual-form",
+      "base_was": "血虫"
+    },
     "Bloody Gorge": {
       "cn": "血腥吞噬 Bloody Gorge",
       "source": "shipped-bilingual-form",
@@ -20337,7 +21263,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "蓝色轨道 Blue Track"
+        "name": "蓝色轨道 Blue Track",
+        "notes": "蓝色轨道 Blue Track"
       }
     },
     "Blue Tracks": {
@@ -20517,6 +21444,16 @@
         "name": "精灵靴 Boots of Elvenkind"
       }
     },
+    "Border Heathlands": {
+      "cn": "边境荒原 Border Heathlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "边境荒原"
+    },
+    "Border Walls": {
+      "cn": "边境墙 Border Walls",
+      "source": "shipped-bilingual-form",
+      "base_was": "边境墙"
+    },
     "Borel": {
       "cn": "博雷尔语",
       "source": "base"
@@ -20612,6 +21549,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "布拉库斯·冯·泰特"
     },
+    "Braken": {
+      "cn": "布拉肯 Braken",
+      "source": "shipped-bilingual-form",
+      "base_was": "布拉肯"
+    },
     "Bramble Gully": {
       "cn": "荆棘沟壑 Bramble Gully",
       "source": "shipped-bilingual-form",
@@ -20663,6 +21605,11 @@
       "cn": "破口水道 Breached Waterway",
       "source": "shipped-bilingual-form",
       "base_was": "破口水道"
+    },
+    "Break": {
+      "cn": "断口 Break",
+      "source": "shipped-bilingual-form",
+      "base_was": "断口"
     },
     "Break Room": {
       "cn": "休息室 Break Room",
@@ -20724,6 +21671,16 @@
     "Briar Hedge Trap": {
       "cn": "荆棘树篱陷阱",
       "source": "base"
+    },
+    "Briar Peaks": {
+      "cn": "荆棘峰 Briar Peaks",
+      "source": "shipped-bilingual-form",
+      "base_was": "荆棘峰"
+    },
+    "Briarfur": {
+      "cn": "荆棘皮毛 Briarfur",
+      "source": "shipped-bilingual-form",
+      "base_was": "荆棘皮毛"
     },
     "Briarhearth": {
       "cn": "荆炉居",
@@ -20805,6 +21762,11 @@
       "cn": "布面甲 Brigandine",
       "source": "shipped-bilingual-form",
       "base_was": "布面甲"
+    },
+    "Brightcore": {
+      "cn": "辉核 Brightcore",
+      "source": "shipped-bilingual-form",
+      "base_was": "辉核"
     },
     "Brimtown": {
       "cn": "边缘镇 Brimtown",
@@ -20906,7 +21868,7 @@
     "Buckler": {
       "cn": "小圆盾 Buckler",
       "source": "shipped-bilingual-form",
-      "base_was": "圆盾"
+      "base_was": "小圆盾"
     },
     "Bull Rush": {
       "cn": "猛撞 Bull Rush",
@@ -21058,6 +22020,11 @@
       "cn": "阿维拉半身像 Bust of Avilla",
       "source": "shipped-bilingual-form",
       "base_was": "阿维拉半身像"
+    },
+    "CASCAAL GOLDS": {
+      "cn": "卡斯卡尔金原 CASCAAL GOLDS",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡斯卡尔金原"
     },
     "COR-ah": {
       "cn": "科-拉（COR-ah）",
@@ -21223,6 +22190,11 @@
       "byRole": {
         "name": "运河水域"
       }
+    },
+    "Canasia": {
+      "cn": "卡纳西亚 Canasia",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡纳西亚"
     },
     "Candle": {
       "cn": "蜡烛 Candle",
@@ -21534,6 +22506,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "踩点"
     },
+    "Casla-Brava": {
+      "cn": "卡斯拉-布拉瓦 Casla-Brava",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡斯拉-布拉瓦"
+    },
     "Cast Spell": {
       "cn": "施放法术",
       "source": "base"
@@ -21554,6 +22531,11 @@
       "byRole": {
         "name": "卡斯特·塔斯克 Caster Tusk"
       }
+    },
+    "Catch": {
+      "cn": "渔获 Catch",
+      "source": "shipped-bilingual-form",
+      "base_was": "渔获"
     },
     "Category": {
       "cn": "类别",
@@ -21645,6 +22627,11 @@
       "cn": "洞道 Caveway",
       "source": "shipped-bilingual-form",
       "base_was": "洞道"
+    },
+    "Caxco": {
+      "cn": "卡克斯科 Caxco",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡克斯科"
     },
     "Celestial": {
       "cn": "天界生物 Celestial",
@@ -22037,11 +23024,11 @@
       }
     },
     "Change Token Elevation": {
-      "cn": "改变令牌高度",
+      "cn": "改变指示物高度",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "改变令牌高度"
+        "name": "改变指示物高度"
       }
     },
     "Change of Direction": {
@@ -22394,6 +23381,11 @@
         "name": "奇美拉 Chimera"
       }
     },
+    "Chimeras": {
+      "cn": "奇美拉 Chimeras",
+      "source": "shipped-bilingual-form",
+      "base_was": "奇美拉"
+    },
     "Chimerists Collar": {
       "cn": "嵌合师项圈 Chimerists Collar",
       "source": "shipped",
@@ -22521,7 +23513,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "辛达里克旅舍 Cindaric Lodging"
+        "name": "辛达里克旅舍 Cindaric Lodging",
+        "notes": "辛达里克旅舍 Cindaric Lodging"
       }
     },
     "Cindaric Mint Tea": {
@@ -22538,6 +23531,11 @@
       "cn": "辛达里克贤者 Cindaric Sages",
       "source": "shipped-bilingual-form",
       "base_was": "辛达里克贤者"
+    },
+    "Cindaric Threshold": {
+      "cn": "辛达里克阈限 Cindaric Threshold",
+      "source": "shipped-bilingual-form",
+      "base_was": "辛达里克阈限"
     },
     "Cindaric Writ": {
       "cn": "辛达里克令状 Cindaric Writ",
@@ -23950,6 +24948,11 @@
         "name": "科拉月华映照 Cora Lunar Reflection"
       }
     },
+    "Coral": {
+      "cn": "珊瑚 Coral",
+      "source": "shipped-bilingual-form",
+      "base_was": "珊瑚"
+    },
     "Coral Whistle": {
       "cn": "珊瑚哨",
       "source": "shipped",
@@ -23957,6 +24960,11 @@
       "byRole": {
         "name": "珊瑚哨"
       }
+    },
+    "Coran Spike": {
+      "cn": "科兰尖刺 Coran Spike",
+      "source": "shipped-bilingual-form",
+      "base_was": "科兰尖刺"
     },
     "Core Classes": {
       "cn": "核心职业",
@@ -23970,6 +24978,11 @@
       "cn": "辉核森林 Corebright Forest",
       "source": "shipped-bilingual-form",
       "base_was": "辉核森林"
+    },
+    "Corla": {
+      "cn": "科尔拉 Corla",
+      "source": "shipped-bilingual-form",
+      "base_was": "科尔拉"
     },
     "Corpin Arrival": {
       "cn": "科尔平抵达 Corpin Arrival",
@@ -24170,6 +25183,10 @@
         "name": "科温·考恩 Corwin Kawn"
       }
     },
+    "Cosmic": {
+      "cn": "宇宙",
+      "source": "base"
+    },
     "Cosmic Creation": {
       "cn": "宇宙创生",
       "source": "base"
@@ -24179,17 +25196,18 @@
       "source": "shipped-bilingual-form",
       "base_was": "宇宙宝石"
     },
+    "Cosmological": {
+      "cn": "宇宙",
+      "source": "base"
+    },
     "Cosmological Attunement": {
-      "cn": "宇宙调谐",
+      "cn": "宇宙同调",
       "source": "base"
     },
     "Cosmology": {
       "cn": "宇宙观 Cosmology",
-      "source": "shipped",
-      "role": "name",
-      "byRole": {
-        "name": "宇宙观 Cosmology"
-      }
+      "source": "shipped-bilingual-form",
+      "base_was": "宇宙观"
     },
     "Cosmopolitan Fashionista": {
       "cn": "世界风尚达人 Cosmopolitan Fashionista",
@@ -24293,7 +25311,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "庭院 Courtyard"
+        "name": "庭院 Courtyard",
+        "notes": "庭院 Courtyard"
       }
     },
     "Covering Fire": {
@@ -24596,10 +25615,20 @@
       "source": "shipped-bilingual-form",
       "base_was": "栅堡十字的人群"
     },
+    "Crown": {
+      "cn": "王冠 Crown",
+      "source": "shipped-bilingual-form",
+      "base_was": "王冠"
+    },
     "Crown Apothecary": {
       "cn": "王室药剂师 Crown Apothecary",
       "source": "shipped-bilingual-form",
       "base_was": "王室药剂师"
+    },
+    "Crowning Peaks": {
+      "cn": "冠冕群峰 Crowning Peaks",
+      "source": "shipped-bilingual-form",
+      "base_was": "冠冕群峰"
     },
     "Crucible Playtest": {
       "cn": "Crucible 试玩测试",
@@ -24635,6 +25664,11 @@
       "cn": "坍塌街角 Crumbling Corner",
       "source": "shipped-bilingual-form",
       "base_was": "坍塌街角"
+    },
+    "Crumbling Mausoleum": {
+      "cn": "崩塌的陵墓 Crumbling Mausoleum",
+      "source": "shipped-bilingual-form",
+      "base_was": "崩塌的陵墓"
     },
     "Crumbling Sanctuary": {
       "cn": "崩塌圣所 Crumbling Sanctuary",
@@ -24738,6 +25772,11 @@
       "cn": "水晶木杖 Crystal Staff",
       "source": "shipped-bilingual-form",
       "base_was": "水晶木杖"
+    },
+    "Crystal Tundra": {
+      "cn": "水晶苔原 Crystal Tundra",
+      "source": "shipped-bilingual-form",
+      "base_was": "水晶苔原"
     },
     "Crystal Wand": {
       "cn": "水晶魔杖 Crystal Wand",
@@ -25078,9 +26117,9 @@
       }
     },
     "Cyclonic": {
-      "cn": "旋风的 Cyclonic",
+      "cn": "气旋 Cyclonic",
       "source": "shipped-bilingual-form",
-      "base_was": "旋风的"
+      "base_was": "气旋"
     },
     "Cyclonic Displacement": {
       "cn": "气旋位移",
@@ -25101,6 +26140,11 @@
       "byRole": {
         "pronunciation": "德拉-孔（DRA-kon）"
       }
+    },
+    "DUSTRA": {
+      "cn": "尘灵 DUSTRA",
+      "source": "shipped-bilingual-form",
+      "base_was": "尘灵"
     },
     "Daemos": {
       "cn": "戴莫斯 Daemos",
@@ -26756,7 +27800,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "楼下前厅 Downstairs Vestibule"
+        "name": "楼下前厅 Downstairs Vestibule",
+        "notes": "楼下前厅 Downstairs Vestibule"
       }
     },
     "Dracanis Peaks": {
@@ -26918,6 +27963,11 @@
         "name": "吸引注意力 Drawing Attention"
       }
     },
+    "Dread Hills": {
+      "cn": "恐惧丘陵 Dread Hills",
+      "source": "shipped-bilingual-form",
+      "base_was": "恐惧丘陵"
+    },
     "Dread Lord": {
       "cn": "恐惧领主 Dread Lord",
       "source": "shipped-bilingual-form",
@@ -26951,7 +28001,7 @@
     "Dress Clothing": {
       "cn": "礼服服装 Dress Clothing",
       "source": "shipped-bilingual-form",
-      "base_was": "礼服"
+      "base_was": "礼服服装"
     },
     "Dreth Sap": {
       "cn": "德雷思树液 Dreth Sap",
@@ -27158,6 +28208,11 @@
       "cn": "暮潮合月",
       "source": "base"
     },
+    "Dust": {
+      "cn": "尘土 Dust",
+      "source": "shipped-bilingual-form",
+      "base_was": "尘土"
+    },
     "Dust Devil": {
       "cn": "尘卷风 Dust Devil",
       "source": "shipped",
@@ -27197,6 +28252,11 @@
       "cn": "尘锻炉 Dustforge",
       "source": "shipped-bilingual-form",
       "base_was": "尘锻炉"
+    },
+    "Dustlands": {
+      "cn": "尘土荒原 Dustlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "尘土荒原"
     },
     "Dustweed": {
       "cn": "尘草 Dustweed",
@@ -27244,20 +28304,20 @@
       "base_was": "垂死之光"
     },
     "Dynamic Token": {
-      "cn": "动态令牌 Dynamic Token",
+      "cn": "动态指示物 Dynamic Token",
       "source": "shipped-bilingual-form",
-      "base_was": "动态令牌"
+      "base_was": "动态指示物"
     },
     "Dynamic Token Maker": {
-      "cn": "动态令牌制作器",
+      "cn": "动态指示物制作器",
       "source": "base"
     },
     "Dynamic Token legs": {
-      "cn": "动态令牌腿部",
+      "cn": "动态指示物腿部",
       "source": "base"
     },
     "Dynamic Tokens": {
-      "cn": "动态代币",
+      "cn": "动态指示物",
       "source": "base"
     },
     "ED-eer": {
@@ -27275,6 +28335,11 @@
       "byRole": {
         "pronunciation": "恩-伯（EM-ber）"
       }
+    },
+    "EMEIR": {
+      "cn": "埃梅尔 EMEIR",
+      "source": "shipped-bilingual-form",
+      "base_was": "埃梅尔"
     },
     "Eamon Mariflor": {
       "cn": "伊蒙·玛里弗洛尔 Eamon Mariflor",
@@ -27787,8 +28852,7 @@
     },
     "Elemental": {
       "cn": "元素生物",
-      "source": "shipped-bilingual-form",
-      "base_was": "元素"
+      "source": "base"
     },
     "Elemental Armor": {
       "cn": "元素护甲 Elemental Armor",
@@ -28008,6 +29072,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "飘忽形态"
     },
+    "Elvan": {
+      "cn": "埃尔凡 Elvan",
+      "source": "shipped-bilingual-form",
+      "base_was": "埃尔凡"
+    },
     "Elvish": {
       "cn": "精灵 Elvish",
       "source": "shipped-bilingual-form",
@@ -28017,6 +29086,11 @@
       "cn": "埃尔温·达沃斯 Elwin Davos",
       "source": "shipped-bilingual-form",
       "base_was": "埃尔温·达沃斯"
+    },
+    "Elwin's Seat": {
+      "cn": "埃尔温之座 Elwin's Seat",
+      "source": "shipped-bilingual-form",
+      "base_was": "埃尔温之座"
     },
     "Embalming Room": {
       "cn": "防腐室 Embalming Room",
@@ -28932,7 +30006,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "检查室 Examination Room"
+        "name": "检查室 Examination Room",
+        "notes": "检查室 Examination Room"
       }
     },
     "Examined Falar's Paint": {
@@ -29181,6 +30256,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "精致宝石戒指"
     },
+    "Exten Peninsula": {
+      "cn": "埃克斯滕半岛 Exten Peninsula",
+      "source": "shipped-bilingual-form",
+      "base_was": "埃克斯滕半岛"
+    },
     "Extend": {
       "cn": "延展",
       "source": "base"
@@ -29336,6 +30416,11 @@
         "name": "暗影中的眼睛 Eyes in the Shadows"
       }
     },
+    "FAR'RENT MOUNTAINS": {
+      "cn": "法尔伦特山脉 FAR'RENT MOUNTAINS",
+      "source": "shipped-bilingual-form",
+      "base_was": "法尔伦特山脉"
+    },
     "FEE-ah-ra": {
       "cn": "菲-亚-拉（FEE-ah-ra）",
       "source": "shipped",
@@ -29351,6 +30436,11 @@
       "byRole": {
         "pronunciation": "费伊杰（FEHJ）"
       }
+    },
+    "FENLINGS": {
+      "cn": "芬灵族 FENLINGS",
+      "source": "shipped-bilingual-form",
+      "base_was": "芬灵族"
     },
     "Fabricate": {
       "cn": "捏造 Fabricate",
@@ -30090,6 +31180,11 @@
         "name": "拳击 Fist"
       }
     },
+    "Fist's Landing": {
+      "cn": "拳之登陆点 Fist's Landing",
+      "source": "shipped-bilingual-form",
+      "base_was": "拳之登陆点"
+    },
     "Fists": {
       "cn": "铁拳 Fists",
       "source": "shipped",
@@ -30710,6 +31805,11 @@
         "name": "文书伪造工具 Forgery Kit"
       }
     },
+    "Forgil": {
+      "cn": "福尔吉尔 Forgil",
+      "source": "shipped-bilingual-form",
+      "base_was": "福尔吉尔"
+    },
     "Forgotten": {
       "cn": "遗忘",
       "source": "base"
@@ -31159,7 +32259,7 @@
     "Funar Cevher": {
       "cn": "富纳尔·杰夫赫尔 Funar Cevher",
       "source": "shipped-bilingual-form",
-      "base_was": "富纳尔·杰夫赫"
+      "base_was": "富纳尔·杰夫赫尔"
     },
     "Funar Cevher's Cell": {
       "cn": "富纳尔·杰夫赫尔的牢房 Funar Cevher's Cell",
@@ -31229,6 +32329,11 @@
       "byRole": {
         "name": "融合外骨骼 Fused Exoskeleton"
       }
+    },
+    "GLITTERING MOUNTAINS": {
+      "cn": "闪耀山脉 GLITTERING MOUNTAINS",
+      "source": "shipped-bilingual-form",
+      "base_was": "闪耀山脉"
     },
     "Gabi Hargrove": {
       "cn": "加比·哈格罗夫",
@@ -31479,7 +32584,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "阿肯宝石 Gem of Akon"
+        "name": "阿肯宝石 Gem of Akon",
+        "notes": "阿肯宝石 Gem of Akon"
       }
     },
     "Gem of Aura": {
@@ -31487,7 +32593,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "奥拉宝石 Gem of Aura"
+        "name": "奥拉宝石 Gem of Aura",
+        "notes": "奥拉宝石 Gem of Aura"
       }
     },
     "Gem of Cora": {
@@ -31495,7 +32602,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "科拉宝石 Gem of Cora"
+        "name": "科拉宝石 Gem of Cora",
+        "notes": "科拉宝石 Gem of Cora"
       }
     },
     "Gem of Illumination": {
@@ -31511,7 +32619,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "兰提尔宝石 Gem of Lantyr"
+        "name": "兰提尔宝石 Gem of Lantyr",
+        "notes": "兰提尔宝石 Gem of Lantyr"
       }
     },
     "Gem of Mayis": {
@@ -31519,7 +32628,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "玛伊斯宝石 Gem of Mayis"
+        "name": "玛伊斯宝石 Gem of Mayis",
+        "notes": "玛伊斯宝石 Gem of Mayis"
       }
     },
     "Gem of Orbis": {
@@ -31527,7 +32637,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "奥比斯宝石 Gem of Orbis"
+        "name": "奥比斯宝石 Gem of Orbis",
+        "notes": "奥比斯宝石 Gem of Orbis"
       }
     },
     "Gem of Ragen": {
@@ -31535,7 +32646,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "拉根宝石 Gem of Ragen"
+        "name": "拉根宝石 Gem of Ragen",
+        "notes": "拉根宝石 Gem of Ragen"
       }
     },
     "Gem of Shielding": {
@@ -32599,6 +33711,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "墓击（仅限吸血鬼形态）"
     },
+    "Gravechill": {
+      "cn": "墓寒 Gravechill",
+      "source": "shipped-bilingual-form",
+      "base_was": "墓寒"
+    },
     "Gravel Chute": {
       "cn": "碎石滑道 Gravel Chute",
       "source": "shipped-bilingual-form",
@@ -32678,6 +33795,11 @@
       "byRole": {
         "name": "巨锤 Great Maul"
       }
+    },
+    "Great Morenel": {
+      "cn": "大莫瑞内尔 Great Morenel",
+      "source": "shipped-bilingual-form",
+      "base_was": "大莫瑞内尔"
     },
     "Greataxe": {
       "cn": "巨斧 Greataxe",
@@ -33304,6 +34426,11 @@
         "name": "阴魂缠身"
       }
     },
+    "Haxim": {
+      "cn": "哈克西姆 Haxim",
+      "source": "shipped-bilingual-form",
+      "base_was": "哈克西姆"
+    },
     "Haxwell Tailoring & Alterations": {
       "cn": "哈克斯韦尔裁缝与修改衣物店 Haxwell Tailoring & Alterations",
       "source": "shipped",
@@ -33501,6 +34628,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "心血幽光"
     },
+    "Hearth": {
+      "cn": "赫斯 Hearth",
+      "source": "shipped-bilingual-form",
+      "base_was": "赫斯"
+    },
     "Heartmoss": {
       "cn": "心苔 Heartmoss",
       "source": "shipped-bilingual-form",
@@ -33648,8 +34780,14 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "脚跟与鞋底 Heel and Sole"
+        "name": "脚跟与鞋底 Heel and Sole",
+        "notes": "脚跟与鞋底 Heel and Sole"
       }
+    },
+    "Hekkiro": {
+      "cn": "赫基罗 Hekkiro",
+      "source": "shipped-bilingual-form",
+      "base_was": "赫基罗"
     },
     "Helice Korsos": {
       "cn": "赫利刻·科索斯 Helice Korsos",
@@ -34102,6 +35240,11 @@
       "cn": "大地精 Hobgoblin",
       "source": "shipped-bilingual-form",
       "base_was": "大地精"
+    },
+    "Hoist": {
+      "cn": "霍伊斯特 Hoist",
+      "source": "shipped-bilingual-form",
+      "base_was": "霍伊斯特"
     },
     "Hold Breath": {
       "cn": "屏住呼吸 Hold Breath",
@@ -34644,6 +35787,11 @@
         "name": "点火 Ignition"
       }
     },
+    "Iktae": {
+      "cn": "伊克泰 Iktae",
+      "source": "shipped-bilingual-form",
+      "base_was": "伊克泰"
+    },
     "Ill Tidings": {
       "cn": "凶兆 Ill Tidings",
       "source": "shipped-bilingual-form",
@@ -35014,6 +36162,11 @@
         "name": "提升高度"
       }
     },
+    "Incursion of Ragen": {
+      "cn": "拉根的入侵 Incursion of Ragen",
+      "source": "shipped-bilingual-form",
+      "base_was": "拉根的入侵"
+    },
     "Independence": {
       "cn": "独立性",
       "source": "base"
@@ -35100,7 +36253,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "医务室 Infirmary"
+        "name": "医务室 Infirmary",
+        "notes": "医务室 Infirmary"
       }
     },
     "Inflection": {
@@ -36100,6 +37254,11 @@
         "name": "铁扳手 Iron Wrench"
       }
     },
+    "Ironrow Hills": {
+      "cn": "铁脊丘陵 Ironrow Hills",
+      "source": "shipped-bilingual-form",
+      "base_was": "铁脊丘陵"
+    },
     "Irradiated": {
       "cn": "辐照 Irradiated",
       "source": "shipped-bilingual-form",
@@ -36160,6 +37319,16 @@
         "name": "伊克斯埃拉克斯 Ix'erax",
         "tokenName": "伊克斯埃拉克斯"
       }
+    },
+    "Ixik": {
+      "cn": "伊西克 Ixik",
+      "source": "shipped-bilingual-form",
+      "base_was": "伊西克"
+    },
+    "JAEDITH": {
+      "cn": "贾迪思 JAEDITH",
+      "source": "shipped-bilingual-form",
+      "base_was": "贾迪思"
     },
     "Jade Mountains": {
       "cn": "翠玉山脉 Jade Mountains",
@@ -36328,7 +37497,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "杰莎的私人寝室 Jessa's Private Quarters"
+        "name": "杰莎的私人寝室 Jessa's Private Quarters",
+        "notes": "杰莎的私人寝室 Jessa's Private Quarters"
       }
     },
     "Jessos Station": {
@@ -36619,6 +37789,11 @@
         "pronunciation": "卡-图（KAH-too）"
       }
     },
+    "KAUSTIC HINTERLANDS": {
+      "cn": "考斯提克腹地 KAUSTIC HINTERLANDS",
+      "source": "shipped-bilingual-form",
+      "base_was": "考斯提克腹地"
+    },
     "KETH": {
       "cn": "凯思（KETH）",
       "source": "shipped",
@@ -36657,7 +37832,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "卡德拉赞恩 Kadra Zann"
+        "name": "卡德拉赞恩 Kadra Zann",
+        "notes": "卡德拉赞恩 Kadra Zann"
       }
     },
     "Kadísos": {
@@ -36696,6 +37872,11 @@
         "name": "神乐 Kagura",
         "tokenName": "神乐"
       }
+    },
+    "Kakiro": {
+      "cn": "卡基罗 Kakiro",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡基罗"
     },
     "Kalasak": {
       "cn": "卡拉萨克",
@@ -36741,6 +37922,11 @@
       "byRole": {
         "name": "卡拉萨克的观察 Kalasak's Observations"
       }
+    },
+    "Kalaxo": {
+      "cn": "卡拉克索 Kalaxo",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡拉克索"
     },
     "Kaleidoscope Caverns": {
       "cn": "万花筒洞窟 Kaleidoscope Caverns",
@@ -36881,6 +38067,11 @@
         "name": "卡拉克苏斯 Karaxsus"
       }
     },
+    "Karon Mounts": {
+      "cn": "卡隆山脉 Karon Mounts",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡隆山脉"
+    },
     "Kasarain": {
       "cn": "卡萨莱因 Kasarain",
       "source": "shipped-bilingual-form",
@@ -36926,6 +38117,16 @@
       "cn": "卡图 Katu",
       "source": "shipped-bilingual-form",
       "base_was": "卡图"
+    },
+    "Kawn": {
+      "cn": "考恩 Kawn",
+      "source": "shipped-bilingual-form",
+      "base_was": "考恩"
+    },
+    "Kayhurn": {
+      "cn": "凯胡恩 Kayhurn",
+      "source": "shipped-bilingual-form",
+      "base_was": "凯胡恩"
     },
     "Kazra": {
       "cn": "卡兹拉",
@@ -37007,6 +38208,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "凯尔梅兹安"
     },
+    "Kemas Badlands": {
+      "cn": "凯马斯荒地 Kemas Badlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "凯马斯荒地"
+    },
     "Ken Crystal": {
       "cn": "肯水晶 Ken Crystal",
       "source": "shipped-bilingual-form",
@@ -37066,9 +38272,9 @@
       "source": "base"
     },
     "Kessian Sand Knife": {
-      "cn": "凯西亚沙刀 Kessian Sand Knife",
+      "cn": "凯西安沙刀 Kessian Sand Knife",
       "source": "shipped-bilingual-form",
-      "base_was": "凯西亚沙刀"
+      "base_was": "凯西安沙刀"
     },
     "Keteran Shard": {
       "cn": "凯特兰碎片",
@@ -37201,6 +38407,16 @@
       "source": "shipped-bilingual-form",
       "base_was": "基拉吉骑士"
     },
+    "Kirike Wildlands": {
+      "cn": "基里克荒野 Kirike Wildlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "基里克荒野"
+    },
+    "Kisen": {
+      "cn": "纪森 Kisen",
+      "source": "shipped-bilingual-form",
+      "base_was": "纪森"
+    },
     "Kiska": {
       "cn": "基斯卡 Kiska",
       "source": "shipped-bilingual-form",
@@ -37269,6 +38485,16 @@
       "cn": "已知语言",
       "source": "base"
     },
+    "Koronda Barrens": {
+      "cn": "科隆达荒原 Koronda Barrens",
+      "source": "shipped-bilingual-form",
+      "base_was": "科隆达荒原"
+    },
+    "Kortos Isle": {
+      "cn": "科托斯岛 Kortos Isle",
+      "source": "shipped-bilingual-form",
+      "base_was": "科托斯岛"
+    },
     "Kost": {
       "cn": "科斯特语",
       "source": "base"
@@ -37317,10 +38543,25 @@
         "name": "海怪 Kraken"
       }
     },
+    "Kraken Port": {
+      "cn": "海妖港 Kraken Port",
+      "source": "shipped-bilingual-form",
+      "base_was": "海妖港"
+    },
+    "Krasarioc": {
+      "cn": "克拉萨里奥克 Krasarioc",
+      "source": "shipped-bilingual-form",
+      "base_was": "克拉萨里奥克"
+    },
     "Krator's Hall": {
       "cn": "克拉托尔大厅 Krator's Hall",
       "source": "shipped-bilingual-form",
       "base_was": "克拉托尔大厅"
+    },
+    "Krenac": {
+      "cn": "克雷纳克 Krenac",
+      "source": "shipped-bilingual-form",
+      "base_was": "克雷纳克"
     },
     "Kryz": {
       "cn": "克里兹 Kryz",
@@ -37347,6 +38588,16 @@
       "byRole": {
         "pronunciation": "库-阿-塔（Ku-ar-ta）"
       }
+    },
+    "Kula'me": {
+      "cn": "库拉梅 Kula'me",
+      "source": "shipped-bilingual-form",
+      "base_was": "库拉梅"
+    },
+    "Kulrun": {
+      "cn": "库尔伦 Kulrun",
+      "source": "shipped-bilingual-form",
+      "base_was": "库尔伦"
     },
     "Kyasifer": {
       "cn": "基亚西弗 Kyasifer",
@@ -37507,6 +38758,11 @@
         "pronunciation": "洛尔-吉（LOR-gee）"
       }
     },
+    "LUNARAI": {
+      "cn": "卢纳莱 LUNARAI",
+      "source": "shipped-bilingual-form",
+      "base_was": "卢纳莱"
+    },
     "Lab Area": {
       "cn": "实验室区",
       "source": "shipped",
@@ -37575,6 +38831,11 @@
       "cn": "金罗湖月神殿 Lake Jinro Lunar Shrine",
       "source": "shipped-bilingual-form",
       "base_was": "金罗湖月神殿"
+    },
+    "Lake Krena": {
+      "cn": "克雷纳湖 Lake Krena",
+      "source": "shipped-bilingual-form",
+      "base_was": "克雷纳湖"
     },
     "Lake Mithra": {
       "cn": "米斯拉湖 Lake Mithra",
@@ -37650,6 +38911,11 @@
       "cn": "陆地速度",
       "source": "base"
     },
+    "Land of the Lost": {
+      "cn": "失落之地 Land of the Lost",
+      "source": "shipped-bilingual-form",
+      "base_was": "失落之地"
+    },
     "Landmarks": {
       "cn": "地标",
       "source": "base"
@@ -37712,9 +38978,9 @@
       "base_was": "兰提尔"
     },
     "Lantyr's Blade": {
-      "cn": "兰蒂尔的刀刃 Lantyr's Blade",
+      "cn": "兰提尔的刀刃 Lantyr's Blade",
       "source": "shipped-bilingual-form",
-      "base_was": "兰蒂尔的刀刃"
+      "base_was": "兰提尔的刀刃"
     },
     "Lantyr's Flame": {
       "cn": "兰提尔之焰 Lantyr's Flame",
@@ -37757,6 +39023,21 @@
       "cn": "鞭击 Lash",
       "source": "shipped-bilingual-form",
       "base_was": "鞭击"
+    },
+    "Last Grove": {
+      "cn": "最后林地 Last Grove",
+      "source": "shipped-bilingual-form",
+      "base_was": "最后林地"
+    },
+    "Last Port": {
+      "cn": "最后的港口 Last Port",
+      "source": "shipped-bilingual-form",
+      "base_was": "最后的港口"
+    },
+    "Last Remiss": {
+      "cn": "最后的失职 Last Remiss",
+      "source": "shipped-bilingual-form",
+      "base_was": "最后的失职"
     },
     "Last Stand": {
       "cn": "背水一战 Last Stand",
@@ -39139,11 +40420,11 @@
       "source": "base"
     },
     "Lower Arcturel Mine Effect": {
-      "cn": "下层阿克图雷尔矿井效果",
+      "cn": "下层阿克图瑞尔矿井效果",
       "source": "base"
     },
     "Lower Arcturel Mine Effects": {
-      "cn": "下层阿克图雷尔矿井效果",
+      "cn": "下层阿克图瑞尔矿井效果",
       "source": "base"
     },
     "Lower Ashvale": {
@@ -39228,6 +40509,11 @@
         "name": "下层水域"
       }
     },
+    "Lowland Bastions": {
+      "cn": "低地堡垒 Lowland Bastions",
+      "source": "shipped-bilingual-form",
+      "base_was": "低地堡垒"
+    },
     "Lowlands": {
       "cn": "低地 Lowlands",
       "source": "shipped-bilingual-form",
@@ -39258,9 +40544,19 @@
         "tokenName": "辉耀"
       }
     },
+    "Luen": {
+      "cn": "卢恩 Luen",
+      "source": "shipped-bilingual-form",
+      "base_was": "卢恩"
+    },
     "Luma": {
       "cn": "卢玛语",
       "source": "base"
+    },
+    "Lumarin Homelands": {
+      "cn": "卢马林家园 Lumarin Homelands",
+      "source": "shipped-bilingual-form",
+      "base_was": "卢马林家园"
     },
     "Lumarin Steel": {
       "cn": "卢马林钢 Lumarin Steel",
@@ -39595,7 +40891,7 @@
     "Lyla Cevher": {
       "cn": "莱拉·杰夫赫尔 Lyla Cevher",
       "source": "shipped-bilingual-form",
-      "base_was": "莱拉"
+      "base_was": "莱拉·杰夫赫尔"
     },
     "Lyla Cevher (CR1)": {
       "cn": "莱拉·杰夫赫尔 Lyla Cevher (CR1)",
@@ -39896,7 +41192,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "总办公室 Main Office"
+        "name": "总办公室 Main Office",
+        "notes": "总办公室 Main Office"
       }
     },
     "Main Plaza": {
@@ -40108,6 +41405,11 @@
       "cn": "绘制神话地图 Mapping the Myth",
       "source": "shipped-bilingual-form",
       "base_was": "绘制神话地图"
+    },
+    "Marben Hills": {
+      "cn": "马本丘陵 Marben Hills",
+      "source": "shipped-bilingual-form",
+      "base_was": "马本丘陵"
     },
     "Marine Crossbow": {
       "cn": "海军十字弓 Marine Crossbow",
@@ -40522,6 +41824,11 @@
       "cn": "遭遇第一位巨人",
       "source": "base"
     },
+    "Melcator's Refuge": {
+      "cn": "梅尔卡托的避难所 Melcator's Refuge",
+      "source": "shipped-bilingual-form",
+      "base_was": "梅尔卡托的避难所"
+    },
     "Meld into Stone": {
       "cn": "融入石料 Meld into Stone",
       "source": "shipped-bilingual-form",
@@ -40572,6 +41879,11 @@
       "cn": "修补 Mending",
       "source": "shipped-bilingual-form",
       "base_was": "修补"
+    },
+    "Menin Heights": {
+      "cn": "梅宁高地 Menin Heights",
+      "source": "shipped-bilingual-form",
+      "base_was": "梅宁高地"
     },
     "Menis Valegar": {
       "cn": "梅尼斯·瓦勒加尔 Menis Valegar",
@@ -41032,8 +42344,14 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "迷雾遮蔽的小径 Mist-Veiled Approach"
+        "name": "迷雾遮蔽的小径 Mist-Veiled Approach",
+        "notes": "迷雾遮蔽的小径 Mist-Veiled Approach"
       }
+    },
+    "Mistbound Narrows": {
+      "cn": "雾锁海峡 Mistbound Narrows",
+      "source": "shipped-bilingual-form",
+      "base_was": "雾锁海峡"
     },
     "Misted": {
       "cn": "薄雾 Misted",
@@ -41150,6 +42468,11 @@
       "cn": "莫伊兰守卫者 Moiran Warders",
       "source": "shipped-bilingual-form",
       "base_was": "莫伊兰守卫者"
+    },
+    "Moiran's Lament": {
+      "cn": "莫伊兰的哀歌 Moiran's Lament",
+      "source": "shipped-bilingual-form",
+      "base_was": "莫伊兰的哀歌"
     },
     "Moldy Recipe Folder": {
       "cn": "发霉的食谱文件夹 Moldy Recipe Folder",
@@ -41306,6 +42629,11 @@
       "cn": "士气",
       "source": "base"
     },
+    "Mordant": {
+      "cn": "莫丹特 Mordant",
+      "source": "shipped-bilingual-form",
+      "base_was": "莫丹特"
+    },
     "Morgue": {
       "cn": "停尸房 Morgue",
       "source": "shipped-bilingual-form",
@@ -41371,6 +42699,26 @@
       "cn": "腐朽护甲",
       "source": "base"
     },
+    "Mount Fate": {
+      "cn": "命运山 Mount Fate",
+      "source": "shipped-bilingual-form",
+      "base_was": "命运山"
+    },
+    "Mount K'Hente": {
+      "cn": "肯特山 Mount K'Hente",
+      "source": "shipped-bilingual-form",
+      "base_was": "肯特山"
+    },
+    "Mountains of the Sun": {
+      "cn": "太阳群山 Mountains of the Sun",
+      "source": "shipped-bilingual-form",
+      "base_was": "太阳群山"
+    },
+    "Mourn": {
+      "cn": "哀悼 Mourn",
+      "source": "shipped-bilingual-form",
+      "base_was": "哀悼"
+    },
     "Mournax": {
       "cn": "莫纳克斯 Mournax",
       "source": "shipped",
@@ -41424,6 +42772,11 @@
     "Movement and Stature": {
       "cn": "移动与体型",
       "source": "base"
+    },
+    "Mt Claw": {
+      "cn": "爪山 Mt Claw",
+      "source": "shipped-bilingual-form",
+      "base_was": "爪山"
     },
     "Mud Elemental": {
       "cn": "泥浆元素 Mud Elemental",
@@ -41788,6 +43141,11 @@
         "name": "西北楼梯井上行"
       }
     },
+    "Na'me": {
+      "cn": "奈姆 Na'me",
+      "source": "shipped-bilingual-form",
+      "base_was": "奈姆"
+    },
     "Nadin": {
       "cn": "纳丁 Nadin",
       "source": "shipped-bilingual-form",
@@ -41835,6 +43193,11 @@
       "byRole": {
         "name": "狭窄的岩架"
       }
+    },
+    "Nasjar": {
+      "cn": "纳斯贾尔 Nasjar",
+      "source": "shipped-bilingual-form",
+      "base_was": "纳斯贾尔"
     },
     "Natural Alteration": {
       "cn": "自然变异",
@@ -42285,6 +43648,16 @@
       "cn": "北部运河 Northern Canals",
       "source": "shipped-bilingual-form",
       "base_was": "北部运河"
+    },
+    "Northern Corebright Forest": {
+      "cn": "北部辉核森林 Northern Corebright Forest",
+      "source": "shipped-bilingual-form",
+      "base_was": "北部辉核森林"
+    },
+    "Northern Shana Mountains": {
+      "cn": "沙纳山脉北部 Northern Shana Mountains",
+      "source": "shipped-bilingual-form",
+      "base_was": "沙纳山脉北部"
     },
     "Northern Sitting Room": {
       "cn": "北侧起居室 Northern Sitting Room",
@@ -42756,8 +44129,7 @@
     },
     "Ooze": {
       "cn": "软泥",
-      "source": "shipped-bilingual-form",
-      "base_was": "软泥怪"
+      "source": "base"
     },
     "Ooze Bane": {
       "cn": "软泥怪祸骰 Ooze Bane",
@@ -42893,6 +44265,10 @@
     },
     "Orb Apparatus": {
       "cn": "宝珠装置",
+      "source": "base"
+    },
+    "Orb Destroyed": {
+      "cn": "法珠已摧毁",
       "source": "base"
     },
     "Orb Room": {
@@ -43171,6 +44547,16 @@
       "cn": "奥尔瓦斯 Orvaath",
       "source": "shipped-bilingual-form",
       "base_was": "奥尔瓦斯"
+    },
+    "Oshclaw": {
+      "cn": "奥什爪 Oshclaw",
+      "source": "shipped-bilingual-form",
+      "base_was": "奥什爪"
+    },
+    "Oshel": {
+      "cn": "奥谢尔 Oshel",
+      "source": "shipped-bilingual-form",
+      "base_was": "奥谢尔"
     },
     "Ossarchate": {
       "cn": "骸骨领 Ossarchate",
@@ -43498,7 +44884,7 @@
     "Pallid Drakeling": {
       "cn": "苍白幼龙兽 Pallid Drakeling",
       "source": "shipped-bilingual-form",
-      "base_was": "苍白幼龙"
+      "base_was": "苍白幼龙兽"
     },
     "Pallid Ultra Drake": {
       "cn": "苍白究极龙兽 Pallid Ultra Drake",
@@ -44552,6 +45938,11 @@
         "name": "坠落的巨石"
       }
     },
+    "Point": {
+      "cn": "岬 Point",
+      "source": "shipped-bilingual-form",
+      "base_was": "岬"
+    },
     "Points Required": {
       "cn": "所需点数",
       "source": "base"
@@ -45314,6 +46705,11 @@
         "label": "准备进入监狱"
       }
     },
+    "Prison of Fiyara": {
+      "cn": "菲亚拉的监狱 Prison of Fiyara",
+      "source": "shipped-bilingual-form",
+      "base_was": "菲亚拉的监狱"
+    },
     "Pristine Otherhood Forgery": {
       "cn": "完美无瑕的异姊会伪造文件",
       "source": "shipped",
@@ -45934,6 +47330,16 @@
       "byRole": {
         "pronunciation": "里-凡（RIV-un）"
       }
+    },
+    "RUNA HIGHLANDS": {
+      "cn": "鲁纳高地 RUNA HIGHLANDS",
+      "source": "shipped-bilingual-form",
+      "base_was": "鲁纳高地"
+    },
+    "Ra'vel": {
+      "cn": "拉维尔 Ra'vel",
+      "source": "shipped-bilingual-form",
+      "base_was": "拉维尔"
     },
     "Rackela": {
       "cn": "拉凯拉 Rackela",
@@ -46729,12 +48135,18 @@
         "name": "赤咳"
       }
     },
+    "Red Rhuin": {
+      "cn": "红鲁因 Red Rhuin",
+      "source": "shipped-bilingual-form",
+      "base_was": "红鲁因"
+    },
     "Red Track": {
       "cn": "红色轨道 Red Track",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "红色轨道 Red Track"
+        "name": "红色轨道 Red Track",
+        "notes": "红色轨道 Red Track"
       }
     },
     "Red Tracks": {
@@ -46900,6 +48312,11 @@
       "byRole": {
         "label": "遭朱罗·万德伦拒绝"
       }
+    },
+    "Regained Isle": {
+      "cn": "失而复得之岛 Regained Isle",
+      "source": "shipped-bilingual-form",
+      "base_was": "失而复得之岛"
     },
     "Regarding Ebbok Zhùr": {
       "cn": "关于艾博克·朱尔 Regarding Ebbok Zhùr",
@@ -47407,6 +48824,11 @@
       "cn": "休息",
       "source": "base"
     },
+    "Restless Bay": {
+      "cn": "躁动湾 Restless Bay",
+      "source": "shipped-bilingual-form",
+      "base_was": "躁动湾"
+    },
     "Restless Dead": {
       "cn": "躁动亡者 Restless Dead",
       "source": "shipped-bilingual-form",
@@ -47554,6 +48976,11 @@
       "byRole": {
         "name": "回生术 Revivify"
       }
+    },
+    "Reysta": {
+      "cn": "雷斯塔 Reysta",
+      "source": "shipped-bilingual-form",
+      "base_was": "雷斯塔"
     },
     "Rhivan": {
       "cn": "里凡 Rhivan",
@@ -47930,6 +49357,11 @@
         "name": "毁坏的家园 Ruined Home"
       }
     },
+    "Ruined Lunar Shrine": {
+      "cn": "毁坏的月神殿 Ruined Lunar Shrine",
+      "source": "shipped-bilingual-form",
+      "base_was": "毁坏的月神殿"
+    },
     "Ruined Mausoleum": {
       "cn": "废弃陵墓 Ruined Mausoleum",
       "source": "shipped-bilingual-form",
@@ -48295,7 +49727,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "莱莱尔 Ryleir"
+        "name": "莱莱尔 Ryleir",
+        "notes": "莱莱尔 Ryleir"
       }
     },
     "Rylo's Rooms": {
@@ -48310,6 +49743,11 @@
         "pronunciation": "萨-克茨（SAH-kets）"
       }
     },
+    "SALISKA": {
+      "cn": "萨利斯卡 SALISKA",
+      "source": "shipped-bilingual-form",
+      "base_was": "萨利斯卡"
+    },
     "SAN-gwin-AIR-ies": {
       "cn": "桑-圭恩-埃尔-伊斯（SAN-gwin-AIR-ies）",
       "source": "shipped",
@@ -48317,6 +49755,11 @@
       "byRole": {
         "pronunciation": "桑-圭恩-埃尔-伊斯（SAN-gwin-AIR-ies）"
       }
+    },
+    "SAURVEK": {
+      "cn": "索维克 SAURVEK",
+      "source": "shipped-bilingual-form",
+      "base_was": "索维克"
     },
     "SEV-air": {
       "cn": "塞夫-埃尔（SEV-air）",
@@ -48333,6 +49776,11 @@
       "byRole": {
         "pronunciation": "沙-佐-萨（SHA-ZOTH-ah）"
       }
+    },
+    "SHADEKIN": {
+      "cn": "影裔 SHADEKIN",
+      "source": "shipped-bilingual-form",
+      "base_was": "影裔"
     },
     "SHENT": {
       "cn": "申特（SHENT）",
@@ -48358,6 +49806,11 @@
         "pronunciation": "赛恩-伯恩（SIGN-born）"
       }
     },
+    "SKITARI": {
+      "cn": "斯基塔里 SKITARI",
+      "source": "shipped-bilingual-form",
+      "base_was": "斯基塔里"
+    },
     "SLIN-er-rak": {
       "cn": "斯林-纳-拉克（SLIN-er-rak）",
       "source": "shipped",
@@ -48382,10 +49835,20 @@
         "pronunciation": "斯蒂尔-桑（STEEL-song）"
       }
     },
+    "SUNARAE": {
+      "cn": "苏纳雷 SUNARAE",
+      "source": "shipped-bilingual-form",
+      "base_was": "苏纳雷"
+    },
     "Saboteur": {
       "cn": "破坏者 Saboteur",
       "source": "shipped-bilingual-form",
       "base_was": "破坏者"
+    },
+    "Sacarath": {
+      "cn": "萨卡拉斯 Sacarath",
+      "source": "shipped-bilingual-form",
+      "base_was": "萨卡拉斯"
     },
     "Sacred": {
       "cn": "神圣 Sacred",
@@ -48493,6 +49956,11 @@
       "cn": "钗 Sai",
       "source": "shipped-bilingual-form",
       "base_was": "钗"
+    },
+    "Sail": {
+      "cn": "帆 Sail",
+      "source": "shipped-bilingual-form",
+      "base_was": "帆"
     },
     "Sailed With Lyla": {
       "cn": "与莱拉一同启航",
@@ -48911,6 +50379,11 @@
       "byRole": {
         "name": "抓挠 Scratch"
       }
+    },
+    "Screaming Wasteland": {
+      "cn": "尖啸荒原 Screaming Wasteland",
+      "source": "shipped-bilingual-form",
+      "base_was": "尖啸荒原"
     },
     "Screenshots or recordings": {
       "cn": "截图或录屏",
@@ -49707,6 +51180,11 @@
         "name": "崩毁的灌溉梯田"
       }
     },
+    "Shattered Keep": {
+      "cn": "破碎要塞 Shattered Keep",
+      "source": "shipped-bilingual-form",
+      "base_was": "破碎要塞"
+    },
     "Shattered One": {
       "cn": "碎裂者 Shattered One",
       "source": "shipped-bilingual-form",
@@ -49727,6 +51205,11 @@
       "byRole": {
         "name": "碎裂挥击 Shattered Swipe"
       }
+    },
+    "She'lu": {
+      "cn": "谢卢 She'lu",
+      "source": "shipped-bilingual-form",
+      "base_was": "谢卢"
     },
     "Sheltered Campsite": {
       "cn": "有遮蔽的营地 Sheltered Campsite",
@@ -49910,6 +51393,11 @@
       "cn": "移形碎片 Shifting Shard",
       "source": "shipped-bilingual-form",
       "base_was": "移形碎片"
+    },
+    "Shiftstone": {
+      "cn": "移位石 Shiftstone",
+      "source": "shipped-bilingual-form",
+      "base_was": "移位石"
     },
     "Shillelagh": {
       "cn": "橡棍术 Shillelagh",
@@ -50611,7 +52099,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "西奥德雷德 Siodread"
+        "name": "西奥德雷德 Siodread",
+        "notes": "西奥德雷德 Siodread"
       }
     },
     "Sionia": {
@@ -50639,6 +52128,11 @@
       "byRole": {
         "name": "虹吸活力 Siphon Vitality"
       }
+    },
+    "Sirewood": {
+      "cn": "西尔伍德 Sirewood",
+      "source": "shipped-bilingual-form",
+      "base_was": "西尔伍德"
     },
     "Sitheera": {
       "cn": "西希拉 Sitheera",
@@ -51279,6 +52773,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "术法点数"
     },
+    "Sorrow": {
+      "cn": "哀伤 Sorrow",
+      "source": "shipped-bilingual-form",
+      "base_was": "哀伤"
+    },
     "Soul": {
       "cn": "灵魂",
       "source": "base"
@@ -51389,6 +52888,16 @@
       "byRole": {
         "name": "南部空地 Southern Clearing"
       }
+    },
+    "Southern Corebright Forest": {
+      "cn": "南部辉核森林 Southern Corebright Forest",
+      "source": "shipped-bilingual-form",
+      "base_was": "南部辉核森林"
+    },
+    "Southern Shana Mountains": {
+      "cn": "沙纳山脉南部 Southern Shana Mountains",
+      "source": "shipped-bilingual-form",
+      "base_was": "沙纳山脉南部"
     },
     "Southern Sitting Room": {
       "cn": "南侧起居室 Southern Sitting Room",
@@ -52194,6 +53703,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "法铸笔"
     },
+    "Sperun": {
+      "cn": "斯佩伦 Sperun",
+      "source": "shipped-bilingual-form",
+      "base_was": "斯佩伦"
+    },
     "Spider": {
       "cn": "蜘蛛",
       "source": "base"
@@ -52251,6 +53765,11 @@
       "cn": "尖刺猛击 Spiked Slam",
       "source": "shipped-bilingual-form",
       "base_was": "尖刺猛击"
+    },
+    "Spine of Ember": {
+      "cn": "余烬之脊 Spine of Ember",
+      "source": "shipped-bilingual-form",
+      "base_was": "余烬之脊"
     },
     "Spinebite": {
       "cn": "脊咬者 Spinebite",
@@ -52389,6 +53908,11 @@
       "cn": "碎裂峡谷 Splinter Canyons",
       "source": "shipped-bilingual-form",
       "base_was": "碎裂峡谷"
+    },
+    "Splintis": {
+      "cn": "斯普林提斯 Splintis",
+      "source": "shipped-bilingual-form",
+      "base_was": "斯普林提斯"
     },
     "Split": {
       "cn": "分裂 Split",
@@ -54366,6 +55890,11 @@
         "pronunciation": "塔-扬（TAY-an）"
       }
     },
+    "TEMPAR": {
+      "cn": "坦帕尔 TEMPAR",
+      "source": "shipped-bilingual-form",
+      "base_was": "坦帕尔"
+    },
     "THEM-iss": {
       "cn": "忒弥-斯（THEM-iss）",
       "source": "shipped",
@@ -54389,6 +55918,11 @@
       "byRole": {
         "pronunciation": "索恩-灵（THORN-ling）"
       }
+    },
+    "TOLVOR KOHATAI": {
+      "cn": "托尔沃尔·科哈泰 TOLVOR KOHATAI",
+      "source": "shipped-bilingual-form",
+      "base_was": "托尔沃尔·科哈泰"
     },
     "Tactical Plan": {
       "cn": "战术计划 Tactical Plan",
@@ -54735,59 +56269,59 @@
       "base_was": "传送"
     },
     "Teleport Token": {
-      "cn": "传送令牌",
+      "cn": "传送指示物",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌"
+        "name": "传送指示物"
       }
     },
     "Teleport Token L1": {
-      "cn": "传送令牌（第1层）",
+      "cn": "传送指示物（第1层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第1层）"
+        "name": "传送指示物（第1层）"
       }
     },
     "Teleport Token L2": {
-      "cn": "传送令牌（第2层）",
+      "cn": "传送指示物（第2层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第2层）"
+        "name": "传送指示物（第2层）"
       }
     },
     "Teleport Token L3": {
-      "cn": "传送令牌（第3层）",
+      "cn": "传送指示物（第3层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第3层）"
+        "name": "传送指示物（第3层）"
       }
     },
     "Teleport Token L4": {
-      "cn": "传送令牌（第4层）",
+      "cn": "传送指示物（第4层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第4层）"
+        "name": "传送指示物（第4层）"
       }
     },
     "Teleport Token L5": {
-      "cn": "传送令牌（第5层）",
+      "cn": "传送指示物（第5层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第5层）"
+        "name": "传送指示物（第5层）"
       }
     },
     "Teleport Token L6": {
-      "cn": "传送令牌（第6层）",
+      "cn": "传送指示物（第6层）",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "传送令牌（第6层）"
+        "name": "传送指示物（第6层）"
       }
     },
     "Teleportation": {
@@ -54837,6 +56371,10 @@
       "cn": "神殿入侵者 Temple Invader",
       "source": "shipped-bilingual-form",
       "base_was": "神殿入侵者"
+    },
+    "Temple Lunarium": {
+      "cn": "神殿月辉宫",
+      "source": "base"
     },
     "Temple Sanctum": {
       "cn": "神殿圣所 Temple Sanctum",
@@ -55176,7 +56714,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "临时厨房 The Ad-Hoc Kitchen"
+        "name": "临时厨房 The Ad-Hoc Kitchen",
+        "notes": "临时厨房 The Ad-Hoc Kitchen"
       }
     },
     "The Ailing Jon Vastil": {
@@ -55268,6 +56807,11 @@
     "The Batteries": {
       "cn": "炮列甲板",
       "source": "base"
+    },
+    "The Beast's Maw": {
+      "cn": "野兽之喉 The Beast's Maw",
+      "source": "shipped-bilingual-form",
+      "base_was": "野兽之喉"
     },
     "The Bewilderment": {
       "cn": "迷惘 The Bewilderment",
@@ -55370,6 +56914,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "青铜拉斯克剧院"
     },
+    "The Bulwark": {
+      "cn": "壁垒 The Bulwark",
+      "source": "shipped-bilingual-form",
+      "base_was": "壁垒"
+    },
     "The Burnished Left Hand": {
       "cn": "辉手的左手",
       "source": "shipped",
@@ -55382,6 +56931,11 @@
       "cn": "伯恩斯 The Burns",
       "source": "shipped-bilingual-form",
       "base_was": "伯恩斯"
+    },
+    "The Carrow Ocean": {
+      "cn": "卡罗海洋 The Carrow Ocean",
+      "source": "shipped-bilingual-form",
+      "base_was": "卡罗海洋"
     },
     "The Cauldron": {
       "cn": "坩埚湖 The Cauldron",
@@ -55489,6 +57043,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "峭岩边酒馆"
     },
+    "The Crawler": {
+      "cn": "爬行者 The Crawler",
+      "source": "shipped-bilingual-form",
+      "base_was": "爬行者"
+    },
     "The Crawling Catacomb": {
       "cn": "爬行的地下墓窟",
       "source": "shipped",
@@ -55500,6 +57059,11 @@
     "The Crooked Spine": {
       "cn": "秘藏书架",
       "source": "base"
+    },
+    "The Crossing Sea": {
+      "cn": "横渡海 The Crossing Sea",
+      "source": "shipped-bilingual-form",
+      "base_was": "横渡海"
     },
     "The Crystal Quarryman": {
       "cn": "水晶采石工 The Crystal Quarryman",
@@ -55518,6 +57082,11 @@
       "byRole": {
         "name": "文化 The Cultures"
       }
+    },
+    "The Cursed Continent": {
+      "cn": "被诅咒的大陆 The Cursed Continent",
+      "source": "shipped-bilingual-form",
+      "base_was": "被诅咒的大陆"
     },
     "The Damaged Lantern": {
       "cn": "受损的提灯",
@@ -55671,6 +57240,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "这次坠落会要了你的命"
     },
+    "The Far Southlands": {
+      "cn": "遥远的南方之地 The Far Southlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "遥远的南方之地"
+    },
     "The Final Days of Daelin Lowd": {
       "cn": "戴林·洛德的最后岁月 The Final Days of Daelin Lowd",
       "source": "shipped-bilingual-form",
@@ -55696,6 +57270,11 @@
     "The First Puzzle": {
       "cn": "第一个谜题",
       "source": "base"
+    },
+    "The First Throne": {
+      "cn": "第一王座 The First Throne",
+      "source": "shipped-bilingual-form",
+      "base_was": "第一王座"
     },
     "The Flame Within": {
       "cn": "内蕴之焰 The Flame Within",
@@ -55799,6 +57378,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "纱光微烁"
     },
+    "The Golden Bay": {
+      "cn": "黄金湾 The Golden Bay",
+      "source": "shipped-bilingual-form",
+      "base_was": "黄金湾"
+    },
     "The Grand Galley": {
       "cn": "大厨房",
       "source": "base"
@@ -55845,6 +57429,11 @@
         "label": "铁石心肠"
       }
     },
+    "The Harmonious Truth": {
+      "cn": "和谐真理 The Harmonious Truth",
+      "source": "shipped-bilingual-form",
+      "base_was": "和谐真理"
+    },
     "The Hayren Arms": {
       "cn": "海伦兵舍",
       "source": "base"
@@ -55880,6 +57469,11 @@
       "byRole": {
         "name": "历史 The History"
       }
+    },
+    "The Hoarfrost Edge": {
+      "cn": "霜冻之缘 The Hoarfrost Edge",
+      "source": "shipped-bilingual-form",
+      "base_was": "霜冻之缘"
     },
     "The Hollow Moon": {
       "cn": "空洞之月",
@@ -55935,6 +57529,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "知情者"
     },
+    "The Jarn Peninsula": {
+      "cn": "雅恩半岛 The Jarn Peninsula",
+      "source": "shipped-bilingual-form",
+      "base_was": "雅恩半岛"
+    },
     "The Jewel Merchant's Companion": {
       "cn": "珠宝商的伙伴",
       "source": "shipped",
@@ -55988,6 +57587,11 @@
       "cn": "桂冠餐桌",
       "source": "base"
     },
+    "The Leviathan Preserve": {
+      "cn": "利维坦禁猎区 The Leviathan Preserve",
+      "source": "shipped-bilingual-form",
+      "base_was": "利维坦禁猎区"
+    },
     "The Life Tyrant": {
       "cn": "生命暴君",
       "source": "shipped",
@@ -56017,9 +57621,19 @@
         "name": "储物柜区 The Lockers"
       }
     },
+    "The Lost Dale": {
+      "cn": "失落谷地 The Lost Dale",
+      "source": "shipped-bilingual-form",
+      "base_was": "失落谷地"
+    },
     "The Lost Daughter": {
       "cn": "失落之女",
       "source": "base"
+    },
+    "The Lost Realms": {
+      "cn": "失落诸域 The Lost Realms",
+      "source": "shipped-bilingual-form",
+      "base_was": "失落诸域"
     },
     "The Manuscript Awakens": {
       "cn": "手稿觉醒了 The Manuscript Awakens",
@@ -56045,6 +57659,11 @@
       "byRole": {
         "categories": "夹层"
       }
+    },
+    "The Middle Sea": {
+      "cn": "中央海 The Middle Sea",
+      "source": "shipped-bilingual-form",
+      "base_was": "中央海"
     },
     "The Mill": {
       "cn": "磨坊 The Mill",
@@ -56151,9 +57770,24 @@
       "cn": "跃羊",
       "source": "base"
     },
+    "The Prowling Death": {
+      "cn": "潜行的死亡 The Prowling Death",
+      "source": "shipped-bilingual-form",
+      "base_was": "潜行的死亡"
+    },
+    "The Radiant Continent": {
+      "cn": "辉耀大陆 The Radiant Continent",
+      "source": "shipped-bilingual-form",
+      "base_was": "辉耀大陆"
+    },
     "The Ramble Amphitheater": {
       "cn": "漫步园圆形剧场",
       "source": "base"
+    },
+    "The Reaver Ocean": {
+      "cn": "劫掠者海洋 The Reaver Ocean",
+      "source": "shipped-bilingual-form",
+      "base_was": "劫掠者海洋"
     },
     "The Redfiend": {
       "cn": "赤魔",
@@ -56179,6 +57813,11 @@
     "The Riverlight Steps": {
       "cn": "河光阶道",
       "source": "base"
+    },
+    "The Roaring Edge": {
+      "cn": "咆哮之缘 The Roaring Edge",
+      "source": "shipped-bilingual-form",
+      "base_was": "咆哮之缘"
     },
     "The Roost": {
       "cn": "栖枝酒馆",
@@ -56238,6 +57877,11 @@
       "cn": "荫道",
       "source": "base"
     },
+    "The Shardstone Continent": {
+      "cn": "碎片石大陆 The Shardstone Continent",
+      "source": "shipped-bilingual-form",
+      "base_was": "碎片石大陆"
+    },
     "The Shattered Moon": {
       "cn": "破碎之月",
       "source": "shipped",
@@ -56264,6 +57908,11 @@
       "cn": "寂静狼群 The Silent Pack",
       "source": "shipped-bilingual-form",
       "base_was": "寂静狼群"
+    },
+    "The Silken Sea": {
+      "cn": "丝绸之海 The Silken Sea",
+      "source": "shipped-bilingual-form",
+      "base_was": "丝绸之海"
     },
     "The Silver Beam Sentinel": {
       "cn": "银色光束哨卫",
@@ -56316,6 +57965,11 @@
       "cn": "南方仓库",
       "source": "base"
     },
+    "The Southern Ocean": {
+      "cn": "南大洋 The Southern Ocean",
+      "source": "shipped-bilingual-form",
+      "base_was": "南大洋"
+    },
     "The Spellbreaker": {
       "cn": "破法者 The Spellbreaker",
       "source": "shipped-bilingual-form",
@@ -56341,6 +57995,11 @@
       "byRole": {
         "subtitle": "灵魂之月"
       }
+    },
+    "The Spiritlands": {
+      "cn": "灵界 The Spiritlands",
+      "source": "shipped-bilingual-form",
+      "base_was": "灵界"
     },
     "The Starshield": {
       "cn": "星之盾 The Starshield",
@@ -56376,6 +58035,16 @@
     "The Sunnery": {
       "cn": "日光馆",
       "source": "base"
+    },
+    "The Swirling Edge": {
+      "cn": "旋涡之缘 The Swirling Edge",
+      "source": "shipped-bilingual-form",
+      "base_was": "旋涡之缘"
+    },
+    "The Sword Range": {
+      "cn": "剑锋山脉 The Sword Range",
+      "source": "shipped-bilingual-form",
+      "base_was": "剑锋山脉"
     },
     "The Syderie": {
       "cn": "赛德里",
@@ -56467,6 +58136,11 @@
       "cn": "足下道",
       "source": "base"
     },
+    "The Untamed Edge": {
+      "cn": "蛮荒之缘 The Untamed Edge",
+      "source": "shipped-bilingual-form",
+      "base_was": "蛮荒之缘"
+    },
     "The Unveiling": {
       "cn": "揭幕 The Unveiling",
       "source": "shipped-bilingual-form",
@@ -56550,6 +58224,11 @@
       "byRole": {
         "subtitle": "织者"
       }
+    },
+    "The Western Wilds": {
+      "cn": "西部荒野 The Western Wilds",
+      "source": "shipped-bilingual-form",
+      "base_was": "西部荒野"
     },
     "The Wheel": {
       "cn": "纺轮坊",
@@ -56741,6 +58420,11 @@
     "Threadforge": {
       "cn": "线铸坊",
       "source": "base"
+    },
+    "Three Eyes Island": {
+      "cn": "三眼岛 Three Eyes Island",
+      "source": "shipped-bilingual-form",
+      "base_was": "三眼岛"
     },
     "Three Point Lift": {
       "cn": "三点抬举 Three Point Lift",
@@ -57023,6 +58707,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "斯佩克特拉之选民的坟墓"
     },
+    "Tome": {
+      "cn": "典籍 Tome",
+      "source": "shipped-bilingual-form",
+      "base_was": "典籍"
+    },
     "Tome of Abyssal Histories": {
       "cn": "深渊史典 Tome of Abyssal Histories",
       "source": "shipped-bilingual-form",
@@ -57153,6 +58842,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "扑倒猛跃"
     },
+    "Toraga": {
+      "cn": "托拉加 Toraga",
+      "source": "shipped-bilingual-form",
+      "base_was": "托拉加"
+    },
     "Torch": {
       "cn": "火把 Torch",
       "source": "shipped-bilingual-form",
@@ -57175,7 +58869,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "折磨 Torment"
+        "name": "折磨 Torment",
+        "notes": "折磨 Torment"
       }
     },
     "Tormented Threads": {
@@ -57373,6 +59068,11 @@
     "Trading House Market": {
       "cn": "贸易行集市",
       "source": "base"
+    },
+    "Trailing Hills": {
+      "cn": "丘陵尽头 Trailing Hills",
+      "source": "shipped-bilingual-form",
+      "base_was": "丘陵尽头"
     },
     "Trained": {
       "cn": "受训",
@@ -58225,11 +59925,11 @@
       "base_was": "水下伪装"
     },
     "Underwater Token Scale": {
-      "cn": "水下令牌缩放",
+      "cn": "水下指示物缩放",
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "水下令牌缩放"
+        "name": "水下指示物缩放"
       }
     },
     "Underworks Guidestone": {
@@ -58655,6 +60355,16 @@
         "pronunciation": "维-拉-多尔（VAIR-a-door）"
       }
     },
+    "VARENA": {
+      "cn": "瓦雷娜 VARENA",
+      "source": "shipped-bilingual-form",
+      "base_was": "瓦雷娜"
+    },
+    "VARTIC": {
+      "cn": "瓦提克 VARTIC",
+      "source": "shipped-bilingual-form",
+      "base_was": "瓦提克"
+    },
     "VEIL-ed": {
       "cn": "维尔-德（VEIL-ed）",
       "source": "shipped",
@@ -58662,6 +60372,11 @@
       "byRole": {
         "pronunciation": "维尔-德（VEIL-ed）"
       }
+    },
+    "VELLATAGÉ": {
+      "cn": "维拉塔热 VELLATAGÉ",
+      "source": "shipped-bilingual-form",
+      "base_was": "维拉塔热"
     },
     "VRIN-har": {
       "cn": "弗林-哈尔（VRIN-har）",
@@ -58722,6 +60437,16 @@
       "cn": "制高点",
       "source": "base"
     },
+    "Vantol": {
+      "cn": "范托尔 Vantol",
+      "source": "shipped-bilingual-form",
+      "base_was": "范托尔"
+    },
+    "Varen Hills": {
+      "cn": "瓦伦丘陵 Varen Hills",
+      "source": "shipped-bilingual-form",
+      "base_was": "瓦伦丘陵"
+    },
     "Varied": {
       "cn": "不定",
       "source": "shipped",
@@ -58744,7 +60469,8 @@
       "source": "shipped",
       "role": "name",
       "byRole": {
-        "name": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)"
+        "name": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)",
+        "notes": "瓦琳娜的工作室（上层） Varinna's Studio (Upper)"
       }
     },
     "Varlo's": {
@@ -58790,6 +60516,16 @@
       "cn": "瓦瑟姆 Vasem",
       "source": "shipped-bilingual-form",
       "base_was": "瓦瑟姆"
+    },
+    "Vathan": {
+      "cn": "瓦森 Vathan",
+      "source": "shipped-bilingual-form",
+      "base_was": "瓦森"
+    },
+    "Vathar Forests": {
+      "cn": "瓦萨尔森林 Vathar Forests",
+      "source": "shipped-bilingual-form",
+      "base_was": "瓦萨尔森林"
     },
     "Vault": {
       "cn": "宝库",
@@ -59377,6 +61113,11 @@
         "name": "游戏主持人的远景 Vistas for Gamemasters"
       }
     },
+    "Vita'ri": {
+      "cn": "维塔里 Vita'ri",
+      "source": "shipped-bilingual-form",
+      "base_was": "维塔里"
+    },
     "Vitt Wandren": {
       "cn": "维特·万德伦 Vitt Wandren",
       "source": "shipped",
@@ -59593,6 +61334,11 @@
       "byRole": {
         "pronunciation": "威-伦（WEER-un）"
       }
+    },
+    "WINDBARE": {
+      "cn": "温赤荒 WINDBARE",
+      "source": "shipped-bilingual-form",
+      "base_was": "温赤荒"
     },
     "Waerd": {
       "cn": "瓦尔德 Waerd",
@@ -60501,6 +62247,11 @@
       "cn": "什么是 Crucible",
       "source": "base"
     },
+    "Wheel": {
+      "cn": "轮子 Wheel",
+      "source": "shipped-bilingual-form",
+      "base_was": "轮子"
+    },
     "Where Evil Lurks": {
       "cn": "邪恶潜伏之处 Where Evil Lurks",
       "source": "shipped-bilingual-form",
@@ -60577,6 +62328,11 @@
       "byRole": {
         "name": "白石念珠 White Stone Rosary"
       }
+    },
+    "Wick": {
+      "cn": "威克 Wick",
+      "source": "shipped-bilingual-form",
+      "base_was": "威克"
     },
     "Wicked Beak": {
       "cn": "邪恶鸟喙 Wicked Beak",
@@ -60739,7 +62495,7 @@
     "Wingsuit": {
       "cn": "翼装飞行服 Wingsuit",
       "source": "shipped-bilingual-form",
-      "base_was": "飞行服"
+      "base_was": "翼装飞行服"
     },
     "Winter's Mercy": {
       "cn": "寒冬之慈",
@@ -60924,6 +62680,11 @@
       "source": "shipped-bilingual-form",
       "base_was": "余烬世界"
     },
+    "World's End": {
+      "cn": "世界尽头 World's End",
+      "source": "shipped-bilingual-form",
+      "base_was": "世界尽头"
+    },
     "Worship": {
       "cn": "崇拜",
       "source": "base"
@@ -61101,6 +62862,11 @@
         "name": "雅弗塔的仓库便条 Yaphta's Warehouse Note"
       }
     },
+    "Yarino": {
+      "cn": "亚里诺 Yarino",
+      "source": "shipped-bilingual-form",
+      "base_was": "亚里诺"
+    },
     "Yarnac": {
       "cn": "亚纳克 Yarnac",
       "source": "shipped-bilingual-form",
@@ -61192,6 +62958,11 @@
       "byRole": {
         "pronunciation": "泽夫（ZEFF）"
       }
+    },
+    "Zancol Expanse": {
+      "cn": "赞科尔广袤域 Zancol Expanse",
+      "source": "shipped-bilingual-form",
+      "base_was": "赞科尔广袤域"
     },
     "Zarajah": {
       "cn": "扎拉贾 Zarajah",
@@ -62175,6 +63946,10 @@
     },
     "tension": {
       "cn": "紧张",
+      "source": "base"
+    },
+    "the Dives": {
+      "cn": "矿渊",
       "source": "base"
     },
     "theater": {
