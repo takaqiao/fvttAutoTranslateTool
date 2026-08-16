@@ -253,6 +253,7 @@
 不一致就说明某条断言在用裸相对路径（形态 (g) 的典型征兆）。
 """
 import argparse
+import collections
 import copy
 import json
 import os
@@ -1168,6 +1169,130 @@ def a_block_sense_gate(rule, ctx):
             bad.append(("-", "配置", rule["id"],
                         f"{why}只数到 {got}（要求 ≥{want}）—— 这条断言在空转"))
     return bad, detail
+
+
+# ============================================ HTML 标签 EN/CN 对等（第三十三轮 B）
+#
+# 为什么在「§0.1 已收官、原则上不再加判据层」之后还批准这一条
+# ------------------------------------------------------------
+# 0.10.2 跟版轮的独立复核发现：本轮译文给中文**多加了 2 处 `<strong>`**，
+# 而当时**没有任何判据看得见这件事**。两路复核各自报了一个数，都结构上发现不了：
+#   · 「标签总数 21732 → 21686」—— 那是**单侧总量**，中文多一个、英文少一个，总数照样对得上；
+#   · 「标签种类 85 不变」—— 那是**集合**，多几个同种标签种类一个不多。
+# 两个口径都在库级汇总，而对等是**逐叶**性质：汇总量守恒 ≠ 每片叶两侧一致。
+#
+# 它符合 §0.1 停止条件的例外那一支：**会咬到诚实的维护者**。
+# 本轮那 2 处不是攻击、不是投机取巧，就是译者顺手加了个强调 —— 而没有任何东西吭声。
+# 与 L6-② 那条「等长乱码替换」（纯攻击场景、判定不修）正好是两类。
+# ⚠ **只批了这一条。** 别顺势再加别的层。
+#
+# 判什么、不判什么（边界写死，免得下一轮扩张）
+# --------------------------------------------
+# · 判**标签多重集**：把每个标签压成 `p` / `/p` 这样的 (开闭 + 名字) 记号，逐叶比两侧计数。
+#   多重集相等 ⇔ 两侧每种标签各出现同样多次。位置/嵌套顺序**不判** —— 那是块对齐那两条
+#   （`block_aligned_gate`）的事，本条不重复造第二个判据。
+# · **属性不判**（`<span class="x">` 与 `<span>` 视为同一记号）。属性漂移归 scan_markup_drift；
+#   把属性也纳进来会让「中文侧给 `<td>` 补了个 colspan」这类合法差异变成噪声。
+# · 自闭合写法归一：`<br>` / `<br/>` / `<br />` 是同一个记号 `br`。
+# · 两侧都不含标签的叶**不进闸**（纯文本名字/短标签占全库大半），detail 里报进闸叶数。
+#
+# ⚠ 与硬约束 3 的关系：`@UUID[…]` / `@Condition[…]` / `@Embed[…]` 里不含 `<`，
+#   本条压根碰不到它们；本条**只读不写**，任何情况下都不改库。
+#
+# ⚠ **已知局限，照实写**：`<` 后面紧跟字母就当标签，所以正文里的数学比较
+#   （`if damage < weight`）会被误当成 `<weight>`。本轮实测这不是活问题 ——
+#   全库 69 种记号逐一看过，**没有一个不是正经 HTML 标签**（a/blockquote/br/code/dd/
+#   details/div/dl/dt/em/figcaption/figure/h2-h4/hr/i/img/li/ol/p/s/section/span/strong/
+#   sub/sup/summary/table/tbody/td/tfoot/th/thead/tr/ul 及其闭合）。
+#   而且就算将来出现，只要两侧写法一致就仍然对等、不会误报；真误报的前提是
+#   「英文写 `< weight`、中文把它译没了」—— 那本来也该有人看一眼。
+_TAG_TOKEN = re.compile(r"<\s*(/?)\s*([A-Za-z][A-Za-z0-9]*)")
+
+# —— 本条的**死下限**：住在本文件，不住规则文件（§3.7.2「强度参数与判据同层 = 没有强度」）。
+#
+# 2026-08-17 探针实测（`probe_tag_parity.py` 先落盘再跑，两仓 40676 对中英叶）：
+#     进闸叶（两侧任一带标签） 15363 · 单侧标签总数 EN 398486 / CN 398486
+#     标签记号种类（含闭合） 69 · **多重集不等的叶 0**
+# 历史对照：2026-08-11 那份 21732 → 21686 的数是**只数 crucible 一个仓的英文侧**
+# （本轮复算 crucible 侧 21682、ember 侧 376804），所以两个数不可直接比，别当成掉了。
+#
+# ⚠ 三个死下限取的是实测值的**保守下取整**，不是实测值本身：叶数/标签数会随每一轮
+#   译文增删小幅浮动，把实测值原样钉死等于让这条闸每轮都红一次 —— 那会把护栏变成背景音
+#   （本项目登记过的代价：护栏一旦常红，人就学会忽略它）。要抓的是「整块塌掉」，不是抖动。
+# ⚠ 它**不跟规则文件联动**：规则里那三个 `min_*` 被改小也越不过这三个数（作弊路径 B）。
+TAG_PARITY_HARD = {"min_leaves": 15000, "min_tags": 390000, "min_tag_kinds": 60}
+
+
+def tag_multiset(s):
+    """一段文本 → {标签记号: 次数}。开标签记 `p`，闭标签记 `/p`，属性一律不看。
+
+    ⚠ 抽成模块级函数**不是**为了好看：`--selftest` 要能把它单独掏空
+      （`return collections.Counter()`）来证明「掏空判定函数必须有用例变红」。
+      判定逻辑埋在执行体里的话，那条反例就无从写起（L6-① 的教训）。
+    """
+    return collections.Counter(f"{m.group(1)}{m.group(2).lower()}"
+                               for m in _TAG_TOKEN.finditer(s))
+
+
+def tag_diff(en_c, cn_c):
+    """两个多重集的差异 → 人话。相等返回空串（**判定就在这一行**）。"""
+    if en_c == cn_c:
+        return ""
+    return "；".join(f"<{t}> EN {en_c.get(t, 0)} / CN {cn_c.get(t, 0)}"
+                     for t in sorted(set(en_c) | set(cn_c))
+                     if en_c.get(t, 0) != cn_c.get(t, 0))
+
+
+def a_tag_parity(rule, ctx):
+    """逐叶比 EN/CN 的 **HTML 标签多重集**，不等就报，并点名到叶路径与差在哪个标签。
+
+    两层地板（本项目现行纪律，缺一不可 —— 见 `_two_layer_floor` 的 docstring）：
+      · **现算下限**：规则文件里的 `min_leaves` / `min_tags` / `min_tag_kinds`，
+        由本轮实测现算后写进规则集；`PAYLOAD_FLOORS` 把它们钉成 `ge`，只许涨不许降。
+      · **历史记录值**：`TAG_PARITY_HARD`，住在**本文件**。规则文件被改松也越不过它。
+        规则里缺了 `min_*` ⇒ `_two_layer_floor` 直接报「两层里少了一层」，不是放行。
+
+    ⚠ 「判了几条规矩」数的是**这次真的见到过的标签记号种类**（＋三道地板）。
+      它与语料规模无关（同一个 `<p>` 判 18 万次仍只算一条），但**与库里还剩哪些标签种类有关** ——
+      所以这条闸红成「规矩数不达地板」时，最可能的解释不是判据空转，而是
+      **某一种标签在库里整种消失了**（或执行体被换成了空壳）。两种都得人看一眼。
+    """
+    exc = _paths_matcher(rule.get("except_paths"))
+    bad = []
+    n_leaf = n_en = n_cn = 0
+    kinds = set()
+    for repo, pack, path, ev, cv in ctx.all_pairs(rule.get("scope")):
+        ec, cc = tag_multiset(ev), tag_multiset(cv)
+        if not ec and not cc:
+            continue                                   # 纯文本叶：本条无从判，也无须判
+        if exc and exc(path):
+            continue
+        n_leaf += 1
+        n_en += sum(ec.values())
+        n_cn += sum(cc.values())
+        for t in set(ec) | set(cc):
+            kinds.add(t)
+            _unit(f"tag:{t}")                          # 落到实数据上了才记
+        why = tag_diff(ec, cc)
+        if why:
+            bad.append((repo, pack, path,
+                        f"标签多重集两侧不等：{why} —— 译文单方面增删了标签。"
+                        f"两侧的标签必须一一对应：中文多一个 `<strong>` 不会让"
+                        f"「标签总数」或「标签种类数」有任何变化，只有逐叶多重集看得见"))
+    _unit("min_leaves", "min_tags", "min_tag_kinds")
+    H = TAG_PARITY_HARD
+    _two_layer_floor(bad, "进闸叶数（两侧任一带标签）", n_leaf, rule.get("min_leaves"),
+                     hard=H["min_leaves"], key="min_leaves",
+                     grow_hint="库里带标签的叶变多了（新包/新页），把规则里的 min_leaves 补记上去")
+    _two_layer_floor(bad, "英文侧标签总数", n_en, rule.get("min_tags"),
+                     hard=H["min_tags"], key="min_tags",
+                     grow_hint="正文变多了，把规则里的 min_tags 补记上去")
+    _two_layer_floor(bad, "标签记号种类数", len(kinds), rule.get("min_tag_kinds"),
+                     hard=H["min_tag_kinds"], key="min_tag_kinds",
+                     grow_hint="上游用了新标签，把规则里的 min_tag_kinds 补记上去")
+    return bad, (f"逐叶比标签多重集：进闸 {n_leaf} 叶 / 标签 EN {n_en} · CN {n_cn} / "
+                 f"记号 {len(kinds)} 种（死下限 叶{H['min_leaves']}·标签{H['min_tags']}·"
+                 f"种类{H['min_tag_kinds']}，住在 assert_resolutions.py）")
 
 
 def _run_same_en_split(ctx, rule):
@@ -3055,8 +3180,10 @@ def a_tracked_inputs(rule, ctx):
 RULESET_SHAPE = {
     # —— 断言条数与 kind 数：**这是最要紧的一条**。在此之前，删掉整条断言
     #    （65 → 64）全项目没有任何东西数一数还剩几条。
-    "min_assertions": 66,
-    "min_kinds": 22,
+    # 第三十三轮 B：66 → 67 / 22 → 23（新增 `tag_parity` 一条，见它的执行体注释；
+    # §0.1 收官后唯一批准的新判据层，理由是「它会咬到诚实的维护者」那一支例外）
+    "min_assertions": 67,
+    "min_kinds": 23,
     # —— 各 kind 必须存在的条数（防「把某一类整类删光」，也防「某一类被削掉大半」）
     #
     # ⚠ 第三十轮：这张表**曾经只有 4 项**（translate_cases / panel_liveness /
@@ -3085,6 +3212,7 @@ RULESET_SHAPE = {
         "ruleset_shape": 1,
         "sense_gated": 1,
         "source_literal": 1,
+        "tag_parity": 1,
         "term_domains": 4,
         "term_gated": 11,
         "tracked_inputs": 1,
@@ -3254,6 +3382,7 @@ REGISTERED_ASSERTIONS = {
     'R-selfcheck-d-liveness': 'panel_liveness',
     'R-assertion-inputs-tracked': 'tracked_inputs',
     'R-ruleset-shape': 'ruleset_shape',
+    'R-html-tag-parity': 'tag_parity',
 }
 
 
@@ -3374,6 +3503,7 @@ PAYLOAD_FLOORS = {
     "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 168), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 719), "min.fetchOk": ("eq", 219), "min.rawChecked": ("eq", 1273), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 887), "min.registeredRaw": ("eq", 1459), "min.tableRegexEntries": ("eq", 47), "min.tableRows": ("eq", 39), "min.tablesFedIn": ("eq", 39), "min.tplFiles": ("eq", 67), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
     "R-ruleset-shape": {},
+    "R-html-tag-parity": {"min_leaves": ("ge", 15000), "min_tag_kinds": ("ge", 60), "min_tags": ("ge", 390000)},
 }
 
 
@@ -3458,6 +3588,13 @@ JUDGED_UNITS = {
     "R-selfcheck-d-liveness": 33,
     "R-assertion-inputs-tracked": 7,
     "R-ruleset-shape": 32,
+    # 第三十三轮 B：69 种标签记号（本轮实测）+ 3 道地板 = 72。
+    # ⚠ 地板取 64 而不是 72：这一条的规矩数是**从库里现算的标签种类**，
+    #   `<tfoot>` / `<i>` / `<s>` / `<details>` 这几种全库只出现一两次，
+    #   删掉一段正文就可能整种消失 —— 钉死 72 会把「译文改了一句」报成「判据空转」，
+    #   而那句报错的措辞（「载荷被清空、执行体被换成空壳」）会把下一轮引到错的方向去。
+    #   64 仍然远高于「执行体被掏空」的 0，反空转的职能一个字没丢。
+    "R-html-tag-parity": 64,
 }
 
 # 上表的**合计**。⚠ 单独把某一条的地板改小是个单点动作，本表自己看不出来；
@@ -3465,7 +3602,7 @@ JUDGED_UNITS = {
 # 载荷地板那一侧走的是更强的「现推 == 登记」（见 `_derive_payload_floors`），
 # 而规矩数是**运行时量出来的**、推不出来，所以只能到这一档。
 # **这是两点门槛，不是墙** —— 写在这里，免得下一轮把它读成「堵死了」。
-JUDGED_UNITS_TOTAL = 536          # 第三十二轮 V18：525 → 536（面板闸 +11 条）
+JUDGED_UNITS_TOTAL = 600          # 第三十三轮 B：536 → 600（tag_parity +64 条）
 
 
 def _dig(rule, path):
@@ -3899,6 +4036,7 @@ KINDS = {
     "leaf_literal": a_leaf_literal,
     "block_aligned_gate": a_block_aligned_gate,
     "block_sense_gate": a_block_sense_gate,
+    "tag_parity": a_tag_parity,
     "enricher_slot_gate": a_enricher_slot_gate,
     "enricher_text_coverage": a_enricher_text_coverage,
     "glossary_value": a_glossary_value,
@@ -4182,6 +4320,126 @@ BLOCK_SENSE_SELFTEST = [
       "max_unused_exempt": 1},
      _P("<p>You gain the Novice rank in Arcana.</p>", "<p>你在奥秘上获得新手阶位。</p>"), 0),
 ]
+
+
+# ============================ HTML 标签 EN/CN 对等闸（第三十三轮 B）的正反例
+#
+# ⚠ 这一组的两条**必答题**（任务点名要的，也是本项目第六层的教训「没有反例的护栏等于没有」）：
+#   ① 「给某叶中文多加一个 `<strong>` → 必须变红」——`TAG_PARITY_SELFTEST` 第 2 条；
+#   ② 「掏空这条判据的判定函数 → 必须有用例变红」——`run_tag_parity_selftest()` 末尾
+#      那两条**元用例**：把 `tag_diff` / `tag_multiset` 换成空壳后重跑第 2 条，
+#      **它必须从「响」变成「不响」**（也就是说：它确实是被那个判定函数撑起来的，
+#      不是恰好被别的层顺手接住）。只断言「换了空壳之后自检红了」是不够的 ——
+#      红也可能是别的层在响，那正是 ruleset_shape 那一组第三十轮踩过的坑（分层归因）。
+_TAG_RULE = {
+    "id": "SELFTEST-tag", "kind": "tag_parity",
+    "min_leaves": 1, "min_tags": 1, "min_tag_kinds": 1,
+}
+# 自检用的死下限（真身那三个数是按 4 万叶的库定的，合成叶喂进去必然触底）。
+# ⚠ 真身的 `TAG_PARITY_HARD` 由下面第 9 条**单独**验它咬不咬人，不能只在放松的副本上测。
+_TAG_HARD_TINY = {"min_leaves": 1, "min_tags": 1, "min_tag_kinds": 1}
+
+TAG_PARITY_SELFTEST = [
+    ("两侧标签多重集相同 → 不响", None,
+     _P("<p>The <strong>Overrun</strong> creature suffers <em>flanked</em>.</p>",
+        "<p>处于<strong>围攻</strong>状态的生物承受<em>夹击</em>。</p>"), 0),
+    # ⚑ 必答题 ①：本轮真实发生过的那件事 —— 译者顺手给中文加了个 `<strong>`。
+    #    此前**没有任何判据看得见**：单侧总数照样守恒、种类数一个不多。
+    ("⚑ 中文多一个 `<strong>` → 必须响（这正是本轮漏掉的那 2 处）", None,
+     _P("<p>The <strong>Overrun</strong> creature suffers flanked.</p>",
+        "<p>处于<strong>围攻</strong>状态的生物承受<strong>夹击</strong>。</p>"), 1),
+    ("中文少一个 `<em>` → 必须响（少也是不对等，别只测多的那一侧）", None,
+     _P("<p>a <em>straight</em> line, <em>bowling</em> over</p>",
+        "<p>一条<em>直线</em>，撞翻挡路者</p>"), 1),
+    ("标签换了种类（EN `<em>` ↔ CN `<strong>`）→ 必须响（总数相等，只有多重集看得见）", None,
+     _P("<p>a <em>Juggernaut</em> charge</p>", "<p>一次<strong>坚壁</strong>冲锋</p>"), 1),
+    ("属性不看：`<span class=\"x\">` 与 `<span>` 是同一个记号 → 不响（属性漂移归 scan_markup_drift）",
+     None, _P("<p><span class=\"x\">Stride</span></p>", "<p><span>移动</span></p>"), 0),
+    ("自闭合归一：`<br>` / `<br />` 是同一个记号 → 不响", None,
+     _P("<p>one<br>two</p>", "<p>一<br />二</p>"), 0),
+    ("增强器里没有 `<`，两侧标签本就相同 → 不响（硬约束 3 的东西碰不到本条）", None,
+     _P("<p>@UUID[Item.x]{Overrun} knocks them @Condition[prone]</p>",
+        "<p>@UUID[Item.x]{冲撞}将其击倒@Condition[prone]</p>"), 0),
+    # 三道地板同时响：叶 0 / 标签 0 / 种类 0。三道都要在 —— 「无从查起」不许印成「查过了没问题」。
+    ("两侧都不带标签的叶不进闸 → 进闸 0 叶，三道地板一起响（**不是**判成通过）", None,
+     _P("Overrun", "冲撞 Overrun"), 3),
+    # ⚑ 两层地板各自的反例：规则文件那一层被摘掉 / 被调松，都不许静默过。
+    ("规则里少了 `min_leaves` → 报「两层里少了一层」（缺一层不许当没事）",
+     {"min_leaves": None}, _P("<p>a</p>", "<p>甲</p>"), 1),
+    ("规则里把 `min_tags` 调成 0、而本文件的死下限是 99 → 仍然响（作弊路径 B 越不过 .py）",
+     {"min_tags": 0, "_hard": {"min_leaves": 1, "min_tags": 99, "min_tag_kinds": 1}},
+     _P("<p>a</p>", "<p>甲</p>"), 1),
+]
+
+
+def run_tag_parity_selftest():
+    """返回 (失败条数, 总条数)。含两条**掏空判定函数**的元用例。"""
+    global TAG_PARITY_HARD, tag_diff, tag_multiset
+    results = []
+    saved_hard, saved_diff, saved_ms = TAG_PARITY_HARD, tag_diff, tag_multiset
+
+    def _run(override, pairs):
+        hard = (override or {}).get("_hard") or _TAG_HARD_TINY
+        rule = dict(_TAG_RULE)
+        for k, v in (override or {}).items():
+            if k == "_hard":
+                continue
+            if v is None:
+                rule.pop(k, None)                      # None ＝「把这个键摘掉」
+            else:
+                rule[k] = v
+        globals()["TAG_PARITY_HARD"] = hard
+        try:
+            return a_tag_parity(rule, _FakeCtx(pairs=pairs))
+        finally:
+            globals()["TAG_PARITY_HARD"] = saved_hard
+
+    for note, override, pairs, want in TAG_PARITY_SELFTEST:
+        b, detail = _run(override, pairs)
+        ok = len(b) == want
+        results.append((note, ok, "" if ok else f"期望违规 {want}，实得 {len(b)}：{b[:2]}｜{detail}"))
+
+    # —— 元用例 A：掏空 `tag_diff`（判定就在那一行）→ 必答题 ② 那条用例必须失守。
+    _note, _ov, _pairs, _want = TAG_PARITY_SELFTEST[1]
+    try:
+        globals()["tag_diff"] = lambda a, b: ""
+        b, _d = _run(_ov, _pairs)
+        ok = len(b) == 0
+    finally:
+        globals()["tag_diff"] = saved_diff
+    results.append(("⚑ 掏空 `tag_diff` → 上面那条「中文多一个 `<strong>`」必须从响变成不响"
+                    "（证明它是被这个判定函数撑起来的，不是被别的层顺手接住）", ok,
+                    "" if ok else f"掏空之后仍报了 {len(b)} 处 —— 那条反例测的不是这个函数"))
+
+    # —— 元用例 B：掏空 `tag_multiset` → 一叶都进不了闸，地板层接住。
+    try:
+        globals()["tag_multiset"] = lambda s: collections.Counter()
+        b, d = _run(None, TAG_PARITY_SELFTEST[0][2])
+        ok = len(b) >= 1 and "进闸 0 叶" in d
+    finally:
+        globals()["tag_multiset"] = saved_ms
+    results.append(("⚑ 掏空 `tag_multiset` → 进闸 0 叶、地板层当场响（空转不许判成通过）", ok,
+                    "" if ok else f"实得违规 {len(b)}｜{d}"))
+
+    # —— 元用例 C：发布中的**真身**死下限确实咬人（上面十条跑的都是放松过的副本，
+    #    只测副本等于没测那三个真数 —— 形态 (g)「验的不是产线那一份」）。
+    b, d = a_tag_parity(dict(_TAG_RULE), _FakeCtx(pairs=_P("<p>a</p>", "<p>甲</p>")))
+    ok = len(b) == 3 and str(TAG_PARITY_HARD["min_leaves"]) in " ".join(x[3] for x in b)
+    results.append((f"⚑ 用**真身** TAG_PARITY_HARD（叶{TAG_PARITY_HARD['min_leaves']}·"
+                    f"标签{TAG_PARITY_HARD['min_tags']}·种类{TAG_PARITY_HARD['min_tag_kinds']}）"
+                    f"跑一片合成叶 → 三道死下限全部响", ok,
+                    "" if ok else f"期望 3 处，实得 {len(b)}｜{d}"))
+
+    print("\nHTML 标签 EN/CN 对等闸（tag_parity）正反例：")
+    nbad = 0
+    for note, ok, extra in results:
+        if not ok:
+            nbad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        if extra:
+            print(f"        {extra}")
+    print(f"\ntag_parity：{len(results) - nbad} / {len(results)} 通过")
+    return nbad, len(results)
 
 
 _SLOT_RULE = {
@@ -5823,6 +6081,7 @@ KIND_SELFTEST_OWNER = {
     "sense_gated": "sense_gated",
     "block_aligned_gate": "block_aligned_gate",
     "block_sense_gate": "block_sense_gate",
+    "tag_parity": "tag_parity",          # 第三十三轮 B
     "enricher_slot_gate": "enricher_slot_gate",
     "enricher_text_coverage": "enricher_text_coverage",
     "twin_files": "twin_files",
@@ -6532,7 +6791,11 @@ SELFTEST_SHAPE = {
     "叶级执行体": 23, "读盘执行体": 15, "载荷地板": 29, "判了几条规矩": 9,
     # 第三十二轮 L6-①：`kind 覆盖表` 从字面量 1 改成**函数自报的比对项数**
     #（22 种 kind + 1 道待补上限 = 23），并新增「护栏反例」组（那两道判定函数自己的反例）
-    "kind 覆盖表": 23, "护栏反例": 9,
+    # 第三十三轮 B：KINDS 从 22 种涨到 23 种 ⇒ 覆盖表的比对项数 23 → 24（23 种 + 1 道待补上限）
+    "kind 覆盖表": 24, "护栏反例": 9,
+    # 第三十三轮 B：新判据层 tag_parity 的正反例 10 条 + 3 条元用例
+    #（掏空 tag_diff / 掏空 tag_multiset / 用真身死下限跑一遍）
+    "tag_parity": 13,
 }
 
 
@@ -6632,6 +6895,8 @@ def run_selftest():
         print(f"        期望违规 {want_b}，实得 {len(b)}　（{detail}）")
     print(f"\nblock_sense_gate：{len(BLOCK_SENSE_SELFTEST) - bbad} / {len(BLOCK_SENSE_SELFTEST)} 通过")
 
+    tgbad, _tgn = run_tag_parity_selftest()
+
     print("\n增强器槽位闸（enricher_slot_gate）正反例：")
     ebad = 0
     for note, override, pairs, want_b in SLOT_SELFTEST:
@@ -6685,10 +6950,10 @@ def run_selftest():
     total = (len(SELFTEST) + len(GATE_SELFTEST) + len(SENSE_SELFTEST) + len(GLOSSARY_SELFTEST)
              + len(BLOCK_ALIGN_SELFTEST) + len(BLOCK_SENSE_SELFTEST) + len(SLOT_SELFTEST)
              + len(TEXT_COV_SELFTEST) + 1 + _wn + _rn + _ln + _pn + _kn + _sqn + _mvn
-             + _lkn + _dkn + _pfn + _jun + _gcn)
+             + _lkn + _dkn + _pfn + _jun + _gcn + _tgn)
     nbad = (bad + gbad + sbad + vbad + abad + bbad + ebad + tbad
             + wbad + rbad + lbad + pbad + kbad + sqbad + mvbad
-            + lkbad + dkbad + pfbad + jubad + gcbad)
+            + lkbad + dkbad + pfbad + jubad + gcbad + tgbad)
 
     # —— kind 覆盖表：`KINDS` 里每个 kind 都得有一组、且那一组**真的调到了它**。
     #    ⚠ 必须放在**所有组跑完之后**（数的是本次自检的累计调用次数）。
@@ -6720,6 +6985,7 @@ def run_selftest():
         "sense_gated": len(SENSE_SELFTEST), "glossary_value": len(GLOSSARY_SELFTEST),
         "block_aligned_gate": len(BLOCK_ALIGN_SELFTEST),
         "block_sense_gate": len(BLOCK_SENSE_SELFTEST),
+        "tag_parity": _tgn,
         "enricher_slot_gate": len(SLOT_SELFTEST),
         "enricher_text_coverage": len(TEXT_COV_SELFTEST) + 1,
         "twin_files": _wn, "translate_cases": _rn, "source_literal": _ln,

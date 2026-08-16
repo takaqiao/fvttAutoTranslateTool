@@ -577,10 +577,17 @@ export const BABELE_DEFAULTS = {
     name: 'name',
     caption: 'image.caption',
     // 上游 `default-mappings.js:156-159`：src / width / height 是给「本地化版
-    // 图片或视频」用的。本项目不本地化素材，但镜像照抄 —— 实测两包 3208 个页面里
+    // 图片或视频」用的。本项目不本地化素材，但镜像照抄 —— 实测两包 3097 个页面里
+    // （**attach 前计数**：113 个 `journal.pages` 桶文档 + 2984 个 adventure 内嵌页
+    //  ＝ ember.adventure 1488 + ember.crucible-adventure 1488 + crucible.playtest 8）
     // `src` 非空 0 个、`video.width` 非空 0 个，且抽取器只吐非空字符串（数字不吐），
     // 所以现状零 diff。若哪天上游加了视频页，`src` 会以资源路径的形态进基线，
     // 到时候按「不译资源路径」处理，别再把这三行删掉制造隐性偏离。
+    // ⚠ 这里原先写的是 3208，是个**重复计入**出来的陈旧数：那一版是在 `attachEmbedded`
+    // 之后数的，`journal.pages` 桶里的页已经挂到父 JournalEntry 上，桶本身却还在，
+    // 于是 crucible.rules 那 112 页被数了两遍（3096 + 112 = 3208）。2026-08-17 用第二套
+    // 独立遍历复算坐实：0.10.2 下真值 3097（0.10.1 是 3096，差 1 是 0.10.2 新增的
+    // Conditions/Overrun 规则页），重复计入的差额同步变成 113。数页面**一律 attach 前数**。
     src: 'src',
     text: 'text.content',
     width: 'video.width',

@@ -56,6 +56,11 @@
  },
  {
   "slug": "G1",
+  "what": "`Overrun` 冲撞(4) / 围攻(1)",
+  "why": "0.10.2 跟版时上游把同一个词用在了两个互不相干的东西上，与 `Shield`（护盾术/盾牌）、`Light`（光/轻型）同型，2026-08-17 裁为合法分叉。**状态 Overrun＝围攻**：`module/const/statuses.mjs:180` 新增的 status id `overrun`（`name: ACTIVE_EFFECT.STATUSES.Overrun`，规则页 crucibleConditio/overrun000000000），被 `module/documents/actor.mjs:112` 的 `imposedFlanking` 读来给夹击级数 +1、被 `module/hooks/action.mjs:1638` 读来禁掉反应打击；库里就 1 叶＝crucible.rules.json 的 entries.Conditions.pages.Overrun.name。**动作 Overrun＝冲撞**：Juggernaut 天赋的冲锋动作（`module/hooks/action.mjs:1541` 的 `HOOKS.overrun`，直线冲过可被擒抱的生物、撞翻并击倒），4 叶＝crucible.talent.json 的 entries.Juggernaut.actions.overrun.name 与 .effects[0].name，加 ember.crucible-adventure.json 里 Clodmarl 身上的同一条副本各一份。**判别依据（下一轮不必重裁）：那个冲锋动作全程不施加 overrun 状态** —— 它的效果里只有 `@Condition[prone]`，`HOOKS.overrun` 的 prepare/postActivate 只改 size/range/excludeTokenTest 与逐目标事件，从头到尾没有碰 statuses.overrun；施加围攻状态的是别的效果或 GM 直接给。⚠ 顺带记项目所有者认下的一个错：当初裁「围攻」给的理由是「库里 58 处『围攻』全是散文、不撞车」，那句话**只核了中文侧**，而撞车发生在**英文侧**（`Overrun` 早被『冲撞』占了）——定新术语必须双向核：中文别撞别人，英文也别已经被别的中文占了。⚠ `glossary_ec.byrole.json` 里 terms.Overrun = {\"name\": \"冲撞 Overrun\"}，两个义项同属 name 角色、byrole 结构上分不开，所以本表是唯一收口处，不要去改 byrole 表。"
+ },
+ {
+  "slug": "G1",
   "what": "`<p>Adelyne gains resistance to necrotic damage…` 三种中文：莫赖亚 / 伊萨 / 阿德琳",
   "why": "上游英文的错，不是译文的错：Abyssal Sensitivity 的 Abyssal Resistance 效果被作者复制粘贴到 Moriah Foxhaven、Issa Sunsword、Adelyne Goss 三个 actor 上，英文一律硬编码 Adelyne。中文按各自 actor 本地化，GM 在每张卡上读到的都是对的人；统一成「阿德琳」只会把上游 bug 原样复刻给玩家。孪生包各一份共 6 叶。按「宁可少改不可错改」保持现状。"
  },

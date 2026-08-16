@@ -1,0 +1,27 @@
+- [ok] **已认到译文的合集**（查了 22 项） — 21/22 个合集有对应译文文件。**差的 1 个逐个点名如下**，**全部是上游自己的空包**（index 0 条，没有可译内容）—— 这是**预期**，不是缺陷。　⚠ **分母一条没动**：22 个合集全在分母里，没有任何包被摘出视野（摘掉一个换来「全部齐活」的满分，正是本项目第二十四轮那个假 0 的同型动作）。　⚠ 「空包」判据是 `pack.index.size`，索引没加载时与空包长得一样 —— 本次别处抽到 105 条索引，只有在这个前提下才敢把 index 0 条判成「预期」。
+    - `crucible.crafting`（Crafting） —— **预期**：上游此包为空（`pack.index` 0 条），**没有可译内容**，本来就不该有译文文件（例：`crucible.crafting` 在 `system.json` 里声明了，`systems/crucible/packs/` 下却连目录都没有）。
+- [ok] **合集索引抽样**（查了 105 项） — 抽 105 条，中文 84 条（80%）。**其余 21 条抽样条目名里没有中文，逐条点名如下**：⚠ 非 100% 不一定是缺陷 —— 有些条目按约定保留英文原名（见 H 档豁免）；**但真的漏译时报出来长得一模一样，所以不许只报一个百分比。**
+    - ember.crucible-adversary :: Prestidigitation
+    - ember.crucible-character :: Prestidigitation
+    - ember.crucible-adventure :: Prestidigitation
+    - ember.crucible-affixes :: Prestidigitation
+    - ember.crucible-effects :: Prestidigitation
+    - ember.crucible-items :: Prestidigitation
+    - crucible.adversary-equipment :: Prestidigitation
+    - crucible.adversary-talents :: Prestidigitation
+    - crucible.affixes :: Prestidigitation
+    - crucible.ancestry :: Prestidigitation
+    - crucible.archetype :: Prestidigitation
+    - crucible.background :: Prestidigitation
+    - crucible.equipment :: Prestidigitation
+    - crucible.macros :: Prestidigitation
+    - crucible.rules :: Prestidigitation
+    - crucible.playtest :: Prestidigitation
+    - crucible.pregens :: Prestidigitation
+    - crucible.spell :: Prestidigitation
+    - crucible.summons :: Prestidigitation
+    - crucible.talent :: Prestidigitation
+    - crucible.taxonomy :: Prestidigitation
+- [ok] **i18n 表已加载**（查了 1 项） — 顶层键 1 个
+- [ok] **裁决键抽验**（查了 1 项） — 查 1/2 条，全部符合既定裁决。　⚠ 探针共 2 条，**另有 1 条这次取不到、根本没查**（**不是通过**），逐条点名见下。
+    - `SPELL.INFLECTIONS.Aura` —— **本次没查**（`localize()` 原样吐回了键名：相关模块没装，或上游把这个键改名/删了）。裁决内容：Ember 的月亮/同调/屈折 Aura＝奥拉（Crucible 的手势/目标类型才是灵气）
