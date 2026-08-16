@@ -1,5 +1,5 @@
-// ⚠ 本文件是 2026-08-16「第二十二轮改动之前」的整份快照（182808 B，真身现已 24 万 B+），任何时候都不要当现表读。它含 EXACT / PREFIXED / PATTERNS / NOTIFICATION_PATTERNS 四张表的**旧版全文**，上游一改就是过期快照（本项目登记的空转形态 (c)）。保留理由：`2026-08-16-round22/gate54/cross_crucible_BAK.json` 是对着它跑出来的报告，删了那份报告就失去被判对象；无任何脚本 import 它。要看现表请读 `1-Ember汉化插件/scripts/ember-hardcoded-cn.mjs`。
-// ⚠ 死戳补于 2026-08-16 第二十八轮。它躲过上一轮清理不是因为体积（182808 B 远超当时的 >40k 门槛），而是文件名以 `.bak` 结尾、没落进 `*.mjs` 的筛网。新判据改成按**内容含表定义**（`const PREFIXED = [` / `const PATTERNS = [` / `const EXACT = {` / `const NOTIFICATION_PATTERNS = [`）扫，与后缀、体积都无关。
+// ⚠ 本文件是 2026-08-16「第二十四轮改动之前」的快照，任何时候都不要当现表读。保留理由：`2026-08-16-round25/probe_liveness*.mjs` 把它当 before 臂真跑（`which === "before"` 那一支），**不可从真身再生成**。要看现表请读 `1-Ember汉化插件/scripts/ember-hardcoded-cn.mjs`。
+globalThis.Hooks = globalThis.Hooks ?? { once() {}, on() {} };
 /**
  * ember-hardcoded-cn.mjs
  *
@@ -46,6 +46,10 @@
  * ⚠ 剩下的 11 条**已全部裁为「保持」，下一轮不要再当新缺陷重查**，也不要为了把计数清零
  *   去改任何一边 —— 它们是判据的定义域问题（枚举名 / UI 按钮 / 句首碎片 vs 散文里的同形词）。
  */
+
+// 自检面板（诊断工具，与汉化主线解耦）。⚠ 用**静态** import：
+// `registerMenu` 必须在 init 期间同步完成，动态 import 会赶不上。
+const SELFCHECK = { SUBTREE_SELECTORS: [], registerSelfCheck() {}, keyLiveness() {} };
 
 const MODULE = "ember_cn_unofficial";
 const log = (...a) => console.log(`${MODULE} |`, ...a);
@@ -338,6 +342,9 @@ const MOODS = {
  *   ↳ 副作用记一笔：组名补齐之后，`Marlstone Gala` / `Ordain` / `The Pit Trap` 这 3 条
  *     **编排名**也跟着被翻了，编排名恒英文 **204 → 201**。这是同串同译的必然结果，
  *     不是对「204 条编排名暂不补」那条裁决的翻案，下一轮别把它当成偷补。
+ *   ↳ 第二十二轮：项目所有者要求补完编排名，「暂不补」那条裁决已作废，201 → 1。
+ *     补完之后这 7 条同串**仍然只写在本表**，ARRANGEMENTS 一条都不重复 —— 谁要往
+ *     ARRANGEMENTS 里补这 7 条，MOOD_PANEL 的展开顺序会让它顶掉本表的组名译文。
  *
  * 译名依据（专名一律先过 compendium 英文闸，大小写逐条单独判；括号内为命中的英文串）：
  *   · 生物类取 crucible lang `TAXONOMY.CATEGORIES.*`（最权威的一档）：`Beast`野兽 /
@@ -419,9 +426,98 @@ const SOUNDSCAPE_GROUPS = {
  * ⚠ 这张表**只装编排名**（外加 `Reset`，理由见下）。第二十一轮以前它一张表同时兜两档
  * （9 键里 4 个其实是 optgroup 组名），混着长下去迟早出误命中，已拆开：组名一律进
  * SOUNDSCAPE_GROUPS。实测 42 个组名 / 212 个去重编排名里有 **7 条同串**，同串只写一次、
- * 写在组名表；本表现在的 4 条编排名（`Shent Ruins` / `Shent Ruins Tension` /
- * `The Pit Trap - Intense` / `The Pit Trap - Relaxed`）都**只是编排名、不是组名**，与组名表零重叠。
- * 覆盖面没变：编排名 212 条里翻了 11 条（本表 4 ＋ 组名表里同串的 7），恒英文 201 条。
+ * 写在组名表（`Ancient Ruins` / `Ankarist Theme` / `Lyla Theme` / `Marlstone Gala` /
+ * `Ordain` / `Sin Theme` / `The Pit Trap`），本表**一条都不重复写** —— 重复写会让
+ * MOOD_PANEL 的 `{...SOUNDSCAPE_GROUPS, ...ARRANGEMENTS}` 里后者把组名译文顶掉。
+ *
+ * **第二十二轮：编排名补完**（项目所有者要求；第二十一轮「暂不补」的裁决到此为止）。
+ * 本表 = `Reset` ＋ **204 条编排名**；加上组名表里那 7 条同串，212 条去重编排名里
+ * 覆盖 **211**、恒英文 **1**（`Seven Sails`，理由见文末）。编排名恒英文 **201 → 1**。
+ * 全集不是估计：`4-临时脚本/2026-08-16-round22/probe_groups_r22.mjs` 重跑第二十一轮那套
+ * 双方法互校探针（手写大括号配对正则 ／ node:vm 真解析器 ＋ `obj.id === 注册表键`），
+ * 自报 `A=44 B=44 BAD=0`、两法逐条相同、`267 条 / 去重 212 条 / 同串 7 条`；
+ * 表体由 `gen_arrangements.py` 从该探针产物生成，生成器**要求 212 条各自落进
+ * 「同串／留英／本表」三桶之一**，剩一条就 exit 2，落不进桶的不会被悄悄漏掉。
+ *
+ * ── 结构词统一译法（先定表再逐条套，不要一条一个样）──────────────────
+ *   时段    `Day`白天 · `Night`夜晚
+ *   情绪    `Calm`平静 · `Tension`紧张（＝ MOODS 表，两条通道同译）· `Quiet`静谧 ·
+ *           `Chaos`混乱 · `Sad`哀伤 · `Intense`激烈 · `Relaxed`舒缓 · `test`测试
+ *   曲式    `Main`主段 · `Section N`第 N 段 · `Interlude`间奏 · `Interval`间歇 ·
+ *           `Rises`渐强 · `Verse`主歌 · `Chorus`副歌 · `Bridge`桥段 · `Melody`旋律 ·
+ *           `Rhythm`节律（glossary_ec `Rhythm`＝节律）
+ *   曲风    `Heroic`英勇 · `Atonal`无调性 · `Spooky`阴森 · `Weird`诡谲 · `Dramatic`戏剧性
+ *   战斗    `X Fight` / `X Combat` 一律作「X战斗」，与 SOUNDSCAPE_GROUPS 的战斗组名同调
+ *   分隔符  一律 ` · `（沿用组名表的 `元素战斗 · 火` / 本表原有的 `陷坑 · 激烈`）
+ *   ⚠ `Chaos`＝混乱 与 glossary_ec 的 `Chaos`＝混沌 **有意不同**：这里是实验室里乱作一团的
+ *     环境音，不是宇宙学意义的「混沌」。同理 `Weird`＝诡谲 **不取** glossary_ec 的
+ *     `Weird`＝怪影杀手（那是生物名，另一个域）。
+ *
+ * ── 专名依据（一律先过 compendium 英文闸，大小写逐条单独判；括号内为命中的英文串）──
+ * 探针 `gate_arr.py`（两仓库 en/cn 配对 43115 条英文叶 ＋ 两份 lang）与
+ * `exact_arr.py`（拿 212 条标签整串去撞已译英文叶）自报扫描量，`gloss_probe.py`
+ * 再把每条标签的各级子串拿去查 glossary_ec（7974 条）。三者一致的才写进来：
+ *   · 整串命中已译英文叶（最强）：`Burial Grounds`墓地 · `Fogbound Caverns`雾缚洞窟 ·
+ *     `Inkaro Pools`因卡罗水潭 · `Kaleidoscope Caverns`万花筒洞窟 · `Mycelian Expanse`菌丝旷野 ·
+ *     `Pathways`通路 · `Primordial Bastion`原初堡垒 · `Signara`西格纳拉 ·
+ *     `Spellbreaker Tower`破法者之塔 · `The Ballad of Dereth Erekos`德雷斯·埃雷科斯之歌 ·
+ *     `Yakoshta Mine`雅科什塔矿井 · `Ember Cosmos`余烬寰宇（lang 里 1 条整串）。
+ *   · 去掉结构词后整串命中：`Amerasp Grove`阿梅拉斯普林地 · `Arcturel`阿克图瑞尔 ·
+ *     `Corpin Sanctuary`科尔平庇护所 · `Dripstones`滴石笋 · `Ember's Bounty`余烬的恩赐 ·
+ *     `Forest of Stone`石之森林 · `Golden Flats`金色平原 · `Helkas`赫尔卡斯 · `Nain`奈因 ·
+ *     `Ocean`海洋 · `Ordain Docks`奥尔丹船坞 · `Ordain Flats`奥尔丹平原 ·
+ *     `Ordain Spires`奥尔丹尖塔区 · `Redrak Fields`雷德拉克原野 ·
+ *     `Rustvar Valleys`鲁斯特瓦尔山谷 · `Sarin Strand`萨林海滨 · `Seawall`海堤 ·
+ *     `Skybrush`天刷镇 · `Splinter Canyons`碎裂峡谷 · `Steed's Point`斯蒂德角 ·
+ *     `The Teeth`卡迪索斯之牙 · `Tidal Pools`潮汐池 · `Verdant Paths`翠绿径 ·
+ *     `Wedgelands`楔地 · `Yakoshta`雅科什塔 · `Graven's Rest`格雷文之憩。
+ *   · 命中同族短名，按同一构词法套用：`The Bleak Archive`黯淡秘库 → `Bleak Archive` ·
+ *     `The Cauldron`坩埚湖 → `Cauldron` · `Volcanic Bluffs`火山峭壁 → `Bluffs`峭壁 ·
+ *     `Clouded Jungle`迷雾丛林 → `Jungle`丛林 · `Mountains of the Sun`太阳群山 →
+ *     `Mountains`群山 · `The Broken Tower`破碎之塔 · `The Scrapyard`废料场 ·
+ *     `The Waterworks`水务工程 · `Kalion Stadium Underworks`卡利昂竞技场地下工事 →
+ *     `Stadium Underworks`竞技场地下工事 · `Overwatch Garrison`守望驻军营 →
+ *     `Garrison`驻军营 · `Redrak Farm`雷德拉克农场 ＋ `Ooze Pools`软泥池 →
+ *     `Ooze Farm`软泥农场 · `Toothbreaker Hideout`碎牙帮藏身处 ＋ `Raiders`劫掠者 →
+ *     `Raiders' Hideout`劫掠者藏身处 · `Noxious Spit`剧毒唾液 → `Noxious Cave`剧毒洞穴 ·
+ *     `Clockwork Feather`发条羽毛 ＋ GM 指南 `Dungeon`地下城 → `Clockwork Dungeon`发条地下城 ·
+ *     `Writhing Grave`蠕动之墓 → `Kaleidoscope Grave`万花筒之墓 ·
+ *     `Brevin Festival`布雷文庆典 → `Helkas Festival`赫尔卡斯庆典 ·
+ *     `Vineyard Attack`葡萄园袭击 → `Helkas Attack`赫尔卡斯袭击 ·
+ *     `Vista: X`＝远景：X → `Camp Vista`营地远景 ·
+ *     `A Song for Lady Stonecraft`献给石艺女士的一首歌 → `Lady Stonecraft`石艺女士 ·
+ *     `Shrine to Spectra`斯佩克特拉圣祠（Shrine ＋ 神名）→ `Shrine of Nite`奈特圣祠
+ *     （`Nite` 是碎片之神，合集 `pages/Nite/name` 整串作「奈特 Nite」）·
+ *     `Signara Water`西格纳拉水域 → `Golden Flats Water`金色平原水域 ·
+ *     `Ordain Interior vista`奥尔丹室内远景（合集正文逐字）→ `Ordain Interior`奥尔丹室内 ·
+ *     `Mutagist X`突变学派X ＋ `Empty Laboratory`空实验室 → `Mutagist Laboratory`突变学派实验室 ·
+ *     `Bandit`强盗（`Carmin the Bandit`强盗卡尔敏）· `Drake`龙兽 · `Rejarh`雷贾尔
+ *     （合集正文「浮空之城雷贾尔沉入了海浪之下」）→ `Sunken Rejarh`沉没的雷贾尔 ·
+ *     `Seydiri`塞迪里（合集正文「塞迪里文化」，与组名 `Seydiri Theme`＝塞迪里主题 同调）。
+ *   · glossary_ec 定稿的单词：`Bloodletter`放血者 · `Spires`尖塔 · `Ancient`远古 ·
+ *     `Giants`巨人 · `Upper`上层 / `Lower`下层 · `Water`水域 · `Vista`远景 · `Folk`民谣
+ *     （＝三条 `X Folk` 组名的既定译法）。
+ *   · 依据只到「同族词 ＋ 构词」这一档的 4 条，写明以免下轮误当定稿：
+ *     `Blood Woods`血色森林（`Woods` 两仓库 0 命中；按同组 `Golden Flats`＝金色平原 的
+ *     「颜色词＋地貌」构词，`Forest`＝森林 取自 `Forest of Stone`＝石之森林）·
+ *     `Rock Spires`岩石尖塔（`Rock Spires` 整串 0 命中，`Spires`＝尖塔 有据）·
+ *     `Shipwreck`沉船（整串 0 命中，通用名词）·
+ *     `Ocean Ship`海洋 · 船上（`Ship` 无已译叶；同组另两条是 `Ocean Day/Night`，
+ *     故按「海洋 ＋ 变体」处理，不当成一个地名）。
+ *
+ * ⚠ `Marlstone Gala Tension` 取组名表的「马尔石晚会」，**不取** glossary_ec 的
+ *   「马尔斯通晚会」：英文闸下 compendium 三处（`The Marlstone Gala` / `Vista: Marlstone Gala`）
+ *   全作「马尔石晚会」，组名表也已定「马尔石晚会」。词表那条是孤例，本文件不跟。
+ * ⚠ `Shent Water Temple` 作「申特水之神殿」（跟组名 `Water Temple`＝水之神殿），
+ *   **不写成**合集里那座建筑的场景名「申特月神殿」（`Shent Moon Temple`）—— 英文闸按键判，
+ *   本表的键是 `Shent Water Temple`，上游对同一栋楼有两种写法，各译各的。
+ * ⚠ 有 4 条译文一串对两个键，全部是**上游拼写变体指同一处地方**，不是撞名：
+ *   `Teeth Day/Night` ↔ `The Teeth Day/Night`、`Rustvar Valley Day/Night` ↔
+ *   `Rustvar Valleys Day/Night`。生成器专门把这一项打印出来核对过（只此 4 条）。
+ * ⚠ `Seven Sails` **故意留英**：两仓库 43115 条英文叶里 `Seven Sails` en-hits=0、
+ *   连 `Sails` 单词都 0 命中，glossary_ec 也没有，模块自带语料里查不到这个名字指什么
+ *   （酒馆？船？曲名？）。宁可露英文也不猜 —— 下一轮的英文残留扫描若报到这 1 条，
+ *   属**预期内**，按本条驳回；等上游正文出现这个名字再补。
  */
 const ARRANGEMENTS = {
   // `Reset` 既不是组名也不是编排名：它是 ember.mjs:16255 `${channel.capitalize()}: Reset`
@@ -433,10 +529,211 @@ const ARRANGEMENTS = {
   //   与同一轮 `Usage` 那条 MJS_ORPHAN_CN +1 是两笔相反的变化，B 段总数 33 → 32 是两者相抵后的结果。
   //   下一轮对 B 段计数时别把这两笔当成没发生。
   "Reset": "重置",
-  "Shent Ruins": "申特遗迹",
-  "Shent Ruins Tension": "申特遗迹 · 紧张",
-  "The Pit Trap - Intense": "陷坑 · 激烈",
-  "The Pit Trap - Relaxed": "陷坑 · 舒缓"
+
+  "Abyssal Fight Interlude":          "深渊战斗 · 间奏",
+  "Abyssal Fight Main":               "深渊战斗 · 主段",
+  "Abyssal Fight Rises":              "深渊战斗 · 渐强",
+  "Aedir Garrison Exploration":       "艾迪尔驻军营探索",
+  "Amerasp Grove Day":                "阿梅拉斯普林地 · 白天",
+  "Amerasp Grove Night":              "阿梅拉斯普林地 · 夜晚",
+  "Ancient Giants":                   "远古巨人",
+  "Ancient Giants Tension":           "远古巨人 · 紧张",
+  "Ancient Ruins Magic Depths":       "远古遗迹 · 魔法深处",
+  "Arcane Theme Calm":                "奥术主题 · 平静",
+  "Arcane Theme Tension":             "奥术主题 · 紧张",
+  "Arcturel Day":                     "阿克图瑞尔 · 白天",
+  "Arcturel Night":                   "阿克图瑞尔 · 夜晚",
+  "Arcturel Tension":                 "阿克图瑞尔 · 紧张",
+  "Bandit Fight Bridge":              "强盗战斗 · 桥段",
+  "Bandit Fight Chorus":              "强盗战斗 · 副歌",
+  "Bandit Fight Verse":               "强盗战斗 · 主歌",
+  "Beast Fight Heroic":               "野兽战斗 · 英勇",
+  "Beast Fight Interval":             "野兽战斗 · 间歇",
+  "Beast Fight Main":                 "野兽战斗 · 主段",
+  "Bleak Archive":                    "黯淡秘库",
+  "Blood Woods Day":                  "血色森林 · 白天",
+  "Blood Woods Night":                "血色森林 · 夜晚",
+  "Blood Woods Tension":              "血色森林 · 紧张",
+  "Bloodletter Cave":                 "放血者洞穴",
+  "Bluffs Day":                       "峭壁 · 白天",
+  "Bluffs Night":                     "峭壁 · 夜晚",
+  "Bluffs Tension":                   "峭壁 · 紧张",
+  "Broken Tower":                     "破碎之塔",
+  "Burial Grounds":                   "墓地",
+  "Camp Vista":                       "营地远景",
+  "Cauldron Day":                     "坩埚湖 · 白天",
+  "Cauldron Night":                   "坩埚湖 · 夜晚",
+  "Cauldron Tension":                 "坩埚湖 · 紧张",
+  "Celestial Combat Section 1":       "天界生物战斗 · 第一段",
+  "Celestial Combat Section 2":       "天界生物战斗 · 第二段",
+  "Celestial Combat Section 3":       "天界生物战斗 · 第三段",
+  "Cindaric Temple Calm":             "辛达里克神殿 · 平静",
+  "Cindaric Temple Tension":          "辛达里克神殿 · 紧张",
+  "Clockwork Dungeon":                "发条地下城",
+  "Construct Combat Section 1":       "构装体战斗 · 第一段",
+  "Construct Combat Section 2":       "构装体战斗 · 第二段",
+  "Construct Combat Section 3":       "构装体战斗 · 第三段",
+  "Corpin Sanctuary Day":             "科尔平庇护所 · 白天",
+  "Corpin Sanctuary Night":           "科尔平庇护所 · 夜晚",
+  "Dripstones Day":                   "滴石笋 · 白天",
+  "Dripstones Night":                 "滴石笋 · 夜晚",
+  "Dripstones Tension":               "滴石笋 · 紧张",
+  "Dungeon Calm":                     "地下城 · 平静",
+  "Dungeon Tension":                  "地下城 · 紧张",
+  "Earth Elemental Combat Section 1": "土元素战斗 · 第一段",
+  "Earth Elemental Combat Section 2": "土元素战斗 · 第二段",
+  "Ember Cosmos":                     "余烬寰宇",
+  "Ember's Bounty Calm":              "余烬的恩赐 · 平静",
+  "Ember's Bounty Day":               "余烬的恩赐 · 白天",
+  "Ember's Bounty Night":             "余烬的恩赐 · 夜晚",
+  "Ember's Bounty Tension":           "余烬的恩赐 · 紧张",
+  "Fire Elemental Combat Section 1":  "火元素战斗 · 第一段",
+  "Fire Elemental Combat Section 2":  "火元素战斗 · 第二段",
+  "Fogbound Caverns":                 "雾缚洞窟",
+  "Fogbound Caverns Tension":         "雾缚洞窟 · 紧张",
+  "Forest of Stone Day":              "石之森林 · 白天",
+  "Forest of Stone Night":            "石之森林 · 夜晚",
+  "Frost Elemental Combat Section 1": "冰霜元素战斗 · 第一段",
+  "Frost Elemental Combat Section 2": "冰霜元素战斗 · 第二段",
+  "Golden Flats Day":                 "金色平原 · 白天",
+  "Golden Flats Night":               "金色平原 · 夜晚",
+  "Golden Flats Tension":             "金色平原 · 紧张",
+  "Golden Flats Water Day":           "金色平原水域 · 白天",
+  "Golden Flats Water Night":         "金色平原水域 · 夜晚",
+  "Graven's Rest Day":                "格雷文之憩 · 白天",
+  "Graven's Rest Night":              "格雷文之憩 · 夜晚",
+  "Graven's Rest Tension":            "格雷文之憩 · 紧张",
+  "Graven's Rest test":               "格雷文之憩 · 测试",
+  "Helkas Attack":                    "赫尔卡斯袭击",
+  "Helkas Attack (Drakes)":           "赫尔卡斯袭击（龙兽）",
+  "Helkas Attack (Raiders)":          "赫尔卡斯袭击（劫掠者）",
+  "Helkas Day":                       "赫尔卡斯 · 白天",
+  "Helkas Festival":                  "赫尔卡斯庆典",
+  "Helkas Night":                     "赫尔卡斯 · 夜晚",
+  "Helkas Sad":                       "赫尔卡斯 · 哀伤",
+  "Helkas Tension":                   "赫尔卡斯 · 紧张",
+  "Illusory Fight Atonal":            "幻象战斗 · 无调性",
+  "Illusory Fight Main":              "幻象战斗 · 主段",
+  "Inkaro Pools":                     "因卡罗水潭",
+  "Jungle Day":                       "丛林 · 白天",
+  "Jungle Night":                     "丛林 · 夜晚",
+  "Jungle Tension":                   "丛林 · 紧张",
+  "Kaleidoscope Caverns":             "万花筒洞窟",
+  "Kaleidoscope Caverns Tension":     "万花筒洞窟 · 紧张",
+  "Kaleidoscope Grave":               "万花筒之墓",
+  "Lady Stonecraft":                  "石艺女士",
+  "Lower Arcturel Day":               "下层阿克图瑞尔 · 白天",
+  "Lower Arcturel Night":             "下层阿克图瑞尔 · 夜晚",
+  "Marlstone Gala Tension":           "马尔石晚会 · 紧张",
+  "Monstrosity Combat Section 1":     "畸怪战斗 · 第一段",
+  "Monstrosity Combat Section 2":     "畸怪战斗 · 第二段",
+  "Monstrosity Combat Section 3":     "畸怪战斗 · 第三段",
+  "Mountains Day":                    "群山 · 白天",
+  "Mountains Night":                  "群山 · 夜晚",
+  "Mountains Tension":                "群山 · 紧张",
+  "Mutagenic Fight Main":             "诱变战斗 · 主段",
+  "Mutagenic Fight Melody":           "诱变战斗 · 旋律",
+  "Mutagenic Fight Rhythm":           "诱变战斗 · 节律",
+  "Mutagist Laboratory Chaos":        "突变学派实验室 · 混乱",
+  "Mutagist Laboratory Quiet":        "突变学派实验室 · 静谧",
+  "Mycelian Expanse":                 "菌丝旷野",
+  "Nain Day":                         "奈因 · 白天",
+  "Nain Night":                       "奈因 · 夜晚",
+  "Noxious Cave":                     "剧毒洞穴",
+  "Ocean Day":                        "海洋 · 白天",
+  "Ocean Night":                      "海洋 · 夜晚",
+  "Ocean Ship":                       "海洋 · 船上",
+  "Ocean Tension":                    "海洋 · 紧张",
+  "Ooze Farm Day":                    "软泥农场 · 白天",
+  "Ooze Farm Night":                  "软泥农场 · 夜晚",
+  "Ooze Fight - Dramatic":            "软泥怪战斗 · 戏剧性",
+  "Ooze Fight - Weird":               "软泥怪战斗 · 诡谲",
+  "Ordain Docks Day":                 "奥尔丹船坞 · 白天",
+  "Ordain Docks Night":               "奥尔丹船坞 · 夜晚",
+  "Ordain Docks Tension":             "奥尔丹船坞 · 紧张",
+  "Ordain Flats Day":                 "奥尔丹平原 · 白天",
+  "Ordain Flats Night":               "奥尔丹平原 · 夜晚",
+  "Ordain Flats Tension":             "奥尔丹平原 · 紧张",
+  "Ordain Folk":                      "奥尔丹民谣",
+  "Ordain Interior Day":              "奥尔丹室内 · 白天",
+  "Ordain Interior Night":            "奥尔丹室内 · 夜晚",
+  "Ordain Spires Day":                "奥尔丹尖塔区 · 白天",
+  "Ordain Spires Night":              "奥尔丹尖塔区 · 夜晚",
+  "Ordain Spires Tension":            "奥尔丹尖塔区 · 紧张",
+  "Ordain Temple":                    "奥尔丹神殿",
+  "Pathways":                         "通路",
+  "Pathways Tension":                 "通路 · 紧张",
+  "Primordial Bastion":               "原初堡垒",
+  "Raider Fight - Intense":           "劫掠者战斗 · 激烈",
+  "Raider Fight - Main":              "劫掠者战斗 · 主段",
+  "Raiders' Hideout Day":             "劫掠者藏身处 · 白天",
+  "Raiders' Hideout Night":           "劫掠者藏身处 · 夜晚",
+  "Redrak Fields Day":                "雷德拉克原野 · 白天",
+  "Redrak Fields Night":              "雷德拉克原野 · 夜晚",
+  "Redrak Fields Tension":            "雷德拉克原野 · 紧张",
+  "Rock Spires Day":                  "岩石尖塔 · 白天",
+  "Rock Spires Night":                "岩石尖塔 · 夜晚",
+  "Rock Spires Tension":              "岩石尖塔 · 紧张",
+  "Rustvar Valley Day":               "鲁斯特瓦尔山谷 · 白天",
+  "Rustvar Valley Night":             "鲁斯特瓦尔山谷 · 夜晚",
+  "Rustvar Valley Tension":           "鲁斯特瓦尔山谷 · 紧张",
+  "Rustvar Valleys Day":              "鲁斯特瓦尔山谷 · 白天",
+  "Rustvar Valleys Night":            "鲁斯特瓦尔山谷 · 夜晚",
+  "Sarin Strand Day":                 "萨林海滨 · 白天",
+  "Sarin Strand Night":               "萨林海滨 · 夜晚",
+  "Sarin Strand Tension":             "萨林海滨 · 紧张",
+  "Scrapyard":                        "废料场",
+  "Seawall Day":                      "海堤 · 白天",
+  "Seawall Night":                    "海堤 · 夜晚",
+  "Seawall Tension":                  "海堤 · 紧张",
+  "Seydiri Calm":                     "塞迪里 · 平静",
+  "Seydiri Tension":                  "塞迪里 · 紧张",
+  "Shent Ruins":                      "申特遗迹",
+  "Shent Ruins Tension":              "申特遗迹 · 紧张",
+  "Shent Water Temple Day":           "申特水之神殿 · 白天",
+  "Shent Water Temple Night":         "申特水之神殿 · 夜晚",
+  "Shipwreck Day":                    "沉船 · 白天",
+  "Shipwreck Night":                  "沉船 · 夜晚",
+  "Shrine of Nite Calm":              "奈特圣祠 · 平静",
+  "Shrine of Nite Tension":           "奈特圣祠 · 紧张",
+  "Signara":                          "西格纳拉",
+  "Signara Calm":                     "西格纳拉 · 平静",
+  "Signara Tension":                  "西格纳拉 · 紧张",
+  "Skybrush Day":                     "天刷镇 · 白天",
+  "Skybrush Night":                   "天刷镇 · 夜晚",
+  "Spellbreaker Tower":               "破法者之塔",
+  "Splinter Canyons Day":             "碎裂峡谷 · 白天",
+  "Splinter Canyons Night":           "碎裂峡谷 · 夜晚",
+  "Splinter Canyons Tension":         "碎裂峡谷 · 紧张",
+  "Stadium Underworks":               "竞技场地下工事",
+  "Steed's Point Day":                "斯蒂德角 · 白天",
+  "Sunken Rejarh":                    "沉没的雷贾尔",
+  "Teeth Day":                        "卡迪索斯之牙 · 白天",
+  "Teeth Night":                      "卡迪索斯之牙 · 夜晚",
+  "Teeth Tension":                    "卡迪索斯之牙 · 紧张",
+  "The Ballad of Dereth Erekos":      "德雷斯·埃雷科斯之歌",
+  "The Pit Trap - Intense":           "陷坑 · 激烈",
+  "The Pit Trap - Relaxed":           "陷坑 · 舒缓",
+  "The Teeth Day":                    "卡迪索斯之牙 · 白天",
+  "The Teeth Night":                  "卡迪索斯之牙 · 夜晚",
+  "Tidal Pools Day":                  "潮汐池 · 白天",
+  "Tidal Pools Night":                "潮汐池 · 夜晚",
+  "Tidal Pools Tension":              "潮汐池 · 紧张",
+  "Undead Fight - Atonal":            "不死生物战斗 · 无调性",
+  "Undead Fight - Main":              "不死生物战斗 · 主段",
+  "Undead Fight - Spooky":            "不死生物战斗 · 阴森",
+  "Upper Arcturel Day":               "上层阿克图瑞尔 · 白天",
+  "Upper Arcturel Night":             "上层阿克图瑞尔 · 夜晚",
+  "Verdant Paths Day":                "翠绿径 · 白天",
+  "Verdant Paths Night":              "翠绿径 · 夜晚",
+  "Verdant Paths Tension":            "翠绿径 · 紧张",
+  "Waterworks":                       "水务工程",
+  "Wedgelands Day":                   "楔地 · 白天",
+  "Wedgelands Night":                 "楔地 · 夜晚",
+  "Wedgelands Tension":               "楔地 · 紧张",
+  "Yakoshta Day":                     "雅科什塔 · 白天",
+  "Yakoshta Mine":                    "雅科什塔矿井",
+  "Yakoshta Night":                   "雅科什塔 · 夜晚"
 };
 
 /**
@@ -1475,7 +1772,7 @@ const EMBER_DIALOG_UI = {...DIALOG_UI, ...EMBER_WINDOW_UI};
 /**
  * 播放列表侧栏里 Ember 注入的音景面板（`<form id="ember-mood">`，ember.mjs:15874-15898）。
  * 宿主是 core 的 PlaylistDirectory，主闸两个判据都不成立，靠 INJECTED_SUBTREES 放行子树。
- * 本表 **50 键 = SOUNDSCAPE_GROUPS(42) ＋ ARRANGEMENTS(5) ＋ 下面 3 条面板自有文案**，三部分零重叠
+ * 本表 **250 键 = SOUNDSCAPE_GROUPS(42) ＋ ARRANGEMENTS(205) ＋ 下面 3 条面板自有文案**，三部分零重叠
  * （`Ember Environment` 既是组名又是 :15892 的 `<header>` 文案，只在组名表里定义一次，
  * 所以这里不再重写它 —— 别看着 header 没登记就往回加，那会造出第二个定义处）。
  * 译名取 glossary_ec 的定稿（Ember Music 余烬乐曲 / Ember Environment 余烬环境）。
@@ -1503,17 +1800,24 @@ const EMBER_DIALOG_UI = {...DIALOG_UI, ...EMBER_WINDOW_UI};
  *   · 拿真 `translateText` 复核时，**不传作用域表则 42 个组名一条都不翻**（212 个编排名同样一条不翻）——
  *     MOOD_PANEL 是作用域表，键**不在全局 `EXACT` 里**。拿全局通道去量这块覆盖率只会量出假的「0 覆盖」。
  *
- * 按 MOOD_PANEL 判的当前账（第二十一轮实测，探针 `probe_moodpanel.mjs`，
- * 它是**在 vm 里跑本文件真源码**取到的 MOOD_PANEL，再喂给本文件导出的真 `translateText`）：
- *   · 组名 42 条 → 覆盖 **42**、**恒英文 0**（本轮把 37 条补齐了）。
- *   · 编排名去重 212 条 → 覆盖 **11**、**恒英文 201**（上一轮是覆盖 8 / 恒英文 204；
- *     多出来的 3 条是 `Marlstone Gala` / `Ordain` / `The Pit Trap`，它们与组名同串，
- *     是补组名的**必然副作用**，不是偷偷补了编排名，见 SOUNDSCAPE_GROUPS 表内注）。
+ * 按 MOOD_PANEL 判的当前账（第二十二轮实测，探针
+ * `4-临时脚本/2026-08-16-round22/probe_moodpanel_r22.mjs`，它是**在 vm 里跑本文件真源码**
+ * 取到的 MOOD_PANEL，再喂给本文件导出的真 `translateText`）：
+ *   · 组名 42 条 → 覆盖 **42**、**恒英文 0**（第二十一轮把 37 条补齐）。
+ *   · 编排名去重 212 条 → 覆盖 **211**、**恒英文 1**（第二十一轮是覆盖 11 / 恒英文 201；
+ *     第二十二轮补进 ARRANGEMENTS 200 条，剩下的 1 条是**故意留英**的 `Seven Sails`，
+ *     理由见 ARRANGEMENTS 表内注末尾）。探针把仍是英文的那一档**逐条打印出来**，
+ *     所以「1」是列出来的，不是减出来的。
  *   · 三条面板自有文案（`Ember Music` / `Rearrange Music` / `Ember Default`）与 `Reset`
  *     两边都对不上，它们不是音景名。
- * 排期时**别把两档并成一档**：组名已清零，剩下的 201 条编排名是另一件事，
- * 多为「Bandit Fight Chorus / Celestial Combat Section 3」这类内部段落编号，
- * 主控第二十一轮裁的是**暂不补**。补不补不在本文件裁。
+ * 该探针自带四道反空转控制，四道全过才 PASS：① 负控制 —— 不传作用域表时 254 条一条都不翻
+ * （证明量的是作用域表，不是全局 EXACT）；② 组名侧变异控制 —— 从源码里删掉
+ * `Water Temple` 一行，组名覆盖必须恰好 42→41；③ 编排名侧变异控制 —— 删掉
+ * `Bandit Fight Chorus` 一行，编排名覆盖必须恰好 211→210（第二十二轮新加，
+ * 因为②只压得住组名表那一侧，编排名补完后必须有自己的一道）；④ DOM 属性通道
+ * 用假 `<optgroup>` 真跑 translateNode，并证明把 `label` 从属性白名单里拿掉就会失效。
+ * ⚠ **「上屏留不留英」仍必须按 MOOD_PANEL 判**，不是按 ARRANGEMENTS，更不是按不带 extra
+ * 的全局 `translateText`（负控制①就是为这句话准备的）。
  */
 const MOOD_PANEL = {
   ...SOUNDSCAPE_GROUPS,
@@ -2571,3 +2875,86 @@ Hooks.once("ready", () => {
   refreshCalendarUI();
   log("Ember 硬编码字符串补丁已就绪。");
 });
+
+/* ============================================================
+ *  自检面板接线
+ * ============================================================
+ *
+ * 面板本体在 `ember-cn-selfcheck.mjs`。这里只做两件本文件才做得到的事：
+ *   ① 把硬编码表交给它做**键活性**检查（只有本文件拿得到这些表）；
+ *   ② 把 INJECTED_SUBTREES 的选择器交给它做 DOM 命中检查。
+ *
+ * ⚠ 为什么键活性这一档非做不可：这些表是**按字面匹配上游产出的字符串**的。
+ *   上游一改措辞，键就再也匹配不上，界面照旧显示英文，而**控制台一声不响** ——
+ *   第十六轮离线核对时查出过 31 个键在当时的上游上根本不生效。
+ *   面板把这件事变成「随时能当场跑一遍」，上游一升级就能立刻看出来。
+ *
+ * ⚠ 传表时用 `{table, onlyOn}` 形态标注**按设计只在某系统下生效**的表 ——
+ *   否则在别的系统里跑，那些键在源码里找不到会被误报成失效。
+ */
+
+const SELFCHECK_TABLES = {
+  // ── 普通字面量表：键应当能在上游源码里找到，找不到多半是上游改了措辞 ──
+  EXACT, PREFIXED, PATTERNS,
+  DIALOG_TITLES, DIALOG_UI, EMBER_WINDOW_UI,
+  NOTIFICATIONS, SCROLLING_TEXT,
+  ATTUNEMENTS, ATTUNEMENT_ITEM_NAMES, ATTUNEMENT_TAB,
+  MOON_NAMES, WEATHER,
+  LANGUAGES, LANGUAGE_CATEGORIES,
+  SOUNDSCAPE_GROUPS, ARRANGEMENTS, ARRANGEMENT_LEAVES, MOODS, MOOD_PANEL,
+  NOTE_TYPES, SETTINGS_UI, SCENE_CONTROL_UI,
+  REGION_BEHAVIOR_FIELDS, VISTA_PLACEMENT_FIELDS, PROSEMIRROR_BLOCK_TITLES,
+
+  // ── 运行时拼出来的：字面量核对对它**无效**，报「查无此串」是判据的假阳性 ──
+  //   CHAT_UI 的复合键由 buildChatKeys() 在 ready 时按当前 lang 的实际译文拼出
+  //   （`${月亮} Attunement (Rank ${N})`），上游源码里本来就不会有这个字面量。
+  CHAT_UI: { table: CHAT_UI, kind: 'composed' },
+
+  // ── 键来自数据文件而不是脚本：拿 .mjs 当语料核不出来 ──
+  DATE_AGES: { table: DATE_AGES, kind: 'data' },
+
+  // ── 反向判据：这几张表**正是因为上游缺这些**才建的。
+  //   所以「上游查无此串」是**预期状态**；反过来哪天找到了，说明上游补上了，
+  //   我们的兜底可能变成多余甚至冲突 —— 那才是要复核的信号。
+  MISSING_LANGUAGES:  { table: MISSING_LANGUAGES,  kind: 'absent-by-design' },
+  MISSING_KNOWLEDGE:  { table: MISSING_KNOWLEDGE,  kind: 'absent-by-design', onlyOn: 'dnd5e' },
+  MISSING_ANCESTRIES: { table: MISSING_ANCESTRIES, kind: 'absent-by-design', onlyOn: 'crucible' },
+  MISSING_CULTURES:   { table: MISSING_CULTURES,   kind: 'absent-by-design', onlyOn: 'crucible' },
+  MISSING_PATHS:      { table: MISSING_PATHS,      kind: 'absent-by-design', onlyOn: 'crucible' },
+
+  // ── 按设计只在 dnd5e 世界生效：串在 dnd5e 系统源码里，
+  //   不标 onlyOn 的话在 crucible 世界跑会把它们全部误报成失效。
+  KNOWLEDGE:         { table: KNOWLEDGE,         onlyOn: 'dnd5e' },
+  RARITIES:          { table: RARITIES,          onlyOn: 'dnd5e' },
+  DIVINE_DOMAINS:    { table: DIVINE_DOMAINS,    onlyOn: 'dnd5e' },
+  WARLOCK_PATRONS:   { table: WARLOCK_PATRONS,   onlyOn: 'dnd5e' },
+  SORCEROUS_ORIGINS: { table: SORCEROUS_ORIGINS, onlyOn: 'dnd5e' },
+};
+
+Hooks.once('init', () => {
+  // ⚠ 这里必须是**同步**的：`game.settings.registerMenu` 要在 init 期间完成，
+  //   用 `await import(...)` 会把注册推到 init 之后，设置面板里可能就看不到入口了。
+  //   所以上面用的是**静态 import**（模块体执行前就解析完），这里只管调用。
+  try {
+    // INJECTED_SUBTREES 的每一项是 [选择器, 表, 选项]，面板只要选择器。
+    SELFCHECK.SUBTREE_SELECTORS.push(...INJECTED_SUBTREES.map(x => x[0]));
+    SELFCHECK.registerSelfCheck(() => SELFCHECK.keyLiveness(SELFCHECK_TABLES));
+  } catch (err) {
+    // ⚠ 自检面板出问题**不能拖垮汉化本身** —— 汉化是主线，面板只是诊断工具。
+    console.error('[ember-cn] 自检面板注册失败（汉化本身不受影响）：', err);
+  }
+});
+
+
+export {
+  SELFCHECK_TABLES as __SELFCHECK_TABLES,
+  EXACT as __EXACT,
+  DIALOG_UI as __DIALOG_UI,
+  EMBER_WINDOW_UI as __EMBER_WINDOW_UI,
+  NOTIFICATIONS as __NOTIFICATIONS,
+  ATTUNEMENTS as __ATTUNEMENTS,
+  ATTUNEMENT_TAB as __ATTUNEMENT_TAB,
+  MOON_NAMES as __MOON_NAMES,
+  VISTA_PLACEMENT_EN as __VISTA_PLACEMENT_EN,
+  VISTA_PLACEMENT_FIELDS as __VISTA_PLACEMENT_FIELDS
+};

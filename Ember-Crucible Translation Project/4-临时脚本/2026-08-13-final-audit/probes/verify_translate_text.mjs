@@ -4,8 +4,15 @@
  *
  * 直接 import 插件里导出的 translateText，避免我口算 PREFIXED/EXACT 匹配顺序出错。
  * 只读，不写库。
+ *
+ * ⚠ 2026-08-16 第二十八轮改：原来 import 的是同目录的 `_shim_hardcoded.mjs` —— 那是一份
+ *   2026-08-13 的**打桩副本**（PREFIXED 只有 4 条，真身当时已 19 条），抬头注释还逐字照搬真身。
+ *   于是这支探针量的是一份过期副本，真身怎么改它都不知道 —— 本项目登记的空转形态 (h)
+ *   「空转的是喂输入的那个探针」。诱饵已删；这里改成**现 import 真身**，
+ *   只补一个 `globalThis.Hooks` 桩（真身 import 时会注册渲染钩子，Node 里没有）。
  */
-import {translateText} from "./_shim_hardcoded.mjs";
+globalThis.Hooks = globalThis.Hooks ?? {once() {}, on() {}};
+const {translateText} = await import("../../../1-Ember汉化插件/scripts/ember-hardcoded-cn.mjs");
 
 const cases = [
   // ember 增强器实际输出（name/label 已是 babele 译好的中文并列名）

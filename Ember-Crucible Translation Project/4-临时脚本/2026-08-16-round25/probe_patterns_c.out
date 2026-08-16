@@ -1,0 +1,79 @@
+
+── ① 正例 · Result of（ember.mjs:22909/22912，dc 为整数，只拼 `${dc-5}-` / `${dc+5}+`）──
+  ok   Result of -5-
+  ok   Result of 5+
+  ok   Result of 0-
+  ok   Result of 10+
+  ok   Result of 3-
+  ok   Result of 13+
+  ok   Result of 13-
+  ok   Result of 23+
+  ok   Result of 95-
+  ok   Result of 105+
+  ok   Result of -8-
+  ok   Result of 2+
+
+── ② 正例 · 音景（编排名取自上游 ember.mjs，逐条过 translateText）──
+  注册表 44 个音景
+  ok   所有音景都解析出来了（unresolved 必须为 0）
+  上游唯一编排名 219 条
+  ok   上游 219 条编排名里翻不动的**恰好**是登记的那 8 条
+  实际翻动 422 条 / 422 条应翻动
+  ok   Music: Reset
+  ok   Environment: Reset
+  ok   Music: Ancient Ruins (Tension)
+  ok   Music: Ankarist Theme (Calm)
+  ok   Music Mood: Calm 仍走 PREFIXED
+
+── ③ 反例 · 13 条（含复核点名的 3 条误翻）──
+  ok   反例不动："Result of the investigation was inconclusive"
+  ok   反例不动："Music: my custom playlist"
+  ok   反例不动："Environment: Rain"
+  ok   反例不动："Result of the roll"
+  ok   反例不动："Result of a long and fruitless search"
+  ok   反例不动："Result of 13 plus"
+  ok   反例不动："Music: Session 3 Playlist"
+  ok   反例不动："Environment: Forest ambience"
+  ok   反例不动："Music: The Beatles"
+  ok   反例不动："Environment: Dust Storm"
+  ok   反例不动："Environment: Tempest"
+  ok   反例不动："Music: Rain (Calm)"
+  ok   反例不动："Result of two checks"
+
+── ④ 回归 · 未改动的分支 ──
+  ok   +2 Boons
+  ok   -6 Banes
+  ok   Age of Beasts - 12 Years Ago
+  ok   Age of the Tower - Current Year
+  ok   Day 43 - 12:00
+  ok   Day 43
+  ok   Outcome 3
+  ok   5 Others
+  ok   Threat 12.5
+  ok   Vantage Point: X
+  ok   Interactable: X
+  ok   Breeze (4.5 mph)
+  ok   Activate Attunement: Abyss
+  ok   [[/language borel]]
+  ok   Day, Generic 不许被吃（远景资源名）
+  ok   EXACT: Critical Success
+  ok   PREFIXED: Attunement: Abyss
+
+── ⑤ 旧实现回归对照（把收紧前的两条正则装回来跑同一批反例）──
+  · "Result of the investigation was inconclusive"
+      旧 → "结果：the investigation was inconclusive"
+      新 → "Result of the investigation was inconclusive"
+  · "Music: my custom playlist"
+      旧 → "音乐：my custom playlist"
+      新 → "Music: my custom playlist"
+  · "Environment: Rain"
+      旧 → "环境音：Rain"
+      新 → "Environment: Rain"
+  ok   旧实现确实会咬这 3 条（否则本组用例是空转）
+  ok   新实现一条都不咬
+  收紧的代价（如实报，不藏）：
+  · "Music: Seven Sails"  旧 → "音乐：Seven Sails"   新 → "Music: Seven Sails"
+  · "Environment: Rain"  旧 → "环境音：Rain"   新 → "Environment: Rain"
+  · "Music: Events"  旧 → "音乐：Events"   新 → "Music: Events"
+
+合计：通过 51 / 失败 0

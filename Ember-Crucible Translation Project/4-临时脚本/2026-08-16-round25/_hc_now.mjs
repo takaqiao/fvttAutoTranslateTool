@@ -1,5 +1,5 @@
-// ⚠ 本文件是 2026-08-16「第二十二轮改动之前」的整份快照（182808 B，真身现已 24 万 B+），任何时候都不要当现表读。它含 EXACT / PREFIXED / PATTERNS / NOTIFICATION_PATTERNS 四张表的**旧版全文**，上游一改就是过期快照（本项目登记的空转形态 (c)）。保留理由：`2026-08-16-round22/gate54/cross_crucible_BAK.json` 是对着它跑出来的报告，删了那份报告就失去被判对象；无任何脚本 import 它。要看现表请读 `1-Ember汉化插件/scripts/ember-hardcoded-cn.mjs`。
-// ⚠ 死戳补于 2026-08-16 第二十八轮。它躲过上一轮清理不是因为体积（182808 B 远超当时的 >40k 门槛），而是文件名以 `.bak` 结尾、没落进 `*.mjs` 的筛网。新判据改成按**内容含表定义**（`const PREFIXED = [` / `const PATTERNS = [` / `const EXACT = {` / `const NOTIFICATION_PATTERNS = [`）扫，与后缀、体积都无关。
+// ⚠ 本文件是 2026-08-16（第二十五轮）的快照，任何时候都不要当现表读。它是 `1-Ember汉化插件/scripts/ember-hardcoded-cn.mjs` 的打桩副本，由 `probe_liveness.mjs` 每次现生成；上游一改它就是过期快照（本项目登记的空转形态 (c)）。要看现表请读真身。
+globalThis.Hooks = globalThis.Hooks ?? { once() {}, on() {} };
 /**
  * ember-hardcoded-cn.mjs
  *
@@ -47,6 +47,10 @@
  *   去改任何一边 —— 它们是判据的定义域问题（枚举名 / UI 按钮 / 句首碎片 vs 散文里的同形词）。
  */
 
+// 自检面板（诊断工具，与汉化主线解耦）。⚠ 用**静态** import：
+// `registerMenu` 必须在 init 期间同步完成，动态 import 会赶不上。
+const SELFCHECK = { SUBTREE_SELECTORS: [], registerSelfCheck() {}, keyLiveness() {} };
+
 const MODULE = "ember_cn_unofficial";
 const log = (...a) => console.log(`${MODULE} |`, ...a);
 const warn = (...a) => console.warn(`${MODULE} |`, ...a);
@@ -67,6 +71,21 @@ const warn = (...a) => console.warn(`${MODULE} |`, ...a);
  *   从**世界里的** JournalEntry `emberCosmos00000` 取 page.name。装了本汉化之后那个页名已经是
  *   babele 译好的「深渊 The Abyss」/「余烬之心 Heart of Ember」（双语），查表必然落空、叶子原样带回；
  *   只有「先用英文导入过、之后才装汉化」的世界才会命中。保留是因为成本为零、且正是那种世界的兜底。
+ *   2026-08-16 第二十四轮补实了这两条键的**物理出处**：它们是合集里 JournalEntryPage 的 `name`
+ *   （`packs/adventure` 的 LevelDB；仓内英文基准 `compendium/en/ember.adventure.json` 与
+ *   `ember.crucible-adventure.json` 的 `/entries/Ember Early Access/journals/Cosmos/pages/…/name`），
+ *   **原理上不会出现在任何 .mjs / .hbs / lang 里**（四份脚本 + lang/en.json 实测命中 0）。
+ *   ⚠ 因此**在没有合集索引可查的场合**（离线探针 / 合集没加载的世界）这一档对它们查无此串。
+ *   2026-08-16 第二十五轮起，判据的语料里加了「合集索引条目名（含 JournalEntry 的 pages 名）」
+ *   这一路，所以在真实 Foundry 世界里这两条会被**真数据**接住 —— 那叫查过了。
+ *   同一轮判据还做了**展开表去重**：本表被 `...ATTUNEMENTS` 展开进 MOON_NAMES / DIALOG_UI /
+ *   ATTUNEMENT_TAB / CHAT_UI，第二十四轮一个源键会被报成 4 条独立线索、很容易读成
+ *   「四张表同时失效」，现在按键去重只算一条。
+ *   ⚠ **故意不给它们加 `keyKinds`**：把键标成 data 只是又一次「挪出视野」，
+ *   而被合集索引接住是真的查过了。合集没加载时它挂榜，那是如实报「这一路没查成」。
+ *   ⚠ 反过来 `Heart of Ember` 从来不上榜，是**假阴性**：它在 ember.mjs 里唯一那次命中是
+ *   :74871 远景 Vista 精灵素材目录的 `label: "Heart of Ember"`，与同调页毫无关系 ——
+ *   同一批键一条报一条不报，纯看有没有撞上无关字面量，这一档「搜得到」不构成任何证据。
  * 2026-08-13 第三轮：`Aura` 原译「灵气」是错的 —— 它是月亮专名，Cosmos 页 name 字段即「奥拉 Aura」，
  * 同一份月亮清单里 Mayis/Cora/Ragen/Orbis/Akon 全是音译；「灵气」是 `Aura Spellcraft` 手势的 adjective，不是月名。
  * ⚠ 由此，B 段拿 crucible lang 的 `SPELL.GESTURES.Aura` / `ACTION.TARGET_TYPES.Aura`＝灵气 来比本表的
@@ -128,14 +147,24 @@ const ATTUNEMENT_ITEM_NAMES = {
 };
 
 /**
- * Ember 的十个月亮名（ember.mjs:52821 起 `cosmos.moons[]` 的 `name` 字段，裸英文）。
+ * 日历面板上的天体名（裸英文；= ATTUNEMENTS 那张表 ＋ `Ember` 一条）。
  *
  * 日历面板的月亮 tooltip 由 `#refreshMoons()` 每帧写成 `${moon.name} ${moon.phaseLabel}`
  * （ember.mjs:24628），相位那半截走 i18n 已是中文、月名那半截是数据 —— 三张查表都是整串匹配，
  * 接不住这种「英文名 + 空格 + 中文相位」的复合串，而 #refreshMoons 由 animate() 每帧调用、
  * 不发渲染钩子，DOM 层就算翻了下一帧也会被写回。所以改数据（patchMoonNames）。
  * `moon.name` 全上游只有 24628 这一处消费点（查找一律用 `moon.id`，如 :125773 / :125958），改名安全。
- * 第十个 `Ember` 不是同调月，按 PROJECT.md 既定 Ember(世界)=余烬。
+ *
+ * ⚠ 2026-08-16 第二十四轮**逐行核过上游，原注释「Ember 的十个月亮名（ember.mjs:52821 起
+ *   cosmos.moons[]）」不准**，照它去数会得出错误结论：
+ *     · `cosmos.moons[]`（:52821）只有 **6** 条 —— Aura(52824) / Cora(52842) / Ragen(52864) /
+ *       Mayis(52883) / Orbis(52902) / Akon(52927)；
+ *     · Signara(52956) / Luxarum(52974) / Primordis(52992) 在**同级的 `realms[]`**（:52953）里；
+ *     · `Ember`(53037) 是 `sprites.Ember`（:53009）的 name —— 世界本体，根本不是天体。
+ *   patchMoonNames 只作用于 `ember.calendar.moons`，而上游 :3772 只把 `cosmos.moons` 灌进去，
+ *   所以本表里那 8 个非月亮的键**永远命不中，也永远不会误伤**（:2334 用 `MOON_NAMES[moon.name]`
+ *   守卫，查不到就原样跳过）—— 保留成本为零，但别把它们当「活的月亮名」去调译文。
+ *   `Ember` 按 PROJECT.md 既定 Ember(世界)=余烬。
  */
 const MOON_NAMES = {
   ...ATTUNEMENTS,
@@ -338,6 +367,9 @@ const MOODS = {
  *   ↳ 副作用记一笔：组名补齐之后，`Marlstone Gala` / `Ordain` / `The Pit Trap` 这 3 条
  *     **编排名**也跟着被翻了，编排名恒英文 **204 → 201**。这是同串同译的必然结果，
  *     不是对「204 条编排名暂不补」那条裁决的翻案，下一轮别把它当成偷补。
+ *   ↳ 第二十二轮：项目所有者要求补完编排名，「暂不补」那条裁决已作废，201 → 1。
+ *     补完之后这 7 条同串**仍然只写在本表**，ARRANGEMENTS 一条都不重复 —— 谁要往
+ *     ARRANGEMENTS 里补这 7 条，MOOD_PANEL 的展开顺序会让它顶掉本表的组名译文。
  *
  * 译名依据（专名一律先过 compendium 英文闸，大小写逐条单独判；括号内为命中的英文串）：
  *   · 生物类取 crucible lang `TAXONOMY.CATEGORIES.*`（最权威的一档）：`Beast`野兽 /
@@ -419,9 +451,98 @@ const SOUNDSCAPE_GROUPS = {
  * ⚠ 这张表**只装编排名**（外加 `Reset`，理由见下）。第二十一轮以前它一张表同时兜两档
  * （9 键里 4 个其实是 optgroup 组名），混着长下去迟早出误命中，已拆开：组名一律进
  * SOUNDSCAPE_GROUPS。实测 42 个组名 / 212 个去重编排名里有 **7 条同串**，同串只写一次、
- * 写在组名表；本表现在的 4 条编排名（`Shent Ruins` / `Shent Ruins Tension` /
- * `The Pit Trap - Intense` / `The Pit Trap - Relaxed`）都**只是编排名、不是组名**，与组名表零重叠。
- * 覆盖面没变：编排名 212 条里翻了 11 条（本表 4 ＋ 组名表里同串的 7），恒英文 201 条。
+ * 写在组名表（`Ancient Ruins` / `Ankarist Theme` / `Lyla Theme` / `Marlstone Gala` /
+ * `Ordain` / `Sin Theme` / `The Pit Trap`），本表**一条都不重复写** —— 重复写会让
+ * MOOD_PANEL 的 `{...SOUNDSCAPE_GROUPS, ...ARRANGEMENTS}` 里后者把组名译文顶掉。
+ *
+ * **第二十二轮：编排名补完**（项目所有者要求；第二十一轮「暂不补」的裁决到此为止）。
+ * 本表 = `Reset` ＋ **204 条编排名**；加上组名表里那 7 条同串，212 条去重编排名里
+ * 覆盖 **211**、恒英文 **1**（`Seven Sails`，理由见文末）。编排名恒英文 **201 → 1**。
+ * 全集不是估计：`4-临时脚本/2026-08-16-round22/probe_groups_r22.mjs` 重跑第二十一轮那套
+ * 双方法互校探针（手写大括号配对正则 ／ node:vm 真解析器 ＋ `obj.id === 注册表键`），
+ * 自报 `A=44 B=44 BAD=0`、两法逐条相同、`267 条 / 去重 212 条 / 同串 7 条`；
+ * 表体由 `gen_arrangements.py` 从该探针产物生成，生成器**要求 212 条各自落进
+ * 「同串／留英／本表」三桶之一**，剩一条就 exit 2，落不进桶的不会被悄悄漏掉。
+ *
+ * ── 结构词统一译法（先定表再逐条套，不要一条一个样）──────────────────
+ *   时段    `Day`白天 · `Night`夜晚
+ *   情绪    `Calm`平静 · `Tension`紧张（＝ MOODS 表，两条通道同译）· `Quiet`静谧 ·
+ *           `Chaos`混乱 · `Sad`哀伤 · `Intense`激烈 · `Relaxed`舒缓 · `test`测试
+ *   曲式    `Main`主段 · `Section N`第 N 段 · `Interlude`间奏 · `Interval`间歇 ·
+ *           `Rises`渐强 · `Verse`主歌 · `Chorus`副歌 · `Bridge`桥段 · `Melody`旋律 ·
+ *           `Rhythm`节律（glossary_ec `Rhythm`＝节律）
+ *   曲风    `Heroic`英勇 · `Atonal`无调性 · `Spooky`阴森 · `Weird`诡谲 · `Dramatic`戏剧性
+ *   战斗    `X Fight` / `X Combat` 一律作「X战斗」，与 SOUNDSCAPE_GROUPS 的战斗组名同调
+ *   分隔符  一律 ` · `（沿用组名表的 `元素战斗 · 火` / 本表原有的 `陷坑 · 激烈`）
+ *   ⚠ `Chaos`＝混乱 与 glossary_ec 的 `Chaos`＝混沌 **有意不同**：这里是实验室里乱作一团的
+ *     环境音，不是宇宙学意义的「混沌」。同理 `Weird`＝诡谲 **不取** glossary_ec 的
+ *     `Weird`＝怪影杀手（那是生物名，另一个域）。
+ *
+ * ── 专名依据（一律先过 compendium 英文闸，大小写逐条单独判；括号内为命中的英文串）──
+ * 探针 `gate_arr.py`（两仓库 en/cn 配对 43115 条英文叶 ＋ 两份 lang）与
+ * `exact_arr.py`（拿 212 条标签整串去撞已译英文叶）自报扫描量，`gloss_probe.py`
+ * 再把每条标签的各级子串拿去查 glossary_ec（7974 条）。三者一致的才写进来：
+ *   · 整串命中已译英文叶（最强）：`Burial Grounds`墓地 · `Fogbound Caverns`雾缚洞窟 ·
+ *     `Inkaro Pools`因卡罗水潭 · `Kaleidoscope Caverns`万花筒洞窟 · `Mycelian Expanse`菌丝旷野 ·
+ *     `Pathways`通路 · `Primordial Bastion`原初堡垒 · `Signara`西格纳拉 ·
+ *     `Spellbreaker Tower`破法者之塔 · `The Ballad of Dereth Erekos`德雷斯·埃雷科斯之歌 ·
+ *     `Yakoshta Mine`雅科什塔矿井 · `Ember Cosmos`余烬寰宇（lang 里 1 条整串）。
+ *   · 去掉结构词后整串命中：`Amerasp Grove`阿梅拉斯普林地 · `Arcturel`阿克图瑞尔 ·
+ *     `Corpin Sanctuary`科尔平庇护所 · `Dripstones`滴石笋 · `Ember's Bounty`余烬的恩赐 ·
+ *     `Forest of Stone`石之森林 · `Golden Flats`金色平原 · `Helkas`赫尔卡斯 · `Nain`奈因 ·
+ *     `Ocean`海洋 · `Ordain Docks`奥尔丹船坞 · `Ordain Flats`奥尔丹平原 ·
+ *     `Ordain Spires`奥尔丹尖塔区 · `Redrak Fields`雷德拉克原野 ·
+ *     `Rustvar Valleys`鲁斯特瓦尔山谷 · `Sarin Strand`萨林海滨 · `Seawall`海堤 ·
+ *     `Skybrush`天刷镇 · `Splinter Canyons`碎裂峡谷 · `Steed's Point`斯蒂德角 ·
+ *     `The Teeth`卡迪索斯之牙 · `Tidal Pools`潮汐池 · `Verdant Paths`翠绿径 ·
+ *     `Wedgelands`楔地 · `Yakoshta`雅科什塔 · `Graven's Rest`格雷文之憩。
+ *   · 命中同族短名，按同一构词法套用：`The Bleak Archive`黯淡秘库 → `Bleak Archive` ·
+ *     `The Cauldron`坩埚湖 → `Cauldron` · `Volcanic Bluffs`火山峭壁 → `Bluffs`峭壁 ·
+ *     `Clouded Jungle`迷雾丛林 → `Jungle`丛林 · `Mountains of the Sun`太阳群山 →
+ *     `Mountains`群山 · `The Broken Tower`破碎之塔 · `The Scrapyard`废料场 ·
+ *     `The Waterworks`水务工程 · `Kalion Stadium Underworks`卡利昂竞技场地下工事 →
+ *     `Stadium Underworks`竞技场地下工事 · `Overwatch Garrison`守望驻军营 →
+ *     `Garrison`驻军营 · `Redrak Farm`雷德拉克农场 ＋ `Ooze Pools`软泥池 →
+ *     `Ooze Farm`软泥农场 · `Toothbreaker Hideout`碎牙帮藏身处 ＋ `Raiders`劫掠者 →
+ *     `Raiders' Hideout`劫掠者藏身处 · `Noxious Spit`剧毒唾液 → `Noxious Cave`剧毒洞穴 ·
+ *     `Clockwork Feather`发条羽毛 ＋ GM 指南 `Dungeon`地下城 → `Clockwork Dungeon`发条地下城 ·
+ *     `Writhing Grave`蠕动之墓 → `Kaleidoscope Grave`万花筒之墓 ·
+ *     `Brevin Festival`布雷文庆典 → `Helkas Festival`赫尔卡斯庆典 ·
+ *     `Vineyard Attack`葡萄园袭击 → `Helkas Attack`赫尔卡斯袭击 ·
+ *     `Vista: X`＝远景：X → `Camp Vista`营地远景 ·
+ *     `A Song for Lady Stonecraft`献给石艺女士的一首歌 → `Lady Stonecraft`石艺女士 ·
+ *     `Shrine to Spectra`斯佩克特拉圣祠（Shrine ＋ 神名）→ `Shrine of Nite`奈特圣祠
+ *     （`Nite` 是碎片之神，合集 `pages/Nite/name` 整串作「奈特 Nite」）·
+ *     `Signara Water`西格纳拉水域 → `Golden Flats Water`金色平原水域 ·
+ *     `Ordain Interior vista`奥尔丹室内远景（合集正文逐字）→ `Ordain Interior`奥尔丹室内 ·
+ *     `Mutagist X`突变学派X ＋ `Empty Laboratory`空实验室 → `Mutagist Laboratory`突变学派实验室 ·
+ *     `Bandit`强盗（`Carmin the Bandit`强盗卡尔敏）· `Drake`龙兽 · `Rejarh`雷贾尔
+ *     （合集正文「浮空之城雷贾尔沉入了海浪之下」）→ `Sunken Rejarh`沉没的雷贾尔 ·
+ *     `Seydiri`塞迪里（合集正文「塞迪里文化」，与组名 `Seydiri Theme`＝塞迪里主题 同调）。
+ *   · glossary_ec 定稿的单词：`Bloodletter`放血者 · `Spires`尖塔 · `Ancient`远古 ·
+ *     `Giants`巨人 · `Upper`上层 / `Lower`下层 · `Water`水域 · `Vista`远景 · `Folk`民谣
+ *     （＝三条 `X Folk` 组名的既定译法）。
+ *   · 依据只到「同族词 ＋ 构词」这一档的 4 条，写明以免下轮误当定稿：
+ *     `Blood Woods`血色森林（`Woods` 两仓库 0 命中；按同组 `Golden Flats`＝金色平原 的
+ *     「颜色词＋地貌」构词，`Forest`＝森林 取自 `Forest of Stone`＝石之森林）·
+ *     `Rock Spires`岩石尖塔（`Rock Spires` 整串 0 命中，`Spires`＝尖塔 有据）·
+ *     `Shipwreck`沉船（整串 0 命中，通用名词）·
+ *     `Ocean Ship`海洋 · 船上（`Ship` 无已译叶；同组另两条是 `Ocean Day/Night`，
+ *     故按「海洋 ＋ 变体」处理，不当成一个地名）。
+ *
+ * ⚠ `Marlstone Gala Tension` 取组名表的「马尔石晚会」，**不取** glossary_ec 的
+ *   「马尔斯通晚会」：英文闸下 compendium 三处（`The Marlstone Gala` / `Vista: Marlstone Gala`）
+ *   全作「马尔石晚会」，组名表也已定「马尔石晚会」。词表那条是孤例，本文件不跟。
+ * ⚠ `Shent Water Temple` 作「申特水之神殿」（跟组名 `Water Temple`＝水之神殿），
+ *   **不写成**合集里那座建筑的场景名「申特月神殿」（`Shent Moon Temple`）—— 英文闸按键判，
+ *   本表的键是 `Shent Water Temple`，上游对同一栋楼有两种写法，各译各的。
+ * ⚠ 有 4 条译文一串对两个键，全部是**上游拼写变体指同一处地方**，不是撞名：
+ *   `Teeth Day/Night` ↔ `The Teeth Day/Night`、`Rustvar Valley Day/Night` ↔
+ *   `Rustvar Valleys Day/Night`。生成器专门把这一项打印出来核对过（只此 4 条）。
+ * ⚠ `Seven Sails` **故意留英**：两仓库 43115 条英文叶里 `Seven Sails` en-hits=0、
+ *   连 `Sails` 单词都 0 命中，glossary_ec 也没有，模块自带语料里查不到这个名字指什么
+ *   （酒馆？船？曲名？）。宁可露英文也不猜 —— 下一轮的英文残留扫描若报到这 1 条，
+ *   属**预期内**，按本条驳回；等上游正文出现这个名字再补。
  */
 const ARRANGEMENTS = {
   // `Reset` 既不是组名也不是编排名：它是 ember.mjs:16255 `${channel.capitalize()}: Reset`
@@ -433,10 +554,211 @@ const ARRANGEMENTS = {
   //   与同一轮 `Usage` 那条 MJS_ORPHAN_CN +1 是两笔相反的变化，B 段总数 33 → 32 是两者相抵后的结果。
   //   下一轮对 B 段计数时别把这两笔当成没发生。
   "Reset": "重置",
-  "Shent Ruins": "申特遗迹",
-  "Shent Ruins Tension": "申特遗迹 · 紧张",
-  "The Pit Trap - Intense": "陷坑 · 激烈",
-  "The Pit Trap - Relaxed": "陷坑 · 舒缓"
+
+  "Abyssal Fight Interlude":          "深渊战斗 · 间奏",
+  "Abyssal Fight Main":               "深渊战斗 · 主段",
+  "Abyssal Fight Rises":              "深渊战斗 · 渐强",
+  "Aedir Garrison Exploration":       "艾迪尔驻军营探索",
+  "Amerasp Grove Day":                "阿梅拉斯普林地 · 白天",
+  "Amerasp Grove Night":              "阿梅拉斯普林地 · 夜晚",
+  "Ancient Giants":                   "远古巨人",
+  "Ancient Giants Tension":           "远古巨人 · 紧张",
+  "Ancient Ruins Magic Depths":       "远古遗迹 · 魔法深处",
+  "Arcane Theme Calm":                "奥术主题 · 平静",
+  "Arcane Theme Tension":             "奥术主题 · 紧张",
+  "Arcturel Day":                     "阿克图瑞尔 · 白天",
+  "Arcturel Night":                   "阿克图瑞尔 · 夜晚",
+  "Arcturel Tension":                 "阿克图瑞尔 · 紧张",
+  "Bandit Fight Bridge":              "强盗战斗 · 桥段",
+  "Bandit Fight Chorus":              "强盗战斗 · 副歌",
+  "Bandit Fight Verse":               "强盗战斗 · 主歌",
+  "Beast Fight Heroic":               "野兽战斗 · 英勇",
+  "Beast Fight Interval":             "野兽战斗 · 间歇",
+  "Beast Fight Main":                 "野兽战斗 · 主段",
+  "Bleak Archive":                    "黯淡秘库",
+  "Blood Woods Day":                  "血色森林 · 白天",
+  "Blood Woods Night":                "血色森林 · 夜晚",
+  "Blood Woods Tension":              "血色森林 · 紧张",
+  "Bloodletter Cave":                 "放血者洞穴",
+  "Bluffs Day":                       "峭壁 · 白天",
+  "Bluffs Night":                     "峭壁 · 夜晚",
+  "Bluffs Tension":                   "峭壁 · 紧张",
+  "Broken Tower":                     "破碎之塔",
+  "Burial Grounds":                   "墓地",
+  "Camp Vista":                       "营地远景",
+  "Cauldron Day":                     "坩埚湖 · 白天",
+  "Cauldron Night":                   "坩埚湖 · 夜晚",
+  "Cauldron Tension":                 "坩埚湖 · 紧张",
+  "Celestial Combat Section 1":       "天界生物战斗 · 第一段",
+  "Celestial Combat Section 2":       "天界生物战斗 · 第二段",
+  "Celestial Combat Section 3":       "天界生物战斗 · 第三段",
+  "Cindaric Temple Calm":             "辛达里克神殿 · 平静",
+  "Cindaric Temple Tension":          "辛达里克神殿 · 紧张",
+  "Clockwork Dungeon":                "发条地下城",
+  "Construct Combat Section 1":       "构装体战斗 · 第一段",
+  "Construct Combat Section 2":       "构装体战斗 · 第二段",
+  "Construct Combat Section 3":       "构装体战斗 · 第三段",
+  "Corpin Sanctuary Day":             "科尔平庇护所 · 白天",
+  "Corpin Sanctuary Night":           "科尔平庇护所 · 夜晚",
+  "Dripstones Day":                   "滴石笋 · 白天",
+  "Dripstones Night":                 "滴石笋 · 夜晚",
+  "Dripstones Tension":               "滴石笋 · 紧张",
+  "Dungeon Calm":                     "地下城 · 平静",
+  "Dungeon Tension":                  "地下城 · 紧张",
+  "Earth Elemental Combat Section 1": "土元素战斗 · 第一段",
+  "Earth Elemental Combat Section 2": "土元素战斗 · 第二段",
+  "Ember Cosmos":                     "余烬寰宇",
+  "Ember's Bounty Calm":              "余烬的恩赐 · 平静",
+  "Ember's Bounty Day":               "余烬的恩赐 · 白天",
+  "Ember's Bounty Night":             "余烬的恩赐 · 夜晚",
+  "Ember's Bounty Tension":           "余烬的恩赐 · 紧张",
+  "Fire Elemental Combat Section 1":  "火元素战斗 · 第一段",
+  "Fire Elemental Combat Section 2":  "火元素战斗 · 第二段",
+  "Fogbound Caverns":                 "雾缚洞窟",
+  "Fogbound Caverns Tension":         "雾缚洞窟 · 紧张",
+  "Forest of Stone Day":              "石之森林 · 白天",
+  "Forest of Stone Night":            "石之森林 · 夜晚",
+  "Frost Elemental Combat Section 1": "冰霜元素战斗 · 第一段",
+  "Frost Elemental Combat Section 2": "冰霜元素战斗 · 第二段",
+  "Golden Flats Day":                 "金色平原 · 白天",
+  "Golden Flats Night":               "金色平原 · 夜晚",
+  "Golden Flats Tension":             "金色平原 · 紧张",
+  "Golden Flats Water Day":           "金色平原水域 · 白天",
+  "Golden Flats Water Night":         "金色平原水域 · 夜晚",
+  "Graven's Rest Day":                "格雷文之憩 · 白天",
+  "Graven's Rest Night":              "格雷文之憩 · 夜晚",
+  "Graven's Rest Tension":            "格雷文之憩 · 紧张",
+  "Graven's Rest test":               "格雷文之憩 · 测试",
+  "Helkas Attack":                    "赫尔卡斯袭击",
+  "Helkas Attack (Drakes)":           "赫尔卡斯袭击（龙兽）",
+  "Helkas Attack (Raiders)":          "赫尔卡斯袭击（劫掠者）",
+  "Helkas Day":                       "赫尔卡斯 · 白天",
+  "Helkas Festival":                  "赫尔卡斯庆典",
+  "Helkas Night":                     "赫尔卡斯 · 夜晚",
+  "Helkas Sad":                       "赫尔卡斯 · 哀伤",
+  "Helkas Tension":                   "赫尔卡斯 · 紧张",
+  "Illusory Fight Atonal":            "幻象战斗 · 无调性",
+  "Illusory Fight Main":              "幻象战斗 · 主段",
+  "Inkaro Pools":                     "因卡罗水潭",
+  "Jungle Day":                       "丛林 · 白天",
+  "Jungle Night":                     "丛林 · 夜晚",
+  "Jungle Tension":                   "丛林 · 紧张",
+  "Kaleidoscope Caverns":             "万花筒洞窟",
+  "Kaleidoscope Caverns Tension":     "万花筒洞窟 · 紧张",
+  "Kaleidoscope Grave":               "万花筒之墓",
+  "Lady Stonecraft":                  "石艺女士",
+  "Lower Arcturel Day":               "下层阿克图瑞尔 · 白天",
+  "Lower Arcturel Night":             "下层阿克图瑞尔 · 夜晚",
+  "Marlstone Gala Tension":           "马尔石晚会 · 紧张",
+  "Monstrosity Combat Section 1":     "畸怪战斗 · 第一段",
+  "Monstrosity Combat Section 2":     "畸怪战斗 · 第二段",
+  "Monstrosity Combat Section 3":     "畸怪战斗 · 第三段",
+  "Mountains Day":                    "群山 · 白天",
+  "Mountains Night":                  "群山 · 夜晚",
+  "Mountains Tension":                "群山 · 紧张",
+  "Mutagenic Fight Main":             "诱变战斗 · 主段",
+  "Mutagenic Fight Melody":           "诱变战斗 · 旋律",
+  "Mutagenic Fight Rhythm":           "诱变战斗 · 节律",
+  "Mutagist Laboratory Chaos":        "突变学派实验室 · 混乱",
+  "Mutagist Laboratory Quiet":        "突变学派实验室 · 静谧",
+  "Mycelian Expanse":                 "菌丝旷野",
+  "Nain Day":                         "奈因 · 白天",
+  "Nain Night":                       "奈因 · 夜晚",
+  "Noxious Cave":                     "剧毒洞穴",
+  "Ocean Day":                        "海洋 · 白天",
+  "Ocean Night":                      "海洋 · 夜晚",
+  "Ocean Ship":                       "海洋 · 船上",
+  "Ocean Tension":                    "海洋 · 紧张",
+  "Ooze Farm Day":                    "软泥农场 · 白天",
+  "Ooze Farm Night":                  "软泥农场 · 夜晚",
+  "Ooze Fight - Dramatic":            "软泥怪战斗 · 戏剧性",
+  "Ooze Fight - Weird":               "软泥怪战斗 · 诡谲",
+  "Ordain Docks Day":                 "奥尔丹船坞 · 白天",
+  "Ordain Docks Night":               "奥尔丹船坞 · 夜晚",
+  "Ordain Docks Tension":             "奥尔丹船坞 · 紧张",
+  "Ordain Flats Day":                 "奥尔丹平原 · 白天",
+  "Ordain Flats Night":               "奥尔丹平原 · 夜晚",
+  "Ordain Flats Tension":             "奥尔丹平原 · 紧张",
+  "Ordain Folk":                      "奥尔丹民谣",
+  "Ordain Interior Day":              "奥尔丹室内 · 白天",
+  "Ordain Interior Night":            "奥尔丹室内 · 夜晚",
+  "Ordain Spires Day":                "奥尔丹尖塔区 · 白天",
+  "Ordain Spires Night":              "奥尔丹尖塔区 · 夜晚",
+  "Ordain Spires Tension":            "奥尔丹尖塔区 · 紧张",
+  "Ordain Temple":                    "奥尔丹神殿",
+  "Pathways":                         "通路",
+  "Pathways Tension":                 "通路 · 紧张",
+  "Primordial Bastion":               "原初堡垒",
+  "Raider Fight - Intense":           "劫掠者战斗 · 激烈",
+  "Raider Fight - Main":              "劫掠者战斗 · 主段",
+  "Raiders' Hideout Day":             "劫掠者藏身处 · 白天",
+  "Raiders' Hideout Night":           "劫掠者藏身处 · 夜晚",
+  "Redrak Fields Day":                "雷德拉克原野 · 白天",
+  "Redrak Fields Night":              "雷德拉克原野 · 夜晚",
+  "Redrak Fields Tension":            "雷德拉克原野 · 紧张",
+  "Rock Spires Day":                  "岩石尖塔 · 白天",
+  "Rock Spires Night":                "岩石尖塔 · 夜晚",
+  "Rock Spires Tension":              "岩石尖塔 · 紧张",
+  "Rustvar Valley Day":               "鲁斯特瓦尔山谷 · 白天",
+  "Rustvar Valley Night":             "鲁斯特瓦尔山谷 · 夜晚",
+  "Rustvar Valley Tension":           "鲁斯特瓦尔山谷 · 紧张",
+  "Rustvar Valleys Day":              "鲁斯特瓦尔山谷 · 白天",
+  "Rustvar Valleys Night":            "鲁斯特瓦尔山谷 · 夜晚",
+  "Sarin Strand Day":                 "萨林海滨 · 白天",
+  "Sarin Strand Night":               "萨林海滨 · 夜晚",
+  "Sarin Strand Tension":             "萨林海滨 · 紧张",
+  "Scrapyard":                        "废料场",
+  "Seawall Day":                      "海堤 · 白天",
+  "Seawall Night":                    "海堤 · 夜晚",
+  "Seawall Tension":                  "海堤 · 紧张",
+  "Seydiri Calm":                     "塞迪里 · 平静",
+  "Seydiri Tension":                  "塞迪里 · 紧张",
+  "Shent Ruins":                      "申特遗迹",
+  "Shent Ruins Tension":              "申特遗迹 · 紧张",
+  "Shent Water Temple Day":           "申特水之神殿 · 白天",
+  "Shent Water Temple Night":         "申特水之神殿 · 夜晚",
+  "Shipwreck Day":                    "沉船 · 白天",
+  "Shipwreck Night":                  "沉船 · 夜晚",
+  "Shrine of Nite Calm":              "奈特圣祠 · 平静",
+  "Shrine of Nite Tension":           "奈特圣祠 · 紧张",
+  "Signara":                          "西格纳拉",
+  "Signara Calm":                     "西格纳拉 · 平静",
+  "Signara Tension":                  "西格纳拉 · 紧张",
+  "Skybrush Day":                     "天刷镇 · 白天",
+  "Skybrush Night":                   "天刷镇 · 夜晚",
+  "Spellbreaker Tower":               "破法者之塔",
+  "Splinter Canyons Day":             "碎裂峡谷 · 白天",
+  "Splinter Canyons Night":           "碎裂峡谷 · 夜晚",
+  "Splinter Canyons Tension":         "碎裂峡谷 · 紧张",
+  "Stadium Underworks":               "竞技场地下工事",
+  "Steed's Point Day":                "斯蒂德角 · 白天",
+  "Sunken Rejarh":                    "沉没的雷贾尔",
+  "Teeth Day":                        "卡迪索斯之牙 · 白天",
+  "Teeth Night":                      "卡迪索斯之牙 · 夜晚",
+  "Teeth Tension":                    "卡迪索斯之牙 · 紧张",
+  "The Ballad of Dereth Erekos":      "德雷斯·埃雷科斯之歌",
+  "The Pit Trap - Intense":           "陷坑 · 激烈",
+  "The Pit Trap - Relaxed":           "陷坑 · 舒缓",
+  "The Teeth Day":                    "卡迪索斯之牙 · 白天",
+  "The Teeth Night":                  "卡迪索斯之牙 · 夜晚",
+  "Tidal Pools Day":                  "潮汐池 · 白天",
+  "Tidal Pools Night":                "潮汐池 · 夜晚",
+  "Tidal Pools Tension":              "潮汐池 · 紧张",
+  "Undead Fight - Atonal":            "不死生物战斗 · 无调性",
+  "Undead Fight - Main":              "不死生物战斗 · 主段",
+  "Undead Fight - Spooky":            "不死生物战斗 · 阴森",
+  "Upper Arcturel Day":               "上层阿克图瑞尔 · 白天",
+  "Upper Arcturel Night":             "上层阿克图瑞尔 · 夜晚",
+  "Verdant Paths Day":                "翠绿径 · 白天",
+  "Verdant Paths Night":              "翠绿径 · 夜晚",
+  "Verdant Paths Tension":            "翠绿径 · 紧张",
+  "Waterworks":                       "水务工程",
+  "Wedgelands Day":                   "楔地 · 白天",
+  "Wedgelands Night":                 "楔地 · 夜晚",
+  "Wedgelands Tension":               "楔地 · 紧张",
+  "Yakoshta Day":                     "雅科什塔 · 白天",
+  "Yakoshta Mine":                    "雅科什塔矿井",
+  "Yakoshta Night":                   "雅科什塔 · 夜晚"
 };
 
 /**
@@ -545,6 +867,20 @@ const RARITIES = {
  * `Kavir` 全库（含英文基线）只有这 8 处悬空引用、无任何定稿，音译作「卡维尔」暂定。
  *
  * ⚠ 只登记这些**悬空 id**。真实 id 的叶子已经是 babele 译好的中文，查表落空原样返回，不会被改。
+ *
+ * ⚠ 本表（连同 MISSING_CULTURES / MISSING_PATHS）的键是**合集文档的 `system.identifier`，不是显示串**。
+ *   要证明某条兜底已经多余，唯一有意义的证据是「合集 index 里出现了 identifier 等于该键的文档」：
+ *     `game.packs.get(ember.CONST.CHARACTER_OPTIONS_PACK).index.some(i => i.system?.identifier === key)`
+ *   —— 拿 .mjs 当语料 grep **两个方向都证不了**。2026-08-16 第二十四轮把面板报的 11 条
+ *   「上游现在提供了」逐条看了上下文，**11/11 全是误报**：
+ *     · `Arcturian`(187 次) / `Ordani`(291 次) 的独立成词全是**形容词**（Arcturian Folk 曲目名、
+ *       Ordani Tree 场景素材…），没有一处是血统/文化条目；
+ *     · `Human` / `Keth` / `Kivahr` / `Wirrun` 命中的是 **TokenMaker 纸娃娃模板**（`id: "human"` 小写，
+ *       与合集 identifier 不同源）；`Lumek` 唯一的独立成词是注释横幅 :127412；
+ *     · `Oaken` / `Bejak` / `Waerd` 独立成词 **0 次** —— 全是 `PlateHeavyWaerd` 这类部件 id 的尾巴，
+ *       判据的 `has()` 是裸 `includes` 没有词边界（ember-cn-selfcheck.mjs:99-104）。
+ *   旁证：真实 id 一律带 `ember` 前缀（`HOOKS.emberKethLineage` :125902、合集里 `[[/culture emberOrdani`），
+ *   我们兜的正是正文里**漏写前缀**的那批，两者并存、不冲突。**兜底一条都不能撤。**
  */
 const MISSING_ANCESTRIES = {
   "Arcturian": "阿克图里安 Arcturian",
@@ -793,6 +1129,13 @@ const DIALOG_UI = {
   "Restore or disable power to the Stealth Field Generator?": "恢复还是切断隐形力场发生器的供能？", // 95618
   "Engage Lockdown": "启动封锁", "Lift Lockdown": "解除封锁",            // 113776
   // 银光束安保控制的两段正文：`<strong>lockdown</strong>` 把整段切成三个文本节点
+  // ⚠ 下面两条长键开头那个 `?` **不是我们把前缀吃掉留下的残渣**（2026-08-16 第二十四轮证伪了
+  //   这个猜测）：上游把问号写在 `<strong>lockdown</strong>` 的**外面**（`…</strong>? Security doors…`），
+  //   所以第三个文本节点天然以 `?` 开头，键的形态是对的，一个字符都不能删。
+  //   同段前两个碎片 `Engage` / `lockdown` 早在表里且从没报过，正说明切分点认得没错。
+  // ⚠ 这两条在自检面板「上游字面量存在性」那一档必报「查无此串」：源码 113771 / 113773 用跨行
+  //   `+` 把整句劈成两半（`…construct elevators` ｜ ` descend to the Construct Assembly.</p>`），
+  //   完整字面量在源码里根本不存在。判据没做「相邻字面量相加先合成」，是假阳性，不是失效。
   // ⚠ 这三条是**句子碎片**，不是术语。B 段拿 crucible lang 的
   //   `ACTOR.FIELDS.movement.engagement.labelShort`＝交战 来比这里的 `Engage`＝启动，比的是
   //   「启动封锁」的动词与战斗中的「交战」状态，不同域；已裁：不统一。
@@ -880,6 +1223,13 @@ const DIALOG_UI = {
     "升降台将下降至深处。请为队伍选择一个目的地。",                        // 96462-96463
   // 魂缚进阶确认框（126639 / 126660）的正文同样被 <strong> 切碎，按碎片建键；
   // 尾段源码里带换行缩进，靠 translateNode 的空白折叠回退命中。
+  // ⚠ 2026-08-16 第二十四轮回源码复核，两条既有判断都成立：`rank 1 (Lesser Soulmark)` 是死字面量
+  //   但与前面的 `at` 之间隔着真实换行 + 19 空格（所以源码里没有 `at rank 1 (…` 这个子串）；
+  //   `rank ${nextRank} (${nextLabel})?` 是双插值，取值域由 :126657 的 `{2:"Greater Soulmark",
+  //   3:"Deathly Soulmark"}` 写死、:126650 的 `if (nextRank > 3) return` 兜住，只可能是 2 或 3。
+  //   三条都会被「上游字面量存在性」那一档报「查无此串」（空白差异 + 模板插值两个盲区），是假阳性。
+  //   ⚠ 也**不要因此挪进 PATTERNS**：变量位是闭枚举、且它们是**碎片**，DIALOG_UI 是作用域表
+  //   （只在认出归属的框里查），挪进全局 PATTERNS 会把 `to rank N (…)?` 这种通用形状暴露到别的模块。
   // 拼回去是「将 <天赋> 天赋添加给 <角色> ，阶位 1（次等魂印）？」/
   //         「将 <天赋> 天赋于 <角色> 身上升至阶位 2（高等魂印）？」
   "Add the": "将", "talent to": "天赋添加给",                           // 126639
@@ -911,10 +1261,13 @@ const DIALOG_UI = {
   "No destinations are currently reachable. Adjust the track levers and try again.":
     "当前没有可到达的目的地。请调整轨道拉杆后重试。",                      // 112042
   "Activate this mine cart with no passenger?": "在无乘客的情况下启动这辆矿车？", // 112066
+  // ⚠ 下面两条串在 0.6.0 里逐字未改，只是被换行缩进劈开（源码里 `game state. ` 与 `Are you sure`
+  //   之间是换行 + 12 空格），所以「上游字面量存在性」那一档必报「查无此串」—— 判据没做空白折叠，
+  //   而运行时靠 translateNode 的折叠回退命中。2026-08-16 第二十四轮复核，两条注释均准确。
   "Resetting the event step for this event may introduce critical errors into your Ember game state. Are you sure you wish to proceed?":
-    "重置该事件的步骤可能给你的余烬战役状态引入严重错误。确定要继续吗？",    // 36935（模板串跨行，靠折叠空白后命中）
+    "重置该事件的步骤可能给你的余烬战役状态引入严重错误。确定要继续吗？",    // 36934-36936（模板串跨行，靠折叠空白后命中）
   "Beginning this event may introduce critical errors into your Ember game state. Are you sure you wish to proceed?":
-    "开始该事件可能给你的余烬战役状态引入严重错误。确定要继续吗？"         // 36952（同上）
+    "开始该事件可能给你的余烬战役状态引入严重错误。确定要继续吗？"         // 36952-36954（同上）
 };
 
 /** 完全匹配即可替换的字符串 */
@@ -931,7 +1284,13 @@ const EXACT = {
   //    :43 attunement / :63 token 四条才是裸英文。也就是说 Crucible 世界里 localize 吐出的是
   //    crucible-cn 的中文，这个裸键永远接不到自己人，却仍会去改任何第三方窗口里孤零零的
   //    "Ancestry" 文本节点 —— 是越界风险而不只是死重量。它只在 dnd5e 世界活（ember.mjs:121864
-  //    `label: "Ancestry"`），那边宿主是 EmberHeroCreationSheet，作用域表照样够得到。
+  //    `label: "Ancestry"`），那边宿主是 **EmberCharacterCreationSheet**（ember.mjs:121801
+  //    `class EmberCharacterCreationSheet extends HandlebarsApplicationMixin(ActorSheetV2)`，
+  //    #STEPS 就在 :121861 起），作用域表照样够得到。
+  //    ⚠ 2026-08-16 第二十五轮订正：原注释写的 `EmberHeroCreationSheet` 是**另一个类**
+  //    （crucible-async.mjs:4，Crucible 分支的创角向导），ember.mjs:121864 不在它里面。
+  //    两个类名都以 `Ember` 开头，`/^Ember/` 主闸对二者都放行，所以这处笔误不影响行为、
+  //    只会误导下一个查上游的人 —— 别再把 dnd5e 分支的证据挂到 crucible 分支那个类上。
   "Culture": "文化",
   "Path": "道途",
   "Attunement": "同调",
@@ -955,11 +1314,20 @@ const EXACT = {
   "Critical Success": "大成功",
   "Critical Failure": "严重失败",
 
-  // 事件状态提示
-  "Event Completed": "事件已完成",
-  "Event Not Completed": "事件未完成",
-  "Event Outcome Completed": "事件结果已完成",
-  "Event Outcome Not Completed": "事件结果未完成",
+  // 事件状态提示。上游是**模板串三元**：
+  //   ember.mjs:23047 `tooltipText: \`Event ${event.complete ? "Completed" : "Not Completed"}\``
+  //   ember.mjs:23042 `tooltipText: \`Event Outcome ${outcome.complete ? "Completed" : "Not Completed"}\``
+  // 落点是 `dataset.tooltipText` → DOM 的 `data-tooltip-text`，被 translateNode 的属性白名单接住。
+  // ⚠ 两个变量位都是**闭枚举**（complete 只能 true/false），下面四条键已经把取值域枚举完 ——
+  //   2026-08-16 第二十四轮复核后裁定：**不要挪进 PATTERNS**，宽正则命中面一点没多、误伤面反而变大。
+  // ⚠ 源码里只有 `Event ` / `Event Outcome ` 与两个三元分支共三段独立字面量，拼不出完整字面量。
+  //   第二十四轮的自检面板必报这四条；2026-08-16 第二十五轮判据加了**三元插值展开**
+  //   （`${x ? "A" : "B"}` 展开成两支再入「拼接展开（推导）」语料），这四条已不再挂榜。
+  //   命中在推导语料上，证据力比直接命中弱一档 —— 这是预期的，别当成硬证据。
+  "Event Completed": "事件已完成",                  // ember.mjs:23047（模板串三元拼接）
+  "Event Not Completed": "事件未完成",              // 同上
+  "Event Outcome Completed": "事件结果已完成",       // ember.mjs:23042（模板串三元拼接）
+  "Event Outcome Not Completed": "事件结果未完成",   // 同上
 
   // 角色卡 / 日志分节标题
   "Gamemaster Information": "游戏主持人信息",
@@ -1032,6 +1400,20 @@ const EXACT = {
 
   // 法典（EmberCodex，ember.mjs:24810）与创角向导（EmberHeroCreationSheet）的模板裸串。
   // 两个宿主都命中 patchRenderedApplications 的 `/^Ember/` 闸，纯粹是原先表里没有这些键。
+  //
+  // ⚠ 这一整批的出处是 `.hbs`。第二十四轮的判据只 fetch 两份 .mjs，于是这批键年年上
+  //   「上游查无此串」的榜；那一轮逐条回源码核过：八条（Entry Date / 四条 Select a … /
+  //   Increase|Decrease Ability Score / Spend 9 points…）在 0.6.0 里**一个字都没改**、
+  //   行号也一处没漂 —— 判据是假阳性，键全部有效。
+  //   2026-08-16 第二十五轮判据把 `templates/**` 的 .hbs 补进语料，这批键已不再挂榜。
+  //   同一批里的 `Quest`(mjs 命中 75 处) / `Points`(70) / `Ability Scores`(3) / `Uncategorized`(1)
+  //   之所以当时没上榜，纯粹是这些词在 ember.mjs 里**巧合出现**，与它们活不活没有任何因果关系
+  //   —— 「搜得到」不构成证据，这一档只能证伪不能证实（判据现在给短键加了词边界，
+  //   巧合命中少了一批，但这条结论不变：通过不是证据，只有失败才是线索）。
+  // ⚠ 四条 `Select a … from the left menu.` **不是同一模板的四个实例**，是四个 .hbs 文件里
+  //   四条互相独立的死字面量（quests:40 / bestiary:46 / characters:48 / discoveries:46），
+  //   其中 `a biome or location` 是并列名词、结构上就套不进单占位模板 ——
+  //   已裁：**不要挪进 PATTERNS**，挪了等于拿宽正则换掉精确键，只增大误伤面。
   "Entry Date": "条目日期",                                          // codex/journal.hbs:7
   "Quest": "任务",                                                  // codex/quests.hbs:7
   "Select a quest from the left menu.": "请从左侧菜单选择一个任务。",      // codex/quests.hbs:40
@@ -1085,8 +1467,15 @@ const DATE_AGES = {
 const PATTERNS = [
   // `Result of X` **只在 dnd5e 分支产出**（ember.mjs:22909/22912，crucible 分支走
   // 22910/22913 直接输出 Critical Failure / Critical Success，那两串在 EXACT 里）。
-  // 叶子只可能是 `18+` / `8-` 这类 DC 数字串，所以不查表，原样带回。
-  { re: /^Result of (.+)$/, cn: (m) => `结果：${m[1]}` },
+  // 上游 enrichCriticalResult（:22905-22913）先 `dc = Number(dc)` 再 `if (!Number.isInteger(dc)) return match`，
+  // 然后只可能拼出 `Result of ${dc - 5}-` 或 `Result of ${dc + 5}+` —— 叶子**必然**是
+  // 「可选负号 + 数字 + 一个 `+`/`-` 后缀」，别的形状上游一个都产不出来。
+  // ⚠ 2026-08-16 第二十五轮收紧：原来写的是 `^Result of (.+)$`，会把任何以 "Result of " 开头的
+  //   英文句子吃掉 —— 复核造的反例 `Result of the investigation was inconclusive` 当场被译成
+  //   「结果：the investigation was inconclusive」。PATTERNS 只在 Ember 自己的窗口 / 认出归属的框 /
+  //   注入子树 / 聊天卡上跑，爆炸半径有限，但 Ember 窗口内的日志正文是真会咬到的。
+  //   收紧后正例（Result of 13+ / Result of 3- / Result of -2-）逐条实测仍然翻得动。
+  { re: /^Result of (-?\d+[+-])$/, cn: (m) => `结果：${m[1]}` },
   // 恩惠骰 / 祸骰。上游 enrichAdvantage(ember.mjs:22890) 拼 `+${n} Boons` / `${n} Banes`，
   // n 自带负号，故符号位写成可选。取代原先 EXACT 里 ±1..±3 那六个枚举键。
   { re: /^([+-]?\d+) (Boons|Banes)$/, cn: (m) => `${m[1]} ${m[2] === "Boons" ? "恩惠骰" : "祸骰"}` },
@@ -1102,12 +1491,33 @@ const PATTERNS = [
   //             → `Music: Shent Ruins (Tension)`
   // 最后那种复合叶是原先 PREFIXED 两条接不住的（整串查表落空 → 前缀中文、叶子全英）。
   // channel 只有 music / environment 两个（ember.mjs:15643），mood 只有 calm / tension（:15606），
-  // 所以尾巴写成穷举的可选组，不会把别的「…（X）」形状吃掉；叶子查不到照旧原样带回。
+  // 所以尾巴写成穷举的可选组，不会把别的「…（X）」形状吃掉。
   // 已发布语料里 46 个 `[[/soundscape …]]` 标记暂无一条同时带 soundscapeId 与 mood，
   // 这条是给 GM 自己写的标记兜底的。
+  // ⚠ 2026-08-16 第二十五轮收紧：**叶子必须在 ARRANGEMENT_LEAVES 里查得到才翻**，查不到整串不动。
+  //   原来的写法是「叶子查不到就原样带回、前缀照翻」，于是任何 `Music: …` / `Environment: …`
+  //   形状的英文句子都会被改成「音乐：…」/「环境音：…」—— 复核造的两条反例
+  //   `Music: my custom playlist` 与 `Environment: Rain` 当场被误翻（`Rain` 只在 WEATHER 里，
+  //   不是编排名）。上游这一支的叶子只可能是 `arrangement.label` 或 `Reset`，两者都在本表里，
+  //   上游哪天新增编排名，退化成整串留英（不误翻），而那条新编排名会由自检面板的
+  //   ARRANGEMENTS 那一档另行报出来，不会静默。
+  // ⚠ **代价如实记一笔**（探针 `4-临时脚本/2026-08-16-round25/probe_patterns_c.mjs`
+  //   从 ember.mjs 现抠全部 219 条编排名逐条过 translateText，双向验）：收紧后翻不动的
+  //   **恰好 8 条**，逐条有据、且它们本来就只有前缀是中文、叶子照旧英文：
+  //     · `Seven Sails` —— 第二十二轮裁定**故意留英**（见 ARRANGEMENTS 表注释）；
+  //     · `Events` 一条属音景 `events`（"Ember Events"，type `events`）；
+  //     · `Clear`/`Drizzle`/`Rain`/`Thunderstorm`/`Arcane Fog`/`Mayis Storm` 六条属音景
+  //       `weather`（"Ember Weather"，type `weather`）。这两个音景的 type 不是 music/environment，
+  //       **不进播放列表侧栏那两个下拉**（ember.mjs:15916-15922 只取 music 41 + environment 1
+  //       共 42 个），所以第二十一/二十二轮建表时它们本来就不在全集里（212 vs 219）。
+  //   其中 `Rain` / `Clear` / `Drizzle` 正是把它们放回查表面就会重新咬到散文的那几个常用词
+  //   —— 复核的反例 `Environment: Rain` 就是它。所以**不要**为了这 8 条把闸放宽回去。
+  //   探针断言写成「翻不动的恰好等于这 8 条」，多一条少一条都失败。
   { re: /^(Music|Environment): (.+?)(?: \((Calm|Tension)\))?$/,
-    cn: (m) => `${m[1] === "Music" ? "音乐" : "环境音"}：${translateLeaf(m[2], ARRANGEMENT_LEAVES)}`
-             + (m[3] ? `（${MOODS[m[3]]}）` : "") },
+    cn: (m) => (ARRANGEMENT_LEAVES[m[2]]
+      ? `${m[1] === "Music" ? "音乐" : "环境音"}：${ARRANGEMENT_LEAVES[m[2]]}`
+        + (m[3] ? `（${MOODS[m[3]]}）` : "")
+      : m[0]) },
 
   { re: /^Award Attunement: (.+)$/, cn: (m) => `授予同调：${m[1]}` },
   { re: /^Revoke Attunement: (.+)$/, cn: (m) => `撤销同调：${m[1]}` },
@@ -1309,6 +1719,12 @@ const ATTUNEMENT_TAB = {
   // `Cosmos` 不是 `Cosmological`，取错了源。锚点是合集里 `Players' Guide.pages.Cosmology` 的中文 name
   // 「宇宙观 Cosmology」，指向它的 `@UUID[…]{宇宙同调}` 标签也是「宇宙」—— 标签跟锚点走。
   // `Cosmos` 那一支（TYPES.…ember.cosmos＝余烬寰宇 / EMBER.CALENDAR.COSMOS＝寰宇地图）保持不动。
+  // ⚠ 下面两条的出处都是 `.hbs`，不在自检面板那一档的语料（两份 .mjs）里。2026-08-16 第二十四轮
+  //   核实：`Make Active` 在 0.6.0 里一字未改，仍写在 tab-attunement.hbs:38 与它的 dnd5e 孪生版
+  //   `applications/dnd5e/actor/tabs/attunement.hbs:38`（逐字相同），ember.mjs / crucible-compiled.mjs
+  //   命中均为 0 —— 判据的假阳性。而 `Cosmological Attunements` 之所以**没**上榜，是因为
+  //   ember.mjs:124711 有一条**注释横幅** `/*  Cosmological Attunements  */` 撞上了 ——
+  //   两条键来源相同（同一张模板），一条报失效一条报正常，纯属巧合，别据此下结论。
   "Cosmological Attunements": "宇宙同调",  // tab-attunement.hbs:4
   "Make Active": "设为激活",               // tab-attunement.hbs:38 的 aria-label
   // `Active` 这里是**状态标签**（哪一个同调当前处于激活状态），所以带「中」；lang 的
@@ -1367,6 +1783,23 @@ const CHAT_UI = {
  * 这些词单独看都太通用（Overview / Class / Type / Anchor / Points…），进全局 EXACT 会顺手
  * 改掉别的模块的窗口，甚至被 DialogV2 认框失败那一支拿去改别人的标题；但在 Ember 自己的
  * 窗口里含义是确定的。行末是上游出处。
+ *
+ * ⚠ **本表按设计就是为 `.hbs` 模板裸串而建的** —— 行末出处写 `xxx.hbs:NN` 的占绝大多数，
+ *   只有 11 条另有 `ember.mjs:NNNN` 出处、2 条来自 `scripts/crucible-async.mjs`。
+ *   第二十四轮自检面板那一档的语料只有 `scripts/ember.mjs` ＋ `<sys>-compiled.mjs` 两份 .mjs，
+ *   **表的性质与判据的语料从一开始就对不上**，所以这张表的报数天然最高（76 键报 48 条）。
+ *   那 48 条已逐条回模板核过：**REWORDED 0 / REMOVED 0**，16 个模板全部仍被 ember.mjs 以
+ *   `template: "modules/ember/…"` 注册（孤儿 0），表注释里的 hbs 行号与当前上游**逐条一致、
+ *   0 处漂移**，`{{localize}}` 形态命中 0 处，lang/en.json 里也没有任何一条以这些串为值 ——
+ *   也就是说 DOM 注入仍是唯一可行通道，通道不用改。
+ *   剩下 28 条「找得到」里有 17 条同样是 .hbs 来源、纯属巧合子串命中（Create / Scale / Skew /
+ *   Anchor / Next…）—— **这一档的通过与失败都没有证据力，别拿它当键活性用**（这条结论不因
+ *   语料补全而改变）。
+ *
+ * ⚠ 2026-08-16 第二十五轮：判据把 `templates/**` 补进语料之后，本表**整张**交给它核，
+ *   不再像第二十四轮那样只挑 11 条 ember.mjs 来源的键（那等于把另外 65 个键挪出视野，
+ *   而那 65 条里至少 17 条 —— `Anatomy` ember.mjs:50854 / `Equipment` :51681 等 ——
+ *   本来就在 .mjs 里、是被判据实实在在盖着的）。现在 76 键 0 条挂榜。
  */
 const EMBER_WINDOW_UI = {
   // 日志页的次级内容页签（EmberPageSheet.secondaryContentTabs，ember.mjs:35987/35989/36094 等，
@@ -1395,7 +1828,10 @@ const EMBER_WINDOW_UI = {
   "Event Probabilities": "事件概率",                                      // applications/hex-hud.hbs:9
   // 创角向导
   // `Ancestry` 2026-08-15 从全局 EXACT 挪进来（理由见 EXACT 的注释）：它在 Crucible 世界里
-  // 接不到自己人，放在全局表只会去改别人窗口里的裸 "Ancestry"；宿主 EmberHeroCreationSheet
+  // 接不到自己人，放在全局表只会去改别人窗口里的裸 "Ancestry"；宿主是
+  // **EmberCharacterCreationSheet**（ember.mjs:121801，dnd5e 分支的创角向导；
+  // 2026-08-16 第二十五轮订正 —— 原注释写的 `EmberHeroCreationSheet` 是 crucible-async.mjs:4
+  // 那个 Crucible 分支的类，与 :121864 无关），类名同样以 `Ember` 开头、
   // 过得了 `/^Ember/` 主闸，放作用域表里 dnd5e 世界照旧生效、Crucible 世界不再越界。
   "Ancestry": "血统",                                                    // ember.mjs:121864（dnd5e 分支的步骤名）
   "Class": "职业",                                                       // ember.mjs:121870 的步骤名（dnd5e 分支）
@@ -1475,7 +1911,7 @@ const EMBER_DIALOG_UI = {...DIALOG_UI, ...EMBER_WINDOW_UI};
 /**
  * 播放列表侧栏里 Ember 注入的音景面板（`<form id="ember-mood">`，ember.mjs:15874-15898）。
  * 宿主是 core 的 PlaylistDirectory，主闸两个判据都不成立，靠 INJECTED_SUBTREES 放行子树。
- * 本表 **50 键 = SOUNDSCAPE_GROUPS(42) ＋ ARRANGEMENTS(5) ＋ 下面 3 条面板自有文案**，三部分零重叠
+ * 本表 **250 键 = SOUNDSCAPE_GROUPS(42) ＋ ARRANGEMENTS(205) ＋ 下面 3 条面板自有文案**，三部分零重叠
  * （`Ember Environment` 既是组名又是 :15892 的 `<header>` 文案，只在组名表里定义一次，
  * 所以这里不再重写它 —— 别看着 header 没登记就往回加，那会造出第二个定义处）。
  * 译名取 glossary_ec 的定稿（Ember Music 余烬乐曲 / Ember Environment 余烬环境）。
@@ -1503,17 +1939,24 @@ const EMBER_DIALOG_UI = {...DIALOG_UI, ...EMBER_WINDOW_UI};
  *   · 拿真 `translateText` 复核时，**不传作用域表则 42 个组名一条都不翻**（212 个编排名同样一条不翻）——
  *     MOOD_PANEL 是作用域表，键**不在全局 `EXACT` 里**。拿全局通道去量这块覆盖率只会量出假的「0 覆盖」。
  *
- * 按 MOOD_PANEL 判的当前账（第二十一轮实测，探针 `probe_moodpanel.mjs`，
- * 它是**在 vm 里跑本文件真源码**取到的 MOOD_PANEL，再喂给本文件导出的真 `translateText`）：
- *   · 组名 42 条 → 覆盖 **42**、**恒英文 0**（本轮把 37 条补齐了）。
- *   · 编排名去重 212 条 → 覆盖 **11**、**恒英文 201**（上一轮是覆盖 8 / 恒英文 204；
- *     多出来的 3 条是 `Marlstone Gala` / `Ordain` / `The Pit Trap`，它们与组名同串，
- *     是补组名的**必然副作用**，不是偷偷补了编排名，见 SOUNDSCAPE_GROUPS 表内注）。
+ * 按 MOOD_PANEL 判的当前账（第二十二轮实测，探针
+ * `4-临时脚本/2026-08-16-round22/probe_moodpanel_r22.mjs`，它是**在 vm 里跑本文件真源码**
+ * 取到的 MOOD_PANEL，再喂给本文件导出的真 `translateText`）：
+ *   · 组名 42 条 → 覆盖 **42**、**恒英文 0**（第二十一轮把 37 条补齐）。
+ *   · 编排名去重 212 条 → 覆盖 **211**、**恒英文 1**（第二十一轮是覆盖 11 / 恒英文 201；
+ *     第二十二轮补进 ARRANGEMENTS 200 条，剩下的 1 条是**故意留英**的 `Seven Sails`，
+ *     理由见 ARRANGEMENTS 表内注末尾）。探针把仍是英文的那一档**逐条打印出来**，
+ *     所以「1」是列出来的，不是减出来的。
  *   · 三条面板自有文案（`Ember Music` / `Rearrange Music` / `Ember Default`）与 `Reset`
  *     两边都对不上，它们不是音景名。
- * 排期时**别把两档并成一档**：组名已清零，剩下的 201 条编排名是另一件事，
- * 多为「Bandit Fight Chorus / Celestial Combat Section 3」这类内部段落编号，
- * 主控第二十一轮裁的是**暂不补**。补不补不在本文件裁。
+ * 该探针自带四道反空转控制，四道全过才 PASS：① 负控制 —— 不传作用域表时 254 条一条都不翻
+ * （证明量的是作用域表，不是全局 EXACT）；② 组名侧变异控制 —— 从源码里删掉
+ * `Water Temple` 一行，组名覆盖必须恰好 42→41；③ 编排名侧变异控制 —— 删掉
+ * `Bandit Fight Chorus` 一行，编排名覆盖必须恰好 211→210（第二十二轮新加，
+ * 因为②只压得住组名表那一侧，编排名补完后必须有自己的一道）；④ DOM 属性通道
+ * 用假 `<optgroup>` 真跑 translateNode，并证明把 `label` 从属性白名单里拿掉就会失效。
+ * ⚠ **「上屏留不留英」仍必须按 MOOD_PANEL 判**，不是按 ARRANGEMENTS，更不是按不带 extra
+ * 的全局 `translateText`（负控制①就是为这句话准备的）。
  */
 const MOOD_PANEL = {
   ...SOUNDSCAPE_GROUPS,
@@ -1643,6 +2086,11 @@ const NOTIFICATIONS = {
     "已将青铜拉斯克剧院 Bronze Rask Theater 里的万德伦与恶棍敌人切换为敌对！",                     // 73366
   // 61461 是 `"…which will" + " automatically…"` 两段字符串相加，运行时是一整行；
   // 源码里的 \" 到了运行时就是普通的半角引号。任务名取合集定稿「有遮蔽的营地 Sheltered Campsite」。
+  // ⚠ 下面这三条（61461 / 126622 / 126626）是本表 26 条里**仅有的三条跨行相加**，也正是
+  //   「上游字面量存在性」那一档报出来的三条 —— 报数与「相加」这个形态**完全重合**，这条相关性
+  //   本身就是判据缺陷的指纹（它没做「相邻字面量相加先合成」）。2026-08-16 第二十四轮回源码逐条核过：
+  //   三条全是普通双引号字面量相加、一个 `${}` 都没有（真正带插值的通知在 NOTIFICATION_PATTERNS 里），
+  //   运行时值与本表键**逐字节相同** —— 假阳性，键有效，不要动。
   "When you are ready to begin the Ember game, activate this Scene which will automatically begin the first quest event, \"The Sheltered Campsite\".":
     "准备好开始余烬战役时，激活本场景即可自动开启第一个任务事件「有遮蔽的营地 The Sheltered Campsite」。", // 61461
   // 魂缚进阶宏的三条前置检查（126622 / 126626 同样是两段相加）
@@ -2170,6 +2618,13 @@ function patchRegionBehaviorSchemas() {
  * Blur Strength 并列的位置读作「只渲染照明层」，故译「仅照明」——**这一条是推断，不是实证**，
  * 哪天能进游戏看到实际效果再复核。
  */
+// ⚠ 本表的**键是 schema 的字段路径**（`schema.getField(path)` 的实参），不是上屏文本 ——
+//   要核的显示串在下面配对的 VISTA_PLACEMENT_EN 里。自检面板那一档拿路径当字面量去源码里找，
+//   报出来的 `illumination.blurStrength`「查无此串」是必然的：`illumination` 与 `blurStrength`
+//   分处两级嵌套（ember.mjs:33919-33923 / :33937），源码里不存在这个拼接串，而字段本身好好地在。
+//   2026-08-16 第二十四轮已把这一档改成核 VISTA_PLACEMENT_EN 的 14 个英文 label（见文件末尾）。
+//   ⚠ 真正硬的自检是下面 patchVistaPlacementSchema 自己那两条 warn（字段不存在 / label 对不上），
+//   它直接对着运行时的 schema 跑，比任何字面量核对都准 —— 别用面板的绿去替代它。
 const VISTA_PLACEMENT_FIELDS = {
   elevation: { label: "高度" },                     // ember.mjs:33928
   sort: { label: "排序" },                          // :33929
@@ -2571,3 +3026,209 @@ Hooks.once("ready", () => {
   refreshCalendarUI();
   log("Ember 硬编码字符串补丁已就绪。");
 });
+
+/* ============================================================
+ *  自检面板接线
+ * ============================================================
+ *
+ * 面板本体在 `ember-cn-selfcheck.mjs`。这里只做两件本文件才做得到的事：
+ *   ① 把硬编码表交给它做**键活性**检查（只有本文件拿得到这些表）；
+ *   ② 把 INJECTED_SUBTREES 的选择器交给它做 DOM 命中检查。
+ *
+ * ⚠ 为什么键活性这一档非做不可：这些表是**按字面匹配上游产出的字符串**的。
+ *   上游一改措辞，键就再也匹配不上，界面照旧显示英文，而**控制台一声不响** ——
+ *   第十六轮离线核对时查出过 31 个键在当时的上游上根本不生效。
+ *   面板把这件事变成「随时能当场跑一遍」，上游一升级就能立刻看出来。
+ *
+ * ⚠ 传表时用 `{table, onlyOn}` 形态标注**按设计只在某系统下生效**的表 ——
+ *   否则在别的系统里跑，那些键在源码里找不到会被误报成失效。
+ *
+ * ------------------------------------------------------------------
+ * 2026-08-16 第二十四轮：这一档报的 77 条，**真阳性 0 条**
+ * ------------------------------------------------------------------
+ * 面板在真实世界跑出「1292 键 / 77 条上游查无此串」。三条工作面把这 77 条逐条回上游源码
+ * （本机 `modules/ember/scripts/*.mjs` + `templates/**` + `lang/en.json` + `packs/`）核完：
+ *   **REWORDED 0 · REMOVED 0 · STILL_LIVE 8 · FALSE_POSITIVE 69**，改键 0 条、删键 0 条。
+ * 也就是说「上游改了措辞」「上游删了功能」这两类**一条都没有**，77 条全部是判据自身的边界：
+ *   ① 语料不全（最大的一块）—— 判据只 fetch `scripts/ember.mjs` ＋ `<sys>-compiled.mjs` 两份 .mjs，
+ *      而 Ember 大量上屏串写在 `templates/` 下的 `.hbs` 里，另有 `scripts/crucible-async.mjs`
+ *      与 `scripts/dnd5e-async.mjs` 两个脚本、`lang/en.json`、以及合集 `packs/` 的文档字段；
+ *   ② 拼接 —— 跨行 `"a" + "b"` 相加、模板串 `${…}` 插值（含三元）、`join(" and ")`；
+ *   ③ 空白差异 —— 模板串里的换行 + 缩进，运行时靠 translateNode 折叠命中，判据没折叠；
+ *   ④ 碎片键 —— 被 `<strong>` / `@UUID[]` 切开的文本节点，宿主串完整地在源码里、碎片不在；
+ *   ⑤ 键不是显示串 —— schema 字段路径、合集 `system.identifier`，原理上不该拿字面量核；
+ *   ⑥ 展开表重复计数 —— 一个源键经 `...ATTUNEMENTS` 被四张表继承，报成四条独立线索。
+ *
+ * ⚠ **反过来「找得到」同样不构成证据** —— 这一档是**子串匹配**，与键活性没有因果关系。硬证据：
+ *   `Heart of Ember` 唯一那次命中是远景精灵素材名（ember.mjs:74871），`Cosmological Attunements`
+ *   唯一那次是注释横幅（:124711），`Human`/`Keth` 命中的是 TokenMaker 纸娃娃模板，
+ *   `Oaken`/`Bejak`/`Waerd` **独立成词 0 次**（全是复合 id 的尾巴，`has()` 是裸 includes 没有词边界）；
+ *   而 `Entry Date` 在 .mjs 里 0 处、却是完全有效的活键。
+ *   所以这一档更准确的名字是「**上游字面量存在性（仅供人工复核）**」，
+ *   在下面 D1-D6 补完之前，77/1292 这个数字**不应被当作「键失效」的证据引用**。
+ *
+ * ------------------------------------------------------------------
+ * 2026-08-16 第二十五轮：**撤掉第二十四轮那份反向白名单**（DETECTOR_BLIND）
+ * ------------------------------------------------------------------
+ * 第二十四轮在本文件这一侧的处置是「按来源分流」：加一份 `DETECTOR_BLIND` 名单，把 117 个键
+ * 用 `dropKeys()` 从统计里摘出去、再用 `pickKeys()` 单列成 `… · 判据够不着` 那几行报 skip。
+ * 面板上的「上游查无此串」因此变成 0 —— **但那个 0 是把 117 个键挪出视野换来的**，
+ * 复核给的定性是「封口费」。而且那份名单本身有**事实性错误**：被摘走的键里至少 17 条
+ * （点名的有 `Anatomy`（ember.mjs:50854 `label:"Anatomy"`）与 `Equipment`（:51681 分组名））
+ * 确实来自 `ember.mjs`，本来是被判据实实在在盖着的，加了名单反而**静默跳过**了。
+ *
+ * 本轮判据那一侧（ember-cn-selfcheck.mjs）已经把语料与匹配口径补齐：
+ *   D1 语料补 `modules/ember/templates/**`（.hbs/.html）、`scripts/` 下**全部** .mjs、`lang/en.json`、
+ *      合集索引条目名（含 JournalEntry 的 pages 名）；
+ *   D2 语料与键**双侧** `\s+ → 单空格` 折叠，与运行时 translateNode 同口径；
+ *   D3 跨行 `"a" + "b"` 相加 / 解转义 / 三元插值展开，另建一份「拼接展开（推导）」语料；
+ *   D4 展开表去重：一个源键经 `...ATTUNEMENTS` 被四张表继承时只算一个键；
+ *   D5 新 kind：`field-path` / `pack-identifier`，外加键级 `keyKinds`；
+ *   D6 `has()` 对 ASCII 短键加**词边界**（CJK 键不加）。
+ * 实测（离线探针 `4-临时脚本/2026-08-16-round25/probe_liveness.mjs`，驱动判据真身、不抄副本）：
+ * 拿**第二十四轮加白名单之前的原表**跑新判据 —— 报文条数 77 → 7，按键去重后 **4**；
+ * 5 个构造的不存在串对照 5/5 仍报出，没有引入假阴性。
+ * ⇒ 白名单已经没有存在理由，本轮整块删掉，`SELFCHECK_TABLES` 恢复成**直接登记原表**。
+ *
+ * 剩下那 4 个键**不是**上游改了措辞，逐条有确认过的成因，故意留在榜上（报文里写明「这是线索不是结论」）：
+ *   · `The Abyss` —— 合集页名。离线探针 `game.packs` 是空的所以还挂着；真实 Foundry 世界里
+ *     会被「合集索引条目名」那一路语料接住，届时归零。**故意不加 keyKinds** ——
+ *     被真数据接住那叫「查过了」，加 keyKinds 只是又一次「挪出视野」。
+ *   · `to rank 2 (Greater Soulmark)?` / `to rank 3 (Deathly Soulmark)?` —— ember.mjs:126657-126660
+ *     `` `rank ${nextRank} (${nextLabel})?` ``，**插值的值本身参与构串**，静态语料补不出来。
+ *   · `and gain` —— ember.mjs:3138 `clauses.join(" and ")` 拼出来的碎片，这两个字在源码里从没挨着出现过。
+ *   要消掉这三条只能执行上游代码，那已经不是静态判据的活儿。
+ *
+ * ⚠ **一处「无从查起」，判据那一侧已登记**：上游 `templates/journal/pages/${this.pageClass}-edit.hbs`
+ *   是拼路径，面板只能 fetch 不能列目录，因此 15 个 `.hbs` 抓不进语料。本文件这边不必处理，
+ *   但若某个键的唯一出处正是那 15 份之一，它会以「查无此串」的形式挂榜 —— 属预期，别当缺陷。
+ *
+ * ⚠ 落地正则时注意本项目登记的空转形态 (f)：正则里的 `\b` / `\s` **不要经改写脚本传**
+ *   （Python 字符串会把 `\b` 当退格符写进文件，正则当场失效而闸照样全绿），直接编辑文件写。
+ */
+
+/**
+ * ⛔ 已删除：`DETECTOR_BLIND` + `checkNames()` / `dropKeys()` / `pickKeys()`（2026-08-16 第二十五轮）
+ *
+ * 原样：一份按「来源文件」登记的反向名单（PAGE_NAMES / EXACT / DIALOG_UI / NOTIFICATIONS /
+ * ATTUNEMENT_TAB 各一组，外加 EMBER_WINDOW_UI_MJS 那组方向相反的白名单），配三个辅助函数
+ * 把 117 个键从「上游字面量存在性」这一档摘出去、再单列成 `… · 判据够不着` 报 skip。
+ *
+ * 删除理由（三条，任一条都足够）：
+ *   ① 判据侧已补齐（见上面那段 D1-D6），原表跑新判据只剩 7 条报文 / 4 个键，名单没有存在理由；
+ *   ② 名单有**事实性错误**：被摘走的 65 条 EMBER_WINDOW_UI 里至少 17 条确实出自 `ember.mjs`
+ *      （`Anatomy` ember.mjs:50854、`Equipment` :51681 等），本来盖着，加名单后反而静默跳过；
+ *   ③ 名单是**按串**登记的，天生会烂 —— 上游真删一条它就留个死条目，只能靠额外的死名单告警补救。
+ *      改用按表标 `kind` / `onlyOn` 分流之后，分流依据是「这类键本来该去哪里查」，不是「哪几条报过」。
+ *
+ * 如果哪天又想加名单，先回答这个问题：**要摘掉的那几条，是判据够不着，还是我不想看见它红？**
+ * 前者的正解是给判据补语料或补一种 kind（本轮做的），后者叫封口费。
+ */
+
+/**
+ * 远景摆放表单**该核的是这 14 个英文 label**，不是 VISTA_PLACEMENT_FIELDS 那 14 条字段路径
+ * （路径是 `schema.getField()` 的实参，`illumination.blurStrength` 这种拼接串源码里当然没有）。
+ * 这里把 VISTA_PLACEMENT_EN 翻过来，让键＝英文显示串。实测 14/14 全部能在 ember.mjs 里找到。
+ * ⚠ 其中 `Sort` / `Only` / `Tint` / `Angle` / `Alpha` 是极短词，在几 MB 源码里必然巧合命中 ——
+ *   在判据加上词边界之前，这几条的「通过」证据力约等于零。真正硬的自检是
+ *   patchVistaPlacementSchema 自己那两条 warn（字段不存在 / label 对不上）。
+ */
+const VISTA_PLACEMENT_LABELS_EN = Object.fromEntries(
+  Object.entries(VISTA_PLACEMENT_EN).map(([path, en]) => [en, path])
+);
+
+const SELFCHECK_TABLES = {
+  // ── 普通字面量表：整表直接交给判据核，**一个键都不摘**。
+  //    判据侧的语料现在含 `scripts/` 下全部 .mjs、`templates/**` 的 .hbs/.html、`lang/en.json`、
+  //    合集索引条目名，外加一份「拼接展开（推导）」，短键还加了词边界 ——
+  //    第二十四轮那份把 117 个键摘出视野的 DETECTOR_BLIND 已整块删除，见上面那段。
+  PREFIXED, PATTERNS,
+  DIALOG_TITLES, SCROLLING_TEXT,
+  ATTUNEMENT_ITEM_NAMES, WEATHER,
+  LANGUAGES, LANGUAGE_CATEGORIES,
+  SOUNDSCAPE_GROUPS, ARRANGEMENTS, ARRANGEMENT_LEAVES, MOODS, MOOD_PANEL,
+  NOTE_TYPES, SETTINGS_UI, SCENE_CONTROL_UI,
+  PROSEMIRROR_BLOCK_TITLES,
+  // REGION_BEHAVIOR_FIELDS 的键是三个**行为子类型 id**（`ember.trapTrigger` 等），它们确实以
+  // 字面量写在 ember.mjs 里，上游改名这一档能接住 —— 所以照旧核（与 VISTA 那张不同，别一起挪走）。
+  REGION_BEHAVIOR_FIELDS,
+
+  // ── 下面这六张第二十四轮被 dropKeys/pickKeys 拆成过两行，现在恢复成**整表一行** ──
+  //   `.hbs` 出处的键（EMBER_WINDOW_UI 那 65 条是大头）现在被 `templates/**` 语料接住；
+  //   跨行 `+` 相加、模板串 ${…} 插值、换行缩进分别被拼接展开语料与空白折叠接住。
+  //   仍然挂榜的只剩 4 个键（`The Abyss` / 两条 `to rank N (…)?` / `and gain`），
+  //   成因逐条写在上面那段里 —— **故意留在榜上**，报文里已写明这是线索不是结论。
+  EXACT, DIALOG_UI, NOTIFICATIONS,
+  ATTUNEMENTS, MOON_NAMES, ATTUNEMENT_TAB,
+  EMBER_WINDOW_UI,
+
+  // ── 运行时拼出来的：字面量核对对它**无效**，报「查无此串」是判据的假阳性 ──
+  //   CHAT_UI 的复合键由 buildChatKeys() 在 ready 时按当前 lang 的实际译文拼出
+  //   （`${月亮} Attunement (Rank ${N})`），上游源码里本来就不会有这个字面量。
+  CHAT_UI: { table: CHAT_UI, kind: 'composed' },
+
+  // ── 键来自数据文件而不是脚本：拿 .mjs 当语料核不出来 ──
+  DATE_AGES: { table: DATE_AGES, kind: 'data', corpus: 'async-script' },
+
+  // ── 远景摆放：两张表**两个方向都登记**，别只留一张 ──
+  //   · VISTA_PLACEMENT_FIELDS 的键是 `schema.getField()` 的**字段路径**（`illumination.blurStrength`
+  //     这种拼接串源码里当然没有），标 `kind:'field-path'`，面板报 skip 并指向配对的英文 label 表；
+  //     第二十四轮把它整张换成 LABELS_EN 之后，字段路径那一侧就再没人看守了 —— 这里补回来。
+  //   · VISTA_PLACEMENT_LABELS_EN 是真正该核的 14 个英文 label，当普通表核（实测 14/14 通过）。
+  //   ⚠ 真正硬的自检仍然是 patchVistaPlacementSchema 自己那两条 warn（字段不存在 / label 对不上）。
+  VISTA_PLACEMENT_FIELDS: { table: VISTA_PLACEMENT_FIELDS, kind: 'field-path' },
+  VISTA_PLACEMENT_LABELS_EN,
+
+  // ── 反向判据：这几张表**正是因为上游缺这些**才建的。
+  //   所以「上游查无此串」是**预期状态**；反过来哪天找到了，说明上游补上了，
+  //   我们的兜底可能变成多余甚至冲突 —— 那才是要复核的信号。
+  //   ⚠ 只有下面两张的键是**上游在 .mjs 里注册的 id**（语言表 ember.mjs:126693 起 / 知识领域
+  //     crucible-compiled.mjs:586 起 + ember.mjs:126683），拿 .mjs 当语料才立得住，
+  //     所以这两张**留在 absent-by-design**，别跟着下面三张一起挪走。
+  MISSING_LANGUAGES:  { table: MISSING_LANGUAGES,  kind: 'absent-by-design' },
+  MISSING_KNOWLEDGE:  { table: MISSING_KNOWLEDGE,  kind: 'absent-by-design', onlyOn: 'dnd5e' },
+
+  // ⚠ 下面三张的键是**合集文档的 `system.identifier`**，不是 .mjs 里的 id，也不是显示串 ——
+  //   上游三个增强器（ember.mjs:22927/22947/22979）拿它去
+  //   `game.packs.get(ember.CONST.CHARACTER_OPTIONS_PACK).index.find(i => i.system?.identifier === id)`，
+  //   查不到就把 id 当名字渲染，合集里有 78 处这种悬空引用，我们按 id 兜底。
+  //   拿源码 grep 两个方向都证不了（第二十四轮：11 条「上游现在提供了」11/11 是误报，成因是
+  //   形容词同形、TokenMaker 纸娃娃模板名、注释横幅、以及裸 `includes` 没有词边界）。
+  //   ⚠ 第二十四轮把它们改成 `kind:'data'`，结果是**正向反向都没人看守**：19 个键完全不进统计。
+  //     本轮改用判据新实现的 `kind:'pack-identifier'` —— 它在 Foundry 里直接查合集 index 的
+  //     identifier，找到了才报 warn（说明上游补上了，我们的兜底该复核），
+  //     **取不到 index 时如实报「无从查起」而不是假绿**。
+  //   `packs` 限定到 crucible 世界的 CHARACTER_OPTIONS_PACK（ember.mjs:123964
+  //   `const CHARACTER_OPTIONS_PACK = "ember.crucible-character"`），与上游查表的范围一致；
+  //   dnd5e 世界那份是 `ember.character`（dnd5e-async.mjs:522），但这三张表本来就 onlyOn crucible。
+  MISSING_ANCESTRIES: { table: MISSING_ANCESTRIES, kind: 'pack-identifier', onlyOn: 'crucible',
+                        packs: ['ember.crucible-character'] },
+  MISSING_CULTURES:   { table: MISSING_CULTURES,   kind: 'pack-identifier', onlyOn: 'crucible',
+                        packs: ['ember.crucible-character'] },
+  MISSING_PATHS:      { table: MISSING_PATHS,      kind: 'pack-identifier', onlyOn: 'crucible',
+                        packs: ['ember.crucible-character'] },
+
+  // ── 按设计只在 dnd5e 世界生效：串在 dnd5e 系统源码里，
+  //   不标 onlyOn 的话在 crucible 世界跑会把它们全部误报成失效。
+  KNOWLEDGE:         { table: KNOWLEDGE,         onlyOn: 'dnd5e' },
+  RARITIES:          { table: RARITIES,          onlyOn: 'dnd5e' },
+  DIVINE_DOMAINS:    { table: DIVINE_DOMAINS,    onlyOn: 'dnd5e' },
+  WARLOCK_PATRONS:   { table: WARLOCK_PATRONS,   onlyOn: 'dnd5e' },
+  SORCEROUS_ORIGINS: { table: SORCEROUS_ORIGINS, onlyOn: 'dnd5e' },
+};
+
+Hooks.once('init', () => {
+  // ⚠ 这里必须是**同步**的：`game.settings.registerMenu` 要在 init 期间完成，
+  //   用 `await import(...)` 会把注册推到 init 之后，设置面板里可能就看不到入口了。
+  //   所以上面用的是**静态 import**（模块体执行前就解析完），这里只管调用。
+  try {
+    // INJECTED_SUBTREES 的每一项是 [选择器, 表, 选项]，面板只要选择器。
+    SELFCHECK.SUBTREE_SELECTORS.push(...INJECTED_SUBTREES.map(x => x[0]));
+    SELFCHECK.registerSelfCheck(() => SELFCHECK.keyLiveness(SELFCHECK_TABLES));
+  } catch (err) {
+    // ⚠ 自检面板出问题**不能拖垮汉化本身** —— 汉化是主线，面板只是诊断工具。
+    console.error('[ember-cn] 自检面板注册失败（汉化本身不受影响）：', err);
+  }
+});
+
+export { SELFCHECK_TABLES as __SELFCHECK_TABLES };

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# ⚠ 本文件是 2026-08-15（第十九轮）的 HEAD 快照，任何时候都不要当现判据读。它是 `3-常用脚本/qa/scan_dropped_terms.py` 当时的副本（截至 2026-08-16 已与真身差 8 千余字节），本项目登记的空转形态 (c) 的诱饵。要看现判据请读 `3-常用脚本/qa/scan_dropped_terms.py`。
 """删除型漂移闸：上游**删掉**一个术语，中文还留着它的译名。
 
     python scan_dropped_terms.py --repo <repo> --baseline <旧英文基准目录>
