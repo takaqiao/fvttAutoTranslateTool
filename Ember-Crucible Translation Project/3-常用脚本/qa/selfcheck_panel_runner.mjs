@@ -25,9 +25,13 @@
  *   它从面板源码里现抠 `EMBER_ROOT`，确认 `dataRoot/<EMBER_ROOT>/scripts/ember.mjs` 真的存在，
  *   对不上当场硬失败 —— 免得「桩指到了空目录，语料一份没抓到，而判据照跑」。
  *
- * ⚠ 两个**变异开关**（`drop_corpus` / `keep_table_fraction`）只给 `--selftest` 的回测用。
- *   两个开关的方向都是**只会让结果更差**（少抓语料 ⇒ miss 涨；摘掉表项 ⇒ 覆盖掉），
+ * ⚠ **变异开关**（`drop_corpus` / `keep_table_fraction` / `count_no_unwrap` /
+ *   `ledger_offset` / `fake_ledger_flags`）只给 `--selftest` 的回测用。
+ *   每个开关的方向都是**只会让结果更差**（少抓语料 ⇒ miss 涨；摘掉表项 ⇒ 覆盖掉；
+ *   表侧计数退回不解包 ⇒ 对账恒等式断；台账偏移 ⇒ 账不平且没核数涨；旗标作假 ⇒ 直接红），
  *   所以它们进不了「调一下开关就变绿」的作弊路径 —— 这是有意选的方向。
+ *   ⚠⚠ 往这里加开关时**必须守住这个方向**：任何能把某个数往好里推的开关，
+ *   都会立刻变成「跑闸时顺手带一个 spec 字段」的单点绕法。
  *
  * SPEC（JSON 文件，路径作为 argv[2] 传入）：
  *   panel               面板 .mjs 的绝对路径（ember 侧那一份）
@@ -39,6 +43,9 @@
  *   substr_probe        子串型改词的边界复现：一个「被截短的」键，预期报出 0 条
  *   drop_corpus         [变异] url 里含这些子串就让 fetch 报失败
  *   keep_table_fraction [变异] 每张表只保留前这么大比例的条目
+ *   count_no_unwrap     [变异] 表侧独立计数退回 V18 之前那个**不解包**的写法
+ *   ledger_offset       [变异] 给报出去的「按设计没核」加一个正偏移（把账弄不平）
+ *   fake_ledger_flags   [变异] 谎报 ledgerBalanced=false / ledgerNoReason=1
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -121,35 +128,67 @@ let TABLES;
 if (!TABLES || !Object.keys(TABLES).length) die("SELFCHECK_TABLES 是空的 —— 没跑成");
 
 /* 表侧的**独立计数**：不经面板，自己数一遍「表里一共有多少个不同的键」。
- * 面板自报的 checkedDistinct 是另一条汇总路径 —— 两个数摆在一起，
- * 「面板悄悄少核了一批键」这件事才有得对（光看面板自报的数，它少核了也自洽）。 */
-// ⚠ **只数字面量键的表**（`{英文串: 中文}`）—— 数组形态的表（PREFIXED / PATTERNS /
-//   NOTIFICATION_PATTERNS 那三张「命中即整串替换」的）键**不是字面量**，D 档按设计核不了它们
-//   （对它们直接报 ⛔），所以它们不进这个数，另计一份 `regexEntries`。
+ * 面板自报的 registeredRaw / registeredDistinct 是另一条汇总路径 —— 两个数摆在一起，
+ * 「面板悄悄少核了一批键」这件事才有得对（光看面板自报的数，它少核了也自洽）。
+ *
+ * ⚠⚠ **第三十二轮 V18：这个函数从前是错的，而且它的注释宣称的用途与实现不符** ——
+ *   它直接 `Object.keys(spec)`，**不解包** `{ table, kind, onlyOn, packs, corpus }`
+ *   这 13 张包装表：对包装对象数出来的是那 5 个**元数据属性名**（伪键），
+ *   同时**漏掉包装里 189 raw / 171 distinct 个真实键**。
+ *   于是它吐的是 721 distinct / 1304 raw，**真值是 887 / 1459**，两个数都错。
+ *   而 V14 那条「面板 719/1273 vs 表侧 721/1304」挂了三轮，成因正是这一处
+ *   —— 差在**数表这一侧**，面板一个键都没漏核（见面板 `keyLiveness` 的「记账口径」段）。
+ *   ⇒ 用与面板 `:1116` `spec?.table ?? spec` **同一个口径**解包；
+ *     并且解包完的数**必须真的有人判**（见 `a_panel_liveness` 的恒等式
+ *     `tableKeysRaw == registeredRaw` / `tableKeysDistinct == registeredDistinct`）——
+ *     「算了、印了、没人判」正是本项目登记的空转形态，V18 的另一半就是它。
+ *
+ * ⚠ **只数字面量键的表**（`{英文串: 中文}`）—— 数组形态的表（PREFIXED / PATTERNS /
+ *   NOTIFICATION_PATTERNS 那三张「命中即整串替换」的）键**不是字面量**，D 档按设计核不了它们
+ *   （对它们直接报 ⛔），所以它们不进这个数，另计一份 `regexEntries`。 */
+function unwrapTable(x) {
+  // 与面板 keyLiveness 的 `const table = spec?.table ?? spec;` 逐字同口径。
+  return Array.isArray(x) ? x : (x?.table ?? x);
+}
+
 function countTableKeys(tabs) {
   const seen = new Set();
-  let raw = 0, regexEntries = 0, objTables = 0, arrTables = 0;
-  for (const t of Object.values(tabs)) {
+  let raw = 0, regexEntries = 0, objTables = 0, arrTables = 0, wrapped = 0;
+  for (const x of Object.values(tabs)) {
+    if (x && !Array.isArray(x) && typeof x === "object"
+        && Object.prototype.hasOwnProperty.call(x, "table")) wrapped++;
+    // [变异] 退回 V18 之前那个不解包的写法 —— 只会让对账恒等式断，不会让谁变绿
+    const t = spec.count_no_unwrap ? x : unwrapTable(x);
     if (Array.isArray(t)) { arrTables++; regexEntries += t.length; continue; }
     if (!t || typeof t !== "object") continue;
     objTables++;
     for (const k of Object.keys(t)) { raw++; seen.add(k); }
   }
-  return { distinct: seen.size, raw, regexEntries, objTables, arrTables };
+  return { distinct: seen.size, raw, regexEntries, objTables, arrTables, wrapped };
 }
 
-/* [变异开关] 摘掉每张表的一部分条目 —— 只会让覆盖掉，不会让谁变绿 */
+/* [变异开关] 摘掉每张表的一部分条目 —— 只会让覆盖掉，不会让谁变绿。
+ * ⚠ 同一个不解包的坑在这里也有过：直接切包装对象的 `Object.entries()` 切掉的是
+ *   **元数据属性**（`corpus`/`packs`/…），13 张包装表里的真实键**一条都没被摘掉**，
+ *   变异开关对它们等于没开。这里按包装形态原样保留外壳、只摘里面那张表。 */
 const frac = spec.keep_table_fraction;
 let tablesIn = TABLES;
 if (frac != null) {
   if (!(frac > 0 && frac <= 1)) die(`keep_table_fraction 必须落在 (0,1]，实得 ${frac}`);
-  tablesIn = {};
-  for (const [name, t] of Object.entries(TABLES)) {
-    if (Array.isArray(t)) tablesIn[name] = t.slice(0, Math.ceil(t.length * frac));
-    else if (t && typeof t === "object") {
+  const trim = (t) => {
+    if (Array.isArray(t)) return t.slice(0, Math.ceil(t.length * frac));
+    if (t && typeof t === "object") {
       const e = Object.entries(t);
-      tablesIn[name] = Object.fromEntries(e.slice(0, Math.ceil(e.length * frac)));
-    } else tablesIn[name] = t;
+      return Object.fromEntries(e.slice(0, Math.ceil(e.length * frac)));
+    }
+    return t;
+  };
+  tablesIn = {};
+  for (const [name, x] of Object.entries(TABLES)) {
+    if (x && !Array.isArray(x) && typeof x === "object"
+        && Object.prototype.hasOwnProperty.call(x, "table")) {
+      tablesIn[name] = { ...x, table: trim(x.table) };
+    } else tablesIn[name] = trim(x);
   }
 }
 
@@ -194,6 +233,12 @@ if (spec.substr_probe) {
 
 const tk = countTableKeys(tablesIn);
 
+/* [变异] 台账那一侧：偏移只许为正（把「按设计没核」做大 ⇒ 账不平 + 上限被顶破），
+ * 旗标作假只许往坏里说。两个开关都进不了「调一下就变绿」那条路。 */
+const off = spec.ledger_offset ?? 0;
+if (!(Number.isInteger(off) && off >= 0)) die(`ledger_offset 必须是非负整数，实得 ${off}`);
+const ledgerNoReasonNames = Array.isArray(st.ledgerNoReason) ? st.ledgerNoReason : [];
+
 const result = {
   section: total.section ?? null,
   counts: {
@@ -202,10 +247,25 @@ const result = {
     tableRegexEntries: tk.regexEntries,
     tableObjTables: tk.objTables,
     tableArrTables: tk.arrTables,
+    tableWrapped: tk.wrapped,
     checkedDistinct: st.checkedDistinct,
     rawChecked: st.rawChecked,
     missDistinct: st.missDistinct,
     rawMiss: st.rawMiss,
+    /* ── 面板自己算的**分母**（第三十一轮 V14 归因造出来的八个数）。
+     *   ⚠ 第三十二轮 V18 的另一半：它们**造出来了却一个都没转发**，
+     *     runner 不转发 ⇒ 规则里的 min/max 够不着 ⇒ 全 `3-常用脚本/qa/` 零引用
+     *     ⇒ 这批分母本身就是新一份「算了、印了、没人判」。转发在这里，判在
+     *     `a_panel_liveness`（registered… 与 wrapped… 与 regex… 走 min，unchecked… 走 max，
+     *     ledgerBalanced / ledgerNoReason 是**不含阈值**的恒等式，调不松）。 */
+    registeredRaw: st.registeredRaw,
+    registeredDistinct: st.registeredDistinct,
+    uncheckedRaw: st.uncheckedRaw + off,
+    uncheckedDistinct: st.uncheckedDistinct + off,
+    ledgerBalanced: spec.fake_ledger_flags ? false : st.ledgerBalanced,
+    ledgerNoReason: spec.fake_ledger_flags ? 1 : ledgerNoReasonNames.length,
+    wrappedTables: st.wrappedTables,
+    regexTables: st.regexTables,
     fetchOk: fOk,
     fetchFail: fFail,
     tableRows: tableRows.length,
@@ -223,6 +283,8 @@ const result = {
     substrMiss
   },
   miss: st.miss ?? [],
+  ledgerNoReasonNames: spec.fake_ledger_flags
+    ? ["（变异开关 fake_ledger_flags 谎报的一张表）"] : ledgerNoReasonNames,
   tablesWithoutRowNames: tablesWithoutRow,
   droppedUrls: dropped
 };

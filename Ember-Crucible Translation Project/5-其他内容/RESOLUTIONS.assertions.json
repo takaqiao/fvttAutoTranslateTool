@@ -3,7 +3,7 @@
   "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
   "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
   "created": "2026-08-15（第十五轮）",
-  "updated": "2026-08-16（第二十二轮：新增断言类型 `enricher_text_coverage` 与 1 条 `R-readaloud-coverage` —— 上一轮把 `@Embed[… readaloud=\"…\"]` 的整段朗读正文纳入了 `scan_content_coverage` 的正文口径，但**纳入 ≠ 判得到**：那 48 段英文里阿拉伯数字 0 个，默认的数字多重集判据必然 0 命中，实测把最长的一段中文删空也一声不响；`--with-terms` 干净时就报 39 条、删空 43 条，两侧非零没有判别力。本轮改用**段级**四支判据（缺失／中英字符比／段内定译专名／句数），现读 48 段 0 违规，删空回测 48/48 报、删一半 46/48 报，判据边界写在 R-readaloud-coverage 的 why 里）｜ 2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
+  "updated": "2026-08-16d（第二十九轮：**堵作弊路径 C** —— 新增断言类型 `ruleset_shape` 与 1 条 `R-ruleset-shape`，把**规则集自身的形状**（断言条数 66 / kind 数 22 / 各 kind 的容器块 / 长度地板 / 强度参数的死下限与死上限）纳入判据，**记录值住在 `3-常用脚本/qa/assert_resolutions.py` 的模块级常量 `RULESET_SHAPE`，不在本文件里** —— 守卫绝不能与被守护的容器同生共死；另有一道**不是断言**的存在性检查写在 `main()` 里（`_require_ruleset_shape`），接住「连守卫一起删」那一刀。复核实测的**七种单点容器层动作**（删 arrangements 整块 / channels 砍成一个 / 面板闸 min·max 整块删 / min_checked→0 / must_include 清空 / min_labels 改小 / 删掉整条断言）此前改完主闸仍 65/0/0 全绿，现在逐条固化进 `--selftest`，七条全红。｜同轮另两处：① **反例的结构护栏**（`R-patterns-translate-cases`）—— 正例侧早有「每条表项都必须有正例」的恒等式，反例侧此前只有一个可调的数，「清空反例 + 记录值改 0」两处协同就全绿；现在按「一条表项一条专属的近似反例」的**最大二分匹配必须完美**判，外加零维护的机械近似探针 `Zzq <字面骨架> Zzq`，反例 28→66 / 通知反例 14→39。② **`tracked_inputs` 的推导器补 `pack` 字段**，并新加一道**反查**：规则里所有「像文件名」的串，凡能在库里解析成真实文件却不在推导清单里的，就地点名 —— 让「推导器漏了某类字段」这件事自己变成判据。｜⚠ 本轮还跟改了一处**不是本轮改的**记录值：被判文件按一条新裁决删掉 4 条 NOTIFICATION_PATTERNS 并收紧 hex 那条，`np_size` 31→27 / `notify_positive` 36→31，理由与损失评估在被判文件 :2132 起的注释块里，细节记在 `recorded._why_29`）｜ 2026-08-16（第二十二轮：新增断言类型 `enricher_text_coverage` 与 1 条 `R-readaloud-coverage` —— 上一轮把 `@Embed[… readaloud=\"…\"]` 的整段朗读正文纳入了 `scan_content_coverage` 的正文口径，但**纳入 ≠ 判得到**：那 48 段英文里阿拉伯数字 0 个，默认的数字多重集判据必然 0 命中，实测把最长的一段中文删空也一声不响；`--with-terms` 干净时就报 39 条、删空 43 条，两侧非零没有判别力。本轮改用**段级**四支判据（缺失／中英字符比／段内定译专名／句数），现读 48 段 0 违规，删空回测 48/48 报、删一半 46/48 报，判据边界写在 R-readaloud-coverage 的 why 里）｜ 2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
   "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
   "idle_forms": {
    "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
@@ -1369,9 +1369,9 @@
   },
   {
    "id": "R-patterns-translate-cases",
-   "title": "PATTERNS 28 / PREFIXED 19 / NOTIFICATION_PATTERNS 31 三张「命中即整串替换」的表：不许吃散文，上游真产出的串必须逐字符翻对，且**每一条都得有正例**（真跑 translateText 与 translateNotification）",
+   "title": "PATTERNS 28 / PREFIXED 19 / NOTIFICATION_PATTERNS 27 三张「命中即整串替换」的表：不许吃散文，上游真产出的串必须逐字符翻对，且**每一条都得有正例、也都得有一条属于它自己的近似反例**（真跑 translateText 与 translateNotification）",
    "decision": "2026-08-16（第二十六轮建闸）· 2026-08-16b（第二十七轮：补满 PREFIXED 覆盖、新增通知闸、修抽取器的 (h) 残留）",
-   "why": "PATTERNS（28 条正则）· PREFIXED（19 条前缀）· NOTIFICATION_PATTERNS（31 条正则）是本项目**能主动改坏译文**的三张表 —— 命中就把整串替换掉。⚠ **第二十六轮这条 why 的开头写的是「唯一能主动改坏译文的两张表」，第二十七轮复核判为错，本轮改掉**：第三张 NOTIFICATION_PATTERNS 由 translateNotification 消费（ember-hardcoded-cn.mjs:2284-2304），而那个函数包的是 `ui.notifications.notify` —— **所有模块共用的全局钩子**；PATTERNS 只在 Ember 自己的窗口 / 认出归属的框 / 注入子树 / 聊天卡上跑，够不到别的模块，**通知这条通道是别的模块发的每一条提示都要过一遍**，爆炸半径更大。更难堪的是，旧 why 末尾自己写着「DIALOG_UI / NOTIFICATION_PATTERNS 是作用域表、不进本条」——**与开头那句「唯一」自相矛盾**，而那 31 条正则就这样在闸外多待了一轮。｜而在第二十六轮之前这几张表**一道常设闸都没有**：自检面板的 D 档「上游字面量存在性」按设计核不了正则表（对这 47 个键直接报 ⛔，键不是字面量，无从在上游语料里查「有没有这个串」），而此前 61 条断言里 PATTERNS 出现 **0 次**；上一轮验它的探针（4-临时脚本/2026-08-16-round25/probe_patterns_c.mjs）是**一次性**的，跑完没人再跑。⇒ 在此之前，下一轮谁再动一次这两条正则，没有任何常设判据会响。第二十五轮真正咬人的缺陷就出在这里：`^Result of (.+)$` 会把任意以 “Result of ” 开头的英文句子吃掉（→「结果：the investigation was inconclusive」），`^(Music|Environment): …$` 会把任意 `Music: …` 形状的句子改成「音乐：…」。｜本条**真的 import 发布中的 translateText 与 translateNotification 跑用例**（node 子进程，见 3-常用脚本/qa/translate_cases_runner.mjs），不在 Python 里重写一遍正则 —— 重写一遍就是又造一个会漂移的副本。translateNotification 与三张表都是模块私有的，runner 在 **harness 副本**上追加一行 `export {…}`（只加导出、函数体一个字节不改），且每个名字先确认顶层声明存在、找不到当场失败。node 取不到 / import 失败 / 导出名对不上 / 上游抠不到编排名，一律**当场失败并说明**，不许静默跳过（空转形态 (e)）。｜四段用例：(A) **反例 28 条**，上游产不出、形状相近的英文串一个字都不许被翻动 —— 13 条来自第二十五轮复核（其中 “Result of the investigation was inconclusive” / “Music: my custom playlist” / “Environment: Rain” 三条是旧实现真会误翻的现场），另加 2 条钉住另外两条宽正则（“Day, Generic” 是远景资源名，曾被旧的 `^Day` 兜底吃成「日 , Generic」；“Nosuch Attunement Rank 3” 钉 `^(.+) Rank ([1-5])$` 的 ATTUNEMENTS 查表兜底）；第二十七轮**新补 13 条专钉 PREFIXED 那一层**（第二十六轮这一层**一条反例都没有**）。⚠ 这 13 条守的**不是**「不许翻未知叶子」，而是「**不许把 Ember 根本不产出的串吃掉**」—— 见下面 A2 那条裁决。分两类：① 别的模块产出的通用标签（Name: / Type: / Description: / Source: / Duration: / Range:）—— 将来谁给 PREFIXED 加一条太通用的前缀，这几条当场红；② 上游产不出的近似写法 —— `Locations:`（复数）/ `location:`（小写）/ `Location:X`（无空格，上游模板里恒是「冒号 + 一个空格」）/ `The Location: X`（**不在串首**，而 translateText 用的是 startsWith）/ `Talents:` / `Quest Log:` / `Sorcerous Origins:`。(B) **正例 81 条**，上游真会产出的串必须仍然翻得动、且**译文逐字符相符** —— 只断言「翻动了」不够，收紧过头会把译文改成别的东西而断言照样绿。定义域出处：enrichCriticalResult（ember.mjs:22905-22913）先 dc = Number(dc) 再 if (!Number.isInteger(dc)) return match，之后**只可能**拼出 `Result of ${dc-5}-` 与 `Result of ${dc+5}+`，故 12 条取 dc = 0/5/8/18/100/-3 两支各一；音景三支取自 EmberSoundscape.enricherHTML —— :16255 的 `${channel.capitalize()}: Reset`、:16266 的 `${channel.capitalize()}: ${arrangement.label}`、:16267-16268 的心情后缀；PREFIXED 19 条前缀的出处逐条可查（Ancestry: ember.mjs:22934 · Culture: :22954/:123464 · Path: :22986/:123467 · Knowledge: :122900/:123707 · Language: :123688/:126547 · Attunement: :23008/:23181 · Quest: :25236 · Identifier: :35842 · Divine Domain:/Warlock Patron:/Sorcerous Origin: :36354/:36359/:36364 · Lifespan: :122595 与 crucible-async.mjs:189 · Rarity: crucible-async.mjs:188 · Talent: crucible/module/enrichers.mjs:739 · Area Map:/Location:/Biome:/Terrain: templates/applications/hex-hud.hbs:13/47/50/52 · Music Mood: :16271）；其余 PATTERNS/EXACT 分支各取一到两条回归。(B2) **覆盖归因（第二十七轮新增，这一段是本轮的要害）**：三张表的**每一条**都必须被至少一条正例触到，漏一条报违规；另有表长下限（19/28/31）兜住「把表和用例一起删掉换全绿」。⚠ 为什么非加不可：第二十六轮的闸名写着「PATTERNS / PREFIXED」，复核实测 79 条用例把 PATTERNS 打满 **28/28**（比自述的「20+」还好），`PREFIXED` 却只触到 **2/19**（只有 Attunement、Music Mood），**一条反例都没有**；把 Knowledge / Location / Quest / Talent / Rarity 五条译名逐个改坏重跑，闸 **5/5 全部保持 0 违规**。⇒「47 键零判据」当时其实只降到「约 17 键零判据」，不是 0。**用例数不等于覆盖，人眼数不出来，就让判据自己数。**归因用的是 translateText 派发顺序的镜像（EXACT → PREFIXED → PATTERNS），镜像有漂移风险，所以每条用例都做**预测输出 vs 实跑输出**的自洽校验 —— 派发顺序 / translateLeaf 的兜底 / 收尾 replace 被改而镜像没跟上，当场报违规；镜像引用的是**真表对象本身**，不是抄一份表。(D) **通知闸（第二十七轮新增）**：31 条 NOTIFICATION_PATTERNS **逐条正例（31/31）** + 12 条反例。反例重点是「**别的模块发的通知不许被吃掉**」（Token Mold / Dice So Nice / core 的 “You do not have permission to update this Document.” / “Compendium folders migration complete.”），另有近似写法（`Mirror does not exist!` 无参数 · `The Mirror 3 does not exist!` 不在串首 · 少了句末句号的那条）钉住锚点。translateNotification 的**空白折叠回退支**（:2299-2302）另有 2 条专用例，按上游 ember.mjs:36922 与 126652 那两条**跨行模板串**的真实换行 + 缩进构造 —— 没有带真实空白的用例，那一支等于没判。⚠ 顺带记一笔已知的最宽一条：`^Mirror (.+) does not exist!$`（:98432）在这 31 条里定义域最松，本轮只加用例钉住现状、不改表。(C) **全量护栏**：ember.mjs 里能抠出的**全部编排名** × Music/Environment 两通道逐条过。⚠ 编排名**从上游现抠**（soundscapes 注册表里的 arrangements[].label，正是 :16266 那个 arrangement.label 的来源），不许把 219 条硬编码进本文件 —— 硬编码就是空转形态 (c)「读旧快照」，上游一改断言还在核一份过期名单；抠不出来（上游打包形状变了）当场失败。⚠ 反过来，「**恰好这 8 个编排名整串留英**」这个集合**写死当护栏**：上游新增编排名时它会响，**那是要的**（人来看一眼这条新名字该不该进表）。8 个的由来：Clear / Drizzle / Rain / Thunderstorm / Arcane Fog / Mayis Storm 属音景 weather，Events 属音景 events，这两个音景的 type 不是 music/environment，不进播放列表侧栏那两个下拉（ember.mjs:15916-15922 只取 music 41 + environment 1 共 42 个），所以建 ARRANGEMENTS 表时本来就不在全集里（212 vs 219）；第 8 个 Seven Sails 是第二十二轮裁定**故意**留英（两仓 43115 条英文叶 en-hits=0，查不到这个名字指什么，宁可露英文也不猜）。⚠ 第二十七轮修 (C) 段里的**空转形态 (h) 残留**：抽取器锚在**精确空白**上（`\\n  arrangements: {` 与 `\\n      label: \"…\"`）。复核把上游 40 条 `label:` 行各加 1 个空格模拟上游换打包格式，编排名 **219 → 196 静默下降而闸仍 0 违规** —— 两处原因都已改：① min_labels 当时只卡 **150**、比现值低 69，掉 23 条照样在门槛之上 ⇒ 提到 **210**（Python 侧默认也从 100 提到 210），并加一条 labels_recorded=219「不得低于上次记录值」；② 找不到 arrangements 块的那一支原先是 `continue`、**不计 unresolved**，是真静默 ⇒ 现在与「有但抠不出来」同等计入 unresolved 并列出是哪个音景（实测 44 个音景全部带 arrangements 块，unresolved 恒为 0）。⇒ **形态 (h) 的要害不是「没有门槛」，是门槛松到够不着现值。**｜**A2 裁决（第二十七轮，主控拍板）：第二十五轮把音景那条收紧成「查不到就整串不动」，结论正确、但当时记的理由是错的，本轮把正确理由记在这里。**当时记的理由是「`translateLeaf = table[name] ?? name` ＋前缀替换会把未知叶子的英文原样带出去」，可 PREFIXED 那 19 条**全部**在做同一件事（`Location: <未知>` →「地点：<未知>」），一处判缺陷、十九处判正常，两边不可能都对。真正的判据是「**这个前缀的叶子集合，能不能从上游枚举出来**」：音景叶子有**闭合的上游注册表**（ember.mjs 的 soundscapes 里现抠得到 219 条编排名 + `Reset`），所以要求「查得到才翻」是**免费**的；而 Location: / Quest: / Talent: / Biome: / Terrain: / Area Map: / Lifespan: / Identifier: 的叶子是**用户与战役数据里创建的内容**（hex-hud.hbs 的 location.label / ember.mjs:25236 的 event.root.label / crucible enrichers.mjs:739 的 talentIndex.name），是**开放集合**，要求查表等于**绝大多数正常内容都不翻**，代价远大于收益。而 `^Result of (.+)$` 与它们**不是一类**：前缀替换的降级是**安全**的（标签变中文、叶子留英、句子结构完整、信息一个字没丢），`^Result of (.+)$` 的降级是**破坏性**的（把一个完整英文句子重构成「标签＋残句」，原句语义被销毁）。⇒ **两处都不改**，改的只是记错的理由。这也决定了 PREFIXED 反例层的设计：守的是「不许把 Ember 根本不产出的串吃掉」（锚定串首 + 前缀确实由 Ember 产出），不是「不许翻未知叶子」。｜⚠ 判据边界：本条只判 translateText / translateNotification 的**输入→输出**，不判「这个中文译得好不好」；EXACT 4200+ 条与 NOTIFICATIONS 的整串查表仍由自检面板的 D 档管（本条只用 1 条正例钉住 translateNotification 查 NOTIFICATIONS 那一支的存在）；DIALOG_UI 是**认框后**才作为 extra 传进去的作用域表，本条不判（它进不了全局通道，改坏它只影响已认出的 Ember 对话框子树）。⚠ 灵敏度回测固化在 --selftest 里（把 `^Result of (.+)$` 改回宽的、把 ARRANGEMENT_LEAVES 的查表兜底放宽回去、把某条 PREFIXED 的中文前缀改坏、把某条 NOTIFICATION_PATTERNS 的译文改坏、删掉一条用例让覆盖率掉下来，各自必须变红），**做不到回测的闸不算闸**。｜**第二十八轮（本轮）三处补丁，都是复核实测逼出来的：** ① **堵作弊路径 B（自指的洞）**：上面写的那些下限（表长 19/28/31 · 用例条数 · min_labels）**全是规则文件里的自报数**，复核把 coverage.min_prefixed 从 19 改回 2、min_negative / min_positive 放到 1，**其余一个字节不动 → 违规 0，闸变绿**（对照：删一条用例 4/4 立刻红）⇒ 这些数现在改走 `recorded` 块，判据**另从被判对象现算一份下限**（表现在有几条 / 规则里现在写着几条用例 / 上游这次抠出几个编排名），两层一起判：`actual < recorded` 抓删除，`recorded < 现算值` 抓「调松了 / 加了东西忘了记」（判法见 assert_resolutions.py 的 `_two_layer_floor`）。实测五种调松动作（表长记录值→2 · 用例条数→1 · 整个 recorded 块删掉 · min_labels 与 labels_recorded 一起→2 · np 那两个数一起调松）**逐个复现，闸全部仍然红**，五条都固化进 --selftest。⚠ 边界写明白：两份文件都是可改的，**同时**改「删表项 + 删用例 + 改记录值」仍然能过 —— 本轮保证的是「**任何一处单独调松都会当场红**」，要绕过它必须留下一串写着「我把记录值改小了」的自证 diff，而不是原先那种「悄悄把 19 改成 2」。另有一道交叉印证：PREFIXED + PATTERNS 进自检面板的条目数（19+28=47）在 R-selfcheck-d-liveness 里**另记了一份**，跑的是另一份执行体、读的是另一条汇总路径。② **能不写成阈值的都改成恒等式**：编排名那两道数量门槛之外，新加一道**不含阈值**的同源包含检查 —— 被判文件 `ARRANGEMENT_LEAVES` 的每个键都必须能在「上游现抠的编排名」里找到（两边本来就同源：那张表当初就是从这份上游注册表抄下来的），抽取器的锚一失效，缺的那批立刻被逐个点名。`Reset` 是唯一登记的例外（它来自 ember.mjs:16255 的 `${channel.capitalize()}: Reset`，不是 arrangements[].label），例外集合过期（上游有了 / 表里没了）也会响。**门槛定得准是运气，集合包含关系不靠运气。** ③ **`^Mirror (.+) does not exist!$` 本轮被收紧了**（上面 (D) 段末尾那句「本轮只加用例钉住现状、不改表」是第二十七轮的记法，**不改它，在这里加脚注**）：现在是 `^Mirror ([ab]\\d{1,2}) does not exist!$` —— 上游 BleakArchiveAreaMap.#MIRRORS 的键恰好是 a1…a23 / b1…b23，ember.mjs:97859 / 98130 / 98430 三处互相印证，是个闭合集合。用例随之改：正例 `Mirror 3` → `Mirror a1`；反例新增 `Mirror Image does not exist!`（Mirror Image = 镜影术，别的模块真会发的句子，旧的宽正则会把它整句重构成「镜子 Image 不存在！」）与 `Mirror Universe does not exist!`，`The Mirror 3` → `The Mirror a1`，故通知反例 12 → **14** 条。⚠ 顺带记一次**判据按设计工作**的现场：表一改，主闸当场红在两处 —— 「notify_positive 实得 'Mirror 3 does not exist!'」与「NOTIFICATION_PATTERNS 31 条里有 1 条没有正例」，后者正是第二十七轮那道覆盖归因要的效果；同时 --selftest 的变异锚点 `_TRANS_NOTIFY_RE` **硬失败**（AssertionError「锚点不在被判文件里」），逼着人重新锚定而不是跳过 —— 重新锚定之后那条回测反而更有价值：放宽方向不再是随便造一个宽正则，而是**改回本轮修掉的那一版**。",
+   "why": "PATTERNS（28 条正则）· PREFIXED（19 条前缀）· NOTIFICATION_PATTERNS（31 条正则）是本项目**能主动改坏译文**的三张表 —— 命中就把整串替换掉。⚠ **第二十六轮这条 why 的开头写的是「唯一能主动改坏译文的两张表」，第二十七轮复核判为错，本轮改掉**：第三张 NOTIFICATION_PATTERNS 由 translateNotification 消费（ember-hardcoded-cn.mjs:2284-2304），而那个函数包的是 `ui.notifications.notify` —— **所有模块共用的全局钩子**；PATTERNS 只在 Ember 自己的窗口 / 认出归属的框 / 注入子树 / 聊天卡上跑，够不到别的模块，**通知这条通道是别的模块发的每一条提示都要过一遍**，爆炸半径更大。更难堪的是，旧 why 末尾自己写着「DIALOG_UI / NOTIFICATION_PATTERNS 是作用域表、不进本条」——**与开头那句「唯一」自相矛盾**，而那 31 条正则就这样在闸外多待了一轮。｜而在第二十六轮之前这几张表**一道常设闸都没有**：自检面板的 D 档「上游字面量存在性」按设计核不了正则表（对这 47 个键直接报 ⛔，键不是字面量，无从在上游语料里查「有没有这个串」），而此前 61 条断言里 PATTERNS 出现 **0 次**；上一轮验它的探针（4-临时脚本/2026-08-16-round25/probe_patterns_c.mjs）是**一次性**的，跑完没人再跑。⇒ 在此之前，下一轮谁再动一次这两条正则，没有任何常设判据会响。第二十五轮真正咬人的缺陷就出在这里：`^Result of (.+)$` 会把任意以 “Result of ” 开头的英文句子吃掉（→「结果：the investigation was inconclusive」），`^(Music|Environment): …$` 会把任意 `Music: …` 形状的句子改成「音乐：…」。｜本条**真的 import 发布中的 translateText 与 translateNotification 跑用例**（node 子进程，见 3-常用脚本/qa/translate_cases_runner.mjs），不在 Python 里重写一遍正则 —— 重写一遍就是又造一个会漂移的副本。translateNotification 与三张表都是模块私有的，runner 在 **harness 副本**上追加一行 `export {…}`（只加导出、函数体一个字节不改），且每个名字先确认顶层声明存在、找不到当场失败。node 取不到 / import 失败 / 导出名对不上 / 上游抠不到编排名，一律**当场失败并说明**，不许静默跳过（空转形态 (e)）。｜四段用例：(A) **反例 28 条**，上游产不出、形状相近的英文串一个字都不许被翻动 —— 13 条来自第二十五轮复核（其中 “Result of the investigation was inconclusive” / “Music: my custom playlist” / “Environment: Rain” 三条是旧实现真会误翻的现场），另加 2 条钉住另外两条宽正则（“Day, Generic” 是远景资源名，曾被旧的 `^Day` 兜底吃成「日 , Generic」；“Nosuch Attunement Rank 3” 钉 `^(.+) Rank ([1-5])$` 的 ATTUNEMENTS 查表兜底）；第二十七轮**新补 13 条专钉 PREFIXED 那一层**（第二十六轮这一层**一条反例都没有**）。⚠ 这 13 条守的**不是**「不许翻未知叶子」，而是「**不许把 Ember 根本不产出的串吃掉**」—— 见下面 A2 那条裁决。分两类：① 别的模块产出的通用标签（Name: / Type: / Description: / Source: / Duration: / Range:）—— 将来谁给 PREFIXED 加一条太通用的前缀，这几条当场红；② 上游产不出的近似写法 —— `Locations:`（复数）/ `location:`（小写）/ `Location:X`（无空格，上游模板里恒是「冒号 + 一个空格」）/ `The Location: X`（**不在串首**，而 translateText 用的是 startsWith）/ `Talents:` / `Quest Log:` / `Sorcerous Origins:`。(B) **正例 81 条**，上游真会产出的串必须仍然翻得动、且**译文逐字符相符** —— 只断言「翻动了」不够，收紧过头会把译文改成别的东西而断言照样绿。定义域出处：enrichCriticalResult（ember.mjs:22905-22913）先 dc = Number(dc) 再 if (!Number.isInteger(dc)) return match，之后**只可能**拼出 `Result of ${dc-5}-` 与 `Result of ${dc+5}+`，故 12 条取 dc = 0/5/8/18/100/-3 两支各一；音景三支取自 EmberSoundscape.enricherHTML —— :16255 的 `${channel.capitalize()}: Reset`、:16266 的 `${channel.capitalize()}: ${arrangement.label}`、:16267-16268 的心情后缀；PREFIXED 19 条前缀的出处逐条可查（Ancestry: ember.mjs:22934 · Culture: :22954/:123464 · Path: :22986/:123467 · Knowledge: :122900/:123707 · Language: :123688/:126547 · Attunement: :23008/:23181 · Quest: :25236 · Identifier: :35842 · Divine Domain:/Warlock Patron:/Sorcerous Origin: :36354/:36359/:36364 · Lifespan: :122595 与 crucible-async.mjs:189 · Rarity: crucible-async.mjs:188 · Talent: crucible/module/enrichers.mjs:739 · Area Map:/Location:/Biome:/Terrain: templates/applications/hex-hud.hbs:13/47/50/52 · Music Mood: :16271）；其余 PATTERNS/EXACT 分支各取一到两条回归。(B2) **覆盖归因（第二十七轮新增，这一段是本轮的要害）**：三张表的**每一条**都必须被至少一条正例触到，漏一条报违规；另有表长下限（19/28/31）兜住「把表和用例一起删掉换全绿」。⚠ 为什么非加不可：第二十六轮的闸名写着「PATTERNS / PREFIXED」，复核实测 79 条用例把 PATTERNS 打满 **28/28**（比自述的「20+」还好），`PREFIXED` 却只触到 **2/19**（只有 Attunement、Music Mood），**一条反例都没有**；把 Knowledge / Location / Quest / Talent / Rarity 五条译名逐个改坏重跑，闸 **5/5 全部保持 0 违规**。⇒「47 键零判据」当时其实只降到「约 17 键零判据」，不是 0。**用例数不等于覆盖，人眼数不出来，就让判据自己数。**归因用的是 translateText 派发顺序的镜像（EXACT → PREFIXED → PATTERNS），镜像有漂移风险，所以每条用例都做**预测输出 vs 实跑输出**的自洽校验 —— 派发顺序 / translateLeaf 的兜底 / 收尾 replace 被改而镜像没跟上，当场报违规；镜像引用的是**真表对象本身**，不是抄一份表。(D) **通知闸（第二十七轮新增）**：31 条 NOTIFICATION_PATTERNS **逐条正例（31/31）** + 12 条反例。反例重点是「**别的模块发的通知不许被吃掉**」（Token Mold / Dice So Nice / core 的 “You do not have permission to update this Document.” / “Compendium folders migration complete.”），另有近似写法（`Mirror does not exist!` 无参数 · `The Mirror 3 does not exist!` 不在串首 · 少了句末句号的那条）钉住锚点。translateNotification 的**空白折叠回退支**（:2299-2302）另有 2 条专用例，按上游 ember.mjs:36922 与 126652 那两条**跨行模板串**的真实换行 + 缩进构造 —— 没有带真实空白的用例，那一支等于没判。⚠ 顺带记一笔已知的最宽一条：`^Mirror (.+) does not exist!$`（:98432）在这 31 条里定义域最松，本轮只加用例钉住现状、不改表。(C) **全量护栏**：ember.mjs 里能抠出的**全部编排名** × Music/Environment 两通道逐条过。⚠ 编排名**从上游现抠**（soundscapes 注册表里的 arrangements[].label，正是 :16266 那个 arrangement.label 的来源），不许把 219 条硬编码进本文件 —— 硬编码就是空转形态 (c)「读旧快照」，上游一改断言还在核一份过期名单；抠不出来（上游打包形状变了）当场失败。⚠ 反过来，「**恰好这 8 个编排名整串留英**」这个集合**写死当护栏**：上游新增编排名时它会响，**那是要的**（人来看一眼这条新名字该不该进表）。8 个的由来：Clear / Drizzle / Rain / Thunderstorm / Arcane Fog / Mayis Storm 属音景 weather，Events 属音景 events，这两个音景的 type 不是 music/environment，不进播放列表侧栏那两个下拉（ember.mjs:15916-15922 只取 music 41 + environment 1 共 42 个），所以建 ARRANGEMENTS 表时本来就不在全集里（212 vs 219）；第 8 个 Seven Sails 是第二十二轮裁定**故意**留英（两仓 43115 条英文叶 en-hits=0，查不到这个名字指什么，宁可露英文也不猜）。⚠ 第二十七轮修 (C) 段里的**空转形态 (h) 残留**：抽取器锚在**精确空白**上（`\\n  arrangements: {` 与 `\\n      label: \"…\"`）。复核把上游 40 条 `label:` 行各加 1 个空格模拟上游换打包格式，编排名 **219 → 196 静默下降而闸仍 0 违规** —— 两处原因都已改：① min_labels 当时只卡 **150**、比现值低 69，掉 23 条照样在门槛之上 ⇒ 提到 **210**（Python 侧默认也从 100 提到 210），并加一条 labels_recorded=219「不得低于上次记录值」；② 找不到 arrangements 块的那一支原先是 `continue`、**不计 unresolved**，是真静默 ⇒ 现在与「有但抠不出来」同等计入 unresolved 并列出是哪个音景（实测 44 个音景全部带 arrangements 块，unresolved 恒为 0）。⇒ **形态 (h) 的要害不是「没有门槛」，是门槛松到够不着现值。**｜**A2 裁决（第二十七轮，主控拍板）：第二十五轮把音景那条收紧成「查不到就整串不动」，结论正确、但当时记的理由是错的，本轮把正确理由记在这里。**当时记的理由是「`translateLeaf = table[name] ?? name` ＋前缀替换会把未知叶子的英文原样带出去」，可 PREFIXED 那 19 条**全部**在做同一件事（`Location: <未知>` →「地点：<未知>」），一处判缺陷、十九处判正常，两边不可能都对。真正的判据是「**这个前缀的叶子集合，能不能从上游枚举出来**」：音景叶子有**闭合的上游注册表**（ember.mjs 的 soundscapes 里现抠得到 219 条编排名 + `Reset`），所以要求「查得到才翻」是**免费**的；而 Location: / Quest: / Talent: / Biome: / Terrain: / Area Map: / Lifespan: / Identifier: 的叶子是**用户与战役数据里创建的内容**（hex-hud.hbs 的 location.label / ember.mjs:25236 的 event.root.label / crucible enrichers.mjs:739 的 talentIndex.name），是**开放集合**，要求查表等于**绝大多数正常内容都不翻**，代价远大于收益。而 `^Result of (.+)$` 与它们**不是一类**：前缀替换的降级是**安全**的（标签变中文、叶子留英、句子结构完整、信息一个字没丢），`^Result of (.+)$` 的降级是**破坏性**的（把一个完整英文句子重构成「标签＋残句」，原句语义被销毁）。⇒ **两处都不改**，改的只是记错的理由。这也决定了 PREFIXED 反例层的设计：守的是「不许把 Ember 根本不产出的串吃掉」（锚定串首 + 前缀确实由 Ember 产出），不是「不许翻未知叶子」。｜⚠ 判据边界：本条只判 translateText / translateNotification 的**输入→输出**，不判「这个中文译得好不好」；EXACT 4200+ 条与 NOTIFICATIONS 的整串查表仍由自检面板的 D 档管（本条只用 1 条正例钉住 translateNotification 查 NOTIFICATIONS 那一支的存在）；DIALOG_UI 是**认框后**才作为 extra 传进去的作用域表，本条不判（它进不了全局通道，改坏它只影响已认出的 Ember 对话框子树）。⚠ 灵敏度回测固化在 --selftest 里（把 `^Result of (.+)$` 改回宽的、把 ARRANGEMENT_LEAVES 的查表兜底放宽回去、把某条 PREFIXED 的中文前缀改坏、把某条 NOTIFICATION_PATTERNS 的译文改坏、删掉一条用例让覆盖率掉下来，各自必须变红），**做不到回测的闸不算闸**。｜**第二十八轮（本轮）三处补丁，都是复核实测逼出来的：** ① **堵作弊路径 B（自指的洞）**：上面写的那些下限（表长 19/28/31 · 用例条数 · min_labels）**全是规则文件里的自报数**，复核把 coverage.min_prefixed 从 19 改回 2、min_negative / min_positive 放到 1，**其余一个字节不动 → 违规 0，闸变绿**（对照：删一条用例 4/4 立刻红）⇒ 这些数现在改走 `recorded` 块，判据**另从被判对象现算一份下限**（表现在有几条 / 规则里现在写着几条用例 / 上游这次抠出几个编排名），两层一起判：`actual < recorded` 抓删除，`recorded < 现算值` 抓「调松了 / 加了东西忘了记」（判法见 assert_resolutions.py 的 `_two_layer_floor`）。实测五种调松动作（表长记录值→2 · 用例条数→1 · 整个 recorded 块删掉 · min_labels 与 labels_recorded 一起→2 · np 那两个数一起调松）**逐个复现，闸全部仍然红**，五条都固化进 --selftest。⚠ 边界写明白：两份文件都是可改的，**同时**改「删表项 + 删用例 + 改记录值」仍然能过 —— 本轮保证的是「**任何一处单独调松都会当场红**」，要绕过它必须留下一串写着「我把记录值改小了」的自证 diff，而不是原先那种「悄悄把 19 改成 2」。另有一道交叉印证：PREFIXED + PATTERNS 进自检面板的条目数（19+28=47）在 R-selfcheck-d-liveness 里**另记了一份**，跑的是另一份执行体、读的是另一条汇总路径。② **能不写成阈值的都改成恒等式**：编排名那两道数量门槛之外，新加一道**不含阈值**的同源包含检查 —— 被判文件 `ARRANGEMENT_LEAVES` 的每个键都必须能在「上游现抠的编排名」里找到（两边本来就同源：那张表当初就是从这份上游注册表抄下来的），抽取器的锚一失效，缺的那批立刻被逐个点名。`Reset` 是唯一登记的例外（它来自 ember.mjs:16255 的 `${channel.capitalize()}: Reset`，不是 arrangements[].label），例外集合过期（上游有了 / 表里没了）也会响。**门槛定得准是运气，集合包含关系不靠运气。** ③ **`^Mirror (.+) does not exist!$` 本轮被收紧了**（上面 (D) 段末尾那句「本轮只加用例钉住现状、不改表」是第二十七轮的记法，**不改它，在这里加脚注**）：现在是 `^Mirror ([ab]\\d{1,2}) does not exist!$` —— 上游 BleakArchiveAreaMap.#MIRRORS 的键恰好是 a1…a23 / b1…b23，ember.mjs:97859 / 98130 / 98430 三处互相印证，是个闭合集合。用例随之改：正例 `Mirror 3` → `Mirror a1`；反例新增 `Mirror Image does not exist!`（Mirror Image = 镜影术，别的模块真会发的句子，旧的宽正则会把它整句重构成「镜子 Image 不存在！」）与 `Mirror Universe does not exist!`，`The Mirror 3` → `The Mirror a1`，故通知反例 12 → **14** 条。⚠ 顺带记一次**判据按设计工作**的现场：表一改，主闸当场红在两处 —— 「notify_positive 实得 'Mirror 3 does not exist!'」与「NOTIFICATION_PATTERNS 31 条里有 1 条没有正例」，后者正是第二十七轮那道覆盖归因要的效果；同时 --selftest 的变异锚点 `_TRANS_NOTIFY_RE` **硬失败**（AssertionError「锚点不在被判文件里」），逼着人重新锚定而不是跳过 —— 重新锚定之后那条回测反而更有价值：放宽方向不再是随便造一个宽正则，而是**改回本轮修掉的那一版**。｜**第二十九轮（本轮）：反例是最后一段没有结构护栏的用例，补上。**复核实测把两侧摆在一起看：**正例**被「每条表项都必须有正例」这条**从表长现算**的恒等式钉死 —— 把三张表砍到 47 条并**同步改 `recorded`**，闸照样红、还点名「PREFIXED 17 条无正例 / PATTERNS 11 条无正例」；**反例只有一个数字挡着** —— 「清空 `negative` + 把 `recorded.negative` 改 0」两处协同就**全绿**，`notify_negative` 同理。而反例正是守「**不许吃别的模块的散文与通知**」的那一层，`Mirror Image does not exist!` 那类**唯一一次实测到的现网越界**就住在这里。⇒ 现在反例也有两道从表长现算的护栏（实现见 translate_cases_runner.mjs 的 §④b，判法在 Python 侧另核一遍恒等式）：**(N1) 一条表项一条专属的近似反例**，按**最大二分匹配必须是完美匹配**判 —— 「近似」的机械定义是「反例串**逐字包含**该表项的**字面骨架**」（PREFIXED 取它的 `en`；两张正则表从 `re.source` 里抠最长的连续字面，含纯字面 alternation 的各支）；一对一 ⇒ 反例条数**结构上**不可能少于表长之和（translateText 通道 19+28=47 · 通知通道 27）。**粒度就选在「逐条表项」，没有降**：复核建议的正是这个粒度，成本是 38 + 25 = 63 条新反例，一次性付清，之后每加一条表项才多付一条；降成「按前缀分组」会让「新加一条与既有条目同前缀的宽正则」不必配反例，而那恰恰是最危险的那种加法。**(N2) 机械近似探针**（零维护、条数跟着表长走）：对每条表项现造 `Zzq <骨架> Zzq` —— 骨架既不在串首也不在串尾，三张表现在每条都是 `^…$` 全锚定，所以结构上匹配不到；它一旦被翻动，只可能是有人写了**不锚定串首/串尾**的正则（或把 `startsWith` 改成 `includes`），而那正是「吃别的模块散文」的成因。两道**互补**：(N2) 抓不锚定，(N1) 抓「锚定但定义域太宽」（`^Result of (.+)$` 那一种，(N2) 对它无效）。⚠ **(N1) 的边界照实写**：它证明的是「每条表项旁边至少有一条含它字面骨架、且一个字都没被吃掉的串」，**不是**「有人专门为它想过反例」—— 归因靠子串包含，所以反例可能被**碰巧**归到另一条表项上（`location:` 本是给 PREFIXED 的 `Location` 写的，也含 PATTERNS 那条 `… in (\\d+) location(?:s)?$` 的骨架）；也**绕得过去**：拿一条把骨架串进去的垃圾串来凑，一条只能顶一条，凑满要 47+27 条垃圾串 —— **那是一眼可见的 diff**，与「悄悄把一个数改成 0」不是一回事。⚠ 另有一处**本轮不是我改的、但记录值必须跟着改**：被判文件按一条新裁决（「全局通知表每条正则必须有厂商锚点或封闭定义域」）删掉 4 条 NOTIFICATION_PATTERNS（两条 rest-event、`is already registered for this (layer|color)`、`group actor`）并把 `Adjacent hex` 收紧成带 slice 前缀的形状，删除理由与损失评估逐条写在被判文件 :2132 起的注释块里。⇒ `np_size` 31→27、`notify_positive` 36→31（对应的 5 条正例移除、hex 那条改成 `s.12.4`），细节记在 `recorded._why_29`。**这次是判据按设计工作的又一个现场**：表一删，主闸当场红在「np_size 实得 27 低于历史记录值 31」与「1 条没有正例」两处，逼人来看一眼再改记录值。",
    "kind": "translate_cases",
    "repo": "ember",
    "src": "scripts/ember-hardcoded-cn.mjs",
@@ -1380,13 +1380,15 @@
    "upstream_src": "scripts/ember.mjs",
    "recorded": {
     "_why": "第二十八轮：原先这里是 min_negative / min_positive / min_notify_* 与 coverage.min_* 一堆**可调的门槛**，复核实测把其中三个改小（min_prefixed 19→2、min_negative/min_positive→1），**其余一个字节不动，闸就从红变绿**。⇒ 现在这些数一律只当「**上次人工确认过的值**」用，判据另从被判对象**现算**一份下限（表现在有多少条 / 规则里现在写着几条用例 / 上游现抠出多少编排名），两层一起判：`actual < recorded` 抓删除，`recorded < 现算值` 抓「调松了 / 加了东西忘了记」。谁把下面任何一个数改小，闸当场红。判法见 assert_resolutions.py 的 `_two_layer_floor`。",
+    "_why_29": "第二十九轮两处改动，都必须留痕：① `np_size` 31→27、`notify_positive` 36→31 是**记录值调小**，理由不是「让闸变绿」而是**被判文件里的一条显式裁决**——本轮 `ember-hardcoded-cn.mjs` 按「全局通知表每条正则必须有厂商锚点或封闭定义域」删掉 4 条（两条 rest-event、`is already registered for this (layer|color)`、`group actor`），删除理由与损失评估逐条写在被判文件的注释块里（:2132 起）；另把 `Adjacent hex (.+)…(.+)` 收紧成带 slice 前缀的形状，故那条正例从 `12.4` 改成 `s.12.4`。被删的 4 条对应的 5 条正例随之移除。⚠ 这正是 `_two_layer_floor` 设计要的效果：表一删，主闸当场红在「np_size 实得 27 低于历史记录值 31」与「1 条没有正例」，**逼人来看一眼再改记录值**，而不是悄悄地绿。② `negative` 28→66、`notify_negative` 14→39 是**补齐反例的结构护栏**（见 why 里第二十九轮那段）：反例此前只有这两个数挡着，清空反例 + 把数改 0 就全绿；现在按「一条表项一条专属近似反例」的完美匹配判，这两个数**结构上**不可能低于 47 与 27。",
     "prefixed_size": 19,
     "patterns_size": 28,
-    "np_size": 31,
-    "negative": 28,
+    "np_size": 27,
+    "negative": 66,
     "positive": 81,
-    "notify_negative": 14,
-    "notify_positive": 36
+    "notify_negative": 45,
+    "notify_positive": 32,
+    "_why_29b": "第二十九轮备好、第三十轮落地的增量：通知反例 +6 / 通知正例 +1，**只加不删**，两个记录值随之上调（notify_negative 39→45 · notify_positive 31→32）。⚠ **措辞按第三十轮复核的实测口径更正过**：第二十九轮原稿写的是「删除这个动作本身此前没有任何常设判据守着，下一轮谁把它放回表里都是无声的」—— **这句话经实测不成立**。把第二十九轮删掉的那条正则（`^\"(.+)\" is already registered for this (layer|color)\\.$`）原样加回被判文件，主闸当场**违规 4 处、红**：覆盖归因、结构护栏、`np_size` 三道一起响；要让它变绿必须 4 处协同改动，而每一处都在 diff 里自证。⇒ 这 6 条**不是补一个无人看守的洞，是加固**：那三道守的是「表变长了却没人记账」，而**合法的加法**——把正则加回去、同时补上它自己的正例与近似反例并把记录值一起上调——本来是一条走得通的路；这 6 条反例把那条路也钉死了。⚠ 第三十轮就地实测过这件事（临时副本树加回正则、跑发布中的这条规则，被判文件本体没动）：落 E1 **之前** 4 处违规全是记账类（coverage / negative_structure / np_size / np_neg_matched），逐条都能靠「补正例 + 补专属反例 + 上调 np_size」合法消掉；落 E1 **之后**同样 4 处，但其中 2 处换成了这 6 条里的 `\"myLayer\"` 与 `\"crimson\"` **自己被整句重写成中文**（实得「「myLayer」已在该层上注册过了。」），而 negative_structure / np_neg_matched 反倒被这 6 条**满足**了 —— 也就是说它们一边充当那条表项的专属近似反例、一边把它钉死。它们钉的不是某条现存表项，而是「**这条正则不许被加回来**」，且**改记录值救不了**（反例判的是「这句不许被翻译」，不是数量）；要变绿只能把这 6 条删掉，而那是作弊路径 A，第二十七轮已堵。其中前两条（`\"myLayer\" … layer.` / `\"crimson\" … color.`）是复核用真身实跑坐实的**现网越界现场**：改动前它们确实会被整句重写成「「myLayer」已在该层上注册过了。」。加的 1 条正例覆盖 hex 的另一个 slice 前缀与负偏移（`p.0.0` / `s.-3.7`，出处 ember.mjs:119780 `prefix: \"s\"` · :120120 `prefix: \"p\"` · :955-956 i/j 只要求整数）。"
    },
    "negative": [
     "Result of the investigation was inconclusive",
@@ -1416,90 +1418,371 @@
     "The Location: Kestrel Hall",
     "Talents: Iron Will",
     "Quest Log: Chapter 2",
-    "Sorcerous Origins: Wild Magic"
+    "Sorcerous Origins: Wild Magic",
+    "Languages: Arcden",
+    "Knowledge:Alchemy",
+    "Music Moods: Calm",
+    "Ancestry:Kavir",
+    "The Culture: Bejak",
+    "Paths: Nightwatch",
+    "Area Maps: Ashen Wastes",
+    "Biomes: Tundra",
+    "Terrain:Mountain",
+    "Divine Domains: Knowledge",
+    "Warlock Patrons: Genie",
+    "Item Rarity: Extinct",
+    "Lifespans: 80 years",
+    "Identifiers: emberVaultDoor",
+    "Many Boons and Banes",
+    "Age of the Tower - Long Ago",
+    "Please Award Attunement: Abyss",
+    "Do not Revoke Attunement: Abyss",
+    "Tap to Activate Attunement: Abyss",
+    "See [[/language borel]] for details",
+    "See [[/knowledge Shent]] above",
+    "The Interactable: Lever",
+    "See Token Maker Part Usage: Horns",
+    "Are you sure you wish to proceed and delete the \"Foo\" folder? This cannot be undone.",
+    "Activate this mine cart with Bob as its driver?",
+    "There are upstream events of Foo which have been started or completed.",
+    "This event is not currently available because its prerequisites are not satisfied.",
+    "Would you like to transition the Party to the Pathways section of the Region map?",
+    "No results found for foo.",
+    "New Vantage Point: Somewhere",
+    "Set the active attunement for Bob.",
+    "Threat Level High",
+    "An example Kessian creature.",
+    "You have some unspent ability points to allocate as part of your",
+    "Outcome Three",
+    "Some Others",
+    "Abyss Rank 6",
+    "Breeze (4.5 mph) gusting"
    ],
    "positive": [
-    ["Result of -5-", "结果：-5-"],
-    ["Result of 5+", "结果：5+"],
-    ["Result of 0-", "结果：0-"],
-    ["Result of 10+", "结果：10+"],
-    ["Result of 3-", "结果：3-"],
-    ["Result of 13+", "结果：13+"],
-    ["Result of 13-", "结果：13-"],
-    ["Result of 23+", "结果：23+"],
-    ["Result of 95-", "结果：95-"],
-    ["Result of 105+", "结果：105+"],
-    ["Result of -8-", "结果：-8-"],
-    ["Result of 2+", "结果：2+"],
-    ["Music: Reset", "音乐：重置"],
-    ["Environment: Reset", "环境音：重置"],
-    ["Music: Ankarist Theme", "音乐：安卡里斯特的主题"],
-    ["Environment: Ankarist Theme", "环境音：安卡里斯特的主题"],
-    ["Music: Ancient Ruins (Tension)", "音乐：远古遗迹（紧张）"],
-    ["Music: Ankarist Theme (Calm)", "音乐：安卡里斯特的主题（平静）"],
-    ["Music: Ancient Giants Tension", "音乐：远古巨人 · 紧张"],
-    ["Music Mood: Calm", "音乐氛围：平静"],
-    ["+2 Boons", "+2 恩惠骰"],
-    ["-6 Banes", "-6 祸骰"],
-    ["+1 Boons", "+1 恩惠骰"],
-    ["-1 Banes", "-1 祸骰"],
-    ["Age of Beasts - 12 Years Ago", "野兽时代 · 12 年前"],
-    ["Age of the Tower - Current Year", "高塔时代 · 本年"],
-    ["Age of Creation - -300 Years Ago", "创造时代 · 300 年前"],
-    ["After Shattering - 5 Years From Now", "大破裂之后 · 5 年后"],
-    ["Day 43 - 12:00", "第 43 天 - 12:00"],
-    ["Day 43", "第 43 天"],
-    ["Outcome 3", "结果 3"],
-    ["5 Others", "其他 5 项"],
-    ["Threat 12.5", "威胁等级 12.5"],
-    ["Threat -2", "威胁等级 -2"],
-    ["Vantage Point: Somewhere", "制高点：Somewhere"],
-    ["Interactable: Lever", "可交互物：Lever"],
-    ["Breeze (4.5 mph)", "Breeze（4.5 英里/时）"],
-    ["Activate Attunement: Abyss", "激活同调：深渊"],
-    ["Award Attunement: Abyss", "授予同调：Abyss"],
-    ["Revoke Attunement: Abyss", "撤销同调：Abyss"],
-    ["Token Maker Part Usage: Horns", "指示物制作器部件用量：Horns"],
-    ["Attunement: Abyss", "同调：深渊"],
-    ["Critical Success", "大成功"],
-    ["[[/language borel]]", "语言：博雷尔语"],
-    ["[[/language kost]]", "语言：科斯特语"],
-    ["[[/language moiré]]", "语言：莫伊雷语"],
-    ["[[/knowledge Shent]]", "知识：申特"],
-    ["[[/knowledge nosuchid]]", "知识：nosuchid"],
-    ["Abyss Rank 3", "深渊 阶位 3"],
-    ["An example Kessian character.", "一位Kessian角色的示例。"],
-    ["You have 3 unspent ability points to allocate as part of your", "你还有 3 点未分配的属性点，需要在"],
-    ["You have 1 unspent ability increases to allocate as part of your", "你还有 1 点未分配的属性提升，需要在"],
-    ["Are you sure you wish to proceed and delete the \"Foo\" composition? This cannot be undone.", "确定要删除「Foo」构图吗？此操作无法撤销。"],
-    ["Activate this mine cart with Bob as its passenger?", "以 Bob 为乘客启动这辆矿车？"],
-    ["There are downstream events of Foo which have been started or completed.", "Foo 存在已开始或已完成的下游事件。"],
-    ["The Foo event is not currently available because its prerequisites are not satisfied.", "Foo 事件当前不可用，其前置条件尚未满足。"],
-    ["Do you want to transition the Party to the Pathways section of the Region map?", "是否将队伍转移到地区地图的通路 Pathways 区段？"],
-    ["Do you want to complete this event and transition the Party to the Pathways section of the Region map?", "是否完成此事件并将队伍转移到地区地图的通路 Pathways 区段？"],
-    ["the active attunement for Bob.", "设为 Bob 的激活同调。"],
-    ["the active attunement for Bob. You will lose", "设为 Bob 的激活同调。你将失去"],
-    ["the active attunement for Bob. You will gain", "设为 Bob 的激活同调。你将获得"],
-    ["\"foo\" - 3 matches in 2 locations", "“foo” — 在 2 处位置找到 3 个匹配"],
-    ["\"foo\" - 1 match in 1 location", "“foo” — 在 1 处位置找到 1 个匹配"],
-    ["No results found for “foo”.", "未找到与“foo”匹配的内容。"],
-    ["Language: Arcden", "语言：奥克登语"],
-    ["Knowledge: Alchemy", "知识：炼金术"],
-    ["Ancestry: Kavir", "血统：卡维尔 Kavir"],
-    ["Culture: Bejak", "文化：贝雅克 Bejak"],
-    ["Path: Nightwatch", "道途：夜巡者 Nightwatch"],
-    ["Talent: 铁意志", "天赋：铁意志"],
-    ["Area Map: 灰烬荒野", "区域地图：灰烬荒野"],
-    ["Location: 凯斯特尔厅", "地点：凯斯特尔厅"],
-    ["Biome: 苔原", "生物群系：苔原"],
-    ["Terrain: 山地", "地形：山地"],
-    ["Divine Domain: Knowledge", "神圣领域：知识"],
-    ["Warlock Patron: Genie", "邪术师宗主：巨灵"],
-    ["Sorcerous Origin: Wild Magic", "术士起源：狂野魔法"],
-    ["Rarity: Extinct", "稀有度：已灭绝"],
-    ["Lifespan: 约 80 年", "寿命：约 80 年"],
-    ["Identifier: emberVaultDoor", "标识符：emberVaultDoor"],
-    ["Quest: 有遮蔽的营地", "任务：有遮蔽的营地"]
+    [
+     "Result of -5-",
+     "结果：-5-"
+    ],
+    [
+     "Result of 5+",
+     "结果：5+"
+    ],
+    [
+     "Result of 0-",
+     "结果：0-"
+    ],
+    [
+     "Result of 10+",
+     "结果：10+"
+    ],
+    [
+     "Result of 3-",
+     "结果：3-"
+    ],
+    [
+     "Result of 13+",
+     "结果：13+"
+    ],
+    [
+     "Result of 13-",
+     "结果：13-"
+    ],
+    [
+     "Result of 23+",
+     "结果：23+"
+    ],
+    [
+     "Result of 95-",
+     "结果：95-"
+    ],
+    [
+     "Result of 105+",
+     "结果：105+"
+    ],
+    [
+     "Result of -8-",
+     "结果：-8-"
+    ],
+    [
+     "Result of 2+",
+     "结果：2+"
+    ],
+    [
+     "Music: Reset",
+     "音乐：重置"
+    ],
+    [
+     "Environment: Reset",
+     "环境音：重置"
+    ],
+    [
+     "Music: Ankarist Theme",
+     "音乐：安卡里斯特的主题"
+    ],
+    [
+     "Environment: Ankarist Theme",
+     "环境音：安卡里斯特的主题"
+    ],
+    [
+     "Music: Ancient Ruins (Tension)",
+     "音乐：远古遗迹（紧张）"
+    ],
+    [
+     "Music: Ankarist Theme (Calm)",
+     "音乐：安卡里斯特的主题（平静）"
+    ],
+    [
+     "Music: Ancient Giants Tension",
+     "音乐：远古巨人 · 紧张"
+    ],
+    [
+     "Music Mood: Calm",
+     "音乐氛围：平静"
+    ],
+    [
+     "+2 Boons",
+     "+2 恩惠骰"
+    ],
+    [
+     "-6 Banes",
+     "-6 祸骰"
+    ],
+    [
+     "+1 Boons",
+     "+1 恩惠骰"
+    ],
+    [
+     "-1 Banes",
+     "-1 祸骰"
+    ],
+    [
+     "Age of Beasts - 12 Years Ago",
+     "野兽时代 · 12 年前"
+    ],
+    [
+     "Age of the Tower - Current Year",
+     "高塔时代 · 本年"
+    ],
+    [
+     "Age of Creation - -300 Years Ago",
+     "创造时代 · 300 年前"
+    ],
+    [
+     "After Shattering - 5 Years From Now",
+     "大破裂之后 · 5 年后"
+    ],
+    [
+     "Day 43 - 12:00",
+     "第 43 天 - 12:00"
+    ],
+    [
+     "Day 43",
+     "第 43 天"
+    ],
+    [
+     "Outcome 3",
+     "结果 3"
+    ],
+    [
+     "5 Others",
+     "其他 5 项"
+    ],
+    [
+     "Threat 12.5",
+     "威胁等级 12.5"
+    ],
+    [
+     "Threat -2",
+     "威胁等级 -2"
+    ],
+    [
+     "Vantage Point: Somewhere",
+     "制高点：Somewhere"
+    ],
+    [
+     "Interactable: Lever",
+     "可交互物：Lever"
+    ],
+    [
+     "Breeze (4.5 mph)",
+     "Breeze（4.5 英里/时）"
+    ],
+    [
+     "Activate Attunement: Abyss",
+     "激活同调：深渊"
+    ],
+    [
+     "Award Attunement: Abyss",
+     "授予同调：Abyss"
+    ],
+    [
+     "Revoke Attunement: Abyss",
+     "撤销同调：Abyss"
+    ],
+    [
+     "Token Maker Part Usage: Horns",
+     "指示物制作器部件用量：Horns"
+    ],
+    [
+     "Attunement: Abyss",
+     "同调：深渊"
+    ],
+    [
+     "Critical Success",
+     "大成功"
+    ],
+    [
+     "[[/language borel]]",
+     "语言：博雷尔语"
+    ],
+    [
+     "[[/language kost]]",
+     "语言：科斯特语"
+    ],
+    [
+     "[[/language moiré]]",
+     "语言：莫伊雷语"
+    ],
+    [
+     "[[/knowledge Shent]]",
+     "知识：申特"
+    ],
+    [
+     "[[/knowledge nosuchid]]",
+     "知识：nosuchid"
+    ],
+    [
+     "Abyss Rank 3",
+     "深渊 阶位 3"
+    ],
+    [
+     "An example Kessian character.",
+     "一位Kessian角色的示例。"
+    ],
+    [
+     "You have 3 unspent ability points to allocate as part of your",
+     "你还有 3 点未分配的属性点，需要在"
+    ],
+    [
+     "You have 1 unspent ability increases to allocate as part of your",
+     "你还有 1 点未分配的属性提升，需要在"
+    ],
+    [
+     "Are you sure you wish to proceed and delete the \"Foo\" composition? This cannot be undone.",
+     "确定要删除「Foo」构图吗？此操作无法撤销。"
+    ],
+    [
+     "Activate this mine cart with Bob as its passenger?",
+     "以 Bob 为乘客启动这辆矿车？"
+    ],
+    [
+     "There are downstream events of Foo which have been started or completed.",
+     "Foo 存在已开始或已完成的下游事件。"
+    ],
+    [
+     "The Foo event is not currently available because its prerequisites are not satisfied.",
+     "Foo 事件当前不可用，其前置条件尚未满足。"
+    ],
+    [
+     "Do you want to transition the Party to the Pathways section of the Region map?",
+     "是否将队伍转移到地区地图的通路 Pathways 区段？"
+    ],
+    [
+     "Do you want to complete this event and transition the Party to the Pathways section of the Region map?",
+     "是否完成此事件并将队伍转移到地区地图的通路 Pathways 区段？"
+    ],
+    [
+     "the active attunement for Bob.",
+     "设为 Bob 的激活同调。"
+    ],
+    [
+     "the active attunement for Bob. You will lose",
+     "设为 Bob 的激活同调。你将失去"
+    ],
+    [
+     "the active attunement for Bob. You will gain",
+     "设为 Bob 的激活同调。你将获得"
+    ],
+    [
+     "\"foo\" - 3 matches in 2 locations",
+     "“foo” — 在 2 处位置找到 3 个匹配"
+    ],
+    [
+     "\"foo\" - 1 match in 1 location",
+     "“foo” — 在 1 处位置找到 1 个匹配"
+    ],
+    [
+     "No results found for “foo”.",
+     "未找到与“foo”匹配的内容。"
+    ],
+    [
+     "Language: Arcden",
+     "语言：奥克登语"
+    ],
+    [
+     "Knowledge: Alchemy",
+     "知识：炼金术"
+    ],
+    [
+     "Ancestry: Kavir",
+     "血统：卡维尔 Kavir"
+    ],
+    [
+     "Culture: Bejak",
+     "文化：贝雅克 Bejak"
+    ],
+    [
+     "Path: Nightwatch",
+     "道途：夜巡者 Nightwatch"
+    ],
+    [
+     "Talent: 铁意志",
+     "天赋：铁意志"
+    ],
+    [
+     "Area Map: 灰烬荒野",
+     "区域地图：灰烬荒野"
+    ],
+    [
+     "Location: 凯斯特尔厅",
+     "地点：凯斯特尔厅"
+    ],
+    [
+     "Biome: 苔原",
+     "生物群系：苔原"
+    ],
+    [
+     "Terrain: 山地",
+     "地形：山地"
+    ],
+    [
+     "Divine Domain: Knowledge",
+     "神圣领域：知识"
+    ],
+    [
+     "Warlock Patron: Genie",
+     "邪术师宗主：巨灵"
+    ],
+    [
+     "Sorcerous Origin: Wild Magic",
+     "术士起源：狂野魔法"
+    ],
+    [
+     "Rarity: Extinct",
+     "稀有度：已灭绝"
+    ],
+    [
+     "Lifespan: 约 80 年",
+     "寿命：约 80 年"
+    ],
+    [
+     "Identifier: emberVaultDoor",
+     "标识符：emberVaultDoor"
+    ],
+    [
+     "Quest: 有遮蔽的营地",
+     "任务：有遮蔽的营地"
+    ]
    ],
    "notify_negative": [
     "Token Mold | Settings saved.",
@@ -1515,52 +1798,183 @@
     "Awarded attunement progression points to Actors",
     "Saved Ember Dynamic Token configuration",
     "Your rest was interrupted by the storm.",
-    "Attunement activation is not yet implemented for system \"pf2e\""
+    "Attunement activation is not yet implemented for system \"pf2e\"",
+    "This Vista is not yet configured to support the placement of Tokens.",
+    "Deleted saved Vista composition \"Dawn\"",
+    "Updated composition for Level \"2\"!",
+    "Saved composition to Scene with identifier \"vault-01\"",
+    "Imported composition to Level \"3\" successfully.",
+    "Awarded attunement progression points to Actors:",
+    "Completed resting for eight hours without incident!",
+    "Your short rest has been interrupted after a while!",
+    "Your long rest has been interrupted after a while!",
+    "Saved Ember Dynamic Token configuration for",
+    "Saved Ember Dynamic Token randomization parameters to Actor",
+    "Applied fog exploration from the North Ridge vantage point.",
+    "Discovered vantage point, North Ridge.",
+    "Added the Soulbound talent to Bob at rank 2.",
+    "Upgraded Soulbound talent on Bob to rank two.",
+    "The event badId is not a recognized gameplay event. This likely indicates some issue with the Ember module installation.",
+    "\"horns\" is not a known Token Maker part in any template layer.",
+    "This part is not available in the Token Maker's current template preview.",
+    "Adjacent hex 12.4 is not directly reachable from current hex 12.3.",
+    "You are not allowed to delete the Bob Token from the Area Map.",
+    "That Scene \"Vault\" does not have compositions defined.",
+    "User \"Alice\" edited interactable \"Lever\" in Scene Vault. You must be present in this Scene to acknowledge this operation.",
+    "Ember | Transit destination scene \"Depot\" was not found!",
+    "Attunement feat for Abyss rank two could not be resolved.",
+    "Bob cannot progress their Soulbound rank further as they already bear a Deathly Soulmark. Try again later.",
+    "\"myLayer\" is already registered for this layer.",
+    "\"crimson\" is already registered for this color.",
+    "Your rest was interrupted after 3 hours by the Ambush event!",
+    "Your rest was interrupted by the Ambush event!",
+    "You cannot create multiple tokens for the \"Bandits\" group actor.",
+    "Adjacent hex A is not directly reachable from current hex B."
    ],
    "notify_positive": [
-    ["Attunement activation is not yet implemented for system \"pf2e\".", "系统「pf2e」尚未实现同调激活。"],
-    ["The Ashen Overlook Vista is not yet configured to support the placement of Tokens.", "远景「Ashen Overlook」尚未配置为支持放置指示物。"],
-    ["Deleted saved Vista composition \"Dawn\".", "已删除保存的远景构图「Dawn」。"],
-    ["Updated composition for Level \"2\".", "已更新层「2」的构图。"],
-    ["Saved composition to Scene with identifier \"vault-01\".", "已将构图保存到场景，标识符为「vault-01」。"],
-    ["Imported composition to Level \"3\".", "已将构图导入到层「3」。"],
-    ["Awarded attunement progression points to Actors: Bob, Alice", "已向以下角色授予同调进阶点数：Bob, Alice"],
-    ["Completed resting for 8 hours without incident!", "顺利完成了 8 小时的休息！"],
-    ["Your rest was interrupted after 3 hours by the Ambush event!", "休息在 3 小时后被「Ambush」事件打断！"],
-    ["Your rest was interrupted by the Ambush event!", "休息被「Ambush」事件打断！"],
-    ["Your short rest has been interrupted after 10 minutes!", "短休在 10 分钟后被打断！"],
-    ["Your long rest has been interrupted after 6 hours!", "长休在 6 小时后被打断！"],
-    ["Saved Ember Dynamic Token configuration for Bob", "已保存 Bob 的余烬动态指示物配置"],
-    ["Saved Ember Dynamic Token randomization parameters to Actor Bob", "已将余烬动态指示物的随机化参数保存到角色 Bob"],
-    ["Applied fog exploration from the North Ridge vantage point!", "已应用来自制高点「North Ridge」的迷雾探索！"],
-    ["Discovered vantage point, North Ridge!", "发现了制高点：North Ridge！"],
-    ["Added the Soulbound talent to Bob at rank 1.", "已为 Bob 添加阶位 1 的魂缚 Soulbound 天赋。"],
-    ["Upgraded Soulbound talent on Bob to rank 2.", "已将 Bob 的魂缚 Soulbound 天赋升至阶位 2。"],
-    ["Event badId is not a recognized gameplay event. This likely indicates some issue with the Ember module installation.", "事件 badId 不是可识别的游戏事件。这多半说明余烬模块的安装有问题。"],
-    ["Event badId is not a recognized gameplay event. This likely indicates some issue \n      with the Ember module installation.", "事件 badId 不是可识别的游戏事件。这多半说明余烬模块的安装有问题。"],
-    ["Ember | \"horns\" is not a known Token Maker part in any template layer.", "Ember | 「horns」不是任何模板层里已知的指示物制作器部件。"],
-    ["This layer is not available in the Token Maker's current template preview.", "该层在指示物制作器当前的模板预览中不可用。"],
-    ["This color is not available in the Token Maker's current template preview.", "该颜色在指示物制作器当前的模板预览中不可用。"],
-    ["\"horns\" is already registered for this layer.", "「horns」已在该层上注册过了。"],
-    ["\"red\" is already registered for this color.", "「red」已在该颜色上注册过了。"],
-    ["You cannot create multiple tokens for the \"Bandits\" group actor.", "不能为群组角色「Bandits」创建多个指示物。"],
-    ["Adjacent hex 12.4 is not directly reachable from current hex 12.3.", "相邻六边格 12.4 无法从当前六边格 12.3 直达。"],
-    ["You are not allowed to delete the Bob Token from the Region Map.", "你无权从地区地图上删除指示物 Bob。"],
-    ["The Scene \"Vault\" does not have compositions defined.", "场景「Vault」没有定义任何构图。"],
-    ["User \"Alice\" wants to modify interactable \"Lever\" in Scene Vault. You must be present in this Scene to acknowledge this operation.", "用户「Alice」想要修改场景 Vault 中的可交互物「Lever」。你必须身处该场景才能确认此操作。"],
-    ["Ember | Transit destination scene \"Depot\" was not found.", "Ember | 找不到转运目的地场景「Depot」。"],
-    ["Mirror a1 does not exist!", "镜子 a1 不存在！"],
-    ["Attunement feat for Abyss rank 2 could not be resolved.", "无法解析 Abyss 阶位 2 的同调专长。"],
-    ["Bob cannot progress their Soulbound rank further as they already bear a Deathly Soulmark.", "Bob 已经带有死亡魂印，魂缚阶位无法再提升。"],
-    ["Bob cannot progress their Soulbound rank further as they already bear \n    a Deathly Soulmark.", "Bob 已经带有死亡魂印，魂缚阶位无法再提升。"],
-    ["Source compendium data for the Soulbound talent was not found!", "找不到魂缚 Soulbound 天赋的合集源数据！"]
+    [
+     "Attunement activation is not yet implemented for system \"pf2e\".",
+     "系统「pf2e」尚未实现同调激活。"
+    ],
+    [
+     "The Ashen Overlook Vista is not yet configured to support the placement of Tokens.",
+     "远景「Ashen Overlook」尚未配置为支持放置指示物。"
+    ],
+    [
+     "Deleted saved Vista composition \"Dawn\".",
+     "已删除保存的远景构图「Dawn」。"
+    ],
+    [
+     "Updated composition for Level \"2\".",
+     "已更新层「2」的构图。"
+    ],
+    [
+     "Saved composition to Scene with identifier \"vault-01\".",
+     "已将构图保存到场景，标识符为「vault-01」。"
+    ],
+    [
+     "Imported composition to Level \"3\".",
+     "已将构图导入到层「3」。"
+    ],
+    [
+     "Awarded attunement progression points to Actors: Bob, Alice",
+     "已向以下角色授予同调进阶点数：Bob, Alice"
+    ],
+    [
+     "Completed resting for 8 hours without incident!",
+     "顺利完成了 8 小时的休息！"
+    ],
+    [
+     "Your short rest has been interrupted after 10 minutes!",
+     "短休在 10 分钟后被打断！"
+    ],
+    [
+     "Your long rest has been interrupted after 6 hours!",
+     "长休在 6 小时后被打断！"
+    ],
+    [
+     "Saved Ember Dynamic Token configuration for Bob",
+     "已保存 Bob 的余烬动态指示物配置"
+    ],
+    [
+     "Saved Ember Dynamic Token randomization parameters to Actor Bob",
+     "已将余烬动态指示物的随机化参数保存到角色 Bob"
+    ],
+    [
+     "Applied fog exploration from the North Ridge vantage point!",
+     "已应用来自制高点「North Ridge」的迷雾探索！"
+    ],
+    [
+     "Discovered vantage point, North Ridge!",
+     "发现了制高点：North Ridge！"
+    ],
+    [
+     "Added the Soulbound talent to Bob at rank 1.",
+     "已为 Bob 添加阶位 1 的魂缚 Soulbound 天赋。"
+    ],
+    [
+     "Upgraded Soulbound talent on Bob to rank 2.",
+     "已将 Bob 的魂缚 Soulbound 天赋升至阶位 2。"
+    ],
+    [
+     "Event badId is not a recognized gameplay event. This likely indicates some issue with the Ember module installation.",
+     "事件 badId 不是可识别的游戏事件。这多半说明余烬模块的安装有问题。"
+    ],
+    [
+     "Event badId is not a recognized gameplay event. This likely indicates some issue \n      with the Ember module installation.",
+     "事件 badId 不是可识别的游戏事件。这多半说明余烬模块的安装有问题。"
+    ],
+    [
+     "Ember | \"horns\" is not a known Token Maker part in any template layer.",
+     "Ember | 「horns」不是任何模板层里已知的指示物制作器部件。"
+    ],
+    [
+     "This layer is not available in the Token Maker's current template preview.",
+     "该层在指示物制作器当前的模板预览中不可用。"
+    ],
+    [
+     "This color is not available in the Token Maker's current template preview.",
+     "该颜色在指示物制作器当前的模板预览中不可用。"
+    ],
+    [
+     "Adjacent hex s.12.4 is not directly reachable from current hex s.12.3.",
+     "相邻六边格 s.12.4 无法从当前六边格 s.12.3 直达。"
+    ],
+    [
+     "You are not allowed to delete the Bob Token from the Region Map.",
+     "你无权从地区地图上删除指示物 Bob。"
+    ],
+    [
+     "The Scene \"Vault\" does not have compositions defined.",
+     "场景「Vault」没有定义任何构图。"
+    ],
+    [
+     "User \"Alice\" wants to modify interactable \"Lever\" in Scene Vault. You must be present in this Scene to acknowledge this operation.",
+     "用户「Alice」想要修改场景 Vault 中的可交互物「Lever」。你必须身处该场景才能确认此操作。"
+    ],
+    [
+     "Ember | Transit destination scene \"Depot\" was not found.",
+     "Ember | 找不到转运目的地场景「Depot」。"
+    ],
+    [
+     "Mirror a1 does not exist!",
+     "镜子 a1 不存在！"
+    ],
+    [
+     "Attunement feat for Abyss rank 2 could not be resolved.",
+     "无法解析 Abyss 阶位 2 的同调专长。"
+    ],
+    [
+     "Bob cannot progress their Soulbound rank further as they already bear a Deathly Soulmark.",
+     "Bob 已经带有死亡魂印，魂缚阶位无法再提升。"
+    ],
+    [
+     "Bob cannot progress their Soulbound rank further as they already bear \n    a Deathly Soulmark.",
+     "Bob 已经带有死亡魂印，魂缚阶位无法再提升。"
+    ],
+    [
+     "Source compendium data for the Soulbound talent was not found!",
+     "找不到魂缚 Soulbound 天赋的合集源数据！"
+    ],
+    [
+     "Adjacent hex p.0.0 is not directly reachable from current hex s.-3.7.",
+     "相邻六边格 p.0.0 无法从当前六边格 s.-3.7 直达。"
+    ]
    ],
    "arrangements": {
-    "channels": ["Music", "Environment"],
-    "prefixes": {"Music": "音乐：", "Environment": "环境音："},
+    "channels": [
+     "Music",
+     "Environment"
+    ],
+    "prefixes": {
+     "Music": "音乐：",
+     "Environment": "环境音："
+    },
     "min_labels": 210,
     "labels_recorded": 219,
-    "leaves_not_upstream": ["Reset"],
+    "leaves_not_upstream": [
+     "Reset"
+    ],
     "expect_untranslated": [
      "Seven Sails",
      "Events",
@@ -1582,8 +1996,14 @@
    "min_files": 2,
    "min_checks": 4,
    "files": [
-    {"repo": "ember", "path": "scripts/ember-cn-selfcheck.mjs"},
-    {"repo": "crucible", "path": "selfcheck/cn-selfcheck.mjs"}
+    {
+     "repo": "ember",
+     "path": "scripts/ember-cn-selfcheck.mjs"
+    },
+    {
+     "repo": "crucible",
+     "path": "selfcheck/cn-selfcheck.mjs"
+    }
    ],
    "require": [
     "const D_SECTION = \"D 上游字面量存在性（仅供人工复核）\";"
@@ -1596,7 +2016,7 @@
    "id": "R-selfcheck-d-liveness",
    "title": "自检面板 D 档必须**每跑一次闸就现跑一次**：719 键 / 1273 条 / miss 4 键 7 报文 是**现算的数**，不是快照",
    "decision": "2026-08-16c（第二十八轮）",
-   "why": "上一条（R-selfcheck-d-section-name）是 source_literal，**只钉档名那一个字符串** —— 档名漂回「键活性」会红，可**那 719 个键的结论漂成什么样都不会红**。复核 grep 整个 assert_resolutions.py，`keyLiveness` 出现 **0 次**：没有任何断言跑过那块面板。而全项目唯一能跑出这组数的执行体，是 `4-临时脚本/2026-08-16-round26/probe_panel_report.mjs` —— 一次性探针，**git 未跟踪**。于是 PROJECT.md、面板 why、复核报告三路都在引用的「719 distinct / 1273 raw · miss 4 键 / 7 报文」，**可再现性挂在一台机器上的一份未入库脚本上**。⇒ 这是本项目登记的空转形态 (c) 在**更高一层**复发：不是判据读了旧快照，是**「结论」本身就是一张快照**。本条把执行体提升进 `3-常用脚本/qa/selfcheck_panel_runner.mjs`（已入库，并由 R-assertion-inputs-tracked 常设盯着它别掉出库），每跑一次闸就**离线现跑一次面板真身**（只桩 fetch / game / Hooks，判据一行都不抄；数一律读面板挂在「合计」行 stats 上的**它自己算的数**）。｜**记录值的方向是两个方向**：覆盖侧（checkedDistinct 719 / rawChecked 1273 / fetchOk 219 / tableRows 39 / tplFiles 67 / tableRegexEntries 47）按「**不得低于**」记 —— 上游长东西、表里加键，这些数只会涨，掉下来只可能是表被砍了或语料没抓着；miss 侧（missDistinct 4 / rawMiss 7 / fetchFail 3）按「**不得高于**」记 —— 查无此串的键只许越修越少，涨了就是有键真对不上上游了，人必须看一眼。⚠ fetchOk 记 219 而不是探针当年那个 73：本执行体一次跑三遍 keyLiveness（正式一遍 + 假阴性对照一遍 + 子串边界一遍），73×3=219，**这个数本身也是账**。｜⚠ **本条真正扛事的不是上面那些阈值**（第二十八轮堵的正是「调松阈值」那条作弊路径），而是几条**不含阈值、调不松**的恒等式：① 逐表行的 checked 之和必须等于「合计」自报的 rawChecked（面板里两条不同的汇总路径）；② 模板三路记账（引用推导 52 + 拼路径展开 12 + 无引用快照 3）之和必须等于抓到的份数 67；③ 喂进去几张表，报文里就得有几张表的行 —— 少一行 = 有张表被静默吞了，合计的数看不出来；④ **假阴性对照**：6 个自造的、上游绝无的串必须 **6/6** 被报出来 —— 匹配器哪天变成「什么都找得到」（判据在，但恒真），阈值全在也照样绿，只有这一条会当场红；⑤ 子串型改词那条**已知边界**必须仍然复现（喂 `Increase Ability`，上游有 `Increase Ability Score`，必须报 0 条）—— 它是写进报文的边界不是缺陷，变了说明匹配口径被人动过、报文里那段边界说明也就跟着过期了；⑥ 现跑吐出的**档名**必须与上一条钉的那一行一致 —— 上一条钉的是源码字面量，本条钉的是**运行时真的用了它**。把阈值全调松，①—⑥ 一条都动不了。｜⚠ 形态 (h)（喂输入的那一半坏了）：fetch 桩的 Data 根目录**不写死**，从 meta.lang_sources 的上游安装目录倒推，倒推时用的是**面板源码里现抠的 EMBER_ROOT**（面板 fetch 的 url 就是 `${EMBER_ROOT}/…`，:698 与 :98 fetchText）；Python 侧与 node 侧**各核一遍**「倒推出来的根目录下真有 <EMBER_ROOT>/scripts/ember.mjs」，对不上当场判「没跑成」——桩指到空目录、语料一份没抓着而判据照跑，正是 (h)。｜⚠ 判据边界：本档核的是**「这个英文串还在不在上游的文本里」**，**不是**「这个键还生不生效」（那正是第二十四轮 77 条误报的由来）。本条只保证**这组数是现算的、且面板自己的记账自洽**，不保证「miss 的这 4 个是缺陷」——它们仍然**仅供人工复核**。｜⚠ 灵敏度回测固化在 --selftest 里：让 fetch 少抓一份语料（drop_corpus）→ miss 从 4 涨到 614、fetchOk 从 219 掉到 18，必须红；把每张表摘掉一半（keep_table_fraction 0.5）→ checkedDistinct 719→544、rawChecked 1273→806，必须红；把假阴性对照清空 → 必须红；面板文件不在 / node 取不到 → 必须报「没跑成」而不是通过。**做不到回测的闸不算闸。**",
+   "why": "上一条（R-selfcheck-d-section-name）是 source_literal，**只钉档名那一个字符串** —— 档名漂回「键活性」会红，可**那 719 个键的结论漂成什么样都不会红**。复核 grep 整个 assert_resolutions.py，`keyLiveness` 出现 **0 次**：没有任何断言跑过那块面板。而全项目唯一能跑出这组数的执行体，是 `4-临时脚本/2026-08-16-round26/probe_panel_report.mjs` —— 一次性探针，**git 未跟踪**。于是 PROJECT.md、面板 why、复核报告三路都在引用的「719 distinct / 1273 raw · miss 4 键 / 7 报文」，**可再现性挂在一台机器上的一份未入库脚本上**。⇒ 这是本项目登记的空转形态 (c) 在**更高一层**复发：不是判据读了旧快照，是**「结论」本身就是一张快照**。本条把执行体提升进 `3-常用脚本/qa/selfcheck_panel_runner.mjs`（已入库，并由 R-assertion-inputs-tracked 常设盯着它别掉出库），每跑一次闸就**离线现跑一次面板真身**（只桩 fetch / game / Hooks，判据一行都不抄；数一律读面板挂在「合计」行 stats 上的**它自己算的数**）。｜**记录值的方向是两个方向**：覆盖侧（checkedDistinct 719 / rawChecked 1273 / fetchOk 219 / tableRows 39 / tplFiles 67 / tableRegexEntries 47）按「**不得低于**」记 —— 上游长东西、表里加键，这些数只会涨，掉下来只可能是表被砍了或语料没抓着；miss 侧（missDistinct 4 / rawMiss 7 / fetchFail 3）按「**不得高于**」记 —— 查无此串的键只许越修越少，涨了就是有键真对不上上游了，人必须看一眼。⚠ fetchOk 记 219 而不是探针当年那个 73：本执行体一次跑三遍 keyLiveness（正式一遍 + 假阴性对照一遍 + 子串边界一遍），73×3=219，**这个数本身也是账**。｜⚠ **本条真正扛事的不是上面那些阈值**（第二十八轮堵的正是「调松阈值」那条作弊路径），而是几条**不含阈值、调不松**的恒等式：① 逐表行的 checked 之和必须等于「合计」自报的 rawChecked（面板里两条不同的汇总路径）；② 模板三路记账（引用推导 52 + 拼路径展开 12 + 无引用快照 3）之和必须等于抓到的份数 67；③ 喂进去几张表，报文里就得有几张表的行 —— 少一行 = 有张表被静默吞了，合计的数看不出来；④ **假阴性对照**：6 个自造的、上游绝无的串必须 **6/6** 被报出来 —— 匹配器哪天变成「什么都找得到」（判据在，但恒真），阈值全在也照样绿，只有这一条会当场红；⑤ 子串型改词那条**已知边界**必须仍然复现（喂 `Increase Ability`，上游有 `Increase Ability Score`，必须报 0 条）—— 它是写进报文的边界不是缺陷，变了说明匹配口径被人动过、报文里那段边界说明也就跟着过期了；⑥ 现跑吐出的**档名**必须与上一条钉的那一行一致 —— 上一条钉的是源码字面量，本条钉的是**运行时真的用了它**。把阈值全调松，①—⑥ 一条都动不了。｜⚠ 形态 (h)（喂输入的那一半坏了）：fetch 桩的 Data 根目录**不写死**，从 meta.lang_sources 的上游安装目录倒推，倒推时用的是**面板源码里现抠的 EMBER_ROOT**（面板 fetch 的 url 就是 `${EMBER_ROOT}/…`，:698 与 :98 fetchText）；Python 侧与 node 侧**各核一遍**「倒推出来的根目录下真有 <EMBER_ROOT>/scripts/ember.mjs」，对不上当场判「没跑成」——桩指到空目录、语料一份没抓着而判据照跑，正是 (h)。｜⚠ 判据边界：本档核的是**「这个英文串还在不在上游的文本里」**，**不是**「这个键还生不生效」（那正是第二十四轮 77 条误报的由来）。本条只保证**这组数是现算的、且面板自己的记账自洽**，不保证「miss 的这 4 个是缺陷」——它们仍然**仅供人工复核**。｜⚠ 灵敏度回测固化在 --selftest 里：让 fetch 少抓一份语料（drop_corpus）→ miss 从 4 涨到 614、fetchOk 从 219 掉到 18，必须红；把每张表摘掉一半（keep_table_fraction 0.5）→ checkedDistinct 719→544、rawChecked 1273→806，必须红；把假阴性对照清空 → 必须红；面板文件不在 / node 取不到 → 必须报「没跑成」而不是通过。**做不到回测的闸不算闸。**｜**脚注（第三十二轮 V18，标题与上面的历史结论不动）**：本条的执行体里那份「表侧独立计数」`countTableKeys` **一直是错的** —— 它不解包 `{ table, kind, onlyOn, packs, corpus }` 这 13 张包装表，对包装对象直接 `Object.keys()`，数出来的是那 5 个**元数据属性名**，同时漏掉包装里 **189 raw / 171 distinct** 个真实键，于是吐的 `tableKeysDistinct 721 / tableKeysRaw 1304` **两个数都是错的**（真值 **887 / 1459**）；而它的注释自称「对账基准」——**注释宣称的用途与实现不符，这正是 V14 挂了三轮的全部成因**。本轮按面板 `keyLiveness` 的 `spec?.table ?? spec` 同口径解包（同一个不解包的坑在 `keep_table_fraction` 变异开关上也有一份：它切的是包装的元数据属性，13 张包装表里的真实键一条都没被摘掉，变异对它们等于没开，一并修）。｜**并且「数对了仍然没人判」的另一半同轮补上**：第三十一轮为回答 V14 造出来的八个分母（`registeredRaw` / `registeredDistinct` / `uncheckedRaw` / `uncheckedDistinct` / `ledgerBalanced` / `ledgerNoReason` / `wrappedTables` / `regexTables`）此前 **runner 根本不转发、min/max 里一个都没有、全 `3-常用脚本/qa/` 与规则文件零引用** —— 它们本身就是新一份「算了、印了、没人判」。现在：覆盖侧 `registeredRaw 1459 / registeredDistinct 887 / wrappedTables 13 / regexTables 2` 进 `min`（只许涨），没核侧 `uncheckedRaw 186 / uncheckedDistinct 168` 进 `max`（只许降），而 `ledgerBalanced` 必须恒 true、`ledgerNoReason` 必须恒 0（「没核却说不出为什么」= 0）—— 后两个是**不含阈值、调不松**的恒等式，与①—⑥同一档。另加三条同样调不松的恒等式：⑦ 表侧独立计数 `tableKeysRaw/Distinct` 必须**逐个等于**面板自报的 `registeredRaw/Distinct`（两条独立汇总路径，这才是这份计数器当初宣称的用途）；⑧ `rawChecked + uncheckedRaw == registeredRaw`（Python 侧**自己再算一遍**面板的账，面板把 `ledgerBalanced` 写死成 true 也骗不过）；⑨ `checkedDistinct + uncheckedDistinct == registeredDistinct`。⚠ **被核键数一个都没降**：`checkedDistinct 719` / `rawChecked 1273` / `missDistinct 4` / `rawMiss 7` / 假阴性 6/6 与本轮之前逐字相同。",
    "kind": "panel_liveness",
    "repo": "ember",
    "panel": "scripts/ember-cn-selfcheck.mjs",
@@ -1611,12 +2031,18 @@
     "tableRows": 39,
     "tablesFedIn": 39,
     "tplFiles": 67,
-    "tableRegexEntries": 47
+    "tableRegexEntries": 47,
+    "registeredRaw": 1459,
+    "registeredDistinct": 887,
+    "wrappedTables": 13,
+    "regexTables": 2
    },
    "max": {
     "missDistinct": 4,
     "rawMiss": 7,
-    "fetchFail": 3
+    "fetchFail": 3,
+    "uncheckedRaw": 186,
+    "uncheckedDistinct": 168
    },
    "substr_probe": "Increase Ability",
    "substr_expect_miss": 0,
@@ -1636,15 +2062,27 @@
    "why": "同一个形状**已经犯了四次**：① EXCLUSIONS.json 当初躺在 `4-临时脚本/…/findings/`（未入库的临时目录）里被 exclusions_closed 当输入读；② 第十五轮的 findings 同样；③ `5-其他内容/english-baseline/` 在第二十轮之前不在库里；④ 第二十八轮复核发现 `3-常用脚本/qa/translate_cases_runner.mjs` 至今是 `??` —— 同目录另外 39 个脚本全部 tracked，**只有它**在外面，而主闸对它是**硬依赖**（找不到就判「没跑成」＝失败）。⇒ 四次都是「判据依赖的东西留在工作区里没入库」：本机跑得好好的，换台机器 / clean checkout 上整条塌掉，而**塌掉的样子是「断言失败」**，下一个人会先怀疑库、再怀疑判据，最后才想到是文件没入库。与其每轮靠人再想起来一次，不如让**「断言依赖了未入库文件」本身变成一条判据**。｜清单**从规则集自身推**，不靠人维护：把每条断言里会被当路径打开的字段（src / files / glossary / exclusions / doc / scanner / panel / tables_src）以及各 kind 的**默认 runner 名**逐条解析成绝对路径 —— 人新加一条断言，它的输入自动进清单。⚠ 默认 runner 名那一项是专门为第 ④ 次加的：规则里根本没写 `runner` 字段（用的是默认值），所以任何「只看规则里写了什么」的清单都会**恰好漏掉它**。｜两道兜底：`sweep` 把整个 `3-常用脚本/qa/`（判据执行体的家）一个不落地扫，哪天又有人往里放一个没入库的执行体，不必等它被某条规则引用就会响；`must_include` 点名三条必须出现在推导结果里的路径，防的是**推导器自己静默变短**（改了字段名 / 加了新 kind 没登记执行体 ⇒ 清单变短 ⇒ 判据一路报「全部入库」，那是空转形态 (d)「豁免表已空」的镜像）。｜⚠ 「入库」按**拥有那个文件的 git 仓**判：`1-Ember汉化插件` 与 `2-Crucible汉化插件` 各自是**独立仓**，在外层仓里它们是 ignored 的 —— 拿外层仓去问「你跟踪它吗」会得到一个**假的红**（实测：外层 git ls-files 对这三个面板 / 表文件全部报 did not match，而在各自仓里它们都是 tracked）。｜⚠ 判据边界：`meta.lang_sources` 指的是**上游安装目录**（%LOCALAPPDATA%/FoundryVTT/Data/…），那是别人的仓、按设计不进我们的库，**不列入本条**（列了就是逼人做不可能的事）；上游那一侧「输入没了」由各断言自己的「没跑成」分支管。本条也**不判**内容对不对、不判有没有 commit —— 只判「git 认不认识它」。git 取不到 = **没判成**，不是通过（空转形态 (e)）；min_checked 兜住「清单是空的也报绿」。",
    "kind": "tracked_inputs",
    "rules": "5-其他内容/RESOLUTIONS.assertions.json",
-   "sweep": ["3-常用脚本/qa"],
-   "sweep_ignore": ["__pycache__"],
+   "sweep": [
+    "3-常用脚本/qa"
+   ],
+   "sweep_ignore": [
+    "__pycache__"
+   ],
    "must_include": [
     "3-常用脚本/qa/translate_cases_runner.mjs",
     "3-常用脚本/qa/selfcheck_panel_runner.mjs",
     "5-其他内容/RESOLUTIONS.assertions.json",
-    "5-其他内容/EXCLUSIONS.same_en_split.json"
+    "5-其他内容/EXCLUSIONS.same_en_split.json",
+    "1-Ember汉化插件/compendium/cn/ember.crucible-adventure.json"
    ],
    "min_checked": 40
+  },
+  {
+   "id": "R-ruleset-shape",
+   "title": "规则集**自身的形状**必须有闸：断言条数、kind 数、各 kind 的容器块 —— 记录值住在 assert_resolutions.py，不在本文件里",
+   "decision": "2026-08-16d（第二十九轮）",
+   "kind": "ruleset_shape",
+   "why": "**作弊路径 C：删掉装数字的容器，或删掉整条断言。**｜第二十七轮堵住 A（删／摘用例：78 条逐条改坏，两种改法各跑一遍，156/156 全红），第二十八轮堵住 B（调松阈值数字：`recorded` 里 10 种单点调松全红，`_two_layer_floor` 两层判法）—— 而第二十八轮复核**当场证明洞被挪到了容器层**：下面每一条都是**单点**改动、改完主闸仍 65/0/0 全绿 ▸ 删 `arrangements` 整块（438 条编排名对拍整段消失）· `channels` 砍成一个（同一道护栏 438→219）· 面板闸的 `min`/`max` 整块删掉（覆盖侧与 miss 侧记录值全消失）· `tracked.min_checked` → 0（防「清单空转」的兜底消失）· `tracked.must_include` 清空（防「推导器静默变短」的点名消失）· `arrangements.min_labels` 单独改小（形态 (h) 的死下限层消失）· **删掉整条断言（65→64）—— 全项目没有任何东西数一数还剩几条规则**。⇒ A、B 都堵上之后，最省事的绕法不再是改数字，而是**把装数字的容器端走**。｜**本条的要害是它自己的自指问题，先说清楚再说判法。**守卫**绝不能住在它所守护的那个容器里** —— 住在里面的话，删掉容器就把守卫一起删了，那是把洞原地又挖一遍。所以记录值一律放在 `3-常用脚本/qa/assert_resolutions.py` 的**模块级常量 `RULESET_SHAPE`** 里（不是本文件、也不是另开一个 lock 文件：lock 文件同样是「一个可以被删掉的文件」，而改判据本身留下的 diff 就写在判据里，看的人一眼能认出「有人把地板改低了」）。另有一道**不是断言**的存在性检查写在 `main()` 里（`_require_ruleset_shape`）：规则集里一条 `ruleset_shape` 都没有，主闸直接判失败 —— 这样「连守卫一起删」也得改判据文件。｜⚠ **绕过它需要改哪几处（照实写，不许写成「不可能被绕过」）：**① 改小 `RULESET_SHAPE` 里的数（改判据本身，diff 自证）；② 删掉本条断言（`main()` 的存在性检查会红）；③ 连 `main()` 那道检查一起删。**①②③ 同时改，仍然能过。**本条保证的是：**任何一处单独的容器层删除都会当场红**，而绕过它必须在 `assert_resolutions.py` 上留下一串互相印证的显式改动 —— 与 `_two_layer_floor` 的边界写法同一个口径。｜判什么：① 断言条数 ≥ 66、kind 数 ≥ 22、`translate_cases`/`panel_liveness`/`tracked_inputs`/`ruleset_shape` 各 ≥1 条；② 每条 `translate_cases` 必须有非空的 `recorded` 与 `arrangements`（且各自点名的键齐全），每条 `panel_liveness` 必须有非空的 `min`/`max`/`fakes`，每条 `tracked_inputs` 必须有非空的 `sweep`/`must_include`；③ 长度地板：`arrangements.channels` ≥ 2、`fakes` ≥ 6、`must_include` ≥ 4、`sweep` ≥ 1；④ 强度参数的死下限（`min_labels` 210 · `labels_recorded` 219 · 面板 `checkedDistinct` 719 / `rawChecked` 1273 / `tableRegexEntries` 47 · `min_checked` 40）与 miss 侧的死上限（4 / 7 / 3）；⑤ `min_checked` 与 `must_include` 走**同一套两层地板** —— 历史层住在 `RULESET_SHAPE`，现算层从**规则集自身**现推（每个 kind 的**默认执行体**都必须被点名，且 `min_checked` 不得低于点名清单的长度：点了名却不数它们，兜底形同虚设）。｜⚠ 判据边界：本条只判**形状**（有没有、够不够长、点名的在不在），**不判内容对不对** —— `min` 里那些数记得准不准由 `R-selfcheck-d-liveness` 现跑面板去核，用例写得好不好由 `R-patterns-translate-cases` 去核。本条绿了只证明「容器还在、地板没被改低」，**不证明这些断言判得对**。｜⚠ 判的是**本次运行真正在跑的那份规则集**（`ctx.rules`，`main()` 塞进来的），不是磁盘上另找一份重读 —— 重读一份就有形态 (g)「输入被静默换成另一份」的风险（`--rules` 指向 A 而本条去读 B，两边都绿、判的却不是同一件事）；拿不到就判「没跑成」。｜⚠ 灵敏度回测固化在 `--selftest` 里：复核实测的那**七种容器层单点动作**逐条注入合成规则集，七条必须全红；另加「删掉本条断言本身」一条走 `_require_ruleset_shape`。**做不到回测的闸不算闸。**"
   }
  ]
 }

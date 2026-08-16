@@ -32,6 +32,17 @@
  *     格式），编排名 219 → 196 **静默下降而闸仍 0 违规** —— 因为 `min_labels` 只卡 150、比现值低 69，
  *     而且找不到 `arrangements` 的那一支 `continue` 掉了、**不计 unresolved**。两处都已改。
  *
+ * 第二十九轮补的一件事：**反例侧的结构护栏**（§④b）
+ * ----------------------------------------------
+ * 正例那一侧早就被 §④ 的恒等式钉死（每条表项都必须有正例），**反例那一侧只有一个数字挡着** ——
+ * 复核实测「清空 `negative` + 把 `recorded.negative` 改 0」两处协同就**全绿**。
+ * 而反例正是守「不许吃别的模块的散文与通知」的那一层，`Mirror Image does not exist!`
+ * 那类**唯一一次实测到的现网越界**就住在这里。⇒ §④b 给反例上两道从表长现算的护栏：
+ *   (N1) **一条表项一条专属的近似反例**（最大二分匹配必须完美；「近似」＝反例串逐字包含
+ *        该表项的**字面骨架**）⇒ 反例条数结构上不可能少于表长之和；
+ *   (N2) **机械近似探针** `Zzq <骨架> Zzq`（零维护，抓「不锚定串首/串尾」的正则）。
+ * 两道互补，边界与「怎么绕过去」写在 §④b 那段注释里。
+ *
  * 空转形态 (h)：**空转的是给判据喂输入的那个探针**（第二十六轮登记）
  * -----------------------------------------------------------------
  * 上一轮的 `probe_world_c.mjs` 把英文基准里所有层级的 name 拍平成顶层 index 条目喂给判据，
@@ -262,6 +273,252 @@ function reportCoverage(group, table, covered, label) {
 reportCoverage("coverage", PREFIXED, covPrefixed, "PREFIXED");
 reportCoverage("coverage", PATTERNS, covPatterns, "PATTERNS");
 
+/* ------------------------------- ④b 反例的**结构护栏**（第二十九轮，作弊路径 C）*/
+//
+// 为什么非有这一段
+// ----------------
+// **正例**那一侧早被一条恒等式钉死：§④ 的 `reportCoverage`「每条表项都必须有正例」。
+// 复核实测把三张表砍到 47 条并**同步改 `recorded`**，闸照样红、还点名
+// 「PREFIXED 17 条无正例 / PATTERNS 11 条无正例」——**协同改两处也绕不过去**。
+// **反例那一侧此前只有一个数字挡着**：复核「清空 `negative` + 把 `recorded.negative` 改 0」
+// 两处协同就**全绿**，`notify_negative` 同理。
+// 而反例正是守「**不许吃别的模块的散文与通知**」的那一层 ——
+// `Mirror Image does not exist!`（别的模块真会发的句子，旧正则把它重构成「镜子 Image 不存在！」）
+// 那类缺陷就住在这里，是本项目实测到的**唯一一次现网越界**。
+// ⇒ 本段给反例也上**从表长现算**的结构护栏，与正例那道同形、同样不含阈值。
+//
+// 两道，粒度都是**逐条表项**
+// --------------------------
+// (N1) **一条表项一条专属的近似反例**（最大二分匹配，必须是**完美匹配**）。
+//      「近似」的机械定义：反例串**逐字包含**该表项的**字面骨架**
+//      （PREFIXED 取它的 `en`；两张正则表从 `re.source` 里抠出最长的字面片段，
+//        含纯字面 alternation 的各支，见 `literalCandidates`）。
+//      要求匹配是**一对一**的（一条反例只能认领一条表项）⇒ 反例条数**结构上**
+//      不可能少于表长，与正例那道「正例数 ≥ 表长」完全对称。
+//      ⚠ 这一道的**边界，写清楚别吹**：它证明的是「每条表项旁边至少有一条
+//        含它字面骨架、且一个字都没被吃掉的串」，**不是**「有人专门为它想过反例」。
+//        归因靠子串包含，所以：① 反例可能被**碰巧**归到另一条表项上
+//        （`location:` 那条本来是给 PREFIXED 的 `Location` 写的，也含 PATTERNS
+//         `… in (\d+) location(?:s)?$` 的骨架 `location`）；
+//        ② 拿一条把所有骨架串起来的垃圾串来凑，一条只能顶一条，凑满要 N 条垃圾串 ——
+//        **绕得过去，但那是一眼可见的 diff**，与「悄悄把一个数改成 0」不是一回事。
+// (N2) **机械近似探针**（零维护，条数跟着表长走）：对每条表项现造
+//      `Zzq <骨架> Zzq`（PREFIXED 造 `Zzq <en>: Zzq`）—— 骨架**既不在串首也不在串尾**。
+//      三张表现在每一条都是 `^…$` 全锚定的，所以这个串**结构上**匹配不到；
+//      它一旦被翻动，只可能是有人写了**不锚定串首/串尾**的正则
+//      （或把 `startsWith` 改成 `includes`），而那正是「吃别的模块的散文」的成因。
+//      ⚠ 这一道**不靠任何人维护**：新加一条表项，探针自动多一条。
+//      ⚠ 它对「锚定但定义域太宽」的那种（`^Result of (.+)$`）**无效** ——
+//        那一种只有 (N1) 的人写反例能防，两道互补，缺一不可。
+
+// 字面骨架的最短长度。取 3 是实测定的：`^Day (\d+)\b(.*)$` 的最长字面就是 `Day`（3），
+// 定成 4 会把它判成「抠不出骨架」；而 2 会把 `": "` / `" - "` 这种毫无锚定力的片段放进来。
+const MIN_SKEL = 3;
+
+/** `[` 处的字符类整体跳过，返回 `]` 之后的下标。 */
+function skipClass(src, i) {
+  let j = i + 1;
+  if (src[j] === "^") j++;
+  if (src[j] === "]") j++;
+  while (j < src.length && src[j] !== "]") { if (src[j] === "\\") j++; j++; }
+  return j + 1;
+}
+
+/** `(` 处取一个配平的组：返回 `{ body, next, lookaround }`。 */
+function groupAt(src, i) {
+  let bodyStart = i + 1;
+  let lookaround = false;
+  if (src[i + 1] === "?") {
+    const c2 = src[i + 2];
+    if (c2 === ":") bodyStart = i + 3;
+    else if (c2 === "=" || c2 === "!") { lookaround = true; bodyStart = i + 3; }
+    else if (c2 === "<") {
+      if (src[i + 3] === "=" || src[i + 3] === "!") { lookaround = true; bodyStart = i + 4; }
+      else { const g = src.indexOf(">", i); bodyStart = g < 0 ? i + 3 : g + 1; }
+    }
+  }
+  let d = 1, j = bodyStart;
+  while (j < src.length && d > 0) {
+    const c = src[j];
+    if (c === "\\") { j += 2; continue; }
+    if (c === "[") { j = skipClass(src, j); continue; }
+    if (c === "(") d++;
+    else if (c === ")") { d--; if (d === 0) break; }
+    j++;
+  }
+  return { body: src.slice(bodyStart, j), next: j + 1, lookaround };
+}
+
+/** 按**顶层** `|` 切分。 */
+function splitAlt(body) {
+  const out = [];
+  let cur = "", d = 0, i = 0;
+  while (i < body.length) {
+    const c = body[i];
+    if (c === "\\") { cur += body.slice(i, i + 2); i += 2; continue; }
+    if (c === "[") { const j = skipClass(body, i); cur += body.slice(i, j); i = j; continue; }
+    if (c === "(") d++;
+    else if (c === ")") d--;
+    if (c === "|" && d === 0) { out.push(cur); cur = ""; i++; continue; }
+    cur += c; i++;
+  }
+  out.push(cur);
+  return out;
+}
+
+/** 整段是不是**纯字面**（只含普通字符与转义掉的标点）；是就返回还原后的串，否则 null。 */
+function pureLiteral(s) {
+  let out = "", i = 0;
+  while (i < s.length) {
+    const c = s[i];
+    if (c === "\\") {
+      const n = s[i + 1];
+      if (n === undefined || /[a-zA-Z0-9]/.test(n)) return null;
+      out += n; i += 2; continue;
+    }
+    if ("[](){}|*+?.^$".includes(c)) return null;
+    out += c; i++;
+  }
+  return out;
+}
+
+/** 从正则 source 抠「字面骨架」候选：顶层字面片段 + 组内各支（递归）。 */
+function literalCandidates(src) {
+  const out = [];
+  let run = "";
+  const flush = () => { const t = run.trim(); if (t.length >= MIN_SKEL) out.push(t); run = ""; };
+  let i = 0;
+  while (i < src.length) {
+    const c = src[i];
+    if (c === "\\") {
+      const n = src[i + 1];
+      if (n === "p" || n === "P") {                       // \p{L} 之类：非字面，整段跳过
+        flush();
+        const j = src.indexOf("}", i);
+        i = j < 0 ? src.length : j + 1;
+        continue;
+      }
+      if (/[a-zA-Z0-9]/.test(n)) { flush(); i += 2; continue; }   // \d \w \s \b：非字面
+      run += n; i += 2; continue;                                  // \. \? \" \|：字面
+    }
+    if (c === "[") { flush(); i = skipClass(src, i); continue; }
+    if (c === "(") {
+      flush();
+      const g = groupAt(src, i);
+      if (!g.lookaround) {
+        for (const alt of splitAlt(g.body)) {
+          const lit = pureLiteral(alt);
+          if (lit !== null) { const t = lit.trim(); if (t.length >= MIN_SKEL) out.push(t); }
+          else out.push(...literalCandidates(alt));
+        }
+      }
+      i = g.next; continue;
+    }
+    // `?` / `*` / `{n,m}` 作用在**前一个字符**上 ⇒ 那个字符是可选的，不能算进字面骨架
+    if (c === "?" || c === "*") { run = run.slice(0, -1); flush(); i++; continue; }
+    if (c === "{") {
+      run = run.slice(0, -1); flush();
+      const j = src.indexOf("}", i);
+      i = j < 0 ? src.length : j + 1;
+      continue;
+    }
+    if (".+|^$)".includes(c)) { flush(); i++; continue; }
+    run += c; i++;
+  }
+  flush();
+  return out;
+}
+
+/** 一条表项的字面骨架 = 最长的那个候选；一个都没有返回 null。 */
+function skeletonOf(entry) {
+  if (typeof entry.en === "string") return entry.en;        // PREFIXED
+  const cands = literalCandidates(entry.re.source);
+  let best = null;
+  for (const c of cands) if (best === null || c.length > best.length) best = c;
+  return best;
+}
+
+/** 最大二分匹配（Kuhn）：表项 i ← 反例 j。返回 matchOf[i] = j 或 -1。 */
+function maxMatch(adj, nRight) {
+  const matchRight = new Array(nRight).fill(-1);
+  const matchLeft = new Array(adj.length).fill(-1);
+  const tryK = (u, seen) => {
+    for (const v of adj[u]) {
+      if (seen[v]) continue;
+      seen[v] = 1;
+      if (matchRight[v] < 0 || tryK(matchRight[v], seen)) {
+        matchRight[v] = u; matchLeft[u] = v; return true;
+      }
+    }
+    return false;
+  };
+  for (let u = 0; u < adj.length; u++) tryK(u, new Array(nRight).fill(0));
+  return matchLeft;
+}
+
+/**
+ * 反例结构护栏：(N1) 逐条表项一条专属近似反例 + (N2) 机械近似探针。
+ * 返回匹配上的条数（喂给 counts，让 detail 说得出「我这次盖住了几条」）。
+ */
+function negativeStructure(group, tables, negatives, translate) {
+  // ⚠ 共用同一条通道（同一个 translate、同一份反例清单）的**几张表放在一起**做匹配 ——
+  //   分开做的话，同一条反例会被两张表各认领一次，「反例数 ≥ 表长」就退化成
+  //   「≥ 最长的那张表」。translateText 那条通道上 PREFIXED + PATTERNS 一起算。
+  const items = [];
+  for (const { label, table } of tables) {
+    table.forEach((entry, i) => items.push({ label, i, entry, sk: skeletonOf(entry) }));
+  }
+  // 骨架抠不出来 = 这条正则连 4 个字符的字面锚点都没有 —— 它宽到没法写近似反例，
+  // 本身就该被人看一眼（`^(.+)$` 这种一旦进表，全局通道就完了）。
+  const noSkel = items.filter((x) => !x.sk).map((x) => `${x.label}[${x.i}]`);
+  if (noSkel.length) {
+    V(group, "抠不出字面骨架的条目", JSON.stringify(noSkel), "[]",
+      `这些条目连 ${MIN_SKEL} 个字符的连续字面都没有 —— 无从写近似反例，`
+      + `也意味着它们几乎没有锚定力，人必须看一眼是不是宽到会吃散文`);
+  }
+  // (N1) 完美匹配
+  const adj = items.map(({ sk }) => {
+    const js = [];
+    if (sk) for (let j = 0; j < negatives.length; j++) if (negatives[j].includes(sk)) js.push(j);
+    return js;
+  });
+  const matchLeft = maxMatch(adj, negatives.length);
+  const missing = items
+    .map((x, k) => (matchLeft[k] < 0 ? [`${x.label}[${x.i}]`, x.sk] : null))
+    .filter(Boolean);
+  if (missing.length) {
+    V(group, "没有专属近似反例的条目", JSON.stringify(missing.slice(0, 60)), "[]",
+      `这条通道上共 ${items.length} 条表项，其中 ${missing.length} 条`
+      + `**没有一条属于它自己的近似反例**（现有反例 ${negatives.length} 条）。`
+      + `反例是守「不许吃别的模块的散文与通知」的唯一一层，此前它只有一个可调的数挡着 ——`
+      + `现在按「一条表项一条专属反例」的完美匹配判，反例条数结构上不可能少于表长之和。`
+      + `上面每一项是 [表项, 字面骨架]：给它写一条**含这个骨架、但上游产不出**的串`);
+  }
+  // (N2) 机械近似探针：骨架既不在串首也不在串尾
+  let probes = 0;
+  for (const { label, i, entry, sk } of items) {
+    if (!sk) continue;
+    const probe = typeof entry.en === "string" ? `Zzq ${entry.en}: Zzq` : `Zzq ${sk} Zzq`;
+    probes++;
+    const got = translate(probe);
+    if (got !== probe) {
+      V(group, probe, got, probe,
+        `${label}[${i}] 的机械近似探针被吃掉了 —— 骨架既不在串首也不在串尾却仍然命中，`
+        + `说明这条不再是 \`^…$\` 全锚定的（或 startsWith 被改成了 includes）。`
+        + `这一道**不靠人维护**：表里加一条它就多一条探针`);
+    }
+  }
+  return { total: items.length, matched: items.length - missing.length, probes };
+}
+
+const negStructText = negativeStructure("negative_structure",
+                                        [{ label: "PREFIXED", table: PREFIXED },
+                                         { label: "PATTERNS", table: PATTERNS }],
+                                        negative, translateText);
+counts.neg_entries = negStructText.total;
+counts.neg_matched = negStructText.matched;
+counts.neg_probes = negStructText.probes;
+
 /* --------------------------------------------- ⑤ 通知闸 (D)：NOTIFICATION_PATTERNS */
 //
 // `translateNotification`（被判文件 :2284 起）包的是 `ui.notifications.notify` ——
@@ -333,6 +590,16 @@ counts.np_size = NOTIFICATION_PATTERNS.length;
 counts.np_covered = covNP.size;
 counts.np_flat_fallback = flatHits;
 reportCoverage("coverage", NOTIFICATION_PATTERNS, covNP, "NOTIFICATION_PATTERNS");
+
+// ④b 的另一半：通知这条通道**爆炸半径最大**（全局 ui.notifications.notify），
+// 反例结构护栏在这里比在 translateText 那侧更值钱。判法与上面完全同形。
+const negStructNotify = negativeStructure("negative_structure",
+                                          [{ label: "NOTIFICATION_PATTERNS",
+                                             table: NOTIFICATION_PATTERNS }],
+                                          nNeg, translateNotification);
+counts.np_neg_entries = negStructNotify.total;
+counts.np_neg_matched = negStructNotify.matched;
+counts.np_neg_probes = negStructNotify.probes;
 
 // 空白折叠回退支（被判文件 :2299-2302）：上游 ember.mjs:36922 / 126652 是**跨行**模板串，
 // 源码里的换行 + 缩进原样进了消息文本。没有一条带真实空白的用例，这一支等于没判。
