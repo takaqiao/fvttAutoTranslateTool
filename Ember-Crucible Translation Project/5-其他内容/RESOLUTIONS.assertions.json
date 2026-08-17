@@ -385,7 +385,8 @@
      "en_gate": "(?s)^(?!.*\\bShard God\\b).*\\bShard Gods\\b",
      "except_paths": [
       "Deities.pages.Kinalathi.contentGamemaster",
-      "actors.Sigil.archetype.description"
+      "actors.Sigil.archetype.description",
+            "actors.Sigil.items.Shard God.description"
      ]
     },
     {
@@ -1970,8 +1971,8 @@
      "Music": "音乐：",
      "Environment": "环境音："
     },
-    "min_labels": 210,
-    "labels_recorded": 219,
+    "min_labels": 224,
+    "labels_recorded": 233,
     "leaves_not_upstream": [
      "Reset"
     ],
@@ -2032,8 +2033,8 @@
     "tablesFedIn": 39,
     "tplFiles": 67,
     "tableRegexEntries": 47,
-    "registeredRaw": 1459,
-    "registeredDistinct": 887,
+    "registeredRaw": 1495,
+    "registeredDistinct": 896,
     "wrappedTables": 13,
     "regexTables": 2
    },
