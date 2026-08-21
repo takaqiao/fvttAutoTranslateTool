@@ -1,0 +1,31 @@
+--- /dev/fd/63	2026-08-21 23:42:04.000000000 +0800
++++ /dev/fd/62	2026-08-21 23:42:04.000000000 +0800
+@@ -1,14 +1,14 @@
+ {
+  "min": {
+-  "checkedDistinct": 719,
+-  "rawChecked": 1273,
++  "checkedDistinct": 891,
++  "rawChecked": 1473,
+   "fetchOk": 219,
+-  "tableRows": 39,
+-  "tablesFedIn": 39,
++  "tableRows": 40,
++  "tablesFedIn": 40,
+   "tplFiles": 67,
+   "tableRegexEntries": 47,
+-  "registeredRaw": 1495,
+-  "registeredDistinct": 896,
++  "registeredRaw": 1659,
++  "registeredDistinct": 1056,
+   "wrappedTables": 13,
+   "regexTables": 2
+  },
+@@ -17,6 +17,6 @@
+   "rawMiss": 7,
+   "fetchFail": 3,
+   "uncheckedRaw": 186,
+-  "uncheckedDistinct": 168
++  "uncheckedDistinct": 165
+  }
+ }

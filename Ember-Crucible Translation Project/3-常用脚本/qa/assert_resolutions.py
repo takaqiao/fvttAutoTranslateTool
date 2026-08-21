@@ -20,6 +20,10 @@
 `distinct_terms`  一组术语的中文必须两两不同，**且每个术语都要过英文闸读库核对**（防撞名 + 防空转）
 `term_domains`    同一个英文词按域分裂成多个中文，逐域钉死（防下一轮「顺手统一」）
 `lang_parity`     两仓 `lang/cn.json` 的键数必须等于英文侧键数
+`lang_shape`      两仓 `lang/cn.json` 的**结构**：顶层值全是字符串、raw 键之间无点号前缀相撞
+                     （第三十四轮 A 新增）。`lang_parity` 只比**键数**，而键数对齐 ≠ 结构正确 ——
+                     2026-08-21 那次「加了两个嵌套键 ⇒ 整个 `EMBER.*` 命名空间被顶掉」，
+                     键数 488/488 全绿、值也几乎全译，**而整个命名空间是死的**。见 `a_lang_shape`。
 `anchor_ids`      标题上的显式 `id=` 数量不得低于阈值（撑着锚点链接）
 `no_bilingual_tail` 指定字段的中文不得带「中文 English」双语尾巴
 `exclusions_closed` `same_en_split` 的分组必须全部在已归档豁免表内
@@ -800,6 +804,150 @@ def a_lang_parity(rule, ctx):
         if len(cn) != len(en):
             bad.append((name, "-", "lang/cn.json", f"键数 {len(cn)} != 英文侧 {len(en)}"))
     return bad, " | ".join(detail)
+
+
+# ============ lang 文件的**结构闸**（第三十四轮 A；2026-08-21 的 `EMBER.*` 整块失效）
+#
+# **回归的形态**（照抄，别再重新发现一遍）：v1.1.25 往
+# `1-Ember汉化插件/lang/cn.json` 里加两个新键时用了**嵌套对象**写法，
+# 而那份文件其余 486 个键全是**扁平点号键**。Foundry 装载语言文件时展开点号键：
+# 扁平的 `"EMBER.CALENDAR.…"` 展开成一个 `EMBER` 对象，**撞上后写进去的嵌套 `EMBER` 对象**，
+# 后者整块盖掉前者 ⇒ **整个 `EMBER.*` 顶层命名空间被顶掉**，受害面 = 该命名空间下的全部键。
+# 实际失效：绽放 / 渐盈 / 渐亏 / 法典 / 地区地图 / 同调 / 阶位 / 与物体互动 /
+# 传送 / 六角 HUD / 地形 / 天气 / 事件 HUD —— **全部是 `EMBER.*`**；
+# 幸存的「第 X 天」与月亮名字**全部走硬编码 DOM 替换那条通道**，压根不查 lang 表。
+#
+# **为什么两道现成的闸都是瞎的**（这一条最值钱，也是本条存在的全部理由）：
+#   · `R-lang-parity` **只比键数、不比结构**：它用 `walk()` 递归拍平，
+#     嵌套写法与扁平写法拍出来的路径**一模一样**，键数一个不差 ⇒ 488/488 一路全绿；
+#   · 自检面板 D 档核的是「我们的键在不在上游」—— 键还在，它也看不见。
+#   ⇒ **不是判据坏了，是这一维度从来没有判据。** 发现它的不是闸，是项目所有者
+#     在真实游戏里看见的 —— 与冒烟验证那次同型，再次印证「译文对 ≠ 译文上得了屏」。
+#
+# ⚠ **它落在 §0.1 收官的例外那一支**：咬到的是**诚实的维护者**（就是主控自己，
+#   而且已经发到用户手里了），与 L6-②（等长乱码替换、纯攻击场景、已裁永久边界）是两类。
+#   ⚠ 项目所有者只批了这一条，别顺势再加别的判据层。
+#
+# **判什么（两条，缺一不可，理由见下）**：
+#   ① **顶层不许有嵌套对象** —— 顶层每个值都必须是字符串；
+#   ② **raw 键之间不许点号前缀相撞** —— 不存在这样一对 raw 键：一个是 `A`（或 `A.B`），
+#      另一个是 `A.B.C`。
+#
+# ⚠⚠ **②「更本质」这句话只在 raw 键上成立，本轮实测把口径订正过一次**：
+#   ② 必须判在**没拍平的 raw 键**上。这时嵌套确实是它的一个实例 ——
+#   `{"EMBER": {...}, "EMBER.CALENDAR.CODEX": "法典"}` 的两个 raw 键里
+#   `EMBER` 正是 `EMBER.CALENDAR.CODEX` 的点号前缀，② 当场抓到。
+#   **可一旦先拍平就抓不到了**：`walk()` 吐出来的是 `EMBER.ATTUNEMENT.Tab` 与
+#   `EMBER.CALENDAR.CODEX`，谁也不是谁的前缀 —— 这正是 `R-lang-parity` 全绿的机理。
+#   而且 ② 只在「同命名空间下另有扁平键」时才响：一份**只有**嵌套、没有同前缀扁平键的
+#   文件，② 一声不吭（今天不撞，明天有人补一个扁平键就撞）。**所以 ① 不能省。**
+#
+# ⚠ 边界写死，免得下一轮扩张：本条**只判结构**，不判键名对不对、不判值译得对不对
+#   （那是 `R-lang-parity` / `cn_absent` / D 档的事），**只读不写**，任何情况下都不改文件。
+#
+# ⚠ **两层地板**（本项目现行纪律，缺一不可 —— 见 `_two_layer_floor` 的 docstring）：
+#   规则文件里的 `min_files` / `min_keys_total` 是**现算下限**（2026-08-21 实测：
+#   ember 488 键 · crucible 1845 键 · 合计 2333，取保守下取整写进规则集），
+#   `PAYLOAD_FLOORS` 把它们钉成 `ge`、只许涨；**历史记录值住在下面这个模块级常量**，
+#   规则文件被调松也越不过它（作弊路径 B）；规则里少写一个键 ⇒ `_two_layer_floor`
+#   报「两层里少了一层」，不是放行。
+LANG_SHAPE_HARD = {"min_files": 2, "min_keys_total": 2000}
+
+
+def lang_nested_keys(obj):
+    """顶层值**不是字符串**的 raw 键（嵌套对象 / 数组 / 数字 …）。判定就在这一行。
+
+    ⚠ 抽成模块级函数**不是**为了好看：`--selftest` 要能把它单独掏空（`return []`）
+      来证明「掏空这条判据的判定函数 → 必须有用例变红」。判定逻辑埋在执行体里的话，
+      那条反例就无从写起（L6-① 的教训：没有反例的护栏等于没有）。
+    """
+    if not isinstance(obj, dict):
+        return ["<整份文件不是一个 JSON 对象>"]
+    return [k for k, v in obj.items() if not isinstance(v, str)]
+
+
+def lang_prefix_collisions(obj):
+    """raw 键之间的**点号前缀相撞** -> [(前缀键, 被它顶掉的长键), ...]。
+
+    ⚠⚠ **判在 raw 键上，不许先拍平。** 拍平之后嵌套与扁平长得一模一样
+      （`walk()` 两种结构都能走通），前缀关系当场消失 —— 那正是 `R-lang-parity`
+      键数 488/488 全绿而整个命名空间是死的那个机理。
+    ⚠ 同样是为了能被 `--selftest` 单独掏空才抽成模块级函数。
+    """
+    if not isinstance(obj, dict):
+        return []
+    keys = [k for k in obj if isinstance(k, str)]
+    kset = set(keys)
+    out = set()
+    for k in keys:
+        seg = k.split(".")
+        for i in range(1, len(seg)):
+            pre = ".".join(seg[:i])
+            if pre in kset:
+                out.add((pre, k))
+    return sorted(out)
+
+
+def a_lang_shape(rule, ctx):
+    """两仓 `lang/cn.json` 的**结构**：顶层值全是字符串 ＋ raw 键之间无点号前缀相撞。
+
+    ⚠ 「判了几条规矩」数的是**每份文件各两条判定 ＋ 两道地板** = 6 —— 与键数无关
+      （同一条判定在 1845 个键上判 1845 次仍只算一条）。它掉下来只有两种解释：
+      某个仓的 lang 文件**没读成**，或执行体被换成了空壳。两种都得人看一眼。
+    """
+    bad = []
+    detail = []
+    n_files = n_keys = 0
+    for name in (rule.get("scope") or sorted(ctx.repos)):
+        # ⚠ 形态 (g)：仓名写错**不许静默跳过**（那会让这条断言一份文件都不查、照样返回空、
+        #   照样绿）。写错 = 硬错误；被 `--repo` 限定掉 = 跳过。与 `a_lang_parity` 同口径。
+        if name not in REPOS:
+            raise KeyError(f"scope 里的仓名 {name!r} 不在 REPOS（可选：{sorted(REPOS)}）"
+                           f" —— 规则写错了，不许静默跳过（空转形态 (g)）")
+        repo = ctx.repos.get(name)
+        if not repo:                                   # 被 `--repo` 限定掉，不是写错
+            continue
+        p = os.path.join(repo, "lang", "cn.json")
+        if not os.path.exists(p):
+            bad.append((name, "-", "lang/cn.json",
+                        f"文件不在：{p} —— **无从查起 != 查过了没问题**（空转形态 (e)）"))
+            continue
+        try:
+            obj = json.load(open(p, encoding="utf-8-sig"))
+        except Exception as exc:                       # noqa: BLE001 —— 读不动必须判失败
+            bad.append((name, "-", "lang/cn.json",
+                        f"读不动：{exc!r} —— 判失败，不是通过（空转形态 (e)）"))
+            continue
+        n_files += 1
+        n_keys += len(obj) if isinstance(obj, dict) else 0
+        _unit(f"lang_shape:flat:{name}")               # 落到实数据上了才记
+        _unit(f"lang_shape:prefix:{name}")
+        nested = lang_nested_keys(obj)
+        for k in nested:
+            bad.append((name, "-", f"lang/cn.json :: {k}",
+                        f"顶层键 `{k}` 的值**不是字符串** —— 这份文件的其余键是扁平点号键，"
+                        f"Foundry 展开点号键时会造出同名容器，**后写进去的那一个整块盖掉另一个**，"
+                        f"于是该顶层命名空间下的全部键一起失效（2026-08-21 `EMBER.*` 那次回归）。"
+                        f"改成扁平点号键：\"{k}.子键\": \"译文\""))
+        coll = lang_prefix_collisions(obj)
+        for pre, full in coll:
+            bad.append((name, "-", f"lang/cn.json :: {pre}",
+                        f"raw 键 `{pre}` 是 `{full}` 的**点号前缀** —— 两者展开到同一条路径上，"
+                        f"谁后写进去谁把对方整块顶掉。这一条比「不许嵌套」更本质："
+                        f"嵌套只是它的一种表现（`{pre}` 的值是个对象时就是那一种）"))
+        detail.append(f"{name}: {len(obj) if isinstance(obj, dict) else '非对象'} 个顶层键"
+                      f"（顶层非字符串 {len(nested)} · 前缀相撞 {len(coll)}）")
+    _unit("lang_shape:min_files", "lang_shape:min_keys_total")
+    H = LANG_SHAPE_HARD
+    _two_layer_floor(bad, "核过的 lang/cn.json 份数", n_files, rule.get("min_files"),
+                     hard=H["min_files"], key="min_files",
+                     grow_hint="多了一个仓，把规则里的 min_files 补记上去")
+    _two_layer_floor(bad, "两仓 lang/cn.json 顶层键合计", n_keys, rule.get("min_keys_total"),
+                     hard=H["min_keys_total"], key="min_keys_total",
+                     grow_hint="上游加了词条、我们跟上了，把规则里的 min_keys_total 补记上去")
+    return bad, (f"{' | '.join(detail) or '一份都没核到'}"
+                 f"（死下限 份数{H['min_files']}·键{H['min_keys_total']}，"
+                 f"住在 assert_resolutions.py）")
 
 
 def a_anchor_ids(rule, ctx):
@@ -3182,8 +3330,10 @@ RULESET_SHAPE = {
     #    （65 → 64）全项目没有任何东西数一数还剩几条。
     # 第三十三轮 B：66 → 67 / 22 → 23（新增 `tag_parity` 一条，见它的执行体注释；
     # §0.1 收官后唯一批准的新判据层，理由是「它会咬到诚实的维护者」那一支例外）
-    "min_assertions": 67,
-    "min_kinds": 23,
+    # 第三十四轮 A：67 → 68 / 23 → 24（新增 `lang_shape` 一条，见它的执行体注释；
+    # 同样走 §0.1 收官后「它会咬到诚实的维护者」那一支例外 —— 这次咬到的就是主控自己）
+    "min_assertions": 68,
+    "min_kinds": 24,
     # —— 各 kind 必须存在的条数（防「把某一类整类删光」，也防「某一类被削掉大半」）
     #
     # ⚠ 第三十轮：这张表**曾经只有 4 项**（translate_cases / panel_liveness /
@@ -3206,6 +3356,7 @@ RULESET_SHAPE = {
         "exclusions_closed": 1,
         "glossary_value": 2,
         "lang_parity": 1,
+        "lang_shape": 1,
         "leaf_literal": 2,
         "no_bilingual_tail": 1,
         "panel_liveness": 1,
@@ -3329,6 +3480,7 @@ REGISTERED_ASSERTIONS = {
     'R-evidence-value': 'cn_absent',
     'R-presence-wisdom': 'cn_absent',
     'R-lang-parity': 'lang_parity',
+    'R-lang-flat-keys': 'lang_shape',
     'R-anchor-ids': 'anchor_ids',
     'R-bare-cn-fields': 'no_bilingual_tail',
     'R-exclusions-closed': 'exclusions_closed',
@@ -3450,6 +3602,7 @@ PAYLOAD_FLOORS = {
     "R-evidence-value": {"cn": ("str", 3)},
     "R-presence-wisdom": {"cn": ("str", 3)},
     "R-lang-parity": {"packages": ("list", 2), "packages.crucible": ("str", 47), "packages.ember": ("str", 44)},
+    "R-lang-flat-keys": {"min_files": ("ge", 2), "min_keys_total": ("ge", 2200), "scope": ("list", 2)},
     "R-anchor-ids": {"min": ("ge", 900), "scope": ("list", 1)},
     "R-bare-cn-fields": {"fields": ("list", 4), "scope": ("list", 1)},
     "R-exclusions-closed": {"exclusions": ("str", 36), "long_keys": ("list", 2), "min_en_strings": ("ge", 10000), "scanner": ("str", 21), "short_len": ("eq", 40)},
@@ -3500,7 +3653,7 @@ PAYLOAD_FLOORS = {
     "R-selfcheck-twin": {"min_pairs": ("ge", 1), "pairs": ("list", 1)},
     "R-patterns-translate-cases": {"arrangements": ("list", 6), "arrangements.channels": ("list", 2), "arrangements.expect_untranslated": ("list", 8), "arrangements.labels_recorded": ("eq", 233), "arrangements.leaves_not_upstream": ("list", 1), "arrangements.min_labels": ("ge", 224), "arrangements.prefixes": ("list", 2), "negative": ("list", 66), "notify_negative": ("list", 45), "notify_positive": ("list", 32), "positive": ("list", 81), "recorded": ("list", 10), "recorded.negative": ("eq", 66), "recorded.notify_negative": ("eq", 45), "recorded.notify_positive": ("eq", 32), "recorded.np_size": ("eq", 27), "recorded.patterns_size": ("eq", 28), "recorded.positive": ("eq", 81), "recorded.prefixed_size": ("eq", 19), "repo": ("str", 5), "src": ("str", 30), "stub_import": ("str", 54), "upstream_repo": ("str", 5), "upstream_src": ("str", 17)},
     "R-selfcheck-d-section-name": {"files": ("list", 2), "forbid_re": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 2), "require": ("list", 1)},
-    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 168), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 719), "min.fetchOk": ("eq", 219), "min.rawChecked": ("eq", 1273), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 896), "min.registeredRaw": ("eq", 1495), "min.tableRegexEntries": ("eq", 47), "min.tableRows": ("eq", 39), "min.tablesFedIn": ("eq", 39), "min.tplFiles": ("eq", 67), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
+    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 165), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 891), "min.fetchOk": ("eq", 219), "min.rawChecked": ("eq", 1473), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 1056), "min.registeredRaw": ("eq", 1659), "min.tableRegexEntries": ("eq", 47), "min.tableRows": ("eq", 40), "min.tablesFedIn": ("eq", 40), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
     "R-ruleset-shape": {},
     "R-html-tag-parity": {"min_leaves": ("ge", 15000), "min_tag_kinds": ("ge", 60), "min_tags": ("ge", 390000)},
@@ -3532,6 +3685,9 @@ JUDGED_UNITS = {
     "R-evidence-value": 1,
     "R-presence-wisdom": 1,
     "R-lang-parity": 2,
+    # 第三十四轮 A：两份文件各两条判定（顶层非字符串 / raw 键前缀相撞）+ 两道地板 = 6。
+    # ⚠ 它与键数无关（同一条判定在 1845 个键上判 1845 次仍只算一条），所以可以钉死实测值。
+    "R-lang-flat-keys": 6,
     "R-anchor-ids": 1,
     "R-bare-cn-fields": 4,
     "R-exclusions-closed": 4,
@@ -3602,7 +3758,7 @@ JUDGED_UNITS = {
 # 载荷地板那一侧走的是更强的「现推 == 登记」（见 `_derive_payload_floors`），
 # 而规矩数是**运行时量出来的**、推不出来，所以只能到这一档。
 # **这是两点门槛，不是墙** —— 写在这里，免得下一轮把它读成「堵死了」。
-JUDGED_UNITS_TOTAL = 600          # 第三十三轮 B：536 → 600（tag_parity +64 条）
+JUDGED_UNITS_TOTAL = 606          # 第三十四轮 A：600 → 606（lang_shape +6 条）
 
 
 def _dig(rule, path):
@@ -4030,6 +4186,7 @@ KINDS = {
     "distinct_terms": a_distinct_terms,
     "term_domains": a_term_domains,
     "lang_parity": a_lang_parity,
+    "lang_shape": a_lang_shape,
     "anchor_ids": a_anchor_ids,
     "no_bilingual_tail": a_no_bilingual_tail,
     "exclusions_closed": a_exclusions_closed,
@@ -4439,6 +4596,197 @@ def run_tag_parity_selftest():
         if extra:
             print(f"        {extra}")
     print(f"\ntag_parity：{len(results) - nbad} / {len(results)} 通过")
+    return nbad, len(results)
+
+
+# ==================== lang 结构闸（第三十四轮 A）的正反例
+#
+# ⚠ 这一组的三条**必答题**（任务点名要的，也是本项目第六层的教训「没有反例的护栏等于没有」）：
+#   ① 「把某个扁平键改成嵌套写法 → 必须变红」——`LANG_SHAPE_SELFTEST` 第 2 条，
+#      喂的就是 2026-08-21 那次回归的原样形态；
+#   ② 「掏空这条判据的判定函数 → 必须有用例变红」——末尾的元用例 A / B：
+#      把 `lang_nested_keys` / `lang_prefix_collisions` 换成空壳后重跑第 2 / 第 4 条，
+#      **它们必须从「响」变成「不响」**。只断言「换了空壳之后自检红了」是不够的 ——
+#      红也可能是别的层在响（分层归因，ruleset_shape 那一组第三十轮踩过的坑）；
+#   ③ 元用例 C：发布中的**真身** `LANG_SHAPE_HARD` 确实咬人。上面那些用的是放松过的
+#      副本，只测副本等于没测产线那两个数（空转形态 (g)「验的不是产线那一份」）。
+#
+# ⚠ 第 3 / 第 4 条是一对，**缺一不可**，它们证明的是「两条判定各管一段、谁也替不了谁」：
+#   第 3 条（只嵌套、无同前缀扁平键）只有 ① 看得见；第 4 条（全扁平、`A.B` vs `A.B.C`）
+#   只有 ② 看得见。任务里那句「② 比 ① 更本质」在 **raw 键**上成立，但**不代表 ① 可以省**。
+_LANG_SHAPE_RULE = {
+    "id": "SELFTEST-lang-shape", "kind": "lang_shape",
+    "scope": ["ember", "crucible"], "min_files": 1, "min_keys_total": 1,
+}
+# 自检用的死下限（真身那两个数是按两仓 2333 个键定的，合成文件喂进去必然触底）。
+# ⚠ 真身的 `LANG_SHAPE_HARD` 由元用例 C **单独**验它咬不咬人。
+_LANG_HARD_TINY = {"min_files": 1, "min_keys_total": 1}
+
+_FLAT_OK = {"EMBER.CALENDAR.SEASONS.BLOOMING": "绽放",
+            "EMBER.MOON.PHASES.WAXING": "渐盈",
+            "TYPES.JournalEntryPage.ember.ancestry": "血统"}
+_CRU_OK = {"ABILITIES.GROUPS.Power": "力量"}
+
+LANG_SHAPE_SELFTEST = [
+    ("正例：两仓都是扁平点号键、值全是字符串、互不为前缀 → 不响",
+     {"ember": _FLAT_OK, "crucible": _CRU_OK}, None, 0),
+    # ⚑ 必答题 ①：2026-08-21 那次回归的**原样形态** —— 往扁平点号键的文件里加嵌套对象。
+    ("⚑ 必答题①：把 `EMBER.CALENDAR.CODEX` 写成**嵌套对象**、而同命名空间下还有扁平键 → "
+     "必须响 2 处（顶层非字符串 1 ＋ raw 键前缀相撞 1）",
+     {"ember": {"EMBER": {"CALENDAR": {"CODEX": "法典"}},
+                "EMBER.MOON.PHASES.WAXING": "渐盈"},
+      "crucible": _CRU_OK}, None, 2),
+    ("只加嵌套、该命名空间下**没有**别的扁平键 → 仍然响 1 处（顶层非字符串）—— "
+     "前缀闸此时看不见它，所以「顶层不许嵌套」这一条**不能省**",
+     {"ember": {"NEWNS": {"A": "甲"}, "EMBER.MOON.PHASES.WAXING": "渐盈"},
+      "crucible": _CRU_OK}, None, 1),
+    # ⚑ 必答题 ②：这一形态里**一个嵌套对象都没有**，第 ① 条判定完全看不见。
+    ("⚑ 必答题②：全扁平、零嵌套，但 `A.B` 与 `A.B.C` 并存 → 必须响 1 处（点号前缀相撞）",
+     {"ember": {"EMBER.CALENDAR": "日历", "EMBER.CALENDAR.CODEX": "法典"},
+      "crucible": _CRU_OK}, None, 1),
+    ("三层并存（`A` / `A.B` / `A.B.C`）→ 响 3 处，**逐对点名**而不是只报一条",
+     {"ember": {"EMBER": "余烬", "EMBER.CALENDAR": "日历", "EMBER.CALENDAR.CODEX": "法典"},
+      "crucible": _CRU_OK}, None, 3),
+    ("顶层值是**数组** → 响 1（判的是「值必须全是字符串」，不是「不许是 dict」）",
+     {"ember": {"EMBER.LIST": ["甲", "乙"]}, "crucible": _CRU_OK}, None, 1),
+    ("顶层值是**数字** → 响 1（同上）",
+     {"ember": {"EMBER.NUM": 3}, "crucible": _CRU_OK}, None, 1),
+    # —— 两条防恒真：闸不许见点号就响。
+    ("防恒真：`A.B` 与 `A.C` 并存（有点号、互不为前缀）→ 不响",
+     {"ember": {"EMBER.B": "乙", "EMBER.C": "丙"}, "crucible": _CRU_OK}, None, 0),
+    ("防恒真：键里根本没有点号 → 不响",
+     {"ember": {"Foo": "甲", "Bar": "乙"}, "crucible": _CRU_OK}, None, 0),
+    # —— 三条「无从查起 != 查过了没问题」（空转形态 (e)）。
+    ("反例：ember 的 lang/cn.json **不在** → 必须响（不是通过）",
+     {"ember": None, "crucible": _CRU_OK}, None, 1),
+    ("反例：lang/cn.json 是**坏 JSON** → 必须响（读不动 = 判失败）",
+     {"ember": "{ 这不是 JSON ", "crucible": _CRU_OK}, None, 1),
+    ("反例：整份文件是个 JSON **数组**（连对象都不是）→ 必须响",
+     {"ember": "[\"a\", \"b\"]", "crucible": _CRU_OK}, None, 1),
+    # ⚑ 两层地板各自的反例：规则那一层被摘掉 / 被调松，都不许静默过。
+    ("规则里少了 `min_keys_total` → 报「两层里少了一层」（缺一层不许当没事）",
+     {"ember": _FLAT_OK, "crucible": _CRU_OK}, {"min_keys_total": None}, 1),
+    ("规则里把 `min_files` 调成 0、而本文件的死下限是 99 → 仍然响"
+     "（作弊路径 B 越不过 .py）",
+     {"ember": _FLAT_OK, "crucible": _CRU_OK},
+     {"min_files": 0, "_hard": {"min_files": 99, "min_keys_total": 1}}, 1),
+]
+
+
+def run_lang_shape_selftest():
+    """返回 (失败条数, 总条数)。含**掏空判定函数**的元用例（L6-① 的教训）。"""
+    import shutil
+    global LANG_SHAPE_HARD, lang_nested_keys, lang_prefix_collisions
+    saved_hard = LANG_SHAPE_HARD
+    saved_nested, saved_coll = lang_nested_keys, lang_prefix_collisions
+    results = []
+    tmp = tempfile.mkdtemp(prefix="ar_lang_shape_selftest_")
+
+    def _tree(files, tag):
+        """按 {仓名: 内容} 造一棵最小树。内容可以是 dict（写成 JSON）、str（原样写）、
+        None（**不建这个文件**）。返回一个只有 `.repos` 的 ctx。"""
+        base = os.path.join(tmp, tag)
+        repos = {}
+        for name, content in files.items():
+            d = os.path.join(base, name)
+            repos[name] = d
+            if content is None:
+                os.makedirs(os.path.join(d, "lang"), exist_ok=True)
+                continue
+            p = os.path.join(d, "lang", "cn.json")
+            if isinstance(content, str):
+                _mk(p, content)
+            else:
+                _mkjson(p, content)
+        return _DiskCtx(repos)
+
+    def _run(files, override, tag):
+        hard = (override or {}).get("_hard") or _LANG_HARD_TINY
+        rule = dict(_LANG_SHAPE_RULE)
+        for k, v in (override or {}).items():
+            if k == "_hard":
+                continue
+            if v is None:
+                rule.pop(k, None)                      # None ＝「把这个键摘掉」
+            else:
+                rule[k] = v
+        globals()["LANG_SHAPE_HARD"] = hard
+        try:
+            return a_lang_shape(rule, _tree(files, tag))
+        finally:
+            globals()["LANG_SHAPE_HARD"] = saved_hard
+
+    try:
+        for i, (note, files, override, want) in enumerate(LANG_SHAPE_SELFTEST):
+            try:
+                b, detail = _run(files, override, "c%d" % i)
+            except Exception as exc:                   # noqa: BLE001
+                b, detail = [], "执行出错 %r" % (exc,)
+            ok = len(b) == want
+            results.append((note, ok,
+                            "" if ok else f"期望违规 {want}，实得 {len(b)}：{b[:2]}｜{detail}"))
+
+        # —— 形态 (g)：`scope` 里的仓名写错**不许静默跳过**，要当场抛。
+        try:
+            _run({"ember": _FLAT_OK}, {"scope": ["embre"]}, "g")
+            ok, why = False, "写错仓名居然静默跑过去了 —— 那就是空转形态 (g)"
+        except KeyError as exc:
+            hit = "不在 REPOS" in str(exc)
+            ok, why = hit, "" if hit else repr(exc)
+        results.append(("⚑ `scope` 里的仓名写错（`embre`）→ 必须当场抛，不许静默跳过"
+                        "（写错 = 硬错误；被 `--repo` 限定掉才是跳过）", ok, why))
+
+        # —— 元用例 A：掏空 `lang_nested_keys` → 必答题① 的**嵌套那一半**必须失守。
+        _note, _files, _ov, _want = LANG_SHAPE_SELFTEST[1]
+        try:
+            globals()["lang_nested_keys"] = lambda obj: []
+            b, _d = _run(_files, _ov, "mA")
+            ok = (len(b) == 1 and "点号前缀" in b[0][3])
+        finally:
+            globals()["lang_nested_keys"] = saved_nested
+        results.append(("⚑ 掏空 `lang_nested_keys` → 必答题①从 2 处掉到 1 处，"
+                        "**掉的正是「顶层非字符串」那一处**（剩下的必须是前缀相撞）—— "
+                        "分层归因：证明那一半是被这个判定函数撑起来的", ok,
+                        "" if ok else f"实得 {len(b)} 处：{b[:2]}"))
+
+        # —— 元用例 B：掏空 `lang_prefix_collisions` → 必答题②（全扁平、零嵌套）必须从响变不响。
+        _note, _files, _ov, _want = LANG_SHAPE_SELFTEST[3]
+        try:
+            globals()["lang_prefix_collisions"] = lambda obj: []
+            b, _d = _run(_files, _ov, "mB")
+            ok = len(b) == 0
+        finally:
+            globals()["lang_prefix_collisions"] = saved_coll
+        results.append(("⚑ 掏空 `lang_prefix_collisions` → 必答题②（全扁平、零嵌套）"
+                        "必须从「响」变成「不响」（证明它是被这个判定函数撑起来的，"
+                        "不是被别的层顺手接住）", ok,
+                        "" if ok else f"掏空之后仍报了 {len(b)} 处 —— 那条反例测的不是这个函数"))
+
+        # —— 元用例 C：发布中的**真身**死下限确实咬人（上面跑的都是放松过的副本，
+        #    只测副本等于没测产线那两个数，形态 (g)「验的不是产线那一份」）。
+        b, d = a_lang_shape(dict(_LANG_SHAPE_RULE, scope=["ember"], min_files=2,
+                                 min_keys_total=2200),
+                            _tree({"ember": {"EMBER.A": "甲"}}, "mC"))
+        ok = (len(b) == 2 and str(LANG_SHAPE_HARD["min_keys_total"]) in " ".join(x[3] for x in b))
+        results.append((f"⚑ 用**真身** LANG_SHAPE_HARD（份数{LANG_SHAPE_HARD['min_files']}·"
+                        f"键{LANG_SHAPE_HARD['min_keys_total']}）跑一份只有 1 个键的合成文件 → "
+                        f"两道死下限全部响", ok,
+                        "" if ok else f"期望 2 处，实得 {len(b)}｜{d}"))
+    finally:
+        globals()["LANG_SHAPE_HARD"] = saved_hard
+        globals()["lang_nested_keys"] = saved_nested
+        globals()["lang_prefix_collisions"] = saved_coll
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    print("\nlang 文件结构闸（lang_shape）正反例：")
+    nbad = 0
+    for note, ok, extra in results:
+        if not ok:
+            nbad += 1
+        print(f"  {'ok  ' if ok else 'FAIL'} {note}")
+        if extra:
+            print(f"        {extra}")
+    print(f"\nlang_shape：{len(results) - nbad} / {len(results)} 通过")
     return nbad, len(results)
 
 
@@ -6100,6 +6448,7 @@ KIND_SELFTEST_OWNER = {
     "leaf_literal": "叶级执行体",
     "glossary_value": "读盘执行体",
     "lang_parity": "读盘执行体",
+    "lang_shape": "lang_shape",          # 第三十四轮 A
     "version_matrix": "读盘执行体",
     "exclusions_closed": "读盘执行体",
 }
@@ -6792,10 +7141,14 @@ SELFTEST_SHAPE = {
     # 第三十二轮 L6-①：`kind 覆盖表` 从字面量 1 改成**函数自报的比对项数**
     #（22 种 kind + 1 道待补上限 = 23），并新增「护栏反例」组（那两道判定函数自己的反例）
     # 第三十三轮 B：KINDS 从 22 种涨到 23 种 ⇒ 覆盖表的比对项数 23 → 24（23 种 + 1 道待补上限）
-    "kind 覆盖表": 24, "护栏反例": 9,
+    # 第三十四轮 A：KINDS 23 → 24 种 ⇒ 24 → 25
+    "kind 覆盖表": 25, "护栏反例": 9,
     # 第三十三轮 B：新判据层 tag_parity 的正反例 10 条 + 3 条元用例
     #（掏空 tag_diff / 掏空 tag_multiset / 用真身死下限跑一遍）
     "tag_parity": 13,
+    # 第三十四轮 A：新判据层 lang_shape 的正反例 14 条 + 1 条形态 (g) + 3 条元用例
+    #（掏空 lang_nested_keys / 掏空 lang_prefix_collisions / 用真身死下限跑一遍）
+    "lang_shape": 18,
 }
 
 
@@ -6896,6 +7249,7 @@ def run_selftest():
     print(f"\nblock_sense_gate：{len(BLOCK_SENSE_SELFTEST) - bbad} / {len(BLOCK_SENSE_SELFTEST)} 通过")
 
     tgbad, _tgn = run_tag_parity_selftest()
+    lsbad, _lsn = run_lang_shape_selftest()      # 第三十四轮 A
 
     print("\n增强器槽位闸（enricher_slot_gate）正反例：")
     ebad = 0
@@ -6950,10 +7304,10 @@ def run_selftest():
     total = (len(SELFTEST) + len(GATE_SELFTEST) + len(SENSE_SELFTEST) + len(GLOSSARY_SELFTEST)
              + len(BLOCK_ALIGN_SELFTEST) + len(BLOCK_SENSE_SELFTEST) + len(SLOT_SELFTEST)
              + len(TEXT_COV_SELFTEST) + 1 + _wn + _rn + _ln + _pn + _kn + _sqn + _mvn
-             + _lkn + _dkn + _pfn + _jun + _gcn + _tgn)
+             + _lkn + _dkn + _pfn + _jun + _gcn + _tgn + _lsn)
     nbad = (bad + gbad + sbad + vbad + abad + bbad + ebad + tbad
             + wbad + rbad + lbad + pbad + kbad + sqbad + mvbad
-            + lkbad + dkbad + pfbad + jubad + gcbad + tgbad)
+            + lkbad + dkbad + pfbad + jubad + gcbad + tgbad + lsbad)
 
     # —— kind 覆盖表：`KINDS` 里每个 kind 都得有一组、且那一组**真的调到了它**。
     #    ⚠ 必须放在**所有组跑完之后**（数的是本次自检的累计调用次数）。
@@ -6986,6 +7340,7 @@ def run_selftest():
         "block_aligned_gate": len(BLOCK_ALIGN_SELFTEST),
         "block_sense_gate": len(BLOCK_SENSE_SELFTEST),
         "tag_parity": _tgn,
+        "lang_shape": _lsn,
         "enricher_slot_gate": len(SLOT_SELFTEST),
         "enricher_text_coverage": len(TEXT_COV_SELFTEST) + 1,
         "twin_files": _wn, "translate_cases": _rn, "source_literal": _ln,

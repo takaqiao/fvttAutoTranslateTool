@@ -386,7 +386,9 @@
      "except_paths": [
       "Deities.pages.Kinalathi.contentGamemaster",
       "actors.Sigil.archetype.description",
-            "actors.Sigil.items.Shard God.description"
+            "actors.Sigil.items.Shard God.description",
+            "actors.Aythorn.archetype.description",
+            "entries.Shard God.description"
      ]
     },
     {
@@ -2026,15 +2028,15 @@
    "upstream_repo": "ember",
    "section": "D 上游字面量存在性（仅供人工复核）",
    "min": {
-    "checkedDistinct": 719,
-    "rawChecked": 1273,
+    "checkedDistinct": 891,
+    "rawChecked": 1473,
     "fetchOk": 219,
-    "tableRows": 39,
-    "tablesFedIn": 39,
-    "tplFiles": 67,
+    "tableRows": 40,
+    "tablesFedIn": 40,
+    "tplFiles": 68,
     "tableRegexEntries": 47,
-    "registeredRaw": 1495,
-    "registeredDistinct": 896,
+    "registeredRaw": 1659,
+    "registeredDistinct": 1056,
     "wrappedTables": 13,
     "regexTables": 2
    },
@@ -2043,7 +2045,7 @@
     "rawMiss": 7,
     "fetchFail": 3,
     "uncheckedRaw": 186,
-    "uncheckedDistinct": 168
+    "uncheckedDistinct": 165
    },
    "substr_probe": "Increase Ability",
    "substr_expect_miss": 0,
@@ -2094,6 +2096,19 @@
    "min_leaves": 15000,
    "min_tags": 390000,
    "min_tag_kinds": 60
+  },
+  {
+   "id": "R-lang-flat-keys",
+   "title": "两仓 lang/cn.json 必须是扁平点号键：顶层值全为字符串、raw 键之间不许点号前缀相撞（记录值住在 assert_resolutions.py）",
+   "decision": "2026-08-21（v1.1.25 整个 EMBER.* 命名空间被顶掉；§0.1 收官后第二条获批的新判据层）",
+   "kind": "lang_shape",
+   "why": "**两仓 `lang/cn.json` 的结构闸：顶层每个值都必须是字符串，raw 键之间不许点号前缀相撞。**｜为什么在 §0.1 收官之后还加这一层（项目所有者单独批准的第二条，理由与 `R-html-tag-parity` 同一支）：2026-08-21 项目所有者在**真实游戏里**报了 8 处未汉化，分诊后其中 5 处是**同一个根因** —— v1.1.25 往 `1-Ember汉化插件/lang/cn.json` 加 2 个新键时用了**嵌套对象**写法，而那份文件其余 486 个键全是**扁平点号键**。Foundry 装载语言文件时展开点号键：扁平的 `EMBER.CALENDAR.…` 展开成一个 `EMBER` 对象，撞上后写进去的嵌套 `EMBER` 对象，后者整块盖掉前者 ⇒ **整个 `EMBER.*` 顶层命名空间被顶掉**，受害面 = 该命名空间下的全部键。实测失效的全是 `EMBER.*`（绽放 / 渐盈 / 渐亏 / 法典 / 地区地图 / 同调 / 阶位 / 与物体互动 / 传送 / 六角 HUD / 地形 / 天气 / 事件 HUD）；幸存的「第 X 天」与月亮名字**全部走硬编码 DOM 替换**那条通道，压根不查 lang 表 —— 症状与推断逐条吻合，这是判为根因的依据，不是猜。｜**两道现成的闸对这一类都是瞎的，这一条是本条最值钱的部分**：① `R-lang-parity` **只比键数、不比结构** —— 它用 `walk()` 递归拍平，嵌套写法与扁平写法拍出来的路径**一模一样**，键数一个不差，于是 488/488 一路全绿；② 自检面板 D 档核的是「我们的键在不在上游」，键还在，它也看不见。**不是判据坏了，是这一维度从来没有判据。**发现它的不是闸，是项目所有者在游戏里看见的 —— 与冒烟验证那次同型，再次印证「**译文对 ≠ 译文上得了屏**」，也再次印证「**键数对齐 ≠ 结构正确，更 ≠ 能生效**」：本轮实测键数 488/488 全绿、值也几乎全译（只 1 条占位符留英），而整个命名空间是死的。｜它落在 §0.1 停止条件的例外那一支：**会咬到诚实的维护者** —— 这次咬到的就是主控自己，而且已经发到用户手里了；与 L6-②（等长乱码替换、纯攻击场景、已裁为永久边界不修）正好是两类。⚠ **项目所有者只批了这一条，别顺势再加别的判据层。**｜**判什么（两条，缺一不可）**：① 顶层不许有嵌套对象（值必须全是字符串）；② raw 键之间不许点号前缀相撞 —— 不存在这样一对 raw 键，一个是 `A`（或 `A.B`）、另一个是 `A.B.C`。⚠⚠ **②「更本质」这句只在 raw 键上成立，本轮实测把口径订正过一次**：② 必须判在**没拍平的 raw 键**上，这时嵌套确实是它的一个实例（`{\"EMBER\": {…}, \"EMBER.CALENDAR.CODEX\": \"法典\"}` 的两个 raw 键里 `EMBER` 正是后者的点号前缀）；**可一旦先拍平就抓不到了** —— `walk()` 吐出来的是 `EMBER.ATTUNEMENT.Tab` 与 `EMBER.CALENDAR.CODEX`，谁也不是谁的前缀，那正是 `R-lang-parity` 全绿的机理。而且 ② 只在「同命名空间下另有扁平键」时才响：一份**只有**嵌套、没有同前缀扁平键的文件 ② 一声不吭（今天不撞，明天有人补一个扁平键就撞）。**所以 ① 不能省**，`--selftest` 的第 3 / 第 4 条就是这一对的分层归因。｜**边界写死，免得下一轮扩张**：本条**只判结构**，不判键名对不对、不判值译得对不对（那是 `R-lang-parity` / `cn_absent` / 面板 D 档的事）；**只读不写**，任何情况下都不改文件。｜**两层地板**（本项目现行纪律，缺一不可）：本文件里这两个 `min_*` 是**现算下限**（2026-08-21 实测 ember 488 键 · crucible 1845 键 · 合计 2333，取保守下取整写进来），`PAYLOAD_FLOORS` 把它们钉成 `ge`、只许涨；**历史记录值住在 `3-常用脚本/qa/assert_resolutions.py` 的模块级常量 `LANG_SHAPE_HARD`**，不在本文件 —— 本文件是可改的，把这两个数调小仍然越不过那两个死下限（作弊路径 B）；两个键里少写一个，`_two_layer_floor` 会报「两层里少了一层」，不是放行。｜**反例回测**（第六层的教训：没有反例的护栏等于没有）：`--selftest` 的 `lang_shape` 组 18 条 —— 14 条正反例（含必答题「把某个扁平键改成嵌套写法 → 必须变红」、两条防恒真、三条「文件不在 / 坏 JSON / 整份不是对象都必须响」）＋ 1 条形态 (g)（`scope` 仓名写错必须当场抛）＋ 3 条元用例：掏空 `lang_nested_keys` 后必答题①**从 2 处掉到 1 处且掉的正是嵌套那一处**、掏空 `lang_prefix_collisions` 后必答题②**从响变成不响**、用**真身**的 `LANG_SHAPE_HARD` 跑一份只有 1 个键的合成文件时两道死下限全部响（只测放松过的副本等于没测产线那两个数，形态 (g)）。｜⚠ 「判了几条规矩」数的是**每份文件各两条判定 ＋ 两道地板** = 6，与键数无关（同一条判定在 1845 个键上判 1845 次仍只算一条）；它掉下来只有两种解释：某个仓的 lang 文件没读成，或执行体被换成了空壳。两种都得人看一眼。",
+   "scope": [
+    "ember",
+    "crucible"
+   ],
+   "min_files": 2,
+   "min_keys_total": 2200
   }
  ]
 }
