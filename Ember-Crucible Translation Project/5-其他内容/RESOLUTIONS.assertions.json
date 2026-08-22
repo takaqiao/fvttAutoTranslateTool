@@ -386,9 +386,9 @@
      "except_paths": [
       "Deities.pages.Kinalathi.contentGamemaster",
       "actors.Sigil.archetype.description",
-            "actors.Sigil.items.Shard God.description",
-            "actors.Aythorn.archetype.description",
-            "entries.Shard God.description"
+      "actors.Sigil.items.Shard God.description",
+      "actors.Aythorn.archetype.description",
+      "entries.Shard God.description"
      ]
     },
     {
@@ -1385,13 +1385,14 @@
     "_why": "第二十八轮：原先这里是 min_negative / min_positive / min_notify_* 与 coverage.min_* 一堆**可调的门槛**，复核实测把其中三个改小（min_prefixed 19→2、min_negative/min_positive→1），**其余一个字节不动，闸就从红变绿**。⇒ 现在这些数一律只当「**上次人工确认过的值**」用，判据另从被判对象**现算**一份下限（表现在有多少条 / 规则里现在写着几条用例 / 上游现抠出多少编排名），两层一起判：`actual < recorded` 抓删除，`recorded < 现算值` 抓「调松了 / 加了东西忘了记」。谁把下面任何一个数改小，闸当场红。判法见 assert_resolutions.py 的 `_two_layer_floor`。",
     "_why_29": "第二十九轮两处改动，都必须留痕：① `np_size` 31→27、`notify_positive` 36→31 是**记录值调小**，理由不是「让闸变绿」而是**被判文件里的一条显式裁决**——本轮 `ember-hardcoded-cn.mjs` 按「全局通知表每条正则必须有厂商锚点或封闭定义域」删掉 4 条（两条 rest-event、`is already registered for this (layer|color)`、`group actor`），删除理由与损失评估逐条写在被判文件的注释块里（:2132 起）；另把 `Adjacent hex (.+)…(.+)` 收紧成带 slice 前缀的形状，故那条正例从 `12.4` 改成 `s.12.4`。被删的 4 条对应的 5 条正例随之移除。⚠ 这正是 `_two_layer_floor` 设计要的效果：表一删，主闸当场红在「np_size 实得 27 低于历史记录值 31」与「1 条没有正例」，**逼人来看一眼再改记录值**，而不是悄悄地绿。② `negative` 28→66、`notify_negative` 14→39 是**补齐反例的结构护栏**（见 why 里第二十九轮那段）：反例此前只有这两个数挡着，清空反例 + 把数改 0 就全绿；现在按「一条表项一条专属近似反例」的完美匹配判，这两个数**结构上**不可能低于 47 与 27。",
     "prefixed_size": 19,
-    "patterns_size": 28,
+    "patterns_size": 29,
     "np_size": 27,
-    "negative": 66,
-    "positive": 81,
+    "negative": 67,
+    "positive": 82,
     "notify_negative": 45,
     "notify_positive": 32,
-    "_why_29b": "第二十九轮备好、第三十轮落地的增量：通知反例 +6 / 通知正例 +1，**只加不删**，两个记录值随之上调（notify_negative 39→45 · notify_positive 31→32）。⚠ **措辞按第三十轮复核的实测口径更正过**：第二十九轮原稿写的是「删除这个动作本身此前没有任何常设判据守着，下一轮谁把它放回表里都是无声的」—— **这句话经实测不成立**。把第二十九轮删掉的那条正则（`^\"(.+)\" is already registered for this (layer|color)\\.$`）原样加回被判文件，主闸当场**违规 4 处、红**：覆盖归因、结构护栏、`np_size` 三道一起响；要让它变绿必须 4 处协同改动，而每一处都在 diff 里自证。⇒ 这 6 条**不是补一个无人看守的洞，是加固**：那三道守的是「表变长了却没人记账」，而**合法的加法**——把正则加回去、同时补上它自己的正例与近似反例并把记录值一起上调——本来是一条走得通的路；这 6 条反例把那条路也钉死了。⚠ 第三十轮就地实测过这件事（临时副本树加回正则、跑发布中的这条规则，被判文件本体没动）：落 E1 **之前** 4 处违规全是记账类（coverage / negative_structure / np_size / np_neg_matched），逐条都能靠「补正例 + 补专属反例 + 上调 np_size」合法消掉；落 E1 **之后**同样 4 处，但其中 2 处换成了这 6 条里的 `\"myLayer\"` 与 `\"crimson\"` **自己被整句重写成中文**（实得「「myLayer」已在该层上注册过了。」），而 negative_structure / np_neg_matched 反倒被这 6 条**满足**了 —— 也就是说它们一边充当那条表项的专属近似反例、一边把它钉死。它们钉的不是某条现存表项，而是「**这条正则不许被加回来**」，且**改记录值救不了**（反例判的是「这句不许被翻译」，不是数量）；要变绿只能把这 6 条删掉，而那是作弊路径 A，第二十七轮已堵。其中前两条（`\"myLayer\" … layer.` / `\"crimson\" … color.`）是复核用真身实跑坐实的**现网越界现场**：改动前它们确实会被整句重写成「「myLayer」已在该层上注册过了。」。加的 1 条正例覆盖 hex 的另一个 slice 前缀与负偏移（`p.0.0` / `s.-3.7`，出处 ember.mjs:119780 `prefix: \"s\"` · :120120 `prefix: \"p\"` · :955-956 i/j 只要求整数）。"
+    "_why_29b": "第二十九轮备好、第三十轮落地的增量：通知反例 +6 / 通知正例 +1，**只加不删**，两个记录值随之上调（notify_negative 39→45 · notify_positive 31→32）。⚠ **措辞按第三十轮复核的实测口径更正过**：第二十九轮原稿写的是「删除这个动作本身此前没有任何常设判据守着，下一轮谁把它放回表里都是无声的」—— **这句话经实测不成立**。把第二十九轮删掉的那条正则（`^\"(.+)\" is already registered for this (layer|color)\\.$`）原样加回被判文件，主闸当场**违规 4 处、红**：覆盖归因、结构护栏、`np_size` 三道一起响；要让它变绿必须 4 处协同改动，而每一处都在 diff 里自证。⇒ 这 6 条**不是补一个无人看守的洞，是加固**：那三道守的是「表变长了却没人记账」，而**合法的加法**——把正则加回去、同时补上它自己的正例与近似反例并把记录值一起上调——本来是一条走得通的路；这 6 条反例把那条路也钉死了。⚠ 第三十轮就地实测过这件事（临时副本树加回正则、跑发布中的这条规则，被判文件本体没动）：落 E1 **之前** 4 处违规全是记账类（coverage / negative_structure / np_size / np_neg_matched），逐条都能靠「补正例 + 补专属反例 + 上调 np_size」合法消掉；落 E1 **之后**同样 4 处，但其中 2 处换成了这 6 条里的 `\"myLayer\"` 与 `\"crimson\"` **自己被整句重写成中文**（实得「「myLayer」已在该层上注册过了。」），而 negative_structure / np_neg_matched 反倒被这 6 条**满足**了 —— 也就是说它们一边充当那条表项的专属近似反例、一边把它钉死。它们钉的不是某条现存表项，而是「**这条正则不许被加回来**」，且**改记录值救不了**（反例判的是「这句不许被翻译」，不是数量）；要变绿只能把这 6 条删掉，而那是作弊路径 A，第二十七轮已堵。其中前两条（`\"myLayer\" … layer.` / `\"crimson\" … color.`）是复核用真身实跑坐实的**现网越界现场**：改动前它们确实会被整句重写成「「myLayer」已在该层上注册过了。」。加的 1 条正例覆盖 hex 的另一个 slice 前缀与负偏移（`p.0.0` / `s.-3.7`，出处 ember.mjs:119780 `prefix: \"s\"` · :120120 `prefix: \"p\"` · :955-956 i/j 只要求整数）。",
+    "_why_30": "第三十轮（2026-08-22 第三轮 UI 缺口）：`ember-hardcoded-cn.mjs` 的 PATTERNS 新增 1 条 —— 沃特斯特塔传送装置的确认正文 `^Transport everyone inside the tower to (.+)\\?$`（ember.mjs:126652，变量位是 `canvas.scene.levels.get(id)?.name`，是场景层名这个开放集合，枚举不了所以只能走正则）。⇒ patterns_size 28→29 · positive 81→82 · negative 66→67。反例取 `Please Transport everyone inside the tower to the docks?`：含这条正则的字面骨架、但骨架**不在串首**，锚定的 `^…$` 结构上吃不到它 —— 这正是 (N1) 要的那种「属于它自己的近似反例」。"
    },
    "negative": [
     "Result of the investigation was inconclusive",
@@ -1459,7 +1460,8 @@
     "Outcome Three",
     "Some Others",
     "Abyss Rank 6",
-    "Breeze (4.5 mph) gusting"
+    "Breeze (4.5 mph) gusting",
+    "Please Transport everyone inside the tower to the docks?"
    ],
    "positive": [
     [
@@ -1785,6 +1787,10 @@
     [
      "Quest: 有遮蔽的营地",
      "任务：有遮蔽的营地"
+    ],
+    [
+     "Transport everyone inside the tower to Golden Flats?",
+     "将塔内所有人传送至 Golden Flats？"
     ]
    ],
    "notify_negative": [
@@ -2028,15 +2034,15 @@
    "upstream_repo": "ember",
    "section": "D 上游字面量存在性（仅供人工复核）",
    "min": {
-    "checkedDistinct": 940,
-    "rawChecked": 1522,
-    "fetchOk": 219,
-    "tableRows": 40,
-    "tablesFedIn": 40,
+    "checkedDistinct": 1609,
+    "rawChecked": 2203,
+    "fetchOk": 222,
+    "tableRows": 41,
+    "tablesFedIn": 41,
     "tplFiles": 68,
-    "tableRegexEntries": 47,
-    "registeredRaw": 1708,
-    "registeredDistinct": 1104,
+    "tableRegexEntries": 48,
+    "registeredRaw": 2389,
+    "registeredDistinct": 1773,
     "wrappedTables": 13,
     "regexTables": 2
    },

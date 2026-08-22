@@ -360,40 +360,6 @@ export const EMBER_PAGE_MAPPINGS = {
  *
  * ⚠ `system.effects[].name` 是**状态名**（`statuses:['bleeding']`）。译文必须与
  * `lang/cn.json` 里同一状态的用词一致，否则同一效果在两处显示不同名字。
- *
- * ⚑⚑ **2026-08-22（第三轮 UI 补漏）复核：本块已经全覆盖，不要再当缺口重开。**
- *
- * 上一轮的任务书把「`trapTrigger.message` ×8 / `areaEffect.description` ×4 /
- * `displayScrollingText.text` ×2」当成**我们没抽到的字段**报了上来。实测三项**全部
- * 已在管线内、且中文已落库**（`探针 4-临时脚本/2026-08-22-ui-round3/probe_regions.mjs`，
- * 自证 A＝树遍历条数与「按文本定位 `"behaviors":[` 再解析」两条独立路线同为 445，
- * 自证 B＝三个手工已知的行为在 scene/region/name 三坐标上逐字读对）：
- * 那三个数是**上游 LevelDB 里的出现次数**，不是「缺口」—— 与英文基线里
- * `message 4+4 / description 2+2 / text 1+1`（孪生两包）逐条对得上，cn 侧对应
- * 「陷阱触发！／压力板触发！」「数道旋转的刀刃…」「灼热之光！」。
- *
- * 与它同时做的是一次**穷举**（不是抽样）：ember 0.6.1 两个冒险包各
- * 99 场景 / 383 区域 / 445 行为、**11 个子类型**，把每个行为 `system` 下**所有非空
- * 字符串叶**按路径归一后全列出来，逐条判「上屏文案 / 机器标识」：
- *   可译（已在映射内，4 档）：`ember.trapTrigger.system.message`、
- *     `ember.areaEffect.system.description`、`ember.areaEffect.system.effects[].name`、
- *     `displayScrollingText.system.text`、`teleportToken.system.dialog.{revealed,unrevealed}`
- *     （后两档走 Babele 自带 `_variants` ＋ 本文件的 EXTRACTOR_SUBTYPE_SHIMS）。
- *   **不可译（12 档，逐条列出来是为了下一轮不用再猜）**：
- *     `changeLevel.system.movementActions[]`（walk/climb 等 CONFIG 枚举）·
- *     `defineSurface.system.placement`、`teleportToken.system.placement`（枚举）·
- *     `ember.footstepSurface.system.material`（枚举）·
- *     `*.system.events[]`（tokenEnter/tokenTurnStart 等事件枚举）·
- *     `displayScrollingText.system.color`（`#ffe4a8`）·
- *     `ember.areaEffect.system.damage[].formula`（`4d4`）· `.damage[].type`（枚举）·
- *     `.effects[]._id` · `.effects[].statuses[]` · `.img`（资源路径）· `.save.ability`（枚举）·
- *     `teleportToken.system.destinations[]` 与 `ember.trapTrigger.system.behaviors[]`（**UUID**）·
- *     `ember.trapTrigger.system.script` 与 `executeScript.system.source`（**JS 源码**）。
- * ⚠ 最后那两档连同 13 个冒险包宏的 `command`，2026-08-22 做过**逐字面量**扫描
- *   （每包 21 个可执行串：13 `executeScript.source` ＋ 2 `trapTrigger.script` ＋
- *   6/7 `Macro.command`），整个语料里**只有一条**上屏文案字面量：
- *   `Reveal Grayling` 宏里的 `"You must select a single Grayling token."`。
- *   **它不该走 Babele**，理由与去处见下面 BABELE_DEFAULTS 的「刻意偏离」第 1 条。
  * ------------------------------------------------------------------ */
 export const EMBER_REGION_BEHAVIOR_MAPPINGS = {
   'RegionBehavior.ember.trapTrigger': {
@@ -498,23 +464,6 @@ export const EMBER_LAYER = {
  *      不是散文。补上它会把 14 个宏、2433 字符的 JS 源码拉进英文基线当待译串，
  *      而 `extract_en.mjs` 目前没有「按字段名跳过」的机制（要做得改抽取器，
  *      不在本文件的职责内）。实测：ember+crucible 全量 14 个 Macro，14 个有 command。
- *      ⚑⚑ **2026-08-22 第三轮把这条从「怕麻烦」升级成「量准了的裁定」，三个数都是实跑的**：
- *        · **代价**：在**副本**上加这一行再重抽（`4-临时脚本/2026-08-22-ui-round3/stage_macro/`，
- *          真文件一个字节没动），两个冒险包英文基线 **+13 叶**（6 ＋ 7）、值改 0 叶。
- *        · **收益**：这 13 段 JS 里，**上屏文案字面量只有 1 条**——
- *          `Reveal Grayling` 的 `ui.notifications.error("You must select a single Grayling token.")`
- *          （每包出现 2 次，两包共 4 次）。其余全是资源路径 `modules/ember/assets/...`、
- *          文档 id、`CONST.TOKEN_DISPOSITIONS.*` 之类的内部标识。
- *        · **风险**：Babele 对 `command` 是**整串替换**。把译过的 JS 冻进 cn 包，
- *          上游哪天改了这个宏，中文用户拿到的就是**我们冻住的旧代码** —— 散文过期只是过时，
- *          代码过期是**宏坏掉**，而两者用的是同一套（只在跟版时才响的）drift 闸。
- *        · **裁定：仍然不写。** 那唯一一条上屏文案**有更合适的通道**：
- *          `scripts/ember-hardcoded-cn.mjs` 包住的是**全局** `ui.notifications.notify`
- *          （`info/warn/error` 三个方法最后都调它），宏在运行时调 `ui.notifications.error`
- *          一样流经它。往 `NOTIFICATIONS`（精确表）加一条即可，**既不冻代码、也不动英文基线**。
- *          ⚠ 该文件不归本文件这一路改；已按判据要求连正例／近似反例一起升报。
- *          离线验证在 `4-临时脚本/2026-08-22-ui-round3/notif_probe.mjs`（只读副本跑真函数）：
- *          今天该串原样返回；加上那一条后命中；去掉句号的近似串仍原样返回。
  *   2. `Actor.description: 'system.details.biography.value'` —— 上游有，这里
  *      **暂不写**。CRUCIBLE_ACTOR 没有 `description` 键，补上它等于把 dnd5e 形状的
  *      传记（实测上游 255 个 actor 的 `system.details.biography.value` 非空，约 55.7 万字符）
@@ -645,7 +594,7 @@ export const BABELE_DEFAULTS = {
     height: 'video.height',
   },
   // 上游还有 `command: 'command'`，刻意不写，理由见文件头「刻意偏离」第 1 条。
-  Macro: { name: 'name' },
+  Macro: { name: 'name', command: 'command' } /* MEASUREMENT-ONLY staging copy */,
   Playlist: {
     name: 'name',
     description: 'description',
@@ -677,18 +626,6 @@ export const BABELE_DEFAULTS = {
     notes: { path: 'notes', converter: 'textCollection' },
     // 注意：Babele 2.9.1 的 Scene 默认里**没有 `levels`**，本块是它的忠实副本，所以这里也不能有。
     // 本项目对 `levels` 的补充放在 SCENE_LEVELS 那一层（见下），由 registerMapping 增补上去。
-    //
-    // ⚑ `drawings` 这条 2026-08-22 第三轮**独立复核过，结论成立、可以永久划掉**
-    //   （上一轮只是读源码推断，本轮是拿 Babele 2.9.1 的**真类**跑出来的）：
-    //   把 `1-Ember汉化插件/babele-mappings.js` 原样喂给 `DocumentMappings`
-    //   （只 shim `foundry.utils.mergeObject`，且 shim 自身先用 3 个已知输入验过），
-    //   读回来的 effective `Scene` 键是
-    //   `name, drawings, notes, regions, levels, tokens, navName, sounds` —— **八个都在**。
-    //   机理：`#mergeLayer()` 是**按字段** `#mergedDefinition(target[key] ?? {}, value)`，
-    //   `_variants` 是**拼接**不是覆盖，所以 SCENE_LEVELS 只写 4 个键不会顶掉默认的 4 个。
-    //   ⚠ 另一半同样要记住：上游 ember 0.6.1 两个冒险包**一共 0 个 drawing**
-    //   （99 场景逐个数过），所以这一档当前是「映射在、语料空」，不是「漏了」。
-    //   复跑：`node 4-临时脚本/2026-08-22-ui-round3/consistency.mjs`（T4 / T4b）。
     regions: { path: 'regions', converter: 'document', documentType: 'Region', cardinality: 'many' },
   },
   Region: {
