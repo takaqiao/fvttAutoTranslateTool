@@ -3335,7 +3335,7 @@ RULESET_SHAPE = {
     # 第三十六轮（UI 补漏第四轮）：68 → 71，kind 数不变（三条都复用既有的 source_literal）。
     # 同样走 §0.1 收官后「它会咬到诚实的维护者」那一支例外 —— 这次会咬到的动作是
     # 「顺手清理一个看起来没人用的文件」：lang-reclaim.js 不被调就等于白进包，而没人会响。
-    "min_assertions": 71,
+    "min_assertions": 73,
     "min_kinds": 24,
     # —— 各 kind 必须存在的条数（防「把某一类整类删光」，也防「某一类被削掉大半」）
     #
@@ -3365,7 +3365,7 @@ RULESET_SHAPE = {
         "panel_liveness": 1,
         "ruleset_shape": 1,
         "sense_gated": 1,
-        "source_literal": 4,
+        "source_literal": 6,
         "tag_parity": 1,
         "term_domains": 4,
         "term_gated": 11,
@@ -3539,6 +3539,8 @@ REGISTERED_ASSERTIONS = {
     # 维护者只要没装 foundry_chn 就永远复现不了。本轮之前 `lang-reclaim` 在整个判据侧出现 0 次。
     'R-lang-reclaim-wired': 'source_literal',
     'R-lang-reclaim-mechanism': 'source_literal',
+    'R-crucible-hardcoded-wired': 'source_literal',
+    'R-crucible-hardcoded-scope': 'source_literal',
     'R-lang-squat-panel': 'source_literal',
     'R-selfcheck-d-liveness': 'panel_liveness',
     'R-assertion-inputs-tracked': 'tracked_inputs',
@@ -3664,6 +3666,8 @@ PAYLOAD_FLOORS = {
     "R-selfcheck-d-section-name": {"files": ("list", 2), "forbid_re": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 2), "require": ("list", 1)},
     "R-lang-reclaim-wired": {"files": ("list", 1), "forbid_re": ("list", 2), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 2)},
     "R-lang-reclaim-mechanism": {"files": ("list", 1), "min_checks": ("ge", 6), "min_files": ("ge", 1), "require": ("list", 6)},
+    "R-crucible-hardcoded-wired": {"files": ("list", 1), "forbid_re": ("list", 2), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 2)},
+    "R-crucible-hardcoded-scope": {"files": ("list", 1), "min_checks": ("ge", 5), "min_files": ("ge", 1), "require": ("list", 5)},
     "R-lang-squat-panel": {"files": ("list", 2), "min_checks": ("ge", 8), "min_files": ("ge", 2), "require": ("list", 4)},
     "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 2217), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2816), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 2381), "min.registeredRaw": ("eq", 3002), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 41), "min.tablesFedIn": ("eq", 41), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
@@ -3758,6 +3762,8 @@ JUDGED_UNITS = {
     # R-lang-squat-panel  ：ember + crucible 两仓 ⇒ 2×4 require = 8
     "R-lang-reclaim-wired": 4,
     "R-lang-reclaim-mechanism": 6,
+    "R-crucible-hardcoded-wired": 4,
+    "R-crucible-hardcoded-scope": 5,
     "R-lang-squat-panel": 8,
     # 第三十二轮 V18：22 → 33（min 7→11 · max 3→5 · 新增 5 条不含阈值的台账恒等式）
     "R-selfcheck-d-liveness": 33,

@@ -3,7 +3,7 @@
   "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
   "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
   "created": "2026-08-15（第十五轮）",
-  "updated": "2026-08-22（UI 补漏第五轮：修 0.9.16 的取址 bug，判据补钉两行）",
+  "updated": "2026-08-22（UI 补漏第六轮：crucible 硬编码翻译器 18 条 + 两条判据）",
   "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
   "idle_forms": {
    "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
@@ -2160,6 +2160,51 @@
     "pkg.api.getReclaimState = getReclaimState;",
     "  const url = getRoute(toClientPath(declared));",
     "  return clean.startsWith(prefix) ? clean : `${prefix}${clean}`;"
+   ]
+  },
+  {
+   "id": "R-crucible-hardcoded-wired",
+   "title": "crucible 的硬编码翻译器必须真的被调（`registerCrucibleHardcoded();` 不许消失或被注释）",
+   "decision": "2026-08-22（UI 补漏第六轮）",
+   "why": "2026-08-22 做过一次**上游硬编码串的全量审计**（`4-临时脚本/2026-08-22-hardcoded-audit/`）：crucible 的 99 份模板几乎全走 `{{localize}}`，JS 展示字段里 i18n 键 437 个、硬编码只有 11 个，模板另有 7 条硬编码 placeholder/aria-label ⇒ 合计 **18 条**，而本仓此前**根本没有硬编码翻译脚本**，覆盖 0。量虽小，那 11 条却全在**掷骰面板与聊天卡**上 —— 每次攻击掷骰都会看到。｜与 `R-lang-reclaim-wired` 同型、同理由：新文件在包里、却没人调它，两仓 CI、主闸、面板**没有一样会响**，而屏幕上只是英文。本条的 require 直接钉**整行**（import 行 + 调用行），不钉名字 —— 0.9.16 那次已经证明只钉名字会被同文件的 import 行满足（见 `R-lang-reclaim-wired` 的 why）。｜⚠ 判据边界：只钉「被调」，不判它翻得对不对；作用域正确性归 `R-crucible-hardcoded-scope`，报文正确性归真浏览器验 `4-临时脚本/2026-08-22-crucible-hardcoded/scope.html`（8/8，**不入主闸**）。",
+   "kind": "source_literal",
+   "min_files": 1,
+   "min_checks": 4,
+   "files": [
+    {
+     "repo": "crucible",
+     "path": "babele-register.js"
+    }
+   ],
+   "require": [
+    "import { registerCrucibleHardcoded } from './crucible-hardcoded-cn.mjs';",
+    "registerCrucibleHardcoded();"
+   ],
+   "forbid_re": [
+    "//\\s*registerCrucibleHardcoded\\s*\\(\\s*\\)\\s*;",
+    "/\\*[^*]*registerCrucibleHardcoded\\s*\\(\\s*\\)\\s*;"
+   ]
+  },
+  {
+   "id": "R-crucible-hardcoded-scope",
+   "title": "硬编码翻译器的**两档作用域**不许被合并 —— 通用词必须留在 `.crucible` 里",
+   "decision": "2026-08-22（UI 补漏第六轮）",
+   "why": "规则分两档，判据是「选择器本身够不够独特」：`STRUCTURAL` 档（`.boon-details .boon > .label` / `.context-tags .tag-icon`）是 crucible 模板独有的结构，命中即归属，**不要求** `.crucible` 祖先 —— 必须如此，因为掷骰聊天卡的根是 `<div class=\"{{cssClass}} line-item\">`（`standard-check-chat.hbs:1`），`cssClass` 是**动态**的、并不保证含 `crucible`，要求祖先反而会把最值钱的两条规则漏掉。`SCOPED` 档的词太通用（`Item Name` / `Actor Name` / `Add one …` 别的模块也会用），**必须**落在 `.crucible` 内才动。｜⚠ 把两档合并（或把 `apply(SCOPED, scopes)` 改成 `apply(SCOPED, [root])`）之后，`renderApplicationV2` 对**所有**窗口都触发 ⇒ 我们会去改别的模块输入框的 placeholder。**那是越界，而且是静默的**：受害的是别人的窗口，我们自己的世界里一切正常。本项目一贯把这类越界看得比漏译更重（EXACT 与作用域表之分就是为它设的）。｜另钉 `scopes.push(root)` 那一行：根**自己**带 `crucible` 类时 `querySelectorAll` 找不到它（只查后代），漏掉这一行会让所有卡的 placeholder 静默失效 —— 真浏览器验里 `#sheet` / `#sheet2` / `#sheet4` / `#sheet5` 四个根正是这种形态。｜实测依据：`scope.html` 在真浏览器里跑真身函数，负例区（一个 `class=\"application some-other-module\"` 的窗口，摆着同名 placeholder / tooltip / .label / aria-label）**一处未动**，计数 `{text:0,attr:0,aria:0}`；首遍共改 18 处，第二遍全零（幂等）。8/8 通过。",
+   "kind": "source_literal",
+   "min_files": 1,
+   "min_checks": 5,
+   "files": [
+    {
+     "repo": "crucible",
+     "path": "crucible-hardcoded-cn.mjs"
+    }
+   ],
+   "require": [
+    "const STRUCTURAL = [",
+    "const SCOPED = [",
+    "  if (root.classList?.contains?.(\"crucible\")) scopes.push(root);",
+    "  apply(SCOPED, scopes);",
+    "  for (const el of scopes.flatMap((r) => Array.from(r.querySelectorAll(\"[aria-label]\")))) {"
    ]
   },
   {
