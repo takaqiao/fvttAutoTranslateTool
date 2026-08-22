@@ -77,3 +77,5 @@ __pycache__/
 4-临时脚本/**/*.PATCHED.py
 4-临时脚本/**/before_HEAD.mjs
 4-临时脚本/**/stage_macro/extract_en.mjs
+# 探针**自己生成**的临时装载壳（跑一次重建一次）：_slice.mjs / _dump.mjs 之类
+4-临时脚本/**/_*.mjs
