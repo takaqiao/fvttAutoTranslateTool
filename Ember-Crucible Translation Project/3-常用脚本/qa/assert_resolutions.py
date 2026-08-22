@@ -3335,7 +3335,7 @@ RULESET_SHAPE = {
     # 第三十六轮（UI 补漏第四轮）：68 → 71，kind 数不变（三条都复用既有的 source_literal）。
     # 同样走 §0.1 收官后「它会咬到诚实的维护者」那一支例外 —— 这次会咬到的动作是
     # 「顺手清理一个看起来没人用的文件」：lang-reclaim.js 不被调就等于白进包，而没人会响。
-    "min_assertions": 73,
+    "min_assertions": 74,
     "min_kinds": 24,
     # —— 各 kind 必须存在的条数（防「把某一类整类删光」，也防「某一类被削掉大半」）
     #
@@ -3365,7 +3365,7 @@ RULESET_SHAPE = {
         "panel_liveness": 1,
         "ruleset_shape": 1,
         "sense_gated": 1,
-        "source_literal": 6,
+        "source_literal": 7,
         "tag_parity": 1,
         "term_domains": 4,
         "term_gated": 11,
@@ -3541,6 +3541,7 @@ REGISTERED_ASSERTIONS = {
     'R-lang-reclaim-mechanism': 'source_literal',
     'R-crucible-hardcoded-wired': 'source_literal',
     'R-crucible-hardcoded-scope': 'source_literal',
+    'R-ember-boon-labels': 'source_literal',
     'R-lang-squat-panel': 'source_literal',
     'R-selfcheck-d-liveness': 'panel_liveness',
     'R-assertion-inputs-tracked': 'tracked_inputs',
@@ -3668,8 +3669,9 @@ PAYLOAD_FLOORS = {
     "R-lang-reclaim-mechanism": {"files": ("list", 1), "min_checks": ("ge", 6), "min_files": ("ge", 1), "require": ("list", 6)},
     "R-crucible-hardcoded-wired": {"files": ("list", 1), "forbid_re": ("list", 2), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 2)},
     "R-crucible-hardcoded-scope": {"files": ("list", 1), "min_checks": ("ge", 5), "min_files": ("ge", 1), "require": ("list", 5)},
+    "R-ember-boon-labels": {"files": ("list", 1), "min_checks": ("ge", 3), "min_files": ("ge", 1), "require": ("list", 3)},
     "R-lang-squat-panel": {"files": ("list", 2), "min_checks": ("ge", 8), "min_files": ("ge", 2), "require": ("list", 4)},
-    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 2217), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2816), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 2381), "min.registeredRaw": ("eq", 3002), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 41), "min.tablesFedIn": ("eq", 41), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
+    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 2261), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2861), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 2425), "min.registeredRaw": ("eq", 3047), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 42), "min.tablesFedIn": ("eq", 42), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
     "R-ruleset-shape": {},
     "R-html-tag-parity": {"min_leaves": ("ge", 15000), "min_tag_kinds": ("ge", 60), "min_tags": ("ge", 390000)},
@@ -3764,6 +3766,7 @@ JUDGED_UNITS = {
     "R-lang-reclaim-mechanism": 6,
     "R-crucible-hardcoded-wired": 4,
     "R-crucible-hardcoded-scope": 5,
+    "R-ember-boon-labels": 3,
     "R-lang-squat-panel": 8,
     # 第三十二轮 V18：22 → 33（min 7→11 · max 3→5 · 新增 5 条不含阈值的台账恒等式）
     "R-selfcheck-d-liveness": 33,
