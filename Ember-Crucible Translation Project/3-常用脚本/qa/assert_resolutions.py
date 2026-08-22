@@ -3663,7 +3663,7 @@ PAYLOAD_FLOORS = {
     "R-patterns-translate-cases": {"arrangements": ("list", 6), "arrangements.channels": ("list", 2), "arrangements.expect_untranslated": ("list", 8), "arrangements.labels_recorded": ("eq", 233), "arrangements.leaves_not_upstream": ("list", 1), "arrangements.min_labels": ("ge", 224), "arrangements.prefixes": ("list", 2), "negative": ("list", 67), "notify_negative": ("list", 45), "notify_positive": ("list", 32), "positive": ("list", 82), "recorded": ("list", 11), "recorded.negative": ("eq", 67), "recorded.notify_negative": ("eq", 45), "recorded.notify_positive": ("eq", 32), "recorded.np_size": ("eq", 27), "recorded.patterns_size": ("eq", 29), "recorded.positive": ("eq", 82), "recorded.prefixed_size": ("eq", 19), "repo": ("str", 5), "src": ("str", 30), "stub_import": ("str", 54), "upstream_repo": ("str", 5), "upstream_src": ("str", 17)},
     "R-selfcheck-d-section-name": {"files": ("list", 2), "forbid_re": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 2), "require": ("list", 1)},
     "R-lang-reclaim-wired": {"files": ("list", 1), "forbid_re": ("list", 2), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 2)},
-    "R-lang-reclaim-mechanism": {"files": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 4)},
+    "R-lang-reclaim-mechanism": {"files": ("list", 1), "min_checks": ("ge", 6), "min_files": ("ge", 1), "require": ("list", 6)},
     "R-lang-squat-panel": {"files": ("list", 2), "min_checks": ("ge", 8), "min_files": ("ge", 2), "require": ("list", 4)},
     "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 2217), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2816), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 2381), "min.registeredRaw": ("eq", 3002), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 41), "min.tablesFedIn": ("eq", 41), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
@@ -3757,7 +3757,7 @@ JUDGED_UNITS = {
     # R-lang-reclaim-wired：仓只有 crucible ⇒ 1×(1 require + 2 forbid) = 3
     # R-lang-squat-panel  ：ember + crucible 两仓 ⇒ 2×4 require = 8
     "R-lang-reclaim-wired": 4,
-    "R-lang-reclaim-mechanism": 4,
+    "R-lang-reclaim-mechanism": 6,
     "R-lang-squat-panel": 8,
     # 第三十二轮 V18：22 → 33（min 7→11 · max 3→5 · 新增 5 条不含阈值的台账恒等式）
     "R-selfcheck-d-liveness": 33,
