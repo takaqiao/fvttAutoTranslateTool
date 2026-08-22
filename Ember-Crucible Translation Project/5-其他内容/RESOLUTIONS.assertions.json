@@ -3,7 +3,7 @@
   "note": "PROJECT.md 第 8 节裁决的可执行版本。跑法：python 3-常用脚本/qa/assert_resolutions.py [--verbose]",
   "rule": "断言失败时，正确处理是「改回来」或「显式推翻那条裁决并同时改断言」。只改断言让它变绿，正是这套东西要防的事。",
   "created": "2026-08-15（第十五轮）",
-  "updated": "2026-08-16d（第二十九轮：**堵作弊路径 C** —— 新增断言类型 `ruleset_shape` 与 1 条 `R-ruleset-shape`，把**规则集自身的形状**（断言条数 66 / kind 数 22 / 各 kind 的容器块 / 长度地板 / 强度参数的死下限与死上限）纳入判据，**记录值住在 `3-常用脚本/qa/assert_resolutions.py` 的模块级常量 `RULESET_SHAPE`，不在本文件里** —— 守卫绝不能与被守护的容器同生共死；另有一道**不是断言**的存在性检查写在 `main()` 里（`_require_ruleset_shape`），接住「连守卫一起删」那一刀。复核实测的**七种单点容器层动作**（删 arrangements 整块 / channels 砍成一个 / 面板闸 min·max 整块删 / min_checked→0 / must_include 清空 / min_labels 改小 / 删掉整条断言）此前改完主闸仍 65/0/0 全绿，现在逐条固化进 `--selftest`，七条全红。｜同轮另两处：① **反例的结构护栏**（`R-patterns-translate-cases`）—— 正例侧早有「每条表项都必须有正例」的恒等式，反例侧此前只有一个可调的数，「清空反例 + 记录值改 0」两处协同就全绿；现在按「一条表项一条专属的近似反例」的**最大二分匹配必须完美**判，外加零维护的机械近似探针 `Zzq <字面骨架> Zzq`，反例 28→66 / 通知反例 14→39。② **`tracked_inputs` 的推导器补 `pack` 字段**，并新加一道**反查**：规则里所有「像文件名」的串，凡能在库里解析成真实文件却不在推导清单里的，就地点名 —— 让「推导器漏了某类字段」这件事自己变成判据。｜⚠ 本轮还跟改了一处**不是本轮改的**记录值：被判文件按一条新裁决删掉 4 条 NOTIFICATION_PATTERNS 并收紧 hex 那条，`np_size` 31→27 / `notify_positive` 36→31，理由与损失评估在被判文件 :2132 起的注释块里，细节记在 `recorded._why_29`）｜ 2026-08-16（第二十二轮：新增断言类型 `enricher_text_coverage` 与 1 条 `R-readaloud-coverage` —— 上一轮把 `@Embed[… readaloud=\"…\"]` 的整段朗读正文纳入了 `scan_content_coverage` 的正文口径，但**纳入 ≠ 判得到**：那 48 段英文里阿拉伯数字 0 个，默认的数字多重集判据必然 0 命中，实测把最长的一段中文删空也一声不响；`--with-terms` 干净时就报 39 条、删空 43 条，两侧非零没有判别力。本轮改用**段级**四支判据（缺失／中英字符比／段内定译专名／句数），现读 48 段 0 违规，删空回测 48/48 报、删一半 46/48 报，判据边界写在 R-readaloud-coverage 的 why 里）｜ 2026-08-15h（第十九轮 Y6：新增断言类型 enricher_slot_gate 与 7 条标签级断言 —— split_blocks 把 @X[…]{标签} 连花括号一起涂空，标签里的译名整条不进任何块级闸；实测「阿克图瑞尔|阿克图里安」全库 2218 处里 278 处（12.5%）落在增强器内，逐处变异回测后 189 处无闸，本轮压到 4 处。配对按 (动词,目标) 分组而不是出现序号 —— 按序号配会把 30650 对里的 1388 对（4.5%）配歪，造出四类幻影缺陷。槽位含 @Embed 的 label= / readaloud= 参数，那里塞的是整段朗读正文。详见 R-arcturel-arcturian-labels 的 why 与脚本里 a_enricher_slot_gate 的 docstring）｜ 2026-08-15g（第十八轮 Y2 复核收尾：① 删掉 7 条**死豁免**（R-rank-sense-blocks 5 条 · R-arcturel-arcturian-blocks 2 条，登记的内容欠账都已修完，逐条实跑确认 0 命中），并给两个块级类型加 `max_unused_exempt`（默认 0）—— 在此之前豁免不命中不会让任何断言变红，那是第四种「静默全绿」形态，已写进脚本 docstring 的空转清单与本文件 idle_forms；② 订正 why 里三个实测数（R-arcturel-arcturian-blocks 905→903 叶 · 1705→1707 块，R-rank-sense-blocks 无法分类 72→66 块）；③ 按主控补裁把 `Arcturelian` 从族名 `Arcturian` 拆出来单列 `L` 类（＝阿克图瑞尔，派生自 Arcturel 不是 Arcturian）；④ 把「增强器标签另有三条闸看着」这句**没取证的话**换成实测结论：278 处标签在本条闸外，逐处改错回测只有 89 处会让某条断言变红，**189 处无闸**，已登记为待补的标签级闸）｜ 2026-08-15f（第十八轮 Y2：新增 block_aligned_gate / block_sense_gate 两个**叶内**断言类型，补上 R-shard-god / R-arcturel-vs-arcturian / R-rank-sense-compendium 三条各自在 why 里写死的覆盖洞；三条新断言合计现读 502+903+391 叶、694+1714+555 块）｜ 2026-08-16e（第十六轮收尾：R-dives-mine 的内容欠账已还、except_paths 清空；R-glossary-not-laundering 补 14 条（含 Cosmology=宇宙观 这个必须单列的键）；新增 R-kessia-vs-kessian / R-ordain-vs-ordani 两组「专名 vs 文化形容词」二分，通则写在前者的 why 里；R-cosmology-cosmos 登记「宇宙宝石」这条有意例外） ｜ 2026-08-16（第十六轮终段：补 sense_gated 类型堵上 compendium 侧 rank 的整片无闸区；R-shard-god 用「单／复数专属叶」负向先行断言真的守住了单复数；补 T-1 矿渊 / T-2 宇宙·寰宇 / Arcturel↔Arcturian 三条）",
+  "updated": "2026-08-22（第三十六轮 / UI 补漏第四轮：+3 判据、装备族部件名 611 条、面板 D 档 4 个覆盖侧登记值跟涨）",
   "anti_idle_rule": "任何断言都必须能说出「我这次扫了多少叶 / 多少个键」。说不出来的是自检，不是断言。",
   "idle_forms": {
    "note": "实测到的三种「断言空转」形态。写新断言前逐条自检，脚本顶部 docstring 有同一份清单。",
@@ -2034,15 +2034,15 @@
    "upstream_repo": "ember",
    "section": "D 上游字面量存在性（仅供人工复核）",
    "min": {
-    "checkedDistinct": 1609,
-    "rawChecked": 2203,
+    "checkedDistinct": 2217,
+    "rawChecked": 2816,
     "fetchOk": 222,
     "tableRows": 41,
     "tablesFedIn": 41,
     "tplFiles": 68,
     "tableRegexEntries": 48,
-    "registeredRaw": 2389,
-    "registeredDistinct": 1773,
+    "registeredRaw": 3002,
+    "registeredDistinct": 2381,
     "wrappedTables": 13,
     "regexTables": 2
    },
@@ -2115,6 +2115,75 @@
    ],
    "min_files": 2,
    "min_keys_total": 2200
+  },
+  {
+   "id": "R-lang-reclaim-wired",
+   "title": "抢回器必须**真的被调**：`registerLangReclaim();` 那一行不许消失，也不许被注释掉",
+   "decision": "2026-08-22（第三十六轮 / UI 补漏第四轮；同轮灵敏度回测后加强）",
+   "why": "`crucible-cn/lang-reclaim.js` 修的是一个**跨模块**故障：`foundry_chn/cn.json` 顶层有 98 个**裸字符串**，其中 `\"TOKEN\"` 与 `\"WARNING\"` 正好压在我们建好的两个命名空间上；Foundry 逐份 `expandObject` 后按模块顺序 `mergeObject`，而 `_mergeUpdate` **只在两边都是对象时递归**，否则整块覆盖 ⇒ 我们那 42 条（夹击标签 5 · 移动方式与「强制」27 · 报错提示 10）被一个字符串盖掉，`localize()` 退回英文 fallback。｜这套东西**全程静默**：抢回成功是正常中文，没被顶也是正常中文，抢回器根本没跑则是英文**且不报错**。维护者只要没装 `foundry_chn` 就**永远复现不了**。本轮之前 `lang-reclaim` 在整个判据侧出现 **0 次**。｜⚠ **本条第一版是弱的，灵敏度回测当场把它打回来了**：原来 require 只写了名字 `registerLangReclaim`，于是把 `registerLangReclaim();` 整行删掉之后，同文件的 `import { registerLangReclaim } from './lang-reclaim.js';` **照样满足了它** —— 而「文件还在包里、就是没人调」正是这套机制最可能的坏法（`.js` 静静躺在 zip 里，两仓 CI、主闸、面板没有一样会响）。现在 require 钉的是**两行各自的完整字面量**：import 那一行 + 调用那一行。forbid_re 是第二道保险，专抓「注释掉但没删」这种半吊子回退（回测②实测会响）。｜⚠ **判据边界（不许读成钉住了全部）**：本条只钉**我们这一侧的源码行**。钉不住的是**上游语义漂移** —— 哪天 Foundry 改了 `mergeObject` 的递归条件或 `getProperty` 的顶层快路径（`if ( key in object ) return object[key]`），这些行原样留着、机制却已经失效，本条照样全绿。那需要一道**现跑**的活闸（形如 `R-selfcheck-d-liveness`：把离线复刻器提升进 `3-常用脚本/qa/`，每跑一次闸就用真身 helpers 重放一次装载顺序）。本轮**没做**，理由是它要新开一种 kind 连带一整套正反例；登记在此当未了项，别下一轮读到这条就以为已经有活闸了。",
+   "kind": "source_literal",
+   "min_files": 1,
+   "min_checks": 4,
+   "files": [
+    {
+     "repo": "crucible",
+     "path": "babele-register.js"
+    }
+   ],
+   "require": [
+    "import { registerLangReclaim } from './lang-reclaim.js';",
+    "registerLangReclaim();"
+   ],
+   "forbid_re": [
+    "//\\s*registerLangReclaim\\s*\\(\\s*\\)\\s*;",
+    "/\\*[^*]*registerLangReclaim\\s*\\(\\s*\\)\\s*;"
+   ]
+  },
+  {
+   "id": "R-lang-reclaim-mechanism",
+   "title": "抢回器那三处**实测逼出来的**实现细节不许被顺手改掉（同步 XHR / 非枚举 / i18nInit）",
+   "decision": "2026-08-22（第三十六轮 / UI 补漏第四轮；同轮灵敏度回测后新增）",
+   "why": "`crucible-cn/lang-reclaim.js` 修的是一个**跨模块**故障：`foundry_chn/cn.json` 顶层有 98 个**裸字符串**，其中 `\"TOKEN\"` 与 `\"WARNING\"` 正好压在我们建好的两个命名空间上；Foundry 逐份 `expandObject` 后按模块顺序 `mergeObject`，而 `_mergeUpdate` **只在两边都是对象时递归**，否则整块覆盖 ⇒ 我们那 42 条（夹击标签 5 · 移动方式与「强制」27 · 报错提示 10）被一个字符串盖掉，`localize()` 退回英文 fallback。｜这套东西**全程静默**：抢回成功是正常中文，没被顶也是正常中文，抢回器根本没跑则是英文**且不报错**。维护者只要没装 `foundry_chn` 就**永远复现不了**。本轮之前 `lang-reclaim` 在整个判据侧出现 **0 次**。｜这三处每一处都是**实测**逼出来的，不是风格偏好，而且**改坏之后的样子全都是「英文，不报错」**：① `xhr.open('GET', url, false)` —— 必须**同步**。实测 top-level await **不推迟 `DOMContentLoaded`**（探针序列：mod:before-await | DOMContentLoaded | load | mod:after-await），而 Foundry 正是在 `DOMContentLoaded` 里 `await game.initialize()`、`i18nInit` 就在其中 ⇒ 改回 `fetch`+`await` 必然赶不上。② `enumerable: false` —— 否则 `#hotReloadJSON` 的 `mergeObject` 会因 `expanded.TOKEN` 已是字符串而在严格模式抛 `TypeError`（离线复刻器用**真身** `mergeObject` 正反两侧实测过）。③ `Hooks.once('i18nInit', …)` —— 早于它取不到 `translations`，晚于它那 42 条已经被查过了。④ `pkg.api.getReclaimState = getReclaimState;` —— 账本的出口，摘掉它面板那一节就只能报「装了但没挂账本」。｜⚠ 本条与 `R-lang-reclaim-wired` **必须分成两条**：`source_literal` 的 require 是**逐文件全量套用**的，而这两个文件没有共同的强字面量 —— 硬塞进一条就只能退回到「钉名字」那种弱写法，那正是回测打回来的东西。｜⚠ **判据边界（不许读成钉住了全部）**：本条只钉**我们这一侧的源码行**。钉不住的是**上游语义漂移** —— 哪天 Foundry 改了 `mergeObject` 的递归条件或 `getProperty` 的顶层快路径（`if ( key in object ) return object[key]`），这些行原样留着、机制却已经失效，本条照样全绿。那需要一道**现跑**的活闸（形如 `R-selfcheck-d-liveness`：把离线复刻器提升进 `3-常用脚本/qa/`，每跑一次闸就用真身 helpers 重放一次装载顺序）。本轮**没做**，理由是它要新开一种 kind 连带一整套正反例；登记在此当未了项，别下一轮读到这条就以为已经有活闸了。",
+   "kind": "source_literal",
+   "min_files": 1,
+   "min_checks": 4,
+   "files": [
+    {
+     "repo": "crucible",
+     "path": "lang-reclaim.js"
+    }
+   ],
+   "require": [
+    "xhr.open('GET', url, false);",
+    "      enumerable: false,",
+    "Hooks.once('i18nInit', () => {",
+    "pkg.api.getReclaimState = getReclaimState;"
+   ]
+  },
+  {
+   "id": "R-lang-squat-panel",
+   "title": "自检面板必须留着「命名空间被顶 · 抢回」那一节 —— 它是这套静默机制唯一的人可见出口",
+   "decision": "2026-08-22（第三十六轮 / UI 补漏第四轮）",
+   "why": "抢回是静默的（理由见 `R-lang-reclaim-wired`），于是面板这一节是**唯一**能替人区分三态的地方：「没人顶」「顶了但抢回来了」「抢回器根本没跑」。它读的是抢回器自己记的账，并且**不信账本**、把抢回的每一条丢回 `game.i18n.localize()` 当场复验 —— 账上写了、玩家通道上没生效，正是本项目登记的空转形态 (h)（探针自己捏输入）。｜要钉的是**接线**，不是实现：`checkLangSquat` 这个函数留着、却没人从 `checkI18n` 里调它，面板就会安安静静少一节，而 `R-selfcheck-twin` 只保证两份面板**彼此**相同 —— **一起摘掉它照样绿**（这正是 `R-selfcheck-d-section-name` 当初要新开 source_literal 的同一个理由）。所以 require 里同时钉「函数在」与「调用点在」两行。｜另钉两条探针键：`TOKEN.MOVEMENT.ACTIONS.walk.label` 与 `WARNING.NoParty`。它们各来自一个被顶过的命名空间，走的是 `localize()` 这条**玩家真正用的**通道；与上面那一节两边同时绿，才说明「账上抢回了」和「屏幕上真是中文」是同一件事。｜⚠ 判据边界：只钉这四行**在不在**，不判那一节报得对不对 —— 报文对不对由离线验（`4-临时脚本/2026-08-22-ui-round4/verify_squat.mjs`，六种情形 19 条断言全绿）负责，而那是**一次性探针、不入主闸**，同 `R-lang-reclaim-wired` 的未了项。",
+   "kind": "source_literal",
+   "min_files": 2,
+   "min_checks": 8,
+   "files": [
+    {
+     "repo": "ember",
+     "path": "scripts/ember-cn-selfcheck.mjs"
+    },
+    {
+     "repo": "crucible",
+     "path": "selfcheck/cn-selfcheck.mjs"
+    }
+   ],
+   "require": [
+    "function checkLangSquat(S, table) {",
+    "out.push(...checkLangSquat(S, table));",
+    "\"TOKEN.MOVEMENT.ACTIONS.walk.label\"",
+    "\"WARNING.NoParty\""
+   ]
   }
  ]
 }

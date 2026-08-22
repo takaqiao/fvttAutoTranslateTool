@@ -3,9 +3,9 @@
 > 这是本项目的**唯一长期入口**。新会话请先读 **§0**（收官裁决），再读第 1 节，然后按需跳读。
 > 阶段日志（第 6 节）只追加、不重写，用来做长期校对与断点续做。
 
-**发版状态（2026-08-22）：第三十二轮（⛔ 收官轮）之后又做了跟版与 UI 补漏共四轮
-（crucible 0.10.2 跟版 · ember 0.6.1 跟版 · UI 补漏第一～三轮），均已发版。
-当前已发布 `crucible-cn 0.9.15` / `ember_cn_unofficial v1.1.29`。**
+**发版状态（2026-08-22）：第三十二轮（⛔ 收官轮）之后又做了跟版与 UI 补漏共五轮
+（crucible 0.10.2 跟版 · ember 0.6.1 跟版 · UI 补漏第一～四轮），均已发版。
+当前已发布 `crucible-cn 0.9.16` / `ember_cn_unofficial v1.1.30`。**
 
 > ⚠ **本行就是「抬头」，`R-version-matrix` 钉的是它**（判据取 `PROJECT.md` 的**前 40 行**）。
 > ⚠⚠ **版本号全文只写两处：本行与 §2 的版本矩阵。** 别处一律指过来 ——
@@ -806,8 +806,8 @@ J00《Ordain Gazetteer》漏读的 22 页）。
 | crucible | 系统 | **0.10.2** | `%LOCALAPPDATA%\FoundryVTT\Data\systems\crucible` |
 | ember | 模块（**付费/protected**） | **0.6.1** | `…\Data\modules\ember` |
 | babele | 模块（翻译框架） | **2.9.1** | `…\Data\modules\babele` |
-| crucible-cn | 汉化模块（本项目） | **0.9.15**（2026-08-22 发布；⚠ 旧记 08-15 与 `git for-each-ref` 不符，`0.9.10`/`0.9.11` 两个 tag 都打于 08-16；**`0.9.12` 为第二十四～三十二轮收官发版**） | `2-Crucible汉化插件\` |
-| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.29**（2026-08-22；v1.1.8/v1.1.9 为阻断急修，v1.1.11–15 为第十四～十五轮，v1.1.16–17 为第十五～十六轮，v1.1.18 为第十七轮，v1.1.19 为第十八～二十轮，v1.1.20/v1.1.21 为第二十二～二十三轮，**v1.1.22 为第二十四～三十二轮收官发版**） | `1-Ember汉化插件\` |
+| crucible-cn | 汉化模块（本项目） | **0.9.16**（2026-08-22 发布；⚠ 旧记 08-15 与 `git for-each-ref` 不符，`0.9.10`/`0.9.11` 两个 tag 都打于 08-16；**`0.9.12` 为第二十四～三十二轮收官发版**） | `2-Crucible汉化插件\` |
+| ember_cn_unofficial | 汉化模块（本项目） | **v1.1.30**（2026-08-22；v1.1.8/v1.1.9 为阻断急修，v1.1.11–15 为第十四～十五轮，v1.1.16–17 为第十五～十六轮，v1.1.18 为第十七轮，v1.1.19 为第十八～二十轮，v1.1.20/v1.1.21 为第二十二～二十三轮，**v1.1.22 为第二十四～三十二轮收官发版**） | `1-Ember汉化插件\` |
 
 两个汉化仓库：
 - https://github.com/takaqiao/crucible-cn
@@ -2088,6 +2088,8 @@ Actions 不可用时的兜底手工流程：`zip -r` 前先 `rm -f module.zip`�
 | `v1.1.28` | 08-22 | **指示物制作器图层名 49 键**（项目所有者点名的 `Cheeks`/`Hand Left`/`Hand Right`/`Tail`/`Ears` 全在内）。<br>成因不是漏译，是上一轮抽取器**漏了一整种形态** —— `Object.assign(cloneLayer(...), {label:"…"})`，只抓了裸 `label:` 那一种。作用域实测干净（泄漏 0 / 近似串被吃 0），三张高危表一条没动。<br>⚠ **本轮查清、但未修的三件（都不是漏译）**：<br>　① **token 上的夹击标签与「强制」仍是英文** —— crucible-cn 早就译好了，是 `foundry_chn/cn.json` 顶层的**裸字符串** `"TOKEN":"指示物"` / `"WARNING":"警告"` 在 `mergeObject` 时**整块盖掉**了这两个命名空间，连 Foundry 核心自己的 `WARNING.*` 中文一起打掉，**受害 42 条**。与第三十四轮 A 的 `EMBER.*` 事故**同型**，只是肇事者是第三方模块。<br>　② **地图上的地名不是翻译缺口** —— 那是 Note 的 text，唯一 295 条，我们**覆盖 295/295**（regions 310/310、levels 266/266 同样满覆盖）。<br>　③ **换新版汉化不会改已导入世界的内容** —— `babele/script/foundry/wrapper.js:50` 有 `if (!pack) return result;`，**世界文档没有 pack，永远不进翻译路径**。唯一通路是重新导入冒险，而 `Adventure#importContent` 用 `updateDocuments(data,{diff:false,recursive:false})` **整份替换**，世界侧改动会丢；可用导入器的 `importFields` 只勾场景缩小爆炸半径。<br>主闸 68/0/0 · `--selftest` 357/357。 |
 
 | `0.9.15` / `v1.1.29` | 08-22 | **抢回被核心中文包顶掉的 42 条 + 互动面板/导入器/部件名**。<br>· 🔥 **crucible-cn 新增 `lang-reclaim.js`** —— `foundry_chn/cn.json` 顶层的裸字符串 `"TOKEN":"指示物"` / `"WARNING":"警告"` 在 `mergeObject` 时**整块盖掉**这两个命名空间（只在两边都是对象时才递归），打掉我们 **42 条**已译内容（夹击标签 5 · 移动方式与「强制」27 · 报错提示 10）。挂 `i18nInit` 就地抢回。**幂等**：没被顶掉时是 no-op（离线复刻实测写入 0 次、逐键快照零差异）。<br>　⚠ 实现上两处是被实测逼出来的、不是过度设计：① 用**同步 XHR** 而非 top-level await —— 实测 TLA **不推迟 DOMContentLoaded**，而 Foundry 正是在那里 `await game.initialize()`，必然赶不上；② 用 `enumerable:false` —— 否则 `#hotReloadJSON` 的 `mergeObject` 会因 `expanded.TOKEN` 已是字符串而抛 `TypeError`。<br>　⚠ **别读成「修好了核心的 WARNING/TOKEN」** —— 那 373 条核心叶仍走英文 fallback，本版没碰；我们只抢自己的键。<br>· **ember 互动面板 7 条 + 冒险导入器 4 条 + 部件显示名 763 条**（真实全集 **1454** 条，`templateLayer.parts` 口径，不是图集的 1535；**仍缺 687**，基本在装备族）。顺带修好两处既有错译：部件行 `Heavy`→粗壮、`Lithe`→柔韧。<br>⚠ **明确不做（本轮裁决）**：把 `Reveal Grayling` 那句宏提示塞进 `NOTIFICATIONS` —— 实测会让面板 `missDistinct` 4→5 顶破 `max` 天花板（那句话住在 LevelDB 的宏 `command` 里，不在面板语料内，按 literal 核必然报 miss）。抬天花板是本项目定性最重的动作，不为一条提示做。<br>⚠ **仍会看到英文**：GM 叠加层 155 条（PIXI `PreciseText`，DOM 遍历结构上够不到）· 传送框下拉的 `Surface`/`Pathways` 两个分组名（`<optgroup label>`，本轮未登记）· 装备族部件名 687 条。<br>主闸 68/0/0 · `--selftest` 357/357。 |
+
+| `0.9.16` / `v1.1.30` | 08-22 | **装备族部件名 611 条补齐 + 给「抢回器」上判据与面板出口**。<br>· **部件显示名做完了**：先把**分母重算**了一遍 —— 上一轮拿随包图集当全集（1512），而图集是贴图，真正决定「进不进选择器」的是 `templateLayer.parts`。整份 ember.mjs 装不进 Node（六层 stub 之后卡在 `HEXES[…].terrain`，与部件毫无关系），改用**切片求值**：只取 53648~61260 行那一段，用真身 `foundry.utils` 建出 22 个模板。三重自证（切片首尾行逐字符 · 模板 id 集合 · 2579 个 id 三段形状并**逐个回图集交叉核**）⇒ 真全集 **1458** 条。<br>　本轮之前盖住 767（53%），补完 **1378 / 1458（95%）**；余下 80 条**全是纯数字**（symbol 族 10..82，上屏就是「10」）⇒ **可译部分 100%**。<br>　译法三层：品质四档直接取 crucible 系统定译（Shoddy 粗糙 / Standard 标准 / Fine 精良 / Superior 卓越，出现 87 次）· 本表已定过的同名段 · glossary_ec；⚠ **词表有六条套了就错**（`Shield`→护盾术是法术、`Point`→岬是地名裁决、`Split`→分裂、`Sticks`→专名、`Water`→水域、`Alchemist`→串行脏数据），逐条改判 —— **「词表里有」不等于「这条能用」**。<br>　拼串只出初稿，611 条**逐行读过一遍**才定稿；上表前三道机器核（互撞 0 / 撞现表 0 / 同图层同名 0）＋ 611 键逐个回上游查字面量（**查不到 0 个** ⇒ 面板 miss 侧一条没涨）。<br>· **传送框下拉的 `Surface` / `Pathways` 两个分组名**补上了。上一轮记成「未登记」，其实够得到 —— `<optgroup label>` 早在第十四轮就进了属性白名单，纯粹是这两个词没进表。<br>· 🔥 **判据侧：`lang-reclaim.js` 从「零判据覆盖」变成 3 条**（`R-lang-reclaim-wired` / `R-lang-reclaim-mechanism` / `R-lang-squat-panel`，71 条 / 24 种 kind）。这套机制**全程静默**（抢回成功是中文、没被顶也是中文、根本没跑是英文且不报错），没装 `foundry_chn` 的维护者永远复现不了 ⇒ 任何一次「顺手清理」都能悄悄拆掉它。<br>　⚠ **第一版判据是弱的，灵敏度回测当场打回来**：require 只写了名字，于是把 `registerLangReclaim();` 整行删掉之后 `import { registerLangReclaim }` 照样满足它 —— 而「文件还在包里、就是没人调」正是最可能的坏法。拆成两条、改钉整行之后，**9 格灵敏度回测每格只咬中该咬的那一条**（删调用 / 注释掉 / 删 import / 同步 XHR 改异步 / 去掉 `enumerable:false` / 钩子挪到 ready / 摘掉账本出口 / 摘掉面板那一节 / 改探针键）。<br>· **自检面板新增「命名空间被顶 · 抢回」一节**：替人区分「没人顶」「顶了但抢回来了」「抢回器根本没跑」三态，并且**不信账本** —— 把抢回的每条丢回 `game.i18n.localize()` 当场复验。离线验六种情形 19 条断言全绿（用真身 `mergeObject` + 真实 `foundry_chn` 语料）。`I18N_PROBES` 另补两条被顶过的键。<br>⚠ **仍会看到英文**：GM 叠加层 155 条（PIXI `PreciseText`，DOM 遍历结构上够不到）。<br>⚠ **未了项**（登记在 `R-lang-reclaim-wired` 的 why 里）：抢回器只有**字面量闸**，钉不住**上游语义漂移**（Foundry 改 `mergeObject` 递归条件或 `getProperty` 顶层快路径）。要一道现跑的活闸，得新开一种 kind ＋ 一整套正反例，本轮没做 —— 别下一轮读到那条就以为已经有活闸了。<br>主闸 71/0/0 · `--selftest` 357/357 · 灵敏度回测 9/9。 |
 
 > ⚠⚠ **本表到 `0.9.15` / `v1.1.29` 为止全部已发版**（2026-08-22 核过：两仓工作树干净，
 > HEAD 就是各自最新 tag，回包逐字节核对通过 —— 换行归一后 25/25 与 17/17 文件一致）。

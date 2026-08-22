@@ -3332,7 +3332,10 @@ RULESET_SHAPE = {
     # §0.1 收官后唯一批准的新判据层，理由是「它会咬到诚实的维护者」那一支例外）
     # 第三十四轮 A：67 → 68 / 23 → 24（新增 `lang_shape` 一条，见它的执行体注释；
     # 同样走 §0.1 收官后「它会咬到诚实的维护者」那一支例外 —— 这次咬到的就是主控自己）
-    "min_assertions": 68,
+    # 第三十六轮（UI 补漏第四轮）：68 → 71，kind 数不变（三条都复用既有的 source_literal）。
+    # 同样走 §0.1 收官后「它会咬到诚实的维护者」那一支例外 —— 这次会咬到的动作是
+    # 「顺手清理一个看起来没人用的文件」：lang-reclaim.js 不被调就等于白进包，而没人会响。
+    "min_assertions": 71,
     "min_kinds": 24,
     # —— 各 kind 必须存在的条数（防「把某一类整类删光」，也防「某一类被削掉大半」）
     #
@@ -3362,7 +3365,7 @@ RULESET_SHAPE = {
         "panel_liveness": 1,
         "ruleset_shape": 1,
         "sense_gated": 1,
-        "source_literal": 1,
+        "source_literal": 4,
         "tag_parity": 1,
         "term_domains": 4,
         "term_gated": 11,
@@ -3531,6 +3534,12 @@ REGISTERED_ASSERTIONS = {
     'R-selfcheck-twin': 'twin_files',
     'R-patterns-translate-cases': 'translate_cases',
     'R-selfcheck-d-section-name': 'source_literal',
+    # 第三十六轮（UI 补漏第四轮）：钉住「译文抢回器」这套**全程静默**的机制。
+    # 静默到什么程度：修好了是中文、没被顶也是中文、抢回器根本没跑则是英文**且不报错** ——
+    # 维护者只要没装 foundry_chn 就永远复现不了。本轮之前 `lang-reclaim` 在整个判据侧出现 0 次。
+    'R-lang-reclaim-wired': 'source_literal',
+    'R-lang-reclaim-mechanism': 'source_literal',
+    'R-lang-squat-panel': 'source_literal',
     'R-selfcheck-d-liveness': 'panel_liveness',
     'R-assertion-inputs-tracked': 'tracked_inputs',
     'R-ruleset-shape': 'ruleset_shape',
@@ -3653,7 +3662,10 @@ PAYLOAD_FLOORS = {
     "R-selfcheck-twin": {"min_pairs": ("ge", 1), "pairs": ("list", 1)},
     "R-patterns-translate-cases": {"arrangements": ("list", 6), "arrangements.channels": ("list", 2), "arrangements.expect_untranslated": ("list", 8), "arrangements.labels_recorded": ("eq", 233), "arrangements.leaves_not_upstream": ("list", 1), "arrangements.min_labels": ("ge", 224), "arrangements.prefixes": ("list", 2), "negative": ("list", 67), "notify_negative": ("list", 45), "notify_positive": ("list", 32), "positive": ("list", 82), "recorded": ("list", 11), "recorded.negative": ("eq", 67), "recorded.notify_negative": ("eq", 45), "recorded.notify_positive": ("eq", 32), "recorded.np_size": ("eq", 27), "recorded.patterns_size": ("eq", 29), "recorded.positive": ("eq", 82), "recorded.prefixed_size": ("eq", 19), "repo": ("str", 5), "src": ("str", 30), "stub_import": ("str", 54), "upstream_repo": ("str", 5), "upstream_src": ("str", 17)},
     "R-selfcheck-d-section-name": {"files": ("list", 2), "forbid_re": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 2), "require": ("list", 1)},
-    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 1609), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2203), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 1773), "min.registeredRaw": ("eq", 2389), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 41), "min.tablesFedIn": ("eq", 41), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
+    "R-lang-reclaim-wired": {"files": ("list", 1), "forbid_re": ("list", 2), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 2)},
+    "R-lang-reclaim-mechanism": {"files": ("list", 1), "min_checks": ("ge", 4), "min_files": ("ge", 1), "require": ("list", 4)},
+    "R-lang-squat-panel": {"files": ("list", 2), "min_checks": ("ge", 8), "min_files": ("ge", 2), "require": ("list", 4)},
+    "R-selfcheck-d-liveness": {"fakes": ("list", 6), "fakes.Gyroscopic Pemmican Requisition": ("str", 3), "fakes.Quaffle Marmalade Dispenser": ("str", 3), "fakes.This String Does Not Exist Upstream At All": ("str", 3), "fakes.Vorpal Blancmange Protocol": ("str", 3), "fakes.Xylophone Requisition Form": ("str", 3), "fakes.Zzq Frobnicated Widget": ("str", 3), "max": ("list", 5), "max.fetchFail": ("eq", 3), "max.missDistinct": ("eq", 4), "max.rawMiss": ("eq", 7), "max.uncheckedDistinct": ("eq", 164), "max.uncheckedRaw": ("eq", 186), "min": ("list", 11), "min.checkedDistinct": ("eq", 2217), "min.fetchOk": ("eq", 222), "min.rawChecked": ("eq", 2816), "min.regexTables": ("eq", 2), "min.registeredDistinct": ("eq", 2381), "min.registeredRaw": ("eq", 3002), "min.tableRegexEntries": ("eq", 48), "min.tableRows": ("eq", 41), "min.tablesFedIn": ("eq", 41), "min.tplFiles": ("eq", 68), "min.wrappedTables": ("eq", 13), "panel": ("str", 30), "repo": ("str", 5), "section": ("str", 18), "stub_import": ("str", 54), "substr_expect_miss": ("eq", 0), "substr_probe": ("str", 16), "tables_src": ("str", 30), "upstream_repo": ("str", 5)},
     "R-assertion-inputs-tracked": {"min_checked": ("ge", 40), "must_include": ("list", 5), "rules": ("str", 34), "sweep": ("list", 1), "sweep_ignore": ("list", 1)},
     "R-ruleset-shape": {},
     "R-html-tag-parity": {"min_leaves": ("ge", 15000), "min_tag_kinds": ("ge", 60), "min_tags": ("ge", 390000)},
@@ -3740,6 +3752,13 @@ JUDGED_UNITS = {
     "R-selfcheck-twin": 1,
     "R-patterns-translate-cases": 229,
     "R-selfcheck-d-section-name": 4,
+    # source_literal 的规矩数 = 文件的**仓名**去重后 × (require + forbid_re) 条数：
+    # `_unit()` 的名字是 `require:{repo}:{字面量}`，两个文件同仓时会合成一条。
+    # R-lang-reclaim-wired：仓只有 crucible ⇒ 1×(1 require + 2 forbid) = 3
+    # R-lang-squat-panel  ：ember + crucible 两仓 ⇒ 2×4 require = 8
+    "R-lang-reclaim-wired": 4,
+    "R-lang-reclaim-mechanism": 4,
+    "R-lang-squat-panel": 8,
     # 第三十二轮 V18：22 → 33（min 7→11 · max 3→5 · 新增 5 条不含阈值的台账恒等式）
     "R-selfcheck-d-liveness": 33,
     "R-assertion-inputs-tracked": 7,
