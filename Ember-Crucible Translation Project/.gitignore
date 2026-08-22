@@ -71,3 +71,9 @@ __pycache__/
 4-临时脚本/**/*.webp
 4-临时脚本/**/*.png
 4-工作区/
+
+# 临时轮次里「与真文件逐字节相同」的副本（含仅差一行的 measurement 版）：
+# 信息量为零，且历史上被 grep 误当成真配置。真身在仓库里，旧版在 git 历史里。
+4-临时脚本/**/*.PATCHED.py
+4-临时脚本/**/before_HEAD.mjs
+4-临时脚本/**/stage_macro/extract_en.mjs
