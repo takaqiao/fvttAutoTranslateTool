@@ -1,0 +1,108 @@
+{
+ "summary": "Mined the 《异形RPG：进化版》 fan translation (priority level 1) into 285 terms with re-derived quotes, 20 internal inconsistencies, and 14 notes.\n\nWHAT WAS DONE\n1. Inline-gloss harvest, cleaned. The crude first-pass regex found 35 pairs with leading context baked in. A corrected pass found 56 distinct 中文 (English) pairs in ch1, 30 in ch2, 4 in old1e — 98 of the 285 output terms carry inline_glossed:true, with the headword trimmed to the actual noun (大气处理器, not 引进了大气处理器; 大卫, not 韦兰德生产了第一代大卫) and the untrimmed sentence preserved in `quote`.\n2. Went beyond the glosses. Anchored every non-glossed term against BOTH en.json (590 flattened keys) and corerules.json — whose adventure name is \"Alien Evolved Core Rules\" and whose journal pages \"Alien Evolved Player Guide / 1. SPACE IS HELL\" and \"/ 2. YOUR CHARACTER\" are the exact English of these two fan chapters. That let the twelve skills, nine careers, 30 career talents, the whole gear table, and the Round/Stretch/Shift table be matched line for line rather than guessed.\n3. The old-1e file is quarantined. All 17 terms from it carry chapter=\"old1e\" and a note reading \"⚠ LEVEL 5 ONLY\". It disagrees with level 1 on ten headwords (维兰德-汤谷 / 美洲联邦 / 进步人民联盟 / 外面纱 / 西德斯 / 托林普莱姆 / 美国殖民地陆战队 / 梅雷迪斯·维克斯 / 彼得·维兰德 / 地球拯救者); level 1 wins each time, and each level-1 entry names the level-5 competitor in its internal_conflict field.\n\nTHE FOUR LOAD-BEARING AREAS\n• Four attributes: 力量/敏捷/智力/同理心, all four inline-glossed. 智力 and 同理心 are recorded with tier T-EXACT and a REJECT note — the owner-pinned 机智/共情 win. Independent of the pin, both fan renderings are self-colliding: 智力 appears inside its own gloss (\"感官感知、智力和理智\") and 同理心 appears inside its own gloss (\"个人魅力、同理心以及操控他人的能力\"), so neither can serve as a unique key.\n• Twelve skills: complete and internally consistent in the fan doc, and they disagree with level-4 cn.json on 7 of 12. Agree: 耐力 Stamina, 医疗 Medical Aid, 机动 Mobility, 指挥 Command, 驾驶 Piloting. Disagree: 近战/肉搏, 计算机科学/科技, 侦察/观察, 远程战斗/射击, 重型机械/机械, 操控/操纵, 生存/求生. The fan doc never once uses a cn.json form, so this is a clean two-source split, not internal noise.\n• Time units: 轮 (Round) / 节 (Stretch) / 班 (Shift), all three inline-glossed in the same table. ⚠ Shift has three candidate strings across the two sources — 班 (fan table), 班次 (fan body prose, twice), and in cn.json the untranslated English \"Shift\" for ALIENRPG.Shift plus 一轮班 for ALIENRPG.OneShift. Round has its own clash: fan 轮 vs cn.json 一回合, and the fan's own Overkill talent slips to 回合.\n• Stress engine: 压力 / 压力骰子 / 基础骰子 / 追骰 (Push) / 恐慌 / 精神强度 (Resolve). Push and Resolve have NO level-4 competitor — cn.json has no Push key (ALIENRPG.SynthStress garbles it as 按钮, misreading Push as a button) and leaves ALIENRPG.Resolve null — so 追骰 and 精神强度 rest on level 1 alone.\n\nINTERNAL INCONSISTENCIES — 20 found, up from the 3 named in the brief. Each names which reading the rest of the document supports and carries 2-4 re-derived quotes. The three known ones resolve as: Fiorina 161 → 菲奥莉娜161 (2 of 3 hits; the ONE glossed instance is the minority 费奥莉娜, which makes it look authoritative); Android/Synthetic → 机器人 for Android (19 of 21 hits) and 合成人 for Synthetic, with 仿生人 a single stray two timeline lines from 机器人 for the SAME David series. Seventeen more: MOTHER (a five-way split — 游戏管理员 / 老妈 / 游戏主持人 / 老妈-as-ship-AI / untranslated MOTHER), hypersleep (深度睡眠 / 休眠 / 冷冻), Colonial Marines (殖民海军陆战队 ×8 vs 殖民地海军陆战队 ×2), Free League (自由联盟 vs untranslated), Shift, Round, W-Y dollars (韦汤币 / W-Y币 / 刀W-Y币), Pressure vs Compression Suit (two distinct corerules armor items collapsed to one 压力服), cinematic play (电影模式 vs 剧情模式), Hope's Last Day (ch2 imports 哈德利 the English title does not have), game session, pre-generated, the 2183 date (English says only \"the 2180s\"), FTL drive, terraforming (地形改造 vs 地球化), Medic, Company Agent, Colonial Marshal. The last three are logged as SPLIT-and-defensible so a reviewer does not \"fix\" them.\n\nFOUR OUTRIGHT MISTRANSLATIONS quarantined at confidence:low — Hydr8tion → 8号药剂 (the leetspeak 8 read as a product number), Armat Model 37A2 → 军用型37A2 (a manufacturer name read as the adjective \"military\"), Watatsumi DV-303 → 海神DV-303 (a Japanese corporate name rendered semantically as \"sea god\"), Lasalle Bionational → 生物国家 (first name dropped, rest calqued).",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\glossary\\mined_fan_translation.json",
+   "bytes": 182808,
+   "what": "The deliverable. {_meta, terms[285], internal_inconsistencies[20], notes[14]}. Each term: en, zh, tier_hint (T-FROZEN 11 / T-EXACT 74 / T-BILINGUAL 92 / T-PLAIN 108), chapter (ch1 101 / ch2 167 / old1e 17), quote, inline_glossed (98 true), internal_conflict (76 non-null), confidence (241 high / 20 medium / 24 low), plus an optional note. _meta records source char counts, the three anchor files, and the tier legend."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\mine_fan_translation.py",
+   "bytes": 85451,
+   "what": "The re-runnable builder, copied next to term_vote.py and build_subtitle_corpus.py. Every quote in the JSON is extracted at build time by a needle lookup against the source file — nothing is hand-typed, so a needle that stops matching aborts the build with NEEDLE NOT FOUND rather than emitting a stale quote."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "terms mined",
+   "value": "285 (ch1 101 / ch2 167 / old1e 17)"
+  },
+  {
+   "what": "inline 中文 (English) pairs harvested, cleaned",
+   "value": "90 distinct in ch1+ch2 (56 + 30) plus 4 in old1e; 98 output terms carry inline_glossed:true. The brief's first pass found 35, and those were dirty"
+  },
+  {
+   "what": "terms carrying an internal_conflict",
+   "value": "76 of 285"
+  },
+  {
+   "what": "internal inconsistencies documented",
+   "value": "20 (brief named 3)"
+  },
+  {
+   "what": "twelve skills: fan vs level-4 cn.json",
+   "value": "5 agree (耐力/医疗/机动/指挥/驾驶), 7 disagree (近战·计算机科学·侦察·远程战斗·重型机械·操控·生存)"
+  },
+  {
+   "what": "old-1e file headwords that contradict level 1",
+   "value": "10 of 17; level 1 wins all 10"
+  },
+  {
+   "what": "confidence distribution",
+   "value": "241 high / 20 medium / 24 low"
+  },
+  {
+   "what": "quote hygiene",
+   "value": "min 46 chars, max 172; 0 entries where the headword is absent from its quote without a note explaining the normalization"
+  },
+  {
+   "what": "Fiorina 161 variant count",
+   "value": "菲奥莉娜161 ×2 vs 费奥莉娜161 ×1, all in ch1"
+  },
+  {
+   "what": "Android variant count",
+   "value": "机器人 ×19 (ch1 1 + ch2 18) / 合成人 ×2 / 仿生人 ×1"
+  },
+  {
+   "what": "Colonial Navy prefix hazard",
+   "value": "殖民海军 ×11 in ch1 is a strict prefix of 殖民海军陆战队 ×8 — longest-match ordering mandatory for any TM apply pass"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Anchored against the corerules Evolved journal pages rather than inferring English from the Chinese",
+   "reason": "The dump's 'Alien Evolved Player Guide' journal contains pages '1. SPACE IS HELL' and '2. YOUR CHARACTER' — the English source text of exactly these two fan chapters. Career blocks, talent names, key-skill lists, gear tables and the Round/Stretch/Shift table were matched line for line, so the 187 non-glossed entries rest on document evidence, not on back-translation."
+  },
+  {
+   "decision": "Every quote is extracted programmatically from the source at build time",
+   "reason": "The brief demands a quote a reviewer can trust without reopening the docx. A needle-lookup extractor cannot drift; a hand-typed quote can. A missing needle aborts the build."
+  },
+  {
+   "decision": "Short quotes auto-extend to a 46-char floor",
+   "reason": "The first build emitted quotes like '3.鲁莽（reckless）。' and '轮 (Round)', which show the term but not its register. The extractor now walks forward (then backward) a sentence at a time until the window is long enough to judge. The Round/Stretch/Shift rows now pull in the whole 5-10秒/战斗 … 5-10小时/恢复 table."
+  },
+  {
+   "decision": "Kept 智力 and 同理心 as recorded terms rather than silently substituting the pinned 机智/共情",
+   "reason": "This file is a mining record of what level 1 actually says, not a decision sheet. Both are recorded with a REJECT note naming the owner's pin — and with the independent observation that each word appears inside its own gloss, so neither could serve as a unique key even without the pin."
+  },
+  {
+   "decision": "Tagged all 17 old-1e terms chapter='old1e' with a '⚠ LEVEL 5 ONLY' note, and named each as the losing side in the corresponding level-1 entry's internal_conflict",
+   "reason": "The brief said to treat that file as level 5 and say so per term. Cross-linking in both directions means a downstream consumer reading either row sees the demotion."
+  },
+  {
+   "decision": "Recorded the fan document's English-side typos in notes rather than normalizing them away",
+   "reason": "Observed: theOuter Veil, Seen ItAll, Resllient/resillient, anglysis, Steady hand, COLONISE, BioNational. Any matcher keyed on the parenthesised English would miss or mis-key on these, so the note warns against that while the headword carries the correct English."
+  },
+  {
+   "decision": "Logged three SPLIT-and-defensible cases (Medic 医生/医务官, Company Agent 公司代理人/公司代表, Colonial Marshal 殖民地执法官/执法官) as inconsistencies anyway",
+   "reason": "They look like drift but aren't: Company Reps and Company Agent are genuinely different English headings, and 医务官/执法官 are register variants in log prose. Logging them prevents a reviewer from 'fixing' a correct distinction."
+  },
+  {
+   "decision": "Flagged the four mistranslations at confidence:low with the mechanism of the error spelled out",
+   "reason": "Hydr8tion→8号药剂 and Armat→军用型 are not stylistic disagreements, they are parse failures. Naming the mechanism lets a reviewer decide quickly instead of re-deriving it."
+  }
+ ],
+ "open_issues": [
+  "Shift is unresolved and has runtime consequences. Three strings compete for one crit-parse lockstep literal: 班 (fan table, glossed), 班次 (fan body prose, twice), and in cn.json the untranslated English 'Shift' for ALIENRPG.Shift plus 一轮班 for ALIENRPG.OneShift. Whatever the build picks must be applied to every one of those sites at once.",
+  "Round is a genuine level-1 vs level-4 clash with no tiebreaker in these two chapters: fan 轮 (glossed table entry, head of the 轮/节/班 series) vs cn.json 一回合 — and the fan's own Overkill talent text slips to 回合, so level 1 is not even unanimous with itself.",
+  "MOTHER needs a policy decision, not a term. The English pun (the GM is the Game Mother because the ship AI is MOTHER) is split apart in the fan body text and re-fused in one sidebar heading. The ship-AI 老妈 lines are in-fiction log entries the player reads; the GM 老妈 line is a rules cross-reference. Same string, two audiences.",
+  "Free League has no majority: 自由联盟 (ch1) and untranslated 'Free League' (ch2), one hit each, in the same sentence role (download a blank character sheet). Nothing in the document breaks the tie.",
+  "Terraforming likewise has no majority: 地形改造 (2031 entry) and 地球化 (2157 entry), one hit each, both inside the same timeline about eight printed lines apart.",
+  "IRC Mk.35 'Pressure Suit' and IRC Mk.50 'Compression Suit' are two separate armor documents in corerules.json but one Chinese string (压力服) in the fan doc. A Foundry build needs two distinct strings; only the model number currently separates them.",
+  "The Heliades is recorded as 希利亚德号 (a named ship) but the Evolved rulebook says 'a Heliades class Space Exploration Vehicle' — a CLASS. Verify before adopting the 号 suffix.",
+  "Wright-Aberra Waystation (赖特-阿贝拉中转站) has zero hits anywhere in the corerules dump, so the only evidence for it is the printed timeline via this fan translation. It could not be cross-checked.",
+  "牧夫座伊塔8 A3 for '8 Eta Boötis A III' is word-order-mangled (the 8 belongs in front) and mixes an Arabic 3 in the Chinese with a Roman Ⅲ in the gloss. Recorded at confidence:low; needs a rewrite, not an adoption.",
+  "Coverage stops at chapter 2. Neither chapter contains the panic-response table, stress-response table, critical injuries, spaceship attributes, the bestiary, or ranges beyond 近距离 (Short). Level 1 offers nothing on any of it — the owner has confirmed no further chapters exist — so those terms must come from levels 2-4 and must not be synthesised from these two chapters.",
+  "Level-1 vs level-4 remains unadjudicated on 7 of the 12 skills plus Buddy/Rival (朋友·敌人 vs 哥们·对头), Personal Agenda (个人任务 vs 个人目标), Health (生命值 vs 生命), Supply (余量 vs 补给), and Signature Item (标志性物品 vs 标志物品). Each is recorded in internal_conflict; none is decided here. Note that the fan's 敌人 collides with generic 'enemy' throughout the talent text, and 余量 is a prefix of both 余量检定 and 余量计数器."
+ ]
+}

@@ -1,0 +1,353 @@
+{
+ "unit": "SYS-J2",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase2/pages/SYS-J2.cn.html",
+ "summary": "SYS-J2「Characters —— 角色卡逐字段走查」已完成并写出。做法是把英文按 `re.split(r'(<[^>]+>)')` 拆成 305 个标签节点 + 文本节点，**只按下标替换文本节点**，标签一个都不重建——所以结构必然守恒（实测标签序列 305/305 逐个相等，唯一的 10 处差异就是我给 10 个标题加的 `id=`）。术语一律先查 `1-系统汉化插件/lang/cn.json`，查不到再回落 `glossary_alien.json`；为确认「哪个键真的渲染在这块界面上」，还去本机 `systems/alienrpg/templates/actor/*.hbs` 与 `module/sheets/character-sheet.mjs` 反查了引用点（例如 Pwr 列是 `ALIENRPG.Pwr`=威力 而非 `ALIENRPG.Power`=电力；页签标签是 `character-sheet.mjs:282` 拼出的 `ALIENRPG.Actor.Tabs.*`）。标题 id 的 slug 按 Foundry 真实实现算：`slugifyHeading` 走的是 **非严格** `slugify`（`foundry.mjs:685`），CHAR_MAP 里没有 `(`，所以圆括号会**保留**，正确 slug 是 `header-(1)` 而不是 `header-1`；导航走 `toc[anchor].element.scrollIntoView()` 的对象取值，不是 querySelector，括号安全。三处 T-FROZEN 表名（Critical Injuries / Critical injuries / Critical Injuries on Synthetics）、两个 `<pre><code>` 重伤格式模板、TIME LIMIT 的五个字面值（None/OneRound/OneTurn/OneShift/OneDay）、模板文件名与 systems/alienrpg/macros 路径全部逐字节原样保留。54 个 U+00A0 占位空格与 2 个换行也一比一保留。",
+ "chars_en": 9839,
+ "chars_cn": 3696,
+ "label_lookups": [
+  {
+   "english": "Characters (h1 / actor type)",
+   "lang_key": "TYPES.Actor.character",
+   "used": "角色"
+  },
+  {
+   "english": "General Tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.General",
+   "used": "通用（写作「通用页签」）"
+  },
+  {
+   "english": "Skills Tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Skills",
+   "used": "技能（写作「技能页签」）"
+  },
+  {
+   "english": "Inventory Tab / Inventory",
+   "lang_key": "ALIENRPG.Actor.Tabs.Inventory",
+   "used": "物品栏（写作「物品栏页签」）"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Stress (level)",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力（Stress level → 压力等级）"
+  },
+  {
+   "english": "Career",
+   "lang_key": "ALIENRPG.Career",
+   "used": "职业"
+  },
+  {
+   "english": "specialities",
+   "lang_key": "ALIENRPG.SPECIALTY",
+   "used": "专长"
+  },
+  {
+   "english": "Talents",
+   "lang_key": "ALIENRPG.Talents",
+   "used": "天赋"
+  },
+  {
+   "english": "Agenda/Story Cards",
+   "lang_key": "ALIENRPG.AgendaStory",
+   "used": "任务/故事卡"
+  },
+  {
+   "english": "Experience",
+   "lang_key": "ALIENRPG.XP",
+   "used": "经验"
+  },
+  {
+   "english": "Story Points",
+   "lang_key": "ALIENRPG.StoryPoints",
+   "used": "故事点"
+  },
+  {
+   "english": "Radiation",
+   "lang_key": "ALIENRPG.Radiation",
+   "used": "辐射"
+  },
+  {
+   "english": "Conditions",
+   "lang_key": "ALIENRPG.Conditions",
+   "used": "状态"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Overwatch",
+   "lang_key": "ALIENRPG.Overwatch",
+   "used": "警戒"
+  },
+  {
+   "english": "Panicked / “PANICKED” dot",
+   "lang_key": "ALIENRPG.Panicked",
+   "used": "恐慌"
+  },
+  {
+   "english": "More Panic",
+   "lang_key": "ALIENRPG.MorePanic",
+   "used": "更加恐慌"
+  },
+  {
+   "english": "Air",
+   "lang_key": "ALIENRPG.Air",
+   "used": "空气"
+  },
+  {
+   "english": "Food",
+   "lang_key": "ALIENRPG.Food",
+   "used": "食物"
+  },
+  {
+   "english": "Water",
+   "lang_key": "ALIENRPG.Water",
+   "used": "水"
+  },
+  {
+   "english": "Power (Consumables row)",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Pwr column (Inventory tab)",
+   "lang_key": "ALIENRPG.Pwr",
+   "used": "威力（character-inventory.hbs:29/39 实测）"
+  },
+  {
+   "english": "supply roll (parachute button title)",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Armor Piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲（RULINGS R2-armor-piercing）"
+  },
+  {
+   "english": "Armor Doubled",
+   "lang_key": "ALIENRPG.ArmorDoubled",
+   "used": "护甲加倍"
+  },
+  {
+   "english": "Roll Crit button",
+   "lang_key": "ALIENRPG.RollCrit",
+   "used": "重伤检定"
+  },
+  {
+   "english": "Critical Injuries (sheet section label)",
+   "lang_key": "ALIENRPG.CriticalInjuries",
+   "used": "Critical injuries（cn.json 里该键的值就是英文，故写成双语「重伤 Critical injuries」，见 open_issues #1）"
+  },
+  {
+   "english": "modifiers tab (on the injury item)",
+   "lang_key": "ALIENRPG.Item.Tabs.Modifiers",
+   "used": "修正"
+  },
+  {
+   "english": "Encumbrance",
+   "lang_key": "ALIENRPG.Encumbrance",
+   "used": "负重"
+  },
+  {
+   "english": "Active",
+   "lang_key": "ALIENRPG.Active",
+   "used": "已激活"
+  },
+  {
+   "english": "Inactive",
+   "lang_key": "ALIENRPG.Inactive",
+   "used": "未激活"
+  },
+  {
+   "english": "Foot Locker",
+   "lang_key": "ALIENRPG.fLocker",
+   "used": "储物箱"
+  },
+  {
+   "english": "Add to Locker",
+   "lang_key": "ALIENRPG.addToFLocker",
+   "used": "存入储物箱"
+  },
+  {
+   "english": "Take From Locker",
+   "lang_key": "ALIENRPG.moveFromFlocker",
+   "used": "从储物箱取出"
+  },
+  {
+   "english": "Ad Hoc",
+   "lang_key": "ALIENRPG.AdHoc",
+   "used": "临时"
+  },
+  {
+   "english": "Rounds",
+   "lang_key": "ALIENRPG.Rds / ALIENRPG.Rounds",
+   "used": "备弹"
+  },
+  {
+   "english": "Quantity",
+   "lang_key": "ALIENRPG.QuantityLabel",
+   "used": "数量"
+  },
+  {
+   "english": "Medical Aid",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗（T-EXACT，不带英文尾巴）"
+  },
+  {
+   "english": "Skill Stunts",
+   "lang_key": "ITEM.TypeSkill-stunts / TYPES.Item.skill-stunts",
+   "used": "技能炫技"
+  },
+  {
+   "english": "stunts",
+   "lang_key": "ALIENRPG.Stunts",
+   "used": "炫技"
+  },
+  {
+   "english": "Str (Maximum Encumbrance is Str *4)",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "Synthetics",
+   "lang_key": "TYPES.Actor.synthetic / ALIENRPG.Synthetic",
+   "used": "合成人"
+  },
+  {
+   "english": "Item type \"critical-injury\"",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤（机器 id `critical-injury` 括注保留）"
+  },
+  {
+   "english": "agenda items",
+   "lang_key": "TYPES.Item.agenda",
+   "used": "任务（写作「任务物品」）"
+  },
+  {
+   "english": "Token / token settings",
+   "lang_key": "ALIENRPG.NoToken（本项目既定译名登记点）",
+   "used": "指示物"
+  },
+  {
+   "english": "NPC tick box",
+   "lang_key": "（无键，character-header.hbs:62 硬编码 'NPC?'）",
+   "used": "NPC 勾选框"
+  },
+  {
+   "english": "“Panic Level”",
+   "lang_key": "（无键，卡上是无标签数字框 system.general.panic.lastRoll）",
+   "used": "恐慌等级（对齐 ALIENRPG.PCPanicLevel 的措辞）"
+  },
+  {
+   "english": "Roll Table Formula",
+   "lang_key": "（Foundry 核心 UI，不在本项目 lang 内）",
+   "used": "Roll Table Formula（骰表公式）"
+  }
+ ],
+ "frozen_kept": [
+  "Critical Injuries",
+  "Critical injuries",
+  "Critical Injuries on Synthetics",
+  "None",
+  "OneRound",
+  "OneTurn",
+  "OneShift",
+  "OneDay",
+  "TIME LIMIT",
+  "INJURY / FATAL / EFFECTS / HEALING TIME（两个 <pre><code> 模板整块逐字节保留）",
+  "fvtt-RollTable-critical-injuries-template.json",
+  "systems/alienrpg/macros",
+  "critical-injury（物品类型 id）",
+  "D66 / D6 / 10*1d6+1d6 / 1d6",
+  "Core Rules / Starter Set（模组名）",
+  "Quick-Insert（模组名）",
+  "CTRL / Delete / Backspace（按键名）"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Field Surgeon",
+   "proposed": "战地外科医生 Field Surgeon",
+   "why": "天赋名，glossary_alien.json 里没有。它不在 DO-NOT-TRANSLATE 的 6 个 T-FROZEN 天赋名（PACK MULE / TAKE CONTROL / NERVES OF STEEL / TOUGH / HARDENED / STOIC）之列，所以按 §3.4 走 T-BILINGUAL。需要主控确认后回填词表，并与 corerules 包里该天赋的 name 同步。"
+  },
+  {
+   "en": "Supply Dice",
+   "proposed": "余量骰子",
+   "why": "词表有 Supply=余量、Supply Roll=余量检定，但没有 Supply Dice。按 Stress Dice=压力骰子 / Base Dice=基础骰子 的既有构词推得。"
+  },
+  {
+   "en": "Foot Locker",
+   "proposed": "储物箱",
+   "why": "词表里没有，但 lang 的 ALIENRPG.fLocker 已经是「储物箱」，且 addToFLocker/moveFromFlocker 两条右键菜单都用它。建议把 lang 值回填进词表以免后续单元另起译名。"
+  },
+  {
+   "en": "medbay",
+   "proposed": "医疗舱",
+   "why": "词表有 Infirmary=医疗室、MedPod=医疗舱、Medlab=医疗实验室，唯独没有 medbay。本页取「医疗舱」。"
+  },
+  {
+   "en": "Panic Level",
+   "proposed": "恐慌等级",
+   "why": "词表有 Stress Level=压力等级，没有 Panic Level。取「恐慌等级」以对齐 ALIENRPG.PCPanicLevel / YourPanicLevel 的既有措辞。"
+  },
+  {
+   "en": "Roll Table Formula",
+   "proposed": "骰表公式（保留英文并括注）",
+   "why": "这是 Foundry 核心 UI 的字段名，不在本项目 lang 里；GM 的核心界面语言未必是中文，故正文写成「Roll Table Formula（骰表公式）」保证找得到。"
+  },
+  {
+   "en": "Actor (Foundry 文档类型)",
+   "proposed": "actor（保留英文小写）",
+   "why": "词表未收；PROJECT.md 自身的行文就用小写英文 actor 指 Foundry 文档（区别于 Character=角色）。本页沿用，共 4 处。若主控要统一改为中文，SYS-J1 的 h1「Actors」也要一起定。"
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "1. 结构标签多重集与英文相等（逐标签名计数）",
+   "result": "PASS —— 305/305。Counter 完全相等：br124 p74 span36 strong14 h3:10 li10 div8 h2:8 em6 pre4 code4 img3 h1:2 ul2。另做了更严的一步：标签**序列**逐个比对，305 个位置里只有 10 处不同，正是我给 10 个标题加 id 的那 10 个开标签，其余 295 个逐字节相同。"
+  },
+  {
+   "check": "2. 英文里出现的每个 class=\"...\" 值都在中文里原样存在",
+   "result": "PASS —— 20 个不同 class 值、连出现次数都相等（heading2×6 heading×4 imagecontainer×3 inv-context-menu-img×2，以及 character-details / character-consumables / radiation-roll / stresssymbol / status-icons-img / pwr-supply / armor-mod / moskills / spanner-icon / talent-agenda / con-edit / enc / enc-warn / enc-icon-img / inventory-tab-img / inv-inact 各 1）。3 个 <img> 标签（src/style/alt）也逐字节相同。"
+  },
+  {
+   "check": "3. 每个 @UUID[...] / [[...]] 构造逐字节一致",
+   "result": "PASS（空集）—— 本页英文里 @UUID / @TEXTDRAW / [[...]] 命中数为 0，中文同样为 0，无可破坏面。"
+  },
+  {
+   "check": "4. 每个被翻译的标题都带显式 id= 且为英文原文 slug",
+   "result": "PASS —— 10/10。slug 按 Foundry 真实实现算（slugifyHeading → 非严格 slugify，foundry.mjs:685/44689）：characters · general-tab · header-(1) · details-(2) · tracking-(3) · consumables · armor · critical-injuries-(4) · skills-tab-(5) · inventory-tab-(6)。⚠ 圆括号必须保留：strict 默认为 false，且 CHAR_MAP 里没有 '('，所以 'header-1' 是错的。"
+  },
+  {
+   "check": "5. DO-NOT-TRANSLATE.json 的 T-FROZEN 字面量一个都没被翻",
+   "result": "PASS —— 英文里出现的 T-FROZEN 字面量共 3 条（Critical Injuries / Critical injuries / Critical Injuries on Synthetics），全部在中文里逐字节存在。注：闸门脚本初版误把 exact_match_to_lang 段的 item_name_en（'Medical Aid'）也算成冻结串而报 FAIL——那一段是 **T-EXACT**，规则恰恰相反（必须译成纯中文且与 lang 键逐字节相等），已核对 Medical Aid → 医疗 = ALIENRPG.SkillmedicalAid，正确。"
+  },
+  {
+   "check": "6. 输出不与英文逐字节相同",
+   "result": "PASS —— 12238 → 6277 字符（11683 字节，UTF-8 无 BOM、无 CRLF、无行尾换行，与英文一致）。可见文本 9839 → 3696 字符。54 个 U+00A0 与 2 个换行数量完全保留。"
+  }
+ ],
+ "open_issues": [
+  "【最该拍板的一条】`ALIENRPG.CriticalInjuries` 在 cn.json 里的值还是英文 'Critical injuries'，所以角色卡上重伤区的标签**今天渲染成英文**。这不一定是漏译：`module/documents/actor.mjs:1815` 把这个键**同时当查表名用**——`game.tables.getName(game.i18n.localize('ALIENRPG.CriticalInjuries')) || getName('Critical Injuries') || getName('Critical injuries')`。有后两条兜底，把它翻成「重伤」在功能上是**安全**的（兜底会接住），但会让首选查找落空。我按「手册必须写玩家真正看到的字」把标题写成双语 `重伤 Critical injuries（4）`。若主控决定把该键改成中文，本页标题要跟着改成纯「重伤（4）」。",
+  "`character-header.hbs:62` 的 `NPC?` 是**硬编码英文**，没有 lang 键（该行只有 tooltip 走 ALIENRPG.NPCpopUp）。手册里的 \"NPC tick box\" 因此无法靠 lang/cn.json 汉化——归运行时补丁管。我正文写作「NPC 勾选框」。",
+  "手册引用的 “Panic Level” 在卡上**没有对应标签**：character-general.hbs:126 只是紧挨「恐慌」圆点的一个无标签数字输入框（system.general.panic.lastRoll）。译作「恐慌等级」是我按 ALIENRPG.PCPanicLevel 的措辞补的，不是抄某个键。",
+  "手册引用的 “Total Carried / Maximum Encumbrance” 也**不是屏幕上的字面串**。负重条实际渲染的是 `{{ALIENRPG.Encumbrance}} - {value}{{ALIENRPG.AbbreviationKg}} / {max}{{ALIENRPG.AbbreviationKg}}`（character-inventory.hbs:6），即「负重 - Xkg / Ykg」。我按描述译成「已携带总重 / 负重上限」。⚠ 顺带发现 **`ALIENRPG.AbbreviationKg` 在 cn.json 里缺失**（回落英文 kg）。",
+  "另一个 cn.json 缺键：**`ALIENRPG.Skill`**，被 character-skills.hbs 引用。不影响本页文字，但登记一下。",
+  "'Roll Table Formula' 是 **Foundry 核心** 的字段名，不在本项目 lang 覆盖范围内；GM 的核心界面语言未必是中文，所以我写成「Roll Table Formula（骰表公式）」而不是纯中文。",
+  "**跨单元排版约定需要主控统一**：图注编号我用了全角括号（1）…（6），中文正文里更自然；若 SYS-J3/J4 等单元用了半角 (1)，交付前需归一。注意——**标题的 id 不受影响**，id 里必须是英文原 slug 的半角括号 `header-(1)`。",
+  "本单元的字节区间**切在 DOM 中间**：文件末尾是不配对的 `</div><div style=\"position:relative;margin-top:30px\">`。已原样保留，未做任何补全——装配时靠相邻单元闭合。",
+  "英文原文有几处笔误，我按**作者本意**翻，没有在译文里保留错误：'rolla' → roll a；'Cirt tables' → crit tables；'Each of the entries but be constructed' → must be；'relevent' → relevant；'This is a near as I can get' → as near as。如果主控要求译文逐错对译，这几处需回改。",
+  "'Core Rules' / 'Starter Set' 两处指的是模组（完整名 'Alien Evolved Core Rules' / 'Alien Evolved Starter Set' 是 DNT 里的首次导入查找名）。我在正文里**保留英文**，以便对得上模组管理器里的条目；未加中文。若主控希望双语，此处要与 SYS-J1 的更新日志段统一。"
+ ]
+}

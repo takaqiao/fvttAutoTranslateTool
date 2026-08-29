@@ -1,0 +1,3296 @@
+{
+  "_meta": {
+    "source_priority_level": 1,
+    "source_dir": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/reference/cn-fan-translation",
+    "source_files": {
+      "ch1": {
+        "file": "异形RPG：进化版-第一章：宇宙是地狱.txt",
+        "chars": 11380
+      },
+      "ch2": {
+        "file": "异形RPG：进化版-第二章：你的角色.txt",
+        "chars": 14233
+      },
+      "old1e": {
+        "file": "《异形RPG》版异形宇宙设定翻译·时间线·第一部分-这是旧版的 非新版Evolved.txt",
+        "chars": 3896
+      }
+    },
+    "anchors": [
+      "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/lang/en.json",
+      "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/lang/cn.json",
+      "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/raw-dumps/corerules.json"
+    ],
+    "tier_legend": {
+      "T-FROZEN": "keep English bytes exactly",
+      "T-EXACT": "pure Chinese, must be byte-equal to a lang key value",
+      "T-BILINGUAL": "中文 English, ONE ASCII space, no parentheses",
+      "T-PLAIN": "bare Chinese in prose and {labels}"
+    },
+    "term_count": 285,
+    "inline_glossed_count": 98,
+    "conflicted_count": 76
+  },
+  "terms": [
+    {
+      "en": "Strength",
+      "zh": "力量",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "力量 (Strength): 原始的肌肉力量和体格。敏捷 (Agility):身体控制、速度和运动能力。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Agility",
+      "zh": "敏捷",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "敏捷 (Agility):身体控制、速度和运动能力。智力 (Wits):感官感知、智力和理智。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Wits",
+      "zh": "智力",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "智力 (Wits):感官感知、智力和理智。同理心 (Empathy)：个人魅力、同理心以及操控他人的能力。",
+      "inline_glossed": true,
+      "internal_conflict": "fan uses 智力 for Wits, but 智力 also appears inside the Wits gloss itself ('感官感知、智力和理智' = 'Intelligence, alertness…'), so 智力 is doubly loaded; system lang cn.json A-stratum has 机智 and the owner has pinned 机智",
+      "confidence": "high",
+      "note": "REJECT for the Foundry build: owner-pinned exception, level-4 cn.json 机智 wins"
+    },
+    {
+      "en": "Empathy",
+      "zh": "同理心",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "同理心 (Empathy)：个人魅力、同理心以及操控他人的能力。初始属性：创建你的玩家角色时，你可以在属性之间分配总共14点。",
+      "inline_glossed": true,
+      "internal_conflict": "fan uses 同理心 for Empathy, but 同理心 also appears inside its own gloss ('个人魅力、同理心以及操控他人的能力'); system lang cn.json A-stratum has 共情 and the owner has pinned 共情",
+      "confidence": "high",
+      "note": "REJECT for the Foundry build: owner-pinned exception, level-4 cn.json 共情 wins"
+    },
+    {
+      "en": "Attributes",
+      "zh": "属性",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "对于机器人，在分配随机掷出的点数后，将力量和智力各+2，同时同理心-1.属性你的角色有四个属性，用于表示你的基本身体和心理能力，每个属性的等级是1到5。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "key attribute",
+      "zh": "关键属性",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "然而，你可以将5点分配给职业中列为\"关键属性\"的属性。机器人：合成人角色在分配完14点属性后，可以在任意两个属性上各获得3点加值，关键属性最高可达8，另一个属性最高可达7。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Skills",
+      "zh": "技能",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "游戏中共有十二种核心技能，详细描述见第3章。技能以0到5的等级来衡量。没有技能等级？即使你在某项技能上没有等级，你仍然可以进行该技能的掷骰。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Heavy Machinery",
+      "zh": "重型机械",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "技能：内特的关键技能是重型机械、耐力和近战。我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 机械 (bare)",
+      "confidence": "high"
+    },
+    {
+      "en": "Stamina",
+      "zh": "耐力",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "技能：内特的关键技能是重型机械、耐力和近战。我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 耐力"
+    },
+    {
+      "en": "Close Combat",
+      "zh": "近战",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "技能：内特的关键技能是重型机械、耐力和近战。我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 肉搏",
+      "confidence": "high"
+    },
+    {
+      "en": "Comtech",
+      "zh": "计算机科学",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 科技; fan's 计算机科学 over-narrows a skill that also covers comms and electronics",
+      "confidence": "high"
+    },
+    {
+      "en": "Observation",
+      "zh": "侦察",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 观察; the fan doc itself uses 观察 once in a non-skill sense",
+      "confidence": "high"
+    },
+    {
+      "en": "Medical Aid",
+      "zh": "医疗",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗——你永远不知道什么时候就会用到。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 医疗"
+    },
+    {
+      "en": "Mobility",
+      "zh": "机动",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：敏捷关键技能：机动、生存、侦察现金：D6x10 W-Y币天赋选择或投掷D3：1.抓不到我（hard to catch）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 机动"
+    },
+    {
+      "en": "Survival",
+      "zh": "生存",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：敏捷关键技能：机动、生存、侦察现金：D6x10 W-Y币天赋选择或投掷D3：1.抓不到我（hard to catch）。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 求生",
+      "confidence": "high"
+    },
+    {
+      "en": "Ranged Combat",
+      "zh": "远程战斗",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：力量关键技能：近战、耐力、远程战斗现金：D6x100 W-Y币天赋 选择或投掷D3： 1.玩笑（banter）。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 射击",
+      "confidence": "high"
+    },
+    {
+      "en": "Command",
+      "zh": "指挥",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：智力关键技能：侦察、远程战斗、指挥现金：D6x200 W-Y币天赋选择或投掷D3：1. 权威（authority）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 指挥"
+    },
+    {
+      "en": "Manipulation",
+      "zh": "操控",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：智力关键技能：计算机科学、侦察、操控现金：D6x1000 W-Y币天赋选择或投掷D3：1.公司资源（company resources）。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 操纵 (same sound, different second character)",
+      "confidence": "high"
+    },
+    {
+      "en": "Piloting",
+      "zh": "驾驶",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "·关键属性：敏捷·关键技能：驾驶、远程战斗、计算机科学·现金：D6x200 W-Y币天赋选择或投掷D3:1.全速前进（full throttle）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 驾驶"
+    },
+    {
+      "en": "key skills",
+      "zh": "关键技能",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "关键属性：力量关键技能：近战、耐力、远程战斗现金：D6x100 W-Y币天赋 选择或投掷D3： 1.玩笑（banter）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "skill level",
+      "zh": "技能等级",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "在游戏过程中，你可以提升你的技能等级（见第30页）。天赋天赋是一些技巧、动作和小能力，能给你带来微小的优势。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "skill roll",
+      "zh": "技能检定",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "下方是应用于机器人的特殊规则：机器人在分配完14点属性后，可以在任意两个属性上各获得3点加值机器人不能追骰技能检定。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "base dice",
+      "zh": "基础骰子",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "这个游戏有两种定制的六面骰：基础骰子（黑色）和压力骰子（黄色）。这个盒装套装中每种骰子各包含十个。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "stress dice",
+      "zh": "压力骰子",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "这个游戏有两种定制的六面骰：基础骰子（黑色）和压力骰子（黄色）。这个盒装套装中每种骰子各包含十个。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Stress",
+      "zh": "压力",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "压力太空生活是致命的。你会发现，你往往比你想象的更频繁地处于极度压力之下。在游戏中，这种不断增加的紧张感通过你的压力等级来体现。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 压力"
+    },
+    {
+      "en": "stress level",
+      "zh": "压力等级",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "在游戏中，这种不断增加的紧张感通过你的压力等级来体现。压力等级通常从0开始，会因追骰（见第43页）或经历令人害怕或紧张的情况而增加。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "push (a roll)",
+      "zh": "追骰",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "压力等级通常从0开始，会因追骰（见第43页）或经历令人害怕或紧张的情况而增加。关于压力的具体说明，请参阅第4章。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "load-bearing: the fan doc never once uses 推骰/加骰; 追骰 is its single stable rendering of Push, used 11× in ch2"
+    },
+    {
+      "en": "Panic",
+      "zh": "恐慌",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "（第43页）机器人不会受到压力也没有压力等级（第72页）机器人永远不会进行恐慌检定机器人遭受的伤害不同（第78页）秘密机器人：多数机器人看起来像人类。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 恐慌"
+    },
+    {
+      "en": "panic roll",
+      "zh": "恐慌检定",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "（第43页）机器人不会受到压力也没有压力等级（第72页）机器人永远不会进行恐慌检定机器人遭受的伤害不同（第78页）秘密机器人：多数机器人看起来像人类。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Resolve",
+      "zh": "精神强度",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "精神强度为了控制你的紧张情绪，你需要精神强度——一个数值评分，等于你的（智力+同理心）/2（向上取整）。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum leaves ALIENRPG.Resolve untranslated (null), so there is no level-4 competitor",
+      "confidence": "high"
+    },
+    {
+      "en": "Health",
+      "zh": "生命值",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "生命值即使你保持冷静，早晚你也可能受伤。这通过你的生命值来记录。当受伤时，生命值会减少。当你的生命值降至0，你会濒死，甚至真的死掉——详见第4章。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has bare 生命 for ALIENRPG.Health",
+      "confidence": "high"
+    },
+    {
+      "en": "Story Points",
+      "zh": "故事点",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "如果在本幕中，你为了推进你的个人任务而采取了明确的行动，你将获得一个故事点（见第44页）。幕、任务和故事点的更多细节见第7章。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 故事点"
+    },
+    {
+      "en": "Experience Points (XP)",
+      "zh": "经验值",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你在游戏过程中学到的东西用经验值(XP)来衡量。每场游戏会话结束后，你都会获得XP。复盘剧情，让整个团队讨论发生了什么。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "ch2 also uses 经验点 once ('1点经验点奖励') for the same thing"
+    },
+    {
+      "en": "D66",
+      "zh": "D66",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "另一种掷骰类型是D66，这意味着你掷两个D6——第一个骰子作为十位数，第二个骰子作为个位数。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Round",
+      "zh": "轮",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch1",
+      "quote": "轮 (Round) 5-10秒 战斗 节 (Stretch) 5-10分 潜行 班 (Shift)",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "table row: 轮 / 5-10秒 / 战斗. Body prose also writes 战斗轮 and 每轮战斗. System lang cn.json A-stratum has 一回合 for ALIENRPG.OneRound, i.e. 回合 not 轮 — a real level-1/level-4 clash"
+    },
+    {
+      "en": "Stretch",
+      "zh": "节",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch1",
+      "quote": "节 (Stretch) 5-10分 潜行 班 (Shift) 5-10小时 恢复 倒计时：在某些灾难性事件的倒计时期间，可以用掷骰子来调节时间的流逝。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "table row: 节 / 5-10分 / 潜行. Used in ch2 body as 每节时间之后 and 1节潜行模式. No level-4 competitor: cn.json has no Stretch key"
+    },
+    {
+      "en": "Shift",
+      "zh": "班",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch1",
+      "quote": "班 (Shift) 5-10小时 恢复 倒计时：在某些灾难性事件的倒计时期间，可以用掷骰子来调节时间的流逝。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "⚠ RUNTIME: Shift is the crit-parse lockstep literal. Table row 班 / 5-10小时 / 恢复. ch2 body drifts to 班次 twice ('至少接受老师一个班次的指导', '每天的每个班次'). System lang cn.json leaves ALIENRPG.Shift as the English word 'Shift' and renders ALIENRPG.OneShift as 一轮班"
+    },
+    {
+      "en": "shift (body-text variant)",
+      "zh": "班次",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "然而，要做到这一点，要么你必须在本场游戏会话中使用过该技能并成功（没有技能等级），要么至少接受老师一个班次的指导。",
+      "inline_glossed": false,
+      "internal_conflict": "班 (table, glossed) vs 班次 (body ×2) for the same unit",
+      "confidence": "high"
+    },
+    {
+      "en": "combat round",
+      "zh": "战斗轮",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "战斗轮、节和班的准确持续时间会根据情况变化。[/color】 单位 持续 主要用于 轮 (Round)",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "countdown",
+      "zh": "倒计时",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "倒计时：在某些灾难性事件的倒计时期间，可以用掷骰子来调节时间的流逝。有关详细信息，请参见第55页。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "cinematic play",
+      "zh": "电影模式",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.6游戏模式异形角色扮演游戏可以以两种不同的模式进行：电影模式和战役模式。这些模式各自旨在为你创造不同的体验。",
+      "inline_glossed": false,
+      "internal_conflict": "ch2 once writes 剧情模式 for the same mode ('在剧情模式中每幕一次')",
+      "confidence": "high"
+    },
+    {
+      "en": "campaign play",
+      "zh": "战役模式",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.6游戏模式异形角色扮演游戏可以以两种不同的模式进行：电影模式和战役模式。这些模式各自旨在为你创造不同的体验。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "campaign framework",
+      "zh": "战役框架",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "核心规则书支持三种不同的战役框架： 太空卡车司机 殖民海军陆战队 边境殖民者 关于这些战役框架的更多信息，以及如何使用它们的工具，可以在第7章中找到。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Space Truckers (framework)",
+      "zh": "太空卡车司机",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.4边境的职业太空卡车司机虽然这个领域不像五十年前那么赚钱，但在地球与殖民地之间运输炼油厂和货物仍然是大生意。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "one of the three campaign frameworks; also the ch1 career-overview heading"
+    },
+    {
+      "en": "Colonial Marines (framework)",
+      "zh": "殖民海军陆战队",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "殖民海军陆战队美国殖民海军陆战队代表了有史以来最精锐的作战力量。技术先进，并装备了所有最新的军事硬件——其中大量由韦汤公司设计——殖民地海军陆战队能够在几乎任何环境下独立作战。",
+      "inline_glossed": false,
+      "internal_conflict": "殖民海军陆战队 (ch1 ×6, ch2 ×2) vs 殖民地海军陆战队 (ch1 ×2); 殖民海军陆战队 is the majority and matches the campaign-framework list",
+      "confidence": "high"
+    },
+    {
+      "en": "Frontier Colonists (framework)",
+      "zh": "边境殖民者",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "边境殖民者对大多数人来说，成为殖民者意味着你要接受艰苦的生活，除了完成工作后的满足感几乎没有其他回报。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Game Mother",
+      "zh": "游戏管理员",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "游戏管理员 (the Game MOTHER)最后一名玩家是游戏主持人，简称GM。她向你描述《异形》宇宙的世界。",
+      "inline_glossed": true,
+      "internal_conflict": "Game Mother rendered 游戏管理员 (heading, glossed) / 老妈 (heading '成为老妈 (Game MOTHER)') / 游戏主持人 (body, glossed 'GM'); the ship AI MOTHER is ALSO 老妈, so 老妈 is doubly loaded",
+      "confidence": "medium"
+    },
+    {
+      "en": "Game Mother (2nd rendering)",
+      "zh": "老妈",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "成为老妈 (Game MOTHER)：关于GM的各种信息和工具可以在第七章中找到。航行日志 062:00 USCSS 米兰达号船长理查兹录音执法官不会来了，谈判也泡汤了。",
+      "inline_glossed": true,
+      "internal_conflict": "Game Mother rendered 游戏管理员 (heading, glossed) / 老妈 (heading '成为老妈 (Game MOTHER)') / 游戏主持人 (body, glossed 'GM'); the ship AI MOTHER is ALSO 老妈, so 老妈 is doubly loaded",
+      "confidence": "medium"
+    },
+    {
+      "en": "GM / Game Master",
+      "zh": "游戏主持人",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "游戏管理员 (the Game MOTHER)最后一名玩家是游戏主持人，简称GM。她向你描述《异形》宇宙的世界。",
+      "inline_glossed": true,
+      "internal_conflict": "Game Mother rendered 游戏管理员 (heading, glossed) / 老妈 (heading '成为老妈 (Game MOTHER)') / 游戏主持人 (body, glossed 'GM'); the ship AI MOTHER is ALSO 老妈, so 老妈 is doubly loaded",
+      "confidence": "high"
+    },
+    {
+      "en": "MOTHER (ship AI)",
+      "zh": "老妈",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "航行日志 060:15 USCSS 米兰达号船长 理查兹 录音老妈妥协了。我命令她重新对齐通讯阵列好让我向锚点站发送跟踪信息，但是她说有机械故障。",
+      "inline_glossed": false,
+      "internal_conflict": "Game Mother rendered 游戏管理员 (heading, glossed) / 老妈 (heading '成为老妈 (Game MOTHER)') / 游戏主持人 (body, glossed 'GM'); the ship AI MOTHER is ALSO 老妈, so 老妈 is doubly loaded",
+      "confidence": "high",
+      "note": "ship-AI MOTHER = 老妈 in all four log entries (老妈妥协了 / 老妈禁止打开气闸 / 老妈把我们的通讯发送到了HQ公司 / 老妈不肯帮我们锁上门)"
+    },
+    {
+      "en": "MOTHER (section title, untranslated)",
+      "zh": "MOTHER",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "1.1 MOTHER，发生了什么一条红龙......它的尾巴拖拽着天上星辰的三分之一，坠落在地上。",
+      "inline_glossed": false,
+      "internal_conflict": "Game Mother rendered 游戏管理员 (heading, glossed) / 老妈 (heading '成为老妈 (Game MOTHER)') / 游戏主持人 (body, glossed 'GM'); the ship AI MOTHER is ALSO 老妈, so 老妈 is doubly loaded",
+      "confidence": "high",
+      "note": "the ch1 §1.1 heading 'WHAT'S THE STORY MOTHER?' keeps MOTHER in Latin letters"
+    },
+    {
+      "en": "player character (PC)",
+      "zh": "玩家角色",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.5异形中的角色扮演游戏中的每个玩家——除了一个——都扮演一个玩家角色 (PC)。你可能是太空殖民者、太空卡车司机、海军陆战队员，或者其他角色。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "non-player character (NPC)",
+      "zh": "非玩家角色",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "由GM 控制的角色称为非玩家角色，简称NPC。游戏是玩家与 GM 之间的对话，来回进行，直到出现一个结果不确定的关键情境。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Player versus Player (PvP)",
+      "zh": "PVP",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch2",
+      "quote": "PVP在《异形》角色扮演游戏中，你的角色可能会与另一个玩家角色直接对抗。这在电影模式中非常常见，而在战役模式中则较少发生。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "act (of a cinematic adventure)",
+      "zh": "幕",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "在冒险的三幕的开始，GM会给每个PC一张包含本幕新任务的卡片。任务是保密的，你不应该展示给其他玩家或写在角色卡上。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "game session",
+      "zh": "游戏会话",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "在每场游戏会话结束时，一起讨论所有PC的任务。如果你在本次游戏会话中冒着风险或代价采取了某些具体行动来推进你的任务，你将获得1点经验点奖励（见第30页）。",
+      "inline_glossed": false,
+      "internal_conflict": "ch2 also writes 游戏环节 once ('你参加了游戏环节吗？') for the same session",
+      "confidence": "high"
+    },
+    {
+      "en": "character sheet",
+      "zh": "角色卡",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "角色卡：要跟踪你角色的游戏统计信息，你需要一张角色卡。你可以从本书的末尾复印，或者从Free League网站下载并打印。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "pre-generated character",
+      "zh": "预设角色",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "所有电影模式冒险均包含预设角色。战役模式战役模式旨在让玩家在多次游戏中使用相同的角色进行较长时间的连续游戏，可能甚至几十次游戏。",
+      "inline_glossed": false,
+      "internal_conflict": "ch2 uses 预制 ('在预制电影模式冒险中') for the same thing",
+      "confidence": "high"
+    },
+    {
+      "en": "Free League (publisher)",
+      "zh": "自由联盟",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "在电影模式中有预设的角色卡，你也可以从自由联盟网站下载空白角色卡。骰子在《异形》宇宙中，没有任何地方是安全的。",
+      "inline_glossed": false,
+      "internal_conflict": "自由联盟 (ch1) vs untranslated 'Free League' (ch2), for the same publisher in the same sentence role (download character sheets)",
+      "confidence": "high"
+    },
+    {
+      "en": "Free League (untranslated)",
+      "zh": "Free League",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch2",
+      "quote": "你可以从本书的末尾复印，或者从Free League网站下载并打印。电影模式CIN在预制电影模式冒险中，如《狂喜协议》和《哈德利的希望的最后一天入门套装》，提供了已经完成的玩家角色。",
+      "inline_glossed": false,
+      "internal_conflict": "自由联盟 (ch1) vs untranslated 'Free League' (ch2), for the same publisher in the same sentence role (download character sheets)",
+      "confidence": "high"
+    },
+    {
+      "en": "safety tools",
+      "zh": "安全道具",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "为了确保每个人都能玩得开心并感到安全，我们建议您在游戏前、游戏中和游戏后使用安全道具。这些安全道具的例子包括：游戏前关于玩家想要避免或不希望出现在屏幕上的内容的界限和遮蔽的讨论；玩家在游戏中展示的安全卡片，以表明他们对游戏中发生的事情感到不舒服；以及游戏后的总结讨论。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "life path method",
+      "zh": "生命历程方法",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "如果你们想花更多的时间充实你们角色过去的人生，你可以用本书第282页列出的生命历程方法。此方法可以让你们开发背景故事的细节，并在过程中学习技能和专长。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Career",
+      "zh": "职业",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.1 核心概念职业在战役模式中，你角色的第一个选择是你的职业。职业选择决定了你的背景和在团队中的角色。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 职业"
+    },
+    {
+      "en": "Talents",
+      "zh": "天赋",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "天赋天赋是一些技巧、动作和小能力，能给你带来微小的优势。它们比技能更专业化，使你的角色独一无二。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 天赋"
+    },
+    {
+      "en": "career talent",
+      "zh": "职业天赋",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "天赋：作为一名杂工，内特的职业天赋是坚韧（Resllient）,稳定的双手（Steady Hands）和真正的勇士（True Grit）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "general talent",
+      "zh": "通用天赋",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你可以在第3章从你的职业天赋和通用天赋中自由选择一项新天赋。改变朋友&敌人在每场游戏会话结束后，你可以按你所愿自由更换你的朋友和敌人PC。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "agrees with system lang cn.json A-stratum 通用天赋"
+    },
+    {
+      "en": "Personal Agenda",
+      "zh": "个人任务",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "个人任务的运作方式在电影模式和战役模式中有所不同。CIN电影模式任务：在电影模式中，PC的任务是由冒险预先设定的。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 个人目标 for ALIENRPG.PersonalAgenda and 目标 for ALIENRPG.AgendaStory; 任务 collides with 'mission'",
+      "confidence": "high"
+    },
+    {
+      "en": "Buddy",
+      "zh": "朋友",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "你的PC可以在其他PC中拥有一个朋友和一个敌人。在游戏期间，每种关系你只能拥有一个。你的关系对GM很重要，因为她可以利用这些关系在游戏中创造有趣的情境。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 哥们 for ALIENRPG.relOne",
+      "confidence": "high"
+    },
+    {
+      "en": "Rival",
+      "zh": "敌人",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "你的PC可以在其他PC中拥有一个朋友和一个敌人。在游戏期间，每种关系你只能拥有一个。你的关系对GM很重要，因为她可以利用这些关系在游戏中创造有趣的情境。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 对头 for ALIENRPG.relTwo; 敌人 collides with generic 'enemy' used throughout the talent text",
+      "confidence": "high"
+    },
+    {
+      "en": "Signature Item",
+      "zh": "标志性物品",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "标志性物品：除了你的常规装备，你还有一个标志性物品——一个小东西，这没什么实际用途，但对你的精神很有意义，你的角色和它有一段故事。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 标志物品 (no 性)",
+      "confidence": "high"
+    },
+    {
+      "en": "Appearance",
+      "zh": "外貌",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌用几句话描述你玩家角色的外貌。你的职业会给你一些建议，但你可以自由选择任何你认为适合角色的外貌。",
+      "inline_glossed": false,
+      "internal_conflict": "ch2 career blocks head the same field 外观 in the 10-step list ('6.决定你的外观')",
+      "confidence": "high"
+    },
+    {
+      "en": "Cash",
+      "zh": "现金",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "关键属性：力量关键技能：近战、耐力、远程战斗现金：D6x100 W-Y币天赋 选择或投掷D3： 1.玩笑（banter）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "W-Y dollars",
+      "zh": "韦汤币",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你还会获得韦汤币（W-Y dollar）——根据你的职业而定。关于现金以及如何花钱详见第6章。",
+      "inline_glossed": true,
+      "internal_conflict": "韦汤币 (glossed 'W-Y dollar') vs bare W-Y币 (all nine career cash lines) vs '300刀W-Y币' (worked example)",
+      "confidence": "high"
+    },
+    {
+      "en": "Gear",
+      "zh": "装备",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "2.3 你的装备为了在异形的世界中生存，你需要合适的装备。一台 M314 运动追踪器或一把 M41A 脉冲步枪可能真的意味着生与死的区别。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "starting gear",
+      "zh": "初始装备",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "初始装备：在电影模式中，冒险决定了你游戏开始时的装备。在战役模式中，你的职业决定了游戏开始时可以选择的装备。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Encumbrance",
+      "zh": "负重",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "负重你可以轻松携带数量相当于你力量等级两倍的常规大小物品。常规物品（在第5章的装备列表中重量为1）通常大小相当于一个小包，重量不超过几公斤，在你的角色卡上占一行。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Over-Encumbered",
+      "zh": "超重",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "超重：你可以暂时携带最多2倍于正常负重上限的物品，即力量×4件常规物品。当你这么做时，你的压力等级（见第72页）在你每次进行1节潜行模式（见第55页）或1轮战斗（见第61页）时+1。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Heavy (item weight)",
+      "zh": "重",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "重（Heavy）&轻（Light）物品：特别重或大的物品算作两个或更多常规物品，因此在角色卡上占据两行。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Light (item weight)",
+      "zh": "轻",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "重（Heavy）&轻（Light）物品：特别重或大的物品算作两个或更多常规物品，因此在角色卡上占据两行。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Tiny (item weight)",
+      "zh": "小",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "小（Tiny）物品：比轻物品还小的物品称为小物品。它们小到完全不会影响你的负重。经验法则是：如果物品可以藏在紧握的拳头中，它就是小物品。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "regular item",
+      "zh": "常规物品",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "常规物品（在第5章的装备列表中重量为1）通常大小相当于一个小包，重量不超过几公斤，在你的角色卡上占一行。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Consumables",
+      "zh": "消耗品",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "这些称为消耗品。太空服的空气量见第5章，武器有弹药量，某些类型的装备有电量。总的来说，这些被称为余量，并在你的角色卡上进行跟踪。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "supply rating",
+      "zh": "余量",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "总的来说，这些被称为余量，并在你的角色卡上进行跟踪。时间的消耗在倒计时某些灾难性事件期间，时间本身可以被视为一种可消耗的资源。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 补给 (ALIENRPG.NoSupplys 补给已耗尽 / supplyDecreases 补给下降)",
+      "confidence": "high"
+    },
+    {
+      "en": "Supply Roll",
+      "zh": "余量检定",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "余量检定：每隔固定的时间，你需要为你的装备进行余量检定。这意味着投掷数量等于当前空气、弹药或电量的压力骰子，骰子数量最多不超过6个。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 补给骰 for ALIENRPG.Supply",
+      "confidence": "high"
+    },
+    {
+      "en": "supply dial",
+      "zh": "余量计数器",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "余量计数器《希望的最后一天入门套装》包含一个有用的余量计数器，你可以用它来跟踪任何类型的消耗品余量而不用在角色卡上做标记。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Air (consumable)",
+      "zh": "空气",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "每掷出一个，该物品的余量-1.空气：每节时间之后，以及每次剧烈活动，如战斗或机动检定之后，进行一次余量检定。",
+      "inline_glossed": false,
+      "internal_conflict": "system lang cn.json A-stratum has 氧气供应 for ALIENRPG.AirSupply",
+      "confidence": "high"
+    },
+    {
+      "en": "Ammo (consumable)",
+      "zh": "弹药",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "弹药：大多数热武器都有弹匣来提供弹药。在开火后，进行一次余量检定。当你的弹药用尽时，你需要重新装填（见第67页）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Power (consumable)",
+      "zh": "电力",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "电力：一些物品需要电力才能工作。每次使用后，或者根据物品描述，你需要进行余量检定。当电量耗尽，物品就无法工作。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Broken",
+      "zh": "濒死",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你在为了激励濒死角色（见第68页）而进行指挥检定时，获得+2颗骰子。3.官大一级（pull rank）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "EN 'rally a broken character' → 激励濒死角色; also 效果持续到你或视线范围内所有敌人都濒死为止 = 'until you or all enemies in sight are broken'"
+    },
+    {
+      "en": "critical injury",
+      "zh": "重伤",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你可以重骰任何死亡检定或重伤检定一次。选择你喜欢的结果。3.敏锐（nimble）。对于使用敏捷的技能检定你可以追骰2次。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "death roll",
+      "zh": "死亡检定",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你可以重骰任何死亡检定或重伤检定一次。选择你喜欢的结果。3.敏锐（nimble）。对于使用敏捷的技能检定你可以追骰2次。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "zone",
+      "zh": "区域",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你在一个区域（见第57页）主动寻找隐藏的东西时，你的侦察检定+2颗骰子。这不适用于被动的侦察检定。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Short range",
+      "zh": "近距离",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "每在一个安全地点（见第73页）度过1节，你和近距离内的所有人压力等级-2（而不是-1）。 2.滥杀（overkill）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "safe place",
+      "zh": "安全地点",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "每在一个安全地点（见第73页）度过1节，你和近距离内的所有人压力等级-2（而不是-1）。 2.滥杀（overkill）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "quick action",
+      "zh": "快动作",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你可以使用指挥在战斗中下达命令（见第60页），作为快动作而不是完整动作。2.前线领导（frontline leader）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "full action",
+      "zh": "完整动作",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "你可以使用指挥在战斗中下达命令（见第60页），作为快动作而不是完整动作。2.前线领导（frontline leader）。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "stealth mode",
+      "zh": "潜行模式",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你这么做时，你的压力等级（见第72页）在你每次进行1节潜行模式（见第55页）或1轮战斗（见第61页）时+1。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "grapple",
+      "zh": "擒抱",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你尝试在近战（见第62页）中擒抱住对手时，你获得+2颗骰子。姓名选择或投掷D6：1. Jack Kitani2. Akira Kano3. Barrell Klein4. Angela Harris5. Ivan Mankov6. Lee-Ann Jenkins个人任务选择或投掷D3：1. 你多年的合作伙伴背叛了你，投靠了一个犯罪集团。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "first aid",
+      "zh": "急救",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你为了急救（见第68页）而进行医疗检定时，你得到+2颗骰子。2.护理（nurse）。当你照料一个正在从重伤中恢复的角色（见第71页）时，每一天都算作双倍。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "dodge",
+      "zh": "躲避",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你躲避攻击（见第65页）进行机动检定时，你得到+2颗骰子。2.幸运（lucky）。你可以重骰任何死亡检定或重伤检定一次。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "take cover",
+      "zh": "寻找掩护",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当滥杀时，你必须每回合都攻击你的敌人，不能寻找掩护、躲避或防御攻击。效果持续到你或视线范围内所有敌人都濒死为止。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "initiative",
+      "zh": "先攻",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "这些卡牌有两个用途——用于战斗中抽取先攻（见第5章）以及用于记录重要装备、武器和载具。游戏并不强制使用自定义卡牌，但它们是一个有用的补充。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Vacuum / world of hurt",
+      "zh": "充满伤害的世界",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "当你的空气量降至0，你就会进入一个充满伤害的世界（见第75页）。弹药：大多数热武器都有弹匣来提供弹药。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "literal calque of 'entering a world of hurt'; the EN cross-ref is to the Vacuum rules, so this is prose, not a term"
+    },
+    {
+      "en": "Android",
+      "zh": "机器人",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "扮演机器人机器人是《异形》角色扮演游戏中一个重要的组成部分，你可以将其作为你的玩家角色来扮演。",
+      "inline_glossed": false,
+      "internal_conflict": "机器人 (ch1 ×1 glossed 'androids', ch2 ×18) vs 仿生人 (ch1 ×1, 'David 7 series') vs 合成人 (ch1 ×1 'synthetic people', ch2 ×1 'Synthetic characters'); the document's dominant reading is 机器人=Android and 合成人=Synthetic, with 仿生人 a one-off stray",
+      "confidence": "high",
+      "note": "18 hits in ch2; the ch1 timeline glosses it explicitly as '系列机器人 (androids)'"
+    },
+    {
+      "en": "Synthetic",
+      "zh": "合成人",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "机器人：合成人角色在分配完14点属性后，可以在任意两个属性上各获得3点加值，关键属性最高可达8，另一个属性最高可达7。",
+      "inline_glossed": false,
+      "internal_conflict": "合成人 renders 'synthetic' in both chapters, but ch2 uses it as an apposition to 机器人 in the same sentence ('机器人：合成人角色…'), so the doc treats Android and Synthetic as one referent under two labels",
+      "confidence": "high",
+      "note": "the single sentence where both labels meet: 机器人 heads the rule, 合成人 names the character type"
+    },
+    {
+      "en": "synthetic people (ch1 prose)",
+      "zh": "合成人",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "这是《异形》角色扮演游戏——一个充满身体恐怖和公司角力的宇宙，合成人扮演上帝，而太空卡车司机和海军陆战队员则成为新生怪异生物的宿主。",
+      "inline_glossed": false,
+      "internal_conflict": "合成人 renders 'synthetic' in both chapters, but ch2 uses it as an apposition to 机器人 in the same sentence ('机器人：合成人角色…'), so the doc treats Android and Synthetic as one referent under two labels",
+      "confidence": "high"
+    },
+    {
+      "en": "android (David-series, stray)",
+      "zh": "仿生人",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "韦兰德公司的大卫7代系列仿生人在劳动中变得很常见。2088三界帝国由英国、日本及其他国家组成，领导着由韦兰德公司和汤谷公司等企业引领的技术革命。",
+      "inline_glossed": false,
+      "internal_conflict": "机器人 (ch1 ×1 glossed 'androids', ch2 ×18) vs 仿生人 (ch1 ×1, 'David 7 series') vs 合成人 (ch1 ×1 'synthetic people', ch2 ×1 'Synthetic characters'); the document's dominant reading is 机器人=Android and 合成人=Synthetic, with 仿生人 a one-off stray",
+      "confidence": "low",
+      "note": "ONE-OFF. Two timeline lines apart, the same David series is 机器人 in 2023 and 仿生人 in 2066. Drop 仿生人"
+    },
+    {
+      "en": "secret android",
+      "zh": "秘密机器人",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "（第43页）机器人不会受到压力也没有压力等级（第72页）机器人永远不会进行恐慌检定机器人遭受的伤害不同（第78页）秘密机器人：多数机器人看起来像人类。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Marine (career)",
+      "zh": "殖民海军陆战队",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.5 职业：殖民海军陆战队你大多数朋友可能永远都见不到另一个世界......但你不一样。一到年纪，你就报名加入了USCMC。",
+      "inline_glossed": false,
+      "internal_conflict": "殖民海军陆战队 (ch1 ×6, ch2 ×2) vs 殖民地海军陆战队 (ch1 ×2); 殖民海军陆战队 is the majority and matches the campaign-framework list",
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Marshal (career)",
+      "zh": "殖民地执法官",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "…14运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：殖民地执法官边境可能是一个无法无天的地方。…",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 uses bare 执法官 for the same office ('选举执法官来监督日常的执法工作', '我给殖民地执法官发了消息')",
+      "confidence": "high"
+    },
+    {
+      "en": "Company Agent (career)",
+      "zh": "公司代理人",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "…7A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3. 破旧的帽子2.7 职业：公司代理人你很饥渴。…",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 renders the same archetype 公司代表 ('公司代表在边境，企业的权力甚至超过政府') — that is EN 'Company Reps', a different heading, so both are defensible",
+      "confidence": "high"
+    },
+    {
+      "en": "Kid (career)",
+      "zh": "儿童",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Medic (career)",
+      "zh": "医生",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "…6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成千上万种死法，从暴露在真空或未知的传染病中，到凶猛的生物，甚至被喝醉的杂工意外射杀。…",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 log entries call the same crew role 医务官 ('唯一的新人是医务官海斯'); ch2's worked example also uses 医务官海斯",
+      "confidence": "high"
+    },
+    {
+      "en": "Officer (career)",
+      "zh": "飞行官",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "… 压力服3.D6剂镇痛剂4.D6剂不眠药5.个人医疗包6.萨马尼E系列手表标志性物品选择或投掷D3：1.装裱好的医生证明2.儿子或女儿的信3.最近的心理评估：\"一切正常\"2.10 职业：飞行官当一切都糟透了——公司扣押了你们的船员工资，那次发生在特杜斯附近的意外还堆积着一大堆报告要提交，而且谁知道有多少返家的亲人正让每个人牵肠挂肚——这时…",
+      "inline_glossed": false,
+      "internal_conflict": "EN is plain 'Officer'; 飞行官 imports 'flight' that the English does not have, and the same word is reused for the ICC Commercial Flight Officer licence",
+      "confidence": "medium"
+    },
+    {
+      "en": "Pilot (career)",
+      "zh": "驾驶员",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "…314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物品选择或投掷D3:1.船上的猫2.推荐信3.ICC（星际商务委员会）商业飞行员执照2.11 职业：驾驶员星辰是极限，而它们无穷无尽。…",
+      "inline_glossed": false,
+      "internal_conflict": "the SKILL Piloting is 驾驶 and the CAREER Pilot is 驾驶员 — distinct, but one character apart",
+      "confidence": "high"
+    },
+    {
+      "en": "Roughneck (career)",
+      "zh": "杂工",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "….PR-PUT上行终端3.手持无线电4.维修千斤顶5.西格森系统诊断设备6.IRC MK.50压力服标志性物品选择或投掷D3：1.仪表盘点头小玩偶2.飞行日志3.飞行墨镜2.12 职业：杂工总有人得在边境地区做体力劳动，而那个人就是你。…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "ch1 log uses the same word for the crew: '内特和里德是杂工'"
+    },
+    {
+      "en": "Scientist (career)",
+      "zh": "科学家",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "…神DV-303栓动枪3.D6剂8号药剂4.维修千斤顶5.IRC MK.50压力服6.强光手电筒标志性物品选择或投掷D3：1.工具腰带2.伴侣的照片3.十字架或其他宗教符号2.13 职业：科学家每天，在边境上都会发现存在拼图的新碎片。…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Banter",
+      "zh": "玩笑",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：力量关键技能：近战、耐力、远程战斗现金：D6x100 W-Y币天赋 选择或投掷D3： 1.玩笑（banter）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Overkill",
+      "zh": "滥杀",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.滥杀（overkill）。当你在恐慌检定（见第72页）中掷出9或更高，你可以无视结果并进行滥杀状态。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Precise Shooter",
+      "zh": "精确射手",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.精确射手（precise shooter）。当进行弹药（见第66页）余量检定时，你可以投掷比你的弹药余量少2的骰子数量，骰子数量最少1个。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Authority",
+      "zh": "权威",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：智力关键技能：侦察、远程战斗、指挥现金：D6x200 W-Y币天赋选择或投掷D3：1. 权威（authority）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Investigator",
+      "zh": "调查员",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2. 调查员（investigator）。当你在一个区域（见第57页）主动寻找隐藏的东西时，你的侦察检定+2颗骰子。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Subdue",
+      "zh": "征服",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3. 征服（subdue）。当你尝试在近战（见第62页）中擒抱住对手时，你获得+2颗骰子。姓名选择或投掷D6：1. Jack Kitani2. Akira Kano3. Barrell Klein4. Angela Harris5. Ivan Mankov6. Lee-Ann Jenkins个人任务选择或投掷D3：1. 你多年的合作伙伴背…",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN 'Subdue' is the grapple talent; 征服 ('conquer') over-reaches — 制伏 would match the mechanic"
+    },
+    {
+      "en": "Company Resources",
+      "zh": "公司资源",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：智力关键技能：计算机科学、侦察、操控现金：D6x1000 W-Y币天赋选择或投掷D3：1.公司资源（company resources）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Cunning",
+      "zh": "欺诈",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.欺诈（cunning）。你可以用智力代替同理心来进行操控检定。3.人身安全（personal safety）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN 'Cunning' is Wits-for-Empathy on Manipulation; 欺诈 ('fraud') is narrower than the English"
+    },
+    {
+      "en": "Personal Safety",
+      "zh": "人身安全",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.人身安全（personal safety）。如果当你被攻击时，另一个PC或友方NPC在近距离内，进行操控检定（不算动作）让其他角色代替你成为攻击目标。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Hard to Catch",
+      "zh": "抓不到我",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：敏捷关键技能：机动、生存、侦察现金：D6x10 W-Y币天赋选择或投掷D3：1.抓不到我（hard to catch）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Lucky",
+      "zh": "幸运",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.幸运（lucky）。你可以重骰任何死亡检定或重伤检定一次。选择你喜欢的结果。3.敏锐（nimble）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Nimble",
+      "zh": "敏锐",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.敏锐（nimble）。对于使用敏捷的技能检定你可以追骰2次。每次追骰压力等级+1。姓名选择或投掷D6：1.Chip Harrington2.Meggie Wu3.Hugo Turner4.Maisie Kelly5.Jakey Myers6.Becca David个人任务选择或投掷D3：1.你想找到一个你能信任——真正可靠的成年人。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN 'Nimble' is an Agility-push talent; 敏锐 reads as acuity/sharpness (a Wits word), 敏捷 is taken by the attribute — 灵巧 would fit better"
+    },
+    {
+      "en": "Field Medic",
+      "zh": "野战外科",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：同理心关键技能：机动、侦察、医疗现金：D6x200 W-Y币天赋选择或投掷D3：1.野战外科（field medic）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "外科 = surgery, which collides with the separate Surgeon talent in the same career block"
+    },
+    {
+      "en": "Nurse",
+      "zh": "护理",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.护理（nurse）。当你照料一个正在从重伤中恢复的角色（见第71页）时，每一天都算作双倍。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Surgeon",
+      "zh": "外科医生",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.外科医生（surgeon）。当为需要手术的重伤进行医疗检定时，你得到+2颗骰子。姓名选择或投掷D6：1.Cho Hadfield2.Ana Kasnavik3.Ken Ibane4.Juno Blanchard5.Sullivan Ward6.Katie Aberly个人任务选择或投掷D3：1.你对一种强效止痛药上瘾了。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Field Commander",
+      "zh": "战场指挥",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：同理心关键技能：远程战斗、指挥、操控现金：D6x300 W-Y币天赋选择或投掷D3:1.战场指挥（field commander）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Frontline Leader",
+      "zh": "前线领导",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.前线领导（frontline leader）。你在为了激励濒死角色（见第68页）而进行指挥检定时，获得+2颗骰子。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Pull Rank",
+      "zh": "官大一级",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.官大一级（pull rank）。你可以使用你的指挥技能来命令其他非官员NPC，只要他们属于与你相同的组织。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Full Throttle",
+      "zh": "全速前进",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "·关键属性：敏捷·关键技能：驾驶、远程战斗、计算机科学·现金：D6x200 W-Y币天赋选择或投掷D3:1.全速前进（full throttle）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Like the Back of Your Hand",
+      "zh": "了如指掌",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.了如指掌（like the back of your hand）。你对某种特定的宇宙飞船或车辆的所有驾驶检定获得+2颗骰子。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Reckless",
+      "zh": "鲁莽",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.鲁莽（reckless）。你在进行技能检定之前压力等级+1，在追骰之前。你可以正常追骰，压力等级再+1。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Resilient",
+      "zh": "坚韧",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：力量关键技能：重型机械、耐力、近战现金：D6x100 W-Y币天赋选择或投掷D3：1.坚韧（resillient）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "fan doc misspells the English twice: 'Resllient' in the worked example, 'resillient' in the Roughneck block. Correct headword is Resilient"
+    },
+    {
+      "en": "Steady Hands",
+      "zh": "稳定的双手",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.稳定的双手（Steady hand）。如果你愿意，你可以在任何技能检定中去掉掷一或两个压力骰。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "fan doc writes 'Steady Hands' in the worked example and 'Steady hand' (singular, lowercase) in the Roughneck block"
+    },
+    {
+      "en": "True Grit",
+      "zh": "真正的勇士",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.真正的勇士（True Grit）。你可以对基于力量进行的技能检定追骰两次。每次追骰压力等级+1。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Analysis",
+      "zh": "解析",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "关键属性：智力关键技能：侦察、生存、计算机科学现金：D6x300 W-Y币天赋选择或投掷D3：1.解析（anglysis）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "fan doc misspells the English as 'anglysis'; the corerules talent is Analysis"
+    },
+    {
+      "en": "Inquisitive",
+      "zh": "保持好奇",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "2.保持好奇（inquisitive）。对基于智力的技能检定你可以追骰2次。每次追骰压力等级+1。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Xenomorphology",
+      "zh": "异形生物学",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "3.异形生物学（Xenomorphology）。当面对任何一种外星生物时，你可以进行一次侦察（快动作）检定。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Seen It All",
+      "zh": "见多识广",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "你的精神强度可以通过见多识广 (Seen ItAll)天赋来增加。你可以使用精神强度值来抵抗压力（见第44页）和恐慌（见第72页）。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "fan doc writes 'Seen ItAll' with the space in the wrong place; corerules talent is 'Seen It All'"
+    },
+    {
+      "en": "Hardened",
+      "zh": "硬汉",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch2",
+      "quote": "你的初始最大生命值等于你的（力量+敏捷）/2（向上取整），但还可以通过硬汉 (Hardened)天赋增加。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Three World Empire",
+      "zh": "三界帝国",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "三界帝国 (THE THREE WORLD EMPIRE): 由前英国、日本以及几个发展中国家组成，韦汤 (Weyland-Yutani) 公司本身是三界帝国形成的产物——三界帝国是在英国公司韦兰德公司与日本汤谷公司合并后创建的。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "the old-1e file (level 5) agrees: 三界帝国（Three World Empire，缩写3WE）"
+    },
+    {
+      "en": "United Americas",
+      "zh": "联合美洲",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "联合美洲 (THE UNITED AMERICAS)：联合美洲成立于2100s初，旨在与不断扩张的三界帝国竞争，由北美、中美和南美合并成一个国家。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 美洲联邦 for the same body — REJECT 美洲联邦, level 1 wins",
+      "confidence": "high"
+    },
+    {
+      "en": "Union of Progressive Peoples (UPP)",
+      "zh": "人类进步联盟",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "人类进步联盟(THE UNION OF PROGRESSIVE PEOPLES)：UPP 是一个强大的社会主义体系集团，控制着一个广阔但资源贫乏的太空区域。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 进步人民联盟 — REJECT, level 1 wins",
+      "confidence": "high"
+    },
+    {
+      "en": "Independent Core System Colonies (ICSC)",
+      "zh": "独立核心星系殖民地",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "独立核心星系殖民地 (THE INDEPENDENT CORE SYSTEM COLONISE) : ICSC 是一个松散的私人所有行星联盟。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "the fan doc's own English gloss misspells COLONIES as 'COLONISE'"
+    },
+    {
+      "en": "Weyland-Yutani",
+      "zh": "韦汤",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "三界帝国 (THE THREE WORLD EMPIRE): 由前英国、日本以及几个发展中国家组成，韦汤 (Weyland-Yutani) 公司本身是三界帝国形成的产物——三界帝国是在英国公司韦兰德公司与日本汤谷公司合并后创建的。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 维兰德-汤谷 — REJECT, level 1 wins",
+      "confidence": "high",
+      "note": "the fan doc uses the clipped 韦汤公司 11× in ch1 and spells the full name 韦兰德-汤谷公司 only once, at the merger"
+    },
+    {
+      "en": "Weyland-Yutani (full form)",
+      "zh": "韦兰德-汤谷公司",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "到世纪之交，公司被收购并与汤谷公司合并，组建成韦兰德-汤谷公司。2103USCSS 契约（Covenant）号任务公布，这是地球首次进行远距离、大规模的殖民行动。",
+      "inline_glossed": false,
+      "internal_conflict": "韦汤 (clipped, ×11) vs 韦兰德-汤谷 (full, ×1) — both are the fan doc's own",
+      "confidence": "high"
+    },
+    {
+      "en": "Weyland Corp / Weyland Industries",
+      "zh": "韦兰德公司",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "随着公司创始人彼得·韦兰德和首席执行官梅雷迪思·维克尔斯 (Meredith Vickers) 的去世，韦兰德公司陷入财务困境。",
+      "inline_glossed": false,
+      "internal_conflict": "韦兰德公司 and 韦兰德工业 both appear for Weyland Corp / Weyland Industries; the old-1e file (level 5) says 维兰德公司",
+      "confidence": "high"
+    },
+    {
+      "en": "Yutani Corporation",
+      "zh": "汤谷公司",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "三界帝国 (THE THREE WORLD EMPIRE): 由前英国、日本以及几个发展中国家组成，韦汤 (Weyland-Yutani) 公司本身是三界帝国形成的产物——三界帝国是在英国公司韦兰德公司与日本汤谷公司合并后创建的。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Lasalle Bionational",
+      "zh": "生物国家",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "像韦汤公司、生物国家 (BioNational) 公司和西格森 (Seegson) 公司这样的企业不受国界限制。",
+      "inline_glossed": true,
+      "internal_conflict": "the fan doc's own English gloss is 'BioNational'; the Evolved corerules name is 'Lasalle Bionational', so the fan rendering drops Lasalle",
+      "confidence": "low",
+      "note": "REJECT as a headword: 生物国家 ('bio-nation') is a calque of a truncated name"
+    },
+    {
+      "en": "Seegson",
+      "zh": "西格森",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "像韦汤公司、生物国家 (BioNational) 公司和西格森 (Seegson) 公司这样的企业不受国界限制。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Marines / USCMC",
+      "zh": "殖民海军陆战队",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "殖民海军陆战队美国殖民海军陆战队代表了有史以来最精锐的作战力量。技术先进，并装备了所有最新的军事硬件——其中大量由韦汤公司设计——殖民地海军陆战队能够在几乎任何环境下独立作战。",
+      "inline_glossed": false,
+      "internal_conflict": "殖民海军陆战队 (ch1 ×6, ch2 ×2) vs 殖民地海军陆战队 (ch1 ×2); 殖民海军陆战队 is the majority and matches the campaign-framework list",
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Navy",
+      "zh": "殖民海军",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "外环被广泛殖民，殖民海军在此活动。外环之外是未知领域——而正是这种未知的刺激吸引着先锋们。定居者们将有时法治缺失的边境比作美国的旧西部。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "⚠ 殖民海军 (Colonial Navy) and 殖民海军陆战队 (Colonial Marines) differ by two characters and the shorter is a prefix of the longer — a substring-matching hazard for any TM apply pass"
+    },
+    {
+      "en": "United Americas Outer Rim Defense Fleet",
+      "zh": "联合美洲外环防卫舰队",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "这最终导致了联合美洲外环防卫舰队的成立，以及后来的殖民海军陆战队。韦兰德公司的大卫7代系列仿生人在劳动中变得很常见。",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 later writes 联合美洲外环防卫舰队 in the careers section as 联合美洲外环防卫舰队 too; the old-1e file (level 5) says 联合美州联邦外环防系统 / 外环防御舰队",
+      "confidence": "high"
+    },
+    {
+      "en": "USCMC (untranslated acronym)",
+      "zh": "USCMC",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch2",
+      "quote": "一到年纪，你就报名加入了USCMC。工资很低，食物更糟，但你总有床铺可睡，还可以用各种武器射击各种东西。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Administration",
+      "zh": "殖民管理局",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "鬼知道为什么，但是老妈把我们的通讯发送到了HQ公司而不是殖民管理局。他们唯一的回复就是\"收到了\"。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN log line reads 'Corporate HQ, not Colonial Control'; the fan renders Colonial Control as 殖民管理局, which is the Evolved book's Colonial Administration"
+    },
+    {
+      "en": "Interstellar Commerce Commission (ICC)",
+      "zh": "星际商务委员会",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…M5 EVA手枪3.萨马尼E系列手表4.M314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物品选择或投掷D3:1.船上的猫2.推荐信3.ICC（星际商务委员会）商业飞行员执照2.11 职业：驾驶员星辰是极限，而它们无穷无尽。…",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Practitioners of the Holy Immolation",
+      "zh": "神圣焚祭信徒组织",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "近年来，一些动机可疑的新兴组织也开始出现，例如\"神圣焚祭信徒组织\"和迷信色彩浓厚的\"无瑕孕育教会\"。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Church of Immaculate Incubation",
+      "zh": "无瑕孕育教会",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "近年来，一些动机可疑的新兴组织也开始出现，例如\"神圣焚祭信徒组织\"和迷信色彩浓厚的\"无瑕孕育教会\"。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "the Earth Savers",
+      "zh": "地球守护者",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "名为地球守护者（the Earth Savers）的狂热组织多次试图破坏契约号任务，但均未成功。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 地球拯救者",
+      "confidence": "high"
+    },
+    {
+      "en": "the Frontier",
+      "zh": "边境",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.2边境 (Frontier) 的生活\"你真想在这儿住一辈子？\"\"明知故问。\"泰勒和蕾边境始于外层帷幕 (theOuter Veil)的前端，穿过已知领土的外环，并延伸至深空。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "the Outer Veil",
+      "zh": "外层帷幕",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "\"泰勒和蕾边境始于外层帷幕 (theOuter Veil)的前端，穿过已知领土的外环，并延伸至深空。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 外面纱 — REJECT, level 1 wins",
+      "confidence": "high",
+      "note": "the fan doc's own English gloss is run together as 'theOuter Veil'"
+    },
+    {
+      "en": "the Core Systems",
+      "zh": "核心星系",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "外层帷幕位于核心星系(the Core Systems)与外环 (the Outer Rim)之间，是一个矿产资源极为丰富的广阔区域。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "the Outer Rim",
+      "zh": "外环",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "外层帷幕位于核心星系(the Core Systems)与外环 (the Outer Rim)之间，是一个矿产资源极为丰富的广阔区域。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Anchorpoint",
+      "zh": "锚点",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "像锚点 (Anchorpoint)这样的空间站则作为进入深空探险的中立集结地。邻近殖民地不总是和睦相处，围绕权益和地盘的武装冲突并不罕见——通常需要殖民海军陆战队介入以恢复秩序。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Anchorpoint Station",
+      "zh": "锚点站",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "作为回应，第一个锚点站（Anchorpoint Station）在核心星系和外环之间建立，以便确保边境往返的安全通行。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Thedus",
+      "zh": "特杜斯",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在一次对特杜斯（Thedus）的维和任务中，UAS部队的运兵舰\"大天使（Archangel）\"被摧毁，造成超过一万五千人丧生。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 西德斯 — REJECT, level 1 wins",
+      "confidence": "high"
+    },
+    {
+      "en": "Torin Prime",
+      "zh": "托林主星",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2106托林主星（Torin Prime）殖民地在外环边境地区爆发内战。两年后，冲突解决，该行星重新加入联合美洲殖民地。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 托林普莱姆 (transliterated 'Prime') — REJECT, level 1's 托林主星 is correct",
+      "confidence": "high"
+    },
+    {
+      "en": "the Solomons",
+      "zh": "所罗门星系",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "航行日志006:00 USCSS 米兰达号船长 理查兹 录音米兰达号已经在锚点站完成补给，并且对接上了一个又老又破的YX-3型精炼模块，公司要求将其拖往所罗门星系。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN 'the Solomons' are seven colonised MOONS of Alpha Caeli V, not a star system; 星系 is factually loose"
+    },
+    {
+      "en": "LV-426",
+      "zh": "LV-426",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Hadley's Hope",
+      "zh": "哈德利的希望",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Fiorina 161",
+      "zh": "菲奥莉娜161",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "成员的牺牲：公开发表的关于这些事件的唯一说明只涉及菲奥莉娜161的事后情况。这本书名为《太空野兽》，是囚犯罗伯特·莫尔斯 (Robert Morse) 所谓对一个外星\"巨龙\"袭击设施并残忍杀害二十多名双Y染色体囚犯及其看护人员的描述。",
+      "inline_glossed": false,
+      "internal_conflict": "菲奥莉娜161 (ch1 ×2) vs 费奥莉娜161 (ch1 ×1); the inline-glossed instance is 费奥莉娜 but the document's own majority reading is 菲奥莉娜 — adopt 菲奥莉娜161",
+      "confidence": "high",
+      "note": "MAJORITY reading (2 of 3 hits). The one glossed instance uses the minority spelling 费奥莉娜"
+    },
+    {
+      "en": "Fiorina 161 (glossed, minority)",
+      "zh": "费奥莉娜161",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+      "inline_glossed": true,
+      "internal_conflict": "菲奥莉娜161 (ch1 ×2) vs 费奥莉娜161 (ch1 ×1); the inline-glossed instance is 费奥莉娜 but the document's own majority reading is 菲奥莉娜 — adopt 菲奥莉娜161",
+      "confidence": "high",
+      "note": "the source writes this one with a space before the number (费奥莉娜 161) while the majority spelling is closed up (菲奥莉娜161)"
+    },
+    {
+      "en": "USS Sulaco",
+      "zh": "USS萨拉科号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "USCSS Nostromo",
+      "zh": "USCSS诺斯特罗莫号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2121商业拖运飞船USCSS诺斯特罗莫（Nostromo）号从特杜斯启程前往地球。出于未知原因，诺斯特罗莫号在LV-426着陆。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "in the source the English gloss sits INSIDE the Chinese name (USCSS诺斯特罗莫（Nostromo）号); the headword here is the reconstructed clean form"
+    },
+    {
+      "en": "USCSS Prometheus",
+      "zh": "USCSS普罗米修斯号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2091韦兰德公司发射了臭名昭著的USCSS普罗米修斯 (Prometheus) 号，执行\"寻找人类起源\"的任务。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "in the source the English gloss sits INSIDE the Chinese name (USCSS普罗米修斯 (Prometheus) 号); the headword here is the reconstructed clean form"
+    },
+    {
+      "en": "USCSS Covenant",
+      "zh": "USCSS 契约号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2103USCSS 契约（Covenant）号任务公布，这是地球首次进行远距离、大规模的殖民行动。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "in the source the English gloss sits INSIDE the Chinese name (USCSS 契约（Covenant）号); the headword here is the reconstructed clean form"
+    },
+    {
+      "en": "USCSS Miranda",
+      "zh": "USCSS 米兰达号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "航行日志006:00 USCSS 米兰达号船长 理查兹 录音米兰达号已经在锚点站完成补给，并且对接上了一个又老又破的YX-3型精炼模块，公司要求将其拖往所罗门星系。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "the ship of the ch1 voyage-log framing device; the EN corerules worked examples use the same ship"
+    },
+    {
+      "en": "the Heliades",
+      "zh": "希利亚德号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "随着超光速飞行成为现实，韦兰德公司发射了第一艘超光速太空探测船 (FTL Space Exploration vessel)——希利亚德号 (the Heliades)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "the Evolved rulebook says 'a Heliades class Space Exploration Vehicle' — a CLASS. The fan doc names it as a single ship (号). Check before adopting 号"
+    },
+    {
+      "en": "UAS Archangel",
+      "zh": "大天使号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在一次对特杜斯（Thedus）的维和任务中，UAS部队的运兵舰\"大天使（Archangel）\"被摧毁，造成超过一万五千人丧生。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) writes UAS大天使号",
+      "confidence": "high",
+      "note": "in the source the English gloss sits INSIDE the quoted Chinese name 「大天使（Archangel）」; the headword here is the reconstructed clean form"
+    },
+    {
+      "en": "Sevastopol Station",
+      "zh": "塞瓦斯托波尔站",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2137诺斯特罗莫号的飞行记录仪被打捞并送往塞瓦斯托波尔站（Sevastopol Station)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "matches the Alien: Isolation official 简中 lineage (level 3)"
+    },
+    {
+      "en": "Mendel Station",
+      "zh": "门德尔站",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "位于外环的门德尔站（Mendel Station）也消失了。三年后，与西格森站（Seegson Station）LV 44-40 以及赖特-阿贝拉中转站（Wright-Aberra Waystation）的联系也中断。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Seegson Station LV 44-40",
+      "zh": "西格森站",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "三年后，与西格森站（Seegson Station）LV 44-40 以及赖特-阿贝拉中转站（Wright-Aberra Waystation）的联系也中断。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Wright-Aberra Waystation",
+      "zh": "赖特-阿贝拉中转站",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "三年后，与西格森站（Seegson Station）LV 44-40 以及赖特-阿贝拉中转站（Wright-Aberra Waystation）的联系也中断。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "no hit for 'Wright-Aberra' anywhere in the Evolved corerules dump — this name comes from the printed timeline only"
+    },
+    {
+      "en": "8 Eta Bootis A III",
+      "zh": "牧夫座伊塔8 A3",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在边境世界牧夫座伊塔8 A3（8 Eta Boötis A Ⅲ）上，联合美洲与人类进步联盟之间爆发了天津战役（The Tientsin Campaign)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "word order is mangled — the '8' belongs in front (8 牧夫座η A III). Also mixes Arabic '3' in the Chinese with Roman 'Ⅲ' in the gloss"
+    },
+    {
+      "en": "The Tientsin Campaign",
+      "zh": "天津战役",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在边境世界牧夫座伊塔8 A3（8 Eta Boötis A Ⅲ）上，联合美洲与人类进步联盟之间爆发了天津战役（The Tientsin Campaign)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "correct: Tientsin is the Wade-Giles form of 天津"
+    },
+    {
+      "en": "HR-2429",
+      "zh": "HR-2429星系",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "现在她锁定了我们的航向，朝着HR-2429星系。1.6游戏模式异形角色扮演游戏可以以两种不同的模式进行：电影模式和战役模式。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Origae-6",
+      "zh": "Origae-6",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "契约号成功从地球轨道发射，搭载2000多名殖民者和胚胎，前往远方第87区的行星Origae-6。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "left in Latin letters by the fan translator; 'Sector 87' becomes 第87区"
+    },
+    {
+      "en": "Luna",
+      "zh": "露娜",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "2031对地球的月球露娜进行地形改造作业。随着超光速飞行成为现实，韦兰德公司发射了第一艘超光速太空探测船 (FTL Space Exploration vessel)——希利亚德号 (the Heliades)。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "transliteration where 月球 is already used in the same clause; the Evolved corerules call it LUNA, humanity's first off-world colony"
+    },
+    {
+      "en": "Sevastopol / KG348",
+      "zh": "行星KG348",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "该站随后被摧毁，并坠入行星KG348 的大气层。位于外环的门德尔站（Mendel Station）也消失了。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "GJ667CC",
+      "zh": "系外行星GJ667CC",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "韦兰德工业成功在系外行星GJ667CC上创造了可呼吸的大气，为人类播撒星辰打开了潘多拉的盒子。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "HD85512 B",
+      "zh": "HD85512 B",
+      "tier_hint": "T-FROZEN",
+      "chapter": "ch1",
+      "quote": "2042HD85512 B，地球的第一个球外监狱，由韦兰德公司建立。来自地球监狱的囚犯被转移到那里。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "'球外监狱' is a calque of 'off-world prison'; 地外/外星 would be the idiomatic choice"
+    },
+    {
+      "en": "Space Beast (banned book)",
+      "zh": "《太空野兽》",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "这本书名为《太空野兽》，是囚犯罗伯特·莫尔斯 (Robert Morse) 所谓对一个外星\"巨龙\"袭击设施并残忍杀害二十多名双Y染色体囚犯及其看护人员的描述。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Robert Morse",
+      "zh": "罗伯特·莫尔斯",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "这本书名为《太空野兽》，是囚犯罗伯特·莫尔斯 (Robert Morse) 所谓对一个外星\"巨龙\"袭击设施并残忍杀害二十多名双Y染色体囚犯及其看护人员的描述。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Peter Weyland",
+      "zh": "彼得·韦兰德",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "1.3 时间线2023在彼得·韦兰德 (Peter Weyland) 2023年臭名昭著的TED演讲之后，韦兰德工业开始开发将人类推进未来的新技术。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 彼得·维兰德爵士 — REJECT, level 1 wins",
+      "confidence": "high"
+    },
+    {
+      "en": "Meredith Vickers",
+      "zh": "梅雷迪思·维克尔斯",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "随着公司创始人彼得·韦兰德和首席执行官梅雷迪思·维克尔斯 (Meredith Vickers) 的去世，韦兰德公司陷入财务困境。",
+      "inline_glossed": true,
+      "internal_conflict": "the old-1e file (level 5) says 梅雷迪斯·维克斯 — REJECT, level 1 wins",
+      "confidence": "high"
+    },
+    {
+      "en": "David (android series)",
+      "zh": "大卫",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "韦兰德生产了第一代大卫 (David) 系列机器人 (androids)。2031对地球的月球露娜进行地形改造作业。",
+      "inline_glossed": true,
+      "internal_conflict": "机器人 (ch1 ×1 glossed 'androids', ch2 ×18) vs 仿生人 (ch1 ×1, 'David 7 series') vs 合成人 (ch1 ×1 'synthetic people', ch2 ×1 'Synthetic characters'); the document's dominant reading is 机器人=Android and 合成人=Synthetic, with 仿生人 a one-off stray",
+      "confidence": "high"
+    },
+    {
+      "en": "FTL drive",
+      "zh": "超光速引擎",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "正在开发的项目包括先进的人工智能、超光速引擎 (FTL drives)、大气处理器用于改造不宜居住的世界，以及深度睡眠舱 (hypersleep pods)。",
+      "inline_glossed": true,
+      "internal_conflict": "ch1 careers section says 超光速驱动器 ('新型更快速的超光速驱动器的出现') for the same device",
+      "confidence": "high"
+    },
+    {
+      "en": "FTL travel",
+      "zh": "超光速飞行",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "随着超光速飞行成为现实，韦兰德公司发射了第一艘超光速太空探测船 (FTL Space Exploration vessel)——希利亚德号 (the Heliades)。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "hypersleep pod",
+      "zh": "深度睡眠舱",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "正在开发的项目包括先进的人工智能、超光速引擎 (FTL drives)、大气处理器用于改造不宜居住的世界，以及深度睡眠舱 (hypersleep pods)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "hypersleep / stasis",
+      "zh": "深度睡眠",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "航行日志015:09 USCSS米兰达号船长 理查兹 录音我们定好了014：30开始超光速飞行，正在准备进入深度睡眠。",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 also uses 休眠 ('不必在休眠状态中花费太多时间', '补偿他们在休眠中失去的时间') and 冷冻 ('没有他我们没法进行冷冻') for the same state",
+      "confidence": "high",
+      "note": "⚠ three renderings of hypersleep/stasis inside ch1 alone: 深度睡眠 / 休眠 / 冷冻"
+    },
+    {
+      "en": "atmospheric processor",
+      "zh": "大气处理器",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "在许多星球上，引进了大气处理器 (atmospheric processors)将空气转换成勉强可呼吸的状态。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "the crude first-pass regex captured '引进了大气处理器'; the noun is 大气处理器"
+    },
+    {
+      "en": "terraforming",
+      "zh": "地形改造",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "2031对地球的月球露娜进行地形改造作业。随着超光速飞行成为现实，韦兰德公司发射了第一艘超光速太空探测船 (FTL Space Exploration vessel)——希利亚德号 (the Heliades)。",
+      "inline_glossed": false,
+      "internal_conflict": "ch1 timeline also says 地球化 ('哈德利的希望的地球化殖民地在LV-426上建立') for the same process",
+      "confidence": "high"
+    },
+    {
+      "en": "EEV (Emergency Escape Vehicle)",
+      "zh": "逃生舱",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "我们在逃生舱 (EEV)舱门区建立了防御屏障，但是老妈不肯帮我们锁上门。内特在尝试越过系统发射逃生舱，只有这样我们才能离开这里——上帝啊，它就在这儿······[传输结束]",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "airlock",
+      "zh": "气闸",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "关闭你的风暴百叶窗并封住气闸——外面可能有外星生物，就藏在黑暗中。它在等你。真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Xenomorph / the Alien",
+      "zh": "异形",
+      "tier_hint": "T-EXACT",
+      "chapter": "ch1",
+      "quote": "从新变种到异形生物，这些生物所围绕的神秘感令人着迷。异形代表了我们对自然世界未知的一切。它唤起了对身体被侵犯和利用的恐惧。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "matches the settled project decision Xenomorph = 异形"
+    },
+    {
+      "en": "Neomorph",
+      "zh": "新变种",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "从新变种到异形生物，这些生物所围绕的神秘感令人着迷。异形代表了我们对自然世界未知的一切。它唤起了对身体被侵犯和利用的恐惧。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "corerules has a Neomorph creature and 'EV - Neomorph Attacks' table; 新变种 is a semantic rendering, not the usual 新形态"
+    },
+    {
+      "en": "alien (adjective) / extraterrestrial",
+      "zh": "外星",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "外星生命。这是《异形》角色扮演游戏——一个充满身体恐怖和公司角力的宇宙，合成人扮演上帝，而太空卡车司机和海军陆战队员则成为新生怪异生物的宿主。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "matches the settled project decision alien(adj) = 外星; the doc keeps 外星生命 / 外星生物 distinct from 异形"
+    },
+    {
+      "en": "dropship",
+      "zh": "着陆舰",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "从星际战机到着陆舰，从货船到护卫舰，总有一些东西需要飞行——还有一些只有你能完成的飞行特技。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "EN 'From starfighters to dropships, freighters to frigates'. 着陆舰 is idiosyncratic; the known-bad CnSCG lineage erases dropship entirely, so this at least renders it"
+    },
+    {
+      "en": "starfighter",
+      "zh": "星际战机",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "从星际战机到着陆舰，从货船到护卫舰，总有一些东西需要飞行——还有一些只有你能完成的飞行特技。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium"
+    },
+    {
+      "en": "frigate",
+      "zh": "护卫舰",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "从星际战机到着陆舰，从货船到护卫舰，总有一些东西需要飞行——还有一些只有你能完成的飞行特技。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "MedPod",
+      "zh": "医疗舱",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "如果有人能够坚持到达到医疗舱，你的工作就算完成了。你曾经对边境医学抱有利他主义，但你已经见得太多而变得心灰意冷。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium"
+    },
+    {
+      "en": "space trucker",
+      "zh": "太空卡车司机",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "1.4边境的职业太空卡车司机虽然这个领域不像五十年前那么赚钱，但在地球与殖民地之间运输炼油厂和货物仍然是大生意。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "colonist",
+      "zh": "殖民者",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "殖民者是人类的生命之血。公司代表在边境，企业的权力甚至超过政府。它们拥有行星，建立工厂，并引入殖民者，创造居所和就业机会。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "M41A Pulse Rifle",
+      "zh": "M41A脉冲步枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.平头2.手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "M56A2 Smart Gun",
+      "zh": "M56A2智能炮",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.平头2.手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "AVOIDS the known-bad CnSCG rendering smart gun→机关枪"
+    },
+    {
+      "en": "M314 Motion Tracker",
+      "zh": "M314运动追踪器",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.平头2.手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "ch2 prose spaces it as 'M314 运动追踪器'; the gear tables close it up as 'M314运动追踪器'"
+    },
+    {
+      "en": "G2 Electroshock Grenade",
+      "zh": "G2电击手榴弹",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…2次D6：1.平头2.手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "IRC Mk.35 Pressure Suit",
+      "zh": "IRC MK.35压力服",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：殖民地执法官边境可能是…",
+      "inline_glossed": false,
+      "internal_conflict": "IRC MK.35 'Pressure Suit' and IRC MK.50 'Compression Suit' are BOTH rendered 压力服 — two distinct armor items in corerules.json collapse to one Chinese string",
+      "confidence": "high"
+    },
+    {
+      "en": "IRC Mk.50 Compression Suit",
+      "zh": "IRC MK.50压力服",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.同情的微笑2.眼下有黑眼圈3.平静温柔的声音4.冰冷无情的目光5.眼镜6.白大褂（干净的或脏的）装备选择2项或投掷2次D6：1.外科手术包2.IRC MK.50 压力服3.D6剂镇痛剂4.D6剂不眠药5.个人医疗包6.萨马尼E系列手表标志性物品选择或投掷D3：1.装裱好的医生证明2.儿子或女儿的信3.最近的…",
+      "inline_glossed": false,
+      "internal_conflict": "IRC MK.35 'Pressure Suit' and IRC MK.50 'Compression Suit' are BOTH rendered 压力服 — two distinct armor items in corerules.json collapse to one Chinese string",
+      "confidence": "medium",
+      "note": "should be 加压服/抗压服 to keep it distinct from the Mk.35 Pressure Suit"
+    },
+    {
+      "en": "M3 Personnel Armor",
+      "zh": "M3单兵防弹衣",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：殖民地执法官边境可能是一个无法无天的地方。…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": ".357 Magnum Revolver",
+      "zh": ".357马格南左轮手枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1. 嘴里叼着烟2. 令人印象深刻的胡子3. 憔悴且未刮胡子4. 灰白的头发5. 探究的目光6. 旧皮夹克装备选择2项或投掷2次D6：1. .357马格南左轮手枪2. 军用型37A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. …",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Armat Model 37A2 12-Gauge Pump-Action",
+      "zh": "军用型37A2 12号口径霰弹枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…次D6：1. 嘴里叼着烟2. 令人印象深刻的胡子3. 憔悴且未刮胡子4. 灰白的头发5. 探究的目光6. 旧皮夹克装备选择2项或投掷2次D6：1. .357马格南左轮手枪2. 军用型37A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "ERROR: 'Armat' is the manufacturer's name, not the adjective 'armed/military'. 军用型 is a mistranslation — should transliterate Armat (阿玛特)"
+    },
+    {
+      "en": "Watatsumi DV-303 Bolt Gun",
+      "zh": "海神DV-303栓动枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…貌选择2项或投掷2次D6：1.文身2.大声的笑3.布满淤伤和茧的手4.眼睛隐藏在护目镜后面5.走路时咣当作响的肮脏靴子6.狂野的头发装备选择2项或投掷2次D6：1.切割炬2.海神DV-303栓动枪3.D6剂8号药剂4.维修千斤顶5.IRC MK.50压力服6.强光手电筒标志性物品选择或投掷D3：1.工具腰带2.伴侣的照片3.十字架或其他宗…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "Watatsumi is the Japanese sea deity; the fan translator rendered it semantically as 海神 instead of transliterating a corporate name. corerules spells it both 'Watatsumi' and 'Watsumi'"
+    },
+    {
+      "en": "Rexim RXF-M5 EVA Pistol",
+      "zh": "雷克希姆RXF-M5 EVA手枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…:1.平头发型或扎起来的头发2.严肃、专注的表情3.干净整洁的制服4.僵硬的身体姿态5.令人放松、舒缓的声音6.焦急地跺脚装备选择2项或投掷2次D6:1.M4A3制式手枪2.雷克希姆RXF-M5 EVA手枪3.萨马尼E系列手表4.M314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物品选择或投掷D3:1…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "M4A3 Service Pistol",
+      "zh": "M4A3制式手枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…择2项或投掷2次D6:1.平头发型或扎起来的头发2.严肃、专注的表情3.干净整洁的制服4.僵硬的身体姿态5.令人放松、舒缓的声音6.焦急地跺脚装备选择2项或投掷2次D6:1.M4A3制式手枪2.雷克希姆RXF-M5 EVA手枪3.萨马尼E系列手表4.M314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "VP-70MA6 Service Pistol",
+      "zh": "VP-70MA6制式手枪",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Stun baton",
+      "zh": "电棍",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…. 灰白的头发5. 探究的目光6. 旧皮夹克装备选择2项或投掷2次D6：1. .357马格南左轮手枪2. 军用型37A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3. 破旧的帽子2.7 职业：公司代理人你很饥渴。…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Hi-beam flashlight",
+      "zh": "强光手电筒",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…深刻的胡子3. 憔悴且未刮胡子4. 灰白的头发5. 探究的目光6. 旧皮夹克装备选择2项或投掷2次D6：1. .357马格南左轮手枪2. 军用型37A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3. 破旧的帽子2.7 职业：公司代理人…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Personal medkit",
+      "zh": "个人医疗包",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…憔悴且未刮胡子4. 灰白的头发5. 探究的目光6. 旧皮夹克装备选择2项或投掷2次D6：1. .357马格南左轮手枪2. 军用型37A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3. 破旧的帽子2.7 职业：公司代理人你很饥渴。…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Surgical kit",
+      "zh": "外科手术包",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.同情的微笑2.眼下有黑眼圈3.平静温柔的声音4.冰冷无情的目光5.眼镜6.白大褂（干净的或脏的）装备选择2项或投掷2次D6：1.外科手术包2.IRC MK.50 压力服3.D6剂镇痛剂4.D6剂不眠药5.个人医疗包6.萨马尼E系列手表标志性物品选择或投掷D3：1.装裱好的医生证明2.儿子或女儿的信3.最近的…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Maintenance jack",
+      "zh": "维修千斤顶",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…6:1.傲慢的步伐2.钢蓝色的眼镜3.多口袋飞行服4.太阳镜5.冷冷的表情6.口香糖装备选择2项或投掷2次D6:1.M4A3制式手枪2.PR-PUT上行终端3.手持无线电4.维修千斤顶5.西格森系统诊断设备6.IRC MK.50压力服标志性物品选择或投掷D3：1.仪表盘点头小玩偶2.飞行日志3.飞行墨镜2.12 职业：杂工总有人得在边境地…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Cutting torch",
+      "zh": "切割炬",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.文身2.大声的笑3.布满淤伤和茧的手4.眼睛隐藏在护目镜后面5.走路时咣当作响的肮脏靴子6.狂野的头发装备选择2项或投掷2次D6：1.切割炬2.海神DV-303栓动枪3.D6剂8号药剂4.维修千斤顶5.IRC MK.50压力服6.强光手电筒标志性物品选择或投掷D3：1.工具腰带2.伴侣的照片3.十字架或其他…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Comm unit",
+      "zh": "通信单元",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Hand radio",
+      "zh": "手持无线电",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…项或投掷2次D6:1.傲慢的步伐2.钢蓝色的眼镜3.多口袋飞行服4.太阳镜5.冷冷的表情6.口香糖装备选择2项或投掷2次D6:1.M4A3制式手枪2.PR-PUT上行终端3.手持无线电4.维修千斤顶5.西格森系统诊断设备6.IRC MK.50压力服标志性物品选择或投掷D3：1.仪表盘点头小玩偶2.飞行日志3.飞行墨镜2.12 职业：杂工总…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Samani E-Series Watch",
+      "zh": "萨马尼E系列手表",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Seegson P-DAT",
+      "zh": "西格森个人数据平板",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…音6.焦急地跺脚装备选择2项或投掷2次D6:1.M4A3制式手枪2.雷克希姆RXF-M5 EVA手枪3.萨马尼E系列手表4.M314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物品选择或投掷D3:1.船上的猫2.推荐信3.ICC（星际商务委员会）商业飞行员执照2.11 职业：驾驶员星辰是极限，而它们无穷…",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Seegson System Diagnostic Device",
+      "zh": "西格森系统诊断设备",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…步伐2.钢蓝色的眼镜3.多口袋飞行服4.太阳镜5.冷冷的表情6.口香糖装备选择2项或投掷2次D6:1.M4A3制式手枪2.PR-PUT上行终端3.手持无线电4.维修千斤顶5.西格森系统诊断设备6.IRC MK.50压力服标志性物品选择或投掷D3：1.仪表盘点头小玩偶2.飞行日志3.飞行墨镜2.12 职业：杂工总有人得在边境地区做体力劳动，…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "PR-PUT Uplink Terminal",
+      "zh": "PR-PUT上行终端",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6:1.傲慢的步伐2.钢蓝色的眼镜3.多口袋飞行服4.太阳镜5.冷冷的表情6.口香糖装备选择2项或投掷2次D6:1.M4A3制式手枪2.PR-PUT上行终端3.手持无线电4.维修千斤顶5.西格森系统诊断设备6.IRC MK.50压力服标志性物品选择或投掷D3：1.仪表盘点头小玩偶2.飞行日志3.飞行墨镜2.12 职…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Personal Data Transmitter",
+      "zh": "个人数据传输器",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…张的举止4.若有所思的眼神5.说话前会清嗓6.疲惫过度、布满血丝的眼睛装备选择2项或投掷2次D6：1.数字摄像机2.西格森个人数据平板（P-DAT）3.西格森系统诊断设备4.个人数据传输器5.M314运动追踪器6.个人医疗包标志性物品选择或投掷D3：1.阿尔伯特爱因斯坦奖2.未完成的科学论文3.勒索信…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Data transmitter card with corporate clearance",
+      "zh": "具有公司许可级别的数据传输卡",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Digital video camera",
+      "zh": "数字摄像机",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…选择2项或投掷2次D6：1.凌乱、不整洁的外表2.沾有污渍的实验服3.紧张的举止4.若有所思的眼神5.说话前会清嗓6.疲惫过度、布满血丝的眼睛装备选择2项或投掷2次D6：1.数字摄像机2.西格森个人数据平板（P-DAT）3.西格森系统诊断设备4.个人数据传输器5.M314运动追踪器6.个人医疗包标志性物品选择或投掷D3：1.阿尔伯特爱因斯…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Personal locator beacon",
+      "zh": "个人定位装置",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…2次D6：1.邋里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成千上万种死法，从暴…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Leather briefcase",
+      "zh": "皮革公文包",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Naproleve",
+      "zh": "镇痛剂",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "装备选择2项或投掷2次D6：1.皮革公文包2.通信单元3.萨马尼E系列手表4.具有公司许可级别的数据传输卡5.VP-70MA6制式手枪6.D6剂镇痛剂标志性物品选择或投掷D3：1.个性化名片2.劳力士手表3.镀金笔2.8 职业：儿童你并没有选择边境生活——是你的父母把你带到这个世界上，你出生时哭闹不休。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "Naproleve is a brand name in the corerules gear list; 镇痛剂 renders it as the generic category 'analgesic', losing the name"
+    },
+    {
+      "en": "Neversleep pills",
+      "zh": "不眠药",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…眼下有黑眼圈3.平静温柔的声音4.冰冷无情的目光5.眼镜6.白大褂（干净的或脏的）装备选择2项或投掷2次D6：1.外科手术包2.IRC MK.50 压力服3.D6剂镇痛剂4.D6剂不眠药5.个人医疗包6.萨马尼E系列手表标志性物品选择或投掷D3：1.装裱好的医生证明2.儿子或女儿的信3.最近的心理评估：\"一切正常\"2.10 职业：飞行官当…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium"
+    },
+    {
+      "en": "Hydr8tion",
+      "zh": "8号药剂",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…1.文身2.大声的笑3.布满淤伤和茧的手4.眼睛隐藏在护目镜后面5.走路时咣当作响的肮脏靴子6.狂野的头发装备选择2项或投掷2次D6：1.切割炬2.海神DV-303栓动枪3.D6剂8号药剂4.维修千斤顶5.IRC MK.50压力服6.强光手电筒标志性物品选择或投掷D3：1.工具腰带2.伴侣的照片3.十字架或其他宗教符号2.13 职业：科学…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "ERROR: 'Hydr8tion' is leetspeak for 'hydration'. The fan translator parsed the embedded 8 as a product number and produced '8号药剂' ('agent no. 8')"
+    },
+    {
+      "en": "Aspen beer",
+      "zh": "阿斯彭啤酒",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "要是能有一罐阿斯彭啤酒（Aspen beer）和一些独处时间，我会很高兴。\"朋友&敌人：内特团队里的其他人分别是飞行官查里兹、驾驶员杰弗里斯、她的丈夫，也是杂工的里德、以及医务官海斯。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Souta Dry",
+      "zh": "索塔干啤",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "如果你能拿到一罐阿斯彭啤酒（或者甚至是索塔干啤（Souta Dry），除非万不得已）和一些独处时间，你就会很开心。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Laser pointer",
+      "zh": "激光笔",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.邋里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Radio-controlled car",
+      "zh": "遥控车",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.邋里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Yo-yo",
+      "zh": "溜溜球",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "外貌选择2项或投掷2次D6：1.邋里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Electronic handheld game",
+      "zh": "掌上游戏机",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…选择2项或投掷2次D6：1.邋里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成千上…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Coloring pens",
+      "zh": "彩笔",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch2",
+      "quote": "…里邋遢2.时尚发光运动鞋3.有乐队logo的T恤4.马尾辫5.无聊的表情6.棒球帽装备选择2项或投掷2次D6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成千上万种死法，从暴露在真空或未知的…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "ICC Commercial Flight Officer license",
+      "zh": "ICC商业飞行员执照",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…M5 EVA手枪3.萨马尼E系列手表4.M314运动追踪器5.IRC MK.50压力服6.西格森个人数据平板（P-DAT）标志性物品选择或投掷D3:1.船上的猫2.推荐信3.ICC（星际商务委员会）商业飞行员执照2.11 职业：驾驶员星辰是极限，而它们无穷无尽。…",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "in the source the ICC expansion （星际商务委员会） is spliced into the middle of the item name; the headword here is the clean form"
+    },
+    {
+      "en": "Albert Einstein Award",
+      "zh": "阿尔伯特爱因斯坦奖",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch2",
+      "quote": "…项或投掷2次D6：1.数字摄像机2.西格森个人数据平板（P-DAT）3.西格森系统诊断设备4.个人数据传输器5.M314运动追踪器6.个人医疗包标志性物品选择或投掷D3：1.阿尔伯特爱因斯坦奖2.未完成的科学论文3.勒索信…",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high",
+      "note": "the fan doc omits the interpunct: 阿尔伯特爱因斯坦, not 阿尔伯特·爱因斯坦"
+    },
+    {
+      "en": "Rapture Protocol",
+      "zh": "《狂喜协议》",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "一部三幕完整的电影冒险《狂喜协议》(Rapture Protocol)可以单独购买。在单独发售的《希望的最后一天入门套装》(Hope's Last Day Starter Set)中可以获得电影玩法的快速体验，《德拉科尼斯传奇》三部曲(the Draconis Saga trilogy)是为《异形》RPG第一版出版的(但与本进化版兼容)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Hope's Last Day Starter Set",
+      "zh": "《希望的最后一天入门套装》",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在单独发售的《希望的最后一天入门套装》(Hope's Last Day Starter Set)中可以获得电影玩法的快速体验，《德拉科尼斯传奇》三部曲(the Draconis Saga trilogy)是为《异形》RPG第一版出版的(但与本进化版兼容)。",
+      "inline_glossed": true,
+      "internal_conflict": "ch2 expands the same title to 《哈德利的希望的最后一天入门套装》, importing 'Hadley' that the English title does not have",
+      "confidence": "high"
+    },
+    {
+      "en": "the Draconis Saga trilogy",
+      "zh": "《德拉科尼斯传奇》三部曲",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "在单独发售的《希望的最后一天入门套装》(Hope's Last Day Starter Set)中可以获得电影玩法的快速体验，《德拉科尼斯传奇》三部曲(the Draconis Saga trilogy)是为《异形》RPG第一版出版的(但与本进化版兼容)。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Colonial Marines Operations Guide",
+      "zh": "《殖民海军行动指南》",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "两本用于战役玩法的扩展资料书——《殖民海军行动指南》(the Colonial Marines Operations Guide)和《建造更美好世界》(Building Better Worlds)——已经为《异形》角色扮演游戏第一版出版，并且与进化版兼容。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "EN is Colonial MARINES; 殖民海军 is the Colonial NAVY. Should be 《殖民海军陆战队行动指南》"
+    },
+    {
+      "en": "Building Better Worlds",
+      "zh": "《建造更美好世界》",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "两本用于战役玩法的扩展资料书——《殖民海军行动指南》(the Colonial Marines Operations Guide)和《建造更美好世界》(Building Better Worlds)——已经为《异形》角色扮演游戏第一版出版，并且与进化版兼容。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "ALIEN roleplaying game",
+      "zh": "《异形》角色扮演游戏",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "ch1",
+      "quote": "这是《异形》角色扮演游戏——一个充满身体恐怖和公司角力的宇宙，合成人扮演上帝，而太空卡车司机和海军陆战队员则成为新生怪异生物的宿主。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Evolved Edition",
+      "zh": "进化版",
+      "tier_hint": "T-PLAIN",
+      "chapter": "ch1",
+      "quote": "进化版这是《异形》角色扮演游戏的进化版。多年来，数千名玩家游玩这款游戏的经验被深度采纳，以进一步增强和简化游戏。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "high"
+    },
+    {
+      "en": "Weyland-Yutani (1e file)",
+      "zh": "维兰德-汤谷",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "维兰德-汤谷，阿尔法科技（AlphaTech）和新科莫·格兰特公司（Newcomer Grant Corp），各大公司在军事上投入了大量资金，因此可以在这个参议员或那个上校讨价还价。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 韦汤 / 韦兰德-汤谷",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "United Americas (1e file)",
+      "zh": "美洲联邦",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "在联合国会议组织首脑会议上，美国、拉丁美洲和加拿大宣布有意离开联合国，组成一个名为美洲联邦的超级集团。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 联合美洲",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Union of Progressive Peoples (1e file)",
+      "zh": "进步人民联盟",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "欧盟因为三界帝国而解散，随着欧盟剩下的部分，如德国和西班牙加入了俄罗斯，建立了一个新的超级大国——社会主义国家，进步人民联盟(Union of Progressive Peoples ，简称UPP)。",
+      "inline_glossed": true,
+      "internal_conflict": "conflicts with level-1 人类进步联盟",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Three World Empire (1e file)",
+      "zh": "三界帝国",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "主要成员国包括欧盟、美国、俄罗斯、印度、拉丁美洲、中部非洲联盟和日本——直到金融巨头维兰德公司和汤谷公司背后支持将英国、日本、火星、泰坦星组合成了三界帝国（Three World Empire，缩写3WE）——一个由企业建立的星际集团国家，然后，三界帝国挑走了联合国星际部队中的一些关键力量。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence. Agrees with level 1, so it corroborates rather than conflicts."
+    },
+    {
+      "en": "Outer Veil (1e file)",
+      "zh": "外面纱",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "由于需要一支经过训练的常备战斗部队来保护外面纱边缘的新系外行星，美国军队形成了一个新的军事分支：美国殖民海军陆战队集团军(USCMC)。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 外层帷幕",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Thedus (1e file)",
+      "zh": "西德斯",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "贾哈尔叛军顾问利用破坏通往托林普莱姆殖民地的军事补给线所造成的混乱，在西德斯引发了一场大规模的劳资纠纷。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 特杜斯",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Torin Prime (1e file)",
+      "zh": "托林普莱姆",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "随着新的殖民法的生效，巴拉圭人的殖民地托林普莱姆抵制了三个美洲国家的大统一。那里的贾哈尔叛军发布了一份恐怖宣言，并设法接管了地球上大部分主要的能源生产设施。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 托林主星",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "USCMC (1e file)",
+      "zh": "美国殖民海军陆战队集团军",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "由于需要一支经过训练的常备战斗部队来保护外面纱边缘的新系外行星，美国军队形成了一个新的军事分支：美国殖民海军陆战队集团军(USCMC)。",
+      "inline_glossed": true,
+      "internal_conflict": "the same file also writes 美国殖民地陆战队集团军 and 美国殖民地陆战队大连 (a garbled 大队); conflicts with level-1 殖民海军陆战队",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Meredith Vickers (1e file)",
+      "zh": "梅雷迪斯·维克斯",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "到2090年代中期，公司宣布彼得·维兰德爵士和首席执行官梅雷迪斯·维克斯与命运不佳的普罗米修斯项目一起失踪。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 梅雷迪思·维克尔斯",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Peter Weyland (1e file)",
+      "zh": "彼得·维兰德爵士",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "21世纪的许多创新都来自一个人的愿景-彼得·维兰德爵士。他的维兰德公司找到了宜居的世界，让我们比光速更快地到达那里，让我们一路上休眠，让我们目的地的空气可以呼吸，并为我们提供人工生命，帮助我们把风险最小化并实现我们的目标。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 彼得·韦兰德",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Earth Savers (1e file)",
+      "zh": "地球拯救者",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "在几起事件之后，这个狂热的“地球拯救者”——一个致力于迫使殖民外太空的人类返回地球的组织正式被联邦调查局列为恐怖组织。",
+      "inline_glossed": false,
+      "internal_conflict": "conflicts with level-1 地球守护者",
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "UAS Archangel (1e file)",
+      "zh": "UAS大天使号",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "在托林普莱姆殖民地事发之后，运兵船UAS大天使号在执行维和任务时被摧毁。超过一万五千名军人和平民丧生。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "medium",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence. Adds the 号 that level 1 omits."
+    },
+    {
+      "en": "AlphaTech (1e file)",
+      "zh": "阿尔法科技",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "维兰德-汤谷，阿尔法科技（AlphaTech）和新科莫·格兰特公司（Newcomer Grant Corp），各大公司在军事上投入了大量资金，因此可以在这个参议员或那个上校讨价还价。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "Newcomer Grant Corp (1e file)",
+      "zh": "新科莫·格兰特公司",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "维兰德-汤谷，阿尔法科技（AlphaTech）和新科莫·格兰特公司（Newcomer Grant Corp），各大公司在军事上投入了大量资金，因此可以在这个参议员或那个上校讨价还价。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "UNIC / UN Interstellar Corps (1e file)",
+      "zh": "联合国行星际部队",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "而联合国重生为联合国行星际部队(UNIC)。主要成员国包括欧盟、美国、俄罗斯、印度、拉丁美洲、中部非洲联盟和日本——直到金融巨头维兰德公司和汤谷公司背后支持将英国、日本、火星、泰坦星组合成了三界帝国（Three World Empire，缩写3WE）——一个由企业建立的星际集团国家，然后，三界帝国挑走了联合国星际部队中的一些关键力量。",
+      "inline_glossed": true,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "CANC (1e file)",
+      "zh": "中国/亚洲国家合作组织",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "作为回应，中国成立了中国/亚洲国家合作组织(Chinese/Asian Nations Cooperative，缩写CANC),他们自己的太阳系外殖民地国家级联盟——进一步削弱了联合国星际部队。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence."
+    },
+    {
+      "en": "J'Har rebels (1e file)",
+      "zh": "贾哈尔叛军",
+      "tier_hint": "T-BILINGUAL",
+      "chapter": "old1e",
+      "quote": "那里的贾哈尔叛军发布了一份恐怖宣言，并设法接管了地球上大部分主要的能源生产设施。所有美州联邦的支持者都被围捕并关押在集中营，集中营也是贾哈尔叛军的总部，集中营基本上就是保护叛军领导层的人肉盾牌。",
+      "inline_glossed": false,
+      "internal_conflict": null,
+      "confidence": "low",
+      "note": "⚠ LEVEL 5 ONLY — this file's own filename says 这是旧版的 非新版Evolved (1st-edition material). Do NOT count it as level-1 evidence. The Evolved corerules do carry 'J'Har rebels' (Torin Prime, 2106 uprising), so the referent is real even though the file is 1e."
+    }
+  ],
+  "internal_inconsistencies": [
+    {
+      "id": "fiorina",
+      "term": "Fiorina 161",
+      "readings": [
+        "菲奥莉娜161 (ch1 ×2)",
+        "费奥莉娜161 (ch1 ×1)"
+      ],
+      "which_the_document_supports": "菲奥莉娜161",
+      "why": "2 of 3 occurrences, including both narrative mentions (成员的牺牲 sidebar and the 2179 timeline entry). The single 费 spelling is the one that carries the English gloss, which makes it look authoritative, but it is the minority.",
+      "quotes": [
+        "成员的牺牲：公开发表的关于这些事件的唯一说明只涉及菲奥莉娜161的事后情况。这本书名为《太空野兽》，是囚犯罗伯特·莫尔斯 (Robert Morse) 所谓对一个外星\"巨龙\"袭击设施并残忍杀害二十多名双Y染色体囚犯及其看护人员的描述。",
+        "萨拉科号失踪，但她的一艘逃生舱坠落在高级安保行星菲奥莉娜161。那里的设施被隔离并关闭。唯一的幸存者出现。",
+        "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。"
+      ]
+    },
+    {
+      "id": "android",
+      "term": "Android / Synthetic",
+      "readings": [
+        "机器人 (ch1 ×1 glossed 'androids', ch2 ×18)",
+        "合成人 (ch1 ×1 'synthetic people', ch2 ×1 'Synthetic characters')",
+        "仿生人 (ch1 ×1, David 7 series)"
+      ],
+      "which_the_document_supports": "机器人 for Android; 合成人 for Synthetic; DROP 仿生人",
+      "why": "机器人 carries 19 of the 21 hits and is the heading of the ch2 rules block 扮演机器人 (= PLAYING AN ANDROID). 合成人 appears only where the English says 'synthetic', including the one sentence that uses both labels for the same referent (机器人：合成人角色…). 仿生人 is a single stray, two timeline lines away from 机器人 for the SAME David series — a drafting slip, not a distinction.",
+      "quotes": [
+        "韦兰德生产了第一代大卫 (David) 系列机器人 (androids)。2031对地球的月球露娜进行地形改造作业。",
+        "韦兰德公司的大卫7代系列仿生人在劳动中变得很常见。2088三界帝国由英国、日本及其他国家组成，领导着由韦兰德公司和汤谷公司等企业引领的技术革命。",
+        "机器人：合成人角色在分配完14点属性后，可以在任意两个属性上各获得3点加值，关键属性最高可达8，另一个属性最高可达7。",
+        "这是《异形》角色扮演游戏——一个充满身体恐怖和公司角力的宇宙，合成人扮演上帝，而太空卡车司机和海军陆战队员则成为新生怪异生物的宿主。"
+      ]
+    },
+    {
+      "id": "mother",
+      "term": "Game Mother / MOTHER (ship AI) / GM",
+      "readings": [
+        "游戏管理员 (ch1, glossed 'the Game MOTHER')",
+        "老妈 (ch1, glossed 'Game MOTHER' in the 成为老妈 sidebar)",
+        "游戏主持人 (ch1 ×3, glossed 'GM')",
+        "老妈 (ch1 ×4, the USCSS Miranda's MU/TH/UR AI)",
+        "MOTHER (ch1 §1.1 heading, untranslated)"
+      ],
+      "which_the_document_supports": "SPLIT, deliberately: 游戏管理员/游戏主持人 for the human GM, 老妈 for the ship AI — but the 成为老妈 (Game MOTHER) sidebar breaks the split by using 老妈 for the GM.",
+      "why": "The English pun is the whole point: the GM is called the Game Mother because the ship AI is called MOTHER. The fan doc splits the pun apart for the body text and then re-fuses it for one sidebar heading. Any Foundry build has to pick one policy and hold it, because the ship-AI 老妈 lines are in-fiction log entries the player reads and the GM 老妈 line is a rules cross-reference.",
+      "quotes": [
+        "游戏管理员 (the Game MOTHER)最后一名玩家是游戏主持人，简称GM。她向你描述《异形》宇宙的世界。",
+        "成为老妈 (Game MOTHER)：关于GM的各种信息和工具可以在第七章中找到。航行日志 062:00 USCSS 米兰达号船长理查兹录音执法官不会来了，谈判也泡汤了。",
+        "航行日志 060:15 USCSS 米兰达号船长 理查兹 录音老妈妥协了。我命令她重新对齐通讯阵列好让我向锚点站发送跟踪信息，但是她说有机械故障。",
+        "1.1 MOTHER，发生了什么一条红龙......它的尾巴拖拽着天上星辰的三分之一，坠落在地上。"
+      ]
+    },
+    {
+      "id": "hypersleep",
+      "term": "hypersleep / stasis",
+      "readings": [
+        "深度睡眠 (ch1)",
+        "休眠 (ch1 ×2)",
+        "冷冻 (ch1)",
+        "深度睡眠舱 (ch1, glossed 'hypersleep pods')"
+      ],
+      "which_the_document_supports": "深度睡眠 / 深度睡眠舱 — it is the only reading that carries an English gloss.",
+      "why": "休眠 and 冷冻 appear in adjacent paragraphs of the same chapter for the same act. The known-bad CnSCG lineage renders stasis as 静态平衡, so any of the fan's three beats that, but the doc does not settle on one.",
+      "quotes": [
+        "正在开发的项目包括先进的人工智能、超光速引擎 (FTL drives)、大气处理器用于改造不宜居住的世界，以及深度睡眠舱 (hypersleep pods)。",
+        "航行日志015:09 USCSS米兰达号船长 理查兹 录音我们定好了014：30开始超光速飞行，正在准备进入深度睡眠。",
+        "新型更快速的超光速驱动器的出现显著缩短了星际旅行的时间，确保星际飞船的船员不必在休眠状态中花费太多时间。",
+        "谁都不知道里德爬到了哪个洞里，没有他我们没法进行冷冻。我怎么会碰到这种倒霉事。联合美洲 (THE UNITED AMERICAS)：联合美洲成立于2100s初，旨在与不断扩张的三界帝国竞争，由北美、中美和南美合并成一个国家。"
+      ]
+    },
+    {
+      "id": "marines",
+      "term": "Colonial Marines",
+      "readings": [
+        "殖民海军陆战队 (ch1 ×6, ch2 ×2)",
+        "殖民地海军陆战队 (ch1 ×2)"
+      ],
+      "which_the_document_supports": "殖民海军陆战队",
+      "why": "8 of 10 hits, and it is the form used in the campaign-framework list and the ch2 career heading. 殖民地海军陆战队 appears twice inside the same careers paragraph as 殖民海军陆战队, so it is drafting noise.",
+      "quotes": [
+        "邻近殖民地不总是和睦相处，围绕权益和地盘的武装冲突并不罕见——通常需要殖民海军陆战队介入以恢复秩序。",
+        "技术先进，并装备了所有最新的军事硬件——其中大量由韦汤公司设计——殖民地海军陆战队能够在几乎任何环境下独立作战。"
+      ]
+    },
+    {
+      "id": "freeleague",
+      "term": "Free League (publisher)",
+      "readings": [
+        "自由联盟 (ch1)",
+        "Free League (ch2, untranslated)"
+      ],
+      "which_the_document_supports": "no majority — one hit each, in the same sentence role",
+      "why": "Both sentences tell the reader to download a blank character sheet from the publisher's site. ch1 localises the name, ch2 leaves it in Latin letters. Nothing in the document breaks the tie.",
+      "quotes": [
+        "在电影模式中有预设的角色卡，你也可以从自由联盟网站下载空白角色卡。骰子在《异形》宇宙中，没有任何地方是安全的。",
+        "你可以从本书的末尾复印，或者从Free League网站下载并打印。电影模式CIN在预制电影模式冒险中，如《狂喜协议》和《哈德利的希望的最后一天入门套装》，提供了已经完成的玩家角色。"
+      ]
+    },
+    {
+      "id": "shift",
+      "term": "Shift (time unit)",
+      "readings": [
+        "班 (ch1 table, glossed 'Shift')",
+        "班次 (ch2 ×2, body prose)"
+      ],
+      "which_the_document_supports": "班 — it is the glossed table entry and the parallel member of 轮/节/班",
+      "why": "⚠ RUNTIME CONSEQUENCE. Shift is the crit-parse lockstep literal, so whatever string the build adopts has to be the SAME string everywhere the parser sees it. The fan doc's own body text already drifts to 班次 twice ('接受老师一个班次的指导', '每天的每个班次'), which would break a literal match. Note also that system lang cn.json leaves ALIENRPG.Shift as the English word 'Shift' and renders ALIENRPG.OneShift as 一轮班 — three candidate strings across two sources.",
+      "quotes": [
+        "班 (Shift) 5-10小时 恢复 倒计时：在某些灾难性事件的倒计时期间，可以用掷骰子来调节时间的流逝。",
+        "然而，要做到这一点，要么你必须在本场游戏会话中使用过该技能并成功（没有技能等级），要么至少接受老师一个班次的指导。",
+        "每天的每个班次，你可以照料的病人数等于你的医疗技能等级。3.外科医生（surgeon）。当为需要手术的重伤进行医疗检定时，你得到+2颗骰子。"
+      ]
+    },
+    {
+      "id": "round",
+      "term": "Round (time unit)",
+      "readings": [
+        "轮 (ch1 table, glossed 'Round')",
+        "战斗轮 (ch1 body)",
+        "回合 (ch2, once: '你必须每回合都攻击你的敌人')"
+      ],
+      "which_the_document_supports": "轮",
+      "why": "轮 is the glossed table entry and the head of the 轮/节/班 series; 战斗轮 is just 轮 with its domain attached. But the Overkill talent slips into 回合, which is the mainstream Chinese TRPG word for Round and is also what system lang cn.json uses (ALIENRPG.OneRound = 一回合). The level-1 and level-4 sources disagree here.",
+      "quotes": [
+        "轮 (Round) 5-10秒 战斗 节 (Stretch) 5-10分 潜行 班 (Shift)",
+        "战斗轮、节和班的准确持续时间会根据情况变化。[/color】 单位 持续 主要用于 轮 (Round)",
+        "当滥杀时，你必须每回合都攻击你的敌人，不能寻找掩护、躲避或防御攻击。效果持续到你或视线范围内所有敌人都濒死为止。"
+      ]
+    },
+    {
+      "id": "wy_dollar",
+      "term": "W-Y dollars",
+      "readings": [
+        "韦汤币 (ch2, glossed 'W-Y dollar')",
+        "W-Y币 (ch2 ×9, every career cash line)",
+        "刀W-Y币 (ch2, worked example: '300刀W-Y币')"
+      ],
+      "which_the_document_supports": "W-Y币 by count, 韦汤币 by authority",
+      "why": "The glossed form 韦汤币 appears once, in the rules explanation. Every career block then uses the mixed-script W-Y币. The worked example adds a third form by prefixing the colloquial 刀 for 'dollar' to the already-complete W-Y币.",
+      "quotes": [
+        "你还会获得韦汤币（W-Y dollar）——根据你的职业而定。关于现金以及如何花钱详见第6章。",
+        "关键属性：力量关键技能：近战、耐力、远程战斗现金：D6x100 W-Y币天赋 选择或投掷D3： 1.玩笑（banter）。",
+        "装备：内特在游戏开始时有一把切割炬，一套压力服和300刀W-Y币。她的标志性物品是她过世伴侣的照片。"
+      ]
+    },
+    {
+      "id": "pressure_suit",
+      "term": "Pressure Suit vs Compression Suit",
+      "readings": [
+        "IRC MK.35压力服 (ch2)",
+        "IRC MK.50压力服 (ch2)"
+      ],
+      "which_the_document_supports": "neither — the document collapses two distinct corerules armor items into one Chinese string",
+      "why": "corerules.json carries 'IRC Mk.35 Pressure Suit' and 'IRC Mk.50 Compression Suit' as two separate armor documents. The fan doc renders both 压力服, so the only thing distinguishing them in Chinese is the model number. A Foundry build needs two strings.",
+      "quotes": [
+        "…手臂文身3.伤疤4.冷酷的眼神5.傲慢的笑6.个性化防弹衣装备选择2项或投掷2次D6：1.M41A脉冲步枪2.M56A2智能炮3.M314运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：殖民地执法官边境可能是…",
+        "外貌选择2项或投掷2次D6：1.同情的微笑2.眼下有黑眼圈3.平静温柔的声音4.冰冷无情的目光5.眼镜6.白大褂（干净的或脏的）装备选择2项或投掷2次D6：1.外科手术包2.IRC MK.50 压力服3.D6剂镇痛剂4.D6剂不眠药5.个人医疗包6.萨马尼E系列手表标志性物品选择或投掷D3：1.装裱好的医生证明2.儿子或女儿的信3.最近的…"
+      ]
+    },
+    {
+      "id": "cinematic",
+      "term": "cinematic play",
+      "readings": [
+        "电影模式 (ch1 ×several, ch2)",
+        "剧情模式 (ch2, once)"
+      ],
+      "which_the_document_supports": "电影模式",
+      "why": "电影模式 is the defined term introduced in ch1 §1.6 and reused throughout. The Company Resources talent text slips to 剧情模式 for the same mode, in a sentence that contrasts it with 战役模式.",
+      "quotes": [
+        "1.6游戏模式异形角色扮演游戏可以以两种不同的模式进行：电影模式和战役模式。这些模式各自旨在为你创造不同的体验。",
+        "在剧情模式中每幕一次，或在战役模式中每次会话一次，你可以+1压力等级来生成你选择的物品——你一直都有它！"
+      ]
+    },
+    {
+      "id": "hopes_last_day",
+      "term": "Hope's Last Day Starter Set",
+      "readings": [
+        "《希望的最后一天入门套装》 (ch1, glossed)",
+        "《哈德利的希望的最后一天入门套装》 (ch2)"
+      ],
+      "which_the_document_supports": "《希望的最后一天入门套装》 — it is the glossed form and matches the English title exactly",
+      "why": "ch2 imports 哈德利 (Hadley) into the title. The English product is 'Hope's Last Day Starter Set'; the in-fiction colony is Hadley's Hope, so the expansion is an explanatory addition the title does not license.",
+      "quotes": [
+        "在单独发售的《希望的最后一天入门套装》(Hope's Last Day Starter Set)中可以获得电影玩法的快速体验，《德拉科尼斯传奇》三部曲(the Draconis Saga trilogy)是为《异形》RPG第一版出版的(但与本进化版兼容)。",
+        "电影模式CIN在预制电影模式冒险中，如《狂喜协议》和《哈德利的希望的最后一天入门套装》，提供了已经完成的玩家角色。"
+      ]
+    },
+    {
+      "id": "session",
+      "term": "game session",
+      "readings": [
+        "游戏会话 (ch2 ×several)",
+        "游戏环节 (ch2, once, in the XP checklist)"
+      ],
+      "which_the_document_supports": "游戏会话",
+      "why": "游戏会话 is used in the agenda rules, the XP rules and the buddy/rival rules. 游戏环节 appears once, in the very first XP question, for the same thing.",
+      "quotes": [
+        "在每场游戏会话结束时，一起讨论所有PC的任务。如果你在本次游戏会话中冒着风险或代价采取了某些具体行动来推进你的任务，你将获得1点经验点奖励（见第30页）。",
+        "以下问题每有一个你可以回答\"是\"的，你会获得1点XP：你参加了游戏环节吗？仅仅在场你就能获得1点XP。"
+      ]
+    },
+    {
+      "id": "pregen",
+      "term": "pre-generated characters",
+      "readings": [
+        "预设角色 (ch1, ch2)",
+        "预制 (ch2)"
+      ],
+      "which_the_document_supports": "预设角色",
+      "why": "预设 is used for both the characters and their agendas ('在电影模式冒险中，选择是预设的'). 预制 appears once, as a modifier on 电影模式冒险.",
+      "quotes": [
+        "所有电影模式冒险均包含预设角色。战役模式战役模式旨在让玩家在多次游戏中使用相同的角色进行较长时间的连续游戏，可能甚至几十次游戏。",
+        "电影模式CIN在预制电影模式冒险中，如《狂喜协议》和《哈德利的希望的最后一天入门套装》，提供了已经完成的玩家角色。"
+      ]
+    },
+    {
+      "id": "date_2183",
+      "term": "the present date of the setting",
+      "readings": [
+        "2183年 (ch1 真相在此)",
+        "2180s (ch1 timeline heading 2180-至今 and '2180s是一个艰难的时代')"
+      ],
+      "which_the_document_supports": "both, but the English does not license 2183",
+      "why": "The Evolved English reads 'It's the 2180s – only a few years have passed since…'. The fan translation pins it to 现在是2183年…不过三年多的时间. 2183 is defensible from the corerules art page titled 'City of 2183', but it is an addition, not a translation.",
+      "quotes": [
+        "真相在此现在是2183年——距离LV-426上的哈德利的希望殖民地 (the Hadley's Hope colony) 被毁、USS萨拉科号 (USS Sulaco) 失踪以及费奥莉娜 161 (Fiorina 161) 的监狱和铅厂关闭不过三年多的时间。",
+        "2180s是一个艰难的时代。航行日志 026:50 USCSS 米兰达号船长 理查兹 录音里德死了。"
+      ]
+    },
+    {
+      "id": "ftl_drive",
+      "term": "FTL drive",
+      "readings": [
+        "超光速引擎 (ch1 timeline, glossed 'FTL drives')",
+        "超光速驱动器 (ch1 careers)"
+      ],
+      "which_the_document_supports": "超光速引擎",
+      "why": "It carries the English gloss. 超光速驱动器 appears once, in the Space Truckers career blurb, for the same device.",
+      "quotes": [
+        "正在开发的项目包括先进的人工智能、超光速引擎 (FTL drives)、大气处理器用于改造不宜居住的世界，以及深度睡眠舱 (hypersleep pods)。",
+        "新型更快速的超光速驱动器的出现显著缩短了星际旅行的时间，确保星际飞船的船员不必在休眠状态中花费太多时间。"
+      ]
+    },
+    {
+      "id": "terraform",
+      "term": "terraforming",
+      "readings": [
+        "地形改造 (ch1, 2031 entry)",
+        "地球化 (ch1, 2157 entry)"
+      ],
+      "which_the_document_supports": "no majority — one hit each, both in the same timeline",
+      "why": "2031 for Luna is 地形改造作业; 2157 Hadley's Hope is 地球化殖民地. Same process, two words, 126 in-fiction years and about eight printed lines apart.",
+      "quotes": [
+        "2031对地球的月球露娜进行地形改造作业。随着超光速飞行成为现实，韦兰德公司发射了第一艘超光速太空探测船 (FTL Space Exploration vessel)——希利亚德号 (the Heliades)。",
+        "2157哈德利的希望的地球化殖民地在LV-426上建立。2162殖民地海军在殖民地实施征兵。"
+      ]
+    },
+    {
+      "id": "medic",
+      "term": "Medic",
+      "readings": [
+        "医生 (ch2 career heading)",
+        "医务官 (ch1 log entries, ch2 worked example)"
+      ],
+      "which_the_document_supports": "SPLIT and defensible: 医生 for the career, 医务官 for the shipboard billet",
+      "why": "Both render EN 'medic', but in different registers — 医务官 appears only where Hayes is introduced as a crew member. The English uses the one word for both, so a Foundry build that keys on the career name will not find the log lines.",
+      "quotes": [
+        "）唯一的新人是医务官海斯，从休斯船长那儿临时借调的。航行日志008:30 USCSS 米兰达号船长 理查兹 录音我们已经驶离锚点站，航向特杜斯。",
+        "…6：1.激光笔2.遥控车3.溜溜球4.掌上游戏机5.个人定位装置6.彩笔标志性物品选择或投掷D3：1.贴满贴纸的午餐盒2.最喜欢的洋娃娃或可动人偶3.哥哥姐姐给你做的手链2.9 职业：医生在太空中有成千上万种死法，从暴露在真空或未知的传染病中，到凶猛的生物，甚至被喝醉的杂工意外射杀。…",
+        "\"朋友&敌人：内特团队里的其他人分别是飞行官查里兹、驾驶员杰弗里斯、她的丈夫，也是杂工的里德、以及医务官海斯。"
+      ]
+    },
+    {
+      "id": "career_agent",
+      "term": "Company Agent / Company Reps",
+      "readings": [
+        "公司代理人 (ch2 career heading)",
+        "公司代表 (ch1 careers-on-the-Frontier section)"
+      ],
+      "which_the_document_supports": "SPLIT and correct: the English headings genuinely differ (Company Agent vs Company Reps)",
+      "why": "Listed here so a reviewer does not 'fix' it. ch1 §1.4 renders the setting section 'Company Reps' as 公司代表; ch2 §2.7 renders the career 'COMPANY AGENT' as 公司代理人. Both are right.",
+      "quotes": [
+        "公司代表在边境，企业的权力甚至超过政府。它们拥有行星，建立工厂，并引入殖民者，创造居所和就业机会。",
+        "…7A2 12号口径霰弹枪3. 强光手电筒4. 个人医疗包5. 电棍6. D6剂不眠药标志性物品选择或投掷D3：1. 所爱之人的照片2. 带有铭文的凹陷酒瓶3. 破旧的帽子2.7 职业：公司代理人你很饥渴。…"
+      ]
+    },
+    {
+      "id": "marshal",
+      "term": "Colonial Marshal",
+      "readings": [
+        "殖民地执法官 (ch2 career heading)",
+        "执法官 (ch1 ×3, bare)",
+        "殖民地执法官 (ch1, log entry)"
+      ],
+      "which_the_document_supports": "殖民地执法官",
+      "why": "The bare 执法官 in ch1 is elliptical prose ('选举执法官来监督日常的执法工作'), not a competing term. Recorded so a TM apply pass does not treat the bare form as a separate headword.",
+      "quotes": [
+        "为此，许多殖民地制定了自己的法律系统，选举执法官来监督日常的执法工作。一些殖民地甚至雇佣了雇佣军来保护他们的利益。",
+        "我给殖民地执法官发了消息，请求派一支治安队来和我们会合。我会把枪发下去，但我不知道凶手是否是我们之一，还是船上有偷渡的。",
+        "…14运动追踪器4.2枚G2电击手榴弹5.IRC MK.35压力服6.M3单兵防弹衣标志性物品选择或投掷D3：1.那颗救了你命的子弹2.牺牲战友的狗牌3.击败敌人获得的奖章2.6 职业：殖民地执法官边境可能是一个无法无天的地方。…"
+      ]
+    }
+  ],
+  "notes": [
+    "SOURCE PROVENANCE. ch1 = 异形RPG：进化版-第一章：宇宙是地狱.txt (11,380 chars, last edited 2026-04-28 by 鹿鹿); ch2 = 异形RPG：进化版-第二章：你的角色.txt (14,233 chars, 2026-04-28). Both are LEVEL 1 under the owner's settled priority: they are chapters 1 and 2 of the very book being translated.",
+    "THE THIRD FILE IS NOT LEVEL 1. 《异形RPG》版异形宇宙设定翻译·时间线·第一部分-这是旧版的 非新版Evolved.txt (3,896 chars, posted 2022-08-15 by 维兰德时空策略部官方) is 1st-edition material by its own filename and by its content. Every term mined from it is tagged chapter='old1e' and carries a note saying LEVEL 5 ONLY. It disagrees with level 1 on ten headwords (维兰德-汤谷 / 美洲联邦 / 进步人民联盟 / 外面纱 / 西德斯 / 托林普莱姆 / 美国殖民地陆战队 / 梅雷迪斯·维克斯 / 彼得·维兰德 / 地球拯救者). In every one of those ten, level 1 wins.",
+    "ENGLISH ANCHORING. Every non-glossed entry was anchored against two artifacts, not guessed: C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/lang/en.json (590 flattened keys) and C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/raw-dumps/corerules.json (adventure name 'Alien Evolved Core Rules'; 283 items incl. 57 talents, 123 rolltables, 61 actors, 7 journals). The journal pages 'Alien Evolved Player Guide / 1. SPACE IS HELL' and '/ 2. YOUR CHARACTER' are the English of exactly these two fan-translated chapters, so the career blocks, talent names, gear lists and the Round/Stretch/Shift table were matched line for line rather than inferred.",
+    "INLINE GLOSS HARVEST. A cleaned regex pass over the three files found 56 distinct 中文 (English) pairs in ch1, 30 in ch2 and 4 in old1e. The earlier first-pass count of 35 was low AND dirty: its captures ran leading context into the headword (e.g. '引进了大气处理器' for atmospheric processors, '韦兰德生产了第一代大卫' for David, '距离LV-426上的哈德利的希望殖民地' for Hadley's Hope colony). Every headword in this file is the trimmed noun; the untrimmed sentence is preserved in `quote` so a reviewer can see where the boundary was drawn.",
+    "THE FAN DOC'S ENGLISH IS ITSELF TYPO-BEARING. Do not key any matcher on the parenthesised English. Observed: 'theOuter Veil' (missing space), 'Seen ItAll' (space in the wrong place), 'Resllient' and 'resillient' (both for Resilient), 'anglysis' (for Analysis), 'Steady hand' vs 'Steady Hands', 'THE INDEPENDENT CORE SYSTEM COLONISE' (for COLONIES), 'BioNational' (for Lasalle Bionational).",
+    "FOUR OUTRIGHT MISTRANSLATIONS worth quarantining. (1) Hydr8tion → 8号药剂: the leetspeak 8 in 'hydration' was read as a product number. (2) Armat Model 37A2 → 军用型37A2: the manufacturer Armat was read as the adjective 'armed/military'. (3) Watatsumi DV-303 → 海神DV-303: a Japanese corporate name rendered semantically ('sea god') instead of transliterated. (4) Lasalle Bionational → 生物国家 (glossed 'BioNational'): the company's first name is dropped and the rest calqued.",
+    "TWO OWNER-PINNED REJECTIONS ARE CONFIRMED PRESENT IN THE SOURCE. The fan translation uses 智力 for Wits and 同理心 for Empathy. Both entries are recorded with tier T-EXACT and a note saying REJECT, because level-4 cn.json (机智 / 共情) is what players already see in Foundry. Independently of the pin, both fan renderings are self-colliding: 智力 also appears INSIDE the Wits gloss ('感官感知、智力和理智') and 同理心 also appears INSIDE the Empathy gloss ('个人魅力、同理心以及操控他人的能力'), so neither can serve as a unique key.",
+    "THE TWELVE SKILLS ARE COMPLETE AND CONSISTENT IN THE FAN DOC, and they disagree with level-4 cn.json on 7 of 12. Agreeing: 耐力 Stamina, 医疗 Medical Aid, 机动 Mobility, 指挥 Command, 驾驶 Piloting. Disagreeing: 近战/肉搏 Close Combat, 计算机科学/科技 Comtech, 侦察/观察 Observation, 远程战斗/射击 Ranged Combat, 重型机械/机械 Heavy Machinery, 操控/操纵 Manipulation, 生存/求生 Survival. The fan doc never once uses the cn.json form for any of the seven, so this is a clean two-source disagreement, not internal noise.",
+    "⚠ SHIFT HAS RUNTIME CONSEQUENCES. Three candidate strings exist across the two sources for one lockstep literal: 班 (fan, glossed table entry), 班次 (fan body prose, twice), and — in system cn.json — the untranslated English 'Shift' for ALIENRPG.Shift plus 一轮班 for ALIENRPG.OneShift. Whatever the build picks has to be applied to every one of those sites at once.",
+    "SUBSTRING HAZARD FOR ANY TM APPLY PASS. 殖民海军 (Colonial Navy) is a strict prefix of 殖民海军陆战队 (Colonial Marines), and both occur 11 and 8 times respectively in ch1 alone. Longest-match ordering is mandatory. Same shape: 驾驶 (Piloting, skill) is a prefix of 驾驶员 (Pilot, career); 机器人 (Android) is a substring of 秘密机器人 (secret android); 余量 (supply rating) is a prefix of 余量检定 (supply roll) and 余量计数器 (supply dial).",
+    "PUSH. The fan doc's rendering of Push is 追骰, used 11 times in ch2 and never varied. system cn.json has no Push key at all (ALIENRPG.SynthStress is the nearest and is garbled: 'Human Panic, Push, ect.' → '模仿人类的恐慌和按钮', which mis-reads Push as a button). So level 1 is the only real evidence for this term and 追骰 should be adopted.",
+    "RESOLVE. 精神强度. system cn.json leaves ALIENRPG.Resolve and ALIENRPG.ResolveMod untranslated (null), so again level 1 is the only evidence.",
+    "TERMS THE FAN DOC DOES NOT COVER. Neither chapter contains the panic-response table, the stress-response table, critical injuries, spaceship attributes, the bestiary, or chapters 3-14. Anything about ranges beyond 近距离 (Short), about initiative beyond the word 先攻, or about creature names beyond 异形 / 新变种 / 抱脸虫-class terms is simply absent — do not synthesise it from these two chapters.",
+    "CHECKED AND FOUND CLEAN. The doc keeps 异形 (Xenomorph/the Alien) and 外星 (alien, adjective) apart exactly as the project has already settled: '外星生命', '外星生物学', '奇怪外星工艺品或生物' vs '异形的生命周期', '异形生物学'. It also avoids three known-bad CnSCG renderings: smart gun is 智能炮 not 机关枪, the dropship is rendered (as 着陆舰) rather than erased, and stasis is 深度睡眠/休眠/冷冻 rather than 静态平衡."
+  ]
+}

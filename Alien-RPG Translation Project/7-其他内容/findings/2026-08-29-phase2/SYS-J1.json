@@ -1,0 +1,310 @@
+{
+ "unit": "SYS-J1",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\pages\\SYS-J1.cn.html",
+ "summary": "Translated the MU/TH/ER Instructions opening section (intro / Welcome to Alien Evolved / NOTE / 4.1.11→4.1.13 changelog / Official Modules / Top Tips / Actors overview). Register is instructional software-manual Chinese, second person 你. Every UI label was resolved against 1-系统汉化插件/lang/cn.json and copied verbatim (消耗品 / 电力 / 紧邻距离 / 贴近距离 / 属性 / 精神强度 / 技能 / 笔记 / 乘员 / 射程 / 现金 / 经验 / 使用异形进化版规则与卡片 / 角色卡 / 合成人卡 / 星际飞船卡 / 载具卡 / 星际飞船重创 / 殖民地开发计划 and the six TYPES.Actor.* values). Per the unit note (更新日志里全是模块名与版本号，属名从严) the changelog keeps every proper name byte-exact English: Evolved-Core, Evolved-Starterset, Hardened, RPG, CRT UI, V14, Foundry V1, and all version numbers. All six headings were translated with an explicit id= carrying the exact Foundry-derived English slug — the slugs were computed against the real implementation (foundry.mjs:685 slugify, non-strict + :44689 slugifyHeading), not guessed, which is why NOTE: yields id=\"note:\" (colon preserved) and the changelog heading yields the dotted 4.1.11/4.1.13 slug. Structural markup is untouched: same tag multiset, same class list in the same order, same two style attributes, same 28 <br>, same 2 &gt; entities, both href values byte-identical. No @UUID/[[...]] constructs exist in this unit.",
+ "chars_en": 4676,
+ "chars_cn": 2847,
+ "label_lookups": [
+  {
+   "english": "Use Alien Evolved Rules and Sheets",
+   "lang_key": "ALIENRPG.Evolved",
+   "used": "使用异形进化版规则与卡片"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Power (rolls)",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Adjacent",
+   "lang_key": "ALIENRPG.Adjacent",
+   "used": "紧邻距离"
+  },
+  {
+   "english": "Close",
+   "lang_key": "ALIENRPG.Close",
+   "used": "贴近距离"
+  },
+  {
+   "english": "Attributes",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Resolve",
+   "lang_key": "ALIENRPG.Resolve",
+   "used": "精神强度"
+  },
+  {
+   "english": "Skills",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "Notes (field)",
+   "lang_key": "ALIENRPG.Notes",
+   "used": "笔记"
+  },
+  {
+   "english": "crew",
+   "lang_key": "ALIENRPG.Crew",
+   "used": "乘员"
+  },
+  {
+   "english": "Weapon Range",
+   "lang_key": "ALIENRPG.Range",
+   "used": "射程"
+  },
+  {
+   "english": "cash",
+   "lang_key": "ALIENRPG.Cash",
+   "used": "现金"
+  },
+  {
+   "english": "xp",
+   "lang_key": "ALIENRPG.XP",
+   "used": "经验"
+  },
+  {
+   "english": "roll modifiers",
+   "lang_key": "ALIENRPG.RollMod",
+   "used": "检定修正"
+  },
+  {
+   "english": "right click modifier (enter modifiers before a roll)",
+   "lang_key": "ALIENRPG.LEFTCLICKTOROLL",
+   "used": "右键单击输入修正值 / “检定”"
+  },
+  {
+   "english": "Character sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Synthtic [sic] sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Synthetic",
+   "used": "合成人卡"
+  },
+  {
+   "english": "Spacecraft sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Spacecraft",
+   "used": "星际飞船卡"
+  },
+  {
+   "english": "Vehicle sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Vehicle",
+   "used": "载具卡"
+  },
+  {
+   "english": "Spacecraft critical injuries",
+   "lang_key": "TYPES.Item.spacecraft-crit",
+   "used": "星际飞船重创"
+  },
+  {
+   "english": "Colony Initiatives",
+   "lang_key": "TYPES.Item.colony-initiative",
+   "used": "殖民地开发计划"
+  },
+  {
+   "english": "Characters (Actor type)",
+   "lang_key": "TYPES.Actor.character",
+   "used": "角色"
+  },
+  {
+   "english": "Synthetics",
+   "lang_key": "TYPES.Actor.synthetic",
+   "used": "合成人"
+  },
+  {
+   "english": "Creatures",
+   "lang_key": "TYPES.Actor.creature",
+   "used": "生物"
+  },
+  {
+   "english": "Spaceships",
+   "lang_key": "TYPES.Actor.spacecraft",
+   "used": "星际飞船"
+  },
+  {
+   "english": "Vehicles",
+   "lang_key": "TYPES.Actor.vehicles",
+   "used": "载具"
+  },
+  {
+   "english": "Territories",
+   "lang_key": "TYPES.Actor.territory",
+   "used": "领地"
+  },
+  {
+   "english": "max strength",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "Active (weapons)",
+   "lang_key": "ALIENRPG.Active",
+   "used": "已激活"
+  },
+  {
+   "english": "fired / fire",
+   "lang_key": "ALIENRPG.fireWeapon",
+   "used": "开火"
+  },
+  {
+   "english": "Right click … edit",
+   "lang_key": "ALIENRPG.ActorSheet.Edit",
+   "used": "编辑"
+  },
+  {
+   "english": "delete",
+   "lang_key": "ALIENRPG.ActorSheet.Delete",
+   "used": "删除"
+  },
+  {
+   "english": "Right Click (usage phrasing)",
+   "lang_key": "ALIENRPG.EditItem",
+   "used": "右键单击"
+  },
+  {
+   "english": "CRT UI",
+   "lang_key": "ALIENRPG.ResetNote",
+   "used": "CRT UI（Phase 1 已在该键值中保持英文）"
+  },
+  {
+   "english": "Configure Settings > … (settings navigation path)",
+   "lang_key": "ALIENRPG.NoPanicTable",
+   "used": "Configure Settings&gt;Alien Evolved&gt;（沿用 Phase 1「Configuration &gt; Alien RPG &gt; Re-Import」的英文路径写法）"
+  },
+  {
+   "english": "Alien Classic / Alien Evolved",
+   "lang_key": "ALIENRPG.EvolvedHint",
+   "used": "异形经典版 / 异形进化版"
+  }
+ ],
+ "frozen_kept": [
+  "RPG",
+  " RPG ",
+  "Hardened",
+  "MU/TH/UR",
+  "Alien Evolved Starter Set",
+  "Evolved-Core",
+  "Evolved-Starterset",
+  "Alien RPG",
+  "Alien Evolved",
+  "Free League",
+  "Free League Publishing",
+  "Paul Watson",
+  "Foundry VTT",
+  "Foundry V1",
+  "V14",
+  "App V2",
+  "CRT UI",
+  "Configure Settings",
+  "Starter Set",
+  "Core Rules",
+  "Destroyer of Worlds Scenario",
+  "Colonial Marines Operations Manual",
+  "Heart of Darkness",
+  "Building Better Worlds",
+  "Alien Evolved Core Rule Book",
+  "https://ko-fi.com/paulwatson",
+  "https://frialigan.se/en/games/alien/",
+  "https://freeleaguepublishing.com/shop/alien-rpg-2/",
+  "4.1.11",
+  "4.1.12",
+  "4.1.13"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Free League / Free League Publishing",
+   "proposed": "Free League（保持英文）",
+   "why": "出版社名，glossary_alien.json 里没有条目，中文圈也没有稳定译名（自由联盟/弗里亚联盟都不通行）。按 §3.4 走 T-LATIN 保持英文。建议正式登记为「保持英文」，否则下一轮会有人顺手译成「自由联盟」。"
+  },
+  {
+   "en": "Destroyer of Worlds",
+   "proposed": "世界毁灭者",
+   "why": "官方剧本名，glossary 无条目。本单元按 T-BILINGUAL 写作「世界毁灭者剧本 Destroyer of Worlds Scenario」。"
+  },
+  {
+   "en": "Heart of Darkness",
+   "proposed": "黑暗之心",
+   "why": "官方模组名，glossary 无条目。取康拉德同名小说的通行中译。"
+  },
+  {
+   "en": "Colonial Marines Operations Manual",
+   "proposed": "殖民海军陆战队行动手册",
+   "why": "glossary 只有 Colonial Marines=殖民海军陆战队，整本书名缺条目。"
+  },
+  {
+   "en": "Alien Evolved Core Rule Book",
+   "proposed": "异形进化版核心规则书",
+   "why": "glossary/册子里冻结的是 Adventure 名 'Alien Evolved Core Rules'，本页出现的是书名变体 'Core Rule Book'，两者不逐字节相同，词表里没有它。"
+  },
+  {
+   "en": "Alien Evolved",
+   "proposed": "异形进化版",
+   "why": "glossary 只有 Evolved Edition=进化版。本单元取 ALIENRPG.EvolvedHint 的既定写法「异形进化版 / 异形经典版」。⚠ 但作为**设置面板的分区标题**时它是 system.json 的 title（硬编码），必须保持英文，两种身份要分开登记。"
+  },
+  {
+   "en": "Initiative card",
+   "proposed": "先攻卡",
+   "why": "glossary 只有 Initiative=先攻，没有 initiative card；系统 lang 也没有对应键。"
+  },
+  {
+   "en": "Ammo Dice",
+   "proposed": "弹药骰子",
+   "why": "lang 只有 ALIENRPG.ammo=弹药 与 ALIENRPG.Dice；按 Stress Dice=压力骰子 / Base Dice=基础骰子 的构词法补出。"
+  },
+  {
+   "en": "Macro Bar",
+   "proposed": "宏栏",
+   "why": "Foundry 核心 UI 概念，本项目 lang 与 glossary 都没有。"
+  },
+  {
+   "en": "Actors (Foundry 文档类)",
+   "proposed": "角色 Actors（T-BILINGUAL）",
+   "why": "与 TYPES.Actor.character=角色 撞词：一个是文档类，一个是其中一种子类型。词表没有区分二者的条目。"
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "1. 结构标签多重集与英文完全相等（逐标签名计数）",
+   "result": "PASS — en 与 cn 均为 a:4 br:28 div:6 h1:8 h3:4 li:56 p:78 strong:2 ul:10。另核对 &gt; 实体 2:2、<br> 28:28。"
+  },
+  {
+   "check": "2. 英文中每个 class=\"…\" 值在中文里原样存在",
+   "result": "PASS — 两侧 class 列表逐项且**按同一顺序**相等：alienrpg a.entity-link / heading ×3 / heading2 ×2 / heading。style=\"position:relative;margin-top:30px\" 两处也一致。"
+  },
+  {
+   "check": "3. 每个 @UUID[...] / [[...]] 构件逐字节相同，只有 {label} 变",
+   "result": "PASS（空集）— 本单元不含任何 @UUID/@TEXTDRAW/@DRAW/[[...]] 构件。附带核对：两个 href 值逐字节相同；ko-fi 链接的 label 本身是 URL，未改；Free League Store 的 label 译作「Free League 商店」。"
+  },
+  {
+   "check": "4. 每个被翻译的标题都带显式 id= 且用原英文 slug",
+   "result": "PASS — 6/6。slug 不是猜的，是按真实实现算的（foundry.mjs:685 slugify 非严格模式 + :44689 slugifyHeading）：welcome-to-alien-evolved / note: / change-history-for-latest-version-version-4.1.11-to-4.1.13 / official-modules / top-tips / actors。"
+  },
+  {
+   "check": "5. DO-NOT-TRANSLATE.json 的冻结字面量一个都没被翻",
+   "result": "PASS — 从册子的 name_lookups / folder_names / rolltable_names / item_names / name_substring_tests 与 glossary 中 key==value 的自等条目合并出候选集，命中本单元英文的 5 条（' RPG ' / 'RPG' / 'Alien Evolved Starter Set' / 'Hardened' / 'MU/TH/UR'）在中文里全部逐字节存在。"
+  },
+  {
+   "check": "6. 输出与英文不逐字节相同",
+   "result": "PASS — en 4676 字符 / cn 2847 字符，正文含 CJK，可见文本残留拉丁词仅为刻意保留的属名与版本号。"
+  }
+ ],
+ "open_issues": [
+  "【无 lang 键的 UI 串，属运行时补丁的活】设置路径里的两段都查不到键：① 'Configure Settings' 是 Foundry 核心串；② 分区标题 'Alien Evolved' 是 systems/alienrpg/system.json 的 title 字段（硬编码，**不是** i18n 键，实测 title=\"Alien Evolved\"）。二者今天在中文世界里都渲染成英文，所以译文照抄英文，写法沿用 Phase 1 在 ALIENRPG.NoPanicTable 里的先例（'Configuration > Alien RPG > Re-Import' 整条保留英文）。只有末端那个复选框标签是真键 ALIENRPG.Evolved，已译。若以后运行时补丁把这两段汉化了，本行要跟着改。",
+  "【跨单元术语冲突，需主控裁】'Actors'（Foundry 文档类）与 'Characters'（六种子类型之一）在中文里都落到「角色」上——TYPES.Actor.character 的值就是「角色」。本单元把 h1 写成 T-BILINGUAL 的「角色 Actors」（一个 ASCII 空格，无括号）以区别于 SYS-J2 的 'Characters' 段标题，列表项里的 'Characters' 则用裸的 lang 值「角色」。SYS-J2/J4 定稿后需要主控统一。",
+  "【上游拼写错误，我按意图译】原文 'Developed for Foundry FTT by Paul Watson' 的 FTT 是 VTT 的笔误，译文写作 'Foundry VTT'（属名从严：写错的产品名比保留笔误更糟）。同类按意图译的还有 calcualtion→计算、Synthtic→合成人、Corrrected→修正、'bugs i have missed'→测试时没抓到的 bug。",
+  "【上游数值表述可疑，未擅改】'Hardened now added =1 to max strength.' 里的 '=1' 几乎肯定是 '+1' 的笔误，译文写作「让最大力量 +1」。⚠ 但请主控注意两处口径不一致：DO-NOT-TRANSLATE.json 与 PROJECT.md §1.2 记的是 HARDENED 给 **+1 最大生命**，本条更新日志说的是 max **strength**。我按原文写「力量」，没有替上游改口径。",
+  "【重伤 / 重创两套词，本单元未触碰锁步面】本页只提到 'Spacecraft critical injuries'，映射到 TYPES.Item.spacecraft-crit=星际飞船重创（已是中文，不在 lang_keep_english 锁步组里），所以没有碰到 ALIENRPG.CriticalInjuries 那条 Phase-5 才解冻的英文影子。附带记录：本语料对飞船用「重创」、对角色用「重伤」，是两套词，不要在后续单元里顺手统一。",
+  "【标题 id 含冒号，是对的不是笔误】id=\"note:\" 里的冒号是 Foundry 非严格 slugify 的真实产物（strict=false 时只把空白与连字符归一，标点原样保留），不是我漏删。已确认安全：Foundry 解析 data-hash 走的是对象取键 toc[hash]（foundry.mjs:45338 / :45592 / :101798），不是 CSS 选择器，冒号不会触发选择器语法错误。",
+  "【命名档次的一处主控决策点】'Official Modules' 六个官方内容书名走了 T-BILINGUAL（中文 English，一个 ASCII 空格），理由是它们是名字型列表项且 glossary 已给出 Building Better Worlds=建造更美好世界 之类的采纳译法；英文尾巴完整保留，'Alien Evolved Starter Set' 这条冻结串因此逐字节幸存。⚠ 但 SYS-J6 的单元注写的是「模块名一律保留英文」——那一段说的是第三方 Foundry 软件模块，与这里的 Free League 内容书不是同一类，主控若要把两段口径拉平，改这一段即可（改动只在这一个 <p> 里）。",
+  "【'CRT UI' 没有自己的 lang 键】它只作为 ALIENRPG.ResetNote 值里的一段文字存在，卡片上那个按钮如果是硬编码串，就是运行时补丁的问题，不是本单元的。译文保留英文 'CRT UI'，与 ResetNote 的中文值写法一致。"
+ ]
+}

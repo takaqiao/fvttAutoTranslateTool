@@ -1,0 +1,195 @@
+{
+ "unit": "SYS-U1",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-U1.cn.json",
+ "summary": "Adventure shell translated: 1 name (frozen), 1 description (1,782→1,406 chars), 7 folder names (3 frozen + 4 translated), 4 macro names. Key verifications done from source rather than from the brief: (1) re-derived the folder freeze from DO-NOT-TRANSLATE.json §folder_names — exactly 3 entries: Alien Tables / Alien Creature Tables / Alien Mother Tables, all emitted byte-identical; (2) independently confirmed `Alien Sub-Tables` is translatable — its only occurrence in the system tree is systems/alienrpg/module/apps/migratefolders.js:29, and that file's sole importer is COMMENTED OUT at init.mjs:2 (`// import migrateFolders from './migratefolders.js';`), matching the register's `dead-source-files` defect note; the pack dump also shows it is a child of `Alien Mother Tables`, and Folder#contents being non-recursive means it never reaches the creature-sheet dropdown either way. Translated it to 异形子表 (the glossary's own adopted value). (3) `Alien Macros`, `Careers`, `Skill-Stunts` have zero live-code references (only a commented-out `// await deleteFolderIfExist(\"Skill-Stunts\")` at init.mjs:89), so all three translated. (4) Verified the 4 macro `command` fields to see which folder literals they hard-code (Mother/Creature macros only) and which ALIENRPG.* keys their dialogs use, then matched the macro NAMES to those dialog strings. Output carries no `command` key. Description register is plain instructional Chinese, second person 你; every sheet/field label was looked up in lang/cn.json rather than paraphrased.",
+ "chars_en": 2041,
+ "chars_cn": 1556,
+ "frozen_kept": [
+  "Alien RPG System (Adventure name — register §name_lookups id=system.adventurePackName; unguarded .sheet deref at init.mjs:77)",
+  "Alien Tables (folder — register §folder_names; negative guard at init.mjs:49)",
+  "Alien Creature Tables (folder — register §folder_names; unguarded folder.contents at rollTableData.mjs:9)",
+  "Alien Mother Tables (folder — register §folder_names; unguarded folder.contents at rollTableData.mjs:27)",
+  "MU/TH/ER Instructions. (journal name cited inside the description prose — register §name_lookups id=system.welcomeJournalEntry, glossary maps it to itself)",
+  "Free League / Free League Publishing / Foundry VTT / Paul Watson / Dice So Nice / ENNIE / YZE / V10 (T-LATIN brands, person, third-party module, engine and version designators)"
+ ],
+ "label_lookups": [
+  {
+   "english": "Character sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Synthetic sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Synthetic",
+   "used": "合成人卡"
+  },
+  {
+   "english": "Creature sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Creature",
+   "used": "生物卡"
+  },
+  {
+   "english": "Territories",
+   "lang_key": "ALIENRPG.SheetLabels.Territory",
+   "used": "领地卡"
+  },
+  {
+   "english": "Vehicle sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Vehicle",
+   "used": "载具卡"
+  },
+  {
+   "english": "Items",
+   "lang_key": "ALIENRPG.Items",
+   "used": "物品"
+  },
+  {
+   "english": "Careers (folder)",
+   "lang_key": "ALIENRPG.Career",
+   "used": "职业 (T-EXACT, byte-equal, asserted in gate)"
+  },
+  {
+   "english": "Skill-Stunts (folder)",
+   "lang_key": "TYPES.Item.skill-stunts / ITEM.TypeSkill-stunts",
+   "used": "技能炫技 (T-EXACT, byte-equal, asserted in gate)"
+  },
+  {
+   "english": "module (Foundry sense)",
+   "lang_key": "ALIENRPG.forceImportLabel / ALIENRPG.forceImportName",
+   "used": "模块 (NOT 模组 — phase 1 already settled 模块)"
+  },
+  {
+   "english": "Roll / Dice Roller",
+   "lang_key": "ALIENRPG.Roll / ALIENRPG.DialRoll",
+   "used": "投骰 → 投骰器 (NOT 掷骰器)"
+  },
+  {
+   "english": "Ad-hoc",
+   "lang_key": "ALIENRPG.AdHoc",
+   "used": "临时"
+  },
+  {
+   "english": "Roll on selected Mother table (macro's own dialog title)",
+   "lang_key": "ALIENRPG.ROLLONSELECTED",
+   "used": "在选定的老妈表格上投骰"
+  },
+  {
+   "english": "Roll on selected Creature table (macro's own dialog title)",
+   "lang_key": "ALIENRPG.ROLLONCREATURETABLE",
+   "used": "在选定的生物表格上投骰 — see open_issues #2, the lang value there is 抽取异形生物表"
+  },
+  {
+   "english": "Journal (Entry)",
+   "lang_key": "ALIENRPG.JournalColorSettings",
+   "used": "日志 → 日志条目"
+  },
+  {
+   "english": "Mother",
+   "lang_key": "glossary_alien.json 'Mother' + ALIENRPG.ROLLONSELECTED",
+   "used": "老妈"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Alien Macros",
+   "proposed": "异形宏",
+   "why": "Folder name in the payload, absent from glossary_alien.json (which does carry the sibling 'Alien Sub-Tables' → 异形子表). Zero live-code references, so translatable; coined to match the sibling's 异形* pattern."
+  },
+  {
+   "en": "Scenario",
+   "proposed": "剧本",
+   "why": "Needed for 'Destroyer of Worlds Scenario'. Deliberately NOT 战役 — PROJECT.md §1.4 pins Campaign Mode = 战役模式, so 战役 is taken. 剧本 is the standard rendering for a cinematic-mode adventure module."
+  },
+  {
+   "en": "Destroyer of Worlds",
+   "proposed": "世界毁灭者",
+   "why": "Official supplement title in the purchase-link list. Glossary has its sibling 'Building Better Worlds' → 建造更美好世界 but not this one."
+  },
+  {
+   "en": "Heart of Darkness",
+   "proposed": "黑暗之心",
+   "why": "Official supplement title. Conrad novella; 黑暗之心 is the dominant mainland rendering (黑暗的心 is the competing one). Not in glossary."
+  },
+  {
+   "en": "Starter Set",
+   "proposed": "新手包",
+   "why": "Used in 'Alien RPG Starter Set' and 'purchase the Starter Set … modules'. Not a glossary entry, but the project's own directory 2-新手包汉化插件 already commits to 新手包 — adopting that rather than inventing."
+  },
+  {
+   "en": "Core Rule Book / Core Rules",
+   "proposed": "核心规则书 / 核心规则",
+   "why": "Same situation: directory 3-核心书汉化插件 implies 核心书; I used the fuller 核心规则书 for the book title and 核心规则 for the bare 'Core Rules modules'. Worth pinning one form."
+  },
+  {
+   "en": "Free League / Free League Publishing",
+   "proposed": "",
+   "why": "Publisher brand, no adopted Chinese anywhere in glossary/lang/RULINGS. Left English (T-LATIN) since both occurrences sit next to purchase links to English store pages. If the project wants a Chinese form it should be ruled once and applied across all three packs, not decided in this unit."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "Structural tag counts, opening tags (h1/p/ul/li/br/strong/a)",
+   "result": "PASS — EN {h1:1,p:6,ul:1,li:4,br:14,strong:1,a:7} == CN, identical dict"
+  },
+  {
+   "check": "Structural tag counts, closing tags",
+   "result": "PASS — EN {h1:1,p:6,ul:1,li:4,strong:1,a:7} == CN"
+  },
+  {
+   "check": "All 7 href values byte-identical and in the same order",
+   "result": "PASS"
+  },
+  {
+   "check": "Adventure name emitted unchanged AND present in DO-NOT-TRANSLATE §name_lookups",
+   "result": "PASS — 'Alien RPG System', re-derived from the register, not from the brief"
+  },
+  {
+   "check": "Every folder listed in register §folder_names emitted byte-identical to its English",
+   "result": "PASS — Alien Tables / Alien Creature Tables / Alien Mother Tables all round-trip"
+  },
+  {
+   "check": "Every folder NOT in the register was actually translated (no lazy English pass-through)",
+   "result": "PASS — Alien Macros, Alien Sub-Tables, Careers, Skill-Stunts all differ from their English"
+  },
+  {
+   "check": "'Alien Sub-Tables' is genuinely absent from the register (abort if present)",
+   "result": "PASS — absent; independently confirmed dead-code-only reference at migratefolders.js:29 whose importer is commented out (init.mjs:2)"
+  },
+  {
+   "check": "No 'command' key anywhere in the output; each macro object has exactly {name}",
+   "result": "PASS"
+  },
+  {
+   "check": "Macro dash-gap spacing structure preserved per name (double space in 'Alien -  GM Dice Roller')",
+   "result": "PASS — CN is '异形 -  GM 投骰器', gap width compared per-macro against the English"
+  },
+  {
+   "check": "No U+00A0 or U+3000 introduced into any emitted string",
+   "result": "PASS"
+  },
+  {
+   "check": "T-EXACT folders byte-equal to their lang/cn.json values",
+   "result": "PASS — Careers==ALIENRPG.Career=='职业'; Skill-Stunts==TYPES.Item.skill-stunts=='技能炫技'"
+  },
+  {
+   "check": "Translated <h1> carries explicit id with the original English slug",
+   "result": "PASS — id=\"alien-rpg-system\" equals slugify('Alien RPG System')"
+  },
+  {
+   "check": "Output key-sets identical to index.json SYS-U1.payload (folders and macros)",
+   "result": "PASS — both set-equal, no key added or dropped"
+  },
+  {
+   "check": "Wrote only my own unit file; compendium/cn untouched",
+   "result": "PASS — single write to 6-工作区/phase2/SYS-U1.cn.json (2,700 bytes), no other file modified"
+  }
+ ],
+ "open_issues": [
+  "UPSTREAM TYPO, corrected deliberately — the English description says the Journal Entry is \"MO/TH/ER Instructions\" (letter O, no trailing period). The actual document is 'MU/TH/ER Instructions.' (letter U, WITH trailing period), per register §name_lookups id=system.welcomeJournalEntry, and it stays frozen English in the Chinese pack. I wrote the real name, following the register's own precedent in upstream_defects id=textdraw-label-typo: 'The label is display-only, so translate it to match the TABLE, not the typo.' If the controller wants the typo propagated instead, change 4 characters in the one <p>.",
+  "Macro name vs. its own dialog title, for the Creature roller. The two macros are parallel in English ('Roll on selected Mother/Creature table V10'), but the phase-1 lang values they pop are NOT parallel: ALIENRPG.ROLLONSELECTED='在选定的老妈表格上投骰' vs ALIENRPG.ROLLONCREATURETABLE='抽取异形生物表'. I kept the two macro NAMES parallel (在选定的老妈表格上投骰 / 在选定的生物表格上投骰), so the Creature macro's name and its dialog title differ in wording. The alternative — naming it 异形 - 抽取异形生物表 V10 — matches the dialog but breaks the pair. Controller's call; it is a name-only change, no code touches either string.",
+  "The <h1> is T-BILINGUAL ('异形RPG系统 Alien RPG System') while the Adventure `name` field beside it in the compendium browser stays frozen English. That is intentional — different fields, only `name` is compared with ===. If the controller prefers the h1 to mirror the sidebar exactly, revert the h1 text to bare English; the explicit id is harmless either way and should stay.",
+  "Link-label tier is mixed on purpose: the six official-module purchase links got T-BILINGUAL labels (中文 + one ASCII space + English) because a Chinese buyer lands on an English store page and needs the English title; the first label, 'Free League - Alien RPG', was left fully English because both halves are brand strings and a bilingual form would duplicate 异形RPG. Flagging in case the controller wants uniformity.",
+  "Whitespace fidelity: I preserved every ASCII space that sits adjacent to a tag in the English (e.g. '…ENNIE 奖。 <br><br>', '…录进来： <br>', '</a> <br>'), including the ones that now follow a full-width Chinese punctuation mark and look stray. They are invisible in render but a whitespace-normalising QA pass would strip them and cause a false diff against the English structure.",
+  "Latin-spacing convention applied, for cross-unit consistency: ASCII spaces around standalone Latin in running prose (Foundry VTT 上, 由 Free League 出品, 曾获 ENNIE 奖, 定制 3D 骰子) but fused with no space inside established title compounds (异形RPG, 异形RPG新手包). Phase-1 lang/cn.json is itself split on this (仅限GM and Ctrl+单击 fused vs 输入 D66 点数 and 恐慌表 Panic Table spaced), so this is my reading, not a lock. If the controller sets a project-wide rule, this unit has 6 affected spots."
+ ]
+}

@@ -1,0 +1,37 @@
+# ⚠⚠ 绝对不要往这个文件里加 `*.json` / `**/*.json` 这类规则 ⚠⚠
+#
+# EC 项目的 .gitignore 里有过一条 `4-临时脚本/**/*.json`，把**人工裁定过、重跑不出来**的
+# finding 整批挡在仓外，事后只能靠捞。本项目的 7-其他内容/findings/ 与 glossary/ 全是 JSON，
+# 且全是不可再生的裁定产物。要忽略就写完整路径，永远不要用通配扩展名。
+
+# ── 三个插件是**独立 git 仓**，不归外仓管 ──
+# EC 惯例：译文提交在插件仓，文档与脚本提交在外仓。
+# 它们各自有 .git，外仓 `git add` 会报 "does not have a commit checked out"。
+1-系统汉化插件/
+2-新手包汉化插件/
+3-核心书汉化插件/
+
+# ── 可再生的中间产物 ──
+# 6-工作区/ 是脚本跑出来的中间态，删掉重跑即可。
+# 但 raw-dumps/ 是三个包的 LevelDB 导出，抽取器与所有度量脚本都依赖它，保留。
+6-工作区/*
+!6-工作区/raw-dumps/
+!6-工作区/.gitkeep
+
+# reports/ 明确可再生
+7-其他内容/reports/
+
+# ── 参考素材：体积大且是第三方内容，不进仓 ──
+# 对齐语料由 4-常用脚本/tm/build_subtitle_corpus.py 从
+# Desktop/fvtt/AlienRPG/ 下的字幕重新生成，源文件不属于本项目。
+7-其他内容/reference/subtitles/
+
+# 维护脚本的中间产物
+__pycache__/
+*.pyc
+*.bak
+
+# 系统垃圾文件
+.DS_Store
+Thumbs.db
+desktop.ini

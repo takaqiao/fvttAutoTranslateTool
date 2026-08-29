@@ -1,0 +1,275 @@
+{
+ "summary": "Repointed the ported EC tooling, ran `extract/extract_en.mjs` against all three Alien packs using the project mapping layer, verified the output against a fully independent second implementation, took a 3/3 baseline snapshot, and measured a provisional CN/EN band from this corpus only.\n\nEXTRACTION — 3/3 packs, `mappingSource: project`, `--strict-mappings` clean:\n  alienrpg 4.1.13                  135 leaves /    76,036 chars\n  alien-evolved-starterset 1.0.2   514 leaves /   341,284 chars\n  alien-evolved-corerules 1.0.2  4,374 leaves / 2,287,944 chars\n  TOTAL                          5,023 leaves / 2,705,264 chars\n`_source.json` is now written BY the extractor (the pre-existing ones were scaffold placeholders with `capturedAt: null` — they had clobbered the extractor's own metadata) and records packageId/packageVersion/mappingSource/extractedAt/declaredPacks/extractedPacks/skippedPacks/unknownConverters plus per-pack collection+label+file.\n\nVERIFICATION — leaf counts match an independent walk EXACTLY, path for path.\nI wrote `qa/verify_extract_leaves.py`: it reads the raw dumps (nested Adventure docs) rather than LevelDB, and re-implements `_variants` normalization, `_when` evaluation, `activeFields`, every converter, and the key allocator in Python. Result: 5,023 / 2,705,264 on both sides; only-in-raw 0, only-in-extractor 0, value-mismatch 0, for all three packs. The drop account also balances: 5,063 raw mapped-path leaves − 32 `None` sentinels (alienRollTableRef) − 6 collection dedupe (folders 3, scene notes 3) − 2 key-collapse union = 5,023. Zero `None` sentinels leaked into any output.\n\nMAPPINGS-AGNOSTIC — proven both ways. With Babele 2.9.1 raw defaults the same extractor yields 101 leaves on the system pack (vs 135 with the project layer) and prints the loud fallback banner. Pointed at EC's own `mappings.mjs`, the guard correctly REFUSES (\"does not serve target 'alienrpg'\") instead of silently returning a Crucible layer. `unknownConverters` is exactly one key — `TableResult.name:referencedDocumentField` at 31/124/1375 — matching the positive expectation asserted in mappings.mjs.\n\nBASELINE — `qa/capture_baseline.py` prints \"COVERAGE: packs captured 3/3 declared | repos complete 3/3\", en leaves 5,023. It cross-checks three ways (upstream manifest / `_source.json.extractedPacks` / files on disk) and exits non-zero on any shortfall, which is what EC's 3-of-10 bug needed.\n\nRATIO — `qa/measure_ratio.py` run: 349 CJK pairs in the system lang, median 0.333, PROVISIONAL band p05–p95 [0.200, 0.571]; prose-proxy bucket (EN >60 chars, n=24) median 0.359 / [0.296, 0.486]. Visible-of-raw measured at 78.0% / 58.7% / 49.3% per pack; journal page text (56 long leaves) median 52.5% min 13.0%; RollTable descriptions (30) median 12.0% min 6.8%; overall long-leaf spread 6.8%–100%, i.e. the two denominators differ by 14.7x. EC's 0.31/0.22/0.25 appear only as named counter-examples in `refusedImports`; no threshold is wired. \"Remeasure on the real CN corpus\" is recorded as a Phase-2 exit item in both the script and `reports/measure_ratio.json`.\n\nREPOINTING — the task's stated grep matches only 2 files (both benign provenance docstrings); a wave before mine had already repointed the project root, `ALIEN_PARALLEL_ROOT`, `glossary_alien.json` and the numbered dirs. The real residue was 71 code-level EC identifiers across 25 files. I brought that to 58 across 14, and everything left is a redesign job, not a rename.",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\verify_extract_leaves.py",
+   "bytes": 29758,
+   "what": "NEW. Independent re-computation of the extractor: walks 6-工作区/raw-dumps/*.json (nested Adventure docs) with its own Python implementation of _variants normalization / _when matching / activeFields / all converters / key allocation, then diffs leaf-for-leaf against compendium/en. Also reconciles FIELD_CENSUS against a raw-path re-measure and prints a closed drop account (None sentinels + collection dedupe + key-collapse). Exit 1 on any mismatch. Mapping data still comes only from mappings.mjs (dumped via node -e), so there is no second copy of the truth."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\extract\\extract_en.mjs",
+   "bytes": 31147,
+   "what": "MODIFIED. Added collection/label/file to each _source.json pack summary, and a note field marking the file as generated. The rest of the file (target names alienrpg|starterset|corerules, system.json/module.json discovery, mapping-source auto/project/babele resolution, coverage line) was already correct; I ran and validated it."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\measure_ratio.py",
+   "bytes": 15208,
+   "what": "MODIFIED. Refreshed the docstring's measured numbers, which were computed from the stale 3,401-leaf Babele-defaults extraction: now 5,023 leaves / 2,705,264 chars, visible-of-raw 78.0/58.7/49.3%, long-leaf spread 14.7x. Ran it; report at 7-其他内容/reports/measure_ratio.json."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\build_glossary.py",
+   "bytes": 34728,
+   "what": "MODIFIED — live hazard. Layer 1 hard-coded base_path = glossary_crucible_merged.json (4,833 Crucible/PF2E terms) as an unconditional default, which running the script would have laundered into glossary_alien.json at LOWEST priority — the exact 'stale value into the base layer' shape the file's own line 190 warns about, and a direct violation of PROJECT.md §3.3. Base layer is now opt-in via --base, defaults to empty, and prints the §3.3 reason. Current glossary_alien.json (346 terms) is clean; only 26 keys overlap the Crucible table."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_units.py",
+   "bytes": 0,
+   "what": "MODIFIED. ember.crucible-adventure -> alien-evolved-corerules.alien-evolved-core-rules; EMBER_PACK -> ALIEN_PACK; reports/ember -> reports/corerules; added a REPO_FOR_PACK table so the three Alien packs resolve to the right repo instead of always 3-核心书汉化插件; replaced the hard-coded 'Ember Early Access' entry name with a sole-entry lookup that errors instead of silently returning {}. Also corrected the dnd5e-twin comment (this project has no twin pack)."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\attach_orphans.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name repointed; added a shared sole_entry() helper replacing the hard-coded \"Ember Early Access\" Adventure entry name (which would have KeyError'd or silently emptied on every Alien pack). Same change applied to count_terms.py, prep_journal_rest.py and probe.py."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\count_terms.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name + sole_entry() (see attach_orphans.py)."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_journal_rest.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name (x2), reports/ember -> reports/corerules, sole_entry()."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\probe.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name + sole_entry()."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_8c.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name + reports/ember -> reports/corerules."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_realign.py",
+   "bytes": 0,
+   "what": "MODIFIED. Pack name + reports/ember -> reports/corerules."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_sigfix.py",
+   "bytes": 0,
+   "what": "MODIFIED. --pack default repointed."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\slice_todo.py",
+   "bytes": 0,
+   "what": "MODIFIED. TODO path: reports/ember/todo/ember.crucible-adventure.todo.json -> reports/corerules/todo/alien-evolved-corerules.alien-evolved-core-rules.todo.json."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\collect_realign.py",
+   "bytes": 0,
+   "what": "MODIFIED. Self-check command in the docstring repointed to the corerules pack."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\BRIEF.md",
+   "bytes": 0,
+   "what": "MODIFIED. Translator brief: pack name in every apply_translations command. Same for BRIEF-REALIGN.md and BRIEF-SIGFIX.md."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\release\\generate_runtime.mjs",
+   "bytes": 8913,
+   "what": "MODIFIED (docstring only). Its notes claimed mappings.mjs was still an EC verbatim copy with no ALIEN_LAYER — no longer true. Recorded the current state (--check passes) and flagged the open converter gap. Verified: `--check` reports babele-mappings.js in sync with ALIEN_LAYER."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\fill_twin.py",
+   "bytes": 0,
+   "what": "MODIFIED (banner only). Prepended a NOT-APPLICABLE warning: EC's 'twin pack' means two modules shipping the same campaign with byte-identical journal prose; Alien's three packs do not overlap, so running MAIN/TWIN alignment here would align two different bodies of content. Deliberately NOT renamed — renaming would make it look usable. Same banner added to qa/sync_twin_packs.py (tm/fill_twin_names.py already carried one)."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\sync_twin_packs.py",
+   "bytes": 0,
+   "what": "MODIFIED (banner only). NOT-APPLICABLE warning, see fill_twin.py."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\compendium\\en\\alienrpg.alien-rpg-system.json",
+   "bytes": 83393,
+   "what": "REGENERATED with the project mapping layer. 135 leaves / 76,036 chars. The pre-existing file was extracted before mappings.mjs became the Alien one."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\compendium\\en\\_source.json",
+   "bytes": 1182,
+   "what": "REGENERATED by the extractor. alienrpg / 4.1.13 / system.json, mappingSource=project, declaredPacks 1, extractedPacks 1, skippedPacks [], unknownConverters {TableResult.name:referencedDocumentField: 31}."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\2-新手包汉化插件\\compendium\\en\\alien-evolved-starterset.alien-evolved-starter-set.json",
+   "bytes": 378786,
+   "what": "REGENERATED. 514 leaves / 341,284 chars."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\2-新手包汉化插件\\compendium\\en\\_source.json",
+   "bytes": 1268,
+   "what": "REGENERATED. alien-evolved-starterset / 1.0.2 / module.json, unknownConverters 124."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\3-核心书汉化插件\\compendium\\en\\alien-evolved-corerules.alien-evolved-core-rules.json",
+   "bytes": 2592993,
+   "what": "REGENERATED. 4,374 leaves / 2,287,944 chars."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\3-核心书汉化插件\\compendium\\en\\_source.json",
+   "bytes": 1261,
+   "what": "REGENERATED. alien-evolved-corerules / 1.0.2 / module.json, unknownConverters 1375."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\english-baseline\\alienrpg-4.1.13\\",
+   "bytes": 85687,
+   "what": "Baseline snapshot (pack json + _source.json with the three-way coverage block). Captured AFTER the project-mapping re-extraction, so it is not the stale Babele-defaults one."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\english-baseline\\alien-evolved-starterset-1.0.2\\",
+   "bytes": 381234,
+   "what": "Baseline snapshot, 514 en leaves, coverage complete."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\english-baseline\\alien-evolved-corerules-1.0.2\\",
+   "bytes": 2595431,
+   "what": "Baseline snapshot, 4,374 en leaves, coverage complete."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\reports\\verify_extract_leaves.json",
+   "bytes": 3741,
+   "what": "Machine-readable verification result: per-pack raw-walk vs extractor leaves/chars, the three empty diff lists, the corpus census, and the closed drop reconciliation."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\reports\\measure_ratio.json",
+   "bytes": 4182,
+   "what": "Ratio report: lang-pair distribution by register bucket, per-pack visible/raw, long-leaf distribution by field kind, provisional_band marked PROVISIONAL, refusedImports recording EC's three constants as counter-examples, and the phase2_exit_item with satisfied:false."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Extractor output, all three packs (project mapping layer)",
+   "value": "5,023 leaves / 2,705,264 chars — alienrpg 135/76,036 · starterset 514/341,284 · corerules 4,374/2,287,944"
+  },
+  {
+   "what": "Independent walk of the raw dumps (separate Python implementation, different serialization)",
+   "value": "5,023 leaves / 2,705,264 chars — IDENTICAL. only-in-raw 0, only-in-extractor 0, value-mismatch 0, on all three packs"
+  },
+  {
+   "what": "Drop reconciliation (raw mapped-path leaves -> emitted leaves)",
+   "value": "5,063 − 32 None sentinels (128 chars) − 6 collection dedupe (60 chars) − 2 key-collapse union (111 chars) = 5,023 / 2,705,264. Predicted equals emitted, chars included"
+  },
+  {
+   "what": "capture_baseline.py coverage line",
+   "value": "COVERAGE: packs captured 3/3 declared | repos complete 3/3 | en 叶合计 5023, cn 叶合计 0"
+  },
+  {
+   "what": "Corpus census, derived independently from the raw dumps",
+   "value": "Adventure 3 · Folder 49 · Actor 74 · Item 523 · JournalEntry 13 · JournalEntryPage 151 · Scene 15 · Region 4 · RegionBehavior 4 · RollTable 137 · TableResult 1530 · Macro 5; ActiveEffect/Playlist/PlaylistSound/Cards/Card 0 — matches PROJECT.md and verify-inventory.json exactly"
+  },
+  {
+   "what": "Item subtype census",
+   "value": "spacecraftmods 124 · item 93 · talent 85 · weapon 78 · planet-system 68 · spacecraftweapons 20 · specialty 19 · agenda 15 · skill-stunts 12 · armor 9"
+  },
+  {
+   "what": "Actor subtype census",
+   "value": "creature 30 · character 28 · spacecraft 7 · vehicles 6 · synthetic 3"
+  },
+  {
+   "what": "unknownConverters (must be exactly one key per mappings.mjs assertion)",
+   "value": "TableResult.name:referencedDocumentField only — 31 / 124 / 1375, one per TableResult doc. Matches the asserted expectation"
+  },
+  {
+   "what": "None sentinel leakage into the English baseline",
+   "value": "0 across all three packs (32 dropped by EXTRACT_CONVERTERS.alienRollTableRef: 3 rTables + 29 cTables)"
+  },
+  {
+   "what": "Mapping-source independence proof",
+   "value": "Same extractor with Babele 2.9.1 raw defaults yields 101 leaves on the system pack vs 135 with the project layer (34 alienrpg-specific leaves), and prints the fallback banner"
+  },
+  {
+   "what": "EC-mappings refusal guard",
+   "value": "Pointed at Ember-Crucible/3-常用脚本/extract/mappings.mjs it refuses: \"does not serve target 'alienrpg'\", listing CRUCIBLE_LAYER/EMBER_LAYER/effectiveMappings — no silent Crucible layer"
+  },
+  {
+   "what": "measure_ratio: CN/EN from the 349 CJK-bearing lang pairs (raw-char denominator)",
+   "value": "median 0.333, PROVISIONAL band p05–p95 [0.200, 0.571], mean 0.353, min 0.111, max 2.000"
+  },
+  {
+   "what": "measure_ratio: prose-proxy bucket (English > 60 chars, n=24)",
+   "value": "median 0.359, band [0.296, 0.486]"
+  },
+  {
+   "what": "measure_ratio: register split",
+   "value": "EN ≤20 chars n=258 median 0.333 · EN 21-60 n=67 median 0.312 · EN >60 n=24 median 0.359"
+  },
+  {
+   "what": "measure_ratio: visible-of-raw per pack",
+   "value": "alienrpg 78.0% · starterset 58.7% · corerules 49.3% (task brief guessed 42–77%)"
+  },
+  {
+   "what": "measure_ratio: long-leaf (>=500 raw chars) visible/raw by field kind",
+   "value": "journal page text n=56 median 52.5% min 13.0% max 83.8% · table result description n=30 median 12.0% min 6.8% · other long leaves n=131 median 98.5%. Overall n=217, min 6.8% max 100.0% => the two denominators differ by 14.7x"
+  },
+  {
+   "what": "lang key surface",
+   "value": "en.json 590 leaves, cn.json 511 leaves (1 JSON null, 80 keys falling back to English), 349 pairs with CJK on the CN side and non-empty English"
+  },
+  {
+   "what": "EC residue in 4-常用脚本 before / after",
+   "value": "71 code-level EC identifiers in 25 files -> 58 in 14 files. The task's stated grep matched only 2 files (both benign provenance docstrings), so it understated the surface by an order of magnitude"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Re-ran the extraction rather than accepting the existing compendium/en",
+   "reason": "The files on disk were extracted at 06:39, but extract/mappings.mjs was rewritten at 07:02 and again at 11:13 by the parallel agent. The old output therefore came from Babele raw defaults (101 leaves on the system pack, no alienrpg-specific fields), and its _source.json had been overwritten by a scaffold placeholder carrying capturedAt: null and no mappingSource. A baseline extracted with the wrong mapping is exactly the invisible-shortfall class the design exists to prevent."
+  },
+  {
+   "decision": "Verified with a second, independent implementation reading a different serialization, not by re-running the extractor",
+   "reason": "Re-running the same code proves nothing. The extractor reads LevelDB sibling buckets and re-attaches embedded docs via attachEmbedded(); the verifier reads the pre-nested Adventure documents in 6-工作区/raw-dumps. Both walks agreeing to the leaf means the LevelDB traversal lost no document, the key allocator agrees, and every converter agrees. Mapping DATA still has exactly one source (mappings.mjs, dumped via node), so this adds a second implementation without adding a second truth."
+  },
+  {
+   "decision": "Made the drop account explicit and machine-checked instead of accepting 'close enough'",
+   "reason": "The raw walk found 5,063 mapped leaves but only 5,023 were emitted. A 40-leaf gap that nobody can name is indistinguishable from lost content. The verifier now names all three channels (sentinel drop, collection dedupe, key-collapse union) and fails if predicted != emitted, in leaves AND chars."
+  },
+  {
+   "decision": "Wired FIELD_CENSUS reconciliation across all three packs at once, not per pack",
+   "reason": "FIELD_CENSUS numbers are three-pack totals. Comparing them per pack would report drift on every row on every run, which trains people to ignore the check — the same desensitisation that let EC's 3-of-10 baseline pass as clean."
+  },
+  {
+   "decision": "Did NOT wire any ratio threshold, and recorded EC's constants only as named counter-examples",
+   "reason": "EC's 0.31/0.22/0.25 were reverse-engineered from a prose corpus measured on raw characters. Here the only real CN sample is 349 UI labels, and the corpus that will actually be gated is HTML rich text whose visible/raw runs 6.8%–100%. Same translation, two denominators, 14.7x apart. A gate built on that mismatch would fire on correct work and pass truncated work."
+  },
+  {
+   "decision": "Left the extractor's unknownConverters diagnostic for referencedDocumentField unsuppressed",
+   "reason": "mappings.mjs deliberately does not shim it and instead asserts the positive expectation (exactly one key, 31/124/1375). Shimming it would silence a diagnostic whose whole job is to catch a converter that was named and never wired up. Confirmed the observed counts match the asserted ones exactly."
+  },
+  {
+   "decision": "Fixed build_glossary.py's default base layer rather than just renaming the path",
+   "reason": "It unconditionally loaded glossary_crucible_merged.json (4,833 terms) as layer 1. PROJECT.md §3.3 forbids merging EC/PF2E tables into glossary_alien.json; worse, layer 1 is the LOWEST priority, which is precisely the 'launder a stale value into the base layer' failure the file's own line 190 documents. Now opt-in via --base with the §3.3 reason printed. The shipped glossary_alien.json (346 terms) was verified clean — only 26 keys overlap."
+  },
+  {
+   "decision": "Bannered the twin-pack scripts as NOT-APPLICABLE instead of repointing their pack names",
+   "reason": "EC's 'twin' is two modules shipping the same campaign with byte-identical journal prose. Alien's three packs do not overlap in content. Substituting Alien pack names into MAIN/TWIN would produce a script that confidently aligns two different bodies of text — a silent corruption. Making the grep clean would have been worse than leaving it dirty."
+  },
+  {
+   "decision": "Reported rather than edited assert_resolutions.py, the two self-check runners, restore_enrichers.py and scan_cross_channel.py",
+   "reason": "Their EC identifiers are rule IDs and domain concepts (R-crucible-hardcoded-wired, the ember self-check panel, @Advantage/@CriticalSuccess enrichers, the ember-hardcoded-cn.mjs third channel), not paths. Renaming them yields code that still describes Crucible while looking repointed. They also belong to other agents' active work — build_register.py and assert_resolutions.py were being edited during this session."
+  },
+  {
+   "decision": "Replaced the hard-coded \"Ember Early Access\" Adventure entry name with a sole_entry() lookup that raises",
+   "reason": "Four parallel/ scripts indexed entries[\"Ember Early Access\"]. On an Alien pack that either KeyErrors or, where .get() was used, silently returns {} — the script then reports zero work to do and looks like it succeeded. All three Alien packs are single-Adventure packs, so deriving the one entry is both correct and self-checking."
+  }
+ ],
+ "open_issues": [
+  "CONVERTER WIRED ON ONE LEG ONLY (belongs to the mapping/release task, not this one). ALIEN_LAYER declares Actor.rollTable / Actor.critTable with converter `alienRollTableRef`, and the extract half exists (EXTRACT_CONVERTERS in mappings.mjs, verified working — 32 'None' sentinels correctly dropped). But release/runtime-converters.alien.js does not exist, so generate_runtime.mjs emits PROJECT_CONVERTERS = {} and the TRANSLATE direction is unimplemented. This is exactly the shape PROJECT.md §3.1 names ('自定义 converter 的 extract 方向与 translate 方向必须同一个 commit 一起改'). generate_runtime.mjs --check currently passes and prints the missing-file warning, so nothing fails loudly. I recorded it in that file's header.",
+  "58 code-level EC identifiers remain in 14 files, all needing redesign rather than renaming: qa/assert_resolutions.py (31 — EC rule corpus plus the ember self-check panel machinery, EMBER_ROOT extraction, rule IDs R-crucible-hardcoded-*/R-ember-boon-*), qa/selfcheck_panel_runner.mjs (5) and qa/translate_cases_runner.mjs (3) (EC panel harnesses reading modules/ember/scripts/ember.mjs), qa/restore_enrichers.py (3 — ember_candidates() handles @Advantage/@CriticalSuccess, Crucible enrichers; Alien's are @UUID/@TEXTDRAW/@DRAW, so this function matches nothing here), qa/scan_cross_channel.py (2 — channel B compares against ember-hardcoded-cn.mjs, which has no Alien counterpart), tm/build_glossary.py (3, all prose/help text, benign), and the three bannered twin-pack scripts.",
+  "Five drift gates carry a dead EC special case: `key = (\"ember.crucible-adventure.json\" if f == \"_repaired.json\" else ...)` in scan_dropped_terms.py:443, scan_en_drift.py:105, scan_marker_followup.py:170, scan_number_drift.py:235, scan_renamed_terms.py:121. Harmless today (no _repaired.json exists in any Alien baseline) but it should be removed when those gates are Alien-ified, along with the EC baseline-name hint printed at scan_dropped_terms.py:728.",
+  "FIELD_CENSUS was missing a row for RegionBehavior / name (n=4, chars=70) — found by my reconciliation at 11:04, which is why the census summed to 5,059 while the real mapped surface was 5,063. The mappings agent added the row independently at 11:13 and the reconciliation now balances at 5,063. Flagging it because it is the exact defect class FIELD_CENSUS exists to catch, and it was caught by cross-checking rather than by the table itself.",
+  "measure_ratio's provisional band is UI labels measured on raw characters. It must NOT be used as a gate. Phase-2 exit item, recorded in the script header and in reports/measure_ratio.json as phase2_exit_item.satisfied = false: once compendium/cn holds real translations, re-run `measure_ratio.py --only corpus` with VISIBLE characters as the denominator, bucketed by register, before enabling any ratio gate.",
+  "The task brief's own grep (Ember-Crucible|ember_cn_unofficial|crucible-cn|EMBER_PARALLEL_ROOT|glossary_ec|1-Ember|2-Crucible) matches only 2 files, both benign provenance docstrings. The actual residue was 25 files. If that grep is used as the completion criterion for repointing anywhere else in the project, it will report clean over a substantially EC-pointed tree — the same 'looks clean because it only checked part of the corpus' shape as the EC baseline bug. Suggest replacing it with the wider pattern I used (in the scratchpad at residue.py), which distinguishes code-level hits from prose.",
+  "capture_baseline reports cn 叶 0 for all three repos. Expected at Phase 0 (compendium/cn holds only .gitkeep), but it means the three drift gates have nothing to compare yet and any 'clean' report from them right now is vacuous."
+ ]
+}

@@ -1,0 +1,1427 @@
+{
+  "_meta": {
+    "artifact": "mined_alien_isolation.json",
+    "version": "v1.0",
+    "generated": "2026-08-29",
+    "source_name": "Alien: Isolation -- official Simplified Chinese localisation",
+    "source_priority_level": 3,
+    "source_root": "C:\\Users\\Taka\\Desktop\\fvtt\\AlienRPG\\简体汉化",
+    "reader": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\read_isolation.py",
+    "term_count": 44,
+    "encoding": "UTF-16LE with BOM (NOT utf-8-sig as previously assumed)",
+    "corpus_correction": {
+      "files_on_disk": 768,
+      "unique_files": 64,
+      "duplicate_explanation": "The 704 files under DATA/ENV/PRODUCTION/DLC/<MAP>/TEXT/ENGLISH/ are 11 byte-identical copies of the 64 files in DATA/TEXT/ENGLISH/ (768 paths collapse to 64 md5 hashes). They are NOT separate in-world terminal or signage text.",
+      "unique_keys": 13565,
+      "unique_value_chars": 201328,
+      "inflated_figures_seen_elsewhere": "162,804 keys / 6.75M chars -- these count the 12x duplication (13,565 x 12 = 162,780 keys; 201,328 x 12 = 2,415,936 chars).",
+      "placeholder_keys": 1018,
+      "placeholder_explanation": "Keys whose value is the key string repeated verbatim, or empty -- untranslated stubs. Excluded from all statistics below."
+    }
+  },
+  "english_gate_coverage": {
+    "headline": "NO ENGLISH SIDE EXISTS. This is a Chinese-only localisation; the directory named ENGLISH contains only Chinese. Only 19.50% of live keys can be English-gated by any mechanical means.",
+    "english_mirror_search": {
+      "searched": [
+        "the localisation tree itself (768 TXT + 3 non-TXT files)",
+        "DATA/UI/FONTS_CN.GFX -- compiled Scaleform font library, zero extractable ASCII strings",
+        "DATA/FONT_CONFIG.XML and FONT_CONFIG.BML -- font-to-language mapping only, no UI strings",
+        "all Steam libraries on C:, F:, G: -- no Alien: Isolation install (appid 214490 absent from every libraryfolders.vdf entry)",
+        "C:/Users/Taka/Desktop, Downloads and Documents for a sibling English text tree -- only the 12 copies of the Chinese tree were found"
+      ],
+      "result": "No English build and no English mirror exists anywhere on this machine. Recovering English by KEY was therefore the only available route."
+    },
+    "totals": {
+      "unique_keys": 13565,
+      "placeholder_or_empty": 1018,
+      "live_translated_keys": 12547,
+      "gated_keys": 2447,
+      "gated_fraction_of_live": 0.195,
+      "ungated_keys": 10100,
+      "ungated_fraction_of_live": 0.805
+    },
+    "gates": {
+      "tier1_key_is_english_sentence": {
+        "keys": 44,
+        "what": "The key IS the English source string, e.g. [TEXT_Get to the Airlock] -> 前往气闸舱 and [TEXT_Hold RB to use the Motion Tracker] -> 按住RB键使用运动追踪器. A genuine aligned en/zh pair. All of them are in GLOBAL.TXT.",
+        "strength": "hard"
+      },
+      "key_slug_gate": {
+        "keys_only_this_gate": 1767,
+        "what": "The key carries English content words naming the referent, e.g. [TEXT_MOTIONTRACKER] -> 运动追踪器 and [AI_EXTERN_360_PRESENCE_KILLED_BY_ANDROID] -> 被仿生人所杀. The slug is derived from the English source string, so the pairing is observed rather than inferred.",
+        "strength": "hard for the item and UI dictionaries (GLOBAL, UI, EXTERNAL, TUTORIALS); unusable elsewhere",
+        "excluded_false_gates": "Speaker, emotion and scene codes were stoplisted after inspection -- RIP, SAM, ASH, PAR, ELL, DAL, LAM, USE, SIC, SII, CUTSCENES, OBJECTIVE, NAME, SECONDARY and similar carry no information about a string's meaning. The 15 bark files (CV1-CV6, SS1-SS3, G0000-G0003, P0001-P0002) are excluded from this gate wholesale, because their keys are purely speaker+emotion codes."
+      },
+      "inline_literal_gate": {
+        "keys_only_this_gate": 570,
+        "keys_both_gates": 110,
+        "what": "The localisers LEFT the English proper noun inside the Chinese value -- Sevastopol, Seegson, Weyland-Yutani, Nostromo, Torrens, San Cristobal. The English literal is physically present in the string, so the pairing is observed, not inferred. This gate simultaneously documents a T-FROZEN decision made by the official localiser.",
+        "strength": "hard, but reaches only proper nouns"
+      },
+      "ungated": {
+        "keys": 10100,
+        "fraction_of_live": 0.805,
+        "what": "Voice lines and terminal prose keyed by opaque numeric line IDs (A1_CUTSCENES_SAM_C0100_0004, A1_T0001_TEX_4066, A1_LOC_TEX_2295). The key says who speaks and in what scene, never what the line means.",
+        "rule": "Terms attested ONLY here are marked english_gate:false and capped at confidence 'low'. They may CORROBORATE a rendering already attested elsewhere. They may NEVER be the sole basis for adopting one."
+      }
+    },
+    "per_file": {
+      "UI.TXT": {
+        "live": 1834,
+        "key_gated": 1292,
+        "inline_gated": 185,
+        "ungated": 429
+      },
+      "EXTERNAL.TXT": {
+        "live": 231,
+        "key_gated": 225,
+        "inline_gated": 22,
+        "ungated": 5
+      },
+      "GLOBAL.TXT": {
+        "live": 166,
+        "key_gated": 160,
+        "inline_gated": 1,
+        "ungated": 6
+      },
+      "TUTORIALS.TXT": {
+        "live": 149,
+        "key_gated": 145,
+        "inline_gated": 11,
+        "ungated": 4
+      },
+      "DLC04_FRONTEND.TXT": {
+        "live": 126,
+        "key_gated": 22,
+        "inline_gated": 13,
+        "ungated": 94
+      },
+      "M0401.TXT": {
+        "live": 364,
+        "key_gated": 10,
+        "inline_gated": 25,
+        "ungated": 331
+      },
+      "DLC03_FRONTEND.TXT": {
+        "live": 83,
+        "key_gated": 7,
+        "inline_gated": 6,
+        "ungated": 70
+      },
+      "DLC02_FRONTEND.TXT": {
+        "live": 54,
+        "key_gated": 4,
+        "inline_gated": 2,
+        "ungated": 48
+      },
+      "DLC01_FRONTEND.TXT": {
+        "live": 52,
+        "key_gated": 3,
+        "inline_gated": 4,
+        "ungated": 45
+      },
+      "CUTSCENES.TXT": {
+        "live": 158,
+        "key_gated": 1,
+        "inline_gated": 24,
+        "ungated": 133
+      },
+      "DLC05_FRONTEND.TXT": {
+        "live": 45,
+        "key_gated": 1,
+        "inline_gated": 1,
+        "ungated": 43
+      },
+      "M0101.TXT": {
+        "live": 151,
+        "key_gated": 1,
+        "inline_gated": 1,
+        "ungated": 149
+      },
+      "M0701.TXT": {
+        "live": 79,
+        "key_gated": 1,
+        "inline_gated": 12,
+        "ungated": 66
+      },
+      "M1001.TXT": {
+        "live": 67,
+        "key_gated": 1,
+        "inline_gated": 10,
+        "ungated": 56
+      },
+      "M1201.TXT": {
+        "live": 57,
+        "key_gated": 1,
+        "inline_gated": 1,
+        "ungated": 55
+      },
+      "M3001.TXT": {
+        "live": 121,
+        "key_gated": 1,
+        "inline_gated": 21,
+        "ungated": 99
+      },
+      "T0000.TXT": {
+        "live": 151,
+        "key_gated": 1,
+        "inline_gated": 0,
+        "ungated": 150
+      },
+      "T0001.TXT": {
+        "live": 566,
+        "key_gated": 1,
+        "inline_gated": 84,
+        "ungated": 481
+      },
+      "CV1.TXT": {
+        "live": 388,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 388
+      },
+      "CV2.TXT": {
+        "live": 384,
+        "key_gated": 0,
+        "inline_gated": 2,
+        "ungated": 382
+      },
+      "CV3.TXT": {
+        "live": 427,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 427
+      },
+      "CV4.TXT": {
+        "live": 382,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 381
+      },
+      "CV5.TXT": {
+        "live": 377,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 374
+      },
+      "CV6.TXT": {
+        "live": 376,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 376
+      },
+      "DLC01.TXT": {
+        "live": 17,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 17
+      },
+      "DLC02.TXT": {
+        "live": 17,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 17
+      },
+      "DLC03.TXT": {
+        "live": 17,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 17
+      },
+      "DLC04.TXT": {
+        "live": 17,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 17
+      },
+      "DLC05.TXT": {
+        "live": 17,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 17
+      },
+      "G0000.TXT": {
+        "live": 250,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 249
+      },
+      "G0001.TXT": {
+        "live": 553,
+        "key_gated": 0,
+        "inline_gated": 2,
+        "ungated": 551
+      },
+      "G0002.TXT": {
+        "live": 1037,
+        "key_gated": 0,
+        "inline_gated": 51,
+        "ungated": 986
+      },
+      "G0003.TXT": {
+        "live": 241,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 241
+      },
+      "LOCATIONS.TXT": {
+        "live": 293,
+        "key_gated": 0,
+        "inline_gated": 30,
+        "ungated": 263
+      },
+      "M0601.TXT": {
+        "live": 49,
+        "key_gated": 0,
+        "inline_gated": 9,
+        "ungated": 40
+      },
+      "M0702.TXT": {
+        "live": 3,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 3
+      },
+      "M0901.TXT": {
+        "live": 28,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 27
+      },
+      "M0902.TXT": {
+        "live": 68,
+        "key_gated": 0,
+        "inline_gated": 2,
+        "ungated": 66
+      },
+      "M1101.TXT": {
+        "live": 74,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 73
+      },
+      "M1202.TXT": {
+        "live": 42,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 39
+      },
+      "M1301.TXT": {
+        "live": 73,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 73
+      },
+      "M1302.TXT": {
+        "live": 61,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 60
+      },
+      "M1401.TXT": {
+        "live": 37,
+        "key_gated": 0,
+        "inline_gated": 4,
+        "ungated": 33
+      },
+      "M1402.TXT": {
+        "live": 83,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 82
+      },
+      "M1403.TXT": {
+        "live": 33,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 30
+      },
+      "M1404.TXT": {
+        "live": 49,
+        "key_gated": 0,
+        "inline_gated": 2,
+        "ungated": 47
+      },
+      "M1601.TXT": {
+        "live": 26,
+        "key_gated": 0,
+        "inline_gated": 1,
+        "ungated": 25
+      },
+      "M1602.TXT": {
+        "live": 53,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 50
+      },
+      "M2101.TXT": {
+        "live": 24,
+        "key_gated": 0,
+        "inline_gated": 5,
+        "ungated": 19
+      },
+      "M2102.TXT": {
+        "live": 150,
+        "key_gated": 0,
+        "inline_gated": 14,
+        "ungated": 136
+      },
+      "M2201.TXT": {
+        "live": 93,
+        "key_gated": 0,
+        "inline_gated": 7,
+        "ungated": 86
+      },
+      "M2501.TXT": {
+        "live": 107,
+        "key_gated": 0,
+        "inline_gated": 6,
+        "ungated": 101
+      },
+      "M2701.TXT": {
+        "live": 35,
+        "key_gated": 0,
+        "inline_gated": 5,
+        "ungated": 30
+      },
+      "M2702.TXT": {
+        "live": 127,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 124
+      },
+      "M3201.TXT": {
+        "live": 15,
+        "key_gated": 0,
+        "inline_gated": 5,
+        "ungated": 10
+      },
+      "M3301.TXT": {
+        "live": 89,
+        "key_gated": 0,
+        "inline_gated": 11,
+        "ungated": 78
+      },
+      "M3401.TXT": {
+        "live": 7,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 7
+      },
+      "OBJECTIVES.TXT": {
+        "live": 305,
+        "key_gated": 0,
+        "inline_gated": 53,
+        "ungated": 252
+      },
+      "P0001.TXT": {
+        "live": 303,
+        "key_gated": 0,
+        "inline_gated": 3,
+        "ungated": 300
+      },
+      "P0002.TXT": {
+        "live": 157,
+        "key_gated": 0,
+        "inline_gated": 7,
+        "ungated": 150
+      },
+      "SS1.TXT": {
+        "live": 389,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 389
+      },
+      "SS2.TXT": {
+        "live": 372,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 372
+      },
+      "SS3.TXT": {
+        "live": 385,
+        "key_gated": 0,
+        "inline_gated": 0,
+        "ungated": 385
+      },
+      "TORRENS.TXT": {
+        "live": 63,
+        "key_gated": 0,
+        "inline_gated": 17,
+        "ungated": 46
+      }
+    },
+    "limitation_statement": "80.50% of the live keys in this corpus cannot be English-gated at all. Every dialogue file, every terminal-log file and the whole of LOCATIONS.TXT fall in that bucket -- which means every station location name, every ship-log entry and every line of spoken dialogue is ungated. Terms mined from those files are corroboration only and are marked confidence 'low'. The gated 19.50% is concentrated in four files -- GLOBAL.TXT (the item dictionary), UI.TXT, EXTERNAL.TXT (achievement text) and TUTORIALS.TXT -- and every 'high' confidence entry below comes from there."
+  },
+  "terms": {
+    "Sevastopol Station": {
+      "en": "Sevastopol Station",
+      "candidates": [
+        {
+          "zh": "Sevastopol空间站",
+          "alt": "bare 'Sevastopol' when used alone; Sevastopol港 (port); Sevastopol航天管制中心 (traffic control)",
+          "category": "franchise-place",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 228,
+            "representative_key": "CUTSCENES.TXT:[A1_CUTSCENES_VER_C0800_0003]",
+            "representative_line": "Sevastopol空间站。"
+          },
+          "note": "The official localisation NEVER transliterates Sevastopol. The Latin string is left verbatim and a Chinese common noun is suffixed with NO separating space ('Sevastopol空间站', 28 keys). Strong independent support for keeping this name T-FROZEN in the RPG -- but note the corpus's Latin-first, no-space joining differs from the project's T-BILINGUAL rule (Chinese first, one ASCII space)."
+        }
+      ]
+    },
+    "Seegson": {
+      "en": "Seegson",
+      "candidates": [
+        {
+          "zh": "Seegson",
+          "alt": "Seegson公司 (the company); Seegson仿生人公司 (Seegson Synthetics); Seegson通信中心 (Seegson Communications)",
+          "category": "franchise-corp",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 217,
+            "representative_key": "T0001.TXT:[A1_T0001_TEX_2318]",
+            "representative_line": "Seegson"
+          },
+          "note": "Never transliterated anywhere in its 217 keys. Same treatment as Weyland-Yutani."
+        }
+      ]
+    },
+    "Weyland-Yutani": {
+      "en": "Weyland-Yutani",
+      "candidates": [
+        {
+          "zh": "Weyland-Yutani",
+          "alt": "Weyland-Yutani公司 for 'the Weyland-Yutani Corporation'",
+          "category": "franchise-corp",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 40,
+            "representative_key": "TORRENS.TXT:[A1_M0101_TEX_6024]",
+            "representative_line": "Weyland-Yutani"
+          },
+          "note": "Hyphen retained, never transliterated. Slogan A1_M2201_SGM_9655 renders 'Building Better Worlds' as 'Weyland-Yutani，建设更美好的世界。'"
+        }
+      ]
+    },
+    "Nostromo": {
+      "en": "Nostromo",
+      "candidates": [
+        {
+          "zh": "Nostromo号",
+          "alt": "美国商用星舰Nostromo (USCSS Nostromo, full registry form)",
+          "category": "franchise-ship",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 58,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_2066]",
+            "representative_line": "Nostromo号"
+          },
+          "note": "English hull name + 号 suffix. This is the localisation's uniform pattern for ship names it does not transliterate."
+        }
+      ]
+    },
+    "Torrens": {
+      "en": "Torrens",
+      "candidates": [
+        {
+          "zh": "Torrens号",
+          "alt": "商船Torrens号 (merchant vessel Torrens)",
+          "category": "franchise-ship",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 91,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_2295]",
+            "representative_line": "Torrens号"
+          },
+          "note": "Registry line A1_M0101_TEX_0160: '船籍编号：MSV-7760。船名：美国商用星舰Torrens。M级星际飞船。'"
+        }
+      ]
+    },
+    "San Cristobal Medical Facility": {
+      "en": "San Cristobal Medical Facility",
+      "candidates": [
+        {
+          "zh": "San Cristobal医院",
+          "alt": null,
+          "category": "franchise-place",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "inline_literal",
+          "tier_hint": "T-FROZEN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 55,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_5728]",
+            "representative_line": "San Cristobal医院"
+          },
+          "note": "Name left in English, 医院 (hospital) appended rather than 医疗设施. 50 of the 55 keys use the exact string 'San Cristobal医院' with NO space between the Latin and the Chinese -- note this differs from the project's T-BILINGUAL rule, which puts Chinese first and separates with one ASCII space."
+        }
+      ]
+    },
+    "APOLLO": {
+      "en": "APOLLO",
+      "candidates": [
+        {
+          "zh": "“阿波罗”",
+          "alt": "“阿波罗”核心 (APOLLO Core); “阿波罗”主机 (the APOLLO mainframe)",
+          "category": "franchise-computer",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 3,
+            "value_occurrence_keys": 179,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_LEVEL_NAME_TECH_MUTHRCORE]",
+            "representative_line": "在“阿波罗”核心"
+          },
+          "note": "Transliterated AND wrapped in Chinese quotation marks as a machine name. Key gate: AI_UI_TRAN_APOLLO_PROMPT -> '去往“阿波罗”核心'. The dev-internal key AI_EXTERN_360_LEVEL_NAME_TECH_MUTHRCORE also resolves here -- see the MU/TH/UR entry."
+        }
+      ]
+    },
+    "Working Joe": {
+      "en": "Working Joe",
+      "candidates": [
+        {
+          "zh": "“打工仔”",
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 33,
+            "representative_key": "T0001.TXT:[A1_T0001_TEX_1747]",
+            "representative_line": "“打工仔”推销词"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE: no key contains JOE except AI_EXTERN_CLIP_FLAMIN_JOE -> '燃烧的乔', a video-clip label. The pairing Working Joe = 打工仔 is made by EXTERNAL KNOWLEDGE of the game (Seegson's budget android line), corroborated by the in-world line A1_M0401_ADV_2062: '“打工仔”——Sevastopol的仿生人劳动力'. A vivid, register-correct rendering (lit. 'wage grunt'), but it must be corroborated, not adopted on this source alone."
+        }
+      ]
+    },
+    "Anesidora": {
+      "en": "Anesidora",
+      "candidates": [
+        {
+          "zh": "安妮斯朵拉号",
+          "alt": null,
+          "category": "franchise-ship",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 44,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_9737]",
+            "representative_line": "安妮斯朵拉号"
+          },
+          "note": "Transliterated, unlike Nostromo and Torrens which were kept in Latin -- an internal inconsistency in the localisation. No key gate; paired by external knowledge (Marlow's ship)."
+        }
+      ]
+    },
+    "Colonial Marshal": {
+      "en": "Colonial Marshal",
+      "candidates": [
+        {
+          "zh": "殖民地执法官",
+          "alt": "执法官 (short form, most frequent); 殖民地执法局 (Colonial Marshal Bureau); 总执法官 (Marshal-in-charge)",
+          "category": "career",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 56,
+            "representative_key": "CUTSCENES.TXT:[A1_CUTSCENES_WAI_1371]",
+            "representative_line": "（噪音）...韦茨，Sevastopol空间站...（噪音）...殖民地执法官...（噪音）...严重事态...（噪音）"
+          },
+          "note": "No key gate. Paired by external knowledge from Waits' self-introduction A1_CUTSCENES_WAI_C0800_0021: '我是韦茨，Sevastopol空间站的殖民地执法官'. 执法官 (not 警长 / 治安官) is the register this franchise uses."
+        }
+      ]
+    },
+    "Solomons Habitation Tower": {
+      "en": "Solomons Habitation Tower",
+      "candidates": [
+        {
+          "zh": "所罗门居住塔",
+          "alt": "所罗门商业街 (Solomons Galleria / shopping centre)",
+          "category": "franchise-place",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 2,
+            "value_occurrence_keys": 30,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_LEVEL_NAME_HAB_SHOPPINGCENTRE]",
+            "representative_line": "在所罗门商业街"
+          },
+          "note": "Key gate is partial: AI_EXTERN_360_LEVEL_NAME_HAB_SHOPPINGCENTRE -> '在所罗门商业街' gates the 'Solomons ... shopping centre' half only. 居住塔 for 'Habitation Tower' comes from LOCATIONS.TXT and is ungated."
+        }
+      ]
+    },
+    "Lorenz Systech Spire": {
+      "en": "Lorenz Systech Spire",
+      "candidates": [
+        {
+          "zh": "洛伦兹合成技术塔",
+          "alt": "合成技术塔 (short form, 'Systech Spire'); 洛伦兹私人病房区 (Lorenz private ward)",
+          "category": "franchise-place",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 26,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_4010]",
+            "representative_line": "洛伦兹合成技术塔"
+          },
+          "note": "No key gate. 'Systech' -> 合成技术 (synthetic technology) is an interpretation, not a transliteration. 'Spire' -> 塔, the same word used for Solomons Habitation Tower, so the CN loses the Tower/Spire distinction."
+        }
+      ]
+    },
+    "Gemini Exoplanet Solutions": {
+      "en": "Gemini Exoplanet Solutions",
+      "candidates": [
+        {
+          "zh": "双子座行星解决方案公司",
+          "alt": "双子座 (short form); 双子座次要系统区 (Gemini Secondary Systems)",
+          "category": "franchise-corp",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 51,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_6337]",
+            "representative_line": "双子座行星解决方案公司"
+          },
+          "note": "'Gemini' rendered semantically as the constellation 双子座 rather than transliterated. 'Exoplanet' -> 行星 loses the exo-. No key gate."
+        }
+      ]
+    },
+    "MU/TH/UR 6000": {
+      "en": "MU/TH/UR 6000",
+      "candidates": [
+        {
+          "zh": null,
+          "alt": null,
+          "category": "franchise-computer",
+          "confidence": "none",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "not_attested",
+          "tier_hint": null,
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 0,
+            "representative_key": null,
+            "representative_line": null
+          },
+          "note": "NOT ATTESTED. Zero occurrences of MU/TH/UR, MUTHUR or any transliteration across all 13,565 keys. The only two keys carrying the dev-internal token MUTHR -- AI_EXTERN_360_LEVEL_NAME_TECH_MUTHRCORE and AI_UI_PRESENCE_TECH_MUTHRCORE -- BOTH resolve to '“阿波罗”核心'. That is a leftover development codename for Sevastopol's AI, which shipped as APOLLO; it is NOT evidence for how MU/TH/UR is rendered. Do not mine MU/TH/UR from this source."
+        }
+      ]
+    },
+    "motion tracker": {
+      "en": "motion tracker",
+      "candidates": [
+        {
+          "zh": "运动追踪器",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 17,
+            "value_occurrence_keys": 30,
+            "representative_key": "GLOBAL.TXT:[TEXT_MOTIONTRACKER]",
+            "representative_line": "运动追踪器"
+          },
+          "note": "Hardest gate in the corpus. GLOBAL.TXT [TEXT_MOTIONTRACKER] -> '运动追踪器' is a bare dictionary pair where the key IS the English source slug. Description key TEXT_MOTIONTRACKER_DESCRIPTION -> '在20米范围内探测任何物体的行动'."
+        }
+      ]
+    },
+    "flamethrower": {
+      "en": "flamethrower",
+      "candidates": [
+        {
+          "zh": "火焰喷射器",
+          "alt": "火焰喷射器燃料 (flamer fuel)",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 15,
+            "value_occurrence_keys": 24,
+            "representative_key": "GLOBAL.TXT:[TEXT_FLAMETHROWER]",
+            "representative_line": "火焰喷射器"
+          },
+          "note": "TEXT_FLAMETHROWER -> '火焰喷射器'. Also gated via the 'flamer' shorthand (TEXT_FLAMER_FUEL, AI_UI_CHALLENGE_NO_FLAMER)."
+        }
+      ]
+    },
+    "noisemaker": {
+      "en": "noisemaker",
+      "candidates": [
+        {
+          "zh": "制噪器",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 8,
+            "value_occurrence_keys": 11,
+            "representative_key": "GLOBAL.TXT:[TEXT_NOISEMAKER]",
+            "representative_line": "制噪器"
+          },
+          "note": "TEXT_NOISEMAKER -> '制噪器'. A coined compound; the localiser did not use 噪音器 or 干扰器."
+        }
+      ]
+    },
+    "med-kit": {
+      "en": "med-kit",
+      "candidates": [
+        {
+          "zh": "医疗包",
+          "alt": "大医疗包 (TEXT_LARGE_MEDIKIT), 小医疗包 (TEXT_SMALL_MEDIKIT)",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 11,
+            "value_occurrence_keys": 18,
+            "representative_key": "UI.TXT:[AI_UI_ITEM_SMALL_MEDIKIT]",
+            "representative_line": "医疗包"
+          },
+          "note": "The corpus distinguishes med-kit = 医疗包 from trauma/first-aid kit = 急救包 (A1_M1001_OBJ_2260 '找到创伤急救包')."
+        }
+      ]
+    },
+    "EMP mine": {
+      "en": "EMP mine",
+      "candidates": [
+        {
+          "zh": "电磁脉冲地雷",
+          "alt": "电磁脉冲 (EMP alone, TEXT_EMP); 电磁脉冲组件 (EMP element); 电磁脉冲装置 (EMP device, DLC blueprint text)",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 3,
+            "value_occurrence_keys": 3,
+            "representative_key": "GLOBAL.TXT:[TEXT_EMP_MINE]",
+            "representative_line": "电磁脉冲地雷"
+          },
+          "note": "TEXT_EMP_MINE -> '电磁脉冲地雷'. Note mine = 地雷 even though these are thrown or placed indoors."
+        }
+      ]
+    },
+    "ion torch": {
+      "en": "ion torch",
+      "candidates": [
+        {
+          "zh": "离子割炬",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 6,
+            "value_occurrence_keys": 7,
+            "representative_key": "UI.TXT:[AI_UI_ION_TORCH]",
+            "representative_line": "使用离子割炬"
+          },
+          "note": "LOCALISATION BUG FOUND: four ION keys give '离子割炬' correctly (AI_UI_ION_TORCH, AI_UI_ION_TORCH_REQUIRED, AI_UI_ION_TORCH_UPGRADE_REQUIRED, AI_UI_INTERACT_CUTTING_ION) but AI_UI_WEAPONSTUFF_ION_TORCH wrongly gives '等离子割炬' (plasma torch). Adopt 离子割炬; majority and semantics agree."
+        }
+      ]
+    },
+    "plasma torch": {
+      "en": "plasma torch",
+      "candidates": [
+        {
+          "zh": "等离子割炬",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 6,
+            "value_occurrence_keys": 13,
+            "representative_key": "UI.TXT:[AI_UI_WEAPONSTUFF_PLASMA_TORCH]",
+            "representative_line": "等离子割炬"
+          },
+          "note": null
+        }
+      ]
+    },
+    "gas torch": {
+      "en": "gas torch",
+      "candidates": [
+        {
+          "zh": "气体割炬",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 6,
+            "value_occurrence_keys": 7,
+            "representative_key": "UI.TXT:[AI_UI_WEAPONSTUFF_GAS_TORCH]",
+            "representative_line": "气体割炬"
+          },
+          "note": "The three torch tiers are gas -> plasma -> ion (气体 -> 等离子 -> 离子割炬)."
+        }
+      ]
+    },
+    "cutting tool": {
+      "en": "cutting tool",
+      "candidates": [
+        {
+          "zh": "切割工具",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 3,
+            "value_occurrence_keys": 8,
+            "representative_key": "GLOBAL.TXT:[TEXT_CUTTING_TOOL]",
+            "representative_line": "切割工具"
+          },
+          "note": "TEXT_CUTTING_TOOL -> '切割工具'. Distinct from 割炬 (torch), which is the cutting tool's upgradeable head."
+        }
+      ]
+    },
+    "access tuner / security tuner": {
+      "en": "access tuner / security tuner",
+      "candidates": [
+        {
+          "zh": "安全访问调谐器",
+          "alt": "入侵工具 (GLOBAL.TXT natural-language key 'Hacking Tool Required' -> '需要入侵工具')",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 4,
+            "value_occurrence_keys": 32,
+            "representative_key": "UI.TXT:[AI_UI_HACKING_TOOL_LEVEL]",
+            "representative_line": "安全访问调谐器等级"
+          },
+          "note": "The item the game calls both 'access tuner' and 'security access tuner' is keyed HACKING_TOOL internally. AI_UI_HACKING_TOOL_LEVEL -> '安全访问调谐器等级'; AI_UI_USE_HACKING_TOOL -> '使用安全访问调谐器'. GLOBAL.TXT's 入侵工具 is a second, inconsistent rendering."
+        }
+      ]
+    },
+    "maintenance jack": {
+      "en": "maintenance jack",
+      "candidates": [
+        {
+          "zh": "维修扳手",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "medium",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "external_knowledge+value",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 22,
+            "representative_key": "UI.TXT:[AI_UI_INTERACT_REMOVE_BRACE_LOCK]",
+            "representative_line": "需要维修扳手"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE for the noun: no key contains JACK or WRENCH. The keys producing this string describe its uses -- A1_TUT_TIP_MELEE (melee weapon), A1_TUT_TIP_DOOR_BRACE (remove door braces), A1_TUT_TIP_ELECTRIC_JUNCTION (rewire junction boxes) -- and in Alien: Isolation that single tool IS the maintenance jack. Pairing by external knowledge. Note 扳手 = wrench, not jack."
+        }
+      ]
+    },
+    "flare": {
+      "en": "flare",
+      "candidates": [
+        {
+          "zh": "发光棒",
+          "alt": "荧光棒 (TEXT_CHEM_LIGHT, glow stick); 大范围荧光棒 (wide-area chem light)",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 6,
+            "value_occurrence_keys": 83,
+            "representative_key": "GLOBAL.TXT:[TEXT_FLARE]",
+            "representative_line": "发光棒"
+          },
+          "note": "TEXT_FLARE -> '发光棒'. The corpus keeps flare = 发光棒 separate from chem light = 荧光棒."
+        }
+      ]
+    },
+    "keycard": {
+      "en": "keycard",
+      "candidates": [
+        {
+          "zh": "钥匙卡",
+          "alt": "密码卡 (AI_UI_INTERACT_KEYCARD_UNLOCKED, inconsistent)",
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 9,
+            "value_occurrence_keys": 47,
+            "representative_key": "GLOBAL.TXT:[TEXT_KEYCARD]",
+            "representative_line": "钥匙卡"
+          },
+          "note": "TEXT_KEYCARD -> '钥匙卡'; GLOBAL.TXT natural-language key 'Use Key Card' -> '使用钥匙卡'."
+        }
+      ]
+    },
+    "bolt gun": {
+      "en": "bolt gun",
+      "candidates": [
+        {
+          "zh": "气矢枪",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 7,
+            "value_occurrence_keys": 16,
+            "representative_key": "UI.TXT:[AI_UI_ITEM_BOLTGUN]",
+            "representative_line": "气矢枪"
+          },
+          "note": "AI_UI_ITEM_BOLTGUN -> '气矢枪'. Lit. 'air-dart gun' -- captures the pneumatic mechanism described in A1_TUT_TIP_BOLTGUN."
+        }
+      ]
+    },
+    "cattle prod / stun baton": {
+      "en": "cattle prod / stun baton",
+      "candidates": [
+        {
+          "zh": "电击棍",
+          "alt": null,
+          "category": "equipment",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 6,
+            "value_occurrence_keys": 8,
+            "representative_key": "UI.TXT:[AI_UI_ITEM_CATTLEPROD]",
+            "representative_line": "电击棍"
+          },
+          "note": null
+        }
+      ]
+    },
+    "rewire": {
+      "en": "rewire",
+      "candidates": [
+        {
+          "zh": "重新接线系统",
+          "alt": "重新接线点 (rewire point); 接线盒 (junction box)",
+          "category": "station-system",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 68,
+            "value_occurrence_keys": 32,
+            "representative_key": "GLOBAL.TXT:[TEXT_REWIRE]",
+            "representative_line": "重新接线系统"
+          },
+          "note": "TEXT_REWIRE -> '重新接线系统'. 68 keys carry REWIRE; most are room names on the rewire panel."
+        }
+      ]
+    },
+    "Alien (the creature)": {
+      "en": "Alien (the creature)",
+      "candidates": [
+        {
+          "zh": "异形",
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 72,
+            "value_occurrence_keys": 71,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_PRESENCE_KILLED_BY_ALIEN]",
+            "representative_line": "被异形所杀"
+          },
+          "note": "Hard gate: AI_EXTERN_360_PRESENCE_KILLED_BY_ALIEN -> '被异形所杀'; AI_EXTERN_ACHIEVEMENT_CA_ALIEN_ENCOUNTERED_DESC -> '在Sevastopol第一次遭遇了异形'. Independently confirms the project's settled 异形. Zero occurrences of 异型."
+        }
+      ]
+    },
+    "facehugger": {
+      "en": "facehugger",
+      "candidates": [
+        {
+          "zh": "抱脸虫",
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 3,
+            "value_occurrence_keys": 3,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_PRESENCE_KILLED_BY_FACEHUGGER]",
+            "representative_line": "被抱脸虫所杀"
+          },
+          "note": "Hard gate, 3 keys, all of the form *_KILLED_BY_FACEHUGGER -> '被抱脸虫所杀'. Official-localisation confirmation of the project's settled 抱脸虫."
+        }
+      ]
+    },
+    "android / synthetic": {
+      "en": "android / synthetic",
+      "candidates": [
+        {
+          "zh": "仿生人",
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 11,
+            "value_occurrence_keys": 220,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_PRESENCE_KILLED_BY_ANDROID]",
+            "representative_line": "被仿生人所杀"
+          },
+          "note": "Hard gate: AI_EXTERN_360_PRESENCE_KILLED_BY_ANDROID -> '被仿生人所杀'; AI_EXTERN_ACHIEVEMENT_CA_KILL_ANDROID_DESC -> '干掉了一个仿生人'. The paired key *_KILLED_BY_HUMAN -> '被人类所杀' fixes the android/human contrast. Note 仿生人, NOT 合成人 or 机器人."
+        }
+      ]
+    },
+    "xenomorph": {
+      "en": "xenomorph",
+      "candidates": [
+        {
+          "zh": null,
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "not_distinguished",
+          "tier_hint": null,
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 0,
+            "representative_key": null,
+            "representative_line": null
+          },
+          "note": "NOT SEPARATELY ATTESTED. The localisation has no distinct rendering for 'xenomorph' -- everything is 异形. The nearest register-raised phrase is 生物体 ('organism'), used where the script avoids naming it: AI_EXTERN_ACHIEVEMENT_CA_ALIEN_ENCOUNTERED_TITLE -> '一个完美的生物体' (the famous 'perfect organism'), and A1_CUTSCENES_RIP_C1500_0008 '是个生物体，很大，能要人命'. Use only to corroborate 异形; this source cannot settle an Alien/Xenomorph split."
+        }
+      ]
+    },
+    "egg": {
+      "en": "egg",
+      "candidates": [
+        {
+          "zh": "卵",
+          "alt": "蛋 (A1_UI_LAM_0030 '都是内含不明生物体的蛋')",
+          "category": "franchise-creature",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "ungated_prose",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 1,
+            "representative_key": "M2501.TXT:[A1_M2501_RIP_0380]",
+            "representative_line": "所有失踪的人，所有人，他们都被困在某种巢穴里，那里有卵。像是一个......养殖场......"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE. The one EGG key, AI_EXTERN_ACHIEVEMENT_CA_NO_EGG_DISTURBED_DESC, resolves to '穿过了反应堆维修站而不死亡' -- it never says egg. 卵 appears only in ungated dialogue (A1_M2501_RIP_0380). Corroborative only."
+        }
+      ]
+    },
+    "nest / hive": {
+      "en": "nest / hive",
+      "candidates": [
+        {
+          "zh": "巢穴",
+          "alt": null,
+          "category": "franchise-creature",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "ungated_prose",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 13,
+            "representative_key": "M2501.TXT:[A1_M2501_OBJ_4161]",
+            "representative_line": "摧毁巢穴"
+          },
+          "note": "ENGLISH GATE MISLEADING: the key AI_EXTERN_360_LEVEL_NAME_ENG_ALIEN_NEST resolves to '在反应堆维修站' -- the localiser used the location name, not 'nest'. 巢穴 appears only in ungated M2501 dialogue. Corroborative only."
+        }
+      ]
+    },
+    "airlock": {
+      "en": "airlock",
+      "candidates": [
+        {
+          "zh": "气闸舱",
+          "alt": "主气闸舱 (main); 紧急气闸舱 (emergency); 外部气闸舱 (external); 气闸舱控制室 (airlock control)",
+          "category": "station-system",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_sentence",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 1,
+            "value_occurrence_keys": 59,
+            "representative_key": "GLOBAL.TXT:[TEXT_Get to the Airlock]",
+            "representative_line": "前往气闸舱"
+          },
+          "note": "Gated by a tier-1 natural-language key: GLOBAL.TXT [TEXT_Get to the Airlock] -> '前往气闸舱'. That key IS the English source string, so this is a genuine aligned pair."
+        }
+      ]
+    },
+    "reactor": {
+      "en": "reactor",
+      "candidates": [
+        {
+          "zh": "反应堆",
+          "alt": "反应堆堆芯 / 反应堆芯 (reactor core); 中央反应堆 (central reactor); 反应堆冷却剂工厂 (coolant plant)",
+          "category": "station-system",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 3,
+            "value_occurrence_keys": 66,
+            "representative_key": "EXTERNAL.TXT:[AI_EXTERN_360_LEVEL_NAME_ENG_REACTORCORE]",
+            "representative_line": "在反应堆芯"
+          },
+          "note": "AI_UI_REACTOR_CORE -> '反应堆堆芯'; AI_EXTERN_360_LEVEL_NAME_ENG_REACTORCORE -> '在反应堆芯'. The two disagree on 堆芯 vs 芯."
+        }
+      ]
+    },
+    "comms / communications": {
+      "en": "comms / communications",
+      "candidates": [
+        {
+          "zh": "通信",
+          "alt": "通信中心 (Comms hub); Seegson通信系统 (Seegson Communications system); 对外通信 (external comms); 对内通信 (internal comms)",
+          "category": "station-system",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 9,
+            "value_occurrence_keys": 135,
+            "representative_key": "UI.TXT:[AI_UI_DLC_TECH_COMMS_TITLE]",
+            "representative_line": "合成技术塔—通信中心"
+          },
+          "note": "AI_EXTERN_360_LEVEL_NAME_TECH_COMMS -> '在Seegson通信中心'; AI_UI_INTERACT_COMMS_TITLE -> 'Seegson通信系统'. Note 通信, not 通讯."
+        }
+      ]
+    },
+    "terminal": {
+      "en": "terminal",
+      "candidates": [
+        {
+          "zh": "终端",
+          "alt": "个人终端 (personal terminal, AI_UI_TERMINAL_INTERACTION)",
+          "category": "station-system",
+          "confidence": "high",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": true,
+          "gate_method": "key_slug",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 9,
+            "value_occurrence_keys": 50,
+            "representative_key": "UI.TXT:[AI_UI_TERMINAL_INTERACTION]",
+            "representative_line": "个人终端"
+          },
+          "note": "AI_UI_INTERACT_ACCESS_TERMINAL -> '访问终端'; AI_UI_INTERACT_ACCESS_TERMINAL_LOCKED -> '终端已锁定'."
+        }
+      ]
+    },
+    "hypersleep / cryo": {
+      "en": "hypersleep / cryo",
+      "candidates": [
+        {
+          "zh": "深度休眠",
+          "alt": "休眠舱 / 深度休眠舱 (hypersleep chamber, LOCATIONS.TXT)",
+          "category": "station-system",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "ungated_prose",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 9,
+            "representative_key": "LOCATIONS.TXT:[A1_LOC_TEX_4242]",
+            "representative_line": "深度休眠舱"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE: no key contains HYPERSLEEP or CRYO. 深度休眠 appears only in ungated dialogue (A1_M0101_SAM_9851 '深度休眠难为她了') and ungated LOCATIONS entries. Beware 冷冻剂 in A1_UI_SPE_1879 -- that is reactor coolant, not cryo."
+        }
+      ]
+    },
+    "transit system": {
+      "en": "transit system",
+      "candidates": [
+        {
+          "zh": "运输列车",
+          "alt": "运输车站 (transit station, the more frequent form); 运输列车控制室 (transit control)",
+          "category": "station-system",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "ungated_prose",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 125,
+            "representative_key": "UI.TXT:[AI_UI_CHI_3625]",
+            "representative_line": "拆除运输列车"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE: no key contains TRANSIT (the TRAN_ segment in AI_UI_TRAN_* is a structural prefix). All occurrences are in ungated LOCATIONS and dialogue. Corroborative only."
+        }
+      ]
+    },
+    "quarantine": {
+      "en": "quarantine",
+      "candidates": [
+        {
+          "zh": "检疫隔离",
+          "alt": "封锁 = lockdown, a DIFFERENT concept (DLC01 '主管封锁' / '公司封锁')",
+          "category": "station-system",
+          "confidence": "low",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "ungated_prose",
+          "tier_hint": "T-PLAIN",
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 17,
+            "representative_key": "UI.TXT:[AI_UI_MISSION_NAME_0050]",
+            "representative_line": "检疫隔离"
+          },
+          "note": "ENGLISH GATE NOT AVAILABLE: no key contains QUARANTINE. Attested only in ungated terminal prose, e.g. A1_M0902_TEX_2684 'San Cristobal医院检疫隔离：已实施。' and A1_M0902_SGF_0430 '警告：检测到医院检疫隔离被突破。' Do not conflate with 封锁 (lockdown)."
+        }
+      ]
+    },
+    "decontamination": {
+      "en": "decontamination",
+      "candidates": [
+        {
+          "zh": null,
+          "alt": null,
+          "category": "station-system",
+          "confidence": "none",
+          "source": "Alien: Isolation official Simplified Chinese localisation (priority level 3)",
+          "english_gate": false,
+          "gate_method": "not_attested",
+          "tier_hint": null,
+          "evidence": {
+            "key_gated_keys": 0,
+            "value_occurrence_keys": 22,
+            "representative_key": "UI.TXT:[AI_UI_AIR_CONDITIONING]",
+            "representative_line": "空气净化"
+          },
+          "note": "NOT ATTESTED as 'decontamination'. No key contains DECON or PURGE. Of the 22 keys containing 净化, 21 are the PURGE sense: the reactor/nest purge (A1_M2501_RIP_0440 '启动一次反应堆净化'; A1_M2501_SGF_5368 '系统净化已准备就绪'; A1_M2501_OBJ_9215 '在反应堆控制站启动净化'), the electrical-grid purge (A1_M2102_OBJ_4591 '停止电网净化'), and the Environment Control minigame (A1_TUT_MINIGAME_3_EnvironCTR '使用&dpad&来启动净化'). The single exception is AI_UI_AIR_CONDITIONING -> '空气净化' (air conditioning/purification). So 净化 here means purge or air-purify, never decontaminate. Do not mine decontamination from this source."
+        }
+      ]
+    }
+  }
+}

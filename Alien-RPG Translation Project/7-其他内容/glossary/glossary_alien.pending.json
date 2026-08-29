@@ -1,0 +1,573 @@
+{
+ "_meta": {
+  "artifact": "glossary_alien.pending.json",
+  "version": "v1.0",
+  "generated": "2026-08-29",
+  "count": 31,
+  "count_is_authoritative": true,
+  "note": "Terms with NO usable evidence under the ladder. They are deliberately ABSENT from glossary_alien.json: an absent key makes a translator stop and ask, whereas a plausible-looking guess propagates silently through 2.7M characters of content.",
+  "rule": "Standard modern Chinese usage may settle a COMMON noun. It can NEVER settle a proper noun — a place, a ship, a person, an organisation or a model designation. Phase 0 broke this rule twice (United Systems Military 联合星系军, whose why_this_won said literally 'Coined.', and Rebecca Jorden 丽贝卡·乔登, whose surname was sourced to 'standard modern Chinese usage' at en-gated 0). Both are now in glossary_alien.pending.json, and assertion #7 in the builder makes the rule mechanical: any franchise-* term at level C without a derived_from parent fails the build.",
+  "moved_out_of_the_spine_in_v1_0": [
+   "Chestburster",
+   "Drone",
+   "Ovomorph",
+   "Rebecca Jorden",
+   "United Systems Military",
+   "Warrior"
+  ],
+  "resolved_out_of_pending_in_v1_0": {
+   "Atmosphere Processor": "大气处理器 — level 1 ch.1, glossed inline",
+   "Hadley's Hope": "哈德利的希望 — level 1 ch.1, glossed inline",
+   "Sulaco": "萨拉科号 — level 1 ch.1 (USS萨拉科号), glossed inline",
+   "Smartgun": "keyed as Smart Gun = 智能炮 — level 1 ch.2 (M56A2智能炮)",
+   "Motion Tracker": "运动追踪器 — level 1 ch.2 AND a level-3 hard key gate (TEXT_MOTIONTRACKER)",
+   "Dropship": "着陆舰 — level 1 ch.2",
+   "Neomorph": "新变种 — level 1 ch.1"
+  },
+  "permanently_unreachable": {
+   "_why": "Level 1 covers only ch.1 and ch.2 and the owner has confirmed no more exists. The Xenomorph life cycle is ch.10. These five are zero-hit across all 11,088 subtitle pairs AND absent from the Alien: Isolation localisation, so nothing on the ladder above rung 7 can reach them.",
+   "terms": [
+    "Chestburster",
+    "Ovomorph",
+    "Drone",
+    "Warrior",
+    "Praetorian"
+   ]
+  }
+ },
+ "terms": {
+  "APC": {
+   "kind": "vehicle class (M577 Armored Personnel Carrier)",
+   "candidates": [
+    {
+     "zh": "(none)",
+     "source": "CnSCG subs",
+     "count": "en-gated 0 — MISTRANSLATED",
+     "note": "ALIENS1986 1:15:17 'fall back by squads to the A.P.C.' -> 离开焚化炉 (= leave the crematorium — badly wrong); 1:26:28 'salvage out of the A.P.C. wreckage' -> 失事船上能用的武器."
+    }
+   ],
+   "corpus": "Both occurrences are wrong.",
+   "why_unresolved": "装甲运兵车 is the standard Chinese military term and is almost certainly right, but 'APC' is also a model-bearing proper noun in this franchise (M577) and the project rule sends proper nouns here rather than to a convention call.",
+   "next_step": "Almost certainly 装甲运兵车 / M577装甲运兵车. Needs only an owner nod, not research.",
+   "carried_from": "v0.2"
+  },
+  "Acheron": {
+   "kind": "proper noun — planet name (LV-426's colonial name)",
+   "candidates": [
+    {
+     "zh": "阿克伦",
+     "source": "survey proposal",
+     "count": "en-gated 0",
+     "note": "Could not be found in zh.wikipedia's Alien articles or in cn.json."
+    },
+    {
+     "zh": "阿刻戎 / 阿克戎",
+     "source": "standard Chinese for the Greek river Acheron",
+     "count": "n/a",
+     "note": "The conventional rendering of the mythological river, which argues AGAINST 阿克伦."
+    }
+   ],
+   "corpus": "en-gated 0 in the subtitle corpus — the planet is only ever called LV426 there.",
+   "why_unresolved": "Two plausible transliterations and no Alien-specific attestation for either.",
+   "next_step": "Check whether the 异形2 zh-wiki article names the colony's planet at all; otherwise decide between the mythological 阿刻戎 and the phonetic 阿克伦.",
+   "carried_from": "v0.2"
+  },
+  "Bambi Burster": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "(none)",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "An in-joke English nickname. No Chinese source and no obvious calque."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage III Xenomorph, the Alien-3 runner burster",
+   "carried_from": "v0.2"
+  },
+  "Charger / Crusher": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "冲撞异形 / 碾压异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "A slash-joined double name; needs a ruling on whether to keep the slash."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage VI caste, Actor 'EV - Charger/Crusher (Stage VI Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Chestburster": {
+   "phase0_cn": "破胸体",
+   "why": "Zero English-gated hits across all 11,088 subtitle pairs, zero in the Alien: Isolation localisation, and level 1 does not reach the Xenomorph life cycle — that is ch.10 and only ch.1 and ch.2 exist. The Phase-0 value came from zh.wikipedia, which the new ladder demotes to level 7, the floor. A level-7 value for a creature caste name that the packs use as an Actor name is exactly the kind of plausible guess that propagates silently.",
+   "sources_checked": [
+    "level 1: not reached (life cycle is ch.10)",
+    "level 2: en-gated 0",
+    "level 3: not attested",
+    "level 5: en-gated 0",
+    "level 6: en-gated 0",
+    "level 7: zh.wikipedia 破胸体 / 百度百科 破胸者"
+   ],
+   "what_would_settle_it": "ch.10 of the fan serial, if it is ever written. The owner has confirmed only ch.1 and ch.2 exist, so plan for this staying pending.",
+   "pack_impact": "corerules ships Chestburster Actors and an 'EV - Chestburster Attacks' RollTable. The table NAME is separately frozen by actor.mjs's system.rTables lookup, so the pending term blocks only the prose and the Actor name.",
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Drone": {
+   "phase0_cn": "工蜂异形",
+   "why": "en-gated 0 across every level. 工蜂异形 ('worker-bee alien') is a Phase-0 coinage from the wiki's bee metaphor.",
+   "sources_checked": [
+    "level 1: not reached",
+    "level 2: en-gated 0",
+    "level 3: not attested",
+    "level 6: en-gated 0"
+   ],
+   "what_would_settle_it": "ch.10 of the fan serial, or the Evolved bestiary's own Chinese release.",
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Ellen Ripley": {
+   "kind": "proper noun — given name",
+   "candidates": [
+    {
+     "zh": "海伦·蕾普丽",
+     "source": "CnSCG subs",
+     "count": "en-gated 2, RESURRECTION — REJECTED",
+     "note": "0:10:47 'Ellen Ripley died trying to wipe this species out' -> 海伦·蕾普丽死于致力消灭异形; 0:35:30. 海伦 is the standard Chinese rendering of HELEN, not Ellen — the corpus mistranslates the given name."
+    },
+    {
+     "zh": "埃伦·蕾普丽 / 艾伦·蕾普丽",
+     "source": "standard Chinese for 'Ellen'",
+     "count": "en-gated 0",
+     "note": "Two conventional forms; no Alien-specific attestation."
+    }
+   ],
+   "corpus": "The only attestation is a mistranslation. The SURNAME is settled (蕾普丽, en-gated 75).",
+   "why_unresolved": "Cannot pick between 埃伦 and 艾伦 without a reference work, and must not keep 海伦.",
+   "next_step": "Read zh.wikipedia 异形 (电影) for the character's full Chinese name.",
+   "carried_from": "v0.2",
+   "v1_0_note": "STILL PENDING. The surname is settled (Ripley = 蕾普丽, level 6, en-gated 75) but the given name is not: level 6's only rendering of 'Ellen' is 海伦, which is on the project's known-bad list. en-gated 5 rows for 'Ellen Ripley', 3 of them 蕾普丽 with the given name dropped entirely."
+  },
+  "Fury 161": {
+   "kind": "proper noun — planet name (a corruption of Fiorina 161)",
+   "candidates": [
+    {
+     "zh": "复仇161星",
+     "source": "CnSCG subs",
+     "count": "en-gated 2, ALIEN3 only",
+     "note": "0:13:02 'Fury 161' -> 复仇161星; 0:37:13. RENDERS 'Fury' SEMANTICALLY ('vengeance') and silently drops that Fury is a corruption of Fiorina."
+    }
+   ],
+   "corpus": "Consistent within one film, but the rendering destroys the etymology the name depends on.",
+   "why_unresolved": "A phonetic 富里161 or 菲奥里纳161 would preserve the joke; neither is attested.",
+   "next_step": "Owner ruling on semantic vs phonetic for franchise place names — the same decision governs Acheron and Hadley's Hope, so settle all three together.",
+   "carried_from": "v0.2",
+   "v1_0_note": "STILL PENDING, but the same world under its other English name IS now settled: Fiorina 161 = 菲奥莉娜161 at level 1. Only the 'Fury 161' spelling is unreached."
+  },
+  "Harvester": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "收割者",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Literal. No Alien-specific attestation."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Non-Xenomorph creature; Actors 'EV - Harvester', 'EV - Harvester Juvenile'",
+   "carried_from": "v0.2"
+  },
+  "Imp": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "小鬼异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Unsourced."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage III Xenomorph",
+   "carried_from": "v0.2"
+  },
+  "Lion Worm": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "狮蠕虫",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Literal compound; unsourced."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Non-Xenomorph creature, Actor 'EV - Lion Worm'",
+   "carried_from": "v0.2"
+  },
+  "Named planets and colonies (Evolved core rules)": {
+   "kind": "proper nouns — a SET, to be ruled on as a set",
+   "candidates": [
+    {
+     "zh": "(per-name transliteration)",
+     "source": "none",
+     "count": "en-gated 0",
+     "note": "Calpamos, Thedus, Torin Prime, Volcus, Tanaka 5, Linna 349, Fiorina 161 and 'GJ1187 “SHĀNMÉN”'. Re-derived from raw-dumps/corerules.json items."
+    }
+   ],
+   "corpus": "en-gated 0 for every one of them.",
+   "why_unresolved": "Same class as Acheron: transliteration with no Chinese attestation. Note GJ1187 “SHĀNMÉN” is already pinyin for 山门 and should probably be RESTORED to 山门 rather than transliterated back — that one is a Chinese name that made a round trip through English.",
+   "next_step": "One owner ruling fixing a transliteration policy, then apply it mechanically. The pure catalogue designations (KOI-*, GJ*, GL*, ALPHA BOÖTIS, 70 OPHIUCHI, ...) need no ruling: they stay Latin, like LV-426.",
+   "count_note": "~40 designations; only the pronounceable names need a decision.",
+   "carried_from": "v0.2"
+  },
+  "Neomorphic Bloodburster": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "破血体",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Built on the settled Chestburster -> 破胸体 pattern (破X体)."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage III Neomorph, Actor 'EV - Neomorphic Bloodburster (Stage III Neomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Neophyte": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "新生体",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Literal; unsourced."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage IV Neomorph",
+   "carried_from": "v0.2"
+  },
+  "Ovomorph": {
+   "phase0_cn": "异形卵",
+   "why": "Same evidence state as Chestburster: en-gated 0 everywhere, level 1 does not reach it. 异形卵 is a compound Phase 0 built, not a rendering anyone attested.",
+   "sources_checked": [
+    "level 1: not reached",
+    "level 2: en-gated 0",
+    "level 3: not attested",
+    "level 6: en-gated 0"
+   ],
+   "what_would_settle_it": "ch.10 of the fan serial.",
+   "note": "The bare noun Egg IS settled (卵, level 3). Ovomorph is the caste designation and is a different word in the English.",
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Power Loader": {
+   "kind": "proper noun — vehicle model (P-5000 Power Loader)",
+   "candidates": [
+    {
+     "zh": "动力装载机",
+     "source": "Chinese fan writing",
+     "count": "unverified",
+     "note": "Common fan rendering; unsourced to a reference work."
+    },
+    {
+     "zh": "动力服",
+     "source": "zh.wikipedia 异形2 plot summary",
+     "count": "n/a — REJECTED",
+     "note": "= powered suit. Loses the 'loader' sense entirely."
+    },
+    {
+     "zh": "起重机械人",
+     "source": "CnSCG subs",
+     "count": "en-gated 1",
+     "note": "ALIENS1986 0:37:02 'I can drive that loader' -> 我能操作起重机械人. Reads as a crane robot."
+    }
+   ],
+   "corpus": "One hit, and it renames the machine.",
+   "why_unresolved": "Same shape as Smartgun: no reference work reachable.",
+   "next_step": "Check 萌娘百科 for P-5000. Note the English canon itself says 'Powered Work Loader' (Caterpillar P-5000), which argues for 动力装载机.",
+   "carried_from": "v0.2"
+  },
+  "Praeto-Facehugger": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "禁卫抱脸虫",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Depends on Praetorian, which is itself pending."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage II Xenomorph",
+   "carried_from": "v0.2"
+  },
+  "Praetorian": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "禁卫异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "禁卫 is the standard Chinese for the Roman Praetorian Guard; + the 异形 pattern."
+    },
+    {
+     "zh": "近卫异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "近卫 is the alternative rendering of Praetorian Guard."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage VI caste, Actor 'EV - Praetorian (Stage VI Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Queenburster": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "女王破胸体",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Compound of the settled Queen and Chestburster — but Queen itself is dispute D6, so this cannot be settled before D6 is."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage III Xenomorph",
+   "carried_from": "v0.2"
+  },
+  "Rebecca Jorden": {
+   "phase0_cn": "丽贝卡·乔登",
+   "why": "RULE VIOLATION, carried over from Phase 0 and now resolved by splitting. The GIVEN name 丽贝卡 is en-gated 5 (ALIENS1986 1:02:32) and is sound. The SURNAME 乔登 was sourced to 'standard modern Chinese usage' at en-gated 0 — a proper noun settled by convention, which the rule forbids. The usual Chinese form of Jorden/Jordan is 乔丹, so 乔登 is a choice presented as a standard. The character IS reachable under her nickname: Newt = 纽特 stays in the glossary at level 6, en-gated 35.",
+   "sources_checked": [
+    "given name 丽贝卡: level 6, en-gated 5",
+    "surname 乔登: en-gated 0 at every level",
+    "nickname Newt 纽特: level 6, en-gated 35 — IN the glossary"
+   ],
+   "what_would_settle_it": "Any level 1-3 source that spells the surname. Until then use the nickname, which is what the fiction uses anyway.",
+   "was_rule_violation": true,
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Remote Sentry Unit": {
+   "kind": "gear name (UA 571-C sentry gun)",
+   "candidates": [
+    {
+     "zh": "机械感应器",
+     "source": "CnSCG subs",
+     "count": "en-gated 1 — REJECTED",
+     "note": "ALIENS1986 1:26:53 'we got four of these robot sentries' -> 我们有四套这种机械感应器 (= mechanical sensor). At 1:29:07 and 1:29:30 'sentry units' is dropped entirely."
+    },
+    {
+     "zh": "自动哨戒炮 / 遥控哨戒单元",
+     "source": "standard Chinese gaming usage",
+     "count": "en-gated 0",
+     "note": "Plausible; unattested for this franchise."
+    }
+   ],
+   "corpus": "One hit and it turns a gun into a sensor.",
+   "why_unresolved": "No source; and the device is a weapon, so getting it wrong changes what players think it does.",
+   "next_step": "Owner ruling.",
+   "carried_from": "v0.2"
+  },
+  "Royal Facehugger": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "皇家抱脸虫",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Compound of the owner-decreed 抱脸虫."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage II Xenomorph",
+   "carried_from": "v0.2"
+  },
+  "Scout": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "侦察异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "侦察 = scout/recon."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage IV caste, Actor 'EV - Scout (Stage IV Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Sentry": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "哨戒异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "哨戒 = sentry duty. Collides with the proposed reading of the UA 571-C Sentry Gun."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage V caste, Actor 'EV - Sentry (Stage V Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Soldier": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "士兵异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Plain."
+    },
+    {
+     "zh": "战士异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "REJECTED here — already spoken for by Warrior."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage V caste, Actor 'EV - Soldier (Stage V Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "Stalker": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "潜行异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "潜行 = stalk/prowl."
+    },
+    {
+     "zh": "猎杀异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Emphasises the hunt rather than the stealth."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage IV caste, Actor 'EV - Stalker (Stage IV Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "United States Colonial Marine Corps (USCM)": {
+   "kind": "proper noun — military organisation",
+   "candidates": [
+    {
+     "zh": "美国殖民陆战队",
+     "source": "composed from the settled Colonial Marine -> 殖民陆战队",
+     "count": "en-gated 0",
+     "note": "The adjective is settled; the 'United States' half is not."
+    },
+    {
+     "zh": "USCM",
+     "source": "keep the acronym",
+     "count": "en-gated 0",
+     "note": "Chinese military writing routinely keeps foreign service acronyms."
+    }
+   ],
+   "corpus": "en-gated 0 — the brief already flags the corpus as having zero USCM attestation, and the re-run confirms it.",
+   "why_unresolved": "The settled 殖民陆战队 covers the adjectival use ('a Colonial Marine'). The full service name and its acronym are a separate decision, and the setting's United States is not the present-day one.",
+   "next_step": "Owner ruling, together with United Systems Military (联合星系军), which is already in the glossary and sets the pattern for a service name.",
+   "carried_from": "v0.2"
+  },
+  "United Systems Military": {
+   "phase0_cn": "联合星系军",
+   "why": "RULE VIOLATION, carried over from Phase 0 and now resolved by removal. This is a proper noun — a military branch — and its Phase-0 why_this_won said literally 'Coined.' Its only recorded candidate was 军队 at en-gated 1, dismissed as too generic. The glossary's own rule (and pending._meta.rule) is that convention may settle a COMMON noun and never a proper noun. Its sibling organisation USCM was already pending for exactly this reason; two military branches in the same evidence state were getting opposite treatment.",
+   "sources_checked": [
+    "level 1: not reached",
+    "level 2: en-gated 0",
+    "level 3: not attested",
+    "level 6: en-gated 0",
+    "level 7: silent"
+   ],
+   "what_would_settle_it": "bilibili cv18100844 (named in PROJECT.md §7.2), or ch.3+ of the fan serial.",
+   "was_rule_violation": true,
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Warrior": {
+   "phase0_cn": "战士异形",
+   "why": "The corpus's only hit is a single Alien: Earth 2025 line rendering 战士模式 ('warrior mode'), which is not the caste noun. Grade 'thin', one line, one lineage. Not enough to name an Actor.",
+   "sources_checked": [
+    "level 1: not reached",
+    "level 2: en-gated 1 line, 战士模式, grade thin",
+    "level 3: not attested",
+    "level 6: en-gated 0"
+   ],
+   "what_would_settle_it": "ch.10 of the fan serial.",
+   "moved_out_of_the_spine_in": "v1.0"
+  },
+  "Worker": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "劳工异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Avoids 工蜂, which Drone already holds."
+    },
+    {
+     "zh": "工兵异形",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Reads as a combat engineer."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "Stage V caste, Actor 'EV - Worker (Stage V Xenomorph)'",
+   "carried_from": "v0.2"
+  },
+  "XX121": {
+   "kind": "proper noun — Xenomorph/creature caste designation",
+   "candidates": [
+    {
+     "zh": "XX121",
+     "source": "composed this session from the attested pattern, NOT a source",
+     "count": "en-gated 0",
+     "note": "Almost certainly stays Latin, like LV-426 and LV-223 — but it is a species designation rather than a catalogue number, so it needs the nod rather than the rule."
+    }
+   ],
+   "corpus": "en-gated 0. Gate re-run this session: no caste word has a single English-side hit in the 4,665-row corpus.",
+   "why_unresolved": "The only two caste renderings with any source at all are terminology-web.json's Drone -> 工蜂异形 and Warrior -> 战士异形, both at confidence 'medium' and both from community writing rather than a reference work. Re-gated this session against the subtitle corpus: '\\bdrone' matches 0 English rows, '\\bwarrior' matches 0, '\\bpraetorian' 0, '\\bneomorph' 0. The corpus cannot vote on ANY caste name. Extending 工蜂/战士异形 into a nine-rung ladder would be coining a taxonomy from a two-point sample, which is exactly what the no-guessing rule forbids.",
+   "next_step": "Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder well enough to translate as a set. Failing that, an owner ruling on the whole ladder AT ONCE; deciding these one at a time guarantees an inconsistent taxonomy.",
+   "shipped_as": "The Weyland-Yutani species designation; Actor 'EV -  XX121 - Stage IV Xenomorph'",
+   "carried_from": "v0.2"
+  }
+ }
+}

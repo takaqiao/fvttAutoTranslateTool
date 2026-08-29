@@ -1,0 +1,102 @@
+{
+ "summary": "Mined all 5 subtitle lineages (11,088 deduped pairs) into a per-term, per-lineage vote table covering 118 terms — every proper noun, creature, hardware and role term requested, plus 12 extras found in-corpus (Prodigy, Neverland, Betty, Narcissus, incinerator, the Company, MU/TH/UR, Engineer, hive/nest/cocoon, marine-loose).\n\nMETHOD — extended term_vote.py, did not fork it. mine_terms.py does `import term_vote` and calls its `load()`, so the CnSCG-four-films-fold-to-one-vote and the mirror-file dedup are inherited code, not reimplemented. Verified empirically: 5 lineages, max lineage_count = 5, CnSCG = 4,591 lines from 4 films counted as ONE vote. Every term is English-gated; ranking is lineage_count first, line_count second, exactly as specified.\n\nThree additions over term_vote.py, each forced by a defect I hit:\n1. LIFT FILTER. Bare CJK-chunk extraction returns 我们/这个/他们 as \"candidates\". lift = P(cand|hit-lines)/P(cand|whole-corpus) separates a rendering from ambient vocabulary.\n2. LATIN CANDIDATES. LV-426 survives untranslated on the Chinese side as \"LV426\" — a Han-only regex can never see it. Same for the acronyms.\n3. AUDITED PROBE CHANNEL. n-gram mining is unreliable below ~4 hits (it emits clause shards like 我们必须派一艘船). So 96 of 118 terms also carry a hand-curated probe list counted exactly, bypassing all filters. A probe scoring 0 is reported, not dropped — \"Romulus never says 汤谷\" is itself a finding.\n\nVALIDATION — the miner independently reproduced every known-bad CnSCG rendering listed in the brief without being told them: smartgun→机关枪, science division→卫生署, Ellen→海伦·蕾普丽, stasis→静态平衡, dropship erased (\"我们必须派一艘船来救我们\"). That is the corpus and the English gate confirming each other.\n\nTWO CORRECTIONS TO THE BRIEF'S OWN NOTES (re-derived from raw lines):\n- \"APC→焚化炉\" is not quite right. The corpus spells it \"A.P.C.\" with periods — `\\bAPC\\b` returns zero hits, which would have been misread as absence of evidence. What actually happened: 焚化炉 is CnSCG's rendering of *incinerator*, and it bled onto the adjacent A.P.C. line (\"fall back by squads to the A.P.C.\" → \"离开焚化炉\"). The A.P.C. itself is erased, not mistranslated. CnSCG also renders incinerator correctly as 喷火枪 elsewhere — it has two renderings, one right, one wrong.\n- USCM is erased too: \"of the Colonial Marine Corps-\" → \"高曼中尉\". A new known-bad for the list.\n\n18 NEW-vs-CnSCG DISAGREEMENTS, all flagged in the JSON with the ruling that priority-2 outranks priority-6. Highest-value ones: pulse rifle Rom24 脉冲步枪 vs CnSCG 电波枪; Science Officer Rom24 科学官 vs CnSCG 科学研究员; Sergeant Earth25/Cov17 中士 vs CnSCG 士官长; Captain Earth25/Cov17 舰长 vs Pro12/CnSCG 船长; airlock four-way split (Rom24 气锁室 / Cov17 空气阀 / Pro12 气闸舱 / CnSCG 空气舱); quarantine 隔离 vs CnSCG 检疫; colonist Rom24 殖民地 vs CnSCG 移民; specimen Earth25 样本 vs CnSCG/Rom24 标本.\n\n22 ZERO-HIT terms flagged unusable. These are not weak evidence, they are no evidence, and the JSON says so per-term.",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\glossary\\mined_subtitles_vote.json",
+   "bytes": 466027,
+   "what": "The deliverable. Top level: meta / terms / zero_hit_unusable / new_lineage_vs_cnscg_disagreements / thin_evidence. Each of the 118 term records carries english_regex, case_sensitive, total_hits, hits_by_lineage, evidence_grade (none|thin|usable), candidates[] (auto-mined: zh, kind, lineage_count, line_count, lineages, per_lineage_lines, corpus_lines, lift, exclusive_to_hits), audited_candidates[] (exact probe counts incl. zeros), audited_zero[], per_lineage_top (with source: audited|auto-mined and coverage as lines/of_hits), per_lineage_top_auto, new_vs_cnscg (status + ruling), and up to 3 bilingual example lines per lineage."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\mine_terms.py",
+   "bytes": 14733,
+   "what": "The miner. Imports term_vote and calls term_vote.load(), so lineage folding + dedup are inherited rather than duplicated. Adds lift filtering, Latin-token candidates, maximal-collapse of n-gram shingles, function-word suppression, the audited probe channel, and new-vs-CnSCG comparison. CLI: -o OUT to write the table, --print KEY to dump one term."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\terms_spec.py",
+   "bytes": 14542,
+   "what": "The 118 English-gate regexes with category and case-sensitivity, plus the PROBES map of hand-curated Chinese candidates attached to 96 terms. Separate from the miner so terms can be added without touching mining logic."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Corpus after inherited dedup",
+   "value": "11,088 pairs / 5 lineages — CnSCG 4,591 (4 films = 1 vote), AlienEarth2025 2,266, Prometheus2012 1,765, Covenant2017 1,316, Romulus2024 1,150"
+  },
+  {
+   "what": "Terms in table",
+   "value": "118 (every term the brief listed, plus 12 in-corpus extras)"
+  },
+  {
+   "what": "Terms with audited exact-count probes",
+   "value": "96 of 118"
+  },
+  {
+   "what": "New-lineage vs CnSCG disagreements",
+   "value": "18"
+  },
+  {
+   "what": "Zero English-gated hits (unusable evidence)",
+   "value": "22"
+  },
+  {
+   "what": "Thin evidence (1-3 hits; read the example lines before adopting)",
+   "value": "22"
+  },
+  {
+   "what": "Usable evidence (4+ hits)",
+   "value": "74"
+  },
+  {
+   "what": "Max attainable lineage_count",
+   "value": "5 (verified: CnSCG's 4 films fold to a single vote)"
+  },
+  {
+   "what": "Runtime",
+   "value": "~0.8 s full table"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Imported term_vote.load() instead of writing a parallel loader",
+   "reason": "The brief forbade losing the lineage folding. Calling the existing function makes that structurally impossible rather than a thing I have to remember to copy correctly."
+  },
+  {
+   "decision": "Added a lift filter (P(cand|hits)/P(cand|corpus)) on top of the English gate",
+   "reason": "The English gate stops bare-Chinese-frequency errors between terms, but within the hit lines every common pronoun still scores highly. Without lift the top candidate for most terms was 我们 or 这个."
+  },
+  {
+   "decision": "Added Latin-token candidates alongside Han n-grams",
+   "reason": "LV-426 appears on the Chinese side as the untranslated string 'LV426'. A Han-only extractor reports zero candidates and the term looks unattested when it is in fact attested five times."
+  },
+  {
+   "decision": "Added a hand-curated probe channel with exact counts, reported even at 0",
+   "reason": "n-gram mining degrades badly below ~4 hits, emitting whole clause shards. Probes give trustworthy counts for thin terms, and an explicit 0 is real evidence — it is how the table shows that Romulus renders Weyland-Yutani as 威兰 and never uses 汤谷 at all."
+  },
+  {
+   "decision": "per_lineage_top picks the LONGEST probe covering >=50% of that lineage's hits, not the highest count",
+   "reason": "A short rendering is always a substring of the long one, so its count can never be lower. Ranking by count alone reported Alien: Earth's Weyland-Yutani as 威兰 when the lineage actually writes 威兰汤谷."
+  },
+  {
+   "decision": "Suppressed auto-mined fallbacks from per_lineage_top once a term has probes",
+   "reason": "Clause shards such as 个口子 and 以阻挡一阵子 were standing in as a lineage's 'preferred rendering' and manufacturing false DISAGREE flags. Where no probe matches, the field is now honestly null."
+  },
+  {
+   "decision": "Kept both the shorter and longer forms in candidates[] rather than pruning aggressively",
+   "reason": "My first pruning rule kept the longer string on ties, which deleted the real term 机关枪 in favour of the shard 拿出机关枪. Shingle collapse is now capped at 6 chars, which folds 焚化/焚化炉/化炉 without letting a clause swallow a term."
+  },
+  {
+   "decision": "Reported the A.P.C. / 焚化炉 finding as a correction rather than restating the brief",
+   "reason": "The brief's note would have led to a permanently zero-hit regex. The distinction matters downstream: APC is erased by CnSCG, whereas incinerator is genuinely mistranslated — different remedies."
+  }
+ ],
+ "open_issues": [
+  "Five of the 22 zero-hit terms are Alien: Isolation content specifically — Sevastopol, Seegson, Anesidora, Torrens, and Amanda Ripley (whose only film hit is the single line 蕾普丽-麦克伦). Priority level 3, the official Isolation 简中 at AlienRPG/简体汉化/ (768 .TXT, 162,804 keys), almost certainly carries all five with official renderings. That is the obvious next mining target and it outranks CnSCG.",
+  "facehugger, chestburster, ovomorph, neomorph and drone all return zero English-gated hits across all five lineages — the films never say these words on screen. They cannot be settled from subtitles at all and need level 1 (the 连载) or level 3 (Isolation).",
+  "Nostromo has no good source in this corpus: CnSCG says 诺斯都罗莫号, Romulus 2024 says 诺史莫号, and neither is the mainland-standard 诺斯特罗莫号. The new-beats-old rule alone would install 诺史莫, which reads Taiwan-flavoured. Worth checking against level 1 and level 3 before adopting either.",
+  "Romulus 2024 renders Weyland-Yutani as plain 威兰, dropping Yutani entirely (15 of 17 hits), while Alien: Earth writes 威兰汤谷 and uses 汤谷 alone for Yutani. Both are priority-2 lineages and they disagree with each other, so the new-vs-old rule cannot resolve this one — it needs owner adjudication.",
+  "Prometheus 2012 and Covenant 2017 use 维兰德 for Weyland where both new lineages use 威兰. This is a level-5-vs-level-2 split rather than a CnSCG conflict, so it is not in the 18 flagged disagreements; the JSON shows it under Weyland (bare) per_lineage_top.",
+  "terraforming splits three ways with no CnSCG involvement worth keeping: Rom24 地球化, Cov17 整地, CnSCG 改造. The two priority-2/5 renderings conflict.",
+  "Two extras I added, 'the Company' and 'MU/TH/UR (Mother)', use loose gates — `\\bthe Company\\b` and `\\bMother\\b` — so the latter conflates MU/TH/UR with ordinary maternal 'mother'. Its 母亲-vs-老妈 disagreement flag should be re-derived with a tighter gate before anyone relies on it.",
+  "The lift/probe thresholds in mine_terms.py (lift>=4.0, single-char lift>=25, 6-char collapse cap) were tuned against this corpus by inspection. They are documented inline but are not derived from anything principled, and would need re-checking on a corpus of a different size."
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "summary": "Mined the Alien: Isolation official Simplified Chinese localisation for RPG terminology, solving the English-gate problem first.\n\n**Two corpus facts that change the brief.** (1) The tree holds 768 .TXT files but only **64 are unique** — the 704 files under DATA/ENV/PRODUCTION/DLC/<MAP>/TEXT/ENGLISH/ are 11 byte-identical copies of the base 64 (768 paths collapse to 64 md5 hashes). They are not separate terminal/signage text. The real corpus is **13,565 keys / 201,328 Chinese chars**; the circulating \"162,804 keys / 6.75M chars\" counts the 12× duplication (13,565 × 12 = 162,780). (2) Encoding is **UTF-16LE with BOM**, not UTF-8. A further 1,018 keys are untranslated stubs whose value is the key repeated, leaving 12,547 live keys.\n\n**No English mirror exists.** I searched the localisation tree, DATA/UI/FONTS_CN.GFX (compiled Scaleform font library, zero extractable ASCII), FONT_CONFIG.XML/.BML (font mapping only), all three Steam libraries on C:/F:/G: (no Alien: Isolation; appid 214490 absent from every libraryfolders.vdf), and Desktop/Downloads/Documents. Only the 12 copies of the Chinese tree turned up.\n\n**So I recovered English by key, and found two mechanical gates.** GATE \"key\": the key is the English source slug — [TEXT_MOTIONTRACKER] → 运动追踪器, [AI_EXTERN_360_PRESENCE_KILLED_BY_ANDROID] → 被仿生人所杀. GLOBAL.TXT even has 44 keys that are full English sentences ([TEXT_Get to the Airlock] → 前往气闸舱), which are genuine aligned en/zh pairs. GATE \"inline\": the localisers left the English proper noun physically inside the Chinese value (Sevastopol, Seegson, Weyland-Yutani, Nostromo, Torrens, San Cristobal) — this simultaneously documents a T-FROZEN decision by the official localiser.\n\n**Coverage: 2,447 of 12,547 live keys gated (19.50%); 10,100 ungated (80.50%).** I built and then twice tightened the classifier — my first pass claimed 87.7% because speaker/scene codes (RIP, SAM, USE, SIC, CUTSCENES, OBJECTIVE) were counted as content words. The 15 bark files are now excluded wholesale. The gated fifth is concentrated in four files: GLOBAL.TXT (a 166-entry bilingual item dictionary), UI.TXT, EXTERNAL.TXT, TUTORIALS.TXT. Every dialogue file, every terminal-log file and all of LOCATIONS.TXT are 100% ungated — so every station location name and every spoken line is corroboration-only.\n\n44 terms: 29 high-confidence (all English-gated), 12 medium/low marked english_gate:false and capped, 3 reported as NOT ATTESTED.",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\glossary\\mined_alien_isolation.json",
+   "bytes": 57051,
+   "what": "44 mined terms in the seed_candidates.json shape ({en: {en, candidates:[{zh, alt, category, confidence, source, english_gate, gate_method, tier_hint, evidence, note}]}}), plus an english_gate_coverage block (gate definitions, per-file gated/ungated counts, the English-mirror search log, and an explicit limitation statement) and a _meta.corpus_correction block recording the 12x duplication and the UTF-16LE encoding."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\tm\\read_isolation.py",
+   "bytes": 9225,
+   "what": "Reusable reader. load() (dedupes the 11 DLC copies by default), find() for substring/regex search over values or keys, key_gate_english(), gate_coverage(), and a Rec dataclass exposing .clean / .key_words / .inline_english / .is_placeholder / .gate. Docstring records the measured corpus facts and audited coverage so they are not re-discovered. Runnable as CLI: `python read_isolation.py \"<regex>\"`."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Files on disk vs unique files",
+   "value": "768 .TXT on disk, 64 unique (768 paths -> 64 md5 hashes; the 704 DLC files are 11 exact copies)"
+  },
+  {
+   "what": "Unique keys (brief said 162,804)",
+   "value": "13,565 — the 162,804 figure counts the 12x duplication (13,565 x 12 = 162,780)"
+  },
+  {
+   "what": "Unique Chinese value chars (brief said 6.75M)",
+   "value": "201,328 (x12 = 2,415,936)"
+  },
+  {
+   "what": "Encoding (brief said UTF-8 with BOM)",
+   "value": "UTF-16LE with BOM (ff fe)"
+  },
+  {
+   "what": "Untranslated placeholder keys (value == key, or empty)",
+   "value": "1,018 of 13,565"
+  },
+  {
+   "what": "Live translated keys",
+   "value": "12,547"
+  },
+  {
+   "what": "ENGLISH-GATED keys",
+   "value": "2,447 = 19.50% of live keys"
+  },
+  {
+   "what": "UNGATED keys",
+   "value": "10,100 = 80.50% of live keys"
+  },
+  {
+   "what": "Gate breakdown",
+   "value": "key-slug only 1,767 | inline-literal only 570 | both 110 | of which 44 are keys that ARE full English sentences"
+  },
+  {
+   "what": "Gated keys by file (top 4 carry nearly all of it)",
+   "value": "UI.TXT 1,292/1,834 | EXTERNAL.TXT 225/231 | GLOBAL.TXT 160/166 | TUTORIALS.TXT 145/149"
+  },
+  {
+   "what": "Files that are 100% ungated",
+   "value": "all 15 bark/dialogue files, all terminal-log files (T0000/T0001), LOCATIONS.TXT (293 keys), CUTSCENES.TXT"
+  },
+  {
+   "what": "Terms delivered",
+   "value": "44 total: 29 high-confidence (all english_gate:true), 12 medium/low (english_gate:false, capped), 3 not-attested"
+  },
+  {
+   "what": "English-mirror search result",
+   "value": "0 English builds found (localisation tree, FONTS_CN.GFX, FONT_CONFIG.XML/BML, 3 Steam libraries, Desktop/Downloads/Documents)"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Read only the 64 unique files; excluded the 704 DLC copies by default in load()",
+   "reason": "They are byte-identical duplicates. Counting them multiplies every frequency by 12 and would have made every term look 12x better attested than it is."
+  },
+  {
+   "decision": "Defined exactly two mechanical gates (key-slug, inline-literal) and rejected everything else as ungated",
+   "reason": "The project forbids adopting a term from a bare Chinese frequency count, and no English side exists in these files. These two are the only routes where the English is physically present rather than inferred."
+  },
+  {
+   "decision": "Tightened the gate classifier twice after sampling, from 87.7% claimed down to 19.50%",
+   "reason": "The first pass counted speaker/scene codes (RIP, SAM, USE, SIC, CUTSCENES, OBJECTIVE, NAME) as English content words. Sampling showed these say who speaks and in what scene, never what the line means. The 15 bark files are now excluded wholesale."
+  },
+  {
+   "decision": "Reported MU/TH/UR as NOT ATTESTED despite two keys containing the token MUTHR",
+   "reason": "AI_EXTERN_360_LEVEL_NAME_TECH_MUTHRCORE and AI_UI_PRESENCE_TECH_MUTHRCORE both resolve to 「阿波罗」核心. MUTHR is a leftover dev codename for Sevastopol's AI, which shipped as APOLLO. Treating it as a MU/TH/UR rendering would have been a fabricated pairing. Zero literal MU/TH/UR hits in 13,565 keys."
+  },
+  {
+   "decision": "Reported decontamination as NOT ATTESTED",
+   "reason": "No key contains DECON or PURGE. All 22 净化 keys are the reactor/grid PURGE sense or, in one case, 空气净化 (air conditioning). 净化 here means purge, not decontaminate."
+  },
+  {
+   "decision": "Marked Working Joe, maintenance jack, Anesidora, Colonial Marshal, Lorenz Systech, Gemini, egg, nest, hypersleep, transit, quarantine as english_gate:false",
+   "reason": "Task rule (b). None has a key gate. Their Chinese is solid but the English pairing rests on external Alien: Isolation knowledge or ungated prose, so they are capped and marked corroborate-only."
+  },
+  {
+   "decision": "Recorded the corpus's Latin-first, no-space joining (Sevastopol空间站, San Cristobal医院) as differing from the project's T-BILINGUAL rule",
+   "reason": "The evidence supports T-FROZEN for the name, but the joining convention is the localiser's, not the project's. Flagging it prevents the shape being copied in by mistake."
+  },
+  {
+   "decision": "Ported the audited stoplist back into read_isolation.py so its gate_coverage() reproduces 2,447/10,100 independently",
+   "reason": "The reader shipped with a looser built-in estimate that contradicted the report. Now the reusable tool and the miner cross-check each other."
+  }
+ ],
+ "open_issues": [
+  "80.50% of the corpus cannot be English-gated at all. Nothing further can be extracted from those 10,100 keys without an English build of Alien: Isolation. If the owner ever installs it (Steam appid 214490), DATA/TEXT/ENGLISH/ in that install is the true English mirror and would gate the corpus ~100%; read_isolation.py would need only a second ROOT to become a full aligned-pair miner. This is the single highest-value follow-up.",
+  "LOCALISATION BUG found and worked around: AI_UI_WEAPONSTUFF_ION_TORCH gives 等离子割炬 (plasma torch) where the other four ION keys give 离子割炬. I adopted 离子割炬 on majority + semantics, but it means the corpus is not internally consistent and single-key evidence from UI.TXT should not be trusted alone.",
+  "Second internal inconsistency: the same item is 安全访问调谐器 in UI.TXT but 入侵工具 in GLOBAL.TXT ('Hacking Tool Required'); keycard is 钥匙卡 but 密码卡 in AI_UI_INTERACT_KEYCARD_UNLOCKED; reactor core is 反应堆堆芯 in UI.TXT but 反应堆芯 in EXTERNAL.TXT. Flagged in the notes, not adjudicated.",
+  "The localisation transliterates Anesidora (安妮斯朵拉号) while keeping Nostromo/Torrens in Latin. That inconsistency is the localiser's, so this source cannot settle a uniform ship-name policy for the RPG on its own.",
+  "'Working Joe' = 「打工仔」 is a striking, register-correct rendering (lit. 'wage grunt') but rests entirely on external knowledge. It needs a second lineage before adoption — worth putting to term_vote.py if any subtitle lineage carries it.",
+  "The corpus has no distinct rendering for xenomorph — everything is 异形. It cannot support an Alien/Xenomorph split; it only corroborates 异形 (and independently confirms the settled 抱脸虫 and 异形, with zero occurrences of 异型)."
+ ]
+}

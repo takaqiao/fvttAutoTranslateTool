@@ -1,0 +1,35 @@
+{
+  "_README": [
+    "模板抢注（通道 B）的上游锚点。抢注是整份替换：上游改一个字，我们那份就静默过期且不报错。",
+    "这个文件把「上游当时长什么样」钉死，由 qa/adversarial_hardcoded_patch.mjs 的 D 组机械看守。",
+    "upstream_sha256 对不上 = 上游改了模板，必须重新推导译文模板，然后才允许更新本文件。",
+    "baseline_sha256 对不上 = 7-其他内容/english-baseline/ 里的快照被改坏了或没跟上版本。",
+    "skeleton 是标签骨架（丢掉文本与 handlebars），译文模板必须与基线**逐标签相同** ——",
+    "这一条捕获的是「译文里少了一个 div / 多了一个 span」这类基线哈希看不见的结构漂移。"
+  ],
+  "system_id": "alienrpg",
+  "system_version": "4.1.13",
+  "generated": "2026-08-29",
+  "templates": {
+    "systems/alienrpg/templates/actor/creature-header.hbs": {
+      "ours": "modules/alienrpg-cn/templates/alienrpg/actor/creature-header.hbs",
+      "upstream_sha256": "3fa846c2751e204a515de14eb5092d6e69406a11b4d6ba74bcc77ba093480dec",
+      "upstream_bytes": 3416,
+      "baseline_path": "7-其他内容/english-baseline/alienrpg-4.1.13/templates/actor/creature-header.hbs",
+      "baseline_sha256": "3fa846c2751e204a515de14eb5092d6e69406a11b4d6ba74bcc77ba093480dec",
+      "ours_sha256": "af7ae5ff0ba3f4643ec24b45f5b9220393eb0adbbe164a6f74b1343d303a1a94",
+      "skeleton_sha256": "d1249aef15243575585d07ad69c229225ec0911026de32ad561c3e6ec6bdc456",
+      "skeleton_tag_count": 48
+    },
+    "systems/alienrpg/templates/actor/planet-general.hbs": {
+      "ours": "modules/alienrpg-cn/templates/alienrpg/actor/planet-general.hbs",
+      "upstream_sha256": "be915aa778ca06157dba0c8461e2ddb2ae6243eebff1c1d9fc157ffc207b2a06",
+      "upstream_bytes": 9177,
+      "baseline_path": "7-其他内容/english-baseline/alienrpg-4.1.13/templates/actor/planet-general.hbs",
+      "baseline_sha256": "be915aa778ca06157dba0c8461e2ddb2ae6243eebff1c1d9fc157ffc207b2a06",
+      "ours_sha256": "9073bbb86165ab1ffb6f2764f99c34d6dd0f259523e71aaa818f2a54c2864f2b",
+      "skeleton_sha256": "f406b50d2653136d30ab70d1bbee0bf610e8d76180b02c05fd5431309312acd5",
+      "skeleton_tag_count": 154
+    }
+  }
+}

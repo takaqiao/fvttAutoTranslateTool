@@ -1,0 +1,66 @@
+{
+  "_artifact": "RULINGS.json",
+  "_what": "主控对词表争议的裁定。由 4-常用脚本/tm/build_glossary_v1.py 在装配 terms 之后、跑不变式之前读入并套用。",
+  "_why_a_file_and_not_code": "裁定是**决策**，不是推导。写在 glossary_adjudication.py 的 OV[] 里会和证据推导混在一起，下一轮没人分得清哪条是证据说的、哪条是人拍的。分开放，且每条都带 ruled_by / ruled_on / rationale。",
+  "_authority": "业主 2026-08-29 授权：「术语你综合判断最优解作为主轴即可」。业主自己钉死的两条（Wits=机智、Empathy=共情）不在本文件里，它们在 build_glossary_v1.py 的 owner_pinned 机制里，优先级更高。",
+  "_precedence": "RULINGS 压过 glossary_adjudication 的阶梯推导，但**压不过** owner_pinned。若某条 ruling 与 owner_pinned 冲突，构建必须失败而不是静默取舍。",
+
+  "rulings": [
+    {
+      "id": "R1-queen",
+      "en": "Queen",
+      "closes_dispute": "D6-queen",
+      "adopt": "女王",
+      "reject": ["王后"],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "三条理由，按强弱：① 本项目真正需要的是**复合词** Alien Queen → 异形女王，而不是孤立的 Queen；异形女王 是中文语境里压倒性的既有说法。② 生物学上错不得：异形女王是**孤雌生殖的蜂巢首领**，是统治者本人；「王后」在中文里是「国王的配偶」，指向一个并不存在的国王。③ 证据侧 3-2（扣掉那条蜜蜂比喻的命中），且 zh.wikipedia 的《异形(虚构生物)》条目用的就是 女王。",
+      "counter_argument_acknowledged": "王后 在《异形4》全片一致，且同片把 'Her Majesty' 译作 异形王后。但《异形4》属于 CnSCG 那一条血脉，按 §3.3 折成一票——这是**一票在自己内部打架**，不是两票对立。",
+      "blast_radius": "corerules 的 RollTable 'EV - Praetorian, Charger and Queen Attacks'、25 个 creature actor 里的女王形态、第 10 章正文。定稿后进 RESOLUTIONS.assertions.json。"
+    },
+    {
+      "id": "R2-armor-piercing",
+      "en": "Armor Piercing",
+      "closes_dispute": "D9-armor-piercing",
+      "adopt": "破甲",
+      "reject": ["穿甲弹", "穿甲"],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "现行 cn.json 的 穿甲弹 是**范畴错误**，不是风格差异。Armor Piercing 在本系统里是一条挂在武器上的**属性**，而它挂载的对象包括刀、气矢枪和**异形的酸血攻击**——酸血不是「弹」。破甲 在中文里是形容词性的，且是 TRPG 既有惯例，能同时盖住这三类。",
+      "counter_argument_acknowledged": "对脉冲步枪那一例，穿甲弹 恰好是精确的；最小改动方案 穿甲 也保留了字面。但属性名要按**最宽的挂载面**取，不能按最典型的那一例取。",
+      "blast_radius": "武器族物品的 system 属性、装备表正文。"
+    },
+    {
+      "id": "R3-comtech",
+      "en": "Comtech",
+      "closes_dispute": "D10-comtech",
+      "adopt": "通信科技",
+      "reject": ["计算机科学", "科技"],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "两个候选各错一半，取中间那个不是和稀泥而是唯一正确解：① 一级源的 计算机科学 **窄于英文**——Comtech 同时管通讯、计算机与电子设备，砍掉「通讯」这一半会让技能描述自相矛盾（这也是 adjudication 当初拒绝直接采纳它、而把它扔进争议的原因）。② 四级源的 科技 **宽到不指任何东西**，任何技能都可以叫科技。③ 英文名本身就是 Com + tech 的缩合，通信科技 是它的忠实还原，保留了四级源的中心语 科技，补回了英文里的 COM 一半，四个字与其余技能名等长。",
+      "note": "⚠ 技能名是 T-EXACT：它必须与 lang/cn.json 的 ALIENRPG.Skillcomtech 逐字节相等。改这一条要同时改 lang 值与包内 skill-stunts 物品名，同一个 commit。",
+      "blast_radius": "lang/cn.json Skillcomtech · 12 个 skill-stunts 物品名之一 · 角色卡 · 全书技能检定正文。"
+    },
+    {
+      "id": "R4-captain",
+      "en": "Captain",
+      "closes_dispute": "D11-captain",
+      "adopt": "船长",
+      "domain_split": {
+        "船长": "默认。商船、拖船、运输船、打捞船——即 USCSS（United States Commercial Ship）与「太空卡车司机」战役框架下的绝大多数船。",
+        "舰长": "仅限具名军舰。殖民海军陆战队框架下的 UAS/USS 战斗舰艇。"
+      },
+      "reject": [],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "这不是二选一，是**按域分裂**——中文本来就区分商船与军舰的主官，而英文一个 Captain 通吃。① 本游戏的默认框架是商业的：船级前缀 USCSS 里的 C 就是 Commercial，三大战役框架里「太空卡车司机」排第一。② 电影侧 达拉斯船长（《异形》）也是商船。③ 舰长 在二级源（Alien: Earth 2025）与五级源（Covenant 2017）出现，但那两处指的都是**具名大船**，正好落在军舰那一支里，所以采纳域分裂之后**两边的证据都被解释了**，没有一方被推翻。",
+      "note": "按域分裂的条目要进 RESOLUTIONS.assertions.json 的 `term_domains` 类断言钉死，防止下一轮有人「顺手统一」。",
+      "blast_radius": "全书 NPC 头衔、飞船条目、预设角色卡。"
+    }
+  ],
+
+  "_still_open_after_this_file": [
+    "生命周期六词（Facehugger 已定 抱脸虫；Chestburster / Ovomorph / Drone / Warrior / Praetorian 未定）—— 按 PROJECT.md §7.2.0，这一组无任何中文先例，按「组内自洽」在第 10 章翻译时定稿，source_level 标 0-本项目自定。"
+  ]
+}

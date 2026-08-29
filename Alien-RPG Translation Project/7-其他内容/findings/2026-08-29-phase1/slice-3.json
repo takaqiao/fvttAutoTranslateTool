@@ -1,0 +1,168 @@
+{
+ "summary": "Phase-1 slice **lang-ui** delivered: 167 flat keys at `C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-ui.json`, plus a 167-entry per-key rationale file with cross-slice collision table at `.../lang-ui.notes.json`. 144 keys change relative to the shipped cn.json, 44 were absent from it, and 18 exist in NO lang file of any package (they render as raw dotted keys today).\n\nI re-derived everything rather than trusting the brief. Flattening confirms en.json = 590 keys, cn.json = 511, 14 cn-orphans, 93 en-keys missing from cn. The live ES-module import graph from `module/alienrpg.mjs` is 62 files (matches verify-i18n.json, not the survey's 62-mjs-only claim). Scanning those 62 plus all 100 templates with a regex covering ALIENRPG/TYPES/ACTOR/ITEM/EFFECT/DRAW_STEEL/alienrpgct yields 520 distinct referenced keys and 50 referenced-but-absent-from-en.json — but only **18** of those 50 are genuine renderable i18n keys. The other 32 are 20 `LOCALIZATION_PREFIXES` declarations, 1 Hook name (`ALIENRPG.prepareActiveEffectData`), 5 handlebars/JS concatenation prefixes (`ALIENRPG.Skill`, `ALIENRPG.AbilityAbb`, `ALIENRPG.Actor.Tabs.`, `ALIENRPG.Item.Tabs.`, bare `ALIENRPG.`), and 6 DRAW_STEEL + 6 EFFECT keys that live only in the dead active-effect templates. So the brief's \"~35 keys that render as raw dotted keys\" is 18. I own and fixed all 18, including the `alienrpgct` top-level block (effects.mjs:16 and :21 — the brief said :15/:20, re-derived).\n\nTwo correctness wins beyond wording: `ALIENRPG.RollManShipMinorCrit` shipped as 「数字必须介于 1 和 44 之间」 against en \"between 1 and 66\" — a wrong number, not a style issue; and `ALIENRPG.hideInitChatHint` hallucinated a clause (\"以备不时之需\") absent from the source while dropping \"Initiative\". I also kept the English menu path inside `NoPanicTable`/`NoResolveTable` because `apps/init.mjs:39-41` hardcodes \"Import Adventure\"/\"Re-Import\" — a Chinese path would send the GM to a menu that does not exist.\n\nSafety: I explicitly did NOT claim the 8 crit-parse keys, the 12 T-EXACT skill keys, or the 7 localized-value comparison keys (`Radiation`, `RadiationReduced`, `Armor`, `Ability{Str,Agl,Emp,Wit}`), which I re-derived by grepping every `=== game.i18n.localize` / `case game.i18n.localize` in the live graph. Verified Foundry's merge order myself at `C:/Program Files/Foundry Virtual Tabletop/resources/app/client/helpers/localization.mjs:283-320` — core → system → modules → world, `mergeObject(..., {inplace:true})` at :318, later wins, no deletion semantics.\n\nThree sibling slices (lang-core, lang-combat, lang-ship) landed in the same directory while I worked. I measured 42 overlapping keys, 18 disagreements, and wrote the full table with a per-key ownership recommendation into `lang-ui.notes.json` → `cross_slice_collisions`. I did NOT edit my values to resolve them — the controller adjudicates.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-ui.json",
+   "bytes": 9202,
+   "what": "The slice. Flat map of 167 dotted keys -> Chinese string, sorted, UTF-8, LF, 2-space indent. Groups: 9 SheetLabels, 16 Actor/Item Tabs, 6 Item.General.FIELDS, 21 TYPES.Actor/TYPES.Item, 31 registered settings names+hints, 7 AlienConfig dialog chrome strings, 7 companion-package settings, 18 ui.notifications messages, 30 chat-card strings, 4 combat-tracker context-menu labels, 18 keys absent from every lang file (incl. the top-level alienrpgct block)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-ui.notes.json",
+   "bytes": 72512,
+   "what": "Per-key rationale. For all 167 keys: en source, whether it exists in en.json, the shipped cn value (`was`, null when absent), the new value, a `changed` flag, and a `why` carrying the re-derived file:line call site. Plus a `gates` block (all PASS), a `counts` block, a `boundary` block listing what was claimed vs deliberately not claimed and why, and a `cross_slice_collisions` block measuring the 42 overlaps / 18 disagreements against lang-core, lang-combat and lang-ship with a recommendation per disputed key."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Claimed the 8 registered settings-menu chrome keys rendered by module/helpers/alienprgSettings.hbs (SheetColorSettings, JournalColorSettings, ResetNote, SubmitButton, ResetButton, InThePipe, GameOver) even though they live in a template, not settings.mjs.",
+   "reason": "They ARE the settings dialog. AlienConfig.defaultOptions (alienRPGConfig.mjs:12) loads `systems/alienrpg/module/helpers/alienprgSettings.hbs` — note the copy at templates/system/alienprgSettings.hbs is a dead duplicate. SheetColorSettings is one of the brief's marquee defects (图纸颜色设置) and had no other natural owner."
+  },
+  {
+   "decision": "Claimed ALIENRPG.TAH-tooltip-{name,hint}, ALIENRPG.displayUnequipped-{name,hint} and ALIENRPG.forceImport{Name,Label,Hint} even though the system references none of them.",
+   "reason": "They follow the `<settingKey>-name` / `-hint` registration convention and belong to companion packages (a Token Action HUD module, and the corerules/starterset re-import menu). 'Settings names and hints' is my assigned namespace and nobody else was given them. Flagging so the controller can reassign if a content-module slice exists."
+  },
+  {
+   "decision": "Claimed ALIENRPG.debug.name and ALIENRPG.debug.hint.",
+   "reason": "They look orphaned to grep but are live: helpers/logger.mjs:50 calls COMMON.applySettings({debug:{scope:'world',config:true,...}}) and helpers/common.mjs:64-65 builds the keys dynamically as `ALIENRPG.${key}.name` / `.hint`. The setting is config:true, so it shows in Configure Settings."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.dialog.* (8 keys) or ALIENRPG.Dial{Text,TextXeno,Title1,Title2,Cancel,Roll}.",
+   "reason": "A distinct namespace that was not assigned to lang-ui, and a wrong guess there is expensive: ALIENRPG.dialog.Rollontable carries a {tablename} placeholder and the Dial* family is concatenated into roll-dialog titles at actor.mjs:281/379/766/1034/1274/1752. Reported in open_issues instead — all 8 ALIENRPG.dialog.* keys are missing from the shipped cn.json and may currently be unowned."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.Consumables despite it being the payload of a ui.notifications.info call.",
+   "reason": "Its shipped value 消耗品 is already correct and glossary-conformant, and its primary role is an inventory section header (config.mjs:522, character-enhanced-general.hbs:187). Its appearance at alienRPGConfig.mjs:57 — where saving font settings pops a toast reading 'Consumables' — is an upstream bug, not an ownership claim."
+  },
+  {
+   "decision": "Kept the English navigation path 'Configuration > Alien RPG > Re-Import' inside ALIENRPG.NoPanicTable and ALIENRPG.NoResolveTable, and rendered ALIENRPG.MenuName / MenuLabel with the Latin literal 'Alien RPG'.",
+   "reason": "apps/init.mjs:39-41 hardcodes the menu as name 'Import Adventure' / label 'Re-Import' — neither goes through i18n. Translating the path in the message sends the GM hunting for a menu entry that does not exist. lang-core's competing NoResolveTable value does translate it; see the collision table."
+  },
+  {
+   "decision": "Gave ALIENRPG.NoCharCrit / NoSynCrit a T-BILINGUAL tail (找不到重伤表 Critical injuries / 找不到合成人重伤表 Critical Injuries on Synthetics) rather than bare Chinese.",
+   "reason": "Both are T-FROZEN RollTable names (DO-NOT-TRANSLATE sections.rolltable_names). The whole point of the warning is to tell the GM which table to go import; a bare Chinese message leaves nothing to search for. PROJECT.md §3.4 T-BILINGUAL = 中文 + one ASCII space + English, no parentheses."
+  },
+  {
+   "decision": "Shipped ALIENRPG.ActorSheet.Edit/.Delete, ALIENRPG.Item.Tabs.Weapon, ALIENRPG.YourPanicLevel, ALIENRPG.creature.Health and ALIENRPG.Item.General.FIELDS.* even though I measured all of them DEAD in 4.1.13.",
+   "reason": "The brief assigns them, they cost nothing under mergeObject, and each is one upstream fix away from becoming live. Every one is labelled DEAD in its notes entry with the measurement that proves it, so the controller can drop them without re-deriving."
+  },
+  {
+   "decision": "ALIENRPG.Init.SubModule was given a {name} placeholder that has no English counterpart.",
+   "reason": "alienrpg.mjs:91 calls COMMON.localize('ALIENRPG.Init.SubModule', {name: cl.NAME}), and COMMON.localize is game.i18n.format. The key exists in no lang file at all, so there is no en source to match 1:1 — the placeholder is dictated by the format() call, not by a source string. It reaches logger.info -> console.log only, never the UI."
+  },
+  {
+   "decision": "Did not edit any value to resolve the 42 overlaps with lang-core / lang-combat / lang-ship.",
+   "reason": "Silently converging would hide the disagreement from the controller and could leave a key unfixed if the other slice also defers. Instead I recorded all 42 rows with agree/disagree and a per-key ownership recommendation in lang-ui.notes.json -> cross_slice_collisions. 24 of the 42 already agree byte for byte, which is good convergence evidence for the glossary."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "lang/en.json flattened key count (re-derived, not trusted)",
+   "value": "590"
+  },
+  {
+   "what": "lang/cn.json flattened key count (re-derived)",
+   "value": "511; 14 keys present in cn but not en (8 ACTOR.Type* + 6 ITEM.Type*, all dead pre-v11 orphans), 93 en keys missing from cn"
+  },
+  {
+   "what": "Live ES-module import graph walked from system.json esmodule module/alienrpg.mjs",
+   "value": "62 files (60 .mjs + module/apps/update.js + module/devmsg.js). module/actor/old-*.js, colony-sheet.js, planet-sheet.js, common.js, logger.js, migration.js, apps/migratefolders.js are all unreachable."
+  },
+  {
+   "what": "Files scanned for i18n key references (mjs/js/hbs/html, packs excluded)",
+   "value": "180 files; 520 distinct referenced keys under ALIENRPG/TYPES/ACTOR/ITEM/EFFECT/DRAW_STEEL/alienrpgct"
+  },
+  {
+   "what": "Keys referenced by code but absent from lang/en.json",
+   "value": "50 raw hits, of which only 18 are genuine renderable i18n keys. The rest: 20 LOCALIZATION_PREFIXES, 5 concatenation prefixes, 1 Hook name, 6 DRAW_STEEL + 6 EFFECT keys in the unreachable active-effect templates. verify-i18n.json's figure of 35 counts prefixes as keys."
+  },
+  {
+   "what": "Tab labels built by concatenation (the brief's '49 tab labels')",
+   "value": "49 concatenation SITES resolving to 15 DISTINCT keys (11 Actor.Tabs + 4 Item.Tabs). en.json defines 16 — ALIENRPG.Item.Tabs.Weapon has zero live sites. Busiest: Item.Tabs.General 13 sites, Actor.Tabs.General 11."
+  },
+  {
+   "what": "Keys whose LOCALIZED VALUE is string-compared (must never be split across slices)",
+   "value": "7 outside the crit block: ALIENRPG.Radiation (actor.mjs:273, YZEDiceRoller.mjs:79/257/289), RadiationReduced (YZEDiceRoller.mjs:80/90/154/189/244/270/312/472/511), Armor (:78/:344), AbilityStr/Agl/Emp/Wit (:81-84). None claimed by lang-ui."
+  },
+  {
+   "what": "Foundry translation merge order, re-derived",
+   "value": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/helpers/localization.mjs, #getTranslations at :283-320: core lang/<lang>.json -> game.system -> game.modules (active only) -> game.world, merged with foundry.utils.mergeObject(translations, json, {inplace:true}) at :318. Later wins; no deletion semantics, so the 14 orphans cannot be removed by a module lang file."
+  },
+  {
+   "what": "lang-ui slice size",
+   "value": "167 keys. 144 differ from the shipped cn.json; 44 were absent from it; 18 are absent from en.json too."
+  },
+  {
+   "what": "Self-gate results on the WRITTEN file (independent re-check, not the builder's own)",
+   "value": "placeholder 1:1 PASS, HTML tag multiset 1:1 PASS, every value contains CJK PASS, no value equals a DO-NOT-TRANSLATE frozen literal PASS, no duplicate keys PASS, no crit-parse key claimed PASS, no compared-value key claimed PASS, no T-EXACT skill key claimed PASS, no dotted-key prefix collision on expansion PASS"
+  },
+  {
+   "what": "Cross-slice overlap with lang-core / lang-combat / lang-ship (present in 6-工作区/phase1 at write time)",
+   "value": "42 overlapping keys, 24 byte-identical, 18 disagreements (lang-core 3, lang-combat 12, lang-ship 3). Full table in lang-ui.notes.json -> cross_slice_collisions."
+  },
+  {
+   "what": "Keys in the shipped cn.json carrying marquee defects that are in fact DEAD in 4.1.13 (zero references in the live graph or any template)",
+   "value": "GMONLY (仅限通用汽车), HOWMANYDICE (有多少基地死亡？), Utility (公用事业), plus NoActor, NoItem, ENSOKEN, NOTABLES, SELTABLE, ROLLONSELECTED, ROLLONCREATURETABLE, DANGERLEVEL, HOWMANY, HOWMANYSTRESS, CREWPANIC, worstResult, youHave, YourPanicLevel, CombatantRemove, CombatantUpdate. Fixing them changes nothing on screen today."
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Territory",
+   "proposed": "领地",
+   "why": "Needed by TYPES.Actor.territory and ALIENRPG.SheetLabels.Territory — a whole actor type. glossary_alien.json has Sector/Sectors=星区 but no Territory. 领地 keeps it distinct from 星区."
+  },
+  {
+   "en": "Planet",
+   "proposed": "行星",
+   "why": "Needed by TYPES.Actor.planet, SheetLabels.Planet and TYPES.Item.planet-system. Absent from the glossary even though it names an actor type and an item type."
+  },
+  {
+   "en": "Specialty (as in 'Career/Specialty')",
+   "proposed": "专长",
+   "why": "TYPES.Item.specialty. glossary has Career=职业 but not Specialty. I avoided 专业 because it means 'profession/major' and would duplicate 职业 inside the same compound. ⚠ ALIENRPG.SPECIALTY (a different slice) currently ships 专业 — the controller must pick one for both."
+  },
+  {
+   "en": "Colony Initiative",
+   "proposed": "殖民地开发计划",
+   "why": "TYPES.Item.colony-initiative. This is NOT combat Initiative — item-colony-initiative.mjs:16-40 gives it economy/potential/productivity/maintenance modifiers, i.e. a colony development project. Mapping it onto glossary Initiative=先攻 would be a category error. lang-ship independently proposed 殖民地举措; both are defensible, pick one."
+  },
+  {
+   "en": "Spaceship Crit",
+   "proposed": "星际飞船重创",
+   "why": "TYPES.Item.spacecraft-crit. glossary reserves 重伤 for character Critical Injury; ships need a distinct word. lang-ship independently arrived at the same 星际飞船重创, which is corroboration."
+  },
+  {
+   "en": "Close (spaceship weapon range band)",
+   "proposed": "贴近距离",
+   "why": "ALIENRPG.Close, config.mjs:468, ship_weapon_range_list[6]. The Evolved list puts 'Adjacent' in the same slot (config.mjs:476), so this is the closest band and must stay distinct from 'Short' — which the glossary already renders 近距离. Note the glossary's distance ladder (近/中/远/极远距离) contradicts the shipped cn.json (短程/中程/远程/极远程); that family belongs to another slice and needs a single ruling."
+  },
+  {
+   "en": "Space Combat Phase",
+   "proposed": "太空战阶段",
+   "why": "ALIENRPG.Actor.Tabs.'Space Combat Phases'. 'Phase' is absent from the glossary although the spacecraft sheet has five of them (Sensor/Pilot/Gunner/Engineer phases at config.mjs)."
+  },
+  {
+   "en": "Alien Classic (rules edition)",
+   "proposed": "异形经典版",
+   "why": "ALIENRPG.EvolvedHint contrasts it with Evolved. glossary has 'Evolved Edition'=进化版 but no counterpart for the classic edition, which the system toggles between at every sheet render."
+  },
+  {
+   "en": "Sheet (as a Foundry document sheet)",
+   "proposed": "卡片 (generic) / 卡 (as a suffix)",
+   "why": "glossary has 'Character Sheet'=角色卡, which I extended to the whole SheetLabels family (殖民地卡, 生物卡, 物品卡, 行星卡, 星际飞船卡, 合成人卡, 领地卡, 载具卡) and to ALIENRPG.SheetColorSettings=卡片颜色设置. Worth adopting explicitly so no later slice writes 图纸 or 表单."
+  }
+ ],
+ "open_issues": [
+  "UNOWNED NAMESPACE: all 8 ALIENRPG.dialog.* keys are missing from the shipped cn.json (Modifier, Rollontable, Tooltip-ManualRoll, Tooltip-Rollontable, cancel, howManyDice, ok, roll) and were not assigned to lang-ui. ALIENRPG.dialog.Rollontable carries a {tablename} placeholder and is emitted at helpers/enricher.mjs:118; the rest at enricher.mjs:16/123/134/143. If no slice owns them they stay English. Proposed values if the controller wants to fold them into lang-ui: Modifier=修正, Rollontable='在表 {tablename} 上检定', Tooltip-ManualRoll='shift+点击进行手动检定', Tooltip-Rollontable='shift+点击添加修正', cancel=取消, howManyDice='掷多少骰子？', ok=确定, roll=检定.",
+  "TERMINOLOGY SPLIT — Supply. glossary_alien.json says Supply=余量 / Supply Roll=余量检定, and I followed it in ALIENRPG.NoSupplys (你的余量已耗尽) and ALIENRPG.supplyDecreases (你的余量下降了). But ALIENRPG.Supply ('Supply Roll') still ships as 补给骰 and is outside my slice. Two renderings of the same mechanic will sit side by side on one chat card. One slice must own the whole family.",
+  "TERMINOLOGY SPLIT — Push. glossary says Push=追骰, which I used in ALIENRPG.followingPush (追骰之后，) and ALIENRPG.MultiPush (允许连续追骰). ALIENRPG.Push itself still ships as 孤注一掷 and is outside my slice — it is the label of the Push button that sits directly above my text on the same card (YZEDiceRoller.mjs:88 and :390).",
+  "LIVE-BUG WARNING for whoever owns ALIENRPG.CriticalInjuries: its cn value is fed to game.tables.getName() at actor.mjs:1815. Today the shipped 重伤 is harmless because :1816-1817 fall back to getName('Critical Injuries') || getName('Critical injuries'). This corrects DO-NOT-TRANSLATE.json's phrasing, which says 'the ONLY working leg is this literal' — the i18n leg is dead but the chain is guarded, so nothing breaks yet. It breaks the moment the RollTable is renamed to Chinese without retargeting the key.",
+  "UPSTREAM BUG (confirms verify-i18n.json): module/sheets/active-effect-config.mjs:21 and :24 point PARTS at `systems/alienrpglates/sheets/active-effect/{details,config-duration}.hbs`. No system id `alienrpglates` exists and there is no `sheets/` subdirectory — the real files are templates/active-effect/. The class is registered as THE ActiveEffect sheet at alienrpg.mjs:228-229, so the system's active-effect config sheet is broken. Per instruction I added no DRAW_STEEL block.",
+  "UPSTREAM BUG (new, not in verify-i18n.json): templates/actor/crt/vehicles-sheet.html is referenced by nothing — vehicle-sheet.mjs PARTS points at vehicle-crew.hbs, which uses ALIENRPG.EditItem / ALIENRPG.DeleteItem instead. That makes ALIENRPG.ActorSheet.Edit / .Delete dead surface. I shipped them anyway because the brief assigns them.",
+  "UPSTREAM BUG (new): module/helpers/alienRPGConfig.mjs:57 — saving the font/colour settings fires ui.notifications.info(game.i18n.localize('ALIENRPG.Consumables')), so the confirmation toast reads 'Consumables'. Wrong key; almost certainly meant a 'settings saved' string that does not exist.",
+  "UPSTREAM BUG (new): module/alienrpg.mjs:522 hardcodes the English 'You can only create macro buttons for owned Items' while ALIENRPG.NoActor in en.json holds that exact string. The neighbouring :559 hardcodes a template literal too; ALIENRPG.NoItem is simply orphaned (its en text no longer matches any call site).",
+  "UPSTREAM DATA BUG: ALIENRPG.RollManShipMinorCrit ships as 「数字必须介于 1 和 44 之间」 against en 'Number must be between 1 and 66'. Wrong number, not wrong style — a GM following it would refuse valid D66 input. Fixed in this slice; lang-combat and lang-ship independently fixed it too.",
+  "CROSS-SLICE: 42 keys in lang-ui also appear in lang-core / lang-combat / lang-ship (24 identical, 18 disputed). The full table with a per-key recommendation is in lang-ui.notes.json -> cross_slice_collisions. The two disputes I would argue hardest for lang-ui: ALIENRPG.NoResolveTable (lang-core translates the settings path that init.mjs hardcodes in English) and ALIENRPG.healthDamage (lang-combat keeps the en LEADING SPACE, so YZEDiceRoller.mjs:263's `sTotal + \" \" + localize(...)` renders '3  生命值伤害' with a double space and no measure word).",
+  "FOR THE ASSEMBLER: two of my keys have a final segment containing non-identifier characters — `ALIENRPG.Actor.Tabs.Modules/Upgrades` (slash) and `ALIENRPG.Actor.Tabs.Space Combat Phases` (spaces). Expand the flat map with a plain split on '.', not a `[A-Za-z0-9_]+` regex, or both tabs silently vanish. `TYPES.Item.colony-initiative` / `.critical-injury` / `.planet-system` / `.skill-stunts` / `.spacecraft-crit` contain hyphens for the same reason.",
+  "NOT DONE HERE, by design: lang_keep_english.json for the 8 crit-parse keys. Constraint 1 assigns them to a different slice; I only verified none of them appears in lang-ui."
+ ]
+}

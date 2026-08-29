@@ -1,0 +1,158 @@
+{
+ "summary": "All four Phase-0 defects closed, with executable evidence. Important correction to the task premise: items 1, 2 and 4 had ALREADY been applied to the working tree by the earlier verifier pass (all three repos have zero commits — everything is untracked working tree). But item 1's applied fix WAS BROKEN, and I proved it empirically rather than reading it: the gate `CN_KEYS=$(jq '[paths(scalars)]|length' lang/cn.json); if [ \"$CN_KEYS\" -eq 0 ]` lets a 0-byte and a whitespace-only cn.json SHIP (measured rc=0), because jq treats empty/whitespace input as zero input values (exits 0, prints nothing), so CN_KEYS=\"\", `[ \"\" -eq 0 ]` returns 2 with `integer expression expected`, and `set -e` is explicitly exempt for a command used as an `if` condition — the else branch runs and the release proceeds. It also shipped `{\"a\":\"\"}` and `{\"a\":\"   \"}`. Only the literal `{}` case was caught. Replaced with a three-part gate (non-zero-byte, `jq -e 'type==\"object\"'`, at least one non-blank string leaf) and extended the same payload check to modules 2/3, whose `find|wc -l` counted files rather than content. Item 2's workflow guard and register.js comments were present and every Babele citation re-derived and confirmed; the missing piece was the standing QA check, now added to validate_skeleton.py (recursive over all three compendium/cn) together with anti-regression assertions that all three release.yml keep both gates and that the payload gate cannot degrade back to the broken form. Item 3's README note existed but the README CONTRADICTED ITSELF 90 lines later (\"我们会把它显式写成英文串\" for EVCriticalInjuries) — fixed, and the whole rule rewritten as an (A) shadow / (B) write-nothing table with the 14 orphan keys and the single JSON null re-derived from the installed system. lang_keep_english.json was a bare JSON array with nowhere to put a header, so it is now an object with a 92-line _README plus two tables, and all three QA consumers were updated with a shape-tolerant loader that hard-fails rather than silently returning key names. Item 4 confirmed landed and byte-matching core. Every check run: validate_skeleton.py passes; 27/27 workflow run-blocks pass `bash -n` and all three YAML parse; 25+12 executed gate cases match expectation with 0 mismatches; the gate_fixtures harness still shows GOOD clean and all 30 mutants tripping exactly their own gate.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.github/workflows/release.yml",
+   "bytes": 10947,
+   "what": "Replaced the broken 'Verify there is actually something to ship' gate with a three-part fail-closed gate (test -s; jq -e 'type == \"object\"'; count of non-blank string leaves via `[paths(scalars) as $p | getpath($p) | strings | select(test(\"[^[:space:]]\"))] | length`), with the measured jq/set -e failure mode recorded inline. Also corrected the zip-exclusion comment describing lang_keep_english.json."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/.github/workflows/release.yml",
+   "bytes": 8276,
+   "what": "Extended the existing file-count gate with a per-file payload check (non-zero-byte + JSON object + >=1 non-blank string leaf), and replaced `for f in $(find …)` with a `while IFS= read -r f … done < <(find …)` loop so a filename containing a space cannot be word-split into bogus paths."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/.github/workflows/release.yml",
+   "bytes": 8276,
+   "what": "Same payload check and word-splitting fix as module 2."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/validate_skeleton.py",
+   "bytes": 9129,
+   "what": "Added the standing QA guard for item 2: an os.walk over each repo's compendium/cn that FAILs on `mappings.json` or `mapping.json` at any depth, with the source citations for why those two names are reserved. Added four anti-regression assertions per repo: both gate steps must be present by name, and the payload gate must still contain `jq -e 'type == \"object\"'`, `select(test(\"[^[:space:]]\"))` and a `[ ! -s ` zero-byte check."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/lang_keep_english.json",
+   "bytes": 9071,
+   "what": "Restructured from a bare 10-element JSON array to {_README (92 lines), keep_english (9 keys), never_write (1 key + reason)}. The header documents the write-but-never-delete rule with source lines, the (A) shadow vs (B) write-nothing split, the two actor.mjs lookup traps, the 14 dead orphan keys, and the file's own format contract. ALIENRPG.EVCriticalInjuries moved from the keep list into never_write."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/README.md",
+   "bytes": 18917,
+   "what": "Rewrote the override section as '⚠ 覆盖只能写，不能删 —— 影子覆盖(shadow)，不是删除' with an (A)/(B) decision table, the localize() line-by-line fallback proof, and the measured upstream inventory (511 vs 590 leaves, the 14 ACTOR.Type*/ITEM.Type* orphans, the single JSON null). Removed the self-contradicting sentence that said we would write EVCriticalInjuries out as an English string, replacing it with a per-key table plus the cross-repo lockstep warning."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/apply_lang.py",
+   "bytes": 8523,
+   "what": "Added load_keep_english() (accepts the object shape and the legacy bare array, raises on anything else) and a new rejection branch that refuses to write any key listed in never_write, printing that key's recorded reason."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/lang_gap.py",
+   "bytes": 6995,
+   "what": "Added the same loader plus a `never_write` report bucket; those keys are no longer counted as NEW gaps, and the run warns if one of them has somehow appeared in cn.json."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_cross_channel.py",
+   "bytes": 75796,
+   "what": "load_lang_pairs() now reads the object shape (keep_english | never_write union, preserving prior behaviour) and raises on an unrecognised shape instead of silently degrading to the key names."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Item 1 — the PRE-EXISTING gate, executed against a 13-fixture matrix under `bash -eo pipefail` with jq 1.7.1",
+   "value": "0-byte cn.json → rc=0 SHIPS; whitespace-only → rc=0 SHIPS; {\"a\":\"\"} → SHIPS; {\"a\":\"   \"} → SHIPS. Only {} , [] , null , {\"a\":null} and unparseable JSON were blocked. Cause: jq exits 0 with no output on empty input → CN_KEYS=\"\" → `[ \"\" -eq 0 ]` exits 2 (`integer expression expected`) → set -e is exempt for `if` conditions → else branch → release proceeds."
+  },
+  {
+   "what": "Item 1 — the REPLACEMENT gate, same matrix",
+   "value": "13/13 correct: every degenerate shape BLOCKED, only real content SHIPS. Against the repo's actual 3-byte lang/cn.json today: BLOCKED."
+  },
+  {
+   "what": "Executed workflow gate steps against synthetic fixture repos (extracted verbatim from the YAML, run under `bash --noprofile --norc -eo pipefail`)",
+   "value": "25 cases, 0 mismatches (first sweep) + 12 cases, 0 mismatches (re-run after the while-read change, including two filename-with-a-space cases)"
+  },
+  {
+   "what": "Workflow static validation",
+   "value": "3/3 release.yml parse as YAML; 27/27 `run:` blocks pass `bash -n`"
+  },
+  {
+   "what": "validate_skeleton.py (the repos' own check)",
+   "value": "PASS (exit 0). Negative test: planting mappings.json in all three compendium/cn plus a nested mapping.json in repo 1 → 4 FAIL lines, exit 1. Second negative test: degrading module 1's gate back toward the broken form → FAIL, exit 1. Restored → PASS."
+  },
+  {
+   "what": "gate_fixtures harness (build_fixture.py + build_gaps.py + run_gates.py)",
+   "value": "GOOD passes both gates (exit 0/0, checked=195 / checked=190, viol=0); all 30 mutants trip exactly their intended gate. No regression from these edits."
+  },
+  {
+   "what": "System cn.json census, re-derived from the installed alienrpg 4.1.13",
+   "value": "511 cn leaves vs 590 en leaves; exactly 14 cn-only keys (ACTOR.TypeCharacter/Colony/Creature/Planet/Spacecraft/Synthetic/Territory/Vehicles, ITEM.TypeAgenda/Armor/Colony-initiative/Critical-injury/Item/Weapon); en.json has no ACTOR namespace at all, carrying v11+ TYPES.Actor.* / TYPES.Item.* instead; `ACTOR.Type` / `ITEM.Type` have 0 hits in the whole system codebase. Exactly 1 JSON-null value: ALIENRPG.EVCriticalInjuries."
+  },
+  {
+   "what": "Why 'write nothing' for EVCriticalInjuries is provably right, not just safe",
+   "value": "system en.json ALIENRPG.EVCriticalInjuries = 'EV - Critical Injuries'; both 2-新手包汉化插件 and 3-核心书汉化插件 compendium/en contain a RollTable named exactly 'EV - Critical Injuries'. localize() falls through (localization.mjs:437 typeof!==string → :441 _fallback, which is :236's #getTranslations('en')) and actor.mjs:1812's FIRST getName() hits. Sibling asymmetry found: ALIENRPG.CriticalInjuries has cn '重伤' — a real string, so it does NOT fall back and MUST be shadowed with the en value 'Critical injuries' (lowercase i), which likewise byte-matches the table name in both content repos."
+  },
+  {
+   "what": "Item 4 — preventIndent, re-derived not assumed",
+   "value": "CONFIRMED. alienrpg-hardcoded-cn.mjs:121 and plugins-hardcoded-cn.mjs:106 both read `Handlebars.registerPartial(path, Handlebars.compile(source, { preventIndent: true }));`, matching core `client/applications/handlebars.mjs:41` `const compiled = Handlebars.compile(resp.html, {preventIndent: true});`. The getTemplate short-circuit the patchers rely on is confirmed at handlebars.mjs:31."
+  },
+  {
+   "what": "Babele 2.9.1 citations re-derived (all held)",
+   "value": "translation-source.js:14-15 (MAPPING_FILENAME/LEGACY_MAPPING_FILENAME), :115-118 #isMappingFile, :120-126 #matchesKind, :83-95 #discover→FilePicker.browse (non-recursive); translation-source-registry.js:61-62 (same dir as both translationDirectories and mappingDirectories), :29-34 register, :212-231 #moduleRegistrationFor/#moduleSourceName; document-mappings.js:267-281 #rebuild (builtIn→registered→loaded), :283-287, :347-361; babele.js:26-34, :281-294, :984-994."
+  },
+  {
+   "what": "Foundry v14.366 citations re-derived (all held)",
+   "value": "helpers.mjs:1126 overwrite=true, :1127 applyOperators=false, :1132-1138 performDeletions deprecation {since:14, until:16}, :1142-1153 depth-0 expandObject, :1158 isDeletionKey, :1163 _mergeUpdate, :1211/:1223 applyDataOperators gated on applyOperators, :1219-1224; localization.mjs:236 _fallback = #getTranslations('en'), :283-321 push/merge order, :435-445 localize; actor.mjs:1812 and :1815-1817 RollTable lookups."
+  },
+  {
+   "what": "QA consumer regression tests after the file-shape change",
+   "value": "lang_gap.py: NEW dropped 590→589, new NEVER-WRITE bucket = 1. apply_lang.py --dry: EVCriticalInjuries rejected with its reason, keep_english key applied with only a warning, plain English key still rejected, cn.json untouched (3 bytes). scan_cross_channel.py: clean run. Bad-shape file ('\"nope\"') → ValueError from all three, never a silently empty whitelist."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Treated the task premise 'none has been fixed yet' as wrong and verified before acting",
+   "reason": "Items 1, 2 and 4 were already present in the working tree (the earlier verifier's fixes_applied list confirms it; all three repos have zero commits, so nothing is tracked). Blindly re-applying them would have duplicated steps. Verifying instead is what exposed that item 1's applied gate did not actually work."
+  },
+  {
+   "decision": "Chose `jq -e 'type == \"object\"'` as the parse/shape check rather than `jq . >/dev/null`",
+   "reason": "Measured exit codes distinguish every bad shape and none of them is 0: empty file → 4, whitespace-only → 4, top-level array or null → 1, syntax error → 5. A bare `jq .` returns 0 on empty input, which is the exact hole that broke the original gate."
+  },
+  {
+   "decision": "Counted non-blank STRING leaves rather than all scalar leaves",
+   "reason": "The task asked the gate to fail on an empty/whitespace payload, not merely a missing file. `{\"a\":\"\"}` and `{\"a\":\"   \"}` pass a raw leaf count but ship a no-op module. Verified CJK counts as non-blank under `test(\"[^[:space:]]\")`."
+  },
+  {
+   "decision": "Used the POSIX class `[^[:space:]]` instead of `\\S`",
+   "reason": "Avoids backslash-escape mangling across the YAML block scalar / shell / jq string layers — a `\\S` variant failed to compile in testing. `[[:space:]]` needs no escapes at any layer."
+  },
+  {
+   "decision": "Extended the payload check to modules 2 and 3 as well",
+   "reason": "Their gate counted .json files, so a 0-byte or `{}` pack file satisfied it. The task's stated criterion — 'not merely on a missing file' — applies identically there, and leaving the asymmetry in place recreates the exact class of defect being closed."
+  },
+  {
+   "decision": "Put the standing reserved-filename QA check in validate_skeleton.py and made it recursive, while the release-time guard stays at -maxdepth 1",
+   "reason": "translation-source.js:83-95 calls FilePicker.browse, which is not recursive, so depth 1 is the real runtime blast radius. The QA walk goes deeper as defence-in-depth against a future refactor that registers a subdirectory; costing nothing today."
+  },
+  {
+   "decision": "Added anti-regression assertions on the workflows to validate_skeleton.py",
+   "reason": "The whole defect was an asymmetry between three near-identical files. A named-step check plus three substring checks on the payload judgement make both the omission and a silent degradation back to the broken jq form fail the standing QA run rather than waiting for a tag."
+  },
+  {
+   "decision": "Reshaped lang_keep_english.json into an object with a _README and updated all three consumers, rather than leaving a bare array",
+   "reason": "A JSON array has nowhere to put the header the task asked for. The risk is that `set(json.load(f))` silently yields key names instead of keys, so the loader accepts both shapes and raises on anything else — the failure mode had to be loud, not an empty whitelist."
+  },
+  {
+   "decision": "Split the whitelist into keep_english and never_write instead of one flat list",
+   "reason": "The two cases are genuinely different and the difference is load-bearing. ALIENRPG.None/OneRound/OneTurn/OneShift/OneDay have real Chinese values upstream, so they MUST be shadowed with English or healTime silently falls to 0. EVCriticalInjuries is JSON null, which localize() already rejects, so writing anything only creates a frozen copy that goes stale if upstream renames the table."
+  },
+  {
+   "decision": "Fixed the README's self-contradiction rather than only adding new text",
+   "reason": "README:106-111 stated the write-nothing rule and README:198-200 stated the opposite for the very key the rule was about. Adding more documentation on top of a live contradiction would have left the wrong instruction in place at the point a maintainer actually reads it."
+  },
+  {
+   "decision": "Replaced `for f in $(find …)` with a while-read loop in modules 2/3",
+   "reason": "A translation filename containing a space would have been word-split into two nonexistent paths and misreported as 'not a JSON object'. Verified with an explicit 'filename WITH A SPACE' fixture in both the good and empty cases."
+  },
+  {
+   "decision": "Downloaded a pinned jq 1.7.1 binary into the scratchpad rather than reasoning about jq semantics on paper",
+   "reason": "The entire item-1 defect lives in undocumented jq exit-code and empty-input behaviour. It is exactly the kind of claim that must be measured; reading the snippet would have concluded the gate was fine."
+  }
+ ],
+ "open_issues": [
+  "Item 4's preventIndent fix is correct but currently LATENT: both TEMPLATE_OVERRIDES tables are empty (alienrpg-hardcoded-cn.mjs:59 and plugins-hardcoded-cn.mjs:79 are both `= {}`), and each registerPartial loop early-returns on an empty table. It cannot be exercised until the first template is added; the named targets (terminal, motion-tracker-multideck) are the ASCII-art UIs the option exists for.",
+  "ALIENRPG.CriticalInjuries is listed in keep_english but the repo's lang/cn.json is still 3 bytes, so nothing shadows the system's '重伤' yet. Today that lookup survives on actor.mjs:1817's third `||` fallback ('Critical injuries'). It becomes a real requirement the moment cn.json is populated — the value written must be byte-exactly 'Critical injuries', lowercase i.",
+  "The three module repos have ZERO commits — every file, including all of this work, is untracked in the working tree. Nothing here is committed and no branch was created; I made no git changes since none were requested.",
+  "glossary_alien.provenance.json's _meta.lockstep_literals is the other half of the EVCriticalInjuries/CriticalInjuries story and I did not re-audit it this pass. If it still records the two RollTable strings without the shadow-vs-write-nothing distinction now in lang_keep_english.json's _README, the two documents will drift.",
+  "The five remaining 'missed items' from the verifier report (T-FROZEN tier over-application on LV-426/LV-223/MU-TH-UR/USCSS, the 韦兰德/韦兰- Weyland spelling split, the D8-shift backlink, PROJECT.md:182's superseded T-FROZEN counts, and the init.mjs .sheet/.show() dereference note) were out of scope for this task and remain open.",
+  "Modules 2 and 3's payload gate now fails the build if ANY file in compendium/cn lacks non-blank content. That is deliberate, but it means a deliberately-empty placeholder pack file can no longer be committed and tagged — the placeholder has to be left out of compendium/cn instead."
+ ]
+}

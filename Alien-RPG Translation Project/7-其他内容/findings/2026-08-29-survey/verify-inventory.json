@@ -1,0 +1,117 @@
+{
+ "refuted_claims": [
+  {
+   "claim": "BABELE PACKAGING: 'Babele 2.9.1 ... already ships Adventure defaultMappings, so all three packs can be shipped as Adventure-type translation files WITHOUT A CUSTOM MAPPING.'",
+   "why_wrong": "Adventure defaultMappings do exist, but they delegate Actors and Items to the default Actor/Item mappings, which for this system reach almost nothing. Default Item = {name, system.description.value, effects}. Default Actor = {name, system.details.biography.value, items, effects, tokenName}. The alienrpg system stores NONE of its prose at those paths — it uses system.notes, system.general.special.value, system.general.appearance.value, system.general.sigItem.value, system.attributes.comment.value, system.general.comment.value, system.details.*, system.header.*, system.attributes.capacity.value, system.attributes.class.value. Worse, the one default path that looks like a fit is a type mismatch: in alien-rpg-system, items[].system.description is a plain STRING (12 skill-stunts, 1957 chars), not {value:...}. Shipping with defaults would silently leave every actor and item string in English: CR 235,746 (actor.prose 103,626 + item.prose 86,831 + actor.embitem.prose 45,289) + SS 39,889 + SYS 2,347 = 277,982 chars — i.e. 100% of the non-journal, non-table inventory. Custom Actor and Item mappings are mandatory, not optional.",
+   "evidence": "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\modules\\babele\\script\\mapping\\default-mappings.js — \"Item\": {\"name\":\"name\",\"description\":\"system.description.value\",\"effects\":{...}} and \"Actor\": {\"name\":\"name\",\"description\":\"system.details.biography.value\",\"items\":{...},\"effects\":{...},\"tokenName\":{\"path\":\"prototypeToken.name\"}}. Verified module.json id=babele version=2.9.1. Verified SYS item system.description types = {str, NoneType}, and that no CR/SS item has any system.description key at all."
+  },
+  {
+   "claim": "ZERO-TEXT ROLLTABLES — DO NOT ASSIGN: '8 corerules tables have 118 results with completely empty description fields'.",
+   "why_wrong": "It is 9 tables and 165 results. The report's own enumeration names nine tables (EV - 16, 17, 18, 32, 48, 48a, 48b, 48c, 48d) whose results are 5+4+5+3+37+3+36+36+36 = 165. No subset of that list sums to 118. The same error is repeated inside the CR-T-LASTSURV unit note ('5 tables (48, 48a, 48b, 48c, 48d ..., 118 results total)') — those five actually hold 37+3+36+36+36 = 148 results.",
+   "evidence": "Recomputed over raw/corerules.json: tables with results but zero total result-description chars = EV - 16. CARGO RUNS (5), EV - 17. MILITARY MISSIONS (4), EV - 18. EXPEDITIONS (5), EV - 32. LIFE PATH - EARLY LIFE (3), EV - 48. LS - DANGER EVENT MATRIX (37), EV - 48a. LS - DANGER EVENT DETAIL (3), EV - 48b. LS - DANGER EVENT DETAIL 2-10 (36), EV - 48c. LS - DANGER EVENT DETAIL 11-15 (36), EV - 48d. LS - DANGER EVENT DETAIL 16+ (36). Count 9, total results 165."
+  },
+  {
+   "claim": "SS-T-CORERES: '6 of 7 are BYTE-IDENTICAL to the core-rules copies; only Critical injuries differs ... Reuse CR-T-CORERES wholesale.' (echoed in CR-T-CORERES as 'identical copies exist in alien-evolved-starter-set (7 tables)').",
+   "why_wrong": "Only 5 of the 7 are byte-identical. 'Critical injuries' differs (correctly flagged). But the 7th, 'Sub Table Critical Injuries on Xenomorphs' (2 results, 680 chars), has NO core-rules counterpart whatsoever — corerules' only 'Sub Table' rolltable is 'EV - Sub Table Facehugger Attacks'. Telling the owner to 'reuse wholesale' means 680 chars of genuinely new translation gets skipped, and the table is also absent from the CR-T-CORERES unit list so it is never assigned anywhere.",
+   "evidence": "Cross-pack join by table name over all three dumps: 11 names shared by >=2 packs, 10 byte-identical (md5 over description + per-result name/description). SS table list contains 'Sub Table Critical Injuries on Xenomorphs' (results=2, chars=680); [t['name'] for t in CR['tables'] if 'Sub Table' in t['name']] == ['EV - Sub Table Facehugger Attacks']. SS-T-CORERES's 20531 char figure = 6290+8761+966+680+730+2492+612, confirming the sub-table is inside that unit."
+  },
+  {
+   "claim": "'@UUID LINKS: 346 total, ALL OF THEM enriched HTML anchors of the form <a class=\"content-link\" data-uuid=\"...\">'.",
+   "why_wrong": "The class is not uniform across packs. corerules uses class=\"content-link\" (265 occurrences, zero of ev-content-link); alien-evolved-starter-set uses class=\"ev-content-link\" (81 occurrences, zero of content-link). Any QA regex, link-preservation check, or find/replace built on the stated single form silently misses all 81 Starter Set links — including the 42 on Starter Set Rules and 32 on Hope's Last Day, the two highest-value SS units.",
+   "evidence": "Counted over journal page text.content: SS class=\"content-link\"=0, class=\"ev-content-link\"=81, data-uuid=\"=81, <a tags=81. CR class=\"content-link\"=265, class=\"ev-content-link\"=0, data-uuid=\"=265. (Per-page split matches the report's own numbers otherwise.)"
+  },
+  {
+   "claim": "'PARALLELISATION SHAPE: 96 units' / 'The 96 work_units above sum exactly to the per-pack totals'.",
+   "why_wrong": "There are 98 work units, not 96. (CR 77 + SS 16 + SYS 5.) The sum claim itself is TRUE — I confirm zero drift — but only at 98 units; the count is stated wrongly twice.",
+   "evidence": "Transcribed all work_units into /tmp/units.py: 98 entries; CR=77 summing to 2,286,505, SS=16 summing to 340,968, SYS=5 summing to 76,036, grand 2,703,509 — exact matches, which also proves the transcription is complete (any omission or duplicate would break the exact sums)."
+  },
+  {
+   "claim": "'5 anchor units (~118k chars) must finish first' (TRANSLATE-FIRST ORDER: SYS-J-1, CR-J-03a, CR-J-02a, CR-J-10a, CR-J-08a/08b).",
+   "why_wrong": "Unit mismatch that understates the serial critical path by 66-87%. Every work_unit 'chars' field in the report is RAW HTML chars, but ~118k is roughly the VISIBLE (tag-stripped) total of those anchors. In raw chars — the same currency as every unit estimate and the 2.70M headline — the five named anchors are 196,095, or 220,550 including CR-J-08b which the anchor list explicitly names.",
+   "evidence": "Raw/visible per anchor: SYS-J-1 39,899/31,090; CR-J-03a 39,835/17,704; CR-J-02a 39,143/21,333; CR-J-10a 37,474/22,583; CR-J-08a 39,744/29,633; CR-J-08b 24,455/17,197. Five-anchor totals: raw 196,095, visible 122,343 (~the quoted 118k)."
+  },
+  {
+   "claim": "SS-J-MAPPINS: '8 of the pages also carry @UUID links back to the main page.'",
+   "why_wrong": "Seven do, not eight — and the report's own @UUID structural note says 'starterset 81 (... 7 Map Pin pages 1 each)', contradicting the unit note.",
+   "evidence": "Map Pin pages carrying data-uuid: Sterile Lab, Storage, Geolab West, Stairway & Elevator, Weyland-Yutani Office, Medlab, Life Support/Power = 7 pages, 1 link each. The other 10 Map Pin pages carry zero."
+  },
+  {
+   "claim": "alien-evolved-starter-set contents: '13 Actors (creature 5, character 6, synthetic 1, + 1 char/1 synth in PC's)'.",
+   "why_wrong": "That enumeration lists 14 actors in a 13-actor pack (5+6+1+1+1). The actual type breakdown is character 7, synthetic 1, creature 5 = 13.",
+   "evidence": "Counter over starterset.json actors[].type = {'character': 7, 'synthetic': 1, 'creature': 5}, total 13. (The SS-A-CAST unit's '8 actors, 5 PC + 3 NPC' is correct and consistent with 7 character + 1 synthetic.)"
+  },
+  {
+   "claim": "CR-UI folder list: 'Alien Evolved (x2: Actor+Item)'.",
+   "why_wrong": "The folder name 'Alien Evolved' occurs THREE times in corerules, not twice (and twice more in starterset). This matters more than a count nit: Babele maps Adventure folders with the name-keyed 'nameCollection' converter, so same-named folders are exactly the collision case that needs calling out — undercounting them hides one collision.",
+   "evidence": "corerules folders[] names in order include 'Alien Evolved' at positions 9, 11 and 16 of 25. starterset folders[] include 'Alien Evolved' at positions 7 and 14 of 17. Babele default-mappings.js: \"folders\": {\"path\":\"folders\",\"converter\":\"nameCollection\"}."
+  },
+  {
+   "claim": "'11 folder names are shared verbatim with the other two packs — translate once, apply to all three.'",
+   "why_wrong": "Only 4 folder names appear in all three packs: Alien Tables, Alien Creature Tables, Alien Mother Tables, Alien Sub-Tables. Eleven is the count of names appearing in at least TWO packs (the other 7 are CR+SS or CR+SYS only). 'Apply to all three' is valid for 4 of them.",
+   "evidence": "SYS folders (7): Alien Tables, Alien Creature Tables, Alien Mother Tables, Alien Sub-Tables, Alien Macros, Skill-Stunts, Careers. CR∩SS∩SYS = 4. CR∩SS = 10 (adds Alien RPG Mother Aids, The Art of Alien, Alien Evolved, Weapons, Creatures, Talents (Career)). CR∩SYS adds Alien Macros."
+  },
+  {
+   "claim": "Literal '[object Object]' placeholder strings are counted as translatable prose throughout the totals — e.g. SYS-I-STUNTS 'specialty items are near-nameless (avg 15 chars, 210 chars of prose across 14)' and CR-A-SHIP 'Spacecraft own-prose is ~15 chars each'.",
+   "why_wrong": "Those figures are the literal string '[object Object]' (exactly 15 chars), not prose. The 14 specialty items have system.description = None for all 14 and system.notes = '[object Object]' for all 14: 14 x 15 = the quoted 210. Their real translatable prose is ZERO; only the 14 career NAMES (Colonial Marine ... Homebrew) are translatable. Identically, all 7 corerules spacecraft carry system.notes == '[object Object]' — the quoted '~15 chars each'. Across the corpus 4,110 chars of the reported totals are this junk string (SYS 390 = 26/26 items; SS 300 = items 225 + embedded 75; CR 3,420 = items 2,130 + embedded 1,185 + 7 spacecraft actors 105).",
+   "evidence": "Verified all 26 SYS items have notes=='[object Object]' and all 14 specialty items have description is None. Verified the 7 CR actors with notes=='[object Object]' are exactly CONESTOGA-CLASS FRIGATE, EV - CM-88G Bison, EV - CM-88H Bison, EV - CM-90S, EV - CM-93D Mule, EV - CYG-NS3, EV - STARCUB SHUTTLE."
+  },
+  {
+   "claim": "'All 21 Alien RPG Systems Journals pages are 36–99% table' (and CR-J-SYSJ-2 '36-99% tables').",
+   "why_wrong": "The measured floor is 66%, not 36%. Across all 21 pages the range is 66–99% (minimum: Frontier - GAMMA LEPORIS SYSTEM at 66%). Within the 9 pages of CR-J-SYSJ-2 specifically the range is 76–99% (minimum: Outer Veil - BAO SAU SECTOR). The error is in the conservative direction (the pages are cheaper than advertised) but it is a routing/budget number.",
+   "evidence": "Per-page <table>...</table> char share over raw/corerules.json: GL300 99, TANAKA 85, NEROID 88, AG-4550.02 99, 8 ETA BOOTIS 88, GLIESE 326-3827 97, BAO SAU 76, GAMMA LEPORIS 66, HESKE 337 98, System Build Template 97, THIRD BASE 99, EPSILON RETICULI 98, ZETA RETICULI 91, DP-27 98, ALPHA CAELI 98, SOL SECTOR 77, FIORI 16 94, KHADAJI 93, GJ229A 98, SECTOR 3847 88, SECTOR 117 86."
+  }
+ ],
+ "missed_items": [
+  {
+   "what": "Six corerules actor prose fields that are outside BOTH the totals and the FIELD MAP: system.adhocitems (358 chars, 8 NPC actors, HTML gear lists), system.attributes.model (96, 7 spacecraft), system.attributes.modules (235, 7), system.attributes.ai (73, 7), system.attributes.manufacturer (68, 7), system.attributes.armaments (44, 6). Total 874 chars of sheet-visible text.",
+   "where": "raw/corerules.json actors[].system.adhocitems and actors[].system.attributes.{model,ai,manufacturer,modules,armaments}. Examples: 'EV - ICC INSPECTOR' adhocitems = '<p>&nbsp;Digital Camera, Voice Recorder, Pens, Clipboard, &lsquo;Do Not Cross&rsquo; Hazard Tape</p>'; CONESTOGA-CLASS FRIGATE model='FRIGATE/CONESTOGA', ai='MU/TH/UR 9000', manufacturer='Weyland-Yutani', modules='5 x size V 7 x size IV 9 x size III'.",
+   "why_matters": "The CR-A-SHIP unit asserts 'Spacecraft own-prose is ~15 chars each' and budgets the whole unit on embedded items; in reality each spacecraft carries a header block of real strings, and 8 NPCs carry an adhoc-gear HTML field the field map never names. A translator working strictly from the report's field list leaves all 874 chars in English on the sheet."
+  },
+  {
+   "what": "scenes[].regions[].name — 4 named scene regions in the Starter Set (69 chars) that are translatable via Babele's Scene default mapping and appear nowhere in the inventory or in SS-UI.",
+   "where": "raw/starterset.json: 'Hadley's Hope - Level 1' region 'HH Level 1 stairs'; 'Hadley's Hope - Level 2' region 'HH Level 2 Stairs'; 'Tannen's Casino' regions 'Tavern Ground Floor' and 'Tavern Top Floor'. Babele default-mappings.js \"Scene\": {\"regions\": {\"converter\":\"document\",\"documentType\":\"Region\"}} and \"Region\": {\"name\":\"name\", ...}.",
+   "why_matters": "The SCENES structural note explicitly claims 'All 8 corerules scenes and the other 5 starterset scenes have zero notes and zero drawing text; only their names are translatable' — Tannen's Casino is one of those 'other 5' and carries two named regions. It is a stated-complete claim that is not complete."
+  },
+  {
+   "what": "actors[].system.general.relOne.value and relTwo.value on the Starter Set pre-gen cast (81 chars) — the Buddy/Rival fields.",
+   "where": "raw/starterset.json: Hannah Singleton relOne='MacWhirr' relTwo='Hirsch'; Holroyd 'Hirsch'/'Sigg'; Janice Macwhirr 'Singleton'/'Hirsch'; Morgan Hirsch 'Sigg'/'MacWhirr'; Sonny Sigg 'Hirsch'/'MacWhirr'. (sigItem.value IS in the field map and holds 'Toy dinosaur', 'Company ID badge', 'Cross necklace', 'Lab coat'.)",
+   "why_matters": "These are the only place the cast's relationship web is encoded, and they are surnames that must track whatever SS-A-CAST does with the character names. Not counted, not in the field map, and they sit on the highest-prose-quality unit in the Starter Set."
+  },
+  {
+   "what": "system.attributes.capacity.value is COUNTED in the totals but MISSING from the FIELD MAP a translator is told to work from — 886 chars on 55 corerules spacecraftmods plus 1,129 chars on 69 embedded actor items (2,015 total).",
+   "where": "raw/corerules.json items[].system.attributes.capacity.value ('Added Hardpoint, size I') and actors[].items[].system.attributes.capacity.value ('Artificial Intelligence').",
+   "why_matters": "CR-I-SHIPMOD's 21,398-char budget includes these strings, but the 'FIELD MAP for non-journal documents (what a translator must touch)' enumerates system.notes / attributes.comment.value / general.comment.value / attributes.class.value / header.* / details.* and stops. Budgeted-but-unassigned fields are exactly what ships half-translated."
+  },
+  {
+   "what": "The NAME-KEYED CROSS-REFERENCE hazard list — flagged as 'highest-risk item in the project' — is incomplete on both sides.",
+   "where": "raw/corerules.json actors[].system.rTables additionally holds 'EV - Tanakan Scorpionid Attacks' (1), 'EV - Swarm Attacks' (1), 'EV - Sub Table Facehugger Attacks' (1) — none listed. 'Critical Injuries on Xenomorphs' (1) is in cTables, not rTables as listed. raw/starterset.json actors also carry rTables: 'EV - Stalker, Scout and Drone Attacks' (2), 'EV - Chestburster Attacks' (1), 'EV - Facehugger Attacks' (1), plus 'None' x1 and cTables 'None' x5.",
+   "why_matters": "The note is scoped to corerules and misses three CR table names and the entire Starter Set. Since the stated failure mode is 'the creature's attack roll silently breaks', an incomplete list is the same as no list for the four SS creature actors. Also 'None' appears in 32 slots across both packs, not 26."
+  },
+  {
+   "what": "All 39 legacy @UUID[Item.<id>] links in 5. GEAR & TECH carry an explicit {Label}, and all 39 resolve to real items in the pack.",
+   "where": "raw/corerules.json page T5FJ7PFAIhyRk5GN, e.g. '@UUID[Item.lAQKgY2ATgpV8Fqq]{.357 Magnum Revolver}', '@UUID[Item.nLAWbpHwm01svvYv]{M4A3 Service Pistol}'. Also 2 further @UUID[JournalEntry...] links on the two HOW TO USE THIS MODULE pages (CR and SS) that fall outside the '346 total' tally.",
+   "why_matters": "Because the label is explicit rather than auto-derived, translating an item name in CR-I-WEAPON does NOT update the link text in the journal. These are 39 hard sync points between CR-J-05a/05b and CR-I-WEAPON. The report names the links but only as a syntax curiosity, never as a label-sync obligation — and its blanket 'translating page names does NOT break them' reassurance does not cover this case."
+  },
+  {
+   "what": "Babele's default Macro mapping exposes the macro COMMAND body as a translatable field.",
+   "where": "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\modules\\babele\\script\\mapping\\default-mappings.js — \"Macro\": {\"name\": \"name\", \"command\": \"command\"}.",
+   "why_matters": "The report correctly warns that the 7,865 chars of macro JS contain hard-coded table names, but concludes only that they are 'NOT translatable'. Because the default mapping accepts 'command', the packaging instruction needs to be affirmative — explicitly omit command from the Macro mapping — or a well-meaning contributor can supply one and break the 4 dice/table macros."
+  },
+  {
+   "what": "Crib-sheet reuse is understated, so the 'realistic NET new-translation volume ≈ 2.30M' figure is pessimistic.",
+   "where": "Measured by sliding-window coverage against the parent chapter at a strict 150-char window: 'Life Paths' crib = 42% duplicated from 12. LIFE PATH (report says 26%); 'Last Survivor Crib Sheet' = 63% from 13. LAST SURVIVOR (report says 56%). At a 40-char window they are 73% and 80%.",
+   "why_matters": "More of the corpus is paste-work than the plan assumes, which changes both the net budget and who these units should be assigned to. (For contrast, two other reuse claims verify cleanly: Map Pins really is 100% contained in Hope's Last Day on all 17 pages, and Starter Set Rules' 43% is well-calibrated — I measured 46% at the same strict window.)"
+  },
+  {
+   "what": "The per-chapter HTML metrics are correct individually but overlap heavily and cannot be summed for budgeting.",
+   "where": "11. CAMPAIGN PLAY is a 358,262-char page, yet the report's own three figures for it are 222,529 table chars + 215,919 blockquote chars + 222,542 evexamplebox chars = 660,990. I reproduced all three exactly (tables 222,529 / 127; blockquote 215,919 / 69; evexamplebox 222,542 / 43; evblockquoteCenter 26).",
+   "why_matters": "Tables nest inside example boxes which nest inside blockquotes, so the categories triple-count the same text. Anyone using these to apportion effort across the 11 CR-J-11* slices will get nonsense. The report presents them as if they were disjoint shares of the page."
+  },
+  {
+   "what": "prototypeToken.name is not in the inventory or the field map (CR 1,496 chars / 61 actors, SS 351 / 13), though in this case Babele covers it.",
+   "where": "raw/*.json actors[].prototypeToken.name — verified byte-identical to actors[].name for all 74 actors, zero mismatches. Babele default-mappings.js \"Actor\": {\"tokenName\": {\"path\": \"prototypeToken.name\", \"converter\": \"name\"}}, plus a 'syncImportedAdventureTokenNames' setting in script/foundry/settings.js.",
+   "why_matters": "Low risk because Babele's Actor default handles it and the strings duplicate actor.name — but it should be stated, since the report's field map is presented as the definitive list of 'what a translator must touch' and a custom Actor mapping (which is mandatory, per the Babele finding above) can easily drop the inherited tokenName entry."
+  }
+ ],
+ "verdict": "The quantitative spine of this report is genuinely solid and safe to build on; the advisory layer is not. I independently reproduced all three per-pack totals to the character (76,036 / 340,968 / 2,286,505; grand 2,703,509) under the report's own field selection, confirmed that the work units sum to those totals with zero drift per pack and per journal, confirmed the journal-page enumeration is complete (CR 112 pages/38 text, SS 38/20, SYS 1/1, all image captions genuinely empty), and — the claim I most expected to break — confirmed that every one of the 41 slice cut points lands exactly on an opening h2/h3 tag with zero mid-tag splits and boundary headings matching the stated labels. Several reuse claims I initially thought were wrong turned out right on fairer measurement (Map Pins really is 100% contained in Hope's Last Day; the 43% Starter Set Rules figure is well-calibrated; CM-88G Bison really does appear twice at 3,945 chars; 10 of 11 cross-pack tables really are byte-identical; the SYS changelog offset 53,657 is exact). Where it fails is in the conclusions drawn on top of those numbers, and one failure is serious: the assertion that the packs can ship as Adventure translation files without a custom mapping is wrong, because Babele's default Actor and Item mappings point at system.details.biography.value and system.description.value while this system stores everything elsewhere — roughly 278,000 chars, the entire actor and item inventory, would silently ship in English, and the SYS pack's system.description is a bare string that mismatches even the one plausible default path. Beyond that, three \"no work here\" claims would cause real content to be dropped (the Starter Set's Sub Table Critical Injuries on Xenomorphs has no core-rules twin yet is marked \"reuse wholesale\"; the zero-text rolltable set is 9 tables/165 results not 8/118), the name-keyed rTables hazard list omits three CR tables and the whole Starter Set despite being billed as the project's top risk, the anchor-phase estimate silently switches from raw to visible chars and so understates the serial critical path by 66–87% (196k raw, not ~118k), and about 4,110 chars of literal \"[object Object]\" placeholder plus ~1,024 chars of uninventoried sheet fields (adhocitems, spacecraft header block, scene region names, Buddy/Rival) sit inside the published figures. Practical guidance: take the totals, the unit decomposition, the slice boundaries and the page/table/blockquote census as verified and start work on them; re-derive the Babele packaging plan from scratch before writing a single mapping file; and re-audit the reuse map, the zero-text table list, and the cross-reference hazard list before any unit is marked \"paste only\" or handed to a translator."
+}

@@ -1,0 +1,155 @@
+{
+ "summary": "`4-常用脚本/extract/mappings.mjs` was already present in near-final Alien-RPG form (not the verbatim Ember/Crucible copy the brief described — an earlier pass of this pipeline wrote it at 07:02). I treated it as a submission to audit rather than a blank page: re-measured every `// n=… chars=…` comment against the three raw dumps, re-derived every source citation line-by-line, deep-compared BABELE_DEFAULTS against the installed Babele 2.9.1, and ran the real extractor end-to-end over all three packs.\n\nWHAT PASSED (no changes needed). All 69 pre-existing FIELD_CENSUS rows matched the dumps EXACTLY on n / chars / present. Corpus census, per-pack census and Item/Actor subtype tallies matched. All 25 alienrpg 4.1.13 citations and all 34 Babele 2.9.1 citations re-derived correct. BABELE_DEFAULTS is JSON-strict-equal (key order included) to `modules/babele/script/mapping/default-mappings.js`. Every task-mandated correction is present and correct: `critical-injury` fixed not deleted; `alienTokenName` dropped AND `tokenName` dropped from the extract leg too; `exists` guards on all 24 variants; `system.header.type.value` DO-NOT-TRANSLATE with the measured '1'–'9' reason; the modifiers verdict kept but the false 'prepareDerivedData' reason replaced; sigItem/relOne/relTwo mapped with the cross-reference hazard; the six colony fields and Item `system.attributes.notes.value` added; `territory` forward-compat-only; Item `system.notes` mapped with the '[object Object]' migration-bug note; Adventure description+caption; `Scene.regions[].name` correctly identified as already covered by Babele's default rather than re-declared; `Macro.command` EXCLUDED with a four-point written reason.\n\nWHAT FAILED, AND WAS FIXED (5 edits). (1) FIELD_CENSUS had NO row for `RegionBehavior.name`, which is live via Babele's default and which the extractor really does emit — 4 docs / 70 chars — and the cross-alignment comment asserted \"Only `Region.name` is real\". That is the exact census-blind-spot class the table exists to close. Row added, comment corrected. (2) The census total 2,700,536 was arithmetically wrong; reduced from the array it is 2,705,563. Replaced, with a per-documentType breakdown that sums. (3) The census counts SOURCE DOCUMENTS while the baseline counts EMITTED KEYS — a QA script diffing them naively fires four false positives on day one. Documented the exact 299-char delta with all four terms named. (4) The `expose` coverage char figures (48,181/52,998) silently excluded the 84 embedded '[object Object]' notes; base now stated, both numbers given. (5) `extract_en.mjs`'s own header calls the converter ctx property `mappings` while its call site at :353 passes `ctx` — mappings.mjs had it right; recorded so nobody \"fixes\" the correct line backwards.\n\nFINAL STATE: module loads, exports the full contract, throws on an unknown target, deep-frozen. A live 3-pack extract with `--strict-mappings` runs clean, `unknownConverters` contains exactly the one expected key at exactly the expected counts (31/124/1375), and sum(FIELD_CENSUS.chars) − 299 === 2,705,264 === the sum of the three emitted baselines, to the character.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/extract/mappings.mjs",
+   "bytes": 99680,
+   "what": "THE single source of truth for the Alien RPG Babele mapping data. 1763 lines. Exports ALIENRPG_MAPPINGS / ALIEN_LAYER / STARTERSET_LAYER / CORERULES_LAYER (one shared deep-frozen object — registerMapping cannot scope a layer to a pack, so three distinct objects would be a fiction), BABELE_DEFAULTS (verbatim 2.9.1 snapshot, JSON-strict-equal to the installed file), EXTRACTOR_DEVIATIONS, EXTRACT_CONVERTERS, ALIENRPG_CONVERTER_CONTRACT, ALIEN_TARGETS, ALIEN_ACTOR_TYPES, FIELD_CENSUS (70 rows), and effectiveMappings(target) reproducing Babele's own per-field merge with _variants concatenation. 12 Item variants + 10 Actor variants, every one guarded {all:[{path:'type',in:[…]},{path:'<alienrpg-only>',exists:true}]}. Audited and corrected this session (5 edits)."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/measure.mjs",
+   "bytes": 7100,
+   "what": "SCRATCH but reusable — walks the three raw dumps through the same document tree the extractor walks and re-measures every mapped path (n / chars / present). This is the harness the file's own 'a QA script should re-measure and diff against FIELD_CENSUS' note calls for; lift it into 4-常用脚本/qa/ rather than rewriting it."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/reconcile.mjs",
+   "bytes": 3000,
+   "what": "SCRATCH but reusable — reconciles FIELD_CENSUS (source documents) against the emitted baselines (translation keys), splitting collection-map keys from real keys. This is what produced and proves the 299-char delta now documented in the census header."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/crossalign.mjs",
+   "bytes": 1900,
+   "what": "SCRATCH but reusable — deep-equals BABELE_DEFAULTS against the installed default-mappings.js (the guard for a Babele upgrade) and prints the per-documentType added/dropped/+variants deviation table."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/probe.mjs",
+   "bytes": 4600,
+   "what": "SCRATCH — one-off evidence for the non-numeric claims (notes values, sentinel distributions, surname cross-references, folder id sharing, macro literals, journal enricher syntax, TableResult range collisions)."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/probe2.mjs",
+   "bytes": 4400,
+   "what": "SCRATCH — one-off evidence for the expose-coverage figures and the DO-NOT-TRANSLATE tallies (modifiers 30 paths / 101 docs / 19,493 chars, header.active, cost, actor skills)."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Audit and repair the existing file rather than rewrite it from the proposal",
+   "reason": "The brief said mappings.mjs was still the verbatim EC copy; it was not — an earlier pass had already applied the survey plus every verify-mapping.json correction. Rewriting from scratch would have discarded correct, expensively-derived work and re-rolled the dice on 100+ citations. Auditing found real defects a rewrite would probably have reproduced (the census total was wrong because it was hand-written; a rewrite would hand-write it again)."
+  },
+  {
+   "decision": "Add RegionBehavior.name (n=4, chars=70) to FIELD_CENSUS and correct the comment that said only Region.name is real",
+   "reason": "Babele's default RegionBehavior block maps name; the extractor emits 4 keys / 70 chars nested under scenes->regions->behaviors. A mapped, emitted field with no census row is exactly the invisible blind spot the census exists to prevent — the same shape as the 766K-char EC regression, just smaller. Found by diffing the extractor's real output against the table, not by re-reading the table."
+  },
+  {
+   "decision": "Recompute the census total from the array (2,705,563) instead of trusting the stated 2,700,536",
+   "reason": "The old figure was wrong twice over: bad arithmetic, and computed from a table that was missing a row. Replaced the hand-added bullet list with a per-documentType breakdown that actually sums, plus an instruction to re-run the reduce rather than re-add the bullets."
+  },
+  {
+   "decision": "Document the source-docs vs emitted-keys gap as an exact 299-char delta with four named terms, instead of leaving FIELD_CENSUS to look directly comparable to the baselines",
+   "reason": "A QA gate asserting census == baseline fails on day one for four benign reasons (duplicate document names collapsing in the extractor's name-keyed maps, x3; the 32 'None' sentinels the converter deliberately withholds). The predictable response to a day-one failure is to loosen the check — which is how a real hole gets in. Naming every term keeps the check tight and makes any FIFTH discrepancy a genuine failure."
+  },
+  {
+   "decision": "State the base of the expose coverage char figures rather than silently changing them",
+   "reason": "48,181/52,998 excludes system.notes; including it gives 49,351/54,258. Both are defensible (the excluded values are 84 copies of the '[object Object]' migration residue) and the percentage is unchanged at ~91%, so the fix is to state the base, not to pick a different number. An unstated base is what makes two correct measurements look like a contradiction later."
+  },
+  {
+   "decision": "Record the extract_en.mjs ctx-property discrepancy in mappings.mjs instead of editing extract_en.mjs",
+   "reason": "extract_en.mjs's header comment (:50) says the property is `mappings`; its call site (:353) passes `ctx`, which is what mappings.mjs documents. mappings.mjs is right. Nothing currently reads the property so the drift is inert, and extract_en.mjs is another agent's deliverable — flagging it beats silently editing a file I was not asked to own, and the note stops someone 'correcting' the accurate line to match the stale one."
+  },
+  {
+   "decision": "Left Macro.command excluded, JournalEntryPage.src dropped, and Actor.tokenName dropped as the file had them",
+   "reason": "Each was independently re-verified. command: 9,347 chars of JS for ~53 chars of visible text, Babele replaces it wholesale so a translation freezes upstream's code, and five literals inside must stay byte-identical with no validation — confirmed by scanning all five command bodies. src: 92 pages / 5,879 chars of asset paths this project does not localise (a real divergence from the EC precedent, where src was empty and keeping it was free). tokenName: prototypeToken.name === name on 74/74 actors and Babele's own exporter omits the key, so emitting it would be 1,847 chars a translator must fill twice or delete."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "FIELD_CENSUS rows / total chars after the fix",
+   "value": "70 rows, 2,705,563 chars (was 69 rows and a claimed 2,700,536)"
+  },
+  {
+   "what": "Sum of the three emitted English baselines, live extract",
+   "value": "2,705,264 chars — equals sum(FIELD_CENSUS.chars) − 299, with all four delta terms named"
+  },
+  {
+   "what": "The 299-char census-vs-baseline delta, itemised",
+   "value": "−5 and −106 Item 'Lucky' duplicate-name collapse (corerules, 2 byte-identical talents) · −39 Folder 'Alien Evolved' x3 · −21 in-scene duplicate note texts (37/349 → 34/328) · −12 and −116 the 32 'None' sentinels alienRollTableRef withholds (rollTable 30/805→27/793, critTable 30/147→1/31)"
+  },
+  {
+   "what": "Pre-existing FIELD_CENSUS rows that matched the dumps exactly on n / chars / present",
+   "value": "69 of 69 (100%)"
+  },
+  {
+   "what": "BABELE_DEFAULTS vs installed modules/babele 2.9.1 default-mappings.js",
+   "value": "JSON-strict-equal including key order — true"
+  },
+  {
+   "what": "Source citations re-derived line-by-line",
+   "value": "25 in systems/alienrpg 4.1.13, 34 in modules/babele 2.9.1 — all correct, zero drift"
+  },
+  {
+   "what": "Effective mapping deviations from Babele's defaults",
+   "value": "Actor −tokenName +10 variants · Item +12 variants · JournalEntryPage −src · Macro −command · Scene +navName +tokens. Nothing else differs."
+  },
+  {
+   "what": "Live extract, all three packs, --strict-mappings",
+   "value": "mappingSource=project, 17 document types / 24 variants, 1/1 packs each; unknownConverters is exactly {TableResult.name:referencedDocumentField: 31 / 124 / 1375} as the file predicts"
+  },
+  {
+   "what": "Deviation assertions on the emitted baselines",
+   "value": "tokenName absent · command absent · src absent · zero 'None' sentinels leaked · rollTable 27/793 · critTable 1/31"
+  },
+  {
+   "what": "RegionBehavior.name (the missing row)",
+   "value": "n=4 chars=70 — 'Teleport Token to HH Level 1' x1, 'Teleport Token' x3, all starterset"
+  },
+  {
+   "what": "Item system.notes value distribution",
+   "value": "267 non-empty of 523 present, and 267/267 are the literal '[object Object]' — the migration bug is confirmed, not inferred"
+  },
+  {
+   "what": "Item system.header.type.value — the survey's '0'/'1' enum claim",
+   "value": "191 docs / 191 chars: '1'x76 '2'x57 '3'x14 '4'x11 '5'x11 '6'x7 '7'x7 '9'x8, only on item(93)/weapon(78)/spacecraftweapons(20). The verifier was right; it is not a 0/1 enum."
+  },
+  {
+   "what": "system.modifiers.*.label/.ability",
+   "value": "exactly 30 non-empty paths (12 skills × label+ability, 6 attribute labels; resolve.label empty), 101 docs = 92 item + 9 armor, 19,493 chars — the file's figures confirmed to the character"
+  },
+  {
+   "what": "sigItem / relOne / relTwo (survey said all 'None')",
+   "value": "sigItem 6/58 (Toy dinosaur, Company ID badge, Cross necklace, Lab coat, None×2) · relOne 7/41 · relTwo 7/40. All 5 distinct surnames resolve to actors in the same pack, including the MacWhirr→'Janice Macwhirr (Evolved)' case mismatch that proves upstream treats them as free text."
+  },
+  {
+   "what": "rTables / cTables sentinel-free content",
+   "value": "13 distinct rTables values over 30 creatures; all 12 non-'None' values exist as a RollTable in the packs (verified name by name). cTables: 'None'×29 + 'Critical Injuries on Xenomorphs'×1."
+  },
+  {
+   "what": "Adventure.items expose coverage",
+   "value": "155/180 embedded items (86.1%); chars 48,181/52,998 (90.9%) excluding system.notes, or 49,351/54,258 (91.0%) including it. Per pack: core 144/149, starter 11/31, system 0/0."
+  },
+  {
+   "what": "prototypeToken.name vs name",
+   "value": "identical on 74/74 actors — the premise under both the tokenName drop and the Scene.tokens import-hook analysis"
+  },
+  {
+   "what": "Journal enricher inventory (the QA-regex trap)",
+   "value": "33 @TEXTDRAW[ + 3 @DRAW[ + 41 @UUID[ ; zero @Item[ and zero @JournalEntry[ — the v10+ syntax only, so a regex written to the survey's stated shape matches nothing"
+  },
+  {
+   "what": "Folder _id collisions across the three packs",
+   "value": "49 docs, 33 distinct ids, 12 shared groups, 4 groups of 3 — exactly the four _ids quoted in the file (Btepu5tifRV0Pj7w / LrpFZIuICZfNAr2v / A0N3Ct1TQq9BuGk6 / w3xO69hCmTtYDF8d)"
+  },
+  {
+   "what": "Macro.command cost/benefit, re-scanned from the raw bodies",
+   "value": "5 macros / 9,347 chars of JS; visible literals: 'Player - Roll Alien Dice.', 'Roll Alien Dice.', 'GM', 'for ', 'OK'×3 — plus the frozen 'Alien Mother Tables', 'Alien Creature Tables', 'EV - 48a. LS - DANGER EVENT DETAIL', 'Black', 'Stress'"
+  }
+ ],
+ "open_issues": [
+  "BLOCKING FOR RUNTIME, already flagged inside the file: 4-常用脚本/release/runtime-converters.js is STILL the verbatim Ember/Crucible copy (exports crucibleDescription / crucibleNested / crucibleActions / crucibleTokenName / emberEncounterTokenNames) and does NOT export alienRollTableRef. The extract half works today and is proven; system.rTables / system.cTables have no runtime half until that file is ported. Porting it is a separate task.",
+  "The extractor collapses duplicate-named documents in one collection SILENTLY (mergedDuplicates reports 0 for all three packs, so it is not even counted). The two corerules 'Lucky' talents happen to be byte-identical in `system`, so one translation correctly serves both — harmless by luck, not by construction. QA should assert that duplicate-named documents in a collection are byte-identical, not merely tolerate them.",
+  "extract_en.mjs:50 (its own header comment) names the custom-converter ctx property `mappings`; the call site at :353 passes `ctx`. mappings.mjs documents the call site correctly. One-line fix belongs in extract_en.mjs, which is not this task's file — I recorded the discrepancy rather than editing another deliverable.",
+  "The Macro.command exclusion is only complete once the hub module ships the runtime patcher that rewrites the six Dialog title / button-label strings at display time (the alienrpg-cn counterpart of EC's scripts/ember-hardcoded-cn.mjs). That patcher does not exist yet. Until it does, those ~53 chars are simply untranslated — an acceptable interim state, but revisit the exclusion and the patcher together, never separately.",
+  "No QA script yet re-measures the dumps and diffs against FIELD_CENSUS. The file says a comment alone is not a guard and it is right; scratchpad/measure.mjs + reconcile.mjs are that harness, working and proven against this corpus, and should be lifted into 4-常用脚本/qa/ by whoever owns that directory. I left them in scratchpad to avoid colliding with a parallel agent writing qa/.",
+  "FIELD_CENSUS should also be re-derived (not hand-edited) on any alienrpg / alien-evolved-* version bump. Three of the five defects I fixed existed because numbers in this file were written by hand instead of reduced from data."
+ ]
+}

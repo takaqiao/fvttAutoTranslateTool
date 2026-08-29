@@ -1,0 +1,149 @@
+{
+ "summary": "The three module skeletons were already on disk from an earlier pass of this workflow (created ~06:50; `git init` already done on `main`, 0 commits). My pass was adversarial verification + three real corrections + regeneration, not a from-scratch write.\n\nEVERY load-bearing claim re-derived from real source. Corrected line numbers where the survey/prior text had drifted.\n\nVERIFIED (all citations re-derived this session):\n- Per-entry language gate is REAL and is a first-class schema field. `common/packages/base-package.mjs:373` declares `module: new fields.StringField({...optionalString, validate: BasePackage.validateId})` inside the `languages` SetField (`:366-375`). The gate itself is `client/helpers/localization.mjs:331-339`, decisive line `:335`: `const checkModule = !l.module || game.modules.get(l.module)?.active;`\n- System-before-modules load order confirmed at `localization.mjs:283-320`: system at `:294`, modules at `:302`, merged in order at `:316-318`. So our `lang/cn.json` (ungated) always wins over the system's own `cn` entry (the system DOES already ship one: `system.json` languages[2] = `{\"lang\":\"cn\",\"name\":\"中文\",\"path\":\"lang/cn.json\"}`, 511 keys vs en's 590).\n- Five duplicate `cn` entries do NOT produce five dropdown rows: `localization.mjs:255-260` `#discoverSupportedLanguages` does `if (!sl.hasOwnProperty(l.lang)) sl[l.lang] = l.name;` — first wins. `CONFIG.supportedLanguages` starts as `{en:\"English\"}` (`client/config.mjs:1941`). `languages` is a SetField of distinct object refs, so no dedup; `Set.prototype.reduce` exists via `common/primitives/set.mjs:127`, so `.reduce` at `localization.mjs:332` works.\n- `babele.init` hook and timing: `modules/babele/script/babele.js:26-34` — `Hooks.once('init', …)` builds `new BabeleFacade()`, sets `game[\"babele\"]`, then synchronously `Hooks.callAll('babele.init', babele)` at `:33`. Registration outside that window THROWS: `#assertConfigurable()` at `:167/:198/:292`, message at `:990` (\"must be called during the babele.init hook, before the runtime session is initialized\").\n- `babele.register({module})` takes OUR id: `script/translation/translation-source-registry.js:61-62` builds `modules/${registration.module}/${dir}`. Source dedup is by name (`:29-34`), so three modules with three ids don't clobber each other.\n- `registerMapping` is a global layer (babele.js:285-294 doc comment) — hub-only, correct.\n- Foundry cascade layer order confirmed verbatim at `public/css/foundry2.css:5`.\n\nFIXED (3 defects found in the existing skeleton):\n1. `lang/lang_keep_english.json` was missing the 8th crit-parse key. Re-derived the block at `systems/alienrpg/module/documents/actor.mjs:1888-1941`: compare-side keys are Yes/None/OneRound/OneTurn/OneShift/OneDay/Permanent (7), and `ALIENRPG.Shift` at `:1891` is the write-side partner of the bare-literal compare `if (testArray[9] === \"Shift\")` at `:1890`. Added it. File now 10 entries (8 crit-parse + 2 RollTable-name lookups `CriticalInjuries`/`EVCriticalInjuries` used at `:1812/:1815-1817`).\n2. `styles/alienrpg-cn.css` documented and patched only 5 of the 6 hardcoded font stacks that bypass `--alienfont`. The missed one is `alienrpg.css:571-583` `.tooltip2 .tooltiptext2` → `\"Times New Roman\", Times, serif`. Added the rule and corrected the header count 5→6.\n3. `register.js` had no defence against a mapping referencing an unregistered converter. Babele FAILS OPEN there — `script/mapping/field-mapping.js:236-238` returns undefined, `:279` `_skipDynamicField(…,\"missing_converter\")`, `:410-424` logs one `console.warn` at `:419` — i.e. the field silently goes untranslated with no error. Added a walker that collects `converter` names from DOCUMENT_MAPPINGS and warns on any starting with the project prefix `alien` that is absent from PROJECT_CONVERTERS. Deliberately does NOT whitelist against `babele.converters`: `script/core/babele.js:55` constructs `new ConverterRegistry()` empty (built-ins live elsewhere), so that would false-positive on `document`/`nameCollection`. Exercised live: reports exactly `alienRollTableRef`, ignores `document` and `nameCollection`.\n\nREGENERATED: a parallel agent landed `ALIEN_LAYER` in `4-常用脚本/extract/mappings.mjs` mid-session, so `babele-mappings.js` was stale (empty stub) and `--check` FAILED. Re-ran the generator — now 4 document types (Adventure/Item/Actor/Scene), 14,539 bytes, `--check` passes. `generate_runtime.mjs` was already ported to Alien (not by me); it reads `mappings.mjs` dynamically and tolerates a missing `runtime-converters.alien.js`.\n\nRELEASE PIPELINE PROVEN: `zip` is not installed locally, so I simulated Info-ZIP `-x` semantics (patterns match the archive member name; `*` crosses `/`) against the real trees. Hub ships 15 members / 70,804 uncompressed bytes; both content modules ship 5 members. Zero leakage of `compendium/en/*`, `lang/en.json`, `lang/_baseline.json`, `lang_keep_english.json`, or `*.zip`; all 7 hub must-ship files present, `scripts/` correctly NOT excluded (it holds two declared esmodules). `rm -f module.zip` precedes `zip -r` in all three. All 3 release.yml files parse as valid YAML.\n\nGIT: all three are separate repos on `main`, `git status --ignored` shows NOTHING ignored — critically, the 2.6 MB corerules and 379 KB starterset English baselines and every `lang/*.json` are stage-able. No `*.json` rule anywhere in any `.gitignore`; each carries an explicit warning banner about the EC data-loss incident.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/lang_keep_english.json",
+   "bytes": 237,
+   "what": "EDITED — added the missing 8th crit-parse key ALIENRPG.Shift (actor.mjs:1891). Now 10 flat strings: 7 compare-side keys + Shift + the 2 RollTable-name lookup keys. Flat array shape preserved because apply_lang.py:122, lang_gap.py:80 and scan_cross_channel.py:300 all do set(json.load(...))."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/styles/alienrpg-cn.css",
+   "bytes": 12331,
+   "what": "EDITED — added the 6th bypassing font stack .tooltip2 .tooltiptext2 (alienrpg.css:571-583) and corrected the header count 5→6. 8 rules, 8 !important, braces balanced. Keeps the MU-TH-UR block scoped to 10 verified module-owned element ids."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/register.js",
+   "bytes": 9267,
+   "what": "EDITED — added the unregistered-project-converter guard (walks DOCUMENT_MAPPINGS, warns on any `alien*` converter missing from PROJECT_CONVERTERS). Syntax-checked by executing the module with Hooks/game stubs. Still exactly one registerMapping call, all inside Hooks.once('babele.init')."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/babele-mappings.js",
+   "bytes": 14539,
+   "what": "REGENERATED — was a stale empty stub and failed --check. Now carries the real ALIEN_LAYER (Adventure/Item/Actor/Scene, all Item/Actor variants _when-guarded). PROJECT_CONVERTERS still {} because release/runtime-converters.alien.js does not exist yet."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/module.json",
+   "bytes": 2427,
+   "what": "VERIFIED (not modified) — id alienrpg-cn, v0.1.0, 5 `cn` language entries (1 ungated system override + 4 module-gated plugin files), 3 esmodules, styles layer:modules, requires babele>=2.9.1, systems alienrpg min/verified 4.1.13."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.github/workflows/release.yml",
+   "bytes": 0,
+   "what": "VERIFIED (not modified) — tag-triggered; asserts version==tag, download URL contains tag, changelog URL == releases/tag/<tag>, every declared esmodule/lang/style file exists; rm -f before zip -r; excludes compendium/en/*, lang/en.json, lang/_baseline.json, lang_keep_english.json, .github/*, *.zip; does NOT exclude scripts/; uses `unzip -Z1` (not -l, whose Archive: header self-matches .zip) for both a forbidden-content and a must-ship assertion."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/module.json",
+   "bytes": 2329,
+   "what": "VERIFIED — alien-evolved-starterset-cn, no `languages`, requires babele + alienrpg-cn>=0.1.0 + alien-evolved-starterset>=1.0.2. Target pack recorded under relationships.flags['alienrpg-cn'].targetPack because Foundry's PackageRelationships schema has only systems/requires/recommends/conflicts/flags (base-package.mjs:44-55) — there is no `modules` field."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/register.js",
+   "bytes": 1917,
+   "what": "VERIFIED — five-line babele.register inside Hooks.once('babele.init'); zero registerMapping/registerConverters calls (enforced by validate_skeleton.py, which strips comments before counting so the explanatory header doesn't false-positive)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/module.json",
+   "bytes": 2364,
+   "what": "VERIFIED — alien-evolved-corerules-cn, same shape, targetPack alien-evolved-corerules.alien-evolved-core-rules."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/register.js",
+   "bytes": 1912,
+   "what": "VERIFIED — identical structure to module 2, zero registerMapping."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/zipsim.py",
+   "bytes": 1900,
+   "what": "NEW (scratchpad) — Info-ZIP -x semantics simulator used to prove the release exclusion lists, since `zip` is not installed on this machine. Reusable before any release."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Kept compatibility.maximum = \"14.999\" rather than matching the system's literal \"14\"",
+   "reason": "The system declares {minimum:\"13\", verified:\"14\", maximum:\"14\"}; minimum and verified match exactly, only maximum differs. base-package.mjs:455-456 is `!isNewerVersion(release.version, maximum, {majorOnly: Number.isInteger(Number(maximum))})` — \"14\" is an integer so it compares major-only (caps at major 14); \"14.999\" is not, so it compares fully and accepts every build below 14.999. Both accept every real v14 build (highest shipped is ~14.3xx), so the difference is behaviourally inert. Chose the owner-supplied literal, which also matches EC and the existing validate_skeleton.py assertion. Reversible by editing one literal in three module.json files plus validate_skeleton.py:37."
+  },
+  {
+   "decision": "languages carries FIVE entries, not the six the brief named",
+   "reason": "The brief said SIX but enumerated only five paths. I checked whether a sixth plugin could take one: terminal 4.0.11 and motion-tracker-multideck 1.0.2 are the only other Alien-adjacent modules installed, and both declare no `languages` key, have no lang/ directory, and score ZERO hits for `game.i18n` across their JS and ZERO for `{{localize` across their templates. Declaring a lang file for either would be a write with no reader. Those two are routed to scripts/plugins-hardcoded-cn.mjs (template pre-registration + notification shim) instead."
+  },
+  {
+   "decision": "Converter-presence guard keys on the project naming prefix `alien`, not on a Babele built-in whitelist",
+   "reason": "script/core/babele.js:55 constructs `new ConverterRegistry()` with no arguments, so `babele.converters` (babele.js:508-510) exposes only custom registrations — Babele's built-in catalogue (document, name, nameCollection, textCollection, fromPack, pages, tableResults, sceneRegions) lives elsewhere. Using it as a whitelist would report `document` and `nameCollection` as missing. A project-owned prefix has neither false positives nor false negatives and is fully decoupled from Babele internals."
+  },
+  {
+   "decision": "Did NOT create commits in the three repos",
+   "reason": "The brief asked for `git init` (done — all three on `main`, correct .gitignore, nothing ignored). The standing harness rule is to commit only when the user asks, and committing was not asked. All 24/11/11 files are staged-ready and visible to `git status -uall`."
+  },
+  {
+   "decision": "Kept the regenerated real mapping rather than reverting babele-mappings.js to an empty stub",
+   "reason": "The brief asked for a stub, but a parallel agent landed ALIEN_LAYER in mappings.mjs mid-session, which made the stub fail `generate_runtime.mjs --check`. The invariant that actually matters is that the generated file equals what the generator produces from the single source of truth. Reverting would have left a permanently red check. The unregistered converter it now references is caught explicitly by the new guard instead."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "validate_skeleton.py across all three repos",
+   "value": "全部检查通过 (exit 0) — includes the .gitignore JSON-rule ban, the registerMapping call count (hub exactly 1, content modules exactly 0), the 5-language/4-gate assertion, and the release.yml rm-before-zip ordering"
+  },
+  {
+   "what": "generate_runtime.mjs --check",
+   "value": "ok — 1-系统汉化插件\\babele-mappings.js 与源一致 (exit 0); 4 document types, 14,539 bytes"
+  },
+  {
+   "what": "Converter guard live output against the real DOCUMENT_MAPPINGS",
+   "value": "referenced = alienRollTableRef, document, nameCollection; PROJECT_CONVERTERS = empty; guard reports exactly `alienRollTableRef` and correctly ignores the two built-ins"
+  },
+  {
+   "what": "Simulated release zip, hub (1-系统汉化插件)",
+   "value": "15 members / 70,804 uncompressed bytes; 27 files excluded; must-ship missing = none; leakage = none"
+  },
+  {
+   "what": "Simulated release zip, content modules",
+   "value": "5 members each — LICENSE, README.md, compendium/cn/.gitkeep, module.json, register.js. The 379 KB / 2.59 MB compendium/en baselines are correctly excluded"
+  },
+  {
+   "what": "OCR-A (systems/alienrpg/fonts/ocraext.ttf) cmap, parsed directly",
+   "value": "248 codepoints total; U+4E00-9FFF = 0, U+3000-303F = 0, U+3400-4DBF = 0, U+FF00-FFEF = 0. And alienrpg.css:46 sets `--alienfont: 'OCR-A'` with no generic-family fallback at all"
+  },
+  {
+   "what": "MU-TH-UR 2.0.0 inline font-family declarations",
+   "value": "52 occurrences total: 46 `font-family: monospace` (spaced) + 6 `font-family:monospace` (unspaced). The brief's 46 is the spaced form. Split by file: main.js 38 spaced + 6 unspaced + 2 `'Courier New', monospace` (:5103, :5503) = 46; spectateurs.js 4 (:67/:77/:86/:96); spectator-fix.js 4 but that file is NOT in the module's esmodules ([greensock/esm/all.js, scripts/main.js, scripts/spectateurs.js]) so it never loads — 50 effective. All are `element.style.cssText`, i.e. inline, so only !important can beat them."
+  },
+  {
+   "what": "MU-TH-UR container ids (CSS scope), all re-derived from `element.id =` assignments",
+   "value": "10 scoped: muthur-boot-sequence(:22), muthur-glitch-overlay(:384), muthur-chat-container(:1010,:1032), muthur-waiting-container(:1528), gm-muthur-container(:1703), gm-muthur-help-panel(:1803), muthur-spectator-dialog(:2201), muthur-spectator-container(:2383), cerberus-floating-window(:5044), cerberus-death-screen(:5249). Deliberately excluded: hack-progress-container(:5335) — no namespace prefix, high collision risk, and it is only ever a descendant of the above."
+  },
+  {
+   "what": "alienrpg 4.1.13 hardcoded font stacks bypassing --alienfont",
+   "value": "6, all re-derived: :581 .tooltip2 .tooltiptext2 (Times New Roman/serif — the one I added), :5063 .mess, :5610 .colonytable, :6172 .alienrpg .textarea5 (unquoted OCR-A), :6180 .click-stat-level, :6196 .click-stat-level .fas. line-height appears on exactly 10 lines (136,383,422,457,475,4374,4457,4785,6183,6199), none on journal-entry-content/journal-page-content — so the line-height rule needs no !important."
+  },
+  {
+   "what": "T-EXACT skill-stunts lookup chain, fully re-derived",
+   "value": "actor-character.mjs:468 / actor-synthetic.mjs:458 set `skills[skl].description = localize(CONFIG.ALIENRPG.skills[skl].name)` → character-skills.hbs:15 and crtui-character-skills.hbs:13 emit `data-pmbut='{{skill.description}}'` → character-sheet.mjs:1119 `game.items.getName(dataset.pmbut)`. lang/en.json has 15 ALIENRPG.Skill* keys, of which exactly 12 are real skills (closeCbt, command, comtech, heavyMach, manipulation, medicalAid, mobility, observation, piloting, rangedCbt, stamina, survival); Skills, SkillheavyMachAbb, SkillAcidSplash are not."
+  },
+  {
+   "what": "T-FROZEN name inventory re-derived from source",
+   "value": "11 hardcoded RollTable names (actor.mjs :554 Panic Table, :845 Stress Response Table, :1067 Panic Response Table, :1812 EV - Critical Injuries, :1816/:1817 Critical Injuries/Critical injuries, :1830 Critical Injuries on Synthetics/critical injuries on synthetics, :1848/:1855 Spaceship Minor/Major Component Damage, plus old-actor.js:397 Space Combat Panic Roll). 2 hardcoded Folder names: rollTableData.mjs:7 'Alien Creature Tables', :24 'Alien Mother Tables'. First-run import lookups: init.mjs:49 folder 'Alien Tables', adventurePackName 'Alien RPG System' (:76,:94,:141), welcomeJournalEntry 'MU/TH/ER Instructions.' (:81,:107). 'None' sentinel at rollTableData.mjs:12 and :31."
+  },
+  {
+   "what": "Installed upstream versions read from manifests (no invented numbers)",
+   "value": "alienrpg 4.1.13 (compat 13/14/14); babele 2.9.1; alien-mu-th-ur 2.0.0 (275 lang keys, no cn); motion_tracker 1.5.5 (69 keys); token-action-hud-alien 1.3.0 (languages/en.json = {\"tokenActionHud\":{}}, 0 keys); alien-evolved-starterset 1.0.2; alien-evolved-corerules 1.0.2; terminal 4.0.11; motion-tracker-multideck 1.0.2"
+  },
+  {
+   "what": "Pack collection names for the three cn targets",
+   "value": "alienrpg.alien-rpg-system (hub), alien-evolved-starterset.alien-evolved-starter-set, alien-evolved-corerules.alien-evolved-core-rules — each an Adventure pack with exactly 1 document"
+  },
+  {
+   "what": "git state",
+   "value": "3 repos on branch main, 0 commits each; untracked file counts 24 / 11 / 11; `git status --ignored=matching` returns nothing in any of them (no JSON swallowed)"
+  }
+ ],
+ "open_issues": [
+  "BLOCKER for translation quality, belongs to the mapping task: `4-常用脚本/release/runtime-converters.alien.js` does not exist, so PROJECT_CONVERTERS is {} while ALIEN_LAYER's Actor.rollTable / Actor.critTable reference converter `alienRollTableRef`. The extract direction is implemented (mappings.mjs EXTRACT_CONVERTERS.alienRollTableRef) but the translate direction is not. Babele fails open (field-mapping.js:236-238 / :410-424) so those two fields will silently stay English with only one console.warn. My new guard in register.js now names it explicitly at world load.",
+  "CRASH HAZARD to flag before anyone translates the crit tables: actor.mjs:1893-1894 does `testArray[9].match(/^\\[\\[([0-9]d[0-9]+)]/)[1]` with no null check. If the crit-table heal-time column is translated (or its `[[NdN]]` roll formula reshaped) while `ALIENRPG.Permanent` / the bare literal `\"Shift\"` compares still expect English, `.match()` returns null and indexing [1] throws a TypeError that aborts the whole critical-injury roll. lang_keep_english.json pins the 8 lang keys, but that only protects half the pair — the RollTable RESULT TEXT feeding testArray[3]/[5]/[9] must stay English too, or be translated in exact lockstep. This is a mapping/translation-phase constraint, not something the skeleton can enforce.",
+  "Translation payloads are intentionally empty (out of scope for this task): lang/cn.json and all four lang/plugins/*-cn.json are `{}` (3 bytes each); compendium/cn/ holds only .gitkeep in all three modules. The English baselines ARE extracted and in place (alienrpg.alien-rpg-system.json, and the 379 KB / 2.59 MB adventure baselines with their _source.json).",
+  "No commits made in the three repos (only `git init` was asked, and the standing rule is to commit only on request). Everything is staged-ready. Suggested first commit message: an initial skeleton commit per repo.",
+  "Cosmetic divergence to decide: module.json declares compatibility.maximum \"14.999\" while systems/alienrpg/system.json declares \"14\". Behaviourally identical for every shipped v14 build (see decisions). If a byte-match is wanted, change one literal in three module.json files and in 4-常用脚本/qa/validate_skeleton.py:37.",
+  "MU-TH-UR CSS coverage gap, documented and accepted: appendDialogToGM (main.js:4128-4158) appends floating dialogs to #gm-muthur-container when it exists, but falls back to position:fixed on document.body when it does not. In that fallback the element sits outside every scoped selector and keeps its inline monospace. Catching it would require an unscoped rule that leaks into other modules, so it is left uncovered by design.",
+  "`4-常用脚本/` is still the verbatim EC copy apart from release/generate_runtime.mjs and extract/mappings.mjs. In particular release/runtime-converters.js still holds crucible converters (crucibleDescription/crucibleActions/crucibleTokenName) — the generator deliberately ignores that filename and looks for runtime-converters.alien.js instead, so nothing crucible-specific can leak into the Alien global mapping layer."
+ ]
+}

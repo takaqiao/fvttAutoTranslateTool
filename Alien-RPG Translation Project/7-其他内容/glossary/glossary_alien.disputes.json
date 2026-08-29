@@ -1,0 +1,255 @@
+{
+ "_meta": {
+  "artifact": "glossary_alien.disputes.json",
+  "version": "v1.0",
+  "generated": "2026-08-29",
+  "count": 4,
+  "count_is_authoritative": true,
+  "note": "GENUINE OPEN CONFLICTS ONLY. A conflict the ladder settles is a decision, not a dispute, and lives in closed_in_v1_0 below. glossary_alien.json carries a PROVISIONAL winner for each open dispute so the file stays usable; that value is NOT a decision.",
+  "backlinks": "provenance.terms[<en>].dispute points here, and every dispute names the terms it governs in governs_terms. BOTH directions are GENERATED, not hand-maintained, and are asserted by the builder — Phase 0 lost a backlink precisely because one side was maintained by hand.",
+  "closed_count": 7,
+  "opened_in_v1_0": [
+   "D10-comtech",
+   "D11-captain"
+  ],
+  "closed_in_v1_0": {
+   "D1-panic-roll": {
+    "en": "Panic Roll",
+    "closed_by_level": 1,
+    "settled_cn": "恐慌检定",
+    "how": "Level 1 ch.2 writes 恐慌检定. The dispute was level-4-internal — the UI keys said 恐慌 while the stratum-A panic prose said 混乱检定 — and a level-1 source outranks both halves of a level-4 argument.",
+    "still_to_do": "cn.json Panic12/13/14 (混乱检定) and Panic8 (直到混乱结束) must be rewritten.",
+    "was": {
+     "provisional_cn": "恐慌检定",
+     "why_open_in_phase0": "cn.json disagrees with itself: its UI keys use 恐慌 for Panic while its human-translated panic-table prose renders the phrase 'Panic Roll' as 混乱检定. One of the two has to give."
+    }
+   },
+   "D2-engaged": {
+    "en": "Engaged",
+    "closed_by_level": 1,
+    "settled_cn": "接战",
+    "how": "Closed from the OTHER SIDE. The dispute existed because level 4 spent 近战 on both the Engaged range band and the Melee weapon type. Level 1 gives 近战 to the Close Combat SKILL, so neither of the other two can keep it: Engaged takes level 4's own prose form 接战 and Melee takes the freed 肉搏. One level-1 decision dissolved a three-way collision.",
+    "still_to_do": "Rewrite ALIENRPG.Engaged (近战 -> 接战) and ALIENRPG.WepTypeMelee (近战 -> 肉搏) in the same commit as the Close Combat skill rename.",
+    "was": {
+     "provisional_cn": "接战",
+     "why_open_in_phase0": "cn.json uses ONE string, 近战, for two different game terms: the Engaged range band and the Melee weapon type. In the weapon-type dropdown and the range dropdown the player sees the same word for two unrelated things."
+    }
+   },
+   "D3-stress-level": {
+    "en": "Stress Level",
+    "closed_by_level": 1,
+    "settled_cn": "压力等级",
+    "how": "Level 1 ch.2 writes 压力等级. The dispute was a 7-2 level-4 count for 压力水平 against a consistency argument for 压力等级; level 1 picks the side the count was losing on, and it also aligns Stress Level with Panic Level (恐慌等级).",
+    "was": {
+     "provisional_cn": "压力水平",
+     "why_open_in_phase0": "Both renderings are in cn.json, both in stratum A, and both in stratum B. There is no clean stratum split to arbitrate on — only a count."
+    }
+   },
+   "D4-health": {
+    "en": "Health",
+    "closed_by_level": 1,
+    "settled_cn": "生命值",
+    "how": "Level 1 ch.2 writes 生命值. All three Phase-0 sides were level-4 readings of one self-inconsistent file, and the count leader (健康) was entirely stratum B.",
+    "still_to_do": "ALIENRPG.Health (生命) and ALIENRPG.healthDamage (健康损害) both change.",
+    "was": {
+     "provisional_cn": "生命",
+     "why_open_in_phase0": "Three renderings coexist in one file. 健康 actually has the higher English-gated count, so the provisional winner is chosen on stratum, not on count."
+    }
+   },
+   "D5-synthetic": {
+    "en": "Synthetic",
+    "closed_by_level": 1,
+    "settled_cn": "合成人",
+    "how": "Levels 1 and 2 agree on 合成人, and the owner's §1.4 three-way split assigns the other two words explicitly: Android 仿生人 (level-3 hard gate), Robot 机器人 (level 2). The Phase-0 dispute could not be settled because it was arguing about one word while the English has three.",
+    "was": {
+     "provisional_cn": "生化人",
+     "why_open_in_phase0": "The system file and the film reference works disagree, and the subtitle corpus — cited by the survey as supporting 生化人 with 13 hits — does not actually support it once the count is English-gated."
+    }
+   },
+   "D7-weyland-yutani": {
+    "en": "Weyland-Yutani",
+    "closed_by_level": 1,
+    "settled_cn": "韦兰德-汤谷公司",
+    "how": "Level 1 spells it in full and clips it to 韦汤. Level 2 independently agrees that Yutani is 汤谷. The 尤坦尼 branch existed only at level 7 and is abandoned whole.",
+    "still_to_do": "Nothing in lang; this is pack content plus the surname lock across four sibling keys.",
+    "was": {
+     "provisional_cn": "韦兰-尤坦尼集团",
+     "why_open_in_phase0": "Three renderings from three registers, and the only one attested in this project's own corpus is the one nobody proposes."
+    }
+   },
+   "D8-shift": {
+    "en": "Shift",
+    "closed_by_level": 1,
+    "settled_cn": "班",
+    "how": "Level 1 ch.1's time-unit table glosses 班 (Shift) inline, and completes the 轮 / 节 / 班 set that §1.4 names. The Phase-0 dispute was 轮班 (level 4) vs 班次 (stratum B, which is never a source anyway).",
+    "still_to_do": "⚠ The RUNTIME hazard is NOT closed and is not a terminology question: the RollTable heal-time CELL must stay the bare English 'Shift'. See byrole['Shift'] and provenance._meta.lockstep_literals.",
+    "was": {
+     "provisional_cn": "轮班",
+     "why_open_in_phase0": "Shift is BOTH a time unit the rules count in AND a bare English literal the Critical-Injury heal-time parser compares against. cn.json renders the time unit two different ways in two different places while leaving the parser literal English."
+    }
+   }
+  }
+ },
+ "disputes": {
+  "D6-queen": {
+   "en": "Queen",
+   "provisional_cn": "女王",
+   "tier": "T-BILINGUAL",
+   "governs_terms": [
+    "Queen",
+    "Alien Queen"
+   ],
+   "why_open": "ONE VOTE ARGUING WITH ITSELF. Every hit is CnSCG (level 6), and the project's hard rule folds all four films into a single vote precisely because cross-film agreement there is shared provenance rather than corroboration — so cross-film DISAGREEMENT is one translator team changing its mind, not two sources in conflict. Levels 1, 2, 3 and 5 are all silent: the fan serial does not reach the Queen (she is a ch.10 creature), Alien: Isolation has no Queen, and neither Romulus 2024 nor Alien: Earth 2025 names her. There is nothing on the ladder above level 6 to break the tie, and level 6 cannot break it because it IS the tie.",
+   "vote_shape": {
+    "english_regex": "\\bqueen\\b",
+    "total_en_gated_hits": 7,
+    "hits_by_lineage": {
+     "CnSCG(异形1/2/3/4·同源)": 7
+    },
+    "distinct_lineages_with_any_hit": 1,
+    "lineage_count_of_the_winning_candidate": 1
+   },
+   "sides": [
+    {
+     "cn": "女王",
+     "source_level": 6,
+     "argument": "The form in the compound the RPG actually needs (Alien Queen -> 异形女王), and the form zh.wikipedia's 异形 (虚构生物) article uses. Wins the line count 3-2 once the bee-metaphor hit is discounted.",
+     "gated_count": "en-gated 4 of 7 rows matching \\bqueen\\b — ALIEN3 3, ALIENS1986 1. One of the 4 is the simile 女王蜂 (ALIENS1986 1:35:28), so the plain-noun count is 3.",
+     "evidence": "ALIEN3 1:41:18 'I'm carrying the new queen' -> 我孕育新女王; ALIEN3 1:46:49 'It's a queen- an egg layer' -> 它是个女王 会产卵.",
+     "lineage": "CnSCG — the SAME lineage as the other side"
+    },
+    {
+     "cn": "王后",
+     "source_level": 6,
+     "argument": "Uniform across the whole of Alien Resurrection, the film with the most Queen dialogue, and the same film produces 异形王后 for 'Her Majesty'.",
+     "gated_count": "en-gated 3 of 7 — all RESURRECTION",
+     "evidence": "RESURRECTION 0:13:09 'It's a queen.' -> 是王后; 1:29:58 -> 是王后; 1:34:19 'The queen laid her eggs' -> 王后产卵. Plus the cn_only 0:11:27 -> 异形王后才值回票价.",
+     "lineage": "CnSCG — the SAME lineage as the other side"
+    }
+   ],
+   "what_would_settle_it": "ch.10 of the fan serial (level 1) would settle it in one line, and the owner has confirmed it does not exist. Failing that, an owner ruling. Do NOT settle it by counting CnSCG lines: that is a bare count inside one vote, which is the exact failure mode the project's hard rules forbid.",
+   "blast_radius": "The Queen Actor(s) in the core-rules pack, the compound Alien Queen, and all hive prose.",
+   "status": "closed_by_ruling",
+   "closed_by": "R1-queen",
+   "settled_cn": "女王",
+   "ruling_rationale": "三条理由，按强弱：① 本项目真正需要的是**复合词** Alien Queen → 异形女王，而不是孤立的 Queen；异形女王 是中文语境里压倒性的既有说法。② 生物学上错不得：异形女王是**孤雌生殖的蜂巢首领**，是统治者本人；「王后」在中文里是「国王的配偶」，指向一个并不存在的国王。③ 证据侧 3-2（扣掉那条蜜蜂比喻的命中），且 zh.wikipedia 的《异形(虚构生物)》条目用的就是 女王。",
+   "counter_argument_acknowledged": "王后 在《异形4》全片一致，且同片把 'Her Majesty' 译作 异形王后。但《异形4》属于 CnSCG 那一条血脉，按 §3.3 折成一票——这是**一票在自己内部打架**，不是两票对立。"
+  },
+  "D9-armor-piercing": {
+   "en": "Armor Piercing",
+   "provisional_cn": "破甲",
+   "tier": "T-PLAIN",
+   "governs_terms": [
+    "Armor Piercing"
+   ],
+   "why_open": "The provisional value overrides a shipped lang value that is not wrong, only wrong in part of speech. Overriding a string players already read is an owner call. Nothing on the new ladder reaches this term at all: levels 1, 2, 3, 5 and 6 are all silent, so the rebuild could not close it either.",
+   "sides": [
+    {
+     "cn": "破甲",
+     "source_level": "C",
+     "argument": "Armor Piercing is a weapon PROPERTY that attaches to knives, bolt guns and acid attacks as well as to bullets. 破甲 is adjectival in Chinese and is the TRPG convention.",
+     "gated_count": "en-gated 0 — a convention call, not an attestation",
+     "evidence": "Recorded at confidence 'low' in the Phase-0 web survey."
+    },
+    {
+     "cn": "穿甲弹",
+     "source_level": 4,
+     "argument": "It is what the shipped file says, and for the pulse-rifle case it is exactly right.",
+     "gated_count": "en-gated 1 (a lang key/value pair)",
+     "evidence": "ALIENRPG.ArmorPiercing 'Armor Piercing' -> 穿甲弹. 弹 means 'round/projectile', so the string cannot attach to a Combat Knife or to Acid Splash."
+    },
+    {
+     "cn": "穿甲",
+     "source_level": "C",
+     "argument": "The minimal fix: drop only the 弹 from the shipped value, keeping the literal reading and making it a property rather than a noun.",
+     "gated_count": "en-gated 0",
+     "evidence": "Smallest edit that repairs the part of speech."
+    }
+   ],
+   "what_would_settle_it": "Owner ruling between the convention (破甲) and the minimal fix (穿甲). 穿甲弹 is not defensible as-is because of the non-firearm carriers.",
+   "blast_radius": "ALIENRPG.ArmorPiercing plus every weapon Item that carries the feature.",
+   "status": "closed_by_ruling",
+   "closed_by": "R2-armor-piercing",
+   "settled_cn": "破甲",
+   "ruling_rationale": "现行 cn.json 的 穿甲弹 是**范畴错误**，不是风格差异。Armor Piercing 在本系统里是一条挂在武器上的**属性**，而它挂载的对象包括刀、气矢枪和**异形的酸血攻击**——酸血不是「弹」。破甲 在中文里是形容词性的，且是 TRPG 既有惯例，能同时盖住这三类。",
+   "counter_argument_acknowledged": "对脉冲步枪那一例，穿甲弹 恰好是精确的；最小改动方案 穿甲 也保留了字面。但属性名要按**最宽的挂载面**取，不能按最典型的那一例取。"
+  },
+  "D10-comtech": {
+   "en": "Comtech",
+   "provisional_cn": "科技",
+   "tier": "T-EXACT",
+   "governs_terms": [
+    "Comtech"
+   ],
+   "opened_in": "v1.0",
+   "why_open": "NEW IN v1.0, and the only place in this rebuild where level 1 was not taken. Comtech is COMmunications + TECHnology: the skill covers comms, electronics and computer intrusion. Level 1 renders it 计算机科学, 'computer science', which drops the comms and electronics half — the miner flags the same over-narrowing. Level 4's 科技 is vague but not wrong. Taking the higher rung here would import a demonstrably narrower reading, so the term is parked instead of decided.",
+   "sides": [
+    {
+     "cn": "科技",
+     "source_level": 4,
+     "argument": "Broad enough to cover the whole skill, and it is what every Chinese Foundry table reads today. Vague, but not narrower than the English.",
+     "gated_count": "en-gated 1 (lang key/value pair ALIENRPG.Skillcomtech)",
+     "evidence": "lang/en.json ALIENRPG.Skillcomtech 'Comtech' -> lang/cn.json '科技'."
+    },
+    {
+     "cn": "计算机科学",
+     "source_level": 1,
+     "argument": "It is the reading in the Chinese translation of this very book, which is the top of the ladder, and it is unambiguous where 科技 is vague.",
+     "gated_count": "en-gated by construction — the fan text translates the known English skill list position by position",
+     "evidence": "ch.2 '我们给她3级重型机械，2级耐力和近战，以及1级计算机科学、侦察和医疗'. The miner's own note: 'over-narrows a skill that also covers comms and electronics'."
+    },
+    {
+     "cn": "通信科技",
+     "source_level": "C",
+     "argument": "Splits the difference: keeps level 4's head noun 科技 and restores the COM half the English name carries. Four characters, same as 计算机科学.",
+     "gated_count": "en-gated 0",
+     "evidence": "Composition, offered so the owner has a third option that is neither vague nor narrow."
+    }
+   ],
+   "what_would_settle_it": "Owner ruling. ⚠ T-EXACT: whichever wins must be written into ALIENRPG.Skillcomtech AND onto the skill-stunts Item name in the same commit, or character-sheet.mjs's getName() lookup misses.",
+   "blast_radius": "ALIENRPG.Skillcomtech, the Comtech skill-stunts Item, every career's key skill list, and every talent that keys off the skill.",
+   "status": "closed_by_ruling",
+   "closed_by": "R3-comtech",
+   "settled_cn": "通信科技",
+   "ruling_rationale": "两个候选各错一半，取中间那个不是和稀泥而是唯一正确解：① 一级源的 计算机科学 **窄于英文**——Comtech 同时管通讯、计算机与电子设备，砍掉「通讯」这一半会让技能描述自相矛盾（这也是 adjudication 当初拒绝直接采纳它、而把它扔进争议的原因）。② 四级源的 科技 **宽到不指任何东西**，任何技能都可以叫科技。③ 英文名本身就是 Com + tech 的缩合，通信科技 是它的忠实还原，保留了四级源的中心语 科技，补回了英文里的 COM 一半，四个字与其余技能名等长。",
+   "counter_argument_acknowledged": null
+  },
+  "D11-captain": {
+   "en": "Captain",
+   "provisional_cn": "舰长",
+   "tier": "T-PLAIN",
+   "governs_terms": [
+    "Captain"
+   ],
+   "opened_in": "v1.0",
+   "why_open": "NEW IN v1.0. The ladder picks 舰长 because level 2 is the highest rung that speaks and Alien: Earth 2025 says 舰长 — but level 2 itself does not speak with one voice at level 5 below it (Covenant 2017 舰长, Prometheus 2012 船长), and 舰长 is the word for a WARSHIP's commander. Most Alien RPG ships are commercial haulers with a crew of five, which is 船长 territory. The ladder result and the register are pulling opposite ways and neither is obviously wrong.",
+   "sides": [
+    {
+     "cn": "舰长",
+     "source_level": 2,
+     "argument": "The highest rung that speaks. Level 2 (Alien: Earth 2025) and level 5 (Covenant 2017) both use it, and it is the form a player who watched the 2024-25 releases will recognise.",
+     "gated_count": "en-gated: 'Captain' matched 63 rows over 4 lineages; the per-lineage top is 舰长 for AlienEarth2025 and Covenant2017",
+     "evidence": "mined_subtitles_vote.json terms[key='Captain'].per_lineage_top"
+    },
+    {
+     "cn": "船长",
+     "source_level": 5,
+     "argument": "The right register for a commercial freighter, which is what the Space Truckers framework and most published Alien RPG ships are. Level 5 (Prometheus 2012) and level 6 both use it.",
+     "gated_count": "en-gated: per-lineage top 船长 for Prometheus2012 and CnSCG",
+     "evidence": "mined_subtitles_vote.json terms[key='Captain'].per_lineage_top"
+    }
+   ],
+   "what_would_settle_it": "ch.3+ of the fan serial would settle it at level 1; it does not exist. Otherwise an owner ruling on whether ship ranks follow naval register (舰长) or merchant-marine register (船长). Note level 4 has NO Captain key, so nothing is at stake in the UI.",
+   "blast_radius": "Every ship-crew NPC in all three packs, the Officer career's description, and all voyage-log prose.",
+   "status": "closed_by_ruling",
+   "closed_by": "R4-captain",
+   "settled_cn": "船长",
+   "ruling_rationale": "这不是二选一，是**按域分裂**——中文本来就区分商船与军舰的主官，而英文一个 Captain 通吃。① 本游戏的默认框架是商业的：船级前缀 USCSS 里的 C 就是 Commercial，三大战役框架里「太空卡车司机」排第一。② 电影侧 达拉斯船长（《异形》）也是商船。③ 舰长 在二级源（Alien: Earth 2025）与五级源（Covenant 2017）出现，但那两处指的都是**具名大船**，正好落在军舰那一支里，所以采纳域分裂之后**两边的证据都被解释了**，没有一方被推翻。",
+   "counter_argument_acknowledged": null,
+   "domain_split": {
+    "船长": "默认。商船、拖船、运输船、打捞船——即 USCSS（United States Commercial Ship）与「太空卡车司机」战役框架下的绝大多数船。",
+    "舰长": "仅限具名军舰。殖民海军陆战队框架下的 UAS/USS 战斗舰艇。"
+   }
+  }
+ }
+}

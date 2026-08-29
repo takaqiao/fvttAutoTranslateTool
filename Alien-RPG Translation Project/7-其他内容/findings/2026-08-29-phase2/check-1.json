@@ -1,0 +1,130 @@
+{
+ "verdict": "The \"machine output / misstates rules\" hypothesis is REFUTED for rules precision and terminology, and PARTLY CONFIRMED for cross-unit consistency. I read ~35 passages across all six journal units plus SYS-T1 (3 tables), SYS-I1 (26 items) and SYS-U1, checking each field label against 1-系统汉化插件/lang/cn.json (600 keys, dumped and grepped), glossary_alien.json (404), RULINGS.json, DO-NOT-TRANSLATE.json, and — where the manual and the lang file disagreed — against the live system source in AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg. Register is genuinely instructional second-person Chinese; I found no 被-chains, no English clause order, no stacked pre-modifiers worth flagging. Rules precision is high: every negation, comparison and disjunction I checked survived, including the exact construction that broke last project (\"until you or the target is Broken\" → 「直到你或目标濒死，或是恐慌结束」 — both halves intact in Panic Table 14-14 AND Panic Response 11-11). Zero numeric tokens dropped across ~13k characters after folding Chinese numerals. Every one of the 12 skill-stunt names is byte-equal to its ALIENRPG.Skill* value with no English tail. Six of the seven wrong-sense candidates I flagged on first pass turned out to be the translator correctly following the LOCK against a stale or loose English source — including one case (Attributes tab → 通用页签) where the manual's English names a tab that does not exist and the CN silently repointed to the real one. The real defect class is different from the stated hypothesis: each unit is internally coherent but the six do not read as one document. Quotation style splits 2-vs-4 across units (three different conventions counting how frozen English is wrapped), \"Roll Table Formula\" appeared four different ways, \"Combat Tracker\" is 战斗轮 in J5 and 战斗追踪器 in J6, the product name is \"Alien RPG\" in J1/J5 and 异形RPG in J6/U1/I1, and SYS-U1 translates all four macro names while J5/J6 cite them in English — so post-install the manual points at sidebar entries that no longer exist under those names. I fixed 15 occurrences across 5 files (all tag counts re-verified identical to the English); the remaining items need one controller-level pass because they span unit boundaries.",
+ "fixes_applied": [
+  "SYS-J5.cn.html — 「战斗轮」→「战斗追踪器」 (3x: the h1, 「在战斗轮里投先攻时」, 「在战斗轮里右键单击某个角色」). Wrong sense of Tracker: 轮 = round, not the Foundry sidebar panel. J6 already used 战斗追踪器 three times, and glossary_alien.json has 'Motion Tracker' = 运动追踪器. As written, 「在战斗轮里右键单击某个角色」 was not a followable UI instruction.",
+  "SYS-J5.cn.html — 「提供该数值的物品数量也会相应减少」→「提供该数值的物品，其数值也会相应减少」. EN: 'the items giving that value will be decremented'. 数量 is the Quantity field that SYS-J4 explicitly defines for Data Storage/Pharmaceuticals/Clothing; the supply roll decrements the item's supply VALUE, and SYS-J2's parallel sentence already said 数值.",
+  "SYS-J5.cn.html — 「投掷表公式填 10*1d6+1d6」→「Roll Table Formula（骰表公式）填 10*1d6+1d6」, unifying with the anchor unit SYS-J2.",
+  "SYS-J3.cn.html — 「把表格的投骰公式设为 1d6。」→「把表格的 Roll Table Formula（骰表公式）设为 1d6。」, same unification. 'Roll Table Formula' had been rendered four ways across the journal (J2 Roll Table Formula（骰表公式） / J3 投骰公式 / J5 投掷表公式 / J6 随机表); now two, and J6's 随机表宏 refers to the macros rather than the field so it is correct as-is.",
+  "SYS-J5.cn.html — 5x 「点击」→「单击」 (降落伞图标 / 「护甲」 / 追骰图标 / CRT UI 按钮 / 「重置」按钮). J5 mixed both verbs for the same action; the anchor unit J2 uses 单击 throughout (31x, 0x 点击).",
+  "SYS-J4.cn.html — 3x 「点击」→「单击」, same normalization.",
+  "SYS-J4.cn.html — 「在编辑图标上单击右键会弹出右键菜单」→「右键单击编辑图标会弹出右键菜单」, matching the J2/J3/J5 phrasing for the identical action.",
+  "SYS-J2.cn.html — 4x bare English 「actor」 → 「角色」 (该 actor 的指示物设置 / 带有永久辐射的 actor / 表示该 actor 处于警戒姿态 / 加到该 actor 的卡上). An untranslated lowercase English noun dropped into Chinese prose, in the unit index.json designates as 全项目的术语锚点; J3/J4/J5 all already use 角色, and J1's heading established 「角色 Actors」.",
+  "SYS-J6.cn.html — 「异形RPG 支持 2 种骰面类型。」→「Alien RPG 支持 2 种骰面类型。」. Sole spot in J1–J6 that translated the product name; J1 and J5 keep 'Alien RPG'. (The 异形RPG form also survives in U1/I1 — see missed_items.)",
+  "SYS-J6.cn.html — 「用来显示关键资源各项与发展等级总计的修正合计。」→「用来显示各项关键属性与发展等级总计的修正合计。」. EN 'key stats'; 资源 is a different sense, and SYS-J4 calls the same colony values 属性 (「殖民地各项属性的基础数值」).",
+  "Verified after editing: HTML tag-name counts in all six .cn.html files still match their .en.html exactly (no merged/split/dropped structural tags)."
+ ],
+ "missed_items": [
+  {
+   "what": "SYS-U1 translates all four macro names and the 'Alien Macros' folder, but SYS-J5 and SYS-J6 cite those macros in English — so the manual names entries that will not exist under those names after install. U1: 「异形 -  GM 投骰器」/「异形 - 玩家临时 YZE 投骰器」/「异形 - 在选定的生物表格上投骰 V10」/「异形 - 在选定的老妈表格上投骰 V10」, folder 'Alien Macros'→异形宏. J5 §Macros lists them as 'Alien - GM Dice Roller:', 'Alien - Player Ad-hoc YZE Dice Roller:', etc., and says 「它们在合集里的 Macro>Alien 下」; J6 v3.2.3 cites 'Alien - Roll on selected Mother table V10'.",
+   "where": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-U1.cn.json (macros, folders) vs pages\\SYS-J5.cn.html (§宏) and pages\\SYS-J6.cn.html (v3.2.3)",
+   "why_matters": "This is the manual's most literal promise — 'go find this thing in your sidebar'. Either freeze the macro names in U1 or give J5/J6 the translated names (bilingual would serve both). A mechanics gate that only checks each unit's own frozen-string register cannot see this: neither unit is internally wrong."
+  },
+  {
+   "what": "Three different quotation conventions across the six units, and the split is clean along unit boundaries. J2 uses 「」 for translated UI labels (41x) and ASCII \"\" for frozen English strings ( \"Critical injuries\", \"fvtt-RollTable-critical-injuries-template.json\" ). J3 uses 「」 for BOTH (56x, incl. 「Critical Injuries on Synthetics」, 「Alien Mother Tables」, 「None」). J1/J4/J5/J6 use curly “” (6/7/25/23), including around English (“Private GM Roll”, “Import All Content”, “Critical Injuries”).",
+   "where": "All six files under ...\\6-工作区\\phase2\\pages\\. Counts: J1 6“ / J2 41「 / J3 56「 / J4 7“ / J5 25“ / J6 23“",
+   "why_matters": "These six units assemble into ONE journal page a reader scrolls through end to end; the punctuation flips at each unit boundary and is the single most visible tell that this was written by six hands. PROJECT.md's own prose uses 「」 and index.json designates J2 as 全项目的术语锚点, so 「」 with ASCII \"\" reserved for T-FROZEN English is the defensible rule — but it needs one deliberate pass, not a subagent silently restyling 61 quote pairs in four files."
+  },
+  {
+   "what": "SYS-J6 keeps the upstream author's typo 'MO/TH/ER Instructions' while SYS-U1 correctly repointed to the real document name 'MU/TH/ER Instructions.' (with the trailing period). J6: 「它只能由 GM 移除（见 MO/TH/ER Instructions）。」 U1: 「请看日志条目“MU/TH/ER Instructions.”」",
+   "where": "pages\\SYS-J6.cn.html (v3.1.3) vs SYS-U1.cn.json (description). Ground truth: 1-系统汉化插件\\compendium\\en\\alienrpg.alien-rpg-system.json — the journal/page name field is \"MU/TH/ER Instructions.\"; only the two prose mentions say MO/TH/ER. DO-NOT-TRANSLATE.json:109 registers \"MU/TH/ER Instructions.\" as the frozen name.",
+   "why_matters": "Two sibling units made opposite calls on the same cross-reference. U1's is right and the fix is already proven; J6's line sends the reader after a document that does not exist. I did not fix it myself because editing a name that sits in the hard register is a controller call, not a QA one."
+  },
+  {
+   "what": "The same settings path is rendered three ways inside one journal. J1: 「请依次打开 Configure Settings&gt;Alien Evolved&gt; 使用异形进化版规则与卡片」 (first two segments left English). J6, the changelog echo of literally the same sentence: 「开关在“配置设置&gt;异形进化版&gt;使用异形进化版规则与卡片”」 (fully Chinese). J5: 「在 Configuration Settings&gt;System Settings 下」 (wholly English).",
+   "where": "pages\\SYS-J1.cn.html (§NOTE), pages\\SYS-J6.cn.html (EVOLVED SYSTEM bullet 2), pages\\SYS-J5.cn.html (§系统设置选项)",
+   "why_matters": "The leaf of the path is right in all three (ALIENRPG.Evolved = 使用异形进化版规则与卡片, matched byte-exact), so a lang-key gate passes all three. But a reader running the Chinese localization sees 配置设置, and a reader told to look for 'Configure Settings' in J1 and 'Configuration Settings' in J5 has to guess. Pick one — J6's fully-Chinese form is the one consistent with shipping a localization."
+  },
+  {
+   "what": "The product name splits along the journal/non-journal boundary: J1 and J5 keep 'Alien RPG' in running prose (「在 Foundry VTT 上运行…的 Alien RPG 的官方系统」, 「Alien RPG 系统为基础骰子和压力骰子定义了专用的骰子记法」), while SYS-U1 uses 异形RPG/《异形RPG》 and its h1 is 「异形RPG系统 Alien RPG System」, and all 12 SYS-I1 skill-stunt descriptions say 「参见《异形RPG》规则书第 64 页起」.",
+   "where": "SYS-U1.cn.json (description, 4 link labels), SYS-I1.cn.json (12 descriptions), vs pages\\SYS-J1.cn.html and pages\\SYS-J5.cn.html",
+   "why_matters": "U1's description and the journal render side by side in the compendium browser. There is no ruling for 'Alien RPG' in RULINGS.json or DO-NOT-TRANSLATE.json, so this is an open naming-tier decision that has been answered two ways by different units — exactly the kind of drift that gets 'harmonized' wrongly in a later pass. I fixed only the single J6 outlier; U1/I1 need the controller's call."
+  },
+  {
+   "what": "Talent names get two different naming tiers. SYS-J2 gives 'Field Surgeon' a T-BILINGUAL rendering 「战地外科医生 Field Surgeon」; SYS-J4 leaves 'Nerves of Steel', 'Pack Mule' AND 'Compassion' as bare English with no Chinese at all.",
+   "where": "pages\\SYS-J2.cn.html (§技能页签) vs pages\\SYS-J4.cn.html (§天赋)",
+   "why_matters": "Nerves of Steel and Pack Mule are defensible — glossary_alien.json freezes them ('NERVES OF STEEL' = NERVES OF STEEL, 'Pack Mule' = Pack Mule). Compassion and Field Surgeon are in neither the glossary nor DO-NOT-TRANSLATE, and got opposite treatment. GLOSSARY GAP: 'Compassion' and 'Field Surgeon' need entries before Phase 4/5, or the corerules talent items will drift a third way."
+  },
+  {
+   "what": "SYS-T1 renders 'turn' as 出手 (「失去你的下一次出手」, 「打断动作，会打破出手顺序」, 4 occurrences in the Panic Response Table) while glossary_alien.json pins 'Turn' = 节 and lang/cn.json's ShipPanic11/ShipPanic9 use 节 (「呆滞一节」/「接下来的一节内」).",
+   "where": "SYS-T1.cn.json — Panic Response Table results 7-7, 8-8, 9-9, 10-10",
+   "why_matters": "The split is CORRECT — 'turn order' here is the initiative sequence, not the 5–10-minute Turn time unit, and 节 would have been a real rules error. But it is undeclared, which means the next consistency pass (or a scripted glossary sweep) will 'fix' it back to 节 and introduce the bug. GLOSSARY GAP: add an explicit second sense, e.g. 'turn (initiative order)' = 出手, with a note that it is deliberately not 节."
+  },
+  {
+   "what": "'Broken' is 濒死 in the locked strings but 崩溃 in SYS-J2. lang ALIENRPG.Panic14 and SYS-T1 both use 「直到你或目标濒死」; SYS-J2 renders 'to show how near breaking they are' as 「让他知道自己离崩溃还有多远」.",
+   "where": "pages\\SYS-J2.cn.html (§追踪, Panicked condition paragraph); compare SYS-T1.cn.json Panic Table 14-14 and glossary_alien.json 'Broken' = 濒死",
+   "why_matters": "Low severity — the English 'breaking' here is figurative (panic threshold), not necessarily the Broken condition. But 崩溃 sits in a paragraph about panic level in a manual whose tables define 濒死 as the state name, and a reader may reasonably think two different things are meant. Worth a deliberate call rather than an accident."
+  },
+  {
+   "what": "SYS-J4's Armor section faithfully reproduces an upstream copy-paste bug: 「武器处于“已激活”状态时，卡上的数值与修正会参与检定。」 under the 护甲 heading. The English is 'The stats and modifiers on the sheet will be used in rolls when the weapon is \"Active\"' — inside the Armor section, where it should say armor.",
+   "where": "pages\\SYS-J4.cn.html (§护甲, last sentence)",
+   "why_matters": "Preserving the source is the safe default, but the Chinese reader has no way to see this is the author's slip rather than a real rule, and the immediately preceding J4 Weapon section ends with the same sentence about weapons — so it reads as a deliberate repetition. Silently correcting to 护甲 (the CN already silently corrected a stale tab name elsewhere, see refuted_claims) would serve the manual better. Controller's call on whether faithfulness or usability wins here."
+  },
+  {
+   "what": "Three smaller self-consistency items. (a) 'radio buttons' is 单选按钮 in J1 and 一排圆点按钮 in J2. (b) 'System sheet for BBW' is 星系卡 in J6 while J4 calls the same item type 行星/星系 (TYPES.Item.planet-system). (c) 'archetypes' is flattened to 职业 in J6 (「新增了 BBW 里的独立勘探者与艺人两个职业」), collapsing a BBW concept distinct from Career.",
+   "where": "pages\\SYS-J1.cn.html §实用提示 vs SYS-J2.cn.html §追踪; pages\\SYS-J6.cn.html v3.1.7 vs SYS-J4.cn.html §行星/星系 and §物品类型",
+   "why_matters": "None is a rules error and (a) is arguably an improvement in J2, but all three are the same-thing-named-twice pattern the review was asked to surface, and they are cheap to unify."
+  },
+  {
+   "what": "Two register wobbles in the changelog units. J6: 「仅适用于 Foundry 第 13 版的发布。」 for 'Foundry Version 13 (ONLY) release.' reads as 'the release OF version 13' rather than 'this release is for version 13 only'; and the same unit keeps 'FVTT V12' un-translated two lines away. J1: 「加大了经典版卡片上经验与现金窗口的尺寸，避免互相重叠。」 for 'Increased the size of the xp cash window' — 经验与现金窗口 reads as two windows (the source means the single XP/Cash window), and 互相重叠 adds a reciprocal the English does not have.",
+   "where": "pages\\SYS-J6.cn.html (Versions 3.3.0 & 3.3.1) and pages\\SYS-J1.cn.html (Version 4.1.12, bullet 5)",
+   "why_matters": "These are the only two places in ~13k characters where the Chinese reads translated rather than written. Both are one-clause rewrites; flagging them because the review's stated default stance was 'reads like machine output' and these are the closest the corpus comes to earning it."
+  }
+ ],
+ "refuted_claims": [
+  {
+   "claim": "The Pwr column is mistranslated with the wrong sense of 'power': SYS-J2 says 「单击「威力」列里的数值」 (威力 = a weapon's destructive power) in a paragraph that otherwise uses 电力 (electrical power) — the exact 仅限通用汽车 failure mode.",
+   "why_wrong": "The manual is required to name the label the sheet actually shows, and the sheet shows 威力. The internal oddity is real but it lives one layer down, in the Phase 1 lang file: ALIENRPG.Pwr should almost certainly be 电力 to match ALIENRPG.Power. Changing J2 would have broken the LOCK and made the manual stop matching the UI. Reporting it as an upstream lang defect for a Phase 1 ticket, not touching J2.",
+   "evidence": "1-系统汉化插件\\lang\\cn.json: ALIENRPG.Pwr = 威力, ALIENRPG.Power = 电力. SYS-J2.cn.html: 「电力的余量检定要针对物品栏页签上的单件物品来做：单击「威力」列里的数值即可。」"
+  },
+  {
+   "claim": "'Observation' is rendered 侦察 (scout/reconnoiter) instead of 观察 — a plausible Chinese word for a different sense, appearing in J3 creature stats, J5 creature rolls, SYS-T1 Panic Response 4-4 and SYS-I1's skill-stunt item.",
+   "why_wrong": "侦察 is the delivered UI value for the skill, so every one of those four sites is byte-correct and mutually consistent. Same result for 机动 (Mobility) and 酸血飞溅 (Acid Splash).",
+   "evidence": "lang\\cn.json: ALIENRPG.Skillobservation = 侦察, ALIENRPG.Skillmobility = 机动, ALIENRPG.SkillAcidSplash = 酸血飞溅. Also glossary_alien.json 'Observation' = 侦察, 'Mobility' = 机动."
+  },
+  {
+   "claim": "SYS-J4 sends the reader to the wrong tab: EN says the item sheet gains stats 'on its Attributes tab', CN says 「在通用页签上列出该物品类型相关的数值」 — Attributes (属性) silently became General (通用).",
+   "why_wrong": "The item sheet has no Attributes tab. Its tabs are Description/General/Modifiers/Notes/Weapon. The English manual is stale and the CN repointed to the tab that actually exists — the correct application of the 'must match what the sheet shows' rule, and a decision no mechanical EN↔CN diff would ever approve. Same pattern in J2, where 'the tab modifiers tab' correctly became 「修正」页签.",
+   "evidence": "lang\\cn.json: ALIENRPG.Item.Tabs.Description/General/Modifiers/Notes/Weapon = 描述/通用/修正/笔记/武器. No ALIENRPG.Item.Tabs.Attributes key exists (ALIENRPG.Attributes = 属性 is the actor attribute block)."
+  },
+  {
+   "claim": "SYS-J5 conflates two adjacent creature-sheet fields: EN 'This is added to the creatures \"Acid Attack\" value', CN 「这个数值会加到生物的“酸血飞溅”数值上」 — Acid Attack (酸血) swapped for Acid Splash (酸血飞溅).",
+   "why_wrong": "There is no 'Acid Attack' numeric field on the creature sheet. The dialog's damage input is added to system.general.acidSplash.value — the field labeled 酸血飞溅 — and ALIENRPG.AcidAttack is used only as a chat <h2> in the branch where the creature has no acid at all. The CN matches both the sheet and the code; the English is the loose one.",
+   "evidence": "systems\\alienrpg\\module\\documents\\actor.mjs:2595-2597 (const modifier = Number(response.damage); r1Data = r1Data + modifier; where r1Data is the acidSplash roll value) and :2601 (AcidAttack used only in the else branch, paired with ALIENRPG.AcidBlood 「该生物没有酸血。」). templates\\actor\\creature-header.hbs:54-57 binds the input to system.general.acidSplash.value with label ALIENRPG.SkillAcidSplash."
+  },
+  {
+   "claim": "SYS-J4 renders the colony sub-type 'Initiatives' as 工程 (engineering works) while its own item-type bullet says 殖民地开发计划 — a wrong sense plus a self-contradiction in one unit.",
+   "why_wrong": "Both are right and they name different things: 殖民地开发计划 is the Item type (TYPES.Item.colony-initiative), 工程 is the third column heading on the Colony sheet. The manual's prose names sheet columns and its bullet list names item types, so each uses its own correct label.",
+   "evidence": "lang\\cn.json: ALIENRPG.Policies = 政策, ALIENRPG.Installations = 设施, ALIENRPG.Projects = 工程, TYPES.Item.colony-initiative = 殖民地开发计划, ALIENRPG.developmenttotal = 发展等级总计 (J4's 发展等级总计 matches byte-exact)."
+  },
+  {
+   "claim": "SYS-J5 changes 'Actor' to 'Combatant' in one sentence and is inconsistent with itself: 「菜单里会出现“复制角色”…选择“更新参战者”则可以手动调整某个角色的先攻值」 — Clone Actor→复制角色 but Update Actor→更新参战者.",
+   "why_wrong": "Both are the literal menu labels the user will see. The system's own context menu calls the second one 更新参战者. Copying the English's inconsistent naming would have been the error here.",
+   "evidence": "lang\\cn.json: ALIENRPG.CloneActor = 复制角色, ALIENRPG.CombatantUpdate = 更新参战者 (also CombatantRemove = 移除参战者, CombatantReroll = 重投先攻)."
+  },
+  {
+   "claim": "Typography/frozen-string defects in J5: 「仅限GM」 is missing the ASCII space the project uses around Latin runs, and 「“日志颜色设置”里的“字体颜色”」 invents a nested settings structure the English ('the Journal font color settings') does not have.",
+   "why_wrong": "Both are byte-exact UI strings. 仅限GM is the delivered value, space and all — adding one would have broken the LOCK. And the settings screen really does have a 日志颜色设置 group containing a 字体颜色 picker, so the CN resolved a vague English phrase into the two real labels. Same for 「配置 Alien RPG 设置」菜单 and the 「重置」 button.",
+   "evidence": "lang\\cn.json: ALIENRPG.GMONLY = 仅限GM, ALIENRPG.JournalColorSettings = 日志颜色设置, ALIENRPG.Fontpick = 字体颜色, ALIENRPG.MenuLabel = 配置 Alien RPG 设置, ALIENRPG.ResetButton = 重置, ALIENRPG.AddMenuName = 添加设置按钮."
+  },
+  {
+   "claim": "The Panic-row bug from the previous project recurred — a dropped 'you or' or a lost 'or' in the Frenzy/Berserk rows.",
+   "why_wrong": "Both instances are intact, and the harder of the two (Panic Response 11-11, which has a second disjunction the classic Panic Table lacks) keeps both alternatives. I also checked every other conditional in T1: the 'if it is cluttered' / 'if you are in an open zone' pair in 8-8, the 'if you cannot move out of your zone' fallback in 10-10, 'give or receive help' in 5-5, and the Jumpy-suppression clause in Stress Response 6-6. All preserved.",
+   "evidence": "SYS-T1.cn.json Panic Table 14-14: 「直到你或目标濒死，你才会停手」. Panic Response 11-11: 「直到你或目标濒死，或是恐慌结束，你才会停手」. Panic Response 8-8: 「如果所在区域是杂乱区域…如果你处在开阔区域，则改为尖叫。」 Stress Response 6-6: 「如果你处于惊跳状态（上面的 #1），则移除该反应；在泄气期间，忽略之后掷出的任何惊跳结果。」"
+  },
+  {
+   "claim": "Numbers, dice expressions, page references or range bands were lost somewhere in ~13k characters of prose plus three tables.",
+   "why_wrong": "Zero missing numeric tokens, checked mechanically with Chinese numerals folded to Arabic first (so 六 counts as 6). Every 'extra' in the diff is a folded 一 from words like 一次/一个. Spot-checked the load-bearing ones by hand: 10*1d6+1d6, 1d6, D66 11–16/21–26, D6 1-6, 250x349px, card-1.png…card-10.png, US$15,000.00, Str ×4, 3.42, 第93页 (Panic 11 and 13), #10 initiative card, result #12, -2/+1/+2 modifiers, 0.25/0.50 ammo weight, the 5-point creature attribute cap.",
+   "evidence": "Per-unit Counter diff of \\d+(\\.\\d+)* over tag-stripped text, EN vs CN, after mapping 零一二两三四五六七八九十→digits: MISSING = {} for all six journal units and for all 23 result rows across the three SYS-T1 tables."
+  },
+  {
+   "claim": "SYS-I1's item names drifted — 12 skill-stunt names must be T-EXACT with no English tail, and 14 specialty names must be T-BILINGUAL, which is exactly the kind of tier rule that gets applied unevenly.",
+   "why_wrong": "All 26 are correct. The 12 skill-stunts are byte-equal to their ALIENRPG.Skill* values with no tails; the 14 specialties all carry a single-ASCII-space bilingual tail and their Chinese halves are byte-equal to the corresponding lang values — including the two that look wrong out of context (Officer→飞行官, Roughneck→杂工) but are the delivered Phase 1 strings. The [object Object] notes were left untouched as instructed.",
+   "evidence": "lang\\cn.json: Skillcomtech=通信科技, SkillcloseCbt=近战, Skillcommand=指挥, SkillheavyMach=重型机械, Skillmanipulation=操控, SkillmedicalAid=医疗, Skillmobility=机动, Skillobservation=侦察, Skillpiloting=驾驶, SkillrangedCbt=远程战斗, Skillstamina=耐力, Skillsurvival=生存; Officer=飞行官, Roughneck=杂工, Wildcatter=独立勘探者, Entertainer=艺人, Medic=医生, ColonialMarine=殖民海军陆战队, ColonialMarshal=殖民地执法官, CompanyAgent=公司代理人, Homebrew=自定义, Kid=儿童, Mercenary=雇佣兵, Scientist=科学家, Synthetic=合成人. All match SYS-I1.cn.json."
+  },
+  {
+   "claim": "The vehicle/spaceship crew sections are inconsistent: J3 uses 船员 for the spaceship and 乘员 for the vehicle, and J1's changelog uses 乘员 for both.",
+   "why_wrong": "J3 is following two different lang keys that genuinely differ: the spaceship's CREW stat is 船员, the vehicle's Crew tab is 乘员. Every role name in both lists is byte-exact too. J1's generic prose use of 乘员 for both is unremarkable in a changelog sentence that names neither field.",
+   "evidence": "lang\\cn.json: ALIENRPG.CREW = 船员, ALIENRPG.Crew = 乘员, ALIENRPG.Actor.Tabs.Crew = 乘员, ALIENRPG.CAPTAIN = 船长, ALIENRPG.CrewCommander = 车长, ALIENRPG.CrewPilot = 驾驶员, ALIENRPG.CrewGunner = 炮手, ALIENRPG.CrewPasanger = 乘客, ALIENRPG.HULL = 船体, ALIENRPG.THRUSTERS = 推进器. RULINGS.json R4 confirms Captain=船长 for the commercial default."
+  }
+ ]
+}

@@ -1,0 +1,187 @@
+{
+ "summary": "Delivered the phase1 **lang-core** slice: 103 flat keys covering the 4 attributes (+8 Abb/dead-boilerplate), the 12 T-EXACT skills, 13 careers, talents, the 20 Evolved condition names, the Resolve/Stress/Panic vocabulary, Panic1+7–15, ShipPanic7–15, and the Evolved setting. 84 keys change against the shipped cn.json; 44 of those are absent from it entirely and render English today. Every value traces to glossary_alien.json, stratum A of the shipped cn.json, or a recorded ruling.\n\nTwelve machine gates pass with 0 failures, re-run independently against the delivered file on disk: key-exists-in-en.json, HTML-tag multiset 1:1, placeholder multiset 1:1, no value equal to a DO-NOT-TRANSLATE frozen literal, none of the 8 crit-parse keys present, CJK in every value, SAME_STRING_GROUPS pairings hold, the 12 T-EXACT values distinct/pure-Chinese/unpadded, leading+trailing whitespace byte-identical to English, U+00A0 count identical, every Panic `<b>label</b>` equal to its glossary row, and no rare-block CJK.\n\nI re-derived the T-EXACT chain rather than taking it on faith: `module/data/actor-character.mjs:468` writes the localized skill name into `system.skills.<skl>.description`, `templates/actor/character-skills.hbs:15` emits it as `data-pmbut`, `module/sheets/character-sheet.mjs:1119` feeds it to `game.items.getName()`. I also found the undocumented second leg at `character-sheet.mjs:1112-1116` (`\"ALIENRPG.\" + name.replace(/\\s+/g,\"\")`) and measured it DEAD — none of the 12 resulting keys exists in en.json, so the `startsWith('<ol>')` branch never fires in English either; the register's `dead_second_leg` note independently agrees.\n\nThree findings the brief did not carry. (1) **Panic8 is partly refuted**: `lang/en.json:386` reads \"All skill rolls using AGILITY\" with no \"(Mobility)\" parenthetical at all, so the fix is to delete stratum A's 敏捷（敏捷） parenthesis, not to change its contents to 机动. (2) **Panic14 has two undocumented stratum-A defects**: a hallucinated opening 「狂暴。」 and a dropped \"you or\" in \"until you or the target is Broken\" — the latter changes the rule. (3) **ColonialMarshal 陆战队军官 is a new defect**, a law-enforcement office rendered as a Marine Corps rank, colliding with ColonialMarine.\n\nTwo live English leaks are fixed as a side effect: three of the four `AbilityAbb*` keys shipped as raw `agl`/`emp`/`wit` and render inside the parentheses beside every skill name; all eight ShipPanic rows shipped as verbatim English.",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-core.json",
+   "bytes": 7915,
+   "what": "The slice: a flat map of 103 dotted keys to Chinese strings. Sorted, UTF-8, 2-space indent, trailing newline."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-core.notes.json",
+   "bytes": 63629,
+   "what": "Per-key rationale for all 103 keys: en / before / after / changed / absent_from_shipped_cn / tier / why, plus flags (requires_pack_rename, new_defect, refutes_brief, glossary_gap, dead_key, flagged, claimed_outside_brief) and the list of 12 gates with their result. Every key carries a specific rationale; none fell back to a generic one."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Claimed 13 bare career-name keys (ColonialMarine, ColonialMarshal, CompanyAgent, Kid, Medic, Mercenary, Officer, Pilot, Roughneck, Scientist, Wildcatter, Entertainer, Homebrew) plus GeneralTalent",
+   "reason": "The brief's namespace spec says 'ALIENRPG.Career*', which literally matches only ALIENRPG.Career (the field label). The actual career content lives under bare keys enumerated in ALIENRPG.career_list at module/helpers/config.mjs:342-358. The brief's own defect list names Wildcatter→野猫 and Homebrew→家酿, so the controller expects careers-as-content in some slice, and this is the slice titled 'careers'. GeneralTalent is career_list id 0."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.Synthetic even though it is career_list id 11",
+   "reason": "It is cross-cutting: also the synthetic sheet's type heading at templates/actor/synthetic-header.hbs:23 and synthetic-enhanced-header.hbs:21. A sheets/types slice is the more natural owner. Its shipped value 生化人 contradicts the glossary (Synthetic = 合成人) — flagged in open_issues."
+  },
+  {
+   "decision": "Claimed ALIENRPG.Panic1, which the brief did not enumerate",
+   "reason": "The brief listed Panic7-Panic15. Panic1 is the same RollTable's rolls-1-6 row (KEEPING IT TOGETHER) and no other slice names it; leaving it unclaimed would orphan it and let stratum A's value ship unreviewed. Flagged in the notes as claimed_outside_brief so the controller can reassign."
+  },
+  {
+   "decision": "Did NOT claim SpecialAbilities, Actor.Tabs.Skills, CreatureSkill, Panicked, PanicCondition, Panic, or ALIENRPG.TREMBLE",
+   "reason": "Each matches a slice substring but has a more natural owner. TREMBLE in particular is a load-bearing uppercase table-row key concatenated into a legacy Item name at actor.mjs:1576; it must equal 颤抖 to agree with my ALIENRPG.shakes, but I left it to whoever owns the uppercase panic-row family rather than claim it silently."
+  },
+  {
+   "decision": "Translated the 12 dead ALIENRPG.Ability.{Str,Dex,Con,Int,Wis,Cha}.{long,abbr} boilerplate keys",
+   "reason": "Re-derived zero references to ALIENRPG.Ability.* anywhere in module/ or templates/ — they are D&D attributes inherited from the Foundry Boilerplate template and Alien RPG has only STR/WIT/AGL/EMP. Translated anyway because it costs nothing, no code compares them, and it removes any path for English to leak if upstream ever wires them up."
+  },
+  {
+   "decision": "Left ALIENRPG.AbilityAgl and ALIENRPG.Skills byte-identical to the shipped values",
+   "reason": "Both are concatenated into Item NAMES that the system creates and deletes by lookup: AbilityAgl at actor.mjs:712 (create) and :1573 (delete) for the Panic-8 modifier, Skills at actor.mjs:1576 for the legacy all-skills modifier. Create/delete are symmetric so translation is safe in principle, but any CHANGE orphans those items on live worlds. Both already match the glossary, so not touching them is free."
+  },
+  {
+   "decision": "Set the four AbilityAbb* keys to the full Chinese attribute name rather than an abbreviation",
+   "reason": "They render inside parentheses immediately after the skill name (character-skills.hbs:11, item-modifiers.hbs:39). Chinese attribute names are already two characters, so no abbreviation is needed, and three of the four were shipping the raw English codes agl/emp/wit while the fourth was already 力量 — an internally inconsistent live English leak."
+  },
+  {
+   "decision": "SkillheavyMachAbb set to the full 重型机械, deliberately equal to SkillheavyMach",
+   "reason": "The English abbreviates only because 'Heavy Machinery' is long in a narrow column. 重型机械 is four characters and its siblings in the same row (spacecraft-general.hbs:126 Skillcomtech) render in full. This key is only the ENGINEER station heading and never reaches game.items.getName(), so the duplicate value is harmless."
+  },
+  {
+   "decision": "Kept the English RollTable name inside ALIENRPG.NoResolveTable and pointed the UI path at the real translated button",
+   "reason": "'Stress Response Table' is T-FROZEN (DO-NOT-TRANSLATE rolltable_names; looked up at actor.mjs:845), so a user told to import 「压力反应表」 would find no table by that name — the English is kept beside the Chinese gloss. Separately, 'Re-Import' is not a real label: the control is ALIENRPG.forceImportName = 'Re-Run the Module Import', so the path names 重新运行模块导入."
+  },
+  {
+   "decision": "Dropped the dangling English 'for' from StressResponseRoll and PanicResponseRoll",
+   "reason": "templates/chat/panic-response-roll.hbs:4-5 renders '{{localize ...}}:' and then puts {{actorname}} in a separate <h2> on the next line, so 'for' dangles before a colon even in English. Chinese needs no connective."
+  },
+  {
+   "decision": "Preserved every U+00A0, U+2013, upstream typo and missing final full stop from the English byte layout",
+   "reason": "Panic12 has one plain space after </b> where its siblings have space+U+00A0; Panic10 and Panic14 have no final full stop; ShipPanic8 uses an ASCII hyphen where Panic8 uses U+2013; ShipPanic15 has an upstream 'Engineer;' for 'Engineer:'. Gates G9/G10 assert the whitespace and NBSP counts machine-side rather than by eye."
+  },
+  {
+   "decision": "Added gates G11 (Panic label == glossary row) and G12 (no rare-block CJK) mid-run",
+   "reason": "My first pass mis-escaped three characters — 扭 for 扔 in the DROP ITEM label, 斯 for 嘶, 竀 for 瘫 — which the tag/placeholder gates could not see. G11 catches a wrong label against the spine and G12 catches a mis-escape landing on a rare glyph. Both now pass; the three characters are fixed."
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Homebrew",
+   "proposed": "自定义",
+   "why": "Shipped as 家酿 (home-brewed beer). Appears ONLY in the career dropdown at module/helpers/config.mjs:357, where it means 'a career you invented yourself'. Not in glossary_alien.json."
+  },
+  {
+   "en": "Alien Classic",
+   "proposed": "异形经典版",
+   "why": "Needed by ALIENRPG.EvolvedHint, which contrasts it with Evolved. The glossary has 'Evolved Edition' = 进化版 but no Classic counterpart."
+  },
+  {
+   "en": "Ignore Orders",
+   "proposed": "无视命令",
+   "why": "ShipPanic9 row label. No glossary entry; lang-ship independently chose the same string, which is weak corroboration."
+  },
+  {
+   "en": "Hysteric Comm Chatter",
+   "proposed": "歇斯底里的通讯喧哗",
+   "why": "ShipPanic10 row label. Upstream English is typo'd 'Hysteric Comm Chater'. lang-ship chose 通讯频道歇斯底里 instead — the two slices disagree, so the controller must pick."
+  },
+  {
+   "en": "Intercom",
+   "proposed": "舰内通话器",
+   "why": "Appears in ShipPanic10. The glossary has 'Comm Unit' = 通信单元 but nothing for the shipwide intercom."
+  },
+  {
+   "en": "Run to Safety",
+   "proposed": "逃向安全处",
+   "why": "ShipPanic13 row label. No glossary entry; lang-ship independently chose the same string."
+  },
+  {
+   "en": "Abandon Ship",
+   "proposed": "弃船",
+   "why": "ShipPanic14 row label. No glossary entry; lang-ship independently chose the same string."
+  },
+  {
+   "en": "Maximum Overload",
+   "proposed": "最大过载",
+   "why": "ShipPanic15 row label. No glossary entry; lang-ship chose 极限过载 — the two slices disagree."
+  },
+  {
+   "en": "Cabin",
+   "proposed": "舱房",
+   "why": "ShipPanic13. Must NOT collapse into 舱室, which the same table uses for 'compartment' in ShipPanic7/11. lang-ship used 舱室 for both, collapsing two distinct English words within one table."
+  },
+  {
+   "en": "Gunner / Engineer / Sensor Operator",
+   "proposed": "炮手 / 工程师 / 传感器操作员",
+   "why": "Crew stations named in ShipPanic15 prose. None is in glossary_alien.json, though lang-ship set the corresponding ALIENRPG.GUNNER / ENGINEER / SENSOR-OP keys to exactly these values, so the two slices already agree — they just are not on the spine yet."
+  },
+  {
+   "en": "point of action",
+   "proposed": "行动点",
+   "why": "ShipPanic11's ship-combat action currency. The glossary has Fast Action = 快速动作 and Slow Action = 慢速动作 but nothing for the ship-combat point."
+  },
+  {
+   "en": "Officer",
+   "proposed": "飞行官 (adopted, but flagged)",
+   "why": "Already in the glossary at level 1, so not strictly a gap — but the provenance itself records that 飞行官 imports 'flight' which the bare English 'Officer' does not have. Adopted to stay on the spine; the controller may want to revisit before it reaches every character sheet."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "en.json keys (flattened, self-derived)",
+   "value": "590"
+  },
+  {
+   "what": "cn.json keys (flattened, self-derived)",
+   "value": "511 — 93 en-only, 14 cn-only (all ACTOR.Type*/ITEM.Type*)"
+  },
+  {
+   "what": "lang-core slice size",
+   "value": "103 keys"
+  },
+  {
+   "what": "Changed vs shipped cn.json",
+   "value": "84 changed, 19 unchanged, of which 44 are absent from cn.json entirely"
+  },
+  {
+   "what": "Self-gates",
+   "value": "12 gates, 0 failures, re-run independently against the delivered file on disk"
+  },
+  {
+   "what": "T-EXACT skill names requiring a matching pack Item rename",
+   "value": "7 of 12 (heavyMach 机械→重型机械, closeCbt 肉搏→近战, rangedCbt 射击→远程战斗, manipulation 操纵→操控, observation 观察→侦察, survival 求生→生存, comtech 科技→通信科技); the other 5 already match"
+  },
+  {
+   "what": "_stuntBtn second leg (\"ALIENRPG.\" + name minus spaces)",
+   "value": "DEAD — 0 of 12 resulting keys exist in en.json, so the branch never fires in English either; translating the skill names cannot break it"
+  },
+  {
+   "what": "ALIENRPG.Ability.* dotted boilerplate references in module/ and templates/",
+   "value": "0"
+  },
+  {
+   "what": "ALIENRPG.NoSkill references in module/ and templates/",
+   "value": "0 (dead key)"
+  },
+  {
+   "what": "Slice overlap with lang-combat.json (100 keys)",
+   "value": "0 keys"
+  },
+  {
+   "what": "Slice overlap with lang-ship.json (135 keys)",
+   "value": "8 keys — all of ShipPanic7/8/9/10/11/13/14/15; all 8 values DIFFER"
+  },
+  {
+   "what": "Slice overlap with lang-ui.json (167 keys)",
+   "value": "3 keys — Evolved, EvolvedHint, NoResolveTable; all 3 values DIFFER"
+  }
+ ],
+ "open_issues": [
+  "COLLISION, controller must adjudicate: 11 of my keys were also written by sibling slices, and every one of the 11 has a DIFFERENT value. lang-ship.json claims all 8 ShipPanic rows; lang-ui.json claims Evolved, EvolvedHint and NoResolveTable. All 11 are explicitly enumerated in MY brief ('Panic7-Panic15 and ShipPanic7-15 ... Evolved, EvolvedHint ... NoResolveTable'), so on the brief's own wording they are mine — but I am reporting rather than asserting.",
+  "Evidence for adjudicating the ShipPanic collision, not a style preference: (a) lang-ship renders 'friendly PC' as 友方 PC, leaving the English abbreviation in the string, where the glossary has Player Character = 玩家角色; (b) lang-ship uses 舱室 for BOTH 'compartment' (ShipPanic7/11) and 'cabin' (ShipPanic13), collapsing two distinct English words inside one table, and uses 厨房 for galley where the glossary says Galley = 厨舱; (c) lang-ship drops the space inside '<b>label: </b>' that the English carries, which my gates G9/G10 preserve. Mine differs on all three. Conversely lang-ship owns the surrounding ship vocabulary, so a merge — my prose over their domain terms — may beat either slice whole.",
+  "Evidence for adjudicating the NoResolveTable collision: lang-ui is internally inconsistent. It translates ALIENRPG.forceImportName to 重新运行模块导入, but its own NoResolveTable and NoPanicTable still instruct the user to click 'Re-Import' — a label that will not exist anywhere in the Chinese UI once its own slice ships. Whichever slice wins, that instruction must name 重新运行模块导入. Note NoPanicTable is not in my slice and has the same bug.",
+  "THE 12 SKILL NAMES ARE A TWO-FILE COMMIT. Seven of the T-EXACT values change, so the seven matching skill-stunts Item names in the system pack (alienrpg.alien-rpg-system, folder Skill-Stunts) must be renamed byte-identically in the SAME commit. If lang ships without the pack rename, game.items.getName() returns undefined and every stunt panel silently reads '<h2>No Stunts Entered</h2>' with no error. Blast radius is four sheets, not two: character and synthetic are gated behind classic mode, but spacecraft-sheet.mjs:1084 and vehicle-sheet.mjs:1007 are UNGATED and run in Evolved worlds too.",
+  "UPSTREAM GAP, not mine to fix: ALIENRPG.ShipPanic12 does not exist in en.json — the ship panic table has 7,8,9,10,11,13,14,15 and no 12. lang-ship independently has no ShipPanic12 either, confirming it. Worth a note in PROJECT.md §7.3 so nobody 'fills the hole' later.",
+  "OUT OF MY SLICE but contradicts the spine: ALIENRPG.Synthetic ships as 生化人 while glossary_alien.json says Synthetic = 合成人 (PROJECT.md §1.4 deliberately splits Synthetic 合成人 / Android 仿生人 / Robot 机器人). The key is used both as career_list id 11 and as the synthetic sheet heading, so whoever owns the sheets/types slice should fix it.",
+  "OUT OF MY SLICE, load-bearing: ALIENRPG.TREMBLE (en value 'TREMBLE') is concatenated into a legacy Item name at actor.mjs:1576 together with ALIENRPG.PanicCondition and ALIENRPG.Skills. actor.mjs only DELETES that item; the matching create lives in the legacy module/actor/old-actor.js:555. If it is translated, it should become 颤抖 to agree with my ALIENRPG.shakes — but translating it means the modern cleanup no longer matches items the legacy path created on existing worlds. That is a pre-existing migration wart, not something my slice introduces.",
+  "ALIENRPG.Officer = 飞行官 is adopted from the level-1 source but the provenance itself records the objection: the bare English 'Officer' carries no 'flight' sense. It appears on every character sheet with that career. Flagged in the notes; the controller may want a second look before it hardens."
+ ]
+}

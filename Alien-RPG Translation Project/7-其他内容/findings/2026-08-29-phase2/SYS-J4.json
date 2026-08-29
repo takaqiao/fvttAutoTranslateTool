@@ -1,0 +1,420 @@
+{
+ "unit": "SYS-J4",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\pages\\SYS-J4.cn.html",
+ "chars_en": 8832,
+ "chars_cn": 4536,
+ "summary": "Translated the MU/TH/ER Instructions section covering Territories / Colony Planet Sheet / Colony Sheet / Items+Item Types / Tokens (5 h1, 13 h2). Method: built the .cn.html by ordered exact-substring substitution on the English file, each pattern asserted to occur exactly once, so all 227 tags, every class=, every style=, all 3 img src, and all 30 NBSP survive byte-identical; only prose changed. Every item type in the Items/Item Types list is byte-equal to its TYPES.Item.* value per the unit note (物品 / 武器 / 护甲 / 天赋 / 行星-星系 / 技能炫技 / 任务 / 职业-专长 / 重伤 / 星际飞船模块-升级 / 星际飞船武器 / 星际飞船重创 / 殖民地开发计划), and the 13 h2 section titles reuse the same values. 45 UI labels resolved against lang/cn.json. All 18 headings carry an explicit id= holding the original English slug, computed with Foundry's real slugify (read from foundry.mjs:685 and slugifyHeading at :44689 — non-strict, so 'Items/Item Types' -> 'items/item-types' keeps the slash; verified id-by-id against a Python reimplementation). The two T-FROZEN talent names in the Talent NOTE stay byte-exact English with no bilingual tail, as DO-NOT-TRANSLATE.json requires (a .toUpperCase() === comparison in actor-character.mjs / actor-synthetic.mjs). Two places where the English manual is stale against the shipped sheets were resolved in favour of the live lang value so a Chinese GM can actually find the control — see open_issues 1 and 2.",
+ "label_lookups": [
+  {
+   "english": "Territories (sheet)",
+   "lang_key": "ALIENRPG.SheetLabels.Territory",
+   "used": "领地卡"
+  },
+  {
+   "english": "sectors",
+   "lang_key": "ALIENRPG.Sectors",
+   "used": "星区"
+  },
+  {
+   "english": "System Tab / Systems tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Systems (= ALIENRPG.Systems, used by templates/actor/crt/territory-sheet.html)",
+   "used": "星系页签"
+  },
+  {
+   "english": "the associated sheet (of a Planet-System item)",
+   "lang_key": "ALIENRPG.SheetLabels.Item",
+   "used": "物品卡"
+  },
+  {
+   "english": "Edit icon",
+   "lang_key": "ALIENRPG.ActorSheet.Edit",
+   "used": "编辑图标"
+  },
+  {
+   "english": "context menu",
+   "lang_key": "ALIENRPG.EditItem (its own wording 右键单击打开右键菜单)",
+   "used": "右键菜单"
+  },
+  {
+   "english": "Colony Sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Colony",
+   "used": "殖民地卡"
+  },
+  {
+   "english": "Colony Planet Sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Planet (= 行星卡, prefixed 殖民 for the section title)",
+   "used": "殖民行星卡"
+  },
+  {
+   "english": "Development Level Total",
+   "lang_key": "ALIENRPG.developmenttotal",
+   "used": "发展等级总计"
+  },
+  {
+   "english": "Colony Policies",
+   "lang_key": "ALIENRPG.Policies",
+   "used": "政策"
+  },
+  {
+   "english": "Installations",
+   "lang_key": "ALIENRPG.Installations",
+   "used": "设施"
+  },
+  {
+   "english": "Initiatives (3rd option of the colony-initiative type dropdown)",
+   "lang_key": "ALIENRPG.Projects (config.mjs colony_policy_list {1:Policies,2:Installations,3:Projects})",
+   "used": "工程"
+  },
+  {
+   "english": "attribute",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Items / Item Types (h1)",
+   "lang_key": "ALIENRPG.Items",
+   "used": "物品/物品类型"
+  },
+  {
+   "english": "Item (type)",
+   "lang_key": "TYPES.Item.item",
+   "used": "物品"
+  },
+  {
+   "english": "Weapon (type)",
+   "lang_key": "TYPES.Item.weapon",
+   "used": "武器"
+  },
+  {
+   "english": "Armor (type)",
+   "lang_key": "TYPES.Item.armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Talent (type)",
+   "lang_key": "TYPES.Item.talent",
+   "used": "天赋"
+  },
+  {
+   "english": "Planet-System (type)",
+   "lang_key": "TYPES.Item.planet-system",
+   "used": "行星/星系"
+  },
+  {
+   "english": "Skill-Stunt (type)",
+   "lang_key": "TYPES.Item.skill-stunts",
+   "used": "技能炫技"
+  },
+  {
+   "english": "Agenda (type)",
+   "lang_key": "TYPES.Item.agenda",
+   "used": "任务"
+  },
+  {
+   "english": "Specialty (type)",
+   "lang_key": "TYPES.Item.specialty",
+   "used": "职业/专长"
+  },
+  {
+   "english": "Critical Injury (type)",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "Spaceship Modules/Upgrades (type)",
+   "lang_key": "TYPES.Item.spacecraftmods",
+   "used": "星际飞船模块/升级"
+  },
+  {
+   "english": "Spaceship Weapons (type)",
+   "lang_key": "TYPES.Item.spacecraftweapons",
+   "used": "星际飞船武器"
+  },
+  {
+   "english": "Spaceship Crit (type)",
+   "lang_key": "TYPES.Item.spacecraft-crit",
+   "used": "星际飞船重创"
+  },
+  {
+   "english": "Colony Initiative (type)",
+   "lang_key": "TYPES.Item.colony-initiative",
+   "used": "殖民地开发计划"
+  },
+  {
+   "english": "Career / sub-careers",
+   "lang_key": "ALIENRPG.Career",
+   "used": "职业"
+  },
+  {
+   "english": "item sub category dropdown (the header field)",
+   "lang_key": "ALIENRPG.Type",
+   "used": "类型下拉框"
+  },
+  {
+   "english": "Attributes tab (item sheet)",
+   "lang_key": "ALIENRPG.Item.Tabs.General — the item sheet has NO Attributes tab; item-sheet.mjs:490 sets tab.label += \"General\"",
+   "used": "通用页签"
+  },
+  {
+   "english": "\"Active\"",
+   "lang_key": "ALIENRPG.Active",
+   "used": "已激活"
+  },
+  {
+   "english": "Data Storage",
+   "lang_key": "ALIENRPG.DataStorage",
+   "used": "数据存储设备"
+  },
+  {
+   "english": "Diagnostics Display",
+   "lang_key": "ALIENRPG.DiagnosticsDisplay",
+   "used": "诊断与显示设备"
+  },
+  {
+   "english": "Pharmaceuticals",
+   "lang_key": "ALIENRPG.Pharmaceuticals",
+   "used": "药品"
+  },
+  {
+   "english": "Clothing",
+   "lang_key": "ALIENRPG.Clothing",
+   "used": "服装"
+  },
+  {
+   "english": "Quantity field",
+   "lang_key": "ALIENRPG.QuantityLabel",
+   "used": "数量字段"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Power",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Food",
+   "lang_key": "ALIENRPG.Food",
+   "used": "食物"
+  },
+  {
+   "english": "Water",
+   "lang_key": "ALIENRPG.Water",
+   "used": "水"
+  },
+  {
+   "english": "Air Supply",
+   "lang_key": "ALIENRPG.AirSupply",
+   "used": "空气供应"
+  },
+  {
+   "english": "modifiers tab / Modifiers tab",
+   "lang_key": "ALIENRPG.Item.Tabs.Modifiers",
+   "used": "修正页签"
+  },
+  {
+   "english": "skills",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "Ranged",
+   "lang_key": "ALIENRPG.WepTypeRanged",
+   "used": "远程"
+  },
+  {
+   "english": "Melee",
+   "lang_key": "ALIENRPG.WepTypeMelee",
+   "used": "肉搏"
+  },
+  {
+   "english": "Class field",
+   "lang_key": "ALIENRPG.Class",
+   "used": "类别"
+  },
+  {
+   "english": "range",
+   "lang_key": "ALIENRPG.Range",
+   "used": "射程"
+  },
+  {
+   "english": "Engaged",
+   "lang_key": "ALIENRPG.Engaged (classic weapon_range_list option 1)",
+   "used": "接战"
+  },
+  {
+   "english": "Cost field",
+   "lang_key": "ALIENRPG.Cost",
+   "used": "费用字段"
+  },
+  {
+   "english": "Armor Rating",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "Description tab",
+   "lang_key": "ALIENRPG.Item.Tabs.Description (planet-description part)",
+   "used": "描述页签"
+  },
+  {
+   "english": "Skills tab (PC sheet)",
+   "lang_key": "ALIENRPG.Actor.Tabs.Skills",
+   "used": "技能页签"
+  },
+  {
+   "english": "Agenda or Story cards",
+   "lang_key": "ALIENRPG.AgendaStory (任务/故事卡)",
+   "used": "任务卡或故事卡"
+  },
+  {
+   "english": "Stress rolls",
+   "lang_key": "ALIENRPG.Stress + ALIENRPG.rollStress",
+   "used": "压力检定"
+  },
+  {
+   "english": "Encumbrance",
+   "lang_key": "ALIENRPG.Encumbrance",
+   "used": "负重"
+  },
+  {
+   "english": "push / PUSH",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "\"Allow multi-push\" check box",
+   "lang_key": "ALIENRPG.MultiPush",
+   "used": "允许连续追骰"
+  },
+  {
+   "english": "Character (sheet)",
+   "lang_key": "TYPES.Actor.character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Synthetic (sheet)",
+   "lang_key": "TYPES.Actor.synthetic",
+   "used": "合成人卡"
+  },
+  {
+   "english": "Offensive",
+   "lang_key": "ALIENRPG.Offensive",
+   "used": "进攻型"
+  },
+  {
+   "english": "Defensive",
+   "lang_key": "ALIENRPG.Defensive",
+   "used": "防御型"
+  },
+  {
+   "english": "Minor Component damage",
+   "lang_key": "ALIENRPG.MINOR-COMPONENT-DAMAGE",
+   "used": "轻微部件损伤"
+  },
+  {
+   "english": "Major Component damage",
+   "lang_key": "ALIENRPG.MAJOR-COMPONENT-DAMAGE",
+   "used": "重大部件损伤"
+  },
+  {
+   "english": "Modules",
+   "lang_key": "ALIENRPG.MODULES",
+   "used": "模块"
+  },
+  {
+   "english": "Upgrades",
+   "lang_key": "ALIENRPG.upgrade",
+   "used": "升级"
+  },
+  {
+   "english": "token / Tokens",
+   "lang_key": "ALIENRPG.NoToken (你没有选中任何指示物)",
+   "used": "指示物"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Creatures",
+   "lang_key": "TYPES.Actor.creature",
+   "used": "生物"
+  },
+  {
+   "english": "Hostile and Unlinked",
+   "lang_key": "ALIENRPG.NPCpopUp (…都将不与角色卡关联，并默认为敌对。)",
+   "used": "设为敌对，且不与角色卡关联"
+  },
+  {
+   "english": "GM",
+   "lang_key": "ALIENRPG.GMONLY (仅限GM) / ALIENRPG.Panic9 (由GM决定)",
+   "used": "GM"
+  }
+ ],
+ "frozen_kept": [
+  "Nerves of Steel — T-FROZEN item_names entry NERVES OF STEEL (actor-character.mjs:436 / actor-synthetic.mjs:426, .toUpperCase() ===). Kept byte-exact English inside CJK quotes, no bilingual tail.",
+  "Pack Mule — T-FROZEN item_names entry PACK MULE (character-sheet.mjs:491 / synthetic-sheet.mjs:478 / colony-sheet.mjs:339). Kept byte-exact English, no bilingual tail.",
+  "US$15,000.00 — the currency example the Cost field reformats to; kept literal.",
+  "systems/alienrpg/images/mother-instructions/colony-planet-sheet.webp / colony-sheet.webp / colony-initiative-sheet.webp — all 3 img src byte-identical.",
+  "30 U+00A0 NO-BREAK SPACEs inside the <br> <span class=\"…\"> </span>  image-placeholder machinery — count and positions unchanged (DO-NOT-TRANSLATE.json encoding_note: never normalise)."
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Compassion (Medic career talent)",
+   "proposed": "恻隐 Compassion（备选：同情心）",
+   "why": "glossary_alien.json 没有这一条，三个包里也没有同名文档——全项目 grep 只在本篇日志里命中 3 次（en/cn 同一段）。按「不许发明与主轴冲突的词」，正文里保留英文 Compassion 未加中译；等 corerules 第 6 章天赋表定稿后再回填。它不是 T-FROZEN（没有代码比对它），所以将来可以安全改成 T-BILINGUAL。"
+  },
+  {
+   "en": "House Rule (Careers)",
+   "proposed": "家规职业",
+   "why": "glossary 里没有 House Rule。本页译作「你自己的家规职业」。备选：自制职业 / 自订职业。TRPG 中文圈 家规 最常见，但需要主控钉一次，否则别的单元可能写成 自制规则。"
+  },
+  {
+   "en": "Projects (colony-initiative 第三类)",
+   "proposed": "工程（沿用 ALIENRPG.Projects）",
+   "why": "不是缺口而是提醒：英文手册写 Initiatives，UI 下拉框却是 Projects/工程。已按 UI 落 工程。若主控决定统一，两处都要改（lang 值 + 本页 3 处）。"
+  }
+ ],
+ "open_issues": [
+  "【英文手册过时 · 已按 UI 落译】Item 段的 \"its Attributes tab\"：物品卡上没有 Attributes 页签。item-sheet.mjs:490 起对 general/weapon/talent/armor/… 全部 tab.label += \"General\"，即 ALIENRPG.Item.Tabs.General = 通用；templates/item/item-sheet.hbs 里只剩一句 HTML 注释 {{! Attributes Tab }}。我译作「通用页签」。若主控要保源文，改成「属性页签」（ALIENRPG.Attributes = 属性），但玩家将找不到这个页签。",
+  "【英文手册过时 · 已按 UI 落译】Colony Sheet 段与 Colony Initiative 段的 \"Initiatives\"：colony-initiative 的类型下拉框三项是 config.mjs:534-537 colony_policy_list = {1: ALIENRPG.Policies 政策, 2: ALIENRPG.Installations 设施, 3: ALIENRPG.Projects 工程}。英文写 Initiatives，UI 显示 工程。三处（Colony Sheet 两段 + Colony Initiative 段 + 物品类型清单一行）统一译作「工程」。",
+  "【上游笔误 · 已按原文保留】Armor 段最后一句英文是 \"…will be used in rolls when the **weapon** is \\\"Active\\\".\"——在护甲小节里写了 weapon，是上游复制粘贴的手误。我照字面译作「武器处于「已激活」状态时…」。要不要静默改成「护甲」由主控定；这不是 UI 标签查表，我没有自行改的依据。",
+  "【上游错字 · 按义译】\"can bee seen\"（Colony Sheet 段）→ 就会显示；\"the rich test field\"（Talent 段，应为 rich text）→ 富文本字段。原文错字未在中文里复现。",
+  "【无对应 lang 键，属 Foundry 核心或运行时补丁的面】手册点名但 ALIENRPG.* 里没有的 UI 串：Scene（场景）· resource bars（资源条）· Rich Text editor（富文本编辑器）· dropdown / dropdown list（下拉框 / 下拉列表）· check box（复选框）· chat window（聊天窗口）· context menu（右键菜单，我照 ALIENRPG.EditItem 自己的措辞写）· tooltip（工具提示，只在 ALIENRPG.TAH-tooltip-name 的值里出现过）· Hostile / Unlinked（我照 ALIENRPG.NPCpopUp 的原话写成「设为敌对，且不与角色卡关联」）。这些要么走 Foundry 自带中文包，要么是运行时补丁的活，不是本单元能钉的。",
+  "【模组短名按 T-BILINGUAL 落】Skill-Stunt 段的 \"(Starter Set or Core Rules)\" 译作「（新手包 Starter Set 或核心规则 Core Rules）」。DO-NOT-TRANSLATE.json 冻的是完整 Adventure 名 Alien Evolved Starter Set / Alien Evolved Core Rules，本单元里不出现，所以这里是散文而非查找名。若别的单元已把这两个短名定成别的写法，请以那边为准统一。",
+  "【h1 与卡名不完全相等，提请确认】\"Colony Planet Sheet\" 译作「殖民行星卡」，而该 actor 的卡名是 ALIENRPG.SheetLabels.Planet = 行星卡。「殖民行星卡」含「行星卡」，检索得到；若主控要求 h1 与卡名逐字节相等，改成「行星卡」即可（slug id 不受影响）。",
+  "【冻结串的同形散文】物品类型清单里 \"Create Critical injuries with modifiers\" 的 \"Critical injuries\"（小写 i）与 T-FROZEN 的 RollTable 名同形。此处是描述物品类型的散文，已按 TYPES.Item.critical-injury 译作「重伤」。scan_name_lookup_traps.py 只核 name 字段，日志正文不在其判据内，不会触发 FROZEN_TRANSLATED——如果主控之后把闸门扩到正文，这一处需要豁免。",
+  "【交付形态】按任务书只写了 pages/SYS-J4.cn.html，没有生成 batch.json，因此没跑 apply_translations.py --dry（它吃 batch.json）。等控制器装配成 batch 后需要补跑一次 --dry 到 0 拒绝。"
+ ],
+ "self_gate": [
+  {
+   "check": "1. 结构标签多重集相等（每个标签名计数）",
+   "result": "PASS — 227 个标签，Counter 完全相等：p 68 · br 58 · h2 26 · li 26 · span 20 · h1 10 · div 10 · strong 4 · img 3 · ul 2。另加跑了一道更严的**有序**序列比对：227 项逐位相同（相当于 tagseq.py 的判据）。"
+  },
+  {
+   "check": "2. 英文里出现的每个 class= 值在中文里原样存在",
+   "result": "PASS — class 多重集相等：heading 17 · heading2 1 · territories-general 1 · territories-systems 1 · item-dropdown 1 · modifiers-img 1 · melee-img 1 · ranged-img 1 · armor-img 1 · planet-system-img 1 · character-token 1 · creature-token 1。带属性的整标签逐位比对只有 18 处差异，全部是我给标题加的 id=，没有第 19 处。"
+  },
+  {
+   "check": "3. @UUID[...] / [[...]] 逐字节一致",
+   "result": "PASS（空集）— 本页 0 个 @UUID / @TEXTDRAW / @DRAW / [[ ]] 构造，en 与 cn 都是 0。3 个 <img src> 与全部 style= 属性逐字节相同；30 个 U+00A0 数量与位置未变。"
+  },
+  {
+   "check": "4. 每个翻译过的标题都带显式 id=，值为原英文 slug",
+   "result": "PASS — 18/18（5 个 h1 + 13 个 h2）。slug 用 foundry.mjs:685 的 slugify（非严格）+ :44689 的 slugifyHeading 在 Python 里复现后逐条核对，18/18 相等。注意非严格模式保留斜杠：id=\"items/item-types\" 与 id=\"spaceship-modules/upgrades\" 是正确值，不要「修」成连字符。Foundry 取锚点走 toc[anchor] 对象取键（:45338/:101055），不是 querySelector，所以 id 里的 / 安全。"
+  },
+  {
+   "check": "5. DO-NOT-TRANSLATE.json 的冻结字面量未被翻译",
+   "result": "PASS — 本页命中 2 条，均 en=1 / cn=1 且英文原样、无双语尾巴：Nerves of Steel · Pack Mule。逐条核过登记表其余各节（name_lookups / rolltable_names / folder_names / None 哨兵 / macro_commands / name_substring_tests）在本 byte range 内均无命中。"
+  },
+  {
+   "check": "6. 输出与英文不逐字节相同",
+   "result": "PASS — en 8832 字符 / cn 4536 字符，可见正文 2052 字符；全部 18 个标题与 60 余段散文均已改写。"
+  }
+ ]
+}

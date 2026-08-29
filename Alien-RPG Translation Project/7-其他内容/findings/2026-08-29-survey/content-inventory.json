@@ -1,0 +1,830 @@
+{
+ "packages": [
+  {
+   "pack": "alien-rpg-system",
+   "adventure_name": "Alien RPG System (Adventure _id R8mjiz4iJkZGZMIw, key !adventures!R8mjiz4iJkZGZMIw, file scratchpad/alien/raw/system.json)",
+   "translatable_chars": 76036,
+   "breakdown": "journal.pagecontent 66228 | table.result 4890 | item.prose 2347 | adventure.description 1782 | item.name 248 | table.resultname 186 | macro.name 144 | folder.name 99 | table.name 52 | journal.entryname 22 | journal.pagename 22 | adventure.name 16. Contents: 1 journal (1 text page), 3 RollTables, 26 Items (skill-stunts 12, specialty 14), 0 Actors, 0 Scenes, 4 Macros, 7 Folders. Visible (tag-stripped) journal text = 51192 chars (77% of raw)."
+  },
+  {
+   "pack": "alien-evolved-starter-set",
+   "adventure_name": "Alien Evolved Starter Set (Adventure _id SeKD8c6gQ4L9ovYs, key !adventures!SeKD8c6gQ4L9ovYs, file scratchpad/alien/raw/starterset.json)",
+   "translatable_chars": 340968,
+   "breakdown": "journal.pagecontent 271419 | actor.prose 25414 | table.result 25225 | item.prose 8559 | actor.embitem.prose 5916 | adventure.description 898 | item.name 527 | journal.pagename 472 | actor.embitem.name 433 | actor.name 351 | scene.notetext 349 | table.name 301 | table.desc 285 | table.resultname 278 | folder.name 277 | scene.name 133 | journal.entryname 106 | adventure.name 25. Contents: 5 journals / 38 pages (20 text + 18 image), 11 RollTables, 34 Items (agenda 15, weapon 14, talent 5), 13 Actors (creature 5, character 6, synthetic 1, + 1 char/1 synth in PC's), 7 Scenes (2 carry note text), 0 Macros, 17 Folders. Visible journal text = 141229 chars (52% of raw)."
+  },
+  {
+   "pack": "alien-evolved-core-rules",
+   "adventure_name": "Alien Evolved Core Rules (Adventure _id NwJ5FeyOrpMRuWpg, key !adventures!NwJ5FeyOrpMRuWpg, file scratchpad/alien/raw/corerules.json)",
+   "translatable_chars": 2286505,
+   "breakdown": "journal.pagecontent 1892633 | table.result 133076 | actor.prose 103626 | item.prose 86831 | actor.embitem.prose 45289 | table.resultname 9461 | item.name 4158 | table.name 3287 | actor.embitem.name 2620 | journal.pagename 1762 | actor.name 1496 | adventure.description 892 | table.desc 603 | folder.name 379 | journal.entryname 177 | scene.name 158 | macro.name 33 | adventure.name 24. Contents: 7 journals / 112 pages (38 text + 74 image), 123 RollTables, 283 Items (planet-system 68, talent 57, spacecraftmods 55, item 48, weapon 36, spacecraftweapons 12, armor 7), 61 Actors (creature 25, character 18, synthetic 2, spacecraft 7, vehicles 6, + 3 misc NPC), 8 Scenes (no note text), 1 Macro, 25 Folders. Visible journal text = 790704 chars (42% of raw)."
+  }
+ ],
+ "work_units": [
+  {
+   "unit": "CR-J-SYSJ-1 | Alien RPG Systems Journals: Core Systems + Sol (pages AG-4550.02 2818, HESKE 337 2701, THIRD BASE 2745, 01. System Build Template 1841, 02. SOL SECTOR 3141)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-group (5 whole pages, JE 3Cm0OlukMVLydnkD)",
+   "chars": 13246,
+   "tier": "T4",
+   "notes": "77-99% of each page is <table> planet data (classification/atmosphere/temperature/gravity rows). 01. System Build Template is a blank form: 1841 raw / 239 visible. Pairs with CR-I-PLANET (planet-system items reuse ~25% of these strings verbatim)."
+  },
+  {
+   "unit": "CR-J-SYSJ-2 | Systems Journals: Outer Veil + Outer Rim (NEROID 3496, BAO SAU 4672, FIORI 16 4116, SECTOR 3847 2535, GL300 3006, 8 ETA BOOTIS 3189, GLIESE 326-3827 2176, DP-27 2853, GJ229A 2495)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-group (9 whole pages)",
+   "chars": 28538,
+   "tier": "T4",
+   "notes": "36-99% tables. Dense proper nouns (sector/system/colony names) — must be locked by the terminology unit before starting."
+  },
+  {
+   "unit": "CR-J-SYSJ-3 | Systems Journals: Frontier + Unclaimed (TANAKA 2877, GAMMA LEPORIS 3479, EPSILON RETICULI 3038, ZETA RETICULI 7370, ALPHA CAELI 2668, KHADAJI 3092, SECTOR 117 2612)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-group (7 whole pages)",
+   "chars": 25136,
+   "tier": "T4",
+   "notes": "ZETA RETICULI has 6 tables / 91% table chars (LV-426, Hadley's Hope) — cross-check names against SS Hope's Last Day units."
+  },
+  {
+   "unit": "CR-J-01 | 1. SPACE IS HELL (whole page LAwYnxL684yvFA0t)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page",
+   "chars": 38302,
+   "tier": "T3",
+   "notes": "70% visible text, only 5 tables. Setting/tone chapter: Frontier factions, careers, key themes, dice. 13 blockquotes / 1 example box. Establishes tone register for the whole line — translate before other T3 units."
+  },
+  {
+   "unit": "CR-J-02a | 2. YOUR CHARACTER [1/3] (intro → 'Changing Buddy & Rival')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (ImqB2d3n5uLbAQMa)",
+   "chars": 39143,
+   "tier": "T2",
+   "notes": "Core character mechanics: Attributes, Skills, Talents, Stress, Resolve, Health, Encumbrance, Consumables, XP. GLOSSARY-CRITICAL. 4 centered blockquote sidebars."
+  },
+  {
+   "unit": "CR-J-02b | 2. YOUR CHARACTER [2/3] (COLONIAL MARINE → MEDIC)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38047,
+   "tier": "T2",
+   "notes": "5 career templates (Marine, Marshal, Company Agent, Kid, Medic). 67% of the parent page is tables — this slice is mostly stat/talent/gear tables, only 9912 visible chars."
+  },
+  {
+   "unit": "CR-J-02c | 2. YOUR CHARACTER [3/3] (OFFICER → SCIENTIST)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 29876,
+   "tier": "T2",
+   "notes": "4 career templates (Officer, Pilot, Roughneck, Scientist). 8484 visible chars. Career names must match CR-T-LIFEPATH and CR-I-TALENT."
+  },
+  {
+   "unit": "CR-J-03a | 3. SKILLS AND TALENTS [1/2] (intro → 'Officer Talents')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (ZfCi7DOm2LxtqLMZ)",
+   "chars": 39835,
+   "tier": "T2",
+   "notes": "TERMINOLOGY ANCHOR — TRANSLATE FIRST. Defines all 12 skill names + skill-roll vocabulary (Push, Stress Die, Success, Opposed Roll) and 9 career talent lists. 43 @UUID content-links out to other chapters."
+  },
+  {
+   "unit": "CR-J-03b | 3. SKILLS AND TALENTS [2/2] ('Pilot Talents' → 'General Talents')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 15574,
+   "tier": "T2",
+   "notes": "General Talents block alone is 11269 chars. Names must be identical to the 57 CR-I-TALENT items."
+  },
+  {
+   "unit": "CR-J-04a | 4. STEALTH & COMBAT [1/4] (intro → 'Full Actions & Quick Actions')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (Z0Y4W3DMfbqDO78Y)",
+   "chars": 35030,
+   "tier": "T2",
+   "notes": "Zones/Range/Time, Stealth Mode, Motion Trackers, Initiative. Highest-precision unit in the pack. 49 @UUID links on parent page."
+  },
+  {
+   "unit": "CR-J-04b | 4. STEALTH & COMBAT [2/4] ('Giving Orders' → 'Barriers')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 36855,
+   "tier": "T2",
+   "notes": "Actions, movement, close combat, ranged combat, ammo, full auto, armor. Many example boxes (parent page has 22 evexamplebox, 60052 chars)."
+  },
+  {
+   "unit": "CR-J-04c | 4. STEALTH & COMBAT [3/4] ('Broken' → 'Relieving Stress')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38206,
+   "tier": "T2",
+   "notes": "Broken, Critical Injuries, Panic Rolls, Stress Level. Critical-injury wording must match CR-T-CORERES roll tables verbatim."
+  },
+  {
+   "unit": "CR-J-04d | 4. STEALTH & COMBAT [4/4] ('Mental Trauma' → 'Repairs')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 43094,
+   "tier": "T2",
+   "notes": "Slightly over 40k because 'Mental Trauma' (8568) + hazards + vehicle combat form one indivisible h2 run. Mental Trauma text must match the EV - Mental Trauma table."
+  },
+  {
+   "unit": "CR-J-05a | 5. GEAR & TECH [1/5] (intro → 'OTHER WEAPONS')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (T5FJ7PFAIhyRk5GN)",
+   "chars": 38889,
+   "tier": "T2",
+   "notes": "Weapon Features + 12 handgun/rifle entries. Parent page is 57% tables, 121 tables, 39 @UUID Item links (the only Item-target UUIDs in the corpus). Only 8898 visible chars — mostly stat blocks."
+  },
+  {
+   "unit": "CR-J-05b | 5. GEAR & TECH [2/5] ('ARMAT MODEL 37A2' → 'IRC MK.50 COMPRESSION SUIT')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39054,
+   "tier": "T2",
+   "notes": "Heavy weapons, grenades, melee, then armor. Product proper nouns; 19% of these strings are copied verbatim into CR-I-WEAPON/ARMOR items — same owner as CR-I-WEAPON."
+  },
+  {
+   "unit": "CR-J-05c | 5. GEAR & TECH [3/5] ('KEVLAR RIOT VEST' → 'M314 MOTION TRACKER')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38801,
+   "tier": "T2",
+   "notes": "Suits, MU/TH/UR mainframes, data storage, diagnostics/display devices. MU/TH/UR naming must match SYS-J-1."
+  },
+  {
+   "unit": "CR-J-05d | 5. GEAR & TECH [4/5] ('M316 MOTION TRACKER' → 'Vehicle Features')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39615,
+   "tier": "T2",
+   "notes": "Vision devices, tools, medical, pharmaceuticals, food & drink. 51% of armor strings and 14% of generic item strings here reappear in CR-I-ITEM."
+  },
+  {
+   "unit": "CR-J-05e | 5. GEAR & TECH [5/5] ('WEYLAND NR-9' → 'WY-37B CARGO LIFTER')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 17787,
+   "tier": "T2",
+   "notes": "6 vehicle write-ups. Same content family as the 6 CR vehicles actors (CR-A-SHIP) — assign to the same translator or run after it."
+  },
+  {
+   "unit": "CR-J-06a | 6. A HARD LIFE AMONGST THE STARS [1/5] (intro → 'Living Quarters')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (ZUMdwXwrGUBKAaZb)",
+   "chars": 38921,
+   "tier": "T3",
+   "notes": "Highest visible-text density in the pack (26830 visible). Hypersleep, charted space, stations, colonies. Pure setting prose."
+  },
+  {
+   "unit": "CR-J-06b | 6. A HARD LIFE [2/5] ('Function Before Fashion' → 'Core Components')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39359,
+   "tier": "T3",
+   "notes": "Money/ID, work-for-hire, comms, media, entertainment, religion, law enforcement, then ship classes. 21979 visible. 12 centered sidebars on parent page."
+  },
+  {
+   "unit": "CR-J-06c | 6. A HARD LIFE [3/5] ('Internal Modules' → \"SPACESHIPS OF THE 2180'S\")",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38107,
+   "tier": "T2",
+   "notes": "Internal modules, armaments, upgrades — module names must match the 55 spacecraftmods + 12 spacecraftweapons items (CR-I-SHIPMOD)."
+  },
+  {
+   "unit": "CR-J-06d | 6. A HARD LIFE [4/5] ('MODEL CM-93D MULE' → 'Crew Positions')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39297,
+   "tier": "T2",
+   "notes": "7 named ship write-ups; note MODEL CM-88G BISON appears twice in the source (3945 chars each, duplicated section) — translate once, paste twice."
+  },
+  {
+   "unit": "CR-J-06e | 6. A HARD LIFE [5/5] ('Distance & Segments' → 'SHIP COMBAT EXAMPLE')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 47734,
+   "tier": "T2",
+   "notes": "Over 40k because Combat Phases (12702) + MINOR/MAJOR COMPONENT DAMAGE (9106+5522) are one indivisible run. Component-damage text must match CR-T-SHIPDMG tables verbatim."
+  },
+  {
+   "unit": "CR-J-07 | 7. BEING THE GAME MOTHER (whole page 2MX5D6qR6rSUok1d)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page",
+   "chars": 40378,
+   "tier": "T4",
+   "notes": "67% visible, only 5 tables. GM craft advice: three stages of fear, NPC creation, cinematic vs campaign structure. Contains the only literal 'read aloud' instruction outside the Starter Set."
+  },
+  {
+   "unit": "CR-J-08a | 8. GOVERNMENTS & CORPORATIONS [1/2] (intro → 'Leaders')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (PjOfEERcEGC3cgex)",
+   "chars": 39744,
+   "tier": "T3",
+   "notes": "29653 visible — densest prose slice in the corpus (only 3 tables on the whole page). 3WE, United Americas, UPP, ICSC. FACTION-NAME ANCHOR: run early, right after CR-J-03a."
+  },
+  {
+   "unit": "CR-J-08b | 8. GOVERNMENTS & CORPORATIONS [2/2] ('Locations' → 'Current Activities')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 24455,
+   "tier": "T3",
+   "notes": "ICSC tail, ICC, Weyland-Yutani, Lasalle Bionational, Seegson. Corporate names feed planet-system items and every gear brand."
+  },
+  {
+   "unit": "CR-J-09a | 9. SYSTEMS & PLANETS [1/4] (intro → 'POL-5362 System')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (ktAmSIQQYGY893Ub)",
+   "chars": 31076,
+   "tier": "T4",
+   "notes": "Gazetteer: Sol Sector, Third Base (9154), New Eden, AG-4550, Heske 337, Sector 3847, JPG-770, Neroid. 41% tables. Same place-names as CR-J-SYSJ-* and CR-I-PLANET."
+  },
+  {
+   "unit": "CR-J-09b | 9. SYSTEMS & PLANETS [2/4] ('Fiori 16 System' → 'GL300 System')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38910,
+   "tier": "T4",
+   "notes": "Fiori 16 (9579), 17 Phei Phei, Borodino, Requist, Gliese 326-3827, 8 Eta Bootis (6964), Tartarus, GJ229A, GL300."
+  },
+  {
+   "unit": "CR-J-09c | 9. SYSTEMS & PLANETS [3/4] ('THE FRONTIER' → 'Alpheios System')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39304,
+   "tier": "T4",
+   "notes": "Zeta Reticuli alone is 21831 chars (LV-426 / Hadley's Hope / Sevastopol). Overlaps the Starter Set adventure — keep one owner across CR-J-09c and SS-J-HLD-*."
+  },
+  {
+   "unit": "CR-J-09d | 9. SYSTEMS & PLANETS [4/4] ('Epsilon Reticuli System' → 'Achilles System')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 13264,
+   "tier": "T4",
+   "notes": "Far Reach tail: Epsilon Reticuli, Tanaka, Sector 117, Achilles."
+  },
+  {
+   "unit": "CR-J-10a | 10. ALIEN SPECIES [1/5] (intro → 'Xenomorph XX121 Special Abilities')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (NA9udSkjDWDK6itr)",
+   "chars": 37474,
+   "tier": "T2",
+   "notes": "XENOMORPH TERMINOLOGY ANCHOR — the Engineers, Xenomorph Combat Rules (9269) and XX121 Special Abilities (6642). Every one of the 25 creature actors repeats these ability names; translate before CR-A-CRE-*."
+  },
+  {
+   "unit": "CR-J-10b | 10. ALIEN SPECIES [2/5] ('Stage I: Ovomorph' → 'Stage III: Chestburster, Bambi Burster, Imp')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 34936,
+   "tier": "T4",
+   "notes": "Stage I-III lifecycle + stat blocks. 46% tables on parent page; 36 blockquotes / 19 centered boxes."
+  },
+  {
+   "unit": "CR-J-10c | 10. ALIEN SPECIES [3/5] ('Stage IV: Drone, Scout, Stalker' → 'Stage VII And Beyond')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 34318,
+   "tier": "T4",
+   "notes": "Stage IV-VII (17748 chars for Stage IV alone). Maps 1:1 onto CR-A-CRE-2."
+  },
+  {
+   "unit": "CR-J-10d | 10. ALIEN SPECIES [4/5] ('The Alien Hive' → 'Harvesters')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 36697,
+   "tier": "T4",
+   "notes": "Hive ecology, full Neomorph lifecycle (Bloodburster block is 12048), Harvesters."
+  },
+  {
+   "unit": "CR-J-10e | 10. ALIEN SPECIES [5/5] ('Lion Worms' → 'The Swarm')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 30026,
+   "tier": "T4",
+   "notes": "Lion Worms 10470, Tanakan Scorpionids 10756, The Swarm 8800. Maps onto the non-Xeno half of CR-A-CRE-3."
+  },
+  {
+   "unit": "CR-J-11a | 11. CAMPAIGN PLAY [1/11] (intro → 'Temperature')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (TGaKQLUMk69avd5b)",
+   "chars": 37193,
+   "tier": "T4",
+   "notes": "Parent page is the single largest document in the corpus: 358262 raw / 115967 visible / 127 tables / 62% table chars / 69 blockquotes. This slice: campaign frames + star-system creation start."
+  },
+  {
+   "unit": "CR-J-11b | 11. CAMPAIGN PLAY [2/11] ('Geosphere' → 'Colony Allegiance')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38299,
+   "tier": "T4",
+   "notes": "Only 6110 visible chars — almost pure generator tables (Terrestrial Planet Terrain 15552). Duplicates CR-T-SYSGEN-1 result text; same owner."
+  },
+  {
+   "unit": "CR-J-11c | 11. CAMPAIGN PLAY [3/11] ('Campaign Hooks' → 'Bonus Rewards')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 25504,
+   "tier": "T4",
+   "notes": "Campaign Hooks 13995 + system objects/gas giants/asteroids + job generator opening. 6265 visible."
+  },
+  {
+   "unit": "CR-J-11d | 11. CAMPAIGN PLAY [4/11] ('Cargo' → 'Mission')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 34986,
+   "tier": "T4",
+   "notes": "Cargo run generator (Cargo block 15684). 8060 visible. Mirrors CR-T-JOBGEN."
+  },
+  {
+   "unit": "CR-J-11e | 11. CAMPAIGN PLAY [5/11] ('Destination' → 'ENCOUNTERS')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39830,
+   "tier": "T4",
+   "notes": "Military-mission + expedition generators, plot twists. 10589 visible."
+  },
+  {
+   "unit": "CR-J-11f | 11. CAMPAIGN PLAY [6/11] (untitled encounter block → 'Surface Encounters')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 16358,
+   "tier": "T4",
+   "notes": "Only 2895 visible — a 12965-char untitled encounter table. Cheap despite raw size."
+  },
+  {
+   "unit": "CR-J-11g | 11. CAMPAIGN PLAY [7/11] ('General Colony Encounters', single h3)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39601,
+   "tier": "T4",
+   "notes": "One indivisible h3 of 39601 raw / 5277 visible: the colony-encounter matrix. Cheapest chars-per-effort unit in the pack; short label phrases only."
+  },
+  {
+   "unit": "CR-J-11h | 11. CAMPAIGN PLAY [8/11] ('SHORE LEAVE' → 'TARTARUS SECTOR')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 35175,
+   "tier": "T4",
+   "notes": "Shore leave (14003) + NPC roster (19972). NPC names/roles must match the 23 CR-A-NPC actors."
+  },
+  {
+   "unit": "CR-J-11i | 11. CAMPAIGN PLAY [9/11] ('Brief History' → 'GL257AB – Tartarus')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 38713,
+   "tier": "T3",
+   "notes": "19968 visible. Tartarus Sector gazetteer + 11 colony write-ups — narrative setting, not tables. Different register from the rest of ch.11."
+  },
+  {
+   "unit": "CR-J-11j | 11. CAMPAIGN PLAY [10/11] ('GJ2034 – Argos' → 'C Deck: Main Concourse')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 39807,
+   "tier": "T3",
+   "notes": "26078 visible — the prose peak of ch.11: sector politics, Jackson's Star colony + adventure hooks, Novgorod Station deck-by-deck. BOXED PLAYER-FACING TEXT likely (centered blockquotes)."
+  },
+  {
+   "unit": "CR-J-11k | 11. CAMPAIGN PLAY [11/11] ('D Deck: Life Support' → 'Events')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 12796,
+   "tier": "T3",
+   "notes": "Novgorod Station remaining decks + Events (5210). Pairs with the 'Alien RPG Novgorod Station' scene folder."
+  },
+  {
+   "unit": "CR-J-12a | 12. LIFE PATH [1/2] (intro → 'Life Event')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (8orByY3cBB6OVPuf)",
+   "chars": 39558,
+   "tier": "T4",
+   "notes": "Life Event alone is 32988 raw. Page is 72% tables, 11024 visible. Text is duplicated into CR-T-LIFEPATH results (5309 chars exact-match) — same owner as that table unit."
+  },
+  {
+   "unit": "CR-J-12b | 12. LIFE PATH [2/2] ('Career' → 'Career Postings')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 21225,
+   "tier": "T4",
+   "notes": "Career (9677) + Career Terms (6036) + psych eval. 6298 visible."
+  },
+  {
+   "unit": "CR-J-13a | 13. LAST SURVIVOR [1/5] (intro → 'Danger Events')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (rTyaHUFRgY6Hq7d7)",
+   "chars": 38672,
+   "tier": "T2",
+   "notes": "Solo-play rules + mission starters + MOTHER analysis matrices; Danger Events block 16885. Solo terminology (Danger Level, Timers, Matrices) is used by 19 LS roll tables and the Last Survivor crib sheet."
+  },
+  {
+   "unit": "CR-J-13b | 13. LAST SURVIVOR [2/5] ('Opportunity Events' → 'Complex Responses')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 15142,
+   "tier": "T4",
+   "notes": "3557 visible — response matrices, mostly short cell labels."
+  },
+  {
+   "unit": "CR-J-13c | 13. LAST SURVIVOR [3/5] ('Location Details' → 'Solo Panic Response')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 30884,
+   "tier": "T4",
+   "notes": "Location Details matrix is 27108 raw / very low visible (6238 for the slice). Label-grade work at scale."
+  },
+  {
+   "unit": "CR-J-13d | 13. LAST SURVIVOR [4/5] ('Stopping Panic' → 'Locations And Zones')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 37871,
+   "tier": "T2",
+   "notes": "Danger/Survivor/Objective timer rules. 15184 visible. Precision-critical solo mechanics."
+  },
+  {
+   "unit": "CR-J-13e | 13. LAST SURVIVOR [5/5] ('Setting The Encounter Timer' → 'Phases')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 35528,
+   "tier": "T2",
+   "notes": "Solo stealth/encounter procedure, solo combat, solo space combat. 16089 visible."
+  },
+  {
+   "unit": "CR-J-14a | 14. UPGRADES & EQUIPMENT [1/2] (intro → 'Xenomorphs')",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice (N9PiYx2FEUIw9fAr)",
+   "chars": 12127,
+   "tier": "T2",
+   "notes": "1e→Evolved conversion rules (talents, weapons, armor, Xenomorphs). Only 2147 visible."
+  },
+  {
+   "unit": "CR-J-14b | 14. UPGRADES & EQUIPMENT [2/2] ('EQUIPMENT', single h2)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page-slice",
+   "chars": 59662,
+   "tier": "T1",
+   "notes": "Deliberately left oversize: one indivisible 172-row / 778-cell master equipment table. 59662 raw but only 8438 visible — item names, weights, prices. Effectively a T1 label job; MUST reuse the exact item names from CR-I-WEAPON / CR-I-ITEM / CR-I-ARMOR."
+  },
+  {
+   "unit": "CR-J-HOWTO | CORE RULES - HOW TO USE THIS MODULE (whole page 9pObvIeQAYkAi6NK)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page",
+   "chars": 6920,
+   "tier": "T1",
+   "notes": "Module install/usage instructions, 1 @UUID link. Foundry UI vocabulary — align with systems/alienrpg/lang/cn.json."
+  },
+  {
+   "unit": "CR-J-CRIB-LP | Lifepath Crib Sheet → 'Life Paths' page (2mOao4ub3hNBqEOX)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page",
+   "chars": 19430,
+   "tier": "T4",
+   "notes": "26% of its paragraphs are verbatim copies of ch.12. DEPENDENT UNIT — run after CR-J-12a/12b and paste."
+  },
+  {
+   "unit": "CR-J-CRIB-LS | Last Survivor Crib Sheet (AnHPTCo9mxXDzsoZ)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "journal-page",
+   "chars": 18324,
+   "tier": "T4",
+   "notes": "56% of its paragraph chars (5929/10604) are verbatim copies of ch.13. DEPENDENT UNIT — run after CR-J-13a..e. 7 @UUID links."
+  },
+  {
+   "unit": "CR-T-SYSGEN-1 | RollTables 'EV - 01..15' (star system / world creation)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (15 tables)",
+   "chars": 27459,
+   "tier": "T4",
+   "notes": "Prose-heavy generator tables: 01 PLANET SIZE 5665 (avg 706 chars/result), 03 TEMPERATURE 3961 (avg 788), 04 GEOSPHERE 3510, 02 ATMOSPHERE 1828, 12 CAMPAIGN HOOKS 3659. Text duplicates CR-J-11a/11b — same owner."
+  },
+  {
+   "unit": "CR-T-SYSGEN-2 | RollTables 'EV - 16..30' (encounters, shore leave)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (15 tables)",
+   "chars": 13303,
+   "tier": "T1",
+   "notes": "CHEAP: mostly single-phrase labels. 16/17/18 (CARGO RUNS / MILITARY MISSIONS / EXPEDITIONS) have ZERO result text (pure numeric ranges) — skip entirely. 23 GENERAL COLONY ENCOUNTERS avg 29 chars, 20 STAR SYSTEM ENCOUNTERS avg 32."
+  },
+  {
+   "unit": "CR-T-CORERES | RollTables: Panic Table, Panic Response, Stress Response, Critical injuries (36), EV - Critical Injuries (36), Crit on Xenomorphs, Crit on Synthetics, EV - Mental Trauma (18)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (8 tables)",
+   "chars": 24189,
+   "tier": "T2",
+   "notes": "PROSE tables, precision-critical, and the most-reused strings in the whole project: identical copies exist in alien-evolved-starter-set (7 tables) and alien-rpg-system (3 tables). TRANSLATE HERE FIRST, then propagate — saves 25659 chars across the other two packs."
+  },
+  {
+   "unit": "CR-T-CREATURE | RollTables 'EV - * Attacks' (Chestburster, Facehugger, Harvester, Lion Worm, Neomorph, Bloodburster, Praetorian/Charger/Queen, Soldier/Sentry, Stalker/Scout/Drone, Swarm, Scorpionid, Sub-Table Facehugger)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (12 tables)",
+   "chars": 20129,
+   "tier": "T2",
+   "notes": "Prose attack tables, avg 255-394 chars per result. Referenced BY NAME from actor field system.rTables (e.g. 'EV - Chestburster Attacks' x4 actors) — see structural note on name-keyed table links. 5 of these are byte-identical in the Starter Set."
+  },
+  {
+   "unit": "CR-T-LIFEPATH | RollTables 'EV - 31..46 LIFE PATH *' + 'EV - LP *' + affiliation/home tables (ICSC/IND/TWE/UA/UPP)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (29 tables)",
+   "chars": 20237,
+   "tier": "T4",
+   "notes": "Mixed: 33 LIFE EVENT (18 results, avg 182) and LP AND EXPERIENCED are prose; ORIGIN/SUB-AFFILIATION/IN THE COMPANY OF are 1-3 word LABELS (avg 9-30 chars). 32 LIFE PATH - EARLY LIFE has zero result text. 5309 chars are verbatim from CR-J-12a."
+  },
+  {
+   "unit": "CR-T-JOBGEN | RollTables 'EV - CR/MM/EX *' + LIEUTENANT / OLD FRIEND / EVENTS COLONIAL MARINES",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (22 tables)",
+   "chars": 18826,
+   "tier": "T4",
+   "notes": "Job generator. CARGO (22 results, 2900) / COMPLICATIONS / MISSIONS are prose; EMPLOYER, MAJOR CORPORATION, SPONSORS, BONUS REWARDS are pure labels (avg 10-35 chars). 17557 chars duplicate CR-J-11d/11e."
+  },
+  {
+   "unit": "CR-T-LASTSURV | RollTables 'EV - 47..59c LS *'",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (19 tables)",
+   "chars": 15403,
+   "tier": "T1",
+   "notes": "MOSTLY CHEAP/SKIPPABLE: 5 tables (48, 48a, 48b, 48c, 48d DANGER EVENT MATRIX/DETAIL, 118 results total) have ZERO result text — numeric only, do not translate. Matrices 50/52/53/54/56 average 6-24 chars per result. Only 58 LS - SOLO PANIC RESPONSE (2347) and 51/55 are real work."
+  },
+  {
+   "unit": "CR-T-SHIPDMG | RollTables: Spaceship Major Component Damage (11), Spaceship Minor Component Damage (27), Vehicle Component Damage (6)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "rolltable-group (3 tables)",
+   "chars": 6881,
+   "tier": "T2",
+   "notes": "Prose results avg 144-158 chars. Wording must match CR-J-06e's MINOR/MAJOR COMPONENT DAMAGE sections verbatim."
+  },
+  {
+   "unit": "CR-A-CRE-1 | Creature actors: Xenomorph Stages I–III (Ovomorph, Facehugger, Praeto-Facehugger, Royal Facehugger, Chestburster, Bambi Burster, Imp, Queenburster)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "actor-group (8 creature actors)",
+   "chars": 38399,
+   "tier": "T4",
+   "notes": "XENOMORPH VARIANTS. Fields: name, system.notes (HTML), system.general.special.value (PLAIN TEXT, newline-separated). 79% of special.value across all 25 creatures is repeated boilerplate — the 8 shared paragraphs (Acid Splash x4 paras, Sprint, Resistance to Vacuum, Falling, Immune to the Cold) appear in 16 actors each. Translate the boilerplate ONCE in CR-A-CRE-1 and clone."
+  },
+  {
+   "unit": "CR-A-CRE-2 | Creature actors: Xenomorph Stages IV–VI (Drone, Scout, Stalker, Soldier, Worker, Sentry, Praetorian, Charger/Crusher, Queen)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "actor-group (9 creature actors)",
+   "chars": 42935,
+   "tier": "T4",
+   "notes": "XENOMORPH VARIANTS. Depends on CR-A-CRE-1 for the shared special-ability boilerplate; unique content per actor is ~1.4k chars. Ability names must match CR-J-10a."
+  },
+  {
+   "unit": "CR-A-CRE-3 | Creature actors: Neomorphs + other species (Adult Neomorph, Neophyte, Neomorphic Bloodburster, Harvester, Harvester Juvenile, Lion Worm, Tanakan Scorpionids, The Swarm)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "actor-group (8 creature actors)",
+   "chars": 16948,
+   "tier": "T4",
+   "notes": "Non-XX121 species; far less boilerplate sharing. Pairs with CR-J-10d/10e."
+  },
+  {
+   "unit": "CR-A-NPC | NPC actors (EV - ANDROID COVERT/CURIOUS/REFURBISHED, ASTEROID MINER, COLONIAL MARSHAL, COLONIST CHILD, COLONY MANAGER, COMPANY BUREAUCRAT, CORPORATE KILLER, CULTIST, HOMESTEADER, ICC INSPECTOR, MEDICAL DOCTOR, MERCENARY/SOLDIER, MINING WILDCATTER, PILOT, ROGUE SCIENTIST, SALVAGE EXPERT, SECURITY GUARD, SHIP'S ENGINEER, SMUGGLER, SQUAD LEADER, THUG)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "actor-group (23 actors)",
+   "chars": 18443,
+   "tier": "T4",
+   "notes": "All 23 have EMPTY system.notes — the entire payload is the names plus 1-5 EMBEDDED items each (their gear/talents, system.attributes.comment.value). Names must match the NPC roster in CR-J-11h."
+  },
+  {
+   "unit": "CR-A-SHIP | Spacecraft actors (Conestoga-class Frigate, CM-88G Bison, CM-88H Bison, CM-90S, CM-93D Mule, CYG-NS3, Starcub Shuttle) + Vehicle actors (Aerodyne Gyrocar, Daihotai 8X8 Tractor, M570 APC, UD-4 Cheyenne, WY-37B Cargo Lifter, Weyland NR-9 ATV)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "actor-group (13 actors)",
+   "chars": 36306,
+   "tier": "T4",
+   "notes": "Spacecraft own-prose is ~15 chars each; the weight is 80 EMBEDDED module/weapon items (Conestoga alone has 23 embedded items = 7301 chars). Vehicles carry real prose in system.attributes.comment.value (525-1376 each). Pairs with CR-J-06c/06d and CR-J-05e."
+  },
+  {
+   "unit": "CR-I-PLANET | Items type=planet-system (68)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "item-group",
+   "chars": 22710,
+   "tier": "T4",
+   "notes": "Fields: header.commonName/location/sector/system + details.climate/colonies/terrain/keyResources/affiliation/classification/meanTemperature. Short factual phrases (e.g. '–173°C at night to 427°C during the day'). 25% of segments are verbatim copies of the Systems Journals pages — run after CR-J-SYSJ-1/2/3."
+  },
+  {
+   "unit": "CR-I-ITEM | Items type=item (48, general gear/tools/medical/food)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "item-group",
+   "chars": 21027,
+   "tier": "T2",
+   "notes": "system.attributes.comment.value + system.notes. 14% verbatim from CR-J-05 slices. Names must match the ch.14 equipment master table (CR-J-14b)."
+  },
+  {
+   "unit": "CR-I-SHIPMOD | Items type=spacecraftmods (55) + spacecraftweapons (12)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "item-group",
+   "chars": 21398,
+   "tier": "T2",
+   "notes": "0% verbatim overlap with the journal despite covering the same modules — the item copy is rewritten. Terminology must still match CR-J-06c."
+  },
+  {
+   "unit": "CR-I-WEAPON | Items type=weapon (36) + armor (7)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "item-group",
+   "chars": 15905,
+   "tier": "T2",
+   "notes": "19% of weapon and 51% of armor segments are verbatim from CR-J-05a/05b — assign to that translator. system.attributes.class.value holds one-word categories ('Pistol','Rifle') = T1 labels."
+  },
+  {
+   "unit": "CR-I-TALENT | Items type=talent (57)",
+   "pack": "alien-evolved-core-rules",
+   "kind": "item-group",
+   "chars": 9949,
+   "tier": "T2",
+   "notes": "0% verbatim overlap with ch.3 talent lists (rewritten), but talent NAMES must be byte-identical to CR-J-03a/03b or players cannot match sheet to book."
+  },
+  {
+   "unit": "CR-UI | Adventure name+description, 25 folder names, 7 journal-entry names, 112 journal page names (incl. 74 'Core Rules - Art of Alien' image-page names), 8 scene names, 1 macro name",
+   "pack": "alien-evolved-core-rules",
+   "kind": "ui-labels",
+   "chars": 3425,
+   "tier": "T1",
+   "notes": "Folders: Alien RPG Mother Aids, Alien RPG Novgorod Station, Alien RPG Systems Journals, The Art of Alien, Alien Tables, Alien Creature Tables, Alien Mother Tables, Alien Sub-Tables, Alien Evolved (x2: Actor+Item), Vehicles, Weapons, Armor, Equipment, Vehicle Weapons, Creatures, NPCs, Spaceships, Alien RPG Systems, Alien RPG Spaceship Weapons, Alien RPG Spaceship Modules, Talents (Career), Talents (General), Alien Macros. 11 folder names are shared verbatim with the other two packs — translate once, apply to all three."
+  },
+  {
+   "unit": "SS-J-HOWTO | STARTER SET - HOW TO USE THIS MODULE (page 2jw2hnbbkqglnabb)",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page",
+   "chars": 6418,
+   "tier": "T1",
+   "notes": "Module usage instructions, 1 @UUID link out to the system's MU/TH/ER Instructions journal."
+  },
+  {
+   "unit": "SS-J-RULES-1 | Starter Set Rules [1/4] (intro → 'STEALTH MODE')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice (lgOF383Fh8ONxlgY)",
+   "chars": 39895,
+   "tier": "T2",
+   "notes": "DEPENDENT UNIT: 43% of this page's paragraphs (17844 of 62518 visible chars) are byte-identical to core-rules chapters 2/3/4. Run the whole Starter Set Rules page AFTER CR-J-02a/03a/04a-d and reuse. Parent page: 39 tables, 33 blockquotes, 24 example boxes."
+  },
+  {
+   "unit": "SS-J-RULES-2 | Starter Set Rules [2/4] ('PC Movement' → 'Firearms In Close Combat')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice",
+   "chars": 39662,
+   "tier": "T2",
+   "notes": "Stealth mode, motion trackers, initiative, close combat. Same reuse dependency on CR-J-04a/04b."
+  },
+  {
+   "unit": "SS-J-RULES-3 | Starter Set Rules [3/4] ('RANGED COMBAT' → 'Panic Roll')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice",
+   "chars": 39791,
+   "tier": "T2",
+   "notes": "Ranged combat, damage, critical injuries (8337), panic (8399). Critical-injury and panic wording must match CR-T-CORERES."
+  },
+  {
+   "unit": "SS-J-RULES-4 | Starter Set Rules [4/4] ('Stopping Panic' → 'Synthetics')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice",
+   "chars": 18227,
+   "tier": "T2",
+   "notes": "Hazards + Synthetics (11252). Only 6092 visible."
+  },
+  {
+   "unit": "SS-J-HLD-1 | Hope's Last Day [1/3] (intro → 'Surgery Room')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice (1x3YCWOHYWkJeLFJ)",
+   "chars": 39509,
+   "tier": "T3",
+   "notes": "READ-ALOUD / BOXED TEXT. The cinematic adventure. Parent page has 20 blockquotes (36813 chars), 10 of them class='evblockquoteCenter' — these are the player-facing boxed passages, and the page contains the corpus's only literal 'read the following' instruction. Highest prose-quality bar in the project. 25004 visible chars. Only 18% overlaps core rules."
+  },
+  {
+   "unit": "SS-J-HLD-2 | Hope's Last Day [2/3] ('Morgue' → 'Combat Rules')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice",
+   "chars": 37191,
+   "tier": "T3",
+   "notes": "READ-ALOUD / BOXED TEXT. Morgue (6999), Tannen's Casino (6514), Events, Final Horrors, then Xenomorph combat rules (T2 tail)."
+  },
+  {
+   "unit": "SS-J-HLD-3 | Hope's Last Day [3/3] ('Acid Splash' → 'Stage IV: Drone')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-slice",
+   "chars": 28853,
+   "tier": "T2",
+   "notes": "Acid Splash (5701) + the four Xenomorph stage stat blocks. Must match CR-J-10a/10b/10c wording and the SS creature actors."
+  },
+  {
+   "unit": "SS-J-MAPPINS | 'Map Pins' journal, all 17 pages (Sterile Lab, Storage, Geolab West, Stairway & Elevator, Survey Office, Weyland-Yutani Office, Asset/Claims Office, Assistant Manager Office, Geolab East, Geological Managers Office, Operations, Medlab, Stasis Room, Surgery Room, Morgue, Life Support/Power, Station Maintenance Center)",
+   "pack": "alien-evolved-starter-set",
+   "kind": "journal-page-group (17 pages, 362–2525 chars each)",
+   "chars": 21873,
+   "tier": "T3",
+   "notes": "ZERO-NEW-TRANSLATION UNIT. 100% of the visible text (14776/14776 chars) is byte-identical to location sections already inside Hope's Last Day. Pure paste job after SS-J-HLD-1/2 — assign to the same owner, do NOT hand to an independent translator. 8 of the pages also carry @UUID links back to the main page."
+  },
+  {
+   "unit": "SS-T-CORERES | RollTables: Critical injuries (36), EV - Critical Injuries (36), Critical Injuries on Xenomorphs, Sub Table Crit on Xenomorphs, Crit on Synthetics, Panic Response, Stress Response",
+   "pack": "alien-evolved-starter-set",
+   "kind": "rolltable-group (7 tables)",
+   "chars": 20531,
+   "tier": "T2",
+   "notes": "6 of 7 are BYTE-IDENTICAL to the core-rules copies; only 'Critical injuries' differs (6273 vs 6383 chars in CR — diff and reconcile). Reuse CR-T-CORERES wholesale."
+  },
+  {
+   "unit": "SS-T-CREATURE | RollTables: EV - Facehugger Attacks, EV - Chestburster Attacks, EV - Stalker/Scout/Drone Attacks, EV - Sub Table Facehugger Attacks",
+   "pack": "alien-evolved-starter-set",
+   "kind": "rolltable-group (4 tables)",
+   "chars": 5558,
+   "tier": "T2",
+   "notes": "All 4 byte-identical to their core-rules copies. Pure reuse from CR-T-CREATURE."
+  },
+  {
+   "unit": "SS-A-CRE | Creature actors: EV - XX121 Stage IV Xenomorph, Chestburster, Drone, Facehugger, Ovomorph",
+   "pack": "alien-evolved-starter-set",
+   "kind": "actor-group (5 creature actors)",
+   "chars": 20207,
+   "tier": "T4",
+   "notes": "XENOMORPH VARIANTS. 4 of the 5 share a name with core-rules actors (Chestburster, Drone, Facehugger, Ovomorph) and carry the same boilerplate special.value; 'EV - XX121 - Stage IV Xenomorph' (2968) is Starter-Set-only. Reuse CR-A-CRE-1/2."
+  },
+  {
+   "unit": "SS-A-CAST | PC actors (Hannah Singleton, Holroyd, Janice Macwhirr, Morgan Hirsch, Sonny Sigg) + NPC actors (Angela Lin, Theodora Komiskey, Wes Osterman)",
+   "pack": "alien-evolved-starter-set",
+   "kind": "actor-group (8 actors, 5 PC + 3 NPC)",
+   "chars": 11907,
+   "tier": "T3",
+   "notes": "Pre-generated cast: system.notes (character bio), general.appearance.value, general.sigItem.value, plus 2-6 embedded items each (their gear + personal agenda). Only 2% overlaps any journal text — genuinely new narrative prose. Names must match the agenda items and Hope's Last Day."
+  },
+  {
+   "unit": "SS-I-AGENDA | Items type=agenda (15 'Hope's Last Day - Personal Agendas')",
+   "pack": "alien-evolved-starter-set",
+   "kind": "item-group",
+   "chars": 4702,
+   "tier": "T3",
+   "notes": "Secret personal-agenda cards, one per PC per act. Player-facing narrative — same owner as SS-A-CAST and SS-J-HLD-1."
+  },
+  {
+   "unit": "SS-I-GEAR | Items type=weapon (14) + talent (5)",
+   "pack": "alien-evolved-starter-set",
+   "kind": "item-group",
+   "chars": 4384,
+   "tier": "T2",
+   "notes": "14 of these 19 (all 5 talents + 9 weapons incl. .357 Magnum Revolver, Armat M41A Pulse Rifle, Combat Knife, Fire Axe, M240 Incinerator, M4A3 Service Pistol) exist by the same name in core-rules — reuse CR-I-WEAPON / CR-I-TALENT."
+  },
+  {
+   "unit": "SS-UI | Adventure name+description, 17 folder names, 5 journal-entry names, 38 journal page names (incl. 18 'The Art of Alien' image-page names), 7 scene names, 37 scene note labels",
+   "pack": "alien-evolved-starter-set",
+   "kind": "ui-labels",
+   "chars": 2260,
+   "tier": "T1",
+   "notes": "The ONLY pack with translatable scene note text: 'Hadley's Hope - Level 1' (20 notes) and 'Hadley's Hope - Level 2' (17 notes), 349 chars of room labels (Operations, Medlab, Stasis Room, Morgue, Geolab West…). These labels MUST be byte-identical to the Map Pins page names and the Hope's Last Day location headings, or the map pins read inconsistently. 11 folder names shared with the other packs."
+  },
+  {
+   "unit": "SYS-J-1 | MU/TH/ER Instructions [1/2] (intro → 'Spaceship Weapons')",
+   "pack": "alien-rpg-system",
+   "kind": "journal-page-slice (mdbh7wrsow46dt8r, only text page in the pack)",
+   "chars": 39899,
+   "tier": "T1",
+   "notes": "FOUNDRY-UI ANCHOR — TRANSLATE FIRST IN THIS PACK. A field-by-field walkthrough of every actor and item sheet (Characters, Synthetics, Creatures, Spaceships, Vehicles, Territories, Colony sheets, 13 item types). Every label here must match systems/alienrpg/lang/cn.json (511 keys, already partially Chinese: Health=生命, Stress=压力, but e.g. ALIENRPG.Panic is still untranslated). 31207 visible chars, 1 table only."
+  },
+  {
+   "unit": "SYS-J-2 | MU/TH/ER Instructions [2/2] ('Spaceship Crit' → 'Version 4.0.4')",
+   "pack": "alien-rpg-system",
+   "kind": "journal-page-slice",
+   "chars": 26329,
+   "tier": "T1",
+   "notes": "Item types, tokens, dice rolling, combat tracker, tables, config options, macros, recommended modules — then a 12571-char changelog tail (offset 53657 to end, 21 version sections, 10315 visible). RECOMMEND SKIPPING the changelog: it is 19% of the whole pack's chars and has no play value. Net real work ≈ 13800 chars."
+  },
+  {
+   "unit": "SYS-T-CORERES | RollTables: Panic Table (10), Panic Response Table (13), Stress Response Table (8)",
+   "pack": "alien-rpg-system",
+   "kind": "rolltable-group (3 tables)",
+   "chars": 5128,
+   "tier": "T2",
+   "notes": "All three are BYTE-IDENTICAL to their core-rules copies. Pure reuse from CR-T-CORERES — zero new translation."
+  },
+  {
+   "unit": "SYS-I-STUNTS | Items type=skill-stunts (12) + specialty (14)",
+   "pack": "alien-rpg-system",
+   "kind": "item-group",
+   "chars": 2595,
+   "tier": "T2",
+   "notes": "Uses system.description (12 items, 1957 chars) — the ONLY pack that uses that field; the Evolved packs use system.attributes.comment.value instead. specialty items are near-nameless (avg 15 chars, 210 chars of prose across 14)."
+  },
+  {
+   "unit": "SYS-UI | Adventure name + description (1782 chars of HTML blurb), 7 folder names, 1 journal-entry name, 1 page name, 4 macro names",
+   "pack": "alien-rpg-system",
+   "kind": "ui-labels",
+   "chars": 2085,
+   "tier": "T1",
+   "notes": "Folders: Alien Tables, Alien Creature Tables, Alien Mother Tables, Alien Sub-Tables, Alien Macros, Skill-Stunts, Careers. Macros: 'Alien - Player Ad-hoc YZE Dice Roller', 'Alien -  GM Dice Roller' (note the double space), 'Alien - Roll on selected Mother table V10', 'Alien - Roll on selected Creature table V10'. Macro COMMAND bodies (7865 chars of JS) are NOT translatable but DO contain hard-coded table names — see structural notes."
+  }
+ ],
+ "totals": {
+  "content_chars": 2695739,
+  "ui_chars": 7770,
+  "grand_total_chars": 2703509
+ },
+ "structural_notes": [
+  "TOTALS VERIFY: 76036 (system) + 340968 (starterset) + 2286505 (corerules) = 2703509 raw translatable chars. Journal page content alone is 2230280 (82.5%): 66228 / 271419 / 1892633. The 96 work_units above sum exactly to the per-pack totals (verified per pack: journal slices sum to 1892633 / 271419 / 66228 with zero drift).",
+  "RAW vs VISIBLE: raw HTML chars are what a translator edits, but visible (tag-stripped) text is the real effort. Journal visible totals: system 51192 (77% of raw), starterset 141229 (52%), corerules 790704 (42%) = 983125. The gap is table markup. Worst offenders — units that look expensive but are cheap: CR-J-14b 'EQUIPMENT' 59662 raw / 8438 visible (14%), CR-J-11g 39601/5277 (13%), CR-J-11b 38299/6110 (16%), 12. LIFE PATH 60783/17323 (28%), 14. UPGRADES 71789/10586 (15%), 01. System Build Template 1841/239 (13%).",
+  "TRANSLATE-FIRST ORDER (terminology anchors, ~118k chars total, must complete before parallel fan-out): (1) SYS-J-1 MU/TH/ER Instructions — locks every Foundry sheet label and MUST be reconciled against the existing systems/alienrpg/lang/cn.json (511 keys, partially translated: ALIENRPG.Health=生命, Stress=压力, AbilityStr=力量, AbilityWit=机智, AbilityEmp=共情, AcidAttack=酸血 — but ALIENRPG.Panic is still literal English). (2) CR-J-03a SKILLS AND TALENTS — the 12 canonical skill names and the roll vocabulary (Push, Stress Die, Success, Opposed Roll, Passive Roll). (3) CR-J-02a YOUR CHARACTER — Attribute/Stress/Resolve/Health/Career/Talent/Agenda vocabulary. (4) CR-J-10a ALIEN SPECIES intro + Xenomorph Combat Rules + XX121 Special Abilities — locks Acid Splash / Sprint / Resistance to Vacuum / Immune to the Cold, which then repeat 16x each across 25 creature actors. (5) CR-J-08a/08b GOVERNMENTS & CORPORATIONS — locks 3WE / United Americas / UPP / ICSC / ICC / Weyland-Yutani / Lasalle Bionational / Seegson, which propagate into 68 planet-system items and every gear brand. There is no dedicated glossary page in any pack; these five ARE the glossary.",
+  "NAME-KEYED CROSS-REFERENCE HAZARD (highest-risk item in the project): creature actors link to their attack tables BY TABLE NAME, not by id — actor field system.rTables holds literal strings like 'EV - Chestburster Attacks' (4 actors), 'EV - Praetorian, Charger and Queen Attacks' (3), 'EV - Stalker, Scout and Drone Attacks' (3), 'EV - Neomorph Attacks' (2), 'EV - Facehugger Attacks' (2), 'EV - Harvester Attacks' (2), 'EV - Soldier and Sentry Attacks' (2), 'Critical Injuries on Xenomorphs' (1), 'EV - Lion Worm Attacks' (1), 'EV - Neomorphic Bloodburster Attacks' (1); system.cTables holds 25 more. 26 actors hold the literal string 'None'. If a RollTable name is translated but the actor's rTables string is not (or vice versa), the creature's attack roll silently breaks. Either translate both sides in lockstep or leave RollTable NAMES in English. The 4 system macros ('Roll on selected Mother table V10', 'Roll on selected Creature table V10', 7865 chars of JS) and the corerules macro 'Roll on Danger Event Detail Table' also reference table names from code — inspect before renaming anything.",
+  "@UUID LINKS: 346 total, all of them enriched HTML anchors of the form <a class=\"content-link\" data-uuid=\"JournalEntry.<id>.JournalEntryPage.<id>\" data-hash=\"...\">LABEL</a>. corerules 265 (4. STEALTH & COMBAT 49, 3. SKILLS AND TALENTS 43, 13. LAST SURVIVOR 34, 6. A HARD LIFE 30, 2. YOUR CHARACTER 27, 10. ALIEN SPECIES 26, 11. CAMPAIGN PLAY 20, 5. GEAR & TECH 18, Last Survivor Crib 7, 12. LIFE PATH 5, ch.7 2, ch.8 2, ch.1 1, ch.9 1), starterset 81 (Starter Set Rules 42, Hope's Last Day 32, 7 Map Pin pages 1 each), system 0. All targets are ID-based, so translating page names does NOT break them — but the anchor's INNER TEXT is the visible label and must be translated consistently with the target page's heading. Additionally corerules 5. GEAR & TECH carries 39 legacy @UUID[Item.<id>] macro-syntax links (the only Item-target links; data-uuid form is used everywhere else). data-hash anchors (e.g. data-hash=\"upgrades\") point at heading ids — do NOT translate the hash.",
+  "PAGES THAT ARE MOSTLY TABLES/HTML (route to a translator comfortable with HTML tables, budget by visible chars not raw): 14. UPGRADES & EQUIPMENT 85% table chars (37 tables, 172 rows, 778 cells), 12. LIFE PATH 72%, 2. YOUR CHARACTER 67% (53 tables), 11. CAMPAIGN PLAY 62% (127 tables — the single biggest document at 358262 raw), 5. GEAR & TECH 57% (121 tables), 13. LAST SURVIVOR 53% (58 tables), 10. ALIEN SPECIES 46% (53 tables), 9. SYSTEMS & PLANETS 41%. All 21 'Alien RPG Systems Journals' pages are 36–99% table (data sheets). Wide tables use class tcol1/tcol2/scol1..scol7/arpgtable/ntable/evstable — preserve class attributes verbatim.",
+  "REUSE MAP — do not translate these twice. (a) 11 RollTables are shared across packs and 10 of them are BYTE-IDENTICAL: Panic Response Table and Stress Response Table exist in all three packs; Panic Table in CR+SYS; Critical Injuries on Xenomorphs/Synthetics, EV - Critical Injuries, EV - Chestburster/Facehugger/Stalker-Scout-Drone Attacks, EV - Sub Table Facehugger Attacks in CR+SS. Only 'Critical injuries' differs between CR (6383) and SS (6273) — diff it. Savings ≈ 25.7k chars. (b) 4 creature actors are name-shared CR↔SS (Chestburster, Drone, Facehugger, Ovomorph). (c) 19 items are name-shared CR↔SS (5 talents, 14 weapons). (d) 11 folder names are shared across packs. (e) 1 scene name shared (ToM - Meeting Room).",
+  "REUSE MAP, WITHIN-PACK. (a) Starter Set Rules: 66 of 155 paragraphs (43%; 17844 of 62518 visible chars) are byte-identical to core-rules chapters 2/3/4 — run the whole Starter Set AFTER core rules. (b) 'Map Pins' 17 pages are 100% duplicates (14776/14776 chars) of location sections inside Hope's Last Day — pure paste, zero new translation. (c) Lifepath Crib Sheet 26% and Last Survivor Crib Sheet 56% duplicate their parent chapters. (d) Creature actor system.general.special.value: 66943 chars total but only 13896 unique (79% saving) — 8 boilerplate paragraphs appear in 16 actors each. (e) Creature system.notes: 28224 → 21100 unique. (f) RollTable results duplicate journal text: 22957 chars, mostly 11. CAMPAIGN PLAY (17557) and 12. LIFE PATH (5309). (g) Item prose duplicates journal: armor 51%, planet-system 25%, weapon 19%, item 14%; spacecraftmods, spacecraftweapons and talent overlap 0% (independently written). Realistic NET new-translation volume after all reuse is roughly 2.30M raw chars, not 2.70M.",
+  "ZERO-TEXT ROLLTABLES — DO NOT ASSIGN: 8 corerules tables have 118 results with completely empty description fields (pure numeric/dice ranges): EV - 16. CARGO RUNS (5), EV - 17. MILITARY MISSIONS (4), EV - 18. EXPEDITIONS (5), EV - 32. LIFE PATH - EARLY LIFE (3), EV - 48. LS - DANGER EVENT MATRIX (37), EV - 48a. LS - DANGER EVENT DETAIL (3), EV - 48b/48c/48d LS - DANGER EVENT DETAIL (36 each). Only their table NAMES need translating (T1). A further 24 tables are LABEL-grade (avg 6–39 chars/result): the LS matrices 50/52/53/54/56, EV - 20/23/26 encounters, all CR/EX/MM EMPLOYER/SPONSORS/BONUS REWARDS/HOME/SUB-AFFILIATION tables, EV - 34 RANDOM GENERAL SKILLS.",
+  "BOXED / READ-ALOUD TEXT: the class evblockquoteCenter marks centered boxed passages and is the read-aloud marker. Counts: Hope's Last Day 10 of 20 blockquotes (36813 blockquote chars total) — this is the only document containing an explicit 'read the following' instruction and is the true read-aloud unit (flagged on SS-J-HLD-1 and SS-J-HLD-2); Starter Set Rules 9 of 33; corerules 11. CAMPAIGN PLAY 26 of 69 (215919 blockquote chars — Jackson's Star and Novgorod Station sections, flagged on CR-J-11j/11k), 10. ALIEN SPECIES 19 of 36, 6. A HARD LIFE 12 of 24, 4. STEALTH & COMBAT 11 of 33, 8. GOVERNMENTS 8 of 9. Separately, class evexamplebox marks RULES EXAMPLES (not read-aloud): 24 in Starter Set Rules (51674 chars), 43 in 11. CAMPAIGN PLAY (222542), 22 in 4. STEALTH & COMBAT (60052), 20 in 13. LAST SURVIVOR, 18 in 10. ALIEN SPECIES, 17 in 14. UPGRADES. Examples need mechanical precision; centered blockquotes need voice.",
+  "FIELD MAP for non-journal documents (what a translator must touch). Actors: name, system.notes (HTML), system.general.special.value (PLAIN TEXT, newline-separated, NOT HTML — do not add tags), system.general.appearance.value, system.general.sigItem.value, system.attributes.comment.value (vehicles only, 6 actors / 6038 chars), plus every embedded item in actor.items. Items: name, system.description (alien-rpg-system pack ONLY), system.notes, system.attributes.comment.value (the main Evolved field, 151 CR items / 53180 chars), system.general.comment.value, system.attributes.class.value (one-word category), and for planet-system items system.header.commonName/location/sector/system.value + system.details.climate/colonies/terrain/keyResources/affiliation/classification/meanTemperature.value. DO NOT TRANSLATE: every *.label and *.description under system.skills / system.attributes / system.modifiers — those hold either i18n keys ('ALIENRPG.Health', 'Number', 'Text') or English skill names the system re-renders from its own lang file; translating them shadows cn.json and produces mixed-language sheets.",
+  "SCENES: 15 scenes total, only 2 carry translatable text — starterset 'Hadley's Hope - Level 1' (20 notes) and 'Hadley's Hope - Level 2' (17 notes), 349 chars of room labels. All 8 corerules scenes and the other 5 starterset scenes have zero notes and zero drawing text; only their names are translatable. The 37 note labels are the same strings as the 17 Map Pins page names and the Hope's Last Day h3 location headings — one owner, byte-identical output, or the pins mismatch the text.",
+  "IMAGE-ONLY JOURNAL PAGES: 92 pages carry no text at all — 'Core Rules - Art of Alien' (74 pages) and 'The Art of Alien' (18 pages). Their image.caption fields are empty, so only the 92 page NAMES are translatable (part of the CR-UI / SS-UI units). This is why corerules has 112 pages but only 38 text pages, and starterset 38 pages but only 20 text pages.",
+  "BABELE PACKAGING: Babele 2.9.1 is installed at <data>/modules/babele and already ships Adventure defaultMappings, so all three packs can be shipped as Adventure-type translation files without a custom mapping. Note the nested-document requirement: Adventure translations must carry sub-maps for journal.pages, tables.results, actors.items (embedded), plus folders and scenes.notes. Two source strings contain non-breaking spaces that will break naive key matching: the journal entry name 'CORE RULES\\xa0-\\xa0HOW\\xa0TO\\xa0USE\\xa0THIS\\xa0MODULE' (U+00A0 throughout, while its page name uses normal spaces) and the page name '11. CAMPAIGN  PLAY' (double space). The macro name 'Alien -  GM Dice Roller' also has a double space.",
+  "PARALLELISATION SHAPE: 96 units. 5 anchor units (~118k chars) must finish first. After that, 3 dependency chains constrain ordering — (core rules ch.2/3/4) → Starter Set Rules ×4; (Hope's Last Day ×2) → Map Pins; (ch.12/ch.13) → the two crib sheets; plus CR-T-CORERES → SS-T-CORERES + SYS-T-CORERES, and CR-A-CRE-1 → CR-A-CRE-2/3 + SS-A-CRE. Everything else is independent. Suggested co-ownership pairs to avoid terminology drift: {CR-J-05a..e + CR-I-WEAPON + CR-I-ITEM}, {CR-J-06c/06d + CR-I-SHIPMOD + CR-A-SHIP}, {CR-J-SYSJ-1/2/3 + CR-I-PLANET + CR-J-09a..d}, {CR-J-10a..e + CR-A-CRE-1/2/3 + CR-T-CREATURE}, {CR-J-11a..h + CR-T-SYSGEN-1/2 + CR-T-JOBGEN}, {CR-J-12a/12b + CR-T-LIFEPATH + crib}, {CR-J-13a..e + CR-T-LASTSURV + crib}, {SS-J-HLD-1/2/3 + SS-J-MAPPINS + SS-A-CAST + SS-I-AGENDA + SS-UI scene notes}."
+ ]
+}

@@ -1,0 +1,170 @@
+{
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-combat.json",
+   "bytes": 4346,
+   "what": "The slice: flat map of 100 dotted keys to Chinese (9 deliberately byte-exact English). Flat dotted keys, never nested - lang_gap.py confirms UNREACHABLE 0."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-combat.notes.json",
+   "bytes": 38221,
+   "what": "Per-key rationale for all 100 keys: en value, shipped cn value, new value, changed flag, source class (glossary / stratum A / ruling / own / deliberately-English), and reason with re-derived file:line citations. _meta carries the measured 590/511 counts and the changed/unchanged/english split."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\lang\\lang_keep_english.json",
+   "bytes": 13998,
+   "what": "Added a keep_english_reasons block (was 9071 bytes). The 8 crit-parse keys were ALREADY in keep_english when I arrived, so I did not touch that list, never_write, or the existing _README - verified byte-identical via round-trip. What I added is the per-key phase-1 reasoning the brief asked for: why each of the 8 is frozen, which side of the contract it sits on (comparison vs output), the EN DASH U+2013 warning, the Phase-5 target values, and the note that the 8 flip together with the RollTables in one commit. All three readers consume only keep_english and never_write, so a sibling key is inert - re-verified by re-running apply_lang --dry afterwards."
+  }
+ ],
+ "summary": "Phase 1 slice `lang-combat`: 100 keys covering the ranged-attack dialog, range bands, cover/size modifiers, weapon and armor vocabulary, damage, the whole critical-injury pipeline, initiative/combat tracker, action economy, and ALIENRPG.dialog.*. 80 keys change relative to the shipped system cn.json, 20 adopt stratum-A values verbatim, 9 are deliberately English (the 8 crit-parse lockstep keys plus ALIENRPG.CriticalInjuries).\n\nRe-derived, not trusted: en.json flattens to 590 leaves, cn.json to 511 (93 en keys missing from cn, 14 cn-only dead keys) - both match the brief. Every file:line in the notes was resolved against the installed alienrpg 4.1.13 this session; three citations I drafted from a wide sed window were wrong (config.mjs size_modifiers is 438-440 not 479-481; crit-roll-character.hbs CriticalInjuryfor is line 4 not 5; the enricher CTRL comment is 116 not 115) and were corrected before delivery.\n\nGates: apply_lang.py --dry = 100 applied / 0 rejected (9 \"no CJK\" warnings, all on keep_english keys). An independent self-gate (stricter: order-sensitive HTML tag sequence, frozen-literal cross-check against the 55 English literals extracted from DO-NOT-TRANSLATE.json, full-width-colon scan, whitespace hygiene on the lockstep group) = 0 failures. Applying the slice to a throwaway repo and running scan_crit_lockstep.py gives checked=8 violations=0; lang_gap.py on that repo gives UNREACHABLE 0 (flat dotted keys, no nested-shadow trap), DRIFT 0, UNTRANSLATED 0, NEVER-WRITE 1 (EVCriticalInjuries, correctly absent), NEW 489 = 590 - 100 - 1.\n\nThe three-way range collision stays dissolved: Engaged=接战, Melee(weapon type)=肉搏, and 近战 appears nowhere in my file (it belongs to the Close Combat skill, not my slice). Long=远距离 vs Ranged=远程 also stays split. Armor Piercing=破甲 per R2.\n\nI did NOT write to 1-系统汉化插件/lang/cn.json - verified still `{}` with its original 06:41 mtime.\n\nMost actionable finding: sibling slices landed while I worked and I checked overlap. lang-core = 0 overlap, but lang-ship overlaps me on 11 keys (5 with different values) and lang-ui on 16 (12 different). 25 distinct keys are double-claimed, 17 with a value disagreement, 2 three-way. Details in open_issues - the controller must arbitrate before assembling, because apply_lang.py is last-write-wins and will silently take whichever batch lands last.",
+ "decisions": [
+  {
+   "decision": "Claimed 100 keys under the rule: the key's ENGLISH VALUE is combat / range / cover / weapon / armor / damage / critical-injury / initiative vocabulary - not which sheet displays it.",
+   "reason": "A sheet-based rule would have split the range band set across three slices (Short/Medium/Long/Extreme label personal, vehicle AND ship weapons alike), which is exactly how the shipped cn.json ended up with 远程 meaning two different things."
+  },
+  {
+   "decision": "Did NOT claim the 12 ALIENRPG.Skill* keys even though SkillcloseCbt and SkillrangedCbt are combat words.",
+   "reason": "They are T-EXACT and byte-coupled to the skill-stunts Item names; a skills slice is their natural owner and splitting that contract across two agents is how it gets broken. Flagged so the controller can confirm someone owns them - note the glossary now differs from the shipped values on five of the twelve (Comtech 科技->通信科技 per R3, Observation 观察->侦察, Manipulation 操纵->操控, Survival 求生->生存, Heavy Machinery 机械->重型机械), and each change must land in the same commit as the pack Item rename."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.Overwatch ('OVERWATCH' -> 守望先锋, a headline defect) or ALIENRPG.TAH.overwatch.",
+   "reason": "config.mjs:113-114 puts Overwatch inside the classic status-effects array next to Dehydrated/Exhausted/Freezing/Encumbered/Panicked/Radiation, and TAH.overwatch is one of seven TAH.* tooltips. A conditions/status slice is the natural owner. If no such slice exists, this defect ships - glossary_alien.json says 警戒."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.keepingguard / seekcover / the other Evolved condition keys, nor the generic roll-dialog family (HOWMANYDICE, HOWMANYSTRESS, MODIFIER, Dial*, Ones, Sixes, Dice, Rolled, Rolling, DRAW).",
+   "reason": "Conditions and generic rolls are their own coherent contracts. ALIENRPG.HOWMANYDICE ('How Many Base Die?' -> 有多少基地死亡？) is on the brief's named-defect list and is NOT in my slice - the controller must confirm the rolls slice has it."
+  },
+  {
+   "decision": "Claimed 14 ship-adjacent keys anyway: SHIP-ARMOR, ARMAMENTS, Armament, Bonus, DAMAGE, Offensive, Defensive, Contact, Surface, REPAIRROLL, ComponentDamagefor, SelectFirer, MAJOR-/MINOR-COMPONENT-DAMAGE.",
+   "reason": "They are pure weapon/armor/damage/range words that must read the same at every scale - e.g. provenance's Armor entry names SHIP-ARMOR=盔甲 specifically as a stratum-B residue contradicting ALIENRPG.Armor=护甲. This is the source of most of my collision with lang-ship; where lang-ship disagrees I recommend deferring to it on the sheet-chrome ones."
+  },
+  {
+   "decision": "Dropped the leading space from ALIENRPG.targetRange (' Range to Target' -> 目标距离).",
+   "reason": "handlebars.mjs:28 capitalise does charAt(0).toUpperCase(), a no-op on both a space and a Chinese character, so the leading space is pure upstream noise in a form-group label. My self-gate flags it as the one intentional whitespace divergence."
+  },
+  {
+   "decision": "KEPT the leading space on ALIENRPG.healthDamage (' HEALTH Damage' -> ' 生命值伤害').",
+   "reason": "YZEDiceRoller.mjs:263 splices it inside a <span> where the space is doing spacing work. But lang-ui claims the same key as '点生命值伤害' with no leading space, and at :268 the call site is sTotal + ' ' + localize(...) - so lang-ui's version renders '3 点生命值伤害' while mine renders '3  生命值伤害' with a double space. I recommend the controller take lang-ui's value here; mine is the more conservative one, theirs is the better one."
+  },
+  {
+   "decision": "Used full-width parentheses with ASCII digits and ASCII +/- inside for the cover and size modifiers: 无掩护（0）半掩护（-2）全掩护（-3）普通（0）大型（+2）小型（-2）仔细瞄准？（+2）瞄准弱点（-2）.",
+   "reason": "The parentheses sit directly against Chinese characters, where full-width is conventional. Flagging it because it is a house-style call the controller may want to normalise across slices - no code compares these values (config.mjs target_cover / size_modifiers store id and value separately from label)."
+  },
+  {
+   "decision": "Wrote all 100 keys including the 20 where I adopt the shipped value unchanged.",
+   "reason": "The module is a key-for-key override channel. An omitted key silently inherits the upstream value, which works today but has no defence against upstream drift - and the notes file records for each of the 20 that I checked it rather than skipped it."
+  },
+  {
+   "decision": "Kept ALIENRPG.Shift English despite the glossary saying otherwise.",
+   "reason": "glossary_alien.byrole.json's lang.value role for Shift says emit 班, and it is right on the mechanics: actor.mjs:1890 compares a BARE literal with no localize(), and :1891 uses ALIENRPG.Shift purely as OUTPUT, so translating it is safe in isolation. I followed the brief's constraint 1 instead and recorded the disagreement in the file, in the notes, and in open_issues rather than silently picking a side."
+  },
+  {
+   "decision": "Fixed a number, not just wording, in ALIENRPG.RollManShipMinorCrit.",
+   "reason": "English is 'Number must be between 1 and 66'; the shipped Chinese says 1 和 44. The Spaceship Minor Component Damage table is d66. This is a content error in the shipped translation, not a style one."
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Adjacent",
+   "proposed": "紧邻",
+   "why": "The Evolved edition's rename of the Engaged band (config.mjs:409, :424, :476 - evolved_weapon_range_list, evolved_vehicle_weapon_range_list, evolved_ship_weapon_range_list). Absent from glossary_alien.json, from .pending.json, and from .provenance.json. I deliberately did NOT reuse 接战 because that is pinned to Engaged and Adjacent is a positional, not a combat-state, description. This is the band a Chinese player sees most often in Evolved worlds, so it deserves a ruling rather than my default."
+  },
+  {
+   "en": "Contact",
+   "proposed": "接触",
+   "why": "Vehicle weapon range band 1 (config.mjs:417, value '2') and gRng case '6' (handlebars.mjs:120). Absent from all three glossary artifacts. Literal rendering; 抵近 or 贴近 are alternatives if the controller wants something less clinical."
+  },
+  {
+   "en": "Surface",
+   "proposed": "地表",
+   "why": "Ship weapon range band 7 (config.mjs:473 and :481) and gRng case '7' (handlebars.mjs:123) - firing from orbit at a planetary surface. Absent from all three glossary artifacts."
+  },
+  {
+   "en": "Full Auto",
+   "proposed": "全自动",
+   "why": "Weapon property (item-weapon.hbs:31) plus the attack-dialog checkbox 'Firing Full Auto?' (ALIENRPG.firingFullAuto). Not in the glossary. Standard rendering, but it is a weapon property name that will also appear in pack item text, so it should be on the spine before Phase 2."
+  },
+  {
+   "en": "Reloads",
+   "proposed": "备弹",
+   "why": "Two keys carry this English value and the key NAMES are misleading: ALIENRPG.Rounds and ALIENRPG.Rds are BOTH en='Reloads'. item.mjs:628 concatenates localize('ALIENRPG.Rounds') + ' ' + localize('ALIENRPG.Supply'), and Supply=余量检定 per the glossary, so the rendered string is 备弹 余量检定. The shipped values are 弹药 (collides with ALIENRPG.ammo) and 重新加载 (a verb, unusable as a count column header). Needs a spine entry because the weapon item template will repeat it."
+  },
+  {
+   "en": "Roll (as a UI action button, vs. Roll as the noun)",
+   "proposed": "投骰 for the button role; 检定 stays the noun",
+   "why": "glossary_alien.json pins Roll=检定 and provenance justifies it (en-gated 10 vs 滚动 9, with every 滚动 hit stratum-B MT). That is right for the noun. But ALIENRPG.dialog.roll is the literal 'ROLL' confirm button, and ALIENRPG.DialRoll (not my slice) is the same problem. This is exactly the shape glossary_alien.byrole.json exists to express - I propose a role split so the rolls slice and I do not diverge. I used 投骰 for dialog.roll pending the ruling."
+  },
+  {
+   "en": "Fatal / Time Limit / Healing Time / Injury / Effect",
+   "proposed": "致命 / 时限 / 治愈时间 / 伤势 / 效果",
+   "why": "These five are the crit chat-card field headers (crit-roll-character.hbs:12/16/20/24/28) AND they mirror the FATAL: / TIME LIMIT: / HEALING TIME: / INJURY: / EFFECTS: labels inside the RollTable result text. The lang values are display-only and safe now, but in Phase 2/5 the table cells must be rewritten to match, and that is a hard sync point. The first four I adopted from stratum A; Effect I changed 影响->效果 because a field header needs the noun. None of the five is on the spine - they should be before the tables are touched."
+  },
+  {
+   "en": "Offensive / Defensive (spaceship weapon class)",
+   "proposed": "攻击型 / 防御型",
+   "why": "config.mjs:464-465 ship_weapon_type_list. Not on the spine, and lang-ship independently chose 进攻型 / 防御型 - an immediate live divergence that proves the term needs a ruling rather than two agents' defaults."
+  },
+  {
+   "en": "Minor / Major Component Damage",
+   "proposed": "次要部件损坏 / 主要部件损坏",
+   "why": "config.mjs:149 and :155 status icons, plus crit_list[0]/[1] at :508-509. Not on the spine. The shipped pair 轻微/主要 is not parallel; lang-ship independently chose 轻微/重大 with 损伤 instead of 损坏. Whichever wins, ALIENRPG.ComponentDamagefor must use the same head word. Note these lang values are sheet labels only - the RollTable names 'Spaceship Minor/Major Component Damage' stay frozen English per the register."
+  }
+ ],
+ "open_issues": [
+  "HIGHEST PRIORITY - SLICE COLLISIONS, DETECTED LIVE. lang-ship.json and lang-ui.json appeared in 6-工作区/phase1/ while I worked. 25 distinct keys are claimed by two slices, 17 with disagreeing values, 2 three-way. apply_lang.py is last-write-wins per key, so assembling in arbitrary order silently picks a winner. lang-ship (11 overlap, 5 disagree): ARMAMENTS 武器装备/武装 · ComponentDamagefor 部件损坏，目标/部件损伤对象 · MAJOR-COMPONENT-DAMAGE 主要部件损坏/重大部件损伤 · MINOR-COMPONENT-DAMAGE 次要部件损坏/轻微部件损伤 · Offensive 攻击型/进攻型 (agreeing: Defensive, REPAIRROLL, RollManShipMajorCrit, RollManShipMinorCrit, SHIP-ARMOR, SelectFirer). lang-ui (16 overlap, 12 disagree): ArmorDoubled 护甲加倍/护甲翻倍 · CombatantReroll 重投先攻/重掷先攻 · NoCharCrit 没有重伤表/找不到重伤表 Critical injuries · NoSynCrit 没有合成人重伤表/找不到合成人重伤表 Critical Injuries on Synthetics · RollManCharCrit 输入 D66 点数/输入 D66 数值 · RollManCrit 手动进行重伤检定/手动指定重伤 · RollManShipMajorCrit · RollManShipMinorCrit · RollManSynCrit 输入 D6 点数/输入 D6 数值 · healthDamage ' 生命值伤害'/'点生命值伤害' · hideInitChatHint (trailing period only) · noAmmo 你需要重新装填！！/你需要重新装弹！！ (agreeing: OutofRange, SwapInitiative, ammoConcerved, hideInitChat). Three-way: RollManShipMajorCrit, RollManShipMinorCrit. MY RECOMMENDATIONS where one side is clearly better rather than merely different: take lang-ui's healthDamage 点生命值伤害 (the call site at YZEDiceRoller.mjs:268 already adds a space, so mine produces a double space and theirs renders '3 点生命值伤害'); take lang-ui's NoCharCrit/NoSynCrit with the English table-name tail (the GM needs the exact English name to import the table, and those table names stay English by design - see ALIENRPG.CriticalInjuries in keep_english); defer ARMAMENTS/ComponentDamagefor/MAJOR-/MINOR-COMPONENT-DAMAGE/Offensive to lang-ship, which owns the spacecraft sheet; keep RollManShipMinorCrit either way since both slices independently fixed the 44->66 number bug.",
+  "ALIENRPG.Shift - the brief's constraint 1 and glossary_alien.byrole.json disagree, and I followed the brief. byrole's lang.value role says emit 班 and is mechanically correct: actor.mjs:1890's testArray[9] === \"Shift\" is a bare literal with no localize(), and :1891 uses ALIENRPG.Shift purely as OUTPUT, so this one key could be translated today with zero risk. I kept it English so the 8-key group stays one lockstep unit that flips with the tables in Phase 5. If the controller prefers byrole, translating it is safe - but it must simultaneously be removed from lang_keep_english.json's keep_english list, or apply_lang's 'translation equals English' check will stop guarding it.",
+  "Keeping ALIENRPG.None English has a visible cost beyond the crit path: config.mjs:484 uses it as the label for ship_weapon_targetmod_list[1], so the spaceship target-modifier dropdown reads 'None' in English. Same shape for ALIENRPG.CriticalInjuries - config.mjs:143 uses it as a status-effect label, so the 'roll a crit' token-HUD icon tooltip reads 'Critical injuries'. Both are the documented price of the runtime lookups; recording them so nobody files them as bugs later.",
+  "UPSTREAM BUG, not ours: ALIENRPG.Close is referenced at config.mjs:468 (ship_weapon_range_list key 6) but does not exist in en.json or cn.json - re-derived with grep, zero hits in either lang file. The classic ship-weapon range dropdown therefore displays the raw string 'ALIENRPG.Close'. I did NOT add the key: apply_lang.py gate 1 rejects any key absent from en.json, and adding one would take our module outside the key-for-key override contract. The inconsistency is upstream's own - handlebars.mjs:120 maps the same band 6 to ALIENRPG.Contact, so the sheet display and the dropdown disagree even in English. Worth an upstream report (PROJECT.md 7.4).",
+  "UPSTREAM i18n GAP: enricher.mjs:16 and :34 build the draw-from-table tooltip as `Draw from ${tableName}. <br> ${localize('ALIENRPG.dialog.Tooltip-Rollontable')}` - the 'Draw from ...' half is a hardcoded English literal with no key, so it cannot be translated from our side at all. Only the second half is localizable, which is what I translated.",
+  "Three of the eight ALIENRPG.dialog.* keys are DEAD in 4.1.13 - dialog.roll, dialog.howManyDice, dialog.Tooltip-ManualRoll have zero references (grep over *.mjs/*.js/*.hbs/*.html found only ok, cancel, Modifier, Rollontable, Tooltip-Rollontable, all in enricher.mjs). I translated them anyway so the module is correct if upstream wires them up. Recorded per-key in the notes.",
+  "Five more keys in my slice are dead in 4.1.13 and translated defensively, flagged individually in the notes: ALIENRPG.Weapons (only InventoryWeaponsHeader is live), ALIENRPG.Armament, ALIENRPG.NotActive, ALIENRPG.CombatantUpdate (CBTracker.mjs:8 now uses core's COMBAT.CombatantUpdate), ALIENRPG.CombatantRemove (CBTracker.mjs:43, commented out). METHOD NOTE: my first grep missed ALIENRPG.SwapWith because I only searched *.hbs - it is live in templates/dialog/switch-initiative.html, which is .html not .hbs. Any live/dead audit of this system MUST include *.html; templates/actor/tabs/ and templates/actor/crt/ hold .html files too.",
+  "ALIENRPG.Days ('Days') is dead and unclaimed by me. It is not obviously combat vocabulary despite looking crit-adjacent - the crit healing-time ' days' tail comes from the RollTable cell (re-emitted verbatim as regex group 2 at actor.mjs:1894), not from this key. Someone should still own it.",
+  "Not verified by me because it is out of scope for a lang-only phase: my Chinese values for Fatal / TimeLimit / HealTime / Injury / Effect are display-only TODAY, but they become a hard byte-level sync point the moment the crit RollTables are translated in Phase 2/5. The table's structural invariant (ASCII colon-plus-space inside each <strong>, '<br />' spelled exactly that way, the double '<br /><br />' in spaceship rows) is what produces the 10-element array - see DO-NOT-TRANSLATE.json crit_parse_lockstep. Nothing I wrote touches that, but whoever writes the tables must read my notes file for the header wordings."
+ ],
+ "measurements": [
+  {
+   "what": "en.json flattened leaf keys (re-derived, not taken from the brief)",
+   "value": "590"
+  },
+  {
+   "what": "cn.json flattened leaf keys (re-derived)",
+   "value": "511 - 93 en keys absent from cn, 14 cn-only dead keys (the ACTOR.Type* / ITEM.Type* v10 namespace)"
+  },
+  {
+   "what": "keys in the lang-combat slice",
+   "value": "100"
+  },
+  {
+   "what": "changed vs shipped cn.json / unchanged (stratum A adopted) / deliberately English",
+   "value": "80 / 20 / 9"
+  },
+  {
+   "what": "apply_lang.py --dry against the hub repo",
+   "value": "applied 100 / rejected 0 / cleaned 0 - 9 warnings, all 'no CJK' on keep_english keys (the 8 crit-parse keys + CriticalInjuries)"
+  },
+  {
+   "what": "independent self-gate (order-sensitive HTML tag sequence, placeholder parity, frozen-literal cross-check, never_write, full-width colon, lockstep whitespace hygiene)",
+   "value": "0 failures; 1 intentional warning (targetRange leading space dropped). 55 frozen English literals extracted from DO-NOT-TRANSLATE.json for the cross-check, 0 collisions."
+  },
+  {
+   "what": "scan_crit_lockstep.py after applying the slice to a throwaway repo",
+   "value": "checked=8 violations=0 - LANG_ok 8 / LANG_seen 8"
+  },
+  {
+   "what": "lang_gap.py after applying the slice to a throwaway repo",
+   "value": "NEW 489, DRIFT 0, UNTRANSLATED 0, STALE 0, UNREACHABLE 0, NEVER-WRITE 1 - 590 minus 100 minus 1 = 489 checks out, and UNREACHABLE 0 confirms flat dotted keys (no nested-shadow trap)"
+  },
+  {
+   "what": "slice overlap with sibling phase-1 slices",
+   "value": "lang-core 0 / lang-ship 11 (5 disagree) / lang-ui 16 (12 disagree); 25 distinct double-claimed keys, 17 with a value disagreement, 2 three-way"
+  },
+  {
+   "what": "duplicate Chinese values inside my own slice",
+   "value": "5 groups, all legitimate (same English word in different casings or abbreviations): 伤害<-Damage/Dam/DAMAGE, 备弹<-Rounds/Rds, 护甲<-Armor/InventoryArmorHeader/SHIP-ARMOR, 武器<-Weapons/InventoryWeaponsHeader, 武器装备<-Armament/ARMAMENTS. 近战 appears 0 times, as required."
+  },
+  {
+   "what": "hub deliverable lang/cn.json after my run",
+   "value": "still empty object, 3 bytes, mtime 2026-08-29 06:41:31 - untouched, as required"
+  }
+ ]
+}

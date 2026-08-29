@@ -1,0 +1,108 @@
+{
+ "summary": "The register and both gates already existed from a prior pass (files written 06:52-06:57 today), so this run was a full adversarial re-derivation from source rather than a from-scratch build. Every entry was re-measured against systems/alienrpg 4.1.13, both add-on modules 1.0.2, and the three raw pack dumps. Most of the register held up exactly: all 111 file:line citations resolve, and independent recomputation reproduced the 9 name lookups, 10 RollTable literals, 3 folder names, 12 T-EXACT stunt names, 60 actor table refs (30 actors, 14 distinct values, 32 'None' occurrences across 29 actor records / 25 unique doc ids), and the 33+3+42 enricher links to the exact counts already recorded. Three defects were found and fixed. C1 (documentation): system.welcomeJournalEntry.declared_at cited init.mjs:11, which is the commented-out predecessor line; the live declaration is line 14 - the only one of 111 citations landing on the wrong line. C2 (material): the corerules.welcomeJournalEntry entry had the NBSP claim exactly inverted. It froze the ASCII-space form, set verified_target_exists false, and asserted the lookup was already broken upstream. A byte dump proves the JS literal at modules/alien-evolved-corerules/module/init.js:11 carries U+00A0 in all five gaps, byte-identical to the JournalEntry - the lookup is live. The old entry would have frozen a string that never matches the real Babele key, and its \"already dead, don't bother\" framing would have licensed translating that journal name and genuinely breaking the Core Rules post-import flow. C3 (gate correctness, caught by the specificity fixture): replaying the actor.mjs parse pipeline over all 144 shipped crit rows found a row LONGER than expected - EV - Critical Injuries 11-11 ends with a trailing br after an empty HEALING TIME cell, giving 11 elements in both packs. The register recorded only the two 9-element corerules rows, and the gate tolerated only expected-1, so it raised SPLIT_SHAPE on a faithful translation of upstream. Both were fixed. Two further gate improvements: the crit gate governed only 7 lang keys (ALIENRPG.Shift, the output key, was skipped) and now governs 8 as specified; and the ref check pulled actor records without pack scoping, which double-reported findings for the 4 creature actors that exist in both packs with the same _id and risked a genuine cross-pack false positive. Both gates were then tested across the full matrix: day-one (empty compendium/cn) checked=0 and checked=8, exit 0; specificity against a full plausible translation of all three packs built from compendium/en, checked=123 and 132, violations 0, exit 0; sensitivity against the same translation with 17 deliberate corruptions, 14 and 9 violations, exit 1, with all 17 injections producing at least one finding.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json",
+   "bytes": 115810,
+   "what": "The hard register. 9 sections: name_lookups (9), rolltable_names (10 + 1 prefix filter), folder_names (3), item_names (2 + the 'None' sentinel), exact_match_to_lang (12 T-EXACT stunt names), crit_parse_lockstep (10 cases over 8 lang keys + the bare 'Shift' literal, with U+2013 emitted as \\u escapes and per-row upstream split-length exceptions), actor_table_refs (60 refs across all three packs), enricher_labels (33 TEXTDRAW + 3 DRAW + 42 explicit-label UUID links), heading_anchor_hashes (346 data-hash anchors - an extra section beyond the 7 requested). Plus upstream_defects, corrections_2026_08_29 (C1/C2/C3) and gate_tests_2026_08_29. Written with ensure_ascii so U+00A0 and U+2013 survive as \\u escapes."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_name_lookup_traps.py",
+   "bytes": 25212,
+   "what": "Frozen-string gate. Reads the register, walks compendium/cn/*.json in all three repos, fails on FROZEN_TRANSLATED / EXACT_MISMATCH / TABLE_REF_DANGLING. Edited this run: actor records are now scoped to the ref's own pack (removes duplicate reports for the 4 creature actors shared between starterset and corerules, and removes a cross-pack false-positive risk)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_crit_lockstep.py",
+   "bytes": 20597,
+   "what": "Crit-table lockstep gate. Replays the actor.mjs strip/normalise/split pipeline over translated crit rows and asserts indices 3/5/9 against localize(key)+suffix. Edited this run: now governs 8 lang keys instead of 7 (adds ALIENRPG.Shift from cases[*].output_key), tolerates the measured per-row upstream split lengths from rows_with_nonstandard_split instead of only expected-1, and fixes an operator-precedence bug that rendered the ROLL_SHAPE message as '以 [[2d6 开头]]'."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/build_fixtures.py",
+   "bytes": 9800,
+   "what": "Scratchpad fixture builder. Produces a GOOD fixture (a full plausible cn translation of all three packs derived from compendium/en, honouring every register rule) and a BAD fixture (the same with 17 asserted corruptions), plus a matching lang/cn.json. Injections assert that the replacement actually changed the string, after three silently no-oped on the first run."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Verify and correct the existing register rather than rebuild it",
+   "reason": "DO-NOT-TRANSLATE.json and both gates already existed from a run earlier today. Rebuilding would have discarded correct work and lost the audit trail; an independent re-derivation that diffs against what is there is a stronger test and is what the task's 'do not trust the survey's line numbers' instruction actually asks for."
+  },
+  {
+   "decision": "Report the measured 'None' counts (32 occurrences / 29 actor records / 25 unique doc ids) rather than the task's stated 26",
+   "reason": "The task said to measure from the dumps. Every counting basis I tried gives 29 or 25, never 26. The register records all three numbers so the next reader can see which basis is meant."
+  },
+  {
+   "decision": "rolltable_names = 10, not the survey's 9 or the verifier's 11",
+   "reason": "10 distinct string literals reach game.tables.getName(). The i18n-derived legs (ALIENRPG.CriticalInjuries, ALIENRPG.EVCriticalInjuries) resolve to two of those same 10 in en, so counting them separately double-counts; the 'Critical Injuries' startsWith prefix filter at rollTableData.mjs:27 is a different mechanism and is recorded separately."
+  },
+  {
+   "decision": "folder_names = 3, not 2",
+   "reason": "The owner's note says 2 hard-coded Folder names. Live code names three: 'Alien Tables' (init.mjs:49), 'Alien Creature Tables' (rollTableData.mjs:7) and 'Alien Mother Tables' (rollTableData.mjs:24). 'Alien Sub-Tables' appears only in the dead migratefolders.js and is fully translatable."
+  },
+  {
+   "decision": "Excluded module/actor/old-*.js and both migratefolders.js from the register",
+   "reason": "They contain more English name lookups but are not in the live ES-module import graph. system.json esmodules is only module/alienrpg.mjs; the only reference to migratefolders is a commented-out import at init.mjs:2. Recorded as upstream_defects/dead-source-files so the exclusion is auditable."
+  },
+  {
+   "decision": "Kept heading_anchor_hashes as an extra 8th section",
+   "reason": "346 pre-baked in-prose anchors carry data-hash slugs derived from English heading text and there are zero explicit heading ids in the corpus. It is the same class of silent break as the requested sections and was not in the seven the task listed."
+  },
+  {
+   "decision": "Built a full GOOD fixture rather than only testing the corrupted case",
+   "reason": "Sensitivity alone would not have caught C3. The false-positive SPLIT_SHAPE on EV - Critical Injuries 11-11 only surfaced because a faithful translation of upstream was run through the gate and was expected to come back clean."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Day-one: real project, compendium/cn empty",
+   "value": "scan_name_lookup_traps checked=0 violations=0 exit=0; scan_crit_lockstep checked=8 violations=0 exit=0"
+  },
+  {
+   "what": "Specificity: GOOD fixture (full plausible translation of all three packs)",
+   "value": "scan_name_lookup_traps checked=123 violations=0 exit=0; scan_crit_lockstep checked=132 violations=0 exit=0, all 144 crit rows parsed, 4 known upstream-deviating rows tolerated"
+  },
+  {
+   "what": "Sensitivity: BAD fixture, 17 injected corruptions",
+   "value": "scan_name_lookup_traps checked=124 violations=14 exit=1 (FROZEN_TRANSLATED=9 EXACT_MISMATCH=1 TABLE_REF_DANGLING=4); scan_crit_lockstep checked=129 violations=9 exit=1 (CELL_MISMATCH=5 LANG_BAD=1 SPLIT_SHAPE=1 ROLL_SHAPE=1 SHIFT_TRANSLATED=1); all 17 injections produced at least one finding"
+  },
+  {
+   "what": "Register citations re-resolved against source",
+   "value": "111 distinct file:line citations, 0 missing or out of range, 1 landing on the wrong line (fixed as C1)"
+  },
+  {
+   "what": "EN DASH proof at actor.mjs:1906 and :1912",
+   "value": "codepoints ['0x22','0x2c','0x20','0x2013','0x31','0x20','0x22','0x3a'] - the suffix is ', –1 ', U+2013 not U+002D"
+  },
+  {
+   "what": "NBSP proof at corerules init.js:11",
+   "value": "b'export const welcomeJournalEntry = \"CORE RULES\\xc2\\xa0-\\xc2\\xa0HOW\\xc2\\xa0TO\\xc2\\xa0USE\\xc2\\xa0THIS\\xc2\\xa0MODULE\"' - matches JournalEntry yYRGRr4jU0cWDpFm byte for byte"
+  },
+  {
+   "what": "Crit parse pipeline replayed over all shipped rows",
+   "value": "144 rows (2 tables x 2 packs). Split lengths: 10 x140, 11 x2, 9 x2. index[3]: 'Yes ' x46, 'No ' x44, ' ' x36, 'Yes, –1 ' x10, '' x6, 'Yes, –2 ' x2. index[9]: '[[1d6]] days' x42, '' x32, '[[2d6]] days' x32, '[[3d6]] days' x18, '[[4d6]] days' x8, 'Permanent' x4, 'Shift' x4, '[[1d6]]  days' x2 (double space)"
+  },
+  {
+   "what": "actor_table_refs across all three packs",
+   "value": "60 refs on 30 actors (system pack has 0 actors; starterset 5 creatures, corerules 25). 14 distinct values. 32 'None' occurrences = 29 cTables + 3 rTables, held by 29 actor records / 25 unique document ids. 0 cross-pack refs"
+  },
+  {
+   "what": "enricher links",
+   "value": "33 @TEXTDRAW (29 unique targets, 23 labels currently equal to their table name) + 3 @DRAW, all corerules; 42 @UUID with explicit labels = 39 Item (all on 'Alien Evolved Player Guide' / '5. GEAR & TECH', 38 unique items, all labels currently equal the item name) + 2 JournalEntry + 1 Actor"
+  },
+  {
+   "what": "content-link class split",
+   "value": "corerules class=\"content-link\" x265, starterset class=\"ev-content-link\" x81, plus corerules arpglink x63; all 346 content-link anchors carry data-hash (44 distinct in starterset, 109 in corerules), and there are 0 explicit heading ids anywhere in the corpus"
+  },
+  {
+   "what": "Table presence per pack (verifies every present_in claim)",
+   "value": "'Critical Injuries' (capital I) and 'critical injuries on synthetics' exist in NO pack - dead legs of the fallback chains; 'Critical injuries' and 'Critical Injuries on Synthetics' and 'EV - Critical Injuries' in starterset+corerules; 'Spaceship Minor/Major Component Damage' corerules only; 'Panic Table' system+corerules"
+  }
+ ],
+ "open_issues": [
+  "Conflict the owner should be aware of on the 12 T-EXACT stunt names: templates/item/item-header.hbs:45 renders the skill-stunts item sheet as {{selectOptions config.skills_list selected=item.name nameAttr='key'}}, and those config.mjs keys are the ENGLISH skill names ('Heavy Machinery', 'Close Combat', ...). Setting the item name to the Chinese lang value (which decision 4 requires, and which _stuntBtn's game.items.getName(dataset.pmbut) needs) makes that dropdown show nothing selected. Cosmetic vs. functional, and T-EXACT is the right call, but it is a real visible consequence.",
+  "'Critical Injuries on Xenomorphs' cannot take the standard T-BILINGUAL form. cTableget() filters folder.contents with name.startsWith('Critical Injuries'), so '中文 English' would drop it out of the creature sheet's crit-table dropdown. It needs the English prefix at offset 0, so it is effectively T-FROZEN-PREFIX rather than T-BILINGUAL. The register records it under prefix_filters and the gate enforces it, but the naming policy should say so explicitly.",
+  "Real upstream crash, unrelated to translation but worth an alienrpg-cn runtime patch: corerules 'Critical injuries' rows 11-11 and 12-12 write '<b>HEALING TIME:</b>' with no space after the colon, so the split yields 9 elements, testArray[9] is undefined, and actor.mjs:1889 reads .length off it - uncaught TypeError. Rolling 11 or 12 on that table in corerules dies today. The starterset copy of the same rows has the space.",
+  "The macros 'Alien - Roll on selected Mother table V10' and 'Alien - Roll on selected Creature table V10' compare t.folder.name === 'Alien Mother Tables' / 'Alien Creature Tables' inside their command bodies, i.e. the two frozen folder names have call sites inside pack content, not just in system JS. The Babele extract does not currently expose macro command, so nothing translates it today - but any future mapping that touches Macro.command must treat those two literals as frozen.",
+  "measured_against.system.live_import_graph_files = 62 (and 3 per add-on module) was carried over from the earlier pass and not re-walked this run. Everything else in the register was re-derived. Worth re-running the graph walk if upstream ships a new version."
+ ]
+}

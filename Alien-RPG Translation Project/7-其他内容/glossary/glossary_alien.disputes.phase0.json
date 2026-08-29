@@ -1,0 +1,57 @@
+{
+ "_meta": {
+  "artifact": "glossary_alien.disputes.phase0.json",
+  "what": "FROZEN ARCHIVE of the Phase-0 (v0.2 / v0.2.1) dispute set, kept so that the v1.0 build can quote what each closed dispute USED to say without depending on the live file it overwrites. Created 2026-08-29 during the v1.0 rebuild, after the first build run consumed and replaced glossary_alien.disputes.json in place.",
+  "do_not_edit": "Append-only history. The live file is glossary_alien.disputes.json.",
+  "count": 9,
+  "spine_at_the_time": "zh.wikipedia (level 1 of the OLD priority list). Superseded 2026-08-29 by the owner's settled ladder in PROJECT.md §1.4."
+ },
+ "disputes": {
+  "D1-panic-roll": {
+   "en": "Panic Roll",
+   "provisional_cn": "恐慌检定",
+   "why_open": "cn.json disagrees with itself: its UI keys use 恐慌 for Panic while its human-translated panic-table prose renders the phrase 'Panic Roll' as 混乱检定. One of the two has to give."
+  },
+  "D2-engaged": {
+   "en": "Engaged",
+   "provisional_cn": "接战",
+   "why_open": "cn.json uses ONE string, 近战, for two different game terms: the Engaged range band and the Melee weapon type. In the weapon-type dropdown and the range dropdown the player sees the same word for two unrelated things."
+  },
+  "D3-stress-level": {
+   "en": "Stress Level",
+   "provisional_cn": "压力水平",
+   "why_open": "Both renderings are in cn.json, both in stratum A, and both in stratum B. There is no clean stratum split to arbitrate on — only a count."
+  },
+  "D4-health": {
+   "en": "Health",
+   "provisional_cn": "生命",
+   "why_open": "Three renderings coexist in one file. 健康 actually has the higher English-gated count, so the provisional winner is chosen on stratum, not on count."
+  },
+  "D5-synthetic": {
+   "en": "Synthetic",
+   "provisional_cn": "生化人",
+   "why_open": "The system file and the film reference works disagree, and the subtitle corpus — cited by the survey as supporting 生化人 with 13 hits — does not actually support it once the count is English-gated."
+  },
+  "D6-queen": {
+   "en": "Queen",
+   "provisional_cn": "女王",
+   "why_open": "The corpus splits by film, and English-gating narrows the margin to 4-3. zh.wikipedia breaks the tie for the compound (异形女王) but its own 异形2 article uses a third form."
+  },
+  "D7-weyland-yutani": {
+   "en": "Weyland-Yutani",
+   "provisional_cn": "韦兰-尤坦尼集团",
+   "why_open": "Three renderings from three registers, and the only one attested in this project's own corpus is the one nobody proposes."
+  },
+  "D8-shift": {
+   "en": "Shift",
+   "provisional_cn": "轮班",
+   "why_open": "Shift is BOTH a time unit the rules count in AND a bare English literal the Critical-Injury heal-time parser compares against. cn.json renders the time unit two different ways in two different places while leaving the parser literal English.",
+   "known_defect_in_this_archived_text": "Its do_not_confuse_with field cited actor.mjs:1888 for the bare 'Shift' literal. The literal is at :1890; :1888 is the ALIENRPG.Permanent comparison. The same wrong anchor had already been corrected in the provenance file and was left uncorrected here — which is why the v1.0 build derives every anchor from source instead of quoting one."
+  },
+  "D9-armor-piercing": {
+   "en": "Armor Piercing",
+   "provisional_cn": "破甲",
+   "why_open": "The provisional value overrides a lang value that is not obviously wrong, only wrong in part of speech. Any override of a shipped string is an owner call."
+  }
+ }
+}

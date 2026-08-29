@@ -1,0 +1,440 @@
+{
+ "unit": "SYS-J3",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\pages\\SYS-J3.cn.html",
+ "summary": "译完 SYS-J3（Synthetics / Creatures / Spaceships / Vehicles 四张卡的逐字段走查，byte 16914–32097）。原文 15,183 原始字符 / 11,624 可见，译文 7,787 原始 / 3,707 可见（CJK 2,925）。结构逐标签对齐：br 149、p 86、strong 50、li 26、span 26、h3 20、div 18、h2 16、h1 8、img 5、ul 6、pre/code/h5 各 2——多重集与有序骨架都与英文完全相等，13 个 `&nbsp;<span class=\"…\">&nbsp;</span>&nbsp; ` 图片占位块逐字节照抄（39 个 U+00A0 一个不差）。所有 UI 标签都回查 1-系统汉化插件/lang/cn.json 并逐字节采用（船员/船体/伤害/护甲/武装/传感器操作员/车长/储物箱/投骰/岗位/模块-升级/太空战阶段…），另核对了 systems/alienrpg 的 hbs 模板与 config.mjs 的 crewPositionFlagsLocalized，确认飞船与载具两套岗位走的是不同 lang 键（CAPTAIN=船长 vs CrewCommander=车长；CREW=船员 vs Actor.Tabs.Crew=乘员）。23 个标题全部带上英文原 slug 的显式 id（按 foundry.mjs:685 的非 strict slugify 推导，括号和斜杠都保留，如 `header-(1)`、`modules/upgrades-tab`）。T-FROZEN 全部原样：Alien Tables&gt; Alien Creature Tables、Alien Mother Tables×2、Critical Injuries on Synthetics、前缀 Critical Injuries（含 h5 段里带尾空格的「Critical Injuries 」）、None 哨兵、物品类型 id critical-injury。收尾时锚点单元 SYS-J2 已落盘，据此把 Header→顶栏（1）、重伤区标题改成「重伤 Critical injuries」双语形，并按 lang 的 EditItem/LEFTCLICKTOROLL 把 22 处点击统一成「单击/左键单击/右键单击」。只写了自己单元的 .cn.html，未碰 compendium/cn。",
+ "chars_en": 15183,
+ "chars_cn": 7787,
+ "frozen_kept": [
+  "Alien Tables&gt; Alien Creature Tables",
+  "Alien Mother Tables",
+  "Critical Injuries on Synthetics",
+  "Critical Injuries（前缀过滤器，出现 2 次，其中 h5 段保留尾空格「Critical Injuries 」）",
+  "None（ALIENRPG.None 哨兵）",
+  "critical-injury（物品类型 id）",
+  "Critical injuries（ALIENRPG.CriticalInjuries 的 lang 值，即卡上那一区的现行英文标题）",
+  "&lt;b&gt; / &lt;/b /&gt;（代码样例里的实体，含上游写坏的闭合标签）",
+  "1d6 / D6",
+  "Space Combat Panic Roll（英文名保留在双语形的后半）"
+ ],
+ "label_lookups": [
+  {
+   "english": "Character sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Synthetic sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Synthetic",
+   "used": "合成人卡"
+  },
+  {
+   "english": "Vehicle Sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Vehicle",
+   "used": "载具卡"
+  },
+  {
+   "english": "Synthetics",
+   "lang_key": "ALIENRPG.Synthetic",
+   "used": "合成人"
+  },
+  {
+   "english": "Creatures",
+   "lang_key": "TYPES.Actor.creature",
+   "used": "生物"
+  },
+  {
+   "english": "Spaceships",
+   "lang_key": "TYPES.Actor.spacecraft",
+   "used": "星际飞船"
+  },
+  {
+   "english": "Vehicles",
+   "lang_key": "TYPES.Actor.vehicles",
+   "used": "载具"
+  },
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Radiation",
+   "lang_key": "ALIENRPG.Radiation",
+   "used": "辐射"
+  },
+  {
+   "english": "Conditions",
+   "lang_key": "ALIENRPG.Conditions",
+   "used": "状态"
+  },
+  {
+   "english": "Push",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "\"Imitate Human Panic and Push Button\" / \"Human Panic, Push...\" checkbox",
+   "lang_key": "ALIENRPG.SynthStress",
+   "used": "模拟人类的恐慌、追骰等"
+  },
+  {
+   "english": "General tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.General",
+   "used": "通用（页签）"
+  },
+  {
+   "english": "Skills tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Skills",
+   "used": "技能（页签）"
+  },
+  {
+   "english": "Inventory tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Inventory",
+   "used": "物品栏（页签）"
+  },
+  {
+   "english": "Notes tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Notes",
+   "used": "笔记（页签）"
+  },
+  {
+   "english": "Modules/Upgrades tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.'Modules/Upgrades'",
+   "used": "模块/升级（页签）"
+  },
+  {
+   "english": "Image tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Image",
+   "used": "图片（页签）"
+  },
+  {
+   "english": "Space Combat Phases tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.'Space Combat Phases'",
+   "used": "太空战阶段（页签）"
+  },
+  {
+   "english": "Crew tab (vehicle sheet)",
+   "lang_key": "ALIENRPG.Actor.Tabs.Crew",
+   "used": "乘员（页签）"
+  },
+  {
+   "english": "Signature Item",
+   "lang_key": "ALIENRPG.SignatureItem",
+   "used": "标志性物品"
+  },
+  {
+   "english": "Critical Injuries section",
+   "lang_key": "ALIENRPG.CriticalInjuries",
+   "used": "重伤 Critical injuries（lang 值是英文 Critical injuries，见 open_issues）"
+  },
+  {
+   "english": "\"Roll Crit\" button",
+   "lang_key": "ALIENRPG.RollCrit",
+   "used": "重伤检定"
+  },
+  {
+   "english": "Critical Injury item",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "modifiers tab (on the injury item)",
+   "lang_key": "ALIENRPG.Item.Tabs.Modifiers",
+   "used": "修正（页签）"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Power",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "roll against supplies",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "\"Keeping it Together\"",
+   "lang_key": "ALIENRPG.Panic1",
+   "used": "保持镇定"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health / ALIENRPG.creature.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Acid Splash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "Attack Table",
+   "lang_key": "ALIENRPG.AttackTable",
+   "used": "攻击表"
+  },
+  {
+   "english": "\"Roll Attack\" button",
+   "lang_key": "ALIENRPG.AttackRoll",
+   "used": "攻击检定"
+  },
+  {
+   "english": "Special Abilities",
+   "lang_key": "ALIENRPG.SpecialAbilities",
+   "used": "特殊能力"
+  },
+  {
+   "english": "\"None\" (crit-table dropdown default)",
+   "lang_key": "ALIENRPG.None",
+   "used": "None（保持英文哨兵）"
+  },
+  {
+   "english": "CREW",
+   "lang_key": "ALIENRPG.CREW",
+   "used": "船员"
+  },
+  {
+   "english": "HULL",
+   "lang_key": "ALIENRPG.HULL",
+   "used": "船体"
+  },
+  {
+   "english": "DAMAGE",
+   "lang_key": "ALIENRPG.DAMAGE",
+   "used": "伤害"
+  },
+  {
+   "english": "ARMOR (spaceship)",
+   "lang_key": "ALIENRPG.SHIP-ARMOR",
+   "used": "护甲"
+  },
+  {
+   "english": "Minor component damage table",
+   "lang_key": "ALIENRPG.MINOR-COMPONENT-DAMAGE",
+   "used": "轻微部件损伤"
+  },
+  {
+   "english": "Major component damage table",
+   "lang_key": "ALIENRPG.MAJOR-COMPONENT-DAMAGE",
+   "used": "重大部件损伤"
+  },
+  {
+   "english": "CAPTAIN",
+   "lang_key": "ALIENRPG.CAPTAIN",
+   "used": "船长"
+  },
+  {
+   "english": "PILOT",
+   "lang_key": "ALIENRPG.CrewPilot",
+   "used": "驾驶员"
+  },
+  {
+   "english": "GUNNER",
+   "lang_key": "ALIENRPG.CrewGunner",
+   "used": "炮手"
+  },
+  {
+   "english": "SENSOR-OP",
+   "lang_key": "ALIENRPG.SENSOR-OP",
+   "used": "传感器操作员"
+  },
+  {
+   "english": "ENGINEER",
+   "lang_key": "ALIENRPG.ENGINEER",
+   "used": "工程师"
+  },
+  {
+   "english": "PASSENGER",
+   "lang_key": "ALIENRPG.CrewPasanger",
+   "used": "乘客"
+  },
+  {
+   "english": "COMMANDER (vehicle)",
+   "lang_key": "ALIENRPG.CrewCommander",
+   "used": "车长"
+  },
+  {
+   "english": "position",
+   "lang_key": "ALIENRPG.Position",
+   "used": "岗位"
+  },
+  {
+   "english": "\"ROLL\" column",
+   "lang_key": "ALIENRPG.Roll",
+   "used": "投骰"
+  },
+  {
+   "english": "PILOTING",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "COMTECH",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "Thrusters",
+   "lang_key": "ALIENRPG.THRUSTERS",
+   "used": "推进器"
+  },
+  {
+   "english": "Armaments",
+   "lang_key": "ALIENRPG.ARMAMENTS",
+   "used": "武装"
+  },
+  {
+   "english": "Spaceship Weapons (item type)",
+   "lang_key": "ITEM.TypeSpacecraftweapons / TYPES.Item.spacecraftweapons",
+   "used": "星际飞船武器"
+  },
+  {
+   "english": "Modules/Upgrades (item type)",
+   "lang_key": "ITEM.TypeSpacecraftmods / TYPES.Item.spacecraftmods",
+   "used": "星际飞船模块/升级"
+  },
+  {
+   "english": "Cargo",
+   "lang_key": "ALIENRPG.Cargo",
+   "used": "货物"
+  },
+  {
+   "english": "inactive",
+   "lang_key": "ALIENRPG.Inactive",
+   "used": "未激活"
+  },
+  {
+   "english": "submit",
+   "lang_key": "ALIENRPG.SubmitButton",
+   "used": "提交"
+  },
+  {
+   "english": "Armor Rating",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "\"FootLocker\"",
+   "lang_key": "ALIENRPG.fLocker",
+   "used": "储物箱"
+  },
+  {
+   "english": "fire weapons",
+   "lang_key": "ALIENRPG.fireWeapon",
+   "used": "开火"
+  },
+  {
+   "english": "left/right click wording",
+   "lang_key": "ALIENRPG.LEFTCLICKTOROLL / ALIENRPG.EditItem",
+   "used": "左键单击 / 右键单击 / 右键菜单"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Secret Android",
+   "proposed": "秘密仿生人",
+   "why": "玩法概念（玩家扮演的隐藏仿生人）。glossary 里有 Android=仿生人，但这个复合词没有；本页开篇就用它。"
+  },
+  {
+   "en": "Component Damage",
+   "proposed": "部件损伤",
+   "why": "飞船卡的一整个区。lang 有 MINOR-/MAJOR-COMPONENT-DAMAGE 与 ComponentDamagefor，但 glossary 无条目，跨单元容易分叉成「组件损坏」。"
+  },
+  {
+   "en": "hull points",
+   "proposed": "船体点数",
+   "why": "Hull=船体已有，points 的搭配没有；与 Health/生命值 的计量口径要分开。"
+  },
+  {
+   "en": "Thrusters rating",
+   "proposed": "推进器数值",
+   "why": "lang 的 THRUSTERS=推进器只有字段名，rating 在正文里出现（驾驶检定要加它）。"
+  },
+  {
+   "en": "Owner (Foundry ownership level)",
+   "proposed": "所有者",
+   "why": "Foundry 核心权限词，不在本项目 lang 也不在 glossary；正文有「make all the players \"Owners\"」。"
+  },
+  {
+   "en": "Public (chat roll mode)",
+   "proposed": "公开",
+   "why": "Foundry 核心的聊天可见性选项；正文以 \"Public\" message 指代它。"
+  },
+  {
+   "end": null,
+   "en": "Roll Table Formula",
+   "proposed": "投骰公式",
+   "why": "Foundry 核心 RollTable 的字段名，本项目 lang 无键；h5 段要求把它设为 1d6。"
+  },
+  {
+   "en": "Space Combat Panic Roll",
+   "proposed": "太空战恐慌检定 Space Combat Panic Roll",
+   "why": "正文点名的表；三个包里没有同名 RollTable，也不在硬冻结册子的 11 个 getName 字面量里（只出现在未进活导入图的 module/actor/old-actor.js:397）。按 §3.4「表名 T-BILINGUAL」处理，请主控确认。"
+  },
+  {
+   "en": "FootLocker",
+   "proposed": "储物箱",
+   "why": "lang 有 ALIENRPG.fLocker=储物箱，但 glossary 没有，装备/载具单元容易另起一个译法。"
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "1 结构标签多重集与英文相等",
+   "result": "PASS —— br149 / p86 / strong50 / li26 / span26 / h3-20 / div18 / h2-16 / h1-8 / ul6 / img5 / pre2 / code2 / h5-2，两侧完全一致；另加跑「有序骨架比对」（剥掉我新增的 id 后逐标签同序），无差异"
+  },
+  {
+   "check": "2 class 属性值全部原样",
+   "result": "PASS —— heading/heading2/imagecontainer 及 13 个占位 span 的 class 计数与拼写完全一致；img 标签、style 值也逐字节相同"
+  },
+  {
+   "check": "3 @UUID / [[...]] 构件逐字节",
+   "result": "PASS —— 本页 enricher 构件数英文 0 / 中文 0，无可破坏对象；&lt;b&gt;、&lt;/b /&gt;、&gt; 等实体保持原样"
+  },
+  {
+   "check": "4 译过的标题带英文原 slug 的显式 id",
+   "result": "PASS —— 23 个标题（含 h5）全部带 id，按 foundry.mjs:685 非 strict slugify + slugifyHeading 逐个推导核对：synthetics / header-(1) / details-(2) / tracking-(3) / human-panic,-push,-ect. / creatures / attack-table-(2) / creature-critical-injuries-(3) / creating-your-own-… / spaceships / general-tab / stats-(1) / component-damage(2) / crew-(3) / armaments-(4) / modules/upgrades-tab / image-tab / space-combat-phases-tab / vehicles / inventory-tab / crew-tab —— 括号与斜杠都按非 strict 规则保留"
+  },
+  {
+   "check": "5 DO-NOT-TRANSLATE 冻结串未被翻译",
+   "result": "PASS —— 以「英文里被 ASCII 引号括起来的名字」为口径逐条比对：Alien Mother Tables 2/2、Critical Injuries on Synthetics 1/1、前缀 Critical Injuries 与带尾空格的 Critical Injuries  各在位、None 1/1、critical-injury 1/1；复合串 \"Alien Tables&gt; Alien Creature Tables\" 单独核对 1/1。裸计数「Critical Injuries」英 6 中 3 是预期：另 3 处是散文/标题用法，已按 lang 值译成「重伤 Critical injuries」"
+  },
+  {
+   "check": "6 输出不与英文逐字节相同",
+   "result": "PASS —— 7,787 vs 15,183 原始字符，CJK 2,925 字；无 BOM、无 CRLF、结尾与英文一样停在未闭合的 <div style=\"position:relative;margin-top:30px\">"
+  },
+  {
+   "check": "7（附加）nbsp 占位块",
+   "result": "PASS —— U+00A0 计数 39/39，13 个 `&nbsp;<span class=\"…\">&nbsp;</span>&nbsp; ` 块的正则捕获序列与英文完全相同"
+  },
+  {
+   "check": "8（附加）逐段无漏译",
+   "result": "PASS —— 按标签切成 417 段逐段对照，无空段、无异常短段；每个 <br> 分隔的行都有对应中文"
+  }
+ ],
+ "open_issues": [
+  "⚠ `ALIENRPG.CriticalInjuries` 在交付的 lang/cn.json 里是英文 `Critical injuries`——因为同一个键在 actor.mjs:1815 还当 `game.tables.getName()` 的 i18n 腿用。也就是说角色卡/合成人卡/生物卡上那一区的标题今天渲染出来就是英文。我按锚点单元 SYS-J2 的写法落成双语「重伤 Critical injuries」。**这是运行时补丁的活**：actor.mjs:1816-1817 已经有 `getName(\"Critical Injuries\") || getName(\"Critical injuries\")` 两条裸字面量兜底，所以把该键改成中文并不会打断经典模式的重伤检定（合成人分支 1830 行本来就不看这个键）。要不要改由主控裁，改了我这两处措辞要跟着动。",
+  "本页出现但 lang/cn.json 里没有对应键的标签（属 Foundry 核心或纯硬编码，不是我能锁的）：`\"Public\"` 聊天消息（核心 roll mode）、`\"Owners\"`（核心 ownership）、`Roll Table Formula`（核心 RollTable 字段）、context menu / rich text editor / token image / token health bar。我分别用了 公开 / 所有者 / 投骰公式 / 右键菜单 / 富文本编辑器 / 指示物图像 / 指示物的生命值条——若核心中文包用词不同，这几处要回改。",
+  "⚠ 飞船卡根本没有「Crew 页签」：船员是 General 页签里的一个区（spacecraft-general.hbs:93 的 h2 用 ALIENRPG.CREW=船员），英文那句 \"under the \\\"ROLL\\\" section of the Crew tab\" 是从载具那段抄过来的。我在飞船段译作「船员区的『投骰』栏」，在载具段才用「『乘员』页签」——两处 lang 键确实不同（CREW vs Actor.Tabs.Crew），不是我随手改的。",
+  "上游事实错误，已按原文保留未擅自修：飞船段说 \"one of the four roles\" 但列了六个（船长/驾驶员/炮手/传感器操作员/工程师/乘客），我照译「四个岗位」。载具段的四个是对的。",
+  "`Space Combat Panic Roll` 只在 module/actor/old-actor.js:397 被 getName，**不在**硬冻结册子的 11 个 RollTable 字面量里，三个包里也没有同名表（live 的飞船恐慌走 Panic Table）。我按 T-BILINGUAL 写成「太空战恐慌检定 Space Combat Panic Roll」。若主控认定该段整体过期，这句要跟着更新。",
+  "重复 slug：`header-(1)` 出现 2 次、`general-tab` 出现 2 次（第二个是载具段的 h2.heading2）。今天没有显式 id 时 buildTOC 自己会给后一个补 `$1`（foundry.mjs:44740 一带），我写显式 id 后这个去重逻辑照旧生效，行为不变。但如果以后有人要给本页做深链，两端要一起改。",
+  "h5 那段保留了「Critical Injuries 」**尾部那个空格**——它是 prefix_filters 的真实形态（folder.contents.filter(startsWith)），看着像手误，别清。",
+  "`<pre><code>` 里的占位词我译了（伤势名称 / 伤势描述），实体 `&lt;b&gt;` `&lt;/b /&gt;`（含上游写坏的闭合标签）逐字节未动。若主控的政策是代码样例整体保留英文，回退这两个词即可，正文那句「代码要在加粗 html 标签里找到伤势名称」要同步。",
+  "跨单元用词分叉，请主控统一：锚点单元 SYS-J2 把 `PC` 和 `actor` 保留成英文（PC 出现 9 次），我按 glossary_alien.json 的 Player Character→玩家角色、以及 lang 的 CloneActor=复制角色 写成「玩家角色 / 角色」。另 SYS-J2 用「掷骰」，我用 lang 的 ALIENRPG.Roll=「投骰」。我已按锚点对齐了 顶栏（1）、重伤 Critical injuries 的写法和「单击/左键单击/右键单击」这三项。",
+  "英文原文本身多处语病（\"Has no function on a other than…\"、\"roll against supplied\"、\"The GM then both sides…\"、\"proceed to he next phase\"、Critial/defailt/relevent 拼写），中文按意思译通顺了，未在译文里加译注。"
+ ]
+}

@@ -1,0 +1,306 @@
+{
+ "unit": "SYS-T1",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-T1.cn.json",
+ "chars_en": 5076,
+ "chars_cn": 1986,
+ "summary": "Translated the three RollTables (31 results) into `6-工作区/phase2/SYS-T1.cn.json`, shape byte-for-byte identical to the payload (tables → name / results → range key → {name?, description}).\n\n**Table names verified frozen, not trusted.** All three resolve in DO-NOT-TRANSLATE.json §`name_lookups`/table entries as T-FROZEN with call sites `actor.mjs:554` (Panic Table), `:845` (Stress Response Table), `:1067` (Panic Response Table), and glossary_alien.json maps each to itself. Emitted unchanged in English.\n\n**The Panic Table needed no new prose.** Its ten descriptions are the same source strings as `ALIENRPG.Panic1` and `Panic7–15`, which Phase 1 already delivered. I re-derived that from `lang/en.json` rather than assuming it: 1-6 and 12-12 are byte-identical to their lang English; the other eight differ only in the whitespace after `</b>` (this table has two ASCII spaces where lang has space+U+00A0). So I reused the Phase-1 Chinese verbatim and carried this table's own whitespace, which also keeps the file at zero NBSP against an EN side of zero.\n\n**Result names are byte-equal to their lang condition value, all 19 verified mechanically** — the pairing the brief warned about holds, including TREMBLE↔`ALIENRPG.shakes` where the English differs and the Chinese must not. I checked the coupling in source: `rollPanic`/`rollStress` dispatch on the roll TOTAL, not on the result name, so a mistranslated name would not throw — it would silently render a different word beside the status-effect label in `panic-response-roll.hbs` (`name: customResults[0].name` at `actor.mjs:1246`, next to the effect toggled from the same switch). Display-only, but exactly the drift the SAME_STRING_GROUPS rule exists to stop, so the gate is worth having.\n\nThe 21 Panic/Stress Response descriptions are new prose (no lang equivalent exists — the `ALIENRPG.TAH.*` keys cover only environmental conditions), written plain and instructional, second person, reusing the lock's established phrasings (濒死 / 追骰 / 余量检定 / 在恐慌结束前 / 瘫倒在地 / 茫然地凝视着虚空).\n\n20 self-gate checks, 0 failures. Eight terms the glossary lacks are reported rather than silently coined; nine source-fidelity decisions are itemized in open_issues, several of which the controller should confirm before `fill_twin.py` propagates this to corerules and starterset.",
+ "frozen_kept": [
+  "Panic Table",
+  "Stress Response Table",
+  "Panic Response Table"
+ ],
+ "label_lookups": [
+  {
+   "english": "Spooked.",
+   "lang_key": "ALIENRPG.spooked",
+   "used": "受惊"
+  },
+  {
+   "english": "Noisy.",
+   "lang_key": "ALIENRPG.noisy",
+   "used": "喧闹"
+  },
+  {
+   "english": "Twitchy.",
+   "lang_key": "ALIENRPG.twitchy",
+   "used": "抽搐不安"
+  },
+  {
+   "english": "Lose Item.",
+   "lang_key": "ALIENRPG.loseitem",
+   "used": "失去物品"
+  },
+  {
+   "english": "Paranoid.",
+   "lang_key": "ALIENRPG.paranoid",
+   "used": "疑神疑鬼"
+  },
+  {
+   "english": "Hesitant.",
+   "lang_key": "ALIENRPG.hesitant",
+   "used": "犹豫"
+  },
+  {
+   "english": "Freeze.",
+   "lang_key": "ALIENRPG.freeze",
+   "used": "呆滞"
+  },
+  {
+   "english": "Seek Cover.",
+   "lang_key": "ALIENRPG.seekcover",
+   "used": "寻找掩护"
+  },
+  {
+   "english": "Scream.",
+   "lang_key": "ALIENRPG.scream",
+   "used": "尖叫"
+  },
+  {
+   "english": "Flee.",
+   "lang_key": "ALIENRPG.flee",
+   "used": "逃跑"
+  },
+  {
+   "english": "Frenzy.",
+   "lang_key": "ALIENRPG.frenzy",
+   "used": "发狂"
+  },
+  {
+   "english": "Catatonic.",
+   "lang_key": "ALIENRPG.catatonic",
+   "used": "失去知觉"
+  },
+  {
+   "english": "Jumpy.",
+   "lang_key": "ALIENRPG.jumpy",
+   "used": "惊跳"
+  },
+  {
+   "english": "Tunnel Vision.",
+   "lang_key": "ALIENRPG.tunnelvision",
+   "used": "视野狭窄"
+  },
+  {
+   "english": "Aggravated.",
+   "lang_key": "ALIENRPG.aggravated",
+   "used": "恼怒"
+  },
+  {
+   "english": "Shakes.",
+   "lang_key": "ALIENRPG.shakes",
+   "used": "颤抖"
+  },
+  {
+   "english": "Frantic.",
+   "lang_key": "ALIENRPG.frantic",
+   "used": "慌乱"
+  },
+  {
+   "english": "Deflated.",
+   "lang_key": "ALIENRPG.deflated",
+   "used": "泄气"
+  },
+  {
+   "english": "Mess Up.",
+   "lang_key": "ALIENRPG.messup",
+   "used": "搞砸"
+  },
+  {
+   "english": "TREMBLE (Panic Table 8-8 label) — paired with Shakes by SAME_STRING_GROUPS; English differs, Chinese must not",
+   "lang_key": "ALIENRPG.TREMBLE = ALIENRPG.shakes",
+   "used": "颤抖"
+  },
+  {
+   "english": "KEEPING IT TOGETHER: … (Panic Table 1-6, whole cell)",
+   "lang_key": "ALIENRPG.Panic1",
+   "used": "保持镇定：… (lang value reused verbatim)"
+  },
+  {
+   "english": "NERVOUS TWITCH: … (Panic Table 7-7, whole cell)",
+   "lang_key": "ALIENRPG.Panic7",
+   "used": "精神紧绷：… (lang value + this table's own whitespace + source's stray ')"
+  },
+  {
+   "english": "TREMBLE: … (Panic Table 8-8, whole cell)",
+   "lang_key": "ALIENRPG.Panic8",
+   "used": "颤抖：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "DROP ITEM: … (Panic Table 9-9, whole cell)",
+   "lang_key": "ALIENRPG.Panic9",
+   "used": "扔下物品：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "FREEZE: … (Panic Table 10-10, whole cell)",
+   "lang_key": "ALIENRPG.Panic10",
+   "used": "呆滞：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "SEEK COVER: … (Panic Table 11-11, whole cell)",
+   "lang_key": "ALIENRPG.Panic11",
+   "used": "寻找掩护：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "SCREAM: … (Panic Table 12-12, whole cell)",
+   "lang_key": "ALIENRPG.Panic12",
+   "used": "尖叫：… (lang value reused verbatim)"
+  },
+  {
+   "english": "FLEE: … (Panic Table 13-13, whole cell)",
+   "lang_key": "ALIENRPG.Panic13",
+   "used": "逃跑：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "BERSERK: … (Panic Table 14-14, whole cell)",
+   "lang_key": "ALIENRPG.Panic14",
+   "used": "发狂：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "CATATONIC: … (Panic Table 15-20, whole cell)",
+   "lang_key": "ALIENRPG.Panic15",
+   "used": "失去知觉：… (lang value + this table's own whitespace)"
+  },
+  {
+   "english": "OBSERVATION (Panic Response 4-4, inside <strong>)",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Wits / Empathy / Agility / Strength (Stress Response 2-2…5-5)",
+   "lang_key": "ALIENRPG.AbilityWit / AbilityEmp / AbilityAgl / AbilityStr",
+   "used": "机智 / 共情 / 敏捷 / 力量"
+  },
+  {
+   "english": "supply roll (Panic Response 3-3)",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "push a skill roll (Stress Response 1-1, 6-6)",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "ammo / air / power (Panic Response 3-3)",
+   "lang_key": "ALIENRPG.ammo / ALIENRPG.Air / ALIENRPG.Power",
+   "used": "弹药 / 空气 / 电力"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Keeping Cool",
+   "proposed": "保持冷静",
+   "why": "The result-0 'nothing happens' row of BOTH Evolved tables. No lang key exists (`keepingcool` is in the `toRemove` list at alienrpg.mjs:267, so it is not a condition and has no ALIENRPG.* value), and no glossary row. Deliberately NOT set equal to KEEPING IT TOGETHER 保持镇定 (the classic Panic Table's row) — SAME_STRING_GROUPS does not pair them, exactly as phase1 recorded for Lose Item vs DROP ITEM. Also distinct from Keeping Guard 保持警戒. 保持冷静 collides with nothing in glossary_alien.json."
+  },
+  {
+   "en": "interrupt action",
+   "proposed": "打断动作",
+   "why": "Evolved-only term, 6 occurrences across Panic Response 7-7/8-8/9-9/10-10/11-11. Not in the glossary and not in lang. An action that breaks into the turn order; 打断 is the direct rendering and does not collide with 快速动作/慢速动作."
+  },
+  {
+   "en": "turn (a character's turn in combat, 'losing your next turn')",
+   "proposed": "出手",
+   "why": "HOMOGRAPH RISK — the glossary's `Turn = 节` is the middle TIME UNIT (SAME_STRING_GROUPS pairs it with Stretch for exactly that reason). 'losing your next turn' in Panic Response 7-7/8-8/9-9/10-10 is the combat turn, a different sense; rendering it 节 (5–10 minutes) would be a rules error. 出手 keeps it distinct from both 节 (Stretch) and 轮 (Round) — 回合 was rejected because Chinese TRPG usage reads it as Round."
+  },
+  {
+   "en": "turn order",
+   "proposed": "出手顺序",
+   "why": "'breaking the turn order', Panic Response 8-8 and 10-10. Falls out of the 出手 choice above; kept distinct from 先攻 (Initiative)."
+  },
+  {
+   "en": "initiative card",
+   "proposed": "先攻卡",
+   "why": "Panic Response 6-6, 'the #10 initiative card'. Glossary has Initiative = 先攻 but no card compound."
+  },
+  {
+   "en": "cluttered (zone)",
+   "proposed": "杂乱区域",
+   "why": "Panic Response 8-8, the zone descriptor that gates whether Seek Cover works. Paired with its opposite below."
+  },
+  {
+   "en": "open zone",
+   "proposed": "开阔区域",
+   "why": "Panic Response 8-8, the branch that turns Seek Cover into Scream. Glossary has Zone = 区域 but neither descriptor."
+  },
+  {
+   "en": "quick action",
+   "proposed": "快速动作",
+   "why": "Panic Response 4-4. The rules define only Fast Action 快速动作 and Slow Action 慢速动作 — there is no third action type — so this is the author's loose synonym for Fast Action rather than a new term. Flagging because the English string is NOT 'Fast Action' and a term-drift gate may read 快速动作 here as a renamed term."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "G1 output shape identical to payload (3 tables / 31 results / same optional-name pattern per row)",
+   "result": "PASS"
+  },
+  {
+   "check": "G2 all three table `name` fields emitted unchanged in English AND each found as a frozen `string` in DO-NOT-TRANSLATE.json",
+   "result": "PASS — Panic Table, Stress Response Table, Panic Response Table"
+  },
+  {
+   "check": "G3 structural tag multiset identical per description (no <p>/<b>/<strong> merged, split or dropped)",
+   "result": "PASS — 31/31"
+  },
+  {
+   "check": "G4 CJK present in every description",
+   "result": "PASS — 31/31"
+  },
+  {
+   "check": "G5 no bare English residue in prose or names (GM allowed)",
+   "result": "PASS — 0 leaks"
+  },
+  {
+   "check": "G6 all 19 result names byte-equal to their lang/cn.json condition value",
+   "result": "PASS — 19/19"
+  },
+  {
+   "check": "G7 SAME_STRING_GROUPS pairings hold: BERSERK/Frenzy, CATATONIC/Catatonic, FLEE/Flee, FREEZE/Freeze, SCREAM/Scream, SEEK COVER/Seekcover, TREMBLE/Shakes",
+   "result": "PASS — 7/7, Panic Table <b> label == the condition's Chinese in every pair"
+  },
+  {
+   "check": "G8 Panic Table body identical to the Phase-1 lang lock (ALIENRPG.Panic1, Panic7-15), modulo the </b> whitespace this table owns",
+   "result": "PASS — 10/10"
+  },
+  {
+   "check": "G9 U+00A0 count in output",
+   "result": "PASS — 0 emitted; Panic Table and Stress Response EN also have 0. Panic Response EN has 5, all mid-sentence — see open_issues #2"
+  },
+  {
+   "check": "G10 '+', '#' and U+2013 EN DASH counts identical to English",
+   "result": "PASS — +:5=5, #:3=3, –:5=5"
+  },
+  {
+   "check": "G11 number tokens preserved per description (signed and bare)",
+   "result": "PASS — 31/31"
+  },
+  {
+   "check": "G12 none of the 8 crit-parse heal-time CELLS present as a cell in this unit",
+   "result": "PASS — no crit table here; 'one Round' appears 3x as lowercase prose only, see open_issues #6"
+  },
+  {
+   "check": "G13 no result name collides with a different condition's Chinese",
+   "result": "PASS — only 保持冷静 repeats, and it is the same row in both tables"
+  },
+  {
+   "check": "G14 file is valid UTF-8 JSON, LF newlines, trailing newline",
+   "result": "PASS"
+  },
+  {
+   "check": "Scope discipline — wrote only 6-工作区/phase2/SYS-T1.cn.json; compendium/cn untouched",
+   "result": "PASS"
+  }
+ ],
+ "open_issues": [
+  "SOURCE TYPO PRESERVED — Panic Table 7-7 ends with a stray ASCII apostrophe: `...increases by one.'`. The lang twin (ALIENRPG.Panic7) has no such character. I preserved it, so the CN ends `...各上升一级。'`. Rationale: my CN differs from the Phase-1 lock in exactly the places the table's EN differs from the lock's EN, and deleting source characters is not a translator's call. If the controller would rather the CN read clean, delete the single trailing U+0027 — nothing else changes.",
+  "NBSP DROPPED, 5 OCCURRENCES — the Panic Response Table's English carries 5 U+00A0 inside sentences (8-8 `This is an interrupt`, 10-10 `After the move`, 11-11 `Every friendly PC` and `until you or`). They are word gaps from the author's paste; Chinese has no inter-word position for them, so the CN emits 0. If a gate asserts `U+00A0 count identical to English` on pack content the way the Phase-1 lang gate did, this unit will trip it and the gate needs a mid-prose exemption — do not 'fix' it by injecting NBSPs into the Chinese.",
+  "WHITESPACE DIVERGES FROM THE LANG LOCK, DELIBERATELY — in 8 of the 10 Panic Table cells the table's own English has two ASCII spaces after `</b>` where lang/en.json has space+U+00A0. I followed the TABLE (two ASCII spaces), not the lang value, so U+00A0 stays at 0=0 against this unit's own source. The two cells whose EN is byte-identical to lang (1-6, 12-12) reuse the lang whitespace unchanged.",
+  "EM DASH COUNT 1 -> 2 — Panic Table 9-9 English has one U+2014 (`item—the GM`); the Phase-1 lock renders it as the Chinese double dash `——`. I kept the lock. A strict per-character parity gate would see 1 vs 2. This is correct Chinese typography and matches what Phase 1 already shipped, but flagging it since I could not find a rule covering U+2014 (the register's encoding_note names only U+2013 and U+00A0).",
+  "TRAILING PERIOD DROPPED FROM ALL 21 RESULT NAMES — every English name is written as a mini-sentence (`Spooked.`, `Mess Up.`, `Keeping Cool.`). The Chinese is bare, with no `。` and no `.`, so each is byte-equal to its lang condition value per the brief's requirement and per the T-EXACT tier definition ('pure Chinese, byte-equal to a lang key... no trailing space'). A Chinese UI label does not take a sentence period. Confirm this is the house rule before fill_twin.py propagates it to two more packs.",
+  "'one Round' x3 IN PROSE (reporting per the brief's heal-time instruction) — Panic Table 10-10, 11-11 and 12-12 contain lowercase `one Round` inside sentences. These are NOT heal-time cells: there is no crit table in this pack, and `ALIENRPG.OneRound` / `OneTurn` are still deliberately English in cn.json pending the Phase-5 lockstep. The Phase-1 lock already renders this prose as 一轮 (glossary Round = 轮), so I did not deviate. No Phase-5 coupling as far as I can see, but the words are present, so it is on the record.",
+  "AMBIGUOUS GAME TERM — Panic Response 4-4: 'you need an OBSERVATION roll and a stretch of time to find the item'. Evolved renamed the middle time unit Turn -> Stretch (glossary Stretch = 节), so this could mean literally one Stretch. I read it as the English idiom (lowercase, indefinite article, no capital) and wrote 一段时间. If the controller has the Evolved text and it means the unit, change 并花上一段时间 to 并花上一节时间.",
+  "BROKEN SOURCE ENGLISH — Stress Response 7-10: 'Your action fails regardless of rolled and you gain +1 stress level.' A word is missing after 'regardless of'. Translated to the evident meaning: 无论掷出什么结果，你的动作都失败. Phrasing follows the existing lock ALIENRPG.ActionFailed = 动作失败.",
+  "MISSING FINAL PERIOD PRESERVED — Panic Table 10-10 and 14-14 have no sentence-final period in English; the Phase-1 lock also omits it, and I kept it omitted. Intentional, not an oversight.",
+  "COUPLING NOTE FOR THE CONTROLLER — I verified in source that rollPanic (actor.mjs:554), rollStress (:845) and the Panic-Response path (:1067) all dispatch on the roll TOTAL via a switch, never on the result name string, so a bad name cannot throw. The names still matter because panic-response-roll.hbs renders customResults[0].name (:1246) immediately beside the status-effect label localized from ALIENRPG.<effectid> — a mismatch would show the player two different words for one result. That is why G6/G7 are hard gates here rather than advisory.",
+  "PROPAGATION READY — no unit-local content; the file can be copied verbatim into the corerules and starterset twins by tm/fill_twin.py. Note the register lists Stress Response Table and Panic Response Table as present in all three packs but Panic Table as present in system + corerules only, so expect the starterset twin to take 2 of the 3 tables."
+ ]
+}

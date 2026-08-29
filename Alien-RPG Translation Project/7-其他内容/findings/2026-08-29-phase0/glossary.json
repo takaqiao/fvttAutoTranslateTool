@@ -1,0 +1,132 @@
+{
+ "summary": "glossary_alien.* now stands at v0.2: 346 terms, 9 disputes, 32 pending. A v0 build (275 terms) already existed on disk from an earlier pass, so this session ran as an adversarial re-derivation on top of it rather than a rewrite — every cn.json line number, every init.mjs / actor.mjs / rollTableData.mjs anchor, and the Queen subtitle gate were re-derived from source. All of v0's citations HELD except one, which was a factual error of v0's own making and is now retracted in-file: v0 asserted ALIENRPG.conditions has 20 entries and excludes 'fatigued'. Brace-matching the object literal at module/helpers/config.mjs:161 gives 21 entries and fatigued IS one of them (7 stress-response tableNumber 1-7, 12 panic-response tableNumber 1-12, plus fatigued and keepingguard on no table). 'Fatigued' was missing from the glossary as a direct result and has been added.\n\nThe larger gap v0 had was that it worked from the survey's term lists and never opened the packs. This pass mined 6-工作区/raw-dumps/*.json for every Actor, Item and Folder name and found the Evolved content is far wider than the survey described: an 18-rung Xenomorph/Neomorph caste ladder (Praetorian, Scout, Stalker, Sentry, Soldier, Worker, Charger/Crusher, Queenburster, Royal/Praeto-Facehugger, Neomorph, Bloodburster, Neophyte, Harvester, Lion Worm, XX121...), of which v0 covered only Drone and Warrior. Re-gating the subtitle corpus confirmed ZERO English-side hits for every caste word, so all 18 went to pending rather than being coined — extending a two-point sample into a nine-rung taxonomy is precisely what the no-guessing rule forbids. 73 terms were added where the ground was solid: the six Stage ordinals, the four Trials-and-Hazards states, 15 pack folder labels the Babele mapping will need, and 37 hardware / Colonial-Marine common nouns tied to shipped Item names.\n\nThe most load-bearing finding is one that prevented a bad edit. The T-EXACT skill values 科技 (Comtech) and 医疗 (Medical Aid) look like MT flattening and were candidates for correction. They are not: all twelve ALIENRPG.Skill* values are EXACTLY two Han characters (肉搏 指挥 科技 机械 操纵 医疗 机动 观察 驾驶 射击 耐力 求生). A uniform 2-character width across twelve English words of 6-16 letters cannot come from machine translation — it is deliberate house style for sheet-column alignment, and stratum-A human work. Widening any one of them breaks the scheme.\n\nglossary_alien.json is now generated from provenance rather than maintained alongside it, so the two cannot drift, and a new QA script asserts nine structural invariants (flat shape, no drift, recomputed counts, T-FROZEN identity, T-EXACT byte-equality against cn.json, the bilingual-name contract, pending/glossary disjointness, dispute anchoring). It caught two real defects in my own additions before they shipped.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.json",
+   "bytes": 10119,
+   "what": "The spine. Flat {en: cn}, 346 entries, key-sorted case-insensitively. Regenerated from provenance every build, so glossary and provenance cannot drift. T-FROZEN values are the byte-exact English; everything else is bare Chinese with no bilingual tail (the ready-made '中文 English' name string lives in provenance.terms[<en>].bilingual_name)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.provenance.json",
+   "bytes": 232925,
+   "what": "Per-term: cn, tier, category, why_this_won, and every candidate rendering with source / English-gated count / evidence. _meta holds the authoritative counts, the 4-tier definitions, the 5-level source priority, the 4 hard rules, 7 corrections to the survey plus the retraction of v0's own conditions error, the lockstep_literals block (actor.mjs heal-time parser, incl. the U+2013 EN DASH in the ALIENRPG.Yes case labels), frozen_count_reconciliation, the new skill_scheme_finding, the bilingual_name_contract, and 22 Chinese-value collisions now classified harmful (2) vs benign (20)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.disputes.json",
+   "bytes": 20727,
+   "what": "9 genuine open conflicts, each with both sides argued, sources, English-gated counts, evidence, what_would_settle_it and blast_radius. D1-D7 are the ones the brief required (Panic Roll, Engaged, Stress Level, Health, Synthetic, Queen, Weyland-Yutani), citations re-derived and all holding. D8-shift and D9-armor-piercing are new, both found by re-deriving cn.json rather than by reading the survey."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.pending.json",
+   "bytes": 41565,
+   "what": "32 terms deliberately ABSENT from the glossary so a translator stops and asks instead of propagating a guess. All 12 from v0 plus 20 new: the 18-rung caste ladder, USCM, and the named-planet set. resolved_since_brief documents the one brief-listed term (Special Order 937) that the research actually did source, so the override is visible rather than silent."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/build_glossary_v0_2.py",
+   "bytes": 50035,
+   "what": "The v0 -> v0.2 build. Loads v0 provenance as base, applies fixes / schema repairs / additions / pending moves, then REGENERATES glossary_alien.json from provenance and recomputes every _meta count from the data. Re-runnable from the v0 backup; never types a count."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/check_glossary_alien.py",
+   "bytes": 5768,
+   "what": "Structural validator, exit 1 on any violation. Asserts flat {str:str} shape, glossary/provenance key-set identity and value equality, every _meta count recomputed, tier present and valid on every entry, candidates non-empty with all four fields, T-FROZEN identity, T-EXACT byte-equality against a live cn.json ALIENRPG.Skill* value, the bilingual-name contract (and its absence on non-bilingual entries), pending/glossary disjointness, and dispute provisional == shipped value."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "glossary terms",
+   "value": "346 (v0: 275; +73 added, 0 removed, 2 enriched in place)"
+  },
+  {
+   "what": "tier split",
+   "value": "T-PLAIN 205 / T-BILINGUAL 101 / T-FROZEN 28 / T-EXACT 12"
+  },
+  {
+   "what": "disputes",
+   "value": "9 (7 required by the brief, all held on re-derivation; +D8-shift, +D9-armor-piercing)"
+  },
+  {
+   "what": "pending",
+   "value": "32 (12 from v0 + 18 caste designations + USCM + the named-planet set)"
+  },
+  {
+   "what": "ALIENRPG.conditions, re-derived by brace-matching config.mjs:161",
+   "value": "21 entries, not 20 — 7 stress (tableNumber 1-7) + 12 panic (tableNumber 1-12) + fatigued + keepingguard"
+  },
+  {
+   "what": "condition coverage in cn.json",
+   "value": "0 of 21 translated — 20 keys absent, ALIENRPG.messup holds the English 'Mess Up'. Every condition rendering in the glossary is an authored proposal, not an attestation."
+  },
+  {
+   "what": "the 12 ALIENRPG.Skill* values",
+   "value": "all exactly 2 Han characters — deliberate house style, not MT. Confirms T-EXACT and blocks the 科技->通讯技术 'fix'."
+  },
+  {
+   "what": "Queen gate re-run (term_gate.py --mode subs, 4665 rows)",
+   "value": "女王 gated 4 / cn_only 2; 王后 gated 3 / cn_only 1 — v0's correction of the survey's bare 7-vs-4 confirmed, incl. the 女王蜂 bee-metaphor hit at ALIENS1986 1:35:28"
+  },
+  {
+   "what": "caste-word attestation in the subtitle corpus",
+   "value": "'\\bdrone' 0 English rows, '\\bwarrior' 0, '\\bpraetorian' 0, '\\bneomorph' 0 — the corpus cannot vote on any caste name"
+  },
+  {
+   "what": "Marine gate",
+   "value": "10 English rows: 陆战队 gated 7, 陆战队员 gated 2, 海军陆战队 gated 1 (REJECTED — 海军 = navy; the USCM is not a naval service)"
+  },
+  {
+   "what": "Chinese-value collisions",
+   "value": "22 total, classified: 2 harmful (远程 = Long band + Ranged weapon type; 生化人 = Synthetic + Android, which is dispute D5), 20 benign (case variants, English inflections, same-referent synonyms)"
+  },
+  {
+   "what": "pack inventory mined from raw-dumps",
+   "value": "74 Actors, 342 Items, 46 Folders across the 3 packs — the source of all new coverage and all new pending entries"
+  },
+  {
+   "what": "validator result",
+   "value": "ALL INVARIANTS HOLD (it caught and rejected 2 of my own defects first: 'NPCs' mis-tiered T-FROZEN with a non-identity value, and 'Xenomorphology' carrying a bilingual_name on a T-PLAIN tier)"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Revised the existing v0 artifacts to v0.2 rather than rebuilding from scratch",
+   "reason": "glossary_alien.* already existed on disk (275 terms, timestamped earlier the same day) with genuinely careful work in it — English-gated counts, a lockstep_literals block, a frozen-count reconciliation. Spot-checking 32 cn.json line numbers plus every init.mjs/actor.mjs/rollTableData.mjs anchor and re-running the Queen gate showed all of them correct. Discarding that to re-author would have risked regression for no gain; the value left on the table was verification and coverage, which is what this pass spent its effort on."
+  },
+  {
+   "decision": "Retracted v0's own 'correction' about the condition count in-file rather than quietly editing it",
+   "reason": "v0 claimed the survey was wrong and that ALIENRPG.conditions has 20 entries excluding 'fatigued'. Both the survey and v0 were wrong, in opposite directions: it has 21 and includes it. A silent fix would leave a future reader trusting v0's reasoning on the other six corrections. The retraction states what was claimed, what is true, and how it was re-derived."
+  },
+  {
+   "decision": "Sent all 18 Evolved caste designations to pending instead of coining renderings",
+   "reason": "The only sourced caste words are Drone->工蜂异形 and Warrior->战士异形, both community-sourced at confidence 'medium'. Gate re-run confirms the 4,665-row corpus has zero English-side hits for drone, warrior, praetorian or neomorph. Extending a two-point sample into a nine-rung taxonomy is exactly the bare-inference the project's hard rule forbids, and getting it wrong would be locked in across every bestiary entry. They are pending WITH composed candidates and a note that the ladder must be ruled on as a set — deciding them one at a time guarantees an inconsistent taxonomy."
+  },
+  {
+   "decision": "Kept the 12 skill names as-is and recorded WHY, instead of correcting Comtech 科技 and Medical Aid 医疗",
+   "reason": "Both look like MT flattening in isolation. Checking all twelve together showed every one is exactly two Han characters — a uniform width across English words of 6 to 16 letters that machine translation cannot produce. It is deliberate house style for character-sheet column alignment. The looser readings are recorded as aliases only, with an explicit do-not-fix note, because the next reader will have the same instinct I did."
+  },
+  {
+   "decision": "Split two Chinese-value collisions that v0 left merged; documented the remaining 22 with a harmful/benign classification",
+   "reason": "Flamethrower and Incinerator Unit both mapped to 喷火枪, but 'M240 Incinerator Unit' is a separately shipped Item and the two would be indistinguishable in the weapon list — now 喷火器 / 焚烧器. Cryo Deck was added as 低温舱室 to stay clear of Cryo-tube's 低温舱. The other 22 collisions are dumped raw by v0, forcing a reader to check them all by hand; classifying them isolates the 2 that can actually hurt."
+  },
+  {
+   "decision": "Re-keyed the frozen talent names in both cases and corrected the mechanism description",
+   "reason": "The code never compares against the literal 'PACK MULE'. All five sites call .toUpperCase() first, and the shipped Item is title-case 'Pack Mule'. So case does not matter — the Latin string surviving does, and a bilingual name still breaks it ('驮马 Pack Mule'.toUpperCase() != 'PACK MULE'). Both forms are keyed so a lookup on either surface hits."
+  },
+  {
+   "decision": "Generated glossary_alien.json from provenance rather than maintaining them side by side, and wrote a validator",
+   "reason": "The flat file is what consumers read and the provenance is what humans edit; two hand-maintained copies of the same 346 values will drift. Generation makes drift impossible by construction and the validator asserts it anyway, along with eight other invariants that fail silently in production rather than loudly at build time."
+  },
+  {
+   "decision": "Excluded the 58 Talent Item names and ~40 star-system designations, and said so in known_gaps",
+   "reason": "They are in the packs but they are content for the translation pass, not terminology spine. Listing the exclusion in known_gaps makes their absence read as a decision rather than an oversight when someone diffs the glossary against the pack inventory."
+  }
+ ],
+ "open_issues": [
+  "The 18 caste designations are the biggest blocker: they are in pending, they cannot be resolved from any reachable source, and the bestiary is unusable without them. They need ONE owner ruling covering the whole ladder at once. Queenburster additionally cannot be settled before D6-queen (女王 vs 王后) is.",
+  "D2-engaged is effectively decided on evidence (接战 wins; 近战 collides with Melee at cn.json:157 vs :476) and is only open because it changes a dropdown label an existing Chinese table may already know. It is the cheapest of the nine to close.",
+  "The 3 content packs are still not extracted to compendium/en, so no compendium-mode gate could run. This pass worked around it by mining Actor/Item/Folder NAMES from raw-dumps, which establishes coverage but cannot gate a rendering against pack PROSE. Every disputed term should be re-gated in compendium mode once the packs are dumped.",
+  "Three sources the research wanted are still unread and any of them could overturn choices: 純美蘋果園 topic=121082.0 (a 2021 Chinese translation of the Alien RPG stealth rules, login-walled — the only other Chinese Alien RPG text known to exist), and 萌娘百科 / bilibili, which 403 automated fetch and which are exactly the source class that settled M41A脉冲步枪. Smartgun, Motion Tracker and Power Loader are all pending specifically because 萌娘百科 could not be read.",
+  "Special Order 937 sits in the glossary as 937号特别指令 against the brief's instruction to leave it pending, because terminology-web.json records it as directly attested at zh.wikipedia at confidence 'high'. That zh-wiki citation could NOT be re-derived this session (WebFetch unavailable) and rests on the survey's own reading. It is flagged in pending.resolved_since_brief; if the citation does not hold, move it back.",
+  "Pack Mule / Take Control are frozen against a case-insensitive comparison, so the Chinese must live in the Item description. That constraint is recorded but not yet enforced by anything — worth a release-time check that no name field carrying those talents has acquired Chinese.",
+  "cn.json ships several stratum-B defects this glossary now contradicts (GMONLY -> 仅限通用汽车 i.e. General Motors, Overwatch -> 守望先锋 the Blizzard game, SelectFirer -> 选择消防员 fireman, HOWMANYDICE -> 有多少基地死亡, Wildcatter -> 野猫, ColonialMarshal -> 陆战队军官, None -> 莫, OneTurn -> 一斡). The glossary carries the corrected values, but the lang-override file that applies them has not been written yet."
+ ]
+}

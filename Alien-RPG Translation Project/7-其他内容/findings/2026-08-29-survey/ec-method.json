@@ -1,0 +1,501 @@
+{
+ "file_layout": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/PROJECT.md",
+   "purpose": "714 KB master document. §0 stop-decision · §1 quick catch-up (three must-know facts, blind-spot table, term-arbitration ladder, 'where to start next round') · §2 version matrix · §3 hard constraints + §3.6 checker blind spots + §3.7 the ten 'criterion idling' failure shapes + §3.7.1 two documentation disciplines · §4 directory & script index · §5 SOP (5.0 upgrade catch-up / 5.1 post-upgrade routine / 5.2 batching / 5.3 three-pass calibration / 5.4 the full pre-release scan suite / 5.5 release) · §6 chronology + release table · §7 open items + smoke-test checklist · §8 append-only resolution log. Append-only for §8; version numbers written in exactly TWO places (header line + §2 matrix) and nowhere else."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/PARALLEL-RUNBOOK.md",
+   "purpose": "29 KB. THE most transferable artifact: the multi-agent parallel translation runbook. Written for a future self whose context has been summarised away — 'decide where you are from disk state alone, never from session memory'. Sections: 0 fixed paths / how to hand over between sessions · 1 the three status commands to run first · 2 resume semantics · 3 the landing (apply) sequence · 4 how to cut the next wave · 5 the six inviolable rules · 6 cross-check agent prompt · 6.5 the page-file format · 7 remaining work."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/1-Ember汉化插件/",
+   "purpose": "Numbered slot 1 = a git clone of the shippable translation module #1 (ember_cn_unofficial). Directly releasable; has its own .git, .github/workflows/release.yml and tags. The project repo and the plugin repos are SEPARATE git repos — commit translations in the plugin repo, docs+scripts in the outer repo."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/2-Crucible汉化插件/",
+   "purpose": "Numbered slot 2 = shippable translation module #2 (crucible-cn). Same shape as slot 1. Two modules exist because one covers the SYSTEM and one covers the campaign MODULE; for Alien this maps to alienrpg-cn (system) + alien-evolved-corerules/starterset-cn (modules)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/",
+   "purpose": "PERMANENT tooling, five subdirs: extract/ (LevelDB -> English baseline), tm/ (translation-memory build/prefill/dedupe), qa/ (38+ scripts: coverage, markup, residue, drift, resolution assertions), parallel/ (17 .py + 3 BRIEF.md: unit cutting, batch collection, per-unit checks), release/ (runtime generation)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-临时脚本/<date>-<round>/",
+   "purpose": "One-shot probes archived by date+round, NEVER deleted (so any conclusion can be recomputed). Each round's findings MUST be written to <date>-<round>/findings/. NOTE the trap: .gitignore had `4-临时脚本/**/*.json`, so irreplaceable human-adjudicated findings were silently kept out of the repo — they had to be rescued into 5-其他内容/findings/."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-工作区/",
+   "purpose": "Pure intermediate state from script runs (12 subdirs: fill-missing, lang-recheck, qa, release-check, unify-*). Explicitly deletable and re-runnable. Nothing that must survive goes here."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/5-其他内容/",
+   "purpose": "Durable non-code assets. Subdirs: glossary/ · english-baseline/ · reports/ (gitignored, regenerable) · reference/ (other-language implementations' term extractions) · findings/ (irreproducible human adjudications). Top-level files: EXCLUSIONS.json (project-level permanent exemption register: uuid_swap / glossary pending / name_splits / per-leaf term exemptions), EXCLUSIONS.same_en_split.json (125 per-fork-group exemptions, read at RUNTIME by an assertion), RESOLUTIONS.assertions.json (the rule file for the resolution gate — the count of rules is authoritative HERE, never transcribed into prose), STAGE-LOG.md (1518-line raw stage record)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/5-其他内容/glossary/",
+   "purpose": "glossary_ec.json (flat {en: cn}, 378 KB — the only shape consumers expect) + glossary_ec.byrole.json (per-field-role table, 522 KB) + glossary_ec.provenance.json (1.7 MB, per-term source + conflicts; the _meta here is the authoritative term count) + glossary_ec.disputes.json + glossary_ec.pending.json + enricher_surface_forms.json + dated unify_rules.<date>.json / port_rules.<date>.json rule files (one per adjudication round, kept forever)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/5-其他内容/english-baseline/<package>-<version>/",
+   "purpose": "Historical English snapshots, one dir per upstream version. THE LYNCHPIN of the whole upgrade-catch-up method: compendium/en/ only ever holds the CURRENT English, so without an archived old snapshot every drift criterion degrades to a heuristic. Also holds LOCAL-PATCHES.md (upstream typo fixes that a re-extract would silently revert). Naming embeds the upstream version read from _source.json."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/.../scratchpad/parallel/",
+   "purpose": "Session-scoped work dirs for the parallel wave: one dir per unit holding todo.json / already_translated.json / orphan_reference.json / pages/<i>.en.html / pages/<i>.cn.html / index.json / _original_cn.json / batch.json / _review_progress.json. Located via $env:EMBER_PARALLEL_ROOT so a new session can re-prep. NOT in git — anything unlanded when the session ends must be redone."
+  }
+ ],
+ "pipeline_stages": [
+  {
+   "stage": "0. Archive the current English as 'old' BEFORE anything else",
+   "what": "Snapshot compendium/en into 5-其他内容/english-baseline/<package>-<version>/ with the upstream version read from _source.json. This is step 0 of every upgrade cycle and the single point of failure for the whole method: without it, 'has the English changed' is unanswerable and every drift check silently degrades to a length heuristic. MUST be a FULL snapshot of every pack — this project snapshotted only 3 of 10 packs and three drift gates ran on 30% of the corpus for months while printing clean reports.",
+   "tooling": "3-常用脚本/qa/capture_baseline.py --repo <repo> --dest \"5-其他内容/english-baseline/<pkg>-<ver>\" [--note ...]"
+  },
+  {
+   "stage": "1. Define the mapping (declarative, single source of truth)",
+   "what": "Write the Babele document-mapping layers ONCE, as data, in extract/mappings.mjs — shaped exactly like Babele's own default-mappings.js (keyed by document type; subtype keys like `JournalEntryPage.ember.location` are natively normalised into `_variants` by 2.9.1). The same data is consumed by two places: the runtime hands it to babele.registerMapping(), and the extractor INTERPRETS it to decide which LevelDB fields to pull. That guarantees the extracted English keys are by construction the keys Babele will look for. Cross-align it block-by-block against babele/script/mapping/default-mappings.js and record any deliberate deviation with a written reason so nobody 'helpfully' completes it later.",
+   "tooling": "3-常用脚本/extract/mappings.mjs (data) + 3-常用脚本/release/runtime-converters.js (translate-direction custom converters) + 3-常用脚本/release/generate_runtime.mjs (generates each plugin repo's babele-mappings.js). Any edit to either source file REQUIRES re-running generate_runtime.mjs."
+  },
+  {
+   "stage": "2. Extract the English baseline from LevelDB packs",
+   "what": "Walk each pack's LevelDB, apply the mapping, emit Babele-shaped <packageId>.<packName>.json into <repo>/compendium/en/ plus a _source.json recording packageId/packageVersion. Key allocation is modelled on Babele's own ExportKeys with one deliberate difference: two documents wanting the same key whose extracted content is identical COLLAPSE onto that key rather than the second falling back to _id. The English baseline goes INTO git (both Crucible-FR and this project do this) but is excluded from the release zip.",
+   "tooling": "node 3-常用脚本/extract/extract_en.mjs --package <foundry pkg dir> --out <repo>/compendium/en [--target <layer>] [--pack <name>]  (requires classic-level resolvable from C:/Users/Taka/Desktop/fvtt)"
+  },
+  {
+   "stage": "3. Re-apply LOCAL-PATCHES, then verify by re-extract + per-leaf diff",
+   "what": "Upstream typo fixes recorded in english-baseline/LOCAL-PATCHES.md are overwritten by every re-extract. Re-apply them, then re-extract and diff leaf-by-leaf to prove the register is complete — do NOT infer completeness from 'the gate is green'. This project found a 5th patch that had been applied-but-unregistered for four rounds while every gate stayed green; any re-extract would have silently reverted it.",
+   "tooling": "manual + 3-常用脚本/qa/scan_en_drift.py as the verification diff"
+  },
+  {
+   "stage": "4. Compute the gap (three-way diff), separately for compendium and lang",
+   "what": "compendium side: scan_en_drift.py old-EN vs new-EN, four buckets — `stale` (EN changed AND the Chinese length ratio fits the OLD English → re-translate, this is the main product), `changed` (EN changed but CN already fits the new EN → spot-check), `gone` (upstream deleted, CN still there → dead weight), `new` (translate normally). The stale discriminator: this corpus's CN/EN plain-text length ratio median is 0.31; compare CN/oldEN vs CN/newEN against 0.31. It cut crucible 295→44 and ember 921→280 on first run. lang side: lang_gap.py five buckets NEW / DRIFT / UNTRANSLATED / STALE / UNREACHABLE. ⚠ `stale` in scan_en_drift means 'CN did not keep up' while `STALE` in lang_gap means 'upstream deleted' — OPPOSITE meanings; the latter is called `gone` in scan_en_drift.",
+   "tooling": "3-常用脚本/qa/scan_en_drift.py · qa/lang_gap.py · qa/scan_content_coverage.py (fallback when there is no old baseline: uses the cross-language invariant that English digits must survive into the Chinese)"
+  },
+  {
+   "stage": "5. Subtract what Babele resolves for FREE",
+   "what": "Run BEFORE handing anything to translators or you pay twice and create same-English-different-Chinese forks. Babele 2.9.1's DocumentConverter._genericTranslationSource scans every registered translated pack for one whose hasTranslation(data) is true, matching _id -> name -> sourceId, SCOPED BY DOCUMENT TYPE. In this project 352 of 371 nominally-untranslated campaign entries were resolved for free; the coverage number went from 'crucible 97% / ember 99%, 436 items missing' to a real residue of 19 items / 1556 chars.",
+   "tooling": "3-常用脚本/qa/resolve_generic_fallback.py --repo <repo> --also <other repo>  → writes reports/<repo>/todo/_residual_after_fallback.json"
+  },
+  {
+   "stage": "6. TM prefill before human/model translation",
+   "what": "Fill everything mechanically derivable first: fill_twin.py copies across twin packs where the English is byte-identical (12,560 entries / 8.17 M chars filled at 0 rejections, taking a pack from 0% to 90%); fill_missing.py fills leaves that do not EXIST on the Chinese side at all (a gap no other scan can see, because every other scan starts from 'the Chinese has a value'); fill_twin_names.py fills only EMPTY name slots and never overwrites. CRITICAL ORDERING: fix markup/alignment debt FIRST, then run TM fill — fill_twin abandons a fill when the markup does not match, and 66% of its 554 abandonments were exactly the pages a pending alignment batch was about to fix. Running it in the wrong order left thousands of entries unfilled. These scripts NEVER write compendium/cn directly; they emit a batch and go through apply_translations.py so the 8.17 M chars still pass all three gates.",
+   "tooling": "3-常用脚本/tm/fill_twin.py · tm/fill_missing.py · tm/fill_twin_names.py · tm/build_glossary.py"
+  },
+  {
+   "stage": "7. Cut units for the parallel wave",
+   "what": "10–12 units per wave, 270–310 K English chars total (20–30 K per translator), paired 1:1 with adversarial reviewers plus 1 cross-unit term checker = 21–25 agents; that consumes most of one quota window. Large journals split by page-weight, small ones merged, non-journal content bucketed (tables / actors / scenes / items). Orphaned translations from renamed paths are attached as DRAFT reference (90% usable, 100% dangerous to paste — they were written against older English). CRITICAL FORMAT DECISION: for anything that already HAS Chinese, do not hand out a todo list that makes the agent re-emit whole values. Hand out PAGE FILES — <i>.en.html (read-only) + <i>.cn.html (a byte-exact copy of today's Chinese that the agent edits with the Edit tool) + index.json + _original_cn.json. This cut authored output from 1.45 M to 260 K chars, made 'bytes nobody touched stay untouched' a property of the format instead of a matter of discipline, and turned quota death from an accident into an ordinary interruption (12 agents all killed, 219 of 493 pages still done and gated).",
+   "tooling": "3-常用脚本/parallel/prep_units.py (split/merge/bucket/journals) · prep_realign.py · prep_sigfix.py · prep_catchup.py · attach_orphans.py · slice_todo.py"
+  },
+  {
+   "stage": "8. Parallel translate + adversarial review",
+   "what": "Every unit gets a translator agent and a separate reviewer agent whose default stance is 'this finding is a false positive'. Round 8 measured the reviewers: 136 findings survived, 63 overturned (32% overturn rate). Round 4 measured recall: a full sentence-by-sentence read of 35 journals produced 507 findings and the attached reviewers found 188 MORE (~73% single-pass recall) — and nearly all the misses were mechanisable, which is why a mechanical sweep must follow every human read. Translators self-gate to 0 rejections before delivering. NO agent except the controller may write compendium/cn.",
+   "tooling": "Workflow tool with a UNITS array; briefs at 3-常用脚本/parallel/BRIEF.md (general), BRIEF-REALIGN.md (page-alignment batches), BRIEF-SIGFIX.md (markup-signature batches); lookup helper parallel/probe.py; residue self-check parallel/residue.py"
+  },
+  {
+   "stage": "9. Three-way MERGE (mandatory, not an optimisation)",
+   "what": "apply_translations.py is a WHOLE-LEAF overwrite and parallel batches are all generated against the same base, so landing them in sequence lets later batches silently roll back earlier ones — measured at 350 contested paths in one round, 681 in another. Take compendium/cn's CURRENT value as base and replay each batch's edits as a diff. Real conflicts get written into resolutions.json with a stated reason and are adjudicated by hand (typical round: 43 batches, 681 paths, 24 multi-claimed, 20 auto-merged, 2 human calls).",
+   "tooling": "4-临时脚本/2026-08-12-fix/merge_batches.py --manifest <m.json> --scan then --merge --out-dir <merged>; manifest built by 2026-08-12-audit3/prep_manifest*.py; conflict-heavy rounds use gen_resolutions.py to draft 'superset + overlay' resolutions"
+  },
+  {
+   "stage": "10. Apply through the gate — never write compendium/cn by hand",
+   "what": "Three gates, any failure rejects the whole entry: (a) the English source no longer matches the baseline (the pack moved under you); (b) no CJK in the value (unless the English holds no visible prose at all, e.g. a bare @Embed); (c) markup multiset mismatch — @X[...] targets, [[/cmd ...]] bodies, and tag-name counts must be identical, {label} is stripped first because labels ARE supposed to be translated. A fourth gate refuses to overwrite an existing Chinese value unless --force, and it walks EVERY level of the path, not just the leaf. Always --dry to 0 rejections first, then land.",
+   "tooling": "3-常用脚本/qa/apply_translations.py --repo <repo> --pack <pack.json> --batch <batch.json> [--dry] [--force]; lang side: qa/apply_lang.py with its own four gates (key must exist in the NEW English / placeholders {x} identical / HTML tags 1:1 / inline-markup TARGETS identical) plus a CJK requirement with a keep-english allowlist"
+  },
+  {
+   "stage": "11. Normalise style, then run the full QA suite",
+   "what": "Quote/dash normalisation, then the §5.4 suite (see qa_discipline). Acceptance baseline: markup drift may only go DOWN, never up — if it went up, do not commit, investigate. Foreign-script contamination must be 0. For fill/catch-up batches, BLOCK and TRUNCATED must visibly DROP after landing; if they did not, the write did not happen (almost always a missing --force).",
+   "tooling": "4-临时脚本/2026-08-06/normalize_quotes.py --mode quotes|dashes --write · then the §5.4 command block · plus parallel/tagseq.py (positional block-skeleton diff — the gate's multiset comparison cannot see a block inserted in the WRONG PLACE) and parallel/prose_survival.py / diff_realign.py (did the translator quietly reword already-vetted Chinese? `~` opcodes are what reviewers scrutinise)"
+  },
+  {
+   "stage": "12. Commit, then smoke-test in a real world, then release",
+   "what": "Two repos commit separately (plugin repo = translations; outer repo = docs + scripts). Smoke test is the ONLY thing scripts cannot prove — every static check is JSON comparison with Foundry never loaded. This project shipped every single version without it, and that remains its top-priority open item.",
+   "tooling": "git in each plugin repo; smoke checklist in PROJECT.md §7 'as of round N'; console probes game.babele.inspectMapping(type) / await game.babele.sourceDiagnostics() / game.babele.cacheDiagnostics()"
+  }
+ ],
+ "key_scripts": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/extract/extract_en.mjs",
+   "purpose": "Generic LevelDB -> Babele-shaped English JSON extractor. Deliberately hard-codes NO field list; it interprets mappings.mjs, the same data handed to babele.registerMapping(), so extracted keys are by construction the keys Babele will look for. Handles key allocation (identical-content collision collapse), _source.json emission, and the extract direction of the custom converters.",
+   "reusable_for_alien": "HIGH — near drop-in. Change: (1) FVTT_NODE_ANCHOR is hard-coded to 'C:/Users/Taka/Desktop/fvtt/package.json' for resolving classic-level; (2) --target layer names (crucible|ember) become (alienrpg|alien-evolved-corerules|alien-evolved-starterset); (3) the extract-direction custom-converter bodies (crucibleDescription/crucibleNested/crucibleActions) are Crucible-schema-specific — replace with whatever alienrpg's polymorphic fields need, or delete if none. NOTE: your Alien packs are ALREADY dumped as one Adventure doc each (scratchpad/alien/raw/{system,starterset,corerules}.json), so you may only need the mapping-interpretation half."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/extract/mappings.mjs",
+   "purpose": "THE single source of truth for mapping data. 44 KB, shaped exactly like Babele's default-mappings.js. Every deliberate deviation from Babele 2.9.1's defaults is annotated with the evidence that forced it and a 'do not helpfully complete this' note. Also documents dead declarations that were removed after measuring the LevelDB corpus (e.g. Actor.system.actions is a derived property, never in toObject(), so it idled in both directions).",
+   "reusable_for_alien": "STRUCTURE reusable, CONTENT replaced. Keep: the file-header contract (same data feeds runtime + extractor), the block-by-block alignment to babele default-mappings.js with a 'last verified <date>' comment, and the rule that `document` converter entries must NOT be replaced by hand-written traversal converters (that is what buys source-pack fallback). Replace: all Crucible/Ember document and subtype layers. For Alien, Babele 2.9.1 already ships Adventure defaultMappings — start from those and only ADD the alienrpg-specific system.* fields."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/release/generate_runtime.mjs",
+   "purpose": "Generates each plugin repo's babele-mappings.js from mappings.mjs + runtime-converters.js, stamping a 'GENERATED FILE — DO NOT EDIT BY HAND' header naming both sources and the regeneration command. Guarantees the extractor's keys and Babele's lookup keys cannot drift.",
+   "reusable_for_alien": "HIGH — change only the TARGETS array (repo dir, layer export name, module id)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/validate_translations.py",
+   "purpose": "Core acceptance gate AND the source of all remaining-work numbers. Per pack reports covered/todo, `orphans` (CN values at paths the EN baseline no longer has — dead, Babele will never apply them) and `residue` (CN byte-identical to EN — never actually translated). Emits the machine-readable todo lists (<reportDir>/todo/*.todo.json) that every batch path string comes from.",
+   "reusable_for_alien": "HIGH — generic. It only needs compendium/en and compendium/cn in the Babele shape."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/apply_translations.py",
+   "purpose": "The ONLY sanctioned writer into compendium/cn. Flat {path: 中文} batch in, three gates (EN-source drift / no-CJK / markup-multiset), plus --force to permit overwriting existing Chinese, --dry for repeatable rehearsal. Reads batches as utf-8-sig because PowerShell writes BOMs. Has an __main__ guard so prep scripts can reuse its split_path().",
+   "reusable_for_alien": "HIGH — the markup regexes are Foundry-generic (@X[...], [[/cmd ...]], <tag>). Change: the CJK regex if you need a wider range, and add any Alien-specific enricher form to MARKUP/INLINE_CMD. Keep the {label}-stripped-before-comparison rule and the walk-every-level clobber check verbatim."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/apply_lang.py",
+   "purpose": "The lang/cn.json counterpart. Four gates: key must exist in the NEW English (catches typo'd and deleted keys), {placeholders} identical to English, HTML tags 1:1, inline-markup TARGETS identical (labels excepted). Plus a CJK requirement with escape hatches for keys whose English has no Latin letters and for a keep-english allowlist. --clean-stale removes keys upstream deleted.",
+   "reusable_for_alien": "HIGH — fully generic Foundry i18n logic."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/lang_gap.py",
+   "purpose": "Three-way diff for lang/cn.json: old English (the archived <repo>/lang/en.json, in git) vs new English (the installed package's lang/en.json) vs the translation. Buckets NEW / DRIFT / UNTRANSLATED / STALE (+ UNREACHABLE). There is NO 'PARTIAL' bucket — no tool produces one.",
+   "reusable_for_alien": "HIGH — generic. Note the naming trap to carry forward: lang_gap's STALE means 'upstream deleted', scan_en_drift's stale means 'the Chinese did not keep up'. Rename one of them in the Alien project."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/flatten_lang.py",
+   "purpose": "Flattens lang/*.json into the flat dotted keys Foundry actually resolves, reimplementing foundry.utils.getProperty's real two-step lookup (whole key first, then dotted descent). Catches the hybrid shape ('EMBER.CALENDAR' as a top-level dotted key whose value is a nested object) that satisfies NEITHER lookup path. Pre-release invariant: keys-before-flatten == keys-after-flatten == English key count.",
+   "reusable_for_alien": "HIGH and MANDATORY. This one check caught 77% of one release's lang file being silently dead. Only the English lang path changes."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_en_drift.py",
+   "purpose": "The main cross-version drift criterion; §5.0 is built on it. Old-EN vs current-EN direct diff, four buckets, with the CN/EN length-ratio-vs-0.31 discriminator that makes 'stale' actionable.",
+   "reusable_for_alien": "HIGH — change only the 0.31 median ratio, which must be MEASURED on the Alien corpus first (it is language-pair + corpus specific; the code has 0.31 in scan_en_drift.py:126-129 and scan_markup_drift.py:118/124, and TRUNCATED's real threshold is plain_cn < 0.22 * plain_en at scan_markup_drift.py:120)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/capture_baseline.py",
+   "purpose": "Snapshots the full compendium/en into english-baseline/<pkg>-<ver>/, reading packageId/packageVersion from _source.json so the dir name cannot be mistyped. Step 0 of every upgrade cycle.",
+   "reusable_for_alien": "HIGH — generic. Run it ONCE at project start on the Alien packs so version 1 of the baseline exists before any upstream update."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_markup_drift.py",
+   "purpose": "Library-wide markup diff (as opposed to apply_translations' write-time gate, which never inspects legacy content). Five classes: LINK (@UUID/@Action/@Condition/[[/…]] TARGETS mismatch — broken links, must fix), BLOCK (block-tag counts — a missing or surplus paragraph), INLINE (<strong>/<em> — cosmetic), PLACEHOLDER ({x} — braces visible in UI), TRUNCATED (plain-text ratio collapse — a whole section untranslated).",
+   "reusable_for_alien": "HIGH — generic Foundry markup. Re-measure the ratio constants."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_markup_targets.py",
+   "purpose": "Finds Chinese that leaked INSIDE markup targets/parameters — the mechanical enforcement of 'everything between the brackets is machinery, only a trailing {label} is prose'. A translated target silently breaks the link/embed while coverage still says 100% and the write-time gate never saw it (legacy content).",
+   "reusable_for_alien": "HIGH — generic."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_class_drift.py",
+   "purpose": "Scans HTML class-attribute drift. Exists because the write gate's signature captures TAG NAMES ONLY (regex `<\\s*(/?)([a-zA-Z][a-zA-Z0-9]*)`), so <ul class=\"complex-check\"> and a bare <ul> are indistinguishable to it — and in this system those classes are FUNCTIONAL (section.block gamemaster hides GM text from players; li.advantage/li.critical-success drive check rendering).",
+   "reusable_for_alien": "HIGH if alienrpg uses functional classes (stress/panic/consequence blocks are the likely analogue). The script is class-agnostic; you only supply which classes matter."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_content_coverage.py",
+   "purpose": "Finds Chinese that dropped content, using the cross-language invariant that English digits must survive. Uses a MULTISET (not a set — the set version was silently blind whenever the same number appeared twice on a page) and understands Chinese numerals plus decade/dozen-style multipliers, otherwise it forces bad Chinese ('2 个十年').",
+   "reusable_for_alien": "HIGH — the fallback when there is no old baseline. Change the Chinese-numeral table only if you widen the range. Known blind spot to inherit and fix: its MARKUP regex strips `@[A-Za-z]+\\[[^\\]]*\\]` wholesale, so any prose written INSIDE an enricher's brackets (this project's @Embed[... readaloud=\"...\"], 48 passages / 17 K chars) is invisible to it."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_foreign_script.py",
+   "purpose": "Finds foreign-script contamination (Armenian, Thai, Cyrillic, Arabic, Devanagari fragments spliced in by MT). Invisible in a diff, survives every structural check, visible to players. --fix deletes bare contamination; cases where a foreign fragment REPLACED a real word are reported for manual repair, never auto-fixed.",
+   "reusable_for_alien": "HIGH — fully generic. Must be 0."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/prune_dead.py",
+   "purpose": "Deletes CN keys the EN baseline no longer has (Babele can never look them up — pure download weight) and, as a by-product, catches keys with Chinese in the KEY NAME (e.g. items.吞噬思维 Devour Thoughts.name), which means that translation does not exist for the player at all. Its prune() only truncates trailing array elements — deleting a middle element would shift indices and move every later translation onto someone else's key.",
+   "reusable_for_alien": "HIGH — generic. Keep the array-index warning."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/tm/fill_missing.py",
+   "purpose": "The reverse-direction gap finder: leaves that exist in English and are ENTIRELY ABSENT on the Chinese side. Every other scan starts from a Chinese value, so this class of gap is invisible to all of them. Descends into arrays (the original walk only handled dict+str, which put every array-nested leaf outside its domain).",
+   "reusable_for_alien": "HIGH — generic. The array-descent fix is the important part to carry over."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/resolve_generic_fallback.py",
+   "purpose": "Subtracts what Babele's generic fallback translates for free, by reimplementing 2.9.1's DocumentConverter._genericTranslationSource / runtime.translatedPackFor semantics INCLUDING its document-type scoping. Must run before every translation wave.",
+   "reusable_for_alien": "HIGH — but re-verify against the installed Babele version's source; this is the class of script that must 'replicate the verified system's real semantics'."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/unify_terms.py",
+   "purpose": "Rule-driven term unification with an ENGLISH GATE: a rewrite happens only when (1) the English source actually matches the `en` regex, (2) the Chinese contains one of the `variants`, and (3) the English does NOT match an optional `unless` (to exclude a colliding concept). --review emits a markdown review list writing nothing; --batch-dir emits batches for apply_translations --force. This is the mechanical guarantee behind 'check the English before judging the Chinese'.",
+   "reusable_for_alien": "HIGH — generic; you supply a rules JSON per adjudication. Never hand-edit around it."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-临时脚本/2026-08-12-fix/term_gate.py",
+   "purpose": "English-gated term counting, three buckets: gated_hit (English has the term AND Chinese has the old rendering — real), cn_only (Chinese has the rendering but English is a different word — probably NOT a leftover), en_only (English has the term but Chinese used another rendering). Usage: --en \"\\bBoon\\b\" --cn \"恩惠骰,恩惠\".",
+   "reusable_for_alien": "HIGH and ESSENTIAL. This is the tool behind method-lesson #2 ('every term conclusion must carry an English-gated count'). Bare frequency both over- and under-counts: 25 hits of 电能 and 160 of 阶位 looked like leftovers until the English gate showed they rendered 'electrical energy' and 'Rank'."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-临时脚本/2026-08-12-fix/merge_batches.py",
+   "purpose": "Three-way merge of parallel batches. Takes the CURRENT compendium/cn value as base and replays each batch's edits as a diff; real conflicts land in resolutions.json for human adjudication. Without it, whole-leaf overwrite lets later batches silently roll back earlier ones.",
+   "reusable_for_alien": "HIGH — required for any multi-agent wave, regardless of game system. Promote it out of 4-临时脚本 into 3-常用脚本/parallel/ in the new project."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/4-临时脚本/2026-08-12-fix/pair_dump.py",
+   "purpose": "Paired EN/CN leaf dump carrying batch_path (the key form a batch file consumes directly). --slice i/k gives deterministic sharding, --grep-path / --grep-en select a subset.",
+   "reusable_for_alien": "HIGH — the workhorse for handing an agent 'here are the pairs you own, here is the exact key to write back'."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/parallel/prep_realign.py + collect_realign.py + diff_realign.py + tagseq.py + prose_survival.py",
+   "purpose": "The page-file toolchain, the highest-value invention of the whole project. prep_realign cuts units as en.html/cn.html page pairs plus index.json and a byte-exact _original_cn.json; collect_realign reassembles edited pages into a batch and reports UNTOUCHED (pages still byte-identical = the agent did not do them) — deliberately NOT re-implementing the markup gate, because a second copy of those regexes would just drift; diff_realign shows block-level +/-/~ with `~` being what reviewers scrutinise; tagseq does POSITIONAL block-skeleton comparison (the gate's multiset comparison passes a block inserted in the wrong place); prose_survival counts sentences of the ORIGINAL Chinese surviving verbatim, the direct test of 'do not reword vetted text'.",
+   "reusable_for_alien": "HIGH — the format and the four checks are game-agnostic. Change: hard-coded project root P, PACK name, and the block-tag set if alienrpg uses different structural tags. Delivery standard to carry over verbatim: UNTOUCHED == 0 AND gate rejections == 0."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/parallel/prep_units.py + slice_todo.py + attach_orphans.py + batch_status.py + check_catchup.py",
+   "purpose": "Wave logistics. prep_units cuts journal / merged / bucket / split units reading the post-fallback residual list so free-fallback items are never handed out; slice_todo groups the todo by journal/page; attach_orphans hangs old-path translations of renamed pages into the work dir as draft reference; batch_status reports per-unit batch completeness before a resume; check_catchup is the completion criterion for CONTENT-defined batches (English digits present in Chinese + length ratio >= 0.25), because the markup gate reports 0 rejections both before AND after such work.",
+   "reusable_for_alien": "HIGH. check_catchup encodes the single most important runbook lesson: decide what proves this batch is DONE before you send it, and write that into the prompt. Change the hard-coded paths, the pack name, and the length-ratio constants."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/parallel/probe.py + residue.py + count_terms.py",
+   "purpose": "Translator-facing helpers. probe.py answers 'how has this English term already been rendered in this pack' with context (plus --names for page-name EN->CN listing); residue.py finds Latin words left standing in a batch after tags, Foundry markup and {labels} are stripped, with an ALLOW set of established forms (AC/DC/HP/GM/gp/sp, pronouns, entity refs); count_terms.py counts competing renderings across LIVE cn packs, excluding orphan journals (dead translations Babele never applies).",
+   "reusable_for_alien": "HIGH — replace the ALLOW set with Alien's conventions (e.g. keep MU/TH/UR, WY, APC, Xenomorph handling as decided) and repoint the pack paths."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/tm/build_glossary.py",
+   "purpose": "Builds the project glossary in layers (base adjudicated table -> pairs harvested from shipped translations by walking EN and CN baselines in parallel -> report of English terms with no Chinese at all). The harvest pool is keyed on (English, FIELD ROLE), never English alone, because 'does this name carry the bilingual English tail' is a per-field convention (name is bilingual, tokenName/adjective/levels/folders/table-result rows are bare Chinese) — keying on English alone let a library-wide majority decide the FORM and corrupted entries. Emits flat glossary_ec.json plus byrole/provenance/pending/disputes.",
+   "reusable_for_alien": "MEDIUM-HIGH — the layering and the role-keyed harvest are the transferable ideas. Base layer, CONVENTION_PARENTS and role list are project-specific. Alien has an existing community lexicon question (Xenomorph/Weyland-Yutani/Colonial Marines) that becomes the base layer."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/assert_resolutions.py + 5-其他内容/RESOLUTIONS.assertions.json",
+   "purpose": "Compiles prose adjudications into EXECUTABLE assertions run after the scan suite, turning consistency from 'maintained by memory' into 'maintained by a gate'. Has --selftest (positive/negative backtests of the criteria themselves), per-assertion 'how many RULES did I judge' counters with registered floors, per-assertion payload floors, and a fingerprint of the criterion files that auto-reruns --selftest when they change.",
+   "reusable_for_alien": "MEDIUM — the 443 KB implementation is deeply project-specific, but the PATTERN is the single most transferable QA idea here. For Alien, start small: a rules JSON of 10–20 term/format decisions with kinds like term_gated / cn_absent / distinct_terms / version_matrix, and the discipline that a failing assertion is fixed by fixing the library or by explicitly overturning the decision AND editing the assertion — never by only editing the assertion to make it green."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_same_en_split.py",
+   "purpose": "Library-wide 'the same English string has N different Chinese renderings'. Covers the triple blind spot of sync_twin_packs (same path only), propagate_fix (--since increments only) and scan_name_splits (name field only): the same English string appearing at DIFFERENT paths had never been compared. First run: 1514 groups / 8308 leaves. Reports forks only, gives no suggestion — the majority is frequently the wrong side.",
+   "reusable_for_alien": "HIGH — generic and, per this project's own accounting, the highest-yield systematic-defect finder they ever wrote (1068 groups unified, 4652 leaves landed, 225 substantive defects surfaced)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_name_splits.py · scan_token_name.py · scan_label_vs_name.py · scan_bare_english_names.py · scan_uuid_swap.py · scan_name_binding.py + dump_bindings.mjs · scan_attr_text.py",
+   "purpose": "The name/label consistency family. name_splits: one English name with two Chinese names. token_name: tokenName vs name (what the player literally reads on the map). label_vs_name: @UUID{label} vs the target document's Chinese name, strict criterion 'only report where the English label already equalled the target's English name'. bare_english_names: builds an EN->CN proper-noun dictionary from name fields and compiles ALL of them into ONE alternation regex per leaf (the naive O(names x leaves) never finishes). uuid_swap: label attached to the neighbour's target (link points at the wrong document; every other gate is silent because both multisets equal the English). name_binding: RollTable result names and scene note labels vs the document their id actually binds to — the binding lives ONLY in the LevelDB packs, so dump_bindings.mjs must export it first, and it MUST be given every relevant package or targets fall to OUT_OF_SCOPE and UNCERTAIN inflates. attr_text: player-visible text inside HTML/enricher ATTRIBUTE values, plus attribute NAMES translated into Chinese (target= -> 目标=, which browsers ignore entirely).",
+   "reusable_for_alien": "HIGH for token_name / name_splits / same_en_split / attr_text / uuid_swap / markup_targets — all game-agnostic. name_binding needs an alienrpg-flavoured dump_bindings (RollTables and scene notes exist in alienrpg too). bare_english_names needs its whitelist of structural false positives (bilingual-name English halves, folder names, enricher brackets, morpheme use) rebuilt for the Alien corpus."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/scan_dropped_terms.py · scan_number_drift.py · scan_marker_followup.py",
+   "purpose": "The three structural blind spots of the naive drift recheck ('is every new-English-only token present in the Chinese' only looks at ADDITIONS): (1) upstream deleted a word and the Chinese still carries it, (2) a number changed (30->20, /2 -> /4) and the Chinese did not, (3) markup was added/removed and the Chinese did not follow. All three print a COVERAGE LINE (packs scanned / packs in repo / packs missing + how many Chinese leaves never entered the gate) and support --strict-coverage to exit non-zero on a missing pack.",
+   "reusable_for_alien": "HIGH — generic. The coverage-line + --strict-coverage pattern should be built into EVERY baseline-consuming script from day one in the Alien project; here it was retrofitted after three gates ran on 3 of 10 packs while printing clean reports."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/propagate_fix.py · sync_twin_packs.py · port_orphans.py · restore_enrichers.py",
+   "purpose": "propagate_fix pushes a fix from one commit onto byte-identical English copies elsewhere (three-way diff cannot find them — their English never changed, so they stay self-consistent with an old, wrong rule). sync_twin_packs aligns two packs carrying the same content under different rulesets wherever the English is byte-identical but the Chinese differs. port_orphans moves translations to renamed paths using a rules table and REPORTS whatever it could not place instead of dropping it — note it moves paths only, never text, so old names survive inside the Chinese and you must grep for them afterwards. restore_enrichers turns bare Chinese back into @Condition[...]-style enrichers, only when the Chinese word occurs exactly once in that leaf, re-comparing markup afterwards and rolling back the entry if it does not match.",
+   "reusable_for_alien": "propagate_fix and port_orphans: HIGH, generic. sync_twin_packs: HIGH IF the Alien project has parallel packs (corerules vs starterset likely overlap). restore_enrichers: HIGH if alienrpg uses label-less enrichers."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/parallel/BRIEF.md (+ BRIEF-REALIGN.md, BRIEF-SIGFIX.md)",
+   "purpose": "The translator-facing brief, deliberately short (131 lines) and structured as: 1 your inputs and outputs (todo.json / already_translated.json / orphan_reference.json / batch.json, 'copy the path byte-for-byte') · 2 hard markup rules as a table of concrete forms · 3 naming and register conventions (bilingual tail ONLY on name/page-name fields, bare Chinese in prose and inside {labels}; quotes, dashes; 'do not copy errors in the English source, fix them and list them') · 4 how to look up existing renderings BEFORE inventing one · 5 mandatory pre-delivery self-check (apply --dry to 0 rejections, then residue.py) · 6 what to return (a structured summary, NEVER the translation text: unit name, counts, final --dry result, every new proper noun you coined, every English-source error you corrected, everything you were unsure about).",
+   "reusable_for_alien": "HIGH — reuse the SKELETON verbatim. Replace the markup table with alienrpg's real forms and the term list with Alien's. Keep the explicit warning that the brief's own term table is a second-hand excerpt that has been WRONG (5 entries caught by agents) and that existing translations + the glossary outrank it."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Ember-Crucible Translation Project/3-常用脚本/qa/dump_bindings.mjs · 4-临时脚本/2026-08-12-fix/dump_ids.mjs",
+   "purpose": "LevelDB-side exporters for data that exists ONLY in the packs and never in the Babele translation files: scene-note entryId/pageId and TableResult documentUuid bindings (dump_bindings, accepts MULTIPLE --package and must be given all of them); and the id->name index (dump_ids, reads only the FIRST --package, so it must be run once per repo with the matching package).",
+   "reusable_for_alien": "HIGH — this is the pattern for 'the criterion needs data the translation files do not contain'. Both are small; port directly."
+  }
+ ],
+ "hard_constraints": [
+  "DECLARATIVE MAPPING ONLY. Express mappings as data handed to babele.registerMapping() (2.9.1 natively supports subtype keys such as `JournalEntryPage.ember.location` and normalises them into `_variants`; `_when`/`_variants` branch on field values). Do NOT write hand-written traversal converters. The built-in recursive `document` converter is what provides SOURCE-PACK FALLBACK — an embedded item carrying _stats.compendiumSource or flags.core.sourceId is translated from its ORIGINAL pack's translation file. In this project that single behaviour covered 82.4% of actor-embedded item text (~600 K chars) for free. Replacing it with a traversal converter throws that away.",
+  "ONE SOURCE OF TRUTH FOR MAPPINGS. mappings.mjs is the only place mapping data is written; the runtime file (babele-mappings.js) is GENERATED from it and stamped 'DO NOT EDIT BY HAND'; the extractor INTERPRETS the same file. This is what makes 'does this CN path exist in the EN file' identical to 'will Babele find this translation'. Any edit to mappings.mjs or runtime-converters.js REQUIRES re-running generate_runtime.mjs in the same commit, and the extract direction and translate direction of every custom converter must change in the same commit.",
+  "BASELINE = THE LATEST UPSTREAM RELEASE, NOT WHATEVER IS INSTALLED LOCALLY, AND HISTORY MUST BE ARCHIVED. compendium/en/ holds only the CURRENT English; historical snapshots must be captured into 5-其他内容/english-baseline/<pkg>-<version>/ BEFORE re-extracting, as a FULL snapshot of every pack. Without the old baseline the entire drift method degrades into heuristics. Corollary from this project's own memory notes: the deployment is on a VPS, so local install state is not diagnostic evidence.",
+  "PER-PROJECT GLOSSARY. glossary_ec.json is built for this world and must NOT be merged into or replaced by another game's master glossary (PF2E's table renders Restrained as 受制 where this project decided 受缚). A cross-system table is a LOW-PRIORITY SUGGESTION source only, and every hit needs human confirmation. Term-priority ladder, strong to weak: the `name` field of the same entry/item > already-translated pages in the same volume > library-wide majority > glossary > the brief's excerpt table.",
+  "SCOPE ISOLATION BETWEEN RULE SETS. A translation source for ruleset A has NO authority over ruleset B even when the English strings collide. Measured: of 752 name disagreements against a d&d5e Chinese module, 542 fell on the Crucible side where the English merely happened to match (Dagger/Longbow) while the entries were Crucible's own. Cross-fill scripts therefore fill EMPTY slots only and never overwrite.",
+  "THREE-WAY MERGE BEFORE APPLY, ALWAYS, when more than one batch was generated against the same base. apply_translations.py is a WHOLE-LEAF overwrite; landing batches in sequence silently rolls back earlier ones (350 contested paths in one round, 681 in another). Base = the CURRENT compendium/cn value; each batch is replayed as a diff; genuine conflicts go into resolutions.json with a written reason.",
+  "NOBODY BUT THE CONTROLLER WRITES compendium/cn. Translators and reviewers write only batch.json inside their own unit dir. Landing is done by the controller alone, so a bad agent costs exactly one batch file. And while a workflow is running the controller must not write compendium/cn either — agents are reading it (probe, gate) and will read half-written JSON. All normalisation and repair writes are deferred until the wave ends.",
+  "EVERY WRITE GOES THROUGH THE GATE. Three gates on compendium (EN-source drift / no-CJK / markup multiset), four on lang (key exists in new EN / placeholders identical / HTML tags 1:1 / inline-markup TARGETS identical, plus CJK-with-allowlist). Even an 8.17 M-char mechanical TM fill emits a batch and goes through the gate rather than taking a private write path.",
+  "--force SEMANTICS. Without --force, apply_translations SKIPS any path that already holds Chinese and reports `skipped(existing)`, NOT an error. Every catch-up / fill / re-alignment / term-unification batch by definition targets paths that already hold Chinese, so it MUST carry --force or it is a silent no-op. This has been hit for real: 8 fill units wrote nothing while overall coverage kept rising from other units in the same wave, and the only thing that exposed it was markup drift refusing to move. Acceptance rule: after a fill/realign batch lands, BLOCK and TRUNCATED must visibly DROP; if they did not, it did not write. The clobber check also walks EVERY level of the path, not just the leaf, because a translated `description` living as a plain string where English has an object is a supported shape.",
+  "TRANSLATORS SELF-GATE TO ZERO REJECTIONS. `apply_translations.py --dry` must print 0 rejections before an agent may deliver. Markup errors are stopped before they reach the controller, so the controller does not have to re-check them by hand.",
+  "MARKUP IS FUNCTIONAL, NOT DECORATIVE. Everything inside @X[...] brackets and inside [[/cmd ...]] is machinery and is copied verbatim; only a trailing {label} is prose. Structural tag COUNTS (<p>/<li>/<h3>/<h4>/<section>/<div>/<strong>) must equal the English exactly — no merging, no splitting, no dropping a paragraph. Functional class attributes are copied verbatim. `&Reference[...]` WITHOUT a {label} is a reference key rendered by the system itself and translating it breaks it.",
+  "VERSION NUMBERS LIVE IN EXACTLY TWO PLACES (the document header line and the version matrix) and are mechanically asserted against module.json. Any third mention in prose becomes an unguarded second source of truth — measured: one such line sat four releases out of date.",
+  "ROUND-SPECIFIC NUMBERS ARE NEVER TRANSCRIBED. Rule counts come from RESOLUTIONS.assertions.json, script counts from `ls`, hashes from running sha256sum, table sizes from the .mjs itself. Anything transcribed into prose has drifted at least once. A task brief's numbers are LEADS, not baselines: when a real run disagrees with the brief, you report the real number and the delta — you never bend the measurement to match the brief.",
+  "§8 IS APPEND-ONLY. When a later round refutes an earlier conclusion, APPEND a footnote to that line and leave the original wording intact. Rewriting the historical line to read as if it had always been right destroys the lesson — this project's most valuable lessons survive only because the wrong version is still readable. Exception: version numbers, chronology rows, download-verification traces and git describe output are FACTS and are never globally replaced (a one-shot sed once falsified 8 historical records).",
+  "AT THE END OF EVERY ROUND, REWRITE THE STATUS SECTION FROM ACTUAL MEASUREMENT (git status + git log -1), never transcribe the previous round's. A round's output that does not reach the document does not exist for the next session. This project once left the header at 'round sixteen' for many rounds, causing new sessions to misjudge both where the work stood and whether the working tree matched the shipped release."
+ ],
+ "qa_discipline": [
+  "THE CENTRAL PREMISE: all-green does not mean clean. The 0.9.2 release passed every §5.4 item at zero and the very next audit found 8 blocking defects in that same library. When the suite is all zero, the correct question is NOT 'is there anything left wrong' but 'WHICH CLASS OF ERROR STILL HAS NO CRITERION'. PROJECT.md §1 keeps a standing blind-spot table answering exactly that, ranked by value.",
+  "THE SCAN FAMILIES (the §5.4 pre-release suite, ~22 numbered items, run as one PowerShell block). Family A — lang channel: lang_gap five buckets all zero, especially UNREACHABLE (Chinese exists but Foundry cannot find it), plus flatten_lang's three-numbers-equal invariant. Family B — markup: scan_markup_drift (LINK/BLOCK/INLINE/PLACEHOLDER/TRUNCATED), scan_markup_targets (Chinese leaked inside brackets), scan_class_drift (functional classes the tag-name signature cannot see). Family C — content: scan_content_coverage (digits as cross-language invariant). Family D — contamination and dead weight: scan_foreign_script (must be 0), prune_dead (CN keys EN no longer has, plus keys with Chinese in the key NAME). Family E — the reverse direction: fill_missing (leaves absent on the Chinese side entirely — every other check starts from a Chinese value). Family F — link/label integrity: scan_uuid_swap, scan_label_vs_name (needs a per-repo id dump), scan_name_binding (needs a multi-package binding dump from LevelDB). Family G — cross-channel: lang vs compendium vs the runtime hard-coded .mjs, three grades of output (hard criterion / weak signal / no support, the latter two meaning 'a human should look', not 'this is wrong'). Family H — attributes: scan_attr_text (visible text in attribute VALUES; attribute NAMES translated to Chinese). Family I — naming consistency: scan_name_splits, scan_token_name, scan_bare_english_names, scan_status_name (compendium must match the lang status name CHARACTER FOR CHARACTER, not as a substring), scan_same_en_split. Family J — cross-version drift: scan_en_drift plus its three structural blind spots scan_dropped_terms / scan_number_drift / scan_marker_followup, all with coverage lines and --strict-coverage. Family K — the resolution gate: assert_resolutions.py (main gate) AND --selftest, both, always.",
+  "THE ACCEPTANCE RULE IS NOT 'EVERY ITEM ZERO', IT IS 'EVERY ITEM ZERO OR LANDING IN AN ARCHIVED EXEMPTION'. Two exemption registers, different shapes, never merged: a project-level EXCLUSIONS.json (uuid_swap / glossary pending / name_splits / per-leaf term exemptions) and a per-fork-group EXCLUSIONS.same_en_split.json (125 entries) that an assertion reads as RUNTIME INPUT. Saying 'all zero' pushes the next round into one of two errors: fixing legitimate forks, or waving real defects through as exemptions.",
+  "THE INVENT-A-CRITERION LOOP (round 8's method, 25 agents, the highest-yield round). Instead of running existing checks looking for residue, each agent INVENTS a class of error that has no criterion yet, writes a script for it, does a BIDIRECTIONAL BACKTEST — specificity by reading every hit by hand, sensitivity by INJECTING known defects into a TEMP COPY of the library (injectors never touch compendium/) — and then submits evidence. 12 probes reported 121 confirmed + 43 uncertain. Then 13 adversarial review agents re-judged everything with the DEFAULT STANCE 'this finding is a false positive': 136 survived, 63 overturned, a 32% overturn rate. Yields ranged from 1277 raw -> 9 confirmed to 24 -> 21; the low-precision ones still found real defects, and the criterion classes that survived (scan_status_name, the entity-anchored arm of pronoun-gender) were promoted into the standing suite.",
+  "'CAN THIS CRITERION BE BACKTESTED AT ALL' IS ITSELF A CRITERION. Failure shape (h) — the criterion is fine but the PROBE feeding it is fabricating input — was discovered only because someone tried to write a sensitivity backtest and found the probe was not reading the copy tree. If you cannot write a backtest for a criterion, do not trust its green.",
+  "ADVERSARIAL REVIEW IS NON-OPTIONAL AND IS ALWAYS THE THING THE QUOTA KILLS. Translators run first and eat most of the window, so reviewers queue behind them and die. 'Batches are complete' therefore reads as 'this wave is done' when it is not. Never land without confirming the review actually ran — it is the only quality guarantee in the parallel pipeline. Reviewers must also keep their own progress ledger (append each finished page id to <unit>/_review_progress.json, read it at start, skip what is listed), because translators get resumability free from the gate and reviewers have no equivalent.",
+  "REVIEWERS ARE ALSO WRONG SOMETIMES. Of 188 reviewer-supplied additions, ~155 were accepted after independent verification and a batch was rejected — one had a false premise and applying it would have broken correct text. Two rejections were PARTIAL (other edits in the same leaf were right, only one spot was reverted).",
+  "MECHANICAL CHECKS CAN ONLY FALSIFY, NEVER PROVE. check_catchup passing means the digits and the length are there; it says nothing about whether the narrative, conditions and causality kept up. Content-defined batches must still be read against the English even when every mechanical check is green.",
+  "DECIDE THE COMPLETION SIGNAL BEFORE SENDING A BATCH, AND WRITE IT INTO THE PROMPT. The markup gate is a valid completion signal only when the defect is DEFINED ON MARKUP (block-count realignment: yes; signature mismatch: yes; content catch-up: NO — those entries' markup was already correct, so the gate reports 0 rejections before and after). A catch-up wave once had all 13 agents killed by quota having written nothing while the gate reported 'applied 378 / rejected 0'; only collect_realign's UNTOUCHED 378 exposed it.",
+  "JUDGE PROGRESS FROM DISK, NEVER FROM THE WORKFLOW RETURN VALUE. Two consecutive runs reported agents_error 13 / agents_done 0 — total failure by the return value — while actually advancing 219 then 422 of 493 pages. The return value is only populated when an agent returns normally.",
+  "REGISTER EVERY 'CRITERION IDLING' SHAPE YOU GET BURNED BY, IN ONE PLACE. This project's register has ten: (a) the criterion's own regex eaten by escaping; (b) it does not read the library at all (one assertion was green across four releases while 14 lang + 176 compendium violations sat under it); (c) it reads a stale report snapshot instead of the current library; (d) the gate runs but the exemption table is empty (or swallows the whole domain); (e) input missing but the criterion runs anyway, treating 'nothing to check' as 'pass'; (f) the regex is dead but the main gate is still green — only --selftest catches it; (g) input not missing but silently substituted (a .get(k, k) fallback compared a path that does not exist; symptom: the conclusion depends on cwd); (h) the criterion is fine, the probe feeding it is fabricating input; (i) the criterion ran and judged, but the conclusion never reached the door — 'skipped' was not counted as failure and rc stayed 0 while the screen was full of exceptions; (j) the criterion executed and returned, but its RULE TABLE was emptied — and its self-reported 'how much did I check' stays large. All ten report GREEN. A check that checks nothing while reporting green is worse than no check.",
+  "THE MOST EXPENSIVE SINGLE LINE: the anti-idling number must count 'HOW MANY RULES DID I JUDGE', not 'how many leaves did I scan'. Proof by two same-round injections: emptying a field list collapsed the detail from 'checked 1443 leaves' to 'checked 0 leaves' (visible), while emptying a forbidden-word list left 'English gate hit 244 leaves' byte-identical (invisible). Same guardrail hollowed out, one number collapses and one does not, and the difference is only what the number counts.",
+  "FIVE HARD CONSTRAINTS DERIVED FROM THOSE SHAPES: (1) never pass \\b or \\s through a rewriting script — Python turns \\b into a backspace and the regex dies silently while the gate stays green; edit the file with an editor. (2) Write probes to disk and run them — bash heredocs eat backslashes and make the probe falsely green. (3) A probe's simulated input must point at the upstream contract that produces that shape; 'the data file has this field' does NOT imply 'the runtime hands you this field'. (4) Every conclusion a criterion computes must be traced to how it reaches the door — printed text, counters, and main()'s return code are three different things and have been observed contradicting each other. (5) Any probe that iterates 'one by one' must FIRST assert that the number of items it sliced equals a known true value and exit if it does not — this project mis-sliced five times (42 vs a true 212; 61 vs a true 74, which produced 16 fake 'no reds'), and every one was caught by that pre-assertion. The honest sentence attached: 'the probe did not error, it just measured the wrong thing' is now the highest-frequency failure mode, and only a known true value stops it.",
+  "BEFORE WRITING 'another gate covers this' IN A JUSTIFICATION, DO A PER-SITE MUTATION BACKTEST. Of three gates named as backup in one justification, one covered nothing and one was not even in the assertion set. Same class: before declaring something 'impossible / permanently unanswerable', run every available carrier past it (git history, release zips, someone else's snapshots) — that claim is just as falsifiable.",
+  "REGISTERING A FAILURE SHAPE CONFERS NO IMMUNITY TO IT. Shape (h) was re-committed in the very round that registered it; shape (g) recurred inside the criterion file itself, in a function sitting next to a docstring that names that exact pit. What produces immunity is a backtestable criterion, not a paragraph in a document.",
+  "STRENGTH PARAMETERS MUST NOT LIVE IN THE SAME LAYER AS THE CRITERION (a separate dimension from idling: the criterion IS running, its pass mark was just moved). Editing a recorded size from 19 back to 2 turned a gate that pinned 78 table entries into one that pinned nothing, with zero diff to library or criterion source.",
+  "EVERY ROUND'S FINDINGS MUST BE WRITTEN TO DISK, AND NOT INTO A GITIGNORED DIRECTORY. Anything a human adjudicated and that cannot be recomputed goes into 5-其他内容/findings/. This project lost visibility of 237 findings and 125 hand-adjudicated exemptions to a `4-临时脚本/**/*.json` ignore rule and had to rescue them later.",
+  "SMOKE TESTING IS THE ONE THING SCRIPTS CANNOT REPLACE and remains the project's #1 open item across every release. Console probes: game.babele.inspectMapping(<type>) should show your custom converters; inspectMapping with a subtype data payload should hit the subtype layer; await game.babele.sourceDiagnostics() shows each collection's translation sources and overlaps; game.babele.cacheDiagnostics(). Then check by eye: compendium entries render Chinese; after importing an adventure, items EMBEDDED in actors are Chinese too (this is the test of source-pack fallback); no TypeError in console. Every mapping-layer change, every runtime .mjs mechanism change and every enum-shaped field needs its own added checklist line."
+ ],
+ "release_process": [
+  "Preconditions: the full §5.4 scan suite passes (every item zero or in an archived exemption), assert_resolutions main gate AND --selftest both green with BOTH numbers reported, flatten_lang's 'keys before flatten == keys after flatten == English key count' holds for every repo, and smoke testing has been done (this project never did, and says so in the document rather than pretending).",
+  "Edit module.json: `version`, `download` AND `changelog` — all three. `download` must point at this exact tag; `changelog` must be https://github.com/<repo>/releases/tag/<tag>. Tag SHAPE differs per repo in this project (one uses a bare x.y.z, the other a v-prefixed vx.y.z) and the workflow verifies it literally, so a mismatch fails the build. Only one of the two repos' workflows verifies `changelog`, so on the other repo that field drifts silently — add the check to every repo in the new project.",
+  "Update .github/release-body-template.md (Actions uses it as the release body).",
+  "Push main, create the tag, push the tag. The tag-triggered .github/workflows/release.yml verifies module.json version == tag, verifies the download URL matches the tag, (should) verify the changelog URL, builds module.zip and creates the release.",
+  "THE ZIP MUST BE REBUILT, NOT UPDATED. `zip -r` APPENDS to an existing archive. Leaving a stale module.zip in the repo shipped a 22 MB stale copy — including a corrupted translation file — to users. The workflow does `rm -f module.zip` first.",
+  "EXCLUSION LIST: compendium/en/* (the English baseline, ~22 MB, exists only to compute drift — shipping it doubles every user's download), lang/en.json (the lang_gap baseline, ~110 KB; also must NOT be declared in module.json `languages`, or a frozen snapshot silently overrides upstream's English forever), lang/lang_keep_english.json, release/*, .git/*, .github/*, .gitignore, *.zip, plus each repo's own maintenance-script paths. THE LISTS DIFFER PER REPO AND MUST NOT BE COPIED BETWEEN THEM: in one repo `scripts/` holds runtime esmodules that MUST ship, in the other `scripts/` is entirely maintenance code that must not. Copy the -x list from that repo's own release.yml, never from documentation.",
+  "POST-RELEASE: download the published artifact and verify it. manifest and zip both HTTP 200; then list members and assert the exclusions actually held. Use `unzip -Z1` (member names only), NOT `unzip -l` — the latter's first line is `Archive:  module.zip`, which matches a `\\.zip$` pattern and makes the assertion fail against its own header. Write the assertion per-repo for the same reason as the exclusion list.",
+  "APPEND A ROW TO THE CHRONOLOGY IMMEDIATELY. This step was skipped 12 releases in a row and had to be back-filled from git tags plus module.json. Do it at release time, never in a batch later.",
+  "Fallback when Actions is unavailable: rm -f module.zip; zip -r module.zip . <the -x list copied from this repo's release.yml>; gh release create <tag> module.json module.zip --notes-file .github/release-body-template.md.",
+  "A release-time truth to state plainly in the release notes: 'the translations did not change this round' is not automatically true just because compendium/ and lang/ are untouched. A runtime .mjs change (this project trimmed a notification pattern table from 31 to 27 entries) is a USER-VISIBLE behaviour change — four notifications began showing English again — without touching a single compendium leaf."
+ ],
+ "pitfalls": [
+  {
+   "pitfall": "Windows glob returns backslashes, so a path.replace('/cn/','/en/') silently no-ops and the script compares the Chinese file against ITSELF",
+   "why": "Produced a confident, completely wrong conclusion ('all 97 label-spacing cases are faithful to the English'). After switching to os.path.join the real answer was 6 genuine defects. The comparison never errored — it just compared two identical things.",
+   "guard": "Every EN<->CN comparison script must FIRST assert that the two paths it resolved are not equal AND that their contents are not equal, and abort otherwise. Use os.path.join / pathlib, never string replacement on glob output."
+  },
+  {
+   "pitfall": "Term conclusions drawn from bare frequency counts, without an English gate",
+   "why": "Both over- and under-counts. 25 hits of 电能 and 160 of 阶位 looked like leftovers of Electricity/Tier but the English was 'electrical energy' and 'Rank'. Conversely 167 hits of 闪电 contained only 23 real defects — 123 were faithful renderings of Lightning and 44 were metaphors. Acting on the bare count would have damaged 144 correct entries.",
+   "guard": "Every term conclusion carries a three-bucket English-gated count (gated_hit / cn_only / en_only) via term_gate.py, and every rewrite goes through unify_terms.py, which changes an entry only when the English source actually contains the term. Never hand-edit around it."
+  },
+  {
+   "pitfall": "Whole-leaf overwrite silently rolls back parallel batches",
+   "why": "apply_translations.py replaces the whole leaf, and all batches in a wave were generated against the same base. Landing them in order means whichever lands last wins. Measured: 350 contested paths in one round, 681 in another, 24 paths claimed by more than one agent.",
+   "guard": "Mandatory three-way merge (merge_batches.py) using the CURRENT compendium/cn value as base, replaying each batch as a diff; real conflicts adjudicated by hand into resolutions.json with a written reason. Also: never give two agents overlapping path sets — when two defect classes overlap (32 shared pages), MERGE them into one task rather than splitting them across agents."
+  },
+  {
+   "pitfall": "Missing --force turns a whole wave into a silent no-op",
+   "why": "Any batch targeting entries that already have Chinese (catch-up, fill, realign, term unification) is skipped by the 'existing Chinese' gate, reported as skipped(existing) rather than as an error. Eight fill units wrote nothing while overall coverage kept rising from other units in the same wave, so nothing looked wrong.",
+   "guard": "--force on every such batch, and a post-landing acceptance criterion defined on the DEFECT, not on the gate: BLOCK / TRUNCATED must visibly drop. Markup drift may only go down, never up; if it went up, do not commit."
+  },
+  {
+   "pitfall": "Baseline missing a pack = that pack is silently never scanned, and the report looks identical to 'scanned, clean'",
+   "why": "Three drift gates ran on 3 of 10 packs for months; 15,147 Chinese leaves never entered any of them. The reports were clean-looking the whole time.",
+   "guard": "Every baseline-consuming script prints a coverage line (packs scanned / packs in repo / packs missing + how many Chinese leaves were excluded) and supports --strict-coverage to exit non-zero. Baseline capture must be a FULL snapshot, produced by a script that reads the version from _source.json, never a hand-copied directory."
+  },
+  {
+   "pitfall": "Re-extracting the English silently reverts locally applied upstream-typo patches",
+   "why": "A patch had been applied but never registered in LOCAL-PATCHES.md and had sat that way for four rounds while every gate was green. Any re-extract would have reverted it with no signal.",
+   "guard": "After re-extracting and re-applying, re-extract AGAIN and diff leaf-by-leaf to prove the patch register is complete. 'The gate is green' is not evidence that the register is complete."
+  },
+  {
+   "pitfall": "Comparing markup as an unordered multiset lets a block inserted in the WRONG PLACE pass with zero rejections",
+   "why": "Counts are identical, only the order is wrong; players read a room's paragraphs scrambled.",
+   "guard": "Run tagseq.py (positional block-skeleton diff via difflib) on realign-style batches. Note it also flags legitimate in-block word-order changes as MISMATCH, so read the opcodes rather than the count."
+  },
+  {
+   "pitfall": "The markup signature captures TAG NAMES ONLY, so functional class attributes are invisible to it",
+   "why": "<ul class=\"complex-check\"> and a bare <ul> are identical to the gate, and those classes decide whether GM text is hidden from players and how check results render. First measurement: 412 of 2214 class-bearing translated entries disagreed with the English.",
+   "guard": "scan_class_drift.py as a separate standing check. And a related judgment error worth inheriting: a missing `section.block gamemaster` is NOT proof of a GM-content leak — in 36 cases the Chinese did not contain that GM content at all (a missing-block defect). Verify by searching the Chinese for that section's reference coordinate before concluding."
+  },
+  {
+   "pitfall": "Re-emitting a whole page washes away carefully reviewed prose",
+   "why": "Every sentence goes back through the model and the wording inevitably drifts. Also, sizing units by the MISSING content under-estimated the real output by 5.6x (260 K estimated vs 1.45 M actually authored) and got agents killed mid-unit.",
+   "guard": "The page-file format: give the agent a byte-exact copy of today's Chinese and require Edit-tool surgery, never Write. 'Untouched bytes stay untouched' becomes a property of the format. Then measure it with prose_survival.py and read the `~` opcodes in diff_realign.py."
+  },
+  {
+   "pitfall": "A half-written batch.json from a quota-killed agent gets picked up by the retry, producing something that is neither the old nor the new version",
+   "why": "With the old batch.json format, completion granularity is the whole batch — you cannot see that 4 of 12 entries were written.",
+   "guard": "Run batch_status.py before any resume and move incomplete batches aside (rename to batch.partial.bak, never delete). With the page-file format the opposite applies: leave everything in place, because completion is judged per page by the gate itself, so resume is purely incremental (measured: applied + rejected == page count in every unit)."
+  },
+  {
+   "pitfall": "Semantic criteria that stop at 'co-occurs in the same leaf'",
+   "why": "The first pronoun-gender criterion reported 160 findings, ALL false — the symmetric brother 26 : sister 26 count is the tell. The cause is always the same: there are several people in this leaf. Also, naive matching of a Chinese pronoun character sweeps in unrelated words containing it.",
+   "guard": "Entity anchoring plus nearest-antecedent resolution. Use the source's own declarations (this corpus had 977 explicit '(NG, Name, he/him)' markers, harder than any inference) to type the proper nouns, then require the pronoun's nearest antecedent to be that person — that reached 0 false positives. Clean the token stream before judging."
+  },
+  {
+   "pitfall": "Numeric criteria anchored on Arabic digits are blind to Chinese numerals",
+   "why": "'lasts for six turns' rendered with a Chinese numeral, mistranslating Turn as Round, was missed by the probe's 21 hits and only found by a reviewer re-scanning independently. Conversely, forcing digit-for-digit coverage without folding Chinese numerals produced bad Chinese ('3 层矿井' from 16 correct instances of 三层矿井).",
+   "guard": "Fold Chinese numerals (and multiplier words like decade/dozen) into Arabic before comparing, in BOTH directions."
+  },
+  {
+   "pitfall": "Coverage percentages counting entries Babele resolves for free as gaps",
+   "why": "Reported 97% / 99% with 436 'missing' entries; translating them would have manufactured same-English-different-Chinese forks. In the campaign pack 352 of 371 nominally-missing entries were free-fallback resolutions and the real residue was 19 entries / 1556 chars.",
+   "guard": "Always run resolve_generic_fallback.py before believing a coverage number or handing out work."
+  },
+  {
+   "pitfall": "The 'majority rendering' and the `name` field are both frequently the WRONG side",
+   "why": "Of 153 label-vs-name disagreements, 41% were the name being wrong (a proper noun that had been machine-translated word-by-word). A 3:1 majority lost to an already-adjudicated decision. In another case 16 copies of a majority rendering all mistranslated 'scales using Dexterity'.",
+   "guard": "Split-detection scripts report forks and give NO suggestion. Judge direction per group, and check whether that `name` is itself correct before using it as the top rung of the evidence ladder. Prefer the change with the smaller blast radius (rename 4 item entries rather than edit 126 prose sites) — but only after confirming which side is right."
+  },
+  {
+   "pitfall": "A fix applied to one copy leaves byte-identical siblings silently wrong forever",
+   "why": "The same ability is copied verbatim into several packs. Upstream edits one copy's English; three-way diff surfaces only that copy. The others' English and Chinese remain mutually consistent — consistent with the OLD, wrong rule — and no scan can ever see them again.",
+   "guard": "propagate_fix.py after every fixing round (push a fix onto byte-identical English siblings), and sync_twin_packs.py for standing forks between parallel packs (first run cleared 484 pre-existing forks that incremental tooling had never touched)."
+  },
+  {
+   "pitfall": "Ordering error between the alignment fix and the TM cross-fill",
+   "why": "fill_twin abandons a fill when the markup does not match; 66% of its 554 abandonments were exactly the pages a pending realignment batch was about to fix. Running the fill first left thousands of entries unfilled for no reason (re-running after the fix: abandonments 554 -> 143, 421 extra fills).",
+   "guard": "Fix markup/alignment debt FIRST, then run the TM fill. General form: main line lands completely, THEN twin-pack sync runs last, because every main-line landing manufactures new twin forks."
+  },
+  {
+   "pitfall": "port_orphans moves PATHS, never TEXT",
+   "why": "After an upstream rename the translation lands on the new path still containing the OLD name in its prose (a Lightning->Storm rename left 28 stale 闪电).",
+   "guard": "After any rename-class drift, grep the library for the old name. That is what scan_renamed_terms.py automates (two detectors: an English tail that no longer exists anywhere in today's baseline; and a name present in the old baseline but absent from the current one whose Chinese rendering is still in the library)."
+  },
+  {
+   "pitfall": "Adding a field to the mapping's translate direction without the extract direction (or vice versa), and adding fields that do not actually exist",
+   "why": "An item's description key overwrote Babele's built-in default by key (mergeObject replaces a string with an object wholesale), silently zeroing ~766 K chars of one ruleset's content out of the pipeline while coverage still reported 100%. Separately, a field declared on the wrong document type idled in both directions for months (Actor.system.actions is a derived property that never enters toObject()).",
+   "guard": "Both directions change in the same commit. Before declaring any field, MEASURE it in the LevelDB corpus and in both compendium/{en,cn} ('this field appears on 0 documents of that type'). And enumerate all string leaves in the packs, subtract the mapping's coverage set, and review the remainder — 'the field the extractor never extracted' was this project's single highest-yield blind-spot class."
+  },
+  {
+   "pitfall": "'Everything is 100% translated' hides a whole enum field being translated as prose",
+   "why": "A terrain enum id with `choices` was treated as body text, writing 104 Chinese values into document data — which breaks movement costs at runtime and throws console errors, while every static check is happy.",
+   "guard": "Distinguish enum/id fields from prose fields in the mapping, and put every enum-shaped field on the smoke-test checklist — this class is only visible with Foundry actually loaded."
+  },
+  {
+   "pitfall": "A gate that validates at WRITE time can never see what entered before it existed",
+   "why": "357 entries / 791 K chars permanently violated the markup gate because they were written before the gate existed or while the English still looked different. Block-count measures could not see it — the damage was INSIDE the blocks (a dual-system <sup>/<sub> pair collapsed to one branch, so the other system's readers see nothing).",
+   "guard": "Periodically run the gate's own criterion over the WHOLE library, not only over new writes. Note the second-order payoff: fixing that debt unblocked 15 term unifications that could not be written (their existing markup already failed the gate) and freed 713 K chars of twin-pack TM fill."
+  },
+  {
+   "pitfall": "Session-scoped scratchpad work is lost at a session boundary",
+   "why": "Unit dirs and batches live in a per-session temp path and a new session cannot reach the old one, nor resume its workflow (runIds are session-local).",
+   "guard": "Land and commit every batch before switching sessions. Keep all scripts and briefs in the repo so a new session is self-sufficient; re-prep by pointing an env var at the new scratchpad. The runbook is written to be read cold, deciding state from disk plus three status commands, never from memory."
+  },
+  {
+   "pitfall": "A scheduled wake-up lands on top of a still-running wave",
+   "why": "A wave takes over an hour; writing compendium/cn while agents are reading it hands them half-written JSON.",
+   "guard": "The first action on every wake-up is 'is a workflow still running'. If yes, report 'still running' and do nothing. Idling once is far safer than writing into a live wave."
+  },
+  {
+   "pitfall": "PowerShell/bash syntax bleed in documented command blocks",
+   "why": "A line ending in `\\` is a bash continuation but a PowerShell ParserError; 9 such historical lines had to be fixed at once. Separately, PowerShell writes batch files with a BOM, and the default console encoding raises UnicodeEncodeError on any script that prints a warning glyph.",
+   "guard": "PowerShell continuation is a backtick. Readers of batch files use utf-8-sig. Prefix python invocations with PYTHONIOENCODING=utf-8 (or PYTHONUTF8=1)."
+  },
+  {
+   "pitfall": "A scan that is not idempotent producing a batch that re-breaks already-correct data",
+   "why": "A chained substitution table re-applied to an already-fixed library still reported '3 misalignments fixed' and emitted a batch that would have re-corrupted 7 correct entries. Its default output dir was also hard-coded to a long-dead session's scratchpad.",
+   "guard": "Mark such scripts 'run only when there is an actual problem', add an idempotency guard (detect the already-correct value and exit without emitting), require an explicit --out-dir, and hand-verify every entry of such a batch before landing it."
+  },
+  {
+   "pitfall": "Two tools using the same word for opposite meanings",
+   "why": "scan_en_drift's `stale` means 'the Chinese did not keep up'; lang_gap's `STALE` means 'upstream deleted it' (which scan_en_drift calls `gone`). Acting on the wrong one deletes live translations or re-translates dead ones.",
+   "guard": "Rename one of them in the new project; if you cannot, document the disambiguation everywhere both appear."
+  },
+  {
+   "pitfall": "Adopting a wrong length-ratio band from documentation instead of measuring the corpus",
+   "why": "A stale docstring said 0.4-0.7 was normal; the measured median for this corpus is 0.31 (suspect-inflation above 0.44, suspect-omission below 0.20, TRUNCATED at < 0.22). Using 0.4-0.7 flags almost every correct translation as anomalous.",
+   "guard": "Measure the CN/EN plain-text length ratio on YOUR corpus before wiring any threshold, and grep out stale threshold values left in docstrings. Also remember length ratio is a candidate filter only — one known blocking defect sat at 0.377, squarely inside the normal band."
+  },
+  {
+   "pitfall": "Translating a page-title heading changes Foundry's slug and breaks every #anchor link into it",
+   "why": "234 @UUID[...#anchor] links broke at once because the anchor is derived from the heading text.",
+   "guard": "Add explicit id= attributes to the headings (112 leaves here) — and put 'do the #anchor links actually jump' on the smoke-test list, because whether Foundry's TOC builder honours an explicit id can only be confirmed with a world open."
+  },
+  {
+   "pitfall": "Writing dotted top-level keys into lang/*.json whose values are nested objects",
+   "why": "Foundry resolves a key by checking the WHOLE key first, then descending by dots. A top-level key 'A.B' whose value is {C: ...} satisfies neither path, so the translation is unreachable — 77% of one release's lang file was dead this way, and it shipped.",
+   "guard": "flatten_lang.py before every release with the three-numbers-equal invariant, plus an UNREACHABLE bucket in lang_gap. Note the corollary: some UI strings genuinely cannot go in lang (upstream hard-codes them with no i18n key) and need a runtime patch channel instead — which then becomes a THIRD channel that must be cross-checked against the other two."
+  },
+  {
+   "pitfall": "A runtime notification/pattern table applied to a GLOBAL hook affects every other module",
+   "why": "A regex table consumed by a wrapper around ui.notifications.notify runs against every notification any module emits. Its blast radius is far larger than tables scoped to your own windows.",
+   "guard": "Scope runtime string patching as narrowly as possible; keep a gate that runs the SHIPPING translate functions in a node subprocess with negative cases ('must not eat prose', 'must not eat another module's notification') as well as positive ones; and require that every entry added to such a table comes with a test case, so adding one without a case turns the gate red by design."
+  },
+  {
+   "pitfall": "Directory naming and platform basics",
+   "why": "Windows directory names cannot contain '/', so the project dir uses a hyphen. Node needs classic-level resolvable from a fixed anchor path. Some scans take 15-20 minutes and die under a default 2-minute timeout, which reads as a hang.",
+   "guard": "Hyphenate. Pin the node anchor. Give the known-slow scans their own timeout or run them in the background, and record which ones they are."
+  }
+ ],
+ "module_skeleton_files": [
+  "module.json — id, title, description, authors, version, url, manifest (…/releases/latest/download/module.json), download (…/releases/download/<TAG>/module.zip — must literally contain this release's tag), compatibility {minimum, verified, maximum: \"14.999\"}, esmodules: [\"register.js\", <optional runtime hard-coded-string patch .mjs>], languages: [{lang, name, path: \"lang/cn.json\"}], relationships.requires: [{id:\"babele\", type:\"module\", compatibility:{minimum:\"2.9.1\"}}, {id:<the translated package>, type:\"module\"|\"system\", compatibility:{minimum, verified}}] (a SYSTEM target goes under relationships.systems instead), styles: [{src, layer:\"modules\"}], bugs, changelog (…/releases/tag/<TAG>)",
+  "register.js — the registration entry point. Imports DOCUMENT_MAPPINGS and PROJECT_CONVERTERS from ./babele-mappings.js, and inside `Hooks.once('babele.init', …)` (NOT Foundry's `init` — Babele sets game.babele in its own init then synchronously calls babele.init) registers the converters and calls babele.registerMapping(DOCUMENT_MAPPINGS). Guard with `game.modules.get('babele')?.active`. Also the home for any Foundry/system data-shape shims.",
+  "babele-mappings.js — GENERATED, never hand-edited. Header names both source files and the regeneration command. Exports the converter functions and the DOCUMENT_MAPPINGS object keyed by document type, including subtype keys (`JournalEntryPage.<subtype>`, `RegionBehavior.<subtype>`) which Babele 2.9.1 normalises into _variants.",
+  "compendium/cn/<packageId>.<packName>.json — one per pack; the shipped translations. Plus optionally `<packageId>._packs-folders.json` to translate compendium FOLDER names (Babele recognises it by the collection name ending in ._packs-folders).",
+  "compendium/en/<packageId>.<packName>.json + compendium/en/_source.json — the English baseline. IN git (needed for every drift computation and for validate_translations), EXCLUDED from the release zip. _source.json records packageId/packageVersion so baseline snapshots can be named correctly. Note a pack with entries=0 will exist on the en side but not the cn side — that asymmetry is normal.",
+  "lang/cn.json — the Foundry i18n translations (the channel Babele does not cover).",
+  "lang/en.json — the archived English lang file, used as the OLD baseline by lang_gap.py / flatten_lang.py. IN git, EXCLUDED from the zip, and deliberately NOT declared in module.json's `languages` (declaring it would let a frozen snapshot override upstream's English forever).",
+  "lang/lang_keep_english.json — the allowlist of keys legitimately left in English (so the CJK gate does not reject them).",
+  "styles/<module>-cn.css — CJK font fallback and typography fixes; declared in module.json styles with layer:\"modules\".",
+  "scripts/<module>-hardcoded-cn.mjs (only if the upstream package hard-codes UI strings with no i18n key) — the third translation channel: a runtime patcher. If present it is an esmodule and MUST ship in the zip; that makes the repo's `scripts/` directory shippable, which is why per-repo zip exclusion lists must never be copied between repos.",
+  "selfcheck/ or scripts/<module>-cn-selfcheck.mjs (optional) — an in-world self-check panel. If two modules each carry a copy, add an assertion that the two files are byte-identical.",
+  "README.md",
+  "LICENSE (add one — this project's repos do not have one)",
+  ".gitignore",
+  ".github/workflows/release.yml — tag-triggered. Verifies module.json version == tag, verifies download URL contains the tag, verifies changelog URL == releases/tag/<tag>, then `rm -f module.zip` and `zip -r module.zip . -x <per-repo exclusion list>`, then creates the release.",
+  ".github/release-body-template.md — the release body Actions uses."
+ ]
+}

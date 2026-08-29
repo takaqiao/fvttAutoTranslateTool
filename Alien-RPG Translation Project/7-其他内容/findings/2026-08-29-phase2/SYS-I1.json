@@ -1,0 +1,273 @@
+{
+ "unit": "SYS-I1",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-I1.cn.json",
+ "summary": "26 items delivered (12 skill-stunts + 14 specialty), same shape as payload, same per-item field order. The 12 skill-stunt names are T-EXACT: I did not type them — the generator pulls each one out of `1-系统汉化插件/lang/cn.json` by its `ALIENRPG.Skill<key>` and copies the value, so byte-equality is structural, not clerical. I verified the whole chain in source first: `module/data/actor-character.mjs:468` writes `skills[skl].description = game.i18n.localize(CONFIG.ALIENRPG.skills[skl].name)`, `templates/actor/character-skills.hbs:15` emits it as `data-pmbut`, `module/sheets/character-sheet.mjs:1119` feeds it to `game.items.getName()`. Names as written: 近战 · 指挥 · 通信科技 · 重型机械 · 操控 · 医疗 · 机动 · 侦察 · 驾驶 · 远程战斗 · 耐力 · 生存. The 14 specialty names are T-BILINGUAL (`中文 English`, one ASCII space) with the Chinese head pulled byte-equal from the matching `ALIENRPG.<Career>` lang value — every one of the 14 has a lang counterpart, because `config.mjs:342 career_list` labels them for the sheet dropdown. None of the 26 is in DO-NOT-TRANSLATE.json (checked all five T-FROZEN sections programmatically); nothing looks a specialty up by name, the dropdown stores the numeric id. `notes` is emitted as the literal `[object Object]` on all 26, untouched. The 12 descriptions get an explicit English-slug `id=` on the `<h2>` per the uniform heading rule; `apply_translations.markup_signature` ignores attributes, so this costs nothing at the gate. Upstream's trailing double space before `</em>` is preserved verbatim rather than tidied.",
+ "chars_en": 2595,
+ "chars_cn": 1951,
+ "label_lookups": [
+  {
+   "english": "Close Combat",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Command",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "Comtech",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "Heavy Machinery",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "重型机械"
+  },
+  {
+   "english": "Manipulation",
+   "lang_key": "ALIENRPG.Skillmanipulation",
+   "used": "操控"
+  },
+  {
+   "english": "Medical Aid",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Piloting",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "Ranged Combat",
+   "lang_key": "ALIENRPG.SkillrangedCbt",
+   "used": "远程战斗"
+  },
+  {
+   "english": "Stamina",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "Survival",
+   "lang_key": "ALIENRPG.Skillsurvival",
+   "used": "生存"
+  },
+  {
+   "english": "Colonial Marine",
+   "lang_key": "ALIENRPG.ColonialMarine",
+   "used": "殖民海军陆战队 Colonial Marine"
+  },
+  {
+   "english": "Colonial Marshal",
+   "lang_key": "ALIENRPG.ColonialMarshal",
+   "used": "殖民地执法官 Colonial Marshal"
+  },
+  {
+   "english": "Company Agent",
+   "lang_key": "ALIENRPG.CompanyAgent",
+   "used": "公司代理人 Company Agent"
+  },
+  {
+   "english": "Entertainer",
+   "lang_key": "ALIENRPG.Entertainer",
+   "used": "艺人 Entertainer"
+  },
+  {
+   "english": "Homebrew",
+   "lang_key": "ALIENRPG.Homebrew",
+   "used": "自定义 Homebrew"
+  },
+  {
+   "english": "Kid",
+   "lang_key": "ALIENRPG.Kid",
+   "used": "儿童 Kid"
+  },
+  {
+   "english": "Medic",
+   "lang_key": "ALIENRPG.Medic",
+   "used": "医生 Medic"
+  },
+  {
+   "english": "Mercenary",
+   "lang_key": "ALIENRPG.Mercenary",
+   "used": "雇佣兵 Mercenary"
+  },
+  {
+   "english": "Officer",
+   "lang_key": "ALIENRPG.Officer",
+   "used": "飞行官 Officer"
+  },
+  {
+   "english": "Pilot",
+   "lang_key": "ALIENRPG.Pilot",
+   "used": "驾驶员 Pilot"
+  },
+  {
+   "english": "Roughneck",
+   "lang_key": "ALIENRPG.Roughneck",
+   "used": "杂工 Roughneck"
+  },
+  {
+   "english": "Scientist",
+   "lang_key": "ALIENRPG.Scientist",
+   "used": "科学家 Scientist"
+  },
+  {
+   "english": "Synthetic",
+   "lang_key": "ALIENRPG.Synthetic",
+   "used": "合成人 Synthetic"
+  },
+  {
+   "english": "Wildcatter",
+   "lang_key": "ALIENRPG.Wildcatter",
+   "used": "独立勘探者 Wildcatter"
+  },
+  {
+   "english": "Skill Stunts (item type, source text writes it 'Skill-Stunts')",
+   "lang_key": "TYPES.Item.skill-stunts / ITEM.TypeSkill-stunts",
+   "used": "技能炫技 — used inside the 12 descriptions as 「技能炫技」条目"
+  },
+  {
+   "english": "Stunts",
+   "lang_key": "ALIENRPG.Stunts",
+   "used": "炫技"
+  },
+  {
+   "english": "the Alien rule book (phrasing precedent for '(See Alien Rule book Page #64 onward)')",
+   "lang_key": "ALIENRPG.Seepage104 = '参见《异形RPG》规则书第 104 页。'",
+   "used": "（参见《异形RPG》规则书第 64 页起）"
+  }
+ ],
+ "frozen_kept": [
+  "[object Object] — the literal notes value on all 26 items, emitted byte-unchanged",
+  "English tails on the 14 T-BILINGUAL specialty names: Colonial Marine / Colonial Marshal / Company Agent / Entertainer / Homebrew / Kid / Medic / Mercenary / Officer / Pilot / Roughneck / Scientist / Synthetic / Wildcatter",
+  "no DO-NOT-TRANSLATE.json T-FROZEN string occurs in this unit — checked programmatically against name_lookups, rolltable_names, folder_names, item_names (case-insensitive) and name_substring_tests"
+ ],
+ "self_gate": [
+  {
+   "check": "1. T-EXACT: the 12 skill-stunt names byte-compared (UTF-8 encoded) against lang/cn.json ALIENRPG.Skill<key>, key map taken from DO-NOT-TRANSLATE.json sections.exact_match_to_lang",
+   "result": "PASS — 12/12 byte-equal"
+  },
+  {
+   "check": "1b. T-EXACT names contain no Latin character and no leading/trailing space",
+   "result": "PASS"
+  },
+  {
+   "check": "2. item key set identical to payload (26)",
+   "result": "PASS — symmetric difference empty"
+  },
+  {
+   "check": "2b. field set identical per item (no invented description on the 14 specialty items)",
+   "result": "PASS"
+  },
+  {
+   "check": "3. notes == '[object Object]' verbatim on all 26",
+   "result": "PASS"
+  },
+  {
+   "check": "4. markup signature equal, computed with the real apply_translations.py::markup_signature",
+   "result": "PASS — 12/12 descriptions"
+  },
+  {
+   "check": "4b. structural block-tag counts equal (h1-h3/p/li/ol/ul/em/strong/table)",
+   "result": "PASS — no paragraph merged, split or dropped"
+  },
+  {
+   "check": "5. every translated <h2> carries an explicit id=",
+   "result": "PASS — 12/12"
+  },
+  {
+   "check": "5b. that id equals slugify(original English heading text)",
+   "result": "PASS — no-stunts-entered ×11, another-test-no-stunts-entered ×1"
+  },
+  {
+   "check": "6. CJK present in every name and description",
+   "result": "PASS"
+  },
+  {
+   "check": "7. no item in the unit is a registered T-FROZEN string",
+   "result": "PASS"
+  },
+  {
+   "check": "8. T-BILINGUAL form: exactly one ASCII space, no parentheses, Chinese head byte-equal to the ALIENRPG.<Career> lang value",
+   "result": "PASS — 14/14"
+  },
+  {
+   "check": "9. upstream trailing double space before </em> preserved",
+   "result": "PASS — 12/12"
+  },
+  {
+   "check": "10. newline count preserved per description",
+   "result": "PASS — 2 newlines each"
+  },
+  {
+   "check": "PROJECT GATE scan_name_lookup_traps.py, run against a staged scratch repo (compendium/cn never touched)",
+   "result": "PASS — checked=13 violations=0, EXACT_ok 12 / EXACT_seen 12, exit 0"
+  },
+  {
+   "check": "PROJECT GATE apply_translations.py --dry (the runbook's delivery bar), 38 leaves",
+   "result": "PASS — applied 38, REJECTED no-EN 0 / no-CJK 0 / markup 0 / clobber 0, exit 0"
+  },
+  {
+   "check": "PROJECT GATE scan_markup_drift.py",
+   "result": "PASS — LINK 0 / BLOCK 0 / INLINE 0 / PLACEHOLDER 0 / TRUNCATED 0"
+  },
+  {
+   "check": "PROJECT GATE scan_en_residue.py / scan_class_drift.py / scan_bare_english_names.py / scan_foreign_script.py",
+   "result": "PASS — 0 / 0 / 0 / 0"
+  },
+  {
+   "check": "PROJECT GATE scan_missing_bilingual_tail.py",
+   "result": "EXPECTED FAIL — 12 hits, all of them the 12 T-EXACT names. 0 of the 14 specialty names flagged. See open_issues #2; this gate has no T-EXACT exemption and the register forbids a tail on those 12."
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Skill-Stunts / Skill Stunts",
+   "proposed": "技能炫技",
+   "why": "The item type named in all 12 descriptions. Absent from glossary_alien.json; resolved from lang TYPES.Item.skill-stunts / ITEM.TypeSkill-stunts = 技能炫技. Worth adopting so later units do not re-derive it. Note the source prose hyphenates it ('the Skill-Stunts entry') while the lang label does not."
+  },
+  {
+   "en": "Stunt (singular)",
+   "proposed": "炫技",
+   "why": "glossary_alien.json carries only the plural 'Stunts' -> 炫技. The singular occurs in prose across the corpus (ALIENRPG.EvolvedStunts already uses 炫技 for both numbers)."
+  },
+  {
+   "en": "Specialty / Speciality",
+   "proposed": "专长",
+   "why": "Not in glossary_alien.json. Two lang values disagree in scope and both are live: ITEM.TypeSpecialty = 专长 and TYPES.Item.specialty = 职业/专长. Not load-bearing for this unit (I used neither in output), but SYS-J4 walks the Item Types list and will hit both — worth pinning before that unit runs."
+  },
+  {
+   "en": "rule book / rulebook (as in 'the Alien rule book')",
+   "proposed": "《异形RPG》规则书",
+   "why": "Not in glossary_alien.json. I followed the lang precedent ALIENRPG.Seepage104 = '参见《异形RPG》规则书第 104 页。' Cross-references to the printed book recur throughout the corpus, so the book-title form should be pinned once."
+  },
+  {
+   "en": "Homebrew",
+   "proposed": "自定义",
+   "why": "The only one of the 14 careers missing from glossary_alien.json. lang ALIENRPG.Homebrew = 自定义, which I used. It is not really a career — it is the sentinel career_list id 12 for user-made content — so 自定义 is right and 家酿 would be wrong."
+  }
+ ],
+ "open_issues": [
+  "FLAGGED AS INSTRUCTED — Close Combat's heading is upstream test junk: `<h2>Another test No Stunts Entered</h2>`. I translated the visible sense without repairing it: `<h2 id=\"another-test-no-stunts-entered\">另一个测试 未录入炫技</h2>`. The 'another test' half is preserved so it still reads as junk. If the controller would rather this match the other 11 exactly, the fix is one line in the output file plus an upstream bug report — do not let it get silently normalised in a later pass, because then nobody knows the English was broken.",
+  "GATE COLLISION, needs a controller decision — `scan_missing_bilingual_tail.py` flags exactly the 12 T-EXACT names (0 of the 14 specialty names). It is not wrong about the shape: it puts `items.*.name` in its should-be-bilingual bucket. It is that it has no exemption for T-EXACT, which DO-NOT-TRANSLATE.json mandates be bare Chinese with no English tail. This is not a one-off: it will fire 12 permanent false positives on this pack in every future wave, and a gate with 12 known-ignorable hits stops being read. Suggested fix: have the gate load `DO-NOT-TRANSLATE.json.sections.exact_match_to_lang` and skip those 12 item names, counting them in its `excluded` tally so the coverage number stays honest (the runbook's own §5 methodology note: every gate must report what it covered, not just what it rejected).",
+  "The brief expected 'career descriptions' in the 14 specialty items. There are none — I checked compendium/en/alienrpg.alien-rpg-system.json directly and all 14 carry only `name` and `notes`; the payload is not truncated. All the real description content in this unit is the 12 skill-stunt placeholders. So SYS-I1's prose volume is far smaller than the 3497 raw_chars in index.json suggests (2595 chars across all English string values, of which 12 near-identical descriptions are the bulk).",
+  "TIER CHOICE I MADE, worth a controller confirmation — the 14 specialty names are T-BILINGUAL (`殖民海军陆战队 Colonial Marine`). Reasoning: DO-NOT-TRANSLATE.json does not list them in any T-FROZEN section; nothing looks a specialty up by name (config.mjs:342 career_list stores the numeric id, and the <select> matches on id); PROJECT.md §3.4 makes T-BILINGUAL the default for item names; and scan_missing_bilingual_tail.py's items.*.name bucket wants the tail. The consequence to be aware of: the character sheet will show the career dropdown label in bare Chinese (驾驶员) next to a specialty item named 驾驶员 Pilot. That divergence is by design — §3.4 gives `label` and `name` different tiers — but it is visible, so if the controller prefers pure Chinese here it is a one-line change in the generator and the T-EXACT half is unaffected.",
+  "TERM CONCERN, not changed by me — `Officer` is 飞行官 in BOTH lang/cn.json and glossary_alien.json, so I used it. But in Alien RPG the Officer career is the ship's command officer (Ripley is a Warrant Officer), and 飞行官 reads as 'flight officer', which collides with the separate Pilot career = 驾驶员. Two careers should not both read as the person flying the ship. Since both authorities agree, changing it is a ruling, not a translation call, and it would have to move lang/cn.json and every pack in one commit. Raising it now because the cost only goes up: `Roughneck` = 杂工 is thin for the same reason (an oil-rig/space-trucker archetype, not an odd-job worker) though less confusable.",
+  "SOURCE NOTE, no action needed today — translating `<h2>No Stunts Entered</h2>` is safe. There IS a `chatData.startsWith(\"<h2>No Stunts Entered</h2>\")` comparison against the item description at character-sheet.mjs:1125 (and the same line in synthetic-sheet.mjs:1112, spacecraft-sheet.mjs:1090, vehicle-sheet.mjs:1013), but it is `&&`-gated behind `temp3.startsWith(\"<ol>\")`, which is the dead second leg the register documents: none of the 12 `ALIENRPG.<SkillNameNoSpaces>` keys exists in lang/en.json. With Chinese names the dead leg gets deader still — `langStr.replace(/\\s+/g,\"\")` now builds `ALIENRPG.近战`, which cannot ever collide with a real key. Per the register, do NOT create a cn.json block for those keys. If upstream ever restores them as <ol> stunt lists, this comparison goes live and the translated <h2> would suppress the fallback — cheap to catch then, worth a line in PROJECT.md §7.3 now.",
+  "The catch branch at character-sheet.mjs:1132 hardcodes the English `\"<h2>No Stunts Entered</h2>\"`, unlocalised. That is the failure surface the T-EXACT lock protects: if any of the 12 names ever drifts from lang, the player sees that English string with no error logged anywhere. It is also unfixable from a translation module — worth an upstream issue asking for `game.i18n.localize()` there, since the blast radius per the register includes spacecraft and vehicle sheets, which are UNGATED and run in evolved mode too."
+ ]
+}

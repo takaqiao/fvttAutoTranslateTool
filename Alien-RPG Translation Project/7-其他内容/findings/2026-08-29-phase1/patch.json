@@ -1,0 +1,217 @@
+{
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs",
+   "bytes": 48370,
+   "what": "The runtime patcher, extended from the Phase 0 skeleton (skeleton's 3 empty tables kept and grown into 5 channels + 2 preCreate rule sets). All hook-order research from Phase 0 preserved and one Phase-0 error corrected (see decisions). Exports translateNotification / applyDocRules / __TEST__ so the QA test drives the SHIPPING functions, not a copy."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/templates/alienrpg/actor/planet-general.hbs",
+   "bytes": 9055,
+   "what": "Translated Colony Planet sheet. 32 hard-coded label elements (26 distinct strings) translated; the one upstream {{localize \"ALIENRPG.Name\"}} preserved; byte-identical everywhere else (0 line-count delta)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/templates/alienrpg/actor/creature-header.hbs",
+   "bytes": 3526,
+   "what": "Creature header with the 4 literal data-label attributes (Speed/Mobility/Observation/Acid Splash) converted to {{localize \"ALIENRPG.Speed|Skillmobility|Skillobservation|SkillAcidSplash\"}} — matching the SAME file's lines 18/34, which already use {{localize}}. No Chinese hardcoded: the strings stay in the lang channel. 0 line-count delta."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/english-baseline/alienrpg-4.1.13/templates/actor/planet-general.hbs",
+   "bytes": 9177,
+   "what": "English baseline of the overridden template (4.1.13), for cross-version diff when upstream edits it — a whole-template override goes stale silently otherwise."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/english-baseline/alienrpg-4.1.13/templates/actor/creature-header.hbs",
+   "bytes": 3416,
+   "what": "English baseline of the second overridden template."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/test_hardcoded_patch.mjs",
+   "bytes": 24324,
+   "what": "Node test. Imports the shipping .mjs directly (no copy). 114 assertions in 3 groups: A positive (11), B negative (36), C source-consistency (67). Exit code 1 on any failure."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.github/workflows/release.yml",
+   "bytes": 11480,
+   "what": "Added templates/alienrpg/actor/{creature-header,planet-general}.hbs to the 'must be in the zip' assertion. A missing template file degrades silently at runtime (getTemplate just fetches the English original), so packaging is the only place it can be caught."
+  }
+ ],
+ "summary": "Built the runtime patcher on top of the Phase 0 skeleton. Five channels, each chosen for the narrowest reach that still works, plus a 114-assertion node test that drives the shipping functions directly.\n\nTHE CENTRAL RE-DERIVATION THAT RESHAPED THE WHOLE DESIGN: `client/applications/ui/notifications.mjs:121` is `message = _loc(message, format);` — UNCONDITIONAL, independent of the `{localize}` option (that option only gates the cleanHTML exemption at :116/:119). `_loc` is `Localization#localize` (client/global.d.mts:32). So every STATIC English literal handed to ui.notifications is reachable by a flat top-level i18n key, no notify shim needed. The shim shrank from \"9 notification literals\" to the 3 that are template strings and structurally out of reach.\n\nCHANNEL A — 9 top-level i18n keys (i18nInit): 4 static notification literals + 5 Dice So Nice registrations. DSN was verified to route colorset.description / colorset.category / system.name through game.i18n.localize (prepareColorsetList / prepareSystemList in modules/dice-so-nice/main.js). Global conflict surface measured = 0 across 201 deduped lang JSONs (core + every installed system and module); the measurement is now a permanent gate (test group C2).\n\nCHANNEL A-prime — settings-menu retarget: init.mjs:38/39/40 registerMenu name/label/hint are English literals while ALIENRPG.forceImportName/Label/Hint are translated and have ZERO references upstream. I repoint game.settings.menus at those keys rather than injecting 3 English top-level keys, so the strings stay in the cheap lang channel. Three `expect` fuses: if upstream ever edits the literal, the patch declines and logs instead of guessing. Verified registerMenu stores data raw (client-settings.mjs:185-194) and localization happens at render (settings/config.mjs:59-64 -> templates/settings/config-category.hbs:4/10/14).\n\nCHANNEL B — 2 whole-template overrides only, where the trade is worth it: planet-general.hbs (32 label elements, exactly 1 {{localize}} in the whole file) and creature-header.hbs (the 4 data-label attributes that flow into JS). Everything with one or two plain-text strings went to DOM instead, because a whole-file override of a 281-line template for one word goes stale silently.\n\nCHANNEL C — DOM, 5 text rules + 4 attribute rules + the @DRAW tooltip rule. Every rule carries three independent narrowing conditions: a scope selector (`.alienrpg` — verified as classes[0] on all 8 sheet classes; `#alienprgSettings` for the appv1 config), a system-owned selector, and whole-string equality. Where an i18n key exists the rule resolves it at apply time (`{key: 'ALIENRPG.Stunts'}`) so the string stays translatable rather than being hardcoded Chinese.\n\nCHANNEL D — notify shim, 3 fully `^...$`-anchored patterns, installed at `ready` (ui.notifications is created at game.mjs:764, between setup:740 and ready:779).\n\nCHANNEL E — preCreateChatMessage (5 rules) / preCreateItem (1 rule), each with a STRUCTURAL anchor beyond text: flags.core.initiativeRoll for the initiative flavour, speaker.alias equality for the devmsg byline, `type === 'critical-injury'` for the crit-item glue.\n\nPlus a queueMicrotask-based `renderGamePause` fix that is hook-order-independent and restores core's own GAME.Paused instead of hardcoding Chinese.\n\nTEST RESULT: 114 PASS / 0 FAIL, exit 0. Group B (36 negative assertions) includes the previous project's actual accident string ('Mirror Image does not exist!'), other modules' notifications, prose containing the same words, off-by-one-character variants, Error objects, and structurally-similar-but-unanchored documents — every one passes through byte-identical.",
+ "decisions": [
+  {
+   "decision": "Moved template pre-registration from `init` to `i18nInit`, and corrected my own first draft which had gated it on `game.i18n.lang` at `init`.",
+   "reason": "Re-derived from source: localization.mjs:10-19 sets `this.lang` from the SERVER default in the constructor; the world/client language is only read at :80 and only assigned at :231 inside setLanguage(), which runs from initialize() at game.mjs:663 — AFTER callAll('init') at :652. So at `init`, `game.i18n.lang` is the server default: a Chinese world can read 'en' (silent no-op) and an English world can read 'cn' (silent mis-translation). Both directions wrong. `game.settings.get('core','language')` is not a fallback either — core settings register at game.mjs:660, also after init. i18nInit is the first hook after setLanguage() and is still long before any Actor sheet renders (initializeUI at :764 renders only core singletons)."
+  },
+  {
+   "decision": "Gated the ENTIRE file on `game.i18n.lang === 'cn'`; in any other language it is a complete no-op.",
+   "reason": "Channel A writes top-level keys into the globally-shared game.i18n.translations, and channel B swaps in already-Chinese templates. Both would corrupt an English world. module.json's lang/cn.json already only loads at lang==='cn'; the patcher now matches it."
+  },
+  {
+   "decision": "Used flat top-level i18n keys for the 4 static notification literals instead of a notify shim.",
+   "reason": "notifications.mjs:121 localizes unconditionally. This removes 4 patterns from the one global hook in the file. It is also inherently safer than a regex: a collision requires the WHOLE English string to be identical, in which case the Chinese translation is correct for the colliding caller too — structurally unlike the substring-regex failure that produced '镜子 Image 不存在！'."
+  },
+  {
+   "decision": "Repointed the settings menu at ALIENRPG.forceImportName/Label/Hint rather than translating the literals.",
+   "reason": "Task guidance, and the keys are semantically right: forceImportHint says 'will not overwrite existing data but will replace missing data', which is exactly what ReImport() (init.mjs:132-172) does, and is MORE accurate than upstream's 'Welcome to the Alien RPG System...' hint. Keeps the strings in lang/cn.json where upstream text edits can't silently desync them. Same reasoning applied to ALIENRPG.NPC / Stunts / SPECIALTY / CreateItemTitle in the DOM rules."
+  },
+  {
+   "decision": "'Colors' (the DSN colorset category at alienrpg.mjs:387/398) resolves DICESONICE.Colors at runtime rather than being a hardcoded Chinese string.",
+   "reason": "DSN's own colorsets use category 'DICESONICE.Colors' (→ '颜色' in its zh_Hans.json, which it declares for lang 'cn'). The grouping key in prepareColorsetList is the LOCALIZED category string. Hardcoding a different Chinese word would keep the two alienrpg colorsets in a separate group; resolving DSN's actual value merges them into DSN's existing group. Same mechanism used for 'Yellow' → DICESONICE.ColorYellow, with a '黄色' fallback if DSN is absent."
+  },
+  {
+   "decision": "Only 2 whole-template overrides; everything else routed to DOM.",
+   "reason": "A whole-file override is the highest-maintenance patch shape (upstream edits are lost silently, no error). It earns its keep for planet-general.hbs (32 hardcoded labels, 1 localize call) and creature-header.hbs (61 lines, and the strings are ATTRIBUTES that feed JS). It does not earn its keep for crtui-character-general.hbs (281 lines) or crtui-synthetic-general.hbs (267 lines), which have ONE hardcoded word each (<label>SPECIALTY</label>) — those got a 1-line DOM rule with selector `label.speciality-label`."
+  },
+  {
+   "decision": "Did NOT patch 'Vehicle inceptions are not allowed!' (spacecraft-sheet.mjs:392, vehicle-sheet.mjs:388).",
+   "reason": "The guard is `crew.type === \"vehicles\" && crew.type === \"spacecraft\"` — tautologically false, one value cannot equal both. The notification is unreachable. Patching it would be a rule that can never fire."
+  },
+  {
+   "decision": "Did NOT patch module/apps/update.js's allDone() English, despite the task naming update.js as an unscanned live file.",
+   "reason": "I scanned it (it IS live — imported by init.mjs:1). Its visible English (`${moduleTitle} Update`, 'The update has completed and the following have been updated:', label 'Okay!') sits in allDone(), which is unreachable in 4.1.13: `const updateAssets = []` at :23-24 makes `!updateAssets.length` true at :29, and updateModule() returns at :32-33 before ever calling allDone(). Reported instead of patched."
+  },
+  {
+   "decision": "Did NOT patch 4 template sites the audit listed: 'Hello World', the 2 crt/territory-sheet.html titles, and templates/system/alienprgSettings.hbs.",
+   "reason": "Reachability analysis from the 62-file live import graph plus transitive {{> }} partial following: all four live in templates that NOTHING references. In particular the settings template the audit points at is dead — alienRPGConfig.mjs:12 loads `systems/alienrpg/module/helpers/alienprgSettings.hbs`, a SECOND copy under module/helpers/. My CRT-UI-Sheets DOM rule targets the live copy."
+  },
+  {
+   "decision": "Covered the 4 `<h2>No Stunts Entered</h2>` WRITE sites with a scoped MutationObserver, and left the 4 COMPARE sites alone.",
+   "reason": "The write is `li2.innerHTML = chatData` on a click handler, after render, so no render hook can see it — the observer watches childList on `#panel` inside `.alienrpg` only, which is the smallest possible surface. The 4 compare sites (`temp3.startsWith('<ol>') && chatData.startsWith('<h2>No Stunts Entered</h2>')`) are DEAD in 4.1.13: the left operand short-circuits because the 12 ALIENRPG.<SkillName> keys the register already documents as absent make temp3 the raw key string. So Babele may translate that heading in the pack today — but it is a latent lockstep."
+  },
+  {
+   "decision": "Left the 5 font-name <option> labels (OCR-A / Kosugi / Modesto Condensed / Blinker / Signika) in English.",
+   "reason": "They are font-family identities, and the option VALUE is the same string. Upstream itself keeps the two localized ones (ALIENRPG.Wallpoet / Roboto-Regular) as Latin names."
+  },
+  {
+   "decision": "Test imports the shipping .mjs via a `const HOOKS = globalThis.Hooks ?? {on(){},once(){}}` shim rather than testing a copy.",
+   "reason": "The whole point of the negative test is 'other packages' strings pass through OUR shipping function untouched'. A copied fixture proves nothing about what ships. The shim is a 1-line, documented, behaviour-identical indirection in Foundry."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Test result",
+   "value": "114 PASS / 0 FAIL, exit 0 — group A (positive) 11, group B (negative) 36, group C (source consistency) 67"
+  },
+  {
+   "what": "Live import graph",
+   "value": "62 files reachable from module/alienrpg.mjs — 60 .mjs + 2 .js (module/devmsg.js, module/apps/update.js). 12 files DEAD: actor/{colony-sheet,old-actor-sheet,old-actor,old-rollTableData,old-spacecraft-sheet,planet-sheet}.js, apps/migratefolders.js, common.js, data/item-feature.mjs, logger.js, migration.js, utils/_module.mjs"
+  },
+  {
+   "what": "Template reachability",
+   "value": "76 template paths reachable from live JS + transitive {{> }} partials; 27 of the 103 .hbs/.html on disk are UNREACHABLE, including all 7 templates/actor/tabs/*.html, all 6 crt/*.html, inline/critical-inj.hbs and templates/system/alienprgSettings.hbs"
+  },
+  {
+   "what": "Template English addressed",
+   "value": "64 user-visible English elements in LIVE templates: 32 planet-general labels (26 distinct strings) + 4 creature-header data-labels + 18 Minus/Plus titles + 2 Stunts titles + 1 Create item title + 4 NPC? + 2 SPECIALTY + 1 CRT UI Sheets"
+  },
+  {
+   "what": "Minus/Plus title split",
+   "value": "9 title='Minus' + 9 title='Plus' = 18, across 6 live header templates (character-header 10,30/19,36 · character-enhanced-header 11,28/19,34 · synthetic-header 10/19 · synthetic-enhanced-header 10/18 · crt/crtui-character-header 11,36/20,42 · crt/crtui-synthetic-header 13/21). The audit's 18 is right; my first test split it 10/8 and the test caught me."
+  },
+  {
+   "what": "Top-level i18n key conflict surface",
+   "value": "0 hits for all 9 keys across 201 deduped lang JSONs (core public/lang + every systems/*/lang and modules/*/lang|languages). Now enforced as test C2."
+  },
+  {
+   "what": "ui.notifications English literals, live",
+   "value": "8 distinct strings at 10 call sites. 4 static → channel A. 3 template-string → channel D. 1 dead (Vehicle inceptions, ×2 sites). CBTracker.mjs:39 passes the CORE key COMBAT.CombatantMovementHistoryCleared, not English."
+  },
+  {
+   "what": "planet-general.hbs size delta",
+   "value": "en 9177 B → cn 9055 B, line-count delta 0, remaining ALL-CAPS text nodes 0, upstream's single {{localize}} preserved"
+  },
+  {
+   "what": "creature-header.hbs size delta",
+   "value": "en 3416 B → cn 3526 B, line-count delta 0, all 4 data-labels now {{localize}}, 0 Chinese hardcoded"
+  },
+  {
+   "what": "skill-stunts items carrying the No Stunts Entered sentinel",
+   "value": "11 of 12 in the system pack start with '<h2>No Stunts Entered</h2>'; Close Combat is the odd one out — '<h2>Another test No Stunts Entered</h2>', an upstream leftover that does not startsWith the sentinel"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Minus",
+   "proposed": "减少",
+   "why": "title on the 9 stepper decrement icons. No ALIENRPG.Minus key exists in the system's en.json or cn.json (measured), so this is the only place it can live — but that means it is hardcoded Chinese in the patcher and NOT in the glossary. Needs an owner ruling or a new lang key."
+  },
+  {
+   "en": "Plus",
+   "proposed": "增加",
+   "why": "same as Minus, 9 sites, no ALIENRPG.Plus key exists"
+  },
+  {
+   "en": "{MISSING_CREW}",
+   "proposed": "{乘员已删除}",
+   "why": "placeholder shown as a crew member's name (spacecraft-sheet.mjs:367, vehicle-sheet.mjs:363). Braces kept deliberately so it still reads as a placeholder rather than a real name. Not in glossary_alien.json."
+  },
+  {
+   "en": "No Stunts Entered",
+   "proposed": "未录入炫技",
+   "why": "uses glossary Stunts=炫技, but the full phrase is not in the glossary. Also appears inside 11 pack item descriptions, so the Babele side must match this rendering or the two channels will disagree."
+  },
+  {
+   "en": "Panic is over",
+   "proposed": "恐慌结束",
+   "why": "chat message at actor.mjs:1589. Glossary has Panic=恐慌 but not this sentence."
+  },
+  {
+   "en": "rolls for Initiative!",
+   "proposed": "掷先攻！",
+   "why": "initiative chat flavour, combat.mjs:91/130. Glossary has Initiative=先攻 but not the verb phrase."
+  },
+  {
+   "en": "Draw from {table}.",
+   "proposed": "从 {table} 抽取。",
+   "why": "@DRAW / @TEXTDRAW enricher tooltip prefix, enricher.mjs:16/34. Not in glossary."
+  },
+  {
+   "en": "Alien RPG News",
+   "proposed": "异形 RPG 快讯",
+   "why": "ChatMessage speaker alias, devmsg.js:24. 'Alien RPG' as a product name is not in glossary_alien.json (only 'Alien RPG System' is, and that is T-FROZEN as a document name)."
+  },
+  {
+   "en": "Alien RPG - Blank / Alien RPG - Full Dice",
+   "proposed": "异形 RPG - 空白骰面 / 异形 RPG - 完整骰面",
+   "why": "Dice So Nice dice-system display names, alienrpg.mjs:407/435. Same 'Alien RPG' product-name gap."
+  },
+  {
+   "en": "AlienBlack",
+   "proposed": "异形黑",
+   "why": "DSN colorset description, alienrpg.mjs:397. Uses glossary Alien=异形 but the compound is new."
+  },
+  {
+   "en": "CRT UI Sheets",
+   "proposed": "CRT 风格角色卡",
+   "why": "button in the system settings panel. 'CRT UI' is upstream's name for the alternate sheet skin; not in the glossary."
+  },
+  {
+   "en": "Colony Planet sheet terminology (26 strings)",
+   "proposed": "恒星系 / 母恒星 / 辐射 / 已勘测行星位序 / 气态巨行星 / 岩质行星 / 冰质行星 / 小行星带 / 行星大小 / 大气 / 水圈 / 昼长 / 轴倾角 / 重力 / 气候 / 全球特征 / 轨道周期 / 行星性格 / 北极 / 资源潜力 / 北半球西部 / 赤道 / 北半球东部 / 南半球西部 / 南极 / 南半球东部",
+   "why": "the whole planet-general.hbs vocabulary. Only Radiation=辐射 exists in glossary_alien.json; the other 25 are new astronomy/worldbuilding terms with no precedent in the glossary and no lang key to fall back on. These are baked into the overridden template, so if the glossary later rules differently the template must be regenerated."
+  },
+  {
+   "en": "PUSH Roll? / Import Complete / There was a problem with the Import / You can only create macro buttons for owned Items / No submenu found for the provided key / Could not find item X... / Re-Import Completed Created N Assets / ERROR",
+   "proposed": "要追骰吗？/ 导入完成 / 导入过程中出现问题 / 只能为角色已拥有的物品创建宏按钮 / 未找到该键对应的子菜单 / 未找到物品 X。可能需要删除并重新创建这个宏。/ 重新导入完成，共创建 N 项资源 / 错误",
+   "why": "UI plumbing sentences, not domain terms. 'Push=追骰' comes from the glossary; the rest are new and would benefit from a UI-copy section in the glossary so the three汉化 repos stay consistent."
+  }
+ ],
+ "open_issues": [
+  "AUDIT REFUTED — wrong settings template. The audit's '2 <button>CRT UI Sheets</button>' counts two files, but only ONE is live: alienRPGConfig.mjs:12 loads systems/alienrpg/module/helpers/alienprgSettings.hbs. templates/system/alienprgSettings.hbs has ZERO references anywhere in the system. My DOM rule targets the live copy (#alienprgSettings button[name=\"addcrt\"]).",
+  "AUDIT REFUTED — '<h2>Hello World</h2>' is dead. templates/actor/inline/critical-inj.hbs is referenced nowhere (no PARTS entry, no renderTemplate, no {{> }}). No patch shipped; if upstream ever wires it up, the string reappears.",
+  "AUDIT REFUTED — the 2 title= attributes in templates/actor/crt/territory-sheet.html ('Create item', 'Edit Item') are in a dead template. Of the audit's 23 literal title= attributes, 21 are live (18 Minus/Plus + 2 Stunts + 1 Create item in territory-systems.hbs) and 2 are dead.",
+  "AUDIT REFUTED — 'Vehicle inceptions are not allowed!' (spacecraft-sheet.mjs:392, vehicle-sheet.mjs:388) is unreachable: the guard is `crew.type === \"vehicles\" && crew.type === \"spacecraft\"`, which no value satisfies. Not patched.",
+  "module/apps/update.js IS live (imported at init.mjs:1) but its English is unreachable in 4.1.13: `const updateAssets = []` (:23-24) makes updateModule() return at :32-33, so allDone()'s Dialog ('${moduleTitle} Update' / 'The update has completed and the following have been updated:' / label 'Okay!') never renders. Becomes live the moment upstream adds one asset-update entry — re-check on every version bump.",
+  "module/apps/migratefolders.js, module/logger.js and module/migration.js are NOT in the live import graph. Their ui.notifications English ('Core System Upgrade Waiting', 'AlienRPG System Migration to version X completed!', etc.) is dead. Anyone auditing by grep alone will over-count here.",
+  "UPSTREAM BUG, not fixed by us: actor.mjs:2249 renders `systems/alienrpg/templates/roll-spacecraft-major-crit-dialog.hbs` — the `dialog/` segment is missing and no such file exists, so the manual spacecraft MAJOR crit dialog cannot render. actor.mjs:2233 has a double slash (`templates/dialog//roll-syn-manual-crit-dialog.hbs`). We could incidentally fix the first by pre-registering a partial under the broken id, but that is a functional fix disguised as a translation and I left it out — flagging for an owner decision.",
+  "UPSTREAM BUG, not fixed: _stuntBtn on spacecraft-sheet.mjs:1084 and vehicle-sheet.mjs:1007 does `li.children('#panel')[0]`, but `#panel` exists only in character-skills.hbs:63 and crt/crtui-character-skills.hbs:60. On those two sheets the stunt button throws on `li2.classList`. The register already notes those two call sites are UNGATED by the evolved setting; the deeper problem is they have no panel at all.",
+  "LATENT LOCKSTEP for the Babele slice: the 4 `chatData.startsWith('<h2>No Stunts Entered</h2>')` comparisons are DEAD today because the left operand `temp3.startsWith('<ol>')` short-circuits (the 12 ALIENRPG.<SkillName> keys do not exist in en.json — already recorded in the register's dead_second_leg). So translating that heading in the 11 skill-stunts item descriptions is safe NOW, and becomes a lockstep the moment upstream restores those keys.",
+  "UPSTREAM CONFLICT with Dice So Nice: alienrpg.mjs:385 calls addColorset({name:\"yellow\", ...}), and DSN ships a BUILT-IN colorset also named \"yellow\" (description DICESONICE.ColorYellow). The system silently overwrites DSN's yellow with its own foreground/background. That is why our label resolves DICESONICE.ColorYellow rather than inventing a new Chinese word — but the underlying overwrite is an upstream defect worth reporting to pwatson100.",
+  "PHASE 1 LANG DEPENDENCY: channel A-prime now routes the settings menu through ALIENRPG.forceImportName/Label/Hint. Those three keys are currently UNUSED upstream, so the lang slice may skip them as dead weight. They are no longer dead — the module cn.json must carry good values or users see upstream's machine translations ('强制重新导入，就像这是模块的初始启动一样。'). Same for ALIENRPG.NPC, Stunts, SPECIALTY, CreateItemTitle, Speed, Skillmobility, Skillobservation, SkillAcidSplash, which the DOM rules and the creature-header override now consume.",
+  "ALIENRPG.NPC ships as 'NPC' in both en and cn, so the `>NPC?<` DOM rule is a deliberate no-op today (it resolves to 'NPC?' and the code skips when to === from). It exists so the string is in the lang channel if anyone later wants 非玩家角色.",
+  "ALIENRPG.SkillAcidSplash cn is '酸性血液' while glossary_alien.json says Acid Splash = 酸血飞溅. The creature-header override now feeds that lang value into BOTH the visible label and the dialog title, so the mismatch becomes doubly visible. Phase 1 lang slice should reconcile. Same class of problem: ALIENRPG.ArmorVsFire cn = '护甲 V 火' (machine translation of 'Armor V Fire').",
+  "TIMING GAP, accepted and documented in the file: the notify shim installs at `ready` because ui.notifications is only constructed at game.mjs:764. A logger.error fired by the system's own ready handler before ours would leak the English '| ERROR |' prefix. Fixing it would require patching Notifications.prototype — a strictly wider blast radius than the instance patch, so I did not.",
+  "NOT PATCHED, flagged instead: CBTracker.mjs's swap-initiative Dialog has `label: \"OK\"`. appv1 Dialog does localize button labels, so a top-level key would work — but 'OK' is far too generic to claim as a global i18n key, and core's own cn already renders OK acceptably.",
+  "13 unreachable templates carry English that a naive scanner will keep reporting forever (7 in templates/actor/tabs/, 6 under templates/actor/crt/ plus inline/ and system/). Worth adding the reachability analysis to a permanent QA script so the next audit does not re-litigate them."
+ ]
+}

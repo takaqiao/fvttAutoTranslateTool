@@ -1,0 +1,909 @@
+{
+ "terms": [
+  {
+   "en": "Stress",
+   "zh": "压力",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:419 \"Stress\": \"压力\" (C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg\\lang\\cn.json). Reinforced throughout the human-translated Panic table (Panic7-15) as 压力水平/压力等级. Same term in zh-tw.json as 壓力."
+  },
+  {
+   "en": "Stress Level",
+   "zh": "压力水平",
+   "alt": "压力等级",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:294 Panic11 \"...你的压力水平降低一...\"; cn.json:299 Panic7 \"...你的压力等级...上升1\". BOTH renderings appear in the same file — pick one before seeding the glossary."
+  },
+  {
+   "en": "Stress Dice",
+   "zh": "压力骰",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.HOWMANYSTRESS \"How Many Stress Dice?\" -> \"有多少压力骰子?\" and ALIENRPG.rollStress \"Roll Stress\" -> \"进行压力检定\"; ALIENRPG.StressMod -> \"压力修正\". No standalone \"Stress Dice\" key exists, so 压力骰 is inferred, not literally attested."
+  },
+  {
+   "en": "Base Dice",
+   "zh": "基础骰",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "NOT properly translated anywhere. cn.json:205 HOWMANYDICE \"How Many Base Die?\" -> \"有多少基地死亡？\" (machine-translation failure: base->基地, die->死亡). ALIENRPG.Base -> \"基础\", ALIENRPG.BaseMod -> \"基础修正\". 基础骰 is my proposal, unsourced."
+  },
+  {
+   "en": "Panic",
+   "zh": "恐慌",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:303 \"Panicked\": \"恐慌\"; cn.json:302 \"PanicCondition\": \"恐慌状态\"; ALIENRPG.MorePanic -> \"更加恐慌\"; ALIENRPG.YouAreAtPanic -> \"你正处于恐慌之中\"."
+  },
+  {
+   "en": "Panic Roll",
+   "zh": "恐慌检定",
+   "alt": "混乱检定 (as used inside the panic-table body text)",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "CONFLICT inside cn.json itself. UI keys use 恐慌 (ALIENRPG.RollPanic \"点击滚动恐慌\"), but the human-translated panic entries render \"Panic Roll\" as 混乱检定 — cn.json:296 Panic13 \"...必须立刻进行混乱检定\", cn.json:300 Panic8 \"...直到混乱结束\". ALIENRPG.CREWPANIC \"Panic Roll\" is left untranslated in cn.json."
+  },
+  {
+   "en": "Push",
+   "zh": "孤注一掷",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:327 \"Push\": \"孤注一掷\"; ALIENRPG.followingPush \"Following the Push,\" -> \"选择孤注一掷后\"; zh-tw.json 孤注一擲. Consistent across both Chinese files — this is the strongest single term in the file."
+  },
+  {
+   "en": "Talent",
+   "zh": "天赋",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Talents -> \"天赋\", ALIENRPG.GeneralTalent -> \"通用天赋\"; zh-tw 天賦."
+  },
+  {
+   "en": "Skill",
+   "zh": "技能",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skills -> \"技能\"; ALIENRPG.NoSkill -> \"没有技能\"; ALIENRPG.CreatureSkill -> \"该生物没有此技能。\""
+  },
+  {
+   "en": "Attribute",
+   "zh": "属性",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Attributes -> \"属性\"; ALIENRPG.NoAttribute -> \"无属性\"."
+  },
+  {
+   "en": "Strength",
+   "zh": "力量",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.AbilityStr \"Strength\" -> \"力量\". Caution: the MT'd tooltip ALIENRPG.TAH.encumbered renders the same word as \"强度\" mid-sentence — inconsistent."
+  },
+  {
+   "en": "Agility",
+   "zh": "敏捷",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.AbilityAgl \"Agility\" -> \"敏捷\"; Panic8 \"...所有使用敏捷（敏捷）的技能检定...\" (the parenthetical should have been the AGL abbreviation — a known defect)."
+  },
+  {
+   "en": "Wits",
+   "zh": "机智",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:21 \"AbilityWit\": \"机智\"; zh-tw.json 機智."
+  },
+  {
+   "en": "Empathy",
+   "zh": "共情",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:19 \"AbilityEmp\": \"共情\"; also ALIENRPG.PermanantTrauma -> \"...进行一次共情检定。\" — attested twice, in UI and in prose."
+  },
+  {
+   "en": "Career",
+   "zh": "职业",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:76 \"Career\": \"职业\"; zh-tw 職業."
+  },
+  {
+   "en": "Agenda",
+   "zh": "目标",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.AgendaStory \"Agenda/Story Cards\" -> \"目标\" (the \"/Story Cards\" half was dropped). TYPES.Item.agenda is left as English \"Agenda\" in cn.json. 目标 collides with ALIENRPG.AdHoc which is also rendered \"目标\"."
+  },
+  {
+   "en": "Personal Agenda",
+   "zh": "个人目标",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.PersonalAgenda -> \"个人目标\"; zh-tw 個人目標."
+  },
+  {
+   "en": "Signature Item",
+   "zh": "标志物品",
+   "alt": "标志性物品",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json:390 \"SignatureItem\": \"标志物品\"; zh-tw 標誌物品. Reads slightly off in Chinese; 标志性物品 or 象征物 would be more idiomatic but is unsourced."
+  },
+  {
+   "en": "Buddy",
+   "zh": "哥们",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:337 \"relOne\": \"哥们\" (the Buddy relationship slot); zh-tw 哥們. Colloquial but deliberate."
+  },
+  {
+   "en": "Rival",
+   "zh": "对头",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:338 \"relTwo\": \"对头\"; zh-tw 對頭."
+  },
+  {
+   "en": "Health",
+   "zh": "生命",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.Health -> \"生命\". But ALIENRPG.healthDamage \" HEALTH Damage\" -> \" 健康损害\" and the MT'd TAH tooltips use \"健康\" and \"生命值\" interchangeably. Three renderings in one file."
+  },
+  {
+   "en": "Radiation",
+   "zh": "辐射",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Radiation -> \"辐射\"; PermanentRadiationAdded -> \"添加永久辐射\"; RadiationReduced -> \"减少辐射\"."
+  },
+  {
+   "en": "Rad (radiation point)",
+   "zh": "辐射点",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.TAH.radiation MT text transliterates it: \"...每班可恢复 1 拉德\" and \"每次你要治愈 Rad 时\" — i.e. 拉德 (the SI 'rad' unit) and untranslated 'Rad' both appear. 辐射点 is my proposal."
+  },
+  {
+   "en": "Air Supply",
+   "zh": "氧气供应",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.AirSupply -> \"氧气供应\"; ALIENRPG.Air -> \"氧气\" (note: the consumable is rendered 氧气, not 空气); zh-tw 氧氣供應."
+  },
+  {
+   "en": "Consumables",
+   "zh": "消耗品",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Consumables -> \"消耗品\". The four tracks: Air->氧气, Food->食物, Water->水, Power->动力 (ALIENRPG.Power -> \"动力\"; but ALIENRPG.Pwr -> \"力量\", a defect)."
+  },
+  {
+   "en": "Supply Roll",
+   "zh": "补给骰",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:428 \"Supply\": \"补给骰\"; ALIENRPG.supplyDecreases -> \"你的补给下降了\"; ALIENRPG.NoSupplys -> \"你的补给已耗尽。\"; zh-tw 補給骰."
+  },
+  {
+   "en": "Encumbrance",
+   "zh": "负重",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Encumbrance -> \"负重\"; ALIENRPG.CapacityBarLabel \"Capacity\" -> \"负重\"; ALIENRPG.Encumbered -> \"受阻\". Over-encumbered rendered \"过度负担\" in the MT'd tooltip."
+  },
+  {
+   "en": "Critical Injury",
+   "zh": "重伤",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.CriticalInjuries -> \"重伤\"; zh-tw 重傷. But ALIENRPG.Talent-Crit -> \"天赋/暴击\" and ALIENRPG.RollCrit -> \"重击\" are wrong (D&D-style 暴击/重击 leaked in); ITEM.TypeCritical-injury is left English."
+  },
+  {
+   "en": "Death Roll",
+   "zh": "死亡检定",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "No clean rendering exists. The MT'd tooltips give four different ones in the same file: \"死亡掷骰\" (TAH.dehydrated), \"死亡翻滚\" (TAH.dehydrated, same string), \"死亡滚动\" (TAH.freezing), \"死亡卷\" (TAH.starving). 死亡检定 is my proposal, matching the 检定 pattern used by the human translator."
+  },
+  {
+   "en": "Broken",
+   "zh": "濒死",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json Panic14 renders \"until you or the target is Broken\" as \"直到目标濒死你才会停下\" (human, 濒死). The MT'd tooltips render the same term as \"破碎\" (TAH.dehydrated, TAH.radiation) and \"受伤\" (TAH.freezing). Three-way conflict."
+  },
+  {
+   "en": "Engaged (range)",
+   "zh": "接战",
+   "alt": "近战 (as used in the UI key)",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "CONFLICT. cn.json:157 \"Engaged\": \"近战\" (UI dropdown) — but 近战 is also used for WepTypeMelee \"Melee\". The human panic-table prose uses 接战范围: cn.json:294 Panic11 \"...如果你的接战范围内有敌人...\", cn.json:296 Panic13 same. 接战 is the better term because it frees 近战 for Melee."
+  },
+  {
+   "en": "Short (range)",
+   "zh": "短程",
+   "alt": "短距范围 (in prose)",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Short -> \"短程\"; panic prose uses 短距范围 (Panic11) and 短距离 (Panic7). Same conflict pattern as Engaged."
+  },
+  {
+   "en": "Medium (range)",
+   "zh": "中程",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Medium -> \"中程\"."
+  },
+  {
+   "en": "Long (range)",
+   "zh": "远程",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Long -> \"远程\"; zh-tw 遠程. Collides with WepTypeRanged \"Ranged\" -> \"远程\"."
+  },
+  {
+   "en": "Extreme (range)",
+   "zh": "极远程",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Extreme -> \"极远程\"; zh-tw 極遠程."
+  },
+  {
+   "en": "Slow Action",
+   "zh": "慢速动作",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json Panic10 \"...你失去下一个慢速动作。\"; Panic12 \"...并失去下一个慢速动作。\". The UI key ALIENRPG.SlowAction is itself left untranslated in cn.json — the term only survives in prose."
+  },
+  {
+   "en": "Fast Action",
+   "zh": "快速动作",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.TAH.overwatch MT text opens \"作为一个快速动作，你可以...\" (\"As a fast action...\"). The UI key ALIENRPG.FastAction is untranslated in cn.json. Symmetric with the attested 慢速动作."
+  },
+  {
+   "en": "Round",
+   "zh": "回合",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.OneRound \"One Round\" -> \"一回合\"; panic prose \"呆滞一轮\" / \"一轮之后你可以如常行动\" uses 轮 for Round instead. Note Alien RPG's Round/Turn are inverted relative to D&D, so this needs a deliberate decision."
+  },
+  {
+   "en": "Turn",
+   "zh": "轮次",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.OneTurn \"One Turn\" -> \"一斡\" — 斡 is nonsense here (MT artifact). ALIENRPG.OneShift \"One Shift\" -> \"一轮班\". 轮次 is my proposal."
+  },
+  {
+   "en": "Shift (time unit)",
+   "zh": "轮班",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.OneShift -> \"一轮班\", but the MT'd tooltips render the same unit as \"转变\" (TAH.dehydrated: \"每一次转变\"), \"班次\" (TAH.exhausted: \"睡一个班次\") and \"每班\" (TAH.radiation). Four renderings. ALIENRPG.Shift itself is untranslated."
+  },
+  {
+   "en": "Initiative",
+   "zh": "先攻",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "Badly broken in cn.json. ALIENRPG.CombatantReroll \"ReRoll Initiative\" -> \"重新启动计划\" (MT read 'initiative' as a business initiative); TAH.encumbered ends \"...奔跑或爬行时，你必须进行机动性检定。 倡议</a>）\" — 'ACTIONS & INITIATIVE' became \"行动和行动... 倡议\". ALIENRPG.SwapInitiative / hideInitChat are untranslated. 先攻 is my proposal (standard Chinese TRPG term)."
+  },
+  {
+   "en": "Cover",
+   "zh": "掩护",
+   "category": "yze-core",
+   "confidence": "medium",
+   "evidence": "cn.json Panic11 \"SEEK COVER\" -> \"<b>寻找掩护：</b>\". The Evolved cover-modifier keys (ALIENRPG.fullcover, partialcover, nocover, targetCover) are all absent from cn.json entirely."
+  },
+  {
+   "en": "Campaign Mode",
+   "zh": "战役模式",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.campaign \"CAMPAIGN\" -> \"活动\" (MT: campaign as a marketing campaign). Wrong. 战役模式 is my proposal — 战役 is the standard Chinese TRPG rendering of campaign."
+  },
+  {
+   "en": "Cinematic Mode",
+   "zh": "剧本模式",
+   "alt": "电影模式",
+   "category": "low",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.cinematic \"CINEMATIC\" -> \"电影\"; zh-tw.json leaves it as the Latin string \"CINEMA\". Neither is a usable mode name."
+  },
+  {
+   "en": "Story Points",
+   "zh": "故事点",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json:418 \"StoryPoints\": \"故事点\". Identical in zh-tw."
+  },
+  {
+   "en": "Signature Weapon",
+   "zh": "",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "NOT PRESENT anywhere in en.json or cn.json. No Chinese rendering exists to inherit. (ALIENRPG.SIGNATURE -> \"签名\" is the spacecraft SIGNATURE stat, mistranslated as 'signature' the autograph; it should be 信号特征.)"
+  },
+  {
+   "en": "Overwatch",
+   "zh": "警戒",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "HARD ERROR in cn.json:290 \"Overwatch\": \"守望先锋\" — that is the Chinese name of the Blizzard video game. The MT'd tooltip ALIENRPG.TAH.overwatch uses 监视位置 / 守望位置 inconsistently. 警戒 is my proposal."
+  },
+  {
+   "en": "GM Only",
+   "zh": "仅限GM",
+   "category": "foundry-ui",
+   "confidence": "low",
+   "evidence": "HARD ERROR in cn.json:186 \"GMONLY\": \"仅限通用汽车\" — MT expanded GM to General Motors (通用汽车). Must be fixed."
+  },
+  {
+   "en": "Game Mother (GM)",
+   "zh": "游戏之母",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "Not translated anywhere; cn.json uses the bare Latin \"GM\" in prose (Panic9: \"GM决定丢下了什么\"). The Alien RPG book calls the GM the 'Game Mother'. 游戏之母 is my proposal, unsourced."
+  },
+  {
+   "en": "Select Firer",
+   "zh": "选择射击者",
+   "category": "foundry-ui",
+   "confidence": "low",
+   "evidence": "HARD ERROR in cn.json:370 \"SelectFirer\": \"选择消防员\" — MT read 'firer' as firefighter (消防员)."
+  },
+  {
+   "en": "Synthetic",
+   "zh": "生化人",
+   "alt": "仿生人 (franchise/film standard); 人造人; 合成人",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "cn.json:436 \"Synthetic\": \"生化人\" and ALIENRPG.SynthDontNeed -> \"生化人无需空气，食物，水分或是休眠。\". BUT zh.wikipedia's Alien film articles consistently use 仿生人 for Bishop and for the Romulus synthetic (https://zh.wikipedia.org/zh-hans/異形2 ; https://zh.wikipedia.org/zh-cn/異形：羅穆路斯). The 异形系列 page lists all three: 仿生人 / 人造人 / 合成人. Recommend 仿生人 to match the films."
+  },
+  {
+   "en": "Colonial Marine",
+   "zh": "殖民陆战队",
+   "alt": "殖民地海军陆战队",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.ColonialMarine -> \"殖民陆战队\"; zh-tw 殖民陸戰隊. zh.wikipedia's 异形2 article uses only the loose 陆战队 / 海军陆战队. USCMC has no attested Chinese rendering I could source."
+  },
+  {
+   "en": "Colonial Marshal",
+   "zh": "殖民地执法官",
+   "category": "franchise",
+   "confidence": "low",
+   "evidence": "MISTRANSLATED in cn.json:86 \"ColonialMarshal\": \"陆战队军官\" (= 'marine officer'). A Colonial Marshal is law enforcement, not military. 殖民地执法官 / 星际治安官 is my proposal, unsourced."
+  },
+  {
+   "en": "Company Agent",
+   "zh": "公司代理人",
+   "category": "career",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.CompanyAgent -> \"公司代理人\"."
+  },
+  {
+   "en": "Wildcatter",
+   "zh": "独立勘探者",
+   "category": "career",
+   "confidence": "low",
+   "evidence": "MISTRANSLATED in cn.json:479 \"Wildcatter\": \"野猫\" (= a literal wildcat). A wildcatter is a speculative prospector/driller. 独立勘探者 is my proposal, unsourced."
+  },
+  {
+   "en": "Roughneck",
+   "zh": "钻井工",
+   "category": "career",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.Roughneck -> \"工人\" — loses all flavour (roughneck = oil-rig deck hand). 钻井工 / 粗工 is my proposal."
+  },
+  {
+   "en": "Kid",
+   "zh": "孩童",
+   "category": "career",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.Kid -> \"孩童\"."
+  },
+  {
+   "en": "Medic",
+   "zh": "医护人员",
+   "category": "career",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.Medic -> \"医护人员\"; zh-tw 醫護人員."
+  },
+  {
+   "en": "Officer",
+   "zh": "长官",
+   "category": "career",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.Officer -> \"长官\"; zh-tw 長官."
+  },
+  {
+   "en": "Scientist",
+   "zh": "科学家",
+   "category": "career",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Scientist -> \"科学家\"."
+  },
+  {
+   "en": "Entertainer",
+   "zh": "艺人",
+   "category": "career",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.Entertainer -> \"艺人\"."
+  },
+  {
+   "en": "Mercenary",
+   "zh": "雇佣兵",
+   "category": "career",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Mercenary -> \"雇佣兵\"; zh-tw 僱傭兵."
+  },
+  {
+   "en": "Pilot",
+   "zh": "驾驶员",
+   "category": "career",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Pilot -> \"驾驶员\", ALIENRPG.PilotName -> \"驾驶员名称\". Note the ship-crew-role key ALIENRPG.PILOT is rendered \"飞行员\" instead — two renderings."
+  },
+  {
+   "en": "Heavy Machinery (skill)",
+   "zh": "机械",
+   "category": "skill",
+   "confidence": "medium",
+   "evidence": "cn.json ALIENRPG.SkillheavyMach -> \"机械\", SkillheavyMachAbb -> \"机械\"; zh-tw 機械. 重型机械 would be more literal."
+  },
+  {
+   "en": "Stamina (skill)",
+   "zh": "耐力",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillstamina -> \"耐力\"; also in MT'd tooltips \"<strong>耐力</strong>检定\"."
+  },
+  {
+   "en": "Close Combat (skill)",
+   "zh": "肉搏",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.SkillcloseCbt -> \"肉搏\"."
+  },
+  {
+   "en": "Mobility (skill)",
+   "zh": "机动",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillmobility -> \"机动\"; zh-tw 機動. (The MT'd tooltip TAH.encumbered says 机动性 instead.)"
+  },
+  {
+   "en": "Ranged Combat (skill)",
+   "zh": "射击",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.SkillrangedCbt -> \"射击\"; zh-tw 射擊."
+  },
+  {
+   "en": "Piloting (skill)",
+   "zh": "驾驶",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillpiloting -> \"驾驶\"; zh-tw 駕駛."
+  },
+  {
+   "en": "Observation (skill)",
+   "zh": "观察",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillobservation -> \"观察\"; zh-tw 觀察."
+  },
+  {
+   "en": "Survival (skill)",
+   "zh": "求生",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillsurvival -> \"求生\"."
+  },
+  {
+   "en": "Comtech (skill)",
+   "zh": "科技",
+   "alt": "通讯技术",
+   "category": "skill",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.Skillcomtech -> \"科技\" — drops the 'com' (communications/computer tech) half entirely. 通讯技术 or 通信科技 would be more accurate but is unsourced."
+  },
+  {
+   "en": "Command (skill)",
+   "zh": "指挥",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillcommand -> \"指挥\"; zh-tw 指揮."
+  },
+  {
+   "en": "Manipulation (skill)",
+   "zh": "操纵",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.Skillmanipulation -> \"操纵\"; zh-tw 操縱."
+  },
+  {
+   "en": "Medical Aid (skill)",
+   "zh": "医疗",
+   "category": "skill",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.SkillmedicalAid -> \"医疗\"; zh-tw 醫療. (The MT'd tooltips render the same skill as \"医疗援助\" in prose.)"
+  },
+  {
+   "en": "Armor Rating",
+   "zh": "护甲等级",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json ALIENRPG.ArmorRating -> \"护甲等级\"; ALIENRPG.Armor -> \"护甲\"; ALIENRPG.ArmorDoubled -> \"护甲加倍\"."
+  },
+  {
+   "en": "Armor Piercing",
+   "zh": "破甲",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "cn.json ALIENRPG.ArmorPiercing -> \"穿甲弹\" (= armor-piercing ammunition, a noun). As a damage keyword it should be 破甲. Also ALIENRPG.SHIP-ARMOR is rendered \"盔甲\" instead of 护甲 — inconsistent."
+  },
+  {
+   "en": "Panic table entry: NERVOUS TWITCH",
+   "zh": "精神紧绷",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:299 Panic7. Full human translation of the d6+Stress panic table exists for results 7-15."
+  },
+  {
+   "en": "Panic table entry: TREMBLE",
+   "zh": "颤抖",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:300 Panic8 \"<b>颤抖：</b> 你开始不受控制地颤抖...\""
+  },
+  {
+   "en": "Panic table entry: DROP ITEM",
+   "zh": "扔下物品",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:301 Panic9."
+  },
+  {
+   "en": "Panic table entry: FREEZE",
+   "zh": "呆滞",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:293 Panic10 \"<b>呆滞:</b> 你因恐惧或压力呆滞一轮...\""
+  },
+  {
+   "en": "Panic table entry: SEEK COVER",
+   "zh": "寻找掩护",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:294 Panic11."
+  },
+  {
+   "en": "Panic table entry: SCREAM",
+   "zh": "尖叫",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:295 Panic12."
+  },
+  {
+   "en": "Panic table entry: FLEE",
+   "zh": "逃跑",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:296 Panic13."
+  },
+  {
+   "en": "Panic table entry: BERSERK",
+   "zh": "发狂",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:297 Panic14 \"<b>发狂：</b> 狂暴。你必须立刻攻击最近的生物或人...\""
+  },
+  {
+   "en": "Panic table entry: CATATONIC",
+   "zh": "失去知觉",
+   "category": "panic-table",
+   "confidence": "high",
+   "evidence": "cn.json:298 Panic15."
+  },
+  {
+   "en": "Retreat roll",
+   "zh": "撤退检定",
+   "category": "yze-core",
+   "confidence": "high",
+   "evidence": "cn.json Panic11 and Panic13: \"...你可以进行撤退检定（见P93）\" — human translation, with the page reference localised."
+  },
+  {
+   "en": "Xenomorph / Alien",
+   "zh": "异形",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"異形（英語：Alien，又稱作Xenomorph XX121）是虛構的外星生物\" (https://zh.wikipedia.org/zh-cn/异形_(虚构生物)). cn.json also uses it: ALIENRPG.DialTextXeno -> \"请输入对异形造成的伤害。\", ALIENRPG.MenuLabel -> \"编辑异形RPG设定\"."
+  },
+  {
+   "en": "Facehugger",
+   "zh": "抱脸体",
+   "alt": "抱脸虫 (colloquial/百度百科); 抱面体; TW 抱臉體",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「抱面體」或「抱臉體」（Facehugger）\", zh-cn variant renders 抱脸体/抱面体. zh.wikipedia 异形：夺命舰 (2024, mainland theatrical release) uses \"抱脸体\". 百度百科 has a dedicated 抱脸虫 entry (https://baike.baidu.com/item/抱脸虫/3022517) and 萌娘百科 titles its article 抱脸虫 — 抱脸虫 is the dominant colloquial mainland form. cn.json's MT'd TAH.radiation tooltip says \"抱脸者\" (a third variant) and hideChatBGImageNote leaves the English word \"facehugger\" untranslated."
+  },
+  {
+   "en": "Chestburster",
+   "zh": "破胸体",
+   "alt": "破胸者",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「破胸體」（Chestburster）是由「抱面體」的生殖器從口腔把胚胎植入\"; zh.wikipedia 异形：夺命舰 uses \"破胸体\". 百度百科 / search consensus treats 破胸体 and 破胸者 as interchangeable."
+  },
+  {
+   "en": "Ovomorph / Egg",
+   "zh": "异形卵",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「異形卵」（Ovomorph）...是由在異形巢穴之中的「異形女王」，所生產出來的\"."
+  },
+  {
+   "en": "Alien Queen",
+   "zh": "异形女王",
+   "alt": "异形母后 (used in the zh-wiki 异形2 plot summary)",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「異形女王」（Alien Queen）是一個異形族群的領導者\". The 异形2 article's plot summary instead says \"异形母后\" (https://zh.wikipedia.org/zh-hans/異形2)."
+  },
+  {
+   "en": "Warrior (xenomorph caste)",
+   "zh": "战士异形",
+   "alt": "战斗异形",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「戰鬥異形」或「戰士異形」（Warrior）\" — the page itself offers both."
+  },
+  {
+   "en": "Drone (xenomorph caste)",
+   "zh": "工蜂异形",
+   "alt": "人形异形",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 异形 (虚构生物): \"「工蜂異形」或「人形異形」（Drone）\"."
+  },
+  {
+   "en": "Acid Blood",
+   "zh": "酸血",
+   "alt": "强酸血液 / 酸性血液",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "cn.json:23 \"AcidAttack\": \"酸血\" (for the game term 'Acid Blood'); cn.json ALIENRPG.AcidBlood -> \"这个生物没有酸性血液。\"; ALIENRPG.SkillAcidSplash \"Acid Splash\" -> \"酸性血液\" (wrong — splash is the effect, not the substance). zh.wikipedia describes it as 含高濃度氫氟酸和硫酸...極強的腐蝕性."
+  },
+  {
+   "en": "Weyland-Yutani Corporation",
+   "zh": "韦兰-尤坦尼集团",
+   "alt": "韦兰德-尤坦尼集团; 维兰德-汤谷公司 (mainland fan-popular); TW 韋蘭德-湯谷企業",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "THREE competing renderings. zh.wikipedia's article title and the 异形/异形2/异形：夺命舰 articles all use \"韦兰-尤坦尼集团\" (https://zh.wikipedia.org/zh-cn/异形：羅穆路斯). The dedicated corp article's lead renders it \"韦兰德-尤坦尼集团\" with traditional variant \"韋蘭德-湯谷企業\" and alternate \"韦兰德-汤谷公司\". Chinese fan writing (bilibili cv4357628, douban group topic 310114220) predominantly uses \"维兰德-汤谷公司\", abbreviated \"维汤公司\". Not present in cn.json at all."
+  },
+  {
+   "en": "Weyland Corporation",
+   "zh": "韦兰德公司",
+   "alt": "韦兰德工业",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 韦兰-尤坦尼集团 article: \"韦兰德公司\"; the 异形系列 page uses \"韦兰德工业\" for Weyland Industries."
+  },
+  {
+   "en": "Yutani Corporation",
+   "zh": "尤坦尼公司",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 韦兰-尤坦尼集团 article: \"尤坦尼公司\"."
+  },
+  {
+   "en": "The Company",
+   "zh": "公司",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 韦兰-尤坦尼集团: \"有时只被简称为公司（英语：The Company）\"."
+  },
+  {
+   "en": "USCSS Nostromo",
+   "zh": "诺史莫号",
+   "alt": "诺斯托罗莫号 (common transliteration in fan writing)",
+   "category": "franchise",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia uses \"诺史莫号\" in the 异形 (电影), 异形 (虚构生物) and 异形：夺命舰 articles. But search snippets of the same 异形 (电影) article body show \"诺斯托罗莫号\" in another passage — the wiki is internally inconsistent. Not present in cn.json."
+  },
+  {
+   "en": "USS Sulaco",
+   "zh": "苏拉科号",
+   "alt": "苏拉克号",
+   "category": "franchise",
+   "confidence": "low",
+   "evidence": "zh.wikipedia 异形2 renders it \"苏拉克号\" in the plot summary; \"苏拉科号\" is the more common form in Chinese fan writing but I could not source it to a reference work this session. Low confidence — verify against official subtitles."
+  },
+  {
+   "en": "MU/TH/UR (Mother)",
+   "zh": "母亲",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (电影): the ship's computer appears as \"母亲\" and \"MU/TH/UR 6000\". The Foundry module alien-mu-th-ur v2.0.0 ships 9 languages (en/fr/de/es/it/nl/sv/no/da) — no Chinese."
+  },
+  {
+   "en": "LV-426",
+   "zh": "LV-426",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (电影): \"LV-426号的行星\"; 异形2: \"LV-426号行星\". Kept in Latin — do not transliterate."
+  },
+  {
+   "en": "Acheron (LV-426)",
+   "zh": "阿克伦",
+   "category": "franchise",
+   "confidence": "low",
+   "evidence": "NOT SOURCED. I could not find 阿克伦 (or any Chinese rendering of Acheron-as-LV-426) in zh.wikipedia's Alien articles or in cn.json. The Greek river Acheron is conventionally 阿刻戎/阿克戎 in Chinese, which argues against 阿克伦. Treat as unresolved."
+  },
+  {
+   "en": "Hadley's Hope",
+   "zh": "哈德利希望镇",
+   "category": "franchise",
+   "confidence": "low",
+   "evidence": "NOT SOURCED as a proper noun. zh.wikipedia 异形2 renders the colony loosely as \"希望之地\" in its plot summary, which is not a transliteration and would be wrong as a place name. 哈德利希望镇 / 哈德利之希望 appear in fan writing but I could not confirm them against a reference work."
+  },
+  {
+   "en": "Special Order 937",
+   "zh": "937号特别指令",
+   "category": "franchise",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形 (电影): \"937号特别指令\" — directly attested."
+  },
+  {
+   "en": "M41A Pulse Rifle",
+   "zh": "M41A脉冲步枪",
+   "category": "franchise-gear",
+   "confidence": "high",
+   "evidence": "萌娘百科 article title is literally \"M41A脉冲步枪\" (https://zh.moegirl.org.cn/M41A脉冲步枪); MC百科 item page \"M41A脉冲步枪 (M41A Pulse Rifle)\" (https://www.mcmod.cn/item/226422.html); bilibili cv22321766 \"阿玛特防务M41A脉冲步枪\"; 机核 GCORES article 169846 \"M41a电磁脉冲步枪\"."
+  },
+  {
+   "en": "M56 Smartgun",
+   "zh": "智能枪",
+   "category": "franchise-gear",
+   "confidence": "low",
+   "evidence": "NOT SOURCED this session. I found no Chinese reference-work entry for the Smartgun. 智能枪 is plausible but unverified."
+  },
+  {
+   "en": "Motion Tracker",
+   "zh": "运动探测器",
+   "alt": "动作追踪器 / 运动追踪器",
+   "category": "franchise-gear",
+   "confidence": "low",
+   "evidence": "NOT SOURCED to a reference work. The Foundry module is named motion_tracker (v1.5.5, langs en/es/fr — no Chinese). zh.wikipedia 异形2's plot summary mentions the crew using 运动探测器-type devices but I could not pin an exact string. Unresolved."
+  },
+  {
+   "en": "P-5000 Power Loader",
+   "zh": "动力装载机",
+   "alt": "动力服 (as used in the zh-wiki 异形2 plot summary)",
+   "category": "franchise-gear",
+   "confidence": "low",
+   "evidence": "zh.wikipedia 异形2 plot summary renders it \"动力服\" (= powered suit), which loses the 'loader' sense. English Xenopedia calls it \"P-5000 Powered Work Loader\" / Caterpillar P-5000. 动力装载机 is the common fan rendering but unsourced to a reference work."
+  },
+  {
+   "en": "Atmosphere Processor",
+   "zh": "大气处理厂",
+   "category": "franchise-gear",
+   "confidence": "low",
+   "evidence": "NOT SOURCED. zh.wikipedia 异形2 calls the Hadley's Hope installation \"核融合发电厂\" (= fusion power plant), which is a plot-summary paraphrase, not the canonical term. 大气处理厂 is unattested in the sources I could reach."
+  },
+  {
+   "en": "Alien (1979, film title)",
+   "zh": "异形",
+   "category": "franchise-title",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形系列: \"《异形》\". Traditional-script regions write 異形."
+  },
+  {
+   "en": "Aliens (1986, film title)",
+   "zh": "异形2",
+   "alt": "HK 异形续集",
+   "category": "franchise-title",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 异形2 article; the variant table shows 香港 \"异形续集\", 台湾 \"异形2\"."
+  },
+  {
+   "en": "Alien: Romulus (2024, film title)",
+   "zh": "异形：夺命舰",
+   "alt": "TW 异形：罗穆路斯; HK 异形：罗穆卢斯",
+   "category": "franchise-title",
+   "confidence": "high",
+   "evidence": "zh.wikipedia 异形：夺命舰 (https://zh.wikipedia.org/zh-cn/異形：羅穆路斯) explicitly lists 大陆 \"异形：夺命舰\" / 台湾 \"异形：罗穆路斯\" / 香港 \"异形：罗穆卢斯\". This is the clearest documented three-way regional split in the franchise."
+  },
+  {
+   "en": "Alien Resurrection / Alien: Covenant / Prometheus / Alien: Earth (titles)",
+   "zh": "异形4：浴火重生 / 异形：圣约 / 普罗米修斯 / 异形：地球",
+   "category": "franchise-title",
+   "confidence": "medium",
+   "evidence": "zh.wikipedia 异形系列 (https://zh.wikipedia.org/zh-hans/異形系列) lists these simplified-Chinese titles."
+  },
+  {
+   "en": "Stress Response / Panic Response / Resolve (Evolved Edition)",
+   "zh": "",
+   "category": "yze-core",
+   "confidence": "low",
+   "evidence": "NO Chinese exists. ALIENRPG.Resolve, ALIENRPG.ResolveMod, ALIENRPG.StressResponses, ALIENRPG.PanicResponses, ALIENRPG.StressResponseRoll, ALIENRPG.PanicResponseRoll and the 20 Evolved condition words (jumpy/twitchy/spooked/paranoid/frantic/hesitant/noisy/shakes/tunnelvision/deflated/aggravated/fatigued/catatonic/frenzy/freeze/flee/scream/seekcover/loseitem/keepingguard) are all in en.json but ABSENT from cn.json — the 2025 Evolved Edition vocabulary has never been translated to Chinese."
+  }
+ ],
+ "sources": [
+  "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg\\lang\\cn.json (511 keys, 26,908 bytes; byte-identical to upstream master)",
+  "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg\\lang\\zh-tw.json (511 keys, 26,904 bytes)",
+  "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg\\lang\\en.json (590 keys)",
+  "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\systems\\alienrpg\\system.json (declares lang codes: en, fr, cn, zh-tw, de, es, pt-BR, it, pl)",
+  "https://raw.githubusercontent.com/pwatson100/alienrpg/master/lang/cn.json",
+  "https://github.com/pwatson100/alienrpg/commit/39cf73783ec81a92ccb9fdd4052d1cdd53f29cba (TI-130, 2020-11-13, \"Add Lang support: Chinese\")",
+  "https://github.com/pwatson100/alienrpg/commit/ee3f0c92e414e2e079303c29c00788b552ce6c74 (TI-130, 2020-11-13, \"Minor Fix to Lang support: CN\")",
+  "https://github.com/pwatson100/alienrpg/commit/8ffd21bad80ba70352fd5b4265d6b6fd2565583d (TI-130, 2020-12-02, \"Update cn.json\")",
+  "https://github.com/pwatson100/alienrpg/commit/bef3d346335bf7e635bd2f1671869deb986edf56 (pwatson100, 2020-12-03, \"Improved Chinese language translation with thanks to Tian#7972\")",
+  "https://github.com/pwatson100/alienrpg/commit/13d3a6bdbe44b38d261c1a5577b6d4cda7a953bd (TI-130, 2021-01-19, \"Update cn.json\")",
+  "https://github.com/pwatson100/alienrpg/commit/7aa602c9487aea30f6f7aba1fb3920f33976d12e (pwatson100, 2021-01-24, \"New Chinese language translation with thanks to @Tian#7972\")",
+  "https://github.com/pwatson100/alienrpg/releases/tag/4.1.13 (published 2026-06-27; local install is current)",
+  "https://github.com/pwatson100/alienrpg/issues/282 (Polish translation: \"How can I start translating the core module to Polish language? Just open a PR?\" — closed, pl.json now ships)",
+  "https://github.com/pwatson100/alienrpg/issues/241 (German translation submitted as de.zip attachment on an issue, integrated)",
+  "https://github.com/pwatson100/alienrpg/issues/137 (phenomen, localization defects incl. the Seepage106 page-number bug still present in cn.json)",
+  "https://foundryvtt.com/packages/alienrpg",
+  "https://zh.wikipedia.org/zh-cn/%E5%BC%82%E5%BD%A2_(%E8%99%9A%E6%9E%84%E7%94%9F%E7%89%A9)",
+  "https://zh.wikipedia.org/zh-hans/%E7%95%B0%E5%BD%A2_(%E9%9B%BB%E5%BD%B1)",
+  "https://zh.wikipedia.org/zh-hans/%E7%95%B0%E5%BD%A22",
+  "https://zh.wikipedia.org/zh-hans/%E7%95%B0%E5%BD%A2%E7%B3%BB%E5%88%97",
+  "https://zh.wikipedia.org/zh-cn/%E7%95%B0%E5%BD%A2%EF%BC%9A%E7%BE%85%E7%A9%86%E8%B7%AF%E6%96%AF",
+  "https://zh.wikipedia.org/zh-hans/%E9%9F%8B%E8%98%AD-%E5%B0%A4%E5%9D%A6%E5%B0%BC%E9%9B%86%E5%9C%98",
+  "https://baike.baidu.com/item/%E6%8A%B1%E8%84%B8%E8%99%AB/3022517",
+  "https://zh.moegirl.org.cn/M41A%E8%84%89%E5%86%B2%E6%AD%A5%E6%9E%AA (title confirms M41A脉冲步枪; body blocked 403 / API blocked)",
+  "https://www.mcmod.cn/item/226422.html (M41A脉冲步枪 / M41A Pulse Rifle)",
+  "https://www.mynewsdesk.com/us/free-league/pressreleases/the-official-alien-roleplaying-game-launching-in-seven-new-languages-2965627",
+  "https://freeleaguepublishing.com/games/alien/",
+  "https://en.wikipedia.org/wiki/Alien:_The_Roleplaying_Game",
+  "https://www.goddessfantasy.net/bbs/?topic=121082.0 (純美蘋果園 thread 【翻译】异形RPG潜行规则（和其它）— exists, login-gated)",
+  "https://www.bilibili.com/read/cv18100844/ (《异形:RPG》版异形宇宙设定翻译·时间线·第一部分 — exists, captcha-gated)",
+  "https://www.bilibili.com/video/BV1pV411k7Vs/ (Alien RPG: 异形跑团规则书介绍)",
+  "https://www.bilibili.com/video/BV1qv4y1j7PC/ (《异形》（ALIEN）TRPG预告片)",
+  "https://www.bilibili.com/read/cv4357628 (异形篇-维兰德-汤谷公司)",
+  "https://www.douban.com/group/topic/310114220/ (《异形》系列“维兰德-汤谷公司”编年史)",
+  "https://www.gcores.com/articles/169846 (机核: M41a电磁脉冲步枪)"
+ ],
+ "notes": [
+  "Q1 — Does a Chinese Alien RPG / Foundry translation exist? PARTIALLY, and it is already on disk. The alienrpg system ships lang/cn.json (511 keys) and lang/zh-tw.json. The local 4.1.13 copy is BYTE-IDENTICAL to upstream master (verified by curl + dict compare), so there is nothing newer to pull. No Chinese translation of the RULEBOOK exists — no fan PDF, no 网盘 release, no 汉化组 project surfaced in any search. Search noise is dominated by the video game 异形：隔离 (Alien: Isolation), which has several unrelated Chinese patches.",
+  "Q1 provenance — Who wrote cn.json: GitHub user TI-130 (Tyronemonitor@gmail.com), credited by the maintainer as Discord handle Tian#7972. Three direct commits: 39cf7378 (2020-11-13 'Add Lang support: Chinese'), ee3f0c92 (2020-11-13 fix), 8ffd21ba (2020-12-02 update), 13d3a6bd (2021-01-19 update); the maintainer's bef3d346 and 7aa602c9 credit 'Tian#7972' in the commit message. TI-130 stopped in Jan 2021 and has not touched it since.",
+  "Q1 quality — cn.json has TWO STRATA and they must be treated differently. STRATUM A (TI-130, 2020-11..2021-01, human, good): attributes, skills, careers, ranges, the whole d6+Stress Panic table (Panic7-Panic15, cn.json lines 293-301), SynthDontNeed, DefMacroHint. Idiomatic, consistent, uses 检定 for rolls. STRATUM B (2022-2026, maintainer bulk 'Updated all language files' passes, machine-translated, bad): every ALIENRPG.TAH.* tooltip, the whole spacecraft/colony/planet vocabulary, and the newer settings keys. Stratum B renders 'roll' as 滚动/翻滚/掷骰 at random, 'Shift' four different ways, 'Broken' three ways, 'Death Roll' four ways.",
+  "Q1 hard errors to fix on sight (all in stratum B): cn.json:186 GMONLY 'GM Only' -> 仅限通用汽车 (GM expanded to General Motors); cn.json:290 Overwatch -> 守望先锋 (the Blizzard game); cn.json:205 HOWMANYDICE 'How Many Base Die?' -> 有多少基地死亡？ ; cn.json:370 SelectFirer 'Select Firer' -> 选择消防员 (firefighter); ALIENRPG.None -> 莫 ; ALIENRPG.Ones: -> 那些: ; ALIENRPG.Homebrew -> 家酿 ; ALIENRPG.Utility -> 公用事业 ; ALIENRPG.OneTurn -> 一斡 ; ALIENRPG.NoSynCrit 'Synthetics table' -> 综合表 ; ALIENRPG.RollManShipMinorCrit says 'between 1 and 66' in EN but 介于 1 和 44 之间 in CN (numeric mismatch, also a data bug); ALIENRPG.Seepage106 EN says 'page 105' but CN says 第106面 (upstream issue #137 flagged this in 2021 and it is still wrong).",
+  "Q1 coverage gaps: 93 en.json keys are ABSENT from cn.json and 140 more are present-but-still-English. The entire Alien Evolved Edition (2025) vocabulary is untranslated: Resolve, Resolve Modifier, Stress Responses, Panic Responses, and the 20 condition words (jumpy, twitchy, spooked, paranoid, frantic, hesitant, noisy, shakes, tunnelvision, deflated, aggravated, fatigued, catatonic, frenzy, freeze, flee, scream, seekcover, loseitem, keepingguard), plus all cover/target-size modifiers, all SheetLabels, and all ShipPanic7-15 entries.",
+  "Q1 zh-tw.json is NOT an independent source. 342 of 511 strings are byte-identical to cn.json and the remaining 169 differ only by simplified->traditional character conversion. Only 12 pairs differ by length, and 10 of those are whitespace noise; the two real ones are ALIENRPG.cinematic (CN 电影 vs TW the Latin string 'CINEMA') and ALIENRPG.CrewGunner (TW has a stray leading space). Treat zh-tw as a mechanical s2t conversion of cn — do not mine it for alternative terminology.",
+  "Q2 — Chinese YZE glossary: DOES NOT EXIST. I found no Chinese fan translation or glossary for Mutant: Year Zero, Forbidden Lands, Coriolis, Vaesen, Tales from the Loop, Twilight: 2000, Blade Runner RPG or Dragonbane. Nothing on 純美蘋果園's TRPG译文专区 index, nothing on bilibili, nothing on GitHub. The ONLY Chinese YZE material I located anywhere is (a) this cn.json, and (b) one login-gated 純美蘋果園 thread 【翻译】异形RPG潜行规则（和其它）(topic=121082.0, ~2021-10-22) which translates the Alien RPG stealth rules. Conclusion: cn.json's stratum A is effectively the de-facto Chinese YZE glossary, and whatever you settle on here will become the reference for anyone who follows.",
+  "Q2 — the terminology decisions cn.json leaves genuinely open (real conflicts inside the file, not just MT noise): (1) Panic Roll = 恐慌检定 or 混乱检定 — UI keys say 恐慌, the human panic prose says 混乱; (2) Engaged = 近战 (UI key, but that collides with Melee) or 接战 (panic prose) — 接战 is the better choice; (3) Stress Level = 压力水平 or 压力等级; (4) Health = 生命 / 健康 / 生命值; (5) Synthetic = 生化人 (cn.json) or 仿生人 (all the Chinese film articles). Pick one of each up front.",
+  "Q3 — Franchise names: no Chinese Alien wiki exists. There is NO Chinese-language Alien/Xenopedia fandom wiki and no 灰机wiki (huijiwiki) Alien project. The only usable reference works are zh.wikipedia (异形系列 / 异形(电影) / 异形2 / 异形：夺命舰 / 韦兰-尤坦尼集团 / 异形(虚构生物)), 百度百科 (抱脸虫), and 萌娘百科 (M41A脉冲步枪, 抱脸虫 — both 403 to automated fetch).",
+  "Q3 — the ONE well-documented mainland/TW/HK split I could verify is the Alien: Romulus title: 大陆 异形：夺命舰 / 台湾 异形：罗穆路斯 / 香港 异形：罗穆卢斯. Also 异形2 (大陆·台湾) vs 异形续集 (香港). For the creature and hardware nouns, zh.wikipedia's variant machinery mostly just does simplified/traditional character conversion, so there is no separate 台湾/香港 terminology to record — 抱脸体/抱臉體, 破胸体/破胸體 are the same words in different scripts.",
+  "Q3 — the real fault line is not region but register: reference works say 抱脸体 / 破胸体, while mainland fan and 百度百科 usage says 抱脸虫 / 破胸者. Same for the company: zh.wikipedia says 韦兰-尤坦尼(集团) but the fan corpus (bilibili, douban, 机核) overwhelmingly says 维兰德-汤谷公司 / 维汤. Decide whether the glossary targets wiki-formal or player-colloquial register, because you cannot satisfy both.",
+  "Q3 — terms in the brief I could NOT source and that should be marked unresolved: 阿克伦 (Acheron), 哈德利希望镇 (Hadley's Hope — zh-wiki only offers the loose paraphrase 希望之地), 智能枪 (Smartgun), 动作追踪器 (Motion Tracker), 大气处理厂 (Atmosphere Processor — zh-wiki 异形2 calls it 核融合发电厂, which is a plot-summary error), and 苏拉科号 (Sulaco — zh-wiki says 苏拉克号). Do not treat any of these as settled. 韦兰-尤坦尼公司 should be 集团 not 公司 per zh-wiki. 诺斯托罗莫号 is fan usage; zh-wiki's own articles say 诺史莫号.",
+  "Q4 — Free League Chinese licence: NONE EXISTS. Free League's own press release lists exactly seven licensed Alien RPG editions with named partners: French/Arkhane Asylum, German/Ulisses Spiele, Spanish/Edge Entertainment, Italian/Wyrd Edizioni, Russian/Studio 101, Polish/Galakta, Portuguese/New Order Editora. No Chinese. freeleaguepublishing.com/games/alien/ mentions only English and Swedish. Free League's third-party/OGL programme (Dragonbane, Forbidden Lands, Symbaroum, Coriolis) enumerates ~13 permitted languages and Chinese is not among them — and Alien is not in that programme at all, since it is a 20th Century Studios licence. Practical consequence: any Chinese Alien RPG work is unlicensed fan translation, with a film-studio IP holder behind it. Keep it as a Babele/lang overlay, not a redistribution of book text.",
+  "Q5 — Foundry-specific: NO alienrpg Babele module exists. GitHub code search for a Babele mapping targeting alienrpg returns zero results; the only alienrpg modules on GitHub are BenTheCloudGuy/foundryvtt-alienrpg-module (MU/TH/UR terminal, no i18n) and Frenchy-s-module/alien-roll-request. Babele 2.9.1 is installed locally at <data>/modules/babele and does have built-in Adventure defaultMappings, which matters because all three Alien content packs are single-Adventure-document packs.",
+  "Q5 — upstream is current and receptive. Latest release 4.1.13 (2026-06-27, master.zip, 2898 downloads) == the installed version, and lang/cn.json in master == the local file exactly. Paul Watson (pwatson100) has accepted translations from at least four outside contributors (TI-130 Chinese, Txus5012 Spanish, Stefano1975t Italian, Moradion German, plus Brazilian Portuguese from three contributors). Issue #282 shows the accepted workflow is literally 'just open a PR'; issue #241 shows he will also take a zipped lang file attached to an issue. So a cleaned-up cn.json is straightforwardly upstreamable.",
+  "Q5 — lang code: use `cn`, not `zh-CN` or `zh-Hans`. alienrpg/system.json declares {\"lang\":\"cn\",\"name\":\"中文\"}, and 14 packages on this install use `cn` (foundry_chn, pf2_cn, 5e_chn, crucible-cn, dice-so-nice, quick-insert...) versus only 2 using `zh-cn`. A Babele module for alienrpg must register under `cn` to line up with the core UI translation.",
+  "Q5 — the three Alien content modules are all English-only and Babele-shaped: alien-evolved-corerules v1.0.2 (langs: en; pack alien-evolved-core-rules, type Adventure), alien-evolved-starterset v1.0.2 (langs: en; pack alien-evolved-starter-set, type Adventure), and the system's own pack alien-rpg-system (type Adventure). alien-mu-th-ur v2.0.0 ships 9 languages but no Chinese; motion_tracker v1.5.5 has en/es/fr; token-action-hud-alien v1.3.0 and terminal v4.0.11 are en-only / have no language files at all. All are candidates for the same Chinese overlay.",
+  "Method note on what I could not reach: 純美蘋果園 (goddessfantasy.net) returns HTTP 200 but a login wall for guests on every view I tried (normal, ?wap2, action=printpage, ;nowap). bilibili serves a captcha page to curl and an empty SPA shell to WebFetch, so cv18100844 and cv2014315 are unread. 萌娘百科 returns 403 to WebFetch and 'Unauthorized API call' to its own api.php. Those four are the highest-value remaining leads and are listed under downloads_user_could_help_with."
+ ],
+ "downloads_user_could_help_with": [
+  "純美蘋果園 forum thread 【翻译】异形RPG潜行规则（和其它）— https://www.goddessfantasy.net/bbs/?topic=121082.0 (posted ~2021-10-22). Login-gated; I get the 'no permission' page as a guest. This is the ONLY Chinese fan translation of actual Alien RPG rules text I could locate anywhere. Please register/log in and paste the full post — I specifically need its renderings of Stealth, Observation, Panic Roll, Engaged/Short range, Fast/Slow Action, and Cover, plus the poster's name so we can credit them.",
+  "純美蘋果園 TRPG译文专区 board index — https://www.goddessfantasy.net/bbs/index.php?board=44.0 (also 403 to me). Please browse/search it for any other 异形 / Alien / Year Zero / 年零 / Free League / Mutant / Forbidden Lands / Coriolis threads. I want to know whether thread 121082 is a one-off or part of a larger effort.",
+  "bilibili article cv18100844 《异形:RPG》版异形宇宙设定翻译·时间线·第一部分 — https://www.bilibili.com/read/cv18100844/ . Captcha-blocked to curl, empty SPA shell to my fetcher. This is a Chinese translation of the Alien RPG's own setting/timeline chapter, so it is the single best source for how a Chinese fan renders Weyland-Yutani, UPP, Three World Empire, United Americas, Seegson, USCMC, etc. Please open it in a browser and save the text (and check whether parts 2+ exist on the same author's page).",
+  "bilibili article cv2014315 《TRPG索引（十二）：科幻规则系列》 — https://www.bilibili.com/read/cv2014315/ . Same blocking. Should tell us the Chinese community's settled name for the game and for Free League / Year Zero Engine, and whether any Chinese translation project was ever announced.",
+  "bilibili video BV1pV411k7Vs 'Alien RPG: 异形跑团规则书介绍' (uploader 'Vacuus静空') — https://www.bilibili.com/video/BV1pV411k7Vs/ . A Chinese walkthrough of the rulebook. If you can grab the auto/manual subtitles or the description + pinned comments, spoken terminology for 压力骰/恐慌/孤注一掷 would confirm or overturn cn.json's choices. Also BV1qv4y1j7PC (《异形》（ALIEN）TRPG预告片).",
+  "萌娘百科 articles, both 403 to me and their api.php refuses anonymous calls: https://zh.moegirl.org.cn/抱脸虫 and https://zh.moegirl.org.cn/M41A脉冲步枪 . I confirmed the M41A page TITLE via search but not its body. These would settle Smartgun, Motion Tracker, Power Loader, flamethrower and sentry gun, which I currently have to mark low-confidence.",
+  "Official mainland-Chinese subtitles for the films — this is the highest-value item on the list. 《异形：夺命舰》(Alien: Romulus) had a 2024 mainland theatrical release, so official simplified-Chinese subtitles exist and are authoritative for 抱脸体/破胸体/韦兰-尤坦尼/仿生人. Official Chinese subs or dubs for 异形1/异形2 would settle 苏拉科号, 哈德利希望镇, 大气处理厂, 动力装载机, 智能枪, 动作追踪器 and 937号特别指令 — six terms I currently cannot source. Any legally-obtained .srt you already have would do.",
+  "百度贴吧 异形吧 精品区 — https://tieba.baidu.com/f?kw=异形 . Search engines index it poorly and it often requires login. Worth checking for a terminology/设定 sticky post and for any 异形 TRPG threads.",
+  "Douban group post 《异形》系列“维兰德-汤谷公司”编年史 — https://www.douban.com/group/topic/310114220/ , and bilibili cv4357628 '异形篇-维兰德-汤谷公司'. Both use the fan-standard 维兰德-汤谷 rather than wiki's 韦兰-尤坦尼; reading them would let us judge which register the Chinese Alien audience actually expects.",
+  "Any Chinese fan PDF/doc of the Alien RPG core rulebook, if one exists in a QQ 跑团群 / 百度网盘 / 蓝奏云 share. I found no evidence one exists, but that kind of file is invisible to search engines by design. If you have access to Chinese TRPG QQ groups, asking directly would either hand us a ready-made glossary or confirm the negative.",
+  "Optional and low priority: the Alien RPG Evolved Edition core rulebook PDF (DriveThruRPG, paywalled) — I can only see the English key strings that the Foundry system exposes, not the book's own definitions of Resolve / Stress Response / Panic Response. Having the English chapter would let me translate the 26 missing Evolved keys accurately instead of guessing from key names."
+ ]
+}

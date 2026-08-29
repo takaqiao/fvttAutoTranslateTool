@@ -1,0 +1,72 @@
+{
+ "kind": "pre-upgrade-snapshot",
+ "capturedAt": "2026-08-29T11:16:13",
+ "capturedBy": "4-常用脚本/qa/capture_baseline.py",
+ "capturedFrom": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\2-新手包汉化插件\\compendium\\en",
+ "upstream": {
+  "packageId": "alien-evolved-starterset",
+  "packageVersion": "1.0.2",
+  "packageType": "module",
+  "packageDir": "C:\\Users\\Taka\\AppData\\Local\\FoundryVTT\\Data\\modules\\alien-evolved-starterset"
+ },
+ "includesLocalPatches": true,
+ "note": "Phase 0 全量基线：project mapping 抽取后立刻截。上游 alienrpg 4.1.13 / alien-evolved-* 1.0.2。S3 -latest.json 无版本锚点，每轮跟版必须重截三个包。",
+ "coverage": {
+  "packsInManifest": 1,
+  "manifestPackNames": [
+   "alien-evolved-starter-set"
+  ],
+  "packsInSourceMeta": 1,
+  "packsOnDisk": 1,
+  "skippedPacks": [],
+  "complete": true
+ },
+ "packs": [
+  {
+   "file": "alien-evolved-starterset.alien-evolved-starter-set.json",
+   "en_leaves": 514,
+   "cn_leaves": 0,
+   "cn_present": false
+  }
+ ],
+ "totals": {
+  "packs": 1,
+  "en_leaves": 514,
+  "cn_leaves": 0
+ },
+ "upstreamSourceMeta": {
+  "packageId": "alien-evolved-starterset",
+  "packageVersion": "1.0.2",
+  "packageType": "module",
+  "packageManifest": "module.json",
+  "mappingTarget": "starterset",
+  "mappingSource": "project",
+  "mappingSourceDetail": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\extract\\mappings.mjs",
+  "mappingSourceNote": null,
+  "extractedAt": "2026-08-29T03:16:12.737Z",
+  "extractedBy": "Alien-RPG Translation Project / 4-常用脚本/extract/extract_en.mjs",
+  "declaredPacks": 1,
+  "extractedPacks": 1,
+  "skippedPacks": [],
+  "unknownConverters": {
+   "TableResult.name:referencedDocumentField": 124
+  },
+  "packs": [
+   {
+    "pack": "alien-evolved-starter-set",
+    "collection": "alien-evolved-starterset.alien-evolved-starter-set",
+    "label": "Alien Evolved Starter Set",
+    "file": "alien-evolved-starterset.alien-evolved-starter-set.json",
+    "documentType": "Adventure",
+    "documents": 1,
+    "mergedDuplicates": 0,
+    "buckets": {
+     "adventures": 1
+    },
+    "entries": 1,
+    "folders": 0
+   }
+  ],
+  "note": "compendium/en/ 是英文基准，只用于跨版本算 drift 与 validate_translations，进 git、不进发布 zip。此文件由 extract_en.mjs 生成，请勿手写。"
+ }
+}

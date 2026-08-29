@@ -1,0 +1,154 @@
+{
+ "summary": "Rebuilt the Alien-RPG glossary under the owner's settled ladder (PROJECT.md §1.4), superseding the Phase-0 wiki-spine version. The rebuild is a reproducible builder, not a hand-edited file: `4-常用脚本/tm/build_glossary_v1.py` + four modules read the three miner artifacts, `lang/{en,cn}.json` and `DO-NOT-TRANSLATE.json`, and emit all five deliverables. Every count in the output is READ from a miner artifact at build time — none is transcribed — and 16 invariants gate the write (the build prints \"NOTHING WRITTEN\" and exits 1 on any failure). Two consecutive runs produce byte-identical output on all five files.\n\n404 terms (was 346). 128 re-adjudicated, 61 added, 6 moved to pending, 7 resolved out of pending. Winner levels: L1=140, L2=12, L3=8, L4=49, L5=1, L6=50, L7=7, convention=102, FROZEN=31, LATIN=4 — zh.wikipedia fell from being the spine to 7 winners, all film titles and the two Queen entries.\n\nAll 21 values the owner named in §1.4 landed and are asserted (invariant 13). Weyland-Yutani = 韦兰德-汤谷公司 / 韦汤; Nostromo = 诺斯特罗莫号; Sulaco = 萨拉科号; Synthetic/Android/Robot = 合成人/仿生人/机器人; 大气处理器; 哈德利的希望; 轮/节/班; 电影模式/战役模式; 边境/外层帷幕/核心星系/外环; 进化版. Wits = 机智 and Empathy = 共情 are pinned and asserted. Facehugger = 抱脸虫 kept its value but was PROMOTED from a zero-hit guess to a level-3 hard gate (Alien: Isolation key-gates *_KILLED_BY_FACEHUGGER → 被抱脸虫所杀 on 3 keys) — same for 异形, now 72 key-gated keys instead of a wiki citation.\n\nSix Phase-0 disputes were CLOSED by a higher rung (D1 D2 D3 D4 D5 D7 D8), each with a \"still_to_do\" naming the lang keys that must move. Two new ones opened (D10-comtech, D11-captain). D6-queen stays open and now carries a machine-read vote_shape proving the claim: 7 en-gated hits, all in ONE lineage, lineage_count 1.\n\nAll seven listed defects are fixed, and the lockstep block is now re-derived by PATTERN from the installed actor.mjs on every build rather than transcribed — Permanent :1888, bare \"Shift\" :1890, the throwing regex :1893, switch(testArray[3])→cFatal :1902-1921 with U+2013 EN DASH at :1906/:1912, switch(testArray[5])→healTime :1923-1942 falling to 0 at :1940. Both failure modes are stated separately: the healTime switch IS silent, the Shift branch is a crash.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.json",
+   "bytes": 12106,
+   "what": "Flat {en: cn}, 404 keys, all values non-empty strings. The only shape consumers read."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.provenance.json",
+   "bytes": 508976,
+   "what": "Per term: every candidate with its ladder LEVEL (1-7 / C / B-rejected / off-ladder), its English-gated count, its count_kind, and a one-line why_this_won. _meta.count is authoritative. Carries the re-derived lockstep block, the tier-scope decision, the 7 defect dispositions, the 6 declared ladder deviations, and the recovered Phase-0 research."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.disputes.json",
+   "bytes": 14875,
+   "what": "4 genuinely open conflicts (D6-queen, D9-armor-piercing, D10-comtech, D11-captain), both sides with evidence and levels. _meta.closed_in_v1_0 records the 7 the ladder settled, each quoting what it used to say."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.pending.json",
+   "bytes": 39959,
+   "what": "31 terms with no usable evidence, deliberately absent from the glossary. Includes the permanently-unreachable life-cycle set (Chestburster/Ovomorph/Drone/Warrior/Praetorian) and the two Phase-0 rule violations."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.byrole.json",
+   "bytes": 244526,
+   "what": "Per (English, field role) tier over 9 roles. 11 authored exceptions where the per-field answer is not derivable from the tier; every other row is generated so it cannot drift from the provenance."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.disputes.phase0.json",
+   "bytes": 3543,
+   "what": "Frozen archive of the 9 Phase-0 disputes. Created because the first build run consumed and replaced the live disputes file, which was also its own history source."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/build_glossary_v1.py",
+   "bytes": 55459,
+   "what": "The builder. Loaders, candidate constructors that read counts out of the miners, Phase-0 level relabelling, derive_lockstep() (pattern-located actor.mjs anchors), assembly, SAME_STRING_GROUPS, the 16 invariants, and the emitter. --check asserts without writing."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/glossary_adjudication.py",
+   "bytes": 61226,
+   "what": "The authored OVERRIDES table: every term whose winner changes or whose evidence is upgraded, with its full candidate array and reasoning."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/glossary_additions.py",
+   "bytes": 30888,
+   "what": "61 ADDITIONS the new sources supply, the 5 frozen literals Phase 0 missed, and the 6 TO_PENDING removals with their evidence state."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/glossary_emit.py",
+   "bytes": 26393,
+   "what": "The 4 open disputes, the role vocabulary, CATEGORY_ROLES, the 11 authored byrole exceptions, and the byrole generator."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/tm/glossary_metablocks.py",
+   "bytes": 27453,
+   "what": "The _meta prose: the 7-rung ladder with each rung's caveat, hard rules, tier definitions, the tier-scope decision, defect dispositions, known gaps, and the recovered Phase-0 research."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Defect 7 — NARROWED T-FROZEN and added a new T-LATIN tier, rather than widening the definition.",
+   "reason": "T-FROZEN is load-bearing as a PROOF, not just a label: three QA gates depend on 'every T-FROZEN entry resolves to a lookup in DO-NOT-TRANSLATE.json', and that is only checkable mechanically if the tier means exactly one thing. Widening it to cover Latin designators would force a hand-maintained exception list, and a gate with an exception list is a gate that quietly stops gating. Narrowing costs one tier name and buys invariant 5. The four moved entries are LV-426, LV-223, MU/TH/UR, USCSS; USS and UAS joined them. PROJECT.md §3.4 now needs a fifth row — the artifact says so rather than pretending the doc already agrees."
+  },
+  {
+   "decision": "Defect 2 — reconciled the two proper-noun rule violations by REMOVAL to pending, not by finding better sources.",
+   "reason": "United Systems Military's why_this_won said literally 'Coined.' and Rebecca Jorden's surname was sourced to 'standard modern Chinese usage' at en-gated 0. Nothing on the new ladder reaches either. Its sibling USCM was already pending for exactly this reason, so two military branches in identical evidence states were getting opposite treatment. The rule is now mechanical (invariant 7): any franchise-* term at level C without a derived_from parent fails the build. The Jorden character stays reachable — Newt = 纽特 is level 6, en-gated 35."
+  },
+  {
+   "decision": "Defects 3+4 — the lockstep block is DERIVED by pattern from the installed actor.mjs on every build instead of being transcribed a fourth time.",
+   "reason": "Phase 0 shipped three wrong anchors and v0.2.1 fixed them by hand — and the disputes file still carried the old :1888 after the provenance had been corrected, which is exactly how transcription drifts. Now if upstream moves a line the next build reports the new number instead of lying. It also emits a codepoint dump proving the U+2013 EN DASH at :1906/:1912 and names the two switches separately, which Phase 0 conflated into one."
+  },
+  {
+   "decision": "Defect 1's 'no duplicate zh' invariant is satisfied by FOLDING concurring candidates rather than by deleting them.",
+   "reason": "Two sources reaching the same Chinese string is corroboration, not a duplicate — Phase 0's actual defect was a candidate duplicated with the same source and a pasted evidence string. Same-zh candidates are now merged into one entry carrying also_attested_at, so 'no duplicate zh' is literally true while cross-level agreement (异形 at levels 3, 2, 2, 6) is preserved and visible."
+  },
+  {
+   "decision": "Deviated from the ladder in 6 declared places, and logged all 6 in _meta.ladder_deviations.",
+   "reason": "The ladder decides ties; it does not license importing an error. Android = 仿生人 takes level 3 over level 1 because level 1 spends 机器人 on Android and then has nothing left for Robot (this is the owner's own §1.4 split). Comtech keeps level 4's 科技 because level 1's 计算机科学 excludes the comms and electronics half of the skill — parked in D10 rather than adopted. Bolt Gun takes level 3's 气矢枪 because level 1's 栓动枪 means bolt-ACTION, a mechanism the DV-303 does not have. Egg keeps 卵 because level 2's 蛋 appears only as the measure-word phrase 颗蛋 in spoken dialogue. Plus the two owner-pinned exceptions."
+  },
+  {
+   "decision": "Closed 7 Phase-0 disputes instead of leaving them open with new provisional values.",
+   "reason": "The owner said '术语你综合判断最优解作为主轴即可' and §1.4 names several of these outcomes directly. A conflict a higher rung settles is a decision, not a dispute — keeping it in disputes.json would dilute the file until nobody reads it. Each closure records what it used to say and a still_to_do naming the lang keys that must move; the runtime hazard D8 warned about was NOT closed, it moved to byrole['Shift'] where its anchor is re-derived."
+  },
+  {
+   "decision": "Split three Chinese-value collisions that Phase 0 had left, driven by level-1 evidence.",
+   "reason": "Level 1 gives 近战 to the Close Combat SKILL, which forced Engaged back to 接战 and Melee to the freed 肉搏 — dissolving D2-engaged from the other side. Level 1's 近距离 for Short range moved the whole band set to the 距离 pattern, splitting Long 远距离 from Ranged 远程. EEV / Escape Vehicle / Escape Pod were three keys sharing two strings and are now three. Invariant 14 now requires every remaining shared value to be declared in SAME_STRING_GROUPS with a reason."
+  },
+  {
+   "decision": "Corrected Turn from 轮次 to 节, which was not in the brief.",
+   "reason": "轮次 is one character from Round 轮 and names no unit the game has. Turn is the classic-mode name for the middle time unit that Evolved renamed Stretch. Two independent confirmations: level 1's table gives the middle unit as 节 (Stretch) 5-10分, and the healTime switch orders its cases OneRound(1) < OneTurn(2) < OneShift(3), putting Turn exactly where Stretch sits. This also means ALIENRPG.OneTurn's current 一斡 — a stratum-B artefact, 斡 is not a Chinese counter for anything — becomes 一节 in lockstep with its RollTable cell."
+  },
+  {
+   "decision": "Recorded 6 winners at level 'C' that Phase 0 had winning at cn.json stratum B, and added invariant 16 forbidding it.",
+   "reason": "The project's hard rules say stratum B is never a source. Dehydrated/Exhausted/Freezing/Starving/Fast Action/Radiation are ordinary Chinese common nouns any translator would reach, so the values stand — but they stand as conventions, not attestations. That stratum B produced the same string is corroboration of the obvious reading, not evidence."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Terms in glossary_alien.json (authoritative field: provenance._meta.count)",
+   "value": "404, up from 346"
+  },
+  {
+   "what": "Re-adjudicated / added / moved to pending / resolved out of pending",
+   "value": "128 / 61 / 6 / 7"
+  },
+  {
+   "what": "Winner by ladder level",
+   "value": "L1=140 L2=12 L3=8 L4=49 L5=1 L6=50 L7=7 convention=102 FROZEN=31 LATIN=4"
+  },
+  {
+   "what": "Tier distribution",
+   "value": "T-PLAIN 222, T-BILINGUAL 133, T-FROZEN 31, T-EXACT 12, T-LATIN 6"
+  },
+  {
+   "what": "Disputes: open / closed by the new ladder / newly opened",
+   "value": "4 open (D6 D9 D10 D11) / 7 closed / 2 new"
+  },
+  {
+   "what": "Invariants asserted before any write",
+   "value": "16, all passing; the build prints NOTHING WRITTEN and exits 1 on failure"
+  },
+  {
+   "what": "Declared ladder deviations",
+   "value": "6 (Android, Bolt Gun, Comtech, Egg, Wits, Empathy)"
+  },
+  {
+   "what": "Idempotency",
+   "value": "Two consecutive runs give byte-identical md5 on all five outputs"
+  },
+  {
+   "what": "D6-queen vote shape, read from the miner at build time",
+   "value": "english_regex \\bqueen\\b, 7 en-gated hits, hits_by_lineage = {CnSCG: 7}, distinct lineages = 1 — one vote arguing with itself, mechanically demonstrated"
+  },
+  {
+   "what": "actor.mjs anchors, re-derived by pattern this build",
+   "value": "Permanent :1888 | bare \"Shift\" :1890 | localize :1891 | throwing regex :1893 | switch(testArray[3])→cFatal :1902-1921, EN DASH U+2013 at :1906 and :1912 | switch(testArray[5])→healTime :1923-1942, default :1939, healTime=0 at :1940"
+  },
+  {
+   "what": "byrole coverage",
+   "value": "404 terms over 9 field roles; 11 authored exceptions, the rest generated from tier+category"
+  }
+ ],
+ "open_issues": [
+  "FOUND, NOT IN THE BRIEF — a T-FROZEN key was not byte-exact. 'CORE RULES - HOW TO USE THIS MODULE' was keyed with ASCII spaces; alien-evolved-corerules/module/init.js:11 uses NO-BREAK SPACE U+00A0 between every word. Its sibling 'STARTER SET - HOW TO USE THIS MODULE' really does use ASCII spaces, so the two are NOT symmetric and must not be normalised to match. Fixed, with a codepoint dump on the entry. A T-FROZEN key that is not byte-exact is worse than no key: a translator searching for it never finds the real string and a QA gate built on it reports clean forever. All 9 name_lookups literals were codepoint-dumped; this was the only one.",
+  "FOUND — the level-1 fan translation would break the game if applied naively. It renders the talent Hardened as 硬汉, and actor-character.mjs:449 / actor-synthetic.mjs:439 test Attrib.name.toUpperCase() === 'HARDENED' on documents that ship TODAY (corerules items and the Actor 'EV - MINING WILDCATTER'). '硬汉'.toUpperCase() is '硬汉', so the character silently loses 1 max Health. byrole['HARDENED'] splits it: 'Hardened' on the name field, 硬汉 in prose. STOIC is the same shape and also live. Phase 0 keyed only 2 of the 6 talent-name comparisons; all 6 are now keyed.",
+  "⚠ THE BUILDER SEEDS ITSELF, and I discovered this the expensive way. build_glossary_v1.py reads glossary_alien.provenance.json and .pending.json and then writes them. It is verified idempotent, but the first run consumed the Phase-0 provenance in place before I had archived it. The Phase-0 DISPUTES were saved (glossary_alien.disputes.phase0.json) and the Phase-0 research blocks were recovered into _meta.phase0_research_carried_forward from what I had already read, but the Phase-0 provenance file itself is not recoverable from disk. Treat the current provenance as the baseline, not as a build product; commit it before re-running anything.",
+  "OWNER RULINGS NEEDED on 4 open disputes. D10-comtech (NEW): level 1 says 计算机科学 which excludes the comms/electronics half of the skill; provisional is level 4's 科技; a third option 通信科技 is offered. D11-captain (NEW): the ladder picks 舰长 (level 2) but 船长 is the merchant-marine register that most Alien RPG ships actually are. D6-queen: 女王 vs 王后, unchanged and unresolvable from evidence. D9-armor-piercing: 破甲 vs 穿甲弹 vs 穿甲, en-gated 0 at every level.",
+  "lang/cn.json REWRITES the adopted values require, several of them lockstep-critical. ALIENRPG.OneRound 一回合→一轮 and ALIENRPG.OneTurn 一斡→一节 are cases in the healTime switch and must move in the SAME COMMIT as their RollTable cells or healTime silently becomes 0. Non-lockstep: SkillcloseCbt 肉搏→近战, WepTypeMelee 近战→肉搏, Engaged 近战→接战, SkillheavyMach 机械→重型机械, Skillobservation 观察→侦察, Skillsurvival 求生→生存, SkillrangedCbt 射击→远程战斗, Skillmanipulation 操纵→操控, Health 生命→生命值, healthDamage 健康损害, Push 孤注一掷→追骰, PersonalAgenda 个人目标→个人任务, SignatureItem 标志物品→标志性物品, Supply 补给骰→余量检定, Air 氧气→空气, AirSupply 氧气供应→空气供应, Power 动力→电力, relOne 哥们→朋友, relTwo 对头→敌人, and Panic12/13/14 + Panic8 (混乱→恐慌).",
+  "PROJECT.md needs two edits this rebuild implies. §3.4 needs a fifth row for T-LATIN. §1.4's change list should gain Turn = 节 and a note that Round = 轮 drags ALIENRPG.OneRound into the crit-injury lockstep.",
+  "Still not possible: compendium-mode gating. The 3 content packs are not extracted to compendium/en, so no disputed term could be gated against pack PROSE. Re-run every open dispute in compendium mode once the packs are dumped.",
+  "Cosmetic: the term 'USS' is levelled 'LATIN' rather than 1, because the level-1 candidate's zh is the whole string 'USS萨拉科号' and the fill only matches an exact-equal candidate. 'UAS' got level 1 because it has a hand-built candidate. Harmless, but the two siblings read inconsistently."
+ ]
+}

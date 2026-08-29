@@ -1,0 +1,169 @@
+{
+ "summary": "Delivered the Phase-1 `lang-ship` slice: 135 flat dotted keys covering spacecraft/ship, vehicle, colony, planet and territory, of which 104 differ from the shipped cn.json (81 were untranslated English copies, 23 were wrong Chinese). I re-flattened both lang files myself and measured 590 EN / 511 CN keys — both counts matched the brief. The slice was scoped from the templates and config that actually consume each key (not from key-name guessing), so shared keys such as ALIENRPG.Speed, ArmorRating, ModifierTotal, value, valueTotal, Roll, Panic, Stress, RollCrit, RollPanic, RollStress, MODIFIER, BaseMod, StressMod and the range ladder (Short/Medium/Long/Extreme/Surface) were deliberately left to other slices. Headline fixes: SIGNATURE 签名→信号特征, CAPTAIN 队长→船长 (RULINGS R4), SelectFirer 选择消防员→选择射击者 (glossary), SHIP-ARMOR 盔甲→护甲, CREW 全体人员→船员, CrewCommander 司令→车长, SENSOR-OP 传感器-OP→传感器操作员, Classification 等级→分类, CapacityBarLabel 负重→容量, MAJOR-COMPONENT-DAMAGE 主要部件损坏→重大部件损伤, and RollManShipMinorCrit 44→66 following the English. All 14 space-combat phase actions, the whole colony development track, the 5 SheetLabels (absent from cn.json entirely) and the 8 ShipPanic prose blocks are now Chinese. Self-gate passed: every key exists in en.json, HTML tags 1:1, placeholders 1:1, every value contains CJK, no value collides with a DO-NOT-TRANSLATE.json frozen literal, and the flat map round-trips into the nested shape en.json uses. I did NOT touch any of the 8 crit-parse keys or the 12 T-EXACT skill keys. IMPORTANT: three sibling slices already exist in 6-工作区/phase1 and 42 of my keys collide with them — 25 identical, 17 divergent — all enumerated in decisions/open_issues.",
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-ship.json",
+   "bytes": 7414,
+   "what": "The slice: 135 flat dotted keys -> Chinese string, sorted, UTF-8, LF, 2-space indent. Namespaces: spacecraft/ship, vehicle, colony, planet, territory."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-ship.notes.json",
+   "bytes": 34336,
+   "what": "Per-key rationale for the 104 keys that differ from the shipped cn.json: {en, before, after, why} each, plus a _measured_against block (590 EN / 511 CN / 135 slice / 104 changed) and the list of self-gates passed."
+  },
+  {
+   "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\build_lang_ship.py",
+   "bytes": 26000,
+   "what": "Scratchpad generator + self-gate that produced both deliverables. Re-runnable; it re-reads en.json/cn.json/DO-NOT-TRANSLATE.json at build time and exits non-zero on any gate violation."
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "COLLISION with lang-combat.json (5 divergent keys, ship-namespaced). ARMAMENTS 武器装备/武装 · Offensive 攻击型/进攻型 · MINOR-COMPONENT-DAMAGE 次要部件损坏/轻微部件损伤 · MAJOR-COMPONENT-DAMAGE 主要部件损坏/重大部件损伤 · ComponentDamagefor 部件损坏，目标/部件损伤对象. (6 more keys agree exactly: Defensive, REPAIRROLL, SHIP-ARMOR, SelectFirer, RollManShipMajorCrit, RollManShipMinorCrit.)",
+   "reason": "Controller must pick one. My case for 轻微/重大: MINOR/MAJOR here is SEVERITY (two separate tables — d66 with 27 ranges vs d12 with 11, per DO-NOT-TRANSLATE.json measured_split_length_by_range), not importance; 主要 reads as 'the principal component'. My case for 进攻型/防御型 over 攻击型: 攻击 is already ALIENRPG.AttackRoll's stem. My ComponentDamagefor has no trailing punctuation because crit-roll-spacecraft.hbs:2 appends its own ': ' — theirs ends in a comma and then gets a colon."
+  },
+  {
+   "decision": "COLLISION with lang-core.json on all 8 ALIENRPG.ShipPanic* keys — both slices translated the same prose independently.",
+   "reason": "I predicted this and claimed them anyway because of the 'Ship' prefix; lang-core claimed them presumably as part of the panic-table family. Take exactly one set. Substantive differences: lang-core writes 玩家角色 where I write PC (the EN literally says \"friendly PC's\"), 上升一级 where I write 上升 1 (the EN says 'increases by one'), and lang-core preserves the space before </b> (`<b>颤抖： </b>`) exactly as upstream does while I close the tag tight. Tag counts are 1:1 in both. Also: ShipPanic15 must name the same table as ALIENRPG.MAJOR-COMPONENT-DAMAGE — lang-core says 主要部件损伤表, I say 重大部件损伤表; whichever MAJOR-COMPONENT-DAMAGE wins, that string must be edited to match."
+  },
+  {
+   "decision": "COLLISION with lang-ui.json (3 divergent, 20 identical). RollManShipMajorCrit/MinorCrit 数值必须在 X 到 Y 之间 vs my 数字必须介于 X 和 Y 之间 · TYPES.Item.colony-initiative 殖民地开发计划 vs my 殖民地举措.",
+   "reason": "For the two RollMan keys I preserved the shipped stratum-A phrasing verbatim and changed only the number, so the diff is exactly one digit-pair; lang-ui rewrote the sentence. For colony-initiative I CONCEDE — lang-ui's 殖民地开发计划 is better than my 殖民地举措. Worth noting as corroboration: lang-ui independently also fixed 44→66, so two agents reading the English reached the same number."
+  },
+  {
+   "decision": "Did NOT claim the five keys the brief said live in this slice: ALIENRPG.Overwatch (守望先锋), ALIENRPG.Utility (公用事业), ALIENRPG.Wildcatter (野猫), ALIENRPG.SheetColorSettings (图纸颜色设置), ALIENRPG.CombatantReroll (重新启动计划).",
+   "reason": "Re-derived: none of them touches a ship/vehicle/colony/planet/territory surface. Overwatch → config.mjs:113 + character-general.hbs:146 / synthetic-general.hbs:134 (a combat condition). Utility → not in any item_types_list; not on my sheets. Wildcatter → career_list id 13, config.mjs:354. SheetColorSettings → templates/system/alienprgSettings.hbs:4. CombatantReroll → CBTracker.mjs:27. Claiming them would have collided with the settings/combat/career slices."
+  },
+  {
+   "decision": "Did NOT claim ALIENRPG.SkillheavyMachAbb even though its only two render sites are mine (spacecraft-general.hbs:139, tabs/spacecraft-crew.html).",
+   "reason": "It is a member of the skill-name family whose head, ALIENRPG.SkillheavyMach, is T-EXACT and owned by the skills slice. Shipped value is 机械 while the glossary adopts Heavy Machinery → 重型机械; the abbreviation must be decided in lockstep with the T-EXACT head, not by me."
+  },
+  {
+   "decision": "Claimed the four ALIENRPG.Actor.Tabs.* keys that only my sheets produce (Crew, Modules/Upgrades, 'Space Combat Phases', Systems) but not the shared ones (General/Inventory/Notes/Image/Skills/Description/Creature).",
+   "reason": "Re-derived each from its single producer: vehicle-sheet.mjs:234, spacecraft-sheet.mjs:224, spacecraft-sheet.mjs:230, territory-sheet.mjs:182. Note Actor.Tabs.Systems is the TERRITORY star-systems tab, so 星系, not 系统 — a ship-systems reading would be wrong. lang-ui claimed these too and we agree byte-for-byte."
+  },
+  {
+   "decision": "ALIENRPG.maneuver rendered 规避机动, not the literal 机动.",
+   "reason": "ALIENRPG.Skillmobility is already 机动 and is T-EXACT — it must stay byte-equal to a skill-stunts Item name that game.items.getName() looks up. A second, unrelated 机动 in the pilot-phase dropdown would read as that skill on the same sheet."
+  },
+  {
+   "decision": "Uniform 船员 for Crew across both ship and vehicle sheets (ALIENRPG.CREW, Crew, Actor.Tabs.Crew, EmptyCrew, noCrewAssigned), rather than splitting 船员/乘员 by actor type.",
+   "reason": "EmptyCrew and noCrewAssigned are rendered on BOTH sheets (vehicle-crew.hbs:47, spacecraft-general.hbs:151, tabs/spacecraft-crew.html:78, crt/vehicles-sheet.html:110). Splitting would put a 乘员 tab above a 没有船员 body. ALIENRPG.CrewCommander is the one exception — it is reachable only through CONFIG.ALIENRPG.vehicle.crewPositionFlagsLocalized (config.mjs:316), so 车长 is unambiguous there."
+  },
+  {
+   "decision": "Claimed ALIENRPG.PILOT, GUNNER, CREWPANIC, GunnerName, PilotName, ShipConButtons and the 8 ShipPanic keys even though all are DEAD in 4.1.13.",
+   "reason": "Verified dead: system.json esmodules is ['module/alienrpg.mjs'] only, and nothing imports module/actor/old-actor.js, old-actor-sheet.js, old-spacecraft-sheet.js or colony-sheet.js — grep for any import of them outside their own directory returns nothing. Translating costs nothing, removes English from the shipped file, and stops them drifting out of step with their live siblings if upstream revives the code."
+  },
+  {
+   "decision": "Delivered a FLAT dotted map as instructed, but the assembled deliverable should be NESTED like en.json.",
+   "reason": "en.json is nested (top level ALIENRPG / ITEM / TYPES). Foundry resolves via foundry.utils.getProperty (C:/Program Files/Foundry Virtual Tabletop/resources/app/common/utils/helpers.mjs:822-834), which at line 824 does `if (key in object) return object[key]` BEFORE splitting on '.', so a flat file would in fact work and would even win the lookup after the mergeObject at client/helpers/localization.mjs:318. Nested is still preferable — it matches upstream and survives any helper that walks the tree. I verified my flat map round-trips into the nested shape with no key collisions; the four keys carrying a space or slash (Actor.Tabs.'Space Combat Phases', Actor.Tabs.'Modules/Upgrades') nest correctly since only '.' is a separator."
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Signature (ship)",
+   "proposed": "信号特征",
+   "why": "Not in glossary_alien.json. The shipped 签名 is the autograph sense. This is the ship's detectability rating, rolled on spacecraft-general.hbs:36 and modified by ALIENRPG.SigMod. It also anchors my rendering of 'Go Dark' as 信号静默, so the two must be adopted or rejected together."
+  },
+  {
+   "en": "FTL Rating",
+   "proposed": "超光速等级",
+   "why": "Not in the glossary. Shipped 超光速评级 reads as a review score; I aligned 'Rating' to 等级 to match the adopted Armor Rating → 护甲等级."
+  },
+  {
+   "en": "Hardpoint size / Size I–III",
+   "proposed": "尺寸 I / 尺寸 II / 尺寸 III",
+   "why": "Hardpoint → 挂点 is adopted, but the size ladder is not. The Roman numeral is the stored data key (config.mjs:494 nameAttr='key'), so it must stay Latin; only the word needs a ruling."
+  },
+  {
+   "en": "Colony development tracks: Economy / Potential / Productivity / Maintenance / Science / Spirit",
+   "proposed": "经济 / 潜力 / 生产力 / 维护 / 科学 / 精神",
+   "why": "None of the six are in the glossary and they are a closed set that must be decided as a set. 'Spirit' is the weak one — I chose the literal 精神; 士气 is the plausible alternative if the owner reads it as colony morale."
+  },
+  {
+   "en": "Policies / Installations / Projects",
+   "proposed": "政策 / 设施 / 工程",
+   "why": "colony_policy_list (config.mjs:535-537). 工程 pairs with 设施 as 'what you are building' vs 'what you have'; 项目 is the more literal alternative for Projects."
+  },
+  {
+   "en": "Colony Initiative",
+   "proposed": "殖民地举措 — but lang-ui.json's 殖民地开发计划 is better; recommend adopting theirs",
+   "why": "The item type carries a Policy, an Installation or a Project, so the term has to cover all three. Whichever wins must be identical in lang-ship.json and lang-ui.json."
+  },
+  {
+   "en": "Territory",
+   "proposed": "领地",
+   "why": "Not in the glossary. The Territory sheet holds Sectors (星区) and Systems (星系), so 星域 is a defensible alternative if the owner prefers the spatial reading over the political one."
+  },
+  {
+   "en": "Offensive / Defensive (ship armament class)",
+   "proposed": "进攻型 / 防御型",
+   "why": "Not in the glossary, and lang-combat.json independently chose 攻击型 / 防御型. Needs one ruling. Note these are also PERSISTED: item-header.hbs:128,131 writes the localized value into a hidden input named system.header.type.label, so the chosen Chinese ends up stored as document data the moment a Chinese user opens a spacecraftweapons item."
+  },
+  {
+   "en": "Sensor Operator",
+   "proposed": "传感器操作员",
+   "why": "Not in the glossary. Needed twice — as the crew-position label (config.mjs:326) and inside the ShipPanic15 prose — so it must be one string in both places."
+  },
+  {
+   "en": "Component Damage (minor/major)",
+   "proposed": "轻微部件损伤 / 重大部件损伤",
+   "why": "Not in the glossary; the two table NAMES ('Spaceship Minor/Major Component Damage') are in it but marked frozen English, which gives no guidance for the UI label. Contested with lang-combat.json (次要/主要 部件损坏)."
+  },
+  {
+   "en": "Model/Class (ship)",
+   "proposed": "型号/船级",
+   "why": "Not in the glossary as a term, though PROJECT.md §3.4's T-LATIN row already uses the words 型号与船级前缀, which is where I took it from."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "en.json keys, re-flattened by me",
+   "value": "590 (matches the brief)"
+  },
+  {
+   "what": "cn.json keys, re-flattened by me",
+   "value": "511 (matches the brief); 93 en keys absent from cn, 14 cn keys absent from en"
+  },
+  {
+   "what": "keys claimed by this slice",
+   "value": "135"
+  },
+  {
+   "what": "keys whose value differs from the shipped cn.json",
+   "value": "104 (81 were byte-identical English copies, 23 were wrong or off-spine Chinese); 31 carried forward unchanged"
+  },
+  {
+   "what": "keys in my slice that are DEAD in 4.1.13 (no reference in module/ or templates/)",
+   "value": "13 — PILOT, GUNNER, CREWPANIC, GunnerName, PilotName, ShipConButtons, ShipPanic7/8/9/10/11/13/14/15"
+  },
+  {
+   "what": "overlap with the three sibling slices already on disk",
+   "value": "42 keys total — lang-combat 11 (6 same / 5 divergent), lang-core 8 (0 same / 8 divergent), lang-ui 23 (20 same / 3 divergent)"
+  },
+  {
+   "what": "self-gate result",
+   "value": "PASSED — 0 violations across 5 gates on all 135 keys; 46 frozen literals harvested from DO-NOT-TRANSLATE.json for the collision check"
+  },
+  {
+   "what": "HTML-bearing keys in the slice",
+   "value": "8 (ShipPanic7-15), each exactly one <b>…</b> pair, verified 1:1 against the English tag list"
+  },
+  {
+   "what": "placeholder-bearing keys in the slice",
+   "value": "0 — no {…} appears in any English source string in this slice"
+  }
+ ],
+ "open_issues": [
+  "FLAGGED AS INSTRUCTED, NOT FIXED — module/data/actor-vehicle.mjs persists English skill names as DOCUMENT data, not lang values: `label: new fields.StringField({ required: true, initial: \"Ranged Combat\" })` at lines 44, 52, 60, 69, 77, 85, 92, 107 and `initial: \"Piloting\"` at line 116. Line 44 is the schema for `attributes.weight`, so 'Ranged Combat' there is plainly an upstream copy-paste bug, not a design. Every vehicle Actor ever created carries these strings. They cannot be reached from lang/cn.json; fixing them means either a Babele actor mapping or a data migration, and it belongs to whichever phase owns document data.",
+  "SECOND INSTANCE OF THE SAME CLASS, newly found: templates/item/item-header.hbs:128 and :131 render `<input type='hidden' name='system.header.type.label' value='{{localize \"ALIENRPG.Offensive\"}}'/>` (and Defensive). The LOCALIZED string is written back as document data on every spacecraftweapons item render. No code reads `.label` today — every live comparison in module/ uses `header.type.value` ('1'/'2') — so translating is safe, but a Chinese GM's saved items will contain Chinese in that field and an English GM's will not. Worth an upstream report.",
+  "UPSTREAM DEFECT — ALIENRPG.fullCrew's English is 'The Vehicle is full' but the same key is used as the warning for SPACESHIPS at module/sheets/spacecraft-sheet.mjs:396 and :402 (as well as vehicle-sheet.mjs:392,398). I followed the English and wrote 载具已满员, which will therefore read slightly wrong on a spacecraft. The clean fix is an upstream split into two keys.",
+  "UPSTREAM DEFECT — the spacecraft crit chat card cannot be fully localized. module/documents/actor.mjs:2154,2156 assigns the hardcoded English literals 'Minor'/'Major' to shipCritType, and templates/chat/crit-roll-spacecraft.hbs:2 interpolates it raw between two localized strings. So the card will read '<Rolled> Minor 部件损伤对象: <ship>' no matter what any lang file says. Report upstream; a lang key for those two words is the fix.",
+  "UPSTREAM DEFECTS inside the ShipPanic English that I translated through rather than reproduced: ShipPanic10 has two typos, 'Chater' (for Chatter) and 'deecreased'; ShipPanic15 ends '…Engineer; Reactor breach.' where every other clause in the list uses a colon — I rendered it as a colon so the Chinese list is internally consistent; ShipConButtons has 'wil' for 'will' and a double space. Flagging so nobody reads these as translation liberties.",
+  "templates/actor/planet-general.hbs is almost entirely HARDCODED ENGLISH, not localized: SOLAR SYSTEM, PARENT STAR, RADIATION, SURVEYED PLANETS POSITION, GAS GIANTS, ROCKY PLANETS, ICE PLANETS, ASTEROID BELTS, PLANET SIZE, ATMOSPHERE, HYDROSPHERE, DAY LENGTH, AXIAL TILT, GRAVITY, CLIMATE, GLOBAL FEATURE, ORBITAL PERIOD, PLANETARY PERSONALITY, NORTH POLE, SOUTH POLE, EQUATOR, NORTHERN/SOUTHERN HEMISPHERE WEST/EAST, RESOURCE POTENTIAL (x6). Roughly 25 visible labels with NO lang key at all — the planet actor sheet stays half-English however good cn.json gets. Only ALIENRPG.Name is localized on that sheet. This is a template patch or an upstream PR, not a lang-file job, and it is the single largest remaining English surface in my namespace.",
+  "Keys in my domain I deliberately left to other slices, listed so nobody assumes they are covered: ALIENRPG.Speed and ALIENRPG.ArmorRating (shared with creature-header.hbs and the armor item header — both already correct at 速度 / 护甲等级); ALIENRPG.Surface (member of the range ladder used by the gRng helper at module/helpers/handlebars.mjs:123, which serves personal weapons too — currently untranslated English, and it must be decided together with Short/Medium/Long/Extreme/Adjacent/Engaged/Contact); ALIENRPG.value, valueTotal and ModifierTotal (colony tooltips share them with the character/synthetic sheets — all three are still untranslated English today); ALIENRPG.Roll, Panic, Stress, RollPanic, RollStress, RollCrit, MODIFIER, BaseMod, StressMod, Bonus, Dam, Range, Cost, Damage, Effect, Type, Comment, QuantityLabel, Modifiers.",
+  "ALIENRPG.Close is referenced by CONFIG.ALIENRPG.ship_weapon_range_list (module/helpers/config.mjs:468) but DOES NOT EXIST in en.json — the ship weapon range dropdown renders the raw key 'ALIENRPG.Close' for range value 6 in classic mode. The evolved list uses ALIENRPG.Adjacent for the same slot and that key does exist. Adding ALIENRPG.Close to our module cn.json would paper over it in Chinese only; the real fix is upstream. Not in my slice because the range ladder is another slice's, but it was found here.",
+  "ALIENRPG.CriticalInjuries is 重伤 and I coined 星际飞船重创 for TYPES.Item.spacecraft-crit ('Spaceship Crit'). If the slice that owns the injury family changes 重伤, mine should be revisited so the person/ship pair stays legible.",
+  "The ALIENRPG.SheetLabels.* family is absent from cn.json in its entirety (all nine keys). I supplied my five (Spacecraft/Vehicle/Colony/Planet/Territory) using an 'X 卡' convention; whoever supplies Character/Creature/Item/Synthetic must use the same convention (角色卡 / 生物卡 / 物品卡 / 合成人卡) or the Sheet-Configuration dropdown will look assembled by two people. lang-ui.json already matches me on all five."
+ ]
+}

@@ -1,0 +1,786 @@
+{
+ "lang_gap": {
+  "missing_keys": 93,
+  "untranslated_keys": 140,
+  "notes": [
+   "COUNTS VERIFIED. en.json = 590 flattened keys; cn.json = 511; zh-tw.json = 511. Missing from cn = 93. Present-but-byte-identical-to-en = 140. In cn but not in en = 14. Zero of the 140 identical values contain any CJK.",
+   "Broader untranslated total: 162 of 511 cn values contain NO CJK at all (349 do). The extra 22 beyond the 140 are: the 14 orphans, 6 TYPES.* keys reworded in English (TYPES.Actor.character='Player Character' vs en 'Character', .colony='Colony Sheet', .planet='Colony Planet', .spacecraft='Space Ship', .vehicles='Vehicle', TYPES.Item.specialty='Speciality'), 1 whitespace-only diff (ALIENRPG.ShipPanic9), and 1 JSON null.",
+   "ALIENRPG.EVCriticalInjuries is JSON null in BOTH cn.json and zh-tw.json (en = 'EV - Critical Injuries'). Foundry's Localization#localize returns the key string for a non-string value, so actor.mjs:1812 calls game.tables.getName('ALIENRPG.EVCriticalInjuries') then falls back to the English name. Harmless but it is a malformed lang file.",
+   "The 14 orphan keys are the deprecated pre-v11 document-type namespace and are DEAD: ACTOR.TypeCharacter/Colony/Creature/Planet/Spacecraft/Synthetic/Territory/Vehicles (8) and ITEM.TypeAgenda/Armor/Colony-initiative/Critical-injury/Item/Weapon (6). Foundry v12+ reads TYPES.Actor.* / TYPES.Item.* instead, which cn.json also has but left in English.",
+   "PLACEHOLDER LOSS: 0. Only 2 en keys contain {placeholders} at all (ALIENRPG.dialog.Rollontable '{tablename}', ALIENRPG.NotifWrongItemType '{type}'/'{actor}'); cn preserves NotifWrongItemType's two placeholders exactly and dialog.Rollontable is simply absent from cn.",
+   "HTML TAG LOSS: 0. All 34 cn values containing markup have a tag multiset identical to en (checked <b>/<br>/<ul>/<li>/<strong style=...> incl. attributes).",
+   "The 93 missing keys are not random: they are one contiguous generation of features added to en.json after the last non-German translation sync. Clusters: (a) the whole Alien Evolved ruleset -- ALIENRPG.Evolved, EvolvedHint, Resolve, ResolveMod, RollStress, StressResponses/StressResponseRoll, PanicResponses/PanicResponseRoll, Response, Result, NoResolveTable, and 20 stress/panic condition names (jumpy, tunnelvision, aggravated, shakes, frantic, deflated, fatigued, keepingguard, spooked, noisy, twitchy, loseitem, paranoid, hesitant, freeze, seekcover, scream, flee, frenzy, catatonic); (b) the ranged-attack dialog -- targetRange, targetCover, targetSize, nocover/partialcover/fullcover, normal/large/small, carefullAim, aimForWeakSpot, firingFullAuto, conserveAmmo, ammoConcerved, FullAuto; (c) ALIENRPG.dialog.* (ok, cancel, roll, Modifier, howManyDice, Rollontable, Tooltip-ManualRoll, Tooltip-Rollontable); (d) ALIENRPG.SheetLabels.* (9); (e) ALIENRPG.Item.Tabs.* (5) and ALIENRPG.Item.General.FIELDS.* (6); (f) 12 dead boilerplate ALIENRPG.Ability.Str/Dex/Con/Int/Wis/Cha.abbr/long.",
+   "Of the 93 missing keys, 68 are actually referenced by module code or templates, i.e. 68 strings visibly fall back to English at runtime. The other 25 are dead (Ability.* boilerplate, unused dialog keys).",
+   "Cross-check of what code REFERENCES vs what cn.json DEFINES: 494 distinct ALIENRPG/TYPES/ACTOR/ITEM keys are referenced statically. 68 are missing from cn; another 98 exist in cn but are still English. So 166 of 494 live keys (34%) render English today.",
+   "34 keys are referenced but do NOT exist in en.json either (they render as the raw dotted key in every language). 13 of those are false alarms (LOCALIZATION_PREFIXES stubs ALIENRPG.Actor.base/Character/Colony/Creature/Spacecraft/Synthetic/Territory/Vehicle, ALIENRPG.Item, ALIENRPG.Item.base, ALIENRPG.Item.Feature, ALIENRPG.Weapon, ALIENRPG.ActiveEffect.base/abilityModifier; plus concat prefixes ALIENRPG.Skill and ALIENRPG.AbilityAbb used by the alienConcat helper, and the hook name ALIENRPG.prepareActiveEffectData). The genuinely broken ones that WILL show as raw keys: ALIENRPG.ActiveEffect.Temporary / .Passive / .Inactive (effects-tab section headers on character/creature/synthetic sheets), ALIENRPG.ActiveEffect.Expired, ALIENRPG.Effect.Temporary (helpers/effects.mjs:11), ALIENRPG.ActorSheet.Edit and ALIENRPG.ActorSheet.Delete (crt/vehicles-sheet.html:103,105 tooltips), ALIENRPG.General.NeedToImportActor (error toast in 3 sheets), ALIENRPG.SHEET.Labels.ActiveEffect (alienrpg.mjs:231), ALIENRPG.Apparance, ALIENRPG.Special, ALIENRPG.cost, ALIENRPG.ResolveS, ALIENRPG.Close (all config.mjs label pointers), ALIENRPG.Init.SubModule, ALIENRPG.creature.Health. Adding these to cn.json alone does nothing -- Foundry only merges keys that exist for the ACTIVE language, so a cn.json entry for a key en.json lacks WILL still work (translations are merged per-language, en is only a fallback), so these ARE fixable from cn.json.",
+   "LOCALIZATION_PREFIXES are declared on 26 DataModels (ALIENRPG.Actor.*, ALIENRPG.Item, ALIENRPG.Weapon, ALIENRPG.ActiveEffect.*) but almost no matching .FIELDS.*.label keys exist -- only ALIENRPG.Item.General.FIELDS.{dieSize,numDice,quantity,rollFormula,rollMod,weight}.label, and even those are under the wrong path for the declared prefix. DataModel-driven field labels/hints are therefore effectively unwired system-wide.",
+   "HARD COUPLING WARNING: module/documents/actor.mjs:1888-1940 PARSES the critical-injury RollTable result text and string-compares it against game.i18n.localize('ALIENRPG.Yes')+' ', +', -1 ', +', -2 ', ALIENRPG.None+' ', ALIENRPG.OneRound+' ', ALIENRPG.OneTurn+' ', ALIENRPG.OneShift+' ', ALIENRPG.OneDay+' ', ALIENRPG.Permanent, and the bare literal 'Shift'. cn.json ALREADY breaks this: None='莫', OneRound='一回合', OneTurn='一斡', OneShift='一轮班' are translated while the shipped English crit tables still say 'None'/'One Round'/'One Shift', so healTime always falls through to 0 and 'Fatal' detection depends on Yes/Permanent/Shift happening to still be English. Any cn translation MUST keep these 8 keys byte-identical to whatever the (Babele-)translated crit tables emit, or translate both in lockstep.",
+   "Language-code note: system.json declares the Chinese entry as lang 'cn' (name '中文'), not zh-Hans/zh-CN. This matches this user's installed stack (foundry_chn, pf2_cn, crucible-cn all use 'cn'), so an override module must also declare 'cn'. EFFECT.* keys used in active-effect/config-duration.hbs resolve from foundry_chn; DRAW_STEEL.* resolve from nothing."
+  ],
+  "stale_or_wrong": [
+   {
+    "key": "ALIENRPG.None",
+    "en": "None",
+    "cn": "莫",
+    "problem": "MT nonsense (archaic 莫). Should be 无. ALSO breaks actor.mjs:1955 healTime switch which compares table text against localize('ALIENRPG.None')+' '."
+   },
+   {
+    "key": "ALIENRPG.OneTurn",
+    "en": "One Turn",
+    "cn": "一斡",
+    "problem": "MT nonsense: 斡 (wo, 'to rotate') for 'turn'. Should be 一轮/一个回合. Also feeds the crit healTime switch."
+   },
+   {
+    "key": "ALIENRPG.GMONLY",
+    "en": "GM Only",
+    "cn": "仅限通用汽车",
+    "problem": "GM expanded to General Motors (通用汽车). Should be 仅限GM/仅限主持人."
+   },
+   {
+    "key": "ALIENRPG.Overwatch",
+    "en": "OVERWATCH",
+    "cn": "守望先锋",
+    "problem": "Rendered as the Blizzard video game title. Should be 警戒/掩护射击. Note ALIENRPG.TAH.overwatch (the tooltip for the SAME mechanic) uses 监视位置 -- internally inconsistent."
+   },
+   {
+    "key": "ALIENRPG.SelectFirer",
+    "en": "Select Firer",
+    "cn": "选择消防员",
+    "problem": "'firer' read as firefighter (消防员). Should be 选择射击者."
+   },
+   {
+    "key": "ALIENRPG.Utility",
+    "en": "Utility",
+    "cn": "公用事业",
+    "problem": "Item category read as public-utility company. Should be 工具/杂项."
+   },
+   {
+    "key": "ALIENRPG.Wildcatter",
+    "en": "Wildcatter",
+    "cn": "野猫",
+    "problem": "Career name read as the animal. Should be 拓荒勘探者/投机开采者."
+   },
+   {
+    "key": "ALIENRPG.Homebrew",
+    "en": "Homebrew",
+    "cn": "家酿",
+    "problem": "Read as home-brewed beer. Should be 自制内容/自定义规则."
+   },
+   {
+    "key": "ALIENRPG.SheetColorSettings",
+    "en": "Sheet Color Settings",
+    "cn": "图纸颜色设置",
+    "problem": "'Sheet' as blueprint (图纸). Should be 角色卡颜色设置. This is the title of the system's own settings dialog."
+   },
+   {
+    "key": "ALIENRPG.CombatantReroll",
+    "en": "ReRoll Initiative",
+    "cn": "重新启动计划",
+    "problem": "Garbled: 'ReRoll Initiative' -> 'restart the plan'. Should be 重投先攻. Appears in the combat-tracker context menu."
+   },
+   {
+    "key": "ALIENRPG.SynthStress",
+    "en": "Human Panic, Push, ect.",
+    "cn": "模仿人类的恐慌和按钮",
+    "problem": "'Push' (the core YZE reroll mechanic) rendered as 按钮 (UI button). Should use 孤注一掷, which cn.json itself uses for ALIENRPG.Push -- direct self-contradiction."
+   },
+   {
+    "key": "ALIENRPG.MultiPush",
+    "en": "Allow multi-push",
+    "cn": "允许多次推送",
+    "problem": "Same term, third rendering: 推送 (software push notification). ALIENRPG.Push=孤注一掷, SynthStress=按钮, MultiPush=推送. Three renderings of one mechanic."
+   },
+   {
+    "key": "ALIENRPG.CloneActor",
+    "en": "Clone Actor",
+    "cn": "克隆演员",
+    "problem": "Foundry 'Actor' as film actor (演员). Should be 角色. Same defect in CombatantRemove='删除演员' and CombatantUpdate='更新演员', while ALIENRPG.NoItem correctly says 角色."
+   },
+   {
+    "key": "ALIENRPG.ENSOKEN",
+    "en": "Ensure player token is selected.",
+    "cn": "确保选择了玩家令牌。",
+    "problem": "'Token' as security token (令牌). ALIENRPG.NoToken and ALIENRPG.DefProto both use 指示物 for the same word."
+   },
+   {
+    "key": "ALIENRPG.RollPanic",
+    "en": "Click to roll for Panic",
+    "cn": "点击滚动恐慌",
+    "problem": "'roll' as scroll (滚动). One of 9 keys with this defect: ActionFailed, AutoPanic, LEFTCLICKTOROLL, rollManCreatureAttack, RollManCrit, ROLLONSELECTED, RollPanic, TAHPANICTIP, TAH.freezing."
+   },
+   {
+    "key": "ALIENRPG.ROLLONSELECTED",
+    "en": "Roll on selected Mother table",
+    "cn": "在选定的母桌上滚动",
+    "problem": "Double failure: 'Mother' (the shipboard AI) as 母 + 'table' as 桌 (furniture) = 母桌; plus 'roll' as 滚动. Should be 在选定的 MU/TH/UR 随机表上投骰."
+   },
+   {
+    "key": "ALIENRPG.NOTABLES",
+    "en": "There are no tables to draw from!",
+    "cn": "没有可绘制的表格！",
+    "problem": "'draw from a table' as 'draw/paint a table' (绘制). Same defect in ROLLONCREATURETABLE='绘制外星生物表' and ALIENRPG.DRAW='画'."
+   },
+   {
+    "key": "ALIENRPG.DRAW",
+    "en": "Draw",
+    "cn": "画",
+    "problem": "RollTable draw action rendered as 'paint'. Should be 抽取."
+   },
+   {
+    "key": "ALIENRPG.NoSynCrit",
+    "en": "No Critical Injuries on Synthetics table",
+    "cn": "综合表上没有重大伤害",
+    "problem": "'Synthetics' (androids) read as 'synthesis' -> 综合表. Should be 没有仿生人重伤表. Elsewhere cn.json correctly uses 生化人 (SynthDontNeed)."
+   },
+   {
+    "key": "ALIENRPG.NoCharCrit",
+    "en": "No Critical injuries table",
+    "cn": "没有严重伤害表",
+    "problem": "Uses 严重伤害 while ALIENRPG.CriticalInjuries uses 重伤 and Talent-Crit uses 暴击 and RollCrit uses 重击 -- four renderings of Critical Injury."
+   },
+   {
+    "key": "ALIENRPG.RollCrit",
+    "en": "Roll Crit",
+    "cn": "重击",
+    "problem": "'Crit' as 'heavy blow' (重击), losing the Critical Injury meaning entirely; also drops 'Roll'."
+   },
+   {
+    "key": "ALIENRPG.Talent-Crit",
+    "en": "Talents/Crít",
+    "cn": "天赋/暴击",
+    "problem": "D&D-style 暴击 (critical hit) for Alien's Critical Injury. Sheet tab label."
+   },
+   {
+    "key": "ALIENRPG.DAMAGE",
+    "en": "DAMAGE",
+    "cn": "损害",
+    "problem": "损害 vs ALIENRPG.Damage='伤害' and ALIENRPG.Dam='伤害'. Also healthDamage=' 健康损害' (with a leading space) and MAJOR/MINOR-COMPONENT-DAMAGE='损坏'. Four renderings of Damage."
+   },
+   {
+    "key": "ALIENRPG.Effect",
+    "en": "Effect",
+    "cn": "影响",
+    "problem": "'Effect' as 'influence'. Should be 效果 -- which TAH.radiation itself uses ('效果：'). Contradicts within the same file."
+   },
+   {
+    "key": "ALIENRPG.SIGNATURE",
+    "en": "SIGNATURE",
+    "cn": "签名",
+    "problem": "Spacecraft emission signature rendered as autograph (签名). Should be 信号特征. Same sheet's SigMod is untranslated English."
+   },
+   {
+    "key": "ALIENRPG.CAPTAIN",
+    "en": "CAPTAIN",
+    "cn": "队长",
+    "problem": "Spacecraft crew position rendered as sports team captain. Should be 船长. Adjacent CREW='全体人员' vs ALIENRPG.Crew='船员' -- inconsistent."
+   },
+   {
+    "key": "ALIENRPG.CREW",
+    "en": "CREW",
+    "cn": "全体人员",
+    "problem": "Verbose/wrong register; ALIENRPG.Crew, EmptyCrew and noCrewAssigned all use 船员."
+   },
+   {
+    "key": "ALIENRPG.ColonialMarshal",
+    "en": "Colonial Marshal",
+    "cn": "陆战队军官",
+    "problem": "'Marshal' (colonial law officer) conflated with 'Marine'. Adjacent ColonialMarine='殖民陆战队'. Should be 殖民地执法官."
+   },
+   {
+    "key": "ALIENRPG.hideInitChatHint",
+    "en": "Check this to hide chat messages for Initiative rolls",
+    "cn": "选中此选项可隐藏聊天消息，以备不时之需",
+    "problem": "HALLUCINATION: the 'Initiative rolls' clause is replaced by 以备不时之需 ('just in case'), which is not in the source. Companion key hideInitChat renders Initiative as 主动 ('proactive')."
+   },
+   {
+    "key": "ALIENRPG.hideChatBGImageNote",
+    "en": "Check this to hide the facehugger background image in chat.",
+    "cn": "选中此项以在聊天中隐藏 facehugger 背景图像",
+    "problem": "'facehugger' left untranslated Latin. Should be 抱脸虫. (cn.json DOES translate it as 抱脸者 in AutoPanicHint -- inconsistent AND a second, wrong variant.)"
+   },
+   {
+    "key": "ALIENRPG.AutoPanicHint",
+    "en": "Uncheck to allow the players to manually roll panic after rolling a facehugger.",
+    "cn": "取消选中以允许玩家在投掷抱脸者后手动投掷恐慌",
+    "problem": "'rolling a facehugger' mis-parsed as 'throwing a facehugger' (投掷抱脸者). The source means rolling on the facehugger table."
+   },
+   {
+    "key": "ALIENRPG.MODIFIER",
+    "en": "Modifier?",
+    "cn": "修饰符？",
+    "problem": "'Modifier' as the programming term 修饰符. Should be 修正值 -- which cn.json uses in BaseMod/StressMod/DialText. Also keeps a full-width ？."
+   },
+   {
+    "key": "ALIENRPG.BulkShortLabel",
+    "en": "Bulk",
+    "cn": "重载",
+    "problem": "Encumbrance 'Bulk' rendered as 'reload' (重载). Compounded by ALIENRPG.Rds='重新加载' (Rds = rounds of ammo, not reload)."
+   },
+   {
+    "key": "ALIENRPG.ArmorPiercing",
+    "en": "Armor Piercing",
+    "cn": "穿甲弹",
+    "problem": "Adjective turned into a noun ('AP round'); it is a weapon quality flag, should be 穿甲."
+   },
+   {
+    "key": "ALIENRPG.SHIP-ARMOR",
+    "en": "ARMOR",
+    "cn": "盔甲",
+    "problem": "盔甲 while every other armor key (Armor, ArmorRating, ArmorDoubled, Suit, InventoryArmorHeader) uses 护甲."
+   },
+   {
+    "key": "ALIENRPG.ArmorVsFire",
+    "en": "Armor V Fire",
+    "cn": "护甲 V 火",
+    "problem": "Untranslated 'V' left as a Latin letter and 火 alone. Should be 抗火护甲/防火护甲值."
+   },
+   {
+    "key": "ALIENRPG.fullCrew",
+    "en": "The Vehicle is full",
+    "cn": "车辆已满",
+    "problem": "Used as the toast for BOTH vehicles and spacecraft (spacecraft-sheet.mjs:396,402 and vehicle-sheet.mjs:392,398), so a full spaceship reports '车辆已满'."
+   },
+   {
+    "key": "ALIENRPG.Panic7",
+    "en": "<b>NERVOUS TWITCH:</b>  Your STRESS LEVEL, and the STRESS LEVEL of all friendly PCs in SHORT range of you, increases by one.",
+    "cn": "<b>精神紧绷：</b>  你的压力等级，以及短距离内所有友善角色的压力等级上升1。",
+    "problem": "STRESS LEVEL = 压力等级 here but 压力水平 in Panic9/10/11/12/13 and TAH.dehydrated/starving. Also 'PANIC roll' becomes 混乱检定 in Panic8/12/13/14 while every other key uses 恐慌."
+   },
+   {
+    "key": "ALIENRPG.Panic8",
+    "en": "<b>TREMBLE:</b>  You start to tremble uncontrollably. All skill rolls using AGILITY (Mobility) suffer a -2 modification until Panic ends.",
+    "cn": "<b>颤抖：</b>  你开始不受控制地颤抖。所有使用敏捷（敏捷）的技能检定受到-2调整，直到混乱结束。",
+    "problem": "'AGILITY (Mobility)' collapsed to 敏捷（敏捷） -- the attribute and the skill both became 敏捷, destroying the distinction. Should be 敏捷（机动）; cn.json's own Skillmobility is 机动."
+   },
+   {
+    "key": "ALIENRPG.campaign",
+    "en": "CAMPAIGN",
+    "cn": "活动",
+    "problem": "Game mode 'Campaign' rendered as 'activity/event'. Should be 战役. Sibling ALIENRPG.cinematic='电影' should be 电影模式/剧本模式."
+   }
+  ]
+ },
+ "hardcoded_sites": [
+  {
+   "file": "templates/actor/planet-general.hbs",
+   "line": 4,
+   "kind": "template-text-node <span> (entire Colony Planet sheet)",
+   "sample": "SOLAR SYSTEM / PARENT STAR / RADIATION / SURVEYED PLANETS POSITION / GAS GIANTS / ROCKY / PLANETS / ICE PLANETS / ASTEROID / BELTS / PLANET SIZE / ATMOSPHERE / HYDROSPHERE / DAY LENGTH / AXIAL TILT / GRAVITY / CLIMATE / GLOBAL FEATURE / ORBITAL PERIOD / PLANETARY PERSONALITY / NORTH POLE / RESOURCE POTENTIAL x5 / NORTHERN / SOUTHERN / HEMISPHERE WEST / HEMISPHERE EAST / EQUATOR / SOUTH POLE",
+   "count": 38,
+   "fixable_via": "runtime-patch: template override (whole file has exactly ONE {{localize}} call; lines 4,12,13,20,21,22,22,23,24,24,34,35,36,37,38,48,49,50,51,52,64,70,74,75,78,79,80,91,93,95,100,101,104,105,106,118,122,125)"
+  },
+  {
+   "file": "templates/actor/character-enhanced-header.hbs",
+   "line": 11,
+   "kind": "attr:title",
+   "sample": "title='Minus' / title='Plus' (lines 11,19,28,34) - stress & health steppers",
+   "count": 4,
+   "fixable_via": "runtime-patch: template override or DOM shim"
+  },
+  {
+   "file": "templates/actor/character-header.hbs",
+   "line": 10,
+   "kind": "attr:title",
+   "sample": "title='Minus' / title='Plus' (lines 10,19,30,36)",
+   "count": 4,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/crt/crtui-character-header.hbs",
+   "line": 11,
+   "kind": "attr:title",
+   "sample": "title='Minus' / title='Plus' (lines 11,20,36,42)",
+   "count": 4,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/synthetic-enhanced-header.hbs",
+   "line": 10,
+   "kind": "attr:title",
+   "sample": "title='Minus' (10) / title='Plus' (18)",
+   "count": 2,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/synthetic-header.hbs",
+   "line": 10,
+   "kind": "attr:title",
+   "sample": "title='Minus' (10) / title='Plus' (19)",
+   "count": 2,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/crt/crtui-synthetic-header.hbs",
+   "line": 13,
+   "kind": "attr:title",
+   "sample": "title='Minus' (13) / title='Plus' (21)",
+   "count": 2,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/character-enhanced-header.hbs",
+   "line": 69,
+   "kind": "template-text-node <h3>",
+   "sample": "NPC?",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override (ALIENRPG.NPC key EXISTS but is not used here)"
+  },
+  {
+   "file": "templates/actor/character-header.hbs",
+   "line": 62,
+   "kind": "template-text-node <h3>",
+   "sample": "NPC?",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/synthetic-enhanced-header.hbs",
+   "line": 65,
+   "kind": "template-text-node <h3>",
+   "sample": "NPC?",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/synthetic-header.hbs",
+   "line": 64,
+   "kind": "template-text-node <h3>",
+   "sample": "NPC?",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/character-skills.hbs",
+   "line": 15,
+   "kind": "attr:title",
+   "sample": "title='Stunts'",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override (ALIENRPG.Stunts key exists, unused)"
+  },
+  {
+   "file": "templates/actor/crt/crtui-character-skills.hbs",
+   "line": 13,
+   "kind": "attr:title",
+   "sample": "title='Stunts'",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/crt/crtui-character-general.hbs",
+   "line": 219,
+   "kind": "template-text-node <label>",
+   "sample": "SPECIALTY",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override (ALIENRPG.SPECIALTY key exists and IS translated)"
+  },
+  {
+   "file": "templates/actor/crt/crtui-synthetic-general.hbs",
+   "line": 211,
+   "kind": "template-text-node <label>",
+   "sample": "SPECIALTY",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/crt/territory-sheet.html",
+   "line": 32,
+   "kind": "attr:title",
+   "sample": "title=\"Create item\" (32), title=\"Edit Item\" (43)",
+   "count": 2,
+   "fixable_via": "runtime-patch: template override (ALIENRPG.CreateItemTitle / EditItemTitle exist and ARE translated)"
+  },
+  {
+   "file": "templates/actor/territory-systems.hbs",
+   "line": 9,
+   "kind": "attr:title",
+   "sample": "title='Create item'",
+   "count": 1,
+   "fixable_via": "runtime-patch: template override"
+  },
+  {
+   "file": "templates/actor/inline/critical-inj.hbs",
+   "line": 1,
+   "kind": "template-text-node <h2>",
+   "sample": "Hello World",
+   "count": 1,
+   "fixable_via": "n/a - unshipped dev placeholder left in the system"
+  },
+  {
+   "file": "module/helpers/alienprgSettings.hbs",
+   "line": 9,
+   "kind": "template-text-node <option> + <button>",
+   "sample": "<option>OCR-A</option>, Kosugi, Modesto Condensed, Blinker, Signika (lines 9,10,13,14,15) and <button name='addcrt'>CRT UI Sheets</button> (line 42)",
+   "count": 6,
+   "fixable_via": "runtime-patch: template override. NOTE this is the file actually rendered (alienRPGConfig.mjs:12 points at systems/alienrpg/module/helpers/alienprgSettings.hbs), not the templates/ copy"
+  },
+  {
+   "file": "templates/system/alienprgSettings.hbs",
+   "line": 9,
+   "kind": "template-text-node <option> + <button>",
+   "sample": "identical 5 font <option> labels + 'CRT UI Sheets' button; this copy is DEAD (nothing references it)",
+   "count": 6,
+   "fixable_via": "n/a - dead duplicate"
+  },
+  {
+   "file": "templates/active-effect/config-duration.hbs",
+   "line": 4,
+   "kind": "foreign-namespace i18n key (renders as raw key in EVERY language)",
+   "sample": "{{localize \"DRAW_STEEL.ActiveEffect.Ends.Label\"}} - copy-paste leftover from the Draw Steel system",
+   "count": 1,
+   "fixable_via": "lang/cn.json CAN define a DRAW_STEEL block (Foundry merges any top-level namespace), or runtime-patch"
+  },
+  {
+   "file": "templates/active-effect/details.hbs",
+   "line": 5,
+   "kind": "foreign-namespace i18n key",
+   "sample": "<legend>{{localize \"DRAW_STEEL.ActiveEffect.Filters\"}}</legend>",
+   "count": 1,
+   "fixable_via": "lang/cn.json (add a DRAW_STEEL namespace block)"
+  },
+  {
+   "file": "templates/active-effect/targeted-condition-prompt.hbs",
+   "line": 2,
+   "kind": "foreign-namespace i18n key",
+   "sample": "DRAW_STEEL.ActiveEffect.TargetedConditionPrompt.Prompt (2), .Selected (5), .NoneSelected (7), .Choose (13)",
+   "count": 4,
+   "fixable_via": "lang/cn.json (add a DRAW_STEEL namespace block)"
+  },
+  {
+   "file": "templates/active-effect/config-duration.hbs",
+   "line": 19,
+   "kind": "core-namespace i18n key",
+   "sample": "EFFECT.DurationTurns (19), EFFECT.FIELDS.duration.rounds.label (21), .turns.label (24), EFFECT.StartTurns (30), .startRound.label (32), .startTurn.label (35)",
+   "count": 6,
+   "fixable_via": "Foundry core translation (foundry_chn module, lang 'cn') - already covered in this user's stack"
+  },
+  {
+   "file": "module/sheets/character-sheet.mjs",
+   "line": 282,
+   "kind": "i18n-key built by string concatenation (NOT hardcoded text)",
+   "sample": "label: \"ALIENRPG.Actor.Tabs.\" then tab.label += \"Notes\"/\"General\"/\"Skills\"/\"Inventory\" -> resolves to ALIENRPG.Actor.Tabs.Notes etc.",
+   "count": 49,
+   "fixable_via": "lang/cn.json - all 49 sheet-tab labels across character(8)/synthetic(8)/item(16)/spacecraft(5)/vehicle(3)/creature(3)/colony(2)/planet(2)/territory(2). ALIENRPG.Actor.Tabs.* exist in cn.json but are still English; ALIENRPG.Item.Tabs.* are MISSING from cn.json entirely"
+  },
+  {
+   "file": "module/alienrpg.mjs",
+   "line": 522,
+   "kind": "ui.notifications literal",
+   "sample": "ui.notifications.warn(\"You can only create macro buttons for owned Items\")",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.warn (ALIENRPG.NoActor holds this exact string and IS translated in cn.json - the code just does not use it)"
+  },
+  {
+   "file": "module/alienrpg.mjs",
+   "line": 559,
+   "kind": "ui.notifications literal (template string)",
+   "sample": "ui.notifications.warn(`Could not find item ${itemName}. You may need to delete and recreate this macro.`)",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.warn with a regex table"
+  },
+  {
+   "file": "module/apps/init.mjs",
+   "line": 80,
+   "kind": "ui.notifications literal",
+   "sample": "ui.notifications.notify(\"Import Complete\") - also at line 106",
+   "count": 2,
+   "fixable_via": "runtime-patch: wrap ui.notifications.notify"
+  },
+  {
+   "file": "module/apps/init.mjs",
+   "line": 110,
+   "kind": "ui.notifications literal",
+   "sample": "ui.notifications.warn(\"There was a problem with the Import\")",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.warn"
+  },
+  {
+   "file": "module/apps/init.mjs",
+   "line": 170,
+   "kind": "ui.notifications literal (template string)",
+   "sample": "ui.notifications.warn(`Re-Import Completed Created ${created} Assets`)",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.warn"
+  },
+  {
+   "file": "module/helpers/alienRPGConfig.mjs",
+   "line": 82,
+   "kind": "ui.notifications literal",
+   "sample": "ui.notifications.error(\"No submenu found for the provided key\")",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.error"
+  },
+  {
+   "file": "module/sheets/spacecraft-sheet.mjs",
+   "line": 392,
+   "kind": "ui.notifications literal",
+   "sample": "ui.notifications.info(\"Vehicle inceptions are not allowed!\") - identical at vehicle-sheet.mjs:388",
+   "count": 2,
+   "fixable_via": "runtime-patch: wrap ui.notifications.info"
+  },
+  {
+   "file": "module/helpers/logger.mjs",
+   "line": 19,
+   "kind": "hardcoded English prefix on every error toast",
+   "sample": "ui.notifications.error(`${COMMON.DATA.title} | ERROR | ${args[0]}`) where title = 'Alien RPG - Core System' (common.mjs:12)",
+   "count": 1,
+   "fixable_via": "runtime-patch: wrap ui.notifications.error"
+  },
+  {
+   "file": "module/apps/init.mjs",
+   "line": 39,
+   "kind": "settings menu registered with literal English name/label/hint (config:true, VISIBLE in Configure Settings > Alien RPG)",
+   "sample": "name:\"Import Adventure\" (39), label:\"Re-Import\" (40), hint:`Welcome to the Alien RPG System.  Click above to import any missing (deleted) content to your world. ...` (41)",
+   "count": 3,
+   "fixable_via": "runtime-patch (game.settings.menus map is mutable at 'ready'). NOTE ALIENRPG.forceImportName / forceImportLabel / forceImportHint exist AND are translated in cn.json but are never used - dead translations"
+  },
+  {
+   "file": "module/helpers/settings.mjs",
+   "line": 181,
+   "kind": "settings registered with literal English name/hint but config:false (hidden)",
+   "sample": "\"System Migration Version\" (181), \"Message from the devs\"+hint (189,190), \"Semaphore Flag\"+hint (210,211); plus init.mjs \"Imported Compendiums\" (25), \"Module Version\" (32)",
+   "count": 7,
+   "fixable_via": "n/a - never rendered (config:false)"
+  },
+  {
+   "file": "module/helpers/CBTracker.mjs",
+   "line": 104,
+   "kind": "Dialog button label literal",
+   "sample": "buttons: { one: { icon:'<i class=\"fas fa-check\"></i>', label: \"OK\", ... } } - the Swap Initiative dialog; the sibling Cancel button DOES use game.i18n.localize('ALIENRPG.DialCancel')",
+   "count": 1,
+   "fixable_via": "runtime-patch: renderDialog/renderApplication DOM hook"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 1589,
+   "kind": "ChatMessage content literal",
+   "sample": "ChatMessage.create({ speaker:..., content: \"Panic is over\" })",
+   "count": 1,
+   "fixable_via": "runtime-patch: preCreateChatMessage hook string swap"
+  },
+  {
+   "file": "module/helpers/combat.mjs",
+   "line": 91,
+   "kind": "ChatMessage flavor literal",
+   "sample": "flavor: `${combatant.token.name} rolls for Initiative! <br> ${cardPath}` - also line 130 without the card",
+   "count": 2,
+   "fixable_via": "runtime-patch: preCreateChatMessage hook"
+  },
+  {
+   "file": "module/helpers/YZEDiceRoller.mjs",
+   "line": 389,
+   "kind": "hardcoded tooltip inside generated chat HTML",
+   "sample": "`<button class=\"alien-Push-button\" title=\"PUSH Roll?\">` + game.i18n.localize(\"ALIENRPG.Push\") + \"</button>\" - the button TEXT is localized, its tooltip is not",
+   "count": 1,
+   "fixable_via": "runtime-patch: renderChatMessageHTML DOM"
+  },
+  {
+   "file": "module/sheets/character-sheet.mjs",
+   "line": 1132,
+   "kind": "hardcoded HTML written into the stunts popout",
+   "sample": "chatData = \"<h2>No Stunts Entered</h2>\" (write) and startsWith(\"<h2>No Stunts Entered</h2>\") (compare, line 1125). Identical pairs at synthetic-sheet.mjs:1112/1119, spacecraft-sheet.mjs:1090/1097, vehicle-sheet.mjs:1013/1020",
+   "count": 8,
+   "fixable_via": "runtime-patch: DOM. WARNING - it is BOTH written and string-compared, so a naive text swap must not break the compare"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 1909,
+   "kind": "English glue words concatenated around a localized term",
+   "sample": "speanex += \"<br> -1 to <strong>\" + game.i18n.localize(\"ALIENRPG.SkillmedicalAid\") + \"</strong> roll\"  (also line 1915 with -2). Produces '-1 to 医疗 roll' in the crit-injury chat card",
+   "count": 2,
+   "fixable_via": "runtime-patch: preCreateChatMessage / DOM"
+  },
+  {
+   "file": "module/alienrpg.mjs",
+   "line": 363,
+   "kind": "innerHTML overwrite of the core pause banner",
+   "sample": "document.getElementById(\"pause\").innerHTML = `<img ...><figcaption>GAME PAUSED</figcaption>`  - overwrites Foundry core's already-translated GAME.Paused",
+   "count": 1,
+   "fixable_via": "runtime-patch: renderGamePause hook registered AFTER the system's"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 2348,
+   "kind": "throw new Error (surfaces as a red error toast)",
+   "sample": "throw new Error(`Invalid status ID \"${statusId}\" provided to Actor#toggleStatusEffect`)",
+   "count": 1,
+   "fixable_via": "n/a - developer error path, not worth patching"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 2422,
+   "kind": "throw new TypeError",
+   "sample": "throw new TypeError(`alienrpg | addVehicleOccupant | Wrong position flag: ${position}`) - also line 2427",
+   "count": 2,
+   "fixable_via": "n/a - developer error path"
+  },
+  {
+   "file": "module/utils/formula-field.mjs",
+   "line": 23,
+   "kind": "throw new Error",
+   "sample": "if (!roll.isDeterministic) throw new Error(\"must not contain dice terms\") - fires on bad user input in a modifier formula field",
+   "count": 1,
+   "fixable_via": "runtime-patch only (subclass), low value"
+  },
+  {
+   "file": "module/helpers/rollTableData.mjs",
+   "line": 12,
+   "kind": "dropdown option literal",
+   "sample": "lTables[0] = { key: \"None\", label: \"None\" } - also line 30. The 'None' entry of the creature-table and mother-table selects",
+   "count": 2,
+   "fixable_via": "runtime-patch: DOM, or accept (ALIENRPG.None exists but is mistranslated as 莫)"
+  },
+  {
+   "file": "module/helpers/rollTableData.mjs",
+   "line": 16,
+   "kind": "dropdown labels taken from world RollTable/Folder names",
+   "sample": "lTables[index] = { key: aTables[index].name, label: aTables[index].name } (lines 16-17 and 34-35) - labels are whatever the imported RollTables are named",
+   "count": 4,
+   "fixable_via": "content/Babele (compendium) or renaming world documents - NOT reachable from lang/cn.json"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 499,
+   "kind": "config label literal",
+   "sample": "ship_attributes_list: 1:{key:'I',label:'I'} .. 5:{key:'V',label:'V'} (lines 499-503); the 6th entry correctly uses 'ALIENRPG.upgrade'",
+   "count": 5,
+   "fixable_via": "n/a - Roman numerals need no translation"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 554,
+   "kind": "world-document lookup by English name (TRANSLATION TRAP, not visible text)",
+   "sample": "game.tables.getName(\"Panic Table\"); also \"Stress Response Table\" (845), \"Panic Response Table\" (1067), \"Critical Injuries\"/\"Critical injuries\" (1816,1817), \"EV - Critical Injuries\" (1812), \"Critical Injuries on Synthetics\"/lowercase (1830), \"Spaceship Minor Component Damage\" (1848), \"Spaceship Major Component Damage\" (1855)",
+   "count": 9,
+   "fixable_via": "MUST NOT rename the imported RollTables to Chinese. Only 'Critical Injuries' and 'EV - Critical Injuries' consult game.i18n first (via ALIENRPG.CriticalInjuries / ALIENRPG.EVCriticalInjuries) and then fall back to English"
+  },
+  {
+   "file": "module/apps/init.mjs",
+   "line": 49,
+   "kind": "world-folder lookup by English name (TRANSLATION TRAP)",
+   "sample": "game.folders.getName(\"Alien Tables\"); rollTableData.mjs:7 finds folder \"Alien Creature Tables\", rollTableData.mjs:24 finds \"Alien Mother Tables\"",
+   "count": 3,
+   "fixable_via": "MUST NOT rename these folders. Renaming 'Alien Tables' also re-triggers the first-time import"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 1888,
+   "kind": "localized-string EQUALITY parse of RollTable output (CRITICAL COUPLING)",
+   "sample": "testArray[9] !== game.i18n.localize(\"ALIENRPG.Permanent\"); testArray[9] === \"Shift\" (bare literal); switch(testArray[3]) on localize('ALIENRPG.Yes')+' ' / +', -1 ' / +', -2 '; switch(testArray[5]) on localize('ALIENRPG.None'|'OneRound'|'OneTurn'|'OneShift'|'OneDay')+' '",
+   "count": 11,
+   "fixable_via": "lang/cn.json BUT only in lockstep with the crit-table content. Today cn.json translates None/OneRound/OneTurn/OneShift while leaving Yes/Permanent/Shift English, so healTime silently resolves to 0 on Chinese play"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 281,
+   "kind": "sentence assembled with ' ' concatenation (CJK spacing artefact)",
+   "sample": "title = localize('ALIENRPG.Attributes') + \" \" + dataset.label + \" \" + localize('ALIENRPG.DialTitle2')  -> '属性 力量 检定'. Same shape at actor.mjs 379,766,1034,1274,1752,2575 and item.mjs 65",
+   "count": 8,
+   "fixable_via": "lang/cn.json can absorb the space (leave keys empty/padded) or accept the space; no code change reachable"
+  },
+  {
+   "file": "module/helpers/YZEDiceRoller.mjs",
+   "line": 268,
+   "kind": "sentence assembled with ' ' concatenation",
+   "sample": "return sTotal + \" \" + localize('ALIENRPG.healthDamage'); also \"1 \" + localize('ALIENRPG.sucess') (282), sTotal + \" \" + localize('ALIENRPG.sucesses') (283), localize('ALIENRPG.Rounds')+\" \"+localize('ALIENRPG.Supply') (422), localize('ALIENRPG.ammo')+\" \"+localize('ALIENRPG.Supply') (592)",
+   "count": 5,
+   "fixable_via": "lang/cn.json (note ALIENRPG.healthDamage already carries a LEADING space in cn.json, producing a double space)"
+  },
+  {
+   "file": "module/documents/actor.mjs",
+   "line": 637,
+   "kind": "hardcoded HTML wrapper around localized text in chat",
+   "sample": "chatMessage += \"<h4><i><b>\" + localize('ALIENRPG.Roll') + \" \" + `${pCheck}` + \" </b></i></h4>\"; similar at 651,693,713,1574,1576,2508,2601,2602",
+   "count": 9,
+   "fixable_via": "lang/cn.json (the words are localized; only markup/spacing is fixed)"
+  },
+  {
+   "file": "module/data/actor-vehicle.mjs",
+   "line": 44,
+   "kind": "English literal persisted as document DATA (StringField initial)",
+   "sample": "label: new fields.StringField({ required:true, initial:\"Ranged Combat\" }) x8 (lines 44,52,60,69,77,85,92,107) and initial:\"Piloting\" (116) - these become the crew-slot skill labels stored on every new Vehicle actor",
+   "count": 9,
+   "fixable_via": "NOT fixable by lang file for already-created actors; a runtime patch must rewrite the field or the sheet render. New actors would need a preCreateActor hook"
+  },
+  {
+   "file": "module/data/actor-creature.mjs",
+   "line": 19,
+   "kind": "i18n key used as a StringField initial VALUE (renders as raw key)",
+   "sample": "initial: \"ALIENRPG.creature.Health\" - key does not exist in en.json",
+   "count": 1,
+   "fixable_via": "lang/cn.json can define ALIENRPG.creature.Health, but only if something localizes the stored value; otherwise runtime-patch"
+  },
+  {
+   "file": "module/sheets/character-sheet.mjs",
+   "line": 491,
+   "kind": "game-content name matched in English (TRANSLATION TRAP)",
+   "sample": "if (i.name.toUpperCase() === \"PACK MULE\") - the Pack Mule talent doubles encumbrance; also colony-sheet.mjs:339, synthetic-sheet.mjs:478. Same pattern for \"TAKE CONTROL\" in actor-character.mjs:440 and actor-synthetic.mjs:430",
+   "count": 5,
+   "fixable_via": "MUST NOT translate the item names 'Pack Mule' and 'Take Control' in the compendium, or the mechanics silently stop firing"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 52,
+   "kind": "config object - label source audit",
+   "sample": "ALIENRPG.skills (12 entries, name: 'ALIENRPG.Skill*' i18n keys)",
+   "count": 12,
+   "fixable_via": "lang/cn.json"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 8,
+   "kind": "config object - label source audit",
+   "sample": "ALIENRPG.attributes (4), .modifiers (7), .creatureattributes (3), .creaturedefence (4), .vehicleattributes (7), .spacecraftattributes (7), .general (3) - ALL plain i18n key strings",
+   "count": 35,
+   "fixable_via": "lang/cn.json (but 4 of the pointed-at keys do not exist in en.json: ALIENRPG.ResolveS, ALIENRPG.Special, ALIENRPG.cost, ALIENRPG.Apparance)"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 74,
+   "kind": "config object - label source audit",
+   "sample": "ALIENRPG.conditionEffects (28 name/label fields) and ALIENRPG.conditions (21) - ALL i18n keys; 20 of the condition keys are MISSING from cn.json",
+   "count": 49,
+   "fixable_via": "lang/cn.json"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 342,
+   "kind": "config object - label source audit",
+   "sample": "career_list(15), sensor_list(3), pilot_list(5), gunner_list(2), engineer_list(4), weapon_range_list(5), evolved_weapon_range_list(5), vehicle_weapon_range_list(5), evolved_vehicle_weapon_range_list(5), target_cover(3), size_modifiers(3), weapon_type_list(3), skills_list(12), ship_weapon_type_list(2), ship_weapon_range_list(6), evolved_ship_weapon_range_list(6), ship_weapon_targetmod_list(5), ship_hardpoint_list(3), crit_list(2), item_types_list(11), crit_timelimit_list(5), colony_policy_list(3), StatusEffects(10) - every label is an i18n key",
+   "count": 118,
+   "fixable_via": "lang/cn.json"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 313,
+   "kind": "config object - label source audit",
+   "sample": "ALIENRPG.vehicle.crewPositionFlagsLocalized (4) and ALIENRPG.spacecraft.crewPositionFlagsLocalized (6) map English flag constants to i18n keys; the raw crewPositionFlags arrays ('COMMANDER','PILOT','GUNNER','PASSENGER','CAPTAIN','SENSOR-OP','ENGINEER') stay English as data keys",
+   "count": 10,
+   "fixable_via": "lang/cn.json for the labels; the flag constants must stay English"
+  },
+  {
+   "file": "module/helpers/config.mjs",
+   "line": 334,
+   "kind": "config object - non-text",
+   "sample": "ALIENRPG.Icons.buttons = { edit/delete/remove: '<i class=\"fas ...\"></i>' } - injected raw into templates via {{{@root.config.Icons.buttons.edit}}}; no text, but also no title/aria-label anywhere",
+   "count": 3,
+   "fixable_via": "n/a (icon-only, no accessible label to translate)"
+  },
+  {
+   "file": "module/helpers/settings.mjs",
+   "line": 6,
+   "kind": "settings registrations using i18n keys",
+   "sample": "registerMenu 'alienrpgSettings' (name/label/hint = ALIENRPG.MenuName/MenuLabel/MenuHint) + 13 game.settings.register calls all pointing at ALIENRPG.* keys (evolved, autopanic, dollar, switchMouseKeys, alienrpgHideInitChat, switchJournalColour, switchchatbackground, macroShorthand, addMenuButton, defaultTokenSettings, fontColour, fontStyle, ...)",
+   "count": 14,
+   "fixable_via": "lang/cn.json (ALIENRPG.Evolved / EvolvedHint are MISSING from cn.json, so the single most important world setting shows English)"
+  },
+  {
+   "file": "module/helpers/rollTableData.mjs",
+   "line": 7,
+   "kind": "summary of file",
+   "sample": "41 lines total; produces the two RollTable dropdowns. Everything user-visible is either the literal 'None' or a world-document name.",
+   "count": 41,
+   "fixable_via": "content/Babele + runtime-patch"
+  }
+ ],
+ "summary": "ALIENRPG v4.1.13 i18n audit (Foundry Data\\systems\\alienrpg). Scope scanned: lang/*.json (9 files), 80 .hbs + 21 .html templates (79 hbs under templates/ plus module/helpers/alienprgSettings.hbs, which is the one actually rendered), 62 .mjs under module/ (20,024 lines), css/alienrpg.css, system.json.\n\nLANG GAP (verified, matches the numbers given). en.json 590 flattened keys; cn.json 511; zh-tw.json 511. 93 keys missing from cn, 140 present-but-byte-identical to English, 14 orphans in cn not in en. Broader: 162 of 511 cn values contain no CJK at all (349 do); 1 value is JSON null (ALIENRPG.EVCriticalInjuries, null in both cn and zh-tw). Placeholder loss: 0 (only 2 en keys have placeholders at all). HTML tag loss: 0. The 14 orphans are the dead pre-v11 ACTOR.Type*/ITEM.Type* namespace; the live TYPES.Actor.*/TYPES.Item.* equivalents exist in cn but are English. Against actual usage: 494 distinct keys are referenced by code+templates; 68 of them are missing from cn and 98 more are still English, so 166/494 (34%) of live strings render English today. A further 13 keys are referenced but exist in NO lang file and render as raw dotted keys for everyone (ALIENRPG.ActiveEffect.Temporary/.Passive/.Inactive/.Expired, ALIENRPG.Effect.Temporary, ALIENRPG.ActorSheet.Edit/.Delete, ALIENRPG.General.NeedToImportActor, ALIENRPG.SHEET.Labels.ActiveEffect, ALIENRPG.Apparance, ALIENRPG.Special, ALIENRPG.cost, ALIENRPG.ResolveS, ALIENRPG.Close, ALIENRPG.Init.SubModule, ALIENRPG.creature.Health) - all of these ARE reachable from cn.json since Foundry merges per-language, en is only a fallback.\n\nZH-TW vs CN - VERDICT: they are SIBLINGS from one Simplified-Chinese ancestor, not a copy of one another. Evidence: identical 511-key set in identical key ORDER; 342/511 values byte-identical; of the 169 that differ, 157 differ ONLY by S<->T character substitution; zh-tw.json still contains 101 values that are pure Simplified and were never converted (e.g. ALIENRPG.forceImportHint '强制重新导入...覆盖现有数据', ALIENRPG.Overwatch '守望先锋', all 12 TAH.* tooltips, all settings hints), while cn.json contains ZERO Traditional-only values and neither file has a mixed-script value. zh-tw is therefore an incomplete automated S->T pass over a Simplified base (~29% of its Chinese strings never converted). cn is NOT a T->S conversion of zh-tw either: the 12 non-script differences prove independent divergence (cn cinematic='电影' vs tw 'CINEMA'; cn CrewGunner='炮手' vs tw ' 炮手'; cn ShipPanic7/ShipConButtons match en.json byte-for-byte while tw has extra spaces; ShipPanic7/ShipPanic9 leading-space counts are swapped between the two files). Practical takeaway: cn.json is the cleaner and more canonical of the two - build from cn, and treat zh-tw as derivative. Wider context: cn/es/fr/it/pt-br/zh-tw ALL share the exact same 511-key set in the same order (same 93 missing, same 14 orphans) - one bulk snapshot of an older en.json. Only de.json is current (590/590); pl.json has 508.\n\nCN QUALITY: heavily machine-translated with 107 keys tripping automated defect heuristics. Marquee failures: GMONLY='仅限通用汽车' (GM -> General Motors), Overwatch='守望先锋' (the Blizzard game), SelectFirer='选择消防员' (firer -> firefighter), Utility='公用事业', Wildcatter='野猫', Homebrew='家酿', None='莫', OneTurn='一斡', SheetColorSettings='图纸颜色设置' (its own settings dialog title), CombatantReroll='重新启动计划'. 'Roll' is rendered as 滚动 (scroll) in 9 keys; 'Actor' as 演员 in 3; 'Token' as both 令牌 and 指示物; 'Push' as 孤注一掷 / 按钮 / 推送; 'Critical Injury' as 重伤 / 严重伤害 / 暴击 / 重击; 'Damage' as 伤害 / 损害 / 损坏; 'Stress Level' as 压力等级 / 压力水平; 'Panic' as 恐慌 / 混乱. hideInitChatHint hallucinates a clause ('以备不时之需') not in the source. Panic8 collapses 'AGILITY (Mobility)' to 敏捷（敏捷）. facehugger is left untranslated in one key and rendered 抱脸者 (wrong) in another. 40 concrete cases are in stale_or_wrong; treat cn.json as a re-translation target, not a base to patch.\n\nHARDCODED TOTALS. Templates: 80 unreachable sites across 101 files - 38 text spans (templates/actor/planet-general.hbs, the whole Colony Planet sheet, which contains exactly ONE {{localize}} call), 23 literal title= attributes ('Minus'/'Plus' steppers x18, 'Stunts' x2, 'Create item' x2, 'Edit Item'), 10 <option> labels (5 font names x2 copies), 4 <h3>NPC?</h3>, 2 <label>SPECIALTY</label>, 2 <button>CRT UI Sheets</button>, 1 <h2>Hello World</h2> dev leftover. Zero data-tooltip/aria-label/placeholder/legend/th offenders. Module JS: 31 genuinely user-visible hardcoded English strings - 9 ui.notifications literals, 3 visible settings-menu fields (init.mjs registerMenu, while the matching translated keys ALIENRPG.forceImportName/Label/Hint sit unused), 3 ChatMessage flavor/content literals, 8 '<h2>No Stunts Entered</h2>' write+compare sites, 2 English glue clauses (' to '/' roll') welded around localized skill names in the crit card, the 'PUSH Roll?' button tooltip, the 'GAME PAUSED' innerHTML overwrite of a core-translated banner, the 'Alien RPG - Core System | ERROR |' toast prefix, and Dialog button 'OK'. Plus 4 throw messages, 7 hidden config:false settings, 5 Roman-numeral labels (no translation needed), 2 'None' dropdown entries, and 32 lines that build sentences by ' ' concatenation. 6 DRAW_STEEL.* keys (config-duration.hbs:4, details.hbs:5, targeted-condition-prompt.hbs:2,5,7,13) are copy-paste leftovers from the Draw Steel system and render as raw keys in every language - a cn.json can define a DRAW_STEEL top-level block to fix them. 6 EFFECT.* keys resolve from Foundry core (foundry_chn, lang 'cn' - already installed here).\n\nCONFIG OBJECTS (module/helpers/config.mjs, 585 lines): 27 label-bearing objects, 224 label/name fields, of which 219 are i18n keys and only 5 are literals (ship_attributes_list Roman numerals I-V). alienRPGConfig.mjs uses game.i18n for its window title. settings.mjs: 1 menu + 14 settings on i18n keys, 4 settings on literals but all config:false. rollTableData.mjs is the only config source with real untranslatable labels: two 'None' literals plus dropdown labels read straight off world RollTable document names.\n\nFIXABLE BY lang/cn.json ALONE: all 93 missing keys, all 140 untranslated keys, all 13 raw-key references, all 49 sheet-tab labels (they are i18n keys built by concatenation from 'ALIENRPG.Actor.Tabs.'/'ALIENRPG.Item.Tabs.', not literals), all 219 config.mjs labels, all 14 settings, and the DRAW_STEEL block. That is the overwhelming majority of the surface.\nNEEDS A RUNTIME PATCH MODULE ('hardcoded-cn' shim): the 80 template sites (override the compiled template cache at init, or DOM-patch on renderActorSheet/renderItemSheet), the 9 ui.notifications literals (wrap ui.notifications.warn/info/error/notify with a lookup table), the 3 chat literals + 2 glue clauses + 'No Stunts Entered' + 'PUSH Roll?' (preCreateChatMessage / renderChatMessageHTML), the 3 visible init.mjs settings-menu fields (mutate game.settings.menus at ready), the 'GAME PAUSED' banner (re-register renderGamePause after the system), and the logger error prefix.\nNOT FIXABLE BY EITHER - hard traps to document for the translator: (a) 9 RollTable names and 3 Folder names are looked up in English ('Panic Table', 'Stress Response Table', 'Panic Response Table', 'Spaceship Minor/Major Component Damage', 'Critical Injuries on Synthetics', 'Alien Tables', 'Alien Creature Tables', 'Alien Mother Tables') - renaming them to Chinese breaks panic/stress/crit rolls; (b) item names 'PACK MULE' and 'TAKE CONTROL' are string-matched to fire mechanics; (c) actor-vehicle.mjs stores 'Ranged Combat'/'Piloting' as persisted document data on every vehicle; (d) MOST IMPORTANT - actor.mjs:1888-1940 parses crit-table result TEXT and compares it against localize('ALIENRPG.Yes'/'None'/'OneRound'/'OneTurn'/'OneShift'/'OneDay'/'Permanent') plus the bare literal 'Shift'. cn.json already half-translated that set, so on Chinese play the heal-time switch always falls through to 0. Those 8 keys must be kept in exact lockstep with whatever the (Babele-)translated crit tables emit. Note also that system.json declares the Chinese lang code as 'cn' (not zh-Hans), which matches this user's existing foundry_chn/pf2_cn/crucible-cn stack, so any override module must declare 'cn' too."
+}

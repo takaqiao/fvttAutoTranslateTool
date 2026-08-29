@@ -1,0 +1,359 @@
+{
+ "architecture": "Three shipped modules plus one outer project repo, split on the licence/lifecycle boundary rather than on the technical one. **Channel split:** (a) Babele 2.9.1 owns all compendium content — all three packs are single-Adventure packs, 2,703,509 raw chars; (b) Foundry native i18n owns the system's 590 UI keys plus the plugins' lang files; (c) a runtime patcher module owns the ~115 sites neither channel can reach (80 system template literals, ~33 module-JS literals, the plugins' hardcoded strings, and Handlebars-partial pre-registration for `terminal` and `motion-tracker-multideck`). **The system's lang/cn.json is overridden, not forked — confirmed in source, not assumed.** `Localization#getTranslations` (foundry.mjs:204905-204942) builds one flat dictionary by pushing translation files in a fixed order — core (`CORE_SUPPORTED_LANGUAGES` is `[\"en\"]` only, foundry.mjs:3513, so `cn` comes entirely from packages) → **game.system** → **every active module, in module order** → world — then `for (const p of promises) mergeObject(translations, json, {inplace:true})`, so **later wins and a module's `lang/cn.json` overwrites the system's key-for-key**; `#filterLanguagePaths` (204953) honours a per-entry `\"system\"` / `\"module\"` gate (`checkSystem`/`checkModule`), and `#loadTranslationFile` runs `expandObject` on every file so flat-dotted or nested JSON both resolve. That gate is what lets ONE module carry the system override *and* companion lang files for `alien-mu-th-ur` / `motion_tracker` / `token-action-hud-alien` at zero cost when those aren't installed. **Module 1 `alienrpg-cn`** is the always-present hub: the system lang override, the runtime patcher, CJK CSS, the *single* global `babele.registerMapping()` layer (it is a global layer — registering it from three modules would triple-merge), and the 76k-char system Adventure pack. **Module 2 `alien-evolved-starterset-cn`** and **Module 3 `alien-evolved-corerules-cn`** each carry only `compendium/{cn,en}/` plus a five-line `babele.register({module, lang:'cn', dir})` esmodule and `requires: [babele, alienrpg-cn]`. They are separate because `alien-evolved-corerules` is `\"protected\": true` — paid Free League content — and its 2.29M translated chars must be publishable, withholdable, and versioned independently of everything else. Lang code is `cn` throughout (the system, TAH-core and 13 installed modules use `cn`; only 2 use `zh-CN`), and the plugin lang entries are gated with `\"module\"` so a `cn` world without them loads nothing extra.",
+ "deliverable_files": [
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/PROJECT.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/PARALLEL-RUNBOOK.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/module.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/register.js",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/babele-mappings.js",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/cn.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/en.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/lang_keep_english.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/styles/alienrpg-cn.css",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/en/_source.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/en/alienrpg.alien-rpg-system.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/README.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/LICENSE",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.gitignore",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.github/workflows/release.yml",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/.github/release-body-template.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/module.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/register.js",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/compendium/en/_source.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/compendium/en/alien-evolved-starterset.alien-evolved-starter-set.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/2-新手包汉化插件/.github/workflows/release.yml",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/module.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/register.js",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/compendium/en/_source.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/3-核心书汉化插件/compendium/en/alien-evolved-corerules.alien-evolved-core-rules.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/extract/mappings.mjs",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/extract/extract_en.mjs",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/release/runtime-converters.js",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/release/generate_runtime.mjs",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/apply_translations.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/apply_lang.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/validate_translations.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/lang_gap.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/flatten_lang.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/capture_baseline.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/resolve_generic_fallback.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/assert_resolutions.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/measure_ratio.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_name_lookup_traps.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_table_ref_sync.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/scan_crit_lockstep.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/prep_units.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/prep_realign.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/collect_realign.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/merge_batches.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/probe.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/residue.py",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/BRIEF.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/parallel/BRIEF-REALIGN.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/EXCLUSIONS.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/RESOLUTIONS.assertions.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/STAGE-LOG.md",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.provenance.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.disputes.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/reference/subs_terms.json",
+  "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/english-baseline/LOCAL-PATCHES.md"
+ ],
+ "module_layout": [
+  {
+   "path": "Alien-RPG Translation Project/PROJECT.md",
+   "purpose": "Master document, modelled on the EC one. §0 stop-decision · §1 quick catch-up + blind-spot table + term-arbitration ladder · §2 version matrix (the ONLY place besides each module.json header where a version number is written) · §3 hard constraints incl. the DO-NOT-TRANSLATE register summary · §4 directory & script index · §5 SOP · §6 chronology + release table · §7 open items + smoke-test checklist · §8 append-only resolution log."
+  },
+  {
+   "path": "Alien-RPG Translation Project/PARALLEL-RUNBOOK.md",
+   "purpose": "Ported verbatim in structure from the EC runbook: fixed paths, the three status commands, resume semantics, landing sequence, how to cut the next wave, the six inviolable rules, cross-check agent prompt, page-file format. Rewritten for Alien paths and the alienrpg pack names."
+  },
+  {
+   "path": "Alien-RPG Translation Project/1-系统汉化插件/",
+   "purpose": "Git clone of the shippable hub module `alienrpg-cn`. Owns: the system lang override, the plugin companion lang files, the runtime patcher, the single global Babele mapping layer, and the 76k-char system Adventure pack. Separate git repo from the outer project."
+  },
+  {
+   "path": "1-系统汉化插件/module.json",
+   "purpose": "id `alienrpg-cn`. `relationships.requires: [babele >=2.9.1]`, `relationships.systems: [alienrpg >=4.1.13]`. `languages` carries SIX entries all lang `cn`: {path lang/cn.json, system:\"alienrpg\"}, plus one each gated by `module`: alien-mu-th-ur, motion_tracker, token-action-hud-alien, motion-tracker-multideck, babele. lang/en.json is deliberately NOT declared. esmodules: [register.js]. styles: [{src styles/alienrpg-cn.css, layer:\"modules\"}]."
+  },
+  {
+   "path": "1-系统汉化插件/register.js",
+   "purpose": "Single entry point. Hooks.once('babele.init') → babele.registerConverters(ALIENRPG_CONVERTERS); babele.registerMapping(ALIENRPG_MAPPINGS); babele.register({module:'alienrpg-cn', lang:'cn', dir:'compendium/cn'}). Hooks.once('i18nInit') → top-level bare-key reclaim table (guarded: never overwrite an existing value). Hooks.once('setup') → registerAlienrpgHardcoded(). Guarded by game.modules.get('babele')?.active."
+  },
+  {
+   "path": "1-系统汉化插件/babele-mappings.js",
+   "purpose": "GENERATED — DO NOT EDIT BY HAND. Header names both sources (4-常用脚本/extract/mappings.mjs + release/runtime-converters.js) and the regeneration command. Exports ALIENRPG_MAPPINGS + ALIENRPG_CONVERTERS. Enriches Babele's Adventure/Item/Actor/Scene defaults only; every `_variant` carries an `exists` guard because registerMapping pushes a GLOBAL layer."
+  },
+  {
+   "path": "1-系统汉化插件/lang/cn.json",
+   "purpose": "The system UI override. All 590 en.json keys re-translated (not patched — the upstream cn.json's 2022-2026 stratum is machine-translated), plus the 35 keys code references that en.json lacks, plus the `alienrpgct` namespace (effects.mjs:15/20). Loaded AFTER systems/alienrpg/lang/cn.json and merged over it key-for-key."
+  },
+  {
+   "path": "1-系统汉化插件/lang/en.json",
+   "purpose": "Archived English snapshot, the OLD baseline for lang_gap.py / flatten_lang.py. IN git, EXCLUDED from the release zip, and NOT declared in module.json `languages` (declaring it would freeze upstream's English forever)."
+  },
+  {
+   "path": "1-系统汉化插件/lang/lang_keep_english.json",
+   "purpose": "Allowlist for the CJK gate. Must contain the 8 crit-parse keys (Yes/None/OneRound/OneTurn/OneShift/OneDay/Permanent + the bare 'Shift' note), any key whose value is a document name matched with ===, and Roman numerals."
+  },
+  {
+   "path": "1-系统汉化插件/lang/plugins/muthur-cn.json",
+   "purpose": "MUTHUR.* + MOTHER.* (275 keys / 9.2k chars minus 18 dead keys). Declared with `\"module\":\"alien-mu-th-ur\"`. Command TOKENS stay ASCII (main.js:1139 uppercases and matches literals); MOTHER.Keywords.Special MUST stay \"SPECIAL\" because specialWords has no English fallback (main.js:1147-1157)."
+  },
+  {
+   "path": "1-系统汉化插件/lang/plugins/motiontracker-cn.json",
+   "purpose": "MOTIONTRACKER.* (69 keys / 3.5k chars, zero orphans). Declared with `\"module\":\"motion_tracker\"`. The cleanest surface in the project — 100% of that module routes through game.i18n and it needs no runtime patch."
+  },
+  {
+   "path": "1-系统汉化插件/lang/plugins/tah-alien-cn.json",
+   "purpose": "Declared with `\"module\":\"token-action-hud-alien\"`. Supplies only the 3 keys constants.js references that exist in NO lang file: ALIENRPG.Skill, ALIENRPG.fastslow, ALIENRPG.FastSlow. Everything else in that HUD resolves from the system override."
+  },
+  {
+   "path": "1-系统汉化插件/lang/plugins/babele-cn.json",
+   "purpose": "Optional. Babele 2.9.1 declares ar/en/it/es/de/fr/pl/zh-tw/ja and no `cn`, so its own settings UI is English in a Chinese world. BABELE.* keys, gated `\"module\":\"babele\"`."
+  },
+  {
+   "path": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs",
+   "purpose": "The third channel. Four sub-tables: (1) Handlebars.registerPartial pre-registration for the ~12 system templates with unreachable literals (planet-general.hbs's 38 spans, the 18 Minus/Plus title=, NPC?, SPECIALTY, Stunts, Create/Edit item, the 5 font <option>s in module/helpers/alienprgSettings.hbs — that path, not the dead templates/ copy) plus the four creature-header.hbs data-label values that flow into dialog titles; (2) a literal→Chinese map wrapped around ui.notifications.{warn,info,error,notify} (9 sites); (3) preCreateChatMessage / renderChatMessageHTML for 'Panic is over', the initiative flavor, 'PUSH Roll?', the 8 '<h2>No Stunts Entered</h2>' write+compare pairs, and the two ' to '/' roll' glue clauses at actor.mjs:1909/1915; (4) game.settings.menus mutation at ready for init.mjs:39-41, the renderGamePause re-registration, the logger prefix, devmsg.js's 'Alien RPG News' alias, and the Dice So Nice colorset/dice-system display names at alienrpg.mjs:385/396/407/435."
+  },
+  {
+   "path": "1-系统汉化插件/scripts/muthur-hardcoded-cn.mjs",
+   "purpose": "Reassigns window.hackingSequences / window.postPasswordSequences at ready; MutationObserver text swap on #muthur-boot-sequence for the function-local bootMessages / systemMessages / errorSnippets (~1.8k chars); fixes the two French leaks ('SUCCÈS'/'ÉCHEC' at main.js:3131-3132)."
+  },
+  {
+   "path": "1-系统汉化插件/scripts/multideck-hardcoded-cn.mjs + terminal-hardcoded-cn.mjs",
+   "purpose": "Handlebars.registerPartial pre-registration at 'init', keyed on the exact template path — getTemplate short-circuits on `if (id in Handlebars.partials)` (foundry.mjs:89063), so this translates ApplicationV2 windows with zero forking and no DOM walking. Must run before terminal/hooks.js:41's loadTemplates."
+  },
+  {
+   "path": "1-系统汉化插件/templates/",
+   "purpose": "The translated .hbs bodies the two patcher scripts pre-register. Subdirs alienrpg/, multideck/, terminal/. These are copies of upstream templates with text nodes translated and every {{handlebars}} expression, class, and data-* attribute byte-identical."
+  },
+  {
+   "path": "1-系统汉化插件/styles/alienrpg-cn.css",
+   "purpose": "CJK font fallback and typography. Must include an !important override for MU-TH-UR's 46 inline `font-family: monospace` declarations (`#muthur-chat-container *, #muthur-boot-sequence * { font-family: 'Sarasa Mono SC', 'Zpix', monospace !important }`) — they are set via style.cssText so nothing weaker wins."
+  },
+  {
+   "path": "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json",
+   "purpose": "Babele translation for the system's own Adventure pack (76,036 chars). The ONLY sanctioned writer is qa/apply_translations.py."
+  },
+  {
+   "path": "1-系统汉化插件/compendium/en/ (+ _source.json)",
+   "purpose": "English baseline for every drift computation and for validate_translations. IN git, EXCLUDED from the release zip. _source.json records packageId/packageVersion so capture_baseline.py can name snapshot dirs without a typo."
+  },
+  {
+   "path": "Alien-RPG Translation Project/2-新手包汉化插件/",
+   "purpose": "Git clone of `alien-evolved-starterset-cn`. module.json requires [babele, alienrpg-cn] and relationships.modules [alien-evolved-starterset]. register.js does nothing but babele.register({module:'alien-evolved-starterset-cn', lang:'cn', dir:'compendium/cn'}) — no mapping, no converters, no lang file. compendium/{cn,en}/alien-evolved-starterset.alien-evolved-starter-set.json (340,968 chars)."
+  },
+  {
+   "path": "Alien-RPG Translation Project/3-核心书汉化插件/",
+   "purpose": "Git clone of `alien-evolved-corerules-cn`. Identical shape to slot 2; carries the 2,286,505-char core-rules translation. SEPARATE REPO AND SEPARATE PUBLICATION DECISION because alien-evolved-corerules is `\"protected\": true` — paid Free League content served from frialigan.se's S3 manifest. Default state: private repo."
+  },
+  {
+   "path": "Alien-RPG Translation Project/4-常用脚本/extract/mappings.mjs",
+   "purpose": "THE single source of truth for mapping data — consumed by the runtime generator AND interpreted by the extractor, so extracted keys are by construction the keys Babele looks for. Starts from Babele 2.9.1's Adventure defaults and only ADDS alienrpg-specific system.* fields. Every deviation annotated with the measurement that forced it and a 'do not helpfully complete this' note."
+  },
+  {
+   "path": "4-常用脚本/extract/extract_en.mjs",
+   "purpose": "Ported from EC. Changes: FVTT_NODE_ANCHOR, --target layer names (alienrpg|starterset|corerules), and the extract direction of the alienRollTableRef converter. The three packs are already dumped to scratchpad/alien/raw/{system,starterset,corerules}.json, so the mapping-interpretation half can be exercised offline against those before touching LevelDB."
+  },
+  {
+   "path": "4-常用脚本/qa/ (38+ scripts, ported)",
+   "purpose": "apply_translations.py (3 gates, the ONLY writer into compendium/cn) · apply_lang.py (4 gates) · validate_translations.py · lang_gap.py · flatten_lang.py · capture_baseline.py · scan_en_drift.py · scan_markup_drift.py · scan_markup_targets.py · scan_class_drift.py · scan_content_coverage.py · scan_foreign_script.py · scan_same_en_split.py · scan_name_splits.py · scan_token_name.py · scan_uuid_swap.py · scan_attr_text.py · scan_dropped_terms.py · scan_number_drift.py · prune_dead.py · resolve_generic_fallback.py · unify_terms.py · assert_resolutions.py. Every baseline-consuming script must print a coverage line and support --strict-coverage FROM DAY ONE."
+  },
+  {
+   "path": "4-常用脚本/qa/measure_ratio.py",
+   "purpose": "NEW, Alien-specific and mandatory before any threshold is wired. EC's 0.31 median / 0.22 TRUNCATED / 0.25 catchup constants are corpus-specific and this corpus is 42-85% HTML table markup in places. Must measure on TAG-STRIPPED visible text and emit per-document-class bands (journal prose / journal tables / table results / actor plain-text textareas / item HTML)."
+  },
+  {
+   "path": "4-常用脚本/qa/scan_name_lookup_traps.py",
+   "purpose": "NEW, highest-priority gate. Asserts that 9 strings matched with === in package JS are byte-identical English in compendium/cn: Adventure names 'Alien RPG System' / 'Alien Evolved Core Rules' / 'Alien Evolved Starter Set'; welcome journals 'MU/TH/ER Instructions.' / 'CORE RULES - HOW TO USE THIS MODULE' / 'STARTER SET - HOW TO USE THIS MODULE'; scenes 'Alien Evolved Core Rules' / 'Alien Evolved Starter Set'. Also re-asserts the 11 RollTable names, the 2 folder names, 'PACK MULE', 'TAKE CONTROL' and the 'None' sentinel."
+  },
+  {
+   "path": "4-常用脚本/qa/scan_table_ref_sync.py",
+   "purpose": "NEW. Cross-checks the four places a RollTable name is written down: the RollTable's own `name`, creature `system.rTables`/`system.cTables`, the 33 `@TEXTDRAW[RollTable.<id>]{label}` + 3 `@DRAW[...]{label}` enrichers embedded in corerules journal prose (32 distinct labels, 7 of which differ from the table name only by NBSP), and the macro command bodies. All four must agree or be all-English together."
+  },
+  {
+   "path": "4-常用脚本/qa/scan_crit_lockstep.py",
+   "purpose": "NEW. Pins the actor.mjs:1888-1941 coupling: for each of the 8 keys the switch compares against, assert lang/cn.json's value + the trailing space matches the corresponding column emitted by the translated crit tables. Note the source uses EN DASH U+2013 in ', –1 ' / ', –2 ', and testArray[9] === 'Shift' is a bare literal with no i18n escape hatch."
+  },
+  {
+   "path": "4-常用脚本/parallel/",
+   "purpose": "prep_units.py / prep_realign.py / collect_realign.py / diff_realign.py / tagseq.py / prose_survival.py / merge_batches.py (promoted out of 4-临时脚本 on day one) / batch_status.py / check_catchup.py / attach_orphans.py / slice_todo.py / probe.py / residue.py / count_terms.py + BRIEF.md, BRIEF-REALIGN.md. residue.py's ALLOW set is rebuilt for Alien: MU/TH/UR, WY, UPP, ICSC, ICC, USCSS, APC, EEV, LV-426, XX121, and every command token in the terminal/MU-TH-UR grammars."
+  },
+  {
+   "path": "Alien-RPG Translation Project/5-临时脚本/<date>-<round>/findings/",
+   "purpose": "One-shot probes archived by date+round, never deleted. .gitignore MUST NOT contain a `**/*.json` rule under this path — that exact rule cost the EC project 237 findings and 125 hand-adjudicated exemptions."
+  },
+  {
+   "path": "Alien-RPG Translation Project/6-工作区/",
+   "purpose": "Pure regenerable intermediate state from script runs. Explicitly deletable. Nothing that must survive goes here."
+  },
+  {
+   "path": "Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json",
+   "purpose": "The Alien-specific hard register, read at RUNTIME by scan_name_lookup_traps.py. Four sections: name_lookups (9), rolltable_names (11), folder_names (2: 'Alien Creature Tables', 'Alien Mother Tables' — rollTableData.mjs:7/24 read folder.contents with NO null check, so a rename throws on every creature-sheet render), mechanic_names ('PACK MULE', 'TAKE CONTROL', the 'None' sentinel, the 'Critical Injuries' startsWith prefix at rollTableData.mjs:29), and skill_stunts_names (the 12 items must equal lang/cn.json's ALIENRPG.Skill<key> values exactly)."
+  },
+  {
+   "path": "7-其他内容/glossary/glossary_alien.json",
+   "purpose": "Flat {en: cn}, the only shape consumers expect. Base layer adjudicated from the four sources in priority order: zh.wikipedia > the alienrpg cn.json's good 2020-21 stratum > the film-subtitle corpus (4,601 aligned bilingual pairs, all one CnSCG lineage — treat as ONE vote, not four) > MT proposals. Sibling files: .byrole.json, .provenance.json (authoritative term count lives in its _meta), .disputes.json, .pending.json."
+  },
+  {
+   "path": "7-其他内容/english-baseline/<pkg>-<version>/",
+   "purpose": "Historical English snapshots, one dir per upstream version, FULL snapshot of every pack. The lynchpin: compendium/en holds only CURRENT English. Note both content modules ship a `-latest.json` manifest on an S3 bucket, so upstream can move silently — snapshot on every catch-up round. Holds LOCAL-PATCHES.md."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/.../scratchpad/alien/parallel/",
+   "purpose": "Session-scoped wave work dirs, one per unit: todo.json / already_translated.json / pages/<i>.en.html / pages/<i>.cn.html / index.json / _original_cn.json / batch.json / _review_progress.json. Located via $env:ALIEN_PARALLEL_ROOT. NOT in git — anything unlanded when the session ends must be redone."
+  }
+ ],
+ "phase_plan": [
+  {
+   "phase": "0 — Scaffold, baseline, mapping, and the DO-NOT-TRANSLATE register",
+   "goal": "Make every later measurement possible and make the destructive mistakes impossible. No translation whatsoever.",
+   "work": "Create the outer repo + 3 plugin repos with the trees above. Port 4-常用脚本 from the EC project, repointing FVTT_NODE_ANCHOR and every hard-coded path. Write extract/mappings.mjs from Babele 2.9.1's Adventure defaults + the survey's field inventory, with the verifier corrections applied (critical-injury not crit-inj; no alienTokenName; exists-guard on EVERY variant not just description). Run extract_en.mjs on all three packs into compendium/en, then capture_baseline.py to english-baseline/<pkg>-<ver>/ for all three. Build 7-其他内容/DO-NOT-TRANSLATE.json from code citations and write the three new gates (scan_name_lookup_traps, scan_table_ref_sync, scan_crit_lockstep). Run measure_ratio.py on the 349 CJK-bearing values already in the system cn.json to get a provisional band, and register 'remeasure on real corpus' as a Phase-2 exit item. Write PROJECT.md §0-§4 and PARALLEL-RUNBOOK.md.",
+   "exit_criteria": "extract_en emits 3 Babele-shaped files whose leaf count matches an independent walk of the raw dumps; validate_translations runs on all 3 packs and reports 0 orphans; _source.json present with the right packageVersion in all 3; capture_baseline produced a FULL snapshot of every pack (a coverage line proves 3/3, not 1/3); DO-NOT-TRANSLATE.json has all 9 name-lookup traps, 11 table names, 2 folder names, 12 skill-stunts names and 2 mechanic names, each with a file:line citation re-derived this round (the survey's citations drift 1-4 lines); .gitignore verified NOT to exclude 5-临时脚本/**/findings; and a live smoke test: alienrpg-cn loads in a cn world with 0 console errors and game.babele.inspectMapping('Actor') shows the alienrpg variants.",
+   "est_chars": 0
+  },
+  {
+   "phase": "1 — System i18n complete (user priority #1)",
+   "goal": "Zero English in the alienrpg system UI, and the runtime patcher covering everything lang cannot reach.",
+   "work": "Full RE-TRANSLATION of all 590 keys — not a patch of the upstream cn.json, whose 2022-2026 stratum is machine translation with 40 documented hard errors (GMONLY→仅限通用汽车, Overwatch→守望先锋, SelectFirer→选择消防员, None→莫, OneTurn→一斡, CombatantReroll→重新启动计划). Seed from the good 2020-21 stratum (attributes/skills/careers/ranges/Panic7-15). Add the 35 code-referenced keys absent from en.json and the `alienrpgct.Passive`/`.Inactive` namespace. Settle ~30 terminology conflicts and write glossary_alien.json v1 + RESOLUTIONS.assertions.json with 15-20 executable rules. Build scripts/alienrpg-hardcoded-cn.mjs covering the 80 template sites, the ~33 module-JS literals (including the two live .js files the survey never scanned), the 4 creature-header data-labels, and the Dice So Nice registrations. 4-6 agents, one wave.",
+   "exit_criteria": "lang_gap five buckets all zero incl. UNREACHABLE; flatten_lang's keys-before == keys-after == English key count; a referenced-key census shows 0 of ~487 live keys rendering English outside lang_keep_english.json; assert_resolutions main gate AND --selftest both green with both numbers reported; scan_crit_lockstep green. SMOKE (mandatory, not deferred): open a cn world and confirm character/synthetic/creature/spacecraft/vehicle/colony/planet/territory sheets, all 13 item sheets, the settings menus, the combat tracker and TAH are Chinese; roll a critical injury and confirm healTime resolves non-zero; confirm the first-run import still works (the name-lookup gate is a static check, this is the live one).",
+   "est_chars": 45000
+  },
+  {
+   "phase": "2 — System Adventure pack + terminology anchor",
+   "goal": "Finish the smallest pack, and lock the Foundry-UI vocabulary that every later phase inherits.",
+   "work": "76,036 chars across 4 units. SYS-J-1/2 (MU/TH/ER Instructions, the only text page) is the anchor: a field-by-field walkthrough of every sheet whose every label must agree with Phase 1's lang/cn.json character-for-character. RECOMMEND SKIPPING the 12,571-char changelog tail (19% of the pack, zero play value) and registering it as an archived exemption. SYS-T-CORERES (Panic/Panic Response/Stress Response) is byte-identical to the corerules copies — translate HERE and propagate later with propagate_fix.py. SYS-I-STUNTS: the 12 skill-stunts names are NOT free text, they are a lookup key (character-sheet.mjs:1119 game.items.getName(skill.description) where description is overwritten each prepareDerivedData from ALIENRPG.Skill<key>). SYS-UI: 7 folder names, of which 2 are frozen English. Then re-run measure_ratio.py on the real CN corpus and wire the final thresholds.",
+   "exit_criteria": "validate_translations coverage 100% on alienrpg.alien-rpg-system minus archived exemptions; resolve_generic_fallback run BEFORE the wave so no free-fallback item was handed out; markup drift LINK/BLOCK/PLACEHOLDER = 0 and TRUNCATED within the newly measured band; scan_name_lookup_traps green; the 12 skill-stunts item names byte-equal the 12 lang values (an assertion, not an eyeball). SMOKE: import the Adventure into a fresh world, confirm the import completes (Adventure name untouched), the stunts popover fires for all 12 skills, and the Mother/Creature table dropdowns populate.",
+   "est_chars": 63000
+  },
+  {
+   "phase": "3 — Companion plugins",
+   "goal": "The five satellite modules, cheapest-first, before committing to the big content packs.",
+   "work": "motion_tracker (3,546 chars, lang only, zero code changes — the cleanest surface in the project). token-action-hud-alien (14 chars in the module; it is already translated by Phase 1, plus the 3 missing constants.js keys). alien-mu-th-ur (9.2k lang + 2.0k runtime): translate command DESCRIPTIONS, never the tokens — main.js:1139 uppercases and matches literal HELP/HACK/STATUS/CLEAR/EXIT/CERBERUS/DOORS/LOCK DOOR X/SHUTDOWN LIGHTS/ACTIVATE ALARM/GAS TARGETS/CRYO POD/CRYO RELEASE; keep MOTHER.Keywords.Special = \"SPECIAL\" (specialWords has no English fallback) and add the Chinese alias in Special2; ship the !important font override. motion-tracker-multideck (~2.2k, no i18n plumbing at all) via Handlebars partial pre-registration of link-manager.hbs plus settings-menu mutation; leave the 9 GM notifications English for now. terminal: SCOPE TO THE PLAYER-FACING SLICE (~1.6k chars) plus the 3 settings; defer the 16.9k of GM config prose to a later round; do NOT translate the POSIX command grammar.",
+   "exit_criteria": "Each plugin renders Chinese in a live cn world. MU/TH/UR still parses HELP, HACK, CERBERUS, 'SPECIAL ORDER 937', a bare '937', and '/M <中文消息>' round-trips to the GM. Terminal's `help`/`ls`/`ssh` tables still align (either the cells stayed ASCII or the East-Asian-width padder landed) and the gsap scrambleText effect does not turn Chinese into Latin. No plugin lang file leaks when its target module is disabled (verified by toggling each off and re-checking game.i18n.translations).",
+   "est_chars": 22000
+  },
+  {
+   "phase": "4 — Alien Evolved Starter Set (user priority #2)",
+   "goal": "The complete free content pack, translated so that its shared text becomes the source the core book reuses — not the other way round.",
+   "work": "340,968 chars, 18 units, 2 waves. DELIBERATE INVERSION of the survey's recommendation: it says run Starter Set AFTER core rules because 43% of Starter Set Rules is byte-identical to core chapters 2/3/4. The user's priority order forbids that, and the direction is arbitrary — what matters is that identical English gets identical Chinese, which fill_twin.py delivers in either direction. So translate SS-J-RULES-1..4 first and propagate INTO corerules in Phase 5. Same inversion for SS-T-CORERES (6 of 7 tables byte-identical to core), SS-T-CREATURE (4 of 4), SS-A-CRE (4 of 5 names shared) and SS-I-GEAR (14 of 19 shared). SS-J-HLD-1/2/3 is the read-aloud unit — 10 evblockquoteCenter boxes and the corpus's only literal 'read the following'; highest prose bar in the project, one owner. SS-J-MAPPINS (21,873 chars) is 100% byte-identical to location sections inside Hope's Last Day — pure paste, same owner, never handed to an independent translator. SS-UI carries the only translatable scene notes (37 map-pin labels).",
+   "exit_criteria": "Full §5.4 scan suite green or archived-exempt on the starterset pack; three-way merge_batches run on every wave (never sequential apply); a byte-identity assertion binding the 37 scene note labels ↔ the 17 Map Pins page names ↔ the Hope's Last Day h3 headings; collect_realign UNTOUCHED == 0 per unit; adversarial review CONFIRMED to have actually run (it is always what the quota kills). SMOKE: import the Starter Set adventure, walk both Hadley's Hope scenes and confirm every pin label matches its page, confirm read-aloud boxes keep their class, confirm the welcome journal still opens.",
+   "est_chars": 320000
+  },
+  {
+   "phase": "5 — Alien Evolved Core Rules (user priority #3, last)",
+   "goal": "The 2.29M-char core book, in 6 dependency-ordered waves.",
+   "work": "5a ANCHORS (~118k): CR-J-03a skills/talents vocabulary, CR-J-02a character mechanics, CR-J-10a Xenomorph abilities (the 8 boilerplate paragraphs that then repeat 16× each across 25 creature actors), CR-J-08a/08b faction and corporation names (which propagate into 68 planet-system items and every gear brand). Nothing else starts until these land. 5b PROPAGATE + TABLES: fill_twin/propagate_fix the Phase-2 and Phase-4 reuse into core (≈25.7k of tables, 4 creature actors, 19 items, 11 folder names, 17.8k of shared rules prose), then CR-T-CORERES / CR-T-CREATURE. 5c ch.4 stealth & combat + ch.5 gear + ch.6 ships, co-owned with CR-I-WEAPON / CR-I-ITEM / CR-I-SHIPMOD / CR-A-SHIP. 5d ch.9 gazetteer + ch.10 species + the 25 creature actors + CR-I-PLANET + the 21 Systems Journals pages. 5e ch.11 campaign play (the single largest document at 358k raw but only 116k visible), ch.12 life path, ch.13 last survivor, ch.14 upgrades — then the two crib sheets as dependent paste units (26% and 56% verbatim). 5f CR-UI + leftovers. Budget by VISIBLE chars, not raw: CR-J-14b is 59,662 raw / 8,438 visible and CR-J-11g is 39,601 / 5,277. Skip the 8 zero-text RollTables (118 results, names only).",
+   "exit_criteria": "Per wave: 10-12 units, 270-310k EN chars, translator+adversarial-reviewer pairs plus a cross-unit term checker, three-way merge, --dry to 0 rejections before landing, and BLOCK/TRUNCATED visibly DOWN after every --force fill batch (if they did not move, the write did not happen). Per phase: validate_translations 100% minus exemptions on all 3 packs; scan_same_en_split forks all resolved or in EXCLUSIONS.same_en_split.json; scan_foreign_script = 0; scan_table_ref_sync green across all four writing sites; assert_resolutions + --selftest green. SMOKE: import the core rules adventure, confirm actor-embedded items render Chinese (the test of the expose:true inheritance that covers 155/180 embedded items), confirm all 41 @UUID links still resolve, confirm #anchor links into translated headings still jump.",
+   "est_chars": 1950000
+  },
+  {
+   "phase": "6 — Release, upstream, and the maintenance SOP",
+   "goal": "Ship, hand the system fix back upstream, and leave a runbook that survives a summarised context.",
+   "work": "Release alienrpg-cn and alien-evolved-starterset-cn per the EC process: version + download + changelog all three edited in module.json, tag shape matching what release.yml literally verifies, `rm -f module.zip` before `zip -r` (appending to a stale zip once shipped 22MB of corrupted content to users), per-repo -x exclusion list copied FROM THAT REPO'S OWN release.yml (compendium/en/*, lang/en.json, lang_keep_english.json, .github/*, *.zip — but NOT scripts/, which ships here because the runtime patchers are esmodules). Post-release: download the artifact, `unzip -Z1` (never `unzip -l`) and assert the exclusions held. Append a chronology row AT RELEASE TIME. Open a PR to pwatson100/alienrpg with the subset of lang/cn.json that maps 1:1 onto en.json's 590 keys — he has accepted translations from four outside contributors and issue #282 says 'just open a PR'. Also file the `systems/alienrpglates/...` ActiveEffect sheet-path typo and the NBSP mismatch in welcomeJournalEntry as upstream bugs. Rewrite PROJECT.md §1/§6/§7 from actual measurement (git status + git log -1), never transcription. Corerules-cn release decision deferred to the licensing answer.",
+   "exit_criteria": "Both public modules install from their manifest URL into a clean Foundry and render Chinese end-to-end; published zips verified member-by-member; chronology rows appended in the same commit as the tags; the upstream PR is open with a link recorded in §6; PROJECT.md §7 smoke-test checklist reflects what was actually run this round, and the §1 blind-spot table names at least three error classes that still have no criterion.",
+   "est_chars": 5000
+  }
+ ],
+ "open_questions": [
+  {
+   "question": "Is the Alien stack deployed to the same VPS as the Crucible/Ember work, or is it local?",
+   "why_it_matters": "Your memory carries a standing rule — 汉化装在 VPS；本地安装状态不能当诊断证据，已栽两次 — but the Alien evidence points the other way: this machine has alienrpg 4.1.13, all six companion modules, Babele 2.9.1 and foundry_chn installed, and the three packs are already dumped from local LevelDB. Every phase exit above depends on a real smoke test, and smoke testing is the single item the Ember/Crucible project never once closed across every release. If play happens on the VPS and I test locally, I will be repeating exactly the mistake the rule exists to prevent — and three of the top risks here (the name-lookup import traps, the crit-injury parse, the enum/derived-field class) are ONLY visible with Foundry actually loaded.",
+   "options": "(a) Local is the deployment — test here, no VPS involvement. (b) VPS is the deployment, local is a scratch rig — then PROJECT.md §2 must state the VPS's installed versions as the authority and every 'verified in a world' claim must name which world. (c) Both — VPS for play, local as the designated smoke rig, with a documented version-parity check before each release.",
+   "recommendation": "(c). Keep the local install as the smoke rig because it already has all seven packages, but write the VPS's package versions into PROJECT.md §2 as the release authority and add a one-line parity assertion to the pre-release block. Say which it is before Phase 0 finishes — this choice determines what 'verified' means for the rest of the project."
+  },
+  {
+   "question": "One module or one per package?",
+   "why_it_matters": "It is the licence boundary, not just a packaging preference. alien-evolved-corerules is `\"protected\": true` — paid content served from Free League's S3 manifest — while alien-evolved-starterset is `\"protected\": false` and the system is open source. A single module would force everyone to download 2.29M chars of translated premium text and would make it impossible to withhold that one piece if the licensing answer comes back badly.",
+   "options": "(a) One module for everything. (b) Three: alienrpg-cn hub + starterset-cn + corerules-cn. (c) Five: split the six companion plugins out of the hub into their own module too.",
+   "recommendation": "(b), with the plugins folded into the hub. The plugin surfaces are tiny (3.5k + 9.2k + 2.2k + ~1.6k + 14 chars) and Foundry's per-entry `\"module\"` gate in #filterLanguagePaths means they cost literally nothing when the target module is absent — I verified that gate in foundry.mjs:204953. Splitting them would triple the release overhead for ~16k chars. The one argument for (c) is that `terminal` is a generic sci-fi module used outside Alien, so a Chinese terminal translation has standalone value; if you want that, split only `terminal`."
+  },
+  {
+   "question": "Bilingual 「中文 (English)」 names like the PF2E project, or Chinese-only?",
+   "why_it_matters": "Alien cannot take one uniform answer, because three separate code paths compare names with `===`. A blanket bilingual rule would break the 12 skill-stunts lookups; a blanket Chinese-only rule would break the same 12 plus the 9 first-run import lookups; and the physical Free League book is English-only, so players cross-referencing page numbers need the English somewhere.",
+   "options": "(a) Bilingual everywhere. (b) Chinese-only everywhere. (c) Three tiers: FROZEN ENGLISH for the 9 import-lookup names + 11 hard-coded RollTable names + 2 folder names + 'PACK MULE'/'TAKE CONTROL'/'None'; EXACT-MATCH CHINESE for the 12 skill-stunts item names (must equal lang/cn.json's ALIENRPG.Skill<key> byte-for-byte, no English tail); BILINGUAL 「中文 English」 on name and page-name fields for proper nouns, gear, talents, planets and tables; bare Chinese in prose and inside {labels}.",
+   "recommendation": "(c). It is the only option that satisfies all three code paths, and it matches the Ember/Crucible convention you already have tooling for (build_glossary keys on (English, FIELD ROLE) precisely because 'does this name carry the English tail' is a per-field decision). One sub-choice for you: the separator — the Crucible project uses a space, the PF2E work uses parentheses. I recommend a plain space so residue.py's Latin-word scan stays simple."
+  },
+  {
+   "question": "异形 or 异型?",
+   "why_it_matters": "It is the single most repeated noun in the corpus and it seeds the glossary base layer.",
+   "options": "异形 / 异型.",
+   "recommendation": "异形, and this one is effectively settled rather than open. The four-film subtitle corpus (4,601 aligned bilingual pairs) has 56 occurrences of 异形 and ZERO of 异型; zh.wikipedia's article title, the 异形系列 page and the 2024 mainland theatrical release 《异形：夺命舰》 all use 异形; and the system's own cn.json already uses it (ALIENRPG.DialTextXeno, ALIENRPG.MenuLabel). Also encode the ZH split the subtitles make and English does not: 异形 = the creature, 外星 = the adjective (外星船 'alien ship'), so the pipeline never renders 'alien ship' as 异形船."
+  },
+  {
+   "question": "Contribute lang/cn.json upstream to pwatson100/alienrpg, or override it in our module?",
+   "why_it_matters": "The upstream file is not merely incomplete, it is actively wrong in ~107 keys with 40 documented hard errors, and it is byte-identical between your install and master, so nothing newer exists to pull. Whichever way you go, other Chinese-speaking Alien GMs get the current broken file by default.",
+   "options": "(a) Override only — fastest, no permission needed, and it is the only route for the 35 keys that don't exist in en.json and the `alienrpgct` namespace. (b) Upstream only — one file for everyone, but we wait on a maintainer and lose the extra keys. (c) Both.",
+   "recommendation": "(c). Ship the override first (Phase 1) so you are never blocked, then upstream the subset that maps 1:1 onto en.json's 590 keys once it has survived a release. Upstream is receptive — Paul Watson has merged translations from at least four outside contributors and issue #282's answer to 'how do I start translating' was 'just open a PR'. If he merges, our override becomes a harmless no-op for those keys and still wins the merge, so there is no conflict state to manage. Bundle the two upstream BUGS with it: the `systems/alienrpglates/...` sheet-path typo that breaks the ActiveEffect config, and the NBSP mismatch that makes `game.journal.getName(welcomeJournalEntry)` return undefined."
+  },
+  {
+   "question": "Is shipping a Chinese translation of alien-evolved-corerules (`\"protected\": true`) a redistribution problem?",
+   "why_it_matters": "This is the highest-severity decision in the project and it governs 2,286,505 of the 2,703,509 chars — 85% of the work. The module is flagged protected, meaning paid content behind Free League's own manifest; the translation is a derivative work of the full text of a book that is itself a 20th Century Studios sublicence; and Free League has licensed exactly seven Alien RPG languages (French, German, Spanish, Italian, Russian, Polish, Portuguese) with named partners — Chinese is not among them, and Alien is not in Free League's third-party/OGL programme at all.",
+   "options": "(a) Build it and keep the repo private; distribute only to people who already own the pack, via a manifest they configure themselves. (b) Publish it publicly and accept the risk. (c) Don't build it — stop after Phase 4. (d) Ask Free League (and/or Paul Watson, who maintains the module) for permission before Phase 5 starts.",
+   "recommendation": "(a) + (d), started NOW rather than at Phase 5. Send the enquiry during Phase 0 — it costs nothing, the answer takes weeks, and it arrives before you have spent ~1.95M chars of translation effort on something you may not be able to ship. Meanwhile: build corerules-cn in a private repo from day one, never publish its manifest, and make sure `compendium/en/*` is in the zip exclusion list for every repo (it is the upstream English text verbatim — shipping it converts a translation overlay into an unambiguous redistribution of the book). Note the exposure is not binary: the starterset is `protected: false` but still Free League IP, and even the system's lang/cn.json contains the Panic Table entries verbatim — though upstreaming those is the safest possible home for them, since upstream already ships that text in English and Chinese."
+  },
+  {
+   "question": "How far do we go on the critical-injury tables, given the hard-coded parse at actor.mjs:1888-1941?",
+   "why_it_matters": "The crit tables are among the most-read content in Alien, and the system parses their result TEXT by splitting it and string-comparing columns against localize('ALIENRPG.Yes'/'None'/'OneRound'/'OneTurn'/'OneShift'/'OneDay'/'Permanent') plus a bare literal 'Shift' that has no i18n key at all. The current cn.json already half-translated that set, so healTime silently resolves to 0 on Chinese play today. Two of the source cases use EN DASH U+2013, not ASCII hyphen — a transcription error there produces cases that can never match.",
+   "options": "(a) Leave the crit tables in English. (b) Translate the prose but keep the machine-parsed columns byte-identical English (rows read Chinese with English 'Permanent'/'One Shift' fragments). (c) Translate tables and the 8 lang keys in exact lockstep, pinned by an assertion, and add a runtime patch for the un-keyed 'Shift' literal.",
+   "recommendation": "(c), with scan_crit_lockstep.py as a standing gate and the healTime check on the Phase-1 smoke list. (b) is the safe fallback if the smoke test fails. Do not choose (a) — the Panic and Critical Injury tables are the tables players actually read at the table."
+  },
+  {
+   "question": "Wiki-formal or player-colloquial register for the franchise nouns?",
+   "why_it_matters": "The two registers disagree on the most visible nouns and you cannot satisfy both. zh.wikipedia says 抱脸体 / 破胸体 / 韦兰-尤坦尼集团 / 诺史莫号; the mainland fan corpus (百度百科, 萌娘百科, bilibili, 机核, douban) says 抱脸虫 / 破胸者 / 维兰德-汤谷公司 / 诺斯托罗莫号. The only Weyland-Yutani rendering attested anywhere in your subtitle corpus is 伟伦优达尼 — a Taiwan-flavoured phonetic that neither camp uses, and it appears exactly twice.",
+   "options": "(a) Wiki-formal throughout (defensible, citable, matches the term-priority ladder's wiki-first rule). (b) Player-colloquial throughout (matches what a Chinese Alien player will actually say at the table). (c) Wiki-formal for the glossary spine, colloquial as a documented alias in glossary_alien.disputes.json.",
+   "recommendation": "(a) as the spine with (c)'s alias file, because your own term-priority ladder puts wiki above everything — but with one deliberate exception: 抱脸虫 over 抱脸体 for Facehugger, since it is overwhelmingly dominant in mainland usage and 虫 reads correctly for a creature while 体 reads like a specimen label. Note that all four films come from ONE fansub lineage (CnSCG), so cross-film 'agreement' in the subtitle corpus is an artifact, not four independent votes — weight it as a single source. Also flag: 伟伦优达尼 should be treated as weak evidence and NOT adopted."
+  }
+ ],
+ "risks": [
+  "LICENSING / REDISTRIBUTION — the top risk, governing 85% of the work. alien-evolved-corerules declares \"protected\": true and ships from Free League's own S3 manifest (url frialigan.se), i.e. it is paid content. A Chinese translation of its 2,286,505 chars is a derivative of the full text of a book that is itself a 20th Century Studios sublicence. Free League has licensed exactly seven Alien RPG languages, none of them Chinese, and Alien is excluded from their third-party/OGL programme. Mitigations that must be in place from Phase 0, not Phase 5: corerules-cn lives in a private repo; compendium/en/* is in every repo's zip exclusion list (shipping it turns an overlay into verbatim redistribution of the English book); the licensing enquiry goes out at the START, not after the effort is spent. The starterset (protected:false) is lower exposure but not zero.",
+  "NINE ENGLISH-NAME LOOKUP TRAPS BREAK FIRST-RUN IMPORT — a class the survey never captured, and worse than the RollTable traps it did. All three packages do unguarded === lookups: adventurePackName ('Alien RPG System' / 'Alien Evolved Core Rules' / 'Alien Evolved Starter Set'), welcomeJournalEntry ('MU/TH/ER Instructions.' / 'CORE RULES - HOW TO USE THIS MODULE' / 'STARTER SET - HOW TO USE THIS MODULE') and sceneToActivate ('Alien Evolved Core Rules' / 'Alien Evolved Starter Set'). They are read via pack.getName(...).sheet._updateObject (init.mjs:77, corerules init.js:82, starterset init.js:115) and game.journal.getName(...).show() / game.scenes.getName(...).activate() with no null check, and via pack.index.find(a => a.name === ...). Babele translates the index in place (babele-runtime-applier.js:33 translateIndex(pack.index)), so translating any of these nine produces an unguarded TypeError on first import, not a silent degradation. They must be frozen English AND gated by a script — a bilingual name will not work, the comparison is strict equality.",
+  "CRIT-INJURY LOCKSTEP PARSE. actor.mjs:1888-1941 splits crit-table result text and compares columns against 7 localized keys plus the bare literal 'Shift' that has no i18n key at all. The current cn.json already half-translated that set, so healTime resolves to 0 on Chinese play today. Two cases use EN DASH U+2013 (', –1 ', ', –2 '), not ASCII hyphen — the survey transcribed them as ASCII, and anyone building the lockstep from that transcription produces cases that can never match. Needs a runtime-verified smoke test, not a static check.",
+  "SCALE AND QUOTA. ~2.4M net-new chars over 8-10 parallel waves at 270-310k EN chars each. The wave scratchpad is session-scoped ($env:ALIEN_PARALLEL_ROOT) and runIds are session-local, so anything unlanded at a session boundary is lost. Adversarial review is always what the quota kills — translators run first and eat the window — so 'batches are complete' will keep reading as 'this wave is done' when it is not. Land and commit every batch before switching sessions, and confirm review actually ran from disk, never from the workflow return value (two EC runs reported agents_error 13 / agents_done 0 while actually advancing 219 then 422 of 493 pages).",
+  "NO OLD BASELINE EXISTS YET, AND UPSTREAM CAN MOVE SILENTLY. Until Phase 0's capture_baseline lands, every drift criterion degrades to a length heuristic. Both content modules ship a `-latest.json` manifest on an S3 bucket, so alien-evolved-corerules/starterset 1.0.2 can be replaced under us with no version pin to notice it. Snapshot all three packs FULLY on every catch-up round — the EC project snapshotted 3 of 10 packs and three drift gates ran on 30% of the corpus for months while printing clean reports.",
+  "THRESHOLD CONSTANTS DO NOT TRANSFER. EC's 0.31 CN/EN median, 0.22 TRUNCATED and 0.25 catch-up floor are corpus-specific, and this corpus is far more extreme: journal visible-text ratios run 42% (corerules) to 77% (system) of raw, with individual pages at 13-16% (CR-J-14b is 59,662 raw / 8,438 visible). A ratio wired from EC's numbers would flag most correct translations. measure_ratio.py must run on TAG-STRIPPED text and emit per-document-class bands before any threshold is wired — and remember EC's own lesson that one known blocking defect sat at 0.377, squarely inside the normal band, so ratio is a candidate filter and never a verdict.",
+  "BABELE GLOBAL-LAYER POLLUTION. registerMapping pushes a GLOBAL layer merged into every Babele-managed pack. The survey's proposed mapping guards only the `description` variants with `exists`; every other variant (notes on type 'character'/'creature', weaponClass on 'weapon', capacity, appearance, adhocItems…) fires unguarded on other systems' documents. 'character', 'creature' and 'weapon' are among the most common type keys in Foundry, so a dnd5e or pf2e export would gain alien-only keys. Translate-time is fail-open, but export pollution is real. Guard every variant. Same class: Adventure.items/tables expose:true is also global and changes behaviour for every third-party adventure pack in the world.",
+  "BABELE'S OWN importAdventure HOOK OVERWRITES TOKEN NAMES. babele.js:52-70 registers an importAdventure hook, and the world setting syncImportedAdventureTokenNames (settings.js:62-72, default TRUE) rewrites placed Scene token names from the imported Actor's prototypeToken.name AFTER creation — which would overwrite anything a Scene.tokens nameCollection mapping wrote. Moot today (0 tokens across all 15 scenes) but it is the direct context for the tokenName decision, and the survey never mentions it. This is one reason to drop the proposed alienTokenName converter rather than keep it.",
+  "LANG OVERRIDE CANNOT DELETE, ONLY OVERWRITE. mergeObject merges later-over-earlier but has no deletion semantics, so the 14 dead pre-v11 ACTOR.Type*/ITEM.Type* orphan keys and the JSON-null ALIENRPG.EVCriticalInjuries persist from the system's file unless we write a value over them. For EVCriticalInjuries specifically the correct action is to write NOTHING: localize() falls through to the English fallback dictionary and returns 'EV - Critical Injuries', which is exactly what game.tables.getName needs — adding a Chinese value there would BREAK the lookup.",
+  "UPSTREAM BUGS THAT WILL LOOK LIKE OURS. active-effect-config.mjs:21/24 point at `systems/alienrpglates/sheets/active-effect/...` — a system id that does not exist and a path that does not exist, so the ActiveEffect config sheet is already broken and its three templates (and the 6 DRAW_STEEL.* leftovers inside them) are unreachable dead surface. Do not spend effort translating them and do not add a DRAW_STEEL block. Likewise the NBSP mismatch between init.js's welcomeJournalEntry and the pack's journal name means getName already returns undefined. File both upstream so a future round does not mistake them for translation damage.",
+  "CJK RENDERING DEFECTS IN THE PLUGINS, TWO OF THEM REAL BUGS. terminal.js:1146-1165 pads monospace table columns with padEnd on String.length — double-width CJK ragged the '|' borders of help/ls/ssh output; terminal.js:877's gsap scrambleText chars pool is Latin-only, so Chinese scrambles into lowercase ASCII and changes width mid-animation on 20 of 28 shipped styles; terminal.js:1216 has a keydown Enter handler with no isComposing guard (IME-unsafe). MU-TH-UR sets 46 inline `font-family: monospace` via style.cssText, so only an injected stylesheet with !important can override. None of these is fixable from a lang file.",
+  "THE 12 SKILL-STUNTS ITEM NAMES ARE A LOOKUP KEY BOUND TO lang/cn.json. character-skills.hbs:15 emits data-pmbut='{{skill.description}}', system.skills.<skl>.description is overwritten every prepareDerivedData from game.i18n.localize('ALIENRPG.Skill<key>'), and character-sheet.mjs:1119 does game.items.getName(dataset.pmbut). So the pack items and the lang file are coupled across two modules and two phases: changing a skill translation in Phase 1 silently breaks 12 stunts popovers translated in Phase 2. Needs a standing assertion, not a comment.",
+  "TERM CORPUS IS ONE VOTE, NOT FOUR. All four film subtitle files are CnSCG (圣城家园) releases from a single translation lineage, so cross-film 'consistency' is an artifact of shared provenance. Several renderings are Taiwan-flavoured (士官长, 太空梭, 电波枪, 复仇161星, 伟伦优达尼) and several are outright wrong (APC→焚化炉, dropship erased, stasis→静态平衡, Ellen→海伦). The corpus also has ZERO attestation for Facehugger, Chestburster, Ovomorph, Drone, Warrior, USCSS, Acheron, Hadley's Hope, MU/TH/UR-as-spelled, or the number in Special Order 937 — precisely the RPG vocabulary. Treat it as one weak source under the wiki, never as consensus.",
+  "SMOKE TESTING IS THE FAILURE MODE MOST LIKELY TO REPEAT. The Ember/Crucible project shipped every single version without it and says so in its own document. Here at least five defect classes are invisible to every static check: the nine import-name traps, the crit healTime parse, enum-shaped fields translated as prose (which breaks runtime and throws console errors while every JSON comparison stays green), the expose:true embedded-item inheritance, and whether Foundry's TOC builder honours explicit heading ids so #anchor links still jump. Each phase's exit criteria above names a live-world check for exactly this reason — if a phase ships without it, the phase is not done."
+ ],
+ "corrections_applied": [
+  "MAPPING BUG: the Item variant `_when {path:'type', equals:'crit-inj'}` is dead — `crit-inj` is a filename, the registered type is `critical-injury` (alienrpg.mjs:144, system.json documentTypes.Item, item-sheet.mjs:124). Corrected in mappings.mjs; the forward-compat mapping it claimed to provide did not exist.",
+  "DROPPED the proposed `alienTokenName` converter entirely. Babele's built-in `name` converter (Converters.mappedField('name')) has no .extract, so it emits no key; alienTokenName.extract would inject 74 redundant tokenName keys (~1.8k chars) into every actor entry for zero translate-time benefit, since prototypeToken.name === name for 74/74 actors. It also collides with Babele's importAdventure/syncImportedAdventureTokenNames hook, which rewrites token names post-import anyway.",
+  "GUARD POLICY EXTENDED: `exists` guards go on EVERY variant field, not only the ones redefining `description`. registerMapping pushes a global layer (document-mappings.js:267-287) and 'character'/'creature'/'weapon' are common type keys across systems, so the unguarded notes/weaponClass/capacity/appearance/adhocItems/signatureItem/relationship variants would leak alien-only keys into other systems' exports.",
+  "system.modifiers.*.label/.ability stay DO-NOT-TRANSLATE, but on one leg not two: no registered Item type inherits base-item's prepareDerivedData (all 13 override it) and `feature` is not a registered type at all, so the 'derived' justification is false. The surviving reason is that templates/item/item-modifiers.hbs never renders them (it emits {{localize 'ALIENRPG.*'}} instead).",
+  "system.header.type.value is NOT a '0'/'1' enum. Measured across the three packs it holds '1'–'9' on item/weapon/spacecraftweapons; the cited '0'/'1' switch in actor-spacecraft.mjs is guarded by `type === 'spacecraft-crit'` and there are zero such items. Real readers are item-modifiers.hbs:2/:50 and item-sheet.mjs:236/239/242. Verdict unchanged, reasoning replaced.",
+  "system.general.sigItem.value / relOne.value / relTwo.value are NOT all 'None' — sigItem holds real content ('Toy dinosaur', 'Company ID badge', 'Cross necklace') and relOne/relTwo hold CHARACTER NAMES ('MacWhirr', 'Hirsch', 'Sigg', 'Singleton'). Added a cross-reference hazard the survey never raised: those two fields must stay in sync with the translated Actor names or the pregen relationship lines point at people who no longer exist. Only system.general.agenda.value is genuinely all-'None'.",
+  "JOURNAL LINK SYNTAX CORRECTED: the packs use `@UUID[Item.<id>]{label}` (v10+ form), not `@Item[...]` / `@JournalEntry[...]`. Every QA regex, translator guard and BRIEF.md markup table targets @UUID; a rule written against the survey's stated shape would match zero occurrences and pass a file where every link was destroyed.",
+  "ADDED 36 RollTable draw-enrichers to the table-name sync surface: 33 `@TEXTDRAW[RollTable.<id>]{label}` + 3 `@DRAW[RollTable.<id>]{label}`, all in corerules journal prose, 32 distinct labels of which 25 match a pack RollTable name byte-for-byte and 7 differ only by NBSP. The survey devoted a whole risk entry to keeping table names in sync and then missed the second place they are written down. This is why scan_table_ref_sync.py checks four writing sites, not two.",
+  "42 embedded items DO share an _id with an adventure-level item in the same pack (38 corerules, 4 starterset), contradicting 'no _id collisions exist'. They happen to be same-name so the safety conclusion holds, but Babele's default Item match order is _id-FIRST (document-identity.js:3-6), so for those 42 the lookup is not name-keyed at all.",
+  "Of the 25 embedded items not covered by expose:true, five (Pilot, Roughneck, Officer, Colonial Marine, Scientist — all type `specialty`) exist only in the SYSTEM pack, not the core pack, and two (Weyland-Yutani Key Card, Kitchen Knife) exist in no pack. That changes the remediation: five are inheritable by pointing the starterset file's Item block at the system pack.",
+  "Scene notes carrying entryId+pageId: 25 of 37, not 33. The other 12 map pins are free-standing labels with no journal backing, so the 'translate both consistently' rule applies to fewer pins and the remaining 12 are standalone strings.",
+  "Folder inventory: 31 distinct names, not 26. The shared-_id set (an import-order hazard the survey itself flagged) omitted three — 'Alien Macros', 'Alien RPG Mother Aids', 'The Art of Alien' — and 'Alien Evolved' occurs 5×, not 3×.",
+  "ALIENRPG.EVCriticalInjuries is present-as-JSON-null, not missing, and the stated failure mechanism is inverted. Localization#localize falls through to the English _fallback dictionary before returning the raw key, so it returns 'EV - Critical Injuries' and game.tables.getName already succeeds. The practical conclusion (leave that table English) is unchanged, but the corollary is the opposite of what the survey implies: adding a Chinese value for that key would BREAK the lookup. Written into lang_keep_english.json as a do-not-fill entry.",
+  "REMOVED the DRAW_STEEL work item. The three templates/active-effect/*.hbs files are unreachable — active-effect-config.mjs:21/24 point at `systems/alienrpglates/sheets/active-effect/...`, a system id that does not exist and a path that does not exist (a botched find-and-replace). Nothing renders as a raw key there and a DRAW_STEEL block in cn.json is wasted work. Reclassified as an upstream bug to file. The 6 EFFECT.* keys likewise never render from this system.",
+  "ADDED the `alienrpgct` namespace: `alienrpgct.Passive` and `alienrpgct.Inactive` (helpers/effects.mjs:15/20) render as literal dotted keys as the Passive/Inactive headers on the Item sheet's effects tab. The namespace exists in NO lang file of any package. The survey listed the ALIENRPG.Effect.Temporary sibling one line above and missed these two because its key regex only matched the ALIENRPG/TYPES/ACTOR/ITEM prefixes.",
+  "SCOPE WIDENED: module/ contains 12 .js files (5,428 lines) besides the 62 .mjs, and two are live in the import graph with user-visible English — devmsg.js:24 sets a ChatMessage `alias: \"Alien RPG News\"` (a permanently visible English byline on the GM's ready-time whisper) and apps/update.js:146-153 builds a Dialog with an English title/content/'Okay!' label. Both added to the runtime-patch table.",
+  "CRIT-PARSE BYTES CORRECTED: actor.mjs:1906/1912 use EN DASH U+2013 in `\", –1 \"` / `\", –2 \"`, not ASCII hyphen-minus. The ALIENRPG.None case is at actor.mjs:1924 (switch spans 1922-1941), not :1955. In the survey's own 'MOST IMPORTANT' finding the literal bytes are the entire deliverable.",
+  "Markup-bearing lang values: 26, not 34. The zero-tag-loss conclusion reproduces and stands.",
+  "Referenced-key census restated as approximate rather than verified: an independent scan of the live import graph plus all 101 templates gives 487 distinct keys, 94 byte-identical-to-en, 162 rendering English, 35 referenced-but-absent-from-en — against the survey's 494 / 98 / 166 / 34. Only the 68-missing figure reproduces exactly. Direction and magnitude (~33%) are right; the specific numbers are not quotable.",
+  "ADDED templates/actor/creature-header.hbs:26/42/48/54 — four hardcoded English `data-label` values (Speed, Mobility, Observation, Acid Splash) that flow verbatim into dialog titles and chat flavour via the concatenation sites the survey itself catalogued, producing '检定 Speed 检定'. This contradicts the survey's 'Zero data-tooltip/aria-label/placeholder offenders' claim, and creature-header.hbs appears nowhere in its template enumeration. Two sibling data-labels in the same file ARE wrapped in {{localize}}, proving these are omissions.",
+  "ADDED Dice So Nice registration strings (alienrpg.mjs:385/396/407/435: colorset descriptions 'Yellow'/'AlienBlack', dice-system names 'Alien RPG - Blank'/'Alien RPG - Full Dice') and the `\"{MISSING_CREW}\"` placeholder rendered as a crew name on spacecraft/vehicle sheets (spacecraft-sheet.mjs:367, vehicle-sheet.mjs:363). A whole surface category — third-party module registration payloads — that the audit never scanned.",
+  "NEW, VERIFIED THIS ROUND — NINE ENGLISH-NAME LOOKUP TRAPS, not the survey's system-only list. All three packages match Adventure names, welcome-journal names and scene names with === and dereference the result unguarded: system (init.mjs:9/14/77/94, alienrpg.mjs:571/583), corerules (init.js:9/11/12/82/86/87/95/108, ImportSelectedAssets.js:19, update.js:46), starterset (init.js:9/11/12, :115/119/121/132/145). And Babele DOES translate the compendium index in place (babele-runtime-applier.js:33 `translateIndex(pack.index)`), so translating any of the nine yields a TypeError on first import. Promoted to the project's #2 risk and given its own gate.",
+  "NEW, VERIFIED THIS ROUND — the lang-override mechanism, stated precisely instead of assumed. foundry.mjs:204905-204942: files are pushed in the order core → system → every active module → world and merged with mergeObject in push order, so LATER WINS and a module's lang/cn.json overwrites the system's key-for-key; #filterLanguagePaths (204953) honours per-entry `system` and `module` gates; #loadTranslationFile runs expandObject on every file, so flat-dotted and nested lang JSON both resolve in v14 (keep flatten_lang.py as a gate anyway for hybrid shapes and older cores). Also CORE_SUPPORTED_LANGUAGES = ['en'] only (foundry.mjs:3513) — the core `cn` UI comes entirely from foundry_chn, so our module must not assume it exists.",
+  "NEW, VERIFIED THIS ROUND — Babele 2.9.1 declares languages ar/en/it/es/de/fr/pl/zh-tw/ja and no `cn`, so Babele's own settings UI renders English in a Chinese world. Added an optional BABELE.* companion lang entry gated `\"module\":\"babele\"`.",
+  "Item system.notes reclassified from 'dead corrupted data' to 'live field, currently corrupt'. It is an HTMLField declared on all 13 item types via base-item.mjs:11, with a prose-mirror editor (item-notes.hbs:7) and enrichment (item-sheet.mjs:401) — the 267 '[object Object]' values are an unrepaired migration, not a dead path. Mapped for forward compat with a permanent exemption, which is consistent with mapping four other always-empty fields.",
+  "`_enrichTextFields` does not exist anywhere in the system, and system.notes is enriched in only 6 sheets — territory-sheet.mjs and vehicle-sheet.mjs never enrich it. `territory` removed from the notes variant's type list and re-added as forward-compat-only with the reason recorded.",
+  "ADDED to the forward-compat map: the six colony free-text fields the proposal stopped short of (cycles, potentialname, productivityname, maintenancename, sciencename, spiritname — actor-colony.mjs:24/31-35) and Item system.attributes.notes.value (item-item.mjs:64-66). A partial forward-compat block is worse than none because it looks complete.",
+  "LINE CITATIONS: every file:line in the survey is re-derived before it is quoted anywhere in PROJECT.md or a BRIEF. Confirmed drift includes character-sheet.mjs 1119/1125/1162/1173 (not 1117/1121/1124/1164), rollTableData.mjs:27 and :29 (not :26), actor-vehicle.mjs:126 (not :130), actor-creature.mjs:84-89 (not :81-86). The substance held in every case, but a reader spot-checking a wrong line loses confidence in the whole document.",
+  "PHASE ORDER DELIBERATELY INVERTED against the survey's recommendation. It says run the Starter Set AFTER core rules because 43% of Starter Set Rules is byte-identical to core chapters 2/3/4; the user's stated priority puts starterset second and corerules last. The direction of reuse is arbitrary — fill_twin.py fills byte-identical English in either direction — so the Starter Set is translated first and propagated INTO the core book in Phase 5b. Same inversion for the 6 shared crit/panic tables, the 4 shared creature-attack tables, the 4 shared creature actors and the 19 shared items. Recorded as a deliberate deviation with its reason, not silently."
+ ]
+}

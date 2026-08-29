@@ -1,0 +1,594 @@
+{
+ "unit": "SYS-J6",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\pages\\SYS-J6.cn.html",
+ "chars_cn": 7979,
+ "chars_en": 13855,
+ "summary": "SYS-J6（推荐附加模块 + 更新历史，byte_range 52373–66228）已译完并落盘为单行 UTF-8、无换行、无 BOM，与英文源同构。原文 13855 字节 / 可见 10495 字符，译文 7979 字节 / 可见 4025 字符（2673 个汉字）。\n\n按单元备注执行：**第三方模块名一律保留英文**（Dice So Nice / Quick Insert - Search Widget / Alien RPG - Motion Tracker / Year Zero Engine: Combat / Token-Action-HUD-Alien / Token-Action-HUD-Core / Alien RPG CRT UI / Item piles），只翻描述。两个系统宏名 \"Alien - Roll on selected Mother table V10\" 与 \"Alien - Roll on selected Creature table V10\" 逐字节保留（DO-NOT-TRANSLATE.macro_commands 挂名）。\n\nUI 标签一律回查 1-系统汉化插件/lang/cn.json 取值逐字节使用，其中几条是本页的要害：Resolve→精神强度（不是「决心」）、\"Human Panic, Push...\" 复选框→模拟人类的恐慌、追骰等、\"Automatically Roll Panic\"→自动进行恐慌检定、\"Use Alien Evolved Rules and Sheets\"→使用异形进化版规则与卡片、Rounds→备弹 而 Ammo→弹药（4.0.2 那条正是在讲这两者互换）、Minor/Major Component Damage→轻微/重大部件损伤、Close Combat→近战 而 Ranged Combat→远程战斗、Comtech→通信科技（RULINGS R3）。\n\n标题锚点按 PROJECT.md §1.2 ④ 处理：**22 个标题全部补显式 id**，取值是用 foundry.mjs:685 的 slugify + :44691 的 slugifyHeading（含 CHAR_MAP 的 &→and、以及 substring(0,64) 截断）在本机 Foundry 13 源码上复算出来的英文 slug，不是猜的。注意 `version-4.0.3-added-the-consumables-to-the-evolved-character-she` 的截断是算法本身产生的，不是笔误；另外该 slugify **保留点号**（3.2.5 → `version-3.2.5`，不是 `version-3-2-5`），这一点与「非字母数字全变连字符」的直觉相反，写别的单元时别照直觉来。",
+ "label_lookups": [
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Panic",
+   "lang_key": "ALIENRPG.Panic",
+   "used": "恐慌"
+  },
+  {
+   "english": "Stress Responses",
+   "lang_key": "ALIENRPG.StressResponses",
+   "used": "压力反应"
+  },
+  {
+   "english": "Panic Responses",
+   "lang_key": "ALIENRPG.PanicResponses",
+   "used": "恐慌反应"
+  },
+  {
+   "english": "Resolve (button you click to roll Stress Responses)",
+   "lang_key": "ALIENRPG.Resolve",
+   "used": "精神强度"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Conditions",
+   "lang_key": "ALIENRPG.Conditions",
+   "used": "状态"
+  },
+  {
+   "english": "Use Alien Evolved Rules and Sheets (toggle)",
+   "lang_key": "ALIENRPG.Evolved",
+   "used": "使用异形进化版规则与卡片"
+  },
+  {
+   "english": "Alien \"Classic\" / Alien \"Evolved\"",
+   "lang_key": "ALIENRPG.EvolvedHint",
+   "used": "异形“经典版” / 异形“进化版”"
+  },
+  {
+   "english": "Automatically Roll Panic (checkbox)",
+   "lang_key": "ALIENRPG.AutoPanic",
+   "used": "自动进行恐慌检定"
+  },
+  {
+   "english": "\"Human Panic, Push...\" checkbox",
+   "lang_key": "ALIENRPG.SynthStress",
+   "used": "模拟人类的恐慌、追骰等"
+  },
+  {
+   "english": "Alien PRG [sic] configuration",
+   "lang_key": "ALIENRPG.MenuLabel",
+   "used": "Alien RPG 设置"
+  },
+  {
+   "english": "Supply rolls",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Ammo",
+   "lang_key": "ALIENRPG.ammo",
+   "used": "弹药"
+  },
+  {
+   "english": "Rounds",
+   "lang_key": "ALIENRPG.Rounds",
+   "used": "备弹"
+  },
+  {
+   "english": "Full Auto",
+   "lang_key": "ALIENRPG.FullAuto",
+   "used": "全自动"
+  },
+  {
+   "english": "range",
+   "lang_key": "ALIENRPG.Range",
+   "used": "射程"
+  },
+  {
+   "english": "Engaged",
+   "lang_key": "ALIENRPG.Engaged",
+   "used": "接战"
+  },
+  {
+   "english": "Close Combat",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Ranged Combat",
+   "lang_key": "ALIENRPG.SkillrangedCbt",
+   "used": "远程战斗"
+  },
+  {
+   "english": "piloting",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "comtech",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "Medical Aid",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "Agility",
+   "lang_key": "ALIENRPG.AbilityAgl",
+   "used": "敏捷"
+  },
+  {
+   "english": "All Skills",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "所有技能"
+  },
+  {
+   "english": "Stunt",
+   "lang_key": "ALIENRPG.Stunts",
+   "used": "炫技"
+  },
+  {
+   "english": "Talents",
+   "lang_key": "ALIENRPG.Talents",
+   "used": "天赋"
+  },
+  {
+   "english": "Agendas",
+   "lang_key": "TYPES.Item.agenda",
+   "used": "任务"
+  },
+  {
+   "english": "Careers",
+   "lang_key": "ALIENRPG.Career",
+   "used": "职业"
+  },
+  {
+   "english": "XP",
+   "lang_key": "ALIENRPG.XP",
+   "used": "经验"
+  },
+  {
+   "english": "SP (Story Points)",
+   "lang_key": "ALIENRPG.StoryPoints",
+   "used": "故事点"
+  },
+  {
+   "english": "Campaign (view)",
+   "lang_key": "ALIENRPG.campaign",
+   "used": "战役"
+  },
+  {
+   "english": "Overwatch",
+   "lang_key": "ALIENRPG.Overwatch",
+   "used": "警戒"
+  },
+  {
+   "english": "Radiation",
+   "lang_key": "ALIENRPG.Radiation",
+   "used": "辐射"
+  },
+  {
+   "english": "permanant [sic] radiation",
+   "lang_key": "ALIENRPG.PermanentRadiation",
+   "used": "永久辐射"
+  },
+  {
+   "english": "Hull",
+   "lang_key": "ALIENRPG.Hull",
+   "used": "船体"
+  },
+  {
+   "english": "Minor Component Damage",
+   "lang_key": "ALIENRPG.MINOR-COMPONENT-DAMAGE",
+   "used": "轻微部件损伤"
+  },
+  {
+   "english": "Major Component Damage",
+   "lang_key": "ALIENRPG.MAJOR-COMPONENT-DAMAGE",
+   "used": "重大部件损伤"
+  },
+  {
+   "english": "Inventory",
+   "lang_key": "ALIENRPG.Inventory",
+   "used": "物品栏"
+  },
+  {
+   "english": "Notes tab",
+   "lang_key": "ALIENRPG.Item.Tabs.Notes",
+   "used": "笔记页签"
+  },
+  {
+   "english": "Description tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Description",
+   "used": "描述页签"
+  },
+  {
+   "english": "edit button",
+   "lang_key": "ALIENRPG.ActorSheet.Edit",
+   "used": "编辑按钮"
+  },
+  {
+   "english": "Fatal box",
+   "lang_key": "ALIENRPG.Fatal",
+   "used": "“致命”勾选框"
+  },
+  {
+   "english": "injuriy [sic]",
+   "lang_key": "ALIENRPG.Injury",
+   "used": "伤势"
+  },
+  {
+   "english": "\"Manual\" (selected)",
+   "lang_key": "ALIENRPG.manual",
+   "used": "“手动”"
+  },
+  {
+   "english": "\"Rolled\" (automated)",
+   "lang_key": "ALIENRPG.Rolled",
+   "used": "“投出”"
+  },
+  {
+   "english": "Swap Initiative",
+   "lang_key": "ALIENRPG.SwapInitiative",
+   "used": "交换先攻"
+  },
+  {
+   "english": "the mouse keys are switched",
+   "lang_key": "ALIENRPG.SwitchKeys",
+   "used": "交换鼠标按键"
+  },
+  {
+   "english": "initiative",
+   "lang_key": "ALIENRPG.hideInitChat",
+   "used": "先攻"
+  },
+  {
+   "english": "Hypoxia",
+   "lang_key": "ALIENRPG.hypoxia",
+   "used": "缺氧"
+  },
+  {
+   "english": "Heatstroke",
+   "lang_key": "ALIENRPG.heatstroke",
+   "used": "中暑"
+  },
+  {
+   "english": "Gravity Dyspraxia",
+   "lang_key": "ALIENRPG.gravitydyspraxia",
+   "used": "重力运动障碍"
+  },
+  {
+   "english": "Wildcatter",
+   "lang_key": "ALIENRPG.Wildcatter",
+   "used": "独立勘探者"
+  },
+  {
+   "english": "Entertainer",
+   "lang_key": "ALIENRPG.Entertainer",
+   "used": "艺人"
+  },
+  {
+   "english": "character sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Items sheet / Item sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Item",
+   "used": "物品卡"
+  },
+  {
+   "english": "Creatures sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Creature",
+   "used": "生物卡"
+  },
+  {
+   "english": "Synthetic sheet / synth sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Synthetic",
+   "used": "合成人卡"
+  },
+  {
+   "english": "Vehicle sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Vehicle",
+   "used": "载具卡"
+  },
+  {
+   "english": "Spaceship sheet / Spacecraft sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Spacecraft",
+   "used": "星际飞船卡"
+  },
+  {
+   "english": "Colony sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Colony",
+   "used": "殖民地卡"
+  },
+  {
+   "english": "Planet sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Planet",
+   "used": "行星卡"
+  },
+  {
+   "english": "Territories",
+   "lang_key": "ALIENRPG.SheetLabels.Territory",
+   "used": "领地"
+  },
+  {
+   "english": "System sheet",
+   "lang_key": "ALIENRPG.System",
+   "used": "星系卡"
+  },
+  {
+   "english": "Colony Initiatives",
+   "lang_key": "TYPES.Item.colony-initiative",
+   "used": "殖民地开发计划"
+  },
+  {
+   "english": "development total / Development total",
+   "lang_key": "ALIENRPG.developmenttotal",
+   "used": "发展等级总计"
+  },
+  {
+   "english": "modifier totals",
+   "lang_key": "ALIENRPG.ModifierTotal",
+   "used": "修正合计"
+  },
+  {
+   "english": "key stats",
+   "lang_key": "ALIENRPG.keyResources",
+   "used": "关键资源"
+  },
+  {
+   "english": "modifiers / mods",
+   "lang_key": "ALIENRPG.Modifiers",
+   "used": "修正"
+  },
+  {
+   "english": "Fast actions",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "slow actions",
+   "lang_key": "ALIENRPG.SlowAction",
+   "used": "慢速动作"
+  },
+  {
+   "english": "AcidSplash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "the $ is added or not",
+   "lang_key": "ALIENRPG.Dollar",
+   "used": "是否添加 $ 符号"
+  },
+  {
+   "english": "Journal font colour configuration",
+   "lang_key": "ALIENRPG.JournalColorSettings",
+   "used": "日志字体颜色设置"
+  },
+  {
+   "english": "Attributes",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "the Stress dice",
+   "lang_key": "ALIENRPG.RollStressDice",
+   "used": "压力骰子"
+  },
+  {
+   "english": "push button",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰按钮"
+  },
+  {
+   "english": "crew member / crew quantity",
+   "lang_key": "ALIENRPG.Crew",
+   "used": "乘员"
+  },
+  {
+   "english": "Computer item",
+   "lang_key": "ALIENRPG.ComputerMainframes",
+   "used": "计算机主机物品"
+  },
+  {
+   "english": "Critical Injuries (the created items, not the RollTable)",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "D66 number",
+   "lang_key": "ALIENRPG.RollManCharCrit",
+   "used": "D66 点数"
+  },
+  {
+   "english": "weapon weight",
+   "lang_key": "ALIENRPG.Weight",
+   "used": "武器重量"
+  },
+  {
+   "english": "ActiveEffects",
+   "lang_key": "ALIENRPG.SHEET.Labels.ActiveEffect",
+   "used": "主动效果"
+  },
+  {
+   "english": "comments bot [sic, = box]",
+   "lang_key": "ALIENRPG.Comment",
+   "used": "备注框"
+  },
+  {
+   "english": "character panic table",
+   "lang_key": "ALIENRPG.NoPanicTable",
+   "used": "恐慌表 Panic Table"
+  },
+  {
+   "english": "Ships Minor Crits / Ship crits",
+   "lang_key": "ITEM.TypeSpacecraft-crit",
+   "used": "飞船重创"
+  },
+  {
+   "english": "Spaceship damage dots / \"Hull\" value",
+   "lang_key": "ALIENRPG.ShipConButtons",
+   "used": "损伤圆点按“船体”数值调整"
+  }
+ ],
+ "frozen_kept": [
+  "Alien - Roll on selected Mother table V10",
+  "Alien - Roll on selected Creature table V10",
+  "Critical Injuries (the \"Critical Injuries template\" occurrence — document name, byte-exact)",
+  "MO/TH/ER Instructions (upstream spelling of the frozen journal name, left as written)",
+  "Panic Table (English tail on 恐慌表 Panic Table, per ALIENRPG.NoPanicTable precedent)",
+  "Dice So Nice",
+  "Quick Insert - Search Widget",
+  "Alien RPG - Motion Tracker",
+  "Year Zero Engine: Combat",
+  "Token-Action-HUD-Alien",
+  "Token-Action-HUD-Core",
+  "Alien RPG CRT UI",
+  "CRT UI",
+  "Item piles",
+  "template.json",
+  "options.json",
+  "routePrefix",
+  "enrircher.js",
+  "euclidianDistances",
+  "JQuery",
+  "Foundry App V2",
+  "FVTT V10",
+  "FVTT V11",
+  "FVTT V12",
+  "D66",
+  "RAW",
+  "BBW",
+  "CSS",
+  "Gumbald",
+  "@Takara",
+  "@SourTarte",
+  "netoelix",
+  "Argann Bonneau",
+  "Lukasz Lenart",
+  "@Moradion",
+  "@Txus#5021"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Archetype (as in \"Wildcatter and Entertainer archetypes from BBW\")",
+   "proposed": "职业",
+   "why": "glossary_alien.json 与 lang 都没有 Archetype。但 ALIENRPG.Wildcatter/Entertainer 就挂在职业那一族里，且 glossary 有 Career/Careers|职业，所以按同一族收敛为 职业。⚠ 不要译成 原型——原型 在本项目已被 Foundry 的 prototype token 占用（ALIENRPG.DefProto=默认原型指示物设置），撞车。"
+  },
+  {
+   "en": "Space Combat Panic Roll",
+   "proposed": "太空战恐慌检定",
+   "why": "英文把它当 RollTable 名引用，但它既不在 glossary、也不在 DO-NOT-TRANSLATE.rolltable_names；实测三个包里没有这张表，全仓唯一引用点是 systems/alienrpg/module/actor/old-actor.js:397 这个死掉的旧文件。取 ALIENRPG.SpaceCombatPhases=太空战阶段 的 太空战 + 恐慌检定 组合，按 §3.4 T-BILINGUAL 写成「太空战恐慌检定 Space Combat Panic Roll」。"
+  },
+  {
+   "en": "Reload (Weapon sheets now show reloads instead of Rounds)",
+   "proposed": "装填次数",
+   "why": "glossary 无；lang 只有 ALIENRPG.Rounds=备弹 与 ALIENRPG.noAmmo=你需要重新装填！！。这一条恰好是在讲 reloads 取代 Rounds，两个词必须能区分开，所以给 reload 单独一个词。"
+  },
+  {
+   "en": "Range Modifier (dropdown on vehicle weapon rolls)",
+   "proposed": "射程修正",
+   "why": "没有对应键。最近的 ALIENRPG.targetMod 的现有值是 因素修正，语义对不上（那是 target modifier 的总和，不是 range）。用 ALIENRPG.Range=射程 + 修正 拼。"
+  },
+  {
+   "en": "Combat tracker",
+   "proposed": "战斗追踪器",
+   "why": "Foundry 核心串，无 ALIENRPG 键（ALIENRPG 只有 CombatantRemove/Reroll/Update 三条右键菜单项）。本页出现三次。"
+  },
+  {
+   "en": "Roll Table (document type)",
+   "proposed": "随机表",
+   "why": "Foundry 核心文档类型名，无 ALIENRPG 键；ALIENRPG 自己的相关串（SELTABLE/NOTABLES）用的是 表格。两者若要统一需主控裁定。"
+  },
+  {
+   "en": "Adventure (document type)",
+   "proposed": "冒险",
+   "why": "Foundry 核心文档类型名，无 ALIENRPG 键。3.2.5 那条「Adventure now automatically installs」指的就是这个文档。"
+  },
+  {
+   "en": "Assign Status Effects (menu)",
+   "proposed": "指定状态效果",
+   "why": "指示物 HUD 的菜单名，无 ALIENRPG 键；ALIENRPG.Conditions=状态、ConButtons 讲的是加/减状态的操作，不是菜单名。"
+  },
+  {
+   "en": "Configure Settings",
+   "proposed": "配置设置",
+   "why": "Foundry 核心串。cn.json 自己的 ALIENRPG.NoPanicTable 里把同类路径整段留成了英文（Configuration > Alien RPG > Re-Import），两种做法并存，需要主控统一口径。"
+  },
+  {
+   "en": "dark mode",
+   "proposed": "深色模式",
+   "why": "Foundry 核心 UI 概念，glossary 与 lang 均无。本页 3.3.2/3.3.3/3.3.0 三条都用到。"
+  },
+  {
+   "en": "data model (as opposed to template.json)",
+   "proposed": "数据模型",
+   "why": "Foundry V11+ 的 API 概念，glossary 无。属于开发者向术语，本页「BACK END」一节需要。"
+  }
+ ],
+ "open_issues": [
+  "⚠ 设置路径「Configure Settings>Alien Evolved> Use Alien Evolved Rules and Sheets」有一半是假的。我去 systems/alienrpg/module/helpers/settings.mjs:14 核过：evolved 这个开关是直接 register 在 alienrpg 系统底下的，**根本不存在名叫 Alien Evolved 的设置分组**。中文 GM 实际看到的是 配置设置 →（Alien RPG 系统那一栏）→ 使用异形进化版规则与卡片。译文写成「配置设置>异形进化版>使用异形进化版规则与卡片」，其中末段是 ALIENRPG.Evolved 的逐字节值（真），中段是描述性的（假，跟着原文的错）。要不要在译文里直接把这段路径改对，请主控裁。",
+  "⚠ 「Configure Settings」是 Foundry 核心串，不是 ALIENRPG 键——它归运行时补丁/核心汉化管，不归本单元。同类的还有：Combat tracker（3 处）、Roll Table、Adventure、Assign Status Effects 菜单、dark mode、Foundry App V2。这几条我按核心汉化的通行译法写了，若核心汉化用词不同，需要回来对齐。",
+  "⚠ 「see MO/TH/ER Instructions」是上游把冻结的日志名 MU/TH/ER Instructions.（DO-NOT-TRANSLATE.name_lookups 第 2/3 条，O/U 之差 + 尾点）写错了。我按原文逐字节保留 MO/TH/ER Instructions，**没有顺手改成 MU/TH/ER**——正文里的交叉引用要不要跟真实文档名对齐，是主控的决定，不是译者的。改的话记得那条冻结串是带结尾句点的。",
+  "⚠ 「Space Combat Panic Roll」被当成表名引用，但三个包里没有这张表；全仓唯一引用是 module/actor/old-actor.js:397（死掉的旧 actor 文件）。它也不在册子里。我按 T-BILINGUAL 写成「太空战恐慌检定 Space Combat Panic Roll」。如果主控决定这是个死名、正文该照抄英文，改一处即可。",
+  "⚠ 「Critical Injuries」在本页出现两次，是两种东西，我按两种处理：① 「a \"Critical Injuries template」是**文档名**，保留英文；② 「Critical Injuries are now created with any PC's Skill modifiers applied to the item」讲的是被创建出来的**重伤物品**（TYPES.Item.critical-injury=重伤），译成 重伤。册子的子串式闸门会把 ② 报成丢失冻结串——那是误报，已在自闸脚本里显式登记为 adjudicated exception，不是违规。",
+  "⚠ lang/cn.json 的 ALIENRPG.CriticalInjuries 今天仍是英文字面量 'Critical injuries'（那是重伤锁步的比较侧，**故意不翻**）。所以本页不能拿这个键当「Critical Injuries 的中文」来用；概念用 TYPES.Item.critical-injury=重伤，文档名用英文。",
+  "英文源自身的两处毛病，我按原样保留结构、没有替上游修：① 4.0.7 一节的 「Fixed issue with Notes tab on the Items sheet.」**重复了两个 li**，删一个会破坏标签多重集，故照抄两遍；② 4.0.2 第一条是粘连的（「...weapon dialog boxesWhen in Evolved mode」），译成两句并保留末尾冒号，让它仍然领起后面两条。",
+  "h2 的 id `version-4.0.3-added-the-consumables-to-the-evolved-character-she` **看起来像截断错误，其实是对的**：slugifyHeading 有 .substring(0, 64)（foundry.mjs:44691），这就是 Foundry 自己会算出来的值。别「修」它。",
+  "⚑ 给后面的单元留个坑：这套 slugify（foundry.mjs:685）**保留点号**，只把 [\\s-]+ 折成连字符，并且先过一遍 CHAR_MAP（& → and、$ → dollar、% → percent、> → greater）。所以 3.2.5 的 slug 是 version-3.2.5 而**不是** version-3-2-5，「Versions 3.3.0 & 3.3.1」是 versions-3.3.0-and-3.3.1。按「非字母数字一律变连字符」的直觉手写 id，会写出 22 个全错的锚点。本单元的 22 个 id 是用该函数的 Python 复刻在本机 Foundry 13 源码上实算的。",
+  "本页零 @UUID / 零 [[...]] / 零 data-hash 入链（实测），所以补 id 这件事在本页是纯预防性的；但按任务书是统一规则，已对全部 22 个标题补齐。",
+  "h1 文本取 index.json 的 title「推荐附加模块」逐字使用，与控制器的单元标题保持一致。"
+ ],
+ "self_gate": [
+  {
+   "check": "1. 结构标签多重集 == 英文（每个标签名逐个计数）",
+   "result": "PASS — p 278 / li 238 / ul 70 / h2 42 / span 8 / br 6 / strong 6 / div 4 / h1 2 / ol 2，两侧完全相等。含英文源那 3 个不配对的 </div>（切片产物），原样保留。"
+  },
+  {
+   "check": "1b. 加严：开标签名+属性串多重集（剥掉我新增的 id 后）== 英文",
+   "result": "PASS — 没有任何一个开标签的属性被改动或漏抄。"
+  },
+  {
+   "check": "2. 英文中出现的每个 class 值都原封不动出现在中文里",
+   "result": "PASS — heading×5、heading2×17，两侧同值同计数。"
+  },
+  {
+   "check": "2b. 附加：style 值多重集相等",
+   "result": "PASS — padding-bottom:2%×4、color:deepskyblue×4、position:relative;margin-top:30px×1。"
+  },
+  {
+   "check": "2c. 附加：HTML 实体多重集相等",
+   "result": "PASS — &gt;×3、&amp;×4。（&gt; 落在设置路径两处与「rolls >=10」一处；&amp; 落在两个版本号标题、「轻微 & 重大部件损伤」与「FVTT V10 & V11」。）"
+  },
+  {
+   "check": "3. 每个 @UUID[...] / [[...]] 构件逐字节相同，只有 {label} 可变",
+   "result": "PASS（真空通过）— 本页英文里 @UUID 与 [[...]] 各 0 个，中文也各 0 个；未凭空造出任何链接。"
+  },
+  {
+   "check": "4. 每个被翻译的标题都带显式 id，且携带原英文 slug",
+   "result": "PASS — 22/22。id 由 foundry.mjs:685 slugify + :44691 slugifyHeading（CHAR_MAP、[\\s-]+ 折叠、去引号、substring(0,64)）的 Python 复刻实算，逐个比对相符。"
+  },
+  {
+   "check": "5. DO-NOT-TRANSLATE.json 的冻结字面量一个都没被翻",
+   "result": "PASS（含 1 条已裁定例外）— 本页命中 3 条冻结串：两个宏名逐字节保留；Critical Injuries 的**文档名**那次保留英文，**物品概念**那次译作 重伤（见 open_issues 第 5 条，已在闸门脚本里显式登记，不是漏网）。"
+  },
+  {
+   "check": "6. 输出不与英文逐字节相同",
+   "result": "PASS — 7979 字节 vs 13855 字节；可见文本 4025 vs 10495，其中汉字 2673。"
+  },
+  {
+   "check": "附加：正文里不得残留成句英文",
+   "result": "PASS — 扫出的 4 段长拉丁串全部是应当保留的专名：Quick Insert - Search Widget、Alien RPG - Motion Tracker、以及两个宏名。无漏译句子。"
+  }
+ ]
+}

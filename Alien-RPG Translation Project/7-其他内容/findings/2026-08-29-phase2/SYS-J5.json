@@ -1,0 +1,317 @@
+{
+ "unit": "SYS-J5",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase2/pages/SYS-J5.cn.html",
+ "chars_en": 11444,
+ "chars_cn": 6106,
+ "summary": "Translated the MU/TH/ER Instructions manual's six sections (Rolling Dice / Creatures / Combat Tracker / Tables / System Configuration Options / Macros). Built by surgical prose-only replacement on the English source via a script, so tag multiset, class and style attribute values, all 110 <br>, all 57 U+00A0, and the 3 &gt; entities are byte-preserved and could not drift. Every UI element the manual names was looked up in 1-系统汉化插件/lang/cn.json and used verbatim (压力 / 恐慌状态 / 余量检定 / 护甲 / 物品栏 / 追骰 / 允许连续追骰 / 机动 / 侦察 / 对火护甲 / 酸血飞溅 / 复制角色 / 添加设置按钮 / 配置 Alien RPG 设置 / 重置 / 仅限GM / 通信科技 …); two sentences were re-worded to mirror ALIENRPG.LEFTCLICKTOROLL's own phrasing (左键单击进行检定，右键单击输入修正值) so the manual reads like the tooltip. All 12 headings carry an explicit id= with the original English slug. The three T-FROZEN folder names, the frozen table name Panic Table, the 4 macro names, the dice-notation strings, the @-tag lists and the Foundry core navigation paths were left byte-exact English; the folder-tree table cells were not touched at all. Register is instructional second-person 你, per the software-manual rule.",
+ "self_gate": [
+  {
+   "check": "1. Structural tag multiset .cn == .en (every tag name, opens and closes counted separately)",
+   "result": "PASS — br 110, div 5+5, em 3+3, h1 6+6, h2 3+3, h3 3+3, li 21+21, ol 1+1, p 43+43, span 21+21, strong 3+3, table 1+1, tbody 1+1, td 4+4, tr 2+2, ul 2+2. The fragment's deliberately unbalanced nesting (leading </div>, trailing bare <div style=...>) is reproduced exactly."
+  },
+  {
+   "check": "2. Every class=\"...\" value present in EN is present unchanged in CN",
+   "result": "PASS — Counter equality on all class values: heading, heading2, agil-mod, stress-mod, mpush1/2/3, acid-splash-popup, initiative-roll, clone-actor, roll-clone, init-chat-norm, init-chat-cards, gm-settings, style-button-settings, player-settings, style-settings, font-picker-img, colour-picker-img. Adding id= introduced no class change."
+  },
+  {
+   "check": "3. Every @UUID[...] / [[...]] construct byte-identical",
+   "result": "PASS (vacuously) — this page contains ZERO @UUID/@TEXTDRAW/[[...]] constructs; 0 in EN, 0 in CN. The literal @-tags in the Macros section (@str, @comtech, /r (@wit)db …) are macro syntax, not enrichers, and were copied byte-for-byte."
+  },
+  {
+   "check": "4. Every translated heading carries explicit id= with the ORIGINAL English slug",
+   "result": "PASS 12/12 — rolling-dice, characters-and-npcs, pushing-rolls, creatures, ad-hoc-rolls, combat-tracker, tables, system-configuration-options, gm-configuration-options, player-configuration-options, font-and-colour-configuration-options, macros. Note h1 class=\"heading2\" for Creatures was preserved as upstream wrote it (h1 carrying the h2 class), not normalised."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE.json frozen literal was translated",
+   "result": "PASS — Alien Tables / Alien Creature Tables / Alien Mother Tables (folder_names, T-FROZEN, and the two that rollTableData.mjs dereferences without a guard) and Panic Table (rolltable_names, T-FROZEN) all survive byte-exact and at the same occurrence count. The folder-structure table cells were left completely untouched. No item_names / name_lookups / name_substring_tests literals occur on this page."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 6,106 chars vs 11,444; 1,937 CJK characters written."
+  },
+  {
+   "check": "extra: <br> count",
+   "result": "PASS 110 == 110"
+  },
+  {
+   "check": "extra: U+00A0 NBSP count (encoding_note: never normalise)",
+   "result": "PASS 57 == 57 — every ␣ around the image-placeholder <span>s preserved in place"
+  },
+  {
+   "check": "extra: style=\"...\" value multiset",
+   "result": "PASS — position:relative;margin-top:30px ×5, width:43%;border:0px, width:30% ×2, width:50% ×2, padding-bottom:2% ×4, color:deepskyblue ×4, list-style-type:none ×2"
+  },
+  {
+   "check": "extra: &gt; entity count",
+   "result": "PASS 3 == 3 (Alien Tables -&gt;, Configuration Settings&gt;System Settings, Macro&gt;Alien)"
+  },
+  {
+   "check": "extra: residual untranslated English prose scan",
+   "result": "PASS — only 3 hits, all intentional: the frozen folder-name table cells, and the two macro names 'Alien - Roll on selected Mother/Creature table'"
+  }
+ ],
+ "label_lookups": [
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Panic Roll",
+   "lang_key": "ALIENRPG.CREWPANIC",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "Panic Condition",
+   "lang_key": "ALIENRPG.PanicCondition",
+   "used": "恐慌状态"
+  },
+  {
+   "english": "Supply roll (parachute icon tooltip)",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Armor Vs Fire",
+   "lang_key": "ALIENRPG.ArmorVsFire",
+   "used": "对火护甲"
+  },
+  {
+   "english": "Inventory tab",
+   "lang_key": "ALIENRPG.Actor.Tabs.Inventory",
+   "used": "物品栏"
+  },
+  {
+   "english": "Strength",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "Agility",
+   "lang_key": "ALIENRPG.AbilityAgl",
+   "used": "敏捷"
+  },
+  {
+   "english": "Wits",
+   "lang_key": "ALIENRPG.AbilityWit",
+   "used": "机智"
+  },
+  {
+   "english": "Empathy",
+   "lang_key": "ALIENRPG.AbilityEmp",
+   "used": "共情"
+  },
+  {
+   "english": "Push (chat button / icon)",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "Allow multi-push (chat check box)",
+   "lang_key": "ALIENRPG.MultiPush",
+   "used": "允许连续追骰"
+  },
+  {
+   "english": "Left mouse click will roll / Right mouse click will display a modifier box",
+   "lang_key": "ALIENRPG.LEFTCLICKTOROLL",
+   "used": "左键单击进行检定，右键单击输入修正值 — mirrored as 「左键单击就按该数值进行检定，右键单击输入修正值」"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Acid Splash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "Speed",
+   "lang_key": "ALIENRPG.Speed",
+   "used": "速度"
+  },
+  {
+   "english": "Creatures / Creature",
+   "lang_key": "ALIENRPG.Actor.Tabs.Creature",
+   "used": "生物"
+  },
+  {
+   "english": "Creature sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Creature",
+   "used": "生物卡"
+  },
+  {
+   "english": "Clone Actor (combat tracker context menu)",
+   "lang_key": "ALIENRPG.CloneActor",
+   "used": "复制角色"
+  },
+  {
+   "english": "Update Actor (combat tracker context menu)",
+   "lang_key": "ALIENRPG.CombatantUpdate — see open_issues, the LIVE key is core COMBAT.CombatantUpdate",
+   "used": "更新参战者"
+  },
+  {
+   "english": "ReRoll Initiative / initiative",
+   "lang_key": "ALIENRPG.CombatantReroll",
+   "used": "先攻 (参战者 for combatant)"
+  },
+  {
+   "english": "Add Settings Button",
+   "lang_key": "ALIENRPG.AddMenuName",
+   "used": "添加设置按钮"
+  },
+  {
+   "english": "Configure Alien RPG Settings (menu)",
+   "lang_key": "ALIENRPG.MenuLabel",
+   "used": "配置 Alien RPG 设置"
+  },
+  {
+   "english": "Reset (option / button)",
+   "lang_key": "ALIENRPG.ResetButton",
+   "used": "重置"
+  },
+  {
+   "english": "Journal color settings",
+   "lang_key": "ALIENRPG.JournalColorSettings",
+   "used": "日志颜色设置"
+  },
+  {
+   "english": "font color (the field inside that block)",
+   "lang_key": "ALIENRPG.Fontpick",
+   "used": "字体颜色"
+  },
+  {
+   "english": "GM Only box",
+   "lang_key": "ALIENRPG.GMONLY",
+   "used": "仅限GM"
+  },
+  {
+   "english": "Ad Hoc",
+   "lang_key": "ALIENRPG.AdHoc",
+   "used": "临时"
+  },
+  {
+   "english": "Base dice",
+   "lang_key": "ALIENRPG.HOWMANYDICE",
+   "used": "基础骰子"
+  },
+  {
+   "english": "Stress dice",
+   "lang_key": "ALIENRPG.HOWMANYSTRESS",
+   "used": "压力骰子"
+  },
+  {
+   "english": "Attributes (macro @-tag list header)",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Skills (macro @-tag list header)",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "comtech",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技 (matches RULINGS R3-comtech; T-EXACT)"
+  },
+  {
+   "english": "token",
+   "lang_key": "ALIENRPG.DefProto (默认原型指示物设置)",
+   "used": "指示物"
+  },
+  {
+   "english": "roll on table",
+   "lang_key": "ALIENRPG.dialog.Rollontable (在 {tablename} 表上投骰)",
+   "used": "在表上投骰"
+  }
+ ],
+ "frozen_kept": [
+  "Alien Tables",
+  "Alien Creature Tables",
+  "Alien Mother Tables",
+  "Panic Table",
+  "Alien - GM Dice Roller",
+  "Alien - Player Ad-hoc YZE Dice Roller",
+  "Alien - Roll on selected Mother table",
+  "Alien - Roll on selected Creature table",
+  "Mother Tables",
+  "Creature tables",
+  "Private GM Roll",
+  "Configuration Settings>System Settings",
+  "Import All Content",
+  "Macro>Alien",
+  "Starter Set",
+  "Core Rules",
+  "CRT UI",
+  "FranzWarm",
+  "DsN",
+  "Alien RPG",
+  "D66",
+  "/r xdb",
+  "/r xds",
+  "/r 4db + 2ds",
+  "/r (1d6*10)+1d6",
+  "10*1d6+1d6",
+  "/r (@wit)db + (@comtech)db + (@stress)ds",
+  "@str @agl @wit @emp @stress",
+  "@heavyMach @closeCbt @stamina @rangedCbt @mobility @piloting @command @manipulation @medicalAid @observation @survival @comtech",
+  "\\images\\cards",
+  "card-1.png … card-10.png",
+  "250x349px"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Free League",
+   "proposed": "自由联盟",
+   "why": "Publisher name, appears in the Tables section ('Free League have given me permission…'). Not in glossary_alien.json in any form. I kept it byte-exact English rather than invent a rendering that would contradict the spine — if the controller wants a Chinese form, 自由联盟 is the common community rendering. Decide once, since it will recur across corerules/starterset."
+  },
+  {
+   "en": "Combat Tracker",
+   "proposed": "战斗轮",
+   "why": "An h1 of this unit. No ALIENRPG.* key covers it (it is a Foundry core UI panel), and it is absent from glossary_alien.json. I used 战叉轮→战斗轮 because index.json's own title for SYS-J5 already says 战斗轮; recording it so the choice gets ratified rather than re-decided per page."
+  },
+  {
+   "en": "Token",
+   "proposed": "指示物",
+   "why": "Named twice in this unit ('The PC/Creature token needs to be selected', 'They need to have a token selected'). Not in glossary_alien.json. I took 指示物 from the lang lock itself (ALIENRPG.DefProto = 默认原型指示物设置) rather than inventing one, but it deserves a glossary row."
+  },
+  {
+   "en": "Compendium",
+   "proposed": "合集",
+   "why": "'These can be found in the Compendium under Macro>Alien'. Not in glossary_alien.json. Used 合集, which is PROJECT.md §1.2's own word ('EC 的内容一直待在合集里')."
+  },
+  {
+   "en": "Combatant",
+   "proposed": "参战者",
+   "why": "Not in glossary_alien.json. Taken from the lang lock (ALIENRPG.CombatantRemove = 移除参战者 / ALIENRPG.CombatantUpdate = 更新参战者). Worth a row so it does not drift to 战斗者/战斗单位 elsewhere."
+  },
+  {
+   "en": "Rollable Table",
+   "proposed": "可投掷表格",
+   "why": "Used repeatedly in the Tables section ('rollable tables', 'roll table formula'). No lang key, no glossary row. I used 可投掷表格 / 投掷表公式; a core-Foundry-facing term that other units will hit too."
+  }
+ ],
+ "open_issues": [
+  "HARDCODED STRING, not mine to fix: the manual says players switch sheets by 'selecting the CRT UI button on the \"Configure Alien RPG Settings\" menu'. That button's label has NO lang key — systems/alienrpg/templates/system/alienprgSettings.hbs writes it literally: <button type='button' name='addcrt'><i class='fas fa-save'></i> CRT UI Sheets</button>. Every other control in that same form is localised (ALIENRPG.SheetColorSettings / FontStyle / Colpick / JournalColorSettings / Fontpick / ResetNote / SubmitButton / ResetButton), so this one button is an outlier. I wrote 'CRT UI 按钮' in English. This is the runtime patcher's problem — flagging it so the patcher's target list gets the string.",
+  "DEAD LANG KEY: 'Update Actor'. cn.json ships ALIENRPG.CombatantUpdate = 更新参战者, but module/helpers/CBTracker.mjs:8 registers that context-menu entry as core \"COMBAT.CombatantUpdate\", NOT the ALIENRPG key. So ALIENRPG.CombatantUpdate is dead and what actually renders comes from Foundry core, which this project does not ship a Chinese pack for. I used 更新参战者 (consistent with our own dead key and with 移除参战者). If the world runs core in English the GM will see 'Update Combatant' there, which also differs from the manual's own wording 'Update Actor'. Same file confirms 'Clone Actor' IS live as ALIENRPG.CloneActor — that one is safe.",
+  "LABEL THE MANUAL NAMES DOES NOT EXIST: 'This is added to the creatures “Acid Attack” value'. No sheet field is labelled Acid Attack. The creature-sheet field is templates/actor/creature-header.hbs:55 → ALIENRPG.SkillAcidSplash = 酸血飞溅, and the ONLY key literally named ALIENRPG.AcidAttack carries EN 'Acid Blood' → 酸血 and is a CHAT-CARD <h2> header (documents/actor.mjs:2601), not a field. I translated the manual's 'Acid Attack' as 酸血飞溅 so the reader looks at the right box on the sheet. Flagging because it is a deliberate divergence from the English wording, not a slip.",
+  "FOUNDRY CORE STRINGS, kept English on purpose: 'Private GM Roll' (chat roll-mode dropdown), 'Configuration Settings>System Settings', 'Import All Content' (compendium right-click), 'Macro>Alien' (compendium path). None has an ALIENRPG.* key. Precedent followed: cn.json's own ALIENRPG.NoPanicTable keeps the core navigation path in English ('…：Configuration > Alien RPG > Re-Import'). If a Chinese core pack later becomes a dependency these four should be revisited together.",
+  "CROSS-UNIT SYNC POINT with SYS-U1: I kept all four macro names byte-exact English. SYS-U1 owns the 4 Macro.name fields (its title says '4 个宏名', and macro names are NOT in the T-FROZEN register — only Macro.command is). If the controller translates them there, the four <li> labels on this page must be re-synced or the manual will name macros the GM cannot find. Also note the manual is ALREADY stale against the pack: the real names are 'Alien -  GM Dice Roller' (TWO spaces after the dash), 'Alien - Roll on selected Mother table V10' and 'Alien - Roll on selected Creature table V10'. I reproduced the manual's spelling, not the pack's — say the word if you want them corrected to the pack.",
+  "'Starter Set' / 'Core Rules' in the initiative-card paragraph were kept English: they are the reader-facing shorthand for the T-FROZEN adventure/module names 'Alien Evolved Starter Set' and 'Alien Evolved Core Rules' (glossary_alien.json maps both to themselves). A Chinese rendering here would name products the GM cannot find in the module list.",
+  "UPSTREAM TYPOS in my byte range, translated by intent rather than reproduced: 'this will not rill Alien dice' (rill → roll) → 掷; 'The can be reverted to the default sheet' (The → It) → 选择“重置”就能换回默认角色卡. Neither is a code-visible literal, so meaning was preferred over the defect.",
+  "STRUCTURE ODDITY preserved, do not 'fix' downstream: the Creatures section title is <h1 class=\"heading2\">Creatures</h1> — an h1 carrying the h2 class, unlike every other h1 on the page which uses class=\"heading\". I kept it exactly, and gave it id=\"creatures\".",
+  "This page currently has ZERO incoming data-hash deep links (DO-NOT-TRANSLATE.json measures system: 91 headings, 0 data_hash occurrences), so the explicit English-slug ids I added are not needed today. I added all 12 anyway because the rule is uniform and any future link into this page would otherwise break silently."
+ ]
+}

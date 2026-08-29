@@ -1,0 +1,548 @@
+{
+ "actor_paths": [
+  {
+   "path": "system.general.special.value",
+   "actor_types": "creature — TRANSLATE. Largest single actor field. PLAIN TEXT in a raw <textarea> (templates/actor/creature-general.hbs:14, crt/crtui-creature-general.hbs:11) — newlines are load-bearing, HTML must NOT be introduced by the translator.",
+   "doc_count": 30,
+   "char_count": 81617,
+   "html": false
+  },
+  {
+   "path": "system.notes",
+   "actor_types": "character,creature,spacecraft,synthetic — TRANSLATE as HTML (base-actor.mjs schema.notes = HTMLField; enriched via _enrichTextFields / enrichHTML in every sheet). 38 of 45 non-empty values contain tags. NOTE: on type `vehicles` this path is an OBJECT {notes:\"\"} (actor-vehicle.mjs:130 redeclares it as SchemaField) — see next row.",
+   "doc_count": 45,
+   "char_count": 40265,
+   "html": true
+  },
+  {
+   "path": "system.notes.notes",
+   "actor_types": "vehicles — TRANSLATE (separate variant). All 6 vehicle actors carry {notes:\"\"} here, currently empty. Mapping `system.notes` for vehicles would write a string over a SchemaField.",
+   "doc_count": 6,
+   "char_count": 0,
+   "html": false
+  },
+  {
+   "path": "system.attributes.comment.value",
+   "actor_types": "vehicles — TRANSLATE. PLAIN TEXT <textarea> (templates/actor/vehicle-general.hbs:9). Same path is rich HTML on the Item side — must be a separate _variant.",
+   "doc_count": 6,
+   "char_count": 6038,
+   "html": false
+  },
+  {
+   "path": "system.general.appearance.value",
+   "actor_types": "character,synthetic — TRANSLATE. Plain multi-line text (\"Age: 37\\nLin is a mess...\").",
+   "doc_count": 8,
+   "char_count": 1062,
+   "html": false
+  },
+  {
+   "path": "system.rTables",
+   "actor_types": "creature — NEEDS A CUSTOM CONVERTER (alienRollTableRef). Stores a RollTable NAME, not an id. rollTableData.mjs:7 builds the <select> options as {key: table.name}; actor.mjs:1839 does game.tables.getName(dataset.atttype); actor.mjs:2497 does game.tables.contents.find(b => b.name === targetTable). Value 'None' is a magic sentinel and must never be translated.",
+   "doc_count": 30,
+   "char_count": 805,
+   "html": false
+  },
+  {
+   "path": "system.cTables",
+   "actor_types": "creature — NEEDS A CUSTOM CONVERTER (alienRollTableRef). Same as rTables; only value in the packs is 'Critical Injuries on Xenomorphs' / 'None'. cTableget() (rollTableData.mjs:26) additionally filters folder 'Alien Mother Tables' by name.startsWith('Critical Injuries').",
+   "doc_count": 30,
+   "char_count": 147,
+   "html": false
+  },
+  {
+   "path": "system.adhocitems",
+   "actor_types": "character (schema also on synthetic) — TRANSLATE as HTML. prose-mirror + enrichHTML (character-sheet.mjs:231).",
+   "doc_count": 8,
+   "char_count": 358,
+   "html": true
+  },
+  {
+   "path": "system.attributes.modules",
+   "actor_types": "spacecraft — TRANSLATE (semi-structured: '5 x size V 7 x size IV 9 x size III'; only 'size' is a word).",
+   "doc_count": 7,
+   "char_count": 235,
+   "html": false
+  },
+  {
+   "path": "system.attributes.model",
+   "actor_types": "spacecraft — TRANSLATE/transliterate ('FRIGATE/CONESTOGA', 'BISON / M').",
+   "doc_count": 7,
+   "char_count": 96,
+   "html": false
+  },
+  {
+   "path": "system.attributes.ai",
+   "actor_types": "spacecraft — TRANSLATE or keep ('MU/TH/UR 9000' is a proper noun).",
+   "doc_count": 7,
+   "char_count": 73,
+   "html": false
+  },
+  {
+   "path": "system.attributes.manufacturer",
+   "actor_types": "spacecraft — TRANSLATE/transliterate ('Weyland-Yutani', 'Lockmart').",
+   "doc_count": 7,
+   "char_count": 68,
+   "html": false
+  },
+  {
+   "path": "system.attributes.armaments",
+   "actor_types": "spacecraft — TRANSLATE ('2 x size III 4 x size II', 'None').",
+   "doc_count": 6,
+   "char_count": 44,
+   "html": false
+  },
+  {
+   "path": "system.general.sigItem.value",
+   "actor_types": "character — TRANSLATE (all 6 values are literally 'None').",
+   "doc_count": 6,
+   "char_count": 58,
+   "html": false
+  },
+  {
+   "path": "system.general.relOne.value",
+   "actor_types": "character,synthetic — TRANSLATE (all 'None').",
+   "doc_count": 7,
+   "char_count": 41,
+   "html": false
+  },
+  {
+   "path": "system.general.relTwo.value",
+   "actor_types": "character,synthetic — TRANSLATE (all 'None').",
+   "doc_count": 7,
+   "char_count": 40,
+   "html": false
+  },
+  {
+   "path": "system.general.agenda.value",
+   "actor_types": "character — TRANSLATE (all 'None').",
+   "doc_count": 2,
+   "char_count": 8,
+   "html": false
+  },
+  {
+   "path": "name + prototypeToken.name",
+   "actor_types": "all — TRANSLATE. prototypeToken.name === name for 74/74 actors, so Babele's built-in tokenName behaviour (which returns the translated `name`) is already correct; alienTokenName is a superset that additionally honours an explicit tokenName translation.",
+   "doc_count": 74,
+   "char_count": 1847,
+   "html": false
+  },
+  {
+   "path": "system.skills.<skl>.label AND system.skills.<skl>.description (12 skills x 2)",
+   "actor_types": "character,synthetic — DO NOT TRANSLATE. Both are DERIVED: actor-character.mjs:466-468 / actor-synthetic.mjs:456-458 overwrite them every prepareDerivedData with game.i18n.localize(CONFIG.ALIENRPG.skills[skl].name|.attrib). Translating them in the pack has zero effect AND `description` is used as a lookup key: character-skills.hbs:15 emits data-pmbut='{{skill.description}}' and character-sheet.mjs:1117 does game.items.getName(dataset.pmbut) to find the skill-stunts Item.",
+   "doc_count": 22,
+   "char_count": 5236,
+   "html": false
+  },
+  {
+   "path": "system.attributes.<abl>.label (character/synthetic), system.attributes.<key>.label (creature/vehicles), system.general.mobility|observation|acidSplash.label (creature)",
+   "actor_types": "character,synthetic,creature,vehicles — DO NOT TRANSLATE. Derived: actor-character.mjs:461, actor-synthetic.mjs:451, actor-creature.mjs:81-86, actor-vehicle.mjs:146 all overwrite from CONFIG.ALIENRPG via game.i18n.localize.",
+   "doc_count": 74,
+   "char_count": 2358,
+   "html": false
+  },
+  {
+   "path": "system.header.health.label / system.header.stress.label / system.header.resolve.label / system.general.special.label / system.header.type.label",
+   "actor_types": "character,synthetic,creature,spacecraft,vehicles — DO NOT TRANSLATE. Dead data: grep of templates/ + module/ finds ZERO readers. Values are a mix of i18n keys ('ALIENRPG.Health') and literals ('Health', 'Text', 'Number').",
+   "doc_count": 74,
+   "char_count": 1471,
+   "html": false
+  },
+  {
+   "path": "system.general.cash.value, system.general.career.value, system.general.mobility|observation|acidSplash.value, system.attributes.leasecost.value, system.attributes.cost.value, system.modifiers.*.ability",
+   "actor_types": "character,synthetic,creature,spacecraft,vehicles — DO NOT TRANSLATE. Numbers, currency ('$738,150,000.00'), career_list indexes ('0'..'10'), or attribute codes ('agl','str','wit','emp').",
+   "doc_count": 74,
+   "char_count": 421,
+   "html": false
+  }
+ ],
+ "default_mapping_gaps": [
+  {
+   "doc_type": "Item",
+   "default": "\"description\": \"system.description.value\"",
+   "actual": "NO alienrpg item type has system.description.value. The real long text is system.attributes.comment.value (item, weapon, armor, spacecraftmods, spacecraftweapons — 307 docs / 99,697 chars), system.general.comment.value (agenda, talent, specialty — 100 docs / 19,595 chars), system.description as a PLAIN HTMLField on skill-stunts only (item-stunts.mjs — 12 docs / 1,957 chars), and system.misc.description.value on planet-system (item-planet-system.mjs, 68 docs, all empty today).",
+   "impact": "Without an override, 121,249 chars of item body text (100% of it) is invisible to Babele. Because the path does not exist, PrimitiveConverter fails open silently — no error, just nothing translated."
+  },
+  {
+   "doc_type": "Actor",
+   "default": "\"description\": \"system.details.biography.value\"",
+   "actual": "alienrpg has no system.details at all on actors. Biography-equivalent is system.notes (base-actor.mjs HTMLField — character/creature/spacecraft/synthetic, 45 docs / 40,265 chars) plus the creature-only system.general.special.value (30 docs / 81,617 chars) and character/synthetic system.general.appearance.value.",
+   "impact": "121,882 chars of actor prose invisible. Keep the inherited default in place anyway (harmless, fails open) so foreign systems sharing this GLOBAL mapping layer are not broken."
+  },
+  {
+   "doc_type": "Actor (vehicles subtype)",
+   "default": "n/a — but any naive `\"notes\": \"system.notes\"` override",
+   "actual": "actor-vehicle.mjs:130 REDECLARES schema.notes as SchemaField({notes: StringField}); all 6 vehicle actors carry system.notes = {\"notes\": \"\"} (object), while every other actor type has a string there.",
+   "impact": "PrimitiveConverter._invalidStaticTranslation only type-guards PRIMITIVE originals, so a string translation would be written straight over the object and replace a SchemaField with a scalar. Must be a separate _variant pointing at system.notes.notes."
+  },
+  {
+   "doc_type": "Item (vs Actor) — same path, different medium",
+   "default": "one Item.description mapping",
+   "actual": "system.attributes.comment.value is rich HTML on Items (prose-mirror + TextEditor.enrichHTML, item-sheet.mjs:262/318/340/351) but PLAIN TEXT in a raw <textarea> on the `vehicles` ACTOR (vehicle-general.hbs:9).",
+   "impact": "A single shared translation policy would inject HTML into a textarea (tags rendered literally) or strip it from item bodies. Needs two separate _variants."
+  },
+  {
+   "doc_type": "JournalEntry",
+   "default": "\"description\": \"content\"",
+   "actual": "No journal in any of the three packs has a `content` field (removed in Foundry v10). All text lives in pages[].text.content (151 pages / 2,230,280 chars — 82.3% of the whole corpus).",
+   "impact": "Dead mapping. Harmless (extract drops the undefined), but it will never surface anything; all journal text comes through the default `pages` document converter, which IS correct."
+  },
+  {
+   "doc_type": "TableResult",
+   "default": "\"name\" via referencedDocumentField {uuidPath: documentUuid, referencedField: name}",
+   "actual": "Every documentUuid in the packs is a WORLD uuid — 'RollTable.<id>' (44 results) or 'Macro.<id>' (1). foundry.utils.parseUuid(...).collection.collection resolves to the document-name collection, never a pack id, so runtime.mappedCompendiumFor() returns null.",
+   "impact": "The converter always returns undefined → fails open. TableResult.name for the 45 document-type results must be translated EXPLICITLY in the payload; it will not be inherited from the referenced table. 806 of 1,530 results carry a non-empty name (9,925 chars)."
+  },
+  {
+   "doc_type": "TableResult",
+   "default": "\"_identity\": {export:[\"range\",\"_id\"], match:[\"_id\",\"range\"]}",
+   "actual": "Works — core/babele.js:86-90 registers the `range` extractor producing `${start}-${end}`. BUT 38 results across the 3 packs share a range with a sibling in the same table (37 in core, 1 in starter).",
+   "impact": "ExportKeys falls back to the raw _id for the second result of a duplicate range, so the translation file mixes '1-1' keys with opaque 16-char ids. Matching still resolves correctly (_id tried first, then range), but the file is fragile to any upstream re-roll of result ids."
+  },
+  {
+   "doc_type": "Scene",
+   "default": "name / drawings(textCollection) / notes(textCollection) / regions(document)",
+   "actual": "Correct as far as it goes, but `navName` and `tokens` are not mapped at all. Both are empty in these packs (0 tokens, all navName ''), so this is a forward-compat gap only. Scene notes exist only in the starter pack (37 notes / 349 chars).",
+   "impact": "No loss today; declared anyway so a future scene with placed tokens or a nav name is covered."
+  },
+  {
+   "doc_type": "RegionBehavior",
+   "default": "_variants for displayScrollingText (system.text) and teleportToken (system.dialog.revealed/unrevealed)",
+   "actual": "All 4 regions in the packs use teleportToken with system keys {destination, choice} — there is no `dialog` sub-object in this Foundry version's data.",
+   "impact": "Nothing to translate; only Region.name (4 regions / 69 chars) is real. Default is harmless."
+  },
+  {
+   "doc_type": "Adventure",
+   "default": "items / actors / tables declared WITHOUT `expose`",
+   "actual": "Actor-embedded items (180 docs / 52,998 mapped chars) cannot see the Adventure-level `items` translation block unless the items field is exposed into the document translation scope (DocumentConverter.prepare → scope.publish, only when params.expose === true).",
+   "impact": "Without expose:true, all 180 embedded items must be re-translated inline under each actor. With it, 155/180 (86.1%) and 48,181/52,998 chars (90.9%) are inherited by name. Same trick on `tables` is what makes the system.rTables/cTables converter possible."
+  },
+  {
+   "doc_type": "Macro",
+   "default": "\"command\": \"command\"",
+   "actual": "The 5 macro commands are 9,347 chars of JavaScript with only ~6 user-visible literals ('Player - Roll Alien Dice.', 'Roll Alien Dice.', 'for ' + actor.name, 'GM', label:'OK' x3). They also hard-code folder names ('Alien Mother Tables', 'Alien Creature Tables') and a table name ('EV - 48a. LS - DANGER EVENT DETAIL').",
+   "impact": "Mapping is correct but dangerous: any translation of `command` ships a full replacement JS body. Safest policy is to omit the `command` key from the translation file entirely (Babele then leaves it untouched) or to translate only the literals while keeping folder/table names byte-identical."
+  }
+ ],
+ "embedded_source_coverage": {
+  "embedded_items_total": 180,
+  "with_compendium_source": 180,
+  "resolvable_pct": 0,
+  "note": "TRAP: 180/180 (100%) actor-embedded items carry a source uuid, but 0% of them resolve to any pack we will translate, so Babele's _stats.compendiumSource re-sourcing saves EXACTLY 0 chars here. Breakdown: 144/180 are WORLD uuids of the form 'Item.<16-char id>' — DocumentConverter._sourceCollection() requires a /^Compendium\\./ prefix, so exact-source lookup is skipped outright. The other 36 are Compendium uuids pointing at packs that no longer exist in this install: alienrpg-corerules.alienrpg-talents-career (11), alien-evolved-starterset.alienrpg-weapons (13), alienrpg-corerules.alienrpg-talents-general (6), alienrpg-starterset.alienrpg-weapons (3), alienrpg-starterset.alienrpg-starter-talentscareer (2), alienrpg-corerules.alienrpg-weapons (1). The only installed packs are alienrpg.alien-rpg-system, alien-evolved-corerules.alien-evolved-core-rules and alien-evolved-starterset.alien-evolved-starter-set — all three are Adventure packs with no per-type sub-packs — so runtime.mappedCompendiumFor() returns null for every one of those collection ids. WORKAROUND used in the proposed mapping: declare Adventure.items with expose:true. That publishes the Item EmbeddedCompendium into the per-document DocumentTranslationScope; EmbeddedCompendium's constructor then merges scopedPack.translations as the base entry layer for Actor.items, so embedded items match the Adventure-level item translations BY NAME. Measured coverage with that in place: 155/180 items (86.1%) and 48,181 of 52,998 mapped chars (90.9%). Per pack: core 144/149 items, 47,100 chars; starter 11/31 items, 2,282 chars (the other 20 starter items exist only in the CORE pack's item list and cannot be inherited across packs — each Adventure has its own scope). The 25 uncovered items (4,817 chars) must be translated inline under their actor: spacecraftmods 'Emergency Escape Vehicle II', talents 'Field Surgeon' / 'Take Control', weapons 'Knife' / 'Mk.16 150mm Banshee 70 Unguided Rocked Launcher', plus the starter-only 'Weyland-Yutani Key Card' and 'Kitchen Knife'. No _id collisions exist between embedded items and unrelated pack items (checked all three packs), so name-keyed inheritance is safe; the only duplicate pack-item name is 'Lucky' (2 talents in core, identical body)."
+ },
+ "item_paths": [
+  {
+   "path": "system.attributes.comment.value",
+   "item_types": "item,weapon,armor,spacecraftmods,spacecraftweapons — TRANSLATE. The main item body. prose-mirror + TextEditor.enrichHTML (module/sheets/item-sheet.mjs:262,318,340,351; item-sheet.hbs:91, item-weapon.hbs:65, item-armor.hbs:8, item-spacecraftmods.hbs:13, item-spacecraftweapons.hbs:52). Counts pool adventure-level + actor-embedded items.",
+   "doc_count": 307,
+   "char_count": 99697,
+   "html": true
+  },
+  {
+   "path": "system.general.comment.value",
+   "item_types": "agenda,talent (schema also on specialty and armor; all 19 specialty values are empty) — TRANSLATE. prose-mirror + enrichHTML (item-sheet.mjs:285,307,329; item-talent.hbs:10, item-agenda.hbs:8, item-specialty.hbs:6). Also read verbatim into chat by character-sheet.mjs:1164 _talentBtn.",
+   "doc_count": 100,
+   "char_count": 19595,
+   "html": true
+  },
+  {
+   "path": "system.description",
+   "item_types": "skill-stunts ONLY — TRANSLATE. The one type whose data model declares it (item-stunts.mjs). prose-mirror (item-skill-stunts.hbs:6) + enrichHTML (item-sheet.mjs:274) + pushed to chat by character-sheet.mjs:1121. Note character-sheet.mjs:1124 tests chatData.startsWith('<h2>No Stunts Entered</h2>') — translating that exact placeholder string changes a control-flow branch.",
+   "doc_count": 12,
+   "char_count": 1957,
+   "html": true
+  },
+  {
+   "path": "system.details.climate.value",
+   "item_types": "planet-system — TRANSLATE (free text: 'Chilly and thin but breathable').",
+   "doc_count": 67,
+   "char_count": 3095,
+   "html": false
+  },
+  {
+   "path": "system.details.colonies.value",
+   "item_types": "planet-system — TRANSLATE ('None, military monitoring\\noutpost').",
+   "doc_count": 67,
+   "char_count": 3040,
+   "html": false
+  },
+  {
+   "path": "system.details.terrain.value",
+   "item_types": "planet-system — TRANSLATE ('Fault block mountains and cavernous mines').",
+   "doc_count": 66,
+   "char_count": 2715,
+   "html": false
+  },
+  {
+   "path": "system.details.keyResources.value",
+   "item_types": "planet-system — TRANSLATE ('Diatomite, kaolin, bentonite, and barite').",
+   "doc_count": 66,
+   "char_count": 2310,
+   "html": false
+  },
+  {
+   "path": "system.header.commonName.value",
+   "item_types": "planet-system — TRANSLATE/transliterate (planet names: 'Znoy Outpost', 'TRAON').",
+   "doc_count": 58,
+   "char_count": 2045,
+   "html": false
+  },
+  {
+   "path": "system.attributes.capacity.value",
+   "item_types": "spacecraftmods — TRANSLATE ('Added Hardpoint, size I').",
+   "doc_count": 124,
+   "char_count": 2015,
+   "html": false
+  },
+  {
+   "path": "system.details.affiliation.value",
+   "item_types": "planet-system — TRANSLATE ('Kelland and Omni-Tech', 'UPP').",
+   "doc_count": 67,
+   "char_count": 1796,
+   "html": false
+  },
+  {
+   "path": "system.details.classification.value",
+   "item_types": "planet-system — TRANSLATE ('Terrestrial planet, terraformed').",
+   "doc_count": 67,
+   "char_count": 1752,
+   "html": false
+  },
+  {
+   "path": "system.header.location.value",
+   "item_types": "planet-system — TRANSLATE, partly coordinates ('-6.8 Rimward, 2.0 Spinward' — 'Rimward'/'Spinward' are words).",
+   "doc_count": 64,
+   "char_count": 1675,
+   "html": false
+  },
+  {
+   "path": "system.header.sector.value",
+   "item_types": "planet-system — TRANSLATE/transliterate ('Bao Sau', 'SECTOR 949').",
+   "doc_count": 68,
+   "char_count": 1170,
+   "html": false
+  },
+  {
+   "path": "system.header.system.value",
+   "item_types": "planet-system — TRANSLATE/transliterate ('17 Phei Phei', '268G.CET SYSTEM').",
+   "doc_count": 68,
+   "char_count": 902,
+   "html": false
+  },
+  {
+   "path": "system.attributes.class.value",
+   "item_types": "weapon — TRANSLATE ('Pistol', 'Rifle').",
+   "doc_count": 78,
+   "char_count": 657,
+   "html": false
+  },
+  {
+   "path": "system.details.meanTemperature.value",
+   "item_types": "planet-system — MOSTLY DO-NOT ('16°C') but 'at night to ... during the day' phrases occur; translate with care.",
+   "doc_count": 67,
+   "char_count": 516,
+   "html": false
+  },
+  {
+   "path": "system.misc.description.value",
+   "item_types": "planet-system — TRANSLATE as HTML. Declared HTMLField (item-planet-system.mjs), prose-mirror (item-planet-description.hbs:7) + enrichHTML (item-sheet.mjs:373). Present on all 68 planet-system items but EMPTY everywhere today; mapped for forward compat.",
+   "doc_count": 68,
+   "char_count": 0,
+   "html": true
+  },
+  {
+   "path": "system.attributes.effects / system.attributes.healingtime.value",
+   "item_types": "crit-inj — TRANSLATE (HTMLField / string). 0 documents in the three packs; mapped from item-crit-inj.mjs for forward compat.",
+   "doc_count": 0,
+   "char_count": 0,
+   "html": true
+  },
+  {
+   "path": "system.header.effects / system.header.repairroll / system.header.damage.value",
+   "item_types": "spacecraft-crit — TRANSLATE (2 HTMLFields + 1 string). 0 documents; mapped from item-spacecraft-crit.mjs.",
+   "doc_count": 0,
+   "char_count": 0,
+   "html": true
+  },
+  {
+   "path": "system.header.comment / system.header.type",
+   "item_types": "colony-initiative — TRANSLATE (both HTMLFields). 0 documents; mapped from item-colony-initiative.mjs. Note this is HTMLField `system.header.type`, NOT the '0'/'1' code `system.header.type.value` used by other types.",
+   "doc_count": 0,
+   "char_count": 0,
+   "html": true
+  },
+  {
+   "path": "name",
+   "item_types": "all — TRANSLATE, with one hard constraint: the 12 `skill-stunts` items in the SYSTEM pack are named exactly 'Close Combat', 'Command', 'Comtech', 'Heavy Machinery', 'Manipulation', 'Medical Aid', 'Mobility', 'Observation', 'Piloting', 'Ranged Combat', 'Stamina', 'Survival' and are looked up with game.items.getName(skill.description) where skill.description === game.i18n.localize('ALIENRPG.Skill<key>'). See risks.",
+   "doc_count": 523,
+   "char_count": 7986,
+   "html": false
+  },
+  {
+   "path": "system.notes",
+   "item_types": "agenda,armor,planet-system,skill-stunts,spacecraftmods,spacecraftweapons,specialty — DO NOT TRANSLATE. Every one of the 267 non-empty values is the literal string '[object Object]' (corrupted by an old migration). Mapping it would burn 4,005 chars on garbage.",
+   "doc_count": 267,
+   "char_count": 4005,
+   "html": false
+  },
+  {
+   "path": "system.modifiers.skills.<12 skills>.label and .ability, system.modifiers.attributes.<6>.label",
+   "item_types": "armor,item — DO NOT TRANSLATE. Two independent reasons: (1) on the one type that inherits base-item's prepareDerivedData (`feature`) they are overwritten with game.i18n.localize(CONFIG.ALIENRPG.skills[key].name) (base-item.mjs:40-44); (2) templates/item/item-modifiers.hbs NEVER renders them — it emits {{localize 'ALIENRPG.*'}} literals instead. 19,493 chars of pure noise across 30 paths.",
+   "doc_count": 101,
+   "char_count": 19493,
+   "html": false
+  },
+  {
+   "path": "system.attributes.cost.value",
+   "item_types": "armor,item,spacecraftmods,spacecraftweapons,weapon — DO NOT TRANSLATE. Currency strings ('$300.00', '$1,200.00').",
+   "doc_count": 324,
+   "char_count": 3026,
+   "html": false
+  },
+  {
+   "path": "system.header.active",
+   "item_types": "armor,item,weapon — DO NOT TRANSLATE. StringField holding 'false'/'true' (item-item.mjs, item-weapon.mjs, item-armor.mjs). Translating it breaks the equipped/active toggle.",
+   "doc_count": 180,
+   "char_count": 899,
+   "html": false
+  },
+  {
+   "path": "system.header.type.value",
+   "item_types": "item,spacecraftweapons,weapon (and spacecraft-crit) — DO NOT TRANSLATE. Enum code '0'/'1'; actor-spacecraft.mjs:prepareDerivedData switches on it to count minor/major crits.",
+   "doc_count": 191,
+   "char_count": 191,
+   "html": false
+  },
+  {
+   "path": "system.general.career.value",
+   "item_types": "talent — DO NOT TRANSLATE. Index into CONFIG.ALIENRPG.career_list ('1','8'); rendered with {{selectOptions career_list ... localize=true}}.",
+   "doc_count": 85,
+   "char_count": 99,
+   "html": false
+  },
+  {
+   "path": "system.attributes.size.value / system.attributes.hardpoint.value / system.details.population.value",
+   "item_types": "spacecraftmods, spacecraftweapons, planet-system — DO NOT TRANSLATE. Roman numerals ('I','II','III') and raw numbers ('0','300').",
+   "doc_count": 212,
+   "char_count": 895,
+   "html": false
+  }
+ ],
+ "other_paths": [
+  {
+   "doc_type": "JournalEntryPage",
+   "path": "text.content (default mapping key `text`)",
+   "char_count": 2230280,
+   "note": "151 pages across 13 journals (38 text pages in core, 20 in starter, 1 in system; 92 image pages carry no text). 82.3% of the entire corpus. Contains 41 inline @-links, all world uuids: 39 @Item[<id>]{label} and 2 @JournalEntry[<id>]{label} — only the {label} part is translatable, the id must be preserved verbatim. Adventure import keeps _ids so the links keep resolving."
+  },
+  {
+   "doc_type": "JournalEntryPage",
+   "path": "name",
+   "char_count": 2256,
+   "note": "151 pages. Mapped by default."
+  },
+  {
+   "doc_type": "JournalEntryPage",
+   "path": "image.caption (default key `caption`), src, video.width/height",
+   "char_count": 0,
+   "note": "All 92 image pages have an empty caption; src is a file path, video dims are numbers. Default mappings are harmless no-ops."
+  },
+  {
+   "doc_type": "JournalEntry",
+   "path": "name",
+   "char_count": 305,
+   "note": "13 journals. 'CORE RULES - HOW TO USE THIS MODULE' contains NBSPs — preserve or normalise deliberately. `categories` is an empty array on all 13; `content` does not exist (dead default)."
+  },
+  {
+   "doc_type": "TableResult",
+   "path": "description",
+   "char_count": 163191,
+   "note": "1,530 results across 137 tables (1,375 core / 124 starter / 31 system). This is the real result text in Foundry v13+/v14 — there is NO `text` field on any result in these packs. 6.0% of the corpus, second-largest block."
+  },
+  {
+   "doc_type": "TableResult",
+   "path": "name (referencedDocumentField, uuidPath documentUuid)",
+   "char_count": 9925,
+   "note": "806 of 1,530 results have a non-empty name. Only 45 results have a real documentUuid and all are world uuids, so the referenced-document fallback never fires — names must be translated explicitly. 60 core + 2 starter results are type 'document' (sub-table links) whose displayed label is this name."
+  },
+  {
+   "doc_type": "RollTable",
+   "path": "name",
+   "char_count": 3640,
+   "note": "137 tables. HIGH-RISK: 11 table names are hard-coded in system JS — 'Panic Table', 'Stress Response Table', 'Panic Response Table', 'EV - Critical Injuries', 'Critical injuries', 'Critical Injuries on Synthetics', 'Spaceship Minor Component Damage', 'Spaceship Major Component Damage' (module/documents/actor.mjs:554,845,1067,1812-1830,1848,1855) and 'EV - 48a. LS - DANGER EVENT DETAIL' (inside the core pack's own macro command). Additionally cTableget() (rollTableData.mjs:26) selects tables in folder 'Alien Mother Tables' by name.startsWith('Critical Injuries'), and rTableget() lists every table in folder 'Alien Creature Tables' by name. Verified present: all 11 except the exact-case 'Critical Injuries' (the pack ships 'Critical injuries', which is the third fallback in actor.mjs:1817)."
+  },
+  {
+   "doc_type": "RollTable",
+   "path": "description",
+   "char_count": 888,
+   "note": "137 tables, only a handful non-empty (603 chars core, 285 starter). Safe to translate."
+  },
+  {
+   "doc_type": "Folder (via Adventure.folders → nameCollection)",
+   "path": "folders[].name",
+   "char_count": 755,
+   "note": "49 folder documents (7 system / 17 starter / 25 core), 26 distinct names. DO NOT TRANSLATE 'Alien Creature Tables' or 'Alien Mother Tables' — module/helpers/rollTableData.mjs:7,24 does game.folders.contents.find(x => x.name === '<English>') and then reads folder.contents; a rename makes `folder` undefined and the creature sheet throws on folder.contents. The two adventure macros 'Alien - Roll on selected Mother/Creature table V10' compare t.folder.name against the same two literals. 'Alien Tables' and 'Alien Sub-Tables' are safe. Note nameCollection keys by NAME, so the 3 different-typed folders all named 'Alien Evolved' (Actor/Item/JournalEntry) necessarily share one translation."
+  },
+  {
+   "doc_type": "Macro",
+   "path": "name",
+   "char_count": 177,
+   "note": "5 macros (4 in the system pack, 1 in core). Safe to translate."
+  },
+  {
+   "doc_type": "Macro",
+   "path": "command",
+   "char_count": 9347,
+   "note": "Only these literals are user-visible: Dialog titles 'Player - Roll Alien Dice.' and 'Roll Alien Dice.', the chat label \"'for ' + actor.name\" and \"let label = 'GM'\", and three fallback button labels 'OK'. Everything else is already game.i18n.localize('ALIENRPG.*'). Strings that must stay byte-identical: 'Alien Mother Tables' / 'Alien Creature Tables' (folder-name comparisons), 'EV - 48a. LS - DANGER EVENT DETAIL' (game.tables.getName), and the dice-type args 'Black' / 'Stress' passed to yze.yzeRoll. Recommended policy: leave the `command` key OUT of the translation file so Babele leaves the JS untouched."
+  },
+  {
+   "doc_type": "Scene",
+   "path": "name / notes[].text (textCollection) / regions[].name",
+   "char_count": 709,
+   "note": "15 scenes (291 chars of names), 37 map notes all in the starter pack (349 chars — 'Operations', 'Medlab', 'Skyway to Casino'), 4 regions (69 chars). 0 drawings, 0 tokens, 0 tiles, all navName empty. 33 of the 37 notes carry an entryId+pageId, so the note text is an override label over the journal page name — translate both consistently or the pin and the page disagree."
+  },
+  {
+   "doc_type": "RegionBehavior",
+   "path": "(none)",
+   "char_count": 0,
+   "note": "All 4 behaviors are teleportToken with system keys {destination, choice}. Babele's default _variants look for system.dialog.revealed/unrevealed and system.text, neither of which exists here. Nothing to translate."
+  },
+  {
+   "doc_type": "Adventure",
+   "path": "name / description / caption",
+   "char_count": 3637,
+   "note": "3 documents. description = 1,782 + 898 + 892 = 3,572 chars of HTML; caption is empty on all three; names total 65 chars. `combats` is empty on all three and is not in Babele's default mapping anyway. playlists and cards are empty everywhere."
+  },
+  {
+   "doc_type": "ActiveEffect / Playlist / PlaylistSound / Cards / Card",
+   "path": "(none)",
+   "char_count": 0,
+   "note": "ZERO documents of these types anywhere: 0 effects on actors, 0 on items, 0 on embedded items, 0 playlists, 0 card stacks. The default mappings can stay but will never fire."
+  },
+  {
+   "doc_type": "TOTAL",
+   "path": "all mapped text, three packs",
+   "char_count": 2709883,
+   "note": "journal text 2,230,280 (82.3%) | tableresult description 163,191 (6.0%) | actor prose 130,003 (4.8%) | item prose 94,992 (3.5%) | embedded-item prose 49,945 (1.8%) | tableresult names 9,925 | macro commands 9,347 | everything else ~22,200. Per pack: core 2,285,546 | starter 340,826 | system 83,511."
+  }
+ ],
+ "proposed_mapping_js": "/* eslint-disable */\n/**\n * Babele registerMapping layer for the Alien RPG packages.\n *\n * Targets (all three are Adventure-type packs holding ONE Adventure document):\n *   alienrpg.alien-rpg-system                          (system alienrpg 4.1.13)\n *   alien-evolved-corerules.alien-evolved-core-rules   (module 1.0.2)\n *   alien-evolved-starterset.alien-evolved-starter-set (module 1.0.2)\n *\n * This layer only ENRICHES Babele 2.9.1 built-in defaults. Everything it does\n * not mention (Adventure.folders/journals/scenes/macros/playlists/cards,\n * JournalEntry(.pages), RollTable(.results), Region/RegionBehavior,\n * ActiveEffect, Card) keeps the built-in behaviour on purpose.\n *\n * Register during the `babele.init` hook, before the runtime session exists:\n *   Hooks.once('babele.init', (babele) => {\n *     babele.registerConverters(ALIENRPG_CONVERTERS);\n *     babele.registerMapping(ALIENRPG_MAPPINGS);\n *   });\n */\n\nconst isStr = (v) => typeof v === 'string' && v.trim().length > 0;\n\n/**\n * Normalize whatever Babele hands a function converter as `runtime`\n * (a DocumentTranslationScope, a CompendiumRuntime, or a bare object)\n * into something exposing localMappedCompendiumFor()/currentCompendium().\n */\nfunction asRuntime(runtime) {\n  if (!runtime) return null;\n  if (typeof runtime.runtime === 'function') return runtime.runtime();\n  if (runtime.runtime && typeof runtime.runtime.localMappedCompendiumFor === 'function') return runtime.runtime;\n  return runtime;\n}\n\n/* ------------------------------------------------------------------ *\n * Converter 1 - RollTable NAME REFERENCE fields.\n *\n * `system.rTables` / `system.cTables` on creature actors do not store an id;\n * they store the RollTable NAME. module/helpers/rollTableData.mjs builds the\n * <select> options as {key: table.name, label: table.name}, and\n * module/documents/actor.mjs:1839 resolves the roll with\n * game.tables.getName(dataset.atttype). Translating these strings by hand\n * would silently drift from the translated RollTable names and break both the\n * dropdown selection and the creature attack / critical injury roll.\n *\n * So resolve the value from the SAME translation block that renames the\n * tables: the Adventure `tables` field below is declared with `expose: true`,\n * which publishes its EmbeddedCompendium (metadata.type === 'RollTable') into\n * the per-document translation scope, where localMappedCompendiumFor\n * ('RollTable') finds it. An explicit `rollTable` / `critTable` entry in the\n * actor's own translation still wins.\n * ------------------------------------------------------------------ */\nexport function alienRollTableRef(value, translation, source, contextCompendium, allTranslations, runtime = {}) {\n  if (!isStr(value) || value === 'None') return value;  // 'None' is a magic value, never translate it\n  if (isStr(translation)) return translation;\n  const rt = asRuntime(runtime);\n  const tables = rt?.localMappedCompendiumFor?.('RollTable');\n  if (!tables) return value;\n  const translated = tables.translateField?.('name', { name: value }, rt);\n  return isStr(translated) ? translated : value;\n}\nalienRollTableRef.extract = (value) => (isStr(value) && value !== 'None' ? value : undefined);\n\n/* ------------------------------------------------------------------ *\n * Converter 2 - prototypeToken.name.\n *\n * Babele's built-in Actor mapping declares\n *   tokenName: {path:'prototypeToken.name', converter:'name'}\n * and `name` is Converters.mappedField('name'), which DISCARDS the\n * `tokenName` translation and returns the translated `name` field instead.\n * This is a strict superset: use the tokenName translation when present,\n * otherwise fall back to the built-in behaviour so a token is never left in\n * English. In all three Alien packs prototypeToken.name === actor.name for\n * 74/74 actors, so the fallback is the normal path.\n * ------------------------------------------------------------------ */\nexport function alienTokenName(value, translation, source, contextCompendium, allTranslations, runtime = {}) {\n  if (isStr(translation)) return translation;\n  const pack = contextCompendium ?? asRuntime(runtime)?.currentCompendium?.() ?? null;\n  const fallback = pack?.translateField?.('name', source, runtime);\n  return isStr(fallback) ? fallback : value;\n}\nalienTokenName.extract = (value) => (isStr(value) ? value : undefined);\n\nexport const ALIENRPG_CONVERTERS = {\n  alienRollTableRef,\n  alienTokenName,\n};\n\n/* ------------------------------------------------------------------ *\n * Document mappings.\n *\n * Item/Actor subtype selection uses `_variants` (`_when: {path:'type', ...}`)\n * so that (a) one translation key `description` can point at a different\n * source path per subtype, and (b) documents from OTHER systems sharing this\n * GLOBAL mapping layer never match an alienrpg-only path. Every variant that\n * redefines the built-in key `description` also carries an `exists` guard on\n * its own path, because MappingBlock#activeFields REPLACES a base field with a\n * matching variant field of the same key - without the guard a dnd5e/pf2e\n * item of type \"weapon\"/\"armor\"/\"item\" would lose Babele's built-in\n * system.description.value mapping.\n * ------------------------------------------------------------------ */\nexport const ALIENRPG_MAPPINGS = {\n\n  /* ---------------- Adventure ---------------- *\n   * name / description / caption / folders / journals / scenes / macros /\n   * playlists / cards keep the built-in defaults. Only the two collections\n   * that must become visible to sibling collections are redeclared. */\n  \"Adventure\": {\n    // expose:true publishes the Item EmbeddedCompendium into the document\n    // translation scope, so actor-embedded items inherit these translations by\n    // name. That covers 155/180 (86.1%) of actor-embedded items and\n    // 48,181/52,998 chars (90.9%). _stats.compendiumSource covers 0%: every\n    // embedded source uuid is either a world uuid (144/180) or points at a\n    // pack id that no longer exists (36/180).\n    \"items\": {\n      \"path\": \"items\",\n      \"converter\": \"document\",\n      \"documentType\": \"Item\",\n      \"cardinality\": \"many\",\n      \"expose\": true\n    },\n    // expose:true is what lets alienRollTableRef resolve system.rTables /\n    // system.cTables against the translated table names.\n    \"tables\": {\n      \"path\": \"tables\",\n      \"converter\": \"document\",\n      \"documentType\": \"RollTable\",\n      \"cardinality\": \"many\",\n      \"expose\": true\n    }\n  },\n\n  /* ---------------- Item ---------------- */\n  \"Item\": {\n    \"name\": \"name\",\n    \"effects\": {\n      \"path\": \"effects\",\n      \"converter\": \"document\",\n      \"documentType\": \"ActiveEffect\",\n      \"cardinality\": \"many\"\n    },\n    \"_variants\": [\n      /* HTML body edited through <prose-mirror name=\"system.attributes.comment.value\">\n         and enriched in module/sheets/item-sheet.mjs. 307 docs / 99,697 chars. */\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"in\": [\"item\", \"weapon\", \"armor\", \"spacecraftmods\", \"spacecraftweapons\"] },\n            { \"path\": \"system.attributes.comment.value\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.attributes.comment.value\"\n      },\n      /* HTML body under system.general.comment.value. 100 docs / 19,595 chars. */\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"in\": [\"agenda\", \"talent\", \"specialty\"] },\n            { \"path\": \"system.general.comment.value\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.general.comment.value\"\n      },\n      /* weapon-only free text: \"Pistol\", \"Rifle\", \"Heavy weapon\". */\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"weapon\" },\n        \"weaponClass\": \"system.attributes.class.value\"\n      },\n      /* spacecraftmods-only free text: \"Added Hardpoint, size I\". */\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"spacecraftmods\" },\n        \"capacity\": \"system.attributes.capacity.value\"\n      },\n      /* skill-stunts is the ONLY type whose data model declares\n         system.description (item-stunts.mjs). Babele's built-in Item default\n         points at system.description.value, which does not exist anywhere in\n         this system. */\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"equals\": \"skill-stunts\" },\n            { \"path\": \"system.description\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.description\"\n      },\n      /* planet-system gazetteer entries. */\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"equals\": \"planet-system\" },\n            { \"path\": \"system.details.classification.value\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.misc.description.value\",\n        \"commonName\": \"system.header.commonName.value\",\n        \"starSystem\": \"system.header.system.value\",\n        \"sector\": \"system.header.sector.value\",\n        \"location\": \"system.header.location.value\",\n        \"affiliation\": \"system.details.affiliation.value\",\n        \"classification\": \"system.details.classification.value\",\n        \"climate\": \"system.details.climate.value\",\n        \"meanTemperature\": \"system.details.meanTemperature.value\",\n        \"terrain\": \"system.details.terrain.value\",\n        \"colonies\": \"system.details.colonies.value\",\n        \"keyResources\": \"system.details.keyResources.value\"\n      },\n      /* crit-inj / spacecraft-crit / colony-initiative have 0 documents in the\n         three packs today, but their data models declare these as HTML/string\n         free text, so they are mapped for forward compatibility. */\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"equals\": \"crit-inj\" },\n            { \"path\": \"system.attributes.effects\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.attributes.effects\",\n        \"healingTime\": \"system.attributes.healingtime.value\"\n      },\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"equals\": \"spacecraft-crit\" },\n            { \"path\": \"system.header.effects\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.header.effects\",\n        \"repairRoll\": \"system.header.repairroll\",\n        \"damage\": \"system.header.damage.value\"\n      },\n      {\n        \"_when\": {\n          \"all\": [\n            { \"path\": \"type\", \"equals\": \"colony-initiative\" },\n            { \"path\": \"system.header.comment\", \"exists\": true }\n          ]\n        },\n        \"description\": \"system.header.comment\",\n        \"initiativeType\": \"system.header.type\"\n      }\n    ]\n  },\n\n  /* ---------------- Actor ---------------- */\n  \"Actor\": {\n    \"name\": \"name\",\n    \"tokenName\": {\n      \"path\": \"prototypeToken.name\",\n      \"converter\": \"alienTokenName\"\n    },\n    \"items\": {\n      \"path\": \"items\",\n      \"converter\": \"document\",\n      \"documentType\": \"Item\",\n      \"cardinality\": \"many\"\n    },\n    \"effects\": {\n      \"path\": \"effects\",\n      \"converter\": \"document\",\n      \"documentType\": \"ActiveEffect\",\n      \"cardinality\": \"many\"\n    },\n    \"_variants\": [\n      /* system.notes is the base-actor HTMLField, enriched by every sheet.\n         Babele's built-in Actor default points at\n         system.details.biography.value, which does not exist in this system.\n         NOTE: `vehicles` is deliberately absent - actor-vehicle.mjs REDECLARES\n         schema.notes as SchemaField({notes: StringField}), so on vehicles\n         system.notes is the OBJECT {notes: \"...\"} and writing a string there\n         would replace a SchemaField with a scalar. It is handled below. */\n      {\n        \"_when\": {\n          \"path\": \"type\",\n          \"in\": [\"character\", \"synthetic\", \"creature\", \"spacecraft\", \"colony\", \"planet\", \"territory\"]\n        },\n        \"notes\": \"system.notes\"\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"in\": [\"character\", \"synthetic\"] },\n        \"appearance\": \"system.general.appearance.value\",\n        \"adhocItems\": \"system.adhocitems\",\n        \"signatureItem\": \"system.general.sigItem.value\",\n        \"agenda\": \"system.general.agenda.value\",\n        \"relationshipOne\": \"system.general.relOne.value\",\n        \"relationshipTwo\": \"system.general.relTwo.value\"\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"creature\" },\n        /* PLAIN TEXT in a <textarea> (creature-general.hbs:14): newlines are\n           significant and HTML must NOT be introduced. 30 docs / 81,617 chars,\n           the largest single actor field in the corpus. */\n        \"special\": \"system.general.special.value\",\n        \"rollTable\": { \"path\": \"system.rTables\", \"converter\": \"alienRollTableRef\" },\n        \"critTable\": { \"path\": \"system.cTables\", \"converter\": \"alienRollTableRef\" }\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"vehicles\" },\n        /* PLAIN TEXT <textarea> (vehicle-general.hbs:9) at the SAME path that\n           is rich HTML on the item side - deliberately a separate variant. */\n        \"comment\": \"system.attributes.comment.value\",\n        \"misc\": \"system.general.misc.value\",\n        /* vehicles-only: notes is nested one level deeper than on every other\n           actor type (actor-vehicle.mjs:130). */\n        \"notes\": \"system.notes.notes\"\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"spacecraft\" },\n        \"misc\": \"system.general.misc.value\",\n        \"manufacturer\": \"system.attributes.manufacturer\",\n        \"model\": \"system.attributes.model\",\n        \"ai\": \"system.attributes.ai\",\n        \"modules\": \"system.attributes.modules\",\n        \"armaments\": \"system.attributes.armaments\"\n      },\n      /* colony / planet / territory: 0 documents in the three packs; mapped\n         from the data models so a future colony supplement is covered. */\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"colony\" },\n        \"misc\": \"system.general.misc.value\",\n        \"colonyName\": \"system.header.colonyname\",\n        \"location\": \"system.attributes.location\",\n        \"mission\": \"system.attributes.mission\",\n        \"established\": \"system.attributes.established\",\n        \"sponsor\": \"system.attributes.sponsor\",\n        \"commander\": \"system.attributes.commander\",\n        \"economyDirector\": \"system.attributes.economydirector\",\n        \"statsNotes\": \"system.stats.notes\"\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"planet\" },\n        \"misc\": \"system.general.misc.value\",\n        \"colonyName\": \"system.header.colonyname\",\n        \"parentStar\": \"system.attributes.parentstar\",\n        \"radiation\": \"system.attributes.radiation\",\n        \"planetSize\": \"system.attributes.planetsize\",\n        \"atmosphere\": \"system.attributes.atmosphere\",\n        \"hydrosphere\": \"system.attributes.hydrosphere\",\n        \"dayLength\": \"system.attributes.daylength\",\n        \"axialTilt\": \"system.attributes.axialtilt\",\n        \"gravity\": \"system.attributes.gravity\",\n        \"climate\": \"system.attributes.climate\",\n        \"globalFeature\": \"system.attributes.globalfeature\",\n        \"orbitalPeriod\": \"system.attributes.orbitalperiod\",\n        \"personality\": \"system.attributes.personality\",\n        \"northPole\": \"system.attributes.northpole\",\n        \"equator\": \"system.attributes.equator\",\n        \"southPole\": \"system.attributes.southpole\",\n        \"nhWest\": \"system.attributes.nhwest\",\n        \"nhSouth\": \"system.attributes.nhsouth\",\n        \"nhEast\": \"system.attributes.nheast\",\n        \"shEast\": \"system.attributes.sheast\",\n        \"shWest\": \"system.attributes.shwest\"\n      },\n      {\n        \"_when\": { \"path\": \"type\", \"equals\": \"territory\" },\n        \"sectors\": \"system.sectors.value\",\n        \"comment\": \"system.comment.value\"\n      }\n    ]\n  },\n\n  /* ---------------- Scene ---------------- *\n   * name / drawings / notes / regions keep the built-in defaults\n   * (textCollection for drawings + notes, document converter for regions).\n   * navName and tokens are genuine gaps in Babele's default Scene mapping;\n   * both are empty in these packs today but cost nothing to declare. */\n  \"Scene\": {\n    \"navName\": \"navName\",\n    \"tokens\": {\n      \"path\": \"tokens\",\n      \"converter\": \"nameCollection\"\n    }\n  }\n};\n",
+ "risks": [
+  "FOLDER-NAME LOOKUP CRASH. module/helpers/rollTableData.mjs:7 and :24 do game.folders.contents.find(x => x.name === 'Alien Creature Tables' / 'Alien Mother Tables') and then read folder.contents WITHOUT a null check. Translating either folder name makes `folder` undefined and the creature sheet render throws a TypeError. The two system-pack macros compare t.folder.name against the same two literals. HARD RULE: those two folder names stay English. ('Alien Tables' and 'Alien Sub-Tables' are safe.)",
+  "cTableget() PREFIX FILTER. rollTableData.mjs:26 filters the Alien Mother Tables folder with x.name.startsWith('Critical Injuries'). Fully translating 'Critical Injuries on Xenomorphs' / 'Critical Injuries on Synthetics' empties the creature critical-injury dropdown and silently drops the actor's stored cTables selection. Use a prefix-preserving bilingual name ('Critical Injuries on Xenomorphs 异形重伤表') or leave those names English.",
+  "HARD-CODED TABLE NAMES IN SYSTEM JS. game.tables.getName() is called with literals at module/documents/actor.mjs:554 ('Panic Table'), :845 ('Stress Response Table'), :1067 ('Panic Response Table'), :1812 (localize('ALIENRPG.EVCriticalInjuries') || 'EV - Critical Injuries'), :1815-1817 (localize('ALIENRPG.CriticalInjuries') || 'Critical Injuries' || 'Critical injuries'), :1830 ('Critical Injuries on Synthetics'), :1848/:1855 ('Spaceship Minor/Major Component Damage'), plus 'EV - 48a. LS - DANGER EVENT DETAIL' inside the core pack's own macro. All 11 exist in the packs. Two of them have an i18n escape hatch: with the client language set to cn the system first tries game.tables.getName('重伤') because lang/cn.json maps ALIENRPG.CriticalInjuries='重伤' — so that table may be renamed ONLY to exactly that string. ALIENRPG.EVCriticalInjuries is MISSING from cn.json, so in Evolved mode the table must stay literally 'EV - Critical Injuries'. Everything else must stay English or the roll silently warns and aborts.",
+  "SKILL-STUNTS ITEM NAMES ARE A LOOKUP KEY. templates/actor/character-skills.hbs:15 emits data-pmbut='{{skill.description}}', and system.skills.<skl>.description is overwritten every prepareDerivedData with game.i18n.localize('ALIENRPG.Skill<key>') (actor-character.mjs:468). character-sheet.mjs:1117 then does game.items.getName(dataset.pmbut). So the 12 skill-stunts Items in the system pack must be renamed to EXACTLY the system lang file's skill strings for the active language (cn.json: 肉搏/指挥/科技/机械/操纵/医疗/机动/观察/驾驶/射击/耐力/求生). Any other translation — including leaving them English while the UI runs in cn — breaks the stunts popover for all 12 skills.",
+  "GLOBAL MAPPING LAYER, FIELD-KEY SHADOWING. registerMapping pushes a global layer (core/babele.js) merged into one effectiveMappings used by EVERY Babele-managed pack. MappingBlock#activeFields DELETES then re-sets a field by key, so a variant redefining `description` shadows Babele's built-in Item.description for any other system's item whose `type` happens to be 'weapon'/'armor'/'item' (dnd5e, pf2e...). Mitigated in the proposed mapping by adding an `exists` guard on the alien-only path to every description variant — do not remove those guards. Same reason the built-in Item/Actor `description` defaults are left in place at base level.",
+  "expose:true ON Adventure.items/tables IS ALSO GLOBAL. Every Adventure pack in the world now publishes its item and table translations into the per-document scope. For third-party adventures this is a benign superset (their actor-embedded items may now inherit item translations by name), but it is a behaviour change and could surface a wrong translation if an unrelated adventure has two same-named items meaning different things.",
+  "TABLERESULT KEYS: DUPLICATE RANGES. Default TableResult _identity exports by `range` ('1-6'). 38 results in these packs share a range with a sibling (37 core / 1 starter), so ExportKeys silently falls back to the raw 16-char _id for the second one. Matching still works (_id first, then range), but the translation file mixes readable range keys with opaque ids, and any upstream re-generation of result ids orphans those entries.",
+  "TABLERESULT documentUuid DOES NOT RE-SOURCE. All 45 real documentUuid values are world uuids ('RollTable.<id>', 'Macro.<id>'), so ReferencedDocumentFieldConverter always returns undefined. The 62 type:'document' results (60 core, 2 starter) that link to sub-tables must have their `name` translated explicitly AND kept consistent with the translated sub-table name, or the drawn link label and the table title will disagree (the link itself still resolves by id).",
+  "system.rTables / system.cTables DRIFT. These hold RollTable NAMES. If translated independently of the table names, the <select> loses its selection (selectOptions compares selected against the option key) and game.tables.getName(dataset.atttype) returns null → 'no crit table' warning. The proposed alienRollTableRef converter removes the drift by resolving from the same tables translation block — but it depends on Adventure.tables keeping expose:true. Also: 'None' is a sentinel compared verbatim (actor.mjs:2493) and must never be translated.",
+  "ADVENTURE IMPORT MERGES SHARED FOLDER IDS ACROSS PACKS. 'Alien Tables' (Btepu5tifRV0Pj7w), 'Alien Creature Tables' (LrpFZIuICZfNAr2v), 'Alien Mother Tables' (A0N3Ct1TQq9BuGk6) and 'Alien Sub-Tables' (w3xO69hCmTtYDF8d) have IDENTICAL _ids in all three packs, and 'Alien Evolved'/'Weapons'/'Creatures'/'Talents (Career)' repeat across starter+core. Their nameCollection translations live in three separate translation files; if they disagree, whichever adventure is imported last wins and folder names flip. Keep the folders block byte-identical across the three files.",
+  "STALE WORLD DOCUMENTS SHIFT NAME MATCHING AFTER A FIRST IMPORT. 144/180 embedded items carry _stats.compendiumSource = 'Item.<id>' pointing at a WORLD item. Once the adventure has been imported, DocumentConverter._sourceDocument() resolves those uuids via fromUuidSync and _sourceAwareData() rewrites the payload's `name` to the (already translated) world document's name before the generic-pack lookup. The English-keyed lookup then misses on that branch. It still works today because the current-compendium payload wins the mergeObject, but it is a real fragility if fallback ordering ever changes.",
+  "HTML vs PLAIN TEXT AT THE SAME PATH. system.attributes.comment.value is prose-mirror HTML on Items but a raw <textarea> on the `vehicles` Actor; system.general.special.value (creature, 81,617 chars — the single biggest actor field) is also a raw textarea where '\\n\\n' is the paragraph separator. Injecting <p> tags there renders the tags literally on the sheet; conversely stripping tags from item bodies destroys their formatting. The two must never share a translation-processing pipeline.",
+  "PLACEHOLDER STRINGS ARE CONTROL FLOW. character-sheet.mjs:1124 tests chatData.startsWith('<h2>No Stunts Entered</h2>') and temp3.startsWith('<ol>'); _talentBtn tests temp3.startsWith('<p>'). Translating the skill-stunts placeholder body ('<h2>No Stunts Entered</h2>...' — present in all 12 skill-stunts items) changes which branch runs. Translate the visible words but keep the '<h2>...</h2>' shape, or accept that the ALIENRPG.* fallback path stops firing.",
+  "MACRO command IS EXECUTABLE JS. Babele's default Macro mapping exposes `command`; a translator editing 9,347 chars of JavaScript can break syntax with no validation and no error surface until the macro is run. Recommended: omit the `command` key from the translation files entirely (FieldMapping fails open on a missing key). If it must be translated, the literals 'Alien Mother Tables', 'Alien Creature Tables', 'EV - 48a. LS - DANGER EVENT DETAIL', 'Black' and 'Stress' must stay byte-identical.",
+  "DEAD/DERIVED FIELDS LOOK TRANSLATABLE AND ARE NOT. ~19,493 chars of item system.modifiers.*.label/.ability, ~9,065 chars of actor labels (system.skills.*.label/.description, system.attributes.*.label, system.header.*.label, system.general.special.label) and 4,005 chars of item system.notes ('[object Object]' x267) will show up in any naive extraction. Every one is either overwritten by prepareDerivedData, never rendered by any template, or corrupt data. Translating them wastes ~32.5k chars and, in the case of system.skills.*.description, would be a no-op that also hides the real lookup-key problem.",
+  "registerMapping MUST run in the babele.init hook. BabeleFacade#assertConfigurable rejects late registration once the runtime session exists (babele.js:291-293), and converters have the same constraint (babele.js:197-199). Registering from a `ready` hook silently throws.",
+  "PACK-LEVEL `folders` KEY IS A SECOND, UNCONTROLLED PATH. FolderTranslations.translateImportedCompendiumFolder (hooked on createFolder) renames imported world folders from the pack's top-level translation.folders payload, independently of the Adventure mapping's `folders` field. Do NOT put a `folders` block at the root of these Adventure translation files, or folder names get rewritten twice from two different sources."
+ ]
+}
