@@ -1073,3 +1073,84 @@ EC 项目栽的是 Windows glob 返回反斜杠导致 `.replace('/cn/','/en/')` 
 已改写并**把 10 张图分成两类说明**：9 张是从零重画的（HTML+CSS，未使用上游像素，
 骰面符号复用**系统** `alienrpg` 自带资源），`mini-map.png` 是**上游美术的衍生物**
 （底图是上游 webp，只换了房间名）。后者性质不同，README 里单独声明并给了撤下的途径。
+
+---
+
+### 覆盖率盘点（除核心书外）：一个真缺口，和一次同坑复发
+
+问「除 core 之外是不是都汉完了」，实测下来**基本是，但漏了一整类**。
+
+| 目标 | 实测 |
+|---|---|
+| 系统 `alienrpg` 界面 | 590 键 / 已译 575。余下 15 个全部在 DO-NOT-TRANSLATE 登记过 |
+| `alien-mu-th-ur` | 275 / 269（6 个 MOTHER 关键词必须留 ASCII） |
+| `motion_tracker` | 69 / 69 |
+| `token-action-hud-alien`、`motion-tracker-multideck` | 上游没有 `lang/`，无界面文本 |
+| 系统合集包 | 26 物品 / 4 宏 / 1 日志全译；3 表名 + 3 文件夹名按设计冻结 |
+| **`alien-evolved-*` 的 19 个 `ALIENRPG.*` 键** | **完全未译，连对应 lang 文件都没出** |
+
+那 19 个键是**技能炫技清单（12）与天赋描述（7）的正文**，系统自己的 `en.json`
+里没有，由两个 Evolved 模块补给系统，两包逐字节相同。已补
+`1-系统汉化插件/lang/plugins/evolved-stunts-cn.json`，按模块门控声明两次。
+
+#### 顺带发现：这条查找在中文下**本来就不可能命中**
+
+    character-skills.hbs:15   data-pmbut='{{skill.description}}'
+    actor-character.mjs:468   skills[x].description = localize(CONFIG.ALIENRPG.skills[x].name)
+    character-sheet.mjs:1113  localize("ALIENRPG." + 去空格(那个名字))
+
+key 是用**已经本地化的技能名**拼的。英文 `Close Combat` → `ALIENRPG.CloseCombat`，
+正好命中上游提供的键；中文「近战」→ `ALIENRPG.近战`，上游没有，按钮永远显示
+「未录入炫技」。这是系统自身的 i18n 缺陷，**只在英文下成立**。
+
+处理：额外提供 12 个**中文键别名**，内容与英文键逐字节相同。
+别名跟着技能名走，改词表会**静默**打断它，所以配了
+`qa/scan_stunt_aliases.py`（正向 + 反向都测过：把「近战」改成「格斗」立刻报两条）。
+
+⇒ **凡是「拿本地化后的字符串再去查表」的代码路径，翻译一定会打断它。**
+   §3.4 的命名分层管的是「名字本身要不要翻」，这条补的是另一半：
+   **名字被翻之后，谁还在用它当键**。发现一条就登记一条。
+
+#### 同一个坑，第三次
+
+量「译文比英文多出多少 `id=` 属性」时写了：
+
+    for cnp in glob.glob("[12]-*/compendium/cn/*.json"):
+        enp = cnp.replace("/cn/", "/en/")
+
+**Windows 的 glob 返回反斜杠**，`replace` 一次都没生效，等于拿中文文件跟自己比，
+干脆利落地报了 **0**。而直接点名比对那两个字段，明明是 EN 0 / CN 1。
+
+这就是 §3.7 记着的 EC 项目那次，一模一样。**记在文档里没能阻止它复发。**
+所以这次把解药写进代码而不是写进文档 —— `qa/scan_html_fidelity.py` 的 `pair()`：
+
+    en_path = cn_path.replace(os.sep + "cn" + os.sep, os.sep + "en" + os.sep)
+    assert en_path != cn_path, "路径配对失效：…别用写死的 '/cn/'"
+
+> **配对路径的函数必须断言「配出来的确实不一样」。**
+> 静默失效的比对不会报错，只会给你一个漂亮的 0；而 0 正是你想看到的数字，
+> 所以不会去怀疑它。这一族（§3.7 删标签 vs 换空格、`json.dumps` 上找 `src="`、
+> 反斜杠路径）的共同点都是**在错误的表示层上测量**，且全都**朝"没问题"的方向错**。
+
+实测结果：系统包 14 个字段被译文管线凭空加了 `id=`（英文基准是光秃秃的 `<h2>`），
+新手包 0 个。已清掉。这不只是脏 —— `character-sheet.mjs:1125` 拿
+`startsWith("<h2>No Stunts Entered</h2>")` 做字符串比较，多一个属性判断就废。
+
+#### 同一段英文，两种中文（新手包 6 组）
+
+同一件物品在 Adventure 的 `items/` 与 actor 内嵌各存一份，并行翻译时落进不同切片、
+被当成两段新内容各翻一遍。§8 记过成因（Phase 4 复核实测 69 对），但**没有闸门**，
+于是 v0.2.0 带着 6 组发了出去：玩家在物品栏看到「其他所有 PC」，点开角色卡看到
+「其余所有玩家角色」。已按全项目用词计数定稿，并补 `qa/scan_dup_renderings.py`。
+
+⇒ **成因写进文档 ≠ 问题被治住。写过成因的缺陷，都要配一道能跑的闸。**
+
+#### 上游缺陷登记：`system.notes` 存的就是 `"[object Object]"`
+
+系统包 26 件物品 + 新手包 20 处的 `system.notes` 字段，值是字符串
+`"[object Object]"`。用 `classic-level` 直接读上游 LevelDB 确认过：**上游存的就是这个**
+（`base-item.mjs:8` 还留着旧 `SchemaField` 的注释，第 11 行已改成 `HTMLField()`，
+显然是某次迁移时把对象赋进了字符串字段）。
+
+我们的抽取器如实抄下、译文如实保留、Babele 写回去与原值相同 —— **无害**。
+一度怀疑是我们管线弄坏的，不是。留此存照，免得将来有人"修"它、凭空编出内容。
