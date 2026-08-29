@@ -1213,23 +1213,23 @@
    }
   },
   "CATATONIC": {
-   "cn": "失去知觉",
+   "cn": "木僵",
    "term_tier": "T-PLAIN",
    "category": "yze-panic-table",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "失去知觉",
+     "emit": "木僵",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "table.result_cell": {
      "tier": "T-PLAIN",
-     "emit": "失去知觉",
+     "emit": "木僵",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "失去知觉",
+     "emit": "木僵",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -1440,18 +1440,18 @@
    }
   },
   "Catatonic": {
-   "cn": "失去知觉",
+   "cn": "木僵",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "失去知觉",
+     "emit": "木僵",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "失去知觉",
+     "emit": "木僵",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -2898,23 +2898,23 @@
    }
   },
   "FREEZE": {
-   "cn": "呆滞",
+   "cn": "怔住",
    "term_tier": "T-PLAIN",
    "category": "yze-panic-table",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "呆滞",
+     "emit": "怔住",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "table.result_cell": {
      "tier": "T-PLAIN",
-     "emit": "呆滞",
+     "emit": "怔住",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "呆滞",
+     "emit": "怔住",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -3186,18 +3186,18 @@
    }
   },
   "Freeze": {
-   "cn": "呆滞",
+   "cn": "怔住",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "呆滞",
+     "emit": "怔住",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "呆滞",
+     "emit": "怔住",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -3679,23 +3679,23 @@
    }
   },
   "Heavy Machinery": {
-   "cn": "重型机械",
+   "cn": "机械",
    "term_tier": "T-EXACT",
    "category": "skill",
    "roles": {
     "document.name": {
      "tier": "T-EXACT",
-     "emit": "重型机械",
+     "emit": "机械",
      "why": "The Item name and the lang value must be BYTE-EQUAL. character-skills.hbs:15 emits data-pmbut='{{skill.description}}', system.skills.<skl>.description is overwritten every prepareDerivedData by localize('ALIENRPG.Skill<key>'), and character-sheet.mjs then feeds it to game.items.getName(). NO English tail is permitted."
     },
     "lang.value": {
      "tier": "T-EXACT",
-     "emit": "重型机械",
+     "emit": "机械",
      "why": "The Item name and the lang value must be BYTE-EQUAL. character-skills.hbs:15 emits data-pmbut='{{skill.description}}', system.skills.<skl>.description is overwritten every prepareDerivedData by localize('ALIENRPG.Skill<key>'), and character-sheet.mjs then feeds it to game.items.getName(). NO English tail is permitted."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "重型机械",
+     "emit": "机械",
      "why": "Bare Chinese in running text."
     }
    }
@@ -4332,18 +4332,18 @@
    }
   },
   "Lose Item": {
-   "cn": "失去物品",
+   "cn": "脱手",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "失去物品",
+     "emit": "脱手",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "失去物品",
+     "emit": "脱手",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -4673,18 +4673,18 @@
    }
   },
   "Mess Up": {
-   "cn": "搞砸",
+   "cn": "失误",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "搞砸",
+     "emit": "失误",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "搞砸",
+     "emit": "失误",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -5395,18 +5395,18 @@
    }
   },
   "Paranoid": {
-   "cn": "疑神疑鬼",
+   "cn": "猜忌",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "疑神疑鬼",
+     "emit": "猜忌",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "疑神疑鬼",
+     "emit": "猜忌",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -5878,23 +5878,23 @@
    }
   },
   "Ranged Combat": {
-   "cn": "远程战斗",
+   "cn": "射击",
    "term_tier": "T-EXACT",
    "category": "skill",
    "roles": {
     "document.name": {
      "tier": "T-EXACT",
-     "emit": "远程战斗",
+     "emit": "射击",
      "why": "The Item name and the lang value must be BYTE-EQUAL. character-skills.hbs:15 emits data-pmbut='{{skill.description}}', system.skills.<skl>.description is overwritten every prepareDerivedData by localize('ALIENRPG.Skill<key>'), and character-sheet.mjs then feeds it to game.items.getName(). NO English tail is permitted."
     },
     "lang.value": {
      "tier": "T-EXACT",
-     "emit": "远程战斗",
+     "emit": "射击",
      "why": "The Item name and the lang value must be BYTE-EQUAL. character-skills.hbs:15 emits data-pmbut='{{skill.description}}', system.skills.<skl>.description is overwritten every prepareDerivedData by localize('ALIENRPG.Skill<key>'), and character-sheet.mjs then feeds it to game.items.getName(). NO English tail is permitted."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "远程战斗",
+     "emit": "射击",
      "why": "Bare Chinese in running text."
     }
    }
@@ -6139,23 +6139,23 @@
    }
   },
   "SEEK COVER": {
-   "cn": "寻找掩护",
+   "cn": "掩蔽",
    "term_tier": "T-PLAIN",
    "category": "yze-panic-table",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "寻找掩护",
+     "emit": "掩蔽",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "table.result_cell": {
      "tier": "T-PLAIN",
-     "emit": "寻找掩护",
+     "emit": "掩蔽",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "寻找掩护",
+     "emit": "掩蔽",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -6326,18 +6326,18 @@
    }
   },
   "Seekcover": {
-   "cn": "寻找掩护",
+   "cn": "掩蔽",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "寻找掩护",
+     "emit": "掩蔽",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "寻找掩护",
+     "emit": "掩蔽",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -7826,18 +7826,18 @@
    }
   },
   "Tunnel Vision": {
-   "cn": "视野狭窄",
+   "cn": "恍惚",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "视野狭窄",
+     "emit": "恍惚",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "视野狭窄",
+     "emit": "恍惚",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -7882,18 +7882,18 @@
    }
   },
   "Twitchy": {
-   "cn": "抽搐不安",
+   "cn": "躁动",
    "term_tier": "T-PLAIN",
    "category": "yze-condition-evolved",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "抽搐不安",
+     "emit": "躁动",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "抽搐不安",
+     "emit": "躁动",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }
@@ -8225,18 +8225,18 @@
    }
   },
   "Water": {
-   "cn": "水",
+   "cn": "饮水",
    "term_tier": "T-PLAIN",
    "category": "yze-mechanics",
    "roles": {
     "lang.value": {
      "tier": "T-PLAIN",
-     "emit": "水",
+     "emit": "饮水",
      "why": "Bare Chinese in prose and inside {label} text."
     },
     "prose": {
      "tier": "T-PLAIN",
-     "emit": "水",
+     "emit": "饮水",
      "why": "Bare Chinese in prose and inside {label} text."
     }
    }

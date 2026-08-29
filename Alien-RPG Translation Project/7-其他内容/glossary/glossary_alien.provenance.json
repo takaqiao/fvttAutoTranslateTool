@@ -16,17 +16,17 @@
    "T-PLAIN": 222
   },
   "source_level_counts": {
-   "1": 140,
+   "1": 138,
    "2": 11,
    "3": 8,
-   "4": 48,
+   "4": 41,
    "5": 1,
    "6": 50,
    "7": 6,
-   "C": 101,
+   "C": 96,
    "FROZEN": 31,
    "LATIN": 4,
-   "RULING": 4
+   "RULING": 18
   },
   "category_counts": {
    "attribute": 5,
@@ -1974,11 +1974,11 @@
    "bilingual_name": "巴克 Burke"
   },
   "CATATONIC": {
-   "cn": "失去知觉",
+   "cn": "木僵",
    "tier": "T-PLAIN",
    "category": "yze-panic-table",
-   "source_level": 4,
-   "why_this_won": "Stratum A human translation of the d6+Stress panic table; the strongest block in the whole file.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R20b-catatonic-row：跟随 R20-catatonic。SAME_STRING_GROUPS 声明 CATATONIC（Panic Table 行）与 Catatonic（进化版状态键）必须逐字节相等；只改一边会让进化版恐慌反应与它自己的表对不上。",
    "candidates": [
     {
      "zh": "失去知觉",
@@ -1990,10 +1990,25 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "Catatonic"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R20b-catatonic-row",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "木僵",
+    "rejected": [
+     "失去知觉"
+    ],
+    "rationale": "跟随 R20-catatonic。SAME_STRING_GROUPS 声明 CATATONIC（Panic Table 行）与 Catatonic（进化版状态键）必须逐字节相等；只改一边会让进化版恐慌反应与它自己的表对不上。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ 本条带动 lang ALIENRPG.Panic15 的 <b> 标签与 Panic Table 15-20 描述。"
   },
   "CORE RULES - HOW TO USE THIS MODULE": {
    "cn": "CORE RULES - HOW TO USE THIS MODULE",
@@ -2296,11 +2311,11 @@
    ]
   },
   "Catatonic": {
-   "cn": "失去知觉",
+   "cn": "木僵",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": 4,
-   "why_this_won": "ANCHORED: cn.json:298 Panic15 CATATONIC -> 失去知觉.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R20-catatonic：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去知觉 不是“太长”而是**事实错误**：Panic Response 12-20 的描述写的是角色“胡言乱语、茫然凝视”，他是**清醒的**，什么知觉都没丢。木僵 是 catatonia 在中文精神医学里的定译，且英文 Catatonic 本身就是临床词，两边语体对得上。瘫倒 只说了身体倒下，漏掉“叫不醒”那一半。",
    "candidates": [
     {
      "zh": "失去知觉",
@@ -2312,10 +2327,27 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "CATATONIC"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R20-catatonic",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "木僵",
+    "rejected": [
+     "失去知觉",
+     "瘫倒",
+     "崩溃"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去知觉 不是“太长”而是**事实错误**：Panic Response 12-20 的描述写的是角色“胡言乱语、茫然凝视”，他是**清醒的**，什么知觉都没丢。木僵 是 catatonia 在中文精神医学里的定译，且英文 Catatonic 本身就是临床词，两边语体对得上。瘫倒 只说了身体倒下，漏掉“叫不醒”那一半。",
+    "counter_argument_acknowledged": "木僵 对一般玩家略显术语化。但聊天卡会紧接着把描述打出来，而一个**错的**名字比一个需要看一眼描述的名字危险。",
+    "blast_radius": "lang ALIENRPG.catatonic · Panic Response Table 12-20 · Panic Response Table 10-10 描述里的互引 · corerules / starterset 同名行（待 fill_twin 传播）。",
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ SAME_STRING_GROUPS 把 Catatonic 与 CATATONIC 钉在一起，R20b 同步改动。"
   },
   "Character Sheet": {
    "cn": "角色卡",
@@ -3937,11 +3969,11 @@
    "same_string_reason": "Panic-table result row and Evolved condition key; must match."
   },
   "FREEZE": {
-   "cn": "呆滞",
+   "cn": "怔住",
    "tier": "T-PLAIN",
    "category": "yze-panic-table",
-   "source_level": 4,
-   "why_this_won": "Stratum A human translation of the d6+Stress panic table; the strongest block in the whole file.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R21b-freeze-row：跟随 R21-freeze。SAME_STRING_GROUPS 声明 FREEZE 与 Freeze 必须逐字节相等。⚠ 飞船恐慌表的 ShipPanic11 英文标签写作 “Freeze:”，与本词条同字，因此它也一起改——否则同一个英文词在同一个产品里会出两个中文。",
    "candidates": [
     {
      "zh": "呆滞",
@@ -3953,10 +3985,24 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "Freeze"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R21b-freeze-row",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "怔住",
+    "rejected": [
+     "呆滞"
+    ],
+    "rationale": "跟随 R21-freeze。SAME_STRING_GROUPS 声明 FREEZE 与 Freeze 必须逐字节相等。⚠ 飞船恐慌表的 ShipPanic11 英文标签写作 “Freeze:”，与本词条同字，因此它也一起改——否则同一个英文词在同一个产品里会出两个中文。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "FTL Drive": {
    "cn": "超光速引擎",
@@ -4289,11 +4335,11 @@
    ]
   },
   "Freeze": {
-   "cn": "呆滞",
+   "cn": "怔住",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": 4,
-   "why_this_won": "ANCHORED: cn.json:293 Panic10 FREEZE -> 呆滞.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R21-freeze：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 呆滞 是“目光呿呆、反应迟钝”，它从未说出“你动不了”，而描述的全部内容就是失去下一次出手。更重要的是：R20 把 Catatonic 定为 木僵 之后，呆滞 与 木僵 会在同一张 13 行表里读成同一种“无反应的呆”。怔住 是“被惊吓得僵在原地”，与“frozen by fear”逐字对应，且轻重程度明显低于 木僵。僵住 被否掉正是因为它与 木僵 共用 僵 字，小字号下会混。",
    "candidates": [
     {
      "zh": "呆滞",
@@ -4305,10 +4351,27 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "FREEZE"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R21-freeze",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "怔住",
+    "rejected": [
+     "呆滞",
+     "僵住",
+     "定身"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 呆滞 是“目光呿呆、反应迟钝”，它从未说出“你动不了”，而描述的全部内容就是失去下一次出手。更重要的是：R20 把 Catatonic 定为 木僵 之后，呆滞 与 木僵 会在同一张 13 行表里读成同一种“无反应的呆”。怔住 是“被惊吓得僵在原地”，与“frozen by fear”逐字对应，且轻重程度明显低于 木僵。僵住 被否掉正是因为它与 木僵 共用 僵 字，小字号下会混。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": "lang ALIENRPG.freeze / ALIENRPG.Panic10 / ALIENRPG.ShipPanic11 · Panic Response Table 7-7 · Panic Table 10-10。",
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ 呆滞 是四级源（stratum A 人工）的锚点，本条是**有意推翻一个四级锚点**，理由不是风格而是与 R20 的可区分性。"
   },
   "Freezing": {
    "cn": "冷冻",
@@ -4824,11 +4887,11 @@
    "readjudicated_in_v1_0": true
   },
   "Heavy Machinery": {
-   "cn": "重型机械",
+   "cn": "机械",
    "tier": "T-EXACT",
    "category": "skill",
-   "source_level": 1,
-   "why_this_won": "Level 1 beats level 4's bare 机械. ⚠ T-EXACT: adopting this REQUIRES writing 重型机械 into ALIENRPG.SkillheavyMach as well, or the Item name and the lang value stop being one string.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R5-heavy-machinery：① **屏幕上「重型」是重复的**：character-skills.hbs:10-11 渲染的是 技能名 + 空格 + 括号里的属性缩写，属性 (力量) 就印在名字右边。英文 Heavy 的作用正是提示这是力量技能——中文那个括号已经把这件事说了。② **它不承担区分功能**：技能描述（核心书 ch.3）为 'Roll for this skill when you attempt to use, repair, jury-rig or break any kind of heavy machinery'；本系统 12 个技能里没有第二个「机械」技能，机械 与 通信科技 已经分好「实体机器 / 计算机与通讯」这条线，去掉「重型」不会和任何东西混。③ **参差是真的，但不是截断**：.resource-label 是 justify-self:center，Attr1 列宽 286px，不会截字；问题是 12 个名字居中之后左右两边都对不齐，9 个 2 字里夹 3 个 4 字。④ 机械 是上游 A 层原值，不是本轮新造词。",
    "candidates": [
     {
      "zh": "重型机械",
@@ -4852,7 +4915,21 @@
     }
    ],
    "readjudicated_in_v1_0": true,
-   "lang_key": "ALIENRPG.SkillheavyMach"
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "ruled": {
+    "id": "R5-heavy-machinery",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "重型机械",
+    "rejected": [
+     "重型机械"
+    ],
+    "rationale": "① **屏幕上「重型」是重复的**：character-skills.hbs:10-11 渲染的是 技能名 + 空格 + 括号里的属性缩写，属性 (力量) 就印在名字右边。英文 Heavy 的作用正是提示这是力量技能——中文那个括号已经把这件事说了。② **它不承担区分功能**：技能描述（核心书 ch.3）为 'Roll for this skill when you attempt to use, repair, jury-rig or break any kind of heavy machinery'；本系统 12 个技能里没有第二个「机械」技能，机械 与 通信科技 已经分好「实体机器 / 计算机与通讯」这条线，去掉「重型」不会和任何东西混。③ **参差是真的，但不是截断**：.resource-label 是 justify-self:center，Attr1 列宽 286px，不会截字；问题是 12 个名字居中之后左右两边都对不齐，9 个 2 字里夹 3 个 4 字。④ 机械 是上游 A 层原值，不是本轮新造词。",
+    "counter_argument_acknowledged": "一级源写的是 重型机械，而本项目的取词阶梯里一级源压过一切非 owner_pinned 的推导。本条按「上屏文本可以比书面术语短，前提是同屏已经印出被省掉的那部分信息」这一条例外推翻它；该例外只在**同屏确实印出**时成立（这里是括号里的 (力量)），不得推广到正文散文。",
+    "blast_radius": "lang/cn.json SkillheavyMach + SkillheavyMachAbb · 12 个 skill-stunts 物品名之一 · 角色卡技能列 · spacecraft-general.hbs:131 与 tabs/spacecraft-crew.html:54 的 ENGINEER 舱位标题 · 全书技能检定正文。",
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ T-EXACT：必须与 lang/cn.json 的 ALIENRPG.SkillheavyMach 逐字节相等，并在同一个 commit 里改包内 skill-stunts 物品名（6-工作区/phase2/SYS-I1.cn.json 的 'Heavy Machinery'.name）。ALIENRPG.SkillheavyMachAbb 故意保持与本值相同。"
   },
   "Hesitant": {
    "cn": "犹豫",
@@ -5545,11 +5622,11 @@
    ]
   },
   "Lose Item": {
-   "cn": "失去物品",
+   "cn": "脱手",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": "C",
-   "why_this_won": "Stratum A renders DROP ITEM as 扔下物品 (cn.json:301 Panic9); Evolved says lose, not drop. Not in cn.json (all 20 Evolved condition keys are missing).",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R22-lose-item：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去物品 四字，且读起来是一件事而不是一个状态。描述里写得很清楚：战斗中只需一个快速动作就能把它捡回来——那是**脱手**，不是**丢失**。脱手 两字、是中文里描述兵器脱离手掌的定说，且一眼就能看出东西还在附近。",
    "candidates": [
     {
      "zh": "失去物品",
@@ -5560,7 +5637,24 @@
      "evidence": "module/helpers/config.mjs ALIENRPG.conditions.loseitem: resp=\"panic\", tableNumber=4. Stratum A renders DROP ITEM as 扔下物品 (cn.json:301 Panic9); Evolved says lose, not drop.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R22-lose-item",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "脱手",
+    "rejected": [
+     "失去物品",
+     "丢失",
+     "掉落"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去物品 四字，且读起来是一件事而不是一个状态。描述里写得很清楚：战斗中只需一个快速动作就能把它捡回来——那是**脱手**，不是**丢失**。脱手 两字、是中文里描述兵器脱离手掌的定说，且一眼就能看出东西还在附近。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ 仍然**不**等于 DROP ITEM 扯下物品（Panic9）——SAME_STRING_GROUPS 没有把两者配对，一个是进化版状态、一个是经典版表行。"
   },
   "M41A Pulse Rifle": {
    "cn": "M41A脉冲步枪",
@@ -5939,11 +6033,11 @@
    "bilingual_name": "梅雷迪思·维克尔斯 Meredith Vickers"
   },
   "Mess Up": {
-   "cn": "搞砸",
+   "cn": "失误",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": "C",
-   "why_this_won": "Colloquial register, matching the English. Not in cn.json (all 20 Evolved condition keys are missing).",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R27-mess-up：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 搞砸 是口语，放在状态栏里不像一个状态名（业主实机反馈第 2 条直指这一点）。描述是“无论掷出什么，你的动作都失败”。失手 是第一候选，被否掉两次：一是日常中文里 失手 最常用于“不小心掉了 / 打硕了”，正好是 Lose Item 脱手 的意思，同时挂两个图标时会互干；二是 失手 只管得了手上的活，而这条状态对**任何**技能检定都生效，包括指挥与通信科技。失误 不挑动作类型，也不歧义。",
    "candidates": [
     {
      "zh": "搞砸",
@@ -5954,7 +6048,23 @@
      "evidence": "module/helpers/config.mjs ALIENRPG.conditions.messup: resp=\"stress\", tableNumber=7. Colloquial register, matching the English.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R27-mess-up",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "失误",
+    "rejected": [
+     "搞砸",
+     "失手",
+     "出错"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 搞砸 是口语，放在状态栏里不像一个状态名（业主实机反馈第 2 条直指这一点）。描述是“无论掷出什么，你的动作都失败”。失手 是第一候选，被否掉两次：一是日常中文里 失手 最常用于“不小心掉了 / 打硕了”，正好是 Lose Item 脱手 的意思，同时挂两个图标时会互干；二是 失手 只管得了手上的活，而这条状态对**任何**技能检定都生效，包括指挥与通信科技。失误 不挑动作类型，也不歧义。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "Mobility": {
    "cn": "机动",
@@ -6837,11 +6947,11 @@
    "same_string_reason": "The noun and the condition. Level 4 uses 恐慌 for both (ALIENRPG.Panicked -> 恐慌), and level 1 agrees; a Chinese adjective/noun pair here would be an invention."
   },
   "Paranoid": {
-   "cn": "疑神疑鬼",
+   "cn": "猜忌",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": "C",
-   "why_this_won": "Idiomatic; 偏执 reads clinical. Not in cn.json (all 20 Evolved condition keys are missing).",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R23-paranoid：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 疑神疑鬼 是四字成语，而且它说的是“到处看见鬼”，比机制宽。描述窄得多也准得多：你既不能帮人也不能接受帮助。猜忌 在中文里就是“对自己人的不信任”，正好是这条机制。多疑 落选是因为它指向威胁而不是同伴。",
    "candidates": [
     {
      "zh": "疑神疑鬼",
@@ -6852,7 +6962,23 @@
      "evidence": "module/helpers/config.mjs ALIENRPG.conditions.paranoid: resp=\"panic\", tableNumber=5. Idiomatic; 偏执 reads clinical.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R23-paranoid",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "猜忌",
+    "rejected": [
+     "疑神疑鬼",
+     "多疑",
+     "偏执"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 疑神疑鬼 是四字成语，而且它说的是“到处看见鬼”，比机制宽。描述窄得多也准得多：你既不能帮人也不能接受帮助。猜忌 在中文里就是“对自己人的不信任”，正好是这条机制。多疑 落选是因为它指向威胁而不是同伴。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "Parasite": {
    "cn": "寄生虫",
@@ -7549,11 +7675,11 @@
    ]
   },
   "Ranged Combat": {
-   "cn": "远程战斗",
+   "cn": "射击",
    "tier": "T-EXACT",
    "category": "skill",
-   "source_level": 1,
-   "why_this_won": "Level 1 beats level 4's 射击. 射击 is 'shooting' and under-covers a skill that also runs thrown weapons. ⚠ T-EXACT: ALIENRPG.SkillrangedCbt must be rewritten to match.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R6-ranged-combat：① **按描述取名，而不是按词形**：核心书 ch.3 的技能条目原文是 'If you have a ranged weapon, you can take down your enemy from a distance without getting your hands bloody. Use the RANGED COMBAT skill to **fire** all types of ranged weapons.' 中心动词是 fire，射击 是它的直译；远程战斗 译的是英文词形。② **与已定的近战侧对称**：D2-engaged 已经判定 Melee=肉搏、Close Combat 技能=近战，也就是本项目**已经决定让武器类别与技能名脱钩**。远程侧至今仍耦合（类别 远程 / 技能 远程战斗），是两侧唯一不同构的地方。改成 射击 之后：肉搏/近战、远程/射击，且 近战·射击 是中文 TRPG 的既有配对，正好对上英文 Close/Ranged 的配对关系。③ 宽度：12 个技能名里 3 个 4 字之一，回到 2 字。",
    "candidates": [
     {
      "zh": "远程战斗",
@@ -7580,7 +7706,21 @@
     "射击"
    ],
    "readjudicated_in_v1_0": true,
-   "lang_key": "ALIENRPG.SkillrangedCbt"
+   "lang_key": "ALIENRPG.SkillrangedCbt",
+   "ruled": {
+    "id": "R6-ranged-combat",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "远程战斗",
+    "rejected": [
+     "远程战斗"
+    ],
+    "rationale": "① **按描述取名，而不是按词形**：核心书 ch.3 的技能条目原文是 'If you have a ranged weapon, you can take down your enemy from a distance without getting your hands bloody. Use the RANGED COMBAT skill to **fire** all types of ranged weapons.' 中心动词是 fire，射击 是它的直译；远程战斗 译的是英文词形。② **与已定的近战侧对称**：D2-engaged 已经判定 Melee=肉搏、Close Combat 技能=近战，也就是本项目**已经决定让武器类别与技能名脱钩**。远程侧至今仍耦合（类别 远程 / 技能 远程战斗），是两侧唯一不同构的地方。改成 射击 之后：肉搏/近战、远程/射击，且 近战·射击 是中文 TRPG 的既有配对，正好对上英文 Close/Ranged 的配对关系。③ 宽度：12 个技能名里 3 个 4 字之一，回到 2 字。",
+    "counter_argument_acknowledged": "两点代价，都已量过：(a) 一级源写的是 远程战斗；(b) 射击 字面不含「投掷」，而手雷在规则里也走 Ranged Combat。对 (b)：config.mjs:442 的 weapon_type_list 只有 远程/肉搏 两类，投掷物在数据里就是 远程 类武器，其「远」由武器条目上的类别标签与 …距离 档位承担，不需要技能名再说一遍；且 item.mjs 的全部命中计算都走 skills.rangedCbt.mod，无论发射还是投掷，玩家看见的是同一个技能格。",
+    "blast_radius": "lang/cn.json SkillrangedCbt · 12 个 skill-stunts 物品名之一 · 角色卡技能列 · 全部远程攻击检定的聊天标签 · 全书技能检定正文。",
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ T-EXACT：必须与 lang/cn.json 的 ALIENRPG.SkillrangedCbt 逐字节相等，并在同一个 commit 里改包内 skill-stunts 物品名（6-工作区/phase2/SYS-I1.cn.json 的 'Ranged Combat'.name）。⚠ 不要顺手把 ALIENRPG.WepTypeRanged（远程）也改掉——脱钩是本条的**目的**，不是副作用。"
   },
   "Reactor": {
    "cn": "反应堆",
@@ -7912,11 +8052,11 @@
    "same_string_reason": "Panic-table result row and Evolved condition key; must match."
   },
   "SEEK COVER": {
-   "cn": "寻找掩护",
+   "cn": "掩蔽",
    "tier": "T-PLAIN",
    "category": "yze-panic-table",
-   "source_level": 4,
-   "why_this_won": "Stratum A human translation of the d6+Stress panic table; the strongest block in the whole file.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R24b-seek-cover-row：跟随 R24-seek-cover。SAME_STRING_GROUPS 声明 SEEK COVER 与 Seekcover 必须逐字节相等。⚠ 带动 lang ALIENRPG.Panic11 的 <b> 标签与 Panic Table 11-11 描述。",
    "candidates": [
     {
      "zh": "寻找掩护",
@@ -7928,10 +8068,24 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "Seekcover"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R24b-seek-cover-row",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "掩蔽",
+    "rejected": [
+     "寻找掩护"
+    ],
+    "rationale": "跟随 R24-seek-cover。SAME_STRING_GROUPS 声明 SEEK COVER 与 Seekcover 必须逐字节相等。⚠ 带动 lang ALIENRPG.Panic11 的 <b> 标签与 Panic Table 11-11 描述。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "STARTER SET - HOW TO USE THIS MODULE": {
    "cn": "STARTER SET - HOW TO USE THIS MODULE",
@@ -8118,11 +8272,11 @@
    "bilingual_name": "西格森 Seegson"
   },
   "Seekcover": {
-   "cn": "寻找掩护",
+   "cn": "掩蔽",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": 4,
-   "why_this_won": "ANCHORED: cn.json:294 Panic11 SEEK COVER -> 寻找掩护. (en.json spells the key label 'Seekcover', one word.)",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R24-seek-cover：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 寻找掩护 四字，而且它命名的是一个**动作**；状态栏里要的是动作完成后的那个状态。掩蔽 是中文军事术语里“进入掩体”的两字动词，且保留了 Cover = 掩护 的 掩 字，两者的关系在字面上就看得见。隐蔽 落选：那是 concealment，本系统的 Cover 是会挡子弹的实体。",
    "candidates": [
     {
      "zh": "寻找掩护",
@@ -8134,10 +8288,25 @@
      "carried_from": "phase0"
     }
    ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
    "same_string_as": [
     "SEEK COVER"
    ],
-   "same_string_reason": "Panic-table result row and Evolved condition key; must match."
+   "same_string_reason": "Panic-table result row and Evolved condition key; must match.",
+   "ruled": {
+    "id": "R24-seek-cover",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "掩蔽",
+    "rejected": [
+     "寻找掩护",
+     "隐蔽"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 寻找掩护 四字，而且它命名的是一个**动作**；状态栏里要的是动作完成后的那个状态。掩蔽 是中文军事术语里“进入掩体”的两字动词，且保留了 Cover = 掩护 的 掩 字，两者的关系在字面上就看得见。隐蔽 落选：那是 concealment，本系统的 Cover 是会挡子弹的实体。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "Select Firer": {
    "cn": "选择射击者",
@@ -10005,11 +10174,11 @@
    "bilingual_name": "托林主星 Torin Prime"
   },
   "Tunnel Vision": {
-   "cn": "视野狭窄",
+   "cn": "恍惚",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": "C",
-   "why_this_won": "Literal and standard; the condition is -2 Comtech/Observation/Survival. Not in cn.json (all 20 Evolved condition keys are missing).",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R25-tunnel-vision：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 视野狭窄 不只是四字，它**指错了器官**：描述是机智 –2，管的是侦察 / 生存 / 通信科技，是**脑子**不好使，不是眼睛看不见。失神 两字、说的是注意力，且中文里 目光失神 一语还能带回一点英文名字里的目光意象。",
    "candidates": [
     {
      "zh": "视野狭窄",
@@ -10020,7 +10189,23 @@
      "evidence": "module/helpers/config.mjs ALIENRPG.conditions.tunnelvision: resp=\"stress\", tableNumber=2. Literal and standard; the condition is -2 Comtech/Observation/Survival.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R25-tunnel-vision",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "失神",
+    "rejected": [
+     "视野狭窄",
+     "失神",
+     "迟钝"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 视野狭窄 不只是四字，它**指错了器官**：描述是机智 –2，管的是侦察 / 生存 / 通信科技，是**脑子**不好使，不是眼睛看不见。失神 两字、说的是注意力，且中文里 目光失神 一语还能带回一点英文名字里的目光意象。",
+    "counter_argument_acknowledged": "初拟 失神，理由是 恍 与兄弟行 慌乱（Frantic）的 慌 在窄列小字号下近乎同形。自检推翻了它：失神 与同一张 8 行表里的兄弟 失误（Mess Up）**首字完全相同**，而首字相同比首字相似更费眼；且 慌乱 / 恍惚 的第二字（乱 / 惚）差得极远，整词不会读错。",
+    "blast_radius": null,
+    "closes_dispute": null
+   }
   },
   "Turn": {
    "cn": "节",
@@ -10079,11 +10264,11 @@
    "bilingual_name": "炮塔 Turret"
   },
   "Twitchy": {
-   "cn": "抽搐不安",
+   "cn": "躁动",
    "tier": "T-PLAIN",
    "category": "yze-condition-evolved",
-   "source_level": "C",
-   "why_this_won": "Stratum A renders NERVOUS TWITCH as 精神紧绷 (cn.json:299 Panic7); the Evolved adjective needs its own form. Not in cn.json (all 20 Evolved condition keys are missing).",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R26-twitchy：本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 抽搐不安 四字；但把它剪成 抽搐 不是变短而是**变错**——抽搐 在中文里是痉挛级别的不随意症状，远重于 twitchy，而且会与颤抖（Shakes）并列成两个“不受控地抽”。描述是立刻为空气 / 弹药 / 电力进行一次余量检定——你继得太紧，所以用得浪费。躁动 正是产生这个结果的状态。",
    "candidates": [
     {
      "zh": "抽搐不安",
@@ -10094,7 +10279,24 @@
      "evidence": "module/helpers/config.mjs ALIENRPG.conditions.twitchy: resp=\"panic\", tableNumber=3. Stratum A renders NERVOUS TWITCH as 精神紧绷 (cn.json:299 Panic7); the Evolved adjective needs its own form.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R26-twitchy",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "躁动",
+    "rejected": [
+     "抽搐不安",
+     "抽搐",
+     "焦躁"
+    ],
+    "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 抽搐不安 四字；但把它剪成 抽搐 不是变短而是**变错**——抽搐 在中文里是痉挛级别的不随意症状，远重于 twitchy，而且会与颤抖（Shakes）并列成两个“不受控地抽”。描述是立刻为空气 / 弹药 / 电力进行一次余量检定——你继得太紧，所以用得浪费。躁动 正是产生这个结果的状态。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": null,
+    "closes_dispute": null
+   },
+   "ruling_note": "⚠ 仍然**不**等于 NERVOUS TWITCH 精神紧绷（Panic7）。"
   },
   "UAS": {
    "cn": "UAS",
@@ -10363,11 +10565,11 @@
    ]
   },
   "Water": {
-   "cn": "水",
+   "cn": "饮水",
    "tier": "T-PLAIN",
    "category": "yze-mechanics",
-   "source_level": 4,
-   "why_this_won": "Consumable track.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R8-water：① **它是整套角色卡里唯一的长度离群值**（全量扫描全部 live .hbs 的网格单元后得到）：lCol10 这一个网格列在 character-inventory.hbs / crtui-character-inventory.hbs / vehicle-inventory.hbs 上按分区依次渲染 伤害(2) / 水(1) / 空气(2)，spacecraft-inventory.hbs 上是 射程(2)/水(1)/空气(2)——同一列上下相邻，中间那行少一个字；character-general.hbs:168-188 的 grid-Consumables 里 空气/食物/水/电力 四行共用 119px 标签列，也只有它是 1 字。② 语义上 饮水 不是加长而是**加准**：这一格是船员的饮用水补给（system.consumables.water.value 与物品上的 system.attributes.water.value），不是任何工业用水；与兄弟 食物、空气 一样是物质名词，同构。③ 运行时读得通：character-sheet.mjs:1396-1397 把补给检定标签拼成 localize('ALIENRPG.'+spbutt) + ' ' + localize('ALIENRPG.Supply')，即「饮水 余量检定」。",
    "candidates": [
     {
      "zh": "水",
@@ -10378,7 +10580,21 @@
      "evidence": "cn.json ALIENRPG.Water.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R8-water",
+    "by": "主控",
+    "on": "2026-08-29",
+    "was": "饮水",
+    "rejected": [
+     "水"
+    ],
+    "rationale": "① **它是整套角色卡里唯一的长度离群值**（全量扫描全部 live .hbs 的网格单元后得到）：lCol10 这一个网格列在 character-inventory.hbs / crtui-character-inventory.hbs / vehicle-inventory.hbs 上按分区依次渲染 伤害(2) / 水(1) / 空气(2)，spacecraft-inventory.hbs 上是 射程(2)/水(1)/空气(2)——同一列上下相邻，中间那行少一个字；character-general.hbs:168-188 的 grid-Consumables 里 空气/食物/水/电力 四行共用 119px 标签列，也只有它是 1 字。② 语义上 饮水 不是加长而是**加准**：这一格是船员的饮用水补给（system.consumables.water.value 与物品上的 system.attributes.water.value），不是任何工业用水；与兄弟 食物、空气 一样是物质名词，同构。③ 运行时读得通：character-sheet.mjs:1396-1397 把补给检定标签拼成 localize('ALIENRPG.'+spbutt) + ' ' + localize('ALIENRPG.Supply')，即「饮水 余量检定」。",
+    "counter_argument_acknowledged": "水 是最直白的对译，且与 Food/Air 一样是单纯物质名。但单字标签在这套 UI 里没有任何一个同伴，而 饮水 没有窄化语义——游戏里从来不追踪非饮用水。",
+    "blast_radius": "lang/cn.json Water · 四套 inventory 模板的 lCol10 列头 · character-general / synthetic-general / character-enhanced-general 的消耗品块 · item-sheet.hbs:39/:75 · 补给检定聊天标签。",
+    "closes_dispute": null
+   }
   },
   "Weapons": {
    "cn": "武器",

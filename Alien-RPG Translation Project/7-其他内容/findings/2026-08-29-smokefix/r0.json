@@ -1,0 +1,297 @@
+{
+ "summary": "Renamed the 8 Stress Response and 13 Panic Response conditions so every one of the 21 names is exactly 2 CJK characters and is derived from its own English DESCRIPTION rather than from the English word. 9 names changed, 12 were audited and kept.\n\nSTRESS: 镇定 · 惊跳 · 恍惚 · 恼怒 · 颤抖 · 慌乱 · 泄气 · 失误\nPANIC : 镇定 · 受惊 · 喧闹 · 躁动 · 脱手 · 猜忌 · 犹豫 · 怔住 · 掩蔽 · 尖叫 · 逃跑 · 发狂 · 木僵\n\nI adopted 8 of your 11 proposals and overruled 3 with reasons:\n(1) Mess Up 失手 -> 失误. 失手 in everyday Chinese most often means \"dropped it by accident\" — which is exactly Lose Item 脱手's meaning, so the two would cross-talk on a token carrying both icons; and 失手 is limited to manual slips while this condition fires on ANY skill roll, Command and Comtech included.\n(2) Twitchy 抽搐 -> 躁动. Trimming to 抽搐 is not shorter, it is WRONG: 抽搐 is the clinical word for a convulsion, far more severe than \"twitchy\", and it would sit beside 颤抖 (Shakes) as a second involuntary-movement word. The description is a supply roll for air/ammo/power — you are too keyed up to be economical — so 躁动 is the state that produces it.\n(3) Tunnel Vision 恍惚 -> 失神 -> 恍惚. I first overruled 恍惚 because 恍 is a near-homograph of 慌 in the sibling 慌乱, then my own self-gate caught 失神 sharing its WHOLE leading character with the sibling 失误 in the same 8-row table. An identical first character costs a reader more than two merely similar ones, and 慌乱/恍惚 still differ completely in the second character — so your original 恍惚 stands. Both reversals are recorded in the notes and in R25's counter_argument.\n\nYour key insight held up everywhere it mattered: 失去知觉 was not merely long, it was FACTUALLY WRONG (the row says the character rambles and stares, so they are conscious), and 搞砸/失去物品 both failed the \"reads as a state\" test.\n\n⚠ Your requested check — 怔住 vs 木僵 do NOT read as the same state. 怔住 is transient shock (one lost turn), 木僵 is unresponsive stupor (until panic ends); they share no character and the severity ordering 怔住 < 木僵 is intuitive. This is in fact why Freeze had to move OFF 呆滞: once Catatonic became 木僵, 呆滞 and 木僵 would both have read as \"unresponsive dullness\" in the same 13-row table. 僵住 was rejected for Freeze for the same reason — it shares 僵 with 木僵.\n\nThe ⚠ pair is fully enumerated and locked: all 7 SAME_STRING_GROUPS pairs (BERSERK/Frenzy, TREMBLE/Shakes, FLEE/Flee, FREEZE/Freeze, SCREAM/Scream, SEEK COVER/Seekcover, CATATONIC/Catatonic) are now byte-identical in Chinese on both sides. I also found the \"…\" you left open: the SPACESHIP panic table's ShipPanic11 label is the English word \"Freeze:\" and ShipPanic8 is \"Tremble:\", byte-equal to the Freeze/Shakes glossary keys but NOT named in SAME_STRING_GROUPS — I moved ShipPanic11 with Freeze so one English word does not render two Chinese in one product.\n\nBoth required tools pass: assemble_lang.py \"INVARIANTS: all 11 pass\" (590 en keys, 584 covered, 6 deliberately unwritten, 16 code-only, 600 written); prep_sys_units.py --collect wrote the pack (page 35474 chars). I also ran build_glossary_v1.py, since the glossary is lockstep place (c): \"INVARIANTS: all 16 pass over 404 terms\". Nothing was hand-edited in lang/cn.json or the assembled pack.",
+ "changes": [
+  {
+   "key_or_row": "Keeping Cool — Stress Response 0-0 AND Panic Response 0-0 (result name only; no lang key, keepingcool is on alienrpg.mjs:267's toRemove list)",
+   "from": "保持冷静",
+   "to": "镇定",
+   "why": "ADOPTED your proposal. 4 chars, the only over-wide row in either table. 镇定 is 2 chars and level with the other 20.",
+   "description_evidence": "\"No effect.\" — nothing to encode beyond composure, so the shortest correct word wins."
+  },
+  {
+   "key_or_row": "Tunnel Vision — ALIENRPG.tunnelvision + Stress Response 2-2",
+   "from": "视野狭窄",
+   "to": "恍惚",
+   "why": "ADOPTED your proposal, after a reversal and a reversal back (see summary). 视野狭窄 is 4 chars AND points at the wrong organ — the penalty is mental, not visual. 恍惚 (as in 精神恍惚) is 2 chars and is exactly 'cannot think straight'.",
+   "description_evidence": "\"All skill rolls based on Wits get –2 dice.\" — Wits governs Observation / Survival / Comtech, i.e. thinking and perceiving, not eyesight."
+  },
+  {
+   "key_or_row": "Mess Up — ALIENRPG.messup + Stress Response 7-10",
+   "from": "搞砸",
+   "to": "失误",
+   "why": "OVERRULED your 失手. Two reasons: (a) in everyday Chinese 失手 most often means 'dropped it by accident' — that is Lose Item 脱手's meaning, and a token can carry both icons; (b) 失手 is limited to manual slips, while this condition fires on ANY skill roll including Command and Comtech. 失误 is action-agnostic and unambiguous. Your reading of 搞砸 as colloquial is right and it is gone either way.",
+   "description_evidence": "\"Your action fails regardless of what you rolled and you gain +1 stress level.\" — the name is the botch itself, and it is not restricted to physical actions."
+  },
+  {
+   "key_or_row": "Twitchy — ALIENRPG.twitchy + Panic Response 3-3",
+   "from": "抽搐不安",
+   "to": "躁动",
+   "why": "OVERRULED your 抽搐. Trimming is not the fix here — 抽搐 is the clinical word for a convulsion/seizure, a far more severe and quite different event, and it would stand beside 颤抖 (Shakes) as a second involuntary-movement word. 躁动 (restless agitation) is the state, not a symptom.",
+   "description_evidence": "\"Make an immediate supply roll for air, ammo, or power.\" — you are too keyed up to be economical, so you burn through supplies. 抽搐 says nothing about that; 躁动 explains it."
+  },
+  {
+   "key_or_row": "Lose Item — ALIENRPG.loseitem + Panic Response 4-4",
+   "from": "失去物品",
+   "to": "脱手",
+   "why": "ADOPTED your proposal and your reasoning verbatim. Still deliberately NOT equal to DROP ITEM 扔下物品 (Panic9) — SAME_STRING_GROUPS does not pair them.",
+   "description_evidence": "\"In combat, you can pick up the item with a quick action\" — it is DROPPED, not lost. Description body also nudged to 「你脱手失去一件武器或其他重要物品」so the name and the text agree."
+  },
+  {
+   "key_or_row": "Paranoid — ALIENRPG.paranoid + Panic Response 5-5",
+   "from": "疑神疑鬼",
+   "to": "猜忌",
+   "why": "ADOPTED. 疑神疑鬼 is a 4-char idiom about seeing threats everywhere, which is wider than the mechanic. 猜忌 is specifically distrust of one's OWN side. Runner-up 多疑 rejected as pointing at threats rather than at allies.",
+   "description_evidence": "\"You cannot give or receive help on skill rolls until panic ends.\" — the mechanic is about refusing your teammates, which is what 猜忌 names."
+  },
+  {
+   "key_or_row": "Freeze — ALIENRPG.freeze + Panic Response 7-7 (+ lockstep FREEZE)",
+   "from": "呆滞",
+   "to": "怔住",
+   "why": "ADOPTED. 呆滞 means dull/vacant and never says the character cannot act; and once Catatonic becomes 木僵, 呆滞 and 木僵 read as the same unresponsive stupor in one 13-row table. 僵住 rejected for sharing 僵 with 木僵. ⚠ This overturns a level-4 stratum-A anchor (cn.json Panic10), done deliberately under ruling R21 — the reason is distinguishability, not style.",
+   "description_evidence": "\"You're frozen by fear, losing your next turn and unable to perform any interrupt actions.\" 怔住 = stunned rigid by shock. Description also changed from 「你被恐惧冻住」to 「你因恐惧而怔住」."
+  },
+  {
+   "key_or_row": "Seek Cover — ALIENRPG.seekcover + Panic Response 8-8 (+ lockstep SEEK COVER)",
+   "from": "寻找掩护",
+   "to": "掩蔽",
+   "why": "ADOPTED, and your 'it is an action not a description' point is the load-bearing one. 掩蔽 is the standing military 2-char verb and keeps the 掩 of Cover 掩护 visible, so the relation reads off the glyphs. 隐蔽 rejected: that is concealment, while this game's Cover is a physical barrier.",
+   "description_evidence": "\"You immediately seek (full) cover in the zone… Once in cover, your stress level is reduced 1 step\" — the condition is the resulting state of being under cover."
+  },
+  {
+   "key_or_row": "Catatonic — ALIENRPG.catatonic + Panic Response 12-20 (+ lockstep CATATONIC)",
+   "from": "失去知觉",
+   "to": "木僵",
+   "why": "ADOPTED, and this is the one that was not merely long but wrong. 木僵 is the standing clinical Chinese for catatonia, and the English 'Catatonic' is equally clinical, so the register matches. 瘫倒 was considered and rejected for dropping the 'cannot be roused' half.",
+   "description_evidence": "\"You collapse to the floor and can't move, rambling or staring blankly into oblivion\" — a character who rambles is CONSCIOUS, so 失去知觉 stated a falsehood."
+  },
+  {
+   "key_or_row": "ALIENRPG.Panic10 <b> label + body, and Panic Table 10-10 description (classic FREEZE row)",
+   "from": "呆滞",
+   "to": "怔住",
+   "why": "LOCKSTEP with Freeze. SAME_STRING_GROUPS pairs FREEZE/Freeze; the English differs in case only but the Chinese must be identical. Body 「因恐惧或压力而呆滞一轮」also moved so the prose does not contradict its own label.",
+   "description_evidence": "Same row, same state, two editions' names."
+  },
+  {
+   "key_or_row": "ALIENRPG.ShipPanic11 <b> label + body (spaceship panic table)",
+   "from": "呆滞",
+   "to": "怔住",
+   "why": "THE PAIR YOUR BRIEF LEFT AS '…'. ShipPanic11's English label is literally \"Freeze:\", byte-equal to the Freeze glossary key, yet SAME_STRING_GROUPS never names it. Moved so one English word does not render two Chinese in one product. ShipPanic8 is likewise \"Tremble:\" = TREMBLE = 颤抖, already correct and untouched.",
+   "description_evidence": "\"You're frozen by fear or stress for one Turn, losing your next point of action.\" — the same state on the ship sheet."
+  },
+  {
+   "key_or_row": "ALIENRPG.Panic11 <b> label + Panic Table 11-11 description (classic SEEK COVER row)",
+   "from": "寻找掩护",
+   "to": "掩蔽",
+   "why": "LOCKSTEP with Seekcover (SAME_STRING_GROUPS SEEK COVER/Seekcover).",
+   "description_evidence": "Same row, same state."
+  },
+  {
+   "key_or_row": "ALIENRPG.Panic15 <b> label + Panic Table 15-20 description (classic CATATONIC row)",
+   "from": "失去知觉",
+   "to": "木僵",
+   "why": "LOCKSTEP with Catatonic (SAME_STRING_GROUPS CATATONIC/Catatonic).",
+   "description_evidence": "\"You collapse to the floor and can't talk or move, staring blankly into oblivion.\" — same clinical picture as the Evolved row."
+  },
+  {
+   "key_or_row": "Panic Response 10-10 (Flee) description cross-reference",
+   "from": "则改为进入失去知觉状态（结果 #12）",
+   "to": "则改为进入木僵状态（结果 #12）",
+   "why": "The Flee row names Catatonic by name; it had to move with it or the cross-reference would point at a state name that no longer exists.",
+   "description_evidence": "\"If you cannot move out of your zone, you become Catatonic (result #12) instead.\""
+  },
+  {
+   "key_or_row": "glossary_alien.json — 11 terms, via 11 new RULINGS (R20-R27 + the -row twins)",
+   "from": "ladder-derived values (Freeze/Seekcover/Catatonic were level-4 anchors; the rest level C)",
+   "to": "the 8 new names, both sides of each locked pair",
+   "why": "Lockstep place (c). RULINGS.json is the documented channel (owner_pinned > RULINGS > ladder), so the values survive the next rebuild instead of being silently reverted. build_glossary_v1.py re-run: all 16 invariants pass over 404 terms; RULING-sourced terms went 7 -> 18.",
+   "description_evidence": "Each ruling's rationale quotes the row's own description, per your governing principle."
+  },
+  {
+   "key_or_row": "RULINGS.json ui_label_rulings — R28-keeping-cool",
+   "from": "(no entry; Keeping Cool is in no glossary and no lang key)",
+   "to": "Keeping Cool -> 镇定",
+   "why": "Keeping Cool exists ONLY as a RollTable result name — keepingcool is filtered out of CONFIG.statusEffects at alienrpg.mjs:267, so there is no ALIENRPG.* value, and build_glossary_v1.py hard-exits on a ruling naming a term it cannot find. A concurrent agent created ui_label_rulings this session for exactly this class; I used it rather than inventing a home.",
+   "description_evidence": "\"No effect.\" Recorded as deliberately NOT equal to KEEPING IT TOGETHER 保持镇定 nor Keeping Guard 保持警戒."
+  }
+ ],
+ "kept_unchanged": [
+  {
+   "key_or_row": "Jumpy — ALIENRPG.jumpy + Stress 1-1",
+   "value": "惊跳",
+   "why": "KEPT, as you asked. Already 2 chars, neither vague nor colloquial, and it reads as a state. It is also named by name in two other strings — Deflated's description 「如果你处于惊跳状态（上面的 #1）」and ALIENRPG.CantGetJumpy 「泄气状态下无法获得“惊跳”。」 — so a change here has a blast radius the gain would not justify. Description: pushing costs +2 stress instead of +1, i.e. you are on edge."
+  },
+  {
+   "key_or_row": "Aggravated — ALIENRPG.aggravated + Stress 3-3",
+   "value": "恼怒",
+   "why": "KEPT. 2 chars, and Empathy –2 follows from being angry at everyone. I weighed 暴躁 (irritable temperament, arguably a better fit for a persisting condition) and left it: a marginal gain not worth the churn, and you did not flag it. Recording the runner-up so a later pass need not re-derive it."
+  },
+  {
+   "key_or_row": "Shakes — ALIENRPG.shakes + Stress 4-4",
+   "value": "颤抖",
+   "why": "KEPT. 2 chars, exact, and it is the level-4 anchor shared with the classic TREMBLE row — the one pair where the English differs (TREMBLE vs Shakes) and the Chinese already matched. Description: Agility –2, which trembling hands explain directly."
+  },
+  {
+   "key_or_row": "Frantic — ALIENRPG.frantic + Stress 5-5",
+   "value": "慌乱",
+   "why": "KEPT. 2 chars. Strength –2 because you are flailing rather than applying force. 脱力 was rejected as a fabrication — 'frantic' is not weakness."
+  },
+  {
+   "key_or_row": "Deflated — ALIENRPG.deflated + Stress 6-6",
+   "value": "泄气",
+   "why": "KEPT. 2 chars, and 泄气 (deflated / dispirited) explains 'you cannot push any skill rolls' without needing the description."
+  },
+  {
+   "key_or_row": "Spooked — ALIENRPG.spooked + Panic 1-1",
+   "value": "受惊",
+   "why": "KEPT. 2 chars, exact. Description: stress +1."
+  },
+  {
+   "key_or_row": "Noisy — ALIENRPG.noisy + Panic 2-2",
+   "value": "喧闹",
+   "why": "KEPT after a real audit, not by default. I drafted 暴露 (name it from the consequence — enemies now know where you are) and rejected it: 暴露 collides with the radiation-exposure sense in a sci-fi game that already ships a 辐射 condition. 出声 / 响动 are weaker. 喧闹's only flaw is register (it suits a crowd better than one panicking person), which does not clear the bar for churn when it is already 2 chars and intelligible."
+  },
+  {
+   "key_or_row": "Hesitant — ALIENRPG.hesitant + Panic 6-6",
+   "value": "犹豫",
+   "why": "KEPT. 2 chars, exact, and 'you hesitate' explains 'you automatically get the #10 initiative card' with no gloss."
+  },
+  {
+   "key_or_row": "Scream — ALIENRPG.scream + Panic 9-9 (+ SCREAM)",
+   "value": "尖叫",
+   "why": "KEPT. 2 chars, exact. Also referenced by Seek Cover's description 「如果你处在开阔区域，则改为尖叫」, which still resolves."
+  },
+  {
+   "key_or_row": "Flee — ALIENRPG.flee + Panic 10-10 (+ FLEE)",
+   "value": "逃跑",
+   "why": "KEPT. 2 chars, exact."
+  },
+  {
+   "key_or_row": "Frenzy — ALIENRPG.frenzy + Panic 11-11 (+ BERSERK)",
+   "value": "发狂",
+   "why": "KEPT. 2 chars, exact, and already locked to the classic BERSERK row."
+  },
+  {
+   "key_or_row": "KEEPING IT TOGETHER / NERVOUS TWITCH / DROP ITEM — classic Panic Table rows 1-6, 7-7, 9-9",
+   "value": "保持镇定 / 精神紧绷 / 扔下物品",
+   "why": "KEPT at 4 chars ON PURPOSE. These three are NOT in SAME_STRING_GROUPS — they are the classic edition's own rows and they render as <b>label:</b> inside a prose sentence in a chat card, not as a chip in a narrow column. The width rule that drives this whole pass does not apply to them, and pairing them with Keeping Cool / Twitchy / Lose Item would invent a lock the build explicitly declines to declare."
+  },
+  {
+   "key_or_row": "ALIENRPG.CantGetJumpy",
+   "value": "泄气状态下无法获得“惊跳”。",
+   "why": "KEPT. Both names it references (泄气, 惊跳) survived this pass unchanged, so the string still resolves."
+  },
+  {
+   "key_or_row": "The 12 T-EXACT skill names",
+   "value": "unchanged by me (机械 / 射击 / 通信科技 / …)",
+   "why": "Out of scope for this task and being handled by a concurrent agent. My self-gate asserts they are still 12 distinct pure-Chinese values so I can prove I did not disturb the game.items.getName() chain."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "all 21 Evolved response names are exactly 2 CJK characters (regex ^[一-鿿]{2}$ over both tables in the DELIVERED pack)",
+   "result": "PASS"
+  },
+  {
+   "check": "19 lang condition values are byte-equal to their own table result name, row by row (the mapping derived from config.mjs tableNumber + actor.mjs's rollStress/rollPanic switch, not assumed)",
+   "result": "PASS"
+  },
+  {
+   "check": "all 7 SAME_STRING_GROUPS pairs hold in three places at once — glossary uppercase == glossary title-case, lang condition value == glossary, and the ALIENRPG.Panic* <b> label == the glossary uppercase row",
+   "result": "PASS"
+  },
+  {
+   "check": "the 10 classic Panic Table descriptions still track their ALIENRPG.Panic* twin exactly as the two English sources track each other",
+   "result": "PASS — and it caught a real subtlety: pack row 7-7's English ends in a stray apostrophe that en.json's Panic7 lacks, so the Chinese divergence there is deliberate 1:1 fidelity, not drift. My first gate version flagged it as a failure; I refined the check to compare the CN delta against the EN delta rather than demand CN equality."
+  },
+  {
+   "check": "HTML tag multiset 1:1 with English on every touched string (all 31 table rows, both fields, plus lang Panic10/11/15 + ShipPanic11)",
+   "result": "PASS"
+  },
+  {
+   "check": "U+00A0 count identical to English on Panic10 / Panic11 / Panic15 / ShipPanic11 (assemble_lang invariant 8 territory — the labels sit right before a NBSP)",
+   "result": "PASS"
+  },
+  {
+   "check": "no retired name (保持冷静 视野狭窄 搞砸 抽搐不安 失去物品 疑神疑鬼 呆滞 寻找掩护 失去知觉) survives anywhere in the shipped module — walked every .json under 1-系统汉化插件 except compendium/en",
+   "result": "PASS"
+  },
+  {
+   "check": "no two different rows share a name across both tables (0-0 legitimately appears in both)",
+   "result": "PASS"
+  },
+  {
+   "check": "no two names in the same table share a leading character",
+   "result": "PASS — only after a fix. The first run FAILED on (失神, 失误) in the Stress table, which is what sent Tunnel Vision back to 恍惚. This check earned its keep."
+  },
+  {
+   "check": "the 12 T-EXACT skill values are still 12 distinct pure-Chinese strings (proof I did not disturb another agent's lockstep)",
+   "result": "PASS"
+  },
+  {
+   "check": "build_glossary_v1.py (16 invariants, incl. #14 CN-COLLISION and #7 proper-noun/level-C)",
+   "result": "PASS — all 16 over 404 terms; RULING-sourced terms 7 -> 18"
+  },
+  {
+   "check": "assemble_lang.py (11 invariants)",
+   "result": "PASS — all 11; 590 en keys / 584 covered / 6 deliberately unwritten / 16 code-only / 600 written; wrote lang/cn.json 30983 bytes"
+  },
+  {
+   "check": "prep_sys_units.py --collect",
+   "result": "PASS — wrote compendium/cn/alienrpg.alien-rpg-system.json, page 35474 chars (en 66228); no MISSING and no UNTOUCHED units"
+  },
+  {
+   "check": "nothing hand-edited in the assembled outputs — every delivered byte came from a slice plus a tool run",
+   "result": "PASS"
+  }
+ ],
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-core.json",
+   "what": "7 Evolved condition values (catatonic freeze loseitem paranoid seekcover tunnelvision twitchy) + the <b> labels of Panic10 / Panic11 / Panic15 / ShipPanic11, plus the two body sentences that repeated 呆滞."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-core.notes.json",
+   "what": "after + why rewritten for all 11 touched entries, each citing its ruling id and its own description; plus a _revised_2026_08_29_condition_names banner recording the smoke test as the trigger."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-gap.json",
+   "what": "ALIENRPG.messup 搞砸 -> 失误 (this key lives in the gap slice, not lang-core)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase1/lang-gap.notes.json",
+   "what": "messup after + why, including why 失手 was rejected."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase2/SYS-T1.cn.json",
+   "what": "10 result names across the two Evolved tables, 3 Panic-Table <b> labels, and 3 Panic Response descriptions realigned to their new names (4-4, 7-7, 10-10)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/RULINGS.json",
+   "what": "11 new rulings R20-R27 (+ the -row twins) in rulings[], and R28-keeping-cool in ui_label_rulings[]. Spliced as raw text, not re-serialised, because the file is hand-formatted and a concurrent agent was editing it during this pass."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary/glossary_alien.json",
+   "what": "REGENERATED by build_glossary_v1.py. Alongside it: glossary_alien.provenance.json, .disputes.json, .pending.json, .byrole.json."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/cn.json",
+   "what": "REGENERATED by assemble_lang.py. Not hand-edited."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json",
+   "what": "REGENERATED by prep_sys_units.py --collect. Not hand-edited."
+  }
+ ],
+ "open_issues": [
+  "SAME_STRING_GROUPS IS DECLARED BUT NEVER ENFORCED IN THE EQUALITY DIRECTION. build_glossary_v1.py invariant #14 fails only when two terms SHARE a value without being declared; a declared group whose members have DIVERGED passes silently. I had to write a ruling for each side of every pair by hand (R20/R20b, R21/R21b, R24/R24b) and prove the equality in my own gate. Recommend a 17th invariant: for every group, assert all present members have identical cn. Without it the very drift the group list exists to stop cannot be caught by the build.",
+  "SHIPPANIC IS BOUND BY THE SAME LOCK BUT IS NOT IN THE GROUP LIST. lang/en.json ShipPanic11's label is the English word \"Freeze:\" and ShipPanic8's is \"Tremble:\" — byte-equal to the Freeze and Shakes glossary keys — yet SAME_STRING_GROUPS names neither. I moved ShipPanic11 with Freeze on the same-English-same-Chinese principle; ShipPanic8 was already 颤抖 and needed nothing. Suggest extending the two group entries to name the ShipPanic labels so a future pass cannot split them.",
+  "6-工作区/phase1/OVERLAP-ADJUDICATION.json still records the PRE-rename ShipPanic11 value in rows.ALIENRPG.ShipPanic11.kept and .values.core (both containing 呆滞). I left it alone deliberately — it is a record of a past adjudication, and rewriting it would rewrite history — but it is now stale against the slice. Tell me if you want it refreshed with a dated amendment instead.",
+  "KEEPING COOL HAS NO GLOSSARY TERM AND NO LANG KEY, and still does not. It exists only as the 0-0 result name of both Evolved tables (keepingcool is on alienrpg.mjs:267's toRemove list, so there is no ALIENRPG.* value at all), and build_glossary_v1.py hard-exits on a ruling naming a term it cannot find. I recorded 镇定 in RULINGS.ui_label_rulings as R28. If you want it in the glossary proper it needs a term constructed in glossary_additions, which is a build-script change I did not make unasked.",
+  "TUNNEL VISION WAS DECIDED, REVERSED, AND RE-DECIDED WITHIN THIS PASS (恍惚 -> 失神 -> 恍惚). Your original proposal stands, but the audit trail in lang-core.notes.json and in R25's counter_argument records both directions on purpose, so the next reader does not re-litigate it. If you disagree with the second reversal, the single character to change is ALIENRPG.tunnelvision in the lang-core slice plus Stress 2-2 in SYS-T1 plus R25.",
+  "RULING ID NUMBERING COLLIDED WITH A CONCURRENT AGENT. RULINGS.json gained R5-heavy-machinery / R6-ranged-combat / R8-water while I was working, so I moved my block to R20-R28. R7 is currently unused in rulings[] (R7-max-range lives in ui_label_rulings[]). If you renumber, note that 8 of my ruling ids are cited by name inside 6-工作区/phase1/lang-core.notes.json and lang-gap.notes.json.",
+  "PANIC TABLE ROW 7-7's Chinese carries a trailing apostrophe because the ENGLISH in compendium/en does (\"...increases by one.'\") while lang/en.json's Panic7 does not. Pre-existing and deliberate 1:1 fidelity, untouched by me. My gate now asserts the CN delta mirrors the EN delta rather than demanding CN equality, so it will not be 'fixed' into a real defect later.",
+  "AGGRAVATED 恼怒 was kept but has a defensible runner-up, 暴躁. 恼怒 is anger at something; 暴躁 is a persisting irritability, which fits a lasting condition producing Empathy –2 slightly better. Not changed — you said keep, and the gain is marginal — but recorded so it is not re-derived from scratch next round.",
+  "NO PROPAGATION WAS NEEDED YET. compendium/cn holds only alienrpg.alien-rpg-system.json; corerules and starterset do not exist there. When fill_twin.py eventually creates them, all 9 renamed strings will need to carry, and R20-R28's blast_radius fields name the rows.",
+  "NOT MY SCOPE, CONFIRMED UNTOUCHED: the 12 skill names (complaint #1), the inventory columns 最远射程/水/电力 (#5), the journal name (#6), and the crit chat-card labels (#7) are all being handled by concurrent agents — I can see their R5/R6/R7/R8 rulings and their _examined_and_left_unchanged notes in RULINGS.json. My gate asserts I did not disturb the 12 T-EXACT skill values. Complaint #4 (CRITICAL INJURIES / #36 Broken Leg rendering English) was left alone as instructed; ALIENRPG.CriticalInjuries is still the verbatim English 'Critical injuries' in the delivered cn.json."
+ ]
+}

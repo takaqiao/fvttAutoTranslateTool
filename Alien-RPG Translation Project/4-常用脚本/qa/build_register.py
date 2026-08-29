@@ -52,11 +52,19 @@ def line_at(path, n):
 
 def rel(path):
     for base, tag in ((SYS, 'systems/alienrpg'), (CR, 'modules/alien-evolved-corerules'),
-                      (SS, 'modules/alien-evolved-starterset')):
+                      (SS, 'modules/alien-evolved-starterset'),
+                      (HUB, '1-系统汉化插件'), (PROJ, '')):
         if path.startswith(base):
-            return tag + '/' + os.path.relpath(path, base).replace('\\', '/')
+            r = os.path.relpath(path, base).replace('\\', '/')
+            return (tag + '/' + r) if tag else r
     return path.replace('\\', '/')
 
+
+HUB = os.path.join(PROJ, "1-系统汉化插件")
+# The runtime patcher that un-freezes 'MU/TH/ER Instructions.' (see JOURNAL_SHIM below).
+P_SHIM = os.path.join(HUB, 'scripts', 'alienrpg-hardcoded-cn.mjs')
+P_PREP = os.path.join(PROJ, '4-常用脚本', 'parallel', 'prep_sys_units.py')
+P_CNPACK = os.path.join(HUB, 'compendium', 'cn', 'alienrpg.alien-rpg-system.json')
 
 P_INIT = os.path.join(SYS, 'module', 'apps', 'init.mjs')
 P_MAIN = os.path.join(SYS, 'module', 'alienrpg.mjs')
@@ -91,6 +99,82 @@ def flat(d, p=''):
 
 LANG_EN = flat(json.load(open(os.path.join(SYS, 'lang', 'en.json'), encoding='utf-8')))
 LANG_CN = flat(json.load(open(os.path.join(SYS, 'lang', 'cn.json'), encoding='utf-8')))
+
+# ---------------------------------------------------------------- 0. the un-freezing shim
+#
+# 'MU/TH/ER Instructions.' USED TO BE T-FROZEN.  It is not any more.  The freeze was
+# never about the name; it was about the LOOKUP being keyed on the English name.  We own
+# a runtime patcher, so we added a translated-name fallback to game.journal.getName and
+# the two entries below moved from "frozen" to "translatable, guarded by shim".
+#
+# READ THIS BEFORE TOUCHING EITHER SIDE.  The dependency is mutual and load-bearing:
+#   * remove / disable / rename the shim  -> BOTH entries revert to T-FROZEN and
+#     6-工作区/phase2/SYS-J-name.cn.json must be deleted (that makes
+#     prep_sys_units.py --collect fall back to the English name) and the pack re-collected.
+#     Skip that and the FIRST load of a fresh world throws at init.mjs:81 `.show()`.
+#   * change the translated name -> change it in BOTH places in the same commit
+#     (NAME_FALLBACKS in the patcher AND SYS-J-name.cn.json), or the fallback looks up a
+#     name that no document has and we are back to undefined.
+#
+# Every file:line below is re-derived by cite(), so a drift fails this build.
+JOURNAL_SHIM_STRING = "MU/TH/ER Instructions."
+JOURNAL_SHIM_CN = "MU/TH/ER 使用说明"
+
+_shim_src = open(P_SHIM, encoding='utf-8').read()
+_pack_cn = json.load(open(P_CNPACK, encoding='utf-8'))
+_pack_journal = _pack_cn["entries"]["Alien RPG System"]["journals"][JOURNAL_SHIM_STRING]
+
+JOURNAL_SHIM = {
+    "status": "TRANSLATABLE — guarded by a runtime shim (was T-FROZEN until 2026-08-29)",
+    "translated_to": JOURNAL_SHIM_CN,
+    "token_rule": "The 'MU/TH/ER' token stays ASCII — it is the ship computer's name and the "
+                  "alien-mu-th-ur plugin spells it the same way.",
+    "shim": {
+        "file": rel(P_SHIM),
+        "pairs_declared_at": cite(P_SHIM, "const NAME_FALLBACKS = {"),
+        "installer_at": cite(P_SHIM, "export function installNameFallback"),
+        "installed_at": cite(P_SHIM, "installNameFallback(globalThis.game?.journal"),
+        "install_hook": "setup",
+        "install_target": "the game.journal INSTANCE only — an own, non-enumerable 'getName' "
+                          "property shadowing Collection.prototype.getName "
+                          "(common/utils/collection.mjs:134). The prototype is NOT touched, so "
+                          "game.actors / game.items / every CompendiumCollection are unaffected.",
+        "why_setup": "client/game.mjs:730 initializeDocuments() creates game.journal; :740 callAll('setup'); "
+                     ":779 callAll('ready'). The system's live lookups all run in ready handlers that were "
+                     "registered before ours (systems load before modules), so ready would be too late and "
+                     "i18nInit (:663) too early — game.journal does not exist yet there.",
+        "sentinel": "__alienrpgCnGetNamePatched",
+        "sentinel_note": "Unique. The two patcher files once shared '__alienCnPatched' and the second "
+                         "install silently no-op'd; this name is reused nowhere.",
+        "gate": "enabled() = systemOk() && langOk() — game.system.id === 'alienrpg' && "
+                "game.i18n.lang === 'cn'. Inert in every other world.",
+        "trigger_condition": "fires ONLY when the argument is byte-equal to "
+                             + repr(JOURNAL_SHIM_STRING) + " AND the original lookup returned "
+                             "null/undefined. A successful original lookup is returned untouched, so English "
+                             "worlds and already-imported English-named worlds never reach the fallback.",
+        "strict_option": "getName(name, {strict:true}) keeps upstream semantics: the soft lookup runs first, "
+                         "and if the fallback also misses, the original is re-called with the caller's own "
+                         "options so IT throws its own error.",
+    },
+    "translated_in": [
+        rel(P_CNPACK) + "  entries['Alien RPG System'].journals["
+        + repr(JOURNAL_SHIM_STRING) + "].name",
+        rel(P_CNPACK) + "  entries['Alien RPG System'].journals["
+        + repr(JOURNAL_SHIM_STRING) + "].pages[" + repr(JOURNAL_SHIM_STRING) + "].name",
+    ],
+    "source_slice": "6-工作区/phase2/SYS-J-name.cn.json (journal_name / page_name), emitted by "
+                    + rel(P_PREP) + " --collect",
+    "if_shim_removed": "REVERTS TO T-FROZEN. Delete 6-工作区/phase2/SYS-J-name.cn.json, re-run "
+                       "prep_sys_units.py --collect so the pack carries the English name again, and put these "
+                       "two entries back under the plain T-FROZEN rule. Shipping the Chinese name WITHOUT the "
+                       "shim throws on the first load of a fresh world.",
+    "verified_shim_present": ("export function installNameFallback" in _shim_src
+                              and "installNameFallback(globalThis.game?.journal" in _shim_src),
+    "verified_lockstep": (_pack_journal["name"] == JOURNAL_SHIM_CN
+                          and _pack_journal["pages"][JOURNAL_SHIM_STRING]["name"] == JOURNAL_SHIM_CN
+                          and ("'" + JOURNAL_SHIM_CN + "'") in _shim_src),
+    "gate": "4-常用脚本/qa/adversarial_hardcoded_patch.mjs group S",
+}
 
 # ---------------------------------------------------------------- 1. name_lookups
 name_lookups = [
@@ -133,13 +217,16 @@ name_lookups = [
             cite(P_INIT, 'game.journal.getName(welcomeJournalEntry).show()', 1) + "  .show() on the getName() result",
             cite(P_INIT, 'game.journal.getName(welcomeJournalEntry).show()', 2) + "  .show() on the getName() result",
         ],
-        "breaks_if_translated": (
-            "getName returns null and .show() throws inside FirstTimeSetup() AFTER the 'imported' flag and "
+        "breaks_if_translated_WITHOUT_THE_SHIM": (
+            "getName returns undefined and .show() throws inside FirstTimeSetup() AFTER the 'imported' flag and "
             "migrationVersion were already written, so the exception aborts nothing recoverable but the user "
             "never sees the MU/TH/ER instructions. In ModuleImport()'s importAdventure hook the throw also skips "
             "the `return`, leaving the hook registered."),
+        "unfrozen_by_shim": JOURNAL_SHIM,
         "note": "Same literal is re-declared independently at " + cite(P_MAIN, 'const releaseNoteName = "MU/TH/ER Instructions."') +
-                " as releaseNoteName; both must move together.",
+                " as releaseNoteName; both must move together. Both are now covered by the SAME shim, which "
+                "patches the collection method rather than either call site, so there is exactly one thing to "
+                "keep alive.",
         "verified_target_exists": any(j['name'] == "MU/TH/ER Instructions." for j in PACKS['system']['journal']),
     },
     {
@@ -157,10 +244,18 @@ name_lookups = [
             cite(P_MAIN, 'const selected = game.journal.getName(releaseNoteName).id') + "  .id on the getName() result",
             cite(P_MAIN, 'await newReleaseJournal.setFlag') + "  .setFlag() on the getName() result",
         ],
-        "breaks_if_translated": (
+        "breaks_if_translated_WITHOUT_THE_SHIM": (
             "showReleaseNotes() throws at .id; the whole body is wrapped in try{}catch{} with an EMPTY catch "
             "(" + cite(P_MAIN, '} catch (error) {') + "), so the failure is completely silent: release notes "
             "simply stop appearing forever and no console error is produced."),
+        "why_the_shim_earns_its_keep_here": (
+            "showReleaseNotes() rewrites the world journal from the Babele-translated pack document "
+            "(" + cite(P_MAIN, 'const u = await cls.updateDocuments(updateData') + "), which RENAMES the "
+            "existing world JournalEntry to the Chinese name in place. The very next lookup, "
+            + cite(P_MAIN, 'const newReleaseJournal = game.journal.getName(releaseNoteName)') + ", then asks "
+            "for the ENGLISH name again. Without the shim that returns undefined, the empty catch swallows the "
+            "throw, the 'ver' flag is never written, and the whole update silently re-runs on every load."),
+        "unfrozen_by_shim": JOURNAL_SHIM,
         "verified_target_exists": any(j['name'] == "MU/TH/ER Instructions." for j in PACKS['system']['journal']),
     },
     {
@@ -1087,12 +1182,25 @@ register = {
         "and both are load-bearing here. Never normalise them."),
     "tiers": {
         "T-FROZEN": "byte-exact English. Never translated, never given a bilingual tail.",
+        "T-SHIMMED": ("was T-FROZEN; translated anyway because a runtime shim in the hub module makes the "
+                      "English-keyed lookup resolve to the translated document. An entry is T-SHIMMED only "
+                      "while its `unfrozen_by_shim.shim` block names a shim that actually exists — remove "
+                      "the shim and the entry goes straight back to T-FROZEN and the translation must be "
+                      "reverted in the same commit. See `if_shim_removed` on the entry."),
         "T-EXACT": "pure Chinese, byte-equal to a lang/cn.json value. No English tail, no trailing space.",
         "T-BILINGUAL": "'中文 English' joined by ONE ASCII space, no parentheses.",
         "T-PLAIN": "bare Chinese.",
     },
     "sections": {
-        "name_lookups": {"tier": "T-FROZEN", "count": len(name_lookups), "entries": name_lookups},
+        "name_lookups": {
+            "tier": "T-FROZEN",
+            "count": len(name_lookups),
+            "shimmed_count": sum(1 for e in name_lookups if "unfrozen_by_shim" in e),
+            "tier_exception": ("Entries carrying an `unfrozen_by_shim` block are T-SHIMMED, not T-FROZEN: they "
+                               "ARE translated in the shipped pack, and the English-keyed getName() is made to "
+                               "resolve by a runtime wrapper. Any gate that enforces 'frozen means byte-equal "
+                               "English' must skip those entries — and must fail if the named shim is gone."),
+            "entries": name_lookups},
         "rolltable_names": {"tier": "T-FROZEN",
                             "count": len(rolltable_names),
                             "count_note": "10 literal strings passed to game.tables.getName(), plus 2 "
@@ -1117,6 +1225,72 @@ register = {
     "upstream_defects": upstream_defects,
 }
 
+# ---------------------------------------------------------------- destructive-overwrite guard
+#
+# 2026-08-29: this generator NO LONGER REPRODUCES the file it writes.  Whole blocks
+# (corrections_*, gate_tests_*, the macro_commands and name_substring_tests sections,
+# rows_with_nonstandard_split) were written onto the JSON by hand after the last sync, and a
+# plain re-run silently deleted 410 keys and reverted 14 hand-verified values.  That is not a
+# hypothetical: it happened, and the JSON's own _generator_status now records it.
+#
+# So the generator is no longer allowed to quietly destroy the file.  It compares what it is
+# about to write against what is already on disk and ABORTS if anything would be lost.  Pass
+# --force only when you have deliberately brought the two back into sync and WANT the old
+# content gone.
+def _guard(new_register, out_path):
+    if '--force' in sys.argv:
+        print('!! --force: overwriting without the loss check')
+        return
+    if not os.path.exists(out_path):
+        return
+    try:
+        cur = json.load(open(out_path, encoding='utf-8'))
+    except Exception as exc:
+        print('!! existing register is unreadable (%s); writing a fresh one' % exc)
+        return
+
+    lost_top = [k for k in cur if k not in new_register]
+    lost_sec = [k for k in cur.get('sections', {}) if k not in new_register.get('sections', {})]
+
+    def leaves(o, p=''):
+        if isinstance(o, dict):
+            out = {}
+            for k, v in o.items():
+                out.update(leaves(v, p + '/' + str(k)))
+            return out
+        if isinstance(o, list):
+            out = {}
+            for i, v in enumerate(o):
+                out.update(leaves(v, p + '/%d' % i))
+            return out
+        return {p: o}
+
+    lost_leaves = sorted(set(leaves(cur)) - set(leaves(new_register)))
+    if not (lost_top or lost_sec or lost_leaves):
+        return
+
+    print('=' * 78)
+    print('REFUSING TO WRITE %s' % out_path)
+    print('This generator is OUT OF SYNC with the file on disk. Writing now would delete:')
+    if lost_top:
+        print('  top-level keys : %s' % lost_top)
+    if lost_sec:
+        print('  sections       : %s' % lost_sec)
+    print('  leaf values     : %d' % len(lost_leaves))
+    for k in lost_leaves[:25]:
+        print('      %s' % k)
+    if len(lost_leaves) > 25:
+        print('      ... and %d more' % (len(lost_leaves) - 25))
+    print('')
+    print('The JSON is the source of truth until the generator is brought back in sync')
+    print('(see its own _generator_status, and PROJECT.md). Edit the JSON, or re-sync this')
+    print('script first. `--force` overrides, and throws the listed content away.')
+    print('=' * 78)
+    sys.exit(2)
+
+
+_guard(register, OUT)
+
 text = json.dumps(register, ensure_ascii=False, indent=1)
 # selectively escape the invisible / confusable codepoints
 for ch in ['\u00a0', '\u2013', '\u2014', '\u2018', '\u2019', '\u201c', '\u201d', '\u200b', '\ufeff', '\u3000']:
@@ -1129,7 +1303,8 @@ with open(OUT, 'w', encoding='utf-8', newline='\n') as fh:
 back = json.load(open(OUT, encoding='utf-8'))
 assert back == register, 'ROUND TRIP FAILED'
 print('-> %s  (%d bytes)' % (OUT, os.path.getsize(OUT)))
-print('name_lookups            %d' % len(name_lookups))
+print('name_lookups            %d  (%d shimmed / un-frozen)'
+      % (len(name_lookups), sum(1 for e in name_lookups if 'unfrozen_by_shim' in e)))
 print('rolltable_names         %d  (+%d prefix filter)' % (len(rolltable_names), len(rolltable_name_prefix)))
 print('folder_names            %d' % len(folder_names))
 print('item_names              %d  (+None sentinel)' % len(item_names))

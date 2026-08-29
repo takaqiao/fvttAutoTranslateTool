@@ -1,0 +1,189 @@
+{
+ "summary": "Filled `lang/plugins/muthur-cn.json` (was a `{}` shell) with all 275 keys from the MU/TH/UR module's `en.json` — 198 `MUTHUR.*` + 77 `MOTHER.*` — plus one additive upstream repair (276 total). 19,679 bytes. A 17-check self-gate passes, including a differential parser simulation proving zero regression against the stock-English baseline.\n\nBoth blocking design facts were re-derived from `scripts/main.js`, not taken on trust, and both held:\n\n1. **ASCII-only parser confirmed.** `main.js:1139` does `input.value.trim().toUpperCase()` then matches literal tokens. I extracted the phrase set programmatically (`knownCommands` array + 9 regex literals + the `'CERBERUS'` word test + the two `'ORDER'`/`'PROTOCOL'` English fallbacks) rather than hand-listing it: 25 phrases. Every one survives verbatim in the command-teaching keys; command descriptions are Chinese, tokens are untouched ASCII (`HELP —— 显示本帮助`).\n\n2. **Keywords fallback asymmetry confirmed at `main.js:1148-1157`.** `orderWords` and `protocolWords` each carry a literal English fallback; `specialWords` carries **none**. Wrote the specified safe pattern (`Special`=\"SPECIAL\" unchanged, `Special2`=\"特殊\", `Ordre`=\"指令\", `Protocol`=\"协议\"), and the gate includes a counterfactual proving that translating both `Special` keys would break `SPECIAL ORDER 937` and `SPECIAL 937` — the pattern is load-bearing, not cosmetic.\n\nTwo findings that correct or extend the brief:\n\n- **The `alarmSoundPath` dead-key claim was right for the wrong reason.** The setting *is* registered (`main.js:594`) — but with hardcoded French/English `name`/`hint`, so its i18n keys are unreachable anyway. Confirmed 18 dead keys across 6 subtrees; translated all of them for forward-compat.\n- **`CERBERUS PROTOCOL` does not work in stock English either.** `isCerberus()` admits it, but `handleSpecialOrder`'s prefix strips only remove `PROTOCOL ` as a *prefix*, so `orderKey` stays `\"CERBERUS PROTOCOL\"` and misses the table. The English help text advertises exactly this broken form. I pointed the Chinese help at `CERBERUS`, which works.\n\nI touched only `muthur-cn.json`. Git shows `babele-cn.json` and `motiontracker-cn.json` also modified — those are sibling agents' work, not mine.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/plugins/muthur-cn.json",
+   "bytes": 19679,
+   "what": "The deliverable. 276 keys (275 from en.json + 1 additive upstream repair), UTF-8 no BOM, 4-space indent, trailing newline. Namespaces MUTHUR/MOTHER only."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/build_muthur.py",
+   "bytes": 21000,
+   "what": "Builder. Holds the translation as a flat dotted-key table, then walks en.json to emit the nested file, so shape and completeness are structural guarantees rather than hand-checked. Reports missing/orphan keys."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/gate_muthur.py",
+   "bytes": 9700,
+   "what": "The 17-check self-gate. Re-derives command phrases from main.js and runs the special-order parser twice (English keywords vs Chinese keywords) to check for regression differentially. Re-runnable."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Keys in en.json / keys translated",
+   "value": "275 / 275 — zero fell back to English"
+  },
+  {
+   "what": "Keys in delivered file",
+   "value": "276 (275 + MOTHER.commandNotFound upstream repair)"
+  },
+  {
+   "what": "Source characters translated",
+   "value": "9,204"
+  },
+  {
+   "what": "Delivered file size",
+   "value": "19,679 bytes (was 3 bytes: `{}`)"
+  },
+  {
+   "what": "Values containing Chinese",
+   "value": "270 / 276"
+  },
+  {
+   "what": "Values byte-identical to English (all intentional)",
+   "value": "3 — MUTHUR.motherPrefix ('/M : ', ASCII token), MUTHUR.Time.OnlySeconds ('{seconds} {secondLabel}', pure placeholders), MOTHER.Keywords.Special ('SPECIAL', parser-critical)"
+  },
+  {
+   "what": "Command phrases derived from main.js",
+   "value": "25, from knownCommands (5) + 9 regex literals + CERBERUS + 2 English fallbacks"
+  },
+  {
+   "what": "English special-order / Cerberus forms verified still resolving",
+   "value": "12 of 12"
+  },
+  {
+   "what": "Parser regressions vs stock-English baseline",
+   "value": "0 across 20 simulated inputs"
+  },
+  {
+   "what": "Registered settings in main.js",
+   "value": "21 (13 explicit + 8 postHack loop); spectateurs.js and spectator-fix.js register none"
+  },
+  {
+   "what": "Dead i18n keys confirmed by register() audit",
+   "value": "18 across 6 subtrees — translated anyway for forward-compat"
+  },
+  {
+   "what": "Self-gate checks",
+   "value": "17 / 17 pass"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Kept Keywords.Special as ASCII \"SPECIAL\"; translated only Special2 to \"特殊\"",
+   "reason": "Verified at main.js:1152-1153 that specialWords has no English fallback, unlike orderWords (1149) and protocolWords (1157). Gate check G4c runs the counterfactual: with both keys Chinese, SPECIAL ORDER 937 and SPECIAL 937 both stop parsing. The asymmetry in the source is the whole reason the pattern works."
+  },
+  {
+   "decision": "Translated command DESCRIPTIONS, kept every command TOKEN verbatim ASCII, joined by ——",
+   "reason": "Parser uppercases and matches literals. Verified by extracting phrases from main.js and asserting survival in all command-teaching keys (G2a), plus an allowlist check (G2b) that no CN string invents or corrupts an ASCII token."
+  },
+  {
+   "decision": "Chinese help advertises CERBERUS, not CERBERUS PROTOCOL",
+   "reason": "Simulated stock English: CERBERUS PROTOCOL passes isCerberus() but orderKey stays 'CERBERUS PROTOCOL' and misses the orders table, so it prints 'command not recognized'. The English help advertises this broken form. CERBERUS and PROTOCOL CERBERUS both work. Advertising a working token costs nothing and is strictly better."
+  },
+  {
+   "decision": "Added one key not in en.json: MOTHER.commandNotFound (lowercase c)",
+   "reason": "main.js:4868 localizes 'MOTHER.commandNotFound' but en.json only defines 'MOTHER.CommandNotFound'. Foundry echoes a missing key, so any unresolved 3-digit order (a hacked player typing '123') prints the literal text 'MOTHER.commandNotFound' on the terminal — in every language including English. The alias is in-namespace and purely additive. Flagged here because it makes the file 276 keys, not 275, in case a hub CI check asserts exact parity."
+  },
+  {
+   "decision": "Translated all 18 dead keys rather than skipping them",
+   "reason": "Self-gate (1) requires every en.json key present, and the cost is trivial. Verified dead by register() audit: useTokenName (2, zero occurrences anywhere), commandsList (3, zero occurrences), hackResult (5, only a 'Retiré' comment at line 702), allowCerberus (4, read at 4879 but never registered), cerberusDuration (2, superseded by window.__cerberusDurationMinutes), alarmSoundPath (2, registered at 594 but with hardcoded name/hint that bypass i18n)."
+  },
+  {
+   "decision": "MOTHER rendered as 老妈; MU/TH/UR and MUTHUR left untranslated",
+   "reason": "glossary_alien.json adopts Mother → 老妈 and MU/TH/UR → MU/TH/UR; delivered cn.json already ships 老妈表格 (ALIENRPG.ROLLONSELECTED), so the plugin sheets sit next to a system UI that already says 老妈. MUTHUR.motherName is a speaker-label prefix (main.js:2186), display-only, so it is safe to translate."
+  },
+  {
+   "decision": "Special Orders named 754号特别指令 etc.",
+   "reason": "glossary_alien.json has 'Special Order 937' → '937号特别指令'. These come from MOTHER.SpecialOrders.${code}.name and render as headings — never parsed — so the display form is free while the digits (the actual input token) are preserved."
+  },
+  {
+   "decision": "Fully translated the approve.* GM dialogs, dropping their English words",
+   "reason": "ACTIVATE ALARM?, GAS TARGETS IN AREA?, LOCK {label}? are GM approval prompts rendered by showApprovalDialog, not command references a player types. Keeping tokens there would be cargo-culting. The gate lists all 45 such deliberate drops separately from the enforced teaching-key set."
+  },
+  {
+   "decision": "No angle brackets in helpMenu.sections.*.desc",
+   "reason": "buildGMHelpPanelContent interpolates desc into a template literal assigned as innerHTML. Wrote 'CRYO POD [名称]' with square brackets. Enforced by gate G6a."
+  },
+  {
+   "decision": "Wrote /M [消息] in SETTINGS.commandsList.commands where English says MOTHER [MESSAGE]",
+   "reason": "motherPrefix is '/M' (main.js:1144); no MOTHER command prefix exists in the parser. The English string is inaccurate. The key is dead anyway, so this is forward-compat correctness at zero risk."
+  }
+ ],
+ "open_issues": [
+  "Upstream defect, unfixed by design: `CERBERUS PROTOCOL` never resolves — in English, Chinese, or any of the 9 shipped languages. `isCerberus()` (main.js:1191) admits it, but `handleSpecialOrder`'s strips (main.js:4567) only remove `PROTOCOL ` as a prefix. Fixing it needs a main.js change, which is out of scope for a lang file. I routed the Chinese help around it.",
+  "Chinese keyword aliases reach the access gate but do not resolve to an order. `特殊 937` / `指令 937` pass isSpecialOrder(), but orderKey's strips are hardcoded ASCII, so the lookup misses and the player gets the not-found path. This is NOT a regression — stock English behaves identically for `SPECIAL 000` — and the bare number (`937`) plus every English form work fine. Callable improvement only via main.js. Chinese players should type the bare 3-digit number.",
+  "The delivered file is 276 keys, not 275, because of the deliberate `MOTHER.commandNotFound` repair. If the hub's release CI asserts exact key parity with upstream en.json for plugin lang files, that check will need to permit this one documented extra key — or I can drop it on request, at the cost of restoring a player-visible raw-key leak.",
+  "`allowCerberus` is read at main.js:4879 but registered nowhere in any of the three scripts, so `game.settings.get` should throw there. Purely an upstream bug; I translated its 4 i18n keys for forward-compat but they are currently unreachable.",
+  "I did not verify rendering in a live Foundry world. Per the standing note that the deployment is on VPS and local install state is not diagnostic evidence, all claims here come from static analysis of main.js plus the parser simulation — not from a running client."
+ ],
+ "self_gate": [
+  {
+   "check": "G1a every en.json key present",
+   "result": "PASS — en=275, cn=276, superset holds"
+  },
+  {
+   "check": "G1b only the documented upstream repair is extra",
+   "result": "PASS — extra = ['MOTHER.commandNotFound'] exactly"
+  },
+  {
+   "check": "G2a command phrases survive verbatim in every command-teaching key",
+   "result": "PASS — 25 phrases derived from main.js checked against MUTHUR.help, newSessionStarted, postHack.title, helpMenu.sections.*, SETTINGS.postHack.*, commandsList.commands"
+  },
+  {
+   "check": "G2b no invented or corrupted ASCII token anywhere in CN",
+   "result": "PASS — every uppercase run in all 276 values is in the derived-token allowlist"
+  },
+  {
+   "check": "G3a placeholders {...} preserved 1:1",
+   "result": "PASS — multiset-equal per key across all 275 shared keys ({userName} {label} {target} {name} {result} {command} {user} {time} {minutes} {seconds} {minuteLabel} {secondLabel})"
+  },
+  {
+   "check": "G3b newline structure preserved",
+   "result": "PASS — \\n count identical per key, so terminal line layout is unchanged"
+  },
+  {
+   "check": "G4a no regression vs stock English on any command form",
+   "result": "PASS — 20 inputs simulated under both EN and CN keywords; 0 regressions"
+  },
+  {
+   "check": "G4b every English special-order form that worked still works",
+   "result": "PASS — 12/12 (937, 754, 899, 931, 939, 966, ORDER 937, SPECIAL 937, SPECIAL ORDER 937, ORDER SPECIAL 937, CERBERUS, PROTOCOL CERBERUS)"
+  },
+  {
+   "check": "G4c counterfactual proves Keywords.Special must stay ASCII",
+   "result": "PASS — with both Special keys Chinese, SPECIAL ORDER 937 and SPECIAL 937 both fail to parse"
+  },
+  {
+   "check": "G4d Keywords.Special is still exactly 'SPECIAL'",
+   "result": "PASS"
+  },
+  {
+   "check": "G4e Chinese aliases reach the access gate",
+   "result": "PASS — 特殊 937 / 指令 937 / 协议 CERBERUS all gate True (resolution caveat in open issues)"
+  },
+  {
+   "check": "G5a namespace is MUTHUR/MOTHER only",
+   "result": "PASS — roots == ['MOTHER', 'MUTHUR']"
+  },
+  {
+   "check": "G5b no ALIENRPG.* key",
+   "result": "PASS — zero, so nothing can collide with the 600-key system cn.json in the later-wins merge"
+  },
+  {
+   "check": "G6a no raw < > in helpMenu descs",
+   "result": "PASS — those strings are injected via innerHTML"
+  },
+  {
+   "check": "G6b valid UTF-8 JSON, no BOM",
+   "result": "PASS — parses clean, first 3 bytes are not EF BB BF"
+  },
+  {
+   "check": "G6c machine register: no polite 请/您",
+   "result": "PASS — 请求 ('request') correctly excluded from the 请 check"
+  },
+  {
+   "check": "G6d upstream repair key carries Chinese text",
+   "result": "PASS — 指令无法识别。输入 'HELP' 查看指令列表。"
+  }
+ ]
+}

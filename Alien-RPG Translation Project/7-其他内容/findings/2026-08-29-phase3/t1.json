@@ -1,0 +1,138 @@
+{
+ "summary": "Filled both empty plugin shells. `motiontracker-cn.json` = 69/69 keys (namespace MOTIONTRACKER.* + the one lowercase `MotionTracker.motionless`), `babele-cn.json` = 102/102 keys (BABELE.*). Both written in the source file's exact key order, valid UTF-8 JSON, LF, no BOM. Self-gate passes on both: no missing/extra keys, zero placeholder or backtick-literal drift, no ALIENRPG.* leakage, no untranslated or CJK-free values, no stray whitespace.\n\nTwo corrections to the audit for motion_tracker: (1) the \"0 orphans\" claim is WRONG — 6 keys are dead (`centerTrackerTitle/Hint`, `xOffsetTitle/Hint`, `yOffsetTitle/Hint`); their `game.settings.register` calls were removed upstream and the literals appear nowhere in scripts/ or templates/. I translated them anyway (harmless, and they return if upstream re-adds the settings). (2) the audit says \"all four templates\" — there are 5. The rest of the claim holds: 100% of user-visible text routes through game.i18n (the config template has zero raw text nodes after stripping tags/handlebars; the only literal PIXI.Text is the numeric distance readout `nearestDist.toFixed(2)+scene.grid.units`, which is data, not a string), and no key is built dynamically.\n\nFor Babele I did NOT convert zh-tw.json. It is 22/102 keys = 21.6% coverage, missing all 80 keys added in 2.7–2.9 (the whole Actor-translation review dialog, the directory/pack-folders exporters, and the source-priority system), and its vocabulary is off for a simplified-Chinese Foundry: it renders Compendium as \"概要(compendium)\" where core Chinese uses 合集包. Translated all 102 from en.json instead, cross-checked against foundry_chn 14.365 (3430 flattened keys).",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/plugins/motiontracker-cn.json",
+   "bytes": 5964,
+   "what": "69 keys, MOTIONTRACKER.* (68) + MotionTracker.motionless (1). Was a 3-byte {} shell."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/plugins/babele-cn.json",
+   "bytes": 8276,
+   "what": "102 keys, BABELE.*. Was a 3-byte {} shell."
+  },
+  {
+   "path": "C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/gate.py",
+   "bytes": 2400,
+   "what": "Re-runnable self-gate: key parity, key order, namespace, placeholder/backtick parity, CJK presence, byte-exactness vs lang/cn.json. Scratchpad, not part of the deliverable."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "motion_tracker en.json keys / translated",
+   "value": "69 / 69"
+  },
+  {
+   "what": "motion_tracker keys statically referenced in scripts+templates",
+   "value": "63 of 69 (audit claimed 69)"
+  },
+  {
+   "what": "motion_tracker orphan keys",
+   "value": "6 (centerTrackerTitle, centerTrackerHint, xOffsetTitle, xOffsetHint, yOffsetTitle, yOffsetHint) — audit claimed 0"
+  },
+  {
+   "what": "motion_tracker templates using {{localize}} exclusively, with zero raw ASCII text nodes",
+   "value": "5 of 5 (audit said 4 templates; motion_tracker_window.html has no user text at all, only icon classes)"
+  },
+  {
+   "what": "motion_tracker dynamic/constructed i18n keys",
+   "value": "0 — all 6 i18n.localize() call sites pass string literals; only settings.js:191 is dynamic and it localizes CONFIG.statusEffects labels (core's, not ours)"
+  },
+  {
+   "what": "babele en.json keys / translated",
+   "value": "102 / 102"
+  },
+  {
+   "what": "babele zh-tw.json coverage vs en.json",
+   "value": "22 / 102 = 21.6%; 80 keys missing; 0 stale keys (nothing in zh-tw that en.json dropped)"
+  },
+  {
+   "what": "babele orphan keys (declared but not referenced in module code)",
+   "value": "4 (TranslateActorHint, TranslateActorBtn, ActorTranslationModified, ActorTranslationModifiedHint) — translated anyway"
+  },
+  {
+   "what": "foundry_chn core Chinese consulted",
+   "value": "v14.365, 3430 flattened keys; 21 of 22 checked terms attested in its values"
+  },
+  {
+   "what": "placeholder / backtick-literal parity",
+   "value": "0 mismatches across both files (neither source uses {x} placeholders; babele's 6 `_packs-folders` backtick literals preserved 1:1)"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "Motion tracker close/medium/far sound tiers → 近距离 / 中距离 / 远距离",
+   "reason": "device.js:576-582 splits the tracker's own maxDistance into thirds (0.33 / 0.66), so these are NOT the game's range bands — but at the default maxDistance 80 the boundaries land at 26.4 and 52.8, which is almost exactly Alien's Short/Medium/Long cut-offs. 近/中/远距离 are all attested ALIENRPG values (Short=近距离, Medium=中距离, Long=远距离), so the vocabulary agrees with the sheets without falsely asserting the band named 'Close' (贴近距离), which is a different, tighter band."
+  },
+  {
+   "decision": "'signals' → 信号, 'token' → 指示物, 'GM' → GM (no space)",
+   "reason": "信号 matches the system's SIGNATURE=信号特征 / goDark=信号静默 family; 指示物 is byte-exact with cn.json NoToken/DefProto and with foundry_chn (111 occurrences); ALIENRPG.GMONLY is literally 仅限GM with no space, so gmOnlyTitle reuses that byte sequence."
+  },
+  {
+   "decision": "Byte-exact reuse from lang/cn.json where a key overlaps: settingsGeneral=通用 (ALIENRPG.General), Reset=重置 (ALIENRPG.ResetButton)",
+   "reason": "Gated programmatically, both compare equal. Motion Tracker itself → 运动追踪器 per glossary_alien.json."
+  },
+  {
+   "decision": "seePlayersHint translated to what the code does, not the English word 'dispositions'",
+   "reason": "device.js:507-508 shows the setting simply decides whether player-controlled tokens are emitted as signals at all — it has nothing to do with Foundry token disposition (friendly/hostile). foundry_chn has no attested rendering of 'disposition' either, so a literal 阵营态度 would have been both unattested and wrong. Rendered as 显示其他玩家控制的指示物的位置."
+  },
+  {
+   "decision": "Babele translated from en.json, not converted from zh-tw.json",
+   "reason": "zh-tw is 21.6% complete and its core vocabulary is non-standard for zh-Hans (概要(compendium) vs 合集包; 導出/文件/模組). Nothing in it was worth adapting once the terminology had to be replaced anyway. Note it also carries 'Translation Export' as just 翻譯, which drops the export half."
+  },
+  {
+   "decision": "Babele terminology fixed to foundry_chn 14.365",
+   "reason": "Compendium→合集包 (COMPENDIUM.*, SIDEBAR.TabCompendium), Package→软件包 (PACKAGE.*), Folder→文件夹, Token→指示物, Actor→角色, Item→物品, Adventure→冒险, Export→导出, Select All→全选 (SETUP.BACKUPS.SelectAll), Cancel→取消 (COMMON.Cancel), Move Up/Down→上移/下移, Source→来源 (JOURNALENTRYPAGE.Source), Apply→应用 (PLACEABLE_PALETTE.Apply). All attested in core values."
+  },
+  {
+   "decision": "'module' → 模组 in both files",
+   "reason": "foundry_chn renders PACKAGE.Type.module as 模组 (66 occurrences); this is the word the user sees in Foundry's own module-management UI, which is exactly where BABELE.requireLibWrapperMessage sends them. Flagged below as the one place my two files diverge from lang/cn.json, which uses 模块 in forceImportHint / Init.SubModule."
+  },
+  {
+   "decision": "Disambiguated the two near-identical Export titles",
+   "reason": "en.json has ExportTranslationTitle='Export Translation File' and ExportDirectoryTitle='Export Translation Files' — a bare singular/plural distinction that Chinese cannot carry. Rendered as 导出翻译文件 and 批量导出翻译文件 so the two dialogs are tellable apart."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "all keys present, both files",
+   "result": "PASS — motiontracker 69/69, babele 102/102; 0 missing, 0 extra; key order identical to source en.json"
+  },
+  {
+   "check": "placeholders 1:1",
+   "result": "PASS — 0 mismatches. Neither source uses {x} interpolation; babele's 6 backticked `_packs-folders` literals preserved with matching backtick counts"
+  },
+  {
+   "check": "namespace correct",
+   "result": "PASS — every motiontracker key starts MOTIONTRACKER. or MotionTracker. (the lowercase one is upstream's, in device.js:215 as a status-effect name, reproduced verbatim); every babele key starts BABELE."
+  },
+  {
+   "check": "no ALIENRPG.* leakage",
+   "result": "PASS — 0 occurrences of the string ALIENRPG in any key or value of either file"
+  },
+  {
+   "check": "Babele terminology cross-checked against core Chinese",
+   "result": "PASS — 21 of 22 probed terms attested in foundry_chn 14.365 values. The one absentee is 原文 (for 'Original'/'Original Entries'); core has no equivalent concept string, and 原文 is the standard Chinese term in a translation tool"
+  },
+  {
+   "check": "byte-exactness vs lang/cn.json on overlapping terms",
+   "result": "PASS — 通用/重置 compare equal to ALIENRPG.General/ResetButton; 仅限GM reproduced without an inserted space"
+  },
+  {
+   "check": "structural sanity",
+   "result": "PASS — both parse as JSON, UTF-8 without BOM, LF endings, no empty values, no value identical to its English source, no value without CJK, no leading/trailing whitespace"
+  },
+  {
+   "check": "tah-alien-cn.json left untouched",
+   "result": "PASS — still 3 bytes ({}), as required"
+  }
+ ],
+ "open_issues": [
+  "AUDIT CORRECTION (motion_tracker): plugins-i18n.json's '0 orphans' is wrong. 6 keys are dead — MOTIONTRACKER.centerTrackerTitle/Hint, xOffsetTitle/Hint, yOffsetTitle/Hint. No game.settings.register call declares them and the literals appear nowhere outside lang/. Translated anyway (they cost nothing and return if upstream restores the settings), but the audit's per-plugin counts should be corrected before anything else is derived from them.",
+  "AUDIT CORRECTION (motion_tracker): the audit says 'all four templates'; templates/ holds five (menu_button, motion_tracker_config, motion_tracker_window, updateMessage, welcomeMessage). The substance of the claim survives — the fifth, motion_tracker_window.html, contains no user-visible text at all, only icon class bindings.",
+  "UPSTREAM BUG, NOT OURS, FOR THE RECORD: motion_tracker 1.5.5 module.json maps lang 'es' to 'lang/en.json' while lang/es.json (71 keys, 2 more than en.json) sits unreferenced. Spanish users get English. Do not fix — it is upstream's, and we do not ship es.",
+  "TERMINOLOGY SPLIT TO RATIFY: I used 模组 for 'module' in both plugin files (core Foundry convention, 66 occurrences in foundry_chn), but lang/cn.json uses 模块 in ALIENRPG.forceImportHint and ALIENRPG.Init.SubModule for the same Foundry-package sense. The word occurs 3x in motiontracker-cn.json (WelcomeTitle, WelcomeMessage, UpdateMessage) and 1x in babele-cn.json (requireLibWrapperMessage). If the project wants 模块 everywhere instead, it is a 4-value sed — but the correct fix is arguably the other direction, changing cn.json, since a user reading 'please install and activate it' will go to a Foundry screen that says 模组.",
+  "BABELE 'Modified' vs cn.json: I rendered BABELE.ActorTranslationModified as 已改动 rather than 已修改 to keep the review dialog's five status chips (已翻译/缺失/已改动/无变化/已选中) visually distinct at a glance. No system-UI conflict, but flagging it as a judgement call.",
+  "NOT VERIFIED (out of scope, needs the VPS): neither file has been loaded by a live Foundry. The module.json 'module' gate and the later-wins flat merge are verified from the manifest and from Foundry's #filterLanguagePaths contract only, not observed. Per the standing note that local install state is not diagnostic evidence for this project, a VPS smoke test is still owed before release."
+ ]
+}

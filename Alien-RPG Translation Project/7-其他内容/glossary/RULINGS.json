@@ -4,14 +4,15 @@
   "_why_a_file_and_not_code": "裁定是**决策**，不是推导。写在 glossary_adjudication.py 的 OV[] 里会和证据推导混在一起，下一轮没人分得清哪条是证据说的、哪条是人拍的。分开放，且每条都带 ruled_by / ruled_on / rationale。",
   "_authority": "业主 2026-08-29 授权：「术语你综合判断最优解作为主轴即可」。业主自己钉死的两条（Wits=机智、Empathy=共情）不在本文件里，它们在 build_glossary_v1.py 的 owner_pinned 机制里，优先级更高。",
   "_precedence": "RULINGS 压过 glossary_adjudication 的阶梯推导，但**压不过** owner_pinned。若某条 ruling 与 owner_pinned 冲突，构建必须失败而不是静默取舍。",
-
   "rulings": [
     {
       "id": "R1-queen",
       "en": "Queen",
       "closes_dispute": "D6-queen",
       "adopt": "女王",
-      "reject": ["王后"],
+      "reject": [
+        "王后"
+      ],
       "ruled_by": "主控",
       "ruled_on": "2026-08-29",
       "rationale": "三条理由，按强弱：① 本项目真正需要的是**复合词** Alien Queen → 异形女王，而不是孤立的 Queen；异形女王 是中文语境里压倒性的既有说法。② 生物学上错不得：异形女王是**孤雌生殖的蜂巢首领**，是统治者本人；「王后」在中文里是「国王的配偶」，指向一个并不存在的国王。③ 证据侧 3-2（扣掉那条蜜蜂比喻的命中），且 zh.wikipedia 的《异形(虚构生物)》条目用的就是 女王。",
@@ -23,7 +24,10 @@
       "en": "Armor Piercing",
       "closes_dispute": "D9-armor-piercing",
       "adopt": "破甲",
-      "reject": ["穿甲弹", "穿甲"],
+      "reject": [
+        "穿甲弹",
+        "穿甲"
+      ],
       "ruled_by": "主控",
       "ruled_on": "2026-08-29",
       "rationale": "现行 cn.json 的 穿甲弹 是**范畴错误**，不是风格差异。Armor Piercing 在本系统里是一条挂在武器上的**属性**，而它挂载的对象包括刀、气矢枪和**异形的酸血攻击**——酸血不是「弹」。破甲 在中文里是形容词性的，且是 TRPG 既有惯例，能同时盖住这三类。",
@@ -35,12 +39,24 @@
       "en": "Comtech",
       "closes_dispute": "D10-comtech",
       "adopt": "通信科技",
-      "reject": ["计算机科学", "科技"],
+      "reject": [
+        "计算机科学",
+        "科技"
+      ],
       "ruled_by": "主控",
       "ruled_on": "2026-08-29",
       "rationale": "两个候选各错一半，取中间那个不是和稀泥而是唯一正确解：① 一级源的 计算机科学 **窄于英文**——Comtech 同时管通讯、计算机与电子设备，砍掉「通讯」这一半会让技能描述自相矛盾（这也是 adjudication 当初拒绝直接采纳它、而把它扔进争议的原因）。② 四级源的 科技 **宽到不指任何东西**，任何技能都可以叫科技。③ 英文名本身就是 Com + tech 的缩合，通信科技 是它的忠实还原，保留了四级源的中心语 科技，补回了英文里的 COM 一半，四个字与其余技能名等长。",
       "note": "⚠ 技能名是 T-EXACT：它必须与 lang/cn.json 的 ALIENRPG.Skillcomtech 逐字节相等。改这一条要同时改 lang 值与包内 skill-stunts 物品名，同一个 commit。",
-      "blast_radius": "lang/cn.json Skillcomtech · 12 个 skill-stunts 物品名之一 · 角色卡 · 全书技能检定正文。"
+      "blast_radius": "lang/cn.json Skillcomtech · 12 个 skill-stunts 物品名之一 · 角色卡 · 全书技能检定正文。",
+      "reaffirmed": {
+        "on": "2026-08-29",
+        "by": "主控",
+        "challenge": "业主 v0.1.0 实机反馈：12 个技能名里 9 个 2 字、3 个 4 字，在角色卡技能列里参差。提议 Comtech → 通讯（2 字）。",
+        "verdict": "驳回。R3 的 通信科技 维持不变，并成为 12 个技能名里唯一保留 4 字的一条。",
+        "new_evidence": "上一轮 R3 靠的是「英文名 Com+tech 的构词」这条二手论证；本轮改用**技能描述本身**（核心书 ch.3，见 6-工作区/raw-dumps/corerules.json 的 journal[2]/pages[2]）：'Programming androids, mainframes, and other types of advanced technology requires specialist knowledge. Roll for COMTECH for any challenging attempt to program, repair, decrypt or otherwise manipulate any type of **computer or communications** technology.' 描述把计算机与通讯**并列**写死，且首句举的例子（androids、mainframes）全在计算机侧。",
+        "why_the_2char_form_is_worse": "通讯 保住的是并列里较次要的一半，因此它比 R3 当初已经否掉的 计算机科学 **还糟**——后者至少对上了描述首句。科技 依旧宽到不指任何东西。不存在能同时装下 计算机 + 通讯 + 编程/解密 的 2 字形式，所以这里属于「宽度必须让位于语义」的那一类。",
+        "width_cost_paid_elsewhere": "同一轮把 Heavy Machinery 与 Ranged Combat 收回 2 字（R5/R6），技能列的长度离群由 3 个降为 1 个；spacecraft-general.hbs:120-131 的舱位列由 驾驶/通信科技/重型机械 = 2/4/4 变为 2/4/2。"
+      }
     },
     {
       "id": "R4-captain",
@@ -57,10 +73,249 @@
       "rationale": "这不是二选一，是**按域分裂**——中文本来就区分商船与军舰的主官，而英文一个 Captain 通吃。① 本游戏的默认框架是商业的：船级前缀 USCSS 里的 C 就是 Commercial，三大战役框架里「太空卡车司机」排第一。② 电影侧 达拉斯船长（《异形》）也是商船。③ 舰长 在二级源（Alien: Earth 2025）与五级源（Covenant 2017）出现，但那两处指的都是**具名大船**，正好落在军舰那一支里，所以采纳域分裂之后**两边的证据都被解释了**，没有一方被推翻。",
       "note": "按域分裂的条目要进 RESOLUTIONS.assertions.json 的 `term_domains` 类断言钉死，防止下一轮有人「顺手统一」。",
       "blast_radius": "全书 NPC 头衔、飞船条目、预设角色卡。"
+    },
+    {
+      "id": "R5-heavy-machinery",
+      "en": "Heavy Machinery",
+      "adopt": "机械",
+      "reject": [
+        "重型机械"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "reverses": "一级源采纳（《异形RPG：进化版》ch.2 = 重型机械）。这是本文件里第一条**推翻一级源**的裁定，因此理由必须比平常更硬。",
+      "rationale": "① **屏幕上「重型」是重复的**：character-skills.hbs:10-11 渲染的是 技能名 + 空格 + 括号里的属性缩写，属性 (力量) 就印在名字右边。英文 Heavy 的作用正是提示这是力量技能——中文那个括号已经把这件事说了。② **它不承担区分功能**：技能描述（核心书 ch.3）为 'Roll for this skill when you attempt to use, repair, jury-rig or break any kind of heavy machinery'；本系统 12 个技能里没有第二个「机械」技能，机械 与 通信科技 已经分好「实体机器 / 计算机与通讯」这条线，去掉「重型」不会和任何东西混。③ **参差是真的，但不是截断**：.resource-label 是 justify-self:center，Attr1 列宽 286px，不会截字；问题是 12 个名字居中之后左右两边都对不齐，9 个 2 字里夹 3 个 4 字。④ 机械 是上游 A 层原值，不是本轮新造词。",
+      "counter_argument_acknowledged": "一级源写的是 重型机械，而本项目的取词阶梯里一级源压过一切非 owner_pinned 的推导。本条按「上屏文本可以比书面术语短，前提是同屏已经印出被省掉的那部分信息」这一条例外推翻它；该例外只在**同屏确实印出**时成立（这里是括号里的 (力量)），不得推广到正文散文。",
+      "note": "⚠ T-EXACT：必须与 lang/cn.json 的 ALIENRPG.SkillheavyMach 逐字节相等，并在同一个 commit 里改包内 skill-stunts 物品名（6-工作区/phase2/SYS-I1.cn.json 的 'Heavy Machinery'.name）。ALIENRPG.SkillheavyMachAbb 故意保持与本值相同。",
+      "blast_radius": "lang/cn.json SkillheavyMach + SkillheavyMachAbb · 12 个 skill-stunts 物品名之一 · 角色卡技能列 · spacecraft-general.hbs:131 与 tabs/spacecraft-crew.html:54 的 ENGINEER 舱位标题 · 全书技能检定正文。"
+    },
+    {
+      "id": "R6-ranged-combat",
+      "en": "Ranged Combat",
+      "adopt": "射击",
+      "reject": [
+        "远程战斗"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "reverses": "一级源采纳（《异形RPG：进化版》ch.2 = 远程战斗）。同 R5，推翻一级源。",
+      "rationale": "① **按描述取名，而不是按词形**：核心书 ch.3 的技能条目原文是 'If you have a ranged weapon, you can take down your enemy from a distance without getting your hands bloody. Use the RANGED COMBAT skill to **fire** all types of ranged weapons.' 中心动词是 fire，射击 是它的直译；远程战斗 译的是英文词形。② **与已定的近战侧对称**：D2-engaged 已经判定 Melee=肉搏、Close Combat 技能=近战，也就是本项目**已经决定让武器类别与技能名脱钩**。远程侧至今仍耦合（类别 远程 / 技能 远程战斗），是两侧唯一不同构的地方。改成 射击 之后：肉搏/近战、远程/射击，且 近战·射击 是中文 TRPG 的既有配对，正好对上英文 Close/Ranged 的配对关系。③ 宽度：12 个技能名里 3 个 4 字之一，回到 2 字。",
+      "counter_argument_acknowledged": "两点代价，都已量过：(a) 一级源写的是 远程战斗；(b) 射击 字面不含「投掷」，而手雷在规则里也走 Ranged Combat。对 (b)：config.mjs:442 的 weapon_type_list 只有 远程/肉搏 两类，投掷物在数据里就是 远程 类武器，其「远」由武器条目上的类别标签与 …距离 档位承担，不需要技能名再说一遍；且 item.mjs 的全部命中计算都走 skills.rangedCbt.mod，无论发射还是投掷，玩家看见的是同一个技能格。",
+      "note": "⚠ T-EXACT：必须与 lang/cn.json 的 ALIENRPG.SkillrangedCbt 逐字节相等，并在同一个 commit 里改包内 skill-stunts 物品名（6-工作区/phase2/SYS-I1.cn.json 的 'Ranged Combat'.name）。⚠ 不要顺手把 ALIENRPG.WepTypeRanged（远程）也改掉——脱钩是本条的**目的**，不是副作用。",
+      "blast_radius": "lang/cn.json SkillrangedCbt · 12 个 skill-stunts 物品名之一 · 角色卡技能列 · 全部远程攻击检定的聊天标签 · 全书技能检定正文。"
+    },
+    {
+      "id": "R8-water",
+      "en": "Water",
+      "adopt": "饮水",
+      "reject": [
+        "水"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "① **它是整套角色卡里唯一的长度离群值**（全量扫描全部 live .hbs 的网格单元后得到）：lCol10 这一个网格列在 character-inventory.hbs / crtui-character-inventory.hbs / vehicle-inventory.hbs 上按分区依次渲染 伤害(2) / 水(1) / 空气(2)，spacecraft-inventory.hbs 上是 射程(2)/水(1)/空气(2)——同一列上下相邻，中间那行少一个字；character-general.hbs:168-188 的 grid-Consumables 里 空气/食物/水/电力 四行共用 119px 标签列，也只有它是 1 字。② 语义上 饮水 不是加长而是**加准**：这一格是船员的饮用水补给（system.consumables.water.value 与物品上的 system.attributes.water.value），不是任何工业用水；与兄弟 食物、空气 一样是物质名词，同构。③ 运行时读得通：character-sheet.mjs:1396-1397 把补给检定标签拼成 localize('ALIENRPG.'+spbutt) + ' ' + localize('ALIENRPG.Supply')，即「饮水 余量检定」。",
+      "counter_argument_acknowledged": "水 是最直白的对译，且与 Food/Air 一样是单纯物质名。但单字标签在这套 UI 里没有任何一个同伴，而 饮水 没有窄化语义——游戏里从来不追踪非饮用水。",
+      "blast_radius": "lang/cn.json Water · 四套 inventory 模板的 lCol10 列头 · character-general / synthetic-general / character-enhanced-general 的消耗品块 · item-sheet.hbs:39/:75 · 补给检定聊天标签。"
+    },
+    {
+      "id": "R20-catatonic",
+      "en": "Catatonic",
+      "adopt": "木僵",
+      "reject": [
+        "失去知觉",
+        "瘫倒",
+        "崩溃"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去知觉 不是“太长”而是**事实错误**：Panic Response 12-20 的描述写的是角色“胡言乱语、茫然凝视”，他是**清醒的**，什么知觉都没丢。木僵 是 catatonia 在中文精神医学里的定译，且英文 Catatonic 本身就是临床词，两边语体对得上。瘫倒 只说了身体倒下，漏掉“叫不醒”那一半。",
+      "counter_argument_acknowledged": "木僵 对一般玩家略显术语化。但聊天卡会紧接着把描述打出来，而一个**错的**名字比一个需要看一眼描述的名字危险。",
+      "note": "⚠ SAME_STRING_GROUPS 把 Catatonic 与 CATATONIC 钉在一起，R20b 同步改动。",
+      "blast_radius": "lang ALIENRPG.catatonic · Panic Response Table 12-20 · Panic Response Table 10-10 描述里的互引 · corerules / starterset 同名行（待 fill_twin 传播）。"
+    },
+    {
+      "id": "R20b-catatonic-row",
+      "en": "CATATONIC",
+      "adopt": "木僵",
+      "reject": [
+        "失去知觉"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "跟随 R20-catatonic。SAME_STRING_GROUPS 声明 CATATONIC（Panic Table 行）与 Catatonic（进化版状态键）必须逐字节相等；只改一边会让进化版恐慌反应与它自己的表对不上。",
+      "note": "⚠ 本条带动 lang ALIENRPG.Panic15 的 <b> 标签与 Panic Table 15-20 描述。"
+    },
+    {
+      "id": "R21-freeze",
+      "en": "Freeze",
+      "adopt": "怔住",
+      "reject": [
+        "呆滞",
+        "僵住",
+        "定身"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 呆滞 是“目光呿呆、反应迟钝”，它从未说出“你动不了”，而描述的全部内容就是失去下一次出手。更重要的是：R20 把 Catatonic 定为 木僵 之后，呆滞 与 木僵 会在同一张 13 行表里读成同一种“无反应的呆”。怔住 是“被惊吓得僵在原地”，与“frozen by fear”逐字对应，且轻重程度明显低于 木僵。僵住 被否掉正是因为它与 木僵 共用 僵 字，小字号下会混。",
+      "note": "⚠ 呆滞 是四级源（stratum A 人工）的锚点，本条是**有意推翻一个四级锚点**，理由不是风格而是与 R20 的可区分性。",
+      "blast_radius": "lang ALIENRPG.freeze / ALIENRPG.Panic10 / ALIENRPG.ShipPanic11 · Panic Response Table 7-7 · Panic Table 10-10。"
+    },
+    {
+      "id": "R21b-freeze-row",
+      "en": "FREEZE",
+      "adopt": "怔住",
+      "reject": [
+        "呆滞"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "跟随 R21-freeze。SAME_STRING_GROUPS 声明 FREEZE 与 Freeze 必须逐字节相等。⚠ 飞船恐慌表的 ShipPanic11 英文标签写作 “Freeze:”，与本词条同字，因此它也一起改——否则同一个英文词在同一个产品里会出两个中文。"
+    },
+    {
+      "id": "R22-lose-item",
+      "en": "Lose Item",
+      "adopt": "脱手",
+      "reject": [
+        "失去物品",
+        "丢失",
+        "掉落"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 失去物品 四字，且读起来是一件事而不是一个状态。描述里写得很清楚：战斗中只需一个快速动作就能把它捡回来——那是**脱手**，不是**丢失**。脱手 两字、是中文里描述兵器脱离手掌的定说，且一眼就能看出东西还在附近。",
+      "note": "⚠ 仍然**不**等于 DROP ITEM 扯下物品（Panic9）——SAME_STRING_GROUPS 没有把两者配对，一个是进化版状态、一个是经典版表行。"
+    },
+    {
+      "id": "R23-paranoid",
+      "en": "Paranoid",
+      "adopt": "猜忌",
+      "reject": [
+        "疑神疑鬼",
+        "多疑",
+        "偏执"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 疑神疑鬼 是四字成语，而且它说的是“到处看见鬼”，比机制宽。描述窄得多也准得多：你既不能帮人也不能接受帮助。猜忌 在中文里就是“对自己人的不信任”，正好是这条机制。多疑 落选是因为它指向威胁而不是同伴。"
+    },
+    {
+      "id": "R24-seek-cover",
+      "en": "Seekcover",
+      "adopt": "掩蔽",
+      "reject": [
+        "寻找掩护",
+        "隐蔽"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 寻找掩护 四字，而且它命名的是一个**动作**；状态栏里要的是动作完成后的那个状态。掩蔽 是中文军事术语里“进入掩体”的两字动词，且保留了 Cover = 掩护 的 掩 字，两者的关系在字面上就看得见。隐蔽 落选：那是 concealment，本系统的 Cover 是会挡子弹的实体。"
+    },
+    {
+      "id": "R24b-seek-cover-row",
+      "en": "SEEK COVER",
+      "adopt": "掩蔽",
+      "reject": [
+        "寻找掩护"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "跟随 R24-seek-cover。SAME_STRING_GROUPS 声明 SEEK COVER 与 Seekcover 必须逐字节相等。⚠ 带动 lang ALIENRPG.Panic11 的 <b> 标签与 Panic Table 11-11 描述。"
+    },
+    {
+      "id": "R25-tunnel-vision",
+      "en": "Tunnel Vision",
+      "adopt": "恍惚",
+      "reject": [
+        "视野狭窄",
+        "失神",
+        "迟钝"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 视野狭窄 不只是四字，它**指错了器官**：描述是机智 –2，管的是侦察 / 生存 / 通信科技，是**脑子**不好使，不是眼睛看不见。失神 两字、说的是注意力，且中文里 目光失神 一语还能带回一点英文名字里的目光意象。",
+      "counter_argument_acknowledged": "初拟 失神，理由是 恍 与兄弟行 慌乱（Frantic）的 慌 在窄列小字号下近乎同形。自检推翻了它：失神 与同一张 8 行表里的兄弟 失误（Mess Up）**首字完全相同**，而首字相同比首字相似更费眼；且 慌乱 / 恍惚 的第二字（乱 / 惚）差得极远，整词不会读错。"
+    },
+    {
+      "id": "R26-twitchy",
+      "en": "Twitchy",
+      "adopt": "躁动",
+      "reject": [
+        "抽搐不安",
+        "抽搐",
+        "焦躁"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 抽搐不安 四字；但把它剪成 抽搐 不是变短而是**变错**——抽搐 在中文里是痉挛级别的不随意症状，远重于 twitchy，而且会与颤抖（Shakes）并列成两个“不受控地抽”。描述是立刻为空气 / 弹药 / 电力进行一次余量检定——你继得太紧，所以用得浪费。躁动 正是产生这个结果的状态。",
+      "note": "⚠ 仍然**不**等于 NERVOUS TWITCH 精神紧绷（Panic7）。"
+    },
+    {
+      "id": "R27-mess-up",
+      "en": "Mess Up",
+      "adopt": "失误",
+      "reject": [
+        "搞砸",
+        "失手",
+        "出错"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 搞砸 是口语，放在状态栏里不像一个状态名（业主实机反馈第 2 条直指这一点）。描述是“无论掷出什么，你的动作都失败”。失手 是第一候选，被否掉两次：一是日常中文里 失手 最常用于“不小心掉了 / 打硕了”，正好是 Lose Item 脱手 的意思，同时挂两个图标时会互干；二是 失手 只管得了手上的活，而这条状态对**任何**技能检定都生效，包括指挥与通信科技。失误 不挑动作类型，也不歧义。"
     }
   ],
-
+  "_ui_label_rulings_not_glossary_terms": "同样格式的裁定，但 en 不是 glossary_alien.json 的 terms 键，因此**不放进上面的 rulings[]**——build_glossary_v1.py 对 rulings[] 里找不到的 term 会直接 SystemExit。这些是纯 UI 标签（en.json 键），归 6-工作区/phase1 分片管，词表不收。",
+  "ui_label_rulings": [
+    {
+      "id": "R7-max-range",
+      "en": "Max Rng",
+      "adopt": "射程",
+      "reject": [
+        "最远射程"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "**这一条是消除撞词，不是制造撞词。** ① 同一张角色卡的同一个网格列（lCol15）在三套 live inventory 模板里挂着两个键：crt/crtui-character-inventory.hbs:26 与 actor/vehicle-inventory.hbs:12 用 ALIENRPG.Range（射程），只有 actor/character-inventory.hbs:28/:127/:227 用 ALIENRPG.maxrng；character-sheet.mjs:92 与 :107 把 character-inventory 与 crtui-character-inventory 注册成**同一张卡的两种皮肤**，玩家切皮肤就看见同一列改了名。② 在 item-weapon.hbs 上两个键绑的是**同一个字段**：maxrng（:26）与 Range（:36/:46/:51）都是 name=system.attributes.range.value、同一份 selectOptions，只是 Evolved 与非 Evolved 两条**互斥**分支的两种叫法——没有任何一屏会同时渲染它们。③ 英文缩写成 'Max Rng' 是因为 Evolved 版加了 min range；但 character-inventory.hbs:28 的这行列头**不在 isEvolved 条件之内**，核心版角色（没有最近射程这个概念）也照样看见「最远」这个限定词，是对核心版用户的**过度限定**。④ 宽度只是附带收益，且**只在列头那一行有效**：该列的数据格取值是 极远距离/接触距离/近距离…（3-4 字），列本身不会因为表头变短而变窄——所以本条不是靠宽度立起来的。",
+      "counter_argument_acknowledged": "item-weapon.hbs 的 Evolved 远程武器分支里，minrng（最近射程）与本键并排在 grid-weapon-body 第三行，原本是 最近射程/最远射程 的对称词对，改后变成 最近射程/射程。接受这个不对称：有标记项（最近射程）自带限定词，未加限定的 射程 默认指外界，中文读得通；而 minrng 只在这一个分支出现、不参与任何列头，因此**不动**。",
+      "note": "ALIENRPG.Range 与本键在 cn.json 里将同为 射程。这是**有意的**：同字段、同下拉、同列，永不同屏。Max Rng / Range 都不在 glossary_alien.json 的 terms 里，本条只记录决策，不影响词表构建。",
+      "blast_radius": "lang/cn.json maxrng · character-inventory.hbs 三处武器列头 · item-weapon.hbs Evolved 分支标签。"
+    },
+    {
+      "id": "R28-keeping-cool",
+      "en": "Keeping Cool",
+      "adopt": "镇定",
+      "reject": [
+        "保持冷静"
+      ],
+      "ruled_by": "主控",
+      "ruled_on": "2026-08-29",
+      "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 保持冷静 四字，在两张表里都是唯一超宽的那一行，而它的描述只有一句“无效果”。镇定 两字，与其余 20 行齐平。",
+      "note": "⚠ 故意**不**等于经典版 Panic Table 的 KEEPING IT TOGETHER 保持镇定，也不等于 Keeping Guard 保持警戒；SAME_STRING_GROUPS 没有把它们配对。Keeping Cool 至今不在 glossary_alien.json 的 terms 里（keepingcool 在 alienrpg.mjs:267 的 toRemove 名单里，根本没有 ALIENRPG.* 值），因此只能落在本数组。",
+      "blast_radius": "Stress Response Table 0-0 · Panic Response Table 0-0（两处，无 lang 键）。"
+    }
+  ],
   "_still_open_after_this_file": [
     "生命周期六词（Facehugger 已定 抱脸虫；Chestburster / Ovomorph / Drone / Warrior / Praetorian 未定）—— 按 PROJECT.md §7.2.0，这一组无任何中文先例，按「组内自洽」在第 10 章翻译时定稿，source_level 标 0-本项目自定。"
+  ],
+  "_examined_and_left_unchanged": [
+    {
+      "en": "Comtech",
+      "cn": "通信科技",
+      "why": "见 R3-comtech.reaffirmed。12 个技能名里唯一保留 4 字的一条。"
+    },
+    {
+      "en": "Power / Pwr",
+      "cn": "电力",
+      "why": "业主反馈「电力不清楚」，复核后维持。运行时锁步：character-inventory.hbs 的 Pwr 列头下面那格是 data-spbutt=Power 的补给按钮，而 character-sheet.mjs:1396-1397 把聊天标签取自 **ALIENRPG.Power** 而不是 Pwr，所以两键中文必须相同；而 ALIENRPG.Power 还兼任 config.mjs:520 item_types_list[8] 的物品**类别名**（一类电源器材），叫「电量」是错的。加上 ALIENRPG.Supply 已是 余量检定，「电量 余量检定」自带冗余。业主感到不清楚的真正来源是 Items 列头 数量|电力|食物|水 末位 1 字破了这组消耗品的视觉成组；水→饮水（R8）之后该行成为 数量|电力|食物|饮水，电力 自然被读成游戏里四种 Consumables 之一。"
+    },
+    {
+      "en": "Healing Time",
+      "cn": "治愈时间",
+      "why": "业主提议改 疗程（2 字）。驳回：actor.mjs:2074 把重伤表第 9 列原样塞进 healingtime，而该列取值域包含 **Permanent**（'Critical injuries' 表 2 行）与空值（回落 ALIENRPG.None）。疗程 指一段有始有终的施治周期，「疗程：永久」自相矛盾；恢复/伤愈/休养/痊愈 等全部 2 字候选同样在 永久 上读反。中性的时长义 2 字词（时长）与兄弟 时限 同头同域，伤* 系与兄弟 伤势 同头——这个兄弟集已经占掉 时 与 伤 两个仅有的可用字头，**没有能通过 Permanent 测试的 2 字形式**。且这五个标签不是定宽表格列，是 crit-roll-character.hbs:11-30 里五个独立 h4 的行首，4 字的代价只是那一行的值右移两格。"
+    },
+    {
+      "en": "Min Rng",
+      "cn": "最近射程",
+      "why": "只出现在 item-weapon.hbs:21 的 Evolved 远程武器分支，不参与任何列头，无宽度问题；见 R7 的代价说明。"
+    }
   ]
 }

@@ -1,0 +1,174 @@
+{
+ "summary": "Extended `plugins-hardcoded-cn.mjs` (never rewritten — the language gate, `HOOKS` fallback, `preventIndent` compile, and dual-sentinel notify shim are all preserved) from 3 empty tables to 5 wired channels covering motion-tracker-multideck 1.0.2 and the terminal 4.0.11 player-facing slice.\n\n**Channels shipped**\n- **A (new here) — flat top-level i18n keys, 13 entries.** Re-derived that these two plugins having no i18n plumbing does *not* mean they are unreachable: core itself localizes them. appv1 `get title() { return _loc(this.options.title) }` (application-v1.mjs:327) covers the multideck window title; `config.mjs:59-66` + `config-category.hbs:4/10/14` `{{localize}}` covers registerMenu name/label/hint; `config.mjs:126-127` `_loc(setting.name/hint)` covers terminal's 3 `config:true` settings; `notifications.mjs:121` `_loc` is unconditional, which covers multideck's 4 *static* notifications. So no shim is needed for any of those — this follows the sister patcher's existing doctrine rather than inventing a mechanism.\n- **B — partial pre-registration** for `modules/motion-tracker-multideck/templates/link-manager.hbs`. Changed the table's value shape from inline source to *our file path* + fetch, matching `alienrpg-hardcoded-cn.mjs`, so the translated .hbs is a real file the D-group can diff against the English baseline.\n- **C — notification shim, now regex-based** for the 4 template-string (`${}`) notifications; each anchored `^…$` with the tightest possible interpolation classes (`[AB]`, `\\d+`, signed decimals). Exported `translatePluginNotification()` so QA tests shipping code.\n- **D (new) — terminal's 4 fixed button labels** via `renderTerminal` + a `MutationObserver` on `.terminal-folders` (childList only, no subtree).\n- **E (new) — terminal's 9 ASCII `<h1>` headings** by dynamic-importing the same absolute URL as terminal.js's own `import { ASCII } from \"./presets.js\"` and mutating only the `<h1>` text. The braille/ASCII art is provably untouched.\n\n**Three measurement corrections to the task brief (source beats brief):** multideck has 8 notifications, not 9; it has 1 settings register (and it is `config:false`, so per the F5 doctrine it must *not* be translated — fused instead), not 2; and terminal's scramble affects 28/28 shipped styles, not 20/28.\n\nBoth QA suites green: adversarial 300 PASS / 0 FAIL (125 pre-existing + 175 new), positive suite 115 PASS / 0 FAIL.",
+ "files_written": [
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/scripts/plugins-hardcoded-cn.mjs",
+   "bytes": 40418,
+   "what": "Extended in place from 209 to ~660 lines. Added channel A (LITERAL_LABELS, 13 keys with per-key `requires` module gating and yield-to-others-on-collision), channel C patterns (NOTIFICATION_PATTERNS + exported translatePluginNotification), channel D (TERMINAL_BUTTON_LABELS + relabelTerminalButtons + renderTerminal/closeTerminal observer), channel E (TERMINAL_ASCII_HEADINGS + exported pure translateAsciiHeading + translateTerminalAscii). Changed TEMPLATE_OVERRIDES from inline-source to file-path + fetch to match the sister patcher. Every pre-existing QA-asserted string kept verbatim."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/templates/multideck/link-manager.hbs",
+   "bytes": 7542,
+   "what": "Translated multideck Scene Links window: 29 visible text strings + 3 title=/placeholder= attributes. Tag skeleton is byte-for-byte identical to the English baseline (137 tags), and the non-comment handlebars expression sequence is identical too. Zero residual visible English."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/english-baseline/motion-tracker-multideck-1.0.2/templates/link-manager.hbs",
+   "bytes": 7379,
+   "what": "English baseline snapshot of the upstream template, byte-identical to the installed 1.0.2 file (sha256 b6f3b143…)."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/english-baseline/motion-tracker-multideck-1.0.2/UPSTREAM-TEMPLATE-PINS.json",
+   "bytes": 2134,
+   "what": "Drift pins for the plugin template, same schema as alienrpg-4.1.13's: upstream/baseline/ours sha256, skeleton sha256 + tag count, baseline visible-English count, baseline attribute strings."
+  },
+  {
+   "path": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/adversarial_hardcoded_patch.mjs",
+   "bytes": 68361,
+   "what": "Added groups N6-N10, M2, D2, F6-F10 (75 new check() call sites, 175 executed checks). Includes cross-package resolution-point allowlists, lang-JSON collision scan, 17 notification near-miss cases, 7 relabel near-miss cases against a fake DOM, 5 channel-E near-miss cases, and the real upstream presets.js imported so the art-preservation checks run against real data."
+  }
+ ],
+ "measurements": [
+  {
+   "what": "Adversarial QA gate",
+   "value": "PASS 300 / FAIL 0 (125 pre-existing + 175 added by this pass; 75 new check() call sites)"
+  },
+  {
+   "what": "Positive QA suite (test_hardcoded_patch.mjs, untouched, regression check)",
+   "value": "PASS 115 / FAIL 0"
+  },
+  {
+   "what": "Blast-radius corpus scanned",
+   "value": "4238 code/template files (295 modules + systems + core) and 222 lang JSONs"
+  },
+  {
+   "what": "Channel A resolution points",
+   "value": "All 13 top-level keys resolve in exactly ONE package each (7 -> modules:motion-tracker-multideck, 6 -> modules:terminal). Zero collisions as a top-level key in any of the 222 lang JSONs."
+  },
+  {
+   "what": "multideck template surface",
+   "value": "32 strings translated (29 text + 3 attributes) = 1272 English chars -> 368 CJK chars; 137 tags, skeleton identical to baseline"
+  },
+  {
+   "what": "multideck JS surface",
+   "value": "7 static strings via channel A (520 English chars) + 4 template-string notifications via channel C regexes"
+  },
+  {
+   "what": "terminal surface",
+   "value": "6 settings strings (546 chars) + 4 button labels (64 chars) + 9 ASCII headings (137 chars) = 747 English chars -> 212 CJK chars"
+  },
+  {
+   "what": "ASCII art protected byte-for-byte",
+   "value": "2207 chars across the 9 headed entries (whole ASCII object: 18 entries, 7082 chars, 6603 of them art). Verified by importing the real upstream presets.js and byte-comparing everything from '<pre' onward, plus asserting the length delta equals exactly cn.length + 13 - en.length."
+  },
+  {
+   "what": "multideck notification count (brief said 9)",
+   "value": "8 — multideck.js:753/758/782/786/814/821/868/874"
+  },
+  {
+   "what": "multideck settings count (brief said 2 settings + 1 menu)",
+   "value": "1 register (:841, config:FALSE) + 1 registerMenu (:849). The config:false one is deliberately NOT translated."
+  },
+  {
+   "what": "terminal effectScramble styles (brief said 20/28)",
+   "value": "28/28 — every shipped style has effectScramble: true, so the CJK scramble artifact is default-on, not a minority case"
+  },
+  {
+   "what": "terminal-window as a DOM anchor",
+   "value": "REJECTED — measured 2 holders (modules:terminal AND modules:alien-mu-th-ur). Anchored on .terminal-folders instead (1 holder). QA asserts both facts."
+  },
+  {
+   "what": "renderTerminal hook-name collisions",
+   "value": "1 holder — only modules/terminal declares `class Terminal` in the whole corpus"
+  }
+ ],
+ "decisions": [
+  {
+   "decision": "CJK bug (a) padEnd: keep those cells English, do NOT ship an East-Asian-width padder",
+   "reason": "Two hard reasons, both fused in QA. (1) Unreachable: generateTable is a local `function` declaration inside initCLI's body — not exported, not on any object, no assignment form. The only way to reach it would be wrapping String.prototype.padEnd, which is a global surgery with unacceptable blast radius. (2) Unnecessary: zero of the 16 strings this pass translates flows into it — its 6 call sites take the English help table and world data (actor/journal/file names). QA asserts the function is still closure-local, still uses String.length+padEnd, that none of our Chinese strings appears at any call site, and that the call sites still exist (so the check isn't vacuous)."
+  },
+  {
+   "decision": "CJK bug (b) scrambleText: keep the Chinese headings, and defuse the scramble using upstream's own guard by wrapping the h1 text in a <span>",
+   "reason": "The two options offered were both unavailable or bad. A CJK chars pool is impossible: `chars: \"abcdefghijklmnopqrstuvwxyz \"` is a literal inside a closure in terminal.js, and patching gsap's ScrambleTextPlugin would hit every gsap consumer (dice-so-nice et al.). Leaving the 9 headings English is worse UX than jitter, because the 4 buttons that trigger them ARE translated — a Chinese button popping an English banner. Third path: terminal.js:852-856 only adds .terminal-typewriter when `node.children.length === 0`, so `<h1><span>地图已下载</span></h1>` opts out of the scramble timeline for exactly our 9 strings and nothing else. Cost, stated plainly: those 9 headings no longer animate (on all 28 styles, since all 28 enable it); terminal's scramble everywhere else is untouched. QA fuses the guard, the chars pool, the fact that .terminal-typewriter has only 2 consumers, and that our shipped output really contains the span."
+  },
+  {
+   "decision": "Route multideck's window title, menu, and 4 static notifications through channel A (top-level i18n keys) rather than a lang file or a notify shim",
+   "reason": "The survey's \"a lang file is useless\" is right about the plugin's OWN keys but does not mean the plugin is unreachable — core localizes appv1 titles, settings menu fields, and every notify() message unconditionally. This follows the sister patcher's already-established doctrine (static literals -> channel A, ${} strings -> shim) instead of inventing a second mechanism, and it keeps the notify wrapper carrying only 4 regexes. These keys cannot live in lang/cn.json because #loadTranslationFile expandObject()s every lang JSON and would split the dotted sentences into nested keys."
+  },
+  {
+   "decision": "Do NOT translate multideck's \"Scene Links\" setting name/hint",
+   "reason": "That register call is config:false, so it never renders in the settings panel — translating it would be a write with no reader, and it would put a very generic 2-word string into the global i18n table for nothing. Follows the sister file's existing F5 doctrine. Replaced with a fuse that trips if it ever becomes config:true."
+  },
+  {
+   "decision": "Changed TEMPLATE_OVERRIDES from {path: inline source} to {upstream path: our file path} + fetch",
+   "reason": "The only structural change to pre-existing code, and it was required by the task's own instruction to put the .hbs under templates/multideck/. It also makes the translation diffable against the English baseline by the D group (skeleton + handlebars-expression comparison), which an inline string cannot be. Now identical in shape to alienrpg-hardcoded-cn.mjs."
+  },
+  {
+   "decision": "Channel D uses a MutationObserver on .terminal-folders rather than a one-shot sweep at render",
+   "reason": "terminal.js:150 `static password()` calls createHTML() only AFTER the password is accepted — i.e. after renderTerminal has already fired. A one-shot sweep would silently translate nothing on every password-protected terminal. Scoped to childList (no subtree) on .terminal-folders because all 4 buttons are direct children there, while the high-frequency CLI typing churn happens in .terminal-history/.terminal-textbox."
+  },
+  {
+   "decision": "Anchored channel D on .terminal-folders, explicitly NOT .terminal-window",
+   "reason": "Measured: .terminal-window has two holders in this world — modules/terminal and modules/alien-mu-th-ur. .terminal-folders and the 4 button classes have exactly one. QA now asserts both the safe anchors' exclusivity AND that terminal-window is shared (so the reason survives as a fact, not a memory), plus that our source never uses it as an anchor."
+  },
+  {
+   "decision": "Channel E mutates the exported ASCII object via dynamic import instead of patching the DOM",
+   "reason": "Working upstream of the DOM means the translation is in place before enrichHTML/parse/postMount ever see it, which is also what makes the <span> opt-out possible. URL identity verified from core: main.hbs:28 emits esmodule src as a relative path resolved against {prefix}/game, which is byte-identical to foundry.utils.getRoute('modules/terminal/scripts/presets.js') — same module record, same object reference, so mutating ASCII.ATLAS is what terminal.js reads at click time."
+  },
+  {
+   "decision": "Kept the 3 styleMenu strings (🎨 Styles / Edit Styles / hint) untranslated",
+   "reason": "Task scoped this pass to the player-facing slice; the style editor is a GM-only authoring tool. Their conflict surface measured 0, so they are safe to add later. Rather than silently skipping them, a fuse records that they still exist, are still English, and are deliberately absent from LITERAL_LABELS."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "Every new pattern is anchored so it cannot match another module's strings",
+   "result": "PASS — channel A: 13/13 keys resolve in exactly one package (N6) and collide with zero of 222 lang JSONs (N7). Channel C: all 4 regexes ^…$ anchored, 17 near-miss inputs pass through unchanged, 4 positives still hit (N8). Channel D: 3 stacked anchors (renderTerminal — 1 holder; .terminal-folders — 1 holder; exact-string equality), 7 relabel near-misses pass through (N9). Channel E: whole-string needle that must sit before the first <pre>, 5 near-misses return null, 9/9 headings have a single holder (N10)."
+  },
+  {
+   "check": "adversarial_hardcoded_patch.mjs extended with negative cases for everything added, and run",
+   "result": "PASS — 75 new check() call sites -> 175 executed checks. Full run: PASS 300 / FAIL 0."
+  },
+  {
+   "check": "Existing suite not regressed",
+   "result": "PASS — test_hardcoded_patch.mjs 115 PASS / 0 FAIL, untouched."
+  },
+  {
+   "check": "Extended, not rewritten",
+   "result": "PASS — all five strings the QA asserts verbatim (HOOKS fallback line, sentinel-inheritance line, enabled() shape, i18nInit-not-init, preventIndent) are byte-identical. Only structural change is the documented TEMPLATE_OVERRIDES value shape."
+  },
+  {
+   "check": "ASCII/braille art untouched",
+   "result": "PASS — verified against the REAL upstream presets.js imported into node: all 2207 art chars byte-identical after transform, and the length delta equals exactly cn.length + 13 - en.length for all 9 entries."
+  },
+  {
+   "check": "Every English key/needle exists byte-for-byte in upstream source",
+   "result": "PASS — 13/13 LITERAL_LABELS keys, 4/4 button label sites (regex-matched against their className line), 9/9 ASCII heading needles, 4/4 notification template strings."
+  },
+  {
+   "check": "tah-alien-cn.json left alone",
+   "result": "PASS — no lang/plugins file was touched by this pass."
+  },
+  {
+   "check": "Patch file still imports in bare node",
+   "result": "PASS — exports __TEST__, translateAsciiHeading, translatePluginNotification."
+  },
+  {
+   "check": "config.hbs not translated (explicit scope boundary)",
+   "result": "PASS — untouched; a fuse pins its 26354-char size so it cannot quietly grow into scope."
+  },
+  {
+   "check": "Runtime behavior verified in a live Foundry world",
+   "result": "NOT DONE — no Foundry instance was launched. All evidence is static: core source paths re-derived on this machine, upstream anchors re-derived, and pure functions exercised in node. Per the standing 'VPS not local' note, local install state is not proof anyway; the channels' runtime behavior needs a smoke test on the VPS."
+  }
+ ],
+ "open_issues": [
+  "NOT VERIFIED AT RUNTIME. No Foundry was launched. Three things need a live smoke test on the VPS: (1) the dynamic import of presets.js really returns the same module instance terminal.js holds — the URL-identity argument is derived from core source (main.hbs:28 + getRoute) but not observed; (2) renderTerminal really fires after the buttons exist (derived from _doEvent's async .then branch); (3) the multideck partial pre-registration actually wins over getTemplate.",
+  "Cross-client language bleed, unavoidable without forking terminal: showContent (terminal.js:246-262) broadcasts the RENDERED injectObj (ASCII.X and div.textContent, both translated) over the socket to shadow views and the GM approval flow. A Chinese player's click will therefore put Chinese into an English GM's shadow view. The language gate is per-client; the module broadcasts content rather than keys. Documented in the patch file.",
+  "The padEnd border-raggedness WILL bite this project through world data, not through this patch: `ls` renders the FILENAME column from .terminal-journal-page textContent, i.e. journal page names — which this project translates to Chinese in the compendia. Borders will skew for any GM who points a Terminal at translated journals. Upstream defect amplified by our translations; unreachable without forking (QA fuses it).",
+  "terminal styleMenu (🎨 Styles / Edit Styles / 'Create custom styling for your terminals') deliberately left English — GM authoring tool, outside the player-facing slice. Conflict surface measured 0, so it is a clean 3-key addition whenever the GM surface gets its pass.",
+  "terminal config.hbs (26354 chars of GM configuration prose injected into the Tile config sheet) untranslated by instruction, plus the remaining terminal strings outside this slice: dynamic button defaults ('Run Script', `Alter Door Lock ${n}`, `Secure Shell ${n}`, 'PERSONAL TERMINAL'), the CLI help table, skillCheck's 'Permission Denied' block, and terminal's own ui.notifications (e.g. '❌ Incorrect login', 'Skipping skill check, since you're a GM').",
+  "module.json's description still lists only the four plugins that get lang files; it now also runtime-patches terminal and motion-tracker-multideck. Left unedited on purpose — a sibling agent is working on lang/plugins/*.json and may touch the same manifest. One-line fix when that lands.",
+  "MU-TH-UR's MUTHUR_GLOBAL_SEQUENCES table is still empty — untouched, it belongs to a different work item.",
+  "The multideck translation coins terms not yet in glossary_alien.json: 多层甲板配套模块 (Multideck Companion), 对位点 (matching point), 场景链接 (Scene link), 信号点 (blip). Only Motion Tracker=运动追踪器 and Power=电力 came from the authorities. If these words later appear in core-book prose they will be translated independently with nothing flagging the divergence — same blind spot the QA's G group documents for planet-general.hbs. Worth folding these four into the glossary."
+ ]
+}

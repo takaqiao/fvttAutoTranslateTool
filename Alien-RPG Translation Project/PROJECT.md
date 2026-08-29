@@ -914,3 +914,50 @@ TRUNCATED 阈值定在 **< 0.25**，INFLATED 定在 **> 0.60**。
 
 ⇒ **`alienrpg-cn` 的 Phase 1 + Phase 2 已齐，具备发版条件**——但**发版前必须先做 §7.1 的冒烟**，
 尤其是首次导入的 9 个查找名与经典模式下的技能炫技按钮。
+
+### 2026-08-29 · Phase 4 备料时推翻的一条复用断言（**记下来，因为复核也confirm错了**）
+
+勘察轮的内容清单说：**「Map Pins 的 17 页是 Hope's Last Day 里位置段落的 100% 复制，
+纯粘贴，零新翻译」**，而那一轮的对抗式复核**明确 confirm 了这条**
+（原话：「Map Pins really is 100% contained in Hope's Last Day」）。
+
+**Phase 4 备料时实测：不是 100%，是 60.8%。**
+
+| | |
+|---|---|
+| Map Pins 可见文本合计 | 15,118 字 |
+| 在 Hope's Last Day 里逐字找得到的 | 9,189 字（**60.8%**）|
+| **整页命中的页数** | **0 / 17** |
+| 完全无重叠（0%）的页 | **3 页**：Asset/Claims Office · Assistant Manager Office · Geological Managers Office |
+
+⇒ 若按原断言当"纯粘贴"处理，会**静默丢掉约 5,900 字**，并让那 3 页**整页不翻**发出去。
+而且发不出任何告警——覆盖率会显示 100%，因为那些页"有译文"（粘来的）。
+
+**方法论教训（比这条数据本身重要）**：
+对抗式复核**确认了一条假断言**。最可能的原因是它用了**与原报告同样的度量方式**去验证，
+而不是独立重算。⇒ **复核"确认"过的复用类断言，落地前仍要自己量一遍**——
+复用断言的失败方向是**静默漏译**，不是报错，属于 §3.2「扫了但没扫到 vs 扫了很干净，输出长得一样」那一类。
+
+**处理**：Map Pins 按**正常翻译单元**派工（17 个单元，ST-J09…ST-J25），
+其中 61% 可用 TM 从 Hope's Last Day 的已译段落回填，剩下的照常翻。
+**不是**纯粘贴单元。
+
+⚑ 顺带修正另一条：勘察轮说 `EV - Critical Injuries` 只在 corerules 里。
+实测 **starterset 也有**，且 `Critical injuries` / `Critical Injuries on Xenomorphs` /
+`Critical Injuries on Synthetics` 四张表**两个包都有**。
+⇒ 重伤表**不能单包翻**，两个包必须同时动，见下条。
+
+### 2026-08-29 · 重伤表的两条铁律（Phase 4 定，Phase 5 执行）
+
+重伤表的结果正文是**定长字段记录**：
+`<strong>INJURY: </strong>Sprained Ankle <br /><strong>FATAL: </strong>No <br />…<strong>HEALING TIME: </strong>Shift`
+
+`actor.mjs` 剥标签后按 `/[:] |<br \/>/gi` 切，再读**固定下标**——偶数位是字段名、奇数位是值。
+
+| # | 铁律 | 违反的后果 |
+|---|---|---|
+| **一** | 字段名后的分隔符必须是 **ASCII 冒号 + 空格**。字段名本身可以译（`伤势: ` / `致命: ` / `时限: ` / `效果: ` / `恢复时间: `），但那两个字节不能动 | 写成全角「：」⇒ split 形状改变，**所有固定下标错位**。前一轮的闸门实测过这个形状：`checked` 从 131 掉到 128 |
+| **二** | `FATAL` / `TIME LIMIT` / `HEALING TIME` 三格的**值**在 lang 那 8 个键翻过来之前保持英文。`INJURY` 名与 `EFFECTS` 正文可以译 | 单方面译值 ⇒ healTime 静默归零；裸 `Shift` 那一支更狠，直接抛未捕获异常 |
+
+⇒ **Phase 4 只译 INJURY 名与 EFFECTS 正文**，值与 lang 键留到 Phase 5，
+届时 starterset + corerules + `lang/cn.json` **同一个 commit** 一起翻，由 `scan_crit_lockstep.py` 看守。

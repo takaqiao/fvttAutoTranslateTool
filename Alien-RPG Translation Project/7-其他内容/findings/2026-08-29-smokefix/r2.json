@@ -1,0 +1,228 @@
+{
+ "changes": [
+  {
+   "key_or_row": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs :922-1041 (new 通道 F)",
+   "from": "no getName shim existed; the journal name was T-FROZEN",
+   "to": "exported installNameFallback(collection, pairs) + NAME_FALLBACKS.journal = [{en:'MU/TH/ER Instructions.', cn:'MU/TH/ER 使用说明'}], installed on HOOKS.once('setup') against globalThis.game?.journal only",
+   "why": "The freeze was never about the name — it was about the lookup being keyed on the English name. We own the runtime patcher, so the lookup gets a translated-name fallback instead. Fires ONLY when the argument is byte-equal to the frozen string AND the original lookup returned null/undefined; a successful original lookup is returned untouched.",
+   "description_evidence": "Wraps the instance, not the prototype: an own NON-ENUMERABLE 'getName' property shadowing Collection.prototype.getName (Foundry common/utils/collection.mjs:134). game.actors / game.items / every CompendiumCollection are unaffected. Installed at 'setup' because client/game.mjs:730 initializeDocuments() creates game.journal, :740 callAll('setup'), :779 callAll('ready') — i18nInit (:663) is too early (no game.journal yet) and 'ready' is too late (systems load before modules, so the system's own ready handler runs first). Sentinel is '__alienrpgCnGetNamePatched', unique — NOT the '__alienCnPatched' that the two patcher files once shared."
+  },
+  {
+   "key_or_row": "shim strict-option handling (alienrpg-hardcoded-cn.mjs:1004-1023)",
+   "from": "n/a",
+   "to": "soft lookup first ({...options, strict:false}); if the fallback also misses and the caller asked for strict, the original is re-called with the caller's own options so IT throws its own error",
+   "why": "Collection.getName(name,{strict:true}) throws on a miss (collection.mjs:135-138). A naive wrapper would either swallow that or throw before the fallback could run. No alienrpg call site passes strict, but another module's could.",
+   "description_evidence": "Proved by S-B7: an unrelated missing name still throws upstream's exact message; the frozen string resolves via fallback without throwing; both-missing still throws."
+  },
+  {
+   "key_or_row": "compendium/cn/alienrpg.alien-rpg-system.json → entries['Alien RPG System'].journals['MU/TH/ER Instructions.'].name",
+   "from": "MU/TH/ER Instructions.",
+   "to": "MU/TH/ER 使用说明",
+   "why": "The owner's item 6. Now safe because the shim resolves the English-keyed lookup to this document.",
+   "description_evidence": "The 'MU/TH/ER' token stays ASCII — it is the ship computer's name and the alien-mu-th-ur plugin spells it the same way. The Babele KEY stays the English string (it is the lookup key, never translated)."
+  },
+  {
+   "key_or_row": "compendium/cn/alienrpg.alien-rpg-system.json → …journals[…].pages['MU/TH/ER Instructions.'].name",
+   "from": "MU/TH/ER Instructions.",
+   "to": "MU/TH/ER 使用说明",
+   "why": "The journal's single page carries the same English name upstream; leaving it English would show a Chinese journal containing an English page.",
+   "description_evidence": "prep_sys_units.py's --collect previously hard-coded the page name from the English source with no override path; it now reads page_name from the slice."
+  },
+  {
+   "key_or_row": "6-工作区/phase2/SYS-J-name.cn.json (new slice)",
+   "from": "file did not exist; --collect fell back to the English journal name and always used the English page name",
+   "to": "{journal_name, page_name} = 'MU/TH/ER 使用说明', plus _depends_on / _token_rule notes naming the shim",
+   "why": "The slice is the single upstream of both names. Editing the pack directly would be washed out by the next `prep_sys_units.py --collect`.",
+   "description_evidence": "cmd_collect already had a half-built journal_name hook reading this filename; it is now a first-class two-key slice and the collect prints a warning line when the name is translated."
+  },
+  {
+   "key_or_row": "4-常用脚本/parallel/prep_sys_units.py → cmd_collect",
+   "from": "page name taken unconditionally from compendium/en; journal_name read via an inline conditional expression",
+   "to": "both names read from the optional SYS-J-name.cn.json with English fallback, with the lockstep-to-the-shim rule written in as a comment and a stdout warning when the name is translated",
+   "why": "Item 1 of the task: make the name emitted from the workspace slice, not hand-edited into the pack.",
+   "description_evidence": "Re-ran --collect: diff against the pre-run pack shows EXACTLY 2 changed leaves and 0 added/removed keys, so the collect is idempotent and nothing else drifted."
+  },
+  {
+   "key_or_row": "7-其他内容/DO-NOT-TRANSLATE.json → sections.name_lookups.entries[system.welcomeJournalEntry] and [system.releaseNoteName]",
+   "from": "tier T-FROZEN; key 'breaks_if_translated'",
+   "to": "key renamed to 'breaks_if_translated_WITHOUT_THE_SHIM' + new 'unfrozen_by_shim' block recording status, translated_to, the shim's file:line (pairs_declared_at :977, installer_at :991, installed_at :1039), sentinel, gate, install target/hook, strict semantics, the two translated_in paths, the source slice, and 'if_shim_removed'",
+   "why": "Item 2: the entry moves from frozen to translatable-guarded-by-shim, with the shim's file:line recorded and the removal dependency written in explicitly.",
+   "description_evidence": "if_shim_removed reads 'REVERTS TO T-FROZEN. Delete 6-工作区/phase2/SYS-J-name.cn.json, re-run prep_sys_units.py --collect so the pack carries the English name again…'. Two self-check booleans (verified_shim_present, verified_lockstep) are computed from the shim source and the shipped pack, both true."
+  },
+  {
+   "key_or_row": "7-其他内容/DO-NOT-TRANSLATE.json → tiers, and sections.name_lookups metadata",
+   "from": "tiers had T-FROZEN/T-EXACT/T-BILINGUAL/T-PLAIN; section carried only tier+count+entries",
+   "to": "added tier 'T-SHIMMED' (explicitly: only valid while the named shim exists) + section-level shimmed_count=2 and tier_exception telling any gate to skip shimmed entries and to fail if the shim is gone",
+   "why": "A blanket 'name_lookups = T-FROZEN' would have made every downstream gate report the new translation as a violation.",
+   "description_evidence": "scan_name_lookup_traps.py reads this section at runtime; without the exception it crashed on the renamed key."
+  },
+  {
+   "key_or_row": "4-常用脚本/qa/scan_name_lookup_traps.py → new check_shim()",
+   "from": "every name_lookups entry was checked with 'frozen means byte-equal English'",
+   "to": "entries carrying unfrozen_by_shim are checked against the DEPENDENCY instead: shim file exists, install point still present, the en/cn pair still in the shim source, and the pack's translated name byte-equal to the shim's cn — any failure reports SHIM_BROKEN",
+   "why": "The exemption must not be free. If the shim is deleted or renamed, or the pack name drifts, this must go red at the moment it happens, not on the next player's first world load.",
+   "description_evidence": "Mutation-tested: setting the pack journal name to '母亲说明书' produced violations=2 SHIM_BROKEN with the recovery instructions inline; restoring made it green again (checked=23, violations=0, SHIM_ok=2)."
+  },
+  {
+   "key_or_row": "4-常用脚本/qa/adversarial_hardcoded_patch.mjs → new group S (97 checks)",
+   "from": "300 checks in groups N/M/D/F/G",
+   "to": "397 checks; S splits into S-M mechanism (core + system source facts), S-L lockstep (shim ↔ pack ↔ slice ↔ register file:line), S-B behaviour (runs the real shipped installNameFallback)",
+   "why": "Item 3: positive case, negative cases, and the lang!=='cn' inertness case — plus the mechanism pins the shim rests on.",
+   "description_evidence": "POSITIVE: the exact string resolves to the translated doc, and the call order is [en, cn] (one extra lookup, in that order). NEGATIVES: a different journal name is untouched and causes zero extra lookups; when the original lookup succeeds the original doc is returned with NO second lookup; 8 bypass names (incl. case/whitespace near-misses of the frozen string) give byte-identical results to an unpatched twin; another module's prototype is never touched and a sibling instance of the same class is unaffected. INERT: lang=en, lang=zh-tw, system=pf2e and game-undefined all return false, leave getName identical, stamp no sentinel."
+  },
+  {
+   "key_or_row": "4-常用脚本/qa/build_register.py",
+   "from": "no hub-module paths; rel() only mapped systems/modules; wrote DO-NOT-TRANSLATE.json unconditionally",
+   "to": "added HUB/P_SHIM/P_PREP/P_CNPACK, rel() maps the hub and the project root, a JOURNAL_SHIM descriptor whose every file:line goes through cite(), and a destructive-overwrite guard that ABORTS (exit 2) rather than dropping top-level keys, sections or leaf values it cannot reproduce",
+   "why": "The generator has been out of sync with the JSON since the last round; running it deleted 410 keys (see open_issues). The guard makes that failure loud instead of silent.",
+   "description_evidence": "Verified: `python 4-常用脚本/qa/build_register.py` now exits 2 and prints exactly which 5 top-level keys, 2 sections and 408 leaves it would have destroyed, leaving the file untouched."
+  }
+ ],
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\scripts\\alienrpg-hardcoded-cn.mjs",
+   "what": "通道 F added at lines 922-1041 (installNameFallback + NAME_FALLBACKS + GETNAME_FLAG + the setup hook); __TEST__ export face extended with GETNAME_FLAG, NAME_FALLBACKS, installNameFallback. File is now 1063 lines."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-J-name.cn.json",
+   "what": "NEW. The journal name + page name slice, with the shim dependency written into the file itself."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\parallel\\prep_sys_units.py",
+   "what": "cmd_collect now reads journal_name AND page_name from the slice (English fallback), documents the lockstep, and warns on stdout when the name is translated."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\compendium\\cn\\alienrpg.alien-rpg-system.json",
+   "what": "Regenerated by prep_sys_units.py --collect. Exactly two leaves changed: the journal name and its page name. Babele keys untouched."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\DO-NOT-TRANSLATE.json",
+   "what": "The two journal entries moved to translatable-guarded-by-shim with the shim's file:line and the removal dependency; T-SHIMMED tier and section-level tier_exception added; _generator_status updated with the clobber incident. Restored by merge from backup after the generator destroyed 410 keys — nothing lost."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\build_register.py",
+   "what": "Hub paths, rel() extension, the cite()-backed JOURNAL_SHIM descriptor, and a destructive-overwrite guard (exit 2 + itemised loss report, --force to override)."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\scan_name_lookup_traps.py",
+   "what": "New check_shim(): shimmed entries are exempted from the frozen rule and checked against the shim dependency instead, reporting SHIM_BROKEN on any break."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\adversarial_hardcoded_patch.mjs",
+   "what": "Group S added (97 checks) plus header updated from 四组 to 五组. Suite total 300 -> 397."
+  }
+ ],
+ "kept_unchanged": [
+  {
+   "key_or_row": "Babele key entries['Alien RPG System'].journals['MU/TH/ER Instructions.'] (and the page key)",
+   "value": "MU/TH/ER Instructions.",
+   "why": "The key is Babele's lookup key against the English pack, not display text. Translating it would silently detach the whole journal translation."
+  },
+  {
+   "key_or_row": "The 'MU/TH/ER' token inside the translated name",
+   "value": "MU/TH/ER (ASCII)",
+   "why": "Ship computer's name; the alien-mu-th-ur plugin spells it the same way. Gated by S-L3, which also asserts everything after the token is CJK."
+  },
+  {
+   "key_or_row": "systems/alienrpg source (all 6 call sites)",
+   "value": "unmodified",
+   "why": "The shim patches the collection method, so not one line of upstream changes. Group S-M6 pins all six sites so their disappearance becomes a gate failure rather than a dead shim."
+  },
+  {
+   "key_or_row": "foundry.utils.Collection.prototype.getName",
+   "value": "untouched",
+   "why": "Patching the prototype would wrap game.actors, game.items and every CompendiumCollection — a blast radius that cannot be argued for. Only the game.journal instance gets an own shadowing property. S-B8 proves a sibling instance of the same class is unaffected."
+  },
+  {
+   "key_or_row": "libWrapper",
+   "value": "not adopted",
+   "why": "The project has no libWrapper dependency (module.json relationships.requires lists only babele). Adding a hard dependency for one wrapper is a worse trade than a guarded own-property wrapper with a unique sentinel."
+  },
+  {
+   "key_or_row": "7-其他内容/glossary/glossary_alien.json entry 'MU/TH/ER Instructions.'",
+   "value": "cn = 'MU/TH/ER Instructions.', tier T-FROZEN",
+   "why": "Not in this task's scope and it is a generated artifact of a 4-file build chain (build_glossary_v1 + adjudication/additions/emit/metablocks, seeded from a phase0 script). Nothing goes red today — check_glossary_alien only enforces 'T-FROZEN cn == English key', which still holds. Flagged in open_issues with exact locations."
+  },
+  {
+   "key_or_row": "1-系统汉化插件/module.json version",
+   "value": "0.1.0",
+   "why": "No release bump was requested; the shim ships in the existing esmodule list (scripts/alienrpg-hardcoded-cn.mjs is already declared)."
+  }
+ ],
+ "open_issues": [
+  "THE REGISTER GENERATOR IS STILL OUT OF SYNC — and I triggered the documented hazard. PROJECT.md:677 and the JSON's own _generator_status both warned that build_register.py no longer reproduces DO-NOT-TRANSLATE.json. Running it to add the shim record DELETED 410 keys: the whole corrections_2026_08_29 / gate_tests_2026_08_29 / gate_tests_2026_08_29_pass2 blocks, the macro_commands and name_substring_tests sections, rows_with_nonstandard_split, and it silently reverted 14 hand-verified values (init.mjs:14 back to :11, the corerules NBSP finding back to its inverted form, item_names 6->2, rolltable_names 11->10). The file was fully restored from a backup taken before the run and only the shim deltas merged back in — verified by leaf-diff: 2 renamed keys, 2 edited, 50 added, 0 lost. I then added a destructive-overwrite guard so the next person gets exit 2 and an itemised loss list instead of silent damage. The underlying re-sync of the generator is still owed.",
+  "glossary_alien.json still records 'MU/TH/ER Instructions.' as T-FROZEN with cn = the English string, which now contradicts what ships. Sources: 4-常用脚本/tm/build_glossary_v1.py (built_by), seeded at 5-临时脚本/2026-08-29-glossary-v0/build_glossary_alien.py:823. It should become T-SHIMMED / 'MU/TH/ER 使用说明' with the same shim-dependency note. No gate is red today (check_glossary_alien.py:77-79 only checks that T-FROZEN cn equals the English key), so this is a consistency debt, not a break.",
+  "check_glossary_alien.py crashes on a PRE-EXISTING KeyError ('chinese_value_collisions' missing from glossary_alien.json's _meta, at line 111). Unrelated to this change — I did not touch any glossary file (git shows glossary_alien.json unmodified) — but it means that gate is currently not running at all.",
+  "Two @UUID links carry the explicit label {MU/TH/ER Instructions.} and Foundry renders that label VERBATIM, ignoring the target document's name: starterset.journal[0].pages[0].text.content and corerules.journal[4].pages[0].text.content. Both packs' compendium/cn directories are still EMPTY, so nothing is inconsistent yet — but whoever translates 2-新手包汉化插件 and 3-核心书汉化插件 must use 'MU/TH/ER 使用说明' for those two labels or the links will read English while the journal reads Chinese. The register already tracks them under at_UUID_explicit_label.",
+  "migratefolders.js is currently a dead file (its only import at init.mjs:2 is commented out) but it holds the fifth unguarded deref at :120. The shim covers it if upstream ever reconnects it; the existing F4 check pins 'still dead' and the new S-M6 pins the call site itself.",
+  "During mutation-testing I restored 1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs from a backup taken at 19:14:04, with restores inside the same minute. Another agent is working in this tree concurrently (7-其他内容/glossary/RULINGS.json changed at 19:14 and is not mine). The window was seconds, but if a sibling wrote to the patcher file inside it, that write was lost. The current file is byte-identical to my post-insert backup and both patcher suites (397 + 115) are green.",
+  "Not verified in a live Foundry world — no local install of alienrpg-cn exists (the hub runs on the VPS). Everything here is source-derived plus the shipped function executed in bare node against fakes that mirror Collection#getName. The first real proof is a fresh-world load: the journal should open named 「MU/TH/ER 使用说明」 and the console should log 'alienrpg-cn | 已装载 getName 译名回退（1 条）' at setup."
+ ],
+ "self_gate": [
+  {
+   "check": "Re-derive every getName call site for the frozen string (task asked for 5)",
+   "result": "Found 6 live lookups + 1 inside a guarded helper + 1 commented out. UNGUARDED derefs are FIVE: init.mjs:81 .show(), init.mjs:107 .show(), alienrpg.mjs:592 .id, alienrpg.mjs:613->614 .setFlag(), migratefolders.js:120 .show(). Guarded: alienrpg.mjs:574 (explicit null/undefined test) and migratefolders.js:43 via deleteJournalIfExist(). The register's original entry listed only 4 unguarded; migratefolders.js:120 was outside its live-import-graph scope."
+  },
+  {
+   "check": "Is the wrap target safe in this Foundry version?",
+   "result": "YES — and narrower than feared. getName has exactly ONE implementation, foundry.utils.Collection.prototype.getName at common/utils/collection.mjs:134; DocumentCollection, WorldCollection and Journal do not override it (grep-verified, and pinned by S-M2). So an own non-enumerable property on the game.journal instance shadows the only implementation, with zero effect on any other collection. No libWrapper needed."
+  },
+  {
+   "check": "adversarial_hardcoded_patch.mjs full suite",
+   "result": "PASS 397 FAIL 0 — ALL GREEN. Was 300/0 before; group S contributes 97 (N=184, M=44, F=41, D=22, G=9, S=97)."
+  },
+  {
+   "check": "test_hardcoded_patch.mjs (the sibling positive suite)",
+   "result": "PASS 115 FAIL 0 — ALL GREEN, unchanged by this work."
+  },
+  {
+   "check": "scan_name_lookup_traps.py",
+   "result": "checked=23 violations=0, SHIM_seen=2 SHIM_ok=2. (checked rose from 19 to 23 once the destroyed macro_commands / name_substring_tests sections were restored.)"
+  },
+  {
+   "check": "scan_crit_lockstep.py",
+   "result": "checked=8 violations=0 — untouched by this change."
+  },
+  {
+   "check": "scan_foreign_script / scan_bare_english_names / scan_en_residue on 1-系统汉化插件",
+   "result": "0 / 0 / 0 findings."
+  },
+  {
+   "check": "MUTATION TEST 1 — delete the shim's install point",
+   "result": "BITES. 4 S failures: the single-call-site check, the game.journal-target check, the setup-hook check, and both registers' installed_at line-number checks. Restored -> green."
+  },
+  {
+   "check": "MUTATION TEST 2 — make the wrapper fire even when the original lookup succeeds",
+   "result": "BITES. The two starred negative checks fail: it returns the Chinese doc instead of the English one, and performs a second lookup. Restored -> green."
+  },
+  {
+   "check": "MUTATION TEST 3 — drift the page name in the shipped pack",
+   "result": "BITES. 'PASS 396 FAIL 1' on the S-L2 lockstep check. Restored via --collect -> green."
+  },
+  {
+   "check": "MUTATION TEST 4 — drift the journal name (against the trap scanner)",
+   "result": "BITES. violations=2 SHIM_BROKEN, each printing the pack name, the shim name, and the full recovery instructions from if_shim_removed. Restored -> violations=0."
+  },
+  {
+   "check": "prep_sys_units.py --collect determinism",
+   "result": "Leaf-diff of the pack before/after the run: 0 keys added, 0 removed, EXACTLY 2 values changed (the journal name and the page name). Nothing else in the 82 KB pack drifted."
+  },
+  {
+   "check": "DO-NOT-TRANSLATE.json integrity after the generator incident",
+   "result": "Restored file has 14 top-level keys and 11 sections (matching the pre-run backup). Leaf-diff vs backup: 2 keys renamed (breaks_if_translated -> breaks_if_translated_WITHOUT_THE_SHIM), 2 edited (_generator_status, one note), 50 added, 0 lost. JSON round-trip asserted."
+  },
+  {
+   "check": "build_register.py destructive-overwrite guard",
+   "result": "Re-running it now exits 2, prints the 5 top-level keys / 2 sections / 408 leaves it would destroy, and leaves the file byte-identical (153835 bytes)."
+  },
+  {
+   "check": "Bare-node import of the shipped patcher (no Foundry globals)",
+   "result": "Imports clean; installNameFallback is a function; NAME_FALLBACKS and GETNAME_FLAG exported through __TEST__. The suite exercises the SHIPPED function, not a copy."
+  },
+  {
+   "check": "Sentinel uniqueness",
+   "result": "'__alienrpgCnGetNamePatched' differs from NOTIFY_FLAG, is absent from plugins-hardcoded-cn.mjs, and is absent from the whole local corpus (Data/modules + Data/systems + core, >2000 files). This is the exact failure mode the two patcher files hit once before with '__alienCnPatched'."
+  }
+ ],
+ "summary": "Shipped the shim; the journal name is now `MU/TH/ER 使用说明` and the register records the dependency both ways.\n\n**Verdict on risk: the wrap is safe, and narrower than the brief assumed.** `getName` has exactly one implementation in this Foundry build — `foundry.utils.Collection.prototype.getName` at `common/utils/collection.mjs:134`. `DocumentCollection`, `WorldCollection` and `Journal` do not override it. So an own, **non-enumerable** `getName` on the `game.journal` **instance** shadows the only implementation with zero reach into `game.actors`, `game.items`, or any CompendiumCollection. No libWrapper (the project doesn't depend on it); a guarded own-property wrapper with the unique sentinel `__alienrpgCnGetNamePatched`.\n\n**Call sites re-derived — there are five unguarded derefs, not four.** `init.mjs:81` `.show()`, `init.mjs:107` `.show()`, `alienrpg.mjs:592` `.id`, `alienrpg.mjs:613→614` `.setFlag()`, and `migratefolders.js:120` `.show()`. Guarded: `alienrpg.mjs:574` and `migratefolders.js:43`. The register had listed four — `migratefolders.js:120` sat outside its live-import-graph scope.\n\n**Installed at `setup`, and that is load-bearing.** `client/game.mjs:730` creates `game.journal`, `:740` fires `setup`, `:779` fires `ready`. `i18nInit` (`:663`) is too early — no `game.journal` yet — and `ready` is too late, because systems load before modules, so the system's own `ready` handler reaches `FirstTimeSetup()` first.\n\nThe shim also earns its keep on a path that was already broken: `showReleaseNotes()` rewrites the world journal from the Babele-translated pack, renaming it to Chinese in place, then looks it up by the English name on the very next line — inside an **empty** catch. Without the shim that fails silently forever.\n\n**Suite: PASS 397 / FAIL 0** (was 300/0; group S adds 97). Positive, negatives, and the `lang !== 'cn'` inertness case are all there, and they run the *shipped* `installNameFallback`, not a copy. I mutation-tested four ways — removing the install point, making the wrapper over-fire, drifting the pack name, drifting the page name — and every one goes red, then green again on restore.\n\n**One thing you need to know.** Regenerating `DO-NOT-TRANSLATE.json` tripped the hazard `PROJECT.md:677` had already flagged: `build_register.py` no longer reproduces that file, and the run deleted 410 keys and silently reverted 14 hand-verified values. I restored it from a pre-run backup and merged only the shim deltas (leaf-diff: 0 lost), then gave the generator a destructive-overwrite guard so the next run exits 2 with an itemised loss list instead of quietly eating the file. Re-syncing the generator is still owed. Also unverified in a live world — the hub runs on the VPS, so first proof is a fresh-world load showing the journal named 「MU/TH/ER 使用说明」 and `alienrpg-cn | 已装载 getName 译名回退（1 条）` in the console at setup."
+}

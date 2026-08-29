@@ -211,6 +211,56 @@ def build_index(cn_files):
 
 # --------------------------------------------------------------------------- 判据
 
+def check_shim(shim, entry, idx, roles, findings, stats):
+    """T-SHIMMED 条目的判据：不查「译文等于英文」，查**垫片这条依赖还成立吗**。
+
+    登记表 7-其他内容/DO-NOT-TRANSLATE.json 的 `unfrozen_by_shim` 是唯一真相源，
+    它由 build_register.py 从源码 re-derive，所以这里只需要把它说的话逐条兑现。
+    """
+    stats["SHIM_seen"] += 1
+    shim_file = shim.get("shim", {}).get("file", "")
+    abs_shim = os.path.join(PROJ, shim_file.replace("/", os.sep))
+    cn = shim.get("translated_to")
+
+    def bad(why):
+        findings.append({
+            "verdict": "SHIM_BROKEN", "kind": "name_lookup:" + entry["id"],
+            "repo": "hub", "file": shim_file, "path": "unfrozen_by_shim",
+            "en": entry["string"], "cn": cn,
+            "source": shim.get("shim", {}).get("installed_at", shim_file),
+            "note": why + "  " + shim.get("if_shim_removed", ""),
+        })
+        stats["**SHIM_BROKEN**"] += 1
+
+    if not shim_file or not os.path.exists(abs_shim):
+        bad("登记表点名的垫片文件不存在：%r。" % shim_file)
+        return
+    src = open(abs_shim, encoding="utf-8").read()
+    if "installNameFallback(globalThis.game?.journal" not in src:
+        bad("垫片文件还在，但**安装点没了** —— 找不到 installNameFallback(globalThis.game?.journal ...)。")
+        return
+    if entry["string"] not in src or cn not in src:
+        bad("垫片文件里找不到这一对 en/cn（%r -> %r），回退目标对不上。" % (entry["string"], cn))
+        return
+
+    # 包里的译名必须与垫片写的 cn 逐字节相等，否则 getName 的回退查了个不存在的名字。
+    seen = 0
+    for r in idx.any_role(entry["string"], roles):
+        name = r["cn_name"]
+        if name is None:
+            continue
+        seen += 1
+        if name == cn:
+            stats["SHIM_ok"] += 1
+        elif name == entry["string"]:
+            # 还没译（或已回滚）。垫片在，但它不介入 —— 这不是缺陷，只是没用上。
+            stats["SHIM_not_yet_translated(译名仍是英文原串，垫片不介入)"] += 1
+        else:
+            bad("包里的译名 %r 与垫片里的 %r 不一致 —— 回退会查到一个不存在的名字。" % (name, cn))
+    if not seen:
+        stats["SHIM_absent(未译到，跳过)"] += 1
+
+
 def check_frozen(register, idx, findings, stats):
     """T-FROZEN：英文键在译文里存在时，中文 name 必须与英文逐字节相同。"""
     sec = register["sections"]
@@ -245,6 +295,19 @@ def check_frozen(register, idx, findings, stats):
                  "JournalEntry name shown after import": ["journal"],
                  "JournalEntry name used by the release-notes updater": ["journal"],
                  "Scene name activated after import": ["scene"]}.get(e["role"], ["adventure", "journal", "scene"])
+
+        # T-SHIMMED：这一条已经被运行时垫片解冻，**译文是对的**，用 T-FROZEN 的判据去查
+        # 只会报假警。但豁免不是白给的 —— 换成查那条依赖本身：
+        #   (1) 登记表里点名的垫片文件必须还在；
+        #   (2) 文件里必须还能找到安装点与那一对 en/cn；
+        #   (3) 包里的译名必须与垫片里写的 cn **逐字节相等**。
+        # 三条里塌一条，就说明垫片被删/被改名/与包脱节，那一刻这一条就该回到 T-FROZEN，
+        # 所以直接报 SHIM_BROKEN（与 FROZEN_TRANSLATED 同级的红）。
+        shim = e.get("unfrozen_by_shim")
+        if shim:
+            check_shim(shim, e, idx, roles, findings, stats)
+            continue
+
         one("name_lookup:" + e["id"], e["string"], roles, e["breaks_if_translated"],
             source=e["declared_at"])
 

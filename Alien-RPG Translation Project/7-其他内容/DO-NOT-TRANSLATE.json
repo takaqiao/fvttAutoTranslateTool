@@ -2,7 +2,7 @@
  "_": "Alien RPG 汉化 · 硬冻结字符串登记表 / hard register of byte-exact-English strings",
  "schema_version": 1,
  "generated_on": "2026-08-29",
- "generated_by": "4-常用脚本/qa/build_register.py; every string, count and file:line below is re-derived from source at build time — `cite()` raises if a needle is not found, so a drifted citation fails the build instead of lying.  |  2026-08-29 verification pass: all 111 file:line citations re-resolved against source; 2 defects corrected (system.welcomeJournalEntry declared_at 11->14; corerules.welcomeJournalEntry NBSP claim inverted).",
+ "generated_by": "4-常用脚本/qa/build_register.py; every string, count and file:line below is re-derived from source at build time \u2014 `cite()` raises if a needle is not found, so a drifted citation fails the build instead of lying.  |  2026-08-29 verification pass: all 111 file:line citations re-resolved against source; 2 defects corrected (system.welcomeJournalEntry declared_at 11->14; corerules.welcomeJournalEntry NBSP claim inverted).",
  "measured_against": {
   "system": {
    "id": "alienrpg",
@@ -75,7 +75,8 @@
   "T-FROZEN": "byte-exact English. Never translated, never given a bilingual tail.",
   "T-EXACT": "pure Chinese, byte-equal to a lang/cn.json value. No English tail, no trailing space.",
   "T-BILINGUAL": "'中文 English' joined by ONE ASCII space, no parentheses.",
-  "T-PLAIN": "bare Chinese."
+  "T-PLAIN": "bare Chinese.",
+  "T-SHIMMED": "was T-FROZEN; translated anyway because a runtime shim in the hub module makes the English-keyed lookup resolve to the translated document. An entry is T-SHIMMED only while its `unfrozen_by_shim.shim` block names a shim that actually exists \u2014 remove the shim and the entry goes straight back to T-FROZEN and the translation must be reverted in the same commit. See `if_shim_removed` on the entry."
  },
  "sections": {
   "name_lookups": {
@@ -116,10 +117,38 @@
       "systems/alienrpg/module/apps/init.mjs:81  .show() on the getName() result",
       "systems/alienrpg/module/apps/init.mjs:107  .show() on the getName() result"
      ],
-     "breaks_if_translated": "getName returns null and .show() throws inside FirstTimeSetup() AFTER the 'imported' flag and migrationVersion were already written, so the exception aborts nothing recoverable but the user never sees the MU/TH/ER instructions. In ModuleImport()'s importAdventure hook the throw also skips the `return`, leaving the hook registered.",
-     "note": "Same literal is re-declared independently at systems/alienrpg/module/alienrpg.mjs:571 as releaseNoteName; both must move together.",
+     "note": "Same literal is re-declared independently at systems/alienrpg/module/alienrpg.mjs:571 as releaseNoteName; both must move together. Both are now covered by the SAME shim, which patches the collection method rather than either call site, so there is exactly one thing to keep alive.",
      "verified_target_exists": true,
-     "declared_at_correction": "Was cited as systems/alienrpg/module/apps/init.mjs:11. Line 11 is the COMMENTED-OUT predecessor `// export const welcomeJournalEntry = '00.00 HoD - How To Use This Module';`. The live declaration is line 14. Re-derived 2026-08-29 by reading the file."
+     "declared_at_correction": "Was cited as systems/alienrpg/module/apps/init.mjs:11. Line 11 is the COMMENTED-OUT predecessor `// export const welcomeJournalEntry = '00.00 HoD - How To Use This Module';`. The live declaration is line 14. Re-derived 2026-08-29 by reading the file.",
+     "breaks_if_translated_WITHOUT_THE_SHIM": "getName returns null and .show() throws inside FirstTimeSetup() AFTER the 'imported' flag and migrationVersion were already written, so the exception aborts nothing recoverable but the user never sees the MU/TH/ER instructions. In ModuleImport()'s importAdventure hook the throw also skips the `return`, leaving the hook registered.",
+     "unfrozen_by_shim": {
+      "status": "TRANSLATABLE \u2014 guarded by a runtime shim (was T-FROZEN until 2026-08-29)",
+      "translated_to": "MU/TH/ER 使用说明",
+      "token_rule": "The 'MU/TH/ER' token stays ASCII \u2014 it is the ship computer's name and the alien-mu-th-ur plugin spells it the same way.",
+      "shim": {
+       "file": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs",
+       "pairs_declared_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:977",
+       "installer_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:991",
+       "installed_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:1039",
+       "install_hook": "setup",
+       "install_target": "the game.journal INSTANCE only \u2014 an own, non-enumerable 'getName' property shadowing Collection.prototype.getName (common/utils/collection.mjs:134). The prototype is NOT touched, so game.actors / game.items / every CompendiumCollection are unaffected.",
+       "why_setup": "client/game.mjs:730 initializeDocuments() creates game.journal; :740 callAll('setup'); :779 callAll('ready'). The system's live lookups all run in ready handlers that were registered before ours (systems load before modules), so ready would be too late and i18nInit (:663) too early \u2014 game.journal does not exist yet there.",
+       "sentinel": "__alienrpgCnGetNamePatched",
+       "sentinel_note": "Unique. The two patcher files once shared '__alienCnPatched' and the second install silently no-op'd; this name is reused nowhere.",
+       "gate": "enabled() = systemOk() && langOk() \u2014 game.system.id === 'alienrpg' && game.i18n.lang === 'cn'. Inert in every other world.",
+       "trigger_condition": "fires ONLY when the argument is byte-equal to 'MU/TH/ER Instructions.' AND the original lookup returned null/undefined. A successful original lookup is returned untouched, so English worlds and already-imported English-named worlds never reach the fallback.",
+       "strict_option": "getName(name, {strict:true}) keeps upstream semantics: the soft lookup runs first, and if the fallback also misses, the original is re-called with the caller's own options so IT throws its own error."
+      },
+      "translated_in": [
+       "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json  entries['Alien RPG System'].journals['MU/TH/ER Instructions.'].name",
+       "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json  entries['Alien RPG System'].journals['MU/TH/ER Instructions.'].pages['MU/TH/ER Instructions.'].name"
+      ],
+      "source_slice": "6-工作区/phase2/SYS-J-name.cn.json (journal_name / page_name), emitted by 4-常用脚本/parallel/prep_sys_units.py --collect",
+      "if_shim_removed": "REVERTS TO T-FROZEN. Delete 6-工作区/phase2/SYS-J-name.cn.json, re-run prep_sys_units.py --collect so the pack carries the English name again, and put these two entries back under the plain T-FROZEN rule. Shipping the Chinese name WITHOUT the shim throws on the first load of a fresh world.",
+      "verified_shim_present": true,
+      "verified_lockstep": true,
+      "gate": "4-常用脚本/qa/adversarial_hardcoded_patch.mjs group S"
+     }
     },
     {
      "id": "system.releaseNoteName",
@@ -136,8 +165,37 @@
       "systems/alienrpg/module/alienrpg.mjs:592  .id on the getName() result",
       "systems/alienrpg/module/alienrpg.mjs:614  .setFlag() on the getName() result"
      ],
-     "breaks_if_translated": "showReleaseNotes() throws at .id; the whole body is wrapped in try{}catch{} with an EMPTY catch (systems/alienrpg/module/alienrpg.mjs:618), so the failure is completely silent: release notes simply stop appearing forever and no console error is produced.",
-     "verified_target_exists": true
+     "verified_target_exists": true,
+     "breaks_if_translated_WITHOUT_THE_SHIM": "showReleaseNotes() throws at .id; the whole body is wrapped in try{}catch{} with an EMPTY catch (systems/alienrpg/module/alienrpg.mjs:618), so the failure is completely silent: release notes simply stop appearing forever and no console error is produced.",
+     "unfrozen_by_shim": {
+      "status": "TRANSLATABLE \u2014 guarded by a runtime shim (was T-FROZEN until 2026-08-29)",
+      "translated_to": "MU/TH/ER 使用说明",
+      "token_rule": "The 'MU/TH/ER' token stays ASCII \u2014 it is the ship computer's name and the alien-mu-th-ur plugin spells it the same way.",
+      "shim": {
+       "file": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs",
+       "pairs_declared_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:977",
+       "installer_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:991",
+       "installed_at": "1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs:1039",
+       "install_hook": "setup",
+       "install_target": "the game.journal INSTANCE only \u2014 an own, non-enumerable 'getName' property shadowing Collection.prototype.getName (common/utils/collection.mjs:134). The prototype is NOT touched, so game.actors / game.items / every CompendiumCollection are unaffected.",
+       "why_setup": "client/game.mjs:730 initializeDocuments() creates game.journal; :740 callAll('setup'); :779 callAll('ready'). The system's live lookups all run in ready handlers that were registered before ours (systems load before modules), so ready would be too late and i18nInit (:663) too early \u2014 game.journal does not exist yet there.",
+       "sentinel": "__alienrpgCnGetNamePatched",
+       "sentinel_note": "Unique. The two patcher files once shared '__alienCnPatched' and the second install silently no-op'd; this name is reused nowhere.",
+       "gate": "enabled() = systemOk() && langOk() \u2014 game.system.id === 'alienrpg' && game.i18n.lang === 'cn'. Inert in every other world.",
+       "trigger_condition": "fires ONLY when the argument is byte-equal to 'MU/TH/ER Instructions.' AND the original lookup returned null/undefined. A successful original lookup is returned untouched, so English worlds and already-imported English-named worlds never reach the fallback.",
+       "strict_option": "getName(name, {strict:true}) keeps upstream semantics: the soft lookup runs first, and if the fallback also misses, the original is re-called with the caller's own options so IT throws its own error."
+      },
+      "translated_in": [
+       "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json  entries['Alien RPG System'].journals['MU/TH/ER Instructions.'].name",
+       "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json  entries['Alien RPG System'].journals['MU/TH/ER Instructions.'].pages['MU/TH/ER Instructions.'].name"
+      ],
+      "source_slice": "6-工作区/phase2/SYS-J-name.cn.json (journal_name / page_name), emitted by 4-常用脚本/parallel/prep_sys_units.py --collect",
+      "if_shim_removed": "REVERTS TO T-FROZEN. Delete 6-工作区/phase2/SYS-J-name.cn.json, re-run prep_sys_units.py --collect so the pack carries the English name again, and put these two entries back under the plain T-FROZEN rule. Shipping the Chinese name WITHOUT the shim throws on the first load of a fresh world.",
+      "verified_shim_present": true,
+      "verified_lockstep": true,
+      "gate": "4-常用脚本/qa/adversarial_hardcoded_patch.mjs group S"
+     },
+     "why_the_shim_earns_its_keep_here": "showReleaseNotes() rewrites the world journal from the Babele-translated pack document (systems/alienrpg/module/alienrpg.mjs:610), which RENAMES the existing world JournalEntry to the Chinese name in place. The very next lookup, systems/alienrpg/module/alienrpg.mjs:613, then asks for the ENGLISH name again. Without the shim that returns undefined, the empty catch swallows the throw, the 'ver' flag is never written, and the whole update silently re-runs on every load."
     },
     {
      "id": "corerules.adventurePackName",
@@ -164,7 +222,7 @@
      "id": "corerules.welcomeJournalEntry",
      "package": "alien-evolved-corerules",
      "role": "JournalEntry name shown after import",
-     "string": "CORE RULES - HOW TO USE THIS MODULE",
+     "string": "CORE RULES\u00a0-\u00a0HOW\u00a0TO\u00a0USE\u00a0THIS\u00a0MODULE",
      "declared_at": "modules/alien-evolved-corerules/module/init.js:11",
      "compared_at": [
       "modules/alien-evolved-corerules/module/init.js:87",
@@ -176,9 +234,9 @@
      ],
      "breaks_if_translated": "game.journal.getName() returns null and .show() throws a TypeError. In AutoSetup() (the migrationVersion==='1.0.0' path) the throw lands after the settings writes and after game.scenes.getName(sceneToActivate).activate(); in startImport() it lands before Hooks.off('importAdventure', hookId), so the importAdventure hook stays registered for the rest of the session and re-fires on any later Adventure import.",
      "verified_target_exists": true,
-     "actual_document_name": "CORE RULES - HOW TO USE THIS MODULE",
+     "actual_document_name": "CORE RULES\u00a0-\u00a0HOW\u00a0TO\u00a0USE\u00a0THIS\u00a0MODULE",
      "string_codepoints": "'CORE RULES' U+00A0 '-' U+00A0 'HOW' U+00A0 'TO' U+00A0 'USE' U+00A0 'THIS' U+00A0 'MODULE'",
-     "encoding_hazard": "THE SIX GAPS ARE U+00A0 NO-BREAK SPACE, NOT U+0020 (the only U+0020 in the whole string is the one between CORE and RULES). Byte-verified 2026-08-29 on both sides: the JS literal at modules/alien-evolved-corerules/module/init.js:11 is b'CORE RULESÂ -Â HOWÂ TOÂ USEÂ THISÂ MODULE' and the JournalEntry 'yYRGRr4jU0cWDpFm' in the pack carries the identical bytes. The lookup WORKS in 1.0.2. The hazard is not translation but NORMALISATION: any editor, linter, prettier pass, copy-through-a-terminal or regex that turns U+00A0 into U+0020 in the Babele `entries` key silently unbinds the translation AND, if the same normalisation ever reaches the document, breaks the lookup. Always handle this key as the   escape.",
+     "encoding_hazard": "THE SIX GAPS ARE U+00A0 NO-BREAK SPACE, NOT U+0020 (the only U+0020 in the whole string is the one between CORE and RULES). Byte-verified 2026-08-29 on both sides: the JS literal at modules/alien-evolved-corerules/module/init.js:11 is b'CORE RULESÂ\u00a0-Â\u00a0HOWÂ\u00a0TOÂ\u00a0USEÂ\u00a0THISÂ\u00a0MODULE' and the JournalEntry 'yYRGRr4jU0cWDpFm' in the pack carries the identical bytes. The lookup WORKS in 1.0.2. The hazard is not translation but NORMALISATION: any editor, linter, prettier pass, copy-through-a-terminal or regex that turns U+00A0 into U+0020 in the Babele `entries` key silently unbinds the translation AND, if the same normalisation ever reaches the document, breaks the lookup. Always handle this key as the \u00a0 escape.",
      "actual_document_id": "yYRGRr4jU0cWDpFm",
      "nbsp_count": 6,
      "space_count": 1
@@ -197,7 +255,7 @@
       "modules/alien-evolved-corerules/module/init.js:86  .activate()",
       "modules/alien-evolved-corerules/module/init.js:114  .activate()"
      ],
-     "breaks_if_translated": "startImport() throws at .activate() BEFORE the welcome journal line, so the import never reaches Hooks.off(). Note this string is byte-identical to corerules.adventurePackName but names a DIFFERENT document (a Scene, not the Adventure) — the Babele `scenes` block and the `entries` key must both keep it.",
+     "breaks_if_translated": "startImport() throws at .activate() BEFORE the welcome journal line, so the import never reaches Hooks.off(). Note this string is byte-identical to corerules.adventurePackName but names a DIFFERENT document (a Scene, not the Adventure) \u2014 the Babele `scenes` block and the `entries` key must both keep it.",
      "verified_target_exists": true
     },
     {
@@ -235,7 +293,7 @@
       "modules/alien-evolved-starterset/module/init.js:121  .show()",
       "modules/alien-evolved-starterset/module/init.js:152  .show()"
      ],
-     "breaks_if_translated": "getName returns null, .show() throws. In startImport() the throw lands after createThumbs() and the settings writes, so the module looks imported but the how-to-use journal never opens and Hooks.off('importAdventure') never runs — the hook stays live for the rest of the session and re-fires on any later Adventure import.",
+     "breaks_if_translated": "getName returns null, .show() throws. In startImport() the throw lands after createThumbs() and the settings writes, so the module looks imported but the how-to-use journal never opens and Hooks.off('importAdventure') never runs \u2014 the hook stays live for the rest of the session and re-fires on any later Adventure import.",
      "verified_target_exists": true
     },
     {
@@ -255,7 +313,9 @@
      "breaks_if_translated": "AutoSetup()/startImport() throw at .activate(). Byte-identical to starterset.adventurePackName but names a Scene, not the Adventure.",
      "verified_target_exists": true
     }
-   ]
+   ],
+   "tier_exception": "Entries carrying an `unfrozen_by_shim` block are T-SHIMMED, not T-FROZEN: they ARE translated in the shipped pack, and the English-keyed getName() is made to resolve by a runtime wrapper. Any gate that enforces 'frozen means byte-equal English' must skip those entries \u2014 and must fail if the named shim is gone.",
+   "shimmed_count": 2
   },
   "rolltable_names": {
    "tier": "T-FROZEN",
@@ -268,7 +328,7 @@
      "call_site": "systems/alienrpg/module/documents/actor.mjs:554",
      "guarded": true,
      "guard": "if (!table) ui.notifications.error(ALIENRPG.NoPanicTable) and return",
-     "breaks_if_translated": "rollPanic() aborts with the 'no panic table' error toast; the panic roll — the core mechanic of the game — becomes impossible for every character.",
+     "breaks_if_translated": "rollPanic() aborts with the 'no panic table' error toast; the panic roll \u2014 the core mechanic of the game \u2014 becomes impossible for every character.",
      "present_in": [
       "system",
       "corerules"
@@ -323,7 +383,7 @@
      "call_site": "systems/alienrpg/module/documents/actor.mjs:1816",
      "guarded": true,
      "guard": "atable === null/undefined -> warn(ALIENRPG.NoCharCrit) and return",
-     "breaks_if_translated": "Middle leg of the classic-mode 3-way fallback. NO TABLE WITH THIS EXACT CASING EXISTS IN ANY OF THE THREE PACKS — it is dead in the shipped data, kept here so nobody 'fixes' a table's casing into it and then translates it.",
+     "breaks_if_translated": "Middle leg of the classic-mode 3-way fallback. NO TABLE WITH THIS EXACT CASING EXISTS IN ANY OF THE THREE PACKS \u2014 it is dead in the shipped data, kept here so nobody 'fixes' a table's casing into it and then translates it.",
      "present_in": []
     },
     {
@@ -332,7 +392,7 @@
      "call_site": "systems/alienrpg/module/documents/actor.mjs:1817",
      "guarded": true,
      "guard": "atable === null/undefined -> warn(ALIENRPG.NoCharCrit) and return",
-     "breaks_if_translated": "THIS is the table the classic-mode fallback actually finds (lower-case 'i'). Translate it and every classic-mode character critical-injury roll dies with the NoCharCrit warning. The i18n leg ALIENRPG.CriticalInjuries is shipped as '重伤' in cn.json, which matches nothing, so the ONLY working leg is this literal — unless you retarget the key (see i18n_leg).",
+     "breaks_if_translated": "THIS is the table the classic-mode fallback actually finds (lower-case 'i'). Translate it and every classic-mode character critical-injury roll dies with the NoCharCrit warning. The i18n leg ALIENRPG.CriticalInjuries is shipped as '重伤' in cn.json, which matches nothing, so the ONLY working leg is this literal \u2014 unless you retarget the key (see i18n_leg).",
      "i18n_leg": {
       "key": "ALIENRPG.CriticalInjuries",
       "en": "Critical injuries",
@@ -350,7 +410,7 @@
      "call_site": "systems/alienrpg/module/documents/actor.mjs:1830",
      "guarded": true,
      "guard": "atable === null/undefined -> warn(ALIENRPG.NoSynCrit) and return",
-     "breaks_if_translated": "Synthetic crit rolls stop. There is NO i18n leg on this branch at all — the 'evolved' switch above it is commented out — so the literal is the only path.",
+     "breaks_if_translated": "Synthetic crit rolls stop. There is NO i18n leg on this branch at all \u2014 the 'evolved' switch above it is commented out \u2014 so the literal is the only path.",
      "present_in": [
       "starterset",
       "corerules"
@@ -390,13 +450,13 @@
     {
      "string": "EV - 48a. LS - DANGER EVENT DETAIL",
      "lookup": "game.tables.getName(\"EV - 48a. LS - DANGER EVENT DETAIL\")",
-     "call_site": "alien-evolved-corerules pack :: Macro 'Roll on Danger Event Detail Table' (_id OHnG8YcGCm4txlR9) .command — a name lookup that lives in PACK CONTENT, not in module JS",
+     "call_site": "alien-evolved-corerules pack :: Macro 'Roll on Danger Event Detail Table' (_id OHnG8YcGCm4txlR9) .command \u2014 a name lookup that lives in PACK CONTENT, not in module JS",
      "call_site_kind": "macro_command",
      "guarded": false,
      "unguarded_deref": [
       "`const formula = table.formula;` on the getName() result, one line later"
      ],
-     "breaks_if_translated": "The macro 'Roll on Danger Event Detail Table' — the only Macro the Core Rules pack ships — throws TypeError at `table.formula` inside its own Dialog callback. Nothing is drawn, no chat card appears, and because the throw happens inside an async button callback it surfaces only as an unhandled rejection in the console: to the GM the button is simply dead.",
+     "breaks_if_translated": "The macro 'Roll on Danger Event Detail Table' \u2014 the only Macro the Core Rules pack ships \u2014 throws TypeError at `table.formula` inside its own Dialog callback. Nothing is drawn, no chat card appears, and because the throw happens inside an async button callback it surfaces only as an unhandled rejection in the console: to the GM the button is simply dead.",
      "present_in": [
       "corerules"
      ],
@@ -444,7 +504,7 @@
      "call_site": "systems/alienrpg/module/helpers/rollTableData.mjs:7",
      "role": "Source folder for the creature ATTACK-table <select> (rTables).",
      "unguarded_deref": "systems/alienrpg/module/helpers/rollTableData.mjs:9  `folder.contents` with folder possibly undefined",
-     "breaks_if_translated": "find() returns undefined and `folder.contents` throws a TypeError inside AlienRPGCreatureSheet#_prepareContext (systems/alienrpg/module/sheets/creature-sheet.mjs:129). THE ENTIRE CREATURE SHEET FAILS TO RENDER — not a degraded dropdown, a blank window.",
+     "breaks_if_translated": "find() returns undefined and `folder.contents` throws a TypeError inside AlienRPGCreatureSheet#_prepareContext (systems/alienrpg/module/sheets/creature-sheet.mjs:129). THE ENTIRE CREATURE SHEET FAILS TO RENDER \u2014 not a degraded dropdown, a blank window.",
      "present_in": [
       "system",
       "starterset",
@@ -467,7 +527,7 @@
     }
    ],
    "note": {
-    "note": "The owner's T-FROZEN note says '2 hard-coded Folder names'; the live import graph has THREE. 'Alien Sub-Tables' is NOT one of them — it is never named in code and Folder#contents is non-recursive, so it is fully translatable.",
+    "note": "The owner's T-FROZEN note says '2 hard-coded Folder names'; the live import graph has THREE. 'Alien Sub-Tables' is NOT one of them \u2014 it is never named in code and Folder#contents is non-recursive, so it is fully translatable.",
     "translatable_folders_measured": 28,
     "distinct_folder_names_in_packs": 31
    }
@@ -494,7 +554,7 @@
       }
      ],
      "breaks_if_translated": "The talent silently stops granting its encumbrance bonus. Nothing errors: the character/synthetic/colony sheet just computes a smaller carry capacity, so the player sees a wrong Encumbered status and no clue why. Comparison is .toUpperCase() so case may change; the LETTERS may not.",
-     "rule": "T-FROZEN. Bilingual tail is NOT allowed on this item name — '驮马 Pack Mule'.toUpperCase() is '驮马 PACK MULE', which !== 'PACK MULE'."
+     "rule": "T-FROZEN. Bilingual tail is NOT allowed on this item name \u2014 '驮马 Pack Mule'.toUpperCase() is '驮马 PACK MULE', which !== 'PACK MULE'."
     },
     {
      "string_compared": "TAKE CONTROL",
@@ -525,7 +585,7 @@
      ],
      "documents": [],
      "effect_when_it_matches": "attrMod.stress -= 2 (max Stress reduced by 2), classic mode only",
-     "breaks_if_translated": "The talent silently stops reducing Stress. No error; the character just panics sooner. Purely numeric drift on the sheet, no error anywhere — the same silent class as PACK MULE.",
+     "breaks_if_translated": "The talent silently stops reducing Stress. No error; the character just panics sooner. Purely numeric drift on the sheet, no error anywhere \u2014 the same silent class as PACK MULE.",
      "rule": "T-FROZEN, no bilingual tail: '中文 Nerves Of Steel'.toUpperCase() must still be exactly 'NERVES OF STEEL'.",
      "live": false,
      "note": "No document with this name exists in any of the three packs today, so the comparison is dead in the shipped data. Listed for the same reason the two dead RollTable names are: so nobody creates or renames an item into it and then translates it.",
@@ -541,7 +601,7 @@
      ],
      "documents": [],
      "effect_when_it_matches": "attrMod.health += 2, classic mode only",
-     "breaks_if_translated": "The character silently loses 2 max Health. Purely numeric drift on the sheet, no error anywhere — the same silent class as PACK MULE.",
+     "breaks_if_translated": "The character silently loses 2 max Health. Purely numeric drift on the sheet, no error anywhere \u2014 the same silent class as PACK MULE.",
      "rule": "T-FROZEN, no bilingual tail: '中文 Tough'.toUpperCase() must still be exactly 'TOUGH'.",
      "live": false,
      "note": "No document with this name exists in any of the three packs today, so the comparison is dead in the shipped data. Listed for the same reason the two dead RollTable names are: so nobody creates or renames an item into it and then translates it.",
@@ -570,7 +630,7 @@
       }
      ],
      "effect_when_it_matches": "attrMod.health += 1, BOTH modes",
-     "breaks_if_translated": "The character silently loses 1 max Health. Purely numeric drift on the sheet, no error anywhere — the same silent class as PACK MULE.",
+     "breaks_if_translated": "The character silently loses 1 max Health. Purely numeric drift on the sheet, no error anywhere \u2014 the same silent class as PACK MULE.",
      "rule": "T-FROZEN, no bilingual tail: '中文 Hardened'.toUpperCase() must still be exactly 'HARDENED'.",
      "live": true,
      "note": "LIVE: documents with this name ship in the packs, so translating it changes character stats today.",
@@ -593,7 +653,7 @@
       }
      ],
      "effect_when_it_matches": "this.skills.stamina.ability = 'wit' when WIT > STR, BOTH modes",
-     "breaks_if_translated": "Stamina silently reverts to its STR base, changing every Stamina roll's modifier. Purely numeric drift on the sheet, no error anywhere — the same silent class as PACK MULE.",
+     "breaks_if_translated": "Stamina silently reverts to its STR base, changing every Stamina roll's modifier. Purely numeric drift on the sheet, no error anywhere \u2014 the same silent class as PACK MULE.",
      "rule": "T-FROZEN, no bilingual tail: '中文 Stoic'.toUpperCase() must still be exactly 'STOIC'.",
      "live": true,
      "note": "LIVE: documents with this name ship in the packs, so translating it changes character stats today.",
@@ -751,7 +811,7 @@
     "dead_second_leg": {
      "what": "_stuntBtn also builds `\"ALIENRPG.\" + skill.description.replace(/\\s+/g,\"\")` and localizes it.",
      "call_site": "systems/alienrpg/module/sheets/character-sheet.mjs:1114",
-     "status": "DEAD in 4.1.13 — measured: none of the 12 resulting keys (ALIENRPG.HeavyMachinery, ALIENRPG.CloseCombat, ...) exists in lang/en.json, so localize() returns the raw key and the `startsWith('<ol>')` branches never fire. Do NOT create a cn.json block for them; if upstream restores those keys this becomes a second lockstep.",
+     "status": "DEAD in 4.1.13 \u2014 measured: none of the 12 resulting keys (ALIENRPG.HeavyMachinery, ALIENRPG.CloseCombat, ...) exists in lang/en.json, so localize() returns the raw key and the `startsWith('<ol>')` branches never fire. Do NOT create a cn.json block for them; if upstream restores those keys this becomes a second lockstep.",
      "measured_missing_from_en": [
       "ALIENRPG.HeavyMachinery",
       "ALIENRPG.CloseCombat",
@@ -780,7 +840,7 @@
      "vehicle": "UNGATED"
     }
    },
-   "⚠_TARGET_WARNING": "本节每条的 `lang_cn_upstream_4_1_13_reference_only` **不是 T-EXACT 的目标值**，它记的是**上游系统 4.1.13 自带 cn.json** 当时的样子，仅作历史参照。真正的目标值是本项目交付的 `1-系统汉化插件/lang/cn.json`，闸门必须**在运行时读那个文件**。2026-08-29 实测：12 条里有 **7 条**两者不同（重型机械/近战/远程战斗/操控/侦察/生存/通信科技）——照这一列去改包内物品名会产出 7 个错名，且 game.items.getName() 全部返回 null。",
+   "⚠_TARGET_WARNING": "本节每条的 `lang_cn_upstream_4_1_13_reference_only` **不是 T-EXACT 的目标值**，它记的是**上游系统 4.1.13 自带 cn.json** 当时的样子，仅作历史参照。真正的目标值是本项目交付的 `1-系统汉化插件/lang/cn.json`，闸门必须**在运行时读那个文件**。2026-08-29 实测：12 条里有 **7 条**两者不同（重型机械/近战/远程战斗/操控/侦察/生存/通信科技）\u2014\u2014照这一列去改包内物品名会产出 7 个错名，且 game.items.getName() 全部返回 null。",
    "target_is": "1-系统汉化插件/lang/cn.json  (read at gate time, never cached here)"
   },
   "crit_parse_lockstep": {
@@ -816,7 +876,7 @@
     {
      "index": 3,
      "lang_key": "ALIENRPG.Yes",
-     "suffix_literal": ", –1 ",
+     "suffix_literal": ", \u20131 ",
      "suffix_codepoints": [
       "U+002C",
       "U+0020",
@@ -827,13 +887,13 @@
      "expected_cell": "<localize(ALIENRPG.Yes)> + ', \\u20131 '",
      "at": "systems/alienrpg/module/documents/actor.mjs:1906",
      "effect": "cFatal = true; appends '-1 to <strong>' + localize(ALIENRPG.SkillmedicalAid) + '</strong> roll'",
-     "en_cell": "Yes, –1 ",
+     "en_cell": "Yes, \u20131 ",
      "WARNING": "EN DASH U+2013, NOT ASCII HYPHEN-MINUS U+002D. Verified by codepoint dump of systems/alienrpg/module/documents/actor.mjs:1906"
     },
     {
      "index": 3,
      "lang_key": "ALIENRPG.Yes",
-     "suffix_literal": ", –2 ",
+     "suffix_literal": ", \u20132 ",
      "suffix_codepoints": [
       "U+002C",
       "U+0020",
@@ -844,7 +904,7 @@
      "expected_cell": "<localize(ALIENRPG.Yes)> + ', \\u20132 '",
      "at": "systems/alienrpg/module/documents/actor.mjs:1912",
      "effect": "cFatal = true; appends the -2 Medical Aid penalty",
-     "en_cell": "Yes, –2 ",
+     "en_cell": "Yes, \u20132 ",
      "WARNING": "EN DASH U+2013, NOT ASCII HYPHEN-MINUS U+002D."
     },
     {
@@ -897,12 +957,12 @@
      "index": 9,
      "lang_key": "ALIENRPG.Permanent",
      "suffix_literal": "",
-     "expected_cell": "<localize(ALIENRPG.Permanent)>   (NO trailing space — this cell is last in the string, so nothing follows it)",
+     "expected_cell": "<localize(ALIENRPG.Permanent)>   (NO trailing space \u2014 this cell is last in the string, so nothing follows it)",
      "at": "systems/alienrpg/module/documents/actor.mjs:1888",
      "comparison": "!==  (an EQUALITY match SKIPS the healing-time parsing entirely)",
      "effect": "match -> healing time left as the literal text; mismatch -> falls into the [[XdY]] parser",
      "en_cell": "Permanent",
-     "severity": "CRITICAL — see the Shift entry for the crash path."
+     "severity": "CRITICAL \u2014 see the Shift entry for the crash path."
     },
     {
      "index": 9,
@@ -911,10 +971,10 @@
      "suffix_literal": "",
      "expected_cell": "the ASCII literal 'Shift'",
      "at": "systems/alienrpg/module/documents/actor.mjs:1890",
-     "effect": "testArray[9] = localize('ALIENRPG.Shift')  — i.e. the code translates it FOR you",
+     "effect": "testArray[9] = localize('ALIENRPG.Shift')  \u2014 i.e. the code translates it FOR you",
      "en_cell": "Shift",
      "severity": "CRITICAL",
-     "WARNING": "THIS ONE HAS NO i18n KEY ON THE COMPARISON SIDE. The cell must stay the byte-exact English word 'Shift'. It is emitted by 2 rows of 'EV - Critical Injuries' (14-14 and 15-15). Translate it and control reaches systems/alienrpg/module/documents/actor.mjs:1893 where .match() returns null and null[1] throws an UNCAUGHT TypeError — the whole Evolved crit roll dies mid-flight, the chat card is never posted and the injury is never applied. ALIENRPG.Shift is the OUTPUT key: set that to the Chinese word, leave the table cell English.",
+     "WARNING": "THIS ONE HAS NO i18n KEY ON THE COMPARISON SIDE. The cell must stay the byte-exact English word 'Shift'. It is emitted by 2 rows of 'EV - Critical Injuries' (14-14 and 15-15). Translate it and control reaches systems/alienrpg/module/documents/actor.mjs:1893 where .match() returns null and null[1] throws an UNCAUGHT TypeError \u2014 the whole Evolved crit roll dies mid-flight, the chat card is never posted and the injury is never applied. ALIENRPG.Shift is the OUTPUT key: set that to the Chinese word, leave the table cell English.",
      "output_key": {
       "key": "ALIENRPG.Shift",
       "en": "Shift",
@@ -930,7 +990,7 @@
      "systems/alienrpg/module/documents/actor.mjs:1893",
      "systems/alienrpg/module/documents/actor.mjs:1894"
     ],
-    "rule": "The HEALING TIME cell must START with '[[NdM]]' — one digit, 'd', one-or-more digits, in ASCII double square brackets, at offset 0. The tail after it (' days') IS free to translate; it is captured as group 2 and re-emitted verbatim. Putting anything (even a space) before '[[' makes .match() return null -> uncaught TypeError, same crash as the Shift case.",
+    "rule": "The HEALING TIME cell must START with '[[NdM]]' \u2014 one digit, 'd', one-or-more digits, in ASCII double square brackets, at offset 0. The tail after it (' days') IS free to translate; it is captured as group 2 and re-emitted verbatim. Putting anything (even a space) before '[[' makes .match() return null -> uncaught TypeError, same crash as the Shift case.",
     "measured_en_values": [
      "[[1d6]]  days",
      "[[1d6]] days",
@@ -1007,32 +1067,32 @@
        "healing_en": "[[2d6]] days"
       },
       "52-52": {
-       "fatal_en": "Yes, –1 ",
+       "fatal_en": "Yes, \u20131 ",
        "time_limit_en": "One Turn ",
        "healing_en": "[[1d6]] days"
       },
       "53-53": {
-       "fatal_en": "Yes, –1 ",
+       "fatal_en": "Yes, \u20131 ",
        "time_limit_en": "One Turn ",
        "healing_en": "[[1d6]] days"
       },
       "54-54": {
-       "fatal_en": "Yes, –1 ",
+       "fatal_en": "Yes, \u20131 ",
        "time_limit_en": "One Shift ",
        "healing_en": "Permanent"
       },
       "55-55": {
-       "fatal_en": "Yes, –1 ",
+       "fatal_en": "Yes, \u20131 ",
        "time_limit_en": "One Shift ",
        "healing_en": "Permanent"
       },
       "61-61": {
-       "fatal_en": "Yes, –1 ",
+       "fatal_en": "Yes, \u20131 ",
        "time_limit_en": "One Round ",
        "healing_en": "[[2d6]] days"
       },
       "62-62": {
-       "fatal_en": "Yes, –2 ",
+       "fatal_en": "Yes, \u20132 ",
        "time_limit_en": "One Round ",
        "healing_en": "[[3d6]] days"
       },
@@ -1115,12 +1175,12 @@
      "rows_with_significant_tokens": {
       "14-14": {
        "fatal_en": "No ",
-       "time_limit_en": "–",
+       "time_limit_en": "\u2013",
        "healing_en": "Shift"
       },
       "15-15": {
        "fatal_en": "No ",
-       "time_limit_en": "–",
+       "time_limit_en": "\u2013",
        "healing_en": "Shift"
       },
       "44-44": {
@@ -1185,17 +1245,17 @@
       },
       "64-64": {
        "fatal_en": "Yes ",
-       "time_limit_en": "–",
+       "time_limit_en": "\u2013",
        "healing_en": ""
       },
       "65-65": {
        "fatal_en": "Yes ",
-       "time_limit_en": "–",
+       "time_limit_en": "\u2013",
        "healing_en": ""
       },
       "66-66": {
        "fatal_en": "Yes ",
-       "time_limit_en": "–",
+       "time_limit_en": "\u2013",
        "healing_en": ""
       }
      },
@@ -1204,13 +1264,13 @@
       "11-11": {
        "starterset": 11,
        "corerules": 11,
-       "why": "The row ends '<strong>HEALING TIME: </strong><br /></p>' — a trailing <br /> after an EMPTY healing-time cell. The split therefore yields 11 elements, not 10. Harmless at runtime: testArray[9] is '' so systems/alienrpg/module/documents/actor.mjs:1889 takes the length===0 branch and writes localize('ALIENRPG.None'). MEASURED 2026-08-29 by replaying the actor.mjs pipeline over both packs.",
-       "rule": "Keep the trailing <br /> or drop it — either gives a working row — but the QA gate must not treat 11 as a defect for this range."
+       "why": "The row ends '<strong>HEALING TIME: </strong><br /></p>' \u2014 a trailing <br /> after an EMPTY healing-time cell. The split therefore yields 11 elements, not 10. Harmless at runtime: testArray[9] is '' so systems/alienrpg/module/documents/actor.mjs:1889 takes the length===0 branch and writes localize('ALIENRPG.None'). MEASURED 2026-08-29 by replaying the actor.mjs pipeline over both packs.",
+       "rule": "Keep the trailing <br /> or drop it \u2014 either gives a working row \u2014 but the QA gate must not treat 11 as a defect for this range."
       }
      }
     }
    },
-   "evolved_mode_note": "MEASURED: 'EV - Critical Injuries' emits '–' / 'Shift' / 'Stretch' / 'Round' at index 5, none of which is any of the five ALIENRPG.One* + ' ' cases, so healTime is ALWAYS 0 in Evolved mode today. That is an upstream defect, not something translation caused; do not 'fix' it by rewriting the cells to 'One Shift ' unless you also intend to change game behaviour.",
+   "evolved_mode_note": "MEASURED: 'EV - Critical Injuries' emits '\u2013' / 'Shift' / 'Stretch' / 'Round' at index 5, none of which is any of the five ALIENRPG.One* + ' ' cases, so healTime is ALWAYS 0 in Evolved mode today. That is an upstream defect, not something translation caused; do not 'fix' it by rewriting the cells to 'One Shift ' unless you also intend to change game behaviour.",
    "split_length_note": "expected_split_length is 10 for both tables, but THREE ranges deviate upstream and are recorded per table under rows_with_nonstandard_split: 'EV - Critical Injuries' 11-11 is 11 in BOTH packs (trailing <br />), and 'Critical injuries' 11-11 / 12-12 are 9 in corerules only (missing space after 'HEALING TIME:'). A gate that only tolerates expected-1 false-positives on the 11-element row.",
    "other_branches": {
     "what": "actor.mjs has THREE more fixed-index parses of a drawn crit description besides the `case \"character\"` one documented above. They use a DIFFERENT splitter and DIFFERENT indices, and they cover four more RollTables.",
@@ -1221,7 +1281,7 @@
       "strip_at": "systems/alienrpg/module/documents/actor.mjs:2100",
       "split_at": "systems/alienrpg/module/documents/actor.mjs:1882",
       "split_regex": "/[:] |<br \\/>/gi",
-      "no_br_normalisation": "Unlike the character branch there is NO `<br />` -> `<br>` step, so this splitter matches the LITERAL '<br />'. A bare '<br>' does NOT split here — 'tidying' the markup silently merges cells.",
+      "no_br_normalisation": "Unlike the character branch there is NO `<br />` -> `<br>` step, so this splitter matches the LITERAL '<br />'. A bare '<br>' does NOT split here \u2014 'tidying' the markup silently merges cells.",
       "indices_read": {
        "0": "Item name  ->  `#${roll.total} ${testArray[0]}`  (systems/alienrpg/module/documents/actor.mjs:2110)",
        "1": "system.attributes.effects  (systems/alienrpg/module/documents/actor.mjs:2111)"
@@ -1411,7 +1471,7 @@
     "rule": "For every row of these four tables the translated description must split to exactly the measured length (see measured_split_length_by_range), which means: keep every ASCII 'colon + space' inside its tag (a full-width '：' does not match /[:] /), keep every '<br />' EXACTLY as '<br />' (not '<br>', not '<br/>'), and keep the double '<br /><br />' in the spaceship rows.",
     "upstream_deviations": {
      "Critical Injuries on Xenomorphs 3-3": "description is the empty string in BOTH packs -> split length 1 -> testArray[1] is undefined today. Upstream defect; a translation must not 'fix' it into a 2-element row unless the owner decides to change game content.",
-     "Spaceship Major Component Damage 8-8": "'...suffers a random critical injury.<strong>Repair Roll: </strong>' — the '<br /><br />' before Repair Roll is missing, so the row splits to 4 and testArray[5] is undefined today. Upstream defect; the repair roll for that result is already lost in English."
+     "Spaceship Major Component Damage 8-8": "'...suffers a random critical injury.<strong>Repair Roll: </strong>' \u2014 the '<br /><br />' before Repair Roll is missing, so the row splits to 4 and testArray[5] is undefined today. Upstream defect; the repair roll for that result is already lost in English."
     },
     "found_by": "2026-08-29 adversarial pass."
    }
@@ -1427,11 +1487,11 @@
     {
      "code": "game.tables.contents.find((b) => b.name === targetTable)",
      "at": "systems/alienrpg/module/documents/actor.mjs:2497",
-     "guard": "NONE — `table.roll({roll})` on the next lines throws TypeError if the name misses",
+     "guard": "NONE \u2014 `table.roll({roll})` on the next lines throws TypeError if the name misses",
      "unguarded": true
     },
     {
-     "code": "{{selectOptions rTables selected=system.rTables valueAttr='key'}} — the <select> compares the stored value against the option KEY, which rollTableData.mjs sets to the table name",
+     "code": "{{selectOptions rTables selected=system.rTables valueAttr='key'}} \u2014 the <select> compares the stored value against the option KEY, which rollTableData.mjs sets to the table name",
      "at": "systems/alienrpg/templates/actor/creature-general.hbs:7 and :20"
     }
    ],
@@ -2160,7 +2220,7 @@
      "table_lives_in": []
     }
    ],
-   "rule": "Whatever the Babele mapping does with these fields (the survey proposes a custom `alienRollTableRef` converter), the INVARIANT is: after translation the string stored in system.rTables/cTables must be byte-equal to the translated `name` of the RollTable it points at, in the SAME world. Both must move together or neither. 'None' must move NEITHER — it is the sentinel.",
+   "rule": "Whatever the Babele mapping does with these fields (the survey proposes a custom `alienRollTableRef` converter), the INVARIANT is: after translation the string stored in system.rTables/cTables must be byte-equal to the translated `name` of the RollTable it points at, in the SAME world. Both must move together or neither. 'None' must move NEITHER \u2014 it is the sentinel.",
    "breaks_if_desynced": "rTables desync -> creatureAutoAttackRoll's find() returns undefined -> `table.roll({roll})` throws an uncaught TypeError; the creature's attack button is dead. cTables desync -> the guarded path, so just a NoCharCrit warning. In BOTH cases the <select> also loses its selection and silently re-reads as the first option ('None') the next time the sheet is saved, permanently destroying the actor's table binding.",
    "scope_correction": "The survey scoped this to corerules only. Measured across all three dumps: the Starter Set carries 10 refs on 5 actors and corerules carries 50 refs on 25 actors; the system pack has no actors at all."
   },
@@ -2169,14 +2229,14 @@
     "count": 33,
     "renderer": "elem.innerHTML = `<a class='content-link' >${tableName}</a>`  (systems/alienrpg/module/helpers/enricher.mjs:40)",
     "tooltip": "data-tooltip = `Draw from ${tableName}. <br> ${localize('ALIENRPG.dialog.Tooltip-Rollontable')}`  (systems/alienrpg/module/helpers/enricher.mjs:34)",
-    "binding": "BY UUID. The label is display text only — the draw resolves through data-uuid, so a translated label never breaks the roll.",
+    "binding": "BY UUID. The label is display text only \u2014 the draw resolves through data-uuid, so a translated label never breaks the roll.",
     "rule": "TRANSLATE the label, and keep it byte-equal to the translated RollTable name, because the label is ALSO what the tooltip says you are drawing from. It is a consistency sync point, not a functional one.",
     "labels_matching_target_name_today": 23,
     "labels_already_wrong_upstream": [
      {
       "pack": "corerules",
       "target": "RollTable.SCl1BZa4oHjMeZ4Q",
-      "label": "EV - 32.  LIFE PATH - EARLY LIFE",
+      "label": "EV - 32.\u00a0\u00a0LIFE PATH - EARLY LIFE",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 32. LIFE PATH - EARLY LIFE",
@@ -2185,7 +2245,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.eJgLp3u3A5HAAHuY",
-      "label": "EV - 46.  LIFE PATH - PSYCH EVALUATION",
+      "label": "EV - 46.\u00a0\u00a0LIFE PATH - PSYCH EVALUATION",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 46. LIFE PATH - PSYCH EVALUATION",
@@ -2194,7 +2254,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2203,7 +2263,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.TzDsXA9B8rSG6lyF",
-      "label": "EV - 48.  LS - DANGER EVENT MATRIX",
+      "label": "EV - 48.\u00a0\u00a0LS - DANGER EVENT MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 48. LS - DANGER EVENT MATRIX",
@@ -2212,7 +2272,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2221,7 +2281,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.6HcfWwkEJ1Y0KzMy",
-      "label": "EV - 50.  LS - BINARY RESPONSE MATRIX",
+      "label": "EV - 50.\u00a0\u00a0LS - BINARY RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 50. LS - BINARY RESPONSE MATRIX",
@@ -2230,7 +2290,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.fnb3mBmtREM3ccwW",
-      "label": "EV - 58.  LS - SOLO PANIC RESPONSE TABLE",
+      "label": "EV - 58.\u00a0\u00a0LS - SOLO PANIC RESPONSE TABLE",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 58. LS - SOLO PANIC RESPONSE TABLE",
@@ -2248,7 +2308,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2257,7 +2317,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.TzDsXA9B8rSG6lyF",
-      "label": "EV - 48.  LS - DANGER EVENT MATRIX",
+      "label": "EV - 48.\u00a0\u00a0LS - DANGER EVENT MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 48. LS - DANGER EVENT MATRIX",
@@ -2268,7 +2328,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.SCl1BZa4oHjMeZ4Q",
-      "label": "EV - 32.  LIFE PATH - EARLY LIFE",
+      "label": "EV - 32.\u00a0\u00a0LIFE PATH - EARLY LIFE",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 32. LIFE PATH - EARLY LIFE",
@@ -2277,7 +2337,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.eJgLp3u3A5HAAHuY",
-      "label": "EV - 46.  LIFE PATH - PSYCH EVALUATION",
+      "label": "EV - 46.\u00a0\u00a0LIFE PATH - PSYCH EVALUATION",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 46. LIFE PATH - PSYCH EVALUATION",
@@ -2286,7 +2346,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2295,7 +2355,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.TzDsXA9B8rSG6lyF",
-      "label": "EV - 48.  LS - DANGER EVENT MATRIX",
+      "label": "EV - 48.\u00a0\u00a0LS - DANGER EVENT MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 48. LS - DANGER EVENT MATRIX",
@@ -2304,7 +2364,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2313,7 +2373,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.6HcfWwkEJ1Y0KzMy",
-      "label": "EV - 50.  LS - BINARY RESPONSE MATRIX",
+      "label": "EV - 50.\u00a0\u00a0LS - BINARY RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 50. LS - BINARY RESPONSE MATRIX",
@@ -2322,7 +2382,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.fnb3mBmtREM3ccwW",
-      "label": "EV - 58.  LS - SOLO PANIC RESPONSE TABLE",
+      "label": "EV - 58.\u00a0\u00a0LS - SOLO PANIC RESPONSE TABLE",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 58. LS - SOLO PANIC RESPONSE TABLE",
@@ -2547,7 +2607,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.tGNoaixXP7pVLIPq",
-      "label": "EV - 51.  LS - COMPLEX RESPONSE MATRIX",
+      "label": "EV - 51.\u00a0\u00a0LS - COMPLEX RESPONSE MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 51. LS - COMPLEX RESPONSE MATRIX",
@@ -2556,7 +2616,7 @@
      {
       "pack": "corerules",
       "target": "RollTable.TzDsXA9B8rSG6lyF",
-      "label": "EV - 48.  LS - DANGER EVENT MATRIX",
+      "label": "EV - 48.\u00a0\u00a0LS - DANGER EVENT MATRIX",
       "roll": null,
       "target_pack": "corerules",
       "target_name": "EV - 48. LS - DANGER EVENT MATRIX",
@@ -2567,7 +2627,7 @@
    "at_DRAW": {
     "count": 3,
     "renderer": "elem.innerHTML = `<i class=\"fas fa-dice-d20\">&nbsp;</i>`  (systems/alienrpg/module/helpers/enricher.mjs:22)",
-    "binding": "BY UUID. The label is NEVER rendered as text — only inside data-tooltip.",
+    "binding": "BY UUID. The label is NEVER rendered as text \u2014 only inside data-tooltip.",
     "rule": "TRANSLATE. Invisible except in the tooltip.",
     "entries": [
      {
@@ -3291,7 +3351,7 @@
      "corerules/content-link": 265,
      "starterset/ev-content-link": 81
     },
-    "note": "corerules pre-baked anchors carry class=\"content-link\"; starterset carries the non-standard class=\"ev-content-link\". CORRECTION TO THE OBVIOUS WORRY: this does NOT disable the starterset links. Foundry v14's click and drag delegates select on `a[data-link]` (foundry.mjs:35921 / :35925), not on the class, and all 81 starterset anchors carry data-link + data-uuid. The class difference is CSS-only — and neither module's CSS defines .ev-content-link, so those 81 links render unstyled. Do not 'repair' the class during translation; leave the attribute bytes alone and translate only the anchor's inner text."
+    "note": "corerules pre-baked anchors carry class=\"content-link\"; starterset carries the non-standard class=\"ev-content-link\". CORRECTION TO THE OBVIOUS WORRY: this does NOT disable the starterset links. Foundry v14's click and drag delegates select on `a[data-link]` (foundry.mjs:35921 / :35925), not on the class, and all 81 starterset anchors carry data-link + data-uuid. The class difference is CSS-only \u2014 and neither module's CSS defines .ev-content-link, so those 81 links render unstyled. Do not 'repair' the class during translation; leave the attribute bytes alone and translate only the anchor's inner text."
    }
   },
   "heading_anchor_hashes": {
@@ -3332,14 +3392,14 @@
     }
    },
    "explicit_ids_in_corpus": 0,
-   "breaks_if_translated": "String#slugify is non-strict here, so CJK survives verbatim: '<h2>制作技能检定</h2>' slugifies to '制作技能检定', which never equals 'making-skill-rolls'. The moment a heading is translated, every data-hash pointing at it stops resolving and the link scrolls to the top of the page instead of the section. Silent — no error, no broken-link styling.",
+   "breaks_if_translated": "String#slugify is non-strict here, so CJK survives verbatim: '<h2>制作技能检定</h2>' slugifies to '制作技能检定', which never equals 'making-skill-rolls'. The moment a heading is translated, every data-hash pointing at it stops resolving and the link scrolls to the top of the page instead of the section. Silent \u2014 no error, no broken-link styling.",
    "remediation": "Translate the heading TEXT but add the original English slug as an explicit id: `<h2 id=\"making-skill-rolls\">制作技能检定</h2>`. `heading.id ||` wins over slugifyHeading, so all existing data-hash values keep resolving and no data-hash needs to be rewritten. This is the ONLY approach that does not require editing both ends.",
    "alternative": "Rewrite every data-hash to the new CJK slug. Rejected: 346 occurrences across 153 distinct slugs in two packs, and any later heading edit silently re-breaks them."
   },
   "macro_commands": {
    "tier": "T-FROZEN",
    "what": "Macro.command is executable JavaScript, and Babele translates it by default (modules/babele/script/mapping/default-mappings.js:163 maps \"command\": \"command\").",
-   "rule": "NEVER emit `command` into compendium/cn and never translate it. The extractor in 4-常用脚本/extract does not emit it today — that is load-bearing, not incidental. Macro dialog labels are already localised by the macros themselves through game.i18n.localize('ALIENRPG.*'), so there is nothing inside a command that needs translating; put any new string in lang/cn.json instead.",
+   "rule": "NEVER emit `command` into compendium/cn and never translate it. The extractor in 4-常用脚本/extract does not emit it today \u2014 that is load-bearing, not incidental. Macro dialog labels are already localised by the macros themselves through game.i18n.localize('ALIENRPG.*'), so there is nothing inside a command that needs translating; put any new string in lang/cn.json instead.",
    "macros_carrying_frozen_literals": [
     {
      "pack": "system",
@@ -3369,7 +3429,7 @@
      "why": "these strings are compared with === (or passed to getName) by the macro's own code"
     }
    ],
-   "breaks_if_translated": "Translate 'Alien Mother Tables' / 'Alien Creature Tables' inside the two system macros and their table <select> comes up empty (the forEach filter matches nothing) — the GM 'roll on a table' dialog lists no tables at all. Translate the getName() literal in the corerules macro and it throws at `table.formula`. Both are silent to the user.",
+   "breaks_if_translated": "Translate 'Alien Mother Tables' / 'Alien Creature Tables' inside the two system macros and their table <select> comes up empty (the forEach filter matches nothing) \u2014 the GM 'roll on a table' dialog lists no tables at all. Translate the getName() literal in the corerules macro and it throws at `table.formula`. Both are silent to the user.",
    "found_by": "2026-08-29 adversarial pass."
   },
   "name_substring_tests": {
@@ -3383,7 +3443,7 @@
       "systems/alienrpg/module/sheets/synthetic-sheet.mjs:415"
      ],
      "rule": "The translated name must still satisfy AT LEAST ONE of the three string tests. The T-BILINGUAL form '中文 <English>' keeps ' RPG ' as long as the English tail is kept intact; a pure-Chinese rename drops it.",
-     "data_leg_status": "DEAD — no item in any pack has system.attributes.class.value === 'RPG' (measured), so the NAME test is the only live path.",
+     "data_leg_status": "DEAD \u2014 no item in any pack has system.attributes.class.value === 'RPG' (measured), so the NAME test is the only live path.",
      "current_matches": [
       {
        "pack": "corerules",
@@ -3419,23 +3479,23 @@
  "upstream_defects": [
   {
    "id": "corerules-welcome-journal-nbsp",
-   "severity": "encoding hazard, NOT a break — corrected 2026-08-29",
+   "severity": "encoding hazard, NOT a break \u2014 corrected 2026-08-29",
    "where": "modules/alien-evolved-corerules/module/init.js:11 and corerules JournalEntry yYRGRr4jU0cWDpFm",
-   "what": "BOTH SIDES USE U+00A0. An earlier revision of this register claimed the JS literal used ASCII spaces while the document used NBSP, and therefore that the lookup was already broken upstream. That was WRONG. Byte dump of init.js line 11: b'export const welcomeJournalEntry = \"CORE RULESÂ -Â HOWÂ TOÂ USEÂ THISÂ MODULE\"'. The five NBSPs are identical on both sides, so game.journal.getName() resolves and .show() works in 1.0.2.",
+   "what": "BOTH SIDES USE U+00A0. An earlier revision of this register claimed the JS literal used ASCII spaces while the document used NBSP, and therefore that the lookup was already broken upstream. That was WRONG. Byte dump of init.js line 11: b'export const welcomeJournalEntry = \"CORE RULESÂ\u00a0-Â\u00a0HOWÂ\u00a0TOÂ\u00a0USEÂ\u00a0THISÂ\u00a0MODULE\"'. The five NBSPs are identical on both sides, so game.journal.getName() resolves and .show() works in 1.0.2.",
    "consequence_for_us": "The lookup is LIVE, so the freeze is load-bearing, not decorative. Do not 'fix' the NBSPs into ASCII spaces on either side, and never normalise whitespace in this Babele key. The earlier 'already broken, do not bother' framing would have licensed translating this journal name and would have broken the Core Rules post-import flow."
   },
   {
    "id": "critical-injuries-healing-time-markup",
    "severity": "content defect, 2 rows",
    "where": "corerules RollTable 'Critical injuries', results 11-11 and 12-12",
-   "what": "Those two rows write '<strong>HEALING TIME:</strong>' with NO space after the colon, so /[:] / does not split there and the array is 9 elements instead of 10. testArray[9] is undefined and `testArray[9].length` at systems/alienrpg/module/documents/actor.mjs:1889 would throw — except line systems/alienrpg/module/documents/actor.mjs:1888 compares undefined !== 'Permanent' first, which is true, so it DOES reach the .length and throws. The starterset copy of the same two rows has the space and is fine.",
+   "what": "Those two rows write '<strong>HEALING TIME:</strong>' with NO space after the colon, so /[:] / does not split there and the array is 9 elements instead of 10. testArray[9] is undefined and `testArray[9].length` at systems/alienrpg/module/documents/actor.mjs:1889 would throw \u2014 except line systems/alienrpg/module/documents/actor.mjs:1888 compares undefined !== 'Permanent' first, which is true, so it DOES reach the .length and throws. The starterset copy of the same two rows has the space and is fine.",
    "consequence_for_us": "Keep the ': ' when translating; do not propagate the defect. The QA gate flags any translated row whose split length is not 10."
   },
   {
    "id": "evolved-crit-time-limit-never-matches",
    "severity": "upstream behaviour, do not 'fix'",
    "where": "RollTable 'EV - Critical Injuries', index-5 cells",
-   "what": "Emits '–' / 'Shift' / 'Stretch' / 'Round'; none matches any ALIENRPG.One* + ' ' case, so healTime is always 0 in Evolved mode."
+   "what": "Emits '\u2013' / 'Shift' / 'Stretch' / 'Round'; none matches any ALIENRPG.One* + ' ' case, so healTime is always 0 in Evolved mode."
   },
   {
    "id": "textdraw-label-typo",
@@ -3460,14 +3520,14 @@
    "was": "systems/alienrpg/module/apps/init.mjs:11",
    "now": "systems/alienrpg/module/apps/init.mjs:14",
    "why": "Line 11 is the COMMENTED-OUT predecessor `// export const welcomeJournalEntry = '00.00 HoD - How To Use This Module';`. 3-line drift, exactly the class the survey was warned about. All 111 file:line citations in this register were re-resolved against source; this was the only one that landed on the wrong line.",
-   "impact": "documentation only — the frozen string itself was already correct"
+   "impact": "documentation only \u2014 the frozen string itself was already correct"
   },
   {
    "id": "C2",
    "where": "sections.name_lookups.entries[corerules.welcomeJournalEntry] and upstream_defects[corerules-welcome-journal-nbsp]",
    "was": "string held ASCII spaces; verified_target_exists=false; already_broken_upstream=true; the defect note claimed the JS literal used U+0020 while the document used U+00A0",
    "now": "string holds U+00A0 in all five gaps; verified_target_exists=true; the defect is reclassified as an encoding hazard, not a break",
-   "why": "Byte dump of modules/alien-evolved-corerules/module/init.js line 11 is b'export const welcomeJournalEntry = \"CORE RULESÂ -Â HOWÂ TOÂ USEÂ THISÂ MODULE\"' — the literal ALREADY uses NBSP and matches the document byte for byte. The claim was inverted.",
+   "why": "Byte dump of modules/alien-evolved-corerules/module/init.js line 11 is b'export const welcomeJournalEntry = \"CORE RULESÂ\u00a0-Â\u00a0HOWÂ\u00a0TOÂ\u00a0USEÂ\u00a0THISÂ\u00a0MODULE\"' \u2014 the literal ALREADY uses NBSP and matches the document byte for byte. The claim was inverted.",
    "impact": "MATERIAL. The old entry froze the wrong string (a gate keyed on it would never have matched the real Babele key) AND told translators the lookup was already dead, which would have licensed translating the journal name and actually broken the Core Rules post-import flow."
   },
   {
@@ -3475,14 +3535,14 @@
    "where": "sections.crit_parse_lockstep.tables[*].rows_with_nonstandard_split (new)",
    "was": "only the two 9-element corerules rows were recorded, as rows_that_differ_between_packs",
    "now": "all three deviating ranges recorded with their measured per-pack split length: 'EV - Critical Injuries' 11-11 = 11 in BOTH packs, 'Critical injuries' 11-11 / 12-12 = 9 in corerules",
-   "why": "Replaying the actor.mjs pipeline over all 144 shipped crit rows found a row that is LONGER than expected, not shorter: 'EV - Critical Injuries' 11-11 ends with a trailing <br /> after an empty HEALING TIME cell, giving 11 elements. scan_crit_lockstep.py only tolerated expected-1, so it raised SPLIT_SHAPE on a faithful translation of upstream — a false positive, caught by the specificity fixture.",
-   "impact": "gate correctness — the gate now tolerates the measured upstream lengths and no others"
+   "why": "Replaying the actor.mjs pipeline over all 144 shipped crit rows found a row that is LONGER than expected, not shorter: 'EV - Critical Injuries' 11-11 ends with a trailing <br /> after an empty HEALING TIME cell, giving 11 elements. scan_crit_lockstep.py only tolerated expected-1, so it raised SPLIT_SHAPE on a faithful translation of upstream \u2014 a false positive, caught by the specificity fixture.",
+   "impact": "gate correctness \u2014 the gate now tolerates the measured upstream lengths and no others"
   },
   {
    "id": "C4",
    "where": "sections.rolltable_names",
    "was": "10 frozen RollTable names, all found by scanning module JS",
-   "now": "11 — added 'EV - 48a. LS - DANGER EVENT DETAIL', looked up UNGUARDED by the corerules pack's own Macro.command",
+   "now": "11 \u2014 added 'EV - 48a. LS - DANGER EVENT DETAIL', looked up UNGUARDED by the corerules pack's own Macro.command",
    "why": "Name lookups also live inside pack CONTENT. The corerules Macro 'Roll on Danger Event Detail Table' does game.tables.getName(\"EV - 48a. LS - DANGER EVENT DETAIL\") and dereferences .formula on the result.",
    "impact": "MATERIAL. That table is in the corerules Babele `tables` block and would have been translated on the first pass; the only Macro the Core Rules ships would then be dead."
   },
@@ -3490,7 +3550,7 @@
    "id": "C5",
    "where": "sections.item_names",
    "was": "2 entries (PACK MULE, TAKE CONTROL)",
-   "now": "6 — added NERVES OF STEEL, TOUGH, HARDENED, STOIC",
+   "now": "6 \u2014 added NERVES OF STEEL, TOUGH, HARDENED, STOIC",
    "why": "actor-character.mjs and actor-synthetic.mjs each carry SIX `Attrib.name.toUpperCase() === ...` talent comparisons, not two. HARDENED and STOIC have live documents in the corerules pack ('Hardened' as an adventure-level talent AND embedded in Actor 'EV - MINING WILDCATTER'; 'Stoic' as an adventure-level talent).",
    "impact": "MATERIAL for HARDENED and STOIC (silent max-Health / Stamina-ability drift on translation); reserved-only for NERVES OF STEEL and TOUGH, which have no document today."
   },
@@ -3500,13 +3560,13 @@
    "was": "absent",
    "now": "Macro.command declared T-FROZEN, with the frozen literals each shipped macro contains",
    "why": "Babele's default mapping translates Macro.command (modules/babele/script/mapping/default-mappings.js:163). The two system macros compare t.folder.name === 'Alien Mother Tables' / 'Alien Creature Tables' inside their own source.",
-   "impact": "Latent today — the project extractor emits only `name` for macros — but nothing recorded that this omission is deliberate, so any extractor change would have reintroduced it silently."
+   "impact": "Latent today \u2014 the project extractor emits only `name` for macros \u2014 but nothing recorded that this omission is deliberate, so any extractor change would have reintroduced it silently."
   },
   {
    "id": "C7",
    "where": "sections.crit_parse_lockstep.other_branches (new)",
    "was": "only the `case \"character\"` parse and its two tables were registered",
-   "now": "the `synthetic`/`creature` and `spacecraft` parses are registered too, with their own splitter (/[:] |<br \\/>/gi — literal '<br />', no normalisation step), their own fixed indices ([0],[1] and [0],[2],[5]) and their own four tables",
+   "now": "the `synthetic`/`creature` and `spacecraft` parses are registered too, with their own splitter (/[:] |<br \\/>/gi \u2014 literal '<br />', no normalisation step), their own fixed indices ([0],[1] and [0],[2],[5]) and their own four tables",
    "why": "actor.mjs:2101 and actor.mjs:2134 each split a drawn description and read fixed indices out of it, exactly like the character branch.",
    "impact": "MATERIAL. Four more RollTables (Critical Injuries on Synthetics / on Xenomorphs / Spaceship Minor / Spaceship Major) carry an index contract that nothing was checking."
   },
@@ -3523,7 +3583,7 @@
    "where": "sections.name_lookups.entries[corerules.welcomeJournalEntry].encoding_hazard",
    "was": "'THE FIVE GAPS ARE U+00A0'",
    "now": "'THE SIX GAPS ARE U+00A0', plus explicit nbsp_count / space_count fields",
-   "why": "Byte dump of the literal at modules/alien-evolved-corerules/module/init.js:11 gives b'CORE RULES\\xc2\\xa0-\\xc2\\xa0HOW\\xc2\\xa0TO\\xc2\\xa0USE\\xc2\\xa0THIS\\xc2\\xa0MODULE' — six NBSP, one ASCII space. The string_codepoints field already listed six; only the prose was off by one.",
+   "why": "Byte dump of the literal at modules/alien-evolved-corerules/module/init.js:11 gives b'CORE RULES\\xc2\\xa0-\\xc2\\xa0HOW\\xc2\\xa0TO\\xc2\\xa0USE\\xc2\\xa0THIS\\xc2\\xa0MODULE' \u2014 six NBSP, one ASCII space. The string_codepoints field already listed six; only the prose was off by one.",
    "impact": "documentation only, but this is a register whose entire value is byte-exactness."
   }
  ],
@@ -3545,7 +3605,7 @@
    "coverage": "all 17 injections produced at least one finding"
   }
  },
- "_generator_status": "WARNING: 4-常用脚本/qa/build_register.py no longer reproduces this file. The C1/C2/C3 corrections, the gate_tests block, rows_with_nonstandard_split, and everything added by the 2026-08-29 adversarial pass (C4-C9) were written onto the JSON directly. Re-running build_register.py WILL DELETE them. Treat this JSON as the source of truth until the generator is brought back in sync.",
+ "_generator_status": "WARNING: 4-常用脚本/qa/build_register.py no longer reproduces this file. The C1/C2/C3 corrections, the gate_tests block, rows_with_nonstandard_split, and everything added by the 2026-08-29 adversarial pass (C4-C9) were written onto the JSON directly. Re-running build_register.py WILL DELETE them. Treat this JSON as the source of truth until the generator is brought back in sync.  |  2026-08-29 (second pass, journal-name un-freeze): the warning above was PROVEN, the hard way. Re-running build_register.py to add the shim record deleted 410 keys \u2014 the whole corrections_2026_08_29 / gate_tests_2026_08_29 / gate_tests_2026_08_29_pass2 blocks, the macro_commands and name_substring_tests sections, rows_with_nonstandard_split, and it silently reverted 14 hand-verified values (init.mjs:14 back to :11, the corerules NBSP finding back to its inverted form, item_names 6->2, rolltable_names 11->10). The file was restored from backup and ONLY the shim deltas were merged back in. build_register.py has since been given a destructive-overwrite guard (it now aborts instead of dropping top-level keys or sections it cannot reproduce), and its source DOES carry the shim block, so a future re-sync will emit it. UNTIL THE GENERATOR IS BACK IN SYNC, THIS JSON REMAINS THE SOURCE OF TRUTH \u2014 edit it, do not regenerate it.",
  "gate_tests_2026_08_29_pass2": {
   "_": "Second, adversarial pass. Fixtures are rebuilt from compendium/en by scratchpad/build_fixture.py + build_gaps.py and driven by scratchpad/run_gates.py; every number below is that harness's own stdout.",
   "day_one": {
@@ -3554,10 +3614,10 @@
    "scan_crit_lockstep.py": "checked=8 violations=0 exit=0 (lang-only leg; the 4 new other-branch tables are listed but nothing is translated yet)"
   },
   "specificity": {
-   "fixture": "GOOD — a full rule-abiding cn translation of all three packs: every T-FROZEN name kept English, the 12 skill-stunts renamed to their lang/cn.json values, every actor rTables/cTables ref written out, and all 144 character-branch + 58 other-branch crit rows translated in lockstep (labels and injury text Chinese, cells and markup intact).",
+   "fixture": "GOOD \u2014 a full rule-abiding cn translation of all three packs: every T-FROZEN name kept English, the 12 skill-stunts renamed to their lang/cn.json values, every actor rTables/cTables ref written out, and all 144 character-branch + 58 other-branch crit rows translated in lockstep (labels and injury text Chinese, cells and markup intact).",
    "scan_name_lookup_traps.py": "checked=195 violations=0 exit=0",
    "scan_crit_lockstep.py": "checked=190 violations=0 exit=0",
-   "note": "Both must be exit=0 with checked>0. The two upstream-deviant rows ('Spaceship Major Component Damage' 8-8 and 'Critical Injuries on Xenomorphs' 3-3) are tolerated by length and then skipped for the index check — otherwise a faithful translation would fail on an upstream markup bug."
+   "note": "Both must be exit=0 with checked>0. The two upstream-deviant rows ('Spaceship Major Component Damage' 8-8 and 'Critical Injuries on Xenomorphs' 3-3) are tolerated by length and then skipped for the index check \u2014 otherwise a faithful translation would fail on an upstream markup bug."
   },
   "sensitivity": {
    "fixture": "23 single-injection mutants of GOOD, one rule violation each",
@@ -3690,13 +3750,13 @@
     }
    },
    "legend": {
-    "G1_danger_event_table_translated": "corerules Macro's game.tables.getName target — caught by rolltable_names entry 11",
-    "G2_hardened_stoic_talents": "HARDENED / STOIC talent names — caught by item_names entries 3-6",
-    "G3_spacecraft_crit_split": "'<br /><br />' collapsed in a Spaceship crit row — caught by crit_parse_lockstep.other_branches",
-    "G4_synthetic_crit_split": "full-width colon in a Synthetics crit row — same",
-    "G5_rpg_launcher_name": "'M5A3 RPG Launcher' loses ' RPG ' — caught by name_substring_tests",
-    "G6_macro_command_translated": "Macro.command emitted and translated — caught by macro_commands",
-    "G7_xenomorph_crit_split": "full-width colon in a Xenomorphs crit row — caught by other_branches"
+    "G1_danger_event_table_translated": "corerules Macro's game.tables.getName target \u2014 caught by rolltable_names entry 11",
+    "G2_hardened_stoic_talents": "HARDENED / STOIC talent names \u2014 caught by item_names entries 3-6",
+    "G3_spacecraft_crit_split": "'<br /><br />' collapsed in a Spaceship crit row \u2014 caught by crit_parse_lockstep.other_branches",
+    "G4_synthetic_crit_split": "full-width colon in a Synthetics crit row \u2014 same",
+    "G5_rpg_launcher_name": "'M5A3 RPG Launcher' loses ' RPG ' \u2014 caught by name_substring_tests",
+    "G6_macro_command_translated": "Macro.command emitted and translated \u2014 caught by macro_commands",
+    "G7_xenomorph_crit_split": "full-width colon in a Xenomorphs crit row \u2014 caught by other_branches"
    }
   }
  }

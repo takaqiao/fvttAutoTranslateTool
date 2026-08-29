@@ -1,0 +1,35 @@
+{
+  "_README": [
+    "模板抢注（通道 B）的上游锚点，插件侧。与 alienrpg-4.1.13/UPSTREAM-TEMPLATE-PINS.json 同格式、同看守逻辑。",
+    "抢注是整份替换：上游改一个字，我们那份就静默过期且不报错。",
+    "由 qa/adversarial_hardcoded_patch.mjs 的 D 组机械看守。",
+    "upstream_sha256 对不上 = 上游改了模板，必须重新推导译文模板，然后才允许更新本文件。",
+    "baseline_sha256 对不上 = 7-其他内容/english-baseline/ 里的快照被改坏了或没跟上版本。",
+    "skeleton 是标签骨架（丢掉文本与 handlebars），译文模板必须与基线**逐标签相同**。",
+    "D 组另外做一条骨架哈希看不见的比对：**去掉 {{!-- 注释 --}} 之后**的全部 handlebars",
+    "  表达式序列，译文与基线必须逐条相同 —— {{#if}}/{{#each}} 被改坏不产生标签差异，",
+    "  骨架哈希抓不到，这一条专抓那个。注释被排除，是因为译文模板头部多了一段说明它是",
+    "  汉化副本的中文注释。"
+  ],
+  "module_id": "motion-tracker-multideck",
+  "module_version": "1.0.2",
+  "generated": "2026-08-29",
+  "templates": {
+    "modules/motion-tracker-multideck/templates/link-manager.hbs": {
+      "ours": "modules/alienrpg-cn/templates/multideck/link-manager.hbs",
+      "upstream_sha256": "b6f3b143f3c11eea11dad27e60172c5fc1a158f2ba1c87205adf08e7b56bdd0e",
+      "upstream_bytes": 7379,
+      "baseline_path": "7-其他内容/english-baseline/motion-tracker-multideck-1.0.2/templates/link-manager.hbs",
+      "baseline_sha256": "b6f3b143f3c11eea11dad27e60172c5fc1a158f2ba1c87205adf08e7b56bdd0e",
+      "ours_sha256": "e38d2682ab41874acc1a1cbc1d5dadc6fbc9702052a526554e5df0058ec09680",
+      "skeleton_sha256": "6346b7dfee47d0edbbf1f4c92f698e08471df9d63c5fc6126342bf7fe8019161",
+      "skeleton_tag_count": 137,
+      "baseline_visible_english_count": 29,
+      "baseline_attr_strings": [
+        "title=\"Delete this Scene link\"",
+        "placeholder=\"e.g. USCSS Chupacabra A/B\"",
+        "title=\"Delete this matching point\""
+      ]
+    }
+  }
+}

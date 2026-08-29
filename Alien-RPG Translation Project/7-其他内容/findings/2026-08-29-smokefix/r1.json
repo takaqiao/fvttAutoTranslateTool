@@ -1,0 +1,197 @@
+{
+ "changes": [
+  {
+   "key_or_row": "ALIENRPG.SkillheavyMach + ALIENRPG.SkillheavyMachAbb (6-工作区/phase1/lang-core.json)",
+   "from": "重型机械 (4)",
+   "to": "机械 (2)",
+   "why": "Reverses a level-1-source adoption; recorded as RULINGS R5-heavy-machinery. The decisive argument is not width: character-skills.hbs:10-11 renders `{{Skill}} ({{AbilityAbb}})`, so the attribute (力量) — the only thing 「重型」 signals — is already printed one space to the right. No second machinery skill exists in the 12; the 机械/通信科技 line already separates physical machines from computers+comms. 机械 was also upstream's own A-stratum value.",
+   "description_evidence": "Core rules ch.3: 'Hard work is part of life for any roughneck on the Frontier... Roll for this skill when you attempt to use, repair, jury-rig or break any kind of heavy machinery.' Nothing in that sentence needs 「重型」 to disambiguate against another skill."
+  },
+  {
+   "key_or_row": "ALIENRPG.SkillrangedCbt (6-工作区/phase1/lang-core.json)",
+   "from": "远程战斗 (4)",
+   "to": "射击 (2)",
+   "why": "Reverses a level-1-source adoption; recorded as RULINGS R6-ranged-combat. Named from the description's head verb (fire), and it completes a decoupling the project already committed to: D2-engaged gave Melee=肉搏 and the Close Combat skill=近战, deliberately splitting weapon-category from skill-name. Ranged was the only side still coupled (category 远程 / skill 远程战斗). Now both sides are isomorphic: 肉搏/近战, 远程/射击 — and 近战·射击 is the established Chinese TRPG pair. Cost weighed: 射击 does not literally cover thrown grenades, but config.mjs:442 weapon_type_list has only 远程/肉搏, thrown weapons ARE 远程-category items, and every to-hit path in item.mjs reads skills.rangedCbt.mod regardless.",
+   "description_evidence": "Core rules ch.3: 'If you have a ranged weapon, you can take down your enemy from a distance without getting your hands bloody. Use the RANGED COMBAT skill to **fire** all types of ranged weapons.'"
+  },
+  {
+   "key_or_row": "ALIENRPG.maxrng (6-工作区/phase1/lang-combat.json)",
+   "from": "最远射程 (4)",
+   "to": "射程 (2)",
+   "why": "VERDICT ON THE COLLISION QUESTION: sharing 射程 with ALIENRPG.Range is not a new collision — it REMOVES an existing one. (1) The same grid column lCol15 on the same actor's inventory tab is already labelled 射程 by crtui-character-inventory.hbs:26 and vehicle-inventory.hbs:12; only character-inventory.hbs:28/:127/:227 used maxrng, and character-sheet.mjs:92/:107 register those as two SKINS of one sheet — toggling the skin renamed the column. (2) On item-weapon.hbs both keys bind the identical field name='system.attributes.range.value' with the identical selectOptions, in mutually exclusive isEvolved branches — no template ever renders both at once. (3) character-inventory.hbs:28 sits OUTSIDE the isEvolved guard, so core-ruleset players saw a qualifier for a distinction their ruleset does not have. Honest caveat recorded in the note: the width gain is header-row-only — the column's data cells hold 极远距离/接触距离 (4 chars), so the column does not get narrower. minrng stays 最近射程 (marked/unmarked pair).",
+   "description_evidence": "item-weapon.hbs:21-28 (Evolved, type 1) vs :34-53 (else) — the two branches are `{{#if isEvolved}}…{{else}}…{{/if}}`, so Range and maxrng are never co-rendered."
+  },
+  {
+   "key_or_row": "ALIENRPG.Water (6-工作区/phase1/lang-gap.json)",
+   "from": "水 (1)",
+   "to": "饮水 (2)",
+   "why": "A full sweep of every grid cell in every live .hbs found 水 to be the ONLY per-column length outlier in the whole sheet set. Grid area lCol10 renders, in the same column on one tab, 伤害(2) / 水(1) / 空气(2) across the Weapons/Items/Armor header rows (spacecraft: 射程/水/空气); grid-Consumables in character-general.hbs:168-188 stacks 空气/食物/水/电力 in one 119px label column. 饮水 is not padding — it is more precise: the field is the crew's drinking-water supply, and it keeps the substance-noun form of its siblings 食物/空气.",
+   "description_evidence": "Runtime read-back: character-sheet.mjs:1396-97 builds the supply-roll label as localize('ALIENRPG.'+spbutt)+' '+localize('ALIENRPG.Supply') → 「饮水 余量检定」, which reads correctly."
+  },
+  {
+   "key_or_row": "6-工作区/phase2/SYS-I1.cn.json — skill-stunts item names",
+   "from": "Heavy Machinery=重型机械, Ranged Combat=远程战斗",
+   "to": "Heavy Machinery=机械, Ranged Combat=射击",
+   "why": "T-EXACT lockstep for A. Verified byte-equal against the assembled lang for all 12 skills with repr()/utf-8 bytes, then verified again end-to-end between the SHIPPED lang/cn.json and the SHIPPED compendium pack: 0 mismatches."
+  },
+  {
+   "key_or_row": "6-工作区/phase2/pages/SYS-J6.cn.html — changelog prose",
+   "from": "…使用近战技能，而不是远程战斗（感谢 @Takara）。",
+   "to": "…使用近战技能，而不是射击（感谢 @Takara）。",
+   "why": "Lockstep fallout of R6: the MU/TH/ER changelog names the skill in prose (EN: 'now uses Close Combat skill rather then Ranged Combat'). Fixed in the SLICE, then the pack was regenerated with prep_sys_units.py --collect; the rebuild diff touched exactly one leaf."
+  },
+  {
+   "key_or_row": "7-其他内容/glossary/RULINGS.json",
+   "from": "4 rulings (R1-R4); R3 said 通信科技 with no record of the width challenge",
+   "to": "R3 carries a `reaffirmed` block; new R5-heavy-machinery, R6-ranged-combat, R8-water in rulings[]; R7-max-range parked in a new ui_label_rulings[]; new _examined_and_left_unchanged for Comtech / Power+Pwr / Healing Time / Min Rng",
+   "why": "R3 no longer says one thing while the glossary says another — the challenge, the verdict, the new evidence and where the width cost was paid instead are all recorded. R5/R6 are the project's first rulings to overturn a level-1 source, so each states the exception it invokes and its limit. R7 is outside rulings[] because build_glossary_v1.py hard-exits on a ruling naming a term absent from `terms`, and 'Max Rng' is a UI key, not a glossary term."
+  }
+ ],
+ "files_written": [
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-core.json",
+   "what": "SkillheavyMach + SkillheavyMachAbb → 机械; SkillrangedCbt → 射击; Skillcomtech untouched"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-core.notes.json",
+   "what": "Rewrote the why for the three skill keys incl. an explicit keep-rationale on Skillcomtech"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-combat.json",
+   "what": "maxrng → 射程 (minrng, Range, HealTime unchanged)"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-combat.notes.json",
+   "what": "maxrng note rewritten with the two-skins/one-field evidence; HealTime note now carries the Permanent-value rejection of 疗程"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-gap.json",
+   "what": "Water → 饮水 (Pwr unchanged at 电力)"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase1\\lang-gap.notes.json",
+   "what": "Water note rewritten; Pwr note corrected — it still claimed 威力 while the slice shipped 电力 — now grounded in the _onRollSupply code path"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\SYS-I1.cn.json",
+   "what": "skill-stunts item names for Heavy Machinery and Ranged Combat (T-EXACT lockstep)"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase2\\pages\\SYS-J6.cn.html",
+   "what": "One changelog sentence: 远程战斗 → 射击"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\7-其他内容\\glossary\\RULINGS.json",
+   "what": "R3 reaffirmation + R5/R6/R8 + R7 (parked) + _examined_and_left_unchanged"
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\lang\\cn.json",
+   "what": "GENERATED by 4-常用脚本/qa/assemble_lang.py — not hand-edited. 30983 bytes."
+  },
+  {
+   "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\compendium\\cn\\alienrpg.alien-rpg-system.json",
+   "what": "GENERATED by 4-常用脚本/parallel/prep_sys_units.py --collect --out 6-工作区/phase2 — not hand-edited. Diff vs. previous build: exactly 1 leaf (the changelog sentence)."
+  }
+ ],
+ "kept_unchanged": [
+  {
+   "key_or_row": "ALIENRPG.Skillcomtech",
+   "value": "通信科技 (4)",
+   "why": "VERDICT: R3 re-affirmed, 通讯 rejected. The ch.3 description writes the two halves in coordination — 'any type of **computer or communications** technology' — and its lead sentence ('Programming androids, mainframes…') is entirely on the COMPUTER side. 通讯 keeps only the lesser half, which makes it strictly WORSE than 计算机科学, the candidate R3 already rejected — that one at least matched the lead sentence. 科技 remains vacuous. No 2-char form holds computer + comms + program/decrypt together, so this is the case where width must yield to meaning. It is now the only 4-char name among the 12, and the crew-station column in spacecraft-general.hbs improved from 驾驶/通信科技/重型机械 = 2/4/4 to 2/4/2."
+  },
+  {
+   "key_or_row": "ALIENRPG.Pwr (and ALIENRPG.Power)",
+   "value": "电力 (2)",
+   "why": "VERDICT: keep 电力, do not move to 电量. Three reasons, the first fatal: (1) the cell under the Pwr header is data-spbutt=\"Power\", and _onRollSupply (character-sheet.mjs:1396-97) builds its chat label from **ALIENRPG.Power**, not from Pwr — click the column and the label comes from the other key, so the two Chinese strings must be identical. (2) ALIENRPG.Power is also the item CATEGORY name at config.mjs:520 (item_types_list[8], a class of power gear); a category called 电量 is wrong. (3) ALIENRPG.Supply is already 余量检定, so 「电量 余量检定」 is self-redundant. The owner's 'unclear' reading came from the row itself: Items read 数量|电力|食物|水 with a 1-char tail that broke the consumable grouping; after Water→饮水 it reads 数量|电力|食物|饮水 and 电力 is read as one of the game's four Consumables without needing to argue for itself."
+  },
+  {
+   "key_or_row": "ALIENRPG.HealTime",
+   "value": "治愈时间 (4)",
+   "why": "VERDICT: 疗程 FAILS the duration test, and so does every other 2-char form. actor.mjs:2074 puts the crit table's column 9 into healingtime verbatim. Measured from the raw dump, that column's value set is: 'Critical injuries' = [[1d6]]days x11 / [[2d6]]days x10 / [[3d6]]days x4 / **Permanent x2** / empty x9; 'EV - Critical Injuries' = 1d6-4d6 days x26 / Shift x2 / empty x8 (empty falls back to ALIENRPG.None). 疗程 denotes a bounded course of administered treatment, so 「疗程：永久」 is a contradiction and 「疗程：无」 reads as 'no treatment needed'. Every 2-char alternative in the heal/recover family (恢复 / 伤愈 / 休养 / 痊愈) inverts the same way against Permanent. The neutral duration word 时长 collides with its own sibling 时限 (Time Limit) two lines above; the 伤* forms (伤期) collide with 伤势 (Injury) one line above — the sibling set has already spent 时 and 伤, the only two viable head characters. Also, these are five independent <h4> lines, not fixed-width columns, so the 4-char label costs 2 characters of value offset on one line — far cheaper than a label that lies about Permanent."
+  },
+  {
+   "key_or_row": "ALIENRPG.minrng",
+   "value": "最近射程 (4)",
+   "why": "Appears only at item-weapon.hbs:21 in the Evolved ranged-weapon branch; it is in no column header, so it has no width problem. Left as the marked member of the pair against the now-unmarked 射程."
+  },
+  {
+   "key_or_row": "spacecraft-inventory.hbs lCol1 — ALIENRPG.Offensive / ALIENRPG.Defensive",
+   "value": "进攻型 / 防御型 (3) beside 武器 / 物品 / 护甲 (2)",
+   "why": "SWEEP FINDING, reported and left. These are ship-armament section names, not field labels; lCol1 is justify-self:left in a 2em column so there is no centring raggedness, and shortening to 进攻/防御 would turn category nouns into verbs."
+  },
+  {
+   "key_or_row": "ALIENRPG.CriticalInjuries and the untranslated crit table",
+   "value": "English",
+   "why": "Owner item 4 — confirmed deliberate (lang_keep_english; actor.mjs:1815 looks the table up by its English name). Not touched."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "assemble_lang.py baseline (before edits)",
+   "result": "PASS — all 11 invariants; 590 en keys / 584 covered / 6 deliberately unwritten / 16 code-only"
+  },
+  {
+   "check": "assemble_lang.py after edits (write run)",
+   "result": "PASS — all 11 invariants; wrote 1-系统汉化插件/lang/cn.json, 30983 bytes"
+  },
+  {
+   "check": "assemble_lang.py --check final re-run",
+   "result": "PASS — all 11 invariants, counts unchanged (600 total written)"
+  },
+  {
+   "check": "T-EXACT byte-equality, lang slice vs pack slice, all 12 skills, printed with repr() + utf-8 bytes",
+   "result": "PASS — 12/12 EQUAL (e.g. 机械 = b'\\xe6\\x9c\\xba\\xe6\\xa2\\xb0', 射击 = b'\\xe5\\xb0\\x84\\xe5\\x87\\xbb')"
+  },
+  {
+   "check": "T-EXACT end-to-end, SHIPPED 1-系统汉化插件/lang/cn.json vs SHIPPED 1-系统汉化插件/compendium/cn pack",
+   "result": "PASS — 0 mismatches across all 12"
+  },
+  {
+   "check": "Skill name widths after change",
+   "result": "机械/耐力/近战/机动/射击/驾驶/侦察/通信科技/生存/指挥/操控/医疗 — 11 at 2 chars, 1 outlier (通信科技), down from 3"
+  },
+  {
+   "check": "Inventory header rows re-derived and re-rendered across all live .hbs",
+   "result": "PASS — every Weapons/Items/Armor header row in character-inventory, crtui-character-inventory and vehicle-inventory is now uniformly 2-char (e.g. 名称|数量|射程|电力|备弹|伤害|kg and 名称|数量|电力|食物|饮水|kg)"
+  },
+  {
+   "check": "Full sweep of every grid cell in every live .hbs for per-column length outliers",
+   "result": "6 before → 2 after; both survivors reported and justified (spacecraft-general Attr1 通信科技; spacecraft-inventory lCol1 进攻型/防御型)"
+  },
+  {
+   "check": "grid-Consumables label column (character-general.hbs:168-188)",
+   "result": "空气(2)/食物(2)/饮水(2)/电力(2) — was 空气/食物/水(1)/电力"
+  },
+  {
+   "check": "scan_name_lookup_traps.py",
+   "result": "PASS — checked=23, violations=0"
+  },
+  {
+   "check": "Project-wide exact-value scan for the three retired strings in shipping payloads",
+   "result": "0 remaining — the only hits left are in generated glossary artefacts (blocked, see open issues), the mined-corpus evidence file, and dated findings reports, all of which correctly retain the historical value"
+  },
+  {
+   "check": "prep_sys_units.py --collect rebuild diff vs. the previous pack",
+   "result": "exactly 1 differing leaf: the changelog sentence 远程战斗 → 射击. Nothing else moved."
+  },
+  {
+   "check": "build_glossary_v1.py with the new rulings",
+   "result": "BLOCKED but CLEAN — 9 failures, byte-identical to the baseline run with the original RULINGS.json (verified by git-stashing RULINGS.json and re-running). Zero new failures introduced: no CN-COLLISION for 机械/射击/饮水, no EXACT-TAIL, no RULE-VIOLATION."
+  },
+  {
+   "check": "Module-level probe of build_glossary_v1.py terms (proves the rulings land)",
+   "result": "Heavy Machinery cn='机械' level='RULING'; Ranged Combat cn='射击' level='RULING'; Comtech cn='通信科技' level='RULING'; Water cn='饮水' level='RULING' — all four applied, lang_key bindings intact"
+  }
+ ],
+ "open_issues": [
+  "PRE-EXISTING T-EXACT BREAK FOUND IN THE SMOKE-TESTED BUILD — worth telling the owner. The shipped compendium pack still carried the OLD A-stratum item names 机械 / 射击 while lang/cn.json said 重型机械 / 远程战斗: the pack had never been rebuilt after the R3-era rename. Evidence: I copied the pack before running --collect and it read Heavy Machinery='机械', Ranged Combat='射击', while 6-工作区/phase2/SYS-I1.cn.json read 重型机械 / 远程战斗. In alienrpg-cn v0.1.0 the stunt button (character-sheet.mjs:1119 game.items.getName) would therefore have returned null for those two skills. This round both heals it and re-establishes the binding deliberately at 机械 / 射击 — now verified byte-equal end-to-end.",
+  "GLOSSARY CANNOT BE REGENERATED (pre-existing, blocks the lockstep's third leg). build_glossary_v1.py writes nothing: 9 invariant failures, all FROZEN-* (8x FROZEN-UNTRACEABLE for 'CORE RULES\\xa0-\\xa0HOW\\xa0TO\\xa0USE\\xa0THIS\\xa0MODULE', 'EV - 48a. LS - DANGER EVENT DETAIL', HARDENED/Hardened, 'NERVES OF STEEL', STOIC/Stoic, TOUGH; 1x FROZEN-MISSING). Confirmed identical with and without my RULINGS.json edit. CONSEQUENCE: glossary_alien.json / .provenance.json / .byrole.json still say 重型机械 / 远程战斗 / 水 and contradict the shipped lang. RULINGS.json (the correct input) is already updated and proven to apply; someone must fix the 9 T-FROZEN traceability entries in DO-NOT-TRANSLATE.json and re-run the builder.",
+  "check_glossary_alien.py is broken at baseline, independent of this round: it crashes with KeyError 'chinese_value_collisions' on prov['_meta'], and its TIERS set does not include T-LATIN although 6 terms carry that tier.",
+  "check_glossary_alien.py's T-EXACT invariant reads cn.json from the SYSTEM lang dir (C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/lang/cn.json = upstream A-stratum, 380 keys differ from ours), not from 1-系统汉化插件/lang/cn.json. It is therefore validating skill names against the wrong file and could not have caught the lockstep break above. Suggest pointing it at the hub module's delivered cn.json.",
+  "R7-max-range had to be parked outside rulings[] (in a new ui_label_rulings[] with an explanatory sibling key) because build_glossary_v1.py raises SystemExit on any ruling whose `en` is not in `terms`, and 'Max Rng' / 'Range' / 'Healing Time' are UI keys the glossary does not carry. If that is the wrong home, the alternative is to add them as glossary terms with full provenance.",
+  "OWNER ITEM 6 IS NOT A MISSING TRANSLATION. The journal name was already 'MU/TH/ER 使用说明' in the shipped pack before this round (verified in the pre-rebuild copy), and the slice 6-工作区/phase2/SYS-J-name.cn.json sets it. So the English the owner saw is a DELIVERY problem downstream — most likely the channel-F name-fallback shim in 1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs (installNameFallback / NAME_FALLBACKS.journal) not landing, or the world holding a pre-import copy. Out of this task's scope; needs its own look.",
+  "OUT OF SCOPE, NOT DONE: owner items 2 and 3 (Stress Response 「搞砸」 and Panic Response 「失去物品」 — the state names to be re-derived from their descriptions). Those are the SAME_STRING_GROUPS three-way lockstep (lang key + RollTable result name + glossary), and I deliberately did not touch them.",
+  "Both regenerated artefacts (1-系统汉化插件/lang/cn.json and 1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json) live in untracked trees — git status shows nothing for them, so there is no diff safety net. A pre-release copy of the pack is at C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/pack.before.json if a rollback is needed."
+ ],
+ "summary": "Three of the five proposals adopted, two rejected on evidence; all edits made in the Phase-1 slices and both assemblers re-run.\n\nA — SKILLS. Adopted 重型机械→机械 and 远程战斗→射击, both derived from the ch.3 skill descriptions rather than the English word forms, and both reversing a level-1 source (recorded as new rulings R5/R6 with the exception they invoke and its limit). REJECTED 通讯 and re-affirmed R3's 通信科技: the description writes 'computer **or** communications technology' in coordination and opens with 'Programming androids, mainframes' — the computer side — so 通讯 keeps only the lesser half and is strictly worse than 计算机科学, the candidate R3 had already rejected. Result: 11 of 12 skill names at 2 chars with one justified 4-char outlier, down from three. R3 now records the challenge, the verdict, the new evidence, and where the width cost was paid instead.\n\nB — INVENTORY. maxrng 最远射程→射程: the collision with ALIENRPG.Range is desirable, because the two keys already label the SAME lCol15 column in two registered skins of one sheet (crtui and vehicle inventories were already 射程) and bind the SAME field system.attributes.range.value on item-weapon.hbs in mutually exclusive branches — they can never appear together; and character-inventory.hbs:28 sits outside the isEvolved guard, so core-ruleset players were reading an Evolved-only qualifier. Water 水→饮水: a full sweep of every grid cell in every live template found it to be the only per-column length outlier in the whole sheet set (伤害/水/空气 stacked in one column; 空气/食物/水/电力 in the consumables block). REJECTED 电量 for Pwr: the button under that header is data-spbutt=\"Power\" and _onRollSupply builds its label from ALIENRPG.Power, so the two keys must share one Chinese string — and ALIENRPG.Power is also the item CATEGORY name at config.mjs:520 where 电量 would be wrong. The owner's 'unclear' came from the row, not the word; fixing 水 fixes it. Sweep went from 6 outliers to 2, both reported.\n\nC — CRIT CARD. REJECTED 疗程 and kept 治愈时间, exactly on the test the brief asked for: the crit table's HEALING TIME column contains **Permanent** (2 rows) plus empty→None, and 疗程 is a bounded course of treatment, so 「疗程：永久」 is a contradiction. Every 2-char alternative in the heal/recover family inverts the same way, and the two neutral head characters are already spent by siblings (时限 blocks 时*, 伤势 blocks 伤*). These are five stacked <h4> lines, not fixed-width columns, so the 4-char label costs 2 characters of offset on one line.\n\nAlong the way I found and fixed a live lockstep break the smoke test would eventually have hit: the shipped pack still carried the old item names while lang carried the new ones, so two stunt buttons were pointing at nothing. Both artefacts are now verified byte-equal end-to-end. The glossary leg of the lockstep is updated at its input (RULINGS.json, proven to apply) but cannot be regenerated — build_glossary_v1.py has been failing at baseline on 9 unrelated T-FROZEN entries."
+}

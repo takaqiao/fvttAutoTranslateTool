@@ -180,16 +180,32 @@ def cmd_collect(out):
     out_doc = {"label": en.get("label"), "folders": {}, "entries": {}}
     # shell
     shell = jload(os.path.join(out, "SYS-U1.cn.json"))
+
+    # 日志条目名与它唯一那一页的页名。
+    #
+    # 这两串英文都是 "MU/TH/ER Instructions."，曾经是 T-FROZEN —— 系统有 6 处
+    # `game.journal.getName("MU/TH/ER Instructions.")`，其中 4 处裸解引用。
+    # 现在由 1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs 的**通道 F 译名回退
+    # 垫片**兜住（installNameFallback / NAME_FALLBACKS.journal），所以可以译。
+    #
+    # ⚑ LOCKSTEP：SYS-J-name.cn.json 的 journal_name 必须与那个文件里
+    #   `NAME_FALLBACKS.journal[0].cn` **逐字节相等**。垫片一旦被删，
+    #   这个文件也必须删掉（回落到英文原串），否则首次开世界就炸。
+    #   7-其他内容/DO-NOT-TRANSLATE.json 与
+    #   4-常用脚本/qa/adversarial_hardcoded_patch.mjs 的 S 组都盯着这条依赖。
+    jname_path = os.path.join(out, "SYS-J-name.cn.json")
+    jname = jload(jname_path) if os.path.exists(jname_path) else {}
+    journal_name = jname.get("journal_name", adv_en["journals"][JKEY]["name"])
+    page_name = jname.get("page_name", adv_en["journals"][JKEY]["pages"][JKEY]["name"])
+
     adv_cn = {
         "name": shell["name"],
         "description": shell["description"],
         "folders": shell["folders"],
         "macros": shell["macros"],
-        "journals": {JKEY: {"name": jload(os.path.join(out, "SYS-J-name.cn.json"))["journal_name"]
-                            if os.path.exists(os.path.join(out, "SYS-J-name.cn.json"))
-                            else adv_en["journals"][JKEY]["name"],
+        "journals": {JKEY: {"name": journal_name,
                             "pages": {JKEY: {
-                                "name": adv_en["journals"][JKEY]["pages"][JKEY]["name"],
+                                "name": page_name,
                                 "text": page_cn}}}},
         "tables": jload(os.path.join(out, "SYS-T1.cn.json")),
         "items": jload(os.path.join(out, "SYS-I1.cn.json")),
@@ -198,6 +214,9 @@ def cmd_collect(out):
     jdump(CN, out_doc)
     print("wrote %s" % CN)
     print("  page: %d chars (en %d)" % (len(page_cn), len(text)))
+    print("  journal name: %r   page name: %r" % (journal_name, page_name))
+    if journal_name != adv_en["journals"][JKEY]["name"]:
+        print("  ⚠ 日志名已译 —— 依赖 alienrpg-hardcoded-cn.mjs 的通道 F 译名回退垫片")
     return 0
 
 
