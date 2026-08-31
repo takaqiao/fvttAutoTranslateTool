@@ -1154,3 +1154,49 @@ key 是用**已经本地化的技能名**拼的。英文 `Close Combat` → `ALI
 
 我们的抽取器如实抄下、译文如实保留、Babele 写回去与原值相同 —— **无害**。
 一度怀疑是我们管线弄坏的，不是。留此存照，免得将来有人"修"它、凭空编出内容。
+
+---
+
+### `yze-combat`：系统官方支持的先攻方案，但它是**替换**不是叠加
+
+`alienrpg` 系统内建了对接钩子（`alienrpg.mjs:500`，顶层作用域，不在任何 hook 里）：
+
+    Hooks.once("yzeCombatReady", (yzec) => yzec.register({
+      actorSpeedAttribute: "system.attributes.speed.value",
+      duplicateCombatantOnCombatStart: true,
+    }));
+
+装上 yze-combat 就自动写好这两项 —— 前者让「速度」属性生效，后者让**速度 2 的生物
+开局自动复制成两个参战者**，正是异形生物每轮行动两次的规则。
+
+**谁覆盖谁（实测，非推断）**：两边都**无条件**设置同一批 CONFIG——
+
+| | 系统 `alienrpg.mjs:87,114` | 模块 `yze-combat.js` init |
+|---|---|---|
+| `CONFIG.Combat.documentClass` | `AlienRPGCombat` | `YearZeroCombat` |
+| `CONFIG.ui.combat` | `AlienRPGCTContext` | `YearZeroCombatTracker` |
+| `CONFIG.Combatant.documentClass` | —— | `YearZeroCombatant` |
+
+系统那边没有「yze 在就让路」的判断。顺序由内核决定：
+`dist/server/views/view.mjs` 里先发 `system.esmodules`、再发各 `module.esmodules`，
+ES 模块按文档顺序执行 ⇒ **模块的 `init` 后跑，yze 全赢**。
+
+**因此丢掉的**：系统原生 `rollInitiative` 会把抽到的牌以图片发进聊天栏
+（`systems/alienrpg/images/cards/card-{1..10}.png`；装了核心书则换成
+`modules/alien-evolved-corerules/images/cards/`，两处各 10 张，都在）。
+yze 的默认牌堆是**扑克牌**（`cards/light-soft/spades-ace.webp`），异形牌面不再出现。
+可补救：yze 的先攻牌堆是真正的 Cards 文档，自建一副用系统那 10 张图并在设置里指过去。
+
+系统的速度克隆逻辑（`AlienRPGCombat.createEmbeddedDocuments`，`combat.mjs:177`）
+同样被顶掉，但 yze 的 `duplicateCombatantOnCombatStart` 顶上了，功能不丢、换了实现。
+
+**规则契合度**（全部实测默认值）：牌堆 10 张值 1–10 ✓ ｜ 排序默认升序（低牌先手）✓
+｜ `SlowAndFastActions` 默认开 ✓ ｜ `ShowAmbushed` 默认开（遭伏击者先攻加牌堆张数
+⇒ 本轮最后行动）✓。
+
+**术语错位**：YZE 通称 Slow/Fast Action，《异形》**进化版改称 Full/Quick**
+（本项目交付值：完整动作 / 快速动作）。`yzecombat-cn.json` 按进化版译；
+跑经典版把 `YZEC.CombatTracker.SlowAction` 改回「慢速动作」即可。
+
+⚠ 上游 yze-combat 在 v14 + alienrpg 下有 statusEffect 重复注册崩溃，
+用 takaqiao fork（`module.json` 的 description 里写明了）。
