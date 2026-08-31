@@ -1,38 +1,78 @@
 {
-  "_artifact": "RATIO-BAND.json",
-  "_what": "本语料实测的 中文/英文 可见字符长度比band。QA 脚本读它，**不许从别的项目继承常数**。",
-  "_why": [
-    "EC 项目的 0.31 中位 / 0.22 TRUNCATED / 0.25 catch-up 是**那个语料**的常数。",
-    "PROJECT.md §3.2 与 EC 的教训都写死了一条：阈值必须在自己的语料上量，",
-    "照抄别的项目会把大量正确译文标成异常。Phase 0 只拿系统 cn.json 的 349 条 CJK 值量了个临时值，",
-    "并把「在真实语料上重量」登记为 Phase 2 的退出条件——本文件就是那次重量。"
-  ],
-  "measured_on": "2026-08-29, Phase 2 交付后, alienrpg.alien-rpg-system 的 6 个期刊单元",
-  "sample": {
-    "units": 6,
-    "en_visible_chars": 51064,
-    "cn_visible_chars": 18299,
-    "per_unit_ratio": {
-      "SYS-J1": 0.44, "SYS-J2": 0.37, "SYS-J3": 0.32,
-      "SYS-J4": 0.32, "SYS-J5": 0.35, "SYS-J6": 0.38
-    }
-  },
-  "band": {
+ "_artifact": "RATIO-BAND.json",
+ "_what": "本语料实测的 中文/英文 可见字符长度比band。QA 脚本读它，**不许从别的项目继承常数**。",
+ "_why": [
+  "EC 项目的 0.31 中位 / 0.22 TRUNCATED / 0.25 catch-up 是**那个语料**的常数。",
+  "PROJECT.md §3.2 与 EC 的教训都写死了一条：阈值必须在自己的语料上量，",
+  "照抄别的项目会把大量正确译文标成异常。Phase 0 只拿系统 cn.json 的 349 条 CJK 值量了个临时值，",
+  "并把「在真实语料上重量」登记为 Phase 2 的退出条件——本文件就是那次重量。"
+ ],
+ "measured_on": "2026-08-29, Phase 2 交付后, alienrpg.alien-rpg-system 的 6 个期刊单元",
+ "sample": {
+  "units": 6,
+  "en_visible_chars": 51064,
+  "cn_visible_chars": 18299,
+  "per_unit_ratio": {
+   "SYS-J1": 0.44,
+   "SYS-J2": 0.37,
+   "SYS-J3": 0.32,
+   "SYS-J4": 0.32,
+   "SYS-J5": 0.35,
+   "SYS-J6": 0.38
+  }
+ },
+ "band": {
+  "median": 0.36,
+  "observed_min": 0.32,
+  "observed_max": 0.44,
+  "truncated_below": 0.25,
+  "inflated_above": 0.6,
+  "by_genre": {
+   "software_manual": {
     "median": 0.36,
-    "observed_min": 0.32,
-    "observed_max": 0.44,
-    "truncated_below": 0.25,
-    "inflated_above": 0.60
+    "observed": [
+     0.32,
+     0.44
+    ],
+    "source": "Phase 2 系统包"
+   },
+   "narrative_and_tables": {
+    "median": 0.36,
+    "observed": [
+     0.32,
+     0.47
+    ],
+    "source": "Phase 4 新手包"
+   }
   },
-  "how_to_use": [
-    "TRUNCATED：可见字符比 < 0.25 ⇒ 疑似漏译/截断，必须人看。",
-    "INFLATED：> 0.60 ⇒ 疑似加译/把英文原文也留在了译文里。",
-    "⚠ 长度比只是**候选筛**，不是判据。EC 实测有一条确凿缺陷落在 0.377，正正好在正常带里。",
-    "⚠ 样本只有 6 个单元、全是**软件手册**体裁。starterset/corerules 的散文与表格体裁不同，",
-    "   Phase 4 落地后必须重量一次，并把那次的数追加进本文件（不要覆盖本次的）。"
-  ],
-  "history": [
-    {"round": "Phase 0", "basis": "系统自带 cn.json 的 349 条 CJK 值", "note": "临时值，已被本次取代"},
-    {"round": "Phase 2", "basis": "6 个期刊单元 / 51,064 英文可见字", "median": 0.36}
-  ]
+  "_note": "TRUNCATED 阈值对两种体裁通用；INFLATED 上限按体裁取 by_genre 的 max + 0.15。"
+ },
+ "how_to_use": [
+  "TRUNCATED：可见字符比 < 0.25 ⇒ 疑似漏译/截断，必须人看。",
+  "INFLATED：> 0.60 ⇒ 疑似加译/把英文原文也留在了译文里。",
+  "⚠ 长度比只是**候选筛**，不是判据。EC 实测有一条确凿缺陷落在 0.377，正正好在正常带里。",
+  "⚠ 样本只有 6 个单元、全是**软件手册**体裁。starterset/corerules 的散文与表格体裁不同，",
+  "   Phase 4 落地后必须重量一次，并把那次的数追加进本文件（不要覆盖本次的）。"
+ ],
+ "history": [
+  {
+   "round": "Phase 0",
+   "basis": "系统自带 cn.json 的 349 条 CJK 值",
+   "note": "临时值，已被本次取代"
+  },
+  {
+   "round": "Phase 2",
+   "basis": "6 个期刊单元 / 51,064 英文可见字",
+   "median": 0.36
+  },
+  {
+   "round": "Phase 4",
+   "basis": "starterset 20 个正文页 / 178,862 英文可见字",
+   "median": 0.36,
+   "min": 0.32,
+   "max": 0.47,
+   "overall": 0.46,
+   "note": "体裁与 Phase 2 不同：叙事散文 + 大量表格，而 Phase 2 全是软件手册。比 Phase 2 高约 0.10。⇒ band 按体裁分开看，不要合并成一个数。"
+  }
+ ]
 }

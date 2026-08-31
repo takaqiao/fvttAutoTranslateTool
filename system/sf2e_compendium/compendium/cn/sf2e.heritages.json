@@ -1,416 +1,416 @@
 {
-    "label": "族裔传承 Heritages",
-    "mapping": {
-        "name": "name",
-        "description": "system.description.value"
+  "label": "族裔传承 Heritages",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Sarcesian": "萨瑟蝶人\nSarcesian",
+    "Vlaka": "弗拉卡\nVlaka",
+    "Khizar": "希扎尔\nKhizar",
+    "Astrazoan": "星灵变形怪\nAstrazoan",
+    "Elebrian": "灵脑人\nElebrian",
+    "Dragonkin": "龙人\nDragonkin",
+    "Contemplative": "默思族\nContemplative",
+    "Ikeshti": "异客蜥人\nIkeshti",
+    "Kalo": "卡洛\nKalo",
+    "Android": "仿生人 Android",
+    "Barathu": "飞螅族\nBarathu",
+    "Human": "人类 Human",
+    "Shobhad": "修帕德\nShobhad",
+    "Kasatha": "卡萨萨尼斯人\nKasatha",
+    "Versatile Heritages": "多用传承 Versatile Heritages",
+    "Lashunta": "拉申塔人\nLashunta",
+    "Pahtra": "帕赫特拉\nPahtra",
+    "Shirren": "希伦人\nShirren",
+    "Skittermander": "斯基特曼德人\nSkittermander",
+    "Vesk": "维斯克蜥人\nVesk",
+    "Ysoki": "鼠族\nYsoki"
+  },
+  "entries": {
+    "Mercurial Dragonkin": {
+      "name": "善变龙人 Mercurial Dragonkin",
+      "description": "<p>无论是因为巧合、命运的捉弄，还是对相互依赖根深蒂固的恐惧，你都无法形成永久性的伙伴联结。取而代之的是，你可以形成临时性的伙伴联结。你形成伙伴联结所需的时间缩短为10分钟，而该伙伴联结的持续时间缩短为1天。你可以选择提前切断伙伴联结，这需要一个具有专注特征的单动作。如果你对你的伙伴使用 @UUID[Compendium.sf2e.actions.Item.UeMHbnnaXDa3sGfG]{Transfer Vitality}，生命值消耗减少1点，并且你每拥有4个等级再额外减少1点（最低降至1点）。</p>\n<p>Whether by fluke, the whims of fate, or deep-seated fear of codependency, you can't form a permanent partner bond. Instead, you can form a temporary partner bond. The time it takes you to form a partner bond is reduced to 10 minutes, and the duration of this partner bond is reduced to 1 day. You can choose to sever a partner bond early as a single action that has the concentration trait. If you @UUID[Compendium.sf2e.actions.Item.UeMHbnnaXDa3sGfG]{Transfer Vitality} to your partner, reduce the Hit Point cost by 1 plus 1 for every 4 levels you have (to a minimum of 1).</p>"
     },
-    "folders": {
-        "Sarcesian": "Sarcesian",
-        "Vlaka": "Vlaka",
-        "Khizar": "Khizar",
-        "Astrazoan": "Astrazoan",
-        "Elebrian": "Elebrian",
-        "Dragonkin": "Dragonkin",
-        "Contemplative": "Contemplative",
-        "Ikeshti": "Ikeshti",
-        "Kalo": "Kalo",
-        "Android": "仿生人 Android",
-        "Barathu": "Barathu",
-        "Human": "人类 Human",
-        "Shobhad": "Shobhad",
-        "Kasatha": "Kasatha",
-        "Versatile Heritages": "多用传承 Versatile Heritages",
-        "Lashunta": "Lashunta",
-        "Pahtra": "Pahtra",
-        "Shirren": "Shirren",
-        "Skittermander": "Skittermander",
-        "Vesk": "Vesk",
-        "Ysoki": "Ysoki"
+    "Early Stage Barathu": {
+      "name": "飞螅族早期阶段 Early Stage Barathu",
+      "description": "<p>与其他飞螅族相比，你还很年轻且缺乏经验，并拥有一种个人主义的世界观，这很可能是你与其他文化互动所塑造的。你尚未见识过宇宙的全貌，也还没有适应自己去克服其中的诸多威胁，或理解其各种生命形态。你的形态具有很高的可变性，因为你尚未选择专精某一方向，或与其他飞螅族融合。你的体型为小型而非中型。你获得 @UUID[Compendium.sf2e.feats.Item.3G8xUlgCjRmRJNfP]{快速挤压} 作为一个额外专长。此外，你获得等同于你等级一半的精确伤害抗性（最低为1）。</p>\n<p>You're young and inexperienced compared to other barathus, with an individualistic worldview likely shaped by your interactions with other cultures. You have yet to see the full breadth of the cosmos and haven't adapted yourself to overcome its many threats or understand its various life-forms. Your form is highly mutable, as you haven't yet chosen to specialize or merge with other barathus. You're Small instead of Medium. You gain @UUID[Compendium.sf2e.feats.Item.3G8xUlgCjRmRJNfP]{Quick Squeeze} as a bonus feat. Additionally, you gain resistance to precision damage equal to half your level (minimum 1).</p>"
     },
-    "entries": {
-        "Mercurial Dragonkin": {
-            "name": "Mercurial Dragonkin",
-            "description": "<p>Whether by fluke, the whims of fate, or deep-seated fear of codependency, you can't form a permanent partner bond. Instead, you can form a temporary partner bond. The time it takes you to form a partner bond is reduced to 10 minutes, and the duration of this partner bond is reduced to 1 day. You can choose to sever a partner bond early as a single action that has the concentration trait. If you @UUID[Compendium.sf2e.actions.Item.UeMHbnnaXDa3sGfG]{Transfer Vitality} to your partner, reduce the Hit Point cost by 1 plus 1 for every 4 levels you have (to a minimum of 1).</p>"
-        },
-        "Early Stage Barathu": {
-            "name": "Early Stage Barathu",
-            "description": "<p>You're young and inexperienced compared to other barathus, with an individualistic worldview likely shaped by your interactions with other cultures. You have yet to see the full breadth of the cosmos and haven't adapted yourself to overcome its many threats or understand its various life-forms. Your form is highly mutable, as you haven't yet chosen to specialize or merge with other barathus. You're Small instead of Medium. You gain @UUID[Compendium.sf2e.feats.Item.3G8xUlgCjRmRJNfP]{Quick Squeeze} as a bonus feat. Additionally, you gain resistance to precision damage equal to half your level (minimum 1).</p>"
-        },
-        "Empathic Vlaka": {
-            "name": "Empathic Vlaka",
-            "description": "<p>You instinctively sense when the people around you are feeling strong emotions or inner conflict. You gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}. If you aren't actively using Sense Motive on a creature who's enchanted, possessed, or subject to an emotion effect, the GM rolls a secret check, without the usual circumstance bonus and with a –2 circumstance penalty, for you to potentially notice the enchantment, possession, or emotion effect anyway.</p>"
-        },
-        "Venomthought Vesk": {
-            "name": "Venomthought Vesk",
-            "description": "<p>You're one of the notable vesk born with psychic talents. According to folklore, your lineage originated with an ancient cave-dwelling society on Vesk Prime who modified themselves with occult rituals, which granted them \"venomous thoughts\" that could manifest in any future progeny. You can cast daze as an occult innate cantrip at will. A cantrip is heightened to a spell rank equal to half your level rounded up. You gain a +1 circumstance bonus to Occultism checks to @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{Recall Knowledge} about psychic traditions and philosophies.</p>"
-        },
-        "Unbound Lashunta": {
-            "name": "Unbound Lashunta",
-            "description": "<p>You decided against activating your ancestry's adaptive genetics. You might show a combination of damaya and korasha traits; you might be tall and muscular or short and lithe, or perhaps you have unusual features, such as bumps and swirls covering your body or long, fuzzy antennae. You gain the @UUID[Compendium.sf2e.actions.Item.j1FsKMy7CTtrp3Fu]{Unbound Mind} reaction.</p>"
-        },
-        "Everwhelp Skittermander": {
-            "name": "Everwhelp Skittermander",
-            "description": "<p>Despite being a full-grown adult, you've retained your stomach-mouth—either through a quirk of evolution, purposeful genetic manipulation, or a biotech augmentation. You gain a jaws unarmed attack that deals 1d6 piercing damage, is in the brawling group, and has the finesse, skittermander, and unarmed traits.</p>"
-        },
-        "Plated Vesk": {
-            "name": "Plated Vesk",
-            "description": "<p>Your ancestors were the hardiest specimens of vesk, having traveled far and wide while enduring hostile environments. Your scales count as medium armor in the plate armor group. They grant a +3 item bonus to AC, have a Dex cap of +1, a check penalty of –2, and a Strength threshold of +3, and have the comfort and exposed traits. This item bonus increases to +4 at 5th level. You can wear a flight suit, but you can't wear other armor. You can etch armor runes onto your scales, but you can't install armor upgrades.</p>"
-        },
-        "Akitonian Kasatha": {
-            "name": "Akitonian Kasatha",
-            "description": "<p>You (or one of your ancestors) traveled to the Pact Worlds on the <em>Idari</em> and settled on Akiton. Akiton's significantly lower gravity grants you an advantage in the fun and practical art of leaping, and you likely revel in the many rituals surrounding the desert world's popular sports. You gain the @UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{Quick Jump} feat and don't treat sand as uneven ground.</p>"
-        },
-        "Skitter Raised": {
-            "name": "Skitter Raised",
-            "description": "<p>You've spent your life as part of a tight-knit community, where teamwork makes the dream work and crowds are giant group hugs waiting to happen. You gain the@UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{ Group Impression} skill feat. In addition, you gain a +2 circumstance bonus to checks to Aid an ally at skill checks that don't have the attack trait.</p>"
-        },
-        "Deep Ysoki": {
-            "name": "Deep Ysoki",
-            "description": "<p>You're accustomed to living in dark places, such as maintenance shafts, asteroids, and on distant moons and planetoids far from the sun. You gain darkvision.</p>"
-        },
-        "Outworlder Kalo": {
-            "name": "Outworlder Kalo",
-            "description": "<p>You've spent a significant portion of your life away from the oceans of Kalo-Mahoi, so you're particularly experienced at handling the challenges of life on dry land. Your land Speed is increased by 5 feet (to 25 feet for most kalos).</p>"
-        },
-        "Flameheart Dragonkin": {
-            "name": "Flameheart Dragonkin",
-            "description": "<p>The embers burning in your blood keep you safe from the chill of high altitudes. You gain resistance to cold equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
-        },
-        "Aquazoan": {
-            "name": "Aquazoan",
-            "description": "<p>Astrazoans occupying aquatic worlds and communities learn how to integrate gills and fins into their forms and can even manifest these traits when imitating species that do not normally have them. You gain a swim Speed of 20 feet, and you gain the amphibious trait, enabling you to breathe in water and air.</p>"
-        },
-        "Entertainer Elebrian": {
-            "name": "Entertainer Elebrian",
-            "description": "<p>You love being in the spotlight, and you've spent a good deal of your life on camera. You were born and raised in the Halls of the Living, where you learned how to entertain an audience from childhood. You might be a rising superstar or a prominent character actor, extra, or reality show contestant with a growing fan following. You're trained in Performance and Media Lore, and you gain the @UUID[Compendium.sf2e.feats.Item.xqAdXRd2gSQcqp5E]{Impressive Performance} skill feat.</p>"
-        },
-        "Shipborn Ysoki": {
-            "name": "Shipborn Ysoki",
-            "description": "<p>You were born aboard a starship, inside a space station's access corridors, or another similar environment. You gain the trained proficiency rank in Piloting. If you would automatically become trained in Piloting (from your background or class, for example), you become trained in another skill of your choice. If you get a success on a Piloting check to @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{Navigate} or @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{Plot Course}, you get a critical success instead.</p>\n<p>You've adapted to maneuvering in close quarters. You gain a +1 circumstance bonus to Acrobatics checks to @UUID[Compendium.sf2e.actions.Item.21WIfSu7Xd7uKqV8]{Tumble Through} the spaces of Medium or larger enemies, and the presence of an enemy doesn't make the squares difficult terrain.</p>"
-        },
-        "Akitonian Ysoki": {
-            "name": "Akitonian Ysoki",
-            "description": "<p>You or your ancestors grew up on Akiton, scrapping crashed starships or combing junk heaps for treasures. You gain the trained proficiency rank in Crafting and can use Crafting instead of Thievery to Disable a Device. If you're already trained in Crafting, you instead gain the Quick Repair general feat.</p>"
-        },
-        "Mod Fanatic Android": {
-            "name": "Mod Fanatic Android",
-            "description": "<p>You or your previous iterations have modified your body to be compatible with armor upgrades, enabling you to personally customize your body and its capabilities. Your body has one armor upgrade slot that you can use to install armor upgrades and that doesn't count toward your armor's total number of upgrades. You can install and uninstall armor upgrades into your personal upgrade slot using the Install Upgrade activity. Choose one common armor upgrade with an item level of 1 or less. You begin with this armor upgrade already installed in your upgrade slot (you don't need to pay the credits to purchase this starting upgrade).</p>"
-        },
-        "Winter Coat Vlaka": {
-            "name": "Winter Coat Vlaka",
-            "description": "<p>Your thick fur keeps you warm in cold places like Lajok. You gain cold resistance equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
-        },
-        "Star Marked Vlaka": {
-            "name": "Star Marked Vlaka",
-            "description": "<p>You witnessed the miraculous rebirth of the dying star Sota. Your coat or eyes are marked with starbursts that shine with the light of the stars. With a moment's thought, you can cause these star markings to shed bright light in a 40-foot radius (and dim light to the next 40 feet). This light has the light and occult traits. You can spark or extinguish this light using a single action, which has the concentrate trait. You can't activate this ability when you're beyond the energy of a sun or stars, such as in the Drift or on another plane of existence where these celestial bodies don't exist.</p>"
-        },
-        "Crèche-Raised Sarcesian": {
-            "name": "Crèche-Raised Sarcesian",
-            "description": "<p>You were raised on an idyllic crèche world and lived closely with dozens of other sarcesian children. You learned how to get along with others and stand out in a crowd early on. You are trained in Diplomacy. If you would automatically become trained in Diplomacy (from your background or class, for example), you instead become trained in a skill of your choice. You gain the @UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{Group Impression} skill feat.</p>"
-        },
-        "Survivalist Shobhad": {
-            "name": "Survivalist Shobhad",
-            "description": "<p>Shobhad-neh are renowned for their talents as scouts and guides, talents they have honed over millennia of existence on their harsh home world of Akiton. As an inheritor of these skills, you are exceptionally talented at seeing to your own subsistence and even that of others while still performing other critical tasks. You can perform the @UUID[Compendium.sf2e.actions.Item.kV3XM0YJeS2KCSOb]{Scout} exploration activity at the same time as the @UUID[Compendium.sf2e.actions.Item.EA5vuSgJfiHH7plD]{Track} exploration activity. During downtime, you can perform the Subsist downtime activity alongside any one other downtime activity you are capable of performing.</p>"
-        },
-        "Borai": {
-            "name": "Borai",
-            "description": "<p>You've returned from the brink of death as a borai—at once both living and undead. You gain the borai and undead trait, in addition to the traits from your ancestry. Unlike other undead, you don't gain void healing. You're healed by vitality effects and damaged by void damage, as if you were a living creature. Likewise, you can be stabilized, healed, and brought back to life as if you were a living creature, save that you always return to life in your normal undead state (as a borai). You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from borai feats and feats from your ancestry whenever you gain an ancestry feat.</p>"
-        },
-        "Keen Sighted Vlaka": {
-            "name": "Keen Sighted Vlaka",
-            "description": "<p>You have a particularly keen sense of vision, honed through generations of surviving on a world bathed in the dim light of a dying star. You gain darkvision.</p>"
-        },
-        "Sageborn Elebrian": {
-            "name": "Sageborn Elebrian",
-            "description": "<p>You have a natural talent for magic. This might be due to the presentation of ancient elebrian genes, or maybe you were exposed to a burst of arcane energy that awakened and turbocharged your magical senses. Choose one cantrip from any tradition. You can cast this cantrip as an arcane innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
-        },
-        "Deep Kalo": {
-            "name": "Deep Kalo",
-            "description": "<p>You were born deep down in the aphotic zone where no light penetrates from the surface, far from the bright cities clustered around Kalo-Mahoi's geothermal oases, You gain echolocation as an imprecise sense with a range of 30 feet, or 60 feet when underwater.</p>"
-        },
-        "Sharp-Toothed Vlaka": {
-            "name": "Sharp-Toothed Vlaka",
-            "description": "<p>You have the strong jaw and sharp teeth of a predator, making your mouth a dangerous weapon. You gain a jaws unarmed attack that deals 1d6 piercing damage. Your jaws are in the brawling group and have the finesse and unarmed traits.</p>"
-        },
-        "Meyel's Chosen Pahtra": {
-            "name": "Meyel's Chosen Pahtra",
-            "description": "<p>You have an undeniable streak of luck that you believe is a blessing from your ancestral god Meyel. You might come from a long line of mystics. Perhaps you were born at a holy site on Pulonis, or you reached out in fervent prayer at a time of crisis. Most of Meyel's chosen can point to at least one past event when their goddess might have intervened to save them from death or some other awful fate. Whether metaphorically or literally, you always seem to land on your feet. The first time each day that you critically fail a saving throw, you immediately reroll the saving throw as a free action; this is a fortune effect.</p>"
-        },
-        "Cloned Astrazoan": {
-            "name": "Cloned Astrazoan",
-            "description": "<p>You were either born in a laboratory using genetic samples preserved from a distant ancestor or budded from a parent astrazoan. Your body stubbornly refuses additional external attempts to change you. If you roll a success on a saving throw against a curse, disease, or polymorph effect, you get a critical success instead.</p>"
-        },
-        "Nightstalker Vesk": {
-            "name": "Nightstalker Vesk",
-            "description": "<p>You've adapted to live in darkness, perhaps due to living underground, in dim starship corridors, under smoke-shrouded skies, or on a planet far from its sun. You gain darkvision.</p>"
-        },
-        "Manufacturer Barathu": {
-            "name": "Manufacturer Barathu",
-            "description": "<p>Your body is a living laboratory, allowing you to ingest raw materials and refine them into useful medicines and other products. You become trained in Crafting (or another skill of your choice if you're already trained in Crafting) and gain the @UUID[Compendium.sf2e.feats.Item.VRLHQPDkjy0gbxBY]{Serum Crafting} feat.</p>"
-        },
-        "Glacierborn Shobhad": {
-            "name": "Glacierborn Shobhad",
-            "description": "<p>You trace your lineage to a shobhad clan that migrates along the Akitonian glaciers, making you even more advantageously suited to dealing with the dangers of frigid cold and treacherous climbs than other shobhads. You have cold resistance equal to half your level (minimum 1) and gain the @UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{Combat Climber} skill feat.</p>"
-        },
-        "Gadraveech Skittermander": {
-            "name": "Gadraveech Skittermander",
-            "description": "<p>You grew up in the subterranean realm of Gadraveech, or a similar dangerous underground environment. You have wispy, pale-colored fur, a slender build, and large, luminous eyes. You gain darkvision.</p>"
-        },
-        "Stellar Nomad Kasatha": {
-            "name": "Stellar Nomad Kasatha",
-            "description": "<p>You choose to travel abroad, leaving your birthplace to embark on a journey through the wider cosmos. During your daily preparations, you can study a particular ancestry, faction, philosophy, or religion to learn one of their edicts or anathemas and gain a broader understanding of that culture's customs and traditions. While you follow that edict or anathema, you become trained in the associated lore (such as Vesk Lore or Damoritosh Lore). This proficiency lasts until you prepare again. Since this training is temporary, you can't use it as a prerequisite for a permanent character option like a feat or a skill increase.</p>"
-        },
-        "Pampered Ikeshti": {
-            "name": "Pampered Ikeshti",
-            "description": "<p>Your brood was raised in a resource-rich region, such as the fey-touched forest outside of Great Gwaz, or offworld, perhaps on Castrovel, the Brethedan moon Marata, or Pulonis. You are unaccustomed to going without food and you don't gain the wasteland survivor ability. Instead, you gain 10 Hit Points from your ancestry, rather than 6, and you gain the @UUID[Compendium.sf2e.feats.Item.N8Xz5fuW6o7GW124]{Fast Recovery} general feat, even if you don't meet the prerequisites.</p>"
-        },
-        "Sharp-Eyed Sarcesian": {
-            "name": "Sharp-Eyed Sarcesian",
-            "description": "<p>Your overlarge eyes have adapted to function well in poor lighting conditions. You gain darkvision.</p>"
-        },
-        "Hunter-Stalker Pahtra": {
-            "name": "Hunter-Stalker Pahtra",
-            "description": "<p>You descend from a long line of hunters, and your fur is especially well suited to blending into multiple environments. As long as you're in a natural and undeveloped environment, you gain a +2 circumstance bonus to Stealth checks to @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide} and @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}, to Survival checks to @UUID[Compendium.sf2e.actions.Item.49y9Ec4bDii8pcD3]{Subsist}, and to your Survival DC to @UUID[Compendium.sf2e.actions.Item.SB7cMECVtE06kByk]{Cover Tracks}.</p>"
-        },
-        "Iridescent Shirren": {
-            "name": "Iridescent Shirren",
-            "description": "<p>You descend from shirrens who were originally programmed as decoys for the ravenous Swarm. Your chitin is iridescent and creates shimmering patterns that fascinate and distract most other creatures. You can @UUID[Compendium.sf2e.actions.Item.QNAVeNKtHA0EUw4X]{Feint} at a range of 10 feet, rather than solely while within melee reach of your intended target. You also gain the @UUID[Compendium.sf2e.actions.Item.lIZ9DhrkzM3AEQmX]{Shimmering Dazzle} action.</p>"
-        },
-        "Assimilated Astrazoan": {
-            "name": "Assimilated Astrazoan",
-            "description": "<p>Whether you were raised as a member of another species or became fully immersed in their cultures and traditions later, you have completely assimilated to another ancestry and feel as comfortable in that skin as in your natural form. Choose a common ancestry. You can select ancestry feats from the ancestry you chose, in addition to your character's own ancestry. You can select feats that require a physiological feature that you lack but can only benefit from those feats while you are in that ancestry's form; for example, an assimilated astrazoan who selects the shirren @UUID[Compendium.sf2e.feats.Item.YSi48yghu0wmkSrr]{Basic Insectile Flight} feat can only fly while in their shirren form.</p>"
-        },
-        "Desert Ikeshti": {
-            "name": "Desert Ikeshti",
-            "description": "<p>You're accustomed to surviving in the harsh, arid deserts of Akiton, and can endure the blazing heat of the midday sun. You gain fire resistance equal to half your level (minimum 1), and environmental heat effects are one step less extreme for you (incredible heat becomes extreme, extreme heat becomes severe, and so on). In addition, increase the number of days you can go without food or water before you begin to starve by 1 month.</p>"
-        },
-        "Deadwood": {
-            "name": "Deadwood",
-            "description": "<p>You've been rotting on the inside for some time now, and the invisible rot has changed you. You have the void healing ability, meaning you're damaged by vitality damage and not healed by healing vitality effects. You do not take void damage, and you're healed by void effects that heal undead.</p>"
-        },
-        "Heartbroken Dragonkin": {
-            "name": "Heartbroken Dragonkin",
-            "description": "<p>In the past your bonded partner died, and you remain devastated by their loss. You gain a +1 circumstance bonus to saving throws against emotion effects. If you roll a success on a saving throw against an emotion effect, you get a critical success instead.</p>"
-        },
-        "Inured Ikeshti": {
-            "name": "Inured Ikeshti",
-            "description": "<p>Due to extreme scarcity, negligence, or tragedy, your brood often consumed poisonous, rotten, or tainted food, or served as a living garbage disposal and ate garbage, refuse, waste, pollutants, and toxic sludge. Your body easily breaks down toxins. You gain poison resistance equal to half your level (minimum 1). In addition, you gain the @UUID[Compendium.sf2e.feats.Item.I0BhPWqYf1bbzEYg]{Diehard} general feat.</p>"
-        },
-        "Shipborn Kasatha": {
-            "name": "Shipborn Kasatha",
-            "description": "<p>You were one of the kasathas born and raised on the Idari worldship that now orbits the Pact Worlds' sun. Your family kept hope and tradition alive while enduring the hardships of lengthy space travel. For you, the Idari is the only home you've ever known. When you roll a success on a saving throw against an emotion effect, you get a critical success instead.</p>"
-        },
-        "Warblood Vesk": {
-            "name": "Warblood Vesk",
-            "description": "<p>You come from a bloodline of renowned and honored warriors who have honed their bodies over centuries to become lethal weapons. You gain the @UUID[Compendium.sf2e.feats.Item.s7QK7Q63k9SxG106]{Brutal Anatomy} ancestry feat twice.</p>"
-        },
-        "Akitonian Nomad Shobhad": {
-            "name": "Akitonian Nomad Shobhad",
-            "description": "<p>You were born on Akiton to a clan or group that traveled far and wide, never settling in one place for long. The first time you left Akiton, you discovered the planet's lower gravity had given you specific skills and adaptations in the art of leaping and jumping that translated well to battle in space and other strange environs. You gain the @UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{Quick Jump} skill feat, even if you aren't trained in Athletics, and don't treat ice or sand as uneven ground.</p>"
-        },
-        "Golarion Survivor Human": {
-            "name": "Golarion Survivor Human",
-            "description": "<p>Your ancestors lived on Golarion, and though the precise circumstances of their survival are lost to the Gap, you strongly identify with the lost planet's cultures. You become trained in Golarion Lore, and you learn a bonus language that was spoken in your lineage's region of origin. You have familiarity with archaic weapons and, for purposes of proficiency, treat one archaic weapon of your choice that's a martial weapon as a simple weapon, or that's an advanced weapon as a martial weapon.</p>"
-        },
-        "Courtier Shirren": {
-            "name": "Courtier Shirren",
-            "description": "<p>Your telepathy is stronger than most shirrens', allowing you to combine physical, verbal, and telepathic communication. You can transmit emotions alongside your messages whenever you use limited telepathy. In addition, when a creature communicates with you using limited telepathy or telepathy, you gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} against that creature.</p>"
-        },
-        "Sand Roamer": {
-            "name": "Sand Roamer",
-            "description": "<p>Your ancestors roamed blasted terrain leached of vital nutrients by the Veskarium. You're shorter and stockier than most pahtras, with wide, tufted ears and fur-covered paw pads. Your size is Small instead of Medium. You ignore difficult terrain and uneven ground caused by sand and gain fire resistance equal to half your level (minimum 1).</p>"
-        },
-        "Wildseed": {
-            "name": "Wildseed",
-            "description": "<p>You germinated far from the ancestral groves of other khizars. You might have grown up in a small transplant grove or maybe you were cultivated in a laboratory. Select an ancestry or versatile heritage to represent part of your unconventional upbringing. Once chosen it cannot be changed. At 1st level, you gain an additional ancestry feat from the chosen ancestry or heritage. Whenever you gain an ancestry feat, you may choose that feat from the ancestry or heritage.</p>"
-        },
-        "Stormrider Dragonkin": {
-            "name": "Stormrider Dragonkin",
-            "description": "<p>You were born and raised on a volatile world wracked by destructive storms and powerful winds. Learning to fly in such conditions has conditioned you into an exceptional aerialist. You gain a +2 circumstance bonus to Acrobatics checks to Maneuver in Flight and your fly Speed increases by 5 feet.</p>"
-        },
-        "Dreamer Barathu": {
-            "name": "Dreamer Barathu",
-            "description": "<p>You've communed with the cosmic melody of Liavara and it changed you. You struggle to express the fragments of memory and sensation you recall from the experience, except through singing and similar psychic emanations. Choose one cantrip from the occult spell list. By weaving magic into your song, you can cast this spell as an occult innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>\n<p>Your magic is adaptable, and you can channel your music to enhance it. Once per day, you can meditate on your cosmic song to change the cantrip you've chosen to a different cantrip from the occult spell list. This is a 10-minute activity that has the concentrate trait.</p>"
-        },
-        "Underground Ikeshti": {
-            "name": "Underground Ikeshti",
-            "description": "<p>Your brood was raised underground to protect the surrounding ecosystem. You're accustomed to darkness and prefer a nocturnal lifestyle when on a planet's surface. You gain darkvision.</p>"
-        },
-        "Tunnel Ysoki": {
-            "name": "Tunnel Ysoki",
-            "description": "<p>Your incredibly small bones allow you to easily compress your body and squeeze through gaps, whether it's the space between walls to reach a severed data cable or the ductwork of a space station. You gain the Quick Squeeze feat, even if you aren't trained in Acrobatics. Tight spaces not tight enough to require the Squeeze action aren't difficult terrain for you.</p>"
-        },
-        "Exiled Elebrian": {
-            "name": "Exiled Elebrian",
-            "description": "<p>You're a rarity: an elebrian who wasn't born on Eox. Perhaps your parents left the Halls of the Living before you were born to give you a better life. Maybe you come from a tiny enclave of elebrians making their home away from Eox, a tight-knit community on Absalom Station, or an asteroid in the Diaspora. You learn any regional language of your choice and gain the @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} general feat for that region. You learn another regional language and gain the Additional Lore general feat for that region at 5th level, and again at 13th level.</p>"
-        },
-        "Prismeni": {
-            "name": "Prismeni",
-            "description": "<p>You have an innate connection to the Drift. You gain the prismeni trait, in addition to the traits from your ancestry. While you're in the Drift, you can automatically pinpoint the location of Drift beacons, Drift lanes, Drift engines, and other Drift-related technology within a 100-mile radius. If you're Piloting a starship that doesn't have a Drift engine, you can serve as a connection between the Drift and that starship. This is a 1-minute activity that has the concentrate trait, and it allows the starship you're Piloting to enter or exit the Drift. Once within the Drift, the starship travels via conventional thrusters, as normal. When you get a critical failure on a Piloting check to @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{Navigate} or @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{Plot Course} through the Drift, you get a failure instead. You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from prismeni feats and feats from your ancestry whenever you gain an ancestry feat.</p>"
-        },
-        "Thorny Ikeshti": {
-            "name": "Thorny Ikeshti",
-            "description": "<p>Your scales have bony ridges and spurs, which you can use to defend yourself in a pinch. You gain the @UUID[Compendium.sf2e.actions.Item.6fsMvO0jXtK8gYkH]{Puff Up} reaction.</p>"
-        },
-        "Swarm Exile Shirren": {
-            "name": "Swarm Exile Shirren",
-            "description": "<p>While most shirrens broke away from the Swarm long ago, you're a more recent convert. You come from a group of castaways that have more in common with the Swarm than most other shirrens. You gain a bio-cannon ranged unarmed attack with a range increment of 20 feet that deals 1d6 acid damage. Your bio-cannon is in the corrosive weapon group. When you select this heritage, choose whether this attack comes from an underslung launcher on one of your arms, a launcher mounted over one of your shoulders, or from your mouth. You can't change this selection.</p>"
-        },
-        "Manifested Contemplative": {
-            "name": "Manifested Contemplative",
-            "description": "<p>Your brainwaves are so powerful that occult magic manifests and dances to the tune of your very thoughts. Choose one cantrip from the occult spell list. You can cast this cantrip as an occult innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
-        },
-        "Electric Kalo": {
-            "name": "Electric Kalo",
-            "description": "<p>You descend from a remote tribe in Kalo-Mahoi's photic zone that developed a bioelectric defense against predators, perhaps due to the influence of a bloom or because of an ancient diet of electric rays. You can cast the @UUID[Compendium.sf2e.spells.Item.kBhaPuzLUSwS6vVf]{Electric Arc} cantrip as a primal innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up. If you cast this spell with only 1 target, you gain electricity resistance equal to half your level (minimum 1) until the end of your next turn.</p>\n<p>@UUID[Compendium.sf2e.feat-effects.Item.xQvyfiOh05xK2A5A]{Effect: Electric Kalo}</p>"
-        },
-        "Korasha Lashunta": {
-            "name": "Korasha Lashunta",
-            "description": "<p>You've chosen the adaptive genetics to become a korasha. You might be stockier and more muscular than other lashuntas. In addition to what you gain from your ancestry, you gain an attribute boost to Strength and an attribute flaw to Wisdom, but the free ancestry boost can't also be Strength. You gain 8 Hit Points from your ancestry instead of 6, and you gain a +1 circumstance bonus to Athletics checks to @UUID[Compendium.sf2e.actions.Item.7blmbDrQFNfdT731]{Shove} or @UUID[Compendium.sf2e.actions.Item.ge56Lu1xXVFYUnLP]{Trip}.</p>"
-        },
-        "Irreproachable Contemplative": {
-            "name": "Irreproachable Contemplative",
-            "description": "<p>Just as antibodies isolate and eliminate pathogens in the bloodstream, your brain has evolved its own psychic defenses that deflect unwanted thoughts. You gain mental resistance equal to half your level (minimum 1). If you roll a success on a saving throw against a mental effect that would apply the controlled condition, you critically succeed instead.</p>"
-        },
-        "Stellar Sarcesian": {
-            "name": "Stellar Sarcesian",
-            "description": "<p>You have an intrinsic connection to the cosmos and can channel these stellar forces into magic. Choose one cantrip that has at least one of the following traits: darkness, light, vital, or void. You can cast this cantrip as an arcane innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
-        },
-        "Experimental Ikeshti": {
-            "name": "Experimental Ikeshti",
-            "description": "<p>Scientists have experimented on you, and whether you were paid for your services or were captured as a hatchling and raised in a lab, this experimentation has left a lasting mark. Increase your augmentation implant limit by 1; this additional augmentation can only be implanted with biotech augmentations. Choose one common biotech augmentation with an item level of 1 or less. You begin with this biotech augmentation already implanted in your body. You don't need to pay the credits to purchase this starting augmentation. You can remove and replace this augmentation following the usual rules.</p>"
-        },
-        "Longsnout Ysoki": {
-            "name": "Longsnout Ysoki",
-            "description": "<p>The long snouts that run in your family give you a keener sense of smell than most ysoki. You gain imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine a creature's location. The GM will usually double the range if you're downwind from the creature or halve the range if you're upwind.</p>\n<p>In addition, you gain a +2 circumstance bonus to Perception checks to [[/act seek]] a creature or object within the range of your scent.</p>"
-        },
-        "Wild Astrazoan": {
-            "name": "Wild Astrazoan",
-            "description": "<p>While most astrazoans flock to communities in densely populated settlements, some choose to live among nature in the wilderness, forging their own destiny or even defending their paradise from the influence of others. You have only one ancestry you can select for Change Shape, but you can also use Change Shape to transform into an animal with the statistics of a 1st-rank @UUID[Compendium.sf2e.spells.Item.gfPjmG6Fe6D3MFjl]{Pest Form}.</p>"
-        },
-        "Kasath Survivalist": {
-            "name": "Kasath Survivalist",
-            "description": "<p>You and your ancestors were among those who chose not to abandon your dying home world. Your people trek through wasted lands under dim skies, seeking shelter and resources even as they slowly dwindle. You might have finally decided to seek a better life, or perhaps you hope to convince others to return to Kasath with you. You can @UUID[Compendium.sf2e.actions.Item.JuqmIAnkL9hVGai8]{Hustle} twice as long while exploring before you have to stop. If you're in a group that's Hustling, you increase the total number of minutes the group can Hustle by 10 minutes, or by 20 minutes if you're 13th level or higher. You gain the @UUID[Compendium.sf2e.feats.Item.c9fHUSI5lRdXu1Ic]{Feather Step} feat.</p>"
-        },
-        "Asteroid Hopper Sarcesian": {
-            "name": "Asteroid Hopper Sarcesian",
-            "description": "<p>Whether flitting between asteroids in the Diaspora or repairing the outer hull of a starship, you spend a lot of time in the void of space and have pushed yourself to stay exposed just a little longer every time you head out. You can remain in a vacuum much longer than the average sarcesian. You can maintain suspended respiration up to a maximum of 4 hours at a time, rather than 1 hour at a time.</p>"
-        },
-        "Versatile Human": {
-            "name": "多才人类 Versatile Human",
-            "description": "<p>Humans were the most common ancestry on Golarion before that world disappeared, and they've since spread to the stars thanks to their versatility. Select a general feat of your choice for which you meet the prerequisites (as with your ancestry feat, you can select this general feat at any point during character creation).</p>"
-        },
-        "Retrograde Contemplative": {
-            "name": "Retrograde Contemplative",
-            "description": "<p>Contemplatives' guided evolution has shrunk their limbs and expanded their immense brains. Rarely, by some genetic quirk, a contemplative like you is born with a body more closely resembling your less specialized ancestors. With longer, stronger limbs, you are still unmistakably a contemplative. You lose the atrophied trait. In addition, you gain 10 Hit Points from your ancestry instead of 6.</p>"
-        },
-        "Corpsefolk": {
-            "name": "Corpsefolk",
-            "description": "<p><em>Corpsefolk are people who died and reanimated as corporeal, intelligent undead, with the same general appearance and personality they had in life, though usually with sickly pale skin, rotting parts, exposed bone, or other signs of putrescence.</em></p>\n<p>You are a reanimated corpse. Your undead nature might physically manifest in gray or pale skin, eyes that turn solid black or white, or an unnatural elongation of the fingernails (or similar appendages). You gain the corpsefolk and undead traits, in addition to the traits from your ancestry. You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from corpsefolk feats and feats from your ancestry whenever you gain an ancestry feat.</p>\n<p>Corpsefolk also gain the following.</p>\n<p><strong>Immunity to Death Effects:</strong> You are immune to death effects, such as being automatically killed or having your dying value increase, but not other parts of the spell or effect (such as damage or becoming frightened from vision of death).</p>\n<p><strong>Void Healing:</strong> You are damaged by vitality damage and aren't healed by vitality healing effects. You don't take void damage and are healed by void effects that heal undead.</p>\n<p><strong>Void Survival:</strong> Unlike normal undead, you aren't destroyed when reduced to 0 Hit Points. Instead, powerful energies attempt to keep you from being destroyed. You are knocked out and begin dying when reduced to 0 Hit Points. Because you're undead, many methods of bringing someone back from the dying condition, such as @UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize}, don't benefit you. When you would die, you're destroyed rather than just dead, just like other undead.</p>\n<p><strong>Special</strong>: At the GM's discretion, you can select the corpsefolk versatile heritage after 1st level if your character dies and has an opportunity to be raised as an undead. This replaces your heritage.</p>"
-        },
-        "Compact Sarcesian": {
-            "name": "Compact Sarcesian",
-            "description": "<p>You're incredibly flexible and can fold your gangly limbs up and around yourself like a contortionist, enabling you to maneuver in small and awkward spaces. You can fit through tight spaces as though you were a Medium creature.</p>"
-        },
-        "Defiant Shirren": {
-            "name": "Defiant Shirren",
-            "description": "<p>Despite the passage of time, you remain resolute in your defiance of the Swarm and all forms of mental control. If you roll a success on a Will saving throw against an effect that was created by a creature with the kucharn trait or a creature that you know is allied with the Swarm, you get a critical success instead. You gain these benefits against any creature affected by a spell or effect that controls it. Additionally, you gain the @UUID[Compendium.sf2e.actions.Item.nAJeT29ZJvqeg98h]{Rebellious Defiance} action.</p>"
-        },
-        "Offworld Shobhad": {
-            "name": "Offworld Shobhad",
-            "description": "<p>You were born offworld, far from the influence of shobhad clans and the spirit of your ancestral home world. Your unique experience has allowed you to develop personal adaptations that serve you well. You lose the cold adapted ability but gain an additional 1st-level shobhad ancestry feat for which you meet the prerequisites.</p>"
-        },
-        "Petrified": {
-            "name": "石化 Petrified",
-            "description": "<p>Your body is covered in thick, plated bark. Your bark is medium armor in the plate armor group that grants a +4 item bonus to AC, has a Dex cap of +1, a check penalty of –2, a Speed penalty of –5 feet, a Strength value of +3, and has the bulwark, comfort, and exposed traits. You can never wear other armor or remove the bark. You can etch armor runes onto the bark.</p>"
-        },
-        "Briskwander Vesk": {
-            "name": "Briskwander Vesk",
-            "description": "<p>You come from a line of vesk who were constantly on the move. Your Speed increases by 5 feet.</p>"
-        },
-        "Sniper Shobhad": {
-            "name": "Sniper Shobhad",
-            "description": "<p>Special techniques developed over centuries and passed from generation to generation have helped make shobhad-neh some of the most feared snipers in the Pact Worlds, and with good cause. If you are holding a two-handed gun in your inactive pair of hands, whenever you fail at a Strike made with a weapon or unarmed attack using your active hands, you can @UUID[Compendium.sf2e.actions.Item.oW81CfM9ebxXnrw3]{Switch Hands} as a free action.</p>"
-        },
-        "Urban Shobhad": {
-            "name": "Urban Shobhad",
-            "description": "<p>You live in a city or other densely populated area and, after a lot of trial and error, have found your niche, becoming a productive citizen in equilibrium with your community. You gain the @UUID[Compendium.sf2e.feats.Item.YtbPw4FSa86QAdRq]{Urban Survivalist} skill feat even if you aren't trained in Survival. You have a +2 circumstance bonus on any downtime checks you make to Craft or @UUID[Compendium.sf2e.actions.Item.QyzlsLrqM0EEwd7j]{Earn Income}.</p>"
-        },
-        "Stagehand Elebrian": {
-            "name": "Stagehand Elebrian",
-            "description": "<p>You love being on the other side of the camera. You've spent your formative years rigging scenes, hauling props, and making media magic as a stagehand in the Halls of the Living. You're either trained in Acrobatics and gain the @UUID[Compendium.sf2e.feats.Item.CnqMJR8e9jqJR7MM]{Steady Balance} skill feat, or you're trained in Athletics and gain the @UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{Combat Climber} skill feat. If you would automatically become trained in your chosen skill (from your background or class, for example), you instead become trained in a skill of your choice.</p>"
-        },
-        "Scrabbler Skittermander": {
-            "name": "Scrabbler Skittermander",
-            "description": "<p>You never mastered coordinating all six of your arms for manual manipulation, instead using the lowest two limbs for the extra mobility, balance, and stabilization of a natural climber. You have four arms (rather than six) and four legs (rather than two). You gain a climb Speed equal to your base land Speed and can climb using your feet, leaving your four arms free.</p>"
-        },
-        "Urbanite Human": {
-            "name": "Urbanite Human",
-            "description": "<p>You have grown up in a big city and are accustomed to the press and pull of the largest crowds, the electric buzz and tangle of streets, or the dense nature of vertical living on a station or megaplex. You ignore difficult terrain from crowds and lesser cover from crowds. You become trained in a Lore skill for one specific city of your choice.</p>"
-        },
-        "Construct Copycat": {
-            "name": "Construct Copycat",
-            "description": "<p>You have reinforced your body with technological augmentations that can be shifted to give yourself the appearance of a constructed creature. You can use Change Shape to assume the appearance of a Small or Medium construct. You gain the Augmented Body general feat.</p>"
-        },
-        "Tempering": {
-            "name": "Tempering",
-            "description": "<p>You're undergoing your Tempering, a coming-of-age ritual during which a kasatha rejects the formal traditions of their family and experiences other customs and traditions. You might be one of the Untempered, a kasatha who chooses to continue their Tempering beyond the traditional period. You become trained in Society and gain the @UUID[Compendium.sf2e.feats.Item.X2jGFfLU5qI5XVot]{Streetwise} feat.</p>"
-        },
-        "Merged Barathu": {
-            "name": "Merged Barathu",
-            "description": "<p>You're a unique entity formed from the constant union of two or more barathus who enjoy the act of combination so much that they chose not to return to isolation as their former selves. You're Large instead of Medium. You gain 10 Hit Points from your ancestry instead of 8, and you gain a +1 circumstance bonus to saving throws against emotion effects.</p>"
-        },
-        "Winged Shirren": {
-            "name": "Winged Shirren",
-            "description": "<p>Your ancestors were members of the Swarm who evolved wings. You possess a fully functional pair of wings that grant you a fly Speed of 15 feet.</p>"
-        },
-        "Renewed Android": {
-            "name": "Renewed Android",
-            "description": "<p>Many souls have inhabited your synthetic body before you, and you might incorporate a number into your name to honor them. You might know your body's history and work toward a goal bequeathed to you by a departed soul, or you might seek to learn the mystery of a forgotten legacy. Muscle memory hints at your body's past, and people you've never met sometimes recognize your face. The first time in a day that you lose the dying condition, you don't gain the wounded condition. You become trained in a skill of your choice that has the @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{Recall Knowledge} action, and you gain the@UUID[Compendium.sf2e.feats.Item.1Bt7uCW2WI4sM84P]{ Dubious Knowledge} skill feat.</p>"
-        },
-        "Shipborn Dragonkin": {
-            "name": "Shipborn Dragonkin",
-            "description": "<p>Your ancestors adapted to live on a starship or in a settlement sized for people much smaller than your own. Being large was a disadvantage—one that subsequent generations shed. Instead of Large, your size is Medium. You gain a +1 circumstance bonus to checks to @UUID[Compendium.sf2e.actions.Item.kMcV8e5EZUxa6evt]{Squeeze}, and you can use Acrobatics or Athletics when you Squeeze.</p>"
-        },
-        "Rime Walker Pahtra": {
-            "name": "Rime Walker Pahtra",
-            "description": "<p>You've adapted to cold environments by growing a fluffy fur coat. You might be the descendant of ancient pahtras who dwelled in the frigid regions of Pulonis long before the Veskarium's exploitation changed its climate, or you might have unlocked this genetic potential through bioengineering. You gain cold resistance equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
-        },
-        "Thoughtseeker Contemplative": {
-            "name": "Thoughtseeker Contemplative",
-            "description": "<p>Not content with their own thoughts, some contemplatives opened themselves to other minds seeking knowledge throughout the galaxy, developing far-reaching awareness as a result. You are descended from these psychic explorers or trained extensively with their successors. You gain @UUID[Compendium.sf2e.spells.Item.qOLMHvkAGsVYLhtn]{Detect Thoughts} as a 2nd-rank occult innate spell, which you can cast once every 10 minutes. At level 12, you can cast this as a 4th-rank occult innate spell.</p>"
-        },
-        "Bloom-Born Kalo": {
-            "name": "Bloom-Born Kalo",
-            "description": "<p>You grew up near a bloom, one of the naturally occurring portals to the First World that randomly open and close across Kalo-Mahoi, and have developed a natural sense for the presence of primal magic around you. You gain the trained proficiency rank in Nature. If you would automatically become trained in Nature (from your background or class, for example), you become trained in another skill of your choice. Additionally, you can cast the @UUID[Compendium.sf2e.spells.Item.gpzpAAAJ1Lza2JVl]{Detect Magic} cantrip as a primal innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
-        },
-        "Inflorescent": {
-            "name": "Inflorescent",
-            "description": "<p>You draw from a wellspring of vital energy to remain constantly in bloom. Choose one cantrip: @UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize} or @UUID[Compendium.sf2e.spells.Item.kcelf6IHl3L9VXXg]{Vitality Lash}, which you can cast as a primal innate spell at will. This choice can't be changed. A cantrip is heightened to a spell rank equal to half your level rounded up. You also gain a +1 circumstance bonus to saves against void effects.</p>"
-        },
-        "Networked Android": {
-            "name": "Networked Android",
-            "description": "<p>Your body was modified to network seamlessly with other tech creatures. You gain shortwave, allowing you to communicate wirelessly with any creatures within 30 feet, as long as they have shortwave or are a construct with the tech trait. This doesn't give any special access to their thoughts or programming and communicates no more information than normal speech would. You can attempt Computers checks to Hack systems, @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{Combat Hack}, create a @UUID[Compendium.sf2e.feats.Item.0ZNErs9RICfOw1Nf]{Digital Diversion}, @UUID[Compendium.sf2e.actions.Item.cYdz2grcOcRt4jk6]{Disable a Device}, or @UUID[Compendium.sf2e.actions.Item.2EE4aF4SZpYf0R6H]{Pick a Lock} without a hacker's toolkit or free hand at a range of 30 feet.</p>"
-        },
-        "Imperious Contemplative": {
-            "name": "Imperious Contemplative",
-            "description": "<p>Whether it's a nurtured response or a natural consequence of your instinctive genius, your brain rewards you with endorphins whenever you witness your inferior rivals flailing helplessly in a mental sea. You gain the @UUID[Compendium.sf2e.actions.Item.wI0g2nRfu2d0YFAd]{Shielding Arrogance} reaction.</p>"
-        },
-        "Nomadic Vlaka": {
-            "name": "Nomadic Vlaka",
-            "description": "<p>You live your life on the move, traveling the galaxy in an endless journey. You gain two additional languages of your choice, chosen from among the common and uncommon languages available to you. When you select the @UUID[Compendium.sf2e.feats.Item.P9HCz0uR6xPHuw72]{Multilingual} skill feat, you gain three new languages instead of two.</p>"
-        },
-        "Damaya Lashunta": {
-            "name": "Damaya Lashunta",
-            "description": "<p>You've chosen the adaptive genetics to become a damaya. You might have a leaner, lither body type than other lashuntas and are likely encouraged to pursue work as a scholar or politician. In addition to what you gain from your ancestry, you gain an attribute boost to Intelligence and an attribute flaw to Constitution, but the free ancestry boost can't also be Intelligence. You become trained in Diplomacy. If you would automatically become trained in Diplomacy (from your background or class, for example), you become trained in another skill of your choice. You gain the @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} general feat.</p>"
-        },
-        "Artificial Scion Android": {
-            "name": "Artificial Scion Android",
-            "description": "<p>Your body wasn't created in the image of a biological creature; a powerful artificial intelligence created you to interface with other machines. Your physiology is nearly identical to other androids, but uncanny details give away your non-standard origins (for example, you might have impossibly symmetrical features, extra fingers, or double pupils). You become trained in Computers, and you gain the @UUID[Compendium.sf2e.feats.Item.ifQiKhl0Gt2CM7i9]{Phreaker} skill feat.</p>"
-        },
-        "Skilled Human": {
-            "name": "精熟人类 Skilled Human",
-            "description": "<p>你的聪明才智让你有机会擅长多种技能。你选择的一项技能获得受训熟练度。5级时，你在该所选技能上的熟练度提升至专家。</p>"
-        }
+    "Empathic Vlaka": {
+      "name": "共感弗拉卡 Empathic Vlaka",
+      "description": "<p>你会本能地感知到周围的人何时正经历强烈情绪或内心冲突。你在进行 @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{洞悉动机} 的察觉检定时获得 +2 情境加值。若你未主动对一个受魅惑、被附身，或受到情绪效果影响的生物使用洞悉动机，则 GM 会为你进行一次秘密检定，不适用通常的情境加值，且带有 –2 情境减值，让你仍有可能注意到该魅惑、附身或情绪效果。</p>\n<p>You instinctively sense when the people around you are feeling strong emotions or inner conflict. You gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}. If you aren't actively using Sense Motive on a creature who's enchanted, possessed, or subject to an emotion effect, the GM rolls a secret check, without the usual circumstance bonus and with a –2 circumstance penalty, for you to potentially notice the enchantment, possession, or emotion effect anyway.</p>"
+    },
+    "Venomthought Vesk": {
+      "name": "毒念维斯克蜥人 Venomthought Vesk",
+      "description": "<p>你是少数天生具有灵能天赋的著名维斯克蜥人之一。根据民间传说，你的血统起源于维斯克主星上一个居住在古老洞穴中的社群，他们通过神秘仪式改造了自己，从而获得了能够在任何未来后代身上显现的“毒性思维”。你可以随意将 daze 作为一个天生异能神秘戏法施放。戏法会自动升阶，其法术环阶等于你等级的一半（向上取整）。你在进行有关灵能传统与哲学的 @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{回忆知识} 奥秘学检定时，获得+1环境加值。</p>\n<p>You're one of the notable vesk born with psychic talents. According to folklore, your lineage originated with an ancient cave-dwelling society on Vesk Prime who modified themselves with occult rituals, which granted them \"venomous thoughts\" that could manifest in any future progeny. You can cast daze as an occult innate cantrip at will. A cantrip is heightened to a spell rank equal to half your level rounded up. You gain a +1 circumstance bonus to Occultism checks to @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{Recall Knowledge} about psychic traditions and philosophies.</p>"
+    },
+    "Unbound Lashunta": {
+      "name": "无羁拉申塔人 Unbound Lashunta",
+      "description": "<p>你决定不激活你族裔的适应性遗传。你可能会表现出达玛亚和科拉莎特征的组合；你可能高大健壮，也可能矮小轻盈，或者你拥有一些不寻常的特征，比如覆盖全身的隆起与旋纹，或是长而毛茸茸的触角。你获得@UUID[Compendium.sf2e.actions.Item.j1FsKMy7CTtrp3Fu]{自由心智}反应。</p>\n<p>You decided against activating your ancestry's adaptive genetics. You might show a combination of damaya and korasha traits; you might be tall and muscular or short and lithe, or perhaps you have unusual features, such as bumps and swirls covering your body or long, fuzzy antennae. You gain the @UUID[Compendium.sf2e.actions.Item.j1FsKMy7CTtrp3Fu]{Unbound Mind} reaction.</p>"
+    },
+    "Everwhelp Skittermander": {
+      "name": "永幼颤跃族 Everwhelp Skittermander",
+      "description": "<p>尽管你已是完全成年的个体，你仍然保留着腹部口器——这可能是进化上的奇异变异、有意进行的基因操控，或某种生物工程强化所致。你获得一种颚击无武装攻击，造成 1d6 穿刺伤害，属于搏斗组，并具有灵巧、斯基特曼德，以及无武装特征。</p>\n<p>Despite being a full-grown adult, you've retained your stomach-mouth—either through a quirk of evolution, purposeful genetic manipulation, or a biotech augmentation. You gain a jaws unarmed attack that deals 1d6 piercing damage, is in the brawling group, and has the finesse, skittermander, and unarmed traits.</p>"
+    },
+    "Plated Vesk": {
+      "name": "披甲维斯克蜥人 Plated Vesk",
+      "description": "<p>你的祖先是维斯克蜥人中最为强韧的个体，曾在忍受敌对环境的同时远行四方。你的鳞片视为板甲组中的中甲。它们给予你 AC +3 的物品加值，敏捷上限为 +1，检定减值为 –2，力量阈值为 +3，并具有舒适和暴露特征。该物品加值在5级时提升至 +4。你可以穿飞行服，但不能穿其他护甲。你可以将护甲符文蚀刻在你的鳞片上，但不能安装护甲升级。</p>\n<p>Your ancestors were the hardiest specimens of vesk, having traveled far and wide while enduring hostile environments. Your scales count as medium armor in the plate armor group. They grant a +3 item bonus to AC, have a Dex cap of +1, a check penalty of –2, and a Strength threshold of +3, and have the comfort and exposed traits. This item bonus increases to +4 at 5th level. You can wear a flight suit, but you can't wear other armor. You can etch armor runes onto your scales, but you can't install armor upgrades.</p>"
+    },
+    "Akitonian Kasatha": {
+      "name": "阿基顿卡萨萨人 Akitonian Kasatha",
+      "description": "<p>你（或你的一位祖先）乘坐<em>伊达里号</em>前往协约世界，并定居在阿基顿。阿基顿明显更低的重力让你在兼具趣味与实用性的跳跃艺术上更具优势，而你很可能也乐于参与围绕这颗沙漠世界热门运动的诸多仪式。你获得 @UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{快速跳跃} 专长，且不会将沙地视为崎岖地形。</p>\n<p>You (or one of your ancestors) traveled to the Pact Worlds on the <em>Idari</em> and settled on Akiton. Akiton's significantly lower gravity grants you an advantage in the fun and practical art of leaping, and you likely revel in the many rituals surrounding the desert world's popular sports. You gain the @UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{Quick Jump} feat and don't treat sand as uneven ground.</p>"
+    },
+    "Skitter Raised": {
+      "name": "掠跃鼠觉醒 Skitter Raised",
+      "description": "<p>你一生都生活在一个紧密团结的社群中，在那里团队合作让梦想成真，而人群就像一个等待发生的巨大集体拥抱。你获得@UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{ 团体印象}技能专长。此外，在协助盟友进行不具有攻击（特征）的技能检定时，你的检定获得+2环境加值。</p>\n<p>You've spent your life as part of a tight-knit community, where teamwork makes the dream work and crowds are giant group hugs waiting to happen. You gain the@UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{ Group Impression} skill feat. In addition, you gain a +2 circumstance bonus to checks to Aid an ally at skill checks that don't have the attack trait.</p>"
+    },
+    "Deep Ysoki": {
+      "name": "深地伊索基人 Deep Ysoki",
+      "description": "<p>你习惯于生活在黑暗之处，例如维护竖井、小行星，以及远离太阳的遥远卫星和小型行星上。你获得黑暗视觉。</p>\n<p>You're accustomed to living in dark places, such as maintenance shafts, asteroids, and on distant moons and planetoids far from the sun. You gain darkvision.</p>"
+    },
+    "Outworlder Kalo": {
+      "name": "异界客 卡洛 Outworlder Kalo",
+      "description": "<p>你人生中有相当长的一段时间远离卡洛-马霍伊的海洋，因此你在应对陆地生活的挑战方面经验尤为丰富。你的陆地速度增加5尺（对大多数卡洛鱼人而言提高至25尺）。</p>\n<p>You've spent a significant portion of your life away from the oceans of Kalo-Mahoi, so you're particularly experienced at handling the challenges of life on dry land. Your land Speed is increased by 5 feet (to 25 feet for most kalos).</p>"
+    },
+    "Flameheart Dragonkin": {
+      "name": "焰心龙人 Flameheart Dragonkin",
+      "description": "<p>你血液中燃烧的余烬使你免受高海拔寒意的侵袭。你获得等同于你等级一半的寒冷抗性（最低为 1）。你将环境寒冷效果视为比实际低一级的极端程度（难以置信的严寒变为极端严寒，极端严寒变为严重严寒，依此类推）。</p>\n<p>The embers burning in your blood keep you safe from the chill of high altitudes. You gain resistance to cold equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
+    },
+    "Aquazoan": {
+      "name": "水族生物 Aquazoan",
+      "description": "<p>生活在水生世界和群落中的星体族学会了如何将鳃和鳍整合进自己的形态中，甚至在模仿通常不具备这些特征的物种时也能显现出这些特征。你获得 20 尺的游泳速度，并获得两栖特征，使你能够在水中和空气中呼吸。</p>\n<p>Astrazoans occupying aquatic worlds and communities learn how to integrate gills and fins into their forms and can even manifest these traits when imitating species that do not normally have them. You gain a swim Speed of 20 feet, and you gain the amphibious trait, enabling you to breathe in water and air.</p>"
+    },
+    "Entertainer Elebrian": {
+      "name": "艺人 灵脑人 Entertainer Elebrian",
+      "description": "<p>你热爱成为众人瞩目的焦点，而且你人生中有很大一部分时间都在镜头前度过。你在生者大厅出生并长大，从小就在那里学会了如何娱乐观众。你可能是一位冉冉升起的超级明星，或是一位知名的性格演员、临时演员，或是拥有不断增长粉丝群的真人秀参赛者。你在表演和媒体学识方面受过训练，并获得 @UUID[Compendium.sf2e.feats.Item.xqAdXRd2gSQcqp5E]{令人印象深刻的表演} 技能专长。</p>\n<p>You love being in the spotlight, and you've spent a good deal of your life on camera. You were born and raised in the Halls of the Living, where you learned how to entertain an audience from childhood. You might be a rising superstar or a prominent character actor, extra, or reality show contestant with a growing fan following. You're trained in Performance and Media Lore, and you gain the @UUID[Compendium.sf2e.feats.Item.xqAdXRd2gSQcqp5E]{Impressive Performance} skill feat.</p>"
+    },
+    "Shipborn Ysoki": {
+      "name": "舰生鼬族 Shipborn Ysoki",
+      "description": "<p>你出生在一艘星舰上、一个太空站的通道内，或其他类似环境中。你获得驾驶的受训熟练等级。若你会自动在驾驶上成为受训（例如来自你的背景或职业），则你改为在你自选的另一项技能上成为受训。若你在进行驾驶检定以 @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{Navigate} 或 @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{Plot Course} 时获得成功，则你改为获得大成功。</p>\n<p>你已适应在狭小空间中机动。你在进行特技检定以 @UUID[Compendium.sf2e.actions.Item.21WIfSu7Xd7uKqV8]{Tumble Through} 中型或更大敌人所占据的空间时，获得 +1 情境加值，且敌人的存在不会使这些方格成为困难地形。</p>\n<p>You were born aboard a starship, inside a space station's access corridors, or another similar environment. You gain the trained proficiency rank in Piloting. If you would automatically become trained in Piloting (from your background or class, for example), you become trained in another skill of your choice. If you get a success on a Piloting check to @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{Navigate} or @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{Plot Course}, you get a critical success instead.</p>\n<p>You've adapted to maneuvering in close quarters. You gain a +1 circumstance bonus to Acrobatics checks to @UUID[Compendium.sf2e.actions.Item.21WIfSu7Xd7uKqV8]{Tumble Through} the spaces of Medium or larger enemies, and the presence of an enemy doesn't make the squares difficult terrain.</p>"
+    },
+    "Akitonian Ysoki": {
+      "name": "阿基顿鼠基尼斯人 Akitonian Ysoki",
+      "description": "<p>你或你的祖先在阿基顿长大，靠拆解坠毁的星舰或在垃圾堆中翻找宝物为生。你在制作上获得受训熟练等级，并且可以使用制作代替盗窃来停用装置。如果你已经在制作上受训，则改为获得“快速修理”一般专长。</p>\n<p>You or your ancestors grew up on Akiton, scrapping crashed starships or combing junk heaps for treasures. You gain the trained proficiency rank in Crafting and can use Crafting instead of Thievery to Disable a Device. If you're already trained in Crafting, you instead gain the Quick Repair general feat.</p>"
+    },
+    "Mod Fanatic Android": {
+      "name": "狂热粉丝安卓体 Mod Fanatic Android",
+      "description": "<p>你或你先前的迭代体已改造了自己的身体，使其能够兼容护甲升级，让你可以亲自定制自己的身体及其能力。你的身体拥有1个护甲升级槽位，你可以用它来安装护甲升级，且它不计入你的护甲可安装升级的总数。你可以使用“安装升级”活动，将护甲升级安装到你的个人升级槽位中，或从其中卸下。选择一个物品等级为1或以下的普通护甲升级。你开始游戏时，该护甲升级已安装在你的升级槽位中（你无需支付信用点来购买这个初始升级）。</p>\n<p>You or your previous iterations have modified your body to be compatible with armor upgrades, enabling you to personally customize your body and its capabilities. Your body has one armor upgrade slot that you can use to install armor upgrades and that doesn't count toward your armor's total number of upgrades. You can install and uninstall armor upgrades into your personal upgrade slot using the Install Upgrade activity. Choose one common armor upgrade with an item level of 1 or less. You begin with this armor upgrade already installed in your upgrade slot (you don't need to pay the credits to purchase this starting upgrade).</p>"
+    },
+    "Winter Coat Vlaka": {
+      "name": "冬装外套弗拉卡 Winter Coat Vlaka",
+      "description": "<p>你浓密的毛发使你在像拉约克这样的寒冷地区也能保持温暖。你获得等于你等级一半的寒冷抗性（最低为1）。你将环境寒冷效果视为降低一个等级的极端程度（难以置信的严寒变为极端严寒，极端严寒变为严重严寒，依此类推）。</p>\n<p>Your thick fur keeps you warm in cold places like Lajok. You gain cold resistance equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
+    },
+    "Star Marked Vlaka": {
+      "name": "星痕弗拉卡 Star Marked Vlaka",
+      "description": "<p>你目睹了垂死恒星索塔奇迹般的重生。你的外套或眼睛上带有星芒印记，闪耀着群星之光。只需片刻思索，你就能让这些星之印记在40英尺半径内发出明亮光照（并在接下来的40英尺内发出微光）。这道光具有光和异能特征。你可以用单个动作点燃或熄灭这道光，该动作具有专注特征。当你处于太阳或恒星能量范围之外时，例如在漂流域中，或在这些天体并不存在的其他位面上，你无法激活此能力。</p>\n<p>You witnessed the miraculous rebirth of the dying star Sota. Your coat or eyes are marked with starbursts that shine with the light of the stars. With a moment's thought, you can cause these star markings to shed bright light in a 40-foot radius (and dim light to the next 40 feet). This light has the light and occult traits. You can spark or extinguish this light using a single action, which has the concentrate trait. You can't activate this ability when you're beyond the energy of a sun or stars, such as in the Drift or on another plane of existence where these celestial bodies don't exist.</p>"
+    },
+    "Crèche-Raised Sarcesian": {
+      "name": "育雏所长大的萨瑟蝶人 Crèche-Raised Sarcesian",
+      "description": "<p>你在一个田园牧歌般的育幼星球上长大，并与数十名其他萨瑟蝶人儿童亲密生活在一起。你很早就学会了如何与他人相处，以及如何在人群中脱颖而出。你受训于外交。若你本会自动获得外交的受训等级（例如来自你的背景或职业），则你改为在一项你选择的技能上获得受训。你获得 @UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{群体印象} 技能专长。</p>\n<p>You were raised on an idyllic crèche world and lived closely with dozens of other sarcesian children. You learned how to get along with others and stand out in a crowd early on. You are trained in Diplomacy. If you would automatically become trained in Diplomacy (from your background or class, for example), you instead become trained in a skill of your choice. You gain the @UUID[Compendium.sf2e.feats.Item.KpFetnUqTiweypZk]{Group Impression} skill feat.</p>"
+    },
+    "Survivalist Shobhad": {
+      "name": "求生者绍巴德 Survivalist Shobhad",
+      "description": "<p>肖巴德-内族以其作为侦察兵和向导的天赋而闻名，这些天赋是他们在严酷母星阿基顿上历经数千年生存所磨炼出来的。作为这些技能的继承者，你在维持自己、甚至他人生计方面都异常娴熟，同时仍能执行其他关键任务。你可以在进行 @UUID[Compendium.sf2e.actions.Item.kV3XM0YJeS2KCSOb]{侦察} 探索活动的同时进行 @UUID[Compendium.sf2e.actions.Item.EA5vuSgJfiHH7plD]{追踪} 探索活动。在停工期中，你可以在进行维生停工期活动的同时，进行你有能力执行的任意一项其他停工期活动。</p>\n<p>Shobhad-neh are renowned for their talents as scouts and guides, talents they have honed over millennia of existence on their harsh home world of Akiton. As an inheritor of these skills, you are exceptionally talented at seeing to your own subsistence and even that of others while still performing other critical tasks. You can perform the @UUID[Compendium.sf2e.actions.Item.kV3XM0YJeS2KCSOb]{Scout} exploration activity at the same time as the @UUID[Compendium.sf2e.actions.Item.EA5vuSgJfiHH7plD]{Track} exploration activity. During downtime, you can perform the Subsist downtime activity alongside any one other downtime activity you are capable of performing.</p>"
+    },
+    "Borai": {
+      "name": "活尸裔 Borai",
+      "description": "<p>你从死亡边缘归来，成为一名活尸裔——同时既是活物也是不死生物。除了你族裔原有的特征外，你还获得活尸裔和不死（特征）特征。与其他不死生物不同，你不会获得虚空治疗。你会像活物一样被活力效果治疗，并受到虚空伤害的伤害。同样，你也可以像活物一样被稳定、治疗并复活，但你总是会以自己正常的不死状态（即活尸裔）复生。你获得微光视觉；如果你的族裔已经拥有微光视觉，则改为获得黑暗视觉。每当你获得一个族裔专长时，你都可以从活尸裔专长和你族裔的专长中进行选择。</p>\n<p>You've returned from the brink of death as a borai—at once both living and undead. You gain the borai and undead trait, in addition to the traits from your ancestry. Unlike other undead, you don't gain void healing. You're healed by vitality effects and damaged by void damage, as if you were a living creature. Likewise, you can be stabilized, healed, and brought back to life as if you were a living creature, save that you always return to life in your normal undead state (as a borai). You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from borai feats and feats from your ancestry whenever you gain an ancestry feat.</p>"
+    },
+    "Keen Sighted Vlaka": {
+      "name": "目光敏锐的弗拉卡 Keen Sighted Vlaka",
+      "description": "<p>你的视觉感官格外敏锐，这种能力经过世代在一颗沐浴于垂死恒星黯淡光芒中的世界上求生而磨炼得来。你获得黑暗视觉。</p>\n<p>You have a particularly keen sense of vision, honed through generations of surviving on a world bathed in the dim light of a dying star. You gain darkvision.</p>"
+    },
+    "Sageborn Elebrian": {
+      "name": "灵脑人贤裔 Sageborn Elebrian",
+      "description": "<p>你天生就有施展魔法的才能。这可能是由于古老灵脑人基因的显现，或者也许你曾暴露于一阵奥术能量爆发之中，唤醒并强化了你的魔法感知。从任意传统中选择一个戏法。你可以将这个戏法作为奥术先天法术随意施放。戏法的强化环阶等于你等级的一半，向上取整。</p>\n<p>You have a natural talent for magic. This might be due to the presentation of ancient elebrian genes, or maybe you were exposed to a burst of arcane energy that awakened and turbocharged your magical senses. Choose one cantrip from any tradition. You can cast this cantrip as an arcane innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
+    },
+    "Deep Kalo": {
+      "name": "深海卡洛 Deep Kalo",
+      "description": "<p>你出生在无光层的深处，那里没有来自地表的光能够穿透，远离那些聚集在卡洛-马霍伊地热绿洲周围的明亮城市。你获得回声定位，作为一种不精确感知，范围为30英尺；在水下时，范围为60英尺。</p>\n<p>You were born deep down in the aphotic zone where no light penetrates from the surface, far from the bright cities clustered around Kalo-Mahoi's geothermal oases, You gain echolocation as an imprecise sense with a range of 30 feet, or 60 feet when underwater.</p>"
+    },
+    "Sharp-Toothed Vlaka": {
+      "name": "尖齿维拉卡 Sharp-Toothed Vlaka",
+      "description": "<p>你拥有掠食者般强壮的下颚与锋利的牙齿，使你的口部成为危险的武器。你获得一个造成 1d6 穿刺伤害的颚击无武装攻击。你的颚击属于搏斗组，并具有灵巧和无武装特征。</p>\n<p>You have the strong jaw and sharp teeth of a predator, making your mouth a dangerous weapon. You gain a jaws unarmed attack that deals 1d6 piercing damage. Your jaws are in the brawling group and have the finesse and unarmed traits.</p>"
+    },
+    "Meyel's Chosen Pahtra": {
+      "name": "梅耶尔所选的帕赫特拉 Meyel's Chosen Pahtra",
+      "description": "<p>你有一种无可否认的好运气息，你相信这是来自你祖先神祇梅耶尔的赐福。你可能出身于一个绵延已久的秘学者家族。也许你出生在普洛尼斯的一处圣洁地点，或是在危机时刻以炽烈的祈祷向外求援。大多数被梅耶尔选中的人，至少都能指出过去某个时刻：她们的女神或许曾出手干预，将他们从死亡或其他可怕命运中拯救出来。无论是比喻意义上还是字面意义上，你似乎总能化险为夷。每天第一次你在一次豁免检定中重度失败时，你立刻以一个自由动作重掷该次豁免检定；这是一种幸运效果。</p>\n<p>You have an undeniable streak of luck that you believe is a blessing from your ancestral god Meyel. You might come from a long line of mystics. Perhaps you were born at a holy site on Pulonis, or you reached out in fervent prayer at a time of crisis. Most of Meyel's chosen can point to at least one past event when their goddess might have intervened to save them from death or some other awful fate. Whether metaphorically or literally, you always seem to land on your feet. The first time each day that you critically fail a saving throw, you immediately reroll the saving throw as a free action; this is a fortune effect.</p>"
+    },
+    "Cloned Astrazoan": {
+      "name": "克隆星变怪 Cloned Astrazoan",
+      "description": "<p>你要么是在实验室中利用一位遥远祖先保存下来的基因样本诞生的，要么是从一位母体星变体身上出芽而生。你的身体顽固地拒绝任何额外的外部改变尝试。如果你在对抗诅咒、疾病或变形效果的豁免检定中取得成功，则改为获得大成功。</p>\n<p>You were either born in a laboratory using genetic samples preserved from a distant ancestor or budded from a parent astrazoan. Your body stubbornly refuses additional external attempts to change you. If you roll a success on a saving throw against a curse, disease, or polymorph effect, you get a critical success instead.</p>"
+    },
+    "Nightstalker Vesk": {
+      "name": "夜行者维斯克蜥人 Nightstalker Vesk",
+      "description": "<p>你已经适应了在黑暗中生活，或许是因为长期居住在地下、昏暗的星舰走廊中、烟雾笼罩的天空下，或是在一颗远离其恒星的行星上。你获得黑暗视觉。</p>\n<p>You've adapted to live in darkness, perhaps due to living underground, in dim starship corridors, under smoke-shrouded skies, or on a planet far from its sun. You gain darkvision.</p>"
+    },
+    "Manufacturer Barathu": {
+      "name": "飞螅族制造商 Manufacturer Barathu",
+      "description": "<p>你的身体就是一座活体实验室，使你能够摄入原材料，并将其提炼成有用的药物和其他产品。你在制造上变为受训（如果你已经在制造上受训，则改为你选择的另一项技能），并获得 @UUID[Compendium.sf2e.feats.Item.VRLHQPDkjy0gbxBY]{血清制作} 专长。</p>\n<p>Your body is a living laboratory, allowing you to ingest raw materials and refine them into useful medicines and other products. You become trained in Crafting (or another skill of your choice if you're already trained in Crafting) and gain the @UUID[Compendium.sf2e.feats.Item.VRLHQPDkjy0gbxBY]{Serum Crafting} feat.</p>"
+    },
+    "Glacierborn Shobhad": {
+      "name": "冰川裔肖巴德 Glacierborn Shobhad",
+      "description": "<p>你的血统可追溯至一个沿阿基顿冰川迁徙的绍布哈德氏族，这使你比其他绍布哈德人更适合应对严寒的危险和险恶的攀爬。你获得等同于你等级一半的寒冷抗性（最低为1），并获得@UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{战斗攀爬}技能专长。</p>\n<p>You trace your lineage to a shobhad clan that migrates along the Akitonian glaciers, making you even more advantageously suited to dealing with the dangers of frigid cold and treacherous climbs than other shobhads. You have cold resistance equal to half your level (minimum 1) and gain the @UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{Combat Climber} skill feat.</p>"
+    },
+    "Gadraveech Skittermander": {
+      "name": "加德拉维奇 史奇特曼德尔 Gadraveech Skittermander",
+      "description": "<p>你在加德拉维奇的地下国度，或类似的危险地下环境中长大。你拥有淡色的轻柔毛发、纤细的体型，以及一双硕大而发光的眼睛。你获得黑暗视觉。</p>\n<p>You grew up in the subterranean realm of Gadraveech, or a similar dangerous underground environment. You have wispy, pale-colored fur, a slender build, and large, luminous eyes. You gain darkvision.</p>"
+    },
+    "Stellar Nomad Kasatha": {
+      "name": "星际游民卡萨萨尼斯人 Stellar Nomad Kasatha",
+      "description": "<p>你选择出国旅行，离开你的出生地，踏上穿越更广阔宇宙的旅程。在你每天准备时，你可以研究一个特定的族裔、派系、哲学或宗教，以了解其一条典范或禁忌，并对该文化的风俗与传统获得更广泛的理解。当你遵循那条典范或禁忌时，你会成为相关知识技能的受训者（例如维斯克蜥人知识或戴莫力图斯知识）。此熟练会持续到你再次进行准备为止。由于这种训练是临时的，你不能将其用作永久角色选项（如专长或技能提升）的先决条件。</p>\n<p>You choose to travel abroad, leaving your birthplace to embark on a journey through the wider cosmos. During your daily preparations, you can study a particular ancestry, faction, philosophy, or religion to learn one of their edicts or anathemas and gain a broader understanding of that culture's customs and traditions. While you follow that edict or anathema, you become trained in the associated lore (such as Vesk Lore or Damoritosh Lore). This proficiency lasts until you prepare again. Since this training is temporary, you can't use it as a prerequisite for a permanent character option like a feat or a skill increase.</p>"
+    },
+    "Pampered Ikeshti": {
+      "name": "被娇惯的异客蜥人 Pampered Ikeshti",
+      "description": "<p>你的族群在资源丰富的地区中养育成长，例如大格瓦兹外受精类影响的森林，或是在外星世界，也许是卡斯卓韦、布雷西达人的卫星马拉塔，或普洛尼斯。你不习惯忍饥挨饿，因此你不会获得荒原幸存者能力。作为替代，你从你的族裔中获得 10 点生命值，而非 6 点，并且你获得 @UUID[Compendium.sf2e.feats.Item.N8Xz5fuW6o7GW124]{快速恢复} 一般专长，即使你不满足先决条件也是如此。</p>\n<p>Your brood was raised in a resource-rich region, such as the fey-touched forest outside of Great Gwaz, or offworld, perhaps on Castrovel, the Brethedan moon Marata, or Pulonis. You are unaccustomed to going without food and you don't gain the wasteland survivor ability. Instead, you gain 10 Hit Points from your ancestry, rather than 6, and you gain the @UUID[Compendium.sf2e.feats.Item.N8Xz5fuW6o7GW124]{Fast Recovery} general feat, even if you don't meet the prerequisites.</p>"
+    },
+    "Sharp-Eyed Sarcesian": {
+      "name": "目光敏锐的萨瑟蝶人 Sharp-Eyed Sarcesian",
+      "description": "<p>你那过大的眼睛已经适应了在昏暗光照条件下良好运作。你获得黑暗视觉。</p>\n<p>Your overlarge eyes have adapted to function well in poor lighting conditions. You gain darkvision.</p>"
+    },
+    "Hunter-Stalker Pahtra": {
+      "name": "猎手-追踪者帕赫特拉 Hunter-Stalker Pahtra",
+      "description": "<p>你出身于悠久的猎手世家，而且你的毛皮特别适合融入多种环境。只要你处于自然且未开发的环境中，你在进行 @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{躲藏} 和 @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{潜行} 的隐匿检定时，进行 @UUID[Compendium.sf2e.actions.Item.49y9Ec4bDii8pcD3]{维生} 的求生检定时，以及对抗 @UUID[Compendium.sf2e.actions.Item.SB7cMECVtE06kByk]{掩盖踪迹} 的求生DC时，获得+2环境加值。</p>\n<p>You descend from a long line of hunters, and your fur is especially well suited to blending into multiple environments. As long as you're in a natural and undeveloped environment, you gain a +2 circumstance bonus to Stealth checks to @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide} and @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}, to Survival checks to @UUID[Compendium.sf2e.actions.Item.49y9Ec4bDii8pcD3]{Subsist}, and to your Survival DC to @UUID[Compendium.sf2e.actions.Item.SB7cMECVtE06kByk]{Cover Tracks}.</p>"
+    },
+    "Iridescent Shirren": {
+      "name": "彩虹色希伦尼斯人 Iridescent Shirren",
+      "description": "<p>你的祖先是夏林人，最初被编程为贪婪虫群的诱饵。你的几丁质外壳会呈现虹彩，并形成闪烁的图案，令大多数其他生物着迷并分心。你可以在10英尺范围内进行@UUID[Compendium.sf2e.actions.Item.QNAVeNKtHA0EUw4X]{佯攻}，而不必仅限于在你预定目标的近战触及范围内时才能进行。你还获得@UUID[Compendium.sf2e.actions.Item.lIZ9DhrkzM3AEQmX]{Shimmering Dazzle}动作。</p>\n<p>You descend from shirrens who were originally programmed as decoys for the ravenous Swarm. Your chitin is iridescent and creates shimmering patterns that fascinate and distract most other creatures. You can @UUID[Compendium.sf2e.actions.Item.QNAVeNKtHA0EUw4X]{Feint} at a range of 10 feet, rather than solely while within melee reach of your intended target. You also gain the @UUID[Compendium.sf2e.actions.Item.lIZ9DhrkzM3AEQmX]{Shimmering Dazzle} action.</p>"
+    },
+    "Assimilated Astrazoan": {
+      "name": "同化星质异形 Assimilated Astrazoan",
+      "description": "<p>无论你是作为另一物种的一员被抚养长大，还是后来完全融入了他们的文化与传统，你都已彻底同化为另一族裔，并且在那种外貌下也如同在自己的天生形态中一样自在。选择一个常见族裔。除你角色自身的族裔外，你还可以选择你所选族裔的族裔专长。你可以选择那些要求你所不具备的生理特征的专长，但只有在你处于该族裔的形态时，才能从这些专长中获益；例如，一名已同化的星变体若选择了希灵的 @UUID[Compendium.sf2e.feats.Item.YSi48yghu0wmkSrr]{基础虫类飞行} 专长，则只有在其希灵形态下才能飞行。</p>\n<p>Whether you were raised as a member of another species or became fully immersed in their cultures and traditions later, you have completely assimilated to another ancestry and feel as comfortable in that skin as in your natural form. Choose a common ancestry. You can select ancestry feats from the ancestry you chose, in addition to your character's own ancestry. You can select feats that require a physiological feature that you lack but can only benefit from those feats while you are in that ancestry's form; for example, an assimilated astrazoan who selects the shirren @UUID[Compendium.sf2e.feats.Item.YSi48yghu0wmkSrr]{Basic Insectile Flight} feat can only fly while in their shirren form.</p>"
+    },
+    "Desert Ikeshti": {
+      "name": "沙漠异客蜥人 Desert Ikeshti",
+      "description": "<p>你已习惯于在阿基顿严酷、干旱的沙漠中生存，并且能够忍受正午烈日的灼热。你获得等于你等级一半的火焰抗性（最低为1），并且对你而言，环境高温效果的严酷程度降低一级（难以置信的高温变为极端高温，极端高温变为严重高温，依此类推）。此外，在你开始挨饿之前，你能够在没有食物或水的情况下坚持的天数增加1个月。</p>\n<p>You're accustomed to surviving in the harsh, arid deserts of Akiton, and can endure the blazing heat of the midday sun. You gain fire resistance equal to half your level (minimum 1), and environmental heat effects are one step less extreme for you (incredible heat becomes extreme, extreme heat becomes severe, and so on). In addition, increase the number of days you can go without food or water before you begin to starve by 1 month.</p>"
+    },
+    "Deadwood": {
+      "name": "枯木镇 Deadwood",
+      "description": "<p>有一段时间以来，你的内在一直在腐朽，而这种无形的腐朽改变了你。你获得了虚空治疗能力，这意味着你会受到活力伤害的伤害，且不会被具有治疗活力的效果治疗。你不会受到虚空伤害，并且会被能够治疗不死生物的虚空效果所治疗。</p>\n<p>You've been rotting on the inside for some time now, and the invisible rot has changed you. You have the void healing ability, meaning you're damaged by vitality damage and not healed by healing vitality effects. You do not take void damage, and you're healed by void effects that heal undead.</p>"
+    },
+    "Heartbroken Dragonkin": {
+      "name": "心碎的龙人 Heartbroken Dragonkin",
+      "description": "<p>过去，你的羁绊伴侣去世了，而你仍因他们的离去而悲痛欲绝。你在对抗情绪效果的豁免检定中获得+1处境加值。若你在对抗情绪效果的豁免检定中掷得成功，则改为获得大成功。</p>\n<p>In the past your bonded partner died, and you remain devastated by their loss. You gain a +1 circumstance bonus to saving throws against emotion effects. If you roll a success on a saving throw against an emotion effect, you get a critical success instead.</p>"
+    },
+    "Inured Ikeshti": {
+      "name": "吃苦耐劳的异客蜥人 Inured Ikeshti",
+      "description": "<p>由于极度匮乏、疏忽或悲剧，你的族群经常食用有毒、腐烂或受污染的食物，或充当活体垃圾处理器，吃下垃圾、废料、废弃物、污染物和有毒污泥。你的身体能够轻易分解毒素。你获得等于你等级一半的毒素抗性（最低为 1）。此外，你获得 @UUID[Compendium.sf2e.feats.Item.I0BhPWqYf1bbzEYg]{顽强} 泛用专长。</p>\n<p>Due to extreme scarcity, negligence, or tragedy, your brood often consumed poisonous, rotten, or tainted food, or served as a living garbage disposal and ate garbage, refuse, waste, pollutants, and toxic sludge. Your body easily breaks down toxins. You gain poison resistance equal to half your level (minimum 1). In addition, you gain the @UUID[Compendium.sf2e.feats.Item.I0BhPWqYf1bbzEYg]{Diehard} general feat.</p>"
+    },
+    "Shipborn Kasatha": {
+      "name": "舰生卡萨萨尼斯人 Shipborn Kasatha",
+      "description": "<p>你是出生并成长于伊达里号世界飞船上的卡萨斯人；如今它正环绕着协约世界的恒星运行。你的家人在忍受漫长太空旅行艰辛的同时，始终守护着希望与传统。对你而言，伊达里号是你唯一所知的家园。当你对抗情绪效果进行豁免检定并获得成功时，改为获得大成功。</p>\n<p>You were one of the kasathas born and raised on the Idari worldship that now orbits the Pact Worlds' sun. Your family kept hope and tradition alive while enduring the hardships of lengthy space travel. For you, the Idari is the only home you've ever known. When you roll a success on a saving throw against an emotion effect, you get a critical success instead.</p>"
+    },
+    "Warblood Vesk": {
+      "name": "战血维斯克蜥人 Warblood Vesk",
+      "description": "<p>你出身于一个由声名显赫、备受尊崇的战士组成的血脉，他们历经数个世纪磨炼自己的身体，使其成为致命的武器。你获得两次 @UUID[Compendium.sf2e.feats.Item.s7QK7Q63k9SxG106]{Brutal Anatomy} 族裔专长。</p>\n<p>You come from a bloodline of renowned and honored warriors who have honed their bodies over centuries to become lethal weapons. You gain the @UUID[Compendium.sf2e.feats.Item.s7QK7Q63k9SxG106]{Brutal Anatomy} ancestry feat twice.</p>"
+    },
+    "Akitonian Nomad Shobhad": {
+      "name": "阿基通尼亚游牧修巴德 Akitonian Nomad Shobhad",
+      "description": "<p>你出生于阿基顿的一个氏族或团体，他们四处远行，从不在一个地方久居。你第一次离开阿基顿时，发现这颗星球较低的重力让你在跳跃的艺术上获得了特定的技能与适应，这些能力也很适合在太空和其他奇异环境中的战斗。你获得@UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{Quick Jump}技能专长，即使你未受训于运动，而且你不将冰面或沙地视为崎岖地形。</p>\n<p>You were born on Akiton to a clan or group that traveled far and wide, never settling in one place for long. The first time you left Akiton, you discovered the planet's lower gravity had given you specific skills and adaptations in the art of leaping and jumping that translated well to battle in space and other strange environs. You gain the @UUID[Compendium.sf2e.feats.Item.ZBhvJ9O8MvBFAlhq]{Quick Jump} skill feat, even if you aren't trained in Athletics, and don't treat ice or sand as uneven ground.</p>"
+    },
+    "Golarion Survivor Human": {
+      "name": "戈拉里昂幸存者人类 Golarion Survivor Human",
+      "description": "<p>你的祖先曾居住在戈拉里昂上，尽管他们得以幸存的确切情况已失落于大断层之中，但你强烈认同这颗失落星球的文化。你在戈拉里昂学识上变为受训，并学会一种你的血统起源地区所使用的额外语言。你熟悉古代武器，并且在熟练项判定方面，将一件你选择的、属于军用武器的古代武器视为简易武器，或将一件你选择的、属于先进武器的古代武器视为军用武器。</p>\n<p>Your ancestors lived on Golarion, and though the precise circumstances of their survival are lost to the Gap, you strongly identify with the lost planet's cultures. You become trained in Golarion Lore, and you learn a bonus language that was spoken in your lineage's region of origin. You have familiarity with archaic weapons and, for purposes of proficiency, treat one archaic weapon of your choice that's a martial weapon as a simple weapon, or that's an advanced weapon as a martial weapon.</p>"
+    },
+    "Courtier Shirren": {
+      "name": "宫廷侍者希瑞人 Courtier Shirren",
+      "description": "<p>你的心灵感应比大多数希灵族都更强，使你能够将肢体、语言和心灵感应交流结合起来。每当你使用有限心灵感应时，都可以在传递信息的同时传达情绪。此外，当一个生物使用有限心灵感应或心灵感应与你交流时，你在对该生物进行 @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{洞悉动机} 的察觉检定上获得 +2 情境加值。</p>\n<p>Your telepathy is stronger than most shirrens', allowing you to combine physical, verbal, and telepathic communication. You can transmit emotions alongside your messages whenever you use limited telepathy. In addition, when a creature communicates with you using limited telepathy or telepathy, you gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.sf2e.actions.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} against that creature.</p>"
+    },
+    "Sand Roamer": {
+      "name": "沙地漫游者 Sand Roamer",
+      "description": "<p>你的祖先曾在被维斯卡里姆榨干重要养分的荒芜地带游荡。你比大多数帕赫特拉更矮小敦实，拥有宽大、带簇毛的耳朵，以及覆有毛发的爪垫。你的体型为小型而非中型。你无视由沙地造成的困难地形和不平整地面，并获得等同于你等级一半的火焰抗性（最低为1）。</p>\n<p>Your ancestors roamed blasted terrain leached of vital nutrients by the Veskarium. You're shorter and stockier than most pahtras, with wide, tufted ears and fur-covered paw pads. Your size is Small instead of Medium. You ignore difficult terrain and uneven ground caused by sand and gain fire resistance equal to half your level (minimum 1).</p>"
+    },
+    "Wildseed": {
+      "name": "荒野之种 Wildseed",
+      "description": "<p>你在远离其他奇扎尔祖先树丛的地方萌发。你可能是在一小片移植树丛中长大，或者你是在实验室里培育出来的。选择一个族裔或通用传承，以体现你非传统成长经历的一部分。选定后便无法更改。在1级时，你从所选族裔或传承中获得一个额外的族裔专长。每当你获得一个族裔专长时，你都可以改为从该族裔或传承中选择该专长。</p>\n<p>You germinated far from the ancestral groves of other khizars. You might have grown up in a small transplant grove or maybe you were cultivated in a laboratory. Select an ancestry or versatile heritage to represent part of your unconventional upbringing. Once chosen it cannot be changed. At 1st level, you gain an additional ancestry feat from the chosen ancestry or heritage. Whenever you gain an ancestry feat, you may choose that feat from the ancestry or heritage.</p>"
+    },
+    "Stormrider Dragonkin": {
+      "name": "驭风龙人 Stormrider Dragonkin",
+      "description": "<p>你出生并成长于一个动荡不安的世界，那里饱受毁灭性风暴与强劲气流的肆虐。在这样的环境中学习飞行，使你成为了出色的空中飞行者。你在空中机动的特技检定中获得+2环境加值，且你的飞行速度提高5尺。</p>\n<p>You were born and raised on a volatile world wracked by destructive storms and powerful winds. Learning to fly in such conditions has conditioned you into an exceptional aerialist. You gain a +2 circumstance bonus to Acrobatics checks to Maneuver in Flight and your fly Speed increases by 5 feet.</p>"
+    },
+    "Dreamer Barathu": {
+      "name": "飞螅族梦想家 Dreamer Barathu",
+      "description": "<p>你曾与利亚瓦拉的太空旋律交感，而那改变了你。你难以表达自己从那次经历中回想起的记忆与感受碎片，除非通过歌唱和类似的心灵发散。请选择一个奥术法术列表中的戏法。通过将魔法编织进你的歌声中，你可以将该法术作为先天异能奥术法术随意施放。戏法会自动升阶至等同于你等级一半并向上取整的法术环阶。</p>\n<p>你的魔法具有适应性，而你可以引导自己的音乐来强化它。每天一次，你可以冥想自己的太空之歌，将你所选的戏法更换为奥术法术列表中的另一个戏法。这是一个10分钟的活动，具有专注特征。</p>\n<p>You've communed with the cosmic melody of Liavara and it changed you. You struggle to express the fragments of memory and sensation you recall from the experience, except through singing and similar psychic emanations. Choose one cantrip from the occult spell list. By weaving magic into your song, you can cast this spell as an occult innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>\n<p>Your magic is adaptable, and you can channel your music to enhance it. Once per day, you can meditate on your cosmic song to change the cantrip you've chosen to a different cantrip from the occult spell list. This is a 10-minute activity that has the concentrate trait.</p>"
+    },
+    "Underground Ikeshti": {
+      "name": "地下异客蜥人 Underground Ikeshti",
+      "description": "<p>你的族群在地下被养育，以保护周围的生态系统。你习惯了黑暗，在行星表面时更偏好夜行性生活方式。你获得黑暗视觉。</p>\n<p>Your brood was raised underground to protect the surrounding ecosystem. You're accustomed to darkness and prefer a nocturnal lifestyle when on a planet's surface. You gain darkvision.</p>"
+    },
+    "Tunnel Ysoki": {
+      "name": "地道伊苏基人 Tunnel Ysoki",
+      "description": "<p>你那小得惊人的骨骼让你能够轻松压缩身体，从缝隙中挤过，无论是墙壁之间用来够到被切断的数据线的空隙，还是空间站的管道系统。你获得“快速挤压”专长，即使你未受过特技训练也是如此。对你而言，不需要使用“挤压”动作的狭窄空间不属于困难地形。</p>\n<p>Your incredibly small bones allow you to easily compress your body and squeeze through gaps, whether it's the space between walls to reach a severed data cable or the ductwork of a space station. You gain the Quick Squeeze feat, even if you aren't trained in Acrobatics. Tight spaces not tight enough to require the Squeeze action aren't difficult terrain for you.</p>"
+    },
+    "Exiled Elebrian": {
+      "name": "流亡的灵脑人 Exiled Elebrian",
+      "description": "<p>你很罕见：一名并非生于伊奥克斯的灵脑人。也许你的父母在你出生前就离开了生者大厅，好让你过上更好的生活。也可能你来自一个远离伊奥克斯、以他乡为家的小型灵脑人聚居地——艾巴萨罗姆空间站上一个关系紧密的社群，或是流散带中的一颗小行星。你学会一门你选择的区域语言，并获得该地区的@UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore}通用专长。你在5级时再学会另一门区域语言并获得该地区的 Additional Lore 通用专长，在13级时再次获得。</p>\n<p>You're a rarity: an elebrian who wasn't born on Eox. Perhaps your parents left the Halls of the Living before you were born to give you a better life. Maybe you come from a tiny enclave of elebrians making their home away from Eox, a tight-knit community on Absalom Station, or an asteroid in the Diaspora. You learn any regional language of your choice and gain the @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} general feat for that region. You learn another regional language and gain the Additional Lore general feat for that region at 5th level, and again at 13th level.</p>"
+    },
+    "Prismeni": {
+      "name": "棱虹裔 Prismeni",
+      "description": "<p>你与漂流域有一种与生俱来的连接。除了来自你族裔的特征外，你还获得棱光裔特征。当你处于漂流域中时，你可以自动精确感知100英里半径内漂流信标、漂流航道、漂流引擎以及其他与漂流域相关技术的位置。如果你正在驾驶一艘没有漂流引擎的星舰，你可以充当漂流域与该星舰之间的连接。这是一个具有专注特征的1分钟活动，并且它允许你所驾驶的星舰进入或离开漂流域。一旦进入漂流域，星舰便如常通过常规推进器旅行。当你在漂流域中进行 @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{导航} 或 @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{规划航线} 的驾驶检定时获得大失败，你改为获得失败。你获得微光视觉；如果你的族裔已经拥有微光视觉，则你改为获得黑暗视觉。每当你获得一个族裔专长时，你都可以从棱光裔专长和你族裔的专长中进行选择。</p>\n<p>You have an innate connection to the Drift. You gain the prismeni trait, in addition to the traits from your ancestry. While you're in the Drift, you can automatically pinpoint the location of Drift beacons, Drift lanes, Drift engines, and other Drift-related technology within a 100-mile radius. If you're Piloting a starship that doesn't have a Drift engine, you can serve as a connection between the Drift and that starship. This is a 1-minute activity that has the concentrate trait, and it allows the starship you're Piloting to enter or exit the Drift. Once within the Drift, the starship travels via conventional thrusters, as normal. When you get a critical failure on a Piloting check to @UUID[Compendium.sf2e.actions.Item.hsUKPqTdAvWwsqH2]{Navigate} or @UUID[Compendium.sf2e.actions.Item.LXqcXRayK58inaKo]{Plot Course} through the Drift, you get a failure instead. You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from prismeni feats and feats from your ancestry whenever you gain an ancestry feat.</p>"
+    },
+    "Thorny Ikeshti": {
+      "name": "多刺异客蜥人 Thorny Ikeshti",
+      "description": "<p>你的鳞片上长有骨质脊棱和骨刺，让你在紧急关头可以用来自卫。你获得@UUID[Compendium.sf2e.actions.Item.6fsMvO0jXtK8gYkH]{鼓胀}反应。</p>\n<p>Your scales have bony ridges and spurs, which you can use to defend yourself in a pinch. You gain the @UUID[Compendium.sf2e.actions.Item.6fsMvO0jXtK8gYkH]{Puff Up} reaction.</p>"
+    },
+    "Swarm Exile Shirren": {
+      "name": "虫群流亡什伦人 Swarm Exile Shirren",
+      "description": "<p>尽管大多数希伦人早在很久以前就脱离了虫群，但你是较晚近才转变过来的。你来自一群流落在外的同族，与其他大多数希伦人相比，他们与虫群有更多共同之处。你获得一种生体炮远程徒手攻击，射程增量为20英尺，造成1d6点强酸伤害。你的生体炮属于腐蚀武器组。当你选择此传承时，选择这项攻击是来自你一只手臂上的下挂式发射器、安装在你一侧肩膀上的发射器，还是来自你的口中。你不能更改此选择。</p>\n<p>While most shirrens broke away from the Swarm long ago, you're a more recent convert. You come from a group of castaways that have more in common with the Swarm than most other shirrens. You gain a bio-cannon ranged unarmed attack with a range increment of 20 feet that deals 1d6 acid damage. Your bio-cannon is in the corrosive weapon group. When you select this heritage, choose whether this attack comes from an underslung launcher on one of your arms, a launcher mounted over one of your shoulders, or from your mouth. You can't change this selection.</p>"
+    },
+    "Manifested Contemplative": {
+      "name": "显化默思族 Manifested Contemplative",
+      "description": "<p>你的脑波强大到足以让神秘魔法显现，并随着你的思绪起舞。从神秘法术列表中选择一个戏法。你可以将这个戏法作为神秘天生法术随意施放。戏法会被升阶至等同于你等级一半（向上取整）的法术环阶。</p>\n<p>Your brainwaves are so powerful that occult magic manifests and dances to the tune of your very thoughts. Choose one cantrip from the occult spell list. You can cast this cantrip as an occult innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
+    },
+    "Electric Kalo": {
+      "name": "电卡洛 Electric Kalo",
+      "description": "<p>你出身于卡洛-马霍伊透光带的一个偏远部族，该部族发展出了对抗掠食者的生物电防御，这或许是由于某种繁茂群落的影响，或是因为古代以电鳐为食。你可以随意将 @UUID[Compendium.sf2e.spells.Item.kBhaPuzLUSwS6vVf]{Electric Arc} 戏法作为原初先天法术施放。戏法会被升阶至等于你等级一半（向上取整）的法术环阶。如果你施放此法术时只有1个目标，则你获得等于你等级一半的电击抗性（最低为1），直到你下个回合结束。</p>\n<p>@UUID[Compendium.sf2e.feat-effects.Item.xQvyfiOh05xK2A5A]{效果：电能卡洛}</p>\n<p>You descend from a remote tribe in Kalo-Mahoi's photic zone that developed a bioelectric defense against predators, perhaps due to the influence of a bloom or because of an ancient diet of electric rays. You can cast the @UUID[Compendium.sf2e.spells.Item.kBhaPuzLUSwS6vVf]{Electric Arc} cantrip as a primal innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up. If you cast this spell with only 1 target, you gain electricity resistance equal to half your level (minimum 1) until the end of your next turn.</p>\n<p>@UUID[Compendium.sf2e.feat-effects.Item.xQvyfiOh05xK2A5A]{Effect: Electric Kalo}</p>"
+    },
+    "Korasha Lashunta": {
+      "name": "科拉莎拉申塔人 Korasha Lashunta",
+      "description": "<p>你选择了适应性遗传，成为一名科拉沙。与其他拉申塔人相比，你可能更敦实、更强壮。除你从族裔获得的内容外，你还获得力量属性提升和感知属性缺陷，但自由族裔属性提升不能也选择力量。你的族裔提供的生命值改为 8 点而非 6 点，并且你在进行运动检定以 @UUID[Compendium.sf2e.actions.Item.7blmbDrQFNfdT731]{推撞} 或 @UUID[Compendium.sf2e.actions.Item.ge56Lu1xXVFYUnLP]{绊摔} 时，获得 +1 情境加值。</p>\n<p>You've chosen the adaptive genetics to become a korasha. You might be stockier and more muscular than other lashuntas. In addition to what you gain from your ancestry, you gain an attribute boost to Strength and an attribute flaw to Wisdom, but the free ancestry boost can't also be Strength. You gain 8 Hit Points from your ancestry instead of 6, and you gain a +1 circumstance bonus to Athletics checks to @UUID[Compendium.sf2e.actions.Item.7blmbDrQFNfdT731]{Shove} or @UUID[Compendium.sf2e.actions.Item.ge56Lu1xXVFYUnLP]{Trip}.</p>"
+    },
+    "Irreproachable Contemplative": {
+      "name": "无可指摘的默思族 Irreproachable Contemplative",
+      "description": "<p>正如抗体会在血液中隔离并清除病原体一样，你的大脑也进化出了自身的灵能防御，能够偏转不受欢迎的思想。你获得等同于你等级一半的精神抗性（最低为1）。如果你在对抗会施加“受控”状态的精神效果时进行豁免检定并获得成功，则改为获得大成功。</p>\n<p>Just as antibodies isolate and eliminate pathogens in the bloodstream, your brain has evolved its own psychic defenses that deflect unwanted thoughts. You gain mental resistance equal to half your level (minimum 1). If you roll a success on a saving throw against a mental effect that would apply the controlled condition, you critically succeed instead.</p>"
+    },
+    "Stellar Sarcesian": {
+      "name": "星界萨瑟蝶人 Stellar Sarcesian",
+      "description": "<p>你与宇宙有一种内在的连接，并能将这些群星之力引导为魔法。选择一个至少具有以下一种特征的戏法：darkness、light、vital 或 void。你可以将这个戏法作为奥术先天法术随意施放。戏法的升阶后的法术环阶等于你等级的一半（向上取整）。</p>\n<p>You have an intrinsic connection to the cosmos and can channel these stellar forces into magic. Choose one cantrip that has at least one of the following traits: darkness, light, vital, or void. You can cast this cantrip as an arcane innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
+    },
+    "Experimental Ikeshti": {
+      "name": "实验型异客蜥人 Experimental Ikeshti",
+      "description": "<p>科学家们曾在你身上进行实验，而无论你是因提供服务而获得报酬，还是在幼体时期被捕获并在实验室中长大，这些实验都留下了持久的印记。你的植入体植入上限增加 1；这个额外的植入体只能用于植入生物工程植入体。选择一件物品等级为 1 或以下的常见生物工程植入体。你开始游戏时，该生物工程植入体已经植入你的体内。你无需支付信用点来购买这个初始植入体。你可以按照通常规则移除并替换这个植入体。</p>\n<p>Scientists have experimented on you, and whether you were paid for your services or were captured as a hatchling and raised in a lab, this experimentation has left a lasting mark. Increase your augmentation implant limit by 1; this additional augmentation can only be implanted with biotech augmentations. Choose one common biotech augmentation with an item level of 1 or less. You begin with this biotech augmentation already implanted in your body. You don't need to pay the credits to purchase this starting augmentation. You can remove and replace this augmentation following the usual rules.</p>"
+    },
+    "Longsnout Ysoki": {
+      "name": "长鼻鼠族 Longsnout Ysoki",
+      "description": "<p>你家族世代相传的长鼻口，让你的嗅觉比大多数伊索基更敏锐。你获得30尺范围的不精确嗅觉。这意味着你可以用嗅觉来判断生物的位置。如果你处在该生物的下风处，GM通常会将这个范围加倍；如果你处在上风处，则通常会将这个范围减半。</p>\n<p>此外，你在自己嗅觉范围内对生物或物体进行[[/act seek]]的察觉检定时，获得+2环境加值。</p>\n<p>The long snouts that run in your family give you a keener sense of smell than most ysoki. You gain imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine a creature's location. The GM will usually double the range if you're downwind from the creature or halve the range if you're upwind.</p>\n<p>In addition, you gain a +2 circumstance bonus to Perception checks to [[/act seek]] a creature or object within the range of your scent.</p>"
+    },
+    "Wild Astrazoan": {
+      "name": "野生星变体 Wild Astrazoan",
+      "description": "<p>虽然大多数星质族会聚居在人口稠密的定居点社群中，但也有一些选择在荒野中与自然为伴，开创属于自己的命运，甚至守卫他们的乐土不受他人影响。你只能为“变形”选择一种族裔，但你也可以使用“变形”变成一种动物，并采用1环 @UUID[Compendium.sf2e.spells.Item.gfPjmG6Fe6D3MFjl]{害虫形态} 的属性。</p>\n<p>While most astrazoans flock to communities in densely populated settlements, some choose to live among nature in the wilderness, forging their own destiny or even defending their paradise from the influence of others. You have only one ancestry you can select for Change Shape, but you can also use Change Shape to transform into an animal with the statistics of a 1st-rank @UUID[Compendium.sf2e.spells.Item.gfPjmG6Fe6D3MFjl]{Pest Form}.</p>"
+    },
+    "Kasath Survivalist": {
+      "name": "卡萨斯生存专家 Kasath Survivalist",
+      "description": "<p>你和你的祖先属于那些选择不放弃自己濒死母星的人。你的族人在昏暗天空下穿越荒芜废土，寻找庇护所与资源，尽管你们的人口正在缓慢减少。你也许终于决定去寻求更好的生活，或者你希望说服其他人和你一起回到卡萨斯。探索时，你可以进行 @UUID[Compendium.sf2e.actions.Item.JuqmIAnkL9hVGai8]{Hustle} 的时间延长一倍后才需要停下。如果你在一个正在 Hustling 的队伍中，你会使队伍能够 Hustle 的总分钟数增加 10 分钟；如果你为 13 级或更高，则增加 20 分钟。你获得 @UUID[Compendium.sf2e.feats.Item.c9fHUSI5lRdXu1Ic]{Feather Step} 专长。</p>\n<p>You and your ancestors were among those who chose not to abandon your dying home world. Your people trek through wasted lands under dim skies, seeking shelter and resources even as they slowly dwindle. You might have finally decided to seek a better life, or perhaps you hope to convince others to return to Kasath with you. You can @UUID[Compendium.sf2e.actions.Item.JuqmIAnkL9hVGai8]{Hustle} twice as long while exploring before you have to stop. If you're in a group that's Hustling, you increase the total number of minutes the group can Hustle by 10 minutes, or by 20 minutes if you're 13th level or higher. You gain the @UUID[Compendium.sf2e.feats.Item.c9fHUSI5lRdXu1Ic]{Feather Step} feat.</p>"
+    },
+    "Asteroid Hopper Sarcesian": {
+      "name": "小行星跳跃者萨瑟蝶人 Asteroid Hopper Sarcesian",
+      "description": "<p>无论是在流散带的小行星间来回穿梭，还是修理星舰的外部船体，你都花了大量时间置身于太空的真空之中，并且每次外出时都会逼自己多暴露一小会儿。与普通的萨瑟蝶人相比，你能够在真空中停留更久。你一次最多可以维持悬息 4 小时，而不是 1 小时。</p>\n<p>Whether flitting between asteroids in the Diaspora or repairing the outer hull of a starship, you spend a lot of time in the void of space and have pushed yourself to stay exposed just a little longer every time you head out. You can remain in a vacuum much longer than the average sarcesian. You can maintain suspended respiration up to a maximum of 4 hours at a time, rather than 1 hour at a time.</p>"
+    },
+    "Versatile Human": {
+      "name": "多才人类 Versatile Human",
+      "description": "<p>在戈拉里昂消失之前，人类是那颗星球上最常见的族裔，而后他们凭借自身的多才多艺扩展到了群星之间。选择一个你符合先决条件的通用专长（与您的族裔专长一样，您可以在角色创建过程中的任何时候选择这个通用专长）。</p>\n<p>Humans were the most common ancestry on Golarion before that world disappeared, and they've since spread to the stars thanks to their versatility. Select a general feat of your choice for which you meet the prerequisites (as with your ancestry feat, you can select this general feat at any point during character creation).</p>"
+    },
+    "Retrograde Contemplative": {
+      "name": "逆行默思族 Retrograde Contemplative",
+      "description": "<p>默思族通过引导进化使他们的四肢萎缩，而巨大的大脑则进一步扩张。极少数情况下，由于某种基因上的异常，像你这样的默思族会以一种更接近你那些较少特化祖先的身体形态出生。凭借更长、更强壮的四肢，你仍然显然是一名默思族。你失去atrophied特性。此外，你从你的族裔获得的生命值改为10点，而不是6点。</p>\n<p>Contemplatives' guided evolution has shrunk their limbs and expanded their immense brains. Rarely, by some genetic quirk, a contemplative like you is born with a body more closely resembling your less specialized ancestors. With longer, stronger limbs, you are still unmistakably a contemplative. You lose the atrophied trait. In addition, you gain 10 Hit Points from your ancestry instead of 6.</p>"
+    },
+    "Corpsefolk": {
+      "name": "尸族 Corpsefolk",
+      "description": "<p><em>尸族是指那些死后重新活动起来、具有实体且保有智能的不死生物。他们通常仍保持着生前的大致外貌与性格，不过往往会带有病态苍白的皮肤、腐烂的肢体、外露的骨骼或其他腐败迹象。</em></p>\n<p>你是一具重新活动起来的尸体。你身上的不死本质可能会在身体上表现为灰色或苍白的皮肤、变成纯黑或纯白的眼睛，或指甲（或类似附肢）不自然地变长。除你的族裔特征外，你还获得尸族与不死（特征）。你获得微光视觉；若你的族裔原本已具有微光视觉，则改为获得黑暗视觉。每当你获得一个族裔专长时，你可以从尸族专长和你族裔的专长中进行选择。</p>\n<p>尸族还获得以下能力。</p>\n<p><strong>免疫死亡效果：</strong>你免疫死亡效果，例如被自动杀死或使你的濒死值增加，但法术或效果的其他部分仍然会正常生效（例如伤害，或因死亡幻象而陷入恐慌）。</p>\n<p><strong>虚空治疗：</strong>活力伤害会对你造成伤害，而活力治疗效果无法治疗你。你不会受到虚空伤害，并且能够被可治疗不死生物的虚空效果所治疗。</p>\n<p><strong>虚空存续：</strong>与普通不死生物不同，当你的生命值降至 0 时，你不会被摧毁。相反，强大的能量会试图阻止你被摧毁。你的生命值降至 0 时会陷入昏迷并开始进入濒死状态。由于你是不死生物，许多让生物脱离濒死状态的方法——例如 @UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize}——对你无效。当你本应死亡时，你会像其他不死生物一样被摧毁，而不只是单纯死去。</p>\n<p><strong>特殊</strong>：由 GM 自行裁定，若你的角色在 1 级之后死亡，并有机会以不死生物的形式被复生，你可以选择尸族通用传承。这会替换你的传承。</p>\n<p><em>Corpsefolk are people who died and reanimated as corporeal, intelligent undead, with the same general appearance and personality they had in life, though usually with sickly pale skin, rotting parts, exposed bone, or other signs of putrescence.</em></p>\n<p>You are a reanimated corpse. Your undead nature might physically manifest in gray or pale skin, eyes that turn solid black or white, or an unnatural elongation of the fingernails (or similar appendages). You gain the corpsefolk and undead traits, in addition to the traits from your ancestry. You gain low-light vision, or you gain darkvision if your ancestry already has low-light vision. You can choose from corpsefolk feats and feats from your ancestry whenever you gain an ancestry feat.</p>\n<p>Corpsefolk also gain the following.</p>\n<p><strong>Immunity to Death Effects:</strong> You are immune to death effects, such as being automatically killed or having your dying value increase, but not other parts of the spell or effect (such as damage or becoming frightened from vision of death).</p>\n<p><strong>Void Healing:</strong> You are damaged by vitality damage and aren't healed by vitality healing effects. You don't take void damage and are healed by void effects that heal undead.</p>\n<p><strong>Void Survival:</strong> Unlike normal undead, you aren't destroyed when reduced to 0 Hit Points. Instead, powerful energies attempt to keep you from being destroyed. You are knocked out and begin dying when reduced to 0 Hit Points. Because you're undead, many methods of bringing someone back from the dying condition, such as @UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize}, don't benefit you. When you would die, you're destroyed rather than just dead, just like other undead.</p>\n<p><strong>Special</strong>: At the GM's discretion, you can select the corpsefolk versatile heritage after 1st level if your character dies and has an opportunity to be raised as an undead. This replaces your heritage.</p>"
+    },
+    "Compact Sarcesian": {
+      "name": "袖珍萨瑟蝶人 Compact Sarcesian",
+      "description": "<p>你的身体极其柔韧，能够像柔术演员一样将自己细长的四肢折叠并缠绕起来，使你能够在狭小而别扭的空间中行动自如。你可以穿过狭窄空间，如同你是一个中型生物一样。</p>\n<p>You're incredibly flexible and can fold your gangly limbs up and around yourself like a contortionist, enabling you to maneuver in small and awkward spaces. You can fit through tight spaces as though you were a Medium creature.</p>"
+    },
+    "Defiant Shirren": {
+      "name": "不屈的希壬尼斯人 Defiant Shirren",
+      "description": "<p>尽管时光流逝，你依然坚定不移地反抗虫群以及一切形式的精神控制。若你针对由具有虫族特征的生物，或你知道与虫群结盟的生物所制造的效果进行意志豁免检定并获得成功，则改为获得大成功。对于任何受控制其的法术或效果影响的生物，你也获得这些好处。此外，你获得 @UUID[Compendium.sf2e.actions.Item.nAJeT29ZJvqeg98h]{Rebellious Defiance} 动作。</p>\n<p>Despite the passage of time, you remain resolute in your defiance of the Swarm and all forms of mental control. If you roll a success on a Will saving throw against an effect that was created by a creature with the kucharn trait or a creature that you know is allied with the Swarm, you get a critical success instead. You gain these benefits against any creature affected by a spell or effect that controls it. Additionally, you gain the @UUID[Compendium.sf2e.actions.Item.nAJeT29ZJvqeg98h]{Rebellious Defiance} action.</p>"
+    },
+    "Offworld Shobhad": {
+      "name": "异界绍巴德 Offworld Shobhad",
+      "description": "<p>你出生于异星，远离了肖巴德氏族的影响，也远离了你祖先母星的精神。你独特的经历使你得以发展出对自己大有裨益的个人适应。你失去“适应寒冷的”能力，但获得一个你满足先决条件的额外1级肖巴德族裔专长。</p>\n<p>You were born offworld, far from the influence of shobhad clans and the spirit of your ancestral home world. Your unique experience has allowed you to develop personal adaptations that serve you well. You lose the cold adapted ability but gain an additional 1st-level shobhad ancestry feat for which you meet the prerequisites.</p>"
+    },
+    "Petrified": {
+      "name": "石化 Petrified",
+      "description": "<p>你的身体覆盖着厚实的板状树皮。你的树皮属于板甲组的中型护甲，给予 AC +4 物品加值，敏捷上限为 +1，检定减值为 –2，速度减值为 –5 尺，力量值为 +3，并具有坚垒、舒适和暴露特征。你永远不能穿戴其他护甲，也不能移除这些树皮。你可以将护甲符文蚀刻在树皮上。</p>\n<p>Your body is covered in thick, plated bark. Your bark is medium armor in the plate armor group that grants a +4 item bonus to AC, has a Dex cap of +1, a check penalty of –2, a Speed penalty of –5 feet, a Strength value of +3, and has the bulwark, comfort, and exposed traits. You can never wear other armor or remove the bark. You can etch armor runes onto the bark.</p>"
+    },
+    "Briskwander Vesk": {
+      "name": "疾行者维斯克蜥人 Briskwander Vesk",
+      "description": "<p>你出身于一个不断迁徙的维斯克蜥人家族。你的速度提高 5 尺。</p>\n<p>You come from a line of vesk who were constantly on the move. Your Speed increases by 5 feet.</p>"
+    },
+    "Sniper Shobhad": {
+      "name": "狙击手修巴德 Sniper Shobhad",
+      "description": "<p>经过数个世纪的发展并代代相传的特殊技巧，使得绍巴德-内赫成为协约世界中最令人畏惧的狙击手之一，而且这并非没有道理。如果你在未激活的那一对手中持有一把双手枪械，那么每当你使用激活的手以武器或徒手攻击进行一次打击失败时，你都可以以一个自由动作 @UUID[Compendium.sf2e.actions.Item.oW81CfM9ebxXnrw3]{切换手部}。</p>\n<p>Special techniques developed over centuries and passed from generation to generation have helped make shobhad-neh some of the most feared snipers in the Pact Worlds, and with good cause. If you are holding a two-handed gun in your inactive pair of hands, whenever you fail at a Strike made with a weapon or unarmed attack using your active hands, you can @UUID[Compendium.sf2e.actions.Item.oW81CfM9ebxXnrw3]{Switch Hands} as a free action.</p>"
+    },
+    "Urban Shobhad": {
+      "name": "都市修巴德 Urban Shobhad",
+      "description": "<p>你居住在一座城市或其他人口稠密的地区，经过大量尝试与摸索后，找到了自己的定位，成为了一名与自己的社群和谐共处、富有生产力的公民。你获得 @UUID[Compendium.sf2e.feats.Item.YtbPw4FSa86QAdRq]{都市生存专家} 技能专长，即使你未受过生存训练也是如此。你在进行任何制造或 @UUID[Compendium.sf2e.actions.Item.QyzlsLrqM0EEwd7j]{谋生} 的停工期检定时，获得 +2 处境加值。</p>\n<p>You live in a city or other densely populated area and, after a lot of trial and error, have found your niche, becoming a productive citizen in equilibrium with your community. You gain the @UUID[Compendium.sf2e.feats.Item.YtbPw4FSa86QAdRq]{Urban Survivalist} skill feat even if you aren't trained in Survival. You have a +2 circumstance bonus on any downtime checks you make to Craft or @UUID[Compendium.sf2e.actions.Item.QyzlsLrqM0EEwd7j]{Earn Income}.</p>"
+    },
+    "Stagehand Elebrian": {
+      "name": "舞台工灵脑人 Stagehand Elebrian",
+      "description": "<p>你喜欢待在镜头的另一边。你在生者大厅担任舞台勤务员，度过了自己的成长岁月，搭建布景、搬运道具，并创造媒体魔法。你要么受训于特技，并获得 @UUID[Compendium.sf2e.feats.Item.CnqMJR8e9jqJR7MM]{Steady Balance} 技能专长，要么受训于运动，并获得 @UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{Combat Climber} 技能专长。如果你会自动在所选技能上成为受训（例如来自你的背景或职业），则你改为在你自选的一项技能上成为受训。</p>\n<p>You love being on the other side of the camera. You've spent your formative years rigging scenes, hauling props, and making media magic as a stagehand in the Halls of the Living. You're either trained in Acrobatics and gain the @UUID[Compendium.sf2e.feats.Item.CnqMJR8e9jqJR7MM]{Steady Balance} skill feat, or you're trained in Athletics and gain the @UUID[Compendium.sf2e.feats.Item.09PurtIanNUPfNRq]{Combat Climber} skill feat. If you would automatically become trained in your chosen skill (from your background or class, for example), you instead become trained in a skill of your choice.</p>"
+    },
+    "Scrabbler Skittermander": {
+      "name": "碎语拾荒者斯基特曼德族 Scrabbler Skittermander",
+      "description": "<p>你始终没能掌握协调自己六只手臂进行手动操作的技巧，因此转而将最低的两条肢体用于天然攀爬者所具备的额外机动性、平衡与稳定。你拥有四只手臂（而非六只）和四条腿（而非两条）。你获得等同于你基础陆地速度的攀爬速度，并且可以用双脚攀爬，从而让你的四只手臂保持空闲。</p>\n<p>You never mastered coordinating all six of your arms for manual manipulation, instead using the lowest two limbs for the extra mobility, balance, and stabilization of a natural climber. You have four arms (rather than six) and four legs (rather than two). You gain a climb Speed equal to your base land Speed and can climb using your feet, leaving your four arms free.</p>"
+    },
+    "Urbanite Human": {
+      "name": "都市人类 Urbanite Human",
+      "description": "<p>你在大城市中长大，早已习惯于最拥挤人群的推挤与拉扯、街道间电光般的喧嚣与纷乱，或空间站或巨型综合体中垂直居住环境的稠密生活。你忽略由人群造成的困难地形，以及由人群提供的次等掩护。你在一个由你选择的特定城市相关的知识技能上成为受训。</p>\n<p>You have grown up in a big city and are accustomed to the press and pull of the largest crowds, the electric buzz and tangle of streets, or the dense nature of vertical living on a station or megaplex. You ignore difficult terrain from crowds and lesser cover from crowds. You become trained in a Lore skill for one specific city of your choice.</p>"
+    },
+    "Construct Copycat": {
+      "name": "拟构学舌者 Construct Copycat",
+      "description": "<p>你用可以调整的科技植入体强化了自己的身体，使自己看起来像一只构装生物。你可以使用变形来呈现为一个小型或中型构装体的外观。你获得“改造者之躯”一般专长。</p>\n<p>You have reinforced your body with technological augmentations that can be shifted to give yourself the appearance of a constructed creature. You can use Change Shape to assume the appearance of a Small or Medium construct. You gain the Augmented Body general feat.</p>"
+    },
+    "Tempering": {
+      "name": "回火 Tempering",
+      "description": "<p>你正在经历你的淬炼，这是一种成年仪式，在此期间卡萨萨会摒弃其家族的正式传统，并体验其他习俗与传统。你也可能是未淬炼者，即选择在传统期限之后继续自己淬炼的卡萨萨。你在社群上变为受训，并获得 @UUID[Compendium.sf2e.feats.Item.X2jGFfLU5qI5XVot]{街头智慧} 专长。</p>\n<p>You're undergoing your Tempering, a coming-of-age ritual during which a kasatha rejects the formal traditions of their family and experiences other customs and traditions. You might be one of the Untempered, a kasatha who chooses to continue their Tempering beyond the traditional period. You become trained in Society and gain the @UUID[Compendium.sf2e.feats.Item.X2jGFfLU5qI5XVot]{Streetwise} feat.</p>"
+    },
+    "Merged Barathu": {
+      "name": "融合飞螅族 Merged Barathu",
+      "description": "<p>你是一个独特的个体，由两个或更多飞螅族恒久结合而成；他们如此享受融合的行为，以至于选择不再回归各自原本的孤立状态。你的体型为大型而非中型。你的族裔给予你的生命值为10点而非8点，并且你在对抗情绪效果的豁免检定中获得+1环境加值。</p>\n<p>You're a unique entity formed from the constant union of two or more barathus who enjoy the act of combination so much that they chose not to return to isolation as their former selves. You're Large instead of Medium. You gain 10 Hit Points from your ancestry instead of 8, and you gain a +1 circumstance bonus to saving throws against emotion effects.</p>"
+    },
+    "Winged Shirren": {
+      "name": "有翼希伦人 Winged Shirren",
+      "description": "<p>你的祖先是进化出翅膀的虫群成员。你拥有一对功能完备的翅膀，使你获得 15 英尺的飞行速度。</p>\n<p>Your ancestors were members of the Swarm who evolved wings. You possess a fully functional pair of wings that grant you a fly Speed of 15 feet.</p>"
+    },
+    "Renewed Android": {
+      "name": "重生安卓体 Renewed Android",
+      "description": "<p>在你之前，许多灵魂曾栖居于你的合成躯体之中，而你可能会在名字中加入一个数字来纪念他们。你可能知晓自己这副身体的历史，并朝着某个已逝灵魂留给你的目标努力；或者，你也可能试图揭开某段被遗忘传承的谜团。肌肉记忆暗示着你身体的过去，而那些你从未见过的人有时也会认出你的脸。你在一天中第一次失去濒死状态时，不会获得受伤状态。你获得一项由你选择且拥有 @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{回忆知识} 动作的技能的受训熟练，并获得@UUID[Compendium.sf2e.feats.Item.1Bt7uCW2WI4sM84P]{可疑知识}技能专长。</p>\n<p>Many souls have inhabited your synthetic body before you, and you might incorporate a number into your name to honor them. You might know your body's history and work toward a goal bequeathed to you by a departed soul, or you might seek to learn the mystery of a forgotten legacy. Muscle memory hints at your body's past, and people you've never met sometimes recognize your face. The first time in a day that you lose the dying condition, you don't gain the wounded condition. You become trained in a skill of your choice that has the @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{Recall Knowledge} action, and you gain the@UUID[Compendium.sf2e.feats.Item.1Bt7uCW2WI4sM84P]{ Dubious Knowledge} skill feat.</p>"
+    },
+    "Shipborn Dragonkin": {
+      "name": "舰生龙人 Shipborn Dragonkin",
+      "description": "<p>你的祖先适应了在星舰上，或在为体型远小于你们的人所建的定居点中生活。体型大反而成了劣势——后来的世代摆脱了这一点。你的体型不是大型，而是中型。你在进行 @UUID[Compendium.sf2e.actions.Item.kMcV8e5EZUxa6evt]{挤压} 检定时获得 +1 环境加值，且你在进行挤压时可以使用特技或运动。</p>\n<p>Your ancestors adapted to live on a starship or in a settlement sized for people much smaller than your own. Being large was a disadvantage—one that subsequent generations shed. Instead of Large, your size is Medium. You gain a +1 circumstance bonus to checks to @UUID[Compendium.sf2e.actions.Item.kMcV8e5EZUxa6evt]{Squeeze}, and you can use Acrobatics or Athletics when you Squeeze.</p>"
+    },
+    "Rime Walker Pahtra": {
+      "name": "霜行帕哈特拉 Rime Walker Pahtra",
+      "description": "<p>你通过长出一身蓬松的毛皮外衣来适应寒冷环境。你可能是远在维斯卡里姆的开发改变普洛尼斯气候之前，就居住在其严寒地区的古代帕斯塔拉的后裔；或者你也可能是通过生物工程解锁了这种遗传潜能。你获得等于你等级一半的寒冷抗性（最低为 1）。你将环境寒冷效果视为低一个等级的极端程度（难以置信的严寒变为极端严寒，极端严寒变为严重严寒，依此类推）。</p>\n<p>You've adapted to cold environments by growing a fluffy fur coat. You might be the descendant of ancient pahtras who dwelled in the frigid regions of Pulonis long before the Veskarium's exploitation changed its climate, or you might have unlocked this genetic potential through bioengineering. You gain cold resistance equal to half your level (minimum 1). You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
+    },
+    "Thoughtseeker Contemplative": {
+      "name": "寻思者默思族 Thoughtseeker Contemplative",
+      "description": "<p>有些默思族并不满足于自身的思维，便向其他心灵敞开自己，在银河各处寻求知识，并因此发展出广域的感知。你是这些灵能探索者的后裔，或曾随他们的继承者接受过大量训练。你获得 @UUID[Compendium.sf2e.spells.Item.qOLMHvkAGsVYLhtn]{侦测思想}，作为一个2环的神秘先天法术，你每10分钟可以施放一次。到12级时，你可以将其作为4环的神秘先天法术施放。</p>\n<p>Not content with their own thoughts, some contemplatives opened themselves to other minds seeking knowledge throughout the galaxy, developing far-reaching awareness as a result. You are descended from these psychic explorers or trained extensively with their successors. You gain @UUID[Compendium.sf2e.spells.Item.qOLMHvkAGsVYLhtn]{Detect Thoughts} as a 2nd-rank occult innate spell, which you can cast once every 10 minutes. At level 12, you can cast this as a 4th-rank occult innate spell.</p>"
+    },
+    "Bloom-Born Kalo": {
+      "name": "花绽卡洛 Bloom-Born Kalo",
+      "description": "<p>你在一处繁花附近长大——那是通往第一世界的天然传送门之一，会在卡洛-马霍伊各地随机开启与关闭——并因此对周围原始魔法的存在形成了天然感知。你获得自然的受训熟练等级。若你本会自动在自然上成为受训（例如来自你的背景或职业），则你改为在自选的另一项技能上成为受训。此外，你可以随意将 @UUID[Compendium.sf2e.spells.Item.gpzpAAAJ1Lza2JVl]{侦测魔法}戏法作为原始先天法术施放。戏法会自动升阶至等同于你等级一半（向上取整）的法术环阶。</p>\n<p>You grew up near a bloom, one of the naturally occurring portals to the First World that randomly open and close across Kalo-Mahoi, and have developed a natural sense for the presence of primal magic around you. You gain the trained proficiency rank in Nature. If you would automatically become trained in Nature (from your background or class, for example), you become trained in another skill of your choice. Additionally, you can cast the @UUID[Compendium.sf2e.spells.Item.gpzpAAAJ1Lza2JVl]{Detect Magic} cantrip as a primal innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
+    },
+    "Inflorescent": {
+      "name": "花序状 Inflorescent",
+      "description": "<p>你从生命能量的源泉中汲取力量，使自己始终绽放。选择一个戏法：@UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize} 或 @UUID[Compendium.sf2e.spells.Item.kcelf6IHl3L9VXXg]{Vitality Lash}，你可以将其作为原始先天法术随意施放。此选择无法更改。戏法会被升阶至等于你等级一半（向上取整）的法术环阶。你对抗虚空效果的豁免获得+1环境加值。</p>\n<p>You draw from a wellspring of vital energy to remain constantly in bloom. Choose one cantrip: @UUID[Compendium.sf2e.spells.Item.SnjhtQYexDtNDdEg]{Stabilize} or @UUID[Compendium.sf2e.spells.Item.kcelf6IHl3L9VXXg]{Vitality Lash}, which you can cast as a primal innate spell at will. This choice can't be changed. A cantrip is heightened to a spell rank equal to half your level rounded up. You also gain a +1 circumstance bonus to saves against void effects.</p>"
+    },
+    "Networked Android": {
+      "name": "联网安卓体 Networked Android",
+      "description": "<p>你的身体经过改造，能够与其他科技生物无缝联网。你获得短波，使你能够与30英尺内的任何生物进行无线通信，只要它们也具有短波，或是具有科技特征的构装体。这不会让你获得对其思想或程序的任何特殊访问权限，传递的信息也不会比正常言语更多。你可以在30英尺距离内，无需黑客工具包或空闲手，尝试进行计算机检定来入侵系统、@UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{战斗入侵}、制造一个@UUID[Compendium.sf2e.feats.Item.0ZNErs9RICfOw1Nf]{数字佯攻}、@UUID[Compendium.sf2e.actions.Item.cYdz2grcOcRt4jk6]{禁用装置}，或@UUID[Compendium.sf2e.actions.Item.2EE4aF4SZpYf0R6H]{撬锁}。</p>\n<p>Your body was modified to network seamlessly with other tech creatures. You gain shortwave, allowing you to communicate wirelessly with any creatures within 30 feet, as long as they have shortwave or are a construct with the tech trait. This doesn't give any special access to their thoughts or programming and communicates no more information than normal speech would. You can attempt Computers checks to Hack systems, @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{Combat Hack}, create a @UUID[Compendium.sf2e.feats.Item.0ZNErs9RICfOw1Nf]{Digital Diversion}, @UUID[Compendium.sf2e.actions.Item.cYdz2grcOcRt4jk6]{Disable a Device}, or @UUID[Compendium.sf2e.actions.Item.2EE4aF4SZpYf0R6H]{Pick a Lock} without a hacker's toolkit or free hand at a range of 30 feet.</p>"
+    },
+    "Imperious Contemplative": {
+      "name": "威严的默思族 Imperious Contemplative",
+      "description": "<p>无论这是后天培养出的反应，还是你本能天赋带来的自然结果，每当你目睹那些不如你的对手在思维之海中徒劳挣扎时，你的大脑都会以脑内啡作为奖赏。你获得 @UUID[Compendium.sf2e.actions.Item.wI0g2nRfu2d0YFAd]{护持傲慢} 反应。</p>\n<p>Whether it's a nurtured response or a natural consequence of your instinctive genius, your brain rewards you with endorphins whenever you witness your inferior rivals flailing helplessly in a mental sea. You gain the @UUID[Compendium.sf2e.actions.Item.wI0g2nRfu2d0YFAd]{Shielding Arrogance} reaction.</p>"
+    },
+    "Nomadic Vlaka": {
+      "name": "游牧弗拉卡 Nomadic Vlaka",
+      "description": "<p>你的人生总是在移动之中，在无尽的旅程中穿行银河。你获得两种你选择的额外语言，从你可用的常见和非常见语言中选择。当你选择@UUID[Compendium.sf2e.feats.Item.P9HCz0uR6xPHuw72]{多语言者}技能专长时，你获得三种新语言，而非两种。</p>\n<p>You live your life on the move, traveling the galaxy in an endless journey. You gain two additional languages of your choice, chosen from among the common and uncommon languages available to you. When you select the @UUID[Compendium.sf2e.feats.Item.P9HCz0uR6xPHuw72]{Multilingual} skill feat, you gain three new languages instead of two.</p>"
+    },
+    "Damaya Lashunta": {
+      "name": "达玛亚拉申塔人 Damaya Lashunta",
+      "description": "<p>你选择了适应性遗传特征，成为一名达玛雅。与其他拉申塔人相比，你的体型可能更纤细、更轻盈，而且通常会被鼓励从事学者或政治家的工作。除你从族裔获得的内容外，你还获得一项智力属性提升和一项体质属性缺陷，但自由族裔属性提升也不能选择智力。你在外交技能上变为受训。若你本会自动在外交技能上变为受训（例如来自你的背景或职业），则你改为在你选择的另一项技能上变为受训。你获得 @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} 通用专长。</p>\n<p>You've chosen the adaptive genetics to become a damaya. You might have a leaner, lither body type than other lashuntas and are likely encouraged to pursue work as a scholar or politician. In addition to what you gain from your ancestry, you gain an attribute boost to Intelligence and an attribute flaw to Constitution, but the free ancestry boost can't also be Intelligence. You become trained in Diplomacy. If you would automatically become trained in Diplomacy (from your background or class, for example), you become trained in another skill of your choice. You gain the @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} general feat.</p>"
+    },
+    "Artificial Scion Android": {
+      "name": "人工后裔 安卓体 Artificial Scion Android",
+      "description": "<p>你的身体并非依照某种生物造物的形象而创造；一个强大的人工智能创造了你，以便与其他机器进行接口连接。你的生理构造与其他安卓体几乎完全相同，但一些怪异的细节暴露了你非标准的起源（例如，你可能拥有不可能般对称的五官、额外的手指，或双重瞳孔）。你在计算机上变为受训，并获得 @UUID[Compendium.sf2e.feats.Item.ifQiKhl0Gt2CM7i9]{Phreaker} 技能专长。</p>\n<p>Your body wasn't created in the image of a biological creature; a powerful artificial intelligence created you to interface with other machines. Your physiology is nearly identical to other androids, but uncanny details give away your non-standard origins (for example, you might have impossibly symmetrical features, extra fingers, or double pupils). You become trained in Computers, and you gain the @UUID[Compendium.sf2e.feats.Item.ifQiKhl0Gt2CM7i9]{Phreaker} skill feat.</p>"
+    },
+    "Skilled Human": {
+      "name": "精熟人类 Skilled Human",
+      "description": "<p>你的聪明才智让你有机会擅长多种技能。你选择的一项技能获得受训熟练度。5级时，你在该所选技能上的熟练度提升至专家。</p>"
     }
+  }
 }

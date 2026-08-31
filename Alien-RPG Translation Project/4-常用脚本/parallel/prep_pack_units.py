@@ -79,22 +79,55 @@ def vis(t):
     return len(re.sub(r"<[^>]+>", "", t))
 
 
+def _heading_starts(text, levels=("1", "2", "3")):
+    """收集指定层级标题的起始偏移，去重后升序。"""
+    starts = set()
+    for lv in levels:
+        starts.update(m.start() for m in re.finditer(r"<h%s[^>]*>" % lv, text))
+    return sorted(starts)
+
+
 def slice_page(text, target_chars):
-    """按 h1（不够就 h2）边界把一页切成若干 [start,end)，每块尽量接近 target。"""
-    for pat in (r"<h1[^>]*>", r"<h2[^>]*>"):
-        starts = [m.start() for m in re.finditer(pat, text)]
-        if len(starts) >= 2:
-            break
-    if not starts or starts[0] != 0:
-        starts = [0] + starts
-    bounds = starts + [len(text)]
-    chunks, lo = [], 0
-    for i in range(1, len(bounds)):
-        if bounds[i] - lo >= target_chars or i == len(bounds) - 1:
-            chunks.append((lo, bounds[i]))
-            lo = bounds[i]
-    if lo < len(text):
-        chunks[-1] = (chunks[-1][0], len(text))
+    """按标题边界把一页切成若干 [start,end)，每块尽量接近 target。
+
+    ⚠ 尾块问题：只用 h1（或只用 h2）时，最后一块会把**所有余量**吞掉。
+    starterset 的 Hope's Last Day 第 3 块实测 43,325 字（目标 26,000），
+    因为那一段只有 2 个 h2 —— 但它有 10 个 h3。
+    所以策略是：先用最粗的层级切；**任何仍然超过 1.6×target 的块，
+    再用更细的层级在块内二次切**。二次切只在块内进行，所以铺满性不受影响。
+    """
+    def cut(lo, hi, levels):
+        seg = text[lo:hi]
+        starts = [lo + s for s in _heading_starts(seg, levels) if s > 0]
+        if not starts:
+            return [(lo, hi)]
+        out, cur = [], lo
+        for s in starts:
+            if s - cur >= target_chars:
+                out.append((cur, s))
+                cur = s
+        out.append((cur, hi))
+        return out
+
+    chunks = cut(0, len(text), ("1",)) if _heading_starts(text, ("1",)) else [(0, len(text))]
+    # 二次切：h2，再 h3
+    for levels in (("1", "2"), ("1", "2", "3")):
+        refined = []
+        for lo, hi in chunks:
+            if hi - lo > target_chars * 1.6:
+                refined.extend(cut(lo, hi, levels))
+            else:
+                refined.append((lo, hi))
+        chunks = refined
+
+    # 铺满性自检：块必须首尾相接、覆盖全页
+    pos = 0
+    for lo, hi in chunks:
+        if lo != pos:
+            sys.exit("slice_page: gap/overlap at %d (expected %d)" % (lo, pos))
+        pos = hi
+    if pos != len(text):
+        sys.exit("slice_page: tail %d of %d" % (pos, len(text)))
     return chunks
 
 
@@ -195,9 +228,116 @@ def main():
     ap.add_argument("--collect", action="store_true")
     a = ap.parse_args()
     out = a.out or os.path.join(ROOT, "6-工作区", "phase4-" + a.pack)
-    if a.collect:
-        sys.exit("--collect 尚未实现；先跑 prep")
-    return cmd_prep(a.pack, out, a.target)
+    return cmd_collect(a.pack, out) if a.collect else cmd_prep(a.pack, out, a.target)
+
+
+
+
+# ---------------------------------------------------------------- collect --
+def cmd_collect(pack, out):
+    """把单元产出装配成 compendium/cn/<pack>.json。
+
+    与 prep_sys_units.py 的 collect 同构，但多两件事：
+      · 期刊分段要按 byte_range 排序拼回**各自的页**（内容包有多页，系统包只有一页）；
+      · 日志名与页名来自 ST-NAMES.cn.json（切单元时漏掉的那一层，见该文件 _why_it_was_missed）。
+    """
+    cfg = PACKS[pack]
+    en_path = os.path.join(ROOT, cfg["repo"], "compendium", "en", cfg["file"])
+    cn_path = os.path.join(ROOT, cfg["repo"], "compendium", "cn", cfg["file"])
+    en = jload(en_path)
+    adv_en = en["entries"][cfg["adventure"]]
+    index = jload(os.path.join(out, "index.json"))
+    P = pack[:2].upper()
+
+    fail = []
+
+    def need(name):
+        p = os.path.join(out, name)
+        if not os.path.exists(p):
+            fail.append("MISSING %s" % name)
+            return None
+        return jload(p)
+
+    names = need("ST-NAMES.cn.json") if pack == "starterset" else {}
+    shell = need("%s-U.cn.json" % P)
+    items = need("%s-I.cn.json" % P)
+    cast = need("%s-A-CAST.cn.json" % P)
+    cre = need("%s-A-CRE.cn.json" % P)
+    t_crit = need("%s-T-CRIT.cn.json" % P)
+    t_rest = need("%s-T-REST.cn.json" % P)
+    t_reuse = need("%s-T-REUSE.cn.json" % P)
+
+    # 期刊：按 (journal, page) 归组，组内按 byte_range 排序拼接
+    pages = {}
+    for uid, u in index.items():
+        if u.get("kind") != "journal_section":
+            continue
+        p = os.path.join(out, u["cn_file"])
+        if not os.path.exists(p):
+            fail.append("MISSING %s (%s)" % (uid, u["cn_file"]))
+            continue
+        seg = io.open(p, encoding="utf-8").read()
+        en_seg = io.open(os.path.join(out, u["en_file"]), encoding="utf-8").read()
+        if seg == en_seg:
+            fail.append("UNTOUCHED %s — 与英文逐字节相同，agent 没干活" % uid)
+        pages.setdefault((u["journal"], u["page"]), []).append((u["byte_range"][0], seg))
+
+    if fail:
+        print("COLLECT FAILED:")
+        for f in fail:
+            print("  " + f)
+        return 1
+
+    jn_map = (names or {}).get("journals", {})
+    pn_map = (names or {}).get("pages", {})
+
+    journals = {}
+    for jname, j in adv_en.get("journals", {}).items():
+        out_pages = {}
+        for pname, page in (j.get("pages") or {}).items():
+            parts = pages.get((jname, pname))
+            entry = {"name": pn_map.get(pname, page.get("name", pname))}
+            if parts:
+                parts.sort()
+                entry["text"] = "".join(s for _, s in parts)
+            else:
+                # 纯图片页：只有名字，取 shell 里的 image_only_pages
+                iop = (shell or {}).get("image_only_pages", {}).get(jname, {})
+                if isinstance(iop, dict) and pname in iop:
+                    entry["name"] = iop[pname]
+            out_pages[pname] = entry
+        journals[jname] = {"name": jn_map.get(jname, j.get("name", jname)), "pages": out_pages}
+
+    tables = {}
+    for src in (t_crit, t_rest, t_reuse):
+        if src:
+            tables.update(src)
+
+    actors = {}
+    for src in (cast, cre):
+        if src:
+            actors.update(src)
+
+    adv_cn = {
+        "name": (shell or {}).get("name", adv_en.get("name")),
+        "description": (shell or {}).get("description", adv_en.get("description")),
+        "folders": (shell or {}).get("folders", {}),
+        "scenes": (shell or {}).get("scenes", {}),
+        "journals": journals,
+        "tables": tables,
+        "items": items or {},
+        "actors": actors,
+    }
+    jdump(cn_path, {"label": en.get("label"), "folders": {}, "entries": {cfg["adventure"]: adv_cn}})
+
+    print("wrote %s" % cn_path)
+    for coll in ("journals", "tables", "items", "actors", "folders", "scenes"):
+        print("  %-9s en=%-4d cn=%d" % (coll, len(adv_en.get(coll, {})), len(adv_cn.get(coll, {}))))
+    for (jn, pn), parts in sorted(pages.items()):
+        src = adv_en["journals"][jn]["pages"][pn].get("text") or ""
+        got = "".join(s for _, s in sorted(parts))
+        print("  page %-34s en=%7d cn=%7d" % (pn[:34], len(src), len(got)))
+    return 0
 
 
 if __name__ == "__main__":

@@ -250,6 +250,40 @@
     "船长": "默认。商船、拖船、运输船、打捞船——即 USCSS（United States Commercial Ship）与「太空卡车司机」战役框架下的绝大多数船。",
     "舰长": "仅限具名军舰。殖民海军陆战队框架下的 UAS/USS 战斗舰艇。"
    }
+  },
+  "D12-mother": {
+   "id": "D12-mother",
+   "en": "MOTHER / MU/TH/UR (the ship AI)",
+   "status": "deferred_by_owner",
+   "deferred_on": "2026-08-29",
+   "current": "老妈",
+   "owner_reaction": "「我只是觉得老妈有点奇怪」——业主实机看到后提出，但当轮裁定暂不改。",
+   "why_kept_for_now": "证据侧 老妈 有量（CnSCG 四片 + Covenant 共 15 处），且它确实是电影里船员对 MU/TH/UR 主机的**昵称**语感。改动要跨 lang + 三个包，不值得在业主尚未确定替代词时动。",
+   "candidates": [
+    {
+     "zh": "老妈",
+     "for": "船员昵称语感准确；15 处影视证据；一级源用它称呼 Game MOTHER",
+     "against": "中文里滑向「我妈」的家常味，当船载 AI 的名字读起来发噱"
+    },
+    {
+     "zh": "母亲",
+     "for": "Romulus 2024 与 Alien: Earth 2025 两部最新影视都用它（4 处）；正式、冷；与 2024 院线版一致",
+     "against": "丢掉了昵称语感——电影里那是船员起的外号，不是官方称谓"
+    },
+    {
+     "zh": "母体",
+     "for": "更冷、更像机器代号",
+     "against": "无影视依据；且「母体」在中文科幻里已被《黑客帝国》占用"
+    },
+    {
+     "zh": "MU/TH/UR（不译）",
+     "for": "**一级源（《进化版》中文连载）就是这么做的**；T-LATIN 已允许型号与船级前缀保留拉丁",
+     "against": "正文里反复出现拉丁串会打断阅读"
+    }
+   ],
+   "⚠_not_width_constrained": "业主提出时以为受两字限制。**不受**——两字统一那条只约束面板标签（状态名/技能名/物品栏列头），而本词只出现在正文与一个文件夹名（异形RPG老妈辅助工具）里，宽度自由。下次裁定时候选不必是两字。",
+   "domain_split_worth_considering": "MOTHER 作为**那台主机** 与 Game MOTHER 作为**GM 的称呼**可以分开取词——后者本来就是玩笑式自称（一级源作「老妈 / 游戏管理员」），前者不该是。",
+   "blast_radius": "lang/cn.json 若干键 · 系统包文件夹「异形RPG老妈辅助工具」与两个宏名 · corerules 第 7 章（Being the Game Mother）全章 · ⚠ 文件夹 'Alien Mother Tables' 是 T-FROZEN，无论怎么裁都不能动。"
   }
  }
 }

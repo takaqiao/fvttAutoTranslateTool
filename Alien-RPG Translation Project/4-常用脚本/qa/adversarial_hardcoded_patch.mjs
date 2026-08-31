@@ -1273,6 +1273,204 @@ withGame(CN_WORLD, () => {
     installNameFallback(fakeOwn([]), []), false);
 });
 
+
+/* ══════════════════════════════════════════════════════════════════════
+ * A 组 —— Adventure 名字通道·**反证**（counter-proof）
+ * ══════════════════════════════════════════════════════════════════════
+ * 这一组不守任何一行我们写下的代码。它守的是一段我们**故意没有写**的代码：
+ *
+ *   「把 Adventure 内嵌文档的 `_stats.compendiumSource` 从世界式 UUID
+ *     （`RollTable.<id>`）改写成合集式 UUID
+ *     （`Compendium.alienrpg.alien-rpg-system.RollTable.<id>`）」
+ *   —— 俗称「来源规范化垫片」。
+ *
+ * 症状是真的：世界里导入 Adventure 之后，日志**正文是中文**，但侧栏里的
+ * 文件夹名（Careers / Skill-Stunts）、4 个宏名、3 个随机表名**还是英文**。
+ * 一眼看去像是 Babele 因为 source 形状不合规而认不出源包，于是很自然会想去
+ * 规范化那个字段。**这个因果判断是错的**，而且错得很隐蔽：垫片装上去之后
+ * 一条译文都不会多，但它会往世界文档的溯源字段里写进**伪造且悬空**的 UUID，
+ * 而后人看见这段代码只会以为问题已经被解决了 —— 空补丁比没有补丁更坏。
+ *
+ * 2026-08-29 实测（headless 跑真的 Babele 2.9.1 转换器，判据逐条列在下面）：
+ *   · 规范化前后，译文输出的**叶子差异 = 9 条，全部落在被改写的
+ *     compendiumSource 字段自身**；folders / macros / tables / journal 的
+ *     name 一个字符都没变。
+ *   · 规范化**之后**再跑 `translateImportedCompendiumFolder()`，
+ *     7 个文件夹**全部**仍然返回英文原名。
+ *
+ * 支撑这个结论的是四条互相独立的机制事实（A1–A4）。任何一条被上游改掉，
+ * 这一组就会红 —— 那时候、且只有那时候，才需要重新评估这个垫片：
+ *   A1 文件夹名走 nameCollection，那个转换器**通篇不读** source 字段。
+ *   A2 source 只喂 `_exactSourceTranslationSource` 这一层 fallback；本地
+ *      name 键层是**后**合并的一方，永远赢。
+ *   A3 就算 source 修好了，导入后补写查的是翻译文件的**顶层** `folders` 图，
+ *      而我们的译名全在 `entries[…].folders` 里 —— 那是另一张图，顶层那张是空的。
+ *   A4 宏和随机表**根本没有**导入后补写钩子（babele.js 只注册了 createFolder），
+ *      也就是说三类症状里有两类无论如何都走不到这条路上。
+ *
+ * A5–A6 是把上面两条实测**跑进闸门**（真的 FolderTranslations + 真的转储），
+ * A7 守的是「垫片确实还不存在」这件事本身。
+ *
+ * ⚠ 真正的成因不在读取路径，而是世界处于**混合状态**：那些 Folder / Macro /
+ *   RollTable 文档是在一次没有 Babele 参与的导入里建出来的（alienrpg 的
+ *   init.mjs 会在首个 ready 自动导入），此后没有任何东西会去重命名世界文档；
+ *   日志之所以是中文，是 alienrpg.mjs 的 showReleaseNotes() 另外单独强写了
+ *   **恰好一个**世界文档（就是那本日志），且显式跳过 folders、完全不碰宏与表。
+ *   ⇒ 修法是**重新导入**（Adventure#import 对已存在的 _id 走
+ *     `{diff:false, recursive:false}` 的整份替换，会把英文名覆盖掉），
+ *     不是改 source 形状。
+ * ══════════════════════════════════════════════════════════════════════ */
+
+const A_RAWDUMP = path.join(PROJ, '6-工作区/raw-dumps/system.json');
+const A_CNPACK = path.join(HUB, 'compendium/cn/alienrpg.alien-rpg-system.json');
+const A_BABELE = path.join(DATA, 'modules/babele');
+const babRead = rel => { try { return read(path.join(A_BABELE, rel)); } catch { return null; } };
+
+const A_CONV = babRead('script/converter/converters.js');
+const A_DOCCONV = babRead('script/converter/document-converter.js');
+const A_FT = babRead('script/compendium/folder-translations.js');
+const A_MAPCOMP = babRead('script/compendium/mapped-compendium.js');
+const A_MAIN = babRead('script/babele.js');
+const A_DEFMAP = babRead('script/mapping/default-mappings.js');
+
+// A0 —— 判据存在性。babele 是 module.json 里的 requires，缺了不是「跳过」，是坏了。
+check('A', 'A0 Babele 六份判据源码都在（module.json 把 babele 列为 requires >= 2.9.1）',
+  [A_CONV, A_DOCCONV, A_FT, A_MAPCOMP, A_MAIN, A_DEFMAP].map(s => typeof s === 'string' && s.length > 0),
+  [true, true, true, true, true, true]);
+
+/* ---------------- A1 文件夹名那条路根本不读 source ---------------- */
+// mapping/default-mappings.js:6-9
+const A_ADVMAP = (A_DEFMAP ?? '').split('"Adventure"')[1] ?? '';
+check('A', 'A1a Adventure.folders 的转换器仍是 nameCollection',
+  /"folders"\s*:\s*\{\s*"path"\s*:\s*"folders"\s*,\s*"converter"\s*:\s*"nameCollection"\s*\}/.test(A_ADVMAP), true);
+// converter/converters.js:176
+check('A', 'A1b nameCollection 仍是 fieldCollection("name")',
+  /nameCollection\s*:\s*this\.fieldCollection\("name"\)/.test(A_CONV ?? ''), true);
+// converter/converters.js:99-127
+const A_FIELDCOLL = (() => {
+  const i = (A_CONV ?? '').indexOf('fieldCollection(field) {');
+  return i < 0 ? '' : A_CONV.slice(i, i + 1200);
+})();
+check('A', 'A1c fieldCollection 仍然只按 translations[data[field]] 查表',
+  /translations\[data\[field\]\]/.test(A_FIELDCOLL), true);
+check('A', '★A1d fieldCollection 通篇不出现 compendiumSource / sourceId / _stats —— 文件夹译名与 source 形状无关',
+  ['compendiumSource', 'sourceId', '_sourceUuid', '_stats'].filter(k => A_FIELDCOLL.includes(k)), []);
+
+/* ---------------- A2 source 只喂 fallback 层，本地层后合并获胜 ---------------- */
+// converter/document-converter.js:538-540 —— brief 里「必须 ^Compendium. 前缀」这条前提本身是对的
+check('A', 'A2a _sourceCollection 仍靠 ^Compendium. 前缀取包名',
+  (A_DOCCONV ?? '').includes('.match(/^Compendium\\.([^.]+\\.[^.]+)\\./)?.[1] ?? null'), true);
+check('A', '★A2b _sourceCollection 全文件只有 1 处调用点',
+  ((A_DOCCONV ?? '').match(/this\._sourceCollection\(/g) ?? []).length, 1);
+// converter/document-converter.js:436-440 —— 那一处就在 fallback 层里，取不到包直接 return null
+// 注意锚点要取**定义**而不是调用点：:359 的调用点排在 :436 的定义之前。
+const A_EXACT = (() => {
+  const i = (A_DOCCONV ?? '').indexOf('_exactSourceTranslationSource(data, runtime, currentCompendium, documentType = ');
+  return i < 0 ? '' : A_DOCCONV.slice(i, i + 900);
+})();
+check('A', 'A2c0 _exactSourceTranslationSource 全文件恰好 1 处定义 + 1 处调用，调用点就在 fallback 解析器里',
+  ((A_DOCCONV ?? '').match(/_exactSourceTranslationSource\(/g) ?? []).length, 2);
+check('A', 'A2c 那一处调用在 _exactSourceTranslationSource 体内，取不到包就 return null（只是断了 fallback）',
+  /const collection = this\._sourceCollection\(data\);\s*if \(!collection\) \{\s*return null;/.test(A_EXACT), true);
+// converter/document-converter.js:300 —— currentPayload 后合并 => 本地 name 键层赢
+check('A', '★A2d 本地 name 键层 currentPayload 仍是**后**合并的一方（所以 source 坏了也照样译出来）',
+  (A_DOCCONV ?? '').includes('foundry.utils.mergeObject(fallbackPayload, currentPayload, {inplace: false})'), true);
+
+/* ---------------- A3 补写路径查的是顶层 folders 图，而我们那张是空的 ---------------- */
+// compendium/folder-translations.js:129-136
+check('A', 'A3a translateImportedCompendiumFolder 取译名时走 compendium.folderTranslations()',
+  (A_FT ?? '').includes('return compendium.folderTranslations();'), true);
+// compendium/mapped-compendium.js:138
+check('A', 'A3b MappedCompendium.folderTranslations() 对普通包返回 this.folders',
+  (A_MAPCOMP ?? '').includes('return this.folders ?? {};'), true);
+// compendium/mapped-compendium.js:56-58 —— this.folders 只来自翻译文件的**顶层** folders 键
+check('A', 'A3c this.folders 只来自翻译文件的顶层 folders 键',
+  (A_MAPCOMP ?? '').includes('this.folders = this.#clone(this.translation.folders);'), true);
+
+const A_CN = JSON.parse(read(A_CNPACK));
+const A_TOPF = A_CN.folders ?? {};
+const A_ENTF = A_CN.entries?.['Alien RPG System']?.folders ?? {};
+check('A', '★A3d CN 文件顶层 folders 是空的，译名全在 entries[…].folders 里 —— 补写路径查的正是空的那张',
+  [Object.keys(A_TOPF).length, Object.keys(A_ENTF).length], [0, 7]);
+check('A', 'A3e 被点名的那两个文件夹译名确实在 entries[…].folders 里（所以读取路径译得出来）',
+  [A_ENTF['Careers'], A_ENTF['Skill-Stunts']], ['职业', '技能炫技']);
+
+/* ---------------- A4 宏 / 随机表根本没有补写钩子 ---------------- */
+// script/babele.js:72-74
+check('A', 'A4a babele.js 仍然只给 Folder 注册了导入后补写钩子',
+  (A_MAIN ?? '').includes('Hooks.on("createFolder"'), true);
+check('A', '★A4b 没有 createMacro / createRollTable 钩子 —— 宏名与随机表名在导入后没有任何补写通道',
+  ['createMacro', 'createRollTable'].filter(h => (A_MAIN ?? '').includes(h)), []);
+
+/* ---------------- A5 行为反证：真的规范化，真的补写，一个字都不动 ---------------- */
+const { FolderTranslations: A_FTClass } =
+  await import(pathToFileURL(path.join(A_BABELE, 'script/compendium/folder-translations.js')).href);
+
+// 与 MappedCompendium.folderTranslations() 完全同形的替身 —— A3b/A3c 已把这个等价性钉死。
+const A_FAKEPACK = {
+  metadata: { name: 'alien-rpg-system', type: 'Adventure' },
+  folders: A_CN.folders ?? {},
+  folderTranslations() { return this.folders ?? {}; },
+};
+const A_FTINST = new A_FTClass({
+  mappedCompendiums: () => ({ get: c => (c === 'alienrpg.alien-rpg-system' ? A_FAKEPACK : null) }),
+  packFolderTranslations: () => null,
+});
+const A_NORM = s => (typeof s === 'string' && s && !/^Compendium\./.test(s))
+  ? `Compendium.alienrpg.alien-rpg-system.${s}` : s;
+
+if (!fs.existsSync(A_RAWDUMP)) {
+  check('A', 'A5 原始 Adventure 转储在位（缺了就重新导出 6-工作区/raw-dumps/system.json）', false, true);
+} else {
+  const A_RAW = JSON.parse(read(A_RAWDUMP));
+  const A_ADV = A_RAW[Object.keys(A_RAW)[0]];
+  const A_REPAIR = (raw, src) => {
+    const f = { id: raw._id, _id: raw._id, name: raw.name, type: raw.type, contents: [], _stats: { compendiumSource: src } };
+    A_FTINST.translateImportedCompendiumFolder(f);
+    return f.name;
+  };
+  // 第三级兜底会摸 game.packs（Adventure 型包不暴露合集文件夹，find 必然落空）。
+  withGame({ packs: { find: () => undefined } }, () => {
+    const shipped = A_ADV.folders.map(f => A_REPAIR(f, f?._stats?.compendiumSource ?? null));
+    const fixed = A_ADV.folders.map(f => A_REPAIR(f, A_NORM(f?._stats?.compendiumSource ?? null)));
+    const english = A_ADV.folders.map(f => f.name);
+    check('A', '★A5a 规范化 source **之后**，导入后补写仍然 7/7 原样返回英文', fixed, english);
+    check('A', '★A5b 规范化前后补写结果完全一致 —— 垫片对这条路径是纯空操作', fixed, shipped);
+  });
+
+  /* ---------------- A6 brief 事实前提校核 + 伪造 UUID 的代价 ---------------- */
+  const A_SRCS = f => (A_ADV[f] ?? []).map(d => d?._stats?.compendiumSource ?? null);
+  const A_WORLDISH = f => A_SRCS(f).filter(s => typeof s === 'string' && !s.startsWith('Compendium.')).length;
+  check('A', '★A6a 「内嵌文档的 source 全是世界式」是错的：4 个宏本来就带合规的 Compendium. UUID',
+    A_SRCS('macros').filter(s => typeof s === 'string' && s.startsWith('Compendium.')).length, 4);
+  check('A', 'A6b 真正带世界式 source 的是 folders 4/7、tables 3/3、journal 1/1',
+    [A_WORLDISH('folders'), A_WORLDISH('tables'), A_WORLDISH('journal')], [4, 3, 1]);
+  check('A', 'A6c 另有 3 个文件夹一个 source 都没有 —— 规范化对它们连输入都没有',
+    A_SRCS('folders').filter(s => s === null).length, 3);
+  const A_SYSMAN = JSON.parse(read(path.join(SYS, 'system.json')));
+  const A_PACK = (A_SYSMAN.packs ?? []).find(p => p.name === 'alien-rpg-system');
+  check('A', '★A6d 该包类型是 Adventure —— 所以 Compendium.alienrpg.alien-rpg-system.Folder.<id> 指的是这个包装不下的文档类型：垫片写进去的是伪造且悬空的溯源',
+    A_PACK?.type, 'Adventure');
+  check('A', 'A6e 系统只声明这一个包，宏 source 指向的 alien-rpg-macros / alien 两个包都已不存在（fallback 层本来就够不着，命中的是本地层）',
+    [(A_SYSMAN.packs ?? []).length,
+      (A_SYSMAN.packs ?? []).some(p => p.name === 'alien-rpg-macros'),
+      (A_SYSMAN.packs ?? []).some(p => p.name === 'alien')], [1, false, false]);
+}
+
+/* ---------------- A7 守住「垫片还不存在」这件事本身 ---------------- */
+const A_PATCHER = read(path.join(HUB, 'scripts/alienrpg-hardcoded-cn.mjs'));
+const A_PLUGINS = read(path.join(HUB, 'scripts/plugins-hardcoded-cn.mjs'));
+check('A', '★A7a 出货补丁里没有任何一处给 compendiumSource 赋值（垫片没被悄悄种回来）',
+  (A_PATCHER.match(/compendiumSource\s*=[^=]/g) ?? []).length, 0);
+check('A', 'A7b plugins 侧同样没有',
+  (A_PLUGINS.match(/compendiumSource\s*=[^=]/g) ?? []).length, 0);
+check('A', 'A7c 全文件总门仍是「系统 alienrpg + 语言 cn」（将来真要加垫片，它会自动继承这道门）',
+  [/function systemOk\(\)\s*\{\s*return globalThis\.game\?\.system\?\.id === SYSTEM_ID;\s*\}/.test(A_PATCHER),
+    /function langOk\(\)\s*\{\s*return globalThis\.game\?\.i18n\?\.lang === TARGET_LANG;\s*\}/.test(A_PATCHER),
+    /function enabled\(\)\s*\{\s*return systemOk\(\) && langOk\(\);\s*\}/.test(A_PATCHER)], [true, true, true]);
+check('A', 'A7d SYSTEM_ID / TARGET_LANG 仍是 alienrpg / cn',
+  [/const SYSTEM_ID = 'alienrpg';/.test(A_PATCHER), /const TARGET_LANG = 'cn';/.test(A_PATCHER)], [true, true]);
+
 /* ══════════════════════════════════════════════════════════════════════ */
 console.log(`\n${'='.repeat(70)}`);
 console.log(`PASS ${pass}   FAIL ${failures.length}`);

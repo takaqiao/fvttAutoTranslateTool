@@ -894,7 +894,7 @@
 			"name": "喷射热糖锅 Spitting Hot Candy Pot",
 			"disable": "<p>打破糖锅可在其破裂反应解决后立即解除。</p>",
 			"hazarddescription": "<p>炉上沸腾着一只装满熔糖的巨大青铜大锅，向四面八方喷出黏糊糊的热焦糖。</p>",
-			"routine": "<p>（2个动作）糖锅在每个动作中以30尺范围内一个对拉敏怀有敌意的生物为目标，吐出一团熔糖造成 @Damage[(1d8+4)[fire]] 伤害；目标必须尝试一次 @Check[reflex|dc:16|options:damaging-effect,inflicts:slowed] 豁免。</p><hr><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标承受半额伤害。</p><p><strong>失败</strong> 目标承受全额伤害并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，因黏糊熔糖将其黏在地上。</p><p><strong>大失败</strong> 目标承受双倍伤害、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}，并因热糖黏附其外露皮肤承受 @Damage[1d4[persistent,fire]] 伤害。</p>",
+			"routine": "<p>（2个动作）糖锅在每个动作中以30尺范围内一个对拉敏怀有敌意的生物为目标，吐出一团熔糖造成 @Damage[(1d8+4)[fire]] 伤害；目标必须尝试一次 @Check[reflex|dc:16|options:damaging-effect,inflicts:slowed] 豁免。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标承受半额伤害。</p><p><strong>失败</strong> 目标承受全额伤害并 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，因黏糊熔糖将其黏在地上。</p><p><strong>大失败</strong> 目标承受双倍伤害、@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}，并因热糖黏附其外露皮肤承受 @Damage[1d4[persistent,fire]] 伤害。</p>",
 			"items": {
 				"Rupture": {
 					"name": "破裂 Rupture",

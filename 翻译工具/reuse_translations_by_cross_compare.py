@@ -50,7 +50,7 @@ COMPENDIUM_BRACKET_RE = re.compile(r"(@Compendium\[)([A-Za-z0-9_-]+)(\.[^\]]+\])
 PLACEHOLDER_RE = re.compile(r"\{[A-Za-z0-9_.-]+\}")
 INLINE_LINK_LABEL_RE = re.compile(
     r"(?P<head>(?:"
-    r"@(?:UUID|Compendium|Actor|Item|JournalEntry|RollTable|Macro|Check|Damage|Template|Localize|Embed)\[[^\]]+\]"
+    r"@(?:UUID|Compendium|Actor|Item|JournalEntry|RollTable|Macro|Check|Damage|Template|Localize|Embed|ref|Condition|Scene|Macro)\[[^\]]+\]"
     r"|\[\[/[^\]]+\]\]"
     r"))\{[^\}]*\}"
 )
@@ -72,6 +72,8 @@ PACK_ALIAS_MAP = {
     "conditionitems": "conditions",
     "spells-srd": "spells",
 }
+# Keys under which each child is a distinct "entry" whose name may change between versions.
+ENTRY_CONTAINER_KEYS = {"entries", "mapping", "folders"}
 _MISSING = object()
 
 
@@ -94,12 +96,14 @@ class FileStats:
     replaced_path_only: int = 0
     replaced_uuid_path_match: int = 0
     replaced_uuid_value_match: int = 0
+    replaced_relpath_match: int = 0
     skipped_existing: int = 0
     skipped_no_match: int = 0
     skipped_ambiguous: int = 0
     skipped_placeholder: int = 0
     skipped_uuid_mismatch: int = 0
     skipped_code_like: int = 0
+    skipped_content_changed: int = 0
     unchanged_same_text: int = 0
     output_path: str = ""
     samples: list[dict[str, str]] = field(default_factory=list)
@@ -180,6 +184,18 @@ def path_to_text(path: PathTuple) -> str:
         else:
             out += f".{token}"
     return out
+
+
+def relative_path(path: PathTuple) -> PathTuple | None:
+    """Strip 'entries'/<entry_name> (or similar container) prefix to get a version-stable sub-path.
+
+    For paths like ("entries", "Ember Beta Two", "actors", "Aburyx", "name"),
+    returns ("actors", "Aburyx", "name").  Returns None if the path is too short
+    or doesn't start with a known container key.
+    """
+    if len(path) >= 3 and isinstance(path[0], str) and path[0] in ENTRY_CONTAINER_KEYS:
+        return path[2:]
+    return None
 
 
 def pack_name_from_filename(file_name: str) -> str:
@@ -419,11 +435,24 @@ def rewrite_compendium_systems(translation: str, source_en: str, target_en: str)
     return rewritten
 
 
+def _path_overlap_score(source_path: PathTuple, target_path: PathTuple) -> int:
+    """Count how many path tokens (from the end) are shared between source and target."""
+    score = 0
+    for s, t in zip(reversed(source_path), reversed(target_path)):
+        if s == t:
+            score += 1
+        else:
+            break
+    return score
+
+
 def pick_unique(
     candidates: list[Candidate],
     *,
     target_name_tokens: set[str] | None = None,
     preferred_source_files: set[str] | None = None,
+    target_path: PathTuple | None = None,
+    resolve_ambiguous: bool = False,
 ) -> tuple[Candidate | None, bool]:
     if not candidates:
         return None, False
@@ -466,6 +495,20 @@ def pick_unique(
             if len(preferred_uniq_by_zh) == 1:
                 return next(iter(preferred_uniq_by_zh.values())), False
 
+    # Path-proximity tie-breaker: pick the candidate whose source path overlaps
+    # the most with the target path (matching from the tail end).
+    if resolve_ambiguous and target_path is not None:
+        remaining = list(uniq_by_zh.values())
+        best_overlap = -1
+        best_candidate: Candidate | None = None
+        for candidate in remaining:
+            overlap = _path_overlap_score(candidate.source_path, target_path)
+            if overlap > best_overlap:
+                best_overlap = overlap
+                best_candidate = candidate
+        if best_candidate is not None:
+            return best_candidate, False
+
     return None, True
 
 
@@ -487,18 +530,24 @@ def build_reference_maps(
     *,
     skip_code_like: bool,
     enable_uuid_safe_match: bool,
+    enable_relpath_match: bool = False,
 ) -> tuple[
     dict[tuple[PathTuple, str], list[Candidate]],
     dict[str, list[Candidate]],
     dict[PathTuple, list[Candidate]],
     dict[tuple[PathTuple, str], list[Candidate]],
     dict[str, list[Candidate]],
+    dict[tuple[PathTuple, str], list[Candidate]],
+    dict[tuple[PathTuple, str], list[Candidate]],
+    dict[PathTuple, set[str]],
 ]:
     path_map: dict[tuple[PathTuple, str], list[Candidate]] = {}
     value_map: dict[str, list[Candidate]] = {}
     path_only_map: dict[PathTuple, list[Candidate]] = {}
     uuid_path_map: dict[tuple[PathTuple, str], list[Candidate]] = {}
     uuid_value_map: dict[str, list[Candidate]] = {}
+    relpath_map: dict[tuple[PathTuple, str], list[Candidate]] = {}
+    uuid_relpath_map: dict[tuple[PathTuple, str], list[Candidate]] = {}
 
     for ref_en, ref_zh in refs:
         ref_en_data = load_json(ref_en)
@@ -534,6 +583,11 @@ def build_reference_maps(
                 path_map.setdefault((path, normalized), []).append(candidate)
                 value_map.setdefault(normalized, []).append(candidate)
 
+                if enable_relpath_match:
+                    rp = relative_path(path)
+                    if rp is not None:
+                        relpath_map.setdefault((rp, normalized), []).append(candidate)
+
             if enable_uuid_safe_match and has_uuid_link(en_text):
                 uuid_normalized = normalize_uuid_source_text(en_text).lower()
                 candidate = Candidate(
@@ -545,7 +599,22 @@ def build_reference_maps(
                 uuid_path_map.setdefault((path, uuid_normalized), []).append(candidate)
                 uuid_value_map.setdefault(uuid_normalized, []).append(candidate)
 
-    return path_map, value_map, path_only_map, uuid_path_map, uuid_value_map
+                if enable_relpath_match:
+                    rp = relative_path(path)
+                    if rp is not None:
+                        uuid_relpath_map.setdefault((rp, uuid_normalized), []).append(candidate)
+
+    # Build relpath -> set of normalized EN texts for change detection.
+    ref_relpath_en: dict[PathTuple, set[str]] = {}
+    if enable_relpath_match:
+        for ref_en_path, _ in refs:
+            ref_en_data = load_json(ref_en_path)
+            for path, en_text in iter_string_leaves(ref_en_data):
+                rp = relative_path(path)
+                if rp is not None:
+                    ref_relpath_en.setdefault(rp, set()).add(normalize_source_text(en_text).lower())
+
+    return path_map, value_map, path_only_map, uuid_path_map, uuid_value_map, relpath_map, uuid_relpath_map, ref_relpath_en
 
 
 def add_path_only_references(
@@ -576,11 +645,16 @@ def process_target_pair(
     path_only_map: dict[PathTuple, list[Candidate]],
     uuid_path_map: dict[tuple[PathTuple, str], list[Candidate]],
     uuid_value_map: dict[str, list[Candidate]],
+    relpath_map: dict[tuple[PathTuple, str], list[Candidate]],
+    uuid_relpath_map: dict[tuple[PathTuple, str], list[Candidate]],
+    ref_relpath_en: dict[PathTuple, set[str]],
     overwrite_existing: bool,
     use_path_match: bool,
     use_value_match: bool,
     use_path_only_match: bool,
     use_uuid_safe_match: bool,
+    use_relpath_match: bool,
+    resolve_ambiguous: bool,
     check_placeholders: bool,
     rewrite_compendium: bool,
     skip_code_like: bool,
@@ -617,6 +691,17 @@ def process_target_pair(
         stats.eligible_strings += 1
         normalized_en = normalize_source_text(en_text).lower()
 
+        # Detect content changes: if the same relpath existed in the reference but with
+        # different EN text, the content was intentionally modified — only allow path/relpath
+        # matches (where EN text identity is verified), block value-only matches.
+        content_changed = False
+        if use_relpath_match and ref_relpath_en:
+            rp_check = relative_path(path)
+            if rp_check is not None:
+                ref_en_set = ref_relpath_en.get(rp_check)
+                if ref_en_set is not None and normalized_en not in ref_en_set:
+                    content_changed = True
+
         candidate: Candidate | None = None
         method = ""
         found_ambiguous = False
@@ -630,18 +715,38 @@ def process_target_pair(
                     uuid_path_candidates,
                     target_name_tokens=target_name_tokens,
                     preferred_source_files=preferred_source_files,
+                    target_path=path,
+                    resolve_ambiguous=resolve_ambiguous,
                 )
                 if picked is not None:
                     candidate = picked
                     method = "uuid-path+masked-en"
                 found_ambiguous = found_ambiguous or ambiguous
 
-            if candidate is None and use_value_match:
+            if candidate is None and use_relpath_match:
+                rp = relative_path(path)
+                if rp is not None:
+                    uuid_relpath_candidates = uuid_relpath_map.get((rp, uuid_normalized_en), [])
+                    picked, ambiguous = pick_unique(
+                        uuid_relpath_candidates,
+                        target_name_tokens=target_name_tokens,
+                        preferred_source_files=preferred_source_files,
+                        target_path=path,
+                        resolve_ambiguous=resolve_ambiguous,
+                    )
+                    if picked is not None:
+                        candidate = picked
+                        method = "uuid-relpath+masked-en"
+                    found_ambiguous = found_ambiguous or ambiguous
+
+            if candidate is None and use_value_match and not content_changed:
                 uuid_value_candidates = uuid_value_map.get(uuid_normalized_en, [])
                 picked, ambiguous = pick_unique(
                     uuid_value_candidates,
                     target_name_tokens=target_name_tokens,
                     preferred_source_files=preferred_source_files,
+                    target_path=path,
+                    resolve_ambiguous=resolve_ambiguous,
                 )
                 if picked is not None:
                     candidate = picked
@@ -654,23 +759,47 @@ def process_target_pair(
                 path_candidates,
                 target_name_tokens=target_name_tokens,
                 preferred_source_files=preferred_source_files,
+                target_path=path,
+                resolve_ambiguous=resolve_ambiguous,
             )
             if picked is not None:
                 candidate = picked
                 method = "path+normalized-en"
             found_ambiguous = found_ambiguous or ambiguous
 
-        if candidate is None and use_value_match:
+        if candidate is None and use_relpath_match:
+            rp = relative_path(path)
+            if rp is not None:
+                relpath_candidates = relpath_map.get((rp, normalized_en), [])
+                picked, ambiguous = pick_unique(
+                    relpath_candidates,
+                    target_name_tokens=target_name_tokens,
+                    preferred_source_files=preferred_source_files,
+                    target_path=path,
+                    resolve_ambiguous=resolve_ambiguous,
+                )
+                if picked is not None:
+                    candidate = picked
+                    method = "relpath+normalized-en"
+                found_ambiguous = found_ambiguous or ambiguous
+
+        if candidate is None and use_value_match and not content_changed:
             value_candidates = value_map.get(normalized_en, [])
             picked, ambiguous = pick_unique(
                 value_candidates,
                 target_name_tokens=target_name_tokens,
                 preferred_source_files=preferred_source_files,
+                target_path=path,
+                resolve_ambiguous=resolve_ambiguous,
             )
             if picked is not None:
                 candidate = picked
                 method = "normalized-en"
             found_ambiguous = found_ambiguous or ambiguous
+
+        if candidate is None and content_changed:
+            stats.skipped_content_changed += 1
+            continue
 
         if candidate is None and use_path_only_match:
             path_only_candidates = path_only_map.get(path, [])
@@ -678,6 +807,8 @@ def process_target_pair(
                 path_only_candidates,
                 target_name_tokens=target_name_tokens,
                 preferred_source_files=preferred_source_files,
+                target_path=path,
+                resolve_ambiguous=resolve_ambiguous,
             )
             if picked is not None:
                 candidate = picked
@@ -719,6 +850,10 @@ def process_target_pair(
         if method in {"path+normalized-en", "uuid-path+masked-en"}:
             stats.replaced_path_match += 1
             if method == "uuid-path+masked-en":
+                stats.replaced_uuid_path_match += 1
+        elif method in {"relpath+normalized-en", "uuid-relpath+masked-en"}:
+            stats.replaced_relpath_match += 1
+            if method == "uuid-relpath+masked-en":
                 stats.replaced_uuid_path_match += 1
         elif method == "path-only-zh":
             stats.replaced_path_only += 1
@@ -834,6 +969,23 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
+        "--relpath-match",
+        action="store_true",
+        help=(
+            "Enable relative-path matching: strip the top-level entry name from paths before "
+            "comparing, so entries that were renamed between versions can still be matched by "
+            "their inner structure + normalized English text."
+        ),
+    )
+    parser.add_argument(
+        "--resolve-ambiguous",
+        action="store_true",
+        help=(
+            "When multiple candidates have different translations for the same English text, "
+            "pick the one whose source path is closest to the target path instead of skipping."
+        ),
+    )
+    parser.add_argument(
         "--max-samples",
         type=int,
         default=30,
@@ -917,10 +1069,13 @@ def main() -> None:
     print(f"Mapped triples: {len(mapped_triples)}")
     print(f"Target pairs: {len(target_pairs)}")
 
-    path_map, value_map, path_only_map, uuid_path_map, uuid_value_map = build_reference_maps(
-        ref_pairs,
-        skip_code_like=not bool(args.allow_code_like_match),
-        enable_uuid_safe_match=bool(args.uuid_safe_match),
+    path_map, value_map, path_only_map, uuid_path_map, uuid_value_map, relpath_map, uuid_relpath_map, ref_relpath_en = (
+        build_reference_maps(
+            ref_pairs,
+            skip_code_like=not bool(args.allow_code_like_match),
+            enable_uuid_safe_match=bool(args.uuid_safe_match),
+            enable_relpath_match=bool(args.relpath_match),
+        )
     )
     add_path_only_references(path_only_map, refs_zh_only)
     print(f"Reference entries (path+normalized-en): {len(path_map)}")
@@ -928,6 +1083,8 @@ def main() -> None:
     print(f"Reference entries (path-only-zh): {len(path_only_map)}")
     print(f"Reference entries (uuid path+masked-en): {len(uuid_path_map)}")
     print(f"Reference entries (uuid masked-en): {len(uuid_value_map)}")
+    print(f"Reference entries (relpath+normalized-en): {len(relpath_map)}")
+    print(f"Reference entries (uuid relpath+masked-en): {len(uuid_relpath_map)}")
 
     all_stats: list[FileStats] = []
 
@@ -941,11 +1098,16 @@ def main() -> None:
             path_only_map=path_only_map,
             uuid_path_map=uuid_path_map,
             uuid_value_map=uuid_value_map,
+            relpath_map=relpath_map,
+            uuid_relpath_map=uuid_relpath_map,
+            ref_relpath_en=ref_relpath_en,
             overwrite_existing=bool(args.overwrite_existing),
             use_path_match=not bool(args.disable_path_match),
             use_value_match=not bool(args.disable_value_match),
             use_path_only_match=bool(path_only_map),
             use_uuid_safe_match=bool(args.uuid_safe_match),
+            use_relpath_match=bool(args.relpath_match),
+            resolve_ambiguous=bool(args.resolve_ambiguous),
             check_placeholders=not bool(args.no_placeholder_check),
             rewrite_compendium=not bool(args.no_rewrite_compendium),
             skip_code_like=not bool(args.allow_code_like_match),
@@ -968,6 +1130,7 @@ def main() -> None:
             f"total={stats.total_strings}, "
             f"eligible={stats.eligible_strings}, "
             f"replaced(path)={stats.replaced_path_match}, "
+            f"replaced(relpath)={stats.replaced_relpath_match}, "
             f"replaced(value)={stats.replaced_value_match}, "
             f"replaced(path-only)={stats.replaced_path_only}, "
             f"replaced(uuid-path)={stats.replaced_uuid_path_match}, "
@@ -978,6 +1141,7 @@ def main() -> None:
             f"skipped_placeholder={stats.skipped_placeholder}, "
             f"skipped_uuid_mismatch={stats.skipped_uuid_mismatch}, "
             f"skipped_code_like={stats.skipped_code_like}, "
+            f"skipped_content_changed={stats.skipped_content_changed}, "
             f"unchanged={stats.unchanged_same_text}"
         )
         if stats.output_path:
@@ -991,7 +1155,8 @@ def main() -> None:
             )
 
     replaced_total = sum(
-        s.replaced_path_match + s.replaced_value_match + s.replaced_path_only for s in all_stats
+        s.replaced_path_match + s.replaced_relpath_match + s.replaced_value_match + s.replaced_path_only
+        for s in all_stats
     )
     print("=" * 80)
     print(
@@ -1023,6 +1188,8 @@ def main() -> None:
                 "rewrite_compendium": not bool(args.no_rewrite_compendium),
                 "skip_code_like": not bool(args.allow_code_like_match),
                 "use_uuid_safe_match": bool(args.uuid_safe_match),
+                "use_relpath_match": bool(args.relpath_match),
+                "resolve_ambiguous": bool(args.resolve_ambiguous),
             },
             "stats": [
                 {
@@ -1035,12 +1202,14 @@ def main() -> None:
                     "replaced_path_only": s.replaced_path_only,
                     "replaced_uuid_path_match": s.replaced_uuid_path_match,
                     "replaced_uuid_value_match": s.replaced_uuid_value_match,
+                    "replaced_relpath_match": s.replaced_relpath_match,
                     "skipped_existing": s.skipped_existing,
                     "skipped_no_match": s.skipped_no_match,
                     "skipped_ambiguous": s.skipped_ambiguous,
                     "skipped_placeholder": s.skipped_placeholder,
                     "skipped_uuid_mismatch": s.skipped_uuid_mismatch,
                     "skipped_code_like": s.skipped_code_like,
+                    "skipped_content_changed": s.skipped_content_changed,
                     "unchanged_same_text": s.unchanged_same_text,
                     "output_path": s.output_path,
                     "samples": s.samples,
