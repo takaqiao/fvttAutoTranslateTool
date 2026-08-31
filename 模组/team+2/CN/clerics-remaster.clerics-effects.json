@@ -1,0 +1,100 @@
+{
+    "label": "牧师+ 效果 Clerics+ Effects",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Effect: Divine Flight": {
+            "name": "效果：神圣飞翔 Effect: Divine Flight",
+            "description": "<p>你的圣兽长出双翼、获得悬浮能力，或以其他方式获得飞行手段。你的圣兽获得 25尺的飞行速度。如果你的圣兽已经具备某种飞行手段，则其飞行速度增加 15尺。</p>"
+        },
+        "Effect: Eater of Avatars (Unholy)": {
+            "name": "效果：化身吞噬者（邪恶） Effect: Eater of Avatars (Unholy)",
+            "description": "<p>你的圣兽可以选择获得你祝佑的效益，且其徒手攻击获得对应于你祝佑的特征。你必须已受祝佑才能选择此项。</p>"
+        },
+        "Effect: Deific Conduit": {
+            "name": "效果：神之通灵者 Effect: Deific Conduit",
+            "description": "<p>在 10分钟内，你可以呈现出近似你神祇的极乐相貌。所有看见你使用此动作的生物都明白你是你神的代表，在持续时间内你的魅力相关技能检定获得 +1环境加值。如果该生物追随你的神祇，或本性或所行违反你神祇典范或禁忌，则该环境加值提升至 +2。</p>"
+        },
+        "Effect: Body of the Chosen": {
+            "name": "效果：圣选之躯 Effect: Body of the Chosen",
+            "description": "<p>选择以下两种：酸蚀、寒冷、电击、火焰、毒素或音波。你的圣兽对所选伤害类型获得等同于你等级一半的抗力。此外，你的圣兽对它选择的某一对立阵营获得等同于你等级一半的弱点。如果你的神祇为中立，你只获得一种抗力，且没有弱点。</p>"
+        },
+        "Effect: Blessed Skill": {
+            "name": "效果：受祝技能 Effect: Blessed Skill",
+            "description": "<p>你的圣兽在你神祇的神圣技能上变为受训。在 9级时，它在你神祇的神圣技能上变为专家；在 17级时，变为大师。</p>"
+        },
+        "Effect: Heraldic Statue": {
+            "name": "效果：纹章之像 Effect: Heraldic Statue",
+            "description": "<p>当你的圣兽呈雕像形态时，除了使用同一行动变回原形外，它无法采取任何动作；它也难以自卫，因此处于 @Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}，并对其 AC 额外承受 –2 状态减值，但对所有伤害获得 5点抗力。在此形态下，30尺内的所有盟友对攻击骰以及对抗心灵效果的豁免获得 +1状态加值。在 30尺内，与你神祇为敌或被视为你神祇敌人的生物对其 AC 与意志豁免承受 –1 状态减值。</p>"
+        },
+        "Effect: Fist of the Acolyte": {
+            "name": "效果：侍祭之拳 Effect: Fist of the Acolyte",
+            "description": "<p>选择一件你曾施用 @UUID[Compendium.pf2e.feats-srd.7RFjTTzznsdPcaYB]{刻印武装} 的武器。该武器获得投掷 20尺特征，且当你正持有它时，效果如同它带有 @UUID[Compendium.pf2e.equipment-srd.qlunQzfnzPQpMG6U]{回力} 符文。如果该武器为单手武器，其投掷特征的射程增至 40尺。</p>"
+        },
+        "Effect: Deific Beam": {
+            "name": "效果：神之光束 Effect: Deific Beam",
+            "description": "<p>它获得一种远程徒手攻击，射程 30尺，造成 1d4点精魂伤害，附带后坐、精魂与徒手特征。即便其力量不足以避免减值，你的圣兽在倒地时使用后坐武器也不会承受 –2 减值。</p>"
+        },
+        "Effect: Beacon": {
+            "name": "效果：信标 Effect: Beacon",
+            "description": "<p>你可以花费一个单动作扬起神祇的圣物焦点，赋予 15尺内盟友对抗情绪效果的 +1状态加值，持续至你下一回合开始。当你本应在你神祇圣选武器上变为专家时，你改为将该范围增至 30尺。</p>"
+        },
+        "Effect: Transcendent Mobility": {
+            "name": "效果：超然机动 Effect: Transcendent Mobility",
+            "description": "<p>你的圣兽的攀爬速度、速度或游泳速度增加 15尺。</p>"
+        },
+        "Effect: Reckless Conquest": {
+            "name": "效果：鲁莽征服 Effect: Reckless Conquest",
+            "description": "<p>在你热忱持续期间，你的打击获得溅射特征；直到你下一回合结束前，造成等同于你等级一半的溅射伤害。该溅射伤害类型为精魂，或当你的热忱本身造成伤害时，与热忱伤害同型。你免疫自身热忱产生的溅射伤害。</p>"
+        },
+        "Effect: Eater of Avatars (Holy)": {
+            "name": "效果：化身吞噬者（圣洁） Effect: Eater of Avatars (Holy)",
+            "description": "<p>你的圣兽可以选择获得你祝佑的效益，且其徒手攻击获得对应于你祝佑的特征。你必须已受祝佑才能选择此项。</p>"
+        },
+        "Effect: Hope Prevails": {
+            "name": "效果：希望永存 Effect: Hope Prevails",
+            "description": "<p>该目标在 1分钟内对抗恐惧效果的豁免另外获得 +2状态加值。</p>"
+        },
+        "Effect: Stigmata": {
+            "name": "效果：圣痕 Effect: Stigmata",
+            "description": "<p>当你受这种持续流血伤害折磨时，你的宗教检定获得 +1状态加值，且你的伤害术与治疗术法术获得以下额外效果：</p>\n<p><strong>伤害术 </strong>你以单一生物为目标的 <em>@UUID[Compendium.pf2e.spells-srd.wdA52JJnsuQWeyqz]{伤害术}</em>，对每 4级你拥有 1d4 持续流血伤害施加给强韧豁免失败的目标。如果你使用 3动作版本，则只有大失败的目标才承受持续流血伤害。</p>\n<p><strong>治疗术 </strong>当你将 <em>@UUID[Compendium.pf2e.spells-srd.rfZpqmj0AIIdkVIs]{治疗术}</em> 施于你以外的单一目标时，对方所遭受的任何持续伤害都会自动结束。如果你使用 3动作版本，则目标改为立即获得一次以 @Check[type:flat|dc:11] 检定结束他们所遭受的任何持续伤害的尝试。</p>"
+        },
+        "Effect: Fervor": {
+            "name": "效果：热忱 Effect: Fervor",
+            "description": "<p>你已学会将你的神力源泉锻造为强大的恩赐。当你使用此动作时，你获得以下列出的一项热忱效益，持续到你下一回合结束。如果你消耗一个神力源泉法术位，你可以将此效果的持续时间延长至 1分钟。同一时间你只能受益于一项热忱效益；若你在持续时间结束前再次使用此动作，先前热忱的效果会立即结束。如果你拥有圣洁或邪恶特征，你可以选择让你的热忱获得对应特征，且热忱所造成的任何伤害仅施加于具有相对特征的生物。</p>\n<ul>\n<li>你的 AC 以及对抗心灵效果的豁免获得 +1状态加值。</li>\n<li>你的武器与徒手攻击额外造成 1d4点精魂伤害。每当你的武器多一颗武器伤害骰，此伤害便增加 1d4。</li>\n</ul>"
+        },
+        "Effect: Heretic's Disguise": {
+            "name": "效果：异端伪装 Effect: Heretic's Disguise",
+            "description": "<p>你的幻象服饰与物品赋予你 +4环境加值，用于尝试假扮成该组织的成员。</p>"
+        },
+        "Effect: Virtue's Light": {
+            "name": "效果：贤德之光 Effect: Virtue's Light",
+            "description": "<p>弥漫范围内所有邪恶生物对圣洁获得等同于法术环两倍的弱点。如果它们已具备对圣洁的弱点，则该弱点提高同等数值。</p>"
+        },
+        "Effect: Fervor Chosen Element": {
+            "name": "效果：热忱所选元素 Effect: Fervor Chosen Element",
+            "description": "<p>在每日准备期间，你向你的神祈祷，请求以酸蚀、寒冷、电击或火焰元素祝福你。</p>"
+        },
+        "Effect: Mantle of Nobility": {
+            "name": "效果：贵族披风 Effect: Mantle of Nobility",
+            "description": "<p>你的外交检定获得 +1状态加值，且在 5尺弥漫范围内出现一小群幻象信众。这些信众的群组视作人群，且形成困难地形。</p>"
+        },
+        "Effect: Wield the Will": {
+            "name": "效果：运使意志 Effect: Wield the Will",
+            "description": "<p>你呼唤你的神祇援助你对抗仇敌，让你能够将其意志凝聚成实质的结果。掷一颗 d20。如果在本轮稍后你尝试对你寻求意志的目标进行一次打击，或进行宗教或你神祇神圣技能的基础技能动作，你必须以你掷出运使意志的结果作为该次掷骰的结果，而不再掷骰。这种替代仅对你本轮内对该生物所做的所列骰类的第一次掷骰生效，对后续的所列骰类不生效。如果你使用此结果且本会得到大失败，你将得到失败而非大失败。如果你拥有圣洁或邪恶特征，你可以选择让以运使意志结果进行的打击获得相同特征。</p>"
+        },
+        "Effect: Liberator's Ferocity": {
+            "name": "效果：解放者之凶 Effect: Liberator's Ferocity",
+            "description": "<p>对触发的攻击，你对所有伤害获得等同于法术环两倍的抗力；并在 1轮内，对触发该效果的生物的伤害获得等量的状态加值。</p>"
+        }
+    }
+}

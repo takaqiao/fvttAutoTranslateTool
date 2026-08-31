@@ -1,0 +1,306 @@
+@import "variables.less";
+
+/* ----------------------------------------- */
+/*  All Items                                */
+/* ----------------------------------------- */
+
+.crucible.item,
+.crucible.action,
+.crucible.affix {
+
+  /** Scrollable Tabs */
+  .sheet-body.scrollable {
+    flex: 1;
+    height: 0;
+    margin-right: 0.25rem;
+    padding-right: 0.25rem;
+    scrollbar-gutter: stable;
+  }
+
+  /** Form Groups */
+  .form-group {
+    > label {
+      flex: 2; // Wider labels
+    }
+  }
+
+  /** Description */
+  .tab.description {
+    prose-mirror {
+      --min-height: 240px;
+    }
+  }
+  .tab.description-advanced {
+    gap: 1.5rem;
+    padding: 1.5rem 1rem 1rem;
+    prose-mirror {
+      --min-height: 150px;
+    }
+  }
+
+  /** Hook Editor */
+  code-mirror.hook-editor {
+    font-size: 11px;
+  }
+
+  /** Hook Display */
+  fieldset.hook label code {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+  .module-hook label > button {
+    flex: 0;
+    margin: 0;
+  }
+
+  .item-properties {
+    display: grid;
+    gap: 0.5rem 1rem;
+    multi-checkbox {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /** Talent Progression Items & Initial Equipment */
+  .equipment-list,
+  .talents-list,
+  .spells-list {
+    max-height: 600px;
+    gap: 0.5rem;
+  }
+  .droppable {
+    padding: 0.5rem 1rem;
+    border: 1px dashed var(--color-form-hint);
+    border-radius: 0.5rem;
+    cursor: var(--cursor-pointer);
+  }
+
+  /** Hooks */
+  fieldset.hook {
+    label {
+      flex: 1;
+      code {
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 1.5em;
+      }
+    }
+    button {
+      flex: 0;
+    }
+  }
+
+  // Equipment Attributes
+  .item-equipment {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1rem;
+    label {
+      font-size: var(--font-size-12);
+      font-weight: normal;
+      color: var(--color-secondary);
+    }
+    .form-group {
+      grid-column: 1 / span 2;
+    }
+    .form-group.half {
+      grid-column: auto;
+    }
+  }
+
+  // Currency Fields
+  .form-group.currency {
+    > label {
+      flex: 1;
+    }
+    crucible-currency {
+      justify-content: flex-end;
+    }
+  }
+}
+
+// Make item sheet body resizable
+.crucible.item {
+  min-width: 560px;
+  min-height: 400px;
+  .sheet-body {
+    height: 0;
+    flex: 1;
+  }
+}
+
+// Affix effect sheet
+.crucible.affix {
+  .window-content.standard-form {
+    gap: 0;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Armor                                    */
+/* ----------------------------------------- */
+
+.crucible.armor {
+  .form-group.defense {
+    .form-fields {
+      flex: 8;
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr 64px;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Weapon                                   */
+/* ----------------------------------------- */
+
+.crucible.weapon {
+  .item-equipment {
+    .reload {
+      grid-column: 2;
+    }
+  }
+}
+
+/** ----------------------------------------- *
+ *  Archetype Sheet                           *
+ * ------------------------------------------ */
+
+.crucible.archetype,
+.crucible.taxonomy {
+  .abilities,
+  .resistances {
+    .form-fields {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 0.5rem;
+      label {
+        padding: 0.25rem;
+        border: 1px solid var(--color-frame);
+        border-radius: 6px;
+        text-align: center;
+      }
+      input {
+        --input-height: 24px;
+        --input-border-color: transparent;
+        margin-bottom: 0.25rem;
+        font-size: var(--font-size-18);
+        text-align: center;
+      }
+      .immunities {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 0.25rem;
+        align-items: end;
+        .form-fields {
+          display: block;
+          flex: 1;
+        }
+        label {
+          text-wrap-mode: nowrap;
+          flex: 0;
+          padding: 0 0.25rem;
+          border: none;
+        }
+      }
+    }
+    .sum {
+      margin-left: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid green;
+      border-radius: 4px;
+      &.invalid {
+        border-color: red;
+      }
+    }
+  }
+  .resistances .form-fields {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .equipment {
+    gap: 1rem;
+    &.equipped .toggle-equipped {
+      opacity: 1;
+    }
+  }
+
+  .talents {
+    gap: 1rem;
+  }
+  .characteristics {
+    font-size: var(--font-size-13);
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/** ----------------------------------------- *
+ *  Background Sheet                          *
+ * ------------------------------------------ */
+
+.crucible.background {
+  .talents {
+    .talent .tags {
+      flex: none;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Schematic                                */
+/* ----------------------------------------- */
+
+.crucible.schematic {
+  fieldset.schematic-input {
+    position: relative;
+    legend {
+      button {
+        --button-size: 24px;
+        margin-left: 0.5rem;
+      }
+    }
+    select.input-mode {
+      position: absolute;
+      height: 20px;
+      right: 12px;
+      top: -22px;
+      width: 100px;
+      font-size: 0.8em;
+    }
+    .ingredient {
+      .form-group {
+        flex: none;
+        width: auto;
+        gap: 0;
+        font-size: 0.8em;
+      }
+      select {
+        flex: 0 0 100px;
+        font-size: 0.8em;
+      }
+    }
+    .input-drop {
+      flex: 0 0 100%;
+    }
+  }
+  fieldset + .add-group {
+    margin-top: -0.5rem; // Undo gap
+  }
+}
+
+/* ----------------------------------------- */
+/*  Item Embed Card                          */
+/* ----------------------------------------- */
+
+.crucible.item-embed {
+  background: url("../ui/journal/background-texture.webp");
+  padding: 1rem;
+  max-width: 420px;
+  text-align: left; // always left, regardless of tooltip position
+  border: 12px solid transparent;
+  border-image: url("../ui/frames/tooltip-frame.webp") 64 repeat;
+  border-image-width: 32px;
+  &.centered {
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "label": "族裔特性\nAncestry Features",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Dragonkin": "龙人\nDragonkin",
+    "Khizar": "希扎尔\nKhizar",
+    "Kalo": "卡洛\nKalo",
+    "Vlaka": "弗拉卡\nVlaka",
+    "Astrazoan": "星塑异变体\nAstrazoan",
+    "Ikeshti": "异客蜥人\nIkeshti",
+    "Shobhad": "肖巴德\nShobhad",
+    "Contemplative": "默思族\nContemplative",
+    "Ysoki": "鼠族\nYsoki",
+    "Sarcesian": "萨瑟蝶人\nSarcesian",
+    "Android": "仿生人 Android",
+    "Barathu": "飞螅族\nBarathu",
+    "Shared": "共享\nShared",
+    "Kasatha": "卡萨萨尼斯人\nKasatha",
+    "Skittermander": "斯基特曼德ర్\nSkittermander",
+    "Elebrian": "灵脑人\nElebrian"
+  },
+  "entries": {
+    "Versed": {
+      "name": "熟练的 Versed",
+      "description": "<p>你获得“手语”技能专长，即使你不满足该专长的前置条件也是如此。若你已知的一种语言具有触觉版本，你也会学会这些语言的触觉版本。这意味着，对于你所知的所有语言，你都知晓与之对应的口语、手语和触觉语言。</p>\n<p>You gain the Sign Language skill feat, even if you don't meet the feat's prerequisites. If a language you know has a tactile version, you also learn the tactile version of those languages. This means that you know the spoken, signed, and tactile languages associated with all languages you know.</p>"
+    },
+    "Magical Sense": {
+      "name": "魔法感知 Magical Sense",
+      "description": "<p>你的大脑拥有一种能够感知魔法能量的特殊器官。你可以随意将 @UUID[Compendium.sf2e.spells.Item.gpzpAAAJ1Lza2JVl]{侦测魔法} 戏法作为奥术先天法术施放。戏法会自动升阶至等同于你等级一半（向上取整）的法术环阶。</p>\n<p>Your brain has a specialized organ capable of sensing magical energies. You can cast the @UUID[Compendium.sf2e.spells.Item.gpzpAAAJ1Lza2JVl]{Detect Magic} cantrip as an arcane innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
+    },
+    "Wasteland Survivor": {
+      "name": "废土幸存者 Wasteland Survivor",
+      "description": "<p>你已经习惯了在阿基顿的严酷气候中生存，常常超过一周不进食。在你开始挨饿之前，你能在没有食物和水的情况下生存的天数等于 7 + 你的体质调整值。</p>\n<p>You're accustomed to surviving in Akiton's harsh climates, often going over a week without food. You can survive a number of days without food and water equal to 7 + your Constitution modifier before you begin to starve.</p>"
+    },
+    "Genetic Adaptation": {
+      "name": "基因适应 Genetic Adaptation",
+      "description": "<p>你可以重塑并调整自己的身体，以适应新的情境。你可以在 1 天停工期内重训一个族裔专长，而非 1 周。你可以重训任何族裔专长，甚至包括血统专长。</p>\n<p>You can reshape and adjust your body to adapt to new situations. You can retrain an ancestry feat in 1 day of downtime, rather than in 1 week. You can retrain any ancestry feat, even lineage feats.</p>"
+    },
+    "Energy Wings": {
+      "name": "能量之翼 Energy Wings",
+      "description": "<p>当处于真空中时，你可以显现出由纯能量构成、如蝴蝶般的翅膀，它们可作为太阳帆发挥作用，并使你能够在太空的虚空中飞行。你获得@UUID[Compendium.sf2e.actions.Item.NEYVJWYtgl0rRSwg]{显现能量之翼}动作。</p>\n<p>When in a vacuum, you can manifest butterfly-like wings of pure energy that function as solar sails and enable you to fly through the void of space. You gain the @UUID[Compendium.sf2e.actions.Item.NEYVJWYtgl0rRSwg]{Manifest Energy Wings} action.</p>"
+    },
+    "Thoughtsense": {
+      "name": "思维感知 Thoughtsense",
+      "description": "<p>你获得思想感应，作为一种模糊感知，范围为20英尺。这使你能够判断一个生物何时位于范围内，不过这种感知只会侦测会思考的生物；无思维的生物，或以其他方式免疫精神效果的生物，无法通过你的思想感应被察觉。这并不会赋予你读取或理解其思想的能力。</p>\n<p>You gain thoughtsense as a vague sense with a range of 20 feet. This enables you to determine when a creature is within range, though this sense detects only thinking creatures; a creature that's unthinking or otherwise immune to mental effects can't be perceived using your thoughtsense. This doesn't give you the ability to read or understand their thoughts.</p>"
+    },
+    "Cold-Adapted": {
+      "name": "适应寒冷的 Cold-Adapted",
+      "description": "<p>你天生就适应了阿基顿的严寒气候。你将环境寒冷效应视为低一个等级的极端程度（难以置信的寒冷变为极端寒冷，极端寒冷变为严重寒冷，依此类推）。</p>\n<p>You are naturally acclimated to Akiton's frigid climes. You treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
+    },
+    "Limited Telepathy": {
+      "name": "有限心灵感应 Limited Telepathy",
+      "description": "<p>你可以与30尺内的生物进行心灵交流。你只能与和你共享语言的生物交流。这不会让你读取他们的思想，而且所传达的信息不会比正常言语更多。</p>\n<p>You can communicate mentally with creatures within 30 feet. You can communicate only with creatures that share a language with you. This doesn't give you any access to their thoughts, and it communicates no more information than normal speech would.</p>"
+    },
+    "Suspended Respiration": {
+      "name": "悬置呼吸 Suspended Respiration",
+      "description": "<p>你能够在太空的真空中存活有限的一段时间，暂停呼吸，并保护你的身体免受其危险的环境影响。每当你进入真空时，你会暂时获得宇宙特征。只要你处于真空中，你就拥有该特征，最长可达1小时。具有宇宙特征的生物在太空或真空中不需要呼吸，并且免疫身处太空时的有害环境影响。</p>\n<p>You're capable of surviving for a limited time in the void of space, suspending your respiration and shielding your body from its dangerous environmental effects. Whenever you enter a vacuum, you temporarily gain the cosmic trait. You have this trait for as long as you remain in a vacuum, up to a maximum of 1 hour. Creatures with the cosmic trait don't need to breathe while in space or a vacuum and are immune to the harmful environmental effects of being in space.</p>"
+    },
+    "Atrophied": {
+      "name": "萎缩的 Atrophied",
+      "description": "<p>你的四肢已经萎缩。将你的最大与负重 Bulk 限值各减少 1。当你用双手持用任何 Bulk 为 2 或更高的武器或装置时，你处于 @UUID[Compendium.sf2e.conditions.Item.i3OJZU2nk64Df3xm]{笨拙 1}。</p>\n<p>Your limbs are atrophied. Decrease your maximum and encumbered Bulk limits by 1. While using your hands to wield any weapon or device whose Bulk is 2 or higher, you are @UUID[Compendium.sf2e.conditions.Item.i3OJZU2nk64Df3xm]{Clumsy 1}.</p>"
+    },
+    "Hydration": {
+      "name": "补水 Hydration",
+      "description": "<p>你的身体要求你每24小时内至少一次回到水生环境中，或穿戴具有环境防护的护甲。你必须浸没在水中，以便为你适应水环境的皮肤补充水分。</p>\n<p>如果你未能这样做，你的皮肤会开始开裂，鳃也会变得疼痛。离开水后的前24小时后，你在强韧豁免检定上承受 -1 状态减值。48小时后，你会难以呼吸空气，并开始窒息，直到回到水中为止。</p>\n<p>@UUID[Compendium.sf2e.feat-effects.Item.Q5FUu7yhWPJlcXei]{效果：脱水}</p>\n<p>Your body requires you to return to aquatic environments or to don armor with environmental protections at least once in a 24-hour period. You must submerge in water in order to rehydrate your water-acclimated skin.</p>\n<p>If you fail to do this, your skin begins to crack and your gills become painful. After the first 24 hours outside of water, you take a -1 status penalty to Fortitude saves. After 48 hours, you struggle to breathe air and begin to suffocate until returned to water.</p>\n<p>@UUID[Compendium.sf2e.feat-effects.Item.Q5FUu7yhWPJlcXei]{Effect: Dehydrated}</p>"
+    },
+    "Six-Armed": {
+      "name": "六臂 Six-Armed",
+      "description": "<p>你有六条手臂，因此你可以持用并拿持总计最多相当于六只手所能使用的武器和装备。在任何时候，其中一对手会被指定为你的主动手。你可以通过执行 Switch Hands 动作来将这一指定从一对手改为另一对手，这是一项单动作。你只能用你的主动手来持用物品。</p>\n<p>You have six arms, which allows you to wield and hold up to six hands' worth of weapons and equipment. At any time, one pair of hands is designated as your active hands. You can change this designation from one pair of hands to another by taking the Switch Hands action, which is a single action. You can wield items only with your active hands.</p>"
+    },
+    "Sensory Diversity": {
+      "name": "感官多样性 Sensory Diversity",
+      "description": "<p>所有弗拉卡都拥有敏锐的嗅觉，获得范围为60英尺的不精确嗅觉。这意味着你可以使用嗅觉来确定一个生物的位置。如果你处于该生物的下风处，GM可能会将范围加倍；如果你处于上风处，则可能会将范围减半。</p>\n<p>此外，每个弗拉卡天生都具有以下感官组合之一：失明、失聪、聋盲，或听觉/视觉。选择其中一种感官组合，并获得对应的感官或专长。</p>\n<p><strong>失明：</strong>你是失明的。你获得范围为90英尺的精确听觉。</p>\n<p><strong>失聪：</strong>你是失聪的。你获得“读唇”技能专长（即使你不满足该专长的先决条件）。</p>\n<p><strong>聋盲：</strong>你既失明又失聪。你的嗅觉变为范围90英尺的精确感官，而非范围60英尺的不精确感官。</p>\n<p><strong>听觉/视觉：</strong>你不会获得任何额外感官。</p>\n<p>All vlakas have a keen sense of smell, gaining imprecise scent with a range of 60 feet. This means you can use your sense of smell to determine a creature's location. The GM might double the range if you're downwind from the creature or halve the range if you're upwind.</p>\n<p>In addition, each vlaka is born with one of the following sensory arrays: blind, deaf, deafblind, or hearing/sighted. Select one of these sensory arrays, and gain the associated senses or feats.</p>\n<p><strong>Blind:</strong> You're blind. You gain hearing as a precise sense with a range of 90 feet.</p>\n<p><strong>Deaf:</strong> You're deaf. You gain the Read Lips skill feat (even if you don't meet the feat's prerequisites).</p>\n<p><strong>Deafblind:</strong> You're blind and deaf. Your scent becomes a precise sense with a range of 90 feet, rather than an imprecise sense with a range of 60 feet.</p>\n<p><strong>Hearing/Sighted:</strong> You don't gain any additional senses.</p>"
+    },
+    "Partner Bond": {
+      "name": "伙伴联结 Partner Bond",
+      "description": "<p>你可以与一名自愿的、有知性的生物——通常是非龙人——建立永久的共情联结。建立此联结是一项持续 1 小时的活动，且只有在你与对方共享深厚的情感纽带时才能尝试。你和你的伙伴必须在此活动持续期间始终处于彼此触及范围内，此活动才能成功。一旦此联结建立，除非你当前的伙伴死亡，否则你无法再建立另一个伙伴联结。你和你的伙伴可以彼此进行精神交流，如同你拥有范围为 60 尺的有限心灵感应。</p>\n<p>You can form a permanent empathic bond with one willing sapient creature—usually a non-dragonkin. Forming this bond is a one-hour activity that can only be attempted if both you and your partner share a deep emotional bond. You and your partner must remain within reach of each other for the duration of this activity for it to succeed. Once this bond is formed, you can't form another partner bond unless your current partner dies. You and your partner can communicate with each other mentally, as if you had limited telepathy with a range of 60 feet.</p>"
+    },
+    "Four-Armed": {
+      "name": "四臂 Four-Armed",
+      "description": "<p>你有四条手臂，这使你能够持用和拿持最多相当于四只手所能使用的武器与装备。在任何时候，其中一对手会被指定为你的活动手。你可以通过执行 Switch Hands 动作（这是一个单动作）将这一指定从一对手改为另一对手。你只能用你的活动手来持用物品。</p>\n<p>You have four arms, which allows you to wield and hold up to four hands' worth of weapons and equipment. At any time, one pair of hands is designated as your active hands. You can change this designation from one pair of hands to another by taking the Switch Hands action, which is a single action. You can wield items only with your active hands.</p>"
+    },
+    "Constructed": {
+      "name": "被创造者 Constructed",
+      "description": "<p>你的人造身体比单纯的生物机体更能抵抗疾病。你对疾病、毒素和辐射的豁免检定获得+1环境加值。</p>"
+    },
+    "Verdant": {
+      "name": "翠绿 Verdant",
+      "description": "<p>你对抗精神效果、麻痹、毒素或睡眠的豁免检定获得 +1 境遇加值。若你每天至少暴露在自然阳光下 4 小时，你就不需要进食、饮水或睡眠。</p>\n<p>You receive a +1 circumstance bonus to saving throws against mental effects, paralysis, poison, or sleep. You don't need to eat, drink, or sleep if you're exposed to natural sunlight for at least 4 hours per day.</p>"
+    },
+    "Sharp Teeth": {
+      "name": "尖牙 Sharp Teeth",
+      "description": "<p>你突出的尖锐门牙能成为如同拳头一般的战斗武器。你获得可以造成1d4穿刺伤害的颚无武装攻击。你的颚属于搏击武器组并且具有灵巧和娴熟特征。</p>"
+    },
+    "Change Shape": {
+      "name": "变形 Change Shape",
+      "description": "<p>你可以变形为你所知的一个小型、中型或大型族裔，并任选其特征；例如，你可以在该族裔的正常范围内选择自己的体型、性别和其他细节。这种形态可能类似于某个特定个体，也可能完全是你独有的。使用“改变形态”视为为“冒充”这一“欺瞒”用途制造伪装。你可以无限期保持这种形态，并且可以再次使用此动作来变回你真正的星变体形态或另一种形态。如果你在使用替代形态时死亡，你的身体会缓慢地变回其自然形态。</p>\n<p>You can transform into a Small, Medium, or Large ancestry you know with any features you choose; for example, you choose your body type, gender, and other details within the normal range for that ancestry. This shape might resemble a specific individual or be completely unique to you. Using Change Shape counts as creating a disguise for the Impersonate use of Deception. You can remain in this shape indefinitely, and you can shift back to your true astrazoan form or another shape by using this action again. If you die while using an alternate shape, your body slowly shifts back to its natural form.</p>"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "label": "怪物图鉴效果\nBestiary Effects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Resonance": {
+      "name": "效果：共鸣 Resonance",
+      "description": "<p>你在具有选定特征的效果上的攻击骰和伤害骰获得+1状态加值；具有元素和选定特征的生物在所有攻击和伤害骰上获得该加值。</p>"
+    },
+    "Effect: Engulf and Swallow Whole": {
+      "name": "效果：包卷和活吞 Engulf and Swallow Whole",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.bestiary-ability-glossary-srd.Item.zU3Ovaet4xQ5Gmvy]{Engulf}或@UUID[Compendium.sf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]{Swallow Whole}</p>\n<p>你陷入受擒，缓慢1，并且必须屏住呼吸，否则便会开始窒息。你可以攻击效果来源，但是仅能以无武装攻击或是轻负载及更小的武器进行攻击。来源的生物在对抗此攻击时视为措手不及。如果效果来源于单次攻击或法术中受到的穿刺或挥砍伤害等于或超过所列的破裂值（Rupture），你重获自由。</p>"
+    },
+    "Effect: Gremlin's Gift": {
+      "name": "效果：小魔怪的馈赠 Effect: Gremlin's Gift",
+      "description": "<p>你在所选技能的检定上获得 +2 状态加值。</p>\n<p>You gain +2 status bonus to checks with the chosen skill.</p>"
+    },
+    "Effect: Interstellar Raft": {
+      "name": "效果：星际木筏 Effect: Interstellar Raft",
+      "description": "<p>你获得40尺飞行速度和宇宙特征。</p>\n<p>You gain a 40-foot fly Speed and the cosmic trait.</p>"
+    },
+    "Effect: Input Overload Aura": {
+      "name": "效果：输入过载灵光 Effect: Input Overload Aura",
+      "description": "<p>对抗音波效果或会改变书面或存储数据的效果时，你的 AC 和所有豁免检定承受 –1 状态减值。尝试阅读文档时，你必须成功通过一次 @Check[flat|dc:5]，否则接下来 1d4+1 轮内你无法阅读该文档。</p>\n<p>Take a –1 status penalty to AC and all saves against sonic effects or effects that alter written or stored data. When attempting to read a document you must succeed at a @Check[flat|dc:5] or you cannot read the document for the next 1d4+1 rounds.</p>"
+    },
+    "Effect: Rallied by the Beasts": {
+      "name": "效果：受野兽鼓舞 Effect: Rallied by the Beasts",
+      "description": "<p>你获得 10 点临时生命值，并且你的近战打击额外造成 1d6 点精准伤害。</p>\n<p>You gain 10 temporary Hit Points and deal an additional 1d6 precision damage with your melee strikes.</p>"
+    },
+    "Effect: Self-Destructive Frenzy": {
+      "name": "效果：自毁狂暴 Effect: Self-Destructive Frenzy",
+      "description": "<p>你陷入困惑，并且攻击检定获得 +1 情境加值，伤害检定获得 +2 情境加值，AC 承受 –2 情境减值。</p>\n<p>You become confused and gain a +1 circumstance bonus to attack rolls, a +2 circumstance bonus to damage rolls, and a –2 circumstance penalty to AC.</p>"
+    },
+    "Effect: Follicle Germination": {
+      "name": "效果：毛囊萌发 Effect: Follicle Germination",
+      "description": "<p>科尔扎代人对你进行的攻击检定和伤害掷骰获得+1环境加值。</p>\n<p>Corzadais gain a +1 circumstance bonus to attack and damage rolls against you.</p>"
+    },
+    "Effect: Scoring": {
+      "name": "效果：得分 Effect: Scoring",
+      "description": "<p>你的尾巴获得以下特性：致命 d4、妨碍和毁坏</p>\n<p>Your tail gains the following traits: deadly d4, hampering, and razing</p>"
+    },
+    "Effect: Archon's Protection": {
+      "name": "效果：圣使护卫 Archon's Protection",
+      "description": "<p>你获得针对触发伤害的所有伤害类型的抗力。</p>"
+    },
+    "Effect: Gremlin's Inverted Gift": {
+      "name": "效果：小魔怪的倒置恩赐 Effect: Gremlin's Inverted Gift",
+      "description": "<p>你在使用所选技能进行检定时获得–4状态减值。</p>\n<p>You gain –4 status penalty to checks with the chosen skill.</p>"
+    },
+    "Effect: Seep In": {
+      "name": "效果：渗入 Effect: Seep In",
+      "description": "<p>你获得一个效果，具体取决于该伤害的性质。</p><ul><li><p><strong>能量伤害</strong> 你的攻击额外造成 2d6 点伤害，其类型与你所受到的能量伤害相同。</p></li><li><p><strong>物理伤害</strong> 你获得 6 点物理伤害抗性。如果该伤害由一种特殊材料制成的武器造成，例如银，那么在该效果持续期间，你的 battering sludge Strike 视为由该相同材料制成。</p></li></ul>\n<p>You gain an effect depending on the nature of the damage.</p><ul><li><p><strong>Energy Damage</strong> Your attacks deal an additional 2d6 damage of the same type as the energy damage dealt to you.</p></li><li><p><strong>Physical Damage</strong> You gain resistance 6 to physical damage. If the damage was dealt by a weapon made of a special material, such as silver, your battering sludge Strike counts as that same material for the duration of the effect.</p></li></ul>"
+    },
+    "Effect: Lead the Charge": {
+      "name": "效果：率先冲锋 Effect: Lead the Charge",
+      "description": "<p>你对被标记的目标进行攻击时获得+1环境加值。</p>\n<p>You gain a +1 circumstance bonus to attacks against the marked target.</p>"
+    },
+    "Effect: Bolstering Aura": {
+      "name": "效果：振奋灵光 Effect: Bolstering Aura",
+      "description": "<p>你获得 8 点临时生命值。</p>\n<p>You gain 8 temporary Hit Points.</p>"
+    },
+    "Effect: Revert": {
+      "name": "效果：恢复原状 Effect: Revert",
+      "description": "<p>你获得临时生命值。</p>\n<p>You gain temporary Hit Points.</p>"
+    },
+    "Effect: Siphon Poison": {
+      "name": "效果：汲取毒素 Effect: Siphon Poison",
+      "description": "<p>你的大颚与酸液喷吐打击，以及“恶心死亡”能力的酸性伤害骰尺寸提高一级。</p>\n<p>The acid damage die size for your mandibles and acid spit Strikes and Sickening Death ability increase by one step.</p>"
+    },
+    "Effect: Armament of the Archons": {
+      "name": "效果：圣使的武装 Effect: Armament of the Archons",
+      "description": "<p>你获得一种阿克谢斯打击。它是一种造成 2d10 火焰伤害的军用远程武器；属于激光武器组；射程增量为 40 尺；并具有非电子、圣洁和追踪 +2 特性。使用此武器进行的打击会额外造成 1d10 灵魂伤害。</p>\n<p>You gain an Arqsheth Strike. It is a martial ranged weapon that deals 2d10 fire damage; is in the laser group; has a range increment of 40 feet; and has the analog, holy, and tracking +2 traits. Strikes made with this weapon deal an extra 1d10 spirit damage.</p>"
+    },
+    "Effect: Sandstorm Vortex": {
+      "name": "效果：沙暴涡旋 Effect: Sandstorm Vortex",
+      "description": "<p>你获得对物理伤害 11 的抗性。</p>\n<p>You gain resistance 11 to physical damage.</p>"
+    },
+    "Effect: Colony Mind": {
+      "name": "效果：群殖思维 Effect: Colony Mind",
+      "description": "<p>当你对一个精神效果进行豁免检定并获得成功时，你改为获得大成功。</p>\n<p>When you roll a success on a save against a mental effect, you get a critical success instead.</p>"
+    },
+    "Effect: Attunement Aura (Graviton-Attuned)": {
+      "name": "效果：调谐灵光（引力子协调） Effect: Attunement Aura (Graviton-Attuned)",
+      "description": "<p>你的各项速度承受 –5 尺的状态减值。</p>\n<p>You take a –5-foot status penalty to Speeds.</p>"
+    },
+    "Effect: Natural Thruster": {
+      "name": "效果：自然推进器 Effect: Natural Thruster",
+      "description": "<p>你的飞行速度获得 +75 尺状态加值，并且你用尾巴进行的打击会额外造成 1d10 点挥砍伤害。</p>\n<p>You gain a +75-foot status bonus to your fly Speed and deal an additional 1d10 slashing damage with your tail Strikes.</p>"
+    },
+    "Effect: Sandstorm Veil": {
+      "name": "效果：沙暴帷幕 Effect: Sandstorm Veil",
+      "description": "<p>你获得对物理伤害6点抗性。</p>\n<p>You gain resistance 6 to physical damage.</p>"
+    },
+    "Effect: Encouraging Hope (Enemies)": {
+      "name": "效果：鼓舞希望（敌人） Effect: Encouraging Hope (Enemies)",
+      "description": "<p>你对抗情绪和精神效果的所有豁免检定承受–1状态减值。</p>\n<p>You take a –1 status penalty to all saves against emotion and mental effects.</p>"
+    },
+    "Effect: Divine Farewell": {
+      "name": "效果：神圣告别 Effect: Divine Farewell",
+      "description": "<p>你对抗具有邪秽特征的生物和环境危害的攻击与效应时，AC和豁免检定获得+1状态加值。</p>\n<p>You gain a +1 status bonus to your AC and saving throws against attacks and effects from creatures and hazards with the unholy trait.</p>"
+    },
+    "Effect: Sharpshooter": {
+      "name": "效果：神射手 Effect: Sharpshooter",
+      "description": "<p>你从次等掩蔽或标准掩蔽获得的 AC 加值减少 1。</p>\n<p>Your AC bonus from lesser or standard cover is reduced by 1.</p>"
+    },
+    "Effect: Rally the Troops": {
+      "name": "效果：集结部队 Rally the Troops",
+      "description": "<p>你获得临时生命值。</p>\n<p>You gain temporary hit points.</p>"
+    },
+    "Effect: Blood Renewal": {
+      "name": "效果：鲜血新生 Effect: Blood Renewal",
+      "description": "<p>你获得再生 15（冷铁）。</p>\n<p>You gain regeneration 15 (cold iron).</p>"
+    },
+    "Effect: Shoot to Kill": {
+      "name": "效果：格杀勿论 Effect: Shoot to Kill",
+      "description": "<p>你的 AC 承受 –1 情境减值。</p>\n<p>You take a –1 circumstance penalty to your AC.</p>"
+    },
+    "Effect: Encouraging Hope (Allies)": {
+      "name": "效果：鼓舞希望（盟友） Effect: Encouraging Hope (Allies)",
+      "description": "<p>你对抗情绪和精神效果的所有豁免检定获得+1状态加值。</p>\n<p>You gain a +1 status bonus to all saves against emotion and mental effects.</p>"
+    },
+    "Effect: Attunement Aura (Photon-Attuned)": {
+      "name": "效果：调谐灵光（光子调谐） Effect: Attunement Aura (Photon-Attuned)",
+      "description": "<p>你的各项速度获得 +5 尺状态加值。</p>\n<p>You gain a +5-foot status bonus to Speeds.</p>"
+    },
+    "Effect: Coordinated Fire": {
+      "name": "效果：协同火力 Effect: Coordinated Fire",
+      "description": "<p>你下一次攻击检定获得+2环境加值。</p>\n<p>You gain a +2 circumstance bonus to your next attack roll.</p>"
+    },
+    "Effect: Assess Target": {
+      "name": "效果：评估目标 Effect: Assess Target",
+      "description": "<p>你用现实撕裂者攻击被标记的目标时，额外造成 1d8 点伤害，并将现实撕裂者的射程增量提高至 80 英尺。</p>\n<p>You deal an additional 1d8 damage with your reality ripper against the marked target and increase the range increment of your reality ripper to 80 feet.</p>"
+    }
+  }
+}

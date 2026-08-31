@@ -1,0 +1,74 @@
+{
+  "label": "智者增强包 242（角色）\nWise Plus Pack 242 (Actors)",
+  "mapping": {
+    "name": "name",
+    "publicNotes": "system.details.publicNotes",
+    "privateNotes": "system.details.privateNotes",
+    "disable": "system.details.disable",
+    "hazarddescription": "system.details.description",
+    "reset": "system.details.reset",
+    "routine": "system.details.routine",
+    "blurb": "system.details.blurb",
+    "stealthdetails": "system.attributes.stealth.details",
+    "hp": "system.attributes.hp.details",
+    "senses": "system.traits.senses.value",
+    "allSaves": "system.attributes.allSaves.value",
+    "ac": "system.attributes.ac.details",
+    "prototypeToken": "prototypeToken.name",
+    "di": "system.traits.di.custom",
+    "languages": "system.traits.languages.custom",
+    "speed": "system.attributes.speed.details",
+    "dr": "system.traits.dr"
+  },
+  "folders": {
+    "Theme: Finding": "主题：发现\nTheme: Finding",
+    "Theme: Infiltration": "主题：渗透\nTheme: Infiltration",
+    "Set 1": "第 1 组\nSet 1",
+    "Actor Set (24.2 Plus Pack)": "演员套装（24.2 Plus Pack）\nActor Set (24.2 Plus Pack)",
+    "Set 2": "第2组\nSet 2"
+  },
+  "entries": {
+    "Spike Snare": {
+      "name": "尖刺圈套 Spike Snare",
+      "tokenName": "尖刺圈套 Spike Snare",
+      "hazarddescription": "<p>一旦该陷阱被部署，任何踏入其所在方格的人都会受到<strong>2d8穿刺伤害</strong>，并且必须尝试一次<strong>DC 17基础反射豁免检定。</strong></p>\n<p>Once this trap is deployed, anyone who steps on the square it’s in takes <strong>2d8 piercing damage</strong> and must attempt a <strong>DC 17 basic Reflex saving throw.</strong></p>",
+      "prototypeToken": "尖刺圈套 Spike Snare"
+    },
+    "Compass-1": {
+      "name": "罗盘-1 Compass-1",
+      "tokenName": "罗盘-1 Compass-1",
+      "prototypeToken": "罗盘-1 Compass-1"
+    },
+    "Cage of Flame": {
+      "name": "烈焰囚笼 Cage of Flame",
+      "tokenName": "烈焰牢笼 Cage of Flame",
+      "items": {
+        "Seal the Doors": {
+          "name": "封闭门扉 Seal the Doors",
+          "description": "<p>如果一名生物进入走廊交叉口，该交叉口通向外部的四扇门会关闭并上锁，且陷阱为其先攻掷骰隐秘（+13）。</p>\n<p>If a creature enters the corridor intersection, the four doors exiting this intersection close and lock, and the trap rolls Stealth (+13) for its initiative.</p>"
+        }
+      },
+      "disable": "<p><strong>有五种方式可以解除/逃脱该陷阱：</strong></p>\n<hr>\n<ol>\n<li><strong>摧毁一个喷嘴</strong></li>\n<li><strong>解除一个喷嘴 -&nbsp;</strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">用 @UUID[Compendium.forge-vtt-shared-compendiums-inks-cp.item-2-items.Item.PrPhZnN8G3dZqccN]{解除装置} 解除单个喷嘴时，进行一次 @Check[type:thievery|dc:20|traits:action:disable-a-device] 并获得一次成功</span></li>\n<li><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">摧毁/破拆一扇门： </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">进行一次 @Check[type:athletics|dc:25] 并使用</span><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"> </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">@UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]{破拆}</span></li>\n<li><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">开锁一扇门的门锁 - </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">进行两次 @Check[type:thievery|dc:21|traits:action:pick-a-lock] 并获得两次成功，以对一扇门进行&nbsp;@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}，或</span></li>\n<li><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><strong>从控制面板解除 -&nbsp;</strong> 进行 @Check[type:crafting|dc:25|traits:action:disable-a-device] 或 @Check[type:thievery|dc:25|traits:action:disable-a-device] 以从控制面板停用该陷阱。未受过盗贼训练的英雄会在这些检定上自动失败。</span></li>\n</ol>\n<hr>\n<div data-visibility=\"gm\">\n<p>燃气管道与喷火装置噗噗作响、断断续续地喷射着。你沮丧地站着。你环顾四周，发现每条走廊尽头都有一扇门。</p>\n</div>\n<p><strong>There are FIVE ways to disble/escape the trap:</strong></p>\n<hr>\n<ol>\n<li><strong>Destroy a Nozzle</strong></li>\n<li><strong>Disable a Nozzle -&nbsp;</strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">One success with a @Check[type:thievery|dc:20|traits:action:disable-a-device] to disable a single nozzle using @UUID[Compendium.forge-vtt-shared-compendiums-inks-cp.item-2-items.Item.PrPhZnN8G3dZqccN]{Disable Device}</span></li>\n<li><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">Destroy/Force Open a Door: </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">@Check[type:athletics|dc:25] with</span><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"> </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">@UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]{Force Open}</span></li>\n<li><strong style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">Pick a Door Lock - </strong><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">Two successes with a@Check[type:thievery|dc:21|traits:action:pick-a-lock] twice to &nbsp;@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick a Lock} of a door, or</span></li>\n<li><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\"><strong>Disable from Control Panel -&nbsp;</strong> @Check[type:crafting|dc:25|traits:action:disable-a-device] @Check[type:thievery|dc:25|traits:action:disable-a-device] to deactivate the trap from the control panel. A hero who isn't trained in Thievery automatically fails these checks.</span></li>\n</ol>\n<hr>\n<div data-visibility=\"gm\">\n<p>The gas pipes and flame mechanism spurts and splutters. You stand exasperated. You look around and down each corridor is a door.</p>\n</div>",
+      "hazarddescription": "<p>当触发地砖被激活（交叉点处中心四个方格）时，每条走廊的闸门都会滑落、上锁，而天花板上的喷火器喷嘴（4）会分别朝各走廊方向喷射，方向与其所在天花板工位相对，并穿过中央交叉点。</p>\n<hr />\n<p><strong>防御说明 - 材料数据</strong></p>\n<ul>\n<li><strong>单个喷嘴：</strong>6HRD 50HP/25BT</li>\n<li><strong>一扇门：</strong>12HRD, 20HP（BT 19）以破门并逃脱走廊</li>\n</ul>\n<p>When the trigger tile is activated (center four squares at the intersections), then each cooridor's gate slides down, locks, and the flamethrower jets (4) each spray in each direction of a cooridor opposite of theis station in the ceiling crossing through the middle intersection.</p>\n<hr />\n<p><strong>Defense Clarification - Material Statistics</strong></p>\n<ul>\n<li><strong>A single nozzle:</strong> 6HRD 50HP/25BT</li>\n<li><strong>A Door: </strong>12HRD, 20HP (BT 19) to break open a door and escape the hallway</li>\n</ul>",
+      "reset": "<p>陷阱在10分钟后停用并重置。陷阱被激活第四次后，会耗尽燃料，必须手动重置。</p>\n<p>The trap deactivates and resets after 10 minutes. After the trap is activated for the fourth time, it runs out of fuel and must be reset manually.</p>",
+      "routine": "<p>该陷阱获得<strong>4 动作</strong>，但每个被停用的喷嘴都会使其失去一个动作。</p>\n<hr>\n<p>每次动作时，一个不同的喷嘴会沿着一条不同的走廊向下喷射火焰，向交叉口之后走廊前15英尺内的每个生物造成 @Damage[3d6[fire]] 伤害（@Check[type:reflex|dc:22|basic:true]）。</p>\n<p>站在走廊交叉口中的生物每轮只能被一个火焰喷射命中一次（分别为每个进行检定），即使其位于多个火焰喷射的区域内也是如此。该生物每轮只进行一次豁免骰，但其豁免骰承受-2环境减值。</p>\n<p>&nbsp;此外，任何在笼中停留超过3轮的生物必须进行一次 @Check[type:fortitude|dc:20]，否则会变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}，或在大成功或大失败时变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2}。此后每轮他们都必须再次进行该豁免骰，直到他们离开笼子。</p>\n<p>The trap gets <strong>4 Actions</strong>, but loses an action for each disabled nozzle.</p>\n<hr>\n<p>On each action, a different nozzle fires a jet of flame down a different corridor, dealing @Damage[3d6[fire]] damage to each creature in the first 15 feet of the corridor past the intersection (@Check[type:reflex|dc:22|basic:true]).</p>\n<p>A creature standing in the corridor intersection can be hit by only one flame jet per round (checking for each) even if they're in the area of multiple flame jets. The creature attempts only one saving throw per round, but it takes a -2 circumstance penalty to its saving throw.</p>\n<p>&nbsp;Additionally, any creature in the cage for longer than 3 rounds must perform a @Check[type:fortitude|dc:20] of become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} or @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} on Critical Failure . Each round they must make this Saving Throw again until they get out of the cage.</p>",
+      "stealthdetails": "<p>任何处于 @UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]{搜寻（探索行动）} 探索行动中的玩家，或拥有 @UUID[Compendium.pf2e.feats-srd.Item.oA866uVEFu1OrAX0]{陷阱发现者} 的游荡者，都有机会注意到地砖或天花板上的喷嘴。</p>\n<p>Any player in a @UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]{Search} Exploration Activity or a Rogue with @UUID[Compendium.pf2e.feats-srd.Item.oA866uVEFu1OrAX0]{Trap Finder} can have a chance to notice either the tile or the nozzles in the ceiling.</p>",
+      "prototypeToken": "烈焰牢笼 Cage of Flame"
+    },
+    "Menacing Monstrous Terrain": {
+      "name": "威胁性的怪物地形 Menacing Monstrous Terrain",
+      "tokenName": "险恶的怪物地形 Menacing Monstrous Terrain",
+      "disable": "<p>渗出幻觉般精神痛苦的幻象裂缝可以通过以下任一方式被扰乱：</p>\n<ol>\n<li><strong>三个进度成功</strong> @Check[type:Arcana|dc:22]、@Check[type:Nature|dc:22]、@Check[type:Occultism|dc:22]、@Check[type:Religion|dc:22]，或</li>\n<li>等级 3 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法} <strong>DC25。</strong></li>\n</ol>\n<hr>\n<p><strong>两个成功进度</strong>将提供谜题的解法，即与其他生物挽臂相扣，并且在相连的一组生物中仅有三只眼睛保持睁开。</p>\n<hr>\n<p><strong>相连的生物：</strong></p>\n<p>若任何生物为了解除陷阱而与另一名生物相连，则它们具有<strong>速度减值 -5 尺</strong>，并且它们<strong>作为一个生物行动</strong>，在包括意志豁免投掷在内的动作上使用先攻顺序最低的玩家。</p>\n<p>The illusionary cracks seeping the illusionary mental anguish can be disrupted by either</p>\n<ol>\n<li><strong>Three progression Successes</strong> @Check[type:Arcana|dc:22], @Check[type:Nature|dc:22], @Check[type:Occultism|dc:22], @Check[type:Religion|dc:22], or</li>\n<li>Level 3 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} <strong>DC25.</strong></li>\n</ol>\n<hr>\n<p><strong>Two Success progression</strong> will provide the solution to the puzzle, which is to lock arms with</p>\n<p>other creatures with only three eyes open in the set of creatures connected.&nbsp;</p>\n<hr>\n<p><strong>Connected Creatures:</strong></p>\n<p>if any creature is connected with another in order to Disable the trap, they have a <strong>Speed penalty of -5 feet</strong>, and they <strong>act as one creature</strong> using the player with the lowest initiative order for actions including the Will Savig Throw.</p>",
+      "hazarddescription": "<p>宁静的景观转变为一片24平方英尺的地形：从外裂隙延伸入位面领域的幻象裂痕。所感知到的一切都不清楚究竟是外裂隙，还是一切仍处于真实的物质位面。</p>\n<p> </p>\n<p>它使任何生物的视野范围减少15英尺，并产生一个100x100英尺的@UUID[Item.cURG80Z5uDlYQ6j2]{Sense Supression}发散</p>\n<hr />\n<p><strong>任何</strong>导致<strong>大成功或大失败</strong>中的<strong>大失败</strong>结果的行动，都会使该生物获得@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}状态，直到其下一回合结束。 </p>\n<p>The peaceful landsacpe transforms into a 24 square foot terrain of illusionary cracks from the Outter Rifts into the planar realm. Whatever is perceived is unclear if it is the Outter Rifts or the true Material Plane.</p>\n<p> </p>\n<p>It limits field of vision by 15 feet to any creature and has an 100x100 foot emanation of @UUID[Item.cURG80Z5uDlYQ6j2]{Sense Supression} </p>\n<hr />\n<p><strong>Any </strong>action performed that results in a <strong>Critical Failure </strong>will result in the creature being @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} until the end of their next turn. </p>",
+      "reset": "<p>当生物离开该区域时，这些威吓性的幻象会停止，但在进入时会立即再次actiavet。</p>\n<p>The menacing illusions cease when the creatures exit the area., but will immediately actiavet again when entered.</p>",
+      "routine": "<p>（1 动作）威胁性的心灵影像侵袭所有能看见的生物的心智。每个生物必须尝试一次 @Check[type:will|dc:22] 豁免。</p>\n<hr>\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}。</p>\n<p><strong>失败</strong> 该生物受到 @Damage[(2d8+7)[mental]] 伤害并变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}。</p>\n<p><strong>大失败</strong> 该生物受到 @Damage[(4d8+14)[mental]] 伤害，并变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} 和 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}，持续一轮 。</p>\n<p>(1 Action) Menancing mental images assail the minds of all creature who can see. Each creature must attempt a @Check[type:will|dc:22] saving throw.</p>\n<hr>\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>\n<p><strong>Failure</strong> The creature takes @Damage[(2d8+7)[mental]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[(4d8+14)[mental]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} and @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for one round .</p>",
+      "stealthdetails": "<p>必须在隐秘中达到<strong>专家</strong>，并且满足以下任一条件</p>\n<ol>\n<li>拥有 @UUID[Compendium.pf2e.feats-srd.Item.oA866uVEFu1OrAX0]{陷阱发现者} 或</li>\n<li>在<strong>自然</strong>或<strong>异界学识</strong>中达到<strong>专家</strong>，才能在受到攻击前侦测到它。</li>\n</ol>\n<p>Must either be <strong>Expert </strong>in Stealth and either</p>\n<ol>\n<li>Have @UUID[Compendium.pf2e.feats-srd.Item.oA866uVEFu1OrAX0]{Trap Finder} or</li>\n<li><strong> Expert </strong>in <strong>Nature </strong>or <strong>Planar Lore </strong>to detect it prior to attack.</li>\n</ol>",
+      "prototypeToken": "险恶的怪物地形 Menacing Monstrous Terrain"
+    },
+    "Elevator": {
+      "name": "电梯 Elevator",
+      "tokenName": "电梯 Elevator",
+      "prototypeToken": "电梯 Elevator"
+    }
+  }
+}

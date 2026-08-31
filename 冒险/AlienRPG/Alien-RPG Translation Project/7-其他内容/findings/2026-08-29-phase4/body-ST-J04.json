@@ -1,0 +1,300 @@
+{
+ "unit": "ST-J04",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ST-J04.cn.html",
+ "chars_en": 29009,
+ "chars_cn": 19773,
+ "summary": "Starter Set rules chunk 3/5 (byte range 63824–92833): ACTION & MOVEMENT / CLOSE COMBAT / RANGED COMBAT. 16 headings, 10 cross-reference anchors, 2 rules tables (FULL ACTIONS, RANGED ATTACK MODIFIERS), 2 evexamplebox rules examples (Hayes defending, Nat shooting), 2 sidebar boxes (TOKENS & MINIATURES, MARK YOUR ACTIONS), 15 dice-symbol spans. All 15 basesymbol/stresssymbol spans reproduced byte-identically including their NBSP payloads and NBSP adjacency; all 68 NBSPs preserved; the sole U+2212 (Target Size \"−2 dice\") preserved as U+2212, and the 7 en-dashes that are numeric modifiers kept as U+2013 while the 10 prose en-dashes became \"——\" per ST-J02/J03 precedent. Terminology follows the already-shipped sibling units ST-J02/ST-J03 (完整动作/快速动作/打断动作/追骰/压力等级/精神强度/濒死/爬行管道/指示物/先攻牌) and the system lock for every skill and mechanic name. Upstream defects were preserved rather than silently repaired: the stray literal \"&gt;\" at the end of Action Reset, the missing dice glyph in Giving Orders, and the two mis-targeted data-hash values (body-armor link points at critical-injuries, Defend's opposed-roll link points at relieving-stress) — data-hash values are byte-identical, only the labels are translated.",
+ "self_gate": [
+  {
+   "check": "1. Tag multiset .cn == .en (every tag name counted)",
+   "result": "PASS — identical Counter over all 18 tag names: a 20, blockquote 14, br 62, div 16, figcaption 10, figure 18, h2 6, h3 26, img 9, li 22, p 48, span 94, strong 26, table 14, tbody 14, td 130, tr 50, ul 2"
+  },
+  {
+   "check": "2. Every class=\"…\" value in the English present unchanged",
+   "result": "PASS — Counter over class values is equal, not merely set-equal. All 16 distinct values preserved with identical counts: arpgtable, basesymbol, ev-content-link, evblockquoteCenter, evchapterheading, evexamplebox, evolvedlinestart, evolvedsubheading, evscol10, evscol2, evscol3, evstable, evstrhead, liststyle, stresssymbol, textover. Note: this unit uses ev-content-link (starterset flavour), not content-link — matched as-is."
+  },
+  {
+   "check": "3. Every @UUID / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — 10 anchors, the full attribute string of each is byte-identical (draggable/data-link/data-uuid/data-id/data-type/data-hash). 0 [[…]] constructs in this unit. Labels translated: Critical Injuries→重伤, Relieving Stress→缓解压力, Foot Movement→徒步移动, Surprise & Ambush→突袭与伏击, Zones→区域, Gear→装备, Opposed Rolls→对抗检定, Barriers→屏障, Consumables→消耗品, RANGED COMBAT→射击"
+  },
+  {
+   "check": "4. Every translated heading carries explicit id= with the original English slug",
+   "result": "PASS — 16/16 headings carry an id. Slugs computed by Foundry String#slugify semantics (split on whitespace, join '-', lowercase, non-alnum→'-', collapse runs), which is what _makeHeadingNode falls back to: action-movement, full-actions-quick-actions, giving-orders, foot-movement, leaving-combat, close-combat, defend, special-attacks, restrained-unaware-opponents, firearms-in-close-combat, ranged-combat, dodging, cover, friendly-fire, ammunition, full-auto. The 8 that are live data-hash targets in the corpus (foot-movement, leaving-combat, close-combat, special-attacks, ranged-combat, cover, ammunition, full-auto) all resolve. Ampersand headings follow the ST-J03 precedent (combat-initiative, surprise-ambush), NOT the '-and-' form — matching Foundry's actual derivation."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — two substrings from the register occur in the English and were checked individually. (a) 'Critical Injuries' occurs only as an <a> label in journal prose; every freeze on that string is a game.tables.getName() / folder.contents.filter(startsWith) lookup against a RollTable DOCUMENT NAME (rolltable_names + prefix_filters), never journal HTML — and ST-J03 already ships 重伤 for this identical anchor. (b) ' RPG ' occurs in 'official ALIEN RPG tokens'; name_substring_tests is an ammo-weight test on Item.name only, not prose. Neither is a violation. No other frozen literal is present in the source."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 19773 chars vs 29009; 3910 CJK characters present"
+  },
+  {
+   "check": "7. Every mechanic term matches lang/cn.json byte-for-byte",
+   "result": "PASS — see lock_lookups (29 entries). All 11 skill names and both attribute names used are byte-equal to their ALIENRPG.Skill*/Ability* values, including the two R5/R6 reversals (Heavy Machinery→机械, Ranged Combat→射击) and R3 (Comtech→通信科技)."
+  },
+  {
+   "check": "extra: invisible-character parity",
+   "result": "PASS — NBSP 68/68, U+2212 1/1, 15/15 symbol spans with byte-identical payloads AND identical NBSP adjacency on both sides (the single adjacency delta is the prose char after one stresssymbol span: EN '.' vs CN '也', not markup)"
+  },
+  {
+   "check": "extra: chunk-boundary whitespace",
+   "result": "PASS — leading bytes and the trailing '\\n\\n    ' of the English byte range reproduced so the controller's reassembly is seamless"
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Close Combat (skill)",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Ranged Combat (skill)",
+   "lang_key": "ALIENRPG.SkillrangedCbt",
+   "used": "射击"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Comtech",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "Heavy Machinery",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "机械"
+  },
+  {
+   "english": "Medical Aid",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "Manipulation",
+   "lang_key": "ALIENRPG.Skillmanipulation",
+   "used": "操控"
+  },
+  {
+   "english": "Command",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "Piloting",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Stamina",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "Strength",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "Agility",
+   "lang_key": "ALIENRPG.AbilityAgl",
+   "used": "敏捷"
+  },
+  {
+   "english": "Quick Action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "Adjacent",
+   "lang_key": "ALIENRPG.Adjacent",
+   "used": "紧邻距离"
+  },
+  {
+   "english": "Short",
+   "lang_key": "ALIENRPG.Short",
+   "used": "近距离"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Armor Rating / armor level",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "Armor Piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "Damage",
+   "lang_key": "ALIENRPG.Damage",
+   "used": "伤害"
+  },
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Stress Response",
+   "lang_key": "ALIENRPG.StressResponses",
+   "used": "压力反应"
+  },
+  {
+   "english": "Resolve",
+   "lang_key": "ALIENRPG.Resolve",
+   "used": "精神强度"
+  },
+  {
+   "english": "Push",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "Frantic (stress response in the CLOSE COMBAT example)",
+   "lang_key": "ALIENRPG.frantic",
+   "used": "慌乱"
+  },
+  {
+   "english": "Ammo / ammunition",
+   "lang_key": "ALIENRPG.ammo",
+   "used": "弹药"
+  },
+  {
+   "english": "Supply roll",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Full Auto",
+   "lang_key": "ALIENRPG.FullAuto",
+   "used": "全自动"
+  },
+  {
+   "english": "Initiative (in 先攻牌)",
+   "lang_key": "ALIENRPG.SwapInitiative (交换先攻)",
+   "used": "先攻"
+  },
+  {
+   "english": "partial cover / full cover",
+   "lang_key": "ALIENRPG.partialcover / ALIENRPG.fullcover",
+   "used": "半掩护 / 全掩护 — the lang values are 半掩护（-2）/全掩护（-3）; the parenthetical is the dialog's modifier readout, so prose uses the bare stem, which is byte-equal to the leading segment"
+  },
+  {
+   "english": "Careful aim",
+   "lang_key": "ALIENRPG.carefullAim (仔细瞄准？（+2）)",
+   "used": "仔细瞄准 — stem, same rationale"
+  },
+  {
+   "english": "Aim for weak spot",
+   "lang_key": "ALIENRPG.aimForWeakSpot (瞄准弱点（-2）)",
+   "used": "瞄准弱点 — stem, same rationale"
+  },
+  {
+   "english": "conserve ammo",
+   "lang_key": "ALIENRPG.conserveAmmo / ALIENRPG.ammoConcerved",
+   "used": "节省弹药 — stem"
+  },
+  {
+   "english": "Reload",
+   "lang_key": "ALIENRPG.noAmmo (你需要重新装填！！)",
+   "used": "重新装填 — stem"
+  }
+ ],
+ "frozen_kept": [
+  "Critical Injuries — occurs in the English only as an <a> label; the register's freeze is on the RollTable document name (game.tables.getName / folder.contents.filter startsWith), not journal prose, so the label was translated to 重伤 exactly as ST-J03 already ships for this same anchor. The frozen lookup sites are untouched by this unit.",
+  "' RPG ' (name_substring_tests) — occurs as 'official ALIEN RPG tokens'; the freeze is an Item.name ammo-weight test, not prose. Rendered 《异形 RPG》 per ST-J02/ST-J03 precedent.",
+  "All data-uuid / data-id / data-type / data-hash values on all 10 anchors — byte-identical.",
+  "All image src paths, style attributes and hsl() colour values — byte-identical.",
+  "The stray literal '&gt;' at the end of Action Reset — kept as-is (upstream artifact, not repaired)."
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "One of the six life-cycle names PROJECT.md §7.2.0 marks as unsettled. Appears once, in Target Size ('a small object, such as … a Chestburster'). 破胸体 is the dominant Chinese-fandom rendering and is a noun (体) matching the sibling stage names' shape better than the agent-noun 破胸者. Used consistently; no second form appears anywhere in this unit. ST-J27 owns the 'Stage III: Chestburster' heading and must adopt the same string."
+  },
+  {
+   "en": "Rally (a broken character)",
+   "proposed": "鼓舞",
+   "why": "Quick-action list item 'Rally a broken character'; no glossary entry and no lang key. 鼓舞 is the established TRPG rendering and reads correctly against 濒死 (Broken): you talk them back onto their feet rather than heal them. Flagging because the mechanic is defined in a later chunk (Broken, ST-J05) and both must agree."
+  },
+  {
+   "en": "Burst / fire a burst",
+   "proposed": "连射",
+   "why": "Full Auto section, 4 occurrences. ALIENRPG.FullAuto pins 全自动 for the weapon property but there is no term for the act. 连射 keeps the property name free and is unambiguous against 全自动."
+  },
+  {
+   "en": "Pass (special close combat attack)",
+   "proposed": "越过",
+   "why": "One of four special attacks (缴械/越过/推开/擒抱). Chose 越过 over 突过 to stay a natural 2-char verb parallel with its three siblings; 穿过 was rejected because it reads as passing through the enemy rather than past them."
+  },
+  {
+   "en": "Shove",
+   "proposed": "推开",
+   "why": "Same 4-item parallel set. 推开 covers both 'push to Short range' and 'shove through a door'."
+  },
+  {
+   "en": "Grapple",
+   "proposed": "擒抱",
+   "why": "Same set; 擒抱 is the standard TRPG term and supports the derived 擒抱攻击 in the same paragraph."
+  },
+  {
+   "en": "Disarm",
+   "proposed": "缴械",
+   "why": "Same set; standard, and 2 chars."
+  },
+  {
+   "en": "Friendly Fire",
+   "proposed": "友军误伤",
+   "why": "Heading, id friendly-fire. 友军火力 is a literal calque that reads as a support asset; 误伤 states the mechanic (you hit the unintended target)."
+  },
+  {
+   "en": "Barriers",
+   "proposed": "屏障",
+   "why": "Used ONLY as the Full Cover link label; the heading itself lives in ST-J05 (DAMAGE chapter), which is not yet translated. If ST-J05 picks a different word my label goes stale — controller sync point."
+  },
+  {
+   "en": "Relieving Stress",
+   "proposed": "缓解压力",
+   "why": "Link label. Already used by ST-J02 for the identical data-hash, so this is a confirmation, not a new proposal."
+  },
+  {
+   "en": "Rexim RXF-M5 EVA Pistol",
+   "proposed": "Rexim RXF-M5 EVA 手枪",
+   "why": "In the RANGED COMBAT example. Treated as T-LATIN for the maker + model designation (PROJECT.md §3.4) with only the common noun Pistol translated; short-form 'her Rexim' kept as Rexim. The corerules pack ships the sibling item 'Rexim RXF-M5A3 EVA Pistol' which will need a T-BILINGUAL name — if that name lands on a different transliteration, this prose mention should follow it."
+  },
+  {
+   "en": "Tokens & Miniatures",
+   "proposed": "指示物与微缩模型",
+   "why": "Sidebar title. ⚠ ST-J03 renders the SAME English phrase as '标记与模型' in its Maps section (evolvedlinestart label). I chose 指示物 because it is Foundry's own word (ALIENRPG.NoToken 你没有选中任何指示物, ALIENRPG.DefProto 原型指示物) and because ST-J03's own body prose says 纸质指示物. One of the two should be changed — see open_issues."
+  },
+  {
+   "en": "Use machinery (full action)",
+   "proposed": "使用机器",
+   "why": "The action row sits next to a skill column reading 机械 (Heavy Machinery, R5). 使用机械 would print 机械 twice on one row for two different things; 使用机器 keeps the object distinct from the skill."
+  }
+ ],
+ "open_issues": [
+  "TERM COLLISION with ST-J03: the English 'Tokens & Miniatures' is rendered 标记与模型 in ST-J03 (Maps section, evolvedlinestart label) and 指示物与微缩模型 here (sidebar title). Same English string, same journal page, two Chinese forms. I recommend ST-J03 move to 指示物 — its own body text already says 纸质指示物 and 微缩模型, and 指示物 is what the Foundry UI itself says (ALIENRPG.NoToken / ALIENRPG.DefProto). Controller decision.",
+  "SLUG CONVENTION divergence between the two already-shipped units: ST-J03 uses the true Foundry-derived slug for ampersand headings (combat-initiative, surprise-ambush) while ST-J02 uses an '-and-' form (base-dice-and-stress-dice) and one form with a literal '?' (whats-the-story-mother?). I followed ST-J03, which is the correct derivation — Foundry's String#slugify turns '&' into a replacement run that collapses, it never spells 'and'. This also explains why the register lists surprise-and-ambush and combat-and-initiative as 'not resolving today': those are pre-existing upstream data-hash bugs, and ST-J03 correctly did NOT paper over them. ST-J02's base-dice-and-stress-dice has no data-hash pointing at it so it is inert, but whats-the-story-mother? is not a slugify output at all and is worth a pass.",
+  "UPSTREAM DEFECT preserved (Giving Orders): the English reads 'For every you roll, they get +1 die' — a dice-symbol span was dropped upstream, so the sentence has no object. I mirrored the gap (你每掷出一个，对方就…) rather than inventing 成功, because supplying the missing glyph would be adding rules content. If the controller prefers, the fix is to insert a basesymbol span here — but that would change the tag multiset and must be a deliberate, packaged upstream-repair decision, not a translator's edit.",
+  "UPSTREAM DEFECT preserved (two mis-targeted links): 'Damage may be reduced by body armor (…)' links to data-hash=\"critical-injuries\" and Defend's 'turns the attack into an opposed roll (…)' links to data-hash=\"relieving-stress\". Both should point at Armor and Opposed Rolls respectively. data-hash left byte-identical per §3.6; labels translated to match the sections they actually point at (重伤 / 缓解压力), which is what ST-J02 and ST-J03 already do for these same two anchors. Do not 'fix' the label without fixing the hash.",
+  "UPSTREAM TYPO not reproduced: 'enemies in the adjacent zone..' has a doubled period. Chinese uses a single 。 — punctuation doubling carries no information and no code reads it.",
+  "'Full Action' is rendered 完整动作, NOT the lang value 慢速动作 (ALIENRPG.SlowAction). This is deliberate and follows ST-J03: Evolved renamed Slow/Fast Action to Full/Quick Action, and cn.json's 慢速动作 is keyed to the classic term. 快速动作 happens to match ALIENRPG.FastAction byte-for-byte, so only the Full side is unpinned. If the controller ever adds an ALIENRPG.FullAction key it must be 完整动作 to stay in lockstep with ST-J03 and this unit.",
+  "The two evblockquoteCenter boxes in this unit (QUICK ACTIONS list, MARK YOUR ACTIONS tip) are rules furniture, not read-aloud text, despite the class. Registered them as instructional prose rather than spoken horror register — the read-aloud rule applies to the adventure chapters, not this rules chapter."
+ ]
+}

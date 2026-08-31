@@ -1,0 +1,23 @@
+<section class="tab sheet-body standard-form scrollable {{tabs.config.cssClass}}"
+         data-tab="{{tabs.config.id}}" data-group="{{tabs.config.group}}">
+
+    <fieldset>
+        <legend>{{localize "ITEM.SHEET.TalentConfiguration"}}</legend>
+        {{formGroup fields.nodes value=source.system.nodes options=nodes sort=true}}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "ITEM.SHEET.Spellcraft"}}</legend>
+        {{formGroup fields.rune value=source.system.rune valueAttr="id" labelAttr="name"}}
+        {{formGroup fields.gesture value=source.system.gesture valueAttr="id" labelAttr="name"}}
+        {{formGroup fields.inflection value=source.system.inflection valueAttr="id" labelAttr="name"}}
+        {{formGroup fields.iconicSpells value=source.system.iconicSpells}}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{fields.training.label}}</legend>
+        <p class="hint">{{fields.training.hint}}</p>
+        {{formGroup fields.training.fields.type value=source.system.training.type blank=""}}
+        {{formGroup fields.training.fields.rank value=source.system.training.rank options=trainingRanks blank=""}}
+    </fieldset>
+</section>

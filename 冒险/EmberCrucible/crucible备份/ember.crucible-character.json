@@ -1,0 +1,528 @@
+{
+  "label": "角色选项\nCharacter Options",
+  "mapping": {
+    "name": "name",
+    "description": "system.description",
+    "actionname": {
+      "path": "system.actions",
+      "converter": "emberActions"
+    }
+  },
+  "folders": {
+    "Ancestries": "祖裔\nAncestries",
+    "Attunements": "调谐\nAttunements",
+    "Cultures": "文化\nCultures",
+    "Paths": "径\nPaths",
+    "Soulbound": "魂缚\nSoulbound",
+    "Ancestry Features": "祖裔特性\nAncestry Features",
+    "Attunement Features": "调谐特性\nAttunement Features",
+    "Culture Features": "文化特征\nCulture Features"
+  },
+  "entries": {
+    "Oaken": {
+      "name": "奥肯 Oaken",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.k7bsL7HRGcz4P314 inline 概览]</p>"
+    },
+    "Academy Dropout": {
+      "name": "学院辍学生 Academy Dropout",
+      "description": "<p>里凡的星辰学院招收来自世界各地的学生，而你即使只有最微弱的魔法潜质，也能获准入学。然而，有些人发现那里严格而不间断的学习令人难以忍受，只待了很短一段时间便离开，转而去别处寻找自己的机运。你很可能也学到了一些东西，掌握了恰好足以应付任何需要魔法知识的情况的本事。</p><p>你是一名有能力的魔法行家，至少在知识层面上如此，而且你了解许多魔法理论与现象。</p>"
+    },
+    "Anchorite Marine": {
+      "name": "隐修士陆战队员 Anchorite Marine",
+      "description": "<p>你曾花时间接受训练，成为卡斯奇利亚共和国海军的一名水手或海军陆战队员。这让你对船只以及在 Ember 辽阔海洋上的航行有了深刻理解，也让你掌握了大量关于导航与海图的信息。必要时，你也能够修理甚至建造一艘小型船只，或者在有足够时间的情况下，独自设法穿越河流或湖泊等小型水域。在服役期间，你或许还曾与试图穿过金湾入侵的不死生物交战。</p><p>你理解如何以有限的方式操作不同体型的远洋船只，也知道如何使用海图在海上导航。你或许还了解不同类型的不死生物及其弱点。<br /></p>"
+    },
+    "Caravanner": {
+      "name": "商队旅人 Caravanner",
+      "description": "<p>余烬的诸多城市之间，以及横跨其多样而分散的文化之间的贸易，往往依靠源源不断、形形色色的陆路商队来进行。你过去或许曾随商队长途跋涉，因此学会了如何在手中转动一枚硬币，或给众人讲上一段故事。你也很可能目光敏锐；经过多年在地平线上搜寻危险，你能在麻烦临近前很远就嗅出端倪。</p><p>你目光敏锐，能够发现身边远近潜藏的危险。你具备出色的生存直觉，也能在荒野旅行时让自己活下来。</p>"
+    },
+    "Cindaric Initiate": {
+      "name": "辛达里克入门者 Cindaric Initiate",
+      "description": "<p>奥丹的辛达里克贤者以派遣其成员走向世界闻名，向他人传授余烬之心及其奇妙、赋予生命的能量。你或许小时候曾在故乡受过一位游历贤者的教导，并一直梦想着亲自造访辛达里克神殿；又或者你的家族原本就来自奥丹，因此在成长过程中与贤者们有着密切联系。你很可能对宗教观念颇为熟悉，并坚信余烬之心是一股向善的力量，赋予所有生物生命与目标。</p><p>你的信仰让你获得了关于余烬之心——生命力中赋予生命的能量——的知识，而你也可能与自然以及生命与死亡的循环有着深厚的联系。<br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Cosmopolitan Fashionista": {
+      "name": "世界风尚达人 Cosmopolitan Fashionista",
+      "description": "<p>你曾在奥尔丹这座大城市中生活过一段时间，虽然你未必出生于此，但你已经适应了这里繁忙而国际化的风气与潮流。你或许能更轻松地搜集信息，并且对周围的人有着极佳的视觉记忆。你的时尚品味无可挑剔，只需观察一个人片刻，你就能识别出其身上极其细微的细节。你也可能热衷于投身社交活动，并利用你所发现的知识来为自己谋取优势。</p><p>你对时尚的理解深刻到仅凭研究人们的穿着，就能发掘出他们的个人信息。你可能在权谋、外交以及建立社交联系方面颇有天赋。</p>"
+    },
+    "Crown Apothecary": {
+      "name": "王室药剂师 Crown Apothecary",
+      "description": "<p>你曾花时间拜访或向位于南方岛屿维塔里上克朗的安珀最杰出的炼金术士学习。你在那里的经历让你对制造强效炼金灵药所需的试剂、灌注物与精华有了更深入的知识。你在这一领域的知识使你更容易辨认炼金材料及其性质，或理解以炼金方式制成的物质所产生的效果。</p><p>克朗的炼金术士以将元素能量灌注于造物之中、提升并强化其效力而闻名。这门技艺需要对元素生物及其能力具备相当深入的知识。作为你在克朗经历的副产物，你还获得了一些关于元素生物、它们的各种类型，以及其内在属性的不寻常知识。</p>"
+    },
+    "Abyss Attunement": {
+      "name": "深渊调谐 Abyss Attunement",
+      "description": "<p>你的灵魂并未与 Ember 的宇宙力量产生共鸣；相反，你同调于 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.06I8t0GPggrMVnGV]{深渊} 那令人不安的牵引，以及其哲学理念——<strong>虚无主义</strong>。</p><p>你获得等同于你的同调强度 2 倍的<strong>虚空</strong>伤害抗性。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Akon Attunement": {
+      "name": "阿肯调谐 Akon Attunement",
+      "description": "<p>你的灵魂与 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.3Oywe0peo57dQT9j]{阿肯}——破碎之月——及其哲学理念<strong>纪律</strong>产生了同调。</p><p>你获得对<strong>钝击</strong>、<strong>穿刺</strong>和<strong>挥砍</strong>伤害的抗性，数值等于你的同调强度。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Altyra Lineage": {
+      "name": "阿尔提拉血统 Altyra Lineage",
+      "description": "<p>你免疫<strong>染病</strong>状态；该状态原本会阻止你恢复<strong>生命值</strong>。</p>",
+      "actionname": "泰拉菲克变形\nTyraphic Transformation",
+      "actiondesc": "<p>你可以让自己暂时获得提拉斐姆的形貌与能力，呈现出异界般的外貌。变形期间，你获得以下收益。</p><ul><li><p>你获得对<strong>光耀</strong>伤害的抗性，数值等于你等级的2倍。</p></li><li><p>你的攻击额外造成<strong>光耀</strong>伤害，数值等于你<strong>威仪</strong>的一半。</p></li><li><p>你在使用<strong>威吓</strong>技能时获得<strong>+2 恩惠</strong>。</p></li></ul><p>你可以在自己的回合中于其完整持续时间结束前终止此次变形，无需任何代价。</p>",
+      "actioneffectname": "泰拉菲克变形"
+    },
+    "Altyra": {
+      "name": "阿尔提拉 Altyra",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.tkGzfnJkkLZ3cgpG inline 概览]</p>"
+    },
+    "Ashka": {
+      "name": "阿什卡 Ashka",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.QIC15zfqh4Ndzgha inline 概览]</p>"
+    },
+    "Cor'ak": {
+      "name": "科拉克 Cor'ak",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.blm7nVaaSYLZX3C9 inline 概览]</p>"
+    },
+    "Drakon": {
+      "name": "龙裔 Drakon",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.GRs2vgeVsDpWPqjh inline 概览]</p>"
+    },
+    "Fej": {
+      "name": "费伊杰 Fej",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.fmhP7pxXIXV0BM2r inline 概览]</p>"
+    },
+    "Hulg'run": {
+      "name": "赫尔格伦 Hulg'run",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.K28cb1q6tvU8FP8B inline 概览]</p>"
+    },
+    "Human": {
+      "name": "人类 Human",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.p7n66fVhfJCkGd4z inline 概览]</p>"
+    },
+    "Keth": {
+      "name": "凯思 Keth",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.bOPreM2lwc0iB46X inline 概览]</p>"
+    },
+    "Kiska": {
+      "name": "基斯卡 Kiska",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.tyum0IGWIODRfitO inline 概览]</p>"
+    },
+    "Kivahr": {
+      "name": "基瓦尔 Kivahr",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.rl7QgGAIaYqAxLYq inline 概览]</p>"
+    },
+    "Nir'ae": {
+      "name": "尼尔艾 Nir'ae",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.QgnKHUryvNrNqRfN inline 概览]</p>"
+    },
+    "Signborn": {
+      "name": "印记裔 Signborn",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.p6DGVnaLHZfLvGem inline 概览]</p>"
+    },
+    "Thornling": {
+      "name": "荆芽灵 Thornling",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.3s9YujjWpwPJntGa inline 概览]</p>"
+    },
+    "Vrjnhar": {
+      "name": "弗尔金哈尔 Vrjnhar",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.0YvoRkcs1BxtRiQz inline 概览]</p>"
+    },
+    "Wirrun": {
+      "name": "威伦 Wirrun",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.PYCLsQgKclg5toxT inline 概览]</p>"
+    },
+    "Zeph": {
+      "name": "泽夫 Zeph",
+      "description": "<p>@Embed[JournalEntry.emberAncestries0.JournalEntryPage.eyvVaX4c1rMos0ws inline 概览]</p>"
+    },
+    "Ashka Lineage": {
+      "name": "阿什卡血统 Ashka Lineage",
+      "description": "<p>你在水中时的<strong>移动</strong>不受减值影响。你在水下时最多可以屏息二十分钟。</p><p>你可以精准地察觉温度的细微差异，使你能够定位 60 尺内温血生物或其他会散发热量的生物，只要它们不在完全掩蔽之后，且你没有<strong>目盲</strong>或<strong>失能</strong>。使用热视觉探测到的生物，在需要你看见目标的动作中视为可见。</p><p><strong>ALPHA ONE: </strong>此特性尚未自动化。</p>"
+    },
+    "Aster": {
+      "name": "阿斯特 Aster",
+      "description": "<p>你的变异让你有别于你血统中的其他人。你可能会显现出转变带来的身体特征，也可能这些差异隐藏于内在，从根本层面塑造着你。没有任何两个阿斯特是完全相同的，而你的形态完全属于你自己。</p>"
+    },
+    "Aura Attunement": {
+      "name": "灵气调谐 Aura Attunement",
+      "description": "<p>你的灵魂与 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.smc0OuMxsxfcSdhR]{灵气}——空洞之月——以及其哲学理念<strong>个人主义</strong>产生了同调共鸣。</p><p>你获得等于你的同调强度 2 倍的<strong>电击</strong>伤害抗性。</p><p><em>在更高的调谐等级时，将解锁进一步的效果。</em></p>"
+    },
+    "Abyss": {
+      "name": "深渊 Abyss",
+      "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.06I8t0GPggrMVnGV inline 概览]</p>"
+    },
+    "Akon": {
+      "name": "阿肯 Akon",
+      "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.3Oywe0peo57dQT9j inline 概览]</p>"
+    },
+    "Arcturian": {
+      "name": "阿克图里亚人 Arcturian",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.8cGPxMRewkagoIvc inline 概览]</p>"
+    },
+    "Aura": {
+      "name": "灵气 Aura",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.smc0OuMxsxfcSdhR inline 概览]</p>"
+    },
+    "Bejak": {
+      "name": "贝雅克 Bejak",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.A1uPGhtaDifW8Sph inline 概览]</p>"
+    },
+    "Cascilian": {
+      "name": "卡斯奇利亚人 Cascilian",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.Ed7ttdIwKm95IdUG inline 概览]</p>"
+    },
+    "Cora": {
+      "name": "科拉 Cora",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.5pD8lxiilJJXOgoa inline 概览]</p>"
+    },
+    "Heart": {
+      "name": "心 Heart",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.0anKTKgOav9sXox1 inline 概览]</p>"
+    },
+    "Kelmezian": {
+      "name": "凯尔梅兹安 Kelmezian",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.SySGCB7QdgeKowkD inline 概览]</p>"
+    },
+    "Kessian": {
+      "name": "凯西安 Kessian",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.1WoH2TVw0gngrgWL inline 概览]</p>"
+    },
+    "Kithil": {
+      "name": "基希尔 Kithil",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.IOBQMGUigqxn3UkM inline 概览]</p>"
+    },
+    "Lumek": {
+      "name": "卢梅克 Lumek",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.f52WC5ZzNSK0yKOz inline 概览]</p>"
+    },
+    "Luxarum": {
+      "name": "卢克萨鲁姆 Luxarum",
+      "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.pPU6VZV7WFubtcSR inline 概览]</p>"
+    },
+    "Mayis": {
+      "name": "玛伊斯 Mayis",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.RkdBtFQk7STvMbV2 inline 概览]</p>"
+    },
+    "Maziran": {
+      "name": "马兹兰 Maziran",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.cYMQIQFugpO79L9f inline 概览]</p>"
+    },
+    "Orbis": {
+      "name": "奥比斯 Orbis",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.zkmWSB32y8Fbc4UL inline 概览]</p>"
+    },
+    "Ordani": {
+      "name": "奥尔达尼 Ordani",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.RxhlhTWqJqB1cZxY inline 概览]</p>"
+    },
+    "Primordis": {
+      "name": "普里莫迪斯 Primordis",
+      "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.16sqn71JsCkghaTt inline 概览]</p>"
+    },
+    "Ragen": {
+      "name": "拉根 Ragen",
+      "description": "<p>@embed[JournalEntry.emberCosmos00000.JournalEntryPage.LKptgmc56euSOb0G inline 概览]</p>"
+    },
+    "Railen": {
+      "name": "莱伦 Railen",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.y4WHE3TEr6Of13SL inline 概览]</p>"
+    },
+    "Rhivan": {
+      "name": "里凡 Rhivan",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.emFVgDaCDq0lWY2b inline 概览]</p>"
+    },
+    "Signara": {
+      "name": "西格纳拉 Signara",
+      "description": "<p>@Embed[JournalEntry.emberCosmos00000.JournalEntryPage.3OvueRrGcFnwtnmw inline 概览]</p>"
+    },
+    "Strider": {
+      "name": "疾行者 Strider",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.VHQNztu45XEHuvtY inline 概览]</p>"
+    },
+    "Tayan": {
+      "name": "塔扬 Tayan",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.bG3kuSiwqMnIHSrH inline 概览]</p>"
+    },
+    "Waerd": {
+      "name": "瓦尔德 Waerd",
+      "description": "<p>@embed[JournalEntry.emberCultures000.JournalEntryPage.MsiM0222IPxjGTQQ inline 概览]</p>"
+    },
+    "Wardcall": {
+      "name": "守护召唤 Wardcall",
+      "description": "<p>@Embed[JournalEntry.emberCultures000.JournalEntryPage.xImbz6Nf4mMxtKF1 inline 概览]</p>"
+    },
+    "Cleansing Flame": {
+      "name": "净化之焰 Cleansing Flame",
+      "description": "<p>你是卢梅在对抗不死生物的永恒战争中的勇士。你对<strong>不死生物</strong><strong>类型</strong>的敌人进行的任何攻击获得<strong>+1 恩惠</strong>。</p>"
+    },
+    "Constructed Companion": {
+      "name": "构装同伴 Constructed Companion",
+      "description": "<p>你可以花费1小时，用一种来自地面或生长于地面的天然材料制作一个微型的@UUID[Actor.oLu6qs3AYUu8eitR]，例如黏土、石头、木头或稻草。构装同伴是一种被赋予生命的构装体，会成为一个受你控制的生物，持续存在8小时，或直到其生命值或士气降至0。</p><p>当构装同伴被赋予生命时，你可以向它下达基本的口头指示，以发出简单的命令，例如“拿一把钥匙来”、“站岗”或“把一些书堆起来”。如果你没有下达任何命令，构装同伴除了在面对敌对生物时保护自己之外，什么也不会做，并会在适当时执行防御动作。一旦被下达命令，同伴会持续遵从该命令，直到任务完成或你给予替代指示。</p><p>你同一时间只能有一个构装同伴处于激活状态；创造第二个同伴会使赋予你先前构装同伴生命的魔法立即消散。</p>",
+      "actionname": "构装体伙伴\nConstruct Companion",
+      "actiondesc": "<p>你花费1小时制造一个构装同伴，它会遵循你的基本口头指令。</p>"
+    },
+    "Cora Attunement": {
+      "name": "科拉调谐 Cora Attunement",
+      "description": "<p>你的灵魂与@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.5pD8lxiilJJXOgoa]{科拉}——“焦灼之月”——以及其哲学理念<strong>实用主义</strong>产生了同调。</p><p>你获得等同于你同调强度 2 倍的<strong>强酸</strong>伤害抗性。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Cor'ak Lineage": {
+      "name": "科拉克血统 Cor'ak Lineage",
+      "description": "<p>你厚实且部分金属化的外皮为你提供了抵御打击的天然保护。当你处于<strong>无甲</strong>状态时，你获得等同于你的<strong>坚韧 </strong>属性值的<strong>护甲</strong>加值。</p>",
+      "actionname": "结晶化创伤\nCrystalize Wounds",
+      "actiondesc": "<p>当你变为<strong>虚弱</strong>，或在<strong>虚弱</strong>状态下受到伤害时，一层水晶甲壳会覆盖你的身体。在短时间内，你获得等同于你的<strong>坚韧</strong>调整值的对<strong>钝击</strong>、<strong>穿刺</strong>和<strong>挥砍</strong>伤害的抗性。你还会立即获得等同于你<strong>等级</strong>两倍的<strong>生命值</strong>。</p>",
+      "actioneffectname": "结晶化创伤"
+    },
+    "Personalized Crafting": {
+      "name": "个性化制作 Personalized Crafting",
+      "description": "<p><strong>测试版二</strong>：该天赋尚未根据 Crucible 机制进行更新。</p>"
+    },
+    "Drakon Lineage": {
+      "name": "龙裔血统 Drakon Lineage",
+      "description": "<p>你对死灵术和死亡魔法的影响有着异乎寻常的抗性。使用<strong>死亡符文</strong>的法术对你进行法术攻击检定时具有<strong>+2 祸骰</strong>。</p><p>你本能地知晓<strong>火焰符文</strong>，并且可以将其用于基础施法。</p>",
+      "actionname": "龙焰\nDrakonfire",
+      "actiondesc": "<p>在承受巨大压力的时刻，你可以利用这种力量，在锥形范围内喷吐火焰，灼烧路径上的所有生物。你在一个圆锥区域内喷吐龙类火焰。</p><p>此次<strong>致命</strong>攻击使用你的<strong>坚韧</strong>进行成长，并以受影响生物的<strong>反射</strong><strong>防御</strong>为目标。此<strong>动作</strong>视为一种<strong>天生</strong>武器，而龙裔至少已熟练掌握它。</p>"
+    },
+    "Explosives Training": {
+      "name": "爆炸物训练 Explosives Training",
+      "description": "<p>你熟悉爆炸物。使用<strong>Bomb</strong>类型的消耗品时，你在相关技能上始终至少视为<strong>受训</strong>。如果你已经在该技能上受训，则改为在任何相关检定上获得<strong>+1 恩惠</strong>。</p>"
+    },
+    "Fej Lineage": {
+      "name": "费伊杰血统 Fej Lineage",
+      "description": "<p>你的血统对<strong>火元素</strong>伤害的抗性会进一步提高，提高值等于你的角色<strong>等级</strong>。如果你在水中浸没超过6秒，或在你的回合开始时处于水中浸没状态，你必须使用<strong>畏水</strong>动作来检定你的意志。</p>",
+      "actionname": [
+        "极端代谢\nExtreme Metabolism",
+        "畏水\nWater Aversion"
+      ],
+      "actiondesc": [
+        "<p>你激发体内炽热的代谢，进入一阵超自然的高速状态。</p><ul><li><p>你的<strong>移动</strong>增加 +2。</p></li><li><p>你获得等同于你<strong>敏捷</strong>一半的<strong>闪避</strong>加值。</p></li><li><p>你的当前和最大<strong>动作</strong>都获得 +1。</p></li></ul>",
+        "<p>当浸没在水中超过 6 秒，或当你在浸没于水中时开始你的回合，你必须考验自己的决心。</p><p><strong>ALPHA ONE</strong>：这个动作还需要进一步平衡。</p>"
+      ],
+      "actioneffectname": "极端代谢"
+    },
+    "Heart Attunement": {
+      "name": "心之调谐 Heart Attunement",
+      "description": "<p>你的灵魂与@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.0anKTKgOav9sXox1]{余烬之心}的生命力能量及其哲学理念<strong>活力主义</strong>产生共鸣。</p><p>你获得等同于你的同调强度 2 倍的<strong>腐化</strong>伤害抗性。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Hot Tempered": {
+      "name": "火爆脾气 Hot Tempered",
+      "description": "<p><strong>测试版二</strong>：该天赋尚未按照 Crucible 机制更新。</p>"
+    },
+    "Hulg'run Lineage": {
+      "name": "Hulg'run血统 Hulg'run Lineage",
+      "description": "<p>你免疫<strong>睡眠</strong>状态。</p><p>当你<strong>休息</strong>时，你可以与余烬的本质问道自然。若你在坚实地面上休息，则不需要睡眠，并可保持清醒。为了获得休息的收益，你不得进行任何剧烈活动。</p>",
+      "actionname": "活石\nLiving Stone",
+      "actiondesc": "<p>你的身体暂时钙化，获得对物理打击的强化保护。</p><ul><li><p>你获得对<strong>钝击</strong>、<strong>穿刺</strong>和<strong>挥砍</strong>伤害的抗性，数值等于你的<strong>等级 + 1</strong>。</p></li><li><p>你的<strong>步幅</strong>减少 -2。</p></li><li><p>你免疫<strong>倒地</strong>状态，且无法被强制移动。</p></li></ul>",
+      "actioneffectname": "活石"
+    },
+    "Human Lineage": {
+      "name": "人类血统 Human Lineage",
+      "description": "<p>当你执行一个涉及<strong>专注</strong>消耗的<strong>反应</strong>时，你在任何相关检定上获得<strong>+1 恩惠</strong>。</p>",
+      "actionname": "余烬烈焰\nEmber Blaze",
+      "actiondesc": "<p>当你陷入<strong>虚弱 </strong>状态，或在<strong>虚弱</strong>状态下受到伤害时，你可以激发一阵名为 Blaze 的超常肾上腺素爆发。你立刻将你的<strong>动作</strong>池和<strong>专注</strong>池恢复至其最大值。</p>"
+    },
+    "Impassioned Revelry": {
+      "name": "热情狂欢 Impassioned Revelry",
+      "description": "<p><strong>BETA TWO</strong>：此天赋尚未以 Crucible 机制更新。</p>"
+    },
+    "Imperial Ambition": {
+      "name": "帝国野心 Imperial Ambition",
+      "description": "<p><strong>BETA TWO</strong>：该天赋尚未根据 Crucible 机制进行更新。</p>"
+    },
+    "Intrepid Sailor": {
+      "name": "无畏水手 Intrepid Sailor",
+      "description": "<p><strong>BETA TWO</strong>：此天赋尚未根据 Crucible 机制更新。</p>"
+    },
+    "Keth Lineage": {
+      "name": "凯思血统 Keth Lineage",
+      "description": "<p>你在不可预测中如鱼得水，并且擅长把糟糕的局面转变为有利的局面。</p><ul><li><p>如果你使用<strong>技能</strong><strong>动作</strong>失败，则直到你的下个<strong>回合</strong>开始前，你的下一个动作获得<strong>+1 恩惠</strong>的增益。</p></li><li><p>如果你的<strong>攻击</strong><strong>动作</strong>未命中，则直到你的下个<strong>回合</strong>开始前，你的下一个动作获得<strong>+1 恩惠</strong>的增益。</p></li></ul>",
+      "actionname": "猝然撕咬\nSudden Bite",
+      "actiondesc": "<p>在非常或危急的情况下，你可以用你锋利的牙齿发动一次凶狠的攻击。你用布满利齿的伸展下颚凶狠地啃咬，进行一次具有<strong>致命</strong>属性的<strong>天然</strong>武器攻击，造成<strong>穿刺</strong>伤害。</p>"
+    },
+    "Kiska Lineage": {
+      "name": "基斯卡血统 Kiska Lineage",
+      "description": "<p>你毫不费力地融入黑暗之中。当你站在微光或黑暗中时，任何使用<strong>潜行</strong>技能的检定都会获得<strong>+2 恩惠</strong>。</p><p>你本能地知晓<strong>幻象符文</strong>，并可以将其用于施法。</p>",
+      "actionname": "灵巧跃击\nNimble Leap",
+      "actiondesc": "<p>你调动有限的能量储备，做出一次壮观的腾跃。你可以立即<strong>跳跃</strong>，距离最多为你<strong>步幅</strong>的三倍。以这种方式进行的移动极其突然，不会给予<strong>脱离接战</strong>攻击的机会。</p>"
+    },
+    "Kivahr Lineage": {
+      "name": "基瓦赫血统 Kivahr Lineage",
+      "description": "<p>你的身体因巨人的血统而得到强化。你的心智与身体和谐协作，以解决问题并承受肉体上的压力。</p><p>你的<strong>坚韧</strong>和<strong>意志</strong><strong>防御</strong>获得等同于你的<strong>等级</strong>除以4的加值。</p><p></p><p></p><p></p>",
+      "actionname": "规整节律\nRegulated Rhythm",
+      "actiondesc": "<p>你运用超自然能力来调和身心。你进入一种恍惚般的状态，并在你的<strong>回合</strong>开始时获得以下益处。</p><ul><li><p>你获得 +1 <strong>专注</strong>。</p></li><li><p>如果你的士气高于生命值，你转移至多等同于你的<strong>感召 </strong>属性值的数值，减少<strong>士气</strong>并获得<strong>生命值</strong>。</p></li><li><p>如果你的生命值高于士气，你转移至多等同于你的<strong>坚韧 </strong>属性值的数值，减少<strong>生命值</strong>并获得<strong>士气</strong>。</p></li></ul><p>这些转移不会使任何资源超过其最大值。</p>",
+      "actioneffectname": "规整节律"
+    },
+    "Lunar Tattoos": {
+      "name": "月纹身 Lunar Tattoos",
+      "description": "<p><strong>BETA TWO</strong>：该天赋尚未按 Crucible 机制更新。</p>"
+    },
+    "Luxarum Attunement": {
+      "name": "卢克萨鲁姆调谐 Luxarum Attunement",
+      "description": "<p>你的灵魂与@UUID[JournalEntry.emberCosmos00000.JournalEntryPage.pPU6VZV7WFubtcSR]{卢克萨鲁姆}——无尽战争的领域——及其哲学理念<strong>雄心</strong>产生了同调共鸣。</p><p>你获得对<strong>光耀</strong>伤害的抗性，数值等于你同调强度的 2 倍。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Mayis Attunement": {
+      "name": "梅伊丝调谐 Mayis Attunement",
+      "description": "<p>你的灵魂与 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.RkdBtFQk7STvMbV2]{玛伊斯}——风暴之月——及其哲学理念<strong>耐心</strong>产生了同调。</p><p>你获得等于你的同调强度 2 倍的<strong>寒冷</strong>伤害抗性。</p><p><em>在更高的调谐等级时将解锁进一步的效果。</em></p>"
+    },
+    "Mistrust of Magic": {
+      "name": "对魔法的不信任 Mistrust of Magic",
+      "description": "<p><strong>BETA TWO</strong>：此天赋尚未更新为 Crucible 机制。</p>"
+    },
+    "Nir'ae Lineage": {
+      "name": "尼尔艾血统 Nir'ae Lineage",
+      "description": "<p>你知晓<strong>照明符文</strong>，并可将其用于施法。</p><p>你那虹彩般的胎记赋予你非凡的能力，使你能够闪避或凭本能将敌意魔法引开。针对你的法术攻击承受<strong>+2 祸骰</strong>。</p>",
+      "actionname": "先见之映像\nPrescient Reflection",
+      "actiondesc": "<p>当一个直接以你为目标的法术被抵抗且结果为严重失败时，你可以本能地重定向该法术的能量，使其改为消散，或影响法术射程内除其原始施法者之外的另一个目标。</p><p>该替代目标必须改为对该法术进行防御，且该法术的任何效果都改为施加于该目标。如果未选择替代目标，则该法术的能量会无害地消散。</p>"
+    },
+    "Orbis Attunement": {
+      "name": "奥比斯调谐 Orbis Attunement",
+      "description": "<p>你的灵魂与你对 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.zkmWSB32y8Fbc4UL]{奥比斯}——灵魂之月——及其哲学理念<strong>自发性</strong>的同调产生共鸣。</p><p>你获得等于你同调强度 2 倍的<strong>心灵</strong>伤害抗性。</p><p><em>更高的调谐等级将解锁进一步的效果。</em></p>"
+    },
+    "Passionate Trader": {
+      "name": "热情的商人 Passionate Trader",
+      "description": "<p><strong>BETA TWO</strong>：此天赋尚未更新为 Crucible 机制。</p>"
+    },
+    "Preeminent Survivalist": {
+      "name": "卓越求生者 Preeminent Survivalist",
+      "description": "<p>你在<strong>察觉</strong>与<strong>荒野</strong>这两项<strong>技能</strong>上，始终至少视为已受过<strong>训练</strong>。如果你已经受过训练，则此类<strong>技能检定</strong>以<strong>+1 恩惠</strong>进行。</p><p>此外，除非你处于<strong>失能</strong>、<strong>失聪</strong>或<strong>目盲</strong>状态，否则你不会陷入 @Condition[unaware]。</p>"
+    },
+    "Primordis Attunement": {
+      "name": "普里莫迪斯调谐 Primordis Attunement",
+      "description": "<p>你的灵魂与你和 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.16sqn71JsCkghaTt]{普里莫迪斯}——反复无常的巫术国度——及其哲学理念<strong>狡黠</strong>之间的同调产生共鸣。</p><p>你获得对<strong>毒素</strong>伤害的抗性，数值等于你同调强度的 2 倍。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Ragen Attunement": {
+      "name": "拉根调谐 Ragen Attunement",
+      "description": "<p>你的灵魂与 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.LKptgmc56euSOb0G]{拉根}——焦炭之月——产生同调，并与其哲学理念<strong>直率</strong>共鸣。</p><p>你获得等于你同调强度 2 倍的<strong>火元素</strong>伤害抗性。</p><p><em>更高的调谐等级将解锁更多效果。</em></p>"
+    },
+    "Resolute Legacy": {
+      "name": "坚定传承 Resolute Legacy",
+      "description": "<p><strong>测试版二</strong>：该天赋尚未更新为 Crucible 机制。</p>"
+    },
+    "Ritual Cooking": {
+      "name": "仪式烹饪 Ritual Cooking",
+      "description": "<p><strong>测试版二</strong>：该天赋尚未按《Crucible》机制更新。</p>"
+    },
+    "Signara Attunement": {
+      "name": "西格纳拉调谐 Signara Attunement",
+      "description": "<p>你的灵魂与 @UUID[JournalEntry.emberCosmos00000.JournalEntryPage.3OvueRrGcFnwtnmw]{西格纳拉}——“永不满足的好奇”之领域——及其哲学理念<strong>好奇</strong>产生了同调。</p><p>你获得对<strong>虚空</strong>伤害的抗性，数值等于你同调强度的 2 倍。</p><p><em>在更高的调谐等级时，将解锁更多效果。</em></p>"
+    },
+    "Signborn Lineage": {
+      "name": "星兆血统 Signborn Lineage",
+      "description": "<p>除了你的实体肢体外，你还拥有两条虚体手臂。这些手臂不能持用武器、盾牌或其他装备。然而，它们可以与您的常规肢体一同用于快速操纵物品。每<strong>轮</strong>一次，你可以从你的物品栏中装备一件物品，而无需为此花费任何<strong>动作</strong>点数。</p><p>通过使用印记裔特有的语言与生理结构，你将虚体肢体同步融入施法的编织之中，从而毫不费力地施展魔法技艺。你知晓独特的<strong>符文语</strong>屈折，可将其附加到法术上。以符文语强化的法术在施放时需额外花费<strong>+1 英雄气概</strong>，但可减少<strong>-2 动作</strong>的消耗来施展。</p>"
+    },
+    "Soulbound": {
+      "name": "魂缚 Soulbound",
+      "description": "<p>你已经死亡，如今成为了魂缚者，受到一种名为魂印的魔法系缚影响，它阻止你的灵魂依照烬界通常的灵魂循环继续前行。你并非不死生物，并且保留了生前拥有的特征，但你的持续存在将受到额外规则的约束，其后果会随着魂印强度的增长而愈发恶化。</p><p>魂缚共有三个等级，并依序施加以下魂印：“次等”“高等”和“死亡”。每个等级都会施加逐渐更严重的效果。</p><p>你的<strong>疯狂</strong>最大值会降低，因为你更容易受到不死状态那种吞噬心智的影响。</p><ul><li><p><strong>次等魂印：</strong>每级降低2</p></li><li><p><strong>高等魂印</strong>：每级降低4</p></li><li><p><strong>死亡魂印</strong>：每级降低6</p></li></ul><p>你的<strong>士气阈值</strong>与<strong>治疗阈值</strong>防御提高，使你更难被治疗。</p><ul><li><p><strong>次等魂印：</strong>提高2</p></li><li><p><strong>高等魂印</strong>：提高4</p></li><li><p><strong>死亡魂印</strong>：提高6</p></li></ul><p><strong>异界者</strong>、<strong>不死生物</strong>和<strong>畸怪</strong>类型的生物在感知你时进行的<strong>察觉</strong>检定获得恩惠。</p><ul><li><p><strong>次等魂印：</strong>1恩惠</p></li><li><p><strong>高等魂印</strong>：2恩惠，且你在@Condition[invisible]时也会被看见</p></li><li><p><strong>死亡魂印</strong>：3恩惠，且你在@Condition[invisible]时也会被看见</p></li></ul><p>所有以<strong>野兽</strong>类型生物为目标的<strong>技能</strong>动作都会受到祸骰，因为动物天生会对你保持警惕与不信任。</p><ul><li><p><strong>次等魂印：</strong>1祸骰</p></li><li><p><strong>高等魂印</strong>：2祸骰</p></li><li><p><strong>死亡魂印</strong>：3祸骰</p></li></ul><p>对<strong>人型生物</strong>类型生物使用<strong>外交</strong>技能时，会因你可怖的本质而受到祸骰：</p><ul><li><p><strong>次等魂印：</strong>1祸骰</p></li><li><p><strong>高等魂印</strong>：2祸骰</p></li><li><p><strong>死亡魂印</strong>：3祸骰</p></li></ul><p>当你死亡时，你的魂缚等级提高1级，从次等提升为高等，或从高等提升为死亡。如果你在承受<strong>死亡魂印</strong>时死亡，你会变成一个受游戏主持人控制的不死生物。</p>"
+    },
+    "Tactical Planner": {
+      "name": "战术规划师 Tactical Planner",
+      "description": "<p><strong>测试版二</strong>：此天赋尚未根据 Crucible 机制更新。</p>"
+    },
+    "Exceptional Taste": {
+      "name": "非凡品味 Exceptional Taste",
+      "description": "<p><strong>BETA TWO</strong>：此天赋尚未用 Crucible 机制更新。</p>"
+    },
+    "Thornling Lineage": {
+      "name": "荆棘裔血统 Thornling Lineage",
+      "description": "<p>荆芽灵的纤维状生物学结构极其坚韧，提供以下好处：</p><ul><li><p>无论你穿着何种类型的装备，你的<strong>护甲</strong>防御都不会低于 6。</p></li><li><p>来自<strong>坠落</strong>的伤害在应用其他抗性之前减半。</p></li></ul>",
+      "actionname": "刺棘树皮\nThornbark",
+      "actiondesc": "<p>当你成为一次近战攻击的目标时，你可以使带刺的倒钩从身体中突生而出。持续一分钟内，你获得以下增益。</p><ul><li><p>对你造成<strong>命中</strong>或<strong>擦中</strong>的近战攻击会伤及进行报复的攻击者，其受到等同于你<strong>坚韧</strong>属性值的伤害。</p></li><li><p>试图对你进行<strong>擒抱</strong>或<strong>推撞</strong>时会承受<strong>+2 祸骰</strong>。</p></li></ul><p>此动作的效果适用于触发该反应的那次攻击。</p><p><strong>ALPHA ONE</strong>：刺棘树皮的效果尚未完全自动化。</p>",
+      "actioneffectname": "刺棘树皮"
+    },
+    "Undaunted Warrior": {
+      "name": "无畏战士 Undaunted Warrior",
+      "description": "<p>你在面对可怖的敌人时展现出非凡的勇气，并接受过相关训练。对<strong>类型</strong>为<strong>畸怪</strong>的<strong>敌人</strong>进行任何攻击时，你获得<strong>+1 恩惠</strong>。</p>"
+    },
+    "Urban Resourcefulness": {
+      "name": "都市机敏 Urban Resourcefulness",
+      "description": "<p><strong>测试版二</strong>：此天赋尚未根据《Crucible》机制更新。</p>"
+    },
+    "Vrjnhar Lineage": {
+      "name": "Vrjnhar 血统 Vrjnhar Lineage",
+      "description": "<p>当对你进行的一次攻击结果为<strong>掠过</strong>时，你用自己华丽的胡须承受这一击，从而保护自己，使你完全免受原本由掠过一击造成的伤害。</p>",
+      "actionname": "强健耐力\nFormidable Stamina",
+      "actiondesc": "<p>你调动惊人的能量储备，使自己即使到了力竭的地步仍能继续战斗。在一段时间内，每当你耗尽自己的<strong>动作</strong>点池时，你都有 25% 的几率立刻恢复 1 点<strong>动作 </strong>点。</p>",
+      "actioneffectname": "强健耐力"
+    },
+    "Wirrun Lineage": {
+      "name": "维伦血统 Wirrun Lineage",
+      "description": "<p>你免疫极寒的影响。你的视野不会因雾、薄雾、雪或其他大气效果而受阻。</p><p><strong>Alpha One：</strong>此视觉效果尚未自动化。</p>",
+      "actionname": "无情猎手\nImplacable Hunter",
+      "actiondesc": "<p>你将一个你能看见的生物指定为你的猎物。</p><ul><li><p>你在任何与辨认其位置相关的<strong>察觉</strong>或<strong>荒野</strong>检定中获得<strong>+2恩惠</strong>。</p></li><li><p>当你在自己的<strong>回合</strong>中向你的猎物<strong>移动</strong>并靠近时，你在同一<strong>回合</strong>内对你的猎物进行的下一次<strong>攻击检定</strong>获得<strong>+2恩惠</strong>。</p></li></ul>",
+      "actioneffectname": "无情猎手"
+    },
+    "Zeph Lineage": {
+      "name": "泽夫血统 Zeph Lineage",
+      "description": "<p>你知晓<strong>闪电符文</strong>，并能够用它来编织施法。</p><p>泽夫的面具具备有限程度的超自然可塑性。你可以稍微改变你的面具，以便进行日常沟通并表达情绪。当你死亡时，留下的只有你的面具。对于以已死亡生物为目标的法术或魔法效果而言，你的面具视为你的物理遗骸。</p><p>你的面具高深莫测的本质使他人难以看穿你的意图。在社交挑战中，用于洞悉你动机的<strong>察觉</strong>检定承受<strong>+2祸骰</strong>。</p>",
+      "actionname": [
+        "高深莫测的面容\nInscrutable Visage",
+        "狰狞面容\nMenacing Visage",
+        "魅惑容颜\nBeguiling Visage"
+      ],
+      "actiondesc": [
+        "<p>你的面具呈现出高深莫测的表情。</p><ul><li><p>你在所有使用<strong>欺瞒</strong>技能的检定中获得<strong>+2 恩惠</strong>。</p></li><li><p>你的<strong>反射</strong>防御增加 +2。</p></li></ul><p>在任意给定时间，你只能有一种生效中的面具表情。</p>",
+        "<p>你的面具呈现出威吓的表情。</p><ul><li><p>你在所有<strong>威吓</strong>技能的<strong>使用</strong>中获得<strong>+2 恩惠</strong>。</p></li><li><p>你的<strong>坚韧</strong><strong>防御</strong>提高+2。</p></li></ul><p>在任一给定时间，你只能有一种生效中的面具表情。</p>",
+        "<p>你的面具呈现出一个迷人的表情。</p><ul><li><p>你在所有<strong>Persuasion</strong>技能的使用中获得<strong>+2 恩惠</strong>。</p></li><li><p>你的<strong>意志</strong>防御提高 +2。</p></li></ul><p>你在任意时刻只能有一种生效中的面具表情。</p>"
+      ],
+      "actioneffectname": [
+        "高深莫测的面容",
+        "狰狞面容",
+        "魅惑容颜"
+      ]
+    },
+    "Flameguard Militia": {
+      "name": "焰卫民兵 Flameguard Militia",
+      "description": "<p>对抗从莫伊兰土地中涌出并袭击卢梅克家园的不死生物的战斗影响着整个世界。世界各国都派遣有能力的战士和士兵前来协助支援陷入困境的焰卫。你可能从未见过战斗，而是专注于组织防御和训练。然而，更有可能的是，你曾在前线面对无穷无尽的不死生物大军寸步不退，一手持火把，另一手持盾牌。</p><p>你对不同类型的不死生物、它们的弱点，以及如何在战斗中良好应对，具备一些知识。由于你接触过亡灵之力，你很可能也对深渊有着极其有限的察觉。</p>"
+    },
+    "Imperial Conscript": {
+      "name": "帝国征召兵 Imperial Conscript",
+      "description": "<p>造访或居住在塔扬帝国都可能危机四伏，因为他们几乎不在乎被征召者来自何处。你可能曾被强行征召入伍，或曾在军中接受训练后逃脱，作为逃兵横渡海洋；又或者你曾在一场激战后受伤，并因此退役。你具备一名应征兵或士兵所拥有的全部基础知识：如何使用武器、制定战术，以及如何在战场的恐怖中存活下来。你也可能因与一名或多名塔扬驭龙者的短暂接触，而对巨龙有一些有限的了解，例如女皇本人，或其他少数成功与巨龙建立联结的基拉吉骑士之一。</p><p>你对战争有深刻的认识，能够迅速识别后勤与组织上的问题，并能针对各种情况制定策略与计划。此外，你对巨龙也有一定了解，知道不同类型及其特性。</p>"
+    },
+    "Lightsworn": {
+      "name": "光誓者 Lightsworn",
+      "description": "<p>自孩提时代起，卢克萨鲁姆那遥远而闪耀的光便以辉煌的歌声充满了你的灵魂，而你也许曾发誓要揭开它的秘密。你甚至可能在一次罕见却令人目眩的事件中，遇见过一位来自卢克萨鲁姆、被称为提拉斐姆的闪耀存在；那次经历令你心生敬畏，并发誓要直接侍奉他们。你知道，在满足了你的男主人或女主人的愿望，或进一步了解那道光之后，一旦你在这凡世中死去，你必将毫无疑问地在上方的黄金国度中获得永恒的生命作为奖赏。</p><p>你对卢克萨鲁姆的内界、统治那里的提拉斐姆，以及他们的仆从——天界生物——只有有限的知识。这些知识可能会因你自己的察觉或狂热而扭曲，并可能与你在世间发现的真相有所不同。</p>"
+    },
+    "Lunar Empath": {
+      "name": "月之共情者 Lunar Empath",
+      "description": "<p>你与周围的人有着深刻的联系，只需一瞥便能感知一个人的氛围或情绪。你读人的能力如此不可思议，以至于有些人相信你能读出他们内心最深处的想法。你也可能利用自己的能力，变得近似于当地的神秘术士，也许会通过看手相或牌组来为人占卜命运。</p><p>你以共情的方式理解其他凡人，能够直接设身处地为他人着想，并通过他们的眼睛去看世界。你对元素之月也有一些知识，了解它们的周期与轨道会对地表世界产生怎样的效果。</p>"
+    },
+    "Monster Hunter": {
+      "name": "怪物猎人 Monster Hunter",
+      "description": "<p>你或许曾经过着简单的生活，但当黑暗中的怪物突破了你们社群的防御，摧毁了你所珍视的一切时，一切都改变了。如今，你可能怀着燃烧般的狂怒憎恨烬界的畸变体，并在世界各地追猎它们。或者，你也可能从小就接受了如何猎杀怪物的训练，清楚地知道无论它们出现在何处，该如何追踪并消灭它们。</p><p>你是一名熟练的生存专家，常常一连数日甚至数周在荒野中搜索，并且了解许多不同生物和怪物留下的踪迹。与其他人相比，你更容易辨认畸变体，甚至可能还知道它们的一些弱点。</p><p><br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Natural Artisan": {
+      "name": "天生工匠 Natural Artisan",
+      "description": "<p>在已知世界各地，有许多技艺高超、经验丰富的工匠，但若论奉献精神与传承声望，没有谁比阿克图斯高原的阿克图里亚人更负盛名。你花费了许多年学习他们的技艺与传统知识。你知道如何用木材和其他天然材料，如纤维与壤土，手工制作物品，打造出既实用又美观的形制；此外，你还理解建筑施工以及建筑物是如何组装而成的。</p><p>你了解如何以传统方式使用木材与来自大地的天然材料来建造并制作物品。你也对植物生命与自然世界有所了解。</p>"
+    },
+    "Nightwatch": {
+      "name": "夜巡者 Nightwatch",
+      "description": "<p>卡尔梅赞那些庞大而古老的城邦，是凡人建造的山岳；它们一层层向上堆叠而成，形成彼此独立、自给自足且拥有庞大人口的聚居地。它们的大多数层级几乎都无法治理，尤其是越往深处越是如此；只有那些在堤道与小巷间巡行的夜巡者，凭借狂热的奉献，才尚有希望维持和平。你或许曾与夜巡者的成员一同受训，或协助他们一次次深入下层，在此过程中学会如何融入黑暗，并在城市环境中如闪电般移动。</p><p>你明白该如何调查各种离奇事件，例如犯罪案件，或追踪阴谋的线索。你也可能天生具备某种能力，能够从尸体或凡人的遗体中收集信息，并判断他们死于何种原因。</p>"
+    },
+    "Obsidian Antiquary": {
+      "name": "黑曜石古物学者 Obsidian Antiquary",
+      "description": "<p>遥远而沐浴在阳光中的大陆凯西亚，位于极南之地，是一片充满危险奇观与古老秘密的地方。那些穿行于受腐化的黑曜石沙漠、风沙肆虐的深处之人，既勇敢又愚蠢。你或许痴迷于古老而可怖的秘密，以及那些从黑色沙海中发掘出的遗物。你也许曾多年穿越沙漠，寻找答案；或者在远方收集并研究这片沙漠及其秘密。你很可能已经从研究中发现了骇人的真相，并因其效果而在精神上留下创伤。 </p><p>你以极其有限的方式知晓深渊，尽管你很可能用另一个名字称呼它。你能够判定某些古代魔法遗物的性质。你也知晓兰提尔的治疗与辉耀能量，而这种能量似乎与深渊之物的能量相对抗。<br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Primalist Disciple": {
+      "name": "原始信徒弟子 Primalist Disciple",
+      "description": "<p>在已知世界中心的辉核森林里，于那些巨木的深处之下，潜伏着会变形且崇拜自然的原始主义者。你或许曾在森林边缘徘徊过一段时日，甚至还可能遇见过一位原始主义者，向你讲述他们的信念，以及如何以某种方式与动物问道自然。此外，你也可能了解过许多仍统治着世界广阔区域的古老利维坦；凭借你与自然的联系，你比一般凡人更能感知并理解它们。</p><p>你能够在一定程度上理解动物与野兽，并且与自然世界有着与生俱来的联系。此外，你对利维坦也有一些知识。</p><p><br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Scion of Darkness": {
+      "name": "黑暗之裔 Scion of Darkness",
+      "description": "<p>有人说，黑暗不过是光的缺席，但那些人都是傻瓜，而你更清楚。黑暗是一股与其他任何力量一样强力而诱人的力量，而你发现自己被那些没有光亮的地方所吸引。为了寻求理解，你或许接触过召唤邪魔并与之订立契约的方法，以换取知识与力量；你也因此决心在凡世游荡时为其目标效力。你的契约意味着，在你死亡之后，你将被赐予在西格纳拉的黑暗领域中的永恒生命，并能够随心所欲地钻研奥秘，或投身于无尽的争斗与游戏之中。</p><p>你对西格纳拉的内界、统治其幽暗殿堂的戴莫斯，以及他们的仆从——邪魔，所知有限。这些知识可能会被你自己的察觉或扭曲的理解所影响，因此可能与你在世上发现的真相有所不同。</p><p><br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Shadow Walker": {
+      "name": "暗影行者 Shadow Walker",
+      "description": "<p>凡有光与黑暗之处，便有阴影，而自你年幼时起，你就发现自己能无声无息地在树木或建筑之间潜行，如呼吸般自然。你尤其会在黄昏与黎明时感到平静，那暮光令人安心又充满诱惑。在你生命中的某个时刻，你或许曾在阴影中遇见另一个存在——一位神秘的精灵，它以你低声的侍奉为交换，传授你更强大的能力；又或者，你曾发现自己站在一道微光闪烁的传送门前，尽管你苦苦哀求，却始终无法穿过它。尽管如此，你仍相信，待你死后，自己将获准进入暗影之地，并在那里得到永恒的生命作为奖赏。</p><p>你对普里莫迪斯的内域、潜伏于阴影灌丛中的卡西亚，以及他们的仆从——精灵——有着有限的知识。这些知识可能会被你自己的察觉或幻象所扭曲，并可能与你在世间发现的真相有所不同。</p>"
+    },
+    "Shard God Devotee": {
+      "name": "碎片神信徒 Shard God Devotee",
+      "description": "<p>你被那些与其追随者一同行走于世间的碎片诸神的故事深深吸引，一直痴迷于有朝一日成为诸神的侍者。你可能虔诚信教，坚守某位特定神祇的教义与训诫，来自某位遥远碎片女神的问道自然团体或其神殿之一。或者，你也可能只是想直接崇拜某位特定的碎片女神，并亲身见到祂，而你正在这个危险的世界中寻找意义与信仰。</p><p>你的信仰赋予了你关于许多不同神祇、神祇般的存在以及强力实体的知识，以及它们各异宗教实践的知识。</p>"
+    },
+    "Sky Wanderer": {
+      "name": "天际漫游者 Sky Wanderer",
+      "description": "<p>你总是不断前行，去探索遥远的地平线；一种强烈的自由感与无尽天穹充盈着你的灵魂。你是一位技艺非凡的商人，能够毫不在意、毫无忧虑地穿越广袤的距离，并且你对各种物质物品及其价值有着与生俱来的欣赏与理解。你的自由精神或许源自关于瓦兹诺尔的古老传奇神话，以及他们由云与帆构成的飞行城市。</p><p>你对失落的瓦兹诺尔文化所知极其有限。你同样是一位熟练的商人，几乎可以为任何现有的货物或商品讨价还价，而且你对天气有着与生俱来的理解。<br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Star Dreamer": {
+      "name": "星辰逐梦者 Star Dreamer",
+      "description": "<p>你一直痴迷于自己在睡梦中所进入的那些梦境世界。群星之海伸出怀抱将你扭曲包裹，而那些闪耀的星辰本身也轻声低语着奇异的故事，赐予你关于遥远地点、时间与事件的幻象。你甚至可能在这些梦中受到巨人的引导，他们向你展示神秘的预兆或征象，并在周围的空气中描绘出美丽而闪亮的符文。你也许花时间研究过这些梦，并发现那些巨人般的身影很可能是申特残存的远古记忆——这个失落的民族早在数千年前便已走向终结。  </p><p>你的梦境与研究使你对古老的申特文化有所知识，你对夜空中的星辰及其排列模式也有极为出色的了解。你或许还掌握一些预言方面的知识，并且自己也可能拥有有限的预见未来之能。 <br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Sunfire Descendant": {
+      "name": "烈阳后裔 Sunfire Descendant",
+      "description": "<p>你的家族在无数代人之间一直保守着一个漫长而可耻的秘密；你是古代艾迪尔那臭名昭著遗产的后裔。你的家族或许曾侍奉过艾迪尔，或以某种方式属于其文化的一部分，又或者你的祖先曾以某种惊人的方式从大破裂的事件中幸存下来。如今，你仍掌握着艾迪尔烈阳帝国在其曾统治余烬世界时留下的古老秘密，并且能够辨认出它覆灭后遗留下来的废墟与遗物。你自己或许持有一件家族传家宝，或曾被传授一句古老的秘语。</p><p>你对失落的艾迪尔文化有有限的知识，能够判断某些古代魔法遗物的性质，并且极其擅长保守秘密与周旋于阴谋之中。</p><p><br class=\"Apple-interchange-newline\" /></p>"
+    },
+    "Underworld Mechanic": {
+      "name": "冥界机修师 Underworld Mechanic",
+      "description": "<p>你曾在世界上最伟大的谜团之一——被称为“天球”的巨大城市构造——的底腹区中生存或生活过一段时间。你学会了如何修理、维护和制造各种机器、装置与机械结构。其中包括构装体，也包括能够产生动力或完成近似魔法般惊人工程壮举的设备。不幸的是，你也可能曾过着犯罪生活，为了在曾被你称为家的那片受帮派政治侵扰的昏暗黑暗中求生而不择手段，并在此过程中学会了一些更值得怀疑的技能。<br /><br />你对许多不同类型的机器都有知识，而且比其他凡人更容易修理、修复或维护它们。此外，你还能识别陷阱，并天生具备在危险处境中保护自己的能力。</p>"
+    }
+  }
+}

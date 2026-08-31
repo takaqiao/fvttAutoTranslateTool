@@ -1,0 +1,105 @@
+================================================================================
+FotRP Cross-File NPC Bilingual Audit — Wave 8 v5
+================================================================================
+For each interpunct name X·Y, check if its first-mention in each
+file has an inline English gloss. If canonical English is known
+(found elsewhere), suggest adding it.
+
+
+## fvtt-JournalEntry-back-matter-1ylYqjGKvevX3BgC.json
+   1 name(s) lacking inline bilingual on first mention:
+     - 阿达纳·乌马尔勋爵 (×1 in file)
+       page: '分道扬镳 PARTING WAYS'
+       Canonical EN gloss known? YES, canonical: (Lord Aldanar Unmar)
+       context: "种种事迹。飞田卡索大将军主持建造新的海堤——并与他往日的恋人阿达纳·乌马尔勋爵合作——以及一系列庞大的魔法格斗机器，用以保护过峡海岸线免遭未来任何怪兽袭击。奈燕妃女皇希望队伍常来造访，便在过峡王宫中"
+
+## fvtt-JournalEntry-back-matter-XLDMbpumIxhSEWd4.json
+   1 name(s) lacking inline bilingual on first mention:
+     - 索妮里·穆纳尔 (×1 in file)
+       page: '艺术与娱乐 ARTS AND ENTERTAINMENT'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "—一家名为「冰冻流星」、需要数月前预约且令人印象深刻的、由 索妮里·穆纳尔 （守序邪恶 女性 轮回者 术士 9）监督的低调精品店——严密保守着研发此类魔法服饰的方法。 最后是梅花会，一家出版社"
+
+## fvtt-JournalEntry-chapter-1-RzfDjQH8KPxPJ2kK.json
+   4 name(s) lacking inline bilingual on first mention:
+     - 阿玛拉·李的便笺 (×1 in file)
+       page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: " DC。玩家角色也可以选择放弃本轮影响力，无任何惩罚。  阿玛拉·李的便笺： 如果玩家角色以冒险故事打动了阿玛拉·李，她会赠予队伍一封封缄好的感谢便笺。便笺文字中加密藏有关于每位赞助人的信息。玩"
+     - 以及司仪多贺台·艾米 (×1 in file)
+       page: '表演秀展示 EXHIBITION SHOWCASE'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "、赞助人的至亲好友或随侍、奈燕妃女皇、郝金、大掌柜命·玛丽，以及司仪多贺台·艾米（详见侧边栏）。 所有队伍完成各自的表演秀比赛后，他们将沿着竞技场旁那条林荫广场行进至大掌柜命所站的讲台前。在那里，每"
+     - 玛莱卡·陶 (×10 in file)
+       page: '潜在赞助人 POTENTIAL PATRONS'
+       Canonical EN gloss known? YES, canonical: (Malaika Tao)
+       context: "报价的金钱、好处或礼物。阈值是累计的：例如玩家在竞标开始时对玛莱卡·陶累积了4点影响力，则她为玩家角色提供「影响力1」与「影响力4」两栏所列的所有金钱、物品与福利（若被选中）。除非角色使用「"
+     - 冒险队长阿玛拉·李躬身致意 (×1 in file)
+       page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "在画廊一角搭建的小舞台。请将以下内容朗读或意译给玩家。  冒险队长阿玛拉·李躬身致意，说道：「开拓者协会、赤凰郝金的尊贵宾客们，希望诸位方才欣赏过《开拓者编年史》中的精选片段。我们极少有机会能见到像各位这"
+
+## fvtt-JournalEntry-chapter-1-xClvGtftweJDu3vX.json
+   7 name(s) lacking inline bilingual on first mention:
+     - 哈尔斯丁·刺痛 (×2 in file)
+       page: '城内会面 SHAKING HANDS IN TOWN'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "缓缓漂去，她说会与玩家角色「彼岸再见」。  盛阳漫步： 哈尔斯丁·刺痛 （中立善良 男性 猫族 野兽歌手）演奏的马头琴声从一处宽阔的市场飘来，那里聚集着一大群人围观一只巨大的钢灰色洛克鸟。那"
+     - 无境·蜂鸟 (×2 in file)
+       page: '城内会面 SHAKING HANDS IN TOWN'
+       Canonical EN gloss known? YES, canonical: (Boundless Hummingbird)
+       context: "语者： 如果有人去购买药水、炼金试剂等物品，他们一定会撞见 无境·蜂鸟 （中立 女性 豺狼人 承流学会化形者），她正在与一位商人就一大批朱砂激烈地砍价。当被问及朱砂的用途时，蜂鸟说风语者通常"
+     - 马菲卡·阿尤瓦里教授 (×1 in file)
+       page: 'E4. 不幸的实地考察 E4. AN UNFORTUNATE FIELD TRIP （中等 18）'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "的法术发出嘶嘶声后归于无形。她瘫倒在地，唯一仍站立的身影——马菲卡·阿尤瓦里教授——抬起自己的法杖，脸上是绝望的神情。  队伍在过峡撞见无境·蜂鸟时可能已了解到，风语者尝试使用一种改良过的传送仪式跨"
+     - 雅利卡·穆兰德兹 (×3 in file)
+       page: '城内会面 SHAKING HANDS IN TOWN'
+       Canonical EN gloss known? YES, canonical: (Yarrika Mulandez)
+       context: "上。当被问到为什么不为前方艰难的旅程做准备而是这般闲适时， 雅利卡·穆兰德兹 （守序善良 女性 人类 唤魂师）笑着说着「轻松面对、永远适得其所」之类的话。她喝完茶，注意到杯中漂着一片单独的茶叶。她"
+     - 乌尔纳克·遗风 (×3 in file)
+       page: '缺失的部分 MISSING PIECES'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "者授权的代表。如果角色完全没能获得任一来源，你可以告诉他们：乌尔纳克·遗风与他剩余的队员最终降落在凯芬湾，与刺骨蔷薇会合，协助他们进行打开真慧领域之门的仪式并在战斗中击败她。这授予了乌尔纳克仲裁"
+     - 马菲卡·阿尤瓦里 (×1 in file)
+       page: 'E4. 不幸的实地考察 E4. AN UNFORTUNATE FIELD TRIP （中等 18）'
+       Canonical EN gloss known? YES, canonical: (Mafika Ayuwari)
+       context: "的法术发出嘶嘶声后归于无形。她瘫倒在地，唯一仍站立的身影——马菲卡·阿尤瓦里教授——抬起自己的法杖，脸上是绝望的神情。  队伍在过峡撞见无境·蜂鸟时可能已了解到，风语者尝试使用一种改良过的传送仪"
+     - 阿基拉·暴风踵 (×1 in file)
+       page: 'E4. 不幸的实地考察 E4. AN UNFORTUNATE FIELD TRIP （中等 18）'
+       Canonical EN gloss known? YES, canonical: (Akila Stormheel)
+       context: "一方而身受重伤，让自己的学生有机会逃出。教授虽然侥幸生还，但阿基拉·暴风踵不得不接任为队伍的代理领队，直到阿尤瓦里教授回到玛甘比学院接受更专门的治疗。该队最终也会抵达铁山，但她（以及她的同窗）永"
+
+## fvtt-JournalEntry-chapter-2-FTJT1CRdfjQzy3Ek.json
+   5 name(s) lacking inline bilingual on first mention:
+     - 库比亚·骨柱 (×3 in file)
+       page: '在比赛上下注 BETTING ON MATCHES'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "C 35 外交检定来收集情报。最容易找到的高额押注经纪人是 库比亚·骨柱 （守序邪恶 女性 剪影人 12 级下注经纪人），她利用过峡地市较为宽松的监管，依自己的喜好经营自己的赌厅。库比亚在距离"
+     - 下注经纪人库比亚·骨柱 (×2 in file)
+       page: '第 7 天 DAY 7'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "一天——既无武道会对决，也无表演赛安排。然而，他们仍受到无良下注经纪人库比亚·骨柱的邀请，今晚出席一场在私人场所举行的特别「无规则」比赛。 如果玩家角色处于败方组中，那么他们今日的安排是败方组的最终轮"
+     - 普拉万·马吉纳普蒂 (×1 in file)
+       page: '八臂调和 ARMS OF BALANCE'
+       Canonical EN gloss known? YES, canonical: (Pravan Majinapti)
+       context: "类型。武僧无法在 1d4 轮内再次使用此能力。 冰川之息 （普拉万·马吉纳普蒂；寒冷）普拉万对 30 尺锥形吹出寒风，造成 10d6 寒冷伤害。区域内的生物会被结冰包围，必须尝试一次 DC 33 反"
+     - 兰雅·什瓦纳特丝 (×1 in file)
+       page: '八臂调和 ARMS OF BALANCE'
+       Canonical EN gloss known? YES, canonical: (Ranya Shibhatesh)
+       context: "心 2。 大失败 生物受到双倍伤害并恶心 3。 电光牵引 （兰雅·什瓦纳特丝；电击）兰雅射出四道闪电，使生物带上电磁极性并被拉向自己。从兰雅所在格的四个基本方向各延伸出一条 60 尺直线电流，造成"
+     - 吉瓦蒂·罗瓦特 (×1 in file)
+       page: '八臂调和 ARMS OF BALANCE'
+       Canonical EN gloss known? YES, canonical: (Jivati Rovat)
+       context: "伤害，发光 1 分钟，并被拉向兰雅 30 尺。 熔岩之握 （吉瓦蒂·罗瓦特；火焰）吉瓦蒂的吐息会在 10 尺内每个生物的灵魂上点起火焰，造成 8d6 火焰伤害。区域内每个生物都必须尝试一次 DC"
+
+## fvtt-JournalEntry-chapter-3-SPXqld4nww21Orrg.json
+   1 name(s) lacking inline bilingual on first mention:
+     - 哈尔斯丁·刺痛 (×1 in file)
+       page: '第三章：魔加鲁之怒 CHAPTER 3: RAGE OF MOGARU'
+       Canonical EN gloss known? NO canonical English found in corpus
+       context: "的吐息构成了一场噩梦，破水而出，朝着城市方向砸去。盛阳漫步的哈尔斯丁·刺痛从场边惊恐地大喊：「是魔加鲁，那位终王！」他这一声尖叫的最后几个字被东边一阵不可思议的尖响淹没——那是一把弓擦过弦的声音"
+
+
+## TOTAL: 19 (name, file) pairs lacking local first-mention bilingual
+## Canonical glosses found in corpus: 21

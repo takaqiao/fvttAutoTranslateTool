@@ -1,0 +1,439 @@
+{
+ "unit": "ST-I + ST-U",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-I.cn.json ; C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-U.cn.json",
+ "chars_cn": 9598,
+ "chars_en": 15050,
+ "summary": "ST-I: all 34 items translated (14 weapons, 15 agendas, 5 talents) — names T-BILINGUAL \"中文<one ASCII space>English\", descriptions T-PLAIN, weaponClass mapped to lang/cn.json values (手枪/步枪/近战/肉搏/远程/重型), the 15 agenda `notes` \"[object Object]\" artifacts copied verbatim. None of the six .toUpperCase()-compared talent names (PACK MULE/TAKE CONTROL/NERVES OF STEEL/TOUGH/HARDENED/STOIC) occurs in this unit, so nothing had to be frozen there; no item name matches any of the three ' RPG ' substring tests in English either, so the ammo-weight leg cannot be broken. ST-U: Adventure name and the \"Alien Evolved Starter Set\" Scene kept byte-exact (starterset.adventurePackName init.js:9 / sceneToActivate init.js:12), the three register folders (Alien Tables / Alien Creature Tables / Alien Mother Tables) kept English, \"Alien Sub-Tables\" translated to 异形子表 byte-identical to the shipped system pack; 13 remaining folders, 7 scene names, 34 note labels on the two Hadley's Hope levels, 4 regions + 4 region behaviors, and the 18 The-Art-of-Alien image-only page names all translated. Description markup is byte-parity on every tag and every class/style/href/src/height/width attribute; both `<span class=\"basesymbol\">  </span>` occurrences copied verbatim including the U+0020+U+00A0 payload. Cross-checked against the two peer files that landed while I worked (ST-A-CAST.cn.json, ST-A-CRE.cn.json): all five PC surnames and all 11 shared embedded item names came out byte-identical without coordination.",
+ "frozen_kept": [
+  "Alien Evolved Starter Set  (Adventure `name` — starterset.adventurePackName, modules/alien-evolved-starterset/module/init.js:9; unguarded .sheet deref at :115)",
+  "Alien Evolved Starter Set  (Scene `name` — starterset.sceneToActivate, init.js:12; unguarded .activate() at :119/:151)",
+  "Alien Tables  (folder — systems/alienrpg/module/apps/init.mjs:49 negative guard on first-run auto-import)",
+  "Alien Creature Tables  (folder — rollTableData.mjs:7, unguarded folder.contents; creature sheet would render blank)",
+  "Alien Mother Tables  (folder — rollTableData.mjs:24, same failure mode)",
+  "A / B / C / D  (four map-letter note labels on both Hadley's Hope levels — pure map keys, left as-is)",
+  "[object Object]  (the `notes` field of all 15 agenda items — upstream serialisation artifact, copied verbatim exactly as phase2 SYS-I1.cn.json does)",
+  "Armat / Watatsumi / Rexim / Norcomm / USCMC / UPP / LED  (T-LATIN: manufacturers, service acronyms — no Chinese precedent in glossary_alien.json, kept Latin rather than invented)",
+  "ToM  (scene name prefix — expands to \"Theatre of the Mind\" per the STARTER SET - HOW TO USE THIS MODULE journal; kept as the abbreviation, only \"- Meeting Room\" translated)",
+  "HH  (region-name prefix for Hadley's Hope — GM-facing internal region labels)",
+  "NPC / PC  (folder names \"NPC's\"/\"PC's\" — glossary_alien.json maps NPCs->NPC; peers' ST-J03.cn.html already writes \"PC 移动\"/\"NPC 移动\")"
+ ],
+ "lock_lookups": [
+  {
+   "english": "Armor piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "full auto",
+   "lang_key": "ALIENRPG.FullAuto",
+   "used": "全自动"
+  },
+  {
+   "english": "Armor doubled.",
+   "lang_key": "ALIENRPG.ArmorDoubled",
+   "used": "护甲加倍"
+  },
+  {
+   "english": "COMMAND",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "push / pushing",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "quick action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "take cover",
+   "lang_key": "ALIENRPG.seekcover",
+   "used": "掩蔽"
+  },
+  {
+   "english": "Power (consumable)",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Melee (weaponClass of Scalpel)",
+   "lang_key": "ALIENRPG.WepTypeMelee",
+   "used": "肉搏"
+  },
+  {
+   "english": "Ranged (weaponClass of M40 HEDP Grenade)",
+   "lang_key": "ALIENRPG.WepTypeRanged",
+   "used": "远程"
+  },
+  {
+   "english": "Close Combat (weaponClass of 5 weapons)",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Token (region behavior \"Teleport Token\")",
+   "lang_key": "ALIENRPG.NoToken / ALIENRPG.DefProto",
+   "used": "指示物"
+  },
+  {
+   "english": "broken",
+   "lang_key": "glossary_alien.json Broken",
+   "used": "濒死"
+  },
+  {
+   "english": "full action",
+   "lang_key": "cross-unit: pages/ST-J03.cn.html (peer, already delivered)",
+   "used": "完整动作"
+  },
+  {
+   "english": "Alien Sub-Tables",
+   "lang_key": "cross-pack: 1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json folders",
+   "used": "异形子表 (byte-identical to the shipped system pack)"
+  },
+  {
+   "english": "Alien Evolved",
+   "lang_key": "cross-pack: system pack MU/TH/ER page heading 欢迎来到异形进化版",
+   "used": "异形进化版"
+  },
+  {
+   "english": "Mother (in \"Alien RPG Mother Aids\")",
+   "lang_key": "cross-pack: phase2 SYS-U1.cn.json macro 异形 - 在选定的老妈表格上投骰 V10",
+   "used": "老妈  → folder = 异形RPG老妈辅助工具"
+  },
+  {
+   "english": "HIRSCH",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json relationshipOne/Two (verified byte-equal)",
+   "used": "赫希"
+  },
+  {
+   "english": "HOLROYD",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "霍尔罗伊德"
+  },
+  {
+   "english": "MACWHIRR",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "麦克惠尔"
+  },
+  {
+   "english": "SIGG",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "西格"
+  },
+  {
+   "english": "SINGLETON",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "辛格尔顿"
+  },
+  {
+   "english": "Wes Osterman",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "韦斯·奥斯特曼"
+  },
+  {
+   "english": "Theodora Komiskey",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "西奥多拉·科米斯基"
+  },
+  {
+   "english": "Personal Data Transmitter",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "个人数据发射器"
+  },
+  {
+   "english": "science officer",
+   "lang_key": "cross-unit: ST-A-CAST.cn.json (verified byte-equal)",
+   "used": "科学官"
+  },
+  {
+   "english": "Hadley's Hope",
+   "lang_key": "PROJECT.md §1.4 + ST-A-CAST.cn.json",
+   "used": "哈德利的希望"
+  },
+  {
+   "english": "Weyland-Yutani",
+   "lang_key": "PROJECT.md §1.4 + ST-A-CAST.cn.json",
+   "used": "韦兰德-汤谷公司 (office = 韦兰德-汤谷办公室)"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Sterile Lab",
+   "lang_key": "ST-U scene notes == Map Pins page name (ST-J11) == Hope's Last Day <h3> (ST-J07)",
+   "used": "无菌实验室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Storage",
+   "lang_key": "ST-U notes == Map Pins page (ST-J12) == HLD <h3> \"Storage Rooms\"",
+   "used": "储藏室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Geolab West",
+   "lang_key": "ST-U notes == Map Pins page (ST-J13) == HLD <h3> (ST-J07)",
+   "used": "西地质实验室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Geolab East",
+   "lang_key": "ST-U notes == Map Pins page (ST-J19) == HLD <h3> (ST-J07)",
+   "used": "东地质实验室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Survey Office",
+   "lang_key": "ST-U notes == Map Pins page (ST-J15) == HLD <h3> (ST-J07)",
+   "used": "勘测办公室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Weyland-Yutani Office",
+   "lang_key": "ST-U notes == Map Pins page (ST-J16) == HLD <h3> (ST-J07)",
+   "used": "韦兰德-汤谷办公室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Asset/Claims Office",
+   "lang_key": "ST-U notes == Map Pins page (ST-J17) == HLD <h3> (ST-J07)",
+   "used": "资产/矿权办公室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Assistant Manager(s) Office",
+   "lang_key": "ST-U notes \"Assistant Managers Office\" == Map Pins page \"Assistant Manager Office\" (ST-J18) == HLD <h3> \"Assistant Manager Office\" — three spellings upstream, ONE Chinese",
+   "used": "助理主管办公室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Geological Manager(s) Office",
+   "lang_key": "ST-U notes/Map Pins page \"Geological Managers Office\" (ST-J20) vs HLD <h3> \"Geological Manager Office\" — ONE Chinese",
+   "used": "地质主管办公室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Operations",
+   "lang_key": "ST-U notes == Map Pins page (ST-J21) == HLD <h3> (ST-J08)",
+   "used": "指挥中心  (also used in the HIRSCH-ACT2 / MACWHIRR-ACT2 agenda text)"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Medlab",
+   "lang_key": "ST-U notes == Map Pins page (ST-J22) == HLD <h3> (ST-J08); also in SIGG-ACT2 / SINGLETON-ACT2 agendas",
+   "used": "医疗实验室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Stasis Room",
+   "lang_key": "ST-U notes == Map Pins page (ST-J23) == HLD <h3> (ST-J08)",
+   "used": "休眠室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Surgery Room",
+   "lang_key": "ST-U notes == Map Pins page (ST-J24) == HLD <h3> (ST-J08)",
+   "used": "手术室"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Morgue",
+   "lang_key": "ST-U notes == Map Pins page (ST-J25) == HLD <h3> (ST-J08)",
+   "used": "停尸间"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Life Support/Power",
+   "lang_key": "ST-U notes == Map Pins page (ST-J26) == HLD <h3> (ST-J08)",
+   "used": "生命维持/电力"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Station Maintenance Center",
+   "lang_key": "ST-U notes == Map Pins page (ST-J27) == HLD <h3> (ST-J08)",
+   "used": "站点维护中心"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Stairs (L1) / Stairway (L2) / Elevator",
+   "lang_key": "both note spellings point at Map Pins page \"Stairway & Elevator\" (ST-J14) == HLD <h3> \"Stairway & Elevator\"",
+   "used": "楼梯 / 楼梯 / 电梯  → the ST-J14 page name should be 楼梯与电梯"
+  },
+  {
+   "english": "ROOM-LABEL CHAIN — Airlock / WC / Cold Storage / Medlab Office / Skyway to Casino",
+   "lang_key": "ST-U scene notes only (no Map Pins page); Skyway wording is in the Tannen's Casino text of ST-J26",
+   "used": "气闸 / 卫生间 / 冷藏室 / 医疗实验室办公室 / 通往赌场的天桥"
+  },
+  {
+   "english": "Tannen's Casino",
+   "lang_key": "ST-U scene name; the string also occurs in ST-J07 and ST-J26 prose",
+   "used": "坦嫩的赌场"
+  },
+  {
+   "english": "South Wing / level 1 / level 2",
+   "lang_key": "used inside my agenda text; ST-J07/J08 prose must match",
+   "used": "南翼 / 一层 / 二层"
+  },
+  {
+   "english": "Hope's Last Day",
+   "lang_key": "ST-U folder names; also the journal name (unowned, see open_issues)",
+   "used": "希望的最后一日"
+  },
+  {
+   "english": "Alien RPG Mother Aids / ToM - Meeting Room / Alien Evolved Starter Set Rules / Weapons / Talents (Career) / Hope's Last Day - Personal Agendas",
+   "lang_key": "cross-unit: all six folder/scene names are quoted in ST-J01 (STARTER SET - HOW TO USE THIS MODULE) prose",
+   "used": "异形RPG老妈辅助工具 / ToM - 会议室 / 异形进化版新手包规则 / 武器 / 职业天赋 / 希望的最后一日 - 个人任务"
+  },
+  {
+   "english": "11 ST-I item names are explicit {Label} targets of @UUID[Item.<id>]{...} links in the corerules pack",
+   "lang_key": "PROJECT.md §3.6 — .357 Magnum Revolver, Armat M41A Pulse Rifle, Armat Model 37A2 12 Gauge Pump Action, Combat Knife, Cutting Torch, Fire Axe, M240 Incinerator Unit, M40 HEDP Grenade, M4A3 Service Pistol, Seismic Survey Charge, Watatsumi DV-303 Bolt Gun",
+   "used": "Phase 5 must copy my exact bilingual names into those labels"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Overkill (talent)",
+   "proposed": "过度杀戮",
+   "why": "No entry in glossary_alien.json and the 一级源 connected translation covers only ch.1-2 (no talents). 发狂 is already taken by BERSERK on the panic table, so a berserk-flavoured word was unavailable. 过度杀戮 reads as a named state, which is what the rules text needs ('go into overkill' / 'While in overkill'). Peer ST-A-CAST.cn.json arrived at the identical string independently."
+  },
+  {
+   "en": "Reckless (talent)",
+   "proposed": "鲁莽",
+   "why": "No glossary entry. Same word is needed in the SIGG-ACT1 agenda ('reckless actions'), so one rendering covers both. Peer ST-A-CAST.cn.json matches."
+  },
+  {
+   "en": "Resilient (talent)",
+   "proposed": "坚韧",
+   "why": "No glossary entry. Deliberately NOT 抗打击/强韧, to leave room for the T-FROZEN corerules talents TOUGH and HARDENED which stay English. Peer ST-A-CAST.cn.json matches."
+  },
+  {
+   "en": "Field Commander (talent)",
+   "proposed": "战地指挥官",
+   "why": "No glossary entry; built on the locked skill name 指挥 (ALIENRPG.Skillcommand). Peer ST-A-CAST.cn.json matches."
+  },
+  {
+   "en": "Xenomorphology",
+   "proposed": "异形生物学",
+   "why": "Already in glossary_alien.json; recorded here only because the peer actor unit ships the same embedded item and both must stay in step."
+  },
+  {
+   "en": "Explosive (weapon trait)",
+   "proposed": "爆炸性",
+   "why": "No lang key and no glossary entry. Appears as a bare trait tag on M40 HEDP Grenade and Seismic Survey Charge, so it needs an adjective-shaped form that can sit in a comma list next to 一次性."
+  },
+  {
+   "en": "Single Use / Single-shot (weapon traits)",
+   "proposed": "一次性 / 单发",
+   "why": "No lang key, no glossary entry. Two different traits that must not collapse into one word — Single Use = the item is consumed, Single-shot = one round before reload."
+  },
+  {
+   "en": "Fire Intensity",
+   "proposed": "火焰强度",
+   "why": "No lang key (ALIENRPG.ArmorVsFire=对火护甲 is the only fire term shipped). Needed three times in the M240 description."
+  },
+  {
+   "en": "Operations (the Hadley's Hope room)",
+   "proposed": "指挥中心",
+   "why": "Room name, chosen from the Map Pins ST-J21 description: 'the nerve center of the colony, monitoring vital functions and security'. Load-bearing: it must be byte-identical across the scene note, the Map Pins page name and the HLD <h3>, and it also appears in two of my agenda texts."
+  },
+  {
+   "en": "Operations Manager (Al Simpson)",
+   "proposed": "运营主管",
+   "why": "Deliberately NOT reusing 指挥中心's root — the room is a control room, the title is administrative. Needed in MACWHIRR-ACT2; Simpson is an NPC with no actor document so no unit owns him."
+  },
+  {
+   "en": "Miranda Reynolds / Al Simpson",
+   "proposed": "米兰达·雷诺兹 / 阿尔·辛普森",
+   "why": "Both are named in my agenda text and in Hope's Last Day prose but neither has an Actor document, so ST-A-CAST does not own them. Standard Xinhua transliterations; flagged so ST-J07..J10 use the same."
+  },
+  {
+   "en": "Tannen's Casino",
+   "proposed": "坦嫩的赌场",
+   "why": "Scene name; also in ST-J07 and ST-J26 prose. 的 kept to parallel the owner-decided 哈德利的希望 and 希望的最后一日, so all three possessives in this adventure read the same way."
+  },
+  {
+   "en": "Hope's Last Day",
+   "proposed": "希望的最后一日",
+   "why": "The scenario title — two folder names in my unit, plus the journal name that no unit owns. Puns on Hadley's Hope, so 希望 must be the same word used in 哈德利的希望."
+  },
+  {
+   "en": "Medic! (art page)",
+   "proposed": "医疗兵！",
+   "why": "DELIBERATE SPLIT from glossary_alien.json Medic=医生. The image (stridb.webp) is a battlefield casualty being treated under fire; the page title is the shout, not the career. If a term-unifier later rewrites it to 医生！ that is a regression, not a fix."
+  },
+  {
+   "en": "Loader (art page)",
+   "proposed": "动力装载机",
+   "why": "Verified by opening the image (lastare.webp): it is the P-5000 Power Loader exosuit, not a cargo loader."
+  },
+  {
+   "en": "Armat / Watatsumi / Rexim / Norcomm",
+   "proposed": "(kept Latin)",
+   "why": "Four manufacturers with no Chinese in any of the seven priority sources. Weyland-Yutani is translated because it has a settled name; inventing 阿玛特/绵津见 would be creating terms, so I kept them Latin (T-LATIN) — reversible if the Alien: Isolation official zh-CN corpus (priority 3) is ever queried for them."
+  },
+  {
+   "en": "weaponClass vocabulary",
+   "proposed": "手枪 / 步枪 / 重型 (Pistol / Rifle / Heavy)",
+   "why": "Three of the six weaponClass values have no lang key; the other three (Close Combat/Melee/Ranged) were taken byte-exact from lang/cn.json. The field is free text on the item sheet and is only ever compared against the literal \"RPG\", which none of these is."
+  },
+  {
+   "en": "Seismic Survey Charge / Bolt Gun / HEDP",
+   "proposed": "地震勘探炸药 / 气矢枪(existing) / 双用途高爆",
+   "why": "地震勘探 is the standard Chinese for seismic survey; HEDP spelled out because the acronym carries no meaning in Chinese. Peer ST-A-CAST.cn.json produced 地震勘探炸药 independently."
+  }
+ ],
+ "open_issues": [
+  "SHAPE CHANGE the controller must handle: index.json emits `image_only_pages` as {journalName: [pageName, ...]} — a LIST. I emitted {journalName: {enPageName: cnPageName}} — a DICT — because a positional list of 18 Chinese strings silently mis-assigns if anything reorders, and every other payload in this pack is already an english-keyed map. If the collector expects a list it will fail loudly rather than scramble, which is the intended failure mode; conversion is one dict-comprehension.",
+  "Scene names and the 18 art page names are delivered as PLAIN Chinese with no bilingual English tail. PROJECT.md §3.4 scopes T-BILINGUAL to 怪物/装备/天赋/行星/表格 and scenes are not on that list, and the art captions (Jump, Climb, Skills, Gear) are common nouns, not 专有名词. But 4-常用脚本/qa/scan_missing_bilingual_tail.py puts BOTH `scenes` and `pages` in its 应双语桶, so that script will report 6 scene names and 18 page names. Deliberate, not an oversight — if the controller wants tails it is a one-line change in each of my two maps. (`regions` and `behaviors` are in that script's 应裸中文桶, and I did leave those bare.)",
+  "COVERAGE GAP in the wave, outside my unit: nothing in index.json owns the JournalEntry names or the non-image page names. Untranslated by anyone today: journal \"Map Pins\" + its 17 page names, journal \"Hope's Last Day\" + its page, journal \"Starter Set Rules\" + its page, journal \"The Art of Alien - Starter Set\", and the page \"STARTER SET - HOW TO USE THIS MODULE Text\". The 17 Map Pins page names are exactly the room-label chain I list in lock_lookups, so they cannot be skipped without breaking the pin↔page match.",
+  "The welcome journal name \"STARTER SET - HOW TO USE THIS MODULE\" is T-FROZEN with plain ASCII U+0020 spaces (init.js:11), unlike the corerules twin which uses six U+00A0. I did not touch it — it is not in my payload — but whoever ends up owning journal names must not normalise either one.",
+  "Three upstream spelling mismatches inside the room-label chain, resolved to ONE Chinese each: scene note \"Assistant Managers Office\" vs Map Pins page / HLD <h3> \"Assistant Manager Office\" -> 助理主管办公室; scene note + Map Pins page \"Geological Managers Office\" vs HLD <h3> \"Geological Manager Office\" -> 地质主管办公室; scene notes \"Stairs\" (L1) and \"Stairway\" (L2) both -> 楼梯, both pinning the single page \"Stairway & Elevator\" (suggest 楼梯与电梯).",
+  "Two different folders share the English name \"Alien Evolved\" (an Item folder and an Actor folder). Babele's folders block is name-keyed, so my single value 异形进化版 necessarily renames both. Correct here, but worth knowing it is not a 1:1 mapping.",
+  "The folder \"Alien Evolved Starter Set\" (Scene folder) IS translated (异形进化版新手包) while the identically-named Adventure and Scene are frozen English. Verified safe: starterset's live import graph is only init.js / update.js / ImportSelectedAssets.js — migratefolders.js (which does contain game.folders.getName) is not imported by anything, and update.js's updateAssets array is empty in 1.0.2.",
+  "\"NPC's\" -> \"NPC\" and \"PC's\" -> \"PC\" carry no CJK, so any \"untranslated\" heuristic will flag them. Deliberate: glossary_alien.json maps NPCs->NPC and peer ST-J03.cn.html already writes \"PC 移动\"/\"NPC 移动\".",
+  "Phase 5 inheritance: 11 of my 34 item names are the explicit {Label} of an @UUID[Item.<id>]{...} link inside the corerules pack (listed in lock_lookups). Translating the item name does NOT update those labels — they are hard sync points across two git repos, per PROJECT.md §3.6."
+ ],
+ "self_gate": [
+  {
+   "check": "T-FROZEN item names — every ST-I key .upper()'d and matched against DO-NOT-TRANSLATE.json sections.item_names (PACK MULE / TAKE CONTROL / NERVES OF STEEL / TOUGH / HARDENED / STOIC)",
+   "result": "PASS — zero hits. None of the 34 items is one of the six, so no name in this unit feeds a .toUpperCase() comparison and no bilingual tail can break a stat."
+  },
+  {
+   "check": "name_substring_tests — for each item, does the English satisfy includes(' RPG ') / startsWith('RPG') / endsWith('RPG'), and does the Chinese still satisfy it",
+   "result": "PASS — no ST-I name matches any of the three tests in English, so the 0.5->0.25 kg ammo-weight leg is untouchable from this unit. (The bilingual tail would have preserved it anyway.)"
+  },
+  {
+   "check": "ST-U Adventure `name` byte-equal to DO-NOT-TRANSLATE.json name_lookups[starterset.adventurePackName].string",
+   "result": "PASS — 'Alien Evolved Starter Set', compared programmatically against the register, not typed by hand."
+  },
+  {
+   "check": "ST-U scene 'Alien Evolved Starter Set' byte-equal to name_lookups[starterset.sceneToActivate].string",
+   "result": "PASS — same literal, different document; both legs asserted separately."
+  },
+  {
+   "check": "ST-U folders — the 3 register folder names kept English, and Alien Sub-Tables NOT kept English",
+   "result": "PASS — Alien Tables / Alien Creature Tables / Alien Mother Tables identical to source; Alien Sub-Tables -> 异形子表, byte-identical to the value already shipped in 1-系统汉化插件/compendium/cn."
+  },
+  {
+   "check": "Markup parity — tag-name counts (Counter over <tag) equal EN vs CN for all 34 item descriptions and the Adventure description",
+   "result": "PASS — zero drift. Empty <p></p> spacers in the agendas kept, trailing spaces before </p> kept."
+  },
+  {
+   "check": "Functional attributes — Counter over every class= / style= / href= / src= / height= / width= pair, EN vs CN",
+   "result": "PASS — zero drift, including href=\"https://frialigan.se/\", the fl-20cf-logo.png src, height=\"109\"/width=\"193\", the three style=\"font-size:smaller\" spans and the &amp; entity."
+  },
+  {
+   "check": "basesymbol spans copied verbatim including the U+0020 + U+00A0 payload",
+   "result": "PASS — 1 occurrence in M240 Incinerator Unit, 1 in Resilient, both '<span class=\"basesymbol\">  </span>' byte-for-byte, with the surrounding U+00A0 spacers preserved."
+  },
+  {
+   "check": "T-BILINGUAL shape — every item name must be 中文 + exactly one ASCII space + the source name, no parentheses",
+   "result": "PASS — all 34 end with ' ' + the English key and have CJK in the head. Verified by string test, not by eye."
+  },
+  {
+   "check": "lang/cn.json LOCK — every mechanic term I reused re-read from the shipped file and compared byte-for-byte",
+   "result": "PASS — 12 keys confirmed: ArmorPiercing 破甲, FullAuto 全自动, ArmorDoubled 护甲加倍, Skillcommand 指挥, Skillobservation 侦察, Push 追骰, FastAction 快速动作, seekcover 掩蔽, Power 电力, WepTypeMelee 肉搏, WepTypeRanged 远程, SkillcloseCbt 近战."
+  },
+  {
+   "check": "Key set and key ORDER of both output files mirror the index.json payload exactly; per-item field sets identical (no field added, none dropped)",
+   "result": "PASS — asserted in the builders; ST-I 34/34 items, ST-U 5/5 top-level keys, 16 folders, 7 scenes, 34 note labels, 4 regions, 4 behaviors, 18 art page names."
+  },
+  {
+   "check": "Cross-unit consistency against the two peer files that landed during my run (ST-A-CAST.cn.json / ST-A-CRE.cn.json)",
+   "result": "PASS — all 5 PC surnames (赫希/霍尔罗伊德/麦克惠尔/西格/辛格尔顿), 韦斯·奥斯特曼, 西奥多拉·科米斯基, 个人数据发射器, 科学官, 韦兰德-汤谷公司 and all 11 shared embedded item names are byte-identical to mine. Reached independently — I chose them before those files existed."
+  },
+  {
+   "check": "Write scope — nothing outside my two unit files touched",
+   "result": "PASS — git status over 6-工作区/phase4-starterset is empty (the directory is untracked as a whole); only ST-I.cn.json and ST-U.cn.json were created by me. compendium/cn never opened."
+  }
+ ]
+}

@@ -1,0 +1,1247 @@
+{
+  "pf2e.pathfinder-monster-core": {
+    "XKOQ3ll9TGNso0uB": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/banshee.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/banshee.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/banshee.webp",
+            "scale": 1.5
+          }
+        }
+      }
+    },
+    "IrssIkWkW6fsbHJL": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/dybbuk.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/dybbuk.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/dybbuk.webp",
+            "scale": 1.5
+          }
+        }
+      }
+    },
+    "N98ug9jQHqeFoK1N": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/ghost-commoner.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/ghost-commoner.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/ghost-commoner.webp",
+            "scale": 1.5
+          }
+        }
+      }
+    },
+    "YReM6QbqwUz3UTP7": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/orc-scrapper.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/orc-scrapper.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/orc-scrapper.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "PLZk6zY5iwccPTPS": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/orc-warchief.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/orc-warchief.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/orc-warchief.webp",
+            "scale": 1.5
+          }
+        }
+      }
+    },
+    "V90OYOMyyPLPJuod": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/orc-warrior.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/orc-warrior.webp",
+          "scaleX": 1.5,
+          "scaleY": 1.5
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/orc-warrior.webp",
+            "scale": 1.5
+          }
+        }
+      }
+    },
+    "zkl6planCbeCuAdS": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/skulltaker.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/skulltaker.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/skulltaker.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "aWiTcxAySoYjUP6T": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/zombie-plague.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/zombie-plague.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/zombie-plague.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Xo4IGzw28hivgMmM": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/zombie-shambler.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/zombie-shambler.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/zombie-shambler.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.abomination-vaults-bestiary": {
+    "HBRz8BVLVN9u9Odp": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/corpselight.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/corpselight.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/corpselight.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.claws-of-the-tyrant-bestiary": {
+    "IOzVkKmHQvHdmO90": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/divine-warden-of-arazni.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/divine-warden-of-arazni.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/divine-warden-of-arazni.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "fF04YIUUzwQlK1TW": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/necrophidius.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/necrophidius.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/necrophidius.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "sWoLuDXZoGO9Ld4n": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo1133_taxidermied-bear.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo1133_taxidermied-bear.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo1133_taxidermied-bear.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "tMqtId1TKVUXe4tN": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_arsiella-dei.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_arsiella-dei.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_arsiella-dei.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "vdywUTHF4uhA7cyh": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_cavalry-raised.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_cavalry-raised.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_cavalry-raised.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "rjV4XOnJemV8lKJu": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_chained-norn.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_chained-norn.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_chained-norn.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "0mllbU5aBEcVUj3E": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_chernasardo-ranger.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_chernasardo-ranger.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_chernasardo-ranger.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "U6kC8ohP723gydUI": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_divine-warden-of-iomedae.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_divine-warden-of-iomedae.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_divine-warden-of-iomedae.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ZUkMXxPyOJ9sPRvN": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_engerra.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_engerra.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_engerra.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "mGTK0uSZiQY0vsCf": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_garrholdion.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_garrholdion.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_garrholdion.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "2plKfPwYPE6yHBZw": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_glory-arcely.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_glory-arcely.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_glory-arcely.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "jSE16N2ASzN3qlN1": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_knight-reclaimant.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_knight-reclaimant.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_knight-reclaimant.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "OlBw2JqWcb3aBfKf": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_mirmicette.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_mirmicette.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_mirmicette.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "hXEFhS8iL5d6MqdD": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_moldering-steed.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_moldering-steed.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_moldering-steed.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "M2Co6b3pKO3TOWQj": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_omelia.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_omelia.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_omelia.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "uhTMcy0blrxpP6aZ": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_priest-iomedae.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_priest-iomedae.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_priest-iomedae.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "Kqd7MVuRRYvvZQ0g": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_seldeg-bhedlis.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_seldeg-bhedlis.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_seldeg-bhedlis.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "RiB74rq2dsKATghi": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_splinter-officer.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_splinter-officer.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_splinter-officer.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "OZRvOYnkvEVlTx90": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_stelemora.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_stelemora.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_stelemora.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "pzo14003_tallusian": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_tallusian.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_tallusian.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_tallusian.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "aEBup6SntDIOlTtY": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_vampire-lady-siccale.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_vampire-lady-siccale.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_vampire-lady-siccale.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ElTYWqGvup7okvC5": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo2110_lich-runecarved.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo2110_lich-runecarved.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo2110_lich-runecarved.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "zqnIJ602BTZSBFaL": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo9002_carrionstorm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo9002_carrionstorm.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo9002_carrionstorm.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "RwNVqGmL6VjxhO82": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_skeletal-rat-swarm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_skeletal-rat-swarm.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_skeletal-rat-swarm.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ZcrucwbmzI5J5jvk": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/veranallia.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/veranallia.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/veranallia.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Q0ASK7LvvRXfJe7v": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_tallusian.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_tallusian.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_tallusian.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "rPp9nA89lSDrxEyq": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/skulltaker.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/skulltaker.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/skulltaker.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "NzhVuwCmMTPUQPAB": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/zombie-desecrator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/zombie-desecrator.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/zombie-desecrator.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "HWkNWxoEkPlcr7WU": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "KghpiMuMKd0zfGZq": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "dRxlbmvyHJmAg7IG": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "h8j1vsXe3y88B8UD": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "uib2MwpRqkXslP0p": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Uns3D5g4MTwraYmE": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "BhA4ZUuIGtWm4dlD": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "i70NptUtfWO4s8uP": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "3wLksd7BQeyxygyR": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "FGtLODbx0kwumWA2": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "AypBlM89idHzzukP": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "e2xLxGriCpIUzLPc": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "dTAKNKC1ALBnWRHK": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ii2idpmr4mWpeW7K": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "dCfp9eOVMaTHtWSl": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": false,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-bestiary-3": {
+    "GD8yAL8R8oft23Ml": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/retsnav.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/retsnav.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/retsnav.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "nr8EXKLSejspbb3d": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/retsnov.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/retsnov.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/retsnov.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "cbduxhlI7JbONLXF": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/shambler-troop.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/shambler-troop.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/shambler-troop.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "NldgVUIHB3asozHm": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/wyrmwraith.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/wyrmwraith.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/wyrmwraith.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-bestiary-2": {
+    "y2LqIPBHv2dA0pjI": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/necrophidius.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/necrophidius.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/necrophidius.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "g41X4b3q2iDMLRt3": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/ravener.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/ravener.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/ravener.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.book-of-the-dead-bestiary": {
+    "dgQ9VMuC63T5LW5h": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "icons/environment/traps/trap-jaw-green.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "scale": 1
+          }
+        }
+      }
+    },
+    "zqftTUpxqkdLx2IY": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo2110_ecorche.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo2110_ecorche.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo2110_ecorche.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "abnTemoEnsqZPbKZ": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo2110_guard-last.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo2110_guard-last.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo2110_guard-last.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ToGAEKKOplpXzaQQ": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo2110_skeleton-wolf.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo2110_skeleton-wolf.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo2110_skeleton-wolf.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "dKkHFA4aBgk82QJO": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo2233_skeleton-skeletal-soldier.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo2233_skeleton-skeletal-soldier.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo2233_skeleton-skeletal-soldier.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.outlaws-of-alkenstar-bestiary": {
+    "sUleYLWZG3O9LlKC": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo90178_yeast-ooze.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo90178_yeast-ooze.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo90178_yeast-ooze.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-bestiary": {
+    "sPClc6y3dT3XZupv": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/pzo14003_skeletal-rat-swarm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/pzo14003_skeletal-rat-swarm.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/pzo14003_skeletal-rat-swarm.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "FJo8VkrM7kLkHa5D": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/zombie-hulk.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/zombie-hulk.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/zombie-hulk.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.kingmaker-bestiary": {
+    "8cRXmQ9vd93T0m2N": {
+      "actor": "modules/pf2e-claws-of-the-tyrant/assets/actors/portraits/zombie-desecrator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/zombie-desecrator.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/zombie-desecrator.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.hazards": {
+    "C6nFe8SCWJ8FmLOT": {
+      "actor": "icons/environment/traps/trap-jaw-green.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+            "src": "icons/environment/traps/trap-jaw-green.webp",
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        "ring": {
+            "enabled": true,
+            "subject": {
+            "scale": 1
+            }
+        }
+      }
+    }
+  }
+}

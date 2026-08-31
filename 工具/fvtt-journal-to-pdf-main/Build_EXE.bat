@@ -1,0 +1,1 @@
+python -m PyInstaller --onefile --noconsole --name FVTT-Journal-to-PDF app_with_dividers.py

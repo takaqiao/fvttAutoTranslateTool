@@ -1,0 +1,70 @@
+{
+  "openai_api_key": "",
+  "openai_base_url": "https://api.openai.com/v1",
+  "model": "gpt-5.4",
+
+  "adventure_name": "Season of Ghosts / 肆季鬼志",
+
+  "adventure_json": "SoG/pf2e-season-of-ghosts.adventures.json",
+
+  "dual_pdf_pairs": [
+    {
+      "label": "AP1 常夏不再",
+      "en_pdf": "SoG/PF 2e - Season of Ghosts 1 - The Summer that Never Was.pdf",
+      "zh_pdf": "SoG/pf2e24.5.7《肆季鬼志》1 of 4《常夏不再》 (1).pdf",
+      "en_page_start": 4,
+      "en_page_end": null,
+      "zh_page_start": 1,
+      "zh_page_end": null,
+      "page_offset": -3
+    },
+    {
+      "label": "AP2 落叶知秋",
+      "en_pdf": "SoG/PF 2e - Season of Ghosts 2 - Let the Leaves Fall.pdf",
+      "zh_pdf": "SoG/pf2e24.12.12《落叶知秋》（一校）.pdf",
+      "en_page_start": 4,
+      "en_page_end": null,
+      "zh_page_start": 1,
+      "zh_page_end": null,
+      "page_offset": -3
+    }
+  ],
+
+  "zh_only_files": [
+    "SoG/pf2e24.3.28《肆季鬼志：玩家指南》v0.2.pdf",
+    "SoG/旧版SoG玩家指南.pdf",
+    "SoG/新版SoG玩家指南.pdf",
+    "SoG/pf2eEverything.pdf"
+  ],
+
+  "en_only_pdfs": [
+    {
+      "label": "AP3 无息而泣",
+      "pdf": "SoG/PF 2e - Season of Ghosts 3 - No Breath to Cry.pdf",
+      "page_start": 4,
+      "page_end": null
+    },
+    {
+      "label": "AP4 网下繁花",
+      "pdf": "SoG/PF 2e - Season of Ghosts 4 - To Bloom Below the Web.pdf",
+      "page_start": 4,
+      "page_end": null
+    }
+  ],
+
+  "reference_glossary": "glossary.json",
+  "existing_glossary": "",
+
+  "pages_per_batch": 6,
+  "max_workers": 4,
+  "target_rpm": 60,
+  "max_retries": 3,
+  "max_chars_per_batch": 24000,
+
+  "cache_enabled": true,
+  "cache_path": "glossary_extract_cache_sog.json",
+  "log_path": "glossary_extract_sog.log",
+  "output_json": "glossary_sog.json",
+  "output_candidates_json": "glossary_sog_candidates.json",
+  "output_conflicts_json": "glossary_sog_conflicts.json"
+}

@@ -1,0 +1,1129 @@
+<div class="pf2e-leveler level-planner">
+  <div class="planner-sidebar">
+    <div class="sidebar-header">
+      {{localize "PF2E_LEVELER.UI.OPEN_PLANNER"}}
+    </div>
+    <div class="sidebar-levels">
+      {{#each sidebarLevels}}
+      <div class="sidebar-level {{#if this.active}}active{{/if}} {{#if this.locked}}locked{{/if}}"
+           data-action="selectLevel" data-level="{{this.level}}">
+        <div class="sidebar-level__num">{{this.level}}</div>
+        <div class="sidebar-level__summary" data-tooltip="{{this.summary}}">{{this.summary}}</div>
+        {{#if this.isCurrent}}
+          <span class="sidebar-level__current">{{localize "PF2E_LEVELER.UI.CURRENT"}}</span>
+        {{/if}}
+        {{#if (eq this.status "complete")}}
+          <i class="sidebar-level__status sidebar-level__status--complete fa-solid fa-check-circle"></i>
+        {{else if (eq this.status "warning")}}
+          <i class="sidebar-level__status sidebar-level__status--warning fa-solid fa-exclamation-triangle"></i>
+        {{else if (eq this.status "incomplete")}}
+          <i class="sidebar-level__status sidebar-level__status--incomplete fa-solid fa-circle-xmark"></i>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+    {{#if hasPlan}}
+    <div class="sidebar-actions">
+      <button type="button" class="sidebar-action-btn" data-action="exportPlan" data-tooltip="{{localize 'PF2E_LEVELER.UI.EXPORT'}}">
+        <i class="fa-solid fa-file-export"></i>
+      </button>
+      <button type="button" class="sidebar-action-btn" data-action="importPlan" data-tooltip="{{localize 'PF2E_LEVELER.UI.IMPORT'}}">
+        <i class="fa-solid fa-file-import"></i>
+      </button>
+      <button type="button" class="sidebar-action-btn sidebar-action-btn--danger" data-action="clearPlan" data-tooltip="{{localize 'PF2E_LEVELER.UI.CLEAR'}}">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+    {{/if}}
+  </div>
+
+  <div class="planner-content">
+    {{#if hasPlan}}
+      {{#if selectedLevel}}
+        <div class="planner-content__header">
+          <h2 class="planner-content__title">
+            {{format "PF2E_LEVELER.UI.LEVEL" level=selectedLevel}}
+          </h2>
+          <button type="button" class="sidebar-action-btn sidebar-action-btn--danger planner-content__action" data-action="clearLevel" data-tooltip="{{localize 'PF2E_LEVELER.UI.CLEAR_LEVEL'}}">
+            <i class="fa-solid fa-eraser"></i>
+            {{localize "PF2E_LEVELER.UI.CLEAR_LEVEL"}}
+          </button>
+        </div>
+
+        {{#if classFeatures.length}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-medal"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.CLASS_FEATURES"}}
+          </div>
+          <div class="level-section__body">
+            {{#each classFeatures}}
+            <div class="class-feature-item" data-action="viewFeat" data-uuid="{{this.uuid}}">
+              {{#if this.img}}
+              <img class="class-feature-item__icon" src="{{this.img}}" alt="">
+              {{else}}
+              <i class="class-feature-item__icon fa-solid fa-star"></i>
+              {{/if}}
+              <div class="class-feature-item__name">{{this.name}}</div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showBoosts}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-arrow-up"></i>
+            {{format "PF2E_LEVELER.BOOSTS.TITLE" count=boostCount}} ({{selectedBoostCount}}/{{boostCount}})
+          </div>
+          <div class="level-section__body">
+            <div class="boost-grid">
+              {{#each attributes}}
+              <button type="button"
+                class="boost-btn {{#if this.selected}}selected{{/if}} {{#if this.partial}}partial{{/if}}"
+                data-action="toggleBoost" data-attr="{{this.key}}"
+                {{#if this.disabled}}disabled{{/if}}>
+                <span class="boost-btn__abbr">{{this.label}}</span>
+                {{#if this.selected}}
+                  {{#if this.partial}}
+                    {{#if this.completesPartial}}
+                    <span class="boost-btn__change">+{{this.mod}} → +{{this.newMod}}</span>
+                    {{else}}
+                    <span class="boost-btn__change">+{{this.mod}} → +{{this.newMod}}(partial)</span>
+                    {{/if}}
+                  {{else}}
+                  <span class="boost-btn__change">+{{this.mod}} → +{{this.newMod}}</span>
+                  {{/if}}
+                {{else}}
+                  <span class="boost-btn__mod">+{{this.mod}}</span>
+                {{/if}}
+                {{#if this.partialLabel}}
+                <i class="fa-solid fa-circle-info boost-btn__partial-info" data-tooltip="{{this.partialLabel}}" aria-hidden="true"></i>
+                {{/if}}
+              </button>
+              {{/each}}
+            </div>
+            {{#if intelligenceBenefit}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{#if intelligenceBenefit.gainsSingle}}
+              {{localize "PF2E_LEVELER.CREATION.INTELLIGENCE_BONUS_HINT_SINGLE"}}
+              {{else}}
+              {{format "PF2E_LEVELER.CREATION.INTELLIGENCE_BONUS_HINT_MULTI" count=intelligenceBenefit.count}}
+              {{/if}}
+            </div>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if intBonusSkillOptions}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-brain"></i>
+            {{format "PF2E_LEVELER.CREATION.INTELLIGENCE_BONUS_SKILLS" selected=intBonusSkillCount count=intelligenceBenefit.count}}
+          </div>
+          <div class="level-section__body">
+            <div class="skill-btn-grid">
+              {{#each intBonusSkillOptions}}
+              <button type="button"
+                class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}"
+                data-action="toggleIntBonusSkill" data-skill="{{this.slug}}"
+                {{#if (or this.disabled this.isDisallowed)}}disabled{{/if}}>
+                <span class="skill-btn__content">
+                  <span class="skill-btn__name">{{this.label}}</span>
+                  <span class="skill-btn__tags">
+                    {{#if this.isRecommended}}<span class="tag tag--recommended tag--tiny"><i class="fa-solid fa-star"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_SUGGESTED"}}</span>{{/if}}
+                    {{#if this.isNotRecommended}}<span class="tag tag--muted tag--tiny"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_NOT_RECOMMENDED"}}</span>{{/if}}
+                    {{#if this.isDisallowed}}<span class="tag tag--disallowed tag--tiny"><i class="fa-solid fa-ban"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_DISALLOWED"}}</span>{{/if}}
+                  </span>
+                </span>
+              </button>
+              {{/each}}
+            </div>
+            <button type="button" class="add-lore-btn" data-action="addIntBonusLoreSkill" style="margin-top: var(--leveler-spacing-sm);">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if intBonusLanguageOptions}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-language"></i>
+            {{format "PF2E_LEVELER.CREATION.INTELLIGENCE_BONUS_LANGUAGES" selected=intBonusLanguageCount count=intelligenceBenefit.count}}
+          </div>
+          <div class="level-section__body">
+            <div class="skill-btn-grid">
+              {{#each intBonusLanguageOptions}}
+              <button type="button"
+                class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}"
+                data-action="toggleIntBonusLanguage" data-language="{{this.slug}}"
+                {{#if (or this.disabled this.isDisallowed)}}disabled{{/if}}>
+                <span class="skill-btn__content">
+                  <span class="skill-btn__name">{{this.label}}</span>
+                  <span class="skill-btn__tags">
+                    {{#if this.isRecommended}}<span class="tag tag--recommended tag--tiny"><i class="fa-solid fa-star"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_SUGGESTED"}}</span>{{/if}}
+                    {{#if this.isNotRecommended}}<span class="tag tag--muted tag--tiny"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_NOT_RECOMMENDED"}}</span>{{/if}}
+                    {{#if this.isDisallowed}}<span class="tag tag--disallowed tag--tiny"><i class="fa-solid fa-ban"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_DISALLOWED"}}</span>{{/if}}
+                    {{#if this.suggested}}<span class="tag tag--info tag--tiny">{{localize "PF2E_LEVELER.CREATION.ANCESTRY_SUGGESTION"}}</span>{{/if}}
+                    {{#if (notEqual this.rarity "common")}}
+                    <span class="tag tag--rarity-{{this.rarity}} tag--tiny">{{this.rarity}}</span>
+                    {{/if}}
+                  </span>
+                </span>
+              </button>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showClassFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-book"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.CLASS_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=classFeat category="classFeats" level=selectedLevel}}
+            {{#each classFeatChoiceSets}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{this.prompt}}
+            </div>
+            {{#if (eq this.choiceType "skill")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="classFeats" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                <span class="skill-btn__name">{{this.label}}</span>
+              </button>
+              {{/each}}
+            </div>
+            {{#if this.grantsSkillTraining}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="classFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{/if}}
+            {{else if (eq this.choiceType "language")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}" data-action="selectPlannedFeatChoice" data-category="classFeats" data-flag="{{../flag}}" data-value="{{this.value}}" {{#if this.isDisallowed}}disabled{{/if}}>
+                <span class="skill-btn__content">
+                  <span class="skill-btn__name">{{this.label}}</span>
+                  <span class="skill-btn__tags">
+                    {{#if this.isRecommended}}<span class="tag tag--recommended tag--tiny"><i class="fa-solid fa-star"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_SUGGESTED"}}</span>{{/if}}
+                    {{#if this.isNotRecommended}}<span class="tag tag--muted tag--tiny"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_NOT_RECOMMENDED"}}</span>{{/if}}
+                    {{#if this.isDisallowed}}<span class="tag tag--disallowed tag--tiny"><i class="fa-solid fa-ban"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_DISALLOWED"}}</span>{{/if}}
+                    {{#if (notEqual this.rarity "common")}}<span class="tag tag--rarity-{{this.rarity}} tag--tiny">{{this.rarity}}</span>{{/if}}
+                  </span>
+                </span>
+              </button>
+              {{/each}}
+            </div>
+            {{else if (eq this.choiceType "lore")}}
+            {{#if this.options.length}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" disabled>
+                <span class="skill-btn__name">{{this.label}}</span>
+              </button>
+              {{/each}}
+            </div>
+            {{/if}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="classFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{else}}
+            <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" class="wizard-item__img">
+                {{/if}}
+                <div class="wizard-item__info">
+                  <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                </div>
+                {{#if this.selected}}
+                <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                {{else}}
+                <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="classFeats" data-flag="{{../flag}}" data-value="{{this.value}}">
+                  {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showSkillFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-wrench"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.SKILL_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=skillFeat category="skillFeats" level=selectedLevel}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showGeneralFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-shield"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.GENERAL_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=generalFeat category="generalFeats" level=selectedLevel}}
+            {{#each generalFeatChoiceSets}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{this.prompt}}
+            </div>
+            {{#if (eq this.choiceType "skill")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="generalFeats" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                <span class="skill-btn__name">{{this.label}}</span>
+              </button>
+              {{/each}}
+            </div>
+            {{#if this.grantsSkillTraining}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="generalFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{/if}}
+            {{else if (eq this.choiceType "language")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}" data-action="selectPlannedFeatChoice" data-category="generalFeats" data-flag="{{../flag}}" data-value="{{this.value}}" {{#if this.isDisallowed}}disabled{{/if}}>
+                <span class="skill-btn__content"><span class="skill-btn__name">{{this.label}}</span></span>
+              </button>
+              {{/each}}
+            </div>
+            {{else if (eq this.choiceType "lore")}}
+            {{#if this.options.length}}<div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">{{#each this.options}}<button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" disabled><span class="skill-btn__name">{{this.label}}</span></button>{{/each}}</div>{{/if}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="generalFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{else}}
+            <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" class="wizard-item__img">
+                {{/if}}
+                <div class="wizard-item__info">
+                  <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                </div>
+                {{#if this.selected}}
+                <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                {{else}}
+                <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="generalFeats" data-flag="{{../flag}}" data-value="{{this.value}}">
+                  {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+            {{/each}}
+            {{#if showGeneralFeatAdoptedAncestry}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{localize "PF2E_LEVELER.UI.SELECT_ADOPTED_ANCESTRY"}}
+            </div>
+            <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each generalFeatAdoptedAncestryOptions}}
+              <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" class="wizard-item__img">
+                {{/if}}
+                <div class="wizard-item__info">
+                  <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                </div>
+                {{#if this.selected}}
+                <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                {{else}}
+                <button type="button"
+                  class="wizard-item__select"
+                  data-action="selectAdoptedAncestry"
+                  data-value="{{this.value}}">
+                  {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+            {{#if showGeneralFeatGrantedAncestryFeat}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{format "PF2E_LEVELER.UI.GRANTED_BY_FEAT" featName=generalFeat.name}}
+            </div>
+            {{> featSlot feat=generalFeatGrantedAncestryFeat category="ancestryFeats" level=selectedLevel}}
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showAncestryFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-dna"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.ANCESTRY_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=ancestryFeat category="ancestryFeats" level=selectedLevel}}
+            {{#each ancestryFeatChoiceSets}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{this.prompt}}
+            </div>
+            {{#if (eq this.choiceType "skill")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="ancestryFeats" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                <span class="skill-btn__name">{{this.label}}</span>
+              </button>
+              {{/each}}
+            </div>
+            {{#if this.grantsSkillTraining}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="ancestryFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{/if}}
+            {{else if (eq this.choiceType "language")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}" data-action="selectPlannedFeatChoice" data-category="ancestryFeats" data-flag="{{../flag}}" data-value="{{this.value}}" {{#if this.isDisallowed}}disabled{{/if}}>
+                <span class="skill-btn__content"><span class="skill-btn__name">{{this.label}}</span></span>
+              </button>
+              {{/each}}
+            </div>
+            {{else if (eq this.choiceType "lore")}}
+            {{#if this.options.length}}<div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">{{#each this.options}}<button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" disabled><span class="skill-btn__name">{{this.label}}</span></button>{{/each}}</div>{{/if}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="ancestryFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{else}}
+            <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" class="wizard-item__img">
+                {{/if}}
+                <div class="wizard-item__info">
+                  <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                </div>
+                {{#if this.selected}}
+                <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                {{else}}
+                <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="ancestryFeats" data-flag="{{../flag}}" data-value="{{this.value}}">
+                  {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showSkillIncrease}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-chart-line"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.SKILL_INCREASE"}}
+          </div>
+          <div class="level-section__body">
+            <div class="skill-btn-grid">
+              {{#each availableSkills}}
+              <button type="button"
+                class="skill-btn skill-btn--stacked rank-bg-{{this.rankName}} {{#if this.selected}}selected{{/if}} {{#if this.lockedByFeat}}skill-btn--feat-granted{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}"
+                data-action="selectSkillIncrease" data-skill="{{this.slug}}"
+                data-locked="{{#if this.lockedByFeat}}true{{else}}false{{/if}}"
+                aria-disabled="{{#if this.lockedByFeat}}true{{else}}false{{/if}}"
+                {{#if (or this.isDisallowed (and this.disabled (not this.lockedByFeat)))}}disabled{{/if}}>
+                <span class="skill-btn__content">
+                  <span class="skill-btn__name">
+                    {{this.label}}
+                    {{#if this.featGranted}}
+                    <span class="skill-btn__info" data-tooltip='{{format "PF2E_LEVELER.UI.SET_BY_FEAT" featName=this.featSourceName}}' aria-label='{{format "PF2E_LEVELER.UI.SET_BY_FEAT" featName=this.featSourceName}}'>
+                      <i class="fa-solid fa-circle-info"></i>
+                    </span>
+                    {{/if}}
+                  </span>
+                  <span class="skill-btn__tags">
+                    {{#if this.isRecommended}}<span class="tag tag--recommended tag--tiny"><i class="fa-solid fa-star"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_SUGGESTED"}}</span>{{/if}}
+                    {{#if this.isNotRecommended}}<span class="tag tag--muted tag--tiny"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_NOT_RECOMMENDED"}}</span>{{/if}}
+                    {{#if this.isDisallowed}}<span class="tag tag--disallowed tag--tiny"><i class="fa-solid fa-ban"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_DISALLOWED"}}</span>{{/if}}
+                  </span>
+                </span>
+                {{#if this.featGranted}}
+                <span class="skill-btn__rank rank-text-{{this.rankName}}">{{titleCase this.rankName}}</span>
+                {{else}}
+                <span class="skill-btn__rank rank-text-{{this.nextRankName}}">→ {{titleCase this.nextRankName}}</span>
+                {{/if}}
+              </button>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showArchetypeFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-masks-theater"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.ARCHETYPE_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=archetypeFeat category="archetypeFeats" level=selectedLevel}}
+            {{#each archetypeFeatChoiceSets}}
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{this.prompt}}
+            </div>
+            {{#if (eq this.choiceType "skill")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="archetypeFeats" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                <span class="skill-btn__name">{{this.label}}</span>
+              </button>
+              {{/each}}
+            </div>
+            {{#if this.grantsSkillTraining}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="archetypeFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{/if}}
+            {{else if (eq this.choiceType "language")}}
+            <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <button type="button" class="skill-btn skill-btn--stacked {{#if this.selected}}selected{{/if}} {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}" data-action="selectPlannedFeatChoice" data-category="archetypeFeats" data-flag="{{../flag}}" data-value="{{this.value}}" {{#if this.isDisallowed}}disabled{{/if}}>
+                <span class="skill-btn__content"><span class="skill-btn__name">{{this.label}}</span></span>
+              </button>
+              {{/each}}
+            </div>
+            {{else if (eq this.choiceType "lore")}}
+            {{#if this.options.length}}<div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">{{#each this.options}}<button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" disabled><span class="skill-btn__name">{{this.label}}</span></button>{{/each}}</div>{{/if}}
+            <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="archetypeFeats" data-flag="{{this.flag}}">
+              <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+            </button>
+            {{else}}
+            <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+              {{#each this.options}}
+              <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" class="wizard-item__img" {{#if this.uuid}}data-action="viewFeat" data-uuid="{{this.uuid}}"{{/if}}>
+                {{/if}}
+                <div class="wizard-item__info">
+                  <span class="wizard-item__name wizard-item__name--static" {{#if this.uuid}}data-action="viewFeat" data-uuid="{{this.uuid}}"{{/if}}>{{this.label}}</span>
+                </div>
+                {{#if this.selected}}
+                <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                {{else}}
+                <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="archetypeFeats" data-flag="{{../flag}}" data-value="{{this.value}}">
+                  {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+            {{/each}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showMythicFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-bolt"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.MYTHIC_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=mythicFeat category="mythicFeats" level=selectedLevel}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showDualClassFeat}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-users"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.DUAL_CLASS_FEAT"}}
+          </div>
+          <div class="level-section__body">
+            {{> featSlot feat=dualClassFeat category="dualClassFeats" level=selectedLevel}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showEquipment}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-shield-halved"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.EQUIPMENT"}}
+          </div>
+          <div class="level-section__body">
+            <div class="planned-spells">
+              {{#each equipmentSlots}}
+              <div class="tag tag--muted" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; width: 100%; margin-bottom: 4px;">
+                {{#if this.filled}}
+                  {{#if this.filled.img}}
+                  <img src="{{this.filled.img}}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                  {{/if}}
+                  <button type="button" data-action="viewItem" data-uuid="{{this.filled.uuid}}" style="background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; flex: 1; text-align: left;">
+                    {{this.filled.name}}
+                  </button>
+                  <span class="tag tag--muted" style="font-size: 0.75rem; padding: 2px 6px;">{{localize "PF2E_LEVELER.STARTING_WEALTH.ITEM_LEVEL"}} {{this.filled.itemLevel}}</span>
+                  <button type="button" data-action="removeEquipmentSlot" data-slot="{{this.index}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}" style="background: none; border: 0; padding: 0; color: inherit; cursor: pointer;">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                {{else}}
+                  <span style="flex: 1; opacity: 0.5;">{{format "PF2E_LEVELER.EQUIPMENT.SLOT_EMPTY" max=this.maxLevel}}</span>
+                  <button type="button" class="spell-add-btn" data-action="browseEquipmentSlot" data-slot="{{this.index}}" data-max-level="{{this.maxLevel}}" style="padding: 4px 12px;">
+                    {{localize "PF2E_LEVELER.UI.BROWSE"}}
+                  </button>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+            <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-sm);">
+              <i class="fa-solid fa-coins"></i>
+              {{format "PF2E_LEVELER.EQUIPMENT.CURRENCY_BUDGET" gp=equipmentCurrencyBudgetGp}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showCustomLevelPlan}}
+        <div class="level-section level-section--custom-plan">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-sliders"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.CUSTOM_LEVEL_PLAN"}}
+            <button
+              type="button"
+              class="spell-add-btn"
+              data-action="toggleCustomPlan"
+              data-level="{{selectedLevel}}"
+              style="margin-left: auto;"
+            >
+              <i class="fa-solid {{#if customPlanOpen}}fa-chevron-up{{else}}fa-chevron-down{{/if}}"></i>
+              {{#if customPlanOpen}}
+              {{localize "PF2E_LEVELER.UI.HIDE"}}
+              {{else}}
+              {{localize "PF2E_LEVELER.UI.SHOW"}}
+              {{/if}}
+            </button>
+          </div>
+          {{#if customPlanOpen}}
+          <div class="level-section__body">
+            <div class="feat-slot__note">
+              <i class="fa-solid fa-circle-info"></i>
+              {{localize "PF2E_LEVELER.UI.CUSTOM_LEVEL_PLAN_HINT"}}
+            </div>
+
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-md);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-book-medical"></i>
+                {{localize "PF2E_LEVELER.SECTIONS.CUSTOM_FEATS"}}
+              </div>
+              {{#if customFeats.length}}
+              {{#each customFeats}}
+              <span class="tag tag--muted" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; margin: 0 8px 8px 0;">
+                {{#if this.feat.img}}
+                <img src="{{this.feat.img}}" alt="" style="width: 20px; height: 20px; border-radius: 4px; object-fit: cover;">
+                {{/if}}
+                <button type="button" data-action="viewFeat" data-uuid="{{this.feat.uuid}}" style="background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer;">
+                  {{this.feat.name}}
+                </button>
+                <button type="button" data-action="openCustomFeatPicker" data-level="{{../selectedLevel}}" data-index="{{this.index}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.CHANGE'}}" style="background: none; border: 0; padding: 0; color: inherit; cursor: pointer;">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button type="button" data-action="removeCustomFeat" data-index="{{this.index}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}" style="background: none; border: 0; padding: 0; color: inherit; cursor: pointer;">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </span>
+              {{#if this.feat.manualSpellNote}}
+              <div class='feat-slot__note'>
+                <i class='fa-solid fa-circle-info'></i>
+                {{localize 'PF2E_LEVELER.UI.MANUAL_SPELL_NOTE'}}
+              </div>
+              {{/if}}
+              {{#if this.feat.grantedItems.length}}
+              <div class='feat-slot__note'>
+                <i class='fa-solid fa-link'></i>
+                {{localize 'PF2E_LEVELER.UI.GRANTED_ITEMS'}}
+                {{#each this.feat.grantedItems}}
+                  <button type="button" data-action="viewFeat" data-uuid="{{this.uuid}}" style="background:none;border:0;padding:0;color:inherit;cursor:pointer;text-decoration:underline;">{{this.name}}</button>{{#unless @last}}, {{/unless}}
+                {{/each}}
+              </div>
+              {{/if}}
+              {{#each this.choiceSets}}
+              <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+                <i class="fa-solid fa-circle-info"></i>
+                {{this.prompt}}
+              </div>
+              {{#if (eq this.choiceType "skill")}}
+              <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+                {{#each this.options}}
+                <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="customFeats" data-index="{{../../index}}" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                  <span class="skill-btn__name">{{this.label}}</span>
+                </button>
+                {{/each}}
+              </div>
+              {{#if this.grantsSkillTraining}}
+              <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="customFeats" data-index="{{../index}}" data-flag="{{this.flag}}">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+              </button>
+              {{/if}}
+              {{else}}
+              <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+                {{#each this.options}}
+                <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                  {{#if this.img}}
+                  <img src="{{this.img}}" alt="" class="wizard-item__img">
+                  {{/if}}
+                  <div class="wizard-item__info">
+                    <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                  </div>
+                  {{#if this.selected}}
+                  <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                  {{else}}
+                  <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="customFeats" data-index="{{../../index}}" data-flag="{{../flag}}" data-value="{{this.value}}">
+                    {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                  </button>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
+              {{/if}}
+              {{/each}}
+              {{#each this.feat.grantChoiceSets}}
+              <div class="feat-slot__note" style="margin-top: var(--leveler-spacing-md);">
+                <i class="fa-solid fa-circle-info"></i>
+                {{this.prompt}}
+              </div>
+              {{#if (eq this.choiceType "skill")}}
+              <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+                {{#each this.options}}
+                <button type="button" class="skill-btn {{#if this.selected}}selected{{/if}}" data-action="selectPlannedFeatChoice" data-category="customFeats" data-index="{{../../index}}" data-flag="{{../flag}}" data-value="{{this.value}}" data-grants-skill-training="{{#if ../grantsSkillTraining}}true{{else}}false{{/if}}" {{#if this.disabled}}disabled{{/if}}>
+                  <span class="skill-btn__name">{{this.label}}</span>
+                </button>
+                {{/each}}
+              </div>
+              {{#if this.grantsSkillTraining}}
+              <button type="button" class="add-lore-btn" style="margin-top: var(--leveler-spacing-sm);" data-action="promptPlannedFeatLoreChoice" data-category="customFeats" data-index="{{../index}}" data-flag="{{this.flag}}">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.LORE_SKILLS"}}
+              </button>
+              {{/if}}
+              {{else}}
+              <div class="wizard-item-grid wizard-item-grid--compact" style="margin-top: var(--leveler-spacing-sm);">
+                {{#each this.options}}
+                <div class="wizard-item {{#if this.selected}}wizard-item--taken{{/if}}">
+                  {{#if this.img}}
+                  <img src="{{this.img}}" alt="" class="wizard-item__img">
+                  {{/if}}
+                  <div class="wizard-item__info">
+                    <span class="wizard-item__name wizard-item__name--static">{{this.label}}</span>
+                  </div>
+                  {{#if this.selected}}
+                  <span class="tag tag--success tag--tiny"><i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.SELECTED"}}</span>
+                  {{else}}
+                  <button type="button" class="wizard-item__select" data-action="selectPlannedFeatChoice" data-category="customFeats" data-index="{{../../index}}" data-flag="{{../flag}}" data-value="{{this.value}}">
+                    {{localize "PF2E_LEVELER.FEAT_PICKER.SELECT"}}
+                  </button>
+                  {{/if}}
+                </div>
+                {{/each}}
+              </div>
+              {{/if}}
+              {{/each}}
+              {{/each}}
+              {{/if}}
+              <button type="button" class="spell-add-btn" data-action="openCustomFeatPicker" data-level="{{selectedLevel}}" style="margin-top: 4px; padding: 4px 12px;">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.ADD_CUSTOM_FEAT"}}
+              </button>
+            </div>
+
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-md);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-chart-line"></i>
+                {{localize "PF2E_LEVELER.SECTIONS.CUSTOM_SKILL_INCREASES"}}
+              </div>
+              {{#each customSkillIncreaseGroups}}
+              <div class="picker__filter-label" style="margin-top: var(--leveler-spacing-sm);">{{this.label}}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 var(--leveler-spacing-sm);">
+                {{#each this.entries}}
+                <button
+                  type="button"
+                  class="tag tag--muted custom-skill-chip custom-skill-chip--{{this.rankName}}"
+                  data-action="removeCustomSkillIncrease"
+                  data-index="{{this.index}}"
+                  data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}"
+                  style="display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 10px; cursor: pointer;">
+                  <span>{{this.label}} <span class="rank-text-{{this.rankName}}">→ {{titleCase this.rankName}}</span></span>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+                {{/each}}
+              </div>
+              {{/each}}
+              <div class="skill-btn-grid" style="margin-top: var(--leveler-spacing-sm);">
+                {{#each customAvailableSkills}}
+                <button type="button" class="skill-btn skill-btn--stacked {{#if this.isDisallowed}}wizard-item--disallowed{{/if}}" data-action="addCustomSkillIncrease" data-skill="{{this.slug}}" {{#if (or this.disabled this.isDisallowed)}}disabled{{/if}}>
+                  <span class="skill-btn__content">
+                    <span class="skill-btn__name">{{this.label}}</span>
+                    <span class="skill-btn__tags">
+                      {{#if this.isRecommended}}<span class="tag tag--recommended tag--tiny"><i class="fa-solid fa-star"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_SUGGESTED"}}</span>{{/if}}
+                      {{#if this.isNotRecommended}}<span class="tag tag--muted tag--tiny"><i class="fa-solid fa-triangle-exclamation"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_NOT_RECOMMENDED"}}</span>{{/if}}
+                      {{#if this.isDisallowed}}<span class="tag tag--disallowed tag--tiny"><i class="fa-solid fa-ban"></i> {{localize "PF2E_LEVELER.SETTINGS.CONTENT_GUIDANCE.BADGE_DISALLOWED"}}</span>{{/if}}
+                    </span>
+                  </span>
+                  <span class="skill-btn__rank rank-text-{{this.nextRankName}}">→ {{titleCase this.nextRankName}}</span>
+                </button>
+                {{/each}}
+              </div>
+            </div>
+
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-md);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-wand-sparkles"></i>
+                {{localize "PF2E_LEVELER.SECTIONS.CUSTOM_SPELLS"}}
+              </div>
+              {{#each customSpellGroups}}
+              <div class="picker__filter-label" style="margin-top: var(--leveler-spacing-sm);">{{this.label}}</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 var(--leveler-spacing-sm);">
+                {{#each this.entries}}
+                <div class="tag tag--muted" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px;">
+                  {{#if this.img}}
+                  <img src="{{this.img}}" alt="" style="width: 20px; height: 20px; border-radius: 4px; object-fit: cover;">
+                  {{/if}}
+                  <button type="button" data-action="viewFeat" data-uuid="{{this.uuid}}" style="background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer;">
+                    {{this.name}}
+                  </button>
+                  <button type="button" data-action="removeCustomSpell" data-index="{{this.index}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}" style="background: none; border: 0; padding: 0; color: inherit; cursor: pointer;">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+                {{/each}}
+              </div>
+              {{/each}}
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;">
+                <button type="button" class="spell-add-btn" data-action="openCustomSpellPicker" data-rank="-1" style="padding: 4px 12px;">
+                  <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.ADD_CUSTOM_SPELL"}}
+                </button>
+                <button type="button" class="spell-add-btn" data-action="openCustomSpellPicker" data-rank="0" style="padding: 4px 12px;">
+                  <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.UI.ADD_CUSTOM_CANTRIP"}}
+                </button>
+              </div>
+            </div>
+
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-md);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-shield-halved"></i>
+                {{localize "PF2E_LEVELER.SECTIONS.CUSTOM_EQUIPMENT"}}
+              </div>
+              {{#each customEquipment}}
+              <div class="tag tag--muted" style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; margin-bottom: 4px;">
+                {{#if this.img}}
+                <img src="{{this.img}}" alt="" style="width: 20px; height: 20px; border-radius: 4px; object-fit: cover;">
+                {{/if}}
+                <button type="button" data-action="viewItem" data-uuid="{{this.uuid}}" style="background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer;">
+                  {{this.name}}
+                </button>
+                <button type="button" data-action="removeCustomEquipment" data-index="{{this.index}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}" style="background: none; border: 0; padding: 0; color: inherit; cursor: pointer;">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              {{/each}}
+              <div style="margin-top: 4px;">
+                <button type="button" class="spell-add-btn" data-action="openCustomEquipmentPicker" style="padding: 4px 12px;">
+                  <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.EQUIPMENT.ADD"}}
+                </button>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+        </div>
+        {{/if}}
+
+        {{#if showABP}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-gem"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.ABP_POTENCY"}}
+          </div>
+          <div class="level-section__body">
+            <div class="abp-info">
+              {{#if abpHasNew}}
+              <span class="tag tag--info">{{localize "PF2E_LEVELER.ABP.NEW_POTENCY"}}</span>
+              {{/if}}
+              {{#if abpHasUpgrade2}}
+              <span class="tag tag--info">{{localize "PF2E_LEVELER.ABP.UPGRADE_TO_2"}}</span>
+              {{/if}}
+              {{#if abpHasUpgrade3}}
+              <span class="tag tag--info">{{localize "PF2E_LEVELER.ABP.UPGRADE_TO_3"}}</span>
+              {{/if}}
+              <p class="abp-note">{{localize "PF2E_LEVELER.ABP.NOTE"}}</p>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showSpells}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-sparkles"></i>
+            {{localize "PF2E_LEVELER.SECTIONS.SPELLCASTING"}}
+            {{#if hasNewRank}}
+              <span class="tag tag--success">{{format "PF2E_LEVELER.SPELLS.NEW_RANK" rank=newRank}}</span>
+            {{/if}}
+          </div>
+          <div class="level-section__body">
+            {{#if showCustomSpellRankReminder}}
+            <div class="feat-slot__note" style="margin-bottom: var(--leveler-spacing-sm);">
+              <i class="fa-solid fa-circle-info"></i>
+              {{localize "PF2E_LEVELER.UI.CUSTOM_SPELL_RANK_REMINDER"}}
+            </div>
+            {{/if}}
+            <table class="spell-slot-table">
+              <thead>
+                <tr>
+                  <th>{{localize "PF2E_LEVELER.SPELLS.RANK"}}</th>
+                  <th>{{localize "PF2E_LEVELER.SPELLS.SLOTS"}}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each spellSlots}}
+                <tr class="{{#if this.isNew}}spell-slot-row--new{{else if this.changed}}spell-slot-row--changed{{/if}}">
+                  <td class="spell-slot-rank">{{this.rank}}</td>
+                  <td class="spell-slot-count">
+                    {{#if (and ../hasRankSpellSelections this.hasNew)}}
+                      <span class="spell-slot-new">{{this.planned}}/{{this.newSlots}} new</span>
+                      <span class="spell-slot-breakdown">({{this.total}} total)</span>
+                    {{else if this.hasNew}}
+                      <span class="spell-slot-new">{{this.total}}</span>
+                      <span class="spell-slot-breakdown">(+{{this.newSlots}} new)</span>
+                    {{else}}
+                      {{this.total}}
+                    {{/if}}
+                    {{#if this.isDual}}
+                      <span class="spell-slot-breakdown">({{this.primary}} + {{this.secondary}})</span>
+                    {{/if}}
+                  </td>
+                  <td>
+                    {{#if (and ../hasRankSpellSelections this.hasNew)}}
+                      <button type="button" class="spell-add-btn" data-action="openSpellPicker" data-rank="{{#if this.isCantrips}}0{{else}}{{this.rankNum}}{{/if}}" data-tooltip="{{localize 'PF2E_LEVELER.SPELLS.ADD'}}" {{#if this.isFull}}disabled{{/if}}>
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+                    {{/if}}
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+
+            {{#if showGrantedSpells}}
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-sm);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-gift"></i>
+                {{localize "PF2E_LEVELER.SPELLS.GRANTED"}}
+              </div>
+              {{#each grantedSpells}}
+              <div class="feat-slot feat-slot--filled" style="border-color: var(--leveler-success);">
+                <img class="feat-slot__icon" src="{{this.img}}" alt="" data-action="viewFeat" data-uuid="{{this.uuid}}">
+                <span class="feat-slot__name" data-action="viewFeat" data-uuid="{{this.uuid}}">{{this.name}}</span>
+                <span class="feat-slot__level">Rank {{this.rank}}</span>
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+
+            {{#if hasSpellbook}}
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-sm);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-book"></i>
+                {{format "PF2E_LEVELER.SPELLS.SPELLBOOK" selected=plannedSpellbookSelectionCount count=spellbookSelectionCount}}
+              </div>
+              {{#each plannedSpells}}
+              <div class="feat-slot feat-slot--filled">
+                <img class="feat-slot__icon" src="{{this.img}}" alt="" data-action="viewFeat" data-uuid="{{this.uuid}}">
+                <span class="feat-slot__name" data-action="viewFeat" data-uuid="{{this.uuid}}">{{this.name}}</span>
+                <span class="feat-slot__level">Rank {{this.displayRank}}</span>
+                <i class="feat-slot__clear fa-solid fa-xmark" data-action="removeSpell" data-uuid="{{this.uuid}}" data-entry-type="{{this.entryType}}" data-rank="{{this.displayRank}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}"></i>
+              </div>
+              {{/each}}
+              {{#unless (gte plannedSpellbookSelectionCount spellbookSelectionCount)}}
+              <button type="button" class="spell-add-btn" data-action="openSpellPicker" data-entry-type="primary" data-rank="-1" data-tooltip="{{localize 'PF2E_LEVELER.SPELLS.ADD_TO_SPELLBOOK_HINT'}}" style="margin-top: 4px; padding: 4px 12px;">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.SPELLS.ADD_TO_SPELLBOOK"}}
+              </button>
+              {{/unless}}
+
+              {{#if spellbookCantripSelectionCount}}
+              <div class="section-header" style="font-size: var(--leveler-font-sm); margin-top: var(--leveler-spacing-sm);">
+                <i class="section-header__icon fa-solid fa-wand-sparkles"></i>
+                {{format "PF2E_LEVELER.SPELLS.SPELLBOOK_CANTRIPS" selected=plannedSpellbookCantripCount count=spellbookCantripSelectionCount}}
+              </div>
+              {{#unless (gte plannedSpellbookCantripCount spellbookCantripSelectionCount)}}
+              <button type="button" class="spell-add-btn" data-action="openSpellPicker" data-entry-type="primary" data-rank="0" data-tooltip="{{localize 'PF2E_LEVELER.SPELLS.ADD_CANTRIP_TO_SPELLBOOK_HINT'}}" style="margin-top: 4px; padding: 4px 12px;">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2E_LEVELER.SPELLS.ADD_CANTRIP_TO_SPELLBOOK"}}
+              </button>
+              {{/unless}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{#each dedicationSpellSections}}
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-md);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-book-atlas"></i>
+                {{this.name}}
+              </div>
+              {{#each this.plannedSpells}}
+              <div class="feat-slot feat-slot--filled">
+                <img class="feat-slot__icon" src="{{this.img}}" alt="" data-action="viewFeat" data-uuid="{{this.uuid}}">
+                <span class="feat-slot__name" data-action="viewFeat" data-uuid="{{this.uuid}}">{{this.name}}</span>
+                <span class="feat-slot__level">Rank {{this.displayRank}}</span>
+                <i class="feat-slot__clear fa-solid fa-xmark" data-action="removeSpell" data-uuid="{{this.uuid}}" data-entry-type="{{this.entryType}}" data-rank="{{this.displayRank}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}"></i>
+              </div>
+              {{/each}}
+
+              {{#if (or this.cantripSelectionCount this.plannedCantripCount)}}
+              <div class="section-header" style="font-size: var(--leveler-font-sm); margin-top: var(--leveler-spacing-sm);">
+                <i class="section-header__icon fa-solid fa-wand-sparkles"></i>
+                {{this.tradition}} cantrips ({{this.plannedCantripCount}}/{{this.cantripSelectionCount}})
+              </div>
+              {{#if this.remainingCantripSelections}}
+              <button type="button" class="spell-add-btn" data-action="openSpellPicker" data-entry-type="{{this.entryType}}" data-rank="0" style="margin-top: 4px; padding: 4px 12px;">
+                <i class="fa-solid fa-plus"></i> Add Cantrips
+              </button>
+              {{/if}}
+              {{/if}}
+
+              {{#each this.rankRows}}
+              <div class="section-header" style="font-size: var(--leveler-font-sm); margin-top: var(--leveler-spacing-sm);">
+                <i class="section-header__icon fa-solid fa-sparkles"></i>
+                {{this.label}} spells ({{this.planned}}/{{this.count}})
+              </div>
+              {{#unless this.isFull}}
+              <button type="button" class="spell-add-btn" data-action="openSpellPicker" data-entry-type="{{../entryType}}" data-rank="{{this.rank}}" style="margin-top: 4px; padding: 4px 12px;">
+                <i class="fa-solid fa-plus"></i> Add {{this.label}} Spell
+              </button>
+              {{/unless}}
+              {{/each}}
+            </div>
+            {{/each}}
+
+            {{#if plannedSpells.length}}
+            {{#unless hasSpellbook}}
+            <div class="planned-spells">
+              <div class="section-header" style="font-size: var(--leveler-font-sm); margin-top: var(--leveler-spacing-sm);">
+                <i class="section-header__icon fa-solid fa-book-sparkles"></i>
+                {{localize "PF2E_LEVELER.SPELLS.PLANNED"}}
+              </div>
+              {{#each plannedSpells}}
+              <div class="feat-slot feat-slot--filled">
+                <img class="feat-slot__icon" src="{{this.img}}" alt="" data-action="viewFeat" data-uuid="{{this.uuid}}">
+                <span class="feat-slot__name" data-action="viewFeat" data-uuid="{{this.uuid}}">{{this.name}}</span>
+                <span class="feat-slot__level">Rank {{this.rank}}</span>
+                <i class="feat-slot__clear fa-solid fa-xmark" data-action="removeSpell" data-uuid="{{this.uuid}}" data-entry-type="{{this.entryType}}" data-rank="{{this.rank}}" data-tooltip="{{localize 'PF2E_LEVELER.UI.REMOVE'}}"></i>
+              </div>
+              {{/each}}
+            </div>
+            {{/unless}}
+            {{/if}}
+
+            {{#if showFocusSpells}}
+            <div class="planned-spells" style="margin-top: var(--leveler-spacing-sm);">
+              <div class="section-header" style="font-size: var(--leveler-font-sm);">
+                <i class="section-header__icon fa-solid fa-sun"></i>
+                {{localize "PF2E_LEVELER.SPELLS.FOCUS"}}
+                {{#if newFocusSpell}}<span class="tag tag--success tag--tiny">{{localize "PF2E_LEVELER.SPELLS.NEW_FOCUS"}}</span>{{/if}}
+              </div>
+              {{#each focusSpells}}
+              <div class="feat-slot feat-slot--filled" style="{{#if this.isNew}}border-color: var(--leveler-success);{{/if}}">
+                <img class="feat-slot__icon" src="{{this.img}}" alt="" data-action="viewFeat" data-uuid="{{this.uuid}}">
+                <span class="feat-slot__name" data-action="viewFeat" data-uuid="{{this.uuid}}">{{this.name}}</span>
+                <span class="tag tag--info tag--tiny">{{this.tier}}</span>
+              </div>
+              {{/each}}
+            </div>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if showApparitions}}
+        <div class="level-section">
+          <div class="section-header">
+            <i class="section-header__icon fa-solid fa-ghost"></i>
+            {{localize "PF2E_LEVELER.ANIMIST.APPARITIONS"}}
+            <span class="tag {{#if (eq apparitionSelectedCount attunementSlots)}}tag--success{{else}}tag--info{{/if}}">{{format "PF2E_LEVELER.SPELLS.ATTUNEMENT_SLOTS" selected=apparitionSelectedCount count=attunementSlots}}</span>
+            {{#if newFocusPool}}
+              <span class="tag tag--info">{{format "PF2E_LEVELER.SPELLS.FOCUS_POOL" count=newFocusPool}}</span>
+            {{/if}}
+          </div>
+          <div class="level-section__body">
+            <div class="apparition-list">
+              {{#each availableApparitions}}
+              <div class="apparition-item {{#if this.selected}}apparition-item--selected{{else if this.disabled}}apparition-item--disabled{{/if}}"
+                data-action="toggleApparition" data-slug="{{this.slug}}" data-max-slots="{{../attunementSlots}}">
+                <i class="fa-solid fa-ghost"></i>
+                <span>{{localize this.nameKey}}</span>
+                {{#if this.uuid}}
+                <i class="fa-solid fa-circle-info apparition-info" data-action="viewApparition" data-uuid="{{this.uuid}}"></i>
+                {{/if}}
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+      {{else}}
+        <div class="planner-empty">
+          <i class="planner-empty__icon fa-solid fa-hat-wizard"></i>
+          <p>{{localize "PF2E_LEVELER.UI.OPEN_PLANNER"}}</p>
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="planner-empty">
+        <i class="planner-empty__icon fa-solid fa-hat-wizard"></i>
+        {{#if unsupportedClass}}
+          <p>{{format "PF2E_LEVELER.UI.UNSUPPORTED_CLASS" className=actorClassName}}</p>
+        {{else}}
+          <p>{{localize "PF2E_LEVELER.UI.NO_CLASS"}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
+    {{#if sequentialMode}}
+    <div class="sequential-controls">
+      <div class="sequential-progress">
+        {{format "PF2E_LEVELER.UI.SEQUENTIAL_PROGRESS" current=sequentialCurrentLevel target=sequentialTargetLevel}}
+      </div>
+      {{#if showNextLevel}}
+      <button type="button" class="sequential-btn sequential-btn--next" data-action="sequentialNextLevel">
+        {{localize "PF2E_LEVELER.UI.NEXT_LEVEL"}} <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      {{else if showFinishSequential}}
+      <button type="button" class="sequential-btn sequential-btn--finish" data-action="sequentialFinish">
+        <i class="fa-solid fa-check"></i> {{localize "PF2E_LEVELER.UI.FINISH_PLANNING"}}
+      </button>
+      {{/if}}
+    </div>
+    {{/if}}
+  </div>
+</div>

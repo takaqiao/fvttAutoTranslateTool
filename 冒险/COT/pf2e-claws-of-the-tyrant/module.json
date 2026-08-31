@@ -1,0 +1,104 @@
+{
+    "id": "pf2e-claws-of-the-tyrant",
+    "version": "1.0.0",
+    "title": "Pathfinder: Claws of the Tyrant",
+    "compatibility": {
+        "minimum": "13",
+        "verified": "13"
+    },
+    "authors": [
+        {
+            "name": "Ian Hildebrandt",
+            "discord": "tdnarbedlih",
+            "flags": {}
+        },
+        {
+            "name": "Kobold DM",
+            "discord": "kobold_dm",
+            "url": "https://www.patreon.com/c/KoboldDM",
+            "flags": {}
+        },
+        {
+            "name": "Viviane Charlier",
+            "discord": "geckopilled",
+            "url": "https://foundryvtt.com",
+            "flags": {}
+        },
+        {
+            "name": "Shane Martland",
+            "discord": "anathema3668",
+            "url": "https://foundryvtt.com",
+            "flags": {}
+        },
+        {
+            "name": "Richard Simões",
+            "discord": "stwlam",
+            "url": "https://foundryvtt.com",
+            "flags": {}
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "path": "lang/en.json",
+            "name": "en",
+            "flags": {}
+        }
+    ],
+    "packs": [
+        {
+            "name": "claws-of-the-tyrant",
+            "label": "Claws of the Tyrant",
+            "banner": "modules/pf2e-claws-of-the-tyrant/assets/img/claws-pack-banner.webp",
+            "path": "packs/claws-of-the-tyrant",
+            "type": "Adventure",
+            "system": "pf2e"
+        }
+    ],
+    "media": [
+        {
+            "type": "setup",
+            "caption": "Claws of the Tyrant",
+            "thumbnail": "modules/pf2e-claws-of-the-tyrant/assets/img/claws-module-banner.webp",
+            "loop": false,
+            "flags": {}
+        }
+    ],
+    "relationships": {
+        "systems": [
+            {
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {}
+            }
+        ]
+    },
+    "esmodules": [
+        "scripts/pf2e-claws.mjs"
+    ],
+    "styles": [
+        {
+            "src": "styles/pf2e-claws.css"
+        }
+    ],
+    "flags": {
+        "galleryDatasheets": {
+            "claws-creatures": {
+                "label": "Claws of the Tyrant Datasheet",
+                "hint": "Creature artwork from the Claws of the Tyrant adventures.",
+                "sheet": "modules/pf2e-claws-of-the-tyrant/data/claws-datasheet.json"
+            }
+        },
+        "compendiumArtMappings": {
+            "pf2e": {
+                "mapping": "modules/pf2e-claws-of-the-tyrant/data/compendium-mapping.json",
+                "credit": "<em>Portrait, token, and subject artwork from the Claws of the Tyrant adventures.</em>"
+            }
+        },
+        "tokenRingSubjectMappings": {
+            "modules/pf2e-claws-of-the-tyrant/assets/actors/tokens/": "modules/pf2e-claws-of-the-tyrant/assets/actors/subjects/"
+        }
+    },
+    "manifest": "https://r2.foundryvtt.com/packages-public/pf2e-claws-of-the-tyrant/module.json",
+    "protected": true
+}

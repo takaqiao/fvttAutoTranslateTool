@@ -1,0 +1,194 @@
+{
+  "label": "效果\nEffects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Progenitor Form (The Strangler)": {
+      "name": "效果：始祖形态（绞杀者） Effect: Progenitor Form (The Strangler)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form} 授予</p>\n<p>这具有<em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form}的效果，并使用以下数据。</em></p>\n<ul>\n<li><strong>速度</strong> 30 尺，游泳速度 90 尺</li>\n<li><strong>近战</strong> 爪击（灵巧，触及 15 尺），<strong>伤害</strong> 2d8+10 挥砍外加擒抱。</li>\n</ul>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form}</p>\n<p>This has the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} using the following statistics.</em></p>\n<ul>\n<li><strong>Speed</strong> 30 feet, swim Speed 90 feet</li>\n<li><strong>Melee</strong> claw (agile, reach 15 feet), <strong>Damage</strong> 2d8+10 slashing plus Grab.</li>\n</ul>"
+    },
+    "Effect: Rock Skin": {
+      "name": "效果：岩石皮肤 Effect: Rock Skin",
+      "description": "<p>在你的每日准备期间，你获得物理伤害抗力5（精金除外）。每当该抗力防止伤害时，它降低1，最低为0。然而，当你的抗力低于5时，它会随着时代缓慢自行恢复；每经过10分钟，它增加1，最高为5。</p>\n<p>During your daily preparations, you gain resistance 5 to physical damage (except adamantine). Any time this resistance prevents damage, it decreases by 1, to a minimum of 0. However, when your resistance is below 5, it slowly recovers itself over time; for every 10 minutes, it increases by 1, to a maximum of 5.</p>"
+    },
+    "Effect: Going Bananas": {
+      "name": "效果：发狂暴走 Effect: Going Bananas",
+      "description": "<p>你获得等于3加上你的等级的临时生命值。</p>\n<p>You gain temporary Hit Points equal to 3 plus your level.</p>"
+    },
+    "Effect: Cycle of Tides and Dunes (Changed Degree of Success)": {
+      "name": "效果：潮汐与沙丘之循环（改变的成功等级） Effect: Cycle of Tides and Dunes (Changed Degree of Success)",
+      "description": "<p>你在1分钟内，对使用潮汐与沙丘之环改变了成功度的同类型豁免（强韧、反射或意志）承受–1减值</p>\n<p>You take a –1 penalty to saves of the same type (Fortitude, Reflex, or Will) whose degree of success was changed using Cycle of Tides and Dunes for 1 minute</p>"
+    },
+    "Effect: Perfect Regeneration": {
+      "name": "效果：完美再生 Effect: Perfect Regeneration",
+      "description": "<p>你获得再生 15。你的再生会被火停用。</p>\n<p>You gain regeneration 15. Your regeneration is deactivated by fire.</p>"
+    },
+    "Aura: Revel": {
+      "name": "灵光：狂欢 Aura: Revel",
+      "description": "<p>选择酒类学识、烹饪学识或表演。在你下个回合结束前，你与所有位于@Template[type:emanation|distance:60]内的盟友获得对技能检定的+1状态加值，并且根据你所选技能获得对一种豁免的加值。若你选择酒类学识，你给予该加值于强韧豁免；若你选择烹饪学识，你给予该加值于意志豁免；若你选择表演，你给予该加值于反射豁免。</p>\n<p>Choose Alcohol Lore, Cooking Lore, or Performance. Until the end of your next turn, you and all allies in a @Template[type:emanation|distance:60] gain a +1 status bonus to skill checks, as well as to one saving throw depending on the skill you chose. If you chose Alcohol Lore, you grant the bonus to Fortitude saves, if you chose Cooking Lore, you grant the bonus to Will saves, and if you chose Performance, you grant the bonus to Reflex saves.</p>"
+    },
+    "Effect: Long In The Tooth": {
+      "name": "效果：老态龙钟 Effect: Long In The Tooth",
+      "description": "<p>你获得一个獠牙徒手攻击，造成 1d6 穿刺伤害，并具有灵巧特征。</p>\n<p>You gain a fangs unarmed attack that deals 1d6 piercing damage and has the finesse trait.</p>"
+    },
+    "Aura: Reality Shaper": {
+      "name": "灵光：现实塑造者 Aura: Reality Shaper",
+      "description": "<p>灵光的区域为困难地形。处于灵光中的生物在对抗幻术、法术或会施加 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} 或 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} 呆滞（状态）的效果时，其豁免承受–2状态减值。</p>\n<p>The area of the aura is difficult terrain. Creatures in the aura take a –2 status penalty on saving throws against illusions, spells, or effects that would impose the @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} or @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} condition.</p>"
+    },
+    "Effect: Moment of Greatness (Item Bonus)": {
+      "name": "效果：辉煌时刻（物品加值） Effect: Moment of Greatness (Item Bonus)",
+      "description": "<p>你获得对所有武器攻击掷骰、徒手攻击掷骰、技能检定和豁免的+1物品加值。</p>\n<p>You gain a +1 item bonus to all weapon attack rolls, unarmed attack rolls, skill checks, and saving throws.</p>"
+    },
+    "Aura: Silent Aura": {
+      "name": "灵光：寂静灵光 Aura: Silent Aura",
+      "description": "<p>区域内的生物不会发出任何声音。</p>\n<p>Creatures in the area emit no sound.</p>"
+    },
+    "Effect: Drunken Singer": {
+      "name": "效果：醉酒歌者 Effect: Drunken Singer",
+      "description": "<p>你在表演上变为受训，并在进行歌唱的表演检定时获得+2物品加值。</p>\n<p>You become trained in Performance and gain a +2 item bonus to Performance checks to sing.</p>"
+    },
+    "Effect: That's Deep, Man": {
+      "name": "效果：太深奥了，老兄 Effect: That's Deep, Man",
+      "description": "<p>你在意志豁免、察觉以及基于感知的技能检定上获得+2物品加值，并在AC、反射豁免以及基于敏捷的技能检定上承受–2物品减值。</p>\n<p>You gain a +2 item bonus to Will saves, Perception, and Wisdom-based skill checks, and a –2 item penalty to AC, Reflex saves, and Dexterity-based skill checks.</p>"
+    },
+    "Effect: Silent Aura": {
+      "name": "效果：寂静灵光 Effect: Silent Aura",
+      "description": "<p>你不会发出任何声音。</p>\n<p>You emit no sound.</p>"
+    },
+    "Effect: Punch Drunk": {
+      "name": "效果：醉拳 Effect: Punch Drunk",
+      "description": "<p>你的拳造成1d6钝击伤害，并失去非致命（特征）。在那段时间内，你的拳也成为+1 striking 徒手攻击，使其在攻击掷骰上获得+1物品加值，并额外增加第二颗伤害骰的伤害。</p>\n<p>Your fists deal 1d6 bludgeoning damage and lose the nonlethal trait. During that time, your fists also become a +1 striking unarmed attack, causing them to add a +1 item bonus on attack rolls and deal a second damage die of damage.</p>"
+    },
+    "Aura: Empathetic Aura": {
+      "name": "灵光：共情灵光 Aura: Empathetic Aura",
+      "description": "<p>你和所有15英尺内的盟友在对抗精神效果的豁免检定上获得+1环境加值。如果你在交涉上是大师，则此加值提升为+2环境加值；如果你是传奇，则提升为+3环境加值。</p>\n<p>You and all allies within 15 feet gain a +1 circumstance bonus to saving throws against mental effects. This increases to a +2 circumstance bonus if you're a master in Diplomacy and a +3 circumstance bonus if you're legendary.</p>"
+    },
+    "Effect: Hard Headed": {
+      "name": "效果：硬脑袋 Effect: Hard Headed",
+      "description": "<p>你获得10点临时生命值，强韧豁免获得+2物品加值，且基于魅力的技能检定承受–2物品减值。</p>\n<p>You gain 10 temporary Hit Points, a +2 item bonus to Fortitude saves and a –2 item penalty to Charisma-based skill checks.</p>"
+    },
+    "Effect: Go Cold Turkey": {
+      "name": "效果：突然戒断 Effect: Go Cold Turkey",
+      "description": "<p>目标在对抗所选苦难的豁免上获得+1状态加值，直到该苦难被清除，或其已进行五次豁免尝试（以先发生者为准）。</p>\n<p>The target receives a +1 status bonus on saving throws against the selected affliction, until either the affliction is cleared or they have attempted five saving throws, whichever comes first.</p>"
+    },
+    "Effect: Progenitor Form (The Hungry)": {
+      "name": "效果：始祖形态（饥渴者） Effect: Progenitor Form (The Hungry)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{始祖形态} 授予</p>\n<p>这具有<em> @UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{怪物形态} 的效果，并使用以下数据。</em></p>\n<ul>\n<li><strong>速度</strong> 40 尺，掘地速度 40 尺</li>\n<li><strong>近战</strong> 颌骨（致命 d12，触及 15 尺），<strong>伤害</strong> 2d10+15 穿刺</li>\n<li><strong>盛宴</strong> <span class=\"pf2-icon\">1</span> <strong>需求</strong> 你与一具尸体相邻。<strong>效果</strong> 你停下快速咬一口，治疗 [[/r 4d10[healing]]] 生命值。你在 [[/r 1d4 #Recharge Feast]]{1d4 轮} 内不能再次盛宴。</li>\n</ul>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form}</p>\n<p>This has the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} using the following statistics.</em></p>\n<ul>\n<li><strong>Speed</strong> 40 feet, burrow Speed 40 feet</li>\n<li><strong>Melee</strong> jaws (deadly d12, reach 15 feet), <strong>Damage</strong> 2d10+15 piercing</li>\n<li><strong>Feast</strong> <span class=\"pf2-icon\">1</span> <strong>Requirements</strong> You are adjacent to a corpse. <strong>Effect</strong> You stop for a quick bite, healing [[/r 4d10[healing]]] Hit Points. You can't Feast again for [[/r 1d4 #Recharge Feast]]{1d4 rounds}.</li>\n</ul>"
+    },
+    "Effect: Progenitor Form (The Mountain)": {
+      "name": "效果：始祖形态（群山） Effect: Progenitor Form (The Mountain)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{始祖形态} 授予</p>\n<p>这具有<em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{怪物形态}的效果，使用以下数据。</em></p>\n<ul>\n<li><strong>速度</strong> 60尺</li>\n<li><strong>近战</strong> 蹄（灵巧，触及 10尺），<strong>伤害</strong> 2d8+10 钝击</li>\n<li><strong>践踏</strong> <span class=\"pf2-icon\">3</span> 你移动至多等于你速度两倍的距离，并穿过大型或更小生物的空间，对你进入其空间的每个生物进行践踏。被践踏的生物承受蹄的伤害，并进行一次对抗你的职业DC或法术DC（以较高者为准）的@Check[type:reflex|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|basic:true]豁免。</li>\n</ul>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form}</p>\n<p>This has the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} using the following statistics.</em></p>\n<ul>\n<li><strong>Speed</strong> 60 feet</li>\n<li><strong>Melee</strong> hoof (agile, reach 10 feet), <strong>Damage</strong> 2d8+10 bludgeoning</li>\n<li><strong>Trample</strong> <span class=\"pf2-icon\">3</span> You move up to double your Speed and move through the spaces of Large or smaller creatures, trampling each creature whose space you enter. A trampled creature takes hoof damage with a @Check[type:reflex|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|basic:true] save against your class DC or spell DC, whichever is higher.</li>\n</ul>"
+    },
+    "Effect: Revel": {
+      "name": "效果：启示 Effect: Revel",
+      "description": "<p>你获得+1状态加值，应用于技能检定以及一次豁免。</p>\n<p>You gain a +1 status bonus to skill checks, as well as to one saving throw.</p>"
+    },
+    "Effect: Vigilant Sentry": {
+      "name": "效果：警觉哨兵 Effect: Vigilant Sentry",
+      "description": "<p>你在你的豁免或掷骰上获得+2环境加值。</p>\n<p>You gain a +2 circumstance bonus on your save or roll.</p>"
+    },
+    "Effect: Moment of Greatness (Status Bonus)": {
+      "name": "效果：伟大时刻（状态加值） Effect: Moment of Greatness (Status Bonus)",
+      "description": "<p>你获得对所有攻击掷骰、技能检定和豁免的+1状态加值</p>\n<p>You gain a +1 status bonus to all attack rolls, skill checks, and saving throws</p>"
+    },
+    "Effect: Push Past Pain": {
+      "name": "效果：忍痛前行 Effect: Push Past Pain",
+      "description": "<p>你获得等于你等级一半的快速治疗，再加上你受伤（状态）值的两倍（例如，如果你是9级且受伤3，则快速治疗10）。</p>\n<p>You gain fast healing equal to half your level, plus twice the value of your wounded condition (for example, fast healing 10 if you are 9th level and wounded 3).</p>"
+    },
+    "Effect: Earth's Embrace": {
+      "name": "效果：大地的拥抱 Effect: Earth's Embrace",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.Item.HfxaSPoefcnP7HrA]{大地的拥抱} 授予</p>\n<p>你失去任何对 AC 的物品加值。你获得对物理伤害的抗力 10，并免疫精准伤害。你获得 10 尺的飞行速度。</p>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.Item.HfxaSPoefcnP7HrA]{Earth's Embrace}</p>\n<p>You lose any item bonus to AC. You gain resistance 10 to physical damage and are immune to precision damage. You gain a fly Speed of 10 feet.</p>"
+    },
+    "Effect: Earworm Supreme": {
+      "name": "效果：至尊耳虫 Effect: Earworm Supreme",
+      "description": "<p>你在察觉检定上承受–2物品减值，并且每当你尝试一个带有专注（特征）的动作时，你必须进行一次@Check[type:flat|dc:6]；若失败</p>\n<p>You take a –2 item penalty to Perception checks and whenever you attempt an action with the concentrate trait, you must attempt a @Check[type:flat|dc:6]; on a failure</p>"
+    },
+    "Effect: Reality Shaper": {
+      "name": "效果：现实塑造者 Effect: Reality Shaper",
+      "description": "<p>灵光中的生物在对抗会施加 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} 或 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞（状态）} 状态的幻觉、法术或效果的豁免上承受 –2 状态减值。</p>\n<p>Creatures in the aura take a –2 status penalty on saving throws against illusions, spells, or effects that would impose the @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} or @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} condition.</p>"
+    },
+    "Effect: Dragon Scales": {
+      "name": "效果：巨龙鳞片 Effect: Dragon Scales",
+      "description": "<p>你获得对物理伤害的抗力 7，但每当该抗力阻止伤害时，它就降低 1。</p>\n<hr />\n<p>注意：抗力数值为该效果的计数器等级。</p>\n<p>You gain resistance 7 to physical damage, but each time the resistance prevents damage, it decreases by 1.</p>\n<hr />\n<p>Note: The resistance value is the counter level of the effect.</p>"
+    },
+    "Effect: Life Of The Party": {
+      "name": "效果：派对之魂 Effect: Life Of The Party",
+      "description": "<p>你获得对基于魅力的技能检定的+2物品加值，并对基于智力的技能检定的–2物品减值。</p>\n<p>You gain a +2 item bonus to Charisma-based skill checks, and a –2 item penalty to Intelligence-based skill checks.</p>"
+    },
+    "Effect: Take Root": {
+      "name": "效果：扎根 Effect: Take Root",
+      "description": "<p>你获得@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足（状态）}状态，并在对抗强行移动你或使你@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}的尝试时，你的反射与强韧豁免以及DC获得+4环境加值。</p>\n<p>You gain the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} condition, and a +4 circumstance bonus to your Reflex and Fortitude saving throws and DC against attempts to forcefully move you or make you @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}.</p>"
+    },
+    "Effect: Rapturous Revel (Inspire)": {
+      "name": "效果：狂喜狂欢（激励） Effect: Rapturous Revel (Inspire)",
+      "description": "<p>目标在攻击掷骰、豁免和技能检定上获得+1状态加值。</p>\n<p>The target gains a +1 status bonus to attack rolls, saving throws, and skill checks.</p>"
+    },
+    "Effect: I Can Shpeak Jusht Fine": {
+      "name": "效果：我嗦发完全妹问题 Effect: I Can Shpeak Jusht Fine",
+      "description": "<p>如果你尝试使用带有语言（特征）的动作，或施放带有言语成分的法术，你必须在一次 @Check[type:flat|dc:6] 中成功，否则该动作或法术会被扰乱</p>\n<p>If you attempt to use an action with the linguistic trait or to cast a spell with a verbal component, you must succeed at a @Check[type:flat|dc:6] or the action or spell is disrupted</p>"
+    },
+    "Effect: Curl Up": {
+      "name": "效果：蜷缩起来 Effect: Curl Up",
+      "description": "<p>你获得AC +1环境加值。</p>\n<p>You gain a +1 circumstance bonus to AC.</p>"
+    },
+    "Effect: Exaggerate Weakness": {
+      "name": "效果：夸大弱点 Effect: Exaggerate Weakness",
+      "description": "<p>目标在1轮内进行察觉检定和意志豁免时承受–1状态减值。</p>\n<p>The target takes a –1 status penalty on Perception checks and Will saves for 1 round.</p>"
+    },
+    "Effect: Dream Experience": {
+      "name": "效果：梦境体验 Effect: Dream Experience",
+      "description": "<p>你可以选择一项技能。在你下次每日准备之前，你在所选技能中获得受训（熟练度）熟练度等级；或者如果你在所选技能中已经是受训，则改为成为专家。</p>\n<p>You can select one skill. You gain the trained proficiency rank in the skill you selected until your next daily preparation, or if you're already trained in the selected skill, you become an expert instead.</p>"
+    },
+    "Effect: Song's Flight": {
+      "name": "效果：歌之飞行 Effect: Song's Flight",
+      "description": "<p>你获得等同于你速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your Speed.</p>"
+    },
+    "Effect: Healthy Snack": {
+      "name": "效果：健康零食 Effect: Healthy Snack",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.Item.Rrihbij0QwDXrkVy]{健康零食} 授予</p>\n<p>你获得相当于你等级一半的临时生命值。</p>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.Item.Rrihbij0QwDXrkVy]{Healthy Snack}</p>\n<p>You gain half your level in temporary Hit Points.</p>"
+    },
+    "Effect: Hair Of The Dog": {
+      "name": "效果：以毒攻毒 Effect: Hair Of The Dog",
+      "description": "<p>你获得寒冷抗力 5</p>\n<p>You gain resistance 5 to cold</p>"
+    },
+    "Effect: X Marks the Spot": {
+      "name": "效果：X 标记地点 Effect: X Marks the Spot",
+      "description": "<p>在你下一回合开始前，你的盟友对该敌人的下一次攻击掷骰获得+1环境加值。若两次打击均为大成功或大失败，则该环境加值为+2而非+1。</p>\n<p>Your allies gain a +1 circumstance bonus on their next attack rolls against that foe before your next turn. If both Strikes are critical hits, the circumstance bonus is +2 instead of +1.</p>"
+    },
+    "Effect: Empathetic Aura": {
+      "name": "效果：共情灵光 Effect: Empathetic Aura",
+      "description": "<p>你获得对抗精神效果的豁免的环境加值。</p>\n<p>You gain a circumstance bonus to saving throws against mental effects.</p>"
+    },
+    "Effect: Mean Drunk": {
+      "name": "效果：卑劣醉鬼 Effect: Mean Drunk",
+      "description": "<p>你获得对基于力量的伤害掷骰的+4状态加值。</p>\n<p>You gain a +4 status bonus to Strength-based damage rolls.</p>"
+    },
+    "Effect: Enflame Weapon": {
+      "name": "效果：点燃武器 Effect: Enflame Weapon",
+      "description": "<p>该武器每个武器伤害骰额外造成 1 点火伤害。</p>\n<p>The weapon deals 1 additional fire damage per weapon damage die.</p>"
+    },
+    "Effect: You Gotta Problem?": {
+      "name": "效果：你有问题吗？ Effect: You Gotta Problem?",
+      "description": "<p>你获得 +2 物品加值于基于力量的攻击掷骰、基于力量的技能检定，以及基于力量的伤害掷骰，并且在意志豁免、察觉，以及基于感知的技能检定上承受 –2 物品减值。</p>\n<p>You gain a +2 item bonus to Strength-based attack rolls, Strength-based skill checks, and Strength-based damage rolls, and a –2 item penalty to Will saves, Perception, and Wisdom-based skill checks.</p>"
+    },
+    "Effect: Progenitor Form (The Venomous)": {
+      "name": "效果：始祖形态（毒裔） Effect: Progenitor Form (The Venomous)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form} 授予</p>\n<p>这具有 <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} 的效果，并使用以下数据。</em></p>\n<ul>\n<li><strong>速度</strong> 40 尺，攀爬速度 30 尺，游泳速度 30 尺</li>\n<li><strong>近战</strong> 颌骨（触及 15 尺），<strong>伤害</strong> 2d8+15 穿刺外加 2d6 持续性毒素伤害</li>\n</ul>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form}</p>\n<p>This has the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} using the following statistics.</em></p>\n<ul>\n<li><strong>Speed</strong> 40 feet, climb Speed 30 feet, swim Speed 30 feet</li>\n<li><strong>Melee</strong> jaws (reach 15 feet), <strong>Damage</strong> 2d8+15 piercing plus 2d6 persistent poison damage</li>\n</ul>"
+    },
+    "Effect: Stiffened Wings": {
+      "name": "效果：僵硬之翼 Effect: Stiffened Wings",
+      "description": "<p>你获得等同于你陆地速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Effect: Confounding Truths (Critical Success)": {
+      "name": "效果：令人困惑的真相（大成功或大失败） Effect: Confounding Truths (Critical Success)",
+      "description": "<p>你获得+2状态加值，适用于攻击掷骰、伤害掷骰，以及对抗恐惧效果的豁免。</p>\n<p>You gain a +2 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>"
+    },
+    "Effect: Progenitor Form (The Ironshell)": {
+      "name": "效果：始祖形态（铁壳） Effect: Progenitor Form (The Ironshell)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form} 授予</p>\n<p>这具有<em> @UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} 的效果，使用以下数据。</em></p>\n<ul>\n<li><strong>速度</strong> 40尺，游泳速度 30尺</li>\n<li><strong>近战</strong> 角（触及 15尺），<strong>伤害</strong> 2d12+15 穿刺；</li>\n<li><strong>钢铁皮肤</strong> 你获得对物理伤害的抗力 5。</li>\n</ul>\n<p>Granted by @UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-feats.X3mPLgGQIKGSr3Ln]{Progenitor Form}</p>\n<p>This has the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{Monstrosity Form} using the following statistics.</em></p>\n<ul>\n<li><strong>Speed</strong> 40 feet, swim Speed 30 feet</li>\n<li><strong>Melee</strong> horn (reach 15 feet), <strong>Damage</strong> 2d12+15 piercing;</li>\n<li><strong>Steelskin</strong> You gain resistance 5 to physical damage.</li>\n</ul>"
+    }
+  }
+}

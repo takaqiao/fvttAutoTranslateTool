@@ -1,0 +1,326 @@
+{
+  "label": "怪物图鉴能力术语表\nBestiary Ability Glossary",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Malevolent AI": "恶意 AI\nMalevolent AI",
+    "Digital Ghost": "数字幽灵\nDigital Ghost",
+    "Environmental Adaptation Adjustments": "环境适应调整\nEnvironmental Adaptation Adjustments",
+    "Hardlight Adjustments": "硬光调整\nHardlight Adjustments",
+    "Infiltrator Robot": "渗透机器人\nInfiltrator Robot",
+    "Magical Adjustments": "魔法调整\nMagical Adjustments",
+    "Nanite Adjustments": "纳米体调整\nNanite Adjustments",
+    "Necrovite": "亡灵寄生体\nNecrovite",
+    "Nymph Queen": "宁芙女王\nNymph Queen",
+    "Rendworm Host": "龙卷虫宿主\nRendworm Host",
+    "Robotic War Machine": "机器人战争机器\nRobotic War Machine",
+    "Security Robot": "安保机器人\nSecurity Robot",
+    "Warped Adjustments": "扭曲调整\nWarped Adjustments"
+  },
+  "entries": {
+    "(Malevolent AI) Energy Beam": {
+      "name": "（恶意 AI）能量光束 (Malevolent AI) Energy Beam"
+    },
+    "(Robotic War Machine) Notch Position": {
+      "name": "（机器人战争机器）卡槽位置 (Robotic War Machine) Notch Position",
+      "description": "<p><strong>触发条件</strong> 一个敌人进行移动</p>\n<p><strong>需求</strong> 远程战争机器位于目标触及范围之外</p><hr /><p><strong>效果</strong> 远程战争机器沿着与目标相同的方向移动，最多移动其速度值；直到目标停止移动，或战争机器已移动其完整速度值为止。</p>\n<p><strong>Trigger</strong> An enemy Strides</p>\n<p><strong>Requirements</strong> The remote war machine is outside the target's reach</p><hr /><p><strong>Effect</strong> The remote war machine Strides up to its Speed in the same direction as the target until the target stops moving or the war machine has moved its full Speed.</p>"
+    },
+    "Rend": {
+      "name": "撕裂 Rend",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
+    },
+    "(Necrovite) Smother the Light": {
+      "name": "（死灵精粹）熄灭光明 (Necrovite) Smother the Light",
+      "description": "<p><strong>触发条件</strong> 死尸维特30尺内的一个生物开始施放一个具有光或命能特征的法术</p><hr /><p><strong>效果</strong> 死尸维特尝试反制该触发法术。</p>\n<p><strong>Trigger</strong> A creature within 30 feet of the necrovite begins to Cast a Spell that has the light or vitality trait</p><hr /><p><strong>Effect</strong> The necrovite attempts to counteract the triggering spell.</p>"
+    },
+    "(Robotic War Machine) Attack Pattern Alpha": {
+      "name": "（机器人战争机器）攻击模式阿尔法 (Robotic War Machine) Attack Pattern Alpha",
+      "description": "<p>远程战争机器先进行一步移动或进行移动，然后对同一目标进行两次打击。这两次打击都计入其多重攻击减值，但其多重攻击减值要等到它完成这两次打击后才会增加。</p>\n<p>The remote war machine Steps or Strides, then makes two Strikes against the same target. Both Strikes count toward its multiple attack penalty, but its multiple attack penalty doesn't increase until after it makes both Strikes.</p>"
+    },
+    "(Nymph Queen) Astronomical Ties": {
+      "name": "（宁芙女王）天文关联 (Nymph Queen) Astronomical Ties",
+      "description": "<p>一位宁芙女王与某个特定的天体有着内在联系，例如日炎女王所对应的超巨星。只要女王健康无恙，她的领地便会繁盛兴旺，而且她可以使用自己的法术攻击检定来尝试反制改变该天体物理性质的法术和仪式，其反制阶级等同于她所能施放的最高阶法术。 然而，如果宁芙女王受伤或状态不佳，她所对应的天体也会衰弱：小行星偏离轨道，恒星变暗，黑洞的引力减弱。让宁芙女王恢复健康后，她的天体也会回归平衡。</p>\n<p>A nymph queen is intrinsically tied to a specific celestial body, such as a supergiant star for a heliad queen. As long as the queen is healthy, her territory thrives, and she can attempt to counteract spells and rituals that alter its physical properties using her spell attack roll with a counteract rank equal to the highest-rank spell she can cast. If a nymph queen is injured or unhealthy, however, her celestial body also weakens: asteroids wobble out of orbit, stars dim, and the gravity of black holes diminishes. Restoring the nymph queen returns her celestial body to its equilibrium.</p>"
+    },
+    "Improved Push": {
+      "name": "精通推离 Improved Push",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedPush]</p>"
+    },
+    "(Rendworm Host) Self-Destructive Frenzy": {
+      "name": "（裂虫宿主）自毁狂乱 (Rendworm Host) Self-Destructive Frenzy",
+      "description": "<p><strong>需求</strong> 裂体蠕虫宿主未处于 @UUID[Compendium.sf2e.conditions.Item.yblD8fOR1J8rDwEQ]{困惑} 状态，且尚未陷入狂暴</p>\n<p><strong>触发</strong> 裂体蠕虫宿主受到伤害</p><hr /><p><strong>效果</strong> 裂体蠕虫宿主获得持续 3 轮的狂暴性困惑状态。处于困惑状态时，裂体蠕虫宿主的攻击掷骰获得 +1 情境加值，伤害掷骰获得 +2 情境加值，且 AC 承受 –2 情境减值。裂体蠕虫宿主不能自愿停止此次狂暴。</p>\n<p><strong>Requirements</strong> The rendworm host isn't @UUID[Compendium.sf2e.conditions.Item.yblD8fOR1J8rDwEQ]{Confused} or already in a frenzy</p>\n<p><strong>Trigger</strong> The rendworm host takes damage</p><hr /><p><strong>Effect</strong> The rendworm host gains the confused condition in a frenzy that lasts for 3 rounds. While confused, the rendworm host gains a +1 circumstance bonus to attack rolls, a +2 circumstance bonus to damage rolls, and a –2 circumstance penalty to AC. The rendworm host can't voluntarily stop this frenzy.</p>"
+    },
+    "(Security Robot) Fire Suppressor": {
+      "name": "（安保机器人）灭火器 (Security Robot) Fire Suppressor",
+      "description": "<p>机器人喷射出一股激流，其效果如同 @UUID[Compendium.sf2e.spells.Item.jfVCuOpzC6mUrf6f]{液压推击}。机器人在使用此能力后必须重新灌满其水箱。</p>\n<p>The robot sprays a torrent of water that functions as @UUID[Compendium.sf2e.spells.Item.jfVCuOpzC6mUrf6f]{Hydraulic Push}. The robot must refill its tanks after using this ability.</p>"
+    },
+    "(Magical) Magical Resilience": {
+      "name": "（魔法）魔法韧性 (Magical) Magical Resilience",
+      "description": "<p><strong>触发</strong> 该生物尝试对其魔法传统的一个法术或魔法效果进行豁免检定，但尚未掷骰</p><hr /><p><strong>效果</strong> 该生物对触发该反应的效果进行的豁免检定获得+1环境加值。</p>\n<p><strong>Trigger</strong> The creature attempts a saving throw against a spell or magical effect of its magical tradition but hasn't rolled yet</p><hr /><p><strong>Effect</strong> The creature gains a +1 circumstance bonus to its saving throw against the triggering effect.</p>"
+    },
+    "(Necrovite) Keeper of the Old Ways": {
+      "name": "（死灵维特）古老之道的守护者 (Necrovite) Keeper of the Old Ways",
+      "description": "<p>30 英尺。具有科技特征的生物，以及持有具有科技特征武器并在其回合开始时处于该灵光中的生物，必须尝试一次强韧豁免。随后，该生物在 1 小时内会暂时免疫此灵光。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物变为 @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{故障 1}。</p>\n<p><strong>大失败</strong> 该生物变为 @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{故障 2}。</p>\n<p>30 feet. Creatures with the tech trait and creatures holding a weapon with the tech trait that begin their turn in the aura must attempt a Fortitude save. The creature is then temporarily immune to the aura for 1 hour.</p>\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature becomes @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{glitching 1}.</p>\n<p><strong>Critical Failure</strong> The creature becomes @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{glitching 2}.</p>"
+    },
+    "(Infiltrator Robot) Integrated Infiltration Gear": {
+      "name": "（渗透机器人）集成渗透装备 (Infiltrator Robot) Integrated Infiltration Gear",
+      "description": "<p>该机器人集成了一套@UUID[Compendium.sf2e.equipment.Item.coJUVZGcuVg3FoYh]{渗透者工具包（商业型）}（若其等级至少为7级，则为@UUID[Compendium.sf2e.equipment.Item.ao5MC3I1b4Gx9LNC]{渗透者工具包（战术型）}）以及一套集成的@UUID[Compendium.sf2e.equipment.Item.qqjDcCW118ySAlAS]{黑客工具包（商业型）}（若其等级至少为7级，则为@UUID[Compendium.sf2e.equipment.Item.5o7wOnkxEsyBwBNj]{黑客工具包（战术型）}；若其等级至少为9级，则为@UUID[Compendium.sf2e.equipment.Item.dk4qkf4BF7wCPV4u]{黑客工具包（先进型）}）。</p>\n<p>The robot has an integrated @UUID[Compendium.sf2e.equipment.Item.coJUVZGcuVg3FoYh]{Infiltrator's Toolkit (Commercial)} (or @UUID[Compendium.sf2e.equipment.Item.ao5MC3I1b4Gx9LNC]{Infiltrator's Toolkit (Tactical)} if it's at least 7th level) and an integrated @UUID[Compendium.sf2e.equipment.Item.qqjDcCW118ySAlAS]{Hacking Toolkit (Commercial)} (or @UUID[Compendium.sf2e.equipment.Item.5o7wOnkxEsyBwBNj]{Hacking Toolkit (Tactical)} if it's at least 7th level, or @UUID[Compendium.sf2e.equipment.Item.dk4qkf4BF7wCPV4u]{Hacking Toolkit (Advanced)} if it's at least 9th level).</p>"
+    },
+    "All-Around Vision": {
+      "name": "全域视野 All-Around Vision",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+    },
+    "(Necrovite) Rejuvenation": {
+      "name": "（死灵寄体）复原 (Necrovite) Rejuvenation",
+      "description": "<p>当一名灵柩变体被摧毁时，其意识会立即转移到其脑波仪中。只有找到并摧毁其脑波仪，灵柩变体才能被永久摧毁。</p>\n<p>When a necrovite is destroyed, their consciousness is immediately transferred to their electroencephalon. A necrovite can be permanently destroyed only if their electroencephalon is found and destroyed.</p>"
+    },
+    "Knockdown": {
+      "name": "击倒 Knockdown",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Knockdown]</p>"
+    },
+    "Pull": {
+      "name": "拉拽 Pull",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Pull]</p>"
+    },
+    "Aquatic Ambush": {
+      "name": "水下伏击 Aquatic Ambush",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
+    },
+    "Light Blindness": {
+      "name": "强光致盲 Light Blindness",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
+    },
+    "(Robotic War Machine) Attack Pattern Gamma": {
+      "name": "（机器人战争机器）攻击模式伽马 (Robotic War Machine) Attack Pattern Gamma",
+      "description": "<p>远程战争机器对任意组合的目标进行三次打击。每次打击都获得灵巧特征，且每次打击都会计入其多重攻击减值。</p>\n<p>The remote war machine makes three Strikes against any combination of targets. Each Strike gains the agile trait, and each Strike counts toward its multiple attack penalty.</p>"
+    },
+    "(Robotic War Machine) Attack Pattern Delta": {
+      "name": "（机器人战争机器）攻击模式 Delta (Robotic War Machine) Attack Pattern Delta",
+      "description": "<p>远程战争机械【移动】两次，然后进行【打击】。</p>\n<p>The remote war machine Strides twice and then Strikes.</p>"
+    },
+    "Improved Knockdown": {
+      "name": "精通击倒 Improved Knockdown",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedKnockdown]</p>"
+    },
+    "(Digital Ghost) Malware Infection": {
+      "name": "（数字幽灵）恶意软件感染 (Digital Ghost) Malware Infection",
+      "description": "<p><strong>频率</strong> 每天一次</p><hr /><p><strong>效果</strong> 数字幽灵试图感染一件带有科技特征、且正被30英尺内一个生物持有或使用的物品。持用者可以尝试进行一次意志豁免。</p><hr /><p><strong>大成功</strong> 该物品不受影响，且该数字幽灵在1周内不能使用恶意软件感染。</p>\n<p><strong>成功</strong> 该物品不受影响。</p>\n<p><strong>失败</strong> 该物品变为 @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{故障 2}。</p>\n<p><strong>大失败</strong> 该物品变为故障 2，并且会在该设备上于 [[/gmr 2d4 #days]]{2d4天} 后生成一个基于持用者的离线数字幽灵。</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> The digital ghost attempts to infect an item with the tech trait being held or used by a creature within 30 feet. The bearer can attempt a Will save.</p><hr /><p><strong>Critical Success</strong> The item is unaffected, and the digital ghost can't use Malware Infection for 1 week.</p>\n<p><strong>Success</strong> The item is unaffected.</p>\n<p><strong>Failure</strong> The item becomes @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{Glitching 2}.</p>\n<p><strong>Critical Failure</strong> The item becomes glitching 2, and an offline digital ghost based on the bearer is created on the device in [[/gmr 2d4 #days]]{2d4 days}.</p>"
+    },
+    "(Rendworm Host) Rendworm Eruption": {
+      "name": "（裂蠕虫宿主）裂蠕虫爆发 (Rendworm Host) Rendworm Eruption",
+      "description": "<p>当裂体蠕宿主因火焰伤害以外的任何方式被降至 0 生命值时，其身体会破裂，孳生出数量等于其等级一半（向下取整）的裂体蠕。</p>\n<p>When a rendworm host is reduced to 0 Hit Points by anything other than fire damage, its body ruptures, spawning a number of rendworms equal to half its level, rounded down.</p>"
+    },
+    "(Environmental Adaptation) Temperature Adaptation": {
+      "name": "（环境适应）温度适应 (Environmental Adaptation) Temperature Adaptation",
+      "description": "<p>该生物视环境温度效应时，会将其视为低一个等级的极端程度（难以置信高温变为极端高温，极端高温变为严酷高温，以此类推）。</p>\n<p>The creature treats environmental temperature effects as if they were one step less extreme (incredible heat becomes extreme, extreme heat becomes severe, and so on).</p>"
+    },
+    "Ferocity": {
+      "name": "凶猛 Ferocity",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
+    },
+    "(Robotic War Machine) BVR Engagement": {
+      "name": "（机器人战争机器）超视距交战 (Robotic War Machine) BVR Engagement",
+      "description": "<p>远程战争机器对一个目标进行一次远程打击，视同其武器具有正常射程两倍的射程。此次打击无视一切形式的隐蔽和掩护。</p>\n<p>The remote war machine makes a ranged Strike at a target as though its weapon had double its normal range. This Strike ignores all forms of concealment and cover.</p>"
+    },
+    "Greater Constrict": {
+      "name": "高等紧勒 Greater Constrict",
+      "description": "<p>@Damage[(0)[钝击]]，@Check[fortitude|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.GreaterConstrict]</p>\n<p>@Damage[(0)[bludgeoning]]，@Check[fortitude|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.GreaterConstrict]</p>"
+    },
+    "(Necrovite) Fatiguing Presence": {
+      "name": "（死灵精）疲劳气场 (Necrovite) Fatiguing Presence",
+      "description": "<p>30尺。首次进入该灵光的生物必须成功通过一次强韧豁免，否则将变为@UUID[Compendium.sf2e.conditions.Item.HL2l2VRSaQHu9lUw]{疲乏}。无论此次豁免检定结果如何，该生物都会在24小时内暂时免疫死噬体的致疲劳存在。</p>\n<p>30 feet. A creature that first enters the aura must succeed at a Fortitude save or become @UUID[Compendium.sf2e.conditions.Item.HL2l2VRSaQHu9lUw]{Fatigued}. Regardless of the result of the saving throw, the creature is temporarily immune to the necrovite's fatiguing presence for 24 hours.</p>"
+    },
+    "Stench": {
+      "name": "恶臭 Stench",
+      "description": "<p>0尺。 @Check[fortitude|dc:|options:area-effect,inflicts:sickened,inflicts:slowed]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>\n<p>0 feet. @Check[fortitude|dc:|options:area-effect,inflicts:sickened,inflicts:slowed]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
+    },
+    "(Nymph Queen) Broadcast Allure": {
+      "name": "（宁芙女王）广播魅惑 (Nymph Queen) Broadcast Allure",
+      "description": "<p>宁芙女王会以魔法将自己的影像叠加到行星范围内所有能够显示该影像的科技物品上，例如数据板或通讯装置。或者，她可以将该影像发送到她所知晓的任意一个或多个通讯地址。每个能够看见该影像的生物都必须成功通过一次对抗宁芙女王法术DC的意志豁免，否则其对她的态度改善一级（若严重失败则改善两级）。若宁芙女王对这些受影响的生物或其盟友采取敌对行动，这些生物的态度会恢复到先前的等级。</p>\n<p>The nymph queen magically superimposes her image on all technological items capable of displaying it, such as datapads or comm units, within planetary range. Alternatively, she can send this image to any comm address or addresses that she knows. Each creature that can see the image must succeed at a Will save against the nymph queen's spell DC or have their attitude toward her improve by one step (two steps on a critical failure). Affected creatures' attitudes revert to their previous level if the nymph queen uses a hostile action against them or their allies.</p>"
+    },
+    "Void Healing": {
+      "name": "虚能治疗 Void Healing",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+    },
+    "Grab": {
+      "name": "擒获 Grab",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+    },
+    "(Warped) Unsettling": {
+      "name": "（扭曲）令人不安 (Warped) Unsettling",
+      "description": "<p>20尺。进入该灵气的生物必须成功通过一次意志豁免，否则陷入 @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{恐慌 1}（若为重度失败则为 @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{恐慌 2}），随后在1分钟内获得对此效果的暂时免疫。使用该生物的法术DC或其现有能力之一的DC（取较高者），或者根据该生物的等级设定一个DC。</p>\n<p>20 feet. A creature that enters the aura must succeed at a Will save or become @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 1} (or @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 2} on a critical failure) and is then temporarily immune for 1 minute. Use the creature's spell DC or the DC of one of its existing abilities (whichever is highest), or set a DC based on the creature's level.</p>"
+    },
+    "Trample": {
+      "name": "践踏 Trample",
+      "description": "<p>[体型]，[列出的打击]，@Check[reflex|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>\n<p>[Size]，[Listed Strike]，@Check[reflex|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+    },
+    "Wavesense": {
+      "name": "水波感知 Wavesense",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Wavesense]</p>"
+    },
+    "(Necrovite) Scramble Psyche": {
+      "name": "（死灵精）扰乱心灵 (Necrovite) Scramble Psyche",
+      "description": "<p>死灵触生体触碰一个邻近生物，扰乱其思维模式。该生物必须成功通过一次意志豁免，否则陷入 @UUID[Compendium.sf2e.conditions.Item.yblD8fOR1J8rDwEQ]{困惑} 状态，持续1分钟。只要困惑持续，死灵触生体就被视为对该困惑目标处于 @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{隐蔽} 状态。</p>\n<p>The necrovite touches an adjacent creature and scrambles its thought patterns. The creature must succeed at a Will save or become @UUID[Compendium.sf2e.conditions.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 minute. The necrovite is considered @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden} to the confused target for as long as the confusion lasts.</p>"
+    },
+    "Reactive Strike": {
+      "name": "反应打击 Reactive Strike",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+    },
+    "(Necrovite) Decompose": {
+      "name": "（死灵侍）腐解 (Necrovite) Decompose",
+      "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 死亡活尸用苦痛法杖对一个生物进行一次打击。若该攻击命中并造成伤害，则该生物受到 @Damage[3d6[persistent,void]] 伤害。</p>\n<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> The necrovite makes a wrackstaff Strike against a creature. If the attack hits and deals damage, the creature takes @Damage[3d6[persistent,void]] damage.</p>"
+    },
+    "(Nanite) Compression": {
+      "name": "（纳米机械）压缩 (Nanite) Compression",
+      "description": "<p>该生物可以在不进行挤压的情况下穿过至少 2 英尺宽的缝隙，并且可以挤压通过至少 1 英尺宽的缝隙。</p>\n<p>The creature can move through a gap at least 2 feet wide without Squeezing and can Squeeze through a gap at least 1 foot wide.</p>"
+    },
+    "Throw Rock": {
+      "name": "投石 Throw Rock",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ThrowRock]</p>"
+    },
+    "Swarm Mind": {
+      "name": "集群心智 Swarm Mind",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.SwarmMind]</p>"
+    },
+    "(Necrovite) Undying Vigor": {
+      "name": "（死灵精）不灭活力 (Necrovite) Undying Vigor",
+      "description": "<p><strong>频率</strong> 每分钟一次</p><hr /><p><strong>效果</strong> 死灵虫裔向50尺内的一个亡灵生物注入一股虚空能量。该生物获得 @UUID[Compendium.sf2e.conditions.Item.nlCjDvLMf2EkV2dl]{加速} 1分钟。被强化的亡灵只能将这个额外动作用于疾行或打击。</p>\n<p><strong>Frequency</strong> once per minute</p><hr /><p><strong>Effect</strong> A necrovite infuses an undead creature within 50 feet with a surge of void energy. The creature becomes @UUID[Compendium.sf2e.conditions.Item.nlCjDvLMf2EkV2dl]{Quickened} for 1 minute. The empowered undead can use this extra action only to Stride or Strike.</p>"
+    },
+    "(Security Robot) Exigency": {
+      "name": "（安保机器人）紧急状态 (Security Robot) Exigency",
+      "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p><strong>触发条件</strong> 一个生物以该安保机器人为目标进行攻击</p><hr /><p><strong>效果</strong> 该机器人使其处理能力超频，以尝试避开一次攻击，在对抗触发攻击时，其AC获得+2情境加值。</p>\n<p><strong>Frequency</strong> once every 10 minutes</p>\n<p><strong>Trigger</strong> A creature targets the security robot with an attack</p><hr /><p><strong>Effect</strong> The robot overclocks its processing power to attempt to avoid an attack, gaining a +2 circumstance bonus to its AC against the triggering attack.</p>"
+    },
+    "Change Shape": {
+      "name": "变身 Change Shape",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+    },
+    "Hover": {
+      "name": "悬浮 Hover",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Hover]</p>"
+    },
+    "Frightful Presence": {
+      "name": "恐怖威压 Frightful Presence",
+      "description": "<p>0尺，@Check[will|dc:|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
+    },
+    "Low-Light Vision": {
+      "name": "昏暗视觉 Low-Light Vision",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
+    },
+    "Fast Healing": {
+      "name": "快速治疗 Fast Healing",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+    },
+    "Constrict": {
+      "name": "紧勒 Constrict",
+      "description": "<p>@Damage[(0)[钝击]]，@Check[fortitude|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>\n<p>@Damage[(0)[bludgeoning]]，@Check[fortitude|dc:|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+    },
+    "(Environmental Adaptation) Terrain Adaptation": {
+      "name": "（环境适应）地形适应 (Environmental Adaptation) Terrain Adaptation",
+      "description": "<p>该生物会无视其环境中最常见地形所造成的不平整地面和困难地形，例如寒冷卫星上的积雪地形（将高等困难地形降为普通困难地形）。</p>\n<p>The creature ignores uneven ground and difficult terrain caused by the most prevalent terrain in its environment, such as snowy terrain on a frigid moon (reducing greater difficult terrain to ordinary difficult terrain).</p>"
+    },
+    "Improved Grab": {
+      "name": "精通擒获 Improved Grab",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedGrab]</p>"
+    },
+    "(Necrovite) Clear Mind": {
+      "name": "（死灵迅生体）清明心智 (Necrovite) Clear Mind",
+      "description": "<p><strong>触发条件</strong> 死灵活尸成为具有情绪特征的法术的目标</p><hr /><p><strong>效果</strong> 死灵活尸尝试反制该触发法术。若该法术被扰乱，死灵活尸获得等同于被反制法术环阶两倍的临时生命值，持续 1 分钟。</p>\n<p><strong>Trigger</strong> The necrovite is targeted by a spell with the emotion trait</p><hr /><p><strong>Effect</strong> The necrovite attempts to counteract the triggering spell. If the spell is disrupted, the necrovite gains temporary Hit Points equal to twice the rank of the counteracted spell that last for 1 minute.</p>"
+    },
+    "(Warped) Not Really There": {
+      "name": "（扭曲）并不真的在那里 (Warped) Not Really There",
+      "description": "<p><strong>触发条件</strong> 一个生物以该扭曲生物为目标发动攻击或区域效果，且该扭曲生物察觉到了攻击者</p><hr /><p><strong>效果</strong> 该扭曲生物传送 10 英尺。若这使该扭曲生物脱离该攻击的射程或区域，则该攻击未命中。否则，该扭曲生物在对抗该攻击时获得 AC 和反射豁免的 +2 处境加值。</p>\n<p><strong>Trigger</strong> A creature targets the warped creature with an attack or area effect, and the warped creature is aware of the attacker</p><hr /><p><strong>Effect</strong> The warped creature teleports 10 feet. If this puts the warped creature out of the range or area of the attack, the attack misses. If not, the warped creature gains a +2 circumstance bonus to AC and Reflex saves against the attack.</p>"
+    },
+    "Tremorsense": {
+      "name": "震颤感知 Tremorsense",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+    },
+    "Constant Spells": {
+      "name": "常驻法术 Constant Spells",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+    },
+    "Telepathy": {
+      "name": "心灵感应 Telepathy",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Telepathy]</p>"
+    },
+    "Regeneration": {
+      "name": "再生 Regeneration",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+    },
+    "(Malevolent AI) Electric Cable": {
+      "name": "（恶意 AI）电缆 (Malevolent AI) Electric Cable"
+    },
+    "(Hardlight) Tethered": {
+      "name": "（硬光）系链 (Hardlight) Tethered",
+      "description": "<p>硬光生命体无法离其投影器超过所标示的英尺数。硬光生命体的生命值降至0时会消失，不过其投影器会在[[/gmr 1d4 #hours]]{1d4小时}内将其重构。永久摧毁硬光生命体的唯一方法是找到其投影器，并将其修复或摧毁。</p>\n<p>A hardlight life-form can't travel more than the indicated number of feet from its projector. A hardlight life-form reduced to 0 HP vanishes, though its projector reconstructs it in [[/gmr 1d4 #hours]]{1d4 hours}. The only way to permanently destroy a hardlight life-form is to find its projector and either repair or destroy it.</p>"
+    },
+    "Shield Block": {
+      "name": "盾牌格挡 Shield Block",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ShieldBlock]</p>"
+    },
+    "(Nymph Queen) Fan Mail": {
+      "name": "（宁芙女王）粉丝来信 (Nymph Queen) Fan Mail",
+      "description": "<p>宁芙女王可以通过向一个具有智能的生物发送一段激励视频或文本消息来鼓舞其斗志。只要该生物保存着这条消息，并且与宁芙女王保持良好关系，它就在所有与艺术或表演相关的制造、表演和学识检定中获得+1状态加值。该生物可以用一个单动作的交互动作播放或查看这条消息来鼓舞精神。如此一来，该生物可以尝试对抗一个正在影响它的单一情绪效应，使用宁芙女王的法术攻击调整值。当宁芙女王的消息以这种方式被使用后，它随后就会变成一段普通的视频或文本。</p>\n<p>A nymph queen can inspire a single intelligent creature by sending them a motivational video or text message. As long as the creature keeps the message saved and remains in good standing with the nymph queen, they gain a +1 status bonus to all Crafting, Performance, and Lore checks related to art or performance. As a 1-action Interact action, the creature can play or view the message to bolster their spirits. Doing so allows the creature to attempt a counteract check against a single emotion effect affecting them, using the nymph queen's spell attack modifier. When the nymph queen's message is used in this way, it becomes a mundane video or text afterward.</p>"
+    },
+    "(Necrovite) Entropic Touch": {
+      "name": "（死灵尸妖）熵触 (Necrovite) Entropic Touch",
+      "description": "<p>死空使造成的虚空伤害会对不死生物和具有虚空治疗的生物造成伤害，如同其是生机伤害一般。死空使的近战打击在攻击虚体不死生物时，具有幽灵杀手升级的增益。</p>\n<p>Void damage dealt by a necrovite damages undead and creatures with void healing as if it were vitality damage. A necrovite's melee Strikes have the benefits of the ghost killer upgrade on attacks against incorporeal undead.</p>"
+    },
+    "(Robotic War Machine) Ballistic Defense Matrix": {
+      "name": "（机器人战争机器）弹道防御矩阵 (Robotic War Machine) Ballistic Defense Matrix",
+      "description": "<p><strong>触发条件</strong> 一个生物试图对遥控战争机器进行一次远程打击</p>\n<p><strong>需求</strong> 该战争机器当前位于该生物的触及范围之外</p><hr /><p><strong>效果</strong> 遥控战争机器对触发该反应的生物进行一次远程打击。若此次打击的结果等于或高于触发打击的结果，则该次触发打击视为严重失败。</p>\n<p><strong>Trigger</strong> A creature attempts a ranged Strike against the remote war machine</p>\n<p><strong>Requirements</strong> The war machine is currently outside the creature's reach</p><hr /><p><strong>Effect</strong> The remote war machine makes a ranged Strike against the triggering creature. If the result of this Strike is equal to or greater than the result of the triggering Strike, the triggering Strike is treated as though it were a critical miss.</p>"
+    },
+    "(Security Robot) Nanite Surge": {
+      "name": "（安保机器人）纳米虫激涌 (Security Robot) Nanite Surge",
+      "description": "<p><strong>频率</strong> 每天一次</p><hr /><p><strong>效果</strong> 安保机器人使一个科技生物或物品恢复相当于该机器人等级 × 6 的生命值（@Damage[(@actor.level*6)[healing]]）。</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> The security robot restores 6 Hit Points per the robot's level (@Damage[(@actor.level*6)[healing]]) to one technological creature or item.</p>"
+    },
+    "Darkvision": {
+      "name": "黑暗视觉 Darkvision",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
+    },
+    "(Nymph Queen) Celestial Step": {
+      "name": "（宁芙女王）天族步伐 (Nymph Queen) Celestial Step",
+      "description": "<p>宁芙女王能够近乎瞬间地穿越她的天体身躯。宁芙女王可以使用天族步传送到她领地之上或之内的任何区域，遁入其表面并在她预定的目的地重新出现。</p>\n<p>A nymph queen can traverse her celestial body near-instantaneously. A nymph queen can use Celestial Step to teleport to any area on or within her territory, vanishing into its surface and reemerging at her intended destination.</p>"
+    },
+    "No Breath": {
+      "name": "无须呼吸 No Breath",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NoBreath]</p>"
+    },
+    "Scent": {
+      "name": "灵敏嗅觉 Scent",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
+    },
+    "Lifesense": {
+      "name": "生命感知 Lifesense",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Lifesense]</p>"
+    },
+    "Push": {
+      "name": "推离 Push",
+      "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
+    },
+    "Swallow Whole": {
+      "name": "活吞 Swallow Whole",
+      "description": "<p>[Listed Size]，@Damage[(0)[bludgeoning]]，破裂值[0]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+    },
+    "(Nanite) Nanite Surge": {
+      "name": "（纳米机械）纳米机械激涌 (Nanite) Nanite Surge",
+      "description": "<p><strong>频率</strong> 每天一次</p><hr /><p><strong>效果</strong> 该生物使一个具有科技特征的生物或物品恢复每等级6点生命值（@Damage[(@actor.level*6)[healing]]）。</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> The creature restores 6 Hit Points per level (@Damage[(@actor.level*6)[healing]]) to one creature or item with the tech trait.</p>"
+    },
+    "(Robotic War Machine) Attack Pattern Beta": {
+      "name": "（机器人战争机器）攻击模式贝塔 (Robotic War Machine) Attack Pattern Beta",
+      "description": "<p>远程战争机器对一个目标进行一次打击，然后进行一步调整或疾行，并对射程内的另一个目标进行一次打击。这两次打击都计入其多重攻击减值，但其多重攻击减值要在它完成这两次打击后才会增加。</p>\n<p>The remote war machine makes a Strike against a target, then Steps or Strides and makes a Strike against another target within range. Both Strikes count toward its multiple attack penalty, but its multiple attack penalty doesn't increase until after it makes both Strikes.</p>"
+    },
+    "(Digital Ghost) Virtual Arms": {
+      "name": "（数字幽灵）虚拟武器 (Digital Ghost) Virtual Arms",
+      "description": "<p>数字幽灵的武器造成精神伤害，具有幽灵杀手升级，且在被丢弃时会消失。</p>\n<p>A digital ghost's weapons deal mental damage, have the ghost killer upgrade, and disappear if dropped.</p>"
+    },
+    "Engulf": {
+      "name": "包卷 Engulf",
+      "description": "<p>@Check[reflex|dc:]，@Damage[(0)[damageType]]伤害，[[/act escape dc=0]]，破裂值[0]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+    },
+    "(Infiltrator Robot) Reactive Camouflage": {
+      "name": "（潜入机器人）反应式伪装 (Infiltrator Robot) Reactive Camouflage",
+      "description": "<p>该机器人出厂时，其外部面板上装有光敏反射器。即使没有掩护或隐蔽，它也能 [[/act hide]]。</p>\n<p>The robot comes packaged with photosensitive reflectors on its exterior panels. It can [[/act hide]] even without cover or concealment.</p>"
+    }
+  }
+}

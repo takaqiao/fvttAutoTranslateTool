@@ -1,0 +1,521 @@
+{
+    "label": "魔战士+专长 Feats",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "entries": {
+        "Ablative Barrier Block": {
+            "name": "离格屏障格挡 Ablative Barrier Block",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                },
+                {
+                    "value": "闪耀法盾融汇研究"
+                }
+            ],
+            "description": "<p><strong>需求</strong> 你处于奥术奔涌架势，且你持握一面盾牌或准备了@UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR]{护盾术 Shield}。</p>\n<hr />\n<p>你用奔涌的残余力量创造一个强大的屏障来保护你和盟友。如果你下个动作是@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举起盾牌 Raise a Shield}，除了正常动作效果外，你还可以创造一个围绕你5尺或10尺弥漫的屏障。这道屏障赋予弥漫范围的盟友部分掩蔽的效果，且在你举盾期间，你的盟友可以使用寻找掩蔽动作来获得标准掩蔽效果。该屏障是透明的，盟友无法利用它的掩蔽来躲藏或潜行。</p>"
+        },
+        "Battlemage's Apotheosis: Ultimate Radiance": {
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                }
+            ],
+            "name": "战法巅峰：终极光辉 Battlemage's Apotheosis: Ultimate Radiance",
+            "description": "<p><strong>需求</strong> 你的法术打击已充能</p>\n<hr />\n<p>召唤强大的能量灵光，展示失传的技巧，你释放暴力的力量，奥术奔涌光辉万丈，在你对敌时改变你发丝和眼睛的颜色。你进入奥术奔涌状态并获得额外效果。你发出20尺半径的明亮光并在接下来20尺发出昏暗光，获得等于你速度的飞行速度，以及再生15（因力场伤害和重击失效）。只要你仍在奥术奔涌架势中就能持续获得以上好处。</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.qCoQjwBNbkWHlUnX]{效果：战法巅峰-终极光辉}</p>"
+        },
+        "Cascading Weapon Blast": {
+            "name": "奔涌武器冲击 Cascading Weapon Blast",
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ],
+            "description": "<p>你用武器向附近的对手发射魔法冲击波。你学会@UUID[Compendium.magus.magus-focus-spells.Item.rBPkrPH0L6ZDB4Lb]{奔涌武器冲击 Cascading Weapon Blast}汇聚法术。你聚能池的聚能点增加1。</p>"
+        },
+        "Cone of Figments": {
+            "prerequisites": [
+                {
+                    "value": "flinging figments hybrid study"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ],
+            "name": "Cone of Figments",
+            "description": "<p><strong>Requirement</strong> Your Spellstrike is charged.</p>\n<hr />\n<p>You infuse your spellstrike with a storm of figments. Make a thrown Spellstrike against a target within your bonded weapons first range increment. The spell you cast for the Spellstrike can't be a cantrip or focus spell. If your Strike is successful, figments burst forth from the connecting blow in a @Template[cone|distance:10] bursting from behind the target of your Spellstrike and creatures in the area, excluding the target of your Spellstrike, take 1d4 damage per spell level and must attempt a @Check[reflex|dc:resolve(@actor.attributes.spellDC.value)|basic|traits:magical,conjuration] save.</p>\n<p>If your spell was one that can deal damage, the damage of your Cone of Figments is the same type that spell could deal (or one type of your choice if the spell could deal multiple types of damage). If the spell couldn't deal damage, the bonus damage depends on the spell's school.</p>\n<ul>\n<li><strong>防护系</strong> or <strong>塑能系</strong> force</li>\n<li><strong>咒法系</strong> or <strong>变化系</strong> same type as your weapon or unarmed attack</li>\n<li><strong>预言系</strong>, <strong>惑控系</strong>, or <strong>幻术系</strong> mental</li>\n<li><strong>死灵系</strong> negative or positive damage if your spell had the positive trait</li>\n</ul>"
+        },
+        "Dealer of Death": {
+            "name": "死亡发牌员 Dealer of Death",
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ],
+            "description": "<p>学会将强大的魔法注入哈罗牌或其他牌组中后，你可以将这些牌组当做致命武器使用。选取此专长时，你获得一副哈罗牌或其他适当的牌组。在你的日常准备时，你能向一副牌注入魔法，允许你将里面的卡牌当做简易武器使用，它属于短刃武器组，造成1d6挥砍伤害，具有灵巧、娴熟、投掷10尺和多用P特征。牌组注魔后，其中的卡牌数量不会在你抽卡后减少，从牌组中被摧毁或抽走的卡牌将在1分钟后经由魔法获得补充。</p>\n<p>如果你用注魔牌组中的卡牌进行法术打击并造成伤害，掷骰1d6并见下表。若法术伤害类型与抽取的卡牌相符，你造成对应伤害类型的额外伤害，数值等于用于法术打击的法术环级，戏法则是你等级的一半。</p>\n<ul>\n<li><strong>锤：</strong>寒冷伤害</li>\n<li><strong>钥：</strong>火焰伤害</li>\n<li><strong>盾：</strong>毒素伤害</li>\n<li><strong>书：</strong>电击伤害</li>\n<li><strong>星：</strong>心灵伤害</li>\n<li><strong>冠：</strong>酸蚀伤害</li>\n</ul>"
+        },
+        "Devouring Metal": {
+            "name": "吞噬金属 Devouring Metal",
+            "prerequisites": [
+                {
+                    "value": "无当重刃融汇研究"
+                }
+            ],
+            "description": "<p><strong>触发</strong> 你重击了一个活物</p>\n<p><strong>需求</strong> 你处于奥术奔涌中</p>\n<hr />\n<p>你的武器和魔力不光增强了你力量，在你挥出致命一击时，它们还会吞噬你的敌人。目标必须尝试一次@Check[fortitude|dc:resolve(@actor.attributes.spellDC.value)]豁免，对抗你的法术DC。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，你恢复生命值，数值等于目标因流失状态失去的生命值。若你会恢复的生命值超出生命值上限，超出的部分转为临时生命值，持续到奥术奔涌结束。这些临时生命值与你从奥术奔涌获得的任何其他生命值叠加。</p>\n<p><strong>失败</strong> 同成功，但目标@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}。</p>\n<p><strong>大失败</strong> 同成功，但目标@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 3}。</p>"
+        },
+        "Diametric Pairing": {
+            "name": "Diametric Pairing",
+            "prerequisites": [
+                {
+                    "value": "Arcane Cascade"
+                },
+                {
+                    "value": "diametric fusion hybrid study"
+                }
+            ],
+            "description": "<p><strong>需求</strong> You are in Arcane Cascade and on your last action you critically succeeded at a Strike with one of your diametric weapons while wielding your other diametric weapon.</p>\n<hr />\n<p>You have learned to fuse your weapons into a singular fighting style, often apply a specific name to this fusion such as dance of the sun and moon, crash of thunder and lighting, or something even more eclectic. You unleash diametric energy from your other weapon and the target of the required Strike takes [[/r (1d4*ceil(@actor.level/2))[@actor.flags.pf2e.arcaneCascade.damageType]]] on a basic save determined below. Targets that fail their save also suffer the effects of your other diametric weapon's critical specialization. The save for the damage and critical specialization effect is against your spell DC with a save type that matches the weapon's critical specialization or a Reflex save if there was no save. The target rolls once to determine the effects of the damage and the critical specialization.</p>\n<hr />\n<p>@Check[fortitude|dc:resolve(@actor.attributes.spellDC.value)|basic|traits:magical]</p>\n<p>@Check[will|dc:resolve(@actor.attributes.spellDC.value)|basic|traits:magical]</p>\n<p>@Check[reflex|dc:resolve(@actor.attributes.spellDC.value)|basic|traits:magical]</p>\n<p>@UUID[Compendium.pf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.PVrMSF93KIejBTMm]{Critical Specialization Effects}</p>"
+        },
+        "Discern Physicality": {
+            "name": "辨识强敌 Discern Physicality",
+            "description": "<p><strong>需求</strong> 你处于奥术奔涌架势</p>\n<hr />\n<p>你将自己训练得能一眼看出一个生物的强大程度。进行一次@Check[perception]检定或合适的学识技能检定，对抗一个生物的回忆知识DC，你在检定上获得+1环境加值。若你拥有武器专精，加值为2；拥有高等武器专精则加值为3。GM可能会根据你和敌人之间的距离给予减值。敌人之后对辨识强敌临时免疫1天。</p>\n<p><strong>大成功</strong> GM从以下关于敌人的情报中选择两项告诉你：它的一个被动能力、动作或行动，它其中一项打击的调整值，法术DC或最高的技能调整值。若有平局出现，GM应随机选择一项。只要你还在奥术奔涌中，你对该生物的伤害获得+2状态加值。</p>\n<p><strong>成功</strong> 同大成功，但你只获得一项信息，且奥术奔涌的状态加值为+1。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                }
+            ]
+        },
+        "Elaborate Patterned Strike": {
+            "name": "Elaborate Patterned Strike",
+            "prerequisites": [
+                {
+                    "value": "dual-pattern strike focus spell"
+                },
+                {
+                    "value": "diametric fusion hybrid study"
+                }
+            ],
+            "description": "<p>Your ability to rapidly make attacks allows you to emblazon your enemies with an elaborate set of runes that hinder them further. When you cast dual-pattern strike, you can choose to cast the spell as a 2-action or 3-action spell and gain additional effects.</p>\n<ul style=\"list-style-type:none\">\n<li><span class=\"pf2-icon\">2</span> (somatic, verbal) Make an additional Strike with each of your diametric weapons. For each Strike that hits after the second, increase the weakness from your dual-pattern strike by 1 and apply any weakness from dual-pattern strike before applying any damage from any of your Strikes.</li>\n<li><span class=\"pf2-icon\">3</span> (somatic, verbal) As the 2-action version of the spell, except an eruption of magical energy bursts after the pattern is complete and the target takes 1d4 damage per spell level of the spell on a basic Reflex save after the Strikes are made. The damage dealt is of the same type as the weakness you chose.</li>\n</ul>\n<hr />\n<p>@Check[reflex|dc:resolve(@actor.attributes.spellDC.value)|basic|traits:magical]</p>\n<p>[[/r ceil(@actor.level/2)d4[acid]]]{1d4 acid damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[cold]]]{1d4 cold damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[electricity]]]{1d4 electricity damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[fire]]]{1d4 fire damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[force]]]{1d4 force damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[mental]]]{1d4 mental damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[void]]]{1d4 negative damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[poison]]]{1d4 poison damage per spell level}</p>\n<p>[[/r ceil(@actor.level/2)d4[vitality]]]{1d4 positive damage per spell level}</p>"
+        },
+        "Enhanced Fortification": {
+            "prerequisites": [
+                {
+                    "value": "metamorphic armor focus spell"
+                },
+                {
+                    "value": "wrought warplating hybrid study"
+                }
+            ],
+            "name": "Enhanced Fortification",
+            "description": "<p>When you reshape your armor, you do so perfectly, effectively becoming a brand new suit of armor. You can choose two effects when you cast metamorphic armor instead of one. When you make a Strike during the spell’s duration, you can only swap one of these effects to another effect as normal. Add the following options to the options you have when you cast metamorphic armor.</p>\n<ul>\n<li>You grant your armor an additional armor property rune equal to half your level. This property rune does not count towards the maximum runes your armor can have.</li>\n<li>You change the material your armor is made of to another material; this material must be able to be made into an armor, and the armor material must be equal or lower than your level.</li>\n<li>You can grant your armor an adjustment less than or equal to half your level. It can gain this adjustment even if the armor could not normally sustain the adjustment (such as burnished plating on hide armor).</li>\n<li>You can reduce the Speed penalty of your armor by 5 feet and can remove the Hindering and Noisy traits.</li>\n</ul>"
+        },
+        "Essence Eating Shell": {
+            "name": "Essence Eating Shell",
+            "description": "<p>You have learned that the price of more potent spellshells is infusing it with an essence that taxes your very being. During your daily preparation, you can choose to make one of your shells an essence eating shell. When you make a Spellstrike with one of these shells, you and the initial target of the Spellstrike are affected by an additional effect determined by the spell that was chosen for the spellshell. As long as your attack roll was not a critical failure, the target suffers the effects listed below. You also suffer the listed effect, but you gain a +3 status bonus to saves against the effect if your Spellstrike was successful and you treat your degree of success as one better if you get a critical success.</p>\n<ul style=\"list-style-type:none\">\n<li><strong>防护系</strong> (force) The creature is trapped inside a cube of force which attempts to compress itself around the creature. The creature takes 1d4 force damage per level of the spell and must attempt a basic Fortitude save against your spell DC. Creatures that fail their save are also immobilized for 1 round.</li>\n<li><strong>咒法系</strong> (teleportation) The creature is blinked between existence, rupturing its form. The creature must attempt a basic Fortitude save against your spell DC and takes 1d4 bludgeoning and 1d4 slashing damage per level of the spell. On a failed save, the creature must attempt a DC 5 flat check to use actions with the manipulate trait for 1 round as they phase in and out of existence.</li>\n<li><strong>预言系</strong> (emotion, fear, mental) The creature sees a vision of their death. The creature takes 1d6 mental damage per spell level of the spell and must attempt a basic Will save against your spell DC. Creatures that fail their save are frightened 1 or frightened 2 on a critical failure.</li>\n<li><strong>惑控系</strong> (mental) The creature's mind is bound to a mental prison. The creature must attempt a Will save against your spell DC. Creatures that fail their save are stupefied 2 for 1 round, or confused for 1 round on a critical failure. If a creature would gain the dying condition from the Spellstrike that caused this effect, the duration of the confused and stupefied conditions increases to permanent, but the creature can attempt a new save against the effect each day.</li>\n<li><strong>塑能系</strong> The creature is blasted with essence manipulation. The creature takes an additional amount of damage from your Spellstrike equal to the level of the spell you cast and must attempt a basic Reflex save. Determine the damage type as described in Arcane Cascade. Creatures that fail their save also apply a weakness to the damage type equal to the spell's level or reduce any resistances they have to the damage type by the same amount. If a creature with immunity to the damage type fails their save, they take half damage of that damage type. This effect occurs at the same time as the Spellstrike and applies any weaknesses or reductions in resistances to the Spellstrike's damage if they would apply.</li>\n<li><strong>幻术系</strong> (mental, visual) The creature is absorbed into a false reality. The creature must attempt a Will save against your spell DC. Creatures that fail their save treat all areas around them as difficult terrain for 1 minute or greater difficult terrain if their save was a critical failure. Any creature that moves through the area or uses the Seek action to examine it can attempt to disbelieve this illusion.</li>\n<li><strong>死灵系</strong> (death) The creature is bombarded with a sphere of death. The creature takes 1d8 negative damage per level of the spell or positive damage if the spell had the positive trait and must attempt a Fortitude save against your spell DC. Creatures that fail their save are also drained 2 and creatures that critically fail their save are drained 4. If a creature is reduced to 0 Hit Points from the damage of this effect or the drained condition, it is instantly slain and attempts to communicate with it, return it to life, turn it into an undead, or otherwise disturb its afterlife fail unless the effect's counteract level is higher than half your level when you killed the creature (rounded up), or originates from an artifact or a deity. If any creature would not be affected by the type of damage dealt by this effect, this effect does not occur for any creature and fizzles, but the effects of the Spellstrike still apply normally.</li>\n<li><strong>变化系</strong> (morph) The creature's inner anatomy is morphed by your shell, causing bodily stress and difficulty operating. The creature must attempt a Fortitude save and becomes sickened 2 on a failure, or sickened 3 on a critical failure. While a creature is sickened they also take a –10- foot status penalty to their Speeds. A creature that is immune to the sickened condition instead takes 1d4 bludgeoning damage per level of the spell on a basic Fortitude save and suffers the status penalty to Speeds for 1 round after taking damage from a failure of this effect.</li>\n</ul>\n<p><strong>Special</strong> You can take this feat multiple times, gaining the ability to create an additional essence eating spellshell each time you select it.</p>",
+            "prerequisites": [
+                {
+                    "value": "horizon spellshell study"
+                }
+            ]
+        },
+        "Essence Mystic Dedication": {
+            "prerequisites": [
+                {
+                    "value": "Bargained Essence"
+                }
+            ],
+            "name": "Essence Mystic Dedication",
+            "description": "<p>You have strengthened your connection to your havok. You gain the conflux spell associated with the hybrid study you chose for your essence tactics, and you increase the number of Focus Points in your focus pool by 1.</p>\n<p>When you cast a conflux spell that does not have the havok trait, you can choose to give it the havok trait, giving you a +1 status bonus to any attacks you make as part of Casting the Spell and doubling the damage from your havok cascade until the beginning of your next turn.</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.Ee5RMHDGu9vX9oOj]{Effect: Essence Mystic Dedication}</p>"
+        },
+        "Eternally Rebounding Figments": {
+            "name": "Eternally Rebounding Figments",
+            "prerequisites": [
+                {
+                    "value": "rebounding figment strike focus spell"
+                },
+                {
+                    "value": "flinging figments hybrid study"
+                }
+            ],
+            "description": "<p>Your figments continue to rebound until you miss. When you cast @UUID[Compendium.magus.magus-focus-spells.Item.y9uj8UHvnUWdwpc0]{Rebounding Figment Strike}, your rebounding figment strike can continue to make thrown Strikes with your figments so long as there is another creature within your weapon's range increment to target with a thrown Strike and your previous Strike was successful. You cannot target a creature more than once with one of these Strikes, even if your previous Strike was against another creature. In addition, the first Strike of your rebounding figment strike does not increase your multiple attack penalty.</p>"
+        },
+        "Inverted Energy Spellstrike": {
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ],
+            "name": "能量反转性法术打击 Inverted Energy Spellstrike",
+            "description": "<p><strong>需求</strong> 你的法术打击已充能，且你能够施展至少一个造成能量伤害的法术。</p>\n<hr />\n<p>你挥舞武器的舞蹈为复写法术元素力量的奥术方程写下最后一行。用一个你能施放且造成能量伤害（酸蚀、寒冷、电击、火焰、力场、虚能、命能或音波）的法术进行法术打击。你可以将法术伤害修改为自选的另一种类型，该法术失去之前的伤害类型对应的特征，并获得新伤害类型的特征。若你选择的法术能造成不止一种伤害类型，你选择一种可以应用本专长的伤害类型进行反转，其他伤害保持原样。</p>"
+        },
+        "Living Grimoire": {
+            "name": "活魔典 Living Grimoire",
+            "description": "<p>你不需要法术书，你将法术记录在最为神圣的羊皮纸上：你自己。你可以将法术刻在自己的皮肤上，就如在合适的羊皮纸上抄写卷轴一般，所需时间与抄写卷轴相同。这看起来可能像是文字组成的一堆纹身，手背上的古老文本记号，或其他人体彩绘艺术。你可以将身体当做法术书使用，并用其进行日常准备。</p>\n<p>你的身体获得以下魔典能力，它不算作你当天的魔典。</p>\n<p><strong>启动</strong> <span class=\"pf2-icon\">f</span> 专注 （心灵，视觉）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 若你下一个动作是法术打击，你身体上刻印的符文会旋转起来加强攻击。若法术打击命中，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}直到你下回合结束，重击则持续1分钟。因此效果目眩的生物在目眩持续期间，在针对你的攻击骰上承受-1环境减值。</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.2VcmRCrUc37OSa9y]{效果：活魔典}</p>"
+        },
+        "Mediation of Insight": {
+            "name": "洞见调停 Mediation of Insight",
+            "description": "<p>你用10分钟进入一种特殊状态，在其中你的心灵与肉体通过魔法融合，展示你行动的特定未来，并赋予你塑造结果的力量。下次你为遭遇投掷先攻时，你可以将一个特定动作或行动宣告为你第一回合的首个动作。若你这样做了，该动作被锁定，你必须在第一回合执行它。如果你在动作中失败，或因其他原因无法执行此动作，你失去所有用于执行指名动作的动作。当你尝试指名动作时，你在第一次攻击骰或检定上获得+1状态加值，且在获得失败或大失败的结果时将成功度上调一级。</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.cI71YviGF5ER5wqC]{效果：洞见调停}</p>"
+        },
+        "Merged Martial Stance": {
+            "name": "Merged Martial Stance",
+            "prerequisites": [
+                {
+                    "value": "Arcane Cascade"
+                },
+                {
+                    "value": "thousand-touch arcana hybrid study"
+                }
+            ],
+            "description": "<p>You have learned to merge the effects of your Arcane Cascade with powerful martial arts. Choose a level 1 monk feat with the stance trait. You gain that feat as a magus class feat and can take feats that have it or subsequent feats as a prerequisites. For the purpose of meeting their prerequisites, your monk level is equal to your character level.</p>\n<p>You can use your Arcane Cascade while in the selected stance and you can enter this stance as part of entering an Arcane Cascade, allowing you to enter the two stances at once. When you first enter these stances and at the beginning of each turn you are in Arcane Cascade and your chosen stance, you must choose either Arcane Cascade or your chosen stance as your primary stance. For the purposes of actions, effects, or abilities that would require you to be in a stance, you are in the stance you chose. You must still meet the requirements for both stances, otherwise the stance whose requirements you failed to meet immediately ends.</p>"
+        },
+        "Multi-Faceted Visage": {
+            "name": "Multi-Faceted Visage",
+            "description": "<p><strong>需求</strong> Your visage is donned.</p>\n<hr />\n<p>Your visage can be altered on a whim. You alter your selection from Don Visage to another option of your choice, changing your demeanor to that of your new selection and replacing the benefits with your new demeanor.</p>",
+            "prerequisites": [
+                {
+                    "value": "Jaunty Visage"
+                }
+            ]
+        },
+        "Perfect Arcane Form": {
+            "name": "Perfect Arcane Form",
+            "prerequisites": [
+                {
+                    "value": "thousand-touch arcana hybrid study"
+                }
+            ],
+            "description": "<p>As you allow your magic to flow through you, you overlap yourself with the ideal arcane form that you channel your spells from. This form may look identical to you, or it may have extra ethereal arms, glowing organs, or some other unusual appearance. You enter a battle form for 1 minute. You have hands in this battle form and can take actions with the manipulate trait. While you are in this battle form, you gain the benefits of Arcane Cascade and are considered to be in Arcane Cascade for the purposes of feats or activities that would require it. You also gain the following benefits.</p>\n<ul>\n<li>20 temporary Hit Points.</li>\n<li>If you were Medium or smaller, you can increase your size to Large provided you have the space to do so and your unarmed attacks reach increases by 5 feet (or by 10 feet if it started out Tiny).</li>\n<li>A fly Speed equal to your Speed.</li>\n<li>A +1 status bonus to saves against spells.</li>\n<li>You gain a precise sense with a range of 30 feet that enables you to sense arcane magic and creatures or items with the arcane trait.</li>\n<li>Increase the damage die of your melee unarmed attacks by 1, up to a maximum of d10. If your damage die was already d10 or above, you instead gain a +2 status bonus to damage with your melee unarmed Strikes.</li>\n<li>You gain a ranged unarmed attack (magical, range increment 30 feet, unarmed), which deals 1d6 force damage.</li>\n</ul>"
+        },
+        "Pummeling Spellstrike": {
+            "prerequisites": [
+                {
+                    "value": "thousand-touch arcana hybrid study"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ],
+            "name": "Pummeling Spellstrike",
+            "description": "<p><strong>需求</strong> You're in Arcane Cascade stance, are unarmed, and your Spellstrike is charged.</p>\n<hr />\n<p>You unleash your pummeling blow with a dazzling display of martial prowess, carrying a powerful force behind it. Make a Spellstrike. It gains the following effects in addition to the normal effects of your Spellstrike.</p>\n<p><strong>大成功</strong> You push your target up to 10 feet away from you after your Spellstrike resolves. You can Stride after it, but you must move the same distance and in the same direction.</p>\n<p><strong>成功</strong> You push your target back 5 feet after the Spellstrike resolves. You can Stride after it, but you must move the same distance and in the same direction.</p>\n<hr />\n<p><strong>Special</strong> If you have Merged Martial Cascade, you can use Pummelling Strike in the stance you chose as well as Arcane Cascade.</p>"
+        },
+        "Puppet's Command": {
+            "name": "Puppet's Command",
+            "prerequisites": [
+                {
+                    "value": "Puppet String"
+                }
+            ],
+            "description": "<p><strong>需求</strong> You have two puppet strings attached to a single enemy.</p>\n<hr />\n<p>Your puppet strings allow you to force the target to take an action. You can use your puppet strings to make the target approach you, release what it's holding, drop prone, or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's @Check[will|dc:resolve(@actor.attributes.spellDC.value)] save against your spell DC. The target takes a status penalty to their save against this effect equal to the number puppet strings in excess of two. Regardless of the result, the target is then immune to your Puppet’s Command for 1 day.</p>\n<p><strong>大成功</strong> The creature is unaffected and immediately breaks one of your puppet strings.</p>\n<p><strong>成功</strong> The creature is unaffected.</p>\n<p><strong>失败</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>大失败</strong> The target must use all its actions on its next turn to obey your command.</p>"
+        },
+        "Recharging Reload": {
+            "name": "Recharging Reload",
+            "prerequisites": [
+                {
+                    "value": "horizon spellshell hybrid study"
+                }
+            ],
+            "description": "<p>Recharging and reloading, go together like a target and shot. You Reload and then recharge your Spellstrike.</p>"
+        },
+        "Rewrite Rune": {
+            "name": "覆写符文 Rewrite Rune",
+            "description": "<p>也许没有人比你更熟知魔法武器的基本原理。轻轻一碰，你便可以移动一把武器的符文，如同触碰流水。你可以用花费1小时的行动为武器/防具添加或移除符文。在这段时间内，你可以将武器或防具的符文替换为另一个等级不高于原有的符文，同时你选择的符文价格不能高于原本的符文。你从武器上移除符文时，你可以将其转移到另一把合适武器或普通石头上，这一过程将其转变为符文石。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥法专家"
+                }
+            ]
+        },
+        "Ride the Spell": {
+            "name": "法术冲浪 Ride the Spell",
+            "description": "<p>你在脚下召唤一个法术，骑着它冲向敌人。如果你下一个动作是施放一个有射程或区域效果的法术，你骑着它到达目的地，沿着法术方向移动最多60尺。该移动忽略任何困难或高等困难地形，且允许你越过障碍物或裂缝，你会飞跃它们并在与法术目标或目的地邻接的方格落地。若你施放一个具有区域效果的法术，你可以选择在区域内，或者与影响区域邻接的方格结束移动。</p>"
+        },
+        "Scent of Arcana": {
+            "name": "奥法气息 Scent of Arcana",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                }
+            ],
+            "description": "<p>你发现魔法的辛香能够名副其实地渗入空气，让你能通过嗅觉察觉其存在。当你处于奥术奔涌时，你获得能嗅探奥术魔法的30尺模糊感官。这种嗅觉允许你侦测到等级不高于你的奥术魔法、魔兽、构装体、龙类、元素生物、能施放奥术法术的生物或能使用带有奥术特征动作的生物。此外，你可以使用奥法技能取代生存来@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track}这些生物，若你途经一个被追踪生物在一小时内使用过魔法能力或施过法的地点，你的追踪获得+2状态加值。若你的奥法为大师，途经被追踪生物在一天内使用过魔法能力或施过法的地点即可获得此加值。</p>"
+        },
+        "Second-Hand Wand": {
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ],
+            "name": "二手魔杖 Second-Hand Wand",
+            "description": "<p>你学会将战斗风格和魔杖融合。你用来握持魔杖的手在判断交互动作和专长、能力要求时被视为空手。你也可以用这只手握住物品（但仍然不能用来持握武器）。你可以用魔杖中的合适法术进行法术打击，当你过载魔杖进行法术打击时，将所需的纯骰检定DC降低为5，而非原本的10。</p>"
+        },
+        "Serpentine Flail": {
+            "name": "Serpentine Flail",
+            "description": "<p><strong>需求</strong> You are wielding a weapon in the flail group.</p>\n<hr />\n<p>Your weapon can twist and slither, like a serpent. You infuse your flail with life, giving it a Command and allowing you to issue it further commands for up to 1 minute. Your flail gains 2 actions when you issue it a Command and it can use these actions to make simple Interact actions, move 10 feet by sliding on a surface, or Seek with an imprecise motion sense of 15 feet. Your flail can't perform actions that require significant manual dexterity, including any action that would require a check to accomplish, and you can't use it to hold items. Your flail can slide up sheer surfaces such as a wall and can fit through holes or areas appropriate for its size. Your flail can communicate with you via touch telepathy but it can only convey simple words or sentences when it does.</p>",
+            "prerequisites": [
+                {
+                    "value": "scourging lash hybrid study"
+                }
+            ]
+        },
+        "Slide Slice": {
+            "prerequisites": [
+                {
+                    "value": "Slidecast"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ],
+            "name": "Slide Slice",
+            "description": "<p><strong>触发</strong> You used Slidecast before you made a Spellstrike and the Strike from your Spellstrike was a critical hit.</p>\n<hr />\n<p>You carry your slide through your opponent after making a devastating blow. You can Stride up to half your Speed. You can make this Stride before or after the effects of your spell are applied.</p>"
+        },
+        "Sky Fall": {
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                },
+                {
+                    "value": "星火流矢融汇研究"
+                }
+            ],
+            "name": "坠天 Sky Fall",
+            "description": "<p><strong>需求</strong> 你正握持一把远程、投掷武器或拥有远程无武装攻击，且你处于奥术奔涌中</p>\n<hr />\n<p>你呼唤天空向敌人降下箭雨，你的武器引导即将到来的坠天。用需求武器或无武装攻击进行一次远程打击，但效果不会立刻结算。在你下个回合结束时，将你的攻击检定与武器第一或第二射程增量内的一个@Template[burst|distance:15]范围内的所有敌人进行比较。任何范围内的自然或建造物地形都会因冲击变成困难地形。</p>"
+        },
+        "Spell Stitcher": {
+            "name": "法术绷带 Spell Stitcher",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                },
+                {
+                    "value": "医疗受训"
+                }
+            ],
+            "description": "<p>经历了几次困境后，你学会了如何将奥术魔法编织进特殊工具，用来修补伤口。你可以使用奥法技能的熟练等级来满足技能专长对医疗技能的先决条件。你获得@UUID[Compendium.pf2e.feats-srd.Item.wYerMk6F1RZb0Fwt]{战地医疗 Battle Medicine}技能专长。在日常准备时，你可以为一套医疗工具包注入奥术能量，这套工具在你手中时，你可以用奥法技能代替医疗技能使用医疗的技能动作。</p>\n<p>当你处于奥术奔涌架势中时，你用这套工具进行的战地医疗治疗量增加1，大成功时增加2。若你有武器专精，额外治疗量增加为2和4。若你有高等武器专精，增加为3和6。</p>"
+        },
+        "Time Splitting Spellstrike": {
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ],
+            "name": "时间裂变法术打击 Time Splitting Spellstrike",
+            "description": "<p>你将扭曲时间的技巧来延迟即将到来的法术打击效果。如果你下个动作是法术打击，你能将法术效果延迟最多3轮。在你每回合开始时，你可以选择用法术打击的打击结果让法术生效。如果法术需要将从你占据的方格作为起点，例如扩展法术打击造成的区域效果，你可以将任何邻接目标的方格作为法术起点。</p>"
+        },
+        "Unbreakable Figure": {
+            "name": "Unbreakable Figure",
+            "description": "<p><strong>触发</strong> You would take damage.</p>\n<p><strong>需求</strong> You are in Arcane Cascade stance and are wearing medium or heavy armor.</p>\n<hr />\n<p>You merge with your armor entirely, wrapping your entire body in armor and sheathing you from the coming blow. You reduce the damage you would take by 25, and gain the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} condition until the end of your next turn. You cannot Escape or otherwise remove this immobilized condition and the DC of this effect is equal to your spell DC.</p>",
+            "prerequisites": [
+                {
+                    "value": "Arcane Cascade"
+                },
+                {
+                    "value": "wrought warplating hybrid study"
+                }
+            ]
+        },
+        "Warded Stitch": {
+            "name": "防护绷带 Warded Stitch",
+            "prerequisites": [
+                {
+                    "value": "法术绷带"
+                },
+                {
+                    "value": "奥法大师"
+                }
+            ],
+            "description": "<p><strong>需求</strong> 你处于奥术奔涌中</p>\n<hr />\n<p>你用特殊的注魔绷带治疗目标，保护他们免受特定伤害。你对一个合适生物使用战地医疗，用奥法代替医疗进行检定。如果检定成功，取代立刻应用战地医疗的效果，你将一个防护绷带贴在目标生物身上，持续1分钟。防护绷带生效期间为该生物提供对抗死亡效果、疾病、虚能效果和毒素时的+1状态加值。持续期间内仅一次，你或目标生物可以用一个具有专注特征的单动作将战地医疗的效果赋予贴着防护绷带的生物。一旦防护绷带如此被消耗，你立刻再充能法术打击。</p>"
+        },
+        "Whirling Wand Strike": {
+            "name": "旋转魔杖打击 Whirling Wand Strike",
+            "prerequisites": [
+                {
+                    "value": "二手魔杖"
+                }
+            ],
+            "description": "<p>你将融合魔杖和攻击的魔杖技巧融会贯通。你用魔杖施展一个1-2动作的法术，之后对生物进行一次打击。你自行决定行动顺序，并且可以针对不同目标。或者，如果你的魔杖拥有合适法术，你可以选择用魔杖进行法术打击，并且法术打击的伤害获得等于法术环级一半的状态加值。如果你通过过载魔杖来法术打击，你忽略让魔杖被摧毁的纯骰检定（但它仍正常破损）。</p>"
+        },
+        "Arcane Fists+": {
+            "name": "Arcane Fists+",
+            "description": "<p>Your physical training encompasses unarmed combat forms. The damage die for your fist changes to 1d6 instead of 1d4. You don't take the normal -2 circumstance penalty when making a lethal attack with your fist or any other unarmed attacks. Your unarmed attacks gain the arcane trait, making them magical. At 5th level, you also gain the critical specialization effects of unarmed attacks in the brawling group and weapons in the brawling group.</p>\n<p>You use your spell DC instead of your class DC for your critical specialization.</p>"
+        },
+        "Banishing Spellstrike": {
+            "name": "放逐性法术打击 Banishing Spellstrike",
+            "description": "<p><strong>需求</strong> 你的法术打击已充能</p>\n<hr />\n<p>当你打击外位面敌人时，你可以引导反召唤的魔力，切断它们与这个世界的联系。对一个不在故乡位面的生物进行一次法术打击。命中时，目标必须尝试一次@Check[will|dc:resolve(@actor.attributes.spellDC.value)]豁免对抗你的法术DC。如果你的法术打击造成的伤害触发了弱点，目标在豁免上承受-2环境减值。若你的法术打击目标拥有召唤特征，此能力失去失能特征。</p>\n<p><strong>大成功</strong> 目标拒绝放逐，你陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>成功</strong> 目标拒绝放逐。</p>\n<p><strong>失败</strong> 目标被放逐。</p>\n<p><strong>大失败</strong> 目标被放逐，一周内无法以任何手段回到被驱逐位面。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ]
+        },
+        "Dual-Weapon Spellstrike": {
+            "name": "Dual-Weapon Spellstrike",
+            "description": "<p><strong>需求</strong> You are wielding both your diametric weapons, are in @UUID[Compendium.magus.magus-class-features.Item.SkUkDSnIU1LHBSHf]{Arcane Cascade+} stance, and your @UUID[Compendium.pf2e.classfeatures.Item.KVj5ofUwu3VJSrVw]{Spellstrike} is charged.</p>\n<hr />\n<p>You can swing your weapons in tandem, the power of your spell carried between the two. Make a Spellstrike but when you do make two Strikes, one with each of your two diametric weapons, each using your current multiple attack penalty. Both Strikes must have the same target. Your second Strike is made with a –3 penalty, or a –2 penalty if it has the agile trait.</p>\n<p>If either of your Strikes are successful, you gain the effects of your Spellstrike, using the first successful Strike to determine the effects of your Spellstrike.</p>\n<p>If neither of your Strikes are successful, you use the first Strike you made to determine the effects of your Spellstrike if it would have an effect on a failure, such as @UUID[Compendium.pf2e.feats-srd.Item.84n92oBsRVCxjifM]{Expansive Spellstrike}.</p>",
+            "prerequisites": [
+                {
+                    "value": "diametric fusion hybrid study"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ]
+        },
+        "Eat This!": {
+            "name": "Eat This!",
+            "prerequisites": [
+                {
+                    "value": "horizon spellshell hybrid study"
+                },
+                {
+                    "value": "Arcane Cascade"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ],
+            "description": "<p><strong>需求</strong> You are in Arcane Cascade, you have at least one spellshell, and your Spellstrike is charged.</p>\n<hr />\n<p>You take one of your spellshells and fire it with extreme prejudice. Make a Spellstrike with a spellshell. Increase the radius of your weapon's scatter trait by 5 feet and increase the additional damage of the scatter trait to be equal to the spell's level instead of the normal amount.</p>"
+        },
+        "Flaying Spellstrike": {
+            "name": "Flaying Spellstrike",
+            "description": "<p><strong>需求</strong> You're in Arcane Cascade stance, are wielding a weapon in the flail group, and your Spellstrike is charged.</p>\n<hr />\n<p>Your spellstrike tears through the essences of your opponents, aggravating their greatest flaws and empowering your attack in tandem. Make a Spellstrike and an @UUID[Compendium.magus.magus-macros.Macro.dsKBde1bk00K7vyZ]{Arcana} check immediately after to identify weak points with your magic to flay them. On a success, the creature gains a weakness of 3 to a damage type of your choice that lasts until the end of your next turn or double this amount if you critically succeed. The base weakness amount increases to 5 if you have weapon specialization or 7 if you have greater weapon specialization. The target gains these weaknesses before your Spellstrike deals damage.</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.M313i07uS7llBE89]{Effect: Flaying Spellstrike}</p>",
+            "prerequisites": [
+                {
+                    "value": "scourging lash hybrid study"
+                }
+            ]
+        },
+        "Force Jaws": {
+            "name": "力咬术 Force Jaws",
+            "description": "<p>你学会驾驭力牙的力量，从一次毁灭性的打击延伸到另一次猛击。当你以这种方式施法，你的力牙形态经常变化成某种特定的形态，比如一个生物或物体的模样。当你施放@UUID[Compendium.pf2e.spells-srd.Item.9mPEoOPN0AMuixIv]{力牙术 Force Fang}时，你可以选择2A或3A版本来获得额外效果。</p>\n<ul style=\"list-style-type:none\">\n<li><span class=\"pf2-icon\">2</span> （姿势，语言） 你的力牙迅速攻击目标。因力牙术收到伤害的生物必须尝试一次@Check[reflex|dc:resolve(@actor.attributes.spellDC.value)]豁免，对抗你的法术DC，否则会因血盆大口的拖拽陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</li>\n<li><span class=\"pf2-icon\">3</span> （姿势，语言） 同2A版本，但你可以将法术目标从一个生物变成@Template[cone|distance:15]、@Template[line|distance:30]或30尺射程内的@Template[burst|distance:5]范围内的所有生物。</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "力牙术"
+                }
+            ]
+        },
+        "Force Manipulate": {
+            "description": "<p>你随意操控最稳定的元素：力场。你学会@UUID[Compendium.magus.magus-focus-spells.Item.YKclj7gZLxn9uWMm]{力场操作 Force Manipulate}汇聚法术。你聚能池的聚能点增加1。</p>",
+            "name": "力场操作 Force Manipulate",
+            "prerequisites": [
+                {
+                    "value": "聚能池"
+                },
+                {
+                    "value": "运动受训"
+                }
+            ]
+        },
+        "Guarded Spellstrike": {
+            "name": "防御性法术打击 Guarded Spellstrike",
+            "description": "<p><strong>需求</strong> 你的法术打击已充能。</p>\n<hr />\n<p>你学会如何从干扰你的敌人手中保护法术打击。进行一次法术打击。作为法术打击一部分施放的法术不会触发反应动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                },
+                {
+                    "value": "稳定施法"
+                }
+            ]
+        },
+        "Hundred Year Growth": {
+            "name": "百年之木 Hundred Year Growth",
+            "prerequisites": [
+                {
+                    "value": "盘虬杖形融汇研究"
+                }
+            ],
+            "description": "<p><strong>需求</strong> 你正持握一根杖</p>\n<hr />\n<p>你将杖种植在地上，字面意思，它在瞬间成长百年。选择一个与你邻接的方格种植你的杖，它随之长成一颗超大型的树。占据该空间的生物自动被移到最近的可用方格，你在杖成长期间可以快步一次。</p>\n<p>当杖处于这种形态时，你仍可以用它进行打击，就如被你双手持握的杖一样，但它的触及增加10尺，且只能从当前空间发动攻击。只要你与树杖邻接，你仍可以用它进行法术打击。树无法移动，它拥有AC10，等于你等级的硬度和你等级*10的生命值。你解消此效果或经过1分钟时，树将变回杖，其生命值减少到0。当它变回杖时，它会掉落在你最初选择使用百年之木的方格，如果你与树邻接则掉落到你手中。</p>"
+        },
+        "Imposing Spellstrike": {
+            "name": "Imposing Spellstrike",
+            "prerequisites": [
+                {
+                    "value": "wrought warplating hybrid study"
+                },
+                {
+                    "value": "Spellstrike"
+                }
+            ],
+            "description": "<p><strong>需求</strong> You're in Arcane Cascade, you are wearing heavy armor, and your Spellstrike is charged</p>\n<hr />\n<p>The appearance of your mighty armor is enough to make even the most foolhardy of opponents doubt themselves. Make a Spellstrike. It gains the following effects in addition to the normal effects of your Spellstrike.</p>\n<p><strong>大成功</strong> The target takes a –2 status penalty to its Will saves and a –3 status penalty to fear effects until the end of your next turn.</p>\n<p><strong>成功</strong> The target takes a –1 status penalty to its Will saves and a –2 status penalty to fear effects until the end of your next turn.</p>\n<p>@UUID[Compendium.magus.magus-effects.Item.aVjNPD9mbmvdOUj0]{Effect: Imposing Spellstrike}</p>"
+        },
+        "Mutable Figments": {
+            "name": "Mutable Figments",
+            "description": "<p>Your figments have become alterable, allowing you to shift them to your needs. You alter the form of your figments to take the shape of another non-consumable thrown weapon that requires the same number of hands to wield. Your figments remain in this form until you use this action again. The figment's runes apply to their new shape. Any property runes that can't apply to the new form are suppressed until the figments take a shape to which they can apply.</p>",
+            "prerequisites": [
+                {
+                    "value": "flinging figments hybrid study"
+                }
+            ]
+        },
+        "Mystic Bomb": {
+            "name": "秘法炸弹 Mystic Bomb",
+            "description": "<p>你创造一个强大的魔力库，你和他人都可从中汲取能量。你学会@UUID[Compendium.magus.magus-focus-spells.Item.Dv93B6mBVmsiu2ds]{秘法炸弹 Mystic Bomb}汇聚法术。你聚能池的聚能点增加1。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                },
+                {
+                    "value": "聚能池"
+                }
+            ]
+        },
+        "Reservoir of Power": {
+            "name": "力量汇聚 Reservoir of Power",
+            "description": "<p><strong>需求</strong> 你最近的动作是从法术位施法，或用法术位中的法术进行了一次法术打击。</p>\n<hr />\n<p>当你挖掘奥术奔涌内在的能量时，你用它来制造了其他效果。你使用奥术奔涌，获得的效果取决于最近施放的法术学派，持续到你下回合结束。</p>\n<ul style=\"list-style-type:none\">\n<li><strong>防护系</strong> 你的AC获得+1环境加值。</li>\n<li><strong>咒法系</strong> 你快步10尺。</li>\n<li><strong>预言系</strong> 你在发现隐蔽或藏匿的生物进行的@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}检定上获得+2状态加值，并且指定@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]或@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]生物为目标的纯骰检定DC降低2。</li>\n<li><strong>惑控系</strong> 你在欺骗和威吓检定上获得+1状态加值。</li>\n<li><strong>塑能系</strong> 对抗与你的奥术奔涌相同伤害类型的法术时，你的反射豁免获得+2状态加值。</li>\n<li><strong>幻术系</strong> 你创造一个幻觉，将一个邻接你的方格变为困难地形。你将此困难地形视为正常地形。生物可正常在使用搜索动作或消耗动作与幻觉交互后尝试不相信幻觉。若它成功不相信幻觉，它在你奥术奔涌期间无视此效果。</li>\n<li><strong>死灵系</strong> 你对抗死亡效果时获得+2状态加值，并且在获得任何其他效果（比如诡笑锋影的加值）前恢复等于奥术奔涌伤害值的生命值。</li>\n<li><strong>变化系</strong> 你对抗强迫移动和会让你陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]、@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]状态的效果时获得+2状态加值。</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                }
+            ]
+        },
+        "Reverse Spellstrike": {
+            "name": "逆转法术打击 Reverse Spellstrike",
+            "description": "<p><strong>需求</strong> 你的法术打击已充能，且你上回合被一个你能用来法术打击的敌对法术指定为目标</p>\n<hr />\n<p>你将外界魔力反转，将其化为强大的攻击。你消耗一个最高环的法术位，用上回合攻击你的相同法术进行法术打击。若该法术的环级低于你的最高环位，它被升阶至最高环位。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术打击"
+                }
+            ]
+        },
+        "Second Conservation": {
+            "name": "第二守恒 Second Conservation",
+            "description": "<p>你掌握了运用环绕奥术奔涌魔力的新方法。你获得第二个奥术守恒。你同时只能进入一种奥术奔涌，如果你要进入一个奥术奔涌，你必须从两种奥术守恒中选择一个。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术奔涌"
+                }
+            ]
+        },
+        "Splinter Shadow Assault": {
+            "name": "分裂阴影突袭 Splinter Shadow Assault",
+            "description": "<p>你让自己的影子分裂，因此从所有方向同时进攻前你可以用影子包围目标。当你施放@UUID[Compendium.pf2e.spells-srd.Item.5p9Y4ACrtRM4gTpN]{次元突袭 Dimensional Assault}，你可以选择2A或3A版本来替代正常效果。</p>\n<ul style=\"list-style-type:none\">\n<li><span class=\"pf2-icon\">2</span> （姿势，语言） 你将影子分裂到3个位置，它们都在次元突袭的射程内，并且允许你从这个位置打击目标。从你选择的3个位置各进行一次打击，总共3次，你在影子间传送完成打击，顺序自选。每次打击正常增加你的多重攻击减值，但在决定夹击时，每个你的影子占据的方格视为被盟友占据。将命中打击的伤害合并后计算抗力和弱点。</li>\n<li><span class=\"pf2-icon\">3</span> （姿势，语言） 同2A版本，但你将影子分裂至4个位置，且你的多重攻击减值按-3递增（灵巧武器-2）。</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "次元突袭聚能法术"
+                },
+                {
+                    "value": "诡笑锋影融汇研究"
+                }
+            ]
+        },
+        "Steady Spellcasting+": {
+            "name": "镇定施法+ Steady Spellcasting+",
+            "description": "<p>你对自己的施法技术充满自信，你不会轻易失去法术。如果一个反应动作会打断你的施法动作，尝试一次@Check[flat|dc:10]检定。如果成功，你的动作不会被打断。</p>\n<p>另外，如果你施展一个会触发打断反应的非戏法法术，即使法术被打断，你也不需要花费此法术的聚能点或法术位。</p>"
+        },
+        "Storm of the Winding Lash": {
+            "name": "Storm of the Winding Lash",
+            "description": "<p><strong>需求</strong> You are wielding a weapon in the flail group and are in Arcane Cascade.</p>\n<hr />\n<p>You empower your flail's lashing power and twirl, cutting through the souls of all those around you and winding its way around them. Make a melee Strike or Grapple check with a flail against up to 3 enemies within your flail’s reach. Each attack counts toward your multiple attack penalty, but do not increase your penalty until you have made all your attacks. If you Grappled more than one creature, you can maintain the Grapple against all creatures you grappled with this activity with a single Grapple check by comparing the result of your check against the Fortitude DCs of each creature separately. Creatures can still attempt to Escape as normal and if you would get a critical failure against any creature you made a Grapple against, you drop your flail immediately.</p>",
+            "prerequisites": [
+                {
+                    "value": "scourging lash hybrid study"
+                }
+            ]
+        }
+    }
+}

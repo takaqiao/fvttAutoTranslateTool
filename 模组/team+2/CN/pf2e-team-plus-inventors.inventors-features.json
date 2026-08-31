@@ -1,0 +1,404 @@
+{
+    "label": "发明家+ 特性 Inventors+ Features",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Temporary Animation": {
+            "name": "临时活化 Temporary Animation",
+            "description": "<p>你扭曲医疗的力量以唤起亡者。每日一次，你可以使用 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 作用于尸体而非盟友，产生一阶等同于你等级一半（向上取整）的 <em>@Compendium[pf2e.spells-srd.9WGeBwIIbbUuWKq0]{活化亡灵}</em> 法术效果。该亡灵在你的充能连接以其为目标期间保持激活，且在你每个回合开始时（连接激活时）获得它当回合的动作。</p>"
+        },
+        "Acoustics": {
+            "name": "声学 Acoustics",
+            "description": "<p>你已学会通过声波对生物产生效果的方法，操控它们以产生有害与有益的效果。</p>\n<p>你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.uViPiCqhppdXjyoG]{反弹声波} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.YwKxiN4mAzHVaiXw]{刺耳轰鸣} 职业特性。</p>"
+        },
+        "Arcane Generator": {
+            "name": "奥术发生器 Arcane Generator",
+            "description": "<p>你已掌控相关能量的魔法。当你处于 @Compendium[pf2e.classfeatures.oP5zM5Yu41xcx3iu]{超载} 效果之下时，当你施放需要豁免、造成伤害、无持续时间且以单一生物为目标的法术时，你将「超载」的伤害加在豁免失败上，或大失败时加在双倍上。如果某法术多次造成伤害或有多次豁免，你只对首次造成伤害的失败豁免应用此伤害。</p>"
+        },
+        "Wand Overcharge Insulator": {
+            "name": "法杖过载绝缘体 Wand Overcharge Insulator",
+            "description": "<p>你强化了对法杖的掌控，让你每日能多次使用它们。你可以借由你大发明的魔力，给过载法杖的激活添加不稳定特征。如果如此，你自动通过 DC 10 防止法杖被毁的纯骰检定。此外，你可以将一根法杖收纳于你的大发明内，让你能同时挥舞你的科法大发明与所选法杖。你可以以一个交互动作将一根法杖放入或取出你的大发明。</p>"
+        },
+        "Industrialization": {
+            "name": "工业化 Industrialization",
+            "description": "<p>燃烧强劲燃料的强大机器将带来前所未有的工业时代。你的发明站在这场进步革命的前沿，尽管它们常会产出可怖的烟尘。</p>\n<p>你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.plxpwTtJJ617EoPA]{全力开动} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.3AECqca7NsKMv3N7]{烟雾之云} 职业特性。</p>"
+        },
+        "Smog Cloud": {
+            "name": "烟雾之云 Smog Cloud",
+            "description": "<p>你的大发明在你周围喷出窒息的废烟之云。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.ShxvVLs8JanYPVZs]{烟雾之云} 替代 @Compendium[pf2e.classfeatures.pEm1RTNuzzQVKkR0]{爆炸}。</p>"
+        },
+        "Mutagenic Unlock": {
+            "name": "诱变解锁 Mutagenic Unlock",
+            "description": "<p>你的连接可对盟友产生不寻常效果。每日一次，你可以让被你 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 作用的自愿盟友获得 @Compendium[pf2e.equipment-effects.xFQRiVU6h8EA6Lw9]{效果：兽性诱变剂（中级）} 的效果。在 11级时，你可改为使用 @Compendium[pf2e.equipment-effects.kwD0wuW5Ndkc9YXB]{效果：兽性诱变剂（高级）}；在 17级时，可使用 @Compendium[pf2e.equipment-srd.nS75vsM3x5jxlUqn]{兽性诱变剂（主要）}。你必须在使用充能连接时声明授予此效果，且效果持续到他们仍受你充能连接影响为止。</p>"
+        },
+        "Overheal Drive": {
+            "name": "溢治驱动 Overheal Drive",
+            "description": "<p>你的治疗不仅让目标恢复至满血，更让其超越。当你的 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复} 让一个生物的生命值超过其上限时，超出部分以临时生命值的形式赋予。这些临时生命值不能高于该生物等级的两倍，持续 1分钟。</p>"
+        },
+        "Frigerate": {
+            "name": "制冷 Frigerate",
+            "description": "<p>你使用以完美凝聚能量驱动的奇异金属——但要使用它们，你必须将其保持极低温度。你将多余的寒冷向敌人喷出以减缓他们。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.NZoXaeZ4hKXg5Iv2]{制冷} 替代 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载}。</p>\n<p>如果你拥有 @Compendium[pf2e.classfeatures.bok3P78CMchFibxC]{武器大发明}，你可以选择将制冷的伤害更改为寒冷伤害。</p>"
+        },
+        "Mechanical Trinkets": {
+            "name": "机械饰品 Mechanical Trinkets",
+            "description": "<p>你不太区分通过科学还是魔法运作的工具。你可以通过将能量调谐到普通物品来用你的大发明制作护符。你获得 @Compendium[pf2e.feats-srd.1t5479E6bdvFs4E7]{护符涉猎者献身}，忽略其等级要求。当你在制作上变为大师时，你在每日准备期间获得一个额外的护符。</p>"
+        },
+        "Revolutionary Healing Modifications": {
+            "name": "革命性治疗改装 Revolutionary Healing Modifications",
+            "description": "<h3>革命性治疗改装</h3>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.b11M1l7JjIYBDZsx]{延长充能}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.EDCbYdae8ZDefpZh]{不朽矩阵}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pLWbPfYV0zSDGGli]{侧向式触及}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.3hQCWAMec0XpvO2Y]{溢治驱动}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.hIvMeLOskX7i8S3T]{万应射线}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.dS9vI1BxqUKcU4s9]{位面聚焦}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.7wwch0y0RBjwmyHi]{终极充能}</li>\n</ul>"
+        },
+        "Ultima Charge": {
+            "name": "终极充能 Ultima Charge",
+            "description": "<p>你让你的盟友变得无懈可击。当你的 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 激活时，你的盟友可以选择立即结束你的连接，以反应重掷一次他们失败的强韧或意志豁免。每个盟友每日只能从此效果获益一次。这是一个幸运效果。</p>"
+        },
+        "Healing Fog": {
+            "name": "治疗之雾 Healing Fog",
+            "description": "<p>休整期间，你可以将大发明配置为向你与同伴周围的空气释放治疗微粒，加快恢复。你以及在你大发明 30尺内睡眠 8小时的生物，1天内对抗疾病或毒素的下一次强韧豁免获得 +1环境加值，且因休息恢复的生命值翻倍。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.t1kzHg9k7sP9bFJ2]{效果：治疗之雾}</p>"
+        },
+        "Biotic Booster": {
+            "name": "生物增能器 Biotic Booster",
+            "description": "<p>你的大发明协助身体从其他来源治疗。当你 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 的目标因需要掷骰的效果恢复生命值时，你可以让目标掷骰两次取较好结果。如果你拥有「死亡链接」，你可以改为让目标掷骰两次取较差结果。</p>"
+        },
+        "Freeze Ray": {
+            "name": "冷冻射线 Freeze Ray",
+            "description": "<p>你将你的制冷能量集中为一道强力的定向攻击。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.ORfTjmiEifQ4AXAZ]{冷冻射线} 替代 @Compendium[pf2e.classfeatures.pEm1RTNuzzQVKkR0]{爆炸}。</p>"
+        },
+        "Health Estimator": {
+            "name": "生命估算器 Health Estimator",
+            "description": "<p>你的大发明可扫描生物的生化结构。你可以使用制作代替通常的技能对你能看见的活体生物进行回忆知识。从此次检定中你能学到的信息必须与该生物的生化结构相关，例如生物的弱点、如何关闭其再生、其感官，或其最弱的豁免。</p>"
+        },
+        "Statistical Prophecy": {
+            "name": "统计预言 Statistical Prophecy",
+            "description": "<p>你花费 10分钟与你的大发明交互，产生一种将概率与预言交织的模型仿真。你获得 <em>@Compendium[pf2e.spells-srd.41TZEjhO6D1nWw2X]{占卜术}</em> 的效果，但你选择一个未来 24小时内可能发生的具体场景；任何「好」的结果改为「无」，「混杂」的结果改为「坏」。如果你在制作上为传奇，你只需 1分钟即可使用统计预言。</p>"
+        },
+        "Technomancy Blast": {
+            "name": "科法爆发 Technomancy Blast",
+            "description": "<p>你向对手释放一波能量。作为一个具有操作特征的 2动作行动，你可以对 30尺内 @Template[type:cone|distance:15]、@Template[type:line|distance:30] 或 @Template[type:burst|distance:10] 范围内的所有生物造成 @Damage[max(floor(@actor.level / 2),1)d6[@actor.flags.pf2e.inventor.explode]] 火焰伤害（每 2级你拥有一颗），@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。你在 1d4轮内不能再次使用科法爆发。如果你拥有「可变核心」，你可以将火焰特征替换为与你可变核心相宜的特征。</p>"
+        },
+        "Diagnostic Reader": {
+            "name": "诊断读取器 Diagnostic Reader",
+            "description": "<p>你的大发明能感知疾病。你的大发明获得一种被称作「疫病感知」的特殊感官，让你能将 30尺内身染疾病或携带疾病的生物作为一种模糊感官侦测。如果你的大发明通过疫病感知侦测到一个生物，你便得知它是带菌者还是已染病。</p>"
+        },
+        "Enhanced Physiology": {
+            "name": "增强生理 Enhanced Physiology",
+            "description": "<p>你的大发明增强目标的天然核心力量。当一个生物因充能连接获得临时生命值时，该生物可立即作为自由动作进行干呕，或尝试纯骰检定以结束某项持续伤害的来源。</p>"
+        },
+        "Gadgeteer Innovation": {
+            "name": "装置师大发明 Gadgeteer Innovation",
+            "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+        },
+        "Immortality Matrix": {
+            "name": "不朽矩阵 Immortality Matrix",
+            "description": "<p>你的发明能在不可能的时刻挡退死亡。当你充能连接的盟友被减至 0 生命值但未死时，你可以花费反应立即对该盟友使用 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。这些生命值是在伤害发生后获得的，使其能保持站立，且其垂死状态消除时不会因此增加重伤状态值。</p>"
+        },
+        "World-Warp Rig": {
+            "name": "扭曲世界装置 World-Warp Rig",
+            "description": "<p>你为大发明超载充能以让自己穿越空间传送。作为一个具有操作与传送特征的 2动作行动，你可以在视线范围内向任何方向传送至多两倍速度的距离。当你处于「超载」效果之下时，你可以让你抵达与离开处的 @Template[type:emanation|distance:5] 范围内的所有生物承受等同于你等级的火焰伤害。</p>"
+        },
+        "Mana-Scrambling Feedback": {
+            "name": "法力扰乱反馈 Mana-Scrambling Feedback",
+            "description": "<p>你的触碰部署的科技可彻底扰乱敌人的魔法。你可以花费一个具有塑法特征的单动作，强化你下一次施放的科法射线。如果你以科法射线命中并造成伤害，你可以尝试对抗目标身上的某一激活法术（由你选择）。你的对抗等级等于你等级的一半（向上取整），对抗检定调整值等于你的职业DC – 10。</p>"
+        },
+        "Fail-Safe Operator": {
+            "name": "故障安全操作员 Fail-Safe Operator",
+            "description": "<p>每日一次，当你将获得失去意识状态时，你的护甲大发明代你接管。你可以继续行动如同你未失去意识，且不承受其常规减值——你的大发明基于你的潜意识思想运作，代你移动躯体 1分钟或直到你恢复意识为止。如果你处于垂死状态，你不会因恢复检定失败而增加垂死值；但你仍会因大失败或承受伤害而增加垂死值。</p>"
+        },
+        "Massive Frame": {
+            "name": "庞大架构 Massive Frame",
+            "description": "<p>你的护甲更像是你穿戴的一具构装体而非传统板甲。每日一次，你可以花费一个交互动作扩展护甲架构，对自己产生 <em>@Compendium[pf2e.spells-srd.wzctak6BxOW8xvFV]{放大术}</em> 效果。如果你在制作上为传奇，你可以使用升阶至你等级一半（向上取整）的放大术效果（虽然仍只能以你自己为目标），且可以每小时一次而非每日一次使用此效果。</p>"
+        },
+        "Storage Compartment": {
+            "name": "储物隔间 Storage Compartment",
+            "description": "<p>你的构装体能打开自身一部分用于储存物品。它可携带至多 10 体积的物品或物体，单件最大体积为 5。生物可以花费一个交互动作从你与之相邻的构装体大发明中取出一件物品；或者你的构装体大发明可以以一个交互动作将物品喷出至相邻方格。如果一个生物正占据物品被喷出的方格且有足够手数持用，它可以用反应抓住该物品（触发为你构装体的交互喷出）。</p>"
+        },
+        "Polarity": {
+            "name": "极性 Polarity",
+            "description": "<p>你明白科学能以看似无形的方式改变事物，而无需触碰便能移动他人是一种值得拥有的力量。磁力与电场拥有以仅科学才能想象的方式移动物体的力量。</p>\n<p>你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.MSUlC6Vfg8F8xCxJ]{排斥} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.PMAOXinlgEZZHkiQ]{磁脉冲} 职业特性。</p>"
+        },
+        "Foreign Agent Anti-pattern": {
+            "name": "异质反模式 Foreign Agent Anti-pattern",
+            "description": "<p>你设计护甲以侦测试图进入你身体的异常。你对毒素伤害获得等同于 3 加上你等级一半的抗力，且对疾病豁免获得 +1环境加值；如果你在制作上为大师，则增至 +2环境加值。处于「超载」效果之下时，该抗力增加 2。</p>"
+        },
+        "Extended Reach": {
+            "name": "延伸触及 Extended Reach",
+            "description": "<p>你的连接保持得更久更稳。你可以以 60尺内的盟友作为充能连接的目标，且你连接的最大距离为 120尺。</p>"
+        },
+        "Repulse": {
+            "name": "排斥 Repulse",
+            "description": "<p>你为自己装上磁铁、线圈与杆件。必要时，你可将它们充能为排斥状态以辅助战斗。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.PmErCVFJk0umTe9u]{排斥} 替代 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载}。</p>\n<p>如果你拥有 @Compendium[pf2e.classfeatures.bok3P78CMchFibxC]{武器大发明}，你可以将排斥的额外伤害更改为电击伤害；当你武器大发明的重击专精会造成强制移动时，施加额外伤害。</p>"
+        },
+        "Overdrive/Explode": {
+            "name": "超载／爆炸 Overdrive/Explode",
+            "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+        },
+        "Climbing Limbs+": {
+            "name": "攀爬肢体+ Climbing Limbs+",
+            "description": "<p>有了能抓握或制造吸附力的肢体，你的构装体便成为出色的攀爬者。你的大发明获得等同于陆上速度的攀爬速度。</p>"
+        },
+        "Energize Spell Slot": {
+            "name": "充能法术位 Energize Spell Slot",
+            "description": "<p>你的小器械将能量注入你已耗尽的奥术之井。每日一次，你可以尝试重新充满一个法术位。对你等级的极困难 DC 进行制作检定。成功时，你恢复该法术位，并保留原本准备的法术。大成功时，你可在 1小时内再使用一次。此功能仅适用于你由发明家法术位所获法术，且你必须由发明家职业专长拥有法术位才能选择此改装。</p>"
+        },
+        "Rise, My Minion!": {
+            "name": "起来吧，我的从仆！ Rise, My Minion!",
+            "description": "<p>你将死灵法术与电击灵能合并，让一具尸体作为你的完美造物复生。你可以花费 10分钟将一具合适的尸体变为一只亡灵伙伴，仿佛你拥有 @Compendium[pf2e.feats-srd.M6cWLywN0aWnX5Gl]{亡灵主献身} 而获得。你的亡灵伙伴保持激活直至下次每日准备；你可以通过与你的大发明交互来命令它。你可以每日继续以同一具尸体为目标进行活化，每次都会让它再次成为你的亡灵伙伴，并保留其先前活化时的当前生命值。在你以另一具尸体作为伙伴前，你必须花 1 周重新校准你的大发明。就先决条件而言，本大发明视作「亡灵主献身」；亡灵主架构的专长适用于此伙伴，并计入你的伙伴上限。</p>"
+        },
+        "Metaphysical Materials": {
+            "name": "形上物料 Metaphysical Materials",
+            "description": "<p>每日一次，你可以在护甲大发明上花费 2 个交互动作，让你在 1分钟内获得虚体特征。当你处于虚体形态时，对所有伤害获得等同于你等级一半的抗力，且你免疫精准伤害。由于你处于虚体形态，除非你的打击具有 @Compendium[pf2e.equipment-srd.JQdwHECogcTzdd8R]{鬼触} 属性，否则你不能进行打击。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.jTHwXxjpEadwGrJT]{效果：形上物料}</p>"
+        },
+        "Void Medic": {
+            "name": "虚空医师 Void Medic",
+            "description": "<p>你已考虑到那些靠黑暗力量而非光明力量治愈的患者所需。被你充能连接作用且具有虚空治疗的盟友，在你的连接持续期间失去此能力，从而可被生机效果治疗。</p>"
+        },
+        "Magnetic Pulse": {
+            "name": "磁脉冲 Magnetic Pulse",
+            "description": "<p>你利用电荷的运动来用你的大发明控制磁场。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.TnjWvLVpAypmiPTI]{磁脉冲} 替代 @Compendium[pf2e.classfeatures.pEm1RTNuzzQVKkR0]{爆炸}。</p>"
+        },
+        "Magitek Innovation": {
+            "name": "科法大发明 Magitek Innovation",
+            "description": "<p>足够先进的科学与魔法无可分别。你已设计出一种能够施法或通过机械手段与奥术交互的装置。你可以施放奥术法术，且你的大发明内含四个常见奥术戏法的数据。你获得「施放法术」行动。你每日可以准备两个奥术戏法。你使用你的发明家职业熟练度作为你借由科法大发明所获法术的法术DC 与法术攻击骰。你在奥秘上变为受训，且你发明家法术的施法属性调整值为智力。除了通常拥有的特征外，你借由科法大发明所获的改装与动作还获得奥术特征。你获得 <em>@UUID[Compendium.pf2e-team-plus-inventors.inventors-spells.rLpTFGCUUdXtUbaL]{科法射线}</em> 聚能戏法。</p>\n<p>你的科法大发明是一件由你设计的物品，重 1 体积，必须穿戴、持用或挥舞才能使用你的不稳定动作并施放科法射线。</p>\n<p>当你使用「超载」时，你不再对打击应用「超载」的常规效果，而是改为对会造成伤害、无持续时间且以单一生物为目标的法术攻击骰应用「超载」效果。</p>\n<p>如果你的法术对同一生物会造成多次伤害，你只能应用一次「超载」的伤害。如果你获得「盟友超载」或会将「超载」效果赋予盟友的类似效果，你的盟友仍只对其打击应用「超载」效果。</p>\n<p>选择一项初始科法改装应用于你的大发明，可从下列项中选择，或从你能取用的其他初始科法改装中选择。</p>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.0yYGGmFdluqiMQpo]{奥术发生器}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.yRdTQRvubpxblu5O]{隐匿全息}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.4f6PHXTlAis96JlB]{机械饰品}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.inASnJPnyrLdSF7A]{动力奥术}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.NVkWPIr93Vqhze3D]{起来吧，我的从仆！}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.WtSv0xK40rEYb9Nj]{造物之灵}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.tQzmCpBLNbgYAWM8]{科法挥击}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.232lqg5CQAuHrirt]{法杖过载绝缘体}</li>\n</ul>"
+        },
+        "Transmogrification Boost": {
+            "name": "变形助推 Transmogrification Boost",
+            "description": "<p>他们曾说你疯了，但你成功了！你借由科学突破了魔法的边界！当你施放需要豁免、造成伤害、无持续时间且以单一生物为目标的法术时，你将「攻击性增能」的伤害加在豁免失败的生物上，或大失败时加在双倍上。如果某法术多次造成伤害或有多次豁免，你只对首次造成伤害的失败豁免应用此伤害。</p>"
+        },
+        "Greater Motorarcana": {
+            "name": "高级动力奥术 Greater Motorarcana",
+            "description": "<p>你学得更深的奥术秘密。你将「动力奥术」所选 @Compendium[pf2e.journals.EEZvDB1Z7ezwaxIr]{领域} 的高级领域法术作为奥术聚能法术学得。你必须拥有「动力奥术」才能选择此改装。</p>"
+        },
+        "Weapon Innovation+": {
+            "name": "武器大发明+ Weapon Innovation+",
+            "description": "<p>你的大发明是一件外观不可思议、由众多奇异机件强化的武器。它最初使用与你所选 0级常见简易或军用武器相同的属性，或是另一你能取用的 0级简易或军用武器属性。你也可以改用一种 1级常见简易或军用武器，或另一你能取用的 1级简易或军用武器，但你必须支付该武器的金币售价。一件大发明武器可以与普通武器一样添加基础符文与属性符文，且你可以通过以适量原料制作将特殊材料整合进你的大发明。由于你大发明的独特特征，除你之外的人在其上皆为未受训，即便他们通常会受训（或更高熟练度）于简易或军用武器。如果你使用「超载」动作，你可以将「超载」的额外伤害更改为火焰伤害。选择一项初始武器改装应用于你的大发明，可从下列项中选择，或从你能取用的其他初始武器改装中选择。这些改装赋予额外的武器特征，有时附带额外能力。某项改装可能赋予武器它本就能造成的伤害类型的「多面」特征——无论是从其基础伤害类型，还是从已有的「多面」特征中。在这种情况下，如果你选择该改装，你可以选择让武器获得不同伤害类型（钝击、穿刺或挥砍）的「多面」特征。</p>\n<ul>\n<li><strong>钝击射出（仅限远程）</strong> 你的武器大发明可锉去弹药边缘并调整射击的钝力，让它在必要时进行钝击攻击；并在以致命射击造成致命伤之外避免如此。你的大发明获得非致命与多面 B 特征。你可以为大发明进行的每次攻击选择是否施加非致命特征。</li>\n<li><strong>复杂简朴（仅限简易武器）</strong> 将你大发明的武器伤害骰提升一级（d4→d6、d6→d8、d8→d10、d10→d12）。此外，它获得下列特征之一：多面 B、多面 P 或多面 S。</li>\n<li><strong>动态配重（仅限单手近战武器；不能具有敏捷、连接或空手特征）</strong> 你的武器经调整重量分布以增强威力，但需更多手才能挥舞。你的大发明获得双手特征，伤害骰比该武器常规伤害骰大一级（如长剑会获得双手 d10 特征）。你的大发明还获得多面 B 特征。</li>\n<li><strong>缠结形态（仅限近战）</strong> 你已将你的武器改装为包含缠绕的钢丝或束带，或具有柔韧构造。你的大发明获得擒拿与绊倒特征。</li>\n<li><strong>阻碍尖刺（仅限近战）</strong> 你为武器添加细长的钩刺，可用于阻碍敌人的移动。你的大发明获得阻碍与多面 P 特征。</li>\n<li><strong>厚重构造（仅限近战）</strong> 钝面与坚固构造让你的武器变得厚重、似锤。你的大发明获得推撞与多面 B 特征。</li>\n<li><strong>多用头部</strong> 你为武器构造了多用途、可调的击打面，或制作了可迅速更换的特殊弹药。你的大发明获得钝击、穿刺与挥砍的可换装特征。当你交互以使用可换装特征时，你也可以选择给武器添加非致命特征（若其当前不具有），或在其当前为非致命时移除该特征。</li>\n<li><strong>制服工具（仅限近战）</strong> 较软的材料让你的武器适合制服而非杀戮，特殊凸起让你能勾住武器并解除敌人武装。你的大发明获得卸武与非致命特征。你可以为大发明进行的每次攻击选择是否施加非致命特征。</li>\n<li><strong>剃刀尖齿（仅限近战）</strong> 加在武器上的锐利弯刃可让你击倒并劈砍敌人。你的大发明获得绊倒与多面 S 特征。</li>\n<li><strong>分段框架</strong> 铰链、夹具与可伸缩部件让你的大发明可折叠且可调。它获得钝击、穿刺与挥砍的可换装特征。你可以交互将物品折叠至轻体积，或恢复至常规形态。当它折叠至轻体积时，它具有可隐藏特征——你的隐密检定与隐藏或藏匿武器的 DC 获得 +2环境加值。</li>\n</ul>"
+        },
+        "Unstable Magic Mastery": {
+            "name": "不稳定魔法精通 Unstable Magic Mastery",
+            "description": "<p>你已将魔法与机械编织得真正可互换。你可以使用聚能点无风险地使用不稳定动作；并且你可以在聚能点耗尽时，通过给法术添加不稳定特征来尝试施放聚能法术。你必须拥有聚能池才能选择此项。</p>"
+        },
+        "Ankle-weighted Stabilizers": {
+            "name": "脚踝配重稳定器 Ankle-weighted Stabilizers",
+            "description": "<p>你已安装抗倾配重以防止跌倒。你对抵抗 @Compendium[pf2e.actionspf2e.7blmbDrQFNfdT731]{推撞} 或 @Compendium[pf2e.actionspf2e.ge56Lu1xXVFYUnLP]{绊倒} 的强韧或反射DC 获得 +2环境加值。该加值同样适用于对抗会让你 @Compendium[pf2e.conditionitems.j91X7x0XSomq8d60]{倒地} 的法术或效果的豁免。</p>"
+        },
+        "Bolster Self": {
+            "name": "自我增益 Bolster Self",
+            "description": "<p>你的大发明将治疗能量重新引导给你自己。当你使用充能连接时，你可以将临时生命值赋予你自己而非你的盟友。</p>"
+        },
+        "Rebounding Mechanism": {
+            "name": "回弹机制 Rebounding Mechanism",
+            "description": "<p>当你以你的大发明进行远程打击造成伤害时，它会立即返回你手中，让你可以进行额外打击。你必须处于该大发明的第一射程增量内并有一只空手以接住武器。如果你以投掷武器在第一射程增量外进行远程打击，它会朝你飞回所列射程增量的距离然后落地。</p>"
+        },
+        "Mutate": {
+            "name": "变异 Mutate",
+            "description": "<p>你让你的有机材料自行变形以喷出化学物质。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.VQkGnAT8NcoMf5cm]{变异} 替代 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载}。</p>\n<p>你让你的有机材料自行变形以喷出化学物质。此动作替代「超载」。如果你拥有 @Compendium[pf2e.classfeatures.bok3P78CMchFibxC]{武器大发明}，你可以将变异的持续伤害更改为毒素伤害。</p>"
+        },
+        "Imposing Mechanisms": {
+            "name": "威严机制 Imposing Mechanisms",
+            "description": "<p>你的护甲设计为令他人畏惧。当你让护甲进入超载状态时，机械装置会产生放大的视觉与声学效果，让你更容易威吓。处于「超载」效果之下时，你的威吓检定获得 +1环境加值；如果你在制作上为大师，则增至 +2环境加值。</p>"
+        },
+        "Mounting Operator": {
+            "name": "支架操作员 Mounting Operator",
+            "description": "<p>你已将大发明配置为更适合在坐骑上操作。你的大发明获得长枪 d6 特征。如果你的大发明已具有长枪特征，则改为将其长枪特征的骰子大小提升一级。</p>"
+        },
+        "Breakthrough Healing Modifications": {
+            "name": "突破性治疗改装 Breakthrough Healing Modifications",
+            "description": "<h3>突破性治疗改装</h3>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.9wTdTC6ZOE6jk2R6]{生物增能器}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.c0NOWRH6eV1dYJgk]{重击强化}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.yyXP3J3fWSh24ySd]{医药炮}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.3C1rx6OGXWvby5qG]{诱变解锁}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.aAhqQ2D5a8RyyExd]{抗力引擎}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.04aVXBJTxltvDAzi]{临时活化}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.qVNOputAxn1UTC3y]{生命核心}</li>\n</ul>"
+        },
+        "Trigger-Directed Programming": {
+            "name": "触发引导编程 Trigger-Directed Programming",
+            "description": "<p>你已让你的大发明能在不论其状态时，都对何时该行动作出区分。在战斗第一回合，你可以以自由动作命令你的构装体大发明；或以一个单动作命令为构装体提供其当回合的 3 个动作。</p>"
+        },
+        "Spirit of Artifice": {
+            "name": "造物之灵 Spirit of Artifice",
+            "description": "<p>你吸引了一个住于你大发明（或你为其建造的框架）中的精魂。你获得一个驱动小型机械的元素魔宠。你的魔宠必须选择 @Compendium[pf2e.familiar-abilities.FcQQLMAJMgOLjnSv]{抗力} 与对应你所选抗力元素的元素魔宠能力。你的科法大发明也作为你元素魔宠的合适 @Compendium[pf2e.equipment-srd.xE2CGurZp4eHc1Oc]{魔宠袋}。</p>"
+        },
+        "Manifold Alloy+": {
+            "name": "多重合金+ Manifold Alloy+",
+            "description": "<p>你已设计出几种含有多种金属有用属性的合金，并将武器或弹药的若干部件用这些合金件替换。除其特殊材料外，你的武器大发明还作为冷铁与白银运作。这意味着你对各类超自然生物（如恶魔、邪魔与妖精）造成更多伤害。</p>"
+        },
+        "Breakthrough Magitek Modifications": {
+            "name": "突破性科法改装 Breakthrough Magitek Modifications",
+            "description": "<h3>突破性科法改装</h3>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.xWZ3PDGqIKqOUvMl]{导能合金}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.Mh5AxrdLQ6wPrR7N]{充能法术位}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.RVbopikzLppMLpIB]{高级动力奥术}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.YDspJogqOR3ahY9m]{整合奇物}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.pTcWGMz4Z7Q6gwoF]{符文升级}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.AfikMFKIFyCxCEkf]{统计预言}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.maw9aBk9ZYP4NvFt]{召唤引擎}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.C9CQ7z9jhYWBj3fF]{科法爆发}</li>\n</ul>"
+        },
+        "Integrate Magic Item": {
+            "name": "整合奇物 Integrate Magic Item",
+            "description": "<p>你的大发明围绕并整合奇物的关键部分进行构建。在每日准备期间，你可以将你的大发明与一件你所选的永久奇物（如长袍、法杖或法杖）合并。该物品作为你的大发明与所选物品同时运作；你的大发明获得该物品的属性，使用其自身体积或该物品体积中的较大者。如果所选物品需要被持用、挥舞或穿戴，你仍须满足这些要求才能使用该物品。如果你的大发明具有储存其他物品（如魔宠或法杖）的能力，则即使在合并状态下也保留该能力。</p>"
+        },
+        "Cacophony": {
+            "name": "刺耳轰鸣 Cacophony",
+            "description": "<p>你能发出一道压倒性的响亮声波以流失敌人。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.kOLgnepenLORuhbn]{刺耳轰鸣} 替代 @Compendium[pf2e.classfeatures.pEm1RTNuzzQVKkR0]{爆炸}。</p>"
+        },
+        "Implausible Self-Protector": {
+            "name": "不可思议自卫器 Implausible Self-Protector",
+            "description": "<p>你已在大发明中安装了防护用的弹簧屏障。你的大发明获得招架特征。如果你的大发明是带招架特征的单手武器，你将招架对 AC 的环境加值提升至 +2。</p>"
+        },
+        "Resistance Engine": {
+            "name": "抗力引擎 Resistance Engine",
+            "description": "<p>你的连接帮助减轻输入伤害。从你 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 获得临时生命值的生物，直到你下一回合开始前，对你所选能量类型（酸蚀、寒冷、电击、火焰、毒素或音波）获得等同于你等级一半的抗力。当处于「超载」效果之下时，该抗力增加 2。你在获得抗力引擎时选定该伤害类型，但可以如常重构能量类型。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.W1Szx0lKcAIMInT1]{效果：抗力引擎}</p>"
+        },
+        "Spring-loaded Reformatting": {
+            "name": "弹簧重组 Spring-loaded Reformatting",
+            "description": "<p>你已在大发明中安装弹簧与齿轮，让它能在不同模式间快速切换。当你成功以大发明近战模式打击一个生物时，你可以以反应交互让其切换至远程模式。当你交互装填大发明时，你可以将其切换至近战模式作为同一动作的一部分。</p>"
+        },
+        "Phase Frame": {
+            "name": "相位架构 Phase Frame",
+            "description": "<p>你的护甲能够呈现周遭景象，让你不被察觉。每日一次，你可以花费一个交互动作让光线相位经过护甲，对自己产生 <em>@Compendium[pf2e.spells-srd.XXqE1eY3w3z6xJCB]{隐形术}</em> 效果。如果你在制作上为传奇，你可以使用升阶至你等级一半（向上取整）的隐形术效果（虽然仍只能以你自己为目标），且可以每小时一次而非每日一次使用此效果。</p>"
+        },
+        "Extended Charge": {
+            "name": "延长充能 Extended Charge",
+            "description": "<p>你的大发明拥有极强大的能源。你的 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 持续 1分钟而非 4轮。</p>"
+        },
+        "Critical Enhancement": {
+            "name": "重击强化 Critical Enhancement",
+            "description": "<p>力量涌入你的患者。任何被你 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 影响的盟友，其攻击与伤害骰获得 +1状态加值。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.WQtRptNlKEn3Kmef]{效果：重击强化}</p>"
+        },
+        "Elemental Weapon Systems": {
+            "name": "元素武器系统 Elemental Weapon Systems",
+            "description": "<p>你构装体的攻击被元素之力强化。其打击额外造成 1点火焰伤害。如果你拥有 @Compendium[pf2e.feats-srd.4KkzwOu2OKYLKSXQ]{可变核心}，你可以将火焰伤害替换为与你可变核心相宜的伤害类型。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.cnZPrhP0Kt9oyRDh]{效果：元素武器系统}</p>"
+        },
+        "Self-Modulation Form": {
+            "name": "自调形态 Self-Modulation Form",
+            "description": "<p>你的护甲大发明会展开内部部件以复刻一个战斗形态法术。选择一个奥术或原初战斗形态法术，等级等同于你等级一半（向上取整）且施放时间不超过 2 个动作。每日一次，你可以花费 2 个交互动作产生所选法术的效果。如果你处于「超载」效果之下，你的战斗形态获得「超载」的效果。</p>"
+        },
+        "Ammunition Expellerant": {
+            "name": "弹药驱出器 Ammunition Expellerant",
+            "description": "<p>你为弹药增添了额外容量。你的大发明获得后坐特征，且其射程增量增加 10尺。如果你的大发明已具有后坐特征，你将力量调整值需求降低 2。</p>"
+        },
+        "Cryonization": {
+            "name": "冷冻 Cryonization",
+            "description": "<p>燃烧之力对部分人有效，但你对从系统中移除热量更感兴趣。你的部分超导能源在常温下会失灵，因此你将它们冷却至极地温度以继续研究。</p>\n<p>你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.4LVuv0BZYCOGMUjl]{制冷} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.9xt6C6lHnqzeRymA]{冷冻射线} 职业特性。</p>"
+        },
+        "Divisible Swarm State": {
+            "name": "可分离虫群形态 Divisible Swarm State",
+            "description": "<p>每小时一次，你的构装体可分解为自身的较小版本，在 1分钟内获得虫群特征、虫群免疫与一项虫群攻击。其虫群攻击是一个单动作，使用其某项徒手攻击的伤害骰与伤害类型对你大发明方格内的所有生物造成伤害（基础反射豁免）。在此形态下，它不能进行打击，但可以使用其本拥有的、不需要打击的其他动作。你的大发明可以通过 2 个具有专注特征的动作重新组装回常规形态。</p>"
+        },
+        "Planar Focus": {
+            "name": "位面聚焦 Planar Focus",
+            "description": "<p>你的大发明内含通往「创造熔炉」的压缩之门，可用于超载你的治疗。当你使用灼热修复时，你赋予目标生物 3 加上你等级的精魂与虚空抗力，持续 3轮。如果你 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复} 的目标具有虚空治疗，你可以改为赋予它等量的精魂与生机抗力。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.M3eRVfUcmtZZRyUN]{效果：位面聚焦}</p>"
+        },
+        "Healing Innovation": {
+            "name": "治疗大发明 Healing Innovation",
+            "description": "<p>你的大发明是医学天才之作；一种能让你立即治疗病人的机器。你的大发明为 1 体积，可作为一件军用单手近战武器使用。当你首次获得治疗大发明时，你为它选择形态：1d6 钝击伤害且具有推撞特征的棍棒类武器，或 1d4 穿刺伤害且具有敏捷与巧劲特征的刀类武器。你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 动作与 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复} 发明家专长。选择一项初始治疗改装应用于你的大发明，可从下列项中选择，或从你能取用的其他初始治疗改装中选择。</p>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.qIhYSq6H2wL1OUds]{双适应构造}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.THkmgsDIXX2af6aQ]{自我增益}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.COuFgQTNTpvw8GBU]{诊断读取器}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.LgeKs6KS6ptw2J3q]{延伸触及}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.8j0p8pQ0j300oBFj]{治疗之雾}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.AQqK6ksEgjApxNU3]{生命估算器}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.itQiUohWTn8OOrpS]{回复脉冲}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.NsnK9zlOJFLjjklE]{虚空医师}</li>\n</ul>"
+        },
+        "Gadget Innovations": {
+            "name": "装置大发明 Gadget Innovations",
+            "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+        },
+        "Organics": {
+            "name": "有机 Organics",
+            "description": "<p>你以最不寻常的材料构建：活物。你也许穿着由奇异真菌制成的护甲、持有一件像剑与乌贼混合体的武器，或携带由花卉与肌肤而非钢铁构成的小器械与装置。你的大发明是一具有机构造，并仍如构装体般运作，但由有机材料而非金属制成。</p>\n<p>如果你的大发明是构装体伙伴，它失去对流血、@Compendium[pf2e.conditionitems.4D2KBtexWXa6oUMR]{枯竭}、@Compendium[pf2e.conditionitems.HL2l2VRSaQHu9lUw]{疲劳}、治疗与非致命效果的免疫。选择一项生物特征：异常、野兽、真菌或植物。就效果而言，它可在构装体特征与你所选特征之间选择作为它的生物类型。你的构装体可以将「变异」的额外伤害更改为毒素伤害。</p>\n<p>你获得 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.UaRBlU5HkEaYfPIR]{变异} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pKXVSUrfRmkfETLn]{排放副产物} 职业特性。</p>"
+        },
+        "Bestial Emulation": {
+            "name": "兽性仿效 Bestial Emulation",
+            "description": "<p>你的构装体大发明被赋予动物特征强化。你的构装体伙伴获得「支援」动作，并赋予你所选动物伙伴的支援效益。如果你选择具有坐骑特殊能力的动物伙伴的支援效益，你的构装体伙伴也获得坐骑特殊能力。</p>"
+        },
+        "Panacean Ray": {
+            "name": "万应射线 Panacean Ray",
+            "description": "<p>你的大发明可毫不费力地治愈病痛。当你使用灼热修复时，你也可以尝试对你灼热修复目标身上的一项状态、疾病或毒素进行对抗，使用你的制作调整值作为对抗调整值。</p>"
+        },
+        "Revolutionary Magitek Modifications": {
+            "name": "革命性科法改装 Revolutionary Magitek Modifications",
+            "description": "<h3>革命性科法改装</h3>\n<ul>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.m4gRK3iLLGQACLXu]{瞬时准备}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.GPAZA5YUX2gR1fqe]{法力扰乱反馈}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.R0XzMGwrNgtDCwHC]{变形助推}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.iz56bbu0VVM7Dlnn]{停滞向量}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.SxZUCE5cDdcvUoWY]{不稳定魔法精通}</li>\n<li>@UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.G1vSjlohvJMNkPjR]{扭曲世界装置}</li>\n</ul>"
+        },
+        "Motorarcana": {
+            "name": "动力奥术 Motorarcana",
+            "description": "<p>你学得一个与你所擅之事一致的聚能法术。从 @UUID[Compendium.pf2e.journals.JournalEntry.EEZvDB1Z7ezwaxIr.JournalEntryPage.7xrNAgAnBqBgE3yM]{变化}、@UUID[Compendium.pf2e.journals.JournalEntry.EEZvDB1Z7ezwaxIr.JournalEntryPage.0GwpYEjCHWyfQvgg]{知识}、金属，以及 @UUID[Compendium.pf2e.journals.JournalEntry.EEZvDB1Z7ezwaxIr.JournalEntryPage.EQfZepZX6rxxBRqG]{劳作} 领域中选择。你将其入门领域法术作为奥术聚能法术学得；如果你尚未拥有聚能池，则获得一个。</p>"
+        },
+        "Ricochet Projectile": {
+            "name": "反弹弹丸 Ricochet Projectile",
+            "description": "<p>当判定目标对你大发明远程攻击是否享有掩蔽时，你可以选择你武器第一或第二射程增量内的一处坚实表面来反弹你的射击。如果如此，你从反弹点（而非从你处）判定目标的掩蔽。</p>"
+        },
+        "Recovery Pulse": {
+            "name": "回复脉冲 Recovery Pulse",
+            "description": "<p>你的充能连接闭合伤口、抚平烧伤并清醒心智。当你使用充能连接时，你也可以选择将生物的恢复检定与移除持续伤害检定的 DC 在它们仍受你连接影响期间各降 5。</p>"
+        },
+        "Stasis Vector": {
+            "name": "停滞向量 Stasis Vector",
+            "description": "<p>你已学会通过将你所占的当前时空向量从其流动中隔离，从而压制时间之流，并将其完全停止。每日一次，你可以花费 3 个交互动作对你所选的一个生物产生 <em>@Compendium[pf2e.spells-srd.1dsahW4g1ggXtypx]{时间停止}</em> 效果，但该生物只获得 2 组 3 个动作而非通常的数量。如果你至少 19级，此效果产生时间停止的常规动作数量。当你使用停滞向量后，你的回合立即结束，且你所选生物可以花费所列数量的动作；其先攻顺序移至紧接你回合之后。</p>"
+        },
+        "Duplicitous Nature": {
+            "name": "双面本性 Duplicitous Nature",
+            "description": "<p>你已将你的大发明配置为可分裂为自身的复制品，让你能将其作为同种类型的两件武器挥舞。你的大发明获得双子特征。你仍须如常分别为每件武器添加符文或属性。</p>"
+        },
+        "Instant Preparation": {
+            "name": "瞬时准备 Instant Preparation",
+            "description": "<p>你的大发明可储存无限法术，并能即时准备它们。在每日准备期间，你可以选择让你的最多两个法术位保持未准备状态，让你能在需要时以一个 3动作的行动准备它们。这些法术位必须为不同等级。此功能仅适用于你由发明家法术位所获法术，且你必须由发明家职业专长拥有法术位才能选择此项。</p>"
+        },
+        "Summoning Engine": {
+            "name": "召唤引擎 Summoning Engine",
+            "description": "<p>你的大发明嘎吱作响以召唤一具构装体。每日一次，你可以使用你的大发明自 1 体积的原料中即兴创造一具构装体，产生升阶至你等级一半（向上取整）的 @Compendium[pf2e.spells-srd.lKcsmeOrgHtK4xQa]{召唤构装体} 法术效果。当你处于「超载」效果之下时，你召唤的构装体在其打击伤害上加上你智力调整值的一半；如果你处于重击「超载」效果下，则加上你的智力调整值。</p>"
+        },
+        "Vehicular Mode": {
+            "name": "载具模式 Vehicular Mode",
+            "description": "<p>你的构装体已将载具部件整合入其构造，并能迅速重新格式化以作为载具运作。选择一种等级不超过你等级一半、体型为大型或更小的常见或非常见载具。你的构装体可以花费 3 个交互动作变形为该载具，或变回构装体形态。你可以重构你的构装体大发明以为其赋予新的载具形态。</p>"
+        },
+        "Conductive Energy": {
+            "name": "导能元素 Conductive Energy",
+            "description": "<p>你已找到在大发明中利用导能能量的方法。你的大发明获得共振特征。</p>"
+        },
+        "Vent Byproduct": {
+            "name": "排放副产物 Vent Byproduct",
+            "description": "<p>当你的大发明消耗与生长时，它必须处理积聚的废料。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.7fv8E8xgkmYqa0jL]{排放副产物} 替代 @Compendium[pf2e.classfeatures.pEm1RTNuzzQVKkR0]{爆炸}。</p>"
+        },
+        "Lateral Patterned Reach": {
+            "name": "侧向式触及 Lateral Patterned Reach",
+            "description": "<p>一旦你的连接接通，便不会断裂。你可以以最远 120尺的生物作为 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 的目标，且你连接的最大距离为 240尺。此外，你可以以你看不见的生物为目标——通过瞄准它们所占空间——锁定目标方格内合适的生物，并忽略瞄准它们所需的纯骰检定。如果你瞄准的方格内无生物，你的连接形成失败。你必须拥有 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.LgeKs6KS6ptw2J3q]{延伸触及} 初始改装才能选择此改装。</p>"
+        },
+        "Advanced Bestial Form": {
+            "name": "高级兽性形态 Advanced Bestial Form",
+            "description": "<p>你的构装体表现得如同动物，且更为高效。你的构装体大发明获得你借由「兽性仿效」所仿效动物的高级机动。你的构装体大发明必须拥有「兽性仿效」，且你必须拥有「卓绝构装体伙伴」专长才能选择此项。</p>"
+        },
+        "Runic Upgrade": {
+            "name": "符文升级 Runic Upgrade",
+            "description": "<p>你的大发明以科技方式刻画符文。每小时一次，你可以花费一个交互动作并使用你的大发明，让你或一名 30尺内自愿盟友所持的一件武器在 1分钟内获得你所选武器符文的效益。可选下列符文：@Compendium[pf2e.equipment-srd.Wm0X7Pfd1bfocPSv]{腐蚀}、@Compendium[pf2e.equipment-srd.XszNvxnymWYRaoTp]{烈焰}、@Compendium[pf2e.equipment-srd.M5M1WJ5KzbYfRGsY]{冰霜}、@Compendium[pf2e.equipment-srd.JQdwHECogcTzdd8R]{鬼触}、@Compendium[pf2e.equipment-srd.qlunQzfnzPQpMG6U]{返回}、@Compendium[pf2e.equipment-srd.NVst7e69agGG9Qwd]{电击} 或 @Compendium[pf2e.equipment-srd.dTxbaa7HSiJbIuNN]{雷鸣}。如果此效果会让武器的属性符文超过常规上限，则其中一个现有的属性符文（由你选择）在持续时间内被压制。对于徒手攻击，如果此效果会让徒手攻击的属性符文超过其能借由「重击拳套」拥有的数量，同样压制其中一个现有的属性符文。</p>"
+        },
+        "Crank Up": {
+            "name": "全力开动 Crank Up",
+            "description": "<p>你以煤、焦油或其他可燃燃料为你的小器械供能，让你获得巨大力量并喷出可怖的烟尘。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.9jXdjrR7CWe0eohb]{全力开动} 替代 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载}。</p>\n<p>如果你拥有 @Compendium[pf2e.classfeatures.bok3P78CMchFibxC]{武器大发明}，你可以将危险地形的伤害更改为火焰伤害。</p>"
+        },
+        "Bi-Adapted Build": {
+            "name": "双适应构造 Bi-Adapted Build",
+            "description": "<p>你为大发明作进一步战斗适应。如果是棍棒，你的大发明获得双手 d10 特征；如果是刀，则获得多面 S 与致命 d6 特征。</p>"
+        },
+        "Vital Core": {
+            "name": "生命核心 Vital Core",
+            "description": "<p>你的大发明可装载特别强力的治疗爆发。当你对你充能连接的目标使用 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复} 时，你将治疗骰提升为 [[/r ceil(@actor.level/2)d11[healing]]]{基于等级的 d12 治疗} 而非 d10。</p>"
+        },
+        "Sonar Alert System": {
+            "name": "声呐警报系统 Sonar Alert System",
+            "description": "<p>你的构装体大发明获得感官扩展的听觉感知，可用于警示你与盟友。你的构装体大发明获得 30尺范围内的回声定位作为模糊感官。如果你的构装体伙伴用其某项感官（无论是通过 @Compendium[pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索} 还是正常侦测）侦测到一个生物，它可以以自由动作向 60尺内的所有盟友 @Compendium[pf2e.actionspf2e.sn2hIy1iIJX9Vpgj]{指出} 它所侦测生物的位置。这是一项听觉效果。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.RKuoPIv8IRprcRqL]{效果：声呐警报系统}</p>"
+        },
+        "Technomancy Swing": {
+            "name": "科法挥击 Technomancy Swing",
+            "description": "<p>当你施放 <em>@UUID[Compendium.pf2e-team-plus-inventors.inventors-spells.rLpTFGCUUdXtUbaL]{科法射线}</em> 时，你可以改为以近战法术攻击骰而非远程法术攻击骰进行攻击。如果如此，你将科法射线的伤害骰提升一级。</p>"
+        },
+        "Unconvention": {
+            "name": "非常规 Unconvention",
+            "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+        },
+        "Reverberate": {
+            "name": "反弹声波 Reverberate",
+            "description": "<p>你装备了你自己发明的声学设备：钟铃、哨子和其他响动饰物。你借助这些工具产生声波，赋予你一份力量储备。@UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.xzEHcJhjq8Q6QSTj]{反弹声波} 替代 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载}。</p><p>如果你拥有 @Compendium[pf2e.classfeatures.bok3P78CMchFibxC]{武器大发明}，你可以将反弹声波的额外伤害更改为音波伤害。</p>"
+        },
+        "Conducting Alloys": {
+            "name": "导能合金 Conducting Alloys",
+            "description": "<p>天金合金让你能为所持物品超载。你获得 @Compendium[pf2e.feats-srd.uR62fVC9FyQAMCO1]{操纵奇物} 专长，并可使用制作代替你检定所需的技能。如果你激活一件具有豁免 DC 的金属灌注物品，你可以为你的激活添加不稳定特征以使用你的发明家 DC 而非该物品的 DC（如果你的更高）。</p>"
+        },
+        "Concealing Holograms": {
+            "name": "隐匿全息 Concealing Holograms",
+            "description": "<p>你可以使用大发明的全息投影让你的法术难以被察觉。你可以花费 2 个交互动作创造 @Template[type:emanation|distance:10] 范围的全息影像，持续到你下一回合结束。这些全息在范围内隐藏你的法术效果，赋予你施放的任何法术隐微特征。</p>"
+        },
+        "Medicinal Cannon": {
+            "name": "医药炮 Medicinal Cannon",
+            "description": "<p>你能将一道生命能量蓄能爆发。你的大发明获得组合特征。当处于其远程模式时，它造成 1d6 伤害，具有可换装（钝击与生机）特征、20尺射程增量、装填 1，且属于火器组。你的炮不需要弹药。如果你拥有「双适应构造」，你可以双手挥舞炮以让其获得后坐特征。</p>"
+        }
+    }
+}

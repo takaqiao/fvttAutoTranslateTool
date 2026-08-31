@@ -1,0 +1,231 @@
+=== Magical Feedback ===
+EN name: Magical Feedback
+CN name: 魔法反馈 Magical Feedback
+EN desc: <p><strong>Trigger</strong> You successfully counteract a spell using either dispel magic or Counterspell for the second time during an encounter.</p><hr /><p>You repurpose some of the magical energy from the spells you dissipated to power up your own. You regain the most recent spell slot you spent to dispel magic or to Counterspell. If you Cast a Spell with this spell slot, your spell gains the bold trait. You lose this spell slot after you stop celebrating your triumph. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.BZizB3VFYoo6bGcs]{Evoke Surge} bold activity.</p>
+CN desc: <p><strong>触发</strong> 你于一场战斗中第二次以「驱散魔法」或「反制法术」成功对抗一道法术。</p><hr /><p>你将所驱散法术中的部分魔法能量再利用以增强自身。你恢复你最近用于驱散魔法或反制法术的法术位。若你以此法术位施放法术，则该法术获得「无畏」特征。在你停止庆祝凯旋后，此法术位失去。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.BZizB3VFYoo6bGcs]{激涌唤起} 无畏活动。</p>
+EN prereq: [{'value': 'Counterspell, or the ability to cast dispel magic'}]
+CN prereq: [{'value': '反制法术，或能施放解除魔法'}]
+
+=== Wrathful Protector ===
+EN name: Wrathful Protector
+CN name: 盛怒护卫 Wrathful Protector
+EN desc: <p><strong>Trigger</strong> You successfully Strike an enemy that critically hit an ally within the last turn.</p><hr /><p>When you witness an ally harmed grievously, you respond in kind with an invigorating rebuke. You gain temporary Hit Points equal to half your level and a +4 status bonus to damage against the triggering enemy. If you fell the triggering enemy, you can select one of its allies to become the new target of your Wrathful Protector, but the enemy must have taken a hostile action you or one of your allies during the current encounter. If the triggering enemy had no allies, you stop celebrating your triumph. If you are at least 16th level, the status bonus increases to +6. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.jnNObtugln5yFMjo]{Furious Response} bold activity.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.1Byt0JWIVk6ijxE2]{Effect: Wrathful Protector}</p>
+CN desc: <p><strong>触发</strong> 你成功打击一名在上一回合内对盟友大成功命中之敌人。</p><hr /><p>当你目睹盟友受重创时，你以振奋之斥责回敬。你获得等同你等级一半的临时生命值，并对触发该效果的敌人之伤害获得 +4 状态加值。若你击倒触发之敌人，你可选择其盟友之一作为「盛怒护卫」之新目标，但该敌人必须于当前战斗中对你或盟友之一采取过敌对动作。若触发的敌人无盟友，你便停止庆祝凯旋。若你至少为 16 级，状态加值提升至 +6。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.jnNObtugln5yFMjo]{狂怒回应} 无畏活动。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.1Byt0JWIVk6ijxE2]{效果：愤怒护卫}</p>
+EN prereq: [{'value': 'expert in martial weapons'}]
+CN prereq: [{'value': '军用武器熟练度为专家'}]
+
+=== Devastating Finish ===
+EN name: Devastating Finish
+CN name: 毁灭终局 Devastating Finish
+EN desc: <p><strong>Trigger</strong> You reduced a creature of a level no lower than 4 below your level to 0 Hit Points that had all of its Hit Points.</p><hr /><p>When you send someone to their grave, you become fearsome and devastating to behold. You gain a +2 circumstance bonus to @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize}, and enemies your level or lower that witnessed you reducing the triggering creature to 0 Hit Points cannot reduce the @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened} condition of your Demoralize below 1 while they can see you. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.UoIjmafqNeVuiKRc]{Who's Next?} bold action.</p>
+CN desc: <p><strong>触发</strong> 你将一名等级不低于你等级减 4、且原本满血的生物减至 0 生命值。</p><hr /><p>当你将某人送入坟墓时，你变得可怖而流失。你的 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 获得 +2 环境加值；目睹你将触发该效果生物减至 0 生命值的、等级不高于你的敌人，在能看见你期间，他们由你挫败士气施加的 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态不能降至 1 级以下。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.UoIjmafqNeVuiKRc]{下一个？} 无畏动作。</p>
+EN prereq: [{'value': "You're Next"}]
+CN prereq: [{'value': '下一个就是你'}]
+
+=== Establish Etiquette ===
+EN name: Establish Etiquette
+CN name: 建立礼仪 Establish Etiquette
+EN desc: <p>Even in the midst of battle, there are rules to follow and norms to keep. When you use Establish Etiquette, choose another creature within 30 feet of you and attempt a @Check[society|against:will] check against their Will DC. If you are successful, you appeal to the creature's pride, honor, or other characteristics to follow an established etiquette for 1 minute and they are immune to your Establish Etiquette for 1 hour.</p><p>Each turn the creature does not follow the established etiquette, it takes a -1 circumstance penalty to its attack rolls, or a -2 circumstance penalty if you critically succeeded at your Society check. If it follows the established etiquette, it gains a +1 circumstance bonus on its attack rolls until its next turn or it breaks etiquette (immediately gaining the penalties again if it does). The creature can choose to prematurely end your Establish Etiquette by spending a single action with the auditory or concentrate trait to deny your appeal to etiquette.</p><p>You and your allies must choose to follow the established etiquette when you take actions against the creature, and if you do not follow the established etiquette against the creature the effect immediately ends and all creatures who witnessed you or your allies do so are temporarily immune to your Establish Etiquette for 1 day.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.1LTTY9ZdDmC6WFGf]{Effect: Establish Etiquette}</p><p><strong>10 Paces</strong> You choose to only make Strik
+CN desc: <p>纵使在战斗中，亦有规则要遵守、有规范要保持。当你使用「建立礼仪」时，选择 30 尺内另一名生物，对其意志 DC 进行 @Check[society|against:will] 检定。若成功，你激起该生物的骄傲、荣誉或其他特质，让其在 1 分钟内遵守一项既定礼仪；其于此后 1 小时内对你的「建立礼仪」免疫。</p><p>每回合该生物若不遵守既定礼仪，则其攻击掷骰承受 -1 环境减值；若你社群检定大成功，则承受 -2 环境减值。若其遵守既定礼仪，则在其下回合或破礼仪前其攻击掷骰获得 +1 环境加值（破礼仪时立即重新承受减值）。该生物可花费一个具「听觉」或「专注」特征的单一动作以拒绝你建立礼仪之请求来提前结束此效果。</p><p>当你与盟友对该生物采取动作时，必须选择遵循既定礼仪；若你不遵守既定礼仪而对该生物如此做，效果立即结束，且所有目睹你或盟友如此做的生物 1 日内对你的「建立礼仪」暂时免疫。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.1LTTY9ZdDmC6WFGf]{效果：确立礼仪}</p><p><strong>10 步距离</strong> 你选择只用远程武器进行打击，且只在其首个射程增量内。</p><p><strong>不光彩打击</strong> 你选择忽略 AC 之环境减值。</p><p><strong>仅徒手</strong> 你选择只以非姿态之徒手攻击进行打击。</p><p><strong>无言</strong> 你选择不使用听觉或语言性动作。</p><p><strong>单手</strong> 你选择保持一只手空闲。</p><p><strong>让路权</strong> 你选择每回合只采取一个具「移动」特征之动作。</p><p><strong>单挑</strong> 你选择不攻击本回合已被另一生物攻击之生物。</p>
+EN prereq: [{'value': 'trained in Society'}]
+CN prereq: [{'value': '社群技能熟练度为受训'}]
+
+=== Pinpoint Out ===
+EN name: Pinpoint Out
+CN name: 精准指出 Pinpoint Out
+EN desc: <p><strong>Trigger</strong> You detect a creature using @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek}.</p><hr /><p>You have learned how to communicate with indiscriminate detail to allies. You immediately @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{Point Out} the creature and your allies gain a +2 circumstance to their Perception check if they are unable to see or understand you.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.JOwwEGi101nC1QGd]{Effect: Pinpoint Out}</p>
+CN desc: <p><strong>触发</strong> 你使用 @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索} 检测到一名生物。</p><hr /><p>你已学会如何向盟友进行无差别细节的沟通。你立即 @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{指明} 该生物，若你的盟友无法看见或理解你，则其察觉检定获得 +2 环境加值。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.JOwwEGi101nC1QGd]{效果：精准锁定}</p>
+
+=== Honed-Shot Precision ===
+EN name: Honed-Shot Precision
+CN name: 磨砺射击精准 Honed-Shot Precision
+EN desc: <p><strong>Trigger</strong> You critically succeeded at a ranged Strike against an enemy and the enemy is still above 0 Hit Points after this Strike.</p><hr /><p>You strike true, leaving you the opportunity you need to finish the job. Your ranged Strikes deal 1 additional precision damage per weapon damage die against the required enemy. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.Ig9HaamKNFhmhIYk]{Pinpoint Assault} bold reaction.</p>
+CN desc: <p><strong>触发</strong> 你对一名敌人远程打击大成功，且该敌人在此次打击后仍高于 0 生命值。</p><hr /><p>你击中要害，让你有机会完成最后一击。你的远程打击对该敌人每枚武器伤害骰额外造成 1 点精准伤害。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.Ig9HaamKNFhmhIYk]{精准突击} 无畏反应。</p>
+EN prereq: [{'value': 'trained in at least one martial ranged weapon'}]
+CN prereq: [{'value': '至少在一项军用远程武器上受训'}]
+
+=== Castling Crashers ===
+EN name: Castling Crashers
+CN name: 易位破阵 Castling Crashers
+EN desc: <p><strong>Requirements</strong> You are within 60 feet of your partner.</p><hr /><p>You and your partner are quick on your feet, unexpectedly repositioning like king and rook on a chessboard. While employing this teamwork, when you or your partner Strides towards the other, you each gain a +10 circumstance bonus to their Speed for this Stride, but must end the Stride as close to the other as possible. You also each gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.2XWMN181rq3h8K5j]{Crash Together} reaction.</p>
+CN desc: <p><strong>需求</strong> 你与你的搭档相距 60 尺以内。</p><hr /><p>你与搭档身手敏捷，如棋盘上的王与车那般出乎意料地交换位置。在使用此团队配合时，当你或你搭档朝对方行走时，你们各自此次行走的速度获得 +10 环境加值，但必须以尽可能靠近对方的位置结束行走。你们二人还获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.2XWMN181rq3h8K5j]{并肩冲撞} 反应。</p>
+
+=== Interlocked Shields ===
+EN name: Interlocked Shields
+CN name: 联锁盾墙 Interlocked Shields
+EN desc: <p><strong>Requirements</strong> You are adjacent to your partner.</p><hr /><p>You interlock your defenses to make yourselves both impenetrable. While employing this teamwork, when one of you @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{Raises a Shield} or casts the @UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR] spell, the other gains a +1 circumstance bonus to their AC as long as the shield is raised or the shield spell is active. If both of you have shields raised or the shield spell active, increase the circumstance bonus by 1 while you are benefiting from their circumstance bonuses. In addition, when you or your partner makes a Step, you can use a free action to Step to remain adjacent to your partner.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.09jzA3U88ZStsE7K]{Effect: Interlocked Shields}</p>
+CN desc: <p><strong>需求</strong> 你与你的搭档相邻。</p><hr /><p>你们将彼此的防御互锁，使你们二人都无懈可击。在使用此团队配合时，当你们之一 @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾} 或施放 @UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR] 法术时，另一人在该盾牌已举或盾牌法术生效期间获得 +1 AC 环境加值。若你们双方都有举起的盾牌或生效的盾牌法术，则在彼此都受益于该环境加值时，将环境加值再增加 1。此外，当你或你搭档进行快步时，你可以使用一个自由动作快步以保持与搭档相邻。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.09jzA3U88ZStsE7K]{效果：联锁盾阵}</p>
+EN prereq: [{'value': 'Shield Block or the ability to cast shield'}]
+CN prereq: [{'value': '盾击或能施放盾术'}]
+
+=== Deep Meditation ===
+EN name: Deep Meditation
+CN name: 深度冥想 Deep Meditation
+EN desc: <p><strong>Frequency</strong> once per hour</p><hr /><p>You gain the exploration activity Deep Meditation. You can spend 10 minutes meditating to attempt an @Check[occultism|dc:@self.level] or @Check[religion|dc:@self.level] check against a standard DC of your level.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.0YUXRpBlb0RGHe0x]{Effect: Deep Meditation}</p><hr /><p><strong>Critical Success</strong> You gain a +1 circumstance bonus to the next saving throw against a mental effect within the next hour. If the saving throw also has the emotion trait, the circumstance bonus increases to +2.</p><p><strong>Success</strong>You gain a +1 circumstance bonus to the next saving throw against an emotion effect within the next hour.</p><p><strong>Critical Failure</strong> Your meditation is interrupted and you are perturbed. You take a –1 circumstance penalty to your next saving throw within the next hour.</p>
+CN desc: <p><strong>频率</strong> 每小时一次</p><hr /><p>你获得探索活动「深度冥想」。你可以花费 10 分钟冥想，对你等级的标准 DC 进行一次 @Check[occultism|dc:@self.level] 或 @Check[religion|dc:@self.level] 检定。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.0YUXRpBlb0RGHe0x]{效果：深度冥想}</p><hr /><p><strong>大成功</strong> 你于接下来 1 小时内对一项心灵效果的下次豁免获得 +1 环境加值。若该豁免也具备「情绪」特征，环境加值提升至 +2。</p><p><strong>成功</strong> 你于接下来 1 小时内对一项情绪效果的下次豁免获得 +1 环境加值。</p><p><strong>大失败</strong> 你的冥想被打断且令你心烦意乱。你于接下来 1 小时内的下次豁免承受 -1 环境减值。</p>
+EN prereq: [{'value': 'expert in Occultism or Religion'}]
+CN prereq: [{'value': '神秘或宗教技能熟练度为专家'}]
+
+=== Liturgical Performance ===
+EN name: Liturgical Performance
+CN name: 礼仪表演 Liturgical Performance
+EN desc: <p>You know how to sing hymns, perform ritual dances or share divine jokes from your study of faiths. You can roll a Religion check instead of a Performance check when using the Perform action, and your Perform takes a -1 circumstance penalty if the audience opposes your faith and gains a +1 circumstance bonus if the audience favors your faith, as determined by the GM.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.7h1fcYfzPmAnQw1o]{Effect: Liturgical Performance}</p>
+CN desc: <p>你深谙因对信仰之研习而习得的圣歌、仪式之舞与神圣笑话。当你执行表演动作时，你可以用宗教检定替代表演检定；若听众反对你的信仰，你的表演承受 -1 环境减值；若听众支持你的信仰，则获得 +1 环境加值（由 GM 裁定）。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.7h1fcYfzPmAnQw1o]{效果：礼拜表演}</p>
+EN prereq: [{'value': 'trained in Religion'}]
+CN prereq: [{'value': '宗教技能熟练度为受训'}]
+
+=== Hunger Pangs ===
+EN name: Hunger Pangs
+CN name: 饥饿之痛 Hunger Pangs
+EN desc: <p><strong>Trigger</strong> You would take void damage.</p><hr /><p>You have felt the starving curse of a ghoul and survived. However, the hunger you felt, both as an insatiable ambition and literal ravenousness still lingers within you—much as it lay dormant within you before the curse manifested. You gain void healing for 1 minute, and if the triggering effect would also restore Hit Points to undead, such as harm, you regain Hit Points as normal for the effect.</p><p>In return, you become ravenously hungry for flesh for as long as you have this void healing. While in this state, when you see a living creature reduced to 0 Hit Points, you must make a Will save against a standard DC of your level or you become @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{Fascinated} by them as you are overwhelmed by the desire to consume their flesh, or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} if you critically failed your save The fascinated condition does not end normally and lasts until you can no longer perceive the creature reduced to 0 Hit Points, the creature regains Hit Points, or you spend 3-actions to calm your desires to consume flesh (these actions need not be consecutive).</p>
+CN desc: <p><strong>触发</strong> 你将受到虚空伤害。</p><hr /><p>你曾感受过食尸鬼的饥饿之咒并幸存。然而，你所感的饥饿——既是难以餍足的雄心，也是字面意义上的贪婪——仍残留于你之中，正如其在诅咒显现之前于你内里休眠那般。你于 1 分钟内获得虚空治疗；若触发的效果也会为不死生物恢复生命值（例如「伤害」），你便如该效果之常规效果般恢复生命值。</p><p>作为代价，只要你具备此虚空治疗，你便对血肉感到无可遏制的饥饿。在此状态下，当你看到一名活着的生物被减至 0 生命值时，你必须对你等级的标准 DC 进行意志豁免，否则你因吞噬其血肉之欲望被压垮而对其 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}；若你豁免大失败，则改为 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑1级}。该迷魂状态不会正常结束，并持续至你不再能感知该被减至 0 生命值之生物、该生物恢复生命值，或你花费 3 个动作（这些动作无须连续）平复你吞噬血肉之欲望为止。</p>
+EN prereq: [{'value': 'You survived the Forbidden Cravings curse'}]
+CN prereq: [{'value': '你曾在禁忌欲望诅咒中存活'}]
+
+=== Savage Success ===
+EN name: Savage Success
+CN name: 野蛮成功 Savage Success
+EN desc: <p><strong>Trigger</strong> You reduce an enemy to 0 Hit Points with a melee unarmed attack that is not a fist.</p><hr /><p>Bloodlust fills your thoughts as you enter a state of primal ferocity. Your non-fist melee unarmed Strikes gain a circumstance bonus to damage equal to the number of weapon damage dice. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.0sLZW5D6ziJY7yD0]{Feral Lunge} bold activity.</p>
+CN desc: <p><strong>触发</strong> 你以非拳头的近战徒手攻击将一名敌人减至 0 生命值。</p><hr /><p>嗜血充满你的心智，你进入原始凶猛之状态。你以非拳头之近战徒手打击对伤害获得等同武器伤害骰数的环境加值。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.0sLZW5D6ziJY7yD0]{野性猛冲} 无畏活动。</p>
+EN prereq: [{'value': 'You have a permanent melee unarmed attack other than fist'}]
+CN prereq: [{'value': '除拳以外你拥有一项永久近战徒手攻击'}]
+
+=== Opening Accompaniment ===
+EN name: Opening Accompaniment
+CN name: 开场伴奏 Opening Accompaniment
+EN desc: <p><strong>Trigger</strong> You would roll initiative in an encounter.</p><hr /><p>You perform to bolster your allies motivation. Choose one ally within 30 feet and make a Performance check against a standard DC of their level. Regardless of the outcome of your roll, the ally becomes immune to this action for 1 day.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.AJsTRf9iHyrZzM5H]{Effect: Opening Accompaniment}</p><hr /><p><strong>Critical Success</strong> Your ally gains a +2 status bonus to their initiative. If they tie with an enemy, they always go first.</p><p><strong>Success</strong> As critical success, but the status bonus is +1.</p><p><strong>Critical Failure</strong> You fumble your own start. You take a -4 penalty to your initiative.</p>
+CN desc: <p><strong>触发</strong> 你将于一场战斗中掷先攻。</p><hr /><p>你以表演激励盟友。选择 30 尺内一名盟友，对其等级的标准 DC 进行一次表演检定。无论掷骰结果如何，该盟友在 1 日内对此动作免疫。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.AJsTRf9iHyrZzM5H]{效果：开场伴奏}</p><hr /><p><strong>大成功</strong> 你的盟友先攻获得 +2 状态加值。若其先攻与某敌人打平，则总是先行。</p><p><strong>成功</strong> 同大成功，但状态加值为 +1。</p><p><strong>大失败</strong> 你搞砸了自己的开场。你的先攻承受 -4 减值。</p>
+EN prereq: [{'value': 'expert in Performance'}]
+CN prereq: [{'value': '表演技能熟练度为专家'}]
+
+=== Recognize Liar ===
+EN name: Recognize Liar
+CN name: 识破谎言 Recognize Liar
+EN desc: <p>You know what liars do because you are one. You always use your Deception DC against creatures that attempt to Lie to you or others in your presence, no longer needing to engage in conversation. In addition, you can use your Deception DC instead of your Perception DC for detecting forgeries if they are attempting to Impersonate a specific creature's work and you can use your Deception DC instead of your Perception DC against attempts to Create a Diversion, Impersonate, or Feint.</p>
+CN desc: <p>你深知撒谎者所为，因为你自己也是。你始终使用你的欺诈 DC 对抗试图对你或在你面前对他人撒谎的生物，无须再参与对话。此外，当伪造目标试图模仿某具体生物之作品时，你可以以你的欺诈 DC 替代察觉 DC 来探测伪造；当对抗他人尝试分神、伪装或佯攻时，你也可以用欺诈 DC 替代察觉 DC。</p>
+EN prereq: [{'value': 'expert in Deception'}, {'value': 'Lie to Me'}]
+CN prereq: [{'value': '欺诈技能熟练度为专家'}, {'value': '骗过我'}]
+
+=== Solitary Workforce ===
+EN name: Solitary Workforce
+CN name: 独行劳力 Solitary Workforce
+EN desc: <p>You work more efficiently than even a dozen of your peers. For any activity that requires the physical labor of multiple creatures to do, you count as two creatures, rolling a single check and using the result to determine the effects of each participant you would replace. If you're an expert in Labor Lore, you count as four creatures, if you're a master in Labor Lore you count as six creatures, and if you're legendary, you count as eight creatures. If you use Labor Lore to @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{Earn Income}, you treat the task level as one higher for the purposes of currency earned, two highe r if you are a master, or four higher if you are legendary.</p><p>In addition, when you successfully Earn Income with Labor Lore, you get the effects of a successful @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} on any creatures you worked with or for during the activity if it was your first time interacting with them with the same degree of success as your check.</p>
+CN desc: <p>你之劳作效率超过十二同辈。对任何需要多名生物体力劳作之活动，你视为两名生物——只掷一次检定并以其结果决定每名你所替代之参与者的效果。若你为劳作学识专家，你视为四名生物；若为大师，则六名；若为传奇，则八名。若你以「劳作学识」 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}，就所获货币而言，你将任务等级视为高一级；若为大师则高 2 级；若为传奇则高 4 级。</p><p>此外，当你以劳作学识赚取收入成功时，若这是你与之首次互动，则对你于该活动期间一同共事或为之效力的任何生物，你获得一次成功 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象} 之效果（成功程度与你的检定相同）。</p>
+EN prereq: [{'value': 'trained in Labor Lore'}]
+CN prereq: [{'value': '劳工学识熟练度为受训'}]
+
+=== Haggle ===
+EN name: Haggle
+CN name: 讨价还价 Haggle
+EN desc: <p>The art of haggling is one only the best merchants know. If you spend 1 minute in conversation with someone selling goods, you may attempt to Haggle, choosing one item you wish to buy and attempting a @Check[Mercantile Lore|against:will] check against the Will DC of the person you are conversing with. You cannot choose a formula when you Haggle. Regardless of your result, the target is temporarily immune to your attempts to Haggle it for 1 day.</p><hr /><p><strong>Critical Success</strong> You manage to reduce the price of the item by an amount equal to the cost of the item's formula.</p><p><strong>Success</strong> As critical success, except the amount is half the item's formula cost.</p><p><strong>Critical Failure</strong> Your attempts to haggle insult the merchant! They refuse to sell you the requested item and their attitude towards you becomes one step worse or unfriendly, whichever is worse. The creature continues to refuse to sell you the item until their attitude towards you changes to be indifferent or better.</p>
+CN desc: <p>讨价还价之艺只有最佳商人才知。若你与一名售货之人交谈 1 分钟，你可尝试讨价还价——选择一件你希望购买之物品，并对你交谈对象的意志 DC 进行 @Check[Mercantile Lore|against:will] 检定。讨价还价时你不能选择配方。无论结果如何，目标于 1 日内对你的讨价还价尝试暂时免疫。</p><hr /><p><strong>大成功</strong> 你成功将该物品价格降低相当于该物品配方价格的金额。</p><p><strong>成功</strong> 同大成功，但金额为该物品配方价格的一半。</p><p><strong>大失败</strong> 你的讨价还价尝试侮辱了商家！其拒绝向你出售所求物品，且其对你的态度恶化一级或变为不友善（取较差者）。该生物会持续拒绝向你出售该物品，直至其对你的态度变为冷漠或更佳。</p>
+EN prereq: [{'value': 'expert in Mercantile Lore'}]
+CN prereq: [{'value': '商业学识熟练度为专家'}]
+
+=== Stunning Desensitivity ===
+EN name: Stunning Desensitivity
+CN name: 震慑脱敏 Stunning Desensitivity
+EN desc: <p><strong>Trigger</strong> You would gain the @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned} condition with a value from a non-mental effect.</p><hr /><p>You practice pain management, giving you higher cognitive ability when subjected to pain. Attempt a @Check[survival] check against the DC of the triggering effect if it had a DC, or a standard DC of the hazard or creature's level if it did not have a DC.</p><hr /><p><strong>Critical Success</strong> You reduce the value of the stunned condition you would get by 2.</p><p><strong>Success</strong> As critical success, except you reduce the value by 1.</p><p><strong>Critical Failure</strong> You lean in too hard, increasing your stunned value by 1.</p>
+CN desc: <p><strong>触发</strong> 你将因非心灵效果获得 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑} 状态值。</p><hr /><p>你修习痛苦管理之法，让你于受痛之际仍保有较高的认知能力。对触发效果的 DC 进行一次 @Check[survival] 检定（若该效果有 DC）；若无 DC，则对该危害或生物等级的标准 DC 进行检定。</p><hr /><p><strong>大成功</strong> 你将本应获得的震慑值减少 2。</p><p><strong>成功</strong> 同大成功，但减少 1。</p><p><strong>大失败</strong> 你过度承受，震慑值反而增加 1。</p>
+EN prereq: [{'value': 'master in Survival'}]
+CN prereq: [{'value': '求生技能熟练度为大师'}]
+
+=== Hypersenses ===
+EN name: Hypersenses
+CN name: 超感官 Hypersenses
+EN desc: <p>You have become so firm with your ability to sense that you gain the ability to perceive through a heightened sense. During your daily preparations, choose one of the following senses to gain access to until your next daily preparations. If you select a sense in which you were already imprecise, you can instead increase the precision of that sense to precise within the listed range.</p><ul><li>Echolocation as a precise sense with a range of 20 feet.</li><li>Scent as an imprecise sense with a range of 30 feet or as a precise sense out to 20 feet if you already had scent as an imprecise sense.</li><li>Tremorsense as an imprecise sense out to 30 feet.</li><li>Wavesense as an imprecise sense out to 30 feet.</li></ul><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.Xu3thEXzrCtxjcZw]{Effect: Hypersenses}</p>
+CN desc: <p>你的感知能力已坚定到能透过高敏锐感官来感知。在每日准备期间，从下列感官中选择一项使你能使用至下次每日准备前。若你选择一项你已不精确具备之感官，你可改为将该感官于所列射程内的精确度提升至精确。</p><ul><li>20 尺射程的回声定位作为精确感官。</li><li>30 尺射程的气味作为不精确感官；若你已具备不精确气味感官，则于 20 尺内作为精确感官。</li><li>30 尺内的震感作为不精确感官。</li><li>30 尺内的波感作为不精确感官。</li></ul><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.Xu3thEXzrCtxjcZw]{效果：超感官}</p>
+EN prereq: [{'value': 'master in Perception'}]
+CN prereq: [{'value': '察觉技能熟练度为大师'}]
+
+=== Teamwork Talent ===
+EN name: Teamwork Talent
+CN name: 团队天赋 Teamwork Talent
+EN desc: <p>You're a natural talent when it comes to working alongside others in combat. You obtain one 1st- or 2nd-level feat with the teamwork trait.</p>
+CN desc: <p>你在与他人于战斗中协作上具有天赋。你获得一项具有「团队」特征的 1 级或 2 级专长。</p>
+
+=== Clever Cheat ===
+EN name: Clever Cheat
+CN name: 巧诈作弊 Clever Cheat
+EN desc: <p>You are such an experienced swindler and cheater, you don't even need to use counterfeit decks or other cheater's tools. When playing games or gambling, you may choose to cheat if you are not using @UUID[Compendium.pf2e.equipment-srd.Item.6NEOf1UznG4Po0Qi]{Loaded Dice} or @UUID[Compendium.pf2e.equipment-srd.Item.Q4KkKGGXq4bNGHh2]{Marked Playing Cards} by deftly manipulating the tools of the game to your advantage. If you do so, you gain a +1 circumstance bonus to Games Lore or Gambling Lore checks made for the duration of the game you are playing.</p><p>To discern if you are cheating, an observer must also succeed at a Perception check against your Games Lore or Gambling Lore DC in addition to any other checks to detect your cheating. If you are a master in Games Lore or Gambling Lore, the circumstance bonus increases to +2.</p>
+CN desc: <p>你是经验老道的骗子与作弊者，连仿冒牌组或其他作弊工具都无须使用。当玩游戏或赌博时，纵使你未使用 @UUID[Compendium.pf2e.equipment-srd.Item.6NEOf1UznG4Po0Qi]{灌铅骰} 或 @UUID[Compendium.pf2e.equipment-srd.Item.Q4KkKGGXq4bNGHh2]{带标记的扑克牌}，你仍可选择作弊——巧妙操纵游戏工具于己有利。如此做时，你于所玩游戏期间的游戏学识或赌博学识检定获得 +1 环境加值。</p><p>为辨明你是否在作弊，观察者除任何其他探测作弊之检定外，还须以你的游戏学识或赌博学识 DC 进行察觉检定成功。若你为游戏学识或赌博学识大师，环境加值提升至 +2。</p>
+EN prereq: [{'value': 'trained in Games Lore or Gambling Lore'}]
+CN prereq: [{'value': 'Games Lore or Gambling学识熟练度为受训'}]
+
+=== Duck and Weave ===
+EN name: Duck and Weave
+CN name: 闪躲穿梭 Duck and Weave
+EN desc: <p><strong>Requirements</strong> You are unarmored or wearing light armor.</p><hr /><p>You step quickly, dodge and dance around attacks rather than let them actually touch you. Choose one creature with 30 feet. You gain a +2 circumstance bonus to your AC against all of the creature's attacks until the beginning of your next turn. You cannot make Strikes or take hostile actions against creatures other than the target of your Duck and Weave until the beginning of your next turn and you gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.FwXfIfjV8i9vbOdN]{Twist from Harm} reaction while your Duck and Weave remains in effect.</p>
+CN desc: <p><strong>需求</strong> 你未着甲或穿轻甲。</p><hr /><p>你迅速踏步、闪躲、于攻击之间起舞，而不让其真正击中你。选择 30 尺内一名生物。直至你下回合开始前，你对该生物所有攻击的 AC 获得 +2 环境加值。直至你下回合开始前，你不能对你的「闪躲穿梭」目标以外之生物进行打击或采取敌对动作；且在你的「闪躲穿梭」生效期间，你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.FwXfIfjV8i9vbOdN]{扭身避害} 反应。</p>
+
+=== Divine Arsenal ===
+EN name: Divine Arsenal
+CN name: 神圣军械 Divine Arsenal
+EN desc: <p>You are versed in the weapon your deity favors. You gain access to your deity's favored weapon, and for the purpose of proficiency, you treat it as a simple weapon if it was a martial weapon, or a martial weapon if it was an advanced weapon.</p><p>In addition, you become bound by your deities edicts and anathema, and if you ever fail to follow your deity's edicts or commit an anathema for your deity, you are cursed by your deity and lose the benefits of this feat until you complete an atone ritual.</p>
+CN desc: <p>你精通你神祇所偏爱的武器。你获得使用神祇偏爱武器之权限；就熟练度而言，若该武器原为军用武器则视为简易武器，若原为进阶武器则视为军用武器。</p><p>此外，你受神祇之典范与禁忌约束；若你违反神祇之典范或犯下禁忌，你便会受神祇诅咒，并失去此专长之效益，直至你完成赎罪仪式。</p>
+EN prereq: [{'value': 'You worship a deity with a martial or advanced favored weapon'}]
+CN prereq: [{'value': '你信奉一位偏好军用或进阶武器的神祇'}]
+
+=== Beast Tamer ===
+EN name: Beast Tamer
+CN name: 驯兽师 Beast Tamer
+EN desc: <p>You are a friend to all beasts and animals, able to find kinship in them and command them as you see fit, and they will listen. You automatically succeed on checks to @UUID[Compendium.pf2e.actionspf2e.Item.q9nbyIF0PEBqMtYe]{Command an Animal} on animals lower level than you so long as their attitude toward you is indifferent or better. When you Command an Animal you do not control, you can give them specific commands as though you were directing an animal companion.</p><p>In addition, you do not automatically fail checks to Command an Animal that is unfriendly or hostile to you, but instead take a -4 circumstance penalty and if you succeed, the animal refuses to take hostile actions against you or your allies for 1 hour unless you or your allies take a hostile action against the animal or its allies.</p>
+CN desc: <p>你与所有野兽和动物为友，能与它们结成同伴并依你心意指挥它们，它们也会听从。只要其对你的态度为冷漠或更佳，你便对低于你等级之动物 @UUID[Compendium.pf2e.actionspf2e.Item.q9nbyIF0PEBqMtYe]{驱使动物} 自动成功。当你驱使非你所控制之动物时，你可以如同指挥动物伙伴般对其下达具体命令。</p><p>此外，你对你不友善或敌对的动物的驱使动物检定不再自动失败，而改为承受 -4 环境减值；若你成功，该动物 1 小时内不会对你或盟友采取敌对动作（除非你或盟友对该动物或其盟友采取敌对动作）。</p>
+EN prereq: [{'value': 'legendary in Nature'}, {'value': 'Train Animal'}]
+CN prereq: [{'value': '自然技能熟练度为传奇'}, {'value': '训练动物'}]
+
+=== Slip the Grip ===
+EN name: Slip the Grip
+CN name: 滑脱握持 Slip the Grip
+EN desc: <p><strong>Trigger</strong> You are about to roll a Reflex save against an effect that would make you immobilized.</p><hr><p>When you botch the job, you know how to use professionalism to save your hide. Attempt the triggering saving throw using Thievery instead of your Reflex save.</p>
+CN desc: <p><strong>触发</strong> 你即将对一项会让你禁足的效果掷出反射豁免。</p><hr><p>当你搞砸时，你深知如何以专业素养自救。以盗术替代反射豁免来尝试触发的豁免。</p>
+EN prereq: [{'value': 'master in Thievery'}]
+CN prereq: [{'value': '盗术技能熟练度为大师'}]
+
+=== Back Off! ===
+EN name: Back Off!
+CN name: 退后！ Back Off!
+EN desc: <p><strong>Trigger</strong> A creature moves to be within 15 feet of you.</p><hr /><p>For some enemies, being in your vicinity in itself is a source of fear. You @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize} the triggering creature.</p>
+CN desc: <p><strong>触发</strong> 一名生物移动至距你 15 尺以内。</p><hr /><p>对某些敌人而言，仅是处于你近旁本身便是恐惧之源。你对触发该效果的生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}。</p>
+EN prereq: [{'value': 'legendary in Intimidation'}]
+CN prereq: [{'value': '威吓技能熟练度为传奇'}]
+
+=== Mirror Meeting ===
+EN name: Mirror Meeting
+CN name: 镜会 Mirror Meeting
+EN desc: <p>By writing on foggy glass or inscribing a person's name in blood upon a mirror, you form a connection between two reflective surfaces to use for communicative purposes. By spending 10 minutes you infuse a single mirror or similar solid reflective surface of up to 5 bulk as a mirror you can use to communicate with later. If you perform this exploration activity again on another mirror meeting the same requirements, you successfully forge a connection between the two surfaces. You can only have two mirrors connected like this at a time, and when you forge a new connection, you choose which of the two previous mirrors to become inert. You gain the @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.qKug2AYUe8NvVUr5]{Mirror Mirror} activity.</p>
+CN desc: <p>通过在雾镜上书写或以血在镜上刻下某人之名，你可在两个反射面之间形成连结以用于通信。花费 10 分钟，你将一面单一镜子或类似坚固反射面（至多 5 体积）灌注，使其成为你日后可用于通信之镜。若你对另一面同样符合条件之镜再次进行此探索活动，便成功在两面之间锻造连结。同一时间你最多可以连结两面镜子；当你建立新连结时，你选择前两面之一变为休眠。你获得 @UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.qKug2AYUe8NvVUr5]{镜中之镜} 活动。</p>
+EN prereq: [{'value': 'master in Occultism'}]
+CN prereq: [{'value': '神秘技能熟练度为大师'}]
+
+=== Defensive Flight Maneuver ===
+EN name: Defensive Flight Maneuver
+CN name: 防御飞行机动 Defensive Flight Maneuver
+EN desc: <p><strong>Trigger</strong> You successfully used Maneuver in Flight.</p><hr><p>Flight comes second nature to you and you use it to defend yourself. You gain a +1 circumstance bonus to AC until the beginning of your next turn. If you are already benefiting from a circumstance bonus to AC from Defensive Flight Maneuver, you instead increase the circumstance bonus to AC from Defensive Flight Maneuver by 1.</p>
+CN desc: <p><strong>触发</strong> 你成功使用飞行机动。</p><hr><p>飞行已成你的本能，并被你用以自卫。你直至下一回合开始前对 AC 获得 +1 环境加值。若你已因「防御飞行机动」获得 AC 环境加值，则改为将「防御飞行机动」赋予 AC 的环境加值提升 1。</p>
+EN prereq: [{'value': 'master in Acrobatics'}, {'value': 'ability to Fly or gain an effect that allows you to Fly'}]
+CN prereq: [{'value': '特技技能熟练度为大师'}, {'value': '能飞行或获得让你能飞行的效果'}]
+
+=== Restricting Flora ===
+EN name: Restricting Flora
+CN name: 束缚草木 Restricting Flora
+EN desc: <p><strong>Requirements</strong> You are in an area of natural terrain.</p><hr /><p>You beckon and whisper to the plants around you, invoking them to bind and restrict your foes movements. Attempt a @Check[type:nature|defense:reflex] check against the Reflex DC of a creature within 30 feet of you.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.oGtY2OY4sp40eW0M]{Effect: Restricting Flora}</p><hr /><p><strong>Critical Success</strong> The target creature takes a -10-foot status penalty to its Speed until the end of your next turn.</p><p><strong>Success</strong> As critical success, but the creature takes a -5-foot status penalty to its Speed.</p><p><strong>Critical Failure</strong> Your failed attempt to harness the natural plant life around you backfires, causing you to become @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg] until the end of your next turn.</p><p></p>
+CN desc: <p><strong>需求</strong> 你处于自然地形之区域。</p><hr /><p>你向周围的植物召唤并低语，唤起它们束缚并阻碍敌人之移动。对 30 尺内一名生物的反射 DC 进行一次 @Check[type:nature|defense:reflex] 检定。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.oGtY2OY4sp40eW0M]{效果：束缚草丛}</p><hr /><p><strong>大成功</strong> 目标生物速度承受 -10 尺状态减值，直至你下一回合结束。</p><p><strong>成功</strong> 同大成功，但速度减值为 -5 尺。</p><p><strong>大失败</strong> 你试图驾驭周围自然植物的尝试反噬于己，使你 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg] 直至你下一回合结束。</p><p></p>
+EN prereq: [{'value': 'master in Nature'}]
+CN prereq: [{'value': '自然技能熟练度为大师'}]
+
+=== Shallows' Sallow Shadows ===
+EN name: Shallows' Sallow Shadows
+CN name: 浅滩昏影 Shallows' Sallow Shadows
+EN desc: <p>Those who can't keep track of their line aren't of much use for fishing or on a vessel at sea. If you @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{Recall Knowledge} on a creature that has a permanent swim Speed, you also learn about one ability it has that requires a saving throw, if any, and you gain a +1 circumstance bonus to your saves and DCs against that ability for 1 minute.</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.bpIFxizPX8b6ys3Z]{Effect: Shallows' Sallow Shadows}</p>
+CN desc: <p>那些无法掌控钓线的人对捕鱼或航海毫无用处。若你对一名拥有持续游泳速度的生物 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}，你还能了解其需要豁免的一项能力（如有），并在 1 分钟内对该能力的豁免与 DC 获得 +1 环境加值。</p><p>@UUID[Compendium.pf2e-team-plus-feats.pf2e-misc.Item.bpIFxizPX8b6ys3Z]{效果：浅滩苍影}</p>
+EN prereq: [{'value': 'trained in Fishing Lore, Ocean Lore, or Sailing Lore'}]
+CN prereq: [{'value': '钓鱼学识、海洋学识或航海学识熟练度为受训'}]
+
+=== Monastic Practices ===
+EN name: Monastic Practices
+CN name: 修道之修 Monastic Practices
+EN desc: <p>You have studied in temples and monasteries in lieu of churches and shrines. This has given you a different perspective to faith than some, where repeated obediences like scribing or sacred exercises are more important than preaching or holding mass. When you perform an activity that takes at least 10 minutes, you can make a @Check[religion|dc:@self.level] check against a standard DC of your level to find perspective on your fate. If you are successful, you regain a Focus Point. You gain this Focus Point in addition to any focus points you would normally gain as part of performing the activity. You cannot use the Monastic Practices with the Refocus activity.</p>
+CN desc: <p>你曾于神庙与修道院中研修而非教堂与神龛中。这赐予你与众不同的信仰视角——重复的奉行（例如抄经或圣化锻炼）比布道或主持弥撒更为重要。当你执行至少需要 10 分钟的活动时，你可以对你等级的标准 DC 进行一次 @Check[religion|dc:@self.level] 检定，以求对自身命运得到见解。若你成功，你恢复 1 点聚能点。此聚能点是在你正常通过执行该活动获得的聚能点之外的额外聚能点。你不能将「修道之修」与「重新聚能」活动同时使用。</p>
+EN prereq: [{'value': 'expert in Religion'}, {'value': 'a focus pool'}]
+CN prereq: [{'value': '宗教技能熟练度为专家'}, {'value': '聚能法力池'}]

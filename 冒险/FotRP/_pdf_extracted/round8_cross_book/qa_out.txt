@@ -1,0 +1,62 @@
+﻿=== QA 1: JSON Valid ===
+  OK book1_handouts
+  OK book1_ch1
+  OK book1_ch2
+  OK book1_ch3
+  OK book1_back
+  OK book2_handouts
+  OK book2_ch1
+  OK book2_ch2
+  OK book2_ch3
+  OK book2_back
+  OK book3_handouts
+  OK book3_ch1
+  OK book3_ch2
+  OK book3_ch3
+  OK book3_back
+  OK bestiary
+ALL JSON VALID
+
+=== QA 2: HTML Balance ===
+  OK book1_handouts
+  OK book1_ch1
+  OK book1_ch2
+  OK book1_ch3
+  OK book1_back
+  OK book2_handouts
+  OK book2_ch1
+  OK book2_ch2
+  OK book2_ch3
+  OK book2_back
+  OK book3_handouts
+  OK book3_ch1
+  OK book3_ch2
+  OK book3_ch3
+  OK book3_back
+  OK bestiary
+
+=== QA 3: 残留 (旧字串 count) ===
+
+--- Hard 残留汇总 ---
+  无残留 OK
+
+--- Soft 残留 (短形式, 检查可疑) ---
+
+=== QA 4: 新字串验证 ===
+  武道会: 总 407 次
+  兰托多: 总 18 次
+  路莫里兹: 总 14 次
+  库拉克丝: 总 13 次
+  保宁玛: 总 11 次
+  拉贾娜: 总 11 次
+  乌木巴西: 总 8 次
+  哈尔斯丁·刺痛: 总 7 次
+  阿莫扎双子: 总 7 次
+  阿图斯·罗德里万: 总 6 次
+  固定射击: 总 5 次
+  巨人摔角手: 总 3 次
+  俊（Jun: 总 2 次
+  娜迦裔毒液: 总 2 次
+  跨位面场景: 总 1 次
+
+Wrote qa_report.txt

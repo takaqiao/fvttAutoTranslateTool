@@ -1,0 +1,1195 @@
+{
+  "label": "哈罗牌组\nHarrow Deck",
+  "mapping": {
+    "actors": {
+      "name": "name",
+      "publicNotes": "system.details.publicNotes",
+      "privateNotes": "system.details.privateNotes",
+      "disable": "system.details.disable",
+      "hazarddescription": "system.details.description",
+      "reset": "system.details.reset",
+      "routine": "system.details.routine",
+      "blurb": "system.details.blurb",
+      "stealthdetails": "system.attributes.stealth.details",
+      "hp": "system.attributes.hp.details",
+      "senses": "system.traits.senses.value",
+      "allSaves": "system.attributes.allSaves.value",
+      "ac": "system.attributes.ac.details",
+      "prototypeToken": "prototypeToken.name",
+      "di": "system.traits.di.custom",
+      "languages": "system.traits.languages.custom",
+      "speed": "system.attributes.speed.details",
+      "dr": "system.traits.dr"
+    },
+    "items": {
+      "name": "name",
+      "description": "system.description.value"
+    }
+  },
+  "folders": {},
+  "entries": {
+    "Pathfinder Deck: Harrow": {
+      "name": "《开拓者卡牌：哈罗》 Pathfinder Deck: Harrow",
+      "description": "<p>使用《Pathfinder Harrow 牌组》占卜你的命运吧！这是 Pathfinder 预言破灭之年设定中传奇的占卜卡牌！</p><p>这套 54 张全彩占卜卡将教你如何在任何桌面 RPG 游戏中加入 Harrow，并通过沉浸式的占卜方法与其他见解来强化游戏体验。</p><p>Foundry Virtual Tabletop 的独家模块包含整副牌组，以及一个专为进行 Harrowing 而打造的界面。</p><p>同时还包含日志条目，提供有关 Harrow 历史的详细信息、如何为你的团队模拟占卜解读的说明，以及对该合集全部 54 张卡牌的详细描述——并配有精美的高分辨率插画！</p><p>下次你的玩家在嘉年华遇到算命师，或在本地酒馆碰到先知时，别只是告诉他们未来——用 <em>Pathfinder Harrow 牌组</em>把它展示给他们看！</p>\n<p>Divine your destiny with the Pathfinder Harrow Deck, the legendary fortune-telling cards of Pathfinder’s Age of Lost Omens setting!</p><p>With this 54-card, full-color set of fortune-telling cards, you’ll learn how to include the harrow in any tabletop RPG game and enhance play with immersive fortune-telling methods and other insights.</p><p>The exclusive module for Foundry Virtual Tabletop includes the entire deck, as well as an interface built specifically for performing the Harrowing.</p><p>Also included are journal entries providing details on the history of the Harrow, instructions on how to simulate fortune-telling readings for your group, and detailed descriptions of all 54 cards in the collection- complete with gorgeous high-resolution artwork!</p><p>Next time your players encounter a fortune teller at the carnival or a sooth-sayer at the local tavern, don't just tell them their future—show it to them with the <em>Pathfinder Harrow Deck</em>!</p>",
+      "caption": "占卜师使用自己的牌组来理清命运之线。\nA Harrower uses their deck to untangle the threads of fate.",
+      "scenes": {
+        "Harrow Reading": {
+          "name": "游魂牌占卜 Harrow Reading"
+        }
+      },
+      "macros": {
+        "New Harrow Reading": {
+          "name": "新的哈罗牌占卜 New Harrow Reading",
+          "command": "const reading = await harrow.api.createReading({});\nreading.sheet.render(true);"
+        }
+      },
+      "folders": {
+        "Pathfinder: Harrow": "《探路者：哈罗牌》\nPathfinder: Harrow"
+      },
+      "journals": {
+        "Harrow Cards": {
+          "name": "海罗牌 Harrow Cards",
+          "pages": {
+            "The Avalanche": {
+              "name": "雪崩 The Avalanche",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-avalanche.webp\" /></figure><p><strong>雪崩</strong> <em>（守序邪恶，敏捷）</em>是灾害。它是不加思索、毫无理性的事物，会碾压所有挡在它路上的人。它可以代表物理性的灾害，或由恐慌的人群或其他缺乏思考的群体或实体所带来的灾害。</p><p>如果此牌失位，这场大祸很可能会被避免，但不会不付出代价。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-avalanche.webp\" /></figure><p><strong>The Avalanche</strong> <em>(Lawful Evil, Dexterity)</em> is disaster. It is an unthinking, unreasoning thing that overruns all who get in its way. It can represent physical disaster or the disaster that comes from a panicked crowd or other unthinking group or entity.</p><p>If the card is misaligned, the calamity is likely to be averted, though not without consequence.</p>"
+            },
+            "The Bear": {
+              "name": "熊 The Bear",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-bear.webp\" /></figure><p><strong>巨熊</strong><em>（中立，力量）是纯粹的力量。人们常常犯下错误，以为巨熊可以被驯服或训练。当某人相信自己已经将巨熊置于掌控之下时，那个人最终会明白自己错得有多离谱。此处或许需要蛮力，但动用蛮力的后果可能会非常严重。</em></p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-bear.webp\" /></figure><p><strong>The Bear </strong><em>(Neutral, Strength) is pure strength. People often make the mistake of thinking The Bear can be tamed or trained. When someone believes they have The Bear under control, that person eventually learns the error of their ways. Brute force might be required here, but the consequences of its use might be severe.</em></p>"
+            },
+            "The Beating": {
+              "name": "心跳 The Beating",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-beating.webp\" /></figure><p><strong>殴打</strong> <em>(中立邪恶，力量)</em> 表示遭到四面八方的攻击，但它也可能意味着自我的消解——在心智层面。无论这力量源自肉体还是心智，它都会在无情的攻击下瓦解。</p><p>若为不正位，这张牌暗示在袭击期间，会发现未被察觉的力量。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-beating.webp\" /></figure><p><strong>The Beating</strong> <em>(Neutral Evil, Strength)</em> signifies coming under attack from all sides, but it can also indicate the dissolution of the self—mentally. Whether the strength is of the flesh or the mind, it dissolves under the relentless attack.</p><p>Misaligned, this card suggests that during the assault, undiscovered strength is found.</p>"
+            },
+            "The Betrayal": {
+              "name": "背叛 The Betrayal",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-betrayal.webp\" /></figure><p><strong>背叛</strong> <em>（中立邪恶，魅力）</em>是自私的化身。嫉妒扭曲灵体，并最终导致毁灭。它也可能表示一个人以美貌掩藏邪恶之心。</p><p>倒位时，这张牌意味着自我牺牲，或背离物质世界及其诱惑。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-betrayal.webp\" /></figure><p><strong>The Betrayal</strong> <em>(Neutral Evil, Charisma) </em>is selfishness incarnate. Envy twists the spirit and leads ultimately to devastation. It can also indicate a person whose loveliness hides an evil heart. </p><p>Misaligned, the card means self-sacrifice or turning away from the material world and its temptations.</p>"
+            },
+            "The Big Sky": {
+              "name": "大天空 The Big Sky",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-big-sky.webp\" /></figure><p><strong>广阔天空</strong> <em>（混乱善良，力量）</em>展现了一个史诗般的时刻：受压迫的囚犯获得解放。囚犯的自由象征着重大而强力的改变，旧日的镣铐在日光之下被抛却。</p><p>如果它是错位的，那些被抛弃的镣铐可能会被更糟的镣铐所取代。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-big-sky.webp\" /></figure><p><strong>The Big Sky</strong> <em>(Chaotic Good, Strength) </em>shows an epic moment as downtrodden prisoners are freed. The prisoners’ freedom specifies momentous and powerful change, as old shackles are cast off in the light of day.</p><p>If it is misaligned, those castoff shackles might be replaced with worse ones.</p>"
+            },
+            "The Brass Dwarf": {
+              "name": "黄铜矮人 The Brass Dwarf",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-brass-dwarf.webp\" /></figure><p><strong>黄铜矮人</strong> <em>(守序中立，体质) </em>展示了一个机械人形，象征对当前危险的刀枪不入。尽管他人可能倒下，黄铜矮人依然健壮而强大。黄铜矮人也可能意味着某人的失败或黑暗命运，而这反过来或许能使其周围的所有其他人免于强效危险。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-brass-dwarf.webp\" /></figure><p><strong>The Brass Dwarf</strong> <em>(Lawful Neutral, Constitution) </em>shows a mechanical figure who represents invulnerability to a current danger. Although others might fall, The Brass Dwarf remains hale and strong. The Brass Dwarf can also mean a failure or dark fate for one, which in turn might save all others around them from a greater danger.</p>"
+            },
+            "The Carnival": {
+              "name": "狂欢节 The Carnival",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-carnival.webp\" /></figure><p><strong>狂欢节 </strong><em>（混乱中立，感知）</em>是幻象与虚假梦境之牌。这张牌能增强超自然世界的力量，但依赖这种反复无常的力场可能很危险。对其他人而言，这张牌描绘了轻率的计划或不切实际的野心。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-carnival.webp\" /></figure><p><strong>The Carnival </strong><em>(Chaotic Neutral, Wisdom)</em> is the card of illusions and false dreams. This card can heighten the power of the supernatural world, but depending on such whimsical forces can be risky. For others, this card depicts imprudent plans or unrealistic ambitions.</p>"
+            },
+            "The Courtesan": {
+              "name": "花魁 The Courtesan",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-courtesan.webp\" /></figure><p><strong>宫廷女侍</strong> <em>(混乱中立, 魅力) </em>是政治阴谋的卡牌。面具体现了必须遵循的社交礼节。一旦它滑落，谈判可能会出现意料之外的转折。这张卡牌也可能指示一位左右事件走向的有力量人物。如何对待他们将决定局势的结果。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-courtesan.webp\" /></figure><p><strong>The Courtesan</strong> <em>(Chaotic Neutral, Charisma) </em>is the card of political intrigue. The mask embodies the social niceties that must be followed. If it slips, negotiations can take an unexpected turn. The card can also indicate a figure of power who shapes events. How they are treated decides the outcome of the situation.</p>"
+            },
+            "The Cricket": {
+              "name": "蟋蟀 The Cricket",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-cricket.webp\" /></figure><p><strong>蟋蟀</strong> <em>（中立善良，敏捷）</em>代表一种心智与其身体一样迅捷的生物。它代表速度与迅速通行。尽管蟋蟀通常与旅行相关联，但其果实代表在旅程终点发现的宝藏。</p><p>如果蟋蟀失衡，旅程将进展不顺，而宝藏将是失去而非发现的。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-cricket.webp\" /></figure><p><strong>The Cricket</strong> <em>(Neutral Good, Dexterity) </em>represents a creature whose mind is as quick as its body. It represents speed and quick passage. Although The Cricket is commonly associated with travel, the fruit represents treasure found at the end of a journey. </p><p>If The Cricket is misaligned, the journey will go poorly, and the treasure will be one that is lost rather than found.</p>"
+            },
+            "The Crows": {
+              "name": "乌鸦帮 The Crows",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-crows.webp\" /></figure><p><strong>乌鸦</strong> <em>（中立邪恶，敏捷）</em>是一群危险的家伙，预示着以暴力夺走所爱之物。当乌鸦出现时，会发生谋杀、盗窃或其他损失。</p><p>如果牌位不正，这类行为可以被避免，或盗窃乃是正当之举。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-crows.webp\" /></figure><p><strong>The Crows</strong> <em>(Neutral Evil, Dexterity)</em> are a dangerous bunch who indicate violent taking of that which is loved. When The Crows appear, murder, theft, or other loss occurs.</p><p>If the card is misaligned, such acts can be averted or the thievery is a just one.</p>"
+            },
+            "The Cyclone": {
+              "name": "气旋 The Cyclone",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-cyclone.webp\" /></figure><p><strong>气旋</strong> <em>(混乱邪恶，力量) </em>是一股撕裂其所遇一切的力量。这场灾害并非自然秩序进程中的产物，而是源自智慧生物的阴谋诡计。气旋象征战争、纵火，或其他摧毁其所接触一切的事件。</p><p>若为失衡，这张牌可能表示在一场狂风般的考验之后迎来复苏。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-cyclone.webp\" /></figure><p><strong>The Cyclone</strong> <em>(Chaotic Evil, Strength) </em>is a force that tears through whatever it meets. This disaster does not come in the course of natural order but is one that comes from the plots of intelligent beings. The Cyclone signifies war, arson, or other events that destroy everything they touch. </p><p>Misaligned, this card can indicate renewal after a blustery trial.</p>"
+            },
+            "The Dance": {
+              "name": "舞蹈 The Dance",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-dance.webp\" /></figure><p><strong>舞蹈</strong> <em>（守序善良，敏捷）</em>是一种丰富而精妙的架构，它如同宇宙本身一样，要求其中的每个人都遵守其规则，否则整个构造就会崩塌。它建议你保持完美的步调，知晓自己在强效善中的位置。那些踏出既定模式的人将自食其果。</p><p>若发生偏移，那种模式或许会令人着迷，但并非为了所有人的福祉。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-dance.webp\" /></figure><p><strong>The Dance</strong> <em>(Lawful Good, Dexterity) </em>is a rich and delicate framework that, like the universe itself, requires everyone within it to abide by its rules, lest the entire construct collapse. It advises staying in perfect step, knowing your place in the greater good. Those who step out of the pattern do so at their peril. </p><p>Misaligned, that pattern might be hypnotic, but not to the good of all.</p>"
+            },
+            "The Demon's Lantern": {
+              "name": "恶魔的灯笼 The Demon's Lantern",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-demons-lantern.webp\" /></figure><p><strong>恶魔的提灯</strong> <em>(混乱邪恶，敏捷) </em>是陷阱与诡计之牌，戏法与心智戏法之牌。发光的宝珠代表机遇的世界，用来引诱人步入险境。</p><p>未对位时，恶魔的提灯代表一个机会或一位向导在完美时刻到来以指明道路。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-demons-lantern.webp\" /></figure><p><strong>The Demon's Lantern</strong> <em>(Chaotic Evil, Dexterity) </em>is the card of traps and tricks, sleight of hand and sleight of mind. The glowing orbs represent worlds of opportunity used to lure one into peril. </p><p>Misaligned, The Demon’s Lantern represents an opportunity or a guide arriving at a perfect moment to show the way.</p>"
+            },
+            "The Desert": {
+              "name": "沙漠 The Desert",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-desert.webp\" /></figure><p><strong>沙漠</strong> <em>（混乱善良，体质）</em>是一种极其荒凉的环境，没有援助便无人能够生存。对于那些得到援助的人而言，穿越荒原的旅程可能通向伟大的成就。</p><p>若为失调，它暗示当事人无法依靠他人的帮助，并将迷失。这张牌上的生物可指代来自意想不到来源的援助之源。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-desert.webp\" /></figure><p><strong>The Desert</strong> <em>(Chaotic Good, Constitution) </em>is an environment so bleak that none can survive without aid. For those who find aid, the journey across the wastes can lead to great things. </p><p>Misaligned, it implies the subject can’t rely on the help of others and will be lost. The creature on this card can refer to a source of aid from an unexpected source.</p>"
+            },
+            "The Eclipse": {
+              "name": "日食 The Eclipse",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-eclipse.webp\" /></figure><p><strong>日食</strong> <em>（守序邪恶，感知）</em>代表自我怀疑与目标的丧失。这张牌折磨信仰，象征力量与信念如何会在巨大的苦难下动摇。它也可能预示在道路上迷失方向。</p><p>若未对齐，它也可能预兆某个未曾显露的能力浮现于前，或某处隐蔽的位置被揭示。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-eclipse.webp\" /></figure><p><strong>The Eclipse</strong> <em>(Lawful Evil, Wisdom) </em>represents self-doubt and loss of purpose. This card afflicts faith, symbolizing how powers and convictions can falter under great distress. It can also indicate a loss of way along a path. </p><p>If misaligned, it can augur an unheralded ability coming to the fore or a concealed location revealed.</p>"
+            },
+            "The Empty Throne": {
+              "name": "空王座 The Empty Throne",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-empty-throne.webp\" /></figure><p><strong>空王座</strong> <em>(守序善良，魅力) </em>带着一种清晰可感的失落感。空王座象征着那些离去之人将永远与我们同在。他们教会了我们重要的教训——只要我们选择倾听。这张牌能带来来自遥远或古老源头的信息。</p><p>若空王座失谐，过去的幽灵（特征）将不得安宁，并可能需要付出努力才能令其安息。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-empty-throne.webp\" /></figure><p><strong>The Empty Throne</strong> <em>(Lawful Good, Charisma) </em>has a sense of loss that is palpable. The Empty Throne signifies that those who are gone will always be with us. They taught us important lessons, if only we choose to listen. This card can bring information from a far-off or ancient source. </p><p>If The Empty Throne is misaligned, the ghosts of the past are restless, and might require effort to set at peace.</p>"
+            },
+            "The Fiend": {
+              "name": "魔裔 The Fiend",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-fiend.webp\" /></figure><p><strong>恶魔</strong> <em>(守序邪恶，力量) </em>描绘了一名魔鬼吞噬无辜者。它可以预示在一场巨大灾害中许多人的死亡，或者若解读不当，则预示从同一灾害中获得救赎。恶魔也可以表明有一个阴险且聪明的生物在区域内，危及民众。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-fiend.webp\" /></figure><p><strong>The Fiend</strong> <em>(Lawful Evil, Strength) </em>depicts a devil swallowing innocents. It can indicate the deaths of many in a great calamity or, if misaligned, salvation from the same disaster. The Fiend can also indicate that a sinister and intelligent creature is in the area, endangering the populace.</p>"
+            },
+            "The Fool": {
+              "name": "愚者 The Fool",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-fool.webp\" /></figure><p><strong>愚者</strong> <em>(中立邪恶，智力) </em>是一张象征极度愚蠢与贪婪的牌。它可能意味着贿赂、勒索，或天真到看不见任何邪恶。愚者所陷入的处境表明：失去尊严的知识可能先于失去生命。</p><p>若为失衡，此牌可能表示佯装无知以伪装自身的赋礼。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-fool.webp\" /></figure><p><strong>The Fool</strong> <em>(Neutral Evil, Intelligence) </em>is a card of grave foolishness and greed. It can mean bribery, blackmail, or naivety so grand it can see no evil. The situation The Fool finds themselves in represents the knowledge that loss of dignity can precede loss of life. </p><p>Misaligned, this card might indicate feigning of ignorance to disguise one’s gifts.</p>"
+            },
+            "The Forge": {
+              "name": "熔炉 The Forge",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-forge.webp\" /></figure><p><strong>熔炉</strong> <em>(守序中立, 力量) </em>通过材料与根源的多样性唤起力量。铁匠代表那些能在火的超自然考验中幸存的人，但熔炉之火强大到会把许多人反而烧成灰烬。这张牌常常代表一场危险事件，需要许多力量来源才能克服。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-forge.webp\" /></figure><p><strong>The Forge</strong> <em>(Lawful Neutral, Strength) </em>evokes strength through diversity of materials and traditions. The blacksmith represents those who can survive supernatural trials by fire, but The Forge’s fire is so strong it burns many to cinders instead. This card often represents a dangerous event that requires many sources of strength to overcome.</p>"
+            },
+            "The Hidden Truth": {
+              "name": "隐藏的真相 The Hidden Truth",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-hidden-truth.webp\" /></figure><p><strong>隐秘真相</strong> <em>（守序善良，智力）</em>象征着看穿显而易见与平庸之物、洞见其中强效真理的能力。有时这种发现是神秘莫测的，有时则是字面意义上的发现，例如在房间内揭示出一件物品。无论如何，这都是一张拥有揭示秘密之力量的牌。</p><p>若为错位，则可能意味着秘密被揭露而使当事人受损。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-hidden-truth.webp\" /></figure><p><strong>The Hidden Truth</strong> <em>(Lawful Good, Intelligence) </em>symbolizes the ability to see past the obvious and the banal to a greater truth within. Sometimes this discovery is an esoteric one, sometimes it is a literal find, such as an item revealed within a room. Regardless, it is a card with the power to reveal secrets.</p><p>Misaligned, it can mean a secret being revealed to the subject’s detriment.</p>"
+            },
+            "The Inquisitor": {
+              "name": "审判官 The Inquisitor",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-inquisitor.webp\" /></figure><p><strong>审判官</strong> <em>(守序中立，智力) </em>除了真相之外不接受任何东西。审判官代表不可变的现实，即无法以任何方式被欺骗或动摇之物。试图反抗这一不可改变的物体、人物或理念，便是在招致灾害。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-inquisitor.webp\" /></figure><p><strong>The Inquisitor</strong> <em>(Lawful Neutral, Intelligence) </em>accepts nothing but truth. The Inquisitor represents immutable reality, that which can’t be fooled or swayed in any way. To attempt to go against this unchangeable object, person, or idea is to court disaster.</p>"
+            },
+            "The Joke": {
+              "name": "笑话 The Joke",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-joke.webp\" /></figure><p><strong>笑话</strong> <em>(混乱善良，智力) </em>展示了一种必须被克服的恐惧——但不是通过物理手段。这种恐惧可以通过诡计或巧思来战胜。这张牌可以代表幽默在找到绕过难缠之人或艰难任务的道路时所具有的价值。</p><p>当不对位时，它往往预示着笑话会落在你身上。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-joke.webp\" /></figure><p><strong>The Joke</strong> <em>(Chaotic Good, Intelligence) </em>shows a terror that must be overcome—but not by physical means. This terror can be defeated by trickery or artifice. This card can represent the value of humor in finding the way past a difficult person or task. </p><p>When misaligned, it often signals that the joke will be on you.</p>"
+            },
+            "The Juggler": {
+              "name": "杂耍者 The Juggler",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-juggler.webp\" /></figure><p><strong>杂耍者</strong> <em>（混乱善良，敏捷）</em>代表命运、神祇，或那些摆弄他人生命与宿命之人。若杂耍者能保持自身节奏，他将达成目标。</p><p>但若落位失衡，他便会踉跄，而悲剧与失败将无可避免地降临在那些被他插手过人生的人身上。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-juggler.webp\" /></figure><p><strong>The Juggler</strong> <em>(Chaotic Good, Dexterity) </em>represents fate, the gods, or those who play with the lives and destinies of others. If The Juggler can keep up his rhythm, he will achieve his goals. </p><p>But in a misaligned placement, he falters, and tragedy and failure are assured for those whose lives he meddled in.</p>"
+            },
+            "The Keep": {
+              "name": "要塞 The Keep",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-keep.webp\" /></figure><p><strong>要塞</strong> <em>(中立善良，力量) </em>是沉静力量的象征，这种力量能在必要时变通，却能在最严峻的艰难中屹立不倒。由要塞所代表的人不会被任何力场所动摇。</p><p>如果要塞以错位的方式出现，可能意味着向诱惑让步，或在强效力量面前坠落。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-keep.webp\" /></figure><p><strong>The Keep</strong> <em>(Neutral Good, Strength) </em>is a symbol of quiet strength, one that can shift when necessary, yet stand firm through the greatest hardship. Those represented by The Keep are not shaken by any force.</p><p>If The Keep appears misaligned, it can mean giving way to temptation or falling in the face of greater strength.</p>"
+            },
+            "The Liar": {
+              "name": "骗子 The Liar",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-liar.webp\" /></figure><p><strong>说谎者</strong> <em>(混乱邪恶，魅力) </em>是最为奸诈的爱。这不是那种移山填海的爱——而是那种将心撕成两半、让恋人跃入死亡的爱。说谎者可以意味着痴迷、单相思的激情，或注定失败的恋情。若为逆位，这张牌可能预示一段新关系的开始，尽管它伪装成某种远不如其美好的事物。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-liar.webp\" /></figure><p><strong>The Liar</strong> <em>(Chaotic Evil, Charisma) </em>is love at its most treacherous. This is not the love that moves mountains— this is the love that rips the heart in two and causes lovers to leap to their deaths. The Liar can mean obsession, unrequited passion, or doomed love. Misaligned, the card can indicate a new relationship beginning, although disguised as something much less beautiful.</p>"
+            },
+            "The Locksmith": {
+              "name": "锁匠 The Locksmith",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-locksmith.webp\" /></figure><p><strong>锁匠</strong> <em>（守序中立，敏捷）</em>为当事者提供他们解锁自身命运所需的钥匙。他们找到用于许可进入新地点、线索或宝藏的工具。此牌不会赋予关于如何或在何处使用所授予工具的洞见。此牌通常代表一件奇异、古老或魔法的物体。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-locksmith.webp\" /></figure><p><strong>The Locksmith</strong> <em>(Lawful Neutral, Dexterity) </em>presents the subject with the keys they need to unlock their destiny. They find the tools to access a new location, clue, or treasure. The card does not grant insight into how or where to use the tools granted. This card often represents a strange, ancient, or magical object.</p>"
+            },
+            "The Lost": {
+              "name": "失落者 The Lost",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-lost.webp\" /></figure><p><strong>迷失者</strong> <em>(混乱邪恶，感知) </em>是一张象征空虚与自我认同丧失的牌。牌中所示的人物已被摧毁，在噩梦的世界、折磨人的景象与杀戮者之中迷失。对受其影响者而言，世界毫无意义。它唤起一段段万事皆成胡言乱语的时代，就如同遇见一个只会说另一种语言的人时那样。</p><p>若为逆位，迷失者可以表示在困境之下仍保有心智的清明。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-lost.webp\" /></figure><p><strong>The Lost</strong> <em>(Chaotic Evil, Wisdom) </em>is the card of emptiness and loss of identity. The figure shown is destroyed, lost in worlds of nightmares, tormented vistas, and killers. For those under its influence, the world makes no sense. It evokes times where all is babble, as when meeting someone who speaks only in another tongue. </p><p>Misaligned, The Lost can indicate clarity of mind under duress.</p>"
+            },
+            "The Marriage": {
+              "name": "婚姻 The Marriage",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-marriage.webp\" /></figure><p><strong>婚姻 </strong><em>(守序中立, 魅力)</em>可以是人与人、理念与理念、王国与王国或其他不同事物之间的结合。子嗣预示着一种结合：它可能令双方的力量共同孕育出新的力量，也可能是一场毁灭性的联姻，将本不该结合之物强行连为一体。一旦结为夫妻，二者便无法分离。这是一张象征永久改变的牌。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-marriage.webp\" /></figure><p><strong>The Marriage </strong><em>(Lawful Neutral, Charisma)</em> can be a union of people, ideas, kingdoms, or other distinct things. The progeny promises a union that might bring forth new power from both parties, or one that might be a ruinous joining of that which should never have been united. Once wedded, the two can’t be parted. This is the card of permanent change.</p>"
+            },
+            "The Midwife": {
+              "name": "助产士 The Midwife",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-midwife.webp\" /></figure><p><strong>接生婆</strong> <em>（中立善良，感知）</em>是一条通往创造的导管，尽管接生婆并不会凭自身创造。接生婆是一把钥匙，让新的生命或信息进入世界。即便在最糟的处境中，她们的心也能看见善。 </p><p>她们能看见任何新到者的重要性，但如果这张牌未对齐，新到者很可能不会激起多少喜悦。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-midwife.webp\" /></figure><p><strong>The Midwife</strong> <em>(Neutral Good, Wisdom) </em>is a conduit to creation, although The Midwife does not create on their own. The Midwife is a key that lets new life or information into the world. Their heart can see the good in even the worst situation. </p><p>They can see the import of any new arrival, but if the card is misaligned, the new arrival will likely not inspire much joy.</p>"
+            },
+            "The Mountain Man": {
+              "name": "山地人 The Mountain Man",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-mountain-man.webp\" /></figure><p><strong>山岳之人</strong> <em>(混乱中立，体质) </em>象征着与一种不受自身控制的物理力量的遭遇。山岳之人可能具象化为权威、军队、地震，甚至是在干涸之地里迫切需要的一场暴雨。屈从于这股力量或许明智，但生存下来才是最重要的。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-mountain-man.webp\" /></figure><p><strong>The Mountain Man</strong> <em>(Chaotic Neutral, Constitution) </em>signifies an encounter with a physical power outside of one’s control. The Mountain Man could personify an authority, an army, an earthquake, or even a desperately needed rainstorm in a parched land. Acceding to the force might be wise, but surviving it is paramount.</p>"
+            },
+            "The Owl": {
+              "name": "猫头鹰 The Owl",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-owl.webp\" /></figure><p><strong>猫头鹰</strong> <em>（中立，感知）</em>象征自然秩序的永恒智慧。它是冷酷的现实主义，促使狼群在鹿群中淘汰弱者。对被淘汰的鹿而言这是悲剧，但通过这样的动作，鹿群会变得更强。猫头鹰将生命凝聚在一起，但也同样能轻易将那生命拆散。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-owl.webp\" /></figure><p><strong>The Owl</strong> <em>(Neutral, Wisdom) </em>represents the eternal wisdom of the natural order. It is the harsh realism that causes a pack of wolves to cull the weak in the herd. It is tragic for the culled deer, but through such actions the herd grows stronger. The Owl binds life together, but just as easily can pick that life apart.</p>"
+            },
+            "The Paladin": {
+              "name": "圣武士 The Paladin",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-paladin.webp\" /></figure><p><strong>圣武士</strong> <em>(守序善良，力量) </em>象征着在逆境面前坚强屹立。圣武士在任何环境下都不会退缩。这张牌通常表示需要坚持到底，或去做自己知道正确的事，即使这会付出沉重的代价。</p><p>如果这张牌出现错位，那么这样的路线可能会显得鲁莽。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-paladin.webp\" /></figure><p><strong>The Paladin</strong> <em>(Lawful Good, Strength) </em>symbolizes standing strong in the face of adversity. The Paladin does not back down under any circumstances. This card usually indicates the need to stay the course or do what one knows is right, even if it takes a heavy toll.</p><p>If the card is misaligned, such a course might be foolhardy.</p>"
+            },
+            "The Peacock": {
+              "name": "孔雀 The Peacock",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-peacock.webp\" /></figure><p><strong>孔雀</strong> <em>(中立，敏捷) </em>是一种外表惊人而绚丽多彩的生物，其美丽或丑陋足以让旁观者一见之下当场僵住。更聪明的人会接受时代的流逝，并跳舞避开孔雀的道路。它的出现总是预示着态度上的突然个人转变或社会变迁。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-peacock.webp\" /></figure><p><strong>The Peacock</strong> <em>(Neutral, Dexterity) </em>is a creature of astonishing and colorful appearance, one that can cause the onlooker to freeze in their tracks at the sight of such beauty or ugliness. Wiser people accept the passage of time and dance out of The Peacock’s way. Its appearance always signifies a sudden personal shift in attitude or societal change.</p>"
+            },
+            "The Publican": {
+              "name": "酒馆老板 The Publican",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-publican.webp\" /></figure><p><strong>酒馆老板</strong> <em>（混乱善良，感知）</em>代表情谊与友爱，以及为有需要之人提供的避难之所。多数人会觉得酒馆老板无足轻重，但他们拥有与占卜解读或某项任务相关的洞见。</p><p>若为失准，酒馆老板代表尚未找到的避难所，或在关键时刻被给出的虚假信息。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-publican.webp\" /></figure><p><strong>The Publican</strong> <em>(Chaotic Good, Wisdom) </em>represents fellowship and camaraderie, and a place of refuge for those in need. Most would find The Publican inconsequential, but they have insights relevant to the reading or a quest.</p><p>Misaligned, The Publican represents refuge yet to be found or false information given at a crucial moment.</p>"
+            },
+            "The Queen Mother": {
+              "name": "太后 The Queen Mother",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-queen-mother.webp\" /></figure><p><strong>王母</strong> <em>(守序中立，感知) </em>是知识的化身。王母知晓一切，但对那些不表现出恰当崇敬之人绝不透露分毫。王母偏爱无权者与下层阶级，因为当更强者拒绝时，他们会挺身效劳。她们象征着需要成为社会的一部分，或向那些比你更博学之人俯首称臣。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-queen-mother.webp\" /></figure><p><strong>The Queen Mother</strong> <em>(Lawful Neutral, Wisdom) </em>is knowledge personified. The Queen Mother knows all but reveals nothing to those who do not show proper worship. The Queen Mother is fond of the powerless and the underclasses, for they serve when the more powerful refuse. They represent the need to become part of a society, or to bow before those who know more than you.</p>"
+            },
+            "The Rabbit Prince": {
+              "name": "兔子王子 The Rabbit Prince",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-rabbit-prince.webp\" /></figure><p><strong>兔王子</strong> <em>(混乱中立，敏捷) </em>是个古怪的家伙，代表徒手战斗的无常。兔王子是战斗的化身，反复无常得无以复加。正如他那破损的武器所象征的那样，无论多么勇敢或技艺高超，任何战士都可能在战斗中倒下。这张牌有时也代表较年轻的王室成员或其他强大家族的成员。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-rabbit-prince.webp\" /></figure><p><strong>The Rabbit Prince</strong> <em>(Chaotic Neutral, Dexterity) </em>is a quirky fellow who represents the vagaries of hand-to-hand combat. The Rabbit Prince is battle personified and nothing if not capricious. As his broken weapon symbolizes, any combatant can fall in battle, no matter how brave or skilled. This card sometimes stands for younger members of royalty or other powerful households.</p>"
+            },
+            "The Rakshasa": {
+              "name": "罗刹（特征） The Rakshasa",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-rakshasa.webp\" /></figure><p><strong>罗刹</strong> <em>(守序邪恶，智力) </em>是支配与心智控制之牌。站在雕像前的生物表明有一种外在力场正将自身强加于另一方之上。有时，这种强加是字面意义上的，但更多时候是心智层面的支配。</p><p>逆位时，此牌表示在新信息面前，这种控制能够被摆脱。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-rakshasa.webp\" /></figure><p><strong>The Rakshasa</strong> <em>(Lawful Evil, Intelligence) </em>is the card of dominance and mind control. The creature standing before a statue indicates an exterior force imposing itself upon another. On occasion, this imposition is literal, but more often it is mental domination. </p><p>Misaligned, this card means that the control can be cast off in the face of new information.</p>"
+            },
+            "The Sickness": {
+              "name": "病症 The Sickness",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-sickness.webp\" /></figure><p><strong>疾病</strong> <em>（中立邪恶，体质）</em>代表瘟疫、疫病、饥荒与疾病。它也可能表示灵魂的腐化。</p><p>如果未对齐，疾病则代表极佳的健康，或阻止此类灾害的机会。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-sickness.webp\" /></figure><p><strong>The Sickness</strong> <em>(Neutral Evil, Constitution) </em>represents plague, pestilence, famine, and disease. It can also indicate corruption of the soul. </p><p>If misaligned, The Sickness represents either great health or a chance to stop such a disaster.</p>"
+            },
+            "The Silent Hag": {
+              "name": "沉默鬼婆（特征） The Silent Hag",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-silent-hag.webp\" /></figure><p><strong>沉默的鬼婆</strong> <em>（中立邪恶，感知）</em>或许沉默，但仍能看透所遇之人的内心。沉默的鬼婆召唤血之契约与剧毒的秘密——那种会让手足反目、子女与父母对立的秘密。这张牌令表演者厌恶，因为它会让他们在言语与歌唱上磕磕绊绊。</p><p>倒置时，它表示坚定不移的忠诚与言语清晰。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-silent-hag.webp\" /></figure><p><strong>The Silent Hag</strong> <em>(Neutral Evil, Wisdom) </em>might be silent, but still sees into the hearts of those they meet. The Silent Hag invokes blood pacts and poisonous secrets, the kind that turn sibling against sibling and child against parent. It is a card that performers loathe, as it leaves them stumbling over their words and songs. </p><p>Misaligned, it indicates unshakable loyalty and lucidity of speech.</p>"
+            },
+            "The Snakebite": {
+              "name": "蛇咬 The Snakebite",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-snakebite.webp\" /></figure><p><strong>蛇咬</strong> <em>（混乱邪恶，智力）</em>是一把卑劣的、淬毒的武器。毒素有许多形态——并非全都具备实体。蛇咬象征思想与自由的死亡，也象征将朋友彼此反目，或毒害正直之人心智的能力。</p><p>若为逆位，这张牌可能意味着一次心智上的飞跃、一段新友谊，或一次发现。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-snakebite.webp\" /></figure><p><strong>The Snakebite</strong> <em>(Chaotic Evil, Intelligence) </em>is a vile, poisoned weapon. Poison takes many forms—not all of them physical. The Snakebite represents the death of ideas and freedom, as well as the ability to turn friends against each other or poison the minds of the virtuous. </p><p>Misaligned, this card can mean a mental leap, a new friendship, or a discovery.</p>"
+            },
+            "The Survivor": {
+              "name": "幸存者 The Survivor",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-survivor.webp\" /></figure><p><strong>幸存者</strong> <em>(中立善良, 体质) </em>代表一个经历过某种磨难的人。在他倒下的同伴环绕之中，这个形象代表某个（或某种）被认为永远失去、却再次被寻回的存在。它也可以代表重生。</p><p>失序时，幸存者可能预示可怕的消息或深重的失落。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-survivor.webp\" /></figure><p><strong>The Survivor</strong> <em>(Neutral Good, Constitution) </em>represents a person who has been through an ordeal of some kind. Surrounded by his fallen comrades, the figure represents someone or something thought lost forever, but found once more. It can also represent rebirth. </p><p>Misaligned, The Survivor can evoke terrible news or a profound loss.</p>"
+            },
+            "The Tangled Briar": {
+              "name": "纠缠荆棘 The Tangled Briar",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-tangled-briar.webp\" /></figure><p><strong>纠缠荆棘</strong> <em>（守序邪恶，体质）</em>是一张关于古老功业的牌。它表示某个久远之前的物体或人物将以某种方式对局势产生重大影响。所指的物体或人物，是以某种邪恶的方式失落或被谋杀的。</p><p>若为错位，荆棘丛生的过往带来的不仅是痛苦，还有对未来的希望。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-tangled-briar.webp\" /></figure><p><strong>The Tangled Briar</strong> <em>(Lawful Evil, Constitution) </em>is a card of ancient deeds. It indicates an object or person from long ago that will somehow have great influence on the situation. The object or person in question is one lost or murdered in some foul way.</p><p>Misaligned, the thorny past brings not just pain, but hope for the future.</p>"
+            },
+            "The Teamster": {
+              "name": "车夫 The Teamster",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-teamster.webp\" /></figure><p><strong>赶车人</strong> <em>（中立，体质）</em>是一种推动的外在力场，无论发生什么都能让对象继续前行。这股力场可以是肉体或精神层面的，例如某人在他人已无更多力量可付出时仍鼓舞他们继续前进。这股力场可能为善也可能为恶，但无法被忽视。画中更大的身影过着持续劳作的生命，但这是为了他们自身的改善。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-teamster.webp\" /></figure><p><strong>The Teamster</strong> <em>(Neutral, Constitution) </em>is a driving external force that keeps the subject going, no matter what. This force can be physical or mental, as a person who exhorts others to continue on when they have no more strength to give. The force can be for good or ill but can’t be ignored. The larger figure depicted is leading a life of constant toil, but for their own betterment.</p>"
+            },
+            "The Theater": {
+              "name": "剧院 The Theater",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-theater.webp\" /></figure><p><strong>剧院</strong> <em>（中立善良，魅力）</em>代表“生命的阶段”。木偶们演绎一幕场景，正如先知演绎一幕与她并无关联的场景。先知是观众，而他们的预言便是演出。他们对所见之事没有任何影响，而其重要性常常直到为时已晚才被察觉。</p><p>若剧院牌位不正，这个故事就只是作秀。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-theater.webp\" /></figure><p><strong>The Theater</strong> <em>(Neutral Good, Charisma) </em>represents the “stage that is life.” The puppets act out a scene, just as the prophet acts out a scene in which she has no part. The prophet is the audience and their predictions are the show. They have no influence on what they see, and its importance is often not recognized until too late. </p><p>If The Theater is misaligned, the story is just for show.</p>"
+            },
+            "The Trader": {
+              "name": "商人 The Trader",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-trader.webp\" /></figure><p><strong>商人</strong> <em>（中立，智力）</em>是间谍与小贩共同的牌。任何进行情报交易的人都受这张牌的影响。在这张牌的庇佑下达成的交易总会如实兑现，但对于那些不理解其含义的人来说，这份契约的后果可能会令人震惊。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-trader.webp\" /></figure><p><strong>The Trader</strong> <em>(Neutral, Intelligence) </em>is the card of spies and peddlers alike. Any who trade in information are subject to this card’s influence. A bargain made under this card’s auspice always concludes true, but the ramifications of the pact might be shocking for those who do not understand its implications.</p>"
+            },
+            "The Trumpet": {
+              "name": "号角 The Trumpet",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-trumpet.webp\" /></figure><p><strong>号角</strong> <em>(守序善良，体质) </em>是一种力量的宣示。这张牌展示了一股咄咄逼人的力量，为了正义毫不犹豫地涉入最严峻的局势。</p><p>若不契合，则暗示动机并不高尚，带来伤害与崩塌的力量。这是一张要么赐予一切、要么什么都不给的牌。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-trumpet.webp\" /></figure><p><strong>The Trumpet</strong> <em>(Lawful Good, Constitution) </em>is a declaration of power. This card shows an aggressive force who wades into the direst situations without hesitation in the cause of right. </p><p>Misaligned, it suggests the motives aren’t noble, bringing injury and crumbling strength. It is a card that grants all or nothing at all.</p>"
+            },
+            "The Twin": {
+              "name": "双生 The Twin",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-twin.webp\" /></figure><p><strong>双生</strong> <em>（中立，魅力）</em>预示目的或身份的二元性，也同样可以代表肉体上的复制品，以及精神或心智上的复制品。这个形象也可能意味着优柔寡断，因为某个人或团体在截然不同的选项之间摇摆不定。它也可能意味着忠诚被分割并随处可见。此牌会让占卜师心生戒备，因为它还可能意味着整个牌阵具有隐藏或颠倒的含义。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-twin.webp\" /></figure><p><strong>The Twin</strong> <em>(Neutral, Charisma) </em>signals duality of purpose or identity, and can just as easily represent physical duplicates as much as spiritual or mental ones. This figure can also mean indecision, as a person or group wavers between very different options. It can also mean divided loyalties abound. The card makes a harrower wary, as it can also mean the entire spread has a hidden or reversed meaning.</p>"
+            },
+            "The Tyrant": {
+              "name": "暴君 The Tyrant",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-tyrant.webp\" /></figure><p><strong>暴君</strong> <em>(守序邪恶，魅力) </em>表示一位对其治下之人而言如同瘟疫般的统治者，或指某个对本应照料之人施加的控制却是有毒的那个人。巨龙可能表示一位君主、监督者或一家之主。不论此人是谁，他们都会对自己所支配之人造成伤害，无论他们是否意识到这一点。</p><p>逆位时，这张牌可能表示暴君被揭露或被废黜。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-tyrant.webp\" /></figure><p><strong>The Tyrant</strong> <em>(Lawful Evil, Charisma) </em>indicates a ruler who is a blight upon those ruled, or someone whose control is toxic to those they should be caring for. The dragon might indicate a monarch, overseer, or head of a household. Whoever this person is, they do harm to those over whom they hold sway, whether they realize it or not. </p><p>Misaligned, this card might indicate a tyrant revealed or dethroned.</p>"
+            },
+            "The Unicorn": {
+              "name": "独角兽 The Unicorn",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-unicorn.webp\" /></figure><p><strong>独角兽</strong> <em>(混乱善良，魅力) </em>是一张慷慨给予求问者所追寻之物的牌，例如来自同样意想不到的来源的意外赋礼。</p><p>当不协调时，这张牌意味着背叛、下毒，或虚假的朋友。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-unicorn.webp\" /></figure><p><strong>The Unicorn</strong> <em>(Chaotic Good, Charisma) </em>is a card that generously offers that which the subject seeks, such as an unexpected gift from an equally unexpected source. </p><p>When misaligned, the card means betrayal, poisoning, or a false friend.</p>"
+            },
+            "The Uprising": {
+              "name": "起义 The Uprising",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-uprising.webp\" /></figure><p><strong>起义</strong> <em>(混乱中立，力量) </em>代表你被某种比你更强大的事物所控制。那是一股压倒性的力量，会碾碎与之接触的一切。王冠象征着推翻某种领袖。在牌阵中，它表示一股远比接受解读之人更强的力场。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-uprising.webp\" /></figure><p><strong>The Uprising</strong> <em>(Chaotic Neutral, Strength) </em>represents being caught in the clutches of something more powerful than you. It is an overwhelming strength that crushes what comes in contact with it. The crown signifies an overthrowing of a leader of some sort. In the spread, it indicates a force much stronger than the person receiving the reading.</p>"
+            },
+            "The Vision": {
+              "name": "视野 The Vision",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-vision.webp\" /></figure><p><strong>视野</strong> <em>(混乱中立, 智力) </em>代表晦涩或超自然的学识。这类知识可以采取幻象或隐晦言辞的形态。这张牌通常意味着与一位高深莫测之人的遭遇，但也可能象征与天才的短暂接触。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-vision.webp\" /></figure><p><strong>The Vision</strong> <em>(Chaotic Neutral, Intelligence) </em>represents obscure or supernatural lore. Such knowledge can take the form of visions or cryptic words. This card often means an encounter with an inscrutable person, but it can also signify a brush with genius.</p>"
+            },
+            "The Wanderer": {
+              "name": "漫游者 The Wanderer",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-wanderer.webp\" /></figure><p><strong>漫游者</strong> <em>(中立善良，智力) </em>展示了一位收藏家的随身物品。漫游者欣赏他人视为破烂或垃圾的东西。漫游者会出现在那些足够聪明、能从他人忽视或当作毫无价值之物中发现其真正价值的人面前。</p><p>若为失衡，漫游者象征价值观的丧失，或无法看清某个人或某种局势中真正有价值之处。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-wanderer.webp\" /></figure><p><strong>The Wanderer</strong> <em>(Neutral Good, Intelligence) </em>shows the belongings of a collector. The Wanderer appreciates that which others regard as junk or trash. The Wanderer appears to those clever enough to find the true worth in something others ignore or treat as worthless. </p><p>Misaligned, The Wanderer signifies a loss of values, or the inability to see what is truly valuable in a person or situation.</p>"
+            },
+            "The Waxworks": {
+              "name": "蜡像馆 The Waxworks",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-waxworks.webp\" /></figure><p><strong>蜡像馆</strong> <em>（混乱邪恶，体质）</em>是一处无助与肉体熵的所在。心智或许愿意，但血肉在这恐怖之地被冻结。它也是酷刑与囚禁之牌，象征着字面意义上无法移动，或是一种更为寻常的瘫痪。</p><p>错位时，此牌表示在关键时刻能量充沛，从而改变一切。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-waxworks.webp\" /></figure><p><strong>The Waxworks</strong> <em>(Chaotic Evil, Constitution) </em>is a place of helplessness and physical entropy. The mind might be willing, but the flesh is frozen in this place of horror. It is also the card of torture and imprisonment, signifying literal inability to move or a paralysis of a more prosaic kind. </p><p>Misaligned, this card indicates an abundance of energy at a crucial moment that changes all.</p>"
+            },
+            "The Winged Serpent": {
+              "name": "翼蛇 The Winged Serpent",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-winged-serpent.webp\" /></figure><p><strong>翼蛇</strong> <em>(守序善良, 感知) </em>是一个强大的存在。知识与审慎是两座独立的堡垒，由理解之桥相连。翼蛇代表这座桥，知晓现在是否是进行打击的时代。 </p><p>若失准，此牌意味着要么未能把握时机，要么在不明智的情况下这样做。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-winged-serpent.webp\" /></figure><p><strong>The Winged Serpent</strong> <em>(Lawful Good, Wisdom) </em>is a powerful being. Knowledge and prudence are separate keeps bridged by understanding. The Winged Serpent represents this bridge, knowing whether now is the time to strike. </p><p>Misaligned, this card means either not seizing a moment or doing so ill-advisedly.</p>"
+            },
+            "Reading a Harrow Card": {
+              "name": "解读哈罗牌 Reading a Harrow Card",
+              "text": "<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-paladin.webp\" /></figure><p>哈罗牌组包含54张牌。每张牌都有六种符号之一，对应六项属性——这就是该牌的花色。花色符号位于牌的边缘，出现在八个位置之一，对应八种非中立阵营。花色符号也会出现在牌的底部。</p><p>例如，<em>圣武士</em>在左上角有一把战锤（力量的符号）（守序善良的位置），因此它是守序善良的力量牌。同样，<em>骗子</em>在右下角有一顶王冠（魅力）（混乱邪恶的位置），因此它是混乱邪恶的魅力牌。</p><p>注意，完全中立的牌（<em>熊</em>、<em>商人</em>、<em>猫头鹰</em>、<em>孔雀</em>、<em>赶车人</em>以及<em>双子</em>）在牌边缘不会有任何花色符号——真正中立的牌只会在牌底显示其花色符号。</p><p>接下来的页面将详细说明如何进行一次哈罗解读，解释每张牌的一般含义以及其摆放位置的细节。这些因素都会影响预言，但由各个哈罗解读者自行将牌面的暗示与其目标的命运串联并加以诠释。诠释往往含糊而富于隐喻，哈罗解读者也不应觉得必须为牌的诠释编织出具体含义——含混与多重解读本就是哈罗解读者神秘技艺的一部分。归根结底，哈罗牌组的目的在于帮助促成一次神秘的遭遇，而不是强迫哈罗解读者从一组牌的排列中准确读出某条特定讯息以决定某个特定的未来。只要解读者能把牌组当作跳板来做出宽泛的预言，命运与其他玩家的诠释就能填补空白。</p>\n<figure class=\"card right\"><img src=\"modules/pf2e-decks-harrow/assets/cards/the-paladin.webp\" /></figure><p>A harrow deck contains 54 cards. Each card has one of six symbols corresponding to six abilities—this is the card’s suit. The suit’s symbol is located along the card’s edge in one of eight positions corresponding to the eight non-neutral alignments. The suit’s symbol also appears at the bottom of the card.</p><p><em>The Paladin</em>, for example, has a hammer (the symbol for Strength) in the upper left corner (the position for lawful good), so it’s the lawful good Strength card. Similarly, <em>The Liar</em> has a crown (Charisma) in the lower right corner (chaotic evil), so it’s the chaotic evil Charisma card.</p><p>Note that cards that are entirely neutral (<em>The Bear</em>, <em>The Trader</em>, <em>The Owl</em>, <em>The Peacock</em>, <em>The Teamster</em>, and <em>The Twin</em>) do not have any symbols for the card suit along the card edges—true neutral cards only show their suit’s symbol at the bottom of the card.</p><p>The following pages detail how to conduct a harrow reading, explaining the general meaning of each card and details of its placement. These factors all influence a prediction, but it’s up to the individual harrow reader to tie together and interpret the cards’ suggestions with their target’s fate. Interpretations are often vague and metaphorical, and harrowers shouldn’t feel obligated to craft specific meanings into their interpretations of the cards—vagaries and multiple interpretations are all part of a harrower’s mystical art. Ultimately, the purpose of the harrow deck is to help facilitate a mystical encounter, not to force the harrower to accurately read a specific message from a pattern of cards to determine a specific future. So long as the reader can use the deck as a springboard to make broad predictions, destiny and other players’ interpretations can fill in the gaps.</p>"
+            }
+          }
+        },
+        "Harrow Rulebook": {
+          "name": "《占卜牌规则书》 Harrow Rulebook",
+          "pages": {
+            "The Harrow Deck": {
+              "name": "哈罗牌组 The Harrow Deck",
+              "text": "<section class=\"quote\"><p>你以为它们只是牌？只是些图画和文字，用来赌博，或把镇民骗走几枚铜币？尽管这么想——我不介意。我的牌知道你去过哪里，也知道你要去哪里。而且那可不美妙。一点也不。所以，走开吧。或者停下，学会如何把你生命故事里所剩无几的页面翻成一本值得传颂的小说。或者不学。毕竟，它们只不过是牌。</p><p class=\"attribution\">——莉安娜，瓦瑞夏占卜师</p></section><p>Harrow 是一副类似塔罗牌的牌组，可用于日常生活或任何角色扮演游戏。</p><p>无论你在哪里使用它，都要谨慎。一副 harrow 牌组蕴含着力量，因此你必须学会正确解读牌面，否则将遭受可耻的命运。</p><p>在这些页面中，你将学会进行一次 harrowing——一种解读牌面的方式，从而从某个人的生命中撷取信息。对你的对象而言，这是个艰难的过程，因为他们的过去、现在与未来都会被完全揭露。有时，牌组讲述好消息；有时，讲述坏消息。它很少出错。</p><p>最重要的是，要以尊重的态度对待你的 harrow 牌组。你不尊重牌组，牌组也不会尊重你。那条路必然通向毁灭。你不想走向毁灭，对吧？你想知道如何解读这些牌。</p><figure><img class=\"noborder\" width=\"280\" src=\"modules/pf2e-decks-harrow/assets/journals/hand.webp\" /></figure>\n<section class=\"quote\"><p>You think they’re just cards? Just pictures and words good for gambling or faking townsfolk out of a few coppers? Go on and think that—I don’t mind. My cards know where you’ve been and where you’re going. And it’s not pretty. Not at all. So, walk away. Or stop and learn to turn the few remaining pages of the story of your life into a novel worth the telling. Or don’t. After all, they’re only cards.</p><p class=\"attribution\">—Riana, Varisian harrower</p></section><p>Harrow is a tarot-like deck usable in everyday life or in any roleplaying game.</p><p>Regardless of where you use it, use it with care. A harrow deck is loaded with power, so you must learn to read the cards correctly or else suffer an ignominious fate.</p><p>In these pages, you will learn to perform a harrowing, which is a reading of the cards in such a way that you wrest information out of someone’s life. It’s a difficult process for your subject, as their entire past, present, and future is laid bare. Sometimes, the deck talks of good tidings, sometimes of ill. Rarely is it wrong.</p><p>The most important thing is to treat your harrow deck with respect. Disrespect the deck, and the deck will disrespect you. That way surely leads to ruin. You don’t want ruin, do you? You want to know how to read these cards.</p><figure><img class=\"noborder\" width=\"280\" src=\"modules/pf2e-decks-harrow/assets/journals/hand.webp\" /></figure>"
+            },
+            "Performing a Harrowing": {
+              "name": "进行海罗占卜 Performing a Harrowing",
+              "text": "<div class=\"columns\"><figure class=\"right\"><img width=\"200\" src=\"modules/pf2e-decks-harrow/assets/journals/harrow-1.webp\" /></figure><div class=\"left\"><section class=\"quote\"><p>许多人自称知道如何解读这些古老的牌，但他们大多数只是想骗几个乡下人。另一些人把时间浪费在用牌赌博上。只有极少数人真正掌握解读哈罗牌组的技艺。而对那些确有天赋的人而言，哈罗牌组能够揭示任何人生命织锦中至关重要的线索——过去、现在与未来。</p><p class=\"attribution\">——莉安娜，瓦瑞西安哈罗占卜师</p></section><p>以下是一份关于如何成为哈罗占卜师——懂得解读哈罗牌组之人——的简要入门。本内容仅触及如何使用牌组的皮毛，但它将使你能够用牌组来洞悉你自己以及你在遭遇中遇到之人的重要信息。</p><p>在你进行一次解读之前，为一场戏剧性的遭遇布置好阶段。清空表，并将牌组放在你面前。解读分为两部分：首先你将进行 @UUID[.5yW9VMFjaEzWM2OZ]{择选}，然后你将进行 @UUID[.GQ7Cfs65YleTaUBB]{牌阵}。</p></div></div><h2>让哈罗为你所用</h2><p>在你的游戏中使用哈罗牌组时，请考虑以下两点说明。</p><p><strong>为邪恶角色解读牌面</strong>：当为邪恶之人进行解读时，你可能想要进行一次“逆向解读”。在这种解读中，你将负面牌解释为对邪恶角色的敌人不利，并将正面牌解释为对该角色的敌人有利。若你愿意，也可以改为进行一次普通解读。</p><p><strong>堆叠牌组</strong>：让随机性与命运影响哈罗解读中出现的牌确实很有趣，但有时GM可能想要堆叠哈罗牌组，以便对揭示出的牌面施加更多影响。这是一种仅应由试图编织特定故事的GM使用的策略，而绝不应由PC使用。</p>\n<div class=\"columns\"><figure class=\"right\"><img width=\"200\" src=\"modules/pf2e-decks-harrow/assets/journals/harrow-1.webp\" /></figure><div class=\"left\"><section class=\"quote\"><p>Many people claim to know how to read the ancient cards, but most of them are just out to fleece a few townies. Others waste their time gambling with the cards. A select few actually know the art of reading the harrow deck. And for those who do have the knack, the harrow deck can reveal crucial threads in the tapestry of anyone’s life—past, present, and future.</p><p class=\"attribution\">—Riana, Varisian harrower</p></section><p>The following is a brief primer on how to become a harrower—one who knows how to read a harrow deck. This merely scratches the surface of how to use the deck, but it will allow you to use the deck to glean important information about yourself and those you encounter.</p><p>Before you conduct a reading, set the stage for a dramatic encounter. Clear the table, and place the deck in front of you. The reading is conducted in two parts: first you’ll perform @UUID[.5yW9VMFjaEzWM2OZ]{The Choosing}, and then you’ll perform @UUID[.GQ7Cfs65YleTaUBB]{The Spread}.</p></div></div><h2>Making the Harrow Work for You</h2><p>Consider these two notes when using a harrow deck in your game.</p><p><strong>Reading the Cards for Evil Characters</strong>: When doing readings for evil folks, you might want to do a “reverse reading.” In this type of reading, you interpret negative cards as being bad for the evil character’s foes, and positive cards as positive for the character’s foes. You may do a normal reading instead, if you so choose.</p><p><strong>Stacking the Deck</strong>: While it’s fun to let randomness and fate influence what cards come up in a harrow reading, sometimes GMs might want to stack the harrow deck to have more influence over the cards revealed. This is a tactic that should be utilized only by a GM trying to craft a specific story, and never by PCs.</p>"
+            },
+            "I. The Choosing": {
+              "name": "I. 选择 I. The Choosing",
+              "text": "<p>询问你的询问者——那些来找你占卜的人——他们希望从占卜中得到什么。将请求表述为一个单独的问题，然后决定以下六种能力中哪一种最适合该问题。例如，有关健康的问题可能表明应选择护盾（体质）花色，而有关爱情的问题可能表明应选择王冠（魅力）花色。最终由你来选择最契合的花色——例如，有关爱情的问题同样也可以诉诸群星（感知）花色。</p><table><tbody><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/hammer.webp\" /></td><td><strong>战锤（力量）</strong>：战斗、荣誉、残酷</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/key.webp\" /></td><td><strong>钥匙（敏捷）</strong>：孩子、风险、麻烦</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/shield.webp\" /></td><td><strong>护盾（体质）</strong>：健康、家园、痛苦</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/book.webp\" /></td><td><strong>书籍（智力）</strong>：钱、秘密、故事</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/star.webp\" /></td><td><strong>群星（感知）</strong>：信仰、道德、信任</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/crown.webp\" /></td><td><strong>王冠（魅力）</strong>：家庭、爱情、政治</td></tr></tbody></table><p>从哈罗牌组中取出你所选花色的九张牌，并将这九张洗匀。把你选出的牌面朝下摊在你面前。指示你的询问者各自抽取一张牌。被选中的牌会向那个人传达一则信息，内容关于他们当下在世界中的位置，以及与所提问题之间的关系。使用@UUID[JournalEntry.HarrowCards00000]{哈罗牌}日志中的描述来解读每张牌，以界定该询问者在接下来一系列事件中的角色。</p><p>如果这张牌出现在后续的牌阵中，它最强烈地适用于选择了该角色的人，并应据此进行解读。</p>\n<p>Ask your subjects—those who come to you for a reading—what they seek from it. Phrase the request in the form of a single question, then decide which of the six following abilities best suits that question. For example, a question of health might indicate the suit of Shields (Constitution), while a question regarding love might indicate the suit of Crowns (Charisma). Ultimately, it is up to you to choose which suit most fits—a question regarding love could just as well draw upon the suit of Stars (Wisdom), for example.</p><table><tbody><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/hammer.webp\" /></td><td><strong>Hammers (Strength)</strong>: Battle, honor, cruelty</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/key.webp\" /></td><td><strong>Keys (Dexterity)</strong>: Children, risks, trouble</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/shield.webp\" /></td><td><strong>Shields (Constitution)</strong>: Health, home, pain</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/book.webp\" /></td><td><strong>Books (Intelligence)</strong>: Money, secrets, stories</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/star.webp\" /></td><td><strong>Stars (Wisdom)</strong>: Faith, morality, trust</td></tr><tr><td><img class=\"noborder\" width=\"64\" src=\"modules/pf2e-decks-harrow/assets/suits/crown.webp\" /></td><td><strong>Crowns (Charisma)</strong>: Family, love, politics</td></tr></tbody></table><p>Remove the nine cards of the suit you have chosen from the harrow deck and shuffle those nine. Spread the cards you chose facedown in front of you. Instruct your subjects to each pick one card. The chosen card has a message for that person about their current place in the world and in relation to the question at hand. Using the descriptions in the @UUID[JournalEntry.HarrowCards00000]{Harrow Cards} journal, interpret each card to define that subject’s role for the upcoming series of events.</p><p>If this card appears in the spread that follows, it applies most strongly to the person who chose that role and should be interpreted accordingly.</p>"
+            },
+            "II. The Spread": {
+              "name": "II. 展开 II. The Spread",
+              "text": "<p>每个人都知道自己的角色后，将卡牌（包括刚刚选择的那些）一起洗匀，然后面朝下铺成一个牌阵。该牌阵为三乘三的九张网格。</p><p>在解读卡牌时，每张牌在牌阵中的位置决定它与过去、现在或未来的关联。该位置也会告诉占卜者这张牌应以正面、不明或负面的光来解读。下列表显示各位置及其阵营与含义：</p><table><caption></caption><tbody><tr><td></td><td><strong>守序</strong></td><td><strong>中立</strong></td><td><strong>混乱</strong></td></tr><tr><td><strong>善良</strong></td><td>正面·过去</td><td>正面·现在</td><td>正面·未来</td></tr><tr><td><strong>中立</strong></td><td>不明·过去</td><td>不明·现在</td><td>不明·未来</td></tr><tr><td><strong>邪恶</strong></td><td>负面·过去</td><td>负面·现在</td><td>负面·未来</td></tr></tbody></table><p>上排（善良）中的任何卡牌都以正面的光来解读；中排（中立）中的卡牌为不明；下排（邪恶）中的卡牌则以负面方式解读。守序列代表过去，中立列表示现在，混乱列象征未来。</p><p>例如，位于左上位置的一张牌，指的是过去发生的某件正面之事。</p>\n<p>Once each person knows their role, shuffle the cards together (including those just chosen) and then lay out a spread facedown. The spread is laid out in a three-by-three grid of nine cards.</p><p>When interpreting the cards, each one’s placement in the spread determines whether it relates to the past, present, or future. The placement also tells the harrower if the card should be interpreted in a positive, unclear, or negative light. The following table shows the placements and their alignments and meanings:</p><table><caption></caption><tbody><tr><td></td><td><strong>Lawful</strong></td><td><strong>Neutral</strong></td><td><strong>Chaotic</strong></td></tr><tr><td><strong>Good</strong></td><td>Positive Past</td><td>Positive Present</td><td>Positive Future</td></tr><tr><td><strong>Neutral</strong></td><td>Unclear Past</td><td>Unclear Present</td><td>Unclear Future</td></tr><tr><td><strong>Evil</strong></td><td>Negative Past</td><td>Negative Present</td><td>Negative Future</td></tr></tbody></table><p>Any cards in the top (good) row are interpreted in a positive light, while cards in the middle (neutral) row are unclear, and cards in the bottom (evil) row are interpreted negatively. The lawful column represents the past, the neutral column denotes the present, and the chaotic column signifies the future.</p><p>For example, a card in the upper left placement refers to something in the past that was positive.</p>"
+            },
+            "III. Interpreting the Cards": {
+              "name": "III. 解读卡牌 III. Interpreting the Cards",
+              "text": "<p>将牌翻开并逐列阅读，每次读一列。每一列都对应主题生命中的不同阶段。</p><p><strong>位置</strong>：左列指过去影响当前状况的动作或事件。中列指现在或极近将来可能发生、并影响当前状况的动作或事件。右列指未来可能发生在主题身上的动作或事件。未来当然可能改变，但结果能让你洞见可能发生之事。</p><p><strong>选择要解读的牌</strong>：你可以解读一列中的任意数量的牌，但每列至少必须解读一张。所有角色牌、完全匹配与相对匹配总是要解读。若该列没有出现这些，就寻找部分匹配；若仍未出现，则从该列任意选择一张牌。</p><p>先将过去列的所有牌都翻为正面朝上。按照下方规则检查这些牌，选择一张或多张进行解读。完成过去后，翻开现在列的牌。完成现在后，再进行代表未来的那一列。通过寻找被选中的牌，以及与其位置以三种方式之一相关的牌（称为“匹配”），来为每一列选择要解读的牌。</p><p><strong>被选中的牌</strong>：当某位主题揭示的被选中的牌出现在牌阵中时，它必须被解读，因为它对该主题至关重要。</p><p><strong>完全匹配</strong>：当一张牌出现在牌阵中其“正确”的位置时（即与牌面上其阵营符号所在位置相对应的位置），就会发生完全匹配。例如，若@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ovRTj7sx5rHWgo6H]{圣武士}出现在牌阵的左上角，那就是完全匹配，因为守序善良在该牌的左上角以符号表示。根据该牌的一般含义来解读。</p><p><strong>相对匹配</strong>：当一张牌位于与其阵营直径相对的位置时，就会发生相对匹配。因此，若@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ox20qDHUHQmWWEdc]{杂耍者}（混乱善良）位于左下位置（守序邪恶），那就是相对匹配。根据其一般含义的相反含义来解读该牌。</p><p><strong>部分匹配</strong>：若一张牌只匹配正确的行或列之一，而非两者皆匹配，则发生部分匹配。因此，若@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Inw8JbxPabAwsx86]{蟋蟀}（中立善良）出现在右上位置（混乱善良），它就是部分匹配（仅匹配“善良”）。根据该牌的一般含义解读，但将其含义的某些性相加以改变（由你酌情决定）。</p><p><strong>位于阵营不符位置的牌</strong>：若一张善良牌，例如@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.0HM3rDBJdjOzvPRd]{号角}，出现在底行，你应从其最负面的光来解读（更多细节见牌的描述）。同样地，若一张邪恶牌，例如@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Ry8M8yzofAGXKIeB]{痛打}，出现在顶行，则应给予正面的解读。这些牌被视为阵营不符。（既非善良也非邪恶的牌永远不会阵营不符。）</p><p>当牌出现在中间一行时，正常解读它们，除非解读的语境暗示你应将其视为阵营不符。你解读完每一列后，占卜就结束了。</p><h3>牌与其含义</h3><p>每张圣甲虫牌组中的牌都有其自身含义。这些含义会受到环境影响，而要给出真正的牌面解读，只有技艺高超的圣甲虫占卜师才能做到。然而，即使仅具备圣甲虫牌组的基础知识，也能从中获取一些信息。</p><p>在抽选中，牌按其最基础的含义来解读。然而，在牌阵中，牌的含义可以依据其在牌阵中的位置而被修正。善良牌与邪恶牌在<strong>阵营不符</strong>的位置时（善良牌出现在牌阵底行，或邪恶牌出现在牌阵顶行）会有不同的含义。既非善良也非邪恶的牌永远不会被视为阵营不符。</p><p>你可以在@UUID[JournalEntry.HarrowCards00000]{圣甲虫牌}日志中找到所有牌及其含义的列表。</p>\n<p>Turn over and read the cards one column at a time. Each column relates to a different period in the subjects’ lives.</p><p><strong>Placement</strong>: The left column refers to past actions or events that affect the current situation. The middle column refers to actions or events that might happen now or in the very near future that affect the current situation. The right column refers to actions or events in the future that might happen to the subjects. The future can change, of course, but the results can give insight into what might be.</p><p><strong>Selecting Cards to Interpret</strong>: You can interpret any number of cards in a column, but you must interpret at least one per column. All role cards, true matches, and opposite matches are always interpreted. If none of those appear in the column, look for a partial match. If that doesn’t appear, then choose any one card in the column.</p><p>Turn all of the cards in the past column faceup first. Examine the cards according to the rules below, selecting one or more cards to interpret. After you finish with the past, turn the cards over in the present column. When you finish with the present, go on to the column representing the future. Select the cards to interpret in each column by looking for chosen cards and cards that relate to their placement in one of three ways, called matches.</p><p><strong>Chosen Cards</strong>: Whenever a chosen card that was revealed by one of the subjects appears in a spread, it must be interpreted, because it is of great import to that subject.</p><p><strong>True Matches</strong>: A true match occurs whenever a card appears in its “correct” placement in the spread (that is, in the placement corresponding to the position of its alignment symbol on the card). For example, if @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ovRTj7sx5rHWgo6H]{The Paladin} appears in the upper left corner of the spread, that’s a true match, since lawful good is symbolized in the upper left corner of the card. Interpret the card based on its general meaning.</p><p><strong>Opposite Matches</strong>: An opposite match occurs when a card is in the placement diametrically opposed to its alignment. Thus, if @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ox20qDHUHQmWWEdc]{The Juggler} (chaotic good) is in the lower left placement (lawful evil), that’s an opposite match. Interpret the card based on the opposite of its general meaning.</p><p><strong>Partial Matches</strong>: A partial match occurs if a card matches only the correct row or column, but not both. So if @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Inw8JbxPabAwsx86]{The Cricket} (neutral good) is found in the upper right placement (chaotic good), it is a partial match (matching good only). Interpret the card based on its general meaning, but with some aspect of its meaning altered (at your discretion).</p><p><strong>Cards in Misaligned Placements</strong>: If a good card, such as @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.0HM3rDBJdjOzvPRd]{The Trumpet}, appears in the bottom row, you should interpret it in its most negative light (see card descriptions for more details). Likewise, if an evil card, such as @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Ry8M8yzofAGXKIeB]{The Beating}, appears in the top row, it should be given a positive interpretation. These cards are considered misaligned. (Cards which are neither good nor evil are never misaligned.)</p><p>When cards appear in the middle row, interpret them normally, unless the context of the reading suggests you should treat them as misaligned. Once you’ve interpreted each column, the reading is over.</p><h3>Cards and their Meanings</h3><p>Each card in the harrow deck has its own meaning. These meanings are influenced by circumstances, and giving a true reading of the cards is something only a skilled harrower can accomplish. Yet even those with only basic knowledge of the harrow deck can glean some information from it.</p><p>Cards in a choosing are interpreted by their most basic meaning. However, cards in a spread can have their meanings modified based on their placements in the spread. Good and evil cards have different meanings when they are in <strong>misaligned</strong> placements (a good card appearing on the bottom row of the spread or an evil card appearing on the top row). Cards that are neither good nor evil are never treated as misaligned.</p><p>You can find a list of all cards and their meanings in the @UUID[JournalEntry.HarrowCards00000]{Harrow Cards} journal.</p>"
+            },
+            "The Harrow in Adventures": {
+              "name": "冒险中的哈罗牌 The Harrow in Adventures",
+              "text": "<p>要将一次哈罗占卜作为一次冒险的一部分来进行，你可以通过以下方式调整解读：</p><p>• 决定在 @UUID[.5yW9VMFjaEzWM2OZ]{六个花色} 中哪一个最符合这次冒险的主题。选择具有该能力的九张牌。</p><p>• 进行一次 @UUID[.5yW9VMFjaEzWM2OZ]{抉择}。让每位玩家从这九张牌中抽取一张抉择牌。记录角色名字与他们抽到的牌。记下冒险中若干事件：在这些事件里，玩家所选的牌会暗示一个合适的效果。你可以使用一个三乘三的网格来记录这些牌及其在解读中的位置。</p><p>• 洗混所有牌并进行一次 @UUID[.GQ7Cfs65YleTaUBB]{牌阵}。记录抽到的牌及其位置。当一张重要的牌（抉择牌或相配牌）出现时，选择一个它将产生意义的遭遇，并将其记下。注明是否出现真实（T）、部分（P）或相反（O）匹配。你不需要为每一张牌都记录一个遭遇。当你开始某个被选中的遭遇时，将该遭遇对应牌的效果应用到该遭遇中。</p><h3>一个示例冒险</h3><p>GM 正在主持一场冒险：玩家们要保卫一座城堡，抵御怪物入侵者。GM 记下哈斯克的玩家抽到了“要塞”，并决定当哈斯克防守城堡城墙时获得优势。在进行牌阵时，“雪崩”出现在左下角（一次真实匹配），因此 GM 决定这张牌将影响一场即将到来的吊桥战斗，并记下当角色们防守吊桥时桥会坍塌。“熔炉”是席拉的抉择牌，属于相反匹配，所以某个大事件在一间玩家角色最终会造访的军械库里等待着席拉。</p><h3>被盗的命运</h3><p>你可能希望让哈罗不止是一个讲故事的工具，而是将其作为你战役的基础支柱来使用。如果你有兴趣讲述一个以命运与预言为核心主题的故事，那么不妨看看 <a class=\"url\" href=\"https://paizo.com/store/pathfinder/adventures/adventurePath/stolenFate\">Stolen Fate</a> 冒险路径。该冒险从 <a class=\"url\" href=\"https://paizo.com/store/gaming/accessories/virtualTableTop/foundryVirtualTabletop/stolenFate\" title=\"The Choosing\">#190: The Choosing</a> 开始，故事围绕一群冒险者展开：他们获得了一副魔法哈罗牌组，并提供机会学习围绕哈罗主题的新特性与能力。想先体验一下，你可以在免费的 <a class=\"url\" href=\"https://downloads.paizo.com/StolenFatePlayersGuide.pdf\">Stolen Fate Player's Guide</a> 中了解更多（并查看哈罗师变体）！</p><h3>替代诠释</h3><p>在 @UUID[.6nVhmvQXFPVX7y8L]{解读卡牌} 时，请记住：每张哈罗牌的含义都不只是其阵营、花色与位置那么简单。根据你的冒险语境与主题，你应当考虑哈罗牌是否可能承载其他类型的含义。例如，一些哈罗师可能会特别重视这一事实：哈罗牌组中的某些牌与特定的魔法学派有关联！</p><table><caption>咒法的八重拱门</caption><tbody><tr><td><strong>防护</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Hl9wKpw2aMaaHTMw]{黄铜矮人}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.q2VuRkxAmqUoO5uF]{背叛}</td></tr><tr><td><strong>召唤</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.aeupK77OVXQYJ2mh]{助产士}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.tddtR37p0ZN8Tu5U]{孔雀}</td></tr><tr><td><strong>预言</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bsDqxSxjhOXA9Oc9]{剧院}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ppGwI16dM7Ra03CF]{视野}</td></tr><tr><td><strong>惑控</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bAEA2QjTYEEJOVFS]{笑话}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bX9jSAfmKwxL13g7]{罗刹（特征）}</td></tr><tr><td><strong>塑能</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.YZnTJhdOrtUeg2yw]{熊}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Wst7MQVEUredhlsP]{旋风}</td></tr><tr><td><strong>幻术</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.jEKWaPntCGIAURtq]{嘉年华}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.w0w6or1IAyq1q42Z]{恶魔提灯}</td></tr><tr><td><strong>死灵</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.HNy1wGtcndJARN4B]{幸存者}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ZZT8BjNsuTN0UO2I]{疾病}</td></tr><tr><td><strong>变化</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.avMdGpezGvRyXXUT]{流浪者}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.CjcKYPS6ssHHAAig]{双生}</td></tr></tbody></table>\n<p>To perform a harrowing as part of an adventure, you can adjust a reading by doing the following:</p><p>• Decide which of the @UUID[.5yW9VMFjaEzWM2OZ]{six suits} best matches the theme of the adventure. Select the nine cards with that ability.</p><p>• Conduct a @UUID[.5yW9VMFjaEzWM2OZ]{Choosing}. Have each player draw a choosing card from the nine cards. Record the character names and their chosen cards. Make notes of several events in the adventure where a player’s chosen card suggests an appropriate effect. You can use a three-by-three grid to record the cards and their positions during the reading.</p><p>• Shuffle all of the cards and conduct a @UUID[.GQ7Cfs65YleTaUBB]{Spread}. Record the cards drawn and their positions. When a card of import (a choosing card or a match) appears, select an encounter in which it will be meaningful, and make a note of this. Note if true (T), partial (P), or opposite (O) matches occur. You don’t need to record an encounter for every card. When you begin one of the chosen encounters, apply the effects of that encounter’s card to the encounter.</p><h3>A Sample Adventure</h3><p>The GM is running an adventure in which the players are defending a castle from monstrous invaders. The GM noted that Harsk’s player drew The Keep, and the GM decided that Harsk gains an advantage when defending the walls of the castle. While conducting the spread, The Avalanche appeared in the lower left corner (a true match), so the GM has decided that card will affect an upcoming battle at a drawbridge, and notes that the bridge will collapse while the characters defend it. The Forge, Seelah’s chosen card, is an opposite match, so something big awaits Seelah at an armory the PCs eventually visit.</p><h3>Stolen Fate</h3><p>You might want to make the Harrow into more than a storytelling device, and instead use it as foundational pillar of your campaign. If you're interested in telling a story that centres on themes of fate and prophecy, then look no further than the <a class=\"url\" href=\"https://paizo.com/store/pathfinder/adventures/adventurePath/stolenFate\">Stolen Fate</a> adventure path. Beginning with <a class=\"url\" href=\"https://paizo.com/store/gaming/accessories/virtualTableTop/foundryVirtualTabletop/stolenFate\" title=\"The Choosing\">#190: The Choosing</a>, the adventure revolves around a group of adventurers that come into possession of a magical Harrow deck, and offers opportunities to learn new features and abilities themed around the Harrow. To get a taste, you can learn more (and check out the Harrower archetype) in the free <a class=\"url\" href=\"https://downloads.paizo.com/StolenFatePlayersGuide.pdf\">Stolen Fate Player's Guide</a> !</p><h3>Alternate Interpretations</h3><p>When @UUID[.6nVhmvQXFPVX7y8L]{Interpreting the Cards}, remember that the meaning of each Harrow card is deeper than just their alignment, suit, and position. Depending on the context and the themes of your adventure, you should consider whether Harrow cards might carry other kinds of meaning. For example, some Harrowers might place special importance on the fact that certain cards from the Harrow deck are associated with particular schools of magic!</p><table><caption>Eight Arches of Incantation</caption><tbody><tr><td><strong>Abjuration</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Hl9wKpw2aMaaHTMw]{The Brass Dwarf}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.q2VuRkxAmqUoO5uF]{The Betrayal}</td></tr><tr><td><strong>Conjuration</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.aeupK77OVXQYJ2mh]{The Midwife}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.tddtR37p0ZN8Tu5U]{The Peacock}</td></tr><tr><td><strong>Divination</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bsDqxSxjhOXA9Oc9]{The Theater}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ppGwI16dM7Ra03CF]{The Vision}</td></tr><tr><td><strong>Enchantment</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bAEA2QjTYEEJOVFS]{The Joke}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.bX9jSAfmKwxL13g7]{The Rakshasa}</td></tr><tr><td><strong>Evocation</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.YZnTJhdOrtUeg2yw]{The Bear}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.Wst7MQVEUredhlsP]{The Cyclone}</td></tr><tr><td><strong>Illusion</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.jEKWaPntCGIAURtq]{The Carnival}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.w0w6or1IAyq1q42Z]{The The Demon's Lantern}</td></tr><tr><td><strong>Necromancy</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.HNy1wGtcndJARN4B]{The Survivor}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.ZZT8BjNsuTN0UO2I]{The Sickness}</td></tr><tr><td><strong>Transmutation</strong></td><td>@UUID[JournalEntry.HarrowCards00000.JournalEntryPage.avMdGpezGvRyXXUT]{The Wanderer}, @UUID[JournalEntry.HarrowCards00000.JournalEntryPage.CjcKYPS6ssHHAAig]{The Twin}</td></tr></tbody></table>"
+            },
+            "A Sample Harrowing": {
+              "name": "一次示例哈罗占卜 A Sample Harrowing",
+              "text": "<p>梅莉希尔来找莉安娜占卜。莉安娜让自己平静下来，听梅莉希尔问她，自己打算与凯拉结婚是否是个好主意。莉安娜思索这属于哪类问题，并决定它最适合<strong>魅力</strong>。</p><p>她从牌堆里取出九张<strong>魅力</strong>牌，为“选择”仔细洗牌。随后她将牌面朝下摊开在自己面前。梅莉希尔抽起一张并翻开——是<em>空王座</em>。莉安娜告诉梅莉希尔，这张角色牌代表她相对于问题所处的位置。梅莉希尔曾经感受过爱，但那份爱常常消散，只留下令人疼痛的空缺，正如一个没有领袖的国家——然而就像国家仍需要领导，心也同样需要一个可去爱的人。</p><p>做完这些后，莉安娜将<strong>魅力</strong>牌放回牌堆并洗牌。接着她按展开的三乘三样式发出九张牌，全部牌面朝下。莉安娜先翻开左列的三张牌——代表过去的那些牌。显现出的牌从上到下分别是<em>猫头鹰</em>、<em>婚姻</em>与<em>蟋蟀</em>。</p><p>莉安娜检定这一列是否有任何完全匹配。确实有一张：恰如其分地，<em>婚姻</em>。它是一张守序中立牌，落在展开中守序中立的位置上。莉安娜思量这张牌对问题的含义。由于梅莉希尔的问题关乎婚礼，这张牌格外重要。莉安娜告诉梅莉希尔，既然这张牌出现在过去，它代表她与凯拉既有关系的力量，某种意义上暗示她们的灵魂早已结为连理。由于没有其他完全匹配，莉安娜继续往下。</p><p>她翻开中间的三张牌，代表现在。从上到下，她看到<em>独角兽</em>、<em>舞蹈</em>与<em>纠结荆棘</em>。它们都不是完全匹配或相反匹配。因此，莉安娜寻找部分匹配。她找到了两处：<em>独角兽</em>匹配上中格的善良性相，而<em>纠结荆棘</em>匹配下中格的邪恶。莉安娜看着<em>独角兽</em>，告诉梅莉希尔，这段婚姻有可能带来巨大的幸福。<em>纠结荆棘</em>警告她，过去的某些事可能会给婚礼带来冲突——但由于这张牌出现在中列（并与现在相关），它所预示的潜在冲突若能尽快处理，是可以应对的——要在婚礼举行之前。</p><p>随后，莉安娜翻开展开中的最后三张牌，代表未来的那些牌。在这里她从上到下找到<em>暴君</em>、<em>沉默鬼婆（特征）</em>与<em>要塞</em>。她没有发现完全匹配，但有一个精准的相反匹配：<em>暴君</em>，一张守序邪恶牌，却落在混乱善良的位置上。<em>暴君</em>在这个位置上发生错位，表示一名暴君被推翻。在此情境下，莉安娜相信这意味着<em>纠结荆棘</em>所代表的危险将被克服，而婚礼会坚固并持续许多年——前提是不能让这份危险在今天之后继续发酵。</p><p>梅莉希尔发誓要直面这份挥之不去的危险，并向凯拉倾诉：她过去曾与马格尼玛城中的犯罪元素有所牵连——而婚礼正预定在那里举行。将这些羞耻的秘密向所爱之人揭露后，梅莉希尔希望若牌中所警告的危险真的发生，她能依靠凯拉的支援。莉安娜微笑了。</p>\n<p>Merisiel has come to Riana for a reading. Riana calms herself as Merisiel asks her whether her plans to marry Kyra are good ones. Riana thinks on what type of question this is, and decides that it best fits <strong>Charisma</strong>.</p><p>She takes the nine <strong>Charisma</strong> cards out of the deck and carefully shuffles them for the Choosing. She then spreads them out, facedown, in front of her. Merisiel takes one and turns it over—it is <em>The Empty Throne</em>. Riana tells Merisiel that this role card represents her place in relation to the question. Merisiel has felt love before, but it has often vanished, leaving behind a vacancy that aches as much as a nation without a leader— yet just as a nation still needs leadership, so too does the heart need one to love.</p><p>With that done, Riana puts the <strong>Charisma</strong> cards back into the deck and shuffles. She then deals out nine cards, facedown, in the three-by-three pattern of the spread. Riana starts by turning over the three cards in the left column—those that represent the past. The cards revealed are, from top to bottom, <em>The Owl</em>, <em>The Marriage</em>, and <em>The Cricket</em>.</p><p>Riana checks to see if there are any true matches in this column. There is one: appropriately enough, <em>The Marriage</em>. It is a lawful neutral card in the lawful neutral placement in the spread. Riana contemplates the meaning of this card to the question. Since Merisiel’s question is about a wedding, the card is especially meaningful. Riana tells Merisiel that since this card appears in the past, it represents the strength of her existing relationship with Kyra, suggesting in a way that they have been wedded in soul all along. Since there are no other true matches, Riana moves on.</p><p>She turns over the three cards in the middle, representing the present. Top to bottom, she sees <em>The Unicorn</em>, <em>The Dance</em>, and <em>The Tangled Briar</em>. None of them are true or opposite matches. Thus, Riana looks for partial matches. She finds two. <em>The Unicorn</em> matches the good aspect of the top middle space, while <em>The Tangled Briar</em> matches the evil in the lower middle space. Riana looks at <em>The Unicorn</em> and tells Merisiel that the marriage has the potential of bringing great happiness. <em>The Tangled Briar</em> warns that something in her past may bring conflict to the wedding—but as the card appears in the middle column (and is associated with the present), the potential conflict it warns of can be dealt with if things are taken care of soon—before the wedding takes place.</p><p>With that, Riana turns over the final three cards in the spread, those representing the future. Here she finds, top to bottom, <em>The Tyrant</em>, <em>The Silent Hag</em>, and <em>The Keep</em>. She finds no true matches, but there is one exact opposite: <em>The Tyrant</em>, a lawful evil card in the chaotic good placement. <em>The Tyrant</em> in this placement is misaligned, and indicates a tyrant overthrown. In this case, Riana believes it means that the danger represented by <em>The Tangled Briar</em> will be overcome, and that the wedding will be strong and last for many years—provided the danger itself is not allowed to fester beyond the present day.</p><p>Merisiel vows to confront this lingering danger and to confide in Kyra by confessing her past association with criminal elements in the city of Magnimar—where the wedding is scheduled to take place. With these shameful secrets revealed to her love, Merisiel hopes to rely upon Kyra’s support, should the danger the cards warn of come to pass. Riana smiles.</p>"
+            },
+            "Harrowing in Foundry VTT": {
+              "name": "在 Foundry VTT 中进行哈罗占卜 Harrowing in Foundry VTT",
+              "text": "<figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-foundry.webp\" /></figure><p>在 Foundry Virtual Tabletop 中进行一次解读，遵循与使用实体牌组进行解读完全相同的步骤；你可以通过阅读本日志的其他页面来了解更多。在本页中，我们希望提供一份快速指南，介绍用于在数字空间中复刻该体验的数字工具，并重点说明在使用这副牌组时你可能想要利用的一些特性。</p><p><strong>玩家解读：</strong>虽然本页假设 GM 正在为其玩家进行解读，但实际上也可以允许某位玩家为其他角色进行解读。为此，GM 应按常规创造该解读，然后将该解读的 Owner 权限分配给对应玩家。</p><section class=\"secret\" id=\"secret-ecz3AwcbxS5tNbuM\"><p><strong>堆叠牌组</strong>：在一次 Harrow 解读中，卡牌通常会被发出并随机分配。然而，实体牌组允许插入特定卡牌或移除其他卡牌，以影响解读的最终结果。在设计本产品时，我们努力确保你仍能像面对面一样有效地使用这副数字牌组——通过在流程的每一步都支持手动选择。事实上，现在你还能做到一些用实体卡牌可能无法实现的事！你可以在下方“解读选项”标题下阅读这些能力中的一部分。</p></section><h3>开始解读</h3><p>要在 Foundry VTT 中进行解读，你需要准备好并将 @UUID[Cards.HarrowDeck000000]{Harrow Deck} 导入到你的世界中。如果该牌组缺失，你可以从 @UUID[Compendium.pf2e-decks-harrow.harrow.WPRpKC00KfMTCz6u]{Pathfinder Deck: Harrow} 汇编中重新导入 Harrow 内容以获取另一副。</p><p>当你的牌组准备就绪后，你可以在侧边栏中右键点击它，并从上下文菜单中选择 “New Reading”。你也可以通过运行 @UUID[Macro.HarrowNewReading]{New Reading} 宏来开始一次新的解读。</p><p>在这个阶段，解读窗口看起来会有点空——很快就会改变；但首先，请注意标题旁边的两个按钮，它们分别以一本书和一张卡牌的图标标示。这些是快速链接，用于打开本规则书日志以及 Harrow Deck 本身，并可在接下来的步骤中作为便捷参考。</p><p>在继续之前，还有最后一个按钮需要确认。你可以点击窗口标题栏中的 “Show Players”，以确保你的玩家也打开了解读。一旦你点击 Begin Reading，他们将能够看到被打出的卡牌，并实时跟随解读。不过在此之前，我们还需要做几个选择。</p><h3>解读选项</h3><p>在你开始解读之前，你应添加参与者。你世界中的任何 actor 都可以加入解读，这使你可以在 Choosing 期间将卡牌分配给他们。接着，你应选择本次解读要抽取的花色。你可以通过窗口顶部的下拉菜单进行选择。选择 “any suit” 将会从整副牌组抽牌。</p><section class=\"secret\" id=\"secret-IrQsjQFr2pfS3Xb6\"><p><strong>（可选）堆叠牌组：</strong>如果你希望解读结果完全随机，那么你可以跳过此步，直接进入 The Choosing。反之，如果你希望确保解读得到某个特定结果，例如用来铺垫你的战役未来事件，那么此刻就是你的机会。</p><p>只需打开 @UUID[Cards.HarrowDeck000000]{Harrow Deck}，将其中的卡牌拖到网格中，或拖到某位参与者 actor 的 Subject Card 槽位中，你就可以确保这些卡牌会在之后的解读中被抽到。例如，如果你将 Paladin 放在左上角，那么它就会在解读的 Spread 相位出现。</p><p>你留空的任何位置都会像往常一样随机填充，因此如果你只想设定特定参数，或想让整次解读完全交给运气，你只需进入下一阶段即可。</p></section><h3>The Choosing</h3><p>当你已集合参与者并选择了花色后，点击 Begin Reading 将会把你带入 @UUID[.5yW9VMFjaEzWM2OZ]{Choosing}。你的卡牌将被洗牌并以背面朝上的方式放置在 3x3 网格上，你的参与者可以通过点击一张卡牌来做出选择并选中它。他们也可以点击 “Choose Card” 按钮来选择一张随机卡牌。</p><p>或者，你也可以为他们分配卡牌。点击某张特定卡牌会将其分配给下一位 actor（从列表顶部开始）。底部的 “Choose Subject Cards” 按钮也会立刻为所有 actor 分配随机卡牌，并将你推进到下一步。</p><h3>The Spread</h3><p>当每位参与者都获得了一张卡牌后，你可以进入解读的下一阶段——@UUID[.GQ7Cfs65YleTaUBB]{Spread}。卡牌会再次被洗牌并发出，并再次以背面朝上放置。当你准备好后，你可以逐张点击卡牌将其翻开并展示给你的玩家。这让你能完全掌控解读推进的节奏；不过你也可以点击 “Reveal” 按钮来立刻揭示所有卡牌。</p><h3>解读卡牌</h3><p>在 Spread 期间，解读窗口会贴心地展示每张卡牌的重要信息，这能让你更容易进行解读。</p><ul><li><p>属于各位玩家的卡牌会以他们的颜色高亮显示。</p></li><li><p>处于不对齐、真实或其他重要位置的卡牌会以图标标示。</p></li><li><p>你可以点击任意正面朝上的卡牌来放大它，使其为所有正在查看该解读的用户填满窗格。我们建议你用此功能在你描述每张卡牌的重要性与含义时引导玩家注意力；此外，它也提供了一种快速访问卡牌描述的方式：点击出现在解读窗口底部的 “Interpret Card” 按钮即可。</p></li></ul><h3>解读之后</h3><p>一次 Harrow 解读可能是你战役故事中的重要事件，而你很可能会想要保留解读结果的记录。最简单的方式就是把这次解读保留下来！你可以给它取一个恰当且便于识别的名字，让你和你的玩家将来能够再回来查阅。</p><p>如果你将来想要进行新的解读，你不需要重置这一次。只要点击 “New Reading” 按钮或运行该宏，就像你之前做的那样，你就可以在不丢失任何进度的情况下开始一次全新的解读。</p>\n<figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-foundry.webp\" /></figure><p>Performing a reading in Foundry Virtual Tabletop follows the exact same steps as a reading performed with the physical deck, and you can find out more about those by reading the other pages of this journal. In this page, we hope to present a quick guide to the digital tooling provided for replicating that experience in a digital space, and highlight some of the features you might want to take advantage of as you use this deck.</p><p><strong>Player Readings: </strong>While this page assumes the GM is performing the reading for their players, it's in fact possible to allow a player to perform a reading for other characters. To do this, the GM should create the reading as normal, and then assign the player in question Owner permissions of the reading.</p><section class=\"secret\" id=\"secret-ecz3AwcbxS5tNbuM\"><p><strong>Stacking the Deck</strong>: In a Harrow reading, the cards are usually dealt and assigned at random. However, a physical deck provides the option of inserting specific cards or removing others in order to influence the final outcome of a reading. When designing this product, we endeavoured to ensure that you can still use this digital deck just as effectively as you would in person, by supporting manual selection at every step of the process. In fact, there are some things you can now do that might have been impossible with a physical deck of cards! You can read about some of these capabilities below, under the Reading Options header.</p></section><h3>Starting a Reading</h3><p>To perform a reading in Foundry VTT, you'll need to have the @UUID[Cards.HarrowDeck000000]{Harrow Deck} ready and imported into your world. If the deck is missing, you can re-import the Harrow content from the @UUID[Compendium.pf2e-decks-harrow.harrow.WPRpKC00KfMTCz6u]{Pathfinder Deck: Harrow} compendium to get another.</p><p>When you have your deck ready, you can right click it in your sidebar and select \"New Reading\" from the context menu. You can also start a new reading by running the @UUID[Macro.HarrowNewReading]{New Reading} macro.</p><p>At this stage, the Reading window will look a little bare- that will soon change, but first, do take note of the two buttons by the title which are denoted by a book and a card icon. These are quick links to open this rulebook journal and the Harrow Deck respectively, and can serve as a handy reference in the steps to come.</p><p>There's one last button you'll want to identify before you move forwards. You can click on \"Show Players\" in the window's header bar to make sure that your players have the Reading open too. Once you click on Begin Reading, they'll be able to see the cards that are played and follow along with the Reading in real time. First, though, we have a few more choices to make.</p><h3>Reading Options</h3><p>Before you begin the reading, you should add the participants. Any actor in your world can join the reading, which allows you to assign cards to them during the Choosing. Then, you should choose the suit you'd like to draw from for this reading. You can do this from the drop-down menu at the top of the window. Selecting \"any suit\" will draw cards from the entire deck.</p><section class=\"secret\" id=\"secret-IrQsjQFr2pfS3Xb6\"><p><strong>(Optional) Stacking the Deck:</strong> If you'd like the outcome of the reading to be entirely random, then you can skip this step and move straight on to The Choosing. However, if you'd like to guarantee a specific result from your reading, for instance to foreshadow your campaign's future events, then this moment is your opportunity to do so.</p><p>Simply open the @UUID[Cards.HarrowDeck000000]{Harrow Deck} and drag cards from it to the grid, or to a participant actor's Subject Card slot, and you can guarantee those cards will be drawn later in the reading. For instance, if you place the Paladin in the top left corner, then that is when it will appear in the Spread phase of the Reading.</p><p>Anything you leave blank will be filled randomly as normal, so if you only want to set specific parameters, or if you want to leave the entire reading up to chance, you can simply move on to the next stage.</p></section><h3>The Choosing</h3><p>When you've gathered the participants and chosen a suit, clicking on Begin Reading will move you into the @UUID[.5yW9VMFjaEzWM2OZ]{Choosing}. Your cards will be shuffled and placed face-down on a 3x3 grid, and your participants will be able to make their choice by clicking on a card to select it. They can also click on the \"Choose Card\" button to select a random card.</p><p>Alternatively, you can assign their cards for them. Clicking on a specific card will assign it to the next actor (starting from the top of the list). The \"Choose Subject Cards\" button at the bottom will also immediately assign a random card to all actors and move you to the next step.</p><h3>The Spread</h3><p>When each participant has been dealt a card, you can move to the next stage of your reading- the @UUID[.GQ7Cfs65YleTaUBB]{Spread}. The cards are shuffled and dealt out again, face down once more. When you're ready, you can begin clicking on cards one by one to turn them over and show them to your players. This gives you full control over the pace at which your reading proceeds, but you can also click on the \"Reveal\" button to immediately reveal all of the cards.</p><h3>Interpreting Cards</h3><p>The Reading window helpfully displays important information about each card during the Spread, which can make it easier to perform your reading.</p><ul><li><p>Cards which belong to each player will be highlighted in their color.</p></li><li><p>Cards which are in misaligned, true, or otherwise significant positions are denoted by an icon.</p></li><li><p>You can click on any face-up card to magnify it, causing it to fill the pane for all users viewing the reading. We suggest using this to direct your players' attention as you describe the importance and meaning of each card, but it also provides a means to quickly access the description of a card by clicking on the \"Interpret Card\" button that appears at the bottom of the Reading window.</p></li></ul><h3>After the Reading</h3><p>A Harrow reading can be an important event in your campaign's story, and it's likely you'll want to keep a record of the results of your reading. The easiest way to do this is just to keep this reading around! You can give it an appropriate and identifying name, allowing you and your players to come back and consult it again in the future.</p><p>If you'd like to make new readings in the future, you don't need to reset this one. Simply clicking on the \"New Reading\" button or running the macro, just like you did before, will allow you to start a fresh new reading without losing any of your progress.</p>"
+            },
+            "Credits": {
+              "name": "鸣谢 Credits",
+              "text": "<h3>Paizo 鸣谢</h3><div class=\"columns\"><div class=\"left\"><p><strong>美术</strong>: Firat Solhan</p><p><strong>概念</strong>: James Jacobs, Kyle Hunter, F. Wesley Schneider, Mike Selinker, and James L. Sutter</p><p><strong>占卜设计</strong>: Teeuwynn Woodruff</p><p><strong>开发</strong>: James Jacobs</p><p><strong>美术指导与平面设计</strong>: Sonja Morris</p><p><strong>编辑</strong>: Leo Glass</p><p><strong>出版人</strong>: Erik Mona</p><p><strong>特别鸣谢</strong>: Wolfgang Baur, Jason Bulmahn, James Ernest, Kyle Hunter, Dan Katz, Scott Kim, Ann Kuykendall, Nicolas Logue, Tanis O’Connor, John Rateliff, Sarah Robinson, Anne and Sigfried Trent, Jeremy Walker, and the rest of the Paizo Staff.</p></div><figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-paizo.webp\" /></figure></div><h3>Foundry 虚拟桌面 鸣谢</h3><div class=\"columns\"><div class=\"left\"><p><strong>Andrew Clayton: </strong>设计与开发</p><p><strong>Viviane Charlier: </strong>视觉设计</p><p><strong>Shane Martland: </strong>数据录入</p><p><strong>Matt Ryan:</strong>市场营销</p></div><figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-foundry.webp\" /></figure></div>\n<h3>Paizo Credits</h3><div class=\"columns\"><div class=\"left\"><p><strong>Art</strong>: Firat Solhan</p><p><strong>Concept</strong>: James Jacobs, Kyle Hunter, F. Wesley Schneider, Mike Selinker, and James L. Sutter</p><p><strong>Divination Design</strong>: Teeuwynn Woodruff</p><p><strong>Development</strong>: James Jacobs</p><p><strong>Art Direction and Graphic Design</strong>: Sonja Morris</p><p><strong>Editor</strong>: Leo Glass</p><p><strong>Publisher</strong>: Erik Mona</p><p><strong>Special Thanks</strong>: Wolfgang Baur, Jason Bulmahn, James Ernest, Kyle Hunter, Dan Katz, Scott Kim, Ann Kuykendall, Nicolas Logue, Tanis O’Connor, John Rateliff, Sarah Robinson, Anne and Sigfried Trent, Jeremy Walker, and the rest of the Paizo Staff.</p></div><figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-paizo.webp\" /></figure></div><h3>Foundry Virtual Tabletop Credits</h3><div class=\"columns\"><div class=\"left\"><p><strong>Andrew Clayton: </strong>Design and development</p><p><strong>Viviane Charlier: </strong>Visual design</p><p><strong>Shane Martland: </strong>Data entry</p><p><strong>Matt Ryan:</strong> Marketing</p></div><figure class=\"right\"><img class=\"noborder\" width=\"120\" src=\"modules/pf2e-decks-harrow/styles/assets/logo-foundry.webp\" /></figure></div>"
+            },
+            "Licensing and Information": {
+              "name": "许可与信息 Licensing and Information",
+              "text": "<p>《Pathfinder》哈罗牌牌组 © 2023，Paizo Inc. 版权所有。Paizo、Paizo Inc.、Paizo 魔像标志、Pathfinder、Pathfinder 标志、Pathfinder Society 和 GameMastery 为 Paizo Inc. 的注册商标；Pathfinder Accessories、Pathfinder Adventure Card Game、Pathfinder Adventure Path、Pathfinder Campaign Setting、Pathfinder Cards、Pathfinder Flip-Mat、Pathfinder Map Pack、Pathfinder Module、Pathfinder Pawns、Pathfinder Player Companion、Pathfinder Roleplaying Game、Pathfinder Tales 以及 Rise of the Runelords 为 Paizo Inc. 的商标。</p><p><strong>Paizo Inc.</strong> 7120 185th Ave NE, Suite 120, Redmond, WA 98052</p><p>与 Foundry Gaming LLC 合作，为 Foundry Virtual Tabletop 转换。作者：Andrew Clayton、Shane Martland、Viviane Charlier。</p><h2>开放游戏许可 1.0a 版</h2><p>以下文本为 Wizards of the Coast, Inc. 的财产，并为 Wizards of the Coast, Inc. 于 2000 年版权所有（“Wizards”）。保留所有权利。</p><p>1. 定义：(a) “贡献者（Contributors）”指贡献了开放游戏内容之版权和/或商标所有者；(b) “衍生材料（Derivative Material）”指包含衍生作品与翻译（包括译为其他计算机语言）的受版权保护材料，以及改编、修改、更正、增补、扩展、升级、改进、汇编、删节或使既有作品得以被重述、变形或改作的其他形式；(c) “分发（Distribute）”指复制、许可、出租、租赁、出售、广播、公开展示、传输或以其他方式分发；(d) “开放游戏内容（Open Game Content）”指游戏机制，并在该等内容不体现产品标识且较既有技术有所增强的范围内，包括方法、步骤、流程与例程，以及由贡献者明确识别为开放游戏内容的任何附加内容；并指由本许可所涵盖的任何作品，包括依据版权法之翻译与衍生作品，但明确排除产品标识；(e) “产品标识（Product Identity）”指产品及产品线名称、标志与识别性标记（包括商业外观）；器物、生物、角色、故事、故事线、情节、主题元素、对话、事件、语言、艺术作品、符号、设计、描绘、肖像、格式、姿态、概念、主题以及图形、摄影与其他视觉或音频表现；角色、法术、附魔、性格、队伍、身份、肖像与特殊能力的名称与描述；地点、位置、环境、 生物、装备、魔法或超自然能力或效果、标志、符号或图形设计；以及由产品标识所有者明确识别为产品标识的任何其他商标或注册商标；并明确排除开放游戏内容；(f) “商标（Trademark）”指贡献者用于识别其自身或其产品，或用于识别其向开放游戏许可所贡献之相关产品的标志、名称、标记、符号、格言、设计；(g) “使用（Use）”“已使用（Used）”或“正在使用（Using）”指使用、分发、复制、编辑、排版、修改、翻译以及以其他方式创造开放游戏内容之衍生材料；(h) “你（You）”或“你的（Your）”指本协议项下的被许可方。</p><p>2. 本许可：本许可适用于任何包含声明、指明该开放游戏内容仅可依本许可之条款与条件被使用的开放游戏内容。你必须将此类声明附于你所使用的任何开放游戏内容之上。除本许可自身所述外，不得对本许可增删任何条款。对于使用本许可分发的任何开放游戏内容，不得适用任何其他条款或条件。</p><p>3. 要约与承诺：通过使用开放游戏内容，你表明你接受本许可条款。</p><p>4. 授权与对价：作为同意使用本许可之对价，贡献者授予你一项永久、全球范围、免版税、非独占的许可，并以本许可之确切条款来使用开放游戏内容。</p><p>5. 贡献权限声明：若你正以开放游戏内容贡献原创材料，你声明你的贡献为你的原创创作和/或你拥有足够权利以授予本许可所转让之权利。</p><p>6. 许可版权声明通知：你必须更新本许可中“COPYRIGHT NOTICE（版权声明）”部分，使之包含你正在复制、修改或分发的任何开放游戏内容之“COPYRIGHT NOTICE”的确切文本；并且你必须将标题、版权日期以及版权持有者姓名加入你所分发之任何原创开放游戏内容的“COPYRIGHT NOTICE”中。</p><p>7. 产品标识的使用：你同意不使用任何产品标识，包括作为兼容性指示，除非在与该产品标识之各元素所有者另行订立的独立协议中获得明确许可。你同意不在包含开放游戏内容的作品中，结合任何商标或注册商标来表明兼容性或共同改编性，除非在与该商标或注册商标所有者另行订立的独立协议中获得明确许可。在开放游戏内容中使用任何产品标识，不构成对该产品标识所有权的挑战。任何在开放游戏内容中被使用之产品标识的所有者，将保留对该产品标识的一切权利、所有权与利益。</p><p>8. 识别：若你分发开放游戏内容，你必须清晰指明你所分发作品中的哪些部分为开放游戏内容。</p><p>9. 许可更新：Wizards 或其指定代理可发布本许可的更新版本。你可以使用本许可的任何经授权版本，来复制、修改并分发最初依据本许可任何版本而分发的任何开放游戏内容。</p><p>10. 本许可副本：你必须在你所分发的每一份开放游戏内容副本中包含本许可的副本。</p><p>11. 使用贡献者鸣谢：除非你已获得贡献者的书面许可，否则你不得使用任何贡献者的姓名来对开放游戏内容进行市集推广或广告宣传。</p><p>12. 无法遵守：若由于成文法、司法命令或政府规章，使你不可能就部分或全部开放游戏内容遵守本许可之任何条款，则你不得使用受影响的任何开放游戏材料。</p><p>13. 终止：若你未能遵守本文所载全部条款，且在知悉该违约之日起 30 日内未能补救，则本许可将自动终止。本许可终止后，所有分许可仍继续有效。</p><p>14. 修正：若本许可之任何条款被认定为不可执行，则该条款仅在使其可执行所必需的范围内予以修正。</p><p>15. 版权声明</p><p><strong>开放游戏许可 v 1.0a</strong> © 2000，Wizards of the Coast, Inc.</p><p><strong>系统参考文档</strong> © 2000，Wizards of the Coast, Inc.；作者：Jonathan Tweet、Monte Cook、Skip Williams，基于 E. Gary Gygax 与 Dave Arneson 的材料。</p><p><strong>Pathfinder 核心规则书（第二版）</strong> © 2019，Paizo Inc.；作者：Logan Bonner、Jason Bulmahn、Stephen Radney-MacFarland、Mark Seifter。</p><p><strong>Pathfinder 新手盒（第二版）</strong> © 2020，Paizo Inc.；作者：Logan Bonner、Jason Bulmahn、James Jacobs、Lyz Liddell、Ron Lundeen、Stephen Radney-MacFarland、Mark Seifter。</p><p>本产品符合开放游戏许可（OGL），并适用于 Pathfinder 角色扮演游戏（第二版）。</p><p><strong>产品标识：</strong>下列项目特此被识别为产品标识，其定义见开放游戏许可 1.0a 版第 1(e) 节，且并非开放游戏内容：所有商标、注册商标、专有名词（角色、神祇、地点等，以及由专有名词派生的一切形容词、名称、头衔与描述性术语）、艺术作品、角色、对话、地点、组织、情节、故事线以及商业外观。（先前已被指定为开放游戏内容，或完全源自先前开放游戏内容，或属于公有领域的元素，不包含在本声明之内。）</p><p><strong>开放游戏内容：</strong>除被指定为产品标识或外部工具（见上文）的材料外，本 Paizo 游戏产品的游戏机制为开放游戏内容，其定义见开放游戏许可 1.0a 版第 1(d) 节。除被指定为开放游戏内容的材料外，未经书面许可，不得以任何形式复制本作品的任何部分。</p>\n<p>Pathfinder Harrow Deck © 2023, Paizo Inc. All Rights Reserved. Paizo, Paizo Inc., the Paizo golem logo, Pathfinder, the Pathfinder logo, Pathfinder Society, and GameMastery are registered trademarks of Paizo Inc.; Pathfinder Accessories, Pathfinder Adventure Card Game, Pathfinder Adventure Path, Pathfinder Campaign Setting, Pathfinder Cards, Pathfinder Flip-Mat, Pathfinder Map Pack, Pathfinder Module, Pathfinder Pawns, Pathfinder Player Companion, Pathfinder Roleplaying Game, Pathfinder Tales, and Rise of the Runelords are trademarks of Paizo Inc.</p><p><strong>Paizo Inc.</strong> 7120 185th Ave NE, Suite 120, Redmond, WA 98052</p><p>Converted for Foundry Virtual Tabletop in partnership with Foundry Gaming LLC. Authors: Andrew Clayton, Shane Martland, Viviane Charlier.</p><h2>Open game License Version 1.0a</h2><p>The following text is the property of Wizards of the Coast, Inc. and is Copyright 2000 Wizards of the Coast, Inc. (“Wizards”). All Rights Reserved.</p><p>1. Definitions: (a) “Contributors” means the copyright and/or trademark owners who have contributed Open Game Content; (b) “Derivative Material” means copyrighted material including derivative works and translations (including into other computer languages), potation, modification, correction, addition, extension, upgrade, improvement, compilation, abridgment or other form in which an existing work may be recast, transformed or adapted; (c) “Distribute” means to reproduce, license, rent, lease, sell, broadcast, publicly display, transmit or otherwise distribute; (d) “Open Game Content” means the game mechanic and includes the methods, procedures, processes and routines to the extent such content does not embody the Product Identity and is an enhancement over the prior art and any additional content clearly identified as Open Game Content by the Contributor, and means any work covered by this License, including translations and derivative works under copyright law, but specifically excludes Product Identity. (e) “Product Identity” means product and product line names, logos and identifying marks including trade dress; artifacts, creatures, characters, stories, storylines, plots, thematic elements, dialogue, incidents, language, artwork, symbols, designs, depictions, likenesses, formats, poses, concepts, themes and graphic, photographic and other visual or audio representations; names and descriptions of characters, spells, enchantments, personalities, teams, personas, likenesses and special abilities; places, locations, environments, creatures, equipment, magical or supernatural abilities or effects, logos, symbols, or graphic designs; and any other trademark or registered trademark clearly identified as Product identity by the owner of the Product Identity, and which specifically excludes the Open Game Content; (f) “Trademark” means the logos, names, mark, sign, motto, designs that are used by a Contributor to identify itself or its products or the associated products contributed to the Open Game License by the Contributor (g) “Use”, “Used” or “Using” means to use, Distribute, copy, edit, format, modify, translate and otherwise create Derivative Material of Open Game Content. (h) “You” or “Your” means the licensee in terms of this agreement.</p><p>2. The License: This License applies to any Open Game Content that contains a notice indicating that the Open Game Content may only be Used under and in terms of this License. You must affix such a notice to any Open Game Content that you Use. No terms may be added to or subtracted from this License except as described by the License itself. No other terms or conditions may be applied to any Open Game Content distributed using this License.</p><p>3. Offer and Acceptance: By Using the Open Game Content You indicate Your acceptance of the terms of this License.</p><p>4. Grant and Consideration: In consideration for agreeing to use this License, the Contributors grant You a perpetual, worldwide, royalty-free, non-exclusive license with the exact terms of this License to Use, the Open Game Content.</p><p>5. Representation of Authority to Contribute: If You are contributing original material as Open Game Content, You represent that Your Contributions are Your original creation and/or You have sufficient rights to grant the rights conveyed by this License.</p><p>6. Notice of License Copyright: You must update the COPYRIGHT NOTICE portion of this License to include the exact text of the COPYRIGHT NOTICE of any Open Game Content You are copying, modifying or distributing, and You must add the title, the copyright date, and the copyright holder’s name to the COPYRIGHT NOTICE of any original Open Game Content you Distribute.</p><p>7. Use of Product Identity: You agree not to Use any Product Identity, including as an indication as to compatibility, except as expressly licensed in another, independent Agreement with the owner of each element of that Product Identity. You agree not to indicate compatibility or co-adaptability with any Trademark or Registered Trademark in conjunction with a work containing Open Game Content except as expressly licensed in another, independent Agreement with the owner of such Trademark or Registered Trademark. The use of any Product Identity in Open Game Content does not constitute a challenge to the ownership of that Product Identity. The owner of any Product Identity used in Open Game Content shall retain all rights, title and interest in and to that Product Identity.</p><p>8. Identification: If you distribute Open Game Content You must clearly indicate which portions of the work that you are distributing are Open Game Content.</p><p>9. Updating the License: Wizards or its designated Agents may publish updated versions of this License. You may use any authorized version of this License to copy, modify and distribute any Open Game Content originally distributed under any version of this License.</p><p>10. Copy of this License: You MUST include a copy of this License with every copy of the Open Game Content You distribute.</p><p>11. Use of Contributor Credits: You may not market or advertise the Open Game Content using the name of any Contributor unless You have written permission from the Contributor to do so.</p><p>12. Inability to Comply: If it is impossible for You to comply with any of the terms of this License with respect to some or all of the Open Game Content due to statute, judicial order, or governmental regulation then You may not Use any Open Game Material so affected.</p><p>13. Termination: This License will terminate automatically if You fail to comply with all terms herein and fail to cure such breach within 30 days of becoming aware of the breach. All sublicenses shall survive the termination of this License.</p><p>14. Reformation: If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable.</p><p>15. COPYRIGHT NOTICE</p><p><strong>Open Game License v 1.0a</strong> © 2000, Wizards of the Coast, Inc.</p><p><strong>System Reference Document</strong> © 2000, Wizards of the Coast, Inc.; Authors: Jonathan Tweet, Monte Cook, and Skip Williams, based on material by E. Gary Gygax and Dave Arneson.</p><p><strong>Pathfinder Core Rulebook (Second Edition)</strong> © 2019, Paizo Inc.; Authors: Logan Bonner, Jason Bulmahn, Stephen Radney-MacFarland, and Mark Seifter.</p><p><strong>Pathfinder Beginner Box (Second Edition)</strong> © 2020, Paizo Inc.; Authors: Logan Bonner, Jason Bulmahn, James Jacobs, Lyz Liddell, Ron Lundeen, Stephen Radney-MacFarland, and Mark Seifter.</p><p>This product is compliant with the Open Game License (OGL) and is suitable for use with the Pathfinder Roleplaying Game (Second Edition).</p><p><strong>Product Identity: </strong>The following items are hereby identified as Product Identity, as defined in the Open Game License version 1.0a, Section 1(e), and are not Open Game Content: All trademarks, registered trademarks, proper nouns (characters, deities, locations, etc., as well as all adjectives, names, titles, and descriptive terms derived from proper nouns), artworks, characters, dialogue, locations, organizations, plots, storylines, and trade dress. (Elements that have previously been designated as Open Game Content, or are exclusively derived from previous Open Game Content, or that are in the public domain are not included in this declaration.)</p><p><strong>Open Game Content:</strong> Except for material designated as Product Identity or External Tools (see above), the game mechanics of this Paizo game product are Open Game Content, as defined in the Open Game License version 1.0a, Section 1(d). No portion of this work other than the material designated as Open Game Content may be reproduced in any form without written permission.</p>"
+            }
+          }
+        }
+      },
+      "cards": {
+        "Harrow Deck": {
+          "name": "哈罗牌组 Harrow Deck",
+          "description": "哈罗是一副类似塔罗牌的牌组，可用于日常生活或任何角色扮演游戏中。无论你在哪里使用它，都要谨慎使用。哈罗牌组充满了力量，因此你必须学会正确解读牌面，否则将遭受不光彩的命运。\nHarrow is a tarot-like deck usable in everyday life or in any roleplaying game. Regardless of where you use it, use it with care. A harrow deck is loaded with power, so you must learn to read the cards correctly or else suffer an ignominious fate.",
+          "cards": {
+            "The Avalanche": {
+              "name": "雪崩 The Avalanche",
+              "description": "雪崩（守序邪恶，敏捷）是灾害。它是一个没有思考、没有理性的东西，会碾压所有挡在它路上的人。它可以代表物理上的灾害，或来自恐慌人群或其他没有思考的团体或实体的灾害。若卡牌失位，这场灾难很可能会被避免，但并非没有代价。\nThe Avalanche (lawful evil, Dexterity) is disaster. It is an unthinking, unreasoning thing that overruns all who get in its way. It can represent physical disaster or the disaster that comes from a panicked crowd or other unthinking group or entity. If the card is misaligned, the calamity is likely to be averted, though not without consequence.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "雪崩 The Avalanche",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-avalanche.webp",
+                  "text": "雪崩\nThe Avalanche"
+                }
+              ]
+            },
+            "The Bear": {
+              "name": "熊 The Bear",
+              "description": "熊（中立，力量）就是纯粹的力量。人们常常犯的错误是以为熊可以被驯服或受训。当某人相信自己已经控制住熊时，那个人最终会明白自己错得有多离谱。这里或许需要蛮力，但使用它的后果可能会很严重。\nThe Bear (neutral, Strength) is pure strength. People often make the mistake of thinking The Bear can be tamed or trained. When someone believes they have The Bear under control, that person eventually learns the error of their ways. Brute force might be required here, but the consequences of its use might be severe.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "熊 The Bear",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-bear.webp",
+                  "text": "熊\nThe Bear"
+                }
+              ]
+            },
+            "The Beating": {
+              "name": "搏动 The Beating",
+              "description": "殴打（中立邪恶，力量）象征从四面八方遭受攻击，但它也可以表示自我——在心智层面——的瓦解。无论这份力量来自肉体还是心智，它都会在无情的攻击下消融。失位时，这张牌暗示在这场袭击之中，会发现未曾察觉的力量。\nThe Beating (neutral evil, Strength) signifies coming under attack from all sides, but it can also indicate the dissolution of the self—mentally. Whether the strength is of the flesh or the mind, it dissolves under the relentless attack. Misaligned, this card suggests that during the assault, undiscovered strength is found.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "悸动 The Beating",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-beating.webp",
+                  "text": "跳动\nThe Beating"
+                }
+              ]
+            },
+            "The Betrayal": {
+              "name": "背叛 The Betrayal",
+              "description": "背叛（中立邪恶，魅力）是自私的化身。嫉妒扭曲灵体，并最终导致毁灭。它也可能指一个外表可爱却掩藏着邪恶之心的人。若解读不当，这张牌意味着自我牺牲，或背离物质世界及其诱惑。\nThe Betrayal (neutral evil, Charisma) is selfishness incarnate. Envy twists the spirit and leads ultimately to devastation. It can also indicate a person whose loveliness hides an evil heart. Misaligned, the card means self-sacrifice or turning away from the material world and its temptations.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "背叛 The Betrayal",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-betrayal.webp",
+                  "text": "背叛\nThe Betrayal"
+                }
+              ]
+            },
+            "The Big Sky": {
+              "name": "大天空 The Big Sky",
+              "description": "大苍穹（混乱善良，力量）展现了一个史诗般的瞬间：受压迫的囚犯获得解放。囚犯的自由象征着重大而强大的改变，如同旧日镣铐在白昼之光中被抛下。若其失准，那些被抛弃的镣铐可能会被更糟的镣铐所取代。\nThe Big Sky (chaotic good, Strength) shows an epic moment as downtrodden prisoners are freed. The prisoners’ freedom specifies momentous and powerful change, as old shackles are cast off in the light of day. If it is misaligned, those castoff shackles might be replaced with worse ones.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "大天空 The Big Sky",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-big-sky.webp",
+                  "text": "苍穹之下\nThe Big Sky"
+                }
+              ]
+            },
+            "The Brass Dwarf": {
+              "name": "黄铜矮人 The Brass Dwarf",
+              "description": "黄铜矮人（守序中立，体质）展现出一个机械人偶，象征着对当前危险的刀枪不入。即使他人可能倒下，黄铜矮人仍旧健康而强壮。黄铜矮人也可能意味着某人的失败或黑暗命运，而这反过来可能使其周围所有其他人免于更强效的危险。\nThe Brass Dwarf (lawful neutral, Constitution) shows a mechanical figure who represents invulnerability to a current danger. Although others might fall, The Brass Dwarf remains hale and strong. The Brass Dwarf can also mean a failure or dark fate for one, which in turn might save all others around them from a greater danger.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "黄铜矮人 The Brass Dwarf",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-brass-dwarf.webp",
+                  "text": "黄铜矮人\nThe Brass Dwarf"
+                }
+              ]
+            },
+            "The Carnival": {
+              "name": "狂欢节 The Carnival",
+              "description": "狂欢节（混乱中立，感知）是幻象与虚假梦境之卡。这张牌可以增强超自然世界的力量，但依赖这种反复无常的力量可能有风险。对其他人而言，这张牌描绘了轻率的计划或不切实际的野心。\nThe Carnival (chaotic neutral, Wisdom) is the card of illusions and false dreams. This card can heighten the power of the supernatural world, but depending on such whimsical forces can be risky. For others, this card depicts imprudent plans or unrealistic ambitions.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "狂欢节 The Carnival",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-carnival.webp",
+                  "text": "狂欢节\nThe Carnival"
+                }
+              ]
+            },
+            "The Courtesan": {
+              "name": "交际花 The Courtesan",
+              "description": "交际花（混乱中立，魅力）是政治阴谋之牌。面具体现了必须遵循的社交礼仪。若它滑落，谈判可能出现意想不到的转折。这张牌也可能指示一位左右局势的力量人物。如何对待他们将决定局面的结果。\nThe Courtesan (chaotic neutral, Charisma) is the card of political intrigue. The mask embodies the social niceties that must be followed. If it slips, negotiations can take an unexpected turn. The card can also indicate a figure of power who shapes events. How they are treated decides the outcome of the situation.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "交际花 The Courtesan",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-courtesan.webp",
+                  "text": "交际花\nThe Courtesan"
+                }
+              ]
+            },
+            "The Cricket": {
+              "name": "蟋蟀 The Cricket",
+              "description": "蟋蟀（中立善良，敏捷）代表一种生物，其心智与身体一样敏捷。它代表速度与快速通行。尽管蟋蟀通常与旅行相关联，但果实代表在旅程尽头发现的宝藏。若蟋蟀失衡，旅程将进展不顺，而宝藏将是失去而非寻得之物。\nThe Cricket (neutral good, Dexterity) represents a creature whose mind is as quick as its body. It represents speed and quick passage. Although The Cricket is commonly associated with travel, the fruit represents treasure found at the end of a journey. If The Cricket is misaligned, the journey will go poorly, and the treasure will be one that is lost rather than found.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "蟋蟀 The Cricket",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-cricket.webp",
+                  "text": "蟋蟀\nThe Cricket"
+                }
+              ]
+            },
+            "The Crows": {
+              "name": "乌鸦帮 The Crows",
+              "description": "乌鸦（中立邪恶，敏捷）是一群危险的家伙，预示着以暴力夺取所珍爱之物。当乌鸦出现时，谋杀、盗窃或其他损失会发生。若此牌倒置，则此类行为可被避免，或盗窃是正当的。\nThe Crows (neutral evil, Dexterity) are a dangerous bunch who indicate violent taking of that which is loved. When The Crows appear, murder, theft, or other loss occurs. If the card is misaligned, such acts can be averted or the thievery is a just one.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "乌鸦会 The Crows",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-crows.webp",
+                  "text": "乌鸦帮\nThe Crows"
+                }
+              ]
+            },
+            "The Cyclone": {
+              "name": "气旋 The Cyclone",
+              "description": "旋风（混乱邪恶，力量）是一股撕裂其所遇一切的力场。这场灾害并非自然秩序进程中出现之物，而是源自智慧生物的阴谋。旋风象征战争、纵火，或其他摧毁其所接触一切的事件。若解读不当，此牌也可能表示在狂风般的考验之后迎来新生。\nThe Cyclone (chaotic evil, Strength) is a force that tears through whatever it meets. This disaster does not come in the course of natural order but is one that comes from the plots of intelligent beings. The Cyclone signifies war, arson, or other events that destroy everything they touch. Misaligned, this card can indicate renewal after a blustery trial.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "气旋 The Cyclone",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-cyclone.webp",
+                  "text": "气旋\nThe Cyclone"
+                }
+              ]
+            },
+            "The Dance": {
+              "name": "舞蹈 The Dance",
+              "description": "舞步（守序善良，敏捷）是一套丰饶而精妙的体系，它如同宇宙本身一般，要求其中的每个人都遵守其规则，否则整个结构就会崩塌。它劝诫你保持完美的步调，知晓自己在强效善中所处的位置。那些踏出既定步式的人将自担风险。若步式错位，那图样或许会令人着迷，但绝非为了众人之善。\nThe Dance (lawful good, Dexterity) is a rich and delicate framework that, like the universe itself, requires everyone within it to abide by its rules, lest the entire construct collapse. It advises staying in perfect step, knowing your place in the greater good. Those who step out of the pattern do so at their peril. Misaligned, that pattern might be hypnotic, but not to the good of all.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "舞蹈 The Dance",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-dance.webp",
+                  "text": "舞蹈\nThe Dance"
+                }
+              ]
+            },
+            "The Demon's Lantern": {
+              "name": "恶魔的灯笼 The Demon's Lantern",
+              "description": "恶魔的灯笼（混乱邪恶，敏捷）是一张象征陷阱与诡计、戏法与心智戏法的牌。发光的宝珠代表机会的世界，用来引诱人步入险境。若为逆位，恶魔的灯笼代表一个机会或一位向导在完美的时刻到来，指引道路。\nThe Demon’s Lantern (chaotic evil, Dexterity) is the card of traps and tricks, sleight of hand and sleight of mind. The glowing orbs represent worlds of opportunity used to lure one into peril. Misaligned, The Demon’s Lantern represents an opportunity or a guide arriving at a perfect moment to show the way.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "恶魔的灯笼 The Demon's Lantern",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-demons-lantern.webp",
+                  "text": "恶魔之灯笼\nThe Demon's Lantern"
+                }
+              ]
+            },
+            "The Desert": {
+              "name": "沙漠 The Desert",
+              "description": "沙漠（混乱善良，体质）是一种环境，荒凉到没有援助便无人能够生存。对于那些找到援助的人来说，穿越荒原的旅程可能通向伟大的成就。若为不协调，它意味着对象无法依赖他人的帮助，并将迷失。此牌上的生物可以指代来自意想不到来源的援助之源。\nThe Desert (chaotic good, Constitution) is an environment so bleak that none can survive without aid. For those who find aid, the journey across the wastes can lead to great things. Misaligned, it implies the subject can’t rely on the help of others and will be lost. The creature on this card can refer to a source of aid from an unexpected source.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "沙漠 The Desert",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-desert.webp",
+                  "text": "沙漠\nThe Desert"
+                }
+              ]
+            },
+            "The Eclipse": {
+              "name": "《日蚀》 The Eclipse",
+              "description": "日蚀（守序邪恶，感知）代表自我怀疑与目标感的丧失。此牌折磨信念，象征在巨大苦难之下，力量与信条如何会动摇。它也可能预示在道路上迷失方向。若为逆位，它可预兆某个未曾预告的能力浮现，或一个隐蔽地点被揭示。\nThe Eclipse (lawful evil, Wisdom) represents self-doubt and loss of purpose. This card afflicts faith, symbolizing how powers and convictions can falter under great distress. It can also indicate a loss of way along a path. If misaligned, it can augur an unheralded ability coming to the fore or a concealed location revealed.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "日蚀 The Eclipse",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-eclipse.webp",
+                  "text": "日食\nThe Eclipse"
+                }
+              ]
+            },
+            "The Empty Throne": {
+              "name": "空王座 The Empty Throne",
+              "description": "空王座（守序善良，魅力）带着一种可感知的失落感。空王座象征着那些已离去之人将永远与我们同在。他们教会了我们重要的教训，只要我们愿意倾听。这张牌可以带来来自遥远或古老源头的信息。若空王座失位，过去的幽灵（特征）将不得安宁，可能需要付出努力才能使其安息。\nThe Empty Throne (lawful good, Charisma) has a sense of loss that is palpable. The Empty Throne signifies that those who are gone will always be with us. They taught us important lessons, if only we choose to listen. This card can bring information from a far-off or ancient source. If The Empty Throne is misaligned, the ghosts of the past are restless, and might require effort to set at peace.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "空王座 The Empty Throne",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-empty-throne.webp",
+                  "text": "空王座\nThe Empty Throne"
+                }
+              ]
+            },
+            "The Fiend": {
+              "name": "恶魔 The Fiend",
+              "description": "恶魔（守序邪恶，力量）描绘了一名魔鬼吞噬无辜者。它可以预示在一场巨大的灾厄中许多人的死亡；或者，如果方向相反，则预示从同一场灾害中获得救赎。恶魔也可以表示有一个阴险且聪明的生物在该区域内，危及民众。\nThe Fiend (lawful evil, Strength) depicts a devil swallowing innocents. It can indicate the deaths of many in a great calamity or, if misaligned, salvation from the same disaster. The Fiend can also indicate that a sinister and intelligent creature is in the area, endangering the populace.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "邪魔 The Fiend",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-fiend.webp",
+                  "text": "魔裔\nThe Fiend"
+                }
+              ]
+            },
+            "The Fool": {
+              "name": "愚者 The Fool",
+              "description": "愚者（中立邪恶，智力）是一张象征深重愚蠢与贪婪的牌。它可能意味着贿赂、勒索，或天真到极致以至于看不见邪恶。愚者所处的境况代表着一种认知：尊严的丧失可能先于生命的丧失。若为失衡态，这张牌可能表示装作无知以伪装自己的赋礼。\nThe Fool (neutral evil, Intelligence) is a card of grave foolishness and greed. It can mean bribery, blackmail, or naivety so grand it can see no evil. The situation The Fool finds themselves in represents the knowledge that loss of dignity can precede loss of life. Misaligned, this card might indicate feigning of ignorance to disguise one’s gifts.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "愚者 The Fool",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-fool.webp",
+                  "text": "愚者\nThe Fool"
+                }
+              ]
+            },
+            "The Forge": {
+              "name": "熔炉 The Forge",
+              "description": "熔炉（守序中立，力量）通过材料与根源的多样性唤起力量。铁匠代表那些能够在超自然的火之考验中幸存的人，但熔炉的火如此强大，反而将许多人烧成灰烬。这张牌往往代表一个危险的事件，需要许多力量来源才能克服。\nThe Forge (lawful neutral, Strength) evokes strength through diversity of materials and traditions. The blacksmith represents those who can survive supernatural trials by fire, but The Forge’s fire is so strong it burns many to cinders instead. This card often represents a dangerous event that requires many sources of strength to overcome.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "熔炉 The Forge",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-forge.webp",
+                  "text": "熔炉\nThe Forge"
+                }
+              ]
+            },
+            "The Hidden Truth": {
+              "name": "隐藏的真相 The Hidden Truth",
+              "description": "隐秘真相（守序善良，智力）象征着看穿显而易见与平庸之处的能力，从而洞见内在的强效真相。有时这种发现是深奥的，有时则是字面意义上的发现，例如在房间内揭示出一件物品。无论如何，这是一张拥有揭示秘密之力量的牌。若为失衡，它可能意味着某个秘密被揭露，从而对当事者不利。\nThe Hidden Truth (lawful good, Intelligence) symbolizes the ability to see past the obvious and the banal to a greater truth within. Sometimes this discovery is an esoteric one, sometimes it is a literal find, such as an item revealed within a room. Regardless, it is a card with the power to reveal secrets. Misaligned, it can mean a secret being revealed to the subject’s detriment.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "隐藏的真相 The Hidden Truth",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-hidden-truth.webp",
+                  "text": "隐藏的真相\nThe Hidden Truth"
+                }
+              ]
+            },
+            "The Inquisitor": {
+              "name": "审判官 The Inquisitor",
+              "description": "审判官（守序中立，智力）除了真相之外什么都不接受。审判官代表不可更改的现实——那种无法以任何方式被欺骗或动摇的存在。试图反抗这一不可改变的物体、人物或理念，就是在招致灾害。\nThe Inquisitor (lawful neutral, Intelligence) accepts nothing but truth. The Inquisitor represents immutable reality, that which can’t be fooled or swayed in any way. To attempt to go against this unchangeable object, person, or idea is to court disaster.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "审判官 The Inquisitor",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-inquisitor.webp",
+                  "text": "审判官\nThe Inquisitor"
+                }
+              ]
+            },
+            "The Joke": {
+              "name": "笑话 The Joke",
+              "description": "笑话（混乱善良，智力）展示了一种必须被克服的恐惧——但不是通过物理手段。这种恐惧可以通过诡计或巧计被战胜。这张牌可以代表幽默在找到绕过一个难缠的人或任务之路中的价值。当失衡时，它常常预示着笑话会落在你身上。\nThe Joke (chaotic good, Intelligence) shows a terror that must be overcome—but not by physical means. This terror can be defeated by trickery or artifice. This card can represent the value of humor in finding the way past a difficult person or task. When misaligned, it often signals that the joke will be on you.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "笑话 The Joke",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-joke.webp",
+                  "text": "笑话\nThe Joke"
+                }
+              ]
+            },
+            "The Juggler": {
+              "name": "杂耍者 The Juggler",
+              "description": "杂耍者（混乱善良，敏捷）代表命运、神祇，或那些玩弄他人生命与宿命的人。若杂耍者能保持自己的节奏，他就会达成目标。但在位置不正时，他会踉跄失误，而悲剧与失败将注定降临在那些被他干预过人生的人身上。\nThe Juggler (chaotic good, Dexterity) represents fate, the gods, or those who play with the lives and destinies of others. If The Juggler can keep up his rhythm, he will achieve his goals. But in a misaligned placement, he falters, and tragedy and failure are assured for those whose lives he meddled in.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "杂耍者 The Juggler",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-juggler.webp",
+                  "text": "杂耍师\nThe Juggler"
+                }
+              ]
+            },
+            "The Keep": {
+              "name": "要塞 The Keep",
+              "description": "壁垒（中立善良，力量）是沉静力量的象征，这种力量能在必要时改变，却也能在最艰难的困境中坚定屹立。壁垒所代表的人不会被任何力量动摇。如果壁垒出现偏位，可能意味着向诱惑让步，或在强效力量面前坠落。\nThe Keep (neutral good, Strength) is a symbol of quiet strength, one that can shift when necessary, yet stand firm through the greatest hardship. Those represented by The Keep are not shaken by any force. If The Keep appears misaligned, it can mean giving way to temptation or falling in the face of greater strength.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "要塞 The Keep",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-keep.webp",
+                  "text": "要塞\nThe Keep"
+                }
+              ]
+            },
+            "The Liar": {
+              "name": "谎言者 The Liar",
+              "description": "骗子（混乱邪恶，魅力）是最为背叛的爱。这不是能移山的爱——这是将心撕成两半、让恋人跃向死亡的爱。骗子可能意味着痴迷、得不到回应的激情，或注定失败的爱。若为逆位，这张牌可能预示一段新关系的开始，尽管它伪装成某种远不那么美好的事物。\nThe Liar (chaotic evil, Charisma) is love at its most treacherous. This is not the love that moves mountains— this is the love that rips the heart in two and causes lovers to leap to their deaths. The Liar can mean obsession, unrequited passion, or doomed love. Misaligned, the card can indicate a new relationship beginning, although disguised as something much less beautiful.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "骗子 The Liar",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-liar.webp",
+                  "text": "说谎者\nThe Liar"
+                }
+              ]
+            },
+            "The Locksmith": {
+              "name": "锁匠 The Locksmith",
+              "description": "开锁匠（守序中立，敏捷）向对象呈上他们所需的钥匙，以解锁其命运。他们找到了进入新地点、线索或宝藏所需的工具。此牌不会提供关于如何或在何处使用所获工具的洞见。此牌常常代表一件奇异、古老或魔法的物体。\nThe Locksmith (lawful neutral, Dexterity) presents the subject with the keys they need to unlock their destiny. They find the tools to access a new location, clue, or treasure. The card does not grant insight into how or where to use the tools granted. This card often represents a strange, ancient, or magical object.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "锁匠 The Locksmith",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-locksmith.webp",
+                  "text": "锁匠\nThe Locksmith"
+                }
+              ]
+            },
+            "The Lost": {
+              "name": "失落者 The Lost",
+              "description": "迷失者（混乱邪恶，感知）是一张象征空虚与自我认同丧失的牌。牌中所示的身影已被摧毁，迷失于噩梦的世界、折磨人的景象与杀戮者之间。对受其影响的人而言，世界毫无意义。它唤起一切皆为胡言乱语的时刻，就像遇到一个只会说另一种语言的人一样。若为反位，迷失者可表示在压力之下仍具备心智的清明。\nThe Lost (chaotic evil, Wisdom) is the card of emptiness and loss of identity. The figure shown is destroyed, lost in worlds of nightmares, tormented vistas, and killers. For those under its influence, the world makes no sense. It evokes times where all is babble, as when meeting someone who speaks only in another tongue. Misaligned, The Lost can indicate clarity of mind under duress.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "迷失者 The Lost",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-lost.webp",
+                  "text": "失落的\nThe Lost"
+                }
+              ]
+            },
+            "The Marriage": {
+              "name": "婚姻 The Marriage",
+              "description": "婚姻（守序中立，魅力）可以是人与人、理念、王国或其他不同事物的结合。其后裔寄望城一种可能从双方孕育出新的力量的结合，或是一种将本不该结合之物强行连结、从而导致毁灭的结合。一旦成婚，二者便无法分离。这是一张象征永久改变的牌。\nThe Marriage (lawful neutral, Charisma) can be a union of people, ideas, kingdoms, or other distinct things. The progeny promises a union that might bring forth new power from both parties, or one that might be a ruinous joining of that which should never have been united. Once wedded, the two can’t be parted. This is the card of permanent change.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "婚姻 The Marriage",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-marriage.webp",
+                  "text": "婚姻\nThe Marriage"
+                }
+              ]
+            },
+            "The Midwife": {
+              "name": "助产士 The Midwife",
+              "description": "助产士（中立善良，感知）是通往创造的导管，尽管助产士并不会独自创造。助产士是一把钥匙，让新的生命或信息进入世界。他们的心即使在最糟糕的处境中也能看见善意。他们能看出任何新来者的重要性，但如果这张牌不正位，新来者很可能不会带来多少喜悦。\nThe Midwife (neutral good, Wisdom) is a conduit to creation, although The Midwife does not create on their own. The Midwife is a key that lets new life or information into the world. Their heart can see the good in even the worst situation. They can see the import of any new arrival, but if the card is misaligned, the new arrival will likely not inspire much joy.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "助产士 The Midwife",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-midwife.webp",
+                  "text": "助产士\nThe Midwife"
+                }
+              ]
+            },
+            "The Mountain Man": {
+              "name": "山岳之子 The Mountain Man",
+              "description": "山中人（混乱中立，体质）象征着与一种超出自身控制的肉体力量的遭遇。山中人可能人格化为权威、军队、地震，甚至是在干旱之地迫切需要的一场暴雨。顺从这股力量或许明智，但生存下来才是最重要的。\nThe Mountain Man (chaotic neutral, Constitution) signifies an encounter with a physical power outside of one’s control. The Mountain Man could personify an authority, an army, an earthquake, or even a desperately needed rainstorm in a parched land. Acceding to the force might be wise, but surviving it is paramount.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "山地人 The Mountain Man",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-mountain-man.webp",
+                  "text": "山地人\nThe Mountain Man"
+                }
+              ]
+            },
+            "The Owl": {
+              "name": "猫头鹰 The Owl",
+              "description": "猫头鹰（中立，感知）代表自然秩序的永恒智慧。它是严酷的现实主义，促使一群狼在兽群中淘汰弱者。对被淘汰的鹿而言这是悲剧，但通过这样的动作，兽群会变得更强。猫头鹰将生命联结在一起，但也同样轻易地能将那生命拆散。\nThe Owl (neutral, Wisdom) represents the eternal wisdom of the natural order. It is the harsh realism that causes a pack of wolves to cull the weak in the herd. It is tragic for the culled deer, but through such actions the herd grows stronger. The Owl binds life together, but just as easily can pick that life apart.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "猫头鹰 The Owl",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-owl.webp",
+                  "text": "猫头鹰\nThe Owl"
+                }
+              ]
+            },
+            "The Paladin": {
+              "name": "圣武士 The Paladin",
+              "description": "圣武士（守序善良，力量）象征着在逆境面前坚定不屈。圣武士在任何环境下都不会退缩。这张牌通常表示需要坚持到底，或去做自己知道正确的事，即使要付出沉重代价。如果这张牌出现失位，那么这样的做法可能会是鲁莽的。\nThe Paladin (lawful good, Strength) symbolizes standing strong in the face of adversity. The Paladin does not back down under any circumstances. This card usually indicates the need to stay the course or do what one knows is right, even if it takes a heavy toll. If the card is misaligned, such a course might be foolhardy.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "圣武士 The Paladin",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-paladin.webp",
+                  "text": "圣武士\nThe Paladin"
+                }
+              ]
+            },
+            "The Peacock": {
+              "name": "孔雀 The Peacock",
+              "description": "孔雀（中立，敏捷）是一种外貌惊人而绚丽的生物，它能让旁观者在见到如此美丽或丑陋时当场僵住。更睿智的人接受时代的流逝，并舞步轻盈地避开孔雀的道路。它的出现总是预示着个人态度的突然转变或社会变革。\nThe Peacock (neutral, Dexterity) is a creature of astonishing and colorful appearance, one that can cause the onlooker to freeze in their tracks at the sight of such beauty or ugliness. Wiser people accept the passage of time and dance out of The Peacock’s way. Its appearance always signifies a sudden personal shift in attitude or societal change.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "孔雀 The Peacock",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-peacock.webp",
+                  "text": "孔雀\nThe Peacock"
+                }
+              ]
+            },
+            "The Publican": {
+              "name": "店主 The Publican",
+              "description": "酒馆老板（混乱善良，感知）代表情谊与友爱，以及为有需要之人提供庇护之所。大多数人会觉得酒馆老板无足轻重，但他们拥有与占卜解读或一项任务相关的见解。若为逆位，酒馆老板代表尚未找到的庇护，或在关键时刻给出的错误信息。\nThe Publican (chaotic good, Wisdom) represents fellowship and camaraderie, and a place of refuge for those in need. Most would find The Publican inconsequential, but they have insights relevant to the reading or a quest. Misaligned, The Publican represents refuge yet to be found or false information given at a crucial moment.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "酒馆老板 The Publican",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-publican.webp",
+                  "text": "酒馆老板\nThe Publican"
+                }
+              ]
+            },
+            "The Queen Mother": {
+              "name": "王太后 The Queen Mother",
+              "description": "王太后（守序中立，感知）是知识的化身。王太后知晓一切，但不会向那些未表现出恰当崇敬的人透露分毫。王太后偏爱无权无势者与底层阶级，因为当更强大者拒绝服侍时，唯有他们会效劳。她们代表着融入社会的必要，或在知晓比你更多的人面前俯首称臣。\nThe Queen Mother (lawful neutral, Wisdom) is knowledge personified. The Queen Mother knows all but reveals nothing to those who do not show proper worship. The Queen Mother is fond of the powerless and the underclasses, for they serve when the more powerful refuse. They represent the need to become part of a society, or to bow before those who know more than you.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "王太后 The Queen Mother",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-queen-mother.webp",
+                  "text": "王太后\nThe Queen Mother"
+                }
+              ]
+            },
+            "The Rabbit Prince": {
+              "name": "兔子王子 The Rabbit Prince",
+              "description": "兔子王子（混乱中立，敏捷）是个古怪的家伙，代表徒手战斗的变幻莫测。兔子王子是战斗的化身，若非反复无常便不成其为他。正如他那把破损的武器所象征的那样，无论多么勇敢或娴熟，任何战斗者都可能在战斗中倒下。这张牌有时也代表皇室的年轻成员或其他强大家族的成员。\nThe Rabbit Prince (chaotic neutral, Dexterity) is a quirky fellow who represents the vagaries of hand-to-hand combat. The Rabbit Prince is battle personified and nothing if not capricious. As his broken weapon symbolizes, any combatant can fall in battle, no matter how brave or skilled. This card sometimes stands for younger members of royalty or other powerful households.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "兔王子 The Rabbit Prince",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-rabbit-prince.webp",
+                  "text": "兔王子\nThe Rabbit Prince"
+                }
+              ]
+            },
+            "The Rakshasa": {
+              "name": "罗刹（特征） The Rakshasa",
+              "description": "罗刹（特征）（守序邪恶，智力）是支配与心智控制之牌。站在雕像前的生物表明，一股外在的力场正将自身强加于另一个对象之上。有时，这种强加是字面意义上的，但更多时候是心智上的支配。若为逆位，此牌意味着在新的信息面前，这种控制可以被摆脱。\nThe Rakshasa (lawful evil, Intelligence) is the card of dominance and mind control. The creature standing before a statue indicates an exterior force imposing itself upon another. On occasion, this imposition is literal, but more often it is mental domination. Misaligned, this card means that the control can be cast off in the face of new information.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "罗刹（特征） The Rakshasa",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-rakshasa.webp",
+                  "text": "罗刹（特征）\nThe Rakshasa"
+                }
+              ]
+            },
+            "The Sickness": {
+              "name": "疾病 The Sickness",
+              "description": "疾病（中立邪恶，体质）代表瘟疫、疫病、饥荒与疾病。它也可以表示灵魂的腐化。若解读不当，疾病要么代表极佳的健康，要么代表阻止此类灾害的机会。\nThe Sickness (neutral evil, Constitution) represents plague, pestilence, famine, and disease. It can also indicate corruption of the soul. If misaligned, The Sickness represents either great health or a chance to stop such a disaster.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "疾病 The Sickness",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-sickness.webp",
+                  "text": "疾病\nThe Sickness"
+                }
+              ]
+            },
+            "The Silent Hag": {
+              "name": "沉默鬼婆（特征） The Silent Hag",
+              "description": "沉默的鬼婆（中立邪恶，感知）也许沉默，但仍能洞悉它所遇之人的内心。沉默的鬼婆唤起血之契约与致命的秘密——那种会让兄弟反目、让子女对抗父母的秘密。它是一张表演者憎恶的牌，因为它会让他们在言语与歌唱中踉跄失措。倒置时，它表示不可动摇的忠诚与言语的清晰。\nThe Silent Hag (neutral evil, Wisdom) might be silent, but still sees into the hearts of those they meet. The Silent Hag invokes blood pacts and poisonous secrets, the kind that turn sibling against sibling and child against parent. It is a card that performers loathe, as it leaves them stumbling over their words and songs. Misaligned, it indicates unshakable loyalty and lucidity of speech.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "沉默鬼婆（特征） The Silent Hag",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-silent-hag.webp",
+                  "text": "沉默的鬼婆（特征）\nThe Silent Hag"
+                }
+              ]
+            },
+            "The Snakebite": {
+              "name": "蛇咬 The Snakebite",
+              "description": "蛇咬（混乱邪恶，智力）是一把卑劣、淬毒的武器。毒素有许多形态——并非全都具备实体。蛇咬代表思想与自由的死亡，也代表让朋友彼此反目或毒害善良之人心智的能力。若解读为不符位，这张牌可能意味着一次心智上的飞跃、一段新友谊，或一项发现。\nThe Snakebite (chaotic evil, Intelligence) is a vile, poisoned weapon. Poison takes many forms—not all of them physical. The Snakebite represents the death of ideas and freedom, as well as the ability to turn friends against each other or poison the minds of the virtuous. Misaligned, this card can mean a mental leap, a new friendship, or a discovery.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "蛇咬 The Snakebite",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-snakebite.webp",
+                  "text": "蛇咬\nThe Snakebite"
+                }
+              ]
+            },
+            "The Survivor": {
+              "name": "幸存者 The Survivor",
+              "description": "幸存者（中立善良，体质）代表一个经历过某种磨难的人。被他倒下的同伴所环绕，这个形象代表某个或某种曾被认为永远失落之物，却再次被找回。它也可以代表重生。若正位不符，幸存者可能唤起可怕的消息或深重的失去。\nThe Survivor (neutral good, Constitution) represents a person who has been through an ordeal of some kind. Surrounded by his fallen comrades, the figure represents someone or something thought lost forever, but found once more. It can also represent rebirth. Misaligned, The Survivor can evoke terrible news or a profound loss.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "幸存者 The Survivor",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-survivor.webp",
+                  "text": "幸存者\nThe Survivor"
+                }
+              ]
+            },
+            "The Tangled Briar": {
+              "name": "纠缠的荆棘 The Tangled Briar",
+              "description": "纠缠荆棘（守序邪恶，体质）是一张关于古老功业的卡牌。它表明某个久远以前的物体或人物将以某种方式对局势产生重大影响。所指的物体或人物是以某种卑劣方式遗失或被谋杀的。若为逆位，多刺的过去带来的不仅是痛苦，还有对未来的希望。\nThe Tangled Briar (lawful evil, Constitution) is a card of ancient deeds. It indicates an object or person from long ago that will somehow have great influence on the situation. The object or person in question is one lost or murdered in some foul way. Misaligned, the thorny past brings not just pain, but hope for the future.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "纠缠荆棘 The Tangled Briar",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-tangled-briar.webp",
+                  "text": "纠缠荆棘\nThe Tangled Briar"
+                }
+              ]
+            },
+            "The Teamster": {
+              "name": "车队夫 The Teamster",
+              "description": "赶车人（中立，体质）是一种驱动性的外在力场，无论发生什么都会让目标继续前进。这股力场可以是肉体或精神层面的，例如某人激励他人在已经没有更多力量可付出时仍继续前行。这股力场可以为善也可以为恶，但无法被忽视。画面中较大的那个人物正过着持续劳作的生命，但这是为了自身的提升。\nThe Teamster (neutral, Constitution) is a driving external force that keeps the subject going, no matter what. This force can be physical or mental, as a person who exhorts others to continue on when they have no more strength to give. The force can be for good or ill but can’t be ignored. The larger figure depicted is leading a life of constant toil, but for their own betterment.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "车夫 The Teamster",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-teamster.webp",
+                  "text": "车夫\nThe Teamster"
+                }
+              ]
+            },
+            "The Theater": {
+              "name": "剧院 The Theater",
+              "description": "剧院（中立善良，魅力）代表“生命的阶段”。木偶表演一幕场景，正如先知表演一幕与她无关的场景。先知是观众，而他们的预言就是演出。他们对所见之事没有影响，而其重要性往往直到为时已晚才被认识到。若剧院失衡，这个故事就只是作秀。\nThe Theater (neutral good, Charisma) represents the “stage that is life.” The puppets act out a scene, just as the prophet acts out a scene in which she has no part. The prophet is the audience and their predictions are the show. They have no influence on what they see, and its importance is often not recognized until too late. If The Theater is misaligned, the story is just for show.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "剧院 The Theater",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-theater.webp",
+                  "text": "剧院\nThe Theater"
+                }
+              ]
+            },
+            "The Trader": {
+              "name": "商人 The Trader",
+              "description": "商人（中立，智力）是间谍与小贩皆适用的一张牌。任何交易情报者都会受到此牌的影响。在此牌的庇佑下达成的交易总会如约兑现，但对于不理解其含义的人而言，契约的后果可能令人震惊。\nThe Trader (neutral, Intelligence) is the card of spies and peddlers alike. Any who trade in information are subject to this card’s influence. A bargain made under this card’s auspice always concludes true, but the ramifications of the pact might be shocking for those who do not understand its implications.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "商人 The Trader",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-trader.webp",
+                  "text": "商人\nThe Trader"
+                }
+              ]
+            },
+            "The Trumpet": {
+              "name": "号角 The Trumpet",
+              "description": "号角（守序善良，体质）是一种力量的宣言。这张牌展示了一位咄咄逼人的力量，为了正义毫不犹豫地涉入最危急的局势。若不协调，它暗示动机并不高尚，带来伤害与崩塌的力量。这是一张要么赐予一切、要么毫无所予的牌。\nThe Trumpet (lawful good, Constitution) is a declaration of power. This card shows an aggressive force who wades into the direst situations without hesitation in the cause of right. Misaligned, it suggests the motives aren’t noble, bringing injury and crumbling strength. It is a card that grants all or nothing at all.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "喇叭 The Trumpet",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-trumpet.webp",
+                  "text": "号角\nThe Trumpet"
+                }
+              ]
+            },
+            "The Twin": {
+              "name": "双子 The Twin",
+              "description": "双子（中立，魅力）象征目的或身份的二元性，既可以代表肉体上的复制体，也同样可以代表精神或心智层面的复制。这张牌也可能意味着优柔寡断，因为某个人或团体在截然不同的选项之间摇摆不定。它也可能表示分裂的忠诚随处可见。这张牌会让占卜者心生警惕，因为它还可能意味着整副牌阵具有隐藏或反转的含义。\nThe Twin (neutral, Charisma) signals duality of purpose or identity, and can just as easily represent physical duplicates as much as spiritual or mental ones. This figure can also mean indecision, as a person or group wavers between very different options. It can also mean divided loyalties abound. The card makes a harrower wary, as it can also mean the entire spread has a hidden or reversed meaning.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "双生 The Twin",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-twin.webp",
+                  "text": "双生子\nThe Twin"
+                }
+              ]
+            },
+            "The Tyrant": {
+              "name": "暴君 The Tyrant",
+              "description": "暴君（守序邪恶，魅力）象征一位统治者，对被统治者而言如同祸害，或其掌控对本应照料的人而言是有毒的。巨龙可能象征君主、监管者或一家之主。无论此人是谁，他们都会伤害那些受其支配的人，无论他们是否意识到这一点。逆位时，这张牌可能象征暴君被揭露或被推翻。\nThe Tyrant (lawful evil, Charisma) indicates a ruler who is a blight upon those ruled, or someone whose control is toxic to those they should be caring for. The dragon might indicate a monarch, overseer, or head of a household. Whoever this person is, they do harm to those over whom they hold sway, whether they realize it or not. Misaligned, this card might indicate a tyrant revealed or dethroned.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "暴君 The Tyrant",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-tyrant.webp",
+                  "text": "暴君\nThe Tyrant"
+                }
+              ]
+            },
+            "The Unicorn": {
+              "name": "独角兽 The Unicorn",
+              "description": "独角兽（混乱善良，魅力）是一张慷慨地给予受试者所寻之物的牌，例如来自同样意想不到的来源的一份意外的赋礼。当失谐时，这张牌意味着背叛、下毒，或一位虚假的朋友。\nThe Unicorn (chaotic good, Charisma) is a card that generously offers that which the subject seeks, such as an unexpected gift from an equally unexpected source. When misaligned, the card means betrayal, poisoning, or a false friend.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "独角兽 The Unicorn",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-unicorn.webp",
+                  "text": "独角兽\nThe Unicorn"
+                }
+              ]
+            },
+            "The Uprising": {
+              "name": "起义 The Uprising",
+              "description": "起义（混乱中立，力量）代表你被某种比你更强大的事物所攫住。那是一股压倒性的力量，会碾碎与之接触的一切。王冠象征着推翻某种形式的领袖。在牌阵中，它表示一股远比接受解读之人更强的力场。10\nThe Uprising (chaotic neutral, Strength) represents being caught in the clutches of something more powerful than you. It is an overwhelming strength that crushes what comes in contact with it. The crown signifies an overthrowing of a leader of some sort. In the spread, it indicates a force much stronger than the person receiving the reading.10",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "起义 The Uprising",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-uprising.webp",
+                  "text": "起义\nThe Uprising"
+                }
+              ]
+            },
+            "The Vision": {
+              "name": "视野 The Vision",
+              "description": "视野（混乱中立，智力）代表晦涩或超自然的学识。这类知识可以呈现为幻象或隐晦的言语。这张牌通常意味着一次与高深莫测之人的遭遇，但也可能象征与天才的短暂接触。\nThe Vision (chaotic neutral, Intelligence) represents obscure or supernatural lore. Such knowledge can take the form of visions or cryptic words. This card often means an encounter with an inscrutable person, but it can also signify a brush with genius.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "视野 The Vision",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-vision.webp",
+                  "text": "视野\nThe Vision"
+                }
+              ]
+            },
+            "The Wanderer": {
+              "name": "漫游者 The Wanderer",
+              "description": "漫游者（中立善良，智力）展现出收藏家的随身物品。漫游者欣赏那些被他人视为破烂或垃圾的东西。漫游者会显现给那些足够聪明、能在他人忽视或视为毫无价值之物中发现真正价值的人。若不合调，漫游者象征价值观的丧失，或无法看见某个人或某种处境中真正有价值之处。\nThe Wanderer (neutral good, Intelligence) shows the belongings of a collector. The Wanderer appreciates that which others regard as junk or trash. The Wanderer appears to those clever enough to find the true worth in something others ignore or treat as worthless. Misaligned, The Wanderer signifies a loss of values, or the inability to see what is truly valuable in a person or situation.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "漫游者 The Wanderer",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-wanderer.webp",
+                  "text": "漫游者\nThe Wanderer"
+                }
+              ]
+            },
+            "The Waxworks": {
+              "name": "蜡像馆 The Waxworks",
+              "description": "蜡像馆（混乱邪恶，体质）是一个无助与肉体熵的所在。心智也许愿意，但血肉在这恐怖之地被冻结。它也是酷刑与囚禁之牌，象征字面上无法移动，或一种更为平常的麻痹。逆位时，这张牌表示在关键时刻能量过剩，从而改变一切。\nThe Waxworks (chaotic evil, Constitution) is a place of helplessness and physical entropy. The mind might be willing, but the flesh is frozen in this place of horror. It is also the card of torture and imprisonment, signifying literal inability to move or a paralysis of a more prosaic kind. Misaligned, this card indicates an abundance of energy at a crucial moment that changes all.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "蜡像馆 The Waxworks",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-waxworks.webp",
+                  "text": "蜡像馆\nThe Waxworks"
+                }
+              ]
+            },
+            "The Winged Serpent": {
+              "name": "翼蛇 The Winged Serpent",
+              "description": "有翼巨蛇（守序善良，感知）是一个强大的存在。知识与审慎是彼此分离的堡垒，而理解在其间架起桥梁。有翼巨蛇代表这座桥，懂得是否当下就是时代去打击。若方向不正，这张牌意味着要么未能把握时机，要么是在欠缺明智的情况下贸然为之。\nThe Winged Serpent (lawful good, Wisdom) is a powerful being. Knowledge and prudence are separate keeps bridged by understanding. The Winged Serpent represents this bridge, knowing whether now is the time to strike. Misaligned, this card means either not seizing a moment or doing so ill-advisedly.",
+              "back": {
+                "img": null,
+                "name": "",
+                "text": ""
+              },
+              "faces": [
+                {
+                  "name": "翼蛇 The Winged Serpent",
+                  "img": "modules/pf2e-decks-harrow/assets/cards/the-winged-serpent.webp",
+                  "text": "翼蛇\nThe Winged Serpent"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

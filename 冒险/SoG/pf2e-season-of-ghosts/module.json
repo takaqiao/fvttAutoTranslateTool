@@ -1,0 +1,115 @@
+{
+  "authors": [
+    {
+      "name": "Paizo",
+      "url": "https://paizo.com/",
+      "flags": {}
+    }
+  ],
+  "bugs": "https://support.metamorphic-digital.com",
+  "changelog": "https://support.metamorphic-digital.com/changelog/pf2e-season-of-ghosts",
+  "compatibility": {
+    "minimum": "13.351",
+    "verified": "13"
+  },
+  "description": "<p>The small town of Willowshore has a big problem—it´s cursed! When a group of heroes awaken in the woods after a festival to usher out the last day of spring and welcome in the summer—a time known locally as the season of ghosts, they find their hometown has been invaded by monsters, strange weather, and horrifying ghosts. Yet theses manifestations of the ancient evil that threatens Willowshore are nothing compared to the harrowing secrets awaiting discovery in Season of Ghosts.</p>",
+  "esmodules": [
+    "./dist/index.js"
+  ],
+  "id": "pf2e-season-of-ghosts",
+  "languages": [],
+  "manifest": "https://cdn.paizo.com/foundry/modules/pf2e-season-of-ghosts/module.json",
+  "media": [
+    {
+      "type": "setup",
+      "url": "https://cdn.paizo.com/e7fd0eeb-9d7d-006b-7558-1a3e2f7bd8df/2412b9a2-d72a-4bff-a572-ad30096b411d/PZO14008-FV.jpg",
+      "flags": {}
+    },
+    {
+      "type": "icon",
+      "url": "https://cdn.paizo.com/image/navigation/Nav-Logo-Global.png",
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+    {
+      "color": "#591d22",
+      "folders": [],
+      "name": "Season of Ghosts",
+      "packs": [
+        "adventures"
+      ],
+      "sorting": "m"
+    }
+  ],
+  "packs": [
+    {
+      "name": "adventures",
+      "label": "Season of Ghosts",
+      "type": "Adventure",
+      "ownership": {
+        "PLAYER": "LIMITED",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "pf2e",
+      "path": "packs/adventures"
+    }
+  ],
+  "protected": true,
+  "relationships": {
+    "flags": {},
+    "requires": [],
+    "recommends": [
+      {
+        "id": "dice-so-nice",
+        "type": "module",
+        "manifest": "https://gitlab.com/riccisi/foundryvtt-dice-so-nice/-/raw/master/module/module.json",
+        "compatibility": {
+          "minimum": "13"
+        }
+      }
+    ],
+    "conflicts": [],
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/foundryvtt/pf2e/v13-dev/system.pf2e.json",
+        "compatibility": {
+          "minimum": "7.9.1",
+          "verified": "7"
+        },
+        "flags": {}
+      }
+    ]
+  },
+  "scripts": [],
+  "styles": [
+    "./dist/style.css"
+  ],
+  "title": "Season of Ghosts",
+  "url": "https://store.paizo.com/pathfinder-adventure-path-season-of-ghosts-foundry-vtt-code",
+  "version": "13.4.0",
+  "flags": {
+    "pf2e-season-of-ghosts": {
+      "pf2e-art": "modules/pf2e-season-of-ghosts/image-mapping.json"
+    },
+    "compendiumArtMappings": {
+      "pf2e": {
+        "mapping": "modules/pf2e-season-of-ghosts/image-mapping.json",
+        "credit": "<em>Portrait and token artwork by Paizo.</em>"
+      }
+    },
+    "galleryDatasheets": {
+      "pf2e-season-of-ghosts": {
+        "label": "Season of Ghosts Artwork",
+        "hint": "Artwork from the Pathfinder Adventure Path: Season of Ghosts.",
+        "sheet": "modules/pf2e-season-of-ghosts/assets/datasheet/datasheet.json"
+      }
+    },
+    "craftedWithLoveByGamersAtMetaMorphicDigitalStudios": {
+      "releaseDate": "3/20/2026",
+      "getYourOwnPremiumConversion": "https://metamorphic-digital.com"
+    }
+  }
+}

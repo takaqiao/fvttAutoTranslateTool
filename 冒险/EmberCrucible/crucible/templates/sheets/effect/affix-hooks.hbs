@@ -1,0 +1,9 @@
+<section class="tab sheet-body flexcol scrollable {{tab.cssClass}}"
+         data-tab="{{tab.id}}" data-group="{{tab.group}}">
+    {{#each moduleHooks}}
+    {{> (lookup @root "hookPartial")}}
+    {{/each}}
+    {{#unless moduleHooks.length}}
+    <p class="hint">{{localize "HOOKS.NoModuleHooks"}}</p>
+    {{/unless}}
+</section>

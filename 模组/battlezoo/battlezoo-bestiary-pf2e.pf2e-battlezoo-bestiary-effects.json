@@ -1,0 +1,134 @@
+{
+  "label": "效果\nEffects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Trial": {
+      "name": "效果：试炼 Effect: Trial",
+      "description": "<p>卡罗扎特指定一名被告（任意体型的个体或团体）并裁定刑罚。直到被告完成其刑罚，或卡罗扎特被说服减刑为止，卡罗扎特及其召唤的生物在对抗该被告的攻击掷骰与技能检定上获得+2状态加值。</p>\n<p>The kharozat designates an accused (an individual or a group of any size) and determines a sentence. Until the accused completes its sentence or the kharozat is persuaded to commute the sentence, the kharozat and its summoned creatures gain a +2 status bonus on attack rolls and skill checks against the accused.</p>"
+    },
+    "Effect: Malignant Entropy (4 Dice)": {
+      "name": "效果：恶性熵（4 骰） Effect: Malignant Entropy (4 Dice)",
+      "description": "<p>直到其下个回合结束，塞尼恶魔的打击造成等同于触发攻击中掷出的骰子数量的额外伤害。</p>\n<p>Until the end of its next turn, the senidaemon's Strikes deal additional damage equal to the number of dice rolled in the triggering attack.</p>"
+    },
+    "Effect: Unravel (Weapon)": {
+      "name": "效果：解缠（武器） Effect: Unravel (Weapon)",
+      "description": "<p>一个解构中的物体受到[[/r 2d8[persistent,spirit]]]伤害</p>\n<p>挥持一把解构武器的生物在攻击掷骰上承受-1减值。一个解构中的物体每轮进行一次纯骰检定，如同生物一样，以停止持续伤害。解构者可以对任何解构中的物体或生物施放修复术，以立即终止持续的混沌伤害。</p>\n<p>An unraveling object takes [[/r 2d8[persistent,spirit]]] damage</p>\n<p>A creature wielding an unraveling weapon takes a -1 penalty to attack rolls. An unraveling object makes a flat check each round, just like a creature, to stop the persistent damage. An unraveler can cast mending on any unraveling object or creature to immediately end the persistent chaotic damage.</p>"
+    },
+    "Effect: Killer's Possession": {
+      "name": "效果：杀手的附身 Effect: Killer's Possession",
+      "description": "<p>杀意的嗜血使其实体容器能够超越正常的身体极限。被杀意附身的生物在其近战打击上造成[[/r 4]]{4点额外伤害}，AC受到-2减值，并获得@Compendium[pf2e.conditionitems.nlCjDvLMf2EkV2dl]{迅捷（状态）}；它每轮只能将额外动作用于打击和疾行动作。</p>\n<p>The killing intent's bloodlust allows its corporeal vessel to exceed its normal bodily limits. A creature possessed by the killing intent deals [[/r 4]]{4 additional damage} on its melee Strikes, takes a -2 penalty to AC, and gains the @Compendium[pf2e.conditionitems.nlCjDvLMf2EkV2dl]{Quickened} condition; it can use the extra action each round only for Strike and Stride actions.</p>"
+    },
+    "Effect: Weight of Ages": {
+      "name": "效果：年代的重量 Effect: Weight of Ages",
+      "description": "<p>处于废墟斗殴者灵光内的生物会陷入 @Compendium[pf2e.conditionitems.D5mg6Tc7Jzrj6ro7]{负荷过重}。</p>\n<p>Creatures in the ruin bruiser's aura are @Compendium[pf2e.conditionitems.D5mg6Tc7Jzrj6ro7]{Encumbered}.</p>"
+    },
+    "Effect: Unravel (Armor)": {
+      "name": "效果：解构（护甲） Effect: Unravel (Armor)",
+      "description": "<p>一个瓦解中的物体受到[[/r 2d8[persistent,spirit]]]伤害</p>\n<p>穿戴瓦解中护甲的生物将该护甲对AC的物品加值降低1（最低至+0）。瓦解中的物体如同生物一样，每轮进行一次纯骰检定以停止持续伤害。瓦解者可以对任何瓦解中的物体或生物施放修复术，以立即结束持续混沌伤害。</p>\n<p>An unraveling object takes [[/r 2d8[persistent,spirit]]] damage</p>\n<p>A creature wearing unraveling armor reduces the armor's item bonus to AC by 1 (to a minimum of +0). An unraveling object makes a flat check each round, just like a creature, to stop the persistent damage. An unraveler can cast mending on any unraveling object or creature to immediately end the persistent chaotic damage.</p>"
+    },
+    "Effect: Mother Suit (Huge)": {
+      "name": "效果：母体装甲（超大型） Effect: Mother Suit (Huge)",
+      "description": "<p>一名主母穿着一套由石头、铁，以及被困的妖精生物之灵魂制成的巨大装甲。随着其母体装甲受损，主母会变得更小且更敏捷。</p>\n<p>当其降低至200生命值时，主母变为巨型。主母拳头打击的触及减少5尺，且主母的速度提高10尺。</p>\n<p>A matrona wears a massive suit made of stone, iron, and the souls of trapped fey creatures. As its mother suit is damaged, the matrona becomes smaller and more agile.</p>\n<p>When it is reduced to 200 Hit Points, the matrona becomes Huge. The reach of the matrona's fist Strike reduces by 5 feet and the matrona's Speeds increase by 10 feet.</p>"
+    },
+    "Effect: Consume Poison (3 Doses)": {
+      "name": "效果：消耗毒素（3 剂） Effect: Consume Poison (3 Doses)",
+      "description": "<p>在1小时内，蓝龙的刺突打击会造成额外的[[/r 3d6[poison]]]伤害。</p>\n<p>For 1 hour, the glaucus's cerata Strike deals an additional [[/r 3d6[poison]]] damage.</p>"
+    },
+    "Effect: Malignant Entropy (2 Dice)": {
+      "name": "效果：恶性熵（2骰） Effect: Malignant Entropy (2 Dice)",
+      "description": "<p>直到其下个回合结束前，塞尼恶魔的打击会造成等同于触发该攻击中掷出的骰子数量的额外伤害。</p>\n<p>Until the end of its next turn, the senidaemon's Strikes deal additional damage equal to the number of dice rolled in the triggering attack.</p>"
+    },
+    "Effect: Harden Scales": {
+      "name": "效果：硬化鳞片 Effect: Harden Scales",
+      "description": "<p>蓝宝石龙蜥暂时使其身体硬化以抵御威胁；</p>\n<p>在接下来的[[/br 1d4 #rounds]]{1d4轮}内，蓝宝石龙蜥获得AC+1状态加值，且其速度承受-10英尺状态减值。</p>\n<p>The sapphire drake temporarily hardens its body against threats;</p>\n<p>For the next [[/br 1d4 #rounds]]{1d4 rounds}, the sapphire drake gains a +1 status bonus to AC and a -10-foot status penalty to Speeds.</p>"
+    },
+    "Effect: Forbidden Knowledge": {
+      "name": "效果：禁忌知识 Effect: Forbidden Knowledge",
+      "description": "<p>目标在1天内获得+4状态加值至神秘学检定。</p>\n<p>The target gains a +4 status bonus to Occultism checks for 1 day.</p>"
+    },
+    "Effect: Consume Poison (2 Doses)": {
+      "name": "效果：消耗毒素（2 剂） Effect: Consume Poison (2 Doses)",
+      "description": "<p>在1小时内，天蓝海蛞蝓的背肢打击会造成额外的[[/r 2d6[poison]]]伤害。</p>\n<p>For 1 hour, the glaucus's cerata Strike deals an additional [[/r 2d6[poison]]] damage.</p>"
+    },
+    "Effect: Consume Poison (4 Doses)": {
+      "name": "效果：摄入毒素（4 剂） Effect: Consume Poison (4 Doses)",
+      "description": "<p>在1小时内，苍蓝海蛞蝓的背突打击会造成额外的[[/r 4d6[poison]]] 伤害。</p>\n<p>For 1 hour, the glaucus's cerata Strike deals an additional [[/r 4d6[poison]]] damage.</p>"
+    },
+    "Effect: Consume Poison (1 Dose)": {
+      "name": "效果：消耗毒素（1 剂） Effect: Consume Poison (1 Dose)",
+      "description": "<p>持续1小时，海蛞蝓的背侧突起打击额外造成 [[/r 1d6[poison]]] 伤害。</p>\n<p>For 1 hour, the glaucus's cerata Strike deals an additional [[/r 1d6[poison]]] damage.</p>"
+    },
+    "Effect: Prepare and Serve - Speed Bonus": {
+      "name": "效果：准备与上菜 - 速度加值 Effect: Prepare and Serve - Speed Bonus",
+      "description": "<p>机械领班从其躯干舱室中取出一份注入魔法的食物与饮品，然后伸出手臂将餐点递给15英尺内的一名生物。一名生物可以与该食物进行互动以将其食用。当它这么做时，该生物获得以下效果；该效果由机械领班在使用准备并上菜时选择。</p>\n<ul>\n<li>食用者获得+10英尺的速度状态加值。</li>\n</ul>\n<p>该效果持续1小时。某名生物一旦吃过一道菜，便在1小时内免疫于机械领班的魔法食物。</p>\n<p>一名机械领班一次最多可储存12份食物与饮品。机械领班的躯干舱室会对放入其中的任何食物自动施放enhance victuals。</p>\n<p>The mechanical maître d' retrieves a serving of magic-infused food and drink from its torso compartment, then extends its arm to give the dish to a creature within 15 feet. A creature can Interact with this food to consume it. When it does so, the creature gains the following effect, which is chosen by the mechanical maître d' at the time of using Prepare and Serve.</p>\n<ul>\n<li>The eater gains a +10-foot status bonus to Speed.</li>\n</ul>\n<p>The effect lasts for 1 hour. Once it has eaten a dish, a creature is immune to the mechanical maître d's magical food for 1 hour.</p>\n<p>A mechanical maître d' can store up to 12 servings of food and drink at a time. The mechanical maître d's torso compartment automatically casts enhance victuals on any food placed inside.</p>"
+    },
+    "Effect: Spore Cloud": {
+      "name": "效果：孢子云 Effect: Spore Cloud",
+      "description": "<p>持续1轮，othruni获得AC +1环境加值。</p>\n<p>For 1 round, the othruni gains a +1 circumstance bonus to AC.</p>"
+    },
+    "Effect: Malignant Entropy (1 Dice)": {
+      "name": "效果：恶性熵（1 骰） Effect: Malignant Entropy (1 Dice)",
+      "description": "<p>直到其下一个回合结束，塞尼魔的打击会造成额外伤害，数值等于触发攻击中投掷的骰子数量。</p>\n<p>Until the end of its next turn, the senidaemon's Strikes deal additional damage equal to the number of dice rolled in the triggering attack.</p>"
+    },
+    "Effect: Malignant Entropy (3 Dice)": {
+      "name": "效果：恶性熵（3骰） Effect: Malignant Entropy (3 Dice)",
+      "description": "<p>直到其下个回合结束，灵魂魔的打击会造成等同于触发该次攻击中掷出的骰子数量的额外伤害。</p>\n<p>Until the end of its next turn, the senidaemon's Strikes deal additional damage equal to the number of dice rolled in the triggering attack.</p>"
+    },
+    "Effect: Aura of Magnetism": {
+      "name": "效果：磁力灵光 Effect: Aura of Magnetism",
+      "description": "<p>当处于该灵光内时，使用金属武器进行近战打击或使用金属弹药（包括箭矢与弩矢）进行远程打击的生物，在对抗铁甲龙虾的攻击掷骰上获得+1环境加值，并在对抗其他生物的攻击掷骰上承受-1环境减值。</p>\n<p>While in the aura, a creature that makes a melee Strike with a metal weapon or a ranged Strike with metal ammunition (including arrows and bolts) gains a +1 circumstance bonus on attack rolls against the ferropaceon and a -1 circumstance penalty on attack rolls against other creatures.</p>"
+    },
+    "Effect: Penumbral Theft": {
+      "name": "效果：半影窃夺 Effect: Penumbral Theft",
+      "description": "<p>目标的影子不规则地移动，使其在进行交涉印象、躲藏或潜行时承受-1环境减值。</p>\n<p>The target's shadow moves erratically, inflicting a -1 circumstance penalty to Make an Impression, Hide, or Sneak.</p>"
+    },
+    "Effect: Ancient Reminiscence (Critical Success)": {
+      "name": "效果：远古回忆（大成功） Effect: Ancient Reminiscence (Critical Success)",
+      "description": "<p>直到该生物的下一回合，失落的救世主处于措手不及状态，并在AC与豁免上承受-2环境减值。</p>\n<p>Until the creature's next turn, the lost savior is off-guard and takes a -2 circumstance penalty to AC and saving throws.</p>"
+    },
+    "Effect: Sharpen Leaves": {
+      "name": "效果：锐化叶片 Effect: Sharpen Leaves",
+      "description": "<p>铁蕨用叶片刮擦附近的石头来磨利边缘。直到铁蕨下个回合结束前，它的铁叶打击会额外造成 [[/r 1d4[slashing]]] 伤害。</p>\n<p>The iron fern scrapes its leaves against a nearby stone to sharpen its edges. Until the end of the iron fern's next turn, its iron leaf Strikes deal an additional [[/r 1d4[slashing]]] damage.</p>"
+    },
+    "Effect: Storm Step": {
+      "name": "效果：风暴步伐 Effect: Storm Step",
+      "description": "<p>野牛可以毫不费力地攀爬垂直和水平表面，它不会因坠落而受到伤害，并且它的攻击额外造成 [[/r 1d6[electricity]]] 伤害。</p>\n<p>The aurochs can effortlessly climb vertical and horizontal surfaces, it takes no damage from falls, and its attacks deal an additional [[/r 1d6[electricity]]] damage.</p>"
+    },
+    "Effect: Protective Pouch": {
+      "name": "效果：防护小袋 Effect: Protective Pouch",
+      "description": "<p>在袋中时，该生物获得掩蔽与快速治疗1，并在对抗任何持续的苦难的豁免中获得+2状态加值。</p>\n<p>While in the pouch, the creature has cover and fast healing 1 and gains a +2 status bonus on saving throws against any ongoing afflictions.</p>"
+    },
+    "Effect: Heroic Rally (Lost Savior; +2)": {
+      "name": "效果：英勇集结（失落救星；+2） Effect: Heroic Rally (Lost Savior; +2)",
+      "description": "<p>在接下来的一轮中，迷失救主获得+2状态加值于攻击和伤害；</p>\n<p>For the next round, the lost savior gains a +2 status bonus to attack and damage;</p>"
+    },
+    "Effect: Heroic Rally (Ally)": {
+      "name": "效果：英雄集结（盟友） Effect: Heroic Rally (Ally)",
+      "description": "<p>每名盟友在1轮内的攻击掷骰和AC获得+1状态加值。</p>\n<p>Each ally gains a +1 status bonus to attack rolls and AC for 1 round.</p>"
+    },
+    "Effect: Heroic Rally (Lost Savior; +1)": {
+      "name": "效果：英勇集结（失落救星；+1） Effect: Heroic Rally (Lost Savior; +1)",
+      "description": "<p>在接下来的1轮内，失落救主获得+1状态加值于攻击与伤害；</p>\n<p>For the next round, the lost savior gains a +1 status bonus to attack and damage;</p>"
+    },
+    "Effect: Inflame Fever": {
+      "name": "效果：加剧热病 Effect: Inflame Fever",
+      "description": "<p>该生物在下一次对抗疾病效果的豁免检定中获得+2状态加值。</p>\n<p>The creature gains a +2 status bonus on its next saving throw against a disease effect.</p>"
+    },
+    "Effect: Mother Suit (Large)": {
+      "name": "效果：母体装甲（大型） Effect: Mother Suit (Large)",
+      "description": "<p>玛特罗娜穿着一套由石头、铁，以及被困住的妖精生物的灵魂制成的巨大装甲。当其母装甲受损时，玛特罗娜会变得更小、更灵活。</p>\n<p>当其生命值降至100时，它变为大型。玛特罗娜拳头打击的触及减少10英尺，且玛特罗娜的速度提高20英尺。</p>\n<p>A matrona wears a massive suit made of stone, iron, and the souls of trapped fey creatures. As its mother suit is damaged, the matrona becomes smaller and more agile.</p>\n<p>When reduced to 100 Hit Points, it becomes Large. The reach of the matrona's fist Strike reduces by 10 feet and the matrona's Speeds increase by 20 feet.</p>"
+    },
+    "Effect: Prepare and Serve - Combat Buff": {
+      "name": "效果：准备与上菜 - 战斗增益 Effect: Prepare and Serve - Combat Buff",
+      "description": "<p>机械 maître d' 从其躯干隔间取出一份注入魔法的食物与饮料，然后伸出手臂将菜肴递给15英尺内的一个生物。生物可以与该食物进行交互以食用之。当它这样做时，该生物获得以下效果，该效果由机械 maître d' 在使用 Prepare and Serve 时选择。</p>\n<ul>\n<li>食用者获得+1状态加值，适用于攻击掷骰、察觉检定、豁免以及技能检定。</li>\n</ul>\n<p>该效果持续1小时。一旦吃过一道菜，生物在1小时内对机械 maître d' 的魔法食物免疫。</p>\n<p>机械 maître d' 一次最多可储存12份食物与饮料。机械 maître d' 的躯干隔间会对放入其中的任何食物自动施放 enhance victuals。</p>\n<p>The mechanical maître d' retrieves a serving of magic-infused food and drink from its torso compartment, then extends its arm to give the dish to a creature within 15 feet. A creature can Interact with this food to consume it. When it does so, the creature gains the following effect, which is chosen by the mechanical maître d' at the time of using Prepare and Serve.</p>\n<ul>\n<li>The eater gains a +1 status bonus to attack rolls, Perception checks, saving throws, and skill checks.</li>\n</ul>\n<p>The effect lasts for 1 hour. Once it has eaten a dish, a creature is immune to the mechanical maître d's magical food for 1 hour.</p>\n<p>A mechanical maître d' can store up to 12 servings of food and drink at a time. The mechanical maître d's torso compartment automatically casts enhance victuals on any food placed inside.</p>"
+    },
+    "Effect: Frenzied Hiss": {
+      "name": "效果：狂乱嘶嘶声 Effect: Frenzied Hiss",
+      "description": "<p>盐之母恐怖地嘶嘶作响，驱使她的整个族群陷入暴烈的狂乱。盐之母以及60英尺内所有盐潜行者的近战打击造成[[/r 4]]{4额外伤害}，并且其AC承受-1状态减值。这些效果持续1分钟；之后，受影响的生物在1小时内对盐之母的狂乱嘶鸣暂时免疫。</p>\n<p>当盐之母使用狂乱嘶鸣时，每个受影响的盐潜行者都可以花费其反应动作来疾走至多等同于其速度的距离，但它必须以其移动结束时更接近盐之母或一个可见敌人。</p>\n<p>The salt mother hisses terribly, spurring her entire pack into a violent frenzy. The salt mother and all salt stalkers within 60 feet deal [[/r 4]]{4 additional damage} with melee Strikes and take a -1 status penalty to AC. These effects last for 1 minute, after which affected creatures are temporarily immune to the salt mother's Frenzied Hiss for 1 hour.</p>\n<p>When a salt mother uses Frenzied Hiss, each affected salt stalker can spend its reaction to Stride up to its Speed, but it must end its movement closer to either the salt mother or a visible enemy.</p>"
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+    "label": "杂项 Misc",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Effect: Moonlit Folly": {
+            "name": "效果：月下狂言 Effect: Moonlit Folly",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IQsdvAQkL6cYiJL3]{月光之愚} 授予</p><hr /><p>你的速度获得 +10尺状态加值，强韧与反射豁免获得 +1状态加值，意志豁免承受 -1 状态减值。如果月亮可见，速度状态加值再增加 5尺，且豁免的加值与减值都增至 2。</p>"
+        },
+        "Effect: Glimpse Future": {
+            "name": "效果：未来一瞥 Effect: Glimpse Future",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.oEpn9Xj6vcCqdCtG]{瞥见未来} 授予</p><hr /><p>你在起源者下一回合开始前，下一次攻击骰或豁免承受 -2 状态减值。</p>"
+        },
+        "Effect: Well of Joy": {
+            "name": "效果：欢乐之井 Effect: Well of Joy",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.mLRt0nJQLvbZkiml]{欢欣之井} 授予</p><hr /><p>你获得临时生命值，且只要你拥有这些临时生命值，你的惊惧状态便被中止。</p>"
+        },
+        "Effect: Orb of Brilliance": {
+            "name": "效果：辉煌法球 Effect: Orb of Brilliance",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.tG24AJZm6JF54LaB]{辉煌之球} 授予</p><hr /><p>你的察觉检定承受等同于起源者咒缚值的状态减值。</p>"
+        },
+        "Stance: Embrance Instinct": {
+            "name": "架势：拥抱本能 Stance: Embrance Instinct",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.EQYC796SaVzsHZt6]{拥抱直觉} 授予</p><hr /><p>当你进入此架势时，你变为 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}，且只要你保持此架势，你便变为 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。你只能将额外的动作用于具有咒缚特征的动作或行动。</p>"
+        },
+        "Effect: Aura of Foresight (Finery)": {
+            "name": "效果：先见之灵气（华饰） Effect: Aura of Foresight (Finery)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.SzHSgHXgBgxhyVsH]{灵气：先见之灵气} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.YTRa4c1Ye1cVQAM0]{华饰} 授予</p><hr /><p>取决于起源者，你可能获得他们对抗恐惧效果豁免的状态加值，并可能对心灵伤害获得抗力。</p>"
+        },
+        "Effect: Melt in Sunlight": {
+            "name": "效果：融化于阳 Effect: Melt in Sunlight",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.d8WcB9lRceXoCmKl]{日下融化} 授予</p><hr /><p>你失去任何 AC 物品加值以及护甲带来的所有其他效果与加值，并使用你的熟练度调整值进行无甲防御。你对物理伤害获得 8点抗力，且免疫精准伤害。你不能施法、激活物品，或使用具有攻击或操作特征的动作。你可以从极小的缝隙中挤过。</p>"
+        },
+        "Effect: Spirit Steps": {
+            "name": "效果：精魂之步 Effect: Spirit Steps",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.qE98bL1xWeENwIYg]{精魂之步} 授予</p><hr /><p>你在 1分钟内获得虚体特征，并对所有伤害（精魂、生机或鬼触除外）获得等同于你咒缚值两倍的抗力。</p>"
+        },
+        "Effect: Terrible Size": {
+            "name": "效果：恐怖体型 Effect: Terrible Size",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Ktv8fnq0j7x4VeFX]{可怖之巨} 授予</p><hr /><p>你内在的野兽改造你的身躯。你变为大型，且装备随之放大；但脱下后会回到原本大小。你变为笨拙 1，触及增加 5尺（如果你原为微型，则增加 10尺）。你的所有速度获得 +10尺状态加值。这不会结束不影响你体型的化形效果，例如「野兽之躯」。</p>"
+        },
+        "The Mystery Grows": {
+            "name": "秘示域渐长 The Mystery Grows",
+            "description": "<p><strong>需求</strong> 你正受益于 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见}。</p><hr /><p>你神器的力量向外扩展，成就奇迹。你赋予自己对你「奇物之先见」灵气内生物的伤害与治疗等同于你等级一半（向上取整）的状态加值，直至下一回合结束。该状态加值仅适用于你的打击、先知法术或无持续时间的咒缚动作。每个生物每个效果只能受到此伤害或此治疗一次，即使该效果会对其多次造成伤害或治疗。</p>"
+        },
+        "Effect: Aura of Foresight (Script)": {
+            "name": "效果：先见之灵气（经文） Effect: Aura of Foresight (Script)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.SzHSgHXgBgxhyVsH]{灵气：先见之灵气} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iwnFooF4g1F0QECd]{经文} 授予</p><hr /><p>取决于起源者，你可能对回忆知识检定获得状态加值。</p>"
+        },
+        "Effect: Enlightening Spell": {
+            "name": "效果：启慧法术 Effect: Enlightening Spell",
+            "description": "<p>如果起源者咒缚，则由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.5bgMsNUOOnAwliSa]{启明法术} 授予</p><hr /><p>你的回忆知识检定获得等同于起源者咒缚值的环境加值。</p>"
+        },
+        "Effect: Reveal the Mystery (Charm)": {
+            "name": "效果：揭示秘示域（护符） Effect: Reveal the Mystery (Charm)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.YH1hf50LW2Pdj3FV]{护符} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xWVzGav9VGxTgw5X]{奇物启示} 授予</p><hr /><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CuriosRevelation]</p>"
+        },
+        "Aura: Lucid Reality": {
+            "name": "灵气：清明现实 Aura: Lucid Reality",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.8BaybMIHaMRs5MAH]{清明现实} 授予</p><hr /><p>你拥有梦境之灵气。在你梦境灵气生效的每个回合开始时，你创造出「清明现实」中描述的幻象效果之一，持续到你下一回合开始。如果你使用清明现实时为咒缚 3，你改为同时创造最多 3 种效果，且每种可为不同类型。</p>"
+        },
+        "Curio's Foresight": {
+            "name": "奇物之先见 Curio's Foresight",
+            "description": "<p><strong>需求</strong> 你穿戴或挥舞你的奇物（视奇物而定）。</p><hr /><p>通过将力量灌注入你的奇物，你获得未来的瞥见以助你旅程。你在 1分钟内创造一个 15尺弥漫范围的先见之灵气。你将弥漫面积增加 5尺 × 你的咒缚值。在你先见灵气内的生物对其的 AC 与豁免获得 +1状态加值。</p><p>当你使用此动作以及在每个该灵气激活回合的开始时，你可以选择以你的魅力调整值（而非感知调整值）尝试一次 @Check[perception] 检定，以读取你灵气内你能看见的某个敌人的近期未来，将你的结果与该生物等级的标准 DC 比较。一个意识到你的敌人可以选择以其 @Check[perception|against:deception]{欺瞒 DC} 或 @Check[perception|against:stealth]{隐密 DC} 替代其等级的标准 DC。</p><p><strong>大成功</strong> 你先见灵气对该生物的 AC 与豁免状态加值增至 +2。你预见到该生物的危险攻击，看到近期潜在威胁的简短画面。你预见该生物的潜在威胁，立即得知以下所有信息：它的一次打击（包括其攻击调整值与伤害）、它拥有的一项动作或行动，以及它具有的任何持续灵气的效果。在判定哪一项打击、动作或行动时，如果该生物拥有多项符合条件的项目，你通常学到该生物所拥有最危险的打击、动作或行动（由 GM 裁决）。这些效果对目标生物持续到你再次使用「奇物之先见」为止。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.cP1cpKmDvv4STce2]{效果：未来读取}</p><p><strong>成功</strong> 同大成功，但你只学到一项信息。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.cP1cpKmDvv4STce2]{效果：未来读取}</p><p><strong>失败</strong> 幻视模糊，你不获得额外效果。</p><p><strong>大失败</strong> 幻视嘲弄你，让你毫无防备。你直至下一回合开始前 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p><hr /><p><strong>特殊</strong> 如果你因先知之咒而对察觉检定承受减值，你不会将这些减值施加于「奇物之先见」的察觉检定。<strong>Foundry 提示</strong> 你需要手动禁用这些减值。</p>"
+        },
+        "Effect: Reveal the Mystery (Armament)": {
+            "name": "效果：揭示秘示域（军械） Effect: Reveal the Mystery (Armament)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.nlRmgSMAd773kDNN]{军械} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xWVzGav9VGxTgw5X]{奇物启示} 授予</p><hr /><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.CuriosRevelation]</p>"
+        },
+        "Effect: Recalled Knowledge on from Script Curio": {
+            "name": "效果：来自经文奇物的回忆知识 Effect: Recalled Knowledge on from Script Curio",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iwnFooF4g1F0QECd]{经文} 授予</p><hr /><p>当处于起源者的先见之灵气内时，你根据起源者的咒缚值对目标造成额外伤害。</p>"
+        },
+        "Effect: Amplified Accompaniment": {
+            "name": "效果：放大伴奏 Effect: Amplified Accompaniment",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.xWqIJGRUveOJPJm9]{灵气：放大伴奏} 授予</p><hr /><p>你对音波伤害获得等同于起源者咒缚值的弱点。</p>"
+        },
+        "Effect: Mind's Eye Wink": {
+            "name": "效果：心眼一瞬 Effect: Mind's Eye Wink",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.OpJmCs3zAXmN4mnX]{心眼一瞬（目标变体）} 授予</p><hr /><p>取决于你的豁免，你对所有涉及目标物体的检定承受 -1 或 -2环境减值。</p>"
+        },
+        "Effect: Appear Dead": {
+            "name": "效果：诈死 Effect: Appear Dead",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.0mnwXrMmu6fDiwpR]{貌似死亡} 授予</p><hr /><p>你的欺瞒检定（用以装作尸体）获得 +4环境加值，并对生命感知等感官呈现死亡之态。</p>"
+        },
+        "Reveal the Mystery": {
+            "name": "揭示秘示域 Reveal the Mystery",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你拥有由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见} 提供的灵气。</p><hr /><p>你保护盟友远离你预见的危险。该盟友直至你下一回合开始或离开你的先见灵气前，获得你「奇物之先见」的状态加值——你为其指出敌人的破绽。这包括对你借由「奇物之先见」察觉检定成功的生物的提升状态加值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Lq5m1jSwLBkuFuiW]{效果：揭示秘示域}</p><hr /><p><strong>Foundry 提示</strong> 要赋予提升的状态加值，只需将「奇物之先见」的「未来读取」效果以你赋予自己的相同方式应用于盟友，瞄准同一生物。</p>"
+        },
+        "Effect: Flesh of Cinders": {
+            "name": "效果：余烬之肉 Effect: Flesh of Cinders",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Dcb55j1JkfRQ1Ab5]{灰烬之肉} 授予</p><hr /><p>你对所有物理伤害获得等同于你等级的抗力，并对抗擒拿、或会让你获得无法移动、被擒、被束缚状态的效果的豁免与 DC，获得等同于你咒缚状态值的状态加值。</p>"
+        },
+        "Effect: Familiar Dark": {
+            "name": "效果：熟悉之暗 Effect: Familiar Dark",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.vuB01OQwGNLaGwmR]{熟稔之暗} 授予</p><hr /><p>你获得高级暗视，并根据你的咒缚值在弥漫范围内创造黑暗。</p>"
+        },
+        "Effect: Reveal the Mystery": {
+            "name": "效果：揭示秘示域 Effect: Reveal the Mystery",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} 授予</p><hr /><p>你直至起源者下一回合开始或离开他们的先见灵气前，获得起源者「奇物之先见」的状态加值。</p>"
+        },
+        "Effect: Juggernaut of Jagged Stone": {
+            "name": "效果：岩棱巨魁 Effect: Juggernaut of Jagged Stone",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.VK8P3zkoyrVI1RO7]{尖石巨像} 授予</p><hr /><p>你对物理伤害（精金除外）获得 6点抗力。你免疫死亡效果、疾病、枯竭、疲劳、治疗、非致命攻击、瘫痪、毒素、恶心、生机与虚空；你在施放此法术时所拥有的这些状态被中止，直至法术结束，然后以剩余持续时间恢复。</p><p>你的拳头打击伤害骰为 1d10，失去巧劲与敏捷特征，获得推撞特征；你变为大型，并变为笨拙 1。</p><p>在此形态下，你不需要呼吸。你的体积为 24，且过于密实而无法在水中游泳，会自动沉至水底。你可以解除此法术。</p>"
+        },
+        "Effect: Garden of Crystals": {
+            "name": "效果：水晶花园 Effect: Garden of Crystals",
+            "description": "<p>当你与水晶花园所造的某簇晶族相邻时，由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.vFbQPjMNt7QXj6Do]{水晶花园} 授予</p><hr /><p>你的重击额外造成 1d10 力场伤害。</p>"
+        },
+        "Effect: Fractal Frosting": {
+            "name": "效果：分形结霜 Effect: Fractal Frosting",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.UmP8nuC0f2DiMZOB]{分形霜冻} 的 9 阶效果授予</p><hr /><p>你的速度在 1轮内承受状态减值。</p>"
+        },
+        "Effect: Reveal the Mystery (Script)": {
+            "name": "效果：揭示秘示域（经文） Effect: Reveal the Mystery (Script)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iwnFooF4g1F0QECd]{经文} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xWVzGav9VGxTgw5X]{奇物启示} 授予</p><hr /><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CuriosRevelation]</p>"
+        },
+        "Effect: Preparatory Cremation": {
+            "name": "效果：预备焚化 Effect: Preparatory Cremation",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.sJFANB5KEFjGI4KK]{火化预备} 授予</p><hr /><p>你对物理伤害获得等同于起源者咒缚值两倍的弱点；造成物理伤害的攻击对你获得死亡特征。</p>"
+        },
+        "Effect: Glimpse of Redemption (Weeping Heart)": {
+            "name": "效果：救赎一瞥（泣心） Effect: Glimpse of Redemption (Weeping Heart)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.nLR4sEYoybOz3eax]{泣心之幻象} 授予</p><hr /><p>该盟友对触发的伤害获得等同于你等级的抗力。</p>"
+        },
+        "Aura: Aura of Foresight": {
+            "name": "灵气：先见之灵气 Aura: Aura of Foresight",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见} 授予</p><hr /><p>你对先见灵气内生物的 AC 与豁免获得 +1状态加值。</p>"
+        },
+        "Effect: Golden Touch": {
+            "name": "效果：点金之触 Effect: Golden Touch",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.UKJK9vQwjd44WNcR]{点石成金} 授予</p><hr /><p>你或你所持的物品被部分变成黄金。你对钝击与电击伤害获得弱点。你对隐密检定承受 2点环境减值。如果该物品并非黄金所造，你也可能对该物品的检定或 DC 承受 -2环境减值。你也可能变为 @UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{石化} 或 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损}。</p>"
+        },
+        "Effect: Divine Eclipse": {
+            "name": "效果：神圣蚀 Effect: Divine Eclipse",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.On86WPSyTK9jPkGS]{神圣食日} 授予</p><hr /><p>你获得快速治疗并散发光芒。</p>"
+        },
+        "Effect: Comfort of Struggle": {
+            "name": "效果：挣扎之慰 Effect: Comfort of Struggle",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iWueJXoM6ZFHULZj]{挣扎之慰} 授予给施法者或目标敌人</p><hr /><p>你或获得本回合结束前下一次法术攻击骰的 +1状态加值，或对起源者所施法术的下一次豁免承受 -1 状态减值。</p>"
+        },
+        "Effect: Body of the Beast": {
+            "name": "效果：野兽之躯 Effect: Body of the Beast",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.yCoJlIIopuCPi4Vw]{野兽之躯} 授予</p><hr /><p>当你引导你的神性时，兽性力量在你身体中涌动。当内在野兽显现时，你获得一种属于拳斗武器组的徒手攻击。该徒手攻击的打击额外造成等同于你咒缚状态值的伤害。如果你的咒缚值为 2，则在法术激活期间你以该徒手攻击进行打击获得 +1状态加值；若咒缚值为 3 或更高，则为 +2。</p><ul><li><p>颚，造成 1d8 穿刺伤害</p></li><li><p>爪，造成 1d4 挥砍伤害，具有敏捷与巧劲特征</p></li><li><p>角或鹿角，造成 1d6 穿刺伤害，具有推撞特征</p></li><li><p>触手或尾，造成 1d4 钝击伤害，具有触及特征</p></li></ul>"
+        },
+        "Effect: Promised Renewal": {
+            "name": "效果：许诺重生 Effect: Promised Renewal",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.EQYDCV6Llp7qvEmf]{更新之诺} 授予给弥漫范围内选定的从仆</p><hr /><p>当你处于弥漫范围内时，获得快速治疗 [[/r 3 + 2 * (@item.level - 3)]]。</p>"
+        },
+        "Stance: Divine Gnosis": {
+            "name": "架势：神圣灵知 Stance: Divine Gnosis",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.FZ1lE34yTDwC1FBR]{神圣灵知} 授予</p><hr /><p>你的回忆知识检定获得等同于你咒缚值的环境加值，且你将此检定的成功等级视为高一级。在此架势下，你可以以自由动作进行回忆知识——通过给它添加咒缚特征。你必须对当前遭遇相关的主题进行回忆知识。处于此架势下时，你的回忆知识检定不会因呆滞而承受减值。</p>"
+        },
+        "Finery Curio": {
+            "name": "华饰奇物 Finery Curio",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CuriosForm]</p>"
+        },
+        "Effect: Future Read": {
+            "name": "效果：未来读取 Effect: Future Read",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见} 授予</p><hr /><p>你的先见之灵气对目标的加值增至 +2。</p>"
+        },
+        "Effect: Reverse Movement": {
+            "name": "效果：逆转移动 Effect: Reverse Movement",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.q3psDM7xuBPVrnVX]{逆转移动} 授予</p><hr /><p></p>"
+        },
+        "Effect: Forefathers' Lessons": {
+            "name": "效果：先祖之教 Effect: Forefathers' Lessons",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.5MYvbDWzTMzvr8AL]{先祖之训} 授予</p><hr /><p>你视作具有你所选的血统。</p>"
+        },
+        "Effect: Dream Logic - Warped Energy": {
+            "name": "效果：梦之逻辑——扭曲能量 Effect: Dream Logic - Warped Energy",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IOIBGIvKtLsit2dZ]{幻梦之理} 在掷得 4 时授予</p><hr /><p>如果你会造成酸蚀、寒冷、电击、火焰或音波伤害，你改为造成另一种能量伤害类型（掷 [[/r 1d4 #伤害类型]] 随机决定）。如果某生物会造成多于一种这些伤害类型，则起源者选择哪一种伤害类型被改变。</p>"
+        },
+        "Spell Effect: Weapon Trance (Team+)": {
+            "name": "法术效果：武器入定（Team+） Spell Effect: Weapon Trance (Team+)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.hWVNfDCFS8dekbX5]{武器入定（} 授予</p><p>在此持续时间内，你对目标武器的熟练度等同于你对简易武器的熟练度；如果目标武器为高级武器，则等同于你对军用武器的熟练度。每轮你首次以目标武器尝试打击时，你以自由动作自动持续此法术。如果你的咒缚值为 2，则在法术激活期间你以目标武器进行打击获得 +1状态加值；若咒缚值为 3 或更高，则为 +2。</p>"
+        },
+        "Effect: Curse of Vengeful Darkness (Mount Penalty)": {
+            "name": "效果：复仇黑暗之诅咒（坐骑减值） Effect: Curse of Vengeful Darkness (Mount Penalty)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ZBNdYIBcV5qsn4UH]{复仇之暗之咒} 授予</p><hr /><p>如果起源者处于骑乘状态，你的速度承受其状态减值。</p>"
+        },
+        "Effect: Wishful Thinking": {
+            "name": "效果：一厢情愿 Effect: Wishful Thinking",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.kRd321XLgebXcpni]{如愿之思} 授予</p><hr /><p>根据施法者的选择，你获得以下效果之一：</p><ul><li><p>攻击骰与豁免的 +1状态加值。</p></li><li><p>你所选某项特定技能的检定 +2状态加值。</p></li><li><p>30尺攀爬速度，以及 30尺范围的模糊嗅觉感官。</p></li><li><p>30尺游泳速度并具备水下呼吸的能力。</p></li></ul>"
+        },
+        "Effect: Divine Rampage": {
+            "name": "效果：神圣横扫 Effect: Divine Rampage",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xCpOfmUcUsUMSDnK]{神圣狂暴} 授予</p><hr /><p>下列效果一直适用，直到你将一个生物减至 0 生命值后尝试 @Check[will|against:spell-dc] 以结束此破坏状态。你可以选择放弃此意志豁免并继续横扫。如果你已 1轮未被敌对动作作为目标或包含于其作用区域内，你可以在回合结束时尝试一次意志豁免以结束此破坏状态。</p><ul><li><p>你不视任何人为盟友，但侧背的敌人除外（不过他们仍可能视你为盟友）。</p></li><li><p>你必须将你所有的动作用于打击、施放进攻型戏法、使用进攻型咒缚动作，或便于攻击的动作（如拔出武器、移动以使目标进入触及等）。</p></li><li><p>你的徒手攻击获得强力特征。</p></li><li><p>当你将一个生物减至 0 生命值时，你恢复等同于你等级一半加上你咒缚值的生命值。</p></li></ul>"
+        },
+        "Effect: Halt Steps": {
+            "name": "效果：止步 Effect: Halt Steps",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.2f8ri4nftq4z8oJh]{止步} 授予</p><hr /><p>你的速度直至起源者下一回合结束承受 -10尺状态减值。</p>"
+        },
+        "Effect: Dream Logic - Object Fallacy": {
+            "name": "效果：梦之逻辑——物品谬误 Effect: Dream Logic - Object Fallacy",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IOIBGIvKtLsit2dZ]{幻梦之理} 在掷得 1 时授予</p><hr /><p>当此效果激活时，你的「请求」或「威吓」获得 +1环境加值。</p>"
+        },
+        "Aura: Overwhelming Festivities": {
+            "name": "灵气：席卷狂欢 Aura: Overwhelming Festivities",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.LsoSNdvocpMcOZLv]{压倒性狂欢} 授予</p><hr /><p>灵气内的敌人若情绪效果豁免失败或获得惊惧状态，承受 @Damage[(2 + (ceil(@item.level /2)-1))d4[mental,persistent]] 伤害。</p>"
+        },
+        "Effect: Web of Darkness": {
+            "name": "效果：暗网 Effect: Web of Darkness",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ygUiIHPC2ZQEMcl0]{黑暗之网} 授予</p><hr /><p>根据你的成功等级，你的速度承受环境减值。</p>"
+        },
+        "Effect: Overwhelming Festivities": {
+            "name": "效果：席卷狂欢 Effect: Overwhelming Festivities",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.m7RLoqSYkgvv8pyz]{灵气：席卷狂欢} 授予</p><hr /><p>如果你的情绪效果豁免失败或获得惊惧状态，你承受 @Damage[(2 + (ceil(@item.level /2)-1))d4[mental,persistent]] 伤害。</p>"
+        },
+        "Effect: Reveal the Mystery (Tool)": {
+            "name": "效果：揭示秘示域（工具） Effect: Reveal the Mystery (Tool)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.unktIfBngeF55LrH]{工具} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xWVzGav9VGxTgw5X]{奇物启示} 授予</p><hr /><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.CuriosRevelation]</p>"
+        },
+        "Ephemeral Effect: Preparatory Cremation": {
+            "name": "瞬时效果：预备焚化 Ephemeral Effect: Preparatory Cremation",
+            "description": "<p><strong>请勿直接使用！</strong></p><p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Qkrxlll3LxBXBXup]{效果：预备焚化} 授予</p><hr /><p>赋予你的攻击死亡特征。</p>"
+        },
+        "Charm Curio": {
+            "name": "护符奇物 Charm Curio",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CuriosForm]</p>"
+        },
+        "Effect: Dream Logic - Untethered to Ground": {
+            "name": "效果：梦之逻辑——不系于地 Effect: Dream Logic - Untethered to Ground",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IOIBGIvKtLsit2dZ]{幻梦之理} 在掷得 3 时授予</p><hr /><p>你直至下一回合结束获得等同于你陆上速度的飞行速度。</p>"
+        },
+        "Effect: Seeds of Divinity (Bountiful Bush)": {
+            "name": "效果：神性之种（茂盛丛林） Effect: Seeds of Divinity (Bountiful Bush)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.6eJzIrMiNtOTzhCR]{神性之种} 在选择「茂盛」时授予</p><hr /><p>你在持续时间内获得 [[/r 4 + 2 * (@item.level -1)]] 临时生命值。</p>"
+        },
+        "Effect: The Mystery Grows": {
+            "name": "效果：秘示域渐长 Effect: The Mystery Grows",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.A7RfY8hjBQ4qYReT]{秘示域渐长} 授予</p><hr /><p>你赋予自己对你「奇物之先见」灵气内生物的伤害与治疗等同于你等级一半（向上取整）的状态加值，直至下一回合结束。该状态加值仅适用于你的打击、先知法术或无持续时间的咒缚动作。每个生物每个效果只能受到此伤害或此治疗一次，即使该效果会对其多次造成伤害或治疗。</p>"
+        },
+        "Effect: Life of the Party": {
+            "name": "效果：派对灵魂 Effect: Life of the Party",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IwJEKkV4PX7pY3V9]{派对之魂} 授予</p><hr /><p>你在 1分钟内获得临时生命值；并在临时生命值消失之前，伤害获得 +2状态加值。</p>"
+        },
+        "Effect: Automummification": {
+            "name": "效果：自我木乃伊化 Effect: Automummification",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.1CQxDxHbTcGwoojQ]{自我木乃伊化} 授予</p><hr /><p>你成为木乃伊，获得基础亡灵效益。当法术激活期间，如果你未使用具有听觉、操作或移动特征的动作，你在此持续时间结束时自动延长法术 10分钟，并在法术持续时间通常会结束时持续如此延长。如果在此形态下某生物自你施法以来未见过你移动，则你的察觉 DC 获得 +4环境加值。</p>"
+        },
+        "Effect: Self-Stitching Wounds": {
+            "name": "效果：自缝伤口 Effect: Self-Stitching Wounds",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.cnmps3P2DZSaME5C]{自缝伤口} 授予</p><hr /><p>你获得等同于你咒缚值 4 倍的快速治疗。</p>"
+        },
+        "Effect: Spirit Squire": {
+            "name": "效果：精魂侍从 Effect: Spirit Squire",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.XvQ1DfNuSiwI5U1B]{精魂随从} 授予</p><hr /><p>你的 AC 获得 +1环境加值。</p>"
+        },
+        "Effect: Speak in Tongues (Gain One Language)": {
+            "name": "效果：异言能语（获得一种语言） Effect: Speak in Tongues (Gain One Language)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.hcj2HQSwgRXUEDKz]{通晓万言} 授予</p><hr /><p>你在咒缚期间学会一种语言。</p>"
+        },
+        "Script Curio": {
+            "name": "经文奇物 Script Curio",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CuriosForm]</p>"
+        },
+        "Effect: Cryptic Murmurings": {
+            "name": "效果：晦涩低语 Effect: Cryptic Murmurings",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.MOIyXI1N05xHErEb]{晦涩低语} 授予</p><hr /><p>你在未来 1天内的相关遭遇里，对先攻获得环境加值或减值。</p>"
+        },
+        "Effect: Aura of Foresight": {
+            "name": "效果：先见之灵气 Effect: Aura of Foresight",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.SzHSgHXgBgxhyVsH]{灵气：先见之灵气} 授予</p><hr /><p>只要你在起源者的灵气内，他们便对你获得各种效益。</p>"
+        },
+        "Utensil Curio: Advanced Alchemy": {
+            "name": "器皿奇物：高级炼金 Utensil Curio: Advanced Alchemy",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CurioAdept]</p><hr /><p><strong>Foundry 提示</strong> 由于 PF2e 系统的某个 Bug（？）（疏漏？）会导致 CraftingAbility RE 完全忽略谓词，因此被分离为单独的特性。</p>"
+        },
+        "Effect: Awakened State": {
+            "name": "效果：觉醒状态 Effect: Awakened State",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.GmJ5oShNqLUg4JqB]{幻象} 机制授予</p><hr /><p>你可以使用此效果来表示处于觉醒状态。</p><p>要完整复刻其机制，将你的咒缚状态设置为低于其上限 1级（用于咒缚动作）。「幻视」会改用你的最大咒缚值。</p>"
+        },
+        "Aura: Amplified Accompaniment": {
+            "name": "灵气：放大伴奏 Aura: Amplified Accompaniment",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.u5ZHCGWZtZjpEdSJ]{扩声伴奏} 授予</p><hr /><p>该区域内产生的听觉与音波效果将其射程增加 30尺；并且在该区域内时，语言效果不再要求目标共享语言。区域内的生物对音波伤害获得等同于你咒缚值的弱点，或将其音波伤害弱点提升相同数量。免疫音波伤害的生物仍然免疫。</p>"
+        },
+        "Effect: Reveal the Mystery (Weapon)": {
+            "name": "效果：揭示秘示域（武器） Effect: Reveal the Mystery (Weapon)",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iOygFdgebKxOf857]{武器} + @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.xWVzGav9VGxTgw5X]{奇物启示} 授予</p><hr /><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.CuriosRevelation]</p>"
+        },
+        "Utensil Curio": {
+            "name": "器皿奇物 Utensil Curio",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CuriosForm]</p>"
+        },
+        "Effect: Enchanting Rhapsody": {
+            "name": "效果：魅惑狂想曲 Effect: Enchanting Rhapsody",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.jdkPJ3JOhCyjdxu5]{魅惑狂想曲} 授予</p><hr /><p>你对抗心灵效果的豁免直至离开区域且 1轮后承受状态减值。</p>"
+        },
+        "Effect: Curse of Gelid Presence": {
+            "name": "效果：寒霜临在之诅咒 Effect: Curse of Gelid Presence",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.WkHeAsDV5cy2JkSr]{冰封临在之咒} 授予</p><hr /><p>你的速度减少 10尺，最低至 0。</p>"
+        },
+        "Effect: Foreseen Retaliation": {
+            "name": "效果：先知反击 Effect: Foreseen Retaliation",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ncDfIGvZ4X74q3Tb]{预见反击} 授予</p><hr /><p>对那些起源者已读取其未来的目标，你的打击获得等同于起源者等级一半（向上取整）的状态加值。</p>"
+        },
+        "Effect: Contagious Festivities": {
+            "name": "效果：传染狂欢 Effect: Contagious Festivities",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Lfw8veumNzl5xXVk]{感染欢宴} 授予</p><hr /><p>你对伤害获得等同于起源者咒缚值两倍的状态加值。</p>"
+        }
+    }
+}

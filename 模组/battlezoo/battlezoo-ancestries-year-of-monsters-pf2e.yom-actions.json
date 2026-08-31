@@ -1,0 +1,62 @@
+{
+  "label": "动作\nActions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Demonic Marauder": "恶魔劫掠者\nDemonic Marauder",
+    "Nymph": "宁芙（特征）\nNymph",
+    "Demon": "恶魔\nDemon",
+    "Sidhe": "西德族\nSidhe",
+    "Gremlin": "小魔怪（特征）\nGremlin",
+    "Oni": "恶鬼（特征）\nOni",
+    "Intelligent Weapon": "智能武器\nIntelligent Weapon"
+  },
+  "entries": {
+    "Dog Form": {
+      "name": "犬形态 Dog Form",
+      "description": "<p>你可以在你的人形形态与狗形态之间来回切换，狗形态为一只特定的小型犬（通常毛发蓬乱且呈苔绿色）。处于狗形态时，你不能使用武器、盾牌或任何其他手持物品，并且你在具有操作（特征）的动作方面可采取的动作会受到限制。你唯一能采取的操作动作是施放具有姿势成分的法术，或诸如打开一扇未上锁的门之类的简单互动动作。你的狗形态不能执行需要手指或显著手部灵巧度的动作，包括任何需要进行检定才能完成的动作。GM可能会判定其他操作动作也适合你的狗形态。处于狗形态时你可以说话，而你唯一能进行的徒手攻击是颚部徒手攻击，造成1d6穿刺伤害，并且属于斗殴武器组。你可以无限期保持狗形态，直到你选择切换回去为止。</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.yBcaOJ2xWJAV0WVq]{效果：狗形态}</p>\n<p>You can switch back and forth between your humanoid form and your dog form, a specific Small dog (typically shaggy and moss green). While in dog form, you can't use weapons, shields, or other held items of any sort, and you are limited in what actions you can take that have the manipulate trait. The only manipulate actions you can take are to Cast a Spell with somatic components or simple Interact actions such as opening an unlocked door. Your dog form can't perform actions that require fingers or significant manual dexterity, including any action that would require a check to accomplish. The GM might determine other manipulate actions are appropriate for your dog form. While in dog form you can speak, and the only unarmed attacks you can make are jaws unarmed attacks that deal 1d6 piercing damage and are in the brawling weapon group. You can remain in dog form indefinitely until you choose to switch back.</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.yBcaOJ2xWJAV0WVq]{Effect: Dog Form}</p>"
+    },
+    "Maraud": {
+      "name": "劫掠 Maraud",
+      "description": "<p>你在战场上四处游荡寻求混乱。疾步至多两次（如果你拥有对应的移动类型，你可以用掘地、攀爬、飞行或游泳动作替换其中一次或两次疾步）。如果你在移动结束时处于某个敌人的近战触及范围内，你可以对该敌人进行一次近战打击。若你进行的打击是通过 @UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-feats.Item.RQBlbzOPd4h3Scsj]{恶魔打击} 专长获得的徒手攻击，则你获得等同于武器伤害骰数量的环境加值，加入该次伤害掷骰。</p>\n<p>You rove across the battlefield in search of mayhem. Stride up to twice (you can replace either or both of these Strides with Burrow, Climb, Fly, or Swim actions if you have the corresponding movement type). If you end your movement within melee reach of a foe, you can make a melee Strike against that foe. If the Strike you made was with an unarmed attack granted by the @UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-feats.Item.RQBlbzOPd4h3Scsj]{Demonic Strikes} feat, you gain a circumstance bonus to the damage roll equal to the number of weapon damage dice.</p>"
+    },
+    "Serene Discipline": {
+      "name": "宁心戒律 Serene Discipline",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<p><strong>触发</strong> 你意志豁免失败</p>\n<hr />\n<p>即使在战斗的混沌中，你也能保持纪律，而你的热情高涨。你对触发的豁免进行重骰，并使用较好的结果。</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You fail a Will saving throw</p>\n<hr />\n<p>Even in the chaos of battle, you maintain your discipline as your enthusiasm soars. You reroll the triggering saving throw and use the better result.</p>"
+    },
+    "Produce Fruit": {
+      "name": "结出果实 Produce Fruit",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你产出水果。若一名能够从水果中获取营养的活生物在接下来的1小时内以一个互动动作食用该水果，则其恢复1d8生命值，且你在1级之后每超出2个等级，额外恢复1d8生命值。该水果的效果具有治疗、死灵、正能量与原能（特征）特征。</p>\n<p>[[/r (floor(@actor.level/2)+1)d8[healing]]]{Leveled Healing}</p>\n<p><strong>Frequency</strong> Once per day</p>\n<hr />\n<p>You produce fruit. If a living creature that can derive sustenance from fruit consumes the fruit as an Interact action within the next hour, they regain 1d8 Hit Points, plus an additional 1d8 Hit Points for every 2 of your levels beyond 1st. The fruit's effect has the healing, necromancy, positive, and primal traits.</p>\n<p>[[/r (floor(@actor.level/2)+1)d8[healing]]]{Leveled Healing}</p>"
+    },
+    "Pugwampi Jinx": {
+      "name": "普格万皮诅咒 Pugwampi Jinx",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p>你使30尺内的一个生物（非动物、小魔怪（特征）或豺狼人）变得极其倒霉。目标必须尝试一次 @Check[will|against:class-spell] 豁免，对抗你更高的职业DC或法术DC，并产生以下效果。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 在你下个回合开始前，目标第一次尝试进行攻击掷骰或技能检定时，必须掷骰两次并使用较差的结果。</p>\n<p><strong>大成功或大失败</strong> 持续1轮，每当目标尝试进行攻击掷骰或技能检定时，都必须掷骰两次并使用较差的结果。</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.3QR2PH4fMQHXBAmz]{效果：普格万皮诅咒}</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p>You cause a creature within 30 feet, other than an animal, a gremlin, or a gnoll, to become extremely unlucky. The target must attempt a @Check[will|against:class-spell] save against the higher of your class DC or spell DC, with the following effects.</p>\n<p><strong>Success</strong> The target is unaffected.</p>\n<p><strong>Failure</strong> The first time before your next turn that the target attempts an attack roll or skill check, it must roll twice and use the worse result.</p>\n<p><strong>Critical Failure</strong> For 1 round, every time that the target attempts an attack roll or skill check, it must roll twice and use the worse result.</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.3QR2PH4fMQHXBAmz]{Effect: Pugwampi Jinx}</p>"
+    },
+    "Create Golden Apple": {
+      "name": "创造金苹果 Create Golden Apple",
+      "description": "<p>你可以让金色光芒缠绕一个至多 2 负载的物体，将该物体压缩为一个由金色光芒构成的魔法苹果，其负载为轻。原本的物品在苹果内清晰可见，使他人能够辨认出该苹果是原物品以变形后的形态存在。若你再次使用 Create Golden Apple、在苹果与你分离 1 分钟后，或持有该苹果的任何人为了结束该效果而与该苹果进行交互，则金苹果会恢复为其原本的形态。</p>\n<p>You can spin golden light around an object of up to 2 Bulk to condense the object into a magic apple made of golden light, which has light Bulk. Within the apple, the original item is visible, allowing others to discern that the apple is the original item in a transformed shape. The golden apple reverts back to its original shape if you use Create Golden Apple again, after 1 minute if the apple separated from you, or if whoever is holding the apple Interacts with the apple in order to end the effect.</p>"
+    },
+    "Change Shape (Oni)": {
+      "name": "变化形态（恶鬼（特征）） Change Shape (Oni)",
+      "description": "<p>你会变形为由你的传承所决定的特定替代类人形态。若你的传承未列出形态，你的替代形态为你成长之地最常见的中型类人族裔（通常是人类）。该形态与真实形态拥有相同的年代与体型，并具备大致对应的身体特征，例如发色。使用改变形态视为为欺瞒的【冒充】用途制造伪装。处于此形态时，你失去任何从恶鬼传承或族裔专长中获得的徒手打击。你可以无限期保持替代形态，并且可以再次使用此动作切换回你的真实恶鬼形态。</p>\n<p>You transform into a specific alternate humanoid form determined by your heritage. If your heritage doesn't list a form, your alternate form is the most common Medium humanoid ancestry prevalent where you grew up (typically human). This form is the same age and body type as your true form and has roughly analogous physical traits, such as hair color. Using Change Shape counts as creating a disguise for the Impersonate use of Deception. You lose any unarmed Strikes you gained from an oni heritage or ancestry feat in this form. You can remain in your alternate form indefinitely, and you can shift back to your true oni form by using this action again.</p>"
+    },
+    "Cat Form": {
+      "name": "猫形态 Cat Form",
+      "description": "<p>你可以在你的人形形态与猫形态之间来回切换；猫形态是一只特定的超小型猫（通常为黑色），胸前有一小块颜色截然不同的斑点（通常为白色）。处于猫形态时，你无法使用武器、盾牌或任何其他类型的手持物品，并且你在可执行的带有操作（特征）的动作方面会受到限制。你唯一能进行的操作动作是施放带有姿势成分的法术，或诸如打开一扇未上锁的门之类的简单交互动作。你的猫形态无法执行需要手指或显著手部灵巧度的动作，包括任何需要进行检定才能完成的动作。GM 可能会判定其他操作动作也适用于你的猫形态。处于猫形态时你可以说话，并且你唯一能进行的徒手攻击是颚部徒手攻击：造成 1d4 穿刺伤害，具有灵巧与娴熟特征，并且属于拳斗武器组。你可以无限期保持猫形态，直到你选择切换回来为止。</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.NMh5sJCyc2LGa3C5]{效果: 猫形态}</p>\n<p>You can switch back and forth between your humanoid form and your cat form, a specific Tiny cat (typically black) with a spot of wildly different color on your chest (typically white). While in cat form, you can't use weapons, shields, or other held items of any sort, and you are limited in what actions you can take that have the manipulate trait. The only manipulate actions you can take are to Cast a Spell with somatic components or simple Interact actions such as opening an unlocked door. Your cat form can't perform actions that require fingers or significant manual dexterity, including any action that would require a check to accomplish. The GM might determine other manipulate actions are appropriate for your cat form. While in cat form you can speak, and the only unarmed attacks you can make are jaws unarmed attacks that deal 1d4 piercing damage, have the agile and finesse traits, and are in the brawling weapon group. You can remain in cat form indefinitely until you choose to switch back.</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.NMh5sJCyc2LGa3C5]{Effect: Cat Form}</p>"
+    },
+    "Project Avatar": {
+      "name": "项目头像 Project Avatar",
+      "description": "<p>你在你的空间中显现一个化身（若你已经在某个生物的空间中，则在相邻空间显现），或使你当前已显现的化身解除显现。当你的化身显现时，它会以挥舞着你或将你收纳的样子出现，由你选择其一；若先前有其他生物正握持着你，它将不再握持你，而改由你的化身握持你。化身出现在你的空间中，这可能意味着它出现在危险的位置（例如，若某个怪物在你处于无生命形态时吞下你，你的化身会出现在该怪物体内）。</p>\n<p>You manifest an avatar in your space (or in an adjacent space if you were already in a creature's space) or unmanifest your currently manifested avatar. When your avatar manifests, it appears wielding you or with you stowed, whichever you choose; if another creature was previously holding you, it's no longer holding you, and your avatar is holding you instead. The avatar appears in your space, which could mean it appears in a dangerous location (for instance, if a monster swallows you in inanimate mode, your avatar appears inside the monster).</p>"
+    },
+    "Cower": {
+      "name": "畏缩 Cower",
+      "description": "<p>你本能地让自己缩成一团并畏缩，保护你的四肢与重要器官。你获得+1环境加值至AC，直到你下个回合开始。</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.BeSTjDbXCusclU8a]{效果：畏缩}</p>\n<p>You instinctively make yourself smaller and cower, protecting your limbs and vital organs. You gain a +1 circumstance bonus to AC until the start of your next turn.</p>\n<p>@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-effects.Item.BeSTjDbXCusclU8a]{Effect: Cower}</p>"
+    },
+    "Reactive Slime": {
+      "name": "反应黏液 Reactive Slime",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 一个位于你触及内的生物以一次打击成功命中你</p>\n<hr />\n<p> 你将酸性的、如血般的黏液喷向攻击者。攻击者受到 [[/r 1d10[acid]]] 伤害，并进行一次 @Check[reflex|against:class-spell|basic:true] 豁免，对抗你的职业DC或法术DC中较高者。于第3等级，以及之后每2等级，酸蚀伤害增加1d10。</p>\n<p>[[/r ceil(@actor.level/2)d10[acid]]]{Leveled Acid Damage}</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> A creature within your reach successfully hits you with a Strike</p>\n<hr />\n<p> You expel your acidic, bloodlike slime against the attacker. The attacker takes [[/r 1d10[acid]]] damage with a @Check[reflex|against:class-spell|basic:true] save against the higher of your class DC or spell DC. At 3rd level, and every 2 levels thereafter, the acid damage increases by 1d10.</p>\n<p>[[/r ceil(@actor.level/2)d10[acid]]]{Leveled Acid Damage}</p>"
+    }
+  }
+}

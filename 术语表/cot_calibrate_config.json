@@ -1,0 +1,31 @@
+{
+    "openai_api_key": "",
+    "openai_base_url": "https://api.openai.com/v1",
+    "model": "gpt-5.4",
+    "fallback_model": "gpt-5-mini",
+    "use_responses_api": true,
+    "max_retries": 2,
+    "request_timeout_seconds": 90,
+    "long_text_timeout_seconds": 240,
+    "long_text_char_threshold": 6000,
+    "target_rpm": 9900,
+    "max_workers": 64,
+    "glossary_path": "glossary.json",
+    "extra_glossary_path": "glossary_cot_ai.json",
+    "system_name": "Pathfinder 2e (Claws of the Tyrant / 暴君之爪)",
+    "system_prompt_override": "",
+    "files": [
+        "pf2e-claws-of-the-tyrant.claws-of-the-tyrant.json",
+        "claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-content.json"
+    ],
+    "file_pairs": [],
+    "batch_max_chars": 10000,
+    "batch_max_fields": 30,
+    "group_depth": 4,
+    "skip_untranslated": true,
+    "skip_markup_only": true,
+    "skip_keys": ["command", "formula", "img", "src", "flags", "mapping"],
+    "include_keys_only": [],
+    "report_path": "cot_calibration_report.json",
+    "dry_run_sample_batches": 5
+}

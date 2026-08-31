@@ -1,0 +1,64 @@
+{
+  "id": "storyframe",
+  "title": "Storyframe",
+  "description": "Journal-integrated speaker and skill check manager with synchronized player portraits",
+  "version": "1.11.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "RoiLeaf",
+      "discord": "RoiLeaf",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "storyframe.mjs"
+  ],
+  "styles": [
+    "styles/design-tokens.css",
+    "styles/gm-sidebar-base.css",
+    "styles/gm-sidebar-controls.css",
+    "styles/gm-sidebar-journal.css",
+    "styles/gm-sidebar-popups.css",
+    "styles/speaker-wheel.css",
+    "styles/scene-editor.css",
+    "styles/dc-presets.css",
+    "styles/dc-preset-dropdown.css",
+    "styles/player-viewer.css",
+    "styles/player-sidebar.css",
+    "styles/challenge-builder.css",
+    "styles/challenge-library.css",
+    "styles/roll-request-dialog.css",
+    "styles/target-selector-dialog.css"
+  ],
+  "socket": true,
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module"
+      }
+    ]
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "cn",
+      "name": "Chinese",
+      "path": "lang/cn.json"
+    }
+  ],
+  "flags": {
+    "canUpload": true
+  },
+  "url": "https://github.com/roi007leaf/storyframe",
+  "manifest": "https://github.com/roi007leaf/storyframe/releases/latest/download/module.json",
+  "download": "https://github.com/roi007leaf/storyframe/releases/download/1.11.0/module.zip"
+}

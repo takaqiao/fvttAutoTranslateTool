@@ -1,0 +1,36 @@
+<section class="sheet-header flexcol">
+    <header class="title flexrow">
+        <input class="charname" name="name" type="text" value="{{source.name}}" placeholder="Actor Name">
+        <div class="advancement flexrow">
+            <span><i class="threat-icon {{threat.icon}}"></i> Level</span>
+            <div class="controls flexcol">
+                <button type="button" class="icon fa-solid fa-caret-up {{#unless canLevelUp}}inactive{{/unless}}"
+                        data-tooltip aria-label="{{localize 'ACTOR.ADVERSARY.ACTIONS.IncreaseLevel'}}"
+                        data-action="levelIncrease"></button>
+                <button type="button" class="icon fa-solid fa-caret-down {{#unless canLevelDown}}inactive{{/unless}}"
+                        data-tooltip aria-label="{{localize 'ACTOR.ADVERSARY.ACTIONS.DecreaseLevel'}}"
+                        data-action="levelDecrease"></button>
+            </div>
+        </div>
+        <input type="text" class="level" value="{{levelDisplay}}" disabled>
+    </header>
+
+    <div class="subtitle flexrow">
+        <h2 class="taxonomy flexrow {{#if incomplete.taxonomy}}inactive{{/if}}" data-action="editTaxonomy"
+            {{#if incomplete.taxonomy}}data-tooltip="WALKTHROUGH.ConfigureTaxonomy"{{/if}}>
+            <a>{{#if incomplete.taxonomy}}<i class="fa-solid fa-circle-plus"></i> {{/if}}{{taxonomyName}}</a>
+        </h2>
+        <h2 class="archetype flexrow {{#if incomplete.archetype}}inactive{{/if}}" data-action="editArchetype"
+            {{#if incomplete.archetype}}data-tooltip="WALKTHROUGH.ConfigureArchetype"{{/if}}>
+            <a>{{#if incomplete.archetype}}<i class="fa-solid fa-circle-plus"></i> {{/if}}{{archetypeName}}</a>
+        </h2>
+        <div class="metadata flexrow">
+            {{formInput fields.advancement.fields.rank value=source.system.advancement.rank labelAttr="label"}}
+            <div class="size flexrow">
+                <span class="label" data-tooltip="TAXONOMY.FIELDS.movement.size.hint">{{localize "TAXONOMY.FIELDS.movement.size.label"}}</span>
+                <span role="button" tabindex="0" class="hex" data-action="editSize"
+                      aria-label="{{localize 'ACTOR.ACTIONS.EditSize'}}" data-tooltip>{{actor.size}}</span>
+            </div>
+        </div>
+    </div>
+</section>

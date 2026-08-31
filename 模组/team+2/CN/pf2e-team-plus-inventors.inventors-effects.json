@@ -1,0 +1,96 @@
+{
+    "label": "发明家+ 效果 Inventors+ Effects",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Effect: Reverberate": {
+            "name": "效果：反弹声波 Effect: Reverberate",
+            "description": "<p>你的小器械产生一阵高频。你的打击对敌人施加反弹声波效果，并在 1分钟内获得听觉特征。当你成功打击一个生物后，直到你下一回合开始前，该生物对抗听觉效果承受 -1环境减值；当其受到听觉效果伤害时，承受额外等同于你智力调整值的伤害。反弹声波结束后，你的小器械需重新调音变得不可用，1分钟内你不能再次使用反弹声波。免疫听觉特征的生物仍然可以被你的打击正常作用，即便它们对反弹声波的效果免疫，但它们对反弹声波的伤害免疫。</p>\n"
+        },
+        "Effect: Invigoration Link": {
+            "name": "效果：充能连接 Effect: Invigoration Link",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.OAJJz0ey8LU37Ghc]{充能连接} 授予</p>\n<p>你在你的大发明与 30尺内一名盟友之间建立连接，持续 4轮；该盟友须保持在 60尺内，否则你的连接断开。目标立即获得 2 加上你等级一半的临时生命值，持续到你的连接保持激活时。在你之后每个回合开始时，若你的连接仍激活于该盟友身上，你将其源自充能连接的临时生命值增加 1 加上你等级一半；如果它没有源自充能连接的临时生命值，则改为赋予 1 加上你等级一半的临时生命值。</p>"
+        },
+        "Effect: Reverberate Enemy": {
+            "name": "效果：反弹声波敌人 Effect: Reverberate Enemy",
+            "description": "<p>当你以反弹声波打击敌人后，将此效果施加给该敌人。</p>"
+        },
+        "Effect: Frigerate": {
+            "name": "效果：制冷 Effect: Frigerate",
+            "description": "<p>你的小器械产生凝结效果，使敌人的物质减速。在 1分钟内，当你成功打击一个生物时，它的速度直至你下一回合开始前承受 -5尺状态减值。受此状态减值影响的生物若使用具有移动特征的动作，会承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))]{智力调整值} 的伤害。该伤害类型与该次打击的伤害类型相同。制冷结束后，你的小器械会冻结而变得不可用，1分钟内你不能再次使用制冷。</p>\n"
+        },
+        "Effect: Dynamic Sheeting": {
+            "name": "效果：动态甲衣 Effect: Dynamic Sheeting",
+            "description": "<p>AC 加值 +5；敏捷上限 +1；检定减值 –2；速度减值 –10尺；力量 +3；体积 3；类别 板甲。</p>"
+        },
+        "Effect: Frigerate Enemy": {
+            "name": "效果：制冷敌人 Effect: Frigerate Enemy",
+            "description": "<p>当你以制冷打击敌人后，将此效果施加给该敌人。</p>"
+        },
+        "Effect: Perfected Appendages": {
+            "name": "效果：完美附肢 Effect: Perfected Appendages",
+            "description": "<p>如果你选择进行一次打击，你的附肢视为徒手攻击，造成 1d4 由你选择的钝击、穿刺或挥砍伤害，并具有触及特征，属于拳斗武器组。你在获得此专长时即选定伤害类型，但可以花费 1小时调整附肢以将伤害更改为另一种你所选的类型。</p>"
+        },
+        "Effect: Elemental Entanglement Success": {
+            "name": "效果：元素纠缠成功 Effect: Elemental Entanglement Success",
+            "description": "<p>当 30尺内的生物受到你所选类型的伤害时，它在你停止维持你的理论之前也获得你预测的弱点。</p>"
+        },
+        "Effect: Planar Focus": {
+            "name": "效果：位面聚焦 Effect: Planar Focus",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.dS9vI1BxqUKcU4s9]{位面聚焦} 授予</p>\n<p>在 3轮内，你对精魂与虚空伤害获得等同于 3 加上你等级的抗力。</p>"
+        },
+        "Effect: Repulse": {
+            "name": "效果：排斥 Effect: Repulse",
+            "description": "<p>你的小器械形成一个磁力气泡，保护你并赋予你提升的推开敌人的能力。你被排斥力充能，让你能在 1分钟内使用制作熟练度代替健体进行卸武、移位或推撞。当你处于排斥效果之下时，每当你成功使用上述其中一项动作，或借由你的大发明（如磁脉冲）所造成的效果让敌人承受强制移动时，目标承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[bludgeoning]]{智力调整值} 的伤害（若该效果造成伤害，则为同等的额外伤害）。该伤害的类型与产生该效果的类型相同；若该效果不造成伤害，则为钝击伤害。排斥结束后，你的小器械需冷却或重置而变得不可用，1分钟内你不能再次使用排斥。</p>"
+        },
+        "Effect: Crank Up": {
+            "name": "效果：全力开动 Effect: Crank Up",
+            "description": "<p>你的小器械承担艰难工作，让你以最少能量产出最大物理输出。你的速度获得 +10尺状态加值。当你近身搏击时，沿途留下毒性化学物质。在 1分钟内，当你成功打击一个生物时，你在你所选相邻的 @Template[type:square|distance:5] 内以及你回合结束前所穿过的所有方格上留下危险地形。你的危险地形持续 2轮。除你之外通过你危险地形的生物承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[poison]]{智力调整值} 的毒素伤害。全力开动结束后，你的小器械需补充燃料而变得不可用，1分钟内你不能再次使用全力开动。</p>\n"
+        },
+        "Effect: Sonar Alert System": {
+            "name": "效果：声呐警报系统 Effect: Sonar Alert System",
+            "description": "<p>将此效果施加于你的构装体伙伴。</p>\n<p>你的构装体大发明获得 30尺范围内的回声定位作为模糊感官。</p>"
+        },
+        "Effect: Resistance Engine": {
+            "name": "效果：抗力引擎 Effect: Resistance Engine",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.aAhqQ2D5a8RyyExd]{抗力引擎} 授予</p>\n<p>直到你下一回合开始前，你对你所选能量类型（酸蚀、寒冷、电击、火焰、毒素或音波）获得等同于你等级一半的抗力。当处于「超载」效果之下时，该抗力增加 2。你在获得抗力引擎时选定该伤害类型，但可以如常重构能量类型。</p>"
+        },
+        "Effect: Critical Enhancement": {
+            "name": "效果：重击强化 Effect: Critical Enhancement",
+            "description": "<p>由 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.Item.c0NOWRH6eV1dYJgk]{重击强化} 授予</p>\n<p>你的攻击与伤害骰获得 +1状态加值。</p>"
+        },
+        "Effect: Elemental Weapon Systems": {
+            "name": "效果：元素武器系统 Effect: Elemental Weapon Systems",
+            "description": "<p>你构装体的攻击被元素之力强化。其打击额外造成 1点火焰伤害。如果你拥有 @Compendium[pf2e.feats-srd.4KkzwOu2OKYLKSXQ]{可变核心}，你可以将火焰伤害替换为与你可变核心相宜的伤害类型。</p>"
+        },
+        "Effect: Metaphysical Materials": {
+            "name": "效果：形上物料 Effect: Metaphysical Materials",
+            "description": "<p>当你处于虚体形态时，对所有伤害获得等同于你等级一半的抗力，且你免疫精准伤害。</p>"
+        },
+        "Effect: Mutate": {
+            "name": "效果：变异 Effect: Mutate",
+            "description": "<p>你的小器械生长扭曲，渗出内部酸液。在 1分钟内，你的打击造成等同于你智力调整值一半的持续酸蚀伤害。移除此持续伤害的纯骰检定 DC 为 17。变异结束后，你的变体停止运作，凝固成块而变得不可用，1分钟内你不能再次使用变异。</p>"
+        },
+        "Effect: Healing Fog": {
+            "name": "效果：治疗之雾 Effect: Healing Fog",
+            "description": "<p>由</p>\n<p>在 1天内，你下一次对抗疾病或毒素的强韧豁免获得 +1环境加值。</p>"
+        },
+        "Effect: Proximity Scanner": {
+            "name": "效果：近距扫描 Effect: Proximity Scanner",
+            "description": "<p>你可以花费一个具有操作特征的单动作，在 1分钟内将你的震波感知变为 60尺的模糊感官，并将其检定的环境加值提升至 +2。</p>"
+        },
+        "Effect: Full-Metal Sheeting": {
+            "name": "效果：全金属甲衣 Effect: Full-Metal Sheeting",
+            "description": "<p>AC 加值 +6；敏捷上限 +0；检定减值 –3；速度减值 –10尺；力量 +4；体积 4；类别 板甲。</p>"
+        }
+    }
+}

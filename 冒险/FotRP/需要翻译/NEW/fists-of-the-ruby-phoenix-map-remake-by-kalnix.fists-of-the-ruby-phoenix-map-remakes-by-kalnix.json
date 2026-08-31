@@ -1,0 +1,325 @@
+{
+    "label": "赤凰斗士 地图重制（Kalnix） Fists of the Ruby Phoenix Map Remakes by Kalnix",
+    "mapping": {
+        "actors": {
+            "name": "name",
+            "publicNotes": "system.details.publicNotes",
+            "privateNotes": "system.details.privateNotes",
+            "disable": "system.details.disable",
+            "hazarddescription": "system.details.description",
+            "reset": "system.details.reset",
+            "routine": "system.details.routine",
+            "blurb": "system.details.blurb",
+            "stealthdetails": "system.attributes.stealth.details",
+            "hp": "system.attributes.hp.details",
+            "senses": "system.traits.senses.value",
+            "allSaves": "system.attributes.allSaves.value",
+            "ac": "system.attributes.ac.details",
+            "prototypeToken": "prototypeToken.name",
+            "di": "system.traits.di.custom",
+            "languages": "system.traits.languages.custom",
+            "speed": "system.attributes.speed.details",
+            "dr": "system.traits.dr"
+        },
+        "items": {
+            "name": "name",
+            "description": "system.description.value"
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Book 1: Despair on Danger Island": {
+            "name": "第一本：绝岛之殇",
+            "description": "<p>本资源是 Kalnix 重制版的赤凰斗士冒险地图，原书由 Paizo 出版。可在此处购买原书：<a href=\"https://paizo.com/products/btq02eca?Pathfinder-Adventure-Path-Fists-of-the-Ruby-Phoenix\">Paizo 商城</a>。</p><p>欢迎在 Discord 与 Reddit 找到 Kalnix 的更多作品。</p>",
+            "caption": "Paizo《赤凰斗士》冒险路线的地图重制",
+            "macros": {
+                "Ruby Palace Arena - Lava Toggle": {
+                    "name": "赤玉宫竞技场 - 熔岩切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"5x3xN2nWfDAK2yz3\"\nconst tileId= \"q6gwHCCeqgRAXHaT\"\nconst states = [{x: -2700, y: 2600},{x: 2600, y: 1900}]\nmoveTile(sceneId, tileId, states)\n\n// get the current state of the tile to know which position it is in\nconst tileDoc = canvas.scene.tiles.get(\"RlkXosdhXSPtixON\");\n\n// Arrays of secret does for the walls of each position\nconst doors = [\"Zr5rVLQOPfIDFWAO\",\"EZumCcquA9ocqUEL\",\"0EOJgQfTXWXoMU9g\",\"26e4RTh16BB3BwlC\"]\n\ntoggleDoors(doors)\n\n// function to toggle the doors from open to closed or closed to open\nasync function toggleDoors(doorArray)\n{\n\tconst wallIds = doorArray\n\n\tconst {CLOSED, OPEN} = CONST.WALL_DOOR_STATES;\n\tconst {SECRET} = CONST.WALL_DOOR_TYPES;\n\tconst secretDoors = canvas.scene.walls.filter(w => {\n\t  return wallIds.includes(w.id);\n\t});\n\tconst updates = secretDoors.map(w => {\n\t  return {_id: w.id, ds: w.ds === CLOSED ? OPEN : CLOSED};\n\t});\n\tawait canvas.scene.updateEmbeddedDocuments(\"Wall\", updates);\n}"
+                },
+                "Ruby Palace - Elemental Toggle": {
+                    "name": "赤玉宫 - 元素切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"5x3xN2nWfDAK2yz3\"\nconst tileId= \"VVxRWbIRODk01As5\"\nconst states = [{x: -2700, y: 0},{x: 2600, y: 1900}]\nmoveTile(sceneId, tileId, states)"
+                }
+            },
+            "scenes": {
+                "Abandoned Prison": {
+                    "name": "废弃监狱"
+                },
+                "Battle on the Beach": {
+                    "name": "海滩之战"
+                },
+                "Battle on the Beach 2": {
+                    "name": "海滩之战 2"
+                },
+                "Bonmu (“Danger Island”)": {
+                    "name": "邦木岛（「绝岛」）",
+                    "drawings": {
+                        "Created by u/thenewnoisethriller": "由 u/thenewnoisethriller 创作"
+                    }
+                },
+                "Cave Battle": {
+                    "name": "洞窟之战"
+                },
+                "Empty Pond": {
+                    "name": "空塘"
+                },
+                "Forest Arena": {
+                    "name": "森林竞技场"
+                },
+                "Forest Battle": {
+                    "name": "森林之战"
+                },
+                "Jaiban's Lair": {
+                    "name": "贾班的巢穴"
+                },
+                "Mountain Battle": {
+                    "name": "山岳之战"
+                },
+                "Mountain Pass": {
+                    "name": "山道"
+                },
+                "Mountain Path Battle": {
+                    "name": "山道之战"
+                },
+                "Mountain Site": {
+                    "name": "山岳场地"
+                },
+                "Mountain Summit": {
+                    "name": "山巅"
+                },
+                "Plains Battle": {
+                    "name": "平原之战"
+                },
+                "River Site": {
+                    "name": "河边场地"
+                },
+                "Ruby Palace Arena": {
+                    "name": "赤玉宫竞技场",
+                    "drawings": {
+                        "Macros to toggle between map states can be found between player names and the macro bar.": "可在玩家名称与宏命令栏之间找到用于在地图状态间切换的宏命令。"
+                    }
+                },
+                "Ruins Site": {
+                    "name": "遗迹场地"
+                },
+                "Spotfoot Village": {
+                    "name": "斑足村"
+                },
+                "Temple of Irori": {
+                    "name": "义洛理神庙"
+                },
+                "Watchtower": {
+                    "name": "瞭望塔"
+                }
+            },
+            "folders": {
+                "FoTRP Book 1 Macros": "赤凰斗士 第一本 宏命令",
+                "Fists of the Ruby Phoenix Book 1 Map Remakes by Kalnix": "赤凰斗士 第一本 地图重制（Kalnix）"
+            }
+        },
+        "Book 3: King of the Mountain": {
+            "name": "第三本：山中之王",
+            "description": "<p>《山巅之王》的地图重制 Map remakes for King of the Mountain</p>",
+            "macros": {
+                "Kaifen Bay Beach: Spirit World Shift": {
+                    "name": "凯芬湾海滩：灵界切换",
+                    "command": "// define a fundtion to move the tile between states\nasync function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"3j8nhMxLU5bjEayt\"\nconst tileId= \"UN6Hx9YlxwJng7Cj\"\nconst states = [{x: -3800, y: 800},{x: 1000, y: 800}]\n\n// If statement to make sure that darkness goes with past, light goes with present\nif(canvas.scene.darkness == 0)\n{\n// change the scene darkness over time\ncanvas.scene.update({darkness: .5}, {animateDarkness: 5000})\n// wait for 5000ms until you actually change the position of the tiles\nawait new Promise(r => setTimeout(r, 5000));\n}\nelse\n{\n// change the scene darkness over time\ncanvas.scene.update({darkness: 0}, {animateDarkness: 5000})\n// wait for 5000ms until you actually change the position of the tiles\nawait new Promise(r => setTimeout(r, 5000));\n}\n\n\nmoveTile(sceneId, tileId, states)"
+                },
+                "Grand Dojo: Ancient Forest Toggle": {
+                    "name": "大道场：远古森林切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n          // remove the weather\n          game.scenes.viewed.update({weather: \"\"});\n        }\n        else {\n          // make it fall\n          game.scenes.viewed.update({weather: \"leaves\"});\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"lvjqhMMgo50OEXvw\"\nconst tileId= \"10YJjVgDZZp2hXBQ\"\nconst states = [{x: -1200, y: -3750},{x: 1200, y: 1200}]\nmoveTile(sceneId, tileId, states)"
+                },
+                "Grand Dojo: Midnight Lake Toggle": {
+                    "name": "大道场：午夜湖泊切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n          // remove the snow\n          game.scenes.viewed.update({weather: \"\"});\n        }\n        else {\n          // make it snow\n          game.scenes.viewed.update({weather: \"snow\"});\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"lvjqhMMgo50OEXvw\"\nconst tileId= \"XRuxGftSJe2TDEo7\"\nconst states = [{x: 3600, y: -3750},{x: 1200, y: 1200}]\nmoveTile(sceneId, tileId, states)\n\n// If statement to make sure that darkness goes with past, light goes with present\nif(canvas.scene.darkness == 0)\n{\n// change the scene darkness over time\ncanvas.scene.update({darkness: .4}, {animateDarkness: 4000})\n// wait for 5000ms until you actually change the position of the tiles\nawait new Promise(r => setTimeout(r, 4000));\n\n}\nelse\n{\n// change the scene darkness over time\ncanvas.scene.update({darkness: 0}, {animateDarkness: 4000})\n// wait for 5000ms until you actually change the position of the tiles\nawait new Promise(r => setTimeout(r, 4000));\n}"
+                },
+                "Grand Dojo: Scorching Desert": {
+                    "name": "大道场：灼热沙漠",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"lvjqhMMgo50OEXvw\"\nconst tileId= \"EIqoLYoNONZzcsXc\"\nconst states = [{x: -1200, y: 6300},{x: 1200, y: 1200}]\nmoveTile(sceneId, tileId, states)"
+                },
+                "Grand Dojo: Windswept Ravine": {
+                    "name": "大道场：风袭峡谷",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"lvjqhMMgo50OEXvw\"\nconst tileId= \"JHHKIhzJW5JVRKWc\"\nconst states = [{x: 3600, y: 6300},{x: 1200, y: 1200}]\nmoveTile(sceneId, tileId, states)"
+                }
+            },
+            "scenes": {
+                "Iron Mountain Peak": {
+                    "name": "铁山之巅"
+                },
+                "Kaifen Bay Beach": {
+                    "name": "凯芬湾海滩",
+                    "drawings": {
+                        "In the macro folder (in the bottom left between Players and the macro bar) there is a folder called FoTRP Book 3 Macros. Grab the Black Sand Dunes: Spirit World Shift macro which will send the map back in time. Click it again after it is done to go back.": "在宏命令文件夹（屏幕左下方玩家列表与宏命令栏之间）中，有一个名为「FoTRP Book 3 Macros」的文件夹。取出「Black Sand Dunes: Spirit World Shift」宏命令，点击它会把地图送回过去。再次点击则可返回。"
+                    }
+                },
+                "Kipuka": {
+                    "name": "银杏 kipuka",
+                    "drawings": {
+                        "This is a compressed version of the full resolution battlemap. It is much smaller than the full resolution which means it should load faster, but the yellow on the tress is much more washed out.": "这是完整分辨率战图的压缩版本。它比完整分辨率小得多，意味着加载更快，但树叶上的黄色会被洗淡得多。"
+                    }
+                },
+                "Kipuka (Full Resolution)": {
+                    "name": "银杏 kipuka（高清）",
+                    "drawings": {
+                        "This is a full resolution image of the map that is 40MB.  This will probably cause longer load times than usual. However, the standard 80% compression in DungeonDraft I use creates washed out yellows on the trees.": "这是该地图 40MB 的完整分辨率图像，可能造成比平时更长的加载时间。但是我在 DungeonDraft 中使用的标准 80% 压缩会让树叶上的黄色变得灰暗。"
+                    }
+                },
+                "Rai Sho Monastery": {
+                    "name": "来肖修道院"
+                },
+                "Rolling Mines": {
+                    "name": "滚动矿坑"
+                },
+                "Rolling Mines (Variant)": {
+                    "name": "滚动矿坑（变体）",
+                    "drawings": {
+                        "My GM didn't like the encounter in the book so this is a variant map for it.": "我的 GM 不喜欢书中的这场遭遇，因此这是一份替代地图。"
+                    }
+                },
+                "Skies Above the Blasted Lands": {
+                    "name": "荒寂之地上空"
+                },
+                "Syndara's Trash Heap": {
+                    "name": "辛达拉的废墟堆"
+                },
+                "Volcanic Arena": {
+                    "name": "火山竞技场"
+                },
+                "Winter Shore": {
+                    "name": "寒冬之滨",
+                    "drawings": {
+                        "The rowboat is a Tile, so you can move it around the scene if you want.": "那艘划艇是一个「图块（Tile）」，所以您可以根据需要在场景中移动它。"
+                    }
+                },
+                "Fetid Lotus Bog": {
+                    "name": "腐臭莲沼"
+                },
+                "The Night Parade": {
+                    "name": "百鬼夜行"
+                },
+                "Ocean Floor Arena": {
+                    "name": "海底竞技场"
+                },
+                "Solar Jian II (No Background)": {
+                    "name": "太阳剑·二式（无背景）",
+                    "drawings": {
+                        "This map is so you can put your own background under the ship.": "本地图便于您在飞船下方放置自己的背景。"
+                    }
+                },
+                "Solar Jian II (Sky)": {
+                    "name": "太阳剑·二式（天空）"
+                },
+                "Solar Jian II (Space)": {
+                    "name": "太阳剑·二式（太空）"
+                },
+                "Grand Dojo": {
+                    "name": "大道场",
+                    "drawings": {
+                        "Grand Dojo: Midnight Lake": "大道场：午夜湖泊",
+                        "Grand Dojo: Ancient Forest": "大道场：远古森林",
+                        "There are macros in the macro directory that swap forms for the map. They are labeled Grand Dojo: MAPNAME Toggle. Clicking one will move the map onto the main scene and maybe have an additional effect depending on the map. Click the toggle again to remove that map. Make sure you do this before clicking another toggle.": "宏命令目录中有用于切换地图形态的宏命令，命名为「Grand Dojo: 地图名 Toggle」。点击一个会把对应的地图加到主场景上，并可能根据地图带来额外的效果。再点击一次即可撤下该地图。请确保在点击下一个切换之前先撤下当前地图。",
+                        "Grand Dojo: Scorching Desert": "大道场：灼热沙漠",
+                        "Grand Dojo: Windswept Ravine": "大道场：风袭峡谷"
+                    }
+                },
+                "The End": {
+                    "name": "终末",
+                    "drawings": {
+                        "The map has a light source to make it look nicer, but if you want to get fancy, you turn this light source off and add it to Syndara's token to show that he is the center of the demiplane. The settings are Bright Light Radius 250ft, Color Intensity .15, Light Animation Type Swirling Rainbow, Animation Speed 8, Animation Intensity 1": "本地图带有一个光源以便美观；但若您想玩点花式效果，可以关掉这个光源，转而将其添加到辛达拉的标记上，以体现他是该半位面的中心。设置为：明亮光源半径 250 尺，色彩强度 0.15，光照动画类型「旋转彩虹」，动画速度 8，动画强度 1。"
+                    }
+                },
+                "The End.": {
+                    "name": "终末。"
+                },
+                "Glass Lighthouse": {
+                    "name": "琉璃光屋"
+                },
+                "Shattered Spiral": {
+                    "name": "碎裂之螺"
+                }
+            },
+            "folders": {
+                "FoTRP Book 3 Macros": "赤凰斗士 第三本 宏命令",
+                "Fists of the Ruby Phoenix Book 3 Map Remakes by Kalnix": "赤凰斗士 第三本 地图重制（Kalnix）",
+                "Solar Jian II": "太阳剑·二式"
+            }
+        },
+        "Book 2: Ready? Fight!": {
+            "name": "第二本：比赛开始！",
+            "description": "<p>本资源是 Kalnix 重制版的赤凰斗士冒险地图，原书由 Paizo 出版。可在此处购买原书：<a href=\"https://paizo.com/products/btq02eca?Pathfinder-Adventure-Path-Fists-of-the-Ruby-Phoenix\">Paizo 商城</a>。</p><p>欢迎在 Discord 与 Reddit 找到 Kalnix 的更多作品。</p>",
+            "caption": "Paizo《赤凰斗士》冒险路线的地图重制",
+            "macros": {
+                "Tower Form: Double Trapdoor Toggle": {
+                    "name": "高塔形态：双活板门切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"mpbuEqn34hecR4bi\"\nconst tileId= \"en0CHica4ltbYJtK\"\nconst states = [{x: 150, y: 1350},{x: 2100, y: 1650}]\nmoveTile(sceneId, tileId, states)\n\n// get the current state of the tile to know which position it is in\nconst tileDoc = canvas.scene.tiles.get(\"RlkXosdhXSPtixON\");\n\n// Arrays of secret does for the walls of each position\nconst doors = [\"zQeCdh3QWoL9Xw9F\",\"CGGhDB2Dmyzw5jvk\",\"6dABSOreJrskSm2u\",\"d7AJVFJdX0mTTMYj\"]\n\ntoggleDoors(doors)\n\n// function to toggle the doors from open to closed or closed to open\nasync function toggleDoors(doorArray)\n{\n\tconst wallIds = doorArray\n\n\tconst {CLOSED, OPEN} = CONST.WALL_DOOR_STATES;\n\tconst {SECRET} = CONST.WALL_DOOR_TYPES;\n\tconst secretDoors = canvas.scene.walls.filter(w => {\n\t  return wallIds.includes(w.id);\n\t});\n\tconst updates = secretDoors.map(w => {\n\t  return {_id: w.id, ds: w.ds === CLOSED ? OPEN : CLOSED};\n\t});\n\tawait canvas.scene.updateEmbeddedDocuments(\"Wall\", updates);\n}"
+                },
+                "Tower Form: Single Trapdoor Toggle": {
+                    "name": "高塔形态：单活板门切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"mpbuEqn34hecR4bi\"\nconst tileId= \"DY6nlm1HQR8oDTyo\"\nconst states = [{x: 150, y: 900},{x: 1650, y: 1950}]\nmoveTile(sceneId, tileId, states)\n\n// get the current state of the tile to know which position it is in\nconst tileDoc = canvas.scene.tiles.get(\"RlkXosdhXSPtixON\");\n\n// Arrays of secret does for the walls of each position\nconst doors = [\"PJROHeobYUZ5zTNy\",\"PEM2KLxcv1IjqjPH\"]\n\ntoggleDoors(doors)\n\n// function to toggle the doors from open to closed or closed to open\nasync function toggleDoors(doorArray)\n{\n\tconst wallIds = doorArray\n\n\tconst {CLOSED, OPEN} = CONST.WALL_DOOR_STATES;\n\tconst {SECRET} = CONST.WALL_DOOR_TYPES;\n\tconst secretDoors = canvas.scene.walls.filter(w => {\n\t  return wallIds.includes(w.id);\n\t});\n\tconst updates = secretDoors.map(w => {\n\t  return {_id: w.id, ds: w.ds === CLOSED ? OPEN : CLOSED};\n\t});\n\tawait canvas.scene.updateEmbeddedDocuments(\"Wall\", updates);\n}"
+                },
+                "Tower Form: Floating Platform Toggle": {
+                    "name": "高塔形态：悬浮平台切换",
+                    "command": "async function moveTile(sceneId, tileId, states) {\n    if (canvas.scene.id === sceneId) {\n      const changeTile = canvas.scene.tiles.get(tileId);\n      let originalState = true;\n      Object.keys(states[0]).forEach((k) => {\n        if (Object.keys(diffObject(changeTile, states[0])).length > 0) {\n          originalState = false;\n        }\n      });\n      changeTile.update(states[originalState ? 1 : 0]);\n    }\n  }\nconst sceneId = \"mpbuEqn34hecR4bi\"\nconst tileId= \"vgcOXDXM7pIZSmvk\"\nconst states = [{x: 150, y: 1800},{x: 4650, y: 2550}]\nmoveTile(sceneId, tileId, states)\n\n// get the current state of the tile to know which position it is in\nconst tileDoc = canvas.scene.tiles.get(\"RlkXosdhXSPtixON\");\n\n// Arrays of secret does for the walls of each position\nconst doors = [\"jhlals4euceuxick\",\"TFOaUtr6fWyo0bBE\"]\n\ntoggleDoors(doors)\n\n// function to toggle the doors from open to closed or closed to open\nasync function toggleDoors(doorArray)\n{\n\tconst wallIds = doorArray\n\n\tconst {CLOSED, OPEN} = CONST.WALL_DOOR_STATES;\n\tconst {SECRET} = CONST.WALL_DOOR_TYPES;\n\tconst secretDoors = canvas.scene.walls.filter(w => {\n\t  return wallIds.includes(w.id);\n\t});\n\tconst updates = secretDoors.map(w => {\n\t  return {_id: w.id, ds: w.ds === CLOSED ? OPEN : CLOSED};\n\t});\n\tawait canvas.scene.updateEmbeddedDocuments(\"Wall\", updates);\n}"
+                }
+            },
+            "scenes": {
+                "Air Battle": {
+                    "name": "空中之战"
+                },
+                "Empress Yin Opera House": {
+                    "name": "殷后戏院"
+                },
+                "Goka Backstreets": {
+                    "name": "过峡后街"
+                },
+                "Goka Docks": {
+                    "name": "过峡码头"
+                },
+                "Goka Main Street": {
+                    "name": "过峡主街"
+                },
+                "Goka Marketplace": {
+                    "name": "过峡集市"
+                },
+                "Grand Arena: Base Form": {
+                    "name": "大竞技场：基础形态"
+                },
+                "Grand Arena: Maze Form": {
+                    "name": "大竞技场：迷宫形态"
+                },
+                "Grand Arena: Moat Form": {
+                    "name": "大竞技场：护城河形态"
+                },
+                "Grand Arena: Tower Form": {
+                    "name": "大竞技场：高塔形态",
+                    "drawings": {
+                        "Macros to toggle whether trapdoors are open can be found in the script folder at the bottom of the screen in between player names and the macro bar.": "可在屏幕底部、玩家名称与宏命令栏之间的脚本文件夹中找到用于切换活板门开闭状态的宏命令。"
+                    }
+                },
+                "Icefang Aerie": {
+                    "name": "冰牙巢"
+                },
+                "Seven Dragon Bridge": {
+                    "name": "七龙桥"
+                },
+                "Shelyn's Comb": {
+                    "name": "莎琳之梳"
+                },
+                "The Blasting Cap": {
+                    "name": "雷管"
+                },
+                "Tournament Bracket by @Ryokatsudon": {
+                    "name": "锦标赛对阵图（作者 @Ryokatsudon）",
+                    "drawings": {
+                        "Created by @Ryokatsudon on Twitter": "由 Twitter 用户 @Ryokatsudon 创作"
+                    }
+                }
+            },
+            "folders": {
+                "Fists of the Ruby Phoenix Book 2 Map Remakes by Kalnix": "赤凰斗士 第二本 地图重制（Kalnix）",
+                "FoTRP Book 2 Macros": "赤凰斗士 第二本 宏命令"
+            }
+        }
+    }
+}

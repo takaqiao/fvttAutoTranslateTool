@@ -1,0 +1,3004 @@
+{
+  "pf2e.pathfinder-monster-core-2": {
+    "Q6oMLXjmGqF6dxzp": {
+      "name": "Air Wisp",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/air-wisp.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/air-wisp.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/air-wisp.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Of7WVNrWgvkwctfE": {
+      "name": "Amai",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-amai.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-amai.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-amai.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "TbgHiHtPCK59KStC": {
+      "name": "Amphisbaena",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/amphisbaena.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/amphisbaena.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/amphisbaena.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "9Gex7SavD3YJDPBs": {
+      "name": "Arboreal Reaper",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/arboreal-reaper.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/arboreal-reaper.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/arboreal-reaper.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "S1OFq9Ywrr4MHMAg": {
+      "name": "Brood Leech Swarm",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/brood-leech-swarm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/brood-leech-swarm.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/brood-leech-swarm.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "iICvyvPzfyJe4vzk": {
+      "name": "Cockroach Swarm",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/cockroach-swarm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/cockroach-swarm.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/cockroach-swarm.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "pzCgOvNPish9QlTC": {
+      "name": "Emperor Cobra",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/emporer-cobra.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/emporer-cobra.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/emporer-cobra.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "hoqQ2x6x1tffC6wX": {
+      "name": "Kappa",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/kappa.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/kappa.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/kappa.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "UWRydTp1UvpsOWYO": {
+      "name": "Giant Cockroach",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/giant-cockroach.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/giant-cockroach.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/giant-cockroach.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "X6Avn6djuSmMPGrG": {
+      "name": "Great Willow",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-great-willow.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-great-willow.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-great-willow.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "KLMu7hWQWnc0Plt0": {
+      "name": "Hungry Ghost",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-hungryghost.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-hungryghost.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-hungryghost.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "H9P2QB311Qi5IwUo": {
+      "name": "Khravgodon",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/khravgodon.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/khravgodon.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/khravgodon.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "MovMBbHEln0TUlYh": {
+      "name": "Kohoshi",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/shikigami.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/shikigami.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/shikigami.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Z6yCW77f44bEUgLH": {
+      "name": "Living Boulder",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/living-boulder.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/living-boulder.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/living-boulder.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "V96EY8vLy7alnun9": {
+      "name": "Mandragora",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/mandragora.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/mandragora.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/mandragora.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ou78GkBpPX59BeqL": {
+      "name": "Ogre Spider",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/ogre-spider.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/ogre-spider.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/ogre-spider.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "PFB61dvUsakciV0N": {
+      "name": "Slime Mold",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/slime-mold.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/slime-mold.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/slime-mold.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "vgM18Dm3ur29KJjA": {
+      "name": "Spark Moth",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/spark-bat.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/spark-bat.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/spark-bat.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "WzHEogHdIeOWUnfe": {
+      "name": "Sparrow",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/sparrow.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/sparrow.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/sparrow.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "n40ubwOuMGF7HHZ6": {
+      "name": "Unlived Life",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-unlived-life.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-unlived-life.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-unlived-life.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ScawCKxGgd4d0Gle": {
+      "name": "Viper Swarm",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/viper.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/viper.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/viper.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ZQ7lS9TYOFv07m1a": {
+      "name": "War Wraith",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/dread-wraith.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/dread-wraith.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/dread-wraith.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "jWsHDhzrIOqOp29p": {
+      "name": "Xungu",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-xungu.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-xungu.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-xungu.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "Bz8Sexx3bGFhE1Lq": {
+      "name": "Penanggalan",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/penanggalan.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/penanggalan.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/penanggalan.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.season-of-ghosts-bestiary": {
+    "ozi0MnBHVjQQbfNJ": {
+      "name": "Akashti",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-akashti-nindoru.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-akashti-nindoru.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-akashti-nindoru.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "amLD0YfFcG8ejrME": {
+      "name": "Algriever",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-algriever.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-algriever.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-algriever.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "V67VC975O8iC1Yq2": {
+      "name": "Animated Axe",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/animated-axe.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/animated-axe.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/animated-axe.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "WHb1ycftTkk1QNoJ": {
+      "name": "Animated Cookware Swarm",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/animated-cookware-swarm.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/animated-cookware-swarm.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/animated-cookware-swarm.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "1zClr6JrKhMo2xCu": {
+      "name": "Argyrzei",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-argyrzei.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-argyrzei.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-argyrzei.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "oqykabSneBB3BM90": {
+      "name": "Arms of the Drowned",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "z1FBK5Mi6nWxvkn2": {
+      "name": "Exorcist",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-exorcist.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-exorcist.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-exorcist.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "ELmJu6nt0nW1hvqz": {
+      "name": "Dalgyal Gwishin",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-gwishin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-gwishin.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-gwishin.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "HxgtQw1rldkMf83o": {
+      "name": "False Governor",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-false-governor.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-false-governor.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-false-governor.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "IdbrdikgvRguKYNE": {
+      "name": "Familiar Shadow",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/familiar-shadow.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/familiar-shadow.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/familiar-shadow.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "OqE7v9KwZNEO3zHp": {
+      "name": "Fan Hongrui",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-hongrui-fan.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-hongrui-fan.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-hongrui-fan.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "l0y5TlJ6t6AzszZZ": {
+      "name": "Fiendish Reflection",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "zpZYEywWXAeI55iS": {
+      "name": "Goh's Shame",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "2tgUyKdEjrK5hRye": {
+      "name": "Grasping Currents",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Z97fXdQ6kTe7PUIr": {
+      "name": "Guhdggi",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-guhdggi.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-guhdggi.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-guhdggi.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "QZcSgUKKxaBe8OM1": {
+      "name": "Gurglegut",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-gurglegut.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-gurglegut.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-gurglegut.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "6SJPAIVZIiCjh4lZ": {
+      "name": "Haphazard Wood Pile",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "WenuepXKIpftu95Z": {
+      "name": "Heart-Eating Vulture",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/heart-eating-vulture.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/heart-eating-vulture.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/heart-eating-vulture.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "bIoWSQbvs2yeL7PG": {
+      "name": "Heh Shan-Bao",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-shan-bao-heh.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-shan-bao-heh.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-shan-bao-heh.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "PLV1wW0Aa5SNUQM4": {
+      "name": "Heh Shan-Bao (Level 13)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-monstrous-shan-bao-heh.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-monstrous-shan-bao-heh.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-monstrous-shan-bao-heh.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "P6BnwxID1zxZlt9D": {
+      "name": "Hong Meigui",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-meigui-ci.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-meigui-ci.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-meigui-ci.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "QCTOHTwnEo6eq82T": {
+      "name": "Ijda",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-ijda.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-ijda.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-ijda.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "ZzKbQTDlUuyCd0PF": {
+      "name": "Corpse Sugi",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-corpsewood.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-corpsewood.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-corpsewood.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "E1jJ13PVNqcXNWzW": {
+      "name": "Gray Butcher",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-chimisha.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-chimisha.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-chimisha.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "F7Bqz4kI1rhm4AzW": {
+      "name": "Gurglegut",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-ootora.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-ootora.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-ootora.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "zUXFyObT3Rg80dLs": {
+      "name": "Haunting Presence",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "m9A7aYawYu0zkSFY": {
+      "name": "Kalen Bray",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/kalen-bray.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/kalen-bray.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/kalen-bray.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "vY66lXcqlGgwaWah": {
+      "name": "Kugaptee's Centipede",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/titan-centipede.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/titan-centipede.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/titan-centipede.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "L0IUMSl4uON0zV65": {
+      "name": "Kugaptee's Drakauthix",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/drakauthix.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/drakauthix.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/drakauthix.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "wFcdatjBVDsVzbDO": {
+      "name": "Mercenary Enforcer",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/mercenary-enforcer.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/mercenary-enforcer.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/mercenary-enforcer.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "dP5gbdIHXsYFJCvi": {
+      "name": "Mo Douqiu the Hedonist",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-doiqiu.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-doiqiu.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-doiqiu.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "Cc1BuVVrQ5nGG2Hs": {
+      "name": "Monk of Kugaptee",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/kurobozu.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/kurobozu.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/kurobozu.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "oe7BIYlQXZas3TNE": {
+      "name": "Shrine Caretaker",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/combusted.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/combusted.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/combusted.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "43fI9XHecCCvirYr": {
+      "name": "Stingy",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/stingy.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/stingy.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/stingy.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "2FOiW8VcaDyd8EIz": {
+      "name": "Taunting Monk's Skull",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/taunting-skull.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/taunting-skull.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/taunting-skull.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "GMJrIpVi1ZskXVu1": {
+      "name": "Warty",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/warty-1.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/warty-1.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/warty-1.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "2a0uJf5XIt6z2R0Y": {
+      "name": "Iogaka",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-yama.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-yama.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-yama.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "K68BqK1Ero3x8NsK": {
+      "name": "Ithiniak",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-imprecasia.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-imprecasia.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-imprecasia.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "183L006AcuLnHJbY": {
+      "name": "Kagekuma",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-kagekuma-nindoru.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-kagekuma-nindoru.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-kagekuma-nindoru.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "pkmzf4BMRJNXwLTc": {
+      "name": "Kugaptee's Anger",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "nkayyo1O9RFVBvCW": {
+      "name": "Kugaptee's Blessing",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-kugaptees-blessing.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-kugaptees-blessing.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-kugaptees-blessing.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "oYPSmEGw5vifRv0z": {
+      "name": "Kugaptee's Tree",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "skJTZHJZgIAZ9oGN": {
+      "name": "Mago Kai",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-kai-mago.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-kai-mago.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-kai-mago.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "O1KxqCWfO3HUrgHV": {
+      "name": "Manor Wards",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+
+    "0QfL4oXQrDfhfZDs": {
+      "name": "Hu Ban-Niang",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-grannyhu.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-grannyhu.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-grannyhu.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "KhGtAbhgupqJyqET": {
+      "name": "Matsuki Shou",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-oldmatsuki.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-oldmatsuki.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-oldmatsuki.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+
+    "k77t59tuHjiDEXRm": {
+      "name": "Meokdan",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-meokdan.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-meokdan.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-meokdan.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "APu2EqTJ4QdHkwtR": {
+      "name": "Noppera-bo Trickster",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-mugirou.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-mugirou.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-mugirou.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "QSa1PbcvbgDv8Zpr": {
+      "name": "Noppera-Bo Impersonator (Arcane)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "dqsQutshiegWaFPQ": {
+      "name": "Noppera-Bo Impersonator (Divine)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "AsfjgDmWkUxPI6m8": {
+      "name": "Noppera-Bo Impersonator (Martial)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "Mt053Q3jCVLXp6us": {
+      "name": "Noppera-Bo Impersonator (Occult)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "6UkZJRICusE2EOhS": {
+      "name": "Noppera-Bo Impersonator (Primal)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "3KNblm2fWM6XLiS7": {
+      "name": "Noppera-Bo Impersonator (Skilled)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-noppera-bo-impersinator.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-noppera-bo-impersinator.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-noppera-bo-impersinator.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "52dTAJPXCnE48a5a": {
+      "name": "Noppera-bo Grunt",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-noppera-bo-grunt.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-noppera-bo-grunt.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-noppera-bo-grunt.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "zhw2TOrXkWyvle5S": {
+      "name": "Noppera-bo Occultist",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-noppera-bo-occultist.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-noppera-bo-occultist.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-noppera-bo-occultist.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "k9JJEqd1G2EB27Gd": {
+      "name": "Nosois' Vengeance",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "USMiwD8crKdeFybh": {
+      "name": "Path Maiden",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-path-maiden.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-path-maiden.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-path-maiden.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "N69YhHyRWfpfvESy": {
+      "name": "Red-Hooded Thatchling",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-red-hooded-tatchling.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-red-hooded-tatchling.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-red-hooded-tatchling.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+
+    "I9BbG4LH6LP4zlhK": {
+      "name": "Phantom Boar",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/phantom-beast-boar.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/phantom-beast-boar.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/phantom-beast-boar.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "OV671fn8SuClbJip": {
+      "name": "Phantom Gecko",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/phantom-beast-gecko.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/phantom-beast-gecko.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/phantom-beast-gecko.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "dGKC9fWrGLTI7zP3": {
+      "name": "Phantom Raven",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/phantom-beast-raven.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/phantom-beast-raven.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/phantom-beast-raven.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "R805QpID53EycZ5E": {
+      "name": "Phantom Wolf",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-phantomwolf.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-phantomwolf.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-phantomwolf.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "TVi4RDeqw7GDsxp0": {
+      "name": "Sojiruh",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-sojiruh.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-sojiruh.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-sojiruh.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "ONN4yz1NzvvCGBUv": {
+      "name": "Ren Mei Li",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-mei-li-rin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-mei-li-rin.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-mei-li-rin.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "xxx8mtBmNnwrGUGO": {
+      "name": "Rin",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-rin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-rin.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-rin.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "OoTnmIkunSTCPet3": {
+      "name": "Shimmerthief",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-shimmerthief.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-shimmerthief.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-shimmerthief.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "5GZ9o5DlIQIZgLb8": {
+      "name": "Shinigami",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-shinigami.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-shinigami.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-shinigami.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "MNqc1mJwPOOfjoVr": {
+      "name": "Shisagishin",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-shisagishin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-shisagishin.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-shisagishin.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "oai45noF4GX3LZvX": {
+      "name": "Shrine Maiden",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-shrine-maiden.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-shrine-maiden.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-shrine-maiden.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "UIdOFWDyWh9ER1RZ": {
+      "name": "Silkwasp Bandit",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/silkwasp-bandit.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/silkwasp-bandit.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/silkwasp-bandit.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "9ykOAabxlhcD0dM9": {
+      "name": "Spiritual Disruptor",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Qmg2GRJivmrKxJ4C": {
+      "name": "Tenon",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-silsyche.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-silsyche.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-silsyche.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "7Fua7064VlF0Y14D": {
+      "name": "Thatchling",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-thatchling.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-thatchling.webp",
+          "scaleX": 1.6,
+          "scaleY": 1.6
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-thatchling.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "5UCe00Rh9yGBElYT": {
+      "name": "The Chewer",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-undeadkitsune.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-undeadkitsune.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-undeadkitsune.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "4iZxxQFySmU6EOfn": {
+      "name": "Ugly Cute",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-ugly-cute.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-ugly-cute.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-ugly-cute.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "iNxnErfZYW56oeeT": {
+      "name": "Unholy Hunger",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+
+    "3Hwt7nNXIBlDovJi": {
+      "name": "Path Maiden (Spring's Path)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-path-maiden.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-path-maiden.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-path-maiden.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+
+    "CwU5qtPvGmHYvlzN": {
+      "name": "Unwelcoming Facade",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-unwelcomingfacade.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Cxe6UXbm4kHLNRyC": {
+      "name": "Very Drunken Jinkin",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/very-drunken-jinkin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/very-drunken-jinkin.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/very-drunken-jinkin.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "U0yn2XcgMw4bPU5B": {
+      "name": "Warding Bell",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ujCqaRPlw23baewz": {
+      "name": "Weakened Floor",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "HSozUsLp1ufDkJIr": {
+      "name": "Willowshore Waldgeist",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/willowshore-waldgeist.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/willowshore-waldgeist.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/willowshore-waldgeist.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "DueMGlf6tX1bqwSS": {
+      "name": "Witherweird Runes",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "zas6jyBtcVQUaNl0": {
+      "name": "Writhing Hair",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-writing-hair.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-writing-hair.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-writing-hair.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ExTKQvgLI72XGk98": {
+      "name": "Xin Yue",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-xinyue.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-xinyue.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-xinyue.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "BK4gQmGPX4BW4hyb": {
+      "name": "Yami",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-yami.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-yami.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-yami.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "uQG6HB7OIXaPCwtD": {
+      "name": "Yuni",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-yuni.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-yuni.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-yuni.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "uFg1TnTBpXNYGF9o": {
+      "name": "Zhi Hui",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90197-zhihui.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90197-zhihui.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90197-zhihui.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "rYUegSA59suduHs4": {
+      "name": "Zoudou The Zealous",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-zoudou.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-zoudou.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-zoudou.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-npc-core": {
+    "STds4rxF5ESFLLML": {
+      "name": "Aruka",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/aruka.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/aruka.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/aruka.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "bZRZahVaMyzTbJ4u": {
+      "name": "Kum Meng-Sung",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/kum-meng-sung.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/kum-meng-sung.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/kum-meng-sung.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "APn9B54hhRtr0oCQ": {
+      "name": "Zhen Luoyang",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/zhen-luoyang.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/zhen-luoyang.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/zhen-luoyang.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "Aktz95gNNzfAiTzk": {
+      "name": "Town Guard",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/town-guard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/town-guard.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/town-guard.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "qCKNT6U8O0su578A": {
+      "name": "Hu Deming",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-hu-deming.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-hu-deming.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-hu-deming.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "mgEMfxh0VUbBepc2": {
+      "name": "Yuli Sanmi",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/yuli-sanmi.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/yuli-sanmi.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/yuli-sanmi.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "BYpxg06tP5hI6CzQ": {
+      "name": "Hua De-ge",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-de-ge.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-de-ge.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-de-ge.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "CFBDZzfWCANLJcpF": {
+      "name": "Kum Soon-Chong",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-soon-chongkum.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-soon-chongkum.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-soon-chongkum.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "AdZ4EklEmpHViycl": {
+      "name": "Lo Kuon",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-kuonlo.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-kuonlo.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-kuonlo.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "6CRUvM2p9csP735v": {
+      "name": "Sumika",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-sumika.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-sumika.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-sumika.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "a36bfgbqp1lt2bik": {
+      "name": "Yu Er",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/reveler-2.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/reveler-2.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/reveler-2.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "thDJ5N0wUvI1JOa6": {
+      "name": "Zheng Peng",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90196-zhengpeng.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90196-zhengpeng.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90196-zhengpeng.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-monster-core": {
+    "0Dsy2I3mu86Czjm0": {
+      "name": "Awakened Tree",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/awakened-tree.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/awakened-tree.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/awakened-tree.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "IyhbcdTVmkV4pSju": {
+      "name": "Boar",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/boar.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/boar.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/boar.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "9Bl1ua3uLqodv47s": {
+      "name": "Cacodaemon",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/cacodaemon.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/cacodaemon.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/cacodaemon.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "N98ug9jQHqeFoK1N": {
+      "name": "Forgotten Spirit",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/forgotten-spirit.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/forgotten-spirit.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/forgotten-spirit.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "BoXCGLACP9vuIZkZ": {
+      "name": "Fungus Leshy",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/fungus-leshy.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/fungus-leshy.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/fungus-leshy.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "NRBgcu0LkXXp8mtp": {
+      "name": "Giant Centipede",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/giant-centipede.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/giant-centipede.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/giant-centipede.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "iIJPJcDT8wlJ8z5M": {
+      "name": "Giant Rat",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/giant-rat.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/giant-rat.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/giant-rat.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "MkupNnMKqDBElhhp": {
+      "name": "Giant Stag Beetle",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/giant-stag-beetle.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/giant-stag-beetle.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/giant-stag-beetle.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "RTviEfjYnsXa0wkT": {
+      "name": "Hell Hound",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/hell-hound.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hell-hound.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hell-hound.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "A4VgQIHsqJKssQOM": {
+      "name": "Hunting Spider",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/hunting-spider.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hunting-spider.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hunting-spider.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "LRboVCCVODz00d5B": {
+      "name": "Isori",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/awakener-naga.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/awakener-naga.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/awakener-naga.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "KHTYbQgR5hnFZdGL": {
+      "name": "Jerky",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/jerky.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/jerky.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/jerky.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "lFDYJOIp2knQ0IRY": {
+      "name": "Jinkin",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/very-drunken-jinkin.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/very-drunken-jinkin.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/very-drunken-jinkin.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "yVS5i5U28fQyGz99": {
+      "name": "Mountain Oni",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/onidoshi.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/onidoshi.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/onidoshi.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "5KstOkXabrOlZaKR": {
+      "name": "Yix",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90198-nosoi.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90198-nosoi.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90198-nosoi.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "bsrQp0pLgvjJr6mC": {
+      "name": "Revenant",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/revenant.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/revenant.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/revenant.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "vRAdYovWcy2euwuL": {
+      "name": "Snapping Flytrap",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/snapping-flytrap.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/snapping-flytrap.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/snapping-flytrap.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "NcYbJS5PWBGdNDqh": {
+      "name": "Spider Swarm",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/spider-swarm-1.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/spider-swarm-1.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/spider-swarm-1.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "74TxKGaW7RPzTdbm": {
+      "name": "Vanth",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/vanth.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/vanth.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/vanth.webp",
+            "scale": 3
+          }
+        }
+      }
+    },
+    "1uVwkGlqYzyWaDMy": {
+      "name": "Viper",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/viper.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/viper.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/viper.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "ExVmw8bSvUd2wYkI": {
+      "name": "War Horse",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/war-horse.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/war-horse.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/war-horse.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "KgJq51AeYrENo3Db": {
+      "name": "Will-o'-Wisp",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/will-o-wisp.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/will-o-wisp.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/will-o-wisp.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "BN5Lb6IsQ9Wyu3rL": {
+      "name": "Wolf",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/wolf.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/wolf.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/wolf.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "zpd6b6UPP72ZELCj": {
+      "name": "Yen Rui's Poltergeist",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/poltergeist.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/poltergeist.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/poltergeist.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "Xo4IGzw28hivgMmM": {
+      "name": "Zombie Shambler",
+      "actor": "systems/pf2e/icons/default-icons/npc.svg",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "systems/pf2e/icons/default-icons/npc.svg",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": null,
+            "scale": 1
+          }
+        }
+      }
+    }
+  },
+  "pf2e.pathfinder-bestiary-3": {
+    "aepfNXXy2juozgzB": {
+      "name": "Noodles",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/noodles.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/noodles.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/noodles.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "KG1Zu3EK0wrNdsQC": {
+      "name": "Ittan-Momen",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/ittan-momen.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/ittan-momen.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/ittan-momen.webp",
+            "scale": 2
+          }
+        }
+      }
+    },
+    "pCDp2hdim12wonW5": {
+      "name": "Living Rune (Occult)",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/occult-living-rune.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/occult-living-rune.webp",
+          "scaleX": 0.8,
+          "scaleY": 0.8
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/occult-living-rune.webp",
+            "scale": 1
+          }
+        }
+      }
+    },
+    "qnFiUNUyH0zuG6hj": {
+      "name": "Quintessivore",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/quintessivore.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/quintessivore.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/quintessivore.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.book-of-the-dead-bestiary": {
+    "ZSrMFLrb5CzFH5WX": {
+      "name": "Provincial Jiang-shi",
+      "actor": "modules/pf2e-season-of-ghosts/assets/art/pzo90199-jiang-shi.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/pzo90199-jiang-shi.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/pzo90199-jiang-shi.webp",
+            "scale": 2
+          }
+        }
+      }
+    }
+  },
+  "pf2e.hazards": {
+    "nO4osrBRnpWKFCMP": {
+      "name": "Summoning Rune",
+      "actor": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+      "token": {
+        "randomImg": false,
+        "texture": {
+          "src": "modules/pf2e-season-of-ghosts/assets/tokens/hazard.webp",
+          "scaleX": 1,
+          "scaleY": 1
+        },
+        "ring": {
+          "enabled": true,
+          "subject": {
+            "texture": "modules/pf2e-season-of-ghosts/assets/subjects/hazard.webp",
+            "scale": 1
+          }
+        }
+      }
+    }
+  }
+}

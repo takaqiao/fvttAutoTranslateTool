@@ -1,0 +1,2642 @@
+{
+    "label": "元素之怒 Rage Of Elements",
+    "entries": {
+        "Jabali Shuyookh": {
+            "name": "土巨灵长老 Jabali Shuyookh",
+            "publicNotes": "<p>拥有强大力量，高社会地位的土巨灵被称作长老。身体和心智双重强大的土巨灵长老，重视身体技能，精湛的技巧，和力量展示。他们万分骄傲，容易被冒犯，也容易生气，但只会在权衡后果后才会发怒。长老认为自己的欲望大于周围的人，因此他们会尽可能快速，高效地提供帮助，迅速而不折不扣地履行交易条款。</p>\n<p>土巨灵长老勤奋好学，兴趣广泛，包括运动比赛，工程学，珠宝制作，石工，金工，和雕刻。他们喜欢赌博和讨价还价，无论是在赌场，竞技场还是市场。有些会将他们兴趣用之于管理涉及上述的组织或公会。许多长老将土元素位面的财富售往其他地方，并在此类商品的价值上进行炒作。</p>\n<h2>工业泰坦 Industry Titans</h2>\n<p>土巨灵长老的商业帝国遍及土元素位面并延伸到其他位面。土巨灵尤其喜欢在物质宇宙和和火元素位面贸易。许多顾客看重在土元素位面开采的高价值宝石，金属和其他珍贵材料。因此，土元素位面的资源哺育着遍及位面的工业。</p>",
+            "languages": "Truespeech",
+            "items": {
+                "Earth Glide": {
+                    "name": "穿地 Earth Glide",
+                    "description": "<p>土巨灵可以用完整掘地速度掘地穿越泥土和岩石，不会留下隧道和经过痕迹。</p>"
+                },
+                "Earthen Control": {
+                    "name": "土地操控 Earthen Control",
+                    "description": "<p>当长老施放@UUID[Compendium.pf2e.spells-srd.Item.kOa055FIrO9Smnya]时，其边界可以穿越生物，这会将生物推到与墙边界相对的一侧。</p>"
+                },
+                "Economical Wish": {
+                    "name": "经济祈愿术 Economical Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 长老举行祈愿术仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老会尽可能以最直接简单的方式实现愿望。</p>"
+                },
+                "Stone Clutch": {
+                    "name": "岩石紧抱 Stone Clutch",
+                    "description": "<p>当土巨灵推撞一个生物到岩石障碍上时，其表面会伸出石头手指握住他。目标必须成功通过一次@Check[reflex|dc:30]豁免，否则将@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于该表面（[[/act escape dc=36]]）。</p>"
+                },
+                "Stone Crush": {
+                    "name": "岩石挤压 Stone Crush",
+                    "description": "<p>土巨灵对100尺内所有@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于岩石紧抱的生物造成@Damage[(2d6+13)[bludgeoning]]伤害，进行@Check[fortitude|dc:32|basic]豁免。</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知（模糊）60尺 Tremorsense (Imprecise) 60 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                },
+                "Constant Spells": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
+                    "name": "常驻法术 Constant Spells"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>土巨灵变形成为一个小型或中型土元素或陆地动物，通常为骆驼或狗。这不会影响土巨灵长老的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Push 15 feet": {
+                    "name": "推离15尺 Push 15 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
+                }
+            },
+            "data": {
+                "tokenName": "test",
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "土巨灵长老"
+            }
+        },
+        "Brochmaw": {
+            "name": "炉喉怪 Brochmaw",
+            "publicNotes": "<p>炉喉怪的身体由烧制的陶土构成，看起来像是行走的圆柱形烤炉，其名字来源于中间张开的巨口，口中燃烧着烹饪完美食物的火焰。在它们的巨口后方是熊熊燃烧的内置烤炉，用于烘烤它们的猎物。炉喉怪完全由贪婪的食欲驱动，只离开它们的巢穴去寻找新的食物。早期试图强迫炉喉怪为其服务的尝试结果是，这些意图成为其主人的人被烘烤成了一盘灰烬，还附带一份关于味道的书面评价。如今，炉喉怪在各个位面都被雇佣，诱惑它们的是新鲜肉类的甜美承诺。</p>\n<p>虽然炉喉怪对金钱没有兴趣，但它们确实用礼物换取服务。它们唯一能够提供的是从它们口中烹制出的肉类，且它们认为这是极为珍贵的。令人惊讶的是，所有尝试过炉喉怪肉的人都称其为美味。鉴于炉喉怪只提供熟肉而只渴望生肉，与它们的交易相对简单但略微危险，通常取决于所提供肉类的数量和稀有度。</p>\n<p>炉喉怪讨厌看到肉被浪费。如果它们发现任何种类的尸体，它们会召唤同类一起参加一个节日般的烤肉聚会，伴随着舞蹈和宴会，不可避免地还会对肉的质量进行夸奖或抱怨。</p>\n<h2>烹制位面美食 Planar Delicacies</h2>\n<p>尽管炉喉怪喜欢吞食所有新奇的东西，但它们仍然有特殊偏爱。炉喉怪喜欢两栖动物的肉，尽管这种喜好的起源仍是个谜。它们会热切地食用各种神裔，因为这些魔法血液会产生迷幻效果。炉喉怪认为天界生物既危险又美味，因此需要精湛的烹饪技巧以避免对食客造成致命威胁。大多数炉喉怪都太过急躁，无法正确准备天界生物的肉，往往导致灾难性的结果。</p>",
+            "items": {
+                "Marinade": {
+                    "name": "腌制 Marinade",
+                    "description": "<p>受到炉喉怪热油攻击并遭受持续火焰伤害的生物更容易被烹饪，在受到持续火焰伤害时，对抗烤制的强韧豁免有-2环境减值。</p>"
+                },
+                "Roast": {
+                    "name": "烤制 Roast",
+                    "description": "<p>炉喉怪将其烤签在炉火上翻转，烹饪任何被刺穿的生物。@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于炉喉怪的烤签的生物会受到@Damage[3d6[fire]]伤害（@Check[fortitude|dc:32|basic]豁免）。被烤制生物在1分钟内对抗上菜的强韧豁免有-2环境减值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.IySCRGYxxLFDlIZI]{效果：烤制}</p>"
+                },
+                "Serve": {
+                    "name": "上菜 Serve",
+                    "description": "<p><strong>需求</strong> 一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于炉喉怪</p>\n<hr />\n<p><strong>效果</strong> 炉喉怪从烤签上将辛苦抓住的食物咬下吃掉。炉喉怪咬住一个受擒于它的生物，造成@Damage[12d6[piercing]]伤害（@Check[fortitude|dc:32|basic]豁免）；炉喉怪恢复相当于其造成伤害一半的生命值。随后该生物从烤签上被释放。</p>"
+                },
+                "Skewer Master": {
+                    "name": "烤串大师 Skewer Master",
+                    "description": "<p>炉喉怪的烤签足够长，可以串起多个生物。炉喉怪可以在其穿烤签上擒获最多三个生物，并且即使已经擒获了生物，仍然可以使用烤签进行攻击，但无法以@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于它的生物为目标。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "炉喉怪"
+            }
+        },
+        "Brass Bastion": {
+            "name": "黄铜堡垒 Brass Bastion",
+            "publicNotes": "<p>黄铜堡垒是由元素火焰和异界黄铜打造的强大守卫。虽然它们可以被塑造成各种形态，但大多数呈现为肌肉发达的战士形象，带有弯曲的角和严肃或挑衅的表情。每个黄铜外壳内都有一团熊熊烈火——这是它们持续高温的来源。</p>\n<p>尽管黄铜堡垒最初是由火巨灵创造来充当仆人和守卫的，但制造它们的知识已经在火元素位面广泛传播。由于跨位面交易，它们甚至在土元素位面也能找到。在麦地那·穆迪亚，黄铜堡垒在街道上行走、看管商店和站岗。定制的黄铜堡垒作为家族传承或赠送给商业伙伴和盟友。在最富有的火巨灵家族中，后代出行时总是带着穿着家族服饰的黄铜堡垒随行。毁坏竞争对手的黄铜堡垒是迅速削弱其政治地位的方式之一，但任何被抓到进行这种破坏的人都会面临迅速的报复。</p>\n<p>大多数黄铜堡垒显眼地展示着其主人或制造者的徽记，尽管通过魔法手段也可以确定具体的制造者。在许多火巨灵社区中，由受宠工匠打造的黄铜堡垒是一种地位象征。火巨灵认为，非火巨灵打造的黄铜堡垒天然劣质，几乎不值其材料的成本。黄铜堡垒遵循在制造时刻印的魔法程序或遵从其主人的命令。大多数无法说话，但有些具有魔法声音，可以复述简单短语、朗诵诗歌或根据制造者的喜好讲睡前故事。</p>\n<h2>黄铜废料 Brass Scraps</h2>\n<p>在火元素位面，毁坏的黄铜堡垒被作为废料出售给有创业精神的火巨灵，他们将这些残骸重新锻造成新的黄铜堡垒。许多火巨灵愿意为竞争对手打造的黄铜堡垒残骸支付更高的价格，但当自己原先制造的黄铜堡垒残骸出现在市场上时会表现出极大的愤怒。因此，辨识黄铜堡垒原始制造者是一项宝贵的技能。很少有非火巨灵敢于交易黄铜堡垒废料，除非在非法市场上。</p>",
+            "items": {
+                "Molten Demise": {
+                    "name": "熔融末日 Molten Demise",
+                    "description": "<p>当黄铜堡垒被摧毁时，它的身体会爆炸，喷发出元素火焰和过热的黄铜，对@Template[emanation|distance:20]范围内的生物造成@Damage[4d6[piercing],4d6[fire]|options:area-damage]伤害（@Check[reflex|dc:34|basic|options:area-effect]豁免）。</p>"
+                },
+                "Breathe Smoke": {
+                    "name": "喷吐烟雾 Breathe Smoke",
+                    "description": "<p>黄铜堡垒喷出过热的烟雾和灰烬，覆盖以其占据空间的一角为圆心的@Template[burst|distance:10]范围。烟雾持续1轮。任何在该区域内的生物（或随后进入该区域的生物）会受到@Damage[15d6[fire]|options:area-damage]伤害（@Check[reflex|dc:34|basic|options:area-effect]豁免）；如果豁免大失败，该生物会着火，受到@Damage[2d6[persistent,fire]]伤害。烟雾中的所有生物都会获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，而烟雾外的生物对烟雾内的生物也会变得隐蔽。黄铜堡垒在[[/gmr 1d4 #Recharge Breathe Smoke]]{1d4轮}内不能再次喷吐烟雾。</p>"
+                },
+                "Heat Weapon": {
+                    "name": "高热武器 Heat Weapon",
+                    "description": "<p>黄铜堡垒持有的金属武器带有高温，造成额外的1d10火焰伤害（已包含在其统计数据中）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "黄铜堡垒"
+            }
+        },
+        "Crystal Strider": {
+            "name": "水晶阔步者 Crystal Strider",
+            "publicNotes": "<p>水晶阔步者的每一条长而细的腿都是一块巨大的水晶，通常是石英或石膏。它利用这些众多的腿和不断变化的身体结构，在结晶洞穴中迅速移动，不受地形阻碍。</p>\n<hr />\n<p>广大的土元素群体对元素领主的回归以及金元素和木元素位面的关注反应较慢。这些事件并未摧毁山脉，也没有吹散沙土。</p>\n<h2>朴实情感 Earthy Emotions</h2>\n<p>土元素比大多数元素生物话更少。他们行动迟缓，权衡决定的过程如此缓慢，甚至让讨论失去活力和动力。他们最关心的是局面是否能忍受。虽然稀有或华丽的宝藏可能会吸引土元素，但若没有直接的威胁，他们很难产生任何紧迫感。</p>",
+            "items": {
+                "Crystal Refraction": {
+                    "name": "水晶折射 Crystal Refraction",
+                    "description": "<p><strong>触发</strong> 水晶阔步者被光亮效果瞄准</p>\n<hr />\n<p><strong>效果</strong> 阔步者将触发的效果重新定向到30尺内的其他生物，或者无害地吸收效果，将释放光芒能力剩余的充能减少1轮。</p>"
+                },
+                "Precise Steps": {
+                    "name": "精准步伐 Precise Steps",
+                    "description": "<p>水晶阔步者的众多细腿使其无视困难地形。</p>"
+                },
+                "Release Light": {
+                    "name": "释放光芒 Release Light",
+                    "description": "<p>阔步者发出其体内不断折射的光芒，施放@UUID[Compendium.pf2e.spells-srd.Item.Hb8GdAhP0zBCv3zU]作为内在原能法术，并且升阶到5环级，法术攻击掷骰+21。 水晶阔步者在[[/gmr 1d4 #Recharge Release Light]]{1d4轮}内无法再次释放光芒。</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>大型或更小，腿击，@Check[reflex|dc:29|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知 （模糊）60尺",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "水晶阔步者"
+            }
+        },
+        "Metal Scamp": {
+            "name": "金魔蝠 Metal Scamp",
+            "publicNotes": "<p>这些反复无常、具有破坏性的金魔蝠自封为熵力量的代言，它们以无差别地破坏周围的一切为乐，有时甚至对自己造成伤害。金魔蝠外观严峻，面部特征尖锐，肢体棱角分明，它们的皮肤可以是任何金属的颜色，通常像暴露在元素中多年一样严重氧化。</p>",
+            "hp": "快速治疗 2 （当接触金属时）",
+            "items": {
+                "Breathe Shrapnel": {
+                    "name": "霰弹吐息 Breathe Shrapnel",
+                    "description": "<p>金魔蝠喷出@Template[cone|distance:15]金属碎片，对区域中每个生物造成@Damage[(2d4)[slashing],(1d4)[bleed]|options:area-damage]伤害（@Check[reflex|dc:17|basic|options:area-effect]豁免）。</p>\n<p>金魔蝠在[[/gmr 1d4 #Recharge Breathe Shrapnel]]{1d4轮}内无法使用霰弹吐息。</p>"
+                },
+                "Fast Healing 2 (While Touching Metal)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>",
+                    "name": "快速治疗（当接触金属时）Fast Healing 2 (While Touching Metal)"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金魔蝠"
+            }
+        },
+        "Zephyr, The West Wind": {
+            "name": "泽费尔，西风使 Zephyr, The West Wind",
+            "publicNotes": "<p>宇宙中万千生命的真相即为天气控制着世界。流经格拉利昂的生命之水，维持健康森林的存在，以及那些帮助农作物茁壮成长的雪、融雪和雨水，全都依赖于天气——而天气则由风的变化所决定。风使是来自气元素位面的强大存在，受古老神灵的委托，守护天空并引导各个世界的风。他们引导风沿自然路径前行，尽管他们既不邪恶也不怀恶意，风使对风暴可能会如何影响其路径上的任何生物都没有太多关注。</p>\n<p>风使可以采取多种形态，并能像在微风中穿行一样轻松地在这些形态之间切换。他们以人类的外形在凡人中行走，不引起过多关注；当需要迅速穿越天空时，他们会变成由风暴云和雨水组成的巨大雷霆之马。然而，他们的真身是凝聚成类人形的风，通常有卷曲的头发和由柔软漂浮的云组成的羽翼。</p>\n<p>在格拉利昂，每一方的主要风都由四位主风使（cardinal anemoi）创造和引导。寒冷的北风由波瑞尔引导，是冬天的使者。奥斯特尔引导来自南方的热风。欧洛尔带来来自东方的暴风。最后，温和的春风由来自西方的泽费尔呼唤而来。这四位主要风使及其下属的次级风使（lesser anemoi）议会，塑造并控制着整个格拉利昂的风。据大家所知，主风使并不向更高的权威报告。在气元素位面还有更强大的顶级风使，但他们似乎对将物质宇宙纳入他们的计划毫无兴趣。</p>\n<p>尽管主风使尽量与凡人的事务保持一定的距离，但次级风使（lesser anemoi）偶尔会更加关注。有些会监视某个定居点或县城，保护它、滋养它，甚至恶意地毁灭它。每个风使都有自己的一套兴趣哀嚎。许多风使自负或小心眼，更多的风使态度变化之快，犹如他们所引导的风一样。取悦一个风使不是遵循一套固定的公式，而是需要不断改变策略，迎合他们瞬息万变的当前兴趣或认知需求。</p>\n<h2>空气之形 The Shape Of The Air</h2>\n<p>在气元素位面的风使通常是无性别的，而那些在物质宇宙中度过一段时间的风使，有时会尝试或发展出对某一种凡人性别的偏好，这些性别可能是他们观察或生活在一起的凡人性别。</p>",
+            "hp": "再生15（由受克于土失效）",
+            "languages": "Truespeech",
+            "items": {
+                "Truespeech": {
+                    "name": "实言术 Truespeech",
+                    "description": "<p>风使可以与任何拥有语言的生物交谈并理解其语言。</p>"
+                },
+                "Wind Orchestra": {
+                    "name": "风之乐团 Wind Orchestra",
+                    "description": "<p>风使不需要乐器来演奏音乐，而是使用他们的风来创造和传播任何他们希望复制的乐器的声音。他们可以同时模仿任意数量的乐器，创造并指挥自己的个人乐团。</p>"
+                },
+                "Blessed by the Winds": {
+                    "name": "风之祝福 Blessed by the Winds",
+                    "description": "<p>80尺。那些胆敢与风使在同一空间飞行的生物会遇到湍急的风，但它们总会小心翼翼地避免伤害或打扰引导它们的牧者。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。在灵光启动时，风使不会受到环境空气或天气影响，除非他们选择接受这些影响。</p>"
+                },
+                "Earthbane": {
+                    "name": "受克于土 Earthbane",
+                    "description": "<p>如果风使受到土效果影响，风使的再生能力会被抑制1轮。如果风使与地面接触1轮以上，它的再生能力在此期间会一直被抑制。如果风使被至少1英寸深的泥土、污泥或石头淹没，风使的灵光将被禁用，并且风使会陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+                },
+                "Redirect Weather": {
+                    "name": "重定天气 Redirect Weather",
+                    "description": "<p><strong>需求</strong> 风使的灵光在启动状态；</p>\n<p><strong>触发</strong> 在风使的灵光范围内有生物使用气或电击法术，或气或电击法术在风使的灵光范围内生效；</p>\n<hr />\n<p><strong>效果</strong> 该法术的风和天气听从风使的指挥。风使可以重新决定决定目标、目的地或法术的其他效果，就如同他们是法术的施放者。</p>"
+                },
+                "Collect Thunder": {
+                    "name": "收集雷电 Collect Thunder",
+                    "description": "<p><strong>需求</strong> 风使有一只空闲的手</p>\n<hr />\n<p><strong>效果</strong> 风使将手伸入环绕他们的风中，从指尖冒出的火花聚集成雷电。风使在他们的空手中创造一道雷电束。如果风使花费一个动作来收集雷电，雷电束会击中他们的空手，产生巨大的轰鸣，使20尺范围内的所有生物耳聋1轮，除非它们通过 @Check[fortitude|dc:40]豁免；这为收集雷电增加听觉特征。雷电在1轮后消散。</p>"
+                },
+                "Command the Breeze": {
+                    "name": "指挥微风 Command the Breeze",
+                    "description": "<p>当风使施展仪式时，他们会独自完成仪式的所有环节，指挥他们的风完成仪式的所有成分。他们必须满足仪式所需的所有次要施法者的要求，并且必须亲自尝试通常由次要加施法者进行的检定。此外，风使可以比通常更快地施展仪式。如果一个仪式的施法时间以天为单位，他们可以在相同数量的小时内施展完毕。</p>"
+                },
+                "Storm Strikes Twice": {
+                    "name": "风暴双击 Storm Strikes Twice",
+                    "description": "<p>风使投掷一道雷电束，然后化作一阵风瞬间移动到雷电束的位置再次攻击。他们对一个在其第一射程增量内的生物进行一次雷电束远程打击，然后化为作为一阵风传送到该生物的位置，再抓住投出的雷电束，对触及内的生物进行一次雷电束近战打击。在完成两次攻击之前，他的多重攻击减值不会增加。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>风使的移动不会触发反应动作。</p>"
+                },
+                "Regeneration 15 (Deactivated by Earthbane)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
+                    "name": "再生15（由受克于土失效）Regeneration 15 (Deactivated by Earthbane)"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "泽费尔，西风使"
+            }
+        },
+        "Pine Pangolin": {
+            "name": "松树穿山甲 Pine Pangolin",
+            "publicNotes": "<p>这些生物通过部分卷曲的尾巴倒挂着睡觉，并依靠它们厚实的木质鳞片来抵御危险。这些鳞片抵消的一种危险是故意卷曲起来，落在毫无戒备的对手头上，这是它们最喜欢的战斗策略之一。在它们的鳞片下，松树穿山甲身体分泌出一种厚重、黏稠的焦油，作为第二道防线。</p>",
+            "items": {
+                "Secrete Tar": {
+                    "name": "分泌焦油 Secrete Tar",
+                    "description": "<p>松树穿山甲在@Template[emanation|distance:5]范围分泌棕色粘稠焦油，让这些方格变为困难地形1分钟。进入或在焦油方格内开始回合的生物必须通过@Check[fortitude|dc:25]豁免，否则被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]直到逃脱。一旦大失败，生物还会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]；倒地的生物在@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escape}检定上有-2环境减值。松树穿山甲免疫自己的焦油效果。</p>"
+                },
+                "Roll Up": {
+                    "name": "卷起 Roll Up",
+                    "description": "<p>松树穿山甲@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，卷起它的甲壳，团成一个球状。当卷起时，穿山甲获得10点物理伤害抗力，从不超过50尺高度坠落时免疫坠落伤害。松树穿山甲唯一能使用的动作是站立，并且站立会结束穿山甲的卷起效果。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "松树穿山甲"
+            }
+        },
+        "Blustering Gale": {
+            "name": "呼啸狂风 Blustering Gale",
+            "publicNotes": "<p>呼啸狂风是最微不足道的气元素之一：它们是微风的精魂，有时会尾随着更强大的生物之后出现，就像燕子翅膀的下扇动的气流或一声有力的咳嗽所排出的空气。由于不情愿或无法单独有效行动，它们聚集成由弱小的元素生物组成的“狂风”，它们使用组合之后的力量对那些蔑视它们的人进行侮辱和殴打，试图超越自己卑微起源。</p>\n<p>它们凝聚为一体，强迫其他生物为它们效劳，然后在厌倦时抛弃。虽然大多数狂风声称它们被抛弃的奴隶是无用的，但事实上，狂风缺乏长时间保留附庸的权威姿态和信心。</p>\n<h2>爪牙 Lackeys</h2>\n<p>呼啸狂风有时会作为其他生物（包括云龙、气巨灵和其他强大气元素）的令使或执行者，在更有影响力的领主的命令下欺凌和恐吓其他生物。虽然呼啸狂风常常对这些职责充满自信，但是他们又对服从感到愤怒，很少对被人差遣而感到满意。</p>",
+            "hp": "（16方格）；阙值100（3部分），50（2部分）",
+            "items": {
+                "Bullying Bluster": {
+                    "name": "霸凌咆哮 Bullying Bluster",
+                    "description": "<p>30尺。呼啸疾风不断发出长篇大论的侮辱和咄咄逼人的嘲讽。每个进入灵光或在灵光中开始回合的生物必须通过@Check[will|dc:30]豁免，否则只要呆在灵光范围内就会陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（大失败则@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}）。该部队的成员能够集体模仿各种语言的辱骂，这让他们的霸凌咆哮能够影响任何一种语言的生物。豁免成功的生物临时免疫1小时。呼啸狂风可以用一个具有专注特征的自由动作开启或关闭灵光。</p>"
+                },
+                "Pummeling Winds": {
+                    "name": "连打疾风 Pummeling Winds",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 呼啸狂风连续猛击每个相邻的敌人 (@Check[reflex|dc:27|basic]豁免）。伤害基于花费的动作。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d8+2)[bludgeoning]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d8+12)[bludgeoning]]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d8+15)[bludgeoning]]伤害</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当部队飞行或行走时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Windstorm": {
+                    "name": "暴风 Windstorm",
+                    "description": "<p>呼啸疾风同时吹气，制造一阵强大的暴风。暴风在100尺射程内的@Template[burst|distance:10]范围中造成@Damage[(3d8+10)[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:30|basic|options:area-effect,forced-movement,inflicts:prone]豁免）。豁免失败的生物还会被想任意方向推离10尺（大失败则外加@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]）。当部队减少到2部分或更少时，爆发范围减少到@Template[burst|distance:5]，推离的距离减少到5尺。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "呼啸狂风"
+            }
+        },
+        "Vegetable Lamb": {
+            "name": "蔬菜羊 Vegetable Lamb",
+            "publicNotes": "<p>蔬菜羊正逐渐成为训练中的施法者最喜欢首次召唤的元素生物，因为它们温顺且易于控制，除非被激怒。然而，施法者必须小心，不要让它们在宇宙中发芽；它们是一种高度入侵性的物种，可以在十年内吞噬整个森林。</p>\n<p>蔬菜羊身上生长的具有治疗和滋养效果的食物对冒险者和安于现状的魔法学者同样具有吸引力。其味道类似于在格拉利昂生长的同种植物，但又略有不同。许多人指出，它们有一种类似肉类的味道——一种在普通花朵中找不到的鲜味。</p>",
+            "items": {
+                "Nature's Bounty": {
+                    "name": "自然馈赠 Nature's Bounty",
+                    "description": "<p>每天，蔬菜羊在覆盖它身体的绿色棉花中种植[[/r 1d4 #可食用花]]朵可食用的花（如朝鲜蓟、西兰花或蒲公英）。采摘这些蔬菜不会伤到蔬菜羊。一个活物能以交互动作吃下蔬菜花，恢复@Damage[(1d6+4)[healing]]生命值。</p>"
+                },
+                "Cottonseed Burst": {
+                    "name": "棉籽爆发 Cottonseed Burst",
+                    "description": "<p>蔬菜羊释放出一团绿色的棉花花粉，以自身为中心@Template[burst|distance:10]。卷入爆发中的需要呼吸的生物，除了蔬菜羊自己之外，都必须通过@Check[fortitude|dc:15]豁免，否则因为咳嗽陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "蔬菜羊"
+            }
+        },
+        "Comozant Wyrd": {
+            "name": "电光灵 Comozant Wyrd",
+            "publicNotes": "<p>嗡鸣和噼啪作响的等离子体组成了电光灵，这是一种电荷波动的绿色、蓝色和紫色无热火焰。拥有意识和类似面孔的电光灵需要一个它们可以噼啪作响和扭动的表面。一旦找到合适的表面，它们会寻找附近的同伴。在宇宙中，它们可以在许多地方被发现：附着在航行的船只上、在建筑物上舞动，或锚定在山脉的岩石上。然而，在广阔的气元素位面上，电光灵往往感到非常孤独。幸运的少数会成为居住在该位面城市中的风巨灵的宠物，但更多的则在孤立的浮岛上等待可以附着的飞空艇，或者更为悲惨地，徒劳地努力到达遥远的海岸，最终在消失前熄灭。</p>\n<h2>电光灵沟通 Comozant Communication</h2>\n<p>作为情感和本能的生物，电光灵使用简单的图像和概念来传达深刻而层次丰富的含义。它们相当具有洞察力，能够像在固体表面上跳跃一样迅速地得出可靠的结论。大多数与电光灵“交谈”过的人会发现这一过程令人启发，但很少有人希望经常进行这种体验。</p>",
+            "items": {
+                "Plasmatic Form": {
+                    "name": "等离子形态 Plasmatic Form",
+                    "description": "<p>与其他虚体生物不同，电光灵不能移动到固体物体内部或穿过固体物体。如果在其回合结束时，电光灵没有和一个体型不小于他的固体物体或表面相邻，它将失去@Damage[10[untyped]]点生命值。这种生命值损失无法以任何方式缓解或避免。</p>"
+                },
+                "Illuminating Flames": {
+                    "name": "照明火焰 Illuminating Flames",
+                    "description": "<p>30尺。电光灵在其灵光范围内发出明亮光照，在额外的30尺范围内发出昏暗光照。类似风灵自身的无热火焰会包围灵光内的任何生物。在灵光内的可见生物无法获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，而@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}生物在灵光内变得隐蔽而不是无踪。风灵可以与受到照明火焰影响的任何非无意识生物进行情感沟通，即使它们语言不通。</p>"
+                },
+                "Leap the Gap": {
+                    "name": "跃过间隙 Leap the Gap",
+                    "description": "<p><strong>需求</strong> 电光灵与一个体型不小于他的固体物体或表面相邻</p>\n<hr />\n<p><strong>效果</strong> 风灵以最多以满速度直线飞行，并在移动结束时与另一个体型不小于他的固体物体或表面相邻；这种移动不会触发反应动作。风灵可以在移动过程中穿过其他生物，所有被穿过的生物将受到@Damage[2d12[electricity]]伤害，@Check[reflex|dc:22|basic]豁免。</p>"
+                },
+                "Wyrd Wisdom": {
+                    "name": "风灵智慧 Wyrd Wisdom",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 电光灵通过照明火焰与另一生物进行情感沟通</p>\n<hr />\n<p><strong>效果</strong> 电光灵独特的沟通方式带来奇异的洞察力。正在与风灵进行情感交流的一个生物将获得卜筮术法术的好处，但只能关于当前讨论的话题，而不能是生物自己选择的任何话题。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "电光灵"
+            }
+        },
+        "Austral, The South Wind": {
+            "name": "奥斯特尔，南风使 Austral, The South Wind",
+            "publicNotes": "<p>宇宙中万千生命的真相即为天气控制着世界。流经格拉利昂的生命之水，维持健康森林的存在，以及那些帮助农作物茁壮成长的雪、融雪和雨水，全都依赖于天气——而天气则由风的变化所决定。风使是来自气元素位面的强大存在，受古老神灵的委托，守护天空并引导各个世界的风。他们引导风沿自然路径前行，尽管他们既不邪恶也不怀恶意，风使对风暴可能会如何影响其路径上的任何生物都没有太多关注。</p>\n<p>风使可以采取多种形态，并能像在微风中穿行一样轻松地在这些形态之间切换。他们以人类的外形在凡人中行走，不引起过多关注；当需要迅速穿越天空时，他们会变成由风暴云和雨水组成的巨大雷霆之马。然而，他们的真身是凝聚成类人形的风，通常有卷曲的头发和由柔软漂浮的云组成的羽翼。</p>\n<p>在格拉利昂，每一方的主要风都由四位主风使（cardinal anemoi）创造和引导。寒冷的北风由波瑞尔引导，是冬天的使者。奥斯特尔引导来自南方的热风。欧洛尔带来来自东方的暴风。最后，温和的春风由来自西方的泽费尔呼唤而来。这四位主要风使及其下属的次级风使（lesser anemoi）议会，塑造并控制着整个格拉利昂的风。据大家所知，主风使并不向更高的权威报告。在气元素位面还有更强大的顶级风使，但他们似乎对将物质宇宙纳入他们的计划毫无兴趣。</p>\n<p>尽管主风使尽量与凡人的事务保持一定的距离，但次级风使（lesser anemoi）偶尔会更加关注。有些会监视某个定居点或县城，保护它、滋养它，甚至恶意地毁灭它。每个风使都有自己的一套兴趣哀嚎。许多风使自负或小心眼，更多的风使态度变化之快，犹如他们所引导的风一样。取悦一个风使不是遵循一套固定的公式，而是需要不断改变策略，迎合他们瞬息万变的当前兴趣或认知需求。</p>\n<h2>空气之形 The Shape Of The Air</h2>\n<p>在气元素位面的风使通常是无性别的，而那些在物质宇宙中度过一段时间的风使，有时会尝试或发展出对某一种凡人性别的偏好，这些性别可能是他们观察或生活在一起的凡人性别。</p>",
+            "hp": "再生15（由受克于土失效）",
+            "languages": "Truespeech",
+            "items": {
+                "Truespeech": {
+                    "name": "实言术 Truespeech",
+                    "description": "<p>风使可以与任何拥有语言的生物交谈并理解其语言。</p>"
+                },
+                "Wind Orchestra": {
+                    "name": "风之乐团 Wind Orchestra",
+                    "description": "<p>风使不需要乐器来演奏音乐，而是使用他们的风来创造和传播任何他们希望复制的乐器的声音。他们可以同时模仿任意数量的乐器，创造并指挥自己的个人乐团。</p>"
+                },
+                "Blessed by the Winds": {
+                    "name": "风之祝福 Blessed by the Winds",
+                    "description": "<p>80尺。那些胆敢与风使在同一空间飞行的生物会遇到湍急的风，但它们总会小心翼翼地避免伤害或打扰引导它们的牧者。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。在灵光启动时，风使不会受到环境空气或天气影响，除非他们选择接受这些影响。</p>"
+                },
+                "Earthbane": {
+                    "name": "受克于土 Earthbane",
+                    "description": "<p>如果风使受到土效果影响，风使的再生能力会被抑制1轮。如果风使与地面接触1轮以上，它的再生能力在此期间会一直被抑制。如果风使被至少1英寸深的泥土、污泥或石头淹没，风使的灵光将被禁用，并且风使会陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+                },
+                "Redirect Weather": {
+                    "name": "重定天气 Redirect Weather",
+                    "description": "<p><strong>需求</strong> 风使的灵光在启动状态；</p>\n<p><strong>触发</strong> 在风使的灵光范围内有生物使用气或电击法术，或气或电击法术在风使的灵光范围内生效；</p>\n<hr />\n<p><strong>效果</strong> 该法术的风和天气听从风使的指挥。风使可以重新决定决定目标、目的地或法术的其他效果，就如同他们是法术的施放者。</p>"
+                },
+                "Collect Thunder": {
+                    "name": "收集雷电 Collect Thunder",
+                    "description": "<p><strong>需求</strong> 风使有一只空闲的手</p>\n<hr />\n<p><strong>效果</strong> 风使将手伸入环绕他们的风中，从指尖冒出的火花聚集成雷电。风使在他们的空手中创造一道雷电束。如果风使花费一个动作来收集雷电，雷电束会击中他们的空手，产生巨大的轰鸣，使20尺范围内的所有生物耳聋1轮，除非它们通过 @Check[fortitude|dc:40]豁免；这为收集雷电增加听觉特征。雷电在1轮后消散。</p>"
+                },
+                "Command the Breeze": {
+                    "name": "指挥微风 Command the Breeze",
+                    "description": "<p>当风使施展仪式时，他们会独自完成仪式的所有环节，指挥他们的风完成仪式的所有成分。他们必须满足仪式所需的所有次要施法者的要求，并且必须亲自尝试通常由次要加施法者进行的检定。此外，风使可以比通常更快地施展仪式。如果一个仪式的施法时间以天为单位，他们可以在相同数量的小时内施展完毕。</p>"
+                },
+                "Storm Strikes Twice": {
+                    "name": "风暴双击 Storm Strikes Twice",
+                    "description": "<p>风使投掷一个雷电束，然后化作一阵风瞬间移动到雷电束的位置再次攻击。他们对一个在其第一射程增量内的生物进行一次雷电束远程打击，然后化为作为一阵风传送到该生物的位置，再抓住投出的雷电束，对触及内的生物进行一次雷电束近战打击。在完成两次攻击之前，他的多重攻击减值不会增加。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>风使的移动不会触发反应动作。</p>"
+                },
+                "Regeneration 15 (Deactivated by Earthbane)": {
+                    "name": "再生15（由受克于土失效）Regeneration 15 (Deactivated by Earthbane)",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "奥斯特尔，南风使"
+            }
+        },
+        "Saltborn Stalkers": {
+            "name": "盐生潜伏者 Saltborn Stalkers",
+            "publicNotes": "<p>无际之海（Boundless Sea）的咸水深渊有时会把大群人鱼拧成一团，它们长着一排排恶毒的牙齿和锋利的爪子，被称为盐生潜伏者。盐生潜行者成群狩猎，用它们下垂的触手状副肢作为生物发光的诱饵，把它们摆成一缕或泡泡状的位面能量，吸引毫无防备的猎物进入巧妙的埋伏圈中。</p>\n<hr />\n<p>盐与石的仪式 THE RITE OF SALT AND STONE</p>\n<p>当人鱼加入盐生种的行列时，它们需要经过一个只有其他盐生种和Kelizandrika的洋龙才知道的秘密仪式。新兵们被包裹在盐和冰的坟墓里，被留在无际之海的海底，让它们自己脱身。那些克服了考验的个体并没有能真正摆脱坟墓里的盐，它覆盖着每一个盐生潜伏者的身体。</p>",
+            "hp": "部队防御",
+            "items": {
+                "Lightlure": {
+                    "name": "发光诱饵 Lightlure",
+                    "description": "<p><strong>效果</strong> 盐生潜伏者摆动他们的发光诱饵，制造一场迷人的灯光秀，吸引附近的生物落入他们的掌握之中。@Template[emanation|distance:100]范围内的每个生物必须尝试@Check[will|dc:33]豁免；无论豁免结果如何，生物在24小时内临时免疫。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物被诱饵@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}，并且必须花费下个回合的所有动作，尽可能地向盐生潜伏者移动，避开路径上显眼的危险。</p>\n<p><strong>大失败</strong> 类似失败，但是生物还会@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}[[/gmr 1d4 #rounds]]{1d4轮}。</p>"
+                },
+                "Saline Crust": {
+                    "name": "含盐硬皮 Saline Crust",
+                    "description": "<p>20尺</p>\n<hr />\n<p><strong>需求</strong> 盐生潜伏者位于水体中</p>\n<hr />\n<p><strong>效果</strong> 盐生潜伏者的含盐皮肤层层剥落，融入周围的水中。在灵光中结束回合的生物受到@Damage[2d6[acid]]伤害，@Check[reflex|dc:30|basic]豁免；带有两栖或水栖特征的生物免疫。</p>"
+                },
+                "Salty Clutch": {
+                    "name": "盐之握 Salty Clutch",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 盐生潜伏者尝试擒获敌人并将其拖入水下。@Template[emanation|distance:5]范围内的所有敌人必须尝试@Check[reflex|dc:33]豁免，否则被盐生潜伏者@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]（大失败被@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]）。在当前回合的余下时间里，盐生潜伏者可以向水中移动，这不会导致擒获结束，同时能带着任何被擒抱或束缚的生物和他们一同移动。</p>"
+                },
+                "Scour the Bones": {
+                    "name": "刮骨 Scour the Bones",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 盐生追踪者用牙和爪子剖开5尺内的每个敌人（@Check[reflex|dc:30|basic]豁免）。伤害取决于动作数量。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d10[slashing]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d10+8)[slashing]]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d10+16)[slashing]]伤害</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当盐生潜伏者行走或游泳时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "description": "<p><strong>阈值</strong> 160（3部分），80（2部分）</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>",
+                    "name": "部队防御 Troop Defenses"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "盐生潜伏者"
+            }
+        },
+        "Ardande Gardener": {
+            "name": "木元素裔园丁 Ardande Gardener",
+            "publicNotes": "<p>木元素裔是巨灵子嗣，其元素血统将他们与木元素位面联系在一起。他们的元素连接可以表现为各种不同形式，代表不同类型和变化的木元素。他们可能体现出幼苗的生命力和活力，充满潜力，准备成长。或者，他们可能像古树的枝干和根一样强壮而柔韧，相互连接，共同生长。他们也可能掌握死亡和腐朽的力量，像腐烂的木头一样，准备为下一代提供肥料和养分。</p>\n<p>在木元素位面很常见，但在第一世界却正相反，只是在物质宇宙中刚刚复苏的边缘，木元素裔经常感到在多元宇宙中找不到归属，仿佛生错了地方或时间。许多人毕生都在各个位面中寻找关于自己和他们血统的答案。</p>\n<p>木元素裔分布在木之位面的所有主要城市和文明中，但多数居住在由强大木巨灵基兹达尔掌控的都市——光辉无尽之城诺多林。一些木元素裔称，诺多林的生活充满了木巨灵的宠溺和轻蔑，这些木巨灵统治着这片土地及大部分木之位面。木巨灵大多将木元素裔视为与他们类似的巨灵，但认为木元素裔是低等级的巨灵，就像基兹达尔平民相对于贵族的低微地位一样。虽然有少数木元素裔反抗这种社会秩序，但文化的沉重压力告诉他们，等级制度是木元素的自然属性，即使心有不甘，他们也应该接受自己的位置。</p>\n<p>许多来自各个位面的木元素裔在新城市绍多卡成立时迁居此地，希望通过大量通往木之位面外的传送门，能够访问物质宇宙的其他部分，了解他们失落的凡人遗产。他们喜欢与访客见面，展示他们家乡的美丽与奇观。有些甚至搬迁到物质宇宙中，并成为新木元素裔们的珍贵导师，帮助他们在格拉利昂发现自己的元素潜能。</p>",
+            "items": {
+                "Plant Empathy": {
+                    "name": "植物认同 Plant Empathy",
+                    "description": "<p>木元素裔园丁可以使用交涉技能来给植物[[/act make-an-impression]]并提出非常简单的[[/act request]]。</p>"
+                },
+                "Decompose": {
+                    "name": "腐烂 Decompose",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 虚空能量从木元素裔园丁身上渗出，使@Template[emanation|distance:5]范围内的一切都开始腐朽，导致植物和树叶老化并腐烂。自然的困难地形会被摧毁，区域内具有植物或木特征的生物会受到@Damage[1d6[void]|options:area-damage]伤害（@Check[fortitude|dc:16|basic|options:area-effect]豁免）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "木元素裔园丁"
+            }
+        },
+        "Boreal, The North Wind": {
+            "name": "波瑞尔，北风使 Boreal, The North Wind",
+            "publicNotes": "<p>宇宙中万千生命的真相即为天气控制着世界。流经格拉利昂的生命之水，维持健康森林的存在，以及那些帮助农作物茁壮成长的雪、融雪和雨水，全都依赖于天气——而天气则由风的变化所决定。风使是来自气元素位面的强大存在，受古老神灵的委托，守护天空并引导各个世界的风。他们引导风沿自然路径前行，尽管他们既不邪恶也不怀恶意，风使对风暴可能会如何影响其路径上的任何生物都没有太多关注。</p>\n<p>风使可以采取多种形态，并能像在微风中穿行一样轻松地在这些形态之间切换。他们以人类的外形在凡人中行走，不引起过多关注；当需要迅速穿越天空时，他们会变成由风暴云和雨水组成的巨大雷霆之马。然而，他们的真身是凝聚成类人形的风，通常有卷曲的头发和由柔软漂浮的云组成的羽翼。</p>\n<p>在格拉利昂，每一方的主要风都由四位主风使（cardinal anemoi）创造和引导。寒冷的北风由波瑞尔引导，是冬天的使者。奥斯特尔引导来自南方的热风。欧洛尔带来来自东方的暴风。最后，温和的春风由来自西方的泽费尔呼唤而来。这四位主要风使及其下属的次级风使（lesser anemoi）议会，塑造并控制着整个格拉利昂的风。据大家所知，主风使并不向更高的权威报告。在气元素位面还有更强大的顶级风使，但他们似乎对将物质宇宙纳入他们的计划毫无兴趣。</p>\n<p>尽管主风使尽量与凡人的事务保持一定的距离，但次级风使（lesser anemoi）偶尔会更加关注。有些会监视某个定居点或县城，保护它、滋养它，甚至恶意地毁灭它。每个风使都有自己的一套兴趣哀嚎。许多风使自负或小心眼，更多的风使态度变化之快，犹如他们所引导的风一样。取悦一个风使不是遵循一套固定的公式，而是需要不断改变策略，迎合他们瞬息万变的当前兴趣或认知需求。</p>\n<h2>空气之形 The Shape Of The Air</h2>\n<p>在气元素位面的风使通常是无性别的，而那些在物质宇宙中度过一段时间的风使，有时会尝试或发展出对某一种凡人性别的偏好，这些性别可能是他们观察或生活在一起的凡人性别。</p>",
+            "hp": "再生15（由受克于土失效）",
+            "languages": "Truespeech",
+            "items": {
+                "Truespeech": {
+                    "name": "实言术 Truespeech",
+                    "description": "<p>风使可以与任何拥有语言的生物交谈并理解其语言。</p>"
+                },
+                "Wind Orchestra": {
+                    "name": "风之乐团 Wind Orchestra",
+                    "description": "<p>风使不需要乐器来演奏音乐，而是使用他们的风来创造和传播任何他们希望复制的乐器的声音。他们可以同时模仿任意数量的乐器，创造并指挥自己的个人乐团。</p>"
+                },
+                "Blessed by the Winds": {
+                    "name": "风之祝福 Blessed by the Winds",
+                    "description": "<p>80尺。那些胆敢与风使在同一空间飞行的生物会遇到湍急的风，但它们总会小心翼翼地避免伤害或打扰引导它们的牧者。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。在灵光启动时，风使不会受到环境空气或天气影响，除非他们选择接受这些影响。</p>"
+                },
+                "Earthbane": {
+                    "name": "受克于土 Earthbane",
+                    "description": "<p>如果风使受到土效果影响，风使的再生能力会被抑制1轮。如果风使与地面接触1轮以上，它的再生能力在此期间会一直被抑制。如果风使被至少1英寸深的泥土、污泥或石头淹没，风使的灵光将被禁用，并且风使会陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+                },
+                "Redirect Weather": {
+                    "name": "重定天气 Redirect Weather",
+                    "description": "<p><strong>需求</strong> 风使的灵光在启动状态；</p>\n<p><strong>触发</strong> 在风使的灵光范围内有生物使用气或电击法术，或气或电击法术在风使的灵光范围内生效；</p>\n<hr />\n<p><strong>效果</strong> 该法术的风和天气听从风使的指挥。风使可以重新决定决定目标、目的地或法术的其他效果，就如同他们是法术的施放者。</p>"
+                },
+                "Collect Thunder": {
+                    "name": "收集雷电 Collect Thunder",
+                    "description": "<p><strong>需求</strong> 风使有一只空闲的手</p>\n<hr />\n<p><strong>效果</strong> 风使将手伸入环绕他们的风中，从指尖冒出的火花聚集成雷电。风使在他们的空手中创造一道雷电束。如果风使花费一个动作来收集雷电，雷电束会击中他们的空手，产生巨大的轰鸣，使20尺范围内的所有生物耳聋1轮，除非它们通过 @Check[fortitude|dc:40]豁免；这为收集雷电增加听觉特征。雷电在1轮后消散。</p>"
+                },
+                "Command the Breeze": {
+                    "name": "指挥微风 Command the Breeze",
+                    "description": "<p>当风使施展仪式时，他们会独自完成仪式的所有环节，指挥他们的风完成仪式的所有成分。他们必须满足仪式所需的所有次要施法者的要求，并且必须亲自尝试通常由次要加施法者进行的检定。此外，风使可以比通常更快地施展仪式。如果一个仪式的施法时间以天为单位，他们可以在相同数量的小时内施展完毕。</p>"
+                },
+                "Storm Strikes Twice": {
+                    "name": "风暴双击 Storm Strikes Twice",
+                    "description": "<p>风使投掷一个雷电束，然后化作一阵风瞬间移动到雷电束的位置再次攻击。他们对一个在其第一射程增量内的生物进行一次雷电束远程打击，然后化为作为一阵风传送到该生物的位置，再抓住投出的雷电束，对触及内的生物进行一次雷电束近战打击。在完成两次攻击之前，他的多重攻击减值不会增加。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>风使的移动不会触发反应动作。</p>"
+                },
+                "Regeneration 15 (Deactivated by Earthbane)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
+                    "name": "再生15（由受克于土失效）Regeneration 15 (Deactivated by Earthbane)"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "波瑞尔，北风使"
+            }
+        },
+        "Zuhra Shuyookh": {
+            "name": "金巨灵长老 Zuhra Shuyookh",
+            "publicNotes": "<p>最强大的金巨灵以压倒性的人格魅力和字面意思的磁力吸引着追随者和金元素。当被召唤来进行许愿仪式时，他们会以长期与其他位面隔绝为借口，对请求进行离奇的曲解，声称是语言上的差异。</p>\n<hr />\n<p>金巨灵，是金元素位面的巨灵，他们大胆而巍然，以华丽的表演，技艺的展现，以及个人勇武的故事吸引众人的目光。尽管他们个性张扬，但他们的长期关系往往冷漠，甚至有些疏远；金巨灵经常结成同盟，但很少建立友谊，而更深层次关系所需的信任更是少之又少。少数了解金巨灵的凡人通常会说他们热情奔放，但感情淡漠。</p>\n<p>自从与其他位面重新建立联系后，金巨灵就开始寻求与其他巨灵建立联系。他们认为土巨灵表亲是能干的铁匠伙伴，虽然有些呆板无趣。金巨灵很少对非巨灵元素多看一眼，即便是有智慧的元素，他们也觉得与之交流毫无趣味，或很难与之相处。</p>",
+            "languages": "Truespeech",
+            "items": {
+                "Magnetic Field": {
+                    "name": "磁场 Magnetic Field",
+                    "description": "<p>10尺。</p>\n<p>灵光范围内所有方格对穿戴金属护甲或以金属构成的生物视作困难地形。灵光范围内生物使用金属武器进行的打击，或使用金属武器打击灵光范围内的生物，攻击掷骰受到–2状态减值。金巨灵忽略此效果。</p>"
+                },
+                "Magnetic Reposition": {
+                    "name": "磁力移位 Magnetic Reposition",
+                    "description": "<p><strong>频率</strong> 每轮一次；</p>\n<hr />\n<p><strong>效果</strong> 长老以任意数量受到磁场影响的生物为目标，使每个目标以金巨灵选择的方向移动10尺。每个目标如果成功通过一次@Check[fortitude|dc:32]豁免可以抵抗被移动。</p>"
+                },
+                "Magnetic Storm": {
+                    "name": "磁力风暴 Magnetic Storm",
+                    "description": "<p><strong>需求</strong> 长老的磁场处于启动状态；</p>\n<hr />\n<p><strong>效果</strong> 长老用电磁甩出锋利的金属碎片。@Template[emanation|distance:30]内每个生物受到@Damage[8d6[slashing]伤害以及3d12[electricity]|options:area-damage]伤害，进行@Check[fortitude|dc:32|basic|options:area-effect]豁免。</p>\n<p>长老的磁场会失效[[/gmr 1d4 #rounds]]{1d4轮}。</p>"
+                },
+                "Mercurial Wish": {
+                    "name": "水银祈愿术 Mercurial Wish",
+                    "description": "<p><strong>频率</strong> 每年三次；</p>\n<hr />\n<p><strong>效果</strong> 长老举行@UUID[Compendium.pf2e.spells-srd.Item.6dDtGIUerazSHIOu]{祈愿术 Wish}仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老会尝试用产生不稳定或短暂好处的方式实现愿望。 </p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Conductive Redirection": {
+                    "description": "<p><strong>触发</strong> 金巨灵被造成电击伤害的攻击，法术或效果命中；</p>\n<hr />\n<p><strong>效果</strong> 金巨灵让电流传导过身体，如常受到伤害，然后朝30尺内一个其所能看见的目标重新射出一道电束。金巨灵进行一次远程攻击掷骰，使用[[/r 1d20+27 #Conductive Redirection]]{+27}调整值对抗目标的DC。如果命中或重击，目标受到等同于触发效果全额伤害的电击伤害。 </p>",
+                    "name": "重导电流 Conductive Redirection"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p> 金巨灵变形成为一个小型或中型金元素或动物。这不会影响金巨灵的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金巨灵长老"
+            }
+        },
+        "Oregorger": {
+            "name": "矿食怪 Oregorger",
+            "publicNotes": "<p>矿食怪是由原始金属的层层堆积构成的庞大、四肢发达的蛮横生物。它们完全由不可抑制的吞食金属的冲动驱动，毫不犹豫地贪婪地吞食尽可能多的金属，并将其排泄成腐蚀性的锈迹。</p>",
+            "items": {
+                "Caustic Rust": {
+                    "name": "腐蚀性锈迹 Caustic Rust",
+                    "description": "<p>5尺</p>\n<p>矿食怪不断地向周围空气中泄漏部分消化的锈迹碎片。任何在光环内结束其回合的生物都会受到@Damage[2d6[acid]]伤害，@Check[reflex|dc:27|basic]豁免。大失败的生物还会@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
+                },
+                "Devour Metal": {
+                    "name": "吞噬金属 Devour Metal",
+                    "description": "<p>每当每当矿食怪用精金啃咬打击造成重击时，它对目标所穿戴的任何金属护甲造成相同数量的伤害，如果其硬度低于10，则自动忽视其硬度。如果生物对矿食怪的精金啃咬使用金属盾牌进行盾牌格挡反应，盾牌将自动破损，但是不会有其他物品因为此攻击受到伤害。无人照管的物品将自动受到来自矿食怪的精金啃咬的全部伤害，如果其硬度低于10，则自动忽视其硬度。</p>"
+                },
+                "Searing Spew": {
+                    "name": "灼热喷吐 Searing Spew",
+                    "description": "<p>矿食怪从它的口中喷出一团腐蚀性、生锈的碎片云，填满一个与它相邻的@Template[cube|distance:10]区域。该区域内的任何生物受到@Damage[6d6[acid],6d6[slashing]|options:area-damage]伤害（@Check[reflex|dc:30|basic|options:area-effect]豁免）。云下的地面在1小时内为困难地形，之后碎片崩解为尘埃。</p>\n<p>矿食怪在[[/gmr 1d4 #Recharge Searing Spew]]{1d4轮}内不能再次使用灼热喷吐，但如果矿食怪用吞噬金属对物品造成伤害，这个能力会重新充能。</p>"
+                },
+                "Rust Vision": {
+                    "description": "<p>矿食怪无视锈蚀云带来的隐蔽状态。</p>",
+                    "name": "锈蚀视觉 Rust Vision"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "矿食怪"
+            }
+        },
+        "Mercurial": {
+            "name": "水银人 Mercurial",
+            "publicNotes": "<p>作为金元素位面人口最多的居民，水银人是一种奇怪的液态金属生物，以其相同的频率地改变其特征、化学成分和气质而闻名。易激动、好奇、友好的水银人会迅速为异界生物提供帮助，但他们反复无常的性格会使他们成为不可靠的盟友。</p>\n<hr />\n<p>金元素生物可以以多种不同形式出现，从不同金属的无形混合物到类人和野兽般的怪物。</p>\n<h2>金属躯体 Metal Forms</h2>\n<p>尽管金属元素生物几乎完全由金属构成，但它们大多由微小的不同金属层组成，复杂如肉体或植物组织。这些金属中的许多都因金属位面的自然缓慢熵增而生锈或腐朽。</p>\n<h2>千名千面 Many Faces, Many Names</h2>\n<p>作为拥有较短注意力跨度的不朽生物，水银人最终总会对它们当前的身份感到厌倦，并通过采用新的面貌和人格寻求改变。为避免朋友和熟人之间的混淆，水银人的名字通常不仅包括它们当前的昵称，还有最近几次使用的名字列表，按记忆所及的时间顺序呈现。</p>",
+            "items": {
+                "Metallurgic Adaptation": {
+                    "name": "冶金适性 Metallurgic Adaptation",
+                    "description": "<p>水银人将其液态金属身体改为寒铁、铜、金、铁、银或钢材质。他们的无武装打击将改为该种金属类型，直到水银人再次使用冶金适性。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>水银人变成任何小型或中型人形生物的外观。这种变化含了重要的细节，可以重现特定个体的特征，但水银人保持着闪亮的液态金属外观，使得变形不适合作为伪装，除非他们是在模仿另一个水银人。变形不会改变水银人的攻击加值和伤害加值，但允许他们把四肢变成金属工具或近战武器，潜在地改变他们攻击能造成的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "水银人"
+            }
+        },
+        "Nursery Crawler": {
+            "name": "苗圃爬行者 Nursery Crawler",
+            "publicNotes": "<p>木位面充满活力的元素能量甚至赋予最腐烂的倒下树木力量，使其残骸能够寻找最佳的下一代生长地点。这种独眼腐烂树桩发射的种子一旦被埋葬，无论是在地面还是在活生生的生物的皮肤中，都立刻开始发芽。</p>\n<hr />\n<p>乍一看，木元素似乎不像火元素、水元素或气元素兄弟那样具有破坏性，但不要被表面愚弄了，森林可能是个危险的地方。</p>\n<p>虽然有些像动物，但是这里展示的元素生物依然是植物，它们的生命周期反映了这一点。蔬菜羊长在有根的茎上，直到它们成熟（或者可能成熟）才能从茎上移走，这使得它们依赖于周围的环境来获取养分。苔藓树懒在它们生长出来的第一个世纪里，只不过是一堆绿色的绒毛，只有当它们长出防御性的木爪时，它们才能获得有限的行动能力。</p>\n<h2>野性但不野生 Wild But Unwild</h2>\n<p>许多木元素由木巨灵和木位面上的其他强大生物创造，并被赋予固定角色。它们充满自然保护区和广阔的庄园，一旦被释放到野外，可能不确定如何行动。它们本质上是被驯化出生的，即使在自然环境中，它们的行为也可能与它们模仿的野生生物大相径庭。它们的天敌很少，使元素生物面临的风险较小，尽管它们有时仍被巨型白蚁吃掉或被一些人当作宠物捕捉。</p>\n<h2>不叫大脑的大脑 A Brain By Any Other Name</h2>\n<p>即使是木元素的祖先被树木伮女士（Lady Shumunue）教导模仿动物，木元素的意识也不在大脑中，而是在其根系中。像苗圃爬行者、活体林地和根雕野兽这样的实体利用这一优势。木元素的木质身体可以被雕刻和制作，显然没有长期伤害，这意味着只要它们的根部没有受损，它们可能不会感到疼痛。</p>",
+            "items": {
+                "Germinate": {
+                    "name": "发芽 Germinate",
+                    "description": "<p>被苗圃爬行者的种子打击命中的生物，必须在该回合使用交互动作移除种子；在他的结束回合时，尚未移除的种子会发芽，造成@Damage[1d6[persistent,bleed]] 伤害，并让被植入的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。种子发芽之后再移除它会造成@Damage[1d4[piercing]]伤害，种子发芽前移除它则不会造成伤害。移除的种子如果落在可能使之发育的土壤中的话，会立即发芽，1小时后长成新的树苗。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "苗圃爬行者"
+            }
+        },
+        "Living Lodestone": {
+            "name": "活体磁石 Living Lodestone",
+            "publicNotes": "<p>这个由深色、闪亮的金属组成的旋转球体在离地约5尺的高度漂浮，周围不断有被其强大磁场吸引的小型金属物体旋转。</p>",
+            "items": {
+                "Electromagnetic Disruption": {
+                    "name": "电磁干扰 Electromagnetic Disruption",
+                    "description": "<p>当活体磁石受到电击伤害时，它会自动改变为相反的极性。</p>"
+                },
+                "Magnetic Field": {
+                    "name": "磁场 Magnetic Field",
+                    "description": "<p>60尺。</p>\n<p>活体磁石持续散发强大磁场，一般会保持正极或负极，每个灵光中的生物，如果持用金属武器、穿戴金属护甲、或主要或完全由金属材料制成，则会受到磁石当前极性的影响。</p>\n<p><strong>负极</strong> 受影响的生物在它的每个回合开始时被推离磁石5尺，当它靠近磁石时，灵光范围内的每个方格都被视为困难地形。灵光中负载不超过2的无主金属物品会被直接推出灵光范围。</p>\n<p><strong>正极</strong> 受影响的生物在它的每个回合开始时被拉向磁石5尺，当它远离磁石时，灵光范围内的每个方格都被视为困难地形。灵光中负载不超过2的无主金属物品会被吸到磁石相邻的方格。</p>"
+                },
+                "Hover": {
+                    "name": "悬浮 Hover",
+                    "description": "<p>活体磁石悬浮于地表之上，无视地面上的所有困难地形和高等困难地形。</p>"
+                },
+                "Magnetic Disarm": {
+                    "name": "磁化卸武 Magnetic Disarm",
+                    "description": "<p>活体磁石尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}一个位于磁场中的生物手中的金属武器。如果大成功，并且磁石为负极，武器被推至灵光范围之外；如果磁石为正极，武器被拉向磁石并粘附在磁石上。被粘附在磁石上的武器能以一个交互动作拔下来。</p>"
+                },
+                "Reverse Polarity": {
+                    "name": "逆转极性 Reverse Polarity",
+                    "description": "<p>活体磁石切将磁场从正极专为负极，反之亦可。每个受到磁石灵光影响的生物必须通过@Check[reflex|dc:21]豁免，否则会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>\n<p>磁石在[[/gmr 1d4 #Recharge Reverse Polarity]]{1d4轮}内无法逆转极性。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "活体磁石"
+            }
+        },
+        "Quickiron Plasm": {
+            "name": "血汞电浆团 Quickiron Plasm",
+            "publicNotes": "<p>看起来很像软泥怪，血汞电浆团是一团锈红色的液态天金，这种天金被称为血汞，在宇宙中因为能增强魔法的性质而备受珍视。血汞电浆团以大量魔法能量消耗之后的残余为食，它们在几英里外都能感知到这种能量残余。</p>\n<hr />\n<p>金元素生物可以以多种不同形式出现，从不同金属的无形混合物到类人和野兽般的怪物。</p>\n<h2>金属躯体 Metal Forms</h2>\n<p>尽管金属元素生物几乎完全由金属构成，但它们大多由微小的不同金属层组成，复杂如肉体或植物组织。这些金属中的许多都因金属位面的自然缓慢熵增而生锈或腐朽。</p>",
+            "items": {
+                "Djezet Extraction": {
+                    "name": "血汞萃取 Djezet Extraction",
+                    "description": "<p>当血汞电浆团死亡时，构成其身体的大部分物质会变得惰性和无用。然而，熟练的炼金术士有时可以从它的残骸中提取微量的有价值的天金。这是一个10分钟的过程，需要制造炼金术专长，手艺达到专家以上的熟练度，并且成功通过@Check[crafting|dc:20]检定。成功的尝试能提取一剂量血汞，在分解成恶臭的粘稠物之前，它的效力可以保持1小时。由于物品的临时性质，如果用于出售，它没有价值。</p>"
+                },
+                "Biomagical Feedback": {
+                    "name": "生理魔法反噬 Biomagical Feedback",
+                    "description": "<p>血汞电浆团的导电性质让物理接触它变得十分危险。当一个@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于血汞电浆团的生物施法时，该生物受到每个法术环级@Damage[5[force]]伤害。</p>"
+                },
+                "Consume Magic": {
+                    "name": "吞噬魔法 Consume Magic",
+                    "description": "<p><strong>触发</strong> 血汞电浆团成功通过某个法术的豁免</p>\n<hr />\n<p><strong>效果</strong> 血汞电浆团吞噬法术的能量，恢复每个法术环级5点生命值。</p>"
+                },
+                "Constrict": {
+                    "description": "<p>@Damage[2d6[bludgeoning]]，@Check[fortitude|dc:22|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>",
+                    "name": "紧勒 Constrict"
+                },
+                "Magic Scent": {
+                    "name": "魔法嗅觉 Magic Scent",
+                    "description": "<p>血汞电浆团能感知到最远1英里之内的魔法灵光，作为模糊感官。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "血汞电浆团"
+            }
+        },
+        "Lava Otter": {
+            "name": "熔岩獭 Lava Otter",
+            "publicNotes": "<p>这些火焰獭在火元素位面的岩浆流中嬉戏捕猎。他们具有广为人知的强烈领地意识，会挑起与对手獭家族之间的战斗来争夺领地。它们对陌生人充满好奇，整个族群都会突然袭击那些攻击或意外威胁到其家族成员的人。</p>\n<hr />\n<p>烈焰支配者的火巨灵征召本位面更多的火元素，来为在回归位面上的新战争做好准备，甚至还动员了那些甚少在聚居地附近活动的火元素。</p>\n<h2>魔宠偷猎 Familiar Poaching</h2>\n<p>许多贪婪的火焰法师希望驯服熔岩獭作为他们的魔宠，但大多数火元素位面居民都厌恶这种行为。虽然熔岩獭燃烧的毛皮对偷猎者能起到威慑，但许多火元素裔（火元素的巨灵裔）仍然会在熔岩獭的栖息地巡逻，以保护他们免遭偷猎。</p>",
+            "items": {
+                "Below the Crust": {
+                    "name": "潜入地壳 Below the Crust",
+                    "description": "<p>熔岩獭能够以全速在熔岩中@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}。</p>"
+                },
+                "Molten Form": {
+                    "name": "熔融形态 Molten Form",
+                    "description": "<p>任何用无武装打击命中熔岩獭，或以其他方式接触它时，受到@Damage[1[fire]]伤害。如果有不低于一加仑的水接触到熔岩獭，或是如果它被水效果影响，它的熔岩外层会变硬成为石壳，使其熔融形态失效，并对钝击伤害获得弱点5。熔融形态会在熔岩獭在熔岩中游泳1分钟后重新启动。</p>"
+                },
+                "Scattering Magma": {
+                    "name": "散射岩浆 Scattering Magma",
+                    "description": "<p><strong>需求</strong> 熔岩獭处于熔融形态，且其上一个动作为成功的颚打击</p>\n<hr />\n<p><strong>效果</strong> 熔岩獭用颚夹住岩浆，并迅速扭动将岩浆抛射出去。熔岩獭对与之相邻的所有生物造成@Damage[1d4[fire]]伤害。</p>"
+                },
+                "Tight-Knit Family": {
+                    "name": "亲密家族 Tight-Knit Family",
+                    "description": "<p>一只熔岩獭可以与另一只熔岩獭共享同一空间，但不能有超过两只熔岩獭占据同一空间。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "熔岩獭"
+            }
+        },
+        "Moss Sloth": {
+            "name": "苔藓树懒 Moss Sloth",
+            "publicNotes": "<p>这些苔藓群落在一个世纪内聚合成一个大型树懒的大致模仿物，甚至模仿了这种动物独特的毛发结构，吸引了额外的真菌和传粉昆虫。除非被召唤或攻击，它们很少离开最初形成的树木。</p>\n<hr />\n<p>乍一看，木元素似乎不像火元素、水元素或气元素兄弟那样具有破坏性，但不要被表面愚弄了，森林可能是个危险的地方。</p>\n<p>虽然有些像动物，但是这里展示的元素生物依然是植物，它们的生命周期反映了这一点。蔬菜羊长在有根的茎上，直到它们成熟（或者可能成熟）才能从茎上移走，这使得它们依赖于周围的环境来获取养分。苔藓树懒在它们生长出来的第一个世纪里，只不过是一堆绿色的绒毛，只有当它们长出防御性的木爪时，它们才能获得有限的行动能力。</p>\n<h2>野性但不野生 Wild But Unwild</h2>\n<p>许多木元素由木巨灵和木位面上的其他强大生物创造，并被赋予固定角色。它们充满自然保护区和广阔的庄园，一旦被释放到野外，可能不确定如何行动。它们本质上是被驯化出生的，即使在自然环境中，它们的行为也可能与它们模仿的野生生物大相径庭。它们的天敌很少，使元素生物面临的风险较小，尽管它们有时仍被巨型白蚁吃掉或被一些人当作宠物捕捉。</p>\n<h2>不叫大脑的大脑 A Brain By Any Other Name</h2>\n<p>即使是木元素的祖先被树木伮女士（Lady Shumunue）教导模仿动物，木元素的意识也不在大脑中，而是在其根系中。像苗圃爬行者、活体林地和根雕野兽这样的实体利用这一优势。木元素的木质身体可以被雕刻和制作，显然没有长期伤害，这意味着只要它们的根部没有受损，它们可能不会感到疼痛。</p>",
+            "hp": "再生 5 （火焰使其失效）",
+            "items": {
+                "Insect Swarm": {
+                    "name": "虫群 Insect Swarm",
+                    "description": "<p>苔藓树懒受到近战攻击的钝击伤害时，一团苔藓崩解，释放出虫群攻击造成伤害的生物，造成@Damage[2d4[piercing]]伤害（@Check[reflex|dc:15|basic]豁免）。</p>"
+                },
+                "Hold Fast": {
+                    "name": "牢牢抓住 Hold Fast",
+                    "description": "<p>苔藓树懒能在天花板或其他类似的颠倒表面上爬行，但是它将此类表面视为困难地形。</p>"
+                },
+                "Regeneration 5 (Deactivated by Fire)": {
+                    "name": "再生 5 （火焰使其失效） Regeneration 5 (Deactivated by Fire)",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "苔藓树懒"
+            }
+        },
+        "Eural, The East Wind": {
+            "name": "欧洛尔，东风使 Eural, The East Wind",
+            "publicNotes": "<p>宇宙中万千生命的真相即为天气控制着世界。流经格拉利昂的生命之水，维持健康森林的存在，以及那些帮助农作物茁壮成长的雪、融雪和雨水，全都依赖于天气——而天气则由风的变化所决定。风使是来自气元素位面的强大存在，受古老神灵的委托，守护天空并引导各个世界的风。他们引导风沿自然路径前行，尽管他们既不邪恶也不怀恶意，风使对风暴可能会如何影响其路径上的任何生物都没有太多关注。</p>\n<p>风使可以采取多种形态，并能像在微风中穿行一样轻松地在这些形态之间切换。他们以人类的外形在凡人中行走，不引起过多关注；当需要迅速穿越天空时，他们会变成由风暴云和雨水组成的巨大雷霆之马。然而，他们的真身是凝聚成类人形的风，通常有卷曲的头发和由柔软漂浮的云组成的羽翼。</p>\n<p>在格拉利昂，每一方的主要风都由四位主风使（cardinal anemoi）创造和引导。寒冷的北风由波瑞尔引导，是冬天的使者。奥斯特尔引导来自南方的热风。欧洛尔带来来自东方的暴风。最后，温和的春风由来自西方的泽费尔呼唤而来。这四位主要风使及其下属的次级风使（lesser anemoi）议会，塑造并控制着整个格拉利昂的风。据大家所知，主风使并不向更高的权威报告。在气元素位面还有更强大的顶级风使，但他们似乎对将物质宇宙纳入他们的计划毫无兴趣。</p>\n<p>尽管主风使尽量与凡人的事务保持一定的距离，但次级风使（lesser anemoi）偶尔会更加关注。有些会监视某个定居点或县城，保护它、滋养它，甚至恶意地毁灭它。每个风使都有自己的一套兴趣哀嚎。许多风使自负或小心眼，更多的风使态度变化之快，犹如他们所引导的风一样。取悦一个风使不是遵循一套固定的公式，而是需要不断改变策略，迎合他们瞬息万变的当前兴趣或认知需求。</p>\n<h2>空气之形 The Shape Of The Air</h2>\n<p>在气元素位面的风使通常是无性别的，而那些在物质宇宙中度过一段时间的风使，有时会尝试或发展出对某一种凡人性别的偏好，这些性别可能是他们观察或生活在一起的凡人性别。</p>",
+            "hp": "再生15（由受克于土失效）",
+            "languages": "Truespeech",
+            "items": {
+                "Truespeech": {
+                    "name": "实言术 Truespeech",
+                    "description": "<p>风使可以与任何拥有语言的生物交谈并理解其语言。</p>"
+                },
+                "Wind Orchestra": {
+                    "name": "风之乐团 Wind Orchestra",
+                    "description": "<p>风使不需要乐器来演奏音乐，而是使用他们的风来创造和传播任何他们希望复制的乐器的声音。他们可以同时模仿任意数量的乐器，创造并指挥自己的个人乐团。</p>"
+                },
+                "Blessed by the Winds": {
+                    "name": "风之祝福 Blessed by the Winds",
+                    "description": "<p>80尺。那些胆敢与风使在同一空间飞行的生物会遇到湍急的风，但它们总会小心翼翼地避免伤害或打扰引导它们的牧者。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。在灵光启动时，风使不会受到环境空气或天气影响，除非他们选择接受这些影响。</p>"
+                },
+                "Earthbane": {
+                    "name": "受克于土 Earthbane",
+                    "description": "<p>如果风使受到土效果影响，风使的再生能力会被抑制1轮。如果风使与地面接触1轮以上，它的再生能力在此期间会一直被抑制。如果风使被至少1英寸深的泥土、污泥或石头淹没，风使的灵光将被禁用，并且风使会陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+                },
+                "Redirect Weather": {
+                    "name": "重定天气 Redirect Weather",
+                    "description": "<p><strong>需求</strong> 风使的灵光在启动状态；</p>\n<p><strong>触发</strong> 在风使的灵光范围内有生物使用气或电击法术，或气或电击法术在风使的灵光范围内生效；</p>\n<hr />\n<p><strong>效果</strong> 该法术的风和天气听从风使的指挥。风使可以重新决定决定目标、目的地或法术的其他效果，就如同他们是法术的施放者。</p>"
+                },
+                "Collect Thunder": {
+                    "name": "收集雷电 Collect Thunder",
+                    "description": "<p><strong>需求</strong> 风使有一只空闲的手</p>\n<hr />\n<p><strong>效果</strong> 风使将手伸入环绕他们的风中，从指尖冒出的火花聚集成雷电。风使在他们的空手中创造一道雷电束。如果风使花费一个动作来收集雷电，雷电束会击中他们的空手，产生巨大的轰鸣，使20尺范围内的所有生物耳聋1轮，除非它们通过 @Check[fortitude|dc:40]豁免；这为收集雷电增加听觉特征。雷电在1轮后消散。</p>"
+                },
+                "Command the Breeze": {
+                    "name": "指挥微风 Command the Breeze",
+                    "description": "<p>当风使施展仪式时，他们会独自完成仪式的所有环节，指挥他们的风完成仪式的所有成分。他们必须满足仪式所需的所有次要施法者的要求，并且必须亲自尝试通常由次要加施法者进行的检定。此外，风使可以比通常更快地施展仪式。如果一个仪式的施法时间以天为单位，他们可以在相同数量的小时内施展完毕。</p>"
+                },
+                "Storm Strikes Twice": {
+                    "name": "风暴双击 Storm Strikes Twice",
+                    "description": "<p>风使投掷一道雷电束，然后化作一阵风瞬间移动到雷电束的位置再次攻击。他们对一个在其第一射程增量内的生物进行一次雷电束远程打击，然后化为作为一阵风传送到该生物的位置，再抓住投出的雷电束，对触及内的生物进行一次雷电束近战打击。在完成两次攻击之前，他的多重攻击减值不会增加。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>风使的移动不会触发反应动作。</p>"
+                },
+                "Regeneration 15 (Deactivated by Earthbane)": {
+                    "name": "再生15（由受克于土失效）Regeneration 15 (Deactivated by Earthbane)",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "欧洛尔，东风使"
+            }
+        },
+        "Pelegox Cube": {
+            "name": "聚磁怪方块 Pelegox Cube",
+            "publicNotes": "<p>聚磁怪是一种聚合的磁能生物，他们利用周围环境为自己塑造身体。虽然聚磁怪是的本体是一个球形核心，但他们会将各种形状和大小的金属碎片凝聚成一个多面体外壳。尽管聚磁怪在平时会对某种特定的几何形体产生偏好，但他们会持续寻找新的结构，当他们可以尝试无限的可能性时，会感到极乐，即使这意味着要拆除其他金属实体。</p>\n<p>这些零碎的生物通过磁悬浮和推进的结合来移动，当磁悬浮不起作用时，它们会不断地刺穿地面，将重心向前滚动，这看起来几乎就像滚动的铁蒺藜。随着时间的推移，聚磁怪的磁性特征变得清晰可见，以同心圆的线条蚀刻在它的身体上。这些独特的设计使得即使在表面被侵蚀的情况下也能区分单个的聚磁怪。</p>\n<p>聚磁怪很快就能与同类建立关系。它们喜欢把自己的身体组合成更大、更精致的结构和图案。因此，很难找到独行的聚磁怪——它们更喜欢以集群的形式旅行。</p>",
+            "hp": "140（3部分），70（2部分）",
+            "languages": "心灵感应30尺",
+            "items": {
+                "Metalsense": {
+                    "name": "金属感知 Metalsense",
+                    "description": "<p>聚磁怪方块能感知金属生物和物品，作为一种模糊感官。</p>"
+                },
+                "Entrancing Shapes": {
+                    "name": "迷魂塑形 Entrancing Shapes",
+                    "description": "<p>聚磁怪方块迅速变换外形，展示出看似绝不可能存在的几何图形。@Template[cone|distance:60]范围内的生物受到@Damage[9d6[mental]|options:area-damage]伤害（@Check[will|dc:29|basic|options:area-effect]豁免）。失败的生物还会被方块@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]，并且在1分钟内@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>"
+                },
+                "Scrambled Strike": {
+                    "name": "伸展打击 Scrambled Strike",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 方块重新改变外观，变出许多尖刺，对10尺内所有敌人进行攻击（@Check[reflex|dc:27|basic]豁免）。伤害取决于花费的动作：</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d6[piercing]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d6+10)[piercing]]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(5d6+10)[piercing]]伤害</p>"
+                },
+                "Shard Volley": {
+                    "name": "碎片齐射 Shard Volley",
+                    "description": "<p>聚磁怪方块磁化金属碎片并射向远处，这对30尺内的@Template[burst|distance:10]范围造成@Damage[(2d6+10)[piercing]|options:area-damage]伤害（@Check[reflex|dc:27|basic|options:area-effect]豁免）。当部队减少到2部分或更少时，该区域减少到@Template[burst|distance:5]。 </p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当聚磁怪方块飞行时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "聚磁怪方块"
+            }
+        },
+        "Faydhaan Shuyookh": {
+            "name": "水巨灵长老 Faydhaan Shuyookh",
+            "publicNotes": "<p>水巨灵长老是被尊为领袖，外交官，和谈判家的强大水巨灵。作为水巨灵种族的代表，他们严格遵守礼仪和待客之道，并对文学和表演艺术推崇备至。水巨灵长老喜欢问候客人，也乐于被人问候，看看他们创造出了多少种不同的问候方式就知道了。如果客人能创造性地参与这种传统问候游戏，那么就会给水巨灵长老留下深刻印象，并受到盛情款待。</p>",
+            "languages": "telepathy 100 feet, truespeech",
+            "items": {
+                "Aura of Hospitality": {
+                    "name": "好客灵光 Aura of Hospitality",
+                    "description": "<p>60尺。水巨灵长老消解周围人的敌意。弥漫范围内的自愿生物在社群和交涉检定上获得+2状态加值。长老可以用自由动作抑制或恢复灵光。如果长老表现出敌意，那么灵光会失效，且在1小时内不能再启动。当灵光范围内任何其他生物表现出敌意，它必须尝试一次@Check[will|dc:35]豁免。如果成功，它不受影响且1小时内无需再次豁免；如果失败，它当前动作被打断，且在1轮内尝试的其他任何敌对动作也会被打断。</p>"
+                },
+                "Turbulent Seas": {
+                    "name": "湍流之海 Turbulent Seas",
+                    "description": "<p>60尺。灵光范围内且与水巨灵处于相同水体中的水对游泳中的生物视作困难地形。具有水特征的生物免疫此效果。</p>"
+                },
+                "Diplomatic Wish": {
+                    "name": "交涉祈愿术 Diplomatic Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 长老举行祈愿术仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老会以让尽可能多的人受益的方式诠释愿望。</p>"
+                },
+                "To the Hilt": {
+                    "name": "一刺到底 To the Hilt",
+                    "description": "<p>水巨灵长老进行一次近战<em>双刃弯刀</em>打击，并深深刺入刀刃，命中时造成额外@Damage[3d6[persistent,bleed]]伤害（重击时为6d6）。</p>"
+                },
+                "Detect Magic": {
+                    "name": "侦测魔法 Detect Magic",
+                    "description": "<p>你会定期施放侦测魔法。这要以旅行速度的一半或更慢的速度进行移动。在以最高300尺/分钟的速度旅行时，你不会意外忽略魔法灵光；但是只有在你的速度不超过150尺/分钟时，才能够在队伍移动到魔法灵光之内以前侦测到魔法灵光。</p>"
+                },
+                "+2 Bonus on Perception to Sense motive": {
+                    "name": "察言观色时+2加值 +2 Bonus on Perception to Sense motive"
+                },
+                "Constant Spells": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
+                    "name": "常驻法术 Constant Spells"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>\n<hr />\n<p>水巨灵变形成为一个小型或中型水元素或水栖动物或类人生物。这不会影响水巨灵的数据，但会改变其打击的伤害类型。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "水巨灵长老"
+            }
+        },
+        "Boiling Spring": {
+            "name": "沸泉 Boiling Spring",
+            "publicNotes": "<p>由于其朦胧、几乎难以察觉的形态，沸泉常被误认为是气元素，但实际上，沸泉是由滚烫的蒸汽和沸腾的水组成的类人水元素。当被召唤到物质宇宙中时，沸泉会提升其周围环境的温度，使周围气候变得潮湿闷热。它们似乎很享受自己造成的不适，尽管有些只是把这当作一个有趣的恶作剧，而另一些则真正沉浸在这种痛苦中，并寻找更多的方法来制造不适。</p>",
+            "items": {
+                "Steam Vision": {
+                    "name": "蒸汽视觉 Steam Vision",
+                    "description": "<p>沸泉无视由雾和蒸汽造成的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Evaporate": {
+                    "name": "蒸发 Evaporate",
+                    "description": "<p><strong>触发</strong> 一个效果即将对沸泉造成火焰伤害，即便它无视伤害</p>\n<hr />\n<p><strong>效果</strong> 沸泉蒸发到空气中。直到沸泉下一回合开始前，它不能被攻击或瞄准。它仍占据其空间，并且其灵光仍正常运作。</p>"
+                },
+                "Sweltering Heat": {
+                    "name": "滚烫炙热 Sweltering Heat",
+                    "description": "<p>25尺。沸泉散发出热量，提升其周围空气的温度。一个生物在灵光内开始其回合时，必须通过@Check[fortitude|dc:33]豁免，否则只要它仍留在该区域就会一直@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]；对环境热效果免疫的生物或具有任何火焰抗力的生物免疫此效果。</p>"
+                },
+                "Freeze and Shatter": {
+                    "name": "冻结与破碎 Freeze and Shatter",
+                    "description": "<p>如果沸泉被寒冷伤害摧毁，其身体会冻结并爆炸，释放出一波寒冷的空气和冰片，对@Template[emanation|distance:20]范围内的生物造成@Damage[4d6[piercing],4d6[cold]|options:area-damage]伤害（@Check[reflex|dc:36|basic|options:area-effect]豁免）。</p>"
+                },
+                "Scalding Breath": {
+                    "name": "灼热突袭 Scalding Breath",
+                    "description": "<p>沸泉吐出一片蒸汽云，对@Template[cone|distance:30]区域内的每个生物造成@Damage[14d6[fire]|options:area-damage]伤害（@Check[reflex|dc:33|basic|options:area-effect]豁免）。沸泉在[[/gmr 1d4 #Recharge Scalding Breath]]{1d4轮}内不能再次使用灼热吐息。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "沸泉"
+            }
+        },
+        "Wood Scamp": {
+            "name": "木魔蝠 Wood Scamp",
+            "publicNotes": "<p>木魔蝠的叶脉般的蝙蝠翅膀模仿了叶片的叶层和叶脉。这一特点，加上它们粗壮的绿色躯干和四肢，使它们能够轻松融入活树的枝杈中。它们对于魔蝠来说异常社交，并且在可能的情况下更喜欢团队合作。它们天性觉得自己的家乡位面相当乏味，并且在位面重新开放时兴奋不已。它们渴望前往新的地方，尽情制造恶作剧。</p>\n<hr />\n<p>乍一看，木元素似乎不像火元素、水元素或气元素兄弟那样具有破坏性，但不要被表面愚弄了，森林可能是个危险的地方。</p>\n<p>虽然有些像动物，但是这里展示的元素生物依然是植物，它们的生命周期反映了这一点。蔬菜羊长在有根的茎上，直到它们成熟（或者可能成熟）才能从茎上移走，这使得它们依赖于周围的环境来获取养分。苔藓树懒在它们生长出来的第一个世纪里，只不过是一堆绿色的绒毛，只有当它们长出防御性的木爪时，它们才能获得有限的行动能力。</p>\n<h2>野性但不野生 Wild But Unwild</h2>\n<p>许多木元素由木巨灵和木位面上的其他强大生物创造，并被赋予固定角色。它们充满自然保护区和广阔的庄园，一旦被释放到野外，可能不确定如何行动。它们本质上是被驯化出生的，即使在自然环境中，它们的行为也可能与它们模仿的野生生物大相径庭。它们的天敌很少，使元素生物面临的风险较小，尽管它们有时仍被巨型白蚁吃掉或被一些人当作宠物捕捉。</p>\n<h2>不叫大脑的大脑 A Brain By Any Other Name</h2>\n<p>即使是木元素的祖先被树木伮女士（Lady Shumunue）教导模仿动物，木元素的意识也不在大脑中，而是在其根系中。像苗圃爬行者、活体林地和根雕野兽这样的实体利用这一优势。木元素的木质身体可以被雕刻和制作，显然没有长期伤害，这意味着只要它们的根部没有受损，它们可能不会感到疼痛。</p>",
+            "hp": "再生 5 （火焰使其失效）",
+            "items": {
+                "Breathe Pollen": {
+                    "name": "花粉吐息 Breathe Pollen",
+                    "description": "<p>木魔蝠在@Template[cone|distance:15]喷出呛人花粉，对区域内每个造成@Damage[2d6[poison]|options:area-damage]伤害（@Check[reflex|dc:17|basic|options:area-effect]豁免；不需要呼吸的生物免疫）。木魔蝠在[[/gmr 1d4 #Recharge Breathe Pollen]]{1d4轮}内无法再次使用花粉吐息。</p>"
+                },
+                "Thorn Puncture": {
+                    "name": "荆棘穿刺 Thorn Puncture",
+                    "description": "<p>木魔蝠将尖爪上的荆棘刺入并折断目标的皮肤内，造成1点持续流血伤害，直到荆棘被移除。这需要交互动作。该伤害会随着生物皮肤上刺入的荆棘增多而叠加。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "木魔蝠"
+            }
+        },
+        "Kizidhar Shuyookh": {
+            "name": "木巨灵长老 Kizidhar Shuyookh",
+            "publicNotes": "<p>木巨灵长老是木元素位面光耀瀚界（the Glowing Infinity）强大的统治者。他们将其他巨灵，包括其他木巨灵视为自己伟力的附庸，像操纵外人一样操纵他们，只要有助于实现他们的目标。木巨灵长老外交官是木元素位面派往物质宇宙的使节，代表着大都会诺都林（Nodollin），和光耀瀚界的大苏丹娜艾莎尔·穆阿扎姆·拉亚迪，生长与衰败万物的女士（Grand Sultana Eshal Muazzam Rayadii，Lady of All that Grows and Decays）。</p>\n<hr />\n<p>木元素位面的巨灵被称作木巨灵，他们是其元素霸道的领主。这些木匠大师擅长各种木工和所有种类的木雕，他们乐于按照自己的愿景重塑世界——要么是创造自己的木雕像，要么是操控控制周围的生物。虽然他们能够雕刻自己，但他们通常认为自己的外形是完美的。</p>\n<p>他们回避其他巨灵，喜欢躲开那些实力相当的存在，而是与谄媚者和马屁精为伍。随着通往物质宇宙的道路经过漫长的岁月首次重新开放，木巨灵也漫游多元宇宙，寻找可以引诱的凡人加入他们的宫殿，成为仆人，艺人，和有价值的新消息来源。</p>",
+            "languages": "Speak With Plants, Truespeech",
+            "ac": "（举起盾牌时32）",
+            "items": {
+                "Sprout Shield": {
+                    "name": "萌发盾牌 Sprout Shield",
+                    "description": "<p><strong>触发</strong> 一个敌人使用近战打击命中木巨灵长老；</p>\n<p><strong>需求</strong> 木巨灵长老没有举起盾牌；</p>\n<hr />\n<p><strong>效果</strong> 如果长老没有盾牌，他可以使用萌发盾牌来创造一面夕木盾。随后长老举起盾牌。盾牌提供的环境加值会对触发攻击应用在其AC上。</p>"
+                },
+                "Manipulative Wish": {
+                    "name": "操纵祈愿术 Manipulative Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 长老举行 <em>祈愿术</em>仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老会尝试在为受益人使用祈愿术同时促进自己的利益。</p>"
+                },
+                "Parting the Trees": {
+                    "name": "融入树林 Parting the Trees",
+                    "description": "<p>木巨灵忽略由植物形成的困难地形，并能与更大体型的植物，例如树木共享空间。</p>"
+                },
+                "Sculpt Wood": {
+                    "name": "雕刻木材 Sculpt Wood",
+                    "description": "<p>木巨灵可以从自己的身体中创造出一件木制物品，此物品会出现在其手中，并保持附着。该物品可以是一件单手简易武器，盾牌，或轻负载物品。木巨灵可以用此能力来变形已经持握的物品，或将一件物品移动到一只空手中。用雕刻木材创造的任何物品一旦从木巨灵手中离开都会立即碎裂成渣。</p>"
+                },
+                "Seed of Ambition": {
+                    "name": "野心之种 Seed of Ambition",
+                    "description": "<p><strong>频率</strong> 每轮一次；</p>\n<hr />\n<p><strong>效果</strong> 木巨灵会在50尺内一个生物心中播种下对伟力的渴望。目标必须尝试一次@Check[will|dc:30]豁免。如果失败，直到其下回合结束，目标无法延迟，准备，或使用反应动作。相反，它必须使用所有动作进行打击，或用法术位或聚能点施放其最高环级的可用法术，或使用有利于如此做的动作，例如抽出武器，或向敌人移动。目标必须将攻击集中在木巨灵或它认为威胁最大的对手身上。此效果会在木巨灵再次使用野心之种时结束。</p>"
+                },
+                "Take Root": {
+                    "name": "扎根 Take Root",
+                    "description": "<p>巨灵将其武器插入地面。植物以木巨灵所在方格一角为中心的@Template[burst|distance:20]范围的地面发芽生长。该区域内地面上所有方格都成为困难地形，直到木巨灵再次使用该能力。</p>"
+                },
+                "Change Shape": {
+                    "description": "<p>木巨灵变形成为一个小型或中型木元素或植物生物。这不会影响木巨灵的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
+                    "name": "变身 Change Shape"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "木巨灵长老"
+            }
+        },
+        "Coldmire Pond": {
+            "name": "冷泥塘 Coldmire Pond",
+            "publicNotes": "<p>冷泥塘常被误认为是浅浅的水池，但这些有知觉的活水体实际上会在地面上爬行或漂浮在其他液体中。冷泥塘是危险的伏击捕食者，会将靠得太近的生物淹死，更危险的是，那些站在或游入其水中的生物也难以幸免。</p>",
+            "items": {
+                "Shallow Waters": {
+                    "name": "浅水 Shallow Waters",
+                    "description": "<p>冷泥塘可以占据其他生物所在的空间。穿过冷泥塘的生物将其视为困难地形。任意两个同时占据冷泥塘所在空间的生物无论其实际位置如何，都可以夹击它。</p>"
+                },
+                "Drag Below": {
+                    "name": "拖拽下沉 Drag Below",
+                    "description": "<p><strong>需求</strong> 冷泥塘与@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于它的生物占据相同的空间</p>\n<hr />\n<p><strong>效果</strong> 冷泥塘将目标拉入水面之下。目标必须通过@Check[reflex|dc:26]豁免否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并开始溺水。</p>"
+                },
+                "Flash Flood": {
+                    "name": "山洪暴发 Flash Flood",
+                    "description": "<p>水从冷泥塘中涌出，形成@Template[emanation|distance:20]范围波浪，撞击附近的生物，将它们击倒。区域内的生物以及当前与冷泥塘共享空间的生物，会受到@Damage[4d8[bludgeoning]|options:area-damage]伤害并被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]（@Check[reflex|dc:26|basic|options:area-effect]豁免）。站在冷泥塘占据空间内的生物将其豁免结果下降一阶。</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[1d6[bludgeoning],1d6[cold]]{1d6 钝击 + 1d6 寒冷}, @Check[fortitude|dc:25|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "冷泥塘"
+            }
+        },
+        "Talos Gadgeteer": {
+            "name": "金元素裔装置工匠 Talos Gadgeteer",
+            "publicNotes": "<p>被称为金元素裔的巨灵子嗣主要源自金巨灵、金元素生物以及金元素位面的其他居民。许多金元素裔具有金属加工方面的天赋，投身于修理工、矿工或铁匠等职业，尽管同样有许多金元素裔利用珍贵金属的光泽来追求名声和财富。</p>\n<p>金元素裔是最具都市化的巨灵后裔之一，通常出生或被吸引到各种规模的城市，尤其是那些拥有先进金属加工或技术行业的城市。金属通常需要通过加工才能找到其形态和功能，这可能解释了为什么许多金元素裔似乎喜欢与人们生活在一起，尽管不一定与他们社交。他们经常在技术生产线上找到工作，无论是从地球中开采原矿，将其加工成线材和齿轮，或构建设备本身。一些金元素裔憎恨并拒绝这种刻板印象，但许多人则接受自己对技术的迷恋，往往成为发明专家。因此，金元素裔比其他巨灵子嗣更有可能在他们的社区中使用发条技术。</p>\n<p>金元素裔早已定居在格拉利昂，尽管数量很少，但他们很少被认作巨灵子嗣。最多数量的金元素裔，以及最多的已知其真实本质的金元素裔，居住在天夏。在那里，金属作为一种元素的传统由来已久。金元素裔经常在听到元素金属的概念后，立刻被吸引到相关的讨论和研究中。历史记录中有描述皮肤如同无瑕银或青铜的著名宫廷官员和外交官。在过峡的象牙港区，家族经营的龙之铁炉的铁匠们使用从他们的金巨灵贵族祖先传下来的磁性技术打造刀剑和火器。</p>\n<p>金元素裔装置工匠是发条修补匠。当面临冲突时，他们偏爱的策略是将对手引入次等爆炸地雷陷阱，然后再进行直接交战。</p>",
+            "hp": "烧蚀护甲甲片",
+            "items": {
+                "Reflective Defense": {
+                    "name": "反射防御 Reflective Defense",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>触发</strong> 金元素裔装置工匠被30尺内的一个生物瞄准，并且他可以看到攻击者</p>\n<p><strong>需求</strong> 金元素裔装置工匠处于昏暗或明亮光中</p>\n<hr />\n<p><strong>效果</strong> 金元素裔装置工匠利用金属皮肤的反光晃得敌人睁不开眼；敌人必须通过@Check[reflex|dc:14]豁免，否则@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}直到金元素裔的下个回合结束。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金元素裔装置工匠"
+            }
+        },
+        "Elder Outcrop": {
+            "name": "老凸岩 Elder Outcrop",
+            "publicNotes": "<p>一块经过漫长岁月侵蚀的致密岩石可以获得智慧并缓慢觉醒，拥有自然的智慧。这种元素生物行动迟缓，不易激怒，只有面对直接威胁时才会被激发。</p>\n<hr />\n<p>广大的土元素群体对元素领主的回归以及金元素位面和木元素位面的关注反应较慢。这些事件并未摧毁山脉，也没有吹散沙土。</p>\n<h2>朴实情感 Earthy Emotions</h2>\n<p>土元素比大多数元素生物话更少。他们行动迟缓，权衡决定的过程如此缓慢，甚至让讨论失去活力和动力。他们最关心的是局面是否能忍受。虽然稀有或华丽的宝藏可能会吸引土元素，但若没有直接的威胁，他们很难产生任何紧迫感。</p>\n<h2>石之智慧 Wisdom Of Stone</h2>\n<p>老凸岩每经历一次岩石的侵蚀、每一个暴风和冰冻，都会学到一课。作为睿智的顾问和导师，他们受到其他元素生物以及自然生物的尊重和喜爱。岩石教派的德鲁伊敬仰老凸岩的智慧，乐于接受他们广阔的视角，无论是字面上的还是哲学上的。</p>",
+            "items": {
+                "Dust Eternal": {
+                    "name": "永恒尘土 Dust Eternal",
+                    "description": "<p>30尺。尘土在老凸岩周围旋转，使其灵光内的一切（包括老凸岩）都处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽 Concealed}状态。此外，老凸岩根部的尘土使灵光内的地面变为困难地形。老凸岩可以用一个具备专注特征的单动作启动或关闭此灵光。</p>"
+                },
+                "Unstoppable": {
+                    "name": "不可阻挡 Unstoppable",
+                    "description": "<p>老凸岩的缓慢状态无法高于@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，它无视对其速度的减值以及 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}状态。</p>"
+                },
+                "Call of Earth": {
+                    "name": "大地召唤 Call of Earth",
+                    "description": "<p>被老凸岩的石块远程打击命中的飞行生物会受到7环级@UUID[Compendium.pf2e.spells-srd.Item.gPvtmKMRpg9I9D7H]{地缚术 Earthbind}（@Check[fortitude|dc:33|traits:transmutation]）的影响。</p>"
+                },
+                "Earth Glide": {
+                    "name": "潜地 Earth Glide",
+                    "description": "<p>老凸岩能掘地穿过任何土质物质，包括岩石。当它这样做时，老凸岩能以满掘地速度移动，并且不留隧道或痕迹。</p>"
+                },
+                "Natural Formation": {
+                    "name": "自然形态 Natural Formation",
+                    "description": "<p>直到下一次行动前，老凸岩看起来像是一个自然地形特征。它伪装成自然岩石露头时的欺骗检定结果和DC自动取47。当它使用自然形态时，它的永恒尘土灵光被关闭。</p>"
+                },
+                "Stone Grip": {
+                    "name": "岩石抓握 Stone Grip",
+                    "description": "<p>巨大的石指从老凸岩灵光的内地面升起，抓住位于地面上的最多两个中型或更小的生物。每个目标必须通过@Check[reflex|dc:33]豁免，否则会@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}于石手（若大失败则被@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}；[[/act escape dc=33]]）。受擒或束缚于石手的生物在其回合结束时会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，或当前缓慢状态值增加1。当一个生物由于此效果的缓慢状态最终变得无法行动时，该生物会被永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{石化 Petrified}。</p>"
+                },
+                "Tremorsense 120 feet": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>",
+                    "name": "震颤感知120尺 Tremorsense 120 feet"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "老凸岩"
+            }
+        },
+        "Gennayn": {
+            "name": "微巨灵 Gennayn",
+            "publicNotes": "<p>微巨灵是通常担任更大元素存在使者和信使的微小巨灵。虽然许多微巨灵在这种卑微的任务中找到目标，但他们真正的使命和兴趣是艺术。</p>\n<p>他们通常外貌为微小健美的人形生物，身上不断散发着缕缕元素能量。这些元素能量通常反映出他们的情绪和所调和的元素。微巨灵还喜欢浮夸的戒指，护身符和臂章。</p>\n<p>微巨灵热衷于帮助那些奖励和善待他们的强大生物，但他们很快会抛弃那些他们认为无聊，吝啬，或虐待他们的人。破坏艺术品或虐待艺术家的生物将招致他们永恒的愤怒。</p>",
+            "items": {
+                "Inspiring Influence": {
+                    "name": "启发灵感 Inspiring Influence",
+                    "description": "<p>微巨灵会在支援表演或交涉技能检定的@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助 Aid}动作中自动成功。当在协助创作新的艺术或新的表演时，其协助自动算作大成功。</p>"
+                },
+                "Attuned Element": {
+                    "name": "调和元素 Attuned Element",
+                    "description": "<p>每天醒来时，微巨灵会与一种位面的元素调和。他基于调和的元素获得相应的特征，移动速度，戏法，抗力，以及元素之拳攻击的伤害类型：</p>\n<ul>\n<li>气：飞行30尺，电击抗力5，电弧击，电击伤害；</li>\n<li>土：掘地15尺，钝击抗力5，堆石术，钝击伤害；</li>\n<li>火：飞行30尺，火焰抗力5，引火术，火焰伤害； </li>\n<li>金：掘地15尺，挥砍抗力5，尖锐飞针，挥砍伤害；</li>\n<li>水：游泳20尺，寒冷抗力5，冻伤术，钝击伤害；</li>\n<li>木：攀爬15尺，穿刺抗力5，绊足藤，穿刺伤害。</li>\n</ul>\n<p>调和持续到微巨灵调和一种不同的元素。</p>"
+                },
+                "Little Wish": {
+                    "name": "微小祈愿术 Little Wish",
+                    "description": "<p><strong>触发</strong> 60尺内微巨灵能看见的一个生物尝试豁免骰或技能检定</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 微巨灵以一种微小的方式重塑现实来扭转命运，允许该生物重骰豁免骰或技能检定，并采用较好的结果。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>微巨灵变形成为超小型元素或动物。这不会影响微巨灵的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "微巨灵"
+            }
+        },
+        "Munsahir Gatecrasher": {
+            "name": "火矮人破门者 Munsahir Gatecrasher",
+            "publicNotes": "<p>通常是贵族成员，破门者穿着先进的动力装甲。</p>\n<hr />\n<p>火矮人建立军事化的传统社会。</p>\n<h2>火矮人阶级 Munsahir Hierarchy</h2>\n<p>火矮人社群的三个阶级可以从所有成员所穿的裹裙中辨别出来。贵族，作为无可指责的统治者，穿着精致的黄铜裹裙。社群中层是商人和贸易者，他们穿着青铜裹裙。工人阶级是那些从事建筑和繁重劳动的人，他们穿着生铜裹裙。官方来说，阶层是无法流动的；可怕的罪行可能会导致黄铜贵族被送进监狱，但不会使他们失去其地位。</p>",
+            "items": {
+                "Heat of the Forge": {
+                    "name": "熔炉之热 Heat of the Forge",
+                    "description": "<p>10尺。火矮人的皮肤像熔炉的火焰一样散发热量。每个在该区域内开始其回合的生物必须通过@Check[fortitude|dc:19]豁免，否则在该区域内会变得@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]。对环境热效果免疫或具有任何火焰抗力的生物免疫此效果。</p>"
+                },
+                "Self-Destruct": {
+                    "name": "自毁 Self-Destruct",
+                    "description": "<p>当火矮人的生命值降至0时，他们的护甲会在其下一个回合开始时爆炸，对@Template[emanation|distance:10]范围造成@Damage[5d6[fire]|options:area-damage]伤害（@Check[reflex|dc:19|basic|options:area-effect]豁免）。</p>"
+                },
+                "Blazing Rush": {
+                    "name": "炽热冲锋 Blazing Rush",
+                    "description": "<p>破门者最多以双倍速度直线移动。他们可以穿过敌人的空间，并对其移动路径上的每个生物进行一次铁槌手套打击。炽热冲锋在[[/gmr 1d4 #Recharge Blazing Rush]]{1d4轮}内无法再次使用。</p>"
+                },
+                "Burning Touch": {
+                    "name": "燃烧之触 Burning Touch",
+                    "description": "<p>火矮人破门者的打击造成额外1d6火焰伤害（已包含在数据中）。当破门者成功进行@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}或@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}动作时，他们还会对目标造成@Damage[1d6[fire]]伤害。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "火矮人破门者"
+            }
+        },
+        "Anemos": {
+            "name": "风使 Anemos",
+            "publicNotes": "<p>宇宙中万千生命的真相即为天气控制着世界。流经格拉利昂的生命之水，维持健康森林的存在，以及那些帮助农作物茁壮成长的雪、融雪和雨水，全都依赖于天气——而天气则由风的变化所决定。风使是来自气元素位面的强大存在，受古老神灵的委托，守护天空并引导各个世界的风。他们引导风沿自然路径前行，尽管他们既不邪恶也不怀恶意，风使对风暴可能会如何影响其路径上的任何生物都没有太多关注。</p>\n<p>风使可以采取多种形态，并能像在微风中穿行一样轻松地在这些形态之间切换。他们以人类的外形在凡人中行走，不引起过多关注；当需要迅速穿越天空时，他们会变成由风暴云和雨水组成的巨大雷霆之马。然而，他们的真身是凝聚成类人形的风，通常有卷曲的头发和由柔软漂浮的云组成的羽翼。</p>\n<p>在格拉利昂，每一方的主要风都由四位主风使创造和引导。寒冷的北风由波瑞尔引导，是冬天的使者。奥斯特尔引导来自南方的热风。欧洛尔带来来自东方的暴风。最后，温和的春风由来自西方的泽费尔呼唤而来。这四位主要风使及其下属的次级风使议会，塑造并控制着整个格拉利昂的风。据大家所知，主风使并不向更高的权威报告。在气元素位面还有更强大的顶级风使，但他们似乎对将物质宇宙纳入他们的计划毫无兴趣。</p>\n<p>尽管主风使尽量与凡人的事务保持一定的距离，但次级风使偶尔会更加关注。有些会监视某个定居点或县城，保护它、滋养它，甚至恶意地毁灭它。每个风使都有自己的一套兴趣哀嚎。许多风使自负或小心眼，更多的风使态度变化之快，犹如他们所引导的风一样。取悦一个风使不是遵循一套固定的公式，而是需要不断改变策略，迎合他们瞬息万变的当前兴趣或认知需求。</p>\n<h2>空气之形 The Shape Of The Air</h2>\n<p>在气元素位面的风使通常是无性别的，而那些在宇宙中度过一段时间的风使，有时会尝试或发展出对某一种凡人性别的偏好，这些性别可能是他们观察或生活在一起的凡人性别。</p>",
+            "hp": "再生 15 （受克于土）",
+            "languages": "Truespeech",
+            "items": {
+                "Truespeech": {
+                    "name": "实言术 Truespeech",
+                    "description": "<p>风使可以与任何拥有语言的生物交谈并理解其语言。</p>"
+                },
+                "Wind Orchestra": {
+                    "name": "风之乐团 Wind Orchestra",
+                    "description": "<p>风使不需要乐器来演奏音乐，而是使用他们的风来创造和传播任何他们希望复制的乐器的声音。他们可以同时模仿任意数量的乐器，创造并指挥自己的个人乐团。</p>"
+                },
+                "Blessed by the Winds": {
+                    "name": "风之祝福 Blessed by the Winds",
+                    "description": "<p>80尺。那些胆敢与风使在同一空间飞行的生物会遇到湍急的风，但它们总会小心翼翼地避免伤害或打扰引导它们的牧者。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。在灵光启动时，风使不会受到环境空气或天气影响，除非他们选择接受这些影响。</p>"
+                },
+                "Earthbane": {
+                    "name": "受克于土 Earthbane",
+                    "description": "<p>如果风使受到土效果影响，风使的再生能力会被抑制1轮。如果风使与地面接触1轮以上，它的再生能力在此期间会一直被抑制。如果风使被至少1英寸深的泥土、污泥或石头淹没，风使的灵光将被禁用，并且风使会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}。</p>"
+                },
+                "Redirect Weather": {
+                    "name": "重定天气 Redirect Weather",
+                    "description": "<p><strong>需求</strong> 风使的灵光在启动状态</p>\n<p><strong>触发</strong> 在风使的灵光范围内有生物使用气或电击法术，或气或电击法术在风使的灵光范围内生效</p>\n<hr />\n<p><strong>效果</strong> 该法术的风和天气听从风使的指挥。风使可以重新决定决定目标、目的地或法术的其他效果，就如同他们是法术的施放者。</p>"
+                },
+                "Collect Thunder": {
+                    "name": "收集雷电 Collect Thunder",
+                    "description": "<p><strong>需求</strong> 风使有一只空闲的手</p>\n<hr />\n<p><strong>效果</strong> 风使将手伸入环绕他们的风中，从指尖冒出的火花聚集成雷电。风使在他们的空手中创造一道雷电束。如果风使花费一个动作来收集雷电，雷电束会击中他们的空手，产生巨大的轰鸣，使20尺范围内的所有生物耳聋1轮，除非它们通过@Check[fortitude|dc:40]豁免；这为收集雷电增加听觉特征。雷电在1轮后消散。</p>"
+                },
+                "Command the Breeze": {
+                    "name": "指挥微风 Command the Breeze",
+                    "description": "<p>当风使施展仪式时，他们会独自完成仪式的所有环节，指挥他们的风完成仪式的所有成分。他们必须满足仪式所需的所有次要施法者的要求，并且必须亲自尝试通常由次要加施法者进行的检定。此外，风使可以比通常更快地施展仪式。如果一个仪式的施法时间以天为单位，他们可以在相同数量的小时内施展完毕。</p>"
+                },
+                "Storm Strikes Twice": {
+                    "name": "风暴双击 Storm Strikes Twice",
+                    "description": "<p>风使投掷一个雷电束，然后化作一阵风瞬间移动到雷电束的位置再次攻击。他们对一个在其第一射程增量内的生物进行一次雷电束远程打击，然后化为作为一阵风传送到该生物的位置，然后抓住投出的雷电束，对触及内的生物进行一次雷电束近战打击。在完成两次攻击之前，他的多重攻击减值不会增加。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>风使的移动不会触发反应动作。</p>"
+                },
+                "Regeneration 15 (Deactivated by Earthbane)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
+                    "name": "再生 15 （受克于土）"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "风使"
+            }
+        },
+        "Nightwood Guardian": {
+            "name": "夜林守护者 Nightwood Guardian",
+            "publicNotes": "<p>夜林是木元素位面的一部分，由于缺乏荧光植物，这些区域永久笼罩在黑暗中。在这里，植被和动物需要黑暗而非光明才能繁荣。被称为夜林守护者的类巨魔生物在这些森林中巡逻，以确保它们始终处于永恒的阴影中。夜林守护者认为自己是正义的卫士，对任何其他人的借口——无论是入侵者的还是居民的——都不屑一顾。这些守护者极度厌恶光亮，虽然光不会像对某些种类的生物一样伤害他们。尽管对光亮和其自然栖息地中的任何入侵生命形式都保持警惕，夜林守护者的恐惧很容易转变为愤怒，使得守护者成为驱逐入侵者的愤怒力量。</p>",
+            "hp": "化肉为木",
+            "items": {
+                "Fire-fueled Rage": {
+                    "name": "火焰激怒 Fire-fueled Rage",
+                    "description": "<p>当夜木守护者受到火焰伤害时，他们会变得愤怒。守护者获得15点临时生命值，近战攻击额外造成2点伤害，并且AC减少1。他们不能举盾或使用带有专注特征的动作，除了@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}。这个效果在守护者在一整轮中不再看到任何火焰或守护者@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}时结束，以先发生者为准。</p>\n<hr />\n<p>@UUID[Compendium.pf2e.feat-effects.Item.z3uyCMBddrPK5umr]{效果：狂暴}</p>"
+                },
+                "Flesh of Wood": {
+                    "name": "化肉为木 Flesh of Wood",
+                    "description": "<p>对夜林守护者造成的伤口会使他们的血肉转化为木头。当守护者的生命值减少到40或更少时，他们的身体会变成坚固的木头。他们会陷入震慑状态，具有对所有伤害的10点抗力，并具有每轮40点再生（被火焰失效）。当守护者的生命值达到100或更多时，可以结束该状态，但他们也可以选择无限期地保持这种形态。</p>"
+                },
+                "Shield Eyes": {
+                    "name": "护眼 Shield Eyes",
+                    "description": "<p>当夜林守护者举起盾牌时，他们会保护眼睛，不会因为强光致盲能力或其他光亮效果而获得@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}或@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}状态。</p>"
+                },
+                "Nightwood Roar": {
+                    "name": "夜林咆哮 Nightwood Roar",
+                    "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 守护者咆哮，熄灭@Template[cone|distance:30]范围内的光源。普通火焰和光源会直接熄灭，守护者尝试反制任何魔法光源的反制调整值[[/r 1d20+21 #Counteract]]{+21}，反制环级5。</p>"
+                },
+                "Light Blindness": {
+                    "name": "强光致盲 Light Blindness",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "夜林守护者"
+            }
+        },
+        "Painted Stag": {
+            "name": "彩绘雄鹿 Painted Stag",
+            "hp": "再生 10 （火焰使其失效）",
+            "items": {
+                "Mauler": {
+                    "name": "斗殴者 Mauler",
+                    "description": "<p>彩绘雄鹿对被擒抱的生物，伤害骰有+5环境加值。</p>"
+                },
+                "Painted Dance": {
+                    "name": "彩绘舞蹈 Painted Dance",
+                    "description": "<p>雄鹿摇晃着身体上的木板，发出刺耳的咔嗒声，彩绘图案随之起舞。在彩绘雄鹿周围60范围内所有能看到或听到彩绘雄鹿的生物必须进行@Check[will|dc:28]豁免；因彩绘雄鹿@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]的生物的在豁免上有-4环境减值。无论其豁免结果如何，每个生物临时免疫1小时。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物被彩绘雄鹿@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}1轮。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}并且在震慑期间被彩绘雄鹿迷魂。</p>\n<p><strong>大失败</strong> 类似失败，但是@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 4}。</p>"
+                },
+                "Regeneration 10 (Deactivated by Fire)": {
+                    "name": "再生10（由火焰失效）Regeneration 10 (Deactivated by Fire)",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "彩绘雄鹿"
+            }
+        },
+        "Asp of Grief": {
+            "name": "哀伤铁蛇 Asp of Grief",
+            "publicNotes": "<p>在金元素位面，柔和的低语和轻柔的叮当声常常伴随着狂风，而看似金色缎带的东西在空气中扭动和翻转。实际上，这些是哀伤铁蛇——被强烈情感吸引的智能蛇类生物。它们眼中的铁色虹膜使它们可以看到金元素位面不断变化的磁场，哀伤铁蛇利用这些磁场在天空中航行。</p>\n<p>哀伤铁蛇以哀伤和心痛为食，丧失、哀悼和失落的时刻会吸引它们。它们戴着精致的铁铃铛，宣布自己在葬礼、战场和为死者建造的传统骨灰堂上的到来。哀伤铁蛇摇动头部，使铃铛发出叮当声，提醒哀悼者它们的存在。“你愿与我分享你的哀伤吗？”它们低声嘶嘶地问道。</p>\n<p>如果死者家属同意，哀伤铁蛇的舌头会轻轻舔舐，品尝活人的痛苦，吸吮哀伤和恐惧，提供暂时的解脱。尽管哀伤铁蛇与死亡有关，但金元素位面的多数居民认为它们是吉兆。</p>\n<p>哀伤铁蛇是非常好奇的生物，渴望了解关于魔法和多元宇宙的信息。它们可能会依附于冒险队伍，或者向它们遇到的旅行者询问任何在旅途中发现的神秘魔法知识。作为交换，哀伤铁蛇愿意帮助这些旅行者处理任何痛苦或创伤——或者至少暂时缓解他们的情感痛苦。</p>\n<h2>召唤哀伤铁蛇 Calling The Asps</h2>\n<p>在金元素位面，葬礼仪式通常包括将死者置于高塔上，周围放置水碟。银白色的碱金属钠块在水面上跳舞并燃烧，释放出羽状的氢气烟雾。当哀伤铁蛇在磁场上滑行时，它们能感知到这种死亡和哀伤的宣告，并沿着痕迹找到哀悼者。</p>",
+            "allSaves": "对抗情绪全豁免+1状态加值",
+            "items": {
+                "Magnetic Vision": {
+                    "name": "磁场视觉 Magnetic Vision",
+                    "description": "<p>哀伤铁蛇可以看到磁场，使其能够感知大块的磁性金属（负载至少1），这是精确感官。</p>"
+                },
+                "Curtain of Calm": {
+                    "name": "宁静幕帘 Curtain of Calm",
+                    "description": "<p>20尺。哀伤铁蛇吸收其周围生物的情感。在灵光范围内开始其回合的敌人，必须进行一次@Check[will|dc:29]豁免。如果失败，哀伤铁蛇会吸收其哀伤。生物会感到情感和动机的缺失，其惊惧值减少1，并且变得到@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（在大失败时为@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}），持续[[/gmr 1d4 #rounds]]{1d4轮}。无论豁免结果如何，该生物在1分钟内对宁静幕帘暂时免疫。每当一个生物在此豁免中失败时，哀伤铁蛇会充满哀伤（见铁之哀伤），持续1分钟。</p>"
+                },
+                "Iron Grief": {
+                    "name": "铁之哀伤 Iron Grief",
+                    "description": "<p>如果哀伤铁蛇在充满哀伤时施放磁力加速，它可以将法术升阶至5环级，或最多指定三个目标，而不是原本的一个，并分别对每个目标进行掷骰。施法后，哀伤铁蛇不再充满哀伤。</p>"
+                },
+                "Magnetic Traveler": {
+                    "name": "磁场旅者 Magnetic Traveler",
+                    "description": "<p>哀伤铁蛇可以乘着磁场进行长距离旅行。在具有强磁场的位置（包括金元素位面和格拉利昂），其飞行速度加倍。</p>"
+                },
+                "+1 Status to All Saves vs. Emotion": {
+                    "name": "对抗情绪全豁免+1状态加值"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "哀伤铁蛇"
+            }
+        },
+        "Crysmal": {
+            "name": "Crysmal",
+            "publicNotes": "<p>Crysmals dwell within deep caverns of the Plane of Earth, laden with crystals that glow under their own internal energy. A crysmal's hunger for gems will lead it to travel almost anywhere, even through planar tears. Occasionally, they even establish colonies on planes other than their own, should their newfound territory prove filled with crystals.</p>\n<p>A crysmal's scorpion-like body glitters with crystal. As light refracts between the facets, they concentrate and absorb it, energizing the crysmal and, some say, fueling the creature's magic.</p>\n<p>Crysmals form small communities in locations where crystals are plentiful, working alongside one another to track down anything from a common quartz to precious rubies and sapphires. Scouting parties use their innate magic to communicate with each other via light and wordless sound, as well as to seek out more crystals. However, when precious stone resources grow scarce, crysmals become independent and territorial about their supply, taking crystals from wherever they can, even seizing them from other creatures.</p>\n<p>A crysmal's drive to gather crystals is akin to the drive to reproduce. As a crysmal gathers stones, it stores them within its body. Once the crysmal has enough stored material, the parent fuses its stores into a tiny replica of itself and extrudes the infant crysmal, sometimes referred to as a shardling, into the world. The process leaves the parent weakened for a short time, until it can gather enough crystal to repair its body and begin the process anew. Infant crysmals consume crystals in a similar way. They process the raw material over a few months to grow to adult size. Thereafter, a crysmal \"eats\" stone only to heal injuries.</p>\n<h2>Internal Gems</h2>\n<p>When a crysmal dies, its body breaks into fragments of crystal. Some of these pieces are valuable, but potentially more lucrative are the gems the crysmal has stored inside its body to produce offspring. It takes semiprecious and precious stones worth 500 gp to produce an infant crysmal, though most slain crysmals have only a fraction of this amount stored. Once the stones become a new crysmal, they transform into the crystal of the infant's body, no longer the treasured material they once were.</p>",
+            "items": {
+                "Crystal Scent": {
+                    "name": "Crystal Scent",
+                    "description": "<p>A crysmal can sense crystals or gems within 60 feet as if using the scent ability.</p>"
+                },
+                "Rock Stride": {
+                    "name": "Rock Stride",
+                    "description": "<p>The crysmal phases into adjacent rock that is large enough to accommodate it. Then, the crysmal senses similar or larger rocks within 60 feet and emerges from one. The crysmal can't use this ability again for 1 minute.</p>"
+                },
+                "Sink into Stone": {
+                    "name": "Sink into Stone",
+                    "description": "<p>The spikes fired from a crysmal's tail phase into stone, pinning enemies in place. Enemies standing on or adjacent to a stone surface who are struck by a critical hit on a tail spike Strike are @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}. The DC to @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escape} is 17.</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "Crysmal"
+            }
+        },
+        "Tantriog": {
+            "name": "龟蟹 Tantriog",
+            "publicNotes": "<p>无论是美味佳肴的品尝、精彩歌曲的演唱，还是史诗般浪潮的掀起，总能看到龟蟹的身影。龟蟹是独特的水元素生物，拥有螃蟹的前爪、乌龟的壳以及背鳍。它们在无垠的海洋中穿梭，不断寻找新的体验，不论是下一波大浪、一道美味的佳肴，还是一件艺术品。它们渴望新的感官刺激，通常不惜以他人的利益为代价来追求这些体验。</p>\n<p>如果一个人拥有稀有的艺术品、失落的知识，或者出色的冲浪和烹饪技能，龟蟹可以成为一个绝佳的伙伴。它们对那些有趣的人既迷人又友好，但它们的兴趣极不稳定，一旦感到无聊就会立刻放弃对方。龟蟹甚至可能会背叛朋友，只为了获得另一个有趣的故事。这使得与它们交朋友变得非常棘手，因为你无法理所当然地认为它们会一直对你感兴趣。</p>\n<p>关于龟蟹如何获得现在的形态是一个谜。有些人说，在元素位面最早的日子里，龟蟹是冰和雾的刺客，犯下了严重的罪行，以至于至今仍在受罚。另一些人则声称，龟蟹在输掉一场奇异的宇宙赌局后，变成了现在的形态。一种更流行的理论认为，龟蟹过去能够像水一样随容器形状而变化。在无尽的无聊中，它们尝试了各种形态，当它们从乌龟变形为螃蟹时，一种可能由水巨灵突然施加的诅咒使它们失去了这种能力，导致它们卡在了这两者之间。据说，任何能教会龟蟹重新学习变形能力的人都能获得它们永恒的友谊。不管是什么情况，激怒龟蟹的最简单方法就是询问它们的外貌。</p>\n<p>相反，要与龟蟹交朋友，最简单的方法是赞美它们的外貌或技能。不过，不要过于奉承。龟蟹不喜欢被愚弄或被当成傻瓜。</p>\n<hr />\n<p>打动龟蟹 IMPRESSING A TANTRIOG</p>\n<p>龟蟹喜欢看到新的景象或令人印象深刻的技能展示。任何想要保持龟蟹好感的人需要不断提供新的体验。因此，许多龟蟹与侏儒形成了意想不到的友谊，因为侏儒需要不断寻找新的体验，这为它们提供了共同点。</p>",
+            "items": {
+                "Shell Defense": {
+                    "name": "龟壳防御 Shell Defense",
+                    "description": "<p>龟蟹将四肢和头缩入壳中并结束其回合。这使其AC增加到26，但它无法行动，除非以一个单动作重新从壳里钻出。</p>"
+                },
+                "Listless Saliva": {
+                    "name": "无力唾液 Listless Saliva",
+                    "description": "<p>龟蟹的精华中充满了它们无尽的倦怠。任何被龟蟹的喙或唾液球打击命中的生物必须通过@Check[will|dc:24]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "龟蟹"
+            }
+        },
+        "Gluttonous Geode": {
+            "name": "贪食晶洞 Gluttonous Geode",
+            "publicNotes": "<p>贪食晶洞是在自然力量撕裂充满元素魔法的晶洞时形成的，这导致晶洞产生一道天然裂缝，这好似铰链一样能不断开合的下颚。虽然看似无足轻重，且大小不过普通乌龟，但贪食晶洞在追击敌人时却极其好斗且顽强。</p>\n<h2>朴实情感 Earthy Emotions</h2>\n<p>土元素比大多数元素生物话更少。他们行动迟缓，权衡决定的过程如此缓慢，甚至让讨论失去活力和动力。他们最关心的是局面是否能忍受。虽然稀有或华丽的宝藏可能会吸引土元素，但若没有直接的威胁，他们很难产生任何紧迫感。</p>",
+            "items": {
+                "Attach": {
+                    "name": "附着 Attach",
+                    "description": "<p>晶洞跳跃至多15尺，并进行一次水晶牙打击。如果命中比它大的生物，它可以附着在该生物上。附着类似于擒获生物（[[/act escape dc=17]]），但晶洞会随生物移动而不是将其固定在原地。附着期间晶洞处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态。如果晶洞在附着期间被杀死或推离，附着的生物会受到@Damage[1[bleed]]伤害。逃脱附着的晶洞或以其他方式移除晶洞不会造成流血伤害。</p>"
+                },
+                "Gnaw": {
+                    "name": "啃噬 Gnaw",
+                    "description": "<p><strong>需求</strong> 晶洞附着在生物上</p>\n<hr />\n<p><strong>效果</strong> 晶洞对附着的生物造成@Damage[(1d4+2)[bludgeoning]]伤害（@Check[fortitude|dc:17|basic]豁免）。</p>"
+                },
+                "Tremorsense (Imprecise) 30 feet": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>",
+                    "name": "震颤感知 （模糊）30尺"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "贪食晶洞"
+            }
+        },
+        "Solar Crow": {
+            "name": "金乌 Solar Crow",
+            "publicNotes": "<p>这些巨大的三足元素就像长着火焰羽毛的乌鸦，据说如太阳一样耀眼。它们在燃烧的桑碳森林（Forest of Mulberry Coals）筑巢，由八到十几只群居，以十只最为常见。</p>\n<hr />\n<p>烈焰支配者的火巨灵征召本位面更多的火元素，来为在回归位面上的新战争做好准备，甚至还动员了那些甚少在聚居地附近活动的火元素。</p>\n<h2>恶名传说 Story Of Infamy</h2>\n<p>在由龙统治的天夏，传说有一大群金乌在木元素位面大肆破坏，将一种可以授予不朽的草药灭绝，然后由回到天夏肆虐。所有的金乌都被一名传奇射手射杀，只余下一只。</p>",
+            "items": {
+                "Smoke Vision": {
+                    "name": "烟视 Smoke Vision",
+                    "description": "<p>烟不会削弱金乌的视觉；它忽视由烟带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Glinting Wing": {
+                    "name": "闪光之翼 Glinting Wing",
+                    "description": "<p><strong>触发</strong> 120尺内的生物尝试以金乌为目标</p>\n<hr />\n<p><strong>效果</strong> 金乌防御性地调整翅膀的位置，用光线照射攻击者的眼睛。在触发效果持续时间内，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}状态，使金乌对其视作隐蔽。</p>"
+                },
+                "Glow": {
+                    "name": "发光 Glow",
+                    "description": "<p>25尺。金乌在@Template[emanation|distance:25]范围内产生明亮光照（在接下来25尺内产生昏暗光照）。</p>"
+                },
+                "Blinding Heat": {
+                    "name": "致盲热浪 Blinding Heat",
+                    "description": "<p>金乌展开翅膀，在@Template[emanation|distance:120]范围内释放出灼热刺眼的光芒。区域内每个生物受到@Damage[9d6[fire]|options:area-damage]伤害，进行@Check[reflex|dc:29|options:area-effect,damaging-effect]豁免。金乌在[[/gmr 1d4 #Recharge Blinding Heat]]{1d4轮}内不能再次使用致盲热浪，且其发光灵光在此期间失效。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物受到一半伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。</p>\n<p><strong>失败</strong> 生物受到全额伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1轮。</p>\n<p><strong>大失败</strong> 生物受到双倍伤害，并陷入目盲1分钟。</p>"
+                },
+                "Burning Talons": {
+                    "name": "燃烧鸟爪 Burning Talons",
+                    "description": "<p>@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于金乌的生物受到@Damage[1d4[persistent,fire]]伤害。其在受擒于金乌期间不能从此伤害中恢复。</p>"
+                },
+                "Snatch": {
+                    "name": "紧攫 Snatch",
+                    "description": "<p>金乌在用其足爪使生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]期间能够带着该生物，以一半速度飞行。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金乌"
+            }
+        },
+        "Lithic Locus": {
+            "name": "起源岩灵 Lithic Locus",
+            "publicNotes": "<p>文明会消亡，被时间掩埋，但它们的记忆可能依然留存在破碎的陶器、倒塌的建筑和被毁坏的艺术品中，并在岩石和土壤的压力下被压缩和净化。一些被发掘的遗址中，其基础材料中可能仍然保留着一丝意识，当被唤醒时，这些材料会再次以一个灭绝民族的化身形式行走。这些起源岩灵代表了他们社会的辉煌与愚蠢。与之对话，就如与一个古老时代的见证者对话。起源岩灵的个性展现了他们文化的方方面面，因此这些起源岩灵的态度各异。它们的外表反映了其时代的美学和技术，被发掘出来的土壤云雾所环绕。</p>\n<p>宇宙中的考古遗址丰富多样，而土元素位面则拥有更多、且更为古老的遗址。有些居民甚至发现了比他们自己更为古老的文化所遗留下来的起源岩灵，亲眼目睹了那些文化在逐渐被遗忘后所剩下的遗迹。这促使一些文明开始制定衰落的计划，通过在岩石中留下遗产来永存于世。</p>\n<h2>发掘古代遗物 Ancient Finds</h2>\n<p>起源岩灵通常包含重要且有价值的物品。这些元素结构体不太可能同意被掠夺，但一些起源岩灵会将其古物赠予值得的继承者，骄傲地看到他们文化的创造在现代得到有效利用。起源岩灵还可以引导真诚的探求者找到其他失落的宝藏，帮助恢复已灭绝社会的知识。</p>",
+            "languages": "Plus One Ancient Language",
+            "items": {
+                "Antiques": {
+                    "name": "古物 Antiques",
+                    "description": "<p>起源岩灵至少包含一个魔法物品。这些古物是耐用的、永久物品，是起源岩灵遗址的一部分，体现了他们的文化。起源岩灵可以像穿戴物品或手持物品一样获得这些物品的效果，并能启动它们。起源岩灵通常拥有一个符合其等级的物品。</p>"
+                },
+                "Bury": {
+                    "name": "掩埋 Bury",
+                    "description": "<p>任何被起源岩灵的远古石块打击命中的生物都会被部分掩埋在一阵崩塌的土石中，陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]（[[/act escape dc=34]]）。</p>"
+                },
+                "Echo the Past": {
+                    "name": "回响过往 Echo the Past",
+                    "description": "<p>起源岩灵召唤过去文明的残留部分，以传授教训或掌控现状。再次使用此能力会结束任何先前的显现。起源岩灵施放以下异能内在法术（DC 34）之一，以实现列出的目的。</p>\n<p><em><strong>@UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]{支配术 Dominate}</strong></em> 被支配的生物扮演起源岩灵文明中的历史人物或社会阶层中的某人（如大祭司）。</p>\n<p><em><strong>@UUID[Compendium.pf2e.spells-srd.Item.Ucf8eynbZMfUucjE]{幻象场景 Illusory Scene}</strong></em> 场景重现起源岩灵文明的历史事件。</p>\n<p><em><strong>@UUID[Compendium.pf2e.spells-srd.Item.hghGRzOSzEl4UXdS]{唤起魂灵 Invoke Spirits}</strong></em> 这些灵魂来自起源岩灵对其文明人物的记忆。</p>\n<p><em><strong>@UUID[Compendium.pf2e.spells-srd.Item.kOa055FIrO9Smnya]{石墙术 Wall of Stone}</strong></em> 起源岩灵重建其文明建筑的墙壁，包括装饰。</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知 （模糊）60尺",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "起源岩灵"
+            }
+        },
+        "Elemental Thicket": {
+            "name": "元素灌木丛 Elemental Thicket",
+            "publicNotes": "<p>在宇宙中，植物生长遵循日、周、年和十年的时间尺度。相反，元素灌木丛不断地、在几秒钟内生长。这些扭动的活体木材群体是生长本身的元素化身，一旦出现便迅速膨胀，吞噬其路径中的一切。</p>",
+            "items": {
+                "Entangling Growth": {
+                    "name": "纠缠增长 Entangling Growth",
+                    "description": "<p>30尺</p>\n<p>植物生命从元素灌木丛周围的所有土壤中冒出来，使周围5尺区域变为高等困难地形，周围30尺区域变为困难地形。该能力需要土壤，没有土壤对地形没有影响，比如加工过的石头，坚硬的岩石，开阔的水域等。</p>"
+                },
+                "Engulf": {
+                    "name": "包卷 Engulf",
+                    "description": "<p>@Check[reflex|dc:30]，@Damage[(8d10)[bludgeoning]]伤害，[[/act escape dc=27]]，破裂20</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                },
+                "Regeneration 15 (Deactivated by Fire)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
+                    "name": "再生15（由火焰失效）Regeneration 15 (Deactivated by Fire)"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(1d12+7)[bludgeoning]]，@Check[fortitude|dc:30|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "元素灌木丛"
+            },
+            "hp": "再生15（由火焰失效）"
+        },
+        "Wood Wisp": {
+            "name": "木微灵 Wood Wisp",
+            "publicNotes": "<p>如同其他微灵一样，木微灵漫游其所在的位面，并与其他微灵协调，一起在交响乐中徜徉。由于它们乐于结合，木微灵比其他木元素更频繁地出现在家乡位面之外，尽管与其他微灵相比仍然相对罕见。</p>\n<p>木微灵的外形类似于椰子，后面拖着厚密的树枝团，这些树枝甚至更深层地掩盖和隐藏了带刺的藤蔓网。不幸的是，它们既不了解这些刺对肉体生物可能造成的痛苦，又因为急切地提供帮助而表现出非常亲密的身体接触。</p>",
+            "items": {
+                "Accord Essence": {
+                    "name": "和声要义 Accord Essence",
+                    "description": "<p><strong>触发</strong> 30尺内，在过去一个小时内受到微灵共鸣的增益的盟友被一次攻击作为目标；</p>\n<hr />\n<p><strong>效果</strong> 微灵将自身引爆，造成小范围的元素爆炸，赋予30尺内的，在过去一个小时内受到微灵共鸣增益的盟友获得等于元素当前生命值一半的临时生命。这些临时生命持续1小时。</p>\n<p>使用该反应动作的微灵会被永久摧毁，并且仅能被@UUID[Compendium.pf2e.spells-srd.Item.6dDtGIUerazSHIOu]{祈愿术 Wish}仪式或者类似的强力效果复原。如果某个能力会阻止微灵的毁灭（例如，该微灵是被召唤的，并因此只会被送回），和声要义不会产生效果。</p>"
+                },
+                "Resonance": {
+                    "name": "共鸣 Resonance",
+                    "description": "<p>30尺。所有微灵都按照与它们的元素协调的频率振动，与所有具有该特征的生物和效果共鸣，并增强它们。区域中的生物在具有植物或木特征的效果上的攻击骰和伤害骰获得+1状态加值；具有元素以及植物或木特征之一的生物在所有攻击和伤害骰上获得该加值。对木微灵来说，该加值也适用于所有非魔法木质武器，例如杖和棍棒。</p>"
+                },
+                "In Concert": {
+                    "name": "演奏中 In Concert",
+                    "description": "<p>当木微灵在援助（Aid）时骰出大失败，它们改为得到失败，并且当它们骰出成功，它们改为获得大成功。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "木微灵"
+            }
+        },
+        "Rakkatak": {
+            "name": "飞肠虫 Rakkatak",
+            "publicNotes": "<p>搏动的器官和肿瘤在皮囊中松弛地蠕动，所有这些形成了一个畸形的肿块，这就是飞肠虫的身体。掠食者的眼睛扫视着四周，在烟雾中闪闪发光，就像一个个发光的小点。蠕动的昆虫状的腿——每只飞肠虫腿的数量都不同——挂在其臃肿的身体上。当飞肠虫战斗时，这些肢体会混乱地摆动，只有在进食或休息时才会平静下来。</p>\n<p>大多数飞肠虫都是独自飞行，在突然的俯冲攻击中捕食，但偶尔也会成群结队。尽管不具备与其他生物交流的能力，但飞肠虫有一种与亲属一起狩猎的贪婪天赋。通常情况下，一旦其中一只抓住了猎物，其他的也会扑过来抓住猎物，用水蛭一样的嘴巴吃掉猎物。</p>\n<p>飞肠虫用旺盛食欲来抵御在火元素位面广袤土地上旅行时所带来的长时间的饥荒。因此，如果飞肠虫被带到动物资源更丰富的地方（如物质宇宙），它们很容易摄入过量食物。一只飞肠虫可以容纳数量惊人的内脏，甚至会随着身体的膨胀而变大。它越大就越笨重，位面生物学家认为这是一种生存策略，可以让飞肠虫在饥饿难耐的时候不至于放纵自己，让自己撑破肚皮。</p>\n<h2>灰烬猎场 Ashen Hunting Grounds</h2>\n<p>为了躲避在火元素位面大部分地区那燃烧的混乱和火巨灵的统治，飞肠虫更喜欢将灰烬荒原作为自己的猎场。它们只是在地表挖掘简单的洞穴，被称作飞肠虫丘。在洞穴中，它们可以消化食物，或是产下并照料它们可怕的卵。</p>",
+            "languages": "Can't Speak Any Language",
+            "items": {
+                "Exploding Guts": {
+                    "name": "爆炸内脏 Exploding Guts",
+                    "description": "<p>当飞肠虫被重击或在强韧豁免中大失败时，它的一个器官就会爆炸。掷骰[[/gmr 1d4]]来确定效果。</p>\n<p><strong>1</strong> 被困住的有毒气体喷涌而出。飞肠虫将触发攻击或效果的源头推离10尺。</p>\n<p><strong>2</strong> 脓液喷洒向附近的生物。@Template[emanation|distance:5]范围内每个生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>3</strong> 此次伤害十分严重。飞肠虫受到@Damage[1d6[persistent,bleed]]伤害。</p>\n<p><strong>4</strong> 凝胶状的飞肠虫卵炸裂开并立即孵化。@Template[emanation|distance:5]范围内每个生物受到来自贪食幼虫的@Damage[1d6[persistent,piercing]|options:area-damage]伤害。</p>"
+                },
+                "Predator's Stare": {
+                    "name": "掠食者的凝视 Predator's Stare",
+                    "description": "<p>飞肠虫将它怪异而迷离的眼睛投向30尺内一个它能看见的生物。该生物必须成功通过一次@Check[will|dc:22]豁免，否则将被飞肠虫@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}。当处于迷魂状态时，生物每轮必须花费至少1个动作来尽可能地移动靠近飞肠虫，并且不能故意远离它。迷魂状态在1分钟后结束，或直到飞肠虫再次使用掠食者的凝视，以先满足为准。</p>"
+                },
+                "Suck Innards": {
+                    "name": "吮吸内脏 Suck Innards",
+                    "description": "<p><strong>需求</strong> 一个陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]状态或自愿生物处于飞肠虫触及范围内；</p>\n<hr />\n<p><strong>效果</strong> 飞肠虫对目标造成@Damage[3d6[untyped]]伤害（@Check[fortitude|dc:22|basic]豁免）。如果生物受到至少12点伤害，飞肠虫恢复@Damage[10[healing]]生命值。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "飞肠虫"
+            }
+        },
+        "Vault Keeper": {
+            "name": "护窟者 Vault Keeper",
+            "publicNotes": "<p>护窟者失去了莎莱祖尔的火花，寿命只有两到三千年。他们维持守护着铸窟族许多实验。</p>\n<hr />\n<p>莎莱祖尔（Sairazul）创造铸窟族时，他们尚是不朽。她创造了65536名铸窟族，所有铸窟族均是依照她的形象所造，而所有铸窟族都被灌注了一片她的神性火花。在她被监禁期间，阿依尔祖（Ayrzul）使用未来灭绝的预示来操纵他们将其力量献祭给他。这次献祭将铸窟族分成了两类：32768名维持着莎莱祖尔精华的造窟者，和32768名不再永生的护窟者。万年来，铸窟族建造出了横亘土元素位面的巨大魔法文明，当此处不再有空间建设时，他们便离开了。在每个新世界上，铸窟族建造了自己的洞窟，进行着实验，无止境地寻求着帮助他们避免灭绝的线索。</p>\n<h2>洞窟之种 Vault Seeds</h2>\n<p>铸窟族使用洞窟之种来创造魔法地下洞穴，这是阿依尔祖为他们的献祭而奖赏给其种族的魔法工具。洞窟之种被用于创造了格拉利昂幽暗地域的奥瓦洞窟（Vaults of Orv），还有一场意外涉及到一枚脱离掌控的洞窟之种，被用于创造了神秘的翡翠尖塔（Emerald Spire）。</p>\n<h2>水晶工匠 Crystal Crafters</h2>\n<p>除了传承石和洞窟之种外，铸窟族精通于用水晶制作许多种类魔法物品。其中包括名为低语石（whisperstones）的黑石柱，能让铸窟族可以跨洞窟进行心灵感应交流，如同网状绿水晶隧道的奥瓦门，能够在幽暗地域洞窟之间传送，还有在奥瓦中一处名为水晶子宫（the Crystal Womb）的旋涡，连接着土元素位面上一座至关重要的要塞。</p>",
+            "languages": "心灵感应 300 尺",
+            "items": {
+                "+2 Status to Recall Knowledge About Earth": {
+                    "name": "有关于土的回忆知识+2状态加值"
+                },
+                "Craft Crystal Wand": {
+                    "name": "制作水晶魔杖 Craft Crystal Wand",
+                    "description": "<p><strong>频率</strong> 每天两次</p>\n<hr />\n<p><strong>效果</strong> 护窟者花费10分钟使用放射性绿水晶制作一把魔杖，容纳有任意由其选择的5环级及以下的土法术。魔杖可以被其他生物使用，但在一天结束后会碎成沙子，且不具有任何金钱价值。</p>"
+                },
+                "Item Caster": {
+                    "name": "物品施法者 Item Caster",
+                    "description": "<p>护窟者可以从任意物品上施法（例如法杖或魔杖），如同它在他的法术表中。</p>"
+                },
+                "Constraining Crystal": {
+                    "name": "水晶束缚 Constraining Crystal",
+                    "description": "<p>当护窟者使用爪打击造成伤害时，发光的绿水晶簇会聚集在攻击位置。目标必须成功通过一次@Check[fortitude|dc:31]豁免，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续1小时（或在大失败时陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}）。如果生物已经因水晶束缚陷入笨拙，后续的豁免失败将改为增加笨拙状态值，最大到@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 4}。</p>"
+                },
+                "Crystal Burst": {
+                    "name": "水晶爆 Crystal Burst",
+                    "description": "<p>锋利的碎片爆对120尺内的一处@Template[burst|distance:30]范围炸造成@Damage[15d6[piercing]|options:area-damage|traits:item:frequency:limited]伤害，进行@Check[reflex|dc:35|basic|options:area-effect]豁免。护窟者不能在[[/gmr 1d4 #Recharge Crystal Burst]]{1d4轮}内再次使用水晶爆。</p>"
+                },
+                "Slashing Surge": {
+                    "name": "挥砍狂潮 Slashing Surge",
+                    "description": "<p>护窟者行走或攀爬，并在移动中任意点进行两次爪打击。每次打击必须选择不同生物为目标。多重攻击减值直到两次攻击结束后才会增加。</p>"
+                },
+                "Tremorsense (Imprecise) 120 feet": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>",
+                    "name": "震颤感知（模糊感官）120尺 Tremorsense (Imprecise) 120 feet"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "护窟者"
+            }
+        },
+        "Zuhra": {
+            "name": "金巨灵 Zuhra",
+            "publicNotes": "<p>金巨灵，是金元素位面的巨灵，他们大胆而巍然，以华丽的表演，技艺的展现，以及个人勇武的故事吸引众人的目光。尽管他们个性张扬，但他们的长期关系往往冷漠，甚至有些疏远；金巨灵经常结成同盟，但很少建立友谊，而更深层次关系所需的信任更是少之又少。少数了解金巨灵的凡人通常会说他们热情奔放，但感情淡漠。</p>\n<p>自从与其他位面重新建立联系后，金巨灵就开始寻求与其他巨灵建立联系。他们认为土巨灵表亲是能干的铁匠伙伴，虽然有些呆板无趣。金巨灵很少对非巨灵元素多看一眼，即便是有智慧的元素，他们也觉得与之交流毫无趣味，或很难与之相处。</p>",
+            "languages": "Truespeech",
+            "items": {
+                "Blinding Reflection": {
+                    "name": "致盲反射 Blinding Reflection",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 金巨灵处于昏暗或明亮光照中</p>\n<hr />\n<p><strong>效果</strong> 金巨灵短暂地将部分金属身体重塑为凹面，来将周围的光线反射到30尺内一个生物的眼睛中。目标必须尝试一次@Check[reflex|dc:26]豁免。然后对该效果临时免疫1小时。</p>\n<p><strong>大成功</strong> 该目标不受影响。</p>\n<p><strong>成功</strong> 该目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}直到金巨灵的下回合开始。</p>\n<p><strong>失败</strong> 该目标陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}直到金巨灵的下回合开始。</p>"
+                },
+                "Constant Spells": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
+                    "name": "常驻法术 Constant Spells"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>金巨灵变形成为一个小型或中型金元素或动物。这不会影响金巨灵的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Conductive Redirection": {
+                    "description": "<p><strong>触发</strong> 金巨灵被造成电击伤害的攻击，法术或效果命中</p>\n<hr />\n<p><strong>效果</strong> 金巨灵让电流传导过身体，如常受到伤害，然后朝30尺内一个其所能看见的目标重新射出一道电束。金巨灵进行一次远程攻击掷骰，使用[[/r 1d20+20 #Conductive Redirection]]{+20}调整值对抗目标的DC。如果命中或重击，目标受到等同于触发效果全额伤害的电击伤害。</p>",
+                    "name": "重导电流 Conductive Redirection"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金巨灵"
+            }
+        },
+        "Nanoshard Swarm": {
+            "name": "纳米碎片群 Nanoshard Swarm",
+            "publicNotes": "<p>这个奇异的实体实际上是由数万个构成部分组成的巨大集合体，每个部分都是一个小得像鹅卵石一样的微小金属球。由一个单一的元素精魂控制，该集群能够像液体一样流动穿过最小的开口，然后将自身塑造成强大的战斗者、坚固的墙壁或任何其他情况所需的形态。</p>",
+            "items": {
+                "Barrier Form": {
+                    "name": "屏障形态 Barrier Form",
+                    "description": "<p><strong>需求</strong> 纳米碎片群处于集群形态</p>\n<hr />\n<p><strong>效果</strong> 纳米碎片群形成一个连续的、厚6寸的固体墙壁，最长可达60尺，高10尺，起始于它当前空间的任何一个方格。墙壁可以沿任意路径形成，每5尺位于方格的边界上。它不需要垂直站立，因此可以形成桥梁或楼梯等。墙壁必须在一个连续的开放空间中形成，其边缘不能穿过任何生物或物体。</p>\n<p>墙壁中的单个5尺×5尺部分可以通过对其造成18点伤害来摧毁，这也会减少集群的总生命值。处于屏障形态的纳米碎片群不能被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]或强迫移动，也不能自行移动。处于屏障形态的纳米碎片群可以从其墙壁的任何方格发起触须打击。</p>"
+                },
+                "Battle Form": {
+                    "name": "战斗形态 Battle Form",
+                    "description": "<p><strong>需求</strong> 纳米碎片群处于集群形态</p>\n<hr />\n<p><strong>效果</strong> 纳米碎片群凝结成一个超大型形态，看起来像是人形或野兽，并且能够持握装备。在战斗形态下，它的速度为15尺，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，并具有以下打击。</p>\n<p><strong>近战</strong> <span class=\"action-glyph\">1</span> 肢体 （触及20尺），<strong>伤害</strong> 4d8+9钝击</p>"
+                },
+                "Swarm Form": {
+                    "name": "集群形态 Swarm Form",
+                    "description": "<p>纳米碎片群崩解成其自然形态：一片巨大的微小金属球海洋。它会丢下任何它持有的物品。处于集群形态时，纳米碎片群的速度为25尺，它可以通过任何足以让单个球体通过的区域而无需挤入（Squeeze），并且获得包卷能力。</p>"
+                },
+                "Swarm Mind": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.SwarmMind]</p>",
+                    "name": "集群心智 Swarm Mind"
+                },
+                "Engulf (Swarm Form)": {
+                    "name": "包卷 Engulf （集群形态）",
+                    "description": "<p>@Check[reflex|dc:27]，@Damage[(2d8+6)[bludgeoning]]伤害，[[/act escape dc=27]]，破裂18</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                },
+                "Electromagnetic Dispersal": {
+                    "description": "<p>当纳米碎片群受到电击伤害时，它会自动转换为集群形态。</p>",
+                    "name": "电磁分散 Electromagnetic Dispersal"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "纳米碎片群"
+            }
+        },
+        "Snapdrake": {
+            "name": "花口龙 Snapdrake",
+            "publicNotes": "<p>熟练的木巨灵法师和园丁为了他们的巨灵长老的审美享受和保护需要，手工制作这些可爱的生物。制作花口龙首先需要痛苦地构建一个活体木材的龙形框架，然后将成千上万的五彩鲜艳的金鱼草花编织成复杂的图案，形成它们的身体和鳞片。一旦完成，花口龙通常作为守卫、宠物和装饰，为木巨灵服务，只要它们得到充足的食物。</p>",
+            "languages": "不能说任何语言",
+            "items": {
+                "Alluring Scent": {
+                    "name": "迷人芳香 Alluring Scent",
+                    "description": "<p>30尺</p>\n<p>进入弥漫范围的生物必须尝试@Check[will|dc:25]豁免。如果失败，目标被花口龙@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}，并且在下个回合必须至少使用1个动作向花口龙行走以靠近它。如果成功，目标在1小时内免疫花口龙的迷人芳香。</p>"
+                },
+                "Greater Forest Passage": {
+                    "name": "高等穿林 Greater Forest Passage",
+                    "description": "<p>花口龙无视植物和真菌造成的困难地形、高等困难地形。</p>"
+                },
+                "Snapdrake Pollen": {
+                    "name": "花口龙花粉 Snapdrake Pollen",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:25];</p>\n<p><strong>最大持续</strong> 8轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害外加@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害外加目眩和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（2轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害外加@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}和恶心1（2轮）</p>"
+                },
+                "Speed Surge": {
+                    "name": "速度激增 Speed Surge",
+                    "description": "<p><strong>频率</strong> 每日3次</p>\n<hr />\n<p><strong>效果</strong> 花口龙最多以双倍速度移动。</p>"
+                },
+                "Spray Pollen": {
+                    "name": "喷射花粉 Spray Pollen",
+                    "description": "<p>花口龙对@Template[cone|distance:40]范围进行花粉吐息。暴露其中的生物必须通过@Check[reflex|dc:25|basic]豁免，否则将暴露在花口龙花粉的影响下。</p>\n<p>花口龙在[[/gmr 1d6 #Recharge Spray Pollen]]{1d6轮}内无法再使用花粉喷射。</p>"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>仅限镰刀尾</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "花口龙"
+            }
+        },
+        "Dewdrop Jelly": {
+            "name": "露滴水母 Dewdrop Jelly",
+            "publicNotes": "<p>从行走的台风和活生生的潮汐，到冰、盐和蒸汽形态的生物，水元素位面的无尽海洋充满了各种形式的元素生物，体现了水的多种形态。有些元素生物会根据天气变化或受到威胁时改变形态，在寒冷时冻结成固态冰晶，在阳光下则蒸发成沸腾的蒸汽。还有一些元素生物可能被误认为普通的水坑或湖泊，引诱凡人步入水下坟墓。</p>",
+            "items": {
+                "Dissolve": {
+                    "name": "散开 Dissolve",
+                    "description": "<p><strong>触发</strong> 露滴水母受到敌对动作的伤害</p>\n<hr />\n<p><strong>效果</strong> 露滴水母解体成细雾。直到水母的下一回合开始，它不能被攻击或成为目标，也不占用空间。回合结束时，水母在散开位置25尺内的任意开放空间重新成形。</p>"
+                },
+                "Overflow": {
+                    "name": "溢流 Overflow",
+                    "description": "<p>露滴水母压平身体向前冲刺，沿直线向目标飞行或游泳两次，并尝试一次触手打击。如果打击成功，水母会附着在目标的脸上，用其胶状身体的悬浮水覆盖住目标的口部。如果目标不能在水中呼吸，它将开始溺水。@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escape}的DC为16。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "露滴水母"
+            }
+        },
+        "Jaathoom Shuyookh": {
+            "name": "气巨灵长老 Jaathoom Shuyookh",
+            "languages": "Can't Speak Any Language; Cloud Of Visions",
+            "items": {
+                "Cloud of Visions": {
+                    "name": "幻象之云 Cloud of Visions",
+                    "description": "<p>120尺。气巨灵拥有60尺的心灵感应，但只能展示图像而不能说话。</p>"
+                },
+                "Naturally Invisible": {
+                    "name": "天生隐形 Naturally Invisible",
+                    "description": "<p>气巨灵总是@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的。他可以用一个具有专注特征的单动作变为可见或变回隐形。</p>"
+                },
+                "Turbulent Skies": {
+                    "name": "气旋之空 Turbulent Skies",
+                    "description": "<p>20尺。旋风使得弥漫范围内所有方格对于行走和飞行中的生物视作困难地形。具有气特征的生物免疫此效果。气巨灵可以使用一个具有专注特征的单动作来启动或停用此灵光。</p>"
+                },
+                "Hurricane Blast": {
+                    "name": "飓风冲击 Hurricane Blast",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 气巨灵将处于其喧哗之空灵光内所有没有气特征的生物直线远离，顺时针或逆时针移动20尺。如果生物成功通过一次@Check[fortitude|dc:29]豁免可以避免被移动。</p>"
+                },
+                "Impressive Wish": {
+                    "name": "映像祈愿术 Impressive Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 长老举行祈愿术仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老给对象未来的幻象来告知他是如何诠释愿望。</p>"
+                },
+                "Ominous Dreams": {
+                    "name": "预兆之梦 Ominous Dreams",
+                    "description": "<p>气巨灵将一个预知梦送入60尺内一个睡眠中生物的心智中。非自愿生物如果成功通过一次@Check[will|dc:32]豁免可以避免此幻象。气巨灵选择梦的主题，但不能是明确的事件。目标可以看到一场与该主题相关的未来幻象，具有卜筮术的效果。如果结果为凶或吉且凶，生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}，且直到醒来前惊惧效果才会开始恢复。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "气巨灵长老"
+            }
+        },
+        "Whipping Willow": {
+            "name": "打人柳 Whipping Willow",
+            "publicNotes": "<p>这些高大、纤细的身影过于树木化，不像树妖，但又过于人形化，不像树精。它们空白的脸和细长的躯干只略微暗示着人类特征。它们长长的、枝条般的手臂最终分裂成等比例的枝条般的手指，打人柳用它们进行战斗和在其家乡位面上摇摆穿行。</p>",
+            "items": {
+                "Grounded": {
+                    "name": "稳固 Grounded",
+                    "description": "<p>当面对可能造成@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的效果进行豁免时，打人柳的投掷结果提高一个成功度。此外，打人柳尝试@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}敌人大失败时，自身不会陷入倒地。</p>"
+                },
+                "Strangling Vines": {
+                    "name": "扼杀藤蔓 Strangling Vines",
+                    "description": "<p>当打人柳以藤鞭打击命中一个生物时，它能选择@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]并掐住该生物。目标开始窒息，并且在被掐住期间不能说话。</p>"
+                },
+                "Unseating Sweep": {
+                    "name": "失衡横扫 Unseating Sweep",
+                    "description": "<p>打人柳尝试@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}@Template[cone|distance:15]区域的所有生物，尝试一次@Check[athletics|traits:action:trip]检定对抗所有目标的反射DC。</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(2d4+5)[bludgeoning]]，@Check[fortitude|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "打人柳"
+            }
+        },
+        "Kinzaruk": {
+            "name": "金折灵 Kinzaruk",
+            "items": {
+                "Fold Form": {
+                    "name": "折叠形态 Fold Form",
+                    "description": "<p>金折灵迅速展开并重新折叠自己的身体，从@UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{动物形态 Animal Form}中选择一个新形态。这赋予她所选形态的移动速度和打击，但没有其他好处。它的攻击加值不变，伤害加值为+3。金折灵可以通过再次使用该动作恢复到它的自然形态，并且如果它@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}的话会自动恢复原形。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.513Y2ZSzvm8rijkp]{效果：折叠形态}</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金折灵"
+            },
+            "publicNotes": "<p>在自然形态下，金折灵就像好似纸一样薄的完美方形轻质白色金属板，大约15尺见方。然而，它几乎从不以这种形态示人，因为它更出名的是能够在瞬间将身体复杂地折叠数千次，从而将自己重新变为成各种致命动物的形状。</p>\n<hr />\n<p>金元素生物可以以多种不同形式出现，从不同金属的无形混合物到类人和野兽般的怪物。</p>\n<h2>金属躯体 Metal Forms</h2>\n<p>尽管金元素生物几乎完全由金属构成，但它们大多由微小的不同金属层组成，复杂如肉体或植物组织。这些金属中的许多都因金元素位面的自然缓慢熵增而生锈或腐朽。</p>"
+        },
+        "Carved Beast": {
+            "name": "根雕野兽 Carved Beast",
+            "publicNotes": "<p>无数被雕刻成粗糙动物形状的树桩在木位面上漫游。这些根雕野兽的雕像部分无法进行灵活的运动，然而它们基座的活体木材却是完全有生命的。当被放任自由时，根雕野兽更喜欢粗略地模仿它们所类似的动物行为，就像孩子们用不灵活的玩具进行游戏。</p>",
+            "ac": "（扎根状态时24 ）",
+            "items": {
+                "Top-Heavy": {
+                    "name": "头重脚轻 Top-Heavy",
+                    "description": "<p>当根雕野兽没有在扎根状态时，他笨重的设计让它容易翻倒。将根雕野兽击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的DC减少5，并且根雕野兽在对抗任何可能将其击倒的尝试时，其检定或豁免有-5状态减值。此外，当野兽尝试以树根打击@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}敌人失败时，它得到大失败的结果。如果成功被一个敌人推撞，根雕野兽必须通过@Check[reflex|dc:20]豁免否则也会倒地。</p>"
+                },
+                "Dig In": {
+                    "name": "扎根 Dig In",
+                    "description": "<p>为了更好地防御和抓地，根雕野兽将其半埋在土里。当处于扎根状态时，根雕野兽不能行走，也不能使用树根打击；但是，这也让他更加稳定，让野兽的AC和强韧豁免有+2状态加值，并使其雕像打击伤害提高[[/r 1d8]]。根雕野兽可以在自己的回合花费1个动作来结束此效果；或者，当根雕野兽被强迫移动时，比如通过一次成功的@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}，该效果也会结束。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "根雕野兽"
+            }
+        },
+        "Avalanche Legion": {
+            "name": "山崩军团 Avalanche Legion",
+            "publicNotes": "<p>土元素位面的元素们领土意识都非常强烈。一些独行的元素独自保护自己的巢穴，但偶尔也会有其他元素联合起来保护更旷阔的共享领地。这些元素集合中更值得注意的是山崩军团，他们在这些共享领土的周边巡逻，入组那些胆敢入侵他们家园的入侵者。</p>\n<h2>家族本能 Familial Instincts</h2>\n<p>虽然元素不像一般生物那样繁殖，但活体山崩有时会和更小或更弱的土元素建立联系，例如土微灵、活体滚石以及苔犬。当这些较小的元素聚集在一起时，活体山崩会监护他们。山崩军团有时候会在这些元素聚合中形成，由多个活体山崩联合起来保护较弱小的元素。</p>",
+            "hp": "16方格，阙值160（3部分），80（2部分）",
+            "items": {
+                "Earthbound": {
+                    "name": "地缚 Earthbound",
+                    "description": "<p>当未接触坚实地面时，山崩军团陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                },
+                "Earth Glide": {
+                    "name": "潜地 Earth Glide",
+                    "description": "<p>山崩军团能掘地穿过任何土质材料，包括岩石。当它如此做时，军团以满速移动，并且不会留下隧道或通过的痕迹。</p>"
+                },
+                "Pummeling Boulders": {
+                    "name": "连打石拳 Pummeling Boulders",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 山崩军团的石拳雨点般砸向@Template[emanation|distance:5]内的每个敌人（@Check[reflex|dc:28|basic|options:area-effect]豁免），伤害基于动作数量。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d8[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+8)[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+11)[bludgeoning]|options:area-damage]伤害</p>"
+                },
+                "Spinning Stones": {
+                    "name": "飞旋石块 Spinning Stones",
+                    "description": "<p>山崩军团在原地高速旋转，甩出如弹幕一般的石块。部队30尺内@Template[burst|distance:10]范围内的每个生物受到@Damage[(1d12+8)[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:28|basic|options:area-effect]豁免）。当部队减少到2部分或更少时，该区域减少为@Template[burst|distance:5]。</p>"
+                },
+                "Trample into the Earth": {
+                    "name": "碾进土里 Trample into the Earth",
+                    "description": "<p>山崩军团向前突进，以巨石身体碾过并击倒生物。效果同@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3]{践踏 Trample}；巨型或更小，@Damage[2d8[bludgeoning]]伤害，@Check[reflex|dc:28|basic]。大失败的生物还会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当山崩军团掘地或行走时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知（模糊感官）60尺 Tremorsense (Imprecise) 60 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "山崩军团"
+            }
+        },
+        "Veiled Current": {
+            "name": "遮蔽气流 Veiled Current",
+            "publicNotes": "<p>遮蔽气流常被认为是残魂的表亲，它们是松散的风之面纱，可以在其褶皱中捕捉猎物。</p>\n<hr />\n<p>许多游荡在气元素位面的元素生物体现了混乱风暴的变幻无常和混沌。</p>\n<h2>狂暴的精魂 Tempestuous Spirits</h2>\n<p>气元素通常是轻浮的反对者，更关注引发变化，而不是具体的变化内容。由这些元素生物创作的艺术和写作作品极其罕见，因为他们通常在完成作品的挑战和兴奋感消退后会摧毁这些作品。</p>\n<h2>隐形侍从 Invisible Courtiers</h2>\n<p>这些无形的、不可见的元素生物是气元素母神舒尔哈（Hshurha）的宠儿。他们在她的神域——岁差雾凇（Verglas Precessional）中受到优待，不仅作为她的贴身侍从、其他位面的使者和可信的顾问，还执行女神希望隐藏的秘密任务。</p>",
+            "items": {
+                "Naturally Invisible": {
+                    "name": "天生隐形 Naturally Invisible",
+                    "description": "<p>遮蔽气流始终保持@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]。当它们进行任何形式的敌对行动时，遮蔽气流会变得@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]，而不是无踪，因为它们的人形轮廓隐约可见，直到其下一个回合开始。</p>"
+                },
+                "Envelop": {
+                    "name": "覆盖 Envelop",
+                    "description": "<p><strong>需求</strong> 遮蔽气流在其回合开始时，已有一个与其体型相同或更小的目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于他</p>\n<hr />\n<p><strong>效果</strong> 遮蔽气流维持擒获，并在生物周围凝聚，转变为一个半固体的面纱，将生物包裹在其中。这之后的效果如同遮蔽气流@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.zU3Ovaet4xQ5Gmvy]了该生物（DC26，1d8+8钝击，[[/act escape dc=26]]，破裂17）。由于包卷生物是敌对行动，遮蔽气流在每轮包卷生物时都是@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]，而不是无踪。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "遮蔽气流"
+            }
+        },
+        "Kizidhar": {
+            "name": "木巨灵 Kizidhar",
+            "publicNotes": "<p>木巨灵看上去就像行走的树木，平均身高10到12尺，树枝扭曲形成他们的手臂，脸和其他特征。木巨灵可以重塑自己的身体来创造出任何木制物品。</p>\n<hr />\n<p>木元素位面的巨灵被称作木巨灵，他们是其元素霸道的领主。这些木匠大师擅长各种木工和所有种类的木雕，他们乐于按照自己的愿景重塑世界——要么是创造自己的木雕像，要么是操控控制周围的生物。虽然他们能够雕刻自己，但他们通常认为自己的外形是完美的。</p>\n<p>他们回避其他巨灵，喜欢躲开那些实力相当的存在，而是与谄媚者和马屁精为伍。随着通往物质宇宙的道路经过漫长的岁月首次重新开放，木巨灵也漫游多元宇宙，寻找可以引诱的凡人加入他们的宫殿，成为仆人，艺人，和有价值的新消息来源。</p>",
+            "languages": "Speak With Plants, Truespeech",
+            "ac": "（举起盾牌时24）",
+            "items": {
+                "Parting the Trees": {
+                    "name": "融入树林 Parting the Trees",
+                    "description": "<p>木巨灵忽略由植物形成的困难地形，并能与更大体型的植物，例如树木共享空间。</p>"
+                },
+                "Sculpt Wood": {
+                    "name": "雕刻木材 Sculpt Wood",
+                    "description": "<p>木巨灵可以从自己的身体中创造出一件木制物品，此物品会出现在其手中，并保持附着。该物品可以是一件单手简易武器，盾牌，或轻负载物品。木巨灵可以用此能力来变形已经持握的物品，或将一件物品移动到一只空手中。用雕刻木材创造的任何物品一旦从木巨灵手中离开都会立即碎裂成渣。</p>"
+                },
+                "Take Root": {
+                    "name": "扎根 Take Root",
+                    "description": "<p>巨灵将其武器插入地面。植物以木巨灵所在方格一角为中心的@Template[burst|distance:20]范围的地面发芽生长。该区域内地面上所有方格都成为困难地形，直到木巨灵再次使用该能力。</p>"
+                },
+                "Constant Spells": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
+                    "name": "常驻法术 Constant Spells"
+                },
+                "Change Shape": {
+                    "description": "<p>木巨灵变形成为一个小型或中型木元素或植物生物。这不会影响木巨灵的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
+                    "name": "变身 Change Shape"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "木巨灵"
+            }
+        },
+        "Ore Louse": {
+            "name": "矿虱 Ore Louse",
+            "publicNotes": "<p>矿虱是六足的昆虫形生物，栖息在水面下方或上方。它们对陌生人和彼此都高度具有领土意识，能够通过水面的波纹探测入侵者。由于其饮食习惯，矿虱具有极其坚硬的嵌入金属的甲壳。当无法找到其他猎物时，矿虱之间的同类相食非常常见。</p>\n<p>虽然在接近气元素位面的地方有更多适合矿虱的环境，但它们通常出现在土元素位面与水元素位面的交接处。这个现象曾经让很多人困惑，直到金元素位面在土元素位面与水元素位面之间重新出现。位面研究者意识到，在位面分裂前，矿虱必定就在这里进行捕猎。在金元素位面，矿虱经常出现在恐怖故事中，追逐并凶猛地吞噬金元素生物。它们与菲伦涅斯特拉的联系更是增加了它们的恶名。</p>",
+            "items": {
+                "Metal Scent": {
+                    "name": "金属嗅觉 Metal Scent",
+                    "description": "<p>矿虱可以通过嗅觉识别金属，这是一种精确感官。</p>"
+                },
+                "Consume Living Metal": {
+                    "name": "吞噬活体金属 Consume Living Metal",
+                    "description": "<p><strong>需求</strong> 矿虱与一个在过去一小时内死亡且具有金特征的生物相邻，或与另一个矿虱相邻</p>\n<hr />\n<p><strong>效果</strong> 矿虱可以通过吞食同类或曾经是活物的金特征生物的遗骸来补充其健康。矿虱吞食尸体，恢复@Damage[3d6[healing]]生命值。每个特定尸体只能让矿虱恢复一次生命值。</p>"
+                },
+                "Metal Snack": {
+                    "name": "金属零食 Metal Snack",
+                    "description": "<p>每当矿虱的鳌打击伤害金属物品或导致其破损时，或鳌打击命中具有金属特征或由金属制成的生物时，矿虱获得5点临时生命值。</p>"
+                },
+                "Rust": {
+                    "name": "锈蚀 Rust",
+                    "description": "<p>矿虱的攻击会导致金属迅速生锈和腐蚀。如果矿虱的鳌或氧化唾液打击成功命中，则对目标佩戴或持握的金属物品造成@Damage[3d6[untyped]]伤害（重击时伤害翻倍），无视其硬度。如果矿虱命中无主的金属物品，该物品自动受到此伤害。如果生物使用金属盾牌进行盾牌格挡反应来抵御攻击，该盾牌自动破损，但此次攻击不会对其他物品造成锈蚀。</p>"
+                },
+                "Water Stride": {
+                    "name": "水上行走 Water Stride",
+                    "description": "<p>矿虱可以站立并在水面或其他液体表面上移动而不落入水中。矿虱可以潜入水下，但它必须游泳才能做到这一点。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "矿虱"
+            }
+        },
+        "Jann Shuyookh": {
+            "name": "小巨灵长老 Jann Shuyookh",
+            "publicNotes": "<p>由于被认为是巨灵的祖先，小巨灵受到与特定位面相连的巨灵尊敬。他们与生俱来实现愿望的能力，是其他巨灵分支所缺乏的，也深受后者羡慕。流浪的小巨灵长老很少会维持王庭，只有在需要完成伟大任务时才会聚在一起。低级的小巨灵尊敬崇拜这些领袖，因为他们的智慧和全心全意维护民族荣誉的精神。在与两面三刀的凡人打交道时，小巨灵长老会解读预言和预兆。</p>",
+            "languages": "Truespeech",
+            "items": {
+                "Commanding Presence": {
+                    "name": "威严气势 Commanding Presence",
+                    "description": "<p>20尺。进入灵光的生物必须成功通过一次@Check[will|dc:26豁免否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧Frightened 3}），并临时免疫1分钟。巨灵（除了另一个小巨灵外）在豁免上承受-4环境减值。</p>"
+                },
+                "Elemental Resistance": {
+                    "name": "元素抗力 Elemental Resistance",
+                    "description": "<p>小巨灵的元素抗力适用于寒冷，电击和火焰伤害，同时也适用所有元素来源的伤害（包括元素位面的环境伤害和任何来自具有气，土，火，金，水或木特征的伤害）。</p>"
+                },
+                "All Made One": {
+                    "name": "六元合一 All Made One",
+                    "description": "<p>小巨灵召唤所有构成他们存在的元素来获得额外一种可以随意施法的奥术法术，并用元素增强其打击，造成1d6所列类型的伤害。该增益持续到小巨灵再次使用该能力。</p>\n<ul>\n<li>气：@UUID[Compendium.pf2e.spells-srd.Item.9AAkVUCwF6WVNNY2]{闪电束 Lightning Bolt}，1d6电击；</li>\n<li>土：@UUID[Compendium.pf2e.spells-srd.Item.vh1RpbWfqdNC4L3P]{融身化石 One with Stone}，1d6钝击；</li>\n<li>火：@UUID[Compendium.pf2e.spells-srd.Item.sxQZ6yqTn0czJxVd]{火球术 Fireball}，1d6火焰；</li>\n<li>金：@UUID[Compendium.pf2e.spells-srd.Item.3A3ueS9Q0s3U8KXE]{金毒附体 Noxious Metals}，1d6电击；</li>\n<li>水：@UUID[Compendium.pf2e.spells-srd.Item.LNOwaJAkCfsgTKgV]{水墙术 Wall of Water}，1d6钝击；</li>\n<li>木：@UUID[Compendium.pf2e.spells-srd.Item.KsWhliKfUs3IpW3c]{棘墙术 Wall of Thorns}，1d6穿刺。</li>\n</ul>"
+                },
+                "Wanderer's Wish": {
+                    "name": "漫游者的祈愿术 Wanderer's Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 小巨灵立即给予一个凡性生物<em>祈愿术</em>仪式大成功时的增益。这不需要开销。该生物指定其愿望，但解释权归小巨灵所有。小巨灵通常会试图以鼓励成长和探索的方式来实现愿望。被召唤的小巨灵不能使用该能力。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>小巨灵长老变形成为小型或中型元素或动物。这不会影响小巨灵长老的数据，但会改变其打击的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "小巨灵长老"
+            }
+        },
+        "Murajau": {
+            "name": "寄居蟹人 Murajau",
+            "publicNotes": "<p>寄居蟹人是水元素位面上的许多游牧生物之一，从腰部以上看起来像人类，但腰部以下却像一只巨大的寄居蟹，包括一对强壮的钳子。寄居蟹人的社区通常熟练掌握多种语言，许多个体愿意在适当的报酬下为冒险者担任翻译和向导。与货币不同，寄居蟹人更喜欢用护符等小饰品进行交易，特别是那些能保护旅行者的护符。对于寄居蟹人来说，这些物品象征着他们的真诚和保护他人的坚定愿望。他们之间互相传递关于危险宝藏的信息，而不是将这些信息据为己有，他们乐于与信任的伙伴分享这些信息，以换取一小部分收益。</p>\n<p>水巨灵讲述着轻蔑的传说，称寄居蟹人最初是一群未能完成皇家命令的宫廷仆人。相比之下，寄居蟹人自己的创造故事则宣称，那项皇家命令要求他们游历各地，为来访者提供庇护和款待，这一使命自那时以来已传承了几代人。他们对款待客人感到非常自豪，尤其在提供合适的食物、饮料和礼物方面。</p>\n<hr />\n<p>对于寄居蟹人来说，个人的壳象征着家园、地位、身份和文化传承。社区的长老和领导者往往佩戴从多个继任者那里传下来的壳，这些壳上有标志和痕迹，象征着前任的成就和失败。当社区人数超过可用壳的数量时，可能会宣布开启狩猎季。那些带回合适战利品的参与者因其贡献和勇气而受到崇敬。</p>",
+            "items": {
+                "Hefty Defense": {
+                    "name": "沉重防御 Hefty Defense",
+                    "description": "<p>寄居蟹人的体重和腿使他们极难被绊倒或被强迫移动。他们只能被与自己体型相同或更大的生物摔绊，并且在对抗推撞或摔绊的所有防御上有+2环境加值。然而，寄居蟹人必须将站立作为一个2动作行动来执行。</p>"
+                },
+                "Retract": {
+                    "name": "缩回 Retract",
+                    "description": "<p>寄居蟹人完全缩回到他们的壳中，获得高等掩蔽；高等掩蔽的隐秘加值仅在寄居蟹人无踪时适用。在壳中时，寄居蟹人无法看到外面，并且在基于听觉的察觉上检定有-2的环境减值。寄居蟹人在壳中只能进行站立或快步两种移动动作。寄居蟹人可以花一个单动作从壳里出来。</p>"
+                },
+                "Talisman Faithful": {
+                    "name": "护符信仰 Talisman Faithful",
+                    "description": "<p>寄居蟹人可以将护符附着在他们的壳上，就如同重甲一样，他们一次可以附着多达三个护符，而不是一个。</p>"
+                },
+                "Swinging Spear": {
+                    "name": "挥动长矛 Swinging Spear",
+                    "description": "<p>居蟹人进行一次矛打击。命中时，寄居蟹人会扭动矛将目标移动到寄居蟹人相邻的任意空间，并造成额外的@Damage[2d6[bludgeoning]]伤害，因为目标撞在了寄居蟹人厚实的硬壳上。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "寄居蟹人"
+            }
+        },
+        "Veldenar": {
+            "name": "寒气蛙 Veldenar",
+            "publicNotes": "<p>在无尽天空中潜伏的一些危险可能会在猎物意识到之前就将其毁灭；这正是被称为 寒气蛙的身高20尺的元素生物所喜欢的伏击战术。它们天生隐形且苍白、几乎透明的形态，使它们成为居住在气元素位面上最致命的生物之一。</p>\n<p>寒气蛙类似于物质宇宙中的两栖动物，但它们有无数红色的眼睛，并且偏爱寒冷。它们沿着永恒风暴的边缘、死亡区的事件视界和天空流的河岸猎食，捕食它们家园位面上的较低级的居民。它们常常利用自身的自然浮力漂浮在从前与水元素位面接壤时跨越到气元素位面的巨大魔法冰块之间。在那里，它们伸出舌头，捕捉偶尔飘过的不注意的飞行昆虫或冒险者。即使在吞食当前猎物时，它们的多只眼睛也在监视着下一个猎物。</p>\n<p>寒气蛙胃部的强烈寒冷会迅速使其受害者丧失行动能力，使捕食者能够专注于恢复隐形并找到一个隐秘的地点进行消化。从 寒气蛙胃部逃脱的受害者通常会感到骨髓里的寒冷持续数天。</p>\n<p>寒气蛙对于吸入的对象并不挑剔。因此，各种碎片会在它们的胃里积聚，尤其是无机物。那些猎捕寒气蛙的人通常会等到元素生物需要呕出杂物时进行捕猎，因为这是寒气蛙的少数不利状态之一，由于食道堵塞，它们无法再吸入任何东西。</p>\n<h2>成对猎食者 Paired Predators</h2>\n<p>寒气蛙终身成对生活，这种关系可以持续超过一个世纪。利用它们的伏击群体战术，寒气蛙通常会将潜在的猎物驱赶到其伙伴的掌控中。访问气元素位面的游客应牢记，如果他们碰巧发现一个寒气蛙，另一个很可能就在附近。</p>",
+            "items": {
+                "Natural Invisibility": {
+                    "name": "天生隐形 Natural Invisibility",
+                    "description": "<p>寒气蛙天生@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}，只有当采取敌对动作时才变得可见。被它包卷的生物在其体内仍然可见，但会被寒气蛙的半透明皮肤稍微模糊掉。</p>"
+                },
+                "Viscous Breath": {
+                    "name": "粘稠吐息 Viscous Breath",
+                    "description": "<p>15尺。寒气蛙仅通过呼吸就能提高周围空气的粘稠度。进入或在范围内开始其回合的生物将该区域视为困难地形，并对任何非魔法的物理攻击尝试承受 -2 状态减值。此灵光在寒气蛙包卷生物时会被抑制。</p>"
+                },
+                "Vacuum": {
+                    "name": "真空吸入 Vacuum",
+                    "description": "<p><strong>需求</strong> 寒气蛙还未包卷生物</p>\n<hr />\n<p><strong>效果</strong> 寒气蛙奋力张开其下颚，从其前方@Template[cone|distance:15]范围内吸入空气，将体型不超过大型的生物拉入其巨嘴。寒气蛙@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.zU3Ovaet4xQ5Gmvy]区域内的生物（@Check[reflex|dc:27|options:area-effect,damaging-effect]，@Damage[(1d10+10)[cold]|options:area-damage]伤害，[[/act escape dc=27]]，破裂DC25）。</p>"
+                },
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Attack of Opportunity",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "寒气蛙"
+            }
+        },
+        "Twins of Rowan": {
+            "name": "孪生花楸木 Twins of Rowan",
+            "publicNotes": "<p>孪生花楸木是木位面上最强大的元素之一，专门用于巡逻广阔的荒野，维护木位面精心构建的秩序。尽管有两个头和躯干，但每一对孪生花楸木 都是一个独特的生物;像所有的木元素一样，它们真正的意识不在头部，而在根部，它们真正的身体是树干，而不是伸出来的四肢。</p>",
+            "items": {
+                "Shielded Eyes": {
+                    "name": "受护双目 Shielded Eyes",
+                    "description": "<p>孪生花楸木的保护性面具让他们免受目盲和目眩效果影响。</p>"
+                },
+                "Beacon of the Rowan Guard": {
+                    "name": "花楸守卫信标 Beacon of the Rowan Guard",
+                    "description": "<p>40尺。</p>\n<p>孪生花楸木携带的灯笼包含了纯净的元素生命能量，与所有的木元素产生共鸣并赋予它们力量。在灵光的弥漫范围中，具有元素特征以及具有植物或木特征的生物获得10点快速治疗、且攻击骰和伤害骰有+2环境加值。灵光可以通过DC30的@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]来反制，这样做会使灵光失效[[/gmr 1d6 #Rounds Deactivated]]轮。</p>"
+                },
+                "Follow-Up Combo": {
+                    "name": "跟进连击 Follow-Up Combo",
+                    "description": "<p>孪生花楸木对同一个目标进行一次细剑打击，然后是两次拳头打击。这些攻击都计算孪生花楸木的多重攻击减值，但减值在所有攻击结束后才增加。</p>"
+                },
+                "Lifespring Burst": {
+                    "name": "生命之泉爆发 Lifespring Burst",
+                    "description": "<p>每日一次，孪生花楸木可以用他们的剑攻击地面，以双胞胎为中心释放@Template[burst|distance:30]的生命能量爆发，造成@Damage[14d6[vitality]|options:area-damage]伤害（@Check[fortitude|dc:30|basic|options:area-effect]豁免）；孪生花楸木免疫此效果。受这种爆发影响的地区，随着充满活力的新植物在其中疯长，变为高等困难地形。</p>"
+                },
+                "Throw Stump": {
+                    "name": "投树桩 Throw Stump",
+                    "description": "<p>也可以投掷树桩和树干。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ThrowRock]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "孪生花楸木"
+            }
+        },
+        "Living Magma": {
+            "name": "活体岩浆 Living Magma",
+            "publicNotes": "<p>活体岩浆可以在地下沉睡数个世纪，然后在炽热的火山爆发中苏醒。当整个熔融元素群同时出现时，这种情况尤其危险。</p>\n<hr />\n<p>烈焰支配者的火巨灵征召本位面更多的火元素，来为在回归位面上的新战争做好准备，甚至还动员了那些甚少在聚居地附近活动的火元素。</p>",
+            "items": {
+                "Molten Form": {
+                    "name": "熔融形态 Molten Form",
+                    "description": "<p>任何用无武装打击命中活体岩浆，或以其他方式接触它时，受到@Damage[10[fire]]伤害。如果有不低于一加仑的水接触到熔岩獭，或是如果它被水效果影响，它的熔岩外层会变硬成为石壳，使其熔融形态失效，并对钝击伤害获得弱点15。熔融形态会在活体岩浆在熔岩中游泳1分钟后重新启动。</p>"
+                },
+                "Trap Weapon": {
+                    "name": "困住武器 Trap Weapon",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>触发</strong> 一个生物用近战武器命中活体岩浆</p><hr /><p><strong>效果</strong> 活体岩浆尝试一次@Check[athletics|defense:athletics]检定对抗触发生物的运动DC。如果成功，活体岩浆将武器困于体内，将其中攻击者的手中拔离。生物可以通过交互来取回武器，但除非该生物成功通过一次@Check[athletics|against:fortitude|rollerRole:target]检定对抗活体岩浆的强韧DC（通常为36），否则此尝试会失败。如果活体岩浆使用了包卷，它会吸收所有被困住的武器，使之在其死亡前都无法被取回。</p>"
+                },
+                "Launch Lava": {
+                    "name": "发射熔岩 Launch Lava",
+                    "description": "<p>活体岩浆投射爆炸性的熔岩球到至多120尺。@Template[burst|distance:10]范围内的每个生物受到@Damage[7d6[fire]|options:area-damage]伤害（@Check[reflex|dc:33|basic|options:area-effect]豁免）。</p>"
+                },
+                "Reignite": {
+                    "name": "重燃 Reignite",
+                    "description": "<p><strong>需求</strong> 活体岩浆未处于熔融形态</p>\n<hr />\n<p><strong>效果</strong> 活体岩浆返回熔融形态。</p>"
+                },
+                "Volcanic Heat": {
+                    "name": "火山酷热 Volcanic Heat",
+                    "description": "<p>40尺。任何进入灵光或在灵光中开始回合的生物受到@Damage[15[fire]]伤害（@Check[fortitude|dc:33|basic]豁免）。豁免失败的生物还将陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，直到它不再处于灵光范围。</p>"
+                },
+                "Engulf": {
+                    "name": "包卷 Engulf",
+                    "description": "<p>@Check[reflex|dc:33]，@Damage[2d10[bludgeoning],4d6[fire]]伤害，[[/act escape dc=33]]，破裂 25</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "活体岩浆"
+            }
+        },
+        "Ferrous Butterfly": {
+            "name": "黑铁蝴蝶 Ferrous Butterfly",
+            "items": {
+                "A Thousand Cuts": {
+                    "name": "凌迟 A Thousand Cuts",
+                    "description": "<p>黑铁蝴蝶刀片状的翅膀造成的可怕撕裂会导致持续流血。任何被黑铁蝴蝶蝶翼打击伤害而导致陷入持续流血的生物，在流血期间还会受到2挥砍弱点。</p>"
+                },
+                "Swoop": {
+                    "name": "猛扑 Swoop",
+                    "description": "<p>黑铁蝴蝶最多以满速飞行，并且在移动中的任意一点进行一次蝶翼打击。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "黑铁蝴蝶"
+            }
+        },
+        "Sootsoldiers": {
+            "name": "煤烟士兵 Sootsoldiers",
+            "publicNotes": "<p>强大的神祇和军阀为了证明火的至高无上，因此在火元素位面和内环宇宙的其余部分争夺通知地位。燃烧着火焰的士兵们在硝烟弥漫的战场上相互厮杀，但无法发挥自己的全部力量。伊莫利（Ymeri），这位恶毒的狱火女王（Queen of the Inferno），指挥着大量的煤烟士兵：这些元素能够与她的敌人的军队作战，即使被摧毁，也能从永恒之炉（Eternal Furnace）的灰烬中重生，燃烧着冲天烈火并取得胜利。</p>",
+            "hp": "（16方格）；阙值 110（3部分），55（2部分）；",
+            "items": {
+                "Ashen Smoke": {
+                    "name": "灰烟 Ashen Smoke",
+                    "description": "<p>当煤烟士兵的生命值下降至某个阈值，或减少至0时，被摧毁的士兵将会炸成一团充满烟灰的云团，@Template[burst|distance:20]范围，以煤烟士兵为中心。烟雾内所有生物获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，并且烟雾外的所有生物对里面的生物隐蔽。烟雾持续1分钟，或直到被强风吹散。</p>"
+                },
+                "Incinerating Grasp": {
+                    "name": "焚化之握 Incinerating Grasp",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 煤烟士兵用燃烧的手掌抓握5尺范围内的所有敌人（@Check[reflex|dc:26|basic]豁免）。伤害和额外效果基于它花费的动作。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d8[fire]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+7)[fire]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+7)[fire]]伤害和擒抱</p>"
+                },
+                "Seething Flash": {
+                    "name": "高温闪光 Seething Flash",
+                    "description": "<p>煤烟士兵燃起明亮的火光冲过战场，重整队列并且行走两次。在此行动结束时，一股火焰和高热从煤烟士兵身上倾泻而出，对@Template[emanation|distance:10]范围内的生物造成@Damage[4d8[fire]|options:area-damage]伤害，@Check[reflex|dc:29|basic|options:area-effect,inflicts:prone]豁免。大大失败的生物还会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                },
+                "Smoke Vision": {
+                    "name": "烟雾视觉 Smoke Vision",
+                    "description": "<p>煤烟士兵无视烟雾带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当煤烟士兵行走时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "煤烟士兵"
+            }
+        },
+        "Despairing Pall": {
+            "name": "绝望阴霾 Despairing Pall",
+            "publicNotes": "<p>绝望阴霾是一种小型的黑暗云团，无目标地漂浮在气元素位面，到处投下实体和情感的阴影。恶作剧者和顽皮的元素使常常召唤它们来破坏对手的计划。</p>\n<hr />\n<p>许多游荡在气元素位面的元素生物体现了混乱风暴的变幻无常和混沌。</p>\n<h2>狂暴的精魂 Tempestuous Spirits</h2>\n<p>气元素通常是轻浮的反对者，更关注引发变化，而不是具体的变化内容。由这些元素生物创作的艺术和写作作品极其罕见，因为他们通常在完成作品的挑战和兴奋感消退后会摧毁这些作品。</p>\n<h2>隐形侍从 Invisible Courtiers</h2>\n<p>这些无形的、不可见的元素生物是气元素母神舒尔哈（Hshurha）的宠儿。他们在她的神域——岁差雾凇（Verglas Precessional）中受到优待，不仅作为她的贴身侍从、其他位面的使者和可信的顾问，还执行女神希望隐藏的秘密任务。</p>",
+            "items": {
+                "Duskflow": {
+                    "name": "暮流 Duskflow",
+                    "description": "<p><strong>触发</strong> 绝望阴霾被一次近战打击伤害</p>\n<hr />\n<p><strong>效果</strong> 黑暗从绝望阴霾中涌出，将攻击者笼罩在漆黑的阴影中。绝望阴霾立即向任意方向快步最多15尺。如果绝望阴霾是因为在之前的移动中触发了敌人的反应动作而受到伤害，那么绝望阴霾可以在这之后继续完成其原本的移动。触发本能力的攻击者在一轮内将被黑暗笼罩，并且对光线的感知下降一级（例如，明亮光照变为昏暗光照），相应地影响其感知生物和物体的能力。</p>"
+                },
+                "Downcast": {
+                    "name": "闷闷不乐 Downcast",
+                    "description": "<p>绝望阴霾最多以满速飞行，然后在@Template[line|distance:15]范围降下阴云和绝望。区域内的生物必须成功通过@Check[will|dc:16]豁免，否则在绝望阴霾的下一轮结束前，生物的攻击掷骰受到-1状态减值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.zjVBG6uDd4WKWeKU]{效果：闷闷不乐}</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "绝望阴霾"
+            }
+        },
+        "Metal Wisp": {
+            "name": "金微灵 Metal Wisp",
+            "publicNotes": "<p>金微灵是一团由锈迹粒子和尖锐金属碎片组成的旋转球体，它们狂热地围绕着一个类似于凡人生物头骨的液态金属核心——通常是人形生物的头骨，但动物甚至更奇幻的头骨也不少见。与来自其他元素位面的微灵相比，金微灵不容易形成依恋或联系。其他元素位面的微灵往往认为金属微灵过于忧郁或沉重，尽管金微灵自从位面割裂后仍保留着一定的好奇心。</p>",
+            "items": {
+                "Rust Vision": {
+                    "name": "锈蚀视觉 Rust Vision",
+                    "description": "<p>金微灵无视锈蚀云带来的隐蔽状态。</p>"
+                },
+                "Resonance": {
+                    "name": "共鸣 Resonance",
+                    "description": "<p>30尺。所有微灵都按照与它们的元素协调的频率振动，与所有具有该特征的生物和效果共鸣，并增强它们。区域中的生物如果持握金属武器，或者使用金特征的效果时，其攻击骰和伤害骰获得+1状态加值；具有元素以及金特征的生物在所有攻击和伤害骰上获得该加值。</p>"
+                },
+                "Rust Cloud": {
+                    "name": "锈蚀云 Rust Cloud",
+                    "description": "<p>金微灵周围环绕着铁锈渣组成的云团，因此它对距离超过5尺的生物具有@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+                },
+                "Accord Essence": {
+                    "name": "和声要义 Accord Essence",
+                    "description": "<p><strong>触发</strong> 30尺内，在过去一个小时内受到微灵共鸣的增益的盟友被一次攻击作为目标</p>\n<hr />\n<p><strong>效果</strong> 微灵将自身引爆，造成小范围的元素爆炸，赋予30尺内的，在过去一个小时内受到微灵共鸣增益的盟友获得等于元素当前生命值一半的临时生命。这些临时生命持续1小时。</p>\n<p>使用该反应动作的微灵会被永久摧毁，并且仅能被@UUID[Compendium.pf2e.spells-srd.Item.6dDtGIUerazSHIOu]{祈愿术 Wish}仪式或者类似的强力效果复原。如果某个能力会阻止微灵的毁灭（例如，该微灵是被召唤的，并因此只会被送回），和声要义不会产生效果。</p>"
+                },
+                "In Concert": {
+                    "name": "演奏中 In Concert",
+                    "description": "<p>当金微灵在援助（Aid）时骰出大失败，它们改为得到失败，并且当它们骰出成功，它们改为获得大成功。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "金微灵"
+            }
+        },
+        "Munsahir Trooper": {
+            "name": "火矮人士兵 Munsahir Trooper",
+            "publicNotes": "<p>高度熟练的士兵，大多来自青铜阶级。</p>\n<hr />\n<p>火矮人建立军事化的传统社会。</p>\n<h2>火矮人阶级 Munsahir Hierarchy</h2>\n<p>火矮人社群的三个阶级可以从所有成员所穿的裹裙中辨别出来。贵族，作为无可指责的统治者，穿着精致的黄铜裹裙。社群中层是商人和贸易者，他们穿着青铜裹裙。工人阶级是那些从事建筑和繁重劳动的人，他们穿着生铜裹裙。官方来说，阶层是无法流动的；可怕的罪行可能会导致黄铜贵族被送进监狱，但不会使他们失去其地位。</p>",
+            "items": {
+                "Heat of the Forge": {
+                    "name": "熔炉之热 Heat of the Forge",
+                    "description": "<p>10尺。火矮人的皮肤像熔炉的火焰一样散发热量。每个在该区域内开始其回合的生物必须通过@Check[fortitude|dc:20]豁免，否则在该区域内会变得@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]。对环境热效果免疫或具有任何火焰抗力的生物免疫此效果。</p>"
+                },
+                "Self-Destruct": {
+                    "name": "自毁 Self-Destruct",
+                    "description": "<p>当火矮人的生命值降至0时，他们的护甲会在其下一个回合开始时爆炸，对@Template[emanation|distance:10] 范围造成@Damage[5d6[fire]|options:area-damage]伤害（@Check[reflex|dc:19|basic|options:area-effect]豁免）。 </p>"
+                },
+                "Burning Touch": {
+                    "name": "燃烧之触 Burning Touch",
+                    "description": "<p>火矮人破门者的打击造成额外1d6火焰伤害（已包含在数据中）。当破门者成功进行@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}或@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}动作时，他们还会对目标造成@Damage[1d6[fire]]伤害。</p>"
+                },
+                "Volcanic Hammer": {
+                    "name": "火山之锤 Volcanic Hammer",
+                    "description": "<p>火矮人士兵进行一次战锤攻击，造成额外的一颗武器伤害骰的伤害和@Damage[2d6[persistent,fire]]伤害。</p>"
+                },
+                "Attack of Opportunity": {
+                    "name": "借机攻击 Attack of Opportunity",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "火矮人士兵"
+            }
+        },
+        "Living Grove": {
+            "name": "活体林地 Living Grove",
+            "publicNotes": "<p>活体林地是一个单一连接的实体，拥有几十个基因相同的树干，统一在同一个根系中。休息时，活体林地看起来就像一小片白桦和白杨树的植物园，尽管也存在更大、更坚固的橡树和红杉品种。</p>\n<hr />\n<p>乍一看，木元素似乎不像火元素、水元素或气元素兄弟那样具有破坏性，但不要被表面愚弄了，森林可能是个危险的地方。</p>\n<p>虽然有些像动物，但是这里展示的元素生物依然是植物，它们的生命周期反映了这一点。蔬菜羊长在有根的茎上，直到它们成熟（或者可能成熟）才能从茎上移走，这使得它们依赖于周围的环境来获取养分。苔藓树懒在它们生长出来的第一个世纪里，只不过是一堆绿色的绒毛，只有当它们长出防御性的木爪时，它们才能获得有限的行动能力。</p>\n<h2>野性但不野生 Wild But Unwild</h2>\n<p>许多木元素由木巨灵和木位面上的其他强大生物创造，并被赋予固定角色。它们充满自然保护区和广阔的庄园，一旦被释放到野外，可能不确定如何行动。它们本质上是被驯化出生的，即使在自然环境中，它们的行为也可能与它们模仿的野生生物大相径庭。它们的天敌很少，使元素生物面临的风险较小，尽管它们有时仍被巨型白蚁吃掉或被一些人当作宠物捕捉。</p>\n<h2>不叫大脑的大脑 A Brain By Any Other Name</h2>\n<p>即使是木元素的祖先被树木伮女士（Lady Shumunue）教导模仿动物，木元素的意识也不在大脑中，而是在其根系中。像苗圃爬行者、活体林地和根雕野兽这样的实体利用这一优势。木元素的木质身体可以被雕刻和制作，显然没有长期伤害，这意味着只要它们的根部没有受损，它们可能不会感到疼痛。</p>",
+            "languages": "能理解但是不能说",
+            "ac": "没有防护性伪装时21",
+            "items": {
+                "Defensive Camouflage": {
+                    "name": "防护性伪装 Defensive Camouflage",
+                    "description": "<p>活化林地能在自然环境中@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}，哪怕它没有掩蔽。在躲藏中时，根系被泥土安全地覆盖，赋予活体林地的AC +3状态加值。重击会击碎这层土壤保护层，结束该效果。</p>"
+                },
+                "Engulf": {
+                    "description": "<p>@Check[reflex|dc:22] ，@Damage[5d8[bludgeoning]]伤害，[[/act escape dc=20]],，破裂10</p>\n<p>被活体林地包卷的生物还必须尝试@Check[fortitude|dc:22|basic]豁免，因为他被又细又密的枝条来回击打。</p>\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}。</p>\n<p><strong>大失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 4}。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>",
+                    "name": "包卷 Engulf"
+                },
+                "Tremorsense 30 feet": {
+                    "name": "震颤感知30尺 Tremorsense 30 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "活体林地"
+            }
+        },
+        "Ifrit Shuyookh": {
+            "name": "火巨灵长老 Ifrit Shuyookh",
+            "publicNotes": "<p>火巨灵的领袖和杰出人物均出自睿智而残忍的长老们。这些刻毒的操纵家们用自己的力量统治着其他巨灵，将凡人的贪婪扭曲成悲伤。火巨灵长老用邪恶的奇思引领着烈焰国度（the Dominion of Flame），并坚信火巨灵至高无上。</p>\n<h2>火热八卦 Hot Gossip</h2>\n<p>高贵但不光彩的米沙克家的后裔，火巨灵情报商恰卡米·米沙克（Qalkami Mishalq）在苏丹苏莱曼二十二世（Sultan Suleiman XXII）死后解除流放，返回了烈焰国度。恰卡米利用在开拓者协会中的关系干掉了她在烬怒（Cinderfury）家的对手，步入她自己创造的权力真空，梅迪纳·穆迪阿（Medina Mudii'a）大贵族圈子里的控制力和影响力。</p>",
+            "languages": "Truespeech",
+            "items": {
+                "Heat of Blazing Wings": {
+                    "name": "燃翼灼热 Heat of Blazing Wings",
+                    "description": "<p>5尺。@Damage[4d6[fire]|options:area-damage]伤害（@Check[reflex|dc:31|basic|options:area-effect]）</p>"
+                },
+                "Burning Grasp": {
+                    "name": "燃烧之握 Burning Grasp",
+                    "description": "<p>当火巨灵擒获或束缚一个生物时，该生物受到@Damage[4d6[fire]]伤害，并在其每个回合结束时受到4d6点火焰伤害直到其逃脱。</p>"
+                },
+                "Combat Grab": {
+                    "name": "战斗擒获 Combat Grab",
+                    "description": "<p><strong>需求</strong> 火巨灵有一只空闲手</p>\n<hr />\n<p><strong>效果</strong> 火巨灵进行一次近战打击。如果打击命中，目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}于火巨灵的空闲手。</p>"
+                },
+                "Pedantic Wish": {
+                    "name": "曲解祈愿术 Pedantic Wish",
+                    "description": "<p><strong>频率</strong> 每年三次</p>\n<hr />\n<p><strong>效果</strong> 长老举行祈愿术仪式为一个凡人获取好处，无需开销或次要施法者。如果长老成功通过一次@Check[flat|dc:5]检定便取得成功结果，否则失败。长老会曲解许愿者的真实意图，将措辞扭曲成最大的痛苦。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Exploit Regret": {
+                    "name": "剥削遗憾 Exploit Regret",
+                    "description": "<p><strong>触发</strong> 生物对长老攻击失败</p>\n<hr />\n<p><strong>效果</strong> 长老询问触发生物是否希望命中。如果生物表示希望，长老就会受到伤害，如同攻击命中一样，而遗憾的表情会使长老获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened}状态[[/gmr 1d4 #Quickened Rounds]]{1d4轮}；他可以使用额外动作进行飞行，行走，或打击。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>火巨灵长老变形成为一个小型或中型火元素或爬行动物（reptile），例如蛇。这不会影响火巨灵长老的数据，但会改变其打击的伤害类型。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "火巨灵长老"
+            }
+        },
+        "Olobigonde": {
+            "name": "潜底盘鱼 Olobigonde",
+            "publicNotes": "<p>尽管水元素位面大部分是液体，但它确实包含了一些固体物质，无论是漂浮的水生植物、珊瑚块，还是失落的水下城市的残骸。漂浮物和碎片在整个水元素位面散落，众多生物其中进化并以这些废料为食，而潜底盘鱼就是其中之一。这些扁平、圆形的鱼覆盖着苔藓般的皮肤，使它们在贴紧漂浮物的两侧时极难被发现，它们靠漂浮进其宽大开放的嘴里的废料为食。</p>\n<p>虽然潜底盘鱼主要是食腐动物，但它们有时会在海带森林或长满苔藓的石头旁埋伏，捕捉较小的生物，如水魔蝠或独行的人鱼。它们从藏身处猛冲出来，对毫无防备的猎物大咬一口，然后在猎物试图逃跑时抓住它。尽管体型庞大且形状笨拙，潜底盘鱼在水中却能迅速移动，不过它们的速度爆发通常是短暂的。除了牢牢抓住猎物，潜底盘鱼的嘴中还充满了一种独特的毒素，可以削弱并分解活体肉质。这使得饥饿的鱼能够轻松地吞下由此产生的糊状物。</p>\n<p>古老的潜底盘鱼会长得非常巨大，其外貌也会发生变化。它们的大小似乎没有上限。它们的皮肤甚至会分裂成板块，形成深沟槽，使水可以积聚在其中，使它们看起来更像是一片碎屑，而非单个个体。</p>\n<hr />\n<p>穿越位面的炼金术士发现，潜底盘鱼的毒素能迅速分解肉体，有人甚至找到将其融入炼金作品的方法。成功进行@Check[crafting|dc:16]或生存检定的情况下，潜底盘鱼的尸体可提供价值约1gp的原材料（大成功时为2gp）。这些材料只能用于制造带有毒素特征的炼金炸弹。</p>",
+            "items": {
+                "Ambush": {
+                    "name": "伏击 Ambush",
+                    "description": "<p><strong>触发</strong> 目标生物经过距离潜底盘鱼藏身处20尺内且没有侦测到潜底盘鱼</p>\n<hr />\n<p><strong>效果</strong> 潜底盘鱼从藏身处跃出，向触发生物游泳，并对其进行一次颚打击。目标生物对这次攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                },
+                "Decomposing Toxin": {
+                    "name": "分解毒素 Decomposing Toxin",
+                    "description": "<p>被潜底盘鱼的颚部打击命中的活物必须通过@Check[fortitude|dc:15]豁免，否则会变得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，并受到@Damage[1d6[poison,persistent]]伤害（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，并受到@Damage[2d6[poison,persistent]]伤害）。力竭状态在持续伤害结束时消失。当前受分解毒素影响的生物不需要再次进行豁免。</p>"
+                },
+                "Reactive Grab": {
+                    "name": "反应擒获 Reactive Grab",
+                    "description": "<p><strong>触发</strong> 一生物在潜底盘鱼的触及范围内使用移动动作并离开一个方格</p>\n<p><strong>需求</strong> 尚未有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于潜底盘鱼 </p>\n<hr />\n<p><strong>效果</strong> 潜底盘鱼尝试用颚部@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}触发生物。成功时，目标还会受到@Damage[3[piercing]]伤害（重击时伤害翻倍）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "潜底盘鱼"
+            }
+        },
+        "Lomori Sprout": {
+            "name": "洛莫里幼苗 Lomori Sprout",
+            "publicNotes": "<p>洛莫里幼苗是充满激情的园艺师，在木元素位面上精心照料新生的植物。它们极其勤劳，充满爱心地将幼小的植物引导成精美的构造和图案，形成树隧道、螺旋状的花田、复杂的树篱迷宫、交织的竹子织成的高大挂毯等令人眼花缭乱的创作。洛莫里幼苗仔细收集它们所照料植物的修剪物、种子和碎屑。他们种下种子以促进新的生长，并疯狂地将剩余的材料编织成巢穴、球体和其他简单的物品。它们害羞且易受惊吓，常常沉浸在劳作中，但对于那些尊重它们花园的人，它们总是友好的。</p>\n<p>洛莫里是很久以前被派遣到元素位面的御衡者精魂，目的是从事创造活动。虽然大多数被派遣到其他元素位面的御衡者精魂完成了他们的职责并重新加入了御衡者同胞的队伍，但那些在木元素位面的御衡者精魂却滞留了下来，随着位面消隐而被困。随着时间的推移，它们适应并演变成了洛莫里。如今，洛莫里与木元素位面的其他居民有更多的共同点，而不是它们的御衡者祖先。</p>\n<p>洛莫里幼苗与空塑人很相似，都有一个中央的黑色球体，被称为洛莫里的核心，作为它们的主要身体和意识所在。空塑人会锻造坚固的外骨骼，而洛莫里则在它们的核心周围培育一座高大的草堆，草堆的高度通常是核心的2-3倍。洛莫里在草堆生长过程中塑形，创造出保护层以护卫它们的核心，并形成其他有用的附属肢体。大多数洛莫里有六条木质的、细致入微的蟹状腿，从它们核心的下半部分伸出，使它们能够迅速地在地面上疾行或攀爬树木。</p>",
+            "items": {
+                "Scurry": {
+                    "name": "疾跑 Scurry",
+                    "description": "<p><strong>触发</strong> 一个对洛莫里幼苗可见的敌人攻击洛莫里幼苗</p>\n<hr />\n<p><strong>效果</strong> 攻击结算之后，洛莫里幼苗能以满速行走。此移动不会触发来自触发生物的反应动作。</p>"
+                },
+                "Greater Forest Passage": {
+                    "name": "高等穿林 Greater Forest Passage",
+                    "description": "<p>洛莫里幼苗无视植物和真菌造成的困难地形和高等困难地形。</p>"
+                },
+                "Take Root": {
+                    "name": "扎根 Take Root",
+                    "description": "<p><strong>需求</strong> 洛莫里幼苗在地面上</p>\n<hr />\n<p><strong>效果</strong> 洛莫里幼苗将自己扎入地面。距离洛莫里幼苗60尺内的@Template[burst|distance:5]范围内的地面爆发出抓握的根须，对区域内的生物造成@Damage[4d4[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:20|basic|options:area-effect,inflicts:immobilized]豁免）；如果豁免失败，生物被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，直到它[[/act escape dc=20]]。这些根须还会使区域在1分钟内变为困难地形，此后它们会分解成肥料；区域不再是困难地形，而且任何仍然被根须禁足的生物会自动逃脱。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "洛莫里幼苗"
+            }
+        },
+        "Skymetal Striker": {
+            "name": "天金打击者 Skymetal Striker",
+            "publicNotes": "<p>天金打击者看起来像一条蛇，或更准确地说，像一种被称为双头蛇的两头蛇，由一串数十个旋转的、带锯齿的圆锯片构成。这些锯片沿着生物的身体排列，就像珠子串在一根看不见的磁力线上。尽管构成该生物的刀片通常由许多不同的金属和合金组成，但它以形成其蛇形身体两端的山铜和虚铅利刃而闻名、令人畏惧，并以此得名。</p>\n<hr />\n<p>金元素生物可以以多种不同形式出现，从不同金属的无形混合物到类人和野兽般的怪物。</p>\n<h2>金属躯体 Metal Forms</h2>\n<p>尽管金属元素生物几乎完全由金属构成，但它们大多由微小的不同金属层组成，复杂如肉体或植物组织。这些金属中的许多都因金属位面的自然缓慢熵增而生锈或腐朽。</p>\n<h2>奇异的金属 Strange Metals</h2>\n<p>虚铅（Inubrix）和山铜是天金的类型——在宇宙中用来指代极为罕见的金属的统称，大多数具有魔法属性，来源于遥远的星球和陨落的星星。天金在金位面上很丰富，并且多金元素生物至少含有一种或另一种天金。虚铅，俗称幽灵铁（ghost iron），因其能穿透其他金属而受到珍视，而山铜的神秘性质可以扭曲其周围的时间流。</p>",
+            "items": {
+                "Phase Blade": {
+                    "name": "相位刀刃 Phase Blade",
+                    "description": "<p>天金打击者的虚铅尖牙打击会忽略金属护甲的护甲专精效果所带来的伤害抗力，并且忽视金属盾牌提供的对AC提供的环境加值，同时不会触发借由金属盾牌做出的盾牌格挡反应动作。</p>"
+                },
+                "Temporal Stutter": {
+                    "name": "时间波动 Temporal Stutter",
+                    "description": "<p>一个尚未受到时间波动影响的生物，在受到天金打击者的山铜尖牙打击造成的伤害时，必须尝试@Check[fortitude|dc:25]豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened 1}，直到他的下个回合结束。</p>\n<p><strong>失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，直到他的下个回合结束。</p>\n<p><strong>大失败</strong> 目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}，直到他的下个回合结束。</p>"
+                },
+                "Two-Headed Assault": {
+                    "name": "双头突击 Two-Headed Assault",
+                    "description": "<p>天金打击者进行一次虚铅尖牙和一次山铜尖牙打击，每次针对不同的目标。它的多重攻击减值在两次攻击完成后才增加。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "天金打击者"
+            }
+        },
+        "Vault Builder": {
+            "name": "造窟者 Vault Builder",
+            "publicNotes": "<p>造窟者仍然拥有莎莱祖尔灌输给他们的全部力量，能够创造新生命，塑造其周围的世界。造窟者的寿命为几千年，但他们的记忆会被保存在一块水晶传承石中，在他们死后会将之放进一具新构造的造窟者身躯中。</p>\n<hr />\n<p>莎莱祖尔（Sairazul）创造铸窟族时，他们尚是不朽。她创造了65536名铸窟族，所有铸窟族均是依照她的形象所造，而所有铸窟族都被灌注了一片她的神性火花。在她被监禁期间，阿依尔祖（Ayrzul）使用未来灭绝的预示来操纵他们将其力量献祭给他。这次献祭将铸窟族分成了两类：32768名维持着莎莱祖尔精华的造窟者，和32768名不再永生的护窟者。万年来，铸窟族建造出了横亘土元素位面的巨大魔法文明，当此处不再有空间建设时，他们便离开了。在每个新世界上，铸窟族建造了自己的洞窟，进行着实验，无止境地寻求着帮助他们避免灭绝的线索。</p>\n<h2>洞窟之种 Vault Seeds</h2>\n<p>铸窟族使用洞窟之种来创造魔法地下洞穴，这是阿依尔祖为他们的献祭而奖赏给其种族的魔法工具。洞窟之种被用于创造了格拉利昂幽暗地域的奥瓦洞窟（Vaults of Orv），还有一场意外涉及到一枚脱离掌控的洞窟之种，被用于创造了神秘的翡翠尖塔（Emerald Spire）。</p>\n<h2>水晶工匠 Crystal Crafters</h2>\n<p>除了传承石和洞窟之种外，铸窟族精通于用水晶制作许多种类魔法物品。其中包括名为低语石（whisperstones）的黑石柱，能让铸窟族可以跨洞窟进行心灵感应交流，如同网状绿水晶隧道的奥瓦门，能够在幽暗地域洞窟之间传送，还有在奥瓦中一处名为水晶子宫（the Crystal Womb）的旋涡，连接着土元素位面上一座至关重要的要塞。</p>",
+            "allSaves": "对抗法术时所有豁免+1状态加值（对抗土时+4状态加值）",
+            "languages": "心灵感应 300 尺",
+            "items": {
+                "+2 Status to Recall Knowledge About Earth": {
+                    "name": "有关于土的回忆知识+2状态加值"
+                },
+                "Craft Crystal Wand": {
+                    "name": "制作水晶魔杖 Craft Crystal Wand",
+                    "description": "<p><strong>频率</strong> 每天两次</p>\n<hr />\n<p><strong>效果</strong> 造窟者花费10分钟使用放射性绿水晶制作一把魔杖，容纳有任意由其选择的8环级及以下的土法术。魔杖可以被其他生物使用，但在一天结束后会碎成沙子，且不具有任何金钱价值。造窟者可以将同时消耗每天两次使用次数来制作一件<em>+3高等强击@UUID[Compendium.pf2e.equipment-srd.Item.a8YCTjKnXySKpU5C]{上等土之法杖 Major Staff of Earth}</em>。</p>"
+                },
+                "Item Caster": {
+                    "name": "物品施法者 Item Caster",
+                    "description": "<p>造窟者可以从任意物品上施法（例如法杖或魔杖），如同它在他的法术表中。</p>"
+                },
+                "Constraining Crystal": {
+                    "name": "水晶束缚 Constraining Crystal",
+                    "description": "<p>当造窟者使用爪打击造成伤害时，发光的绿水晶簇会聚集在攻击位置。目标必须成功通过一次@Check[fortitude|dc:31]豁免，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续1小时（或在大失败时陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}）。如果生物已经因水晶束缚陷入笨拙，后续的豁免失败将改为增加笨拙状态值，最大到@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 4}。豁免失败的目标陷入笨拙4时，会陷入持续时间无限的@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{石化 Petrified}。</p>"
+                },
+                "Crystal Burst": {
+                    "name": "水晶爆 Crystal Burst",
+                    "description": "<p>锋利的碎片爆对120尺内的一处@Template[burst|distance:30]范围炸造成@Damage[24d6[piercing]|options:area-damage|traits:item:frequency:limited]伤害，进行@Check[reflex|dc:46|basic|options:area-effect]豁免。护窟者不能在[[/gmr 1d4 #Recharge Crystal Burst]]{1d4轮}内再次使用水晶爆。</p>"
+                },
+                "Earth Glide": {
+                    "name": "潜地 Earth Glide",
+                    "description": "<p>造窟者可以在任何泥土或岩石中钻洞。当他这样做时，造窟者以他的全部掘地速度移动，且不留下隧道或任何它经过的痕迹。</p>"
+                },
+                "Slashing Surge": {
+                    "name": "挥砍冲击 Slashing Surge",
+                    "description": "<p>造窟者行走或攀爬，并在移动中进行两次爪抓打击。每次打击都必须针对不同生物。多重攻击减值在两次打击结束前不会增加。</p>"
+                },
+                "Tremorsense (Imprecise) 120 feet": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>",
+                    "name": "震颤感知（模糊感官）120尺 Tremorsense (Imprecise) 120 feet"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗法术时所有豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "+4 Status to All Saves vs. Earth": {
+                    "name": "对抗土时所有豁免+4状态加值 +4 Status to All Saves vs. Earth"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "造窟者"
+            }
+        },
+        "Harvest Regiment": {
+            "name": "收获战团 Harvest Regiment",
+            "publicNotes": "<p>巨大的果树长满了木元素位面一个叫做“军械库林”（Armory Grove）的地方。经过几十年的成长，这些战团树的树枝会变得很重，上面结满了人形的奇异果实。这些树木由退役的战士种植，他们不知疲倦的工作确保了这些果实长成适合战斗的形状。他们的努力向这些水果战士们灌输战术知识，这样这些果子就能在落地时立刻做好转斗准备——同时形成一个准备好的战斗单位。每个水果士兵的技能相同，外形相似，都有一个木制的外壳，随着水果成熟，外壳会裂成几瓣。被杀的战士体内含有种子，这些种子可以在水分或血液浸染的肥沃土壤中慢慢发芽。每个战场结束后都会变出一座新的花园。</p>",
+            "hp": "阙值: 90, 45",
+            "items": {
+                "Juice Shower": {
+                    "name": "果汁雨 Juice Shower",
+                    "description": "<p>当收获战团被重击，或者对伤害效果的豁免大失败时，黏性果汁会飞溅出来。这影响@Template[emanation|distance:5]范围所有生物。被溅射的生物速度有-10尺状态减值，并且所有事物对它@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。生物能以交互动作移除果汁。</p>"
+                },
+                "Raise Shells": {
+                    "name": "举起硬壳 Raise Shells",
+                    "description": "<p>部队举起形似盾牌的硬壳，AC+2环境加值，直到它的下个回合开始。</p>"
+                },
+                "Seed Volley": {
+                    "name": "种子齐射 Seed Volley",
+                    "description": "<p>收获战团从身体里吐出一连串坚硬种子。该齐射在120尺的@Template[burst|distance:10]范围造成@Damage[2d10[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:23|basic|options:area-effect]豁免）。当收获战团减少至8个或更少方格，该区域减少为@Template[burst|distance:5]。</p>"
+                },
+                "Shell Smash": {
+                    "name": "硬壳猛击 Shell Smash",
+                    "description": "<p><span class=\"action-glyph\">1</span> 到 <span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 收获战团步调一致地对@Template[emanation|distance:5]内每个敌人进行近战攻击，@Check[reflex|dc:23|basic|options:area-effect]豁免。伤害取决于动作数量。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d8+3)[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d8+9)[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d8+12)[bludgeoning]|options:area-damage]伤害</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当收获战团行走时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>",
+                    "name": "部队防御 Troop Defenses"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "收获战团"
+            }
+        },
+        "Abysium Horror": {
+            "name": "渊铀恐魔 Abysium Horror",
+            "publicNotes": "<p>这种由放射性天金渊铀构成的巨大蜘蛛状生物是一种致命的捕食者，它接触的任何东西都会被污染。</p>",
+            "items": {
+                "Green Glow": {
+                    "name": "绿光 Green Glow",
+                    "description": "<p>20尺</p>\n<p>渊铀恐魔不断地散发出对生命有害的强大能量。这种辐射在该区域内产生昏暗光。任何生物在光环中开始其回合时必须进行一次@Check[fortitude|dc:27]豁免，失败将导致@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，大失败则导致@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。一旦离开光环，受影响生物的恶心状态值将在其每个回合开始时自动减少1。</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>大型或更小，爪抓，@Check[reflex|dc:27|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                },
+                "Heavy": {
+                    "description": "<p>由于其形态稳固，该元素无法被强迫移动或被@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{击倒 Prone}。如果它采用了移动动作，会暂时失去这种免疫直到下个回合开始。</p>",
+                    "name": "沉重 Heavy"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "渊铀恐魔"
+            }
+        },
+        "Rust Scarab": {
+            "name": "锈蚀圣甲虫 Rust Scarab",
+            "publicNotes": "<p>这些元素看起来像巨大的甲虫，厚厚的外壳由多层凹凸不平、锈迹斑斑的金属板组成，保护着锯齿状的金属骨架。</p>\n<hr />\n<p>金元素生物可以以多种不同形式出现，从不同金属的无形混合物到类人和野兽般的怪物。</p>\n<h2>金属躯体 Metal Forms</h2>\n<p>尽管金属元素生物几乎完全由金属构成，但它们大多由微小的不同金属层组成，复杂如肉体或植物组织。这些金属中的许多都因金属位面的自然缓慢熵增而生锈或腐朽。</p>",
+            "items": {
+                "Heavy": {
+                    "name": "沉重 Heavy",
+                    "description": "<p>由于其形态稳固，该元素无法被强迫移动或被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。如果它采用了移动动作，会暂时失去这种免疫直到下个回合开始。</p>"
+                },
+                "Rust Vision": {
+                    "name": "锈蚀视觉 Rust Vision",
+                    "description": "<p>锈蚀圣甲虫无视锈蚀云带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Crumbling Carapace": {
+                    "name": "崩坏外壳 Crumbling Carapace",
+                    "description": "<p>如果锈蚀圣甲虫的生命值下降至最大生命值的一半以下，或受到重击，它的外壳破碎成一堆破碎的金属鳞片，这导致它失去物理抗力和沉重能力，但是它获得锈蚀云灵光和35尺陆地速度。</p>"
+                },
+                "Rust Cloud": {
+                    "name": "锈蚀云 Rust Cloud",
+                    "description": "<p>外壳破碎后的锈蚀圣甲虫周围周围环绕着铁锈渣组成的云团，因此它对距离超过5尺的生物具有@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+                },
+                "Tetanus": {
+                    "name": "破伤风 Tetanus",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:19]</p>\n<p><strong>潜伏期</strong> 1周</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1 周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} 并且不能说话 (1 天）</p>\n<p><strong>阶段3</strong> 因为肌肉痉挛而@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF] (1 天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>中型或更小，爪抓，@Check[reflex|dc:23|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "锈蚀圣甲虫"
+            }
+        },
+        "Picture-in-Clouds": {
+            "name": "云中画 Picture-in-Clouds",
+            "publicNotes": "<p>天空中云朵的变幻无常形态几个世纪以来一直吸引着凡间孩童的想象。云中画代表了这种纯粹的空气的可能性，可以变形成物质宇宙所能想象的一切。</p>\n<hr />\n<p>许多游荡在气元素位面的元素生物体现了混乱风暴的变幻无常和混沌。</p>\n<h2>狂暴的精魂 Tempestuous Spirits</h2>\n<p>气元素通常是轻浮的反对者，更关注引发变化，而不是具体的变化内容。由这些元素生物创作的艺术和写作作品极其罕见，因为他们通常在完成作品的挑战和兴奋感消退后会摧毁这些作品。</p>\n<h2>隐形侍从 Invisible Courtiers</h2>\n<p>这些无形的、不可见的元素生物是气元素母神舒尔哈（Hshurha）的宠儿。他们在她的神域——岁差雾凇（Verglas Precessional）中受到优待，不仅作为她的贴身侍从、其他位面的使者和可信的顾问，还执行女神希望隐藏的秘密任务。</p>",
+            "items": {
+                "Disperse": {
+                    "name": "消散 Disperse",
+                    "description": "<p><strong>触发</strong> 云中画因敌对行动受到伤害</p>\n<hr />\n<p><strong>效果</strong> 云中画消散。在当前回合结束之前，它不能被攻击或被瞄准，不占据空间，并且它的任何灵光或弥漫效果将被抑制。当前回合结束时，云中画在150尺范围内任何足够大的空间重新形成；只要元素消散时其灵光或弥漫效果的持续时间未结束，这些效果将被恢复。</p>"
+                },
+                "High Winds": {
+                    "name": "强风 High Winds",
+                    "description": "<p>60尺。弥漫范围内的空气对没有气特征的飞行生物来说是困难地形。</p>"
+                },
+                "Cloudgaze": {
+                    "name": "云观 Cloudgaze",
+                    "description": "<p>云中画变形成其选择的鹰形态、大象形态或剑形态。</p>"
+                },
+                "Elephant Blast": {
+                    "name": "象鼻喷射 Elephant Blast",
+                    "description": "<p><strong>需求</strong> 云中画处于大象形态</p>\n<hr />\n<p><strong>效果</strong> 云中画从其云状象鼻中呼出@Template[cone|distance:30]的气流。区域内的生物必须尝试@Check[fortitude|dc:30|options:area-effect,forced-movement]豁免以避免被吹走。被推入固态物体的生物停止移动并受到@Damage[4d10[bludgeoning]]伤害。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物被推离20尺</p>\n<p><strong>失败</strong> 生物被推离40尺</p>\n<p><strong>大失败</strong> 生物被推离40尺并且被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]</p>"
+                },
+                "Feather Storm": {
+                    "name": "羽毛风暴 Feather Storm",
+                    "description": "<p><strong>需求</strong> 云中画处于鹰形态</p>\n<hr />\n<p><strong>效果</strong> 云中画飞行125尺，振翅并在其路径上形成屏障。该屏障有@UUID[Compendium.pf2e.spells-srd.Item.it4ZsAi6XgvGcodc]的效果（DC@Check[fortitude|dc:30]），并持续到云中画的下一个回合结束。</p>"
+                },
+                "Slicing Wind": {
+                    "name": "切割之风 Slicing Wind",
+                    "description": "<p><strong>需求</strong> 云中画处于剑形态</p>\n<hr />\n<p><strong>效果</strong> 云中画旋转，形成一个@Template[emanation|distance:15]范围的旋风，造成@Damage[5d8[slashing]|options:area-damage]伤害（@Check[reflex|dc:30|basic|options:area-effect]豁免）。</p>"
+                },
+                "Swiftness": {
+                    "name": "迅捷 Swiftness",
+                    "description": "<p>云中画的移动不会触发反应动作。</p>"
+                },
+                "Push 15 feet": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>",
+                    "name": "推离15尺 Push 15 feet"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "云中画"
+            }
+        },
+        "Melomach": {
+            "name": "雷音狂魔 Melomach",
+            "publicNotes": "<p>雷音狂魔是由金属碎片构成的巨大、模糊人形的元素生物。它们非常自豪地用随意放置的尖刺、刀片、人形或野兽的头骨以及其他类似的装饰品来装饰和增强自己的金属身体，越是夸张炫耀越好。当两个雷音狂魔相遇时，它们展开的体力和声音的竞赛可能会持续数日，常常让方圆数英里的景观遭受严重破坏。</p>",
+            "items": {
+                "Lightning Punch": {
+                    "name": "闪电拳击 Lightning Punch",
+                    "description": "<p>雷音狂魔进行一次拳头打击，然后对距离拳头打击目标120尺内的另一生物进行一次闪电打击。这两次打击都计入雷音狂魔的多重攻击减值，但直到两次攻击完成后才增加。</p>"
+                },
+                "Rhythmic Stomp": {
+                    "name": "节奏踏步 Rhythmic Stomp",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 雷音狂魔的脚步通过其身体发出金属声，创造出一段短暂的音乐旋律。雷音狂魔行走，然后产生以下其中一种吟游诗人组曲戏法的效果，环级为7环级：@UUID[Compendium.pf2e.spells-srd.Item.IQchIYUwbsVTa9Mc]{快板曲 Allegro}， @UUID[Compendium.pf2e.spells-srd.Item.1xLVcA8Y1onw7toT]{末日丧歌 Dirge of Doom}（增加恐惧特征），或 @UUID[Compendium.pf2e.spells-srd.Item.c8R2fpk88fBwJ1ie]{三拍子 Triple Time}。</p>"
+                },
+                "Scream": {
+                    "name": "尖叫 Scream",
+                    "description": "<p>雷音狂魔发出一声低沉、刺耳的尖叫。@Template[cone|distance:120]范围内的所有生物受到@Damage[7d12[sonic]|options:area-damage]伤害，并需进行一次@Check[fortitude|dc:32|options:area-effect,damaging-effect,inflicts:deafened,inflicts:stunned]豁免。</p>\n<p>雷音狂魔在[[/gmr 1d4 #Recharge Scream]]{1d4轮}内不能再次尖叫。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物受到一半伤害。</p>\n<p><strong>失败</strong> 生物受到全部伤害，@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，并在1分钟内@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]。</p>\n<p><strong>大失败</strong> 生物受到双倍伤害，@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 3}，并永久耳聋。</p>"
+                },
+                "Heavy": {
+                    "name": "沉重 Heavy",
+                    "description": "<p>由于其形态稳固，该元素无法被强迫移动或@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。如果它采用了移动动作，会暂时失去这种免疫直到下个回合开始。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "雷音狂魔"
+            }
+        },
+        "Sootsoldiers (The Radiant Host)": {
+            "name": "煤烟士兵-光耀之主 Sootsoldiers (The Radiant Host)",
+            "publicNotes": "<p>强大的神祇和军阀为了证明火的至高无上，因此在火元素位面和内环宇宙的其余部分争夺通知地位。燃烧着火焰的士兵们在硝烟弥漫的战场上相互厮杀，但无法发挥自己的全部力量。伊莫利（Ymeri），这位恶毒的狱火女王（Queen of the Inferno），指挥着大量的煤烟士兵：这些元素能够与她的敌人的军队作战，即使被摧毁，也能从永恒之炉（Eternal Furnace）的灰烬中重生，燃烧着冲天烈火并取得胜利。</p>",
+            "hp": "（16方格）；阙值 110（3部分），55（2部分）；",
+            "items": {
+                "Ashen Smoke": {
+                    "name": "灰烟 Ashen Smoke",
+                    "description": "<p>另一位火元素领主，摇曳之王奥特雷亚（Lambent King Atreia）手下的煤烟士兵，身上覆盖着炽热的余烬，而不是黑色的炭。。</p>\n<p>当煤烟士兵的生命值下降至某个阈值，或减少至0时，被摧毁的士兵将会炸成一团充满烟灰的云团，@Template[burst|distance:20]范围，以煤烟士兵为中心。烟雾内所有生物必须尝试@Check[reflex|dc:29]豁免。如果失败，在1分钟内该生物将会@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}，并且它的隐形会暂时失效。</p>"
+                },
+                "Incinerating Grasp": {
+                    "name": "焚化之握 Incinerating Grasp",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 煤烟士兵用燃烧的手掌抓握5尺范围内的所有敌人（@Check[reflex|dc:26|basic]豁免）。伤害和额外效果基于它花费的动作。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d8[fire]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+7)[fire]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+7)[fire]]伤害和擒抱</p>"
+                },
+                "Seething Flash": {
+                    "name": "高温闪光 Seething Flash",
+                    "description": "<p>煤烟士兵燃起明亮的火光冲过战场，重整队列并且行走两次。在此行动结束时，一股火焰和高热从煤烟士兵身上倾泻而出，对@Template[emanation|distance:10]范围内的生物造成@Damage[4d8[fire]|options:area-damage]伤害，@Check[reflex|dc:29|basic|options:area-effect,inflicts:prone]豁免。大大失败的生物还会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                },
+                "Smoke Vision": {
+                    "name": "烟雾视觉 Smoke Vision",
+                    "description": "<p>煤烟士兵无视烟雾带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当煤烟士兵行走时，它首先以一个自由动作重整队列，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后最多以满速度移动。它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "煤烟士兵-光耀之主"
+            }
+        },
+        "Capritellix": {
+            "prototypeToken": {
+                "name": "变脸金球"
+            },
+            "items": {
+                "Whirling Hands": {
+                    "description": "<p><strong>触发</strong> 一个生物在变脸金球的近战范围内开始其回合</p>\n<hr />\n<p><strong>效果</strong> 变脸金球对该生物进行一次金属手打击。</p>",
+                    "name": "旋转手掌 Whirling Hands"
+                },
+                "Push 20 feet": {
+                    "name": "推离20尺",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
+                },
+                "All-Around Vision": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>",
+                    "name": "全域视野 All-Around Vision"
+                },
+                "Shift Mood": {
+                    "name": "情绪转换 Shift Mood",
+                    "description": "<p>变脸金球旋转其面部的圆环，改变其个性和举止。直到再次转换情绪之前，变脸金球获得某个技能+4 状态加值、对抗该技能的意志DC +4 状态加值，以及一个特定的随意施法的奥术内在法术（9环级，DC 38）。</p>\n<p><strong>愤怒</strong> 威吓，@UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]{支配术 Dominate}</p>\n<p><strong>友善</strong> 表演，@UUID[Compendium.pf2e.spells-srd.Item.Jvyy6oVIQsD34MHB]{强迫起舞 Uncontrollable Dance}</p>\n<p><strong>宁静</strong> 交涉，@UUID[Compendium.pf2e.spells-srd.Item.qwlh6aDgi86U3Q7H]{暗示术 Suggestion}</p>\n<p><strong>狡诈</strong> 欺骗，@UUID[Compendium.pf2e.spells-srd.Item.8kJbiBEjMWG4VUjs]{心灵扭曲 Warp Mind}</p>"
+                },
+                "Dual Beams": {
+                    "name": "双重光束 Dual Beams",
+                    "description": "<p>变脸金球进行两次眼部光束打击，分别以不同生物为目标。直到两次攻击之后，它们的多重攻击减值才会增加。</p>"
+                },
+                "Plentiful Metals": {
+                    "name": "多样金属 Plentiful Metals",
+                    "description": "<p>变脸金球的每一只悬浮手掌都是由不同的珍贵金属制成的。每次变脸金球进行金属手打击时，它们可以选择使用精金、寒铁、晨银、山铜、银或其他任意固体珍贵金属手掌。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>金元素位面有时显得不可预测，几近残酷，而变脸金球完美地体现了这一点。其头部由多个圆环组成，每个圆环上都描绘了它们面部的一部分，变脸金球可以通过快速旋转圆盘来重新塑造它们的个性。尽管它们有不同的面孔，每个变脸金球都有唯一身份，只有一份记忆和一个名字。它们面孔上的每一种情绪都是其个性的某个面的放大，而不是完全不同的个体。对于大多数观察者来说，这些差异是微妙的，但一个变脸金球可以展示出众多情绪组合——通常有四张面孔的圆环可以产生64种组合，五张面孔的圆环可以有125种组合。然而，无论它们如何改变面孔，变脸金球都无法抑制其傲慢的自我，也无法摆脱其感受到的无尽绝望。变脸金球内部每种情绪的互相冲突使得这些生物难以制定长期计划或建立稳固的关系。一个面孔建立的东西，另一个面孔却会破坏，这种诅咒使它们清楚地知道前一种意图永远无法实现，所以他们放弃任何精心策划的计划。</p>\n<h2>再生残骸 Recycled Remains</h2>\n<p>当受到严重损伤或疲惫不堪时，变脸金球会前往一个类似于传说中大象墓地的共同墓地。成千上万的金属手从地面伸出，抓向天空，而曾经组成变脸金球的圆盘被堆积在无尽的废料中。其他元素生物有时会从这些不同的部分中打捞，重新组装成一个新的变脸金球——一个具有全新身份的独特个体。</p>",
+            "name": "变脸金球 Capritellix"
+        },
+        "Cullitox": {
+            "name": "晶蝎 Cullitox",
+            "prototypeToken": {
+                "name": "晶蝎"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>晶蝎生活在土元素位面的深洞穴中，这些洞穴充满了在内部能量作用下发光的晶体。晶蝎对宝石的渴望会使它们几乎前往任何地方，甚至穿越位面裂缝。偶尔，它们甚至会在其他位面建立殖民地，只要新发现的领地充满了晶体。</p>\n<p>晶蝎那蝎子般的身体闪烁着晶体。当光在晶体的多个面之间折射时，它们会聚焦和吸收光线，为晶蝎提供能量，有人说这也为这种生物的魔法提供了动力。</p>\n<p>晶蝎在晶体丰富的地方形成小型社区，彼此合作追踪从普通石英到珍贵红宝石和蓝宝石的任何东西。侦察队利用它们与生俱来的魔法，通过光和无言的声音相互交流，并寻找更多的晶体。然而，当珍贵的石材资源变得稀缺时，晶蝎会变得独立并并开始注重私人领地，从任何地方获取晶体，甚至从其他生物那里抢夺。</p>\n<p>晶蝎对收集晶体的驱动类似于繁殖的驱动。当一个晶蝎收集到足够的石材后，它会将这些储存在体内的材料融合成一个微型的自身复制品，并将幼年晶蝎（有时称为晶蝎碎片）挤出体外。这个过程会使父母暂时虚弱，直到它能收集足够的晶体修复其身体并重新开始这一过程。幼年晶蝎以类似的方式消耗晶体。它们在几个月内处理原材料以长成成年尺寸。此后，晶蝎只“吃”石头来治疗伤口。</p>\n<h2>体内宝石 Internal Gems</h2>\n<p>当晶蝎死亡时，它的身体会破碎成晶体碎片。这些碎片中有些是有价值的，但更具潜在价值的是晶蝎体内储存的用于繁殖后代的宝石。生产一个幼年晶蝎需要价值500金币的半宝石和宝石，尽管大多数被杀死的晶蝎体内只储存有这一数额的一小部分。一旦这些宝石变成新的晶蝎，它们就会转化为幼体身体的晶体，不再是曾经珍贵的材料。</p>",
+            "items": {
+                "Crystal Scent": {
+                    "name": "水晶感知 Crystal Scent",
+                    "description": "<p>晶蝎能感知60尺范围内的水晶或宝石，这类似灵敏嗅觉能力。 </p>"
+                },
+                "Rock Stride": {
+                    "name": "岩行术 Rock Stride",
+                    "description": "<p>晶蝎转移到和自己相邻的、并且足够容纳它的岩石中。然后，晶蝎感知到60尺范围内的相似或更大的岩石，并从其中出现。晶蝎1 分钟内不能再次使用此能力。</p>"
+                },
+                "Sink into Stone": {
+                    "name": "钉入岩石 Sink into Stone",
+                    "description": "<p>晶蝎发射的尾针深深地没入石头，将敌人钉在原地。站在石质表面或与石质表面相邻的敌人如果被尾针打击重击命中，将被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escape}DC 为 17。</p>"
+                }
+            }
+        }
+    },
+    "mapping": {
+        "di": "system.traits.di.custom",
+        "name": "name",
+        "portrait": {
+            "converter": "npc-portrait-path",
+            "path": "img"
+        },
+        "token": {
+            "path": "prototypeToken",
+            "converter": "npc-token-translation"
+        },
+        "data": {
+            "path": "system",
+            "converter": "npc-data-translation"
+        },
+        "items": {
+            "path": "items",
+            "converter": "npc-item-translation"
+        },
+        "publicNotes": "system.details.publicNotes",
+        "privateNotes": "system.details.privateNotes",
+        "dr": "system.traits.dr",
+        "allSaves": "system.attributes.allSaves.value",
+        "senses": "system.traits.senses.value",
+        "hp": "system.attributes.hp.details",
+        "disable": "system.details.disable",
+        "hazarddescription": "system.details.description",
+        "reset": "system.details.reset",
+        "routine": "system.details.routine",
+        "blurb": "system.details.blurb",
+        "speed": "system.attributes.speed.details",
+        "languages": "system.traits.languages.custom",
+        "stealthdetails": "system.attributes.stealth.details",
+        "ac": "system.attributes.ac.details",
+        "prototypeToken": {
+            "path": "prototypeToken",
+            "converter": "structured",
+            "cardinality": "one",
+            "mapping": {
+                "name": "name"
+            }
+        }
+    }
+}

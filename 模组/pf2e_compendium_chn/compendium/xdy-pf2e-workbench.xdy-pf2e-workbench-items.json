@@ -1,0 +1,135 @@
+{
+    "label": "PF2e Workbench道具 xdy-pf2e-workbench-items",
+    "entries": {
+        "[Effect] Dirge Of Doom": {
+            "name": "[效果] 末日丧歌 Dirge Of Doom",
+            "description": "<p><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">被附加此效果的敌人</span><span style=\"color:#191813;font-family:Roboto, sans-serif;font-size:13px\">身上的@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]值不会自动被降至低于1。</span></p>"
+        },
+        "Aura: Bane": {
+            "name": "灵光: 绝望术 Bane",
+            "description": "<p>一个“凑合能用”的@Compendium[pf2e.spells-srd.7ZinJNzxq0XF0oMx]{绝望术 Bane}灵光。（严格来说它不是一个灵光，但，嗯……）</p>\n<p>此效果的灵光半径为10尺，如果想要增加灵光半径，你需要手动修改规则元素。</p>"
+        },
+        "Aura: Bless": {
+            "name": "灵光: 祝福术 Bless",
+            "description": "<p>一个“凑合能用”的祝福术灵光。（严格来说它不是一个灵光，但，嗯……）</p>\n<p>此效果的灵光半径为5尺，如果想要增加灵光半径，你需要手动修改规则元素。</p>"
+        },
+        "Aura: Inspire Courage": {
+            "name": "灵光: 激发勇气 Inspire Courage",
+            "description": "<p>一个“凑合能用”的@Compendium[pf2e.spells-srd.IAjvwqgiDr3qGYxY]灵光。（严格来说它不是一个灵光，但，嗯……）</p>\n<p>默认效果持续1轮。每回合自动重新生效，或者可用Shift+左键点击效果来修改持续时间（如果你启用了Extempore Effects这个MOD，你应该启用……）。</p>"
+        },
+        "Aura: Inspire Defense": {
+            "name": "灵光: 激发防御 Inspire Defense",
+            "description": "<p>一个“凑合能用”的@Compendium[pf2e.spells-srd.bH0kPuf7UKxRvi2P]灵光。（严格来说它不是一个灵光，但，嗯……）</p>\n<p>默认效果持续1轮。每回合自动重新生效，或者可用Shift+左键点击效果来修改持续时间（如果你启用了Extempore Effects这个MOD，你应该启用……）。</p>"
+        },
+        "Aura: Protective Ward": {
+            "name": "灵光: 防护结界 Protective Ward",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.lY9fOk1qBDDhBT8s]{防护结界 Protective Ward}。</p>\n<p>你散发出保护魔法的闪耀灵光。你和区域内的任意盟友在AC上获得+1状态加值。每当你@UUID[Compendium.pf2e.actionspf2e.Item.3f5DMFu8fPiqHpRg]{维持法术 Sustain the Spell}时，弥漫区域的半径增加5尺，至多达到半径30尺。</p>\n<p>增加灵光层数以将半径扩大5尺。</p>"
+        },
+        "Stance: Dread Marshal Stance": {
+            "name": "架势: 恐怖军势 Dread Marshal Stance"
+        },
+        "Stance: Inspiring Marshal Stance": {
+            "name": "架势: 激昂军势 Inspiring Marshal Stance"
+        },
+        "Workbench ABP": {
+            "name": "Workbench自动成长加值",
+            "description": "<p>一个使用规则元素实现自动成长加值ABP系统的尝试（使用“专长”为载体）。还未完成，但已经够用了。（我的玩家不喜欢ABP，所以近期我不会再用它了，但我猜它对其他人可能有点用，所以我把它放进Workbench了）</p>\n<p>使用时，<em>不要</em>勾选Foundry VTT中的自动成长加值选项，相对的，将此“专长”放入所有使用ABP玩家角色的战役专长区。</p>\n<p>仅经过一点点测试，可能需要在升级时移除它，再重新添加回角色卡。</p>\n<p>按你的需要调整经济。如果你不想，就不需要移除武器或护甲上的符文，这些规则元素被设置为“物品加值”，因此不管用什么符文，都是最高加值才被计算。<em>除了</em>绝望打击(Devastating Attacks)这种*确实*和强击符文叠加的。（我用了阿巴达尔的图标，你看，我刚刚在上一句话里说了战役经济，感觉很合适:）</p>\n<p> </p>"
+        },
+        "Workbench Flat Check Notes V3.35.2": {
+            "name": "Workbench纯骰检定提醒 V3.35.2",
+            "description": "<p>如不喜: 可使用PF2 Flat Checks模组 (https://github.com/jessev14/pf2-flat-check/ )</p>\n<p>此“动作”中包含了几条有用的提示规则元素。该进行纯骰检定时，它会进行提醒。使用时，将此动作添加到角色/npc卡中，忽略它即可。Workbench更新时，它会自动跟随更新。</p>\n<p>它离完成还早，但它是个不错的开始。</p>\n<p>目前能够处理:</p>\n<ul>\n<li>目标为无踪、藏匿、隐形或隐蔽状态时，提示进行纯骰检定。</li>\n<li>自身目盲或目眩。</li>\n<li>自身拥有盲斗专长（只能部分处理无踪状态）</li>\n</ul>\n<p>你可能会收到多个提醒，使用最差的那个。</p>"
+        },
+        "Reach 'aura'": {
+            "name": "长触及“灵光”",
+            "description": "<p>长触及“灵光”，使用指示物来更改半径以符合你装备的武器。</p>"
+        },
+        "Effect: Change Focus Point Maximum": {
+            "name": "效果：改变聚能点上限",
+            "description": "<p>将此效果添加给聚能点上限应高于3的角色，然后修改聚能点计数器至所需值。</p>"
+        },
+        "Aura: Aura of Despair": {
+            "name": "灵光: 绝望灵光 Aura of Despair",
+            "description": "<p>此灵光赋予@Compendium[pf2e.feat-effects.MNkIxAishE22TqL3]{效果：绝望灵光}，并将敌人的最低@Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧 Frightened}值调整为1。</p>"
+        },
+        "Aura: Dirge of Doom": {
+            "description": "<p>一个“凑合用”的@Compendium[pf2e.spells-srd.1xLVcA8Y1onw7toT]{末日丧歌 Dirge of Doom}灵光 （严格来说不是灵光，不过，嗯……)</p>\n<p>它会应用@Compendium[xdy-pf2e-workbench.xdy-pf2e-workbench-items.Er8NTtocbKcUpBAa]{效果：最低惊惧值}</p>",
+            "name": "灵光: 末日丧歌 Dirge of Doom"
+        },
+        "Effect: Condition for 1 hour (modifiable)": {
+            "name": "效果：持续1小时的状态 （可修改）",
+            "description": "<p>默认持续1轮，如有必要请修改持续时间。</p>\n<p>状态值默认为1（对于状态值很重要的那些），左键单击来增加状态值。你无法移除状态，除非本状态被移除，此时绑定状态也会自动移除。</p>"
+        },
+        "Effect: Condition for 1 minute (modifiable)": {
+            "name": "效果：持续1分钟的状态 （可修改）",
+            "description": "<p>默认持续1轮，如有必要请修改持续时间。</p>\n<p>状态值默认为1（对于状态值很重要的那些），左键单击来增加状态值。你无法移除状态，除非本状态被移除，此时绑定状态也会自动移除。</p>"
+        },
+        "Effect: Condition for 1 round (modifiable)": {
+            "name": "效果：持续1轮的状态 （可修改）",
+            "description": "<p>默认持续1轮，回合开始时过期，如有必要请修改持续时间。</p>\n<p>状态值默认为1（对于状态值很重要的那些），左键单击来增加状态值。你无法移除状态，除非本状态被移除，此时绑定状态也会自动移除。</p>"
+        },
+        "Effect: Condition for 1 round, end of turn (modifiable)": {
+            "description": "<p>默认持续1轮，回合开始时过期，如有必要请修改持续时间。</p>\n<p>状态值默认为1（对于状态值很重要的那些），左键单击来增加状态值。你无法移除状态，除非本状态被移除，此时绑定状态也会自动移除。</p>",
+            "name": "效果：持续1轮的状态, 回合结束时过期 （可修改）"
+        },
+        "Effect: Condition for 10 minutes (modifiable)": {
+            "description": "<p>默认持续1轮，如有必要请修改持续时间。</p>\n<p>状态值默认为1（对于状态值很重要的那些），左键单击来增加状态值。你无法移除状态，除非本状态被移除，此时绑定状态也会自动移除。</p>",
+            "name": "效果：持续10分钟的状态 （可修改）"
+        },
+        "Effect: Minimum Frightened": {
+            "name": "效果：最低惊惧值 Minimum Frightened",
+            "description": "<p>带有此效果的生物无法将其@Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧 Frightened}值降低到此效果等级值以下。</p>\n<p><em>不要</em>额外赋予惊惧状态。</p>"
+        },
+        "Mummy Adjustment": {
+            "description": "<p>所有类型的生物都可以保存自己的尸体，并作为木乃伊重生。</p>\n<ul>\n<li>增加木乃伊和不死生物特征。</li>\n<li>增加死灵语。</li>\n<li>增加以下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>根据生物等级添加火焰弱点值。</li>\n<li>增加以下能力。</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li>@UUID[Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.E4PkAKqJYCyHrY3U]{次级绝望 Lesser Despair}</li>\n</ul>\n</ul>",
+            "name": "木乃伊调整 Mummy Adjustment"
+        },
+        "Zombie Adjustment": {
+            "description": "<p>丧尸是无心智的腐烂尸体，会攻击一切可见生物。</p>\n<ul>\n<li>增加无心智、不死生物和丧尸特征。</li>\n<li>根据生物等级增加HP。</li>\n<li>增加以下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>增加以下弱点，弱点值取决于生物等级：命能、挥砍。</li>\n<li>增加以下能力：</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li>缓慢：丧尸永久@Compendium[pf2e.conditionitems.Slowed]{缓慢 Slowed 1}且无法使用反应动作。</li>\n</ul>\n</ul>",
+            "name": "丧尸调整 Zombie Adjustment"
+        },
+        "(Intelligent) Skeleton Adjustment": {
+            "name": "（智能） 骷髅调整 Skeleton Adjustment",
+            "description": "<p>大部分骷髅是无心智的，只会遵从生前的基本本能，或是它们的创造者给出的命令。</p>\n<ul>\n<li>增加骷髅、无心智和不死生物、僵尸特征。</li>\n<li>根据生物等级增加HP。</li>\n<li>增加一下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>增加以下根据等级决定的抗力值：寒冷、电击、火焰、穿刺、挥砍。</li>\n<li>增加以下能力。</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n</ul>\n</ul>"
+        },
+        "(Mindless) Skeleton Adjustment": {
+            "name": "（无心智） 骷髅调整 Skeleton Adjustment",
+            "description": "<p>大部分骷髅是无心智的，只会遵从生前的基本本能，或是它们的创造者给出的命令。</p>\n<ul>\n<li>增加骷髅、无心智和不死生物、僵尸特征。</li>\n<li>根据生物等级增加HP。</li>\n<li>增加一下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>增加以下根据等级决定的抗力值：寒冷、电击、火焰、穿刺、挥砍。</li>\n<li>增加以下能力。</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n</ul>\n</ul>"
+        },
+        "Aura: Courageous Anthem": {
+            "name": "灵光: 英勇颂歌 Courageous Anthem",
+            "description": "<p>一个可堪一用的@UUID[Compendium.pf2e.spells-srd.Item.IAjvwqgiDr3qGYxY]{英勇颂歌 Courageous Anthem}灵光 （严格来说不是一个灵光，但是，嗯……）</p>\n<p>效果持续1回合。每回合重新赋予，需使用Symon的绕梁组曲宏或右键手动更改效果持续时间（如果你安装了Extempore Effects模组，你应该安装……）。</p>"
+        },
+        "Aura: Rallying Anthem": {
+            "name": "灵光: 集结颂歌 Rallying Anthem",
+            "description": "<p>一个可堪一用的@UUID[Compendium.pf2e.spells-srd.Item.bH0kPuf7UKxRvi2P]{集结颂歌 Rallying Anthem}灵光 （严格来说不是一个灵光，但是，嗯……）</p>\n<p>效果持续1回合。每回合重新赋予，需使用Symon的绕梁组曲宏或右键手动更改效果持续时间（如果你安装了Extempore Effects模组，你应该安装……）。</p>"
+        },
+        "Ghost Adjustment": {
+            "name": "幽灵调整 Ghost Adjustment",
+            "description": "<p>幽灵生物的灵体形态允许它们穿过固体物品、在空中漂浮。为了简化考量，获得此调整的生物并非真正虚体，也不一定会在被摧毁后复生。</p>\n<ul>\n<li>增加幽灵、灵魂和不死生物特征。<br />增加死灵语。</li>\n<li>增加以下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>根据生物等级增加以下弱点值：力场、幽冥、命能。</li>\n<li style=\"font-weight:bold\"><strong>手动：如果生物无法飞行，将其最高速度改为飞行速度。删除其他类型速度。</strong></li>\n<li style=\"font-weight:bold\"><strong>生物的物理打击改为造成虚能伤害，且这些打击为魔法。</strong></li>\n<li>增加以下能力。</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li>@UUID[Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.k5rbou3lvJOavjdU]{幽灵穿墙 Ghostly Passage}</li>\n</ul>\n</ul>"
+        },
+        "Ghostly Passage": {
+            "name": "幽灵穿墙 Ghostly Passage",
+            "description": "<p>生物飞行，移动期间能够如虚体般穿过墙壁、生物和其他物质障碍。它必须在物质障碍以外开始和结束回合，且穿过固体物质被视为穿过困难地形。</p>"
+        },
+        "Ghoul Adjustment": {
+            "name": "食尸鬼调整 Ghoul Adjustment",
+            "description": "<p>食尸鬼通常没有毛发，皮肤发蓝或紫，耳朵尖尖。</p>\n<ul>\n<li>增加食尸鬼和不死生物特征。</li>\n<li>增加以下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>将所有豁免调整值减少1点。</li>\n<li style=\"font-weight:bold\"><strong>手动将麻痹能力添加到生物的啃咬、尖牙或类似<a href=\"https://2e.aonprd.com/Traits.aspx?ID=199\">无武装</a>攻击上。如果生物没有这种打击，添加一个，使用与其最强近战攻击相同的攻击调整值和伤害。</strong></li>\n<li>增加以下能力：</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.FW4KAUHb7r8WkxUc]{（食尸鬼） 麻痹 Paralysis}</li>\n<li>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.UU1Fp3PRuTFONjC9]{（食尸鬼） 迅捷跳跃 Swift Leap}</li>\n</ul>\n</ul>"
+        },
+        "Lesser Despair": {
+            "name": "次级绝望 Lesser Despair",
+            "description": "<p>30尺。等级不高于木乃伊的生物在绝望灵光中陷入惊惧1。在区域中时，他们无法从惊惧中自然恢复，但离开时立刻恢复。</p>"
+        },
+        "Shadow Adjustment": {
+            "name": "幽影调整 Shadow Adjustment",
+            "description": "<p>All types of creatures can have their corpses preserved and rise as mummies.</p>\n<ul>\n<li>增加不死生物特征。</li>\n<li>增加死灵语。</li>\n<li style=\"font-weight:bold\"><strong>手动添加隐秘技能，调整值等于其最高的技能调整值。</strong></li>\n<li>增加以下免疫：死亡效果、疾病、心灵、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、精准、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>\n<p>根据生物等级增加以下弱点值：力场、幽冥、命能。</p>\n</li>\n<li>\n<p><strong>手动：如果生物无法飞行，将其最高的速度改为飞行速度，并删除其他类型速度。</strong></p>\n</li>\n<li>\n<p><strong>手动：生物的物理打击造成伤害改为虚能伤害，且这些打击为魔法。</strong></p>\n</li>\n<li>\n<p><strong>手动将黑暗术添加为神术内在法术，每日一次。</strong></p>\n</li>\n<li style=\"font-weight:bold\">增加以下能力：</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li>@UUID[Compendium.xdy-pf2e-workbench.xdy-pf2e-workbench-items.Item.jsMqvMOtWuaUdDBb]{阴影潜逃 Slink in Shadows}</li>\n</ul>\n</ul>"
+        },
+        "Slink in Shadows": {
+            "name": "阴影潜逃 Slink in Shadows",
+            "description": "<p>幽影能在生物或物品的影子中@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}或结束@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}。</p>"
+        },
+        "Vampire Adjustment": {
+            "name": "吸血鬼调整 Vampire Adjustment",
+            "description": "<p>吸血鬼以活物的血为食物。根据不同的吸血鬼血脉，它可能拥有特定欲望和厌恶。</p>\n<ul>\n<li>增加不死生物和吸血鬼特征。</li>\n<li>增加死灵语。</li>\n<li>根据生物等级减少HP。</li>\n<li>增加以下免疫：死亡效果、疾病、睡眠、@Compendium[pf2e.conditionitems.Paralyzed]{麻痹 Paralyzed}、毒素、@Compendium[pf2e.conditionitems.Unconscious]{失去意识 Unconscious}。</li>\n<li>增加对所有物理伤害的抗性，数值取决于生物等级。<strong>手动：选择一种能无视此抗力的材料：寒铁（毘陀罗逻那），银（莫洛伊），或木（僵尸或诺斯费拉图）。</strong></li>\n<li style=\"font-weight:bold\"><strong>手动添加尖牙打击。它造成的伤害等于生物最低的近战打击，且可被用于吸血。如果生物已经拥有啃咬或尖牙打击，添加吸血能力即可。</strong></li>\n<li>增加以下能力：</li>\n<ul>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.qCCLZhnp2HhP3Ex6]{黑暗视觉 Darkvision}</li>\n<li>@Compendium[pf2e.bestiary-ability-glossary-srd.TTCw5NusiSSkJU1x]{虚能治疗 Void Healing}</li>\n<li style=\"font-weight:bold\"><strong>手动增加: 吸血 Feed [A] （神术，死灵系） 需求：吸血鬼最近的动作为一次成功的啃咬打击，且造成伤害；效果：吸血鬼从受害者身上吸血，造成最低的啃咬打击伤害且根据等级恢复生命值。</strong></li>\n</ul>\n</ul>"
+        }
+    }
+}

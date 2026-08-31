@@ -1,0 +1,276 @@
+{
+    "label": "牧师+ 专长 Clerics+ Feats",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Blood Is Thicker": {
+            "name": "血浓于水 Blood Is Thicker",
+            "description": "<p><strong>触发 </strong>你正承受由圣痕造成的持续流血伤害。</p>\n<hr />\n<p>当你的圣痕涌血时，你与神之神圣力量的连结增强，让你得以操纵导能。你可以将你的流血绑定到 30尺内另一个生物身上，该生物保持此效果直至你的圣痕停止涌血或经过 1分钟，以先到者为准。你同一时间只能以此效果作用于一个生物，对另一个生物使用此效果会立即结束先前生物上的效果。此效果由你的神力源泉决定：</p>\n<p><strong>伤害术 </strong>该生物必须对你的法术DC 进行一次基础强韧豁免。豁免失败的生物在受到打击伤害时，承受等同于你圣痕流血伤害的额外持续流血伤害。</p>\n<p><strong>治疗术 </strong>当你受到圣痕的持续流血伤害时，目标生物恢复等同于你所受持续伤害的生命值。目标必须为活体生物你才能以此能力作用于它。此效果具有治疗特征。</p>"
+        },
+        "Canvas the Layfolk": {
+            "name": "走访信众 Canvas the Layfolk",
+            "description": "<p>探听情报对你而言信手拈来。无论是在教会中低调地询问传闻，还是在低俗酒馆背后审讯关注对象，你从不放弃寻找你目标的线索。当你身处的聚落中至少有少量你神祇的信众时，你可以使用察觉来 @UUID[Compendium.pf2e.actionspf2e.plBGdZhqq5JBl1D8]{搜集信息} 或 @UUID[Compendium.pf2e.actionspf2e.EA5vuSgJfiHH7plD]{追踪}；当对方为你神祇的从仆，或为与你神祇结盟之神祇的从仆时，则可使用察觉来 @UUID[Compendium.pf2e.actionspf2e.OX4fy22hQgUHDr0q]{建立印象}。当这些检定针对你的目标时，你获得 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志} 给予的状态加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "探查者信条"
+                }
+            ]
+        },
+        "Elemental Fervor": {
+            "name": "元素热忱 Elemental Fervor",
+            "description": "<p>你已学会引导你的热忱，让你获得元素之力。在每日准备期间，你向你的神祈祷，请求以酸蚀、寒冷、电击或火焰元素祝福你。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择以下效益替代通常的效益：</p>\n<ul>\n<li>你对带有所选元素特征的豁免获得 +1状态加值，并对该伤害类型获得等同于你等级一半的抗力。</li>\n<li>你的武器与徒手攻击额外造成 1d4点你所选元素的伤害。每当你的武器多一颗伤害骰，此伤害便增加 1d4。</li>\n</ul>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.uE1c16l5QFMj8U8W]{效果：热忱所选元素}</p>",
+            "prerequisites": [
+                {
+                    "value": "热忱"
+                }
+            ]
+        },
+        "Inspired Seeking": {
+            "name": "灵示探查 Inspired Seeking",
+            "description": "<p>你的神祇向你显现迹象，让你确认走在正确的路上。你不再使用通常的动作进行 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志}，而是花费 10分钟思索你神祇旨意的更深含义并提出一个具体问题，并附带通常的效益。</p>\n<p>例如，你可以询问失踪的圣物是否被某敌对教会窃走，或你寻找的某生物是否仍在同一城市。你的假设不能指明某个具体罪魁或地点，但应让你的探查范围更明确，借由神圣的指引来引导你的决策。这一效果如同占卜术，但你不再获得「好」、「坏」或「混杂」的结果，而是分别获得以下选项。你不能在同一天内对同一目标使用灵示探查超过一次。</p>\n<hr />\n<p><strong>正确 </strong>（如果你的猜测完全属实）。</p>\n<p><strong>不正确 </strong>（如果你的猜测完全偏离）。如果获得此结果，你可以立即另选一个目标进行你的寻求意志，无须再花 10分钟，但你不会获得灵示探查的效益。</p>\n<p><strong>方向正确</strong> （如果你的猜测部分正确，但并非全部真相）。</p>",
+            "prerequisites": [
+                {
+                    "value": "探查者信条"
+                }
+            ]
+        },
+        "Channel Smite+": {
+            "name": "导能猛击+ Channel Smite+",
+            "description": "<p><strong>代价</strong> 消耗一次 <em>@UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{治疗术}</em> 法术。</p>\n<hr />\n<p>你将毁灭之能量穿过近战攻击注入敌人。进行一次近战打击。你的打击根据你花费的动作数获得额外效果。</p>\n<p><span class=\"pf2-icon\">1</span> 目标承受所消耗法术伤害的一半，伤害类型为精魂。</p>\n<p><span class=\"pf2-icon\">2</span> 目标承受所消耗法术的全额伤害，伤害类型为精魂。</p>\n<p><span class=\"pf2-icon\">3</span> 你将神圣能量在包含你打击目标的 @Template[type:cone|distance:15] 或 @Template[type:line|distance:20] 中释放，或在以你打击目标为中心的 @Template[type:emanation|distance:10] 中释放。区域内的生物必须对你的法术DC 进行一次基础 @Check[type:reflex|basic:true|dc:resolve(@actor.attributes.classOrSpellDC.value)] 豁免，否则承受所消耗法术伤害的一半，类型为精魂。如果你的打击成功命中，则被你击中的生物在此效果上的豁免结果降低一级。</p>"
+        },
+        "Travel Channel": {
+            "name": "行旅导能 Travel Channel",
+            "description": "<p>你已学会在移动中导能。如果你下一个动作是从神力源泉位施放法术，你可以在施放此法术前移动至多半速的跨步。</p>"
+        },
+        "Fervor of Force": {
+            "name": "力场热忱 Fervor of Force",
+            "description": "<p>你已学会引导你的热忱，借由力场提供保护。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择的效益新增以下：</p>\n<ul>\n<li>你持有的武器获得 @UUID[Compendium.pf2e.equipment-srd.JQdwHECogcTzdd8R]{幽冥} 武器属性符文，且对抗虚体生物的察觉检定获得 +2状态加值。</li>\n<li>你对力场伤害获得等同于你等级一半的抗力，且对会造成强制移动的效果获得 +2状态加值。</li>\n</ul>"
+        },
+        "Upon This Rock": {
+            "name": "立基此磐 Upon This Rock",
+            "description": "<p>你深知教会不是一个地方，而是一个共同体。你已学会仅凭少数信徒便能培育出这样的共同体。你可以花费 1小时，从周遭取来非传统的替代品，搭建出包含祭坛、祈祷毯或纪念碑等设施的临时教堂，复刻一座临时礼拜场所。该区域获得 <em>@UUID[Compendium.pf2e.spells-srd.Dbd5W6G8U2vzWolN]{祝圣术}</em> 的效果，但你只需 1小时，且效果持续 24小时。如果你再次使用此能力，此效果结束，但你的设施保持完好（如祭坛或纪念碑）。如果你在此地连续待满一个月，则该效果如同祝圣术仪式那样持续完整时长，并被视为你神祇的一座真正教堂。</p>"
+        },
+        "Blessed Regalia": {
+            "name": "受祝礼服 Blessed Regalia",
+            "description": "<p>你身着刻有无数你神祇符号与其传说艺术描绘的护甲。在每日准备期间，你可以将你神祇的特殊属性灌注入护甲，让你抵御敌人的伤害。你对精魂伤害获得等同于所选护甲效力符文两倍的抗力。</p>\n<p>当本性或所行违反你神祇典范或禁忌的生物对穿戴受祝礼服的你造成重击时，你可以尝试一次 @Check[type:flat|dc:16]，将其变为通常命中。如果你的护甲带有 @UUID[Compendium.pf2e.equipment-srd.ujWnpVMkbTljMGN9]{强化护甲（高级）} 符文，移除对你的重击的纯骰检定改为 @Check[type:flat|dc:12]，而非通常的 DC。</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗祭司信条"
+                }
+            ]
+        },
+        "Multi-Fervor": {
+            "name": "多重热忱 Multi-Fervor",
+            "description": "<p>你神祇的热忱已变得多维度，你的躯体也被它的力量进一步浸润。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择两项效益而非一项。</p>"
+        },
+        "Arise to Sainthood": {
+            "name": "升登圣阶 Arise to Sainthood",
+            "description": "<p>你超越了普通信徒之身，进入圣者之列，自身也被神圣本质所灌注。世界各地的人将你视为典范，向你与你神祇一同祈祷。选择一个适用于你而非你神祇的领域，你立即获得该领域的入门领域法术。如果你拥有「高级领域」专长，你可以立即将所选法术重训为新领域所属的领域法术。你遵循自己的典范与禁忌，使用自己的神圣武器，并将这些祝福赐予世界各地的潜在信徒。当你重新聚能时，你可以聆听信徒的祈祷。这让你恢复一个神力源泉法术位，且在你使用完该法术位之前你不能再次重新聚能以获得另一个神力源泉法术位。你神祇的信徒会立即认出你，对你普遍提供帮助与尊敬。</p>"
+        },
+        "Spirit Burn": {
+            "name": "精魂炽燃 Spirit Burn",
+            "description": "<p><strong>触发 </strong>你对一个生物造成精魂伤害。</p>\n<hr />\n<p>你能随心点燃生物的灵魂。当你对一个生物造成精魂伤害时，你可以让它在数回合内持续侵蚀该生物的灵魂，造成等同于你等级一半的 @Damage[(floor((@actor.level -1)/2) +1)[persistent,spirit]]，并使该生物在受持续精魂伤害期间变为 @UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{力竭1级}。移除此持续精魂伤害的生物在 1分钟内对你的精魂炽燃暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "探查者信条"
+                }
+            ]
+        },
+        "Fury of the Gods": {
+            "name": "诸神之怒 Fury of the Gods",
+            "description": "<p><strong>触发 </strong>你触及范围内一个具有与你对立特征的敌人使用了一项操作动作或移动动作、进行一次远程攻击，或在它正使用的移动动作中离开一个方格。</p>\n<hr />\n<p>你高举武器，神祇之怒倾涌于你之躯。你对该生物进行一次近战打击，你的打击获得你的圣洁或邪恶特征，并在通常结果之外获得以下效果。</p>\n<hr />\n<p><strong>大成功</strong> 目标变为 @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧2级}。</p>\n<p><strong>成功 </strong>目标变为惊惧 1。</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗祭司信条"
+                },
+                {
+                    "value": "圣洁或邪恶特征"
+                }
+            ]
+        },
+        "Surging Focus+": {
+            "name": "聚能涌动+ Surging Focus+",
+            "description": "<p><strong>频率</strong> 每小时一次</p>\n<p><strong>触发</strong> 你能看见的一个盟友被减至 0 生命值。</p>\n<hr />\n<p>当你能看见的一个盟友在战斗中倒下时，你那正义的愤慨涌动让你得以汲取尚未触及的神圣力量储备。你立即恢复 1 个聚能点。</p>"
+        },
+        "Sacred Avatar": {
+            "name": "圣化化身 Sacred Avatar",
+            "description": "<p>你的圣兽与神祇的连结发展为超凡力量之桥，使其得以专门化。你可以选择常规的专门化之一，或选择「化身」专门化。</p>\n<hr />\n<p><strong>化身 </strong>你的动物伙伴获得以下效益：你的伙伴被视为你神祇的化身，只要它在你 30尺内便视为你的施法焦点。其在你神祇的神圣技能与宗教上的熟练度等级提升至专家，其感知调整值提高 2，魅力调整值提高 1。</p>\n<hr />\n<p><strong>特殊 </strong>你可以多次选择此专长，每次为你的圣兽追加另一项专门化。你的圣兽最多可以同时拥有三项专门化。</p>"
+        },
+        "Prophet's Staff": {
+            "name": "先知法杖 Prophet's Staff",
+            "description": "<p>你的神祇赐予你将其神威赋予一根法杖的能力，途径是在其上嵌入你神祇的圣徽、纪念物或标记。在每日准备期间，你可以将一根普通法杖调谐为魔法法杖：消耗一次神力源泉法术位以神圣力量灌注法杖。这样做时，你的法杖成为你神祇的焦点，并获得等同于你所施放法术环的充能数；只要它仍在你身上，或直到你调谐另一根法杖为止，它都作为魔法法杖运作。你可以使用法杖的充能来施放你的神力源泉与你神祇授予你的牧师法术。你也可以以同样方式调谐你拥有的魔法法杖；它在被调谐之外，原本可施放的法术之外，亦可施放你的神力源泉法术与牧师法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "修道者信条"
+                }
+            ]
+        },
+        "To Arms!": {
+            "name": "拿起武器！ To Arms!",
+            "description": "<p><strong>触发 </strong>你掷先攻。</p>\n<hr />\n<p>你被神祇之力赋能，疾冲入战，攻敌或卫友。作为你第一回合的第一动作，你可以作为自由动作向你能感知的一个敌人跨步。如果你无法感知到任何敌人或无法将你的移动结束在距离更近处，则你不能进行这次跨步。</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗祭司信条"
+                }
+            ]
+        },
+        "Fervant Vessel": {
+            "name": "炽诚载体 Fervant Vessel",
+            "description": "<p>你的神时刻为你延伸其力量，让你得以不断召唤你神祇的力量。你永久变为 @UUID[Compendium.pf2e.conditionitems.nlCjDvLMf2EkV2dl]{迅捷}。你可以使用这额外的动作来使用热忱。</p>",
+            "prerequisites": [
+                {
+                    "value": "热忱"
+                }
+            ]
+        },
+        "Theurgic Trickery": {
+            "name": "神术诡术 Theurgic Trickery",
+            "description": "<p>当你愈发深入魔法的根本时，你发现它们的实施工具对你而言与圣徽一样得心应手。你获得 @UUID[Compendium.pf2e.feats-srd.uR62fVC9FyQAMCO1]{操纵奇物} 专长，并将以下受训技能之一提升至专家：奥秘、自然或神秘。如果你在「操纵奇物」中大失败地施放与所选技能相同传统的法术，则你改为获得失败而非大失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "修道者信条"
+                }
+            ]
+        },
+        "Heroic Recovery+": {
+            "name": "英雄回复+ Heroic Recovery+",
+            "description": "<p>你治疗的恢复之力激发了承受者。如果你下一个动作是对一个活体单一目标施放 @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{治疗术}，且目标因法术恢复了生命值，则目标在它下一回合结束前另获三项加值：速度获得 +5尺状态加值，攻击骰获得 +1状态加值，伤害骰获得 +1状态加值。此外，如果目标处于 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}，它可以立即作为不会触发反应的自由动作站起。</p>\n<p>在 16级时，速度状态加值提升至 +10尺，攻击骰状态加值提升至 +2。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.7ogytOgDmh4h2g5d]{效果：英雄回复}</p>",
+            "prerequisites": [
+                {
+                    "value": "治疗源泉"
+                }
+            ]
+        },
+        "Read the Scriptures": {
+            "name": "诵读经文 Read the Scriptures",
+            "description": "<p>研读你信仰的圣文使你回想起你神祇的事迹与力量。在你进行每日准备时，你可以翻阅你神祇的一份圣文，例如阿斯莫蒂亚斯专著或莎琳的《内在之美的旋律》。在接下来的 24小时内一次，当你掷你的神圣技能时，你可以掷骰两次并取较高结果。在你掷骰之前你必须声明你正使用此效果。</p>"
+        },
+        "Huddle Channel": {
+            "name": "聚拢导能 Huddle Channel",
+            "description": "<p>你已学会在目标接近时分流你的神圣能量。如果你下一个动作是对一个生物施放一动作的 <em>@UUID[Compendium.pf2e.spells-srd.wdA52JJnsuQWeyqz]{伤害术}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.rfZpqmj0AIIdkVIs]{治疗术}</em> 来治疗或伤害单一生物，则选择另一个相邻于你或目标的生物。两个目标都受到你法术的效果，如同你施放了一动作的版本。</p>"
+        },
+        "Deific Conduit": {
+            "name": "神之通灵者 Deific Conduit",
+            "description": "<p>通过引下众神之力，你可以以神祇的精魂赋能自身。这样做时，在 10分钟内你可以呈现出近似你神祇的极乐相貌。所有看见你使用此动作的生物都明白你是你神的代表，在持续时间内你的魅力相关技能检定获得 +1环境加值。如果该生物追随你的神祇，或本性或所行违反你神祇典范或禁忌，则该环境加值提升至 +2。</p>"
+        },
+        "Cunning Fervor": {
+            "name": "狡黠热忱 Cunning Fervor",
+            "description": "<p>你的神祇赋予你穿透物理抗力的能力。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择的效益新增以下：</p>\n<ul>\n<li>当你成功对一个生物使用回忆知识时，你获知其最高的抗力数值，并可忽略等同于你等级一半的该抗力。</li>\n<li>你的 @UUID[Compendium.pf2e.actionspf2e.21WIfSu7Xd7uKqV8]{翻滚通过}、@UUID[Compendium.pf2e.actionspf2e.QNAVeNKtHA0EUw4X]{佯攻} 与 @UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气} 检定获得 +1状态加值。15级以上时，此加值提升至 +2状态加值。</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "秘密诫令"
+                }
+            ]
+        },
+        "Paragon Dedication": {
+            "name": "巅峰献身 Paragon Dedication",
+            "description": "<p>你已获得即使你的神力源泉耗尽时也能挖掘神祇热忱的能力。你使用热忱，且无须消耗神力源泉位即可持续 1分钟。</p>",
+            "prerequisites": [
+                {
+                    "value": "神圣诫令"
+                }
+            ]
+        },
+        "Swift Fervor": {
+            "name": "迅捷热忱 Swift Fervor",
+            "description": "<p>你能以最快的速度赐予你神之力量。你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱}。</p>",
+            "prerequisites": [
+                {
+                    "value": "热忱"
+                }
+            ]
+        },
+        "Stigmata": {
+            "name": "圣痕 Stigmata",
+            "description": "<p>你以自身鲜血供奉你的神祇。你显现出与你信仰相称的圣痕之伤——比如黛丝娜的牧师在拉玛什图伤及库昌努斯之处出现伤痕，艾奥梅黛在曜辉远征中留下的战痕，或洛瓦古格的信徒在桎梏其手腕与脚踝的锁链所在处出现伤痕。这些伤口张开时会涌出圣血。每 4级你拥有 1d4 持续流血伤害。该持续流血伤害不能被移除，会一直持续，直到你花费一个具有专注特征的单动作以自动结束流血及其后续效果。</p>\n<p>如果你陷入失去意识，流血伤害与所有持续效果会自动结束。当你受这种持续流血伤害折磨时，你的宗教检定获得 +1状态加值，且你的伤害术与治疗术法术获得以下额外效果：</p>\n<p><strong>伤害术 </strong>你以单一生物为目标的 <em>@UUID[Compendium.pf2e.spells-srd.wdA52JJnsuQWeyqz]{伤害术}</em>，对每 4级你拥有 1d4 持续流血伤害施加给强韧豁免失败的目标。如果你使用 3动作版本，则只有大失败的目标才承受持续流血伤害。</p>\n<p><strong>治疗术 </strong>当你将 <em>@UUID[Compendium.pf2e.spells-srd.rfZpqmj0AIIdkVIs]{治疗术}</em> 施于你以外的单一目标时，对方所遭受的任何持续伤害都会自动结束。如果你使用 3动作版本，则目标改为立即获得一次以 @Check[type:flat|dc:11] 检定结束他们所遭受的任何持续伤害的尝试。</p>\n<p>[[/r max(floor(@actor.level/4),1)d4[persistent,bleed]]]{持续流血伤害} 伤害</p>"
+        },
+        "Sacred Safeguard": {
+            "name": "圣御 Sacred Safeguard",
+            "description": "<p>你的信仰与盾牌共同保护你免遭危险。你 @UUID[Compendium.pf2e.actionspf2e.xjGwis0uaC2305pm]{举盾} 并施放一个施放时间为两动作或更短、目标为你自己的法术，且当你因操作特征而施放法术时不触发反应。如果该法术原本可以以另一个生物为目标，你必须只以你自己为目标。</p>",
+            "prerequisites": [
+                {
+                    "value": "盾牌格挡"
+                },
+                {
+                    "value": "战斗祭司信条"
+                }
+            ]
+        },
+        "Theologist's Channel": {
+            "name": "神学家导能 Theologist's Channel",
+            "description": "<p>你的神祇教导了你一种将你源泉的神圣能量铸成施放神祇法术的方法。你获得在你的神力源泉位中准备由你神祇授予的 1 阶牧师法术的能力，且当你这么做时，该法术自动升阶至你能施放的最高法术环。</p>",
+            "prerequisites": [
+                {
+                    "value": "修道者信条"
+                }
+            ]
+        },
+        "Fluid Fervor": {
+            "name": "流转热忱 Fluid Fervor",
+            "description": "<p><strong>需求 </strong>你正受益于 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱}。</p>\n<hr />\n<p>你的神祇允许你按需变换你的热忱。你可以将你热忱的效益更换为另一项效益。你热忱的持续时间不变。</p>",
+            "prerequisites": [
+                {
+                    "value": "热忱"
+                }
+            ]
+        },
+        "Theurgic Studies": {
+            "name": "神术研习 Theurgic Studies",
+            "description": "<p>你研读经文之心已让你领悟到其他魔法传统中的神圣脉络。选择奥秘、自然或神秘，你在所选技能上变为受训；如果你在所选技能上已经受训，则改为在另一项你尚未受训的技能上变为受训。你获得施放一项你所选技能传统的戏法的能力，并将该法术作为神圣法术施放。</p>",
+            "prerequisites": [
+                {
+                    "value": "修道者信条"
+                }
+            ]
+        },
+        "Blessed Animal": {
+            "name": "受祝之兽 Blessed Animal",
+            "description": "<p>你的圣兽被祝福以接受更强的力量。它变为敏捷或野性的动物伙伴（由你选择），并根据其类型获得额外能力。</p>",
+            "prerequisites": [
+                {
+                    "value": "圣选之兽"
+                }
+            ]
+        },
+        "Outsider Caller": {
+            "name": "外界召唤者 Outsider Caller",
+            "description": "<p>你与神祇的相通赋予你召唤外位面同道盟友的能力，让它们应你的呼唤而至。在每日准备期间，选择一个会召唤你神祇从仆的、具备召唤特征的法术（例如 <em>@UUID[Compendium.pf2e.spells-srd.lTDixrrNKaCvLKwX]{召唤天族}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.lpT6LotUaQPfinjj]{召唤元素}</em>）（由 GM 裁决）。你可以每日施放一次所选法术，且法术升阶至你能施放的最高等级。该法术可以是非神圣传统，但若是其他传统，你将其作为神圣法术施放。当你施放此法术时，你可以选择在被召唤生物周围的 @Template[type:emanation|distance:15] 范围内，对你法术DC 的基础反射豁免造成等同于法术环两倍的精魂伤害。</p>"
+        },
+        "Chosen Animal": {
+            "name": "圣选之兽 Chosen Animal",
+            "description": "<p>你的圣兽被你的神祇选中以授予力量，成为成熟动物伙伴。在遭遇中，即便你不使用「命令动物」动作，你的动物伙伴在你的回合内仍可使用 1 个动作进行跨步或打击。</p>",
+            "prerequisites": [
+                {
+                    "value": "团结诫令"
+                }
+            ]
+        },
+        "Enlightening Will": {
+            "name": "启示意志 Enlightening Will",
+            "description": "<p>你以受训之眼审视任何问题，沿途寻得简单真相。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，你可以使用宗教，并以你运使意志的结果作为本次检定的结果，对通常需要其他技能的生物进行 @UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}。如果你的回忆知识针对的是通常应使用宗教进行回忆知识的生物，你的检定获得 +2环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "探查者信条"
+                }
+            ]
+        },
+        "Overpowering Fervor": {
+            "name": "压制热忱 Overpowering Fervor",
+            "description": "<p>你的神祇赋予你穿透物理抗力的能力。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择的效益新增以下：</p>\n<ul>\n<li>你可以忽略等同于你等级一半的物理抗力。</li>\n<li>你的 @UUID[Compendium.pf2e.actionspf2e.SjmKHgI7a5Z9JzBx]{破拆}、@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}、@UUID[Compendium.pf2e.actionspf2e.lOE4yjUnETTdaf2T]{移位} 与 @UUID[Compendium.pf2e.actionspf2e.7blmbDrQFNfdT731]{推撞} 检定获得 +1状态加值。15级以上时，此加值提升至 +2状态加值。</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "强力诫令"
+                }
+            ]
+        }
+    }
+}

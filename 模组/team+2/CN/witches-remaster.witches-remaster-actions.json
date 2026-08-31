@@ -1,0 +1,24 @@
+{
+    "label": "动作 Actions",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Black Book Hex": {
+            "name": "黑书法咒 Black Book Hex",
+            "description": "<p>如果你下一个动作是施放一个法咒，魔法书会以黑暗之力强化你的法咒。你立即承受等同于该法咒等级的精魂伤害，且可以在下一回合作为自由动作持续此法咒。</p>"
+        },
+        "It Was Foreseen": {
+            "name": "命中注定 It Was Foreseen",
+            "description": "<p><strong>触发</strong> 你 60尺内的一个生物即将进行你卜读所产生的掷骰。</p>\n<hr />\n<p>选择幸运或厄运。如果你选择幸运，则该生物可取两次掷骰中较高的结果；如果你选择厄运，则该生物必须取较低的结果。此效果分别获得幸运或厄运特征。</p>"
+        }
+    }
+}

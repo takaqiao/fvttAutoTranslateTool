@@ -1,0 +1,281 @@
+{
+ "unit": "ST-A-CRE",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\ST-A-CRE.cn.json",
+ "summary": "5 creature actors translated (19 leaves: 15 prose + 4 T-FROZEN rollTable emitted byte-unchanged). `apply_translations.py --dry` on the 15 translatable leaves: 0 rejections, exit 0. The 8 boilerplate blocks (Acid Splash + Sprint/Vacuum/Falling/Cold/Radiation/Respiration/Heat Signature) and the Drone/XX121 identical-EN `notes` were authored ONCE and asserted byte-identical across actors, so the 16 project-wide re-uses inherit one canonical Chinese. `special` kept as plain text with the exact original line/blank-line structure — no HTML introduced. Life-cycle names: I propose the family 异形卵 / 抱脸虫 / 破胸虫 / 独行异形 / 战士异形 / 禁卫异形 and used it consistently; ALL of these except 抱脸虫 are coinages with no Chinese precedent (PROJECT.md §7.2.0) and are labelled as such — none is dressed up as sourced. Two of my choices deliberately override values written in project docs (破胸虫 over 破胸体, 独行异形 over 工蜂异形); reasoning is in glossary_gaps. ⚠ Highest-priority handoff: ST-T-REST owns the three attack tables my 4 frozen refs point at — if that unit renames them, actor.mjs:2497 throws (unguarded). See open_issues.",
+ "chars_en": 20329,
+ "chars_cn": 6892,
+ "frozen_kept": [
+  "system.rTables \"EV - Facehugger Attacks\" (Facehugger) — emitted byte-unchanged",
+  "system.rTables \"EV - Chestburster Attacks\" (Chestburster) — emitted byte-unchanged",
+  "system.rTables \"EV - Stalker, Scout and Drone Attacks\" (Drone) — emitted byte-unchanged",
+  "system.rTables \"EV - Stalker, Scout and Drone Attacks\" (XX121) — emitted byte-unchanged",
+  "system.cTables literal `None` — never surfaced to me: EXTRACT_CONVERTERS.alienRollTableRef keeps the 32 sentinel leaves out of the baseline, which is why Ovomorph has no rollTable key in the payload. Nothing to leave alone; nothing emitted.",
+  "XX121 kept Latin (T-LATIN model designation, PROJECT.md §3.4)",
+  "Latin binomials kept verbatim in prose: Manumala noxhydria, P. praepotens, Plagiarus",
+  "Every actor `name` carries its full English verbatim as the bilingual tail, so scan_missing_bilingual_tail.py's `en not a substring of cn` criterion is satisfied for all 5"
+ ],
+ "lock_lookups": [
+  {
+   "english": "Engaged (range band)",
+   "lang_key": "ALIENRPG.Engaged",
+   "used": "接战 / 接战距离"
+  },
+  {
+   "english": "Short (range band)",
+   "lang_key": "ALIENRPG.Short",
+   "used": "近距离"
+  },
+  {
+   "english": "Armor Rating",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "Armor Rating: 4 vs. fire",
+   "lang_key": "ALIENRPG.ArmorRating + ALIENRPG.ArmorVsFire (对火护甲)",
+   "used": "护甲等级：对火 4 — keeps the English line's own label and qualifier; the sheet's own field label 对火护甲 is the other legal shape if the controller prefers it"
+  },
+  {
+   "english": "Acid Splash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "Slow action",
+   "lang_key": "ALIENRPG.SlowAction",
+   "used": "慢速动作"
+  },
+  {
+   "english": "Observation (skill)",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Mobility (skill)",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Medical Aid (skill)",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗检定"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health / ALIENRPG.creature.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Panic Roll",
+   "lang_key": "ALIENRPG.CREWPANIC",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "Base Dice",
+   "lang_key": "ALIENRPG.HOWMANYDICE",
+   "used": "基础骰子"
+  },
+  {
+   "english": "Stress Dice",
+   "lang_key": "ALIENRPG.HOWMANYSTRESS",
+   "used": "压力骰子"
+  },
+  {
+   "english": "Rads / Radiation",
+   "lang_key": "ALIENRPG.Radiation + ALIENRPG.TAH.radiation (每当你获得一个辐射点)",
+   "used": "辐射 / 辐射点"
+  },
+  {
+   "english": "melee attack",
+   "lang_key": "ALIENRPG.WepTypeMelee",
+   "used": "肉搏攻击 — verified the key already reads 肉搏 today, so dispute D2's `still_to_do` on this key is DONE; PROJECT.md/disputes still list it as pending"
+  },
+  {
+   "english": "-2 modification (to a test)",
+   "lang_key": "ALIENRPG.Panic8 ('所有使用敏捷的技能检定受到 –2 调整值')",
+   "used": "–2 调整值 — copied the shipped phrasing including the EN DASH U+2013"
+  },
+  {
+   "english": "get -2 dice",
+   "lang_key": "(no key) ST-J02.cn.html: '+1 骰、+2 骰 … –1 骰、–2 骰'",
+   "used": "–2 骰 — the two English forms differ (modification vs dice) and the Chinese preserves the difference"
+  },
+  {
+   "english": "Broken",
+   "lang_key": "(no lang key) ALIENRPG.Panic14 prose + ST-J02.cn.html '当生命值降到零，你就濒死'",
+   "used": "濒死"
+  },
+  {
+   "english": "Stealth Mode / Round / Stretch / Shift / zone / Death Roll / Success",
+   "lang_key": "ST-J02.cn.html + ST-J03.cn.html (the only two already-translated pages of this volume)",
+   "used": "潜行模式 / 轮 / 节 / 班 / 区域 / 死亡检定 / 成功"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Chestburster",
+   "proposed": "破胸虫",
+   "why": "NO CHINESE PRECEDENT — coinage (PROJECT.md §7.2.0; pending.json puts it in permanently_unreachable). ⚠ This OVERRIDES 破胸体, which is written in PROJECT.md §7.2.0's sketch, PARALLEL-RUNBOOK §6's stale '已钉死' line, and this unit's own index note. Grounds: (1) §7.2.0 rule 2 literally forbids the family mixing 「虫」/「体」/「者」, and the owner-locked anchor 抱脸虫 spends the 虫 slot — pairing it with 破胸体 violates the rule the sketch itself states; (2) 破胸虫 is the exact structural mirror of 抱脸虫 (动宾 + 虫, 3 chars, transparent); (3) 破胸体's only attestation is zh.wikipedia = ladder level 7, the floor, which pending.json already judged too weak to name an Actor. The runbook line that pins 破胸体 also pins 韦兰-尤坦尼集团 and 诺史莫号, both since overturned by §1.4 — it is demonstrably stale. Flip cost is one term, ~10 occurrences, one sed."
+  },
+  {
+   "en": "Ovomorph",
+   "proposed": "异形卵",
+   "why": "NO CHINESE PRECEDENT — coinage (pending.json phase0_cn, explicitly 'a compound Phase 0 built, not a rendering anyone attested'). Kept because it is transparent at the table and extends the settled Egg = 卵. Considered and rejected: 虫卵 (semantically excellent — the Ovomorph literally IS the 抱脸虫's egg case, and it would bind the egg into the 虫 family — but it reads as a generic parasite egg rather than a caste name, and the caste-vs-plain-noun distinction the English draws is not load-bearing anywhere in this corpus). Derived verb: ovomorph / ovomorphing = 卵化 (used 4× in this unit)."
+  },
+  {
+   "en": "Drone",
+   "proposed": "独行异形",
+   "why": "NO CHINESE PRECEDENT — coinage. ⚠ This OVERRIDES 工蜂异形, the phase0 value and the ONLY caste rendering with any external source (terminology-web.json, 'community writing', confidence medium). I am rejecting the one attested candidate deliberately, on evidence from the text pending.json itself said would settle this ('Read the Evolved core-rules bestiary text once the packs are extracted — it may gloss the ladder'): (1) THIS unit's own Drone paragraph says the Drone is the form that has NOT joined the hive mind and molts into a Worker or Soldier — calling the pre-hive solitary form 'worker-bee alien' makes the sentence 「工蜂异形…蜕变为劳工异形」 near-nonsense, and that sentence is in the shipped text; (2) 工蜂 is the WORKER bee; the drone bee is 雄蜂, so the compound is wrong twice over; (3) 雄蜂异形 fixes the entomology but imputes a sex the Xenomorph has not got. 独行 tracks what the book actually says: solitary, pre-hive-mind, 'single-minded', 'a Drone plots', stealthy ambusher, nicknamed Lurker."
+  },
+  {
+   "en": "Warrior",
+   "proposed": "战士异形",
+   "why": "NO CHINESE PRECEDENT as a caste noun, but it is the one rung with a (thin) source: terminology-web.json, plus one Alien: Earth 2025 line rendering 战士模式. Kept unchanged from pending.json. Does not appear in this unit; proposed only so the family is decided as a set (pending.json: 'deciding these one at a time guarantees an inconsistent taxonomy')."
+  },
+  {
+   "en": "Praetorian",
+   "proposed": "禁卫异形",
+   "why": "NO CHINESE PRECEDENT — coinage. 禁卫(军) is the standard Chinese for the Roman Praetorian Guard. Chose 禁卫 over pending.json's alternative 近卫 to keep 近 free — 近距离 (Short) and 近战 (Close Combat) are both LOCK terms. Does not appear in this unit; proposed for set-coherence."
+  },
+  {
+   "en": "Praetomorph",
+   "proposed": "禁卫变种",
+   "why": "NO CHINESE PRECEDENT — coinage. APPEARS IN THIS UNIT (Facehugger notes). Built on the settled Neomorph = 新变种 (level 1), which establishes -morph → 变种 as a productive suffix, plus 禁卫 from Praetorian. ⚠ Known asymmetry I am not hiding: I did NOT extend -morph → 变种 to Ovomorph (卵变种 reads badly for an object); the family tolerates this because the English is itself heterogeneous (Latinate -morph, English compounds, plain caste nouns)."
+  },
+  {
+   "en": "Stalker",
+   "proposed": "猎杀异形",
+   "why": "NO CHINESE PRECEDENT — coinage. APPEARS IN THIS UNIT (Drone notes, Drone special). Took pending.json's second candidate over its first: 潜行异形 would collide head-on with 潜行模式 (Stealth Mode), a LOCK term that appears twice in this very unit's special text. That collision is a new finding, not in pending.json."
+  },
+  {
+   "en": "Scout",
+   "proposed": "斥候异形",
+   "why": "NO CHINESE PRECEDENT — coinage. APPEARS IN THIS UNIT (Drone notes, Drone special). ⚠ REJECTS pending.json's only candidate 侦察异形: 侦察 is the LOCK value of ALIENRPG.Skillobservation (the Observation skill), and the Drone's own special text uses 侦察检定 twice — 侦察异形 would put the skill name inside a creature name in adjacent sentences. 斥候 is the standard military 'scout' and is unused elsewhere in the corpus. Also a new finding."
+  },
+  {
+   "en": "Worker",
+   "proposed": "劳工异形",
+   "why": "NO CHINESE PRECEDENT — coinage; pending.json's first candidate, kept. APPEARS IN THIS UNIT (Drone notes). Freed of the 工蜂 collision now that Drone is 独行异形."
+  },
+  {
+   "en": "Soldier",
+   "proposed": "士兵异形",
+   "why": "NO CHINESE PRECEDENT — coinage; pending.json's candidate, kept. APPEARS IN THIS UNIT (Drone notes). 战士异形 stays reserved for Warrior."
+  },
+  {
+   "en": "Lurker (nickname: 'Sometimes called Lurkers')",
+   "proposed": "潜伏者",
+   "why": "NO CHINESE PRECEDENT — coinage. APPEARS IN THIS UNIT, set in “” as a nickname. 潜伏 chosen over 潜行 to avoid the Stealth Mode LOCK."
+  },
+  {
+   "en": "hive mind",
+   "proposed": "虫巢意识",
+   "why": "Built on the settled Hive = 虫巢 (glossary). Appears 3× in this unit."
+  },
+  {
+   "en": "Silent Assassin (ability header)",
+   "proposed": "无声刺客",
+   "why": "Coinage; ability name, appears on both Drone and XX121 and must stay identical."
+  },
+  {
+   "en": "Containment and Termination Protocol / Containment & Termination Protocol",
+   "proposed": "收容与终结规程",
+   "why": "Coinage; a recurring stat-block header across the whole bestiary (4 occurrences here, many more in corerules). 收容 carries the right institutional-horror register. Both the 'and' and '&' spellings collapse to the same Chinese — intentional."
+  },
+  {
+   "en": "Dr. Matshulta",
+   "proposed": "马特舒尔塔博士",
+   "why": "New proper noun, no source anywhere; transliteration. Appears once (Facehugger special)."
+  },
+  {
+   "en": "Dr. Blue Grace Marsalis",
+   "proposed": "布鲁·格蕾丝·马沙利斯博士",
+   "why": "New proper noun. 马沙利斯 is the conventional Chinese for the surname Marsalis. This is a franchise character (Alien: Isolation / the Blue Marsalis novels) — worth a check against the Isolation localisation before it is locked; I could not gate it there (that tree has no English side, per PROJECT.md §7.2)."
+  },
+  {
+   "en": "Jeremiah VI",
+   "proposed": "耶利米六号",
+   "why": "New proper noun — a location, so not T-LATIN under §3.4 (that tier is for model/hull prefixes). 耶利米 is the standard Chinese for the biblical Jeremiah. ⚠ Appears once, in the XX121 special, and it does NOT belong to the Starter Set's own setting (this scenario is Hadley's Hope / LV-426) — the stat block looks reused from another product. Flagged rather than 'corrected'."
+  },
+  {
+   "en": "Silent-family mechanics vocabulary coined here",
+   "proposed": "背管 (dorsal tubes) · 内颚 (inner jaws) · 口器 (proboscis) · 极化外皮 / 极化硅质外皮 (polarized skin) · 无声刺客 · 卵的开启 (Opening the Egg) · 抱脸 (facehugging, as a verb/header) · 卵化 (ovomorphing) · 战斗战术 (Combat Tactics) · 真空抗性 · 无需呼吸 · 无热信号 · 标志性攻击 (signature attack, from glossary Signature Item/Weapon = 标志性…)",
+   "why": "Descriptive coinages with no prior corpus. Listed so the corerules bestiary (25 more creature actors) inherits them rather than re-inventing them."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "apply_translations.py --dry, 15 translatable leaves (frozen rollTable excluded, see open_issues #1)",
+   "result": "PASS — applied 15, REJECTED no-EN 0 / no-CJK 0 / markup 0 / clobber 0, exit code 0"
+  },
+  {
+   "check": "apply_translations.py --dry including the 4 T-FROZEN rollTable leaves",
+   "result": "4 × REJECTED no-CJK — EXPECTED AND BY DESIGN, not a defect. The no-CJK gate cannot pass an intentionally-English leaf. Handling in open_issues #1."
+  },
+  {
+   "check": "EN-source drift: unit payload == 2-新手包汉化插件/compendium/en pack, leaf by leaf",
+   "result": "PASS — 19/19 identical"
+  },
+  {
+   "check": "Key/field parity with the unit payload (no leaf added, none dropped)",
+   "result": "PASS — 5 actors, 19 leaves, exact match"
+  },
+  {
+   "check": "notes HTML tag multiset per actor vs English",
+   "result": "PASS — 8/8, 4/4, 2/2, 2/2 <p> preserved; newline count preserved; the trailing <p> </p> NBSP preserved verbatim"
+  },
+  {
+   "check": "special is PLAIN TEXT — no HTML introduced",
+   "result": "PASS — regex /<[a-zA-Z\\/]/ finds nothing in any of the 5 special fields"
+  },
+  {
+   "check": "special line structure: line count and blank-line positions identical to English",
+   "result": "PASS — 3/3, 24/24, 22/22, 24/24, 10/10 lines; every blank line in the same index (this preserves the paragraph separators, which are the ONLY formatting a raw textarea has)"
+  },
+  {
+   "check": "Shared boilerplate emitted byte-identically (it is re-used 16× project-wide per PARALLEL-RUNBOOK §7)",
+   "result": "PASS — Acid Splash 4-line block identical across Facehugger[0:4] / Chestburster[4:8] / Drone[6:10]; the 8-block tail identical across Facehugger[11:24] / Chestburster[9:22] / Drone[11:24]. Authored once as a Python constant so drift is structurally impossible."
+  },
+  {
+   "check": "Drone and XX121 have byte-identical English `notes` → must have byte-identical Chinese",
+   "result": "PASS — same source constant"
+  },
+  {
+   "check": "T-FROZEN rollTable values byte-equal to the English pack",
+   "result": "PASS — 4/4"
+  },
+  {
+   "check": "T-BILINGUAL: full English name present verbatim as a substring of every actor name (scan_missing_bilingual_tail.py's criterion)",
+   "result": "PASS — 5/5; every name also contains CJK; no half-width parentheses in the Chinese half"
+  },
+  {
+   "check": "Banned / superseded terms absent: 异型 · 智力 · 同理心 · 轮次 · 生化人 · 韦兰-尤坦尼 · 异形飞船 · plus the two renderings I am overriding (工蜂异形, 破胸体/破胸者)",
+   "result": "PASS — 0 hits. (智力 was present in one draft translating the common noun 'intelligence'; rewritten to 心智 so no scanner can confuse it with the Wits lock.)"
+  },
+  {
+   "check": "Residual untranslated English in prose",
+   "result": "PASS — only the intended Latin survives: XX121, Manumala noxhydria, P. praepotens, Plagiarus, GM"
+  },
+  {
+   "check": "Length ratio (cn/en)",
+   "result": "0.34 — inside the band; PROJECT.md §6 records a measured median of 0.36 for this corpus"
+  },
+  {
+   "check": "Output is valid UTF-8 JSON",
+   "result": "PASS — 19,796 bytes, 5 top-level keys"
+  }
+ ],
+ "open_issues": [
+  "⚠⚠ #1 CROSS-UNIT LOCKSTEP, HIGHEST PRIORITY. ST-T-REST owns exactly the three tables my 4 frozen refs point at (EV - Chestburster Attacks / EV - Facehugger Attacks / EV - Stalker, Scout and Drone Attacks) and its payload DOES expose their `name` field as translatable. If that unit gives them a T-BILINGUAL name, actor.mjs:2497 `game.tables.contents.find(b => b.name === targetTable)` returns undefined and `table.roll()` throws on the next line — UNGUARDED, per DO-NOT-TRANSLATE.sections.actor_table_refs. Either those three table names stay byte-exact English, or these 4 actor refs must move in the SAME commit. Two of the four also live in corerules, so the decision is cross-repo. Run scan_table_ref_sync.py after ST-T-REST lands.",
+  "#2 THE 4 rollTable LEAVES CANNOT GO THROUGH apply_translations.py. The no-CJK gate rejects them by design (an all-English value in a translation batch). Correct assembly: OMIT those 4 paths from the batch entirely. An absent path in compendium/cn means Babele never overwrites the field, so the actor keeps the English table name at runtime — exactly the required behaviour, and better than writing English back with --force. I emit them in my unit file anyway so the controller can see they were considered, not forgotten.",
+  "#3 破胸虫 vs 破胸体 is a deliberate override of three project documents (PROJECT.md §7.2.0 sketch, PARALLEL-RUNBOOK §6, this unit's index note). Reasoning is in glossary_gaps. If the controller prefers 破胸体, it is one `sed` over ~10 occurrences in this file — but then §7.2.0's own no-mixing rule needs amending, because 抱脸虫 + 破胸体 is precisely the 虫/体 mix it forbids.",
+  "#4 独行异形 rejects 工蜂异形, the ONLY caste rendering in the whole project with an external source. I did this on the strength of the bestiary text pending.json nominated as the thing that would settle the ladder. If the controller weights recognisability above the text, 工蜂异形 comes back — but then Worker must NOT be 劳工异形, or the sentence 「工蜂异形…蜕变为劳工异形」 (which is in this unit's Drone notes) is unreadable.",
+  "#5 UPSTREAM RULES CONTRADICTION, NOT TRANSLATED AWAY. The Falling block says the Xenomorph 'can fall from great heights without suffering any damage' and then gives a damage formula (distance/4, reduced by Armor). I rendered both sentences faithfully rather than softening the first. This is the source's problem, and it is in 16 places project-wide.",
+  "#6 AMBIGUOUS RULE, translated literally and flagged. Ovomorph: 'An Ovomorph can release its Facehugger even at Short Range-roll a Stress Dice each Round. On a Failure, the Facehugger is released.' A single stress die read as a plain success roll means release on 5-in-6 per Round, which is implausibly lethal; the intended trigger is probably the die's Facehugger face (cn.json ALIENRPG.AutoPanicHint uses exactly that phrasing: 玩家掷出抱脸虫). I did NOT inject that reading — 掷出失败 is literal. Worth settling against the printed book.",
+  "#7 English typos silently corrected (not carried into the Chinese), for the record: adapte→adopt · glood loss→blood loss · diferent→different · Thee→The · occuring→occurring · greather→greater · ammor→armor · 'wiring a ship's hull'→'wiring, a ship's hull' · Xeenomorphs→Xenomorphs · injuected→injected · 'geneticist. Dr.'→'geneticist, Dr.' · 'ad are independent'→'and' · somehwere→somewhere · perfrom→perform · 'through two zone'→zones · 'comes with Engaged range'→'within'. None changes a number or a rule.",
+  "#8 'Jeremiah VI' (XX121 special) is not the Starter Set's own setting — the Starter Set is Hadley's Hope on LV-426. The stat block reads as reused from another product. I translated it (耶利米六号) rather than 'fixing' it; if the controller knows the intended location, this is a one-line change.",
+  "#9 The actor name for XX121 is the one place the bilingual convention reads redundantly: 'XX121 第四阶段异形 EV -  XX121 - Stage IV Xenomorph'. I dropped the 'EV - ' prefix from the Chinese half (the English tail carries it) and kept XX121 in front because it is the leading token a GM scans for. Note this English name contains a DOUBLE SPACE, so scan_missing_bilingual_tail.py excludes it from its check anyway — the tail is there on purpose, not because a gate demanded it.",
+  "#10 Measurement discrepancy, reported per PROJECT.md §3.7 rather than copied from the task: the brief and index.json say 20,883 raw chars for this unit; summing the payload leaves measures 20,329. Difference 554. Both index.json's raw_chars and the payload it ships are in the same file, so one of the two is stale — worth a look before the numbers are used for scheduling.",
+  "#11 Housekeeping finding: glossary_alien.disputes.json D2-engaged lists a `still_to_do` of rewriting ALIENRPG.WepTypeMelee from 近战 to 肉搏. I checked lang/cn.json this session — it already reads 肉搏. That to-do is done and can be closed."
+ ]
+}

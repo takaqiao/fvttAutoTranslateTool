@@ -1,0 +1,345 @@
+{
+    "label": "动物伙伴支援增益 Support Benefits",
+    "entries": {
+        "Ape Support Benefit": {
+            "name": "猿-支援增益 Ape Support Benefit",
+            "description": "<p>你的猿伙伴用充满威胁性的咆哮威吓敌人。直至你的下个回合开始为止，若你命中1个生物并造成伤害，且该生物在猿伙伴的触及范围内时，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.DXhqZ1oa1LxPH0fG]</p>"
+        },
+        "Arboreal Sapling Support Benefit": {
+            "name": "树人幼苗-支援增益 Arboreal Sapling Support Benefit",
+            "description": "<p>你的树人幼苗在敌人周遭种植根须，阻碍对方的移动。直至你的下个回合开始为止，若你命中一个生物并造成伤害，且该生物在树人幼苗的触及范围内时，该生物在受到伤害之后移动进入的第一个方格是困难地形。</p>"
+        },
+        "Badger Support Benefit": {
+            "name": "獾-支援增益 Badger Support Benefit",
+            "description": "<p>獾在敌人的位置周围挖坑，妨碍它的脚步。直到你下一回合开始，如果你命中并伤害了獾所威胁的生物，目标在移出当前所在的位置前无法使用快步动作（除非它能够快步通过困难地形）。</p>"
+        },
+        "Bat Support Benefit": {
+            "name": "蝙蝠-支援增益 Bat Support Benefit",
+            "description": "<p>你的蝙蝠伙伴在敌人周围拍击其手臂和脸部，妨碍他们的攻击。直至你的下个回合开始为止，被你用打击伤害且在蝙蝠伙伴的触及范围内的生物，会在其攻击检定上承受-1环境减值。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.ksT2DrI2r1uZQhz6]</p>"
+        },
+        "Bear Support Benefit": {
+            "name": "熊-支援增益 Bear Support Benefit",
+            "description": "<p>熊会抓住机会撕咬敌人。直到你下一回合开始，每次你以打击命中熊触及范围内的生物时，这名生物会受到来自于熊的@Damage[1d8[slashing]]伤害。如果你的熊是灵敏或狂怒伙伴，那么挥砍伤害会提升至@Damage[2d8[slashing]]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.zAvLdUNaJrKOMfQY]</p>"
+        },
+        "Beetle Support Benefit": {
+            "name": "甲虫-支援增益 Beetle Support Benefit",
+            "description": "<p>当你突破防线时，你的甲虫冲进敌群众四处践踏，能将敌人撞得失去平衡或挤到旁边。直到你的下回合开始，当你骑乘甲虫时，你的打击如果造成伤害，可以让目标陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]直到你的下一回合结束，或让目标被推离甲虫5尺（强迫移动）。由目标来选择两种效果中的其中之一。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Jvh1ciiT9JWXILxo]</p>"
+        },
+        "Bird Support Benefit": {
+            "name": "鸟-支援增益 Bird Support Benefit",
+            "description": "<p>鸟儿会抓住机会啄击敌人的双眼。直到你下一回合开始，你的打击在伤害一名位于你的鸟儿威胁范围内的生物的同时，也会造成@Damage[1d4[persistent,bleed]]伤害，这个目标直到流血伤害被移除前都会陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]。如果你的鸟儿是灵敏或狂怒动物伙伴，持续流血伤害会提升至@Damage[2d4[persistent,bleed]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.s2tD44BtYMJpEXjO]</p>"
+        },
+        "Boar Support Benefit": {
+            "name": "猪-支援增益 Boar Support Benefit",
+            "description": "<p>你的猪伙伴会顶伤敌人。直至你的下个回合开始为止，被你用打击伤害且在猪伙伴的触及范围内的生物，还会受到@Damage[1d6[persistent,bleed]]伤害。若你的猪伙伴是灵敏或狂怒动物伙伴，持续流血伤害会增加至@Damage[2d6[persistent,bleed]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.GZN0Vc8JHVZl1Io4]</p>"
+        },
+        "Camel Support benefit": {
+            "name": "骆驼-支援增益 Camel Support benefit",
+            "description": "<p>骆驼对10尺内的一个敌人吐出一大口唾液。如果命中，该敌人@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。</p>"
+        },
+        "Capybara Support Benefit": {
+            "name": "水豚-支援增益 Capybara Support Benefit",
+            "description": "<p>你的水豚在战斗中帮助你。当你打击一个位于水豚触及范围内的敌人时，你的攻击骰有+1环境加值。此加值一直持续到你进行下一次打击或到你的下一回合开始，以最先发生的为准。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.vh7CqhkZY85PnvMm]</p>"
+        },
+        "Cat Support Benefit": {
+            "name": "猫-支援增益 Cat Support Benefit",
+            "description": "<p>猫咪会抓住机会令敌人失衡。直到你下一回合开始，你的攻击对一名处于你的猫咪威胁范围内的生物造成伤害的同时还会让它在你下一回合结束前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.aG27NngIvWo6gFBG]</p>"
+        },
+        "Cave Gecko Support Benefit": {
+            "name": "洞穴壁虎-支援增益 Cave Gecko Support Benefit",
+            "description": "<p>你的洞穴壁虎协助你站稳脚跟，向你倾斜并在你试图对对手使用战技的时候支撑你。直到你下一轮结束为止，只要你与你的洞穴壁虎相邻，如果你对对手尝试进行@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]，@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]或是@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]且结果为大失败，你将转而得到失败的结果。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.xVZXK6QIbO4ykGVj]</p>"
+        },
+        "Cave Pterosaur Support Benefit": {
+            "name": "洞穴翼龙-支援增益 Cave Pterosaur Support Benefit",
+            "description": "<p>你的翼龙伸展双翼，做出吸引注意力的振翅动作。任何原本可以从翼龙处获得弱效掩护的生物将改为获得标准掩护。</p>"
+        },
+        "Crocodile Support Benefit": {
+            "name": "鳄鱼-支援增益 Crocodile Support Benefit",
+            "description": "<p>你的鳄鱼伙伴紧紧咬住敌人不肯松口。直至你的下个回合开始为止，若你的打击伤害的目标在鳄鱼伙伴的触及范围内，你的鳄鱼能够靠着咬紧附着在该生物身上。由于此种行动，鳄鱼伙伴能够在目标移动时随着一同移动，直至你的下个回合结束为止。你的鳄鱼伙伴只能以此方式附着在1个生物身上，而且它必须放开该生物才能够作出獠牙打击。若目标比鳄鱼伙伴的体型还小，那么在鳄鱼伙伴附着期间，该生物的速度会受到-10环境减值，而且无法飞行。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.FnJH9CPDngavuhwc]</p>"
+        },
+        "Dromaeosaur Support Benefit": {
+            "name": "驰龙-支援增益 Dromaeosaur Support Benefit",
+            "description": "<p>迅猛龙在夹击位附近反复横跳。直到你下一回合开始，在判断你和你的伙伴是否构成夹击时，它被视作处于自己原本的位置或周围10尺内由你选择的一个未被占据的空间；你可以为你的每次攻击选择不同的空间。</p>"
+        },
+        "Elephant Support Benefit": {
+            "name": "大象-支援增益 Elephant Support Benefit",
+            "description": "<p>你的大象大声鸣叫，威胁你的敌人。在你的下回合开始前，大象触及范围内第一只被你击中且伤害的生物，会因为噪音导致耳朵嗡嗡作响，他在尝试纯粹听觉的察觉检定时有-4状态减值，直到你的下回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.yTWDjFno6nKETfXY]</p>"
+        },
+        "Ghost Support Benefit": {
+            "name": "幽灵-支援增益 Ghost Support Benefit",
+            "description": "<p>你的幽灵神出鬼没并在你攻击时惊吓你的对手。直到你下个回合开始前，如果你命中在你幽灵触及范围内的一个生物并造成伤害，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.KfTDGMtgkg8QQd17]</p>"
+        },
+        "Horse Support Benefit": {
+            "name": "马-支援增益 Horse Support Benefit",
+            "description": "<p>马儿为你的冲锋增添威势。直到你下一回合开始，如果你在打击前以某个动作移动至少10尺，那么在这次打击的伤害上增加等同于伤害骰子数量两倍的环境加值。如果你的武器已经具有骑战武器特征，则骑战特征为每个骰子提供的伤害加值再提升2点。</p>"
+        },
+        "Hyena Support Benefit": {
+            "name": "鬣狗-支援增益 Hyena Support Benefit",
+            "description": "<p>鬣狗嘲笑般地对敌人嚎叫，并且当你制造破绽时，它会啃咬你的敌人。直到你的下个回合开始前，每当你的打击命中鬣狗触及范围内的生物时，生物还会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.zrI6j7mFhkbSFdf0]</p>"
+        },
+        "Legchair Support Benefit": {
+            "name": "腿椅-支援增益 Legchair Support Benefit",
+            "description": "<p>你的腿椅移动它的四肢阻挡敌人的攻击。你可以从你的腿椅处获得次等掩蔽，以对抗所有的攻击，而不仅仅是腿椅会挡住的攻击。</p>"
+        },
+        "Monitor Lizard Support Benefit": {
+            "name": "巨蜥蜴-支援增益 Monitor Lizard Support Benefit",
+            "description": "<p>巨蜥蜴使用牙齿猛咬与快速移动吸引一名邻近对手的注意力。直到你下个回合开始前，如果你用打击对一名敌人造成伤害，则直到你下个回合结束前，每次这名敌人试图使用一个带有操作特征的动作时，它必须进行一次@Check[flat|dc:5|showDC:all]检定。失败时，这个动作被打断。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.itbKX7GZbXsfRTf8]</p>"
+        },
+        "Moth Support Benefit": {
+            "name": "飞蛾-支援增益 Moth Support Benefit",
+            "description": "<p>你的飞蛾播撒一片粉尘，暴露你的敌人。直到你的下一回合开始，如果你以打击伤害一个对你@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]或@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]、且位于飞蛾触及范围内的敌人，则命中隐蔽生物的@Check[flat|dc:3|showDC:all]检定DC仅为3，命中藏匿敌人的@Check[flat|dc:9|showDC:all]检定DC仅为9。DC减免效果将持续到你的下回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.SY21KgVDZRQWFSCw]</p>"
+        },
+        "Pangolin Support Benefit": {
+            "name": "穿山甲-支援增益 Pangolin Support Benefit",
+            "description": "<p>你的穿山甲用它的锯齿状甲片撕裂敌人。直到你的下个回合开始，你以打击伤害一个位于穿山甲触及范围内的敌人时，还能造成@Damage[1d6[persistent,bleed]]伤害。如果你的穿山甲是灵敏动物伙伴或狂怒动物伙伴，则持续流血伤害增加到@Damage[2d6[persistent,bleed]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.HWOSRHmd8RLeGyY5]</p>"
+        },
+        "Rhinoceros Support Benefit": {
+            "name": "犀牛-支援增益 Rhinoceros Support Benefit",
+            "description": "<p>你的犀牛摇晃沉重的脑袋让对手失衡。在你的下回合开始前，犀牛触及范围内第一只被你击中且伤害的生物，会陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你的下个回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.LqhSjyZbMN1wKPss]</p>"
+        },
+        "Riding Drake Support Benefit": {
+            "name": "骑乘龙兽-支援增益 Riding Drake Support Benefit",
+            "description": "<p>你的龙兽伙伴能把火喷到敌人脸上。直至你的下个回合开始为止，每当你骑乘着龙兽进行打击，且命中的生物在龙兽的触及范围内时，该生物会由于龙兽而受到@Damage[1d4[fire]]伤害。若你的龙兽伙伴是灵敏或狂怒动物伙伴，火焰伤害会增加至@Damage[2d4[fire]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.5VHKIMzKMw3r2BOa]</p>"
+        },
+        "Scorpion Support Benefit": {
+            "name": "蝎子-支援增益 Scorpion Support Benefit",
+            "description": "<p>蝎子伙伴会在你创造出伤口后将尾刺的毒液注入进去。直至你的下个回合开始为止，你的打击对生物造成伤害，且该生物在蝎子伙伴的触及范围内时，还会造成@Damage[1d6[persistent,poison]]伤害。若你的蝎子伙伴是灵敏或狂怒动物伙伴，持续毒素伤害会增加至@Damage[2d6[persistent,poison]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.YNclyD1YN0eGiOix]</p>"
+        },
+        "Shadow Hound Support Benefit": {
+            "name": "暗影猎犬-支援增益 Shadow Hound Support Benefit",
+            "description": "<p>在你打开缺口时，你的暗影猎犬将你的敌人用幽影覆盖。直到你的下回合开始，当你使用了1次打击伤害了1个生物，且该生物位于暗影猎犬的触及内，你和暗影猎犬相对该生物来说都处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，直到你的下一回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Go7Tbyf3vpAW6rFs]</p>"
+        },
+        "Shark Support Benefit": {
+            "name": "鲨鱼-支援增益 Shark Support Benefit",
+            "description": "<p>你的鲨鱼伙伴在嗅探到血液时会撕咬敌人。直至你的下个回合开始为止，每当你使用造成挥砍或穿刺伤害的打击命中生物，且该生物在鲨鱼的触及范围内时，它会由于鲨鱼而承受@Damage[1d8[slashing]]伤害。若你的鲨鱼伙伴是灵敏或狂怒动物伙伴，挥砍伤害会增加至@Damage[2d8[slashing]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Lgc3OAVIdK8uN9nM]</p>"
+        },
+        "Skeletal Constrictor Support Benefit": {
+            "name": "骷髅蟒蛇-支援增益 Skeletal Constrictor Support Benefit",
+            "description": "<p>你的蛇摇晃着上半身迷惑一个敌人。选择蟒蛇20尺内的一个能看到蟒蛇的生物。在你的下个回合开始之前，你对该生物造成的打击会让目标@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到你的下个回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.tBLkLrtoRFbYV1f4]</p>"
+        },
+        "Skeletal Mount Support Benefit": {
+            "name": "骷髅坐骑-支援增益 Skeletal Mount Support Benefit",
+            "description": "<p>你的骷髅坐骑在冲锋时散播恐惧。直到你下个回合开始，如果你骑乘你的骷髅坐骑并在你攻击前的动作中移动至少10尺，任何被攻击伤害到的生物@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}，如果攻击重击则为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。这是一个情绪、恐惧和心灵效果。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.VVpMpJB3hdTNYdNV]</p>"
+        },
+        "Skeletal Servant Support Benefit": {
+            "name": "骷髅侍从-支援增益 Skeletal Servant Support Benefit",
+            "description": "<p>你的骷髅侍从在你攻击时用骨头戳击你的敌人。直到你的下个回合开始时，当你的打命中你的侍从触及范围内一个生物并造成伤害时，目标直到你的下个回合结束前@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.GQFr15dRbQyfsiTF]</p>"
+        },
+        "Snake Support Benefit": {
+            "name": "蛇-支援增益 Snake Support Benefit",
+            "description": "<p>蛇缠绕住你的敌人，妨碍它们的反应动作。直到你下一回合开始，任何处于你的蛇的威胁范围内的敌人不能使用由你触发的反应动作，除非它们等级比你更高。</p>"
+        },
+        "Terror Bird Support Benefit": {
+            "name": "恐鸟-支援增益 Terror Bird Support Benefit",
+            "description": "<p>当你让对手露出破绽时，你的恐鸟会对敌人尖叫。直到你的下个回合开始，你以打击伤害一个恐鸟触及范围内的敌人时，该敌人陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到你的下回合开始。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Vbi6XlP86bndpHs1]</p>"
+        },
+        "Triceratops Support Benefit": {
+            "name": "三角龙-支援增益 Triceratops Support Benefit",
+            "description": "<p>你的三角龙会跟着你用角顶那些@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的敌人。在你的下回合开始前，当你打击并伤害一个三角龙触及范围内且倒地的敌人时，还会造成@Damage[1d8[persistent,bleed]]伤害。如果你的三角龙是灵敏或狂怒动物伙伴，流血伤害增加到@Damage[2d8[persistent,bleed]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.VK0u5yF0dO2YlGra]</p>"
+        },
+        "Tyrannosaurus Support Benefit": {
+            "name": "暴龙-支援增益 Tyrannosaurus Support Benefit",
+            "description": "<p>当你攻击时，你的暴龙会咆哮并作出可怕的样子，惊吓你的敌人。直到你的下回合开始，如果你命中并伤害暴龙触及范围内的一个生物，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.UJYz572LoOw3LH8u]</p>"
+        },
+        "Ulgrem-Lurann Support Benefit": {
+            "name": "乌格瑞姆的子嗣-支援增益 Ulgrem-Lurann Support Benefit",
+            "description": "<p>乌格瑞姆的子嗣抓住你的敌人并电击它。直到你的下个回合开始，每次你打击命中一个位于乌格瑞姆的子嗣触及范围内的生物，该生物都会受到来自乌格瑞姆的子嗣额外的@Damage[1d4[piercing],1d4[electricity]]伤害。如果乌格瑞姆的子嗣是灵敏或狂怒动物伙伴，穿刺伤害和电击伤害会分别增加到@Damage[2d4[piercing],2d4[electricity]]{2d4}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.axG8U0tIGTXhjA6x]</p>"
+        },
+        "Undead Bird of Prey Support Benefit": {
+            "name": "骷髅猛禽-支援增益 Skeletal Bird of Prey Support Benefit",
+            "description": "<p>你的鸟飞来飞去，让敌人失去平衡。直到你的下个回合开始，当你的打击对鸟触及范围内的敌人造成伤害时，该生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你的下个回合结束。</p>"
+        },
+        "Undead Hand Support Benefit": {
+            "name": "不死手掌-支援增益 Undead Hand Support Benefit",
+            "description": "<p>手掌恶毒地击打你攻击的敌人。 直到你的下一回合开始，每当你的打击命中手掌触及范围内的敌人，手掌还会对它造成@Damage[1d6[bludgeoning]]伤害。如果手掌为灵敏动物伙伴或狂怒动物伙伴，钝击伤害增加到@Damage[2d6[bludgeoning]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.TbsMurFpA6ZkZIfF]</p>"
+        },
+        "Vampiric Animal Support Benefit": {
+            "name": "吸血野兽-支援增益 Vampiric Animal Support Benefit",
+            "description": "<p>当你的吸血野兽察觉到敌人鲜血时，它会迫不及待撕碎他。直到你的下个回合开始时，你的打击在伤害一个位于你吸血野兽触及范围内的生物同时，也会造成@Damage[1d6[persistent,bleed]]伤害。如果你的吸血野兽是灵敏或狂怒动物伙伴，持续流血伤害提高到@Damage[2d6[persistent,bleed]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.rtIhCBYVeEywrZOf]</p>"
+        },
+        "Vulture Support Benefit": {
+            "name": "兀鹫-支援增益 Vulture Support Benefit",
+            "description": "<p>兀鹫对10尺内的敌人呕吐。直到你的下个回合开始前，如果你击中目标并对其造成伤害，目标必须通过@Check[fortitude|against:vulture-support]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。强韧豁免的DC为12+你的等级+兀鹫的体质调整值（如果兀鹫为特化动物伙伴，则DC为14+你的等级+兀鹫的体质调整值）。</p>"
+        },
+        "Water Wraith Support Benefit": {
+            "name": "水缚灵-支援增益 Water Wraith Support Benefit",
+            "description": "<p>你的水缚灵发出嘶嘶声，在环境复杂的交锋中迅速改变颜色，在一片阴影和色泽的瞬息间中压倒你的敌人。直到你的下一个回合开始，每次你击中水缚灵触及范围内的生物，该生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.7WtmY88CPY7lxW3q]</p>"
+        },
+        "Wolf Support Benefit": {
+            "name": "狼-支援增益 Wolf Support Benefit",
+            "description": "<p>狼不会放过任何一个撕裂肌腱的机会。直到你下一回合开始，你的打击在对身处你的狼的威胁范围内的生物造成伤害的同时还会令目标在速度上承受持续1分钟的-5尺状态减值（大成功时为-10尺）。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.zDFmtmfZfAvIVF93]</p>"
+        },
+        "Zombie Carrion Bird Support Benefit": {
+            "name": "丧尸食腐鸟-支援增益 Zombie Carrion Bird Support Benefit",
+            "description": "<p>丧尸鸟散发出腐烂灵光，导致伤口溃烂。知道你的下个回合开始前，每当你命中某个丧尸食腐鸟10尺范围内的生物并造成伤害时，目标会受到@Damage[1d6[untyped]]伤害，因为伤口开始溃烂。如果你的食腐鸟为灵敏动物伙伴或狂怒动物伙伴，伤害增加到@Damage[2d6[untyped]]。这是疾病和死灵系效果。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.FoDGPqWjs8QRR3qv]</p>"
+        },
+        "Zombie Mount Support Benefit": {
+            "name": "丧尸坐骑-支援增益 Zombie Mount Support Benefit",
+            "description": "<p>你的丧尸坐骑啃咬你的敌人。直到你的下一回合开始，每当你在骑乘丧尸坐骑时打击并命中丧尸坐骑触及范围内的敌人时，丧尸坐骑对该生物造成@Damage[1d4[bludgeoning]]伤害。如果你的丧尸坐骑为灵敏动物伙伴或狂怒动物伙伴，伤害增加到@Damage[2d4[bludgeoning]|shortLabel]。该支援增益基于丧尸马或丧尸骆驼，但如果你的坐骑有尖锐的牙齿，它可能会造成穿刺伤害。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.3sRHNnPMUY2f4SF3]</p>"
+        },
+        "Zombie Support Benefit": {
+            "name": "丧尸-支援增益 Zombie Support Benefit",
+            "description": "<p>丧尸散发着腐败气息，使伤口恶化。直到你的下个回合开始时，每次你命中丧尸10尺范围内的一个生物并且造成伤害，生物因伤口恶化额外受到@Damage[1d6[untyped]]伤害。如果你的丧尸是灵敏或狂怒动物伙伴，伤害提高到@Damage[2d6[untyped]|shortLabel]。这是一个疾病、死灵系效果。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.vtArjXfpSGTKbmL9]</p>"
+        },
+        "Augdunar Support Benefit": {
+            "name": "阿格杜骡-支援增益 Augdunar Support Benefit",
+            "description": "<p>阿格杜骡卸下其负重，递给你一件物品。你交互拿出一件由阿格杜纳携带的武器或物品。</p>"
+        },
+        "Goat Support Benefit": {
+            "name": "山羊-支援增益 Goat Support Benefit",
+            "description": "<p>你的山羊带着你加速上墙，让你可以抵达更高的高度。你攀爬上一个表面，如同你在一次@UUID[Compendium.pf2e.actionspf2e.pprgrYQ1QnIDGZiy]{攀爬 Climb}动作中掷骰出成功结果。</p>"
+        },
+        "Draft Lizard Support Benefit": {
+            "name": "驮蜥-支援增益 Draft Lizard Support Benefit",
+            "description": "<p>你的驮蜥在战斗中协助你。你在下次打击处于你驮蜥触及范围内一个敌人时，在攻击骰上获得+1环境加值。加值持续到你第一次使用它，或直到你下个回合开始，以先满足为准。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.xrdIXhRDUHgC8wAe]</p>"
+        },
+        "Rootball Chair Support Benefit": {
+            "name": "球茎助行椅支援增益 Rootball Chair Support Benefit",
+            "description": "<p>多亏了你的球茎助行椅上长出的大量卷须，这使得它能够在大多数地形中如履平地。你的球茎助行椅忽略困难地形。</p>"
+        },
+        "Antelope Support Benefit": {
+            "description": "<p>羚羊将刺穿被你分心（distracted）的敌人。直到你下个回合开始前，只要你骑在羚羊上，你对羚羊触及范围内的生物造成伤害的打击会额外造成1d6点持续流血伤害。如果你的羚羊是灵敏或狂怒动物伙伴，持续流血伤害增加到2d6。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.NzqqTKnlVxubDeRv]</p>",
+            "name": "羚羊-支援增益 Antelope Support Benefit"
+        },
+        "Durian Crab Support Benefit": {
+            "name": "榴莲蟹-支援增益",
+            "description": "<p>作为你的远程攻击的一部分，榴莲蟹将自身发射出去，帮助你扰乱敌人。直到你的下个回合开始，只要榴莲蟹在你触及范围内，你对30尺内生物造成伤害的远程打击会使目标在你下个回合结束前@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。在进行打击后，榴莲蟹会立即快速爬回或跳回你投掷它的原本位置，使你可以多次将它投掷出去。</p>"
+        },
+        "Air Elemental Support Benefit": {
+            "description": "<p>气元素伙伴在你周围盘旋，用狂风遮覆盖住你，让敌人更难击中你，并且可能给予你一个躲藏的机会。直到你下个回合开始前，如果你使用打击命中并对你的气元素触及范围内的一名生物造成伤害，直到你下个回合开始前你将对该生物@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.UaUFJKZxEkN7yraC]</p>",
+            "name": "气元素-支援增益 Air Elemental Support Benefit"
+        },
+        "Earth Elemental Support Benefit": {
+            "description": "<p>土元素会使敌人脚下的泥土碎裂，使敌人难以移动。直到你下个回合开始前，如果你使用打击命中并对你的土元素触及范围内的一名生物造成伤害，受到伤害后该生物进入的第一个方格视为困难地形。</p>",
+            "name": "土元素-支援增益 Earth Elemental Support Benefit"
+        },
+        "Elk Support Benefit": {
+            "name": "麋鹿-支援增益 Elk Support Benefit",
+            "description": "<p>麋鹿挥舞着鹿角进行恐吓。直到你下个回合开始前，如果你命中并对麋鹿触及范围内的生物造成伤害，该生物将陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.uOzhPI4odakOi0uj]</p>"
+        },
+        "Flying Squirrel Support Benefit": {
+            "name": "飞鼠-支援增益 Flying Squirrel Support Benefit",
+            "description": "<p>飞鼠用它的皮瓣包裹你的敌人，阻碍他们的移动。直到你下个回合结束，如果你打击并对你巨飞鼠触及范围内的生物造成伤害，该生物的速度在1轮内受到-10尺环境减值。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.HssfGVFlUB80xBn7]</p>"
+        },
+        "Giant Eel Support Benefit": {
+            "name": "巨鳗鱼-支援增益 Giant Eel Support Benefit",
+            "description": "<p> 你的巨鳗鱼突然混乱的游动。直到你下个回合开始前，在确定你和你的伙伴是否处于夹击位置时，它可以视为在其空间或你选择的10尺内的空置空间中；你可以为每次攻击选择不同的空间。</p>"
+        },
+        "Giant Frog Support Benefit": {
+            "name": "巨青蛙-支援增益 Giant Frog Support Benefit",
+            "description": "<p>你的巨青蛙的舌头迅速伸入你创造的空隙，粘住对手以扰乱它们的移动。直到你下个回合开始前，每当你成功打击巨青蛙威胁的生物时，该生物不能使用由你行动触发的反应，除非它的等级高于你。</p>"
+        },
+        "Giant Wasp Support Benefit": {
+            "name": "巨黄蜂-支援增益 Giant Wasp Support Benefit",
+            "description": "<p>你的黄蜂振翅发出嗡嗡声，使敌人不安。直到你下个回合开始前，如果你命中并对巨黄蜂触及范围内的生物造成伤害，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.nftqFOord0y2cTTi]</p>"
+        },
+        "Giraffe Support Benefit": {
+            "name": "长颈鹿-支援增益 Giraffe Support Benefit",
+            "description": "<p>长颈鹿用它的长颈推挤对手。本回合你骑在长颈鹿上时，你无需一只空手来@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731] ，任何你成功推撞的敌人将移动10尺（大成功时移动15尺）。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.swq8Klr2ePG9rVJS]</p>"
+        },
+        "Griffon Support Benefit": {
+            "name": "狮鹫-支援增益 Griffon Support Benefit",
+            "description": "<p>你的狮鹫挺身出高雅的姿态，以激励你对抗眼前的恐怖。直到你下个回合开始前，你和你的狮鹫在对抗情绪效果的豁免上获得+2环境加值。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.ixEu5vNQCKPtUbBQ]</p>"
+        },
+        "Hermit Krait Support Benefit": {
+            "name": "隐蛇-支援增益 Hermit Krait Support Benefit",
+            "description": "<p>Y你的隐蛇用毒牙咬向敌人。直到你的下个回合开始，你对隐蛇触及范围内的生物打击造成伤害时，还会额外造成@Damage[1d6[persistent,poison]]伤害。如果隐蛇是灵敏动物伙伴或狂怒动物伙伴，持续毒素伤害增加到@Damage[2d6[persistent,poison]]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.8Ij9WexQ731l2PMW]</p>"
+        },
+        "Fire Elemental Support Benefit": {
+            "name": "火元素-支援增益 Fire Elemental Support Benefit",
+            "description": "<p>你的火元素点燃你的敌人并使他们着火。在直到你下个回合开始前，你打击你的火元素触及范围内的一名生物造成额外@Damage[1d6[persistent,fire]]伤害.。如果你的火元素是灵敏动物伙伴或狂怒动物伙伴，则持续火焰伤害增加到@Damage[2d6[persistent,fire]]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.KAAmj9fT7JPGPzKl]</p>"
+        },
+        "Hippocampus Support Benefit": {
+            "name": "海驹-支援增益 Hippocampus Support Benefit",
+            "description": "<p>直到你下个回合开始前，如果你骑在海驹上并在近战打击前的行动中移动了10尺或更多，这次打击的伤害增加一个等于两倍武器伤害骰数量的环境加值。如果你的武器已经具有骑战武器特征，则该特征的伤害加值每骰增加2点。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.YWqoEHfSzoPH0RsW]</p>"
+        },
+        "Hippogriff Support Benefit": {
+            "name": "鹫马-支援增益 Hippogriff Support Benefit",
+            "description": "<p>直到你下个回合开始前，如果你骑在鹫马上并在近战打击前的行动中移动了10尺或更多，这次打击的伤害增加一个等于两倍武器伤害骰数量的环境加值。如果你的武器已经具有骑战武器特征，则该特征的伤害加值每骰增加2点。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.tnlYuQchWOeDKeau]</p>"
+        },
+        "Kangaroo Support Benefit": {
+            "name": "袋鼠-支援增益 Kangaroo Support Benefit",
+            "description": "<p>你的袋鼠弹跳并来回移动。直到你下个回合开始前，当确定你和你的伙伴是否处于夹击位置时，它被视为在其空间或你选择的5尺内空置空间中；你可以为每次攻击选择一个不同的空间。</p>"
+        },
+        "Mole Support Benefit": {
+            "name": "鼹鼠-支援增益 Mole Support Benefit",
+            "description": "<p>你的鼹鼠跳入地下并在敌人脚下掘地，扰乱它们的立足点。直到你下个回合结束，如果你命中并对与鼹鼠相邻的生物造成伤害，直到该生物离开当前位置否则其陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.6X2STQsZYQ4pY6BA]</p>"
+        },
+        "Mongoose Support Benefit": {
+            "name": "猫鼬-支援增益 Mongoose Support Benefit",
+            "description": "<p>猫鼬跳跃到你身边，警觉并随时准备行动。直到你下个回合结束，与猫鼬相邻的生物无法对你进行夹击。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.PL26HLGEitQSAsWV]</p>"
+        },
+        "Orca Support Benefit": {
+            "name": "虎鲸-支援增益 Orca Support Benefit",
+            "description": "<p>你的虎鲸试图将粗心的游泳者拖下水面。直到你下个回合开始前，每次你命中虎鲸触及范围内的游泳生物时，该目标被向水下拖拽5尺。这属于强迫移动。</p>"
+        },
+        "Oozeform Chair Support Benefit": {
+            "name": "泥怪助行椅-支援增益 Oozeform Chair Support Benefit",
+            "description": "<p>一只伪足从你的座椅下伸出，捡起15尺范围内的1件无主物体。若你没有空着的手来接过物体，助行椅会把该物体丢在你所占据的空间内。</p>"
+        },
+        "Metal Elemental Support Benefit": {
+            "name": "金元素-支援增益 Metal Elemental Support Benefit",
+            "description": "<p>金元素用其金属钉刺穿刺敌人时会让敌人流血。直到你下个回合开始前，如果你使用打击对你的金元素触及范围内的一名生物造成伤害，同时也会造成@Damage[1d6[persistent,bleed]]伤害。如果你的金元素是灵敏动物伙伴或狂怒动物伙伴，持续流血伤害增加到@Damage[2d6[persistent,bleed]]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.4QHjAGY39Q86gAEe]</p>"
+        },
+        "Riding Tarantula Support Benefit": {
+            "name": "骑乘狼蛛-支援增益 Riding Tarantula Support Benefit",
+            "description": "<p>你的骑乘狼蛛向敌人弹射针刺，扰乱他们的注意力。直到你下个回合开始前，如果你命中并对骑乘狼蛛威胁范围内的生物造成伤害，目标在每次进行专注动作时必须通过一个@Check[type:flat|dc:5]，否则该动作失败。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.faBOi3CkoeQtQ0Dc]</p>"
+        },
+        "Roc Support Benefit": {
+            "name": "覆天雕-支援增益 Roc Support Benefit",
+            "description": "<p>你的覆天雕拍打双翅，产生强大的下压气流。直到你下个回合开始前，你的打击对覆天雕威胁范围内的生物造成伤害时，会将目标推离覆天雕5尺。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.5AeK9y6jDQrFMYv3]</p>"
+        },
+        "Salamander Support Benefit": {
+            "name": "蝾螈-支援增益 Salamander Support Benefit",
+            "description": "<p>蝾螈从皮肤分泌出一种有毒的粘稠液体。直到你下个回合开始前，如果你或你的蝾螈被与蝾螈相邻的生物击中，该生物将受到@Damage[1d6[poison]]伤害。如果蝾螈是灵敏或狂怒动物伙伴，此伤害增加到@Damage[2d6[poison]|shortLabel]。</p>"
+        },
+        "Shotalashu Support Benefit": {
+            "name": "念力巨蜥-支援增益 Shotalashu Support Benefit",
+            "description": "<p>念力巨蜥会利用你创造的时机来通过心灵攻击敌人。直到你下个回合开始前，每次你用打击命中念力巨蜥触及范围内的生物时，该生物会因念力巨蜥而受到@Damage[1d6[mental]]伤害。如果你的念力巨蜥是灵敏或狂怒动物伙伴，心灵伤害增加到@Damage[2d6[mental]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.TNnBontVMih3LYaC]</p>"
+        },
+        "Sundaflora Support Benefit": {
+            "name": "太阳花-支援增益 Sundaflora Support Benefit",
+            "description": "<p>你的太阳花以其平静的举止和敏捷的步伐激励你的盟友。选择一个距离你的太阳花30尺内的盟友。他们对太阳花触及范围内敌人的下一次攻击骰获得+1环境加值。该加值持续到你的盟友首次使用它或直到你的下个回合开始，以先发生的为准。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.I89IDoLnz4RnfYtX]</p>"
+        },
+        "Tikar Urchinpad Support Benefit": {
+            "name": "草帘扁海胆-支援增益 Tikar Urchinpad Support Benefit",
+            "description": "<p>你的草帘扁海胆试图用触须缠绕敌人的四肢，使其失去平衡。直到你的下个回合结束，只要你与草帘扁海胆相邻，如果你尝试@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]对手并掷出大失败，你取而代之获得失败结果。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.ciyeCV7RsTtFcYKw]</p>"
+        },
+        "Umbrella Mushroom Support Benefit": {
+            "name": "伞菇-支援增益 Umbrella Mushroom Support Benefit",
+            "description": "<p>你的伞菇在你制造破绽时释放出让人神经迟钝的孢子。直到你下个回合开始前，你对伞菇触及范围内的生物造成的打击使其陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1} ，持续一轮。此效果具有毒素特征。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.RjwPBh2CCTUJAa3e]</p>"
+        },
+        "Water Elemental Support Benefit": {
+            "name": "水元素-支援增益 Water Elemental Support Benefit",
+            "description": "<p>你的水元素浸没敌人。直到你下个回合开始前，你第一次用打击命中水元素触及范围内的一名生物并造成伤害时，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你的下个回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.DB0mJPinz35BgBS1]</p>"
+        },
+        "Wood Elemental Support Benefit": {
+            "description": "<p>你的木元素用其分散的枝条与根茎阻碍你的对手。直到你的下个回合开始前，如果你打击命中木元素触及范围内的一名生物并造成伤害时，生物的速度受到-5尺环境减值，持续1分钟（如果大成功则为-10尺）。这名生物，及其邻接的生物，可以使用一个交互动作来扫除枝条与根茎，从而移除减值。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.yw1K63aPTWRj76Nn]</p>",
+            "name": "木元素-支援增益 Wood Elemental Support Benefit"
+        },
+        "Wyvern Support Benefit": {
+            "name": "双足飞龙-支援增益 Wyvern Support Benefit",
+            "description": "<p>你的双足飞龙用尾刺鞭笞你的敌人。直至你的下个回合开始为止，你的打击伤害的生物若处于你的双足飞龙的触及之内，则还会造成@Damage[1d6[persistent,poison]]伤害。若你的双足飞龙是灵敏或狂怒伙伴，该持续伤害增加至@Damage[2d6[persistent,poison]|shortLabel]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.7dCJv3nCv85lwFO7]</p>"
+        },
+        "Yzobu Support Benefit": {
+            "name": "牦角马-支援增益 Yzobu Support Benefit",
+            "description": "<p>直到你下个回合开始，尝试近战攻击牦角马或其骑手的下一个生物，会被牦角马的恶臭所淹没，必须尝试一次@Check[fortitude]豁免。此豁免DC等于你的职业DC或法术DC中较高者。若豁免失败，攻击者在其攻击骰上受到-2环境减值。此能力具有嗅觉特征。</p>"
+        },
+        "Bacallia Support Benefit": {
+            "name": "巴卡利亚兽-支援增益 Bacallia Support Benefit"
+        },
+        "Cragstone Bear Support Benefit": {
+            "name": "峭壁岩熊-支援增益 Cragstone Bear Support Benefit"
+        },
+        "Gray Bladeling Support Benefit": {
+            "name": "灰刃灵-支援增益 Gray Bladeling Support Benefit"
+        },
+        "Severed Head Support Benefit": {
+            "name": "断头-支援增益 Severed Head Support Benefit"
+        }
+    },
+    "mapping": {
+        "description": "system.description.value",
+        "gmnote": "system.description.gm"
+    }
+}

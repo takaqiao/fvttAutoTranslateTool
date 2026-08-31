@@ -1,0 +1,689 @@
+import { getAdditionalSelectedItems, getAdditionalSelectedSkills } from '../../../scripts/creation/apply-creation.js';
+import { applyCreation } from '../../../scripts/creation/apply-creation.js';
+import { MIXED_ANCESTRY_CHOICE_FLAG, MIXED_ANCESTRY_UUID, MODULE_ID } from '../../../scripts/constants.js';
+
+jest.mock('../../../scripts/creation/class-handlers/registry.js', () => ({
+  getClassHandler: jest.fn(() => ({
+    applyExtras: jest.fn(async () => {}),
+    resolveFocusSpells: jest.fn(async () => []),
+    getExtraSteps: jest.fn(() => []),
+    shouldApplySubclassItem: jest.fn(() => false),
+  })),
+}));
+
+jest.mock('../../../scripts/classes/registry.js', () => ({
+  ClassRegistry: { get: jest.fn(() => null) },
+}));
+
+jest.mock('../../../scripts/utils/i18n.js', () => ({
+  format: jest.fn((key, data) => {
+    let result = key;
+    Object.entries(data ?? {}).forEach(([name, value]) => {
+      result = result.replace(`{${name}}`, value);
+    });
+    return result;
+  }),
+  localize: jest.fn((key) => key),
+}));
+
+jest.mock('../../../scripts/utils/logger.js', () => ({
+  debug: jest.fn(),
+  info: jest.fn(),
+  warn: jest.fn(),
+}));
+
+const { getClassHandler } = jest.requireMock('../../../scripts/creation/class-handlers/registry.js');
+
+describe('getAdditionalSelectedItems', () => {
+  it('does not manually add handler-owned class selections', () => {
+    const items = getAdditionalSelectedItems({
+      implement: { uuid: 'implement-uuid', name: 'Amulet' },
+      tactics: [{ uuid: 'tactic-uuid', name: 'Raise Morale' }],
+      innovationItem: { uuid: 'weapon-uuid', name: 'Crossbow' },
+      innovationModification: { uuid: 'mod-uuid', name: 'Razor Prongs' },
+      secondElement: { uuid: 'metal-uuid', name: 'Metal Gate' },
+      kineticImpulses: [{ uuid: 'impulse-uuid', name: 'Armor in Earth' }],
+      subconsciousMind: { uuid: 'sub-uuid', name: 'Gathered Lore' },
+      thesis: { uuid: 'thesis-uuid', name: 'Spell Blending' },
+      apparitions: [{ uuid: 'app-uuid', name: 'Witness to Ancient Battles' }],
+      subclass: {
+        choiceSets: [
+          {
+            flag: 'multiclassDedication',
+            options: [{ value: 'wizard-dedication', uuid: 'dedication-uuid', label: 'Wizard Dedication' }],
+          },
+        ],
+        choices: {
+          multiclassDedication: 'wizard-dedication',
+        },
+      },
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('does not manually add exemplar ikons because PF2E grants them from the system choice set', () => {
+    const items = getAdditionalSelectedItems({
+      ikons: [
+        { uuid: 'ikon-one', name: 'Bands of Imprisonment' },
+        { uuid: 'ikon-two', name: "Barrow's Edge" },
+      ],
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('does not manually add subclass choice results', () => {
+    const items = getAdditionalSelectedItems({
+      implement: { uuid: 'shared-uuid', name: 'Amulet' },
+      subclass: {
+        choiceSets: [
+          {
+            flag: 'implement',
+            options: [{ value: 'amulet', uuid: 'shared-uuid', label: 'Amulet' }],
+          },
+        ],
+        choices: {
+          implement: 'amulet',
+        },
+      },
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('does not manually add direct compendium UUID subclass choices', () => {
+    const items = getAdditionalSelectedItems({
+      subclass: {
+        choiceSets: [
+          {
+            flag: 'impulseOne',
+            options: [],
+          },
+        ],
+        choices: {
+          impulseOne: 'Compendium.pf2e.feats-srd.Item.tremor',
+        },
+      },
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('does not manually add selected feat choice results', () => {
+    const items = getAdditionalSelectedItems({
+      ancestryFeat: {
+        name: 'Natural Ambition',
+        choiceSets: [
+          {
+            flag: 'grantedClassFeat',
+            options: [{ value: 'Compendium.pf2e.feats-srd.Item.reactive-shield', uuid: 'Compendium.pf2e.feats-srd.Item.reactive-shield', label: 'Reactive Shield' }],
+          },
+        ],
+        choices: {
+          grantedClassFeat: 'Compendium.pf2e.feats-srd.Item.reactive-shield',
+        },
+      },
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('does not manually add selected granted feat choice results', () => {
+    const items = getAdditionalSelectedItems({
+      grantedFeatSections: [
+        {
+          slot: 'Compendium.pf2e.feats-srd.Item.adopted-ancestry',
+          featName: 'Adopted Ancestry',
+          sourceName: 'Adaptive Anadi',
+          choiceSets: [
+            {
+              flag: 'ancestry',
+              options: [{ value: 'android', uuid: 'Compendium.pf2e.ancestries.Item.android', label: 'Android' }],
+            },
+          ],
+        },
+      ],
+      grantedFeatChoices: {
+        'Compendium.pf2e.feats-srd.Item.adopted-ancestry': {
+          ancestry: 'android',
+        },
+      },
+    });
+
+    expect(items).toEqual([]);
+  });
+
+  it('manually adds selected spell choice results from choice sets', () => {
+    const items = getAdditionalSelectedItems({
+      grantedFeatSections: [
+        {
+          slot: 'Compendium.pf2e.feats-srd.Item.draconic-feat',
+          featName: 'Dragon Spit',
+          choiceSets: [
+            {
+              flag: 'dragonCantrip',
+              options: [
+                {
+                  value: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+                  uuid: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+                  label: 'Electric Arc',
+                  type: 'spell',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      grantedFeatChoices: {
+        'Compendium.pf2e.feats-srd.Item.draconic-feat': {
+          dragonCantrip: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+        },
+      },
+    });
+
+    expect(items).toEqual([
+      {
+        uuid: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+        name: 'Electric Arc',
+        _type: 'spell',
+      },
+    ]);
+  });
+
+  it('manually adds selected ancestry feat spell choice results when the stored selection uses the option UUID', () => {
+    const items = getAdditionalSelectedItems({
+      ancestryFeat: {
+        name: 'Otherworldly Magic',
+        choiceSets: [
+          {
+            flag: 'otherworldlyMagic',
+            options: [
+              {
+                value: 'electric-arc',
+                label: 'Electric Arc',
+                uuid: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+                type: 'spell',
+              },
+            ],
+          },
+        ],
+        choices: {
+          otherworldlyMagic: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+        },
+      },
+    });
+
+    expect(items).toEqual([
+      {
+        uuid: 'Compendium.pf2e.spells-srd.Item.electric-arc',
+        name: 'Electric Arc',
+        _type: 'spell',
+      },
+    ]);
+  });
+});
+
+describe('getAdditionalSelectedSkills', () => {
+  it('collects selected synthetic feat skill-training choices', () => {
+    const skills = getAdditionalSelectedSkills({
+      ancestryFeat: {
+        choiceSets: [
+          {
+            flag: 'levelerSkillFallback1',
+            grantsSkillTraining: true,
+            options: [
+              { value: 'athletics', label: 'Athletics' },
+            ],
+          },
+        ],
+        choices: {
+          levelerSkillFallback1: 'athletics',
+        },
+      },
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+    });
+
+    expect(skills).toEqual(['athletics']);
+  });
+});
+
+describe('applyCreation ancestry paragon', () => {
+  it('applies the extra level-1 ancestry feat to the ancestry paragon location', async () => {
+    game.settings.get = jest.fn((scope, key) => {
+      if (scope === 'pf2e-leveler' && key === 'ancestralParagon') return true;
+      if (scope === 'pf2e' && key === 'campaignFeatSections') return [];
+      return false;
+    });
+
+    const actor = createMockActor({ items: [] });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => docs.map((doc, index) => ({ ...doc, id: `created-${index}` })));
+    actor.update = jest.fn(async () => {});
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+
+    global.fromUuid = jest.fn(async (uuid) => ({
+      uuid,
+      name: uuid.includes('paragon') ? 'Paragon Feat' : 'Ancestry Feat',
+      toObject: () => ({
+        name: uuid.includes('paragon') ? 'Paragon Feat' : 'Ancestry Feat',
+        type: 'feat',
+        system: { level: { value: 1 }, rules: [], description: { value: '' } },
+      }),
+    }));
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: null,
+      background: null,
+      class: null,
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: { uuid: 'feat-a', name: 'Ancestry Feat', choices: {} },
+      ancestryParagonFeat: { uuid: 'feat-paragon', name: 'Paragon Feat', choices: {} },
+      classFeat: null,
+      subclass: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+    });
+
+    expect(actor.createEmbeddedDocuments).toHaveBeenCalledWith('Item', [
+      expect.objectContaining({
+        name: 'Ancestry Feat',
+        system: expect.objectContaining({ location: 'ancestry-1' }),
+      }),
+    ]);
+    expect(actor.createEmbeddedDocuments).toHaveBeenCalledWith('Item', [
+      expect.objectContaining({
+        name: 'Paragon Feat',
+        system: expect.objectContaining({ location: 'xdy_ancestryparagon-1' }),
+      }),
+    ]);
+  });
+
+  it('applies synthetic Mixed Ancestry heritage with the selected ancestry stored on the actor', async () => {
+    game.settings.get = jest.fn(() => false);
+
+    const actor = createMockActor({
+      items: [],
+      ancestry: { img: 'human.png' },
+    });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => docs.map((doc, index) => ({ ...doc, id: `created-${index}` })));
+    actor.update = jest.fn(async () => {});
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+    global.fromUuid = jest.fn(async () => null);
+    game.packs = new Map([
+      ['pf2e.ancestries', {
+        getDocuments: jest.fn(async () => [
+          {
+            slug: 'elf',
+            name: 'Elf',
+            system: { vision: 'lowLightVision' },
+          },
+        ]),
+      }],
+    ]);
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: { uuid: MIXED_ANCESTRY_UUID, name: 'Mixed Ancestry', img: 'human.png' },
+      background: null,
+      class: null,
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: null,
+      ancestryParagonFeat: null,
+      classFeat: null,
+      skillFeat: null,
+      subclass: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {
+        [MIXED_ANCESTRY_UUID]: {
+          [MIXED_ANCESTRY_CHOICE_FLAG]: 'elf',
+        },
+      },
+    });
+
+    expect(actor.createEmbeddedDocuments).toHaveBeenCalledWith('Item', [
+      expect.objectContaining({
+        name: 'Mixed Ancestry',
+        type: 'heritage',
+        system: expect.objectContaining({
+          slug: 'mixed-ancestry',
+          vision: 'lowLightVision',
+        }),
+        flags: expect.objectContaining({
+          [MODULE_ID]: expect.objectContaining({
+            mixedAncestrySelection: 'elf',
+          }),
+          pf2e: expect.objectContaining({
+            rulesSelections: expect.objectContaining({
+              [MIXED_ANCESTRY_CHOICE_FLAG]: 'elf',
+            }),
+          }),
+        }),
+      }),
+    ]);
+  });
+
+  it('trains the selected deity skill during creation', async () => {
+    game.settings.get = jest.fn(() => false);
+
+    const actor = createMockActor({
+      items: [],
+      system: {
+        skills: {
+          society: { rank: 0 },
+        },
+        details: {
+          languages: { value: [] },
+        },
+      },
+    });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => docs.map((doc, index) => ({ ...doc, id: `created-${index}` })));
+    actor.update = jest.fn(async (updates) => {
+      if (Object.prototype.hasOwnProperty.call(updates, 'system.skills.society.rank')) {
+        actor.system.skills.society.rank = updates['system.skills.society.rank'];
+      }
+    });
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+    global.fromUuid = jest.fn(async () => null);
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: null,
+      background: null,
+      class: { uuid: 'class-uuid', name: 'Champion' },
+      deity: { uuid: 'deity-uuid', name: 'Abadar', skill: 'society' },
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: { uuid: 'feat-uuid', name: 'Natural Ambition', choices: {} },
+      ancestryParagonFeat: null,
+      classFeat: null,
+      subclass: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+    });
+
+    expect(actor.update).toHaveBeenCalledWith({ 'system.skills.society.rank': 1 });
+    expect(ChatMessage.create).toHaveBeenCalledWith(expect.objectContaining({
+      content: expect.stringContaining('@UUID[class-uuid]{Champion}'),
+    }));
+    expect(ChatMessage.create).toHaveBeenCalledWith(expect.objectContaining({
+      content: expect.stringContaining('@UUID[deity-uuid]{Abadar}'),
+    }));
+    expect(ChatMessage.create).toHaveBeenCalledWith(expect.objectContaining({
+      content: expect.stringContaining('@UUID[feat-uuid]{Natural Ambition}'),
+    }));
+  });
+
+  it('trains a selected synthetic feat fallback skill during creation', async () => {
+    game.settings.get = jest.fn(() => false);
+    const originalConfig = global.CONFIG;
+
+    const actor = createMockActor({
+      items: [],
+      system: {
+        skills: {
+          athletics: { rank: 0 },
+        },
+        details: {
+          languages: { value: [] },
+        },
+      },
+    });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => docs.map((doc, index) => ({ ...doc, id: `created-${index}` })));
+    actor.update = jest.fn(async (updates) => {
+      if (Object.prototype.hasOwnProperty.call(updates, 'system.skills.athletics.rank')) {
+        actor.system.skills.athletics.rank = updates['system.skills.athletics.rank'];
+      }
+    });
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+    global.CONFIG = {
+      ...(global.CONFIG ?? {}),
+      PF2E: {
+        ...(global.CONFIG?.PF2E ?? {}),
+        skills: {
+          athletics: 'Athletics',
+        },
+      },
+    };
+    global.fromUuid = jest.fn(async (uuid) => ({
+      uuid,
+      name: 'Elven Lore',
+      toObject: () => ({
+        name: 'Elven Lore',
+        type: 'feat',
+        system: { level: { value: 1 }, rules: [], description: { value: '' } },
+      }),
+    }));
+
+    try {
+      await applyCreation(actor, {
+        ancestry: null,
+        heritage: null,
+        background: null,
+        class: null,
+        boosts: { free: [] },
+        languages: [],
+        skills: [],
+        lores: [],
+        ancestryFeat: {
+          uuid: 'feat-elven-lore',
+          name: 'Elven Lore',
+          choiceSets: [
+            {
+              flag: 'levelerSkillFallback1',
+              grantsSkillTraining: true,
+              options: [{ value: 'athletics', label: 'Athletics' }],
+            },
+          ],
+          choices: {
+            levelerSkillFallback1: 'athletics',
+          },
+        },
+        ancestryParagonFeat: null,
+        classFeat: null,
+        subclass: null,
+        grantedFeatSections: [],
+        grantedFeatChoices: {},
+      });
+
+      expect(actor.update).toHaveBeenCalledWith({ 'system.skills.athletics.rank': 1 });
+    } finally {
+      global.CONFIG = originalConfig;
+    }
+  });
+
+  it('applies a rogue level 1 skill feat during creation', async () => {
+    game.settings.get = jest.fn(() => false);
+
+    const actor = createMockActor({ items: [] });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => docs.map((doc, index) => ({ ...doc, id: `created-${index}` })));
+    actor.update = jest.fn(async () => {});
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+
+    global.fromUuid = jest.fn(async (uuid) => ({
+      uuid,
+      name: uuid === 'skill-feat-uuid' ? 'Steady Balance' : 'Rogue',
+      toObject: () => ({
+        name: uuid === 'skill-feat-uuid' ? 'Steady Balance' : 'Rogue',
+        type: uuid === 'skill-feat-uuid' ? 'feat' : 'class',
+        system: { level: { value: 1 }, rules: [], description: { value: '' } },
+      }),
+    }));
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: null,
+      background: null,
+      class: { uuid: 'class-rogue', name: 'Rogue' },
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: null,
+      ancestryParagonFeat: null,
+      classFeat: null,
+      skillFeat: { uuid: 'skill-feat-uuid', name: 'Steady Balance', choices: {} },
+      subclass: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+    });
+
+    expect(actor.createEmbeddedDocuments).toHaveBeenCalledWith('Item', [
+      expect.objectContaining({
+        name: 'Steady Balance',
+        system: expect.objectContaining({ location: 'skill-1' }),
+      }),
+    ]);
+    expect(ChatMessage.create).toHaveBeenCalledWith(expect.objectContaining({
+      content: expect.stringContaining('@UUID[skill-feat-uuid]{Steady Balance}'),
+    }));
+  });
+
+  it('does not manually apply the selected subclass item during creation', async () => {
+    game.settings.get = jest.fn((scope, key) => {
+      if (scope === 'pf2e-leveler' && key === 'ancestralParagon') return false;
+      if (scope === 'pf2e' && key === 'campaignFeatSections') return [];
+      return false;
+    });
+
+    const createdDocs = [];
+    const actor = createMockActor({ items: [] });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => {
+      createdDocs.push(...docs);
+      return docs.map((doc, index) => ({ ...doc, id: `created-${index}` }));
+    });
+    actor.update = jest.fn(async () => {});
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+
+    global.fromUuid = jest.fn(async (uuid) => ({
+      uuid,
+      name: uuid.includes('untamed-order') ? 'Untamed Order' : 'Druid',
+      toObject: () => ({
+        name: uuid.includes('untamed-order') ? 'Untamed Order' : 'Druid',
+        type: uuid.includes('untamed-order') ? 'feat' : 'class',
+        system: {
+          level: { value: 1 },
+          rules: uuid.includes('untamed-order')
+            ? [{ key: 'GrantItem', uuid: 'Compendium.pf2e.feats-srd.Item.untamed-form' }]
+            : [],
+          description: { value: '' },
+        },
+      }),
+    }));
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: null,
+      background: null,
+      class: { uuid: 'class-druid', name: 'Druid', slug: 'druid', choices: {} },
+      subclass: { uuid: 'subclass-untamed-order', name: 'Untamed Order', slug: 'untamed-order', choices: {} },
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: null,
+      ancestryParagonFeat: null,
+      classFeat: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+      spells: { cantrips: [], rank1: [] },
+    });
+
+    expect(createdDocs).toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'Druid', type: 'class' }),
+    ]));
+    expect(createdDocs).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'Untamed Order', type: 'feat' }),
+    ]));
+  });
+
+  it('does not separately apply wizard school subclass items during creation', async () => {
+    game.settings.get = jest.fn((scope, key) => {
+      if (scope === 'pf2e-leveler' && key === 'ancestralParagon') return false;
+      if (scope === 'pf2e' && key === 'campaignFeatSections') return [];
+      return false;
+    });
+
+    const createdDocs = [];
+    const actor = createMockActor({ items: [] });
+    actor.createEmbeddedDocuments = jest.fn(async (_type, docs) => {
+      createdDocs.push(...docs);
+      return docs.map((doc, index) => ({ ...doc, id: `created-${index}` }));
+    });
+    actor.update = jest.fn(async () => {});
+    actor.testUserPermission = jest.fn(() => true);
+    game.users = [{ isGM: true, id: 'gm-user' }];
+    ChatMessage.create = jest.fn(async () => {});
+    getClassHandler.mockReturnValue({
+      applyExtras: jest.fn(async () => {}),
+      resolveFocusSpells: jest.fn(async () => []),
+      getExtraSteps: jest.fn(() => []),
+      shouldApplySubclassItem: jest.fn(() => false),
+    });
+
+    global.fromUuid = jest.fn(async (uuid) => ({
+      uuid,
+      name: uuid.includes('school') ? 'School of Unified Magical Theory' : 'Wizard',
+      toObject: () => ({
+        name: uuid.includes('school') ? 'School of Unified Magical Theory' : 'Wizard',
+        type: uuid.includes('school') ? 'feat' : 'class',
+        system: {
+          level: { value: 1 },
+          rules: [],
+          description: { value: '' },
+        },
+      }),
+    }));
+
+    await applyCreation(actor, {
+      ancestry: null,
+      heritage: null,
+      background: null,
+      class: { uuid: 'class-wizard', name: 'Wizard', slug: 'wizard', choices: {} },
+      subclass: {
+        uuid: 'subclass-unified-school',
+        name: 'School of Unified Magical Theory',
+        slug: 'school-of-unified-magical-theory',
+        curriculum: {},
+        choices: {},
+      },
+      boosts: { free: [] },
+      languages: [],
+      skills: [],
+      lores: [],
+      ancestryFeat: null,
+      ancestryParagonFeat: null,
+      classFeat: null,
+      grantedFeatSections: [],
+      grantedFeatChoices: {},
+      spells: { cantrips: [], rank1: [] },
+      curriculumSpells: { cantrips: [], rank1: [] },
+    });
+
+    expect(createdDocs).toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'Wizard', type: 'class' }),
+    ]));
+    expect(createdDocs.some((doc) => doc.name === 'School of Unified Magical Theory' && doc.type === 'feat')).toBe(false);
+  });
+});

@@ -1,0 +1,461 @@
+
+/* ----------------------------------------- */
+/*  Application V2 Styles                    */
+/* ----------------------------------------- */
+
+.crucible.application {
+  --color-header-background: transparent;
+  --color-form-label: var(--color-h1);
+  --color-form-label-hover: var(--color-primary);
+  --color-form-hint: var(--color-tertiary);
+  --color-form-hint-hover: var(--color-secondary);
+  --background-texture: url("../ui/journal/background-texture.webp");
+  --background-overlay: url("../ui/journal/overlay-dark.webp");
+  --margin-size: 1rem;
+  --margin-half: 0.5rem;
+
+  background: var(--background-texture) no-repeat;
+  background-size: cover;
+  gap: 0;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--background-overlay) no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+  }
+
+  .window-header {
+    border-bottom: none;
+    .window-title {
+      font-family: var(--font-h1);
+      font-size: var(--font-size-14);
+      color: var(--color-primary);
+    }
+    .header-control {
+      color: var(--color-secondary);
+    }
+  }
+
+  .window-content {
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  // Buttons
+  button,
+  .button,
+  .control {
+    --button-text-color: var(--color-tertiary);
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    --button-hover-background-color: var(--color-frame-bg-75);
+    --button-hover-border-color: var(--color-frame);
+    --button-hover-text-color: var(--color-primary);
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+    opacity: 0.5;
+    &:disabled {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    &:hover {
+      opacity: 1.0;
+    }
+    &.framed {
+      --button-text-color: var(--color-secondary);
+      --button-background-color: var(--color-frame-bg-75);
+      --button-border-color: var(--color-frame);
+    }
+    &.invisible {
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  .header-control button {
+    --button-text-color: var(--color-secondary);
+    opacity: 1.0;
+  }
+
+  // Text Editors
+  prose-mirror {
+    height: 100%; // FIXME this feels like it shouldn't be necessary
+    menu button { // Reset crucible button styles
+      padding: revert;
+      text-align: revert;
+      opacity: revert;
+    }
+    code-mirror {
+      height: calc(100% - 70px); // FIXME fight core style
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  DocumentSheet V2 Styles                  */
+/* ----------------------------------------- */
+
+.crucible.sheet {
+  --sheet-header-height: 80px;
+  --sheet-header-gap: 0.5rem 0.5rem;
+  --sheet-body-gap: 0.5rem 1rem;
+
+  // Sheet Header
+  .sheet-header {
+    gap: var(--sheet-header-gap);
+    padding: 0 var(--margin-size);
+    margin-bottom: var(--margin-half);
+    img.profile {
+      flex: 0 0 var(--sheet-header-height);
+      width: var(--sheet-header-height);
+      height: var(--sheet-header-height);
+      margin: 0;
+      border: 1px solid var(--color-cool-5);
+      border-radius: 4px;
+      object-fit: contain;
+    }
+    .name {
+      height: var(--sheet-header-height);
+      gap: var(--sheet-header-gap);
+      justify-content: center;
+
+    }
+    .title {
+      border: none;
+      margin: 0;
+      input {
+        display: block;
+        height: 60px;
+        width: 100%;
+        margin: 0;
+        padding: 0 0.5rem;
+        background: var(--color-cool-5-50);
+        border: none;
+        font-size: var(--font-size-24);
+      }
+    }
+    .metadata {
+      justify-content: space-between;
+      .currency {
+        flex: none;
+        justify-content: flex-end;
+        input {
+          --input-background-color: transparent;
+          --input-border-color: transparent;
+        }
+      }
+    }
+    .header-tags {
+      justify-content: flex-start;
+    }
+  }
+
+  // Sheet Tabs
+  nav.sheet-tabs {
+    border-color: var(--color-cool-4);
+    font-family: var(--font-h1);
+    color: var(--color-secondary);
+    gap: 0.5rem;
+  }
+
+  // Sheet Body
+  .sheet-body {
+    padding: var(--sheet-body-gap);
+    gap: var(--sheet-body-gap);
+  }
+
+  // Click actions that aren't <button> elements
+  [data-action] {
+    cursor: var(--cursor-pointer, pointer);
+  }
+
+  /* ----------------------------------------- */
+  /*  Sheet Sections                           */
+  /* ----------------------------------------- */
+
+  .sheet-section {
+    background: var(--color-frame-bg-50);
+    border-radius: 6px;
+    position: relative;
+    padding: 1.5rem 1rem 1rem;
+    &.flexcol {
+      width: 100%;
+      align-items: center;
+    }
+    &.flexrow {
+      justify-content: center;
+    }
+    > h3 {
+      box-sizing: content-box;
+      position: absolute;
+      margin: 0;
+      padding: 0 1rem;
+      height: 1.5rem;
+      line-height: 1.5rem;
+      top: -0.75rem;
+      font-size: var(--font-size-14);
+      color: var(--color-primary);
+      background: var(--color-frame-bg);
+      border-radius: 3px;
+      > i {
+        font-size: 10px;
+        color: var(--color-text-subtle);
+      }
+    }
+
+    // Expanding and collapsing sections
+    &.expandable {
+      flex: 1;
+      padding: 1rem;
+      transition: flex-grow 0.25s;
+    }
+    &.collapsed {
+      flex: 0 0 0.5rem;
+      padding: 0;
+      background: none;
+      > * {
+        display: none;
+      }
+      h3 {
+        display: block;
+        opacity: 0.5;
+        > i {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+    &.expanded {
+      flex: 99;
+      h3 > i {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  // Form Elements
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--color-frame);
+    border-radius: 6px;
+    &.flexrow {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    legend {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-h1);
+      color: var(--color-h1);
+      font-weight: normal;
+    }
+  }
+
+  .form-group {
+    width: 100%;
+    margin: 0;
+    &.slim {
+      .form-fields {
+        > label {
+          color: var(--color-secondary);
+        }
+        input {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------- */
+  /*  Actor and Item Biographies               */
+  /* ----------------------------------------- */
+
+  .tab.biography {
+    prose-mirror {
+      width: 100%;
+    }
+    .editor-content {
+      font-size: var(--font-size-13);
+      line-height: 1.25em;
+      > :first-child {
+        margin-top: 0;
+      }
+      > :last-child {
+        margin-bottom: 0;
+      }
+      h2.divider {
+        font-size: 1.5em;
+        margin: 1rem 0 0;
+      }
+      h3.divider {
+        font-size: 1.25em;
+        margin: 1rem 0 0;
+      }
+    }
+    .sheet-section.empty {
+      prose-mirror.inactive {
+        --min-height: 32px;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Line Items: Actions, Talents, etc...     */
+/* ----------------------------------------- */
+
+.crucible .line-item {
+  --icon-size: 32px;
+  --title-font-size: var(--font-size-14);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  // Simple Icon
+  img.icon {
+    flex: none;
+    height: var(--icon-size);
+    width: var(--icon-size);
+    object-fit: contain;
+  }
+
+  // Framed Icon
+  .icon-frame {
+    position: relative;
+    width: calc(var(--icon-size) + 6px);
+    height: calc(var(--icon-size) + 6px);
+    flex: none;
+    img.icon {
+      margin: 3px;
+    }
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: url("../ui/frames/square-small.webp") no-repeat center;
+      background-size: 100%;
+    }
+  }
+
+  // FA Icon
+  i.icon {
+    display: block;
+    height: var(--icon-size);
+    width: var(--icon-size);
+    flex: none;
+    font-size: calc(var(--icon-size) * 0.8);
+    line-height: var(--icon-size);
+  }
+
+  .title {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    h1, h2, h3, h4 {
+      flex: none;
+      margin: 0;
+      font-size: var(--title-font-size);
+      color: var(--color-text);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .tags {
+      flex: none;
+      justify-content: flex-start;
+      margin: 0;
+    }
+  }
+
+  /** Optional Full-Width Header */
+  header {
+    display: flex;
+    flex: none;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /** Description */
+  .description {
+    flex: none;
+    width: 100%;
+    height: auto;
+    font-size: var(--font-size-12);
+    color: var(--color-primary);
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  /** Activation Condition */
+  p.condition {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-12);
+    margin: 0;
+  }
+
+  /** Configurable Quantity */
+  input.quantity {
+    flex:  0 0 32px;
+    font-size: 0.8em;
+    text-align: center;
+  }
+
+  /** Controls */
+  .controls {
+    flex: none;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    i.fa-solid {
+      color: var(--color-text-subtle);
+    }
+  }
+  .button.icon {
+    width: 24px;
+    height: 24px;
+    font-size: var(--font-size-12);
+    padding: 0.25rem;
+  }
+  button.icon {
+    --button-size: 24px;
+    font-size: var(--font-size-12);
+    padding: 0.25rem;
+  }
+
+  /** Applied Effects */
+  .effects {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    .effect {
+      --icon-size: 24px;
+    }
+  }
+
+  /** Dividers in Cards */
+  h3.divider {
+    margin: 0.5rem 0;
+    font-size: var(--font-size-16);
+  }
+}

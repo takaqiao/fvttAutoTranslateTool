@@ -1,0 +1,26 @@
+<div class="crucible-item-inline line-item talent" data-uuid="{{uuid}}" data-crucible-tooltip="talent">
+    <div class="icon-frame">
+        <img class="icon" src="{{img}}" alt="{{name}}">
+    </div>
+    <div class="title">
+        <h4>{{name}}</h4>
+        {{#if tags}}
+        <div class="tags">
+            {{#each tags}}
+            <span class="tag">{{this}}</span>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+    {{#if showLevel}}
+    <label>{{localize "ADVANCEMENT.Level"}}</label>
+    <input type="number" class="quantity" name="system.talents.{{talentIndex}}.level" value="{{level}}"
+        min="0" step="1" placeholder="0">
+    {{/if}}
+    {{#if showRemove}}
+    <div class="controls">
+        <a class="button icon fa-solid fa-times remove-talent" data-action="removeTalent"
+            aria-label="{{localize "ITEM.SHEET.TalentRemove"}}" data-tooltip></a>
+    </div>
+    {{/if}}
+</div>

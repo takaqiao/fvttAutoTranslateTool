@@ -1,0 +1,1052 @@
+{
+    "label": "玩家选项 Player Options",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {
+        "Curios": "奇物 Curios",
+        "Visions": "幻象 Visions",
+        "Features": "职业特性 Features",
+        "Spells": "法术 Spells",
+        "Enlightened Reliquarian": "启明圣物守护者 Enlightened Reliquarian",
+        "Erratas": "勘误 Erratas",
+        "Feats": "专长 Feats",
+        "Curses": "诅咒 Curses",
+        "Oracle Focus Spells": "先知聚能法术 Oracle Focus Spells",
+        "New": "新增 New",
+        "Apocryphal Domain Spells": "秘传领域法术 Apocryphal Domain Spells",
+        "Mysteries": "秘示域 Mysteries"
+    },
+    "entries": {
+        "The Lurking Storm": {
+            "name": "潜伏风暴 The Lurking Storm",
+            "description": "<p>在你身边的每一个水洼中、每一阵微风中，闪电的噼啪之声萦绕不去。如你下次动作为施放具空气、寒冷、电击或水系特征、无持续时间且造成物理或电击伤害的法术，则你选择将一半伤害以钝击伤害施加，另一半以电击伤害施加。</p>",
+            "prerequisites": [
+                {
+                    "value": "风暴秘示域"
+                }
+            ]
+        },
+        "Explosive Crescendo": {
+            "name": "爆裂高潮 Explosive Crescendo",
+            "description": "<p><strong>触发</strong> 射程内一名生物承受音波伤害。</p><hr /><p>你以爆发性音乐制造爆炸作为高潮终曲。目标须以强韧豁免。</p><p>成功 目标不受影响。</p><p>失败 目标@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑}并@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋}1轮。</p><p>大失败 同失败，但目标@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑}。</p>"
+        },
+        "Vital Pululation": {
+            "name": "生机爆发 Vital Pululation",
+            "description": "<p><strong>需求</strong> 你的咒缚值为2或更高，且你处于遭遇战中。</p><hr /><p>你的生命力自身向外爆发。你施放3动作@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{治疗术}，阶级等于你能不消耗法术位施放的第二高阶法术。你被排除在此治疗效果之外。</p>",
+            "prerequisites": [
+                {
+                    "value": "生命秘示域"
+                }
+            ]
+        },
+        "Appear Dead": {
+            "name": "貌似死亡 Appear Dead",
+            "description": "<p>生命从你脸上流失，心跳缓至停歇，你不再像活物。1分钟内，你在欺诈检定上获得+4环境加值以伪装为尸体，且你对生命感等感官表现为死亡状态。无心智不死生物在效果持续期间将你视为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿}状态，除非它们搜索以察觉你。</p>",
+            "prerequisites": [
+                {
+                    "value": "骨骸秘示域"
+                }
+            ]
+        },
+        "Cease to Be": {
+            "name": "化为乌有 Cease to Be",
+            "description": "<p><strong>领域</strong> 虚无（秘传）</p><hr /><p>你被短暂从存在中完全抹去。你变得隐形且非实体，但不能穿过坚实表面。在持续期间，盟友不视你为盟友，敌人须以回忆知识检定对抗你的法术DC方能识别你为敌人。在「化为乌有」效果下你不能施放法术或以敌对动作针对生物。</p>"
+        },
+        "Automummification": {
+            "name": "自我木乃伊化 Automummification",
+            "description": "<p><strong>领域</strong> 守夜（秘传）</p><hr /><p>你完美地脱水保存自己，使你能为已逝者守护数百年。你变成木乃伊，获得基础不死效益。法术激活时，若你未使用具听觉、操纵或移动特征的动作，则法术结束之时持续时间自动延长10分钟，并在每次法术常规持续时间将至时继续延长。如生物自你施放该法术后未见你移动，则你于此形态下的欺诈DC获得+4环境加值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.qdp6T1X5GyRp7raX]{效果：自我木乃伊化}</p>"
+        },
+        "Enlightened Reliquarian Dedication": {
+            "name": "启明圣物守护者献身 Enlightened Reliquarian Dedication",
+            "description": "<p>你是启明圣物守护者——向他人揭示秘示域的先知。你获得@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域}免费动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "圣物守护者之咒"
+                }
+            ]
+        },
+        "Vision of the All-Devouring End": {
+            "name": "万物吞噬之终幻象 Vision of the All-Devouring End",
+            "description": "<p>你的幻象向你展现了不可言说的恐怖未来——我们世界的可怕变化和大规模生命损失。只有通过你才能阻止此结局。火焰先知或许看到一个庞大龙形将世界焚为灰烬；幽暗先知或许看到永无尽头的黑夜被不死生物滋扰。</p><p><strong>替代领域</strong> 噩梦</p><p><strong>替代授予法术</strong> 1阶：@UUID[Compendium.pf2e.spells-srd.Item.4koZzrnMXhhosn0D]{恐惧术}</p><p><strong>授予技能</strong> 威吓</p><p><strong>幻象态</strong> 你必须拥抱恐惧。你在威吓检定上获得状态加值，等于你咒缚值一半（最低1）。遭遇战首回合后，若你结束某回合时未给予至少1名生物@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧}状态、亦未使用咒缚动作，则咒缚值+1（至最大值）。</p><p><strong>觉醒态</strong> 你可对暂时免疫你「挫败士气」的生物使用@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}。如咒缚值为3，可作为具炫技特征之免费动作进行挫败士气。如咒缚值为4，可随意将3阶恐惧术作为内禀法术施放。</p>"
+        },
+        "Past Lives": {
+            "name": "前世 Past Lives",
+            "description": "<p>通过对秘示域的深入研习，你解开了前世记忆。每日一次，你可花费10分钟召唤一位前世——一名很久以前的凡人，其魂魄在来世以阴影身份停留，最终消逝化为本质，成为你灵魂的构件——以获得成功@UUID[Compendium.pf2e.spells-srd.Item.hp6Q64dl7xbdn4gQ]{集体记忆}仪式之效果。通常这等生物年龄最少为1000岁，但通过与其他阴影和魂魄交谈可能习得更新近主题的知识。你保留此前世之外貌1天，效果如10阶@UUID[Compendium.pf2e.spells-srd.Item.2qGqa33E4GPUCbMV]{类人形态}法术，模拟前世之外貌，并在持续期间于一项与前世相符的技能上成为传奇。</p><p>此外，如你死后保持死亡1年，你便如@UUID[Compendium.pf2e.spells-srd.Item.gIVaSCrLhhBzGHQY]{转世}仪式大成功般自动转世。你的新面容可能拥有不同的个性或名字，但保留你所有记忆与大部分理念。</p>"
+        },
+        "Dream Come True": {
+            "name": "美梦成真 Dream Come True",
+            "description": "<p>你潜入一名生物的心智之中，使其感觉自己的某个幻想（或某个梦魇）已成真。当你施放此法术时选择幻想或梦魇，目标须尝试一次意志豁免，因为你正以其梦境之一塑造幻象。</p><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}，至你下一回合结束。若你选择幻想，目标在措手不及期间另 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。若你选择梦魇，目标除措手不及外另 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}，且其在因此效果而处于措手不及期间，惊惧不能降低至 1 级以下。目标可花费一个具专注特征的单一动作以尝试识破此效果。</p><p><strong>失败</strong> 同成功，但措手不及之持续时间为 1 分钟。</p><p><strong>大失败</strong> 同失败，但惊惧与呆滞值提升至 2 级。若你选择幻想，目标因此效果 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}，且迷魂状态直至目标识破幻象方可结束。若你选择梦魇，目标在惊惧期间另 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}。</p>"
+        },
+        "Halt Steps": {
+            "name": "止步 Halt Steps",
+            "description": "<p><strong>触发</strong> 一名生物移动至你10尺内。</p><p><strong>需求</strong> 你的咒缚值为2或更高。</p><hr /><p>当你的诅咒最为冰冷时，仅你的呼气也足以阻止敌人。触发生物须以@Check[fortitude|against:spell]豁免对抗你的法术DC。</p><p><strong>大成功</strong> 该生物不受影响。</p><p><strong>成功</strong> 该生物速度承受–10尺状态减值至下回合结束。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.lt6p04NLLhCEj13r]{效果：止步}</p><p><strong>失败</strong> 该生物停止移动并@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}1轮，或直至其对抗你的法术DC逃脱。</p><p><strong>大失败</strong> 同失败，但该生物@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚}而非禁足。</p>",
+            "prerequisites": [
+                {
+                    "value": "寒冰秘示域"
+                }
+            ]
+        },
+        "Hide From Doom": {
+            "name": "藏匿厄运 Hide From Doom",
+            "description": "<p><strong>触发</strong> 你将承受伤害。</p><hr /><p>你预先看见灾难，编织命运之线以保护自己。你对触发伤害的所有伤害获得抗性，等于[[/r 3 * @item.level + 2 * @actor.conditions.cursebound.value]]。如伤害为重击命中或基础豁免之大失败的结果，则抗性翻倍。</p><hr /><p><strong>提升（+1）</strong> 抗性增加3。</p>"
+        },
+        "Prophecy": {
+            "name": "预言 Prophecy",
+            "description": "<p>你具有预知之天赋，得见尚未发生之未来一瞥。然而，自百年前阿罗登之死以来，预言已变得不确定，你自己的占卜亦无法应验。你也接受了一项严峻真相：注定厄运之未来远多于安全之未来，你被灾难景象所困扰。你或受法拉斯玛、玛格德等神之祝福，或仅生于某颗选定之星辰下。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.lmHmKGs1N3yNAvln]{洗运}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.6ZIKB0151LUR19Rw]{不祥之兆}</li><li><strong>3阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.rfFZKfeCSweFv7P3]{末日将至}</li><li><strong>5阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.8THDHP0UC7SgOYYF]{必至之灾}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.2k0tHIzzZGq3Wub4]{藏匿厄运}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.TGvay9scp7R51wrS]{承担命运}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.NmmMauepJ21ToqlW]{末日将至}</li></ul><p><strong>相关领域</strong> 失向、命运、时间、守夜</p><p><strong>秘示域技能</strong> 神秘</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.oEpn9Xj6vcCqdCtG]{瞥见未来}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Xyt2MJEPNkCbzpBW]{无尽命数之咒}</p>"
+        },
+        "Frigid Journey": {
+            "name": "冰封之旅 Frigid Journey",
+            "description": "<p>你的脚步使冰在你周围扩散，封冻并保存转瞬即逝的世界，加快你穿越其间之旅。你以你的速度向任何方向行走成直线穿过任何表面；如选择向上移动，须以45度角进行。这在你穿过的方格中产生一层薄冰，形成实结构至下回合开始。冰存在期间，你与生物可在其上移动（视作不平地面），如同坚实表面。如使用「冰封之旅」时咒缚2，则冰持续至下回合结束；如咒缚3，可行走至多两倍速度。</p>",
+            "prerequisites": [
+                {
+                    "value": "寒冰秘示域"
+                }
+            ]
+        },
+        "The Bell Tolls Three Times": {
+            "name": "钟鸣三响 The Bell Tolls Three Times",
+            "description": "<p><strong>触发</strong> 你将被打降至0生命值或被杀。</p><hr /><p>当为你秘示域提供动力的神圣力量爆发时，你拒绝死亡之钟鸣。你避免被击晕，保持1生命值。如触发为死亡效果，你的受伤值+1。</p>"
+        },
+        "Arrange the Board": {
+            "name": "布局棋盘 Arrange the Board",
+            "description": "<p>你眼前看见事件序列展开，并稍加变更以影响战斗结果。在你30尺内选择[[/r 2+ @actor.conditions.cursebound.value * 2]]名生物。这些生物须以@Check[will|against:spell]豁免对抗你的法术DC。豁免失败的生物立即按你所选方向快步。盟友可选择得到失败结果。</p>",
+            "prerequisites": [
+                {
+                    "value": "预言秘示域"
+                }
+            ]
+        },
+        "Forefathers' Lessons": {
+            "name": "先祖之训 Forefathers' Lessons",
+            "description": "<p>你唤起与你生活迥异的祖先特征。当你获得此专长时，选择你血脉中的常规传承或你能选择的另一传承。如该传承允许选择，你须在获得专长时作出选择。1分钟内，除你的传承外，你还视为具有该传承。</p><p><strong>特别</strong> 此专长可在你至少12级与18级时各取一次，每次再选一项你可使用「先祖之训」时假冒的传承。当你使用此动作时，可在你能选择的传承中作出选择。</p>",
+            "prerequisites": [
+                {
+                    "value": "先祖秘示域"
+                }
+            ]
+        },
+        "Enlightening Spell": {
+            "name": "启明法术 Enlightening Spell",
+            "description": "<p>你能在施法过程中启明生物。如你下次动作为以你的先知法术位施放针对盟友的法术，则盟友在接受法术效果后可作为免费动作进行回忆知识。如你咒缚，他们的检定获得环境加值，等于你的咒缚值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.BgVgR3Jnc7zUNeVX]{效果：启慧法术}</p>"
+        },
+        "Fall Upwards": {
+            "name": "向上坠落 Fall Upwards",
+            "description": "<p>天空与大地一样召唤你。直至你下回合开始，你视坠落为[[/r 20 * @actor.conditions.cursebound.value + 0]]尺更短，跳远距离增加[[/r 10 * @actor.conditions.cursebound.value + 0]]尺，跳高距离增加[[/r 5 * @actor.conditions.cursebound.value + 0]]尺。如使用「向上坠落」时咒缚3，你获得等于陆地速度的飞行速度。</p>",
+            "prerequisites": [
+                {
+                    "value": "宇宙秘示域"
+                }
+            ]
+        },
+        "Cursed with Sanctity": {
+            "name": "圣性之咒 Cursed with Sanctity",
+            "description": "<p>当你的秘示域占据你时，你变得圣化。首次获得此专长时，选择神圣或亵渎。咒缚期间，你被圣化并获得对应特征以及对相反特征的弱点（等于你等级）。你的咒缚动作获得你的圣化特征。</p>"
+        },
+        "Seeds of Divinity": {
+            "name": "神性之种 Seeds of Divinity",
+            "description": "<p>你以神圣魔法注入四颗强力种子。你创造4颗承重微不足道的种子，出现在你的某只空手中，或施放法术时立即出现在你相邻的4个方格内。你可释放种子至相邻方格或交互以将种子投掷至10尺内的空间。当种子接触地面时，它发芽长成一丛灌木，占据5尺方格并提供隐蔽。每丛灌木有[[/r (@item.level - 1) * 10 + 10]]生命值与[[/r 10 + 2 * @item.level]]护甲等级。</p><p>灌木长出后1轮过去后，你可维持法术使灌木生长，使用时选择「危险」或「丰盛」；以此方式生长的灌木不能再次被选中。</p><ul><li><p><strong>危险</strong> 灌木除提供隐蔽外还成为危险地形，每当生物移动穿过其方格时造成2点穿刺与毒素伤害。</p></li><li><p><strong>丰盛</strong> 灌木结出一颗果实，食用果实的生物对伤害获得状态加值，等于你的最大咒缚值，并获得[[/r 4 + 2 * (@item.level -1)]]临时生命值。这些效果持续至效果结束，结束时灌木结出的果实分解为乌有。生物可作为单一交互动作从灌木采摘并食用一颗果实。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.p1kH1shqzQNnBaBJ]{效果：神性之种（茂盛丛林）}</p></li></ul><hr /><p><strong>提升（+1）</strong> 灌木的生命值增加10，护甲等级增加2。临时生命值、穿刺与毒素伤害各增加2。</p>"
+        },
+        "Inevitable Foresight": {
+            "name": "必至预见 Inevitable Foresight",
+            "description": "<p>你奇物之预见无可否认，未来如文字般被清晰书写。当你尝试奇物预见之察觉检定时，将成功度等级视为提升一阶。</p>"
+        },
+        "Lucid Reality": {
+            "name": "清明现实 Lucid Reality",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你的咒缚值为2或更高，且处于遭遇战中。</p><hr /><p>现实的纤维开始破裂，你以梦境塑造现实。1分钟内，你拥有30尺的梦境光环。当你使用「清明现实」并在你梦境光环生效的每回合开始时，你创造下文所述的一种幻象效果，持续至下回合开始。如使用「清明现实」时咒缚3，你改为同时创造至多3种效果，每种可为不同类型。</p><ul><li><p>你创造一只幻象生物，犹如施放@UUID[Compendium.pf2e.spells-srd.Item.f8SBoXiXQjlCKqly]{虚像生物}法术，提升至你等级一半（向上取整）。当你花费一个具专注特征的单一动作指挥它时，该生物在该回合获得2个动作。</p></li><li><p>你创造高至10尺、宽至10尺的幻象屏障。如生物尝试[[/act seek]]、交互或穿过屏障，幻象可被识破。</p></li><li><p>你创造一件幻象物体，犹如施放@UUID[Compendium.pf2e.spells-srd.Item.2oH5IufzdESuYxat]{幻象造物}法术，提升至你等级一半（向上取整）。</p></li></ul>",
+            "prerequisites": [
+                {
+                    "value": "梦境秘示域"
+                }
+            ]
+        },
+        "Raise Mountain": {
+            "name": "举山 Raise Mountain",
+            "description": "<p><strong>区域</strong> 锥形须处于土或石之区域</p><hr /><p>你感受到肩上秘示域之重，移动世界以创造一座山。区域内每方格比前一方格高5尺，形成多石三角隆起或阶梯状结构，高度等于锥形长度。你可选择将区域设为困难地形或易于穿越。如某区域之高度将触及或超过其上方障碍，则其止于障碍5尺内，且法术近障碍处之区域成为高级困难地形。区域内生物须进行反射豁免。</p><p><strong>大成功</strong> 生物可选择移至最近边缘或留在原方格。</p><p><strong>成功</strong> 同大成功，但生物@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}至你回合结束。</p><p><strong>失败</strong> 生物移至区域外最近相邻方格。如此举致生物从隆起区域坠落，可对抗法术DC尝试[[/act grab-an-edge]]。</p><p><strong>大失败</strong> 生物在区域内倒地。如位于高级困难地形区域，则@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}直至逃脱。</p><hr /><p><strong>提升（+2）</strong> 锥形长度增加5尺。</p>"
+        },
+        "The Mystery Grows": {
+            "name": "秘示域渐长 The Mystery Grows",
+            "description": "<p>你的奇物之力正迅速增长，唤醒古老的力量，或成为通往你盟友的力量管道。你获得以下动作。</p><h2>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.A7RfY8hjBQ4qYReT]{秘示域渐长}</h2><p>@Embed[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.A7RfY8hjBQ4qYReT inline]</p>"
+        },
+        "All-Seer": {
+            "name": "全见者 All-Seer",
+            "description": "<p>你具有远超自身之幻象。你将@UUID[Compendium.pf2e.spells-srd.Item.zvKWclOZ7A53DObE]{鹰眼术}作为神圣法术习得并加入你的先知法术汇总，且对你为标志法术。当你施放天眼通时，它获得以下提升效果：</p><p><strong>提升（+1）</strong> 距离增加250尺。</p>",
+            "prerequisites": [
+                {
+                    "value": "能够从法术位施法"
+                }
+            ]
+        },
+        "Sacrificial Spell": {
+            "name": "献祭法术 Sacrificial Spell",
+            "description": "<p>你的治疗异常强大，但消耗你自身生命力。如你下次动作为施放治疗术且所有目标都是活体生物，则你以d12代替d8掷治疗骰。</p>",
+            "prerequisites": [
+                {
+                    "value": "生命秘示域"
+                }
+            ]
+        },
+        "The Vision is Clear": {
+            "name": "视象清明 The Vision is Clear",
+            "description": "<p>神器向你发送幻象以保护你，即便不可见之物亦然。你于察觉上成为大师。你不会对那些在@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见}下你护甲等级与豁免获得+2状态加值之隐蔽、无踪或夹击生物处于措手不及状态。这些生物仍可帮助盟友夹击。</p>"
+        },
+        "Curse of Impossible Radiance": {
+            "name": "不可能光辉之咒 Curse of Impossible Radiance",
+            "description": "<p>你的内在之光如此耀眼，以致它从你的双眼、双耳、口与指尖以目眩辉煌散发而出。你时常显出微弱辉光，颜色反映你魔法源头之能量。咒缚时，你过于明亮以致无法藏匿。你创造一处明亮光线，半径等于咒缚值×5尺；其外延等距离为昏暗光线。你在视觉察觉检定、潜行检定（用于隐蔽或潜行）以及对抗区域效果之反射豁免上承受状态减值，等于咒缚值。</p>"
+        },
+        "Flesh of Cinders": {
+            "name": "灰烬之肉 Flesh of Cinders",
+            "description": "<p>你的肉身如灰烬之云般绕过物理威胁。直至下回合结束，你对所有物理伤害获得等于你等级的抗性，并对受擒或会致使你陷入「禁足、受擒或束缚」状态的效果之豁免与DC上获得状态加值，等于你的咒缚条件。</p>",
+            "prerequisites": [
+                {
+                    "value": "灰烬秘示域"
+                }
+            ]
+        },
+        "Curse of Monstrous Change": {
+            "name": "怪物变形之咒 Curse of Monstrous Change",
+            "description": "<p>你苦苦压抑深藏内心的强大野兽，但有时你会失败。即便你完全自控，野兽之印记仍可被见：尖牙、竖瞳、增生或减少的毛发、鳞片等。咒缚期间，你在具语言特征之检定与对抗情绪效果之豁免上承受状态减值，等于咒缚值；意志豁免承受减值等于咒缚值一半（最低0）。</p>"
+        },
+        "Embrace Instinct": {
+            "name": "拥抱本能 Embrace Instinct",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你的咒缚值为2或更高。</p><hr /><p>你进入解离迷雾，让躯体完全凭本能行动并代你战斗。进入此姿态时，你@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}并@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞}（只要你保持此姿态）。额外动作只能用于具咒缚特征之动作或活动。</p>"
+        },
+        "Promised Renewal": {
+            "name": "更新之诺 Promised Renewal",
+            "description": "<p>你使一只生物的躯体被零星生长所吞没。如目标为具濒死状态之活体生物，须以强韧豁免对抗你的法术DC，否则其濒死值+2（大失败时+3）。如目标为尸体或因强韧豁免失败而死的活体生物，你立即在目标的@Template[emanation|distance:15]内创造茂盛的天然植物生长，覆盖目标。区域成为困难地形，具真菌、植物或木属特征之从仆在爆发内获得快速治疗[[/r 3 + 2 * (@item.level - 3)]]。如这些特征之效果具生命值（如@UUID[Compendium.pf2e.spells-srd.Item.K9gI08enGtmih5X1]{守护之树}法术），快速治疗也适用于这些效果。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.bAixyu6lyYtnqQGo]{效果：许诺重生}</p><hr /><p><strong>提升（+2）</strong> 爆发增加5尺，快速治疗增加2。</p>"
+        },
+        "Forest": {
+            "name": "森林 Forest",
+            "description": "<p>森林中栖息着奇异之物，你常感到被它们吸引而前往，再不归来。或许你曾偶然踏入受木属位面影响的远古林苑，或是与精类的偶然邂逅至今萦绕。森林先知常崇敬伊拉斯提尔、白虎、根多温或元始者之类的神祇——他们教导先知要在树木间寻找答案。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.BX5UIAUarWG43Fg2]{树根读心}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.K9gI08enGtmih5X1]{守护之树}</li><li><strong>2阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.YWrfKetOqDwVFut7]{橡之坚韧}</li><li><strong>6阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.2hMy9ROM2dOZB8Jq]{木化}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.6eJzIrMiNtOTzhCR]{神性之种}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.EQYDCV6Llp7qvEmf]{更新之诺}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Y8qMgfEFPGlbuN9K]{木之吞噬}</li></ul><p><strong>相关领域</strong> 自然、旅行、诡计、木属</p><p><strong>秘示域技能</strong> 自然</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iWueJXoM6ZFHULZj]{挣扎之慰}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.U6pxB24CFi1YhvKe]{远古生长之咒}</p>"
+        },
+        "Divine Gnosis": {
+            "name": "神圣灵知 Divine Gnosis",
+            "description": "<p><strong>需求</strong> 你的咒缚值为2或更高，且处于遭遇战中。</p><hr /><p>你向超凡知识打开心智。进入此姿态时，你可在回忆知识检定上获得环境加值，等于你的咒缚值，并将该检定的成功度等级视为提升一阶。处于此姿态时，你可作为免费动作进行回忆知识，并赋予其咒缚特征。你须对当前遭遇相关主题进行回忆知识。处于此姿态时，回忆知识检定不承受呆滞带来的减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "学识秘示域"
+                }
+            ]
+        },
+        "Intuitive Reveal": {
+            "name": "直觉揭示 Intuitive Reveal",
+            "description": "<p>你不假思索便预知未来。每回合获得仅可用于「反射揭示」的额外反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "反射揭示"
+                }
+            ]
+        },
+        "Mystery Cultist": {
+            "name": "秘示域信徒 Mystery Cultist",
+            "description": "<p>你的神圣力量引来一名门徒之注意。该追随者或视你为初萌神祇，或为你曾共行隐秘仪式之人，或纯粹奉献于跟随你的旅程。其具有从仆特征，作为新手追随者开始。</p><p><strong>特别</strong> 你获得以下额外专长作为先知职业专长：@UUID[Compendium.pf2e.feats-srd.Item.PPbTc7LjWcH9rhrI]{额外追随者}（4级），@UUID[Compendium.pf2e.feats-srd.Item.UTGVGcpgAbZONOf5]{老练追随者}（4级），@UUID[Compendium.pf2e.feats-srd.Item.EhKeGvsxotMarUt0]{资深追随者}（8级），@UUID[Compendium.pf2e.feats-srd.Item.upsDl9drHCoH6jrz]{杰出追随者}（14级）</p>",
+            "prerequisites": [
+                {
+                    "value": "你不具有动物伙伴、构装伙伴或其他类似功能伙伴"
+                },
+                {
+                    "value": "先知施法或启明圣物守护者施法"
+                }
+            ]
+        },
+        "Vision": {
+            "name": "幻象 Vision",
+            "description": "<p>通常，先知被赋予秘示域时，并无确切目的。火焰先知被赋予火之神圣秘密以反思，野兽先知或许背负怪物之真理。但偶尔，伴随这些先知力量的还有一物：一个幻象。一道神圣讯息——警告可避免之事、必须完成的伟业，或更深之物。幻象赋予先知恩赐与无法永远忽视的沉重责任。</p><p>先知只能选择一个幻象，须在首次成为先知职业一员时选定。该幻象不能更改，代表你秘示域的目标以及你与其交互方式。</p><p>你的幻象提供替代领域与授予法术，替换你秘示域相关之你所选领域与法术。如你由幻象获得的法术与秘示域授予法术之一同阶级，则须以幻象授予法术替代该法术。你受训于幻象授予技能（替代你由先知职业获得的宗教训练），或如你已受训于幻象授予技能，则受训于另一项你所选技能。</p><p>当你于遭遇中掷先攻时，立即获得咒缚值1，或如你已咒缚则咒缚值+1。咒缚期间，你处于幻象态效果下。</p><p>不同于其他先知，你在幻象态期间即便达咒缚值上限仍可使用咒缚动作，但视咒缚动作效果为你咒缚值低1级时的效果。如你处于咒缚值上限且使用咒缚动作，或你的咒缚值因幻象态而将上升，你便进入觉醒态而非提升咒缚值，并获得其效果，之后在你以重新专注解除觉醒态前不能再使用咒缚动作。</p><p>处于觉醒态时，你按你最大咒缚值获得幻象态与觉醒态之全部效果。觉醒持续轮数等于你最大咒缚值，直至你将因未满足幻象态需求而咒缚值上升、被击晕、遭遇结束（取最先发生者）。觉醒期间不能使用施放法术活动，除非所施法术由你的秘示域授予法术、觉醒态、先知专长或神圣访问职业特性所授予。觉醒态结束后，你失去幻象态效果，并在重新专注前不能再次进入幻象态或觉醒态。</p><p>当你的最大咒缚值提升时，你的幻象态与觉醒态变得更强，授予额外效益，使你与秘示域的关系深化。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.wJs7ftC4yUiRkm54]{效果：觉醒状态}</p>"
+        },
+        "Patristic Followers": {
+            "name": "教父追随者 Patristic Followers",
+            "description": "<p>你的追随者是一座基于你预言教导的新教会之始。从1阶至7阶各选一项神圣法术。每位追随者每日各可施放一次作为神圣法术。如你有多名追随者，你可在他们之间分配这些法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "天选门徒"
+                }
+            ]
+        },
+        "Gloom": {
+            "name": "幽暗 Gloom",
+            "description": "<p>幽暗将你拥入它无尽虚无的怀抱，如同一位黑暗之母怀中的婴孩。或许如冉纳尔克伯爵或夜娘女这般幽暗之神视你为黑暗的合适使者，或许你被佐恩库松或奈亚拉托提普所诅咒。或许是幽冥界本身对你施加影响——其强大能量与你的灵魂相缠。无论如何发生，深渊回望你的目光，黑暗如今追随你的足迹。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.0zU8CPejjQFnhZFI]{虚构幻术}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.k34hDOfIIMAxNL4a]{幽暗触须}</li><li><strong>2阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.QZ7OHptO1xnwaruq]{半影伪装}</li><li><strong>3阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.DeF63UTmr7rchF60]{暗影之墙}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.SQu3XaMn5u6fzQos]{暗中之手}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.NFsi2f90SRFobe7H]{影印}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ygUiIHPC2ZQEMcl0]{黑暗之网}</li></ul><p><strong>相关领域</strong> 黑暗、噩梦、虚无、隐秘</p><p><strong>秘示域技能</strong> 潜行</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iWueJXoM6ZFHULZj]{挣扎之慰}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ZBNdYIBcV5qsn4UH]{复仇之暗之咒}</p>"
+        },
+        "Dream Logic": {
+            "name": "幻梦之理 Dream Logic",
+            "description": "<p><strong>领域</strong> 梦境（秘传）</p><hr /><p>在梦境之地，因果常脱节，不可能成为现实。你将梦境逻辑带入现实世界，以奇特幻象与逻辑空缺充满之。光环内所有生物须进行意志豁免；失败时掷[[/r 1d4]]以决定结果。大失败时掷两次，由施法者选择结果。生物可选择得到失败结果。</p><p></p><table class=\"pf2e\"><thead><tr><th style=\"width:10%\"><p>掷骰</p></th><th><p>效果</p></th></tr></thead><tbody><tr><td><p>1</p></td><td><p><strong>物体谬误</strong> 即便无心智之物在此似乎也会说话。直至下回合开始，你可与无生命物体交谈；它们仅以你能听懂之语言对你说话，且只有你能听见。激活时你在请求或挫败士气上获得+1环境加值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.lyYMV9N9mRqRxQ5F]{效果：梦之逻辑——物品谬误}</p></td></tr><tr><td><p>2</p></td><td><p><strong>静止时间</strong> 时钟不规律走动，向后与向前同样频繁。具持续时间且影响你之效果与状态延长1d4轮。</p></td></tr><tr><td><p>3</p></td><td><p><strong>脱离地面</strong> 重力更像建议而非规则。生物获得等于其陆地速度的飞行速度，至下回合结束。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.oDiqzXcbYLuT1bN7]{效果：梦之逻辑——不系于地}</p></td></tr><tr><td><p>4</p></td><td><p><strong>扭曲能量</strong> 区域内能量被扭曲。直至生物回合结束，如生物造成酸性、寒冷、电击、火焰或音波伤害，则改为造成另一种能量伤害（随机1d4确定）。如生物会造成多种这类伤害类型，由你选择哪种伤害被改变。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.eAwv3v3Ww9qxsU4W]{效果：梦之逻辑——扭曲能量}</p></td></tr></tbody></table>"
+        },
+        "Moonlit Folly": {
+            "name": "月光之愚 Moonlit Folly",
+            "description": "<p><strong>领域</strong> 月（秘传）</p><hr /><p>头顶月亮的影响变得显著，你发现自己的情绪与身躯因之改变。你获得+10尺速度状态加值，强韧与反射豁免上+1状态加值，意志豁免上–1状态减值。如月可见，速度状态加值再增加5尺，豁免之加值与减值都提升至2。如你于满月之夜施放该法术，你还获得迅捷并能仅以额外动作行走。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.08EMkXoFIiMaJcF5]{效果：月下狂言}</p>"
+        },
+        "Life of the Party": {
+            "name": "派对之魂 Life of the Party",
+            "description": "<p>你为盟友带来派对礼物，以可能压倒一切的效果鼓舞士气。施法时及持续期间每回合结束时，你立即在两只空手中各装满节日小食以供食用。在持续时间内任何时刻，你或触及内的盟友可作为交互消耗你手中一颗小食，获得5临时生命值（持续1分钟）以及+2状态加值至伤害（直至临时生命值耗尽）。如已食用一颗小食的生物在10分钟内尝试食用另一颗，便@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心}。法术结束时，效果终止，剩余小食消失。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.paSKF0DGRrWtRhXo]{效果：派对灵魂}</p><hr /><p><strong>提升（+1）</strong> 临时生命值增加2。</p>"
+        },
+        "Perfect Understanding": {
+            "name": "完美领悟 Perfect Understanding",
+            "description": "<p>幻象向你揭示终极真理。你于察觉成为传奇。在你的预见光环内，你不会对隐蔽、无踪或夹击生物处于措手不及状态。</p>"
+        },
+        "Urge Clemency": {
+            "name": "劝慈 Urge Clemency",
+            "description": "<p>以丝滑之声，你可告诉他人忘记所见并继续前行。你以@Check[spell|against:will]{法术攻击调整值}进行检定，对抗30尺内至多4只生物之意志DC，并获得状态加值等于你咒缚值。如你或盟友最近威胁或伤害过任一目标，你的检定承受–4环境减值。无论结果如何，生物对「劝慈」暂时免疫1天。</p><p><strong>大成功</strong> 任何会影响该生物的情绪效果被压制，且生物不能进行敌对动作。如目标受到任何其他生物之敌意，此效果终止。生物否则会忽视你，除非在此状态下被威胁——状态持续1分钟。如此效果结束时你与盟友不再被生物感知，则它们完全忘记与你的相遇。</p><p><strong>成功</strong> 同大成功，但生物在1天后想起遭遇。</p><p><strong>失败</strong> 生物意识到你试图影响其心智。</p>"
+        },
+        "Sense Mystery": {
+            "name": "感知秘示域 Sense Mystery",
+            "description": "<p>你天生知道你的秘示域何时触动某人或某物。当你来到与你秘示域有关之生物、地点或物体30尺内时，GM秘密为你掷@Check[perception|traits:secret]检定使你意识到——即便你未花费动作进行察言观色或不在搜索该物体或地点。此专长不会告诉你秘示域如何相关；例如，骨骸先知不会被告知擦肩而过的兜帽身影是死灵法师、不死生物还是法拉斯玛的卧底牧师。同样，火焰先知不会知道被秘示域触动之门后藏着什么，只知它与火焰相关。</p>"
+        },
+        "Pantraditional Knowledge": {
+            "name": "全传统知识 Pantraditional Knowledge",
+            "description": "<p>你已研习所有传统的法术，你的秘示域在需要时将之授予你。你保留一本类似法师法术书的法术之书，可用其法术补充你的法术汇总。免费将你汇总中所有法术加入此书。你可使用[[/act learn-a-spell statistic=religion]]学习法术并以适当费用加入法术书。</p><p>每日准备时，从你的法术之书中选择任一法术。如该法术已在你的法术汇总中，你可视其为当日额外的标志法术。如不在汇总中，则视为已加入汇总至下次每日准备。你可施放以此方式准备的非神圣传统法术，但当你以此方式施放从其他传统习得的法术时，它获得咒缚特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "学识秘示域"
+                }
+            ]
+        },
+        "Song": {
+            "name": "歌 Song",
+            "description": "<p>无论你走到何处，你都被一段神秘音乐所萦绕。它在风中、在你朋友的声音中、在你自己声音的回响中演奏。它或许是莎琳、戈贡塔之类神祇的恩赐。或许你曾目睹一部灵能杰作，多年来萦绕不去。虽无人能听见，但所有其他声音都微妙或显著地弯入它的旋律。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.b5BQbwmuBhgPXTyi]{魂萦圣歌}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.TSyFZNAbqfkRrcq0]{和谐合唱}</li><li><strong>2阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.Yv3AFIO55FONQYMH]{奏鸣跨度}</li><li><strong>6阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.7idCEYHnPpVNL9vX]{幻影乐团}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Pky8fbDXBT5OpVjA]{尖锐音符}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.jdkPJ3JOhCyjdxu5]{魅惑狂想曲}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.0Ci1ZNGdai65PdiA]{爆裂高潮}</li></ul><p><strong>相关领域</strong> 内省、激情、完美、悲伤</p><p><strong>秘示域技能</strong> 表演</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.mLRt0nJQLvbZkiml]{欢欣之井}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.n2k5sQMwOlL0qxDB]{永驻奏鸣之咒}</p>"
+        },
+        "Terrible Size": {
+            "name": "可怖之巨 Terrible Size",
+            "description": "<p>你内里的野兽改造你的体格。你增大至大型体型，你的装备随之增大，但若被取下则恢复正常体型。你 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}，且你的触及范围增加 5 尺（若你原为微型则增加 10 尺）。你对所有速度获得 +10 尺状态加值。此效果不会终止那些不影响你体型的形变效果，例如「野兽之躯」。</p><hr /><p><strong>高阶 (5 阶)</strong> 你可改为增大至超大型体型。速度的状态加值增加至 +20 尺，触及范围增加 10 尺（若你原为微型则增加 15 尺）。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.9mDckQWMjaJjxL79]{效果：恐怖体型}</p>"
+        },
+        "Enlightened Reliquarian": {
+            "name": "启明圣物守护者 Enlightened Reliquarian",
+            "description": "<p>当魔法之伟力难以由肉身所承载时，便寄寓于物。随时间流转，这些物品中之力量日益增长，最终化为神器。诸般神器，有些湮灭于千年长河，有些则被封存，有些则又被重新发现。而有时，其中一者会成为先知秘示域的焦点。</p><p>无论是被命运引向圣物，还是亲手造就一具奇迹工具，启明圣物守护者通过一具奇异的奇物引导神性之力。这些奇物即是神圣的神器与圣物，通常与先知的秘示域相关联。例如，一名战斗秘示域的先知，其武器奇物可能正是一柄曾被尤莫黛本人挥舞过的剑；与此同时，一名烈焰秘示域之器皿，可能是装着延续数百年仪式之火的点燃油瓶。</p><h2>圣物守护者诅咒 <span style=\"float:right\">1 阶</span></h2><p>当先知与圣物分享其秘示域之时，二者所承之力压迫亦同时增减。流经先知的纯粹神圣魔力减少，先知便不再被诅咒如此摧残。无传统先知所承受的魔法蒙翳之雾，启明圣物守护者得以真正看清并理解其秘示域。你必须选择 @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.1EUmjV0gH1eYFizZ]{启明圣物守护者献身} 作为你的 2 级职业专长。</p><p><strong>先决条件</strong> 你必须为先知。</p><p><strong>职业特性调整：</strong></p><ul style=\"list-style-type:none\"><li><p>你不获得 @UUID[Compendium.pf2e.classfeatures.Item.iwAzV1IlQ2pMHQoB]{神术许可} 职业特性。</p></li><li><p>你不获得 @UUID[Compendium.pf2e.classfeatures.Item.571c1aGnvNVwfF6b]{先知启明} 职业特性。</p></li><li><p>你于 1 级而非 11 级获得 @UUID[Compendium.pf2e.classfeatures.Item.eTQZQGPMIZJHIR6J]{先知感知} 职业特性。</p></li><li><p>你另获得以下职业特性与调整：</p></li></ul><p><strong>施法调整：</strong>你的施法能力受到更多限制。在 1 级，你可施放一道 1 环法术与 5 道戏法。随等级提升，你的法术位数量与可施放的最高环级法术也会增加，详见「启明圣物守护者每日法术」。由于你的秘示域之力大多被收纳于你那如卡珊德拉般的神器内，你最高环级法术位最多只有 2 个；若你能施放 2 环或更高环级法术，则比你最高环级低 1 阶的法术位也最多只有 2 个。任何要求能施放某一较低环级法术之能力，即便你已无该环级之法术位，你仍视为符合该要求。</p><table class=\"pf2e\"><thead><tr><th>等级</th><th>戏法</th><th>1 环</th><th>2 环</th><th>3 环</th><th>4 环</th><th>5 环</th><th>6 环</th><th>7 环</th><th>8 环</th><th>9 环</th><th>10 环</th></tr></thead><tbody><tr><td>1</td><td>5</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>2</td><td>5</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>3</td><td>5</td><td>2</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>4</td><td>5</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>5</td><td>5</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>6</td><td>5</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>7</td><td>5</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>8</td><td>5</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>9</td><td>5</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>10</td><td>5</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>11</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>12</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>13</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td></tr><tr><td>14</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td><td>-</td></tr><tr><td>15</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td></tr><tr><td>16</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td><td>-</td></tr><tr><td>17</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td></tr><tr><td>18</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td></tr><tr><td>19</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td></tr><tr><td>20</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>2</td><td>-</td></tr></tbody></table><p><strong>法术目录调整：</strong>你能施放的法术集合称作你的法术目录。在 1 级，你自选学习两道 1 环法术与五道戏法。这些法术可从神圣自然传统的常见法术中选取，或自你具有访问权的该传统的其他法术中选取。你可使用相应环级的法术位施放你法术目录中的任意法术。你的法术位与你法术目录中的法术彼此独立。若某项专长或其他能力将一道法术加入你的法术目录（例如先知秘示域所赐法术），它并不会授予你额外的法术位，反之亦然。</p><p>随等级提升，你向法术目录添加新法术。每当你获得一个法术位，便向法术目录添加一道相同环级的法术。在 2 级，你再选取一道 1 环法术。在 3 级，你向法术目录添加首个 2 环法术。在 4 级，你获得第二道 2 环法术，法术目录达到至多 5 道法术之上限。</p><p>在 5 级时，除将两道 3 环法术加入法术目录外，你还失去最低环级的法术位。每当你失去一个环级的法术位时，你也会失去法术目录中的两道法术。这两道法术可来自已知法术，亦可从新学法术之名额中扣除。在不变更法术位的等级，你可如下文所述置换多道法术。</p><p><strong>置换法术目录中之法术：</strong>当你为法术目录习得新法术时，你或许希望置换一些已学法术。每当你升等级并习得新法术时，你可将一道旧法术置换为相同环级的另一道法术。若该等级你失去一组较低环级法术位，则你可按任意顺序进行此两次置换。你也可改为置换一道戏法。你也可在闲暇期间通过再训练置换法术。</p><p>从 6 级起每偶数等级，你可将任意数量的法术置换为你能施放之环级的不同法术。当你这么做时，你必须保留至少一道可用最低环级法术位施放的法术，以免出现你无法使用的法术位。例如，在 6 级时你须至少保留一道 2 环法术，但你其他法术皆可为 3 环。</p>",
+            "prerequisites": [
+                {
+                    "value": "你必须是先知。"
+                }
+            ]
+        },
+        "Contagious Festivities": {
+            "name": "感染欢宴 Contagious Festivities",
+            "description": "<p>当一切变得纷乱时，你深谙如何启动局面——你在战场上起舞，恣意享受，并令他人参与狂欢。你尝试劝诱 10 尺内一名生物加入欢宴，方法是让目标尝试一次 @Check[will|against:spell] 豁免。若你以盟友为目标，则其可选择不掷骰直接得到失败结果。</p><p><strong>大成功</strong> 该生物拒绝了你的劝诱，并在 1 分钟内对未来之尝试暂时免疫。</p><p><strong>成功</strong> 该生物因你的尝试而略感困惑，至其下一回合结束前，它无法对你采取敌对行动。若你对该生物采取敌对行动，则其在 1 分钟内对此效果暂时免疫。</p><p><strong>失败</strong> 该生物配合你。同成功，但该生物还须以其一项动作执行 [[/act perform]] 或饮食，否则它 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1级}。完成该动作后，至你下一回合结束前，它对伤害获得等同你咒缚值两倍的状态加值。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.z6Hq3CfTIt2XoSx8]{效果：传染狂欢}</p><p><strong>大失败</strong> 该生物沉醉于此刻。同失败，但该生物必须以其所有动作参与狂欢，并 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}，至你下一回合结束。</p>",
+            "prerequisites": [
+                {
+                    "value": "狂欢秘示域"
+                }
+            ]
+        },
+        "Overwhelming Festivities": {
+            "name": "压倒性狂欢 Overwhelming Festivities",
+            "description": "<p>你散发欢宴与华美沉溺之气，将情绪推向极致，令其压垮心智。每当弥漫光环内的敌人对某项情绪效果豁免失败，或因某效果获得惊惧状态时，它额外承受 3d4 持续心灵伤害。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.m7RLoqSYkgvv8pyz]{灵气：席卷狂欢}</p><hr /><p><strong>高阶 (+2)</strong> 持续伤害增加 1d4，且弥漫光环半径增加 5 尺。</p>"
+        },
+        "Sensory Roots": {
+            "name": "感知根须 Sensory Roots",
+            "description": "<p>你的诅咒在你足下扎根，使你能感知周围区域。你迫使诅咒的生长在你足下扎根。咒缚期间获得30尺范围之不精确震感。咒缚时每回合结束，若你本回合未使用具移动特征之动作，则你被根固定禁足。如使用「感知根须」时咒缚2，前15尺范围之震感为精确感官；咒缚3时，震感范围为60尺。</p><hr /><p><strong>Foundry注</strong> 由于系统实现，精确感官将永远「胜过」不精确感官，故咒缚2或更高时你将无法看见或利用此专长之不精确震感。须手动处理。</p>",
+            "prerequisites": [
+                {
+                    "value": "森林秘示域"
+                }
+            ]
+        },
+        "Cryptic Murmurings": {
+            "name": "晦涩低语 Cryptic Murmurings",
+            "description": "<p><strong>触发</strong> 你结束一场遭遇战，其间咒缚值为2或更高且你保持清醒。</p><hr /><p>有时你低声咕哝即将到来之事的严峻警告——连你自己也未必明白其意。你或当时15尺内的盟友可花费10分钟尝试@Check[religion|against:spell|overrideTraits:true|traits:secret]检定对抗你的法术DC以解读咕哝可能之意。检定须于次小时内尝试，否则咕哝之意丢失。此检定具机密特征，结果如下。</p><p><strong>大成功</strong> 你了解某极重要之事。GM警告你即将到来的遭遇或危险；例如，若你的咕哝是「壳行台阶」，你便了解附近楼梯潜伏的墓骑士。你获得对遭遇生物或主题进行回忆知识检定大成功之效果。如该遭遇于次日内发生，你与盟友对其先攻获得+2环境加值。</p><p><strong>成功</strong> 解读你的谜语模糊，但让你瞥见可能之事。你了解谜语之两种解读，一对一错。例如「壳行台阶」可能暗示墓骑士，或可能是关于该区域巡逻的蟹形贾托尔。如该遭遇于次日内发生，你与盟友对其先攻获得+1环境加值。</p><p><strong>失败</strong> 你未能解读谜语。</p><p><strong>大失败</strong> 你得出错误理解。你习得错误信息，例如只学到关于贾托尔的事。如该遭遇于次日内发生，你与盟友对其先攻承受–2环境减值。</p>"
+        },
+        "Shadowcopy": {
+            "name": "影印 Shadowcopy",
+            "description": "<p>你像蛇蜕皮般脱下影子，制造一个独立行走的你之轮廓。你在与你相邻方格创造与你同体型的影印——但其他方面可正常穿过。影印区域内所有生物变为隐蔽，区域外所有生物对其内之生物视为隐蔽。施放法术时与维持法术时，你可将影印移动至多你的速度，到你能看见的区域。在法术持续期间一次，你可使用「影换」免费动作；之后法术结束，影印消失。</p><p><strong>影换</strong> <span class=\"action-glyph\">f</span>（专注、黑暗、先知、阴影）</p><hr /><p><strong>效果</strong> 你与你的影子在一阵黑暗中互换位置。在你的影印副本与你自身位置周围@Template[emanation|distance:15]内创造魔法黑暗，持续至下回合结束。当你使用此动作时，你可选择与影子互换位置；若如此，则法术获得传送特征。</p>"
+        },
+        "Curse of Ancestral Meddling (Team+)": {
+            "name": "祖灵干涉之咒（Team+） Curse of Ancestral Meddling (Team+)",
+            "description": "<p>你与之共通的祖灵以善意（但最终有害）协助你之意图、对你绕过传统获得神圣力量之放肆惩罚、自我娱乐，或以上之混合，纠缠你并干涉你的所有物与行动。处于@UUID[Compendium.pf2e.conditionitems.Item.zXZjC8HLaRoLR17U]{咒缚}状态时，你@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙}，等级等于你的咒缚值。当你使用咒缚动作时，你的诅咒之笨拙状态立即被压制至下回合结束。</p>"
+        },
+        "Cursebound Foresight": {
+            "name": "咒缚预见 Cursebound Foresight",
+            "description": "<p><strong>动作</strong> <span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p><hr /><p>你的神器使你能在预见危险时利用其力量。你使用奇物预见，然后使用一项需1、2或3动作的咒缚动作或活动，所用动作数与咒缚动作相同。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "The End is Nigh": {
+            "name": "末日将至 The End is Nigh",
+            "description": "<p>你向目标喊出等待他们的可怕未来，与他们分享你所受的厄运。你的目标须以意志豁免。无论结果如何，生物之后10分钟内暂时免疫。</p><p><strong>大成功</strong> 你看见自己的命运逼近自己，并@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧}。</p><p><strong>成功</strong> 目标不受影响。</p><p><strong>失败</strong> 目标恐惧未来之必然，@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧}且其惊惧状态在法术持续期间不能降至1以下。下次目标尝试攻击检定或豁免时，须掷两次取较低结果，之后法术结束。</p><p><strong>大失败</strong> 同失败，但生物@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧}并@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑}1轮。</p>"
+        },
+        "The Land Protects Us": {
+            "name": "大地护佑 The Land Protects Us",
+            "description": "<p>纵然你常作大地之守护者，大地亦会反过来护佑你。你于自身周围 15 尺半径内自地下生长出一道天然地形之墙，高 10 尺，持续 1 分钟。试图穿越此屏障的生物须尝试一次 @Check[reflex|against:spell] 豁免，否则承受 @Damage[2d8[persistent,bleed]]{2d8 持续流血} 伤害。当你使用「大地护佑」时若你处于咒缚 2 级，墙高增至 20 尺，持续流血伤害提升至 @Damage[3d8[persistent,bleed]]{3d8}；若你处于咒缚 3 级，则改为 30 尺高，持续流血伤害增加至 @Damage[4d8[persistent,bleed]]{4d8}。</p>",
+            "prerequisites": [
+                {
+                    "value": "森林秘示域，或山岳秘示域"
+                }
+            ]
+        },
+        "Glacial Sculpting": {
+            "name": "冰雕 Glacial Sculpting",
+            "description": "<p><strong>领域</strong> 寒冷（秘传）</p><hr /><p>你以冰创造一个临时物体。它须为坚实物体且不超过5立方尺。它不能依赖精巧工艺或复杂的活动部件，永远不能满足成本等条件，硬度为5，完全由冰构成。该物体明显为冰临时构成之物，不能售卖或冒充真品。如物体暴露于火或热，则每暴露一回合持续时间减少1轮。</p><hr /><p><strong>提升（+1）</strong> 你能创造的立方尺数增加3。</p>"
+        },
+        "Divine Eclipse": {
+            "name": "神圣食日 Divine Eclipse",
+            "description": "<p>你周围的世界陷入夜般黑暗，使你成为一道发光的造物熔炉之门，仅被你自己的凡躯所掩。你熄灭所有非魔法光线效果，并尝试对抗区域内任何其他魔法光。</p><p>选择区域内至多5只生物；你授予它们食日之祝福——它们在5尺爆发内散发明亮光线（外延5尺为昏暗光线），并在爆发内获得快速治疗6。区域内其他生物若在昏暗光线或黑暗区域结束回合，承受6d4寒冷伤害（基础反射豁免）。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.WbVS2UZMIINwpNBZ]{效果：神圣蚀}</p><hr /><p><strong>提升（+1）</strong> 寒冷伤害增加1d4，快速治疗增加1。</p>"
+        },
+        "Mind's Eye Wink": {
+            "name": "心眼一瞬 Mind's Eye Wink",
+            "description": "<p>你将梦境显化为一处幻象危害。</p><ul><li><p><strong>区域（4个相邻5尺方格）</strong> 区域内所有坚实地面成为来自梦境之地的灿烂色彩之爆发。区域内或进入区域的生物须以意志豁免。失败的生物在区域内时@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞}，且离开后再持续1轮。大失败时，区域内@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞}，离开后呆滞1级再持续1轮。</p></li><li><p><strong>目标（1件1或更少承重之物体）</strong> 如对未持有的物体施法，任何尝试拾起物体的人须以意志豁免对抗你的法术DC，否则相信物体危险并会伤害自己。如目标为已持有的物体，或生物拾起未持有的物体，则持物者须以意志豁免。失败时，使用物体的所有检定承受–1环境减值；大失败时为–2。生物可在使用[[/act seek]]后尝试识破效果。如成功识破，便忽视效果至剩余持续时间。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.JiB9kUl9RapPQ3Cr]{效果：心眼一瞬}</p></li></ul>"
+        },
+        "Apocryphal Mastery": {
+            "name": "秘传精通 Apocryphal Mastery",
+            "description": "<p>你完整理解你的领域，包括常被理解的方面与隐藏在秘密中的方面。每日准备时，选择一个你具领域法术且具秘传变体之领域。你今日可选择知道标准领域法术或秘传领域法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "至少1个领域法术"
+                }
+            ]
+        },
+        "Sharp Note": {
+            "name": "尖锐音符 Sharp Note",
+            "description": "<p>你释放一道不和谐之歌，使目标对该歌敞开。区域内每只生物承受1d8音波伤害并须以强韧豁免。被法术致聋的生物仍能听见你，并可正常受你的听觉效果影响。</p><p><strong>大成功</strong> 生物不受影响。</p><p><strong>成功</strong> 生物承受一半伤害。</p><p><strong>失败</strong> 生物承受全部伤害并@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋}1轮。</p><p><strong>大失败</strong> 生物承受双倍伤害，耳聋1分钟，并在耳聋期间承受@Damage[(@item.level)[sonic,persistent]]伤害。</p><hr /><p><strong>提升（+1）</strong> 音波伤害增加1d8，持续音波伤害增加1。</p>"
+        },
+        "Reflexive Reveal": {
+            "name": "反射揭示 Reflexive Reveal",
+            "description": "<p><strong>触发</strong> 你「奇物预见」光环内的盟友成为打击或需豁免的效果之目标。</p><hr /><p>你可将护佑幻象揭示给保护范围外的盟友。你对触发盟友使用@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域}。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "Aspirations of the Acolyte": {
+            "name": "学徒之志 Aspirations of the Acolyte",
+            "description": "<p>你的追随者已见识你秘示域之道，并通过献身追寻其神性。你可花费2动作指挥追随者，授予其施放法术活动之能力。</p><p>每日准备时，你可选择给一名追随者两个你能从先知施法施放的戏法作为神圣戏法。如你有多名追随者，可选择给所有追随者一个戏法（所有追随者获得同一戏法）。</p>",
+            "prerequisites": [
+                {
+                    "value": "秘示域信徒"
+                }
+            ]
+        },
+        "Spiraling Dance": {
+            "name": "螺旋之舞 Spiraling Dance",
+            "description": "<p><strong>领域</strong> 造物（秘传）</p><hr /><p>你以螺旋之舞表达造物之喜，将他人卷入其中。你以速度行走。在此移动期间可尝试[[/act shove statistic=spell]]一名相邻生物，使用法术攻击调整值（如更高）代替运动调整值。每回合首次维持法术后，你可再次行走并尝试推撞一名相邻生物。</p>"
+        },
+        "Dream": {
+            "name": "梦境 Dream",
+            "description": "<p>心智是最伟大的创造者——其褶皱中铸造了梦境之地的千百个世界。你的想象如此持久而强大，仅你的存在便可形成幻象。你或许与德丝娜、远古之神博克鲁格或某些来自梦境领域的古老力量有密切联系。你发现梦境之地的力量只在魔法的微闪之间。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.0zU8CPejjQFnhZFI]{虚构幻术}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.o4lRVTwSxnOOn5vl]{催眠术}</li><li><strong>3阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.yM3KTTSAIHhyuP14]{梦境讯息}</li><li><strong>5阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.U58aQWJ47VrI36yP]{镜花水月}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.OpJmCs3zAXmN4mnX]{心眼一瞬}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.kRd321XLgebXcpni]{如愿之思}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.2OSGe5NaTHXHXHGg]{美梦成真}</li></ul><p><strong>相关领域</strong> 失向、梦境、字图、噩梦</p><p><strong>秘示域技能</strong> 神秘</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.wZz04xU4HejpGTd4]{星界白日梦}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.x6SPAkbSDUbZqLrc]{永恒梦呓之咒}</p>"
+        },
+        "Accursed Curio": {
+            "name": "咒缚奇物 Accursed Curio",
+            "description": "<p>你被诅咒永远与一件咒缚奇物相系——一件由你秘示域赋能的圣物。你以一件看似平凡之该类型物品开始，并获得相关效益。试图摆脱该奇物通常失败；它将永远在你每日准备时出现于你的物品中——即便已被毁。售出它所交换之硬币在你收到后片刻便会变黑卷曲如腐烂的花瓣，购买者神秘地不久后找到新硬币以替补遗失之钱。如你获得与你奇物同类的新物品，可花费一日休闲时间通过仪式合并奇物与新物品。这赋予你的神器略不同的外观与合并物品之能力；例如学识先知可将其经文奇物——古鲁哈斯塔亲笔之古老笔记——与启发胸针合并，使奇物获得物品之属性。如此过程重复，前一物品被从奇物中移除，新物品与你的咒缚奇物合并。以此方式与奇物合并的附装物品不计入你每日附装物品上限。</p><p>你获得@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Fg25A68hjadgRefp]{奇物之先见}动作以及取决于你奇物选择的以下效益。除非你的物体被挥使或穿戴（按奇物所定义），否则你不能使用咒缚动作。</p>"
+        },
+        "Ice": {
+            "name": "寒冰 Ice",
+            "description": "<p>寒冰封住你的心，冷意流过你的血脉。它无处不在，是抹去温暖与喜悦、令你充满严酷麻木的紧贴幻影。你或许从冰霜公主阿尔根维斯、北极人狼霜巨神伊密达尔、姆万吉旷野的乌弗科，甚至从世界之冠诸魂那里汲取力量。无论你的力量来自何方，刺骨严寒都跟随你，无论你走到何处。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.IxhGEKl63R4QBvkj]{冻伤}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.8TQiFzGf4feoHeH0]{凛寒喷溅}</li><li><strong>4阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.kHyjQbibRGPNCixx]{冰风暴}</li><li><strong>5阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.xxWhyl81w3ckslAU]{凛冽暴雪}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.hX9AndfKK4fUf4XX]{凛冽寒冷}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.UkQm3EFrh7FjhMQX]{冰之守卫}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.UmP8nuC0f2DiMZOB]{分形霜冻}</li></ul><p><strong>相关领域</strong> 寒冷、死亡、痛苦、旅行</p><p><strong>秘示域技能</strong> 生存</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.iWueJXoM6ZFHULZj]{挣扎之慰}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.WkHeAsDV5cy2JkSr]{冰封临在之咒}</p>"
+        },
+        "Hand in the Dark": {
+            "name": "暗中之手 Hand in the Dark",
+            "description": "<p><strong>需求</strong> 你与影子相邻或处于黑暗区域。</p><hr /><p>你将手伸入阴影，作为通向其他阴影的传送门。法术激活的每回合开始时，选择射程内一个有阴影的方格。出于交互动作之考量，你视为处于所选方格，且可像处于所选方格般以触摸射程或近战法术攻击检定瞄准生物之法术作为目标。如所选方格不再有阴影（如近处生物移动），你失去此效果，直至下回合开始时选择新方格。</p>"
+        },
+        "Assume Destiny": {
+            "name": "承担命运 Assume Destiny",
+            "description": "<p><strong>触发</strong> 一名盟友在以你与之共为目标的效果之豁免上失败，且你的豁免成功。</p><hr /><p>当朋友面临可怕命运时，你常先见之，并准备承担殉道者之角色。借助你对所见之有限控制，你与盟友交换命运，在所有最终调整后交换两人掷骰之结果。</p><hr /><p><strong>提升（7阶）</strong> 如盟友原结果为大失败，你改为得到失败。</p>"
+        },
+        "Hermit's Shelter": {
+            "name": "隐者之所 Hermit's Shelter",
+            "description": "<p><strong>耗费</strong> 所选物品之价格</p><hr /><p>无论你走到何处，你的庇护所似乎总在附近。你可花费10分钟咨询附近庇护所的幻象或模糊记忆。小屋出现于你500尺范围内某处，通常超出视线或看似无关紧要地隐于视野外。此庇护所与「温馨小屋」法术所造的具相同规格与效果，但其结构与辉煌总取决于所处区域。</p><p>该小屋始终为最多10只生物提供给养，并提供至多2件等级不超过你等级一半的常规物品（由你选择）。这些物品须为冒险装备或消耗品，不能为武器、护甲、永久魔法物品或其他宝物。</p><p>虽然结构是永久的，但当你移动至距庇护所超过500尺时，它从视野中神秘消失，再次以「隐者之所」找到之前不能再被发现。留在庇护所内的生物或物体出现在庇护所外10尺内某处。</p>"
+        },
+        "Curse of Ancient Growth": {
+            "name": "远古生长之咒 Curse of Ancient Growth",
+            "description": "<p>步行世间时，思乡之感啃噬着你；独处时，你听见森林之飒飒细语。咯吱作响的树木、远处的鸟鸣，以及挥之不去的回归森林、永不归返之诱惑。植物或真菌或许在你身上或物品上生长，林地生物如征兆般在你所到之处出现。咒缚期间，处于黑暗或昏暗光线时，你的生长以你的躯体为食，承受@Damage[(@actor.conditions.cursebound.value)[poison,persistent]|immutable]{等于你咒缚值的持续毒素伤害}（处于完全黑暗时为@Damage[(2 * @actor.conditions.cursebound.value)[poison,persistent]|immutable]{两倍咒缚值}）。处于明亮光线时，你立即停止从诅咒承受持续毒素伤害——因植物吸收光线，产生隐蔽你视野之生长。处于明亮光线时，60尺外的生物对你@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}，且每咒缚值超过1级，你能清楚看见生物的距离减少10尺（咒缚4时30尺外的生物对你隐蔽）。当你开始重新专注以缓解诅咒，或失去意识时，你的生长停止，但若重新专注被打断或你恢复意识，则生长恢复。</p>"
+        },
+        "Golden Touch": {
+            "name": "点石成金 Golden Touch",
+            "description": "<p><strong>领域</strong> 财富（伪经）</p><hr /><p>你的手将其触及之物嬗变为黄金。目标须进行强韧豁免；若目标是被生物持有的物品，则由该生物进行强韧豁免。</p><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标部分嬗变为黄金。目标对钝击与电击伤害获得弱点 4。目标对潜行检定承受 –2 环境减值；若为物品，则将此减值施加于持用之生物。</p><p><strong>失败</strong> 嬗变更为强烈。同成功，但对钝击与电击的弱点加倍。若目标为生物，则其 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1级}。若目标为物品，则在该物品并非由黄金构成的情况下，赋予使用该物品所进行的检定或 DC 一项 –2 环境减值。</p><p><strong>大失败</strong> 同失败，但目标在持续期间内 @UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{石化}（如同由黄金所造）。若目标为物品，且该物品并非由黄金构成，则视其为具有 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损} 状态。</p><hr /><p><strong>高阶 (+1)</strong> 成功时对钝击与电击的弱点增加 1。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.TwARzUtpp7SCSpEX]{效果：点金之触}</p>"
+        },
+        "Fantasms of Fire": {
+            "name": "火焰幻影 Fantasms of Fire",
+            "description": "<p>烟与摇曳之火焰幻象充塞你的感官，无害的闪烁火焰也充满你所在空间。你于 @Template[emanation|distance:15] 内创造提供遮蔽的烟雾，持续 1 分钟或被强风驱散为止。你忽视烟雾内之遮蔽，但将烟雾外的所有生物视作对你遮蔽，因为神秘的幻影在火焰中闪现。烟雾内之生物即便具备烟雾视觉或类似可忽视烟雾遮蔽效果之能力，亦无法看见烟雾外。需要呼吸的生物在该区域内结束回合时承受 @Damage[(@actor.conditions.cursebound.value)[fire]]{等同于你咒缚值的火焰伤害}。当你使用「火焰幻影」时若你咒缚值为 2，则弥漫光环改为 @Template[emanation|distance:20]；若咒缚值为 3，则改为 @Template[emanation|distance:30]。</p>",
+            "prerequisites": [
+                {
+                    "value": "火焰秘示域"
+                }
+            ]
+        },
+        "Ice Guardian": {
+            "name": "冰之守卫 Ice Guardian",
+            "description": "<p>你创造一具由冰构成的守卫以保护自己。一座大型体型的冰雕出现于你身侧，并尝试守护你与你的盟友。当你紧邻该守卫时，你与你的盟友获得轻度掩蔽；你可维持该法术，至你下回合开始前将其授予的掩蔽提升至标准掩蔽，或令该守卫以其 25 尺陆地速度 行走 至另一区域。该守卫可被摧毁，具有 [[/r 30+(@item.level -3)*10]] 生命值，AC 为 [[/r 22+(@item.level -3)*3]]，对钝击伤害的弱点为 [[/r 3+(@item.level -3)*3]]，并对冷冻免疫。</p><hr /><p><strong>高阶 (+1)</strong> 守卫的 AC 与弱点提升 3，其生命值增加 10。</p>"
+        },
+        "Curse of the Ancient Summit": {
+            "name": "古老山峰之咒 Curse of the Ancient Summit",
+            "description": "<p>你与之相系之山岳之重量始终压在你肩上与行动上。静止之时，你的皮肤几乎如石，宁静之夜后或许会发现身上长有苔藓。随诅咒进展，你开始石化。咒缚期间，你不能受益于速度的状态加值，且不能被骑乘；如已被骑乘，咒缚时坠落倒地。你的速度承受状态减值，等于5尺×咒缚值，飞行或游泳速度减值翻倍。陆地速度若降至5或更低保留10尺；其他速度降至0或更低则不能使用对应移动类型。</p>"
+        },
+        "Fractal Frosting": {
+            "name": "分形霜冻 Fractal Frosting",
+            "description": "<p>霜寒栖于你指尖边缘，分裂为冰冻光线的微小裂痕。施放「分形霜冻」时，作为施放的一部分，你同时施放 @UUID[Compendium.pf2e.spells-srd.Item.IxhGEKl63R4QBvkj]{冻伤}。在「分形霜冻」持续期间，你可以以 60 尺射程施放冻伤，对范围内至多三个不同目标。你于每个目标周围的区域 @Template[emanation|distance:5] 内创造困难地形，持续 1 轮。</p><hr /><p><strong>高阶 (9 阶)</strong> 在持续期间，当你施放冻伤时，目标在豁免失败时其速度承受 –5 尺状态减值 1 轮，大失败时改为 –15 尺状态减值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.OPBNdJPRJgcGVqp1]{效果：分形结霜}</p>"
+        },
+        "Curse of Inevitable Rot (Team+)": {
+            "name": "必至腐朽之咒（Team+） Curse of Inevitable Rot (Team+)",
+            "description": "<p>你的魔法是一项持续提醒：所有生物终将屈服于时间与环境之蹂躏。你被腐朽光环笼罩。你经过时叶子枯萎，昆虫坠落，银器在你手中变色，酒杯中的残酒变成醋。</p><p><strong>咒缚1</strong> 你获得对酸性与毒素伤害的弱点2。</p><p><strong>咒缚2</strong> 你在对抗疾病与毒素之豁免上承受–1状态减值。此外，治疗你的疾病、毒素或伤口的人在相关技能检定上承受–1状态减值。</p><p><strong>咒缚3</strong> 你的酸性与毒素弱点提升至10+你的等级。</p><p><strong>咒缚4</strong> 你的状态减值与他人治疗你疾病/毒素/伤口的状态减值均提升至–2。</p>"
+        },
+        "Juggernaut of Jagged Stone": {
+            "name": "尖石巨像 Juggernaut of Jagged Stone",
+            "description": "<p>你召唤内里之山岳，化身为其化身。岩石构造在你皮肤上形成，使你状如一座活山。你对物理伤害（精金除外）获得抗力 6。你免疫死亡效果、疾病、流失、疲乏、治疗、非致命攻击、麻痹、毒素、恶心、生命力与虚空；任一你于法术施放时已具备的状态被中止，至法术结束时以剩余持续时间恢复。</p><p>你的拳脚打击伤害骰为 1d10，失去灵巧与娴熟特征，并获得推撞特征；你成为大型体型且笨拙 1。</p><p>在此形态下，你无需呼吸。你的体积为 24，且变得过于致密以致无法在水中游泳——会自动沉至水底。你可驱散此法术。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.MzalS4gzqOn5NTr8]{效果：岩棱巨魁}</p><hr /><p><strong>高阶 (+1)</strong> 物理抗力增加 1。</p>"
+        },
+        "Trepidation Spell": {
+            "name": "惶恐法术 Trepidation Spell",
+            "description": "<p>当你对生物之心智施加意志时，你向其传递骇人的未来景象。若你的下一动作是施放一道至少低于你最高环级 2 环、且需要意志豁免的法术，目标生物在豁免失败时另获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}，大失败时改为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。若该生物免疫情绪、恐惧或心灵效果，则它对此惊惧状态免疫。</p>"
+        },
+        "Vision of the Perfect Creation": {
+            "name": "完美造物之幻象 Vision of the Perfect Creation",
+            "description": "<p>你的幻象向你展示了某种尚未存在的美丽——你将成为其创造的一部分。先祖先知或许见到四颗破碎的镜片插入支点之中，光先知或许见到五颗发光之星绕一座塔轨行。</p><p><strong>替代领域</strong> 造物</p><p><strong>替代授予法术</strong> 1阶：@UUID[Compendium.pf2e.spells-srd.Item.UKsIOWmMx4hSpafl]{目眩光彩}</p><p><strong>授予技能</strong> 表演</p><p><strong>幻象态</strong> 造物即你之使命。咒缚期间，当你@UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{表演}时，视为已准备好@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助}盟友的下一次攻击检定或你所选技能检定。当你之后使用协助反应时，可改为以[[/act aid statistic=performance]]代替常规技能检定。遭遇战首回合后，若你结束某回合时未使用表演或咒缚动作，咒缚值+1（至最大值）。</p><p><strong>觉醒态</strong> 你可在每回合结束时作为免费动作进行表演，且若你以表演协助检定失败，则改为成功。如咒缚值为3，你以表演协助之检定自动大成功。如咒缚值为4，每回合获得仅可用于以表演协助之额外反应。</p>"
+        },
+        "Revelry": {
+            "name": "狂欢 Revelry",
+            "description": "<p>你通过享乐或迷醉获得神秘洞见。可能你纵情狂欢以致赢得凯登·凯林、乌嘉索亚、玛丽诗或孙悟空之类神祇的眷顾；或者你来自一个使用强效幻觉药物以诱发高度感知状态的传统。无论你的狂欢以何形式呈现，迷醉状态使你与神圣建立了无人能及的联系。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.VACvA5VRbddjt5s9]{感染热情}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.pBevG6bSQOiyflev]{困惑}</li><li><strong>2阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.q5qmNn144ZJGxnvJ]{得体服饰}</li><li><strong>7阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.vPWMEyVTreMOoFnm]{位面宫殿}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.IwJEKkV4PX7pY3V9]{派对之魂}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.LsoSNdvocpMcOZLv]{压倒性狂欢}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.uLzgBltYNdU8hmJZ]{人多更欢}</li></ul><p><strong>相关领域</strong> 失向、放纵、激情、财富</p><p><strong>秘示域技能</strong> 表演</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.mLRt0nJQLvbZkiml]{欢欣之井}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.ZamwPUeVau0UltXC]{永恒盛宴之咒}</p>"
+        },
+        "Ray of Light": {
+            "name": "光线 Ray of Light",
+            "description": "<p>你自双手射出一道光束，驱散黑暗并致盲敌人。区域内所有生物须进行一次基础强韧豁免，否则承受 1d6 火焰伤害。具暗影特征或具光照失明的生物对此豁免承受 –2 状态减值。豁免失败的生物另 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩} 1 轮；若为大失败，则改为 @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲} 1 轮，随后目眩 1 分钟。该法术于区域每一格留下持续 1 分钟、犹如火炬般明亮的环境光。</p><hr /><p><strong>高阶 (+1)</strong> 火焰伤害增加 1d6，线形距离增加 5 尺。</p>"
+        },
+        "Curse of Gelid Presence": {
+            "name": "冰封临在之咒 Curse of Gelid Presence",
+            "description": "<p>寒冷如鬼魂般纠缠你的每一刻，麻木你的核心。即便温暖天气，你的呼吸也凝结如冻；霜花有时在你衣物或头发上出现。重新专注或失去意识时霜冷退去，但若重新专注被打断或你恢复意识，霜冷之行为恢复。</p><p><strong>咒缚1</strong> 霜在你皮肤上形成。你承受@Damage[1[cold,persistent]|immutable]伤害。</p><p><strong>咒缚2</strong> 你不能快步。此条款也适用于你所骑乘的坐骑。</p><p><strong>咒缚3</strong> 持续寒冷伤害提升至@Damage[3[cold,persistent]|immutable]{3}。</p><p><strong>咒缚4</strong> 每回合开始时，你将所有速度减少10尺（最低0尺）。如所有速度降至0，则你被冰@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}，须对抗法术DC[[/act escape]]方能再移动。如成功逃脱，所有速度不再减少，然后循环继续，冰再次开始减少速度。骑乘期间，诅咒之速度减值与禁足状态适用于坐骑而非你自身。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.yRNC7m3QIS6GVdvz]{效果：寒霜临在之诅咒}</p>"
+        },
+        "Wield the Divine": {
+            "name": "驾驭神性 Wield the Divine",
+            "description": "<p>你直接接入神圣，即便如此痛苦。你获得1专注点。</p>"
+        },
+        "Mountain": {
+            "name": "山岳 Mountain",
+            "description": "<p>你的灵魂与构成山岳之永恒磐石相系。或许你与某条特定山脉——如科托斯山脉、天霞天界长城，或天界本身所在的山——有神圣联系。或许你受到山祇、巴鲁姆达尔或拉格迪亚之类神祇的祝福。无论如何，你自身便是高耸磐石，你的力量也以此显现。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.zA0jNIBRgLsyTpbm]{碎石飞散}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.dgCH2E0gMLMUgyFl]{震波}</li><li><strong>3阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.KEagmnwgsSbGmkme]{洞穴尖牙}</li><li><strong>6阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.znv4ECL7ZtuiagtA]{石化术}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.tmGuPJr7ppxurTzP]{地震位移}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.8p4xVEywQr8pN5QN]{举山}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.VK8P3zkoyrVI1RO7]{尖石巨像}</li></ul><p><strong>相关领域</strong> 土系、力量、旅行、守夜</p><p><strong>秘示域技能</strong> 运动</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.yiPogNDpDqAXlqTJ]{因苦而坚}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.UlxAZtgVV8KaKGWS]{古老山峰之咒}</p>"
+        },
+        "Creature's Howl": {
+            "name": "野兽之嗥 Creature's Howl",
+            "description": "<p>你向敌人发出可怕的咆哮，足以令其骨髓为之冻僵。区域内所有能听见你嗥叫的敌人须尝试一次意志豁免。无论结果如何，它们在 1 分钟内对此暂时免疫。</p><p><strong>大成功</strong> 该生物不受影响。</p><p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}。</p><p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。</p><p><strong>大失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧3级} 且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 1 轮。</p><hr /><p><strong>高阶 (9 阶)</strong> 区域增加至 60 尺弥漫光环。</p>"
+        },
+        "The Hour of Rallying": {
+            "name": "聚集之时 The Hour of Rallying",
+            "description": "<p><strong>需求</strong> 你的咒缚值为2或更高，且处于遭遇战中。</p><hr /><p>身躯不过是你秘示域的容器，神性轻易主宰之。你尝试@Check[counteract]你与你30尺内所有盟友的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙}、@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}、@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭}、@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{疲乏}或@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞}状态。你的检定获得状态加值，等于你的咒缚值。</p>",
+            "prerequisites": [
+                {
+                    "value": "狂欢秘示域"
+                }
+            ]
+        },
+        "Spirit Squire": {
+            "name": "精魂随从 Spirit Squire",
+            "description": "<p>你可召唤一名战斗中助你的随从。1分钟内，你获得一名召唤随从，可为你携带物品并随时为你交换它们。当你使用此动作和持续期间每回合，你的随从获得仅可用于交互以为你抽出、收纳或交换你所拥有物品的单一动作。如使用「精魂随从」时咒缚2，你的随从可选择以其交互动作授予你+1环境加值至护甲等级（至下回合开始）以保护你，而非用于抽出、收纳或交换物品；如咒缚3，则随从可以同一交互动作同时授予两个效果。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.t3fbScIIFlfyffRK]{效果：精魂侍从}</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗秘示域"
+                }
+            ]
+        },
+        "Curse of Countless Fates": {
+            "name": "无尽命数之咒 Curse of Countless Fates",
+            "description": "<p>当你愈加凝望未来时，巨大压力降临于你，使你愈加无助地难以从眼前无穷之可能性中移开视线。你的双眼为乳白色，或拥有第三只总是向前看的眼，或独眼巨眼，或一条不能取下的眼罩，或其他影响双眼之效果。</p><p><strong>咒缚1</strong> 你@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭}。仅在咒缚值1或更高时持续。</p><p><strong>咒缚2</strong> 你在察觉检定与对抗死亡效果之豁免上承受–1状态减值，因未来的幻象使你不堪重负。</p><p><strong>咒缚3</strong> 你@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭}。仅在咒缚值3或更高时持续。</p><p><strong>咒缚4</strong> 你的察觉与对抗死亡效果之豁免状态减值提升至–2。</p>"
+        },
+        "Ominous Threats": {
+            "name": "凶险威胁 Ominous Threats",
+            "description": "<p>你的言语带有神秘之重。你使用[[/act demoralize]]，但失去听觉特征，且因不共享语言而不承受减值，因为你向个体心智发送凶险幻象。你的检定获得状态加值，等于你的咒缚值。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓精专"
+                }
+            ]
+        },
+        "Wooden Engulfment": {
+            "name": "木之吞噬 Wooden Engulfment",
+            "description": "<p>你从地面长出一棵树，以其枝干抓住你的敌人。你在指定区域创造一棵树，区域内生物立即移至他们能占据的相邻方格。该树高[[/r 40 + (@item.level - 6) *5]]尺，具[[/r 60 + (@item.level - 6) *10]]生命值、护甲等级[[/r 30 + (@item.level - 6) *3]]、15尺触及，并永久@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}。</p><p>当你首次施放法术与每次维持法术时，你可对树触及范围内的目标进行法术攻击检定，对抗反射DC。如成功，目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒}至下回合结束；如大成功则@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚}。被树受擒或束缚的生物可尝试[[/act escape]]，其他生物可尝试[[/act force-open]]为受擒或束缚生物解困——皆使用你的法术DC作为DC。该树使用并计入你的多重攻击减值。</p><p>如树位于土壤中且存活至法术结束，则保留为普通的非魔法树并继续生长。GM可裁定在某些不利情形下树立即消失。</p><hr /><p><strong>提升（+1）</strong> 树高增加5尺，生命值增加10，护甲等级增加3。</p>"
+        },
+        "Charm": {
+            "name": "护符 Charm",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Charm.CuriosForm]</p>"
+        },
+        "Finery": {
+            "name": "华饰 Finery",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Finery.CuriosForm]</p>"
+        },
+        "Curio Adept": {
+            "name": "奇物行家 Curio Adept",
+            "description": "<p>神器力量增长，你也随之增长。你按你奇物之选择获得相关效益。</p>"
+        },
+        "Utensil": {
+            "name": "器皿 Utensil",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Utensil.CuriosForm]</p>"
+        },
+        "Impossible Mysteries": {
+            "name": "不可能秘示域 Impossible Mysteries",
+            "description": "<p>你已对你的秘示域达到近乎完全的启明，却又揭示更多疑问。每日准备时，你获得一项咒缚先知专长——即便其前提条件需要不同秘示域。你可使用该咒缚动作至下次每日准备。</p>"
+        },
+        "Curse of Vengeful Darkness": {
+            "name": "复仇之暗之咒 Curse of Vengeful Darkness",
+            "description": "<p>黑暗永远索取你，将你藏入光之外，以其包裹之拥抱笼罩你。在你存在时，光似乎不再明亮；即便在光线下，你的影子仍显无尽幽黑。咒缚期间处于明亮或昏暗光线时，你的影子袭击你的躯体，造成@Damage[(@actor.conditions.cursebound.value)[bleed,persistent]|immutable]{等于咒缚值的持续流血伤害}（处于明亮光线时为@Damage[(2 * @actor.conditions.cursebound.value)[bleed,persistent]|immutable]{两倍咒缚值}）。处于黑暗时，你立即停止持续流血伤害；相反，你的影子依附于黑暗，使你所有速度承受–5尺状态减值（咒缚2时为–10尺，咒缚3或更高时为–15尺）。该状态减值若你正骑乘则适用于坐骑。当你开始重新专注以缓解诅咒或失去意识时，影子恢复平静；若重新专注被打断或你恢复意识，影子之行为恢复。</p><hr /><p><strong>Foundry注</strong> 使用@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.hqKL2q7hc3FvRlBY]{效果：复仇黑暗之诅咒（坐骑减值）}追踪坐骑的速度减值。</p>"
+        },
+        "Curse of the Eternal Banquet": {
+            "name": "永恒盛宴之咒 Curse of the Eternal Banquet",
+            "description": "<p>你可在庆祝与喜悦中陷得太深，使放松感到不悦甚至可怕。你所穿之色彩在他人看来更为生动鲜艳，美味之气在你周围萦绕，使你更易被压倒和影响。</p><p><strong>咒缚1</strong> 食用可致感官失控。你获得毒素弱点2，具嗅觉特征且以你为目标之效果触发此弱点。你对此类法术与效果之免疫或抗性被压制。</p><p><strong>咒缚2</strong> 以宽臂迎接生命之恩。你不视任何人为敌，直至他们对你采取敌对动作（虽然他们仍可能视你为敌）。你不能以这等生物为敌对效果之目标或将其包含于敌对区域内，除非该区域至少包含一个敌人。</p><p><strong>咒缚3</strong> 你的毒素弱点等于5+你的等级。</p><p><strong>咒缚4</strong> 迷醉令人不堪重负。你措手不及，并在对抗情绪效果之豁免上承受–2状态减值。</p>"
+        },
+        "Vision of the Long Odyssey": {
+            "name": "漫长征途之幻象 Vision of the Long Odyssey",
+            "description": "<p>你的幻象向你展示一个你必须抵达的远方之地。宇宙先知或许看见广阔红沙沙漠中的城堡；狂欢先知或许看见洞穴顶端如阴森钟乳石般倒挂之城。</p><p><strong>替代领域</strong> 旅行</p><p><strong>替代授予法术</strong> 3阶：@UUID[Compendium.pf2e.spells-srd.Item.ThE5zPYKF4weiljj]{指南术}</p><p><strong>授予技能</strong> 特技</p><p><strong>幻象态</strong> 遭遇战首回合及每次使用咒缚动作后，你可作为免费动作快步。遭遇战首回合后，若结束某回合时未使用移动动作或咒缚动作，咒缚值+1（至最大值）。</p><p><strong>觉醒态</strong> 你可在每回合结束时作为免费动作快步。如咒缚值为3，可快步至多10尺。如咒缚值为4，还获得@UUID[Compendium.pf2e.spells-srd.Item.aqRYNoSvxsVfqglH]{行动无碍}之效果。</p>"
+        },
+        "Snuff Out": {
+            "name": "熄灭 Snuff Out",
+            "description": "<p>你召唤内在黑暗以熄灭蔓延的光。你立即尝试@Check[counteract|statistic:spell]30尺内的光源，如该光源为非魔法则自动成功。你以法术攻击调整值作为对抗调整值，并在检定上获得环境加值，等于你的咒缚值。</p><p>你可选择以具光特征或处于光效果下的生物代替光源为目标，造成@Damage[(@actor.level)d6[void]]虚空伤害（基础@Check[fortitude|basic]豁免），而非常规效果。受此效果影响的生物之后1分钟内暂时免疫。7级及以上每等级，虚空伤害增加1d6。</p>",
+            "prerequisites": [
+                {
+                    "value": "幽暗秘示域"
+                }
+            ]
+        },
+        "Share Mystery": {
+            "name": "共享秘示域 Share Mystery",
+            "description": "<p>你可与他人分享秘示域，以咒缚换取力量。每日准备时，选择一项具咒缚特征的1级先知专长以及一名当前与你同行的盟友。该盟友可使用所授予的咒缚动作，但出于所有目的使用你的咒缚值确定结果，并提升你的咒缚状态——犹如动作由你自己使用。你须愿意让盟友使用此咒缚动作，且你须能使用咒缚动作，否则动作自动失败。</p>"
+        },
+        "Self-Stitching Wounds": {
+            "name": "自缝伤口 Self-Stitching Wounds",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你的咒缚值为2或更高，且你于遭遇战中保持清醒。</p><hr /><p>你的躯体在战火中不会破碎。只要你满足需求，便获得快速治疗，等于4×你的咒缚值。</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗秘示域"
+                }
+            ]
+        },
+        "Inevitable Fate": {
+            "name": "必至之运 Inevitable Fate",
+            "description": "<p><strong>触发</strong> 一名生物将使用具幸运或厄运特征的动作或活动。</p><hr /><p>命运的必至无可争辩；当一人试图扭转其趋势时，便能轻易将其归回时间之轨。如触发动作或活动具幸运特征，生物须以@Check[will|against:spell]豁免对抗你的法术DC，否则触发动作获得厄运特征。如触发动作或活动具厄运特征，则获得幸运特征。如同时具幸运与厄运特征之效果之常规——这会抵消效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "预言秘示域"
+                }
+            ]
+        },
+        "Harrowing Vision": {
+            "name": "惊悚幻象 Harrowing Vision",
+            "description": "<p>你向敌人心智植入惊悚幻象，使其因你盟友带来的威胁而分心。在你30尺内选择一名敌人并指定一名盟友，向敌人发送你的盟友伤害他的幻象。只要你的盟友在敌人触及范围内，敌人就对你@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}至下回合开始或所选盟友伤害敌人。目标之后1天内暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "梦境秘示域"
+                }
+            ]
+        },
+        "Melt In Sunlight": {
+            "name": "日下融化 Melt In Sunlight",
+            "description": "<p><strong>领域</strong> 太阳（秘传）</p><p><strong>触发</strong> 你将承受火焰伤害或成为具火焰特征效果的目标。</p><hr /><p>当火焰灼烧你的躯体时，你像日下融化的蜡般滑流向前。你成为一摊变形液体。失去任何护甲等级物品加值与所有其他护甲效果与加值，以熟练加值作为无甲防御。你获得对物理伤害的8抗性并对精准伤害免疫。你不能施法、激活物品或使用具攻击或操作特征之动作。你可滑过狭小裂缝。你可解除该法术。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.5zI6wMVYamcEwbiU]{效果：融化于阳}</p>"
+        },
+        "Beast": {
+            "name": "野兽 Beast",
+            "description": "<p>所有渴求之物皆出自野兽，你也无异。或许你在某座祭祀怪物的圣坛有过神秘际遇；或许你来自一支将狼人尊为神圣守护者的民族（如奥尔芬人）。萨克里安诸神或像拉玛什图、秃鹫之母这等怪兽神祇最可能眷顾你——或在你怨恨己力时给予恩怒。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.MPxbKoR54gkYkqLO]{穿凿尖爪}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.aEM2cttJ2eYcLssW]{迅捷步}</li><li><strong>2阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{动物形态}</li><li><strong>5阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.YtesyvfAIwXOqISq]{月狂}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.yCoJlIIopuCPi4Vw]{野兽之躯}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Ktv8fnq0j7x4VeFX]{可怖之巨}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.XGmpxQgckt6aRUxm]{野兽之嗥}</li></ul><p><strong>相关领域</strong> 改变、毁灭、月、自然</p><p><strong>秘示域技能</strong> 威吓</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.yiPogNDpDqAXlqTJ]{因苦而坚}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.Dx34xI1uRFS6bJmS]{怪物变形之咒}</p>"
+        },
+        "Tenuous Threads": {
+            "name": "脆弱丝缕 Tenuous Threads",
+            "description": "<p>另一人之命运如长袍之线般被拉扯纠缠。在你30尺内选择数量等于2加你咒缚值两倍（[[/r 2 + 2 * @actor.conditions.cursebound.value]]）的生物。这些生物须以@Check[will|against:spell]豁免对抗你的法术DC。你可命令目标按命运之方向接近你、远离（如同@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑}状态）、释放所持物、@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{倒地}或站立原地。每个目标可被给予不同方向，目标可选择不遵从方向，但根据其豁免承受减值。</p><p><strong>成功</strong> 生物不受影响。</p><p><strong>失败</strong> 生物须以下回合首动作遵从方向，否则因偏离命运而受罚。如不遵从，下回合一次攻击检定或豁免须掷两次取较差结果，至下回合结束。</p><p><strong>大失败</strong> 目标须以下回合所有动作遵从方向。如不遵从，下回合所有攻击检定与豁免须掷两次取较差结果，至下回合开始。</p>",
+            "prerequisites": [
+                {
+                    "value": "预言秘示域"
+                }
+            ]
+        },
+        "Oracle's Eyes": {
+            "name": "先知之眼 Oracle's Eyes",
+            "description": "<p>你的双眼异乎寻常，被你的秘示域所隐蔽。与他人所信相反，这澄清了你的视野而非隐蔽，你可与他人分享此视野。在30尺内选择一项具幻象特征的效果尝试对其进行对抗检定，借你的双眼向他人传递视觉。或者，你可瞄准一只生物，尝试对抗影响该生物的下列状态之一：@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲}、@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}、@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}或@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形}。当以此动作瞄准生物时，你自动通过隐形所致硬性检定。你以法术攻击检定调整值作为对抗调整值。</p>"
+        },
+        "Spread Disease": {
+            "name": "散播疾病 Spread Disease",
+            "description": "<p><strong>触发</strong> 你或30尺内一名生物呕吐以解除恶心状态。</p><hr /><p>当你咳嗽与喷溅时，灵魂中的腐朽蔓延。在触发生物30尺内选择另一只生物。目标须以@Check[fortitude|against:spell]豁免，失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心}，大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心}。</p>",
+            "prerequisites": [
+                {
+                    "value": "腐疫秘示域"
+                }
+            ]
+        },
+        "An Opening is Revealed": {
+            "name": "破绽显现 An Opening is Revealed",
+            "description": "<p>当你的警告倾斜战局时，你的盟友便能相应回应。如你预见光环内的生物对处于揭示秘示域效果下的盟友进行攻击检定失败，则该生物对你的盟友@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}至盟友下回合结束。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "Wielder of Mysteries": {
+            "name": "秘示域使者 Wielder of Mysteries",
+            "description": "<p>神器达至力量巅峰，深化你秘示域的力量。你按你奇物之选择获得相关效益。</p>"
+        },
+        "Weapon Trance (Team+)": {
+            "name": "武器入定（Team+） Weapon Trance (Team+)",
+            "description": "<p>暴力之安宁充满你的心智，赋予你对武器所应在之处的高度直觉。在持续期间，你于目标武器之熟练度等于你于简易武器之熟练度，或如目标武器为高级则等于军用武器之熟练度。每轮首次以目标武器尝试打击时，你自动以免费动作维持此法术。如咒缚值为2，法术激活期间你于目标武器打击上获得+1状态加值；如咒缚值为3或更高则为+2。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.gE9AYanWhpYxENBk]{法术效果：武器入定（}</p>"
+        },
+        "Freezing Cold": {
+            "name": "凛冽寒冷 Freezing Cold",
+            "description": "<p><strong>区域</strong> 2或更多相邻方格，其中之一须与你相邻</p><hr /><p>你从指尖喷出冰片。寒冷造成1d6寒冷伤害，区域成为冰冻飞舞之困难地形。</p><p><span class=\"action-glyph\">1</span> 相邻方格数为2，困难地形持续1轮。</p><p><span class=\"action-glyph\">2</span> <strong>（专注）</strong> 相邻方格数为4，困难地形持续2轮。</p><p><span class=\"action-glyph\">3</span> <strong>（专注）</strong> 相邻方格数为6，困难地形持续3轮。</p>"
+        },
+        "The Question Remains": {
+            "name": "疑问仍存 The Question Remains",
+            "description": "<p>很少有人像你一样深刻理解秘示域之真相，以致你已成为你神秘焦点的化身。当你的咒缚状态会上升时，可改为将@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭}值+1。可多次进行，但即使毁灭值将濒死值降至0，你也不会死。如你获得濒死状态且毁灭值常规会致你死亡，你立即死亡。</p><p>你保持此毁灭等级直至休息8小时。当你以此方式死亡时，你立即施放@UUID[Compendium.pf2e.spells-srd.Item.ion3VOiLan6ga3QC]{征服之兵}——你秘示域的显化拥入战场。你保持存活至法术之离开动作进行，并随它们离开以加入你的秘示域本质。</p>"
+        },
+        "Speak in Tongues": {
+            "name": "通晓万言 Speak in Tongues",
+            "description": "<p>你的秘示域赋予超越语言之清明。当你咒缚值上升时，可选择临时习得一种语言（咒缚期间持续）；但若如此，则咒缚期间你只能讲从此效果习得之语言。当你不再咒缚时立即失去这些语言。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.t5NWv8KZClPjc0CE]{效果：异言能语（获得一种语言）}</p>"
+        },
+        "Astronomical Body": {
+            "name": "天体之躯 Astronomical Body",
+            "description": "<p><strong>触发</strong> 你将承受物理伤害。</p><hr /><p>你的躯体成为空间之缺，充满远星与异界的幻象。你将触发伤害减少你等级加你咒缚值，并从触发伤害源向后移动[[/r 5 * @actor.conditions.cursebound.value + 0 #尺]]尺。此为强制移动。</p>",
+            "prerequisites": [
+                {
+                    "value": "宇宙秘示域"
+                }
+            ]
+        },
+        "Light": {
+            "name": "光 Light",
+            "description": "<p>光不仅是火焰之存在；它是黑暗的驱散者、真理的揭示者、来自太阳本身的生命之物的承载者。你内中充满它，如一颗小恒星，但它愈明亮，愈灼伤你。你或许通过萨伦蕾、达杰穆贝，或直接从造物熔炉本身找到引导之光。只要你的心还在跳动，光便会从你内中明亮闪耀。</p><p><strong>授予法术</strong></p><ul><li><strong>戏法：</strong> @UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]{光亮术}</li><li><strong>1阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.m1vKX4xxWQJXfupu]{微光轨迹}</li><li><strong>3阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.HWrNMQENi9WSGbnF]{辉墙术}</li><li><strong>4阶：</strong> @UUID[Compendium.pf2e.spells-srd.Item.ba1RyDpwq6tfW8VM]{圣光披风}</li></ul><p><strong>启示法术</strong></p><ul><li><strong>初始：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.WKktrOEvO2Hm9TF2]{光线}</li><li><strong>高级：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.pMw9249YMITuj2Y9]{力之棱镜}</li><li><strong>更高：</strong>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.On86WPSyTK9jPkGS]{神圣食日}</li></ul><p><strong>相关领域</strong> 治疗、起源、太阳、真理</p><p><strong>秘示域技能</strong> 奥秘</p><p><strong>先知专长</strong> @UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.wZz04xU4HejpGTd4]{星界白日梦}</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.items.Item.D6A4gMTyEDDV1Fhq]{不可能光辉之咒}</p>"
+        },
+        "Weapon": {
+            "name": "武器 Weapon",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Weapon.CuriosForm]</p>"
+        },
+        "Comfort of Struggle": {
+            "name": "挣扎之慰 Comfort of Struggle",
+            "description": "<p><strong>需求</strong> 自上回合开始以来你受到过伤害。</p><hr /><p>你不仅期待痛苦，还在其中找到慰藉。你下次回合结束前进行的法术攻击检定获得+1状态加值，或60尺内一名敌人对你下次施放法术之豁免承受–1状态减值。如使用「挣扎之慰」时咒缚2，状态加值与减值各提升至2；咒缚3时各提升至3。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.a1kOX7I3kKodRyqr]{效果：挣扎之慰}</p>"
+        },
+        "Script": {
+            "name": "经文 Script",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Script.CuriosForm]</p>"
+        },
+        "Rainbow Beam": {
+            "name": "彩虹光束 Rainbow Beam",
+            "description": "<p>你利用所有光的辉煌，向敌人发出一道光谱爆。对你30尺内一名生物进行@Check[spell|against:ac]{法术攻击检定}。如成功，造成@Damage[(@actor.level)d4[fire]]伤害（大成功时双倍）。11级及之后每等级，光束伤害+1d4。掷[[/r 1d8 #额外效果]]按下表确定额外效果。</p><table class=\"pf2e\"><thead><tr><th style=\"width:10%\"><p>掷骰</p></th><th style=\"width:10%\"><p>颜色</p></th><th><p>效果</p></th></tr></thead><tbody><tr><td><p>1</p></td><td><p>红</p></td><td><p>造成额外持续火焰伤害，等于2加咒缚值两倍。@Damage[(2 + 2 * @actor.conditions.cursebound.value)[fire,persistent]]</p></td></tr><tr><td><p>2</p></td><td><p>橙</p></td><td><p>击倒目标。</p></td></tr><tr><td><p>3</p></td><td><p>黄</p></td><td><p>目标被推[[/r 5 + 5 * @actor.conditions.cursebound.value]]尺。</p></td></tr><tr><td><p>4</p></td><td><p>绿</p></td><td><p>目标@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心}，等级为1加你的咒缚值。</p></td></tr><tr><td><p>5</p></td><td><p>蓝</p></td><td><p>目标@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}，持续轮数为1加你咒缚值一半。生物可在每回合开始时尝试豁免，成功则结束瘫痪。</p></td></tr><tr><td><p>6</p></td><td><p>靛</p></td><td><p>目标@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}，持续轮数为1加你咒缚值一半。</p></td></tr><tr><td><p>7</p></td><td><p>紫</p></td><td><p>目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢}，持续轮数为1加你咒缚值一半。</p></td></tr><tr><td><p>8</p></td><td><p>任意</p></td><td><p>选择一种颜色并获得对应效果。</p></td></tr></tbody></table>",
+            "prerequisites": [
+                {
+                    "value": "梦境秘示域，或光秘示域"
+                }
+            ]
+        },
+        "Enchanting Rhapsody": {
+            "name": "魅惑狂想曲 Enchanting Rhapsody",
+            "description": "<p>你以音乐影响敌人，让其依你心意行事。位于初始区域内或于该区域内结束回合的敌人须进行一次意志豁免。</p><p><strong>大成功</strong> 目标不受影响，并在 1 分钟内暂时免疫。</p><p><strong>成功</strong> 目标对心灵效果之豁免承受 –1 状态减值，直至其离开该区域并继续 1 轮。@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.xw2Z41yDSg7JW4hb]{效果：魅惑狂想曲}</p><p><strong>失败</strong> 同成功，但目标在离开该区域之前及离开后 1 轮内 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}，且状态减值提升至 –2。</p><p><strong>大失败</strong> 同失败，但目标须于其每个回合的第一动作执行 [[/act perform variant=dance]] 随音乐起舞，持续到不再迷魂为止。</p>"
+        },
+        "Escape Time's Shackles": {
+            "name": "逃离时之桎梏 Escape Time's Shackles",
+            "description": "<p>你加速自身的时间气泡，使时间于你身上更快流逝。你的躯体向时间前方推进，使 1 分钟时间于你身上有效流逝。任何带有持续时间的效果或状态立即缩短 1 分钟。如同时间已经流逝那般，正常掷出豁免、平稳检定、伤害以及那些效果的任何其他掷骰。若你的咒缚值为 2，则使 1 小时时间流逝；若你的咒缚值为 3，则使 1 天时间流逝。「逃离时之桎梏」不会移除咒缚状态，亦不允许你再次休息或进行每日准备。</p>",
+            "prerequisites": [
+                {
+                    "value": "时间秘示域"
+                }
+            ]
+        },
+        "Wishful Thinking": {
+            "name": "如愿之思 Wishful Thinking",
+            "description": "<p>你以让难以置信成为可能来协助盟友。在你30尺内选择一名盟友，影响其心智使其相信自己能做不可能之事——选定下列效果之一为其授予梦境之特殊能力。法术效果持续至效果结束，但你须于每回合结束时以@Check[deception|against:will|options:wishful-thinking-deception]检定对抗目标的意志DC，否则法术立即结束。如你的法术攻击调整值更高，可使用其代替欺诈调整值。</p><ul><li><p>目标对攻击检定与豁免获得+1状态加值。</p></li><li><p>目标对你所选特定技能的检定获得+2状态加值。</p></li><li><p>目标获得30尺攀爬速度与30尺范围之不精确嗅觉。</p></li><li><p>目标获得30尺游泳速度与水下呼吸能力。</p><hr /></li></ul><p><strong>提升（6阶）</strong> 状态加值增加1，且可选择给目标30尺飞行速度作为另一选项。</p><p><strong>提升（9阶）</strong> 可选择两项效果代替一项。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.k7Hqre7oOIR6gInb]{效果：一厢情愿}</p>"
+        },
+        "Unknowable Icon": {
+            "name": "不可知图腾 Unknowable Icon",
+            "description": "<p><strong>领域</strong> 字图（伪经）</p><hr /><p>你将远古而被遗忘的知识抄录于一道符文之中，能压垮并粉碎心智。你将一道符文置于你触及范围内一处 5 尺方格的平面上，此符文保持休眠，直到你以外的一名活物进入其 10 尺范围内。生物进入 10 尺范围 1 轮后，符文激活，符文 10 尺弥漫光环内的所有生物须尝试一次基础意志豁免，否则承受 1d12 心灵伤害与 1d4 灵魂伤害。大失败时，该生物另获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。</p><hr /><p><strong>高阶 (+1)</strong> 伤害增加 1d12 心灵与 1d4 灵魂。</p>"
+        },
+        "Feel My Pain": {
+            "name": "感我之痛 Feel My Pain",
+            "description": "<p><strong>触发</strong> 你受到持续伤害。</p><hr /><p>当痛苦施加于你时，你将之分予他人。选择 30 尺内一名生物。该生物须以你的法术 DC 尝试一次 @Check[will|against:spell] 豁免，若失败则承受与你相同的持续伤害。</p>",
+            "prerequisites": [
+                {
+                    "value": "幽暗秘示域，或寒冰秘示域"
+                }
+            ]
+        },
+        "Well of Joy": {
+            "name": "欢欣之井 Well of Joy",
+            "description": "<p>你以对未来的希望充盈一名盟友，赐予他们焕然一新的活力与欢愉。选择 30 尺内一名生物。所选生物在 1 分钟内获得 4 点临时生命值。当你使用「欢欣之井」时若你处于咒缚 1 级，该生物获得 8 点临时生命值；若处于咒缚 2 级，则为 16 点临时生命值；若处于咒缚 3 级，则为 24 点临时生命值。此外，在拥有临时生命值期间，他们对恐惧效果免疫。若该生物处于 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态，则该状态被中止，直至其不再拥有临时生命值；中止结束后，惊惧以中止时的相同等级恢复。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.2G2KHpPCP3VZggC9]{效果：欢乐之井}</p>"
+        },
+        "Curse of the Everpresent Sonata": {
+            "name": "永驻奏鸣之咒 Curse of the Everpresent Sonata",
+            "description": "<p>无论怎样努力，你都无法逃脱跟随你的歌；压力之时它愈发响亮，最终成为你能听见的一切。当你移动、欢笑或言语时，有时可听见微弱的乐器伴奏，你所做的一切都几乎具有节奏。咒缚时，乐声膨胀，成为你所能听见的一切。</p><p><strong>咒缚1</strong> 歌声开始演奏，吸引其他声音如管弦乐之乐器。你获得音波弱点2，具听觉特征且以你为目标之敌对效果触发此弱点。</p><p><strong>咒缚2</strong> 乐声压倒你其他感官。你在察觉检定与对抗听觉效果之豁免上承受–2状态减值。</p><p><strong>咒缚3</strong> 你的音波弱点等于5+你的等级。</p><p><strong>咒缚4</strong> 歌声吞噬一切。当你尝试施放无听觉或音波特征之法术时，你须以@Check[flat|dc:10]检定，否则失去该法术。</p>"
+        },
+        "Vision of the Weeping Heart": {
+            "name": "泣心之幻象 Vision of the Weeping Heart",
+            "description": "<p>你的幻象向你展示一场你尚未解读的悲剧，但你或许有力量去修复它。寒冰先知或许看见暴雪中的角猿，发现自己为之哭泣；森林先知或许看见一名公主胸口被一巨大鬼火拔出之剑。</p><p><strong>替代领域</strong> 安息</p><p><strong>替代授予法术</strong> 1阶：@UUID[Compendium.pf2e.spells-srd.Item.szIyEsvihc5e1w8n]{慰藉}</p><p><strong>授予技能</strong> 外交</p><p><strong>幻象态</strong> 你必须治愈破碎者之伤——即使他们不情愿。你获得@UUID[Compendium.pf2e.actionspf2e.Item.tuZnRWHixLArvaIf]{救赎一瞥}圣骑士反应，但授予盟友的抗性减2。如超过1轮未使用救赎一瞥，咒缚值+1（至最大值）。出于救赎一瞥之考量，你的圣骑士光环范围为5尺加5尺×咒缚值。6级时，救赎一瞥授予完整抗性。</p><p><strong>觉醒态</strong> 你可选择使因救赎一瞥而拒绝救赎之敌人@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞}（而非力竭2级），持续相同时间。如咒缚值为3，敌人若拒绝则承受@Damage[(@actor.abilities.cha.mod)[spirit,persistent]]{等于你魅力调整值}的灵魂持续伤害。如咒缚值为4，每回合获得仅可用于救赎一瞥的额外反应。</p>"
+        },
+        "Foreseen Retaliation": {
+            "name": "预见反击 Foreseen Retaliation",
+            "description": "<p>你的预见之力不仅护佑你的盟友，还能让其以同样方式反击。当你在「秘示域渐长」的益处下使用「揭示秘示域」时，你赐予盟友相同的状态加值至其对你「奇物预见」目标进行的打击之伤害。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.z1p6jvxvqmks2kU9]{效果：先知反击}</p>",
+            "prerequisites": [
+                {
+                    "value": "秘示域渐长"
+                },
+                {
+                    "value": "揭示秘示域"
+                }
+            ]
+        },
+        "Curio's Form": {
+            "name": "奇物形态 Curio's Form",
+            "description": "<p>当你融入战斗形态时，你的奇物仍可使用。当你进入战斗形态时，你保留使用依赖于奇物效果（如奇物预见）的能力。处于战斗形态时，你按奇物获得以下效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "Armament": {
+            "name": "军械 Armament",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Armament.CuriosForm]</p>"
+        },
+        "Purge Sickness": {
+            "name": "净化病恙 Purge Sickness",
+            "description": "<p><strong>需求</strong> 你处于恶心状态。</p><hr /><p>你的肉身已习惯被诅咒摧残，故其他此类后果可轻易摆脱。你呕吐以降低恶心状态，并获得等同你咒缚值的状态加值至你解除此状态的检定。若你使用「净化病恙」时处于咒缚 2 级，则你的成功程度提高一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "野兽秘示域，或腐疫秘示域"
+                }
+            ]
+        },
+        "Tectonic Fracture": {
+            "name": "构造断裂 Tectonic Fracture",
+            "description": "<p>你以悠长凝视见出世界最脆弱之处并使之崩裂。你重踏地面，于 @Template[cone|distance:15] 内造成困难地形，区域内生物须尝试一次 @Check[reflex|against:spell] 豁免。当你使用「构造断裂」时若你处于咒缚 2 级，则区域改为 @Template[cone|distance:30]；若处于咒缚 3 级，则改为 @Template[cone|distance:45]。</p><p><strong>成功</strong> 该生物不受影响。</p><p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}，至你下一回合开始为止。</p><p><strong>大失败</strong> 该生物被击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。</p>",
+            "prerequisites": [
+                {
+                    "value": "山岳秘示域"
+                }
+            ]
+        },
+        "Atavistic Landslide": {
+            "name": "返祖崩塌 Atavistic Landslide",
+            "description": "<p>万物终随时间而崩塌，纵是亘古之山岳，但你却能扛过。在 1 分钟内每回合结束时，你创造一阵由碎石与巨砾构成的塌方，于 @Template[line|distance:35] 内移动；不过，该线形以你为中点穿过，两侧各有相等长度的线形。该塌方对区域内所有生物以 @Check[reflex|basic|agaist:spell] 豁免造成 @Damage[1d10[bludgeoning]|basic] 伤害；豁免大失败的生物另被击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。你不能驱散此塌方，但可以维持动作于 1 轮内压制此效果。若你失去意识，则塌方被压制。若在「返祖崩塌」持续期间内你的咒缚值变为 3 或 4，线形增大至 @Template[line|distance:55]，伤害提升至 @Damage[2d10[bludgeoning]|basic]。</p>",
+            "prerequisites": [
+                {
+                    "value": "山岳秘示域"
+                }
+            ]
+        },
+        "Glimpse Future": {
+            "name": "瞥见未来 Glimpse Future",
+            "description": "<p>纵然你的双眼无法让你看清周围一切，它们却向你展现即将到来的景象。你以你的法术攻击调整值替代检定，对你 30 尺内单一生物执行一次 [[/act recall-knowledge statistic=spell options=glimpse-future]]，对照该生物等级的标准 DC，但大失败视作失败，且检定失去秘密特征。若你的检定成功，你可选择令目标在你下回合开始前对其下一次攻击掷骰或豁免承受 –2 状态减值。无论结果如何，目标在 1 小时内对「瞥见未来」暂时免疫。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.13dAWN3gcT3uqOBw]{效果：未来一瞥}</p>"
+        },
+        "Show to Remember": {
+            "name": "记忆之示 Show to Remember",
+            "description": "<p>你以无可压制的喧嚣充塞生物之心智，使其失序。选择 30 尺内一名生物，该生物须尝试一次 @Check[will|against:spell] 豁免。</p><p><strong>大成功</strong> 该生物不受影响。</p><p><strong>成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级} 且 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级} 1 轮。</p><p><strong>失败</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级} 且 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级} 1 分钟。该生物可花费一个具专注特征的动作以重新尝试一次意志豁免对抗此效果。</p><p><strong>大失败</strong> 同失败，但该生物在呆滞期间额外 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1级}。</p>",
+            "prerequisites": [
+                {
+                    "value": "狂欢秘示域，或歌秘示域"
+                }
+            ]
+        },
+        "Dance, Dance": {
+            "name": "舞，舞，舞 Dance, Dance",
+            "description": "<p>你的乐音淹没两名相邻生物的心智，迫使其随节拍移动。选择 30 尺内两名彼此相邻的生物。两名生物均须尝试一次 @Check[will|against:spell] 豁免，但确定效果结果时，两者使用其中较好的结果。若你选择一名自愿盟友作为目标之一，则其可选择不掷骰直接得到失败结果，但其移动会正常触发非该效果目标之生物的反应。</p><p><strong>大成功</strong> 两名生物不移动，自愿盟友被乱步击 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。</p><p><strong>成功</strong> 两名生物随之起舞，向你所选方向移动 5 尺，并保持彼此相邻。此为强制移动。</p><p><strong>失败</strong> 同成功，但两名生物移动至多 10 尺，整段移动期间保持彼此相邻。</p>",
+            "prerequisites": [
+                {
+                    "value": "歌秘示域"
+                }
+            ]
+        },
+        "Prism of Power": {
+            "name": "力之棱镜 Prism of Power",
+            "description": "<p>你召唤一具无形的魔法棱镜，与魔法的交互方式如同光线一般。你于射程内创造一具占据 @Template[square|distance:5] 方格的棱镜。当你创造该棱镜时，选择以下选项之一。</p><ul><li><p><strong>分光</strong> 魔法进入棱镜后被分解为光谱。若一道线形法术进入棱镜区域，该区域从线形改为锥形，其大小等于线形法术进入棱镜前在同方向上剩余可行进尺数的一半（最少 5 尺）。</p></li><li><p><strong>折射</strong> 进入棱镜的魔法可改变方向，甚至可绕过转角。若一次法术攻击以棱镜为目标，或一道线形法术穿过其空间，且如此做并不需要法术全部射程，则其可改变方向。请以棱镜为起点确定该法术之效果线与视野线，并判定生物对该法术是否具备掩蔽。该法术可超出自你测量的正常射程，只要其仍在自棱镜测量的正常射程内即可。</p></li><li><p><strong>散射</strong> 魔法被驱散并向棱镜周围反射。你以棱镜为法术攻击目标即可同时以 2 名生物为目标，目标须为棱镜 5 尺内之至多 2 名生物。就法术攻击掷骰而言，你只投掷一次法术攻击掷骰，并将结果与两名生物的 AC 比较。</p></li></ul>"
+        },
+        "Accursed Flame Form": {
+            "name": "咒缚火焰形态 Accursed Flame Form",
+            "description": "<p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你让圣火吞噬自身，化身为一具燃烧之怪物。你获得 @UUID[Compendium.pf2e.spells-srd.Item.1K6AYGisvo9gqdhs]{元素形态} 的效果，并高位至你能施放的最高环级法术。你必须选择一种具有火焰特征的元素形态。</p><p><strong>特殊</strong> 若你具备 @UUID[Compendium.pf2e-team-plus-magic.items.bK4rp20XuJRWGsEv]{元素变形}（Magic+），你可改为获得「元素变形」的效果（高位至你能施放的最高环级法术），且你必须选择火焰元素层面。</p>",
+            "prerequisites": [
+                {
+                    "value": "火焰秘示域"
+                }
+            ]
+        },
+        "Reverse Movement": {
+            "name": "逆转移动 Reverse Movement",
+            "description": "<p>你折射时间，借此跨越长距离后再返回起点。你以你形态的虚像标记当前位置，并于移动时留下半透明的自身影像，持续轮数等同于 1 加上你咒缚值（[[/r (1+ @actor.conditions.cursebound.value )#rounds]]），追溯至你首次使用此动作的空间。在此期间，你可使用「逆转移动」自由动作。使用「逆转移动」之后，此效果结束。</p><p><strong>逆转移动</strong> <span class=\"action-glyph\">f</span>（神圣自然、先知、传送）</p><hr /><p><strong>效果</strong> 你与你的影子在一阵黑暗爆发中互换位置。你于你与影分身位置周围 15 尺弥漫光环内创造魔法黑暗，持续至你下回合结束。当你使用此动作时可选择与影子互换位置，若如此做，该法术获得传送特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "时间秘示域"
+                }
+            ]
+        },
+        "Spirit Steps": {
+            "name": "精魂之步 Spirit Steps",
+            "description": "<p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你的躯体化为外质，让你呈半透明形态，可见骨骼与束缚于大地的链条。在 1 分钟内你获得非实体特征，并对所有伤害（灵魂、生命力或鬼触除外）获得等同你咒缚值两倍之抗力，但你不能穿过实心物体或墙壁。当你使用「精魂之步」时若咒缚值为 3，则你处于非实体形态期间可穿过实心物体（包括墙壁）。当你处于物体之中时，你无法察觉、攻击或交互物体之外的任何事物；若你以物体内开始回合，则在该回合结束前 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1级}。你与实体生物可彼此穿过，但你们均不能在对方所在空间结束移动。若此效果结束时你位于实心物体或墙壁所在区域，则你被推送至最近可占据空间，并承受 @Damage[(@actor.level)[spirit]]{等同你等级的灵魂伤害}。</p>",
+            "prerequisites": [
+                {
+                    "value": "骨骸秘示域"
+                }
+            ]
+        },
+        "Preparatory Cremation": {
+            "name": "火化预备 Preparatory Cremation",
+            "description": "<p><strong>触发</strong> 30 尺内一名生物受到火焰伤害。</p><hr /><p>你令一名被灼伤的生物变得如灰烬般脆弱无力。该生物对物理伤害获得弱点，等同你咒缚值的两倍，直至你下一回合结束。在该弱点持续期间，对其造成的物理伤害的攻击获得死亡特征；若以此方式被杀，其躯体便会化作尘埃与灰烬。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Qkrxlll3LxBXBXup]{效果：预备焚化}</p>",
+            "prerequisites": [
+                {
+                    "value": "灰烬秘示域"
+                }
+            ]
+        },
+        "Matchmaker": {
+            "name": "媒人 Matchmaker",
+            "description": "<p><strong>领域</strong> 激情（伪经）</p><hr /><p>你凝视渴望者的内心，找出能令其心安定的对象。当你施放此法术时，你以一项称为「爱学」的特殊技能进行回忆知识，并在持续期间内对其受训。你可探知你回忆知识的目标是渴望对象本身，抑或心系另一名生物或物品。你亦可施放此法术以进行 [[/act request skill=love-lore]]，劝说生物与他人进行浪漫之约。若该法术目标通常不愿如此，则法术自动失败。</p><hr /><p><strong>高阶 (2 阶)</strong> 你在持续期间内对爱学成为专家。</p><p><strong>高阶 (4 阶)</strong> 你在持续期间内对爱学成为大师。</p><p><strong>高阶 (8 阶)</strong> 你在持续期间内对爱学成为传奇。</p>"
+        },
+        "Chosen Disciples": {
+            "name": "天选门徒 Chosen Disciples",
+            "description": "<p>你已引导你的追随者学习你秘示域之中的伟大奥秘。在你的每日准备期间，你可选择赐予一名追随者你先知法术目录中的一道 1 环神圣法术，使其每日一次施放此法术。在 10 级或更高时，你可选择于赐予 1 环神圣法术之外，再赐予你先知法术目录中的一道 2 环法术；若你至少为 12 级，则除 1 环与 2 环神圣自然法术外，还可再赐予你先知法术目录中的一道 3 环法术。若你拥有多名追随者，可在他们之间分配这些法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "学徒之志"
+                }
+            ]
+        },
+        "Orb of Brilliance": {
+            "name": "辉煌之球 Orb of Brilliance",
+            "description": "<p>暗之死敌即是光，光所到之处暗则疾速逃逸。你向 500 尺范围内一处发出 @Template[burst|distance:20] 的爆发光芒。该爆发于该区域产生明亮光照，并于该区域外延 20 尺产生昏暗光照，持续至多 1 分钟。雾、烟或其他类似之遮蔽不会赋予该区域内生物 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽} 状态，除非该遮蔽来自不可用于「藏匿」的效果（例如「模糊」）。该法球可于极远距离被看见，且在该区域内结束回合的生物对察觉检定承受等同于你咒缚值的状态减值。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.4O0gLYll9fdNQkCa]{效果：辉煌法球}</p>",
+            "prerequisites": [
+                {
+                    "value": "光秘示域"
+                }
+            ]
+        },
+        "Unmitigated Gaze of the Curio": {
+            "name": "奇物无遮凝视 Unmitigated Gaze of the Curio",
+            "description": "<p>你的预见之力如此强烈，你聚焦的目标无法逃离。对那些你因「奇物预见」而获得 +2 状态加值至 AC 与豁免对抗的生物，你获得 @UUID[Compendium.pf2e.spells-srd.Item.uqlxMQQeSGWEVjki]{真知视} 的效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "Seismic Shift": {
+            "name": "地震位移 Seismic Shift",
+            "description": "<p>你将脚下的岩山驱使，将自己向前推送。你移动至多 30 尺，大地在你脚下涌动，将你推向目的地，避开困难地形。你必须以未被占据且具有稳固立足点的空间结束移动。你穿越的每一格在 1 分钟内成为困难地形。此移动并非「行走」，但其距离以类似方式衡量，且仍会触发由移动引发的反应。你不能携带任何其他人同行。</p><hr /><p><strong>高阶 (+1)</strong> 你的移动距离增加 5 尺。</p>"
+        },
+        "Vision of the Glorious Victory": {
+            "name": "辉煌胜利之幻象 Vision of the Glorious Victory",
+            "description": "<p>在你的幻象中，你被展示了围绕你秘示域的高潮冲突。骨骸先知或许看见一场与双头三臂怪物的战斗，而歌之先知或许在地狱骑士军团面前听见一个新国度的圣歌。</p><p><strong>替代领域</strong> 狂热</p><p><strong>替代授予法术</strong> 2阶：@UUID[Compendium.pf2e.spells-srd.Item.mrDi3v933gsmnw25]{心灵操作}</p><p><strong>授予技能</strong> 运动</p><p><strong>幻象态</strong> 你以战斗胜利寻求幻象的答案。你在运动检定上获得状态加值，等于咒缚值一半（最低1）。遭遇战首回合后，若结束某回合时未使用运动动作或咒缚动作，咒缚值+1（至最大值）。</p><p><strong>觉醒态</strong> 觉醒期间，你获得一项你满足前提条件的运动技能专长之效果。如咒缚值为3，运动检定状态加值等于完整咒缚值。如咒缚值为4，可选择获得4阶@UUID[Compendium.pf2e.spells-srd.Item.wzctak6BxOW8xvFV]{巨化术}之效果。</p>"
+        },
+        "Amplified Accompaniment": {
+            "name": "扩声伴奏 Amplified Accompaniment",
+            "description": "<p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你诅咒之乐转而强化其他声响，而非将其淹没——它放大声响并令生物对声音更加敏感。在 1 分钟内，你的乐音狂热地于 30 尺弥漫光环之光环内播放，强化其他声响；你必须将自身纳入区域内并受效果影响。源自该区域内的听觉与音波效果其射程增加 30 尺，而该区域内之语言性效果不再要求目标共享语言。区域内之生物对音波伤害获得等同你咒缚值的弱点，或将其对音波伤害的弱点提升相同量。免疫音波伤害的生物仍然免疫。</p><hr /><p><strong>Foundry 注</strong> 除赋予音波弱点外，其余效果（包括提升既有弱点）须手动处理。若此光环生效期间你的咒缚值变化，须重新应用该光环。</p>",
+            "prerequisites": [
+                {
+                    "value": "歌秘示域"
+                }
+            ]
+        },
+        "Protection of the Mystery": {
+            "name": "秘示域护佑 Protection of the Mystery",
+            "description": "<p>你的秘示域时刻寻求护佑你，即便你毫无准备。每天一次，你可以将 @UUID[Compendium.pf2e.spells-srd.Item.WG91Z5TiR6oO5FOw]{权变} 作为神圣自然法术施放，高位至等同你等级一半（向上取整）的环级。</p>"
+        },
+        "The More The Merrier": {
+            "name": "人多更欢 The More The Merrier",
+            "description": "<p>当你被狂欢者与放纵之氛围环绕时，可享多大乐趣！你于该区域内所有未被占据的空间内创造一群中型体型的幻象生物。该区域成为困难地形，且区域内生物无法对距离自己 10 尺以外的生物使用通讯或听觉、语言性动作。</p><p>此外，你或你的盟友可花费单一动作进行交互或表演，令相邻方格内的人群在 1 轮内成为更高阶困难地形。生物可花费单一动作交互或察言观色以试图识破该人群。你与你的盟友忽视该人群产生的困难地形与更高阶困难地形。</p>"
+        },
+        "Harness the Light": {
+            "name": "驾驭光辉 Harness the Light",
+            "description": "<p>你将所有光汇入一个微小焦点，再使其在小范围爆发中扩散。选择 30 尺内某个魔法光源，并尝试 @Check[counteract|statistic:spell] 之。若该魔法光源由你所创造，则你的对抗检定自动成功。若你成功对抗该魔法光源，光源 @Template[emanation|distance:10] 内所有生物须以 @Check[reflex|against:spell] 豁免成功，否则 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩} 等同你咒缚值的轮数。若生物对此效果豁免大失败，则另 @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲} 1 轮。若目标是生物或与生物共占同一空间，则你须将该生物纳入效果中。</p><p>若你处于咒缚状态，并以此效果作用于你诅咒之光，则你可不进行对抗你魔法光源的检定即产生此效果，并将豁免的成功程度视为高一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "光秘示域"
+                }
+            ]
+        },
+        "Carnivorous Vegetation": {
+            "name": "食肉植被 Carnivorous Vegetation",
+            "description": "<p>你令周遭植物变得食肉。你令 @Template[emanation|distance:15] 内之所有植物变得食肉，伤害于该区域内结束回合的生物，使其承受 @Damage[(4 + floor(@actor.level / 2 - 6))d6[acid],(4 + floor(@actor.level / 2 - 6))d6[piercing]] 伤害（@Check[fortitude|basic|against:spell] 豁免）。你与区域内之盟友所掷豁免之成功程度提升一级。</p><p>当你首次使用该效果时，区域内特别巨大的植物（如树木）可选择改造成 @Damage[(4 + floor(@actor.level / 2 - 6))d6[acid],(4 + floor(@actor.level / 2 - 6))d6[bludgeoning]]{钝击伤害}（替代穿刺伤害），且其各自具有相同效果之独立弥漫光环。该弥漫光环之尺数等同该植物体积——例如占据 5 尺方格之灌木为 5 尺弥漫光环，占据 15 尺方格之树木为 15 尺弥漫光环。无论一名生物处于多少重叠植物区域，它仅须以基础反射豁免对抗此法术一次，所造成的伤害类型由距离最近的植被决定（由 GM 裁定）。</p><p>14 级时，及此后每 2 级，酸性伤害与穿刺伤害各增加 1d6。</p>",
+            "prerequisites": [
+                {
+                    "value": "森林秘示域"
+                }
+            ]
+        },
+        "Tool": {
+            "name": "工具 Tool",
+            "description": "<p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.AccursedCurio]</p><h3>奇物行家</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.CurioAdept]</p><h3>秘示域使者</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.WielderOfMysteries]</p><h3>奇物启示</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.CuriosRevelation]</p><h3>奇物形态</h3><p>@Localize[PF2E.TEAMPLUS.ORACLES.Curios.Tool.CuriosForm]</p>"
+        },
+        "Nourishing Rot": {
+            "name": "滋养之腐 Nourishing Rot",
+            "description": "<p><strong>触发</strong> 30 尺内一名生物获得恶心状态或染病。</p><p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>当病痛侵蚀你的肉身时，他人之疾患却能净化你。你恢复等同你等级加上你咒缚值的生命值（@Damage[(@actor.level * @actor.conditions.cursebound.value)[healing]]）。</p>",
+            "prerequisites": [
+                {
+                    "value": "腐疫秘示域"
+                }
+            ]
+        },
+        "Garden of Crystals": {
+            "name": "水晶花园 Garden of Crystals",
+            "description": "<p><strong>领域</strong> 大地（伪经）</p><hr /><p>你令水晶自你周围的地面生长。该区域成为困难地形，但你可忽略之。在区域内（至少部分位于其中）选择三个 @Template[burst|distance:5]；这些位置生长出庞大的水晶簇，充满魔力。这些晶体结构高 10 尺，占据该区域，将区域内任何生物移至最近相邻空间。当生物紧邻其中一簇水晶时，其暴击受到强化，额外造成 1d10 力场伤害。</p><hr /><p><strong>高阶 (+2)</strong> 力场伤害增加 1d10。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.NsA3mbbBphp9kx77]{效果：水晶花园}</p>"
+        },
+        "Hunter's Rush": {
+            "name": "猎者疾袭 Hunter's Rush",
+            "description": "<p>你专注于一名敌人，将其作为你兽性敌意的目标。选择一名你能看见的敌人。你向该敌人 行走 两次。若你以近战触及范围内一格结束移动，可对该敌人进行一次近战打击。若此次打击命中，你额外造成一颗武器伤害骰。当你使用「猎者疾袭」时若你处于咒缚 2 级，该额外伤害骰提升至两颗；若处于咒缚 3 级，则提升至三颗。</p>",
+            "prerequisites": [
+                {
+                    "value": "野兽秘示域"
+                }
+            ]
+        },
+        "Curse of Outpouring Life (Team+)": {
+            "name": "倾泻生命之咒（Team+） Curse of Outpouring Life (Team+)",
+            "description": "<p>生命能量自你向外流出，使你与所有生命相连，但你以耗费生命本质换取此连接。你的存在抚慰病者与伤者，使疤痕略显消退，催发植物新生长，并以活力浸染周围。生命力外泄使保持你身体功能愈加困难。恢复你生命值之魔法效果在恢复生命值数量上承受状态减值，等于你等级一半（最低1）×@UUID[Compendium.pf2e.conditionitems.Item.zXZjC8HLaRoLR17U]{咒缚}值。</p>"
+        },
+        "Claimed by Ancestors": {
+            "name": "祖灵召回 Claimed by Ancestors",
+            "description": "<p><strong>触发</strong> 你或 60 尺内一名盟友将被减至 0 生命值或被杀死。</p><p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你的祖灵涌现于一具失去意识的身躯之周围，将其拖回站立姿态并借其身躯继续战斗。触发该效果的生物不会死亡，亦不获得濒死状态，并恢复等同你等级乘以你咒缚值的生命值（@Damage[(@actor.level * @actor.conditions.cursebound.value)[healing]]）。然而，源自你祖灵的猛烈涌动难以适应，使触发效果的生物 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑} 1 轮，除非其以 @Check[will|against:spell] 豁免成功。若触发该效果的生物本应被杀死，则其对此困惑状态的豁免视为成功程度低一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "先祖秘示域"
+                }
+            ]
+        },
+        "Familiar Dark": {
+            "name": "熟稔之暗 Familiar Dark",
+            "description": "<p>黑暗如同你的故友，熟稔且令你安心。你获得高级黑暗视觉持续 1 分钟，并在 @Template[emanation|distance:15] 内制造黑暗。当你使用「熟稔之暗」时若你处于咒缚 2 级，该光环改为 @Template[emanation|distance:30]；若你处于咒缚 3 级，则改为 @Template[emanation|distance:120]。</p>",
+            "prerequisites": [
+                {
+                    "value": "幽暗秘示域"
+                }
+            ]
+        },
+        "Storm Spell": {
+            "name": "风暴法术 Storm Spell",
+            "description": "<p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你将法术之要素转化为强大的风暴魔法爆发。若你的下一动作是施放一道目标为某区域、且具有空气、冷冻、电击或水特征的法术，你将其转化为风暴法术。该法术之区域成为困难地形与危险地形，持续轮数等同于你的咒缚值。穿越此区域的生物每经过其中一格便承受等同于该法术环级的伤害。该伤害为电击伤害或钝击伤害，由你在施放该法术时选择。</p>",
+            "prerequisites": [
+                {
+                    "value": "风暴秘示域"
+                }
+            ]
+        },
+        "Astral Daydream": {
+            "name": "星界白日梦 Astral Daydream",
+            "description": "<p>你借助与精魂自身的连结，灵魂迅捷地在异界之间起舞，并自彼方携回一份馈赠。你直至下一回合结束 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。在呆滞期间，你对心灵伤害获得抗力，等同你咒缚值加上你等级一半，并对自选的一项技能成为受训。若你已对该所选技能受训，则改为获得 +1 状态加值至你下一次以该技能进行的检定，持续效果时长；若你使用「星界白日梦」时处于咒缚 2 级，则改为 +2 状态加值。</p>"
+        },
+        "Curse of Eternal Reverie": {
+            "name": "永恒梦呓之咒 Curse of Eternal Reverie",
+            "description": "<p>你对奇思异想之依恋既是恩赐也是常见之苦。你的浅层思想有时闪现成你周围的图像，随诅咒愈强，你愈被仅有你能辨认的奇想分心。你在对抗心灵与视觉效果之豁免与察觉检定上承受状态减值，等于咒缚调整值。</p>"
+        },
+        "Divine Rampage": {
+            "name": "神圣狂暴 Divine Rampage",
+            "description": "<p><strong>需求</strong> 你的咒缚值为 2 或更高，且你处于战斗中。</p><hr /><p>你与野兽合一，陷入无法控制之状态，化为破坏性的怪物。以下效果持续应用，直到你将一名生物减至 0 生命值之后，尝试一次 @Check[will|against:spell-dc] 以结束此破坏状态。你可选择不进行此意志豁免而继续狂暴。若你在 1 轮内未被任何敌对动作以你为目标或将你纳入效果区域，则可在你回合结束时尝试一次意志豁免以结束此破坏状态。</p><ul><li><p>你不将任何人视为盟友，但侧背的敌人除外（不过它们仍可将你视为其盟友）。</p></li><li><p>你必须以所有动作进行打击、施放具攻击性的戏法、使用具攻击性的咒缚动作，或为攻击作准备（例如拔出武器、移动以使目标进入触及范围等）。</p></li><li><p>你的徒手攻击获得强力特征。</p></li><li><p>当你将一名生物减至 0 生命值时，你恢复等同你等级一半加上你咒缚值的生命值。</p></li></ul>",
+            "prerequisites": [
+                {
+                    "value": "野兽秘示域"
+                }
+            ]
+        },
+        "Curio's Revelation": {
+            "name": "奇物启示 Curio's Revelation",
+            "description": "<p>你的神器具有揭示秘示域目的之独特方法。你可授予以下效益代替@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.Js9vTrVqDJQeZ2uP]{揭示秘示域}的常规效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "启明圣物守护者献身"
+                }
+            ]
+        },
+        "Body of the Beast": {
+            "name": "野兽之躯 Body of the Beast",
+            "description": "<p>当你引导你的神性之时，兽性力量在你身躯中涌动。你内里之野兽显现，让你获得一项徒手攻击，归类于斗殴武器组。该徒手攻击的打击额外造成等同于你咒缚状态值的伤害。当你的咒缚值为 2 时，在法术生效期间你以该徒手攻击进行打击获得 +1 状态加值；若咒缚值为 3 或更高，则为 +2。</p><ul><li><p>颚部攻击：1d8 穿刺伤害</p></li><li><p>利爪：1d4 挥砍伤害，具有灵巧与娴熟特征</p></li><li><p>角或鹿角：1d6 穿刺伤害，具有推撞特征</p></li><li><p>触手或尾部：1d4 钝击伤害，具有及远特征</p></li></ul><hr /><p><strong>高阶 (4 阶)</strong> 你可选择最多 2 项徒手攻击而非 1 项；或将其中一项徒手攻击的伤害骰大小增加一档。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.alBwXHEEIgpe42Vt]{效果：野兽之躯}</p>"
+        },
+        "Web of Darkness": {
+            "name": "黑暗之网 Web of Darkness",
+            "description": "<p>区域内所有黑暗如同暗影之蛛丝般附着，妨碍其移动。区域内所有敌方生物须尝试一次反射豁免。生物可尝试逃脱黑暗之丝，亦可与他人通过攻击来切断脱身（黑丝具有 AC [[/r 30+(@item.level - 6)*3]] 与 [[/r 30+(@item.level - 6)*5]] 生命值）。你可驱散此法术。</p><p><strong>大成功</strong> 该生物不受影响。</p><p><strong>成功</strong> 该生物对其速度承受 –5 尺环境减值。</p><p><strong>失败</strong> 同成功，但该生物对其速度承受 –10 尺环境减值，且其无法距离施放法术时所在空间超过 30 尺。</p><p><strong>大失败</strong> 目标 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}。</p><p>@UUID[Compendium.pf2e-team-plus-oracles-remastered.misc.Item.mOwOxk8Uwyz8hra5]{效果：暗网}</p><hr /><p><strong>高阶 (+1)</strong> 黑丝的 AC 增加 3，生命值增加 5。</p>"
+        },
+        "Hardened to Suffering": {
+            "name": "因苦而坚 Hardened to Suffering",
+            "description": "<p>你的诅咒令你对外来痛苦更加坚毅。你自选获得一项 +1 物品加值至 AC，或将你所穿戴任何护甲的物品加值提高 1，直至你下一回合结束。在你受益于此 AC 加值期间，你对物理伤害获得抗力，等同 2 加上你咒缚值的两倍。</p>"
+        },
+        "Vision of the Unraveling Secret": {
+            "name": "解秘之幻象 Vision of the Unraveling Secret",
+            "description": "<p>你的幻象向你展示了一件极重要的事——你尚不能理解，但解开其含义将助你改变世界之命运。学识先知或许看见一头大象打开一扇通往不可能图书馆之门，野兽先知或许看见在分形玻璃位面中、比一个人大两倍的蛋壳。</p><p><strong>替代领域</strong> 知识</p><p><strong>替代授予法术</strong> 3阶：@UUID[Compendium.pf2e.spells-srd.Item.ZYoC630tNGutgbE0]{超思}</p><p><strong>授予技能</strong> 一项具回忆知识动作的技能</p><p><strong>幻象态</strong> 理解将赋予你力量。遭遇战首回合及每次使用咒缚动作后，你可作为免费动作@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}或@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索}，但回忆知识必须针对当前遭遇中的生物、危害或类似主题。回忆知识与搜索检定获得状态加值等于咒缚值。遭遇战首回合后，若结束某回合时未使用回忆知识、搜索或咒缚动作，咒缚值+1（至最大值）。</p><p><strong>觉醒态</strong> 你可在每回合结束时作为免费动作进行回忆知识或搜索，且即便回忆知识失败仍可对同一主题再次进行（只要主题在当前遭遇中）。如咒缚值为3，获得@UUID[Compendium.pf2e.spells-srd.Item.jwK43yKsHTkJQvQ9]{看见隐形}之效果。如咒缚值为4，还获得6阶@UUID[Compendium.pf2e.spells-srd.Item.uqlxMQQeSGWEVjki]{真知视}之效果。</p>"
+        }
+    }
+}

@@ -1,0 +1,183 @@
+@import "./variables.less";
+
+/* -------------------------------------------- */
+/*  Chat Cards                                  */
+/* -------------------------------------------- */
+
+.crucible.chat-message {
+  --background-texture: url("../ui/journal/background-texture.webp");
+  background: var(--background-texture) repeat;
+  border: none;
+  margin: 0.5rem 0.25rem;
+  padding: 0.25rem 0.5rem 0.5rem;
+
+  .message-header {
+    font-size: var(--font-size-12);
+    color: var(--color-tertiary);
+  }
+
+  .message-metadata {
+    display: flex;
+    align-items: center;
+    .confirmed {
+      color: var(--color-result-verygood);
+    }
+    .unconfirmed {
+      color: var(--color-result-verybad);
+    }
+  }
+
+  .flavor-text {
+    font-size: var(--font-size-12);
+    color: var(--color-secondary);
+    border-top: 1px solid var(--color-cool-4);
+    padding-top: 0.25rem;
+    margin-top: 0.25rem;
+  }
+
+  &.whisper {
+    background: #090b13;
+    border: 1px solid #7b8cc7;
+  }
+  &.blind {
+    background: #130913;
+    border: 1px solid #977dcc;
+  }
+
+  // Smaller die icons
+  .crucible.dice-roll .pool .die {
+    --die-size: 48px;
+  }
+
+  // Confirm button
+  button.confirm {
+    margin-top: 0.5rem;
+  }
+
+  .milestone-award {
+    .labeled-hex {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      margin: 0.5rem 0;
+    }
+  }
+
+  // Turn start/end summary cards
+  .turn-change-summary {
+    .change-table {
+
+    }
+  }
+
+  // Initiative Report and Turn Change Report
+  .report-table {
+    margin: 0.25rem 0 0;
+    td, th {
+      font-size: var(--font-size-12);
+      line-height: 1.5em;
+      padding-inline: 0; // Tight layout
+    }
+    .report-value {
+      text-align: right;
+    }
+
+    // Turn Change Report
+    &.turn-report-table {
+      .crucible-rank-pips {
+        display: flex;
+        justify-content: end;
+      }
+      .resource {
+        background-color: var(--resource-color);
+        width: max-content;
+        justify-self: end;
+        padding: 0 4px;
+        border-radius: 3px;
+        color: var(--color-text-emphatic);
+      }
+    }
+
+    // Initiative Report
+    &.initiative-report-table {
+      tr.combatant.secret {
+        color: #8e80ff;
+      }
+      .boons i {
+        font-size: 10px;
+        color: var(--color-result-verygood);
+      }
+      .banes i {
+        font-size: 10px;
+        color: var(--color-result-verybad);
+      }
+    }
+  }
+
+  // Loot Enrichers
+  enriched-content[enricher="crucibleLoot"] .content-link {
+    display: inline-block;
+    text-wrap: wrap;
+    word-break: unset;
+    text-indent: 1.45em hanging;
+  }
+}
+
+
+/* -------------------------------------------- */
+/*  Chat Actions                                */
+/* -------------------------------------------- */
+
+.crucible .action {
+
+  /** Action Header */
+  .action-header {
+    flex: none;
+  }
+  // TODO temporarily needed until styles in `theme.less` can be applied to chat cards
+  label.tag-icon {
+    flex: none;
+  }
+
+  /** Text Description */
+  .action-description {
+    padding: 4px 0;
+    font-size: var(--font-size-12);
+    font-style: italic;
+    border-top: 1px solid var(--colorBeige);
+    border-bottom: 1px solid var(--colorBeige);
+  }
+}
+
+.crucible.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-14);
+  color: var(--colorOlive);
+  line-height: 20px;
+  margin-top: 0.25rem;
+}
+
+/* -------------------------------------------- */
+/*  Group Check Chat Card                       */
+/* -------------------------------------------- */
+
+.group-check-actors.flexcol {
+  gap: 0.25rem;
+}
+
+.group-check-row.line-item,
+.chat-message .standard-check.line-item {
+  gap: 0 0.5rem;
+  .dice-result {
+    flex: 0 0 100%;
+    margin-top: -0.5rem; // Tighter spacing with title row
+  }
+}
+
+.group-check-result.unresolved .dice-result {
+  display: none;
+}
+

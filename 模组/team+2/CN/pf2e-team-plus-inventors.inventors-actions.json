@@ -1,0 +1,64 @@
+{
+    "label": "发明家+ 动作 Inventors+ Actions",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Vent Byproduct": {
+            "name": "排放副产物 Vent Byproduct",
+            "description": "<p>你指挥你的大发明喷出一道线形的有害液体与黏液，对区域内的生物造成伤害，并让不寻常的植物与有机物涌至地表。该副产物在以你为起点（如果你穿戴或持用该大发明）或以你大发明为起点（如果你的大发明为从仆）的 @Template[type:line|distance:15] 内对所有生物造成 @Damage[(floor((@actor.level -1)/2) +1)d4[@actor.flags.pf2e.inventor.explode]] 伤害（@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true] 基础豁免）。该区域萌生不寻常的有机材料，使其在 1分钟内成为困难地形。</p>\n<p>在 3级及以后每两级，你副产物的伤害增加 1d4。</p>\n<p>如果你拥有「突破性大发明」职业特性，你可以在使用排放副产物时，为该区域选择 15尺或 @Template[type:line|distance:30]；如果你拥有「革命性大发明」职业特性，你可以选择 15尺、30尺或 @Template[type:line|distance:45]。</p>"
+        },
+        "Quick Gadgetry": {
+            "name": "速制装置 Quick Gadgetry",
+            "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+        },
+        "Crank Up": {
+            "name": "全力开动 Crank Up",
+            "description": "<p>你让肮脏的能量为你四肢与躯体上的支架赋能，将你推至凡人极限以上。进行一次对应你等级标准 DC 的 @Check[type:crafting|dc:@self.level] 检定。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.NjluGPAOYCrFJobL]{效果：全力开动}</p>\n<hr />\n<p><strong>大成功</strong> 你的小器械承担艰难工作，让你以最少能量产出最大物理输出。你的速度获得 +10尺状态加值。当你近身搏击时，沿途留下毒性化学物质。在 1分钟内，当你成功打击一个生物时，你在你所选相邻的 @Template[type:square|distance:5] 内以及你回合结束前所穿过的所有方格上留下危险地形。你的危险地形持续 2轮。除你之外通过你危险地形的生物承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[@actor.flags.pf2e.inventor.explode]]{智力调整值} 的伤害。全力开动结束后，你的小器械需补充燃料而变得不可用，1分钟内你不能再次使用全力开动。</p>\n<p><strong>成功 </strong>你的小器械喷出烟尘，将你推向胜利。同大成功，但你危险地形的伤害等同于你 @Damage[(floor(@actor.abilities.int.mod/2)+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[@actor.flags.pf2e.inventor.explode]]{智力调整值的一半}。</p>\n<p><strong>失败 </strong>你的燃料未能点燃，无事发生。</p>\n<p><strong>大失败</strong> 砰！你承受 [[/r @actor.level[@actor.flags.pf2e.inventor.explode]]]{等同于你等级的伤害}，且 1分钟内你不能再次使用全力开动，因为你的小器械需要重置。</p>"
+        },
+        "Frigerate": {
+            "name": "制冷 Frigerate",
+            "description": "<p>你从冷却系统中喷出寒冷能量。进行一次对应你等级标准 DC 的 @Check[type:crafting|dc:@self.level] 检定。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.8uFttYQVmuGOAxqu]{效果：制冷}</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.EXjLp1wRAYeUYpaW]{效果：制冷敌人}</p>\n<hr />\n<p><strong>大成功</strong> 你的小器械产生凝结效果，使敌人的物质减速。在 1分钟内，当你成功打击一个生物时，它的速度直至你下一回合开始前承受 -5尺状态减值。受此状态减值影响的生物若使用具有移动特征的动作，会承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))]{智力调整值} 的伤害。该伤害类型与该次打击的伤害类型相同。制冷结束后，你的小器械会冻结而变得不可用，1分钟内你不能再次使用制冷。</p>\n<p><strong>成功 </strong>你的小器械减缓你所攻击者的物质。同大成功，但伤害等同于你 @Damage[(floor(@actor.abilities.int.mod/2)+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))]{智力调整值的一半}。</p>\n<p><strong>失败 </strong>你无法控制减速剂，无事发生。</p>\n<p><strong>大失败</strong> 啊！不！冷却系统冻结。你承受 [[/r @actor.level[@actor.flags.pf2e.inventor.explode]]]{等同于你等级的伤害}，且 1分钟内你不能再次使用制冷，因为你的小器械需要冷却并重置。</p>"
+        },
+        "Invigoration Link": {
+            "name": "充能连接 Invigoration Link",
+            "description": "<p><strong>需求 </strong>你正持用你的大发明。</p>\n<hr />\n<p>你在你的大发明与 30尺内一名盟友之间建立连接，持续 4轮；该盟友须保持在 60尺内，否则你的连接断开。目标立即获得 2 加上你等级一半的临时生命值，持续到你的连接保持激活时。在你之后每个回合开始时，若你的连接仍激活于该盟友身上，你将其源自充能连接的临时生命值增加 1 加上你等级一半；若它没有源自 @UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.8VDRbkxhnifbuo7h]{效果：充能连接} 的临时生命值，则改为赋予 1 加上你等级一半的临时生命值。同一时间你只能拥有一个充能连接，且每个生物同一时间只能受益于一个充能连接。当你激活某个连接时，即使目标不与你相邻，你也可以对其使用 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。当你的连接在某盟友上结束后，1分钟内你不能再以该盟友为充能连接的目标。如果你因任何原因未能满足需求，你的连接断开。</p>"
+        },
+        "Freeze Ray": {
+            "name": "冷冻射线 Freeze Ray",
+            "description": "<p>你让你的大发明投射出一道寒冷能量射线。你或你的大发明（如果你的大发明为从仆）可以以 20尺内的 @Template[type:burst|distance:5] 为目标，让物质迅速减速以致其在 1分钟内被霜雪覆盖。生物只要停留在该区域中便处于 @Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}；在该区域结束回合的生物承受 @Damage[(floor((@actor.level -1)/2) +1)d4[@actor.flags.pf2e.inventor.explode]] 伤害（@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true] 基础豁免）。</p>\n<p>在 3级及以后每两级，你射线的伤害增加 1d4。</p>\n<p>如果你拥有「突破性大发明」职业特性，你可以在使用冷冻射线时，为该区域选择 5尺或 @Template[type:burst|distance:10]；如果你拥有「革命性大发明」职业特性，你可以选择 5尺、10尺或 @Template[type:burst|distance:15]。</p>\n<p><strong>特殊 </strong>如果你拥有「可变核心」职业专长且改变了你冷冻射线的伤害类型，则被影响的区域改为成为危险地形——除原本生物在该区域结束回合所承受的伤害外，每轮还造成等同于你等级一半、你所选类型的伤害。</p>"
+        },
+        "Repulse": {
+            "name": "排斥 Repulse",
+            "description": "<p>你通过启用注入的磁能让你的小器械变为排斥状态。进行一次对应你等级标准 DC 的 @Check[type:crafting|dc:@self.level] 检定。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.MBXA1svJtqaHDJAn]{效果：排斥}</p>\n<hr />\n<p><strong>大成功</strong> 你的小器械形成一个磁力气泡，保护你并赋予你提升的推开敌人的能力。你被排斥力充能，让你能在 1分钟内使用制作熟练度代替健体进行卸武、移位或推撞。当你处于排斥效果之下时，每当你成功使用上述其中一项动作，或借由你的大发明（如磁脉冲）所造成的效果让敌人承受强制移动时，目标承受等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[bludgeoning]]{智力调整值} 的伤害（若该效果造成伤害，则为同等的额外伤害）。该伤害的类型与产生该效果的类型相同；若该效果不造成伤害，则为钝击伤害。排斥结束后，你的小器械需冷却或重置而变得不可用，1分钟内你不能再次使用排斥。</p>\n<p><strong>成功 </strong>你的小器械变得排斥，为你的攻击附加排开之力。同大成功，但额外伤害等同于你 @Damage[(floor(@actor.abilities.int.mod/2)+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))[bludgeoning]]{智力调整值的一半}。</p>\n<p><strong>失败 </strong>你找不到平衡点，无事发生。</p>\n<p><strong>大失败</strong> 不可能！电荷被分流。你承受 [[/r @actor.level[@actor.flags.pf2e.inventor.explode]]]{等同于你等级的伤害}，且 1分钟内你不能再次使用排斥，因为你的小器械需要冷却并重置。</p>"
+        },
+        "Smog Cloud": {
+            "name": "烟雾之云 Smog Cloud",
+            "description": "<p>你的大发明喷出一大团毒烟，淹没你周围的所有人。该烟雾之云在以你为起点（如果你穿戴或持用该大发明）或以你大发明为起点（如果你的大发明为从仆）的 @Template[type:emanation|distance:5] 范围内对所有生物造成 @Damage[max(2, @actor.level)d4[@actor.flags.pf2e.inventor.explode]] 伤害（@Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:true] 基础豁免）。烟雾之云内的所有生物变为 @Compendium[pf2e.conditionitems.DmAIPqOBomZ7H95W]{模糊}，且烟雾之云外的所有生物对其内的生物而言也变为模糊。云持续 1分钟，或被强风或类似效果驱散为止。</p>\n<p>在 3级及以后每一级，你云的伤害增加 1d4。</p>\n<p>如果你拥有「突破性大发明」职业特性，你可以在使用烟雾之云时，为该区域选择 5尺或 @Template[type:emanation|distance:10]；如果你拥有「革命性大发明」职业特性，你可以选择 5尺、10尺或 @Template[type:emanation|distance:15]。</p>"
+        },
+        "Magnetic Pulse": {
+            "name": "磁脉冲 Magnetic Pulse",
+            "description": "<p>你为空气充上磁能并释放储存的能量，希望不会破损大发明本身……。爆炸在以你为起点（如果你穿戴或持用该大发明）或以你大发明为起点（如果你的大发明为从仆）的 @Template[type:emanation|distance:5] 范围内对所有生物造成 @Damage[(floor((@actor.level -1)/2) +1)d4[@actor.flags.pf2e.inventor.explode]] 伤害（@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true] 基础豁免）。豁免失败的生物被推向你大发明弥漫范围的边缘 5尺；豁免大失败则被推至你大发明弥漫范围的边缘。</p>\n<p>在 3级及以后每两级，你脉冲的伤害增加 1d4。</p>\n<p>如果你拥有「突破性大发明」职业特性，你可以在使用磁脉冲时，为该区域选择 5尺或 @Template[type:emanation|distance:10]；如果你拥有「革命性大发明」职业特性，你可以选择 5尺、10尺或 @Template[type:emanation|distance:15]。</p>"
+        },
+        "Mutate": {
+            "name": "变异 Mutate",
+            "description": "<p>你利用有机材料强化自身并按照你心意变异，产出有毒化学物质。进行一次对应你等级标准 DC 的 @Check[type:crafting|dc:@self.level] 检定。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.juxCUsEgteaJcLjd]{效果：变异}</p>\n<hr />\n<p><strong>大成功</strong> 你的小器械生长扭曲，渗出内部酸液。在 1分钟内，你的打击造成等同于你智力调整值一半的持续酸蚀伤害。移除此持续伤害的纯骰检定 DC 为 @Check[type:flat|dc:17]。变异结束后，你的变体停止运作，凝固成块而变得不可用，1分钟内你不能再次使用变异。</p>\n<p><strong>成功 </strong>你的变异开始渗透，为你的攻击附加酸性。同大成功，但移除你持续伤害的纯骰检定 DC 为 @Check[type:flat|dc:15]。</p>\n<p><strong>失败 </strong>你的装备颤动滑动，但毫无变化。</p>\n<p><strong>大失败</strong> 噢！一声令人作呕的破裂声把你溅得满身黏液。你承受 [[/r @actor.level[@actor.flags.pf2e.inventor.explode]]]{等同于你等级的伤害}，且 1分钟内你不能再次使用变异，因为你的小器械需要重新生长。</p>"
+        },
+        "Cacophony": {
+            "name": "刺耳轰鸣 Cacophony",
+            "description": "<p>你的大发明释放出一阵刺耳的轰鸣。你在以你为起点（如果你穿戴或持用该大发明）或以你大发明为起点（如果你的大发明为从仆）的 @Template[type:cone|distance:10] 范围内产生一阵声响喷射，对该区域内的所有生物造成 @Damage[max(2, @actor.level)d4[@actor.flags.pf2e.inventor.explode]] 伤害（@Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:true] 基础豁免）。豁免大失败的生物在 1分钟内还会变为 @Compendium[pf2e.conditionitems.9PR9y0bi4JPKnHPR]{耳聋}。被你的刺耳轰鸣耳聋的生物不会因其耳聋状态而对你的听觉效果免疫。</p>\n<p>在 3级及以后每一级，你轰鸣的伤害增加 1d4。</p>\n<p>如果你拥有「突破性大发明」职业特性，你可以在使用刺耳轰鸣时，为该区域选择 10尺或 @Template[type:cone|distance:15]；如果你拥有「革命性大发明」职业特性，你可以选择 10尺、15尺或 @Template[type:cone|distance:30]。</p>"
+        },
+        "Reverberate": {
+            "name": "反弹声波 Reverberate",
+            "description": "<p>你让你的小器械振动并加强频率。<br />进行一次对应你等级标准 DC 的 @Check[type:crafting|dc:@self.level] 检定。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.35rdL15KxbtGdr0l]{效果：反弹声波}</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.8ctSpgDMCW4nuY8X]{效果：反弹声波敌人}</p>\n<hr />\n<p><strong>大成功</strong> 你的小器械产生一阵高频。你的打击对敌人施加反弹声波效果，并在 1分钟内获得听觉特征。当你成功打击一个生物后，直到你下一回合开始前，该生物对抗听觉效果承受 -1环境减值；当其受到听觉效果伤害时，承受额外等同于你 @Damage[(@actor.abilities.int.mod+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))]{智力调整值} 的伤害。反弹声波结束后，你的小器械需重新调音变得不可用，1分钟内你不能再次使用反弹声波。免疫听觉特征的生物仍可被你的打击正常作用，即便它们对反弹声波的效果免疫，但它们对反弹声波的伤害免疫。</p>\n<p><strong>成功 </strong>你的小器械飙至高频。同大成功，但伤害等同于你 @Damage[(floor(@actor.abilities.int.mod/2)+ternary(gte(@actor.level,15),3,ternary(gte(@actor.level,7),2,ternary(gte(@actor.level,3),1,0))))]{智力调整值的一半}。</p>\n<p><strong>失败 </strong>你未能取得节奏平衡，无事发生。</p>\n<p><strong>大失败</strong> 不可思议！声响完全不可闻。你承受 [[/r @actor.level[@actor.flags.pf2e.inventor.explode]]]{等同于你等级的伤害}，且 1分钟内你不能再次使用反弹声波，因为你的小器械需要冷却并重置。</p>"
+        }
+    }
+}

@@ -1,0 +1,66 @@
+<section class="tab {{tabs.background.id}} {{tabs.background.cssClass}}"
+         data-tab="{{tabs.background.id}}" data-group="{{tabs.background.group}}">
+
+    <div class="step-selection">
+        <menu id="background-selection" class="selection-menu">
+            {{#each backgrounds as |background|}}
+            <li class="option flexrow {{background.cssClass}}" style="--option-color:{{background.color}};"
+                data-action="chooseBackground" data-background-id="{{background.identifier}}">
+                <div class="option-icon">
+                    <img class="icon" src="{{background.icon}}" alt="{{background.name}}">
+                </div>
+                <h4 class="option-name">{{background.name}}</h4>
+            </li>
+            {{/each}}
+        </menu>
+    </div>
+
+    <div id="background-details" class="step-details flexcol">
+    {{#if background}}
+        <h1 class="step-header">{{background.name}}</h1>
+        <article class="step-summary">
+            {{{background.summary}}}
+        </article>
+        {{#each background.features as |feature|}}
+        <div class="step-feature">
+            <h4>{{feature.label}}</h4>
+            {{#if feature.tags}}
+                <div class="tags">
+                    {{#each feature.tags as |tag|}}
+                    <span class="tag" {{#if tag.tooltip}}data-tooltip aria-label="{{localize tab.tooltip}}"{{/if}}>{{tag.text}}</span>
+                    {{/each}}
+                </div>
+            {{/if}}
+            {{#if feature.items}}
+                <div class="items">
+                    {{#each feature.items as |item|}}
+                    {{{item}}}
+                    {{/each}}
+                </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    {{/if}}
+    </div>
+
+    <section id="ability-scores" class="step-sidebar ability-scores flexcol">
+        <h2 class="step-sidebar-header">{{localize "ATTRIBUTES.Abilities"}}</h2>
+        <p id="ability-points"><span class="points">{{abilities.points.pool}}</span> {{localize "TALENT.LABELS.Points.other"}}</p>
+        {{#each abilities.abilities as |ability|}}
+        <div class="ability flexrow" data-ability="{{ability.id}}">
+            <h4>{{ability.label}}</h4>
+            <span class="score hex {{ability.group}}">{{ability.total}}</span>
+            <span class="increases">{{ability.increases}}</span>
+            <div class="buttons flexcol">
+                <button type="button" class="plain icon fa-solid fa-caret-up" data-action="abilityIncrease"
+                        aria-label="{{localize "ACTOR.ACTIONS.IncreaseAbility"}}" data-tooltip {{#unless ability.canIncrease}}disabled{{/unless}}>
+                </button>
+                <button type="button" class="plain icon fa-solid fa-caret-down" data-action="abilityDecrease"
+                        aria-label="{{localize "ACTOR.ACTIONS.DecreaseAbility"}}" data-tooltip {{#unless ability.canDecrease}}disabled{{/unless}}>
+                </button>
+            </div>
+        </div>
+        {{/each}}
+        <p class="hint">{{localize "ACTOR.CREATION.SpendAbilities"}}</p>
+    </section>
+</section>

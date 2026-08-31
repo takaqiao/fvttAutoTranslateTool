@@ -1,0 +1,49 @@
+{
+    "id": "crucible-cn",
+    "title": "Crucible - Chinese Translation",
+    "description": "Chinese translation for the Crucible system",
+    "version": "0.8.9.8",
+    "compatibility": {
+        "minimum": "13",
+        "verified": "14",
+        "maximum": "14"
+    },
+    "authors": [
+        {
+            "name": "Taka"
+        }
+    ],
+    "relationships": {
+        "requires": [
+            {
+                "id": "babele",
+                "type": "module",
+                "compatibility": {
+                    "minimum": "2.7.5"
+                }
+            },
+            {
+                "id": "crucible",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "0.7.7"
+                }
+            }
+        ]
+    },
+    "languages": [
+        {
+            "lang": "cn",
+            "name": "中文",
+            "path": "lang/cn.json"
+        }
+    ],
+    "esmodules": [
+        "babele-register.js"
+    ],
+    "url": "https://github.com/takaqiao/crucible-cn",
+    "manifest": "https://github.com/takaqiao/crucible-cn/releases/latest/download/module.json",
+    "download": "https://github.com/takaqiao/crucible-cn/releases/download/0.8.9.8/crucible-cn-0.8.9.8.zip",
+    "bugs": "https://github.com/takaqiao/crucible-cn/issues",
+    "changelog": "https://github.com/takaqiao/crucible-cn/releases/tag/0.8.9.8"
+}

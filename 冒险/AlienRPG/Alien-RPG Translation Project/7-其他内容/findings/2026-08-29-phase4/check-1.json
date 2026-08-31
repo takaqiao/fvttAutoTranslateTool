@@ -1,0 +1,124 @@
+{
+ "refuted_claims": [
+  {
+   "claim": "The 8 pregens' relOne/relTwo web contains a dangling reference that breaks the scenario's premise (task item 5).",
+   "why_wrong": "All four surnames actually used as relationship keys resolve to an actor whose translated `name` carries exactly that surname. The web is intact; the only pregen-file defect was elsewhere (Power Supply, Overkill).",
+   "evidence": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-A-CAST.cn.json — relOne/relTwo values are 麦克惠尔 / 赫希 / 西格 / 辛格尔顿 (plus 无 for the two NPCs). Names present: 珍妮丝·麦克惠尔, 摩根·赫希, 桑尼·西格, 汉娜·辛格尔顿. 4/4 resolve; the two NPC rows are 'None'→'无' in both EN and CN."
+  },
+  {
+   "claim": "A negation or disjunction was lost from a Panic/Stress row, as happened in the previous project ('you or').",
+   "why_wrong": "Every 'you or' in a panic/stress/talent row survives, and a full negation audit across ST-J02..J10 (cannot/never/not/unless/only/except/no longer/at least/up to/rounding up|down/more than/higher than/instead/either) produced 24 flags, all of which I hand-checked and all of which are false positives from idiomatic renderings.",
+   "evidence": "ST-J05.cn.html: 'You or a nearby PC suffers a certain stress or panic response.' → '你或附近的 PC 承受了某些特定的压力反应或恐慌反应。'; Frenzy 'until you or the target is broken' → '直到你或目标濒死'; ST-I.cn.json Overkill 'when you or all enemies in sight are broken' → '当你或视野内所有敌人濒死时'. Idiomatic FPs: 'cannot' → 做不到/谈不拢/看不清/打不开/撑不住/盖不住; 'instead' → 而是/反而/改由/不如; 'never in an open zone' → 空旷区域里则不行."
+  },
+  {
+   "claim": "Each unit obeyed the brief's rule 'use your proposal consistently — do NOT invent a second form' for the six unsettled life-cycle names.",
+   "why_wrong": "The assembled pack shipped three simultaneous Chinese words for Drone, two for Chestburster and two for Ovomorph. The rule was obeyed inside each unit and broken across the wave, which is exactly the gap no per-unit self-gate can see.",
+   "evidence": "Before fix — Drone: 工兵体 ×12 (ST-J07) vs 工蜂异形 ×22 (J08/J09/J10/J14/J15/J16/J21/J23) vs 独行异形 ×16 (ST-A-CRE, incl. the actor name '独行异形（第四阶段异形）'). Chestburster: 破胸体 ×34 (journals + ST-T-REST) vs 破胸虫 ×13 (ST-A-CRE). Ovomorph: 卵形体 (J07/J09/J22, and the J09 heading id=\"stage-i:-ovomorph-(egg)\") vs 异形卵 (J08 link label + ST-A-CRE actor name) vs 外星卵 (J07 gloss)."
+  },
+  {
+   "claim": "飞行官 (Officer), 杂工 (Roughneck) and 炫技 (Stunt) are unit-level wrong-sense errors of the 仅限通用汽车 / 选择消防员 class.",
+   "why_wrong": "All three are byte-exact matches to the shipped system lang file, i.e. the units did the right thing. The questionable choice lives in the LOCK, not in Phase 4, and cannot be repaired from here without a coordinated lang+pack commit.",
+   "evidence": "1-系统汉化插件/lang/cn.json: ALIENRPG.Officer = 飞行官; ALIENRPG.Roughneck = 杂工; ALIENRPG.Stunts = 炫技; TYPES.Item.skill-stunts = 技能炫技. ST-A-CAST/ST-I/ST-J01 reproduce all three exactly."
+  },
+  {
+   "claim": "ST-A-CRE's 接战距离 vs the journals' 紧邻距离 is a translation inconsistency in the pack.",
+   "why_wrong": "The two English sources genuinely differ — the Evolved journal rules say 'Adjacent range', the carried-over actor blurbs say 'Engaged Range' — and cn.json locks both words separately. The Chinese is faithful; the hazard is editorial, not a defect.",
+   "evidence": "1-系统汉化插件/lang/cn.json line 73 \"Adjacent\": \"紧邻距离\", line 170 \"Engaged\": \"接战\". EN: ST-J04.en.html 'Close combat is any attack at Adjacent range'; raw-dumps/starterset.json Facehugger special 'may splash on its attacker and anyone within Engaged Range'."
+  },
+  {
+   "claim": "医务室 / 医疗实验室 / 医疗舱 is a three-way rendering of the same room.",
+   "why_wrong": "Three distinct English nouns, correctly kept distinct: Medbay (a ship sickbay in the USCSS Miranda worked example), Medlab (the Hadley's Hope laboratory) and MedPod (the Pauling surgical unit).",
+   "evidence": "ST-J03.en.html:255 'Hayes is in the Medbay' → 医务室; ST-J08.en.html:41 'Medlab' → 医疗实验室 (matches ST-U scene note 'Medlab': '医疗实验室'); ST-J08.en.html:100 'MedPod' → 医疗舱."
+  },
+  {
+   "claim": "The read-aloud passages are where this pack is weakest and need the most repair (task item 1).",
+   "why_wrong": "The read-aloud is the pack's strongest prose. Of the ten evblockquoteCenter blocks in ST-J07..J10, only one (J07 #0, 'WHAT'S THE STORY MOTHER?') is spoken text; it survives being read aloud with no stacked pre-modifiers, no 被-chains, no 的-chains and no English clause order, and it correctly spells numbers out for speech. A heuristic scan for ≥3-的 chains and ≥2-被 long clauses over the whole pack returned zero true positives. The real damage is in the duplicated room descriptions and the actor/table units.",
+   "evidence": "ST-J07 #0: '危机归危机，活还是得干。' for 'Crisis or not, you have a job to do.'; '你们呼叫哈德利的希望，只换来一句敷衍——等着，等他们腾出手来，再管你们这点小麻烦。' for the cursory-response sentence; numbers spelled out (二十二年前 / 一百五十三 / 二十四小时前 / 十公里). J09 'Signing Off' radio message likewise reads cleanly. The other 9 blockquotes are GM-facing statblocks and rules boxes, correctly in flat rules register."
+  },
+  {
+   "claim": "The Panic-response vocabulary given as 'just settled' (镇定·受惊·…) matches the LOCK byte-for-byte.",
+   "why_wrong": "It matches the shipped RollTable but not the lang key. Entry #1 disagrees: the lang file says 保持镇定, the settled list and ST-T-REUSE both say 镇定. Everything the pack does is internally right; the LOCK is the outlier and needs a ruling.",
+   "evidence": "1-系统汉化插件/lang/cn.json ALIENRPG.Panic1 = '<b>保持镇定：</b>…'; 6-工作区/phase4-starterset/ST-T-REUSE.cn.json 'Panic Response Table' 0-0 name = '镇定'; ST-J05.cn.html '镇定。无效果。' All twelve other panic names (受惊/喧闹/躁动/脱手/猜忌/犹豫/怔住/掩蔽/尖叫/逃跑/发狂/木僵) match across all three artefacts."
+  }
+ ],
+ "missed_items": [
+  {
+   "what": "30 blocks of identical English are translated twice (sometimes four times) with different wording, because ST-J07/ST-J08 are the master walkthrough pages and ST-J11–ST-J27 re-publish the same room descriptions as standalone pages. I normalised every proper noun and rules term inside them, but the surrounding prose still differs sentence by sentence.",
+   "where": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ — ST-J07↔J11/J12/J13/J14/J15/J16/J17/J18/J19/J20; ST-J08↔J21/J22/J23/J24/J25/J26/J27",
+   "why_matters": "A GM reads the room twice and gets two different texts: '空气里全是硝烟味' (J07) vs '空气里满是刺鼻的火药味' (J19); '开始跟踪他们' (J07) vs '开始尾随他们' (J16); '进入手术室' (J08) vs '进出手术室' (J22); '门诊手术' (J08) vs '日间手术' (J24). No mechanical check can see this — the tag counts, UUIDs and numbers are all identical. The controller should pick one rendering per duplicated block and propagate it, or make ST-J11–J27 literal reuses of the J07/J08 text."
+  },
+  {
+   "what": "The four life-cycle terms this pack now depends on are still project-level `pending`. I standardised the whole pack on 卵形体 / 抱脸虫 / 破胸体 / 工蜂异形 (majority + the ST-J10 headings), but nothing pins them.",
+   "where": "PROJECT.md §7.2.0; 7-其他内容/glossary/glossary_alien.json (Drone / Ovomorph / Chestburster all return null); RULINGS.json has no entry",
+   "why_matters": "§7.2.0 itself says a change here has a large blast radius and must go into RESOLUTIONS.assertions.json once decided. After my pass, ~50 strings across 12 files plus three actor names ride on these four words. Two caveats for the ruling: (a) 工蜂 imports a hive-worker sense the English explicitly denies ('Drones ... operate outside of the alien hive mind and are independent'), while the rejected 独行异形 was actually derived from that sentence; (b) 女王 was ruled with a rationale that calls the Queen the 蜂巢 leader, which is the strongest argument for keeping 工蜂."
+  },
+  {
+   "what": "Four LOCK-level term concerns that the units correctly reproduced and therefore cannot fix.",
+   "where": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/lang/cn.json",
+   "why_matters": "ALIENRPG.Officer=飞行官 — in this scenario the Officer is Janice Macwhirr, a colony survey team leader with no aircraft, and it sits next to Pilot=驾驶员. ALIENRPG.Stunts=炫技 — cn.json's own EvolvedStunts text lists the stunts as 多造成一点伤害/做得很快/做得很安静, none of which is 'showing off'. ALIENRPG.Panic1=保持镇定 vs 镇定 everywhere else. ALIENRPG.Panic11/Panic13 use 接战距离 where the Evolved journals a GM cross-references say 紧邻距离. Each needs a lang+pack commit, not a pack-only edit."
+  },
+  {
+   "what": "ST-U (shell) names and the journal prose that points at them disagree in four places.",
+   "where": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-U.cn.json vs pages/ST-J01.cn.html, ST-J02.cn.html, and the level references throughout",
+   "why_matters": "(1) ST-U translates the folder 'Alien RPG Mother Aids' → 异形RPG老妈辅助工具, but ST-J01's instructions tell the reader to look for the untranslated English folder name — the reader will hunt for a folder that no longer exists under that name. (2) 'Starter Set' = 新手包 (ST-U) vs 入门套装 (J01/J02). (3) Level 1/2 = 一层/二层 in the scene names and ST-I vs 1 层/2 层 in the journals. (4) 'Tannen's Casino' = 坦嫩的赌场 (ST-U scene) vs 坦嫩赌场 (all journals). I left ST-U alone: folder and scene names are the shell unit's lane and some are T-FROZEN lookups."
+  },
+  {
+   "what": "Manufacturer names follow no policy: some transliterated, some kept Latin, and one brand is split between the item name and the journal that tells you to find it.",
+   "where": "ST-I.cn.json ('Armat M41A脉冲步枪 Armat M41A Pulse Rifle') vs pages/ST-J08.cn.html and ST-J27.cn.html ('阿玛特 M41A 脉冲步枪' / '阿玛特M41A脉冲步枪'); also 韦兰德-汤谷 / 戴霍泰 / 西格森 / 保灵 transliterated vs Rexim / Starcub / Watatsumi kept Latin",
+   "why_matters": "PROJECT.md §3.4 defines T-LATIN for model and hull-class prefixes but says nothing about manufacturers, so the wave split. The armory table sends the GM looking for 阿玛特 M41A 脉冲步枪 while the compendium item is named Armat M41A脉冲步枪. Needs a §3.4 sub-rule, then one sweep."
+  },
+  {
+   "what": "Acid-splash armour degradation: the Chinese narrows the English to damage *absorbed by armour*, which the English does not say.",
+   "where": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ST-J09.cn.html, ACID SPLASH section",
+   "why_matters": "EN: 'Armor reduces the damage, but each point of damage reduces the armor level by 1, as the acid eats through it.' CN: '护甲可以减免伤害，但每减免 1 点伤害，护甲等级就降低 1'. On 4 damage against armour 2 the English (plainly read) drops armour by 4; the Chinese drops it by 2. ST-A-CRE's parallel passage renders the older core wording ('for each Success rolled') as 每掷出一个成功，护甲等级就下降一点 — a third number. I did not fix it because both English readings are live; it needs an adjudication, and it is the pack's most load-bearing creature rule."
+  },
+  {
+   "what": "Critical-injury names diverge between the ST-J05 D6 table, the ST-T-CRIT D66 tables, and ST-J09's Broken-Xenomorph table.",
+   "where": "pages/ST-J05.cn.html, pages/ST-J09.cn.html, ST-T-CRIT.cn.json",
+   "why_matters": "'Focused' = 凝神 (J05) vs 专注 (ST-T-CRIT 'EV - Critical Injuries' 11-11). 'Intense Pain' = 剧痛 (J05 and the legacy ST-T-CRIT table 13-13) vs 剧烈疼痛 (EV table 13-13). 'Last Breath' = 弥留 (J05 crit #6) vs 最后一口气 (J09 Broken Xeno #4). ST-T-CRIT is the tables lane so I left it; I did fix the one that is a live cross-reference (J10's Leg Slash now says “大腿被刺穿” to match ST-T-CRIT 25-25)."
+  },
+  {
+   "what": "ST-T-REUSE, frozen byte-for-byte from the Phase 2 system pack, uses two words the Evolved journals do not.",
+   "where": "ST-T-REUSE.cn.json vs pages/ST-J03.cn.html and ST-J05.cn.html",
+   "why_matters": "'open zone' = 开阔区域 in the frozen RollTable vs 空旷区域 in the journals; 'turn' = 出手 in the frozen RollTable vs 回合 in the journals. Both artefacts show in the same session — the Seek Cover chat card says 如果你处在开阔区域 while the rules page says 空旷区域. Cannot be fixed here without breaking the byte-identity the unit note demands."
+  },
+  {
+   "what": "Defects in the English source that the Chinese inherited faithfully — flagged so the controller can decide whether to repair rather than mirror.",
+   "where": "pages/ST-J07.en.html:269, ST-J03/J04/J05 link labels, ST-A-CAST vs ST-J08, the stage-* deep links",
+   "why_matters": "(a) ST-J07.en.html:269 has lost the stress-die glyph — 'On a (or whenever you feel it's dramatically appropriate)' — so the CN reads 掷出 时 with a hole in it; the CN cannot repair what the dump dropped. (b) Several EN link labels name the wrong section: J04 'Defending turns the attack into an opposed roll (Relieving Stress)', J03 'nor trigger Personal Agenda', J05 'You become fatigued (Full Auto)'. (c) Wes Osterman is Age 39 in ST-A-CAST and Age 49 in ST-J08. (d) `data-hash=\"stage-i\"` / `stage-iii` match no heading slug in either language — the CN added id=\"stage-i:-ovomorph-(egg)\", which is not `stage-i`, so those two deep links land at the top of the page. (e) ST-A-CAST Holroyd: notes say PERSONALITY: Loyal while appearance says Hard-working, and relOne=Hirsch while the prose names Sigg and MacWhirr."
+  },
+  {
+   "what": "'Facehugged' is semantically over-translated as 被抱脸虫寄生 ('parasitised') throughout, but ST-J09's own rules text distinguishes being face-hugged from being inseminated.",
+   "where": "pages/ST-J09.cn.html (抱脸 section) vs pages/ST-J07/J08/J25/J26.cn.html and ST-A-CAST.cn.json",
+   "why_matters": "ST-J09 rules: '抱脸之后每过一节，投一颗压力骰子——掷出 [stress], 就说明宿主已被植入，再摘掉抱脸虫也救不了他了' — implantation is a separate, rollable step. 寄生 asserts the outcome the roll is supposed to determine. In every current occurrence implantation has in fact happened so nothing breaks today, but the verb should be pinned before the core book, where an un-implanted victim is rescuable."
+  },
+  {
+   "what": "One read-aloud nit I chose not to touch: 一声难听的机械脆响 for 'a nasty, mechanical crunch'.",
+   "where": "pages/ST-J07.cn.html, WHAT'S THE STORY MOTHER? read-aloud block",
+   "why_matters": "脆响 means a crisp, brittle snap, which fights 难听 and does not describe a tractor drivetrain letting go. Spoken at the table it is the one phrase in the intro a GM might stumble over. 一记难听的机械闷响 or 咔的一声难听的机械碎响 would read better. Left for the owner because it is a taste call inside the pack's best passage."
+  }
+ ],
+ "fixes_applied": [
+  "ST-J07: Drone unified to 工蜂异形 (12 replacements: 工兵体异形 ×3, 工兵体 ×9). Evidence — every other unit already used 工蜂异形, including the section heading in pages/ST-J10.cn.html `<h3 id=\"stage-iv:-drone\">第四阶段：工蜂异形</h3>`; the parenthetical 'Larger Xenomorphs (Drones but not Facehuggers or Chestbursters)' was re-cast as 体型较大的异形（工蜂异形，但抱脸虫与破胸体除外） to avoid 异形…异形 stacking. File: 6-工作区/phase4-starterset/pages/ST-J07.cn.html",
+  "ST-A-CRE: Drone unified to 工蜂异形 (16 replacements of 独行异形, including the actor name → '工蜂异形（第四阶段异形） EV - Drone (Stage IV Xenomorph)'). Evidence — 独行异形 reads as 'solitary alien' and was the only rendering in the pack; the actor a GM drags to the map would never have matched the 工蜂异形 the scenario text names. File: 6-工作区/phase4-starterset/ST-A-CRE.cn.json",
+  "ST-A-CRE: Chestburster unified to 破胸体 (13 replacements of 破胸虫, incl. actor name). Evidence — 破胸体 is used 34× across ST-J04/J07/J08/J09/J10/J25/J26 and ST-T-REST.cn.json, and PROJECT.md §7.2.0 names the target sequence literally as 卵 → 抱脸虫 → 破胸体 → 成体. File: ST-A-CRE.cn.json",
+  "ST-A-CRE + ST-J08: Ovomorph unified to 卵形体 where the English says 'Ovomorph', leaving 异形卵 only where the English says 'alien egg(s)'. 5 edits in ST-A-CRE (actor name, notes opening, 蜕变成一枚卵形体, 卵形体的接战距离, 卵形体也放得出抱脸虫) and 2 in ST-J08 ('这是一枚卵形体——异形的卵' and the link label 第一阶段：卵形体（卵）). Evidence — pages/ST-J09.cn.html carries the target heading 第一阶段：卵形体（卵）, and pages/ST-J22.cn.html already linked to it with that exact label; ST-J08's label 第一阶段：异形卵（卵） was the only one that did not match its destination. Files: ST-A-CRE.cn.json, pages/ST-J08.cn.html",
+  "ST-J07: 外星卵 → 异形卵 in 'One Ovomorph (alien egg)' → 一枚卵形体（异形卵）. Evidence — the brief's rule is 异形 = the creature / 外星 = the adjective; an Ovomorph is a life-cycle stage of the creature, and ST-A-CRE + ST-J08 both render 'alien egg' as 异形卵. File: pages/ST-J07.cn.html",
+  "ST-J09 + ST-J10: all ten Xenomorph signature-attack names re-aligned to the RollTables that fire in chat. J10 Chestburster 逃逸→逃窜, 骇人嘶鸣→恐吓嘶鸣, 撕腿→割腿; J10 Drone 催眠凝视→摄魂凝视, 致命擒抓→致命抓取, 杀意已决→蓄势待杀, 尾刺→尾刺贯穿; J09 Facehugger 尾部缠击→尾部擒抱 (×2), 扑面擒抱→抱面擒抱. Evidence — ST-T-REST.cn.json 'EV - Chestburster Attacks' / 'EV - Stalker, Scout and Drone Attacks' / 'EV - Facehugger Attacks'; the RollTable side also correctly reuses 擒抱, the Grapple term defined in pages/ST-J04.cn.html. Files: pages/ST-J09.cn.html, pages/ST-J10.cn.html",
+  "ST-J10: 'an Impaled Thigh critical injury' → “大腿被刺穿”重伤 (was 大腿贯穿伤). Evidence — ST-T-CRIT.cn.json 'EV - Critical Injuries' 25-25 伤势: 大腿被刺穿. This is a live cross-reference: the attack tells the GM to apply a named row of that table. File: pages/ST-J10.cn.html",
+  "ST-J10 + ST-J09: 'Imp' 小鬼异形 → 幼魔 and 'Silent Assassin' 无声杀手 → 无声刺客; ST-J09 'Containment & Termination Protocol' 收容与终止协议 → 收容与终结规程. Evidence — ST-T-REST.cn.json 4-4 uses 幼魔; ST-A-CRE.cn.json Drone special uses 无声刺客 and 收容与终结规程 in all four creature entries. Files: pages/ST-J09.cn.html, pages/ST-J10.cn.html",
+  "ST-I.cn.json + ST-A-CAST.cn.json: Overkill talent — 'you must attack your enemies on every turn' was 你每一节都必须攻击敌人; corrected to 你每个回合都必须攻击敌人 in both copies. Evidence — 节 is the Stretch time unit (pages/ST-J03.cn.html time table: Stretch 节 / 5–10 分钟), while turn is 回合 (ST-J03: '你在先攻顺序中的位置称为你的回合'). As written the talent forced an attack once per 5–10 minutes instead of once per initiative turn. Same edit also changed ST-I's 不能掩蔽 → 不能寻找掩护, because 掩蔽 is the locked name of the panic response Seek Cover (cn.json ALIENRPG.Panic11).",
+  "ST-A-CAST.cn.json: Cutting Torch — 'Power Supply 5' / 'Power Supply roll' / 'Power Supply level of 5' were 电力供应 5 / 电力供应检定 / 电力供应等级为 5; corrected to 电量 5 / 电力余量检定 / 电量为 5. Evidence — Supply is the game's remaining-charge mechanic: cn.json ALIENRPG.Supply = 余量检定, and pages/ST-J02.cn.html defines it as '它们统称为余量… 余量检定'. 供应 is the everyday sense of the word — the same failure class as 仅限通用汽车.",
+  "ST-I.cn.json: four agenda cards had 'crew' rendered as ship's crew in a scenario with no ship. SIGG-ACT2 船上其他人总该明白这一点吧？ → 队里其他人…; HIRSCH-ACT3 你船员的性命 → 你队友的性命; HOLROYD-ACT1 保住其他船员的命 → 保住其他队友的命; HOLROYD-ACT2 可要是船员们发现 → 可要是队友们发现. Evidence — the PCs are a Hadley's Hope survey team walking back overland; the only ship in the pack is the Starcub shuttle they have not reached. (The 船员/船上/船友 uses in ST-J02/J03/J05 are correct — those worked examples are aboard the USCSS Miranda and were left alone.)",
+  "ST-J02: over-encumbrance rule repaired. Was '压力等级 会在你每一次于一节 潜行模式 中移动、或经过一轮战斗（战斗与先攻）时上升一级' — the second half dropped the movement condition, so stress would rise every combat round whether or not the character moved. Now '…中移动、或在一轮战斗（战斗与先攻 ）中移动时上升一级'. Evidence — EN: 'your Stress Level increases one step every time you move in a stretch of STEALTH MODE or a round of combat'. Tag order and both link nodes preserved. File: pages/ST-J02.cn.html",
+  "Adventure title unified to 《希望的最后一日》 (5 edits: ST-J01 ×1, ST-J02 ×4, replacing 希望的最后一天). Evidence — ST-U.cn.json folders map 'Hope's Last Day' → 希望的最后一日, and ST-J03/J05/J06/J07/J09 already used it. The Foundry folder a GM opens and the journal that names it now agree.",
+  "Proper nouns unified: Tannen 坦纳赌场 → 坦嫩赌场 (ST-J07 ×6; ST-U scene is 坦嫩的赌场, J08/J21/J26 already 坦嫩); MacWhirr 麦克沃尔 → 麦克惠尔 (ST-J07 ×1, a third form — ST-A-CAST/ST-I use 麦克惠尔); Al Simpson 艾尔·辛普森 → 阿尔·辛普森 (ST-J21 ×1); 'Operations Manager' 运营经理 → 运营主管 (ST-J25 ×1); Pauling 鲍林 → 保灵 (ST-J24 ×1); Nat 内特 → 娜特 (ST-J02 ×2 — the same female roughneck the J03/J04/J05 worked examples call 娜特).",
+  "Location names unified against ST-U's scene notes: 'Operations' 运营中心 → 指挥中心 (ST-J21 ×3) and ST-J07's 中央运营室 → 中央指挥中心; 'Central Unit' 中央单元 → 中央区 (ST-J08 ×2); 'Asset/Claims Office' 资产／权属办公室 → 资产/矿权办公室 (ST-J07 ×1, also fixing a full-width slash); 'W-Y Office' 韦兰德-汤谷公司办公室 → 韦兰德-汤谷办公室 (ST-J16 ×1); 'walkway/skyway' 走道 → 天桥 (ST-J07 ×1); 'level N' 第 1 层/第 2 层 → 1 层/2 层 (ST-J21 ×4). Evidence — ST-U.cn.json scene notes: Operations 指挥中心, Asset/Claims Office 资产/矿权办公室, Weyland-Yutani Office 韦兰德-汤谷办公室, Skyway to Casino 通往赌场的天桥.",
+  "'Landing Pad' unified to 停机坪 across the pack (ST-J08 ×4, ST-J09 ×2, ST-J16 ×1, replacing 着陆坪). Evidence — this was a real dangling deep link: pages/ST-J07.cn.html linked with the label 停机坪 to `data-hash=\"landing-pad\"`, whose destination heading in ST-J08 read 着陆坪, so a GM clicking 停机坪 landed on a section with a different name. 停机坪 was chosen because it is also what the player-facing agenda cards in ST-I.cn.json say (HOLROYD-ACT2, SINGLETON-ACT3).",
+  "'We Got Movement' event cross-reference repaired: pages/ST-J11.cn.html and ST-J13.cn.html linked with the label 有动静了 to `data-hash=\"we-got-movement\"`, whose heading in ST-J08 is 有动静. Both labels corrected to 有动静. Same two files: 运动探测器 → 运动追踪器, matching the M314 Motion Tracker device named 运动追踪器 in ST-J03/J07/J08 and ST-A-CAST.",
+  "Duplicate-page vocabulary reconciled where the two copies named the same object differently: ST-J22 对讲机→内部通话器, 超冷却剂→超冷剂, 冷藏格→冷藏隔间, 医疗工作台→医疗工作站, 算作一件随身物品→算作一件常规物品; ST-J21 对讲机→内部通话器; ST-J23 在物品栏里算作一件物品→算作一件常规物品; ST-J25/ST-J26 被抱脸虫抱住了脸 / 被抱脸虫抱过脸 → 被抱脸虫寄生. Evidence — each is the ST-J08 rendering of the identical English sentence (ST-J08.en.html and ST-J21/J22/J23/J25/J26.en.html share the block verbatim). 内部通话器 also beats 对讲机 on sense: this is a wall intercom, not a handheld.",
+  "Quotation style normalised to “” (ST-J02 ×3, ST-J25 ×1, replacing 「」). Evidence — “” is used in all 17 other files; 「」 appeared only in those two.",
+  "Post-fix verification, all green: tag/class/data-uuid/data-hash/style/src counts identical to English in all 27 journal pages (0 diffs); all 7 cn.json files re-parse; 0 dangling link labels (link text now equals its destination heading in every case); numeric audit with Chinese-numeral folding (一/二/十/百/千 → Arabic) shows no English number lost in any file."
+ ],
+ "verdict": "The prose itself is good — better than the mechanics of assembling it. Sentence-level translation quality is high: the read-aloud intro works spoken, the rules text in ST-J02..J06 is precise and flat, negations and disjunctions all survive (24 audit flags, all false positives), no number is lost once Chinese numerals are folded, and a heuristic scan for 的-chains and 被-chains over the whole pack returned zero true positives. The register is correct per unit: rules flat, scenario tense, boxed text speakable.\n\nWhat failed is the wave, not the writing. Every serious defect I found is a seam between units that no per-unit self-gate could see. The worst: the Xenomorph Drone shipped under three different Chinese names simultaneously (工兵体 in ST-J07, 工蜂异形 in eight journal units, 独行异形 as the actor's own name in ST-A-CRE), and Chestburster and Ovomorph under two each — the actor a GM drags onto the map did not share a name with the creature the scenario text describes. Ten Xenomorph signature-attack names differed between the journal page a GM reads and the RollTable that fires in chat. Two deep links pointed at headings with different names than their own labels. Thirty blocks of identical English were translated twice by different units. I fixed roughly 130 strings across 18 files and re-verified markup, JSON, links and numbers clean.\n\nThree real content errors, all outside the read-aloud: the Overkill talent made you attack once per 节 (5–10 minutes) instead of once per 回合; the Cutting Torch used 电力供应 for the Supply mechanic, which the LOCK calls 余量; and ST-J02's encumbrance rule dropped the movement condition from the combat half of \"every time you move in a stretch of stealth mode or a round of combat\". The pregen relationship web, which the task suspected, is intact — 4/4 surnames resolve.\n\nTwo things need the controller, not me. The four life-cycle names are still `pending` in the glossary while ~50 strings and three actor names now depend on my standardisation — pin them in RESOLUTIONS before anything else references them. And the acid-splash armour-degradation sentence in ST-J09 narrows \"each point of damage\" to damage absorbed by armour; both English readings are live and it is the pack's most load-bearing creature rule, so it wants a ruling rather than a unilateral edit."
+}

@@ -1,0 +1,70 @@
+{
+  "crucible.playtest.json": [
+    {
+      "path": "entries.Playtest 1 - The Ring of Valor.actors.Belladonna.items.Assassin.actions.markForDeath.description",
+      "phrase": "minute studying a creature",
+      "cn": "你花费1分钟研究一个生物。对你的目标进行一次知识检定。若成功，你会知晓目标易伤的所有伤害类型。在战斗第一轮中，你的最低先攻变为比你已标记目标的先攻高1。</p>\nYou spend 1 minute studying a creature. Perform a 知识检定 about your 目标."
+    }
+  ],
+  "crucible.pregens.json": [
+    {
+      "path": "entries.Belladonna.items.Assassin.actions.markForDeath.description",
+      "phrase": "minute studying a creature",
+      "cn": "你花费 1 分钟研究一个生物。对你的目标进行一次知识检定。若成功，你会得知该目标易受哪些伤害类型影响。在战斗第一轮中，你的最低先攻变为比你已标记目标的先攻高 1。</p>\nYou spend 1 minute studying a creature. Perform a 知识检定 about you"
+    }
+  ],
+  "crucible.rules.json": [
+    {
+      "path": "entries.Welcome To Crucible.pages.What is Crucible.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<img src=\"systems/crucible/ui/banner-full.webp\">\n</figure>\n<p><strong>Crucible</strong> 是一个创新且现代的角色扮演游戏（RPG）系统，专为 <strong>Foundry Virtual Tabletop</st"
+    },
+    {
+      "path": "entries.Welcome To Crucible.pages.Providing Feedback.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p>我们欢迎您反馈使用 Crucible 的体验。这些数据有助于我们识别游戏中需要改进的方面，收集需要修复的错误，并确定新功能开发的优先级。</p><h3 class=\"divider\">Discord</h3><p><a href=\"https://discord.gg/foundryvtt\">"
+    },
+    {
+      "path": "entries.Welcome To Crucible.pages.Module Recommendations.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p>与 Foundry Virtual Tabletop 中的任何游戏系统一样，模块可以增强并提升游戏体验的品质。不过，我们仍建议在模块较少的环境中游玩 Crucible，以确保你的体验以及你提供的任何反馈都能明确针对 Crucible 系统的功能本身。</p><h2 class=\"divider"
+    },
+    {
+      "path": "entries.Welcome To Crucible.pages.Credits.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p>Crucible 由 <strong>Foundry Virtual Tabletop </strong>团队打造。具体包括：</p><dl><dt><p>Andrew Clayton (Atropos)</p></dt><dd><p>系统负责人、游戏设计与软件开发。</p></dd><dt>"
+    },
+    {
+      "path": "entries.Welcome To Crucible.pages.License.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p>Crucible 目前仅向 Foundry Virtual Tabletop 用户开放，包括我们的 Patreon 成员以及部分社区成员。</p><p>目前，Crucible 不提供可用于创造第三方内容或修改系统及其规则的许可。</p><p>我们计划在未来提供一份宽松的许可，其他人可用其创造插"
+    },
+    {
+      "path": "entries.Dice Mechanics.pages.Dice Mechanics.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p>Crucible 使用标准的角色扮演游戏骰子组；依靠 4、6、8、10、12 和 20 面骰来进行各种掷骰。这些骰子分别称为 <strong>d4</strong>、<strong>d6</strong>、<strong>d8</strong>、<strong>d10</strong> 和 <"
+    },
+    {
+      "path": "entries.Combat.pages.Movement.text",
+      "phrase": "Foundry Virtual Tabletop",
+      "cn": "<p><strong>移动</strong>是角色在 Crucible 中于战斗里会执行的最重要动作之一。</p><p>Crucible 中的移动与站位使用精细的 1 英尺网格，这带来了许多优秀特性，例如在战术上具有重要意义的移动与站位、生物体型与武器射程之间有意义的差异，以及直观的效果区域。</p"
+    },
+    {
+      "path": "entries.Character Mechanics.pages.Ancestry.text",
+      "phrase": "Strength    Toughness    Cold",
+      "cn": "<p><strong>血统</strong>用于界定 Crucible 中角色的生物学与生理特征。奇幻设定中可能会有各种可供玩家扮演为角色的种族。Crucible 支持为这些选项分别定义在叙事和机制上都适合你自己游戏的血统。</p><h2 class=\"divider\">创造血统</h2><p>Cr"
+    },
+    {
+      "path": "entries.Equipment.pages.Affixes.text",
+      "phrase": "Affixes  compendium pack",
+      "cn": "<p><strong>词缀</strong>是可应用于@UUID[.LYj7sghAMoQj9FFR]{武器}、@UUID[.JTsl6ENdxSDW765Q]{护甲}或@UUID[.配件00000]{配件}的魔法效果，用于通过附魔强化它们。可用词缀的可浏览合集见于 <strong>Crucible"
+    }
+  ],
+  "crucible.talent.json": [
+    {
+      "path": "entries.Assassin.actions.markForDeath.description",
+      "phrase": "minute studying a creature",
+      "cn": "你花费1分钟研究一个生物。进行一次关于你目标的知识检定。若成功，你会得知目标对哪些伤害类型处于易伤状态。在战斗的第一轮中，你的最低先攻值变为比你已标记目标的先攻值高1。</p>\nYou spend 1 minute studying a creature. Perform a 知识检定 about "
+    }
+  ]
+}

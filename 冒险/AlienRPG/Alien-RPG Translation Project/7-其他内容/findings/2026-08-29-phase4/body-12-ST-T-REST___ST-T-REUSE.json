@@ -1,0 +1,218 @@
+{
+ "unit": "ST-T-REST + ST-T-REUSE",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-T-REST.cn.json ; C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-T-REUSE.cn.json",
+ "summary": "ST-T-REUSE: English side asserted byte-identical FIRST (index.json payload vs 1-系统汉化插件/compendium/en) — PASS, packs have not diverged — then the Chinese was copied verbatim out of 1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json, not retranslated. 2 tables / 21 result rows / all 20 distinct condition names preserved (镇定 appears twice, once per table, mirroring the two English \"Keeping Cool.\" rows). A third gate confirms the phase2 SYS-T1.cn.json and the shipped compendium/cn agree, so the copy has a single unambiguous source. ST-T-REST: 4 creature attack tables / 17 result rows translated fresh. All 4 table `name` fields and the Facehugger 3-4 sub-table reference name kept byte-exact English (T-FROZEN) — verified in sync with the sibling ST-A-CRE.cn.json, whose 5 actors carry the same 3 English strings in `rollTable`. Life-cycle family proposed as: 卵/异形卵 → 抱脸虫 (locked) → 破胸体 → 成体, with 幼魔 for the Imp variant and 卵化 for \"ovomorphing\". ⚠ ST-A-CRE independently chose 破胸虫 for Chestburster — a live collision, see open_issues #1.",
+ "output_file_note": "two files, one per unit",
+ "chars_en": 10396,
+ "chars_cn": 2302,
+ "frozen_kept": [
+  "EV - Chestburster Attacks (table name)",
+  "EV - Facehugger Attacks (table name)",
+  "EV - Stalker, Scout and Drone Attacks (table name)",
+  "EV - Sub Table Facehugger Attacks (table name)",
+  "EV - Sub Table Facehugger Attacks (result name on EV - Facehugger Attacks 3-4, the sub-table document reference)",
+  "Panic Response Table (table name)",
+  "Stress Response Table (table name)",
+  "APEsuit (gear proper name, kept English so the prose still matches the item Weyland-Yutani APEsuit)",
+  "[[6db]] [[1db]] [[8db]] [[10db]] [[9db]] (inline-roll machinery)",
+  "style=\"text-align:center;color:lightblue\" (h2 attribute, verbatim)"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "The only two places this project has ever spelled a Chestburster rendering are PROJECT.md §7.2.0 point 2 and the wave brief, and both write the model sequence as 卵 → 抱脸虫 → 破胸体 → 成体. Principle I applied, so the set is coherent rather than arbitrary: 「虫」 marks the one arthropod-shaped parasite stage (only Stage II earns it — the Facehugger is literally spider/crustacean-shaped, and 抱脸虫 is owner-pinned), while 「体」 marks the -morph form stages (卵形体 / 破胸体 / 成体). Corerules ch.10 backs the split: the Stage III Imp variant is described as 'a miniature version of its adult form' with 'translucent skin, a carapace and rawboned features' — i.e. a small bipedal Xenomorph, not a worm, so 虫 would mis-describe it. ⚠ COLLIDES with ST-A-CRE.cn.json which used 破胸虫 (13 occurrences + the actor name). Controller must break this; see open_issues #1."
+  },
+  {
+   "en": "Imp",
+   "proposed": "幼魔",
+   "why": "Not one of the six stage names — it is a named variant inside Stage III ('Stage III: Chestburster, Bambi Burster, Imp'), the immature form of a Praetomorph. So it does not take the 「体」 stage suffix and does not disturb the family. 幼 carries 'immature / miniature version of its adult form'; 魔 carries the demonic etymology of Imp and the horror register. Rejected 小鬼 (reads as 'little kid' in Chinese, kills the register). Low confidence — only 1 occurrence in this unit; corerules ch.10 has the full description and should settle it."
+  },
+  {
+   "en": "Ovomorph / ovomorphing",
+   "proposed": "卵化 (the process); 卵形体 for the noun, 异形卵 in running prose",
+   "why": "Only the verbal form appears in my unit ('initiate the ovomorphing process' → 启动卵化的过程). 卵化 = 宿主→卵, deliberately NOT 孵化 (= hatching, 卵→幼体, the opposite direction) — that near-homophone trap is the main reason to pin this term now. ✅ ST-A-CRE.cn.json independently arrived at 卵化 (7 occurrences) and 异形卵 (8), so this half of the family is already cross-unit consistent with no coordination."
+  },
+  {
+   "en": "Xeno (clipped form of Xenomorph)",
+   "proposed": "异形",
+   "why": "Chinese has no natural clipping of 异形, and the English alternates Xenomorph/Xeno inside a single row purely for rhythm. Rendering both as 异形 (glossary_alien.json, settled) loses nothing. Note the project rule held: 异形 = the creature, 外星 = the adjective — 外星 correctly occurs 0 times in this unit."
+  },
+  {
+   "en": "Skittering Menace",
+   "proposed": "窸窣逼近",
+   "why": "Result label on EV - Facehugger Attacks 1-2, needed in both the `name` field and the `<strong>` opener. 窸窣 is the rustling-scurry sound word; the row's own gloss is 'It skitters forward, single-minded and horrifyingly spider-like'. Dropped the stray trailing ASCII colon from the `name` field, following the shipped Panic Response Table precedent where 'Keeping Cool.' → 镇定 (trailing punctuation dropped in name fields, kept inside the description's <strong>)."
+  },
+  {
+   "en": "inner jaws / outer jaws",
+   "proposed": "内颚 / 外颚",
+   "why": "Used in EV - Stalker, Scout and Drone Attacks 4-4 and 6-6, which must agree with each other since 6-6's Headbite is the follow-up threatened in 4-4. 内颚/外颚 is the established Alien-lore pair and stays anatomical rather than inventing a second creature word."
+  },
+  {
+   "en": "Headbite",
+   "proposed": "咬头",
+   "why": "Attack name, cross-referenced by 4-4 ('will use a Headbite attack (#6 below)') and titling 6-6, so it must be one string in both places. Kept as a blunt 2-char verb-object to match the neighbouring 咬喉 (Throat Bite) on the Chestburster table."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Armor Piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Close Combat",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Stamina",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察 (in the copied REUSE text)"
+  },
+  {
+   "english": "Panic Roll",
+   "lang_key": "ALIENRPG.CREWPANIC",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "Damage",
+   "lang_key": "ALIENRPG.Damage",
+   "used": "伤害"
+  },
+  {
+   "english": "Critical Injury",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力 (压力等级 built on it; 压力等级 itself has no lang key)"
+  },
+  {
+   "english": "Fast Action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作 (REUSE, copied)"
+  },
+  {
+   "english": "Seekcover",
+   "lang_key": "ALIENRPG.seekcover",
+   "used": "掩蔽 (REUSE result name)"
+  },
+  {
+   "english": "Spooked / Noisy / Twitchy / Lose Item / Paranoid / Hesitant / Freeze / Scream / Flee / Frenzy / Catatonic",
+   "lang_key": "ALIENRPG.spooked / .noisy / .twitchy / .loseitem / .paranoid / .hesitant / .freeze / .scream / .flee / .frenzy / .catatonic",
+   "used": "受惊/喧闹/躁动/脱手/猜忌/犹豫/怔住/尖叫/逃跑/发狂/木僵 — all 11 verified byte-equal to cn.json by copying"
+  },
+  {
+   "english": "Jumpy / Tunnel Vision / Aggravated / Shakes / Frantic / Deflated / Mess Up",
+   "lang_key": "ALIENRPG.jumpy / .tunnelvision / .aggravated / .shakes / .frantic / .deflated / .messup",
+   "used": "惊跳/恍惚/恼怒/颤抖/慌乱/泄气/失误 — all 7 verified byte-equal to cn.json by copying"
+  },
+  {
+   "english": "Keeping Cool",
+   "lang_key": "(NONE — no key exists in lang/cn.json)",
+   "used": "镇定 — the one condition name of the 20 that is NOT lock-bound; it comes from the settled vocabulary only. Flagged so nobody later 'fixes' it against a key that does not exist."
+  },
+  {
+   "english": "Turn (combat)",
+   "lang_key": "(none; ALIENRPG.OneTurn is untranslated upstream)",
+   "used": "出手 — matched to the shipped Panic Response Table's 你的下一次出手, NOT the time-unit 节 from the settled vocabulary. 节 = Stretch/Turn as a duration; these rows all mean the combat turn."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "ST-T-REUSE — English side byte-identical before copying (index payload vs 1-系统汉化插件/compendium/en), name + all result name/description fields, both tables",
+   "result": "PASS — packs have NOT diverged"
+  },
+  {
+   "check": "ST-T-REUSE — phase2 SYS-T1.cn.json == shipped compendium/cn for both tables (single unambiguous source for the copy)",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REUSE — written output value-identical to shipped compendium/cn (round-trip)",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REUSE — 20 distinct condition names present across 21 rows (镇定 twice, once per table)",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REST — HTML tag COUNTS equal English, per field (17 result descriptions + 2 table descriptions)",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REST — class / style attributes verbatim",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REST — inline-roll machinery verbatim ([[6db]] [[1db]] [[8db]] [[10db]] [[9db]])",
+   "result": "PASS"
+  },
+  {
+   "check": "ST-T-REST — @UUID / @DRAW / @TEXTDRAW enrichers verbatim (none present in this unit)",
+   "result": "PASS (vacuous)"
+  },
+  {
+   "check": "Both — shape identical to English: table set, field order per table, range set, field set per result",
+   "result": "PASS"
+  },
+  {
+   "check": "Both — T-FROZEN: 6 table names + the Facehugger 3-4 sub-table reference name kept byte-exact English",
+   "result": "PASS"
+  },
+  {
+   "check": "Cross-unit — my 3 English table names byte-match the rollTable refs already written in the sibling ST-A-CRE.cn.json (5 actors)",
+   "result": "PASS — no rTables desync"
+  },
+  {
+   "check": "ST-T-REST — no residual English prose (allowlist: GM, APEsuit, db)",
+   "result": "PASS"
+  },
+  {
+   "check": "Both — banned term variants absent (破胸虫/破胸者/抱面虫/异形虫/外星人/异形飞船/穿甲/孵化)",
+   "result": "PASS within my two files — but see open_issues #1, 破胸虫 IS present in the sibling unit"
+  },
+  {
+   "check": "Both — RULINGS-rejected forms absent (穿甲弹 / 远程战斗 / 重型机械 / 王后)",
+   "result": "PASS"
+  },
+  {
+   "check": "异形 vs 外星 discipline — 外星 occurrences in this unit",
+   "result": "PASS — 0 occurrences (no spacecraft/adjective context arises here)"
+  },
+  {
+   "check": "Both — valid UTF-8 JSON, no BOM, LF newlines, no key overlap between the two units",
+   "result": "PASS"
+  },
+  {
+   "check": "Scope — wrote only my two unit files; compendium/cn untouched",
+   "result": "PASS"
+  }
+ ],
+ "open_issues": [
+  "⚠ #1 CROSS-UNIT TERM COLLISION, needs a controller ruling before assembly. Chestburster: I wrote 破胸体 (6 occurrences, ST-T-REST.cn.json); the sibling ST-A-CRE.cn.json wrote 破胸虫 (13 occurrences PLUS the actor name '破胸虫（第三阶段异形） EV - Chestburster (Stage III Xenomorph)'). Same creature, two words, and the actor's attack button opens exactly my table — a GM will see both in one click. Case for 破胸体: it is the form written in PROJECT.md §7.2.0 point 2 AND in the wave brief, both as 卵 → 抱脸虫 → 破胸体 → 成体; and corerules ch.10 describes the Stage III Imp as 'a miniature version of its adult form' with 'a carapace and rawboned features', which 虫 mis-describes. Case for 破胸虫: PROJECT.md's rule sentence says 不能一个用「虫」一个用「体」一个用「者」, and 抱脸虫 is the owner-pinned anchor. The rule text and its own worked example contradict each other — that is the real defect, and it should be resolved in RULINGS.json, not by a silent sed. Either way the fix is one term in one file; my side is the cheaper one (6 occurrences, no name field). The rest of the family already agrees across both units with no coordination: 抱脸虫, 异形, 卵化, 异形卵, 成体.",
+  "#2 UPSTREAM DEFECT (not fixed, count preserved). EV - Stalker, Scout and Drone Attacks 1-1: the English closes the tag mid-word — '<strong>STRESS LEVE</strong>L'. There is no Chinese analogue of a word split at that point, so I wrote <strong>压力等级</strong> and preserved the tag COUNT (2 <strong>, 1 <p>) rather than replicating the split as <strong>压力等</strong>级. If a gate compares tag positions rather than counts it will flag this row.",
+  "#3 UPSTREAM DEFECT (silently repaired in the Chinese). EV - Facehugger Attacks 6-6 has an unclosed parenthesis: '(armor has no effect, except the APEsuit.' — no ')'. A dangling 全角 parenthesis reads as a rendering bug in Chinese, so I closed it: （护甲无效，APEsuit 除外）。 This changes no game content. Flagging because the project's policy elsewhere is to preserve upstream defects rather than fix them.",
+  "#4 Deliberate divergence worth a controller glance: the EV - Facehugger Attacks table `description` is a heading that I translated (<h2>抱脸虫攻击</h2>) while the table's own `name` stays 'EV - Facehugger Attacks' in English (T-FROZEN). So the sidebar label and the in-table banner are in different languages. That is what the freeze forces — the name is machinery, the description is prose — but it will look like an oversight to anyone reading the assembled pack.",
+  "#5 I added id=\"facehugger-attacks\" to that <h2>, per the brief's heading rule. Note it is belt-and-braces here, not load-bearing: RollTable descriptions never go through JournalEntryPage.buildTOC, and no data-hash=\"facehugger-attacks\" exists anywhere in the starterset (I enumerated all 44 distinct slugs). The corpus currently has 0 explicit heading ids, so if the controller prefers attribute-verbatim headings this is the one place to strip.",
+  "#6 APEsuit left in English inside EV - Facehugger Attacks 6-6. It is a gear proper name and it points at the corerules item 'Weyland-Yutani APEsuit' (not in the T-FROZEN item_names register, so a later unit MAY translate it). If the item族 unit renames it, this one prose mention must move in the same commit or the reference goes stale.",
+  "#7 The EV - Sub Table Facehugger Attacks description quotes the parent table by its frozen English name — 「“EV - Facehugger Attacks”表中“4 尾部擒抱”一项的子表」— deliberately, so a GM reading it can find that table in the sidebar, where it is also English. If the controller ever unfreezes table names, this string is a hard sync point."
+ ]
+}

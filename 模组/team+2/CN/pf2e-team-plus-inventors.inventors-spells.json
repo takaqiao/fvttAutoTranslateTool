@@ -1,0 +1,20 @@
+{
+    "label": "发明家+ 法术 Inventors+ Spells",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Technomancy Ray": {
+            "name": "科法射线 Technomancy Ray",
+            "description": "<p>你向对手射出一道由科技赋能的魔法射线。以你大发明对 30尺内的目标进行一次法术攻击骰。命中时，该射线造成 1d4 火焰伤害；大成功则造成两倍伤害与 1点持续火焰伤害。如果你在制作上为大师，你射线的伤害骰提升至 d6；如果你在制作上为传奇，则提升至 d8。</p>\n<p>如果你拥有「可变核心」，你可以将伤害类型从火焰更改为你所选的类型，并将火焰特征替换为相应的伤害特征。</p>"
+        }
+    }
+}

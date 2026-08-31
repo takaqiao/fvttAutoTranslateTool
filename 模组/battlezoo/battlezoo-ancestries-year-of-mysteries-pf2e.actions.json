@@ -1,0 +1,29 @@
+{
+  "label": "动作\nActions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Will-o'-Wisp": "鬼火\nWill-o'-Wisp",
+    "Mushie": "蘑菇怪\nMushie"
+  },
+  "entries": {
+    "Many-Eyed Survey": {
+      "name": "多眼勘察 Many-Eyed Survey",
+      "description": "<p>你仔细审视周围环境，确保没有人能趁你不备。直到你下一个回合开始，你获得全方位视野，这会使你无法被夹击。</p>\n<p>You carefully survey your surroundings, ensuring that no one can get the drop on you. Until the start of your next turn, you gain all-around vision, which prevents you from being flanked.</p>"
+    },
+    "Steer Constellation": {
+      "name": "引导星座 Steer Constellation",
+      "description": "<p>你调整每一道星座光的距离与方向。只要它仍在你的效果线之内，你就可以将每一道光移动到离你最多120英尺远。</p>\n<p>You adjust the distance and direction to each of your constellation lights. You can move each light up to 120 feet away from you, as long as it remains in your line of effect.</p>"
+    },
+    "Tether Soul": {
+      "name": "系魂 Tether Soul",
+      "description": "<p><strong>频率</strong> 每天一次</p><p><strong>触发</strong> 一名濒死的盟友的濒死值将要增加，且该盟友在30英尺内</p><hr /><p><strong>效果</strong> 你伸出一条触须钩住盟友的灵魂，短暂阻止其从身体飘离。该盟友的濒死值不增加。</p>\n<p><strong>Frequency</strong> once per day</p><p><strong>Trigger</strong> A dying ally's dying value would increase, and that ally is within 30 feet</p><hr /><p><strong>Effect</strong> You extend a tendril to hook onto the ally's soul, momentarily preventing it from drifting away from their body. The ally's dying value does not increase.</p>"
+    },
+    "Extend Hyphae": {
+      "name": "延展菌丝 Extend Hyphae",
+      "description": "<p><strong>需求</strong> 你正站在一处你的菌丝能够穿过的表面上</p><hr /><p><strong>效果</strong> 你在地下延伸一张菌丝网络，提升你感知震动的能力。直到你下个回合开始时，你的震动感知射程提升至80英尺。</p>\n<p><strong>Requirements</strong> You are standing on a surface that your hyphae can pass through</p><hr /><p><strong>Effect</strong> You extend a network of hyphae underground, improving your ability to sense vibrations. Until the start of your next turn, the range of your tremorsense increases to 80 feet.</p>"
+    }
+  }
+}

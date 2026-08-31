@@ -1,0 +1,3050 @@
+{
+    "label": "玩家选项 Player Options",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {
+        "Farming Lore": "农业学识 Farming Lore",
+        "Intimidation": "威吓 Intimidation",
+        "Skill Feats": "技能专长 Skill Feats",
+        "Labor Lore": "劳工学识 Labor Lore",
+        "Arcana": "奥秘 Arcana",
+        "Fishing, Ocean, and Sailing Lore": "渔业、海洋与航海学识 Fishing, Ocean, and Sailing Lore",
+        "Teamwork Feats": "团队专长 Teamwork Feats",
+        "Mining Lore": "采矿学识 Mining Lore",
+        "Lore Skill Feats": "学识技能专长 Lore Skill Feats",
+        "Crafting": "制造 Crafting",
+        "Athletics": "运动 Athletics",
+        "Thievery": "妙手 Thievery",
+        "Stealth": "潜行 Stealth",
+        "Fortune-Telling Lore": "占卜学识 Fortune-Telling Lore",
+        "Creature Lores": "生物学识 Creature Lores",
+        "Engineering Lore": "工程学识 Engineering Lore",
+        "Underworld Lore": "黑社会学识 Underworld Lore",
+        "Society": "社群 Society",
+        "Settlement Lores": "聚落学识 Settlement Lores",
+        "Academia Lore": "学院学识 Academia Lore",
+        "Terrain Lores": "地形学识 Terrain Lores",
+        "Triumph Feats": "凯旋专长 Triumph Feats",
+        "Religion": "宗教 Religion",
+        "Aftermath Feats": "余波专长 Aftermath Feats",
+        "Deity Lores": "神祇学识 Deity Lores",
+        "Shared Class Feats": "共享职业专长 Shared Class Feats",
+        "Games and Gambling Lore": "游戏与赌博学识 Games and Gambling Lore",
+        "General Feats": "通用专长 General Feats",
+        "Multi-Skill Feats": "多技能专长 Multi-Skill Feats",
+        "Acrobatics": "特技 Acrobatics",
+        "Nature": "自然 Nature",
+        "Cartography Lore": "制图学识 Cartography Lore",
+        "Hunting Lore": "狩猎学识 Hunting Lore",
+        "Feats+": "专长+ Feats+",
+        "Performance": "表演 Performance",
+        "Occultism": "灵学 Occultism",
+        "Survival": "生存 Survival",
+        "Diplomacy": "外交 Diplomacy",
+        "Mercantile Lore": "商业学识 Mercantile Lore",
+        "Medicine": "医疗 Medicine",
+        "Cooking Lore": "烹饪学识 Cooking Lore",
+        "Deception": "欺诈 Deception"
+    },
+    "entries": {
+        "Recognize Liar": {
+            "name": "识破谎言 Recognize Liar",
+            "description": "<p>你深知撒谎者所为，因为你自己也是。你始终使用你的欺诈 DC 对抗试图对你或在你面前对他人撒谎的生物，无须再参与对话。此外，当伪造目标试图模仿某具体生物之作品时，你可以以你的欺诈 DC 替代察觉 DC 来探测伪造；当对抗他人尝试分神、伪装或佯攻时，你也可以用欺诈 DC 替代察觉 DC。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为专家"
+                },
+                {
+                    "value": "骗过我"
+                }
+            ]
+        },
+        "Magical Feedback": {
+            "name": "魔法反馈 Magical Feedback",
+            "description": "<p><strong>触发</strong> 你于一场战斗中第二次以「解除魔法」或「反制法术」成功对抗一道法术。</p><hr /><p>你将所驱散法术中的部分魔法能量再利用以增强自身。你恢复你最近用于解除魔法或反制法术的法术位。若你以此法术位施放法术，则该法术获得「大胆」特征。在你停止庆祝凯旋后，此法术位失去。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.BZizB3VFYoo6bGcs]{激涌唤起} 大胆活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "反制法术，或能施放解除魔法"
+                }
+            ]
+        },
+        "Solitary Workforce": {
+            "name": "独行劳力 Solitary Workforce",
+            "description": "<p>你之劳作效率超过十二同辈。对任何需要多名生物体力劳作之活动，你视为两名生物——只掷一次检定并以其结果决定每名你所替代之参与者的效果。若你为劳作学识专家，你视为四名生物；若为大师，则六名；若为传奇，则八名。若你以「劳作学识」 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}，就所获货币而言，你将任务等级视为高一级；若为大师则高 2 级；若为传奇则高 4 级。</p><p>此外，当你以劳作学识赚取收入成功时，若这是你与之首次互动，则对你于该活动期间一同共事或为之效力的任何生物，你获得一次成功 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象} 之效果（成功程度与你的检定相同）。</p>",
+            "prerequisites": [
+                {
+                    "value": "劳工学识熟练度为受训"
+                }
+            ]
+        },
+        "Impossible Flow": {
+            "name": "不可能之流 Impossible Flow",
+            "description": "<p>移动时没有什么能减缓你的势头。当你「翻滚穿过」时，敌人的存在不会让方格成为困难地形。此外，当你以特技进行逃脱时，你可以掷两次特技检定并取较好结果。此为命运效果。</p><hr /><p><strong>Foundry 注</strong> 应用「掷两次取较高」效果之规则元素已存在但不会触发。请手动处理直至该问题修复。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为传奇"
+                }
+            ]
+        },
+        "Clean Entry": {
+            "name": "洁净入场 Clean Entry",
+            "description": "<p>你能滑过甚至最严密把守的入口。你 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}。作为潜行的一部分，你最多可以交互两次以打开或关闭门、移动障碍或类似动作。以此方式交互不会令你成为可见，且你尽量轻声操作；但守望门户的生物可能会看见门开闭，纵然不会察觉到你。你可以选择行走或跳跃替代潜行；若你具备相应移动方式，亦可改为穴行、攀爬、飞行或游泳。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为受训"
+                }
+            ]
+        },
+        "Medicinal Countercurser": {
+            "name": "医方驱咒师 Medicinal Countercurser",
+            "description": "<p>你对各种诅咒症状有足够的认识，能将它们区分开来并预知所将面对之事。你可以使用医疗对具有「诅咒」特征之疾患进行回忆知识。此外，每日一次，你可以花费 10 分钟运用各种医方治疗手段尝试对抗目标身上的一项诅咒，并以你的医疗调整值进行对抗检定。若该诅咒来自被诅咒之物品或其他外部源，成功表明目标生物能舍弃该诅咒物品，但不能将诅咒从该物品上移除。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为大师"
+                }
+            ]
+        },
+        "Tenacious Tosser": {
+            "name": "顽强投手 Tenacious Tosser",
+            "description": "<p>众人都说你有一只好的投掷之臂，而你深谙如何将其发挥到极致！当你以「交互」动作传递或接取物品给盟友时，你可将投掷射程提升至 20 尺增量。</p><p>你可选择赋予「交互」「繁艺」特征，让你能从背包中取出 1 体积或更少的物品并交付给盟友（如常进行投掷掷骰）。</p>"
+        },
+        "Lessons from the Parables": {
+            "name": "寓言之教 Lessons from the Parables",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你以你已为其神祇之学识大师的神祇之神圣自然技能进行技能检定时失败。</p><hr /><p>对神祇之教诲、修习与圣典的认识让你能借迅速诵念祷词救自己于危难。以你神祇之学识重新掷一次触发的检定，但你必须采用新结果（即便比第一次结果更差）。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某神祇相关的学识熟练度为大师"
+                }
+            ]
+        },
+        "Can't Stop, Won't Stop": {
+            "name": "不停不息 Can't Stop, Won't Stop",
+            "description": "<p><strong>触发</strong> 你获得 @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{受伤} 状态或提升你受伤值。</p><hr /><p>从死亡边缘归来不会让你恐惧，反令你忆起活着的感觉。你对自选的一项豁免获得等同你受伤值的状态加值。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.g92q06HvQQvyj445]{屹立不倒} 大胆反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "拼死硬抗"
+                }
+            ]
+        },
+        "Master Anthropologist": {
+            "name": "人类学大师 Master Anthropologist",
+            "description": "<p>你已研习文化、社会、语言学等主题足够久，足以从共通点与差异中得出结论。掷一次社群检定 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}——对至多 5 件不同物品、地点或生物（这些通常须使用社群进行鉴别）。以此方式回忆知识时，你每多包含一件物品、地点或生物，DC 减少 1，但你所问的问题必须适用于你所选 5 个对象。</p><p>例如，你可问是否所有生物都具备某项能力，或是否所有地点都为本地犯罪行会的已知聚集地。若成功，若所提问题对所有目标皆为真，GM 回答「是」；若至少超过一半为真，则回答「大体如此」；否则回答「否」。若某项专长或效果会在你回忆知识成功时赐予你额外事实，则该额外事实亦遵循同样之共通性要求。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为大师"
+                }
+            ]
+        },
+        "Harden Heart": {
+            "name": "心硬如铁 Harden Heart",
+            "description": "<p>你已学会通过持续暴露于危险中来抑制肾上腺素的存在，让你能以铁石之心应对情绪动荡。若你于下一回合开始前被某项情绪效果作用，则致使该效果之生物必须以你的求生 DC 进行额外的检定才能以该效果作用于你。若该效果需进行豁免（如「恐惧」法术），则你的豁免获得 +2 环境加值。若你为求生传奇，环境加值提升至 +3。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "A Home in Every Port+": {
+            "name": "处处皆家+ A Home in Every Port+",
+            "description": "<p>你在你曾访的城镇与村庄中享有声望，居民总愿意为你敞开家门。</p><p>身处城镇或村庄时，在闲暇期间，你可花费 8 小时找到一名愿意为你与至多六名盟友提供至多 24 小时免费住宿的居民。所获住宿之生活水平为「舒适」，并提供免费的丰盛餐食。</p><p>24 小时之后，你必须支付标准价钱以继续住宿与餐食，或再次使用此专长找到一名新的愿意接待你的居民。</p>",
+            "prerequisites": [
+                {
+                    "value": "魅力+2"
+                }
+            ]
+        },
+        "Essence Magic": {
+            "name": "精质魔法 Essence Magic",
+            "description": "<p>通过特化并驾驭某特定魔法精质之力，你获得对该类型魔法的额外访问。从下列与你施法职业之传统相符的四种精质中选择一项。你获得一道 2 环或更低、具备所列特征之一的法术——它来自你自身之外的传统。你以你施法传统之法术施放该法术。若你至少为 15 级，所选法术高位至 3 环；若至少为 19 级，则高位至 4 环。</p><p>若你为准备式施法者，你习得该法术；每小时一次，你可花费 10 分钟将一个已准备的法术位换为此法术。</p><p>若你为自发式施法者，你将该法术加入你的法术目录，并视其为标志法术。</p><p><strong>心智</strong>（奥术、神秘）你的选择必须具备以下特征之一：心灵、预测、幻象或窥探。</p><p><strong>物质</strong>（奥术、原初）你的选择必须具备以下特征之一：空气、土、火焰、金属、水或木。</p><p><strong>生命</strong>（神圣、原初）你的选择必须具备以下特征之一：治疗、生命力或虚空。</p><p><strong>灵魂</strong>（神圣、神秘）你的选择必须具备以下特征之一：心灵、灵魂或虚空。</p><hr /><p><strong>特殊</strong> 你可选取此专长两次；再次选取时，选择与你传统关联之另一精质。</p>",
+            "prerequisites": [
+                {
+                    "value": "能从法术位施放法术"
+                }
+            ]
+        },
+        "Meat Shield": {
+            "name": "肉盾 Meat Shield",
+            "description": "<p>你能利用他人身体来保护自己免遭伤害。只要你 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒} 一名生物，你便获得标准掩蔽——以受擒生物的空间来确定掩蔽。当你擒抓该生物期间，你可以以该生物使用 @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡}，前提是你的掩蔽对触发该伤害之效果适用。当你以该生物盾牌格挡时，其硬度为其等级的一半，并承受相当于你等级或本应触发盾牌格挡之效果对你造成的伤害（取较低者）。当你以受擒生物盾牌格挡后，他们可立即尝试 @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱}，且 10 分钟内不能再次被用作盾牌格挡。</p>"
+        },
+        "Last Cry": {
+            "name": "最后呐喊 Last Cry",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你将被一名生物减至 0 生命值，但不会立即死亡。</p><hr /><p>纵然你失去意识，敌人对你仍心有戚戚。你立即对触发该效果的生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}。若你检定成功，则你保持 1 生命值且不失去意识，但你的受伤值增加 1。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为大师"
+                }
+            ]
+        },
+        "Stunning Desensitivity": {
+            "name": "震慑脱敏 Stunning Desensitivity",
+            "description": "<p><strong>触发</strong> 你将因非心灵效果获得 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑} 状态值。</p><hr /><p>你修习痛苦管理之法，让你于受痛之际仍保有较高的认知能力。对触发效果的 DC 进行一次 @Check[survival] 检定（若该效果有 DC）；若无 DC，则对该危害或生物等级的标准 DC 进行检定。</p><hr /><p><strong>大成功</strong> 你将本应获得的震慑值减少 2。</p><p><strong>成功</strong> 同大成功，但减少 1。</p><p><strong>大失败</strong> 你过度承受，震慑值反而增加 1。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为大师"
+                }
+            ]
+        },
+        "Spell Tag": {
+            "name": "法术标记 Spell Tag",
+            "description": "<p><strong>频率</strong> 每 10 分钟一次</p><hr /><p>你将法术之力借由盟友传递。若你下一动作是施放射程为「触及」之法术，你可改为触及一名盟友——直至你下一回合开始前赋予其该法术，并保留该法术的能量。你的盟友可以以你之名通过交互触及一名生物来释放该法术，并立即耗尽该法术。若盟友在其回合结束前的交互被打断或未能以交互释放该法术，则法术消散无效果。</p>"
+        },
+        "Gaze Into the Tapestry": {
+            "name": "凝视织锦 Gaze Into the Tapestry",
+            "description": "<p>烙印于你双眼的影像永不消逝，将永恒之毁灭刻进你之灵魂。你可以将 @UUID[Compendium.pf2e.spells-srd.Item.xFp4EwVcYwSG336t] 作为神秘内禀法术每日施放一次，且其高位至等同你等级一半（向上取整）的环级。当你获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态时，进行一次 @Check[flat|dc:2]。失败时，你的恐惧撕裂出通往恐惧维度的裂隙。你产生 @UUID[Compendium.pf2e.spells-srd.Item.i1TvBID5QLyXrUCa] 之效果（环级等同你等级一半（向上取整）），但该生物对你与盟友怀有敌意，且效果无须维持。该生物出现在你 30 尺内，通常出现在它能选择的对你而言最安全且最近的位置。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾窥见黑暗织锦，或目睹织锦中强大居民的真实形象"
+                }
+            ]
+        },
+        "Restricting Flora": {
+            "name": "束缚草木 Restricting Flora",
+            "description": "<p><strong>需求</strong> 你处于自然地形之区域。</p><hr /><p>你向周围的植物召唤并低语，唤起它们束缚并阻碍敌人之移动。对 30 尺内一名生物的反射 DC 进行一次 @Check[type:nature|defense:reflex] 检定。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.oGtY2OY4sp40eW0M]{效果：束缚草丛}</p><hr /><p><strong>大成功</strong> 目标生物速度承受 -10 尺状态减值，直至你下一回合结束。</p><p><strong>成功</strong> 同大成功，但速度减值为 -5 尺。</p><p><strong>大失败</strong> 你试图驾驭周围自然植物的尝试反噬于己，使你 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg] 直至你下一回合结束。</p><p></p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Defensive Flight Maneuver": {
+            "name": "防御飞行机动 Defensive Flight Maneuver",
+            "description": "<p><strong>触发</strong> 你成功使用飞行机动。</p><hr><p>飞行已成你的本能，并被你用以自卫。你直至下一回合开始前对 AC 获得 +1 环境加值。若你已因「防御飞行机动」获得 AC 环境加值，则改为将「防御飞行机动」赋予 AC 的环境加值提升 1。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为大师"
+                },
+                {
+                    "value": "能飞行或获得让你能飞行的效果"
+                }
+            ]
+        },
+        "Savage Success": {
+            "name": "野蛮成功 Savage Success",
+            "description": "<p><strong>触发</strong> 你以非拳头的近战徒手攻击将一名敌人减至 0 生命值。</p><hr /><p>嗜血充满你的心智，你进入原始凶猛之状态。你以非拳头之近战徒手打击对伤害获得等同武器伤害骰数的环境加值。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.0sLZW5D6ziJY7yD0]{野性猛冲} 大胆活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "除拳以外你拥有一项永久近战徒手攻击"
+                }
+            ]
+        },
+        "Skill Expertise": {
+            "name": "技能专精 Skill Expertise",
+            "description": "<p>你于某项技能上发展出专精。选择一项你已受训的技能，成为该技能的专家。</p><hr /><p><strong>特殊</strong> 你最多可选取此专长 3 次，每次选择一项新的技能成为专家。</p>",
+            "prerequisites": [
+                {
+                    "value": "智力+3"
+                }
+            ]
+        },
+        "Breathing Techniques": {
+            "name": "呼吸技巧 Breathing Techniques",
+            "description": "<p>你已学会以一套节奏化的深度呼吸技法扩展你的肺活量。进行一次求生检定，依下表所示尝试增加下次屏息时（在接下来 10 分钟内）所能持续之轮数。在你使用「呼吸技巧」之后，若你于屏息时进行攻击或施放法术，则你回合结束时只失去 1 轮空气（替代 2 轮）。</p><p>@Check[survival|dc:15|showDC:none] 检定 DC 通常为 15，但 GM 可能会根据情境调整（例如处于狭小空间或在污水中游泳屏息时）。若你为求生专家，你可改为对 DC 20 检定以增加所获轮数；若你为求生大师，可改为对 @Check[survival|dc:30|showDC:none]{DC 30} 进一步增加所获轮数；若你为传奇，可改为对 @Check[survival|dc:40|showDC:none]{DC 40} 检定再增加所获轮数。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "Sancitifed Layman": {
+            "name": "圣化俗人 Sancitifed Layman",
+            "description": "<p>虽然你并非神职的正式成员，但你对神祇的奉献、对圣典的研读以及以信仰之名的行为已为你赢得神圣关注。你与你的打击成为受神祇圣化的，获得圣洁或邪恶特征。你必须选择一项你的神祇会允许其牧师采纳的圣化。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为传奇"
+                },
+                {
+                    "value": "你尚未圣化"
+                },
+                {
+                    "value": "你信奉一位神祇"
+                }
+            ]
+        },
+        "Recall Lessons": {
+            "name": "重温课业 Recall Lessons",
+            "description": "<p><strong>触发</strong> 30 尺内一名盟友在非战斗状态下尝试 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。</p><hr /><p>你提醒盟友某项主题的关键细节。进行一次学术学识检定，如同你已花费一项预备援助动作那般，对触发的动作进行 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助}。若他们掷出大失败，则改为失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "Academia学识熟练度为受训"
+                }
+            ]
+        },
+        "Spiritual Memories": {
+            "name": "灵魂记忆 Spiritual Memories",
+            "description": "<p>你向精魂之影响敞开心智，并以其记忆为引导，协助你完成你不熟悉的任务。选择一项技能，你在 1 分钟内对该技能成为受训。若你为神秘传奇，你可改为对该技能成为专家，或对你已至少受训的技能成为大师。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.ReoCfS6GaVRfkdNw]{效果：精魂记忆（受训）}</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.PpYMH7xp3RHn7A09]{效果：精魂记忆（专家）}</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.z1mcBkK5ucZYFhYa]{效果：精魂记忆（大师）}</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Rumor Has It": {
+            "name": "据传如此 Rumor Has It",
+            "description": "<p>你创造的谣言其持续时间是常规两倍。每次你 @UUID[Compendium.pf2e.feats-srd.Item.sLEawQueTV1wGn0B]{散播谣言} 时，GM 也秘密进行一次 @Check[type:flat|traits:secret|dc:18]；若你的平稳检定成功，则你创造的谣言成为既定的八卦或都市传说——若你散播谣言成功，持续 1 年；大成功则无限期持续。多数受谣言影响之 NPC 视其为真，除非他们以你的欺诈 DC 大成功打听消息或回忆知识。对谣言主题有亲身了解之生物的成功程度视为高一级。任何试图驳斥你谣言的尝试除任何与传播反向信息相关之检定（例如对当地权威建立印象或请求其发声明）外，都必须以你的欺诈 DC 成功。若你为欺诈传奇，平稳检定 DC 改为 15（替代 18）（@Check[type:flat|traits:secret|dc:15]）。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为大师"
+                },
+                {
+                    "value": "散布谣言"
+                }
+            ]
+        },
+        "Don't Make Me Repeat Myself": {
+            "name": "莫让我重复 Don't Make Me Repeat Myself",
+            "description": "<p><strong>触发</strong> 你 @UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]{胁迫} 一名生物失败或大失败。</p><hr /><p>你以严厉表情支持自己有点羸弱的威胁，以表明你是认真的，且不会重复刚刚所说之话。你尝试 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 你试图胁迫的生物。若你成功，你将触发的胁迫之成功程度视为高一级。无论结果如何，目标在 1 天内对此效果暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为专家"
+                }
+            ]
+        },
+        "Return to the Sea": {
+            "name": "回归大洋 Return to the Sea",
+            "description": "<p>你于诡形怪物可怕之阴谋中幸存——无论是直接面对它们，还是几乎在其爪牙（如无颜潜行者或史卡姆鱼人）手下丧命。这次遭遇在你身上留下伤疤，无论是身体上、心智上还是基因上。你获得「水陆两栖」特征。当你与水体接触时，你的外观剧烈改变，呈鱼类形态。你获得等同你陆地速度的游泳速度，且能于水中与空气中呼吸。然而，你于此形态下永久 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾与艾沟瑟的实验直接接触"
+                }
+            ]
+        },
+        "Prepared for Collapse": {
+            "name": "塌陷预备 Prepared for Collapse",
+            "description": "<p>你已亲历足够多的塌陷，知晓如何避开它们；当将要坠落时，你身手轻盈。你对因建筑塌陷所致的反射豁免获得 +1 环境加值。此外，当你从悬崖或建筑物坠落时，你可以将 @UUID[Compendium.pf2e.actionspf2e.Item.3yoajuKjwHZ9ApUY]{抓住边缘} 作为自由动作（而非反应）使用。</p>",
+            "prerequisites": [
+                {
+                    "value": "Mining学识熟练度为受训"
+                }
+            ]
+        },
+        "Delayed Blocker": {
+            "name": "延迟拦阻 Delayed Blocker",
+            "description": "<p>你已学会在战术性等待下一时机的同时保护自己。当你 @UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟} 时，你可选择 @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾} 或施放 @UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR]{盾}，即便你通常无法采取动作。当你决定开始你的回合时，你失去举盾本应所需的动作数。</p>",
+            "prerequisites": [
+                {
+                    "value": "盾击或能施放盾术"
+                }
+            ]
+        },
+        "Seeking Spell": {
+            "name": "寻迹法术 Seeking Spell",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>你将极高的精度灌注于下一道法术，让其能精确击中受掩蔽保护之敌人。若你下一动作是施放一道带攻击掷骰的法术，则你将目标 AC 因掩蔽所获之环境加值减少 2。</p><p>此外，若你的法术攻击掷骰失败但非大失败，该法术不会立即结束；你可于下一回合维持此效果，再次尝试该法术攻击掷骰。在 14 级及此后每 2 级，你可额外维持此效果一轮以再次尝试攻击掷骰，而不仅限于下一回合；但你每轮只能为此效果尝试一次额外的攻击掷骰。</p>"
+        },
+        "Xenoglossy": {
+            "name": "异语通晓 Xenoglossy",
+            "description": "<p>无论是通过超自然之影响、大脑无法解释的运作，还是借由前世记忆之片段，你以不可思议之方式获得说一种你本不知晓之语言的能力。花费 1 分钟，你向神秘力量敞开心智，并对 @Check[occultism|dc:20|showDC:none|immutable:true]{DC 20} 进行神秘检定。若你为神秘大师，你可改为以 3 动作活动对 @Check[occultism|dc:30|showDC:none|immutable:true]{DC 30} 检定；若你为神秘传奇，则改为单一动作对 @Check[occultism|dc:40|showDC:none|immutable:true]{DC 40} 检定。</p><hr /><p><strong>大成功</strong> 你于 5 分钟内获得说出一种你本不知晓、自选之语言的能力，之后便忘却。</p><p><strong>成功</strong> 同大成功，但持续时间仅为 1 分钟。</p><p><strong>大失败</strong> 你的心智在你刻意激起此异象的尝试中受紧绷，1 轮内 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞2级}，且你 1 日内不能再次尝试「异语通晓」。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Tighten Hold": {
+            "name": "收紧攥握 Tighten Hold",
+            "description": "<p><strong>需求</strong> 你已擒抓或束缚一名生物。</p><hr><p>你紧锁目标并加倍施压，将其牢牢锁在你无可逃避的攥握中。对该生物的强韧 DC 进行一次运动检定。</p><p><strong>大成功</strong> 你的攥握不可被破解。该生物直至你下一回合开始前对逃脱承受 -3 环境减值。</p><p><strong>成功</strong> 同大成功，但减值为 -2。</p><p><strong>大失败</strong> 该生物不再受擒或束缚。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为专家"
+                }
+            ]
+        },
+        "Murmured Prayer": {
+            "name": "低声祷告 Murmured Prayer",
+            "description": "<p>对相应神祇的低声祷告可于困境中指引你。你可以将 @UUID[Compendium.pf2e.spells-srd.Item.izcxFQFwf3woCnFs] 作为神圣自然内禀戏法施放。每日一次，你可以在施放「指引」之时向某特别相关之神祇低声祷告（例如喝酒前向凯登·凯利安祷告以助强韧豁免），加值提升至 +2。你无须信奉该神祇即可寻其指引；但若该神祇之目标与你的不一致，他们可能会拒绝助你（例如阿斯莫迪斯不会帮一名革命者解读法律文件）。若你为宗教传奇，你可以以每小时一次（替代每日一次）随你的「指引」低声祷告。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                }
+            ]
+        },
+        "Tell Fortune": {
+            "name": "占卜未来 Tell Fortune",
+            "description": "<p>无论是通过哈罗牌、看手相、观星术或其他占卜未来之法，你都能令人惊叹地预见他人的未来。你可以花费 1 小时为某人占卜命运。对目标生物的等级困难 DC 进行一次「占卜学识」检定，若成功，便对该生物的未来产生 @UUID[Compendium.pf2e.spells-srd.Item.41TZEjhO6D1nWw2X]{卜筮术} 的效果。无论结果如何，该生物在 1 周内对你的「占卜未来」免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "Fortune-Telling学识熟练度为专家"
+                }
+            ]
+        },
+        "Drop Out of Sight": {
+            "name": "脱出视野 Drop Out of Sight",
+            "description": "<p>你低伏于地以避免被察觉。你 @UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{倒地}、@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{寻找掩蔽}，随后 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{藏匿}。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为受训"
+                }
+            ]
+        },
+        "Monster Zoology": {
+            "name": "怪物动物学 Monster Zoology",
+            "description": "<p>你研习并研究你感兴趣或与你专长领域相关的怪物及多种生物，分析它们时获取更多信息。当你尝试以 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 检定来鉴别生物时，若你检定所用技能至少为专家，你可多问一个问题。若你为相应技能大师，当你掷出大失败时，改为失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作、奥秘、自然、神秘、宗教或某生物学识熟练度为专家"
+                }
+            ]
+        },
+        "Watch and Learn": {
+            "name": "学以致用 Watch and Learn",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 一名盟友以基于力量或敏捷的技能检定成功。</p><hr /><p>你看着盟友的成功并精确仿效。若你在接下来的 3 轮内尝试同样的技能检定，你可以以表演（-2 环境减值）替代该检定通常的技能。当你为表演传奇时，从盟友检定成功起算的 1 分钟内皆可尝试你的检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ]
+        },
+        "Readied Striker": {
+            "name": "蓄势打击者 Readied Striker",
+            "description": "<p>你以更警觉的准备让你能更迅速地行动。当你 @UUID[Compendium.pf2e.actionspf2e.Item.dLgAMt3TbkmLkUqE]{预备} 以进行打击时，你可以以单一动作而非 2 动作活动如此做。</p>"
+        },
+        "Bend Iron, Crush Stone": {
+            "name": "弯铁碎石 Bend Iron, Crush Stone",
+            "description": "<p>对你的惊人力量而言，金属棒不过是廉价玩物。当你以徒手攻击对无守护物体或建筑进行打击时，你忽略相当于你运动熟练度加值一半的硬度（[[/r floor((@actor.system.skills.athletics.rank * 2 + @actor.level) /2)]]）；当你以 @UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]{破拆} 对建筑成功时，你始终可以选择造成等同你等级的伤害。</p><p>此外，你可以以 3 动作活动对无守护物体或建筑「强行打开」或进行徒手打击，对该物体或建筑造成你正常该动作伤害的三倍。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为大师"
+                }
+            ]
+        },
+        "Disrupting Performance": {
+            "name": "扰乱表演 Disrupting Performance",
+            "description": "<p><strong>触发</strong> 30 尺内你能观察到的生物执行一项具有听觉、专注或视觉特征的技能动作。</p><hr /><p>你以怪异或离奇之声响、音符或手势扰乱该生物试图执行的动作。你的反应自选获得听觉或视觉特征。对触发该效果的生物的意志 DC 进行 @Check[performance|against:will] 检定。智力调整值低于 +0 的生物对其意志 DC 获得 +4 环境加值。无论结果如何，该生物在 1 分钟内对此反应免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.BZu26T5ot8fURnpi]{效果：扰乱表演}</p><hr /><p><strong>大成功</strong> 该生物片刻分心，对触发掷骰承受 -3 环境减值。</p><p><strong>成功</strong> 该生物对触发掷骰承受 -2 环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为受训"
+                }
+            ]
+        },
+        "Castling Crashers": {
+            "name": "易位破阵 Castling Crashers",
+            "description": "<p><strong>需求</strong> 你与你的搭档相距 60 尺以内。</p><hr /><p>你与搭档身手敏捷，如棋盘上的王与车那般出乎意料地交换位置。在使用此团队配合时，当你或你搭档朝对方行走时，你们各自此次行走的速度获得 +10 环境加值，但必须以尽可能靠近对方的位置结束行走。你们二人还获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.2XWMN181rq3h8K5j]{并肩冲撞} 反应。</p>"
+        },
+        "Breath Taker": {
+            "name": "夺息 Breath Taker",
+            "description": "<p>你赋予生物的恐惧令其本能地停止呼吸。若你成功对一名需要呼吸的生物挫败士气，该生物会喘不过气，松开它正屏住的气，并在 1 轮内对吸入或嗅觉效果承受 -1 环境减值。若该生物在所处环境中通常无法呼吸（例如水下），则其能屏息的轮数减半（替代常规效果）。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.yoXxQL01V0fI4skD]{效果：屏息凝气}</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为大师"
+                }
+            ]
+        },
+        "Steal Senses": {
+            "name": "窃取感官 Steal Senses",
+            "description": "<p>你的手指如此灵巧，以至于知晓按压何处便能剥夺目标的感官。对你触及范围内一名生物的反射 DC 进行一次 @Check[thievery|against:reflex] 检定。无论结果如何，目标于 1 日内对你的「窃取感官」免疫。</p><hr /><p><strong>大成功</strong> 目标自选成为 @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲} 或 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋}，持续 [[/r 1d4 #Rounds]] 轮。若该生物拥有视觉或听觉之外的感官（例如震感），你可改为否定该感官。该生物可以以一个具「专注」特征的单一动作解除这些状态或恢复失去的感官。</p><p><strong>成功</strong> 同大成功，但持续时间为目标下回合结束前。</p><p><strong>大失败</strong> 目标以恶意挫败你的窃取。你直至下一回合结束前措手不及且不能采取反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为传奇"
+                }
+            ]
+        },
+        "Armor Assist+": {
+            "name": "护甲援助+ Armor Assist+",
+            "description": "<p>在你于身披护甲之战士身边服务期间，你已熟练于帮助自己与他人穿戴重型装备。</p><p>此外，当你穿戴护甲时，你可对由 GM 决定（通常常见护甲为 15、罕见为 20、稀有为 25）之 DC 进行运动或战争学识检定。若检定成功，你的护甲获得「舒适」特征，直至你将护甲取下或 1 日过后。1 日过后，你须将护甲取下至少 1 小时才能再次穿戴，以缓解长时间穿戴所带来的不适。</p><p>你可对由 GM 决定（通常常见护甲为 15、罕见为 20、稀有为 25）的 DC 进行运动或战争学识检定，将你穿戴护甲所需时间减半。</p><p>你可与盟友共同穿戴护甲，并对相同 DC 进行运动或战争学识检定成功，从而将其穿戴护甲的时间减半。</p>",
+            "prerequisites": [
+                {
+                    "value": "Athletics or Warfare学识熟练度为受训"
+                }
+            ]
+        },
+        "Graceful Companions": {
+            "name": "优雅伙伴 Graceful Companions",
+            "description": "<p>当你恭维他人时，也为你的盟友美言几句。当你 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象} 时，你可选择最多 5 名生物使其也同样获得你建立印象的结果——纵使他们当下不与你同处一地。盟友除非通过提及你而表明身份，否则不会获得你建立印象的效果；若你恶化了他们的态度，他们可选择不如此表明。当你成为社群大师时，你可选择最多 10 名生物；若你为社群传奇，则可选择最多 20 名生物。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为专家"
+                },
+                {
+                    "value": "宫廷礼仪"
+                }
+            ]
+        },
+        "Direction Intuition": {
+            "name": "方向直觉 Direction Intuition",
+            "description": "<p>当你寻找去向时，你的训练与本能为你描绘出更清晰的图景。当你使用 @UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向} 时，你不会因物品而承受减值。此外，若你花费至少 10 分钟使用「辨别方向」，且你成功，则你将获得对你前进路径的「占卜」之效果。</p><p>你所获得的结果仅与你将走的路径相关，且不考虑外界因素。例如，若结果为「不利」，前方可能有暴风雨、流沙或洪水，但不会告诉你是否会遇到附近游荡的某帮匪徒。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Surveyed Tracking": {
+            "name": "勘察追踪 Surveyed Tracking",
+            "description": "<p>你已学会精进自己的勘察知识并将其应用于追踪所发现之事物。当你以 @UUID[Compendium.pf2e.feats-srd.Item.tGIXuk0XeWmG04CX]{勘察野生动物} 进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 大失败时，改为失败。此外，当你以勘察野生动物对一名生物成功回忆知识时，你于 1 天内对追踪你勘察过程中所发现之任何生物获得 +2 环境加值。若你为求生大师，环境加值提升至 +3；若你为求生传奇，则提升至 +4。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                },
+                {
+                    "value": "调研野生动物"
+                }
+            ]
+        },
+        "Slip the Grip": {
+            "name": "滑脱握持 Slip the Grip",
+            "description": "<p><strong>触发</strong> 你即将对一项会让你禁足的效果掷出反射豁免。</p><hr><p>当你搞砸时，你深知如何以专业素养自救。以盗术替代反射豁免来尝试触发的豁免。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为大师"
+                }
+            ]
+        },
+        "Careful Withdrawal": {
+            "name": "谨慎撤退 Careful Withdrawal",
+            "description": "<p><strong>需求</strong> 你处于敌人之近战触及范围内，且持用盾牌或带「招架」特征的武器。</p><hr /><p>你已学会如何最妥善地从险境中撤退。你 @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾} 或招架，随后远离该敌人快步并行走。若你的行走会触发该敌人之反应，你的盾牌或招架对其作为该反应所进行的对你打击之环境加值翻倍。</p>"
+        },
+        "Meditatory Defenses": {
+            "name": "冥想防御 Meditatory Defenses",
+            "description": "<p>你已学会以冥想防止心智屈服于心灵效果。在每日准备期间，你可冥想以加固心智抵御一日之心灵负担——你的 GM 为你秘密进行一次 @Check[survival] 检定。每日一次，当你尝试对心灵效果豁免时，你可选择使用秘密求生检定的结果作为对该效果的豁免（替代常规防御）。或者，若你使用常规防御，则改为对你的检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Shallows' Sallow Shadows": {
+            "name": "浅滩昏影 Shallows' Sallow Shadows",
+            "description": "<p>那些无法掌控钓线的人对捕鱼或航海毫无用处。若你对一名拥有持续游泳速度的生物 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}，你还能了解其需要豁免的一项能力（如有），并在 1 分钟内对该能力的豁免与 DC 获得 +1 环境加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.bpIFxizPX8b6ys3Z]{效果：浅滩苍影}</p>",
+            "prerequisites": [
+                {
+                    "value": "钓鱼学识、海洋学识或航海学识熟练度为受训"
+                }
+            ]
+        },
+        "Escape Artist": {
+            "name": "逃脱艺术家 Escape Artist",
+            "description": "<p>被擒有时是工作的一部分，因此你额外训练以便从最棘手的境地中脱身。你可以使用盗术 [[/act escape skill=thievery]]（替代你的徒手攻击调整值），但若你试图脱困的效果来自一名生物或一项已生效的法术效果，则掷骰承受 -2 环境减值。若你为盗术大师，你不再因以盗术逃脱而承受减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "Global Presence": {
+            "name": "全球存在 Global Presence",
+            "description": "<p>你的声望甚至传至最远社会的最高阶层。每月一次，你可花费一周闲暇时间影响你所在地区的某项重大政治或经济决策。对该聚落等级的困难 DC 进行 @Check[society] 检定。若你试图影响比聚落更大之区域（例如郡或公国），则改用目标区域的首府聚落等级。若你试图影响国家、帝国或类似规模，则 DC 为该地区最高等级聚落等级的极困难 DC。</p><p>当你以此方式影响政治或经济决策时，你可选择阻止或促成某事件发生（例如让某政治人物离任或上任），或选择将可能发生的事件延后或加速 1 个月。GM 可对结果重大变化（如让君主离位）增减 DC 或对你的检定施加环境减值，或让你的选择产生其他后果。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为传奇"
+                }
+            ]
+        },
+        "Thought Thievery": {
+            "name": "思想窃取 Thought Thievery",
+            "description": "<p>凭借你独有的高超盗术与对心智之深奥认识，你可在目标头部之侧绘制描摹符印以窃取其思想。对目标之意志 DC 进行 @Check[thievery|against:will] 检定。无论结果如何，目标于 1 日内对「思想窃取」免疫。</p><hr /><p><strong>大成功</strong> 你窃走目标对该主题的知识。选择一项具「专注」特征的动作或活动（除「施放法术」外）。在 1 分钟内，目标因你已窃走其专长而难以执行该动作，使该动作或活动获得 @Check[flat|dc:11] 检定。未通过此平稳检定的生物失去花费在所选动作或活动上的动作及其效果。该生物可花费一个单一动作以恢复镇定并解除此效果。</p><p><strong>成功</strong> 同大成功，但平稳检定为 @Check[flat|dc:5]。</p><p><strong>大失败</strong> 目标以足够心智防御抵御你的窃取。其心灵反击你的尝试，使你 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}，直至你下一回合开始。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为传奇"
+                },
+                {
+                    "value": "奥秘或神秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Revitalizing Grove": {
+            "name": "复苏林苑 Revitalizing Grove",
+            "description": "<p><strong>需求</strong> 你处于自然地形之区域。</p><hr /><p>通过与环境交流并汲取你周围的自然生命之力，你创造出一片治疗能量之区域。你花费 10 分钟以古老的祷词与教诲操控你的环境，创造一片 @Template[type:burst|distance:10] 之能量，持续 1 分钟。进行 @Check[type:nature|dc:30] 检定。若该自然地形之区域状况不佳或缺乏自然生命，GM 可酌情提升 DC。若你为自然传奇，你可选择将 DC 提升至 @Check[type:nature|dc:40] 检定，让快速治疗的数值翻倍。</p><hr /><p><strong>大成功</strong> 区域内之盟友于其留在该区域期间获得快速治疗 5。</p><p><strong>成功</strong> 同大成功，但快速治疗为 2。</p><p><strong>失败</strong> 无效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Divine Arsenal": {
+            "name": "神圣军械 Divine Arsenal",
+            "description": "<p>你精通你神祇所偏爱的武器。你获得使用神祇偏爱武器之权限；就熟练度而言，若该武器原为军用武器则视为简易武器，若原为进阶武器则视为军用武器。</p><p>此外，你受神祇之典范与禁忌约束；若你违反神祇之典范或犯下禁忌，你便会受神祇诅咒，并失去此专长之效益，直至你完成赎罪仪式。</p>",
+            "prerequisites": [
+                {
+                    "value": "你信奉一位偏好军用或进阶武器的神祇"
+                }
+            ]
+        },
+        "Affliction Mithridatism": {
+            "name": "病恙耐药 Affliction Mithridatism",
+            "description": "<p>你练习摄取少量有害之物以求抗其侵害。每日准备期间，你可以让自己接触某种疾病，或对自己施加某种毒素（通常通过施加该疾患之生物的尸骸）。对该疾患的 DC 进行 @Check[type:medicine] 检定。</p><p><strong>大成功</strong> 你于 8 小时内对该疾患免疫。</p><p><strong>成功</strong> 你于此后 8 小时内对该疾患的豁免获得 +4 环境加值。或者，你可选择对所选毒素或疾患所造成之伤害获得等同你等级的抗力。</p><p><strong>失败</strong> 无效果。</p><p><strong>大失败</strong> 你必须立即对该疾病或毒素豁免，犹如已被施加。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.fS9pFotZMFXpi1G2]{效果：苦疫抗性}</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为大师"
+                }
+            ]
+        },
+        "Echoing Earth": {
+            "name": "回响大地 Echoing Earth",
+            "description": "<p>通过专注于脚下大地，你暂时获得对地面震动的高度敏感。直到你下一回合结束，你获得 10 尺的震感作为不精确感官，能感知大地中的震动。若你为自然传奇，震感的射程提升至 20 尺。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Desperate Repair": {
+            "name": "绝境修理 Desperate Repair",
+            "description": "<p>你可尝试将已被摧毁之物品拼回。该物品不能具有「消耗品」特征。对被魔法效果摧毁之物品（例如过载施法之魔杖）进行「绝境修理」尝试自动失败。你不能对因变形而被摧毁之物品（如因魔力耗尽而变为非魔法物品）使用此能力，亦不能对部分已被消耗且无法找回或替代之物品使用。</p><p>当你执行此活动时，对该物品的制作 DC 减 5 进行 @Check[type:crafting|options:action:desperate-repair] 检定。一旦你对某物品使用过「绝境修理」，无论你掷骰结果如何，该物品永久对你的「绝境修理」免疫。若你为制作传奇，你成功时改为大成功。</p><p><strong>大成功</strong> 你成功将物品拼回。该物品恢复全部生命值。无论 1 分钟后该物品状况如何，它都会自动再次被摧毁。若该物品因其他原因将自动被摧毁，则取较短的持续时间。</p><p><strong>成功</strong> 同大成功，但物品在 [[/r 1d4]] 轮（替代 1 分钟）后自动被摧毁。</p><p><strong>大失败</strong> 你花费过多时间拼装物品而分心；你 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 1 轮，且直至你下一回合开始前不能采取反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为大师"
+                },
+                {
+                    "value": "迅捷修理"
+                }
+            ]
+        },
+        "Dream Actualization": {
+            "name": "梦境显化 Dream Actualization",
+            "description": "<p><strong>频率</strong> 每周一次</p><hr /><p>你深谙梦境之中蕴藏之力——那种实现、想象并显化你潜能、并为自己与他人构思新可能性的能力。你以 8 小时不间断睡眠为自己创造一片精心构筑的梦境，从而获得「梦中潜能」之效果。你也可以协助盟友于其梦境中之尝试；若如此做，你与盟友均须保持 8 小时不间断睡眠以获得 @UUID[Compendium.pf2e.spells-srd.Item.y0Vy7iNL3ET8K00C] 的完整效果，但只有你的盟友获得益处。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为传奇"
+                }
+            ]
+        },
+        "Haggle": {
+            "name": "讨价还价 Haggle",
+            "description": "<p>讨价还价之艺只有最佳商人才知。若你与一名售货之人交谈 1 分钟，你可尝试讨价还价——选择一件你希望购买之物品，并对你交谈对象的意志 DC 进行 @Check[Mercantile Lore|against:will] 检定。讨价还价时你不能选择配方。无论结果如何，目标于 1 日内对你的讨价还价尝试暂时免疫。</p><hr /><p><strong>大成功</strong> 你成功将该物品价格降低相当于该物品配方价格的金额。</p><p><strong>成功</strong> 同大成功，但金额为该物品配方价格的一半。</p><p><strong>大失败</strong> 你的讨价还价尝试侮辱了商家！其拒绝向你出售所求物品，且其对你的态度恶化一级或变为不友善（取较差者）。该生物会持续拒绝向你出售该物品，直至其对你的态度变为冷漠或更佳。</p>",
+            "prerequisites": [
+                {
+                    "value": "商业学识熟练度为专家"
+                }
+            ]
+        },
+        "Primal Intonation": {
+            "name": "原始咏唱 Primal Intonation",
+            "description": "<p>你的声音以自然之节奏轰然回响，激起野兽之敬畏并令其臣服。对你等级的标准 DC 进行 @Check[type:nature|dc:@self.level] 检定。若你不在有动物之区域，此检定自动失败（由 GM 裁定）。</p><hr /><p><strong>大成功</strong> 你召唤一只具有「动物」特征、且至少比你低 6 级（最低 -1）的生物。该生物对你与盟友皆有助益，并在该区域内停留至少 1 分钟后再离开。</p><p><strong>成功</strong> 同大成功，但该生物对你与盟友友善。</p><p><strong>大失败</strong> 一只野生生物回应了你的呼唤……但它并不高兴！一只与该地区相符等级的动物出现，并对你与盟友怀有敌意。该生物可能攻击你、阻碍你的旅程，或在你停留于该区域期间对你采取其他动作。若动物等级低于你或你的盟友，受威胁时它会逃跑。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Skin of my Teeth": {
+            "name": "千钧一发 Skin of my Teeth",
+            "description": "<p><strong>触发</strong> 你使用 @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡} 来削减本将令你减至 0 生命值的来袭伤害。</p><hr /><p>与死亡擦肩而过后，你的精魂为之振奋。触发该效果之盾牌的硬度提升 2。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.lZdH7vYrwuAuCovT]{最佳防御} 动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "盾击"
+                }
+            ]
+        },
+        "Creature Indexing": {
+            "name": "生物索引 Creature Indexing",
+            "description": "<p><strong>触发</strong> 你的回合于与一只你已对其学识至少受训之生物的战斗中开始。</p><hr /><p>你对该生物的知识近在脑海，能在紧急时刻迅速搬出。你可以立即对触发该效果的生物 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}；若成功，你了解以下信息之一（若大成功则两条）：其免疫之一项、抗力或弱点之一，或其最低或最高豁免。若你为该生物学识传奇，成功时与大成功时各额外了解 1 项你所选信息。</p>",
+            "prerequisites": [
+                {
+                    "value": "某生物或某生物类型的学识熟练度为大师"
+                }
+            ]
+        },
+        "Deceive Ego": {
+            "name": "欺心 Deceive Ego",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你的技能检定失败或大失败。</p><hr /><p>你的撒谎能力之高，连自己都能骗过。对触发检定的相同 DC 进行一次欺诈检定。</p><hr /><p><strong>大成功</strong> 你欺骗自己以为一切顺利，将触发的检定结果视为成功。</p><p><strong>成功</strong> 你抚平失败的程度，将触发的检定结果视为高一级。</p><p><strong>大失败</strong> 你直至下一回合开始前措手不及。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为传奇"
+                }
+            ]
+        },
+        "Undead Ètudiant": {
+            "name": "不死求知者 Undead Ètudiant",
+            "description": "<p>你已与不死生物近距离接触并研习——了解无心智者的本能行为，以及具心智者之渴求为何如此影响其表现。你习得死灵语作为额外语言；若你已知死灵语，则学一种其他语言。你可以使用宗教对不死生物执行 [[/act make-an-impression skill=religion]] 或 [[/act request skill=religion]]，即便不死生物为无心智。对于无心智不死生物，你以该生物等级的标准 DC 进行此类检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                }
+            ]
+        },
+        "Starvation Prevention": {
+            "name": "防饥 Starvation Prevention",
+            "description": "<p>你的医疗训练让你知道在食物有限时如何生存。你可以以医疗替代社群或求生 [[/act subsist skill=medicine]]，借由营养摄取细微之处与各种其他技法来抑制身体对营养的需求。当你以此方式求生时，你下次以医疗求生的成功程度视为低一级。</p><p>或者，你可以选择以医疗对相同 DC 的检定来帮助另一名以求生的生物。若你成功，你将其成功程度提升一级；若大成功，则提升两级。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为受训"
+                }
+            ]
+        },
+        "Behold!": {
+            "name": "目睹之！ Behold!",
+            "description": "<p>炽天力量灌注于你，让你能将自身灵魂以视觉方式表达。你喷发出眼、剑与翼的炽烈展现，仿佛你自身便是一名圣使。30 尺内能看见你的所有生物须以你的职业 DC 或法术 DC（取较高者）进行 @Check[will|against:class-spell] 豁免。若该生物具有「邪恶」特征，则此效果失去「失能」特征。无论结果如何，该生物在 1 分钟内对此免疫。</p><hr /><p><strong>成功</strong> 该生物不受影响。</p><p><strong>失败</strong> 该生物因敬畏而鞠躬，并 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。若该生物具有「邪恶」特征，则其另 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}。</p><p><strong>大失败</strong> 同失败，但若该生物具备「邪恶」特征，则其改为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾受执法者祝福，或你持有一件天界古宝"
+                }
+            ]
+        },
+        "Magic Item Legend": {
+            "name": "魔法物品传奇 Magic Item Legend",
+            "description": "<p>你引出魔法物品真正威能的能力无人能比。在每日准备期间，你可选择最多 2 件非消耗品魔法物品，且其激活具有固定 DC。这些魔法物品的效果 DC 改为等同你职业 DC 或法术 DC 减 2（取较高者），而非常规 DC。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为传奇"
+                }
+            ]
+        },
+        "Weather Acclimation": {
+            "name": "天候适应 Weather Acclimation",
+            "description": "<p><strong>需求</strong> 你处于与你相关学识所对应的地形。</p><hr /><p>你身处熟悉地形时，受天气变化的影响较小。在你所对应地形中，你始终视为已为天气适当着装。当你尝试对天气状况或自然危害豁免时，你的豁免获得 +2 环境加值。当你成为所需学识大师时，在你对应地形中你也忽视来自天气或自然危害的技能检定环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某地形类型相关的学识熟练度为受训"
+                }
+            ]
+        },
+        "Give Offerings": {
+            "name": "献祭 Give Offerings",
+            "description": "<p>你刻意为你所信奉的对象留下贡品。当你进行每日准备时，你可以为神祇留下贡品以保你平安。这些贡品可包括食物、酒或至少 1 sp 价值的小饰物。若如此做，你于当日首次非琐碎之宗教检定上获得 +1 状态加值。</p><p>或者，你可以将所应花费金钱用于一项你所信奉神祇会支持之事以获取此加值，但你须花费一笔等同于你等级一次性总值之金币的 1% 之款项，且你不能以任何方式直接因此支出而获益。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.d5SYY8oGAXb5dYIQ]{效果：献上贡品}</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                },
+                {
+                    "value": "你信奉一位神祇"
+                }
+            ]
+        },
+        "Take What's Needed": {
+            "name": "取所需 Take What's Needed",
+            "description": "<p>当你狩猎时，你怀有目的。选择一只在过去 8 小时内被杀的动物或野兽。你可以将该生物的残骸用作原材料，让你或另一名生物在尝试 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 物品时，将其视为已具备某项常见或罕见冒险装备之配方。物品等级不能超过你等级的一半。GM 可能裁定只有某些生物能提供某些物品配方之效果（例如以 @UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]{炼金制作} 用两栖动物制作 @UUID[Compendium.pf2e.spells-srd.Item.5KobTMrZeZxuXMgl] 合剂）。</p>",
+            "prerequisites": [
+                {
+                    "value": "Hunting学识熟练度为专家"
+                }
+            ]
+        },
+        "Geologic Genius": {
+            "name": "地质天才 Geologic Genius",
+            "description": "<p>你是经验丰富的地质鉴赏家——从美丽的宝石到天然金属、再到普通沉积物——你能在洞穴环境中发现格格不入之物。你对所有具有「土」或「金属」特征的生物、宝石或物品进行回忆知识，以及在自然形成的土、岩或石中察觉危害之察觉检定，获得 +1 环境加值。此外，你可以使用自然 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}（通过寻找有价值的矿藏与宝石），前提是你身处合理可能含有此类材料之地点（由 GM 裁定）。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为专家"
+                }
+            ]
+        },
+        "Pantomime Need": {
+            "name": "默剧示意 Pantomime Need",
+            "description": "<p>当你与某生物不共享语言而无法以言语表达所需时，你深谙如何使用手势、动作和恰到好处的肢体喜剧来传达意图。你可以以表演替代交涉，通过肢体表演进行 [[/act request skill=performance]]——你的请求失去听觉与语言性特征，并获得视觉特征。当你以此方式请求时，你的请求承受 -2 环境减值。若你为表演大师，你不再因此对请求承受环境减值；若你为表演传奇，你可以以单一动作（替代 2 动作活动）使用「默剧示意」。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                }
+            ]
+        },
+        "Duck and Weave": {
+            "name": "闪躲穿梭 Duck and Weave",
+            "description": "<p><strong>需求</strong> 你未着甲或穿轻甲。</p><hr /><p>你迅速踏步、闪躲、于攻击之间起舞，而不让其真正击中你。选择 30 尺内一名生物。直至你下回合开始前，你对该生物所有攻击的 AC 获得 +2 环境加值。直至你下回合开始前，你不能对你的「闪躲穿梭」目标以外之生物进行打击或采取敌对动作；且在你的「闪躲穿梭」生效期间，你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.FwXfIfjV8i9vbOdN]{扭身避害} 反应。</p>"
+        },
+        "Mountain Carrier": {
+            "name": "登山运夫 Mountain Carrier",
+            "description": "<p>你能搬运令人难以置信的重量。你的最大体积与负重体积上限增加 4（而非「健壮搬运者」的 2）。此外，你不会因负重而获得笨拙 1，且对你的所有速度的减值降低 5。若你为运动传奇，则你的最大体积与负重体积上限增加 6（而非 4），且你不会因负重对速度承受任何减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为大师"
+                },
+                {
+                    "value": "沉重负载者"
+                }
+            ]
+        },
+        "Arcane Ward": {
+            "name": "奥术守护 Arcane Ward",
+            "description": "<p>你为自己或盟友创造一道次要魔法守护，以防御有害魔法。在每日准备期间，选择 1 名生物为其灌注一道守护，并指定以下特征之一：酸性、空气、冷冻、大地、电击、火焰、力场、心灵、金属、水或木。若你至少为奥术传奇，你可选择 2 名生物而非 1 名。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.xbNr7SNbVp9X1KGQ]{守护庇护} 反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Leather Skin": {
+            "name": "皮革之肤 Leather Skin",
+            "description": "<p>你已饱经风霜，身体抵御过太多严酷条件，几乎不再感到那些恼人的疼痛。当你以求生对自身 [[/act administer-first-aid skill=survival]] 时，你可移除任何持续伤害（而非仅限流血伤害）。你仍须如常对该 DC（通常为致使持续伤害之效果的 DC）进行求生检定。此外，当你将受到某项效果之持续伤害时，你于受伤前（而非之后）尝试持续伤害之恢复平稳检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为传奇"
+                },
+                {
+                    "value": "高级自我医疗"
+                }
+            ]
+        },
+        "Fey Charm": {
+            "name": "精类魅惑 Fey Charm",
+            "description": "<p>精类生物以与其魅力相称的难以捉摸与诡谲而闻名。你已学会在与原初世界生物互动时调用精类的魅力。当你以欺诈或交涉对具有动物、野兽、植物、菌类或精类特征的生物进行 [[/act lie skill=nature]] 或 [[/act make-an-impression skill=nature]] 检定时，你可以使用自然替代相应技能。你仍须能与这些生物沟通才能进行此类检定（例如具有 @UUID[Compendium.pf2e.feats-srd.Item.ahyQpMVDIqhvXkQ4]{植物认同} 职业专长才能与植物对话）。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为受训"
+                }
+            ]
+        },
+        "Firewalk": {
+            "name": "踏火 Firewalk",
+            "description": "<p>你的移动如此迅捷而轻盈，让你穿过险境时不致伤己。你以最多你速度的距离行走。在此移动中，你可尝试穿过危险地形之空间。当你试图穿过其空间时，立即对致使该危险地形之效果的 DC 或 @Check[type:acrobatics|dc:20]{ }（取较高者）进行一次 @Check[type:acrobatics] 检定。在适当环境下，你可以以攀爬、飞行、游泳或其他动作替代行走来「踏火」。</p><p><strong>成功</strong> 你穿过危险地形之空间而不承受伤害，将其每个方格视为困难地形（每 5 尺消耗 10 尺移动）。</p><p><strong>失败</strong> 你如常承受伤害。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为大师"
+                }
+            ]
+        },
+        "In Wolf's Clothing": {
+            "name": "披狼之衣 In Wolf's Clothing",
+            "description": "<p>You know the lingo and mannerisms of those who work in criminal organizations. You can choose to present yourself as a member of a criminal organization and individuals do not generally question it. You can use Underworld Lore to [[/act lie skill=underworld-lore]]{撒谎 (Underworld Lore)} to pretend to be a criminal, as well as with [[/act impersonate skill=underworld-lore]]{Impersonate (Underworld Lore)} to pretend to be a member of a specific criminal organization. If you use the normal skills in those situations, you receive a +1 circumstance bonus to the check instead.</p>",
+            "prerequisites": [
+                {
+                    "value": "黑社会学识熟练度为受训"
+                }
+            ]
+        },
+        "Improvised Self-Medication": {
+            "name": "应急自疗 Improvised Self-Medication",
+            "description": "<p>你已学会无需工具便能治疗自身的伤口与流血。当你以自身为目标时，你可以以求生（替代医疗）来 @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势} 与 [[/act administer-first-aid skill=survival]]——包括以更高求生熟练度尝试更困难的检定。这并不替代该技能用于上述活动以外之用途或专长先决条件。此外，纵使你未持用治疗工具，你也可使用这些活动，但承受 -2 环境减值。若你为求生大师，你不再因没有治疗工具而承受环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "Lie Deterrence": {
+            "name": "谎言威慑 Lie Deterrence",
+            "description": "<p>众人在你面前撒谎前会再三斟酌。当某人在与你对话时尝试欺瞒于你，若你的威吓 DC 高于你的察觉 DC，则以前者来判断其是否成功。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为受训"
+                }
+            ]
+        },
+        "Resilient Body": {
+            "name": "坚韧之躯 Resilient Body",
+            "description": "<p>你比常人更能抵御伤害效果。你以低 2 的 DC 进行平稳检定以从持续伤害中恢复。</p>",
+            "prerequisites": [
+                {
+                    "value": "体质+2"
+                }
+            ]
+        },
+        "Secret Stash": {
+            "name": "私藏 Secret Stash",
+            "description": "<p>你能巧妙地利用衣物层、魔法或其他方法在身上隐藏极大物品。在你身上 @UUID[Compendium.pf2e.actionspf2e.Item.qVNVSmsgpKFGk9hV]{隐藏物件} 的体积上限为 1。若你为潜行大师，则上限提升为 2。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "Monumental Shove": {
+            "name": "纪念碑式推撞 Monumental Shove",
+            "description": "<p>当你将某人击退时，你真的会将其抛飞。推撞触及范围内之目标。若你的推撞成功，该生物额外移动等同你检定结果一半（向上取整至 5 尺单位）的尺数。若你的推撞为大成功且目标撞上物体，则目标承受等同你推撞距离的钝击伤害。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为传奇"
+                }
+            ]
+        },
+        "Know the Quarry": {
+            "name": "识猎物 Know the Quarry",
+            "description": "<p><strong>触发</strong> 你在与至少一只动物或野兽的战斗中掷先攻。</p><hr /><p>你深谙野生生物的习性，并据此调整自身。你对触发该效果的动物或野兽 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。</p>",
+            "prerequisites": [
+                {
+                    "value": "Hunting学识熟练度为受训"
+                }
+            ]
+        },
+        "Fortunate One": {
+            "name": "幸运者 Fortunate One",
+            "description": "<p>当不幸降临时，你深知好运将至。当你受到一项非琐碎的厄运效果作用时，你在此后 1 小时内的下一次检定获得 +1 状态加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.zjgmJUE2bBzHExlS]{效果：好运者}</p>",
+            "prerequisites": [
+                {
+                    "value": "Fortune-Telling学识熟练度为受训"
+                }
+            ]
+        },
+        "Staunch Bleeding": {
+            "name": "止血 Staunch Bleeding",
+            "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p>你深谙如何妥善包扎伤口以止血。你以单一动作或 2 动作活动使用「止血」，效果如下。</p><p><span class=\"action-glyph\">1</span> 你 @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{进行急救} 以止血。</p><p><span class=\"action-glyph\">2</span> 你执行急救以止血，且检定 DC 减 10。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为专家"
+                }
+            ]
+        },
+        "Divine Aphorisms": {
+            "name": "神圣箴言 Divine Aphorisms",
+            "description": "<p>诵念与你信仰相关的箴言会在需要时给予你额外的信心。写下你神祇的两条箴言，并约定何时你可能说出它们（例如卡丽司翠的信徒在劝某人复仇前先休息时说「先治好你自己的伤」）。每日首次你恰当诵念此类箴言时，你感受到神性的善意。若你的下一场战斗于 1 小时内发生，你便在该战斗中获得 @UUID[Compendium.pf2e.spells-srd.Item.VACvA5VRbddjt5s9] 的效果，随后在 1 天内对此效果免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                }
+            ]
+        },
+        "Correct the Plot": {
+            "name": "校正剧情 Correct the Plot",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你或 30 尺内一名盟友的攻击掷骰或技能检定失败。</p><hr /><p>你深谙这故事的节奏，并能感觉到一个可怕的剧情转折将至。你以小动作让事情回归正轨，赐予自己或盟友清醒的瞬间，让他们能改写命运。掷一次 @Check[performance] 检定并以你的结果替代触发的掷骰。你必须以新掷骰决定触发检定的结果，即便比原掷骰更差。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ]
+        },
+        "Reshaped Spell": {
+            "name": "重塑法术 Reshaped Spell",
+            "description": "<p>你将塑法之名照实奉行——重新塑形所施法术之形态以覆盖不同区域。若你下一动作是施放区域为锥形或线形的法术，你可将该法术之区域改为线形或锥形（互换）。就法术覆盖区域而言，线形长度始终是锥形的两倍，锥形长度始终是线形的一半。</p>"
+        },
+        "Untangle Ally": {
+            "name": "解缚盟友 Untangle Ally",
+            "description": "<p>你深谙将他人从险境与纠葛中解脱之法。你可使用 @Check[thievery] 来尝试对抗一项使相邻盟友 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒}、@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足} 或 @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚} 之效果。你此次检定的对抗等级等同于你的等级。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为大师"
+                },
+                {
+                    "value": "逃脱艺术家"
+                }
+            ]
+        },
+        "Unmistakable Creatures": {
+            "name": "无误生物学识 Unmistakable Creatures",
+            "description": "<p>你绝不会将你所知之生物误认为他者，亦不会将其他生物误认为它。当你对一名生物或生物种类的学识进行回忆知识大失败时，改为失败。若另一生物试图伪装成你已对其学识至少受训之生物，你识破伪装时获得 +4 环境加值。当你成为某生物或生物种类学识之大师时，生物对其 @UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{假冒} 必须以你的察觉 DC 与你的学识 DC 分别进行欺诈检定，识破伪装时也对你的学识 DC 同等获得环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "某生物或某生物类型的学识熟练度为专家"
+                }
+            ]
+        },
+        "The End Times are Coming!": {
+            "name": "终末将至！ The End Times are Coming!",
+            "description": "<p>纵使你自己未必相信，你深知如何以末日预言与神圣报应之警告令所有人惊惧恐慌。对 30 尺内某特定信仰之所有生物的意志 DC 进行一次 @Check[religion|against:will] 检定。你必须在使用此动作时选择是哪一信仰。该区域内之所有生物（甚至其他信仰之生物）于此后 1 小时内对此暂时免疫。</p><hr /><p><strong>大成功</strong> 目标 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}，且其惊惧状态值不可降至 1 以下，直至其花费一个单一动作祷告。</p><p><strong>成功</strong> 同大成功，但目标 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}。</p><p><strong>大失败</strong> 你反令你训诫之人的信仰更为坚定，他们于 1 分钟内对你的下一次敌对动作获得 +1 状态加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.B0S2JmP30C0Mh5om]{效果：末日将至！}</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为大师"
+                }
+            ]
+        },
+        "Liturgical Performance": {
+            "name": "礼仪表演 Liturgical Performance",
+            "description": "<p>你深谙因对信仰之研习而习得的圣歌、仪式之舞与神圣笑话。当你执行表演动作时，你可以用宗教检定替代表演检定；若听众反对你的信仰，你的表演承受 -1 环境减值；若听众支持你的信仰，则获得 +1 环境加值（由 GM 裁定）。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.7h1fcYfzPmAnQw1o]{效果：礼拜表演}</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                }
+            ]
+        },
+        "Affliction Clairvoyance": {
+            "name": "病恙明知 Affliction Clairvoyance",
+            "description": "<p>你召唤附近精魂的建议，并以你的超自然洞察力来判断病痛或伤害的成因。当尝试对疾病、毒素或其他妨碍治疗之效果进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 时，你可以用神秘替代医疗。若大成功，你的明知尤为灵验，赐予你下一次 @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势}、@UUID[Compendium.pf2e.actionspf2e.Item.TC7OcDa7JlWbqMaN]{治疗疾病}、@UUID[Compendium.pf2e.actionspf2e.Item.KjoCEEmPGTeFE4hh]{治疗中毒} 以及对妨碍治疗之效果的对抗检定 +1 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Expanded Hunt": {
+            "name": "扩展狩猎 Expanded Hunt",
+            "description": "<p>你已将更多种类的怪物纳入你的狩猎对象。你可对巨龙、菌类与植物使用 @UUID[Compendium.pf2e-feats-plus.player-options.Item.GKZXQJrFvfuou6Hb]{识猎物} 与 @UUID[Compendium.pf2e-feats-plus.player-options.Item.DY886d80tKN8D7Cn]{取所需}，除了动物与野兽外。在 GM 裁定下，你可能可以选择其他你常以「狩猎学识」遭遇的生物种类，例如构装体或不死生物。</p>",
+            "prerequisites": [
+                {
+                    "value": "Hunting学识熟练度为大师"
+                },
+                {
+                    "value": "识猎物或取所需"
+                }
+            ]
+        },
+        "Mid-air Tackle": {
+            "name": "空中擒拿 Mid-air Tackle",
+            "description": "<p>你跃入空中，将双臂环绕一名飞行生物。若你使用 2 动作活动，你 @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃} 并对一名空中目标 [[/act grapple options:mid-air-tackle-grapple]]。若你使用 3 动作活动，你可使用 @UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高} 或 @UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远} 并对一名空中目标擒拿。你的擒拿在成功与大成功时获得以下额外效果（依擒拿目标体型而定）。若目标在你成功擒拿后仍处于空中，则其将你的体积值加入其负重容量，以决定其是否负重；若你超过其最大体积容量，你二人均坠落并承受坠落伤害。若你擒拿目标为自愿生物，则将你的成功程度视为高一级。若你正在飞行，使用「空中擒拿」时可使用飞行替代跳高或跳远。</p><p><strong>击落</strong>（你的体型或更小） 目标迅速下落。你与目标都坠落 15 尺；若你的擒拿大成功，则坠落 30 尺。只要目标处于受擒，你便保持与其相邻。若目标着地，你二人均承受坠落伤害并倒地。</p><p><strong>抓住不放</strong>（你的体型或更大） 你抓住目标侧面并随其留在空中。目标不获得受擒或束缚状态，可如常继续移动；你随其移动，犹如骑乘其上。每回合你须再次擒拿尝试以维持此效果。若该生物成功逃脱你的擒拿，你立即下马至与其相邻之空间。</p><hr><p><strong>特殊</strong> 若你具有 @UUID[Compendium.pf2e.feats-srd.Item.KxaYlC50zzHysJj8]{巨人摔角术} 技能专长，确定「空中擒拿」效果时你可选择将你体型视为大一级；若你为运动传奇，则视为大二级。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为专家"
+                }
+            ]
+        },
+        "Specialty Master": {
+            "name": "专长大师 Specialty Master",
+            "description": "<p>纵使你不熟悉某些技法，亦不阻碍你制作你专精领域之物品。你制作涉及你所选专精的物品时，始终对其完整应用环境加值（而非部分）。你也将「专精制作」赐予的环境加值应用于你对落入你专精领域之物品所进行的任何制作检定，而不仅仅是「制作」活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为大师"
+                },
+                {
+                    "value": "独门手艺"
+                }
+            ]
+        },
+        "Vault": {
+            "name": "翻越 Vault",
+            "description": "<p>你能轻松翻越小障碍。你以最多你速度的距离行走。在此移动中，你可尝试穿过单一 5 尺立方体的困难地形，或翻越其上有一项你能翻越之障碍（如矮墙、壕沟、桌子或一件家具）。进行 @Check[type:acrobatics|dc:20|showDC:all|options:action:vault:1] 检定以忽略该区域内的困难地形或障碍。</p><p>若你为特技专家，你可选择将 DC 提升至 @Check[type:acrobatics|dc:25|showDC:all|options:action:vault:2]{ } 来忽略两个 5 尺立方体；若你为特技大师，可将 DC 提升至 @Check[type:acrobatics|dc:30|showDC:all|options:action:vault:4]{ } 来忽略四个 5 尺立方体；若你为传奇，可将 DC 提升至 @Check[type:acrobatics|dc:40|showDC:all|options:action:vault:8]{ } 来忽略八个 5 尺立方体。这些立方体须彼此相邻，但可任意方向排列。</p><p><strong>成功</strong> 你如同困难地形或物体不存在那般继续穿越该区域之移动。</p><p><strong>大失败</strong> 你倒地。</p><hr /><p><strong>特殊</strong> 若你具有「派头」职业特性，此动作获得「飒爽」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为受训"
+                }
+            ]
+        },
+        "Careful Watch": {
+            "name": "谨慎守望 Careful Watch",
+            "description": "<p><strong>需求</strong> 你处于与你相关学识所对应的地形。</p><hr /><p>你深谙熟悉地形中的危险。每当你花费至少 10 分钟在所需地形之内 @Template[type:burst|distance:30] 范围中设置守望区域时，生物除你的察觉 DC 外，必须再以你的学识 DC 进行第二次潜行检定才能不被察觉，否则即使其针对你的察觉 DC 失败，仍如同被察觉。若你以学识 DC 察觉到一名生物，你可以以所需学识掷先攻，并获得 +2 环境加值。此效果持续至你离开该区域或 1 天过后（取先到者为准）。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某地形类型相关的学识熟练度为专家"
+                }
+            ]
+        },
+        "Think Tank": {
+            "name": "智囊团 Think Tank",
+            "description": "<p><strong>需求</strong> 你与你搭档相距 30 尺以内，且双方均能在当前战斗中对一名敌人 @Compendium[pf2e.actionspf2e.Recall Knowledge]{回忆知识}。</p><hr /><p>你与同为辩士者头碰头，争论任何浮现于脑海的事项。在使用此团队配合时，每当你们之一回忆知识，你们二人均掷出该检定并使用较高结果。此为命运效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "至少在一项可使用回忆知识动作的技能上受训"
+                }
+            ]
+        },
+        "Cold Reading": {
+            "name": "冷读术 Cold Reading",
+            "description": "<p>身为冷读术之修习者，你偶尔召唤将物理特征、生活细节及其他征兆相联系的占卜技巧。若你与某人交谈并观察其 1 分钟，你可问一个问题——GM 可秘密以神秘检定（替代察觉）进行 [[/act sense-motive skill=occultism]]，以发掘该个体性格或行为之深层面相。若你为神秘大师，你可于 3 分钟内问 2 个问题。若你为神秘传奇，则可于 5 分钟内问 3 个问题。此不能用于直接判断某人是否对你的回答撒谎，仅能判断其潜在的情绪与心智状态。无论结果如何，你的「冷读术」目标 1 日内对此暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Follow Crime Spree": {
+            "name": "追查犯罪潮 Follow Crime Spree",
+            "description": "<p><strong>需求</strong> 你处于某聚落之中。</p><hr /><p>你以你的犯罪经验识别犯罪规律。若你从犯罪现场出发，可使用盗术 [[/act track skill=thievery]] 生物。若该犯罪发生于 1 天之内，你的追踪检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "All In A Day's Work": {
+            "name": "一日之功 All In A Day's Work",
+            "description": "<p>每当你花费时间从事农耕，便倍感精神焕发。若你以「农耕学识」成功 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}，你在 1 天内对情绪效果获得 +1 状态加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "农业学识熟练度为受训"
+                }
+            ]
+        },
+        "Pinpoint Out": {
+            "name": "精准指出 Pinpoint Out",
+            "description": "<p><strong>触发</strong> 你使用 @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索} 检测到一名生物。</p><hr /><p>你已学会如何向盟友进行无差别细节的沟通。你立即 @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{指明} 该生物，若你的盟友无法看见或理解你，则其察觉检定获得 +2 环境加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.JOwwEGi101nC1QGd]{效果：精准锁定}</p>"
+        },
+        "Interlocked Shields": {
+            "name": "联锁盾墙 Interlocked Shields",
+            "description": "<p><strong>需求</strong> 你与你的搭档相邻。</p><hr /><p>你们将彼此的防御互锁，使你们二人都无懈可击。在使用此团队配合时，当你们之一 @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾} 或施放 @UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR] 法术时，另一人在该盾牌已举或盾牌法术生效期间获得 +1 AC 环境加值。若你们双方都有举起的盾牌或生效的盾牌法术，则在彼此都受益于该环境加值时，将环境加值再增加 1。此外，当你或你搭档进行快步时，你可以使用一个自由动作快步以保持与搭档相邻。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.09jzA3U88ZStsE7K]{效果：联锁盾阵}</p>",
+            "prerequisites": [
+                {
+                    "value": "盾击或能施放盾术"
+                }
+            ]
+        },
+        "Quick Stabilization": {
+            "name": "快速稳定 Quick Stabilization",
+            "description": "<p>越快将濒死生物脱离险境越好。当你 @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{进行急救} 以使一名生物稳定时，你只需一个动作即可施行急救。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为专家"
+                }
+            ]
+        },
+        "Cult Expert": {
+            "name": "邪教专家 Cult Expert",
+            "description": "<p>你已确认某特定邪教为眼中钉，并整理出辨识其成员之共同特征的笔记。若该邪教成员有常用语言，你便习得之；并你始终可以用宗教对该邪教之爪牙进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。你不能用宗教对仅与该邪教结盟的生物进行回忆知识（例如诺戈贝尔教派雇用的卡尔欧雇佣兵），但受邪教控制的生物（如诺戈贝尔教派饲养的巨型蝎子，或他们建造的奇异构装体）则适用此效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                },
+                {
+                    "value": "你曾与特定教派多次交手"
+                }
+            ]
+        },
+        "Water From a Stone": {
+            "name": "石中取水 Water From a Stone",
+            "description": "<p>你已学会在不寻常之处寻得水源。你可以以 @Check[survival|dc:20] 检定，花费 10 分钟挖一口小井、从附近植物与野生生物中收集，或寻找流水来获取 2 加仑水。GM 可在水尤为稀缺之地（如沙漠）提升此 DC，但通常不超过 30。若你为求生大师，你最多可获取 4 加仑水；若你为求生传奇，则最多 8 加仑。在你使用「石中取水」后，于使用之地点 500 尺内 1 日内不能再次使用。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Persistent Spell": {
+            "name": "持续法术 Persistent Spell",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>当你对敌人造成伤害后，你于其上留下一道挥之不去、化脓蔓延之魔法残留。若你的下一动作是施放针对单一生物且造成伤害的法术，则该生物在豁免失败或你的攻击掷骰成功时，额外承受等同于该法术环级两倍的持续伤害（伤害类型与法术相符）。若豁免大失败或攻击掷骰大成功，持续伤害翻倍。若法术造成多种伤害类型，你必须为此持续伤害选择其中一种伤害类型。</p>"
+        },
+        "Delver's Intuition": {
+            "name": "探险者直觉 Delver's Intuition",
+            "description": "<p>你对地下城与室内环境结构布局之认识，赐予你在尚未踏入房间之前便能绘制其图、或发现隐藏通道、探得未探之处的本事。当你探索地下城时，可对适合该区域的 DC（由 GM 裁定）进行 @Check[Cartography Lore] 检定，从而了解 @Template[type:emanation|distance:60] 范围内附近通道、房间或墙壁之内容。除非你获得能让你再次使用此专长之新信息，否则你不能对同一区域多次使用「探险者直觉」。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.XY20I7fkFtLoeYQY]{效果：探险者直觉}</p><hr /><p><strong>大成功</strong> 你了解到该区域的精确尺寸，并自动得知附近是否有任何隐秘区域（但不知其确切位置或如何进入）。你于该区域内的 @UUID[Compendium.pf2e.actionspf2e.Item.EwgTZBWsc8qKaViP]{调查} 与 @UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]{搜索} 探索活动获得 +2 环境加值。</p><p><strong>成功</strong> 同大成功，但环境加值为 +1。</p>",
+            "prerequisites": [
+                {
+                    "value": "Cartography学识熟练度为专家"
+                }
+            ]
+        },
+        "Sprint": {
+            "name": "冲刺 Sprint",
+            "description": "<p><strong>需求</strong> 你未疲乏。</p><hr /><p>你能在紧要关头逼自己跑得比常时更快。沿直线行走，并对 @Check[type:athletics|dc:resolve(15 + (5 * @actor.flags.pf2e-feats-plus.sprintCount))] 进行检定。若你具备相应移动方式，你可以用「冲刺」替代行走来穴行、攀爬、飞行或游泳。</p><p><strong>大成功</strong> 同成功，但不增加冲刺的 DC。</p><p><strong>成功</strong> 你的此次行走视为速度增加 5 尺，并将冲刺的 DC 增加 5，直至你休息 10 分钟。</p><p><strong>大失败</strong> 你逼得太紧。你疲乏，且对你的速度承受 -10 尺状态减值，直至你休息 10 分钟。</p><hr /><p><strong>Foundry 注</strong> 你可使用 @UUID[Compendium.pf2e-feats-plus.misc.Item.kJerV6IsiEEZoBlL]{效果：冲刺计数} 来表示你迄今为止使用此动作的次数。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为受训"
+                }
+            ]
+        },
+        "Slap on the Wrist": {
+            "name": "轻打手腕 Slap on the Wrist",
+            "description": "<p>You know how to get yourself out of trouble with the law, even if you have clearly broken them. Whenever you take an action or activity that breaks local law and customs and are caught, you can spend 1 minute to Make an Impression and you can use your [[/act make-an-impression skill=deception]]{欺诈} instead of Diplomacy for this Make an Impression and the action or activity does not change their attitude toward you unless you fail your attempt to Make an Impression.</p><p>If you include your allies in the story, you can target up to 5 allies to be included in the effects of your Make an Impression, but you take a -2 penalty to your Make an Impression. If you target a group of individuals and there are mixed results within a group, usually the highest ranking authority in the group makes the decision (subject to GM discretion, but usually the highest level creature).</p><p>If after you Make an Impression the targets are friendly towards you or one of your allies, they might be skeptical of your story but give you the benefit of the doubt, but they may still ask that you leave the premises or other reasonable expectations. If the target is helpful towards you or one of your allies, they will treat your actions as if they were lawful as you've convinced them of your circumstances, and they may even aid you in your endeavor unknowing of your intentions.</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为专家"
+                }
+            ]
+        },
+        "Astrological Divination": {
+            "name": "占星术 Astrological Divination",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>通过解读天空中的星座，你预见未来并作出有据之猜测。你可以花费 1 小时进行星象解读以获取某具体事件之知识——对你等级的标准 DC 进行 @Check[occultism|dc:@self.level] 检定。若你能进入清朗夜空可见星辰之处或拥有其他读星方法，你的检定获得 +2 环境加值。</p><hr /><p><strong>大成功</strong> 你针对该事件进行解读，产生 @UUID[Compendium.pf2e.spells-srd.Item.41TZEjhO6D1nWw2X] 之效果。你预测此事件至多 1 天后的结果（替代常规持续时间）。</p><p><strong>成功</strong> 同大成功，但你预测此事件至多 12 小时后的结果。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Elemental Enlightenment": {
+            "name": "元素启明 Elemental Enlightenment",
+            "description": "<p>无论你是元素位面的居民还是仅是其元素魔法的博学学者，你于元素之中皆有特定专长之处。你对针对具有「空气、大地、火焰、金属、水、木」特征的生物、物品或法术进行的奥术或自然检定，于 @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]{鉴别魔法} 或 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 时获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘或自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Monastic Practices": {
+            "name": "修道之修 Monastic Practices",
+            "description": "<p>你曾于神庙与修道院中研修而非教堂与神龛中。这赐予你与众不同的信仰视角——重复的奉行（例如抄经或圣化锻炼）比布道或主持弥撒更为重要。当你执行至少需要 10 分钟的活动时，你可以对你等级的标准 DC 进行一次 @Check[religion|dc:@self.level] 检定，以求对自身命运得到见解。若你成功，你恢复 1 点聚能点。此聚能点是在你正常通过执行该活动获得的聚能点之外的额外聚能点。你不能将「修道之修」与「重新聚能」活动同时使用。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                },
+                {
+                    "value": "聚能法力池"
+                }
+            ]
+        },
+        "Erudite Mentor": {
+            "name": "博学导师 Erudite Mentor",
+            "description": "<p>你是一位耐心而善言的导师，在魔法事务上指导他人——也许你曾从教授那里学习，也可能你自身便有担任此角色的经验。你可使用奥术为盟友的奥术、自然、神秘或宗教检定（用于回忆知识、学习法术，或执行具「魔法」特征之动作）进行援助，且你的援助检定获得 +1 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Ephemeral Echoes": {
+            "name": "瞬息回响 Ephemeral Echoes",
+            "description": "<p><strong>需求</strong> 你对至少一名生物处于隐蔽或无踪状态。</p><hr /><p>你利用诡计、魔法或其他方法留下你存在的鬼魅回响。你 [[/act create-a-diversion skill=stealth]] 并 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}——你对其隐蔽的附近生物听到泄露行踪之声响（如不慎踢到的小石、衣物的窸窣声，甚至过于自信的笑声）。如此做时，你以潜行（替代欺诈）掷分神检定，且仅获得「听觉」特征，并以下结果（替代分神之常规结果）：</p><hr /><p><strong>成功</strong> 察觉 DC 不超过你分神结果之生物，将你视为遮蔽，直至你下一回合开始或你成为可见。</p><p><strong>失败</strong> 察觉 DC 超过你分神结果之生物，对你的「瞬息回响」之潜行的察觉 DC 反而获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "Clever Cheat": {
+            "name": "巧诈作弊 Clever Cheat",
+            "description": "<p>你是经验老道的骗子与作弊者，连仿冒牌组或其他作弊工具都无须使用。当玩游戏或赌博时，纵使你未使用 @UUID[Compendium.pf2e.equipment-srd.Item.6NEOf1UznG4Po0Qi]{灌铅骰} 或 @UUID[Compendium.pf2e.equipment-srd.Item.Q4KkKGGXq4bNGHh2]{带标记的扑克牌}，你仍可选择作弊——巧妙操纵游戏工具于己有利。如此做时，你于所玩游戏期间的游戏学识或赌博学识检定获得 +1 环境加值。</p><p>为辨明你是否在作弊，观察者除任何其他探测作弊之检定外，还须以你的游戏学识或赌博学识 DC 进行察觉检定成功。若你为游戏学识或赌博学识大师，环境加值提升至 +2。</p>",
+            "prerequisites": [
+                {
+                    "value": "Games Lore or Gambling学识熟练度为受训"
+                }
+            ]
+        },
+        "Peace with Death": {
+            "name": "与死和解 Peace with Death",
+            "description": "<p>你研习信仰已久，足以为身后之事做好准备，且不为来世感到惊惧。你花费 10 分钟诵念祷词或其他信仰之确证，并对你等级的标准 DC 进行 @Check[religion|dc:@self.level] 检定。无论结果如何，你于 1 小时内对「与死和解」暂时免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.3DrxNxi9Xdd513ji]{效果：与死亡言和}</p><hr /><p><strong>大成功</strong> 此后 1 小时内你首次获得 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死} 状态时，只要你处于濒死状态，你的恢复检定 DC 减 5。此外，若你于此濒死状态期间恢复生命值，则你额外恢复等同你等级的生命值。</p><p><strong>成功</strong> 同大成功，但额外恢复的生命值为你等级的一半。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                }
+            ]
+        },
+        "Haunt Legend": {
+            "name": "灵祟传说 Haunt Legend",
+            "description": "<p>你对灵祟的知识与技能近乎无人能及，鲜少有人能匹敌你于此领域之精通。你于 @UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]{搜索}、@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 与瘫痪灵祟的检定上获得 +2 环境加值。即便灵祟通常不允许此类检定，你仍可用神秘或宗教对其进行检定，以其神秘或宗教 DC 为 DC（若无神秘或宗教 DC，则以瘫痪所需之最高 DC 为 DC）。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘或宗教技能熟练度为传奇"
+                }
+            ]
+        },
+        "Primary Threat": {
+            "name": "主要威胁 Primary Threat",
+            "description": "<p><strong>需求</strong> 你的回合开始且这是与至少一名敌方生物战斗的第一轮。</p><hr /><p>当战斗开始时，你明示众人应主要关注你。你 @UUID[Compendium.pf2e.actionspf2e.Item.A72nHGUtNXgY5Ey9]{延迟}，同时向你的敌人显示出威慑姿态。在你延迟之后才行动的敌方生物，对你盟友的攻击掷骰承受 -1 环境减值，直至你下一回合开始。生物可花费一个具「专注」特征的单一动作进行自身的威胁评估以解除此减值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.BPfWwVa2tSARRdIN]{效果：首要威胁}</p>"
+        },
+        "Second-Nature Cantrip": {
+            "name": "本能戏法 Second-Nature Cantrip",
+            "description": "<p>某项戏法对你而言始终触手可及，纵使你未将其准备。从你施法传统中选择一道戏法。当你以所选戏法使用 @UUID[Compendium.pf2e.actionspf2e.Item.OQaFzDtVEOMWizJJ]{复唱法术} 探索活动时，你无须以一半速度移动。若你至少为 15 级，则可在使用「复唱法术」时再选择执行另一项探索活动。</p>"
+        },
+        "God-Warrior": {
+            "name": "神战士 God-Warrior",
+            "description": "<p>你已从神祇身上汲取部分威能为己所用，并夺取了其神圣领域之一部分将其与神祇剥离。你可以每日一次将 @UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]{天神下凡} 作为神圣自然内禀法术施放。你呈现出你曾对战之神祇的形态（但非其外貌），将其改造以揭示你自身的全新、传奇之外貌。</p>"
+        },
+        "Off-Handed Insult": {
+            "name": "随手羞辱 Off-Handed Insult",
+            "description": "<p><strong>触发</strong> 受你 @UUID[Compendium.pf2e.feats-srd.Item.0GF2j54roPFIDmXf]{当头棒喝} 影响的生物尝试以技能动作终止该效果。</p><hr /><p>当某人尝试反唇相讥时，你的辛辣评论常能阻碍他们的行动。触发的检定承受 -2 状态减值，因为你接连讽刺。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.MgkrjauDYsZBNQm8]{效果：旁敲讽语}</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为大师"
+                },
+                {
+                    "value": "当头棒喝"
+                }
+            ]
+        },
+        "Honed-Shot Precision": {
+            "name": "磨砺射击精准 Honed-Shot Precision",
+            "description": "<p><strong>触发</strong> 你对一名敌人远程打击大成功，且该敌人在此次打击后仍高于 0 生命值。</p><hr /><p>你击中要害，让你有机会完成最后一击。你的远程打击对该敌人每枚武器伤害骰额外造成 1 点精准伤害。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.Ig9HaamKNFhmhIYk]{精准突击} 大胆反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "至少在一项军用远程武器上受训"
+                }
+            ]
+        },
+        "Safe Spell": {
+            "name": "安全法术 Safe Spell",
+            "description": "<p>作为一名施法者，你太清楚不慎以魔法误伤盟友是多么容易，并已学会保护他们免遭此类事件。若你下一动作是施放一道无持续时间、造成伤害且具区域之法术，你可指定 2 名盟友将其排除于该法术效果之外。</p><p>10 级时及此后每 4 级，你可再多排除一名盟友于该法术区域之外。</p>"
+        },
+        "Circadian Disciplinarian": {
+            "name": "昼夜规律师 Circadian Disciplinarian",
+            "description": "<p>你已学会以更短时间重置身体。你可花费 1 小时休息以获得整夜休息之部分效果——对你等级的标准 DC 进行 @Check[survival|dc:@self.level] 检定。若你已超过 1 日未进行整夜休息，则此检定自动失败。你仍不能在 24 小时内多次获得休息效果，但若你以 8 小时休息，则可获得本以此方式未获得之效果（例如恢复你的法术）。若你为求生大师，你可休息 10 分钟（替代 1 小时）以获得所列效果。</p><hr /><p><strong>大成功</strong> 你失去疲乏状态，将流失值减 1，并恢复等同你体质调整值（最少 1）乘以你等级的生命值。</p><p><strong>成功</strong> 同大成功，但恢复的生命值减半。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "Allied Diversion": {
+            "name": "盟友佯动 Allied Diversion",
+            "description": "<p>你可以以你惊人的把戏将注意力从盟友身上转移开。你使用 @UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神}，但作出佯动的常规效果可改变如下：你可选择 30 尺内最多 10 名盟友生物。所选盟友（而非你自身）因你的分神而成为隐蔽，直至你下一回合开始。无论结果如何，你以「盟友佯动」作用的生物在 1 小时内对此暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为大师"
+                }
+            ]
+        },
+        "Identify Divine Presence": {
+            "name": "识别神圣存在 Identify Divine Presence",
+            "description": "<p>当你闭眼平静心神时，你能感知附近是否有非此世之物。进行一次宗教检定。你将结果与 @Template[type:emanation|distance:30] 内具有「天界、邪魔、监临者或不死」特征之生物或魔法的 @Check[religion|against:deceoption]{欺诈DC} 或 @Check[religion|against:stealth]{潜行DC}（取较高者）比较。若该生物或物品没有欺诈或潜行 DC，则你使用其等级之标准 DC。你了解到该生物或物品所具备的特征及其存在，但不了解其来源或所在之处。若区域内当下没有具备所列特征之生物或物品，但过去 24 小时内曾有，则你侦测到此处曾有存在但已离开。你可在探索模式下如同侦测魔法那般使用此技能专长。若你为宗教传奇，你还能了解该生物的本位面（例如虚空或外裂界）。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为大师"
+                }
+            ]
+        },
+        "Teamwork Talent": {
+            "name": "团队天赋 Teamwork Talent",
+            "description": "<p>你在与他人于战斗中协作上具有天赋。你获得一项具有「团队」特征的 1 级或 2 级专长。</p>"
+        },
+        "Transpose Self": {
+            "name": "易位自身 Transpose Self",
+            "description": "<p>身处对许多法师而言不甚理想的境遇时常出现的副产物，便是某些魔法学者发明出此奥术诡计——让他们能安全跨越短距，并进入他们原本无法进入之区域。对你等级的标准 DC 进行 @Check[type:arcana|dc:@self.level] 检定。若你起点位置与终点位置之间含有任何障碍、屏障、生物或困难地形，则该检定 DC 提升至你等级的 @Check[type:arcana|dc:@self.level|adjustment:+5]{极难 DC}。</p><p><strong>成功</strong> 你传送至多 15 尺至你视野内的空间。你于 1 小时内不能再次使用「易位自身」。</p><p><strong>大失败</strong> 你的传送尝试失败，因身体不当相位化而承受 @Damage[@actor.level[force]] 伤害。你于 1 日内不能使用「易位自身」。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Savory Socialization": {
+            "name": "美味社交 Savory Socialization",
+            "description": "<p>A delicious meal transcends the boundaries of language to forge strong connections. You can use Cooking Lore instead of Diplomacy to [[/act make-an-impression skill=cooking-lore]]{建立印象 (Cooking Lore)} by creating a delicious meal over the course of 10 minutes. You can do this even with creatures that you don't share a language with, provided they partakeinyourmeal.You can perform this activity ahead of time to prepare a meal, allowing you to Make an Impression in the normal amount of time instead of 10 minutes, but you must specify which creature or creatures the meal is for or you take a –4 circumstance penalty to your check.</p>",
+            "prerequisites": [
+                {
+                    "value": "Cooking学识熟练度为大师"
+                }
+            ]
+        },
+        "Pacifying Proposal": {
+            "name": "息止提议 Pacifying Proposal",
+            "description": "<p><strong>触发</strong> 一名盟友生物对你能看见与听见的某生物尝试胁迫。</p><hr><p>你将自己定位成盟友中性情温和之人。对触发活动的 DC 进行一次 @Check[type:diplomacy] 检定。若成功，触发的胁迫活动不会导致该生物的态度变化，但他们仍可能反击你或向当局举报你。若大成功，他们不会反击，并视该提议为互利之事，认为该触发盟友尽管缺乏圆滑但本意良好。无论结果如何，胁迫活动的目标在 1 周内对你的「息止提议」免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为受训"
+                }
+            ]
+        },
+        "Plaster Physician": {
+            "name": "石膏医师 Plaster Physician",
+            "description": "<p>你长期使用天然疗法与材料用于医药用途，由此获得驾驭自然魔法以满足所需的超凡能力。你可以将 1 环 @UUID[Compendium.pf2e.spells-srd.Item.m5QS8q5M6K0euKcT] 作为原初内禀法术随意施放，且可以使用你制造的工具进行 @UUID[Compendium.pf2e.feats-srd.Item.WC4xLBGmBsdOdHWu]{自然疗法}。若你为自然大师，该法术高位至 3 环，且你的自然检定 @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势} 时获得物品加值。若你为自然传奇，施放「治疗石膏」就「自然疗法」之环境加值之触发条件而言，等同于具备新鲜原料。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为专家"
+                },
+                {
+                    "value": "自然疗法"
+                }
+            ]
+        },
+        "Theological Academic": {
+            "name": "神学学者 Theological Academic",
+            "description": "<p>你对神学著作中常见的语言与文风非常熟悉，能迅速消化此类作品。当你以宗教 @UUID[Compendium.pf2e.actionspf2e.Item.d9gbpiQjChYDYA2L]{解读文字}、@UUID[Compendium.pf2e.actionspf2e.Item.t5nBkpjroaq7QBGK]{研究}，或以其他需要宗教掷骰的方式从文本获取知识时，你可以以一半的常规时间执行该活动；若你掷出大失败，则改为失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为受训"
+                }
+            ]
+        },
+        "Language of the Wild": {
+            "name": "荒野之语 Language of the Wild",
+            "description": "<p>你已学会与植物或野生生物沟通——也许是因长期与它们相处，或经德鲁伊教导。</p><p>你获得 @UUID[Compendium.pf2e.spells-srd.Item.BBvV7qoXGdw09q1C] 或 @UUID[Compendium.pf2e.spells-srd.Item.qvwIwJ9QBihy8R0t] 之一，作为 3 环原初内禀法术。你可以每日一次施放所选的内禀法术。</p><hr /><p><strong>特殊</strong> 你可以选取此专长两次，从而获得施放第一次未选之法术之能力（每日一次，作为 3 环原初内禀法术）。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Effective Triage": {
+            "name": "有效分诊 Effective Triage",
+            "description": "<p>你善于将一名生物自鬼门关拉回。当你 @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{进行急救} 以使一名生物稳定时，若成功，目标在其下回合开始时获得 [[/r @actor.level]] 生命值并恢复意识。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为大师"
+                }
+            ]
+        },
+        "Awesome Flex": {
+            "name": "震撼炫技 Awesome Flex",
+            "description": "<p>By showing off your incredible musculature, you can briefly cause creatures who revere strength to marvel at you. When a creature witnesses you successfully make an Athletics check against a standard DC of their level or higher, you can immediately attempt another [[/act make-an-impression skill=athletics]]{运动} check to Make an Impression against that creature so long as you have not taken a hostile action against them or their allies. If the creature you target would not normally be impressed by a show of strength, such as an academic, treat your degree of success as one worse. If you are legendary in Athletics, you can target up to 10 creatures without penalty with this Make an Impression.</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为专家"
+                }
+            ]
+        },
+        "Ligneous Skin": {
+            "name": "木质之肤 Ligneous Skin",
+            "description": "<p>木之位面的生命力治愈了你最严重的伤痛，让肉体与植物之界线在此处模糊；如今你的部分形似树皮，呈植物状。你获得「木」特征及 @UUID[Compendium.pf2e.feats-srd.Item.AmP0qu7c5dlBSath]{健壮} 通用专长。你可以每日一次将 @UUID[Compendium.pf2e.spells-srd.Item.YWrfKetOqDwVFut7] 作为原初内禀法术施放，但只能以你自身为目标。</p>"
+        },
+        "Re-Rig": {
+            "name": "重整索具 Re-Rig",
+            "description": "<p>你能以少许有利的调整重新激活已被瘫痪的装置。你可以对已被瘫痪的装置或陷阱使用 @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{装置}。如此做时，将通常的结果替换为以下：</p><hr /><p><strong>成功</strong> 该装置或陷阱重置；你可改变其反应的触发条件以排除你与盟友，或改为在设定时间激活。GM 也可允许你以其他方式改变触发条件。</p><p><strong>失败</strong> 该装置或陷阱未能重置。</p><p><strong>大失败</strong> 该装置或陷阱重置，并立即被触发。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为专家"
+                }
+            ]
+        },
+        "Life Fish in Water": {
+            "name": "如鱼得水 Life Fish in Water",
+            "description": "<p><strong>需求</strong> 你处于与你相关学识所对应的地点。</p><hr /><p>你对周遭环境的认识让你于该处生存具有优势。你对严寒、严热或恶劣天气之豁免，以及对所需地点常规危害之豁免与检定，获得 +2 环境加值。你可以用所需学识替代常规技能 @UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]{求生}。当你成为所需学识大师时，求生检定的成功程度提升一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某聚落或地区相关的学识熟练度为受训"
+                }
+            ]
+        },
+        "Uninhibited Aid": {
+            "name": "无碍援助 Uninhibited Aid",
+            "description": "<p>援助你的盟友对你而言是如此自然，以至于你能反射般地如此做。每回合首次你花费至少 1 个动作准备援助盟友时，你直至下一回合开始前获得一个仅用于援助反应的额外反应。</p>"
+        },
+        "Steal It All": {
+            "name": "窃尽一切 Steal It All",
+            "description": "<p>你疯狂冲刺，将能拿到的一切尽收囊中。你行走。在行走过程中，你交互以拾取一件物品、@UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{手上功夫}，或 @UUID[Compendium.pf2e.actionspf2e.Item.RDXXE7wMrSPCLv5k]{盗窃}，并立即交互以收纳该物品。</p><p>若你将三个动作用于此活动，你可花费 2 个动作交互以拾取一件物品、手上功夫或盗窃，并在每次动作后立即交互以收纳该物品。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为专家"
+                }
+            ]
+        },
+        "Hardened Combatant": {
+            "name": "坚毅战士 Hardened Combatant",
+            "description": "<p>你已身经百战，不再轻易动摇。你对暴击获得等同你等级一半的抗力，并对针对暴击效果或会因暴击发生之效果的豁免获得 +1 环境加值。</p>"
+        },
+        "Hypersenses": {
+            "name": "超感官 Hypersenses",
+            "description": "<p>你的感知能力已坚定到能透过高敏锐感官来感知。在每日准备期间，从下列感官中选择一项使你能使用至下次每日准备前。若你选择一项你已不精确具备之感官，你可改为将该感官于所列射程内的精确度提升至精确。</p><ul><li>20 尺射程的回声定位作为精确感官。</li><li>30 尺射程的气味作为不精确感官；若你已具备不精确气味感官，则于 20 尺内作为精确感官。</li><li>30 尺内的震感作为不精确感官。</li><li>30 尺内的波感作为不精确感官。</li></ul><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.Xu3thEXzrCtxjcZw]{效果：超感官}</p>",
+            "prerequisites": [
+                {
+                    "value": "察觉技能熟练度为大师"
+                }
+            ]
+        },
+        "Devastating Finish": {
+            "name": "毁灭终局 Devastating Finish",
+            "description": "<p><strong>触发</strong> 你将一名等级不低于你等级减 4、且原本满血的生物减至 0 生命值。</p><hr /><p>当你将某人送入坟墓时，你变得可怖而流失。你的 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 获得 +2 环境加值；目睹你将触发该效果生物减至 0 生命值的、等级不高于你的敌人，在能看见你期间，他们由你挫败士气施加的 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态不能降至 1 级以下。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.UoIjmafqNeVuiKRc]{下一个？} 大胆动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "下一个就是你"
+                }
+            ]
+        },
+        "Ritual Glyphs": {
+            "name": "仪式符印 Ritual Glyphs",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>你能在执行仪式时利用对奥术魔法的认识，通过创建专门的符印获得优势。花费 10 分钟，你在仪式空间中作为其准备的一部分加绘额外的符印与符文。如此做时，你与所有参与仪式的盟友于所有主要与次要检定获得 +1 环境加值，或将其环境加值之数值再增加 1。这些符印只在单次仪式施法持续时间内存在，并于其完成后消散。若你为奥术大师，所应用的环境加值改为增加 2 而非 1。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.CE6OH0P8jV2WUrok]{效果：仪式符印}</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Environmental Ascent": {
+            "name": "环境攀升 Environmental Ascent",
+            "description": "<p><strong>需求</strong> 你处于自然地形。</p><hr /><p>通过以原初魔法呼唤你周围原初景观之根茎与藤蔓，你可以更轻松地克服障碍。你可以以自然替代运动来 [[/act climb skill=nature]]，呼唤附近的植物与大地协助你攀爬。若你已对运动受训且尝试以运动检定攀爬，你改为对攀爬获得 +2 环境加值。若你为自然大师，你可在大地与植物稀少之地点亦能呼唤之，但攀爬检定 DC 提升 5。当你以此方式攀爬时，你的攀爬获得「原初」与「操作」特征。</p><hr /><p><strong>特殊</strong> 若你具备攀爬速度，你于自然地形中改为对攀爬速度获得 +5 尺状态加值；若你为自然传奇，则改为 +10 尺状态加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为受训"
+                }
+            ]
+        },
+        "Chase Shortcut": {
+            "name": "追逐捷径 Chase Shortcut",
+            "description": "<p><strong>触发</strong> 你在追逐中检定失败。</p><p><strong>需求</strong> 你处于与你相关学识所对应的地点。</p><hr /><p>你能在熟悉的领地中轻松进行追逐——当事情不按计划进行时取走捷径。你可以使用所需学识（而非通常技能）重新掷一次触发的技能检定，并采用新结果（即便结果更差）。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某聚落或地区相关的学识熟练度为专家"
+                }
+            ]
+        },
+        "Survivalist's Cartography": {
+            "name": "生存者制图 Survivalist's Cartography",
+            "description": "<p>Asyoutraveloverlandandexploredungeons,youcreate maps of the locations you travel, allowing you to assist your allies in exploring safely without getting lost. You can use Cartography Lore instead of Survival to [[/act sense-direction skill=cartography-lore]]{辨别方向 (Cartography Lore)} and you can @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} @UUID[Compendium.pf2e.equipment-srd.Item.UhcRWtnjU2WLSClx]{地图勘察} using Cartography Lore instead of Crafting. When you Craft a Survey Map with Cartography Lore, it takes you only 1 day and you reduce the cost to create Survey Maps to half the normal amount.</p><p>In addition, if you successfully @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} on an area you are currently in, you can spend 10 minutes scribing an impromptu map of the area, granting a +2 circumstance bonus to Sense Direction while within the area and to Perception to detect secret doors or passageways if the area would have noticeable structural inconsistencies.</p>",
+            "prerequisites": [
+                {
+                    "value": "Cartography学识熟练度为受训"
+                }
+            ]
+        },
+        "Armored Comfort": {
+            "name": "甲适 Armored Comfort",
+            "description": "<p>你深谙如何调整护甲以发挥最大效益、同时减少其负面影响。当护甲处于穿戴状态时，你视其体积低 1。当你穿着会赋予你护甲检定减值的护甲、且不满足所需力量阈值时，你将该减值对技能检定的减值减 2。</p>",
+            "prerequisites": [
+                {
+                    "value": "轻型护甲熟练度为受训"
+                }
+            ]
+        },
+        "Surveillant Senses": {
+            "name": "监视感官 Surveillant Senses",
+            "description": "<p>你的感官高度敏锐。若你 @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索}，你直至下一回合开始前对周围环境保持高度警觉。在此期间若有生物在你 30 尺内尝试 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行} 或 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{藏匿}，你的 GM 会为你秘密地进行一次察觉检定，并使用该结果或你的察觉 DC（取较高者）对抗任何目标对你潜行或藏匿的尝试。</p>",
+            "prerequisites": [
+                {
+                    "value": "察觉技能熟练度为专家"
+                }
+            ]
+        },
+        "Infectious Socialite": {
+            "name": "感染社交家 Infectious Socialite",
+            "description": "<p>你在社交场合中总是表现最佳。你获得将 @UUID[Compendium.pf2e.spells-srd.Item.VACvA5VRbddjt5s9] 作为奥术内禀戏法施放之能力。此外，你可在社交战斗中为你的「感染热情」添加「微妙」特征，使你能绕过因施放该法术所致的任何社交失礼，但盟友以此方式施放时不会获得任何效益。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为专家"
+                }
+            ]
+        },
+        "Wrathful Protector": {
+            "name": "盛怒护卫 Wrathful Protector",
+            "description": "<p><strong>触发</strong> 你成功打击一名在上一回合内对盟友大成功命中之敌人。</p><hr /><p>当你目睹盟友受重创时，你以振奋之斥责回敬。你获得等同你等级一半的临时生命值，并对触发该效果的敌人之伤害获得 +4 状态加值。若你击倒触发之敌人，你可选择其盟友之一作为「盛怒护卫」之新目标，但该敌人必须于当前战斗中对你或盟友之一采取过敌对动作。若触发的敌人无盟友，你便停止庆祝凯旋。若你至少为 16 级，状态加值提升至 +6。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.jnNObtugln5yFMjo]{狂怒回应} 大胆活动。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.1Byt0JWIVk6ijxE2]{效果：愤怒护卫}</p>",
+            "prerequisites": [
+                {
+                    "value": "军用武器熟练度为专家"
+                }
+            ]
+        },
+        "Team Player": {
+            "name": "团队玩家 Team Player",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><hr /><p>你与盟友本能配合——共同冲入战局并交换搭档。你使用一个具有「团队」特征的单一动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "你至少拥有一项具有团队合作特征的专长"
+                }
+            ]
+        },
+        "No Cause for Alarm+": {
+            "name": "无须惊慌+ No Cause for Alarm+",
+            "description": "<p>你尝试缓解恐慌。进行一次 @Check[diplomacy] 检定，与你周围 @Template[emanation|distance:10] 内 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 生物的意志 DC 比较。它们各自在 1 小时内对此暂时免疫。若你为交涉大师，弥漫光环增至 @Template[type:emanation|distance:15]；若你为交涉传奇，则增至 @Template[type:emanation|distance:20]。</p><hr /><p><strong>大成功</strong> 该生物的惊惧值减少 2。</p><p><strong>成功</strong> 该生物的惊惧值减少 1。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为受训"
+                }
+            ]
+        },
+        "Martial Assistance": {
+            "name": "武艺援助 Martial Assistance",
+            "description": "<p>你已学会通过自身训练为有需要者提供帮助。当你以武器援助盟友的攻击掷骰且你掷出成功时，你转而获得大成功；若你援助检定掷出自然 1，则你不会将成功程度视为低一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "军用武器熟练度为专家"
+                }
+            ]
+        },
+        "Top Out": {
+            "name": "登顶 Top Out",
+            "description": "<p>You have learned to use momentum to kick your way atop obstacles and land on both feet. You can use [[/act climb skill=acrobatics]]{特技} to Climb instead of Athletics.</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为专家"
+                }
+            ]
+        },
+        "Fence's Senses": {
+            "name": "销赃者感官 Fence's Senses",
+            "description": "<p>你的存亡取决于你能否区分赃物中的宝物与无价值的废品。你可使用盗术鉴别物品价值，亦可使用盗术替代常规技能，对具有「幻象」或「毒素」特征的魔法物品 [[/act identify-magic skill=thievery]]。你必须知悉该物品具有此类特征才能对其进行鉴别魔法。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "Churning Fear": {
+            "name": "翻搅之惧 Churning Fear",
+            "description": "<p>你滋养目标的恐惧，可能令其感到不适。当你对一名生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 大成功时，其 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1级}。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为大师"
+                }
+            ]
+        },
+        "Artist of Repute": {
+            "name": "声名艺者 Artist of Repute",
+            "description": "<p>你的名声随着每次表演而积累，让你能比常规表演者赚得更多。每当你以表演检定 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入} 大成功时，你于当前所居之聚落或地点获得一级声望。下次你于同一聚落以表演赚取收入时，就所获货币而言，你将赚取收入的任务等级视为高一级。若你为表演大师，则视为高 2 级；若你为表演传奇，则视为高 4 级。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                }
+            ]
+        },
+        "Divine Intervention": {
+            "name": "神圣干预 Divine Intervention",
+            "description": "<p>你对神祇的研习与奉献已让其投身于你于凡世之胜利，他们将主动参与你之成功。你获得与你神祇关联之中阶恩典，但你必须遵守其典范与禁忌。若你违反神祇典范或犯下禁忌，你便获得对该神祇的中阶诅咒，直至赎罪为止。</p><p>每日一次，只要你与神祇关系良好，你便可花费一个具「专注」特征的单一动作，对你等级的极困难 DC 进行 @Check[religion|dc:@self.level|adjustment:5] 检定，以获得你神祇之高阶恩典。若你成功，该高阶恩典持续 1d4 轮（大成功为 1 分钟）。若你检定大失败，则受你神祇之中阶诅咒影响 1 小时。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为传奇"
+                },
+                {
+                    "value": "你信奉一位神祇"
+                }
+            ]
+        },
+        "Reflexive Cover": {
+            "name": "反射掩护 Reflexive Cover",
+            "description": "<p><strong>触发</strong> 你将对某区域效果掷反射豁免，且你未倒地。</p><hr><p>你猛地侧身躲避，纵使没有现成的掩蔽，也设法压低身形寻找掩蔽。对触发效果之 DC 进行一次特技检定。若成功，你对触发效果获得轻度掩蔽，随后倒地；若大成功，则改为获得标准掩蔽。若你附近有可正常用于「寻找掩蔽」之物体来对该效果获得掩蔽，你可选择不倒地。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为专家"
+                }
+            ]
+        },
+        "Creeping Crawler": {
+            "name": "潜行匍匐 Creeping Crawler",
+            "description": "<p><strong>需求</strong> 你处于 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。</p><hr /><p>你低伏于地以避免被察觉。你 @UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{寻找掩蔽}，随后在爬行的同时 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}。以此方式潜行时，你以你正常 @UUID[Compendium.pf2e.actionspf2e.Item.Tj055UcNm6UEgtCg]{爬行} 或潜行可达之速度（取较低者）移动，且整段移动期间你视为已通过「寻找掩蔽」获得掩蔽。若你的潜行与爬行速度相同，则你于倒地与潜行时的速度增加 5 尺。</p>",
+            "prerequisites": [
+                {
+                    "value": "敏捷爬行"
+                },
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "Social Intuition": {
+            "name": "社交直觉 Social Intuition",
+            "description": "<p>You read people's intent as you speak to them. When you succeed at a Diplomacy check to Make an Impression or Request, you can immediately attempt a Sense Motive using [[/act sense-motive skill=diplomacy]]{外交} instead of Perception on the target of your Make an Impression or Request. If you choose to use Perception, you instead gain a +1 circumstance bonus to your check. If you are a master in Diplomacy, the circumstance bonus increases to +2.</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为专家"
+                }
+            ]
+        },
+        "Transferable Parts": {
+            "name": "可换部件 Transferable Parts",
+            "description": "<p>你已掌握一些制作技法，让你能从所知之物上转化有用技能至相似物品。当你尝试制作物品时，你可在该制作活动的一部分中尝试拆解一件等级相同或更低、且至少与所制物品共享 2 项特征的物品。你将制作该物品的成本减去拆解所用物品之制作成本——拆解所用物品被你所制物品替代。若两件物品颇为相似（例如以镰枪制作戟，或以酸瓶制作炼金师之火），你的制作新物品检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为专家"
+                }
+            ]
+        },
+        "Mask Scent": {
+            "name": "掩盖气味 Mask Scent",
+            "description": "<p>当你于该区域能取得强力气味时，你深谙如何掩盖气味。你可花费 10 分钟将周围各种气味组合涂抹到至多 5 名生物身上，掩盖其气味 1 小时。GM 进行一次秘密 @Check[survival] 检定以确定你的效果。若你的结果超过具气味感官生物之察觉 DC，则当其试图察觉具有被掩盖气味的生物时，将气味感官精度视为低一级；若大成功，则视为低两级。具有模糊感官之生物通常不会自动察觉到生物，但仍可能闻到你用以掩盖气味之物的气味。若具气味感官之生物观察到曾使用「掩盖气味」的生物，他们便会通过让鼻子适应新气味而对该生物恢复感官。</p><p>此外，当你 @UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]{掩盖行踪} 时，你自动视为正在掩盖气味；具气味感官之生物以气味试图追踪你时，其求生检定承受 -2 环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Drag Away": {
+            "name": "拖离 Drag Away",
+            "description": "<p>你擅长在奔跑时拖人同行。当你成功 @UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位} 一名敌方生物时，你可以改为向自选方向行走至多 10 尺；若大成功则为 15 尺。该生物保持与你相邻或与你「移位」之触及距离相同；当你行走时，它跟随你的路径。此为强制移动。</p><p>你可以以「移位」拖离一名自愿生物，但你必须以该生物等级的标准 DC 检定成功，且其仍须为你通常能移位之生物。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为专家"
+                }
+            ]
+        },
+        "Rippling Roar": {
+            "name": "涟漪咆哮 Rippling Roar",
+            "description": "<p>你的战吼传达极远，影响整个战场。当你因攻击大成功而以反应使用 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 时，你将结果与 30 尺内所有敌人的意志 DC 比较，而不仅限于你攻击掷骰的目标。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为传奇"
+                },
+                {
+                    "value": "战吼"
+                }
+            ]
+        },
+        "Find Binding Pins": {
+            "name": "寻锁芯 Find Binding Pins",
+            "description": "<p>在动手撬锁之前，你先感受其各部分受力时的反应。对你触及范围内一把锁之 DC 进行 @Check[thievery] 检定。无论结果如何，你于 1 日内不能再次对同一把锁使用「寻锁芯」。</p><hr /><p><strong>大成功</strong> 你下次 @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{撬锁} 时，将检定结果视为高一级，且额外获得 1 次成功；若大成功，则额外获得 2 次成功。</p><p><strong>成功</strong> 你下次对该目标锁撬锁时，将检定结果视为高一级。</p><p><strong>大失败</strong> 你严重误判该锁的构造。你下次对该目标锁撬锁时，将检定结果视为低一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为专家"
+                }
+            ]
+        },
+        "Reserving Preparation": {
+            "name": "保留准备 Reserving Preparation",
+            "description": "<p>由于你对每日准备法术的熟悉，你已发现冒险日中调整法术的额外方式。在每日准备期间，挑选一道你已知、环级比你最高环级法术位低 2 环的法术。你可花费 10 分钟重新聚能，将你已准备于职业法术位中的一道法术替换为所选法术（高位至同环级）。被替换的法术必须至少为所选法术之最低环级。</p>",
+            "prerequisites": [
+                {
+                    "value": "能从法术位施放法术"
+                },
+                {
+                    "value": "你是预备式施法者"
+                }
+            ]
+        },
+        "Mature Pet": {
+            "name": "成熟宠物 Mature Pet",
+            "description": "<p>你的宠物已比同类生物更加进阶。从下列魔宠能力中为你的宠物选择一项作为其能力：@UUID[Compendium.pf2e.familiar-abilities.Item.92lgSEPFIDLvKOCF]、@UUID[Compendium.pf2e.familiar-abilities.Item.7ZxPS0UU7pf7wjp0]、@UUID[Compendium.pf2e.familiar-abilities.Item.mK3mAUWiRLZZYNdz]、@UUID[Compendium.pf2e.familiar-abilities.Item.2fiQzoEKu6YUnrU9]、@UUID[Compendium.pf2e.familiar-abilities.Item.qTxH8mSOvc4PMzrP]、@UUID[Compendium.pf2e.familiar-abilities.Item.cT5octWchU4gjrhP]、@UUID[Compendium.pf2e.familiar-abilities.Item.v7zE3tKQb9G6PaYU]、@UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]、@UUID[Compendium.pf2e.familiar-abilities.Item.fmsVItn94FeY5Q3X] 或 @UUID[Compendium.pf2e.familiar-abilities.Item.zyMRLQnFCQVpltiR]。若你获得新宠物，你可在首次获得其时为其选择 1 项能力。若你选择「言语」而你的宠物通常无法说语言，则你与该生物可改以仅你二者能理解的方式交流。</p><hr /><p><strong>特殊</strong> 若你获得魔宠并将「宠物」通用专长重训，你可以将此专长作为重训「宠物」的一部分进行重训。</p>",
+            "prerequisites": [
+                {
+                    "value": "宠物"
+                }
+            ]
+        },
+        "If Trees Could Talk": {
+            "name": "若树能言 If Trees Could Talk",
+            "description": "<p>通过对原初魔法的初步了解或与自然的连结，你能从你周围的自然世界中获取信息。你可以随意将 1 环 @UUID[Compendium.pf2e.spells-srd.Item.BX5UIAUarWG43Fg2] 作为原初内禀法术施放。若你为自然大师，当你成功在「施放法术」之活动中以「搜索」找到某生物位置时，你可作为自由动作 @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{指明} 该生物。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为受训"
+                }
+            ]
+        },
+        "Diplomat's Caution": {
+            "name": "外交者谨慎 Diplomat's Caution",
+            "description": "<p>你出言谨慎，深知如何运用之，特别是当你与不喜欢你之人交谈时。当你尝试对你或盟友的态度处于「冷漠」或更差的生物建立印象时，你的检定获得 +1 环境加值。若你为交涉大师，则环境加值提升至 +2。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为受训"
+                }
+            ]
+        },
+        "Imitation Infiltration": {
+            "name": "模仿渗透 Imitation Infiltration",
+            "description": "<p>若你确信某地能进入，你便确信你具体也能进入。若你观察到一名生物消失或穿过障碍，你可花费 1 分钟回溯该生物步伐，并对其等级的标准 DC 进行 @Check[stealth] 检定。若成功，你便了解该生物如何穿越障碍或消失，并可尝试自己如此做。若该生物使用了你无法重现之移动方式（如飞行或传送），你将该检定 DC 提升至该生物等级的极困难 DC，并可凭意志与即兴发挥完成渗透。</p><p>例如，若一名生物飞越无底深渊、穿过实心墙、于熔岩中游泳或使用传送，你可凭借自身渗透知识重现类似动作，纵使你通常无法如此做。这并不让你执行除你所观察生物以外任何生物本就不可能完成之任务（由 GM 裁定）。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为传奇"
+                }
+            ]
+        },
+        "Salvage Infiltration": {
+            "name": "残物渗透 Salvage Infiltration",
+            "description": "<p>你在潜入不该进入之地方时极为熟练，让你即便将要被察觉时也能挽回局面。你于渗透检定上获得 +1 环境加值；若该检定为潜行检定，则获得 +2 环境加值。</p><p>此外，每日一次，当你或盟友因障碍或并发情况将获得「警觉值」时，你可以使用反应平息此事，从而避免警觉值增加（但不影响其他效果）。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "Unseen Allies": {
+            "name": "无形盟友 Unseen Allies",
+            "description": "<p>你以高超技巧带领你的团队，让无人知晓你们的存在。当使用 @UUID[Compendium.pf2e.feats-srd.Item.pekKtubQTkG9m1xK]{安静盟友} 进行 @UUID[Compendium.pf2e.actionspf2e.Item.IE2nThCmoyhQA0Jn]{避人耳目} 时，你可以使用你的调整值代替团队中最低者来掷一次潜行检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为传奇"
+                },
+                {
+                    "value": "静默盟友"
+                }
+            ]
+        },
+        "Specialty Repair": {
+            "name": "专长修理 Specialty Repair",
+            "description": "<p>你专注于制作某类特定物品意味着你也尤为擅长修理该类物品。你可以以制作 DC 加 2 的代价，使用与你「专精制作」专长所选专精相关之物品来修理另一物体。如此做时，你可以将用于修理之物品的生命值减少最多你等级的两倍，并将所修理物体所恢复之生命值同等增加。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为专家"
+                },
+                {
+                    "value": "独门手艺"
+                }
+            ]
+        },
+        "Unpredictable Diversion": {
+            "name": "莫测佯动 Unpredictable Diversion",
+            "description": "<p>你制造一次真正难以预测的佯动，将敌人远远甩开。你 @UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神}。若你成功，你的隐蔽状态不会在你回合结束时结束，而是延续到你下一回合开始。生物对你处于隐蔽时，仍可被其盟友指明你的位置，且仍可尝试搜索以发现你。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为专家"
+                }
+            ]
+        },
+        "Protector of the Wilds": {
+            "name": "野域守护者 Protector of the Wilds",
+            "description": "<p>作为荒野守护者与生态保护者，你已学会以非致命方式对自然生灵作战。当你以无「非致命」特征的武器对具有动物、野兽、植物或菌类特征的生物进行非致命打击时，你不会承受 -2 攻击掷骰环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为受训"
+                }
+            ]
+        },
+        "May They Abandon You!": {
+            "name": "愿其弃你！ May They Abandon You!",
+            "description": "<p><strong>频率</strong> 每小时一次</p><p><strong>触发</strong> 30 尺内你能观察到的生物以你已对其学识受训之神祇所偏爱武器进行攻击掷骰，或以该神祇之神圣自然技能进行技能检定。</p><hr /><p>你深谙某些宗教言辞或可撤回神祇对某人的祝福，或带来某种小小的惩罚。该生物必须以你的学识 DC 进行意志豁免。无论结果如何，目标在 1 日内对此效果免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.Acjac0F0AF4qRTqE]{效果：愿其弃你！}</p><hr /><p><strong>大成功</strong> 你反令目标的信仰更为坚定。它对触发检定获得 +1 状态加值。</p><p><strong>成功</strong> 目标不受影响。</p><p><strong>失败</strong> 该生物对触发掷骰承受 -1 状态减值。</p><p><strong>大失败</strong> 该生物对触发掷骰承受 -2 状态减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某神祇相关的学识熟练度为受训"
+                }
+            ]
+        },
+        "Slope Slide": {
+            "name": "斜坡滑行 Slope Slide",
+            "description": "<p>双膝弯曲、双手张开，你让重力带你迅速下坡——无论是山丘、扶手或屋顶。当你向下移动时，你可以 @UUID[Compendium.pf2e.actionspf2e.Item.Bcxarzksqt9ezrs6]{行走} 并依坡度陡峭程度（由 GM 裁定）尝试一次特技检定。坡度类型依倾斜与材质而异，但通常至少需要一格对角才能产生坡度效果。GM 可依据坡度形状或材质（例如冰面或陡峭楼梯）调整。除非你至少为特技大师，否则你不能尝试在严酷坡度上使用「斜坡滑行」。</p><p><strong>缓坡</strong> 你的移动稍微多于预期。在你行走结束时，对你等级的简单 DC 进行 @Check[type:acrobatics|dc:@self.level|showDC:owner|adjustment:-2|options:action:slope-slide:gentle-slope] 检定。若成功，你 @UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]{快步}。</p><p><strong>中坡</strong> 移动之势头将你向前甩出。在你行走结束时，对你等级的标准 DC 进行 @Check[type:acrobatics|dc:@self.level|showDC:owner|options:action:slope-slide:moderate-slope] 检定。若成功，你额外移动 10 尺；若你下一动作是对一名生物进行近战打击，你的攻击掷骰获得 +1 环境加值。</p><p><strong>陡坡</strong> 你以惊险之速冲向对手。在你行走结束时，对你等级的困难 DC 进行 @Check[type:acrobatics|dc:@self.level|showDC:owner|adjustment:+2|options:action:slope-slide:severe-slope] 检定。在你行走结束时，你以与你检定结果相同的成功程度获得 @UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远} 之效果；若你下一动作是对一名生物进行近战打击，你的攻击掷骰获得 +2 环境加值。</p><hr><p><strong>特殊</strong> 若你具有「派头」职业特性，则当你尝试对中坡或陡坡使用此动作时，该动作获得「飒爽」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为受训"
+                }
+            ]
+        },
+        "Gambler's Bluff": {
+            "name": "赌徒虚张声势 Gambler's Bluff",
+            "description": "<p>经过长时间的推理与博弈游戏后，你练就一副铁面扑克脸，使他人无法看穿你的真实动机。当你撒谎时，可选择以游戏学识或赌博学识替代欺诈；当某生物试图对你 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色} 以判断你是否撒谎时，你可选择以你的游戏学识或赌博学识 DC 替代你的欺诈 DC。</p>",
+            "prerequisites": [
+                {
+                    "value": "Games Lore or Gambling学识熟练度为大师"
+                }
+            ]
+        },
+        "Invigorative Breath": {
+            "name": "鼓舞之息 Invigorative Breath",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>你深吸一口气，感到部分能量回流。你立即恢复 1 点聚能点。</p>",
+            "prerequisites": [
+                {
+                    "value": "聚能法力池"
+                }
+            ]
+        },
+        "Phantasm's Phase-Through": {
+            "name": "幻象穿透 Phantasm's Phase-Through",
+            "description": "<p>你如同幽灵般移动，对挡路之生物毫不在意——你径直从其身上穿过。你潜行。在此移动中，你可穿过你处于隐蔽、无踪或未察觉对象的敌人空间，并将敌人空间中的方格视为困难地形（每 5 尺消耗 10 尺移动）。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为大师"
+                }
+            ]
+        },
+        "Pick on Someone Your Own Size": {
+            "name": "挑同等大小者 Pick on Someone Your Own Size",
+            "description": "<p>当你向敌人激起恐惧时，他们退缩并感觉自己身形变小。就你能否对某生物因其体型采取动作而言，已被你成功 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 的生物视为比其实际体型小一阶——只要其因你的挫败士气仍处于 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧}。当你对因你的挫败士气惊惧、且体型大于你的生物进行 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞} 或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊} 时，你获得 +1 环境加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.d3EHjXgDun0hz7Qo]{效果：欺负与你同大者}</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为专家"
+                },
+                {
+                    "value": "运动技能熟练度为受训"
+                }
+            ]
+        },
+        "Beseech Fate": {
+            "name": "祈求命运 Beseech Fate",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>你以如此热忱祈求，竟以某种方式扭曲现实以保护你或盟友。你可对自己或 30 尺内一名生物试图压制其笨拙、力竭、惊惧、恶心或呆滞状态——以致使该状态之效果的 DC 或目标生物等级的困难 DC（取较高者）进行一次交涉检定。GM 可根据情境调整 DC，例如你是否在神祇神龛之内向其祷告。若该状态持续时间超过 1 分钟，则在 1 分钟过后该状态恢复，但被压制的时间计入缩短其持续时间。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为传奇"
+                }
+            ]
+        },
+        "Green Thumb": {
+            "name": "园艺巧手 Green Thumb",
+            "description": "<p>种植植物对你而言是天性，无论魔法的还是非魔法的。你可以使用自然替代制作来制作具有「菌类、植物或木」特征的物品或炼金植物。若你以自然进行制作，你以你的自然熟练度（而非制作）来确定你能制作物品的等级。若你制作炼金植物，它们失去「炼金」特征并获得「原初」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为专家"
+                }
+            ]
+        },
+        "Parley with Celestials": {
+            "name": "与天界生物谈判 Parley with Celestials",
+            "description": "<p>你已学会在面对各种天界生物时如何以恰当方式自我表现，让自己显得远更值得信赖。除非你刻意以不同方式表现自己，天界生物会假定你为圣洁或服侍仁慈神祇。天界生物对你的察觉 DC 承受 -2 环境减值；等级不高于你的天界生物即便借助魔法也无法察觉邪恶圣化，除非它们也以 @Check[perception|against:religion|rollerRole:target] 对你的宗教 DC 检定成功。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                }
+            ]
+        },
+        "Blink of an Eye": {
+            "name": "眨眼之间 Blink of an Eye",
+            "description": "<p><strong>触发</strong> 你将受到一项需要你看向某生物或物体的视觉效果。</p><hr /><p>你于眨眼之间转过头去。你 @UUID[Compendium.pf2e.actionspf2e.Item.UWdRX1VelipCzrCg]{转移目光}。</p>"
+        },
+        "Subsistive Tracker": {
+            "name": "求生追踪者 Subsistive Tracker",
+            "description": "<p>你已学会一边支撑自身一边追踪足迹。当你以闲暇时间 @UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]{求生} 时，你的 GM 会自动将你求生检定的结果与 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪} 你在求生途中所发现生物之足迹的 DC 进行比较。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "Talisman Crafter": {
+            "name": "符记匠 Talisman Crafter",
+            "description": "<p>护符之中蕴含的魔法潜能对任何明智地使用它们的冒险者都是巨大的助力，而你已凭借神秘知识研习出制作之窍诀。当你尝试 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 具有「护符」特征之物品时，你可以以神秘替代制作进行掷骰。若你以神秘进行制作，你的神秘熟练度（视为制作技能）决定你能制作物品的等级。此外，当你选取此专长时，你获得 4 项 2 级或更低之常见护符配方；纵使你不具备 @UUID[Compendium.pf2e.feats-srd.Item.xWY5omyIcILNR7y1]{魔法制造}，你也可制作护符。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为专家"
+                },
+                {
+                    "value": "草根魔法"
+                }
+            ]
+        },
+        "Creature Wary": {
+            "name": "生物警觉 Creature Wary",
+            "description": "<p><strong>触发</strong> 你将在与你已对其学识受训之生物的战斗中掷先攻，且你已察觉到该生物。</p><hr /><p>你常将该生物视为脑海中的假想敌。你可以使用该生物学识技能来掷先攻，并对此掷骰获得 +2 环境加值。若你与该生物先攻打平，则你总是先行。</p>",
+            "prerequisites": [
+                {
+                    "value": "某生物或某生物类型的学识熟练度为受训"
+                }
+            ]
+        },
+        "Diabolic Precaution": {
+            "name": "魔类警备 Diabolic Precaution",
+            "description": "<p>邪魔不可信，恶魔尤甚。你研习它们的诡计，听其话语时知不忽略任何双关之意。你对来自恶魔的心灵效果之豁免获得 +1 环境加值，并可以用宗教对恶魔进行 [[/act sense-motive skill=religion]]。当恶魔试图欺骗你或当你 @UUID[Compendium.pf2e.actionspf2e.Item.d9gbpiQjChYDYA2L]{解读文字} 阅读魔类文档（例如契约）时，你可使用宗教 DC 替代察觉 DC。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                }
+            ]
+        },
+        "Arcane Craftmanship": {
+            "name": "奥术工艺 Arcane Craftmanship",
+            "description": "<p>你创建奥术魔法物品的技艺超越同辈，凭借对魔法物品的无尽认知精进自身工艺，抄写法术卷轴并为个人使用制作魔法法杖。你可以制作具有「奥术」特征的魔法物品；当你尝试制作具有「奥术」特征的魔法物品时，你可以以奥术替代制作掷骰。若你以奥术进行制作，你的奥术熟练度（视为制作技能）决定你能制作物品的等级。</p><p><strong>特殊</strong> 你可以以「奥术工艺」制作魔法法杖，但该法杖必须至少包含一道奥术传统的法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Smash Obstacles": {
+            "name": "粉碎障碍 Smash Obstacles",
+            "description": "<p>锁对你而言毫无意义。当你「强行打开」时，不会因没有撬棍而承受环境减值。此外，当你「强行打开」大失败时，你视为普通失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为受训"
+                }
+            ]
+        },
+        "Break Prevention": {
+            "name": "防破 Break Prevention",
+            "description": "<p><strong>频率</strong> 每小时一次</p><p><strong>触发</strong> 你持用或挥舞中的物品因受到伤害而将获得「破损」状态。</p><hr /><p>有时候，只需狠狠一脚或一击就能让东西重新拼起来……至少能撑一段时间。对你修理该物品所用之同一 DC 进行 @Check[type:crafting] 检定。无论结果如何，该物品于 1 日内对你的「防破」免疫。</p><hr /><p><strong>大成功</strong> 该物品不获得破损状态，并保持高于其破损阈值 1 点生命值。1 分钟后该物品获得 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3] 状态。若该物品于此不稳定期间获得破损状态，便会被摧毁。</p><p><strong>成功</strong> 同大成功，但该物品在 [[/r 1d4]] 轮内不获得破损状态。</p><p><strong>大失败</strong> 该物品被摧毁（而非破损）。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为受训"
+                }
+            ]
+        },
+        "Helter Shelter": {
+            "name": "急遁庇护所 Helter Shelter",
+            "description": "<p>你能在最不像样的地点几乎无须准备地构建合适的庇护所。当你 @UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]{求生} 时，你也产生「温馨小屋」之效果，但当你离开小屋时该效果不会自动结束；小屋每边为 40 尺，可容纳至多 10 名生物（替代常规数量），且可承受任何天气而不被摧毁。若此效果生效期间你再次求生，你可选择以新效果替换之前的效果，或在你身处附近时延长小屋的持续时间。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为传奇"
+                }
+            ]
+        },
+        "Assess Terrain": {
+            "name": "评估地形 Assess Terrain",
+            "description": "<p>你评估当下所在的地形，然后让自己适应周围环境。在 30 尺内选择一个 @Template[type:burst|distance:5] 区域，其中含有自然困难地形，并进行 @Check[survival|dc:15] 检定。该困难地形必须是自然地形，且你须能清晰感知该区域。若你为求生专家，你可将 DC 提升至 20（@Check[survival|dc:20]）以评估 @Template[type:burst|distance:10]。若你为求生大师，你可将 DC 提升至 30（@Check[survival|dc:30]）以评估 @Template[type:burst|distance:20]。若你为求生传奇，你可将这些 DC 增加 10，从而对自然地形外，还能对由具「冷冻、土、植物、水或木」特征之效果所造成之困难地形使用此能力。</p><hr /><p><strong>大成功</strong> 你于至多 1 分钟内将该困难地形视为常规地形，并将更高阶困难地形视为困难地形（直至下一回合结束）。</p><p><strong>成功</strong> 你将该困难地形视为常规地形（直至下一回合结束）。</p><p><strong>大失败</strong> 你误判地形，并将整个区域视为困难地形（若该区域已为困难地形则视为更高阶困难地形），直至下一回合结束。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "As In Fairytales": {
+            "name": "如童话般 As In Fairytales",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>命运有其规则，那便是令人满意的故事之规则——你深知任何角色采取的行动最终都会让你迎来「从此幸福快乐」。你 @UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{表演}，并将你的结果与 30 尺内一名生物的意志 DC 比较。你可选择决定 30 尺内一名生物之下一动作或活动的结果——你编织故事走向，使其下次技能检定或攻击掷骰本会失败时变为成功，或本会成功时变为失败。若你将结果改善为成功，则该动作获得「命运」特征；若改为失败，则获得「厄运」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为传奇"
+                }
+            ]
+        },
+        "Improvising Healer": {
+            "name": "急智治疗者 Improvising Healer",
+            "description": "<p>你总在工具袋与口袋中塞入临时治疗物品，以备没有治疗工具或物资耗尽之时。你可以在没有治疗工具的情况下尝试 @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势}。</p><hr /><p><strong>特殊</strong> 若你具有 @UUID[Compendium.pf2e.feats-srd.Item.wYerMk6F1RZb0Fwt]{战地医疗}，你即便没有穿戴或持用治疗工具，也能使用「战地医疗」。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为受训"
+                }
+            ]
+        },
+        "Professional Tour Guide": {
+            "name": "专业导游 Professional Tour Guide",
+            "description": "<p><strong>需求</strong> 你处于与你相关学识所对应的地点。</p><hr /><p>你能以向游客讲述各种事实与故事（偶有添油加醋）维生。你于所需地点中尝试 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入} 时，始终能找到至少一项与你等级相同之任务。若你以相关学识赚取收入，就所获货币而言，你将任务等级视为高一级；若为大师则高 2 级；若为传奇则高 4 级。</p><p>此外，当你以相关学识赚取收入成功时，对你于该活动期间互动过的任何生物，你赐予其 1 日内对严寒、严热或恶劣天气的豁免，以及对所需地点常规危害之豁免与检定 +1 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某聚落或地区相关的学识熟练度为专家"
+                }
+            ]
+        },
+        "Sight Reading": {
+            "name": "视谱即奏 Sight Reading",
+            "description": "<p>你深谙阅读各种乐谱并将其翻译，这让你在理解魔法书写并翻译为法术上颇有帮助。你可以用表演 @UUID[Compendium.pf2e.actionspf2e.Item.Q5iIYCFdqJFM31GW]{学习法术}（前提是该法术具有听觉或视觉特征），并可用表演对此类特征之法术进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。你也可以用表演对与表演相关的魔法物品进行鉴别魔法（由 GM 裁定）。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为受训"
+                }
+            ]
+        },
+        "Twin Onslaught": {
+            "name": "双重突袭 Twin Onslaught",
+            "description": "<p><strong>需求</strong> 你与你的搭档均使用同一类型且具有「双生」特征的武器。</p><hr /><p>你们互补的武器在战斗中配合默契。若你们之一以具备「双生」特征的武器攻击，则另一人在 1 轮内如同自己以双生武器攻击般获得「双生」特征加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "军用武器熟练度为受训"
+                }
+            ]
+        },
+        "Fine Art Studies": {
+            "name": "美艺研习 Fine Art Studies",
+            "description": "<p>为追求你的艺术造诣，你已进行大量阅读与研究。你始终可以使用表演对任何与美艺或美艺历史相关的知识进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。若你具有 @UUID[Compendium.pf2e.feats-srd.Item.lFwfUvH2708rl6i3]{精湛演技}，且你试图回忆的具体知识与你专精相关，你可加入该专长的加值。你也可使用表演（-2 环境减值）替代常规检定来获取研究点。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为受训"
+                }
+            ]
+        },
+        "Entrap in Faux Pas": {
+            "name": "失礼陷阱 Entrap in Faux Pas",
+            "description": "<p><strong>触发</strong> 你将在有目击者在场之情况下 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象} 或 @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{请求} 失败。</p><hr /><p>你引诱一名生物失礼，随后又原谅他们，以图进一步说服。对触发检定相同的 DC 进行一次 @Check[society] 检定。无论结果如何，目标在 10 分钟内对此免疫。</p><hr /><p><strong>成功</strong> 目标在同辈面前感到尴尬。你将触发检定的 DC 减少（最多 5），减少量等同于目睹该生物失礼之生物数量。</p><p><strong>大失败</strong> 你反令自己出丑，将你的检定减少（最多 5），减少量等同于目睹你失礼之生物数量。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为受训"
+                }
+            ]
+        },
+        "Wallbreaker": {
+            "name": "破墙者 Wallbreaker",
+            "description": "<p>墙壁不过是石堆；穿墙而行只是寻常之事。你可以行走穿过物品硬度等同于你等级、且厚度不超过 5 尺的墙壁，将该墙视为更高阶困难地形。如此做时，你身后留下与你大致同尺寸的洞。与行走类似，若你具备相应移动方式，则在你穴行、攀爬、飞行或游泳时也可以「忽视墙壁」。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为传奇"
+                }
+            ]
+        },
+        "Blissful Ignorance": {
+            "name": "幸福无知 Blissful Ignorance",
+            "description": "<p>有时无知便是福。当你处于 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞} 时，若效果具有语言特征，你不会承受意志豁免减值；当你呆滞期间尝试施放法术，平稳检定为 @Check[flat|dc:5|showDC:none]{DC 5}，而非 DC 5 + 你呆滞值。</p>"
+        },
+        "Conquer Stage Fright": {
+            "name": "克服怯场 Conquer Stage Fright",
+            "description": "<p><strong>需求</strong> 你处于 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]。</p><hr /><p>胃中翻飞之蝴蝶之感你早已熟知。你对致使你惊惧之效果的 DC 或其等级标准 DC 进行一次表演检定。若你成功，你将惊惧值降低 1；大成功则降低 2。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                }
+            ]
+        },
+        "Befuddling Illusions": {
+            "name": "迷惑幻象 Befuddling Illusions",
+            "description": "<p>通过运用次要幻象与心智操控魔法，你可在战斗酣战之时蒙骗你的敌人。你可以以神秘或奥术替代欺诈来 @UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神}；如此做时，你为该动作添加专注、操作与魔法特征。</p><p>[[/act create-a-diversion variant=trick skill=occultism traits=concentrate,manipulate,magical]]</p><p>[[/act create-a-diversion variant=trick skill=arcana traits=concentrate,manipulate,magical]]</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘或神秘技能熟练度为专家"
+                }
+            ]
+        },
+        "What if I do This?": {
+            "name": "我若如此？ What if I do This?",
+            "description": "<p>你总是质问应如何处理某情境，且试错法仍然有效。你可以使用工程学识替代制作执行 @UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理} 活动，并替代盗术 [[/act disable-device skill=engineering-lore]]{瘫痪装置（工程学识）}。在 GM 裁定下，只要技能专长仅与「修理」或「瘫痪装置」活动相关，你便可以以工程学识熟练度替代制作或盗术熟练度选取此类技能专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "Engineering学识熟练度为专家"
+                }
+            ]
+        },
+        "Hunger Pangs": {
+            "name": "饥饿之痛 Hunger Pangs",
+            "description": "<p><strong>触发</strong> 你将受到虚空伤害。</p><hr /><p>你曾感受过食尸鬼的饥饿之咒并幸存。然而，你所感的饥饿——既是难以餍足的雄心，也是字面意义上的贪婪——仍残留于你之中，正如其在诅咒显现之前于你内里休眠那般。你于 1 分钟内获得虚空治疗；若触发的效果也会为不死生物恢复生命值（例如「伤害」），你便如该效果之常规效果般恢复生命值。</p><p>作为代价，只要你具备此虚空治疗，你便对血肉感到无可遏制的饥饿。在此状态下，当你看到一名活着的生物被减至 0 生命值时，你必须对你等级的标准 DC 进行意志豁免，否则你因吞噬其血肉之欲望被压垮而对其 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}；若你豁免大失败，则改为 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑1级}。该迷魂状态不会正常结束，并持续至你不再能感知该被减至 0 生命值之生物、该生物恢复生命值，或你花费 3 个动作（这些动作无须连续）平复你吞噬血肉之欲望为止。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾在禁忌欲望诅咒中存活"
+                }
+            ]
+        },
+        "Mastered Skill": {
+            "name": "精通技能 Mastered Skill",
+            "description": "<p>你成为某项技能的大师。选择一项你已为专家的技能，成为该技能的大师。</p>",
+            "prerequisites": [
+                {
+                    "value": "智力+5"
+                }
+            ]
+        },
+        "Daring Swing": {
+            "name": "大胆飞荡 Daring Swing",
+            "description": "<p><strong>需求</strong> 你至少有一只手空闲，并紧邻一个你可借之飞荡的物体或盟友生物。</p><hr /><p>你借助物体（藤蔓、吊灯，或友人之手）于空中飞荡。你 @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃}，并对你试图借飞之物体的攀爬 DC（由 GM 裁定，但非常规物体或生物通常至少为 20）进行 [[/act daring-swing]]{特技检定}。若你以 2 动作进行「大胆飞荡」，你可使用 @UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高} 或 @UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远} 替代跳跃；若你具备 @UUID[Compendium.pf2e.feats-srd.Item.ZBhvJ9O8MvBFAlhq]{迅速跳跃}，你可以以单一动作版本的「大胆飞荡」使用其中之一。若你成功，你于空中沿你跳跃方向额外飞荡至多 10 尺。若你为特技专家，额外移动距离增加 5 尺；若为大师，则增加 10 尺；若为传奇则增加 20 尺。由于你于此移动期间保持悬空，你能避开困难地形，且若你开始飞荡时离地至少 5 尺，便可能跨越生物或大型物体。</p><hr><p><strong>特殊</strong> 若你具有「派头」职业特性，此动作获得「飒爽」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为受训"
+                }
+            ]
+        },
+        "Well-Traveled Explorer": {
+            "name": "饱经周游之探险者 Well-Traveled Explorer",
+            "description": "<p>穿越险峻地形的长途跋涉使你已习惯自然的挑战。若你花费 1 分钟分析地形，则在与自然环境互动时，你可以使用求生替代运动来 [[/act climb skill=survival]]、[[/act long-jump skill=survival]]、[[/act high-jump skill=survival]] 与 [[/act swim skill=survival]]。此外，你可以使用求生 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助} 你盟友的此类检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Spell-Signature Reading": {
+            "name": "法术签名识读 Spell-Signature Reading",
+            "description": "<p>每当任何施法者执行魔法（无论威能多寡），便会创造一抹华丽的符文环绕着精巧的符印——人称之为「法术签名」。作为奥术博学者，你深知此类符文中可洞察之信息，例如施法者的个性或魔法技艺水平。你了解到该生物以自发式、准备式或内禀式何种身份施法，是否能从法术位施法，以及他们以何种属性施法。若一名生物能从多种来源施法（例如同时拥有内禀法术与已准备法术），你两者皆能了解到。</p><hr /><p><strong>特殊</strong> 若你具备 @UUID[Compendium.pf2e.feats-srd.Item.MjQyTcV8Jiv1Jtln]{法术} 专长，则你于成功对其使用「法术签名识读」之生物所施法术进行「识破法术」时获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘、自然、神秘、宗教或抄写学识熟练度为受训"
+                }
+            ]
+        },
+        "Group Cover": {
+            "name": "群体掩护 Group Cover",
+            "description": "<p>你已学会轻松掩盖大群人的踪迹，让你的盟友与你一同不被察觉。当你 @UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]{掩盖行踪} 而你的盟友 @UUID[Compendium.pf2e.actionspf2e.Item.tfa4Sh7wcxCEqL29]{跟随老手} 时，你只进行一次求生检定来掩盖你们所有人的踪迹，而无须各自分别掷骰。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Advancing Avalanche": {
+            "name": "推进雪崩 Advancing Avalanche",
+            "description": "<p><strong>需求</strong> 你与你的搭档相邻。</p><hr /><p>你们如同势不可挡的雪崩般共同推进，吞没一切。当你们之一进行打击时，另一人可以使用其反应 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助} 该打击，纵使他们本回合未花费预备援助动作。此外，当你或你搭档进行快步时，你可使用一个自由动作快步以保持与搭档相邻。</p>",
+            "prerequisites": [
+                {
+                    "value": "军用武器熟练度为专家"
+                }
+            ]
+        },
+        "Hazard Heuristics": {
+            "name": "危害启发 Hazard Heuristics",
+            "description": "<p>你对魔法物品与环境的熟悉赋予你对魔法危害的敏锐感知，并知晓如何安全解除它们。你对探查魔法危害的察觉检定，以及对具有「魔法」特征之危害进行「瘫痪装置」时获得 +1 环境加值。若你为奥术大师，此加值提升至 +2。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Bastion of Knowledge": {
+            "name": "知识堡垒 Bastion of Knowledge",
+            "description": "<p><strong>频率</strong> 每 10 分钟一次</p><hr /><p>你激励所有人学习他们所能学的一切。你尝试一次回忆知识。若成功，你被一片教师光环包围，于 @Template[type:emanation|distance:30] 弥漫光环内持续 1 分钟。光环内的盟友获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.UN7IXaYjVOhxOh1T]{智者指引} 反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "Academia学识熟练度为传奇"
+                }
+            ]
+        },
+        "Mystic Metacarpus": {
+            "name": "神秘掌骨 Mystic Metacarpus",
+            "description": "<p>许多奥术初学者与法师在踏上奥术魔法之路时学习一些基础戏法，召唤一只魔法之手便是其中之一。你可以随意将 1 环 @UUID[Compendium.pf2e.spells-srd.Item.pwzdSlJgYqN7bs2w]{念动之手} 作为奥术内禀法术施放。若你为奥术大师，则该法术高位至 3 环。若你为奥术传奇，则该法术高位至 5 环。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Swindle": {
+            "name": "诈骗 Swindle",
+            "description": "<p>你以手法或动听之言扰乱某人，让其错算你实际付了多少钱。当向某人付款时（例如商店物品价格或贿赂），你可选择不付足额——能省多少由「赚取收入」决定，使用你的盗术熟练度，并以你试图诈骗之生物的等级作为任务等级。如此做时，对你正在付款生物的察觉 DC 进行盗术检定。若付款时有多名生物在场，则你的 @Check[thievery|against:perception] 检定对照那些会反对你诈骗尝试之生物（如守卫或该生物之盟友）中察觉 DC 最高者。</p><p>无论结果如何，目标对你后续诈骗尝试的察觉 DC 在 1 周内提升 5——因为他们终会发现钱不够。GM 决定目标在被多次诈骗后是否反击及如何反击，以及对大失败之回应（通常是报告当局）。</p><hr /><p><strong>大成功</strong> 你的诡计无人察觉。你最多可省去上述两倍金额，但始终不能超过你本应支付金额的一半。</p><p><strong>成功</strong> 同大成功，但你最多只能省去上述金额，且仍不能超过本应支付金额的一半。</p><p><strong>失败</strong> 目标察觉到差额，但你以「失误」搪塞过去。你支付全额。</p><p><strong>大失败</strong> 目标不仅察觉到差额，且知晓你有意诈骗。若有商品交付预期，他们便拒绝执行交易。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "Timely Trivia": {
+            "name": "适时琐识 Timely Trivia",
+            "description": "<p><strong>触发</strong> 30 尺内一名盟友在战斗中尝试回忆知识。</p><hr /><p>你是无尽却合于场合的知识泉源，能在恰当时机提出一项可能有用的事实。你以所需技能为触发的盟友检定使用 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助}，且无须以预备动作来如此援助。</p>",
+            "prerequisites": [
+                {
+                    "value": "学术学识、奥秘或神秘熟练度为专家"
+                }
+            ]
+        },
+        "Mirror Meeting": {
+            "name": "镜会 Mirror Meeting",
+            "description": "<p>通过在雾镜上书写或以血在镜上刻下某人之名，你可在两个反射面之间形成连结以用于通信。花费 10 分钟，你将一面单一镜子或类似坚固反射面（至多 5 体积）灌注，使其成为你日后可用于通信之镜。若你对另一面同样符合条件之镜再次进行此探索活动，便成功在两面之间锻造连结。同一时间你最多可以连结两面镜子；当你建立新连结时，你选择前两面之一变为休眠。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.qKug2AYUe8NvVUr5]{镜中之镜} 活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Multitasking Tamer": {
+            "name": "多任驯兽 Multitasking Tamer",
+            "description": "<p><strong>需求</strong> 你在前一回合成功对一只你不控制的动物使用 @UUID[Compendium.pf2e.actionspf2e.Item.q9nbyIF0PEBqMtYe]{驱使动物}。</p><hr /><p>纵然驯化野兽并在战斗中指挥它们，你也不会让自己放松警惕或分心，并能在执行此类指令的同时继续行动。你驱使动物，且对此检定自动成功。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为专家"
+                }
+            ]
+        },
+        "Heightened Spell": {
+            "name": "提升法术 Heightened Spell",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>你借助于储蓄的能量储备来强化一道法术。若你下一动作是施放一道至少比你最高环级法术位低 3 环的法术，就基于其高位环级而决定的数值效果（如伤害、治疗、增加之区域、加值或减值）而言，你将该法术之环级视为高 2 环。你不获得与高位环级关联的其他效果，例如能多目标多名生物或将该法术视为更高等级以用于对抗或「失能」特征。</p>"
+        },
+        "Warrior's Rally": {
+            "name": "战士集结 Warrior's Rally",
+            "description": "<p>某些威吓形式可如表演般给人以激励。你以雄壮咆哮之战舞或战歌来激励队伍士气。花费 1 分钟集结你的盟友，对你等级的极困难 DC 进行 @Check[type:intimidation|dc:@self.level|adjustment:5|options:action:warriors-rally] 检定。@Template[type:emanation|distance:15] 内之所有盟友受你「战士集结」影响 10 分钟；若你为威吓传奇，则为 1 小时。无论结果如何，受你「战士集结」影响的盟友于 1 日内对其效果暂时免疫。</p><p><strong>大成功</strong> 该生物对其下次攻击掷骰获得 +2 状态加值，效果随后立即结束。</p><p><strong>成功</strong> 同大成功，但状态加值为 +1。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.RuaqrtRWPv78jx7h]{效果：战士集结}</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为大师"
+                }
+            ]
+        },
+        "Subliminal Messages": {
+            "name": "潜意识讯息 Subliminal Messages",
+            "description": "<p>你大声朗读一段书面文字，尝试不同重音以解读其中的隐藏含义或上下文。你可以在尝试解读的文本是艺术作品（例如歌曲、五行打油诗或诗歌）时，使用表演 [[/act decipher-writing skill=performance]]。</p><p>你也可创建带有隐藏含义之消息——以表演替代欺诈或其他技能，将含义嵌于艺术作品中。生物必须以你的表演 DC 进行 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色} 或 @UUID[Compendium.pf2e.actionspf2e.Item.d9gbpiQjChYDYA2L]{解读文字} 检定才能解读你的含义。熟悉你或你艺术风格的生物对其检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为受训"
+                }
+            ]
+        },
+        "Crafted Contrivance": {
+            "name": "巧造装置 Crafted Contrivance",
+            "description": "<p>你制作的任何物品都可能成为关键时刻拯救生命甚至局势的物件。每当你大成功制作 15 级或更高、且不具「消耗品」特征的魔法物品时，该物品获得以下激活之一（由 GM 裁定）。一名生物每日只能获得「巧造装置」之效果一次。</p><p><strong>激活——为你挡下</strong> <span class=\"action-glyph\">r</span>（专注）</p><p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 一名持用、穿戴、挥舞或以其他方式拥有该物品（例如收纳于包中）之生物将被减至 0 生命值或更低。</p><hr /><p><strong>效果</strong> 该触发该效果之生物保持清醒并停留在 1 生命值。进行 @Check[type:flat|dc:11]。失败则物品被摧毁；成功则物品破损。若该物品已破损且因此效果而获得破损状态，则自动被摧毁。</p><p><strong>激活——便利之具</strong> <span class=\"action-glyph\">r</span>（命运、操作）</p><p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 持有该物品之生物对一项需要或使用工具之技能检定大失败。</p><hr /><p><strong>效果</strong> 你的物品恰巧能完美替代该工具！你可重掷触发的检定并将结果视为高一级。无论结果如何，该物品破损。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为传奇"
+                },
+                {
+                    "value": "魔法制作"
+                }
+            ]
+        },
+        "Contortionist's Escape": {
+            "name": "扭体逃脱 Contortionist's Escape",
+            "description": "<p><strong>需求</strong> 你处于受擒、禁足或束缚状态。</p><hr /><p>你扭曲自身躯体，便能轻易自任何束缚中脱身。你以特技尝试 [[/act escape skill=acrobatics]] 两次，两次共用同一多重攻击减值，之后你的多重攻击减值仅提升一次。若任一次检定大失败，则改为失败。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为专家"
+                }
+            ]
+        },
+        "Work-Life Balance": {
+            "name": "工作生活平衡 Work-Life Balance",
+            "description": "<p>你能将工作与你生活的其他部分清晰分隔。在闲暇期间，每当你以一周时间从事 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入} 之外的活动时，你也可以在该周间断工作 1 天来赚取收入。若你为劳作学识大师，则提升至每周 3 天；若你为传奇，则在不进行赚取收入活动的每一天，你都可以赚取 1 天收入。</p>",
+            "prerequisites": [
+                {
+                    "value": "劳工学识熟练度为专家"
+                }
+            ]
+        },
+        "On Borrowed Time": {
+            "name": "借时萦身 On Borrowed Time",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你将于一场战斗中获得 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死} 状态，但不会立即死亡。</p><hr /><p>你感到死亡的爪牙临近，但你仍有未竟之事。你不获得濒死状态，并保持 1 生命值；你为自己赋予一项可于 1 分钟内合理完成之任务，但该任务必须是非琐碎的，且至少包含一次攻击掷骰或技能检定（由 GM 裁定）。你获得 60 点临时生命值，持续 1 分钟。若你于 1 分钟内或在用尽此动作所获临时生命值前完成所赋任务，你恢复等同于此效果剩余临时生命值一半的生命值。</p>",
+            "prerequisites": [
+                {
+                    "value": "拼死硬抗"
+                }
+            ]
+        },
+        "Masked by the Masses": {
+            "name": "众中藏身 Masked by the Masses",
+            "description": "<p>你能在繁忙街道的人群中良好地融入以隐藏自己。你忽视人群造成的困难地形，并将其更高阶困难地形视为困难地形。此外，当你身处人群中进行 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{藏匿} 时，你获得 +1 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "Establish Etiquette": {
+            "name": "建立礼仪 Establish Etiquette",
+            "description": "<p>纵使在战斗中，亦有规则要遵守、有规范要保持。当你使用「建立礼仪」时，选择 30 尺内另一名生物，对其意志 DC 进行 @Check[society|against:will] 检定。若成功，你激起该生物的骄傲、荣誉或其他特质，让其在 1 分钟内遵守一项既定礼仪；其于此后 1 小时内对你的「建立礼仪」免疫。</p><p>每回合该生物若不遵守既定礼仪，则其攻击掷骰承受 -1 环境减值；若你社群检定大成功，则承受 -2 环境减值。若其遵守既定礼仪，则在其下回合或破礼仪前其攻击掷骰获得 +1 环境加值（破礼仪时立即重新承受减值）。该生物可花费一个具「听觉」或「专注」特征的单一动作以拒绝你建立礼仪之请求来提前结束此效果。</p><p>当你与盟友对该生物采取动作时，必须选择遵循既定礼仪；若你不遵守既定礼仪而对该生物如此做，效果立即结束，且所有目睹你或盟友如此做的生物 1 日内对你的「建立礼仪」暂时免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.1LTTY9ZdDmC6WFGf]{效果：确立礼仪}</p><p><strong>10 步距离</strong> 你选择只用远程武器进行打击，且只在其首个射程增量内。</p><p><strong>不光彩打击</strong> 你选择忽略 AC 之环境减值。</p><p><strong>仅徒手</strong> 你选择只以非姿态之徒手攻击进行打击。</p><p><strong>无言</strong> 你选择不使用听觉或语言性动作。</p><p><strong>单手</strong> 你选择保持一只手空闲。</p><p><strong>让路权</strong> 你选择每回合只采取一个具「移动」特征之动作。</p><p><strong>单挑</strong> 你选择不攻击本回合已被另一生物攻击之生物。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为受训"
+                }
+            ]
+        },
+        "Flip Into Hand": {
+            "name": "翻入掌中 Flip Into Hand",
+            "description": "<p><strong>需求</strong> 你至少有一只手空闲，并紧邻一件 L 体积之无守护物品。</p><hr /><p>你已学会如何将地上的物品踢入预备之手中。进行 @Check[type:acrobatics|dc:20] 检定。你可在行走中执行此动作（前提是你的移动让你紧邻 L 体积或更小的无守护物品）。若你为特技传奇，只要你有手可携带，你便可作为同一动作之一部分将两件物品翻入手中。</p><p><strong>成功</strong> 你将所需物品翻入手中并已持用之。</p><p><strong>失败</strong> 你未能将物品翻入手中。</p><p><strong>大失败</strong> 你不慎将物品踢离自己，落于离你 5 尺远处。</p>",
+            "prerequisites": [
+                {
+                    "value": "特技技能熟练度为大师"
+                }
+            ]
+        },
+        "Entrap Confession": {
+            "name": "诱供 Entrap Confession",
+            "description": "<p>You know how to lay traps in your conversations or use silence to trick people into giving away information they usually wouldn't have. You can spend 10 minutes in conversation with a target to subtly goad them into answering a single yes or no question about themselves. Make a [[/act entrap-confession]]{外交} check against the target creature's Will DC. The GM may modify the DC based on how difficult the answer would be to ascertain in conversation, but the DC is usually at least a standard DC of the target's level.</p><p><strong>Critical Success</strong> You receive a definitive yes or no answer and the target is unaware that you have learned the answer.</p><p><strong>Success</strong> As critical success, but the target is aware they have given you the answer.</p><p><strong>Failure</strong> You are too subtle, and fail to goad the target.</p><p><strong>Critical Failure</strong> The target becomes aware you are attempting to get an answer to your specific question and can choose to leave your question unanswered or give a false answer.</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为大师"
+                }
+            ]
+        },
+        "Trauma Team": {
+            "name": "创伤团队 Trauma Team",
+            "description": "<p><strong>需求</strong> 你的搭档具备 @UUID[Compendium.pf2e.feats-srd.Item.wYerMk6F1RZb0Fwt]{战地医疗}。</p><hr /><p>你与搭档在彼此需要时互相援助。在使用此团队配合时，当你们之一被攻击大成功命中或豁免大失败时，另一人可花费其反应朝其行走。当你们之一以战地医疗成功为另一人恢复生命值时，目标额外恢复等同你等级的生命值。</p>",
+            "prerequisites": [
+                {
+                    "value": "战地医疗"
+                }
+            ]
+        },
+        "Friends in High Places": {
+            "name": "高位之交 Friends in High Places",
+            "description": "<p><strong>触发</strong> 你或盟友对一名服侍贵族或某组织之生物进行交涉或威吓检定时失败或大失败。</p><hr /><p>当事情未能如愿时，你利用对该聚落及其社交圈的认识来抬出重要人物之名。对目标生物的等级标准 DC 进行一次 @Check[society] 检定。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.mYaaE8LUCVofTODA]{效果：高处朋友}</p><hr /><p><strong>大成功</strong> 你或触发该效果的盟友可以以 +2 环境加值重新掷触发的检定。</p><p><strong>成功</strong> 同大成功，但环境加值为 +1。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为受训"
+                }
+            ]
+        },
+        "Prepare the Plans": {
+            "name": "备妥计划 Prepare the Plans",
+            "description": "<p>为筹备一桩大计，你与本地窃贼及销赃者会面、收集情报，并于目标附近接受小型委托。你花费一周闲暇时间筹备。GM 为你秘密进行一次 @Check[thievery] 检定，通常对该聚落等级的标准 DC，或与目标地点或组织相关之 DC（例如平均守卫的察觉 DC、组织首领等级的标准 DC），但 GM 可针对极端情境调整 DC。</p><hr /><p><strong>大成功</strong> 若于次月内你尝试对目标地点或组织进行渗透，你便召集你的人脉并启用资源。GM 立即向你提供 2 项渗透准备活动可执行。</p><p><strong>成功</strong> 同大成功，但 GM 仅提供 1 项此类活动。</p><p><strong>大失败</strong> 目标已被通风报信！你以 1 警觉值开始渗透。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为专家"
+                }
+            ]
+        },
+        "Spellshaping Synergy": {
+            "name": "塑法协同 Spellshaping Synergy",
+            "description": "<p><strong>需求</strong> 你正在使用「共享塑法」。你只需在使用此团队配合时满足该需求，无须在维持时持续满足。</p><hr /><p>你已学会通过将自身魔法签名与他人编织来帮助他人塑法。你 @UUID[Compendium.pf2e.actionspf2e.Item.dLgAMt3TbkmLkUqE]{预备} 对你搭档施放的法术使用一个你已知的 1 动作塑法。你必须指定欲使用的塑法。若该盟友施放一道可受所选塑法影响之法术，你的搭档可选择如同已对其法术应用了塑法那般施放。即使你的搭档使用其自身之塑法动作，他们也只能以此方式对法术应用一项塑法。当你施放法术时，你的搭档亦可如此预备一个 1 动作塑法。</p><p>在后续回合，你可继续以同一触发条件使用反应（如同你已使用「预备」），或花费一个具「专注」特征的单一动作将塑法换为另一项你已知的塑法。若你搭档预备了一个 1 动作塑法，他们也可于后续回合如此做。</p>",
+            "prerequisites": [
+                {
+                    "value": "共享塑法"
+                }
+            ]
+        },
+        "Shared Spellshaping": {
+            "name": "共享塑法 Shared Spellshaping",
+            "description": "<p><strong>需求</strong> 你的搭档能施法。</p><hr /><p>你与搭档共享塑法的奥秘。选择一项你能使用的塑法动作，你的搭档亦选择一项他们能使用的塑法动作（如有）。在使用此团队配合时，若你们彼此相距 15 尺以内，则可使用对方所选的塑法动作。若所选塑法动作有需求，则你们二人皆受该需求约束；若其有频率限制，则该频率适用于你们二人。</p>",
+            "prerequisites": [
+                {
+                    "value": "能施放法术"
+                },
+                {
+                    "value": "你至少拥有一项具有塑法特征的动作"
+                }
+            ]
+        },
+        "Translate Between": {
+            "name": "互译 Translate Between",
+            "description": "<p>你充当社交粘合剂，依需要在两名生物之间翻译。当你尝试援助盟友进行因不共享语言而承受减值的动作或活动时，你可改为选择将该不共享语言的环境减值减少 2；若你的援助大成功，则减少 4。你必须能说一种该动作或活动的目标能理解的语言，否则你的援助检定自动失败。若你为社群大师，以此方式援助成功时，你提供 +1 环境加值；若大成功，则为 +2 环境加值。若你为传奇，大成功时的加值改为 +3。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为专家"
+                }
+            ]
+        },
+        "Menacing Approach": {
+            "name": "威胁逼近 Menacing Approach",
+            "description": "<p>你的姿态与移动激起敌人之恐惧。你对一名生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}，随后立即向其行走。若你挫败士气成功，你的此次移动不会引发该生物的反应。若你为威吓传奇，你可以以一个具有「繁艺」特征的单一动作使用「威胁逼近」。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为受训"
+                }
+            ]
+        },
+        "Freefall": {
+            "name": "自由坠落 Freefall",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><hr /><p>你深谙在地面上获取掩蔽之战术意义。你 @UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{倒地}。</p>"
+        },
+        "To Know a Thief": {
+            "name": "识贼 To Know a Thief",
+            "description": "<p>凭借你于此领域的经验，你深知如何捕获你的同道恶徒。你可以使用盗术 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 镣铐、锁与手铐，包括以你的更高熟练度决定能制作之物品等级。你获得一本配方书，并立即将镣铐、锁与手铐之配方加入其中。此外，你可在自己的镣铐、锁与手铐中内置故障保险——令你或知晓你故障保险的生物在瘫痪、撬开或挣脱时之成功程度提升一级。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "Butterflies, Be Gone!": {
+            "name": "蝴蝶，去也！ Butterflies, Be Gone!",
+            "description": "<p><strong>需求</strong> 你处于 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]。</p><hr /><p>不必呕吐，你可深吸一口气令自己重新平复，从而解除你的恶心状态。对致使你恶心的效果之 DC 进行一次表演检定。若成功，你的恶心值减少 1（大成功则减 2）。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ]
+        },
+        "Opening Accompaniment": {
+            "name": "开场伴奏 Opening Accompaniment",
+            "description": "<p><strong>触发</strong> 你将于一场战斗中掷先攻。</p><hr /><p>你以表演激励盟友。选择 30 尺内一名盟友，对其等级的标准 DC 进行一次表演检定。无论掷骰结果如何，该盟友在 1 日内对此动作免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.AJsTRf9iHyrZzM5H]{效果：开场伴奏}</p><hr /><p><strong>大成功</strong> 你的盟友先攻获得 +2 状态加值。若其先攻与某敌人打平，则总是先行。</p><p><strong>成功</strong> 同大成功，但状态加值为 +1。</p><p><strong>大失败</strong> 你搞砸了自己的开场。你的先攻承受 -4 减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                }
+            ]
+        },
+        "Item Arcanum": {
+            "name": "物品奥义 Item Arcanum",
+            "description": "<p>作为奥术博学之士，你深知如何揭示各种魔法物品的奥秘。当你尝试以自然、宗教或神秘检定欺骗魔法物品时，你可改为以奥术掷骰（承受 -4 环境减值），即便该物品通常不能由奥术欺骗。</p><hr><p><strong>特殊</strong> 若你具有 @UUID[Compendium.pf2e.feats-srd.Item.hrq3NOpS6148aVY1]{统一法论} 技能专长，你对其他传统魔法物品欺骗时不再承受环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为大师"
+                },
+                {
+                    "value": "魔法物品骗用术"
+                }
+            ]
+        },
+        "Tread Where Others Cannot": {
+            "name": "踏入他人不能之地 Tread Where Others Cannot",
+            "description": "<p>你对险峻地形毫不陌生，它们不会像影响他人那般阻挠你。你可以快步至更高阶困难地形之中。此外，你行走时可将首个 5 尺方格的困难地形视为常规地形进行移动。</p>",
+            "prerequisites": [
+                {
+                    "value": "轻盈步"
+                }
+            ]
+        },
+        "Trained Stomach": {
+            "name": "受训之胃 Trained Stomach",
+            "description": "<p>你已研究出抑制疾病的方法。当你呕吐以试图解除 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心} 状态时，你可使用求生代替强韧豁免。若你为求生大师，则你处于恶心状态时仍可自愿摄入。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为受训"
+                }
+            ]
+        },
+        "Crafty Trap Disassembler": {
+            "name": "狡黠拆陷者 Crafty Trap Disassembler",
+            "description": "<p>你之所以擅长拼装事物，部分是因为你最初是通过拆解物品来学习的。你可以以制作（替代盗术）对非魔法陷阱进行 [[/act disable-device skill=crafting]]，并对你的检定获得 +1 环境加值。你以你的制作熟练度决定你是否能瘫痪某些通常需要特定盗术熟练度等级的装置。你可以以工匠工具替代盗贼工具进行瘫痪装置检定。</p><hr /><p><strong>特殊</strong> 若你具有 @UUID[Compendium.pf2e.feats-srd.Item.Na1qfHd6AFAXoN1A]{逆向工程师} 发明家专长，你将此专长之环境加值提升至 +2。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为受训"
+                }
+            ]
+        },
+        "Venomous Visionary": {
+            "name": "毒辣远见者 Venomous Visionary",
+            "description": "<p>你能轻易判断生物或动植物是否具有毒性或毒液特性。选择 30 尺内你能感知的一名生物或物体。若目标为生物，你对其 @Check[survival|against:deception]{欺诈DC} 或 @Check[survival|against:stealth]{潜行DC} 进行一次求生检定；若目标为物体，则对该毒素之 DC 进行检定。若你成功，你对该目标获得「侦测毒素」的效果。若你为求生传奇，你获得 2 环 @UUID[Compendium.pf2e.spells-srd.Item.QqxwHeYEVylkYjsO] 的效果。无论结果如何，你于 1 日内不能再对该目标使用「毒辣远见者」。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为大师"
+                }
+            ]
+        },
+        "Smokescreens": {
+            "name": "烟幕 Smokescreens",
+            "description": "<p>若局势恶化，你已准备好在烟雾掩护下溜走。你获得烟雾球之配方，并可以以潜行替代制作 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 烟雾球。在每日准备期间，你可以制造一颗 @UUID[Compendium.pf2e.equipment-srd.Item.MoBlVd36uD9xVvZC]{次阶烟雾球}，使用至你下次每日准备前；下次每日准备时它便会失效。若你至少为潜行专家，你可以制造两颗次阶烟雾球；若为大师，则四颗。若你为传奇，你可以选择在每日准备制作时改为准备一颗 @UUID[Compendium.pf2e.equipment-srd.Item.ehss8yPTXxiUdVlJ]{高阶烟雾球}（替代两颗次阶烟雾球）。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为受训"
+                }
+            ]
+        },
+        "Deep Meditation": {
+            "name": "深度冥想 Deep Meditation",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>你获得探索活动「深度冥想」。你可以花费 10 分钟冥想，对你等级的标准 DC 进行一次 @Check[occultism|dc:@self.level] 或 @Check[religion|dc:@self.level] 检定。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.0YUXRpBlb0RGHe0x]{效果：深度冥想}</p><hr /><p><strong>大成功</strong> 你于接下来 1 小时内对一项心灵效果的下次豁免获得 +1 环境加值。若该豁免也具备「情绪」特征，环境加值提升至 +2。</p><p><strong>成功</strong> 你于接下来 1 小时内对一项情绪效果的下次豁免获得 +1 环境加值。</p><p><strong>大失败</strong> 你的冥想被打断且令你心烦意乱。你于接下来 1 小时内的下次豁免承受 -1 环境减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘或宗教技能熟练度为专家"
+                }
+            ]
+        },
+        "Audacious Pilfer": {
+            "name": "大胆窃取 Audacious Pilfer",
+            "description": "<p>你甚至懒得隐藏某些盗窃，反而毫无顾忌地大声招摇地行事。当你执行 @UUID[Compendium.pf2e.actionspf2e.Item.RDXXE7wMrSPCLv5k]{盗窃} 动作时，你可对照目标的反射 DC（而非察觉 DC）进行掷骰，但若如此做，无论检定成功或失败，目标与附近生物都会知晓你的盗窃行为。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "No Stone Un-Turned": {
+            "name": "翻遍石头 No Stone Un-Turned",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>当你搜索时，你善于发现他人首次进入房间时可能忽略的细节。你当日首次尝试 @UUID[Compendium.pf2e.actionspf2e.Item.TiNDYUGlMmxzxBYU]{搜索} 一处区域时，可选择掷两次并取较好结果。此外，你对反常事物的目光始终在工作（无论你是否专注），因此你的「搜索」失去「专注」特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "察觉技能熟练度为大师"
+                }
+            ]
+        },
+        "Haughty Correction": {
+            "name": "傲慢更正 Haughty Correction",
+            "description": "<p><strong>Trigger</strong> A creature within 30 feet you can see just Cast a Spell, attempted a counteract check, or attempted to Recall Knowledge.</p><hr /><p>Watching an opponent's magical attempts leads to you point out the flaws in their process, nitpicking the placement of their runes or the intonation of their words when casting in order to show off your magical knowledge. Attempt an [[/act haughty-correction]]{奥秘} check and compare the result to the Will DC of the triggering creature. If the creature critically succeeded in the triggering action, you get one degree worse on your results. If the creature critically failed the triggering action, you get one degree of success better on your results. Regardless of the result, the target is then temporarily immune for 1 minute.</p><p><strong>Critical Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级} for 1 minute as they are distracted by your frustrating interruptions. The target can end the effect early with a rebuttal to your Haughty Correction by spending a single action with the concentrate trait or by making a Recall Knowledge check to counter your correction. The creature does not gain the stupefied condition until after the triggering action is completed.</p><p><strong>Success</strong> As critical success, but the target is stupefied 1 until the end of their next turn.</p><p><strong>Failure</strong> The target is unaffected.</p><p><strong>Critical Failure</strong> You fumble your response and take a -2 circumstance penalty to Intelligence-based skill checks and Perception checks and DCs for 1 minute or until you spend a single action with the concentrate trait to regain your composure. @UUID[Compendium.pf2e-feats-plus.misc.Item.fKfRgiis6hG1xIXV]{效果：傲慢更正大失败}</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Scribe Teleportation Glyph": {
+            "name": "刻写传送符印 Scribe Teleportation Glyph",
+            "description": "<p>通过创建复杂符印与数学奥术方程式，你已发展出跨越长距离的能力，前提是你所刻之符印彼此相连。花费 8 小时，你可以在至少 15 尺大小的平面上刻写一道传送符印。任何时候你最多可有两道传送符印；若你创建额外的符印，则之前的某道便会失效。此外，你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.IHsF4m0fgqRzwUZ3]{激活符印} 活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为传奇"
+                }
+            ]
+        },
+        "Trade of the Trade": {
+            "name": "行业秘技 Trade of the Trade",
+            "description": "<p>你对市场趋势、价格波动与贸易惯例有敏锐理解。你可在与商贩讨价还价或以物易物时使用社群。你也可以使用社群判断商品的售卖价值，并可使用社群替代某魔法传统对应的技能，对在售魔法物品 @UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]{鉴别魔法}（但不可用于其他类型的魔法或物品）。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为受训"
+                }
+            ]
+        },
+        "Spellshaper Initiate": {
+            "name": "塑法新进 Spellshaper Initiate",
+            "description": "<p>你已掌握一些塑法的基础知识。你获得 @UUID[Compendium.pf2e.feats-srd.Item.FoWO4RnHRwfEIC7Q]{扩展法术} 或 @UUID[Compendium.pf2e.feats-srd.Item.BWomK7EVY0WXxWgh]{远法术} 职业专长，且该专长视为你职业的职业专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "能从法术位施放法术"
+                }
+            ]
+        },
+        "Illusory Infiltrator": {
+            "name": "幻象渗透者 Illusory Infiltrator",
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p>通过运用次要幻象之诡计与微妙的咒文，你能以魔法之纱伪装自身来助力潜行追踪。在 1 分钟内，你可以以奥术或神秘调整值替代潜行调整值进行 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{藏匿} 或 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}。若你以此方式藏匿或潜行，则其获得「专注」与「幻象」特征。每过一轮你藏匿或潜行时，魔法随时间消退，让你承受 -1 环境减值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.nS6qmTng0LuNb7ew]{效果：幻象渗透者}</p><p>[[/act hide skill=arcana traits=concentrate,illusion]]</p><p>[[/act hide skill=occultism traits=concentrate,illusion]]</p><p>[[/act sneak skill=arcana traits=concentrate,illusion]]</p><p>[[/act sneak skill=occultism traits=concentrate,illusion]]</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘或神秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Sense Scopophobia": {
+            "name": "察觉恐窥 Sense Scopophobia",
+            "description": "<p>纵然在藏匿之时，你也会聚精会神地观察猎物，留意任何反射性动作以判断行迹是否暴露。只要你能看见某生物，你便能察觉自己对其处于未察觉、无踪、隐蔽或可见状态。此外，若你的意图是判断某生物是否假装未注意你，你可作为自由动作尝试 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色}。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为大师"
+                }
+            ]
+        },
+        "X-Pattern Strike": {
+            "name": "X形打击 X-Pattern Strike",
+            "description": "<p><strong>需求</strong> 你正在使用「双重突袭」，且你与你搭档各自触及范围内有一名敌人。你只需在使用此团队配合时满足该需求，无须在维持时持续满足。</p><hr /><p>你与搭档以并联攻击歼灭一名敌人。对所需敌人进行一次打击，你的搭档可以立即花费其反应对同一敌人进行打击。计算多重攻击减值时，此视为两次攻击。</p>",
+            "prerequisites": [
+                {
+                    "value": "双重突袭"
+                }
+            ]
+        },
+        "Kaiju Blood": {
+            "name": "怪兽之血 Kaiju Blood",
+            "description": "<p>怪兽的可怖之力以亚原子层级搅乱了你，虽然你大体未变，但其力量的微痕仍残留于你之内。当你激动时，你的血液以怪兽之力发出光芒，赐予你无可匹敌的力量。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.Ig8amOmlbl6VkzzK]{释放怪兽之力} 能力。</p>"
+        },
+        "Magical Notation": {
+            "name": "魔法记法 Magical Notation",
+            "description": "<p>你可以将法术抄录如同乐谱般。你可以用施法所属传统的法术制作法术卷轴，如同你具有 @UUID[Compendium.pf2e.feats-srd.Item.xWY5omyIcILNR7y1]{魔法制造} 技能专长般——只要你选择灌注于卷轴的法术具有听觉或视觉特征。当你制作此类卷轴时，你可以以表演替代制作来 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作}，并以你的表演决定你能制作物品的等级。你仍需如常提供任何材料组件与必要费用。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                },
+                {
+                    "value": "你能施放法术"
+                }
+            ]
+        },
+        "Remote Removal": {
+            "name": "远程拆除 Remote Removal",
+            "description": "<p>你甚至无需亲临即可取物。你对魔法的研究让你能本能地感知其存在。你可以随意将 1 环 @UUID[Compendium.pf2e.spells-srd.Item.pwzdSlJgYqN7bs2w] 作为奥术内禀法术施放。你可以将 @UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{手上功夫} 作为施放法术之活动的一部分，使你的心电之手如此做——只要你举起的物体最终位于与你相邻处。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为大师"
+                }
+            ]
+        },
+        "Adapted Camouflage": {
+            "name": "适应伪装 Adapted Camouflage",
+            "description": "<p>你已学会从你周围环境中收集物品，让你更容易融入周遭。你可以花费 10 分钟收集附近材料以助你于某些地形中藏匿，并将植物及其他材料增添于身使你更难被发现。如此做时，你可于所需地形中以求生（替代潜行）使用 [[/act avoid-notice skill=survival]]，并以此方式使用避人耳目而进入战斗时使用求生掷先攻。你的适应伪装持续 [[/r 1d4 #Hours]] 小时或直至你进入战斗（取先到者为准）。当你使用适应伪装时，你可以选择使用潜行（而非求生）进行避人耳目，并对该检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                }
+            ]
+        },
+        "Difference Without a Distinction": {
+            "name": "无别之异 Difference Without a Distinction",
+            "description": "<p>当你清点物件时，你会下意识地注意到最微小的细节。当你使用 @UUID[Compendium.pf2e.feats-srd.Item.0N8TtGSk5enoLBZ8]{计数眼} 时，GM 也为你秘密进行一次 @Check[society|traits:secret] 检定，并将结果与你视野内所有正主动伪装成与你所清点物品类似类型之物体与生物的相关 DC 比较——通常是生物的潜行 DC，或施法者用幻象魔法掩藏物品时使用的法术 DC。GM 然后按「计数眼」给你物品计数，但还会告诉你你 DC 已超过之所有生物与物品的数量，同样四舍五入至首位数。</p><p>此外，在你对商家货物使用「计数眼」动作之后，你可以使用社群对其 [[/act make-an-impression skill=society]]；若这是你为成功清点的物品议价采购之一部分，你的检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为大师"
+                },
+                {
+                    "value": "数字之眼"
+                }
+            ]
+        },
+        "Herald Stained": {
+            "name": "玷污使者 Herald Stained",
+            "description": "<p>圣血赋你以神性之力。若你尚不具备，你获得纳菲利姆特征。仅你接触过血液的部分外观会改变。你自选获得一项 1 级与 5 级的纳菲利姆传承专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾触碰一名具传令官特征生物濒死时的鲜血"
+                }
+            ]
+        },
+        "Endorsing Jingle": {
+            "name": "代言歌谣 Endorsing Jingle",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>需求</strong> 你处于聚落之中。</p><hr /><p>你已积累一定声望，可通过断断续续地为某商家或店铺唱几句歌与口号来宣传，从而降低你向其购买物品的价格。进行一次表演检定以 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}，并以下结果（替代常规效果）。</p><hr /><p><strong>大成功</strong> 该宣传活动大获成功。你获得相当于赚取收入活动应得之四倍金额的店铺信用。商家或店铺职员对你的态度提升一级。</p><p><strong>成功</strong> 同大成功，但店铺信用为赚取收入活动应得金额的两倍。</p><p><strong>大失败</strong> 该聚落几乎将你与你那烦人的歌赶出城。你于 1 日内于该聚落进行的所有表演检定承受 -2 环境减值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.h68gzcPrgspuVeu0]{效果：广告小调}</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ]
+        },
+        "Riding Ally": {
+            "name": "乘骑盟友 Riding Ally",
+            "description": "<p>你已学会驾驭智慧坐骑之力。你可以 @UUID[Compendium.pf2e.actionspf2e.Item.PM5jvValFkbFH3TV]{骑乘} 你的盟友，盟友亦可骑乘你。你仍须满足「骑乘」动作所需的体型要求。在战斗中，当你骑乘盟友或盟友骑乘你时，双方均掷先攻；二人采用其中较低的结果作为先攻。骑者决定二人中谁先行动。骑者获得 2 个动作（而非 3 个），因为另一动作须用于引导或稳住盟友；而被骑者获得 3 个动作。</p>"
+        },
+        "The Farm Never Leaves You": {
+            "name": "田园永不离你 The Farm Never Leaves You",
+            "description": "<p>你可让人离开田园，却永远无法让田园离开此人。你于环境、动物与植物之微观文化的经验，赐予你超越简单农耕的世界共鸣，让你能用「农耕学识」对环境、天气，或具有「动物、菌类或植物」特征的生物 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}。</p><p>此外，你可花费 1 周闲暇时间从一片土地上培育出一座农场，纵使该土地通常无法提供合适农耕材料。这让你能以你等级之任务等级进行农耕学识 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入} 检定，培育 1 平方英里之农业用地——以一周工作所产生的收入提供农场所需之任何材料。一旦创建，你与其他生物可以你等级或更低之任务等级在该农场上尝试赚取收入。若你选择低于你等级之任务等级，GM 可针对农耕特别严酷之环境设定最低任务等级。只要你每周至少在该地以农耕学识赚取收入成功一次，该区域便保持可耕作状态供他人使用。除你之外，其他生物可在你不在时尝试维持该地之农耕；但缺乏你的指导，该地需要 5 名生物以农耕学识赚取收入成功才能保持农地的可持续。</p>",
+            "prerequisites": [
+                {
+                    "value": "农业学识熟练度为传奇"
+                }
+            ]
+        },
+        "Antimagic Authority": {
+            "name": "反魔法权威 Antimagic Authority",
+            "description": "<p>你将魔法作为一项研究领域的经历同样让你能在你认为必要时移除魔法效果。你花费 8 小时利用对奥术魔法的认识来驱散自选的某项法术效果或魔法物品，从而产生 @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法} 之效果。当你以此方式对抗魔法效果时，使用奥术为你的对抗检定，并以你等级一半（向上取整）作为对抗环级。任何高于你等级之物品或魔法效果使对抗检定自动失败。若你成功对抗一件魔法物品，你可将其于 8 小时（替代 10 分钟）内变为非魔法物品。或者，你可选择以 1 小时执行「反魔法权威」并将对抗 DC 提升 2。若你以此方式施法，你仍须遵守反魔法权威之所有其他限制。无论结果如何，反魔法权威之目标 1 日内对其暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为大师"
+                }
+            ]
+        },
+        "Imaginary Trick": {
+            "name": "虚构把戏 Imaginary Trick",
+            "description": "<p>作为晦涩与玄秘事物的鉴赏者，你已掌握幻术之基本天赋。你可以将 1 环 @UUID[Compendium.pf2e.spells-srd.Item.0zU8CPejjQFnhZFI]{虚构幻术} 作为神秘内禀法术随意施放。若你为神秘大师，则法术高位至 3 环。若你为神秘传奇，则法术高位至 4 环。</p>",
+            "prerequisites": [
+                {
+                    "value": "神秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Become the Mask": {
+            "name": "成为面具 Become the Mask",
+            "description": "<p>若你有足够时间进行准备，几乎无人能看出你在演戏。你可以花费 1 天准备一场模仿某具体生物身份的表演，并对该生物等级的标准 DC 进行一次 @Check[performance] 检定。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.xSdboiTL7SpeZkec]{效果：化为面具}</p><hr /><p><strong>大成功</strong> 当你以你的化身行事而进行 @UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{假冒}，或当为模仿你化身而进行 @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{说谎} 时，你获得 +3 环境加值。若你采取你模仿之生物不会做的、与该生物角色不符的动作，此效果便结束。</p><p><strong>成功</strong> 同大成功，但加值为 +2。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                },
+                {
+                    "value": "欺诈技能熟练度为受训"
+                }
+            ]
+        },
+        "Gossip Collector": {
+            "name": "八卦收集者 Gossip Collector",
+            "description": "<p>你利用从八卦或谣言中所知关于他人之秘密来影响人。这些八卦未必为真，但被他人传播且具杀伤力。当你于聚落中对某具体生物打听消息时，你了解到关于目标的一个小秘密。你可选择在对该生物的魅力相关技能检定中揭示此秘密——若你的打听消息成功，你的检定获得 +2 环境加值；若大失败，则承受 -2 减值。若你对某具体生物打听消息并了解到其秘密，他们于 1 个月内对「八卦收集者」免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为专家"
+                }
+            ]
+        },
+        "Aquatic Spellcaster": {
+            "name": "水栖施法者 Aquatic Spellcaster",
+            "description": "<p>你已发展出一种在水下施放法术的方法——大声诵念必要的施法咒语时尽量少呼出空气。当你在水下施放法术时，即便该法术需要言语，你也不会失去所有剩余空气，而是仅如同在屏息时采取动作那般失去 2 轮空气。此外，造成穿刺伤害的远程法术攻击在水下时，其射程不会减半。</p>",
+            "prerequisites": [
+                {
+                    "value": "能施放法术"
+                },
+                {
+                    "value": "运动技能熟练度为受训"
+                }
+            ]
+        },
+        "Vehicle Theft": {
+            "name": "车辆盗窃 Vehicle Theft",
+            "description": "<p>当你在偷盗载具的行当中，你于实战中学会快速逃离并掠走战利品。你可使用 @Check[thievery] 替代「驾驶学识」或「飞行驾驶学识」进行驾驶载具检定；若你尝试瘫痪一具载具，你的检定获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为受训"
+                }
+            ]
+        },
+        "Sing-Along": {
+            "name": "齐声合唱 Sing-Along",
+            "description": "<p>你开始进行一段众所周知的演艺或唱起一首广为人知之歌曲，迫使生物加入演唱。你 @UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{表演}，并将你的结果与 30 尺内一名类人生物的意志 DC 比较。若该生物听不懂你表演所用语言，则其意志 DC 获得 +4 环境加值。无论结果如何，该生物于 1 日内对此效果暂时免疫。</p><hr /><p><strong>大成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}，且不能使用反应，直至其表演加入你的歌、使用具有「听觉」特征之技能动作来反制此效果，或使用一个具有「专注」特征的单一动作以无视它。</p><p><strong>成功</strong> 同大成功，但该生物不呆滞。</p><p><strong>大失败</strong> 你被自己的歌迷住，但无人在听。你 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直至你下一回合开始。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ]
+        },
+        "Embrace Terror": {
+            "name": "拥抱恐惧 Embrace Terror",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你将要尝试一次对抗恐惧效果的意志豁免。</p><hr /><p>你激起他人恐惧的能力让试图惊吓你的尝试效果减弱。你以你的威吓调整值（而非意志豁免）尝试触发的豁免。若你为威吓传奇，你可以以每小时一次（而非每日一次）使用「拥抱恐惧」。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为专家"
+                }
+            ]
+        },
+        "Rapid Rallying": {
+            "name": "迅捷集结 Rapid Rallying",
+            "description": "<p>你已与你的队伍协作，提出更快平复其情绪的方法——添加一个手势（响指、拍手或敲胸）以引起其注意并集结其勇气。你可以以单一动作使用 @UUID[Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX]{无需惊慌}，并自选赋予其「操作」或「视觉」特征，将其弥漫光环扩展至 @Template[type:emanation|distance:20]。若你为交涉传奇，弥漫光环提升至 @Template[type:emanation|distance:30]。</p>",
+            "prerequisites": [
+                {
+                    "value": "外交技能熟练度为大师"
+                },
+                {
+                    "value": "无须惊慌"
+                }
+            ]
+        },
+        "Pendulum Tactics": {
+            "name": "钟摆战术 Pendulum Tactics",
+            "description": "<p><strong>需求</strong> 你或你的搭档将所选生物置于近战触及范围内。</p><hr /><p>你与你的盟友已发展出一种独特的打了就跑战术变体。当你使用此团队配合时，选择一名位于你或搭档触及范围内的单一生物。每当你或搭档以你们二人皆能近战触及之范围内的近战攻击成功打击该敌人时，另一人可作为自由动作快步。</p>"
+        },
+        "Transitional Skills": {
+            "name": "过渡技能 Transitional Skills",
+            "description": "<p>你已于不同类型的技能间发现共通之处，并以一种能突显其相通性的方式整合自己的运用方式。当你以仅受训、且与你至少为大师之另一项技能共享同一属性的技能进行检定时，你的检定获得 +1 环境加值。若你为所选技能传奇，则你于与你传奇技能共享同一属性、且你为专家之技能的检定获得 +1 环境加值；若你仅为该技能受训，则获得 +2 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "某项技能熟练度为大师"
+                }
+            ]
+        },
+        "Knock Sprawling": {
+            "name": "击倒在地 Knock Sprawling",
+            "description": "<p>当你将某人摔倒时，你将其推倒在地，重重坠落。当你摔绊大成功时，你可选择将目标推开 10 尺，而非造成 1d6 钝击伤害。若摔绊目标撞上墙或硬物，则额外承受 @Damage[1d6[bludgeoning]] 伤害。此为强制移动。</p>",
+            "prerequisites": [
+                {
+                    "value": "运动技能熟练度为受训"
+                }
+            ]
+        },
+        "Abrupt Dismissal": {
+            "name": "骤然解散 Abrupt Dismissal",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><hr /><p>你能不假思索地终止法术与类似能力之效果。你解散一项生效的效果。</p>"
+        },
+        "Death Curse Survivor": {
+            "name": "死咒幸存者 Death Curse Survivor",
+            "description": "<p>你已面对一只林诺龙在其逝去后之纯粹怒火，并就此重塑而归。当一名生物将你减至 0 生命值时，他们须以你的职业 DC 进行一次 @Check[fortitude|against:class] 豁免。失败时，其受到诅咒你之林诺龙的死咒。</p><p>每日一次，你可以将 @UUID[Compendium.pf2e.spells-srd.Item.5c692cCcTDXjSEzk] 作为原初内禀法术施放，但你的「龙息」造成与诅咒你之林诺龙之喷吐武器相同类型的伤害，且你必须选择「原初」传统。若你为 20 级，该法术高位至 8 环。</p>",
+            "prerequisites": [
+                {
+                    "value": "你曾让一头巨蛇之毒咒在你体内蛰伏至少两周"
+                }
+            ]
+        },
+        "Moonscarred": {
+            "name": "月伤 Moonscarred",
+            "description": "<p>纵然你免于成为变形生物，但月升之时仍有原初之力在你之内躁动。日落起至日出前，你获得 30 尺范围的不精确气味感官、等同你等级的临时生命值；并可对与你已治愈诅咒相关的动物（例如你曾为狼人则为犬科动物）提问、获得回答，并以交涉技能交流。多数情况下，野生动物会愿意听你陈说。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.PFgq0FHmrZn6z4bW]{效果：月伤}</p>",
+            "prerequisites": [
+                {
+                    "value": "你已治愈兽化生物之诅咒"
+                }
+            ]
+        },
+        "Ripples and Whispers": {
+            "name": "涟漪低语 Ripples and Whispers",
+            "description": "<p>你能听见周遭之事，纵使你并未刻意聆听。每当你于聚落中以地下世界学识 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入} 成功时，你便获得一次成功打听消息的效果（成功程度与你赚取收入的掷骰相同）。</p><p>此外，当你身处过去 1 个月内你曾以地下世界学识赚取收入之聚落时，使用地下世界学识赚取收入或正在进行犯罪活动的其他生物必须以你的地下世界学识 DC 进行欺诈检定成功，否则你于次日便能通过流言获悉该犯罪活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "黑社会学识熟练度为专家"
+                }
+            ]
+        },
+        "Exclusive Activation": {
+            "name": "独占激活 Exclusive Activation",
+            "description": "<p>你以保障措施防止你的创制落入他人之手——只允许少数被选中之人使用，否则后果自负。当你成功制作一件需要激活之物品时，你可指定一项让该物品能正常激活之需求，例如密码或隐藏按钮。任何不知该需求而尝试激活该物品的生物自动失败，除非他们对你的制作 DC 进行 @Check[type:crafting|dc:resolve(max(0, @actor.system.skills.crafting.rank - 3) * 2 + @actor.system.skills.crafting.dc)] 或 @Check[type:thievery|dc:resolve(max(0, @actor.system.skills.crafting.rank - 3) * 2 + @actor.system.skills.crafting.dc)] 检定成功。大失败时，该物品自毁，并对尝试激活之生物及 5 尺弥漫光环内之生物每两个物品等级造成 1d4 穿刺伤害。当你成为制作传奇时，DC 增加 2，大失败时之伤害骰由 d4 改为 d6。</p>",
+            "prerequisites": [
+                {
+                    "value": "制作技能熟练度为大师"
+                }
+            ]
+        },
+        "Beast Tamer": {
+            "name": "驯兽师 Beast Tamer",
+            "description": "<p>你与所有野兽和动物为友，能与它们结成同伴并依你心意指挥它们，它们也会听从。只要其对你的态度为冷漠或更佳，你便对低于你等级之动物 @UUID[Compendium.pf2e.actionspf2e.Item.q9nbyIF0PEBqMtYe]{驱使动物} 自动成功。当你驱使非你所控制之动物时，你可以如同指挥动物伙伴般对其下达具体命令。</p><p>此外，你对你不友善或敌对的动物的驱使动物检定不再自动失败，而改为承受 -4 环境减值；若你成功，该动物 1 小时内不会对你或盟友采取敌对动作（除非你或盟友对该动物或其盟友采取敌对动作）。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为传奇"
+                },
+                {
+                    "value": "训练动物"
+                }
+            ]
+        },
+        "Influence Nature+": {
+            "name": "影响自然+ Influence Nature+",
+            "description": "<p>有耐心与时间，你能模仿鸟鸣、留下兽径，并最终于此后数日内影响该区域某种动物之行为，使其偏向甚至助你。</p><p>GM 决定所需检定之 DC 与你工作所需之时长（通常至少 1-2 日闲暇时间）。虽然你无法直接控制你影响自然之方式，但可期待某些效果，例如更易狩猎，或鸟群在危险临近时陷入沉默。</p><p>若你为自然传奇，你可只花费 10 分钟便引出此种动物行为之同等调整。</p><p>当你身处你成功影响过自然之地点附近时，你视为已采取动作准备 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助} 一项生物或环境本可帮助你的动作（由 GM 裁定）。当你以此方式呼唤自然时，你以自然进行援助检定。在你以此方式呼唤援助后，你 10 分钟内不能再次如此做。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "Distracting Duelists": {
+            "name": "分心决斗者 Distracting Duelists",
+            "description": "<p><strong>需求</strong> 你的搭档须对交涉、欺诈或威吓受训。</p><hr /><p>你与搭档发出令人讨嫌的妙言，对敌人不停玩笑。在使用此团队配合时，你与搭档双方都视为已为对方进行 @UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{虚招} 或 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 的 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助} 进行了准备。每当你们之一进行此类检定时，可使用你们任一方的位置来判断能否执行此动作。</p><hr /><p><strong>特殊</strong> 若你或搭档具有 @UUID[Compendium.pf2e.feats-srd.Item.0GF2j54roPFIDmXf]{当头棒喝} 技能专长，你可以将这些效果应用于「当头棒喝」之上（除上述动作外）。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈或威吓熟练度为受训，或拥有当头棒喝"
+                }
+            ]
+        },
+        "Exceptional Researcher": {
+            "name": "卓越研究员 Exceptional Researcher",
+            "description": "<p>在古老图书馆中长时间研读神秘文本使你于此类环境中尤为擅长。当你于研究子系统中进行涉及魔法主题或魔法社团与文化的研究检定时（通常使用奥术、宗教、自然、神秘，有时社群），你掷骰获得 +1 环境加值；若你成功或大成功，则额外获得 1 RP。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Developed Sensory Response": {
+            "name": "发达感官反应 Developed Sensory Response",
+            "description": "<p>你已学会当主要感官在长期暴露下被关闭时如何适应你的其他感官。你以你的求生（替代察觉）尝试 [[/act seek skill=survival]]，并将你的模糊感官视为不精确感官来执行该检定。</p><p>你可以在使用「调查」或「搜索」探索活动时使用「发达感官反应」，但你须以这些探索活动通常允许速度的一半移动。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为大师"
+                }
+            ]
+        },
+        "Fungal Ward": {
+            "name": "真菌守护 Fungal Ward",
+            "description": "<p><strong>频率</strong> 每小时一次</p><p><strong>需求</strong> 你处于自然环境或含有被杀敌人之区域。</p><hr /><p>通过观察真菌于腐败与不寻常环境中独特的生长特性，你为自己抵御吸取生命之能量。花费 10 分钟收集腐败或自然之源，你可以在自选的一名生物身上放置一处真菌生长，赐予其等同你等级一半的虚空抗力，以抵御他们直至你下次每日准备前所受到的首个虚空伤害源。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.knhj2UJsKqLgoNwD]{效果：真菌护盾}</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为专家"
+                }
+            ]
+        },
+        "Front-Line Adept": {
+            "name": "前线行家 Front-Line Adept",
+            "description": "<p>你已学会更好地适应标准战斗战术。你自选获得 @UUID[Compendium.pf2e.feats-srd.Item.qQt3CMrhLkUV1wCv]{突袭冲锋} 或 @UUID[Compendium.pf2e.feats-srd.Item.2xk4jdwcCfmasYfT]{凶猛挥击} 活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "军用武器熟练度为专家"
+                }
+            ]
+        },
+        "Doom Walker": {
+            "name": "厄行者 Doom Walker",
+            "description": "<p>无人比你更精细地行走于生死之间的细线。你或许曾遭遇某噬魂之怪物吸取了你的灵魂，或在 10 分钟内多次以反应规避死亡。你面色苍白如尸，甚至可能被误认为复仇魂——除了你十分确信自己尚未死去……至少现在还未。</p><p>在每日准备期间，你可花费些许时间将自身能量调和向生者或死者。若你与生者调和，你受具「治疗」特征之效果益处，并如生者般受虚空伤害；若你具备虚空治疗能力，则失去之。若你与死者调和，你获得虚空治疗，并由生命力伤害受伤、由虚空伤害恢复。你对会赋予你流失状态或提升你流失值的效果获得 +1 状态加值。这些效果持续至下一次每日准备。</p><p>13 级时，状态加值提升至 +2。此外，当你与生者调和时，你也能理解并说至高语；若你与死者调和，你改为能理解并说死灵语。</p>"
+        },
+        "Breathing Down The Neck": {
+            "name": "如影随形 Breathing Down The Neck",
+            "description": "<p>当你将敌人攥在手中时，你能在他们心中激起恐惧。你对你已擒抓的生物进行挫败士气检定时获得 +2 环境加值。当你已擒抓某生物时，对其挫败士气不会因不共享语言而承受减值。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为受训"
+                }
+            ]
+        },
+        "Transmute Spell": {
+            "name": "嬗变法术 Transmute Spell",
+            "description": "<p><strong>频率</strong> 每分钟一次</p><hr /><p>嬗变魔法能量之形式于你而言不过儿戏。当你使用此动作时，从下方与你主要施法传统对应的精质中选择一项。若法术造成多种伤害类型，则将所有满足条件的伤害类型一并改变。</p><p><strong>物质</strong>（奥术或原初）若你下一动作是从你法术位施放一道造成物理伤害且无持续时间的法术，你可将其伤害类型改为酸性、冷冻、电击或火焰。</p><p><strong>心智</strong>（奥术或神秘）若你下一动作是从你法术位施放一道造成能量伤害且无持续时间的法术，你可将其伤害类型改为心灵；目标额外承受等同该法术环级的心灵伤害。</p><p><strong>灵魂</strong>（神秘或神圣）若你下一动作是从你法术位施放一道造成物理伤害且无持续时间的法术，你可将其伤害类型改为灵魂；此灵魂伤害仅伤害对圣洁、灵魂或邪恶具有弱点之生物。</p><p><strong>生命</strong>（神圣或原初）若你下一动作是从你法术位施放一道造成能量伤害且无持续时间的法术，你可将其伤害类型改为生命力或虚空。</p>",
+            "prerequisites": [
+                {
+                    "value": "能从法术位施放法术"
+                }
+            ]
+        },
+        "Here, There, Everywhere": {
+            "name": "处处皆在 Here, There, Everywhere",
+            "description": "<p><strong>需求</strong> 你的搭档至少对欺诈受训。</p><hr /><p>当你们之一调侃对手时，另一人扑上去暗中刺击。在使用此团队配合时，只要敌人位于你与你搭档触及范围内，由于侧背，该敌人对你们俩的近战攻击均视为 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。此外，当你们之一对敌人使用 @UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{虚招} 时，可改为选择以下结果：</p><hr /><p><strong>大成功</strong> 目标对你搭档的近战攻击措手不及，直至搭档下一回合结束。</p><p><strong>成功</strong> 目标对你搭档于其下一回合结束前的首次近战攻击措手不及。</p><p><strong>大失败</strong> 你的虚招反噬于己。你直至下一回合结束前对目标对你的近战攻击措手不及。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为专家"
+                }
+            ]
+        },
+        "Echo Listener": {
+            "name": "回响倾听者 Echo Listener",
+            "description": "<p><strong>需求</strong> 你处于地下或可产生回响的地点。</p><hr /><p>你可以以石或岩判断距离。在所需地点中，当你交互投出一颗小石或类似物体，并通过聆听回响进行一次矿业学识检定（DC 由 GM 决定，通常至少为 DC 30）。若成功，你自动察觉物体落地处 @Template[type:emanation|distance:15] 内之任何生物；若大成功，则为 @Template[type:emanation|distance:30]。</p>",
+            "prerequisites": [
+                {
+                    "value": "Mining学识熟练度为大师"
+                }
+            ]
+        },
+        "Organization Infiltrator": {
+            "name": "组织渗透者 Organization Infiltrator",
+            "description": "<p>你花费一日闲暇细心观察某组织、派系或某具体团体（例如某国家的贵族）之活动、修习其举止并收集装备，以便能更好地伪装成其中一员。你于 @UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{假冒} 该团体之成员时获得 +2 环境加值。</p><p>此外，当你假冒该团体成员而你的盟友 @UUID[Compendium.pf2e.actionspf2e.Item.tfa4Sh7wcxCEqL29]{跟随老手} 时，你与这些盟友可选择只掷一次欺诈检定（取最低调整值），并将你假冒之环境加值应用于该检定（替代各自分别掷骰）。此不适用于先攻掷骰。</p><p>此加值同一时间只能应用于单一团体；不过你可花费一日闲暇观察新团体——失去对前一团体之假冒加值，转而获得对新团体之加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为专家"
+                }
+            ]
+        },
+        "Harmless Bystander": {
+            "name": "无害旁观 Harmless Bystander",
+            "description": "<p><strong>触发</strong> 你掷先攻。</p><p><strong>需求</strong> 你尚未被观察到对当前战斗中任何生物采取过敌对动作。</p><hr><p>你假装与即将发生之冲突毫无关联。你以欺诈掷先攻。任何非盟友生物必须 [[/act sense-motive]] 检定才能识别出你对其怀有敌意，且在你对其或其盟友采取敌对动作前不能对你采取反应。若你正持用武器或无法合理伪装为旁观者（例如身处荒野无人群之处），该生物的察言观色获得 +4 环境加值；若你被观察到采取敌对动作，便自动被识别为敌对。无论该生物察言观色的结果如何，一旦你被观察到敌对，非盟友生物 1 日内对你的「无害旁观」暂时免疫。</p>",
+            "prerequisites": [
+                {
+                    "value": "欺诈技能熟练度为受训"
+                }
+            ]
+        },
+        "Veridical Readings": {
+            "name": "真象解读 Veridical Readings",
+            "description": "<p>你所占的卜异常精确。当你的 GM 进行平稳检定以决定预言效果之结果（例如在 @UUID[Compendium.pf2e.spells-srd.Item.41TZEjhO6D1nWw2X]{卜筮术} 施放时谎报「无所获」），你将平稳检定的 DC 减 3。若你为「占卜学识」传奇，则 DC 减 4。</p>",
+            "prerequisites": [
+                {
+                    "value": "Fortune-Telling学识熟练度为大师"
+                }
+            ]
+        },
+        "Bared Fangs in the Shadows": {
+            "name": "暗影獠牙 Bared Fangs in the Shadows",
+            "description": "<p>你潜行于暗处，如同野兽窥视猎物般用眼神威慑生物。当你藏匿或 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行} 时，你可以选择一名你已察觉到的生物。若如此做，GM 为你秘密进行一次威吓检定 @UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]{胁迫} 该生物保持沉默；若成功，则即便其察觉到你也不会暴露你。</p><p>此外，若你成功胁迫该生物，你能察觉到其注意到了你，因为你看到其表情转为震惊或恐惧。在 1 分钟过后，或被另一生物（例如以「指明」动作）揭露后，他们仍可暴露其曾察觉到你。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为受训"
+                },
+                {
+                    "value": "潜行技能熟练度为受训"
+                }
+            ]
+        },
+        "Quick Cuisine": {
+            "name": "快速烹饪 Quick Cuisine",
+            "description": "<p>冒险者不能空着肚子作战！你于旅途中迅速为同伴烹一顿便餐以恢复其精力。你花费 10 分钟搭设一个基础烹饪场地准备餐食，选择一名要喂食的盟友，并对该盟友等级的标准 DC 进行烹饪学识检定。「快速烹饪」之效果持续 1 小时。若你为烹饪学识大师，你可在同样的 10 分钟内为两名盟友准备餐食；若你为烹饪学识传奇，则可为四名盟友准备。你必须以盟友中最高等级决定快速烹饪的标准 DC。生物食用你「快速烹饪」所制食物后，至下次每日准备前对其效果免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.F7MX2YhI0mMy3aGG]{效果：快手料理}</p><hr /><p><strong>大成功</strong> 菜肴美味且饱足！食用此餐之盟友对其下次强韧豁免获得 +1 环境加值；若该效果会致其恶心，则获得 +2 环境加值。目标获得等同于你等级一半加上你智力调整值的临时生命值。</p><p><strong>成功</strong> 同大成功，但生物不获得临时生命值。</p><p><strong>失败</strong> 菜肴中规中矩、平淡无奇。生物获得食用食物之常规效果。</p><p><strong>大失败</strong> 菜肴极为难吃，让你的盟友胃痛！食用此餐之盟友对下次强韧豁免承受 -2 环境减值，直至下次每日准备。</p><hr /><p><strong>特殊</strong> 若你具有 @UUID[Compendium.pf2e.feats-srd.Item.1Eceqc6zbMj2x0q9]{老厨子} 专长，你执行「快速烹饪」动作时除其常规效果外亦可享受其环境加值之益处。</p>",
+            "prerequisites": [
+                {
+                    "value": "Cooking学识熟练度为受训"
+                }
+            ]
+        },
+        "Profitable Business Venture": {
+            "name": "盈利商务 Profitable Business Venture",
+            "description": "<p>你深谙经商时如何赚得比他人更多的钱。只要你于该聚落驻留至少 1 天，便始终能找到一项至少与该聚落等级相同的任务。若你以「商业学识」 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入}，就所获货币而言，你将任务等级视为高一级；若为大师，高 2 级；若为传奇，高 4 级。</p><p>此外，当你以商业学识赚取收入成功时，若这是你与之首次互动，则你对你于该活动期间讨价还价之任何生物获得一次成功 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象} 的效果（成功程度与你的检定相同）。</p>",
+            "prerequisites": [
+                {
+                    "value": "商业学识熟练度为受训"
+                }
+            ]
+        },
+        "Emissary of the Green": {
+            "name": "翠绿使者 Emissary of the Green",
+            "description": "<p>你已掌握与动植物沟通的能力，发现自己是自然生命的同类与使者。你现在可以每小时（而非每天）一次地施放从 @UUID[Compendium.pf2e-feats-plus.player-options.Item.PGZeIAPlaIYGWsgH]{荒野之语} 处获得的内禀法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为传奇"
+                },
+                {
+                    "value": "荒野之语"
+                }
+            ]
+        },
+        "All Hands on Deck!": {
+            "name": "全员就位！ All Hands on Deck!",
+            "description": "<p>你与久经风浪的船员一起航行。当你驾驶载具，或位于以「航海学识」驾驶之载具上时，操作所需船员减少 1 名（最少为 0）。若你为该所需学识之大师，则减少 2 名；若为传奇，则减少 4 名。你也可以将此减少之船员数转化为对驾驶载具检定的等量环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "钓鱼学识、海洋学识或航海学识熟练度为专家"
+                }
+            ]
+        },
+        "Walking Affliction": {
+            "name": "行走病恙 Walking Affliction",
+            "description": "<p>你已摄入足够剂量的某些毒素或疾病，让你对其永久免疫，同时也能轻易将其施加于他人。若你以 @UUID[Compendium.pf2e-feats-plus.player-options.Item.BKGj5UPAz1amIZxk]{病恙耐药} 对单一毒素或疾病连续 7 日成功（大成功视作 2 日），则你对该疾病或毒素永久免疫。同一时间你只能对单一毒素或疾病免疫。若你借此能力对另一项毒素或疾病免疫，则失去对前一项疾患之免疫。</p><p>一旦你对某疾患免疫，每日一次，你可交互将所选毒素或疾病涂于你的徒手攻击、近战武器或远程武器之上。下次你以该武器成功打击时，目标生物便被该毒素或疾病所感染。若你的打击大成功，目标对该疾患的豁免承受 -2 环境减值。你保持涂层，直至你以涂有涂层的徒手攻击或武器成功打击或大失败一次为止。</p><p>或者，你也可交互将食物或饮品下毒，让目标摄取后受感染。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为传奇"
+                },
+                {
+                    "value": "病恙耐药"
+                }
+            ]
+        },
+        "Apprentice Binder": {
+            "name": "学徒缚术师 Apprentice Binder",
+            "description": "<p>魔法已为你与近邻生物之间建立强健的联系。你已学会唤来与你所学相关的仆从。选择一道与下方所需技能相对应的法术。你可以以与该技能相对应传统的 2 环内禀法术每日施放一次该法术。若你为所需技能传奇，该法术高位至 4 环。若你召唤的生物因被减至 0 生命值而被驱散，你于 1 周内不能再次使用「学徒缚术师」。</p><p><strong>奥术</strong> @UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]、@UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa] 或 @UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]</p><p><strong>自然</strong> @UUID[Compendium.pf2e.spells-srd.Item.hs7h8f4Z1ZNdUt3s]、@UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu] 或 @UUID[Compendium.pf2e.spells-srd.Item.jSRAyd57kd4WZ4yE]</p><p><strong>神秘</strong> @UUID[Compendium.pf2e.spells-srd.Item.hs7h8f4Z1ZNdUt3s] 或 @UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]</p><p><strong>宗教</strong> @UUID[Compendium.pf2e.spells-srd.Item.B0FZLkoHsiRgw7gv]servitor} 或 @UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘、自然、神秘或宗教熟练度为大师"
+                }
+            ]
+        },
+        "Veterinary Training": {
+            "name": "兽医训练 Veterinary Training",
+            "description": "<p>纵使非所有医师都精于野兽与动物之治疗，你却于此类生物身上颇有心得，悉心治疗其伤口并保障其安康。当你对动物伙伴或魔宠 @UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势} 且掷出成功时，改为大成功。此外，若你对一只对你态度处于「冷漠」或更差的动物成功使用「治疗伤势」，则其对你的态度提升一级。同一生物对你态度提升的频率不得超过每周一次。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为受训"
+                },
+                {
+                    "value": "自然技能熟练度为受训"
+                }
+            ]
+        },
+        "Back Off!": {
+            "name": "退后！ Back Off!",
+            "description": "<p><strong>触发</strong> 一名生物移动至距你 15 尺以内。</p><hr /><p>对某些敌人而言，仅是处于你近旁本身便是恐惧之源。你对触发该效果的生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}。</p>",
+            "prerequisites": [
+                {
+                    "value": "威吓技能熟练度为传奇"
+                }
+            ]
+        },
+        "Necromancer's Knowledge": {
+            "name": "死灵法师之识 Necromancer's Knowledge",
+            "description": "<p>纵然不死生物与虚空属于神圣自然而非奥术之领域，你对此类力量的认知却超越了对不死生物之阴谋的追寻或抵御之传统。你习得死灵语；若你已知死灵语，则学习另一种语言。当你尝试对不死生物回忆知识时，你可以用奥术替代宗教。若你为奥术大师，则对不死生物的回忆知识检定获得 +1 环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为受训"
+                }
+            ]
+        },
+        "Comfortable Terrain": {
+            "name": "安适地形 Comfortable Terrain",
+            "description": "<p><strong>需求</strong> 你处于与你相关学识所对应的地形。</p><hr /><p>你身处熟悉环境时心境更安适，恢复也更快。在你对应地形中休息时，你恢复的生命值翻倍。若你患上常见于你对应地形之疾病或毒素，你可以以所需学识替代医疗 @UUID[Compendium.pf2e.actionspf2e.Item.KjoCEEmPGTeFE4hh]{治疗中毒} 与 @UUID[Compendium.pf2e.actionspf2e.Item.TC7OcDa7JlWbqMaN]{治疗疾病}，且检定获得 +2 环境加值。若你罹患疾病，你可在所对应地形中作为休息的一部分尝试治疗疾病。</p>",
+            "prerequisites": [
+                {
+                    "value": "与某地形类型相关的学识熟练度为大师"
+                }
+            ]
+        },
+        "Second-Hand Sleight": {
+            "name": "二手把戏 Second-Hand Sleight",
+            "description": "<p>若你正在重新分配从受害者那里取得的物品，那便不妨给自己也添些额外好处。当你 @UUID[Compendium.pf2e.actionspf2e.Item.RDXXE7wMrSPCLv5k]{盗窃} 或 @UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{手上功夫} 时，你可同时对至多两件物体如此做。你只掷一次盗术检定，以最低适用调整值对最高适用 DC。例如，若你试图从口袋中盗窃一件物品（这会使检定承受 -5 减值），同时还试图从一叠文件中偷取一张纸（这会增加 DC），那么你只进行一次盗术检定，但同时承受 -5 减值与提升的 DC——纵使两项各自来自不同物品的盗窃尝试。</p><p>若你为盗术大师，你可以一次检定盗窃或手上功夫至多 3 件物品；若你为传奇，则提升至 4 件。</p>",
+            "prerequisites": [
+                {
+                    "value": "盗术技能熟练度为专家"
+                }
+            ]
+        },
+        "Ward the Sanctified": {
+            "name": "守护圣化者 Ward the Sanctified",
+            "description": "<p>你深知佩戴神祇符号与圣化信物便足以让你免遭对立力量之伤害。你可花费 1 分钟在一名生物身上排列并灌注饰物，以保护其免受具相对特征之生物的怒火，并秘密进行一次宗教检定。同一时间你只能于一名生物身上施加「守护圣化者」；再次使用「守护圣化者」会立即结束之前的所有效果。当目标盟友首次遭遇具相对特征之生物时，GM 将你 @Check[religion|against:will] 检定的结果与该生物的意志 DC 比较。无论结果如何，该生物于 1 日内对「守护圣化者」之效果暂时免疫。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.0hxCpVL3UANl2dKX]{效果：守护受祝者}</p><hr /><p><strong>大成功</strong> 该生物对受守护生物的攻击掷骰承受 -2 状态减值，直至其下一回合结束。</p><p><strong>成功</strong> 同大成功，但状态减值为 -1。</p><p><strong>大失败</strong> 你犯了错误，激起该生物对受守护者的怒火。该生物对受守护生物的伤害获得 +2 状态加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "宗教技能熟练度为专家"
+                },
+                {
+                    "value": "神圣或亵渎特征"
+                }
+            ]
+        },
+        "Antidote Expertise": {
+            "name": "解毒精专 Antidote Expertise",
+            "description": "<p>你为可能接触毒素、毒液或类似危险做准备。若你能取得某毒素，或获得产生该毒素之生物的尸体，你可以花费 10 分钟、对低阶 @UUID[Compendium.pf2e.equipment-srd.Item.ktjFOp3U0wQD9t0Z]{解毒剂} 之制作 DC 进行一次 @Check[type:medicine] 检定，从而提取并处理该毒素，制作出特别针对该毒素的解毒剂。</p><p>当你成为医疗大师时，你可改为制作 @UUID[Compendium.pf2e.equipment-srd.Item.AJ1dC7EtTIfBey0M]{中阶解毒剂}，能覆盖你所提取毒素之生物的整个生物家族。</p>",
+            "prerequisites": [
+                {
+                    "value": "医疗技能熟练度为专家"
+                }
+            ]
+        },
+        "Cultural Chameleon": {
+            "name": "文化变色龙 Cultural Chameleon",
+            "description": "<p>你深爱世间各种文化，且情不自禁地汲取它们所有的小小细节。你可选择于一个聚落中花费一周研究该聚落本身的文化，或研究该聚落中数量不容忽视之某一种族（由 GM 决定该种族成员是否足够）的文化。</p><p>你可花费一周时间更换你所选之聚落或种族；你也可随时选择停止接受这些益处，但若如此，你必须再次花费一周沉浸于某文化中——纵使你欲选择完全相同之对象。</p><p><strong>聚落</strong> 你可使用社群 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 来获悉通常需要你以 @UUID[Compendium.pf2e.actionspf2e.Item.plBGdZhqq5JBl1D8]{信息} 才能获得之同类信息——使用与「打听消息」相同的 DC。此外，你于该聚落之学识技能成为专家。</p><p><strong>种族</strong> 该聚落中所选种族之生物对你的初始态度比常规高一级；你可使用社群（替代交涉）对所选种族之生物 [[/act make-an-impression skill=society]]。此外，你于所选种族之学识技能成为专家。</p>",
+            "prerequisites": [
+                {
+                    "value": "社群技能熟练度为大师"
+                }
+            ]
+        },
+        "Quick Learner": {
+            "name": "快速学习者 Quick Learner",
+            "description": "<p>你能迅速掌握新技能或能力。当你 @UUID[Compendium.pf2e.actionspf2e.Item.24PSsn1SKpUwYA1X]{重训} 通常需要一周时间的事项时，你可以加速学习过程，于 1 天内完成。该活动的代价与需求（如教师或带有该法术的法术书）保持不变。当你以此方式重训后，1 周内不可再次以此方式如此做（但仍可花费正常时间重训）。</p>"
+        },
+        "Quick Stored Item": {
+            "name": "快取储物 Quick Stored Item",
+            "description": "<p>你对储物的熟悉让你能在紧张时刻翻找包中、迅速找到所需物品。你可花费 1 分钟为快速取用准备一项储于身上、激活只需单一动作或更少的特定物品。你可以以一个具「繁艺」特征的单一动作交互以取出该物品并激活之。同一时间你只能指定一件物品以此方式储存。</p>"
+        },
+        "Animal Mimicry": {
+            "name": "动物模仿 Animal Mimicry",
+            "description": "<p><strong>需求</strong> 你对 30 尺内至少一只动物或野兽处于无踪状态。</p><hr /><p>通过模仿动物的叫声与噪音，你惊吓并误导那些无法定位你声音来源的动物或野兽。进行一次 @Check[type:nature|defense:will] 检定，并将其与 30 尺内你处于无踪之所有动物或野兽的意志 DC 比较。若射程内有不同种类的动物或野兽，每出现一种不同种类，你便承受一项减值。无论结果如何，生物 24 小时内对此暂时免疫。</p><hr /><p><strong>大成功</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级} 并 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑}。直至你下一回合开始前，你对该生物 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿}。</p><p><strong>成功</strong> 同大成功，但该生物惊惧 1 级且不会逃跑。</p><p><strong>失败</strong> 你不再对该生物处于无踪，若它能观察到你，则你对其变为隐蔽或可见。</p>",
+            "prerequisites": [
+                {
+                    "value": "自然技能熟练度为大师"
+                }
+            ]
+        },
+        "The Show Must Go On": {
+            "name": "演出必须继续 The Show Must Go On",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p>你的演出必然有始有终。你 @UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{表演}，对照你等级的极困难 DC。若成功，你的表演如此辉煌，以至于无法被任何事物（甚至死亡）所阻止。直至你下一回合开始前，若你将被减至 0 生命值，你不会失去意识，并保持 1 生命值。每次你将被减至 0 生命值时，你的 @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2] 值增加 1。你可在后续回合维持此表演以延长此效果，但若你的受伤值达到你最大濒死值，你立即死亡。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为传奇"
+                }
+            ]
+        },
+        "Planar Pedagogy": {
+            "name": "位面教学 Planar Pedagogy",
+            "description": "<p>位面研究并非格拉利昂法师学派或其他知名学习场所中之罕见科目。理解位面对宇宙的影响及其相互连结之方式可在冒险中作为重要知识。花费 [[/r 1d4]] 小时研究位面，并对你等级的标准 DC 进行 @Check[type:arcana|dc:@self.level] 检定，让你于 1 日内对某特定位面之学识技能成为受训。你可花费另外 1d4 小时研究以更换你受训之位面学识。同一时间你只能因此专长对一项学识技能受训，且你必须具备适当之研究材料才能使用此活动。若你为奥术大师，你改为获得该学识之专家熟练度；若你为奥术传奇，则改为获得大师熟练度。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Ancient Magic Academia": {
+            "name": "古魔法学界 Ancient Magic Academia",
+            "description": "<p>作为远古与奥术的鉴赏者，你已花费无数时间研究早已逝去的魔法社团及其施法遗产。当你以奥术对罕见或稀有法术或魔法物品进行回忆知识或鉴别魔法时，你不会因其稀有度而对照更高的 DC 掷骰。此外，你可使用奥术（替代社群）对古老魔法社团（如硕利、瑟西伦或祁卡）的文化与历史进行回忆知识。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥秘技能熟练度为专家"
+                }
+            ]
+        },
+        "Monochrome Mystique": {
+            "name": "单色神秘 Monochrome Mystique",
+            "description": "<p>你深谙如何运用色彩与暗影装饰自身——让自己于明亮处显眼如肿指，但在暗处由于阴影模糊轮廓且色彩混入无形之灰，则隐于其中。你可花费 1 分钟重新整理衣物，让你即便在昏暗光照或黑暗中对具有黑暗视觉（但非高级黑暗视觉）之生物仍呈现为遮蔽；但此举让你在明亮光照下更易被发现，赐予生物对你潜行检定的察觉 DC +2 环境加值。你可再次执行此活动以让衣物恢复正常状态——失去益处与缺陷。</p><p>卡亚尔人或类似黑暗视觉允许在暗中亦能见全色之生物，将你于黑暗与昏暗光中视为如同处于光照之下。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为大师"
+                }
+            ]
+        },
+        "Artistic Craftsperson": {
+            "name": "艺术匠人 Artistic Craftsperson",
+            "description": "<p>你深谙如何创制并修理你于表演中常用之物品。你可以以表演替代制作来 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 乐器、道具、工具或表演方式所必备之物，且你始终被视为已具备这些物品的配方。若你以表演进行制作，你的表演熟练度（视为制作技能）决定你能制作物品的等级。</p><p>此外，你也可使用你的表演熟练度来修理这些物品，并以其决定你以「修理」恢复多少生命值。</p><hr /><p><strong>特殊</strong> 若你具备 @UUID[Compendium.pf2e.feats-srd.Item.lFwfUvH2708rl6i3]{精湛演技}，你可将「精湛演技」之加值应用于这些物品的制作与修理动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为受训"
+                }
+            ]
+        },
+        "Fearsome Pelts": {
+            "name": "骇人毛皮 Fearsome Pelts",
+            "description": "<p>你已学会将怪物之残骸用作恐吓战术的一部分。你可花费 1 日将怪物之尸体 @UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作} 为可穿戴之毛皮、饰物或其他象征性物品，并可使用求生制作该物品。该物品的制作 DC 使用与你所用怪物相同等级的物品等级，且物品须为至少 1 体积的可穿戴物品。</p><p>当你穿着怪物之残骸时，你对与你毛皮同种的生物 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 时获得 +2 环境加值，且不会因不共享语言而对挫败士气承受减值。仅当毛皮来自等级与你试图挫败士气之生物相同或更高的生物时，你才能获得此环境加值。若该生物并非同种、但与你毛皮制作来源之生物共享一项特征，你也获得这些效果，但环境加值为 +1（替代 +2）。</p>",
+            "prerequisites": [
+                {
+                    "value": "求生技能熟练度为专家"
+                },
+                {
+                    "value": "威吓技能熟练度为受训"
+                }
+            ]
+        },
+        "Slink Away": {
+            "name": "悄然遁去 Slink Away",
+            "description": "<p>你以拥抱你的暗影遮蔽自己。选择一名正在观察你的生物。你立即向远离所选生物的方向 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{藏匿} 并 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}。你对该生物之藏匿与潜行视为已具掩蔽；若你的潜行检定成功使你成为隐蔽，你的藏匿与潜行动作仍视为对所选生物已具掩蔽，直至你下一回合开始。若你于下一回合开始前采取除快步、潜行或藏匿外之任何动作，你便立即失去这些效果。当你潜行时，你必须远离所选生物至少 10 尺，否则在你的移动后立即重新成为可见。无论你的藏匿与潜行结果如何，你所选生物于 1 分钟内不能再次成为「悄然遁去」之目标。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜行技能熟练度为专家"
+                }
+            ]
+        },
+        "How Does It Tick?": {
+            "name": "其理何在？ How Does It Tick?",
+            "description": "<p>归根结底，工程学就是要解决问题。你可以用工程学识对构装体以及具有「发条」特征的危害或物品进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}，并在你的检定上获得 +2 环境加值。当你以工程学识进行回忆知识时失败（但非大失败），你了解到一部分真知识与一部分错误知识，但你无法分辨哪些为真。</p>",
+            "prerequisites": [
+                {
+                    "value": "Engineering学识熟练度为受训"
+                }
+            ]
+        }
+    }
+}

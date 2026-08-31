@@ -1,0 +1,462 @@
+{
+    "label": "牧师+ 特性 Clerics+ Features",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Keeper": {
+            "name": "守护者 Keeper",
+            "description": "<p>你的使命是守护你神祇与信仰所珍视之物。你或许负责一座特定的神龛，或受托保管特别重要的经文，亦或担任你信仰所选之人的私人卫士。无论方法如何，你的最终目标都是守护你信仰之物。</p>\n<p><strong>需求 </strong>选择一件物品或一处地点作为你信仰之物，在你选择此使命时确定。</p>\n<p><strong>额外典范</strong> 你必须保护你信仰之物免遭伤害或落入恶人之手。</p>\n<p><strong>额外禁忌</strong> 你必须永不容忍你信仰之物受到伤害，亦不可鲁莽地置其于险境。</p>\n<p><strong>替代领域</strong> 你以职责或保护领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 4 阶 <em>@UUID[Compendium.pf2e.spells-srd.onjZCEHs3JJJRTD0]{和平之泡}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 4 阶法术，你必须以该法术作为被替换的对象。如果你没有等阶或更高阶的法术，你必须替换你最高阶的法术。</p>\n<p><strong>神圣技能</strong> 如果你选择物品则以制作代替你神祇的神圣技能；如果你选择地点则以社群代替之。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇不再有圣选武器。当你以你的神圣技能进行涉及使用你信仰之物，或以信仰之物为目标的技能检定时，你的检定获得 +1环境加值。当你本应在你神祇圣选武器上变为专家时，则你以信仰之物进行的此类检定大失败时，改为获得失败。</p>"
+        },
+        "Divine Interrogation": {
+            "name": "神圣审问 Divine Interrogation",
+            "description": "<p>你以神圣灵感的提问方式冷静自如地审问。你可以花费 1分钟使用宗教代替威吓对一个生物 @UUID[Compendium.pf2e.actionspf2e.tHCqgwjtQtzNqVvd]{胁迫}，以获得对一个问题的回答。如果你在此结束审问，该生物日后的态度不会因此恶化。如果你威逼的目标本性或所行违反你神祇典范或禁忌，你将成功等级视为高一级。</p>"
+        },
+        "Final Doctrine (Armorclad)": {
+            "name": "终极信条（披甲者） Final Doctrine (Armorclad)",
+            "description": "<p>你在无甲、轻甲、中甲、重甲、法术攻击调整值与法术DC 上获得大师熟练度。</p>"
+        },
+        "Exocommunication": {
+            "name": "革除信仰 Exocommunication",
+            "description": "<p>到此时为止，你已研习了几乎所有信仰的教义——专门用以拆穿其他信徒的错谬。当你成功打击你 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 的目标时，你可以使用反应进行宗教检定对抗其意志DC 来斥责对方。如果成功，该生物在 1轮内对宗教检定及具备神圣特征的攻击、检定或 DC 承受 –2 状态减值；大成功则为 1分钟。无论结果如何，目标在 10分钟内对此效果免疫。</p>\n<p>@UUID[Item.NflEp2MZhDrakaNe]{效果：革除信仰}</p>"
+        },
+        "Second Decree (Secrets)": {
+            "name": "第二诫令（秘密） Second Decree (Secrets)",
+            "description": "<p>你已在你的攻击中运用专家级的策略。你在你神祇的圣选武器、你神祇圣选武器组的军用武器、简易武器与徒手攻击上变为专家。当你使用运使意志的结果进行打击时，你额外造成 1d4 精魂伤害。在 7级你本应获得这些效益时，你改为在察觉上变为大师。在 15级你本应在察觉上变为大师时，你改为在察觉上变为传奇，并附带第五信条的通常效益。</p>"
+        },
+        "Decree of Secrets": {
+            "name": "秘密诫令 Decree of Secrets",
+            "description": "<p>你的神祇授予你一道神圣诫令，让你的心智被神圣赋能，承担一项神秘晦暗的使命。这种召唤可能是夺回凯林的失窃硬币、以阿斯莫蒂亚斯的侍祭身份渗透天界邪教，或为法莱斯玛刺杀那些试图获取永生之人。无论任务如何，你都愿意采取致命手段以确保任务完成。</p>",
+            "prerequisites": [
+                {
+                    "value": "探查者信条"
+                }
+            ]
+        },
+        "Battle-Lust": {
+            "name": "战斗狂欲 Battle-Lust",
+            "description": "<p>战火的神圣狂喜在战斗中涌过你身，你将其全然拥抱。你获得狂热领域作为备选领域，并获得 <em>@UUID[Compendium.pf2e.spells-srd.W37iBXLsY2trJ1rS]{武器涌动}</em> 聚能法术。</p>"
+        },
+        "Fifth Doctrine (Armorclad)": {
+            "name": "第五信条（披甲者） Fifth Doctrine (Armorclad)",
+            "description": "<p>你在强韧豁免上的熟练度等级提升至大师。当你强韧豁免成功时，你改为获得大成功。</p>"
+        },
+        "Sacred Lair": {
+            "name": "圣化巢穴 Sacred Lair",
+            "description": "<p>你的圣兽创造一个你与你的盟友可进入的小型半位面。它可以以一项 1分钟的行动撕开通往该半位面的裂口（该半位面面积 40尺，外观仿照该生物的天然栖地）。该半位面内可以找到美味解渴的食物与水，在此休息会有超凡的舒适感。你可以将物品留在此半位面中并在日后取回。当你希望离开半位面时，可以以 1分钟行动返回离开前的位置。当你与盟友在你圣兽的巢穴中休息时，你恢复的生命值是平时的两倍，且对抗你或你盟友所罹患疾病的豁免获得 +2状态加值。</p>"
+        },
+        "Proselytizer": {
+            "name": "传道者 Proselytizer",
+            "description": "<p>你的使命是在有机会时宣扬你的信仰。你或许通过对会众发表激昂演说、巧妙瓦解敌对教会，或仅是向任何愿意倾听的人散播你神祇之言。无论方法如何，你的最终目标是吸引更多人加入你的信仰。</p>\n<p><strong>额外典范</strong> 当机会出现时，你必须尝试将合适的对象转变为你信仰的信徒。</p>\n<p><strong>额外禁忌</strong> 你绝不能让你神祇眷顾下的现有信徒离开信仰或失去眷顾。</p>\n<p><strong>替代领域</strong> 你以城市或信心领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 3 阶 <em>@UUID[Compendium.pf2e.spells-srd.IihxWhRfpsBgQ5jS]{注目术}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 3 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以外交代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器，但你获得一个 1级外交常见技能专长。当你本应在你神祇圣选武器上变为专家时，你改为再选一个 1级外交常见技能专长。</p>"
+        },
+        "Super Toughness": {
+            "name": "超强韧 Super Toughness",
+            "description": "<p>超强韧！</p>"
+        },
+        "Warrior's Commitment": {
+            "name": "战士献身 Warrior's Commitment",
+            "description": "<p>你获得一个等于你等级一半且你符合先决条件的战士职业专长，且你可以在符合此条件的牧师专长位置上选择额外的战士专长。你必须拥有战士之专注祝福才能选择此项。</p>"
+        },
+        "Speak Before God": {
+            "name": "在神前发言 Speak Before God",
+            "description": "<p>你的提问尖锐而令人战栗。当你使用宗教进行 @UUID[Compendium.pf2e.actionspf2e.tHCqgwjtQtzNqVvd]{胁迫} 时，你可以将其作为 3动作的行动而非 1分钟，但检定承受 –5 减值。如果你的检定成功，该生物像平时一样回答你的一个问题，且目标变为 @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧2级}。你必须拥有神圣审问祝福才能选择此项。</p>"
+        },
+        "Whisphered Prayer": {
+            "name": "低语祈祷 Whisphered Prayer",
+            "description": "<p>即使于沉默中，你也能从暗中指引他人。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，每小时一次，你可以选择花费一个单动作低语一段祈祷，将运使意志的结果赋予 30尺内一个愿意接受的盟友而非你自己。该盟友必须愿意接受你的低语祈祷，且必须以打击作用于你寻求意志的目标以使用此结果。你可以在得知运使意志的结果之后再选择是否低语此祈祷。此具有听觉特征。</p>"
+        },
+        "Warrior's Reaction": {
+            "name": "战士反应 Warrior's Reaction",
+            "description": "<p>你的神开启你的战斗洞察，使你能作出战士的反应。你获得 @UUID[Compendium.pf2e.actionspf2e.KAVf7AmRnbCAHrkT]{反应打击}。</p>"
+        },
+        "Blessed Support": {
+            "name": "受祝支援 Blessed Support",
+            "description": "<p>你的圣兽已学会以独特方式支援你。在每日准备期间，选择一个盟友作为你圣兽的祝福对象。当你的圣兽进行支援动作时，它可以将其支援行动的效益施加于所选盟友而非你自己。</p>"
+        },
+        "Many Eyes of God": {
+            "name": "诸神千目 Many Eyes of God",
+            "description": "<p>你或你的神祇之前再无可藏。你获得通过消耗一次伤害术或治疗术法术位施放 <em>@UUID[Compendium.pf2e.spells-srd.LQzlKbYjZSMFQawP]{定位术}</em> 的能力。法术环等同于所消耗法术的等级。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志} 或 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，只要其目标生物为该法术的目标，或正持有该法术目标，你便可以持续此法术。</p>"
+        },
+        "Deific Operative": {
+            "name": "神之密使 Deific Operative",
+            "description": "<p>你是教会最受信任的密探之一，受你神之庇护免于被察觉。侦测、揭示与窥视效果会径直越过你、你的物品与你的灵气，除非该侦测效果具备 10级或更高的对抗等级，否则什么也察觉不到。例如，「侦测魔法」仍能察觉区域内的其他魔法，但不会察觉你身上的魔法；真知视无法显现你；定位或窥视也找不到你，等等。</p>"
+        },
+        "Third Doctrine (Seeker)": {
+            "name": "第三信条（探查者） Third Doctrine (Seeker)",
+            "description": "<p>你在你神祇的圣选武器、简易武器与徒手攻击上获得专家熟练度。当你使用运使意志的结果进行打击时，你额外造成 1d4 精魂伤害。当你以这些武器进行攻击骰大成功时，你应用该武器的重击专精效果；你可以使用法术DC 替代你的职业DC。</p>"
+        },
+        "Fist of the Acolyte": {
+            "name": "侍祭之拳 Fist of the Acolyte",
+            "description": "<p>你的武器从手中飞向敌人，再回到你掌中。选择一件你曾施用 @UUID[Compendium.pf2e.feats-srd.7RFjTTzznsdPcaYB]{刻印武装} 的武器。该武器获得投掷 20尺特征，且当你正持有它时，效果如同它带有返回符文。如果该武器为单手武器，其投掷特征的射程增至 40尺。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.Nwj8rKx1QpilQft6]{效果：侍祭之拳}</p>"
+        },
+        "Many Faces of God": {
+            "name": "诸神千面 Many Faces of God",
+            "description": "<p>你的神祇引导你跨越任何险阻。你获得通过消耗一次伤害术或治疗术法术位施放 <em>@UUID[Compendium.pf2e.spells-srd.i35dpZFI7jZcRoBo]{幻象伪装}</em> 的能力，且法术获得隐微特征。法术环等同于所消耗法术的等级。</p>"
+        },
+        "Fourth Doctrine (Armorclad)": {
+            "name": "第四信条（披甲者） Fourth Doctrine (Armorclad)",
+            "description": "<p>你的法术攻击调整值与法术DC 状态熟练度提升至专家。</p>"
+        },
+        "Armorclad": {
+            "name": "披甲者 Armorclad",
+            "description": "<p>你追随神祇之意进入险地，将神圣庇护与神圣之钢相融以护你免于一切威胁。此信条作为先决条件，及作为基于信条运作的能力时，与战斗祭司信条等同。</p>\n<hr />\n<p>披甲者是战斗祭司信条的备选选择，更倾向于防御而非原信条。当选择专长或选项（例如巅峰职业架构）时，披甲者与战斗祭司信条作为先决条件与选择资格时可互换。</p>\n<hr />\n<p><strong>第一信条（1级）：</strong>你在轻甲、中甲、重甲、简易武器与你神祇圣选武器组的军用武器上受训；如果你神祇的武器为高级武器，你也在该武器上受训。你还获得 @UUID[Compendium.pf2e.classfeatures.eZNCckLzbH3GyncH]{盾牌格挡} 一般专长。如果你神祇的武器为简易武器，你获得 @UUID[Compendium.pf2e.feats-srd.DfLkIIg2reyYW3a8]{致命简朴} 牧师专长。13级时，如果你获得「神之防御」职业特性，你还在轻甲、中甲与重甲上获得专家熟练度。</p>\n<p><strong>第二信条（3级）：</strong>你在强韧豁免上的熟练度等级提升至专家。</p>\n<p><strong>第三信条（7级）：</strong>你在徒手攻击、简易武器、你神祇圣选武器组的军用武器上获得专家熟练度；如果你神祇的武器为高级武器，你也在该武器上获得专家熟练度。当你以这些武器进行攻击骰大成功时，你应用该武器的重击专精效果；你可以使用法术DC 替代你的职业DC。</p>\n<p><strong>第四信条（11级）：</strong>你的法术攻击调整值与法术DC 状态熟练度提升至专家。</p>\n<p><strong>第五信条（15级）：</strong>你在强韧豁免上的熟练度等级提升至大师。当你强韧豁免成功时，你改为获得大成功。</p>\n<p><strong>终极信条（19级）：</strong>你在无甲、轻甲、中甲、重甲、法术攻击调整值与法术DC 上获得大师熟练度。</p>"
+        },
+        "Third Doctrine (Armorclad)": {
+            "name": "第三信条（披甲者） Third Doctrine (Armorclad)",
+            "description": "<p>你在徒手攻击、简易武器、你神祇圣选武器组的军用武器上获得专家熟练度；如果你神祇的武器为高级武器，你也在该武器上获得专家熟练度。当你以这些武器进行攻击骰大成功时，你应用该武器的重击专精效果；你可以使用法术DC 替代你的职业DC。</p>"
+        },
+        "Strength to Stand": {
+            "name": "屹立之力 Strength to Stand",
+            "description": "<p>神圣力量充盈你之躯，让你不至倒向敌手。每小时一次，作为反应，当你将被减至 0 生命值时，你可以消耗你的伤害术或治疗术，对自己施放该法术的 1动作版本，且不会触发反应。你在触发伤害造成之前先恢复生命值。</p>"
+        },
+        "Final Decree (Secrets)": {
+            "name": "终极诫令（秘密） Final Decree (Secrets)",
+            "description": "<p>选择一项秘密的主要祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Divine Flight": {
+            "name": "神圣飞翔 Divine Flight",
+            "description": "<p>你的圣兽长出双翼、获得悬浮能力，或以其他方式获得飞行手段。你的圣兽获得 25尺的飞行速度。如果你的圣兽已经具备某种飞行手段，则其飞行速度增加 15尺。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.1jgAeCC94vDUEYL7]{效果：神圣飞翔}</p>"
+        },
+        "Clinician": {
+            "name": "诊疗者 Clinician",
+            "description": "<p>你立誓救治受伤、患病或其他需要医疗照顾之人。从无私的莎伦菈疗者，到敲诈成性的阿斯莫蒂亚斯医师，你皆与那些不论身在何处都守护信徒之人为伍。</p>\n<p><strong>额外典范</strong> 按你神祇的旨意救助有需要之人。</p>\n<p><strong>额外禁忌</strong> 故意恶化你患者的状况。</p>\n<p><strong>替代领域</strong> 你以治疗或痛苦领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 1 阶 <em>@UUID[Compendium.pf2e.spells-srd.szIyEsvihc5e1w8n]{舒缓术}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 1 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以医疗代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器，但你获得一个 1级医疗常见技能专长。当你本应在你神祇圣选武器上变为专家时，你改为再选一个 1级医疗常见技能专长。</p>"
+        },
+        "First Decree (Might)": {
+            "name": "第一诫令（强力） First Decree (Might)",
+            "description": "<p>你的关键属性是力量或敏捷。你在 1级而非 3级时获得第二信条。当你本应获得第二信条的效益时，你改为获得 @UUID[Compendium.pf2e.feats-srd.7RFjTTzznsdPcaYB]{刻印武装} 牧师专长，或如果你已拥有刻印武装，则获得另一个你能取用的职业专长。</p>\n<p>选择一项强力的祝福。</p>"
+        },
+        "Destined Strike": {
+            "name": "命定打击 Destined Strike",
+            "description": "<p>你的神祇在战乱时刻引导你的刀锋。你获得通过消耗一次伤害术或治疗术法术位施放「料敌机先」的能力。法术环等同于所消耗法术的等级。</p>"
+        },
+        "Fifth Doctrine (Seeker)": {
+            "name": "第五信条（探查者） Fifth Doctrine (Seeker)",
+            "description": "<p>你在察觉上的熟练度等级提升至大师。对你说谎所需的察觉 DC 提升 2，且你的察言观色与看穿伪装的检定获得 +2环境加值。</p>"
+        },
+        "Final Doctrine (Seeker)": {
+            "name": "终极信条（探查者） Final Doctrine (Seeker)",
+            "description": "<p>你在你神祇的圣选武器、简易武器、徒手攻击、法术攻击调整值与法术DC 上获得大师熟练度。当你使用运使意志的结果进行打击时，所造成的额外精魂伤害提升至 2d4。</p>"
+        },
+        "Final Decree (Might)": {
+            "name": "终极诫令（强力） Final Decree (Might)",
+            "description": "<p>选择一项强力的主要祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Aspect of War": {
+            "name": "战争之相 Aspect of War",
+            "description": "<p>你将众神之愤直接灌注己身，让你近乎刀枪不入。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 动作时，直到你下一回合结束，你对物理伤害获得等同于你等级一半的抗力。</p>"
+        },
+        "Proselytizer Skill Feat": {
+            "name": "传道者技能专长 Proselytizer Skill Feat",
+            "description": "<p>当你本应在你神祇圣选武器上变为专家时，你改为再选一个 1级外交常见技能专长。</p>"
+        },
+        "Greater Enchanted Strikes": {
+            "name": "高级附魔打击 Greater Enchanted Strikes",
+            "description": "<p>你圣兽的附魔打击变得更强。你获得你为附魔打击祝福所选武器属性符文的高级版效果。你必须拥有附魔打击祝福才能选择此祝福。</p>"
+        },
+        "Godspeaker": {
+            "name": "神语者 Godspeaker",
+            "description": "<p>你的圣兽口操所有听者皆能理解的古语。它永久受 <em>@UUID[Compendium.pf2e.spells-srd.SwUiVavHKMWG7t5K]{真言术}</em> 法术的效果。每周一次，你可以与圣兽交流，花费 1小时与之共祷以从中获得神圣指引。这会产生 6 阶 <em>@UUID[Compendium.pf2e.spells-srd.7DN13ILADW2N9Z1t]{通灵术}</em> 仪式的效果。你必须拥有外族之语祝福才能选择此祝福。</p>"
+        },
+        "Clinician Skill Feat": {
+            "name": "诊疗者技能专长 Clinician Skill Feat",
+            "description": "<p>当你本应在你神祇<br />圣选武器上变为专家时，你改为再选一个 1级<br />医疗常见技能专长。</p>"
+        },
+        "Feared by the Other": {
+            "name": "异类畏惧 Feared by the Other",
+            "description": "<p>你的圣兽对你神祇所定的特定生物具有 @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.etMnv73EIdEZrYYu]{骇人临在}。你圣兽的骇人临在对你神祇相关的天界、邪魔、永恒、原蕴体或其他主题适宜的生物类型生效（例如对法莱斯玛而言为亡灵；由 GM 裁决）。</p>"
+        },
+        "First Decree (Secrets)": {
+            "name": "第一诫令（秘密） First Decree (Secrets)",
+            "description": "<p>你的关键属性是力量或敏捷。除你第一信条所授武器外，你也在你神祇圣选武器组的军用武器上受训。你在 1级而非 3级时获得运使意志动作。当你本应在 3级获得运使意志时，你改为在你选择的某项技能上获得一次额外的技能等级提升。当你使用热忱时，你可以将作为同一动作的一部分对你能看见的一个生物使用寻求意志。</p>\n<p>选择一项秘密的祝福。</p>"
+        },
+        "Steel-Wielder": {
+            "name": "持钢者 Steel-Wielder",
+            "description": "<p>你的圣兽获得显化你神祇武器的能力。你的动物伙伴获得一种徒手攻击，其伤害骰与特征与你神祇的圣选武器相同。它可以以一个具有专注特征的单动作显化或解除该徒手攻击；当此徒手攻击显化时，它无法以其他徒手攻击进行打击。仅当你神祇的圣选武器为简易武器或单手军用武器时，你才能选择此祝福。</p>"
+        },
+        "Beacon": {
+            "name": "信标 Beacon",
+            "description": "<p>你是领袖、激励者，是你信众的指路人。受神圣力量赋能，你尽力激励他人如你般行事；战斗在最前线、行事光明磊落、永远秉持信仰。一手持你神祇之圣徽，怀着雄狮之心，无人能阻你与你的盟友达成目标。</p>\n<p><strong>额外典范</strong> 引领并鼓舞他人，按你神祇的目标完成大业。</p>\n<p><strong>额外禁忌</strong> 显示出会带来重大不良后果的软弱或犹疑。</p>\n<p><strong>替代领域</strong> 你以荣誉或希望领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 1 阶忍耐术替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 1 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以外交代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器。你可以花费一个单动作扬起神祇的圣物焦点，赋予 15尺内盟友对抗情绪效果的 +1状态加值，持续至你下一回合开始。当你本应在你神祇圣选武器上变为专家时，你改为将该范围增至 30尺。</p>"
+        },
+        "Fourth Decree (Unity)": {
+            "name": "第四诫令（团结） Fourth Decree (Unity)",
+            "description": "<p>你获得一个 4 阶法术位用于准备牧师法术。在 15级你获得一个 5 阶法术位，17级时获得一个 6 阶法术位，19级你本应获得 10 阶法术位时改为获得一个额外的最高阶法术位。</p>"
+        },
+        "Clergy Detective": {
+            "name": "神职侦探 Clergy Detective",
+            "description": "<p>你受教会委托进行多项调查。在每日准备期间，你可以向你神祇祈祷，让你在两项技能上临时获得回忆知识动作的受训资格。这种熟练度持续至下次准备。由于此熟练度为临时性，你不能将其作为技能等级提升的先决条件，也不能用于诸如专长之类的永久性角色选项。</p>"
+        },
+        "Flawless Onslaught": {
+            "name": "无瑕猛攻 Flawless Onslaught",
+            "description": "<p>你以一种穿透对手最强防御的方式打击它。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，你可以使用察觉调整值进行回忆知识检定来获知一个生物最高的弱点数值。如果成功，你可以将运使意志结果对你打击的该生物造成的精魂伤害更改为该弱点的伤害类型，持续 1分钟或直到你解除为止。</p>"
+        },
+        "Advanced Favored Weapon": {
+            "name": "高级圣选武器 Advanced Favored Weapon",
+            "description": "<p>选择一种与你神祇圣选武器同一武器组的高级武器。你获得使用该武器的资格，且就熟练度判定而言，该武器视作军用武器。</p>"
+        },
+        "Sacred Sight": {
+            "name": "圣化之视 Sacred Sight",
+            "description": "<p>你的圣兽让你能以其视野观看。每 10分钟一次，你可以以一个具有专注特征的单动作将你的感官投射到圣兽身上。这样做时，你失去自身躯体的所有感官信息，但可通过圣兽的躯体感知，最多持续 1分钟。你可以解除此效果。</p>"
+        },
+        "Empowering Presence": {
+            "name": "鼓舞临在 Empowering Presence",
+            "description": "<p>你激烈的战场临在影响你的盟友与敌人。你持用的武器获得以下重击专精效果：你在 1分钟内获得 1 阶 <em>@UUID[Compendium.pf2e.spells-srd.7ZinJNzxq0XF0oMx]{破敌}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.XSujb7EsSwKl19Uu]{祝福术}</em> 法术的效益——若你的神力源泉为伤害术则为厄运术，若为治疗术则为祝福术。当你在该效果激活期间成功打击时，弥漫范围增加 5尺。</p>"
+        },
+        "First Doctrine (Armorclad)": {
+            "name": "第一信条（披甲者） First Doctrine (Armorclad)",
+            "description": "<p>你在轻甲、中甲、重甲、简易武器与你神祇圣选武器组的军用武器上受训；如果你神祇的武器为高级武器，你也在该武器上受训。你还获得 @UUID[Compendium.pf2e.classfeatures.eZNCckLzbH3GyncH]{盾牌格挡} 一般专长。如果你神祇的武器为简易武器，你获得 @UUID[Compendium.pf2e.feats-srd.DfLkIIg2reyYW3a8]{致命简朴} 牧师专长。13级时，如果你获得「神之防御」职业特性，你还在轻甲、中甲与重甲上获得专家熟练度。</p>"
+        },
+        "Wall of Iron": {
+            "name": "铁壁 Wall of Iron",
+            "description": "<p>当你举起盾牌时，你成为名副其实的壁垒。当你举盾时，相邻的盟友也获得你来自盾牌的环境加值至 AC。此外，你来自盾牌的 AC 环境加值也施加于你对法术与其他魔法效果的豁免。</p>"
+        },
+        "Reckless Conquest": {
+            "name": "鲁莽征服 Reckless Conquest",
+            "description": "<p>当你冲入战斗，你心中只有胜利。当你消耗一次 <em>@UUID[Compendium.pf2e.spells-srd.wdA52JJnsuQWeyqz]{伤害术}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.rfZpqmj0AIIdkVIs]{治疗术}</em> 法术位以使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以选择让你的攻击辐射能量。在你热忱持续期间，你的打击获得溅射特征；直到你下一回合结束前，造成等同于你等级一半的溅射伤害。该溅射伤害类型为精魂，或当你的热忱本身造成伤害时，与热忱伤害同型。你免疫自身热忱产生的溅射伤害。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.WjmYalwPFEfzsSD9]{效果：鲁莽征服}</p>"
+        },
+        "Teacher": {
+            "name": "教师 Teacher",
+            "description": "<p>你的使命是教导信仰中的他人，引导他们走过教义。你或许通过教室中严谨授课、以体力障碍进行试炼，或以非常规角度阐释标准教义以凸显其意义。无论方法如何，你的最终目标是教授他人你信仰之事。</p>\n<p><strong>额外典范</strong> 你必须时时驱动他人对你神祇的理解，并对误解你信仰者发起挑战。</p>\n<p><strong>额外禁忌</strong> 你绝不能毁坏、隐藏或以其他方式阻止他人学习你的信仰，除非该学习对象按其本质即为机密。</p>\n<p><strong>替代领域</strong> 你以知识或真理领域替代你的备选领域。</p>\n<p><strong>牧师法术 </strong>你以 3 阶 <em>@UUID[Compendium.pf2e.spells-srd.ZYoC630tNGutgbE0]{极化认知}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 3 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能 </strong>你以与你神祇相关的一项学识技能代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器，但你获得 @UUID[Compendium.pf2e.feats-srd.sMm0UfYxEPpq2Yzd]{老练专家} 技能专长用于你的神圣技能。当你本应在你神祇圣选武器上获得熟练度提升时，你改为在神圣技能上变为专家，并获得 @UUID[Compendium.pf2e.feats-srd.H3I2X0f7v4EzwxuN]{自动知识} 技能专长用于该技能。如果你已经在神圣技能上为专家，则改为在另一项与你神祇相关的学识技能上变为受训。</p>"
+        },
+        "Deific Beam": {
+            "name": "神之光束 Deific Beam",
+            "description": "<p>你的圣兽获得一道可向他者射出的圣化之能光束。它获得一种远程徒手攻击，射程 30尺，造成 1d4点精魂伤害，附带后坐、精魂与徒手特征。即便其力量不足以避免减值，你的圣兽在倒地时使用后坐武器也不会承受 –2 减值。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.Pn3bqVeLEd0HVfu0]{效果：神之光束}</p>"
+        },
+        "Fourth Doctrine (Seeker)": {
+            "name": "第四信条（探查者） Fourth Doctrine (Seeker)",
+            "description": "<p>你的法术攻击调整值与法术DC 状态熟练度提升至专家。</p>"
+        },
+        "Fourth Decree (Might)": {
+            "name": "第四诫令（强力） Fourth Decree (Might)",
+            "description": "<p>你由信条获得的武器熟练度等级提升至大师。15级时，你获得高级武器专门化。19级时，如果你的信条本会授予你神祇圣选武器的大师熟练度，你改为在无甲、轻甲与中甲上获得大师熟练度。</p>"
+        },
+        "Sacred Executioner": {
+            "name": "圣化执刑者 Sacred Executioner",
+            "description": "<p>借由敏锐的疑心感，你能察觉变形者与隐形生物。当处于隐藏或无踪生物的临近范围内 30尺时，停留至少 1轮你便会自动察觉到「有些不对」。这视作模糊感官。此外，当某生物伪装时或使用假扮时，你的察觉检定获得 +4状态加值。当你以此感官察觉到一个生物时，你可以作为自由动作对其使用 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志}。</p>"
+        },
+        "Seeker": {
+            "name": "探查者 Seeker",
+            "description": "<p>你是教会的代理人，受命寻找你信仰所关心之事：失落的知识、被遗弃的圣物、神之敌人，以及信众内部的异端。</p>\n<p><strong>第一信条（1级）：</strong>你在轻甲上受训，且你在察觉上具有专家熟练度。你获得寻求意志动作。5级时，当你本应获得「察觉精进」职业特性时，你改为在反射豁免上获得专家熟练度；11级时，当你本应获得「反射精进」职业特性时，你改为在强韧豁免上变为专家。13级时，如果你获得「神之防御」职业特性，你也在轻甲上获得专家熟练度。</p>\n<p><strong>第二信条（3级）：</strong>你获得运使意志动作。</p>\n<p><strong>第三信条（7级）：</strong>你在你神祇的圣选武器、简易武器与徒手攻击上获得专家熟练度。当你使用运使意志的结果进行打击时，你额外造成 1d4 精魂伤害。当你以这些武器进行攻击骰大成功时，你应用该武器的重击专精效果；你可以使用法术DC 替代你的职业DC。</p>\n<p><strong>第四信条（11级）：</strong>你的法术攻击调整值与法术DC 状态熟练度提升至专家。</p>\n<p><strong>第五信条（15级）：</strong>你在察觉上的熟练度等级提升至大师。对你说谎所需的察觉 DC 提升 2，且你的察言观色与看穿伪装的检定获得 +2环境加值。</p>\n<p><strong>终极信条（19级）：</strong>你在你神祇的圣选武器、简易武器、徒手攻击、法术攻击调整值与法术DC 上获得大师熟练度。当你使用运使意志的结果进行打击时，所造成的额外精魂伤害提升至 2d4。</p>"
+        },
+        "Font Connected": {
+            "name": "源泉相连 Font Connected",
+            "description": "<p>你的神祇通过你的神力源泉将你与你的圣兽相连。当你以神力源泉位施放法术时，你可以使用你的位置或你圣兽的位置来确定法术的射程与效果区域。</p>"
+        },
+        "Show Thyself!": {
+            "name": "现身吧！ Show Thyself!",
+            "description": "<p>当你以运使意志结果对一个生物进行打击时，攻击具有死亡特征，使其在被减至 0 生命值时立即被杀死。以此方式被杀死时，与其交流、复活、化为亡灵或扰动其死后世界的尝试都会失败，除非该效果的对抗等级高于你杀死该生物时你等级的一半（向上取整），或该效果源自神器或神祇。你必须拥有圣化刺客祝福才能选择此项。</p>"
+        },
+        "Esotericist": {
+            "name": "秘学者 Esotericist",
+            "description": "<p>你的召唤是探究你信仰中神秘而不寻常的方面。无论是加入隐晦邪派、调查与你神祇相关的奇异现象，或研习你信仰所留下早已遗忘的秘文，你都被宗教中那些更不寻常、有时怪诞的一面所吸引。</p>\n<p><strong>额外典范</strong> 你必须探求与你神祇及教会相关的奇异真相。</p>\n<p><strong>额外禁忌</strong> 让你信仰之外的人完全了解你神祇的秘密。</p>\n<p><strong>替代领域</strong> 你以秘密或虚空领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以以下任一替换一个等阶或更高阶的法术：<em>@UUID[Compendium.pf2e.spells-srd.Mkbq9xlAUxHUHyR2]{狂乱偏执}</em>、<em>@UUID[Compendium.pf2e.spells-srd.R8bqnYiThB6MYTxD]{幻痛术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.xFp4EwVcYwSG336t]{滑溜}</em>、或 <em>@UUID[Compendium.pf2e.spells-srd.i1TvBID5QLyXrUCa]{召唤实体}</em>。如果你神祇本就授予你该等阶的法术，你必须以该法术作为被替换的对象。如果你没有等阶或更高阶的法术，你必须替换你最高阶的法术。</p>\n<p><strong>神圣技能</strong> 你以神秘代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器，但你获得以下技能专长之一：@UUID[Compendium.pf2e.feats-srd.6O8MoMheHs5hNHX1]{水晶疗法}、@UUID[Compendium.pf2e.feats-srd.22P7IFyhrF7Fbw8B]{草根魔法}、或 @UUID[Compendium.pf2e.feats-srd.lEgYzFHransLkSvI]{密修通晓}。当你本应在你神祇圣选武器上变为专家时，你改为再选你在第一级未选择的另一个技能专长。</p>"
+        },
+        "Third Decree (Unity)": {
+            "name": "第三诫令（团结） Third Decree (Unity)",
+            "description": "<p>选择一项团结的高级祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Passage Finder": {
+            "name": "通路探察 Passage Finder",
+            "description": "<p>你的神祇低语将你的注意引向暗门。你的察觉检定在寻找暗门，以及盗术检定在撬锁时获得 +1环境加值。即使你不在 @UUID[Compendium.pf2e.actionspf2e.TiNDYUGlMmxzxBYU]{搜索}，你也获得一次寻找暗门的检定，即使该检定通常需要你正在搜索。</p>"
+        },
+        "Heraldic Statue": {
+            "name": "纹章之像 Heraldic Statue",
+            "description": "<p>你的圣兽将自身化为你神祇的雕像。它可以以一个 2动作具有操作特征的行动转化形态，从其常态形态变为兽首石像或其他与你神适宜的材质雕像。当你的圣兽呈雕像形态时，除了使用同一行动变回原形外，它无法采取任何动作；它也难以自卫，因此处于措手不及，并对其 AC 额外承受 –2 状态减值，但对所有伤害获得 5点抗力。在此形态下，30尺内的所有盟友对伤害骰获得 +4状态加值，对意志豁免获得 +1状态加值；在 30尺内的所有敌人对其 AC 与意志豁免承受 –1 状态减值。如果你的圣兽在此形态下被减至 0 生命值，它立即恢复为动物形态。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.N0pH4HEBpW35cr1p]{效果：纹章之像}</p>"
+        },
+        "First Decree (Unity)": {
+            "name": "第一诫令（团结） First Decree (Unity)",
+            "description": "<p>你的关键属性是感知。你获得一个动物伙伴，作为你神祇或其从仆的化身，称为你的圣兽。当你使用热忱时，作为同一动作的一部分，你也可以对你的圣兽下达一个单动作的命令，让它在该回合获得 2 个动作。</p>\n<p>选择一项团结的祝福。</p>"
+        },
+        "Gray Shepherd": {
+            "name": "灰色牧者 Gray Shepherd",
+            "description": "<p>为执行你神祇之意，并守护信徒的灵魂，你必须做他们所不能。你可以使用你的神力源泉位来施放 <em>@UUID[Compendium.pf2e.spells-srd.rfZpqmj0AIIdkVIs]{治疗术}</em> 或 <em>@UUID[Compendium.pf2e.spells-srd.wdA52JJnsuQWeyqz]{伤害术}</em>，无论你神祇授予的是何种源泉。每周一次，你可以进行一个会违反你典范或禁忌之一的动作或行动而不致失去神祇眷顾，但你仍必须在 1 周内进行赎罪仪式，否则你行为的常规后果照旧。</p>"
+        },
+        "Third Decree (Secrets)": {
+            "name": "第三诫令（秘密） Third Decree (Secrets)",
+            "description": "<p>选择一项秘密的高级祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Sacred Assassin": {
+            "name": "圣化刺客 Sacred Assassin",
+            "description": "<p>你是你神祇之刃，擅长在教会的命令下进行隐秘的猎杀。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，你的敏捷与巧劲武器及徒手攻击获得背刺与致命 d6 武器特征。如果武器或徒手攻击已具备致命特征，则改为将致命伤害骰大小提升一级，而非赋予致命 d6。</p>"
+        },
+        "Body of the Chosen": {
+            "name": "圣选之躯 Body of the Chosen",
+            "description": "<p>你的神祇祝福你圣兽之躯。选择以下两种：酸蚀、寒冷、电击、火焰、毒素或音波。你的圣兽对所选伤害类型获得等同于你等级一半的抗力，并对它选择的某一类型获得等同于你等级一半的弱点。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.IkCZh6hbFnz162g1]{效果：圣选之躯}</p>"
+        },
+        "Iconoclastic Judgment": {
+            "name": "破像审判 Iconoclastic Judgment",
+            "description": "<p>罪孽神器在此世毫无立足之地。你获得通过消耗一次伤害术或治疗术法术位施放 <em>@UUID[Compendium.pf2e.spells-srd.9HpwDN4MYQJnW0LG]{解除魔法}</em> 的能力。法术环等同于所消耗法术的等级。如果一件神器在你拥有 1 周后，你可以进行一次神圣仪式，无须满足其流失条件，以一次宗教检定（DC 等于该物品等级 + 20）来摧毁它。如果你失败，1 年内不能再次尝试。</p>"
+        },
+        "Final Decree (Unity)": {
+            "name": "终极诫令（团结） Final Decree (Unity)",
+            "description": "<p>选择一项团结的主要祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Fear of God": {
+            "name": "惧吾神威 Fear of God",
+            "description": "<p>你对处于恐惧中的目标的热忱更为强大。在你受热忱效果影响期间，你对 @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧} 的生物额外造成 4点伤害；如果你在该武器上具大师熟练度，则额外造成 6点。所造成伤害类型为精魂。</p>"
+        },
+        "Hunted by Faith": {
+            "name": "以信仰追猎 Hunted by Faith",
+            "description": "<p>你的神祇通过祈祷将你引向他人之所在。你可以使用宗教代替求生进行追踪，并获得 @UUID[Compendium.pf2e.feats-srd.urQZwmzg2kS53vd5]{老练追踪者} 技能专长。如果你追踪的生物是你 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志} 职业特性的目标，你的环境加值提升至 +2。</p>"
+        },
+        "Multiheaded-Form": {
+            "name": "多头之形 Multiheaded-Form",
+            "description": "<p>你的圣兽形态强烈变化，使其拥有多个头。任何会切去圣兽头颅的能力（例如 @UUID[Compendium.pf2e.equipment-srd.6xaxxKfvXED6LfIY]{斩首} 武器属性）只要它仍剩另一个头便不会致死，但它在受命时会失去一个动作。以单一生物为目标的心灵效果只对你圣兽其中一个头生效，且每回合只对其一项动作生效。如果你圣兽只断去其中一个头，它会在你下次每日准备时再生，正如你神祇会在伙伴死亡时另派一员。如果你的圣兽本应在某回合获得超过 2 个动作，由你决定哪一头获得额外动作；但动作限制（例如同一回合内使用支援与攻击）对两个头同样适用。</p>"
+        },
+        "Eater of Avatars": {
+            "name": "化身吞噬者 Eater of Avatars",
+            "description": "<p>你的圣兽在敌对信仰的从仆中令人畏惧，被记录于古老传说中作为大义的带来者，或可怕厄运的使者。你的圣兽可以选择获得你祝佑的效益，且其徒手攻击获得对应于你祝佑的特征。你必须已受祝佑才能选择此项。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.aYsgtt7xTtx6QTUx]{效果：化身吞噬者（圣洁）}</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.EmQNRQGlEeC6O8kb]{效果：化身吞噬者（邪恶）}</p>"
+        },
+        "Condemn": {
+            "name": "谴责 Condemn",
+            "description": "<p>你的神祇赋予你谴责他人的力量。你可以使用宗教代替威吓，对本性或所行违反你神祇典范或禁忌的生物 @UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气}。即使该生物不理解你的语言，你也不承受减值；无心智的生物不会因无心智而对此威吓免疫。你可以使用你在宗教上的熟练度等级，去满足那些要求威吓达到特定熟练度的技能专长所需的先决条件。</p>"
+        },
+        "Mighty Justiciar": {
+            "name": "强力法吏 Mighty Justiciar",
+            "description": "<p>你以钢铁与决心审判被你斩杀者的灵魂。当你以打击将一个在过去 1分钟内对你或你的盟友造成过伤害的敌人减至 0 生命值时，你获得在 1分钟内等同于你等级的临时生命值。</p>"
+        },
+        "Blessed Skill": {
+            "name": "受祝技能 Blessed Skill",
+            "description": "<p>你的神祇将其神圣技能的力量印于你的圣兽。你的圣兽在你神祇的神圣技能上变为受训。在 9级时，它在你神祇的神圣技能上变为专家；在 17级时，变为大师。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.M3JteiXSOxREazxy]{效果：受祝技能}</p>"
+        },
+        "Precise Instructions": {
+            "name": "精准指令 Precise Instructions",
+            "description": "<p>当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.yq3ipSNC3UJQW6C9]{运使意志} 时，只要盟友以你 @UUID[Compendium.clerics-remaster.clerics-actions.Z1OhAfxlOY718JP3]{寻求意志} 的目标作为攻击对象，你便可以使用宗教协助盟友的攻击。</p>"
+        },
+        "Aesthete": {
+            "name": "美学家 Aesthete",
+            "description": "<p>你的使命是以你神祇之名创造美，尽管这一定义往往因人而异。你或许通过竖立你神祇形象的纪念物、举办由你烹饪的盛宴庆祝你的神祇，或仅是守护与你神祇相关的艺术品。无论方法如何，你的最终目标是传播你信仰之美。</p>\n<p><strong>额外典范</strong> 你必须以神之名创造能让他人或自己见证或欣赏的美。</p>\n<p><strong>额外禁忌</strong> 你绝不能毁坏艺术、损毁非敌方信仰的纪念物，或以其他方式抑制美的表达。</p>\n<p><strong>替代领域 </strong>你以创造或工艺领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 4 阶 <em>@UUID[Compendium.pf2e.spells-srd.TUj8eugNqAvB1vVR]{创造术}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 4 阶法术，你必须以该法术作为被替换的对象。如果你没有等阶或更高阶的法术，你必须替换你最高阶的法术。</p>\n<p><strong>神圣技能</strong> 你以制作或与你艺术相关的一项学识替代你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 你以与你艺术最贴近的下列武器之一替代你神祇的圣选武器：@UUID[Compendium.pf2e.equipment-srd.rQWaJhI5Bko5x14Z]{匕首} 或 @UUID[Compendium.pf2e.equipment-srd.FibwLZ12EIEwLGhw]{轻锤}。</p>"
+        },
+        "Chimeric Beast": {
+            "name": "奇美拉之兽 Chimeric Beast",
+            "description": "<p>你的圣兽变为自身与另一类生物的混合体。它获得另一种适合其新形态的动物伙伴的支援效益。</p>"
+        },
+        "Imposing Hand": {
+            "name": "威严之手 Imposing Hand",
+            "description": "<p>你获得通过消耗一次伤害术或治疗术法术位施放 @UUID[Compendium.pf2e.spells-srd.wzctak6BxOW8xvFV]{变巨术} 的能力。如果你选择以你自己为目标，你将施放此法术的动作数减少 1，且法术失去操作特征。如果你至少 13级，此放大术升阶至 4 阶。</p>"
+        },
+        "Esotericist Skill Feat": {
+            "name": "秘学者技能专长 Esotericist Skill Feat",
+            "description": "<p>当你本应在你神祇圣选武器上变为专家时，你改为再选你在第一级未选择的某个技能专长。</p>"
+        },
+        "Faithful Athame": {
+            "name": "诚信祭刃 Faithful Athame",
+            "description": "<p>你的神祇赐予你一柄具有仪式力量的特殊小刀。你获得一件由你神祇授予、属于刀类武器组的武器。该武器成为你神祇的圣选武器，且你获得 @UUID[Compendium.pf2e.feats-srd.DfLkIIg2reyYW3a8]{致命简朴} 牧师专长。当你持用该武器时，你对抗灵骚的豁免与施放仪式所需的技能检定获得 +1状态加值。</p>"
+        },
+        "Precentor": {
+            "name": "领唱者 Precentor",
+            "description": "<p>你的使命是以你神祇之名创造音乐。你或许通过精心作曲、欢庆舞蹈，或以戏剧表演展示你神祇之事迹，或仅在街角弹奏歌谣。无论方法如何，你的最终目标是传播你信仰之声与音律。</p>\n<p><strong>额外典范</strong> 你必须演奏或散播你神祇之乐，让他人或自己得以见证。</p>\n<p><strong>额外禁忌</strong> 你绝不能扰乱供他人欣赏的演出，或以其他方式阻止他人欣赏佳乐。</p>\n<p><strong>替代领域</strong> 你以激情或灵魂领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 2 阶 <em>@UUID[Compendium.pf2e.spells-srd.Yv3AFIO55FONQYMH]{鸣奏跨度}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 2 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以表演代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 你以与你表演最贴近的下列武器之一替代你神祇的圣选武器：@UUID[Compendium.pf2e.equipment-srd.79krBL334Kp1RMNB]{战琴} 或 @UUID[Compendium.pf2e.equipment-srd.0lCXehyFlXdYxDfA]{刀刃悠悠球}。</p>"
+        },
+        "Glorious Purpose": {
+            "name": "荣耀使命 Glorious Purpose",
+            "description": "<p>你引下众神之威，将其磅礴之力赋予盟友。当你以热忱作用时，你可以选择 30尺内的一个盟友以获得你 @UUID[Compendium.clerics-remaster.clerics-effects.nbtHjMtgtxGrl5IK]{热忱} 的效果，而非作用于你自己。</p>"
+        },
+        "Decree of Might": {
+            "name": "强力诫令 Decree of Might",
+            "description": "<p>你的神祇祝福你的躯体，将你与战斗紧紧相连，作为你作为神之使者旅程的恒常见证。强力的巅峰最常出现在召唤牧师参战的神祇之中——从被义洛理召唤参与竞技对决的牧师，到在艾奥梅黛旗帜下不懈追求正义者。你的双臂便是你的经文，其中铭刻的字句正是你作为巅峰任内所积累的一道道凹痕与污渍。</p>",
+            "prerequisites": [
+                {
+                    "value": "战斗祭司信条"
+                }
+            ]
+        },
+        "Ferverent Shield": {
+            "name": "炽诚之盾 Ferverent Shield",
+            "description": "<p>你的神祇赋予你迅捷的盾牌反应。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以作为同一动作的一部分 @UUID[Compendium.pf2e.actionspf2e.xjGwis0uaC2305pm]{举盾}。</p>"
+        },
+        "Many Bodies of God": {
+            "name": "诸神千身 Many Bodies of God",
+            "description": "<p>众的信仰存于少。你获得通过消耗一次伤害术或治疗术法术位施放 <em>@UUID[Compendium.pf2e.spells-srd.2qGqa33E4GPUCbMV]{类人型态}</em> 的能力，且法术获得隐微特征。如果你至少 9级，此类人型态升阶至 3 阶；如果你至少 15级，则升阶至 5 阶。</p>"
+        },
+        "Summon Weapon": {
+            "name": "召唤武器 Summon Weapon",
+            "description": "<p>你只需召唤神祇便能将武器召至身侧。你可以以一个交互动作储存或取出一件你在每日准备期间指定的武器，让其凭意而生灭。当你使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 时，你可以作为同一动作的一部分进行交互以召唤你的武器。</p>"
+        },
+        "First Doctrine (Seeker)": {
+            "name": "第一信条（探查者） First Doctrine (Seeker)",
+            "description": "<p>你在轻甲上受训，且你在察觉上具有专家熟练度。你获得寻求意志动作。5级时，当你本应获得「察觉精进」职业特性时，你改为在反射豁免上获得专家熟练度；11级时，当你本应获得「反射精进」职业特性时，你改为在强韧豁免上变为专家。13级时，如果你获得「神之防御」职业特性，你也在轻甲上获得专家熟练度。</p>"
+        },
+        "Second Doctrine (Seeker)": {
+            "name": "第二信条（探查者） Second Doctrine (Seeker)",
+            "description": "<p>你获得运使意志动作。</p>"
+        },
+        "Second Decree (Unity)": {
+            "name": "第二诫令（团结） Second Decree (Unity)",
+            "description": "<p>你获得一个 1 阶法术位用于准备牧师法术。在 7级你获得一个 2 阶法术位，9级你获得一个 3 阶法术位。</p>"
+        },
+        "Second Decree (Might)": {
+            "name": "第二诫令（强力） Second Decree (Might)",
+            "description": "<p>在你神之命令下，你已成为武器的专家。你由信条获得的武器熟练度等级提升至专家。在 7级你本应获得信条所授武器的专家熟练度时，你改为获得武器专门化。</p>"
+        },
+        "Warrior's Focus": {
+            "name": "战士之专注 Warrior's Focus",
+            "description": "<p>你获得一个 1级且你符合先决条件的战士职业专长。</p>"
+        },
+        "Third Decree (Might)": {
+            "name": "第三诫令（强力） Third Decree (Might)",
+            "description": "<p>选择一项强力的高级祝福，可从下列项中选择，或从其他你能取用的神之祝福中选择。</p>"
+        },
+        "Transcendent Mobility": {
+            "name": "超然机动 Transcendent Mobility",
+            "description": "<p>你的神祇祝福你圣兽以飞快速度。你的圣兽的攀爬速度、速度或游泳速度增加 15尺。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.Wj57lsWiiesLLb02]{效果：超然机动}</p>"
+        },
+        "Decree of Unity": {
+            "name": "团结诫令 Decree of Unity",
+            "description": "<p>你的神祇祝福你的灵魂，将你与一位代表你神祇之意的异界使者相连。该使者使用动物伙伴的机制。它通常呈现适合你神祇的形态，例如伊拉斯特的雄鹿、莎琳的天堂鸟，或阿斯莫蒂亚斯的毒蛇（由 GM 裁决）。</p>\n<p>你的动物伙伴受你神祇的典范与禁忌约束，并获得一个适合你神祇从仆的特征（如佐恩-库松的邪魔特征，或法莱斯玛的灵魂导引特征）。如果你的动物伙伴死亡或离开你的服务，你的神祇会在你的下次每日准备期间另派一名新的动物伙伴。</p>"
+        },
+        "Bestowed with Shadow": {
+            "name": "暗影所授 Bestowed with Shadow",
+            "description": "<p>神祇的祝福有时以黑暗之姿降临。你获得黑暗领域作为备选领域，并获得 <em>@UUID[Compendium.pf2e.spells-srd.SE0fbgBj7atuukdv]{暗影披风}</em> 聚能法术。</p>"
+        },
+        "Cloaked Fervor": {
+            "name": "潜行热忱 Cloaked Fervor",
+            "description": "<p>你擅长伏击，你神祇的热忱也助你成事。当你以 @UUID[Compendium.pf2e.actionspf2e.IE2nThCmoyhQA0Jn]{避人耳目} 探索行动进入战斗时，你可以作为自由动作以「掷先攻」为触发使用 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱}；当你这么做时，尚未行动过的生物对你处于 @UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}。</p>"
+        },
+        "Godspeed": {
+            "name": "神速 Godspeed",
+            "description": "<p>你获得通过消耗一次伤害术或治疗术法术位施放 <em>@UUID[Compendium.pf2e.spells-srd.o6YCGx4lycsYpww4]{加速术}</em> 的能力。如果你选择以你自己为目标，你将施放此法术的动作数减少 1，且法术失去操作特征。</p>"
+        },
+        "Second Doctrine (Armorclad)": {
+            "name": "第二信条（披甲者） Second Doctrine (Armorclad)",
+            "description": "<p>你在强韧豁免上的熟练度等级提升至专家。</p>"
+        },
+        "Otherworldly Awareness": {
+            "name": "异界感知 Otherworldly Awareness",
+            "description": "<p>你的圣兽提高警觉，并向你警报来自不可见者的存在。你的圣兽获得 30尺范围内的一种模糊感官，可能察觉到天界、邪魔、监临者或精魂。你的圣兽即使在它们不可见或伪装时也能察觉到这些生物。</p>"
+        },
+        "Wayfarer": {
+            "name": "行旅者 Wayfarer",
+            "description": "<p>你的使命是远行并见证你神祇的荣耀。你或许通过寻找你神祇的隐秘神殿、目睹众人间你神祇之荣光，或仅是感受其对凡间的丰盛影响。无论方法如何，你的最终目标是踏上朝圣之旅以见证你信仰之地与之事。</p>\n<p><strong>额外典范</strong> 你必须远行去寻访信仰的事迹、见证或纪念物，以加深对其的理解。</p>\n<p><strong>额外禁忌</strong> 你绝不能永远停止旅程，或妨碍他人的精神之旅。</p>\n<p><strong>替代领域</strong> 你以幸运或旅行领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 3 阶 <em>@UUID[Compendium.pf2e.spells-srd.o6YCGx4lycsYpww4]{加速术}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 3 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以求生代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 对你而言，你的神祇没有圣选武器，但你对极端寒冷、酷热或恶劣天气的豁免获得 +2状态加值。当你本应在你神祇圣选武器上获得熟练度提升时，你改为将你对抗极端寒冷、酷热与恶劣天气的成功等级视为高一级。</p>"
+        },
+        "Fourth Decree (Secrets)": {
+            "name": "第四诫令（秘密） Fourth Decree (Secrets)",
+            "description": "<p>你在你神祇的圣选武器、你神祇圣选武器组的军用武器、简易武器与徒手攻击上获得大师熟练度。当你使用运使意志结果进行打击时，所造成的额外精魂伤害提升至 2d4。在 19级你本应获得你神祇圣选武器、简易武器与徒手攻击的大师熟练度时，你改为在轻甲与无甲防御上获得大师熟练度。</p>"
+        },
+        "Sheathed in Light": {
+            "name": "沐光裹体 Sheathed in Light",
+            "description": "<p>你的神祇以光环、火焰或灵气的形态赋予你的伙伴光辉。它在 20尺弥漫范围内发出明亮光芒，并在该范围之外延伸 20尺暗光。你的圣兽可以以一个具有专注特征的单动作压制或恢复此能力。</p>\n<p>@Compendium[pf2e.spell-effects.cVVZXNbV0nElVOPZ]{法术效果：光照术}</p>"
+        },
+        "Unstoppable Advance": {
+            "name": "不可阻挡之进 Unstoppable Advance",
+            "description": "<p>你身上护甲、武器与过往的重负无法减缓你的脚步。当你受 @UUID[Compendium.clerics-remaster.clerics-actions.7oi9FIzMHsI7Jgm6]{热忱} 效果影响时，你忽略所有会让你速度承受状态减值的效果，包括穿戴护甲所造成的速度减值。</p>"
+        },
+        "Enchanted Strikes": {
+            "name": "附魔打击 Enchanted Strikes",
+            "description": "<p>你的圣兽徒手攻击获得额外力量。你的圣兽徒手打击获得以下武器属性符文之一的效果：@UUID[Compendium.pf2e.equipment-srd.JY8X4RSfg6xIqAC9]{粉碎}、@UUID[Compendium.pf2e.equipment-srd.LwQb7ryTC8FlOXgX]{命源} 或 @UUID[Compendium.pf2e.equipment-srd.P6v2AtJw7AUwaDzf]{畏怖}。</p>"
+        },
+        "Heretic": {
+            "name": "异端 Heretic",
+            "description": "<p>你的使命是在伪装为另一信仰成员的同时颠覆其声誉，尽管你仍遵循你真正神祇的典范。你或许公开主张相反的概念、以温和姿态从内部流失其教义，或秘密伪装为真正信徒以等待施行你异端的最佳时机。无论何种情况，你的目标是在与你对立的信仰之中散播不和。</p>\n<p><strong>需求 </strong>当你选择此使命时，选择另一位其典范或禁忌与你神祇相对立的神祇。你可以使用所选对立神祇的圣徽，仿佛它就是你神祇的圣徽。</p>\n<p><strong>额外典范</strong> 在被观察期间你必须遵循对立神祇的典范；只要你这么做是为了避免被发现，便不视作违反你神祇的禁忌。</p>\n<p><strong>额外禁忌</strong> 你绝不能公开承认你正以另一位神祇的伪装行事，除非对方是你真正信仰的成员，或会保守秘密的可信之人。如果你这么做，你不会失去神祇的祝福，但失去此使命的效益。</p>\n<p><strong>替代领域</strong> 你以阴谋或诡术领域替代你的备选领域。</p>\n<p><strong>牧师法术</strong> 你以 1 阶 <em>@UUID[Compendium.pf2e.spells-srd.PRrZ7anETWPm90YY]{伪装魔法}</em> 替换一个等阶或更高阶的法术。如果你神祇本就授予你一个 1 阶法术，你必须以该法术作为被替换的对象。</p>\n<p><strong>神圣技能</strong> 你以欺瞒代替你神祇的神圣技能。</p>\n<p><strong>圣选武器</strong> 你以你对立神祇的圣选武器替代你神祇的圣选武器。</p>"
+        },
+        "Outer Speech": {
+            "name": "外族之语 Outer Speech",
+            "description": "<p>你的神祇赋予你的圣兽说话的能力。你的圣兽获得说一种适合你神祇的语言：阿克洛语、地穴语、邪域语、天界语、亡灵语、岩石语、火元素语、风元素语或水元素语。其智力属性提升至 +0 或加 1，以较高者为准。</p>"
+        }
+    }
+}

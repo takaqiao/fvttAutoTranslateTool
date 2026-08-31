@@ -1,0 +1,692 @@
+{
+    "label": "杂项 Miscellaneous",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Spell Effect: Bizarre Surge": {
+            "name": "法术效果：诡奇涌动 Spell Effect: Bizarre Surge",
+            "description": "<p><em>由@UUID[Compendium.pf2e.spells-srd.Item.lV8FkHZtzZu7Cy6j]{进化浪潮}与@UUID[Compendium.pf2e-summoners-plus.items.vByKHEVb5SQj4nm9]{诡奇涌动}赋予。</em></p>\n<p>你提取未来之秘密以重塑幻灵之形态，进化出适合当前所面问题的特征与构造。当你施放@UUID[Compendium.pf2e.spells-srd.Item.lV8FkHZtzZu7Cy6j]{进化浪潮}时，可在常规效果之外另选下列效果：</p>\n<ul>\n<li>你的幻灵获得回声定位，将听觉作为精确感官，距离至多20尺。</li>\n<li>你的幻灵对心灵伤害获得抗性，数值等于你等级一半。</li>\n</ul>\n<hr />\n<p><strong>提升（3阶）</strong>你的幻灵在意志豁免上获得+1状态加值。</p>\n<p><strong>提升（5阶）</strong>你的幻灵获得生命感作为不精确感官，距离至多30尺。</p>"
+        },
+        "Victory's Companion": {
+            "name": "胜利之伴 Victory's Companion",
+            "description": "<p>你的幻灵视胜利如老友，与之共度每一步征程。你的幻灵将其徒手攻击的伤害骰增大1档。当你掷先攻时，只要它至少察觉到一名敌人，就可以免费动作使用@UUID[Compendium.pf2e-summoners-plus.misc.BPn644yIO8XN3MGs]{战士之心}。当你幻灵处于战士之心效果下且将一生物打降至0生命值时，它获得@UUID[Compendium.pf2e.conditionitems.nlCjDvLMf2EkV2dl]{迅捷}1轮，并可使用此额外动作进行行走或打击。</p>"
+        },
+        "Tandem Boost": {
+            "name": "同步强化 Tandem Boost",
+            "description": "<p>你与幻灵联手强化彼此。你施放@UUID[Compendium.pf2e.spells-srd.HStu2Yhw3iQER9tY]{激励幻灵}，你与幻灵都获得激励幻灵之效果。你由激励幻灵获得的任何伤害加值同样适用于你的徒手与武器攻击，并使用你武器的伤害骰来确定你的状态加值伤害。</p>\n<hr />\n<p><strong>特别</strong>若你获得@UUID[Compendium.pf2e.spells-srd.TYbCj4dgXDOZou9k]{援护幻灵}戏法，你可选择施放它代替激励幻灵。</p>"
+        },
+        "Incarnate Arrival": {
+            "name": "化身降临 Incarnate Arrival",
+            "description": "<p><strong>需求</strong>你的幻灵在本回合显化。</p>\n<hr />\n<p>你的幻灵自你的印记中释放后，爆发出磅礴之力。其周围@Template[distance:10|type:emanation]之内所有生物承受@Damage[(2+(floor(@actor.level/2)))d4[@actor.flags.pf2e.incarnate-type]]{2d4加每两级额外1d4伤害}（基础@Check[type:reflex|basic:true|dc:resolve(@actor.attributes.spellDC.value)]豁免对抗你的法术DC）。</p>\n<p>伤害类型必须从下列选择，且若你的幻灵具下列特征之一则须选择该特征：酸性、钝击、寒冷、电击、火焰、穿刺、毒素、挥砍、音波、生命力、虚空、水（寒冷或钝击）、木（穿刺或钝击）。若该生物具上述多种特征，则由你选择伤害类型。</p>\n<p>若你以「显化化身幻灵」让幻灵解显化，则它可在解显化前使用此活动。</p>\n<hr />\n<p><strong>特别</strong>此活动具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>"
+        },
+        "Manifest Incarnate Eidolon": {
+            "name": "显化化身幻灵 Manifest Incarnate Eidolon",
+            "description": "<p>你的化身幻灵以胜利之力降临。当你使用此动作时，你选择30尺内一个方格以显化你的幻灵。如果你的幻灵已显化，则改为令其解显化。当你使用「显化化身幻灵」时，你的幻灵可作为其降临或离去之一部分使用一个所用2动作或更少的动作或活动；若如此，则「显化化身幻灵」获得同步特征。</p>\n<p>你的幻灵保持显化至下回合结束，但你可@UUID[Compendium.pf2e.actionspf2e.3f5DMFu8fPiqHpRg]{维持}其存在至多1分钟。幻灵每保持显化1轮，其@UUID[Compendium.pf2e-summoners-plus.misc.0fvd9aASh27TJYOj]{化身降临}离去之爆发范围便扩大5尺，最大可至50尺。当其解显化时，你可选择压制此效果，或将爆发范围最低降至5尺。</p>\n<p>使你幻灵得以显化的导管亦是你与它之间的纽带。你的幻灵必须始终保持在你100尺范围内，且不能自愿越过此限。如被强制移至此距离之外，或你被打降至0生命值，则你幻灵的物理形体消散：你的幻灵解显化，须再次使用「显化化身幻灵」方能重新显化。</p>\n<hr />\n<p><strong>特别</strong>此活动具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>"
+        },
+        "Rampaging Oni": {
+            "name": "暴怒之鬼 Rampaging Oni",
+            "description": "<p>力量+4，敏捷+1，体质+3，智力-1，感知+0，魅力+2；+3护甲等级（敏捷上限+2）</p>"
+        },
+        "Effect: Fabricate Tool": {
+            "name": "效果：锻造工具 Effect: Fabricate Tool",
+            "description": "<p>若你为7级或更高，你以所召唤工具进行的检定获得+1物品加值。</p>"
+        },
+        "Be Not Afraid!": {
+            "name": "勿要惧怕！ Be Not Afraid!",
+            "description": "<p>你的幻灵向旁观者展露其真实形态之一瞥，使敌人惊惧、令盟友受到鼓舞。你的幻灵尝试@UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气}射程内一名敌人，然后安抚30尺内的盟友，使其惊惧状态等级降低1。若所选挫败目标具亵渎特征，则其检定获得+2环境加值。</p>"
+        },
+        "Eyes": {
+            "name": "眼 Eyes",
+            "description": "<p>你的幻灵具有额外的眼，或为复眼，或仅是不规则地排布于其身躯之上，强化其侦测能力。你的幻灵在以视觉为基础的@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}检定上获得+1环境加值。每回合开始时，你的幻灵可选定一名敌人将凝视固定于其上，该生物不能夹击你的幻灵（虽然其仍可为同伴提供夹击）。你幻灵的第二项技能必须是使用@UUID[Compendium.pf2e.actionspf2e.d9gbpiQjChYDYA2L]{解读文书}活动的技能。若你获得@UUID[Compendium.pf2e.feats-srd.a6xUSibsRaclbSz3]{无寐感官}职业专长，则在判定敌人是否能夹击它时，将其等级视为高2级。</p>"
+        },
+        "Arcane Etudiant": {
+            "name": "奥术求知者 Arcane Etudiant",
+            "description": "<p>力量+0，敏捷+3，体质+1，智力+4，感知+1，魅力+0；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Suppress Eidolon": {
+            "name": "压制幻灵 Suppress Eidolon",
+            "description": "<p><strong>触发</strong>你回合开始。</p>\n<hr />\n<p>你压制你的幻灵并在其内部呈现你自己的容貌。你的幻灵在你下回合开始前不能行动，而你在下回合开始前再度成为召唤师。你可使用自己的能力代替幻灵之能力，且幻灵被以此方式压制时，其所有能力一并被压制。在你的幻灵被压制期间，你与幻灵都将作为效果与区域效果之目标，且出于「被效果作为目标」之考量，你被视为占据幻灵的方格。</p>"
+        },
+        "Aberrative Devourer": {
+            "name": "异种征服者 Aberrative Devourer",
+            "description": "<p>力量+4，敏捷+2，体质+3，智力-1，感知+1，魅力+0；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Mouth": {
+            "name": "口 Mouth",
+            "description": "<p>你的幻灵具有一处或多处奇异之口，于近距时含混低语并令人不安。你的幻灵在@UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气}的威吓检定上获得+1环境加值，且即便其与目标语言不通，进行挫败士气时亦不承受减值。你幻灵的次要技能为威吓。</p>"
+        },
+        "Spell Effect: Ancient Surge": {
+            "name": "法术效果：远古涌动 Spell Effect: Ancient Surge",
+            "description": "<p><em>由@UUID[Compendium.pf2e.spells-srd.Item.lV8FkHZtzZu7Cy6j]{进化浪潮}与@UUID[Compendium.pf2e-summoners-plus.items.lsB3RzmVmK27iWv3]{远古涌动}赋予。</em></p>\n<p>你解锁过去之力，将幻灵恢复至时间之始的强力状态。选择下列效果之一：</p>\n<ul>\n<li>你的幻灵获得震感作为不精确感官，距离至多20尺。</li>\n<li>你的幻灵获得对酸性、寒冷、电击或火焰伤害的抗性，数值等于你等级一半。若你的幻灵对所选伤害类型有弱点，则改为减少同等数值的弱点。</li>\n</ul>\n<hr />\n<p><strong>提升（3阶）</strong>你的幻灵在强韧豁免上获得+1状态加值。</p>\n<p><strong>提升（5阶）</strong>你的幻灵在对抗会令其陷入「受擒、倒地或束缚」状态的效果之豁免成功度等级提升一阶。</p>"
+        },
+        "Churning Ooze": {
+            "name": "黏液征服者 Churning Ooze",
+            "description": "<p>力量+4，敏捷+2，体质+3，智力-1，感知+1，魅力+0；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Effect: Aura of Knowledge": {
+            "name": "效果：知识光环 Effect: Aura of Knowledge",
+            "description": "<p>区域内所有生物在@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}上获得+1状态加值。当光环内某生物在以任意技能进行回忆知识检定失败（但不是大失败）时，该生物习得正确答案与一个错误答案。</p>"
+        },
+        "Effect: Heart of a Warrior Temp Hp": {
+            "name": "效果：战士之心-临时生命 Effect: Heart of a Warrior Temp Hp",
+            "description": ""
+        },
+        "Effect: Rampaging Spirit": {
+            "name": "效果：暴怒之灵 Effect: Rampaging Spirit",
+            "description": ""
+        },
+        "Effect: Aura of Time": {
+            "name": "效果：时间光环 Effect: Aura of Time",
+            "description": "<p>光环内所有生物不受幸运或厄运效果影响。</p>"
+        },
+        "Aura of Knowledge": {
+            "name": "知识光环 Aura of Knowledge",
+            "description": "<p>你的幻灵散发出知识与领悟之光环。你的幻灵在10尺爆发范围获得知识光环，使区域内所有生物在@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}上获得+1状态加值。当光环内某生物以任意技能进行回忆知识检定失败（但不是大失败）时，该生物习得正确答案与一个错误答案。你的幻灵在学院学识知识技能上成为大师。</p>"
+        },
+        "Extinguish": {
+            "name": "熄灭 Extinguish",
+            "description": "<p>你的幻灵可作为具专注特征的单一动作，将30尺内一个@Template[distance:5|type:burst]作为目标，自动熄灭区域内的非魔法火焰。</p>"
+        },
+        "Pure Life Force": {
+            "name": "纯净生命力 Pure Life Force",
+            "description": "<p>你的幻灵与生命力相融合。你幻灵的打击额外造成1点生命力伤害。你的幻灵获得自其选择的一种生命形式：@UUID[Compendium.pf2e-summoners-plus.misc.Q6f0Rzb4vwJenVXo]{元素}、@UUID[Compendium.pf2e-summoners-plus.misc.NqCwEgFAAt4kLr23]{光}或@UUID[Compendium.pf2e-summoners-plus.misc.kFoaEGrS62JC95Pq]{植物}。</p>"
+        },
+        "Gelatinous Expansion": {
+            "name": "胶状膨胀 Gelatinous Expansion",
+            "description": "<p>你的黏液调整其形态以适应需要。你的幻灵选择下列效果之一，至下回合结束。同时只能激活一个效果。</p>\n<p><strong>酸性粘液：</strong>你幻灵之触为酸性。对你的幻灵进行近战攻击检定成功的生物，承受@Damage[(floor(@actor.level/2))[persistent,acid]]{持续酸性}伤害，等于你等级的一半。</p>\n<p><strong>弹性击打：</strong>你的幻灵可伸展其拟肢与躯体。你幻灵的徒手攻击触及距离增加5尺。</p>\n<p><strong>抓握黏液：</strong>你幻灵之黏液附着于其所触者，啃噬之。当你的幻灵成功@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}一名敌人时，敌人承受@Damage[(floor(@actor.level/2))[persistent,acid]]{持续酸性}伤害，等于你等级的一半。</p>\n<p><strong>武器形态：</strong>你的幻灵塑形其徒手攻击，改变其属性。你的幻灵将其近战徒手主要攻击变更为它原本可在1级时选择的另一项徒手主要攻击，并获得新选择对应的特征与伤害骰。</p>"
+        },
+        "Unspeakable Demonstration": {
+            "name": "难言展示 Unspeakable Demonstration",
+            "description": "<p>你的幻灵以其非自然生理进行难言之展示。1分钟内，你的幻灵在@Template[distance:15|type:emanation]内进行难言展示。开始回合时位于爆发内的敌人须进行@Check[type:will|dc:resolve(@actor.attributes.classDC.value)]豁免对抗你的法术DC。豁免失败的生物对你的幻灵@UUID[Compendium.pf2e.conditionitems.AdPVz7rbaVSRxHFg]{迷魂}1分钟，且幻灵根据其非自然生理选择获得对应效果。你或幻灵的敌对动作不会破坏目标的迷魂状态，盟友对该生物盟友的敌对动作亦不会。一名生物因此效果而结束迷魂状态后，1分钟内不会再次受影响。</p>\n<p><strong>眼</strong>你幻灵之眼投射出无穷迷惑光纹。当你的幻灵对被其难言展示迷魂的生物所在区域进行@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}时，可将其察觉结果与所述生物之意志DC进行比较。成功时，目标@UUID[Compendium.pf2e.conditionitems.TkIyaNPgTZFBCCuh]{目眩}1轮，大成功时为1分钟。该活动获得视觉特征。</p>\n<p><strong>心智</strong>你幻灵之心智借不和而渗入他人之心。当你的幻灵以其徒手攻击对被其难言展示迷魂的生物造成伤害时，该生物在下回合开始前不能进行反应。该活动获得心灵特征。</p>\n<p><strong>口</strong>你幻灵之口喷吐恶语与不和。当你的幻灵成功@UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气}一名被其难言展示迷魂的生物时，目标在迷魂期间@UUID[Compendium.pf2e.conditionitems.9PR9y0bi4JPKnHPR]{耳聋}并@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞1级}。即使目标对恐惧免疫或不会因挫败士气成功而获得「惊惧」状态，亦适用此条件。该活动获得听觉特征。</p>\n<p><strong>皮肤</strong>你幻灵之皮肤震动、颤抖或以其他方式异常扭曲。当你的幻灵对被其难言展示迷魂的生物成功进行近战打击或@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}时，目标承受@Damage[(floor(@actor.level/2))[persistent,acid]]{等于你等级一半的持续酸性伤害}。</p>"
+        },
+        "Flying Beast": {
+            "name": "翔兽 Flying Beast",
+            "description": "<p>你的幻灵具有大型双翼以推进自身。它获得@UUID[Compendium.pf2e.feats-srd.Bj0GvPgyPiC2kDH1]{滑翔形态}专长。作为具移动特征的单一动作，若你的幻灵在地面上则可将自身在空中弹射至多其速度的距离。</p>\n<p>12级时，即使你不满足等级前置条件，你也获得@UUID[Compendium.pf2e.feats-srd.h8OB6zcdIqUPS6PC]{空翔形态}专长。</p>"
+        },
+        "Vital Juggernaut": {
+            "name": "活力巨擘 Vital Juggernaut",
+            "description": "<p>力量+4，敏捷+2，体质+3，智力-1，感知+1，魅力+0；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Disrupt Reality": {
+            "name": "扰乱现实 Disrupt Reality",
+            "description": "<p>你的幻灵对位面之扰乱使魔法变得不稳定且难以使用。你的幻灵在@Template[distance:20|type:emanation]内获得「扰乱现实」光环。在光环内使用施放法术活动的生物须进行@Check[dc:7|type:flat]检定。若失败，则非该法术之常规效果，而是产生@UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{魔泉涌动}之效果。你的幻灵可作为具专注特征的单一动作激活或停用此光环。</p>"
+        },
+        "Effect: Gelatinous Expansion": {
+            "name": "效果：胶状膨胀 Effect: Gelatinous Expansion",
+            "description": "<p>你的黏液调整其形态以适应需要。你的幻灵选择下列效果之一，至下回合结束。同时只能激活一个效果。</p>\n<p><strong>酸性粘液：</strong>你幻灵之触为酸性。对你的幻灵进行近战攻击检定成功的生物，承受@Damage[(floor(@actor.level/2))[persistent,acid]]{持续酸性}伤害，等于你等级的一半。</p>\n<p><strong>弹性击打：</strong>你的幻灵可伸展其拟肢与躯体。你幻灵的徒手攻击触及距离增加5尺。</p>\n<p><strong>抓握黏液：</strong>你幻灵之黏液附着于其所触者，啃噬之。当你的幻灵成功@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}一名敌人时，敌人承受@Damage[(floor(@actor.level/2))[persistent,acid]]{持续酸性}伤害，等于你等级的一半。</p>\n<p><strong>武器形态：</strong>你的幻灵塑形其徒手攻击，改变其属性。你的幻灵将其近战徒手主要攻击变更为它原本可在1级时选择的另一项徒手主要攻击，并获得新选择对应的特征与伤害骰。</p>\n<div>\n<section class=\"secret\">\n<p>从下列列表中加入你所选攻击。建议存储替代攻击以备后用，这样你不必在每次选择此效果时重新加入符文或幻灵打击可能具备的其他效果。</p>\n<ul style=\"columns:2;column-width:15rem\">\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.8dyatrsCMoIPuOlE]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.8IodRUpyU4nXGyAv]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.cIAB28BfwNA2uTQv]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.GEVoWzCBjidkO6DG]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.8EJNylotPDelRtZK]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.XNgPUKsnRQO2OS2O]</li>\n<li>@UUID[Compendium.pf2e-animal-companions.AC-Features.Item.ZXrAWVLwKxz5kovL]</li>\n</ul>\n</section>\n</div>"
+        },
+        "Protean Riddler": {
+            "name": "原蛋谜师 Protean Riddler",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+0，魅力+3；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Ephemeral Existence": {
+            "name": "虚渺存在 Ephemeral Existence",
+            "description": "<p>你的幻灵是由梦质构成的造物，你的梦境会改变其本质构造。每日准备期间，你的幻灵可将其某项进化专长变更为另一个其可使用的1级进化专长，因为其形态体现了不断变化的身份。此变更持续1天，但幻灵可于次日每日准备期间选择延续此变更或将其变更为另一适当的进化专长。你的幻灵仍须满足新进化专长之任何前置条件，且如该进化专长是其另一进化专长的前置条件，则不能变更。它获得施放法术活动并习得@UUID[Compendium.pf2e.spells-srd.0zU8CPejjQFnhZFI]{虚构幻术}，可作为内禀灵能戏法施放。</p>"
+        },
+        "Village": {
+            "name": "村落 Village",
+            "description": "<p>你那金色面具的幻灵潜伏于市井，与金钱或人造之物打交道。它获得金属特征。你的幻灵无视由人造障碍与人群造成的困难地形。</p>"
+        },
+        "Jaathoom": {
+            "name": "佳萨睦 Jaathoom",
+            "description": "<p>你的巨灵幻灵具有空气特征。你的幻灵可悬浮，但仍与你相系。你的幻灵具等于其陆地速度的飞行速度，但其机动性受限。当你的幻灵使用@UUID[Compendium.pf2e.actionspf2e.cS9nfDRGD83bNU1p]{飞行}时，它不能升至离地几英寸以上。这意味着你的幻灵可在多种困难或危险地形之上移动而不必缓慢通过或受到伤害——尽管它不能无限飞行。你的幻灵可以@UUID[Compendium.pf2e.actionspf2e.d5I6018Mci2SWokk]{跳跃}、@UUID[Compendium.pf2e.actionspf2e.2HJ4yuEFY1Cast4h]{跳高}、@UUID[Compendium.pf2e.actionspf2e.JUvAvruz7yRQXfz2]{跳远}及类似动作，所有需用陆地速度计算的，皆改用其飞行速度；并可使用特技代替运动进行这些检定。若你选择@UUID[Compendium.pf2e.feats-srd.xXHoyccK5ZG2AJKg]{熟练伙伴}职业专长，你的幻灵在满足技能专长前置时——如该前置适用于此类动作——可使用其特技熟练度代替运动熟练度。你幻灵的第二项技能为特技。</p>\n<hr />\n<p>[[/act leap skill=acrobatics]]</p>\n<p>[[/act high-jump skill=acrobatics]]</p>\n<p>[[/act long-jump skill=acrobatics]]</p>"
+        },
+        "Arbiter of the Path": {
+            "name": "路途仲裁者 Arbiter of the Path",
+            "description": "<p>你的幻灵已通晓其路径，其每一步皆是开辟道路而非循路而行。你的幻灵按其所束缚之领域获得对应效果。</p>\n<ul>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.SY84YXTJ7YI1XdiS]{责任}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.ipfhdIacg4dFSJLE]{命运}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.X1SqLaqsQgOM3vLg]{知识}</strong></li>\n<li style=\"font-weight:bold\">@UUID[Compendium.pf2e-summoners-plus.misc.Item.qOcbAADPmp9bMQnC]{时间}</li>\n</ul>"
+        },
+        "Heart of a Warrior": {
+            "name": "战士之心 Heart of a Warrior",
+            "description": "<p><strong>需求</strong>你的幻灵处于至少有一名敌人的遭遇战中。</p>\n<hr />\n<p>你的幻灵在战场上方显其威。1分钟内，你的幻灵对一名等级不高于你等级–4级以上的生物进行打击或运动连击成功时，获得等于2加你等级一半之临时生命值，至下回合结束。</p>"
+        },
+        "Terrifying Smite": {
+            "name": "震慑击 Terrifying Smite",
+            "description": "<p>你的幻灵对触及范围内一名将你或盟友置于触及内之敌人进行打击。命中时，目标额外承受@Damage[3d8[spirit]]伤害，并@UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧2级}。亵渎生物若惊惧，则不能将其惊惧状态降至1以下，除非花费一个具专注特征的单一动作以抵御你幻灵的圣力。</p>"
+        },
+        "Vitality Springs Forth": {
+            "name": "生命力涌现 Vitality Springs Forth",
+            "description": "<p>你的幻灵对生命之触如此强大，即便它已离开，效果仍能持续。当你的幻灵恢复一生物的生命值时，它授予该生物等于你等级一半的@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.fJSNOw4zHGbIm4bZ]{快速治疗}，持续4轮。当你的幻灵对一生物造成生命力伤害时，该生物承受@Damage[(floor(@actor.level/2))[persistent,vitality]|traits:item:slug:vitality-springs-forth]等于你等级一半的伤害。你的幻灵获得@UUID[Compendium.pf2e-summoners-plus.misc.W5llrHBDsYYG68ep]{爆发生命泉}免费动作。</p>\n<hr />\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.DC10UMpCz4sJmwcU]{效果：生命力涌现}</p>"
+        },
+        "Project Senses": {
+            "name": "投射感官 Project Senses",
+            "description": "<p><strong>需求</strong>你的幻灵处于解显化状态。</p>\n<hr />\n<p>你的幻灵将其感官投射至你身上，使你能借其感官感知。当你这样做时，你可使用幻灵的任一感官或能力，借由幻灵之躯进行感知与技能检定，至多10分钟。你可解除该效果。</p>\n<hr />\n<p><strong>特别</strong>此动作具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。你的幻灵亦可使用此能力。当它如此做时，则将其感官投射至你的躯体之中。</p>"
+        },
+        "Jabali Shuyookh": {
+            "name": "佳巴里舒由可 Jabali Shuyookh",
+            "description": "<p>你的幻灵碾压被其受擒的生物，对成功被其@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}（或借其能力受擒）的生物造成@Damage[(@actor.level)[bludgeoning]]{等于其等级的钝击伤害}。当你的幻灵赐予愿望时，它以最简单方式实现愿望。如愿望声明时词数超过5个，则需进行@Check[dc:10|type:flat]。</p>"
+        },
+        "Glory Seeker": {
+            "name": "求荣者 Glory Seeker",
+            "description": "<p><strong>需求</strong>你的幻灵处于@UUID[Compendium.pf2e-summoners-plus.misc.BPn644yIO8XN3MGs]{战士之心}效果下。</p>\n<hr />\n<p>你的幻灵发出一声凶悍的挑战。你的幻灵尝试@UUID[Compendium.pf2e.actionspf2e.2u915NdUyQan6uKF]{挫败士气}一只它能看见的生物，无视与该生物语言不通的减值。如你的幻灵对该生物挫败士气成功，则在该生物回合结束时，若你的幻灵自其上一回合以来对其进行过成功打击或运动连击，则其惊惧状态等级不能低于1。</p>"
+        },
+        "Effect: Not Against Me": {
+            "name": "效果：莫加于吾 Effect: Not Against Me",
+            "description": "<p>你的幻灵坚硬以抗击攻击。你的幻灵获得+1状态加值至护甲等级与一项由其选择的豁免，持续1轮。</p>"
+        },
+        "Kizidhar": {
+            "name": "基兹哈 Kizidhar",
+            "description": "<p>你的巨灵幻灵具有植物与木属特征。你的幻灵无视植物造成的困难地形，并可借@UUID[Compendium.pf2e.actionspf2e.kMcV8e5EZUxa6evt]{挤入}穿过植物障碍；它每轮可挤过5尺，大成功时10尺。你的幻灵以此方式挤过时使用自然代替特技。你幻灵的第二项技能为自然。</p>\n<hr />\n<p>[[/act squeeze skill=nature]]</p>"
+        },
+        "Effect: Vitality Springs Forth": {
+            "name": "效果：生命力涌现 Effect: Vitality Springs Forth",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.misc.BwfIMZ7fGH3d9VFt]{生命力涌现}赋予</p>\n<hr />\n<p>当你的幻灵恢复一生物的生命值时，它授予该生物等于你等级一半的@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.fJSNOw4zHGbIm4bZ]{快速治疗}，持续4轮。</p>"
+        },
+        "Aura of Time": {
+            "name": "时间光环 Aura of Time",
+            "description": "<p>你的幻灵散发出一股使时间节奏更为坚硬的光环。你的幻灵在10尺爆发范围获得时间光环，使光环内生物在对抗会使其陷入「缓慢」状态的效果之豁免上获得+2状态加值。在光环内开始回合的生物，将其迅捷或缓慢状态的剩余时间减少1轮。</p>"
+        },
+        "Coordinated Stride": {
+            "name": "协调行走 Coordinated Stride",
+            "description": "<p><strong>需求</strong>你已显化至少2只幻灵。</p>\n<hr />\n<p>你的幻灵移至适当位置。你每只幻灵以单一动作行走。若其中任一具备对应移动类型，则可改为掘地、攀爬、飞行或游泳。</p>"
+        },
+        "Warpwave Strike": {
+            "name": "扭曲波打击 Warpwave Strike",
+            "description": "<p>你的幻灵以扰乱效果攻击。你的幻灵以其徒手攻击之一对一生物进行打击。如你幻灵之打击成功，则该目标须进行@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免。豁免失败的生物掷[[/r 1d8]]以确定效果。该效果持续[[/r 1d4]]轮。</p>\n<table style=\"width:100%;height:238px\" border=\"1\"><colgroup><col style=\"width:10%\"></col><col style=\"width:90%\"></col></colgroup>\n<tbody>\n<tr style=\"height:17px;padding-left:4px\"><td style=\"height:17px;padding-left:4px\">结果</td><td style=\"height:17px;padding-left:4px\">效果</td></tr>\n<tr style=\"height:51px;padding-left:4px\"><td style=\"height:51px;padding-left:4px\">1</td><td style=\"height:51px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙2级}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙3级}）</td></tr>\n<tr style=\"height:34px;padding-left:4px\"><td style=\"height:34px;padding-left:4px\">2</td><td style=\"height:34px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.yblD8fOR1J8rDwEQ]{困惑}并获得@Damage[4d6[temp-hp]]</td></tr>\n<tr style=\"height:34px;padding-left:4px\"><td style=\"height:34px;padding-left:4px\">3</td><td style=\"height:34px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.TkIyaNPgTZFBCCuh]{目眩}（大失败时@UUID[Compendium.pf2e.conditionitems.XgEqL1kFApUbl5Z2]{目盲}）</td></tr>\n<tr style=\"height:34px;padding-left:4px\"><td style=\"height:34px;padding-left:4px\">4</td><td style=\"height:34px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{力竭2级}（大失败时@UUID[Compendium.pf2e.conditionitems.MIRkyAjyBeXivMa7]{力竭3级}）</td></tr>\n<tr style=\"height:17px;padding-left:4px\"><td style=\"height:17px;padding-left:4px\">5</td><td style=\"height:17px;padding-left:4px\">被能量丝缚而@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}</td></tr>\n<tr style=\"height:17px;padding-left:4px\"><td style=\"height:17px;padding-left:4px\">6</td><td style=\"height:17px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.nlCjDvLMf2EkV2dl]{迅捷}（仅可行走、打击或快步）</td></tr>\n<tr style=\"height:17px;padding-left:4px\"><td style=\"height:17px;padding-left:4px\">7</td><td style=\"height:17px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{缓慢1级}</td></tr>\n<tr style=\"height:17px;padding-left:4px\"><td style=\"height:17px;padding-left:4px\">8</td><td style=\"height:17px;padding-left:4px\">@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞2级}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞3级}）</td></tr>\n</tbody>\n</table>"
+        },
+        "Aura of Fate": {
+            "name": "命运光环 Aura of Fate",
+            "description": "<p>你的幻灵散发出一股稳定命运的光环。你的幻灵在10尺爆发范围获得命运光环，光环内所有生物不受幸运或厄运效果影响。它可作为具专注特征的单一动作激活、停用或调整目标效果。</p>"
+        },
+        "Path: Knowledge": {
+            "name": "路径：知识 Path: Knowledge",
+            "description": "<p>你与你的幻灵获得邪逆：你绝不可摧毁或隐蔽知识。你的幻灵在学院学识知识技能上变为受训。</p>"
+        },
+        "Effect: Synergy": {
+            "name": "效果：协同 Effect: Synergy",
+            "description": "<p>@UUID[Compendium.pf2e-summoners-plus.misc.eCBKJ4SEwF7Hiuvb]{协同} @UUID[Compendium.pf2e-summoners-plus.misc.VucxKRn4BC9O3gCf]{协同连招}</p>"
+        },
+        "Zuhra": {
+            "name": "祖乎拉 Zuhra",
+            "description": "<p>你的巨灵幻灵具有金属特征。你的幻灵对电击获得等于你等级一半的抗性（最低1）。当你的幻灵成为造成电击伤害效果的目标时，它获得一股斥退光环，使其在1轮内护甲等级获得+1状态加值。你幻灵的第二项技能为制作。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.Item.H3zwHiUNTrFqnGh5]{效果：祖乎拉电击斥退}</p>"
+        },
+        "Effect: Zuhra Electricity Repel": {
+            "name": "效果：祖乎拉电击斥退 Effect: Zuhra Electricity Repel",
+            "description": "<p>当你的幻灵成为造成电击伤害效果的目标时，它获得一股斥退光环，使其在1轮内护甲等级获得+1状态加值。</p>"
+        },
+        "Punishing Contract": {
+            "name": "惩处契约 Punishing Contract",
+            "description": "<p>你的幻灵起草一份契约并以30尺内的一名生物为目标。目标须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC。该效果持续至下回合结束，但你的幻灵可花费具专注特征的单一动作（如维持法术）将「力竭」状态延续至下回合结束，最长为1分钟。若目标具亵渎特征，则其豁免承受–2环境减值。无论成功与否，目标暂时免疫此效果1天。</p>\n<hr />\n<p><strong>大成功</strong>目标不受影响。</p>\n<p><strong>成功</strong>目标可选@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级}或下跪以@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。</p>\n<p><strong>失败</strong>目标立即下跪倒地，并力竭1级。</p>\n<p><strong>大失败</strong>同失败，但目标@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭2级}。</p>"
+        },
+        "Mountain": {
+            "name": "山岳 Mountain",
+            "description": "<p>你的幻灵是山岳与平原之伟大武者。它获得土系特征。你的幻灵无视由土与岩石造成的困难地形。</p>"
+        },
+        "Traveled Path": {
+            "name": "漫游之路 Traveled Path",
+            "description": "<p>你的幻灵之路不断延续，每前进一步便愈加熟悉、愈加坚定。你的幻灵获得一项与所束缚领域对应的光环。该光环可在你幻灵花费具专注特征的单一动作时激活或停用。</p>\n<ul>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.LRrFK1WVnmW3bVDk]{责任}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.FbWDpg08LxCYE9Lr]{命运}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.5R9dJUYsFVZx9CxK]{知识}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.DV9enusyYTIMrXPS]{时间}</strong></li>\n</ul>"
+        },
+        "Zuhra Shuyookh": {
+            "name": "祖乎拉舒由可 Zuhra Shuyookh",
+            "description": "<p>你的幻灵通过适应周围环境进行调谐。你的幻灵获得一处影响@Template[distance:10|type:emanation]的光环，且光环内方格对穿戴金属护甲或由金属构成的生物为困难地形。在此光环内由或对生物所做的金属武器打击，其攻击检定承受–2状态减值。你的幻灵免疫自身光环之效果，并可作为具专注特征的单一动作激活或停用此光环。当你的幻灵赐予愿望时，它会尝试以最短时长实现愿望。如愿望持续少于1周，则需@Check[dc:5|type:flat]；持续超过1周需@Check[dc:10|type:flat]；持续超过1月需@Check[dc:15|type:flat]。</p>"
+        },
+        "Warrior Brute": {
+            "name": "战士莽夫 Warrior Brute",
+            "description": "<p>力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Effect: Ultimate Form (Occult Phenomenon)": {
+            "name": "效果：终极形态（灵能现象） Effect: Ultimate Form (Occult Phenomenon)",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.items.pVH6bVC39YcxIObM]{终极形态}赋予</p>\n<p><strong>奥秘全知者</strong></p>\n<ul>\n<li>速度40尺</li>\n<li>对物理伤害的5抗性</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 心智粉碎（触及30尺）<strong>伤害</strong>6d8+4心灵；</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 痛苦之念（射程60尺）<strong>伤害</strong>6d8+4灵魂；</li>\n<li><strong>异界世界</strong>（奥术，灵能）60尺。奇异现象自显，扭曲并改变你幻灵周围之世界。区域内所有生物获得25尺飞行速度；若已惊惧，则不能将「惊惧」状态降至1级以下。</li>\n</ul>"
+        },
+        "Power of the Incarnate": {
+            "name": "化身之力 Power of the Incarnate",
+            "description": "<p>你的幻灵汲取其暂时之力。你的幻灵呼唤化身之力并获得下列效果之一。</p>\n<ul>\n<li><strong>退散</strong>你的幻灵指向特定敌人，敌人须进行@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则被推离你的幻灵10尺，大失败时为20尺。如该生物碰触到物体或其他生物，则在下回合开始前处于措手不及状态。此为强制移动。</li>\n<li><strong>畏惧吾威</strong>你的幻灵尝试震慑欲接近它的目标。@Template[distance:10|type:emanation]内的敌人须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)|traits:emotion,fear,mental]豁免对抗你的法术DC，否则@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}）。无论豁免结果如何，生物之后1分钟内对此效果免疫。该效果具情绪、恐惧与心灵特征。</li>\n<li><strong>此为汝之惩罚</strong>你的幻灵射出一道力量之矢，在@Template[distance:30|type:line]中造成（@Damage[(2+(floor(@actor.level/2)))d4[@actor.flags.pf2e.incarnate-type]]）伤害——其值等于你@UUID[Compendium.pf2e-summoners-plus.misc.0fvd9aASh27TJYOj]{化身降临}之伤害（基础@Check[type:reflex|basic:true|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免）。该伤害与化身降临之伤害类型相同。</li>\n<li><strong>莫加于吾</strong>你的幻灵坚硬以抗击攻击。你的幻灵获得+1状态加值至护甲等级与一项由其选择的豁免，持续1轮。@UUID[Compendium.pf2e-summoners-plus.misc.CteoePJ8cCHYrkDP]{效果：莫加于吾}</li>\n<li><strong>无路可逃</strong>你的幻灵可立即朝一名敌人行走。如其结束移动时该敌人在其触及范围内，则可对该敌人进行打击。</li>\n<li><strong>胆敢如此</strong>你的幻灵以漩涌能量回击胆敢攻击它者。1轮内，每当你的幻灵被打击命中时，攻击它的生物承受等于@Damage[2 + (@actor.level)[@actor.flags.pf2e.incarnate-type]]{2+你的等级}的伤害。该伤害与化身降临之伤害类型相同。</li>\n</ul>\n<hr />\n<p><strong>特别</strong>此活动具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>"
+        },
+        "Aura of Duty": {
+            "name": "责任光环 Aura of Duty",
+            "description": "<p>你的幻灵散发出一股召唤诚信与真理的光环。你的幻灵在10尺爆发范围获得责任光环，使被你幻灵挑战的生物在光环内对非你或幻灵的目标的攻击检定承受–1环境减值。你幻灵的额外灵魂伤害提升至2。</p>"
+        },
+        "Overflowing Vigor": {
+            "name": "充沛活力 Overflowing Vigor",
+            "description": "<p>你的幻灵散发活力。@Template[distance:15|type:emanation]内所有活体盟友恢复@Damage[(ceil(@actor.level/2))d4[healing]]生命值，区域内所有敌人承受@Damage[(ceil(@actor.level/2))d4[vitality]]伤害（基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免对抗你的法术DC）。</p>\n<p>9级及之后每2级，所恢复生命值与所造成伤害各增加1d4。</p>"
+        },
+        "Ooze Biology": {
+            "name": "黏液生理 Ooze Biology",
+            "description": "<p>你的幻灵具有不寻常的解剖结构，使其行为与其他幻灵不同。你获得@UUID[Compendium.pf2e.feats-srd.AmP0qu7c5dlBSath]{健壮}通用专长。你的幻灵免疫重击命中与精准伤害。你的黏液每轮可@UUID[Compendium.pf2e.actionspf2e.kMcV8e5EZUxa6evt]{挤入}5尺（大成功时10尺），且在判断其能挤过何种空间时将其体型视为小一档。你的黏液对其护甲等级有持续性–2减值。</p>"
+        },
+        "Effect: Cryptic Coloration": {
+            "name": "效果：诡奇色变 Effect: Cryptic Coloration",
+            "description": ""
+        },
+        "Light": {
+            "name": "光 Light",
+            "description": "<p>你的幻灵发光并令人目眩，获得光特征。你的幻灵在20尺爆发范围散发明亮光线，且其后再20尺为昏暗光线。它可作为具专注特征的单一动作激活或停用此光环；但即便光环停用，你的幻灵仍在其方格内散发明亮光线，并向外5尺散发昏暗光线。当你的幻灵使用具生命力特征的能力或打击重击命中时，受效果影响的敌人须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)|traits:light,visual]豁免对抗你的法术DC，否则@UUID[Compendium.pf2e.conditionitems.TkIyaNPgTZFBCCuh]{目眩}1轮，大失败时为1分钟。该效果具光与视觉特征。</p>"
+        },
+        "Aeon Enforcer": {
+            "name": "永恒执行者 Aeon Enforcer",
+            "description": "<p>力量+4，敏捷+2，体质+2，智力+1，感知+1，魅力-1；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Effect: Arbitrate Fate (Misfortune)": {
+            "name": "效果：仲裁命运（厄运） Effect: Arbitrate Fate (Misfortune)",
+            "description": ""
+        },
+        "Effect: Arbitrate Fate (Fortune)": {
+            "name": "效果：仲裁命运（幸运） Effect: Arbitrate Fate (Fortune)",
+            "description": ""
+        },
+        "Whirlwind Wings": {
+            "name": "旋风之翼 Whirlwind Wings",
+            "description": "<p>你的幻灵以惊人之速飞行，途中横扫穿过对手。飞行两次，并在你移动的任意时刻对触及范围内最多四名不同的生物进行打击。这些攻击各计入你的多重攻击减值。</p>"
+        },
+        "Genie Nemesis": {
+            "name": "巨灵宿敌 Genie Nemesis",
+            "description": "<p>力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Effect: Occult Phenomena": {
+            "name": "效果：灵能现象 Effect: Occult Phenomena",
+            "description": "<p>奇异现象自显，扭曲并改变你幻灵周围之世界。区域内所有生物获得25尺飞行速度；若已惊惧，则不能将「惊惧」状态降至1级以下。</p>"
+        },
+        "Effect: Challenge": {
+            "name": "效果：挑战 Effect: Challenge",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.misc.umwOrIVGPxbRGbMw]{挑战}赋予</p>"
+        },
+        "Elemental": {
+            "name": "元素 Elemental",
+            "description": "<p>你的幻灵之活力与火或水相融合，并获得对应特征。当你的幻灵造成生命力伤害时，它可选择将一半的生命力伤害变为火焰伤害（若选火）或钝击伤害（若选水），最低1点。你的幻灵若选火则获得对寒冷与水的弱点（等于你等级一半），若选水则获得对火的弱点（等于你等级一半）。</p>"
+        },
+        "Path: Duty": {
+            "name": "路径：责任 Path: Duty",
+            "description": "<p>你与你的幻灵获得邪逆：你绝不可不履行承诺、誓言或约定。你的幻灵可花费具听觉与专注特征的单一动作向单一生物发出挑战。该挑战持续1分钟，或直至你的幻灵挑战另一生物。你的幻灵对其挑战过的生物的打击额外造成1点灵魂伤害。</p>"
+        },
+        "Shuyookh Ascendancy": {
+            "name": "舒由可崛起 Shuyookh Ascendancy",
+            "description": "<p>你的巨灵幻灵进阶为「舒由可」之衔，作为同类巨灵中更为强大者并获得改变现实之能力。你的巨灵幻灵按其巨灵化身获得对应效果。20级时，你的幻灵可为一凡人进行@UUID[Compendium.pf2e.spells-srd.6dDtGIUerazSHIOu]{祈愿术}仪式，无需任何耗费或副施法者，每年使用一次，且必须遵守其巨灵血脉所设之要求。如该巨灵在与其愿望相关的硬性检定上成功，则授予「成功」效果，否则结果为「失败」。</p>"
+        },
+        "Engulfing Propensity": {
+            "name": "吞没倾向 Engulfing Propensity",
+            "description": "<p>你的黏液可借其黏性物质吞没生物。你的幻灵获得@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.zU3Ovaet4xQ5Gmvy]{包卷}活动。在判定能吞没何种生物时，你的幻灵将其体型视为大一档。</p>\n<p>你幻灵的吞没具@Check[type:reflex|dc:resolve(@actor.attributes.classOrSpellDC.value)|traits:action:engulf]等于你的法术DC，造成@Damage[4d10[acid]]伤害；@Check[type:athletics|dc:resolve(@actor.attributes.classOrSpellDC.value)|traits:action:escape]{逃脱}DC等于你的法术DC，且破裂为20。</p>"
+        },
+        "Aeon Adjudicator": {
+            "name": "永恒裁定者 Aeon Adjudicator",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+2，感知+2，魅力-1；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Mystic Training": {
+            "name": "神秘训练 Mystic Training",
+            "description": "<p>你的幻灵赋予你超越其他召唤师的魔法。你幻灵的徒手主要攻击是其魔法爆裂——一种远程徒手攻击，射程增量为30尺，造成1d6伤害并具奥术特征。在该远程攻击检定中，它使用魅力或智力代替敏捷。该徒手攻击造成下列类型之一的伤害：酸性、钝击、寒冷、电击、火焰、穿刺、挥砍、生命力或虚空。这些选择在你首次获得幻灵时确定且不能更改。若你选择@UUID[Compendium.pf2e.feats-srd.oVSlTmdmho8ZQo2k]{远程战士}职业专长，你将改为获得适合你幻灵的近战徒手主要攻击，而非该专长授予的远程徒手攻击。若你选择@UUID[Compendium.pf2e.feats-srd.kFpVgcqREAfDmjXp]{高级武艺}职业专长，你幻灵的远程徒手攻击获得「多用」特征，并附带你1级时本可选择的另一种伤害类型。</p>\n<p>你的幻灵获得@UUID[Compendium.pf2e.feats-srd.WfbmFsRxbVyzMmCz]{魔法导师}召唤师专长——即使不满足等级前置——但你只获得一个戏法。如同任何由专长按名称授予的能力一样，你不能将「魔法导师」改训为其他专长。从你幻灵传统中选择一个常规奥术法术或其他奥术法术，最高至你能施放的最高阶法术（最高9阶）。该法术须为3动作或更短可施放。该法术为你的@UUID[Compendium.pf2e-summoners-plus.misc.ya6e8AnzVvDxp6yD]{消耗偏爱法术}法术。每升一级，你的幻灵可改选一个新的偏爱法术以替换原先选择。</p>"
+        },
+        "Power of the Zuhra": {
+            "name": "祖乎拉之力 Power of the Zuhra",
+            "description": "<p>你的巨灵幻灵可借其反光皮肤令人目眩并致盲。你的幻灵可花费一个@UUID[Compendium.pf2e.actionspf2e.pvQ5rY2zrtPI614F]{交互}动作以形成反射面，将光线反射到30尺内另一生物的眼中。该生物须进行@Check[type:reflex|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，失败时@UUID[Compendium.pf2e.conditionitems.TkIyaNPgTZFBCCuh]{目眩}1轮，大失败时@UUID[Compendium.pf2e.conditionitems.XgEqL1kFApUbl5Z2]{目盲}1轮。该效果具失能与视觉特征。</p>"
+        },
+        "Arbiter of Duty": {
+            "name": "责任仲裁者 Arbiter of Duty",
+            "description": "<p>你的幻灵为各种形式之责任的执行者。你幻灵打击的额外灵魂伤害提升至6。当你的幻灵打击已被挑战的生物时，该打击还附加死亡特征——使该生物在生命值降至0时立即被杀。当一生物以此方式被杀时，与之沟通、令其复生、变其为不死生物或扰乱其后世之尝试均失败，除非该效果之对抗阶级高于你等级一半，或来自神器或神祇。</p>"
+        },
+        "Arbitrate Fate": {
+            "name": "仲裁命运 Arbitrate Fate",
+            "description": "<p>你的幻灵以不扰乱命运自然流向之方式拨弄命运之丝。每小时一次，你的幻灵可花费具专注特征的单一动作令一生物对其下次攻击检定、豁免或技能检定掷两次。幻灵可选择取较佳或较差结果，分别获得幸运或厄运特征。该效果忽略生物对幸运或厄运效果的任何免疫（如来自你幻灵的光环）。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.Item.PMdQZwwfcftloNDC]{效果：仲裁命运（幸运）} @UUID[Compendium.pf2e-summoners-plus.misc.Item.P4W6xEUyXOtaqWcU]{效果：仲裁命运（厄运）}</p>"
+        },
+        "Path: Fate": {
+            "name": "路径：命运 Path: Fate",
+            "description": "<p>你与你的幻灵获得邪逆：你绝不可主动尝试改变预言或命运。你的幻灵不受你或其自身之外的生物所发动的、具幸运或厄运特征的能力或法术的影响。</p>"
+        },
+        "Arcane Link": {
+            "name": "奥术链结 Arcane Link",
+            "description": "<p>你的幻灵将你作为唤起其奥术之力的载体。你的幻灵获得@UUID[Compendium.pf2e-animal-companions.AC-Evolution-Feats.Item.en0ikSriHVja8kGM]{魔法导师}专长——即使不满足等级前置。当你或你的幻灵使用施放法术活动时，你可选择以你或幻灵的位置作为施法点以及效果起点。</p>"
+        },
+        "Jaathoom Shuyookh": {
+            "name": "佳萨睦舒由可 Jaathoom Shuyookh",
+            "description": "<p>你的巨灵幻灵飞行速度的机动性不再受限，且可每10分钟一次（而非每日一次）将@UUID[Compendium.pf2e.spells-srd.XXqE1eY3w3z6xJCB]{隐形术}作为内禀奥术法术于自身施放。当你的幻灵赐予愿望时，它先获得@UUID[Compendium.pf2e.spells-srd.41TZEjhO6D1nWw2X]{卜筮术}法术之效果以预知该愿望之结果，然后再完成仪式——以了解愿望的后果。如愿望后果好坏参半或为坏，需@Check[dc:5|type:flat]；如后果毫无结果，需@Check[dc:10|type:flat]。</p>"
+        },
+        "Forest": {
+            "name": "森林 Forest",
+            "description": "<p>竹林与森木乃你幻灵之领地。它获得木属特征。你的幻灵无视由植物与植被造成的困难地形。</p>"
+        },
+        "Dream Creature": {
+            "name": "梦境造物 Dream Creature",
+            "description": "<p>力量+4，敏捷+2，体质+1，智力+0，感知+1，魅力+1；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Extraneous Anatomy": {
+            "name": "多余解剖 Extraneous Anatomy",
+            "description": "<p>你幻灵的解剖变得更加多余且不稳定。你的幻灵从@UUID[Compendium.pf2e-summoners-plus.misc.coFrRiztDPcMRkyp]{非自然生理}中再选一个1级时未选的项目。你的幻灵获得其所有效果，且使用难言展示时，可获得其任一或两项选择之效果。你在其相关技能或（如已受训于该技能）另一项技能上变为受训。</p>"
+        },
+        "Effect: Ultimate Form (Arcane Omniscient)": {
+            "name": "效果：终极形态（奥秘全知者） Effect: Ultimate Form (Arcane Omniscient)",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.items.pVH6bVC39YcxIObM]{终极形态}赋予</p>\n<p><strong>奥秘全知者</strong></p>\n<ul>\n<li>速度50尺</li>\n<li>对魔法的5抗性</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 奥术之触（触及30尺，敏捷）<strong>伤害</strong>8d4+8力场；</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 奥术箭矢（射程增量60尺，多用酸性、寒冷、电击、火焰、毒素、音波）<strong>伤害</strong>6d10+10力场；</li>\n<li><strong>无所不知 <span class=\"action-glyph\">1</span></strong>（奥术，幸运）你的幻灵以你的奥秘调整值对任何主题进行回忆知识，掷两次取较高者。</li>\n</ul>"
+        },
+        "Rampaging Spirit": {
+            "name": "暴怒之灵 Rampaging Spirit",
+            "description": "<p>你的幻灵是一个愤怒的自然之灵，誓死要为某一巨大悲剧复仇，或欲将苦痛散播于其敌。你的幻灵可执行1分钟具专注特征的活动，从中型变为大型或缩回中型。处于大型时其触及增加至10尺，但永久@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}。你可取@UUID[Compendium.pf2e.feats-srd.H6qletvAJUCC1aIa]{庞大体型}专长以永久解除该笨拙状态。你的幻灵获得与其相关地形对应的特征与特殊效果——在你首次获得幻灵时从下列选项选取。</p>\n<ul>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.wJ1l0VU4fgeDEtsE]{北寒}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.fuXoTYH93NqhyHkc]{黑暗}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.TVOyOXMh4osaxeac]{森林}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.IPUaeoKWaPRS8SiU]{山岳}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.pyU2yWMD10AqHeAs]{天空}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.AwyRGc83uH8FSBRM]{村落}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.xdTL5U9G9ovTZz22]{火山}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.aMWiXeRZJFG8T5gM]{水域}</li>\n</ul>\n<hr />\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.4Wqr2arzll8BkYHQ]{效果：暴怒之灵}</p>"
+        },
+        "Synergy Combos": {
+            "name": "协同连招 Synergy Combos",
+            "description": "<p>你可消耗协同来强化你以同步特征使用的动作或活动。当你以此方式消耗@UUID[Compendium.pf2e-summoners-plus.misc.eCBKJ4SEwF7Hiuvb]{协同}时，协同在所有动作或活动完成后才被消耗。</p>\n<p><strong>同步强化：</strong>当你处于@UUID[Compendium.pf2e.spells-srd.HStu2Yhw3iQER9tY]{激励幻灵}效果下时，你或幻灵造成的第一次成功打击额外造成@Damage[1d6[precision]]精准伤害。如你至少为10级，提升至@Damage[2d6[precision]]精准伤害；如你至少为18级，提升至@Damage[3d6[precision]]精准伤害。如你以同步强化施放@UUID[Compendium.pf2e.spells-srd.TYbCj4dgXDOZou9k]{援护幻灵}，则其抗性等于法术环而非阶级一半。</p>\n<p><strong>同步快步：</strong>你与幻灵一同绕过敌人，不引发回应。你与幻灵各自快步至多10尺。</p>\n<p><strong>同步移动：</strong>当你或幻灵结束移动后，若都能对同一敌人进行近战打击，则你们之一可作为同一动作之一部分对该敌人进行打击。如你或幻灵持有远程徒手攻击或远程武器，则只要打击目标在远程攻击之首个射程增量内，你或幻灵亦可进行此打击。</p>\n<p><strong>同步预备：</strong>使用「同步预备」所需动作数从3动作活动减少至2动作活动，但你或幻灵预备的动作之一必须包含一次打击。</p>\n<p><strong>同步打击：</strong>若你或幻灵的打击至少有一次成功，则首个造成伤害的打击会令目标额外承受@Damage[2d6[persistent,bleed]]持续流血伤害。如你至少为10级，则该流血提升至@Damage[3d6[persistent,bleed]]；14级时为@Damage[4d6[persistent,bleed]]；至少18级时为@Damage[5d6[persistent,bleed]]。</p>\n<h2>显化协同连招</h2>\n<p>下列为显化的同步动作与活动之协同连招。</p>\n<p><strong>召唤化身：</strong>你令幻灵释放能量，产生其@UUID[Compendium.pf2e-summoners-plus.misc.0fvd9aASh27TJYOj]{化身降临}之效果，而非@UUID[Compendium.pf2e-summoners-plus.misc.LKTHOzyQjzuxDG66]{化身之力}之效果。</p>\n<p><strong>压制幻灵：</strong>你与幻灵之间形成完美合体，使你在融入幻灵状态下仍可正常行动。在效果持续期间，你与幻灵不能被分别作为目标，且你可使用对你更有利的护甲等级、免疫、抗性、豁免与弱点。</p>\n<p><strong>同步骑乘：</strong>你的幻灵行走两次而非一次。此外，这些行走可在你@UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{骑乘}之前发生；如你在此移动期间任意时刻与坐骑相邻，则可使用反应骑乘之。</p>"
+        },
+        "Arcane Ascendant": {
+            "name": "奥术升华者 Arcane Ascendant",
+            "description": "<p>力量+0，敏捷+3，体质+1，智力+0，感知+1，魅力+4；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Bursting Life Spring": {
+            "name": "爆发生命泉 Bursting Life Spring",
+            "description": "<p><strong>触发</strong>你将被打降至0生命值。</p>\n<hr />\n<p>你的幻灵以生命能量爆发，如同泉之富丽。你的幻灵使用@UUID[Compendium.pf2e-summoners-plus.misc.LVT1aZKpSBRkbCUd]{充沛活力}（即使原本不能使用此动作），然后解显化。下回合结束时，你的幻灵在原解显化位置或最近相邻方格（若该方格不能显化）以@UUID[Compendium.pf2e.actionspf2e.n5vwBnLSlIXL9ptp]{显现幻灵}显化。</p>"
+        },
+        "Effect: Acidic Viscosity": {
+            "name": "效果：酸性粘液 Effect: Acidic Viscosity",
+            "description": "<p><em>瞬时效果</em></p>\n<hr />\n<p>你幻灵之触为酸性。对你的幻灵进行近战攻击检定成功的生物，承受@Damage[(floor(@item.level/2))[persistent,acid]]等于你等级一半的伤害。</p>"
+        },
+        "Effect: Heart of a Warrior": {
+            "name": "效果：战士之心 Effect: Heart of a Warrior",
+            "description": "<p>1分钟内，你的幻灵对一名等级不高于你等级–4级以上的生物进行打击或运动连击成功时，获得等于2加你等级一半之临时生命值，至下回合结束。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.Item.3pj3i1GTwI10EMyk]{效果：战士之心-临时生命}</p>"
+        },
+        "Arbiter of Knowledge": {
+            "name": "知识仲裁者 Arbiter of Knowledge",
+            "description": "<p>你的幻灵已达成真知。你幻灵在学院学识知识技能上的熟练度提升为传奇。你的幻灵在@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}检定的成功度等级视为提升一阶。</p>"
+        },
+        "Inhibiting Excretion": {
+            "name": "抑制分泌 Inhibiting Excretion",
+            "description": "<p>你的幻灵从其身上分泌一种黏稠物质，覆盖区域阻碍生物每次穿越时的移动。你的幻灵在30尺内创造一个@Template[type:burst|distance:15]内的抑制物质区。被该物质填充的方格为困难地形。每个方格可被造成至少5点挥砍伤害或1点火焰伤害的单次攻击或效果清除。每个方格护甲等级为5，所有豁免自动失败。每当一名生物在该区域内开始进行移动动作或在移动动作期间进入该区域时，须进行@Check[type:athletics|dc:resolve(@actor.attributes.classOrSpellDC.value)]检定或@Check[type:reflex|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，以避免速度承受环境减值或@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}。已脱离分泌物的生物不再因此承受速度环境减值。你的幻灵免疫自身抑制分泌之效果。</p>\n<hr />\n<p><strong>大成功</strong>该生物不受影响，本回合不需再进行运动检定或豁免来对抗此效果。如其使用了运动检定，离开方格时清除离开方格中的物质。</p>\n<p><strong>成功</strong>该生物在动作期间不受影响。如其使用了运动检定，离开方格时清除离开方格中的物质。</p>\n<p><strong>失败</strong>该生物速度承受–10尺环境减值至下回合开始。</p>\n<p><strong>大失败</strong>该生物@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}至下回合开始，之后其速度承受–10尺环境减值1轮。它可以尝试@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱}以解除其禁足状态。</p>\n<hr />\n<p><strong>特别</strong>若你的幻灵具有「超越」能力，则爆发范围扩大为@Template[type:burst|distance:30]，射程增加至60尺，所需用以摧毁的挥砍与火焰伤害分别提升至15与3。</p>"
+        },
+        "True Archmage": {
+            "name": "真正大法师 True Archmage",
+            "description": "<p>你幻灵之施法举世无双。你的幻灵获得@UUID[Compendium.pf2e-animal-companions.AC-Evolution-Feats.yCSsQaTFINIbr9Gh]{魔法大师}专长——即使不满足前置条件。你的幻灵每日可额外使用@UUID[Compendium.pf2e-summoners-plus.misc.ya6e8AnzVvDxp6yD]{消耗偏爱法术}一次，但使用「消耗偏爱法术」后1小时内不能再次使用。</p>"
+        },
+        "Mind": {
+            "name": "心智 Mind",
+            "description": "<p>你幻灵之心智与无人能解之相同，使其触感令人不安。其徒手攻击额外造成1点心灵伤害。如该生物对心灵伤害免疫，则你幻灵的打击改为造成灵魂伤害而非心灵伤害。你幻灵之次要技能为欺诈。</p>"
+        },
+        "Glory Seeker (pF8t)": {
+            "name": "求荣者 Glory Seeker",
+            "description": "<p>你的幻灵在所有形式上都追求荣耀。如你未受训于威吓，则成为受训；如已受训，则改在另一项你选择的技能上受训。你的幻灵获得@UUID[Compendium.pf2e-summoners-plus.misc.CqysXOAp6rpgojAF]{求荣者}动作。</p>"
+        },
+        "Water": {
+            "name": "水域 Water",
+            "description": "<p>你的幻灵藏身于海洋或散布的岛屿之中。它获得两栖与水系特征。你的幻灵无视由水造成的困难地形。</p>"
+        },
+        "Ifrit": {
+            "name": "伊弗利特 Ifrit",
+            "description": "<p>你的巨灵幻灵具有火焰特征。你的幻灵获得对火焰的等于你等级一半（最低1）抗性，以及等量对寒冷与水的弱点。其获得火焰之罩，于伊弗利特周围@Template[distance:5|type:emanation]内形成光环。除你幻灵之外的生物若在光环内结束回合，承受@Damage[(max(1, (@actor.flags.pf2e.ifrit-calculation)))[fire]]{你等级一半}（最低1）的火焰伤害（基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免对抗你的法术DC）。你的幻灵可作为具专注特征的单一动作激活或停用此光环。你幻灵的第二项技能为威吓。</p>"
+        },
+        "Power of the Kizidhar": {
+            "name": "基兹哈之力 Power of the Kizidhar",
+            "description": "<p>你的巨灵幻灵可扎根以获取战斗优势。你的巨灵幻灵可作为单一动作将其足扎入地面或土中，变为@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}状态，使植物从以你幻灵方格一角为中心的@Template[distance:20|type:burst]之地面长出。该区域内所有地面方格变为困难地形，直至你的幻灵再次使用此能力解除其禁足状态。该能力具奥术、植物与木属特征。</p>"
+        },
+        "Effect: Legendary Soul": {
+            "name": "效果：传奇之魂 Effect: Legendary Soul",
+            "description": "<p>每日一次，你的幻灵可花费一个具专注与幻灵特征的单一动作，获得等于你等级一半的快速治疗，持续1分钟。该效果激活期间若被打降至0生命值，则效果立即终止。</p>"
+        },
+        "Gaze": {
+            "name": "凝视 Gaze",
+            "description": "<p>每回合开始时，你的幻灵可选定一名敌人将凝视固定于其上，该生物不能夹击你的幻灵（虽然其仍可为同伴提供夹击）。</p>"
+        },
+        "Genie Courier": {
+            "name": "巨灵信使 Genie Courier",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Unnatural Physiology": {
+            "name": "非自然生理 Unnatural Physiology",
+            "description": "<p>你的异种幻灵具有奇异特征——以其生理而言——保护它们免受针对要害的攻击。它们对重击命中与精准伤害获得等于你等级一半（最低1）的抗性。此外，你的幻灵在你首次选择幻灵时获得一种异常的生理附加。</p>\n<ul>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.1L5GPiooSE0safIE]{眼}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.ZAG5Z1aaiXoMAaUz]{心智}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.2z5ZjeCl2PhBhiQb]{口}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.sAIdHibLicq2cC3w]{皮肤}</li>\n</ul>"
+        },
+        "Tandem Mount": {
+            "name": "同步骑乘 Tandem Mount",
+            "description": "<p>你与幻灵合而为一地移动。你@UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{骑乘}你的幻灵并立即行走。如你的幻灵具有对应移动类型，则可改为掘地、攀爬、飞行或游泳，而非行走。</p>"
+        },
+        "Effect: Ultimate Form": {
+            "name": "效果：终极形态 Effect: Ultimate Form",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.items.pVH6bVC39YcxIObM]{终极形态}赋予</p>\n<p>授予基于你幻灵相联系的魔法传统的战斗形态。</p>"
+        },
+        "Manifest Mount Eidolon": {
+            "name": "显化坐骑幻灵 Manifest Mount Eidolon",
+            "description": "<p>你的幻灵出现，你骑乘其上，自动出现在你的方格中并将你移至适当位置——犹如你使用了@UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{骑乘}。如你的幻灵已显化，则改为令其解显化。</p>\n<p>使你幻灵得以显化的导管亦是你与它之间的纽带。你的幻灵必须始终保持在你100尺范围内，且不能自愿越过此限。如被强制移至此距离之外，或你被打降至0生命值，则你幻灵的物理形体消散：你的幻灵解显化，须再次使用「显化坐骑幻灵」方能重新显化。</p>\n<hr />\n<p><strong>特别</strong>此活动具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>"
+        },
+        "Synergy": {
+            "name": "协同 Synergy",
+            "description": "<p>当你与幻灵一同投入战斗时，你们形成美妙的对称，成为令人生畏的二人组。当你或幻灵成功打击一生物时，你便处于「协同」状态。这种共生状态称为@UUID[Compendium.pf2e-summoners-plus.misc.Item.H0W9EDjO1wwp38ty]{协同}——你要么处于协同状态，要么不处于。如你或幻灵作为活动之一部分进行成功打击，则在完成该活动后才获得协同。</p>\n<p>处于协同状态时，你们各自速度获得+5尺状态加值，且若你们都与同一生物相邻，则该生物对你们二人皆措手不及。</p>\n<p>通常你只在战斗遭遇中获得并使用协同；遭遇结束时，你失去协同。</p>"
+        },
+        "Final Form": {
+            "name": "最终形态 Final Form",
+            "description": "<p>你与你的幻灵已走过漫漫长路，它已达至其力量与征程之巅。在你的幻灵达到接纳、腐化或救赎之间作出选择。</p>\n<ul>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.weTN3YzkeXcfCFFU]{接纳}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.s9ynhm3yoGvsdfMe]{腐化}</li>\n<li>@UUID[Compendium.pf2e-summoners-plus.misc.t6vpAuOuNzhVsqlf]{救赎}</li>\n</ul>"
+        },
+        "Know All": {
+            "name": "无所不知 Know All",
+            "description": "<p>你的幻灵以你的奥秘调整值对任何主题进行@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，掷两次取较高者。</p>"
+        },
+        "Versatile Ranged Primary Attack": {
+            "name": "多用远程主要攻击 Versatile Ranged Primary Attack",
+            "description": "<p>若你选择@UUID[Compendium.pf2e.feats-srd.kFpVgcqREAfDmjXp]{高级武艺}职业专长，你幻灵的远程徒手攻击获得「多用」特征，并附带你1级时本可选择的另一种伤害类型。</p>"
+        },
+        "Effect: Ultimate Form (Divine Demiurge)": {
+            "name": "效果：终极形态（神圣造物主） Effect: Ultimate Form (Divine Demiurge)",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.items.pVH6bVC39YcxIObM]{终极形态}赋予</p>\n<p><strong>神圣造物主</strong></p>\n<ul>\n<li>速度40尺，飞行40尺</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 灵能爆裂（触及30尺，多用挥砍）<strong>伤害</strong>6d8+12灵魂</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 位面射线（射程100尺）<strong>伤害</strong>6d6+6灵魂</li>\n<li><strong>神性恩典</strong>（光环，神圣）60尺。注视你幻灵之敌人须以@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞1级}1轮（大失败时@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞2级}）。</li>\n</ul>"
+        },
+        "Effect: Aura of Duty": {
+            "name": "效果：责任光环 Effect: Aura of Duty",
+            "description": "<p>被你幻灵挑战的生物在光环内对非你或幻灵的目标的攻击检定承受–1环境减值。</p>"
+        },
+        "Power of the Jabali": {
+            "name": "佳巴里之力 Power of the Jabali",
+            "description": "<p>你的巨灵幻灵命令大地受擒敌人。当你的巨灵幻灵成功@UUID[Compendium.pf2e.actionspf2e.7blmbDrQFNfdT731]{推撞}或对一敌人施加强制移动，且该生物结束移动时与土或石相邻，则目标须进行@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则被该表面@UUID[Compendium.pf2e.conditionitems.kWc1fhmv9LBiTuei]{受擒}至下回合结束。</p>"
+        },
+        "Darkness": {
+            "name": "黑暗 Darkness",
+            "description": "<p>无论是夜幕之下还是地下深处之隐匿，你的幻灵皆是黑暗造物。它获得暗影或虚空特征。你的幻灵获得黑暗视觉。</p>"
+        },
+        "Kizidhar Shuyookh": {
+            "name": "基兹哈舒由可 Kizidhar Shuyookh",
+            "description": "<p>你的幻灵在所选生物心中种下野心之种。你的幻灵可花费具听觉、情绪与心灵特征的单一动作向另一生物呼喊，该生物须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则在下回合开始前不能进行反应（大失败时延至下回合结束）。当你的幻灵赐予愿望时，总是以对你或幻灵有利的方式解释。无论何种愿望，需@Check[dc:5|type:flat]。</p>"
+        },
+        "Swarm Attack": {
+            "name": "群体攻击 Swarm Attack",
+            "description": "<p>你的幻灵群没有徒手攻击，而是获得一项群体攻击：造成@Damage[(max(1, @actor.system.actions.0.item.baseDamage.dice)d6+@actor.system.abilities.str.mod)[@actor.flags.pf2e.evolutionFeats.energyHeartChoice]]加其力量调整值的钝击、穿刺或挥砍伤害（在你获得幻灵时选定）。如你的幻灵应获得需进行打击的、具幻灵特征之能力（如@UUID[Compendium.pf2e.actionspf2e.cx0juTYewwBmrYWv]{野兽冲锋}），幻灵可以群体攻击代替打击。该群体攻击在以单一动作使用时，对其方格内所有生物生效；以@Check[basic:true|type:reflex|dc:10]基础豁免对抗10+你幻灵徒手攻击调整值（含威能符文物品加值）。如其在一回合中多次使用群体攻击，则每次额外使用时DC减少5。</p><p>原本会因你群体幻灵徒手打击成功命中而生效之效果，将适用于豁免失败的生物；原本会因重击命中而生效之效果，将适用于大失败的生物。</p><hr /><p>@Damage[(max(1, @actor.system.actions.0.item.baseDamage.dice)d6+@actor.system.abilities.str.mod)[@actor.flags.pf2e.evolutionFeats.energyHeartChoice]]，@Check[basic:true|type:reflex|dc:10]</p><p><strong>DC减少5</strong> @Check[basic:true|type:reflex|dc:10|adjustment:-5]</p><p><strong>DC减少10</strong> @Check[basic:true|type:reflex|dc:10|adjustment:-10]</p>"
+        },
+        "Effect: Through the Veil": {
+            "name": "效果：穿越纱幕 Effect: Through the Veil",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.misc.woR8Dx2cxQAIE3Vf]{穿越纱幕}赋予。</p>\n<hr />\n<p>进入光环的生物会看到你梦境世界的难以置信之幻象——你的幻灵便由此而生。</p>\n<p>在光环内结束回合的敌人须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则承受所列效果。生物可使用@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}以尝试看穿其内之景象与声响。豁免成功或成功看穿你幻象的生物，对此效果暂时免疫1天。</p>\n<hr />\n<p><strong>大成功</strong>该生物不受影响。</p>\n<p><strong>成功</strong>该生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}1轮。</p>\n<p><strong>失败</strong>该生物目眩，且只要其留在爆发内或未识破你幻灵的幻象，便将该区域视为困难地形。</p>\n<p><strong>大失败</strong>同失败，但目标只要目眩即@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>"
+        },
+        "Death Curse": {
+            "name": "死亡诅咒 Death Curse",
+            "description": "<p><strong>触发</strong>你将被打降至0生命值或被杀。</p>\n<hr />\n<p>当你的心跳消逝时，你幻灵之力暴涨。触发生物须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC。如你将死去，则其豁免成功度比正常差一阶。你的幻灵可保持存在至下回合结束，且立即恢复其@UUID[Compendium.pf2e-animal-companions.AC-Features.I8fG26JJS29ZYwfZ]{喷吐武器}使用。如你的幻灵承受任何伤害，则你的濒死值如同濒死期间承受伤害般正常增加，且你的幻灵立即解显化。</p>\n<hr />\n<p><strong>大成功</strong>目标不受影响。</p>\n<p><strong>成功</strong>目标之灵魂受惩。其承受等于你等级的伤害——类型与你幻灵之喷吐武器同。</p>\n<p><strong>失败</strong>剧痛贯穿目标，因其罪行受惩。其承受等于你等级两倍的伤害（类型与你幻灵之喷吐武器同），并获得对该类型的等于你等级一半的弱点（持续1天）。该弱点先于你幻灵死亡诅咒之伤害适用。</p>\n<p><strong>大失败</strong>你的幻灵给敌人下了厄运。同失败，但弱点等于你的等级（而非一半），且只要目标具该弱点，便@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭2级}。</p>"
+        },
+        "Jabali": {
+            "name": "佳巴里 Jabali",
+            "description": "<p>你的巨灵幻灵具有土系特征。你的巨灵幻灵在对抗推撞或摔绊的强韧或反射DC上获得+2环境加值。该加值同样适用于对抗试图将你的巨灵打倒地的法术或效果之豁免。你幻灵的第二项技能为运动。</p>"
+        },
+        "Effect: Disrupt Reality": {
+            "name": "效果：扰乱现实 Effect: Disrupt Reality",
+            "description": "<p>在光环内使用施放法术活动的生物须进行@Check[dc:7|type:flat]检定。若失败，则非该法术之常规效果，而是产生@UUID[Compendium.pf2e.rollable-tables.N0pDFNCffTe2Du39]{魔泉涌动}之效果。</p>"
+        },
+        "Effect: Ancient Surge Resistance": {
+            "name": "效果：远古涌动抗性 Effect: Ancient Surge Resistance",
+            "description": "<p>你的幻灵获得对酸性、寒冷、电击或火焰伤害的抗性，数值等于你等级一半。若你的幻灵对所选伤害类型有弱点，则改为减少同等数值的弱点。</p>"
+        },
+        "Power of the Faydhaan": {
+            "name": "法易丹之力 Power of the Faydhaan",
+            "description": "<p>你的巨灵幻灵让你在谈判与对话中更易于斡旋。只要你的巨灵幻灵在场，你的外交检定（用于@UUID[Compendium.pf2e.actionspf2e.DCb62iCBrJXy0Ik6]{请求}或@UUID[Compendium.pf2e.actionspf2e.OX4fy22hQgUHDr0q]{建立印象}）以及社群检定（用于@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}）获得+1状态加值。如你正试图避免敌对行动或冲突，且该行为或知识有助于你非敌对之目标，则该状态加值提升至+2。</p>"
+        },
+        "Effect: Inhibiting Excretion": {
+            "name": "效果：抑制分泌 Effect: Inhibiting Excretion",
+            "description": "<p>该生物速度承受–10尺环境减值至下回合开始。</p>"
+        },
+        "Power of the Jaathoom": {
+            "name": "佳萨睦之力 Power of the Jaathoom",
+            "description": "<p>你的巨灵幻灵之飞行能力增强。你的幻灵可短暂飞行于空中。如你的幻灵不在结实地面结束移动，则其在你回合结束时坠落。每日一次，你的幻灵可将@UUID[Compendium.pf2e.spells-srd.XXqE1eY3w3z6xJCB]{隐形术}作为内禀奥术法术于自身施放。</p>"
+        },
+        "Arbiter of Fate": {
+            "name": "命运仲裁者 Arbiter of Fate",
+            "description": "<p>你的幻灵以不扰乱命运自然流向之方式拨弄命运之丝。每小时一次，你的幻灵可花费具专注特征的单一动作令一生物对其下次攻击检定、豁免或技能检定掷两次。幻灵可选择取较佳或较差结果，分别获得幸运或厄运特征。该效果忽略生物对幸运或厄运效果的任何免疫（如来自你幻灵的光环）。</p>"
+        },
+        "Destined Path": {
+            "name": "命定之路 Destined Path",
+            "description": "<p>你的幻灵遵循一条秩序之道，于其需要之处推行宇宙平衡。你的幻灵束缚于下列领域之一：责任、命运、知识或时间。你的幻灵获得施放法术活动并获得其相应领域的初始领域法术；你与幻灵共享一个专注池，如常规所述。你与幻灵按其相关领域获得邪逆。如你或幻灵曾犯下此邪逆，则你的幻灵失去其所有幻灵能力（包括从领域法术获得的专注点），直至你完成赎罪仪式。</p>\n<ul>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Q7WyqXKD7HYAHjU3]{责任}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Sswwenib1weVfTYe]{命运}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.GehAdhuYeTT1pf2Y]{知识}</strong></li>\n<li style=\"font-weight:bold\">@UUID[Compendium.pf2e-summoners-plus.misc.zmSA08qGvVO7PLBR]{时间}</li>\n</ul>\n<p><strong>特别</strong>你于8级时获得@UUID[Compendium.pf2e.feats-srd.uR44wELN9OlU68cL]{高级领域}牧师专长之取得资格；如你选择此专长，则必须为你幻灵所束缚之领域选择高级领域法术，且该法术由你的幻灵（而非你）施放。</p>"
+        },
+        "Coordinated Assault": {
+            "name": "协调攻击 Coordinated Assault",
+            "description": "<p><strong>需求</strong>你已显化3只幻灵，且处于至少有一名敌人的遭遇战中。</p>\n<hr />\n<p>你的幻灵组成对目标敌人的三方夹击。你每只幻灵各自行走至多其速度的一半并执行单一动作。这些动作可按任何顺序执行，但若以敌人为目标，则必须以所需的敌人为目标。你幻灵对所需敌人之首次打击其攻击检定获得+2环境加值，并造成两枚额外武器伤害骰。如你至少为10级，则提升为四枚额外伤害骰；如至少18级，则提升为六枚额外伤害骰。计算多重攻击减值时，幻灵之首次打击算作两次攻击。</p>"
+        },
+        "Plant": {
+            "name": "植物 Plant",
+            "description": "<p>你的幻灵创造茂盛生长，并获得植物特征。你的幻灵可@UUID[Compendium.pf2e.actionspf2e.pvQ5rY2zrtPI614F]{交互}以创造一个@Template[distance:5|type:emanation]内的植被造成困难地形，持续1轮。在后续回合，它可交互以将爆发范围扩大5尺并将持续时间延长1轮，最长可达5轮。当你的幻灵使用具生命力特征且影响区域之动作时，可选择将该区域同时设为困难地形持续1轮（除其常规效果外）。这些效果具植物特征。</p>"
+        },
+        "Effect: Change Shape": {
+            "name": "效果：变形 Effect: Change Shape",
+            "description": "<p><em>用于令牌变形之考量。</em></p>"
+        },
+        "Effect: Fabricate Weapon": {
+            "name": "效果：锻造武器 Effect: Fabricate Weapon",
+            "description": ""
+        },
+        "Genie Incarnation": {
+            "name": "巨灵化身 Genie Incarnation",
+            "description": "<p>你的巨灵幻灵具有以下巨灵血脉之一：法易丹、伊弗利特、佳萨睦、佳巴里、基兹哈或祖乎拉。你的巨灵幻灵获得所选血脉对应的特征与能力。</p>\n<ul>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.nyiF0IeEkmEYEAMZ]{法易丹}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.aqBKsZZHyka7QQyT]{伊弗利特}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.B0KXimTqhww3Whc8]{佳萨睦}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.hcrOAHUUDHPNKCnO]{佳巴里}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.D8zVAh2ycPrSE4TU]{基兹哈}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.H2UaWm8aeM6jUtwb]{祖乎拉}</strong></li>\n</ul>"
+        },
+        "Manifest Splintered Eidolon": {
+            "name": "显化分裂幻灵 Manifest Splintered Eidolon",
+            "description": "<p>你的一只幻灵出现在与你相邻的空地中，然后可执行单一动作。或者，你可使用此动作选择令你的分裂幻灵之一解显化。</p>\n<p>使你幻灵得以显化的导管亦是你与它之间的纽带。你的分裂幻灵必须始终保持在你100尺范围内，且不能自愿越过此限。如被强制移至此距离之外，或你被打降至0生命值，则你幻灵的物理形体消散：你的幻灵解显化，须再次使用「显化分裂幻灵」方能重新显化。如分裂幻灵在你回合结束前未至少进行一次动作，则其解显化，须再次显化方能恢复。</p>\n<hr />\n<p><strong>特别</strong>此活动具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>"
+        },
+        "The Mind Makes it Real": {
+            "name": "心想即成 The Mind Makes it Real",
+            "description": "<p>你的幻灵可如清明梦者在其梦境中般轻易地改变现实之感知。你的幻灵获得施放@UUID[Compendium.pf2e.spells-srd.f8SBoXiXQjlCKqly]{幻象生物}与@UUID[Compendium.pf2e.spells-srd.2oH5IufzdESuYxat]{幻象造物}之能力，作为9阶灵能内禀法术，每日各一次。</p>"
+        },
+        "Vital Messenger": {
+            "name": "活力使者 Vital Messenger",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Reshape the Earth": {
+            "name": "重塑大地 Reshape the Earth",
+            "description": "<p>你幻灵之足迹使森林生长、群山崩塌。它创造一个@UUID[Compendium.pf2e.spells-srd.kOa055FIrO9Smnya]{石墙术}或@UUID[Compendium.pf2e.spells-srd.KsWhliKfUs3IpW3c]{棘墙术}，犹如以其施放该法术，且法术提升至8阶。</p>"
+        },
+        "Faydhaan": {
+            "name": "法易丹 Faydhaan",
+            "description": "<p>你的巨灵幻灵具有水系特征。你的幻灵可作为具专注特征的单一动作，将30尺内一个@Template[distance:5|type:burst]作为目标，自动熄灭区域内的非魔法火焰。此外，你的幻灵在对抗水系效果的护甲等级与豁免上获得+1状态加值，并可以其徒手攻击进行非致命攻击而不承受常规的–2环境减值。你幻灵的第二项技能为外交。</p>"
+        },
+        "Nightmare Creature": {
+            "name": "梦魇造物 Nightmare Creature",
+            "description": "<p>力量+2，敏捷+4，体质+0，智力+1，感知+0，魅力+2；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Accursed Oni": {
+            "name": "诅咒之鬼 Accursed Oni",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+0，魅力+3；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Warrior Skirmisher": {
+            "name": "战士游袭者 Warrior Skirmisher",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Shell Armor": {
+            "name": "甲壳护甲 Shell Armor",
+            "description": ""
+        },
+        "Sky": {
+            "name": "天空 Sky",
+            "description": "<p>无论是穿越风暴还是风扫之地，你的幻灵皆为天空之物。它获得空气或电击特征。你的幻灵获得@UUID[Compendium.pf2e.feats-srd.ZBhvJ9O8MvBFAlhq]{迅捷跳跃}技能专长——即使其原本不能取得技能专长。</p>"
+        },
+        "Arbiter of Time": {
+            "name": "时间仲裁者 Arbiter of Time",
+            "description": "<p>你的幻灵将时间作为武器使用。你的幻灵可施放@UUID[Compendium.pf2e.spells-srd.o6YCGx4lycsYpww4]{加速术}与@UUID[Compendium.pf2e.spells-srd.Item.WsUwpfmhKrKwoIe3]{缓慢术}，每小时各一次，作为神圣内禀法术，且这些内禀法术不算违反其邪逆。你的幻灵现可选择不缩短自身或光环内生物之迅捷与缓慢状态的剩余时间——在每一生物本应缩短状态时间时选择是否缩短。</p>"
+        },
+        "Effect: Shrink Down": {
+            "name": "效果：缩小 Effect: Shrink Down",
+            "description": "<p>你的幻灵缩小一个体型，最低可缩至超小型。</p>"
+        },
+        "Power of the Ifrit": {
+            "name": "伊弗利特之力 Power of the Ifrit",
+            "description": "<p>你的巨灵幻灵之火更为炽烈。其对火的抗性以及其火焰之罩光环造成的伤害都提升为等于你的等级。</p>"
+        },
+        "Effect: Entropic Entity": {
+            "name": "效果：熵化实体 Effect: Entropic Entity",
+            "description": "<p>当你的幻灵承受酸性、电击或音波伤害后，立即对该类型获得等于你等级的抗性。该效果持续1小时，或直至你的幻灵下次承受其他类型之一的伤害（此时其抗性变更为对应该类型）——以先发生者为准。</p>"
+        },
+        "Corruption": {
+            "name": "腐化 Corruption",
+            "description": "<p>你的鬼之愤怒愈发邪恶，已成为真正的毁灭之灵。你的幻灵体型增大一档，徒手攻击之伤害骰增大一档。此外，当你对你的幻灵使用@UUID[Compendium.pf2e.spells-srd.lV8FkHZtzZu7Cy6j]{进化浪潮}时，你将其体型提升至超大型而非巨大型。</p>"
+        },
+        "Skin": {
+            "name": "皮肤 Skin",
+            "description": "<p>你幻灵之皮肤分泌一种黏液，使其在近距搏斗中得心应手。你的幻灵在对体型相同或更大生物的@UUID[Compendium.pf2e.actionspf2e.SkZAQRkLLkmBQNB9]{逃脱}上获得+1环境加值，对体型更小生物的@UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}检定上获得+1环境加值。你幻灵之次要技能为运动。</p>"
+        },
+        "Slithering Ooze": {
+            "name": "滑行黏液 Slithering Ooze",
+            "description": "<p>力量+2，敏捷+4，体质+2，智力+0，感知+1，魅力+0；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Entropic Entity": {
+            "name": "熵化实体 Entropic Entity",
+            "description": "<p>你幻灵之原蛋解剖赋予其混沌存在与感知。当你的幻灵承受酸性、电击或音波伤害后，立即对该类型获得等于你等级的抗性。该效果持续1小时，或直至你的幻灵下次承受其他类型之一的伤害（此时其抗性变更为对应该类型）——以先发生者为准。此外，你的幻灵可借其熵感感知生物（一种不精确感官，距离15尺）。处于@UUID[Compendium.pf2e.spells-srd.EoKBlgf6Smt8opaU]{隐蔽帷幕}效果下的生物不能被熵感察觉。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.Item.rMxxodfSKmcgafKB]{效果：熵化实体}</p>"
+        },
+        "Redemption": {
+            "name": "救赎 Redemption",
+            "description": "<p>你已治愈幻灵之破碎之灵，使其回归往日之姿：自然之神祇灵魂。你的幻灵获得神祇与灵魂特征，并失去由@UUID[Compendium.pf2e-summoners-plus.misc.UgC7EEaeRZg4eoYp]{暴怒之灵}所获之体型增大、触及与笨拙状态，以及鬼与巨人特征。你的幻灵可施放@UUID[Compendium.pf2e.spells-srd.dileJ0Yxqg76LMvu]{融身化树}与@UUID[Compendium.pf2e.spells-srd.4MOew29Z1oCX8O28]{再起时刻}，作为9阶原始内禀法术，每日各一次。作为此变化之一部分，你可改变你幻灵在1级时所选的形态与徒手攻击，改为适合其新形态的其他徒手攻击。</p>"
+        },
+        "Call the Incarnate": {
+            "name": "召唤化身 Call the Incarnate",
+            "description": "<p>你激励幻灵之下次动作。你@UUID[Compendium.pf2e.actionspf2e.3f5DMFu8fPiqHpRg]{维持}你的化身幻灵之显化，它立即使用@UUID[Compendium.pf2e-summoners-plus.misc.LKTHOzyQjzuxDG66]{化身之力}。</p>"
+        },
+        "Power of the Jinn": {
+            "name": "巨灵之力 Power of the Jinn",
+            "description": "<p>你的巨灵幻灵之元素之力增长，按其巨灵血脉获得特殊祝福。</p>\n<ul>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.huhxd2tWcgBTqWeS]{法易丹}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.qu25CCeNXhGPOn9S]{伊弗利特}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.iXzJGceJZfXoLBH1]{佳萨睦}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.fqhj974A6FkMJJsB]{佳巴里}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.atStXClBpQVzi8Wt]{基兹哈}</strong></li>\n<li style=\"font-weight:bold\"><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.SNT1JV98S4YzR5ib]{祖乎拉}</strong></li>\n</ul>"
+        },
+        "Challenge": {
+            "name": "挑战 Challenge",
+            "description": "<p>你的幻灵可花费具听觉与专注特征的单一动作向单一生物发出挑战。该挑战持续1分钟，或直至你的幻灵挑战另一生物。你的幻灵对其挑战过的生物的打击额外造成1点灵魂伤害。</p>"
+        },
+        "Infinite Power Cascade": {
+            "name": "无尽力量瀑布 Infinite Power Cascade",
+            "description": "<p>你的幻灵进行一次借其内蕴力量的攻击。该效果获得对应其鬼之类型的特征。你的鬼幻灵对触及范围内一名生物进行近战打击。只要你幻灵之打击未大失败，该目标承受@Damage[(ceil(@actor.level/2))d6[@actor.flags.pf2e.infinite-power-cascade]]伤害（基础@Check[type:reflex|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免）。该伤害类型与其暴怒之灵之能量特征相同，或——具空气、土系或水系特征时——为钝击；具木属时为穿刺；具金属或暗影时为挥砍。如你的幻灵处于与其暴怒之灵相关之地形，则此能力的使用频率从每10分钟一次缩短至[[/r 1d4]]轮。9级及之后每2级，伤害增加1d6。</p>\n<p>如你的幻灵具@UUID[Compendium.pf2e-summoners-plus.misc.f77t4YLJkaKWVLuJ]{最终形态}，则它可在自身周围@Template[distance:20|type:emanation]内创造类似其暴怒之灵地形之地形。该困难地形与你幻灵之暴怒之灵之地形对应；若幻灵地形为黑暗、天空或火山，则相应改为该地形之隐蔽。这会缩减「无尽力量瀑布」于该暴怒之灵地形内之使用频率。</p>"
+        },
+        "Aberrative Skulker": {
+            "name": "异种潜伏者 Aberrative Skulker",
+            "description": "<p>力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>"
+        },
+        "Boreal": {
+            "name": "北寒 Boreal",
+            "description": "<p>你的幻灵潜伏于针叶林与冻土。它获得寒冷特征。你的幻灵无视由寒冷与冰造成的困难地形。</p>"
+        },
+        "Spore Plume": {
+            "name": "孢子翎 Spore Plume",
+            "description": "<p>你的幻灵向敌人射出波、簇与云之孢子。除10尺爆发之外，它在使用@UUID[Compendium.pf2e-summoners-plus.misc.zE41sGx7afQPw97M]{孢子云}时还可创造@Template[distance:30|type:cone]或@Template[distance:60|type:line]。</p>"
+        },
+        "Acceptance": {
+            "name": "接纳 Acceptance",
+            "description": "<p>尽管你的幻灵仍是鬼，且永远无法从导致其踏上此路的悲痛中完全愈合，但它无须再作残忍之仆。你的幻灵习得一个与其共享元素特征、6阶或更低的法术。它可将其作为原始内禀法术每日施放一次，并提升至9阶。</p>"
+        },
+        "Ifrit Shuyookh": {
+            "name": "伊弗利特舒由可 Ifrit Shuyookh",
+            "description": "<p>你的巨灵幻灵免疫火焰，被你的幻灵受擒后于回合结束的生物，从其火焰之罩承受的伤害@Damage[(2*(max(1, @actor.flags.pf2e.ifrit-calculation)))[fire]]{加倍}。当你的幻灵赐予愿望时，必须以让授予者获得意外结果的方式解释——但不阻碍实现该愿望最严格之要求。如该愿望不会伤害你或幻灵之敌，亦不会强化你或幻灵，则需@Check[dc:10|type:flat]。</p>"
+        },
+        "Through the Veil": {
+            "name": "穿越纱幕 Through the Veil",
+            "description": "<p>仅一念之间，你的幻灵便可模糊真实世界与你梦境之界限。你的幻灵在@Template[distance:10|type:emanation]内获得梦境之光环，持续1分钟或被解除为止。进入光环的生物会看到你梦境世界的难以置信之幻象——你的幻灵便由此而生。</p>\n<p>在光环内结束回合的敌人须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则承受所列效果。生物可使用@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}以尝试看穿其内之景象与声响。豁免成功或成功看穿你幻象的生物，对此效果暂时免疫1天。</p>\n<hr />\n<p><strong>大成功</strong>该生物不受影响。</p>\n<p><strong>成功</strong>该生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}1轮。</p>\n<p><strong>失败</strong>该生物目眩，且只要其留在爆发内或未识破你幻灵的幻象，便将该区域视为困难地形。</p>\n<p><strong>大失败</strong>同失败，但目标只要目眩即@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>"
+        },
+        "Volcanic": {
+            "name": "火山 Volcanic",
+            "description": "<p>无论是温泉还是火山口，皆是你幻灵可能视为家园之地。它获得火焰特征。你的幻灵无视由烟雾或蒸汽造成的隐蔽。</p>"
+        },
+        "Rampage": {
+            "name": "暴走 Rampage",
+            "description": "<p>你的幻灵可执行1分钟具专注特征的活动，从中型变为大型或缩回中型。处于大型时其触及增加至10尺，但永久@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}。你可取@UUID[Compendium.pf2e.feats-srd.H6qletvAJUCC1aIa]{庞大体型}专长以永久解除该笨拙状态。</p>"
+        },
+        "Expend Favored Spell": {
+            "name": "消耗偏爱法术 Expend Favored Spell",
+            "description": "<p>你的幻灵消耗其魔法本质中之力以释放强大魔法。你的幻灵施放它为偏爱法术所选择的法术。在你的幻灵使用此能力后，它在1轮内不能再次使用施放法术活动。该活动所用动作数与你幻灵所施法术相同。</p>"
+        },
+        "Effect: Ultimate Form (Primal Apex)": {
+            "name": "效果：终极形态（原始巅峰） Effect: Ultimate Form (Primal Apex)",
+            "description": "<p>由@UUID[Compendium.pf2e-summoners-plus.items.pVH6bVC39YcxIObM]{终极形态}赋予</p>\n<p><strong>原始巅峰</strong></p>\n<ul>\n<li>速度40尺，飞行40尺</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 野性之触（触及30尺）<strong>伤害</strong>6d10+10与你幻灵主要打击同种伤害类型；</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 自然之声（触及100尺）<strong>伤害</strong>6d8+4音波；</li>\n<li><strong>重塑大地 <span class=\"action-glyph\">3</span></strong><strong>使用次数</strong>每分钟一次；<strong>效果</strong>你幻灵之足迹使森林生长、群山崩塌。它创造一个@UUID[Compendium.pf2e.spells-srd.kOa055FIrO9Smnya]{石墙术}或@UUID[Compendium.pf2e.spells-srd.KsWhliKfUs3IpW3c]{棘墙术}，犹如以其施放该法术，且法术提升至8阶。</li>\n</ul>"
+        },
+        "Faydhaan Shuyookh": {
+            "name": "法易丹舒由可 Faydhaan Shuyookh",
+            "description": "<p>你的巨灵幻灵处于持续的@UUID[Compendium.pf2e.spells-srd.SwUiVavHKMWG7t5K]{真言术}效果下。当你的幻灵赐予愿望时，必须以为最多人带来最大利益的方式解释。如该愿望需间接伤害他人，需@Check[dc:5|type:flat]；若需直接伤害则需@Check[dc:15|type:flat]。</p>"
+        },
+        "Spore Cloud": {
+            "name": "孢子云 Spore Cloud",
+            "description": "<p>你的幻灵颤动，于其周围释放消食孢子之云。你的幻灵在@Template[distance:10|type:emanation]内释放一团云雾，持续[[/r 1d4]]轮或被强风驱散。该孢子云提供隐蔽，并对在区域内开始回合的生物造成@Damage[(max(2, ceil(@actor.level/2)))[acid],(max(2, ceil(@actor.level/2)))[poison]]{2点酸性伤害与2点毒素伤害}（基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免对抗你的法术DC）。你的幻灵免疫自身孢子云之强韧豁免。</p>\n<p>3级及之后每2级，酸性与毒素伤害各增加1。</p>"
+        },
+        "Protean Unraveler": {
+            "name": "原蛋解构者 Protean Unraveler",
+            "description": "<p>力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>"
+        },
+        "Effect: Aura of Fate": {
+            "name": "效果：命运光环 Effect: Aura of Fate",
+            "description": "<p>光环内所有生物不受幸运或厄运效果影响。</p>"
+        },
+        "Path: Time": {
+            "name": "路径：时间 Path: Time",
+            "description": "<p>你与你的幻灵获得邪逆：你绝不可改变时间之流向，亦不可有意改变时间进程。你的幻灵将其@UUID[Compendium.pf2e.conditionitems.nlCjDvLMf2EkV2dl]{迅捷}与@UUID[Compendium.pf2e.conditionitems.xYTAsEpcJE1Ccni3]{缓慢}状态的剩余时间减半（最少1轮）。</p>"
+        }
+    }
+}

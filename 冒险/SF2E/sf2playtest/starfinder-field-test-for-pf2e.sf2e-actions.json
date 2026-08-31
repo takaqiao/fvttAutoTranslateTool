@@ -1,0 +1,73 @@
+{
+  "label": "动作\nActions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Technomancer": "科技法师\nTechnomancer",
+    "Mechanic": "技师\nMechanic"
+  },
+  "entries": {
+    "Deploy Turret": {
+      "name": "部署炮塔 Deploy Turret",
+      "description": "<p>你将你的炮塔部署到 30 英尺内一个未被占据的方格中，并使其准备开火；或者，你从相邻方格回收你的炮塔并将其折叠，放回你的自定义装置中储存。如果你的炮塔的 HP 降至 0，你可以用一个 2 动作活动来回收并重新部署你的炮塔，使其恢复到满 HP。当你在它的触及范围内时，你可以 Modify 你的炮塔，将炮塔像武器一样安装模块，或使用以下两种新模块。</p><ul><li><strong>精准射击（炮塔外脑）</strong>：你升级你的炮塔瞄准系统。炮塔造成的伤害增加，增加值等于你的智力调整值。</li><li><strong>切换阵列（炮塔外脑）</strong>：你微调你的炮塔的定制。改变你的炮塔所选的阵列。</li></ul>\n<p>You deploy your turret into an unoccupied square within 30 feet and prime it to fire, or you collect your turret from an adjacent square and collapse it, returning it to your custom rig for storage. If your turret is reduced to 0 HP, you can collect and redeploy your turret as a 2-action activity to return it to full HP. You can Modify your turret when you are within reach of it, modding the turret as a weapon or using the following two new mods.</p><ul><li><strong>Pinpoint Shot (turret exocortex)</strong>: You upgrade your turret's targeting system. Increase the turret's damage by an amount equal to your Intelligence modifier.</li><li><strong>Shift Array (turret exocortex)</strong>: You tweak your turret's customizations. Change your turret's selected array.</li></ul>"
+    },
+    "Mobile Reconfiguration": {
+      "name": "机动重构 Mobile Reconfiguration",
+      "description": "<p>你的无人机重新配置为其另一种机体。在你再次命令它执行此动作之前，它会一直保持这一新配置。</p>\n<p>Your drone reconfigures into its alternate chassis. It remains in the new configuration until you command it to perform this action again.</p>"
+    },
+    "Access Remote Gear": {
+      "name": "远程访问装备 Access Remote Gear",
+      "description": "<p>你将你用装备认证锁定的装备传送到你身边。如果你有空闲手，它会出现在你手中；如果没有，则出现在你脚边；如果该装备是护甲，且你没有穿戴任何其他护甲，你可以选择让它以穿在你身上的方式抵达。</p>\n<p>You teleport the gear you locked with Gear Authentication to you. It arrives in your hand if you have a free hand or at your feet if you don't; if the gear is armor, you can choose for it to arrive worn on your body if you are not wearing any other armor.</p>"
+    },
+    "Jailbreak Spell": {
+      "name": "越狱法术 Jailbreak Spell",
+      "description": "<p><strong>需求</strong> 你的装备处于超频状态。</p><hr /><p>你从超频的装备中抽取魔法能量，为一个塑法提供动力。你可以将一个科技法师塑法应用于你本回合下一次施放的法术效果，而无需额外花费一个动作，并且可以选择将该塑法的越狱增益应用于该法术。每种编程语言都会将一个额外的越狱加值应用于一个特定的塑法专长。在你施放该越狱法术后，你的装备将不再处于超频状态。如果你使用“越狱塑法”来施放一个具有塑法特征的魔法破解，你仍然必须花费1点专注点。</p><p></p>\n<p><strong>Requirements</strong> Your gear is overclocked.</p><hr /><p>You draw the magical energy out of your overclocked gear to power a spellshape. You can apply a technomancer spellshape to the effects of the next spell you cast this turn without spending an extra action, and can choose to apply the jailbroken benefits of that spellshape to the spell. Each programming language has an additional jailbreak bonus applied to a specific spellshape feat. After you cast the jailbroken spell, your gear is no longer overclocked. You must still spend a Focus Point if you use Jailbreak Spell to cast a magic hack with the spellshape trait.</p><p></p>"
+    },
+    "Electrical Discharge": {
+      "name": "放电 Electrical Discharge",
+      "description": "<p>你的无人机在其周围释放电流，发动一次不稳定的攻击，在你选择的 @Template[type:cone|distance:15] 或 @Template[type:line|distance:30] 内造成 @Damage[1d6[electricity]] 伤害。区域内的生物可以尝试一次对抗你职业 DC 的 @Check[reflex|against:class|basic] 豁免。你的无人机在 [[/gmr 1d4 #Recharge this ability]]{1d4 轮} 内不能再次使用此能力。你每额外获得两个等级，伤害就增加 [[/r 1d6]]。</p>\n<p>Your drone discharges electricity around it in a volatile attack, dealing @Damage[1d6[electricity]] damage in your choice of a @Template[type:cone|distance:15] or a @Template[type:line|distance:30]. Creatures in the area can attempt a @Check[reflex|against:class|basic] save against your class DC. Your drone can't use this ability again for [[/gmr 1d4 #Recharge this ability]]{1d4 rounds}. For every additional two levels you have, the damage increases by [[/r 1d6]].</p>"
+    },
+    "Activate Thrusters": {
+      "name": "激活推进器 Activate Thrusters",
+      "description": "<p>你的无人机进行两次疾行，穿过沿途任何生物所占据的空间，对它们造成 @Damage[5d6[bludgeoning]] 伤害，并使其进行一次对抗你职业DC的 @Check[reflex|against:class|basic] 基础豁免检定。豁免检定大失败的生物还会被击倒为 @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{倒地}。你的无人机的移动不会触发反应。</p><hr /><p><strong>等级（+2）</strong> 伤害提高 [[/r 1d6]]。</p>\n<p>Your drone Strides twice, moving through the spaces of any creatures in the way, dealing them @Damage[5d6[bludgeoning]] damage with a @Check[reflex|against:class|basic] save against your class DC. A creature that critically fails its saving throw is additionally knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}. Your drone's movement doesn't trigger reactions.</p><hr /><p><strong>Level (+2)</strong> The damage increases by [[/r 1d6]].</p>"
+    },
+    "Detonate Mine": {
+      "name": "引爆地雷 Detonate Mine",
+      "description": "<p><strong>需求</strong> 你部署的一枚地雷位于100英尺内。你只需稍加思索，便可引爆一枚你在100英尺内部署的地雷，使其在一个 @Template[type:burst|distance:10] 内爆炸。该地雷造成2d6火焰或穿刺伤害，具体取决于你部署该地雷时所选择的伤害类型。区域内的生物可以针对你的职业DC尝试一次 @Check[reflex|against:class|basic] 豁免。</p><hr /><p>你可以以反应动作使用“引爆地雷”，其触发条件如下。</p><p><strong>触发</strong> 一个生物进入或离开你所部署的一枚地雷爆发区域内的一个方格。</p><hr /><p>在第3级以及此后每提升2级时，伤害增加 [[/r 1d6]]。</p>\n<p><strong>Requirements</strong> A mine you deployed is within 100 feet. With a moment's thought, you trigger the detonation of a mine you deployed within 100 feet, causing it to explode in a @Template[type:burst|distance:10]. This mine deals 2d6 fire or piercing damage, based on the damage type you selected when that mine was deployed. Creatures in the area can attempt a @Check[reflex|against:class|basic] save against your class DC. </p><hr /><p>You can Detonate Mine as a reaction, with the following trigger.</p><p><strong>Trigger</strong> A creature enters or leaves a square within the burst area of a mine you have deployed.</p><hr /><p>At 3rd level and every 2 levels thereafter, the damage increases by [[/r 1d6]].</p>"
+    },
+    "Overclock Gear": {
+      "name": "超频装备 Overclock Gear",
+      "description": "<p><strong>需求</strong> 你本回合最近一次动作是施放了一个非戏法法术。 </p><hr /><p>你虹吸残余的魔法能量，以解锁你的装备的全部潜能。施放法术后，你持有、持用或穿戴的一件物品，或一个你正在指挥的科技仆从（取决于你的编程语言），会进入超频状态，持续1分钟。你同一时间只能有一件处于超频状态的装备；如果你尝试让另一件装备超频，你已超频的任何其他装备都会不再处于超频状态。只要你的装备处于超频状态，你就会获得你的编程语言的超频增益所提供的好处。</p>\n<p><strong>Requirements</strong> Your most recent action this turn was to cast a non-cantrip spell. </p><hr /><p>You siphon residual magic energy to unlock the full potential of your equipment. After Casting a Spell, one item you hold, wield, or wear, or a tech minion you are commanding (depending on your programming language), becomes overclocked for 1 minute. You can only have one overclocked gear at a time; if you attempt to overclock a different piece of gear, any other gear you have overclocked is no longer overclocked. As long as your gear is overclocked, you gain the benefits of your programming language's overclock boost.</p>"
+    },
+    "Synchronized Step": {
+      "name": "同步步伐 Synchronized Step",
+      "description": "<p>你和你的无人机协同移动，同步彼此的动作以提高效率。你和你的无人机各进行一次Stride。</p>\n<p>You and your drone move in tandem, synchronizing your movements for efficiency. You and your drone each Stride once.</p>"
+    },
+    "Spin to Win": {
+      "name": "旋转致胜 Spin to Win",
+      "description": "<p>你的无人机将自身重构为一个陀螺仪并旋转起来，撞击范围内的任何目标。你的无人机对 @Template[type:emanation|distance:20] 内的所有生物造成其近战打击伤害（对抗你的职业 DC 的 @Check[reflex|against:class|basic] 基础豁免）。你的无人机在 [[/gmr 1d4 #Recharge this ability]]{1d4 轮} 内不能再次使用此能力。</p><hr /><p><strong>等级（+2）</strong> 伤害提高 1d6。</p>\n<p>Your drone reconfigures itself into a gyroscope and spins around, colliding with anything in range. Your drone deals its melee Strike damage to all creatures within a @Template[type:emanation|distance:20] (@Check[reflex|against:class|basic] save against your class DC). Your drone can't use this ability again for [[/gmr 1d4 #Recharge this ability]]{1d4 rounds}.</p><hr /><p><strong>Level (+2)</strong> The damage increases by 1d6.</p>"
+    },
+    "Reposition Exocortex": {
+      "name": "重新定位外脑皮层 Reposition Exocortex",
+      "description": "<p><strong>要求</strong> 你已部署的一枚地雷或一座炮塔位于 100 英尺内。</p><hr /><p>你指挥自己的外脑部署机械腿并穿越战场，重新部署到一个在战术上更合理的位置。你已部署的一枚地雷或一座炮塔会依照你的指挥 Strides 最多 30 英尺，并在其新位置保持已部署状态。</p><hr /><p><strong>等级（+5）</strong> 其 Strides 的距离增加 10 英尺。</p>\n<p><strong>Requirements</strong> A mine or turret you deployed is within 100 feet.</p><hr /><p> You direct your exocortex to deploy technological legs and move across the battlefield, redeploying to a more tactically sound location. One of your deployed mines or turrets Strides up to 30 feet as you direct, remaining Deployed in its new location.</p><hr /><p><strong>Level (+5)</strong> The distance it Strides increases by 10 feet.</p>"
+    },
+    "Deploy Mine": {
+      "name": "部署地雷 Deploy Mine",
+      "description": "<p><strong>代价</strong> 1 枚地雷</p><hr /><p>你部署一枚地雷，将其安置在相邻方格中并将其设为待引爆状态。你可以将用于部署地雷的动作数增加到 2，从而改为将地雷安置在 30 尺内一个（被）占据的方格中。当你部署地雷时，你选择它在引爆时造成火焰伤害或穿刺伤害。你可以在 30 尺距离内修改你已部署的一枚地雷，像对手雷一样为该地雷加装模块，或为其加装以下新的模块。</p><ul><li><strong>智能地雷（地雷外骨骼中枢）</strong>：你为你的地雷编入基础的虚拟智能，使其能够避免伤及特定目标。选择 60 尺内的一个目标。该目标会被排除在你引爆的所有地雷的区域之外。5级时，你可以改为选择两个目标。</li><li><strong>锁定地雷（地雷外骨骼中枢）</strong>：你的地雷的近炸传感器使你能够精确锁定射程内的生物。使该地雷的伤害增加等同于你的智力调整值的数值。</li></ul>\n<p><strong>Cost</strong> 1 mine</p><hr /><p>You deploy a mine, planting it in an adjacent square and priming it for detonation. You can increase the number of actions you spend Deploying a Mine to 2, to instead plant the mine in an occupied square within 30 feet. When you Deploy a Mine, you select whether it will deal fire damage or piercing damage when detonated. You can Modify one of your deployed mines at a range of 30 feet, modding the mine as if it were a grenade or with the following new mods.</p><ul><li><strong>Smart Mine (mine exocortex)</strong>: You program your mines with rudimentary virtual intelligence, allowing them to avoid damaging specific targets. Select one target within 60 feet. That target is excluded from the area of all mines you detonate. At 5th level, you can instead select two targets.</li><li><strong>Targeting Mine (mine exocortex)</strong>: Your mines' proximity sensors enable you to pinpoint creatures in range. Increase the mine's damage by an amount equal to your Intelligence modifier.</li></ul>"
+    },
+    "Modify": {
+      "name": "调整 Modify",
+      "description": "<p><strong>需求</strong> 你正持握或穿戴着你的自定义装备。</p><hr /><p>利用你可靠的自定义装备，你能迅速改装一件物品。进行交互以抽出、取回或交换一件物品，然后为该物品添加下列模块之一。该物品会保持改装状态，直到你下个回合开始，但如果你再次使用“改装”，或者该物品被摧毁或脱离你的持有，效果会提前结束。当你改装一件物品时，你可以应用以下你所选择的效果之一，称为模块，或你所知晓的任何其他模块。有些模块只能应用于特定类型的物品，或具有特定特征的物品；这些需求会在括号中列出。所选模块会持续生效，直到该物品不再是你的改装物品为止。</p><ul><li><strong>巨型爆破（手雷或区域武器）</strong>：你知道如何把大量炸药和助燃剂塞进一个小包装里。使该物品的半径增加5英尺（若其为爆发），其区域增加5英尺（若其为锥形），或其区域增加10英尺（若其为线形）。</li><li><strong>碉堡克星（手雷或武器）</strong>：你强化一件物品的破坏能力。该物品无视 5 点硬度；若其具有拆解，则无视等于 5 + 其拆解值的硬度。</li><li><strong>失能剂（手雷或武器）</strong>：你将实弹替换为训练弹。该物品获得非致命特征。</li><li><strong>磁力悬浮器（护甲）</strong>：你激活护甲中的强力磁体，将你推进离地。你的基础陆地速度获得悬浮。</li><li><strong>远程推进器（手雷或远程武器）</strong>：你提高自己可靠地发射或投掷该物品的距离。使该物品的射程增加10英尺（若其为手雷），或其射程增量增加30英尺（若其为远程武器）。</li><li><strong>故障排除（物品、无人机外脑、炮塔外脑）</strong>：你迅速重新校准一件发生故障的物品。使该物品的故障状态值减少 1。</li></ul>\n<p><strong>Requirements</strong> You are holding or wearing your custom rig.</p><hr /><p>Using your trusty custom rig, you quickly customize a piece of gear. Interact to draw, retrieve, or swap an item, then add one of the mods listed below to the item. The item remains modded until the start of your next turn, but the effect ends early if you use Modify again or if the item is destroyed or leaves your possession. When you Modify an item you can apply one of the following effects of your choice, called a mod, or any other mod you know. Some mods can only be applied to items of specific types or items with certain traits; these requirements are listed in parentheses. The selected mod lasts as long as the item is your modded item.</p><ul><li><strong>Big Boom (grenade or area weapon)</strong>: You know how to cram a lot of explosives and accelerant into a small package. Increase the item's radius by 5 feet (if it's a burst), its area by 5 feet (if it's a cone), or its area by 10 feet (if it's a line).</li><li><strong>Bunker Buster (grenade or weapon)</strong>: You amp the destructive capabilities of an item. The item bypasses 5 Hardness, or if it has razing, Hardness equal to 5 + its razing value.</li><li><strong>Incapacitant (grenade or weapon)</strong>: You swap live ammunition for dummy rounds. The item gains the nonlethal trait.</li><li><strong>Magnetic Levitators (armor)</strong>: You activate powerful magnets in your armor that propel you off the ground. Your base land Speed gains hover.</li><li><strong>Long-Range Propulsors (grenade or ranged weapon)</strong>: You increase the distance you can reliably shoot or throw the item. Increase the item's range by 10 feet (if it's a grenade) or its range increment by 30 feet (if it's a ranged weapon).</li><li><strong>Troubleshoot (item, drone exocortex, turret exocortex)</strong>: You quickly recalibrate a malfunctioning item. Reduce the value of the item's glitching condition by 1.</li></ul>"
+    },
+    "Download Spell": {
+      "name": "下载法术 Download Spell",
+      "description": "<p>你用你的法术缓存库中一个相同或更低环阶的法术覆盖你已准备的一个法术。选择一个你尚未消耗的、已准备的非戏法法术。这个法术位被清空，而你的一个缓存法术会立即准备到该位置，并升阶至其所填充的法术位。</p>\n<p>You overwrite one of your prepared spells with one of the spells in your spell cache of the same rank or lower. Select one of your prepared non-cantrip spells that has not been expended. This spell slot is emptied and one of your cached spells is instantly prepared in its place, heightened to the slot it fills.</p>"
+    },
+    "Covering Posture": {
+      "name": "掩护姿态 Covering Posture",
+      "description": "<p>你的无人机进入防御姿态，以保护附近的盟友免受伤害，并随时准备调整自身位置以维持这种保护。所有在你的无人机相邻位置停留的盟友，直到你的下个回合开始前都获得较低掩护。</p>\n<p>Your drone enters a defensive stance that shields nearby allies from harm, and it remains ready to adjust its positioning to maintain this protection. All allies that remain adjacent to your drone gain lesser cover until the start of your next turn.</p>"
+    }
+  }
+}

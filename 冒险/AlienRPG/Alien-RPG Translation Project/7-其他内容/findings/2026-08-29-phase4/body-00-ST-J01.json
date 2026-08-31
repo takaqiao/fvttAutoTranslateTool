@@ -1,0 +1,176 @@
+{
+ "unit": "ST-J01",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J01.cn.html",
+ "summary": "Translated the starterset \"HOW TO USE THIS MODULE\" page (1/1 chunk, byte range 0–6418) into Chinese. Register is instructional GM-facing how-to, not read-aloud — no evblockquoteCenter/evexamplebox in this unit. Boilerplate shared with the system pack's MU/TH/ER page was matched to the already-shipped 1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json phrasing byte-for-byte, not re-invented: the whole \"Recommended Add-on Modules\" block (推荐附加模块 / Dice So Nice / Quick Insert / Motion Tracker), the whole \"Macros\" block (宏 / 它们在合集里的 Macro&gt;Alien 下 …\"Import All Content\"…), and all four macro names taken from that pack's macros map (异形 -  GM 投骰器 with the two-space form, 异形 - 玩家临时 YZE 投骰器, 异形 - 在选定的老妈表格上投骰 V10, 异形 - 在选定的生物表格上投骰 V10). The @UUID label was set to MU/TH/ER 使用说明 — verified byte-equal to the JournalEntry name the system cn pack actually ships, which the DO-NOT-TRANSLATE register lists as T-SHIMMED (translated_to: \"MU/TH/ER 使用说明\") with the shim file present on disk; the UUID machinery is untouched. Navigation literals a GM must find in the sidebar (folder / scene / journal names) were left in English so the page still points at real targets whatever ST-U decides for those names. All 3 NBSPs around the chat-roll span preserved, straight ASCII apostrophe in \"Hope's Last Day\" preserved (an earlier draft had a curly one — caught and fixed), &amp;/&gt; entity counts unchanged, all style= values unchanged.",
+ "chars_en": 6418,
+ "chars_cn": 3788,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html equals .en.html (every tag name counted)",
+   "result": "PASS — identical: br 32, div 2, h2 16, li 22, ol 2, p 30, span 2, strong 30, ul 6"
+  },
+  {
+   "check": "2. Every class=\"…\" value in the English present unchanged",
+   "result": "PASS — counts equal, not merely present: 'alienrpg evolved evolvedpage' x1, 'evchapterheading' x8, 'chat-roll' x1. starterset's ev-* forms kept as written; no content-link in this unit"
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical, only {label} differs",
+   "result": "PASS — 1 construct. @UUID[JournalEntry.SkwfSOD5gNvLhaLv] identical byte-for-byte; label {MU/TH/ER Instructions.} -> {MU/TH/ER 使用说明}. Zero [[…]] in both"
+  },
+  {
+   "check": "4. Every translated heading carries explicit id= with the original English slug",
+   "result": "PASS — 8/8 h2 carry id. scenes/actors/items/journals/tables/recommended-add-on-modules/macros each equal the slugify() of their English text; the 8th heading (Alien Evolved Starter Set) is left untranslated as a frozen name and carries its own unchanged slug anyway. Slug derivation cross-validated against the system cn page, which already ships id=\"recommended-add-on-modules\" and id=\"macros\" for the same two headings"
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS with one explained exception. 'Alien Evolved Starter Set' 4/4 occurrences kept. The only miss my scan flagged is 'MU/TH/ER Instructions.' inside the @UUID label — that entry is T-SHIMMED, not T-FROZEN: the register's unfrozen_by_shim block prescribes translated_to = 'MU/TH/ER 使用说明', the shim file 1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs exists, and the string I used is byte-equal to the JournalEntry name the system cn pack ships. It is a display label resolved by UUID, not a getName() lookup"
+  },
+  {
+   "check": "6. Output not byte-identical to the English",
+   "result": "PASS — 3788 chars vs 6418; 1056 CJK characters; 1881 visible characters"
+  },
+  {
+   "check": "7. Mechanic terms match 1-系统汉化插件/lang/cn.json byte-for-byte",
+   "result": "PASS — 16 terms checked against the live lang file, all byte-equal (see lock_lookups)"
+  },
+  {
+   "check": "EXTRA — invisible/confusable characters preserved",
+   "result": "PASS — NBSP 3/3 (one after 成功数。 and two inside <span class=\"chat-roll\">); entities &gt; x2 and &amp; x1 preserved in both; straight ASCII apostrophe kept in the two 'Hope's Last Day' literals (no U+2019 anywhere); UTF-8 no BOM, single line, no trailing newline — same shape as the English"
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Talent",
+   "lang_key": "ALIENRPG.Talents",
+   "used": "天赋"
+  },
+  {
+   "english": "Skill-Stunts",
+   "lang_key": "ITEM.TypeSkill-stunts / TYPES.Item.skill-stunts",
+   "used": "技能炫技"
+  },
+  {
+   "english": "skill stunt options",
+   "lang_key": "ALIENRPG.Stunts",
+   "used": "炫技"
+  },
+  {
+   "english": "Agenda items / agenda card",
+   "lang_key": "TYPES.Item.agenda",
+   "used": "任务"
+  },
+  {
+   "english": "Items",
+   "lang_key": "ALIENRPG.InventoryItemsHeader",
+   "used": "物品"
+  },
+  {
+   "english": "weapons",
+   "lang_key": "ALIENRPG.Weapons / TYPES.Item.weapon",
+   "used": "武器"
+  },
+  {
+   "english": "Creatures",
+   "lang_key": "TYPES.Actor.creature / ALIENRPG.Actor.Tabs.Creature",
+   "used": "生物"
+  },
+  {
+   "english": "Actors (heading)",
+   "lang_key": "TYPES.Actor.character",
+   "used": "角色"
+  },
+  {
+   "english": "character sheets",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Critical Injury tables",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "Trauma tables",
+   "lang_key": "ALIENRPG.PermanantTrauma (永久创伤…)",
+   "used": "创伤"
+  },
+  {
+   "english": "Creature Attack tables",
+   "lang_key": "ALIENRPG.AttackTable",
+   "used": "攻击表"
+  },
+  {
+   "english": "\"roll for attack\" shown in chat",
+   "lang_key": "ALIENRPG.AttackRoll",
+   "used": "攻击检定"
+  },
+  {
+   "english": "tokens",
+   "lang_key": "ALIENRPG.NoToken (你没有选中任何指示物)",
+   "used": "指示物"
+  },
+  {
+   "english": "GM Only box",
+   "lang_key": "ALIENRPG.GMONLY",
+   "used": "仅限GM"
+  },
+  {
+   "english": "skill",
+   "lang_key": "ALIENRPG.Actor.Tabs.Skills",
+   "used": "技能"
+  }
+ ],
+ "frozen_kept": [
+  "Alien Evolved Starter Set (module name, h2 heading, and scene-folder reference — 4/4 occurrences, T-FROZEN adventure + sceneToActivate name)",
+  "Alien Evolved Starter Set Rules (journal folder — carries the frozen substring at offset 0)",
+  "MU/TH/ER (ASCII token kept per the register's token_rule; only the 'Instructions.' tail became 使用说明, which is what the system cn pack ships)",
+  "Mother Tables / Creature tables (macro dropdown sources — the frozen folder names Alien Mother Tables / Alien Creature Tables)",
+  "Alien RPG Mother Aids",
+  "ToM - Meeting Room",
+  "Alien Evolved (item folder)",
+  "Alien RPG Weapons",
+  "Alien RPG Talents(Career)",
+  "Hope's Last Day - Personal Agendas",
+  "Hope's Last Day (journal)",
+  "Starter Set Rules (journal)",
+  "Chariot Of the Gods - Scenario",
+  "Configure Settings> Module Settings",
+  "Macro>Alien",
+  "Import All Content",
+  "Dice So Nice",
+  "Quick Insert - Search Widget",
+  "Alien RPG - Motion Tracker",
+  "Alien RPG (system name in prose)"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Theatre of the Mind",
+   "proposed": "心灵剧场",
+   "why": "Not in glossary_alien.json and not in lang/cn.json. It is a Foundry/TRPG staging concept, quoted in the English as a scene-design note. 心灵剧场 is the common Chinese TRPG rendering; 脑内剧场 and 意象剧场 also circulate. Used once, consistently. Needs a ruling before other units hit it."
+  },
+  {
+   "en": "Fog of War (FoW)",
+   "proposed": "战争迷雾",
+   "why": "Not in glossary_alien.json. It is a Foundry scene feature, not an Alien rules term; 战争迷雾 is Foundry's own zh convention. Expanded the acronym in Chinese since FoW would read as noise."
+  },
+  {
+   "en": "Hope's Last Day",
+   "proposed": "希望的最后一天",
+   "why": "The starter-set scenario title (Hadley's Hope / LV-426). No glossary entry, no RULINGS entry, and the two delivered peer units disagree: ST-J02 has 《希望的最后一天》, ST-J03 has 《希望的最后一日》. I used 最后一天 to match ST-J02 and the literal Day. Needs a ruling — it also decides whether ST-U gives the journal/folder a bilingual name."
+  },
+  {
+   "en": "duct areas",
+   "proposed": "通风道区域",
+   "why": "glossary_alien.json has Air Duct 通风道 but not the bare 'duct'. Used 通风道 for consistency with that entry; flagging so the creature/stealth units (Drones in the vents) do not drift to 管道/风管."
+  }
+ ],
+ "open_issues": [
+  "PEER DIVERGENCE — scenario title. ST-J02.cn.html says 《希望的最后一天》, ST-J03.cn.html says 《希望的最后一日》. I went with 最后一天 (ST-J02, and the literal reading of Day). One of the three files needs a sweep once the controller rules. Cheap to fix now, expensive after ST-J07..J10 land.",
+  "NAMING DEPENDENCY on ST-U. Every folder/scene/journal name this page tells the GM to click (Alien RPG Mother Aids, ToM - Meeting Room, Alien Evolved, Alien RPG Weapons, Alien RPG Talents(Career), Hope's Last Day - Personal Agendas, Starter Set Rules, Alien Evolved Starter Set Rules) is decided in ST-U, whose English payload currently identity-maps them all. I deliberately kept the English literal as the primary token: it survives whether ST-U ships English or T-BILINGUAL 中文 English, because the bilingual form keeps the English tail. If ST-U instead ships pure Chinese names, this page needs a re-sweep — that is the one outcome my choice does not cover.",
+  "MACRO NAMES intentionally do NOT track this page's English. The prose here says 'Alien - GM Dice Roller' (one space) but the actual system macro is 'Alien -  GM Dice Roller' (two spaces), and the system cn pack renames all four. I used the shipped Chinese names in the shipped two-space form so a GM can actually find them in the compendium — matching the system cn how-to page byte-for-byte rather than this page's English. Same reasoning as the @UUID label.",
+  "IMPORT BUTTON deliberately left generic. lang/cn.json has ALIENRPG.forceImportLabel = 导入模块内容 / forceImportName = 重新运行模块导入, which would have been a tempting lock. I did not use them: those localise the SYSTEM's re-import setting, while this sentence points at the starterset MODULE's own settings button, which our lang file does not localise. Wrote 单击其中的导入按钮 so the page does not name a label the user will not see. No lock claimed on those two keys.",
+  "UPSTREAM DEFECT (carried faithfully, not fixed) — the Journals section ends '…<strong>Chariot Of the Gods - Scenario </strong>Folder contains:' and then nothing follows. Chariot of the Gods is a separate product with no content in this pack, so the sentence dangles in English too. Translated as-is; do not let a later reviewer 'fix' it by inventing a list.",
+  "UPSTREAM DEFECT (carried faithfully) — '</strong>all the agenda items' has no space or punctuation after the closing tag. I inserted a Chinese 、comma-equivalent (，) after </strong> so the Chinese reads, which is a punctuation-only deviation from the English's missing space.",
+  "NOT VERIFIED — whether any data-hash elsewhere in the starterset pack points at this page's eight slugs. The register measures 81 data-hash occurrences / 44 distinct in starterset but does not list which. I added explicit English-slug ids to all eight headings regardless, so any such link keeps resolving; this is belt-and-braces, not a measured need."
+ ]
+}

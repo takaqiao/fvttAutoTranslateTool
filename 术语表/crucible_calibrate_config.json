@@ -1,0 +1,37 @@
+{
+    "openai_api_key": "",
+    "openai_base_url": "https://api.openai.com/v1",
+    "model": "gpt-4.1",
+    "fallback_model": "gpt-4.1-mini",
+    "max_retries": 2,
+    "request_timeout_seconds": 90,
+    "long_text_timeout_seconds": 180,
+    "long_text_char_threshold": 8000,
+    "target_rpm": 500,
+    "max_workers": 8,
+    "glossary_path": "glossary_crucible_merged.json",
+    "files": [],
+    "file_pairs": [
+        [
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-adventure-en.json",
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-adventure.json"
+        ],
+        [
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-adversary-en.json",
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-adversary.json"
+        ],
+        [
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-character-en.json",
+            "C:/Users/Taka/Desktop/fvttpublish/ember_cn_unofficial/compendium/cn/ember.crucible-character.json"
+        ]
+    ],
+    "batch_max_chars": 8000,
+    "batch_max_fields": 40,
+    "group_depth": 3,
+    "skip_untranslated": true,
+    "skip_markup_only": true,
+    "skip_keys": ["command", "formula", "img", "src", "flags"],
+    "include_keys_only": [],
+    "report_path": "calibration_report.json",
+    "dry_run_sample_batches": 3
+}

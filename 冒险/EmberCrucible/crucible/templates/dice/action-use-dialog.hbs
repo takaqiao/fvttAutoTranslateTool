@@ -1,0 +1,9 @@
+<form>
+    {{> "systems/crucible/templates/dice/partials/action-use-header.hbs"}}
+
+    {{#if weaponChoice}}
+    {{formGroup weaponChoice.field value=weaponChoice.value valueAttr="id"}}
+    {{/if}}
+
+    {{> "systems/crucible/templates/dice/partials/action-use-footer.hbs"}}
+</form>

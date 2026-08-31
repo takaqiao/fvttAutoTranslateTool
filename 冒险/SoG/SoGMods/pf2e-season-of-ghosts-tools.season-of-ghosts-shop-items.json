@@ -1,0 +1,204 @@
+{
+    "label": "肆季鬼志物品 Season of Ghosts Shop Items",
+    "mapping": {
+        "name": "name",
+        "description": "system.description.value"
+    },
+    "folders": {
+        "Fortune Telling": "占卜\nFortune Telling",
+        "Aid": "协助\nAid",
+        "Meals": "餐食\nMeals",
+        "Beverages": "饮品\nBeverages",
+        "Deliveries": "递送\nDeliveries",
+        "Stabling": "寄养 Stabling",
+        "Other": "其他\nOther",
+        "Spellcasting": "施法能力\nSpellcasting",
+        "Transportation": "运输\nTransportation",
+        "Lodging": "住宿\nLodging",
+        "Vehicles": "载具\nVehicles",
+        "Animals": "动物结社\nAnimals"
+    },
+    "entries": {
+        "Expedited (per bulk)": {
+            "name": "加急（每点负载） Expedited (per bulk)",
+            "description": "<p>每负载 1 gp，在 2 天内送达。</p>\n<p>1 gp per bulk, delivered within 2 days.</p>"
+        },
+        "Stabling (per day)": {
+            "name": "马厩寄养（每天） Stabling (per day)"
+        },
+        "Warpony (per day)": {
+            "name": "战驹（每日）",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.OPavstjKhgcp30fc]{战驹}</p> <p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.OPavstjKhgcp30fc]{War Pony}</p>"
+        },
+        "Riding Pony": {
+            "name": "骑乘小马 Riding Pony",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.YUk9S6caKqheRsUQ]{骑乘矮种马}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.YUk9S6caKqheRsUQ]{Riding Pony}</p>"
+        },
+        "Recall Knowledge (Willowshore)": {
+            "name": "回忆知识（柳岸镇）"
+        },
+        "Rowboat": {
+            "name": "划艇 Rowboat",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.l0RfYgabnbNoHnkS]{划艇}</p>\n<p>@UUID[Compendium.pf2e.vehicles.Actor.l0RfYgabnbNoHnkS]{Rowboat}</p>"
+        },
+        "Guard Dog (per day)": {
+            "name": "护卫犬（每日） Guard Dog (per day)",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.QRRX82FIjBKd8pzs]{护卫犬}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.QRRX82FIjBKd8pzs]{Guard Dog}</p>"
+        },
+        "Cart": {
+            "name": "手推车 Cart",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.mq8bsMnrY81gUEYb]{手推车}</p> <p>@UUID[Compendium.pf2e.vehicles.Actor.mq8bsMnrY81gUEYb]{Cart}</p>"
+        },
+        "Absalom or Further (per bulk)": {
+            "name": "艾巴萨罗姆或更远（每负载） Absalom or Further (per bulk)",
+            "description": "<p>每负载 5 cp，每周交付。</p>\n<p>5 cp per bulk, delivered weekly.</p>"
+        },
+        "Fine Dining": {
+            "name": "高级餐饮 Fine Dining"
+        },
+        "Warhorse (per day)": {
+            "name": "战马（每日） Warhorse (per day)",
+            "description": "<p>@UUID[Actor.7aS2Ue0aoLRZ8QKF]{战马}</p>\n<p>@UUID[Actor.7aS2Ue0aoLRZ8QKF]{War Horse}</p>"
+        },
+        "Gather Information": {
+            "name": "打探消息 Gather Information"
+        },
+        "Rowboat (Per Day)": {
+            "name": "划艇（每日） Rowboat (Per Day)",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.l0RfYgabnbNoHnkS]{划艇}</p>\n<p>@UUID[Compendium.pf2e.vehicles.Actor.l0RfYgabnbNoHnkS]{Rowboat}</p>"
+        },
+        "Warhorse": {
+            "name": "战马 Warhorse",
+            "description": "<p>@UUID[Actor.7aS2Ue0aoLRZ8QKF]{战马}</p>\n<p>@UUID[Actor.7aS2Ue0aoLRZ8QKF]{War Horse}</p>"
+        },
+        "Floor Space": {
+            "name": "地板空间 Floor Space",
+            "description": "<p>每天 3 cp</p>\n<p>3 cp per day</p>"
+        },
+        "Square": {
+            "name": "方格 Square"
+        },
+        "Riding Dog (per day)": {
+            "name": "骑乘犬（每天） Riding Dog (per day)",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.5Azg87M6OnQ7Q4ZS]{骑乘犬}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.5Azg87M6OnQ7Q4ZS]{Riding Dog}</p>"
+        },
+        "Bed, For 1": {
+            "name": "床（单人）",
+            "description": "<p>每天 1 sp</p>\n<p>1 sp per day</p>"
+        },
+        "Carriage (per 5 miles)": {
+            "name": "马车（每 5 英里） Carriage (per 5 miles)",
+            "description": "<p>每 5 英里 2 sp</p>\n<p>2 sp per 5 miles</p>"
+        },
+        "Local (per bulk)": {
+            "name": "本地（每负载） Local (per bulk)",
+            "description": "<p>每负载 1 cp，在 24 小时内送达。</p>\n<p>1 cp per bulk, delivered within 24 hours.</p>"
+        },
+        "Riding Horse (per day)": {
+            "name": "骑乘马（每天） Riding Horse (per day)",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.In2nNwo3JL1RXQhj]{骑乘用马}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.In2nNwo3JL1RXQhj]{Riding Horse}</p>"
+        },
+        "Treat Wounds": {
+            "name": "治疗伤口 Treat Wounds"
+        },
+        "Pack Horse (Per Day)": {
+            "name": "驮马（每日） Pack Horse (Per Day)",
+            "description": "<p>驮马</p>\n<p>Pack Horse</p>"
+        },
+        "Extravagant Suite, For 6": {
+            "name": "豪华套房，供 6 人使用 Extravagant Suite, For 6",
+            "description": "<p>每天 10 gp</p>\n<p>10 gp per day</p>"
+        },
+        "Treat Animal": {
+            "name": "治疗动物 Treat Animal"
+        },
+        "Riding Horse": {
+            "name": "骑乘用马 Riding Horse",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.In2nNwo3JL1RXQhj]{骑乘用马}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.In2nNwo3JL1RXQhj]{Riding Horse}</p>"
+        },
+        "Handcrafted Oar": {
+            "name": "手工制作的船桨 Handcrafted Oar",
+            "description": "<p>这些船桨使你在以划艇进行载具操作检定时获得+1物品加值。</p>\n<p>These oars grant a +1 item bonus to Piloting checks with rowboats.</p>"
+        },
+        "Spellcasting (3rd)": {
+            "name": "施法（3环） Spellcasting (3rd)"
+        },
+        "Spellcasting (Cantrip)": {
+            "name": "施放法术（戏法） Spellcasting (Cantrip)"
+        },
+        "Carriage": {
+            "name": "马车 Carriage",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.66dAXEMUjL7BrX8I]{马车}</p>\n<p>@UUID[Compendium.pf2e.vehicles.Actor.66dAXEMUjL7BrX8I]{Carriage}</p>"
+        },
+        "Guard Dog": {
+            "name": "护卫犬 Guard Dog",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.QRRX82FIjBKd8pzs]{护卫犬}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.QRRX82FIjBKd8pzs]{Guard Dog}</p>"
+        },
+        "Warpony": {
+            "name": "战驹 Warpony",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.OPavstjKhgcp30fc]{战驹}</p> <p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.OPavstjKhgcp30fc]{War Pony}</p>"
+        },
+        "Poor": {
+            "name": "劣等 Poor"
+        },
+        "Bottle of Wine": {
+            "name": "一瓶葡萄酒 Bottle of Wine"
+        },
+        "Spellcasting (2nd)": {
+            "name": "施法（2环）"
+        },
+        "Keg of Ale": {
+            "name": "一桶麦酒 Keg of Ale"
+        },
+        "Pack Horse": {
+            "name": "驮马 Pack Horse",
+            "description": "<p>驮马</p>\n<p>Pack Horse</p>"
+        },
+        "Riding Pony (per day)": {
+            "name": "骑乘小马（每日）",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.YUk9S6caKqheRsUQ]{骑乘矮种马}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.YUk9S6caKqheRsUQ]{Riding Pony}</p>"
+        },
+        "Private Room, For 2": {
+            "name": "私人房间（2人）",
+            "description": "<p>每天 8 银币</p>\n<p>8 sp per day</p>"
+        },
+        "Caravan (per 5 miles)": {
+            "name": "商队（每5英里） Caravan (per 5 miles)",
+            "description": "<p>每5英里 3 cp</p>\n<p>3 cp per 5 miles</p>"
+        },
+        "Expanded Alchemist's Lab (Per Day)": {
+            "name": "专家级炼金实验室（每日） Expanded Alchemist's Lab (Per Day)",
+            "description": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.uhka9LHEP3wDKytG]{炼金术师实验室（扩展版）}</p>\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.uhka9LHEP3wDKytG]{Alchemist's Lab (Expanded)}</p>"
+        },
+        "Fortune Telling": {
+            "name": "占卜 Fortune Telling"
+        },
+        "1 Hour Bathhouse Soak": {
+            "name": "1小时澡堂浸泡 1 Hour Bathhouse Soak"
+        },
+        "Wagon": {
+            "name": "货车 Wagon",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.UNOwkQq5lc4cYdZP]{货车}</p>\n<p>@UUID[Compendium.pf2e.vehicles.Actor.UNOwkQq5lc4cYdZP]{Wagon}</p>"
+        },
+        "Spellcasting (1st)": {
+            "name": "施法（1环） Spellcasting (1st)"
+        },
+        "Sleigh": {
+            "name": "雪橇 Sleigh",
+            "description": "<p>@UUID[Compendium.pf2e.vehicles.Actor.WWvqHSAYOw4ysn3e]{雪橇}</p>\n<p>@UUID[Compendium.pf2e.vehicles.Actor.WWvqHSAYOw4ysn3e]{Sleigh}</p>"
+        },
+        "Riding Dog": {
+            "name": "骑乘犬 Riding Dog",
+            "description": "<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.5Azg87M6OnQ7Q4ZS]{骑乘犬}</p>\n<p>@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.5Azg87M6OnQ7Q4ZS]{Riding Dog}</p>"
+        },
+        "Mug of Ale": {
+            "name": "一杯艾尔啤酒 Mug of Ale"
+        },
+        "Pot of Coffee or Tea": {
+            "name": "一壶咖啡或茶 Pot of Coffee or Tea"
+        },
+        "Bottle of Fine Wine": {
+            "name": "一瓶上等葡萄酒 Bottle of Fine Wine"
+        }
+    }
+}

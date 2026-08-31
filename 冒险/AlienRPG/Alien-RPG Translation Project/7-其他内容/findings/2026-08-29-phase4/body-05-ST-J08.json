@@ -1,0 +1,223 @@
+{
+ "unit": "ST-J08",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J08.cn.html",
+ "summary": "Hope's Last Day 2/4 (Level 2 rooms → Tannen's Casino → Landing Pad → Other Areas → EVENTS) translated. Built as a verified transform of the English source: 117 exact replacements, each asserted to fire exactly the expected number of times, so every tag, class, style, src, data-uuid, data-hash and structural NBSP is carried over untouched by construction rather than by re-typing. All 19 headings translated and given an explicit id= carrying the original English slug (including the three that pre-baked data-hash links in this pack actually target: tannens-casino, a-cry-for-help, events). Three life-cycle names with no Chinese precedent (Drone / Chestburster / Ovomorph) were needed; I reused the project's own recorded Phase-0 coinages rather than inventing new ones, and used each in exactly one form throughout.",
+ "chars_en": 29478,
+ "chars_cn": 19064,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html equals .en.html (every tag name counted)",
+   "result": "PASS — identical: a×14 blockquote×10 br×48 div×36 em×2 figcaption×2 figure×12 h2×10 h3×28 img×6 li×20 p×106 span×40 strong×48 table×10 tbody×10 td×92 tr×40 ul×4. Zero diff."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in the English is present unchanged",
+   "result": "PASS — all 20 distinct values match with identical counts (ev-content-link, evblockquoteCenter, evexamplebox, evolvedlinestart, evolvedsubheading, evchapterheading, evstable, evstrhead, evscol1/2/3/10, evbigtable, arpgtable, basesymbol, liststyle, textover, grid-evolved-2col, gevcol1, gevcol2). starterset's ev-content-link form kept, not corerules' content-link."
+  },
+  {
+   "check": "2b. (extra) All other attributes — style, src, draggable, data-link, data-id, data-type — multiset-identical",
+   "result": "PASS — zero diff outside the id= attributes I deliberately added."
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — this unit has no @UUID[]/[[]] enricher syntax; its 7 links are raw <a data-link data-uuid=…> anchors. All 7 opening tags are byte-identical strings in en and cn (same order); data-uuid and data-hash sequences identical. Only the label text between > and </a> changed."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id= with the original English slug",
+   "result": "PASS — 19/19. Slugs derived per foundry.mjs slugifyHeading (slugify then strip quotes): level-2, operations, medlab, stasis-room, surgery-room, morgue, station-maintenance-center, life-support/power, tannens-casino, landing-pad, other-areas, events, the-gunshot, the-mystery-ping, a-cry-for-help, hunted, the-birth, we-got-movement, power-cut. The three that pre-baked data-hash anchors elsewhere in the pack point at (tannens-casino, a-cry-for-help, events) now resolve."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — harvested every string from register sections whose tier starts with T-FROZEN; the only ones occurring in this unit's English are the pack-id substrings 'starterset' and 'system' inside img src paths, both unchanged. None of the 6 T-FROZEN item names, 11 RollTable names, 3 folder names, or macro_commands appear here. The 4 weapon names that do appear (M4A3 Service Pistol, M240 Incinerator Unit, Armat M41A Pulse Rifle, Armat Model 37A2 12 Gauge Pump Action) are in the register's enricher_labels section, whose rule is TRANSLATE-and-sync, not freeze — and here they are plain prose table cells, not {label} text."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 4,536 CJK characters; 19,064 chars vs 29,478."
+  },
+  {
+   "check": "7. Every mechanic term used matches lang/cn.json byte-for-byte",
+   "result": "PASS — 25 lock values re-read from 1-系统汉化插件/lang/cn.json (flattened) and compared byte-for-byte against what I used. See lock_lookups."
+  },
+  {
+   "check": "(extra) Structural NBSP preserved",
+   "result": "PASS — the 7 <td class=\"evscol2\">U+00A0</td> spacer cells and the 1 <span class=\"basesymbol\">U+00A0</span> die glyph are all intact. Prose-internal NBSPs (word-joiners like Dr.<NBSP>Komiskey) dissolved with their sentences, as intended."
+  },
+  {
+   "check": "(extra) U+2013 EN DASH kept where it is a die modifier",
+   "result": "PASS — all 3 occurrences of “–2 骰子” use U+2013, matching ST-J02/ST-J03 house style. The 12 EN DASHes that were English parenthetical dashes became —— per sibling-unit convention."
+  },
+  {
+   "check": "(extra) No orphaned ASCII punctuation left after translated link labels",
+   "result": "PASS — swept and fixed: the trailing \").\" / \".\" that followed </a> in three places are now ）。 / 。"
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "COMTECH",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "MANIPULATION",
+   "lang_key": "ALIENRPG.Skillmanipulation",
+   "used": "操控"
+  },
+  {
+   "english": "MEDICAL AID",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "STAMINA",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "PILOTING",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "COMMAND",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "HEAVY MACHINERY",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "机械"
+  },
+  {
+   "english": "CLOSE COMBAT",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "STRENGTH",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "AGILITY",
+   "lang_key": "ALIENRPG.AbilityAgl",
+   "used": "敏捷"
+  },
+  {
+   "english": "WITS",
+   "lang_key": "ALIENRPG.AbilityWit",
+   "used": "机智"
+  },
+  {
+   "english": "EMPATHY",
+   "lang_key": "ALIENRPG.AbilityEmp",
+   "used": "共情"
+  },
+  {
+   "english": "Attributes:",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Health:",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Skills:",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "armor level 2",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级 2"
+  },
+  {
+   "english": "10 points of damage / Base Damage 2",
+   "lang_key": "ALIENRPG.DAMAGE",
+   "used": "伤害（10 点伤害 / 基础伤害 2）"
+  },
+  {
+   "english": "Power supply",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "stress level +1",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力等级 +1"
+  },
+  {
+   "english": "panic roll",
+   "lang_key": "ALIENRPG.CREWPANIC",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "the roll cannot be pushed",
+   "lang_key": "ALIENRPG.Push",
+   "used": "该检定不能追骰"
+  },
+  {
+   "english": "No Modifier",
+   "lang_key": "ALIENRPG.Modifiers",
+   "used": "无修正"
+  },
+  {
+   "english": "medical supplies",
+   "lang_key": "ALIENRPG.MedicalSupplies",
+   "used": "医疗物资"
+  }
+ ],
+ "frozen_kept": [
+  "starterset (pack id inside img src=\"modules//alien-evolved-starterset/…\" ×3 and \"modules/alien-evolved-starterset/…\" ×2)",
+  "system (pack id inside img src=\"systems/alienrpg/images/checkered-top.webp\")",
+  "data-hash slugs stage-i / stage-iii / events / a-cry-for-help / tannens-casino / final-horrors / sterile-lab — all 7 byte-identical",
+  "data-uuid JournalEntry.UiDWuSkkUFSZg2xh.JournalEntryPage.1x3YCWOHYWkJeLFJ ×7 and data-id 1x3YCWOHYWkJeLFJ ×7 — byte-identical",
+  "&amp; ×2 preserved, including the stray upstream one at the end of Other Areas",
+  "U+00A0 ×8 structural (7 evscol2 spacer cells + 1 basesymbol glyph)",
+  "M4A3 / M240 / M41A / 37A2 / M40 HEDP / .357 / D6 model designations kept in Latin (T-LATIN)"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Drone",
+   "proposed": "工蜂异形",
+   "why": "One of the six life-cycle names PROJECT.md §7.2.0 declares unsettled. Occurs 5× in this unit ('a Drone Xenomorph', 'a Drone', 'Drones', 'the Drone', 'Drone Xenomorphs'). I did NOT coin anything new: 工蜂异形 is the Phase-0 value already recorded in glossary_alien.pending.json, so the wave converges instead of diverging. Used in exactly this one form, never abbreviated to bare 工蜂. Note for the ch.10 ruling: English 'drone' in bee terminology is the male 雄蜂, not the worker 工蜂 — 工蜂 came from the wiki's loose hive metaphor. If the owner reopens this, 工兵异形 keeps the caste sense without the entomological error."
+  },
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "Same §7.2.0 status. Occurs 4× (Morgue event, Komiskey's birth, Lin's birth, The Birth event) plus once as the link label 'Stage III: Chestburster'. 破胸体 is the recorded Phase-0 value and is also the form PROJECT.md's own illustrative sequence (卵 → 抱脸虫 → 破胸体 → 成体) uses, so it is the lowest-divergence choice."
+  },
+  {
+   "en": "Ovomorph",
+   "proposed": "异形卵",
+   "why": "Same §7.2.0 status. Occurs once in prose and once inside the link label 'Stage I: Ovomorph (Egg)', which I rendered 第一阶段：异形卵（卵） — mirroring the English's own technical-term-plus-plain-gloss structure, with 卵 for the settled bare noun Egg. The Chinese redundancy is real but it is the English's redundancy; if ch.10 gives Ovomorph a distinct morphological form (e.g. 卵形体), that label should be revisited together with the J09 heading it points at."
+  },
+  {
+   "en": "Praetorian / Warrior",
+   "proposed": "",
+   "why": "Not needed by this unit — recorded only so the controller knows I did not silently touch the other half of the ladder."
+  }
+ ],
+ "open_issues": [
+  "CROSS-UNIT LABEL SYNC (highest value to check): three of my seven link labels point at headings that live in units I do not own, so my label and that unit's translated heading must end up identical or the link text goes stale. They are — data-hash=\"stage-i\" → 第一阶段：异形卵（卵） and data-hash=\"stage-iii\" → 第三阶段：破胸体, both targeting h3 headings in ST-J09; and data-hash=\"final-horrors\" → 最后的恐怖, targeting the h2 FINAL HORRORS in ST-J09. data-hash=\"sterile-lab\" → 无菌实验室 targets a heading in ST-J07. The controller should diff these four against ST-J07/ST-J09 when both land.",
+  "Conversely, three data-hash anchors written in OTHER units point INTO my headings (tannens-casino, a-cry-for-help, events). I gave all three the exact English slug as id=, so they resolve regardless of what the other translator writes as the label.",
+  "Register note, not a defect: DO-NOT-TRANSLATE's heading_anchor_hashes lists stage-i, stage-iii and tannens-casino as 'not resolving today' in starterset — i.e. they were already broken upstream in the English. My id= on the Tannen's Casino h2 fixes one of those three as a side effect; the other two depend on ST-J09.",
+  "The four armory weapons appear in my table cells as prose (M4A3 制式手枪 / M240 焚烧器 / 阿玛特 37A2 型 12 号泵动霰弹枪 / 阿玛特 M41A 脉冲步枪). The same four exist as Item documents that will be T-BILINGUAL, and corerules ch.5 carries @UUID{Label} links whose labels must equal those Item names. My prose should match the Chinese half of whatever the Item names become — worth one pass at assembly time. 'Armat' transliterated 阿玛特 by the Seegson=西格森 precedent.",
+  "Brand/model policy I applied, flag if the controller wants it different: company names transliterated (Armat 阿玛特, Lockmart 洛克玛特, Pauling 保灵), alphanumeric model designations kept Latin, and the shuttle model 'Starcub' kept Latin under T-LATIN rather than coined — corerules already ships an Actor named 'STARCUB SHUTTLE', so coining a Chinese name here would pre-empt that unit.",
+  "'Pauling Surgical &amp; Scanner MedPod' → 保灵外科 &amp; 扫描医疗舱. I kept the &amp; entity rather than replacing it with 与, to preserve both entities in the file; if house style dislikes an ampersand between Chinese words, 保灵外科与扫描医疗舱 is the drop-in alternative.",
+  "The h3 'Life Support/Power' got id=\"life-support/power\" — that slash is the true Foundry slug (slugify is non-strict and only strips quotes). It is valid HTML5 and Foundry reads heading.id directly rather than via a CSS selector, so it is safe; noting it only because it looks unusual.",
+  "Register-vs-runbook nuance: PARALLEL-RUNBOOK §5 says evblockquoteCenter is read-aloud. In THIS unit that class carries no read-aloud narration at all — it wraps the THE MEDPOD rules sidebar and the three NPC stat blocks. I wrote them as GM-facing reference prose, and gave the atmospheric register to the actual scene descriptions (Ops, Medlab windows, the Morgue burst, the cascade of bodies) instead. Osterman's <em> line is the only spoken text and is voiced colloquially.",
+  "Terms I resolved from glossary_alien.json rather than the lang lock, listed so a reviewer can spot-check: Supply rating → 余量等级, Stretch → 节, Facehugger → 抱脸虫, Xenomorph/Xeno → 异形, Hadley's Hope → 哈德利的希望, Weyland-Yutani → 韦兰德-汤谷公司 (W-Y → 韦汤), Medlab → 医疗实验室, MedPod → 医疗舱, Stasis → 休眠, Keycard → 钥匙卡, Cutting Torch → 切割炬, Motion Tracker → 运动追踪器, Hive → 虫巢, Air Duct → 通风道, Company Agent → 公司代理人, Science Officer → 科学官, Newt → 纽特, Stage I/III → 第一/第三阶段.",
+  "One deliberate English-side liberty: the source says 'motion detector' twice, but the device is the pack's Motion Tracker item, so I used the settled 运动追踪器 both times rather than coining a second name for the same object."
+ ]
+}

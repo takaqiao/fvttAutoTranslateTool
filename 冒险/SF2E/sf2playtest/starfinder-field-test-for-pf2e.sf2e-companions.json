@@ -1,0 +1,271 @@
+{
+  "label": "伙伴\nCompanions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Advanced Maneuvers": "先进动作\nAdvanced Maneuvers",
+    "Specializations": "专攻\nSpecializations",
+    "Support Benefits": "支援增益\nSupport Benefits",
+    "Superior": "卓越的\nSuperior",
+    "Robot Companions": "机器人伙伴\nRobot Companions",
+    "Tactical": "战术（型）\nTactical",
+    "Customizations": "定制\nCustomizations",
+    "Commercial": "商业\nCommercial",
+    "Advanced": "先进（型）\nAdvanced"
+  },
+  "entries": {
+    "Imitator Chassis Support Benefit": {
+      "name": "模仿者底盘支援增益 Imitator Chassis Support Benefit",
+      "description": "<p>你的机器人同伴将注意力集中在与你相同的目标上，使其武器第一距离增量内的一名敌人分心。直到你的下个回合开始前，你对该目标造成伤害的打击会使其陷入 @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{措手不及}。</p>\n<p>Your robot companion focuses on the same target as you, distracting one enemy within the first range increment of its weapon. Until the start of your next turn, your Strikes against that target that deal damage make the target @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard}.</p>"
+    },
+    "Cameras": {
+      "name": "摄像机 Cameras",
+      "description": "<p>你的机器人伙伴配备了摄像头，使你能够使用你的通讯装置或其他类似设备看到你的机器人伙伴所看到的内容。</p>\n<p>Your robot companion is equipped with cameras, enabling you to see what your robot companion is seeing using your comm unit or other similar device.</p>"
+    },
+    "Emergency Reboot": {
+      "name": "紧急重启 Emergency Reboot",
+      "description": "<p>如果你的机器人同伴将因伤害而降至 0 生命值，则你可以以一个具有专注特征的自由动作启动紧急重启。若你如此做，你的机器人同伴改为降至 1 点生命值，并会完全关机 1 分钟。在这 1 分钟内，它对伤害免疫、不会受到伤害，且不能执行任何动作。</p>\n<p>If your robot companion would be reduced to 0 Hit Points by damage, as a free action with the concentrate trait, you can initiate an emergency reboot. If you do, your robot companion is reduced to 1 Hit Point and shuts down completely for 1 minute. During this minute it becomes immune to damage, can't be harmed, and can't take any actions.</p>"
+    },
+    "Ambusher": {
+      "name": "伏击者 Ambusher",
+      "description": "<p>在你的伙伴的自然环境中，它即使当前正被观察，也可以使用一个 @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{潜行} 动作。它在隐匿上的熟练等级提升为专家（如果它因自身类型而已经是专家，则提升为大师），且其敏捷调整值增加 1。它在无甲防御上的熟练等级提升为专家。</p>\n<p>In your companion's natural environment, it can use a @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} action even if it's currently observed. Its proficiency rank in Stealth increases to expert (or master if it was already an expert from its type), and its Dexterity modifier increases by 1. Its proficiency rank for unarmored defense increases to expert.</p>"
+    },
+    "Speedster": {
+      "name": "极速者 Speedster",
+      "description": "<p>你的机器人伙伴快得惊人。它的所有速度获得 +10 英尺状态加值。</p>\n<p>Your robot companion is incredibly fast. It gains a +10-foot status bonus to all of its Speeds.</p>"
+    },
+    "Emergency Repair": {
+      "name": "紧急维修 Emergency Repair",
+      "description": "<p>每 10 分钟一次，你的无人机可以用单个动作启动紧急维修程序，恢复 @Damage[@actor.level[healing]]{等同于其等级的生命值}。如果你的无人机是卓越型，则改为恢复 @Damage[(2 * @actor.level)[healing]]{等同于其等级两倍的生命值}。</p>\n<p>Once every 10 minutes, your drone can use a single action to initiate an emergency repair sequence, restoring @Damage[@actor.level[healing]]{Hit Points equal to its level}. If your drone is superior, it instead restores @Damage[(2 * @actor.level)[healing]]{Hit Points equal to twice its level}.</p>"
+    },
+    "Speakers": {
+      "name": "扬声器 Speakers",
+      "description": "<p>你的机器人伙伴装有扬声器，使你能够通过你的无人机说话。</p>\n<p>Your robot companion is equipped with speakers, enabling you to speak through your drone.</p>"
+    },
+    "Assistant": {
+      "name": "助手 Assistant",
+      "description": "<p>选择一项你和你的机器人同伴都受训的技能。若你的机器人同伴在你的触及范围内，你在所选技能检定上获得+1处境加值。</p>\n<p>Select one skill both you and your robot companion are trained in. If your robot companion is within reach, you gain a +1 circumstance bonus to the selected skill check.</p>"
+    },
+    "Biotech Healing Circuit": {
+      "name": "生物工程治疗回路 Biotech Healing Circuit",
+      "description": "<p>你的机器人同伴不再免疫治疗，并且可以像活体生物一样被治疗。</p>\n<p>Your robot companion is no longer immune to healing and can be healed as if it were a living creature.</p>"
+    },
+    "Specialized Robot Companion": {
+      "name": "专用机器人伙伴 Specialized Robot Companion",
+      "description": "<p>专门化的机器人伙伴更聪明，并会进行更复杂的行为。大多数机器人伙伴只能拥有一种专精。机器人第一次获得专精时，它还会获得以下效果。</p><ul><li>它的徒手攻击熟练等级提升为专家。</li><li>它的豁免检定和察觉的熟练等级提升为大师。</li><li>其敏捷调整值提高 1，智力调整值提高 2。</li><li>它的徒手攻击伤害从两个骰子提高为三个骰子，且其徒手攻击的额外伤害从 2 提高为 4，或从 3 提高为 6。</li></ul>\n<p>Specialized robot companions are more intelligent and engage in more complex behaviors. Most robot companions can have only one specialization. The first time an robot gains a specialization, it also gains the following.</p><ul><li>Its proficiency rank for unarmed attacks increases to expert.</li><li>Its proficiency ranks for saving throws and Perception increase to master.</li><li>Increase its Dexterity modifier by 1 and its Intelligence modifier by 2.</li><li>Its unarmed attack damage increases from two dice to three dice, and it increases its additional damage with unarmed attacks from 2 to 4 or from 3 to 6.</li></ul>"
+    },
+    "Olfactory Receptors": {
+      "name": "嗅觉受体 Olfactory Receptors",
+      "description": "<p>你的机器人伙伴可以在30英尺内将嗅觉作为一种临时感官来使用。</p>\n<p>Your robot companion can use scent as an improvised sense within 30 feet.</p>"
+    },
+    "Grounded": {
+      "name": "接地 Grounded",
+      "description": "<p>你的机器人伙伴失去其对电击的弱点。</p>\n<p>Your robot companion loses its weakness to electricity.</p>"
+    },
+    "Integrated Weapon Mount": {
+      "name": "集成式武器支架 Integrated Weapon Mount",
+      "description": "<p>你的机器人伙伴获得对简易武器和军用武器的受训熟练。它拥有一个武器架。你可以用一个带有操作特征的 10 分钟活动将一把武器安装到这个武器架中（或将其卸下）。当一把武器安装在这个武器架中时，你的机器人伙伴可以持用该武器，且无法被缴械而失去该武器。你可以选择这项定制两次，以获得第二个武器架。</p>\n<p>Your robot companion becomes trained in simple and martial weapons. It has one weapon mount. You can install (or uninstall) a weapon into this weapon mount as a 10-minute activity with the manipulate trait. When a weapon is installed in this weapon mount, your robot companion can wield the weapon and can't be Disarmed of the weapon. You can take this customization twice, to gain a second weapon mount.</p>"
+    },
+    "Armored Plates": {
+      "name": "装甲板 Armored Plates",
+      "description": "<p>你的机器人伙伴获得 AC 的 +1 物品加值；如果它是卓越机器人伙伴，则改为获得 AC 的 +2 物品加值。它仍然使用其无甲熟练等级来计算 AC。</p>\n<p>Your robot companion gains a +1 item bonus to AC, or a +2 item bonus to AC if it is a superior robot companion. It still uses its unarmored proficiency to calculate its AC.</p>"
+    },
+    "Resistant Panels": {
+      "name": "抗性面板 Resistant Panels",
+      "description": "<p>选择以下一种伤害类型：强酸、钝击、寒冷、火焰、穿刺、挥砍或音波。你的机器人伙伴获得针对所选伤害类型、等于其等级一半（向上取整）的抗性。你可以多次选择这项定制。</p>\n<p>Choose one of the following damage types: acid, bludgeoning, cold, fire, piercing, slashing, or sonic. Your robot companion gains resistance equal to half its level (rounded up) against the chosen damage type. You can select this customization more than once.</p>"
+    },
+    "Blinding Spotlight": {
+      "name": "致盲聚光灯 Blinding Spotlight",
+      "description": "<p>你的机器人同伴将一道强力聚光灯照射到其 60 英尺内它能看见的一个生物身上。目标陷入 @UUID[Compendium.sf2e.conditions.Item.TkIyaNPgTZFBCCuh]{目眩}，直到你的下个回合结束，或直到它移开视线，以先发生者为准。如果该生物原本未被你或你的一名或多名盟友察觉，此效果会将其指出。</p>\n<p>Your robot companion shines a powerful spotlight on a creature it can see within 60 feet of it. The target becomes @UUID[Compendium.sf2e.conditions.Item.TkIyaNPgTZFBCCuh]{Dazzled} until the end of your next turn, or until it Averts it Gaze, whichever comes first. This Points Out the creature if it was undetected by you or one of more of your allies.</p>"
+    },
+    "Expertise Module": {
+      "name": "专精模块 Expertise Module",
+      "description": "<p>选择你的机器人伙伴已受训的一项技能（即使该熟练等级是由技能模块等定制赋予的）。你的机器人伙伴在所选技能上的熟练等级提升为专家。</p>\n<p>Choose a skill your robot companion is trained in (even if this proficiency is granted by a customization such as skill module). Your robot companion becomes expert in the chosen skill.</p>"
+    },
+    "Agile Chassis Support Benefit": {
+      "name": "敏捷底盘支援增益 Agile Chassis Support Benefit",
+      "description": "<p>机器人伙伴携带的一件物品或武器会被发射到至多20英尺高的空中。你进行【互动】来接住该物品。</p>\n<p>An item or weapon the robot companion is carrying is launched up to 20 feet into the air. You Interact to catch the item.</p>"
+    },
+    "Powerful Chassis Support Benefit": {
+      "name": "强力底盘支援增益 Powerful Chassis Support Benefit",
+      "description": "<p>你的机器人伙伴用它的锯片无情地撕裂。直到你下个回合开始前，你对你的机器人伙伴所威胁的生物造成伤害的打击，还会额外造成 @Damage[1d6[persistent,bleed]] 伤害。如果你的机器人伙伴是商用型或先进型，流血伤害提高为 @Damage[2d6[persistent,bleed]]。</p>\n<p>Your robot companion mercilessly tears with its saw. Until the start of your next turn, your Strikes that damage creatures your robot companion threatens also deal @Damage[1d6[persistent,bleed]] damage. If your robot companion is commercial or advanced, the bleed damage increases to @Damage[2d6[persistent,bleed]].</p>"
+    },
+    "Artificial Personality": {
+      "name": "人工人格 Artificial Personality",
+      "description": "<p>你的机器人伙伴拥有人工人格，并且可以尝试需要魅力的技能检定。它会说通用语。</p>\n<p>Your robot companion has an artificial personality and can attempt skill checks that require Charisma. It can speak Common.</p>"
+    },
+    "Bully": {
+      "name": "霸凌者 Bully",
+      "description": "<p>你的伙伴会以支配性的威吓姿态恐吓敌人，并在战场上把他们推来搡去。它的运动和威吓的熟练等级提升为专家（如果它因自身类型已经是专家，则提升为大师），它的力量调整值增加 1，魅力调整值增加 3。</p>\n<p>Your companion terrorizes foes with dominance displays and pushes them around the battlefield. Its proficiency ranks for Athletics and Intimidation increase to expert (or master if it was already expert from its type), its Strength modifier increases by 1, and its Charisma modifier increases by 3.</p>"
+    },
+    "Nightvision Sensors": {
+      "name": "夜视传感器 Nightvision Sensors",
+      "description": "<p>你的机器人伙伴获得黑暗视觉。</p>\n<p>Your robot companion gains darkvision.</p>"
+    },
+    "Skill Module": {
+      "name": "技能模块 Skill Module",
+      "description": "<p>选择一项技能。你的机器人伙伴在所选技能上变为受训。你可以重复选择此定制，每次选择一项不同的技能。</p>\n<p>Choose a skill. Your robot companion becomes trained in the selected skill. You can select this customization repeatedly, choosing a different skill each time.</p>"
+    },
+    "Light Mounts": {
+      "name": "轻型支架 Light Mounts",
+      "description": "<p>你的机器人伙伴在20英尺半径内发出明亮光照（并在接下来的20英尺内提供微光）。你的机器人伙伴可以用单个动作打开或关闭这道光。</p>\n<p>Your robot companion sheds bright light in a 20-foot radius (and dim light for the next 20 feet). Your robot companion can turn this light on and off as a single action.</p>"
+    },
+    "Ram Slam": {
+      "name": "猛击冲撞 Ram Slam",
+      "description": "<p>你的机器人同伴沿直线Stride并进行一次攻城槌打击。只要它至少移动了20英尺且成功命中，目标就会被向后推10英尺。</p>\n<p>Your robot companion Strides in a straight line and makes a battering ram Strike. As long as it moved at least 20 feet and successfully hit, the target is pushed back 10 feet.</p>"
+    },
+    "Mature Robot Companion": {
+      "name": "成熟机器人伙伴 Mature Robot Companion",
+      "description": "<p>当你将一个机器人伙伴提升为成熟机器人伙伴时：</p><ul><li>如果你的伙伴是中型或更小，它的体型增大一级。</li><li>它的力量、敏捷、体质和感知调整值各增加 1。</li><li>将其察觉和所有豁免检定的熟练等级提升至专家。将其威吓、隐匿和求生的熟练等级提升至受训；如果它因其类型而已在这些技能中的某一项达到受训，则将该技能的熟练等级提升至专家。</li><li>将其徒手攻击的伤害从一个伤害骰提高至两个伤害骰（例如从 1d8 提高至 2d8）</li></ul>\n<p>When you advance a robot companion to a mature robot companion:</p><ul><li>If your companion is Medium or smaller, it grows by one size.</li><li>Increase its Strength, Dexterity, Constitution, and Wisdom modifiers by 1.</li><li>Increase its proficiency rank for Perception and all saving throws to expert. Increase its proficiency ranks in Intimidation, Stealth, and Survival to trained, and if it was already trained in one of those skills from its type, increase its proficiency rank in that skill to expert.</li><li>Increase its unarmed attack damage from one die to two dice (for instance 1d8 to 2d8)</li></ul>"
+    },
+    "Graceful Robot Companion": {
+      "name": "优雅机器人伙伴 Graceful Robot Companion",
+      "description": "<p>要将一个成熟机器人伙伴进阶为灵巧机器人伙伴：</p><ul><li>将其敏捷调整值提高 2，并将其力量、体质和感知调整值各提高 1。</li><li>将其特技的熟练等级提升至专家。</li><li>它以其徒手攻击造成的伤害额外增加 2。其攻击为无视抗性之目的视为魔法。</li><li>它习得其类型的先进机动。</li></ul>\n<p>To advance a mature robot companion to a nimble robot companion:</p><ul><li>Increase its Dexterity modifier by 2 and its Strength, Constitution, and Wisdom modifiers by 1.</li><li>Increase its proficiency ranks in Acrobatics to expert.</li><li>It deals 2 additional damage with its unarmed attacks. Its attacks become magical for the purpose of ignoring resistances.</li><li>It learns the advanced maneuver for its type.</li></ul>"
+    },
+    "Sapient": {
+      "name": "智性生物 Sapient",
+      "description": "<p>你的机器人伙伴已获得了知性，不过尚未成为完全自主的存在。它不再免疫精神或灵魂伤害，其智力提升至+0，并且能够尝试需要智力和魅力的动作。它会说通用语。由于战斗带来的压力，你在战斗中仍必须指挥你的机器人伙伴，它才能行动。</p>\n<p>Your robot companion has achieved sapience, though it's yet to become a fully autonomous being. It is no longer immune to mental or spirit damage, its Intelligence increases to +0, and it can attempt actions that require Intelligence and Charisma. It can speak Common. Due to the stress of combat, you must still Command your robot companion in battle for it to act.</p>"
+    },
+    "Powerful Chassis": {
+      "name": "强力底盘 Powerful Chassis",
+      "description": "<p>你的伙伴天生拥有纯粹的力量与威能。</p>\n<p>Your companion is built for raw strength and power.</p>"
+    },
+    "Tank Chassis Support Benefit": {
+      "name": "坦克底盘支援增益 Tank Chassis Support Benefit",
+      "description": "<p>你的机器人伙伴在战斗中协助你。你下一次对处于该机器人伙伴触及范围内的敌人进行打击的攻击检定获得+1处境加值。该加值持续到你第一次使用它时，或直到你下个回合开始时，以先发生者为准。</p>\n<p>Your robot companion assists you in battle. You gain a +1 circumstance bonus on your next attack roll to Strike a foe within the robot companion's reach. The bonus lasts until the first time you use it or until the beginning of your next turn, whichever comes first.</p>"
+    },
+    "Upgrade Slot": {
+      "name": "升级槽 Upgrade Slot",
+      "description": "<p>你的机器人伙伴获得一个护甲升级槽。</p>\n<p>Your robot companion gains one armor upgrade slot.</p>"
+    },
+    "Burrower": {
+      "name": "掘地者 Burrower",
+      "description": "<p>你的机器人伙伴获得 20 英尺的掘穴速度。</p>\n<p>Your robot companion gains a burrow Speed of 20 feet.</p>"
+    },
+    "Burly Robot Companion": {
+      "name": "壮硕机器人伙伴 Burly Robot Companion",
+      "description": "<p>要将一个成熟机器人伙伴提升为强壮机器人伙伴：</p><ul><li><p>如果你的伙伴是中型或更小，它的体型增大一级。</p></li><li><p>将其力量调整值提高 2，并将其敏捷、体质和感知调整值各提高 1。</p></li><li><p>将其运动的熟练等级提升为专家。</p></li><li><p>它以徒手攻击造成的伤害额外增加 3 点。</p></li><li><p>它的攻击在无视抗性时视为魔法。它习得其类型对应的先进机动。</p></li></ul>\n<p>To advance a mature robot companion to a burly robot companion:</p><ul><li><p>If your companion is Medium or smaller, it grows by one size.</p></li><li><p>Increase its Strength modifier by 2 and its Dexterity, Constitution, and Wisdom modifiers by 1.</p></li><li><p>Increase its proficiency rank in Athletics to expert.</p></li><li><p>It deals 3 additional damage with its unarmed attacks.</p></li><li><p>Its attacks become magical for the purpose of ignoring resistances. It learns the advanced maneuver for its type.</p></li></ul>"
+    },
+    "Flier": {
+      "name": "飞行者 Flier",
+      "description": "<p>你的机器人伙伴获得 20 英尺的飞行速度。</p>\n<p>Your robot companion gains a fly Speed of 20 feet.</p>"
+    },
+    "Camouflage": {
+      "name": "伪装 Camouflage",
+      "description": "<p>选择一种生物群系，例如平原或都市。你的机器人同伴在所选生物群系中可以 @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{潜行}，即使它当前正被观察到。它在隐匿上的熟练等级提升为专家（如果原本已是专家，则提升为大师）。</p>\n<p>Select one biome, such as plains or urban. Your robot companion can @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak} in the selected biome even if it's currently observed. Its proficiency rank in Stealth increases to expert (or master if it was already expert).</p>"
+    },
+    "Climber": {
+      "name": "攀爬者 Climber",
+      "description": "<p>你的机器人同伴获得 20 英尺的攀爬速度。</p>\n<p>Your robot companion gains a climb Speed of 20 feet.</p>"
+    },
+    "Surveillance Chassis Support Benefit": {
+      "name": "监视底盘支援增益 Surveillance Chassis Support Benefit",
+      "description": "<p>你的机器人同伴保持警戒，随时准备提醒你危险。直到你下个回合结束时，邻接侦查机身的生物无法夹击你，也无法使你变为 @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{措手不及}。</p>\n<p>Your robot companion is alert and ready to warn you of danger. Until the end of your next turn, creatures adjacent to the surveillance chassis cannot flank you or cause you to become @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard}.</p>"
+    },
+    "Tank Chassis": {
+      "name": "坦克底盘 Tank Chassis",
+      "description": "<p>你的伙伴被打造得能够承受考验。</p>\n<p>Your companion is built to endure.</p>"
+    },
+    "Optimized Avoidance": {
+      "name": "优化闪避 Optimized Avoidance",
+      "description": "<p>选择一种豁免检定类型。你的机器人同伴在对此类豁免掷出成功时不会受到伤害；这无法防止伤害以外的效果。你可以多次选择此定制。</p>\n<p>Choose one type of saving throw. Your robot companion takes no damage when it rolls a success on that type of save; this doesn't prevent effects other than damage. You can select this customization more than once.</p>"
+    },
+    "Recharge": {
+      "name": "充能 Recharge",
+      "description": "<p>你的无人机可以通过一个带有专注特征的单动作，为它接触到的一块电池充能，将它自身的部分能量储备转移到该电池中。这样做时，它会陷入 @UUID[Compendium.sf2e.conditions.Item.i3OJZU2nk64Df3xm]{笨拙 1} 状态，持续 1 轮。</p>\n<p>Your drone can recharge a battery it touches as a single action with the concentrate trait, transferring some of its own power reserves into the battery. When it does, it becomes @UUID[Compendium.sf2e.conditions.Item.i3OJZU2nk64Df3xm]{Clumsy 1} for 1 round.</p>"
+    },
+    "Agile Chassis": {
+      "name": "灵活底盘 Agile Chassis",
+      "description": "<p>你的同伴身形轻巧，且为敏捷而打造。</p>\n<p>Your companion is lightweight and is built for agility.</p>"
+    },
+    "Manual Dexterity": {
+      "name": "手部灵巧 Manual Dexterity",
+      "description": "<p>你的机器人同伴最多可以将它的两条肢体视为手来执行操纵动作。</p>\n<p>Your robot companion can use up to two of its limbs as if they were hands to perform manipulate actions.</p>"
+    },
+    "Aquatic Adaptation": {
+      "name": "水生适应 Aquatic Adaptation",
+      "description": "<p>你的机器人同伴是防水的，并获得20英尺的游泳速度。</p>\n<p>Your robot companion is waterproof and gains a swim Speed of 20 feet.</p>"
+    },
+    "Glow Up": {
+      "name": "焕彩升级 Glow Up",
+      "description": "<p>你的机器人伙伴被制造得富有表现力并能唤起情感。它的外交熟练等级提升至专家（如果原本已是专家，则提升至大师），且它的魅力调整值提高至 +3。它必须拥有人工人格或心智定制，才能选择此定制。</p>\n<p>Your robot companion is a made to be expressive and evoke emotion. Its proficiency ranks for Diplomacy increases to expert (or master if it was already expert) and its Charisma modifier increases to +3. It must have the artificial personality or sapient customizations to select this customization.</p>"
+    },
+    "Racer": {
+      "name": "赛车手 Racer",
+      "description": "<p>你的伙伴奔跑起来。它的速度、游泳速度或飞行速度获得 +10 尺状态加值（由你选择）。它的强韧豁免熟练等级提升至传奇，且它的体质调整值增加 1。</p>\n<p>Your companion races. It gains a +10-foot status bonus to its Speed, swim Speed, or fly Speed (your choice). Its proficiency in Fortitude saves increases to legendary, and its Constitution modifier increases by 1.</p>"
+    },
+    "Tracker": {
+      "name": "追踪器 Tracker",
+      "description": "<p>你的伙伴是一名出色的追踪者。它在循迹时可以以完整速度移动。它在生存上的熟练等级提升为专家（如果它因自身类型已经是专家，则提升为大师），并且它的感知调整值增加 1。</p>\n<p>Your companion is an incredible tracker. It can move at full Speed while following tracks. Its proficiency rank in Survival increases to expert (or master if it was already an expert from its type), and its Wisdom modifier increases by 1.</p>"
+    },
+    "Linguistic Upload": {
+      "name": "语言上传 Linguistic Upload",
+      "description": "<p>你的机器人伙伴能够说另外两种语言。它必须拥有人工人格或智能定制，才能选择此定制。</p>\n<p>Your robot companion can speak two additional languages. It must have the artificial personality or sapient customization to select this customization.</p>"
+    },
+    "Surveillance Chassis": {
+      "name": "监视机架 Surveillance Chassis",
+      "description": "<p>你的伙伴体型小巧且重量轻，便于飞行，也更容易在不被察觉的情况下通过。</p>\n<p>Your companion is small and lightweight to enable flight and more easily pass unseen.</p>"
+    },
+    "Wrecker": {
+      "name": "破坏者 Wrecker",
+      "description": "<p>你的同伴擅长砸碎东西。它的徒手攻击无视物体一半的硬度。它的运动熟练等级提升至大师，并且它的力量调整值增加 1。</p>\n<p>Your companion smashes things. Its unarmed attacks ignore half an object's Hardness. Its Athletics proficiency increases to master, and its Strength modifier increases by 1.</p>"
+    },
+    "Hardened Chassis": {
+      "name": "强化底盘 Hardened Chassis",
+      "description": "<p>你的机器人同伴的生命值每级增加 2 点。</p>\n<p>Your robot companion's Hit Points increase by 2 per level.</p>"
+    },
+    "Neural Upload": {
+      "name": "神经上传 Neural Upload",
+      "description": "<p>每10分钟一次，你可以使用一个带有专注特征的单一动作，暂时将你的意识完整上传到你的机器人伙伴中，通过思维直接控制它。当你这么做时，你会失去自己身体的全部感官信息，但可以通过你的机器人伙伴的身体进行感知。持续最多1分钟，你所进行的任何动作都会改为由你的机器人伙伴执行。你可以终止此效果。</p>\n<p>Once every 10 minutes, you can use a single action with the concentrate trait to temporarily upload your mind fully into your robot companion, controlling it directly by thought. When you do, you lose all sensory information from your own body, but can sense through your robot companion's body. For up to 1 minute, any actions you perform are instead performed by your robot companion. You can Dismiss this effect.</p>"
+    },
+    "Agility Optimization": {
+      "name": "敏捷优化 Agility Optimization",
+      "description": "<p>你的机器人同伴敏捷而优雅。它的移动不会触发反应。它在特技动作上的熟练等级提升为专家（如果它原本已经是专家，则提升为大师）。</p>\n<p>Your robot companion is agile and graceful. Its movement doesn't trigger reactions. Its proficiency rank in Acrobatics increases to expert (or master if it was already expert).</p>"
+    },
+    "Disturbing Display": {
+      "name": "骇人展示 Disturbing Display",
+      "description": "<p>机器人同伴改变其特征，使对手失去平衡。机器人同伴尝试使用欺瞒而非威吓，对该生物进行一次 @UUID[Compendium.sf2e.actions.Item.2u915NdUyQan6uKF]{挫败士气}；此次展示获得视觉（特征）并失去语言（特征）。当目标因该能力而陷入恐惧时，其对你的同伴处于 @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{措手不及} 状态。</p>\n<p>The robot companion morphs its features to throw its opponent off balance. The robot companion attempts a to @UUID[Compendium.sf2e.actions.Item.2u915NdUyQan6uKF]{Demoralize} the creature using Deception instead of Intimidation; this display gains the visual trait and loses the linguistic trait. While frightened by this ability, the target is @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} to your companion.</p>"
+    },
+    "Robot Companion": {
+      "name": "机器人伙伴 Robot Companion"
+    },
+    "Maneuver Module": {
+      "name": "机动模块 Maneuver Module",
+      "description": "<p>你的机器人同伴在你所选择的以下两个动作上获得+1处境加值：@UUID[Compendium.sf2e.actions.Item.Dt6B1slsBy8ipJu9]{Disarm}、@UUID[Compendium.sf2e.actions.Item.PMbdMWc2QroouFGD]{Grapple}、@UUID[Compendium.sf2e.actions.Item.lOE4yjUnETTdaf2T]{Reposition}、@UUID[Compendium.sf2e.actions.Item.7blmbDrQFNfdT731]{Shove}，或 @UUID[Compendium.sf2e.actions.Item.ge56Lu1xXVFYUnLP]{Trip}。如果你的机器人同伴是卓越（型），此加值提升为+2。你可以多次选择此定制，每次都必须选择不同的动作。</p>\n<p>Your robot companion gains a +1 circumstance bonus to two of the following actions of your choice: @UUID[Compendium.sf2e.actions.Item.Dt6B1slsBy8ipJu9]{Disarm}, @UUID[Compendium.sf2e.actions.Item.PMbdMWc2QroouFGD]{Grapple}, @UUID[Compendium.sf2e.actions.Item.lOE4yjUnETTdaf2T]{Reposition}, @UUID[Compendium.sf2e.actions.Item.7blmbDrQFNfdT731]{Shove}, or @UUID[Compendium.sf2e.actions.Item.ge56Lu1xXVFYUnLP]{Trip}. If your robot companion is superior, this bonus increases to +2. You can select this customization more than once, selecting different actions each time.</p>"
+    },
+    "High Speed": {
+      "name": "高速 High Speed",
+      "description": "<p>你的机器人伙伴将其一种速度提高至40尺。</p>\n<p>Your robot companion increases one of its Speeds to 40 feet.</p>"
+    },
+    "Share Charge": {
+      "name": "分担充能 Share Charge",
+      "description": "<p>你的机器人同伴可以使用需要电池的物品，即使该物品没有电池或电量，也能由它自身的动力储备提供能量。</p>\n<p>Your robot companion can use items that require a battery even when the item has no battery or charges by providing the power from its own power reserves.</p>"
+    },
+    "Hydraulic Flipper": {
+      "name": "液压鳍板 Hydraulic Flipper",
+      "description": "<p>机器人伙伴进行一次近战打击。若成功命中，它会自动将目标击倒至 @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{俯卧}。</p>\n<p>The robot companion makes a melee Strike. On a successful hit, it automatically knocks the target @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>"
+    },
+    "Imitator Chassis": {
+      "name": "模仿者机壳 Imitator Chassis",
+      "description": "<p>你的机器人同伴被制造出来是为了模仿活体生物。</p>\n<p>Your robot companion was built to imitate living creatures.</p>"
+    },
+    "Surgical Strike": {
+      "name": "精准打击 Surgical Strike",
+      "description": "<p>机器人伙伴先【移动】然后进行一次集成刀刃【打击】。如果命中，且该机器人伙伴原本处于未被察觉状态，目标会额外受到 1d6 精确伤害。如果你的机器人伙伴是战术型或先进型，则将该伤害提高为 2d6 精确伤害。如果它在施展外科打击开始时处于未被察觉状态，则直到此次【打击】后它仍保持未被察觉状态。</p>\n<p>The robot companion Strides and then makes an integrated blade Strike. If it hits, and the robot companion was undetected, the target takes an additional 1d6 precision damage. If your robot companion is tactical or advanced, increase this damage to 2d6 precision damage. If it was undetected at the start of its Surgical Strike, it remains undetected until after the Strike.</p>"
+    },
+    "Echolocation": {
+      "name": "回声定位 Echolocation",
+      "description": "<p>你的机器人同伴可以在30英尺内将听觉作为精确感官使用。</p>\n<p>Your robot companion can use hearing as a precise sense within 30 feet.</p>"
+    },
+    "Network": {
+      "name": "网络 Network",
+      "description": "<p>你的机器人伙伴内置了一套黑客工具包，并且可以用单个动作连接到相邻的计算机。连接后，你可以如同与该计算机相邻一样，对已连接的计算机进行计算机检定。</p>\n<p>Your robot companion has an integrated hacking kit and can connect to an adjacent computer as a single action. When it's connected, you can perform Computers checks on the connected computer as if you were adjacent to it.</p>"
+    },
+    "Daredevil": {
+      "name": "亡命徒 Daredevil",
+      "description": "<p>你的伙伴以优雅的跳跃与俯冲加入战斗。它获得“否认优势”能力，因此面对 @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden}、@UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected} 或夹击它的生物时，它不会处于 @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} 状态，除非该生物的等级高于你。它在特技的熟练等级提升至大师，且其敏捷调整值增加 1。它在无甲防御的熟练等级提升至专家。</p>\n<p>Your companion joins the fray with graceful leaps and dives. It gains the deny advantage ability, so it isn't @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} to @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden}, @UUID[Compendium.sf2e.conditions.Item.VRSef5y1LmL2Hkjf]{Undetected}, or flanking creatures unless such a creature's level is greater than yours. Its proficiency rank in Acrobatics increases to master, and its Dexterity modifier increases by 1. Its proficiency rank in unarmored defense increases to expert.</p>"
+    }
+  }
+}

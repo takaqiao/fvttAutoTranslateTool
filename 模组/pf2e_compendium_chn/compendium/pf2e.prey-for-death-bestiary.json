@@ -1,0 +1,1478 @@
+{
+    "label": "死亡猎物怪物图鉴 Prey for Death Bestiary",
+    "entries": {
+        "Flensing Floor": {
+            "prototypeToken": {
+                "name": "解剖地板"
+            },
+            "reset": "<p>手动。</p>",
+            "stealthdetails": "<p>（大师）</p>",
+            "items": {
+                "Sudden Blades": {
+                    "name": "刀刃突袭 Sudden Blades",
+                    "description": "<p><strong>触发</strong> 存放在任一武器架上的任一武器被扰动</p><hr /><p><strong>效果</strong> 进入房间的两扇门砰一声关闭且上锁（DC 40）。之后陷阱骰先攻。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "解剖地板 Flensing Floor",
+            "disable": "<p>@Check[thievery|dc:45]（大师）从陷阱的机械结构中分离触发器，每个武器架一次</p>",
+            "hazarddescription": "<p>长长的锯齿刀刃沿着地板上隐藏的凹槽切割，刃上凝结着仿佛血液实则致命毒药的物质。</p>",
+            "routine": "<p>（10个动作） 陷阱为每个动作骰一次锯齿剑攻击检定，在陷阱区域内的目标中均匀分配。若<strong>B7</strong>中没有足够目标来均分这些攻击，将随机选取额外目标。每破坏一把刀，陷阱失去一个动作。陷阱忽略多重攻击减值。</p>"
+        },
+        "Divine Living Rune": {
+            "blurb": "变体活符文",
+            "prototypeToken": {
+                "name": "神术活符文"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "神术活符文 Divine Living Rune",
+            "publicNotes": "<p>最知名的活符文属于古老的瑟西隆符文领主，随着瑟西隆在当代重建，它们也再度出现。不过，也能发现其他类型的活符文，它们各自有各自特定的能力。活符文也可以通过制造过程而使其打击造成不同类型的能量伤害。</p>\n<p>神术活符文由各种教会和教团制造而成，通常具有某位神、魔鬼大公或其他神力的徽记。</p>\n<hr />\n<p>魔法从一开始就很复杂，而到某种复杂程度时，法术和一个自主生物之间的区别就越来越模糊了。活符号是被重新整合和强化的魔法构装生物，由字形、符文和骇物配方维系在一起。</p>",
+            "items": {
+                "Truescript": {
+                    "name": "真实文稿 Truescript",
+                    "description": "<p>活符文不会说话，但它可以把自己的形态转变成复杂的文字和象形符号，让任何能够读懂书面文字的生物理解。活符文也能够理解任何书面或口头语言。</p>"
+                },
+                "Backdrop": {
+                    "name": "背景 Backdrop",
+                    "description": "<p>当一个生物试图打击活符文并大失败时，攻击者会击中活符文背后的表面（墙壁、帆布等等）。这可能会损坏或打破武器或表面。</p>"
+                },
+                "Surface-Bound": {
+                    "name": "表面束缚 Surface-Bound",
+                    "description": "<p>活符文只能沿着平面移动，比如地板和墙壁。如果它所在的表面被破坏了（比如被@UUID[Compendium.pf2e.spells-srd.Item.sxQZ6yqTn0czJxVd]击中的肖像或被溅到的水坑），活符文会受到@Damage[7d6[untyped]]伤害，并被转移到最近的平面上。如果5尺内没有平面，活符文就会被摧毁。</p>"
+                }
+            }
+        },
+        "Einherji Host": {
+            "items": {
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p><strong>阈值</strong> 180（3部分），90（2部分）</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                },
+                "Jotun Slayer": {
+                    "name": "巨人杀手 Jotun Slayer",
+                    "description": "<p>对抗巨人或体型至少为超大型的生物时，英灵战士群集的整齐划一伤害骰获得+4环境加值。</p>"
+                },
+                "Strike as One": {
+                    "name": "整齐划一 Strike as One",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 英灵战士群集对每个@Template[emanation|distance:5]内的敌人进行一次近战打击（@Check[reflex|dc:36|basic|options:area-effect]豁免）。伤害取决于消耗的动作。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(2d8+7)[slashing]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+14)[slashing]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+14)[slashing]|options:area-damage]伤害</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当英灵战士群集行走时，它们首先用自由动作重整队列，收缩为一个20 x 20的方阵（减去任何因丧失生命值减少的方格），然后移动最多等于速度的距离。这相当于巨型生物移动：举例来说，如果部队的任何一部分进入困难地形，额外的移动力消耗都对整个部队有效。</p>"
+                },
+                "+4 to Will Vs. Fear": {
+                    "name": "对抗恐惧意志豁免+4"
+                },
+                "Dagger Volley": {
+                    "name": "匕首齐射 Dagger Volley",
+                    "description": "<p>英灵战士群集投掷出匕首之雨，这是一种远程攻击。齐射覆盖@Template[cone|distance:30]范围；范围内的所有生物承受@Damage[(5d4+15)[piercing]|options:area-damage]伤害（@Check[reflex|dc:36|basic|options:area-effect]豁免）。当部队规模减少到2部分或更少时，范围缩小为@Template[cone|distance:15]。</p>"
+                },
+                "Pay For Every Inch": {
+                    "name": "寸土不让 Pay For Every Inch",
+                    "description": "<p>英灵战士群集重整队列，举起盾墙，然后准备反击。直到部队下回合开始，每次一个敌人进行行动穿过邻接部队的空格时，它承受@Damage[(4d8+18)[slashing]] 伤害（@Check[reflex|dc:36|basic]豁免）。</p>"
+                },
+                "Raise Shields": {
+                    "name": "举起盾墙 Raise Shields",
+                    "description": "<p>部队举起盾墙，其AC在部队下回合开始前增加2点。</p>"
+                },
+                "Song of Freedom": {
+                    "name": "自由之歌 Song of Freedom",
+                    "description": "<p>部队歌唱自由，增强信念和士气。直到部队下回合开始前，其对抗所有心灵效果的意志豁免加值增加为+29，而非仅针对恐惧效果。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "英灵战士群集"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "英灵战士群集 Einherji Host",
+            "allSaves": "对抗恐惧意志豁免+4",
+            "hp": "阈值180（3部分），90（2部分）",
+            "ac": "举盾37"
+        },
+        "Agent of Taraksun": {
+            "prototypeToken": {
+                "name": "塔拉克森的特工"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "塔拉克森的特工 Agent of Taraksun",
+            "items": {
+                "Towering Stance": {
+                    "name": "高耸姿态 Towering Stance",
+                    "description": "<p>虎佞修罗事实上是一个中型生物，但由于气度非凡，看上去就像一个大型生物。与虎佞修罗互动的生物可以尝试通过@Check[will|dc:36]豁免看穿虎佞修罗的真实形态。如果该生物成功，虎佞修罗针对该生物的攻击触及降至5尺（舌挞则为10尺）。</p>\n<p>如果虎佞修罗周围的全部生物都成功地不相信幻象，那么虎佞修罗的体型降为中型，只要所有人仍能看清其真实形态，虎佞修罗就会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}状态。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.PxLWRiCbgpqOTLO9]{效果：高耸姿态-不相信}</p>"
+                },
+                "Improved Knockdown": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedKnockdown]</p>",
+                    "name": "精通击倒 Improved Knockdown"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法时全豁免+1状态加值"
+                },
+                "Pervert Miracle": {
+                    "name": "腐化奇迹 Pervert Miracle",
+                    "description": "<p><strong>触发</strong> 虎佞修罗60尺范围内的敌人施放@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]或其他虎佞修罗能够施放的可以移除苦难或状态的增益类法术（例如@UUID[Compendium.pf2e.spells-srd.Item.SUKaxVZW2TlM8lu0]）</p>\n<hr />\n<p><strong>效果</strong> 虎佞修罗尝试反制敌人的法术（反制检定[[/r 1d20+24 #Counteract]]{+24}，反制等级 7）。如果虎佞修罗反制成功，触发该能力的生物将会受到@UUID[Compendium.pf2e.spells-srd.Item.7ZinJNzxq0XF0oMx]效果或其所尝试移除的效果的影响。</p>"
+                },
+                "Sap Mind": {
+                    "name": "破坏心智 Sap Mind",
+                    "description": "<p>虎佞修罗将视线聚集在60尺范围内的一个生物身上。该生物必须进行@Check[will|dc:34]豁免。无论豁免检定结果如何，目标都会免疫该能力 1 天时间。</p>\n<hr />\n<p><strong>大成功</strong> 虎佞修罗对目标强硬的抵抗猝不及防，在其下个回合结束前陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>\n<p><strong>成功</strong> 目标抵抗住了虎佞修罗的影响。</p>\n<p><strong>失败</strong> 目标的集中力和意志力被吸走；目标陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续时间 1 分钟。</p>\n<p><strong>大失败</strong> 同失败，但目标陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}，持续时间 1 小时。</p>"
+                }
+            },
+            "publicNotes": "<p>谎言、知识与欺骗乃是虎佞修罗的看家本事。他们是杰出的学者，对宗教、哲学、占星术以及类似的其它学科有着深刻而细致的了解。他们热衷于利用那些轻信的崇拜者，挖掘他们内心的贪婪与傲慢，好让他们自毁殿堂，亵渎并腐坏自己的信仰。而哪怕是在亵渎神圣这一既定目标的轨迹之上，虎佞修罗那扭曲的幽默也算得上毫无底线了。他们喜欢伪装成传播福惠的神圣使者的模样，寻找那单个或成群的可能受害者，待找到之后，他们就会利用自身那丰富的宗教知识来传授自相矛盾的智慧，最终让信仰在神职人员与信众的异端邪说下自内而外地瓦解。</p>\n<hr />\n<p>阿修罗之存在是神明亦会犯错的证明。这些魔族乃是神间事故的实体显现，当神明们在宇宙的尺度上犯下过错或被亵渎之时，阿修罗便会诞生。作为对于自身神术起源的回应，阿修罗最喜欢做的便是去污毁那些神圣的功业。他们迫不及待地奔赴物质位面，寻找寺庙、虔诚信徒的集会、以及各种宗教团体，在他们当中播下怀疑的种子，好摧毁神明们所寻求建立的事业。</p>",
+            "allSaves": "对抗魔法时全豁免+1状态加值",
+            "blurb": "变体虎佞修罗"
+        },
+        "Red Mantis Conspirator": {
+            "prototypeToken": {
+                "name": "红螳螂阴谋家"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "红螳螂阴谋家 Red Mantis Conspirator",
+            "blurb": "人类渥娜依阴谋家",
+            "items": {
+                "Blightburn Resin": {
+                    "name": "燃疫松香 Blightburn Resin",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:30]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[6d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段2</strong> @Damage[7d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段3</strong> @Damage[9d6[poison]]伤害 (1轮）</p>"
+                },
+                "Prayer Attack": {
+                    "name": "螳螂幻剑 Prayer Attack",
+                    "description": "<p><strong>需求</strong> 红螳螂阴谋家两手各握持着一把锯齿剑</p><hr /><p><strong>效果</strong> 红螳螂阴谋家向30尺内的一个敌人进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]。若虚招成功，阴谋家在同一回合中的下一次打击对目标造成2d6持续流血伤害。另外，只要阴谋家一直对目标为可见，距离也没有远离30尺以上，接下来针对目标的螳螂幻剑自动让目标对阴谋家的攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到回合结束。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>红螳螂阴谋家对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成2d6精准伤害。</p>"
+                },
+                "Vernai Training": {
+                    "name": "渥娜依训练 Vernai Training",
+                    "description": "<p>要复活被红螳螂阴谋家杀害的生物时，施法者或仪式主持者需先反制阴谋家对其死亡的影响（DC 34）。</p>"
+                }
+            }
+        },
+        "Trial of Tolerance": {
+            "stealthdetails": "<p>（大师）</p>",
+            "prototypeToken": {
+                "name": "忍耐试炼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "忍耐试炼 Trial of Tolerance",
+            "disable": "<p>@Check[thievery|dc:43]（大师）刮出刻在房间地板上的关键符文，或@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（9环级；反制DC 36)来反制试炼</p>",
+            "hazarddescription": "<p>熙熙攘攘的市场幻象填满空荡荡的房间，真实得令人信服，让观者面对令人恐惧的多样性和意料之外的遭遇。</p>",
+            "routine": "<p>(1个动作；情绪，恐惧，幻术，心灵） 一个极具攻击性或令人恐惧的形象出乎意料地出现，例如一个地狱骑士、恶魔、海盗或裹着斗篷的刺客突然从人群中出现，并迅速向房间中随机一个角色靠近，之后TA带着威胁之意挡在角色面前，直到本轮结束时TA失去兴趣并回到人群中。若目标对特定种类的生物抱有恐惧或厌恶，这种出乎意料的形象会是这些情绪的缩影。目标必须成功通过@Check[will|dc:46|traits:emotion,fear,illusion,mental]豁免或陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（若大失败则@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。若任何房间内的生物对威吓性形象采取敌对行动，忍耐试炼使用“暴力映射”反应动作。若三轮过去，而忍耐试炼并未使用暴力映射反应，危害失效。</p>",
+            "reset": "<p>一旦房间内不再有生物，试炼失效，并在1分钟后重置。</p>",
+            "items": {
+                "Unveil the Bazaar": {
+                    "name": "集市亮相 Unveil the Bazaar",
+                    "description": "<p><strong>触发</strong> 一个生物在<strong>B2</strong>区域开始其回合</p><hr /><p><strong>效果</strong> 伊利兹马格罗提城中的集市出现了，栩栩如生，天空万里无云。周遭人流密集，气味、景象和声音都无比真实，但没有人在PC周围走动时撞到他们。之后忍耐试炼骰先攻。</p>"
+                },
+                "Reflective Violence": {
+                    "name": "暴力映射 Reflective Violence",
+                    "description": "<p><strong>触发</strong> 一个生物对忍耐试炼生成的幻觉形象采取敌对行动，或在解除陷阱的尝试中失败</p><hr /><p><strong>效果</strong> 幻觉形象毫不费力地避开触发动作，之后用它最能造成痛苦的暴力手段攻击触发生物。不管这次攻击的表象如何，触发生物承受@Damage[(3d12+19)[mental]]伤害（@Check[reflex|dc:38|basic]豁免）。</p>"
+                }
+            }
+        },
+        "Talaro": {
+            "items": {
+                "Blightburn Resin": {
+                    "name": "燃疫松香 Blightburn Resin",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:30]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[6d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段2</strong> @Damage[7d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段3</strong> @Damage[9d6[poison]]伤害 (1轮）</p>"
+                },
+                "Change Shape": {
+                    "name": "变形 Change Shape",
+                    "description": "<p>你变成另一种由传承决定的型态。如果你的传承没有列出型态，则你的变化型态是无尾型态，呈现为你成长背景中常见的中型类人生物族裔（通常是人类）。此型态的年龄和身材都和你的真实型态相同，毛色等体貌特征也大致相似。使用变身算作是用欺骗技能的乔装动作来创造伪装。处在此型态时，你会失去由狐妖传承或族裔专长得到的无武装打击。你维持变化型态的时间不受限制，只要再次使用此能力，就可以变回真正的狐妖型态。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Crimson Shroud": {
+                    "name": "猩红寿衣 Crimson Shroud",
+                    "description": "<p><strong>频率</strong> 每天五次</p><hr /><p><strong>效果</strong> 塔拉罗将自己包裹在一层红色薄雾内一分钟。当寿衣启动时，他获得快速治疗7。他可以与寿衣交互让其围绕自己旋转，在下回合开始前在AC上获得+1环境加值。如果塔拉罗在寿衣启动时死亡，他整个尸体消失在红色薄雾里，仅留下装备。</p>"
+                },
+                "Prayer Attack": {
+                    "name": "螳螂幻剑 Prayer Attack",
+                    "description": "<p><strong>需求</strong> 塔拉罗两手各握持着一把锯齿剑</p><hr /><p><strong>效果</strong> 塔拉罗向30尺内的一个敌人进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]。若虚招成功，塔拉罗在同一回合中的下一次打击对目标造成2d6持续流血伤害。另外，只要塔拉罗一直对目标为可见，距离也没有远离30尺以上，接下来针对目标的螳螂幻剑自动让目标对塔拉罗的攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到回合结束。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>塔拉罗对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成3d6精准伤害。</p>"
+                },
+                "equipment-Assassination Contract": {
+                    "name": "暗杀契约 Assassination Contract"
+                },
+                "Prescient Dodge": {
+                    "name": "预见闪躲 Prescient Dodge",
+                    "description": "<p><strong>触发</strong> 一个生物尝试打击塔拉罗，而他并未@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]</p><hr /><p><strong>效果</strong> 塔拉罗预见到这次打击，他对抗触发攻击时AC获得+2环境加值。他可以在攻击结果骰出后使用此能力。若攻击失手，塔拉罗可以快速后空翻，以自由动作进行一次快步。</p>"
+                },
+                "Surprise Attack": {
+                    "name": "突然袭击 Surprise Attack",
+                    "description": "<p>在战斗的第一轮，还未行动的生物对塔拉罗@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "塔拉罗"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "塔拉罗 Talaro",
+            "blurb": "男性狐妖刺客"
+        },
+        "Red Mantis Assassin": {
+            "items": {
+                "Prayer Attack": {
+                    "name": "螳螂幻剑 Prayer Attack",
+                    "description": "<p><strong>需求</strong> 红螳螂刺客两手各握持着一把锯齿剑</p><hr /><p><strong>效果</strong> 红螳螂刺客向30尺内的一个敌人进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]。若虚招成功，红螳螂刺客在同一回合中的下一次打击对目标造成2d6持续流血伤害。另外，只要红螳螂刺客一直对目标为可见，距离也没有远离30尺以上，接下来针对目标的螳螂幻剑自动让目标对红螳螂刺客的攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到回合结束。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>红螳螂刺客对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成2d6精准伤害。</p>"
+                },
+                "Blightburn Resin": {
+                    "name": "燃疫松香 Blightburn Resin",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:30]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[6d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段2</strong> @Damage[7d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段3</strong> @Damage[9d6[poison]]伤害 (1轮）</p>"
+                },
+                "Surprise Attack": {
+                    "name": "突然袭击 Surprise Attack",
+                    "description": "<p>在战斗的第一轮，还未行动的生物对红螳螂刺客@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "红螳螂刺客"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "红螳螂刺客 Red Mantis Assassin",
+            "blurb": "人类刺客"
+        },
+        "Ordulf Bladecaller": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "“唤刃”奥尔多夫 Ordulf Bladecaller",
+            "blurb": "男性人类军阀",
+            "items": {
+                "Gorum's Major Boon": {
+                    "name": "古拉姆的上等恩赐 Gorum's Major Boon",
+                    "description": "<p>当奥尔多夫的生命值减少为0时，古拉姆将亚萨不朽战士的狂热灌输给他，奥尔多夫汲取自己的生命力继续战斗而不倒下。他被治疗到150点生命值并陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}（或将毁灭值增加1），这导致他看起来更加憔悴且伤痕累累。一旦他陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 4}，他死亡。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Crushing Insult": {
+                    "name": "粉碎侮辱 Crushing Insult",
+                    "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 奥尔多夫对一个30尺内他能看到的生物进行毁灭性的侮辱。奥尔多夫尝试一次@Check[intimidation|defense:will]检定，对抗目标的意志DC。目标对粉碎侮辱临时免疫24小时。</p><hr /><p><strong>大成功</strong> 侮辱如此不堪，打碎了集中力；目标陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，持续1分钟。</p>\n<p><strong>成功</strong> 侮辱令人分心，但其影响很快就过去了；目标陷入呆滞1和措手不及，直到奥尔多夫下回合开始。</p>\n<p><strong>失败</strong> 这侮辱几乎伤不到人，但足以分散目标的注意力，其陷入措手不及，直到奥尔多夫回合结束。</p>\n<p><strong>大失败</strong> 奥尔多夫的尝试显著失败了，其尝试侮辱的PC可以立刻以侮辱回击，以自由动作使用“侮辱奥尔多夫”行动。</p>"
+                },
+                "Deadly Display": {
+                    "name": "致命展示 Deadly Display",
+                    "description": "<p><strong>需求</strong> 奥尔多夫持用一把近战武器</p><hr /><p><strong>效果</strong> 奥尔多夫挥舞武器以示威胁。他对30尺内所有敌人进行[[/act demoralize]]，掷骰一次，以结果对抗每个敌人的意志DC。</p>"
+                },
+                "Whirlwind Strike": {
+                    "name": "旋风打击 Whirlwind Strike",
+                    "description": "<p>奥尔多夫打击其触及内的每个敌人。每次攻击都计入其多重攻击减值，但在所有攻击结束前不增加。</p>"
+                },
+                "Battle Arrogance": {
+                    "name": "战斗傲慢 Battle Arrogance",
+                    "description": "<p>奥尔多夫已有多年没有遇到过值得一提的战斗挑战了，哪怕在面对PC们这样致命的敌手时，他的傲慢也会成为他的敌人。如果一位PC成功@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]、@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]、@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]奥尔多夫，他的傲慢便会超越理智，令他更马虎地执行战术，在其下回合开始前，他的AC降到34。PC也可以尝试用更具威力的主题侮辱奥尔多夫。</p><h2>侮辱奥尔多夫 Insult Ordulf <span class=\"action-glyph\">2</span></h2><p>PC花上几秒钟时间侮辱和嘲讽奥尔多夫，之后尝试一次DC 38的@Check[deception|dc:38]、@Check[intimidation|dc:38]，或@Check[performance|dc:38]检定。若侮辱包括挑衅质疑奥尔多夫勇武的内容，将其比作巨魔或小鸡崽，侮辱他钓鱼的技巧，或将他和女巫、伊利森类比，则DC为33。</p><hr /><p><strong>大成功</strong> 你触到痛处。奥尔多夫因愤怒陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}，他还会因被你的话语冲击陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>成功</strong> 你的侮辱让奥尔多夫因愤怒而陷入恶心2。</p>\n<p><strong>失败</strong> 你的侮辱只产生了短暂影响，让奥尔多夫陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。他在他下回合结束时自动从恶心状态中恢复。</p>\n<p><strong>大失败</strong> 你侮辱奥尔多夫的尝试显著失败，他在24小时内对你的“侮辱奥尔多夫”行动临时免疫。</p>"
+                },
+                "Battle Cry": {
+                    "name": "战吼 Battle Cry",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 奥尔多夫骰先攻</p><hr /><p><strong>效果</strong> 奥尔多夫对一个可见敌人进行[[/act demoralize]]。</p>"
+                },
+                "Cleaving Blow": {
+                    "name": "劈击 Cleaving Blow",
+                    "description": "<p>奥尔多夫打击其触及内的两个邻接生物。两次攻击都正常计算多重攻击减值，但直到两次攻击结束前不增加。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "“唤刃”奥尔多夫"
+            }
+        },
+        "Gorumite Warpriest": {
+            "prototypeToken": {
+                "name": "古拉姆战斗祭司"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "blurb": "人类牧师",
+            "items": {
+                "equipment-Key": {
+                    "name": "钥匙 Key"
+                },
+                "Consecrated": {
+                    "name": "受加护 Consecrated",
+                    "description": "<p>只要皇冠屯内的加护术仪式效果仍存在，古拉姆战斗祭司的攻击、技能、豁免和察觉检定就获得+1状态加值；这些加值并未算入数据栏。</p>"
+                },
+                "Fervent Casting": {
+                    "name": "狂热施法 Fervent Casting",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 古拉姆战斗祭司大声宣扬古拉姆的荣耀。TA施放的下一个神术法术的动作减少一个（最少减到一个），但只能以战斗祭司本人为目标。若该法术影响一个区域或多个目标，比如祝福术，它只影响战斗祭司本人，即使它的持续时间多于一轮。</p>"
+                }
+            },
+            "name": "古拉姆战斗祭司 Gorumite Warpriest"
+        },
+        "Rhysaphine": {
+            "items": {
+                "Trick Rider": {
+                    "name": "特快骑手 Trick Rider",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 瑞萨菲正在骑乘一个盟友生物或与一个能作为坐骑的盟友生物邻接</p><hr /><p><strong>效果</strong> 若瑞萨菲骑乘，他下马；若瑞萨菲未骑乘，他骑上邻接生物。</p>"
+                },
+                "Wildfire Storm": {
+                    "name": "野火风暴 Wildfire Storm",
+                    "description": "<p>瑞萨菲展开翅膀旋转，生成一股火焰旋风，在@Template[emanation|distance:20]范围内造成@Damage[19d6[fire]|options:area-damage]伤害（@Check[reflex|dc:40|basic|options:area-effect]豁免）。他[[/gmr 1d4 #Recharge Wildfire Storm]]{1d4轮}内无法再次使用野火风暴。</p>"
+                },
+                "Smoke Vision": {
+                    "name": "烟雾视觉",
+                    "description": "<p>瑞萨菲能轻易看透烟雾，他忽略烟雾带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Shining Blaze": {
+                    "name": "闪耀烈焰 Shining Blaze",
+                    "description": "<p>5尺，@Damage[8d6[fire]|options:area-damage]伤害（@Check[reflex|dc:37|basic|options:area-effect]）</p>"
+                },
+                "Flame Jump": {
+                    "name": "炎火跃 Flame Jump",
+                    "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 瑞萨菲行走进入一团最少为他体型的明火，并立刻将自己传送到100里内另一团尺寸足够的火焰中。一旦他进入第一团火，瑞萨菲立刻知晓范围内所有其他火焰的位置。</p>"
+                },
+                "Flamewing Buffet": {
+                    "name": "炎翼猛击 Flamewing Buffet",
+                    "description": "<p>瑞萨菲以任意顺序进行一次弯刀打击和两次燃烧之翼打击。</p>"
+                },
+                "Greater Flameheart Weapon": {
+                    "name": "高等焰心武器 Greater Flameheart Weapon",
+                    "description": "<p>瑞萨菲能从自己的火焰之心中召唤强大的武器。在他手中的武器是<em>+3高等强击高等炽焰弯刀</em>，造成4d6火焰伤害，而非1d6。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "瑞萨菲"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "瑞萨菲 Rhysaphine",
+            "publicNotes": "<p>佩里天族是矛盾而充满艺术性的天族，以其美丽和极具欺骗性的天性而闻名。他们善变，但从无恶意，佩里天族会努力帮助凡人，但他们也更倾向于用谜语和委托任务的方式，而不会直接提供援助。</p>",
+            "blurb": "男性佩里天族骑士"
+        },
+        "Frostripper": {
+            "prototypeToken": {
+                "name": "霜裂者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>雪梦熊的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外2d6精准伤害。</p>"
+                },
+                "Tormented Snarl": {
+                    "name": "受难咆哮 Tormented Snarl",
+                    "description": "<p>雪梦熊可以用拟声能力模仿过往受害者的可怖哀嚎。每个@Template[emanation|distance:120]{120尺}内的生物承受@Damage[4d6[mental]|options:area-damage]伤害，且必须尝试一次@Check[will|dc:33|options:area-effect,damaging-effect,inflicts:fleeing,inflicts:frightened,inflicts:off-guard]豁免。</p>\n<p>因此能力陷入惊惧的生物对雪梦熊@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p><hr /><p><strong>大成功</strong> 生物不受影响且临时免疫1分钟。</p>\n<p><strong>成功</strong> 生物承受一半伤害且@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 生物承受全额伤害且@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 生物承受双倍伤害，@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}，且陷入@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]直到它下回合结束。</p>"
+                },
+                "Trackless Step": {
+                    "name": "无踪步 Trackless Step",
+                    "description": "<p>雪梦熊在自然环境中永远获得@UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]的好处，即使在全速行进时也是如此。</p>"
+                },
+                "Voice Imitation": {
+                    "name": "拟声 Voice Imitation",
+                    "description": "<p>通过尝试一次欺骗检定来@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]，雪梦熊可以模仿一个遇难者的声音。雪梦熊在这一检定上获得+4环境加值。</p>"
+                },
+                "Mauling Rush": {
+                    "name": "重锤冲刺 Mauling Rush",
+                    "description": "<p>雪梦熊行走最多等于其速度的距离。它能在本次移动的任意时点进行最多4次爪抓打击，每次针对不同的目标。这些攻击正常计算多重攻击减值，但多重攻击减值在雪梦熊进行完所有打击前不增加。</p>"
+                }
+            },
+            "name": "霜裂者 Frostripper",
+            "publicNotes": "<p>雪梦熊在陆地上和水中都十分致命，它是苔原上最令人恐惧的捕食者之一。从远处看，它可能会被误认成一只可怕的巨大北极熊，但任何不幸在近距离看到它的人都会在英年早逝前注意到它多出来的六条腿和令人不安的细长脖子。这些熊般的怪物不知疲倦地在冰雪中跟踪猎物。它们也是游泳健将，擅长潜伏在冰下突然伏击水面上毫无防备的生物，或者潜水到水下寻找食物。</p>\n<p>无数爪子和残暴的噬咬已经足够令人揪心，但这些生自噩梦的生物还会用邪恶的欺骗手段，引诱猎物进入暴风雪中。狡诈的雪梦熊会模仿遇险生物的声音，诱骗目标放弃安全的庇护所、开始一次注定失败的营救行动。生活在极地国度的人们已经学会在漫长的冬夜中听到求救声时谨慎应对。</p>",
+            "blurb": "变体雪梦熊"
+        },
+        "The Trial of Finality": {
+            "prototypeToken": {
+                "name": "终局试炼"
+            },
+            "reset": "<p>一旦房间内不再有活物，试炼失效，并在1分钟后重置。</p>",
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "终局试炼 The Trial of Finality",
+            "disable": "<p>@Check[thievery|dc:43]（大师）来使用工具，反射或让从上方照进烟雾的光线聚焦，好驱散烟雾和危害的魔法能力，或@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（9环级；反制DC 36）来反制试炼</p>",
+            "hazarddescription": "<p>一束光从天花板照到地板，形成一圈缓缓翻腾的烟雾。</p>",
+            "routine": "<p>(1或2个动作；情绪，恐惧，心灵） 若一个<strong>B4</strong>中的生物因“早已死亡”陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]，试炼的第一个动作是维持麻痹或失去意识效果；麻痹或失去意识的生物可以尝试一次新的@Check[will|dc:38|traits:emotion,fear,mental]豁免，对抗此效果，豁免结果如“早已死亡”中所描述的那样，每次豁免DC都减少1点，可累积。终局试炼的第二个动作是在烟雾中显现出一个恐怖的幽灵形状，尖叫并通过心灵感应恐吓<strong>B4</strong>中的所有人，告诉他们死亡即将来临。所有并未承受“早已死亡”引发的麻痹或失去意识的生物都必须尝试一次@Check[will|dc:38|traits:emotion,fear,mental]豁免。</p><hr><p><strong>大成功</strong> 生物不受影响。</p><p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p><strong>失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p><p><strong>大失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}，并且只要它还在惊惧就陷入@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态。</p>",
+            "stealthdetails": "<p>（大师）</p>",
+            "items": {
+                "A Quick Death": {
+                    "name": "早已死亡 A Quick Death",
+                    "description": "<p><strong>触发</strong> 一个活物踏入房间中心15尺范围，这一范围被光线直接照亮</p><hr /><p><strong>效果</strong> 触发生物瞬间确信它已经死去许久，而本冒险的种种事件不过是幻觉。若触发生物在本冒险间曾经接近死亡，它会短暂相信它并未真的从那次遭遇中活下来。生物必须尝试一次@Check[will|dc:38]豁免。</p><hr /><p><strong>大成功</strong> 生物摆脱了对自己已死的确信，意识到这是魔法引发的幻觉。终局审判失效。</p>\n<p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，并确信自己已经死了，现在只是作为幽灵，在房间中央看着自己的同伴。终局试炼之后骰先攻，该生物仍然麻痹，直到危害下回合结束为止。</p>\n<p><strong>失败</strong> 同成功，但生物@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]而非麻痹，直到危害下回合结束。在昏迷中，生物做了一个梦，梦中它被带领着通过灵魂之河，前往骨园接受审判。</p>\n<p><strong>大失败</strong> 同失败，但生物还陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}，或将已有毁灭值增加1。若生物因此而死，终局试炼失效。</p>"
+                }
+            }
+        },
+        "Dronuk": {
+            "items": {
+                "Prayer Attack": {
+                    "name": "螳螂幻剑 Prayer Attack",
+                    "description": "<p><strong>需求</strong> 多隆纳克两手各握持着一把锯齿剑</p><hr /><p><strong>效果</strong> 多隆纳克向30尺内的一个敌人进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]。若虚招成功，多隆纳克在同一回合中的下一次打击对目标造成2d6持续流血伤害。另外，只要多隆纳克一直对目标为可见，距离也没有远离30尺以上，接下来针对目标的螳螂幻剑自动让目标对多隆纳克的攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到回合结束。</p>"
+                },
+                "You're Next": {
+                    "name": "下个到你 You're Next",
+                    "description": "<p><strong>触发</strong> 多隆纳克将一个敌人的HP削减至0</p><hr /><p><strong>效果</strong> 多隆纳克对一个他能看到的生物尝试[[/act demoralize options=youre-next]]。他本次检定获得+2环境加值。</p>"
+                },
+                "equipment-Note From Saviya": {
+                    "name": "萨维亚的便条 Note From Saviya"
+                },
+                "Tail Trip": {
+                    "name": "尾巴摔绊 Tail Trip",
+                    "description": "<p><strong>触发</strong> 一个位于多隆纳克触及中的生物使用一个移动动作，或在移动动作中离开一个方格</p><hr /><p><strong>效果</strong> 多隆纳克用尾巴猛击该生物，尝试绊倒触发生物。多隆纳克尝试@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]触发生物。</p>"
+                },
+                "Mantis's Flurry": {
+                    "name": "螳螂连击 Mantis's Flurry",
+                    "description": "<p>多隆纳克第二次用锯齿剑的多重攻击减值是-2，第三次及更多则是-4。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "多隆纳克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "多隆纳克 Dronuk",
+            "blurb": "男性矮人异界裔刺客"
+        },
+        "Frost Roc": {
+            "name": "霜天雕 Frost Roc",
+            "items": {
+                "Mist Sight": {
+                    "name": "迷雾视野 Mist Sight",
+                    "description": "<p>霜天雕能看穿云、雾、霭以及其他水汽。</p>"
+                },
+                "Frozen Feathers": {
+                    "name": "冷羽 Frozen Feathers",
+                    "description": "<p>霜天雕张开翅膀疯狂拍打，在60尺锥形范围内释放一波镀冰的羽毛。范围内的所有生物都必须尝试一次@Check[reflex|dc:34|options:area-effect,damaging-effect]豁免。[[/gmr 1d4 #Recharge Frozen Feathers]]{1d4轮}内霜天雕无法再使用冷羽。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[3d6[piercing],5d6[cold]|options:area-damage]伤害。</p>\n<p><strong>失败</strong> 该生物受到@Damage[5d6[piercing],10d6[cold]|options:area-damage]伤害。 </p>\n<p><strong>大失败</strong> 该生物受到@Damage[8d6[piercing],15d6[cold]|options:area-damage]伤害，并@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}持续1分钟。</p>"
+                },
+                "Flying Strafe": {
+                    "name": "飞掠 Flying Strafe",
+                    "description": "<p>霜天雕飞行最多其速度的距离，然后在移动的任意时点进行两次脚爪打击。每次攻击都必须针对一个不同生物。每次攻击正常计算多重攻击减值。</p>"
+                },
+                "Snack": {
+                    "name": "小菜 Snack",
+                    "description": "<p>覆天雕攻击@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于其脚爪的生物时，它的喙啄打击攻击掷骰获得+2环境加值。</p>"
+                },
+                "Snatch": {
+                    "name": "携行 Snatch",
+                    "description": "<p>当有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于覆天雕的某只脚爪时（或两只脚爪都有），它能用至多半速进行飞行，并带着生物一起移动。</p>"
+                },
+                "Wing Rebuff": {
+                    "name": "翼返 Wing Rebuff",
+                    "description": "<p><strong>触发</strong> 一个生物移动进入霜天雕的翼击触及范围</p><hr /><p><strong>效果</strong> 霜天雕对触发生物进行一次翼击打击。若霜天雕将生物推离，它打断触发的移动动作。</p>"
+                },
+                "Improved Push": {
+                    "name": "精通推离 Improved Push",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedPush]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "霜天雕"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>有种故事在酒馆里很受欢迎，就是巨大的覆天雕俯冲下来将牲畜或扫射它的军队带走，扔进血流成河的废墟。但很多人没有意识到的是，在世界的偏远角落里，还有更危险的魔法覆天雕在徘徊。这些体型超群的大鸟拥有和它们生息地相关联的超自然能力，但它们和普通的覆天雕有一个共同点——它们的巨大体型。</p>\n<p>霜天雕是适应极地生活的捕食者，外形像猫头鹰。它们栖息在白雪皑皑的崎岖山峰间，或在广阔的冰川裂缝中筑巢，针叶林和苔原就是它们广阔的猎场。霜天雕在夜间活动，往往会在蛾眉月会满月时期连续每晚捕猎几周，而后在新月或云层被长时间遮盖期间（比如暴风雨）进入短暂休眠。它们被训练成为坐骑或守卫时会摒弃这一习性——蛇龙诸王领地或猛犸诸王国度中位于偏远地区的巨人或古拉姆教堂经常这么做。</p><h2>其他兽形覆天雕 Other Bestial Rocs</h2><p>其他种类的覆天雕已经进化到适应了偏远恶劣的环境，就像霜天雕一样，它们通常具有某种形式的元素魔力。阿兹兰特西部的风天雕（长得像信天翁）在破碎岛屿的崎岖悬崖中筑巢，它们的翅膀能命令强大的风。在偏远的阿卡迪亚群岛，亮粉色的长腿沼天雕在湿地上大步流星地穿行，使用水魔法帮助狩猎。毫无疑问，世界的其他偏远地方存在更多类型的覆天雕。</p>"
+        },
+        "Alktherisa and Omprisgor": {
+            "items": {
+                "Two As One": {
+                    "name": "合二为一 Two As One",
+                    "description": "<p>阿尔克瑟里萨和奥姆普里斯戈尔是一个生物，但他们的两颗头各自骰先攻，且拥有自己的回合。在每颗头回合开始时，它获得2个动作和1个反应动作。每颗头都控制着一组手臂，但两者都能控制蛇身。只要另一颗头还在，任何能切断头颅的能力都不会导致连体幻蛇死亡，但会让被切断的头部失去其回合、动作和反应动作。影响单一目标的心灵效果只影响其中一颗头。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(1d10+15)[bludgeoning]]，@Check[fortitude|dc:41|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                },
+                "Warpwave": {
+                    "name": "扭曲波 Warpwave",
+                    "description": "<p>许多幻蛇能在环境中创造让现实震荡的涟漪来向着敌人发射扭曲波，这能通过改变敌人对时间与空间的感知来使其陷入迷茫。当有生物受到扭曲波影响并在豁免检定中失败时，投掷[[/gmr 1d8 #Warpwave]]{1d8}并参考下表来获取该生物承受的特殊效果。除非另有说明，扭曲波的效果会持续[[/gmr 1d4 #Duration Warpwave Effect]]{1d4轮}，新产生的扭曲波效果会使得对应生物之前遭受的扭曲波效果结束。</p>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>[[/gmr 1d8 #Warpwave]]{1d8}</th>\n<th>扭曲波效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3})</td>\n</tr>\n<tr>\n<td>2</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]并获得[[/r 4d6 #Temporary Hit Points]]{4d6临时生命值}</td>\n</tr>\n<tr>\n<td>3</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh] （大失败时为永久）</td>\n</tr>\n<tr>\n<td>4</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3})</td>\n</tr>\n<tr>\n<td>5</td>\n<td>被能量丝@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]</td>\n</tr>\n<tr>\n<td>6</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]（仅能用于打击、行走或快步）</td>\n</tr>\n<tr>\n<td>7</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}</td>\n</tr>\n<tr>\n<td>8</td>\n<td>@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3})</td>\n</tr>\n</tbody>\n</table>"
+                },
+                "Warpwave Strike": {
+                    "name": "扭曲波打击 Warpwave Strike",
+                    "description": "<p>被科科塔尔的啃咬或爪子打击命中的生物必须成功通过@Check[fortitude|dc:38]豁免，失败则会成为@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.HKFoOZZV4WdjkeeJ]的对象。</p>"
+                },
+                "Burst of Creation": {
+                    "name": "创造爆发 Burst of Creation",
+                    "description": "<p>阿尔克瑟里萨和奥姆普里斯戈尔死亡时，他们于@Template[burst|distance:30]范围内爆炸，幻蛇能量冲刷过所有范围内生物。这些生物恢复@Damage[20d6[healing]]生命值，且必须成功通过一次@Check[fortitude|dc:38|options:area-effect]豁免，否则收到扭曲波的影响，持续1轮。</p>"
+                },
+                "Entropy Sense (Imprecise) 60 feet": {
+                    "name": "熵力感知（模糊）60尺",
+                    "description": "<p>科科塔尔能通过对混乱的概率与机运的超自然洞察力来预测到生物的存在。这会赋予它在所列范围内感知生物的能力。@UUID[Compendium.pf2e.spells-srd.Item.EoKBlgf6Smt8opaU]能防止生物被科科塔尔通过熵力感知自动侦测到（无需反制检定）。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法全豁免+1状态加值"
+                },
+                "Fast Healing 15": {
+                    "name": "快速治疗 15",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+                },
+                "Eat Death": {
+                    "name": "吞噬死亡 Eat Death",
+                    "description": "<p><strong>触发</strong> 一个位于奥姆普里斯戈尔触及内的生物被造成生命值伤害的法术选为目标</p><hr /><p><strong>效果</strong> 奥姆普里斯戈尔尝试以宗教检定反制该法术；若检定成功，法术被反制，奥姆普里斯戈尔获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态，持续1轮；他可以用这一额外动作行走或打击。</p>"
+                },
+                "Eat Life": {
+                    "name": "吞噬生命 Eat Life",
+                    "description": "<p><strong>触发</strong> 一个位于阿尔克瑟里萨触及内的生物被治疗生命值或赋予临时生命的法术选为目标</p><hr /><p><strong>效果</strong> 阿尔克瑟里萨和奥姆普里斯戈尔成为该法术的额外目标，即便法术通常无法以额外生物为目标。</p>"
+                },
+                "Protean Anatomy": {
+                    "name": "幻蛇体质 Protean Anatomy",
+                    "description": "<p>幻蛇的要害器官会不断地变形和改变位置。当幻蛇承受酸蚀、电击、或音波伤害后，它会立即获得抗力数据中所列数值对应的伤害抗力。这会持续1小时或直至幻蛇承受上述伤害类型中的其他种类为止（在这种情况下，幻蛇的抗力会再度变换并与该类型相匹配），以较先发生者为准。</p>\n<p>除非幻蛇自身是自愿的目标，否则它对变形效果免疫。若陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]或@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]，幻蛇会在它的下个回合结束时自动恢复，因为新的感受器官已经形成并取代了受损的器官。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.c6SiBB3mzV8lZUQr]{效果：幻蛇体质}</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Spatial Riptide": {
+                    "name": "空间激流 Spatial Riptide",
+                    "description": "<p>30尺。有生物在灵光范围内使用传送能力或者由于传送抵达灵光范围内时，必须成功通过@Check[fortitude|dc:41]豁免，失败会在完成传送前从现实中驱离[[/gmr 1d4 #rounds]]轮。该生物无法行动，感知不到任何事物，也无法成为目标。豁免成功时，该生物能正常完成传送，但会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。科科塔尔免疫该效果。</p>"
+                },
+                "Change Shape": {
+                    "name": "变形 Change Shape",
+                    "description": "<p>科科塔尔呈现出任意超大型或更小生物的外观。这不会改变它的速度、它的打击的攻击和伤害加值，但是可能会改变它的打击造成的伤害类型。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Reshape Reality": {
+                    "name": "重塑现实 Reshape Reality",
+                    "description": "<p>当科科塔尔施放@UUID[Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX]时，会将准现实的物质注入到幻象中。那些没能识破幻术的生物会将通过法术创造的建筑和地形视为真实的一般，能爬上幻术阶梯，会被困在幻术流沙中等等。</p>"
+                },
+                "Protean Anatomy 25": {
+                    "name": "幻蛇体质 Protean Anatomy 25",
+                    "description": "<p>幻蛇的要害器官会不断地变形和改变位置。当幻蛇承受酸蚀、电击或音波伤害后，它会立即获得抗力数据中所列数值的对应伤害抗力。这会持续1小时或直至幻蛇承受上述伤害类型中的其他种类为止（在这种情况下，幻蛇的抗力会再度变换并与该类型相匹配），以较先发生者为准。</p>\n<p>除非幻蛇自身自愿，否则它对变形效果免疫。若陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]或@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]，幻蛇会在它的下个回合结束时自动恢复，因为新的感受器官已经形成并取代了受损的器官。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.c6SiBB3mzV8lZUQr]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "阿尔克瑟里萨和奥姆普里斯戈尔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿尔克瑟里萨和奥姆普里斯戈尔 Alktherisa and Omprisgor",
+            "publicNotes": "<p>科科塔尔属于幻蛇中统治阶级的种姓，他们策划了对秩序壁垒的袭击，并能自信地且率性裁决幻蛇间的争端。科科塔尔从外观来看是一只闪耀的蛇形生物，生有尖刺、爪子和龙类样子的头颅。科科塔尔的实际外形在不断地变化，但通常会维持大约18尺长，体重保持在大概1500磅重。尽管实体形态会发生变化，但科科塔尔有两件事是不会改变的：首先，科科塔尔的眼睛总是敏锐的渐变琥珀色或紫色。第二，科科塔尔的阶级标志——头顶上徘徊着的皇冠形徽记——从不会改变。科科塔尔无法摘掉他的皇冠，但可以短暂压制它，不过大多数科科塔尔都不愿意这么做，因为他们将此行为视为一种懦弱或耻辱的象征。</p>\n<p>科科塔尔在幻蛇社会中充当着某种祭司的职位，在深邃诉说者与其他幻蛇间充当中间人的职责。所有其他幻蛇都会服从科科塔尔，对待他们的方式类似于凡人都市中的公民对待受人尊敬的贵族一般；哪怕是更强大的幻蛇也会遵从科科塔尔的意志。与许多宗教一样，其教义和宗教体系易于解释与改变，在幻蛇之中这种情况更为明显。无论深邃诉说者的本质和欲望是什么，每个的科科塔尔通常会根据自身的意志和意图得出截然不同的结论。然而对幻蛇来说，这种内在的不和谐是一种优势而非弱点。</p>\n<hr />\n<p>幻蛇是混乱的捍卫者，被称为大漩涡的混沌原初位面的原住民，他们将散播混乱与加速熵的终结视为自己的使命。最强大的幻蛇是被集体称之为幻蛇领主的半神，然而这些变幻莫测的存在在物质宇宙中的信仰往往暧昧不明且藏于暗处。</p>\n<p>幻蛇按照一种松散的种姓制度划分自身族群，并掌握着令人眼花缭乱的多样能力。大多数幻蛇拥有蛇形的躯体和原初猛兽的头颅。学者们一直着迷于这个事实——即这些无序分裂的后代为何会有如此多具备共性的特征——因此他们指出，即便在最纯粹的混沌中，也存在着某些秩序的表象。而其他人则注意到蛇形是最为原始的形态之一，这也许是在暗示一个事实，即在时间的起点，此类形态可能是唯一的存在。幻蛇自身对此并没有任何好说的，而讽刺的是，这种态度反而使得人们对其种群的说法缺乏共识并加深了人们的困惑。毕竟，连混沌本身都不能信赖混沌，难道这不才是熵的最纯粹形式么？</p>",
+            "allSaves": "对抗魔法全豁免+1状态加值",
+            "hp": "快速治疗15",
+            "blurb": "变体双性科科塔尔"
+        },
+        "Zaiho": {
+            "items": {
+                "Gadget Defense": {
+                    "name": "小装置防御 Gadget Defense",
+                    "description": "<p><strong>触发</strong> 财穗将要骰豁免以对抗一个造成生命值损失的效果</p><hr /><p><strong>效果</strong> 财穗迅速从口袋里掏出一些古怪的小装置来保护自己免受触发效果影响。他尝试一次@Check[crafting]检定代替正常的豁免检定，将检定结果视为豁免结果。若结果为大失败，财穗的小装置受损，他在24小时内无法再使用此反应动作。</p>"
+                },
+                "Fiery Leap": {
+                    "name": "炎火跳 Fiery Leap",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 财穗跳跃。当他这么做时，他将一把引爆装置扔进起跳时与他邻接的一个方格中。方格中的生物承受@Damage[11d10[fire]]伤害（@Check[reflex|dc:37|basic]豁免）；该生物及所有与目标方格邻接的生物都承受@Damage[(11[splash])[fire]]{11点火焰溅射}伤害。 </p>"
+                },
+                "Twinned Combat": {
+                    "name": "孪生战斗 Twinned Combat",
+                    "description": "<p>只要敌人正在承受白田炸弹带来的持续伤害或惊惧状态，它就对财穗的打击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。财穗的炎火跳不对白田造成溅射伤害。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "财穗"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "财穗 Zaiho",
+            "blurb": "男性人类发明家"
+        },
+        "Valkyrie of Gorum": {
+            "items": {
+                "Ravenspeaker": {
+                    "name": "鸦语者 Ravenspeaker",
+                    "description": "<p>女武神将渡鸦用作仆从和间谍。她能与渡鸦交流，且可以拥有最多三只听从她命令的渡鸦仆从。女武神总是能通过仆从渡鸦的感官观察。</p>"
+                },
+                "Claimer of the Slain": {
+                    "name": "挑选战死者 Claimer of the Slain",
+                    "description": "<p>女武神能侦测到刚刚在战斗中死去的灵魂。一位女武神可以花费10分钟在一个生物的尸体前祈祷，该生物的死亡时间必须在12小时内；若该生物值得成为@UUID[Compendium.pf2e.pathfinder-monster-core-2.Actor.jgTjzUA2nJKYY2Tu]，女武神将该生物转化为英灵战士。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                },
+                "Recall the Fallen": {
+                    "name": "唤回陨落者 Recall the Fallen",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 一个60尺内且并非构装体或不死生物的盟友被削减至0HP，且@UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]状态值不超过2</p>\n<hr />\n<p><strong>效果</strong> 女武神让目标的生命值恢复@Damage[5d10[healing]]点。</p>"
+                },
+                "Storm of Battle": {
+                    "name": "战斗风暴 Storm of Battle",
+                    "description": "<p>女武神将长枪猛地掷向空中，在@Template[burst|distance:100]范围内制造一场巨大雷暴。雷电长枪如雨点般落在区域内敌人身上，造成@Damage[4d12[electricity]|options:area-damage]伤害（@Check[reflex|dc:32|basic|options:area-effect]豁免）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "古拉姆的女武神"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "古拉姆的女武神 Valkyrie of Gorum",
+            "publicNotes": "<p>挑选战死者的女武神又被称为战斗天使，她们的歌声响彻钢铁交击之处。女武神是体格健硕的类人生物，她们追求最为史诗的战斗和传奇般的冲突，以便带走世上最伟大战士的灵魂。女武神会将这些灵魂转化为不死不灭的英灵战士。</p>\n<p>女武神通常为战争与战斗之神服务，但女武神也可能会向任何她们认为值得侍奉的神祇宣誓效忠。古拉姆因拥有众多女武神和英灵战士仆从而闻名，但他并不是唯一因此闻名的神。贝斯玛拉同样有女武神作为神仆，许多“幽灵船”传说中出现的船其实都是由侍奉海盗女王的英灵战士船员控制的。</p>",
+            "blurb": "变体女武神"
+        },
+        "Bloody Hands": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "血手 Bloody Hands",
+            "items": {
+                "Bloody Mess": {
+                    "name": "血腥混乱 Bloody Mess",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> B血手向四面八方挥出利爪，让@Template[emanation|distance:20]{20尺半径}内所有活物喷出鲜血，空气中弥漫着细密的红色血雾。区域内的所有生物都必须尝试一次@Check[fortitude|dc:37|options:area-effect,damaging-effect,inflicts:enfeebled]豁免——已经陷入受伤状态的生物在豁免中承受-2减值。如果多于3个生物在豁免中失败，20尺半径范围内的血雾变得非常厚重，所有范围内生物获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，直到血手下回合结束为止。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[8d6[slashing]|options:area-damage]伤害。</p>\n<p><strong>失败</strong> 该生物受到@Damage[8d6[slashing],4d6[persistent,bleed]|options:area-damage]伤害，且因失血陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，持续1分钟。</p>\n<p><strong>大失败</strong> 该生物受到@Damage[12d6[persistent,bleed]|options:area-damage]伤害，且因失血陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法全豁免+1状态加值"
+                },
+                "Battle Reek": {
+                    "name": "战斗嗅觉 Battle Reek",
+                    "description": "<p>30尺。血手散发着广阔战场的腐肉臭气——死亡和泥沼那令人厌恶的混合味道。任何进入灵光或在灵光范围内开始回合的生物必须成功通过一次@Check[fortitude|dc:34]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时，只要生物还在恶心就@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。在灵光中，受影响的生物对抗恐惧或从恶心状态中恢复的豁免承受-2环境减值。豁免成功的生物临时免疫1分钟。</p>"
+                },
+                "Leaping Slam": {
+                    "name": "跳跃猛击 Leaping Slam",
+                    "description": "<p>血手行走，然后@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]，它可以在被生物占据的空间落地。所有在他落地点10尺半径内的生物都必须尝试一次@Check[reflex|dc:37|options:damaging-effect]豁免。</p><hr /><p><strong>大成功</strong> 生物向旁边躲开，不受伤害，它可以选择任何与血手邻接的空格并立刻移动过去；此移动不会触发反应。</p>\n<p><strong>成功</strong> 生物受到@Damage[4d6[bludgeoning]]伤害并被推进一个由血手选择且与其原本空格邻接的空间。</p>\n<p><strong>失败</strong> 生物受到@Damage[8d6[bludgeoning]]伤害并被推进一个由血手选择且与其原本空格邻接的空间，且陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>\n<p><strong>大失败</strong> 生物受到@Damage[8d6[bludgeoning]]伤害，陷入倒地，并被血手禁足。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "血手"
+            },
+            "publicNotes": "<p>当血手在外层裂隙中一片偏远沼泽中初生时，他并不是古拉姆的代理人。在生命的最初几千年里，他一直在广阔的泥沼中为自己争战，最终建立了一个面积相当于一块小型大陆的王国，在这里他的统治无可置疑——至少在古拉姆的英灵战士群集入侵前是这样。亚萨神族的战斗力让血手震惊，他继而认为他帝国的覆灭是一种荣耀，而在入侵结束时，他自豪地与亚萨神族并肩作战，无情地摧毁了那些最近因恐惧归顺的恶魔军队。他对战斗的渴望让英灵战士钦佩，但他们不清楚该如何对待这个青蛙状的恶魔，尤其是当他跟着他们穿过大漩涡回到冲突海岸时。在王国边境经历了几个世纪的争斗后，血手对虐待的兴趣日渐减少，对战斗策略更为着迷，他得到古拉姆的允许，成为他的神仆之一。</p>\n<p>血手看起来是一个勉强有人形的青蛙状恶魔，举手投足令人联想到一只笨拙的猩猩。他黏糊糊的绿色皮肤沿着手臂逐渐变成血红色，因此他的爪子看起来好像总是滴着鲜血。他长着四只小眼睛，大嘴里满是锋利的牙齿。</p><h2>曾是恶魔 Ex-demons</h2><p>恶魔以残忍和它们对混乱与破坏的肆意追求而闻名遐迩，但时不时会有恶魔遇到一些让他们偏离本性的东西。血手就是一个例子，他通过古拉姆发现，恶魔对最纯粹的战争毫无兴趣。</p><h2>神仆 Servitor Of The Divine</h2><p>所有神祇都有一群自己喜爱的代理人，负责在凡人间执行自己的意志。神使是其中最为人熟知的一种——独一无二的实体，担任神祇的代言人和信使，通常在凡人施法者以异界侍从仪式的形式请求帮助时被派遣。但神使并不是唯一被允许在信徒中行动或打击信仰之敌的存在。被称为神仆的存在同样独一无二、强大，是神祇最忠实的信徒之一。</p>\n<p>神仆相当强大，但并非真正不朽。任何神仆都可能在战斗或意外中丧命。一些情况下，丧命神仆的躯体会消失，留下强大的宝物。另外一些情况，尸体会单纯地倒在地上。依据神祇的意愿，神仆可以被复活，但大部分时候神祇不会立刻施以复活，而可能只是去创造一个新的，或让完全不同的另一位仆从晋升。若是令人难以置信的事情发生——神祇本身灭亡——祂们现有的神仆不会死亡，但会立刻意识到他们的创造者已经死亡。一些神话讲述了神仆获取神力，取代创造者成为半神或真神的故事；在另一些神话中，绝望的神仆可能会寻找一位新神或女神来侍奉。</p>\n<p>神仆的稀有度都是独特，大部分时候他们都曾是凡人信徒——可能是类人生物，也有其他——他们都大大取悦了神祇。赋予神仆的力量和能力千奇百怪，但几乎从未有过任何神祇的神仆低于15级，至少也会比他们生前要高上几级。一位神祇保有的神仆数量没有限制，但依据传统，大部分神最多保有三位。</p>\n<p>在古拉姆这里，他最著名的三位神仆分别是恶魔、龙和元素生物，它们要么体现了战争的混乱，要么体现了原始的锻造精神。不管是哪种，这些独特神仆的世界观与哲学都与钢铁雄主非常相似，让它们被同类排挤甚至唾弃。然而对血手、圣牙合烈火淬炼来说，生命中没有比侍奉战神更令人欣慰的事了。</p>",
+            "allSaves": "对抗魔法全豁免+1加值"
+        },
+        "Vatumledor": {
+            "prototypeToken": {
+                "name": "瓦图姆莱多"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "瓦图姆莱多 Vatumledor",
+            "blurb": "雄性古诡谋龙",
+            "items": {
+                "Conjure Disguise": {
+                    "name": "唤出伪装 Conjure Disguise",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 瓦图姆莱多变出一具它曾见过的类人生物的完美肉套，之后他将自己塞进去，同时为肉套生成合适的服装。整个过程需要1分钟来完成，期间瓦图姆莱多陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。如果这一过程停止或被打断，肉套被摧毁。一旦完成，他可以永久保持这种伪装。</p>\n<p>这种效果等同于变身能力，但伪装的本质并非魔法效果，因此对于侦测魔法戏法或类似效果而言不会被识别为魔法。变形时，瓦图姆莱多失去身体回缩能力。</p>\n<p>如果瓦图姆莱多在穿着伪装时遭到重击，肉套被摧毁并立刻爆炸，这具有引爆伪装的效果，但生物使用比其豁免掷骰高一级的成功度。</p>"
+                },
+                "Detonate Disguise": {
+                    "name": "引爆伪装 Detonate Disguise",
+                    "description": "<p><strong>需求</strong> 瓦图姆莱多正穿着唤出的伪装</p><hr /><p><strong>效果</strong> 瓦图姆莱多破开伪装而出，伪装被摧毁。“爆炸性”的身份揭露对与龙邻接的生物造成@Damage[18d6[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:39|basic|options:area-effect]豁免）。豁免失败的生物因被伪装的碎片覆盖而@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。任何与瓦图姆莱多位于同一格子的生物在伪装引爆后被推进最近的空格。</p>"
+                },
+                "Draconic Momentum": {
+                    "name": "龙之威势 Draconic Momentum",
+                    "description": "<p>瓦图姆莱多的打击重击时，恢复烟雾龙息的使用次数。</p>"
+                },
+                "+2 Status to All Saves vs. Occult": {
+                    "name": "对抗异能时全豁免+2状态加值"
+                },
+                "Retract Body": {
+                    "name": "身体回缩 Retract Body",
+                    "description": "<p><strong>触发</strong> 瓦图姆莱多被一个龙能看到的生物的攻击命中或重击</p><hr /><p><strong>效果</strong> 瓦图姆莱多让被命中的部位回缩或扭开来避免攻击，他的AC对触发攻击获得+2环境加值。</p>"
+                },
+                "Draconic Frenzy": {
+                    "name": "龙之狂怒 Draconic Frenzy",
+                    "description": "<p>瓦图姆莱多以任意顺序进行两次爪抓和一次尾扫打击。</p>"
+                },
+                "Rushed Transformation": {
+                    "name": "仓促变形 Rushed Transformation",
+                    "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 在魔法帮助下，瓦图姆莱多竭尽全力迅速将身体重塑为普通的类人生物形态。这具有类人形态法术的效果，但只持续1分钟， 且因为这一变形是用龙的身体粗糙地模仿类人生物，他无法获得欺骗检定上的+4状态加值。瓦图姆莱多可以解消此效果。效果结束时龙会留下魔法召唤的伪装肉片，这可能会暴露龙的存在。</p>"
+                },
+                "Smoke Breath": {
+                    "name": "烟雾龙息 Smoke Breath",
+                    "description": "<p>瓦图姆莱多释放出一团有毒烟雾，在@Template[cone|distance:60]范围内造成@Damage[16d6[poison]|options:area-damage]伤害（@Check[fortitude|dc:39|basic|options:area-effect]豁免）。烟雾停留1分钟。这具有迷雾术的效果，但范围是锥形。[[/gmr 1d4 #Recharge Smoke Breath]]{1d4轮}内他无法再使用烟雾龙息。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>瓦图姆莱多的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的目标额外造成3d6精准伤害。</p>"
+                }
+            },
+            "publicNotes": "<p>诡谋龙藏身于阴影和上层社会中。这些龙是阴谋家，永远试图操纵和控制他人，为了个人利益或者单纯想要阴谋得逞时的快感。诡谋龙认为自己凌驾于他人之上，它们说话的腔调和用词通常极具煽动性。不过，诡谋龙一般只有在伪装时才会和他人交流，而它们会尽最大努力维持伪装。</p>\n<hr />\n<p>各式各样的龙中不少都具有魔法能力，或是与魔法有所联系。相比之下，一部分龙从魔法中获得的力量更强，因此它们能通过长时间浸淫魔法来施展能力或改变身体性状。随着年龄增长，这些龙变得更加强大，与魔法起源的联系也更为紧密。学者为如何对龙进行分类争论不休，一些人喜欢魔法龙的分类，另一些则根据龙与特定魔法根源的联系而用根源分类龙。不论如何分类，龙都有一些共通的特征：它们能够利用魔力，它们的力量和狡猾会随着年龄增长而成长，以及它们都有囤积大量财宝的习性。</p>",
+            "allSaves": "对抗异能时全豁免+2状态加值"
+        },
+        "Niesha": {
+            "items": {
+                "Access Pipe Ambush": {
+                    "name": "检修管道伏击 Access Pipe Ambush",
+                    "description": "<p><strong>触发</strong> 妮莎从萨扎里的一条检修管道中出现</p><hr /><p><strong>效果</strong> 妮莎出现时，她对一个邻接生物进行近战打击。</p>"
+                },
+                "Change Shape": {
+                    "name": "变形 Change Shape",
+                    "description": "<p>拟形泥灵呈现出任意中型或小型生物的模样，不包括具有元素、虚体或集群特征的生物，但包括它曾见过的特定个体。这不会改变拟形泥灵的速度或其打击的攻击调整和伤害加成，但打击的伤害类型也许会根据其新形态改变。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Navigate Pipes": {
+                    "description": "<p>妮莎能在萨扎里检修管道中移动，即便管道只有2尺宽。她视这些管道为困难地形。</p>",
+                    "name": "管道导航 Navigate Pipes"
+                },
+                "Polyglot": {
+                    "name": "语言通晓 Polyglot",
+                    "description": "<p>拟形泥灵在听人说1分钟某种语言后即可理解并用该语言说话。这些语言在24小时后从其脑海中消失。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法时全豁免+1状态加值"
+                },
+                "Regeneration 15 (Deactivated by Acid)": {
+                    "name": "再生 15 （酸蚀使其失效）",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                },
+                "Absorb Spell": {
+                    "name": "吸收法术 Absorb Spell",
+                    "description": "<p><strong>触发</strong> 拟形泥灵在对抗单目标法术的豁免上成功</p>\n<hr />\n<p><strong>效果</strong> 拟形泥灵吸收该法术，抵消其效果并将其存在体内备用。泥灵可以使用原施法者的法术攻击调整值和DC来施法。它同时只能储存一个法术，但它可以吸收一个新法术来替换目前储存的。</p>\n<p>一个自愿施法者可以允许拟形泥灵吸收法术而不需要豁免。</p>"
+                },
+                "Discorporate": {
+                    "name": "灵肉分离 Discorporate",
+                    "description": "<p>当拟形泥灵的生命值降至0时，其身体溶解为无色粘液，并开始渗入附近的裂缝或多孔表面。</p>\n<p>若这种物质不被立刻收容或摧毁，拟形泥灵最终会重新生成，只是它可能会在此之前休眠几年甚至几十年。</p>"
+                },
+                "Extend Limb": {
+                    "name": "肢体延展 Extend Limb",
+                    "description": "<p>拟形泥灵延展它其中一条附肢，在它下回合结束前，它的变形附肢打击获得触及20尺。</p>"
+                },
+                "Up From Below": {
+                    "name": "自下而上 Up From Below",
+                    "description": "<p>当一个生物站在萨扎里检修管道上且刚好在妮莎正上方时，她能@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]该生物。</p>"
+                },
+                "Viscous Trap": {
+                    "name": "粘液陷阱 Viscous Trap",
+                    "description": "<p>被拟形泥灵的软泥粘球击中的生物所有速度收到-15尺环境减值，持续1分钟。重击时，站在固体表面的目标还会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，若目标正用翅膀飞行则坠落地面并无法飞行。</p>\n<p>目标可以通过[[/act escape dc=34]]{逃脱}，或使用总计3个交互动作让自己恢复自由来结束所有效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.iWLAcND0iyW4NUZm]</p>"
+                }
+            },
+            "publicNotes": "<p>拟形泥灵是一种诡异的变形者，通过已被忘却的仪式，将一种特殊智慧生物的灵魂注入以魔法制造的泥怪，便诞生出拟形泥灵——它们是许久以前作为间谍和渗透者被创造出来的。拟形泥灵早已活得比创造者更久，如今它们常常在古代文明——它们曾作为凡人所服务的文明——的废墟中独自生活。</p>",
+            "prototypeToken": {
+                "name": "妮莎"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "妮莎 Niesha",
+            "allSaves": "对抗魔法时全豁免+1状态加值",
+            "hp": "再生 15 （酸蚀使其失效）",
+            "blurb": "变体女性拟形泥灵"
+        },
+        "Valkyrie Tempest": {
+            "items": {
+                "Bolster the Wounded": {
+                    "name": "支援伤员 Bolster the Wounded",
+                    "description": "<p><strong>触发</strong> 狂澜结束回合，且HP未满</p><hr /><p><strong>效果</strong> 狂澜恢复@Damage[5d10[healing]]生命值。这一治疗无法将狂澜的生命值恢复到高于当前生命值阙值以上。</p>"
+                },
+                "Tempest of Battle": {
+                    "name": "战斗狂澜 Tempest of Battle",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 狂澜在@Template[emanation|distance:60]范围内召唤出巨大的雷暴。雷电长枪如雨点般落在区域内敌人身上，造成@Damage[10d12[electricity]|options:area-damage]伤害（@Check[reflex|dc:38|basic|options:area-effect]豁免）。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p><strong>阙值</strong> 208（3部分），104（2部分）</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                },
+                "Rain of Spears": {
+                    "name": "长枪之雨 Rain of Spears",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 狂澜用缠绕电流的长枪进攻，目标是所有邻接的敌人（@Check[reflex|dc:38|basic]豁免）。伤害取决于消耗的动作数。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d6+10)[piercing],(1d12)[electricity]]{1d6+10 穿刺伤害 + 1d12 电击}</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d6+10)[piercing],(2d12)[electricity]]{2d6+10 穿刺伤害 + 2d12 电击}</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d6+10)[piercing],(3d12)[electricity]]{3d6+10 穿刺伤害 + 3d12 电击}</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当部队行走时，她们首先用自由动作重整队列，收缩为一个20 x 20的方阵（减去任何因丧失生命值减少的方格），然后移动最多等于速度的距离。这相当于巨型生物移动：举例来说，如果部队的任何一部分进入困难地形，额外的移动力消耗都对整个部队有效。</p>"
+                },
+                "Troop Spellcasting": {
+                    "name": "部队施法 Troop Spellcasting",
+                    "description": "<p>当狂澜施法时，部队成员齐心协力施放了更强大的法术。当施放一个具有爆发、锥形或线形范围且没有持续时间的法术时，将法术范围增加。将通常半径至少为10尺（半径小于10尺则不受影响）的爆发半径增加5尺。将通常最多15尺长的锥形或线形范围增加5尺，15尺以上的则增加10尺。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "女武神狂澜"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "女武神狂澜 Valkyrie Tempest",
+            "hp": "阈值 208（3部分），104（2部分）；"
+        },
+        "Roc Rider": {
+            "name": "覆天雕骑手 Roc Rider",
+            "prototypeToken": {
+                "name": "覆天雕骑手"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>阿德莱特人居住在世界之冠最遥远、最严酷的地区。乍一看，这些与世隔绝的人和他们的艾鲁塔基人表亲很相似；他们通常有着赤土色的皮肤，笔直的黑发和紧致有力的体格。但阿德莱特人通常比人类亲戚更高大、肌肉更发达。近距离观察时，阿德莱特人的奇怪之处便显露出来：他们每个人嘴里都长满狼一样的尖牙，他们的腿和尾巴则仿佛犬类。</p>\n<p>阿德莱特人的传说表明，很久以前，一位强大的猎人在远方迷了路，来到一座用鲸骨和冰建造的房子。一位身穿白狐皮的女性接待了他，提供食水，照料冻伤。后来他们结婚，生了十个孩子，其中五个长着狐腿狐尾。这些孩子和母亲一同生活，而另外五个长着狼腿狼尾的孩子则跟着父亲回到人类的土地，成了第一批阿德莱特人。</p>\n<p>阿德莱特人并非天生邪恶，但他们的文化好战、排外且明显缺乏谦逊。他们认为自己是极地荒原上天然的统治者，其他人往好了说是非法居住者，往坏了说是入侵者。典型的阿德莱特人比平凡人类要更快更强壮，有能力赤身裸体穿越暴风雪，也能召唤冰冷的雾气。考虑到这些能力，阿德莱特人的优越感也就不足为奇。尽管阿德莱特人的突袭是在世界之冠旅行时的常见问题，但少数狡猾而勇敢的商人已经与常用路线上的阿德莱特社群建立了和平关系。</p>",
+            "blurb": "变体阿德莱特人",
+            "items": {
+                "Aerial Wolfstorm": {
+                    "name": "空战狼风暴 Aerial Wolfstorm",
+                    "description": "<p>60尺。一股湿冷的雾气在阿德莱特人面前翻腾。雾中的生物获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，雾外的生物对其中的生物也获得隐蔽状态。阿德莱特人可以看穿这个灵光。骑乘一只霜天雕时，此灵光从雕身上开始弥漫（而非阿德莱特人），且雕获得看穿此灵光的能力。</p>"
+                },
+                "Avenging Bite": {
+                    "name": "复仇噬咬 Avenging Bite",
+                    "description": "<p><strong>触发</strong> 一个位于阿德莱特人颚咬打击触及内的生物攻击一个阿德莱特人的盟友</p>\n<hr />\n<p><strong>效果</strong> 阿德莱特人对触发生物进行一次颚咬打击。</p>"
+                },
+                "Aerial Wolfrime": {
+                    "name": "空战狼霜 Aerial Wolfrime",
+                    "description": "<p>覆天雕骑手的雾气更为刺骨寒冷，凝聚成一层厚厚的雾凇，对位于空战狼风暴灵光中的生物造成@Damage[7d6[cold]]伤害（@Check[fortitude|dc:31|basic]），该灵光在覆天雕骑手下回合开始前失效。</p>"
+                },
+                "Frozen Weapons": {
+                    "name": "冻寒武器 Frozen Weapons",
+                    "description": "<p>阿德莱特人持用的武器获得<em>@UUID[Compendium.pf2e.equipment-srd.Item.M5M1WJ5KzbYfRGsY]</em>性能符文的效果。</p>"
+                },
+                "Pack Attack": {
+                    "name": "群起攻之 Pack Attack",
+                    "description": "<p>若一个生物位于至少两个阿德莱特人盟友的触及内，阿德莱特对其的打击造成额外2d6伤害。</p>"
+                }
+            }
+        },
+        "Trial of the Gods": {
+            "stealthdetails": "<p>（大师）</p>",
+            "prototypeToken": {
+                "name": "诸神试炼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "诸神试炼 Trial of the Gods",
+            "disable": "<p>@Check[thievery|dc:43]（大师）来解除发光宝珠，并阻止它继续观察房间，@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（9环级；反制DC 36) 来反制试炼，@Check[religion|dc:45]（大师）来进行一个复杂的烛光仪式（5轮时间），或将奥尔多夫将军的圣徽放在墙上任何一个空着的钩子上（一个交互动作）</p>",
+            "hazarddescription": "<p>天花板附近发光的宝珠中，一个看起来是眼睛的东西睁开了。</p>",
+            "routine": "<p>(1个动作；死亡，情绪，恐惧，心灵） 红眼向<strong>B3</strong>中它能看到、且未参与烛光仪式的随机生物投去一瞥，接着对该生物施放9环级@UUID[Compendium.pf2e.spells-srd.Item.Jmxru8zMdYMRuO5n]，让TA看到阿卡艾克克从地面爬出，屠戮不尊诸神之人的景象。</p>",
+            "reset": "<p>一旦房间内不再有生物，试炼失效，并在1分钟后重置。</p>",
+            "items": {
+                "Wrath of the Gods": {
+                    "name": "诸神之怒 Wrath of the Gods",
+                    "description": "<p><strong>触发</strong> 一个生物尝试对东门进行@UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]或@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]，或在未执行烛光仪式的前提下在房间内结束其回合</p><hr /><p><strong>效果</strong> 天花板上的宝珠中出现一只发光的红眼，愤怒地死死盯着触发生物，该生物必须成功通过@Check[will|dc:46]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。之后诸神试炼骰先攻。</p>"
+                }
+            }
+        },
+        "Sister Maeri": {
+            "prototypeToken": {
+                "name": "梅里修女"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "梅里修女 Sister Maeri",
+            "blurb": "阿卡艾克克的女性精灵牧师",
+            "items": {
+                "equipment-Sisters in Serenity": {
+                    "name": "安宁修女 Sisters in Serenity",
+                    "description": "<p>此对开本以通用语书写，阐述了姐妹会的宗旨。</p>"
+                },
+                "equipment-Letter From Mantis Keeper": {
+                    "name": "螳螂守护者的信 Letter From Mantis Keeper"
+                },
+                "Blightburn Resin": {
+                    "name": "燃疫松香 Blightburn Resin",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:30]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[6d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段2</strong> @Damage[7d6[poison]]伤害 (1轮）</p>\n<p><strong>阶段3</strong> @Damage[9d6[poison]]伤害 (1轮）</p>"
+                },
+                "Deadly Saber": {
+                    "name": "致命剑士 Deadly Saber",
+                    "description": "<p>梅里修女持用锯齿刀时，她将武器骰提升一级，并对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外2d6精准伤害。当她用锯齿剑成功重击时，她可以使用该武器的重击专精效果。</p>"
+                },
+                "Divine Weapon": {
+                    "name": "神力武器 Divine Weapon",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>触发</strong> 梅里修女结束一次施法</p><hr /><p><strong>效果</strong> 直到她的回合结束，梅里修女的锯齿剑造成额外的1d4精魂伤害。</p>"
+                }
+            }
+        },
+        "Saviya": {
+            "name": "萨维亚 Saviya",
+            "blurb": "女性精灵阿卡艾克克牧师",
+            "items": {
+                "Perfect Scent": {
+                    "name": "完美嗅觉 Perfect Scent",
+                    "description": "<p>萨维亚的嗅觉是精准感官。这一感官尤其擅于看穿试图掩盖目标实际族裔的伪装，赋予她在揭露伪装的察觉检定上的+4环境加值。</p>"
+                },
+                "Fading": {
+                    "name": "红雾闪避 Fading",
+                    "description": "<p><strong>频率</strong> 每猩红寿衣一次</p>\n<p><strong>触发</strong> 萨维亚成为她能感知到的生物的打击的目标</p>\n<p><strong>需求</strong> 萨维亚的猩红寿衣正在生效</p><hr /><p><strong>效果</strong> 萨维亚局部地脱离现实。攻击者进行@Check[flat|dc:11]检定，若失败则其攻击无害地穿过她身体的残像。下一刻她回归现实。</p>"
+                },
+                "Crimson Shroud": {
+                    "name": "猩红寿衣 Crimson Shroud",
+                    "description": "<p><strong>频率</strong> 每天7次</p><hr /><p><strong>效果</strong> 萨维亚将自己包裹在一层红色薄雾内一分钟。当寿衣启动时，萨维亚获得快速治疗9。她可以与寿衣交互让其围绕你旋转，在下回合开始前在AC上获得+1环境加值。如果她在寿衣启动时死亡，她的尸体消失在红色薄雾里，仅留下她的装备。</p>"
+                },
+                "Prayer Attack": {
+                    "name": "螳螂幻剑 Prayer Attack",
+                    "description": "<p><strong>需求</strong> 萨维亚两手各握持着一把锯齿剑</p><hr /><p><strong>效果</strong> 萨维亚向30尺内的一个敌人进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]。若虚招成功，萨维亚在同一回合中的下一次打击对目标造成2d6持续流血伤害。另外，只要萨维亚一直对目标为可见，距离也没有远离30尺以上，接下来针对目标的螳螂幻剑自动让目标对她的攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，直到回合结束。</p>"
+                },
+                "Vernai Training": {
+                    "name": "渥娜依训练 Vernai Training",
+                    "description": "<p>施法者施法或举行仪式复活被萨维亚杀害的生物时，需先反制她对生物死亡的影响（DC 41）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "萨维亚"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            }
+        },
+        "Rage Rider": {
+            "prototypeToken": {
+                "name": "狂怒骑手"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "狂怒骑手 Rage Rider",
+            "blurb": "人类野蛮人",
+            "items": {
+                "Catch and Release": {
+                    "name": "捕捉释放 Catch and Release",
+                    "description": "<p><strong>需求</strong> 狂怒骑手有一只空手</p>\n<p><strong>触发</strong> 一个敌人用投掷武器攻击狂怒骑手大失败</p><hr /><p><strong>效果</strong> 狂怒骑手抓住投掷武器并用它进行一次远程打击。</p>"
+                },
+                "Exquisite Kokogiak Harness": {
+                    "name": "精制品雪梦熊鞍具 Exquisite Kokogiak Harness",
+                    "description": "<p>狂怒骑手在骑乘雪梦熊时会装备一套精致的鞍具。使用这种鞍具时，两个狂怒骑手可以同骑一只自愿的雪梦熊，同时他们的双手都保持空手状态。当狂怒骑手骑在雪梦熊身上时，TA无法使用任何使用自身速度的动作（比如快步或行走），且所有强迫狂怒骑手移动或将其从坐骑上击倒的DC都增加5。如果狂怒骑手骑乘的、装有此类鞍具的雪梦熊被杀或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]，狂怒骑手因坠落受到@Damage[3d6[bludgeoning]]伤害（@Check[reflex|dc:30|basic]豁免）。狂怒骑手可以用一个交互动作卸下鞍具。</p>"
+                },
+                "Ruinous Rage": {
+                    "name": "毁灭狂暴 Ruinous Rage",
+                    "description": "<p>狂怒骑手进入纯粹的狂暴状态，持续1分钟，直到附近不再有可被感知到的敌人或TA@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]为止，以先到者为准。狂暴时，狂怒骑手的AC为27，且矛打击造成2d6+15伤害附加2d6持续流血伤害。狂暴时，狂怒骑手无法使用带有专注特征的动作，除了@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]。狂暴停止后，狂怒骑手1分钟内无法再狂暴。</p>"
+                }
+            }
+        },
+        "Celasik": {
+            "items": {
+                "Constant Spells": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
+                    "name": "常驻法术 Constant Spells"
+                },
+                "Spider Legs": {
+                    "name": "蜘蛛腿 Spider Legs",
+                    "description": "<p><strong>需求</strong> 女郎蜘蛛处于人类形态；</p>\n<hr />\n<p><strong>效果</strong> 女郎蜘蛛的背后伸出八条巨大的蜘蛛腿，让它获得40尺攀爬速度，并且让它能使用蛛腿拨挡反应动作。</p>"
+                },
+                "Darting Legs": {
+                    "name": "蛛腿拨挡 Darting Legs",
+                    "description": "<p><strong>需求</strong> 女郎蜘蛛背后有张开的蜘蛛腿，或者它处于变形状态；</p>\n<p><strong>触发</strong> 女郎蜘蛛被是某次攻击的目标；</p>\n<hr />\n<p><strong>效果</strong> 女郎蜘蛛举起蜘蛛腿，对触发的攻击在AC上获得+2环境加值。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>女郎蜘蛛能变形为任何小型或中型蜘蛛。这不会改变她的速度或打击。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Jorogumo Venom": {
+                    "name": "女郎蜘蛛毒 Jorogumo Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:32]</p>\n<hr />\n<p><strong>最大持续时间</strong> 4小时</p>\n<p><strong>阶段1</strong> @Damage[3d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[3d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[4d6[poison]]伤害和呆滞2（1轮）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF][[/gmr 1d4 #Duration Paralyzed]]{1d4小时}</p>"
+                },
+                "Web Trap": {
+                    "name": "蛛网捕获 Web Trap",
+                    "description": "<p>被女郎蜘蛛蛛网攻击命中的生物将会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]并被固定在最近的表面上，让它动弹不得。</p>\n<p>[[/act escape dc=32]]或[[/act force-open dc=32]]蛛网的DC为32。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "赛拉丝珂"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "赛拉丝珂 Celasik",
+            "publicNotes": "<p>络新妇是看起来很漂亮、打扮讲究的人类，潜伏在高山中捕猎旅行者。这种邪恶的生物常常饲养巨形蜘蛛作为宠物，可以完全变成一只巨大的蜘蛛或从背上长出蜘蛛腿来。女郎蜘蛛通常会吃掉它们的猎物，但一些类人生物的下场可能会更加凄惨，被当作产卵的活体苗床。虽然大多数女郎蜘蛛都是孤独的生物，但有些人已经开始崇拜诺格巴，并在作为那些崇拜灰宗师（诺格巴四个面相之一）的盗贼工会宝贵的盟友。</p>",
+            "blurb": "女性变体络新妇"
+        },
+        "Gorumite Veteran": {
+            "items": {
+                "+2 Circumstance to All Saves Vs. Fear": {
+                    "name": "对抗恐惧效果时全豁免+2环境加值"
+                },
+                "Consecrated": {
+                    "name": "受加护 Consecrated",
+                    "description": "<p>只要皇冠屯内的@UUID[Compendium.pf2e.spells-srd.Item.Dbd5W6G8U2vzWolN]仪式效果仍存在，古拉姆老兵的攻击、技能、豁免和察觉检定就获得+1状态加值；这些加值并未算入数据栏。</p>"
+                },
+                "Heavy Swing": {
+                    "name": "重挥 Heavy Swing",
+                    "description": "<p>古拉姆老兵用巨剑进行打击，造成4d12+22挥砍伤害和1d6持续流血伤害。在计算多重攻击减值时，这算作两次攻击。</p>"
+                },
+                "Pinning Throw": {
+                    "name": "固定投掷 Pinning Throw",
+                    "description": "<p>古拉姆老兵尝试用标枪进行一次远程打击，造成@Damage[(3d6+22)[piercing]]伤害。若目标与一个固体表面邻接，TA被标枪钉在该表面上。目标陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，直到[[/act escape dc=33]]。若该生物为虚体、液态（比如水元素或一部分泥怪）或其他可以不费吹灰之力逃脱的形态，则不会被固定。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Greatsword Critical Specialization": {
+                    "name": "巨剑重击专精 Greatsword Critical Specialization",
+                    "description": "<p>用巨剑造成重击时，被重击目标失去平衡，直到古拉姆老兵下回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "古拉姆老兵"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "古拉姆老兵 Gorumite Veteran",
+            "allSaves": "对抗恐惧效果时全豁免+2环境加值",
+            "blurb": "人类战士"
+        },
+        "Saint Fang": {
+            "items": {
+                "Dragon Breath": {
+                    "name": "龙息 Dragon Breath",
+                    "description": "<p>圣牙有两种吐息方式。[[/gmr 1d4 #Recharge Dragon Breath]]{1d4轮}内他无法再使用龙息。</p>\n<p><strong>刀刃龙息 Blade Breath</strong> （奥术）他在@Template[line|distance:100]范围中吐出尖锐刀刃，造成@Damage[19d6[slashing]|options:area-damage]伤害（@Check[reflex|dc:40|basic|options:area-effect]豁免）。此吐息制造的刀刃在本轮结束时消失。</p>\n<p><strong>熔炉龙息 Forge Breath</strong> （奥术）他吐出一团余烬和烟雾，仿佛它们来自一个巨大熔炉。每个位于@Template[cone|distance:40]范围内的生物受到@Damage[6d6[fire],12d6[poison]|options:area-damage]伤害（@Check[reflex|dc:40|basic|options:area-effect]豁免）。烟雾会萦绕至圣牙下回合结束；所有烟雾内的生物获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，烟雾外的所有生物也对烟雾内生物隐蔽。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法全豁免+1状态加值"
+                },
+                "Forge Vision": {
+                    "name": "熔炉视觉 Forge Vision",
+                    "description": "<p>圣牙忽略烟和火造成的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Buck": {
+                    "name": "甩脱 Buck",
+                    "description": "<p>@Check[reflex|dc:37]</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Buck]</p>"
+                },
+                "Frightful Presence": {
+                    "name": "恐怖威压 Frightful Presence",
+                    "description": "<p>90尺。@Check[will|dc:37|options:area-effect,inflicts:frightened]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
+                },
+                "Spiked Scales": {
+                    "name": "尖刺鳞片 Spiked Scales",
+                    "description": "<p>一个近战打击圣牙大失败的生物受到@Damage[6d6[piercing]]伤害（@Check[reflex|dc:40|basic]豁免）。</p>"
+                },
+                "Wing Deflection": {
+                    "name": "翼返 Wing Deflection",
+                    "description": "<p><strong>触发</strong> 圣牙成为一次攻击的目标</p><hr /><p><strong>效果</strong> 圣牙举起翅膀，它的AC针对触发攻击获得+2环境加值。若他正在飞行，攻击结束后他下降10尺。</p>"
+                },
+                "Draconic Frenzy": {
+                    "name": "龙之狂怒 Draconic Frenzy",
+                    "description": "<p>圣牙以任意顺序进行两次爪抓打击和一次尾扫打击。</p>"
+                },
+                "Draconic Momentum": {
+                    "name": "龙之威势 Draconic Momentum",
+                    "description": "<p>当圣牙在一次打击中重击时，他立刻为龙息充能。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "圣牙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "圣牙 Saint Fang",
+            "publicNotes": "<p>这条傲慢自大的龙常给人自以为是的印象。作为正义战争的化身，他认为自己不可能做错。他身上抛光的钢鳞会在移动时发出独特的刮擦声，宽阔的翅膀每次有力拍打时，针状的脊骨都会相互碰撞。圣牙是龙形的战争，一位才华横溢的战略大师。</p>\n<p>最近越来越多的古拉姆信徒为了战斗而宣战。他们热衷于以任何借口制造流血，向古拉姆的神仆寻求帮助，但圣牙不响应这些召唤。他更可能出现在一群村民身边，他们整联合起来推翻当地的土匪大王，或者一群正在抵御殖民者的土著居民身边。他认为只要贪婪嗜血之人得到武器，战争就不可避免，而他会帮助那些因为没有和平的选项而发动战争的人。</p>\n<p>圣牙很少会让人骑他，但他会服从钢铁雄主古拉姆的命令。神有时会命令圣牙带他的一名虔诚信徒参加战斗，而他会严格遵守命令，常常一到达战场就把他认为不配的骑兵打落下去。</p><h2>圣牙的过去 Saint Fang's Past</h2><p>许多格拉利昂的神学学者都在探寻圣牙的起源。最有可能（也被广泛相信）的解释是，他曾在格拉利昂上空翱翔，保护无辜的凡人免受战争蹂躏，但随着时间推移，疲惫不堪的他最终成了古拉姆手中完美的武器。</p><h2>神仆 Servitor Of The Divine</h2><p>所有神祇都有一群自己喜爱的代理人，负责在凡人间执行自己的意志。神使是其中最为人熟知的一种——独一无二的实体，担任神祇的代言人和信使，通常在凡人施法者以异界侍从仪式的形式请求帮助时被派遣。但神使并不是唯一被允许在信徒中行动或打击信仰之敌的存在。被称为神仆的存在同样独一无二、强大，是神祇最忠实的信徒之一。</p>\n<p>神仆相当强大，但并非真正不朽。任何神仆都可能在战斗或意外中丧命。一些情况下，丧命神仆的躯体会消失，留下强大的宝物。另外一些情况，尸体会单纯地倒在地上。依据神祇的意愿，神仆可以被复活，但大部分时候神祇不会立刻施以复活，而可能只是去创造一个新的，或让完全不同的另一位仆从晋升。若是令人难以置信的事情发生——神祇本身灭亡——祂们现有的神仆不会死亡，但会立刻意识到他们的创造者已经死亡。一些神话讲述了神仆获取神力，取代创造者成为半神或真神的故事；在另一些神话中，绝望的神仆可能会寻找一位新神或女神来侍奉。</p>\n<p>神仆的稀有度都是独特，大部分时候他们都曾是凡人信徒——可能是类人生物，也有其他——他们都大大取悦了神祇。赋予神仆的力量和能力千奇百怪，但几乎从未有过任何神祇的神仆低于15级，至少也会比他们生前要高上几级。一位神祇保有的神仆数量没有限制，但依据传统，大部分神最多保有三位。</p>\n<p>在古拉姆这里，他最著名的三位神仆分别是恶魔、龙和元素生物，它们要么体现了战争的混乱，要么体现了原始的锻造精神。不管是哪种，这些独特神仆的世界观与哲学都与钢铁雄主非常相似，让它们被同类排挤甚至唾弃。然而对血手、圣牙合烈火淬炼来说，生命中没有比侍奉战神更令人欣慰的事了。</p>",
+            "allSaves": "对抗魔法全豁免+1状态加值"
+        },
+        "Berserker Ordulf": {
+            "prototypeToken": {
+                "name": "狂战士奥尔多夫"
+            },
+            "items": {
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Battle Cry": {
+                    "name": "战吼 Battle Cry",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 奥尔多夫骰先攻</p><hr /><p><strong>效果</strong> 奥尔多夫对一个可见敌人进行[[/act demoralize]]。</p>"
+                },
+                "Deadly Display": {
+                    "name": "致命展示 Deadly Display",
+                    "description": "<p><strong>需求</strong> 奥尔多夫持用一把近战武器</p><hr /><p><strong>效果</strong> 奥尔多夫挥舞武器以示威胁。他对30尺内所有敌人进行[[/act demoralize]]，掷骰一次，以结果对抗每个敌人的意志DC。</p>"
+                },
+                "Whirlwind Strike": {
+                    "name": "旋风打击 Whirlwind Strike",
+                    "description": "<p>奥尔多夫打击其触及内的每个敌人。每次攻击都计入其多重攻击减值，但在所有攻击结束前不增加。</p>"
+                },
+                "Battle Arrogance": {
+                    "name": "战斗傲慢 Battle Arrogance",
+                    "description": "<p>奥尔多夫已有多年没有遇到过值得一提的战斗挑战了，哪怕在面对PC们这样致命的敌手时，他的傲慢也会成为他的敌人。如果一位PC成功@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]、@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]、@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]奥尔多夫，他的傲慢便会超越理智，令他更马虎地执行战术，在其下回合开始前，他的AC降到34。PC也可以尝试用更具威力的主题侮辱奥尔多夫。</p><h2>侮辱奥尔多夫 Insult Ordulf <span class=\"action-glyph\">2</span></h2><p>PC花上几秒钟时间侮辱和嘲讽奥尔多夫，之后尝试一次DC 38的@Check[deception|dc:38]、@Check[intimidation|dc:38]，或@Check[performance|dc:38]检定。若侮辱包括挑衅质疑奥尔多夫勇武的内容，将其比作巨魔或小鸡崽，侮辱他钓鱼的技巧，或将他和女巫、伊利森类比，则DC为33。</p><hr /><p><strong>大成功</strong> 你触到痛处。奥尔多夫因愤怒陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}，他还会因被你的话语冲击陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>成功</strong> 你的侮辱让奥尔多夫因愤怒而陷入恶心2。</p>\n<p><strong>失败</strong> 你的侮辱只产生了短暂影响，让奥尔多夫陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。他在他下回合结束时自动从恶心状态中恢复。</p>\n<p><strong>大失败</strong> 你侮辱奥尔多夫的尝试显著失败，他在24小时内对你的“侮辱奥尔多夫”行动临时免疫。</p>"
+                },
+                "Cleaving Blow": {
+                    "name": "劈击 Cleaving Blow",
+                    "description": "<p>奥尔多夫打击其触及内的两个邻接生物。两次攻击都正常计算多重攻击减值，但直到两次攻击结束前不增加。</p>"
+                },
+                "Crushing Insult": {
+                    "name": "粉碎侮辱 Crushing Insult",
+                    "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 奥尔多夫对一个30尺内他能看到的生物进行毁灭性的侮辱。奥尔多夫尝试一次@Check[intimidation|defense:will]检定，对抗目标的意志DC。目标对粉碎侮辱临时免疫24小时。</p><hr /><p><strong>大成功</strong> 侮辱如此不堪，打碎了集中力；目标陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，持续1分钟。</p>\n<p><strong>成功</strong> 侮辱令人分心，但其影响很快就过去了；目标陷入呆滞1和措手不及，直到奥尔多夫下回合开始。</p>\n<p><strong>失败</strong> 这侮辱几乎伤不到人，但足以分散目标的注意力，其陷入措手不及，直到奥尔多夫回合结束。</p>\n<p><strong>大失败</strong> 奥尔多夫的尝试显著失败了，其尝试侮辱的PC可以立刻以侮辱回击，以自由动作使用“侮辱奥尔多夫”行动。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "狂战士奥尔多夫 Berserker Ordulf",
+            "blurb": "精英“唤刃”奥尔多夫"
+        },
+        "The First Blade": {
+            "prototypeToken": {
+                "name": "第一刃"
+            },
+            "items": {
+                "Fortification": {
+                    "description": "<p>每当第一刃被重击，他尝试一次@Check[flat|dc:17]检定。成功时，重击变为普通命中。</p>",
+                    "name": "护命 Fortification"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Battle Sense": {
+                    "name": "战斗感知 Battle Sense",
+                    "description": "<p>60尺内，第一刃可以感知到金属武器和金属重甲，这是一种精准感官。</p>"
+                },
+                "Halo of Blades": {
+                    "name": "刃之光环 Halo of Blades",
+                    "description": "<p>10尺，@Damage[3d6[slashing]|options:area-damage]伤害（@Check[reflex|dc:33|basic|options:area-effect]豁免）</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法时全豁免+1状态加值"
+                },
+                "Disarm Vulnerability": {
+                    "name": "卸武弱点 Disarm Vulnerability",
+                    "description": "<p>若第一刃被卸武，他受到@Damage[8d6[mental]]伤害（@Check[will|dc:36|basic]豁免，大失败时陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}）。且他无法在1轮内召唤武器。</p>"
+                },
+                "Conjure Weapon": {
+                    "name": "召唤武器 Conjure Weapon",
+                    "description": "<p><strong>需求</strong> 第一刃有一只空手</p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 第一刃张开手臂握拳；当他这样做时，一把常见的<em>+2高等强击高等星魂近战武器</em>出现在他手中，材质为寒铁或银。如果他放开召唤的武器，或它被卸武，武器立刻消失。如果他投掷召唤的武器，它在被投掷后、可能对目标造成伤害后消失。第一刃偏好使用巨剑进行近战打击，用轻锤进行投掷远程打击，但他无法同时拥有一件以上的召唤武器。</p>"
+                },
+                "Lord of Battle": {
+                    "name": "战争之主 Lord of Battle",
+                    "description": "<p>第一刃熟练使用所有近战和投掷武器，他能使用所有此类武器的重击专精效果。他用所有近战武器进行的近战打击造成额外1d6持续流血伤害。</p>"
+                },
+                "Whirling Blades": {
+                    "name": "旋转刀刃 Whirling Blades",
+                    "description": "<p><strong>频率</strong> 每分钟一次</p><hr /><p><strong>效果</strong> 在微弱的凶猛战角声中，第一刃变成一团大型旋转金属刀片，然后行走两次。这种移动不会触发反应，他可以穿过被占据的空间，但他必须在一个未被占据的空间结束移动，移动结束时他恢复真正的形态。在第一刃的行走过程中至少被他穿过一次的所有生物受到@Damage[10d10[slashing]]伤害（@Check[reflex|dc:36|basic]豁免）。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "第一刃 The First Blade",
+            "publicNotes": "<p>古拉姆的神使第一刃据说是数万年前，由古拉姆剑上裂开的一片毫无思想的钢片形成的。它是活生生的战争工具，随着战争面貌演变，第一刃已被古拉姆无数次重塑。第一刃不属于任何特定族裔；它是主人的镜子，盔甲和武器就是他的身体——内里存在的只有空虚。和古拉姆一样，第一刃自认是男性。</p><h2>神使 Heralds</h2><p>神使是神灵的代表。大多神祇都拥有一名神使，其任务是充当神或女神在凡人之间的信使和代理人。拥有神使特征的生物永远具有独特稀有度，通常为15级（有时也存在例外）。当神使被杀，与它们关联的神祇可能会将其复活、用一个新生物取而代之，或者极少数情况下过一段没有神使的日子。</p>",
+            "allSaves": "对抗魔法时全豁免+1状态加值"
+        },
+        "Gorumite Infantry": {
+            "items": {
+                "Fire Crossbows!": {
+                    "name": "发射弩箭！ Fire Crossbows!",
+                    "description": "<p>古拉姆步兵团给手中的弩装填并上弦，然后以齐射的方式进行一次远程攻击。</p>\n<p>这次齐射射程为120尺，对@Template[burst|distance:10]范围造成@Damage[6d8[piercing]|options:area-damage]伤害（@Check[reflex|dc:31|basic|options:area-effect]豁免）。如果部队规模缩减到8格或更小，爆发范围减少到@Template[burst|distance:5]。</p>"
+                },
+                "Raise Swords!": {
+                    "name": "放平长剑！ Raise Swords!",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 古拉姆步兵团对10尺内的每个敌人进行一次狂暴攻势，@Check[reflex|dc:31|basic]豁免。伤害取决于消耗的动作数。</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d12+4)[slashing]]伤害。</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d12+10)[slashing],1d6[bleed]]伤害。</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d12+10)[slashing],2d6[bleed]]伤害。</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当部队行走时，他们首先用自由动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.OvqohW9YuahnFaiX]，收缩为一个20 x 20的方阵（减去任何因丧失生命值减少的方格），然后移动最多等于速度的距离。</p>\n<p>这相当于巨型生物移动：举例来说，如果部队的任何一部分进入困难地形，额外的移动力消耗都对整个部队有效。</p>"
+                },
+                "Troop Defenses": {
+                    "name": "部队防御 Troop Defenses",
+                    "description": "<p><strong>阙值</strong> 170（3部分），85（2部分）</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "古拉姆步兵团"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "古拉姆步兵团 Gorumite Infantry",
+            "publicNotes": "<p>格拉利昂的大多数城镇都有专业的警卫部队，他们的职责包括巡逻街道，协助有需要的公民，以及在危机时刻做出快速军事反应。卫兵通常成组或以分队行动，但当严重的紧急情况威胁到他们时，卫兵会在最近的要塞、哨站或其他集结点集合，然后去搜寻他们的目标。或者，守卫部队可能会驻扎在城市的重要地点，如城门、监狱、或统治者城堡的入口。</p>\n<p>单独的守卫可能不是特别训练有素或经验丰富的士兵，但如果数量庞大，他们就能打败强盗、溜进城门的野生动物，或者偶尔出现的喝醉的食人魔。一组城市守卫通常由一个队长现场指挥，队长负责大部分的交涉场合，并给每个守卫下达命令。该城市警卫分队的成员们一起训练，会执行简单的战术，但不会执行高级军事战术。</p>",
+            "hp": "部队防御",
+            "blurb": "变体城市警卫队"
+        },
+        "Bloodfog": {
+            "prototypeToken": {
+                "name": "血雾"
+            },
+            "items": {
+                "Sense Blood": {
+                    "description": "<p>血雾能够感知到120尺内有血液的生物。它能感知到1英里内暴露的血液。</p>",
+                    "name": "血液感知 Sense Blood"
+                },
+                "Blood Siphon": {
+                    "name": "鲜血虹吸 Blood Siphon",
+                    "description": "<p>当血雾用迷雾触须打击对一个生物造成伤害时，生物必须尝试一次@Check[fortitude|dc:38]豁免。若打击为重击，生物的豁免结果视为低一级。血雾从鲜血虹吸中获得的临时生命值在1小时后消失。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，且血雾获得20点临时生命值。</p>\n<p><strong>大失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}。血雾获得40点临时生命值，其身体呈现一种深红色泽，直到其下回合结束。在此期间，血雾的AC和豁免获得+2状态加值，并且获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态。它只能用此额外动作进行打击。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.ceOkHxhJNTcvZkCy]{效果：鲜血虹吸 （大失败）}</p>"
+                },
+                "Blood Vengeance": {
+                    "name": "鲜血复仇 Blood Vengeance",
+                    "description": "<p>虽然它无法真正流血，血雾也可以施展溢血深仇。除了法术通常的触发条件，血雾可以在目标的穿刺、挥砍或持续流血未对血雾本身造成实际伤害的情况下（不管是因为被抗力抵消或是因免疫流血）用反应动作施放溢血深仇。</p>"
+                },
+                "Misty Form": {
+                    "name": "迷雾形态 Misty Form",
+                    "description": "<p>血雾的躯体由半固体的虹色雾气组成，它的浓稠度和厚泡沫类似。这使血雾能移动穿过1寸宽的狭窄空间而无需减速。然而，血雾无法持握物品或与物品交互。它也无法进入水或其他流体中，当被风影响时它被视为超小型。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "血雾 Bloodfog",
+            "publicNotes": "<p>血雾是一种由饥饿的猩红雾气构成的巨大生物。它看起来拥有模糊的人形面孔——但通常也就比都是洞的头盖骨好一点——这面孔不断在雾化的身体中形成、消散。它们红宝石般的卷须触手要坚固得多，可以从身体中滑出，造成很深的切割伤。</p>\n<p>血雾喜欢在人口密集的地区，或者发生过大规模暴力事件的地点附近狩猎，它们会漂进来吃东西，再飘走。它们穿过生机勃勃的村子，留下的只有寂静和干尸。人们认为血雾是在它们最常出现的地方产生：军队造成过大规模流血和死亡的杀戮地点。</p><h2>空无之死的血 Blood Of The Empty Death</h2><p>人们认为血雾的初次形成要归功于邪恶女神宁布洛斯的影响。虚空之蕨，宁布洛斯早已消亡的故乡，据说那里的整座岛屿甚至次大陆都被巨大的血雾笼罩着。一些人声称较小的血雾不过是“觅食的触角”，它们通过虚空之蕨的单向传送门伸向其他物质位面。</p>"
+        },
+        "Silver Saber": {
+            "prototypeToken": {
+                "name": "银剑士"
+            },
+            "items": {
+                "Faith Bound": {
+                    "name": "信仰所缚 Faith Bound",
+                    "description": "<p>银剑士无法攻击公开佩戴或展示阿卡艾克克圣徽的生物，除非该生物先对银剑士采取敌对行动。它可以攻击一个它认为对阿卡艾克克信仰不忠诚的、或仅为计谋佩戴圣徽的生物（通常需要先成功进行一次察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]）。</p>"
+                },
+                "Reflect Truths": {
+                    "name": "真实映照 Reflect Truths",
+                    "description": "<p>20尺。一个进入范围的生物必须成功通过一次@Check[will|dc:37]豁免，否则它会在银剑士反光的脸上看到自己的脸正注视自己。1分钟内，该生物不能说出任何有意或故意的谎言，且在欺骗坚定中承受-2状态减值。大失败时，该状态减值增加为-4。</p>"
+                },
+                "Liquefy": {
+                    "name": "液化 Liquefy",
+                    "description": "<p>银剑士完全液化成为无定型形态。它获得对精准伤害的免疫，但受到双倍寒冷伤害。液化时，它仅能使用移动动作和尖刺远程打击。它可以再次使用此动作来恢复正常形态。</p>"
+                },
+                "Mirror": {
+                    "name": "镜子 Mirror",
+                    "description": "<p>直到它下次行动，银剑士看起来仿佛一面镜子。它在伪装镜子的欺骗检定和DC上自动取53的结果。</p>"
+                },
+                "Silver Strikes": {
+                    "name": "银之打击 Silver Strikes",
+                    "description": "<p>银剑士的腿击和尖刺打击视为银质武器。</p>"
+                },
+                "Swift Steps": {
+                    "name": "迅捷脚步 Swift Steps",
+                    "description": "<p>银剑士永久@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]，它只能用此额外动作来快步或行走。</p>"
+                },
+                "Evasion": {
+                    "name": "反射闪避 Evasion",
+                    "description": "<p>当银剑士在反射豁免中骰出成功，它转而获得大成功。</p>"
+                },
+                "Focus Gaze": {
+                    "name": "聚焦凝视 Focus Gaze",
+                    "description": "<p>银剑士将视线凝聚到一个30尺内它能看到的生物上。目标必须立刻尝试一次对抗真实映照的意志豁免。若生物已经被真实映照影响，它@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。尝试豁免后，该生物对聚焦凝视临时免疫，直到银剑士下回合开始时。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "银剑士 Silver Saber",
+            "publicNotes": "<p>数百年前，红螳螂秘术师制造了这具构装体，在刺客教团逃离拉哈多姆后不久，阿卡艾克克的牧师就为其灌输了智慧，让其作为神圣守卫工作。银剑士的唯一目的是保卫鲜血女士的秘密不被无资格之人知晓。</p>\n<p>银剑士静止不动看起来就像一面华丽的镜子，但当它进入战斗时，它会活化成一只螳螂，身躯由几乎呈液态的抛光银组成，人形的面孔一片空白。</p><h2>作为镜子 Life as a Mirror</h2><p>银剑士几个世纪以来一直看着阿卡艾克克的信徒，它静静坐在金色镜框中假装自己是面镜子。它相当了解红螳螂的秘密生活，比萨扎里记载得还详细，但它的目的不是记录历史，而是充当守卫——不多，也不少。</p>"
+        },
+        "The Promised One": {
+            "prototypeToken": {
+                "name": "应许之物"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "应许之物 The Promised One",
+            "publicNotes": "<p>这名亡灵守卫立于一个因自己（永远受缚）的命运而愤怒的魂魄所聚成的漩涡中央。通过一种亵渎的死灵仪式，尼莫海斯和它的侍从们就能通过拥抱不死之道来守卫某个极其重要的物品或地点。这个仪式将有联系的人——朋友、家人、同道的信徒，甚至是被牺牲的无辜者——束缚在一起，形成一个尼莫海斯。</p>\n<p>大多数的尼莫海斯生前都是牧师或守护者，他们寻求永生来保护他们所服务的寺庙或守卫一个重要的地标。另一些人则在生与死的界限外进行着无尽甚至是不可能的追寻和探索。在最开始，尼莫海斯并不总是邪恶的，但是它的存在所内含的邪恶与暴力不可避免地会使最高尚的人堕入黑暗。</p>",
+            "hp": "虚能治疗，复生",
+            "blurb": "变体尼莫海斯",
+            "items": {
+                "Site Bound": {
+                    "name": "束缚之地 Site Bound",
+                    "description": "<p>尼莫海斯被束缚于一个地点或大型静物上，它不能离这个物体超过500尺。</p>\n<hr />\n<p>典型的幽灵通常只能距离在他被杀死或作祟的地点很近的区域逗留。这个限制一般为120尺远。部分幽灵会被限制在对他来说具有特殊意义的房间、建筑、物品或生物上，而非具体的某个地点。</p>"
+                },
+                "Bound Spirits": {
+                    "name": "受缚之魂 Bound Spirits",
+                    "description": "<p>10尺，@Damage[4d6[void]|options:area-damage]伤害，@Check[fortitude|dc:36|basic|options:area-effect]豁免</p>"
+                },
+                "Rejuvenation": {
+                    "name": "复生 Rejuvenation",
+                    "description": "<p>摧毁创造尼莫海斯仪式中的那件物品或地点就会摧毁尼莫海斯，解放被束缚的灵魂，将它们送入往生。</p>\n<hr />\n<p>当幽灵被摧毁时，他会在[[/br 2d4 #days]]{2d4天}后在被束缚的地点重新生成，生命值全满。只有在有人确定了幽灵存在的成因并纠正任何阻止幽灵安息的因素时，幽灵才能被永久摧毁。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Drain Life": {
+                    "name": "汲取生命 Drain Life",
+                    "description": "<p>当尼莫海斯使用它的灵魂卷须打击伤害一个生物时，该生物必须成功通过@Check[fortitude|dc:36|options:inflicts:drained]检定，否则获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}。</p>\n<p>尼莫海斯（对这个生物）造成的进一步伤害在豁免失败时使流失值加1，最高流失4。</p>"
+                },
+                "Rage of Spirits": {
+                    "name": "亡魂之怒 Rage of Spirits",
+                    "description": "<p>被尼莫海斯束缚的灵魂狂暴并粉碎@Template[emanation|distance:30]范围内的一切。该区域内的生物受到@Damage[4d6[sonic],4d6[void]|options:area-damage]伤害（@Check[fortitude|dc:36|basic|options:area-effect]豁免）。</p>"
+                },
+                "Throw Spirits": {
+                    "name": "投送灵魂 Throw Spirits",
+                    "description": "<p>尼莫海斯将灵魂视为一个整体引导到至多1英里外（灵魂们有60尺飞行速度）。尼莫海斯可以通过投送的灵魂来看和听，但它失去灵光（即受缚之魂能力），也不能使用它的灵魂飞镖远程打击或亡魂之怒能力。</p>\n<p>当灵魂回到尼莫海斯占据的空间后，它将恢复这些能力。</p>"
+                }
+            }
+        },
+        "Temperbrand": {
+            "prototypeToken": {
+                "name": "烈火淬炼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "烈火淬炼 Temperbrand",
+            "publicNotes": "<p>烈火淬炼是一个14尺高的元素生物，外表令人联想到矮人，但她看起来完全是由橙白相间的淬热金属构成的。刀片在她的皮肤上形成、折叠，随着她的移动和战斗又不断弯折，但替代她手臂的长剑始终保持一个模样。她的战斗散发着凶猛的热情，她切开敌人，要么用四肢化成的炽热刀片，要么她喷发出蒸汽和高热空气，用体内弹出的金属片切割肉体。</p>\n<p>烈火淬炼是古拉姆创造的现代武器化身，也代表着熔炉那锻造任何战争工具的能力。她来自锻造之心，一个强大的火元素和炉渣吞噬者（Slageater）融合形成了她。古拉姆让这两个元素生物并肩作战300余年，然后将它们融合成一个存在。</p>\n<p>烈火淬炼经常被派去支援那些实力悬殊的士兵，试图增加战场上取胜的几率，让战争在古拉姆眼中更为壮观。她可能会出现在军需官面前，用自己的身体为他们提供所需的刀刃、盾牌和护甲。</p><h2>烈火淬炼的尸体 Temperbrand's Corpse</h2><p>这位强大的元素生物尚未死去过，但倘若烈火淬炼被杀，她的尸体会迅速坍塌，变为一把强大的魔法大锤。@UUID[Compendium.pf2e.equipment-srd.Item.596xrLHt1Sx0p7Pm]</p><h2>神仆 Servitor Of The Divine</h2><p>所有神祇都有一群自己喜爱的代理人，负责在凡人间执行自己的意志。神使是其中最为人熟知的一种——独一无二的实体，担任神祇的代言人和信使，通常在凡人施法者以异界侍从仪式的形式请求帮助时被派遣。但神使并不是唯一被允许在信徒中行动或打击信仰之敌的存在。被称为神仆的存在同样独一无二、强大，是神祇最忠实的信徒之一。</p>\n<p>神仆相当强大，但并非真正不朽。任何神仆都可能在战斗或意外中丧命。一些情况下，丧命神仆的躯体会消失，留下强大的宝物。另外一些情况，尸体会单纯地倒在地上。依据神祇的意愿，神仆可以被复活，但大部分时候神祇不会立刻施以复活，而可能只是去创造一个新的，或让完全不同的另一位仆从晋升。若是令人难以置信的事情发生——神祇本身灭亡——祂们现有的神仆不会死亡，但会立刻意识到他们的创造者已经死亡。一些神话讲述了神仆获取神力，取代创造者成为半神或真神的故事；在另一些神话中，绝望的神仆可能会寻找一位新神或女神来侍奉。</p>\n<p>神仆的稀有度都是独特，大部分时候他们都曾是凡人信徒——可能是类人生物，也有其他——他们都大大取悦了神祇。赋予神仆的力量和能力千奇百怪，但几乎从未有过任何神祇的神仆低于15级，至少也会比他们生前要高上几级。一位神祇保有的神仆数量没有限制，但依据传统，大部分神最多保有三位。</p>\n<p>在古拉姆这里，他最著名的三位神仆分别是恶魔、龙和元素生物，它们要么体现了战争的混乱，要么体现了原始的锻造精神。不管是哪种，这些独特神仆的世界观与哲学都与钢铁雄主非常相似，让它们被同类排挤甚至唾弃。然而对血手、圣牙合烈火淬炼来说，生命中没有比侍奉战神更令人欣慰的事了。</p>",
+            "items": {
+                "Molten Spray": {
+                    "name": "熔融喷涂 Molten Spray",
+                    "description": "<p><strong>触发</strong> 烈火淬炼受到物理伤害</p><hr /><p><strong>效果</strong> 烈火淬炼的受伤部位向一个她自选的空间喷发出熔炼的铁水。任何占据该空间的生物受到@Damage[9d6[fire]]伤害（@Check[reflex|dc:37|basic]豁免）。</p>"
+                },
+                "Vulnerable to Water": {
+                    "name": "为水所克 Vulnerable to Water",
+                    "description": "<p>当烈火淬炼被一个水效果视为目标时，她受到@Damage[6d6[cold]]伤害，并且因她的身体硬化为固体金属而陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续[[/gmr 1d4 #rounds]]{1d4轮}。只要她还在缓慢状态，她的AC增加到43。</p>"
+                },
+                "Hurl Slagblade": {
+                    "name": "猛掷炉渣刃 Hurl Slagblade",
+                    "description": "<p>烈火淬炼挥起手臂，鞭打120尺内的一个目标，让她的炉渣刃脱离身体飞出去。目标生物必须尝试一次@Check[reflex|dc:40|options:damaging-effect]豁免。烈火淬炼身上会立刻再生一把新的炉渣刃，但她[[/gmr 1d4 #Recharge Hurl Slag]]{1d4轮}内无法再使用猛掷炉渣刃。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[5d10[fire]]伤害。</p>\n<p><strong>失败</strong> 该生物受到@Damage[10d10[fire]]伤害，且硬化的炉渣让生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续3轮。一个生物可以通过逃脱（DC40）限制身体的炉渣块来结束缓慢状态。</p>\n<p><strong>大失败</strong> 该生物受到@Damage[20d10[fire]]伤害，且炉渣迅速将它钉在原地，让生物陷入@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]状态，直到[[/act escape dc=40]]。</p>"
+                },
+                "Ooze Form": {
+                    "name": "泥怪形态 Ooze Form",
+                    "description": "<p>烈火淬炼的身体变成不定形形态。她的AC变成30，且她免疫重击和精准伤害。在此形态下她陷入目盲（但保留震颤感知），且她的速度降至15尺（最低为5尺）。她能如超小型生物一样穿过空间而不受到惩罚。只要她仍保持着泥怪形态，她就无法进行炉渣刃打击或使用猛掷炉渣刃，但她获得践踏能力。她可以通过再次使用这个行动来结束泥怪形态。</p>"
+                },
+                "Slagblade Storm": {
+                    "name": "炉渣刃风暴 Slagblade Storm",
+                    "description": "<p>烈火淬炼对所有触及内生物进行一次炉渣刃打击。她的多重攻击减值在该行动结束前不增加。</p>"
+                },
+                "Trample (Ooze Form Only)": {
+                    "name": "践踏 Trample （仅限泥怪形态）",
+                    "description": "<p>大型或更小体型，脚踢，@Check[reflex|dc:40|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                }
+            }
+        },
+        "Vofnir": {
+            "prototypeToken": {
+                "name": "沃夫纳"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "沃夫纳 Vofnir",
+            "blurb": "精英古拉姆战斗祭司",
+            "items": {
+                "equipment-Key": {
+                    "name": "钥匙 Key"
+                },
+                "Commanding Shout": {
+                    "name": "指挥之吼 Commanding Shout",
+                    "description": "<p>只要古拉姆步兵团在听觉范围内，沃夫纳就可以指挥步兵团为古拉姆的荣耀战斗。直到沃夫纳下回合开始，古拉姆步兵团的发射弩箭！及放平长剑！的DC增加到33，且他们的豁免检定获得+2状态加值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.F1JHRa75KBAjHOs1]{效果：指挥之吼}</p>"
+                },
+                "Consecrated": {
+                    "name": "受加护 Consecrated",
+                    "description": "<p>只要皇冠屯内的加护术仪式效果仍存在，古拉姆战斗祭司的攻击、技能、豁免和察觉检定就获得+1状态加值；这些加值并未算入数据栏。</p>"
+                },
+                "Fervent Casting": {
+                    "name": "狂热施法 Fervent Casting",
+                    "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 古拉姆战斗祭司大声宣扬古拉姆的荣耀。TA施放的下一个神术法术的动作减少一个（最少减到一个），但只能以战斗祭司本人为目标。若该法术影响一个区域或多个目标，比如祝福术，它只影响战斗祭司本人，即使它的持续时间多于一轮。</p>"
+                }
+            }
+        },
+        "Shirota": {
+            "prototypeToken": {
+                "name": "白田"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "白田 Shirota",
+            "blurb": "男性人类炼金术师",
+            "items": {
+                "equipment-Blood Sight Elixir (Greater)": {
+                    "name": "Blood Sight Elixir (Greater)",
+                    "description": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> (manipulate)</p><hr /><p>This thick, blood-red elixir sharpens your senses and makes you more acutely aware of blood. You gain blood sight as a precise sense with a duration of 1 hour. Blood sight has a range of 60 feet and allows you to detect living creatures who are taking persistent bleed damage or who have the dying or wounded conditions. You also detect free-standing puddles or droplets of recently spilled blood. At the GM's discretion, living creatures without blood can't be detected with your blood sight.</p>"
+                },
+                "Infused Items": {
+                    "name": "灌注物品 Infused Items",
+                    "description": "<p>白田携带以下灌注物品，它们持续存在24小时或直到白田再次日常准备：</p>\n<p>12瓶@UUID[Compendium.pf2e.equipment-srd.Item.n5yTlTs63o53n3k6]</p>\n<p>3瓶@UUID[Compendium.pf2e.equipment-srd.Item.PWh9oBvwMmItEmHH]</p>\n<p>12瓶@UUID[Compendium.pf2e.equipment-srd.Item.kpJmjm843vaMZjIu]</p>\n<p>10瓶@UUID[Compendium.pf2e.equipment-srd.Item.AmxSqEoFhRLMYd1W]</p>\n<p>5瓶@UUID[Compendium.pf2e.equipment-srd.Item.5Qkz4RVJr2Kx3RL6]</p>"
+                },
+                "Quick Bomber": {
+                    "name": "高速投弹手 Quick Bomber",
+                    "description": "<p>白田交互取出一个炸弹，然后用它打击。</p>"
+                },
+                "Reactive Bombing": {
+                    "name": "触发式炸弹 Reactive Bombing",
+                    "description": "<p><strong>触发</strong> 一个生物因财穗的打击受到伤害</p><hr /><p><strong>效果</strong> 白田用炸弹打击触发生物。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>白田对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成3d6精准伤害。</p>"
+                },
+                "Twinned Combat": {
+                    "name": "孪生战斗 Twinned Combat",
+                    "description": "<p>只要敌人位于财穗的触及内，其就对白田的打击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。白田炸弹不会对财穗造成溅射伤害。</p>"
+                }
+            }
+        },
+        "Mantis Keeper": {
+            "prototypeToken": {
+                "name": "螳螂守护者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "螳螂守护者 Mantis Keeper",
+            "allSaves": "对抗毒素时全豁免+1状态加值",
+            "blurb": "无性别叶莱西德鲁伊",
+            "items": {
+                "+1 Status to All Saves vs. Poison": {
+                    "name": "对抗毒素时全豁免+1状态加值"
+                },
+                "Mantis Commander": {
+                    "name": "螳螂指挥官 Mantis Commander",
+                    "description": "<p>螳螂守护者隶属于德鲁伊兽灵教派，但TA没有任何一只动物伴侣。相对的，栖息于梅迪奥伽尔提岛上的夺命螳螂们听命于TA，TA的命令基于螳螂石的力量。在任何时候，都有两只夺命螳螂陪伴着螳螂守护者，每只都认为螳螂守护者为重要盟友。螳螂守护者能用荒野之歌与任何形态的夺命螳螂进行沟通，但它们无法回应。这些夺命螳螂没有仆从特征，螳螂守护者也无需用指挥动物行动来统帅它们——TA能以自由动作单纯用荒野之歌下达指令。</p>"
+                },
+                "Mantis Stone Stride": {
+                    "name": "螳螂石步伐 Mantis Stone Stride",
+                    "description": "<p>螳螂守护者快步、行走或飞行进入一块螳螂石，然后立刻从另一块螳螂石中离开，进入与石头相邻的空间，并继续剩余移动。当螳螂守护者离开另一块螳螂石时，TA制造出一道闪电脉冲，对螳螂捕手周围10尺内的所有生物造成@Damage[8d6[electricity]]伤害（@Check[reflex|dc:38|basic]豁免）。</p>"
+                },
+                "Steady Spellcasting": {
+                    "name": "镇定施法 Steady Spellcasting",
+                    "description": "<p>如果一个反应动作会打断螳螂守护者的施法动作，TA尝试一次@Check[flat|dc:15]检定。如果成功，动作不会被打断。</p>"
+                },
+                "Verdant Scythe": {
+                    "name": "苍翠巨镰 Verdant Scythe",
+                    "description": "<p>螳螂守护者培育了一颗独一无二的苍翠武器种子。当TA启动此能力时，种子变形成一把巨镰，或巨镰变回种子。这把巨镰看起来全身由木头制成，当守护者攻击时，巨镰的上半截会延伸成短短的刀刃，仿佛长长的螳螂臂。虽然它由木头制成，螳螂守护者的苍翠巨镰刀刃在功效上就像由铁制成的一样。若螳螂守护者被杀，武器迅速腐烂，只留下种子，其功能等效于符文石，刻有符合武器品质的符文。</p>"
+                }
+            }
+        }
+    },
+    "mapping": {
+        "name": "name",
+        "portrait": {
+            "path": "img",
+            "converter": "npc-portrait-path"
+        },
+        "token": {
+            "path": "prototypeToken",
+            "converter": "npc-token-translation"
+        },
+        "data": {
+            "path": "system",
+            "converter": "npc-data-translation"
+        },
+        "items": {
+            "path": "items",
+            "converter": "npc-item-translation"
+        },
+        "publicNotes": "system.details.publicNotes",
+        "privateNotes": "system.details.privateNotes",
+        "allSaves": "system.attributes.allSaves.value",
+        "senses": "system.traits.senses.value",
+        "hp": "system.attributes.hp.details",
+        "blurb": "system.details.blurb",
+        "speed": "system.attributes.speed.details",
+        "languages": "system.traits.languages.custom",
+        "ac": "system.attributes.ac.details",
+        "di": "system.traits.di.custom",
+        "prototypeToken": {
+            "path": "prototypeToken",
+            "converter": "structured",
+            "cardinality": "one",
+            "mapping": {
+                "name": "name"
+            }
+        }
+    }
+}

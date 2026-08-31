@@ -1,0 +1,153 @@
+{
+    "label": "Actors",
+    "mapping": {
+        "tokenName": "prototypeToken.name",
+        "prototypeToken": "prototypeToken.name",
+        "blurb": "system.details.blurb",
+        "publicNotes": "system.details.publicNotes",
+        "items": {
+            "path": "items",
+            "converter": "fromPack"
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Monitor Aspect": {
+            "name": "监督层面 Monitor Aspect",
+            "tokenName": "监督层面 Monitor Aspect",
+            "prototypeToken": "监督层面 Monitor Aspect",
+            "items": {
+                "Legal Lore": {
+                    "name": "律法学识 Legal Lore"
+                }
+            }
+        },
+        "Animal Aspect": {
+            "name": "动物层面 Animal Aspect",
+            "tokenName": "动物层面 Animal Aspect",
+            "prototypeToken": "动物层面 Animal Aspect"
+        },
+        "Undead Aspect": {
+            "name": "不死层面 Undead Aspect",
+            "tokenName": "不死层面 Undead Aspect",
+            "prototypeToken": "不死层面 Undead Aspect"
+        },
+        "Dragon Aspect": {
+            "name": "龙族层面 Dragon Aspect",
+            "tokenName": "龙族层面 Dragon Aspect",
+            "prototypeToken": "龙族层面 Dragon Aspect",
+            "items": {
+                "Disaster Lore": {
+                    "name": "灾祸学识 Disaster Lore"
+                },
+                "Secrets Lore": {
+                    "name": "秘密学识 Secrets Lore"
+                },
+                "Planar Lore": {
+                    "name": "位面学识 Planar Lore"
+                },
+                "Spirit Lore": {
+                    "name": "灵魂学识 Spirit Lore"
+                }
+            }
+        },
+        "Plant Aspect": {
+            "name": "植物层面 Plant Aspect",
+            "tokenName": "植物层面 Plant Aspect",
+            "prototypeToken": "植物层面 Plant Aspect"
+        },
+        "Celestial Aspect": {
+            "name": "天界层面 Celestial Aspect",
+            "tokenName": "天界层面 Celestial Aspect",
+            "prototypeToken": "天界层面 Celestial Aspect"
+        },
+        "Elemental Aspect": {
+            "name": "元素层面 Elemental Aspect",
+            "tokenName": "元素层面 Elemental Aspect",
+            "prototypeToken": "元素层面 Elemental Aspect",
+            "items": {
+                "Fire Lore": {
+                    "name": "火焰学识 Fire Lore"
+                },
+                "Air Lore": {
+                    "name": "空气学识 Air Lore"
+                },
+                "Metal Lore": {
+                    "name": "金属学识 Metal Lore"
+                },
+                "Wood Lore": {
+                    "name": "木质学识 Wood Lore"
+                },
+                "Earth Lore": {
+                    "name": "土地学识 Earth Lore"
+                },
+                "Water Lore": {
+                    "name": "水流学识 Water Lore"
+                }
+            }
+        },
+        "Fiend Aspect": {
+            "name": "魔类层面 Fiend Aspect",
+            "tokenName": "魔类层面 Fiend Aspect",
+            "prototypeToken": "魔类层面 Fiend Aspect",
+            "items": {
+                "Legal Lore": {
+                    "name": "律法学识 Legal Lore"
+                }
+            }
+        },
+        "Construct Aspect": {
+            "name": "构装层面 Construct Aspect",
+            "tokenName": "构装层面 Construct Aspect",
+            "prototypeToken": "构装层面 Construct Aspect"
+        },
+        "Thurse Aspect": {
+            "name": "霜巨层面 Thurse Aspect",
+            "tokenName": "霜巨层面 Thurse Aspect",
+            "prototypeToken": "霜巨层面 Thurse Aspect",
+            "items": {
+                "Fire Lore": {
+                    "name": "火焰学识 Fire Lore"
+                },
+                "Earth Lore": {
+                    "name": "土地学识 Earth Lore"
+                },
+                "Metal Lore": {
+                    "name": "金属学识 Metal Lore"
+                },
+                "Riddle Lore": {
+                    "name": "谜题学识 Riddle Lore"
+                },
+                "Wood Lore": {
+                    "name": "木质学识 Wood Lore"
+                },
+                "Air Lore": {
+                    "name": "空气学识 Air Lore"
+                },
+                "Water Lore": {
+                    "name": "水流学识 Water Lore"
+                }
+            }
+        },
+        "Fey Aspect": {
+            "name": "精类层面 Fey Aspect",
+            "tokenName": "精类层面 Fey Aspect",
+            "prototypeToken": "精类层面 Fey Aspect"
+        },
+        "Entity Aspect": {
+            "name": "实体层面 Entity Aspect",
+            "tokenName": "实体层面 Entity Aspect",
+            "prototypeToken": "实体层面 Entity Aspect"
+        },
+        "Ooze Aspect": {
+            "name": "黏液层面 Ooze Aspect",
+            "tokenName": "黏液层面 Ooze Aspect",
+            "prototypeToken": "黏液层面 Ooze Aspect",
+            "items": {
+                "Legal Lore": {
+                    "name": "律法学识 Legal Lore"
+                }
+            }
+        }
+    }
+}

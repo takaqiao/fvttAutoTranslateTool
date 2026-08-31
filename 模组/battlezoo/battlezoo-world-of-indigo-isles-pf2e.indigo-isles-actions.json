@@ -1,0 +1,132 @@
+{
+  "label": "动作\nActions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Familiar Abilities": "魔宠能力\nFamiliar Abilities"
+  },
+  "entries": {
+    "Water Weakness": {
+      "name": "水 弱点 Water Weakness",
+      "description": "<p>你的野火莱西魔宠具有等同于你等级的水弱点。除水（特征）的伤害效果照常造成伤害外，当你的野火莱西暴露于不造成伤害的水效果时，该弱点同样适用，例如它被水浇湿时（无论是通过法术还是其他效果，比如把一桶水倒在它身上或被雨淋到）。你可以额外花费一个魔宠能力，无论是永久的还是按每日的方式，用以加固你的野火莱西并为其防水，从而移除此弱点。</p>\n<p>Your wildfire leshy familiar has weakness to water equal to your level. In addition to damaging effects with the water trait, as normal, the weakness applies when your wildfire leshy is exposed to a nondamaging water effect, such as when it's doused with water (either through a spell or some other effect, such as pouring a bucket of water over it or being caught in the rain). You can spend an additional familiar ability, either permanently or on a per-day basis, to reinforce your wildfire leshy and waterproof it, removing this weakness.</p>"
+    },
+    "Smoke Vision": {
+      "name": "烟雾视野 Smoke Vision",
+      "description": "<p>烟雾不会妨碍野火莱西的视野；它无视烟雾造成的隐蔽。</p>\n<p>Smoke doesn't impair a wildfire leshy's vision; it ignores concealment from smoke.</p>"
+    },
+    "Exude Toxin": {
+      "name": "散发毒素 Exude Toxin",
+      "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 你散发出紫色的食肉毒素，并将其灌注入你的下一次攻击。直到你回合结束前，你的下一次近战打击会额外造成1d6点伤害；该伤害为毒素伤害或酸蚀伤害，以对目标造成伤害更高者为准。如果你为第10等级，伤害增加至2d6；如果你为第18等级，伤害增加至3d6。</p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> You exude violet flesh-eating poison, infusing it into your next attack. Your next melee Strike until the end of your turn deals 1d6 additional damage; this damage is either poison damage or acid damage, whichever would deal more damage to the target. If you're 10th level, the damage increases to 2d6, and if you're 18th level, the damage increases to 3d6.</p>"
+    },
+    "Feast": {
+      "name": "盛宴 Feast",
+      "description": "<p><strong>需求</strong> 你与一具尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 你停下来快速咬上一口，治疗 [[/r 4d10[healing]]] 生命值。你在 [[/r 1d4 #Recharge Feast]]{1d4 轮} 内不能再次盛宴。</p>\n<p><strong>Requirements</strong> You are adjacent to a corpse.</p>\n<hr />\n<p><strong>Effect</strong> You stop for a quick bite, healing [[/r 4d10[healing]]] Hit Points. You can't Feast again for [[/r 1d4 #Recharge Feast]]{1d4 rounds}.</p>"
+    },
+    "Just a Dream": {
+      "name": "只是一场梦 Just a Dream",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<p><strong>触发</strong> 一个生物对你造成伤害。</p>\n<hr />\n<p>你本能地汲取梦境维度的力量来保护自己，短暂地成为一种半实体的梦境、幻影或思维形态。你获得等于你等级一半（最低1）的抗力，以抵抗由触发的攻击造成的所有伤害（力场除外），然后你进行一步移动。</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> A creature damages you.</p>\n<hr />\n<p>You instinctively tap into the Dimension of Dreams to protect yourself, momentarily becoming a semi-tangible dream, figment, or thoughtform. You gain resistance equal to half your level (minimum 1) against all damage dealt by the triggering attack (except force), then you Step.</p>"
+    },
+    "Self-Immolate": {
+      "name": "自焚 Self-Immolate",
+      "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 你的野火莱西魔宠可以让自身燃烧的余烬迸发，在其所站立之处的 @Template[type:burst|distance:5] 内制造一股浓密的不透明烟柱。野火莱西失去4点生命值。所有位于受影响区域内的生物均为 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}，并且所有其他生物对它们而言也处于隐蔽状态。烟雾持续1分钟，或直到被强风驱散为止。</p>\n<p><strong>Frequency</strong> Once per hour</p>\n<hr />\n<p><strong>Effect</strong> Your wildfire leshy familiar can flare up its own burning embers, creating a thick plume of opaque smoke where it stands in a @Template[type:burst|distance:5]. The wildfire leshy loses 4 Hit Points. All creatures within the affected area are @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}, and all other creatures are concealed to them. The smoke persists for 1 minute or until it is dispersed by a strong wind.</p>"
+    },
+    "Toogtoog Tattoo": {
+      "name": "图格图格纹身 Toogtoog Tattoo",
+      "description": "<p>你身上会出现一个风格化的toogtoog纹身。toogtoog可以花费一个单动作（具有魔法、移动和变化系特征）来融入或离开该纹身。它必须与你相邻才能融入你的纹身，并且它会在你相邻的一个开放空间中离开你的纹身。魔宠的任何同伴物品都会留在它身上，但它不能携带任何其他物品一同进入。融入纹身期间，它唯一能使用的动作就是离开纹身的动作。如果你的toogtoog魔宠死亡，这个纹身会失去其魔法并变为普通纹身。你可以像对待由toogtoog墨水制成的纹身那样，正常改变纹身墨水的颜色。</p>\n<p>A stylized tattoo of a toogtoog appears on your body. The toogtoog can spend a single action, which has the magical, move, and transmutation traits, to meld into or exit the tattoo. It must be adjacent to you to meld into your tattoo, and it exits your tattoo in an open space adjacent to you. Any of the familiar's companion items remain on it, but it can't carry any other items with it. While melded in the tattoo, the only action it can use is the action to exit the tattoo. If your toogtoog familiar dies, this tattoo loses its magic and becomes a mundane tattoo. You can alter the color of the tattoo's ink as normal for tattoos produced by toogtoog ink.</p>"
+    },
+    "Inkwell": {
+      "name": "墨水瓶 Inkwell",
+      "description": "<p>一只典型的健康图格图格每天会分泌足以装满一只标准墨水小瓶的墨汁。图格图格魔宠也可以选择分泌一种更适合用于纹身的不同类型墨水。这种带有微弱魔力的墨水无毒且不易褪色。图格图格的主人可以随意为这种墨水重新着色，使其能够改变纹身的颜色，甚至在需要时让它们变得@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}。尽管是一个仆从，你的图格图格魔宠在其回合开始时获得1个反应动作，它只能用来在进行一项工艺检定以创造纹身或其他以墨水为基础的艺术作品时援助你（它仍然必须像平常一样为援助反应动作做好准备）。它在以这些技能援助你的检定上自动成功；如果你是相关技能的大师，则它自动大成功。</p>\n<p>A typical healthy toogtoog produces enough ink to fill a standard ink vial every day. Toogtoog familiars can also choose to produce a different type of ink that is well-suited for tattoos. This faintly magical ink is nontoxic and resistant to fading. The toogtoog's master can recolor this ink at will, allowing them to alter the color of tattoos or even make them @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible} if desired. Despite being a minion, your toogtoog familiar gains 1 reaction at the start of its turns, which it can use only to Aid you on a Crafting check to create a tattoo or other ink-based artwork (it still has to prepare to help you as normal for the Aid reaction). It automatically succeeds at its check to Aid you with those skills or automatically critically succeeds if you're a master of the skill in question.</p>"
+    },
+    "Rock Stride": {
+      "name": "岩石踏步 Rock Stride",
+      "description": "<p>页岩幼体在洞穴和岩石山脉中无视困难地形。</p>\n<p>Shale hatchlings ignore difficult terrain in caves and rocky mountains.</p>"
+    },
+    "Manifest Membrane": {
+      "name": "显现膜 Manifest Membrane",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong>你显现出一种灵性毒素并将其涂抹在你的武器、爪击、双手或一枚弹药上。这层梦境薄膜会一直保持效力，直到你下个回合结束，或如同普通的伤害型毒素那样被消耗：要么命中一个目标，要么在一次攻击掷骰中大失败。</p>\n<p><strong>梦境薄膜</strong>（伤害，神秘，毒素）</p>\n<p><strong>豁免</strong> @Check[type:will|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|traits:injury,occult,poison|overrideTraits:true]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}（1轮）</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}和stupefied 1（1轮）</p>\n<p><strong>阶段 3</strong> drained 1和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}（1轮）</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You manifest a spiritual poison and apply it to your weapon, claws, hands, or a piece of ammunition. This dream membrane remains potent until the end of your next turn, or until you expend it as normal for an injury poison by either hitting a target or critically failing an attack roll.</p>\n<p><strong>Dream Membrane</strong> (injury, occult, poison)</p>\n<p><strong>Saving Throw</strong> @Check[type:will|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|traits:injury,occult,poison|overrideTraits:true]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} (1 round)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and stupefied 1 (1 round)</p>\n<p><strong>Stage 3</strong> drained 1 and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2} (1 round)</p>"
+    },
+    "Revel": {
+      "name": "狂欢 Revel",
+      "description": "<p><strong>效果</strong> 选择酒精学识、烹饪学识或表演。直到你下个回合结束，你与所有位于 @Template[type:emanation|distance:60] 内的盟友在技能检定上获得+1状态加值，并且根据你所选的技能，在一种豁免上也获得该加值。若你选择酒精学识，你将该加值给予强韧豁免；若你选择烹饪学识，你将该加值给予意志豁免；若你选择表演，你将该加值给予反射豁免。狂欢结束后，你在1轮内不能再次狂欢。若你愿意，你可以让敌人也受到狂欢影响。若你如此做，你可以以自由动作（）撤销邀请并取消该生物从狂欢获得的益处。一旦邀请被撤销，该敌人在24小时内暂时免疫你的狂欢。这不会使你能够使用其他仅对盟友或你的敌人生效的朗姆船板狂欢者动作。</p>\n<p><strong>Effect</strong> Choose Alcohol Lore, Cooking Lore, or Performance. Until the end of your next turn, you and all allies in a @Template[type:emanation|distance:60] gain a +1 status bonus to skill checks, as well as to one saving throw depending on the skill you chose. If you chose Alcohol Lore, you grant the bonus to Fortitude saves, if you chose Cooking Lore, you grant the bonus to Will saves, and if you chose Performance, you grant the bonus to Reflex saves. After the Revel ends, you can't Revel again for 1 round. You can allow foes to be affected by Revel if you wish. If you do, you can rescind the invitation and cancel the benefits of Revel for that creature as a free action. Once the invitation is rescinded, the foe becomes temporarily immune to your Revel for 24 hours. This doesn't allow you to use other Rumplank reveler actions that only work on allies or your foes.</p>"
+    },
+    "Cauterize": {
+      "name": "烧灼 Cauterize",
+      "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 余烬树液泥怪流过一处开放性伤口，将其所有热量吸引到自身表面，使你立即进行一次纯骰检定以结束流血，并以较低的 DC 作为特别有效的援助。</p>\n<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p><strong>Effect</strong> The embersap ooze flows over an open wound and draws all of its heat onto its surface, giving an immediate flat check to end the bleed with the lower DC for particularly effective assistance.</p>"
+    },
+    "Cosmic Insight": {
+      "name": "宇宙洞见 Cosmic Insight",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p><strong>效果</strong> 星蛾翼龙可以窥视不久的未来，给予其主人对某个可能未来的视野。选择一个星蛾翼龙的主人在接下来 1 分钟内合理能够执行、且需要掷骰 1d20 的动作，并提前掷该 d20。星蛾翼龙的主人在接下来 1 分钟内第一次执行该动作时，自动获得该结果；若其不希望获得该结果，则可以改为花费 1 动作并具有操作（特征），以做出一连串迅捷的手势来驱除厄运；若其如此做，则改为照常为该检定掷与之相关的 d20。</p>\n<p><strong>Frequency</strong> Once per day</p>\n<hr />\n<p><strong>Effect</strong> An astroloptera can peer into the near future, granting their master a vision of a possible future. Select one action that the astroloptera's master could reasonably perform in the next minute that requires rolling a 1d20, and roll that d20 in advance. The astroloptera's master automatically receives that result the first time they take that action within the next minute; if they do not wish to receive that result, they can instead spend 1 action with the manipulate trait to perform a quick series of gestures to ward off ill fortune; if they do so, they instead roll the d20 associated with the check normally.</p>"
+    },
+    "Bring Out The Sauce!": {
+      "name": "把酱汁拿出来！ Bring Out The Sauce!",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p>你用正能量创造一份莓果酱汁，足够供一名中型生物吃一餐。如果一名活生物能够从水果中获得营养，并在接下来的1小时内以一个交互动作食用它，则其恢复1d8生命值，且你的等级每比1级高2级，额外恢复1d8生命值。</p>\n<p>[[/r (max(1,floor(@actor.level/2))d8)[治疗]]]{Level Based Healing}</p>\n<p> </p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p>You creating a serving of berry sauce out of positive energy, enough for a single Medium creature’s meal. If a living creature that can derive sustenance from fruit consumes it as an Interact action within the next hour, they regain 1d8 Hit Points, plus an additional 1d8 Hit Points for every 2 of your levels beyond 1st.</p>\n<p>[[/r (max(1,floor(@actor.level/2))d8)[healing]]]{Level Based Healing}</p>\n<p> </p>"
+    },
+    "Trample": {
+      "name": "践踏 Trample",
+      "description": "<p>你移动至多为你速度的两倍，并穿过大型或更小生物的空间，践踏你进入其空间的每个生物。被践踏的生物会受到蹄部伤害，并进行一次对抗你的职业DC或法术DC（以较高者为准）的@Check[type:reflex|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|basic:true]豁免。</p>\n<p>You move up to double your Speed and move through the spaces of Large or smaller creatures, trampling each creature whose space you enter. A trampled creature takes hoof damage with a @Check[type:reflex|dc:resolve(@actor.system.attributes.classOrSpellDC.value)|basic:true] save against your class DC or spell DC, whichever is higher.</p>"
+    },
+    "Curl Up": {
+      "name": "蜷缩起来 Curl Up",
+      "description": "<p>页岩幼体缩入其甲壳，AC获得+2环境加值。它保留此AC加值，并处于@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}状态，直到它花费一个动作伸展开来（此动作具有移动（特征））。</p>\n<p>The shale hatchling recoils into its carapace, gaining a +2 circumstance bonus to AC. It retains this bonus to AC and is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until it uncurls by spending an action (this action has the move trait).</p>"
+    },
+    "Ooze Defense": {
+      "name": "软泥怪防御 Ooze Defense",
+      "description": "<p>你的余烬树液泥怪魔宠很容易被击中，但它没有弱点。它免疫大成功或大失败命中和精准伤害，但它的AC只有10 + 你的等级（而不是与你的AC相同）。</p>\n<p>Your embersap ooze familiar is easy to hit, but it lacks weak points. It is immune to critical hits and precision damage, but its AC is only 10 + your level (instead of an AC equal to yours).</p>"
+    },
+    "Learn From Plant": {
+      "name": "向植物学习 Learn From Plant",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你与一株你正在触碰的活植物交流。你可以使用巴库学识或自然（技能）来获得一条信息。尽管这是植物的知识而非你自己的知识，但除此之外，这具有回忆知识的效果，用于了解该植物周围 @Template[type:emanation|distance:30] 范围内在过去一周发生的事件。如同使用<em>@UUID[Compendium.pf2e.spells-srd.Item.qvwIwJ9QBihy8R0t]{与植物交谈}</em>与它们交谈时一样，大多数普通植物对其周围世界有独特的看法，因此它们无法识别有关生物的细节，也不了解其直接附近以外的世界。</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You commune with a living plant that you are touching. You can use the Bacoo Lore or Nature skill to gain one piece of information. Though this is the plant's knowledge and not your own, this otherwise has the effects of Recall Knowledge about events that occurred during the last week within a @Template[type:emanation|distance:30] around the plant. As when using <em>@UUID[Compendium.pf2e.spells-srd.Item.qvwIwJ9QBihy8R0t]{Speak with Plants}</em> to converse with them, most normal plants have a distinctive view of the world around them, so they don't recognize details about creatures or know anything about the world beyond their immediate vicinity.</p>"
+    },
+    "Enflame Weapon": {
+      "name": "点燃武器 Enflame Weapon",
+      "description": "<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p><strong>效果</strong> 余烬树液软泥怪可以重塑自身身体以包覆一把近战武器，然后点燃其外表面。持续1分钟，或直到余烬树液软泥怪恢复其原始形态为止，该武器每个武器伤害骰额外造成1点火伤害。</p>\n<p>@UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-effects.Item.pVdbptaUck16kOgy]{效果: 点燃武器}</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The embersap ooze can reshape its body to coat a melee weapon, and then set its outer surface ablaze. For 1 minute or until the embersap ooze resumes its original form, the weapon deals 1 additional fire damage per weapon damage die.</p>\n<p>@UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-effects.Item.pVdbptaUck16kOgy]{Effect: Enflame Weapon}</p>"
+    },
+    "Crystal Generation": {
+      "name": "水晶生成 Crystal Generation",
+      "description": "<p>如果你的页岩孵化魔宠意识清醒且健康，你可以使用自然来 @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{挣取收入}，方法是花费你的时代仔细喂养你的魔宠并收获它珍贵的晶体排泄物。</p>\n<p>If your shale hatching familiar is conscious and healthy, you can use Nature to @UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{Earn Income}, by spending your time carefully feeding your familiar and harvesting its precious crystalline waste.</p>"
+    },
+    "Bloodless": {
+      "name": "无血 Bloodless",
+      "description": "<p>页岩雏龙没有血液，所以它们免疫流血伤害。</p>\n<p>Shale hatchlings lack blood, so they are immune to bleed damage.</p>"
+    },
+    "Cycle of Tides and Dunes": {
+      "name": "潮汐与沙丘之环 Cycle of Tides and Dunes",
+      "description": "<p><strong>触发</strong> 你尝试进行一次豁免检定，但你尚未掷骰</p>\n<hr />\n<p>你在该次触发的豁免检定上获得+2环境加值。若该加值影响了该豁免检定的成功程度，你在1分钟内对同类型的豁免（强韧、反射或意志）承受–1减值。当你承受该减值期间，你不能使用潮汐与沙丘之循环。</p>\n<p>@UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-effects.Item.3KU3DijMlPVCHEG9]{潮汐与沙丘之循环（改变成功程度）}</p>\n<p><strong>Trigger</strong> You attempt a saving throw, but you haven’t rolled yet</p>\n<hr />\n<p>You gain a +2 circumstance bonus to the triggering saving throw. If the bonus affects the degree of success of the saving throw, you take a –1 penalty to saves of the same type (Fortitude, Reflex, or Will) for 1 minute. While you have the penalty, you can’t use Cycle of Tides and Dunes.</p>\n<p>@UUID[Compendium.battlezoo-world-of-indigo-isles-pf2e.indigo-isles-effects.Item.3KU3DijMlPVCHEG9]{Cycle of Tides and Dunes (Changed Degree of Success)}</p>"
+    },
+    "Frozen Sap": {
+      "name": "冻结树液 Frozen Sap",
+      "description": "<p>暴露于寒冷会削弱余烬树液软泥怪的火焰，并使构成其身体的树液凝固。它获得等同于你的等级的寒冷弱点。你可以额外花费一个魔宠能力（永久或按每日计）来强化余烬树液软泥怪的身体，从而移除此弱点。</p>\n<p>Exposure to cold dulls an embersap ooze's flames and solidifies the sap that forms its body. It gains weakness to cold equal to your level. You can spend an additional familiar ability, either permanently or on a per-day basis, to reinforce the embersap ooze's body, removing this weakness.</p>"
+    },
+    "Echolocation": {
+      "name": "回声定位 Echolocation",
+      "description": "<p>星盘蛾拥有回声定位作为一种精确感官，射程为20英尺。</p>\n<p>An astroloptera has echolocation as a precise sense with a range of 20 feet.</p>"
+    },
+    "Waveglider": {
+      "name": "波浪滑翔者 Waveglider",
+      "description": "<p>海沫灵体总是被一股随它移动的海水波浪所环绕，使其无论到哪里都能游泳。这些水在灵体与空气中的毒素之间提供缓冲，使其对抗吸入效果的豁免获得+2环境加值。</p>\n<p>A seafoam spirit is always surrounded by a wave of seawater that moves along with it, allowing it to Swim wherever it goes. This water provides a buffer between the spirit and airborne toxins, granting it a +2 circumstance bonus to saving throws against inhaled effects.</p>"
+    },
+    "Bottle Up": {
+      "name": "装瓶封存 Bottle Up",
+      "description": "<p><strong>需求</strong> 你正在触碰你已投资的瓶子</p>\n<hr />\n<p><strong>效果</strong> 你缩小并进入你所触碰的已投资瓶子。你在里面时，瓶子看起来像是塞上了瓶塞。瓶子为你提供标准掩蔽，但你无法行动，除了重新出现外；你可以以单动作这么做。若瓶子被摧毁，你会自动从瓶子中重新出现。瓶子与其周围环境共享可呼吸性与温度，但除此之外会庇护你免受基础天气状态的影响。你可以把你穿戴与携带的物品一并带入瓶中（最多不超过10负载），尽管它们通常无法放入瓶中，但当你重新出现时，它们会与你一同离开瓶子。以这种方式缩小你自己与道具不会改变你的重量。</p>\n<p><strong>Requirements</strong> You are touching your invested bottle</p>\n<hr />\n<p><strong>Effect</strong> You shrink and enter the invested bottle you are touching. The bottle appears to be corked while you are inside. The bottle gives you standard cover, but you can't act except to reemerge, which you can do as a single action. You automatically reemerge from the bottle if the bottle is destroyed. The bottle shares the breathability and temperature of its surroundings but otherwise shelters you from basic weather conditions. You can bring your worn and carried items into the bottle with you (up to 10 Bulk maximum), even though they normally wouldn't fit into the bottle, but they leave the bottle with you when you reemerge. Shrinking yourself and your gear in this way doesn't change your weight.</p>"
+    },
+    "Evaporation": {
+      "name": "蒸发 Evaporation",
+      "description": "<p>在正常情况下，海泡灵体能够从空气、土壤、水洼或其他来源中提取足够的水，以补充它们流失的部分。当处于特别干旱的环境（例如沙漠）时，海泡灵体的身体会缓慢蒸发。在此类环境中，它们必须每2小时至少消耗1加仑的水，否则会变为 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}，直到它们补充回失去的水分为止。如果海泡灵体在干旱环境中至少24小时未获得水，它们会陷入一种迟钝状态，直到重新补水才会苏醒。海泡灵体对基于脱水的效果具有弱点5。</p>\n<p>Under normal conditions, seafoam spirits can extract enough water from the air, soil, puddles, or other sources to replenish what they lose. When in particularly arid environments such as a desert, seafoam spirits experience a slow evaporation of their bodies. They must consume at least 1 gallon of water every 2 hours in such environments or become @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until they replenish their lost water. If a seafoam spirit goes at least 24 hours in an arid environment without water, they fall into a state of torpor and do not awaken until rehydrated. Seafoam spirits have weakness 5 to effects based on dehydration.</p>"
+    },
+    "Record": {
+      "name": "记录 Record",
+      "description": "<p>每日一次，你的机械鹦鹉可以仔细聆听并将最多 1 分钟的声音片段记忆下来，连最细微的细节也不放过。随后，鹦鹉可以在任何时候依指令重现该声音。重放已记忆的片段时，鹦鹉在用于模仿原始来源声音的欺瞒检定上获得 +4 环境加值。机械鹦鹉以这种方式一次只能记住一个片段；一旦它记忆了新的片段，先前的片段就会遗失。</p>\n<p>Once per day, your mechanical parrot can listen carefully to and memorizes a snippet up to 1 minute worth of sound down to the slightest detail. The parrot can then reproduce the sound at any time on command. When repeating a memorized snippet, the parrot gains a +4 circumstance bonus on Deception checks to sound like the original source. A mechanical parrot can only remember one snippet at a time in this way; once it memorizes a new snippet, the previous one is lost.</p>"
+    },
+    "Constructed": {
+      "name": "构装 Constructed",
+      "description": "<p>机械鹦鹉免疫流血、死亡效果、疾病、@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed}、@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained}、@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}、治疗、死灵法术、非致命攻击、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}、毒素、@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened}以及@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷}。它只能通过修理动作以及其他用于修复物品的方法来恢复生命值，而不能从任何形式的生命值治疗中恢复。它在生命值为0时被摧毁。</p>\n<p>A mechanical parrot is immune to bleed, death effects, disease, @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed}, @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained}, @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}, healing, necromancy, nonlethal attacks, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, poison, @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened}, and @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. It can recover Hit Points only via the Repair action and other methods that fix items, not from any form of Hit Point healing. It's destroyed at 0 HP.</p>"
+    },
+    "Change Shape": {
+      "name": "改变形态 Change Shape",
+      "description": "<p>海沫会将其形状从默认的形态——一团无定形的水——改变为一种生活在咸水中的微型水栖动物的形态。它可以再次使用此动作以回到其自然形状或采用一种新的形状。使用改变形状视为为欺瞒的“冒充”用法进行了一次伪装。海沫灵体的变形会自动战胜用于判定其是否为水栖动物的察觉DC，并且它获得+4状态加值到其欺瞒DC以防止他人看穿其伪装。海沫灵体不会获得新形态的任何特殊能力，只会获得其物理形态。作为该次变形的一部分，海沫灵体可以将任何明确基于其物理形态的魔宠能力替换为更符合其新形态的能力（但它不能替换两栖或鳃，因为它总是变成水栖（特征）生物，这意味着只有拥有超过最低数量魔宠能力的海沫灵体才有足够的能力来进行替换）。例如，一个海沫灵体可能拥有黑暗视觉，以表现其作为深海鮟鱇鱼、具备在黑暗中视物的能力；当它变形为牡蛎时，它会将其替换为掘穴者。</p>\n<p>The seafoam changes its shape from its default form as an amorphous blob of water to the form of a Tiny aquatic animal that lives in saltwater. It can use this action again to return to its natural shape or adopt a new shape. Using Change Shape counts as creating a disguise for the Impersonate use of Deception. The seafoam spirit's transformation automatically defeats Perception DCs to determine whether it is an aquatic animal, and it gains a +4 status bonus to its Deception DC to prevent others from seeing through its disguise. The seafoam spirit doesn't gain any special abilities of the new shape, only its physical form. As a part of this transformation, the seafoam spirit can swap out any familiar abilities specifically based on its physical form to better fit its new form (though it can't swap out amphibious or gills, since it always changes to an aquatic creature, which means only a seafoam spirit with more than the minimum number of familiar abilities will have enough abilities to switch them out). For example, a seafoam spirit might have darkvision to represent its form as a deep sea anglerfish with ability to see in the dark that it swaps out for burrower when it transforms into an oyster.</p>"
+    }
+  }
+}

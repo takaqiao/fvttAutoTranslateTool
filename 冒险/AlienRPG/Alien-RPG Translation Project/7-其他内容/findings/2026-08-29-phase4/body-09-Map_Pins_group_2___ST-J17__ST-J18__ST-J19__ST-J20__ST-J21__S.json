@@ -1,0 +1,315 @@
+{
+ "unit": "Map Pins group 2 — ST-J17, ST-J18, ST-J19, ST-J20, ST-J21, ST-J22 (alien-evolved-starterset, journal \"Map Pins\")",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J17.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J18.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J19.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J20.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J21.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J22.cn.html",
+ "summary": "六个单元全部按真实翻译单元处理，一页一文件，未合并。措辞对齐结果：ST-J07（Level 1 四个房间）与 ST-J08（Operations / Medlab）的英文与本组逐字相同，但它们的 .cn.html 尚不存在，因此本组是这些段落的首译，需交叉核对时以本组为基准或反向对齐（见 open_issues）。组内自身的重复段落（Asset/Claims 出现在 J17/J18/J20，Assistant Manager 出现在 J18/J20，Geological Manager 出现在 J19/J20）由同一常量拼装，已用脚本验证三组共 7 处**逐字节相同**。标记面：标签多重集与标签**顺序**逐位相等，class 属性逐字相等，唯一的 @UUID 锚（data-uuid/data-id/data-type/data-hash=\"stage-i\"）机器件逐字节照抄、只译 label。六个 h3 全部补了显式 id，slug 用 Foundry 真实算法（foundry.mjs:685 slugify + JournalEntryPage.slugifyHeading:44689，含 CHAR_MAP 与 /[\"']/ 剥除）算出并逐条断言：asset/claims-office · assistant-manager-office · geolab-east · geological-manager-office · operations · medlab。可见字数 5,641 → 2,034，比值 0.36，正落在 PROJECT.md §8 Phase 2 实测中位数上。",
+ "chars_en": 5641,
+ "chars_cn": 2034,
+ "lock_lookups": [
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "COMTECH",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "stress level +1",
+   "lang_key": "ALIENRPG.Stress + ALIENRPG.Level",
+   "used": "压力等级 +1"
+  },
+  {
+   "english": "armor level 2",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级为 2"
+  },
+  {
+   "english": "Supply rating of 3",
+   "lang_key": "ALIENRPG.Supply / glossary Supply",
+   "used": "余量等级为 3"
+  },
+  {
+   "english": "fatigue (from thirst / hunger)",
+   "lang_key": "ALIENRPG.fatigued",
+   "used": "疲劳"
+  },
+  {
+   "english": "water bottle",
+   "lang_key": "ALIENRPG.Water",
+   "used": "一瓶饮水（按角色卡 Pwr|Food|Water 列的 饮水 取字，不用 一瓶水）"
+  },
+  {
+   "english": "stretch / a stretch of time",
+   "lang_key": "glossary Stretch",
+   "used": "节 / 一节时间"
+  },
+  {
+   "english": "Medlab",
+   "lang_key": "glossary Medlab",
+   "used": "医疗实验室"
+  },
+  {
+   "english": "Hadley’s Hope",
+   "lang_key": "glossary Hadley's Hope",
+   "used": "哈德利的希望"
+  },
+  {
+   "english": "W-Y dollars",
+   "lang_key": "glossary W-Y Dollars",
+   "used": "韦汤币"
+  },
+  {
+   "english": "Weyland-Yutani",
+   "lang_key": "glossary Weyland-Yutani",
+   "used": "韦兰德-汤谷公司；缩写处用 韦汤（韦汤办公室 / 韦汤科学官）"
+  },
+  {
+   "english": "M4A3 Service Pistol",
+   "lang_key": "glossary Service Pistol",
+   "used": "M4A3 制式手枪"
+  },
+  {
+   "english": "Facehugger",
+   "lang_key": "glossary Facehugger",
+   "used": "抱脸虫"
+  },
+  {
+   "english": "Xenomorph egg / Egg",
+   "lang_key": "glossary Egg / Xenomorph",
+   "used": "异形的卵 / 卵"
+  },
+  {
+   "english": "Stasis Room",
+   "lang_key": "glossary Stasis",
+   "used": "休眠室"
+  },
+  {
+   "english": "air duct grill",
+   "lang_key": "glossary Air Duct",
+   "used": "通风道格栅"
+  },
+  {
+   "english": "Company Agent",
+   "lang_key": "glossary Company Agent",
+   "used": "公司代理人"
+  },
+  {
+   "english": "science officer",
+   "lang_key": "glossary Science Officer",
+   "used": "科学官"
+  },
+  {
+   "english": "corporate shuttle",
+   "lang_key": "glossary Shuttle",
+   "used": "公司穿梭机"
+  },
+  {
+   "english": "colonist / colony",
+   "lang_key": "glossary Colonist / Colony",
+   "used": "殖民者 / 殖民地"
+  },
+  {
+   "english": "ROOM NAME · Asset/Claims Office",
+   "lang_key": "h3 id=asset/claims-office",
+   "used": "资产/矿权办公室"
+  },
+  {
+   "english": "ROOM NAME · Assistant Manager Office (场景注记作 Assistant Managers Office)",
+   "lang_key": "h3 id=assistant-manager-office",
+   "used": "助理主管办公室"
+  },
+  {
+   "english": "ROOM NAME · Geolab East",
+   "lang_key": "h3 id=geolab-east",
+   "used": "东地质实验室"
+  },
+  {
+   "english": "ROOM NAME · Geological Manager Office (页名/场景注记作 Geological Managers Office)",
+   "lang_key": "h3 id=geological-manager-office",
+   "used": "地质主管办公室"
+  },
+  {
+   "english": "ROOM NAME · Operations（正文简称 “Ops”）",
+   "lang_key": "h3 id=operations",
+   "used": "运营中心"
+  },
+  {
+   "english": "ROOM NAME · Medlab",
+   "lang_key": "h3 id=medlab",
+   "used": "医疗实验室"
+  },
+  {
+   "english": "ROOM NAME · Surgery Room",
+   "lang_key": "Map Pins 页名 8pFEl6RrXBuGem3m",
+   "used": "手术室"
+  },
+  {
+   "english": "ROOM NAME · Stasis Room",
+   "lang_key": "Map Pins 页名 lIheYyLmCf5fdBeR",
+   "used": "休眠室"
+  },
+  {
+   "english": "ROOM NAME · Morgue",
+   "lang_key": "Map Pins 页名 z3kOw9UkpKIv0gB9",
+   "used": "停尸间"
+  },
+  {
+   "english": "ROOM NAME · Weyland-Yutani Office / W-Y Office",
+   "lang_key": "Map Pins 页名 AGLbzjqXTuLVTbmQ",
+   "used": "韦汤办公室（正文简称形；全称页名建议 韦兰德-汤谷办公室）"
+  },
+  {
+   "english": "ROOM NAME · Tannen’s Casino",
+   "lang_key": "Hope's Last Day h2 / 场景 Tannen's Casino",
+   "used": "坦嫩赌场"
+  },
+  {
+   "english": "ROOM NAME · Landing Pad",
+   "lang_key": "Hope's Last Day h2 / data-hash landing-pad",
+   "used": "停机坪"
+  },
+  {
+   "english": "ROOM NAME · Armory（抽屉里钥匙上的标签）",
+   "lang_key": "无独立页，仅正文道具标签",
+   "used": "军械库"
+  },
+  {
+   "english": "skywalk to Tannen’s Casino（场景注记作 Skyway to Casino）",
+   "lang_key": "Hadley's Hope - Level 2 note",
+   "used": "通往坦嫩赌场的天桥"
+  },
+  {
+   "english": "Wings / Sublevels",
+   "lang_key": "Hope's Last Day h3 South Wing",
+   "used": "各翼 / 地下各层（South Wing ⇒ 南翼）"
+  },
+  {
+   "english": "level 1 / level 2",
+   "lang_key": "Hope's Last Day h2 Level 1 / Level 2",
+   "used": "第 1 层 / 第 2 层"
+  },
+  {
+   "english": "Stage I: Ovomorph (Egg)（@UUID 锚 label，= ST-J09 的 h3）",
+   "lang_key": "data-hash=stage-i",
+   "used": "第一阶段：卵形体（卵）"
+  }
+ ],
+ "frozen_kept": [
+  "PDT / “PDTs” — 正文引号内保持英文缩写，与 corerules 的 Item『Personal Data Transmitter』同源（T-LATIN）",
+  "Starcub — 不是船名而是**型号**：ST-J08 原文作 “A modified Lockmart Starcub”，Lockmart 是厂商、Starcub 是机型，按 §3.4 T-LATIN 与 M41A / DV-303 同类处理，保持拉丁字母",
+  "M4A3 — 型号前缀，T-LATIN",
+  "D6 / ×100 — 骰式与 U+00D7 乘号原样保留",
+  "PC — 沿用 ST-J02/ST-J03 既有写法，中西文之间加一个 ASCII 空格",
+  "&gt; — ST-J17/J18/J20 段尾的上游残留实体，原样保留（HTML 实体，不是散文）",
+  "@UUID 锚的全部机器件 —— class=\"ev-content-link\" · draggable · data-link · data-uuid · data-id · data-type · data-hash=\"stage-i\"，逐字节照抄",
+  "DO-NOT-TRANSLATE.json 的 T-FROZEN 串在本组 6 页中**一条都没出现**（脚本核过），因此无冻结面被触及"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Ovomorph",
+   "proposed": "卵形体",
+   "why": "§7.2.0 六个生命周期名无中文先例。pending 档里 Phase-0 给的是『异形卵』，但**在本单元的这一句里它会塌成同义反复**：原文 “This is an Ovomorph – a Xenomorph egg” ⇒ 『这是一枚异形卵——异形的卵』，破坏点名+解释的句式，也抹掉了 Ovomorph 是**形态学术语**、Egg 是**普通名词**这条英文自己划的分野（pending 档的 note 就是这么写的）。『卵形体』保住 -morph = 形体 的构词，与 Chestburster=破胸体 同后缀，可扩成 卵形体/抱脸虫/破胸体/工蜂体/战士体/禁卫体 的一套。同时用作 @UUID label『第一阶段：卵形体（卵）』"
+  },
+  {
+   "en": "Drone",
+   "proposed": "工蜂异形",
+   "why": "直接沿用 glossary_alien.pending.json 已有的 Phase-0 候选，不另造新词——本组只出现在 ST-J21 的一条 CCTV 项目里，主动分叉的收益为负。⚠ 与上一条不同族（X异形 vs X形体），第 10 章定稿时须整组一起收，不要只改一个"
+  },
+  {
+   "en": "Asset/Claims Office",
+   "proposed": "资产/矿权办公室",
+   "why": "本组风险最高的房名，且是 3 个『与 Hope's Last Day 零重叠』页之一。取『矿权』的依据是**电影本身的情节**：《异形 2》里乔登一家正是去查一份 claim 的探勘者，且该房间所在的 Level 1 整条走廊都是地质口（Geolab West/East · Sterile Lab · Survey Office · Geological Manager Office）。另一解是保险理赔（房里有现金）⇒ 备选『资产/理赔办公室』。斜杠按英文保留 ASCII /，与 Life Support/Power 同"
+  },
+  {
+   "en": "Operations（房名）/ “Ops”（正文简称）",
+   "proposed": "运营中心",
+   "why": "必须与人物头衔咬合：Operations Manager ⇒ 运营主管、Assistant Operations Manager ⇒ 助理运营主管，三者同根。另一候选『指挥中心』读感更硬，但会让 Operations Manager 变成『指挥官』，与殖民地行政官的身份不符。中文不区分 Operations / Ops，两处都写 运营中心"
+  },
+  {
+   "en": "Hyper-Coolant Spray",
+   "proposed": "超冷却剂喷雾",
+   "why": "两个包的 Item 表里都没有这件装备（只在本场景出现），属自造。取『超冷却剂』而非『超低温冷却剂』是为压长度——它在同一句里要跟『保持休眠』并列"
+  },
+  {
+   "en": "Personal Data Transmitter",
+   "proposed": "个人数据发射器",
+   "why": "corerules 有同名 Item（『Personal Data Transmitter』），本条是**跨包同步点**：那件物品的 name 走 T-BILINGUAL 时中文头必须与此处逐字相同，否则玩家在物品栏和正文里看到两个名字"
+  },
+  {
+   "en": "Service Technician",
+   "proposed": "维修技师",
+   "why": "词表无条目。与 Chief Medical Officer=医疗主任 / Science Officer=科学官 的职衔风格取齐"
+  },
+  {
+   "en": "Wing（South Wing / the other Wings）",
+   "proposed": "翼（南翼 / 其他各翼）",
+   "why": "词表无条目。建筑侧翼的中文惯例是『南翼』，复数作『各翼』；不用『翼区』以免与地图上的区域（Zone=区域）撞词"
+  },
+  {
+   "en": "人名转写（本组首次落地，后续单元须照抄）",
+   "proposed": "Miranda Reynolds 米兰达·雷诺兹 · Theodora Komiskey 西奥多拉·科米斯基 · Al Simpson 艾尔·辛普森 · John J. Marachuk 约翰·J·马拉丘克 · Angela Lin 安吉拉·林 · Wes Osterman 韦斯·奥斯特曼 · Lydecker 莱德克 · Tannen 坦嫩",
+   "why": "glossary_alien.json 里一个都没有，全库也搜不到既有中译（Komiskey/Lydecker/Marachuk/Osterman 只在英文基线里出现）。其中 Angela Lin / Theodora Komiskey / Wes Osterman 是 starterset 的 **Actor 名**（带 (Evolved) 后缀），走 T-BILINGUAL 时中文头必须与本组正文逐字相同"
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "① 标签多重集 EN=CN",
+   "result": "PASS 6/6（10 / 16 / 12 / 20 / 44 / 30 个标签）"
+  },
+  {
+   "check": "② 标签**顺序**逐位相等（比多重集严；闸门是无序的，抓不到块错位）",
+   "result": "PASS 6/6，difflib 零 non-equal opcode"
+  },
+  {
+   "check": "③ class 属性逐字相等且顺序一致（alienrpg evolved · evolvedpage · evolvedsubheading · evolvedlinestart · liststyle · ev-content-link）",
+   "result": "PASS 6/6，共 40 个 class 值零差异；确认用的是 starterset 的 ev-content-link 而非 corerules 的 content-link"
+  },
+  {
+   "check": "④ @UUID 链接机器件逐字节相等，只译 {label}",
+   "result": "PASS（ST-J22 唯一一条：data-uuid/data-id/data-type/data-hash/draggable/data-link 全等，label 译为『第一阶段：卵形体（卵）』）"
+  },
+  {
+   "check": "⑤ 数字·骰式·实体·型号多重集相等（D6 · ×100 · +1 · 2 · 3 · M4A3 · PDT · Starcub · &gt;）",
+   "result": "PASS 6/6，零增零漏"
+  },
+  {
+   "check": "⑥ 每个译过的 h3 都带显式 id=英文 slug，用 Foundry 真实算法算出，且页内唯一",
+   "result": "PASS 6/6 共 11 个 h3；slug 由 foundry.mjs:685 slugify + :44689 slugifyHeading 的 Python 移植逐条比对得出"
+  },
+  {
+   "check": "⑦ 无英文残留 / 每页有 CJK（白名单只放行 PDT · Starcub · gt）",
+   "result": "PASS 6/6，残留列表为空"
+  },
+  {
+   "check": "⑧（加做）组内重复段落跨单元逐字节相同",
+   "result": "PASS 3/3 组、7 处：Asset/Claims（J17=J18=J20）· Assistant Manager（J18=J20）· Geological Manager（J19=J20）"
+  },
+  {
+   "check": "⑨（加做）术语锁：24 条 cn.json/glossary 值逐字节命中；禁用变体扫描（观察/侦查/计算机科学/异型/韦兰-尤坦尼/穿甲弹/重型机械/远程战斗/智力/同理心/医疗湾）",
+   "result": "PASS，0 真命中。唯一告警 科技检定 是剥标签后的假阳性——原文是 <strong>通信科技</strong>检定，锁串完整"
+  },
+  {
+   "check": "⑩（加做）DO-NOT-TRANSLATE.json 的 T-FROZEN 串是否被触及",
+   "result": "PASS，本组 6 页不含任何冻结串，未触及三条硬耦合面"
+  },
+  {
+   "check": "⚠ 未跑：apply_translations.py --dry",
+   "result": "NOT RUN — 它按 batch.json + repo 工作，本单元只交 .cn.html，无 batch。上面 ①③④⑤ 已是它那三道（EN 源漂移/无 CJK/markup 多重集）的超集，但**装配成 batch 后主控仍需按 §5.2 跑到 0 拒绝**"
+  }
+ ],
+ "open_issues": [
+  "【交叉核对的基准方向反了，必须先读这条】ST-J07（Geolab East / Geological Manager Office / Assistant Manager Office / Asset/Claims Office）与 ST-J08（Operations / Medlab）的英文与本组**逐字相同**，但两者的 .cn.html **此刻都不存在**（pages/ 下只有 ST-J02、ST-J03 有 cn）。所以本组不是『回填复用』而是这些段落的**首译**。核对时请把本组当基准去对齐 J07/J08，或者若 J07/J08 后落且措辞不同，以**其中一方为准全量刷齐**——不要留两版。",
+  "【推翻 DO-NOT-TRANSLATE.json 的一条实测断言】册子 heading_anchor_hashes 的 starterset.data_hash_not_resolving_today 列了 5 条，实测**其中 3 条今天是能跳的**：tannens-casino · combat-and-initiative · surprise-and-ambush。原因是册子的 slug 计算漏了两步——Foundry 的 slugify 有 CHAR_MAP（’ ⇒ ' 、& ⇒ and），slugifyHeading 之后还有 .replace(/[\"']/g,\"\")。按真算法：Tannen’s Casino ⇒ tannens-casino ✓、COMBAT & INITIATIVE ⇒ combat-and-initiative ✓、Surprise & Ambush ⇒ surprise-and-ambush ✓。**真正断掉的只有 stage-i 与 stage-iii**（Stage I: Ovomorph (Egg) 的真 slug 是 stage-i:-ovomorph-(egg)，是上游手写死的）。⇒ 建议重跑 build_register.py 时把 slug 计算改成真移植，否则未来会照着一张错的『已坏』清单做决策。",
+  "【ST-J08 的三个 id 是承重的，本组不是】全库 data-hash 无一指向 Map Pins，所以本组 6 个 id 纯属防御。但同名标题在 **Hope's Last Day** 那一页上是**活锚点**：Medlab ⇒ 必须 id=\"medlab\"（两处 data-hash 指着它）、Sterile Lab ⇒ id=\"sterile-lab\"、Station Maintenance Center ⇒ id=\"station-maintenance-center\"、Landing Pad ⇒ id=\"landing-pad\"、Tannen’s Casino ⇒ id=\"tannens-casino\"。请务必转告 ST-J07/ST-J08 单元。",
+  "【ST-J02 的 id 有个小瑕疵】ST-J02.cn.html 写的是 id=\"whats-the-story-mother?\"，真算法给出的是 what-s-the-story-mother? ⇒ 不对，正确值是 whats-the-story-mother?（撇号被 slugifyHeading 剥掉，问号保留）——复算后确认 **ST-J02 是对的**，此条仅作备案，无需改。",
+  "【上游文案错，已照译】ST-J22 的『关于与科米斯基博士互动的更多内容，见下文』——这句是从 Hope's Last Day 整段粘过来的，而 Map Pins 的 Medlab 页**没有『下文』**，指向空处。保持忠实照译；若主控决定修，J07..J10 与本页要一起改。",
+  "【上游残留字符，已原样保留】ST-J17/J18/J20 的 Asset/Claims 段尾有一个孤立的 ' &gt;'（空格 + 实体）。它是可见文本不是标签，删了会让 EN/CN 实体计数对不上，故保留。",
+  "【一个 U+00A0 在中文里无处安放】ST-J22 英文 'Dr. Komiskey’s' 里的不换行空格，随语序重排（⇒ 科米斯基博士）自然消失。DO-NOT-TRANSLATE.json 的 encoding_note 说的是**册子内冻结串**里的 NBSP，不是散文；4-常用脚本 下也没有任何闸在数 NBSP。备案而已。",
+  "【英文自己三处不一致，中文已统一】同一个房间在三处写法不同：Map Pins 页名 'Geological Managers Office' / Hope's Last Day h3 'Geological Manager Office' / 场景注记 'Geological Managers Office'；'Assistant Manager Office' 同理（场景注记作 Assistant Managers Office）。中文一律 地质主管办公室 / 助理主管办公室。⚠ id= 里的英文 slug 我按**本页 h3 的实际英文**（单数）算，没有按页名算——slug 必须跟标题文本走。",
+  "【页名与场景注记不在我的单元里】本组只写 6 个 .cn.html 的正文。Map Pins 的 17 个**页名**、以及 Hadley's Hope Level 1/Level 2 两张场景上的 **37 条 note.text**，是另外两处书写同一批房名的地方，需由主控用 lock_lookups 里那张表统一落。",
+  "【生命周期名仍是 pending，本组只是先用】卵形体（Ovomorph）与 工蜂异形（Drone）按 §7.2.0 属『0-本项目自定』，不得伪装成有出处。第 10 章正文到手后整组一起定稿并进 RESOLUTIONS.assertions.json——届时本组这两处、ST-J09/ST-J10 的四个 h3、以及 5 个 EV- 开头的 Actor 名要同一个 commit 改完。",
+  "【一处为了守锁牺牲了一点顺口】ST-J17/J18/J20 的 'a water bottle' 译作『一瓶饮水』而不是更自然的『一瓶水』，因为 ALIENRPG.Water=饮水 是角色卡 Pwr|Food|Water 那一列的列头，而这句紧接着就在讲解除口渴疲劳。若主控认为散文优先，改成『一瓶水』不影响任何闸——但三个文件要一起改（它们是同一个常量拼出来的）。"
+ ]
+}

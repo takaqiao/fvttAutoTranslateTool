@@ -1,0 +1,144 @@
+{
+  "label": "效果\nEffects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Sand Cloud": {
+      "name": "效果：沙尘云 Effect: Sand Cloud",
+      "description": "<p>任何陷入该区域内的生物都会获得@Compendium[pf2e.conditionitems.Concealed]{隐蔽}。</p>\n<p>Any creature caught within the area is @Compendium[pf2e.conditionitems.Concealed]{Concealed}.</p>"
+    },
+    "Effect: Protect The Heart": {
+      "name": "效果：保护心脏 Effect: Protect The Heart",
+      "description": "<p>肋骨藤蔓获得 AC +2 环境加值。</p>\n<p>The ribcage vine gains a +2 circumstance bonus to AC.</p>"
+    },
+    "Effect: Split Skull": {
+      "name": "效果：裂颅 Effect: Split Skull",
+      "description": "<p>该鱼形执行者对抗死去生物的盟友时，在攻击掷骰、技能检定、豁免以及AC上获得+2环境加值。</p>\n<p>The ictioctor gains a +2 circumstance bonus on attack rolls, skill checks, saving throws, and AC against the dead creature's allies.</p>"
+    },
+    "Effect: Hype Aura": {
+      "name": "效果：亢奋灵光 Effect: Hype Aura"
+    },
+    "Effect: Titanic Transformation": {
+      "name": "效果：泰坦变形 Effect: Titanic Transformation",
+      "description": "<p>伪塔拉斯克呈现为其选择的一种怪物般的外貌，其体型变为超巨型。其在变形期间所有攻击获得10尺触及，但其统计数据除此之外不变。</p>\n<p>The false tarrasque assumes a monstrous appearance of its choice and its size becomes Gargantuan. All of its attacks gain a 10 foot reach while transformed but its statistics are otherwise unchanged.</p>"
+    },
+    "Effect: Know Penitent (Atoning Spirit)": {
+      "name": "效果：识得忏悔者（赎罪灵体） Effect: Know Penitent (Atoning Spirit)",
+      "description": "<p>赎罪灵体在对忏悔者进行交涉检定时获得环境加值。</p>\n<p>The atoning spirit gains a circumstance bonus to Diplomacy checks against the penitent.</p>"
+    },
+    "Effect: Nightmarish Protector": {
+      "name": "效果：梦魇守护者 Effect: Nightmarish Protector",
+      "description": "<p>圣选者成长为更可怕的形态，以便更好地保护他们的同伴。圣选者从超小型成长为小型，获得5尺触及、10点临时生命值，以及其攻击与伤害掷骰获得+2状态加值。</p>\n<p>The chosaintor grows into a more fearsome form in order to better protect their companion. The chosaintor grows from Tiny to Small, gains a 5 foot reach, 10 temporary Hit Points, and a +2 status bonus to their attack and damage rolls.</p>"
+    },
+    "Effect: Fire Amplification": {
+      "name": "效果：火焰增幅 Effect: Fire Amplification",
+      "description": "<p>距离熔炉蝾螈30尺内的生物在造成火焰伤害时，其伤害掷骰获得+1状态加值。随着熔炉蝾螈因“吞噬万物之火”而体型增大，该状态加值也会提高：若蝾螈为中型则为+2，若为大型则为+3，若为巨型则为+4。</p>\n<p>Creatures within 30 feet of a furnace newt gain a +1 status bonus to damage rolls whenever they deal fire damage. This status bonus increases depending on the furnace newt's increasing size from All-Consuming Fire, to +2 if the newt is Medium, +3 if the newt is Large, and +4 if the newt is Huge.</p>"
+    },
+    "Effect: Hermetic Organs": {
+      "name": "效果：密闭器官 Effect: Hermetic Organs",
+      "description": "<p>萨瓦利尔选择强酸、寒冷、电击或火焰；他们获得所选伤害类型的15点抗力，其近战打击额外造成1d6点所选类型的伤害，并将其腐蚀唾液的伤害完全改为所选类型。</p>\n<p>The Savalier chooses acid, cold, electricity, or fire; they gain 15 resistance to the chosen damage type, add 1d6 damage of the chosen type with their melee Strikes, and change their caustic spit's damage entirely to the chosen type.</p>"
+    },
+    "Effect: Share Attunement": {
+      "name": "效果：共享调谐 Effect: Share Attunement",
+      "description": "<p>该盟友在其打击中造成额外 4d6 伤害，其类型由星界巨龙的天界调谐决定。</p>\n<p>The ally deals an additional 4d6 damage with their strikes, with the type determined by the star wyrm's Celestial Attunement.</p>"
+    },
+    "Effect: Issue Challenge (Victor)": {
+      "name": "效果：发起挑战（胜者） Effect: Issue Challenge (Victor)",
+      "description": "<p>胜利者获得+2状态加值，适用于攻击掷骰、豁免，以及技能检定。</p>\n<p>The victor gains a +2 status bonus to attack rolls, saving throws, and skill checks.</p>"
+    },
+    "Effect: Lightning Collection": {
+      "name": "效果：闪电收集 Effect: Lightning Collection",
+      "description": "<p>雷云柳的打击额外造成 1d6 点电击伤害。</p>\n<p>The thunderhead willow's Strikes deal 1d6 additional electricity damage.</p>"
+    },
+    "Effect: Molten Form": {
+      "name": "效果：熔融形态 Effect: Molten Form",
+      "description": "<p>该柠檬酸蒸发体获得快速治疗5，AC承受-2减值，速度获得+30加值，获得其伪足打击的许可，失去其拳打击的许可，并失去其对电击的免疫。</p>\n<p>The citric evaporate gains fast healing 5, takes a -2 penalty to AC, gains a +30 bonus to its Speed, gains access to its pseudopod strike, loses access to its fist strike, and loses its immunity to electricity.</p>"
+    },
+    "Effect: Issue Challenge (Participants)": {
+      "name": "效果：发布挑战（参与者） Effect: Issue Challenge (Participants)",
+      "description": "<p>参与者获得50点临时生命值。</p>\n<p>The participants gain 50 temporary hit points.</p>"
+    },
+    "Effect: Intercepting Swell": {
+      "name": "效果：拦截涌浪 Effect: Intercepting Swell",
+      "description": "<p>目标获得快速治疗 5。</p>\n<p>The target gains fast healing 5.</p>"
+    },
+    "Effect: Silvering Aura": {
+      "name": "效果：镀银灵光 Effect: Silvering Aura",
+      "description": "<p>所有处于银匠妖灵光内的武器在用于判定弱点、抗力及类似效果时都视为银制。</p>\n<p>All weapons within the silversmyf's aura count as silver for the purposes of determining weaknesses, resistances, and the like.</p>"
+    },
+    "Effect: Mutable Combatant": {
+      "name": "效果：可变战斗者 Effect: Mutable Combatant",
+      "description": "<p>千皮者选择以下一项增益，获得至其下个回合开始：</p>\n<ul>\n<li>千皮者的AC获得+2环境加值。</li>\n<li>千皮者的皮鞭与皮鞭喷发造成额外2d6伤害。</li>\n<li>千皮者的运动检定获得+2环境加值。</li>\n<li>千皮者获得20点临时生命值，持续至其下个回合。</li>\n</ul>\n<p>The thousand skins chooses one of the following benefits to gain until the start of its next turn:</p>\n<ul>\n<li>The thousand skins gains a +2 circumstance bonus to its AC.</li>\n<li>The thousand skins deals 2d6 additional damage with its skinwhip and Skinwhip Eruption.</li>\n<li>The thousand skins gains a +2 circumstance bonus to its Athletics checks.</li>\n<li>The thousand skins gains 20 temporary Hit Points that last until its next turn.</li>\n</ul>"
+    },
+    "Effect: Alchemical Restoration": {
+      "name": "效果：炼金复原 Effect: Alchemical Restoration",
+      "description": "<p>萨瓦利尔在1分钟内对抗疾病和毒素的豁免获得+2物品加值。</p>\n<p>The Savalir gains a +2 item bonus on saves against disease and poison for 1 minute.</p>"
+    },
+    "Effect: Flame Shroud": {
+      "name": "效果：烈焰披覆 Effect: Flame Shroud",
+      "description": "<p>变形体的近战打击额外造成1d6火焰伤害。</p>\n<p>The morphoid's melee strikes deal an additional 1d6 fire damage.</p>"
+    },
+    "Effect: Steal Sight": {
+      "name": "效果：窃取视力 Effect: Steal Sight",
+      "description": "<p>眼柄潜行者获得15点临时HP，并失去其对视觉效果的免疫。</p>\n<p>The eye stalker gains 15 temporary HP and loses its immunity to visual effects.</p>"
+    },
+    "Effect: All-Consuming Fire": {
+      "name": "效果：吞噬一切之火 Effect: All-Consuming Fire",
+      "description": "<p>熔炉蝾螈以火焰的热能为食，其体型增大至下一体型类别（从小型到中型，从中型到大型，或从大型到巨型）</p>\n<p>The furnace newt feeds on the thermal energy of the fire, growing in size to the next size category (from Small to Medium, from Medium to Large, or from Large to Huge)</p>"
+    },
+    "Effect: Myth Mask": {
+      "name": "效果：神话面具 Effect: Myth Mask",
+      "description": "<p>一名典型的洛瑞基斯会携带三张面具，并会按需进行改造；英雄、导师与反派。他们可以用一个交互动作更换面具，并根据当前佩戴的面具获得不同益处。他们的面具具有硬度3与12点生命值，破损阈值为6，且生物可以使用洛瑞基斯的AC与豁免来以洛瑞基斯的面具为目标，不过当面具在洛瑞基斯持有期间，通常不会受到区域效果影响。若其面具破损，洛瑞基斯会失去该面具的益处，直到他们制作一张新的为止；这不会消耗任何贵重材料，且只需1天。更为罕见的洛瑞基斯可能拥有许可使用比这基础三张更多的面具。</p>\n<ul>\n<li><strong>英雄</strong> 洛瑞基斯获得快速治疗2。</li>\n<li><strong>导师</strong> 洛瑞基斯在技能检定上获得+1状态加值。</li>\n<li><strong>反派</strong> 洛瑞基斯在攻击与伤害掷骰上获得+1状态加值。</li>\n</ul>\n<h3>额外的洛瑞基斯面具</h3>\n<p>几乎每一名洛瑞基斯都曾为故事中的关键角色戴过面具，但有些拥有更具体的偏好，会制作诸如大火、巨龙或小丑之类的面具。</p>\n<ul>\n<li><strong>大火</strong> 洛瑞基斯获得火焰抗力5，且其影子木偶打击的伤害改为火焰。</li>\n<li><strong>巨龙</strong> 洛瑞基斯的威吓加值变为+13。</li>\n<li><strong>小丑</strong> 洛瑞基斯对抗精神效果的豁免获得+2状态加值。</li>\n</ul>\n<p>A typical lorekith carries three masks that they modify as needed; the hero, the mentor, and the villain. They can swap masks with an Interact action, and they gain benefits based on which mask they currently wear. Their masks have a Hardness of 3 and 12 Hit Points, with a Broken Threshold of 6, and a creature can target a lorekith's mask using the lorekith's AC and saves, though the masks aren't normally affected by area effects while in the lorekith's possession. If their mask is broken, a lorekith loses access to that mask's benefits until they Craft a new one, which costs them no valuable materials and takes only 1 day. Rarer lorekith might have access to more masks than these basic three.</p>\n<ul>\n<li><strong>Hero</strong> The lorekith gains fast healing 2.</li>\n<li><strong>Mentor</strong> The lorekith gains a +1 status bonus to skill checks.</li>\n<li><strong>Villain</strong> The lorekith gains a +1 status bonus to attack and damage rolls.</li>\n</ul>\n<h3>Additional Lorekith Masks</h3>\n<p>While nearly every lorekith has worn a mask for the essential roles of a story, some have more specific tastes, creating masks such as the conflagration, the dragon, or the fool.</p>\n<ul>\n<li><strong>The Conflagration</strong> The lorekith gains resistance 5 to fire, and its shadow puppet Strike's damage changes to fire.</li>\n<li><strong>The Dragon</strong> The lorekith's Intimidation bonus becomes +13.</li>\n<li><strong>The Fool</strong> The lorekith gains a +2 status bonus to saves against mental effects.</li>\n</ul>"
+    },
+    "Effect: Heedless Mutation": {
+      "name": "效果：鲁莽突变 Effect: Heedless Mutation",
+      "description": "<p>fethrotte以其颌骨打击进行伤害掷骰时获得+1状态加值，但会变为@Compendium[pf2e.conditionitems.Clumsy]{笨拙 1}。此效果可随多次使用而累积，最多累积至伤害掷骰获得+4状态加值以及@Compendium[pf2e.conditionitems.Clumsy]{笨拙 4}</p>\n<p>The fethrotte gains a +1 status bonus to its damage rolls with its jaws Strikes, but becomes @Compendium[pf2e.conditionitems.Clumsy]{Clumsy 1}. This effect is cumulative with multiple uses to a maximum of a +4 status bonus to damage rolls and @Compendium[pf2e.conditionitems.Clumsy]{Clumsy 4}</p>"
+    },
+    "Effect: Juxtapose": {
+      "name": "效果：并置 Effect: Juxtapose",
+      "description": "<p>塔哈加塔失去其物理抗力，并在对并置的生物进行的检定中掷骰两次。</p>\n<p>The Tahagata loses its physical resistance and rolls twice on checks made against the juxtaposed creature.</p>"
+    },
+    "Effect: Joint-Locking Strike": {
+      "name": "效果：关节锁定打击 Effect: Joint-Locking Strike",
+      "description": "<p>目标成为 @Compendium[pf2e.conditionitems.Clumsy]{笨拙 2} 且 @Compendium[pf2e.conditionitems.Enfeebled]{虚弱 2}（若为大成功或大失败命中，则为 @Compendium[pf2e.conditionitems.Clumsy]{笨拙 3} 且 @Compendium[pf2e.conditionitems.Enfeebled]{虚弱 3}），并且其各项速度受到 –10 尺的状态减值。</p>\n<p>The target is @Compendium[pf2e.conditionitems.Clumsy]{Clumsy 2} and @Compendium[pf2e.conditionitems.Enfeebled]{Enfeebled 2} (or @Compendium[pf2e.conditionitems.Clumsy]{Clumsy 3} and @Compendium[pf2e.conditionitems.Enfeebled]{Enfeebled 3} on a critical hit), and takes a –10-foot status penalty to its Speeds.</p>"
+    },
+    "Effect: Expanded Formation": {
+      "name": "效果：扩展阵型 Effect: Expanded Formation",
+      "description": "<p>阿戎格塔塔虫群的AC与反射豁免承受–2环境减值，但虫群的体型增至巨型。</p>\n<p>The Arrongtata Swarm takes a –2 circumstance penalty to AC and Reflex saves but increasing the swarm’s size to Huge.</p>"
+    },
+    "Effect: Know Penitent (Penitent)": {
+      "name": "效果：识晓忏悔者（忏悔者） Effect: Know Penitent (Penitent)",
+      "description": "<p>忏悔者在对抗赎罪灵体的欺瞒检定时承受环境减值。</p>\n<p>The penitent takes a circumstance penalty on Deception checks against the atoning spirit.</p>"
+    },
+    "Effect: Shifting Defense": {
+      "name": "效果：转移防御 Effect: Shifting Defense"
+    },
+    "Effect: Demon Soul": {
+      "name": "效果：恶魔之魂 Effect: Demon Soul",
+      "description": "<p>辉光恶魔绵羊长大到中型（体型），其身体燃起火焰，使其打击额外造成1d6火焰伤害。它的羊毛变成一团浓密的呛人黑烟，使其对所有其他生物获得 @Compendium[pf2e.conditionitems.DmAIPqOBomZ7H95W]{隐蔽}。最后，辉光恶魔绵羊获得烟雾视野，使其能够看穿烟雾。</p>\n<p>The lucent demonsheep grows to Medium size, and its body lights on fire, causing its Strikes to deal 1d6 additional fire damage. Its wool becomes a dense cloud of choking black smoke, granting it @Compendium[pf2e.conditionitems.DmAIPqOBomZ7H95W]{Concealement} to all other creatures. Finally, the lucent demonsheep gains smoke vision, allowing it to see through smoke.</p>"
+    },
+    "Effect: Taste Reflection": {
+      "name": "效果：味觉反射 Effect: Taste Reflection",
+      "description": "<p>奥德拉祖在基于魅力的技能检定上获得+2状态加值。</p>\n<p>The Odrazu gains a +2 status bonus to Charisma-based skill checks.</p>"
+    },
+    "Effect: Broken Mirror Curse": {
+      "name": "效果：破碎镜之诅咒 Effect: Broken Mirror Curse",
+      "description": "<p>该生物必须掷骰两次并采用较差的结果。</p>\n<p>The creature must roll twice and take the worse result.</p>"
+    },
+    "Effect: Nourishing Spirits": {
+      "name": "效果：滋养灵体 Effect: Nourishing Spirits",
+      "description": "<p>该不死生物的灵体获得+1状态加值于攻击掷骰和伤害掷骰。</p>\n<p>The undead spirit gains a +1 status to attack rolls and damage rolls.</p>"
+    },
+    "Effect: Tortoise Formation": {
+      "name": "效果：龟甲阵型 Effect: Tortoise Formation",
+      "description": "<p>当 arrongtata 虫群进入龟甲阵型时，它获得 +2 环境加值至 AC 和反射豁免，并且处于 @Compendium[pf2e.conditionitems.Immobilized]{Immobilized}。</p>\n<p>When the arrongtata swarm gets into Tortoise Formation, it gains a +2 circumstance bonus to AC and Reflex saves and is @Compendium[pf2e.conditionitems.Immobilized]{Immobilized}.</p>"
+    },
+    "Effect: Together, Charge!": {
+      "name": "效果：并肩冲锋！ Effect: Together, Charge!",
+      "description": "<p>结契的朋友在其下一次攻击中获得+2环境加值。</p>\n<p>The bonded friend gains a +2 circumstance bonus to its next attack.</p>"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div class="action line-item" data-action-id="{{action.id}}">
+    <img class="icon" src="{{action.img}}" alt="{{action.name}}">
+    <div class="title">
+        <h4>{{action.name}}</h4>
+    </div>
+    {{#if isEditable}}
+    <div class="controls">
+        <a class="button icon fa-solid fa-edit" data-action="actionEdit" aria-label="{{localize "TALENT.ACTIONS.ActionEdit"}}" data-tooltip></a>
+        <a class="button icon fa-solid fa-trash" data-action="actionDelete" aria-label="{{localize "TALENT.ACTIONS.ActionDelete"}}" data-tooltip></a>
+    </div>
+    {{/if}}
+    <div class="description">{{{action.description}}}</div>
+    {{#if action.effects.length}}
+    <ol class="effects">
+        {{#each action.effects as |effect|}}
+        <li class="effect line-item">
+            <img class="icon" src="{{effect.img}}" alt="{{effect.name}}">
+            <div class="title">
+                <h4>{{localize "ACTION.EffectSpecific" effect=effect.name}}</h4>
+            </div>
+            {{crucibleTags effect.tags additionalClasses="effect-tags"}}
+        </li>
+        {{/each}}
+    </ol>
+    {{/if}}
+</div>

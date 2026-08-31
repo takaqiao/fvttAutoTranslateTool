@@ -1,0 +1,518 @@
+{
+  "label": "屈折",
+  "mapping": {
+    "description": "description"
+  },
+  "folders": {
+    "Suffixes": "后缀",
+    "Defenses": "防御",
+    "Potency": "效能",
+    "Weapons": "武器",
+    "Spellcraft": "施法",
+    "Movement": "移动",
+    "Prefixes": "前缀",
+    "Bonuses": "加值",
+    "Conversion": "转换",
+    "Skills": "技能",
+    "Runes": "符文",
+    "Creature Bane": "生物祸骰",
+    "Gestures": "手势",
+    "Resources": "资源",
+    "Damage": "伤害",
+    "Resistances": "抗性"
+  },
+  "entries": {
+    "Acid Conversion": {
+      "name": "强酸转换 Acid Conversion",
+      "description": "<p>此武器进行打击所造成的部分伤害会转化为<strong>强酸</strong>伤害。转化比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>转化 33% 伤害</p></li><li><p><strong>第2阶：</strong>转化 66% 伤害</p></li><li><p><strong>第3阶：</strong>转化 100% 伤害</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多个不同类型伤害部分的基础功能目前尚不存在。在此功能实现之前，该词缀的所有阶级都会将武器的 100% 伤害转化为<strong>强酸</strong>伤害。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Acid Damage": {
+      "name": "强酸伤害 Acid 伤害",
+      "description": "<p>为使用此武器进行的打击附加强酸伤害。额外伤害等于该后缀每<strong>阶</strong> 2点。</p><h3 class=\"divider\">试玩测试说明</h3><p>该加值当前以此武器现有伤害类型的平直额外伤害形式生效。在未来的更新中，这将改为造成<strong>强酸</strong>伤害，并单独检定目标的<strong>强酸</strong>抗性。</p>"
+    },
+    "Acid Resistance": {
+      "name": "强酸抗性 Acid 抗性",
+      "description": "<p>该前缀每有1个<strong>阶位</strong>，<strong>强酸</strong>抗性便提高3点。</p>"
+    },
+    "Activating": {
+      "name": "启动 Activating",
+      "description": "<p>赋予<strong>补充动作</strong>动作，使持有者能够在危急时刻恢复<strong>动作</strong>。恢复的数量会随此前缀的<strong>阶级</strong>而变化。</p>"
+    },
+    "Arcana": {
+      "name": "奥术 奥术",
+      "description": "<p>此前缀的每个<strong>阶级</strong>都会使<strong>奥术</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高1。</p>"
+    },
+    "Arrow Spellcraft": {
+      "name": "箭头 施法 箭头 施法",
+      "description": "<p>此物品被注入了<strong>箭头</strong>施法的精髓。持用时，持有者会本能地获得关于<strong>箭头</strong>手势的知识，使其即使未曾通过天赋习得该手势，也能使用它来构成法术。</p>"
+    },
+    "Aspect Spellcraft": {
+      "name": "化相施法 化相 施法",
+      "description": "<p>该物品被注入了<strong>化相</strong>施法的精髓。持用时，持有者会本能地获得<strong>化相</strong><strong>手势</strong>的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Athletics": {
+      "name": "运动 运动",
+      "description": "<p>此前缀每有<strong>1个阶级</strong>，<strong>运动</strong>技能检定的<strong>附魔加值</strong>便提高1。</p>"
+    },
+    "Aura Spellcraft": {
+      "name": "灵气施法 Aura 施法",
+      "description": "<p>此物品被灌注了<strong>灵气</strong>施法的精华。装备时，持有者会本能地获得关于<strong>灵气</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Awareness": {
+      "name": "察觉 察觉",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>察觉</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高 1。</p>"
+    },
+    "Beast Bane": {
+      "name": "野兽祸骰 野兽 祸骰",
+      "description": "<p>这把武器对<strong>野兽</strong>类型的生物特别有效。以该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Blast Spellcraft": {
+      "name": "爆破施法 Blast 施法",
+      "description": "<p>此物品被注入了<strong>爆破</strong>施法的精髓。装备时，持有者会本能地获得关于<strong>爆破</strong><strong>手势</strong>的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Bludgeoning Damage": {
+      "name": "钝击伤害 Bludgeoning 伤害",
+      "description": "<p>使用此武器进行的打击附加<strong>钝击</strong>伤害。该额外伤害等于此后缀每<strong>阶</strong>2点。</p><h3 class=\"divider\">试玩测试说明</h3><p>该加值目前以该武器现有伤害类型的固定额外伤害形式生效。在未来的更新中，这将改为造成<strong>钝击</strong>伤害，并单独对照目标的<strong>钝击</strong>抗性进行检定。</p>"
+    },
+    "Bludgeoning Resistance": {
+      "name": "钝击抗性 Bludgeoning 抗性",
+      "description": "<p>每有此前缀的<strong>1个阶级</strong>，<strong>钝击</strong>抗性提高3点。</p>"
+    },
+    "Celestial Bane": {
+      "name": "天界生物祸骰 Celestial 祸骰",
+      "description": "<p>这种武器对<strong>天界生物</strong>尤其有效。对该生物类型的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Cold Conversion": {
+      "name": "冷能转换 Cold Conversion",
+      "description": "<p>使用此武器进行打击所造成的部分伤害会转化为<strong>Cold</strong>伤害。转化的比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong> 33% 的伤害被转化</p></li><li><p><strong>第2阶：</strong> 66% 的伤害被转化</p></li><li><p><strong>Tier 3:</strong> 100% 的伤害被转化</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多个不同类型伤害组成部分的基础架构尚不存在。在此功能实现之前，此词缀的所有阶级都会将该武器 100% 的伤害转化为<strong>Cold</strong>。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Cold Damage": {
+      "name": "寒冷伤害",
+      "description": "<p>为使用此武器进行的打击附加<strong>寒冷</strong>伤害。该额外伤害等于此后缀每个<strong>阶级</strong>提供的 2 点。</p><h3 class=\"divider\">试玩测试备注</h3><p>此加值目前作为此武器现有伤害类型的平直额外伤害生效。在未来的更新中，这将作为<strong>寒冷</strong>伤害结算，并单独对照目标的<strong>寒冷</strong>抗性进行检定。</p>"
+    },
+    "Cold Resistance": {
+      "name": "寒冷抗性",
+      "description": "<p>此前缀每有<strong>1阶</strong>，<strong>寒冷</strong>抗性增加3。</p>"
+    },
+    "Cone Spellcraft": {
+      "name": "锥形施法",
+      "description": "<p>这件物品被灌注了<strong>锥形</strong>施法的精髓。装备时，持有者会本能地获得关于<strong>锥形</strong>手势的知识，使其即使未通过天赋学会该手势，也能使用它来构筑法术。</p>"
+    },
+    "Conjure Spellcraft": {
+      "name": "召唤施法",
+      "description": "<p>此物品被灌注了<strong>召唤</strong>施法的精华。佩戴时，持有者会本能地获得关于<strong>召唤</strong>手势的知识，使其即使未通过天赋学会该手势，也能使用它来构筑法术。</p>"
+    },
+    "Construct Bane": {
+      "name": "构装体祸骰",
+      "description": "<p>这把武器对<strong>构装体</strong>生物尤为有效。对该生物类型的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Control Potency": {
+      "name": "控制强度",
+      "description": "<p>使用<strong>控制</strong>符文的法术，其<strong>附魔加值</strong>每有该后缀的一个<strong>阶级</strong>便提高 1。</p>"
+    },
+    "Control Spellcraft": {
+      "name": "控制施法",
+      "description": "<p>此物品被灌注了<strong>控制</strong>施法的精华。处于已装备状态时，持有者会本能地获得关于<strong>控制</strong>符文的知识，使其即使未通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Corruption Conversion": {
+      "name": "腐化转换",
+      "description": "<p>使用此武器进行打击所造成的部分伤害会被转换为<strong>腐化</strong>伤害。转换的比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>转换 33% 的伤害</p></li><li><p><strong>第2阶：</strong>转换 66% 的伤害</p></li><li><p><strong>Tier 3:</strong>转换 100% 的伤害</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次单独攻击拆分为多种类型伤害组成部分的基础架构目前尚不存在。在实现之前，此词缀的所有阶级都会将该武器 100% 的伤害转换为<strong>腐化</strong>。一旦支持多类型伤害，较低阶级将只转换总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Corruption Damage": {
+      "name": "腐化伤害",
+      "description": "<p>使用此武器进行的打击会附加<strong>腐化</strong>伤害。该额外伤害等于此后缀每<strong>阶</strong>2点。</p><h3 class=\"divider\">试玩测试说明</h3><p>此加值目前以该武器现有<strong>伤害类型</strong>的平额额外伤害形式生效。在未来的更新中，该伤害将作为<strong>腐化</strong>伤害结算，并单独对照目标的<strong>腐化</strong><strong>抗性</strong>进行判定。</p>"
+    },
+    "Corruption Resistance": {
+      "name": "腐化抗性",
+      "description": "<p>此前缀每有<strong>1个阶级</strong>，<strong>腐化</strong>抗性提高3。</p>"
+    },
+    "Create Spellcraft": {
+      "name": "创造施法",
+      "description": "<p>该物品被灌注了<strong>创造</strong>施法的精髓。装备时，持有者会本能地获得关于<strong>创造</strong>手势的知识，使其即使没有通过天赋学会该手势，也能在构筑法术时使用它。</p>"
+    },
+    "Death Potency": {
+      "name": "死亡强度",
+      "description": "<p>使用<strong>死亡</strong>符文的法术，其<strong>附魔加值</strong>每有1个该后缀的<strong>阶级</strong>，便提高1点。</p>"
+    },
+    "Death Spellcraft": {
+      "name": "死亡施法",
+      "description": "<p>此物品被注入了<strong>死亡</strong>施法的精华。装备时，持有者会本能地获得关于<strong>死亡</strong>符文的知识，使其即使未通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Deception": {
+      "name": "欺瞒",
+      "description": "<p>使<strong>欺瞒</strong><strong>技能检定</strong>的<strong>附魔加值</strong>每有该前缀的一个<strong>阶位</strong>便提高1。</p>"
+    },
+    "Deflection": {
+      "name": "偏斜",
+      "description": "<p>此后缀每有<strong>1阶</strong>，<strong>招架</strong><strong>防御</strong>便提高1点。</p>"
+    },
+    "Determination": {
+      "name": "决心",
+      "description": "<p>每有1个该后缀的<strong>阶</strong>，<strong>意志</strong>防御便提高1点。</p>"
+    },
+    "Diplomacy": {
+      "name": "外交",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>外交</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高1。</p>"
+    },
+    "Disguise": {
+      "name": "伪装",
+      "description": "<p>赋予<strong>伪装</strong>动作，使持有者每次休息可一次呈现出幻象外表。</p>"
+    },
+    "Dragon Bane": {
+      "name": "巨龙祸骰",
+      "description": "<p>这种武器对<strong>巨龙</strong><strong>生物</strong>尤其有效。对该生物类型的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Earth Potency": {
+      "name": "大地效能 Earth Potency",
+      "description": "<p>使用<strong>大地</strong>符文的法术，其<strong>附魔加值</strong>每有此后缀的<strong>1个阶级</strong>便增加1。</p>"
+    },
+    "Earth Spellcraft": {
+      "name": "大地施法 Earth 施法",
+      "description": "<p>该物品被灌注了<strong>大地</strong><strong>施法</strong>的精华。处于已装备状态时，持有者会本能地获得关于<strong>大地</strong><strong>符文</strong>的知识，使其即使未通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Electricity Conversion": {
+      "name": "电能转换 Electricity Conversion",
+      "description": "<p>使用此武器进行打击所造成的伤害中，有一部分会转化为<strong>电击</strong>伤害。转化的比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>33%的伤害被转化</p></li><li><p><strong>第2阶：</strong>66%的伤害被转化</p></li><li><p><strong>Tier 3:</strong> 100%的伤害被转化</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多种类型伤害组成部分的机制目前尚不存在。在该机制实装前，此词缀的所有阶级都会将武器的100%伤害转化为<strong>电击</strong>。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Electricity Damage": {
+      "name": "电击伤害 Electricity 伤害",
+      "description": "<p>为使用此武器进行的打击附加<strong>电击</strong>伤害。该额外伤害等于此后缀每个<strong>阶级</strong>的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>该加值目前以该武器现有伤害类型的平直额外伤害形式生效。在未来的更新中，这将改为造成<strong>电击</strong>伤害，并单独对照目标的<strong>电击</strong>抗性进行检定。</p>"
+    },
+    "Electricity Resistance": {
+      "name": "电抗性 Electricity 抗性",
+      "description": "<p>此前缀的每个<strong>阶级</strong>使<strong>电击</strong>抗性提高 3。</p>"
+    },
+    "Earth Elemental Bane": {
+      "name": "土元素祸骰",
+      "description": "<p>这种武器对<strong>土元素</strong><strong>生物</strong>尤其有效。当对该生物类型的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Fire Elemental Bane": {
+      "name": "火元素祸骰 火元素 祸骰",
+      "description": "<p>这种武器对<strong>火元素</strong>生物尤其有效。当对该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Frost Elemental Bane": {
+      "name": "冰霜元素祸骰 冰霜元素 祸骰",
+      "description": "<p>这把武器对<strong>冰霜元素</strong><strong>生物</strong>尤其有效。当对该生物<strong>类型</strong>的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于该前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Storm Elemental Bane": {
+      "name": "风暴元素祸骰 风暴元素 祸骰",
+      "description": "<p>该武器对<strong>风暴元素</strong><strong>生物</strong>特别有效。当对该生物<strong>类型</strong>的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Evasion": {
+      "name": "闪避 闪避",
+      "description": "<p>此后缀每有<strong>1个阶级</strong>，<strong>闪避</strong>防御便提高1点。</p>"
+    },
+    "Fan Spellcraft": {
+      "name": "扇形施法 扇形 施法",
+      "description": "<p>此物品被灌注了<strong>扇形</strong>施法的精华。已装备时，持有者会本能地获得关于<strong>扇形</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Fey Bane": {
+      "name": "妖精祸骰 妖精 祸骰",
+      "description": "<p>该武器对<strong>妖精</strong>生物尤为有效。对该生物<strong>类型</strong>的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Fire Conversion": {
+      "name": "火焰转换 Fire Conversion",
+      "description": "<p>使用此武器进行打击所造成的部分伤害会转化为<strong>火焰</strong>伤害。转化的比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>33%的伤害被转化</p></li><li><p><strong>第2阶：</strong>66%的伤害被转化</p></li><li><p><strong>第3阶：</strong>100%的伤害被转化</p></li></ul><h3 class=\"divider\">试玩测试备注</h3><p>将一次攻击拆分为多种类型伤害组成部分的机制目前尚不存在。在此之前，该词缀的所有阶级都会将武器伤害的100%转化为<strong>火焰</strong>伤害。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为武器的原始类型。</p>"
+    },
+    "Fire Damage": {
+      "name": "火焰伤害 Fire 伤害",
+      "description": "<p>为使用此武器进行的打击附加<strong>火元素</strong>伤害。额外伤害等于该后缀每<strong>阶</strong>2点。</p><h3 class=\"divider\">试玩测试备注</h3><p>该加值当前作为此武器现有伤害类型的固定额外伤害生效。在未来更新中，这将作为<strong>火元素</strong>造成伤害，并单独对照目标的<strong>火元素</strong>抗性进行检定。</p>"
+    },
+    "Fire Resistance": {
+      "name": "火焰抗性 Fire 抗性",
+      "description": "<p>此前缀的每个<strong>阶级</strong>使<strong>火焰</strong>抗性提高 3。</p>"
+    },
+    "Flame Potency": {
+      "name": "火焰强效 火焰 Potency",
+      "description": "<p>使用<strong>火焰</strong>符文的法术，其<strong>附魔加值</strong>每有1个该后缀的<strong>阶级</strong>便提高1。</p>"
+    },
+    "Flame Spellcraft": {
+      "name": "火焰施法 火焰 施法",
+      "description": "<p>这件物品被注入了<strong>火焰</strong>施法的本质。持有者在已装备时会本能地获得关于<strong>火焰</strong>符文的知识，使其即使未通过天赋学会该符文，也能使用它来构成法术。</p>"
+    },
+    "Focusing": {
+      "name": "专注 Focusing",
+      "description": "<p>赋予<strong>恢复专注</strong>动作，使持有者能够在危急时刻恢复<strong>专注</strong>。恢复的数量会随该词缀的<strong>阶级</strong>而提升。</p>"
+    },
+    "Frost Potency": {
+      "name": "霜冻强效 霜冻 Potency",
+      "description": "<p>使用<strong>霜冻</strong>符文的法术，其<strong>附魔加值</strong>每拥有此后缀的<strong>1个阶级</strong>便提高1点。</p>"
+    },
+    "Frost Spellcraft": {
+      "name": "霜冻施法 霜冻 施法",
+      "description": "<p>该物品被注入了<strong>霜冻</strong>施法的精华。处于已装备状态时，持有者会本能地获得关于<strong>霜冻</strong>符文的知识，使其即使未通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Giant Bane": {
+      "name": "巨人祸骰 巨人 祸骰",
+      "description": "<p>该武器对<strong>巨人</strong>生物尤为有效。对该<strong>类型</strong>的生物<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于该前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Gliding": {
+      "name": "滑翔 Gliding",
+      "description": "<p>赋予<strong>滑翔</strong>动作，使持有者能够在坠落期间横向滑翔。滑翔距离会随此前缀的<strong>阶级</strong>提升而增加。</p>"
+    },
+    "Guarding": {
+      "name": "守护 守护",
+      "description": "<p>此后缀的每个<strong>阶</strong>使<strong>格挡</strong>防御提高1。</p>"
+    },
+    "Hale": {
+      "name": "健壮 健壮",
+      "description": "<p>该前缀的每个<strong>阶</strong>使最大<strong>生命值</strong>提高 6。</p>"
+    },
+    "Illumination Potency": {
+      "name": "照明强效 照明 Potency",
+      "description": "<p>使用<strong>照明</strong>符文的法术，其<strong>附魔加值</strong>每有该后缀的<strong>1个阶位</strong>便提高1。</p>"
+    },
+    "Illumination Spellcraft": {
+      "name": "照明施法 照明 施法",
+      "description": "<p>此物品被灌注了<strong>照明</strong>施法的精华。装备时，持有者会本能地获得关于<strong>照明</strong>符文的知识，使其即使未通过天赋学会该符文，也能使用它来构筑法术。</p>"
+    },
+    "Illusion Potency": {
+      "name": "幻象强效 幻象 Potency",
+      "description": "<p>使用<strong>幻象</strong>符文的法术，其<strong>附魔加值</strong>每有1个该后缀的<strong>阶级</strong>便增加1。</p>"
+    },
+    "Illusion Spellcraft": {
+      "name": "幻象施法 幻象 施法",
+      "description": "<p>此物品被灌注了<strong>幻象</strong>施法的精华。装备时，持有者会本能地获得关于<strong>幻象</strong>符文的知识，使其即使未通过天赋习得该符文，也能使用它来编组法术。</p>"
+    },
+    "Influence Spellcraft": {
+      "name": "影响施法 影响 施法",
+      "description": "<p>此物品被灌注了<strong>影响</strong>施法的精髓。已装备时，持用者会本能地获得关于<strong>影响</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构成法术。</p>"
+    },
+    "Keen": {
+      "name": "敏锐 Keen",
+      "description": "<p>降低在成功的打击中造成<strong>暴击</strong>所需的<strong>暴击阈值</strong>。该阈值会随此词缀的每个<strong>阶</strong>降低 1。</p>"
+    },
+    "Kinesis Potency": {
+      "name": "念动力强度 念动力 Potency",
+      "description": "<p>使使用<strong>念动力</strong>符文的法术的<strong>附魔加值</strong>，按此后缀的每个<strong>阶级</strong>提高 1。</p>"
+    },
+    "Kinesis Spellcraft": {
+      "name": "念动力施法 念动力 施法",
+      "description": "<p>此物品被注入了<strong>念动力</strong>施法的精髓。佩戴后，持有者会本能地获得<strong>念动力</strong>符文的知识，使其即使未曾通过天赋习得该符文，也能使用它来构成法术。</p>"
+    },
+    "Life Potency": {
+      "name": "生命强效 生命 Potency",
+      "description": "<p>使用<strong>生命</strong>符文的法术，其<strong>附魔加值</strong>每有1个此后缀的<strong>阶级</strong>便提高1。</p>"
+    },
+    "Life Spellcraft": {
+      "name": "生命施法 生命 施法",
+      "description": "<p>此物品被注入了<strong>生命</strong>施法的精华。已装备时，持有者会本能地获得关于<strong>生命</strong>符文的知识，使其即使未曾通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Lightning Potency": {
+      "name": "闪电强效 闪电 Potency",
+      "description": "<p>使用<strong>闪电</strong>符文的法术，其<strong>附魔加值</strong>每有此后缀的1个<strong>阶</strong>便提高1点。</p>"
+    },
+    "Lightning Spellcraft": {
+      "name": "闪电施法 闪电 施法",
+      "description": "<p>该物品被灌注了<strong>闪电</strong>施法的精华。已装备时，持有者会本能地获得<strong>闪电</strong>符文的知识，使其即使没有通过天赋学会该符文，也能使用它来构筑法术。</p>"
+    },
+    "Luminary": {
+      "name": "辉耀者 Luminary",
+      "description": "<p>包含<strong>屈折</strong>的<strong>沉着</strong><strong>动作</strong>获得恩惠骰。获得的恩惠骰数量等于此前缀的<strong>阶级</strong>。只有一个词缀可以提供此增益。</p>"
+    },
+    "Medicine": {
+      "name": "医疗 医疗",
+      "description": "<p>此前缀每有<strong>1个阶级</strong>，<strong>医疗</strong><strong>技能检定</strong>的<strong>附魔加值</strong>便提高1点。</p>"
+    },
+    "Mending": {
+      "name": "修补 修补",
+      "description": "<p>每有1个此前缀的<strong>阶级</strong>，<strong>创伤</strong>防御阈值便降低1点，使穿戴者更容易从创伤中恢复。</p>"
+    },
+    "Monstrosity Bane": {
+      "name": "畸怪祸骰 畸怪 祸骰",
+      "description": "<p>这种武器对<strong>畸怪</strong><strong>生物</strong>特别有效。对该生物<strong>类型</strong>的<strong>目标</strong>进行<strong>打击</strong>时，攻击者获得等同于该前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Nimbleness": {
+      "name": "敏捷 Nimbleness",
+      "description": "<p>此后缀的每个<strong>阶</strong>使<strong>反射</strong>防御提高1点。</p>"
+    },
+    "Nonchalant": {
+      "name": "漠不关心的 Nonchalant",
+      "description": "<p>针对你的<strong>士气</strong>的打击需要更高的溢出来造成<strong>暴击</strong>。该前缀每有1个<strong>阶</strong>，暴击阈值就提高1。</p>"
+    },
+    "Intimidation": {
+      "name": "威吓 威吓",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>威吓</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高 1。</p>"
+    },
+    "Oblivion Potency": {
+      "name": "湮灭强度 湮灭 Potency",
+      "description": "<p>使用<strong>湮灭</strong>符文的法术，其<strong>附魔加值</strong>每有该后缀的<strong>1个阶位</strong>便提高1点。</p>"
+    },
+    "Oblivion Spellcraft": {
+      "name": "湮灭施法 湮灭 施法",
+      "description": "<p>该物品被注入了<strong>湮灭</strong>施法的精髓。处于已装备状态时，持有者会本能地获得关于<strong>湮灭</strong>符文的知识，使其即使未通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Ooze Bane": {
+      "name": "软泥怪祸骰 软泥怪 祸骰",
+      "description": "<p>该武器对<strong>软泥怪</strong>类型的生物尤其有效。对该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Outsider Bane": {
+      "name": "异界生物祸骰 Outsider 祸骰",
+      "description": "<p>该武器对<strong>异界生物</strong>尤其有效。对该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Performance": {
+      "name": "表演 表演",
+      "description": "<p>此前缀的每个<strong>阶级</strong>都会使<strong>表演</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高1。</p>"
+    },
+    "Piercing Damage": {
+      "name": "穿刺伤害 Piercing 伤害",
+      "description": "<p>为使用此武器进行的打击附加<strong>穿刺</strong>伤害。额外伤害等于该后缀每个<strong>阶级</strong>的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>此加值当前作为该武器现有伤害类型的平额额外伤害生效。在未来的更新中，这将作为<strong>穿刺</strong>伤害结算，并单独对照目标的<strong>穿刺</strong>抗性进行检定。</p>"
+    },
+    "Piercing Resistance": {
+      "name": "穿刺抗性 Piercing 抗性",
+      "description": "<p>该前缀每有<strong>1个阶级</strong>，<strong>穿刺</strong>抗性提高3。</p>"
+    },
+    "Plant Bane": {
+      "name": "植物祸骰 Plant 祸骰",
+      "description": "<p>这种武器对<strong>植物</strong>生物特别有效。对该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于该前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Poison Conversion": {
+      "name": "毒药转化 毒药 Conversion",
+      "description": "<p>使用该武器进行打击所造成的部分伤害会转换为<strong>毒药</strong>伤害。转换的比例取决于此前缀的<strong>阶位</strong>。</p><ul><li><p><strong>第1阶：</strong>33% 伤害被转换</p></li><li><p><strong>第2阶：</strong>66% 伤害被转换</p></li><li><p><strong>第3阶：</strong>100% 伤害被转换</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多种类型伤害组成部分的基础架构尚未实现。在此之前，该词缀的所有阶位都会将武器的 100% 伤害转换为<strong>毒药</strong>伤害。一旦支持多类型伤害，较低阶位将只转换总伤害的一部分，剩余部分则保留为该武器的原始类型。</p>"
+    },
+    "Poison Damage": {
+      "name": "毒药伤害 毒药 伤害",
+      "description": "<p>使用此武器进行的打击附加<strong>毒药</strong>伤害。额外伤害等于该后缀每个<strong>阶</strong>的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>此加值当前作为该武器现有伤害类型的固定额外伤害生效。在未来的更新中，这将作为<strong>毒药</strong>伤害结算，并单独对照目标的<strong>毒药</strong>抗性进行检定。</p>"
+    },
+    "Poison Resistance": {
+      "name": "毒药抗性 毒药 抗性",
+      "description": "<p>此前缀每有<strong>1阶</strong>，<strong>毒药</strong>抗性就提高 3 点。</p>"
+    },
+    "Psychic Conversion": {
+      "name": "灵能转化 灵能 Conversion",
+      "description": "<p>使用此武器进行打击所造成的部分伤害会转化为<strong>灵能</strong>伤害。转化比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>33%的伤害被转化</p></li><li><p><strong>第2阶：</strong>66%的伤害被转化</p></li><li><p><strong>第3阶：</strong>100%的伤害被转化</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多个不同类型伤害组成部分的基础机制尚未实现。在此之前，此词缀的所有阶级都会将该武器的100%伤害转化为<strong>灵能</strong>伤害。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Psychic Damage": {
+      "name": "心灵伤害 灵能 伤害",
+      "description": "<p>为使用该武器进行的打击附加<strong>灵能</strong>伤害。该额外伤害等于此后缀每个<strong>阶级</strong>提供的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>该加值目前以该武器现有<strong>伤害类型</strong>的平直额外伤害形式生效。在未来的更新中，这将作为<strong>灵能</strong>伤害结算，并单独对照目标的<strong>灵能</strong><strong>抗性</strong>进行检定。</p>"
+    },
+    "Psychic Resistance": {
+      "name": "灵能抗性 灵能 抗性",
+      "description": "<p>每有1个该前缀的<strong>阶级</strong>，<strong>灵能</strong>抗性提高3。</p>"
+    },
+    "Pulse Spellcraft": {
+      "name": "脉冲施法 脉冲 施法",
+      "description": "<p>该物品被灌注了<strong>脉冲</strong>施法的精髓。已装备时，持有者会本能地获得关于<strong>脉冲</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Radiant Conversion": {
+      "name": "光耀转化 Radiant Conversion",
+      "description": "<p>用该武器进行打击所造成的部分伤害会转化为<strong>光辉</strong>伤害。转化比例取决于该前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>33%的伤害被转化</p></li><li><p><strong>第2阶：</strong>66%的伤害被转化</p></li><li><p><strong>Tier 3：</strong>100%的伤害被转化</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多种类型伤害组成部分的机制目前尚不存在。在实现之前，该词缀的所有阶级都会将武器造成的100%伤害转化为<strong>光辉</strong>。一旦支持多类型伤害，较低阶级将只转化总伤害的一部分，其余部分则保留为武器的原始类型。</p>"
+    },
+    "Radiant Damage": {
+      "name": "光耀伤害 Radiant 伤害",
+      "description": "<p>使用此武器进行的打击附加<strong>光辉</strong>伤害。额外伤害等于该后缀每<strong>阶</strong>的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>该加值目前以此武器现有伤害类型的平直额外伤害形式生效。在未来的更新中，这将作为<strong>光辉</strong>伤害结算，并单独对照目标的<strong>光辉</strong>抗性进行检定。</p>"
+    },
+    "Radiant Resistance": {
+      "name": "光耀抗性 Radiant 抗性",
+      "description": "<p>此前缀的每个<strong>阶级</strong>使<strong>光耀抗性</strong>提高3。</p>"
+    },
+    "Rallying": {
+      "name": "集结 Rallying",
+      "description": "<p>此词缀每有<strong>1个阶位</strong>，就使<strong>疯狂</strong><strong>防御</strong>阈值降低1，从而使佩戴者更容易从疯狂中被治愈。</p>"
+    },
+    "Ray Spellcraft": {
+      "name": "射线 施法 射线 施法",
+      "description": "<p>此物品被注入了<strong>射线</strong>施法的精髓。佩戴并已装备时，持有者会本能地获得关于<strong>射线</strong>手势的知识，使其即使未通过天赋学会该手势，也能使用它来构成法术。</p>"
+    },
+    "Reach": {
+      "name": "延伸 延伸",
+      "description": "<p>延展该武器的有效射程。近战武器每阶获得<strong>+1射程</strong>。远程武器每阶获得<strong>+10射程</strong>。</p>"
+    },
+    "Reinforcement": {
+      "name": "增援 Reinforcement",
+      "description": "<p>此后缀的每个<strong>阶</strong>使<strong>护甲</strong>防御提高 1。</p>"
+    },
+    "Reliable": {
+      "name": "可靠的 Reliable",
+      "description": "<p>降低以此武器进行攻击检定时的<strong>严重失败阈值</strong>。该阈值每<strong>阶</strong>降低<strong>1</strong>。</p>"
+    },
+    "Returning": {
+      "name": "归来 Returning",
+      "description": "<p>带有此词缀的投掷武器会在每次攻击后以魔法方式返回持用者手中，使其无需回收便可再次投掷。</p>"
+    },
+    "Science": {
+      "name": "科学 科学",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>科学</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高1。</p>"
+    },
+    "Sense Spellcraft": {
+      "name": "感知 施法 感知 施法",
+      "description": "<p>该物品被注入了<strong>感知</strong>施法的精华。处于已装备状态时，持有者会本能地获得关于<strong>感知</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构成法术。</p>"
+    },
+    "Slashing Damage": {
+      "name": "挥砍伤害 Slashing 伤害",
+      "description": "<p>为使用此武器进行的打击添加<strong>挥砍</strong>伤害。该额外伤害等于此后缀每个<strong>阶级</strong>的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>当前，此加值作为该武器现有伤害类型的平直额外伤害生效。未来更新中，这将改为造成<strong>挥砍</strong>伤害，并单独对照目标的<strong>挥砍</strong>抗性进行检定。</p>"
+    },
+    "Slashing Resistance": {
+      "name": "挥砍抗性 Slashing 抗性",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>挥砍</strong>抗性提高 3。</p>"
+    },
+    "Society": {
+      "name": "社会",
+      "description": "<p>此前缀的每个<strong>阶</strong>都会使<strong>社交</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高 1。</p>"
+    },
+    "Soul Potency": {
+      "name": "灵魂强度",
+      "description": "<p>使用<strong>灵魂</strong>符文的法术，其<strong>附魔加值</strong>每有1个此后缀的<strong>阶级</strong>便提高1。</p>"
+    },
+    "Soul Spellcraft": {
+      "name": "灵魂施法 灵魂 施法",
+      "description": "<p>该物品被注入了<strong>灵魂</strong>施法的精华。已装备时，持有者会本能地获得关于<strong>灵魂</strong>符文的知识，使其即使未曾通过天赋习得该符文，也能使用它来构筑法术。</p>"
+    },
+    "Spirited": {
+      "name": "精神焕发",
+      "description": "<p>此前缀的每个<strong>阶</strong>使最大<strong>士气</strong>提高 6。</p>"
+    },
+    "Stealth": {
+      "name": "潜行 潜行",
+      "description": "<p>此前缀的每个<strong>阶级</strong>都会使<strong>潜行</strong><strong>技能检定</strong>的<strong>附魔加值</strong>提高 1。</p>"
+    },
+    "Step Spellcraft": {
+      "name": "踏步施法",
+      "description": "<p>此物品被注入了<strong>踏步</strong>施法的精华。已装备时，持用者会本能地获得关于<strong>踏步</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构成法术。</p>"
+    },
+    "Strike Spellcraft": {
+      "name": "打击施法",
+      "description": "<p>此物品被注入了<strong>打击</strong>施法的精髓。已装备时，持有者会本能地获得关于<strong>打击</strong>手势的知识，使其即使未曾通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Surge Spellcraft": {
+      "name": "涌动施法 涌动 施法",
+      "description": "<p>该物品被注入了<strong>涌动</strong>施法的精华。持有者在已装备时会本能地获得关于<strong>涌动</strong>手势的知识，从而即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Tenacity": {
+      "name": "坚韧 Tenacity",
+      "description": "<p>每有1个该后缀的<strong>阶级</strong>，<strong>坚韧</strong>防御便提高1点。</p>"
+    },
+    "Undead Bane": {
+      "name": "不死生物祸骰",
+      "description": "<p>这把武器对<strong>不死生物</strong>尤其有效。当对该生物类型的目标进行<strong>打击</strong>时，攻击者获得等同于此前缀<strong>阶级</strong>的额外<strong>恩惠骰</strong>。</p>"
+    },
+    "Unshakeable": {
+      "name": "不可动摇 Unshakeable",
+      "description": "<p>针对你的<strong>生命值</strong>的打击需要更高的溢出才能造成<strong>暴击</strong>。该前缀每有1个<strong>阶</strong>，暴击阈值就提高1。</p>"
+    },
+    "Void Conversion": {
+      "name": "虚空转换 虚空 Conversion",
+      "description": "<p>用这件武器进行打击所造成的部分伤害会转换为<strong>虚空</strong>伤害。转换的比例取决于此前缀的<strong>阶级</strong>。</p><ul><li><p><strong>第1阶：</strong>转换 33% 的伤害</p></li><li><p><strong>第2阶：</strong>转换 66% 的伤害</p></li><li><p><strong>Tier 3:</strong>转换 100% 的伤害</p></li></ul><h3 class=\"divider\">试玩测试说明</h3><p>将一次攻击拆分为多个不同类型伤害组成部分的基础机制目前尚不存在。在该机制实装之前，此词缀的所有阶级都会将该武器 100% 的伤害转换为<strong>虚空</strong>。一旦支持多类型伤害，较低阶级将只转换总伤害的一部分，其余部分则保留为该武器的原始类型。</p>"
+    },
+    "Void Damage": {
+      "name": "虚空伤害 虚空 伤害",
+      "description": "<p>为使用此武器进行的打击附加<strong>虚空</strong>伤害。该额外伤害的数值等于此后缀每个<strong>阶</strong>提供的 2 点。</p><h3 class=\"divider\">试玩测试说明</h3><p>此加值当前作为该武器现有伤害类型的平直额外伤害生效。在未来更新中，该效果将改为造成<strong>虚空</strong>伤害，并单独对照目标的<strong>虚空</strong>抗性进行判定。</p>"
+    },
+    "Void Resistance": {
+      "name": "虚空抗性 虚空 抗性",
+      "description": "<p>此前缀每有<strong>1个阶级</strong>，<strong>虚空</strong>抗性提高3。</p>"
+    },
+    "Ward Spellcraft": {
+      "name": "防护施法 Ward 施法",
+      "description": "<p>此物品被灌注了<strong>防护</strong>施法的精华。处于已装备状态时，持有者会本能地获得<strong>防护</strong>手势的知识，使其即使未通过天赋习得该手势，也能使用它来构筑法术。</p>"
+    },
+    "Potency": {
+      "name": "效力 Potency",
+      "description": "<p>根据该词缀的<strong>阶级</strong>，为所有使用此武器进行的<strong>打击</strong>提供<strong>附魔加值</strong>。</p>"
+    },
+    "Wilderness": {
+      "name": "荒野 荒野",
+      "description": "<p>每有此前缀的<strong>1个阶级</strong>，<strong>荒野</strong><strong>技能检定</strong>的<strong>附魔加值</strong>便增加1。</p>"
+    }
+  }
+}

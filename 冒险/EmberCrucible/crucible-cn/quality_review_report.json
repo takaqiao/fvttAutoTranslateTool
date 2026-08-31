@@ -1,0 +1,378 @@
+[
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Absorption.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Absorption.description",
+    "issues": [
+      "当前中文文本残留了一整段英文原文，需删除。",
+      "“负数部分改为作为治疗获得”表达不够自然，也不够贴合 received as Healing 的规则措辞。",
+      "原文中的 negative amount 指负数值本身，译为“该负数值”更准确。"
+    ],
+    "confidence": 0.97,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spit.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spit.description",
+    "issues": [
+      "当前中文文本残留未翻译的英文原文，导致中英重复。",
+      "中文语义基本准确，但该字段应仅保留对应的中文描述。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "mixed_language",
+      "duplicate_source_text",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spit.actions.acidSpit.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spit.actions.acidSpit.description",
+    "issues": [
+      "“严重命中”对 Critical Hit 术语翻译不正确，应为“暴击”。",
+      "当前中文文本末尾错误地附带了整段英文原文，需删除。",
+      "“向 20 英尺内”中的空格不自然，中文排版应为“向20英尺内”。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spit.actions.acidSpit.effects[0].name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spray.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spray.description",
+    "issues": [
+      "当前中文字段中残留英文原文，需删除。",
+      "“酸液喷雾”对应 source 中的 acidic spray 略显不自然；结合术语 Spray -> 喷射，宜译为“酸液喷射”。"
+    ],
+    "confidence": 0.97,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spray.actions.acidSpray.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spray.actions.acidSpray.description",
+    "issues": [
+      "将 fan 误译为“锥形范围”，应为“扇形范围”",
+      "Critical Hit 译为“重击”不符合术语，宜为“暴击”",
+      "condition 译为“状况”不符合术语，宜为“状态”",
+      "当前中文字段混入了未翻译的英文原文，需删除"
+    ],
+    "confidence": 0.98,
+    "risk_flags": [
+      "terminology",
+      "rules_shape_mismatch",
+      "source_text_leak",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Acid Spray.actions.acidSpray.effects[0].name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Amorphous.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Amorphous.description",
+    "issues": [
+      "当前中文文本中误留了一整段英文原文，造成重复且未完成本地化。",
+      "其余中文内容与原文语义和规则基本一致。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "duplicate_source_text_left_in_translation",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aquatic Breathing.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aquatic Breathing.description",
+    "issues": [
+      "当前中文文本重复保留了一行英文原文，导致内容重复且未完全本地化。",
+      "需仅保留与英文原文等义的中文一句。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Camouflage.name",
+    "issues": [
+      "“Aqueous”指与水/液体有关，不限定为“水下”；当前译名“水下伪装”缩窄了原义。",
+      "结合描述“浸没在水或液体中”，译为“水生伪装”/“水态伪装”更符合语义范围与规则文本。"
+    ],
+    "confidence": 0.93,
+    "risk_flags": [],
+    "applied": true
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Camouflage.description",
+    "issues": [
+      "当前中文文本错误地保留了英文原文段落，造成重复且未完全本地化。",
+      "“water or liquids”译为“水或液体”语义略别扭，中文更自然的是“水或其他液体”。",
+      "规则语义应保持为对潜行检定具有 @Advantage[2]，现有中文虽大体正确，但可润色为更自然的规则表述。"
+    ],
+    "confidence": 0.98,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Transmission.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Transmission.description",
+    "issues": [
+      "当前中文文本残留未翻译的英文原文，导致重复。",
+      "中文译文语义基本准确，但应仅保留本地化后的中文内容。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Transmission.actions.aqueousTransmission.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Aqueous Transmission.actions.aqueousTransmission.description",
+    "issues": [
+      "当前中文字段中残留了英文原文，需删除。",
+      "“同一片水体内120英尺内”表达略显重复，调整为更自然的“同一水体中120英尺内”。",
+      "其余规则语义基本准确，包含“无需看见目的地即可进行此次Move”的规则点。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "bilingual_text_left_in_field",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Bestial Senses.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Bestial Senses.description",
+    "issues": [
+      "当前中文文本重复保留了一整段英文原文，应删除英文段落。",
+      "术语“Boons”应按规则术语译为“恩惠骰”，当前译为“恩惠”不准确。",
+      "“高度磨炼的感知”表达略显生硬，调整后更自然且不改变原意。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Blood Sense.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Blood Sense.description",
+    "issues": [
+      "当前中文字段末尾错误残留了一整段英文原文，需删除。",
+      "其余中文语义与规则基本准确，术语使用自然。"
+    ],
+    "confidence": 0.98,
+    "risk_flags": [
+      "mixed_language",
+      "duplicate_source_text",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Bonded Mind.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Bonded Mind.description",
+    "issues": [
+      "当前中文文本混入了一整段未翻译的英文原文，需删除。",
+      "“心灵感应沟通”略显重复，但不影响语义；整体规则含义正确。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [
+      "mixed_language",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Burrower.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Burrower.description",
+    "issues": [
+      "当前中文后附带了整段英文原文，属于未清理的重复内容。",
+      "\"impermeable\" 译为“不可渗透”在掘穿地表语境下不够自然，改为“不可穿透”更贴切。"
+    ],
+    "confidence": 0.98,
+    "risk_flags": [
+      "duplicate_source_text",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Burrower.actions.explosiveEmergence.name",
+    "issues": [],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Burrower.actions.explosiveEmergence.description",
+    "issues": [
+      "当前中文字段末尾残留整段英文原文，需删除。",
+      "“进行一次强化的打击”对规则语义表达不够准确；原文为“with an Empowered attack”修饰的是攻击，而非“打击”本身，更自然准确应为“以一次强化攻击进行打击”。"
+    ],
+    "confidence": 0.98,
+    "risk_flags": [
+      "bilingual_text_leak",
+      "rules_wording_precision",
+      "markup_guard_failed"
+    ],
+    "applied": false
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Burrower.actions.explosiveEmergence.condition",
+    "issues": [
+      "当前中文字段残留了英文原文“While burrowing.”，属于未清理的重复内容。",
+      "中文“在掘穴时。”语义准确，符合此处条件文本的简洁规则表述。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": true
+  },
+  {
+    "file": "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json",
+    "path": "root.entries.Clinging Grip.name",
+    "issues": [
+      "当前中文名称保留了英文“Clinging Grip”，不符合纯中文本地化字段的一致性。",
+      "根据上下文术语表，Clinging Grip 应译为“黏附之握”，现有译名已包含正确中文，应去除重复英文。"
+    ],
+    "confidence": 0.99,
+    "risk_flags": [],
+    "applied": true
+  }
+]

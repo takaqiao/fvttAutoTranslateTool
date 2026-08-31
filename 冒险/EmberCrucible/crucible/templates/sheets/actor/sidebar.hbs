@@ -1,0 +1,34 @@
+<section class="sheet-sidebar flexcol">
+    <img class="profile" src="{{source.img}}" alt="{{source.name}}" width="200" height="200"
+         data-action="editImage" data-edit="img">
+
+    {{!-- Current Equipment --}}
+    <h2 class="section-header divider">{{localize "ACTOR.LABELS.CurrentEquipment"}}</h2>
+    <div class="item-list equipped" data-tooltip-direction="LEFT">
+        {{#each featuredEquipment as |e|}}
+        <div class="equipped line-item" data-crucible-tooltip="{{e.type}}" data-uuid="{{e.uuid}}">
+            <img class="icon" src="{{e.img}}" alt="{{e.name}}">
+            <div class="title">
+                <h4>{{this.name}}</h4>
+                <div class="tags">
+                    {{#each e.tags}}<span class="tag">{{this}}</span>{{/each}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    {{!-- Favorite Actions --}}
+    <h2 class="section-header divider">{{localize "ACTOR.LABELS.FavoriteActions"}}</h2>
+    <div class="item-list actions" data-tooltip-direction="RIGHT">
+        {{#each favoriteActions as |action|}}
+        <div class="action line-item" data-action-id="{{action.id}}" data-crucible-tooltip="action" data-uuid="{{@root.actor.uuid}}">
+            <img class="icon draggable action-drag" src="{{action.img}}" alt="{{action.name}}" draggable="true">
+            <div class="title">
+                <h4 data-action="actionUse"><a>{{action.name}}</a></h4>
+                {{crucibleTags action.tags}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</section>

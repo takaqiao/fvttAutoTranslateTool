@@ -1,0 +1,198 @@
+{
+ "unit": "ST-J03",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ST-J03.cn.html",
+ "chars_cn": 4117,
+ "chars_en": 19197,
+ "summary": "Starter Set Rules chunk 2/5 — SPACE &amp; TIME / STEALTH MODE / COMBAT &amp; INITIATIVE — fully translated (19 headings, 14 @UUID links, 4 example boxes, 1 DARKNESS sidebar, 4 pull-quotes, 1 time-unit table). All 478 tags, all class values, all 14 anchor opening tags (data-uuid/data-id/data-hash/data-type/draggable) and all 10 img src values are byte-identical to the English; only text nodes and link labels changed. Every heading carries an explicit id= holding the Foundry-derived English slug. The 8 load-bearing U+00A0 spacer cells in the evstable and the 5 U+00A0 layout pads after quote attributions / example-box titles were preserved (20 of 21; the 21st is an upstream PDF artifact mid-sentence — \"come out of hiding\" — which has no Chinese word gap to sit in). Terminology drawn from lang/cn.json + glossary_alien + RULINGS; the movie pull-quotes were sourced against the actual subtitle corpus (Tyler=泰勒 and \"in and out in 30 minutes\" from Romulus2024 line 223; \"stay quiet\"/\"we all die\" composited from Romulus2024 lines 754+931).",
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html equals .en.html (every tag name counted)",
+   "result": "PASS — 478 tag tokens, Counter(en) == Counter(cn) exactly. br=54/54, no tag added, merged, split or dropped."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in the English is present unchanged",
+   "result": "PASS — class-value multisets are equal, not merely subset-equal: evchapterheading, arpgtable, evolvedsubheading, textover, evstable, evstrhead, evscol4, evscol2, ev-content-link (×14), evblockquoteCenter, evexamplebox. The starterset-specific ev-content-link was kept (NOT rewritten to corerules' content-link)."
+  },
+  {
+   "check": "3. Every @UUID / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — this unit uses no @UUID/[[…]] enricher syntax; its 14 links are raw v10 <a data-link> anchors. All 14 opening tags compare byte-identical and in the same order; data-uuid ×14, data-id ×14, data-hash ×14, data-type ×14, draggable ×14, img src ×10 all identical lists. Only the 14 inner labels are Chinese."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id= with the original English slug",
+   "result": "PASS — 19/19 headings carry id=. Each id was computed by replicating Foundry's String#slugify(strict:false) on the English heading text and verified programmatically against it. Includes the two ampersand headings: COMBAT & INITIATIVE -> id=\"combat-initiative\", Surprise & Ambush -> id=\"surprise-ambush\" (see open_issues #1 — these are the true derived slugs, NOT the combat-and-initiative / surprise-and-ambush values the corpus links at, which the register already lists as broken upstream)."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — only three registered literals occur anywhere in the English of this unit and none is in a frozen ROLE. 'Critical Injuries' and 'Shift' are frozen as a game.tables.getName() RollTable name and as the crit-table comparison cell respectively; here they are journal prose (an <a> label and a time-unit table row), i.e. T-PLAIN per §3.4 — deliberately translated, flagged in open_issues #2. ' RPG ' / 'RPG' is the name_substring_tests ammo-weight test, which applies to Item names, not prose; the string 'RPG' still survives in-page inside 《异形 RPG》. T-LATIN preserved verbatim: USCSS ×1, M314 ×2, GM ×24, NPC, PC, Mother ×1."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 28,654 bytes vs 29,891; 4,117 CJK characters; only 6 Latin token types survive in text nodes (RPG, Mother, PC, GM, NPC, USCSS), all intentional."
+  },
+  {
+   "check": "7. Every mechanic term used that exists in lang/cn.json matches it byte-for-byte",
+   "result": "PASS — 12 lock hits verified by exact value comparison against the flattened lang/cn.json (see lock_lookups). No mechanic term was rendered in a form that differs from a lang value for the same English string. One deliberate near-miss is documented: 'full action' -> 完整动作, because lang has no 'Full Action' key at all (see open_issues #3)."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Observation",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Keeping Guard",
+   "lang_key": "ALIENRPG.keepingguard",
+   "used": "保持警戒"
+  },
+  {
+   "english": "Personal Agenda",
+   "lang_key": "ALIENRPG.PersonalAgenda",
+   "used": "个人任务"
+  },
+  {
+   "english": "Full Cover",
+   "lang_key": "ALIENRPG.fullcover",
+   "used": "全掩护"
+  },
+  {
+   "english": "Speed",
+   "lang_key": "ALIENRPG.Speed",
+   "used": "速度"
+  },
+  {
+   "english": "Swap Initiative",
+   "lang_key": "ALIENRPG.SwapInitiative",
+   "used": "交换先攻"
+  },
+  {
+   "english": "Push",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "Fast Action (= Evolved 'quick action')",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "Character Sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  },
+  {
+   "english": "Power",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Supply (roll)",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Combatant",
+   "lang_key": "ALIENRPG.CombatantRemove / ALIENRPG.CombatantUpdate",
+   "used": "参战者"
+  },
+  {
+   "english": "Token",
+   "lang_key": "ALIENRPG.NoToken",
+   "used": "指示物"
+  },
+  {
+   "english": "Critical Injury",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "Round / Stretch / Shift",
+   "lang_key": "PROJECT.md §1.4 (ALIENRPG.OneRound/OneTurn/OneShift ship untranslated)",
+   "used": "轮 / 节 / 班"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Full Action",
+   "proposed": "完整动作",
+   "why": "HIGHEST PRIORITY — cross-cutting, 26 occurrences in J02/J04/J05/J06/J07/J14. Evolved renamed 1e's Fast/Slow Action to Quick/Full Action, but the Foundry system's status effects still ship the 1e names (ALIENRPG.FastAction=快速动作, ALIENRPG.SlowAction=慢速动作). 'Quick action' therefore lands on the lock for free (快速动作); 'full action' has NO lang key to match. I chose 完整动作 (not 慢速动作) because the book explicitly contrasts 'full' = uses your whole turn with 'quick', and calls a full action 'anything you could do in less than 10 seconds' — 慢速 says the opposite. Note this seam exists in English too (tracker says 'Slow Action', book says 'full action'), so the translation reproduces rather than introduces it. Clean fix if wanted: add an Evolved-mode override making SlowAction render 完整动作. ST-J04 owns the definition — it must not pick a different word."
+  },
+  {
+   "en": "Turn (initiative sense)",
+   "proposed": "回合",
+   "why": "glossary_alien has Turn=节, but that is the CLASSIC 5-10-minute TIME UNIT (folded with Stretch in §1.4). In this unit 'turn' is exclusively the initiative-order sense ('your place in the initiative order is called your turn', 'turn order', 'on your turn'). Rendering it 节 would be catastrophic. Used 回合, giving the standard TRPG-CN pair Round=轮 / Turn=回合. The glossary entry needs a domain split like R4-captain."
+  },
+  {
+   "en": "Holding Off / hold off",
+   "proposed": "押后",
+   "why": "9 occurrences here plus 1 in ST-J04; it is a heading and a data-hash target, so the label must be stable. Rejected 延迟 (the settled CN rendering of D&D's Delay) because Alien's hold off is not a delay — it is a FORCED SWAP: the other party cannot refuse and must act immediately. 押后 is 2 chars, reads as a deliberate tactical choice, and does not import the wrong mental model. Controller may prefer 延后; either way ST-J04 must follow."
+  },
+  {
+   "en": "Nat / Hayes / Miranda",
+   "proposed": "娜特 / 海斯 / 米兰达（USCSS 米兰达号）",
+   "why": "Cross-unit example-box cast. Nat: J02/J03/J04/J05. Hayes: J03/J04/J05. Miranda: J02/J03/J07/J08/J16/J21. Zero corpus attestation. 海斯 follows the Xinhua standard for Hayes (not 海耶斯); 娜特 marks Nat female, which the text requires ('She takes a chance'); 米兰达 is the standard rendering. These are the names most likely to drift across the wave."
+  },
+  {
+   "en": "Hope's Last Day",
+   "proposed": "《希望的最后一日》",
+   "why": "The adventure title, 2 occurrences here, heading in ST-J07 (data-hash target none). Plays on Hadley's Hope = 哈德利的希望 (settled §1.4), so the 希望 must be kept rather than translated as 末日. ST-J07 owns the heading."
+  },
+  {
+   "en": "Crawlspace / Air shaft / Access point",
+   "proposed": "爬行管道 / 通风管道 / 接入口",
+   "why": "Crawlspaces is a heading + data-hash target (crawlspaces, 2 refs) and recurs in ST-J07/J14 ('Air Ducts'). 爬行管道 pairs with 通风管道 so the genus/species relation is visible; 接入口 (not 接入点) because the thing is a physical opening you can weld shut with a cutting torch."
+  },
+  {
+   "en": "Active & Passive (enemy state)",
+   "proposed": "活跃 / 蛰伏",
+   "why": "'Passive' is already spoken for: ST-J02 defines Passive Rolls, which I render 被动检定 and use in this unit ('a passive open opposed OBSERVATION roll' -> 被动的开放对抗侦察检定). Using 被动 for the enemy state too would collide on the same page. 蛰伏 disambiguates and fits the horror register."
+  },
+  {
+   "en": "Cluttered / Open zone; open / blocked border",
+   "proposed": "杂乱 / 空旷；敞开 / 封闭",
+   "why": "English overloads 'open' for two different axes (zone type vs border state). Chinese splits them, which is clearer and loses nothing. Used consistently 8 times."
+  },
+  {
+   "en": "ping / Tracker Pings",
+   "proposed": "信号点 / 追踪器信号点",
+   "why": "Syncs with ST-J08's event heading 'The Mystery Ping' — that unit should use 神秘信号点."
+  },
+  {
+   "en": "Passive / Opposed / Open roll",
+   "proposed": "被动检定 / 对抗检定 / 开放检定",
+   "why": "All three are defined by ST-J02 headings and all three are consumed by my Detection section. Listed so the controller can confirm ST-J02 used the same three words."
+  },
+  {
+   "en": "Stealth Mode / Social Mode / Detection / Hiding / Starting A Fight",
+   "proposed": "潜行模式 / 社交模式 / 察觉 / 躲藏 / 开战",
+   "why": "潜行模式 is from glossary_alien; the other four are new headings I coined. hiding and stealth-mode are data-hash targets referenced from other units (stealth-mode ×3, hiding ×1), so any other unit writing those link labels must match my heading text."
+  }
+ ],
+ "frozen_kept": [
+  "USCSS",
+  "M314",
+  "GM",
+  "NPC",
+  "PC",
+  "Mother",
+  "RPG (inside 《异形 RPG》, preserving the name_substring_tests literal)",
+  "all 14 data-uuid values",
+  "all 14 data-id values",
+  "all 14 data-hash values",
+  "all 14 data-type values",
+  "draggable=\"false\" ×14",
+  "data-link (bare attribute) ×14",
+  "all 10 img src paths",
+  "every inline style=\"…\" value",
+  "8 × U+00A0 evstable spacer cells",
+  "5 × U+00A0 layout pads in quote attributions and example-box titles"
+ ],
+ "open_issues": [
+  "HEADING-SLUG JUDGEMENT CALL, needs one controller decision. Two of my headings contain '&', and Foundry's slugify drops it: 'COMBAT & INITIATIVE' -> combat-initiative, 'Surprise & Ambush' -> surprise-ambush. But the corpus links at data-hash=\"combat-and-initiative\" (2 refs) and \"surprise-and-ambush\" (4 refs) — which is exactly why DO-NOT-TRANSLATE.json lists both under starterset.data_hash_not_resolving_today. I wrote the TRUE derived slugs (combat-initiative / surprise-ambush), so the page behaves exactly as the English does today: status quo preserved, gate #4 read literally, no upstream defect silently 'fixed' from inside a unit. If the controller would rather repair those 6 dead deep links, flipping the two id values to combat-and-initiative / surprise-ambush is a safe one-line change — I verified NOTHING anywhere in the starterset corpus links at combat-initiative or surprise-ambush, so there is no collision either way. Same defect exists in corerules, so decide once for both packs.",
+  "FROZEN-LITERAL FALSE POSITIVE WARNING for the assembly gate. My .cn.html no longer contains the strings 'Critical Injuries' or 'Shift'. Both are in DO-NOT-TRANSLATE.json, but both freezes are role-scoped, not string-scoped: 'Critical Injuries' is frozen as a game.tables.getName() RollTable NAME (actor.mjs:1816) and here it is an <a> label pointing at ST-J05's heading, so I used 重伤 to match glossary_alien's Critical Injury=重伤; 'Shift' is frozen as the crit-table COMPARISON cell (actor.mjs:1890) and here it is a row label in the journal's time-unit table, which PROJECT.md §1.2 explicitly says is the translatable side ('ALIENRPG.Shift 是输出键，该翻；表格里那个 Shift 格子是比较侧，不许翻'). A naive whole-file string-presence gate will flag both. Neither is a defect.",
+  "LINK LABELS I CHOSE THAT ARE OWNED BY OTHER UNITS — these must match those units' final heading text or the label goes stale: Combat Rules->战斗规则 (ST-J09), Personal Agenda->个人任务 (ST-J02, matches lock), Helping->协助 (ST-J02), Gear->装备 (ST-J02), Relieving Stress->缓解压力 (ST-J05), Critical Injuries->重伤 (ST-J05), XENOMORPHS->异形 (ST-J09). The other 7 point at headings inside my own unit and are self-consistent.",
+  "PULL-QUOTE DEPARTURE FROM THE SUBTITLE CORPUS, deliberate, 2 lines. (a) 'You always were an asshole, Gorman' — CnSCG/Aliens1986 line 1303 renders it 高曼 你老是那么笨 ('you're always so dumb'), which is a bowdlerised mistranslation; I wrote 高曼，你从来就是个混蛋. (b) 'LET'S ROCK!' — CnSCG line 735 renders it 来吧! which is limp for a chapter epigraph; I wrote 开火吧！ because it sits directly above COMBAT & INITIATIVE and Vasquez is opening up with the smartgun. §1.4's source ladder governs TERMS; these are full-sentence quotes where PARALLEL-RUNBOOK §5's register rule ('must sound good spoken') dominates. Names themselves stayed on-ladder: 高曼 and 娃丝佳 are the glossary values. Revert either if the controller wants strict corpus fidelity.",
+  "One U+00A0 of the English's 21 is not reproduced: line 216's 'come out of hiding', an accidental PDF-conversion artifact mid-sentence with no Chinese word gap to occupy. The 20 that are load-bearing (8 evstable spacer cells + 12 attribution/title pads) are all preserved. Expect NBSP 20 vs 21, not a mismatch to chase.",
+  "Register note for review: the single class=\"evblockquoteCenter\" block in this unit is the DARKNESS rules sidebar, not read-aloud boxed text, so I translated it as crisp rules prose rather than for the spoken voice. The four evexamplebox blocks are rules examples and were treated the same way. The four arpgtable pull-quotes ARE voice and were written to be spoken."
+ ]
+}

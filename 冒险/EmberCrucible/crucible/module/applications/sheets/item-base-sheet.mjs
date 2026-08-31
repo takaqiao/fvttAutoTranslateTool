@@ -1,0 +1,570 @@
+const {api, sheets} = foundry.applications;
+import CruciblePhysicalItem from "../../models/item-physical.mjs";
+import {formatHookContext, HOOK_PARTIAL} from "../../hooks/_module.mjs";
+
+/**
+ * A base ItemSheet built on top of ApplicationV2 and the Handlebars rendering backend.
+ */
+export default class CrucibleBaseItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemSheetV2) {
+
+  /** @inheritDoc */
+  static DEFAULT_OPTIONS = {
+    classes: ["crucible", "item", "standard-form"],
+    tag: "form",
+    position: {
+      width: 560,
+      height: "auto"
+    },
+    actions: {
+      actionAdd: CrucibleBaseItemSheet.#onActionAdd,
+      actionDelete: CrucibleBaseItemSheet.#onActionDelete,
+      actionEdit: CrucibleBaseItemSheet.#onActionEdit,
+      affixDelete: CrucibleBaseItemSheet.#onAffixDelete,
+      affixEdit: CrucibleBaseItemSheet.#onAffixEdit,
+      hookToggleSource: CrucibleBaseItemSheet.#onHookToggleSource,
+      expandSection: CrucibleBaseItemSheet.#onExpandSection
+    },
+    form: {
+      submitOnChange: true
+    },
+    item: {
+      type: undefined, // Defined by subclass
+      includesActions: false,
+      includesAffixes: false,
+      includesHooks: false,
+      hasAdvancedDescription: false
+    },
+    window: {
+      resizable: true
+    }
+  };
+
+  /**
+   * A template path used to render a single action.
+   * @type {string}
+   */
+  static ACTION_PARTIAL = "systems/crucible/templates/sheets/item/included-action.hbs";
+
+  /**
+   * A template path used to render a single affix.
+   * @type {string}
+   */
+  static AFFIX_PARTIAL = "systems/crucible/templates/sheets/item/included-affix.hbs";
+
+  /** @override */
+  static PARTS = {
+    header: {
+      id: "header",
+      template: "systems/crucible/templates/sheets/item/item-header.hbs"
+    },
+    tabs: {
+      id: "tabs",
+      template: "templates/generic/tab-navigation.hbs"
+    },
+    description: {
+      id: "description",
+      template: "systems/crucible/templates/sheets/item/item-description.hbs"
+    },
+    config: {
+      id: "config",
+      template: undefined // Populated during _initializeItemSheetClass
+    }
+  };
+
+  /**
+   * Define the structure of tabs used by this Item Sheet.
+   * @type {Record<string, Array<Record<string, ApplicationTab>>>}
+   */
+  static TABS = {
+    sheet: [
+      {id: "description", group: "sheet", icon: "fa-solid fa-book", label: "ITEM.TABS.Description"},
+      {id: "config", group: "sheet", icon: "fa-solid fa-cogs", label: "ITEM.TABS.Configuration"}
+    ]
+  };
+
+  /** @override */
+  tabGroups = {
+    sheet: "description"
+  };
+
+  /**
+   * Track which module hooks have their source expanded.
+   * @type {Set<string>}
+   */
+  #expandedHooks = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * A method which can be called by subclasses in a static initialization block to refine configuration options at the
+   * class level.
+   */
+  static _initializeItemSheetClass() {
+    const item = this.DEFAULT_OPTIONS.item;
+    this.PARTS = foundry.utils.deepClone(this.PARTS);
+    this.TABS = foundry.utils.deepClone(this.TABS);
+
+    // Item Type Configuration
+    this.DEFAULT_OPTIONS.classes = [this.DEFAULT_OPTIONS.item.type];
+    this.PARTS.config.template = `systems/crucible/templates/sheets/item/${item.type}-config.hbs`;
+
+    // Includes Affixes
+    if ( item.includesAffixes ) {
+      this.PARTS.affixes = {
+        id: "affixes",
+        template: "systems/crucible/templates/sheets/item/item-affixes.hbs",
+        templates: [this.AFFIX_PARTIAL],
+        scrollable: [""]
+      };
+      this.TABS.sheet.push({id: "affixes", group: "sheet", icon: "fa-solid fa-sparkles",
+        label: "ITEM.TABS.Affixes"});
+    }
+
+    // Includes Actions
+    if ( item.includesActions ) {
+      this.PARTS.actions = {
+        id: "actions",
+        template: "systems/crucible/templates/sheets/item/item-actions.hbs",
+        templates: [this.ACTION_PARTIAL],
+        scrollable: [""]
+      };
+      this.TABS.sheet.push({id: "actions", group: "sheet", icon: "fa-solid fa-bullseye", label: "ITEM.TABS.Actions"});
+    }
+
+    // Includes Hooks
+    if ( item.includesHooks ) {
+      this.PARTS.hooks = {
+        id: "hooks",
+        template: "systems/crucible/templates/sheets/item/item-hooks.hbs",
+        templates: [HOOK_PARTIAL],
+        scrollable: [""]
+      };
+      this.TABS.sheet.push({id: "hooks", group: "sheet", icon: "fa-solid fa-cogs", label: "ITEM.TABS.Hooks"});
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareContext(options) {
+    const tabGroups = this._getTabs();
+    const source = this.document.toObject();
+    const context = {
+      item: this.document,
+      source,
+      system: source.system,
+      isEditable: this.isEditable,
+      fieldDisabled: this.isEditable ? "" : "disabled",
+      fields: this.document.system.schema.fields,
+      hasAdvancedDescription: this.options.item.hasAdvancedDescription,
+      tabGroups,
+      tabs: tabGroups.sheet,
+      tabsPartial: this.constructor.PARTS.tabs.template,
+      tags: this.document.getTags()
+    };
+
+    // Physical Items
+    if ( this.document.system instanceof CruciblePhysicalItem ) {
+      context.isPhysical = true;
+      context.propertiesWidget = this.#propertiesWidget.bind(this);
+      context.currencyInput = this.#currencyInput.bind(this);
+      context.scaledPriceField = new foundry.data.fields.StringField({label: _loc("ITEM.SHEET.ScaledPrice")});
+      context.requiresInvestment = source.system.equipped && this.document.system.properties.has("investment");
+      const cfg = this.document.system.config;
+      context.enchantment = {
+        value: cfg.enchantmentDerived ? cfg.enchantment.id : source.system.enchantment,
+        disabled: cfg.enchantmentDerived ?? false,
+        hint: cfg.enchantmentDerived ? _loc("ITEM.SHEET.EnchantmentDerivedHint") : ""
+      };
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _preparePartContext(partId, context) {
+    switch ( partId ) {
+      case "actions":
+        context.actionPartial = this.constructor.ACTION_PARTIAL;
+        context.actionGroups = await this.#prepareActionGroups();
+        break;
+      case "affixes":
+        context.isUnique = this.document.system.properties.has("unique");
+        if ( !context.isUnique ) {
+          context.affixPartial = this.constructor.AFFIX_PARTIAL;
+          Object.assign(context, this.#prepareAffixes());
+          context.affixCapacity = this.document.system.affixCapacity;
+          const hasAffixes = (context.prefixes.length + context.suffixes.length) > 0;
+          context.hasAffixCapacity = hasAffixes
+            || ((context.affixCapacity.prefix.total + context.affixCapacity.suffix.total) > 0);
+        }
+        break;
+      case "description":
+        const editorCls = CONFIG.ux.TextEditor;
+        const editorOptions = {relativeTo: this.document, secrets: this.document.isOwner};
+        if ( this.options.item.hasAdvancedDescription ) {
+          const {public: publicSrc, private: privateSrc} = context.source.system.description;
+          context.description = {
+            tab: context.tabs.description,
+            fields: context.fields.description.fields,
+            publicSrc,
+            publicHTML: await editorCls.enrichHTML(publicSrc, editorOptions),
+            publicClass: publicSrc ? "" : "empty",
+            privateSrc,
+            privateHTML: await editorCls.enrichHTML(privateSrc, editorOptions),
+            privateClass: privateSrc ? "" : "empty"
+          };
+        } else {
+          const src = context.source.system.description;
+          context.description = {
+            tab: context.tabs.description,
+            field: context.fields.description,
+            publicSrc: src,
+            publicHTML: await editorCls.enrichHTML(src, editorOptions)
+          };
+        }
+        break;
+      case "hooks":
+        context.hookPartial = HOOK_PARTIAL;
+        const identifier = this.document.system.identifier || this.document.id;
+        const moduleHookFns = crucible.api.hooks[this.document.type]?.[identifier];
+        context.moduleHooks = [];
+        if ( moduleHookFns ) {
+          for ( const h of formatHookContext(moduleHookFns, SYSTEM.ACTOR.HOOKS) ) {
+            h.expanded = this.#expandedHooks.has(h.hookId);
+            context.moduleHooks.push(h);
+          }
+        }
+        context.affixHooks = this.#prepareAffixHooks();
+        break;
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare action groups for the actions tab, separating item-level actions from affix-provided actions.
+   * @returns {Promise<object[]>}
+   */
+  async #prepareActionGroups() {
+    const editorCls = CONFIG.ux.TextEditor;
+    const editorOptions = {relativeTo: this.document, secrets: this.document.isOwner};
+    const enrichAction = async action => ({
+      id: action.id, name: action.name, img: action.img, condition: action.condition,
+      description: await editorCls.enrichHTML(action.description, editorOptions),
+      tags: action.getTags(), effects: action.effects
+    });
+
+    // Item-level actions
+    const sourceActions = this.document.system.schema.has("actions") ? this.document.system._source.actions : [];
+    const itemActionIds = new Set(sourceActions.map(a => a.id));
+    const groups = [{
+      legend: null,
+      canAdd: true,
+      isEditable: this.isEditable,
+      actions: await Promise.all(
+        this.document.system.actions.filter(a => itemActionIds.has(a.id)).map(enrichAction)
+      )
+    }];
+
+    // Affix-provided action groups
+    const affixes = this.document.system.constructor.AFFIXABLE ? this.document.system.affixes : {};
+    for ( const affix of Object.values(affixes) ) {
+      if ( !affix.system.actions?.length ) continue;
+      groups.push({
+        legend: affix.name,
+        canAdd: false,
+        isEditable: false,
+        actions: await Promise.all(affix.system.actions.map(enrichAction))
+      });
+    }
+    return groups;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare data for the actor hooks currently registered by this item.
+   * @returns {object[]}
+   */
+  /**
+   * Prepare affix-provided hooks for display on the hooks tab.
+   * @returns {object[]}
+   */
+  #prepareAffixHooks() {
+    const hooks = [];
+    const affixes = this.document.system.constructor.AFFIXABLE ? this.document.system.affixes : {};
+    for ( const affix of Object.values(affixes) ) {
+      const hookFns = crucible.api.hooks.affix?.[affix.system.identifier];
+      if ( !hookFns ) continue;
+      for ( const h of formatHookContext(hookFns, SYSTEM.ACTOR.HOOKS) ) {
+        const expandKey = `${affix.system.identifier}.${h.hookId}`;
+        h.hookId = expandKey;
+        h.expanded = this.#expandedHooks.has(expandKey);
+        h.legend = affix.name;
+        hooks.push(h);
+      }
+    }
+    return hooks;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare affix data for display in the affixes tab, split into prefix and suffix groups.
+   * @returns {{prefixes: object[], suffixes: object[]}}
+   */
+  #prepareAffixes() {
+    const prefixes = [];
+    const suffixes = [];
+    for ( const affix of Object.values(this.document.system.affixes) ) {
+      const tierValue = affix.system.tier.value;
+      const data = {
+        id: affix.id,
+        name: affix.name,
+        img: affix.img,
+        description: affix.description,
+        tier: tierValue,
+        tierRoman: ["", "I", "II", "III"][tierValue] ?? tierValue
+      };
+      if ( affix.system.affixType === "prefix" ) prefixes.push(data);
+      else suffixes.push(data);
+    }
+    return {prefixes, suffixes};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render the properties field as a multi-checkboxes element.
+   * @param {foundry.data.fields.DataField} field
+   * @param {object} groupConfig
+   * @param {object} inputConfig
+   * @returns {HTMLMultiCheckboxElement}
+   */
+  #propertiesWidget(field, groupConfig, inputConfig) {
+    inputConfig.name = field.fieldPath;
+    const PROPERTIES = this.document.system.constructor.ITEM_PROPERTIES;
+    inputConfig.options = Object.entries(PROPERTIES).map(([k, v]) => ({value: k, label: v.label}));
+    inputConfig.type = "checkboxes";
+    return foundry.applications.fields.createMultiSelectInput(inputConfig);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a price field using a HTMLCrucibleCurrencyElement element.
+   * @param {foundry.data.fields.DataField} field
+   * @param {object} inputConfig
+   * @returns {HTMLCrucibleCurrencyElement}
+   */
+  #currencyInput(field, inputConfig) {
+    return crucible.api.applications.elements.HTMLCrucibleCurrencyElement.create(inputConfig);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configure the tabs used by this sheet.
+   * @returns {Record<string, Record<string, ApplicationTab>>}
+   * @protected
+   */
+  _getTabs() {
+    const tabs = {};
+    for ( const [groupId, config] of Object.entries(this.constructor.TABS) ) {
+      const group = {};
+      for ( const t of config ) {
+        const active = this.tabGroups[t.group] === t.id;
+        group[t.id] = Object.assign({active, cssClass: active ? "active" : ""}, t);
+      }
+      tabs[groupId] = group;
+    }
+
+    // Description style
+    const adv = this.options.item.hasAdvancedDescription;
+    tabs.sheet.description.cssClass = [
+      tabs.sheet.description.cssClass,
+      "biography",
+      "description",
+      adv ? "description-advanced" : ""
+    ].filterJoin(" ");
+
+    // Restrict access to hooks
+    if ( !game.user.isGM ) delete tabs.sheet.hooks;
+    return tabs;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare submission data for the form when needed as a side effect of some other workflow.
+   * @param {Event} event
+   * @returns {object}
+   * @protected
+   */
+  _getSubmitData(event) {
+    const fd = new foundry.applications.ux.FormDataExtended(this.element);
+    return this._prepareSubmitData(event, this.element, fd);
+  }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a new Action to the Item.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} event          The initiating click event
+   * @returns {Promise<void>}
+   */
+  static async #onActionAdd(event) {
+    const fd = this._getSubmitData(event);
+    const actions = this.document.system.toObject().actions;
+
+    // Configure Action data
+    const suffix = actions.length ? actions.length + 1 : "";
+    const actionData = {id: crucible.api.methods.generateId(this.document.name)};
+    if ( actions.length ) {
+      actionData.id += suffix;
+      actionData.name = `${this.document.name} ${suffix}`;
+    }
+
+    // Add data to the actions array
+    const action = new crucible.api.models.CrucibleAction(actionData, {parent: this.document.system});
+    actions.push(action.toObject());
+    fd.system.actions = actions;
+    await this.document.update(fd);
+
+    // Render the action configuration sheet
+    await action.sheet.render({force: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Delete an Action from the Item.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} event          The initiating click event
+   * @param {HTMLAnchorElement} button    The clicked button element
+   * @returns {Promise<void>}
+   */
+  static async #onActionDelete(event, button) {
+    const actionId = button.closest(".action").dataset.actionId;
+    const idx = this.document.system.actions.findIndex(a => a.id === actionId);
+    const action = this.document.system.actions[idx];
+    if ( !action ) throw new Error(`Invalid Action id "${actionId}" requested for deletion`);
+
+    // Prompt for confirmation
+    const confirm = await api.DialogV2.confirm({
+      title: _loc("ACTION.ACTIONS.Delete", {name: action.name}),
+      content: `<p>${_loc("ACTION.ACTIONS.DeleteConfirm", {
+        name: action.name,
+        parent: this.document.name,
+        type: _loc(CONFIG.Item.typeLabels[this.document.type])
+      })}</p>`
+    });
+    if ( !confirm ) return;
+    if ( action.sheet.rendered ) action.sheet.close();
+
+    // Remove the action and save
+    const fd = this._getSubmitData(event);
+    const actions = this.document.system.toObject().actions;
+    actions.splice(idx, 1);
+    fd.system.actions = actions;
+    await this.document.update(fd);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Edit an Action from the Item.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} event          The initiating click event
+   * @param {HTMLAnchorElement} button    The clicked button element
+   * @returns {Promise<void>}
+   */
+  static async #onActionEdit(event, button) {
+    const actionId = button.closest(".action").dataset.actionId;
+    const action = this.document.system.actions.find(a => a.id === actionId);
+    await action.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Expand or collapse a sheet section, collapsing sibling sections when expanding.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} _event
+   * @param {HTMLElement} target
+   * @returns {Promise<void>}
+   */
+  static async #onExpandSection(_event, target) {
+    const section = target.closest(".sheet-section");
+    const wasExpanded = section.classList.contains("expanded");
+    if ( wasExpanded ) {
+      for ( const s of section.parentElement.children ) s.classList.remove("expanded", "collapsed");
+      return;
+    }
+    for ( const s of section.parentElement.children ) {
+      s.classList.toggle("expanded", s === section);
+      s.classList.toggle("collapsed", s !== section);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Toggle the display of a module-defined hook function source.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} _event         The initiating click event
+   * @param {HTMLElement} target           The clicked button element
+   */
+  static #onHookToggleSource(_event, target) {
+    const fieldset = target.closest(".module-hook");
+    const hookId = fieldset.dataset.hookId;
+    if ( this.#expandedHooks.has(hookId) ) this.#expandedHooks.delete(hookId);
+    else this.#expandedHooks.add(hookId);
+    this.render({parts: ["hooks"]});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Edit an affix ActiveEffect on the Item.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} event          The initiating click event
+   * @param {HTMLAnchorElement} button    The clicked button element
+   * @returns {Promise<void>}
+   */
+  static async #onAffixEdit(event, button) {
+    const effectId = button.closest(".affix").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    await effect.sheet.render({force: true});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Delete an affix ActiveEffect from the Item.
+   * @this {CrucibleBaseItemSheet}
+   * @param {PointerEvent} event          The initiating click event
+   * @param {HTMLAnchorElement} button    The clicked button element
+   * @returns {Promise<void>}
+   */
+  static async #onAffixDelete(event, button) {
+    const effectId = button.closest(".affix").dataset.effectId;
+    const effect = this.document.effects.get(effectId);
+    if ( !effect ) return;
+    await effect.deleteDialog();
+  }
+}

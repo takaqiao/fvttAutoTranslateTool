@@ -1,0 +1,264 @@
+================================================================================
+FotRP NPC Bilingual Gloss Audit — Wave 8 v2 (strict NPC heuristic)
+================================================================================
+
+Detection patterns:
+  1. Names with · interpunct (e.g. 多贺台·艾米)
+  2. Names preceded by title (大师X, 师傅X, 大将军X)
+  3. Names followed by title (X大师, X女士, X夫人)
+  4. Names after intro verb (名为X, 叫X, 称为X)
+  5. Names with NPC action verbs (X邀请, X说道, X宣称)
+
+
+## fvtt-JournalEntry-back-matter-ti7ZfnFRd1IabwaA.json
+   Bilingual pairs already in file: 33
+   Glossed examples: ['四位队员都曾在伏陀罗首都印达帕塔/Indapatta', '来自阿卡迪亚纳尔梅拉斯/Nalmeras', '与一只在战斗中并肩而战的幻灵/phantom', '这是一所位于芒吉莽原/Mwangi Expanse', '民那塔北部的曼杜赖岛/Mandurai', '埃贝什拉/Ebeshra the Winged Razor', '千野崇拜哥哥元/Yuen', '作为林诺姆国/Lands of the Linnorm Kings']
+   Missing bilingual (≥1 occurrence):
+     - 打击 (×2)  first page: '专长 FEATS'
+     - 兰雅·什瓦纳特 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 吉瓦蒂·罗瓦特 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 普拉万·马吉纳普 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 雅利卡·穆兰德兹 (×1)  first page: '刺骨蔷薇 BITING ROSES'
+     - 阿托斯·罗德里万 (×1)  first page: '刺骨蔷薇 BITING ROSES'
+     - 阿基拉·暴风踵 (×1)  first page: '风语者 SPEAKERS TO THE WINDS'
+     - 无境·蜂鸟 (×1)  first page: '风语者 SPEAKERS TO THE WINDS'
+     - 普提·努瓦雷 (×1)  first page: '风语者 SPEAKERS TO THE WINDS'
+     - 苏吉特·哈梅兰 (×1)  first page: '风语者 SPEAKERS TO THE WINDS'
+     - 无境·蜂鸟以魔 (×1)  first page: '风语者 SPEAKERS TO THE WINDS'
+     - 乌纳克·失风 (×1)  first page: '寒霜之吼 WINTER'S ROAR'
+     - 斯皮克斯·拉梅尔 (×1)  first page: '寒霜之吼 WINTER'S ROAR'
+     - 胡德琳·斯科尔斯 (×1)  first page: '寒霜之吼 WINTER'S ROAR'
+     - 特罗夫·霜指 (×1)  first page: '寒霜之吼 WINTER'S ROAR'
+     - 路易斯·罗萨 (×1)  first page: '绝岛之殇 DESPAIR ON DANGER ISLAND'
+     - 詹姆斯·凯斯 (×1)  first page: '山中之王 KING OF THE MOUNTAIN'
+     - 而是多位 (×1)  first page: '阿努学徒 ANUGOBU APPRENTICE'
+     - 过峡爱戴的 (×1)  first page: '奈燕妃女皇 LADY NAI YAN FEI'
+     - 回到她作为 (×1)  first page: '奈燕妃女皇 LADY NAI YAN FEI'
+     - 是首位 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 当郝金 (×1)  first page: '净光守护者 LIGHTKEEPERS'
+     - 晋级 (×1)  first page: '赤凰战队花名册 RUBY PHOENIX FIGHTING ROSTER'
+     - 俊森 (×1)  first page: '盛阳漫步 STEPS OF THE SUN'
+
+## fvtt-JournalEntry-chapter-1-c0yHRsNbVDGXKaIu.json
+   Bilingual pairs already in file: 37
+   Glossed examples: ['该地区最常用的语言是天夏语/Tien', '这其中就有一位名为雕匠辛达拉/Syndara the Sculptor', '当辛达拉为一位名叫索俊孙/Sok Jyun-son', '此人是嬛族/Tian-Hwan', '曾趁花国/Hwanggot', '净光守护者/Lightkeepers', '宏大的陶玛塔/Taumata', '在星陨之灾/Earthfall']
+   Missing bilingual (≥1 occurrence):
+     - 位名叫琴·禅古罗 (×1)  first page: '执行者 Enforcers'
+     - 我是修诺 (×1)  first page: '冒险开始 GETTING STARTED'
+     - 或者用郝金 (×1)  first page: '冒险开始 GETTING STARTED'
+     - 正是修诺 (×1)  first page: '整装出发 SETTING OUT'
+     - 修诺 (×1)  first page: '冒险开始 GETTING STARTED'
+     - 来源 (×1)  first page: '第一章：欢迎来到危岛 CHAPTER 1: WELCOME TO DANGER ISLAND'
+     - 郝金挂毯 (×1)  first page: '复仇的奇匠 THE VENGEFUL AXIOMITE'
+     - 琉璃光屋 (×1)  first page: '复仇的奇匠 THE VENGEFUL AXIOMITE'
+     - 民那塔的群岛 (×1)  first page: '邦木岛 BONMU'
+     - 邦木的小岛 (×1)  first page: '邦木岛 BONMU'
+     - 接受 (×1)  first page: '第一章：欢迎来到危岛 CHAPTER 1: WELCOME TO DANGER ISLAND'
+     - 有权 (×1)  first page: '基本规则 Basic Rules'
+     - 挑战一旦 (×1)  first page: '比赛规则 Contests'
+     - 执行者 (×1)  first page: '基本规则 Basic Rules'
+     - 若队伍 (×1)  first page: 'A2. 试炼间 A2. CHAMBER OF TRIALS'
+
+## fvtt-JournalEntry-chapter-2-PpZKICROB7B08r53.json
+   Bilingual pairs already in file: 52
+   Glossed examples: ['旅行/Travel', '与探勘/Reconnoiter', '使其与过峡崖边之庭/Cliffside Court', '邦木岛是许多远古巨兽/megafauna', '一群奔鸟/dromornises', '安国纳神龛/Shrine of Ahngonar', '巴布纳彼神龛/Shrine of Babbunabi', '金牙婆神龛/Shrine of Jinya-Por']
+   Missing bilingual (≥1 occurrence):
+     - 武器 (×2)  first page: '武器大师 WEAPON MASTER'
+     - 人类武器 (×1)  first page: 'K. 执行者基地 K. ENFORCER BASE'
+     - 石桌集市 (×1)  first page: '第二章：求生 CHAPTER 2: SURVIVE'
+     - 活动来 (×1)  first page: '赚取银羽毛 EARNING FEATHERS'
+     - 向执行者 (×1)  first page: '漫游邦木岛 TRAVELING ON BONMU'
+     - 不听 (×1)  first page: 'K. 执行者基地 K. ENFORCER BASE'
+     - 是当年 (×1)  first page: '格拉利昂最强队 GOLARION'S FINEST'
+
+## fvtt-JournalEntry-chapter-3-jy3Vrm5yA3jrrG5W.json
+   Bilingual pairs already in file: 11
+   Glossed examples: ['董/Tino Tung', '禅古罗/Koto Zekora', '是一名鬼道士/onidoshi', '来自镣铐群岛/Shackles', '要穿越熔岩池的角色须先成功执行搜索/Seek', '苏塔奴/Syu Tak-nwa', '白谷真野/Shino Hakusa', '苏塔奴用自己的女巫诅咒/hex']
+   Missing bilingual (≥1 occurrence):
+     - 郝金便 (×2)  first page: '凤凰挑战 THE PHOENIX CHALLENGE'
+     - 把琴·禅古罗的 (×1)  first page: '事件 9：面对首席执行者（14级严重威胁） EVENT 9: FACING THE TOP ENFORCER (SEVERE 14)'
+     - 被奈燕妃 (×1)  first page: '事件 9：面对首席执行者（14级严重威胁） EVENT 9: FACING THE TOP ENFORCER (SEVERE 14)'
+     - 尽管奈燕妃 (×1)  first page: '与女皇共进晚宴 DINNER WITH THE EMPRESS'
+     - 这是角色给 (×1)  first page: '与女皇共进晚宴 DINNER WITH THE EMPRESS'
+     - 整队在 (×1)  first page: '与女皇共进晚宴 DINNER WITH THE EMPRESS'
+     - 可以追溯 (×1)  first page: '与女皇共进晚宴 DINNER WITH THE EMPRESS'
+     - 角色不仅在 (×1)  first page: '夜晚终章 ENDING THE NIGHT'
+     - 食人魔法师 (×1)  first page: '事件 9：面对首席执行者（14级严重威胁） EVENT 9: FACING THE TOP ENFORCER (SEVERE 14)'
+     - 直到郝金 (×1)  first page: '面对净光守护者（14级极限威胁） FACING THE LIGHTKEEPERS (EXTREME 14)'
+
+## fvtt-JournalEntry-back-matter-XLDMbpumIxhSEWd4.json
+   Bilingual pairs already in file: 0
+   Glossed examples: []
+   Missing bilingual (≥1 occurrence):
+     - 索妮里·穆纳尔 (×1)  first page: '艺术与娱乐 ARTS AND ENTERTAINMENT'
+     - 奈羽妃 (×1)  first page: '历史 HISTORY'
+     - 课程而闻名 (×1)  first page: '地名志 GAZETTEER'
+     - 在她所谓 (×1)  first page: '拉祖 RAZU'
+     - 尽管 (×1)  first page: '历史 HISTORY'
+     - 过峡夫人与 (×1)  first page: '历史 HISTORY'
+     - 奈珠朝 (×1)  first page: '历史 HISTORY'
+     - 自奈燕妃 (×1)  first page: '政府与领导 GOVERNMENT AND LEADERS'
+     - 龙兽 (×1)  first page: '政府与领导 GOVERNMENT AND LEADERS'
+     - 在这位 (×1)  first page: '政府与领导 GOVERNMENT AND LEADERS'
+     - 别了我的 (×1)  first page: '地名志 GAZETTEER'
+     - 这位 (×1)  first page: '政府与领导 GOVERNMENT AND LEADERS'
+     - 莱特拉的瓦瑞 (×1)  first page: '冒险钩子 ADVENTURE HOOKS'
+     - 相崎的黑风女 (×1)  first page: '冒险钩子 ADVENTURE HOOKS'
+     - 魔加鲁王或终 (×1)  first page: '魔加鲁 MOGARU'
+     - 前去 (×1)  first page: '历史 HISTORY'
+     - 过峡人 (×1)  first page: '过峡 GOKA'
+     - 附近居民 (×1)  first page: '地名志 GAZETTEER'
+
+## fvtt-JournalEntry-chapter-1-RzfDjQH8KPxPJ2kK.json
+   Bilingual pairs already in file: 14
+   Glossed examples: ['该地区最常用的语言是天夏语/Tien', '他还招募了一位名叫拉祖/Razu', '的记忆献给了那领域中强大的元神/aeons', '艾米/Tagada Emmi', '她曾是冰牙巢/Icefang Aerie', '影响力/Influence', '抗力与弱点/Resistances and Weaknesses', '竞标/Bidding']
+   Missing bilingual (≥1 occurrence):
+     - 乌马尔 (×13)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 邱美莎 (×11)  first page: '影响赞助人 INFLUENCING PATRONS'
+     - 夏之芽 (×10)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 玛莱卡·陶 (×3)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 阿达纳·乌马尔勋 (×3)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 飞田卡索大 (×3)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 特古拉 (×3)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 大掌柜命·玛丽 (×2)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 布肯·特古拉爵 (×2)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 玛莱卡·陶与阿达 (×2)  first page: '五柱院 FIVE PILLARS ACADEMY （严重 15）'
+     - 太阳剑·二式 (×2)  first page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+     - 万家乐 (×2)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 叫多贺台·艾米 (×1)  first page: '多贺台·艾米 TAGADA EMMI'
+     - 纳瓦里·万家乐夫 (×1)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 然玛莱卡·陶 (×1)  first page: '冰牙巢 ICEFANG AERIE （中等 16）'
+     - 玛莱卡·陶会以三 (×1)  first page: '冰牙巢 ICEFANG AERIE （中等 16）'
+     - 阿玛拉·李的便笺 (×1)  first page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+     - 了阿玛拉·李 (×1)  first page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+     - 对玛莱卡·陶 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 仪多贺台·艾米 (×1)  first page: '表演秀展示 EXHIBITION SHOWCASE'
+     - 阿达纳·乌马尔挨 (×1)  first page: '签订生死状 SIGNED LIVES'
+     - 但布肯·特古拉爵 (×1)  first page: '签订生死状 SIGNED LIVES'
+     - 之袍 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 介绍 (×1)  first page: '冒险开始 GETTING STARTED'
+     - 弓匠打造了 (×1)  first page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+     - 的彩排表演 (×1)  first page: '殷后戏院 EMPRESS YIN OPERA HOUSE （微小 15）'
+     - 一位 (×1)  first page: '第一章：寻找赞助人 CHAPTER 1: IN SEARCH OF SPONSORSHIP'
+     - 的口味 (×1)  first page: 'A7. 莎琳之梳 A7. SHELYN’S COMB （中等 15）'
+     - 的吟游诗人 (×1)  first page: '雕匠的伏笔 FORESHADOWING THE SCULPTOR'
+     - 过峡的大 (×1)  first page: '冒险开始 GETTING STARTED'
+     - 商业领袖与 (×1)  first page: '影响赞助人 INFLUENCING PATRONS'
+     - 飞田 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 能给这位 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 乃至过峡 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 除了为 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 与过峡 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 燕轻爵 (×1)  first page: '财神爷大钱庄 GRAND BANK OF ABADAR'
+     - 这位 (×1)  first page: '雕匠的伏笔 FORESHADOWING THE SCULPTOR'
+     - 飞田大 (×1)  first page: '殷后戏院 EMPRESS YIN OPERA HOUSE （微小 15）'
+     - 当大 (×1)  first page: '队伍表演秀 TEAM SHOWCASE （中等 15）'
+     - 人所知的术士 (×1)  first page: '第一章：寻找赞助人 CHAPTER 1: IN SEARCH OF SPONSORSHIP'
+     - 琉璃光屋 (×1)  first page: '雕匠的伏笔 FORESHADOWING THE SCULPTOR'
+     - 冰牙巢的庞大 (×1)  first page: '冰牙巢 ICEFANG AERIE （中等 16）'
+     - 鹏的圣鸟之灵 (×1)  first page: '灯笼小舍画廊 LANTERN LODGE GALLERY'
+     - 莎琳之梳 (×1)  first page: 'A7. 莎琳之梳 A7. SHELYN’S COMB （中等 15）'
+     - 伊阿加拉的古 (×1)  first page: '事件 4：日蚀 EVENT 4: ECLIPSE （严重 15）'
+     - 玛莱卡还 (×1)  first page: '潜在赞助人 POTENTIAL PATRONS'
+     - 这场展示 (×1)  first page: '五柱院 FIVE PILLARS ACADEMY （严重 15）'
+     - 然后悄悄 (×1)  first page: '五柱院 FIVE PILLARS ACADEMY （严重 15）'
+     - 继续 (×1)  first page: '五柱院 FIVE PILLARS ACADEMY （严重 15）'
+     - 便愉快地 (×1)  first page: 'A8. 无尽市场 A8. NEVERENDING MARKET （中等 15）'
+     - 她接着 (×1)  first page: '五柱院 FIVE PILLARS ACADEMY （严重 15）'
+     - 准备 (×1)  first page: '冒险开始 GETTING STARTED'
+
+## fvtt-JournalEntry-chapter-2-FTJT1CRdfjQzy3Ek.json
+   Bilingual pairs already in file: 1
+   Glossed examples: ['董/Tino Tung']
+   Missing bilingual (≥1 occurrence):
+     - 库比亚·骨柱 (×1)  first page: '在比赛上下注 BETTING ON MATCHES'
+     - 普拉万·马吉纳普 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 兰雅·什瓦纳特 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 吉瓦蒂·罗瓦特 (×1)  first page: '八臂调和 ARMS OF BALANCE'
+     - 溃了千野·董 (×1)  first page: '第 2 天 DAY 2'
+     - 人库比亚·骨柱 (×1)  first page: '第 7 天 DAY 7'
+     - 邱美莎 (×1)  first page: '表演赛：龙兽竞速 EXHIBITION MATCH: DRAKE RACE'
+     - 骨柱的 (×1)  first page: '第 7 天 DAY 7'
+
+## fvtt-JournalEntry-chapter-3-SPXqld4nww21Orrg.json
+   Bilingual pairs already in file: 0
+   Glossed examples: []
+   Missing bilingual (≥1 occurrence):
+     - 邱美莎 (×1)  first page: '第三章：魔加鲁之怒 CHAPTER 3: RAGE OF MOGARU'
+     - 郝金即将 (×1)  first page: '第三章：魔加鲁之怒 CHAPTER 3: RAGE OF MOGARU'
+     - 准备 (×1)  first page: '第三章：魔加鲁之怒 CHAPTER 3: RAGE OF MOGARU'
+
+## fvtt-JournalEntry-back-matter-1ylYqjGKvevX3BgC.json
+   Bilingual pairs already in file: 0
+   Glossed examples: []
+   Missing bilingual (≥1 occurrence):
+     - 凯登·凯连的传 (×2)  first page: '战之原野 FIELDS OF BATTLE'
+     - 凯登·凯连那狂 (×1)  first page: '战之原野 FIELDS OF BATTLE'
+     - 千野·董亲自向 (×1)  first page: '分道扬镳 PARTING WAYS'
+     - 太阳剑·二式 (×1)  first page: '优·苏然 YOH SOURAN'
+     - 所定的规程 (×1)  first page: '失落的半位面 LOST DEMIPLANES'
+     - 视作家园 (×1)  first page: '林冠长老的盟友 CANOPY ELDER ALLIES'
+     - 燕轻爵 (×1)  first page: '分道扬镳 PARTING WAYS'
+     - 飞田卡索大 (×1)  first page: '分道扬镳 PARTING WAYS'
+     - 乌马尔 (×1)  first page: '分道扬镳 PARTING WAYS'
+     - 这位剑术 (×1)  first page: '分道扬镳 PARTING WAYS'
+     - 林冠 (×1)  first page: '树灵，林冠长老 ARBOREAL, CANOPY ELDER'
+     - 当奈燕妃 (×1)  first page: '优·苏然 YOH SOURAN'
+     - 艾森格里之造 (×1)  first page: '失落的半位面 LOST DEMIPLANES'
+     - 坎迪维西安 (×1)  first page: '失落的半位面 LOST DEMIPLANES'
+     - 炅裕的人类女 (×1)  first page: '优·苏然 YOH SOURAN'
+     - 便会被 (×1)  first page: '武道会形式 TOURNAMENT FORMAT'
+     - 以所 (×1)  first page: '巅峰专长 CAPSTONE FEATS'
+
+## fvtt-JournalEntry-chapter-1-xClvGtftweJDu3vX.json
+   Bilingual pairs already in file: 1
+   Glossed examples: ['董/Tino Tung']
+   Missing bilingual (≥1 occurrence):
+     - 太阳剑·二式 (×17)  first page: '驾驶飞船 PILOTING THE SHIP'
+     - 雅利卡·穆兰德兹 (×3)  first page: '城内会面 SHAKING HANDS IN TOWN'
+     - 你可以 (×3)  first page: '驾驶飞船 PILOTING THE SHIP'
+     - 立彦 (×3)  first page: '鸟瞰之景 A BIRD’S-EYE VIEW'
+     - 哈尔斯丁·刺痛 (×1)  first page: '城内会面 SHAKING HANDS IN TOWN'
+     - 无境·蜂鸟 (×1)  first page: '城内会面 SHAKING HANDS IN TOWN'
+     - 乌尔纳克·遗风 (×1)  first page: '缺失的部分 MISSING PIECES'
+     - 看到千野·董 (×1)  first page: '城内会面 SHAKING HANDS IN TOWN'
+     - 认为普希·努瓦 (×1)  first page: 'E4. 不幸的实地考察 E4. AN UNFORTUNATE FIELD TRIP （中等 18）'
+     - 阿图斯·罗德里万 (×1)  first page: '来自牺牲的点数 POINTS FROM SACRIFICE'
+     - 所造 (×1)  first page: '世界之间的海岸 THE SHORE BETWEEN WORLDS'
+     - 这群元素 (×1)  first page: '来自仪式的点数 POINTS FROM THE RITUAL'
+     - 辛达拉的奇匠 (×1)  first page: '第一章：奔向峰顶 CHAPTER 1: RACE TO THE PEAK'
+     - 琉璃光屋 (×1)  first page: '第一章：奔向峰顶 CHAPTER 1: RACE TO THE PEAK'
+     - 缠绕长蛇 (×1)  first page: '无尽回响传说 INFINITE ECHOING TALES'
+     - 托拉洛阿 (×1)  first page: '世界之间的海岸 THE SHORE BETWEEN WORLDS'
+     - 两姐妹 (×1)  first page: '城内会面 SHAKING HANDS IN TOWN'
+     - 如果角色 (×1)  first page: '缺失的部分 MISSING PIECES'
+     - 你能 (×1)  first page: '揭示 REVELATIONS'
+     - 真慧点头 (×1)  first page: '世界之间的海岸 THE SHORE BETWEEN WORLDS'
+     - 充分 (×1)  first page: '来自牺牲的点数 POINTS FROM SACRIFICE'
+
+## fvtt-JournalEntry-chapter-2-fwmZr935hxQLlBus.json
+   Bilingual pairs already in file: 1
+   Glossed examples: ['而是来自轴心城/Axis']
+   Missing bilingual (≥1 occurrence):
+     - 太阳剑·二式 (×12)  first page: '突破屏障 BREACHING THE BARRIER'
+     - 太阳剑·一式 (×1)  first page: '第二章：分形丛林之碎 CHAPTER 2: FRAGMENTS OF THE FRACTAL JUNGLE'
+     - 施展自己的 (×1)  first page: '第二章：分形丛林之碎 CHAPTER 2: FRAGMENTS OF THE FRACTAL JUNGLE'
+     - 乐器 (×1)  first page: '事件：百鬼夜行的来访 EVENT: A VISIT FROM THE NIGHT PARADE （中等 19）'
+     - 这位邪恶的 (×1)  first page: '与天裁面对面 FACE TO FACE WITH THE GRAND JUDGE'
+     - 陶玛塔 (×1)  first page: '第二章：分形丛林之碎 CHAPTER 2: FRAGMENTS OF THE FRACTAL JUNGLE'
+     - 高等 (×1)  first page: '事件：百鬼夜行的来访 EVENT: A VISIT FROM THE NIGHT PARADE （中等 19）'
+     - 的岛屿要塞 (×1)  first page: '第二章：分形丛林之碎 CHAPTER 2: FRAGMENTS OF THE FRACTAL JUNGLE'
+     - 救世主之时 (×1)  first page: '与天裁面对面 FACE TO FACE WITH THE GRAND JUDGE'
+     - 狸缗灶 (×1)  first page: '事件：百鬼夜行的来访 EVENT: A VISIT FROM THE NIGHT PARADE （中等 19）'
+     - 但我 (×1)  first page: '与天裁面对面 FACE TO FACE WITH THE GRAND JUDGE'
+     - 这只狸的 (×1)  first page: '事件：百鬼夜行的来访 EVENT: A VISIT FROM THE NIGHT PARADE （中等 19）'
+     - 但他 (×1)  first page: '饿鬼武道会 THE HUNGRY GHOST TOURNAMENT'
+
+## fvtt-JournalEntry-chapter-3-VPgzvXimMH8NKzBk.json
+   Bilingual pairs already in file: 0
+   Glossed examples: []
+   Missing bilingual (≥1 occurrence):
+     - 太阳剑·二式 (×2)  first page: '结束本冒险 CONCLUDING THE ADVENTURE'
+
+
+## TOTAL: 190 candidates across all files

@@ -1,0 +1,36 @@
+<section class="tab sheet-body flexcol scrollable {{tabs.target.cssClass}}"
+         data-group="{{tabs.target.group}}" data-tab="{{tabs.target.id}}">
+    <fieldset>
+        <legend>{{fields.range.label}}</legend>
+        <div class="form-group">
+            <label>{{localize "MEASUREMENT.Distance"}}</label>
+            <div class="form-fields">
+                <label>{{fields.range.fields.minimum.label}}</label>
+                {{formInput fields.range.fields.minimum value=action.range.minimum}}
+                <label>{{fields.range.fields.maximum.label}}</label>
+                {{formInput fields.range.fields.maximum value=action.range.maximum}}
+            </div>
+            <p class="hint">{{fields.range.hint}}</p>
+        </div>
+        {{formGroup fields.range.fields.weapon value=action.range.weapon}}
+    </fieldset>
+
+    <fieldset>
+        <legend>{{fields.target.label}}</legend>
+        {{formGroup fields.target.fields.scope value=action.target.scope localize=true}}
+        {{formGroup fields.target.fields.type value=action.target.type}}
+        {{formGroup fields.target.fields.number value=action.target.number classes="slim"}}
+        {{formGroup fields.target.fields.size value=action.target.size classes="slim"}}
+        {{formGroup fields.target.fields.limit value=action.target.limit classes="slim"}}
+        {{formGroup fields.target.fields.multiple value=action.target.multiple classes="slim"}}
+        {{formGroup fields.target.fields.self value=action.target.self}}
+    </fieldset>
+
+    {{#if isSummon}}
+    <fieldset>
+        <legend>{{fields.summon.label}}</legend>
+        {{formGroup fields.summon.fields.actorUuid value=action.summon.actorUuid}}
+        {{formGroup fields.summon.fields.permanent value=action.summon.permanent}}
+    </fieldset>
+    {{/if}}
+</section>

@@ -1,0 +1,342 @@
+{
+ "Intercept": {
+  "src": "crucible",
+  "pack": "playtest",
+  "node": null,
+  "description": "You protect your allies, intercepting blows that might otherwise be directed towards your companions.",
+  "actions": [
+   {
+    "id": "intercept",
+    "name": "Intercept",
+    "cost": {
+     "action": 0,
+     "focus": 1,
+     "weapon": false,
+     "heroism": 0,
+     "hands": 0
+    },
+    "target": {
+     "type": "single",
+     "number": 1,
+     "scope": 3,
+     "self": false
+    },
+    "range": {
+     "maximum": 4,
+     "weapon": false,
+     "minimum": null
+    },
+    "tags": [
+     "reaction",
+     "movement"
+    ],
+    "effects": [],
+    "description": "You intercept the path of an enemy which enters your Engagement radius, immediately moving up to your Stride to interpose yourself and block their path. If the enemy moves out of your Engagement radius or attacks any other creature during their turn, you may make a @Action[default reactiveStrike] against them. Playtest Notes The interruption of enemy movement is not yet automated."
+   }
+  ]
+ },
+ "Assassin": {
+  "src": "crucible",
+  "pack": "playtest",
+  "node": null,
+  "description": "You specialize in bringing death the the unwary. Any Strike or Spell attack against an @Condition[unaware] target becomes Deadly . An Unaware creature hit by your attack may not alert its allies until its own turn in Combat .",
+  "actions": [
+   {
+    "id": "markForDeath",
+    "name": "Mark For Death",
+    "cost": {
+     "action": 0,
+     "focus": 1,
+     "heroism": 0,
+     "hands": 0,
+     "weapon": false
+    },
+    "target": {
+     "type": "single",
+     "number": 1,
+     "scope": 0,
+     "self": false
+    },
+    "range": {
+     "minimum": null,
+     "maximum": null,
+     "weapon": false
+    },
+    "tags": [
+     "undetectable"
+    ],
+    "effects": [],
+    "description": "You spend 1 minute studying a creature. Perform a Knowledge Test about your target. If successful, you learn all damage types against which the target is Vulnerable. Your minimum Initiative during the first round of Combat becomes one greater than the Initiative of your marked target. Playtest Notes This action is not yet automated."
+   }
+  ]
+ },
+ "Gesture: Step": {
+  "src": "crucible",
+  "pack": "playtest",
+  "node": null,
+  "description": "You infuse runic power into a movement, crossing physical and spatial boundaries. The Step gesture scales with Dexterity and allows you to move up to 20 feet in a straight line with width equal to your Size . It deals 2 Base Damage to targets along that line which fail to Resist the spell. This gesture does not require any free hands to cast and has a base cost of 3 Action and 1 Focus . Playtest Notes The movement aspect of this talent is not yet automated and must be manually performed as a consequence of the spell.",
+  "actions": []
+ },
+ "Unshakeable Stance": {
+  "src": "crucible",
+  "pack": "playtest",
+  "node": null,
+  "description": "You cannot be unvoluntarily Moved or knocked @Condition[prone] by any action that is not a Critical Success rolled by an enemy or a Critical Failure rolled by yourself. Playtest Notes This talent is not yet automated.",
+  "actions": []
+ },
+ "Strategic Repositioning": {
+  "src": "crucible",
+  "pack": "playtest",
+  "node": null,
+  "description": "You are always thinking ahead about where to position yourself should danger loom. Before Turn 1 of a Combat encounter, provided that you are not @Condition[unaware], you may immediately move 4 feet in any permitted direction. If multiple combatants have this feature, repositioning occurs in reverse order of Initiative. Playtest Notes This talent is not yet automated.",
+  "actions": []
+ },
+ "Beastmaster": {
+  "src": "crucible",
+  "pack": "talent",
+  "node": null,
+  "description": "You have trained your animal companion to aid you in combat. Your companion may participate in encounters as an allied combatant. Playtest Notes This talent is not yet automated.",
+  "actions": []
+ },
+ "Fulcrum": {
+  "src": "crucible",
+  "pack": "talent",
+  "node": null,
+  "description": "Balance, positioning, and leverage are your greatest allies in combat. You know how to use a foe's momentum against them and that a small redirection in force can turn the tide of battle.",
+  "actions": [
+   {
+    "id": "conserveMomentum",
+    "name": "Conserve Momentum",
+    "cost": {
+     "focus": 1,
+     "action": 0,
+     "heroism": 0,
+     "hands": 0,
+     "weapon": false
+    },
+    "target": {
+     "type": "single",
+     "number": 1,
+     "scope": 3,
+     "self": false
+    },
+    "range": {
+     "minimum": null,
+     "maximum": null,
+     "weapon": false
+    },
+    "tags": [
+     "reaction"
+    ],
+    "effects": [],
+    "description": "You redirect the force of a melee attack which misses you, pivoting it to instead hit some other adjacent enemy. Your attacker must re-roll their attack targeting their ally instead. Playtest Notes This action is not yet automated."
+   }
+  ]
+ },
+ "Inflection: Extend": {
+  "src": "crucible",
+  "pack": "talent",
+  "node": null,
+  "description": "Enhance the duration of a spell, increasing the duration of its effect. For spells which are instantaneous, any corresponding status conditions that they cause are increased in duration. Effect duration increases from the Extend inflection are not yet automated in Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system.",
+  "actions": []
+ },
+ "Inflection: Negate": {
+  "src": "crucible",
+  "pack": "talent",
+  "node": null,
+  "description": "Invert the effect of a spell. An Inverted Life Touch spell which normally heals a target deals Poison damage instead. An Inverted Death Ward spell inflicts vulnerability to Corruption damage upon an adjacent enemy. The effects of the Negate inflection are not yet automated for Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system.",
+  "actions": []
+ },
+ "Shapeshifter": {
+  "src": "crucible",
+  "pack": "talent",
+  "node": null,
+  "description": "You possess supernatural ability to transform your body into the shapes of beasts. You undergo a transformation where you assume the form of a beast that you are familiar with and which is half your level or less. While transformed you have the exact attributes and abilities of the chosen beast. Your equipment is magically incorporated into the form that you take, however you gain no benefit from that equipment while transformed. If your bestial form becomes @Condition[incapacitated] you revert back to your normal form with any excess damage becoming Wounds . If your Morale is @Condition[broken] while in beast form your transformation ends and any excess damage becomes Madness . Playtest Notes This talent and its associated actions are not yet automated.",
+  "actions": [
+   {
+    "id": "beastShape",
+    "name": "Beast Shape",
+    "cost": {
+     "action": 3,
+     "focus": 3,
+     "heroism": 0,
+     "hands": 0,
+     "weapon": false
+    },
+    "target": {
+     "type": "self",
+     "scope": 1,
+     "number": 1,
+     "self": false
+    },
+    "range": {
+     "minimum": null,
+     "maximum": null,
+     "weapon": false
+    },
+    "tags": [],
+    "effects": [
+     {
+      "name": "Beast Shape",
+      "duration": {
+       "value": 60,
+       "units": "rounds",
+       "expiry": "turnStart"
+      },
+      "statuses": [],
+      "system": {
+       "changes": [],
+       "dot": [],
+       "maintenance": null,
+       "regions": [],
+       "summons": []
+      }
+     }
+    ],
+    "description": "You assume the form of a beast that you are familiar with of one-half your level or less."
+   },
+   {
+    "id": "beastShapeRevert",
+    "name": "Revert Shape",
+    "cost": {
+     "action": 3,
+     "focus": 0,
+     "heroism": 0,
+     "hands": 0,
+     "weapon": false
+    },
+    "target": {
+     "type": "self",
+     "scope": 1,
+     "number": 1,
+     "self": false
+    },
+    "range": {
+     "minimum": null,
+     "maximum": null,
+     "weapon": false
+    },
+    "tags": [],
+    "effects": [],
+    "description": "You end your bestial transformation, returning to your normal form."
+   }
+  ]
+ },
+ "Wirrun Lineage": {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "node": null,
+  "description": "You are immune to the effects of extreme cold. Your vision is not impaired by fog, mist, snow, or other atmospheric effects. Alpha One: This vision effect is not yet automated.",
+  "actions": [
+   {
+    "id": "implacableHunter",
+    "name": "Implacable Hunter",
+    "cost": {
+     "action": 0,
+     "focus": 1,
+     "heroism": 1,
+     "weapon": false,
+     "hands": 0
+    },
+    "target": {
+     "type": "single",
+     "number": 1,
+     "scope": 4,
+     "self": false
+    },
+    "range": {
+     "minimum": 1,
+     "maximum": 60,
+     "weapon": false
+    },
+    "tags": [],
+    "effects": [
+     {
+      "name": "Implacable Hunter",
+      "duration": {
+       "value": 360,
+       "units": "rounds",
+       "expiry": "turnEnd",
+       "expired": false
+      },
+      "statuses": [],
+      "system": {
+       "changes": [],
+       "dc": null,
+       "dot": [],
+       "maintenance": {
+        "cost": null,
+        "hands": 0
+       },
+       "properties": [],
+       "regions": [],
+       "summons": []
+      }
+     }
+    ],
+    "description": "You designate one creature you can see as your quarry. You gain +2 Boons to any Awareness or Wilderness roll which pertains to identifying its location. When you move closer to your quarry on your turn, you gain +2 Boons on the next attack roll made against your quarry on that same turn."
+   }
+  ]
+ },
+ "Abyssal Remains": {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "node": null,
+  "description": "Upon death, the @ref[actor.name]{creature} dissolves into a thick liquid often described as a \"melted shadow,\" which spreads in an oozing pour from the place where it died, soaking the area around it in abyssal corruption.",
+  "actions": [
+   {
+    "id": "abyssalRemains",
+    "name": "Abyssal Remains",
+    "cost": {
+     "action": 0,
+     "focus": 1,
+     "heroism": 0,
+     "hands": 0,
+     "weapon": false
+    },
+    "target": {
+     "type": "pulse",
+     "number": 1,
+     "scope": 3,
+     "self": false,
+     "size": 4
+    },
+    "range": {
+     "minimum": null,
+     "maximum": null,
+     "weapon": false
+    },
+    "tags": [
+     "weakened",
+     "reflex",
+     "corruption"
+    ],
+    "effects": [
+     {
+      "name": "Cursed Vision",
+      "duration": {
+       "value": null,
+       "units": "",
+       "expiry": null,
+       "expired": false
+      },
+      "statuses": [],
+      "system": {
+       "changes": [],
+       "dc": null,
+       "dot": [],
+       "maintenance": {
+        "cost": null,
+        "hands": 0
+       },
+       "properties": [],
+       "regions": [],
+       "summons": []
+      }
+     }
+    ],
+    "description": "Upon death, the @ref[actor.name]{creature} spreads into a melted pool of shadow spreading in a 4 foot radius from its position. This residue remains in place for one month or unless otherwise cleansed. Any creature within the area or who enters it upon a subsequent turn must withstand an attack against their Reflex defense or suffer Corruption damage which also afflicts them with Cursed Vision. While affected by Cursed Vision, they cannot perceive sources of dim light and sources of bright light appear dim. Playtest Notes : Cursed Vision is not yet automated, but will be some time after Foundry VTT version 14 becomes stable."
+   }
+  ]
+ }
+}

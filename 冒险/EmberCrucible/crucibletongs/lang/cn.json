@@ -1,0 +1,28 @@
+{
+    "crucibletongs": {
+        "selectAction": "Select an action",
+        "SETTINGS": {
+            "enableHotBarActor": "Enable Actor on Hotbar",
+            "enableHotBarActorHint": "The current selected actor or character will be shown on the hotbar.",
+            "enableCombatFlow": "Enable Combat Tracker",
+            "enableCombatFlowHint": "Enables the additional Crucible Combat Tracker.",
+            "iniTrackerCount": "Combat Tracker Count",
+            "iniTrackerCountHint": "Number of actors displayed in the Combat Tracker",
+            "iniTrackerSize": "Combat Tracker Size",
+            "iniTrackerSizeHint": "Size of the buttons in the Combat Tracker",
+            "hotbarActorScale": "Hotbar Actor Scale",
+            "hotbarActorScaleHint": "Scale of the complete actor hotbar HUD, including avatar, resources, weapons, and action icons.",
+            "hotbarActionBarMaxWidth": "Hotbar Action Bar Max Width",
+            "hotbarActionBarMaxWidthHint": "Maximum width of the action bar in pixels before icons wrap to a new line.",
+            "enableCombatPan": "Pan to Current Turn",
+            "enableCombatPanHint": "Pan the view to the current turn and select the token if ownership rights are available."
+        },
+        "TABS": {
+            "MACRO": "Macros",
+            "ACTIONS": "Actions",
+            "TALENTS": "Talents"
+        },
+        "combatTracker": "Combat Tracker",
+        "waitInit": "Delay"
+    }
+}

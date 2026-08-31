@@ -1,0 +1,30 @@
+{
+  "openai_api_key": "",
+  "openai_base_url": "https://api.openai.com/v1",
+  "model": "gpt-5.2",
+  "pdf_root": "术语工具",
+  "recursive": true,
+  "pdf_glob": "*.pdf",
+  "include_keywords": [
+    "pf2e",
+    "pathfinder",
+    "adventure",
+    "vaults",
+    "otari",
+    "冒险"
+  ],
+  "exclude_keywords": [],
+  "page_start": 1,
+  "page_end": null,
+  "pages_per_batch": 18,
+  "max_workers": 64,
+  "target_rpm": 9900,
+  "max_retries": 3,
+  "max_chars_per_batch": 32000,
+  "cache_enabled": true,
+  "cache_path": "glossary_extract_cache.json",
+  "log_path": "glossary_extract.log",
+  "output_json": "glossary_from_pdf_fog.json",
+  "output_candidates_json": "glossary_candidates_from_pdf.json",
+  "output_conflicts_json": "glossary_conflicts_from_pdf.json"
+}

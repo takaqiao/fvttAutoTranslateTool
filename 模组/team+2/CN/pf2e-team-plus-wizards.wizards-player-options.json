@@ -1,0 +1,943 @@
+{
+    "label": "玩家选项 Player Options",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {
+        "Wand Adroitness": "魔杖娴熟 Wand Adroitness",
+        "Feats": "专长 Feats",
+        "Experimental Spellshaping": "实验性塑法 Experimental Spellshaping",
+        "Quintessential Experimentation": "精质实验 Quintessential Experimentation",
+        "Focus Spells": "聚能法术 Focus Spells",
+        "School Spells": "学派法术 School Spells",
+        "Deliberations": "深思 Deliberations",
+        "Rudimentary Perfectionism": "本初完美主义 Rudimentary Perfectionism",
+        "School of Wandering Steps": "行旅学派 School of Wandering Steps",
+        "Staff Nexus": "法杖枢纽 Staff Nexus",
+        "Arcane Schools": "奥术学派 Arcane Schools",
+        "Arcane Theses": "奥术学位论文 Arcane Theses",
+        "Simulacric Spellcraft": "拟形施法 Simulacric Spellcraft",
+        "Spell Substitution": "法术替换 Spell Substitution",
+        "Elemental Entanglement": "元素纠缠 Elemental Entanglement",
+        "School of Dwimmeric Entertainment": "幻语乐艺学派 School of Dwimmeric Entertainment",
+        "School of Aethereal Astrologia": "群星占星学派 School of Aethereal Astrologia",
+        "Errata": "勘误 Errata",
+        "Bibliographic Goetia": "典籍召术 Bibliographic Goetia",
+        "Improved Familiar Attunement": "高级魔宠相通 Improved Familiar Attunement",
+        "School of Planar Jurisprudence": "位面法理学派 School of Planar Jurisprudence",
+        "Galdr-Brewed Concotions": "咒酿合剂 Galdr-Brewed Concotions",
+        "Class Feats": "职业专长 Class Feats",
+        "Quasiplanar Fusionist": "类位面熔炼者 Quasiplanar Fusionist",
+        "School of Penumbral Sculpture": "暗影雕塑学派 School of Penumbral Sculpture",
+        "Deliberation Feats": "深思专长 Deliberation Feats",
+        "Eldritch Ballistics": "诡奇弹道 Eldritch Ballistics",
+        "Expanded Thesis Feats": "扩展论文专长 Expanded Thesis Feats",
+        "School of Medicinal Arcana": "奥术医疗学派 School of Medicinal Arcana",
+        "Spell Blending": "法术调和 Spell Blending"
+    },
+    "entries": {
+        "Quasiplanar Fusionist Dedication": {
+            "name": "类位面熔炼者献身 Quasiplanar Fusionist Dedication",
+            "description": "<p>你的通量可被移动。当你维持类位面通量时（包括以施放融合法术延续），你可将通量移至射程内另一5尺方格。该移动发生于你施法之后。</p>",
+            "prerequisites": [
+                {
+                    "value": "类位面施法"
+                }
+            ]
+        },
+        "Distilled Magic": {
+            "name": "蒸馏魔法 Distilled Magic",
+            "description": "<p>你已学会将奥术魔法注入可分发的合剂。每日准备时，你可将一道法术蒸馏入合剂。这样做时，你以2动作或更少的法术位施放一道法术作为合剂创造之一部分，将该法术置于合剂中。饮用此合剂的生物便成为该法术的目标。如你在法术DC上有大师熟练度，你可将两道法术蒸馏入合剂（而非一道），但每道蒸馏法术须为不同阶级。</p>",
+            "prerequisites": [
+                {
+                    "value": "咒酿合剂论文"
+                }
+            ]
+        },
+        "Staff Striker": {
+            "name": "法杖击者 Staff Striker",
+            "description": "<p>当你向敌人挥击时，法杖闪耀魔法之光。对目标护甲等级进行近战法术攻击检定。命中时造成1d6钝击伤害。重击命中时造成双倍伤害，并可选择将目标推离你5尺。如你以双手持法杖，则将所有法术伤害骰提升至1d8。</p><hr /><p><strong>提升（+1）</strong> 伤害提升1d6，或双手持杖时1d8。</p>"
+        },
+        "Fickle Fate": {
+            "name": "无常命运 Fickle Fate",
+            "description": "<p><strong>耗费</strong> 消耗具幸运或厄运特征的法术位</p><hr /><p>你认识到，影响命运不过如同将算盘珠拨过水流般简单。你可使命运天平更倾向中立，使结果更平衡。受影响生物对厄运检定获得状态加值，或对幸运检定承受状态减值，数值等于2加该法术环一半。</p><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 你30尺内一名生物将进行具幸运或厄运特征的检定；<strong>效果</strong> 触发生物受影响。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你在自身15尺内创造一处持续1分钟的均衡光环。所有在光环内开始回合的生物受影响。</p>"
+        },
+        "Improved Familiar Attunement+": {
+            "name": "高级魔宠相通+ Improved Familiar Attunement+",
+            "description": "<p>你长期主张，调谐法师与魔宠之间的羁绊魔法可改善神秘联系并产生更佳效果——较多数法师所用之安全但通用的羁绊更胜一筹。你已与魔宠建立此种契约，从中获得比多数法师更多的效益。你获得@UUID[Compendium.pf2e.feats-srd.Item.bcxIg7wi8ZAhvhOD]{魔宠}法师专长。你的魔宠获得一项额外能力，并在6级、12级与18级时各获一项额外能力。</p><p>你与魔宠的连结改变你的奥术连结职业特性，使你将魔法能量储存于魔宠之中（而非你所拥有的物品）；你也获得「汲取魔宠」免费动作以代替@UUID[Compendium.pf2e.actionspf2e.Item.v82XtjAVN4ffgVVR]{汲取附装物品}。汲取魔宠可在能使你使用汲取附装物品的任何时候使用，作用相同——只是你从魔宠（而非物品）中汲取魔法。如你的魔宠在你120尺内死亡，则其立即作为插画被吸入你的法术书，使你可在下次每日准备时令其复活。该魔宠永远是死去魔宠的精确复制。</p>"
+        },
+        "Potent Portals": {
+            "name": "强力传送门 Potent Portals",
+            "description": "<p>你以传送门折叠时空，在两处空间之间建立桥梁。在30尺内选择两个5尺方格以创造两处传送门。出于移动之考量，这两个方格在持续时间内视为相邻空间。如生物占据多于一格，须额外花费一个动作将自身角度调整以穿过传送门。生物穿过空间后，此法术结束。</p>"
+        },
+        "Beguiling Feint": {
+            "name": "迷魅佯攻 Beguiling Feint",
+            "description": "<p>以一记误导性的花式动作，你以神秘迷惑对手。如你下一动作为对30尺内一名生物施放法术，则以智力调整值代替魅力调整值，对其察觉DC进行欺诈检定。</p><hr /><p><strong>大成功</strong> 敌人未对你的魔法做好准备。其对你的法术处于@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}状态，你对该生物@UUID[Compendium.pf2e.conditionitems.DmAIPqOBomZ7H95W]{隐蔽}至下回合结束。你可借此隐蔽进行隐蔽。</p><p><strong>成功</strong> 同大成功，但你执行敌对动作后隐蔽即结束。</p><p><strong>大失败</strong> 你的魔法反噬。你措手不及至下回合结束。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜匿施法"
+                }
+            ]
+        },
+        "Compressed Spell": {
+            "name": "压缩法术 Compressed Spell",
+            "description": "<p>你将法术之范围压缩为单一高度集中的爆裂，向敌人释放。如你下一动作为施放影响爆发、锥形或线形、无持续时间且需进行豁免的法术，你可将该法术区域改为针对单一生物（须位于法术原本影响范围内）；该生物对此法术的豁免承受–2状态减值。如该爆发、锥形或线形分别大于30尺、45尺或60尺，则改为承受–3状态减值。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.y1xvzL4H1FuW16qt]{效果：压缩法术}</p>"
+        },
+        "Studious Familiar": {
+            "name": "勤学魔宠 Studious Familiar",
+            "description": "<p>你的魔宠几乎与你这等法师同样擅长揭示知识之主题。你的魔宠受训于奥秘并具@UUID[Compendium.pf2e.familiar-abilities.j9vOSbF9kLibhSIf]{不同见解}魔宠能力；此为永久效果，不计入你魔宠能力数量上限。其奥秘调整值等于你的调整值（而非其等级加上你的施法属性），且当你以奥秘进行回忆知识检定时，它无须先准备援助便可使用复议反应；除回忆知识外，复议魔宠能力亦可援助你的「学习法术」活动。如你获得本应已具有此专长所授魔宠能力的特定魔宠，则你减少所选特定魔宠所需的魔宠能力数量等同此数。</p><hr /><p><strong>特别</strong> 若你具@UUID[Compendium.pf2e.classfeatures.SNZ46g3u7U6x0XJj]{高级魔宠相通}学位论文，你可在2级（而非4级）选择「勤学魔宠」作为职业专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Mixed-Potency Tincture": {
+            "name": "混合效力酊剂 Mixed-Potency Tincture",
+            "description": "<p>你可将合剂组合，使之能一并饮用。当你每日准备合剂时，可选择将多达3种灵药或药水合并为单一可消耗物，饮用时同时施加各物之效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "咒酿合剂论文"
+                }
+            ]
+        },
+        "Stroke Chin": {
+            "name": "捋下颌 Stroke Chin",
+            "description": "<p><strong>触发</strong> 你进行回忆知识检定。</p><hr /><p>当你陷入对奥秘的思索时，你以捋下颌、胡须或胡子来定神，从而获得更佳洞察。你的回忆知识检定获得+2环境加值，且如大失败则改为失败。</p>"
+        },
+        "Planar Calling": {
+            "name": "位面召唤 Planar Calling",
+            "description": "<p><strong>需求</strong> 你至少有一个通量激活。</p><hr /><p>你召唤通量中的生物前来作战。你产生与通量所属位面相对应的召唤法术之效果，提升至你能施放的最高阶法术。所选法术与生物须与通量相关联的位面相符（由GM裁定）。当你维持通量并使用此活动时，你给被召唤的生物2个回合动作。使用此活动延续类位面通量。</p><p><strong>神圣</strong> <em>@UUID[Compendium.pf2e.spells-srd.B0FZLkoHsiRgw7gv]{召唤次级仆从}</em>、<em>@UUID[Compendium.pf2e.spells-srd.9WGeBwIIbbUuWKq0]{召唤亡灵}</em></p><p><strong>灵能</strong> <em>@UUID[Compendium.pf2e.spells-srd.hs7h8f4Z1ZNdUt3s]{召唤精类}</em>、<em>@UUID[Compendium.pf2e.spells-srd.9WGeBwIIbbUuWKq0]{召唤亡灵}</em></p><p><strong>原始</strong> <em>@UUID[Compendium.pf2e.spells-srd.hs7h8f4Z1ZNdUt3s]{召唤精类}</em>、<em>@UUID[Compendium.pf2e.spells-srd.jSRAyd57kd4WZ4yE]{召唤植物与真菌}</em>或<em>@UUID[Compendium.pf2e.spells-srd.lpT6LotUaQPfinjj]{召唤元素}</em></p><p>如你能施放至少5阶法术，则可施放下列额外法术。</p><p><strong>神圣</strong> <em>@UUID[Compendium.pf2e.spells-srd.lTDixrrNKaCvLKwX]{召唤天族}</em>、<em>@UUID[Compendium.pf2e.spells-srd.kghwmH3tQjMIhdH1]{召唤巨龙}</em>、<em>@UUID[Compendium.pf2e.spells-srd.29ytKctjg7qSW2ff]{召唤魔族}</em>或<em>@UUID[Compendium.pf2e.spells-srd.ZbEHglw5tkJ3grQZ]{召唤监视者}</em></p><p><strong>灵能</strong> <em>@UUID[Compendium.pf2e.spells-srd.kghwmH3tQjMIhdH1]{召唤巨龙}</em>、<em>@UUID[Compendium.pf2e.spells-srd.i1TvBID5QLyXrUCa]{召唤实体}</em></p><p><strong>原始</strong> <em>@UUID[Compendium.pf2e.spells-srd.kghwmH3tQjMIhdH1]{召唤巨龙}</em>、<em>@UUID[Compendium.pf2e.spells-srd.e9UJoVYUd5kJWUpi]{召唤巨人}</em></p>",
+            "prerequisites": [
+                {
+                    "value": "类位面熔炼者献身"
+                }
+            ]
+        },
+        "Doctoral Thesis": {
+            "name": "博士学位论文 Doctoral Thesis",
+            "description": "<p>11级时，你可选择另一项你于1级本可选择的学位论文，除原有论文之效益外，再获得新论文所列效果。</p>"
+        },
+        "Stop Passage": {
+            "name": "止行 Stop Passage",
+            "description": "<p><strong>耗费</strong> 来自你法杖的若干充能</p><p><strong>需求</strong> 你站立于坚实地面上，并以双手持握已准备好的法杖。</p><hr /><p>你的法杖如此强大，以致你可借其魔法创造扰乱地形。你将法杖之柄狠狠击入足下地面。消耗你法杖的若干充能（数量不超过你能施放最高法术环）。你扰乱足下5尺爆发地面，每消耗一个充能再扩展5尺，造成区域内的高级困难地形。如你至少消耗5个充能，你对区域施加等于消耗充能数两倍的力场伤害（基础反射豁免对抗你的法术DC）。该力场伤害适用于区域内未持有的物体与建筑，并无视其硬度。</p>",
+            "prerequisites": [
+                {
+                    "value": "法杖枢纽论文"
+                }
+            ]
+        },
+        "Copy of a Copy": {
+            "name": "副本之副本 Copy of a Copy",
+            "description": "<p>你将一具秘密复制体藏于世间，以备危急之需。你可花费1周休闲时间创造一具不会立即如常复活的复制体。该复制体保持休眠，直至更紧急的状况发生为止。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.N6MzS5d2mtVtcyqn]{拟形避难}反应。</p>",
+            "prerequisites": [
+                {
+                    "value": "拟形施法论文"
+                }
+            ]
+        },
+        "Adaptable Energy": {
+            "name": "适应能量 Adaptable Energy",
+            "description": "<p><strong>耗费</strong> 消耗具能量特征且造成伤害的法术位</p><hr /><p>你将本会造成伤害的能量解构为有限的能量护盾，以吸收此类能量。你授予对应于所消耗法术之能量特征类型的伤害抗性，等于该法术环两倍，授予目标或区域。此利用与该抗性具相同能量特征。</p><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 你或15尺内一名盟友将承受能量伤害；效果 你授予触发生物对触发效果的抗性。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你授予自身与@Template[type:burst|distance:30]内所有盟友抗性，持续轮数等于该法术环。</p>"
+        },
+        "Become Elemental": {
+            "name": "化身元素 Become Elemental",
+            "description": "<p><strong>需求</strong> 你具有残余能量。</p><hr /><p>你不外释残余能量，而是将其内引并彻底改变自身。你消耗残余能量，于自身施放7阶<em>@UUID[Compendium.pf2e.spells-srd.1K6AYGisvo9gqdhs]{元素形态}</em>法术，但若原本速度更高则获得+10尺状态加值至各速度，攻击调整值为+31，伤害加值为+14。你变为的元素之类型须与你所消耗残余能量具相同元素特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "元素纠缠论文"
+                }
+            ]
+        },
+        "Quasiplanar Flux": {
+            "name": "类位面通量 Quasiplanar Flux",
+            "description": "<p>你驾驭一道通量波，连接至与你类位面传统相关的某个位面，你的双眼与心智散发出所选位面之力。通量出现于30尺内一处5尺方格，呈半透明外观，犹如通往所选位面的传送门，并持续至效果结束。只要通量保持开启，你便可施放与通量位面对应法术列表中之法术。这些法术使用通量位置作为施法点，并使用你的融合法术位施放。每次你施放或延续融合法术，你都自动维持此法术。</p><hr /><p><strong>提升（4阶）</strong> 你可创造两道通量，连接至你所选两个位面。</p><p><strong>提升（8阶）</strong> 你可创造三道通量，连接至你所选三个位面。</p>"
+        },
+        "Terrible Shamblers": {
+            "name": "可怖蹒跚者 Terrible Shamblers",
+            "description": "<p>你已强化你的尸体与魂影，使之更具杀伤力且更敏捷。由「夺魂」创造的从仆即便你未下令，也自动在你回合获得1个动作。当你使用@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.o0QMw5sUYexhLvZi]{夺魂}时，你的不死获得以下效益。</p><p><strong>尸体</strong> 速度增加5尺，并获得等于其速度的攀爬速度。</p><p><strong>魂影</strong> 获得15尺飞行速度，但其须于坚实地面结束回合，否则在回合结束时自动浮落至最近表面。如你至少为10级，则其在回合结束时不再自动浮落至最近表面。</p>",
+            "prerequisites": [
+                {
+                    "value": "夺魂"
+                }
+            ]
+        },
+        "View Internal Anatomy": {
+            "name": "洞察内构 View Internal Anatomy",
+            "description": "<p>你的双眼放出奇异之光，使你能看见所见生物之内部解剖。你看到其内部解剖，并获得一次成功回忆知识之效果——但你只能习得关于其生物或物理特征的信息，例如其最弱豁免或某项抗性。如该生物处于伪装状态、且看到其解剖会揭穿伪装，你便习得该生物处于伪装状态——前提是其伪装并非来自比此法术更高阶的幻象魔法。</p><p>在持续时间内，当你成功协助一名盟友对该生物进行打击时，你允许其瞄准要害，造成1点额外精准伤害。你也对自身的打击与造成伤害的法术攻击检定造成此精准伤害。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.KmB66KAlI1xcmlsA]{法术效果：洞察内构}</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.7D9CdHYBcW86QKo0]{法术效果：洞察内构（援助）}</p><hr /><p><strong>提升（+1）</strong> 精准伤害提升1。</p>"
+        },
+        "Linked Sparks": {
+            "name": "链结火花 Linked Sparks",
+            "description": "<p><strong>触发</strong> 一名生物在对抗由@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.hohuWXsWCSFmvdsr]{生灵之火}所造从仆之消散动作的豁免上大失败。</p><hr /><p>你已将火花之释放与魔法之恢复相联系。你恢复一个专注点。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                },
+                {
+                    "value": "生灵之火专注戏法"
+                }
+            ]
+        },
+        "School of Medicinal Arcana": {
+            "name": "奥术医疗学派 School of Medicinal Arcana",
+            "description": "<p>生物学是一道等待被妥善理解的奥秘——你认为，借由奥术，你可揭开它。无论你就读于声誉卓著的莱皮德斯塔大学，或是维尼坎药物与外科学院，你皆借万物之内部解剖以推进你的魔法。虽然奥术不像其他魔法传统那样最适合愈合伤口，但你仍可以其他方式助益身躯。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.C2DwamKrW6QHoDQg]{深吸}</em>、<em>@UUID[Compendium.pf2e.spells-srd.iYRDFxeVpJ5KIjmr]{尖锐飞针}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.f9m9DayyGy3meqUX]{脱水术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.J7Y7tl0bbdz7TcCc]{衰弱术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.zJQnkKEKbJqGB3iB]{地精疹}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.ElpqHitq4FqwLURV]{净化空气}</em>、<em>@UUID[Compendium.pf2e.spells-srd.8ViwItUgwT4lOvvb]{虚假生机}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.VosLNn2M8S7JH67D]{目盲术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.DCQHaLrYXMI37dvW]{麻痹术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.VXUrO8TwRqBpNzdU]{流血诅咒}</em>、<em>@UUID[Compendium.pf2e.spells-srd.5zeSxzDxMSr0wgSF]{嗜血浓雾}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.59NR1hA2jPSgg2sW]{水疱术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.d9sBzPOXX3KT8uTu]{骇人增生}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.MLYTWHfewOpI3Cz7]{刃锋之地}</em>、<em>@UUID[Compendium.pf2e.spells-srd.6lO6uMQxbqmYho0e]{身躯坏死}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.M5dp7ILSCKID9fDK]{雷震虎躯}</em>、<em>@UUID[Compendium.pf2e.spells-srd.8kJbiBEjMWG4VUjs]{扭曲心智}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.fBoiPXmcIO50OFFR]{血液沸腾}</em>、<em>@UUID[Compendium.pf2e.spells-srd.M0jQlpQYUr0pp2Sv]{干涸凋死}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.4WS7HrFjwNvTn8T2]{内爆术}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.8fv7sjrqesjr1bJK]{洞察内构}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.sAWHI5utUa23VUPF]{即时手术}</em></p><p>*<em>你将此法术作为奥术法术习得与施放</em></p>"
+        },
+        "Mana Well": {
+            "name": "法力之井 Mana Well",
+            "description": "<p>你已挣脱魔法之锁链，使你能极轻松地施放更多法术。每日准备时，选择两个1阶与两个2阶法术位。你可施放这些法术位中准备的1动作与2动作法术而无须消耗法术位，但若不消耗法术位施放，则施放该法术所需的动作数加1。</p>"
+        },
+        "Book Pansophism": {
+            "name": "典籍博学 Book Pansophism",
+            "description": "<p>无论是阅读了多过常人想象的书籍、奥术仪式将相当于整座图书馆的知识置入你的心中，或是你能轻易通过翻阅书页并将关键词组织起来以辨识书的结构与内容，你的书目知识都令人惊叹。</p><p>你可每小时一次将<em>@UUID[Compendium.pf2e.spells-srd.ZYoC630tNGutgbE0]{极化认知}</em>作为奥术内禀法术施放。或者，你可以一本书为目标，进行回忆知识检定，且仅须进行一次回忆知识检定。你的回忆知识适用于该书全部内容，使你能以惊人速度阅读文献。你不能借此更快从法术书中学习法术，但可识别书中的法术。</p>"
+        },
+        "Recharging Spellgun": {
+            "name": "重新充能法术枪 Recharging Spellgun",
+            "description": "<p><strong>需求</strong> 你正持握你的临时法术枪。</p><hr /><p>你的法术枪基础效果以更快速度恢复。你恢复你临时法术枪的初始激活。</p>",
+            "prerequisites": [
+                {
+                    "value": "诡奇弹道论文"
+                }
+            ]
+        },
+        "Studied Backup": {
+            "name": "研习备援 Studied Backup",
+            "description": "<p>你已将一道法术练为你提升施放的偏好法术，且练习足够熟练，以致你不再需要事先准备便能施放它。从你法术书中选择一道阶级至少比你最高阶法师法术位低3阶的法术。你可不必预先准备便施放此法术，方法是消耗一个足以将所选法术以提升阶级施放的法术位。当你向法术书添加新法术时，或花费1小时研习法术书时，你可改变此法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "本初完美主义论文"
+                }
+            ]
+        },
+        "School of Dwimmeric Entertainment": {
+            "name": "幻语乐艺学派 School of Dwimmeric Entertainment",
+            "description": "<p>举世之中，魔法与表演密不可分，你的研究亦反映此点。无论你打算在歌剧表演中亲自登台（如塔尔多基塔罗迪学院的众多毕业生），或更倾向幕后或管理角色（出身阿布萨隆白岩等学院之佳选），你的魔法都将使任何表演升至新的高度。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.vLzFcIaSXs7YTIqJ]{传讯术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.yvs1zN5Pai5U4CJX]{召唤乐器}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.pBevG6bSQOiyflev]{迷惑术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.YgbYvkLvnWJ4WfEA]{目眩消失}</em>、<em>@UUID[Compendium.pf2e.spells-srd.yV7Ouzaoe7DHLESI]{腹语术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.CI7F5qdwp6YngyFt]{彩纸云}</em>、<em>@UUID[Compendium.pf2e.spells-srd.xyRjD52YZl3DBsiy]{即兴游行}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.JHntYF0SbaWKq7wR]{扰乱絮语}</em>、<em>@UUID[Compendium.pf2e.spells-srd.KAWQ5x2j4tUJ91ry]{闪光皮肤}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.a8xXWCQhIR7o6IvP]{隐形帷幕}</em>、<em>@UUID[Compendium.pf2e.spells-srd.5z1700cfG8Ybm0e6]{虚假本性}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.Ucf8eynbZMfUucjE]{幻象场景}</em>、<em>@UUID[Compendium.pf2e.spells-srd.Hp2wmnRS6TUGZlZ2]{号召旌旗}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.7idCEYHnPpVNL9vX]{幻影乐团}</em>、<em>@UUID[Compendium.pf2e.spells-srd.RQjSQVZRG497cJhX]{缤纷光影}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.73rToy0v5Ra9NvL6]{仿敌拟像}</em>、<em>@UUID[Compendium.pf2e.spells-srd.O6VQC1Bs4aSYDa6R]{惊骇假面}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.wfleiawxsfhpRRwf]{无影无踪}</em>、<em>@UUID[Compendium.pf2e.spells-srd.Jvyy6oVIQsD34MHB]{失控之舞}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.HHCgEEkeeShVQf8d]{二重身}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.z0YzKrZnXUpFNI8g]{聚光灯}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.ibaX1SgY3IudpmZJ]{大终曲}</em></p>"
+        },
+        "Arcane Uplift": {
+            "name": "奥术擢升 Arcane Uplift",
+            "description": "<p>你与魔法如此契合，仅施放法术便能使你飞行。你获得<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.FFLK5zaNl4URLHT1]{奥术擢升}</em>聚能法术。</p>"
+        },
+        "Spell Amalgamator": {
+            "name": "法术合并者 Spell Amalgamator",
+            "description": "<p>你交织不同强度的魔法以创造更强大的法术。当你选择交易法术位以产生更高阶法术位时，你可选择3个法术位以产生最多比所交易法术位高3阶的奖励法术位——前提是其总阶级与你通常法术调和可交易的两个法术总阶级相同。例如，与其交易两个3阶法术位以产生5阶法术位，你可改为交易一个1阶、一个2阶与一个3阶法术位以产生5阶法术位。你仍须满足法术调和的所有要求（如奖励法术位各为不同阶级）。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术调和论文"
+                }
+            ]
+        },
+        "Experimental Spellshaping+": {
+            "name": "实验性塑法+ Experimental Spellshaping+",
+            "description": "<p>你的论文主张：通过在施法时改变变量与参数，可更高效地实现塑法之魔法实践——模仿远古时代必须自行研究法术的法师们。这使你能高效访问各种塑法效果。</p><p>你获得一项你所选择的1级塑法法师专长。从4级开始，你每日准备时可选择获得一项等级要求不超过你等级的塑法法师专长，可使用至下次每日准备时。</p>"
+        },
+        "Linked to Undeath": {
+            "name": "链结不死 Linked to Undeath",
+            "description": "<p><strong>触发</strong> 你以「夺魂」创造的从仆在非琐碎遭遇战中以运动检定或徒手打击成功。</p><hr /><p>你已将对不死的控制与你的羁绊魔法相联系。你恢复一个专注点。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                },
+                {
+                    "value": "夺魂"
+                }
+            ]
+        },
+        "Stimulated Muscle Memory": {
+            "name": "激发肌肉记忆 Stimulated Muscle Memory",
+            "description": "<p>你能调动肌肉最深处的神经，使其超越正常极限。你可在攀爬、跳跃或游泳之运动检定中以智力调整值代替力量调整值。如你于上一轮施放过法术，则你的运动检定获得+1环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术活化"
+                }
+            ]
+        },
+        "Superior Wiles": {
+            "name": "精妙诡计 Superior Wiles",
+            "description": "<p>你的诡计比以往更为强大。环境减值提升为–2环境减值，且对法术攻击检定的环境加值提升为+2。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.V9kcZ4IdMFQMzXT8]{效果：精妙诡计}</p>",
+            "prerequisites": [
+                {
+                    "value": "潜匿施法"
+                }
+            ]
+        },
+        "Reporting Spell": {
+            "name": "汇报法术 Reporting Spell",
+            "description": "<p>你知晓如何设置法术，使其即便失败也能提供信息。如你下次动作为施放将以你某敌人为目标进行法术攻击检定或豁免的法术，你便能从法术影响的某敌人处习得一项信息。只要其受法术影响，你便从该敌人处习得以下之一：其最高弱点、其最低豁免、敌人之一项免疫，或敌人之最高抗性。如你的法术对该生物造成有免疫、抗性或弱点的伤害类型，你自动习得该弱点（除你的选择外）；如你的法术针对最低或最高调整值的豁免，你便习得它是最弱抑或最强。无论法术结果如何，敌人对「汇报法术」暂时免疫1天。</p>"
+        },
+        "Arcane Uplift (LHT1)": {
+            "name": "奥术擢升 Arcane Uplift",
+            "description": "<p><strong>触发</strong> 你以法师法术位施放法术</p><hr /><p>你借残留的魔法能量在空中漂浮。你获得等于你的速度或20尺（取较大者）的飞行速度。你可在以法师法术位施放法术后立即花费一个反应向任意方向飞行至多10尺，包括作为初始施法之一部分。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.5ivmUrYyxQIcEhel]{法术效果：奥术擢升}</p>"
+        },
+        "Impromptu Incarnation": {
+            "name": "即兴显化 Impromptu Incarnation",
+            "description": "<p><strong>耗费</strong> 消耗具召唤特征的法术位</p><hr /><p>对许多法师而言，召唤生物是关键工具，但有时短暂的召唤可能更为有效。选择一只你本可以你所消耗法术召唤的生物以使用此利用。该生物以化身形式被召唤，体型最多比原体型大两档，触及增加10尺，但在效果持续期间@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}。它可在你使用此利用后立即使用一个单一动作，并在它即将离开前使用2个动作。如另一生物在你使用此利用后处于你召唤生物的方格内，则其被无害地移至召唤生物之方格边缘。如此移动会使生物碰触其无法占据的障碍，则召唤失败。此为强制移动。</p><hr /><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 你被一名敌人重击命中；<strong>效果</strong> 你的召唤须以敌对动作以触发敌人为目标，且其出现于你相邻处。其于你下回合结束时离开。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你召唤一只巨兽出现于30尺内。被召唤生物在你回合结束时获得每回合1个动作，并在你使用此利用后第三回合结束时离开。</p>"
+        },
+        "School of Wandering Steps": {
+            "name": "行旅学派 School of Wandering Steps",
+            "description": "<p>在远古时期，法师以徒步周游世界并在需要时出现于正确之处而闻名。这些法师周游世界以观奇迹，传播魔法并教授他人其方法。在现代，仍有人沿循像古法师贾腾贝或科比斯拉尼这样人物的脚步过此生活。你或许接受过正规教育却离开以见识世界，你或许与一位向你展示世道之师同行，亦或许你只是通过亲历生活习得所学。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.tXa5vOu5giBNCjdR]{指路术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.uZK2BYzPnxUBnDjr]{绊足藤}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.PGVhjDbzC4lf6aXF]{面包屑}</em>、<em>@UUID[Compendium.pf2e.spells-srd.4c1c6eNzU1PFGkAy]{坚忍}</em>、<em>@UUID[Compendium.pf2e.spells-srd.KcLVELhCUcKXxiKE]{顺风而行}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.UirEIHILQgip87qv]{慷慨冲动}</em>、<em>@UUID[Compendium.pf2e.spells-srd.9XHmC2JgTUIQ1CCm]{迷雾术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.IFuEzfmmWyNwVbhY]{安全通道}</em>、<em>@UUID[Compendium.pf2e.spells-srd.KsWhliKfUs3IpW3c]{棘墙术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.Wpgt5TYcTHLDei6J]{贪攫之土}</em>、<em>@UUID[Compendium.pf2e.spells-srd.1NLMPmyCB2MBoCuR]{龟兔赛跑}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.3E1p58MNQMO4GAxt]{时间迟滞}</em>、<em>@UUID[Compendium.pf2e.spells-srd.SwUiVavHKMWG7t5K]{真言术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.yrZA4k2VAqEP8xx7]{斥退}</em>、<em>@UUID[Compendium.pf2e.spells-srd.uqlxMQQeSGWEVjki]{真景术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.smiVuoFMSgY2FTOO]{曼舞之泉}</em>、<em>@UUID[Compendium.pf2e.spells-srd.ggtZTxeyEnDYbt6f]{片刻复位}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.rwCh2qTYPA44KEoK]{梦境会议}</em>、<em>@UUID[Compendium.pf2e.spells-srd.JAaETUBg0xlttpCH]{召唤大法师}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.KPDHmmjJiw7PhTYF]{辉煌宅邸}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.rEQnHxJ2COtkYDHi]{魔法之图}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.kHjT8RQ1tC3MX11t]{前路险阻}</em></p><p>*<em>你将此法术作为奥术法术习得与施放</em></p>"
+        },
+        "Scry Spell Theft": {
+            "name": "占视窃法 Scry Spell Theft",
+            "description": "<p>当你「窃法」时，你可以更具辨别力。当你窃法时，你只须指定希望窃取之阶级，而非具体奥术法术。如成功，你便习得所选阶级之每道奥术法术，并获得你所选择之法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "窃取法术"
+                }
+            ]
+        },
+        "Deliberations": {
+            "name": "深思 Deliberations",
+            "description": "<p>作为魔法学者，法师以学术辩论为荣。虽然多数法师为奥术共识辩护——即「正确」之法师之路是深入研习法术书并通过严守的奥术连结引导魔法——其他人则代表其他哲学辩论。这些深思的拥护者以不同方式理解法师之角色，以替代方法研习其魔法，并自称迷魅师或死灵法师。</p><p>法师只作一项深思，须在首次成为法师职业之一员时选择。该深思不能改变，代表你的法师习得与控制其魔法的方式。深思替代或修改需要@UUID[Compendium.pf2e.classfeatures.au0lwQ1nAcNQwcGh]{奥术连结}职业特性的专长或动作，并改变你习得魔法的方式。你以你的深思技能替代来自法师之奥秘训练。当你尝试习得新法师法术时，你以深思技能（而非奥秘）进行@UUID[Compendium.pf2e.actionspf2e.Q5iIYCFdqJFM31GW]{学习法术}活动，并在此时使用智力调整值代替你的技能检定常规调整值。你的深思通常也改变你学习法术与他人从你处学习法术的方式。如法师专长、职业特性或法术原本会使用奥秘，则在此类基于奥秘熟练度的检定与判定效果中，你以深思技能代替奥秘。</p><p>你的深思以另一项使你与奥术紧密相系的魔法层面替代你的奥术连结。你以与你深思关联的新动作替代@UUID[Compendium.pf2e.actionspf2e.v82XtjAVN4ffgVVR]{汲取附装物品}免费动作。</p>"
+        },
+        "Superior Theft Retention": {
+            "name": "精妙窃法持留 Superior Theft Retention",
+            "description": "<p>你的窃法现在使魔法停留更长时间。当你「窃法」时，你保留施放该法术之能力至多1分钟，而非至下回合结束。</p>",
+            "prerequisites": [
+                {
+                    "value": "窃取法术"
+                }
+            ]
+        },
+        "Glyph-Triggered Spell": {
+            "name": "符印触发法术 Glyph-Triggered Spell",
+            "description": "<p>你可绘制一道奥术符印以注入你的魔法，使其在恰当条件下触发。你可花费1分钟在附近方格表面上绘制一道奥术符印，然后施放2动作或更少的法术。所施法术须为戏法或至少比你最高阶法术位低2阶。你所施法术不立即生效，而是被包含在符印之中——当你指定的生物进入符印区域时触发。施放该法术时你须立即作出有关该法术的所有决定，包括区域、目标以及该法术的其他判定标准。如该法术针对区域效果，则其区域须包含所选方格；如该法术针对生物，则该生物须在符印5尺内——这两项均于施法时确定。</p><p>触发条件达成后，法术立即施放。符印持续至法术施放、符印因交互动作而扰动，或1小时过去为止——以最先发生者为准。生物可以察觉检定对抗你的法术DC来注意到符印法术。</p>"
+        },
+        "Babbling Profusion": {
+            "name": "繁絮喋言 Babbling Profusion",
+            "description": "<p><strong>耗费</strong> 消耗具语言特征的法术位</p><hr /><p>你将语言搅混为咕哝、扭曲之声，使所有形式的沟通完全失效。</p><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 射程内一名生物将使用具语言特征的动作；<strong>效果</strong> 你尝试对抗触发动作。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你创造一处喋喋之爆发，将@Template[type:emanation|distance:30]内所有言语扭曲，持续轮数等于所消耗法术之阶级。区域内生物须以@Check[flat|dc:11]检定方能在区域内使用具语言特征的动作，且区域内文本变得难以辨识。你可选择忽略数量等于所消耗法术环的生物或文字物体。这不影响施放法术活动，除非所施法术具语言特征。</p>"
+        },
+        "Verbose Hypothesis": {
+            "name": "繁言假设 Verbose Hypothesis",
+            "description": "<p>你已积累足够多真正晦涩的奥术知识，足以轻易投入热情、术语连篇的辩论。选择30尺内一名生物作进行繁言论辩之对象——挑战你的智识同侪，使不解者心智迟钝。对你目标的意志DC进行奥秘掷骰。无论结果如何，该生物之后1天内暂时免疫。</p><hr /><p><strong>大成功</strong> 你彻底压制目标。该生物@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞2级}。如该生物之智力调整值低于你的，则其对你@UUID[Compendium.pf2e.conditionitems.AdPVz7rbaVSRxHFg]{迷魂}，且只要它迷魂，便保持呆滞2级。否则，它呆滞2级，直至其花费两个具专注特征的动作驳斥你的论点为止。这些动作无须连续。</p><p><strong>成功</strong> 同大成功，但该生物呆滞1级。</p><p><strong>大失败</strong> 你的目标以淡定坦率或不屑屈尊冷静反驳，摧毁你的论点与自尊。你呆滞1级1轮。</p>"
+        },
+        "Multi-Tasking Substitution": {
+            "name": "多任务替换 Multi-Tasking Substitution",
+            "description": "<p>你能同时替换数个法术。当你花费10分钟清空一个已准备的法术位并准备另一道来自法术书的不同法术时，你可改为清空数量等于1加你等级一半的已准备法术位，并在每个法术位中准备另一道来自法术书的不同法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术替换论文"
+                }
+            ]
+        },
+        "Powerful Sparks": {
+            "name": "强力火花 Powerful Sparks",
+            "description": "<p>你的物体在你控制下变得更具威力。由生灵之火创造的从仆失去其弱点，并获得@UUID[Compendium.pf2e.familiar-abilities.Le8UWr5BU8rV3iBf]{坚韧}宠物能力。此外，它们的现有移动速度均提升10尺。</p>",
+            "prerequisites": [
+                {
+                    "value": "生灵之火专注戏法"
+                }
+            ]
+        },
+        "Spellsplitter": {
+            "name": "法术分裂者 Spellsplitter",
+            "description": "<p>得益于你详尽的笔记，魔法可在片刻间被改写。当你每日准备时，你也可选择将法术位分裂为更低阶法术位。你可将一个法术位换取两个奖励法术位，每个至少比所换取法术位低2阶。你可换取你拥有的任意数量法术位，但不能分裂已分裂过的法术位。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.OqyS9UAu0l4OBBB9]{分裂法术}活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术调和论文"
+                }
+            ]
+        },
+        "School of Planar Jurisprudence": {
+            "name": "位面法理学派 School of Planar Jurisprudence",
+            "description": "<p>纵观宇宙及其他位面，皆有人通过主权权威寻求秩序。从书写现实根本规则的永恒，到审判亡者之引魂使者，再到为正义而战的执政天使及惩处罪者的恶魔，律法之实践者无处不在。最伟大的政治家、立法者与律师就读于埃格利安魔法艺术学院或阿尔玛斯大学，并将研究集中于完善由这些关心律法之位面所提议的律法。从恶魔学律师到阿卡夏官僚，这些法师以律法治理宇宙。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.EqdSKqr8Qj5TUhMR]{估量术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.BvNbDwFYaidKJG9j]{时之感}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.2tHYKoVc5YhSewDO]{灌铅步伐}</em>、<em>@UUID[Compendium.pf2e.spells-srd.aIHY2DArKFweIrpf]{指令}</em>、<em>@UUID[Compendium.pf2e.spells-srd.TjWHgXqPv5jywMti]{随身书阁}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.q5qmNn144ZJGxnvJ]{宽严得体}</em>、<em>@UUID[Compendium.pf2e.spells-srd.9HpwDN4MYQJnW0LG]{解除魔法}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.B3eLlbaPxOYHcs1o]{光阴诅咒}</em>、<em>@UUID[Compendium.pf2e.spells-srd.rfFZKfeCSweFv7P3]{末日将至}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.D6BcAoWFxHYTKwVZ]{时代沼泽}</em>、<em>@UUID[Compendium.pf2e.spells-srd.HqTI6wRrck1YXp3F]{心灵感应}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.R9xqCBblkS5KE4y7]{短讯术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.ba12fO37w7O37gim]{召唤律则*}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.OsOhx3TGIZ7AhD0P]{支配术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.uqlxMQQeSGWEVjki]{真景术}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.HES5jvGiNZZnJycK]{力场监牢}</em>、<em>@UUID[Compendium.pf2e.spells-srd.AlbpWWN87yGegoAF]{洞烛机先}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.Oj1PJBMQD9vuwCv7]{迷障术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.y2cQYLr5mljDSu1G]{无休监控}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.ZqmP9gijBmK7y8Xy]{判决武器*}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.wqFMsuigkgN7yQN0]{召集陪审}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.gwG0MQ46uSaLTqCc]{审判之手}</em></p><p>*<em>你将此法术作为奥术法术习得与施放</em></p>"
+        },
+        "Slot Rehearsed Reload": {
+            "name": "槽位预演重装 Slot Rehearsed Reload",
+            "description": "<p><strong>需求</strong> 你正持握你的临时法术枪。</p><hr /><p>你释放魔法并立即装载武器。如你下次动作为以法师法术位施放法术，你可作为施法之一部分进行交互，重新装载临时法术枪之火器。</p>",
+            "prerequisites": [
+                {
+                    "value": "诡奇弹道论文"
+                }
+            ]
+        },
+        "Basic Offense": {
+            "name": "基础攻势 Basic Offense",
+            "description": "<p>你有一道比其他戏法更为强大的特定戏法。每日准备时，选择一道奥术传统的戏法——其造成伤害、无持续时间、且需2动作施放。你可选择以单一动作施放该法术，将该法术造成伤害减半，并赋予其炫技特征。或者，你可将施放法术所需动作数提升至3动作，使每阶伤害提升2。法术其他效果同原法术。你不能对以此方式修改的法术使用塑法。</p>",
+            "prerequisites": [
+                {
+                    "value": "本初完美主义论文"
+                }
+            ]
+        },
+        "Quick Substitution": {
+            "name": "快速替换 Quick Substitution",
+            "description": "<p>你可在飞行中作出替换。选择一个已准备法术位，在所选法术位中准备一道你本可在每日准备时准备的另一法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术替换论文"
+                }
+            ]
+        },
+        "Big Shot": {
+            "name": "重击射手 Big Shot",
+            "description": "<p><strong>需求</strong> 你正持握你的临时法术枪，且其至少剩余一次激活。</p><hr /><p>你从你的法术枪发出毁灭一击。你施放一道1或2动作的、需法术攻击检定的法术。该法术效果不立即发生，而是注入你临时法术枪的下次激活。你的法术与法术枪激活的法术攻击检定相结合——你以你法术攻击检定的结果同时判定激活与法术之效果。这计入你的多重攻击减值两次，但你直至此活动后才施加减值。此活动其他限制同魔战士之法击。</p>",
+            "prerequisites": [
+                {
+                    "value": "诡奇弹道论文"
+                }
+            ]
+        },
+        "Elemental Study Notes": {
+            "name": "元素研习笔记 Elemental Study Notes",
+            "description": "<p>你对元素与元素位面尤为博学。当你尝试习得具元素特征之法术且大失败时，改为失败；失败时则可在升级前再次尝试。此外，当你对具元素特征之生物或位面进行回忆知识或研究时，检定获得+2环境加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "元素纠缠论文"
+                }
+            ]
+        },
+        "Extradimensional Pockets": {
+            "name": "异维口袋 Extradimensional Pockets",
+            "description": "<p>你发现拥有小型口袋次元很有用——既能藏匿，亦能快速取物。每日准备时，你选择一件衣物使其获得能容纳至多你等级一半承重的次元空间，至你选择新衣物为止。存于此次元空间之物品须为1承重或更少。此次元空间难以察觉——使该空间的@UUID[Compendium.pf2e.actionspf2e.qVNVSmsgpKFGk9hV]{隐藏物件}检定获得+2环境加值，且你可使用奥秘代替常规技能在该次元空间内隐藏物件。当你穿着附有你次元空间的衣物时，你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.io2C4gxyi82BxjfZ]{腕间妙法}活动。</p>"
+        },
+        "Constructed Spark": {
+            "name": "构装火花 Constructed Spark",
+            "description": "<p>你可呼唤物体之集合为你而战。如你下次动作为施放@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.hohuWXsWCSFmvdsr]{生灵之火}，你便获得你能施放最高阶法术之<em>@UUID[Compendium.pf2e.spells-srd.lKcsmeOrgHtK4xQa]{召唤构装体}</em>法术之效果，而非该法术之常规效果。</p>",
+            "prerequisites": [
+                {
+                    "value": "生灵之火专注戏法"
+                }
+            ]
+        },
+        "Caged Specimens": {
+            "name": "笼中标本 Caged Specimens",
+            "description": "<p>你将一只魔法生物置于华丽笼中、玻璃瓶或其他容器中，以便更好地理解其魔法能力。在击败、购买或以其他方式遇见小型或更小的魔法生物后，你可将其囚禁并记录其能力。你可以奥秘（而非常规技能）@UUID[Compendium.pf2e.actionspf2e.q9nbyIF0PEBqMtYe]{指挥动物}，并将<em>@UUID[Compendium.pf2e.spells-srd.s7ILzY2xh1tc9U1v]{驯服术}</em>戏法作为奥术戏法习得。</p><p>你可研究一只能施放奥术传统法术的生物，使你能@UUID[Compendium.pf2e.actionspf2e.Q5iIYCFdqJFM31GW]{学习法术}该生物可施放的法术——前提是你的检定结果亦超过其意志DC。这通常要求生物被囚禁，但某些生物可能允许你自愿研究它们，使你无需超过其意志DC（由GM裁定）。</p>"
+        },
+        "Divergent Study": {
+            "name": "分支研习 Divergent Study",
+            "description": "<p>1级时，你在@UUID[Compendium.pf2e.classfeatures.OAcxS625AXSGrQIC]{法术调和}与@UUID[Compendium.pf2e.classfeatures.QzWXMCSGNfvvpYgF]{法术替换}之间为分支研习作出选择。你获得所选之效果。</p>"
+        },
+        "Arcane Legerdemain": {
+            "name": "奥术魔术 Arcane Legerdemain",
+            "description": "<p>你可借眨眼之间与几个迅捷手势从他人处取物。你获得@UUID[Compendium.pf2e.feats-srd.jDdOqFmZLwE4dblQ]{扒窃}技能专长。你可使用智力调整值代替敏捷调整值进行@UUID[Compendium.pf2e.actionspf2e.RDXXE7wMrSPCLv5k]{盗窃}或@UUID[Compendium.pf2e.actionspf2e.ijZ0DDFpMkWqaShd]{手上功夫}，且这些动作（如使用智力）获得奥术特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "窃取法术"
+                }
+            ]
+        },
+        "Dangerous Fluxes": {
+            "name": "危险通量 Dangerous Fluxes",
+            "description": "<p>你可使你的类位面通量在物理上具形，使位面能量渗漏而出。当你施放<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.7exSZrsaySDHtobU]{类位面通量}</em>时，你可将施法时间提升至单一动作，从你的通量创造@Template[type:emanation|distance:5]。在通量区域内开始回合的生物承受等于法术环两倍的伤害（基础@Check[fortitude|against:spell|basic]豁免）。伤害类型由你所选位面决定，且爆发持续至法术激活期满。</p><ul style=\"columns:2\"><li><p><strong>星界</strong> @Damage[(2*(ceil(@actor.level/2)))[mental]]</p></li><li><p><strong>骨园</strong> @Damage[(2*(ceil(@actor.level/2)))[spirit]]</p></li><li><p><strong>造物熔炉</strong> @Damage[(2*(ceil(@actor.level/2)))[vitality]]</p></li><li><p><strong>初界</strong> @Damage[(2*(ceil(@actor.level/2)))[mental]]</p></li><li><p><strong>气元素位面</strong> @Damage[(2*(ceil(@actor.level/2)))[electricity]]</p></li><li><p><strong>土元素位面</strong> @Damage[(2*(ceil(@actor.level/2)))[bludgeoning]]</p></li><li><p><strong>火元素位面</strong> @Damage[(2*(ceil(@actor.level/2)))[fire]]</p></li><li><p><strong>金属位面</strong> @Damage[(2*(ceil(@actor.level/2)))[slashing]]</p></li><li><p><strong>水元素位面</strong> @Damage[(2*(ceil(@actor.level/2)))[cold]]</p></li><li><p><strong>木属位面</strong> @Damage[(2*(ceil(@actor.level/2)))[piercing]]</p></li><li><p><strong>天界诸界</strong> @Damage[(2*(ceil(@actor.level/2)))[spirit]|traits:holy] 具神圣特征</p></li><li><p><strong>魔界诸界</strong> @Damage[(2*(ceil(@actor.level/2)))[spirit]|traits:unholy] 具亵渎特征</p></li><li><p><strong>幽冥界</strong> @Damage[(2*(ceil(@actor.level/2)))[void]]</p></li><li><p><strong>虚空</strong> @Damage[(2*(ceil(@actor.level/2)))[void]]</p></li></ul>",
+            "prerequisites": [
+                {
+                    "value": "类位面熔炼者献身"
+                }
+            ]
+        },
+        "Unfailable Guise": {
+            "name": "无瑕伪装 Unfailable Guise",
+            "description": "<p>你将密码学魔法应用于自身，控制自身外观，从而创造一个备用身份，可在需要时启用。你可使用奥秘代替欺诈来@UUID[Compendium.pf2e.actionspf2e.AJstokjdG6iDjVjE]{假冒}，使你能在无伪装工具情况下假冒，并使其获得奥术特征。每日准备时，你可选择一个特定身份用于假冒，并通过单一动作进行假冒便可呈现该身份（而非通常所需时间），且你的假冒获得奥术特征并失去探索特征。该身份不能为特定生物。你可解除使用奥术特征所造伪装。</p>"
+        },
+        "Linked Pilfering": {
+            "name": "链结盗窃 Linked Pilfering",
+            "description": "<p><strong>触发</strong> 你对一个不情愿目标的「窃法」成功且获得了一道法术。</p><hr /><p>你在窃法时多取了一点。你恢复一个专注点。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                },
+                {
+                    "value": "窃取法术"
+                }
+            ]
+        },
+        "Darkness Form": {
+            "name": "黑暗形态 Darkness Form",
+            "description": "<p>你允许元素阴影与你的躯体融合，化为一道活生生的影子。你变为一个中型战斗形态，外形如自身延展之影，于地面与墙壁上行进，宛如自身的影子。处于此形态时，你具有非实体特征，且即便在昏暗光线或黑暗中被观测亦能进行隐蔽动作。你可解除该法术。你获得以下数据与能力：</p><ul><li><p>护甲等级 = 18 + 你的等级。无视护甲检定减值与速度减值。</p></li><li><p>10临时生命值。</p></li><li><p>黑暗视觉</p></li><li><p>对所有伤害的抗性等于法术环的一半</p></li><li><p>影手徒手近战打击，是你唯一可使用的打击。攻击调整值为+16，造成2d6虚空伤害。这些攻击基于敏捷（例如对笨拙状态而言）；若你基于敏捷的徒手攻击调整值更高，可改用更高者。</p></li><li><p>特技与潜行调整值为+16，除非你自身的更高。</p></li></ul><hr /><p><strong>提升（5阶）</strong> 你改为获得护甲等级 = 19 + 你的等级，15临时生命值，攻击调整值+18，伤害加值+5，伤害骰加倍，特技+21，潜行+21。</p><p><strong>提升（7阶）</strong> 你的战斗形态可大至大型，且若至少为大型则攻击具10尺触及。你改为获得护甲等级 = 21 + 你的等级，20临时生命值，对所有伤害的抗性等于法术环，攻击调整值+24，伤害加值+15，伤害骰加倍，特技+25，潜行+25。</p><p><strong>提升（9阶）</strong> 你的战斗形态可大至超大型，攻击具10尺触及（若至少大型）或15尺触及（若超大型）。你改为获得护甲等级 = 24 + 你的等级，30临时生命值，对所有伤害的抗性等于法术环，攻击调整值+29，伤害加值+25，伤害骰三倍，特技+29，潜行+29。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.XTS9fbMIZvxSeDw2]{法术效果：黑暗形态}</p>"
+        },
+        "Consume Item Magic": {
+            "name": "吞噬物品魔法 Consume Item Magic",
+            "description": "<p><strong>需求</strong> 你正持握具消耗品特征之魔法物品。</p><hr /><p>你吸收物品中的魔法以恢复你自己的魔法。你消耗所需物品，恢复一个你当日先前已施过的法术位，其阶级等于或低于所需物品等级一半。所恢复法术位至少须与所需消耗品共享一项特征。</p>"
+        },
+        "Advanced Elective Spell": {
+            "name": "高级选修法术 Advanced Elective Spell",
+            "description": "<p>你将选修学习提升至更高水平。你获得为「选修学派法术」所选学派之高级学派法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "选修学派法术"
+                }
+            ]
+        },
+        "Cosmic Glow": {
+            "name": "宇辉 Cosmic Glow",
+            "description": "<p>你召唤宇宙创造四颗于宇宙之光中闪耀的微型恒星，置于射程内一处方格中。宇辉散发10尺半径之明亮光线（再10尺为昏暗光线）。宇辉对其出现方格中的每只生物造成2d4火焰伤害（基础反射豁免）；豁免大失败的生物对宇辉@UUID[Compendium.pf2e.conditionitems.AdPVz7rbaVSRxHFg]{迷魂}。每回合首次维持此法术时，你将宇辉闪现至15尺内（且在法术射程内）的另一方格。它随后对该方格内之每只生物造成伤害。如你的宇辉与你或盟友处于同一方格，你可选择不造成伤害，而是为该生物的回忆知识检定授予+2状态加值，只要它仍处于该生物方格中。</p><hr /><p><strong>提升（+1）</strong> 伤害提升1d4。</p>"
+        },
+        "I Walk, You Follow": {
+            "name": "吾行汝随 I Walk, You Follow",
+            "description": "<p>你的造物按需保持在你的控制之下。你@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.o0QMw5sUYexhLvZi]{夺魂}，但生物受你支配为1天而非1分钟。如你再次使用「吾行汝随」，则之前任何「吾行汝随」效果立即结束，不死生物变回尸体。你可在后续日子里继续对现有从仆使用此效果，使尸体保留并维持其在你的支配下。</p>",
+            "prerequisites": [
+                {
+                    "value": "夺魂"
+                }
+            ]
+        },
+        "Worldcrafter": {
+            "name": "世界缔造者 Worldcrafter",
+            "description": "<p>如同小神祇般，你已掌握创造世界球之艺术——一种装在掌心大小漂浮球中的微型半位面。这些世界拥有它们自己的生态系统、魔法属性与你设计的生命形式；它们持续24小时，对其中之物而言代表从行星创世之黎明到时光之终结。尽管你可能正在制作多个或在收藏中拥有多个，但你只能选择一个世界球作为你激活的世界球——你在每日准备时如此选择。准备时你须选定世界球的所有特征。你获得「部署世界球」活动。</p>"
+        },
+        "Research Partner": {
+            "name": "研究伙伴 Research Partner",
+            "description": "<p>你可让魔宠承担本应由你完成的任务，待其归来时获得其劳动之果。你可将魔宠留在某地为你执行学习活动。你的魔宠可使用以下活动，前提是其在适当技能上具有「熟练魔宠」能力：@UUID[Compendium.pf2e.actionspf2e.OizxuPb44g3eHPFh]{借阅奥术法术}、@UUID[Compendium.pf2e.actionspf2e.d9gbpiQjChYDYA2L]{解读文字}、@UUID[Compendium.pf2e.actionspf2e.eReSHVEPCsdkSL4G]{鉴别魔法}、@UUID[Compendium.pf2e.actionspf2e.Q5iIYCFdqJFM31GW]{学习法术}或@UUID[Compendium.pf2e.actionspf2e.t5nBkpjroaq7QBGK]{研究}。你的魔宠以你之名义执行这些活动，使用其调整值（而非你的），且无须你在场便可执行——使你能在魔宠完成时执行其他活动。你仍须为活动支付任何相关费用，且当你下次来到魔宠身边时，你（而非魔宠）获得活动之效益。</p>",
+            "prerequisites": [
+                {
+                    "value": "高级魔宠相通论文"
+                }
+            ]
+        },
+        "Potion Synthesis": {
+            "name": "药水合成 Potion Synthesis",
+            "description": "<p>你已开发出可即时改变化学的技术。你可花费10分钟将一种合剂重新准备为你本可在每日准备时创造的另一种合剂。</p>",
+            "prerequisites": [
+                {
+                    "value": "咒酿合剂论文"
+                }
+            ]
+        },
+        "Wizardly Regalia": {
+            "name": "法师礼服 Wizardly Regalia",
+            "description": "<p>好的法师之标志性服装常包括尖顶帽、斗篷与法杖，但有时采用更现代的时尚，如背心和丝衬衫、装满卷轴的袋子和华丽眼镜。无论形式如何，它都激发陌生人对你法师才学与学术见解的信心。你可制作配件符文，并可在制作时使用奥秘代替制造。当你穿着将你识别为法师之服装时，你可使用奥秘代替常规技能进行@UUID[Compendium.pf2e.actionspf2e.tHCqgwjtQtzNqVvd]{胁迫}、@UUID[Compendium.pf2e.actionspf2e.ewwCglB7XOPLUz72]{说谎}或@UUID[Compendium.pf2e.actionspf2e.OX4fy22hQgUHDr0q]{建立印象}——前提是你能通过魔法展示或奥术知识影响目标。</p>"
+        },
+        "Impossible Library": {
+            "name": "不可能图书馆 Impossible Library",
+            "description": "<p>你的魔法知识近乎无所不知，经过无数研习之夜，你已破解了瞬间学习法术之密钥。你为每阶你能施放的10阶以下法术向法术书添加最多10道新法术，借助你选取此专长时所获得的、与你心智相连之扩展图书馆。如你之后改训此专长，则你失去从扩展图书馆习得的所有法术。</p><p>此外，你@UUID[Compendium.pf2e.actionspf2e.Q5iIYCFdqJFM31GW]{学习法术}所需时间一律为3动作（无论阶级）。当你@UUID[Compendium.pf2e.feats-srd.MjQyTcV8Jiv1Jtln]{辨识奥术法术}时，你可在该法术施放后1天内尝试习得它并将其加入法术书——无需该法术的书面副本，亦无需教学者。</p>"
+        },
+        "Force Disruption": {
+            "name": "力场扰乱 Force Disruption",
+            "description": "<p><strong>耗费</strong> 消耗具力场特征或提供AC加值的法术位</p><hr /><p>通过以本不应起作用的方式交叉法术位，你笨拙地释放纯粹、不受约束的力场魔法。你的利用造成@Damage[1d6[force]]每阶所消耗法术伤害（基础@Check[reflex|against:spell|basic]豁免），豁免失败的生物从效果区域中心被推开5尺，大失败时10尺。在此移动中接触到物体的生物@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}至下回合开始。</p><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 一名敌人移动至你5尺内；<strong>效果</strong> 你于@Template[type:emanation|distance:10]内施加一道力场扰乱。如此反应发生于一生物移动期间，则其可在反应后继续以同一动作进行其余移动——前提是其仍可移动。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你于30尺内三处不重叠的@Template[type:burst|distance:5]中施加力场扰乱。</p>"
+        },
+        "Scholar's Lore": {
+            "name": "学者学识 Scholar's Lore",
+            "description": "<p>你精通你学派的学术。你两次获得@UUID[Compendium.pf2e.feats-srd.BocFD2KV0qgUC76x]{额外学识}技能专长，但须选择两项与你奥术学派相符的学识——例如，战斗魔法学派的法师可选择攻城学识与战争学识，而群星占星学派的法师可选择永恒学识与占星学识。此外，遭遇中你首次以学者学识技能成功使用回忆知识鉴定一只生物时，该生物在该遭遇中你下次施放的法术之豁免与AC上承受–1状态减值。</p><hr /><p><strong>特别</strong> 若你为统一法论学派之法师，可为额外学识选择任意学识技能。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                }
+            ]
+        },
+        "Swirled Spine Staff": {
+            "name": "缠脊法杖 Swirled Spine Staff",
+            "description": "<p>你将两根法杖通过编织合为一根。当你将临时法杖制作为另一种魔法法杖时，你可选择将两根魔法法杖合并入同一根法杖。选择两根你本可制作的魔法法杖。其中一根的物品等级须至少比你等级低5级。你可将两根法杖一并制作入临时法杖，使用两根法杖费用之总和判定其费用。你的合并法杖作为单一法杖运作，物品等级等于你所合并法杖中最高者，且可使用两根法杖之法术与能力。</p>",
+            "prerequisites": [
+                {
+                    "value": "法杖枢纽论文"
+                }
+            ]
+        },
+        "School of Aethereal Astrologia": {
+            "name": "群星占星学派 School of Aethereal Astrologia",
+            "description": "<p>你的魔法受星空启发；它们如何相互作用、它们与高拉里恩在任意时刻的几何关系意味着什么、潜伏于星辰之间的事物。你或许就读于卡塔佩什的多维研究学院（拥有令人惊叹的星盘）或瓦里西亚的科尔沃萨大学（专注于恒星数学）。无论你来自何方，天体既是你施法的指引，也是你施法的工具。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.WBmvzNDfpwka3qT4]{光亮术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.sX2g6WFSQPNW9jzx]{扭曲快步}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.EUMjrJJwSgsqNidi]{预感危机}</em>、<em>@UUID[Compendium.pf2e.spells-srd.gKKqvLohtrSJj3BM]{力场飞弹}</em>、<em>@UUID[Compendium.pf2e.spells-srd.F1fQC9SarAkjNxpP]{引力牵引}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.ynm8JIU3sc3qUMpa]{永恒之光}</em>、<em>@UUID[Compendium.pf2e.spells-srd.L10q1ng6U3sega9S]{引导之星*}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.06pzGkKTyPE3tHR8]{重力井}</em>、<em>@UUID[Compendium.pf2e.spells-srd.HWrNMQENi9WSGbnF]{光辉之墙}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.Hb8GdAhP0zBCv3zU]{彩虹光束}</em>、@UUID[Compendium.pf2e.spells-srd.DcmWrD0V5PWQQyDm]{变易重力}</span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.gasOL6a0WhOhUsgL]{以太碎片}</em>、<em>@UUID[Compendium.pf2e.spells-srd.3E1p58MNQMO4GAxt]{时间迟滞}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.ZMvplR106Jxl7B15]{唤醒熵}</em>、<em>@UUID[Compendium.pf2e.spells-srd.P1iqzEIidRagUs7W]{零重力}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.IHUs4qn27RrdFQ5Y]{宇宙形态*}</em>、<em>@UUID[Compendium.pf2e.spells-srd.kk7JKox6MdGAWmCH]{真空}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.vm9O7ne48NM72yrJ]{坠天术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.y2cQYLr5mljDSu1G]{无休监控}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.jrBa9deU2ULFWvSl]{坠星爆}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.T6c88r5rJTMebu6G]{宇辉}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.b2bHRCwvXxD1Dc5n]{塑成星座}</em></p><p>*<em>你将此法术作为奥术法术习得与施放</em></p>"
+        },
+        "Form Constellation": {
+            "name": "塑成星座 Form Constellation",
+            "description": "<p>一道以太链结在你与你的盟友之间形成，赋予你一道映照星空中星座的辉光。当你首次习得此法术时，于「宇宙商队」与「龙族帝国」黄道之间作出选择；不能同时选择两类。</p><p>当你施放该法术时，你从你黄道之表中选择一个星座。逐次画五条线；每条线须固定于你或一个已与前一条线相连的生物或物体，并须止于其锚点15尺内的生物或物体（这可能让星象延伸至其完整75尺射程）。一旦放置，线即不动。</p><p>你与盟友生物若于这些线上空间或锚点处开始回合，便获得法术之效果至回合结束。这些线散发如火炬般的光线。</p><hr /><p><strong>提升（8阶）</strong> 状态加值提升1，或若状态加值是对速度则提升10。</p><hr /><table><tbody><tr><td><p style=\"text-align:center\">黄道</p></td><td><p style=\"text-align:center\">效果</p></td></tr><tr><td><p style=\"text-align:center\">画眉/燕子</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.IAYX7FFq5N7X4zjk]{对所有速度+15尺状态加值}</p></td></tr><tr><td><p style=\"text-align:center\">持灯人/至高龙</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.2r6VG7mrkGyz5iEM]{火焰抗性等同于法术环两倍}</p></td></tr><tr><td><p style=\"text-align:center\">新婚伉俪/绽花</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.LV1EW39GmDvDezbu]{+1状态加值至意志豁免；对抗情绪效果+2}</p></td></tr><tr><td><p style=\"text-align:center\">桥/天龙</p></td><td><p style=\"text-align:center\">无视天然困难地形</p></td></tr><tr><td><p style=\"text-align:center\">女儿/弓手</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.kxJJ6q3Y9DjkEaaz]{+1状态加值至反射豁免与对抗远程攻击的护甲等级}</p></td></tr><tr><td><p style=\"text-align:center\">骑手/剑客</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.9Uiogkw8dh0YGJuC]{+1状态加值至近战攻击检定与察觉}</p></td></tr><tr><td><p style=\"text-align:center\">族长/食人魔</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.QEcAcv0crCvhymA5]{+1状态加值至威吓与对抗恐惧的豁免}</p></td></tr><tr><td><p style=\"text-align:center\">板车/壮牛</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.PR8ZIhPIVnrAOWLY]{+1状态加值至运动与对抗强制移动的豁免}</p></td></tr><tr><td><p style=\"text-align:center\">母亲/海龙</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.XH9Y2eCpzsBdzNwB]{+1状态加值至特技与基础豁免}</p></td></tr><tr><td><p style=\"text-align:center\">观星者或追随者/犬</p></td><td><p style=\"text-align:center\">额外一次协助反应</p></td></tr><tr><td><p style=\"text-align:center\">陌客/冥府龙</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.MApBTJ8EdJK9ZFBs]{临时生命值等于法术环}</p></td></tr><tr><td><p style=\"text-align:center\">群兽/林龙</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.LvyeB71tJeXVNumu]{+1状态加值至自然与对措手不及敌人的攻击检定}</p></td></tr></tbody></table>"
+        },
+        "Sure Wand": {
+            "name": "稳固魔杖 Sure Wand",
+            "description": "<p><strong>触发</strong> 你正持握你的临时魔杖。</p><hr /><p>你对你的魔杖各方面都很有把握。你施放<em>@UUID[Compendium.pf2e.spells-srd.Gb7SeieEvd0pL2Eh]{料敌机先}</em>，但效果只适用于你持握临时魔杖时进行的法术攻击检定。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔杖娴熟论文"
+                }
+            ]
+        },
+        "Consult Tome": {
+            "name": "翻阅典籍 Consult Tome",
+            "description": "<p><strong>需求</strong> 你正持有你的法术书。</p><hr /><p>法术书是蕴藏无价笔记的强力工具。当你将心神投入翻阅其页面、寻索可信赖的法术时，你便能不经准备而再现它。在每日准备时，选取等于你智力调整值一半数量的法术作为你的「翻阅法术」。如果你至少为10级，则可改为选取等于你智力调整值数量的法术。</p><p>当你进入此姿态时，选定一名生物、灵祟或物体作为目标，并指定你「翻阅法术」之一。该法术成为你的翻阅法术。你可以消耗一个任意阶级的已准备法术位，以施放你的翻阅法术，使其阶级提升至所消耗法术位的阶级；但当你以此方式施放法术时，须将目标包含在该法术效果中。当你以此方式施放法术后，由于你需频繁回顾笔记，你处于@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}状态，直至你下回合开始。</p>"
+        },
+        "Shaped Spell": {
+            "name": "塑法 Shaped Spell",
+            "description": "<p>你可预先塑法。每日准备时，从你已准备的法术中选择数量不超过你智力调整值且需2动作或更少施放的法术作为塑法。这些法术获得你所知的1动作塑法之效果，使你能以法术之常规动作耗费施放它们。你可为不同塑法选择不同塑法，且法术获得塑法之特征及其自身特征。施放该法术时你仍须支付塑法之耗费、频率或要求。你不能对塑法使用塑法。</p>",
+            "prerequisites": [
+                {
+                    "value": "实验性塑法论文"
+                }
+            ]
+        },
+        "Swift Exploits": {
+            "name": "迅捷利用 Swift Exploits",
+            "description": "<p>你的利用动作极为迅捷。你每回合获得一次额外反应，仅可用于利用。此外，当你使用利用之3动作版本时，你可在使用利用前行走至多你速度的一半。</p>",
+            "prerequisites": [
+                {
+                    "value": "精质实验论文"
+                }
+            ]
+        },
+        "Deep Magick": {
+            "name": "深奥魔法 Deep Magick",
+            "description": "<p>你已揭示鲜有人在数千年间见过之上古法术，并将其方法应用于新法术。你可使用@UUID[Compendium.pf2e.actionspf2e.Q5iIYCFdqJFM31GW]{学习法术}活动创造你已知法术之变体，使你能以微妙方式改变它们以产生新效果。这些法术须为以法术位施放且为奥术传统，且至少比你能施放最高阶法术低2阶。习得该法术时，从下列适合该法术之效果中选择其一：</p><ul><li><p><strong>区域隐蔽</strong> 你将造成区域伤害的法术修改为：在区域内留下持续1轮的隐蔽——类型与该法术相符（如火焰法术留下烟雾或电击法术留下风暴云）。如该法术至少为7阶，则持续2轮。</p></li><li><p><strong>推射射线</strong> 你将需法术攻击检定的法术修改为：成功时还将目标推离你——成功时5尺，大成功时10尺。如该法术至少为7阶，则推开距离加倍。</p></li><li><p><strong>混乱目标</strong> 你将以单一生物为目标的法术修改为：以该法术原射程之5尺爆发内所有生物为目标，但该法术DC减少2。如该法术至少为7阶，则该法术DC仅减少1。</p></li><li><p><strong>墙之构装</strong> 你将墙系法术修改为：成为一只由墙之物质构成的高大生物。该法术获得召唤特征，且生物使用与该阶<em>@UUID[Compendium.pf2e.spells-srd.lKcsmeOrgHtK4xQa]{召唤构装体}</em>法术本可召唤之另一生物之数据。如墙系法术造成伤害（如火墙术），则构装体之打击造成相同伤害类型。</p></li></ul>",
+            "prerequisites": [
+                {
+                    "value": "典籍召术论文"
+                }
+            ]
+        },
+        "Staff Striker (TAPj)": {
+            "name": "法杖击者 Staff Striker",
+            "description": "<p>你的法杖借魔法之力可用作强大武器。你获得「法杖击」奥术专注戏法。</p>",
+            "prerequisites": [
+                {
+                    "value": "法杖枢纽论文"
+                }
+            ]
+        },
+        "Arise, My Minion!": {
+            "name": "起来吧，吾从仆！ Arise, My Minion!",
+            "description": "<p><strong>触发</strong> 你将30尺内、等级与你相等或更低之活体生物以致命伤害打降至0生命值。</p><hr /><p>你弹指之间使他人成为死亡之仆。你对触发生物使用@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.o0QMw5sUYexhLvZi]{夺魂}，产生一具尸体或魂影从仆为你服务，并立即获得动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "夺魂"
+                }
+            ]
+        },
+        "Eldritch Ballistics": {
+            "name": "诡奇弹道 Eldritch Ballistics",
+            "description": "<p>你已花费数小时研究自全球进口的火器，并为自身独特法术枪绘制蓝图，主张：一旦完善，这些武器将成为各处施法者的首选实用工具。游戏开始时你拥有一把由你设计、以你所选火器制成的临时法术枪。</p><p>只有你知如何激活你的法术枪——与其他法术枪不同，它在使用后不被毁坏，而是在使用之后变为该类型之常规火器，直至你下次每日准备。你也可将法术枪作为该类型之火器使用，且使用法术枪之激活不会发射武器。你的临时法术枪永远具有以下激活。</p><p>此外，你可使用制作活动制作法术枪。你可使用法术书作为公式书来学习法术枪之公式，且自动将你独特法术枪之公式添加至公式列表。从4级开始，每两级你获得一项常规或不常见的、等级低于你等级或同级法术枪公式（4级时为4级公式，6级时为6级，依此类推）。</p><p>如你至少为5级，则可在每日准备时使用你已知公式创造一把临时法术枪。每超过5级以上的5级，你可额外创造一把临时法术枪，至20级时最多4把。</p><p>你可将法术枪从你临时法术枪中合并或分离，过程需10分钟，使你的法术枪获得所合并法术枪的额外激活。你可在法术枪变回常规火器前使用所有激活。当你使用合并法术枪之激活时，法术枪失去该激活——犹如它已被消耗。</p>"
+        },
+        "Grimoire Study": {
+            "name": "魔典研习 Grimoire Study",
+            "description": "<p>你知晓如何瞬间发现法术变体。你可花费10分钟清空一个具「法术诡师」变体（无论是原始还是法术诡师版本）的已准备法术，并以另一版本之该法术替换。如此交换被打断，则原法术保留并仍可施放。你可稍后再次尝试交换，但须从头开始。</p>",
+            "prerequisites": [
+                {
+                    "value": "典籍召术论文"
+                }
+            ]
+        },
+        "Galdr-Brewed Concotions": {
+            "name": "咒酿合剂 Galdr-Brewed Concotions",
+            "description": "<p>你已研习酿造药水之艺术——这门艺术远比常规炼金术更古老、更复杂。通过将魔法蒸馏入可饮液体，你已开启使用所学的新方式。你可使用制作活动制作灵药与药水。你立即获得四道常规1级灵药或药水之公式。从4级开始，每两级你获得一项常规灵药或药水公式（4级时为4级，6级时为6级，依此类推）。你的法术书兼作公式书。</p><p>每日准备时，你可使用已知公式创造一份临时灵药或药水作为临时合剂。如你的法术DC精专，可在每日准备时创造一批两份合剂；大师可创造一批四份；传奇可创造一批六份。任何以此方式创造的合剂在你下次每日准备时变为惰性瓶装液体，临时物品的剩余效果终止。临时合剂没有价值。</p>"
+        },
+        "Hand of Judgement": {
+            "name": "审判之手 Hand of Judgement",
+            "description": "<p>你将手放在敌人身上，使其受你的审判。目标须以意志豁免。目标承受8d6灵魂伤害。如目标过去一周内于你目前所处区域之律法范围内有违法行为，则其豁免承受–2环境减值。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标承受一半伤害。</p><p><strong>失败</strong> 目标承受全部伤害，并因罪行之重被击@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地}。</p><p><strong>大失败</strong> 同失败，但目标承受双倍伤害。</p><hr /><p><strong>提升（+1）</strong> 伤害提升2d6。</p>"
+        },
+        "Field Advantage": {
+            "name": "场地优势 Field Advantage",
+            "description": "<p>你的通量不仅强大，还能扩展并扰乱地形。当你施放<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.7exSZrsaySDHtobU]{类位面通量}</em>时，你可选择于@Template[type:emanation|distance:10]内创造类似你所选位面的困难地形，持续至法术结束并在通量关闭后再持续2轮。</p>",
+            "prerequisites": [
+                {
+                    "value": "类位面熔炼者献身"
+                }
+            ]
+        },
+        "Clone Reconstructor": {
+            "name": "复制体重塑师 Clone Reconstructor",
+            "description": "<p>你的复制体已被以易于重塑的方式构建。如你尚未受训于医疗，你便受训于医疗；如已受训，则成为精专。每日一次，你可作为3动作活动尝试重塑被还原为基本物质的复制体——以已分解复制体之残余为目标，对你等级之标准DC进行医疗检定。如你于医疗为传奇，则可每小时（而非每日）一次使用此3动作活动。</p>",
+            "prerequisites": [
+                {
+                    "value": "拟形施法论文"
+                }
+            ]
+        },
+        "Spliced-Trait Explotation": {
+            "name": "拼接特征利用 Spliced-Trait Explotation",
+            "description": "<p>你可将一项特征拼接入法术，使利用更具灵活性。每日准备时，每阶你可施放法术，你可选择一道已准备法术，将一项特征拼接入该法术位以供利用使用，使你能将所准备法术用于本不可使用之利用。如该利用具有基于原始法术的其他要求且所准备法术不满足，则其不能用于该利用。</p>",
+            "prerequisites": [
+                {
+                    "value": "精质实验论文"
+                }
+            ]
+        },
+        "Grand Finale": {
+            "name": "大终曲 Grand Finale",
+            "description": "<p>你释放令人惊叹的烟火表演——粉碎物体并闪烁灯光以结束战斗。选择受所需法术影响的单一生物、所需法术区域内的单一方格，或如该法术不针对生物或区域则选择你自身。你立即结束所需法术与其效果，制造一场造成4d12火焰伤害与4d6音波伤害的爆炸。</p><p><strong>大成功</strong> 生物不受影响。</p><p><strong>成功</strong> 生物承受一半伤害。</p><p><strong>失败</strong> 生物承受全部伤害，并@UUID[Compendium.pf2e.conditionitems.TkIyaNPgTZFBCCuh]{目眩}且@UUID[Compendium.pf2e.conditionitems.9PR9y0bi4JPKnHPR]{耳聋}1轮。</p><p><strong>大失败</strong> 生物承受双倍伤害，并@UUID[Compendium.pf2e.conditionitems.XgEqL1kFApUbl5Z2]{目盲}且耳聋1轮，然后目眩1分钟。</p><hr /><p><strong>提升（+1）</strong> 火焰伤害增加1d12，音波伤害增加1d6。</p>"
+        },
+        "Energy Exertion": {
+            "name": "能量挥发 Energy Exertion",
+            "description": "<p>你将光环中残留的能量投向附近的敌人。你造成1d4与你残余能量同类型的伤害；或如你的残余能量具空气、土系或水系特征则为钝击伤害；具木属特征则为穿刺；具金属特征则为挥砍。或者，你可消耗残余能量以将伤害提升为2d4。此法术获得你残余能量之特征。</p><p><strong>大成功</strong> 目标承受双倍伤害。</p><p><strong>成功</strong> 目标承受全部伤害。</p><hr /><p><strong>提升（+1）</strong> 伤害提升1d4，或若你消耗残余能量则提升2d4。</p>"
+        },
+        "I Am Omnipotent!": {
+            "name": "吾即全能！ I Am Omnipotent!",
+            "description": "<p><strong>需求</strong> 你的上一动作为施放法术，且你于法术攻击检定中大成功或目标在豁免上大失败。</p><hr /><p>对于一定能力水平的法师而言，忘乎所以并让魔法暂时将其心智拉入自我膨胀之境，并不少见。在指挥极强大魔法之后，法师可能不禁仰头大笑、说大话，或炫耀其优越。</p><p>你@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞1级}至下回合结束。只要你因此效果而呆滞，便可施放法师聚能法术而无须消耗专注点，且无须因呆滞进行硬性检定。当你因此效果而失去呆滞状态后，10分钟内对此效果暂时免疫。</p>"
+        },
+        "Shadow Puppetry": {
+            "name": "影偶戏 Shadow Puppetry",
+            "description": "<p>你以手散光，部分隐蔽以在区域中创造一群影状生物。施放该法术时，于酸性、钝击、寒冷、电击、火焰、力场、穿刺、挥砍、音波或灵魂伤害之间选择。你创造数个生物、物体或幻象之小影，对区域内每只生物造成1d6你所选类型之伤害，且每回合首次维持法术时如此造成。</p><hr /><p><strong>提升（+1）</strong> 伤害提升1d6。</p>"
+        },
+        "Dueling Cantrips": {
+            "name": "决斗戏法 Dueling Cantrips",
+            "description": "<p>你可以你最简单的魔法（无需准备）挥使魔杖。当你以戏法进行法术攻击检定时，你可应用「决斗魔杖」之效果，且无需满足其要求。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔杖娴熟论文"
+                }
+            ]
+        },
+        "Reserved Slot Cantrip": {
+            "name": "保留法术位戏法 Reserved Slot Cantrip",
+            "description": "<p><strong>需求</strong> 你至少有一个最高可施法阶级的法术位可用。</p><hr /><p>你知晓如何使用储备法术位来获取额外低阶魔法。你可花费10分钟保留所需法术位，失去施放其中法术之能力，直至你解除此效果为止。作为交换，你可像准备好一样以法术书施放奥术戏法——只要你以此方式保留着法术位。同时只能保留一个法术位。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术调和论文"
+                }
+            ]
+        },
+        "Wand Adroitness": {
+            "name": "魔杖娴熟 Wand Adroitness",
+            "description": "<p>你的论文阐述：魔杖远不止是单一法术之便携容器。这些工具使施法者能像剑客般以娴熟与精准来面对决斗，谨慎且精确地向反对你者的核心施法。你以一根由你设计、具奥术特征的临时魔杖开始游戏。如其遗失或被毁，可经1天休闲时间制作一根新的临时魔杖。</p><p>每日准备时，你可选择一个法师法术位放入临时魔杖，使你的魔杖获得所选法术并失去该法术位。你的临时魔杖可被过载，但不会获得破损状态，亦不能被毁。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.4QuDNcfU3ZnLGyPe]{决斗魔杖}塑法。</p>"
+        },
+        "Perilous Road Ahead": {
+            "name": "前路险阻 Perilous Road Ahead",
+            "description": "<p>面对令人费解之最后通牒，你瞥见即将发生之事。GM秘密掷[[/gmr 1d20]]以确定一危险触发条件。下次GM所掷结果之危险触发条件对法术目标发生时，GM通知该目标该触发已发生。被触发的目标可选择花费一个免费动作以获得所列救济。如目标拒绝使用其免费动作以获取该效果，则GM重新掷骰，并在相同目标上以新结果用于触发与救济。当目标使用其免费动作获得救济后，法术对所有目标立即结束，使用救济的目标在1天内对此暂时免疫。</p><p>此外，你与法术目标对先攻获得+2状态加值。在法术结束前你不能恢复施放此法术所用之专注点，但你可随时解除此效果。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.hl1z53dgkxt30edL]{法术效果：前路险阻（先攻）}</p><table><tbody><tr><td data-colwidth=\"592\"><p style=\"text-align:center\">结果</p></td><td><p style=\"text-align:center\">触发</p></td><td><p style=\"text-align:center\">救济</p></td></tr><tr><td data-colwidth=\"592\"><p style=\"text-align:center\">1-5</p></td><td><p style=\"text-align:center\">目标将被重击命中。</p></td><td><p style=\"text-align:center\">@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.rm9lruwSdffgyF8s]{目标对重击命中获得抗性，数值等于该法术环两倍。}</p></td></tr><tr><td data-colwidth=\"592\"><p style=\"text-align:center\">6-10</p></td><td><p style=\"text-align:center\">目标在豁免上掷出大失败。</p></td><td><p style=\"text-align:center\">目标重掷触发豁免。此为幸运效果。</p></td></tr><tr><td data-colwidth=\"592\"><p style=\"text-align:center\">11-15</p></td><td><p style=\"text-align:center\">目标因检定或豁免将@UUID[Compendium.pf2e.conditionitems.kWc1fhmv9LBiTuei]{受擒}、@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}、@UUID[Compendium.pf2e.conditionitems.j91X7x0XSomq8d60]{倒地}或@UUID[Compendium.pf2e.conditionitems.VcDeM8A5oI6VqhbM]{束缚}。</p></td><td><p style=\"text-align:center\">目标对触发效果获得+4状态加值。</p></td></tr><tr><td data-colwidth=\"592\"><p style=\"text-align:center\">16-20</p></td><td><p style=\"text-align:center\">目标将获得@UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧}或@UUID[Compendium.pf2e.conditionitems.fesd1n5eVhpCSS18]{恶心}状态。</p></td><td><p style=\"text-align:center\">目标立即将该状态减少2，最低至0。</p></td></tr></tbody></table>"
+        },
+        "Aeon Étude": {
+            "name": "永恒练习曲 Aeon Étude",
+            "description": "<p>在远古文明中，永恒之石常被法师用来探索奥秘。你的学术之路也使你身处同样位置。你获得数量等于智力调整值的额外附装物品槽，仅可用于永恒之石且不计入附装物品上限。选取此专长时，你获得一颗已消耗永恒之石——但你的已消耗永恒之石还授予你施放一道你选择之奥术戏法的能力。当你每日准备时，选择一颗你的永恒之石。你可使用其共鸣之力，无需将其加入向导符。</p><p><strong>特别</strong> 若你具高级魔宠相通学位论文，选择永恒精怪魔宠所需之魔宠能力数量减1。</p>"
+        },
+        "Elemental Entanglement": {
+            "name": "元素纠缠 Elemental Entanglement",
+            "description": "<p>你已撰写无数关于元素位面属性的论文，并发现以一种使你能完全掌握其副产物的方式从中虹吸能量的方法。除你所准备之戏法外，你还获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.HYhmbowbprh3kpGS]{残余能量截取}反应与<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.iqKLVPlvr0EebEpk]{能量挥发}</em>专注戏法。</p>"
+        },
+        "Shared Cantrip": {
+            "name": "共享戏法 Shared Cantrip",
+            "description": "<p>你善于操纵戏法。你使用一项1动作塑法，然后施放一道2动作或更少（或3动作或更少）的戏法，以与该戏法相同的动作数完成此活动。</p><hr /><p><strong>特别</strong> 若你的法术DC至少为大师，频率为每10分钟一次（而非每小时）。</p>",
+            "prerequisites": [
+                {
+                    "value": "实验性塑法论文"
+                }
+            ]
+        },
+        "Create Elemental": {
+            "name": "创造元素 Create Elemental",
+            "description": "<p><strong>需求</strong> 你具有残余能量。</p><hr /><p>你驾驭你的残余能量，将生命赋予你的造物。你消耗残余能量，将<em>@UUID[Compendium.pf2e.spells-srd.lpT6LotUaQPfinjj]{召唤元素}</em>作为奥术内禀法术施放，提升至等于你等级一半之法术环。所召唤元素须与你所消耗残余能量具相同元素特征。</p>",
+            "prerequisites": [
+                {
+                    "value": "元素纠缠论文"
+                }
+            ]
+        },
+        "Impart Learnings": {
+            "name": "传授学识 Impart Learnings",
+            "description": "<p><strong>需求</strong> 你于过去1小时结束过遭遇战。</p><hr /><p>在激烈遭遇之后，你常将一些观察分享给盟友——人们做对或做错的事、魔法之意外作用，甚至关于万物本质之神秘陈述。你可花费1分钟谈论近期遭遇，使你能在此后1小时内以奥秘代替你检定，最多援助6名盟友的下一项探索活动。</p>"
+        },
+        "Animated Troop": {
+            "name": "群队赋灵 Animated Troop",
+            "description": "<p>你已学会将多个物体合而为一融合体。当你施放生灵之火时，可选择将物体的体型增大至超大型——前提是你以足够承重构造该生物（由GM裁定）。你的生灵之火从仆可作为单一动作进行近战法术攻击检定，使用你的法术攻击调整值。它可针对其20尺内的生物使用这些法术攻击，且其造成与消散动作相同的伤害。生物进行4次此类法术攻击后，法术结束，物体重新变为无生命。</p>",
+            "prerequisites": [
+                {
+                    "value": "生灵之火专注戏法"
+                }
+            ]
+        },
+        "Mind and Body": {
+            "name": "心与身 Mind and Body",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你处于奥术活化姿态。</p><hr /><p>你的心智与躯体如此紧密相连，以致你能从法术中获得残留能量。你获得以下你所选择之效果之一，至下回合开始：</p><ul><li><p>对力场冲拳徒手打击之攻击检定+1状态加值</p></li><li><p>对运动检定+1状态加值</p></li><li><p>力场冲拳之招架环境加值提升至+2</p></li><li><p>对强韧豁免+1状态加值</p></li></ul>",
+            "prerequisites": [
+                {
+                    "value": "奥术活化"
+                }
+            ]
+        },
+        "Pursuit of Learning": {
+            "name": "求知不倦 Pursuit of Learning",
+            "description": "<p>即便法师力量不断增长，对其而言学习也只是表面而已——求知无止境。你获得两项你满足前提条件之奥秘技能专长，并对一项具回忆知识动作之技能获得一次额外技能提升。</p>"
+        },
+        "School of Quasiplanar Fusionism": {
+            "name": "类位面熔炼学派 School of Quasiplanar Fusionism",
+            "description": "<p>你已学会借助你魔法所创造的微小裂隙访问其他位面之魔法。此职业特性改变你的法师施法职业特性与奥术学派职业特性。如你选择此职业架构，必须选择「类位面熔炼者献身」作为2级职业专长。</p><p><strong>前置</strong>：你必须为法师。</p><p><strong>类位面熔炼者调整</strong>：你不获得奥术学派职业特性的常规效果，包括来自奥术学派的额外法术位、能力或所习法术。你的奥术学派为类位面熔炼学派。你以法师法术位施放的已准备法术位减少1个，戏法减少3个。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.oqWq3F6W5HhiQVoL]{位面传统}与@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.eWZLnEKrt1RHtQTt]{类位面施法}职业特性以及<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.7exSZrsaySDHtobU]{类位面通量}</em>学派法术。</p><table class=\"pf2-table\" style=\"width:100%\"><thead><tr><th>你的等级</th><th>戏法</th><th>1阶</th><th>2阶</th><th>3阶</th><th>4阶</th><th>5阶</th><th>6阶</th><th>7阶</th><th>8阶</th><th>9阶</th></tr></thead><tbody><tr><td>1</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>2</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>3</td><td>2+1</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>4</td><td>2+1</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>5</td><td>2+1</td><td>2+1</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>6</td><td>2+1</td><td>2+1</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>7</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>8</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>9</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>10</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>11</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td><td>-</td></tr><tr><td>12</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td><td>-</td></tr><tr><td>13</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>1+1</td><td>-</td><td>-</td></tr><tr><td>14</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>-</td><td>-</td></tr><tr><td>15</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>1+1</td><td>-</td></tr><tr><td>16</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td><td>-</td></tr><tr><td>17</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>1+1</td></tr><tr><td>18</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+1</td><td>2+1</td></tr><tr><td>19</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2</td><td>2+1</td></tr><tr><td>20</td><td>2+3</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2+2</td><td>2</td><td>2+1</td></tr><tr><td colspan=\"11\" style=\"color:white;background-color:rgb(82, 46, 44);text-align:center\">加号前数字表示来自法师施法的法术位，加号后数字为来自类位面施法之法术位。例如，2级类位面熔炼者拥有「2+1」个1阶法术位，意味着可通过法师施法准备2个1阶法术，并可自发施放1个融合法术位。</td></tr></tbody></table>"
+        },
+        "Fundamental Galdercraft": {
+            "name": "基础咒法工艺 Fundamental Galdercraft",
+            "description": "<p>你已学会在变体法术之间轻松切换。当你使用魔典之「古老把戏」激活时，频率为每轮一次（而非每日）。</p>",
+            "prerequisites": [
+                {
+                    "value": "典籍召术论文"
+                }
+            ]
+        },
+        "Flux Portals": {
+            "name": "通量之门 Flux Portals",
+            "description": "<p>你已进阶你撕开通量之门的能力。你获得<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.1WjcCWpSlkQ6AUQj]{强力传送门}</em>聚能法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "类位面熔炼者献身"
+                }
+            ]
+        },
+        "Dynamic Slot": {
+            "name": "动态法术位 Dynamic Slot",
+            "description": "<p>你可强化一个法术位，使其按需要起两个不同法术之作用。你可花费10分钟选择一个已准备法术位，使之起两个你能施放法术之作用。在你使用此活动后1小时内，你可使用该法术位施放所选两道法术之任一道；之后它固化为两道法术中的其一（由你于此活动时选择）。同时只能以此方式准备一个法术位，且以此方式准备新法术位时，自动使其他动态法术位固化为单一法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "法术替换论文"
+                }
+            ]
+        },
+        "Linked Jabs": {
+            "name": "链结猛击 Linked Jabs",
+            "description": "<p><strong>触发</strong> 你以力场冲拳徒手打击将一名生物打降至0生命值。</p><hr /><p>你已将力场冲拳与你学派法术之力相联系。你恢复一个专注点。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                },
+                {
+                    "value": "奥术活化"
+                }
+            ]
+        },
+        "Simulacric Spellcraft": {
+            "name": "拟形施法 Simulacric Spellcraft",
+            "description": "<p>通过探索镜像之魔法、人造矮人之艺术，甚至更深的奥秘，你已揭开复制生命之非常规方法。你以魔法创造一个外貌几乎与你一模一样、细节微毫毕现的复制体，并通过魔法与你相系。</p><p>你的复制体类似幻灵，但具备你的熟练度、属性调整值、徒手攻击、职业专长与职业特性。它具施放法术活动，可像你一样施放法术，但其施法时与你共享法术位与专注池。你与之共享动作与生命值（如幻灵常规般），但即使物品不具幻灵特征，只要你也能激活该物品，它就可以激活带有激活的物品。你与复制体只能其一准备魔典或法杖，但你可在选择时在二者之间作选择。你的复制体共享你的豁免、护甲等级与徒手攻击调整值，但环境与状态加值与减值各自适用。如你被打降至0生命值，你的复制体被还原为基本物质，你须花费10分钟以重塑。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.2LSsvzMnX6ahXRFO]{拟形施法}活动。</p>"
+        },
+        "Superior Vitalization": {
+            "name": "精妙活化 Superior Vitalization",
+            "description": "<p>当受魔法增强时，你的躯体变得更具韧性。你于姿态中保持的每回合都恢复来自奥术活化的临时生命值。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术活化"
+                }
+            ]
+        },
+        "School of Penumbral Sculpture": {
+            "name": "暗影雕塑学派 School of Penumbral Sculpture",
+            "description": "<p>影之形是通过遮挡与光辉来雕塑的——一根在光辉与晦暗之间摆动的钟摆。该学派据传起源于游历幽冥界的法师。在阴影阿布萨隆（特别是高度排他的「无罪学院」）中据说有授课与典籍，但该实践在高拉里恩的多个更隐秘魔法学派中保留下来，例如尼达尔的「黄昏厅」。此学派之法师认识到：想象与未知因隐藏于阴影中而更强。</p><p><span style=\"font-family:Roboto, sans-serif\"><strong>课程</strong></span></p><ul><li><span style=\"font-family:Roboto, sans-serif\"><strong>戏法：</strong> <em>@UUID[Compendium.pf2e.spells-srd.0zU8CPejjQFnhZFI]{幻象}</em>、<em>@UUID[Compendium.pf2e.spells-srd.qCkxBOLMCCXEjBWo]{照明}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>1阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.k34hDOfIIMAxNL4a]{邪影触须}</em>、<em>@UUID[Compendium.pf2e.spells-srd.zdb8cjOIDVKYMWdr]{半影裹布}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>2阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.4GE2ZdODgIQtg51c]{黑暗术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.EDwakYQTS1t6XHD4]{本影窃取}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>3阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.8cuqRFB3mWBOgy61]{重影射弹}</em>、@UUID[Compendium.pf2e.spells-srd.DeF63UTmr7rchF60]{暗影之墙}</span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>4阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.Uqj344bezBq3ESdq]{梦魇}</em>、<em>@UUID[Compendium.pf2e.spells-srd.srEKUvym9kDVbEhD]{复制}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>5阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.IqJ9URobmJ9L9UBG]{幽影爆破}</em>、<em>@UUID[Compendium.pf2e.spells-srd.xFp4EwVcYwSG336t]{滑溜}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>6阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.WPXzPl7YbMEIGWfi]{假像术}</em>、<em>@UUID[Compendium.pf2e.spells-srd.0XP2XOxT9VSiXFDr]{魅影灾祸}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>7阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.0jadeyQIItIuRgeH]{蚀日爆裂}</em>、<em>@UUID[Compendium.pf2e.spells-srd.VTb0yI6P1bLkzuRr]{阴影突袭}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>8阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.rwCh2qTYPA44KEoK]{梦境会议}</em>、<em>@UUID[Compendium.pf2e.spells-srd.C2w3YfBKjIRS07DP]{隐秘心智}</em></span></li><li><span style=\"font-family:Roboto, sans-serif\"><strong>9阶：</strong> <em>@UUID[Compendium.pf2e.spells-srd.hq57j7Nif1zuQ2Ab]{怪异鬼影}</em></span></li></ul><p><strong>学派法术</strong> 初始：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.Item.jPb8Tj8WsaTEdBke]{影偶戏}</em>；高级：<em>@UUID[Compendium.pf2e-team-plus-wizards.wizards-player-options.S9McoIu8aeSJPdg7]{黑暗形态}</em></p><p>*<em>你将此法术作为奥术法术习得与施放</em></p>"
+        },
+        "Magic Map": {
+            "name": "魔法之图 Magic Map",
+            "description": "<p>你于手中召唤一卷绘出周围区域、并在你施放法术时标出你身边所有生物位置的卷轴。你创造该区域的地图。你可将射程内你看不见的区域作为目标，但法术不能透过厚于1尺的墙。如位置内有隐藏门，GM秘密进行察觉检定以确定地图是否揭示该门。区域内每只生物按其选择进行意志豁免、欺诈检定或潜行检定，对抗你的法术DC。</p><hr /><p><strong>大成功</strong> 地图错误地将该生物标为其他事物，例如山口的捷径、远弱或远强的生物。</p><p><strong>成功</strong> 该生物未出现在地图上。</p><p><strong>失败</strong> 该生物之插画出现在地图当前位置上，且若你曾遇见过该生物，你便习得其血脉。你与盟友可对该生物像它存在一样进行回忆知识。</p><p><strong>大失败</strong> 同失败，但你还习得该生物之名，且地图对回忆知识检定授予+2环境加值。</p><hr /><p><strong>提升（4阶）</strong> 失败时回忆知识之环境加值提升为+1，大失败时为+3。</p><p><strong>提升（8阶）</strong> 失败时回忆知识之环境加值提升为+2，大失败时为+4。</p>"
+        },
+        "Rudimentary Perfectionism": {
+            "name": "本初完美主义 Rudimentary Perfectionism",
+            "description": "<p>你的著述主张：最简单之魔法不容低估，因其结果在妥善应用下绝对具毁灭性。你每日可额外准备两个戏法。</p><p>此外，当你以提升阶级施放造成伤害或恢复生命值之法术时，你对该法术之伤害或治疗获得状态加值，等于其被提升的阶级数；如该法术从法术位施放，则为此值之两倍。这只适用于该法术施放时所造之首次伤害或治疗。每个生物在每次施法中只承受一次此伤害或一次此治疗，即使该法术原本会多次伤害或治疗该生物。例如，若你将火球术提升至6阶，则其获得+6状态加值至伤害；若你将「火焰」作为6阶戏法施放，则其获得+5状态加值至伤害。</p>"
+        },
+        "Instant Surgery": {
+            "name": "即时手术 Instant Surgery",
+            "description": "<p>你触摸一只生物，并于瞬间执行复杂的医疗操作，暂时改造其内部系统。对目标护甲等级进行法术攻击检定。如你于该生物上有「洞察内构」激活，你的法术攻击检定获得+2环境加值。如该生物自愿，可使用医疗援助你（无须先花费援助通常所需的预备动作）。</p><hr /><p><strong>大成功</strong> 选择目标的两项属性，并选择强化或流失之。所有以这些属性进行的检定获得+1或–1状态加值或减值（依你选择）。</p><p><strong>成功</strong> 同大成功，但其中一项属性必为+1状态加值，另一项必为–1状态减值。</p><hr /><p><strong>提升（8阶）</strong> 状态加值与减值各提升1。</p>"
+        },
+        "Mage Famiiliar": {
+            "name": "法师魔宠 Mage Famiiliar",
+            "description": "<p>你的魔宠具有施放强力法术之能力。你的魔宠两次获得@UUID[Compendium.pf2e.familiar-abilities.asOhEdyF8CWFbR96]{施法}魔宠能力，但你须为其所获得法术选择两个不同阶级。</p>",
+            "prerequisites": [
+                {
+                    "value": "高级魔宠相通论文"
+                }
+            ]
+        },
+        "Immortality Clause": {
+            "name": "不朽条款 Immortality Clause",
+            "description": "<p><strong>耗费</strong> 消耗一个10阶法术位</p><hr /><p>你以你最高之力使自己对伤害无懈可击。</p><p><strong>反驳</strong> <span class=\"action-glyph\">r</span> <strong>触发</strong> 你将受伤、被杀或受有害效果影响；<strong>效果</strong> 你完全无视触发效果。</p><p><strong>解开</strong> <span class=\"action-glyph\">3</span>（操纵）你获得对所有伤害的10抗性、20临时生命值与再生20，持续1分钟。当你具再生时，你不会因生命值伤害而死，且你的濒死值不能升至会致死之值；但若你的受伤值变为4或更高，则你保持失去意识直至伤口被治疗。如你承受力场或灵魂伤害，则你的再生在下回合结束后才停用。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.OlrFDoCzswPS9qpq]{效果：不朽条款}</p>"
+        },
+        "Linked Beguiling": {
+            "name": "链结迷魅 Linked Beguiling",
+            "description": "<p><strong>触发</strong> 一只对你@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}的生物在你某法术之豁免上失败，或你对一只措手不及生物之法术攻击检定成功。</p><hr /><p>你已将密码学与你学派法术相联系。你恢复一个专注点。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术学派"
+                },
+                {
+                    "value": "潜匿施法"
+                }
+            ]
+        },
+        "Turn The Pages": {
+            "name": "翻动书页 Turn The Pages",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p><p><strong>需求</strong> 你正在翻阅典籍。</p><hr /><p>你的法术书的页自行翻动，恰好停在适合当前情形之页面上。你选择另一道法术作为你的翻阅法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "翻阅典籍"
+                }
+            ]
+        },
+        "Sacred Geometry": {
+            "name": "神圣几何 Sacred Geometry",
+            "description": "<p>你通过最好被遗忘的数学公式接入魔法之线。你使用一项你所知的1动作塑法，并掷[[/r 1d20]]。如结果为1、4、6、8、9、10、12、14、15、16、18或20，则须以@Check[will|against:spell]豁免对抗你的法术DC。</p><hr /><p><strong>大成功</strong> 你不受影响。</p><p><strong>成功</strong> 你1分钟内不能再使用「神圣几何」。</p><p><strong>失败</strong> 同成功，但持续时间为1小时。</p><p><strong>大失败</strong> 同失败，但你还@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞1级}1轮。</p>",
+            "prerequisites": [
+                {
+                    "value": "至少一项1动作塑法"
+                }
+            ]
+        },
+        "Archmage's Stronghold": {
+            "name": "大法师据点 Archmage's Stronghold",
+            "description": "<p>你已习得：家是心之所在，但也是最易完成大量学习之处。你获得一座大法师据点——可选择你已拥有的现有据点，或通过魔法构建该据点，将其置于你可在施放<em>@UUID[Compendium.pf2e.spells-srd.vPWMEyVTreMOoFnm]{位面豪宅}</em>时召唤的次元空间中。</p><p>你获得一个最高阶之额外法术位，仅可用于施放位面宫殿以召唤你的大法师据点。你的据点功能与该法术相同，但仆从通常为魔法效果、物体或灵体；它具有广泛知识，使你能像在你等级聚落的图书馆一样尝试研究。</p>"
+        },
+        "Flick and Point": {
+            "name": "弹指指敌 Flick and Point",
+            "description": "<p><strong>触发</strong> 你掷先攻。</p><hr /><p>你已学会执行有助于命中法术攻击检定的战术。你立即交互以拔出你的临时魔杖，并可在上一轮未进行成功法术攻击检定情况下使用「决斗魔杖」，但你须以先攻顺序中后于你的生物为目标，方能获得对法术攻击检定的状态加值。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔杖娴熟论文"
+                }
+            ]
+        },
+        "Extended Cloaking": {
+            "name": "延展潜匿 Extended Cloaking",
+            "description": "<p>保持隐身是计划的一部分。当你以法师法术位对一只对你@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}的敌人施放法术时，你对该敌人@UUID[Compendium.pf2e.conditionitems.DmAIPqOBomZ7H95W]{隐蔽}数轮，等于该法术之阶级。如你对该敌人采取敌对动作，则失去此隐蔽。</p>",
+            "prerequisites": [
+                {
+                    "value": "潜匿施法"
+                }
+            ]
+        },
+        "Slot-Charged Spell": {
+            "name": "法术位充能法术 Slot-Charged Spell",
+            "description": "<p>你以另一道法术之力增强你的低阶法术。如你下次动作为施放至少比你能施放最高阶法术低3阶之法术，你可消耗你所准备的一个法术位，使所施法术之阶级提升所选法术位阶级之一半（最低1）。提升后法术之阶级不能高于你能施放最高阶法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "本初完美主义论文"
+                }
+            ]
+        },
+        "Protective Fluxes": {
+            "name": "防护通量 Protective Fluxes",
+            "description": "<p>每当你有一个通量激活时，你便被防护魔法笼罩。占据你通量方格的你或盟友对具有你位面传统之效果的豁免获得+1状态加值。如你能施放7阶法术，则状态加值提升至+2。</p>",
+            "prerequisites": [
+                {
+                    "value": "类位面熔炼者献身"
+                }
+            ]
+        },
+        "Multishaped Spell": {
+            "name": "多重塑法 Multishaped Spell",
+            "description": "<p>你已创造一种新型法术之形态。从你具有之1动作或更短的塑法法师专长中选择两项。你将其合并为一项新塑法，施放法术时同时获得两者效果。如该塑法具耗费、频率、触发或任何要求，你须满足两者之要求方能使用合并塑法。</p>",
+            "prerequisites": [
+                {
+                    "value": "实验性塑法论文"
+                }
+            ]
+        },
+        "Bibliographic Goetia": {
+            "name": "典籍召术 Bibliographic Goetia",
+            "description": "<p>法师之法术书传统上是同伴的标志性工具，但你已通过深奥研习创造了自己的。你拥有一本临时魔典。</p><p>此魔典如常规法术书般运作，但当你准备具有「法术诡师」架构变体之法术时，你可选择准备变体或原始法术，将该法术位或戏法限制为你所选版本。这取代该特定法术位中之常规版本。你的魔典具@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.urqvBWQpEVFI8tkU]{古老把戏}免费动作。如你以另一本魔典准备法术，则不获得此免费动作，但仍可如常以你自己的魔典准备变体法术。</p>"
+        },
+        "Summon Jury": {
+            "name": "召集陪审 Summon Jury",
+            "description": "<p>你挥手召唤敌人之同侪陪审团。你召唤一群与目标生物相关之幻象陪审，例如来自其家城之公民、其同事或同侪，或其他适合审判该目标的生物组合。陪审团占据巨大型生物之空间。</p><hr /><p><strong>抵达</strong>（情绪、心灵）<strong>开庭</strong> 你以指控施压目标，目标须进行一次意志豁免。</p><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标对其下一次攻击检定承受–1状态减值，持续1轮。</p><p><strong>失败</strong> 目标对所有攻击检定承受–1状态减值，持续1轮。</p><p><strong>大失败</strong> 目标对攻击检定承受–1状态减值1轮，且对「离场」效果之豁免亦如此。</p><hr /><p><strong>离场</strong>（情绪、心灵）<strong>判决</strong> 陪审团对目标作出判决，目标须进行一次意志豁免。</p><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标对其下次豁免承受–1状态减值，持续1轮。</p><p><strong>失败</strong> 目标对豁免承受–1状态减值，持续1轮。</p><p><strong>大失败</strong> 目标因其罪行被定罪，对豁免承受–1状态减值1分钟。</p><hr /><p><strong>提升（5阶）</strong> 状态减值提升至2。</p><p><strong>提升（9阶）</strong> 状态减值提升至3。</p>"
+        },
+        "Mind Swap": {
+            "name": "交换思维 Mind Swap",
+            "description": "<p>你与你的复制体交换心智。你与你的复制体互换心智——你成为你的复制体，你的复制体成为你。如你将被打降至0生命值，你可在被打降至0生命值前以相同触发作为免费动作进行交换思维，并在思维交换后销毁复制体。你必须能看到你的复制体方能使用此能力。</p>",
+            "prerequisites": [
+                {
+                    "value": "拟形施法论文"
+                }
+            ]
+        },
+        "Elective School Spell": {
+            "name": "选修学派法术 Elective School Spell",
+            "description": "<p>你已与另一学派进行交叉学习，获得其初始学派法术。选择你自己学派之外的另一学派。你获得该学派之初始学派法术。</p>"
+        },
+        "Quick Step Portals": {
+            "name": "迅捷传送步 Quick Step Portals",
+            "description": "<p>你穿过你的传送门更为娴熟。当你使用「维度跳跃」利用时，你可在跳过你的传送门后快步。此外，当你使用「维度跳跃」之3动作版本时，你不必在坚实表面上快步，可将空气视为坚实地面以进行快步；但若你最终快步未结束于坚实地面，你立即坠落。</p>",
+            "prerequisites": [
+                {
+                    "value": "精质实验论文"
+                }
+            ]
+        },
+        "Quintessential Experimentation": {
+            "name": "精质实验 Quintessential Experimentation",
+            "description": "<p>你已紧密研习了魔法之基本构件，使你能找到通过将法术位解构为原始魔法并塑形为新事物来打破奥术法则、产生全新效果之方法。你获得@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.9Ljtc0TTqjPm5u1g]{维度跳跃}利用。</p><p>从4级开始，每日准备时，你可获得一项你所选择之等级要求不超过你等级的利用法师专长，可使用至下次每日准备。</p>"
+        },
+        "Shine Spotlight": {
+            "name": "聚光灯 Shine Spotlight",
+            "description": "<p>你召唤一道强大之光，吸引附近生物之注意。你以魔法在区域内照射聚光灯，且区域内须包含至少一只生物。爆发15尺内的非盟友生物须以意志豁免成功，否则对聚光灯目标@UUID[Compendium.pf2e.conditionitems.AdPVz7rbaVSRxHFg]{迷魂}并在迷魂期间@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}。如敌对动作会终止迷魂，则措手不及状态保持至该敌对动作结束。聚光灯内的生物不受此效果影响。</p><p>当生物处于聚光灯中时，其表演检定获得+1状态加值，潜行检定承受–1环境减值。位于聚光灯内的生物可花费单一动作进行表演以代你维持法术；若该生物的表演结果超过聚光灯外、且距爆发15尺内某生物的意志DC，则该生物便对此表演者迷魂，并在其迷魂期间措手不及。</p><p>@UUID[Compendium.pf2e-team-plus-wizards.wizards-misc.Item.XGL2Vp0WNOcaJukC]{法术效果：聚光灯}</p>"
+        }
+    }
+}

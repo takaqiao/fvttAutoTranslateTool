@@ -1,0 +1,682 @@
+{
+ "diag": {
+  "summary": "Babele's read path is NOT broken. I ran Babele 2.9.1's real converter code headlessly (node, with Foundry's real `foundry.utils` + `CONST` imported from the app source) against the raw Adventure dump and the shipped CN file: `folders[i].name`, `macros[i].name` and the journal all come out Chinese. `tables[i].name` comes out English because the CN file itself maps every table name to its English self. Therefore the owner's English Folder/Macro names in the world cannot have come from a Babele-translated read — the world is in a mixed state. The precise mechanism that made ONLY the journal Chinese is the alienrpg system's own `showReleaseNotes()` (module/alienrpg.mjs:567-621), which on a system-version change re-reads the Adventure through Babele and force-overwrites exactly one world document — deterministically the JournalEntry — while explicitly excluding `folders` and never touching macros/tables. The brief's premise that the embedded `_stats.compendiumSource` values are \"all world-style\" is also wrong: all 4 macros carry proper `Compendium.` UUIDs; and even when the UUID *is* world-style, that only disables a *fallback* layer in the document converter — the local name-keyed layer still translates.",
+  "root_cause": "The world's Folder, Macro and RollTable documents were created by an Adventure import whose read did NOT go through a live Babele session (the alienrpg system auto-imports on its first `ready` — init.mjs:48-56 → FirstTimeSetup at :74-82), and nothing renames world documents afterwards; the journal is Chinese only because alienrpg.mjs `showReleaseNotes()` (:567-621) independently force-overwrites exactly one world document — deterministically the JournalEntry (`updateAssets[1].sectionData[0]`, :604) — with freshly Babele-translated adventure data while explicitly skipping `folders` (:596) and never touching macros/tables, so the \"journal translated, names not\" asymmetry is a world-state artifact, not a Babele converter defect (the 3 RollTable names are a separate, real content gap: they are English in the CN file itself).",
+  "decisions": [
+   {
+    "decision": "Answer Q1: the Adventure always comes from a fresh pack.getDocument()/getDocuments(), i.e. through Babele's _getDocuments wrapper — on all three entry paths",
+    "reason": "V2 sheet: applications/sheets/adventure-importer.mjs:271-283 `#loadDocument()` does `compendium.get(id)` then `await compendium.getDocument(this.document.id)`, and submit calls `this.adventure.import(submitData)` (:237-241). Sidebar: client/applications/sidebar/apps/compendium.mjs:210-222 uses the cached doc if present, else `Adventure.fromIndex`, and for V1 sheets `adventure = await this.collection.getDocument(entryId)`. The DEFAULT registered Adventure sheet is the V1 importer (applications/sheets/_module.mjs:129-132, makeDefault:true), whose `_updateObject` calls `this.adventure.import(formData)` (appv1/sheets/adventure-importer.mjs:105-112). The alienrpg system's own auto-import calls `pack.getDocuments()` (systems/alienrpg/module/apps/init.mjs:76) then `pack.getName(...).sheet._updateObject({}, new FormData())` (:77). `CompendiumCollection#getDocuments` (compendium-collection.mjs:412-424) calls `cls.database.get(...)` = `CONFIG.DatabaseBackend._getDocuments`, which Babele wraps at babele/script/foundry/wrapper.js:11-14. There is no index-only import path."
+   },
+   {
+    "decision": "Answer Q2: YES — Babele rewrites folders[i].name, macros[i].name and tables[i].name on the returned object. There is NO code asymmetry between journal text and macro/table names.",
+    "reason": "`folders` uses the `nameCollection` converter (default-mappings.js:7-10), which is `fieldCollection(\"name\")` (converters.js:176 → :99-127): it does `translations[data.name]` and `mergeObject(data,{name:translation,translated:true})` — it never reads `_stats.compendiumSource` at all. `macros`/`tables`/`journals` use the `document` converter with cardinality `many` (default-mappings.js:11-40) → DocumentConverter._fromPack (document-converter.js:279-314). A world-style UUID only makes `_sourceCollection` (document-converter.js:538-540, regex `^Compendium\\.([^.]+\\.[^.]+)\\.`) return null, so `_exactSourceTranslationSource` (:436-457) bails and `_genericTranslationSource` finds nothing — but those are FALLBACK layers. The local layer still runs: `hasCurrentTranslation = currentCompendium.hasTranslation(data)` (:286) is true because the EmbeddedCompendium is built from the field's own name-keyed sub-map (embedded-compendium.js:28-32, 62-74), and `currentPayload` is merged LAST so it wins (:296-300). Headless run confirms: macros all Chinese despite Compendium-UUIDs pointing at packs that no longer exist, journal Chinese despite a world-style `JournalEntry.` UUID, folders Chinese where the CN map has a Chinese value."
+   },
+   {
+    "decision": "Answer Q3: `Adventure#import` UPDATES pre-existing documents matched by _id, with a full non-recursive replace — so a re-import DOES overwrite the English names in an already-imported world",
+    "reason": "client/documents/adventure.mjs:130-157 `prepareImport()` does `const adventureData = this.toObject()` then `let [c,u] = adventureData[field].partition(d => collection.has(d._id))`; `Array#partition` returns `[false-results, true-results]` (common/primitives/array.mjs:27-34), so `u` = documents already present in the world. adventure.mjs:188-197 then calls `cls.updateDocuments(updateData, {diff:false, recursive:false, noHook:true, render:false})` with the FULL translated source objects — `name` included — so folder/macro names are replaced, not preserved. New documents are created with `keepId:true` (:174-186)."
+   },
+   {
+    "decision": "Answer Q4: reproduced headlessly; the decisive test contradicts the bug premise for folders/macros and confirms it for tables",
+    "reason": "Harness imports Foundry's real `common/utils/helpers.mjs` + `collection.mjs` + `constants.mjs` as `foundry.utils`/`CONST`, stubs `Hooks`/`CONFIG`/`game`/`fromUuidSync`, then builds Babele's real ConverterRegistry (Converters.legacyRegistrations() + DocumentConverter/Structured/Lookup/TokenizedLookup/ReferencedDocumentField), IdentityExtractorRegistry, DocumentMappings and MappedCompendiums, and calls `mc.translate('alienrpg.alien-rpg-system', rawAdventure)`. Ran three variants: with the project's registered ALIEN_LAYER mapping, with built-in mappings only, and with a simulated already-imported ENGLISH world visible to `fromUuidSync`. All three produce identical names."
+   },
+   {
+    "decision": "Ruled out `Adventure.fromSource` stripping the Item-typed folders (Careers / Skill-Stunts)",
+    "reason": "client/documents/adventure.mjs:37-46 drops `items` and filters folders of `CONST.SYSTEM_SPECIFIC_COMPENDIUM_TYPES` (= [\"ActiveEffect\",\"Actor\",\"Item\"], common/constants.mjs:1828) when `!pack.metadata.system`. But common/packages/base-package.mjs:566-579 auto-assigns `pack.system = data.id` for every pack declared by a *system* manifest, so `alienrpg.alien-rpg-system` has `metadata.system === \"alienrpg\"` and nothing is stripped."
+   },
+   {
+    "decision": "Ruled out a late-shipping translation file as the explanation",
+    "reason": "`git show <rev>:compendium/cn/alienrpg.alien-rpg-system.json` for all three revisions that touched it (b0c3ec8 v0.1.0, 36491d2 v0.2.0, a28b830 HEAD) yields byte-identical `folders`, `macros` and `tables` sub-maps. `Careers`→职业 and `Skill-Stunts`→技能炫技 have been present since v0.1.0."
+   },
+   {
+    "decision": "Ruled out alienrpg's other import/update paths as a re-Anglicizing mechanism",
+    "reason": "`ReImport()` (init.mjs:135-173) is create-only (it computes `[c,u]` but uses only `c`). `updateModule()` (module/apps/update.js:3-34) short-circuits because `updateAssets` is empty in 4.1.13. `migratefolders.js` is commented out (init.mjs:2). Babele's `importAdventure` hook (babele.js:52-70) only syncs Scene token names; its `createFolder` hook (babele.js:72-74) can only SET a translated name, never revert one."
+   },
+   {
+    "decision": "Flagged that Babele's post-import folder repair genuinely cannot fire here (the brief's point 4 is correct), and that no equivalent repair exists for Macros or RollTables at all",
+    "reason": "`FolderTranslations.translateImportedCompendiumFolder` (folder-translations.js:44-62) → `#sourcePackCollectionFor` (:85-115) needs `^Compendium\\.` in `_stats.compendiumSource`/`flags.core.sourceId` (`#collectionFromSourceId`, :153-159). Measured: 4/7 adventure folders carry `Folder.<worldId>`, the other 3 carry nothing. Its third fallback, `game.packs.find(p => p.folders.get(folderId))` (:107-114), also misses because an Adventure-type pack exposes no compendium folders. And babele.js hooks only `createFolder` — there is no `createMacro`/`createRollTable` equivalent."
+   }
+  ],
+  "evidence": [
+   {
+    "claim": "Babele wraps the document read path, so any pack.getDocument()/getDocuments() returns translated data",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/foundry/wrapper.js:11-14",
+    "what_it_says": "`libWrapper.register('babele','CONFIG.DatabaseBackend._getDocuments', async function (wrapped, ...args) { const result = await wrapped(...args); return await translateResult(result, contextFromArgs(args)); }, 'WRAPPER');`"
+   },
+   {
+    "claim": "The V2 importer loads the FULL document from the pack (through the wrapper), not the index entry, and imports that",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/applications/sheets/adventure-importer.mjs:271-283, 237-241",
+    "what_it_says": "`#loadDocument()`: `let doc = compendium.get(this.document.id); if (!(doc instanceof foundry.abstract.Document)) { doc = await compendium.getDocument(this.document.id); this.document.updateSource(doc.toObject()); } this.#adventure = doc;` and `_processSubmitData`: `await this.adventure.import(submitData);`"
+   },
+   {
+    "claim": "The DEFAULT Adventure sheet is the V1 importer, which is the one the alienrpg system drives programmatically",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/applications/sheets/_module.mjs:129-136",
+    "what_it_says": "`DocumentSheetConfig.registerSheet(Adventure,\"core\",foundry.appv1.sheets.AdventureImporter,{label:\"ADVENTURE.Importer.V1\", makeDefault:true});` then AdventureImporterV2 with `canBeDefault:false`."
+   },
+   {
+    "claim": "getDocuments goes through the database backend that Babele wraps",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/collections/compendium-collection.mjs:412-424 (and getDocument at :376-382)",
+    "what_it_says": "`async getDocuments(query={}) { const cls = this.documentClass; const documents = await cls.database.get(cls, {query, pack: this.collection}, game.user); ... }`; `getDocument(id)` returns the cached Document if present, else `await this.getDocuments({_id:id})`."
+   },
+   {
+    "claim": "Adventure import uses this.toObject() and partitions existing-by-_id into an UPDATE bucket",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/adventure.mjs:130-157",
+    "what_it_says": "`const adventureData = this.toObject(); ... const collection = game.collections.get(cls.documentName); let [c, u] = adventureData[field].partition(d => collection.has(d._id));` with `c`→toCreate, `u`→toUpdate."
+   },
+   {
+    "claim": "Existing world documents are FULLY REPLACED on import, so a re-import overwrites English names",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/adventure.mjs:188-197",
+    "what_it_says": "`const options = {diff:false, recursive:false, noHook:true, render:false}; const docs = await cls.updateDocuments(updateData, options);`"
+   },
+   {
+    "claim": "partition returns [false-results, true-results], confirming c=create / u=update",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/common/primitives/array.mjs:27-34",
+    "what_it_says": "`export function partition(rule){ return this.reduce((acc,val)=>{ const test = rule(val); acc[Number(test)].push(val); return acc; }, [[],[]]); }`"
+   },
+   {
+    "claim": "The Adventure default mapping routes folders through nameCollection and macros/tables/journals through the document converter",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/mapping/default-mappings.js:3-40",
+    "what_it_says": "`\"folders\": {\"path\":\"folders\",\"converter\":\"nameCollection\"}`, `\"journals\": {\"path\":\"journal\",\"converter\":\"document\",\"documentType\":\"JournalEntry\",\"cardinality\":\"many\"}`, `\"macros\": {\"path\":\"macros\",...\"documentType\":\"Macro\"...}`, `\"tables\": {\"path\":\"tables\",...\"documentType\":\"RollTable\"...}`"
+   },
+   {
+    "claim": "nameCollection rewrites folder names purely by name lookup and never consults _stats.compendiumSource",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/converter/converters.js:99-114 and :176",
+    "what_it_says": "`fieldCollection(field)` → `collection.map(data => { const translation = translations[data[field]]; if (!translation) return data; return foundry.utils.mergeObject(data, {[field]: translation, translated: true}); })`; registered as `nameCollection: this.fieldCollection(\"name\")`."
+   },
+   {
+    "claim": "A malformed (world-style) compendiumSource only disables a FALLBACK layer; the local name-keyed layer still applies and wins the merge",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/converter/document-converter.js:286, 294-300, 436-457, 538-540",
+    "what_it_says": "`_sourceCollection(data)` = `String(this._sourceUuid(data) ?? \"\").match(/^Compendium\\.([^.]+\\.[^.]+)\\./)?.[1] ?? null` (:538-540) → `_exactSourceTranslationSource` returns null (:437-440). But `hasCurrentTranslation = currentCompendium?.hasTranslation(data, documentType) === true` (:286) and `payload = foundry.utils.mergeObject(fallbackPayload, currentPayload, {inplace:false})` (:300) — currentPayload (the local name-keyed sub-map) is applied last."
+   },
+   {
+    "claim": "The local embedded compendium is seeded with the field's own name-keyed translation payload",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/compendium/embedded-compendium.js:28-32, 62-74",
+    "what_it_says": "`const entries = {...new TranslationEntries(scopedPack?.translations).snapshot(), ...new TranslationEntries(translations).snapshot()};` → passed as `payload.entries` into `new MappedCompendium({type: documentType, ...}, payload, ...)`."
+   },
+   {
+    "claim": "MEASURED: the macros do NOT carry world-style UUIDs — the brief's premise is wrong for macros",
+    "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/raw-dumps/system.json (adventure !adventures!R8mjiz4iJkZGZMIw)",
+    "what_it_says": "macros 4/4 carry `Compendium.alienrpg.alien-rpg-macros.2uRygGpJBInn9YZk`, `Compendium.alienrpg.alien-rpg-macros.7oJw70t0MODJWuGV`, `Compendium.alienrpg.alien.0eSdw4VU3hdTKhS2`, `Compendium.alienrpg.alien.zdUdRGV2IIK7krBU`. folders 4/7 carry `Folder.<id>` (Alien Tables, Alien Macros, Skill-Stunts, Careers), 3/7 carry none. tables 3/3 carry `RollTable.<id>`. journal 1/1 carries `JournalEntry.u522l4MmxvdH1ZTt`. items: 12 Compendium-style (`Compendium.alienrpg.skill-stunts.*`), 1 world-style `Item.*`, 13 none."
+   },
+   {
+    "claim": "The Compendium UUIDs the macros point at are dead — alienrpg 4.1.13 declares only ONE pack",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/system.json (packs)",
+    "what_it_says": "Exactly one pack: `alien-rpg-system` / type `Adventure` / label `Alien RPG System`. There is no `alien-rpg-macros` and no `alien` pack, so `runtime.mappedCompendiumFor()` cannot resolve them either — which is harmless, because the local layer covers the macros."
+   },
+   {
+    "claim": "The RollTable names are English IN THE TRANSLATION FILE — this half of the bug is a content gap, not a Babele failure",
+    "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json (entries['Alien RPG System'].tables)",
+    "what_it_says": "`\"Panic Response Table\": {\"name\": \"Panic Response Table\", ...}`, `\"Panic Table\": {\"name\": \"Panic Table\", ...}`, `\"Stress Response Table\": {\"name\": \"Stress Response Table\", ...}` — all three `name` values equal their English keys (the nested `results` ARE translated). Same pattern for 3 of the 7 folders: `\"Alien Tables\"→\"Alien Tables\"`, `\"Alien Creature Tables\"→ itself`, `\"Alien Mother Tables\"→ itself`. Only `Alien Sub-Tables`→异形子表, `Alien Macros`→异形宏, `Careers`→职业, `Skill-Stunts`→技能炫技 are translated."
+   },
+   {
+    "claim": "The translated folder/macro entries have been in the shipped file since v0.1.0, so 'the translation arrived after the import' is not the explanation",
+    "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件 (git revs b0c3ec8, 36491d2, a28b830)",
+    "what_it_says": "All three revisions of compendium/cn/alienrpg.alien-rpg-system.json carry identical folders/macros/tables sub-maps, including Careers→职业 and Skill-Stunts→技能炫技."
+   },
+   {
+    "claim": "THE ASYMMETRY: the alienrpg system separately force-overwrites exactly ONE world document — the JournalEntry — with Babele-translated adventure data, and explicitly excludes folders",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/module/alienrpg.mjs:567-621 (called unawaited from the ready hook at :298-309)",
+    "what_it_says": "`const adventure = await pack.getDocument(adventureId); const adventureData = adventure.toObject();` (:584-586) — translated. Then `for (const [field, cls] of Object.entries(Adventure.contentFields)) { if (adventureData[field].length > 0 && field != \"folders\") newData[\"updateAssets\"].push({section: field, sectionData: adventureData[field]}); }` (:594-598), `newData['updateAssets'].sort(...)` (:600), `newUpdate.push(spanner.updateAssets[1].sectionData[0]); toUpdate[Adventure.contentFields.journal.documentName] = newUpdate;` (:603-605), `await cls.updateDocuments(updateData, {diff:false, recursive:false, noHook:true})` (:606-611). Guarded by `newVer === currentVer` where currentVer comes from `oldReleaseNotes.getFlag(\"alienrpg\",\"ver\")` (:573-579), and gated on `game.journal.getName(\"MU/TH/ER Instructions.\")` (:576, :594) — the ENGLISH name. The whole body sits in a `try{}catch(error){}` with an EMPTY catch (:620)."
+   },
+   {
+    "claim": "That one-shot journal overwrite then silently disables itself, which is exactly the state the owner reports",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/module/alienrpg.mjs:613-618",
+    "what_it_says": "After the update renames the journal to 「MU/TH/ER 使用说明」, `const newReleaseJournal = game.journal.getName(releaseNoteName)` returns null, so `await newReleaseJournal.setFlag(\"alienrpg\",\"ver\",newVer)` throws into the empty catch — the version flag is NEVER persisted, and on every later ready `game.journal.getName(releaseNoteName).id` (:594) throws first. Net effect: the journal is translated exactly once; folders, macros and tables are never touched."
+   },
+   {
+    "claim": "The alienrpg system auto-imports the Adventure on its first ready, bypassing any user decision about Babele state",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/module/apps/init.mjs:48-56 and :74-82",
+    "what_it_says": "`Hooks.on(\"ready\", () => { if (!game.settings.get(moduleKey,\"imported\") && game.user.isGM && !game.folders.getName(\"Alien Tables\")) { FirstTimeSetup(); return } ... })`; `FirstTimeSetup()` = `const pack = game.packs.get(adventurePack); await pack.getDocuments(); await pack.getName(adventurePackName).sheet._updateObject({}, new FormData()); ... game.journal.getName(welcomeJournalEntry).show()`."
+   },
+   {
+    "claim": "Two hidden name couplings that the current CN file happens to satisfy — and one it does NOT",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/module/apps/init.mjs:49, :77, :81",
+    "what_it_says": ":49 `!game.folders.getName(\"Alien Tables\")` and :77 `pack.getName(\"Alien RPG System\")` both survive because the CN file leaves those two names English. :81 `game.journal.getName(\"MU/TH/ER Instructions.\").show()` does NOT: with the journal name translated to 「MU/TH/ER 使用说明」, getName returns null and FirstTimeSetup throws a TypeError there — after the import and the two `game.settings.set` calls (:78-79) have already succeeded, so the import survives but the welcome popup dies with an uncaught error."
+   },
+   {
+    "claim": "Babele's post-import folder repair cannot resolve a source pack for these folders, and there is no repair at all for Macros/RollTables",
+    "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/compendium/folder-translations.js:85-115, :153-159 and script/babele.js:52-74",
+    "what_it_says": "`#collectionFromSourceId(sourceId)` = `String(sourceId).match(/^Compendium\\.([^.]+\\.[^.]+)\\./)?.[1] ?? null` (:158); `#sourcePackCollectionFor` tries the folder's own sourceId, then its `contents` entries, then `game.packs.find(pack => pack?.folders?.get?.(folderId))` (:107-114) — all three miss for `Folder.<worldId>` on an Adventure pack. babele.js registers only `Hooks.on(\"createFolder\", folder => game.babele?.translateImportedCompendiumFolder?.(folder))` (:72-74); its `importAdventure` hook (:52-70) only syncs Scene token names to Actor prototype token names."
+   },
+   {
+    "claim": "Ruled out: Adventure.fromSource does NOT strip the Item-typed folders here",
+    "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/adventure.mjs:37-46 + common/packages/base-package.mjs:566-579 + common/constants.mjs:1828",
+    "what_it_says": "fromSource drops `items` and filters folders whose `type` is in `CONST.SYSTEM_SPECIFIC_COMPENDIUM_TYPES` (= `[\"ActiveEffect\",\"Actor\",\"Item\"]`) only `if (pack && !pack.metadata.system)`. base-package.mjs `_cleanData`: `if (this.type === \"system\") systemId = (data.id ?? _state.source?.id); ... for (const pack of data.packs) { if (!pack.system && systemId) pack.system = systemId; }` — so the pack has `system: \"alienrpg\"` and nothing is stripped."
+   },
+   {
+    "claim": "The project's own registered global mapping layer does not disturb folders/macros/journals",
+    "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/babele-mappings.js:40-59 and register.js:109-127",
+    "what_it_says": "`DOCUMENT_MAPPINGS.Adventure` declares only name/description/caption/items/tables (items and tables additionally with `\"expose\": true`); folders, journals, macros, scenes, playlists, actors, cards fall through to the Babele built-ins. Registered once, in the `babele.init` hook. Headless run confirms identical output with and without this layer."
+   }
+  ],
+  "measurements": [
+   {
+    "what": "Headless Babele translation of the raw Adventure — folders (variant A: with the project's ALIEN_LAYER registered mapping)",
+    "value": "Alien Tables | Alien Creature Tables | Alien Mother Tables | 异形子表 | 异形宏 | 技能炫技 | 职业   (all 7 marked translated=true; the 3 English ones are English because the CN map sends them to themselves)"
+   },
+   {
+    "what": "Headless Babele translation — macros",
+    "value": "异形 - 玩家临时 YZE 投骰器 | 异形 -  GM 投骰器 | 异形 - 在选定的老妈表格上投骰 V10 | 异形 - 在选定的生物表格上投骰 V10   (4/4 Chinese)"
+   },
+   {
+    "what": "Headless Babele translation — tables",
+    "value": "Panic Table | Stress Response Table | Panic Response Table   (3/3 English — matches the CN file's own `tables.*.name` values)"
+   },
+   {
+    "what": "Headless Babele translation — journal entry name and page text",
+    "value": "name 「MU/TH/ER 使用说明」, page[0].text.content starts `<div class=\"alienrpg a.entity-link\"><div><p>在 Foundry VTT 上运...`"
+   },
+   {
+    "what": "Variant B — same run with the project's registered mapping layer REMOVED (Babele built-in mappings only)",
+    "value": "byte-identical output for folders / macros / tables / journal → the project's global mapping layer is not implicated"
+   },
+   {
+    "what": "Variant C — same run with fromUuidSync simulating an already-imported ENGLISH world (so every world-style `Folder.*`/`RollTable.*`/`JournalEntry.*` UUID resolves to an English-named document)",
+    "value": "byte-identical output → an existing English world state cannot poison the read path via `_sourceAwareData`"
+   },
+   {
+    "what": "Reproduction of alienrpg showReleaseNotes() selection arithmetic against the TRANSLATED adventure",
+    "value": "non-empty non-folder sections sort to `items,journal,macros,tables`; `updateAssets[1].sectionData[0]` → name 「MU/TH/ER 使用说明」, page text Chinese, written into the JournalEntry collection. Exactly one document, always the journal."
+   },
+   {
+    "what": "Adventure content-field population in the raw dump",
+    "value": "actors 0, combats 0, items 26, scenes 0, journal 1, tables 3, macros 4, cards 0, playlists 0, folders 7"
+   },
+   {
+    "what": "_stats.compendiumSource census in the raw dump",
+    "value": "folders 4/7 world-style `Folder.*`; macros 4/4 Compendium-style (2× `alienrpg.alien-rpg-macros`, 2× `alienrpg.alien`, both packs nonexistent in 4.1.13); tables 3/3 world-style `RollTable.*`; journal 1/1 world-style `JournalEntry.*`; items 12 Compendium-style + 1 world-style + 13 absent"
+   }
+  ],
+  "files_written": [
+   {
+    "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\harness.mjs",
+    "what": "Headless Babele bootstrap for node: imports Foundry's real common/utils/helpers.mjs + collection.mjs + constants.mjs as globalThis.foundry.utils / CONST, stubs Hooks/CONFIG/game/fromUuidSync, then assembles Babele 2.9.1's real ConverterRegistry (legacy registrations + DocumentConverter/StructuredDataConverter/LookupConverter/TokenizedLookupConverter/ReferencedDocumentFieldConverter), IdentityExtractorRegistry, DocumentMappings and MappedCompendiums. Exports buildSession({registeredMappings, packMetadata, translationsByCollection})."
+   },
+   {
+    "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\test1.mjs",
+    "what": "Variants A and B: translates the raw Adventure with and without the project's registered ALIEN_LAYER mapping and prints folders/macros/tables/journal names."
+   },
+   {
+    "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\test2.mjs",
+    "what": "Variant C (simulated already-imported English world visible to fromUuidSync) plus a faithful reproduction of alienrpg showReleaseNotes()'s `updateAssets[1].sectionData[0]` selection against the translated adventure."
+   }
+  ],
+  "open_issues": [
+   "The owner's world lives on a VPS and I could not inspect it, so the mixed-state conclusion is a deduction from code + data, not a direct observation. It is falsifiable with four one-liners in that world's console — my predictions if the diagnosis is right: (1) `game.journal.getName('MU/TH/ER 使用说明')?.getFlag('alienrpg','ver')` → undefined (the flag was never written because setFlag threw at alienrpg.mjs:613-615); (2) `game.folders.getName('Careers')` exists with English name and `_stats.compendiumSource === 'Folder.D4Yb7CG643VQx0uS'`; (3) `game.macros.getName('Alien -  GM Dice Roller')` exists (English); (4) `game.settings.get('alienrpg','imported') === true`. If instead the journal DOES carry `flags.alienrpg.ver`, my showReleaseNotes mechanism is wrong and the asymmetry needs re-derivation.",
+   "Independent second defect, unrelated to the import: `entries['Alien RPG System'].tables.*.name` in the CN file are all still English (`Panic Table`, `Panic Response Table`, `Stress Response Table`), so the 3 RollTable names will stay English even after a perfect re-import. Their nested `results` ARE translated. Same question for `Alien Tables` / `Alien Creature Tables` / `Alien Mother Tables` — those three look like a DELIBERATE keep-English decision (alienrpg init.mjs:49 guards on `game.folders.getName('Alien Tables')`), but that intent is not recorded anywhere I found; if it is deliberate it belongs in DO-NOT-TRANSLATE.json.",
+   "Landmine for a FRESH translated install: alienrpg init.mjs:81 does `game.journal.getName('MU/TH/ER Instructions.').show()` at the end of FirstTimeSetup. With the CN file active the imported journal is named 「MU/TH/ER 使用说明」, so this throws an uncaught TypeError. The import itself and both `game.settings.set` calls (:78-79) complete first, so content is fine — but the welcome journal never opens and the console shows an error on every new world. Deciding whether to keep the journal name English is a product call, not a bug fix.",
+   "I did not verify the ready-hook ORDER between Babele's `Hooks.once('ready')` (babele.js:37) and alienrpg's `Hooks.on('ready')` (init.mjs:48) in a live client. It should not matter — Babele's `_getDocuments` wrapper awaits `babele.init()` itself (wrapper.js:39) and that facade init is idempotent and explicitly documented as callable before ready (babele.js:407-411) — but I proved this by reading, not by running Foundry.",
+   "Not investigated: whether `alien-evolved-corerules` / `alien-evolved-starterset` (both installed) ship their own Adventure packs that could have contributed the world's Folder documents. Only `alienrpg.alien-rpg-system` was in scope."
+  ]
+ },
+ "fixes": [
+  {
+   "summary": "I did NOT implement fix #1. The diagnosis is right that the source-normalising shim is not the operative cause, and I re-derived that independently and then went further: I measured that the shim is inert on *every* path it could possibly act on, and that shipping it would write fabricated, dangling provenance UUIDs into world documents. Three independent proofs: (1) folder names go through `nameCollection`, a converter whose entire body never reads `_stats.compendiumSource`; (2) for macros/tables/journal the source only feeds a *fallback* layer, and the local name-keyed layer is merged last and wins — measured, normalising the source changes 9 leaf values in the translated output and all 9 ARE the rewritten source fields, zero name changes; (3) the post-import fill-back the shim is supposed to unblock reads the translation file's *pack-level* `folders` map, which is `{}` in our CN file (our names live in `entries[…].folders`, a different map) — measured, running the real `FolderTranslations.translateImportedCompendiumFolder()` with fully normalised sources still returns English for 7/7 folders. Plus Babele registers only a `createFolder` hook, so 2 of the 3 reported symptom classes (macros, roll tables) have no fill-back path at all regardless. The brief's factual premise is also partly wrong: all 4 macros already carry well-formed `Compendium.` UUIDs. Instead of an inert patch I shipped a 28-check counter-proof group (A) in the adversarial suite that pins every mechanism fact the refutation rests on — so if upstream Babele ever changes such that the shim WOULD be needed, the gate goes red — plus a guard (A7a) that fails if anyone assigns to `compendiumSource` in the shipped patchers, and a negative-decision comment block appended to `alienrpg-hardcoded-cn.mjs`. Suites: adversarial 422 PASS / 12 FAIL where the 12 are byte-identical to the pre-existing baseline and group A is 28/28 green; test_hardcoded_patch 115/0 ALL GREEN; gate_plugin_lang 57/0 ALL GREEN.",
+   "root_cause": "The reported symptom (Chinese journal body, English folder/macro/table names) is a world-state artifact, not a Babele resolution failure, so normalising `_stats.compendiumSource` cannot fix it. Babele's read path already returns Chinese folder and macro names from the shipped CN file with the sources exactly as they are (re-confirmed headlessly this session). The English world documents were created by an import that did not go through a live Babele session, and nothing renames world documents afterwards; the journal is Chinese only because the alienrpg system separately force-overwrites exactly one world document. The correct remedy is a re-import — `Adventure#import` replaces already-present `_id`s with `{diff:false, recursive:false}`, so `name` is overwritten — not a source-shape change. Independently, the shim would be inert even on its own intended repair path because that path consults the translation file's pack-level `folders` key, which is empty in our CN file, and because no `createMacro`/`createRollTable` hook exists.",
+   "decisions": [
+    {
+     "decision": "Did NOT implement the source-normalising shim in alienrpg-hardcoded-cn.mjs",
+     "reason": "Measured inert on every path. Read path: deep-diffing the translated Adventure with vs. without normalisation yields 9 leaf differences, all of them the rewritten `_stats.compendiumSource` values themselves — 0 differences in any name or content field. Repair path: running Babele's real `FolderTranslations.translateImportedCompendiumFolder()` against the raw dump with fully normalised sources returns the English name for 7/7 folders. The task's own guard clause instructs me to refuse an inert patch, and shipping one would additionally write fabricated dangling UUIDs (`Compendium.alienrpg.alien-rpg-system.Folder.<id>` names a document type an Adventure-type pack cannot contain) into world documents' provenance field."
+    },
+    {
+     "decision": "Refuted the brief's premise that every embedded `_stats.compendiumSource` is world-style",
+     "reason": "Re-measured the raw dump: all 4 macros carry proper `Compendium.` UUIDs (2× alienrpg.alien-rpg-macros, 2× alienrpg.alien). Only folders 4/7, tables 3/3 and journal 1/1 are world-style, and 3 of the 7 folders carry no source at all — for those the shim has no input to normalise. So the macros, which ARE a reported symptom, already satisfy the shim's precondition and are still English in the world."
+    },
+    {
+     "decision": "Established the second, independent reason the shim is inert — the fill-back reads a different map than the one our translations live in",
+     "reason": "`FolderTranslations.#folderTranslationsPayload` calls `compendium.folderTranslations()` (folder-translations.js:129,:135), which for a normal pack returns `this.folders` (mapped-compendium.js:138), sourced only from the translation file's TOP-LEVEL `folders` key (mapped-compendium.js:57). Our CN file's top-level `folders` is `{}`; all 7 folder names live in `entries['Alien RPG System'].folders`. So even a perfectly normalised source resolves to an empty translation map."
+    },
+    {
+     "decision": "Established that 2 of the 3 symptom classes have no repair path at all",
+     "reason": "babele.js registers exactly one post-import name hook — `Hooks.on(\"createFolder\", …)` at :72 — and grep confirms the strings `createMacro` and `createRollTable` appear nowhere in it. Macro names and RollTable names can never be filled back after import by any source-shape fix."
+    },
+    {
+     "decision": "Wrote a mutation test to prove the new assertions are live rather than vacuous",
+     "reason": "Ran the real FolderTranslations across a 2×2 of {empty vs populated pack-level folders map} × {as-shipped vs normalised source}. Only the shim+map cell renames anything, and it renames 3 of 7 folders. Rows 1-3 are identical English. This proves both preconditions are jointly required, that the shim alone is a no-op, and that even both together would fix at most 3 of the ~10 English names the owner sees."
+    },
+    {
+     "decision": "Added counter-proof group A (28 checks) to adversarial_hardcoded_patch.mjs instead of the three requested negative tests",
+     "reason": "The three requested negatives (other-package untouched / well-formed source untouched / inert in non-cn) all presuppose a shim exists; with no shim they have no subject. I substituted checks with the same protective purpose: A1-A4 pin the four upstream mechanism facts that make the shim inert, each anchored to a live Babele source string so the gate goes red if upstream changes and the shim becomes genuinely necessary; A5-A6 run the real repair code and the real raw dump; A7a fails if anyone assigns to `compendiumSource` in either shipped patcher, and A7c/A7d pin that the file's global `alienrpg` + `cn` gate is intact so any future shim inherits it."
+    },
+    {
+     "decision": "Appended the negative decision to the END of alienrpg-hardcoded-cn.mjs rather than inserting near its header",
+     "reason": "The suite resolves line-number pins into that file by index (adversarial_hardcoded_patch.mjs:1074-1081 checks that `pairs_declared_at`/`installer_at`/`installed_at` still point at their anchors). Inserting near the top would shift every anchor below and break the two pins that currently pass. Appending after the `__TEST__` export shifts nothing; confirmed by the failure set staying byte-identical to baseline."
+    },
+    {
+     "decision": "Did not touch the 12 pre-existing suite failures",
+     "reason": "They are stale line-number and translated-name pins in 7-其他内容/DO-NOT-TRANSLATE.json's name_lookups registry, dating from when a second pair (`STARTER SET - HOW TO USE THIS MODULE`) was added to NAME_FALLBACKS. Out of scope, and entangling a registry rebuild with this refutation would obscure whether my change regressed anything."
+    },
+    {
+     "decision": "Confirmed the one live defect the diagnosis flagged in our blast radius is already fixed",
+     "reason": "alienrpg init.mjs:81 does `game.journal.getName('MU/TH/ER Instructions.').show()` unguarded, which would throw once the journal is renamed. `installNameFallback` already ships in this file and installs a `getName` fallback on `game.journal` at the `setup` hook with exactly that en→cn pair. Nothing to add."
+    }
+   ],
+   "evidence": [
+    {
+     "claim": "Folder names use a converter that never reads the source field, so the shim cannot affect them even in principle",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/converter/converters.js:99-127, :176",
+     "what_it_says": "`nameCollection: this.fieldCollection(\"name\")` (:176) → `fieldCollection(field)` (:99) whose whole body is `return collection.map(data => { const translation = translations[data[field]]; ... })` (:106-107). Grepping the function body for `compendiumSource`, `sourceId`, `_sourceUuid` and `_stats` returns zero hits — pinned as check A1d."
+    },
+    {
+     "claim": "Adventure.folders is routed through that converter",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/mapping/default-mappings.js:6-9",
+     "what_it_says": "`\"folders\": { \"path\": \"folders\", \"converter\": \"nameCollection\" }` inside the `\"Adventure\"` mapping; macros/tables/journals use `\"converter\": \"document\"` with `cardinality: \"many\"`."
+    },
+    {
+     "claim": "The brief's stated precondition is real but only gates a FALLBACK layer",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/converter/document-converter.js:539, :549-550, :437",
+     "what_it_says": "`_sourceCollection(data) { return String(this._sourceUuid(data) ?? \"\").match(/^Compendium\\.([^.]+\\.[^.]+)\\./)?.[1] ?? null; }` (:539). It has exactly ONE call site in the whole file, `const collection = this._sourceCollection(data);` at :437 inside `_exactSourceTranslationSource`, immediately followed by `if (!collection) { return null; }`."
+    },
+    {
+     "claim": "The local name-keyed layer is merged last and therefore wins regardless of source shape",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/converter/document-converter.js:279, :286, :300",
+     "what_it_says": "In `_fromPack` (:279): `const hasCurrentTranslation = currentCompendium?.hasTranslation(data, documentType) === true;` (:286) and `const payload = foundry.utils.mergeObject(fallbackPayload, currentPayload, {inplace: false});` (:300) — `currentPayload`, the local embedded name-keyed layer, is the second argument and overrides."
+    },
+    {
+     "claim": "The post-import folder repair reads the translation file's PACK-LEVEL folders map, not the per-entry one where our names live",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/compendium/folder-translations.js:44, :129, :135 + compendium/mapped-compendium.js:57, :138",
+     "what_it_says": "`translateImportedCompendiumFolder(folder)` (:44) → `#folderTranslationsPayload` (:129) → `return compendium.folderTranslations();` (:135). `MappedCompendium.folderTranslations()` returns `this.folders ?? {}` (mapped-compendium.js:138), and `this.folders` is assigned only from `this.#clone(this.translation.folders)` (mapped-compendium.js:57) — the file's top-level `folders` key."
+    },
+    {
+     "claim": "Our CN file's top-level folders map is empty while all 7 names live in the per-entry map",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json",
+     "what_it_says": "Top-level keys are `['entries','folders','label']`; `folders` is `{}`. `entries['Alien RPG System'].folders` has 7 entries including `Careers→职业` and `Skill-Stunts→技能炫技`. Pinned as check A3d ([0, 7])."
+    },
+    {
+     "claim": "Babele has no post-import repair hook for Macros or RollTables",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/babele.js:26, :36, :52, :72",
+     "what_it_says": "The file registers exactly four hooks: `init` (:26), `ready` (:36), `importAdventure` (:52, which only syncs Scene token names to Actor prototype token names), and `createFolder` (:72). The strings `createMacro` and `createRollTable` do not occur anywhere in the file — pinned as check A4b."
+    },
+    {
+     "claim": "MEASURED: the brief's premise that every embedded source is world-style is wrong for macros",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/raw-dumps/system.json (!adventures!R8mjiz4iJkZGZMIw)",
+     "what_it_says": "macros 4/4 carry `Compendium.alienrpg.alien-rpg-macros.*` / `Compendium.alienrpg.alien.*`. folders: 4/7 carry world-style `Folder.<id>` (Alien Tables, Alien Macros, Skill-Stunts, Careers) and 3/7 carry none at all. tables 3/3 `RollTable.<id>`, journal 1/1 `JournalEntry.u522l4MmxvdH1ZTt`. Pinned as checks A6a/A6b/A6c."
+    },
+    {
+     "claim": "The UUID the shim would fabricate is dangling — that pack cannot contain Folder or RollTable documents",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/system.json",
+     "what_it_says": "alienrpg 4.1.13 declares exactly ONE pack: `{name: 'alien-rpg-system', type: 'Adventure', label: 'Alien RPG System', system: 'alienrpg'}`. So `Compendium.alienrpg.alien-rpg-system.Folder.<id>` names a document type this pack cannot hold, and the two packs the macro sources point at (`alien-rpg-macros`, `alien`) do not exist at all. Pinned as checks A6d/A6e."
+    },
+    {
+     "claim": "Babele is a hard dependency, so treating its absence as a gate failure rather than a skip is correct",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/module.json",
+     "what_it_says": "`relationships.requires: [{id: 'babele', type: 'module', compatibility: {minimum: '2.9.1'}}]`; installed Babele is 2.9.1. Check A0 fails loudly if any of the six judged source files is missing."
+    },
+    {
+     "claim": "The suite resolves line-number pins into the patcher by index, which is why the decision note had to be appended at the end",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/4-常用脚本/qa/adversarial_hardcoded_patch.mjs:1066, 1074-1081",
+     "what_it_says": "`const shimLines = read(path.join(HUB, 'scripts/alienrpg-hardcoded-cn.mjs')).split('\\n');` then for each of `pairs_declared_at`/`installer_at`/`installed_at` it asserts `(shimLines[n - 1] || '').includes(needle)`. An insertion above those anchors would shift them."
+    },
+    {
+     "claim": "The init.mjs:81 landmine the diagnosis flagged is already covered by shipped code",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件/scripts/alienrpg-hardcoded-cn.mjs (installNameFallback + NAME_FALLBACKS.journal, sentinel __alienrpgCnGetNamePatched)",
+     "what_it_says": "`NAME_FALLBACKS.journal` contains `{ en: 'MU/TH/ER Instructions.', cn: 'MU/TH/ER 使用说明' }` plus the starter-set pair, and `HOOKS.once('setup', () => installNameFallback(globalThis.game?.journal, NAME_FALLBACKS.journal))` shadows `getName` on the instance so the system's English lookup still resolves."
+    }
+   ],
+   "measurements": [
+    {
+     "what": "Read-path effect of normalising every world-style `_stats.compendiumSource` to a Compendium UUID — deep leaf diff of the full translated Adventure",
+     "value": "9 leaf differences total; 0 of them outside `_stats.compendiumSource` itself. Folder/macro/table/journal names byte-identical."
+    },
+    {
+     "what": "Babele read output for folder names, as shipped (no shim), re-run this session",
+     "value": "Alien Tables | Alien Creature Tables | Alien Mother Tables | 异形子表 | 异形宏 | 技能炫技 | 职业 — already Chinese where the CN map has a Chinese value"
+    },
+    {
+     "what": "Babele read output for macro names, as shipped (no shim)",
+     "value": "异形 - 玩家临时 YZE 投骰器 | 异形 -  GM 投骰器 | 异形 - 在选定的老妈表格上投骰 V10 | 异形 - 在选定的生物表格上投骰 V10 — 4/4 Chinese"
+    },
+    {
+     "what": "Real FolderTranslations.translateImportedCompendiumFolder() over the 7 raw folders, sources fully normalised",
+     "value": "7/7 returned the English name — identical to the as-shipped run. The shim unblocks nothing on its own intended path."
+    },
+    {
+     "what": "Mutation test 2×2 {pack-level folders map empty|populated} × {source as-shipped|normalised}",
+     "value": "empty+shipped, empty+normalised, populated+shipped all return the same 7 English names; only populated+normalised renames, and only 3 of 7 (异形宏 / 技能炫技 / 职业). Proves the assertions are live AND that both preconditions are jointly required."
+    },
+    {
+     "what": "MappedCompendium.folderTranslations() for alienrpg.alien-rpg-system with the real CN payload",
+     "value": "{} — the only map the fill-back consults is empty"
+    },
+    {
+     "what": "_sourceCollection call sites in document-converter.js",
+     "value": "1 (line 437, inside the fallback resolver _exactSourceTranslationSource)"
+    },
+    {
+     "what": "createMacro / createRollTable occurrences in babele.js",
+     "value": "0"
+    },
+    {
+     "what": "adversarial_hardcoded_patch.mjs — baseline before my change",
+     "value": "PASS 394 / FAIL 12 (exit 1)"
+    },
+    {
+     "what": "adversarial_hardcoded_patch.mjs — after adding counter-proof group A",
+     "value": "PASS 422 / FAIL 12 (exit 1). Group A: 28 PASS / 0 FAIL. The 12 failures diff byte-identical against the baseline failure set."
+    },
+    {
+     "what": "test_hardcoded_patch.mjs after my changes",
+     "value": "PASS 115 / FAIL 0 — ALL GREEN (exit 0)"
+    },
+    {
+     "what": "gate_plugin_lang.mjs after my changes",
+     "value": "PASS 57 / FAIL 0 — ALL GREEN (exit 0)"
+    },
+    {
+     "what": "Diff size",
+     "value": "adversarial_hardcoded_patch.mjs +198 lines (new group A); alienrpg-hardcoded-cn.mjs +42 lines, comment-only, appended after the __TEST__ export. Both files remain pure LF; the QA file's intentional NUL-byte fixture at line 540 is preserved."
+    }
+   ],
+   "files_written": [
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\adversarial_hardcoded_patch.mjs",
+     "what": "Added counter-proof group A (28 checks, +198 lines) before the summary block. A0 judges Babele source availability; A1 pins that nameCollection/fieldCollection never read the source field; A2 pins that _sourceCollection has a single call site in the fallback layer and that currentPayload is merged last; A3 pins that the fill-back reads the pack-level folders map and that ours is empty while entries[…].folders holds all 7; A4 pins the absence of createMacro/createRollTable hooks; A5 runs the real FolderTranslations over the real raw dump with and without normalisation; A6 re-measures the source census and the fabricated-UUID cost; A7 fails if anyone assigns to compendiumSource in either shipped patcher and pins the alienrpg+cn global gate."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\scripts\\alienrpg-hardcoded-cn.mjs",
+     "what": "Appended a 42-line comment-only 「负面决议」 block after the __TEST__ export recording why the source-normalising shim is deliberately absent, with the four mechanism citations, the two measurements, the real root cause, and a pointer to group A. Appended (not inserted) so no line-number pin shifts. Zero behavioural change."
+    },
+    {
+     "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\test3.mjs",
+     "what": "Decisive shim-efficacy experiment: translates the raw Adventure through real Babele with and without source normalisation, prints the before/after source census, and runs the real FolderTranslations repair on all 7 folders in both states."
+    },
+    {
+     "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\test4.mjs",
+     "what": "Deep leaf-diff of the translated Adventure with vs. without normalisation — the measurement behind '9 diffs, all of them the source field itself'."
+    },
+    {
+     "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\mutation.mjs",
+     "what": "Mutation test proving group A's A5a/A5b are live rather than vacuous: the 2×2 over {empty|populated pack-level folders map} × {shipped|normalised source}."
+    },
+    {
+     "path": "C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\adversarial.bak.mjs",
+     "what": "Byte copy of adversarial_hardcoded_patch.mjs taken immediately before the splice, for rollback."
+    }
+   ],
+   "open_issues": [
+    "Fix #1 is refuted, so the owner's world is still broken. The remedy the evidence supports is a RE-IMPORT of the Adventure in a world with Babele active: Adventure#import partitions documents already present by _id into an update bucket and replaces them with `{diff:false, recursive:false}`, so the English folder/macro names get overwritten with the translated ones. Nothing in this task changed the owner's world.",
+    "Even after a perfect re-import, 6 names stay English because they are English IN the CN file, not because of any code path: `tables.*.name` for Panic Table / Panic Response Table / Stress Response Table (their nested `results` ARE translated), and folders `Alien Tables` / `Alien Creature Tables` / `Alien Mother Tables`. `Alien Tables` staying English is load-bearing — alienrpg init.mjs:49 guards the auto-import on `!game.folders.getName('Alien Tables')` — but that intent is recorded nowhere I found. It belongs in DO-NOT-TRANSLATE.json, and the 3 table names are probably just a content gap. This is a data decision I did not make unilaterally.",
+    "12 pre-existing failures in the adversarial suite, all in group S, all stale pins in 7-其他内容/DO-NOT-TRANSLATE.json's name_lookups registry: `shimmed` filters to entries whose recorded translated name/line anchors no longer match after the starter-set pair was added to NAME_FALLBACKS (e.g. `starterset.welcomeJournalEntry: expected 'MU/TH/ER 使用说明', actual '新手包 - 如何使用本模块'` — the check compares every shimmed entry against the single SHIM_CN constant). Regenerating the registry with build_register.py is the likely fix. I left them untouched and verified my change neither added to nor removed from that exact set.",
+    "The three negative tests the task specified (other package untouched / well-formed source untouched / inert in a non-cn world) have no subject without a shim. I substituted A7a (fails on any `compendiumSource` assignment in either shipped patcher) and A7c/A7d (pins the alienrpg+cn global gate so a future shim inherits it). If you later decide to ship a shim anyway, those three tests become writable and A7a must be deleted in the same change — deliberately, not incidentally.",
+    "Group A's A5 uses a stand-in object for MappedCompendium rather than constructing a real one, because the real class needs `foundry.utils` and DocumentMappings and setting `globalThis.foundry` inside the QA suite risks polluting other groups. The stand-in's fidelity is not assumed — A3b and A3c pin the two source lines it replicates, so the stand-in goes stale loudly. The full-fidelity version does exist and was run: scratchpad/test3.mjs, same result.",
+    "A5 depends on 6-工作区/raw-dumps/system.json still being present; if it is a scratch artifact that gets cleaned up, A5 emits one clear FAIL naming the path rather than crashing. Consider promoting that dump to a committed fixture if the suite is meant to run on a clean checkout.",
+    "I could not inspect the owner's VPS world, so 'the world is in a mixed state' remains a deduction from code plus data. The previous phase's four console one-liners are still the way to falsify it; my work strengthens the case against fix #1 but does not independently confirm the mixed-state story."
+   ]
+  },
+  {
+   "summary": "Built the in-place \"重新汉化本世界\" repair tool as a shipped part of the hub module `alienrpg-cn`, exposed through a GM-restricted settings-menu button plus a module API. It renames world documents of all seven types the three Adventure packs contain, and additionally repairs RollTable result bodies, JournalEntry page names/text, and the Actor→RollTable name references that must move in lockstep with table renames. The frozen-name register is fetched at runtime from `data/DO-NOT-TRANSLATE.json` (a byte-identical copy of `7-其他内容/DO-NOT-TRANSLATE.json`); if it cannot be loaded, or if it compiles to zero rules, the tool REFUSES to run rather than proceeding unguarded. Dry-run is the default everywhere. A new QA gate (`4-常用脚本/qa/gate_retranslate_world.mjs`, 105 checks, all passing) drives the real Babele 2.9.1 converters over the real raw pack dumps and proves idempotence end-to-end: pass 1 = 106 renames + 193 content edits, passes 2 and 3 = 0 operations. Operator documentation is in the module README.",
+   "root_cause": "Not re-derived — taken as given from the prior phase: the alienrpg system auto-imports its Adventure pack on first `ready` without waiting for Babele, and nothing renames world documents afterwards (Adventure#import only overwrites on a *re*-import; Babele's only post-import repair hook is `createFolder`, which needs a `Compendium.`-prefixed `_stats.compendiumSource` this pack does not carry, and there is no equivalent hook for Macro/RollTable at all). This work is the fix, not a re-diagnosis. Two upstream facts I did re-derive because the fix depends on them: `Adventure#import` creates with `keepId: true` (so world `_id`s equal pack `_id`s, which is what makes precise id-matched repair possible), and the three packs deliberately SHARE `_id`s for overlapping content, which forced an explicit \"sources must agree or the tool refuses to guess\" rule.",
+   "decisions": [
+    {
+     "decision": "Ship it as a settings-menu button (`game.settings.registerMenu`, restricted:true) plus `game.modules.get('alienrpg-cn').api.*` — NOT a compendium Macro pack",
+     "reason": "(a) Foundry 14.366 compendium packs are LevelDB directories, not JSON — verified: `systems/alienrpg/packs/alien-rpg-system/` contains `000005.ldb / MANIFEST-000028 / CURRENT / LOCK`. The hub ships no `packs` today and the release workflow has no pack-build step, so a Macro pack means new build machinery. (b) A Macro pack's usage model is 'import into the world', which makes the world's copy a SNAPSHOT — the repair tool itself would go stale on module update, becoming the next bug. (c) The settings menu matches this project's own precedent (crucible-cn's self-check panel, modules/crucible-cn/selfcheck/cn-selfcheck.mjs:1761-1768) AND sits next to the button the GM already knows: the alienrpg system's own 'Import Adventure / Re-Import' menu (systems/alienrpg/module/apps/init.mjs:38-45). Verified the launch path works: client/applications/settings/config.mjs:212 does `new menu.type()` then `await app.render(true)`, and my thin launcher overrides `render()`."
+    },
+    {
+     "decision": "Primary matching is by `_id` against the Babele-translated pack document; matching by English name against `compendium/cn/*.json` is the fallback for hand-rebuilt documents",
+     "reason": "`Adventure#import` creates with `keepId: true` (client/documents/adventure.mjs:174-186), so world `_id` == pack `_id`. Reading the target from `pack.getDocument()` means the target value is literally 'what a clean re-import would write', which inherits every translation decision already baked into the CN files — including the deliberate keep-English ones. Measured on the real data: 100% of the simulated world matched by id, the name fallback fired 0 times. The name path still exists because the task asked for it and because a hand-deleted-and-recreated document loses its id."
+    },
+    {
+     "decision": "The DO-NOT-TRANSLATE guard is type-scoped, not a flat string blacklist",
+     "reason": "A flat blacklist produces false blocks on real data. Two measured traps: (1) the starterset CN file translates the FOLDER named `Alien Evolved Starter Set` to 异形进化版新手包 while the same string is frozen as an Adventure name and a Scene name — an untyped guard would wrongly block a legitimate rename; (2) the folder `Alien RPG Mother Aids` → 异形RPG老妈辅助工具 fails the ` RPG `/startsWith/endsWith substring test, but that test lives in the encumbrance code which iterates ITEMS, never folders. Both are explicit regression tests in group C of the gate."
+    },
+    {
+     "decision": "Entries carrying `unfrozen_by_shim` are excluded from the freeze set",
+     "reason": "The register's own `sections.name_lookups.tier_exception` says those are T-SHIMMED, not T-FROZEN: they ARE translated in the shipped pack and the English-keyed `getName()` is made to resolve by the runtime shim in scripts/alienrpg-hardcoded-cn.mjs. Treating them as frozen would invert the fix — the world's MU/TH/ER journal could never be renamed to Chinese."
+    },
+    {
+     "decision": "An unrecognizable `role` in the register freezes that string for ALL covered types and emits a visible warning, rather than aborting or silently guessing",
+     "reason": "Over-freezing fails safe (a rename does not happen, and the report says exactly why); under-freezing fails silently and breaks the game. All 9 current entries classify cleanly, so the warning list is empty today — asserted in gate group G."
+    },
+    {
+     "decision": "Content repair covers RollTable `description` and JournalEntry page `name` + `text.content`, gated on 'current value contains no CJK'",
+     "reason": "The diagnosis implies the world's table results and journal bodies are English too (same non-Babele import), so names alone would leave the job half done. The CJK gate is what makes it safe without an English baseline: a field that already contains Chinese is treated as 'localized or hand-edited' and is left alone AND reported. Idempotence falls straight out of it. A `force` checkbox exists for deliberate re-alignment and is off by default."
+    },
+    {
+     "decision": "Explicitly NOT covered: Item/Actor body text, Macro `command`, Scene notes/drawings/regions, TableResult `name`, Playlist/Cards",
+     "reason": "Item/Actor body fields live at paths that vary by `Item.type` (see babele-mappings.js `_variants` with `_when` guards); re-deriving them at runtime means reimplementing Babele's mapping engine, and getting it wrong writes to the wrong field silently. Macro `command` carries frozen literals (register section `macro_commands`). TableResult `name` goes through Babele's `referencedDocumentField` converter — its value is resolved live from the referenced document, so writing it in place would freeze a dynamic value into a snapshot. All of this is stated in the README rather than being a silent gap."
+    },
+    {
+     "decision": "Actor `system.rTables` / `system.cTables` are repaired independently of whether a table rename happens in the same run",
+     "reason": "Register section `actor_table_refs`: `module/documents/actor.mjs:2497` does `game.tables.contents.find(b => b.name === targetTable)` with NO guard, and the next line's `table.roll()` throws a TypeError — a one-sided move kills the creature's attack button. Making the ref repair independent means a half-failed run self-heals on the next run. The `None` sentinel is read from the register (`sections.item_names.none_sentinel.string`), not hardcoded, and is never moved."
+    },
+    {
+     "decision": "When one `_id` exists in multiple packs, the tool requires the packs to agree; disagreement is recorded as `ambiguous-id-match` and nothing is written",
+     "reason": "Measured: the three packs deliberately share `_id`s — system∩starterset 4 folders / 2 tables; starterset∩corerules 11 folders / 9 tables / 18 items / 4 actors / 1 scene. The world holds ONE document per id (the last import wins) and runtime cannot tell which pack wrote it. Today all shared translations are byte-identical, so this never fires on real data; group S proves it fires when a single pack drifts."
+    },
+    {
+     "decision": "The duplicate-name warning only fires when a rename MERGES previously-distinct names",
+     "reason": "First implementation warned on any post-rename duplicate, which produced two false warnings on real data (`异形子表`, `异形进化版`) for folders that were ALREADY duplicates in English because of the shared-_id design. Warning about a pre-existing condition the tool did not cause is noise."
+    }
+   ],
+   "evidence": [
+    {
+     "claim": "Compendium packs on this install are LevelDB directories, so a shipped Macro pack would need new build machinery",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/packs/alien-rpg-system/",
+     "what_it_says": "Directory contents are `000005.ldb`, `000029.log`, `CURRENT`, `LOCK`, `LOG`, `MANIFEST-000028` — a LevelDB store, not JSON. Foundry version measured at C:/Program Files/Foundry Virtual Tabletop/resources/app/package.json → 14.366.0."
+    },
+    {
+     "claim": "A settings submenu is launched with a no-arg constructor followed by render(true), which is what the thin launcher class relies on",
+     "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/applications/settings/config.mjs:206-213",
+     "what_it_says": "`static async #onOpenSubmenu(_event, button) { const menu = game.settings.menus.get(button.dataset.key); ... const app = new menu.type(); await app.render(true); }`"
+    },
+    {
+     "claim": "This project's own sibling module already uses exactly this delivery mechanism for a maintenance panel",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/crucible-cn/selfcheck/cn-selfcheck.mjs:1744-1768",
+     "what_it_says": "`export function registerSelfCheck(extra, opts = {})` builds a thin `SelfCheckLauncher extends FormApp` whose `render()` opens the panel and whose `close()` is a no-op, then `game.settings.registerMenu(NS, \"selfCheck\", {name, label, hint, icon, type: SelfCheckLauncher, restricted: false})`. The base class is taken via `globalThis.foundry?.applications?.api?.ApplicationV2 ?? globalThis.Application ?? class {}` because a bare identifier in an `extends` expression throws a ReferenceError that no surrounding try/catch can contain (:1746-1752)."
+    },
+    {
+     "claim": "The alienrpg system's own Re-Import button lives in the same settings panel, so the new button sits where the GM already looks",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/module/apps/init.mjs:38-45",
+     "what_it_says": "`game.settings.registerMenu(moduleKey, \"import\", {name: \"Import Adventure\", label: \"Re-Import\", hint: \"...\", config: true, type: ImportFormWrapper, restricted: true})`"
+    },
+    {
+     "claim": "World documents keep the pack's _id on import, which is what makes id-matched in-place repair possible",
+     "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/adventure.mjs:174-186",
+     "what_it_says": "`const options = { keepId: true, // Keep adventure document IDs\\n render: false, renderSheet: false }; const docs = await cls.createDocuments(createData, options);`"
+    },
+    {
+     "claim": "A re-import fully replaces already-present documents, which is why the README steers 'full refresh' to the Adventure importer and warns it loses edits",
+     "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/documents/adventure.mjs:141-142 and :188-197",
+     "what_it_says": "`const collection = game.collections.get(cls.documentName); let [c, u] = adventureData[field].partition(d => collection.has(d._id));` then `const options = {diff: false, recursive: false, noHook: true, render: false}; const docs = await cls.updateDocuments(updateData, options);`"
+    },
+    {
+     "claim": "TableResult's translated field is `description`, and its identity is matched by _id then range — both used verbatim by the repair",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/mapping/default-mappings.js (\"TableResult\" block)",
+     "what_it_says": "`\"TableResult\": {\"_identity\": {\"export\": [\"range\", \"_id\"], \"match\": [\"_id\", \"range\"]}, \"name\": {\"path\": \"name\", \"converter\": \"referencedDocumentField\", \"uuidPath\": \"documentUuid\", \"referencedField\": \"name\"}, \"description\": \"description\"}` — the `name` field is resolved live from the referenced document, which is why the tool never writes it."
+    },
+    {
+     "claim": "JournalEntryPage's translated fields are `name` and `text.content`",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/mapping/default-mappings.js (\"JournalEntryPage\" block)",
+     "what_it_says": "`\"JournalEntryPage\": {\"name\": \"name\", \"caption\": \"image.caption\", \"src\": \"src\", \"text\": \"text.content\", \"width\": \"video.width\", \"height\": \"video.height\"}`"
+    },
+    {
+     "claim": "Reading a pack document goes through Babele's wrapper, so `pack.getDocument()` yields exactly what a clean re-import would write",
+     "file_line": "C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules/babele/script/foundry/wrapper.js:11-14",
+     "what_it_says": "`libWrapper.register('babele', 'CONFIG.DatabaseBackend._getDocuments', async function (wrapped, ...args) { const result = await wrapped(...args); return await translateResult(result, contextFromArgs(args)); }, 'WRAPPER');`"
+    },
+    {
+     "claim": "The three frozen folder names are looked up WITHOUT a type filter, so the guard must freeze them for any Folder rather than only RollTable-typed folders",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json sections.folder_names.entries[*].lookup",
+     "what_it_says": "`game.folders.getName(\"Alien Tables\")`, `game.folders.contents.find((x) => x.name === \"Alien Creature Tables\")`, `game.folders.contents.find((x) => x.name === \"Alien Mother Tables\")` — the `type: \"RollTable\"` field on each entry is the folder's own type, not a lookup filter."
+    },
+    {
+     "claim": "Three register entries are T-SHIMMED (translated on purpose) and must NOT be treated as frozen",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json sections.name_lookups.tier_exception",
+     "what_it_says": "\"Entries carrying an `unfrozen_by_shim` block are T-SHIMMED, not T-FROZEN: they ARE translated in the shipped pack, and the English-keyed getName() is made to resolve by a runtime wrapper. Any gate that enforces 'frozen means byte-equal English' must skip those entries.\" The three are system.welcomeJournalEntry, system.releaseNoteName, starterset.welcomeJournalEntry."
+    },
+    {
+     "claim": "Renaming a RollTable without moving the Actor references that point at it kills the attack button with an unguarded TypeError",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json sections.actor_table_refs.consumers[1]",
+     "what_it_says": "`{\"code\": \"game.tables.contents.find((b) => b.name === targetTable)\", \"at\": \"systems/alienrpg/module/documents/actor.mjs:2497\", \"guard\": \"NONE — `table.roll({roll})` on the next lines throws TypeError if the name misses\", \"unguarded\": true}`"
+    },
+    {
+     "claim": "The 'None' sentinel is a value, not a document name, and is read from the register instead of hardcoded",
+     "file_line": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/DO-NOT-TRANSLATE.json sections.item_names.none_sentinel",
+     "what_it_says": "`{\"string\": \"None\", \"kind\": \"sentinel value, not a document name\", \"stored_in\": \"Actor system.rTables / system.cTables (creature type only)\", ...}`"
+    },
+    {
+     "claim": "The shipped CN files are already register-compliant, so the guard blocks nothing on real data — the freeze is a safety net against future drift, not a workaround",
+     "file_line": "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json and 2-新手包汉化插件/compendium/cn/alien-evolved-starterset.alien-evolved-starter-set.json",
+     "what_it_says": "Every frozen key maps to itself: `folders['Alien Tables'] → 'Alien Tables'`, `tables['Panic Response Table'].name → 'Panic Response Table'`, `scenes['Alien Evolved Starter Set'].name → 'Alien Evolved Starter Set'`. Gate group W asserts blocked.length === 0 on this data."
+    },
+    {
+     "claim": "Checkboxes in the dry-run dialog round-trip correctly, including unchecked ones",
+     "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/applications/ux/form-data-extended.mjs:187-196",
+     "what_it_says": "`if ( field.type === \"checkbox\" ) { ... return this.#castType(field.checked, dataType); }` — FormDataExtended walks form elements, so an unchecked box yields `false` rather than being absent."
+    },
+    {
+     "claim": "DialogV2 button callbacks receive the button element, so `button.form` is the right handle for reading the option checkboxes",
+     "file_line": "C:/Program Files/Foundry Virtual Tabletop/resources/app/client/applications/api/dialog.mjs:26-32, :124, :273",
+     "what_it_says": "`@param {HTMLButtonElement} button`; the class JSDoc example uses `callback: (event, button, dialog) => button.form.elements.choice.value`; and `const result = (await button?.callback?.(event, target, this)) ?? button?.action;`"
+    }
+   ],
+   "measurements": [
+    {
+     "what": "New QA gate result",
+     "value": "105 / 105 pass — groups G(27) 守卫编译 · C(22) 判据行为 · T(5) 真实 Babele 译文 · W(26) 端到端幂等 · S(14) 灵敏度 · P(11) 出货"
+    },
+    {
+     "what": "IDEMPOTENCE PROOF — simulated world built from the real raw pack dumps (Folder 20, Macro 4, RollTable 12, Item 60, Actor 13, JournalEntry 6, Scene 7, deduped by _id)",
+     "value": "pass 1: 106 renames + 193 content edits + 0 table-ref edits, 0 blocked, 0 skipped → apply → pass 2: 0 ops / 0 blocked / 0 skipped → apply → pass 3: 0 ops"
+    },
+    {
+     "what": "Match quality on that world",
+     "value": "matchedById 106+, matchedByName 0, unmatched 0 — every world document found its pack counterpart by _id, exactly as `keepId: true` predicts"
+    },
+    {
+     "what": "Guard compiled from the shipped register",
+     "value": "18 exact frozen names (Folder 3, RollTable 11, Adventure 3, Scene 2, JournalEntry 1 — the NBSP corerules string), 6 uppercase talent names, 1 RollTable prefix filter (`Critical Injuries`), 1 Item substring rule (3 operators), 3 T-SHIMMED entries excluded, 0 warnings"
+    },
+    {
+     "what": "Frozen names touched by the plan on real data",
+     "value": "0 — asserted directly (gate W), plus a post-apply re-check that all three hardcoded folder names and every present hardcoded table name are still byte-identical English"
+    },
+    {
+     "what": "Sensitivity (proof the guard is not a no-op)",
+     "value": "5 mutants, all caught: frozen Folder name translated → T-FROZEN/name block; frozen RollTable name translated → T-FROZEN/name block; `.toUpperCase()` talent name translated → T-FROZEN/uppercase block; table renamed → Actor system.rTables co-moves and converges to 0 on re-plan; single-pack drift on a shared _id → ambiguous-id-match block. In every case the corresponding op is absent from the plan, not merely flagged."
+    },
+    {
+     "what": "Cross-pack _id sharing (measured from the three raw dumps)",
+     "value": "system∩starterset: folders 4, tables 2 · system∩corerules: folders 5, tables 3 · starterset∩corerules: folders 11, tables 9, items 18, actors 4, scenes 1. All shared documents and all shared translations are currently byte-identical across packs, so the agreement rule never fires on today's data."
+    },
+    {
+     "what": "Owner-edit protection",
+     "value": "A hand-edited table result and a hand-renamed folder are both reported under 主动跳过 with a reason and are NOT overwritten; with `force: true` they are (both directions asserted)."
+    },
+    {
+     "what": "Refuse-to-run paths, verified end-to-end (not just at buildGuard)",
+     "value": "non-GM → throws; register fetch fails → throws and does not fall back to unguarded operation; register missing any of the 5 required sections → throws '拒绝运行'; register compiling to 0 frozen names → throws '判据空转'"
+    },
+    {
+     "what": "Shipped register integrity",
+     "value": "1-系统汉化插件/data/DO-NOT-TRANSLATE.json is SHA-256-identical to 7-其他内容/DO-NOT-TRANSLATE.json (156,196 bytes)"
+    }
+   ],
+   "files_written": [
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\scripts\\retranslate-world.mjs",
+     "what": "NEW — the repair tool. Pure planning layer (buildGuard / checkRename / indexTranslationFile / planRetranslation / hasCJK / rangeKey / reportToMarkdown) touches no Foundry global and is importable in node; Foundry layer does collection, apply, dialog, chat/console reporting, and registration. Registered on `init` as a GM-restricted settings menu plus `game.modules.get('alienrpg-cn').api.{retranslateWorld, openRetranslateDialog, reportToMarkdown, registerRepairSource, lastReport}`."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\data\\DO-NOT-TRANSLATE.json",
+     "what": "NEW — byte-identical copy of the project's frozen-name register, shipped so the tool can fetch it at runtime. Not gitignored; will be committed."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\module.json",
+     "what": "EDITED — added `scripts/retranslate-world.mjs` to `esmodules`. Version deliberately left at 0.2.1 (release cadence is the owner's call)."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\README.md",
+     "what": "EDITED — new operator section 「🛠 重新汉化本世界」 covering: when to use it, the upstream root cause with file:line, an explicit warning that a fresh world can hit it again and the tool is idempotent, a coverage table, an explicit not-covered list, the frozen-name guard and its refuse-to-run rule, the report/rollback surface, the scripting API, and the gate command. Also two new rows in the Contents table and a Development-section note that changing the project register REQUIRES copying it into `1-系统汉化插件/data/`."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\1-系统汉化插件\\.github\\workflows\\release.yml",
+     "what": "EDITED — new step 'Assert the shipped DO-NOT-TRANSLATE register is intact' (non-empty, JSON object, schema_version==1, all five required sections have ≥1 entry — because an empty-but-present register makes the tool silently refuse to run), and added `scripts/retranslate-world.mjs` + `data/DO-NOT-TRANSLATE.json` to the existing must-be-in-the-zip assertion. YAML re-validated (12 steps)."
+    },
+    {
+     "path": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\4-常用脚本\\qa\\gate_retranslate_world.mjs",
+     "what": "NEW — 105-check gate. Boots Foundry's real `common/utils` + `constants` and Babele 2.9.1's real ConverterRegistry / DocumentMappings / MappedCompendiums, translates the real raw pack dumps with the project's own registered mapping layer, then runs plan → apply → re-plan against a simulated world built from those dumps. Run with `node \"4-常用脚本/qa/gate_retranslate_world.mjs\"`."
+    }
+   ],
+   "open_issues": [
+    "NOT VERIFIED IN A LIVE FOUNDRY. Everything pure was executed headlessly; the Foundry-only layer (collectSources / snapshotWorld / applyPlan / DialogV2 flow / settings-menu launch) was verified by reading the installed v14.366 source and following crucible-cn's working precedent, not by running it. The owner's world is on a VPS I cannot reach. First live run should be on a backup, dry-run first.",
+    "PRE-EXISTING RED, not caused by this work, but it touches the register this tool depends on: `node \"4-常用脚本/qa/adversarial_hardcoded_patch.mjs\"` currently fails 13 checks in its S group. Concretely, `sections.name_lookups.shimmed_count` says 2 while 3 entries actually carry `unfrozen_by_shim`, and several `installer_at` / `installed_at` / `pairs_declared_at` line citations no longer resolve in scripts/alienrpg-hardcoded-cn.mjs. Both that gate and 7-其他内容/DO-NOT-TRANSLATE.json were already dirty in git before I started and I edited neither. My tool reads the entries themselves (3 shimmed, handled correctly) and never reads `shimmed_count`, so it is unaffected today — but if that desync is 'fixed' by dropping the starterset shim entry rather than by correcting the count, `STARTER SET - HOW TO USE THIS MODULE` becomes frozen and the tool will start reporting that journal's rename under 被冻结挡住. That would be visible, not silent.",
+    "Version not bumped. module.json still says 0.2.1 and its `download`/`changelog` URLs still point at v0.2.1; the release workflow enforces module.json version == tag, so shipping this needs a coordinated bump of all three.",
+    "Coverage gap, documented rather than closed: Item and Actor BODY text (descriptions, notes, talent text) is not repaired — only names. On the owner's world those fields are presumably still English for the same reason the table results are. Closing it means either reimplementing Babele's variant-aware mapping resolution at runtime (risky, silent-wrong-field failure mode) or introspecting `game.babele.inspectMapping()` (untested surface). The README points at the Adventure importer for a full refresh and states plainly that it overwrites edits.",
+    "`data/DO-NOT-TRANSLATE.json` is a manual copy. The release workflow can only check its shape (CI has one checkout); byte-identity with 7-其他内容/ is enforced only by the local gate's P group. A pre-commit hook or a copy step in the release script would close that.",
+    "The name-fallback path finds a pack's translation file by assuming the CN module is named `<translated package id>-cn`. True for all three modules today and verified against their manifests, but a differently-named future module silently loses that fallback — mitigated by an explicit warning in the report and `api.registerRepairSource()`, not by detection.",
+    "Partial-failure window: if the RollTable rename succeeds and the following Actor-reference update throws, the world is briefly in the state that breaks the attack button. The tool detects nothing automatically; it reports the failure prominently (red block in the dialog, red line in chat) and tells the GM to re-run immediately — which works because the reference repair is independent and idempotent. With the current CN files zero table renames are planned, so this window does not open today."
+   ]
+  }
+ ],
+ "verify": {
+  "verdict": "The DIAGNOSIS survives; the MACRO did not. I independently reproduced the root cause through Babele's own public API (`Babele.create()` → `register()` → `session()` → `translatedCompendiumFor().translate()`, i.e. the exact call `wrapper.js:96` makes) rather than the prior phase's hand-assembled internals, and got the same answer: folder names 4/7 Chinese, macros 4/4 Chinese, journal Chinese, tables English-because-the-CN-file-says-so. The read path is not broken, the source-normalising shim is correctly refused, and the `showReleaseNotes()` asymmetry checks out at `alienrpg.mjs:567-621`. But the repair tool that shipped on top of that diagnosis had four real defects, one of them destructive, all invisible to its own 105-check gate because that gate models a two-pack world while every real install has three. In the actual environment the tool recovered 172 of the 322 operations it should have (32 blocked, 95 skipped) — and with the `force` box ticked while Babele was inactive it would have rewritten 104 Chinese names and 190 content fields back to English with no undo. All four are fixed, each pinned by a mutation-tested check in a new gate group R (24→29 checks); gate now 134/134, the other three gates unchanged (115/0, 57/0, 422/12 pre-existing baseline).",
+  "refuted_claims": [
+   {
+    "claim": "\"IDEMPOTENCE PROOF … pass 1: 106 renames + 193 content edits + 0 table-ref edits, 0 blocked, 0 skipped\" and \"All shared documents and all shared translations are currently byte-identical across packs, so the agreement rule never fires on today's data.\"",
+    "why_wrong": "That measurement was taken in a world containing only two of the three Adventure packs that are actually installed. `alien-evolved-corerules` is installed (module.json declares pack `alien-evolved-core-rules`, type Adventure) and `3-核心书汉化插件/compendium/cn/` is EMPTY, so Babele returns its documents untranslated. Because the three packs deliberately share `_id`s, that untranslated pack casts an \"English original name\" vote on every shared id, and `agreeOn` treats abstention as dissent. On today's data the agreement rule fires 32 times.",
+    "evidence": "gate_retranslate_world.mjs loads only `6-工作区/raw-dumps/system.json` (:74) and `starterset.json` (:75) — `corerules.json` sits in the same directory and is never read, though the gate's own comment at :267 cites `starterset∩corerules` id sharing. Measured with real Babele over all three dumps: system+starterset → 301 ops / 0 blocked / 0 skipped; all three → 172 ops (74 name + 98 content) / 32 blocked / 95 skipped. Every block is rule `ambiguous-id-match` with a \"conflict\" like `\"异形子表 / Alien Sub-Tables\"` — the second half is just corerules' untranslated read. Provenance dump for folder `w3xO69hCmTtYDF8d`: system→异形子表, starterset→异形子表, corerules→\"Alien Sub-Tables\" (no CN file)."
+   },
+   {
+    "claim": "\"Refuse-to-run paths, verified end-to-end (not just at buildGuard): non-GM → throws; register fetch fails → throws …; register missing any of the 5 required sections → throws; register compiling to 0 frozen names → throws\"",
+    "why_wrong": "The list omits the only path that can destroy data. With no pack translation in effect (Babele disabled, language not cn, or the CN module off) the packs read back as English; the `force` checkbox — present in the dialog — bypasses the \"skip if the current value already contains CJK\" protection, and the tool rewrites an already-localized world back to English. It only warned; it did not refuse.",
+    "evidence": "Measured against a Chinese world built from the real translated dumps, fed the raw English dumps: `force:false` → 2 ops; `force:true` → 296 ops, of which 104 are name renames Chinese→English (异形子表→Alien Sub-Tables, 职业→Careers, 技能炫技→Skill-Stunts …) and 190 are content fields reverted. `retranslate-world.mjs` only did `report.warnings.unshift(...)` for both `untranslated.length` and `!game.modules.get(\"babele\")?.active`; neither gated `apply` or `force`."
+   },
+   {
+    "claim": "\"Match quality on that world: matchedById 106+, matchedByName 0, unmatched 0 … The name path still exists because the task asked for it\" — offered as evidence the name fallback is harmless. The README states it flatly: \"按英文名（补）—— **只用于**世界里那些被手工删掉重建、id 已经对不上的文档.\"",
+    "why_wrong": "matchedByName was 0 only because the simulated world contained nothing but documents from those packs. `snapshotWorld()` returns every world document of the seven covered types, and the fallback's sole criterion was an English-name match against the CN file. Any folder a GM or another module created with a colliding name was renamed. The names in play are not exotic: `Weapons`, `Creatures`, `Careers`, `Combat Knife`.",
+    "evidence": "Fixture with seven foreign documents carrying fresh `_id`s: Folder `Careers`→职业, `Weapons`→武器, `Creatures`→生物, `Alien Evolved`→异形进化版, Item `Combat Knife`→战斗刀 Combat Knife, Actor `EV - Drone (Stage IV Xenomorph)`→工蜂异形（第四阶段异形）…, JournalEntry `MU/TH/ER Instructions.`→MU/TH/ER 使用说明. 7 of 7 renamed, all via `match=\"name\"`, with `nameFallback` defaulting to true."
+   },
+   {
+    "claim": "`babeleTranslated: game.babele?.isTranslated?.(pack) ?? null` at retranslate-world.mjs:732, used to warn \"Babele 报告这些包**没有译文生效**\"",
+    "why_wrong": "`isTranslated` takes a compendium-id STRING, not a CompendiumCollection object. The object flows into `MappedCompendiums.get(pack)` → `this.packs.get(pack)` on a Collection (a Map keyed by strings) → undefined → false. Every pack was reported untranslated on every run, so the warning fired on a perfectly healthy world — the exact opposite of the truth, and it trained the GM to ignore the one message that mattered for the destructive path above.",
+    "evidence": "babele/script/babele.js:552-559 `@param {string} pack compendium name (ex. dnd5e.classes)`; mapped-compendiums.js:49-51 `get(pack) { return this.packs.get(pack) ?? null; }`. Executed headlessly against a loaded session: `isTranslated(\"alienrpg.alien-rpg-system\")` → true; `isTranslated(<pack object>)` → false. The correct value `collection` was already computed two lines above in the same scope."
+   },
+   {
+    "claim": "\"Explicitly NOT covered: … TableResult `name` … goes through Babele's `referencedDocumentField` converter — its value is resolved live from the referenced document, so writing it in place would freeze a dynamic value into a snapshot.\" (repeated verbatim in the README)",
+    "why_wrong": "That converter's FIRST precedence is the local translation payload; it only resolves through `documentUuid` when the local payload has nothing to say. Our CN files do supply translated result names, so the value Babele returns is a static translation, not a live lookup. The blanket exclusion dropped a whole class of already-translated content for a hazard that does not occur anywhere in the corpus.",
+    "evidence": "babele/script/converter/referenced-document-field-converter.js:15-17 `if (typeof context.translation !== \"undefined\" && context.translation !== null) { return context.translation; }` — the UUID path at :24-39 is only reached afterwards. Measured over the two translated packs (155 TableResults): 43 have a Chinese name in the pack, and 0 of those 43 carry a `documentUuid`; the entire corpus contains 2 results with a `documentUuid` and neither has a translated name. The CN file itself shows the static data, e.g. `tables[\"Panic Table\"].results[\"0-0\"] = {\"name\": \"镇定\", \"description\": \"<p>无效果。</p>\"}`."
+   },
+   {
+    "claim": "\"Frozen names touched by the plan on real data: 0 — asserted directly (gate W)\" — presented as proof the DO-NOT-TRANSLATE guard protects the world.",
+    "why_wrong": "True but vacuous. All 15 frozen names present in the world are already no-ops: the CN files map each to itself, so `target === doc.name` and the code returns before `checkRename` is ever consulted. The assertion would still pass with the guard deleted. It is the same shape as the project's Map Pins 60.8% error — a number measured on data that cannot express the failure.",
+    "evidence": "Pass-1 census over the real world: every one of the 15 present frozen names shows `renamedOps=0 blocked=0` — zero blocks, meaning the guard never ran on any of them. I built the missing provoked test: inject a world document plus a pack entry proposing a translated name for each of the 28 frozen constraints (17 exact names across JournalEntry/Scene/RollTable/Folder, 9 uppercase talent spellings, 1 `Critical Injuries` prefix case, 1 ` RPG ` substring case) → 28 blocked, 0 leaked, with rules T-FROZEN/name, T-FROZEN/uppercase, T-FROZEN/prefix, T-FROZEN-SUBSTRING. The guard is sound; it simply had never been exercised."
+   }
+  ],
+  "missed_items": [
+   {
+    "what": "The owner's reported symptom is only two-thirds repairable, and the README promises otherwise. The three RollTable names (`Panic Table`, `Panic Response Table`, `Stress Response Table`) stay English after a perfect run — `entries[…].tables.*.name` in the CN file maps each to its own English string, and they are additionally frozen in `rolltable_names`. The prior phase logged this in open_issues but the README's \"什么时候需要它\" section still said \"文件夹 / 宏 / 随机表还是英文名 … 两种都用它修\".",
+    "where": "1-系统汉化插件/compendium/cn/alienrpg.alien-rpg-system.json (entries['Alien RPG System'].tables) and 1-系统汉化插件/README.md 「什么时候需要它」",
+    "why_matters": "The owner named the three roll tables as part of the bug. Running the tool and finding them unchanged reads as \"the fix failed\", which invites re-running with `force` — the one destructive setting. Now stated up front: 6 of the 9 reported items are repairable, the 3 table names are not, and their result bodies are."
+   },
+   {
+    "what": "`PROJECT_CONVERTERS` is an empty object while `DOCUMENT_MAPPINGS` references the converter `alienRollTableRef` for `system.rTables` / `system.cTables`. Babele fails open (`field-mapping.js:236-238`), logging one warn line per document and silently leaving those fields untranslated.",
+    "where": "1-系统汉化插件/babele-mappings.js:37 (`export const PROJECT_CONVERTERS = {};`) — surfaced live in every headless run as `Babele | missing converter 'alienRollTableRef' … field skipped`",
+    "why_matters": "Not a regression I introduced and the project's own self-check in register.js:151-169 does warn about exactly this class, so it is flagged rather than hidden. Recorded here because the repair tool's `tableRef` lockstep path is currently compensating for it, and if the converter is ever supplied the two mechanisms will both be writing the same field."
+   },
+   {
+    "what": "The dry-run failure dialog's explanatory footnote named only one refusal reason (\"硬冻结登记表读不到\"), so the new \"no pack translation in effect\" refusal would have surfaced as an unexplained error.",
+    "where": "1-系统汉化插件/scripts/retranslate-world.mjs, openRetranslateDialog catch block (~:1226-1234)",
+    "why_matters": "A refusal the operator cannot interpret gets worked around rather than acted on. Both reasons are now listed with what each means for the world."
+   },
+   {
+    "what": "The gate's own `applyToFakeWorld` helper wrote every `kind:'result'` op into `description` regardless of `op.path`. Harmless while only `description` was produced, but it would have silently corrupted the world model the moment a second result field was added — and then shown up as a phantom idempotence failure rather than as a helper bug.",
+    "where": "4-常用脚本/qa/gate_retranslate_world.mjs, applyToFakeWorld",
+    "why_matters": "This is the failure mode the gate's own comment at :272 warns about (\"那是**模型不对**，不是工具的错\"). Fixed to dispatch on `op.path` in the same change that added TableResult name repair."
+   }
+  ],
+  "fixes_applied": [
+   "ROOT CAUSE RE-DERIVED INDEPENDENTLY, NOT TAKEN ON TRUST. Built a second harness (scratchpad/adv/boot.mjs) that drives Babele 2.9.1 through its OWN public API — `Babele.create({translationSources, registerConfiguredDirectory:false})` → `babele.register({module:'alienrpg-cn',lang:'cn',dir:'compendium/cn'})` → `await babele.session({language:'cn'})` → `session.translatedCompendiumFor(collection).translate(source)`, which is verbatim what `foundry/wrapper.js:96` does — with `FilePicker.browse` and the JSON loader bridged to the real filesystem, instead of hand-assembling ConverterRegistry/DocumentMappings/MappedCompendiums as the prior phase did. Result reproduces: folders `[Alien Tables, Alien Creature Tables, Alien Mother Tables, 异形子表, 异形宏, 技能炫技, 职业]`, macros 4/4 Chinese, journal 「MU/TH/ER 使用说明」 with Chinese page text, tables 3/3 English. The diagnosis stands and the read path is not broken.",
+   "SHIM CONFIRMED CORRECTLY REFUSED. Re-derived the two mechanism facts myself: `nameCollection` is `fieldCollection(\"name\")` (converters.js:176 → :99-127) whose entire body is a `translations[data[field]]` lookup and never touches `_stats.compendiumSource`; and `_sourceCollection` (document-converter.js:538-540) has exactly one call site, `:437` inside `_exactSourceTranslationSource`, a FALLBACK layer, while `currentPayload` — the local name-keyed layer — is merged second and wins (`:300`). A source-normalising shim cannot affect folder names even in principle, and cannot affect macro/table names because the local layer already covers them. Not shipping it was right.",
+   "FIX 1 — `isTranslated` argument. retranslate-world.mjs `collectSources()` now passes the collection-id string (`isTranslated?.(collection)`) instead of the CompendiumCollection object, and falls back to a hard `false` when the babele module is inactive (`const babeleActive = !!game.modules?.get?.('babele')?.active`) rather than to `null`. Verified: string → true, object → false, against a live session. Comment cites babele.js:552-559 and mapped-compendiums.js:49-51.",
+   "FIX 2 — untranslated packs no longer veto. `planRetranslation` partitions sources into `voting` (`babeleTranslated !== false`) and `muted`, and uses `voting` for id hits, name candidates, the RollTable lockstep map and the missing-translation-file warning; muted packs are named in the report. A pack with no translation reads back as English, which is an abstention, not a dissenting translation. Real 3-pack world: 172 ops / 32 blocked / 95 skipped → 299 ops / 0 blocked / 3 skipped (+127 recovered).",
+   "FIX 3 — the destructive path is now a hard refusal. `retranslateWorld()` throws when at least one Adventure pack exists and none of them has a translation in effect, instead of pushing a warning and proceeding. Falls out of FIX 2 as well (empty voting pool ⇒ zero ops), so the refusal and the planner agree. Re-measured: Babele off + `force:true` → 0 ops, where the shipped version produced 296 ops including 104 Chinese→English renames and 190 reverted content fields. The dry-run dialog's failure text now explains both refusal reasons.",
+   "FIX 4 — the name fallback can no longer rename other people's documents. Two conditions, either of which skips (and records a reason in 主动跳过): (a) the English name is already claimed by a document matched via `_id`; (b) the intended Chinese target is already worn by a different world document. Condition (a) alone was not enough — it holds on pass 1 but dissolves once the rightful owner is renamed, and pass 2 then produced 2 late renames (Folder 「Alien Evolved」, Item 「Reckless」); (b) covers pass 2 onward. Foreign fixture: 7/7 renamed → 0/7 renamed. Intended use case preserved: a hand-rebuilt `Careers` with no id twin is still repaired to 职业 (`matchedByName: 1`).",
+   "FIX 5 — TableResult.name is now repaired when it is safe to. The blanket exclusion is replaced by the precise one: skip only results carrying a `documentUuid` (world side or pack side), because that is the only case where the converter resolves live. `snapshotWorld()` now carries `name` and `documentUuid` on result rows. +23 content ops in the real 3-pack world (193 → 216), still idempotent. Sensitivity check: attach a `documentUuid` to one result and its name op disappears while its description op is untouched.",
+   "GATE — new group R, 29 checks, added to gate_retranslate_world.mjs; total 105 → 134, all green. It loads corerules.json and models the real three-pack world; asserts 0 blocked, correct `votingPacks`, three-pass idempotence, the owner's symptom (Careers/Skill-Stunts/4 macros repaired, 3 table names explicitly NOT), foreign documents untouched but reported, the hand-rebuilt fallback still live, the force/Babele-off refusal, the TableResult documentUuid rule, and source pins on `isTranslated?.(collection)` (comment lines stripped first, since the explanatory comment quotes Babele's own `isTranslated?.(pack)`) plus the two upstream contracts it depends on.",
+   "GATE SENSITIVITY — every new assertion carries its own inverted control inside group R, so it cannot pass vacuously: give the untranslated pack a vote → blocks reappear; drop `babeleTranslated` to null on English sources → Chinese-to-English reverts reappear; attach a documentUuid → the name op vanishes. Confirmed by external mutation: removing the vote filter turns 5 checks red, removing the claim check turns 2 red, and restoring the file returns 134/134.",
+   "GATE HELPER — `worldFromRaw` in the gate now carries `name`/`documentUuid` on results and `applyToFakeWorld` dispatches on `op.path` instead of hardcoding `description`, so result-name ops are applied to the right field.",
+   "README — three corrections. (1) A callout up front that the three roll table names cannot be repaired (their `tables.*.name` map to themselves in the CN file and they are frozen), that their result bodies can, and that 6 of the 9 typical symptoms are fixable. (2) The name-fallback section now documents both narrowing conditions and the untranslated-pack mute, with the 172/32/95 → 299/0/3 measurement. (3) A new ⛔ section on the refuse-to-run rule, the 104-names/190-fields revert it prevents, and why a warning alone was insufficient given the isTranslated bug. The TableResult exclusion is restated as \"only results carrying documentUuid\", with the converter's precedence order and the 43/43 and 2-in-corpus measurements.",
+   "REGRESSION CHECK — gate_retranslate_world 134/134; test_hardcoded_patch 115/0; gate_plugin_lang 57/0; adversarial_hardcoded_patch 422 PASS / 12 FAIL, byte-identical to the pre-existing baseline (stale name_lookups registry pins), and I edited neither that gate nor alienrpg-hardcoded-cn.mjs. Also verified: two-EN-to-one-CN collisions still rename both and emit the naming warning (non-destructive, Foundry permits duplicates); an already-Chinese name is untouched; an owner's own rename is preserved unless `force`; all files remain LF-only."
+  ]
+ }
+}

@@ -1,0 +1,29 @@
+{
+  "label": "特性\nFeatures",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Mushie": "蘑菇仔\nMushie",
+    "Will-o'-Wisp": "鬼火\nWill-o'-Wisp"
+  },
+  "entries": {
+    "Glow": {
+      "name": "辉光 Glow",
+      "description": "<p>你的身体散发出稳定的光辉。你在20尺半径内发出明亮光照（并在接下来的20尺内提供昏暗光照），其颜色由你选择。你可以花费一个专注动作来抑制这道光、重新点燃它，或改变其颜色。</p>\n<p>Your body emits a steady glow. You shed bright light in a 20-foot radius (and dim light for the next 20 feet) in a color you choose. You can spend a concentrate action to suppress the light, rekindle it, or change its color.</p>"
+    },
+    "Fungal Diet": {
+      "name": "真菌食性 Fungal Diet",
+      "description": "<p>大多数蘑菇人靠食用腐烂的有机物维生，但他们也可以食用几乎为任何族裔配制的食物。有些传承会赋予额外的饮食选择。</p>\n<p>Most mushies sustain themselves by consuming decaying organic matter, but they can also eat food formulated for almost any ancestry. Some heritages grant additional dietary options.</p>"
+    },
+    "Light Source": {
+      "name": "光源 Light Source",
+      "description": "<p>作为鬼火，你的光可能源自噼啪作响的火焰，或源自原始的闪电。选择火焰或电击。你的一些族裔专长会根据你所选择的光源授予能力。基于你光源的能力会获得火焰或电击（特征）特征。</p>\n<p>As a will-o'-wisp, your light might originate from crackling flames or from raw lightning. Choose either fire or electricity. Some of your ancestry feats grant abilities based upon the light source you choose. Abilities that are based on your light source gain either the fire or electricity trait.</p>"
+    },
+    "Wispy Form": {
+      "name": "缥缈形态 Wispy Form",
+      "description": "<p>在你的自然形态下，你是一颗光之球体。你可以花费1个动作，并带有专注（特征），在该球体形态与一种次要形态之间切换；该次要形态会拟态为一种常见族裔的外形。当你陷入@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}时，你会恢复为你的球体形态；否则，你会保持你的次要形态，直到你花费一个动作恢复为球体形态。你的次要形态是独特且一眼就能认出是你，尽管你每次采取次要形态时都可以改变诸如颜色、发型、服装与配饰等特性。</p>\n<p>In your natural form, you are a sphere of light. You can spend 1 action with the concentrate trait to change between this ball form and a secondary form that mimics the shape of a common ancestry. When you fall @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, you revert to your ball form; otherwise, you retain your secondary form until you spend an action to revert to it. Your secondary form is unique and recognizably you, though you can change features like color, hairstyle, clothing, and accessories each time you take on your secondary form.</p>"
+    }
+  }
+}

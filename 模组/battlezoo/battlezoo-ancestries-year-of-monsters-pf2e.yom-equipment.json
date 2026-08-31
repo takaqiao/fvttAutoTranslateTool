@@ -1,0 +1,35 @@
+{
+  "label": "装备\nEquipment",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Minotaur": "牛头人\nMinotaur",
+    "Slime": "黏液怪\nSlime",
+    "Mimic": "拟形怪\nMimic",
+    "Oni": "恶鬼（特征）\nOni"
+  },
+  "entries": {
+    "Oni Tetsubo": {
+      "name": "恶鬼铁棒 Oni Tetsubo",
+      "description": "<p>恶鬼铁棒专为大幅度的横扫挥击打造，甚至比巨木棒或普通铁棒更甚；其上的金属钉旨在提升对抗护甲与盾牌时的破坏潜力。恶鬼铁棒是一把罕见的进阶近战武器，属于棍棒武器组，造成 @Damage[1d10[bludgeoning]] 伤害，并具有回摆、破拆与横扫特征。当回摆与横扫特征都将其环境加值应用于一次攻击掷骰时（例如在攻击未命中后更换目标），该环境加值提升至+2。</p>\n<p>An oni tetsubo is built for large, sweeping swings, even more so than a greatclub or an ordinary tetsubo, with metal studs intended to increase the destructive potential against armor and shields. An oni testubo is an uncommon advanced melee weapon in the club weapon group that deals @Damage[1d10[bludgeoning]] damage and has the backswing, razing, and sweep traits. When both the backswing and sweep trait apply their circumstance bonus to an attack roll (such as when changing targets after missing an attack), the circumstance bonus increases to +2.</p>"
+    },
+    "Minotaur Mazeaxe": {
+      "name": "牛头人迷宫巨斧 Minotaur Mazeaxe",
+      "description": "<p>牛头人迷宫斧的柄与刃上蚀刻着蜿蜒的迷宫般纹路，以增强武器的握持与空气动力学性能，辅助使用斧头绊摔敌人，并契合牛头人的审美。牛头人迷宫斧是一把不常见的高级近战武器，属于斧类武器组，造成1d12挥砍伤害，并具有横扫与绊摔特征。</p>\n<p>A minotaur mazeaxe has twisting maze-like patterns etched along the handle and blade in a way that enhances the weapon's grip and aerodynamics, assists in using the axe to trip foes, and appeals to the aesthetics of minotaurs. A minotaur mazeaxe is an uncommon advanced melee weapon in the axe weapon group that deals 1d12 slashing damage and has the sweep and trip traits.</p>"
+    },
+    "Chitin": {
+      "name": "几丁质 Chitin",
+      "description": "<p>你已学会用更厚的几丁质强化你的所有形态，即使你仍看起来像一件普通的物体。你的几丁质是一套板甲组的中型护甲，在AC上提供+4物品加值，敏捷上限为+1，检定减值为–2，速度减值为–5尺，力量值为16。你永远不能穿戴其他护甲或移除你的几丁质；不过，你仍不会因睡眠而陷入 @Compendium[pf2e.conditionitems.Fatigued]{Fatigued}。最后，你可以如常在你的几丁质上蚀刻护甲符文。</p>\n<p>You've learned to reinforce all your forms with thicker chitin, even while you still appear like an ordinary object. Your chitin is medium armor in the plate armor group that grants a +4 item bonus to AC, a Dex cap of +1, a check penalty of –2, a speed penalty of –5 feet, and a Strength value of 16. You can never wear other armor or remove your chitin; however, you still don't become @Compendium[pf2e.conditionitems.Fatigued]{Fatigued} from sleeping. Finally, you can etch armor runes onto your chitin as normal.</p>"
+    },
+    "Water Garment": {
+      "name": "水之衣裳 Water Garment",
+      "description": "<p>虽然所有水夜叉都能用水塑造成衣物，并且常常做成和服的样式，但你已将你的水之衣精炼得足够强大，能够保护你免受伤害。你的衣物给予你AC+1物品加值，且敏捷加值上限为+4。你在你的衣物上受训；它不使用你的护甲或无甲熟练度。从第7等级开始，若你的无甲熟练度更高，你可以改用无甲熟练度。此外，你可以在你的衣物上铭刻基础与特性符文。若你这么做，效力符文会提高你衣物的AC物品加值，就如同它们通常对护甲所做的那样。你也可以将一枚护符附着在你的衣物上。若你穿着任何种类的护甲，你衣物上的基础与特性符文不会运作；并且若你在衣物上附着着护符时穿上带有附着护符的护甲，则两枚护符都会停止运作，且你必须重新附着它们。如同探险者服装，你的衣物不是护甲，因此你不能铭刻那些指定特定护甲类型的特性符文，例如轻型护甲或重型护甲。</p>\n<p>While all water yai can form garments out of water, and often do so in the form of a kimono, you've refined your water garment to be powerful enough to protect you from harm. Your garment grants you a +1 item bonus to AC, and a maximum Dexterity bonus of +4. You are trained in your garment; it doesn't use your armor or unarmored proficiencies. Starting at 7th level, you can use your unarmored proficiency if it's better. Furthermore, you can inscribe fundamental and property runes onto your garment. If you do, potency runes increase your garment's item bonus to AC, just as they normally do for armor. You can also affix a talisman to your garment. If you wear armor of any kind, your fundamental and property runes on your garment don't function, and if you don armor with an affixed talisman while a talisman is affixed to your garment, both talismans cease to function and you must affix them again. Like explorer's clothing, your garment isn't armor, so you can't inscribe property runes that specify a particular type of armor, such as light armor or heavy armor.</p>"
+    },
+    "Metal Slime body": {
+      "name": "金属黏液怪身体 Metal Slime body",
+      "description": "<p>你的黏液怪身体转化为液态金属，使你能够抵御各类攻击。你的金属黏液怪是一套板甲护甲组的中甲，给予AC +4物品加值，敏捷上限+1，检定减值–2，速度减值–5英尺，以及力量值16。你永远无法穿戴其他护甲，也无法移除你的金属黏液怪；然而，即使穿着这套护甲睡觉，你仍不会因此陷入@Compendium[pf2e.conditionitems.Fatigued]{Fatigued}。最后，你可以照常在你的金属黏液怪上蚀刻护甲符文。</p>\n<p>Your slime body transforms into liquid metal, allowing you to fend off all sorts of attacks. Your metal slime is medium armor in the plate armor group that grants a +4 item bonus to AC, a Dex cap of +1, a check penalty of –2, a speed penalty of –5 feet, and a Strength value of 16. You can never wear other armor or remove your metal slime; however, you still don't become @Compendium[pf2e.conditionitems.Fatigued]{Fatigued} from sleeping in this armor. Finally, you can etch armor runes onto your metal slime as normal.</p>"
+    }
+  }
+}

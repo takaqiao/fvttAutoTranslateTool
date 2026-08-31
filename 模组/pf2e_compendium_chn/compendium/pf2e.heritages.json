@@ -1,0 +1,1409 @@
+{
+    "label": "族裔传承 Heritages",
+    "entries": {
+        "Aasimar": {
+            "name": "神裔 Aasimar",
+            "description": "<p>你是天界生物的后裔，或被某个天界位面所浸染，因此浑身散发著威严与优雅，身上也有些彰显你天界血脉的特性。除了你族裔的特征外，你还额外获得神裔特征。你获得 @UUID[Compendium.pf2e.ancestryfeatures.Item.DRtaqOHXTRtGRIUT]{昏暗视觉 Low-Light Vision} ，若你的族裔已有昏暗视觉，则改为获得 @UUID[Compendium.pf2e.ancestryfeatures.Item.HHVQDp61ehcpdiU8]{黑暗视觉 Darkvision} 。你在选取族裔专长时，能选取神裔专长或原族裔的专长。</p>"
+        },
+        "Adaptive Anadi": {
+            "name": "融合半蛛人 Adaptive Anadi",
+            "description": "<p>你的血脉来自一支古老的半蛛人，他们努力钻研他们的变形魔法，这让他们更广泛地融入了不同文化之中。选一个常见的、中型类人生物族裔。你的人类形态被所选的族裔取代。你同样会获得和你选择的种族相匹配的 @UUID[Compendium.pf2e.feats-srd.Item.ihN8gkHSdPG9Trte]{异族情谊 Adopted Ancestry} 专长。</p>"
+        },
+        "Ancient Elf": {
+            "name": "古代精灵 Ancient Elf",
+            "description": "<p>在你漫长的生命中，你曾涉猎过许多道途亦尝试过诸多流派。一个典型的古代精灵岁数至少得有100岁，但根据GM的决断，你也可以比这更加年轻一些。选择你职业以外的另一个职业。你获得该职业的兼职入门专长，哪怕你并不满足它的等级先决条件。你仍需满足其他的先决条件以获取此专长。</p>"
+        },
+        "Ancient Scale Azarketi": {
+            "name": "古鳞阿扎克缇人 Ancient Scale Azarketi",
+            "description": "<p>你的血统源自忠于深海的阿扎克缇人。与陆地社会分离后，任何高于千米深度的世界对你而言都是陌生的。你获得黑暗视觉。</p>\n<p>磷光斑分布于你的身上，通过发出引导性的光帮助你交流。这些斑点主要分布在你的面部、手臂和手部，以昏暗的光线照亮你周围10尺的范围。你可以通过一个动作来激活、停用或改变灯光的排列，这动作具有专注特征。</p>"
+        },
+        "Ancient-Blooded Dwarf": {
+            "name": "远古血脉矮人 Ancient-Blooded Dwarf",
+            "description": "<p>古老的矮人英雄可以轻易摆脱敌人的魔法，此等韧性在你的身上有所显现。你获得@UUID[Compendium.pf2e.actionspf2e.Item.8w6esW689NNbbq3i]{唤醒血脉 Call on Ancient Blood}反应动作。</p>"
+        },
+        "Ant Gnoll": {
+            "name": "微蚁鬣狗人 Ant Gnoll",
+            "description": "<p>你是个约三尺高，面部轮廓分明的大耳朵鬣狗人。许多人怀疑你实际上并非鬣狗人。你的体型是小型而非中型。你在欺骗上的熟练度达到受训（或其他一项技能，若你已在欺骗上受训）。你通过说谎以装无辜进行的欺骗检定，或在对抗试图发现你谎言的察言观色（Sense Motive）检定的欺骗DC，或使用欺骗技能进行的先攻检定中获得+1环境加值。</p>\n<hr />\n<p><em>备注:如果你在此专长获得的技能已受训，你可以选择自己选择一个其它技能来替代。</em></p>"
+        },
+        "Anvil Dwarf": {
+            "name": "铁砧矮人 Anvil Dwarf",
+            "description": "<p>你是著名匠人的后代，并且自己也拥有惊人的才华。取决于你成长的地方，其他矮人可能会认为这是你祖先或锻造之父的祝福。你受训于手艺（如果你已经受训于手艺，则选择另一项技能），并获得 @UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{专门制作 Specialty Crafting} 技能专长，并且你可以选择两个不同的专攻方向，而非一个。</p>"
+        },
+        "Aphorite": {
+            "name": "公理裔 Aphorite",
+            "description": "<p>你生来就与秩序位面——轴心枢纽有着联系。你不仅获得你族裔的特征，还获得公理裔特征。你获得昏暗视觉，或者当你的族裔已经给予了你昏暗视觉，则获得黑暗视觉。每当你获得族裔专长，你可以在公理裔专长和你的族裔的专长中选取。</p>"
+        },
+        "Arctic Elf": {
+            "name": "极地精灵 Arctic Elf",
+            "description": "<p>你常年居住在寒冷的北方并且获得了对于寒冷环境不可思议的抵抗力。你获得等同于你等级一半（最小为1）的寒冷抗力。环境的寒冷效果对你而言视作减轻一级（酷寒incredible cold视为极寒extreme cold，极寒视为严寒severe cold，以此类推）。</p>"
+        },
+        "Artisan Android": {
+            "name": "创造型仿生人 Artisan Android",
+            "description": "<p>你的身体最初被设计来创造艺术作品，复杂的工具，或维护先进的机械。你在手艺技能上受训（或者其他技能，如果你已经在手艺技能上受训），同时你获得所选专攻的 @UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{专门制作 Specialty Crafting} 技能专长。</p>"
+        },
+        "Badlands Orc": {
+            "name": "荒地兽人 Badlands Orc",
+            "description": "<p>你来自被阳光炙烤的不毛之地，强健的双腿以及更强的耐受力让你在这样的土地上生存下来。在探索模式中，你可以在不得不停下来之前@UUID[Compendium.pf2e.actionspf2e.Item.JuqmIAnkL9hVGai8]{强行军 Hustle}两倍的时间，环境的暑热效果对你而言视作减轻一级（酷热视为极热，极热视为炎热，以此类推）。</p>"
+        },
+        "Battle-Ready Orc": {
+            "name": "战备兽人 Battle-Ready Orc",
+            "description": "<p>你是一群令人闻风丧胆的战场指挥官的后裔。你在威吓技能上获得受训熟练度，你获得@UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{金刚怒目 Intimidating Glare}技能专长。</p>"
+        },
+        "Beastkin": {
+            "name": "兽化裔 Beastkin",
+            "description": "<p>你的血管里流淌着野兽血液，赋予你野兽般凶猛和力量。只有具有类人生物特征的生物才能继承兽化裔的多种传承。选择例如蝙蝠、鹰、鲨鱼、蜘蛛、暴龙、黄蜂或狼等某种特定的动物。这是一种与你传承相关的动物，被称为本源动物（inherent animal）。除了原本的族裔特征外，你还获得魔兽和兽化裔特征。</p>\n<p>你获得@UUID[Compendium.pf2e.actionspf2e.Item.34E7k2YRcsOU5uyl]能力。当你获得族裔专长提升时，你可以从兽化裔专长和族裔专长中选择。</p>"
+        },
+        "Benthic Azarketi": {
+            "name": "底栖阿扎克缇人 Benthic Azarketi",
+            "description": "<p>你的祖先曾经居住于深海，你比大多数人更能适应寒冷的深海。你的寒冷抗力是你等级的一半，而且当你受潮时，你不会把寒冷环境（environmental cold）视为更严重的程度。你能自动适应水下深处的水压变化而不受影响。</p>"
+        },
+        "Bloodhound Shoony": {
+            "name": "猎犬舒尼 Bloodhound Shoony",
+            "description": "<p>你的祖先是著名的追踪者，而你的血液中也带有同样的狩猎天赋。</p>\n<p>你获得一种特殊感官：嗅觉（模糊imprecise，30尺）。这意味着你可以用你的嗅觉来确定一个生物的位置，但该生物仍处于@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态。</p>\n<p>此外，在 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track} 你之前用嗅觉发现的猎物时，你的生存检定获得+2的环境加值。</p>"
+        },
+        "Bright Fetchling": {
+            "name": "光明窃影鬼 Bright Fetchling",
+            "description": "<p>你的身体证明了光与影相伴相生。也许你眼睛更加明亮，或者你的血管里偶尔会有光芒跳动。你可以在周身5尺范围内发出昏暗光。你可以以一个动作启动或关闭该能力，此动作具有专注特征。此外，你可以让你的部分影子发光，并且可以将@UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]作为异能内在戏法施放。戏法的环级等于你等级的一半，向上取整。</p>"
+        },
+        "Cactus Leshy": {
+            "name": "仙人掌莱西 Cactus Leshy",
+            "description": "<p>尖刺将你的身体包裹。你获得可以造成1d6穿刺伤害的尖刺无武装攻击。你的尖刺属于搏击武器组并且具有娴熟和无武装特征。</p>"
+        },
+        "Caveclimber Kobold": {
+            "name": "攀穴狗头人 Caveclimber Kobold",
+            "description": "<p>你住在一个垂直方向的巢穴里，因而成为了一名技艺非凡的攀登者。你获得 @UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬 Combat Climber} 技能专长，哪怕你没有满足先决条件。你可以利用你爪子一样的双脚和尾巴来进行攀爬，这让你的双手得以在攀爬过程中自由活动。此外，如果你在一次攀爬 (Climb) 的运动检定中获得成功，你以大成功的结果作为代替。</p>"
+        },
+        "Cavern Elf": {
+            "name": "洞穴精灵 Cavern Elf",
+            "description": "<p>你出生在常年缺少光照的地下坑道或是洞穴之中。你获得黑暗视觉。</p>"
+        },
+        "Cavern Kobold": {
+            "name": "洞穴狗头人 Cavern Kobold",
+            "description": "<p>将你孵化的巢穴是居住着无数族人的狭窄隧道群。你的身体异常灵活。</p>\n<p>当你 @UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]{攀爬 Climbing} 岩壁、钟乳石以及其他天然石质地貌（natural stone features）时，成功的检定让你能半速移动，大成功则可以全速移动；如果你具有 @UUID[Compendium.pf2e.feats-srd.Item.P04Hw8E6WAWARKHP]{迅速攀爬 Quick Climb} 专长则可以在成功检定时以全速移动。若你使用攀爬速度，则该效果无法影响你。</p>\n<p>如果你在用于 @UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{挤入 Squeeze} 的特技检定中掷出成功，则使用大成功作为替代。</p>"
+        },
+        "Celestial Envoy Kitsune": {
+            "name": "天狐 Celestial Envoy Kitsune",
+            "description": "<p>不知是因为大狐女的恩泽还是祖先的虔诚，使得你和神灵关系匪浅，得到祂们庇佑。你获得反射动作 @UUID[Compendium.pf2e.actionspf2e.Item.Aq2mXT2hLlstFL5C]{天官赐福 Invoke Celestial Privilege} 。你的变化型态是成长背景中常见的中型类人生物族裔（通常是人类），称作无尾型态。</p>"
+        },
+        "Chameleon Gnome": {
+            "name": "幻身侏儒 Chameleon Gnome",
+            "description": "<p>也许是受第一世界潜在魔法的影响亦或缠绵不绝的幻术效果留存，你的肤色和发色可以变幻自如。你可以缓慢地改变自己身体的光泽和颜色，不仅可以变得浑身上下五颜六色，还可以显现出花纹和七彩图案。你可以花费一个动作从而达成微小的局部变换，而花费一小时你能让自己全身焕然一新。睡着时，你的体色会随着梦境情景而随时变幻，因而每天早上你醒来后都有可能会看到自己变为了一个或许截然不同的颜色。当你身处的环境颜色与你的体色相似时（例如叶绿色的你身处森林之中时），你可以用一个动作来进行微小的局部变色，让你更好地融入周围环境当中。因而你在隐秘检定上获得+2环境加值，直到你周围环境的颜色或图案发生变化。</p>"
+        },
+        "Changeling": {
+            "name": "替换儿 Changeling",
+            "description": "<p>你的母亲是一名鬼婆。你与生俱来的异色瞳便是这一血统最明显的标志，与此同时，和另一位生亲族裔的成员相比，你的身体或许更加纤弱，你的肤色或许更加苍白，你的头发或许漆黑如鬼魅。你获得“替换儿”特征。你获得昏暗视觉，若你的族裔已有昏暗视觉，你转而获得黑暗视觉。获得族裔专长时，你能从替换儿专长或非鬼婆生亲的族裔专长中进行选取。</p>"
+        },
+        "Charhide Goblin": {
+            "name": "焦皮地精 Charhide Goblin",
+            "description": "<p>你的祖先总是与火关系密切，还长着能抵抗灼烧的厚厚皮肤。你获得等于你等级一半的火焰抗性（最低1点）。你还更容易扑灭身上的火焰。你用于移除持续性火焰伤害的纯骰检定DC为10而非15，如果有其他生物用特别合适的行动帮助你，该DC降低到@Check[flat|dc:5]。</p>"
+        },
+        "Clawed Catfolk": {
+            "name": "长爪猫族 Clawed Catfolk",
+            "description": "<p>你家系中遗传的特别长又利的爪子，轻轻一抓便能搞得皮开肉绽血流不止。你获得造成1d6挥砍伤害的爪抓无武装攻击。这个爪抓属于搏击武器组，并持有灵巧、娴熟、无武装特性。</p>"
+        },
+        "Cliffscale Lizardfolk": {
+            "name": "崖鳞蜥蜴人 Cliffscale Lizardfolk",
+            "description": "<p>你的脚趾进化得更适合抓握和攀爬。你获得@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]专长作为奖励专长，并且只要你没有穿鞋，你就可以用脚上的黏垫进行攀爬（Climb），从而让你能够自由使用双手。此外，若你在一次用以攀爬的运动检定上获得成功，将结果改为大成功。</p>"
+        },
+        "Cloudleaper Lizardfolk": {
+            "name": "纵云蜥蜴人 Cloudleaper Lizardfolk",
+            "description": "<p>你的身体轻盈，四肢上长出的皮瓣能捕捉从你身下经过的空气。只要你能行动且有足够的空间，你能张开皮瓣，减缓下落的速度，从而避免受到伤害（你有没有足够空间取决于GM的判断）。</p>"
+        },
+        "Created Fleshwarp": {
+            "name": "创生畸肉体 Created Fleshwarp",
+            "description": "<p>你是通过神秘仪式或炼金术被制造出来的，例如养在培养缸里，或者由一位乌斯塔拉夫（Ustalav）科学家用其他生物的尸体缝合而成。你的人造之躯坚韧耐用；你不需要进食，也不会挨饿。你对疾病的豁免检定获得+2环境加值。</p>"
+        },
+        "Dark Fields Kitsune": {
+            "name": "地狐 Dark Fields Kitsune",
+            "description": "<p>你的外表令人发毛，巧妙运用就能挫败他人士气。当你这么做的时候，挫败士气失去听觉特征，并获得视觉特征；如果你尝试挫败士气的生物不理解你的语言，你不会遭受减值。你还会得到反射动作 @UUID[Compendium.pf2e.actionspf2e.Item.Ul4I0ER6pj3U5eAk]{幸惊乐惧 Invigorating Fear} 。你的变化型态是狐狸，使用1环级@UUID[Compendium.pf2e.spells-srd.Item.gfPjmG6Fe6D3MFjl]{害兽型态 Pest Form}的数值。</p>"
+        },
+        "Death Warden Dwarf": {
+            "name": "亡灵护卫矮人 Death Warden Dwarf",
+            "description": "<p>你的祖先们乃是陵墓守卫，他们将抵御死亡的力量传承给了你。当你在对抗具有虚能特征或创造自不死生物的效果的豁免检定中成功时，将结果改为大成功。</p>"
+        },
+        "Deep Fetchling (Cold)": {
+            "name": "深暗窃影鬼（寒冷） Deep Fetchling (Cold)",
+            "description": "<p>你的祖先居住在阴影位面最深、最危险的区域。你的阴影更为浓重、心跳更为缓慢，并能在黑暗的拥抱中找到慰藉。你获得寒冷抗力，其数值等于你等级的一半（最少为1）。</p>"
+        },
+        "Deep Fetchling (Negative)": {
+            "name": "深暗窃影鬼（负能量）Deep Fetchling (Negative)",
+            "description": "<p>你的祖先居住在阴影位面最深、最危险的区域。你的阴影更为浓重、心跳更为缓慢，并能在黑暗的拥抱中找到慰藉。你获得负能量抗力，其数值等于你等级的一半（最少为1）。</p>"
+        },
+        "Deep Orc": {
+            "name": "深土兽人 Deep Orc",
+            "description": "<p>你那双长满老茧的手以及红色的眼睛诉说着幽深黑暗的山洞生活，你在那里学会了如何在岩壁上战斗以及如何使用最少的资源生存下去。你获得所选地形为地底的@UUID[Compendium.pf2e.feats-srd.Item.4tTkRyOQ0VuRBac3]{地形专家 Terrain Expertise}以及@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬 Combat Climber}技能专长。</p>"
+        },
+        "Deep Rat": {
+            "name": "深穴鼠族 Deep Rat",
+            "description": "<p>相比其它鼠族，你的祖先来自更深的地下，因而你生来便能看穿黑暗。你获得黑暗视觉。</p>"
+        },
+        "Desert Elf": {
+            "name": "沙漠精灵 Desert Elf",
+            "description": "<p>你生活在沙漠滚烫的核心地带，并且获得了对于高温环境不可思议的抵抗力。你获得等同于你等级一半（至少为1）的火焰抗性，并且你受环境的高温效果影响减弱一级（酷热变为极热，极热变为炎热，依此类推）。</p>"
+        },
+        "Desert Rat": {
+            "name": "热沙鼠族 Desert Rat",
+            "description": "<p>你是旱地生存的行家，擅长长途跋涉。若你双手均空闲，你可以通过四足奔跑的方式将自身速度提升至30尺。此外，环境的暑热效果对你而言视作减轻一级（酷热视为极热，极热视为炎热，以此类推）。而且你能忍受饥饿和口渴影响的时间是一般人的10倍。然而，除非你穿上防护服或者找个地方避寒，否则环境的寒冷效果对你而言视作加重一级。</p>"
+        },
+        "Dhampir": {
+            "name": "吸血裔 Dhampir",
+            "description": "<p>你你是吸血鬼的后裔，一半生，一半死。你天赋异禀，优雅迷人，魅力非凡，面无血色，且尖牙修长。除了你自身族裔的特征外，你还会获得“吸血裔”特征。你获得虚能治疗能力，这意味着你将会被命能效果伤害，被虚能效果治疗，一如真正的不死生物。你还会获得昏暗视觉，若你的族裔已有昏暗视觉，你转而获得黑暗视觉。获得族裔专长时，你能从吸血裔专长和原族裔专长中进行选取。</p>"
+        },
+        "Dogtooth Tengu": {
+            "name": "犬牙天狗 Dogtooth Tengu",
+            "description": "<p>除了你的鸟喙之外，你的嘴里还有很多尖锐的利齿。有些传说甚至声称你强大的下颚能够咬穿钢铁。虽然你可能还没那么强大，你的尖牙仍然能够给人留下可怕的伤口。你的鸟喙无武装攻击获得致命d8特征。</p>"
+        },
+        "Dragonscaled Kobold (Black)": {
+            "name": "龙鳞狗头人（黑） Dragonscaled Kobold (Black)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得强酸抗力，数值为你等级的一半（最低1点）。在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Blue)": {
+            "name": "龙鳞狗头人（蓝） Dragonscaled Kobold (Blue)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得电击抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Brass)": {
+            "name": "龙鳞狗头人（黄铜） Dragonscaled Kobold (Brass)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得火焰抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Bronze)": {
+            "name": "龙鳞狗头人（青铜） Dragonscaled Kobold (Bronze)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得电击抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Copper)": {
+            "name": "龙鳞狗头人（赤铜） Dragonscaled Kobold (Copper)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得强酸抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Gold)": {
+            "name": "龙鳞狗头人（金） Dragonscaled Kobold (Gold)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得火焰抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Green)": {
+            "name": "龙鳞狗头人（绿） Dragonscaled Kobold (Green)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得毒素抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Red)": {
+            "name": "龙鳞狗头人（红） Dragonscaled Kobold (Red)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得火焰抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (Silver)": {
+            "name": "龙鳞狗头人（银） Dragonscaled Kobold (Silver)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得寒冷抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Dragonscaled Kobold (White)": {
+            "name": "龙鳞狗头人（白） Dragonscaled Kobold (White)",
+            "description": "<p>你的鳞片特别鲜艳，它与真龙的鳞片一样具有抗性。你获得哈冷抗力，数值为你等级的一半（最低1点），在对抗龙类的喷吐武器时，该抗力翻倍。</p>"
+        },
+        "Draxie": {
+            "name": "小龙精 Draxie",
+            "description": "<p>你是妖精龙的亲族，你的传承可以追溯到第一世界中最强大的妖精龙的死亡。你获得触碰心灵感应，这允许你与你所接触到的任何生物进行无声的、纯粹的精神交流，只要你们有共同的语言。</p>"
+        },
+        "Duskwalker": {
+            "name": "冥裔 Duskwalker",
+            "description": "<p>依循古老协议的规则，你的灵魂转世成一名冥裔，一种与招魂者及骨园有着紧密连结的位面后裔。你获得“冥裔”特征。你还会获得昏暗视觉，若你的族裔已有昏暗视觉，你转而获得黑暗视觉。获得族裔专长时，你能从冥裔专长和原族裔专长中进行选取。</p>"
+        },
+        "Earthly Wilds Kitsune": {
+            "name": "野狐 Earthly Wilds Kitsune",
+            "description": "<p>由物质世界生养长大的你比起都市更亲近荒野。你得到无武装攻击噬咬，造成1d6穿刺伤害。你的噬咬属于搏击武器组，具有娴熟和无武装特征。你的变化型态是只狐狸，使用1环级@UUID[Compendium.pf2e.spells-srd.Item.gfPjmG6Fe6D3MFjl]{害兽型态 Pest Form}的数值。</p>"
+        },
+        "Elemental Heart Dwarf": {
+            "name": "元素之心矮人 Elemental Heart Dwarf",
+            "description": "<p>无论是与 @UUID[Compendium.pf2e.deities.Item.sZrdzh0ANQnZGXJb]{托拉格 Torag}的锻造厂——火元素位面的火炉，还是其它来源连接，你能爆发出能量。芒吉莽原(Mwangi Expanse)的姆贝克(Mbe’ke)和塔拉鲁(Taralu)矮人认为，这一天赋传承自龙或元素精魂。选择以下伤害类型之一：酸蚀、寒冷、电击或火焰，选择后无法更改。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.7qjfYsLNTr17Aftf]{能量爆发 Energy Emanation} 行动。</p>"
+        },
+        "Elfbane Hobgoblin": {
+            "name": "精灵克星 Elfbane Hobgoblin",
+            "description": "<p>大地精在很久之前就被武装起来用作对付精灵的军队，比不可靠但多产的地精要早很多。尽管精灵最终将大地精从奴役中解放了出来，有些大地精仍然保持着先祖遗传下来的抗性以抵抗魔法，又被大地精称为“精灵魔法”。你获得@UUID[Compendium.pf2e.actionspf2e.Item.On5CQjX4euWqToly]反应。</p>"
+        },
+        "Empty Sky Kitsune": {
+            "name": "空狐 Empty Sky Kitsune",
+            "description": "<p>你的灵魂能够接受彼岸的祕密，让你获得更强大的狐妖魔法。你获得族裔专长 @UUID[Compendium.pf2e.feats-srd.Item.Zz7isE8Td2xDWqR8]{狐妖法术天份 Kitsune Spell Familiarity}。你的变化型态是成长背景中常见的中型类人生物族裔（通常是人类），称作无尾型态。</p>"
+        },
+        "Farsight Goloma": {
+            "name": "远见戈洛玛 Farsight Goloma",
+            "description": "<p>你的眼睛已经适应了如何在不利的条件下看见更多的事物，你获得昏暗视觉。</p>"
+        },
+        "Fey-Touched Gnome": {
+            "name": "精类侏儒 Fey-Touched Gnome",
+            "description": "<p>精类的血脉流淌在你的身体之中，让你浑身充满了属于他们的魔力，以至于让你真正成为了他们的一员。除了侏儒和类人生物特征外，你还会获得精类特征。从原能法术列表中选择一个戏法，你可以将其作为原能内在法术任意施放。戏法总会升阶到你等级的一半，向上取整。每日一次，你可以通过冥想来调整自身与第一世界的联系，从而将该所选戏法替换为同一根源列表中的另一个戏法，这是一个需要花费10分钟且带有专注特征的行动。</p>"
+        },
+        "Fishseeker Shoony": {
+            "name": "捕鱼舒尼 Fishseeker Shoony",
+            "description": "<p>你出身于一个渔民世家，你继承了在大鱼上钩时迅速捕获收杆所必备的快速反应能力。如果你在@UUID[Compendium.pf2e.actionspf2e.Item.3yoajuKjwHZ9ApUY]检定中取得成功，那么这次成功视为大成功；如果这次检定是大失败，则视为普通失败。当一个生物对你进行 @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm} 时，对方如果检定失败，则视为大失败。</p>"
+        },
+        "Flexible Catfolk": {
+            "name": "柔身猫族 Flexible Catfolk",
+            "description": "<p>你继承了远比一般类人生物柔韧的躯体。你不将不需要进行挤入动作就能进入的狭窄空间视为困难地形。此外，你在进行逃脱动作的检定上获得+1环境加值。</p>"
+        },
+        "Forge Dwarf": {
+            "name": "锻炉矮人 Forge Dwarf",
+            "description": "<p>你的炎热的环境有着超乎寻常的适应能力。你获得等同于你等级一半（最小为1）的火焰抗力。环境的暑热效果对你而言视作减轻一级（酷热视为极热，极热视为炎热，以此类推）。</p>"
+        },
+        "Frightful Goloma": {
+            "name": "惊骇戈洛玛 Frightful Goloma",
+            "description": "<p>你的面孔特别令人厌恶。你在威吓上受训 （如果你的威吓技能已经受训，选择一个其他技能） ，并且你获得@UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]技能专长。</p>"
+        },
+        "Frilled Lizardfolk": {
+            "name": "褶颈蜥蜴人 Frilled Lizardfolk",
+            "description": "<p>你可以展开你颈部边上的领圈并弯曲其你脊背上的尖刺，以此威吓你的敌人。如此做时，你的@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]行动失去听觉特征并获得视觉特征，且当你试图对一个不能理解你语言的生物使用挫败士气时，你不会受到减值。同时，你获得@UUID[Compendium.pf2e.actionspf2e.Item.W4M8L9WepGLamlHs]行动。</p>"
+        },
+        "Frozen Wind Kitsune": {
+            "name": "雪狐 Frozen Wind Kitsune",
+            "description": "<p>你的祖先穿越过世界之冠，或是居住于终年冰雪的山峰上。你得到等于等级一半的寒冷抗力（最小为1）。寒冷环境对你的影响视作减低一级（酷寒视作极寒，极寒视作严寒，依此类推）。你的变化型态是无尾型态，外表为成长地区主要的中型类人生物族裔（通常是人类）。</p>"
+        },
+        "Fruit Leshy": {
+            "name": "果莱西 Fruit Leshy",
+            "description": "<p>你的枝干能够源源不断地结出蕴含着原能魔力的小水果。每天清晨，一个新的果实将会成熟。你或者你的盟友可以用一个交互动作将果实采摘下来。在果实被采摘后的1小时内，若某活物能将水果作为营养来源，则他能用一个交互动作吃下果实，并回复@Damage[(ceil(@actor.level/2))d8[vitality,healing]|shortLabel]生命值，此外你每高于1级2个等级，你的果实便可额外治疗1d8生命值。此效果拥有治疗以及命能特征。</p>"
+        },
+        "Fungus Leshy": {
+            "name": "真菌莱西 Fungus Leshy",
+            "description": "<p>你的身体由生长在洞穴和树荫下的真菌构成，你在黑暗的洞穴和狭窄的管道中时会感到十分自在。你获得黑暗视觉@UUID[Compendium.pf2e.ancestryfeatures.Item.HHVQDp61ehcpdiU8]{黑暗视觉 Darkvision} 。你失去植物特征，获得真菌特征。</p>"
+        },
+        "Ganzi": {
+            "name": "混沌裔 Ganzi",
+            "description": "<p>你的血液因原始的混沌而感到震撼。你除了从你的族裔中获得的特征之外，还额外获得混沌裔特征。你获得等同于你等级一半的单一类型的伤害抗力；在每天开始时，随机从酸蚀、电击或是音波伤害中确定一个适用于此伤害抗力。你同时在对抗那些会使你获得 @UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{被控制 Controlled} 状态的豁免骰上获得+1环境加值。你在选取族裔专长时，能选取混沌裔专长或原族裔的专长。</p>"
+        },
+        "Ghost Poppet": {
+            "name": "魂缚人偶 Ghost Poppet",
+            "description": "<p>当另一个人的生命力和他们的一点灵魂碎片——可能是，但不一定总是在他们死亡的那一刻——进入你的躯体时，你醒来了。你只记得你“生前”的一些模糊的片段，但那份生命精华仍然保护着你。你获得相当于你等级一半的虚能伤害的抵抗力（最小值为1）。</p>"
+        },
+        "Gourd Leshy": {
+            "name": "葫芦莱西 Gourd Leshy",
+            "description": "<p>你的脑袋是个大大的葫芦，鉴于你并不拥有一个物质意义上的大脑，因而你可以利用自己脑袋里的空腔来做一些事情。你可以在你的脑袋里储存至多1负载的物体。想要从你脑袋里@UUID[Compendium.pf2e.actionspf2e.Item.RDXXE7wMrSPCLv5k]{盗窃 Steal}东西的检定的DC增加4。此外，如果你的脑袋里只储存了一件物品，你可以毫不费力地把该物体拿到自己手上，作为使用该物品的动作的一部分。拿出这个物品将会为使用该物品的动作赋予操纵特征。</p>"
+        },
+        "Grave Orc": {
+            "name": "坟冢兽人 Grave Orc",
+            "description": "<p>你曾暴露在一股本足以杀死你的强大死灵力量之中——但无论如何，你幸存下来了。你的皮肤变得阴冷、潮湿、灰暗。你获得等同于你等级一半（最低为1）的虚能伤害抗力。并且在对抗带有死亡或虚能（void）特征的效果时，你在豁免检定上获得+1环境加值。</p>"
+        },
+        "Great Gnoll": {
+            "name": "巨力鬣狗人 Great Gnoll",
+            "description": "<p>你是个又大又强壮的鬣狗人，浑身生着茶色皮毛与棕色斑点。你从族裔处获得10点生命值而非8点，并在用于推撞或摔绊敌人的运动检定中获得+1环境加值。</p>"
+        },
+        "Grig": {
+            "name": "格利精 Grig",
+            "description": "<p>你有蟋蟀似的后肢，喜欢艺术和音乐。你的蟋蟀腿使你在跳高或跳远的运动检定中获得+2的环境加值，并且你获得了@UUID[Compendium.pf2e.spells-srd.Item.atlgGNI1E1Ox3O3a]{幻音术 Ghost Sound}原能内在戏法。</p>"
+        },
+        "Gutsy Halfling": {
+            "name": "无畏半身人 Gutsy Halfling",
+            "description": "<p>你的家族因在危急时刻保持冷静且毫不畏惧而闻名。当你在对抗情绪效果的豁免检定中成功时，将结果改为大成功。</p>"
+        },
+        "Half-Elf": {
+            "name": "半精灵 Half-Elf",
+            "description": "<p>你的双亲要么一个是精灵，要么2个都是半精灵。你有着尖尖的耳朵和其他精灵遗传的迹象。你获得了精灵特性和 @UUID[Compendium.pf2e.ancestryfeatures.Item.DRtaqOHXTRtGRIUT]{昏暗视觉}。此外，当你获得一个先祖专长时，你可以选择精灵，半精灵或是人类专长。</p>"
+        },
+        "Half-Orc": {
+            "name": "半兽人 Half-Orc",
+            "description": "<p>你的双亲要么一个是兽人，要么2个都是半兽人。你有着淡绿的皮肤和其他兽人遗传的迹象。你获得了兽人特性和 @UUID[Compendium.pf2e.ancestryfeatures.Item.DRtaqOHXTRtGRIUT]{昏暗视觉}。此外，当你获得一个先祖专长时，你可以选择兽人，半兽人或是人类专长。</p>"
+        },
+        "Hillock Halfling": {
+            "name": "山陵半身人 Hillock Halfling",
+            "description": "<p>山间的平静生活使你的族人发现，休憩与放松，尤其是充足的食物与睡眠，特别能让人恢复活力。当你在整夜休息后重新获得生命值时，你额外恢复等同于你等级的生命值。当任何人使用医疗技能为你@UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]{治疗伤势 Treat Wounds}时，你可以吃点零食从而额外恢复等同于你的等级的生命值。</p>"
+        },
+        "Hold-Scarred Orc": {
+            "name": "疤痕兽人 Hold-Scarred Orc",
+            "description": "<p>你所在的兽人社群会举行授予疤痕或刺青的仪式，而你也参加了。皮肤上的印记展示了你那非凡的韧性和活力。你从族裔中获得12点生命值以取代原本的10点。你还会获得@UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{顽强 Diehard}专长。</p>"
+        },
+        "Hunter Automaton": {
+            "name": "狩猎型灵导械 Hunter Automaton",
+            "description": "<p>你被设计用于侦察和刺杀，并且拥有类似于大型猫或狼这些猎手的躯体。即使你通常如四足生物般移动，但你依然可以站立并如两足生物般战斗，这使你如常使用所有装备。你的四足设计使你移动更加迅捷；如果你双手空闲（both hands free），你可以如同四足生物般奔跑将你的速度提升到30尺。</p>"
+        },
+        "Hunting Catfolk": {
+            "name": "追猎猫族 Hunting Catfolk",
+            "description": "<p>你出自充满了老练猎人与追踪者的悠久家系，遗传了特别敏锐的嗅觉。你获得距离30尺的灵敏嗅觉模糊感官，因此可以气味判断生物的位置。依照GM判断，当你身处下风处时，可将嗅觉射程翻倍，身处上风处时则是减半。</p>\n<p>此外，当你对已经闻过记住气味的生物或物品进行 @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track} 时，获得+2环境加值。</p>"
+        },
+        "Ifrit": {
+            "name": "火元素裔 Ifrit",
+            "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔（Ifrit）特征。你获得等于你的等级的一半的火焰抗性（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+        },
+        "Impersonator Android": {
+            "name": "间谍型仿生人 Impersonator Android",
+            "description": "<p>你的身体为了更容易地融入人类社群而被设计得更加仿真。</p>\n<p>你在欺骗技能上受训（或者其他技能，如果你已经在欺骗技能上受训）。当你试图 @UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{乔装 Impersonate} 成人类时，你不需要伪装工具。</p>\n<p>此外，你在乔装自己是一个人类，而不是一个仿生人时获得+4环境加值。此加值只适用于乔装人类外观下的自己，而不适用于乔装成除你自己之外的其他人的检定。</p>"
+        },
+        "Insightful Goloma": {
+            "name": "洞察戈洛玛 Insightful Goloma",
+            "description": "<p>你已经学会了如何观察到他人危险态度中的蛛丝马迹，这能帮助你避免麻烦。当别人尝试对你说谎 (Lie) 时，你用以对抗的察觉DC获得+1环境加值；你在察言观色 (Sense Motive) 上的察觉检定上获得+1环境加值。</p>"
+        },
+        "Inured Azarketi": {
+            "name": "坚毅阿扎克缇人 Inured Azarketi",
+            "description": "<p>你的祖先不得不在被污染的水中生存，迫使他们呼吸着有毒的水。你获得的毒素抗力相当于你等级的一半（最低为1）。此外，在你开始窒息（suffocate）之前，你可以在水外生存72小时。</p>"
+        },
+        "Irongut Goblin": {
+            "name": "铁胃地精 Irongut Goblin",
+            "description": "<p>大多数人认为已腐烂的食物，你都可以用来充饥。在聚居地时，只要能轻松弄到垃圾，你就可以靠劣质食品维持生计，而不需要采取@UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]{求生 Subsist}这项休整期行动。你在处于@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened}状态时，也能够进食和饮水。</p>\n<p>你在对抗苦难、对抗恶心状态、移除恶心状态的豁免检定上获得+2环境加值。当你在应用此加值的强韧豁免检定中获得“成功”时，改为获得“大成功”。以上好处只对你食入的东西造成的苦难或状态生效。</p>"
+        },
+        "Jinxed Halfling": {
+            "name": "厄运半身人 Jinxed Halfling",
+            "description": "<p>你的诞生伴随着一种奇异的祝福：你丧失了常见的半身人好运，但取而代之的是，你能够操纵他人的命运。你永远无法选取@UUID[Compendium.pf2e.feats-srd.Item.ZbRVqf14RTJJIZXG]{半身人幸运 Halfling Luck}族裔专长，同时你会获得@UUID[Compendium.pf2e.actionspf2e.Item.hFRHPBj6wjAayNtW]{厄运招来 Jinx}动作。</p>"
+        },
+        "Jinxed Tengu": {
+            "name": "厄咒天狗 Jinxed Tengu",
+            "description": "<p>你的家系自古承受了一个又一个的诅咒，到了今日已然养成百咒不沾的体质。你在抵抗诅咒或厄运效果的豁免骰上成功时，视为大成功处理。当你陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]状态时，进行 @Check[flat|dc:17]检定，若此检定成功，则你获得的毁灭值减少1。</p>"
+        },
+        "Jungle Catfolk": {
+            "name": "密林猫族 Jungle Catfolk",
+            "description": "<p>你是丛林居民的后裔，可在草莽树丛之间自在穿梭。你忽略来自矮丛的困难地形，且来自矮丛的高等困难地形对你只是困难地形。</p>"
+        },
+        "Laborer Android": {
+            "name": "劳务型仿生人 Laborer Android",
+            "description": "<p>你的身体适应于忍受身体上的困难或长时间从事繁重的劳动。你在运动技能上受训（或者其他技能，如果你已经在运动技能上受训），并且你获得了 @UUID[Compendium.pf2e.feats-srd.Item.C0Tcelg3BAPhML6J]{体健负重 Hefty Hauler} 技能专长。</p>"
+        },
+        "Leaf Leshy": {
+            "name": "叶莱西 Leaf Leshy",
+            "description": "<p>你的身体主要由天然的树叶构成，就像叶子从树上飘落那样，你从高处落下时特别的优雅。不管你掉落了多少距离，你都不会受到伤害。</p>"
+        },
+        "Liminal Catfolk": {
+            "name": "辟限猫族 Liminal Catfolk",
+            "description": "<p>次元之间的界线会变得暧昧不清的世界边疆与你有着联系。你可以异能内在随意法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]戏法。此戏法会升阶到你的等级的一半并向上取整的环级。此外，你在以神秘技能向不源自物质位面的生物进行@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]的检定上获得+1环境加值。</p>"
+        },
+        "Liminal Fetchling": {
+            "name": "阈限窃影鬼 Liminal Fetchling",
+            "description": "<p>你的血脉与灵界或阴影位面有更紧密的联系，并且你可以将这样的联系投射到在位面之间不可见的领域。当你通过搜索动作来定位60尺内的 @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected} 生物时，你获得+1环境加值。当你以@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]的生物作为目标时，你的纯骰检定DC为@Check[flat|dc:3]而不是5，当你以无踪的生物作为目标时，你的纯骰检定DC为@Check[flat|dc:9]而不是11。</p>"
+        },
+        "Longsnout Rat": {
+            "name": "长鼻鼠族 Longsnout Rat",
+            "description": "<p>你出众的长鼻子让你拥有了比其它鼠族更加灵敏的嗅觉。你获得一种30尺范围的模糊感官——灵敏嗅觉。这意味着你可以通过气味来判断生物所处的确切位置。如果你位于目标生物的下风处，GM应在通常情况下将灵敏嗅觉的范围翻倍。反之，若你位于上风处，则范围减半。</p>\n<p>此外，当你@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]嗅觉范围内的生物或物品时，在察觉检定上获得+2环境加值。</p>"
+        },
+        "Lorekeeper Shisk": {
+            "name": "博学希斯克 Lorekeeper Shisk",
+            "description": "<p>你在知识与秘密的围绕下长大。你在你选择的一项学识技能和一项基于智力或感知的技能上熟练等级变为受训。在5级时，你在所选技能上的熟练等级变为专家。</p>"
+        },
+        "Lotus Leshy": {
+            "name": "莲莱西 Lotus Leshy",
+            "description": "<p>你可以毫不费力地漂浮在水面上。你能够以你正常速度的一半在平静的水面以及其它无害液体表面上走动。此外你还可以通过尝试@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{保持平衡 Balance}来从流动水体的表面上走过，该动作检定DC与游泳通过该水体的DC相同。当你如此做时，你移动的距离至多为你速度的一半，若上述检定失败或大失败，你将跌入水中，而不采用保持平衡的通常效果。</p>"
+        },
+        "Luminous Sprite": {
+            "name": "萤火妖精 Luminous Sprite",
+            "description": "<p>你闪耀着魔法光辉，如自然地发出@UUID[Compendium.pf2e.equipment-srd.Item.8Jdw4yAzWYylGePS]{火炬 Torch}一样的光亮；这种光亮具有塑能、光和原能特性。你可以用一个动作来熄灭、重新点燃或改变这种光的颜色，这个动作具有专注特性。</p>"
+        },
+        "Mage Automaton": {
+            "name": "施法型灵导械 Mage Automaton",
+            "description": "<p>你存放核心的舱室与你类人形态的其他部分具有更多直接链接，使得你能利用你核心中的魔法能量。你获得一个来自于奥术法术列表中的戏法。你可以将其作为内在奥术法术随意施展。此戏法将被升阶至等同你等级一半的环数。</p>"
+        },
+        "Melixie": {
+            "name": "梅莉精 Melixie",
+            "description": "<p>你有蜜蜂、蝴蝶或其他喜欢甜食的昆虫特征。你可以向节肢动物（昆虫、蜘蛛、蝎子、螃蟹和类似的无脊椎动物）提问，并得到它们的回答，还可以使用交涉对它们进行建立印象Make an Impression和提出请求Request。大多数蜜蜂、蝴蝶、飞蛾和甲虫都对你 @UUID[Compendium.pf2e.conditionitems.Item.fuG8dgthlDWfWjIA]{不关心 Indifferent} or @UUID[Compendium.pf2e.conditionitems.Item.v66R7FdOf11l94im]{友善 Friendly} ，并给你时间来说明你的情况，但其他节肢动物对你的反应则与对待其他冒险者一样。</p>"
+        },
+        "Mistbreath Azarketi": {
+            "name": "雾息阿扎克缇人 Mistbreath Azarketi",
+            "description": "<p>你是迁徙到近水陆地环境的阿扎克缇人的后代。随着时间的推移，你的族人在文化上和身体上都适应了陆地上的生活，甚至导致阿扎克缇人像他们的阿兹兰蒂人祖先一样生出人类的头发。你不再每隔24小时便需要浸泡在水中来维持你的皮肤，而是可以通过喷洒水雾或使用湿布擦拭你的皮肤舒适地生活。你的陆地速度是25尺，但你的游泳速度只有15尺。</p>"
+        },
+        "Mountainkeeper Tengu": {
+            "name": "山伏天狗 Mountainkeeper Tengu",
+            "description": "<p>你出身于天狗修行僧的家系，与万物精魂及伟大彼岸有着联系。你可随意以原能内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.kcelf6IHl3L9VXXg]，此戏法会升阶到等同于你的角色等级的一半（向上取整）的环级。每当你施放源自天狗传承或族裔专长的法术时，可指定这个法术是以神术还是原能法术的形式生效。</p>"
+        },
+        "Murkeyed Azarketi": {
+            "name": "浊水阿扎克缇人 Murkeyed Azarketi",
+            "description": "<p>你生活在浑浊的水域，已经习惯了在低能见度的环境中生活。当你瞄准隐蔽的生物时，你只需要成功地进行@Check[flat|dc:3]检定，而当瞄准藏匿的生物时，则需要成功地进行@Check[flat|dc:9]检定。</p>"
+        },
+        "Mutated Fleshwarp": {
+            "name": "突变畸肉体 Mutated Fleshwarp",
+            "description": "<p>你起源于法力废墟（Mana Wastes）或其他不受控制的狂乱魔法区域，并被魔法影响而变异。归功于你变强或增生的器官，你从持续流血伤害中恢复的纯骰检定DC从15降低为10。如果你在恢复流血伤害的过程中得到了有效的协助，则DC从10降低到@Check[flat|dc:5]。</p>"
+        },
+        "Nightglider Strix": {
+            "name": "夜翔枭鬼 Nightglider Strix",
+            "description": "<p>你是个夜猫子，习于在近乎无光的环境监视与狩猎。你获得黑暗视觉。</p>"
+        },
+        "Nine Lives Catfolk": {
+            "name": "九命猫族 Nine Lives Catfolk",
+            "description": "<p>你的家族似乎总是能在遭逢灾难后，不靠强健体魄或特殊技法，仅凭天生强运就能谷底翻身。其他猫族传说你们家的人生来有着九条命。当你陷入@UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]状态时，你进行复苏检定的DC不会加上当前濒死值（这意味着你的复苏检定DC通常情况下始终为10）。此外，你还会获得@UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]通用专长。</p>"
+        },
+        "Nomadic Halfling": {
+            "name": "漂泊半身人 Nomadic Halfling",
+            "description": "<p>你的祖先世代四处旅行，从未驻足定居。你习得两门额外语言，从你能够接触到的常见和罕见语言中选取。每当你选取@UUID[Compendium.pf2e.feats-srd.Item.P9HCz0uR6xPHuw72]{额外语言 Multilingual}专长时，你额外再习得一门新语言。</p>"
+        },
+        "Nyktera": {
+            "name": "奈克精 Nyktera",
+            "description": "<p>你有蝙蝠一样的特征，对蝙蝠类生物有一种亲和力，而且听力也是首屈一指的。只要你能正常听见声音，就可以使用搜寻Seek动作来感知 @Template[cone|distance:30] 内的 @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected} 生物，而非平常的@Template[cone|distance:30]范围。在定位你在30尺锥形范围内通过搜寻动作可以听到的无踪的生物时，你还获得+2的环境加值。</p>"
+        },
+        "Oathkeeper Dwarf": {
+            "name": "守信矮人 Oathkeeper Dwarf",
+            "description": "<p>长到这么大，你从来不靠撒谎获得想要的东西，即使在必要时，说假话也会让你浑身难受。那些特别虔信的人甚至可能以为你受到过矮人的责任之神 @UUID[Compendium.pf2e.deities.Item.zhPhYge7VJbIlJvA]{科尔斯 Kols} 的祝福。</p>\n<p>你用来 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色 Sense Motive} 的察觉检定和对你尝试 @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{说谎 Lie} 的察觉DC获得+1环境加值。</p>\n<p>而且，在你使用交涉检定说服他人你说的是真话，且你说的确实是真话时，获得+2环境加值。你说谎时对抗 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色 Sense Motive} 的欺骗DC-4环境减值。</p>"
+        },
+        "Observant Halfling": {
+            "name": "敏锐半身人 Observant Halfling",
+            "description": "<p>你敏锐的感官能快速地就揭示你陷入的危险或诡计。你的察觉DC获得+1环境加值，察觉检定不获得此加值。</p>"
+        },
+        "Oread": {
+            "name": "土元素裔传承 Oread",
+            "description": "<p>元素的元素先祖影响了你的血脉，你的特征凸显了这种位面联系。你可能会有含着水晶或金属光泽的肌肤或头发，粗糙而坚硬的肉体，或闪闪发光的宝石眼睛。除了你的族裔特质外，你还获得了土元素裔的特性。你还会获得昏暗视觉，如果你的族裔已经拥有昏暗视觉，你会获得黑暗视觉。每当你获得一项族裔专长时，你可以从土元素裔专长和你族裔的专长中选择。</p>"
+        },
+        "Paddler Shoony": {
+            "name": "桨手舒尼 Paddler Shoony",
+            "description": "<p>你来自于那些长久以来在沼泽芦苇和香蒲丛中安居乐业的舒尼族群，你已经适应了在水浸地区生活的种种挑战。你忽略因沼泽造成的困难地形和高等困难地形。当你进行@UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]检定成功时，这次检定视为大成功。</p>"
+        },
+        "Pixie": {
+            "name": "皮克精 Pixie",
+            "description": "<p>你比其他小妖精要大。你的体型不是超小型，而是小型。</p>"
+        },
+        "Poisonhide Grippli": {
+            "name": "毒肤树蛙人 Poisonhide Grippli",
+            "description": "<p>你的体型可能很小，但你皮肤下的毒腺是一道致命的防御。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.kKKHwVUnroKuAnOt]{毒性皮肤 Toxic Skin} 反应动作。</p>"
+        },
+        "Polychromatic Anadi": {
+            "name": "炫彩半蛛人 Polychromatic Anadi",
+            "description": "<p>你的身体覆盖着异常鲜艳的毛发，创造出充满活力、引人注目的图案，其中一些甚至可能在你的人类形态中体现出来。你的表演技能受训（如果你的表演技能已经受训，选择一个其他技能），并且你获得 @UUID[Compendium.pf2e.feats-srd.Item.xqAdXRd2gSQcqp5E]专长。</p>"
+        },
+        "Polyglot Android": {
+            "name": "翻译型仿生人 Polyglot Android",
+            "description": "<p>被预先设定了熟练多种语言，很可能成为一名翻译。你从所有你具有许可的常见及罕见语言中选择两种语言并学会它们，这些语言的形式（手语或口语）需和你的其他语言相同。如果您选择 @UUID[Compendium.pf2e.feats-srd.Item.P9HCz0uR6xPHuw72]{多语言 Multilingual} 技能专长，您将学会三种新语言而不是两种。</p>"
+        },
+        "Predator Strix": {
+            "name": "猛掠枭鬼 Predator Strix",
+            "description": "<p>你的同类有着格外宽阔的羽翼和长长的爪子。你获得无武装攻击钩爪，造成 @Damage[1d4[slashing]]伤害。你的钩爪属于搏击武器组，具有灵巧、娴熟和无武装特征。</p>"
+        },
+        "Quillcoat Shisk": {
+            "name": "羽衣希斯克 Quillcoat Shisk",
+            "description": "<p>你的身体进化出了一种可以分离扎进攻击者体内的尖刺的防御机制。这使你可以从主动进攻的掠食者手中保护你自己，尽管尖刺需要一段时间来重新长出。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.oAWNluJaMlaGysXA]{带刺羽尖 Barbed Quills} 反应。</p>"
+        },
+        "Rainfall Orc": {
+            "name": "丛林兽人 Rainfall Orc",
+            "description": "<p>你出生在雨林之中，这里只有缠结的林木能在倾盆暴雨和洪水中保护你。你学会了如何熟练地穿行雨林地形以及抵御潮湿环境中的常见病的方法。你在@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]或@UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]的运动检定上获得+2环境加值，并在对抗疾病的豁免检定上获得+1环境加值。</p>"
+        },
+        "Razortooth Goblin": {
+            "name": "刃齿地精 Razortooth Goblin",
+            "description": "<p>你的家族的牙齿是种强力武器。你获得可造成1d6点穿刺伤害的无武装攻击“颚咬”。你的颚咬属于格斗武器组，并且具有娴熟和无武装特征。</p>"
+        },
+        "Resolute Fetchling": {
+            "name": "坚毅窃影鬼 Resolute Fetchling",
+            "description": "<p>你的先祖长期面对阴影位面和其他地方的各种恐怖光景，而你继承了他们精神上的坚韧。如果你尝试对抗情绪（emotion）效果的豁免检定时成功，你将得到大成功的结果。</p>"
+        },
+        "Rite of Invocation": {
+            "name": "祈祷仪式 Rite of Invocation",
+            "description": "<p>你用魔法增强你的外骨骼。你从奥术或异能法术表中获得一个戏法。你可以将此此法作为内在法术随意施展。此戏法环级提升到你等级的一半，并向上取整。</p>"
+        },
+        "Rite of Knowing": {
+            "name": "知识仪式 Rite of Knowing",
+            "description": "<p>你通过与轴心城（Axis）的链接增强了你的外骨骼，让你可以深挖轴心城位面储藏的无数知识。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.k5TASjIxghvGCy7g]{沟通轴心城 Call to Axis} 动作。</p>"
+        },
+        "Rite of Light": {
+            "name": "光明仪式 Rite of Light",
+            "description": "<p>你的外骨骼承载着可以共享生命的嫩芽。当你使用@UUID[Compendium.pf2e.ancestryfeatures.Item.BgHrucbZ9TH92RDv]动作，你也可以恢复一个相邻盟友而不是你自己的生命值。该盟友在1天内对阳光治疗临时免疫。</p>"
+        },
+        "Rite of Passage": {
+            "name": "通途仪式 Rite of Passage",
+            "description": "<p>你的外骨骼依然保持着和创造它的植物的联系。你可以忽略由灌木丛（undergrowth）导致的困难地形和不平整地表。此外，当你在森林中的狭窄地表和不平整地表使用特技技能进行保持平衡动作时，你不会措手不及。当你在此类特技检定中成功时，能得到大成功的结果。</p>"
+        },
+        "Rite of Reinforcement": {
+            "name": "强化仪式 Rite of Reinforcement",
+            "description": "<p>你所穿戴的外骨骼可以媲美最坚硬的盔甲。你的外骨骼是中型护甲，并且属于板甲护甲组，在AC上给与+4物品加值，敏捷上限+1，检定减值-2，速度减值-5，力量值为+3，并且拥有舒适特征。你无法穿戴其他盔甲或脱掉你的外骨骼。你可以像往常一样在外骨骼上蚀刻护甲符文。</p>\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.0KHgAaDi3tmu32Hq]{祈祷仪式外骨骼 Rite of Reinforcement Exoskeleton}</p>"
+        },
+        "River Azarketi": {
+            "name": "河川阿扎克缇人 River Azarketi",
+            "description": "<p>来自放弃海洋而选择内陆生活的淡水的阿扎克缇人。河流多样的地理环境要求你发展先进的体能技能，以便在激流中游泳，跃过汹涌的水面，并灵巧地穿梭于浅窄的水道。</p>\n<p>来自放弃海洋而选择内陆生活的淡水的阿扎克缇人。河流多样的地理环境要求你发展先进的体能技能，以便在激流中游泳，跃过汹涌的水面，并灵巧地穿梭于浅窄的水道。</p>"
+        },
+        "Rock Dwarf": {
+            "name": "磐石矮人 Rock Dwarf",
+            "description": "<p>你的祖先曾在巨石山脉或地底深处生活劳作。这让你在驻足时如岩石一般稳固。在尝试对抗@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}时，你的强韧和反射DC获得+2环境加值。在对抗那些试图让你移动或@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的法术和效果的豁免上，此加值同样适用。</p>\n<p>此外若一个效果强迫你移动10尺或根源，则你被迫移动的距离只有通常情况的一半。</p>"
+        },
+        "Root Leshy": {
+            "name": "根莱西 Root Leshy",
+            "description": "<p>你的身体由强壮的根须组成，让你能够牢牢地抓住地面。你从你的族裔中获得10生命值而非通常的8点。在没有阳光的情况下，你能够在开始挨饿之前撑两周。在尝试对抗@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}时，你的强韧和反射DC获得+2环境加值。在对抗那些试图让你移动或@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的法术和效果的豁免上，此加值同样适用。</p>"
+        },
+        "Runtboss Hobgoblin": {
+            "name": "矮子将军 Runtboss Hobgoblin",
+            "description": "<p>你来自一个专门统御地精的大地精群体。你比其他大地精要瘦小一点，但地精们仍然会听从你下达的任何命令。你获得@UUID[Compendium.pf2e.feats-srd.Item.gUqvezs2zzoTXFAI]技能专长。当你在@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]地精的威吓检定中成功时，将结果改为大成功；若检定大失败，将结果改为失败。</p>"
+        },
+        "Sandstrider Lizardfolk": {
+            "name": "沙行蜥蜴人 Sandstrider Lizardfolk",
+            "description": "<p>你厚厚的鳞片可以帮你保持水分并抵御阳光的照射。你获得等同于你等级一半（最小为1）的火焰抗力。环境的暑热效果对你而言视作减轻一级（酷热视为极热 ，极热视为炎热，以此类推）。而且你能忍受饥饿和口渴影响的时间是一般人的10倍。然而，除非你穿上防护服或者找个地方避寒，否则环境的寒冷效果对你而言视作加重一级。</p>"
+        },
+        "Scavenger Strix": {
+            "name": "撷荒枭鬼 Scavenger Strix",
+            "description": "<p>你的祖先来自一块食物稀少、威胁众多的土地。你在生存技能上受训，并获得 @UUID[Compendium.pf2e.feats-srd.Item.8qebBeOJsyRIchcu]{觅食者 Forager} 作为额外专长。惯于采集渔猎所养成的坚毅，还会让你在求生的生存检定中，获得+1环境加值。</p>"
+        },
+        "Seaweed Leshy": {
+            "name": "藻莱西 Seaweed Leshy",
+            "description": "<p>你的身体由编织起来的水藻构成，你在水下的舒适程度与在陆地上没什么区别。你获得20尺的游泳速度，并且你总是能够在水下呼吸。但代价是，你在陆地上的速度将降低5尺（对于大多数藻莱西而言，其陆地速度将是20尺）。</p>"
+        },
+        "Seer Elf": {
+            "name": "先知精灵 Seer Elf",
+            "description": "<p>你天赋有侦测和理解魔法现象的能力。你能以奥术内在法术的形式任意施放@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]{侦测魔法 Detect Magic}戏法。戏法总会升阶到你等级的一半，向上取整。</p>\n<p>此外，你在@UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]{辨识魔法 Identify Magic}以及有关魔法的@UUID[Compendium.pf2e.actionspf2e.Item.d9gbpiQjChYDYA2L]{解译文书 Decipher Writing}上获得+1环境加值。这些技能动作通常使用奥法、自然、神秘以及宗教技能。</p>"
+        },
+        "Sensate Gnome": {
+            "name": "锐感侏儒 Sensate Gnome",
+            "description": "<p>你能看见更为鲜艳的颜色，听见更为丰富的声音，甚至能嗅到最为细微的气味。你获得一种特殊感官，30尺范围的模糊感官——灵敏嗅觉。这意味着你可以通过气味来判断生物所处的确切位置。如果你位于目标生物的下风处，GM应在通常情况下将灵敏嗅觉的范围翻倍。反之，若你位于上风处，则范围减半。</p>\n<p>此外，当你试图定位一个你灵敏嗅觉范围内的无踪（undetected）生物时，你在察觉检定上获得+2环境加值。</p>"
+        },
+        "Sewer Rat": {
+            "name": "水沟鼠族 Sewer Rat",
+            "description": "<p>你的鼠族家系自古便以某个大型聚居地的下水道为家。你免疫疾病“斑疹伤寒”（Putrid Plague，译注：详见巨鼠/鼠群怪物能力）。你在对抗疾病和毒素的豁免骰上获得+1环境加值。当你在对抗疾病的豁免检定上成功时，将结果改为大成功。如果于此同时，你还具备其它类似的能提升豁免结果的能力（例如战士职业特性@UUID[Compendium.pf2e.classfeatures.Item.gdSmSTaGDxf4g2d8]），那么当你在对抗疾病的豁免检定中大失败时，将结果改为失败。</p>"
+        },
+        "Shadow Rat": {
+            "name": "怪影鼠族 Shadow Rat",
+            "description": "<p>你的祖先生活在深邃黑暗的地底空间，你继承了他们漆黑的毛发，以及然人不寒而栗的诡异感。你在威吓技能上获得受训熟练度，且能够使用威吓技能@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]动物。当你对一个动物@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]时，你不会因为语言不通而承受减值。若你已在威吓技能上达到了受训熟练度（例如来自于你的背景或职业），作为代替，你可以选择另外一项技能将其提升至受训熟练度。</p>\n<p>动物对你的初始态度比通常情况视作下降一级，家养动物的起始态度是不友善而非不关心，野生动物的起始态度是敌对而非不友善。</p>"
+        },
+        "Shapewrought Fleshwarp": {
+            "name": "扭形畸肉体 Shapewrought Fleshwarp",
+            "description": "<p>作为畸肉改造的受害者，你可能拥有松散的皮肉、突出的骨刺或者皮肤上长出各种非人的特征。尽管如此，你已经将精神上的扭曲转化为力量。你获得相当于你等级一半的心灵（mental）伤害抗力（至少为1）。</p>"
+        },
+        "Sharp-Eared Catfolk": {
+            "name": "聪耳猫族 Sharp-Eared Catfolk",
+            "description": "<p>你长着一对会随心情摆动，捕捉到意外怪声时又会立刻竖起的大耳朵。你在以@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]动作你能听见且离你30尺内但对你为无踪的生物时，在检定上获得+2环境加值。此外因为耳朵好，每轮一次，只要你能以听觉感知到目标生物，你能以自由动作进行@UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]动作来向所有盟友告知目标的位置。</p>"
+        },
+        "Sharpshooter Automaton": {
+            "name": "射击型灵导械 Sharpshooter Automaton",
+            "description": "<p>你纤长、类人的外形，被设计以适应远程战斗中的快速与准确性。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.9sXQf1SyppS5B6O1]{灵导械瞄准 Automaton Aim} 动作。</p>"
+        },
+        "Shoreline Strix": {
+            "name": "滨涉枭鬼 Shoreline Strix",
+            "description": "<p>你的祖先迁徙到了大海之滨。你的羽毛避水性极佳，又有着适于潜水的外型，方便你捕捉鱼和其他浅水畜的猎物。你受训于运动，并获得 @UUID[Compendium.pf2e.feats-srd.Item.iOY6YfGBaOvMNAor]{浪里白条 Underwater Marauder} 作为奖励专长。</p>"
+        },
+        "Shortshanks Hobgoblin": {
+            "name": "短胫大地精 Shortshanks Hobgoblin",
+            "description": "<p>相比于其他大地精，你的躯干更长，肩膀更宽，但这也让你的腿相比之下会显得比较短。这种体型意味着强健的核心力量并显著降低了你的重心——这能够辅助你进行骑乘和攀爬——并且你在非常小的时候就开始学习在鞍上骑乘。你获得@UUID[Compendium.pf2e.feats-srd.Item.Rq5wkA8DtsmbzoGV]专长。此外，你在攀爬时不会陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+        },
+        "Skilled Heritage": {
+            "name": "精熟人类 Skilled Human",
+            "description": "<p>你的聪明才智让你有机会擅长多种技能。你选择的一项技能获得受训熟练度。5级时，你在该所选技能上的熟练度提升至专家。</p>"
+        },
+        "Skyborn Tengu": {
+            "name": "翔空天狗 Skyborn Tengu",
+            "description": "<p>或是骨骼特别轻盈，或是身为长有翅膀的罕见天狗，又或是与风及天空的精魂的连结特别强，总之你从空中落下的速度比别人慢。不管你掉落了多少距离，你都不会受到坠落伤害。</p>"
+        },
+        "Smokeworker Hobgoblin": {
+            "name": "弄烟大地精 Smokeworker Hobgoblin",
+            "description": "<p>你的家族上数好几代都是炼金术士、工程师、以及科学家，持续钻研着用于将火焰和烟雾带到战场上的军事项目。你获得等同于你等级一半（最小为1）的火焰抗力。若一个@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]生物的隐蔽效果只来自烟雾的遮挡，那么你在瞄准它的DC5纯骰检定上自动成功。</p>"
+        },
+        "Snaptongue Grippli": {
+            "name": "利舌树蛙人 Snaptongue Grippli",
+            "description": "<p>你的舌头特别长，你可以以非凡的射程和准度射出它。你可以用你的舌头传递接触射程的法术以及执行极简单的交互动作，例如打开某些没上锁的门。你的舌头不能执行需要手指或灵巧双手的动作，包括任何需要通过检定才能达成的动作，你不能使用它来握持物品。</p>"
+        },
+        "Snaring Anadi": {
+            "name": "诱捕半蛛人 Snaring Anadi",
+            "description": "<p>你在孵化时就带着钩状的尖牙，这让你在以真实形态进行捕猎时获得优势。你的尖牙打击获得擒拿（grapple）和摔绊特征。</p>"
+        },
+        "Snow Goblin": {
+            "name": "雪地精 Snow Goblin",
+            "description": "<p>你适应了寒冷土地上的生活，拥有天蓝色到海蓝色之间的肤色，而且毛发也是蓝色的。你获得等同于你等级一半（最小为1）的寒冷抗力。环境的寒冷效果对你而言视作减轻一级（酷寒incredible cold视为极寒extreme cold，极寒视为严寒severe cold，以此类推）。</p>"
+        },
+        "Snow Rat": {
+            "name": "冻雪鼠族 Snow Rat",
+            "description": "<p>你身宽毛厚足以御寒。你获得等同于你等级一半（最小为1）的寒冷抗力。环境的寒冷效果对你而言视作减轻一级（酷寒视为极寒，极寒视为严寒，以此类推）。</p>"
+        },
+        "Songbird Strix": {
+            "name": "歌鸣枭鬼 Songbird Strix",
+            "description": "<p>你的祖上有许多精通韵诵的枭鬼，大自然的声响总令你大发歌兴；你从巍峨的山峰飞往纯净的原野，畅快地吸饱清新的空气，鼓颤舌头，用嘹亮的鸣音吟唱甜美的歌曲。而人们的声音，则每每让你好奇仿效。当你在只受声音影响的情境下使用欺骗技能来乔装别人的声音，检定获得+1环境加值；如果你的欺骗熟练度为大师，环境加值提升为+2。另外，你在歌唱时的表演技能检定获得+1环境加值；如果你的表演熟练度为大师，环境加值提升为+2。</p>"
+        },
+        "Spellkeeper Shisk": {
+            "name": "传法希斯克 Spellkeeper Shisk",
+            "description": "<p>你的魔法知识让你可以施放简单的法术。在异能和原能中选择一种。你获得一个所选魔法根源对应法术列表中的戏法。你可以将此戏法作为可随意施展的视同你所选根源的内在法术。此戏法将被升阶至等同你等级一半，向上取整。</p>"
+        },
+        "Spellscale Kobold": {
+            "name": "法鳞狗头人 Spellscale Kobold",
+            "description": "<p>一缕龙之魔力在你的血管中流淌。从奥术法术列表中选择一个戏法。你将其作为奥术内在法术并能随意施放它。戏法会升阶至环级为你角色等级的一半（向上取整）。你在奥术法术攻击检定以及法术DC上达到受训熟练度，你的关键施法属性为魅力。</p>"
+        },
+        "Spindly Anadi": {
+            "name": "纤痩半蛛人 Spindly Anadi",
+            "description": "<p>你在两种形态中的肢体都非常长，让你能够以惊人的敏捷快速移动。你的速度从25尺增加到30尺。</p>"
+        },
+        "Spined Azarketi": {
+            "name": "棘刺阿扎克缇人 Spined Azarketi",
+            "description": "<p>你的鳍中隐藏着可发射的毒刺。你获得远程无武装（ranged unarmed）攻击棘刺，这攻击造成 @Damage[1d4[poison]]伤害，射程为10尺，属于飞镖（dart）武器组。</p>"
+        },
+        "Steelskin Hobgoblin": {
+            "name": "钢皮大地精 Steelskin Hobgoblin",
+            "description": "<p>当你被割伤或烧伤时，你的身体会产生反应，生成一种强韧又柔软的茧包复创口。久而久之，这让你身体上最脆弱的地方变得更坚硬，能抵抗更多的伤害。许多钢皮大地精会刻意用刀刃和火焰在自己的身体上留下错综复杂的疤痕图纹，但这并不普遍。你从持续型物理（包括流血）、能量或毒素伤害中恢复的纯骰检定的DC是13（而非通常的15），在得到特别有效的辅助时，纯骰检定DC变为@Check[flat|dc:8]。</p>"
+        },
+        "Stickytoe Grippli": {
+            "name": "黏趾树蛙人 Stickytoe Grippli",
+            "description": "<p>你的手脚渗出一层有助于粘附在表面的薄膜。你在对抗卸武，推撞，或绊摔时在强韧和反射DC上获得+2环境加值。当攀爬树木，藤蔓，或其他植物时，如果你在攀爬的运动检定上骰出成功结果，那么改为你获得大成功结果。</p>"
+        },
+        "Stormtossed Tengu": {
+            "name": "雷震天狗 Stormtossed Tengu",
+            "description": "<p>可能是由于黑风的加护，或者是在雷霆暴风中孵化而得的异能，你对风暴有着天生抗性。你获得等同于你角色等级的一半（向上取整）的电击抗力。若目标的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态仅来自于雨或雾，则你在用来瞄准他的纯骰检定上自动成功。</p>"
+        },
+        "Strong-Blooded Dwarf": {
+            "name": "强血矮人 Strong-Blooded Dwarf",
+            "description": "<p>你的血液汹涌澎湃，让你更能抵御毒素。你获得等同于你等级一半的毒素抗力（最小为1）。对抗毒素苦难时，你每次成功的豁免检定都会使苦难阶段降低2阶，恶性毒素则降低1阶。对抗毒素的每次大成功都会使苦难阶段降低3阶，恶性毒素则为2阶。</p>"
+        },
+        "Stronggut Shisk": {
+            "name": "健胃希斯克 Stronggut Shisk",
+            "description": "<p>你的代谢很缓慢，这让你可以几天不吃东西，并且病情也会以更慢的速度变化。你在没有食物的情况下可以坚持一个星期再出现饥饿问题。此外，所有影响你的疾病和毒素效果，潜伏期和每阶段的间歇期②将延长50%。如果潜伏期或阶段间歇期为立即或只持续一轮，则此能力不起作用。</p>"
+        },
+        "Strongjaw Kobold": {
+            "name": "壮颚狗头人 Strongjaw Kobold",
+            "description": "<p>或许是为了抵御天敌，又或许是处于对某种强大野兽的崇拜，你的巢穴因族人强壮的下颚和锋利的牙齿而闻名。你获得可造成1d6穿刺伤害的颚无武装攻击。你的颚属于搏击武器组并且具有娴熟和无武装特征。</p>"
+        },
+        "Stuffed Poppet": {
+            "name": "填充人偶 Stuffed Poppet",
+            "description": "<p>你的体内除了棉花、锯末或干树叶之外啥也没有。你不会因为坠落而受到伤害，无论你坠落的距离有多少。</p>"
+        },
+        "Suli": {
+            "name": "巨灵裔传承 Suli",
+            "description": "<p>你的祖先是小巨灵或是以其他方式体现了对立的元素位面力量。除了你的族裔特质外，你还获得了巨灵裔的特性。你还会获得昏暗视觉，如果你的族裔已经拥有昏暗视觉，你会获得黑暗视觉。每当你获得一项族裔专长时，你可以从巨灵裔专长和你族裔的专长中选择。</p>"
+        },
+        "Sweetbreath Gnoll": {
+            "name": "甜息鬣狗人 Sweetbreath Gnoll",
+            "description": "<p>你是个生着斑纹与浅色毛发的鬣狗人，呼出的气体能给人以奇异的愉悦感，并能够以此接近你的猎物。你在交涉上的熟练度达到受训（或其他一项技能，若你已在交涉上受训）。如果目标能闻到你呼出的气体，你在建立印象检定中获得+1环境加值。</p>\n<hr />\n<p><em>备注:如果你在此专长获得的技能已受训，你可以选择自己选择一个其它技能来替代。</em></p>"
+        },
+        "Sylph": {
+            "name": "风元素裔传承 Sylph",
+            "description": "<p>你是风元素的后裔，或在气元素的影响下出生。除了你的族裔特性之外，你还获得了风元素裔特性。你获得昏暗视觉，若你的族裔已有昏暗视觉，则改为获得黑暗视觉。你在选取族裔专长时，能选取风元素裔专长或原族裔的专长。</p>"
+        },
+        "Tactile Azarketi": {
+            "name": "波敏阿扎克缇人 Tactile Azarketi",
+            "description": "<p>你的皮肤可以探测到洋流中最轻微的变化。你获得了水波感知的模糊感官（imprecise wavesense），范围为30尺，使你能够在水中感觉到你周围的动静。你也获得了在水生环境中辨别方向（sense direction）的生存（survival）技能检定的+1加值。</p>"
+        },
+        "Tailed Goblin": {
+            "name": "长尾地精 Tailed Goblin",
+            "description": "<p>你有一条有力的尾巴，可能是因为你来自一个猴地精社群。你用于@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]的运动检定获得+2环境加值，你获得 @UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬 Combat Climber} 作为奖励专长，并且你攀爬或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip} 所需的空闲手数少一。</p>"
+        },
+        "Taloned Tengu": {
+            "name": "利爪天狗 Taloned Tengu",
+            "description": "<p>你指尖的锐爪跟你的鸟喙一样又硬又利，你获得造成1d4挥砍伤害的爪击无武装攻击。这个爪击属于搏击武器组，并持有灵巧、娴熟、无武装、多用S特性。</p>"
+        },
+        "Technological Fleshwarp": {
+            "name": "科技畸肉体 Technological Fleshwarp",
+            "description": "<p>你的转化来自于先进技术的操控，就像在纽梅利亚（Numeria）所发生的那样。你的感情很迟钝，很难受到影响。当你对抗情绪（emotion） 效果的豁免检定成功时，你获得大成功的结果。</p>"
+        },
+        "Thalassic Azarketi": {
+            "name": "大洋阿扎克缇人 Thalassic Azarketi",
+            "description": "<p>你的血统来自于在世界的大洋中生活的阿扎克缇人。你知道如何利用水流和水的原能魔法来引导你的攻击。你获得了 @UUID[Compendium.pf2e.feats-srd.Item.iOY6YfGBaOvMNAor]{浪里白条 Underwater Marauder} 技能专长，在与水下目标作战时，你的穿刺远程攻击的射程增量不会被减半。</p>"
+        },
+        "Thickcoat Shoony": {
+            "name": "厚衫舒尼 Thickcoat Shoony",
+            "description": "<p>你是一个出身于寒冷地区的稀有舒尼。你获得寒冷抗力（cold resistance），数值等于你等级的半值（最低1），你对待环境的寒冷效果时视为比实际效果低一级（寒冷等级从酷寒降到极寒，极寒降为严寒，等等以此类推）。如果一个生物仅依靠雪获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，你不需要进行纯骰检定就可以将该生物作为攻击或其它行动的目标。除非你穿着有保护性的设备，或寻求庇护，否则环境的灼热效果（heat effect）视为比实际效果高一级。</p>"
+        },
+        "Tiefling": {
+            "name": "魔裔 Tiefling",
+            "description": "<p>你是魔界生物的后裔，或被某个魔界位面所浸染，身上长着彰显你魔界血脉的反常特性，例如角或尾巴。除了你族裔的特征外，你还额外获得魔裔特征。你获得 @UUID[Compendium.pf2e.ancestryfeatures.Item.DRtaqOHXTRtGRIUT]{昏暗视觉}，如果你的族裔已有昏暗视觉，则改为获得 @UUID[Compendium.pf2e.ancestryfeatures.Item.HHVQDp61ehcpdiU8]{黑暗视觉}。你在选取族裔专长时，能选取魔裔专长或原族裔的专长。</p>"
+        },
+        "Toy Poppet": {
+            "name": "玩具人偶 Toy Poppet",
+            "description": "<p>你的外形就像孩子的小玩具或娃娃，但你不会让你的小尺寸妨碍你的生活乐趣。你的体型是超小型而非小型。超小型有自己的一套空间和触及的规则。你可以进入另一个生物占据的空间，这很重要，因为你的近战攻击通常没有触及，这意味着你必须进入他们的空间来攻击他们。就像其他超小型生物一样，你不会因为在一个较大的生物的空间里而自动得到次等掩蔽，但环境可能允许你进行寻找掩蔽(Take Cover)。你可以购买适合你体型武器、盔甲和其他物品，其数据与普通装备相同，只是近战武器的触及对你为0（如果它们有触及的特性，则攻击范围比平时短5尺）。记住要调整物品的负载和你的超小型负载限制。</p>"
+        },
+        "Treedweller Goblin": {
+            "name": "树栖地精 Treedweller Goblin",
+            "description": "<p>你特别适应生活在森林环境中。只要你在森林或丛林中，你用于 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}and @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak} 的隐秘检定， @UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]{求生 Subsist}的生存检定，和 @UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]{掩盖行踪 Cover Tracks}的生存DC获得+2环境加值。</p>"
+        },
+        "Tunnel Rat": {
+            "name": "窄隧鼠族 Tunnel Rat",
+            "description": "<p>你可以轻松地压缩你的身体从而自在地挤过窄缝。无论你是否在特技技能上达到受训熟练度，你获得@UUID[Compendium.pf2e.feats-srd.Item.3G8xUlgCjRmRJNfP]技能专长作为奖励专长。此外，那些狭窄但没有狭窄到需要@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]动作的地形，对你而言不再视作困难地形。</p>"
+        },
+        "Tunnelflood Kobold": {
+            "name": "隧泳狗头人 Tunnelflood Kobold",
+            "description": "<p>你在一个水下隧道纵横交错的巢穴（无论其是天然形成还是人工挖掘的）中长大，收到了某种强大水生或水元素存在的影响。你获得15尺的游泳速度。</p>"
+        },
+        "Twilight Halfling": {
+            "name": "暮色半身人 Twilight Halfling",
+            "description": "<p>你的祖先在黄昏的隐蔽掩护下进行了许多或好或坏的秘密行动，随着时间的推移，他们甚至超越了半身人正常的敏锐视觉，发展出了能够在暮色中视物的能力。你获得昏暗视觉。</p>"
+        },
+        "Umbral Gnome": {
+            "name": "暗影侏儒 Umbral Gnome",
+            "description": "<p>无论是由于与黑暗或阴影精类的联系，还是继承自生活在地底深处被称为地底侏儒的侏儒族群，亦或是其他什么原因，你在完全的黑暗之中仍能视物。你获得黑暗视觉。</p>"
+        },
+        "Unbreakable Goblin": {
+            "name": "顽强地精 Unbreakable Goblin",
+            "description": "<p>由于特别厚的头骨、软骨、或其他利弊共存的情况，你可以很容易地恢复伤势。你从族裔中获得的生命值为10点而非6点。当你坠落时，你受到的坠落伤害会被降低，如同你的坠落距离只有原本的一半。</p>"
+        },
+        "Undine": {
+            "name": "水元素裔传承 Undine",
+            "description": "<p>一位水元素的元素先祖影响了你的血脉。除了你的族裔特质外，你还获得了水元素裔的特性。你还会获得10尺游泳速度和两栖特性。与所有带有两栖特性的生物一样，你可以在空气和水中呼吸。每当你获得一项族裔专长时，你可以从水元素裔专长和你族裔的专长中选择。</p>"
+        },
+        "Unseen Lizardfolk": {
+            "name": "隐形蜥蜴人 Unseen Lizardfolk",
+            "description": "<p>你可以通过改变你的肤色来融入周围的环境。使用一个单动作可以造成微小的变色，而持续一个小时的持续改变能够让你完成大幅度的颜色转换。当你的肤色和身处的环境颜色大致相近时（例如带着森林绿的皮肤身处于森林中），你可以通过一次单动作来使用这个能力，让肤色做出一些局部的改变以融入当前的环境，你将因此在隐秘检定上获得+2环境加值，直到你的周遭环境发生颜色或纹理上变化。</p>"
+        },
+        "Venomous Anadi": {
+            "name": "毒牙半蛛人 Venomous Anadi",
+            "description": "<p>你在天然形态下的尖牙能给人注射毒液。你获得 @UUID[Compendium.pf2e.actionspf2e.Item.8aIe57gXJ94mPpW4]{半蛛人毒液 Anadi Venom} 能力。</p>"
+        },
+        "Venomtail Kobold": {
+            "name": "毒尾狗头人 Venomtail Kobold",
+            "description": "<p>由于某种有毒生物大量存在于你的巢穴周围，你的尾巴上天生就长有一根能够分泌致命毒素的刺针。你获得@UUID[Compendium.pf2e.actionspf2e.Item.ev8OHpBO3xq3Zt08]动作。</p>"
+        },
+        "Versatile Heritage": {
+            "name": "多才人类 Versatile Heritage",
+            "description": "<p>人类的多才多艺和雄心壮志让他们在世界上的绝大多数国家中都成为了最为常见的族裔。选取一项你满足先决条件的通用专长（一如你的族裔专长，你可以在创建角色的任意时点选取该通用专长）。</p>"
+        },
+        "Vicious Goloma": {
+            "name": "凶悍戈洛玛 Vicious Goloma",
+            "description": "<p>你手上的几丁质构成了足以保护你自己的有力爪子。你获得能够造成1d6挥砍伤害的利爪无武装攻击。你的利爪属于搏击武器组，拥有灵巧、娴熟和无武装特征。</p>"
+        },
+        "Vigilant Goloma": {
+            "name": "警觉戈洛玛 Vigilant Goloma",
+            "description": "<p>你不仅仅学会了如何注意到物理层面明晃晃的危险，还学会了如何察觉显著的魔法威胁。你能以奥术内在法术形式随意施放@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]{侦测魔法 Detect Magic}戏法。戏法环级提升到你等级的一半，向上取整。此外，你的意识会让你比别人更容易发现魔法陷阱。当试图侦测魔法陷阱时，你在察觉上的熟练等级视作高一级 （受训视作专家，专家视作大师，大师视作传奇） 。</p>"
+        },
+        "Vine Leshy": {
+            "name": "藤蔓莱西 Vine Leshy",
+            "description": "<p>构成你身体的藤蔓赋予了你无与伦比的攀爬能力。你不需要任何空闲手就能进行@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]。除此之外，当你在一次进行攀爬的运动检定上获得成功时，将结果改为大成功。</p>"
+        },
+        "Vivacious Gnome": {
+            "name": "活泼侏儒 Vivacious Gnome",
+            "description": "<p>你与流经第一世界的命能有着难以置信的紧密联系，这使得用虚能攻击你的生命力变得更加困难。你获得的一半于你等级的虚能抗性（最低1点）。当你陷入 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed} 状态时，判断该状态的效果时状态值比原本低1点（毁灭1无效果，毁灭2让你在 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死 Dying 3} 时死亡，以此类推）。).</p>"
+        },
+        "Warmarch Hobgoblin": {
+            "name": "行军大地精 Warmarch Hobgoblin",
+            "description": "<p>你来自一个游荡的雇佣军团，常年行军在外，擅长沿路收集各种食物。当你在野外进行@UUID[Compendium.pf2e.actionspf2e.Item.49y9Ec4bDii8pcD3]检定，最终获得失败而非大失败结果时，你仍然能够获得少量的食粮喂饱自己。在探索中，你可以@UUID[Compendium.pf2e.actionspf2e.Item.JuqmIAnkL9hVGai8]两倍的时间。</p>"
+        },
+        "Warrenbred Hobgoblin": {
+            "name": "狡兔大地精 Warrenbred Hobgoblin",
+            "description": "<p>你的祖先长期生活在地底之下。你的耳朵比其他大地精大上一圈，并且对回声十分敏感。当你身处地下时，在寻找你自身30尺范围内的藏匿与无踪生物的搜索检定上，你获得+2环境加值。当你瞄准对你而言@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]或@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]的敌人时，瞄准前者的纯骰检定DC降低至3，后者降低至9。此外，当你在@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]动作的特技检定中成功时，将结果改为大成功。</p>"
+        },
+        "Warrior Android": {
+            "name": "战斗型仿生人 Warrior Android",
+            "description": "<p>你的身体是作为一个保镖或士兵而被创造出来的，你是天生的战士。你在所有简易及军用武器上受训。</p>"
+        },
+        "Warrior Automaton": {
+            "name": "战斗型灵导械 Warrior Automaton",
+            "description": "<p>你体型庞大、强力设计的身躯被设计用于战斗。你具有一个庞大、类人的外形。你拳头（fist）的伤害骰从 1d4 提升到 1d6。当使用你的拳头或任何其他非致命攻击进行一次致命攻击时，你无需承受减值。</p>"
+        },
+        "Wavediver Tengu": {
+            "name": "破浪天狗 Wavediver Tengu",
+            "description": "<p>你是少有的，能够像鸟儿在空中飞翔般，在水中自由自在地潜游的天狗，而且你经常潜伏在河流或海洋中，少有人知。你获得15尺的游泳速度。</p>"
+        },
+        "Wellspring Gnome": {
+            "name": "秘源侏儒 Wellspring Gnome",
+            "description": "<p>另一种魔法对你的影响盖过了你体内精类血脉带来的原能魔法的影响。这种联系的来源可能是一个异能位面或一首异能古曲、可能来自神祇、天族或恶魔、可能来自法师战争残留的魔法余波、亦有可能来自古老的符文魔法。</p>\n<p>从奥术、神术或异能中选择一项。你获得此魔法根源法术列表中的一个戏法。你可以将其作为你所选根源的内在法术任意施放。戏法总会升阶到你等级的一半，向上取整。每当你因侏儒族裔专长而获得原能内在法术时，将其根源从原能改为你所选择的根源。</p>"
+        },
+        "Wetlander Lizardfolk": {
+            "name": "湿地蜥蜴人 Wetlander Lizardfolk",
+            "description": "<p>你的家族是最常见的蜥蜴人的后裔，你已经习惯了水生环境。你获得15尺游泳速度。</p>"
+        },
+        "Whisper Elf": {
+            "name": "低语精灵 Whisper Elf",
+            "description": "<p>你的耳朵极为灵敏，即使是最轻微的细语也能轻松听见。在寻找你自身30尺范围内的@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]与@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪 Undetected}生物的@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}检定上，你获得+2环境加值。当你瞄准对你而言@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]或藏匿的敌人时，瞄准前者的纯骰检定DC降低至3，后者降低至9。若你无法听见该生物的动静亦或者其不会发出任何声音（例如其身上被施放了@UUID[Compendium.pf2e.spells-srd.Item.gIdDLrbswTV3OBJy]{沉默术 Silence}），则你无法获得上述好处。</p>"
+        },
+        "Wildwood Halfling": {
+            "name": "深林半身人 Wildwood Halfling",
+            "description": "<p>你来自丛林或森林的深处，早已学会了利用你那矮小的体型来在灌木丛、藤蔓和其它障碍间穿梭。你忽略树木、枝叶、灌木丛等植被所造成的困难地形。</p>"
+        },
+        "Windup Poppet": {
+            "name": "发条人偶 Windup Poppet",
+            "description": "<p>你的身体由软金属、如锡或银制成，你的生命活力潜藏在你体内一个特殊的齿轮阵列中。只要你每天给身体上好发条，你就不需要食物或水来生存。你仍然必须通过呼吸来为你的内部机械通风，并通过睡眠来让你的机械得到休息，就像其他人偶一样。</p>"
+        },
+        "Windweb Grippli": {
+            "name": "风蹼树蛙人 Windweb Grippli",
+            "description": "<p>你手指与脚趾间坚韧的脚蹼能够减缓任何坠落。只要你有一只空着的手，你就免受坠落伤害，无论你的坠落距离有多高。</p>"
+        },
+        "Winter Catfolk": {
+            "name": "冬毛猫族 Winter Catfolk",
+            "description": "<p>你长了一身足以御寒的粗厚毛发。这使得你获得1/2角色等级（最小为1）的寒冷抗力。低温环境对你的效果比实际上减轻1阶（酷寒→极寒→严寒以此类推）。</p>"
+        },
+        "Winter Orc": {
+            "name": "凛冬兽人 Winter Orc",
+            "description": "<p>你的祖先在寒冷的气候里存活了下来。你在生存技能上获得受训熟练度，环境的寒冷效果对你而言视作减轻一级（酷寒视为极寒，极寒视为严寒，以此类推）。</p>"
+        },
+        "Wintertouched Human": {
+            "name": "冬抚之民 Wintertouched Human",
+            "description": "<p>寒冬的力量在你身上流动。这一传承在伊利森的雅德维嘉人——由于他们都是芭芭雅嘎的后代——与某些被精魂触碰的艾鲁塔基人中最为常见。你获得等同于你等级一半（至少为1）的寒冷抗性，并且你受环境的寒冷效果影响减弱一级（酷寒变为极寒，极寒变为严寒，依此类推）。</p>"
+        },
+        "Wishborn Poppet": {
+            "name": "愿生人偶 Wishborn Poppet",
+            "description": "<p>你因愿望而生，或许是来自一个强大的施法者，或是一个深爱你的普通人的真诚祈愿。你的存在本身就证明充满希望的精神可以克服任何障碍。如果你在对情绪或恐惧效果的豁免中成功，你会获得大成功。</p>"
+        },
+        "Wisp Fetchling": {
+            "name": "袖珍窃影鬼 Wisp Fetchling",
+            "description": "<p>你的祖先暴露在阴影位面的影响下，造成了巨大的身体变化。你的头发或皮肤显得更加虚无，身材比其他窃影鬼更苗条和灵活。你的体型为小型而非中型。你的特技技能受训，并且获得 @UUID[Compendium.pf2e.feats-srd.Item.3G8xUlgCjRmRJNfP]技能专长，并且在尝试[[/act tumble-through]]时的特技检定上有+1环境加值。如果你的特技已经受训（例如从背景或职业中获得），你可以另选一个技能受训。</p>"
+        },
+        "Witch Gnoll": {
+            "name": "魔音鬣狗人 Witch Gnoll",
+            "description": "<p>你是个多毛的深色鬣狗人，能够发出某些真正不可思议的声音。你可以任意施展@UUID[Compendium.pf2e.spells-srd.Item.atlgGNI1E1Ox3O3a]{幻音术 Ghost Sound}戏法作为一个异能内在法术。这个戏法会自动升阶到1/2你的角色等级的环位。此外，你在仅使用声音进行的乔装和分神检定中获得+1环境加值。</p>"
+        },
+        "Woodland Elf": {
+            "name": "森林精灵 Woodland Elf",
+            "description": "<p>你已经适应了在树丛、森林或类似环境中的生活，你知道该如何利用树木与枝叶占据有利条件。在@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]{攀爬 Climbing}树木、藤蔓以及其它植被时，你在检定成功时能以你速度的一半进行移动，大成功时则可以全速移动（若你拥有@UUID[Compendium.pf2e.feats-srd.Item.P04Hw8E6WAWARKHP]{迅速攀爬 Quick Climb}技能专长，则在检定结果为成功时你即可以全速移动）。若你使用的是攀爬速度，则你无法应用上述好处。</p>\n<p>当你处于森林地形中时，即使你并未邻接一个可以用于@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{寻找掩蔽 Take Cover}的障碍物，你也总是可以使用寻找掩蔽动作来获得掩蔽。</p>"
+        },
+        "Woodstalker Lizardfolk": {
+            "name": "潜林蜥蜴人 Woodstalker Lizardfolk",
+            "description": "<p>你运用每一个树枝或灌木，轻松地穿梭茂密的森林和丛林。当你身处森林或丛林地形时，你总能使用@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]动作以获得掩蔽，即使你邻近没有正常情况下能用于寻找掩蔽的障碍物。你获得@UUID[Compendium.pf2e.feats-srd.Item.beyw5bdA5hkQbmaG]专长，即使你没有在隐秘技能上具备受训熟练度，你必须为该地形潜伏专长选择灌木丛地形。</p>"
+        },
+        "Stonestep Shisk": {
+            "name": "岩步希斯克 Stonestep Shisk",
+            "description": "<p>穿越山脉和其他岩石地貌对你而言已经是一种本能。你可以忽略由小石子和土石材质的不稳表面造成的非魔法困难地形效果。</p>"
+        },
+        "Deep Fetchling": {
+            "name": "深暗窃影鬼 Deep Fetchling",
+            "description": "<p>你的祖先居住在阴影位面最深、最危险的区域。你的阴影更为浓重、心跳更为缓慢，并能在黑暗的拥抱中找到慰藉。当你获得此遗传时，选择寒冷或虚能抗力，其数值等于你等级的一半（最少为1）。</p>"
+        },
+        "Dragonscaled Kobold": {
+            "name": "龙鳞狗头人 Dragonscaled Kobold",
+            "description": "<p>你所属的巢穴与龙有着深厚的联系，你的鳞片也因此比其他狗头人更加坚硬。你从族裔中获得10点生命值以取代原本的6点。在对抗龙息、带有睡眠特征的效果、以及会使你@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]的效果时，你在豁免检定上获得+1环境加值。</p>"
+        },
+        "Compact Skeleton": {
+            "name": "紧凑骷髅 Compact Skeleton",
+            "description": "<p>对于那些需要精细操作的任务，侏儒、地精和半身人的遗骸会比更大的生物更合适。这些更小、更灵活的骷髅能够轻易地被塞进旅行箱、能够强行通过狭窄空间、能够更好地藏起来。你的体型从中型改为小型。你获得@UUID[Compendium.pf2e.feats-srd.Item.3G8xUlgCjRmRJNfP]{迅速穿行 Quick Squeeze}专长，即使你没有特技受训。不需要使用挤入的狭窄空间对于你而言不是困难地形。</p>"
+        },
+        "Fodder Skeleton": {
+            "name": "素材骷髅 Fodder Skeleton",
+            "description": "<p>人类、以及那些躯体相近的种族，是死灵师最喜欢使用的素材。他们易于获得，而且生理特征已经被广泛地研究过，所以很容易大规模生产这种骷髅。尽管名称各异，但素材骷髅由于他们体内的死亡能量的传递效率，能成为相当灵活的士兵。你的基础速度从25尺提升到30尺。</p>"
+        },
+        "Monstrous Skeleton": {
+            "name": "怪物骷髅 Monstrous Skeleton",
+            "description": "<p>创造一名非人型的骷髅通常为了它们致命的躯体攻击和可怕的外表。一个技艺高超的死灵师，往往会从具备奇形怪状骨骼的魔兽和怪物般的类人生物中唤起骷髅，以充作他们收集品的核心。你获得一项爪抓、角抵、尾扫、或翼击的无武装攻击，并造成1d6伤害。爪抓造成挥砍伤害、角抵造成穿刺伤害、尾扫和翼击造成钝击伤害。该无武装攻击属于搏击武器组，具有娴熟和无武装特征。</p>"
+        },
+        "Sturdy Skeleton": {
+            "name": "强健骷髅 Sturdy Skeleton",
+            "description": "<p>某些危险的条件不适合一般的骷髅，所以死灵师可能会选择从矮人、兽人或其他以健壮著称的生物中唤起骷髅。你从种族中获得10hp，而不是6hp，并获得@UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{顽强 Diehard}专长。</p>"
+        },
+        "Pine Leshy": {
+            "name": "松树莱西 Pine Leshy",
+            "description": "<p>你包裹树皮的身体能分泌一种厚而稠的粘液，让攀爬和抓握装备变得更加容易。你获得@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬 Combat Climber}专长作为奖励专长，并且每当有人尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}你的时候，你的反射DC获得+2环境加值。</p>"
+        },
+        "Reflection": {
+            "name": "镜像 Reflection",
+            "description": "<p>你被创造作为另一个生物的复制体，故意或偶然皆有，尽管你可能并不知晓自身的起源。除了一两个小记号外，你看起来与你的原身几乎相同。你在你的族裔特征外，额外获得镜像特征。你乔装成你的原身时不需要尝试欺骗检定，除非你在与相当熟悉他的人互动或你做了一些不符合他性格的事。GM也可能会在其他情况要求你掷骰欺骗检定，比如你诞自镜中，并且与一个看见你与原身的高度相似却注意到某个显著特征在相反一面的人互动时。每当你获得一个族裔专长时，你可以从镜像专长和你的族裔专长中选择。</p>"
+        },
+        "Ancient Ash": {
+            "name": "古之余烬 Ancient Ash",
+            "description": "<p>你的记忆敏锐而清晰，你记得那么多。你还记得暴风雨前的宁静和雨后的泥土味道，魔法的刺鼻气味和低语之歌。你把它们全都记住了。你选择一个技能受训。在五级时，这个技能变为专家熟练度。</p>"
+        },
+        "Enchanting Lily": {
+            "name": "妖娆百合 Enchanting Lily",
+            "description": "<p>你闻起来如此甜美——一种柔和的花香，就像百合醉人的芬芳和丁香花的柔和芬芳。 你的交涉技能受训（如果你的已经交涉技能已经受训，则可以改为其他技能受训）。 如果目标能闻到你的香味，你在@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象 Make an Impression}检定中获得+1环境加值。</p>"
+        },
+        "Strong Oak": {
+            "name": "坚如橡木 Strong Oak",
+            "description": "<p>大多数蒿兰人都有柔软的藤蔓和坚韧的茎干，但你长回了坚固、粗糙的树皮，并且你的腿像根一样稳定。在对抗@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}你的尝试时你的强韧或反射DC在获得+2环境加值。该加值也应用于对抗会@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱 Grab}你、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrain}你或将你击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的效果的豁免检定。你在@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{保持平衡 Balance}的特技动作检定上也获得+2环境加值。</p>"
+        },
+        "Thorned Rose": {
+            "name": "带刺玫瑰 Thorned Rose",
+            "description": "<p>你美丽的花瓣和看似光滑的皮肤隐藏着无声的倒刺刺穿粗心之人。你的身体布满了险恶的刺，以阻止那些可能捕食你的人。你获得@UUID[Compendium.pf2e.actionspf2e.Item.ncdryKskPwHMgHFh]{险恶棘刺 Wicked Thorns}反应。</p>"
+        },
+        "Elusive Vishkanya": {
+            "description": "<p>你灵活的身体在别人看来就像不自然流动的液体，不过他们很难说清楚到底哪里奇怪。你可以轻松地从敌人手上逃脱。你在@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escape}时的检定上获得+1环境加值。此外，你使用挤入时能以两倍速度移动。</p>",
+            "name": "诡行蝮血裔 Elusive Vishkanya"
+        },
+        "Keen-Venom Vishkanya": {
+            "name": "锐毒蝮血裔 Keen-Venom Vishkanya",
+            "description": "<p>你大量练习在战斗中使用毒液，已经可以在一瞬间就涂上毒。你的@UUID[Compendium.pf2e.actionspf2e.Item.s4V7JWSMF9JPJAeX]{下毒 Envenom}动作不会触发由于操作动作而触发的反应。此外，你还获得了@UUID[Compendium.pf2e.actionspf2e.Item.B7wDxyjX66JkiCOV]{涂毒备战 Venom Draw}动作。</p>"
+        },
+        "Old-Blood Vishkanya": {
+            "name": "古血蝮血裔 Old-Blood Vishkanya",
+            "description": "<p>你的母系血脉可以追溯到最初前来扎摩诔开荒的伏陀罗船上的一群蝮血裔。自那以后，你的家族已经很好地适应了内海的新生活。你获得社群受训（如果你已有社群受训，则可另选一种技能），你选择获得@UUID[Compendium.pf2e.feats-srd.Item.JtjnFsOToBLnSRO9]{贵族风范 Courtly Graces}专长或@UUID[Compendium.pf2e.feats-srd.Item.X2jGFfLU5qI5XVot]{人情练达 Streetwise}专长。</p>"
+        },
+        "Prismatic Vishkanya": {
+            "name": "闪鳞蝮血裔 Prismatic Vishkanya",
+            "description": "<p>你的鳞片闪闪发光，在光线下呈现出令人陶醉的色彩。你获得表演受训（如果你已有表演受训，则可另选一种技能），并获得@UUID[Compendium.pf2e.feats-srd.Item.7LB00jkh6JaJr3vS]{迷魂表演 Fascinating Performance}专长。</p>"
+        },
+        "Scalekeeper Vishkanya": {
+            "name": "鳞史蝮血裔 Scalekeeper Vishkanya",
+            "description": "<p>你是所在社区的蝮血裔家族中的一员，负责记录你们民族的历史和经验。进行学术研究使你的思维变得敏捷。每日一次，你可以尝试以自由动作来回忆知识。</p>"
+        },
+        "Venom-Resistant Vishkanya": {
+            "name": "耐毒蝮血裔 Venom-Resistant Vishkanya",
+            "description": "<p>你身体内不仅有毒液，还含有大量抗毒血清。你获得相当于你等级的一半的毒素抗力（最低为1），你每次对抗毒素苦难的豁免成功时,都会使其阶段减少2，如果是恶性毒素则阶段减少1。每当在对抗正在持续的毒素时大成功,都会使其阶段减少3，如果是恶性毒素则减少2。</p>"
+        },
+        "Surgewise Fleshwarp": {
+            "description": "<p>你身体毛发的起伏与泉涌魔法高度同调；它们因洞悉异能能量而颤动，它们的震动提示你秘密的存在。你在神秘技能上受训。如果你已在神秘技能上受训，自选另一个技能受训。你还获得@UUID[Compendium.pf2e.feats-srd.Item.hDGosy2ZTwnyctEP]{辨别异象 Oddity Identification}技能专长。</p>",
+            "name": "泉涌畸肉体 Surgewise Fleshwarp"
+        },
+        "Cataphract Fleshwarp": {
+            "description": "<p>你的骨架专为战斗硬化，附着了额外的软骨和肌肉，可以帮助你在远距离作战时长期承受盔甲的负担。你的皮肤上遍布柔韧而有弹性的角质，优化盔甲在身体各处的重量分摊，提高控制度。你获得@UUID[Compendium.pf2e.feats-srd.Item.BStw1cANwx5baL6d]{护甲擅长 Armor Proficiency}通用专长。</p>\n<p>若你的职业赋予你所有护甲的熟练度，你转而在运动技能上获得受训（如果你已在运动技能上受训，自选一个技能受训）并获得@UUID[Compendium.pf2e.feats-srd.Item.Lc4dJZivRwU3QEmT]{穿甲助手 Armor Assist}技能专长。</p>",
+            "name": "铁骑畸肉体 Cataphract Fleshwarp"
+        },
+        "Discarded Fleshwarp": {
+            "name": "废弃畸肉体 Discarded Fleshwarp",
+            "description": "<p>扭曲你形态的生物学家和突变学家为你贴上了“发现即可废弃”的标签——这是一种委婉说法，意在当场将你销毁。作为异常中的异常，你的身体顽固地拒绝了制造者按照他们的宏伟愿景改造你的努力，而你的免疫削弱了扭曲肉体时的最坏影响。如果你在对抗变化系效果的豁免检定中取得成功，你改为获得大成功。</p>"
+        },
+        "Athamasi": {
+            "name": "阿塔玛斯蛛犀虫裔 Athamasi",
+            "description": "<p>你有第二对小巧的手臂，用于攀爬或悬挂在树上。你不能用这些手臂持握或取回物品，但你可以用它们攀爬或@UUID[Compendium.pf2e.actionspf2e.Item.3yoajuKjwHZ9ApUY]，即使你的两手都拿满东西。你不会在攀爬中陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+        },
+        "Xyloshi": {
+            "description": "<p>你突出的颈部肌肉让你能将脸上的尖角当做武器或工具使用。你获得造成1d6穿刺伤害的尖角（Horn）无武装打击。你的尖角属于搏击武器组，拥有娴熟和无武装特征。</p>",
+            "name": "阔材小蠹犀虫裔 Xyloshi"
+        },
+        "Nascent": {
+            "description": "<p>大部分犀虫裔在成年时已经完全进化并适应了所属环境，但有些人成年后仍然保留着进化潜能，等待释放。你获得一个你满足先决条件（若有）的1级犀虫裔族裔专长。</p>",
+            "name": "初生态犀虫裔 Nascent"
+        },
+        "Trogloshi": {
+            "description": "<p>你的进化适应于茂密丛林和深邃洞穴中没有阳光的区域，你的肉体柔软而缺乏色素，水晶角异常清澈。你获得@UUID[Compendium.pf2e.feats-srd.Item.TLuFqQwvnlJNeEsv]{水晶辉光 Crystal Luminescence}族裔专长。</p>",
+            "name": "洞穴强盗蛛犀虫裔 Trogloshi"
+        },
+        "Lethoci": {
+            "description": "<p>你来自适应海岸线或内陆池塘、湖泊生活的犀虫裔家族。你在游泳的运动检定中获得+2环境加值。如果你在游泳的运动检定中大失败，你转而获得失败的结果。</p>",
+            "name": "水生田鳖犀虫裔 Lethoci"
+        },
+        "Hooded Nagaji": {
+            "name": "膨颈娜迦裔 Hooded Nagaji",
+            "description": "<p>你长着眼镜蛇的头，像兜帽一样。和眼镜蛇一样，你能从嘴里射出毒液。你获得剧毒喷吐（venomous spit）远程无武装打击，射程增量10尺，造成1d4毒素伤害。重击时，目标承受等于武器骰数量的持续毒素伤害。你的喷吐打击没有武器组和重击专精效果。</p>"
+        },
+        "Sacred Nagaji": {
+            "name": "神圣娜迦裔 Sacred Nagaji",
+            "description": "<p>你从大多数娜迦裔同族中脱颖而出，你的上半身是富有魅力的人形，下半身是绿色或白色的蛇尾。传说中，你的祖先因对娜丽妮瓦蒂格外忠贞而受擢升。你不获得尖牙无武装打击，取而代之的是尾扫无武装打击，造成1d6钝击伤害，属于搏击武器组，具有娴熟和无武装特征。你在对抗@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}和@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}的强韧或反射DC上获得+2环境加值，这些加值适用于对抗@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱 Grab}你、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrain}你或让你@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的豁免检定。</p>"
+        },
+        "Venomshield Nagaji": {
+            "name": "毒盾娜迦裔 Venomshield Nagaji",
+            "description": "<p>你与娜迦和蛇类的本质性联系赋予你对各种毒素的天生抗力。你获得等于你等级一半的毒素抗力（最低1点），并且你在对抗毒素时全豁免获得+1环境加值。</p>"
+        },
+        "Whipfang Nagaji": {
+            "description": "<p>你的脖子长而灵活，它能卷曲成蛇一般的攻击姿势。你强大的肌肉允许你以惊人的速度从远处出击。你获得@UUID[Compendium.pf2e.actionspf2e.Item.MLOkyKi1Y3N6y56Q]{抬颈 Raise Neck}动作。</p>",
+            "name": "鞭牙娜迦裔 Whipfang Nagaji"
+        },
+        "Titan Nagaji": {
+            "description": "<p>你从小被培养成一名战士或保镖，专门设计的饮食和隆起的肌肉让你的鳞片如盔甲一样坚固。你的鳞片属于板甲组中的中甲，给予+4AC的物品加值，敏捷上限为+1，检定减值为-2，速度减值-5尺，需求力量值为+3，并具有舒适特征。你无法穿戴其他护甲，也无法移除你的鳞片。你可以在鳞片上蚀刻护甲符文。</p>",
+            "name": "泰坦娜迦裔 Titan Nagaji"
+        },
+        "Ragdyan Vanara": {
+            "description": "<p>作为传统的守护者和古老故事的讲述者，你的家族可以追溯到直接由腊格迪亚的奇想诞生的那些灵猴裔。当你开口时，其他人倾向于聆听你的话语，或许是由于你与腊格迪亚联系中的神性火花。你从神术法术表中获得一个戏法；该戏法不能造成伤害或用其他方式导致直接伤害。你可以以神术内在法术的形式随意施展该法术。该戏法会被升阶至你等级的一半，向上取整。</p>",
+            "name": "腊格迪亚灵猴裔 Ragdyan Vanara"
+        },
+        "Wajaghand Vanara": {
+            "description": "<p>你的祖先是被罗刹鬼神，始末之拉瓦那奴役的劳工。尽管他们的聪明才智在被囚禁期间拯救了无数生命，他们也不再被奴役，但那段时日还是给你的家族在心中留下了永远不会真正愈合的伤疤，即便是跨越了许多代人。你获得在对抗情绪效果时豁免+1环境加值，并且当你在对抗情绪效果时豁免取得成功结，你改为取得大成功结果。</p>",
+            "name": "瓦贾汗德灵猴裔 Wajaghand Vanara"
+        },
+        "Lahkgyan Vanara": {
+            "name": "拉耆亚灵猴裔 Lahkgyan Vanara",
+            "description": "<p>你的灵猴裔祖先可能是诞生自腊格迪亚的想象，但却只是在为他的敌人：红面拉耆亚，效命才活了下来。你有着尖牙，用于撕咬下肉。你可以只食用生肉维生。你拥有造成1d6穿刺伤害的颚咬无武装攻击。你的颚咬是搏击武器组，具有娴熟和无武装特征。</p>"
+        },
+        "Bandaagee Vanara": {
+            "description": "<p>你的家族是许多号称是名为邦达吉，缔造了和平的灵猴裔皇室家族其后裔之一。邦达吉是最常见的一种灵猴裔。你非常熟悉文明的气息，能够轻松穿越最拥挤的社区。你忽视由人群形成的困难地形。</p>",
+            "name": "邦达吉灵猴裔 Bandaagee Vanara"
+        },
+        "Forge-Blessed Dwarf": {
+            "description": "<p>你来自一个将矮人神祇视作高于一切的高盔堡家庭。你出生便被家族的守护神赐福，给予了你些微祂的神力。从矮人诸神中选择一位神祇。你可以将祂授予牧师的1环级法术作为内在神术法术每周一次施放（例如你家族守护神是波络卡（Bolka）就是@UUID[Compendium.pf2e.spells-srd.Item.szIyEsvihc5e1w8n]{安抚术 Soothe}）。</p>",
+            "name": "熔炉赐福矮人 Forge-Blessed Dwarf"
+        },
+        "Talos": {
+            "description": "<p>你的形貌特征反映出了来自金巨灵或其他金元素的影响已经凌驾于你的血统之上。你的皮肤可能具有金属光泽，从原矿那晦暗的哑光到一把新刀的闪亮光泽兼有可能，而随着年龄的增长或生活的艰辛，它会变得灰暗，生锈，或磨损。你的头发可能像是金丝，钢卷，铜线，或是编织起来的锁链。除了来自你族裔的特征外，你获得金元素裔特征。你获得等同于等级一半的电击抗力（最小1）。你可以随意以奥术内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.vJZ83ehQiM906lea]{侦测金属 Detect Metal}戏法。戏法升阶至你等级的一半，向上取整。</p>\n<p>你每次获得族裔专长时，可以从金元素裔专长，巨灵裔专长，以及你的族裔专长中选择。</p>",
+            "name": "金元素裔 Talos"
+        },
+        "Ardande": {
+            "description": "<p>你是木元素的后裔或具有其他受到木元素位面影响的传承。你可能拥有绿色的，覆盖苔藓的皮肤，你的头顶长满藤蔓而非通头发，或是像树枝一样的细附肢。除了你族裔的特征外，你获得木元素裔特征。你也将获得昏暗视觉，或则在你的族裔已经拥有昏暗视觉时，获得黑暗视觉。</p>\n<p>你每次获得族裔专长时，可以从木元素裔专长，巨灵裔专长，以及你的族裔专长中选择。</p>",
+            "name": "木元素裔 Ardande"
+        },
+        "Dromaar": {
+            "description": "<p>兽人的力量增强了你的血脉。你有着绿色的皮肤或者其它兽人血统所会带来的外表特征。你获得“兽人”特征、“半兽人”特征以及昏暗视觉。获得族裔专长时，除了你的基础族裔外，你还能从兽人专长以及半兽人专长中进行选取。</p>",
+            "name": "卓玛尔（半兽人） Dromaar"
+        },
+        "Nephilim": {
+            "description": "<p>你的本质受到了天族、魔族亦或观察者等的影响。其显在表现便是你展现出了一系列与你自身族裔并不相符的外在特征，比如说金色的双眼、头顶光环、长有犄角与尾巴等。除了你自身族裔的特征外，你还会获得“异界裔”特征。你获得昏暗视觉，若你的族裔已有昏暗视觉，你转而获得黑暗视觉。获得族裔专长时，你能从异界裔专长或原族裔专长中进行选取。</p>",
+            "name": "异界裔 Nephilim"
+        },
+        "Aiuvarin": {
+            "description": "<p>你的家系中有着精灵亦或半精灵的存在。你长着尖尖的耳朵以及其它精灵血统所会带来的外表特征。你获得“精灵”特征、“半精灵”特征以及昏暗视觉。获得族裔专长时，除了你的基础族裔外，你还能从精灵专长以及半精灵专长中进行选取。</p>",
+            "name": "艾瓦林（半精灵） Aiuvarin"
+        },
+        "Flying Animal": {
+            "description": "<p>你是一种能长时间或持续飞行的动物，例如鹰，蝙蝠，蜂或鼯鼠。</p>\n<p>启蒙过程扰乱了你如从前般自由飞翔的能力。以前用于自动运作飞行的脑容现在必须拿一些用来思考，直到它再次可以自动运作。你仍然可以减缓下降速度，因此无论坠落距离多远，你都不会受到坠落伤害。大多数飞行启蒙动物可以在1级时选取起飞族裔专长来恢复有限的飞行能力。你具有20尺陆地速度，以及一种任选的动物攻击（通常为喙，爪，颚，足爪，或翅膀）。</p>",
+            "name": "飞行动物 Flying Animal"
+        },
+        "Climbing Animal": {
+            "description": "<p>你是一种四肢善于抓握，攀爬，和在树枝间晃荡的动物。你可能像黑猩猩或水獭一样灵巧，准备好使用工具，也可能仅仅是像熊，浣熊，或树懒一样的快速攀爬者。</p>\n<p>你具有20尺陆地速度，20尺攀爬速度，以及一种任选的动物攻击（通常为爪，拳，或颚）。</p>",
+            "name": "攀爬动物 Climbing Animal"
+        },
+        "Running Animal": {
+            "description": "<p>你是一种适合在陆地上高速奔跑的动物。通常你像狗一样用四肢奔跑，但也可以像袋鼠，鸸鹋或企鹅一样用两腿奔跑。</p>\n<p>你具有30尺陆地速度，以及一种任选的动物攻击（通常为爪，颚，或尾）。</p>",
+            "name": "奔跑动物 Running Animal"
+        },
+        "Swimming Animal": {
+            "description": "<p>你是一种最为适应水中生活的水栖动物。你可能会像鳄鱼，海豹，鲸或海豚一样在水中度过大部分时间，或则你像鱼或某些甲壳纲动物一样需要在水中呼吸。</p>\n<p>你具有一种任选的动物攻击（通常为爪，颚，或尾）。选择你为水栖还是水居。</p>\n<ul>\n<li><strong>水栖 Aquatic：</strong> 你获得水栖特征，你具有30尺游泳速度。水栖特征意味着你在水中非在空气中呼吸，且你的钝击和挥砍无武装打击在水中不会承受-2减值。</li>\n<li><strong>水居 Water-dwelling：</strong> 你可以在水中屏息10分钟才需要换气。你具有20尺游泳速度，且如果你在陆地上移动时，你具有20尺基础速度。</li>\n</ul>",
+            "name": "游泳动物 Swimming Animal"
+        },
+        "Glacier Cavern Minotaur": {
+            "description": "<p>你的皮毛厚实又保暖，非常适合你所居住的冰冻山脉。你获得寒冷抗力，数值等同于你的等级的一半（最低1点）。环境寒冷效果的严重程度对你来说会减弱1阶。</p>",
+            "name": "冰窟牛头人 Glacier Cavern Minotaur"
+        },
+        "Ghost Bull Minotaur": {
+            "description": "<p>你的皮毛宛如死亡一般苍白，这可能是因为你或你的家人与彼世所具有的某种联系，而这能让你以超自然的方式寻得前路。你能够以异能内在法术来随意施放@UUID[Compendium.pf2e.spells-srd.Item.tXa5vOu5giBNCjdR]{指路术 Know the Way}。该戏法会升阶至你等级一半的环级（向上取整）。此外，你在对抗造成@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}状态的法术或效果时获得+1环境加值。</p>",
+            "name": "灵牛牛头人 Ghost Bull Minotaur"
+        },
+        "Littlehorn Minotaur": {
+            "description": "<p>尽管力量不弱于其他牛头人，但你的身体（以及你的尖角）比大多数其他同族都小一号。你的体型为中型，而非大型。你的尖角无武装攻击造成1d6点穿刺伤害，而非1d8点，但是具有灵巧特征。</p>",
+            "name": "小角牛头人 Littlehorn Minotaur"
+        },
+        "Stalker Minotaur": {
+            "description": "<p>尽管你的身体很重，但在行走时带有绒毛的蹄子能压抑脚步声，让你能给猎物带来惊喜。你的隐秘熟练度变为受训（若你的隐秘已受训，则选择另一项技能），并且获得@UUID[Compendium.pf2e.feats-srd.Item.beyw5bdA5hkQbmaG]{地形潜伏 Terrain Stalker}技能专长，不过你必须选择石堆，且你只要移动距离不超过10尺（取代原本的5尺），就无需尝试隐秘检定便可以@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}。</p>",
+            "name": "追踪者牛头人 Stalker Minotaur"
+        },
+        "Roaming Minotaur": {
+            "name": "漫游牛头人 Roaming Minotaur",
+            "description": "<p>你的双蹄宽大有力，非常适合在走路时清开瓦砾。你的生存熟练度变为受训（若你的生存已受训，则选择另一项技能），并且获得@UUID[Compendium.pf2e.feats-srd.Item.4tTkRyOQ0VuRBac3]{地形专家 Terrain Expertise}技能专长。当你身处地形专家专长中选择的地形时，你能够忽略自然崎岖地面产生的困难地形。</p>"
+        },
+        "Slabsoul Minotaur": {
+            "name": "板魂牛头人 Slabsoul Minotaur",
+            "description": "<p>你与岩石和墙壁的深厚联系使得自己能够呼唤出巨大的花岗岩石板来砸在敌人身上。你获得@UUID[Compendium.pf2e.actionspf2e.Item.0VwLAKI7QP6mib88]{升起岩板 Raise Slabs}行动。</p>"
+        },
+        "Abyssal Merfolk": {
+            "description": "<p>你生活在深海之下。你的尾巴可能像蝰鱼或鮟鱇鱼，你可能有发光的眼睛或半透明的皮肤。深海人鱼的名声很不好，但他们可以在最黑暗的地方生活。你获得黑暗视觉，并对海洋深处的水压免疫。</p>",
+            "name": "深海人鱼 Abyssal Merfolk"
+        },
+        "Carcharodon Merfolk": {
+            "description": "<p>作为可怕的鲨鱼人鱼，你的下半身与海洋中的顶级掠食者相似。就像鲨鱼一样，你可以在很远的地方闻到血腥味。你获得灵敏嗅觉模糊感官范围为30尺。不过，你可以闻到溢出的血腥味，空气中时范围为120尺，水中时为500尺。</p>",
+            "name": "大白鲨人鱼 Carcharodon Merfolk"
+        },
+        "Pelagic Merfolk": {
+            "description": "<p>你是公海的人鱼。你的尾巴是仿照在你的狩猎场中成群结队的银色金枪鱼和鲱鱼而设计的。水服从于你的意志，只需一句话，你就能为自己披上一层水衣。你将获得@UUID[Compendium.pf2e.actionspf2e.Item.yOk8s1pftOe5I9Sg]{波浪屏障 Shielding Wave}动作。 </p>",
+            "name": "远洋人鱼 Pelagic Merfolk"
+        },
+        "Reef Merfolk": {
+            "description": "<p>你在色彩斑斓的珊瑚和热带鱼群中长大。与大多数人鱼相比，你的身体有着鲜艳的条纹、斑点和图案，类似于小丑鱼或天使鱼。你已经习惯了家中偶尔出现的有毒生物，很少受到蜇伤或微弱毒素的困扰。你获得毒抗力，相当于你等级的一半（最低为1），每次对毒素苦难的成功豁免都会使其阶段降低2，恶性毒素则降低1 。对正在生效的毒素的每次大成功都会使其阶段降低3 ，恶性毒素则降低2。</p>",
+            "name": "珊瑚礁人鱼 Reef Merfolk"
+        },
+        "Sailfish Merfolk": {
+            "description": "<p>你的下半身就像一只威武的旗鱼，配有一个巨大的背鳍。使用这个背鳍，你可以在水中移动得更快，跳跃得更远。你的游泳速度增加到30尺。当你尝试@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}时，你的运动检定会获得+1环境加值，并且你可以在跳跃前进行游泳来代替行走。</p>",
+            "name": "旗鱼人鱼 Sailfish Merfolk"
+        },
+        "Elytron Surki": {
+            "description": "<p>你甲壳的顶部非常灵活，当你坠落时，你可以将其展开来优雅地借助空气动力。无论你跌落多少距离，都不会受到任何跌落伤害。</p>\n<ul>\n<li><strong>进化</strong> 你肩部的节点进化出了一对神经突刺，你可以激活它来投射出一对闪光双翅。每日一次，你可以施放@UUID[Compendium.pf2e.spells-srd.Item.A2JfEKe6BZcTG1S8]{飞行术 Fly}作为内在法术，只能以自己为目标；当你的鞘翅激活时，你会在20尺半径内发出明亮光照，以及再向外延伸20尺的昏暗光照。</li>\n<li><strong>进化</strong> 你的肩部节点进化为了薄膜状的风叶，可以在魔法流经时发出共鸣。你获得@UUID[Compendium.pf2e.actionspf2e.Item.VPl4pifKcq7ecK87]{刺耳鸣歌 Stridulating Song}动作。</li>\n</ul>",
+            "name": "鞘翅虫人 Elytron Surki"
+        },
+        "Hardshell Surki": {
+            "description": "<p>你的甲壳质层比其它瑟基虫人更加厚重，为你提供了一套天然的护甲。你的甲壳是中甲，属于板甲武器组，赋予AC+4物品加值，敏捷调整上限为+1，检定减值为-2，速度减值为-5尺，力量为+3，并具有舒适特征。你无法穿戴其它护甲或移除你的甲壳。你可以在甲壳上蚀刻护甲符文。</p>\n<ul>\n<li><strong>进化</strong> 你体内节点之间的魔法回路形成了一套加固阵列，用魔力强化了你的甲壳。若你被物理伤害的打击造成了重击，你可以使用你的反应来尝试一次@Check[flat|dc:17|showDC:all]检定。若成功，该攻击变为普通命中。</li>\n<li><strong>进化</strong> 你的腹部节点可以投射出魔法力场，保护你免受自己熟悉的魔法类型所影响。你获得@UUID[Compendium.pf2e.actionspf2e.Item.cczvLO5r7QuHaXwx]动作。</li>\n</ul>",
+            "name": "硬壳虫人 Hardshell Surki"
+        },
+        "Breaker Surki": {
+            "description": "<p>你的利爪极其的坚硬，不但能够破开土层，还能撕碎捕食者。你获得爪抓无武装攻击，造成1d4挥砍伤害。你的爪抓属于搏击武器组，具有灵巧，娴熟，无武装和多用B特征。</p>\n<ul>\n<li><strong>进化</strong> 你通过腕部的节点，将魔法能量投射为持续存在的棱锥挖爪。你可以花费一个交互动作来将你的爪击无武装打击伤害提高至1d6；并赋予其魔法，拆毁和多用 力场特征；并移除灵巧特征。你可以再花费一个单动作来解消棱锥并将爪抓的数据卡还原。</li>\n<li><strong>进化</strong> 你的肘部节点可以发射出接地爪刺，将你固定在原位。如果某一效果将要强迫你移动10尺或以上，你可以选择只移动半数的距离。爪刺提供的额外支持使你能够在一只手被占用的情况下（若你拥有@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬 Combat Climber}专长则两只手均被占用时也可以）进行攀爬。你获得@UUID[Compendium.pf2e.actionspf2e.Item.kWrks0NxMQH39JHD]{挖掘壕沟 Trench Digging}反应。</li>\n</ul>",
+            "name": "破坏虫人 Breaker Surki"
+        },
+        "Budding Speaker Centaur": {
+            "description": "<p>你生来就带有魔法的火花，使你得以踏上苍翠语者或虔心语者之道。选择神术或原能。若你选择神术，则你成为虔心语者。若你选择原能，则你成为苍翠语者。这一选择无法更改。你获得所选根源法术列表里的一个戏法。你可以作为内在法术任意施放该戏法。该戏法自动被升阶到你等级的一半，向上取整。</p>",
+            "name": "稚语半人马 Budding Speaker Centaur"
+        },
+        "Mottle-Coat Centaur": {
+            "description": "<p>你的皮毛上有着驳杂的斑点或条纹，赋予你在自己居住环境中的天然迷彩。从下列地形中选择一项：极地，沙漠，森林，山地，平原，或沼泽。在你选择的地形当中，你在用于@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}或@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}的隐秘检定和用于@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{虚招 Feint}的欺骗检定中获得+1环境加值。</p>",
+            "name": "斑鬃半人马 Mottle-Coat Centaur"
+        },
+        "Ponygait Centaur": {
+            "description": "<p>你比大多数其它半人马体型更小，但奔驰的速度却毫不逊色。你的体型为中型而非大型。你在反射豁免骰上获得+1环境加值。</p>",
+            "name": "驹态半人马 Ponygait Centaur"
+        },
+        "Stoutheart Centaur": {
+            "description": "<p>你是一头吃苦耐劳的半人马，心性坚韧而绝不动摇。你从族裔中获得的HP为10而非8，在@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{保持平衡 Balance}的特技检定和避免被摔绊的反射DC上获得+1环境加值。</p>",
+            "name": "壮心半人马 Stoutheart Centaur"
+        },
+        "Ironhoof Centaur": {
+            "description": "<p>你的蹄子惊人地强壮，可以作为可怕的武器。你获得蹄击无武装攻击，造成1d6钝击伤害。你的蹄击属于搏击武器组，具有娴熟和无武装特征。</p>",
+            "name": "钢蹄半人马 Ironhoof Centaur"
+        },
+        "Fleetwind Centaur": {
+            "description": "<p>你流线型的优美身躯使你只用四蹄就得以达到令人难以置信的速度。你的速度提高5尺。</p>",
+            "name": "驰风半人马 Fleetwind Centaur"
+        },
+        "Hopeful Athamaru": {
+            "description": "<p>你开始准备成为阿萨鱼人主母，可能你踏出群落就是为了更好地准备成为一名领袖。作为身体变化的一部分，你比之前更加高大了。你的体型为大型而非中型。此外，你给你的盟友灌输充满希望的感觉。你获得10尺灵光，灵光范围内任何盟友对抗恐惧的豁免检定获得+1环境加值；这是一种情绪和心灵效果。</p>",
+            "name": "雄心阿萨鱼人 Hopeful Athamaru"
+        },
+        "Kaleidoscopic Athamaru": {
+            "name": "万变阿萨鱼人 Kaleidoscopic Athamaru",
+            "description": "<p>你的鳞片如同色谱一般在光线下闪烁。在明亮光或昏暗光中，你的表演检定获得+1环境加值。你还获得@UUID[Compendium.pf2e.actionspf2e.Item.0LwQufKtXfRda0BR]{眩惑搜查者 Dazzle Seeker}反应动作。</p>"
+        },
+        "Coral Athamaru": {
+            "name": "珊瑚阿萨鱼人 Coral Athamaru",
+            "description": "<p>你身上的一些部分覆盖着珊瑚，提供了一层自然防护。珊瑚阿萨鱼人通常会选择珊瑚共生和其他相关的族裔专长。珊瑚护甲视为中甲，属于板甲护甲组，AC +4物品加值，敏捷上限为+1，检定减值-2，速度减值-5尺，力量需求+3，具有水下和舒适特征。你不能穿戴其他护甲，也不能移除珊瑚。你可以在珊瑚上镶嵌护甲符文。</p>"
+        },
+        "Quilled Athamaru": {
+            "name": "硬毛阿萨鱼人 Quilled Athamaru",
+            "description": "<p>你头部周围的尖锐硬毛能够深深刺入敌人体内。大部分阿萨鱼人利用硬毛进行防御，但在恰当的时候使用头部进行猛击可以达成破坏力极大的效果。你获得硬毛无武装攻击，造成1d6穿刺伤害。你的硬毛属于搏击武器组，具有灵巧、娴熟和无武装特征。</p>"
+        },
+        "Skilled Human": {
+            "name": "精熟人类 Skilled Human",
+            "description": "<p>你的聪明才智让你有机会擅长多种技能。你选择的一项技能获得受训熟练度。5级时，你在该所选技能上的熟练度提升至专家。</p>"
+        },
+        "Versatile Human": {
+            "description": "<p>人类的多才多艺和雄心壮志让他们在世界上的绝大多数国家中都成为了最为常见的族裔。选取一项你满足先决条件的通用专长（一如你的族裔专长，你可以在创建角色的任意时点选取该通用专长）。</p>",
+            "name": "多才人类 Versatile Human"
+        },
+        "Poisonhide Tripkee": {
+            "description": "<p>你的体型可能很小，但你皮肤下的毒腺是一道致命的防御。你获得@UUID[Compendium.pf2e.actionspf2e.Item.kKKHwVUnroKuAnOt]反应动作。</p>",
+            "name": "毒肤树蛙人 Poisonhide Tripkee"
+        },
+        "Snaptongue Tripkee": {
+            "description": "<p>你的舌头特别长，你可以以非凡的射程和准度射出它。你可以用你的舌头传递接触射程的法术以及执行极简单的交互动作，例如打开某些没上锁的门。你的舌头不能执行需要手指或灵巧双手的动作，包括任何需要通过检定才能达成的动作，你不能使用它来握持物品。</p>",
+            "name": "利舌树蛙人 Snaptongue Tripkee"
+        },
+        "Thickskin Tripkee": {
+            "description": "<p>你的厚皮酷似蟾蜍。你从族裔中获得8点生命值而非6点。你在对抗疾病和毒素的豁免上获得+1环境加值。</p>",
+            "name": "厚皮树蛙人 Thickskin Tripkee"
+        },
+        "Riverside Tripkee": {
+            "description": "<p>你的祖先生活在水中或水边。你获得15尺游泳速度。</p>",
+            "name": "河畔树蛙人 Riverside Tripkee"
+        },
+        "Stickytoe Tripkee": {
+            "description": "<p>你的手脚会分泌出一层薄膜，帮助它们附着在物体表面。你在对抗尝试对你@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]，@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]，@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]，或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]的强韧和反射DC上获得+2环境加值。在攀爬树木、藤蔓和其他植物时，如果你进行攀爬的运动检定掷骰出成功，你改为获得大成功。</p>",
+            "name": "粘趾树蛙人 Stickytoe Tripkee"
+        },
+        "Windweb Tripkee": {
+            "description": "<p>你手指与脚趾间坚韧的脚蹼能够减缓任何坠落。只要你有一只空着的手，你就免受坠落伤害，无论你的坠落距离有多高。</p>",
+            "name": "风蹼树蛙人 Windweb Tripkee"
+        },
+        "Winter Kholo": {
+            "description": "<p>你是个身披厚实密绒皮毛、非常耐寒的鬣狗人。你获得等同于你等级一半（最小为1）的寒冷抗力。环境的寒冷效果对你而言视作减轻一级（酷寒视为极寒，极寒视为严寒，以此类推）。</p>",
+            "name": "凛冬鬣狗人 Winter Kholo"
+        },
+        "Cave Kholo": {
+            "description": "<p>说书人所叙述的古老故事宣称，在鬣狗人大规模踏足光明世界之前，她们曾长期生活在洞穴以及地下环境中。而你正是这群古人的返祖后裔，你的胸膛宽阔，身上的斑纹形似黑色短刀而非通常的斑点。你的双目极为锐利，甚至在黑暗中也能清晰视物，对你的部族而言这一能力非常宝贵。你获得黑暗视觉。</p>",
+            "name": "洞穴鬣狗人 Cave Kholo"
+        },
+        "Witch Kholo": {
+            "description": "<p>你是个多毛的深色鬣狗人，能够发出一些真正不可思议的声音。你能以异能内在法术的形式任意施放@UUID[Compendium.pf2e.spells-srd.Item.0zU8CPejjQFnhZFI]戏法。戏法总会升阶到你等级的一半，向上取整。此外，你在仅使用声音进行的乔装和@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]检定上获得+1环境加值。</p>",
+            "name": "巫音鬣狗人 Witch Kholo"
+        },
+        "Dragonblood": {
+            "description": "<p>你是龙的某种后裔。你的外貌特征可能是一对龙角，鳞片状皮肤，甚至是一条尾巴，也可能是体内储备的龙族力量。除了你的族裔特征外，你还会获得龙裔特征。将龙语添加到你族裔的额外语言列表中（如果你的智力修正值为正，你可以选择龙语作为一种语言）。当你对恐惧效果的豁免骰成功时，你将获得大成功。每当你获得一个族裔专长时，你可以在龙裔专长和你的族裔专长中进行选择。</p>",
+            "name": "龙裔 Dragonblood"
+        },
+        "Dog Kholo": {
+            "description": "<p>你是个身体极为灵活的鬣狗人，身形犹如史前时代的犬类。通常而言，你如同四足动物一样移动，但你仍能如两足动物一样直立行走、战斗，也能够正常使用所有装备。若你在双手均空闲时以四足奔跑，你的速度提高至30尺。</p>",
+            "name": "犬行鬣狗人 Dog Kholo"
+        },
+        "Sweetbreath Kholo": {
+            "description": "<p>你是个生着条状斑纹与浅色毛发的鬣狗人，呼出的气体能给人以奇异的愉悦感，你能够借此吸引猎物。你在交涉技能上获得受训熟练度。若你已在其中一项技能上达到了受训熟练度，作为代替，你可以选择另外一项技能将其提升至受训熟练度。此外，当你@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]时，若目标能闻到你呼出的气体，则你在相关检定上获得+1环境加值。</p>",
+            "name": "甜息鬣狗人 Sweetbreath Kholo"
+        },
+        "Great Kholo": {
+            "description": "<p>你是个又大又强壮的鬣狗人，浑身生着茶色皮毛与棕色斑点。你从族裔中获得10点生命值以取代原本的8点。此外，你在用以@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]的运动检定上获得+1环境加值。</p>",
+            "name": "巨力鬣狗人 Great Kholo"
+        },
+        "Ant Kholo": {
+            "name": "微蚁鬣狗人 Ant Kholo",
+            "description": "<p>你是个约三尺高，面部轮廓分明的大耳朵鬣狗人。许多人都会怀疑你究竟是不是鬣狗人。你的体型是小型而非中型。你在欺骗技能上获得受训熟练度。若你已在其中一项技能上达到了受训熟练度，作为代替，你可以选择另外一项技能将其提升至受训熟练度。你在以下检定或DC中获得+1环境加值：通过说谎来装无辜所进行的欺骗检定、对抗试图发现你谎言的@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]检定的欺骗DC、以欺骗技能进行的先攻检定。</p>"
+        },
+        "Cavernstalker Kobold": {
+            "name": "攀洞狗头人 Cavernstalker Kobold",
+            "description": "<p>将你孵化的巢穴是一个无数狭窄隧道所组成的洞穴群，同时也是一位土元素原始存在的家，而你的身体也因此变得异常灵活且富有弹性。当你@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]岩壁、钟乳石以及其他天然石质地貌时，检定成功能让你以半速移动，大成功则可以全速移动，且如果你具有@UUID[Compendium.pf2e.feats-srd.Item.P04Hw8E6WAWARKHP]专长则可以在成功检定时以全速移动。若你使用攀爬速度，则该效果不会影响你。如果你在用于@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]的特技检定上获得成功，则将结果改为大成功。</p>"
+        },
+        "Elementheart Kobold": {
+            "description": "<p>在你孵化之时，某种与元素位面关系紧密的存在，譬如说一位元素生物或巨灵，在你身上留下了深刻的烙印。从气、土、火、金、水、以及木中选择一种作为你元素庇主的关联元素。你获得等同于你等级一半的（最小为1）与该元素类型相关的伤害抗力：气对应寒冷、土对应电击、火对应火焰、金对应音波、水对应酸蚀、木对应毒素。</p>",
+            "name": "元素狗头人 Elementheart Kobold"
+        },
+        "Spellhorn Kobold": {
+            "name": "法角狗头人 Spellhorn Kobold",
+            "description": "<p>你孵化在某个强大魔法源的附近，魔力在你的血管中流淌。从奥术法术列表中选择一个常见戏法，你能以奥术内在法术的形式任意施放该戏法。戏法总会升阶到你等级的一半，向上取整。你在法术攻击检定以及法术DC上获得受训熟练度，你的关键施法属性为魅力。</p>"
+        },
+        "Hungerseed": {
+            "description": "<p>你的父母之一是恶鬼或饥饿之种。你拥有一对角，角的大小从锥形的小凸起到长长的突出物不等。你可能还具有其他遗传特征，比如色彩鲜艳的皮肤、尖牙和利爪，或额头上的第三只眼。你获得恶鬼特征。你还会获得角突无武装攻击，造成1d6穿刺伤害，属于搏击武器组。每当你获得族裔专长时，你可以选择饥饿之种专长或你另一位父母族裔的专长。</p>",
+            "name": "饥饿之种 Hungerseed"
+        },
+        "Peachchild Leshy": {
+            "description": "<p>在你的身体从一颗巨大桃子中分离出来之前，你的莱西精魂已经占据其中，这可能是效仿了过去以同样方式出生的英雄。你看起来就像一个人类小孩，不过肤色永远是粉红色的，也许身上还长着几片桃叶。你体内的自然精魂让某些动物感到安心。</p>\n<p>你可以向家畜和家禽，例如狗或雉鸡，提问并得到它们的回答，还可以使用交涉技能对它们建立印象或对它们请求某事。大多数驯养动物对你的初始态度为不关心或友善，并会给你时间陈述自己的理由，而其他动物则对你的反应与对其他冒险者一样。</p>",
+            "name": "桃太郎莱西 Peachchild Leshy"
+        },
+        "Chrysanthemum Leshy": {
+            "description": "<p>你看起来就像一个人类小孩，不过头上长着一顶巨大的菊花冠，华丽如同皇冠。这些花瓣具有药效，能在对抗毒素时赋予你豁免+1环境加值。</p>\n<p>此外，在每日准备中，你可以不受伤害地从头上摘下几片花瓣，将它们浸泡在清水中，制作出一份茶水形式的@UUID[Compendium.pf2e.equipment-srd.Item.ktjFOp3U0wQD9t0Z]。6级时，你可以制作@UUID[Compendium.pf2e.equipment-srd.Item.AJ1dC7EtTIfBey0M]；10级时，可以制作@UUID[Compendium.pf2e.equipment-srd.Item.XWkeL34yJK6t5qUE]；14 级时，可以制作@UUID[Compendium.pf2e.equipment-srd.Item.ANzB9WzlGQXDn76G]。如果不在你的下次每日准备之前饮用，茶水就会失去效果。</p>",
+            "name": "菊花莱西 Chrysanthemum Leshy"
+        },
+        "Tsukumogami Poppet": {
+            "name": "付丧神人偶 Tsukumogami Poppet",
+            "description": "<p>你拥有普通工具的外形和记忆。选择一项与你的工具种类相关的学识技能；例如，厨刀或勺子为烹饪学识。你在此技能上受训，并在使用这项技能进行检定用于协助时获得+2的环境加值。如果你获得了@UUID[Compendium.pf2e.feats-srd.Item.ARBIhYAREcytOIaL]专长，此加值会增加到+3。</p>\n<p>虽然大多数人偶都是由填充物、布料或软金属制成的，但有些付丧神是由其他材料制成的，这就改变了人偶的火焰弱点。如果你的身体主要是木头或布料，便具有通常人偶的火焰弱点。如果你的身体主要是金属，你便改为电击弱点；如果你的身体主要是陶瓷，你便改为寒冷弱点。</p>"
+        },
+        "Palace Echoes Kitsune": {
+            "description": "<p>你继承了来自先祖的卓越口才，他们清早踏入宫殿，到夜幕降临时就能借此成为王权幕后的真正操纵者。你获得@UUID[Compendium.pf2e.actionspf2e.Item.rlGVQku78DGoOl9V]动作。</p>\n<p>你的变化型态是一种在成长背景中常见的中型类人生物族裔（通常是人类），称作无尾型态。</p>",
+            "name": "窃国狐妖 Palace Echoes Kitsune"
+        },
+        "Mountaineer Samsaran": {
+            "description": "<p>你的往世住在天夏雪山中的洞穴里，你的身体已经适应在寒冷的风暴中生存。你获得等同你等级一半（至少1）的寒冷抗力。环境的寒冷效果对你而言视作减轻一级（酷寒视为极寒，极寒视为严寒，以此类推）。</p>",
+            "name": "山民轮回者 Mountaineer Samsaran"
+        },
+        "Healer Samsaran": {
+            "description": "<p>在寻求开悟之途中，你往世已经远离兹哈祖地，探索了天夏，乃至格拉利昂诸地的不同国度。你的往世在旅行中几度遭遇危险，你常有关于治疗伤势的幻视。你在医疗上受训。如果你已经在医疗上受训（例如从你的职业或者背景），你可以选择另一个技能受训。</p>\n<p>当你用医疗来对自己@UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]时，你可以运用你的独门技艺来将你的等级加入到治疗量中。</p>",
+            "name": "医师轮回者 Healer Samsaran"
+        },
+        "Wilderness Samsaran": {
+            "description": "<p>你的往世在远离天夏主要聚居地的各种偏远环境中重生。你过去的经历必须学会如何独自生存，而你可以回忆起在资源稀缺情境中生存的方式。你在生存上受训。如果你已经在生存上受训（例如从你的职业或者背景），你可以选择另一个技能受训。你可以忽略来自树木、树叶和灌木的困难地形。</p>",
+            "name": "荒野轮回者 Wilderness Samsaran"
+        },
+        "Oracular Samsaran": {
+            "name": "先知轮回者 Oracular Samsaran",
+            "description": "<p>随着历史不断重演，你的往世为你对精神世界、当下和未来的事件提供了极高的洞察力。选择奥术、神术或异能。你获得该根源法术列表中的一个戏法，你可以随意施放该戏法作为你所选根源的内在法术。戏法会自动升阶到你等级的一半，向上取整。</p>"
+        },
+        "Heavenscribe Kobold": {
+            "description": "<p>你与智慧和天界帝龙的联系使其他人寻求你的建议。你能说龙语。每当你在使用交涉技能来@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]或@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]时大失败，你只会得到失败的结果而非大失败。</p>",
+            "name": "天书狗头人 Heavenscribe Kobold"
+        },
+        "Sanctuary Samsaran": {
+            "name": "圣所轮回者 Sanctuary Samsaran",
+            "description": "<p>你的往世都在兹哈北部的圣所中重生，你具有被训练长时集中专注的回忆。你朦胧的幻视也揭示了你过去生活中渴求领悟的书中有用的经文。你获得@UUID[Compendium.pf2e.actionspf2e.Item.jsEBrm8SPcsokJLw]动作。</p>"
+        },
+        "Mightyfall Kobold": {
+            "description": "<p>你与强大怪兽的紧密联系使你变得强壮、坚韧。你从传承中获得10点生命值，而不是6点。你可以选择获得力量属性提升、魅力属性提升和智力属性降低，而不是正常的属性提升和降低。</p>",
+            "name": "巨力狗头人 Mightyfall Kobold"
+        },
+        "Ascetic Tanuki": {
+            "description": "<p>据说，化狸圆滚滚的身体象征着沉稳与忍戒。你获得灵敏嗅觉，一种30尺范围的模糊感官。如果你处于嗅探对象的下风口或上风口，GM通常会将其范围加倍或减半。此外，你在使用灵敏嗅觉来觅食，寻找水源以及搜罗消耗品（譬如药水或灵药）时，在察觉检定上获得+2环境加值。</p>",
+            "name": "“苦行”化狸 Ascetic Tanuki"
+        },
+        "Even-Tempered Tanuki": {
+            "description": "<p>与其他那些情绪轻易失控的化狸不同，你拥有罕见的宁和秉性。你在对抗情绪效应的豁免骰上获得+1环境加值。如果你在对抗情绪效果的豁免中成功，你改为获得大成功，但若你在对抗情绪效果的豁免中失败，则会改为遭到大失败。</p>",
+            "name": "“温顺”化狸 Even-Tempered Tanuki"
+        },
+        "Courageous Tanuki": {
+            "description": "<p>你的内心激荡着无数先辈的胆识，赋予你一种有着化狸特色的勇气。当你获得逃跑状态时，你在速度上获得+10尺状态加值。在你陷入@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态期间，你不是花费所有动作尝试逃离，而是在正常使用一个动作后花费剩余的动作尝试逃离。你还会获得@UUID[Compendium.pf2e.actionspf2e.Item.KInVpdfrxg0AqjRt]能力。</p>",
+            "name": "“大胆”化狸 Courageous Tanuki"
+        },
+        "Virtous Tanuki": {
+            "description": "<p>许多化狸的酒葫芦从不离身，来时刻提醒自己保持品行端正，而若以此为标准，你的品行端正得不能再端正。你获得等同于你等级一半的毒素抗力（最小为1）。你可以在@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]状态下进食或饮水。除非自愿，你不会像常人那样因为醉酒而失去行动能力。</p>",
+            "name": "“正经”化狸 Virtous Tanuki"
+        },
+        "Steadfast Tanuki": {
+            "name": "“忠实”化狸 Steadfast Tanuki",
+            "description": "<p>你对自己无拘无束的化狸真形感到无比自豪。你选择获得@UUID[Compendium.pf2e.feats-srd.Item.fsovjV7yFMGiVs6z]或@UUID[Compendium.pf2e.feats-srd.Item.U8rjCtUuk6qhFyZs]作为额外族裔专长。</p>"
+        },
+        "Shadow of the Courtier": {
+            "description": "<p>你的阴影在身畔翩翩起舞。你获得动人表演技能专长，允许你使用表演取代交涉来@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]。每日一次，如果你在建立印象的检定中失败但未遭到大失败，你可以重投检定；这是一个幸运效果。</p>",
+            "name": "弄臣之影 Shadow of the Courtier"
+        },
+        "Shadow of the Hermit": {
+            "description": "<p>你的阴影之中仿佛充斥着无尽的玄奥谜团——只与你分享的秘密。从异能法术表中选择一个戏法。你可以作为异能内在法术任意施放该戏法。该戏法自动升阶至你等级的一半，向上取整。</p>",
+            "name": "隐士之影 Shadow of the Hermit"
+        },
+        "Shadow of the Sailor": {
+            "description": "<p>你的阴影轻盈地掠过水面，将你也连带着一起。你可以在静水或其它不造成伤害的液体表面行走，速度为你正常速度的一半。你可以尝试沿流水表面行走，速度同上，但必须尝试特技检定来@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]，使用该水域通常的游泳DC；若失败，你落入水中。上述特技检定无需额外花费动作。</p>",
+            "name": "海员之影 Shadow of the Sailor"
+        },
+        "Deny the Firstborn Pursuit": {
+            "description": "<p>你立下誓约，定要保护他人免于第一世界的残酷。由于对精类拿玩弄人心的能力了如指掌，你获得等同于你等级一半的心灵抗力（至少为1），且在对精类使用自然回忆知识时获得+2环境加值。</p><hr /><p><strong>额外典范</strong> 直面你遭遇的残忍精类（只要你有战胜它的可能性）</p>",
+            "name": "拒斥古老者之渴求 Deny the Firstborn Pursuit"
+        },
+        "Respite of Loam and Leaf": {
+            "name": "供养滋壤之木叶 Respite of Loam and Leaf",
+            "description": "<p>你立下誓约，定要保护一切庇护所的基石：大地与其滋养的生态。你的誓约赋予了你大地精魂的力量；你从原能法术表中获得一个戏法。你可以作为内在原能法术任意施放该法术。改戏法升阶至你等级的一半，向上取整。你与世界的根源连接赋予你植物特征。</p><hr /><p><strong>额外典范</strong> 治愈或根除你所见的植物与土地遭受的荒芜或污染</p>"
+        },
+        "Deny Lady Nanbyo's Charity": {
+            "description": "<p>你立下誓约，定要保护他人免于天灾的肆虐。你的誓约赋予你在超载前额外携带1负载，并且至多额外携带2负载的能力，此外，你在@UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]与@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]的运动检定上获得+1环境加值。</p><hr /><p><strong>额外典范</strong> 尽全力施以援手，拯救那些受困于天灾肆虐的人</p>",
+            "name": "拒斥难病姬之施舍 Deny Lady Nanbyo's Charity"
+        },
+        "Deny the Traitor's Rebirth": {
+            "description": "<p>你立下誓约，定要将受难者从罗刹与阿修罗——据夜叉神话记载，是为你堕落腐化的同族——的魔爪中解放。为了挫败他们的黑暗阴谋，你的誓约赋予了你黑暗视觉以及在对罗刹与阿修罗进行@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]与@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]时的察觉检定上获得+1环境加值。</p><hr /><p><strong>额外典范</strong> 直面你遭遇的罗刹与阿修罗（只要你有战胜它的可能性）；但在极为罕见的情况下，你会遭遇放下屠刀，改恶从善的罗刹或阿修罗，你不必对它们赶杀绝。</p>",
+            "name": "拒斥叛族者之重燃 Deny the Traitor's Rebirth"
+        },
+        "Respite of Cloudless Paths": {
+            "description": "<p>你立下誓约，定要保护失路之人与遭伏击者。对你而言，环境寒热效应的严重程度均降低一级（譬如酷寒变为极寒，极寒变为严寒，依此类推），你还会在对抗具有环境特征的危害，譬如洪水，泥石流与沙尘暴的豁免骰中获得+1环境加值。</p><hr /><p><strong>额外典范</strong> 向迷路与丧失行动能力的旅者施以援手。</p>",
+            "name": "供养无云之通途 Respite of Cloudless Paths"
+        },
+        "Respite of a Thousand Roofs": {
+            "description": "<p>你立下誓约，庇护穷人并解决他们的生计。你的誓约赋予了你在木工，烹饪与纺织上的娴熟技艺；你在手艺和烹饪学识上受训，并获得@UUID[Compendium.pf2e.feats-srd.Item.3HChkcD1IRqv4DbA]技能专长。</p><hr /><p><strong>额外典范</strong> 尽全力帮助赤贫者，解决他们的衣食问题，令其过上饱暖的生活</p>",
+            "name": "供养万民之饥寒 Respite of a Thousand Roofs"
+        },
+        "Born of Animal": {
+            "description": "<p>你只是一只动物，直到太阳启迪了你。</p><ul><li><strong>类人形态</strong> 动物能感知你的力量。你在对动物和魔兽的威吓检定上获得+1环境加值，且不会因尝试威吓与你语言不通的动物或魔兽而承受减值。</li><li><strong>妖怪形态</strong> 可以像动物一样奔跑。如果你有两只空手，在你用四足奔跑时，你的速度提升至30尺。</li></ul>",
+            "name": "动物出身 Born of Animal"
+        },
+        "Born of Item": {
+            "description": "<p>你是一件物品，直到月亮赋予了你生命。选择一项与你所属的工具种类相关的学识技能；例如，菜刀为烹饪学识，钉耙为农业学识。你在此技能上受训。.</p><ul><li><strong>类人形态</strong> 作为物品时执行的任务会保留在你的记忆中。你在通过传承获得学识技能上获得+1环境加值。</li><li><strong>妖怪形态</strong> 作为无心智的物体，你很难被影响心灵。如果你在心灵效果上掷骰出成功，你改为获得大成功。</li></ul>",
+            "name": "物品出身 Born of Item"
+        },
+        "Born of Celestial": {
+            "description": "<p>你曾经是一位强大的仙人，但在逃脱或遭受重罚后，你被困在凡人的躯壳中，只有模糊的记忆和有限的力量。由于你残留的神力，你从妖怪传承或族裔专长中获得的任何法术或魔法能力都是神术根源，而非其通常根源（通常为异能）。</p><ul><li><strong>类人形态</strong> 神性记忆的碎片仍然音绕在你的脑海中。你的宗教检定获得+1环境加值。</li><li><strong>妖怪形态</strong> 仙界之力在你体内流淌。从神术法术列表中选择一个戏法。你能够以神术内在戏法的形式随意施放此法术。戏法升阶至你等级的一半，向上取整。</li></ul>",
+            "name": "仙界出身 Born of Celestial"
+        },
+        "Born of Elements": {
+            "description": "<p>你曾是自然的一部分——雨水、风、光线——直到荒野精粹赋予你灵魂。由于你与自然的联系，你从妖怪传承或族裔专长中获得的任何法术或魔法能力都是原能根源，而非其通常根源（通常为异能）。</p><ul><li><strong>类人形态</strong> 你能与自然保持和谐。你在进行@UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]的生存检定上获得+1环境加值，并且你在没有指南针的情况下不会承受减值。</li><li><strong>妖怪形态</strong> 自然之力在你体内流动，蓄势待发。从@UUID[Compendium.pf2e.spells-srd.Item.kBhaPuzLUSwS6vVf]，@UUID[Compendium.pf2e.spells-srd.Item.IxhGEKl63R4QBvkj]，@UUID[Compendium.pf2e.spells-srd.Item.6DfLZBl8wKIV03Iq]，@UUID[Compendium.pf2e.spells-srd.Item.iYRDFxeVpJ5KIjmr]，@UUID[Compendium.pf2e.spells-srd.Item.9I8mp7RkjeXbkYfx]，@UUID[Compendium.pf2e.spells-srd.Item.zA0jNIBRgLsyTpbm]，@UUID[Compendium.pf2e.spells-srd.Item.1Yoipc5jNcMehtEW]，@UUID[Compendium.pf2e.spells-srd.Item.eSL5hVT9gXrnRLtd]中选择。你能够以原能内在戏法的形式随意施放此法术。戏法升阶至你等级的一半，向上取整。</li></ul>",
+            "name": "元素出身 Born of Elements"
+        },
+        "Born of Vegetation": {
+            "description": "<p>你是一株植物或真菌，直到雨水赐予了你心智。你选择获得植物或真菌特征。</p><ul><li><strong>类人形态</strong> 你可以借助新鲜的植被来帮助需要帮助的人。你在进行@UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]的医疗检定上获得+1环境加值。</li><li><strong>妖怪形态</strong> 当有人用医疗技能对你@UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]时，增加你从此治疗中恢复的生命值，数值为你的等级。此外，如果你拥有植物特征，且出于明亮光照中，或如果你拥有真菌特征，且处于黑暗中，尝试此检定的生物获得+1环境加值。</li></ul>",
+            "name": "植物出身 Born of Vegetation"
+        },
+        "Shadow of the Wanderer": {
+            "name": "流浪之影 Shadow of the Wanderer",
+            "description": "<p>你的影子在你身前沸腾，清出一条通路。你的速度提高5尺。</p>"
+        },
+        "Shadow of the Smith": {
+            "name": "铁匠之影 Shadow of the Smith",
+            "description": "<p>你的阴影如同一团粘稠的液体，渴望为最精良的矿石淬火。你获得@UUID[Compendium.pf2e.actionspf2e.Item.lgpJoFrkzfkjAzeV]动作。</p>"
+        },
+        "Naari": {
+            "name": "火元素裔 Naari",
+            "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+        },
+        "Dijiang": {
+            "description": "<p>你形如没有脸的皮球，长着短毛、六条腿，与原始混沌有联系。虽然你没有脸、头、嘴、眼或耳，但你却能正常地听、说、看、吃和呼吸（虽然不清楚具体是怎么做到的）。你反复无常的天性意味着你经常会对刺激做出不可预知的反应。</p>\n<p>当你对情绪效果的豁免失败（但不是大失败）时，你改为获得成功。</p>",
+            "name": "帝江 Dijiang"
+        },
+        "Gandharva": {
+            "description": "<p>你是自称神的乐师，诗人，舞者的后裔，你的身体部分是人形，部分是马或鸟。如果你长出翅膀，它们会呈现出多种绚丽的色彩。由于你与天界的联系，你从小妖精传承或族裔专长中获得的任何法术或魔法能力的根源都是神术，而不是通常的根源。</p>\n<p>你的表演技能受训（如果你的表演已经受训，则你选择另一项技能受训），你能够以神术内在戏法的形式施放@UUID[Compendium.pf2e.spells-srd.Item.yvs1zN5Pai5U4CJX]。</p>",
+            "name": "乾闼婆 Gandharva"
+        },
+        "Kanchil": {
+            "description": "<p>你长着鼷鹿的头，用蹄子代替了脚，以聪明和有说服力而闻名——能用文字游戏和一点运气让自己摆脱困境。你的欺骗技能受训（如果你的欺骗已经受训，则你选择另一项技能受训）。你在专门尝试说谎来避免危险或惩罚时（例如说服一条龙不要吃掉你）进行说谎的欺骗检定上，对抗揭穿此类谎言的@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]检定时欺骗DC上，以及使用欺骗进行先攻时的先攻骰上获得+1环境加值。</p>",
+            "name": "鼷鹿精 Kanchil"
+        },
+        "Leungli": {
+            "name": "龙鲤 Leungli",
+            "description": "<p>你有一颗金鱼或鲤鱼的头，鳞片是白色、黑色、橙色、红色和金色的吉祥组合。如果你长出翅膀，它们看起来就会像龙的鬃毛。你获得10尺的游泳速度和两栖特征。和所有具有两栖特性的生物一样，你可以在水中和空气中呼吸。</p>"
+        },
+        "Dokkaebi Goblin": {
+            "description": "<p>你的祖先精通幻术魔法，使你对其有天生的理解。你可以随意将@UUID[Compendium.pf2e.spells-srd.Item.0zU8CPejjQFnhZFI]作为内在异能戏法施放。戏法的法术环级等于你的等级一半向上取整。你在对抗幻术的意志豁免检定中也获得+1环境加值。</p>",
+            "name": "鬼怪地精 Dokkaebi Goblin"
+        },
+        "Makari Lizardfolk": {
+            "description": "<p>你有一个象鼻状的吻部，并且与神术力量相连。任何从蜥蜴人传承或族裔专长中获得的法术或魔法能力的根源均为神术根源，而不是其通常的根源（通常是原能）。</p>\n<p>你可以选择获得@UUID[Compendium.pf2e.spells-srd.Item.qwZBXN6zBoB9BHXE]或@UUID[Compendium.pf2e.spells-srd.Item.RA7VKcen3p56rVyZ]戏法，你可以将这些戏法作为神术内在戏法随意施放。戏法的环级等于你等级的一半，向上取整。当你施放此戏法时，它失去操作特征，因为你纯粹通过咆哮和张开长鼻来施法。</p>",
+            "name": "马卡里蜥蜴人 Makari Lizardfolk"
+        },
+        "Kijimuna Gnome": {
+            "description": "<p>你的祖先生活在树上，并在天夏的各个水域中捕鱼。你可以选择获得以下好处之一。一旦选择，就不能更改。</p><ul><li>你可以攀爬任何榕树。你获得@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]专长，并且如果你在攀爬的运动检定中成功，你会获得大成功的作为代替。</li><li>你可以捕捉任何鱼类。你获得15尺的游泳速度。</li></ul>",
+            "name": "木灵侏儒 Kijimuna Gnome"
+        },
+        "Bakuwa Lizardfolk": {
+            "description": "<p>你的身体覆盖着骨板。你的骨板属于中型护甲组中的板甲，提供AC+4物品加值、敏捷上限+1、检定减值-2、速度减值-5尺、力量需求16，并具有水下和舒适特征。你不能穿戴其他护甲或移除你的骨板。你可以在骨板上雕刻护甲符文。</p>",
+            "name": "巴库瓦蜥蜴人 Bakuwa Lizardfolk"
+        },
+        "Shimmertongue Nagaji": {
+            "description": "<p>你天生对魔法有着敏锐的感知，能够在空气中品尝到它独特的效果。你获得了魔法感知，这是一种范围为30尺的模糊感官——像所有模糊感官一样，它的精确度大约与普通人类的嗅觉相当，这意味着你通常只能预测魔法是否存在；然而，每种魔法根源对你来说都有独特的味道，使你能够识别出存在的魔法根源。</p>",
+            "name": "辉舌娜迦裔 Shimmertongue Nagaji"
+        },
+        "Lantern Surki": {
+            "name": "明灯虫人 Lantern Surki",
+            "description": "<p>你的腹部节点能够发出强烈的亮光。你可以使用交互动作令腹部节点在20尺半径内发出明亮光照（以及再向外延伸20尺的昏暗光照）。这是一种魔法光亮效果，反制等级等同于你的等级的一半，向上取整。你可以自由选择光亮的颜色，或是用另一个交互动作将其解消。</p><ul><li><strong>进化</strong> 你的腹部节点进化出了一对附肢，通过它可以投射出一面聚焦透镜。你获得@UUID[Compendium.pf2e.actionspf2e.Item.ako5zZwC6o26cfCQ]动作。</li><li><strong>进化</strong> 你的肩部节点上进化出了次级发光体，能与你的明灯同时闪烁。你获得@UUID[Compendium.pf2e.actionspf2e.Item.aVGNaNgG6cYNRp5A]动作。</li></ul>"
+        },
+        "Half Moon Sarangay": {
+            "description": "<p>你来自那些沿着天夏辽阔河流和山脉进行季节性迁徙的游牧社区，给沿途的村庄带去消息。你的族人将遥远的水牛人社区连接在一起，并以半月为象征，连接光明与黑暗；你也将黑暗与光明、红色与蓝色、风与海洋连接在一起。你的祖先身材高大魁梧，拥有闪亮的黑色皮毛、浅色斑点或标记，以及短而紧密弯曲的角。你在由你选择的两个学识技能上受训，并在使用这些学识技能进行回忆知识的检定中获得+1环境加值。</p>",
+            "name": "半月水牛人 Half Moon Sarangay"
+        },
+        "Full Moon Sarangay": {
+            "description": "<p>你在多元化的萨满传统的熏陶下成长。你在萨满长者的指导下度过青春期，他们教导你与灵魂沟通，希望有一天你能利用这些知识来指导和引导你的族人。来自你传统的人是引导灵魂并看见他人看不见事物的祭司或萨满。你将族裔的属性提升从力量变为感知，并将属性缺陷从感知变为体质。你获得@UUID[Compendium.pf2e.feats-srd.Item.ua0O6tQ3D5099mmH]族裔专长。</p>",
+            "name": "满月水牛人 Full Moon Sarangay"
+        },
+        "Waning Moon Sarangay": {
+            "description": "<p>你的祖先因变化无常而得名，正如掩藏面容的残月，他们是秘密技艺的守护者，以其讲故事者、表演者和艺术家而备受尊重。你和你的族人在森林或河流的边缘生活，在那里许多答案以谜语的形式出现，你学会了从不同角度看待世界。你的族人通常是红色或浅黄褐色皮毛，拥有突出的眼睛和平坦紧凑的角。你可以选择特技、手艺或表演技能之一受训。</p>\n<p>每日一次，当你在所选技能上掷出大失败时，可以重新掷骰，使用新的结果，即便该结果更差。这种重投是幸运效果。</p>",
+            "name": "残月水牛人 Waning Moon Sarangay"
+        },
+        "Waxing Moon Sarangay": {
+            "description": "<p>你的祖先居住在沼泽、沼泽地和洪泛森林中，与凶猛的捕食者对抗，并组建突袭队以夺取稀缺资源。受益于成长的新月，你作为开膛者之一，能够战胜潜伏于浑浊水域以及陆地上的威胁。你是强大的游泳者，拥有棕色或灰色皮毛，以及向后或向下弯曲的角。你在@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]或@UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]的运动检定中获得+2环境加值。</p>",
+            "name": "盈月水牛人 Waxing Moon Sarangay"
+        },
+        "New Moon Sarangay": {
+            "description": "<p>一些人称你为“矮水牛人”，你们则自称为“藏匿者”。其他人则低声说，当月亮“去狩猎”时，你们就会出动——这是指新月从天空消失的民间说法。你那神秘的祖先在竹林的阴影下建造住所，你的祖先社区重视谨慎和独立，并传授在竹林中轻步如烟的技艺。你的祖先拥有深棕或灰色皮毛，带有白色标记和V字形的扁平三角形牛角。你的体型是小型而非中型。你的族裔生命值为10点而非8点，并在@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]时的运动检定中获得+2环境加值。</p>",
+            "name": "新月水牛人 New Moon Sarangay"
+        },
+        "Virtuous Tanuki": {
+            "description": "<p>许多化狸的酒葫芦从不离身，来时刻提醒自己保持品行端正，而若以此为标准，你的品行端正得不能再端正。你获得等同于你等级一半的毒素抗力（最小为1）。你可以在@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]状态下进食或饮水。除非自愿，你不会像常人那样因为普通酒精而失去行动能力。</p>",
+            "name": "“正经”化狸 Virtuous Tanuki"
+        },
+        "Keeper Jotunborn": {
+            "description": "<p>你是一位伊芙拉尔看护士，这份工作令你对这种圣兽的了解得以进一步加深，并锻炼了你追踪隐蔽野兽的能力。你在生存上受训，并获得@UUID[Compendium.pf2e.feats-srd.Item.tGIXuk0XeWmG04CX]技能专长。此外，你在@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]野兽时获得+1环境加值。</p>",
+            "name": "保育巨人裔 Keeper Jotunborn"
+        },
+        "Plane-Hopper Jotunborn": {
+            "description": "<p>你生来体型瘦小，但这却令你能轻松在位面障壁间穿行。你通常会充当信使或斥候，常年通行于位面之间令你的魔力火花得以点燃。你的体型为中型而非大型。你从异能法术列表中选择一个戏法。你可将其作为异能内在法术任意施放。该戏法自动升阶至你等级的一半，向上取整。</p>",
+            "name": "跃界巨人裔 Plane-Hopper Jotunborn"
+        },
+        "Weaver Jotunborn": {
+            "description": "<p>你是伊芙拉尔丝织工艺的大师，这令你磨练出了细致入微的观察力。你在手艺上受训。你在@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]暗门、陷阱等隐藏的蛛丝马迹时在察觉上获得+1环境加值。</p>",
+            "name": "织纹巨人裔 Weaver Jotunborn"
+        },
+        "Sage Jotunborn": {
+            "description": "<p>你被赋予了为家族、部族或整个聚居地编写并传承史诗的使命。你在社群上受训，并获得一项任选学识的@UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]通用专长。</p>",
+            "name": "贤达巨人裔 Sage Jotunborn"
+        },
+        "Warrior Jotunborn": {
+            "description": "<p>你的身躯比同族更为刚健，使你被征募上了战场。你的拳头伤害骰提高至1d6。你用拳头进行非致命攻击时不再承受减值。</p>",
+            "name": "历战巨人裔 Warrior Jotunborn"
+        },
+        "Shifting Skeleton": {
+            "description": "<p>变形骷髅是由各种变形生物的骨骼构造而成，他们保留了一定的重构能力，让他们可以改变形态。你获得@UUID[Compendium.pf2e.actionspf2e.Item.OqKYkzbc7NEWmJWB]{重排骨骼 Rearrange Bones}动作。</p>",
+            "name": "变形骷髅 Shifting Skeleton"
+        },
+        "House Drake": {
+            "description": "<p>你有亮蓝色和紫色的鳞片，以及银色的牙齿和爪子。你的颚咬视为银，并且你在对魔族的伤害检定上获得+1环境加值。你将魔鬼语加入你的已知语言列表。</p>",
+            "name": "小巢龙 House Drake"
+        },
+        "Homing Drake": {
+            "description": "<p>你有一个短而粗的鼻子，以及像头发一样的微小刺棘。你的鳞片可能色彩鲜艳，也可能是暗淡的褐色。你能够以奥术内在法术的形式随意施展@UUID[Compendium.pf2e.spells-srd.Item.tXa5vOu5giBNCjdR]{指路术 Know the Way}戏法。戏法的法术环级升阶至等同于你等级的一半（向上取整）。</p>\n<p>此外，你总是知道你家的距离和方向。在一个新地点度过1周后，你可以将其指定为你的家，但你同时只能拥有一个指定的家。</p>",
+            "name": "归巢龙 Homing Drake"
+        },
+        "Tidepool Dragonet": {
+            "description": "<p>你有细长的鳗鱼状身体和蔚蓝的鳞片。你的翅膀像巨大的鳍一样扫过身体，使你相当适宜在水域环境活动。</p>\n<p>你获得两栖特征，以及15尺游泳速度。你将水元素语加入你的已知语言列表。</p>",
+            "name": "潮池微龙 Tidepool Dragonet"
+        },
+        "Pearl Dragonet": {
+            "description": "<p>你有珍珠般的鳞片和圆滚滚的身体，腿短，翅膀小，尾巴长。而这副身体形状让你能缓吸打击并滚开。</p>\n<p><strong>@UUID[Compendium.pf2e.actionspf2e.Item.OpiIzr7h1EKY8wKh]{弹开 Bounce Away}</strong><span class=\"action-glyph\">r</span></p>\n<p>@Embed[Compendium.pf2e.actionspf2e.Item.OpiIzr7h1EKY8wKh inline]</p>",
+            "name": "珍珠微龙 Pearl Dragonet"
+        },
+        "Fey Dragonet": {
+            "description": "<p>你有色彩鲜艳的身体，随着年龄增长会变得更富光泽的闪亮鳞片，以及彩虹般的蝴蝶翅膀。你可以使用一个单动作改变翅膀的颜色和图案，让自己融入环境。</p>\n<p>当你的翅膀与环境相匹配时，你在隐秘检定上获得+2环境加值，直到你的周围环境的颜色或图案发生变化。你获得精类特征，并将精类语加入你的已知语言列表。</p>",
+            "name": "妖精微龙 Fey Dragonet"
+        }
+    }
+}

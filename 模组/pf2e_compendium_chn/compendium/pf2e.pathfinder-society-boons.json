@@ -1,0 +1,200 @@
+{
+    "label": "开拓者协会恩惠 Pathfinder Society Boons",
+    "entries": {
+        "Adversary Lore": {
+            "name": "敌手学识 Adversary Lore",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>It doesn't matter how powerful your weapons are if you don't know where to strike. You have taken the time to study a certain category of creatures, making it easier to recall their capabilities later. When you purchase this boon, either select one creature type from List 1 below, or choose two creature types from List 2. You gain a +1 circumstance bonus to @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{Recall Knowledge} about creatures of the selected type(s). If your Reputation tier with the Vigilant Seal is Revered, this bonus increases to +2.</p>\n<p><strong>List 1:</strong> aberration, animal, beast, construct, dragon, elemental, fiend, undead.</p>\n<p><strong>List 2:</strong> astral, celestial, ethereal, fey, fungus, giant, monitor, ooze, plant.</p><hr /><p>Special: You can apply this boon multiple times to the same character. However, the character must focus their training on one set of creatures before each adventure, and cannot benefit from multiple copies of the Boon at the same time.</p>"
+        },
+        "Crafter's Workshop": {
+            "name": "匠人作坊 Crafter's Workshop",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>Your friends in the Envoy's Alliance share crafting materials and collaborate to create new items more efficiently. You only need to spend 1 day of downtime before attempting your skill check and subsequently beginning to reduce the item's effective cost.</p>"
+        },
+        "Hireling": {
+            "name": "雇员 Hireling",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>You have recruited a non-combat hireling who can assist you with a certain set of skill checks. This ally performs the selected skills with a total modifier equal to 2 + your level, and they are considered trained in the skills. You must expend any actions and be in range to perform the action yourself, and any consequences of these actions affect you (such as falling when using Athletics to Climb).</p>\n<p>The hireling doesn't have or use its own ability modifiers and can never benefit from item bonuses, status bonuses, or fortune effects. Abilities that grant you a circumstance bonus do not grant that circumstance bonus to your hireling even though you are using your action to attempt the check. You cannot aid your own hireling.</p>\n<p>You cannot use the hireling's skills except recall knowledge in combat, and the hireling cannot be affected by, or affect, combat, cannot be harmed unless willfully endangered, and has no effect other than performing the selected skill checks.</p>\n<p>When you purchase this boon, you select one skill as well as one Lore skill. The hireling can perform only these skills' checks.</p><hr /><p><strong>Special</strong>: You can apply this boon multiple times to the same character, but may only benefit from one hireling boon on any given adventure.</p>"
+        },
+        "Mentor, Combat": {
+            "name": "战斗导师 Mentor, Combat",
+            "description": "<p><strong>[导师][社交]</strong></p>\n<p><strong>先决条件</strong> 警醒封印声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你可以提供提议，确保你的新同伴的攻击更加精准。你使所有获得了等级增强，且等级低于你的PC在攻击检定上的等级增强调整值提高到2点。</p>\n<p><strong>正常</strong> 等级增强会使PC的攻击检定调整值提高1点。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.q2kY0TzXloJ8HLNO]{效果：战斗导师福利 (PFS)}</p>"
+        },
+        "Mentor, Magical": {
+            "name": "魔法导师 Mentor, Magical",
+            "description": "<p><strong>[导师][社交]</strong></p>\n<p><strong>先决条件</strong> 宏文会声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你可以提供关键的施法见解，加强你的同伴的魔法。所有获得了等级增强，且等级低于你的PC可以用其最高级法术位额外准备一个法术，或额外施放一个最高级法术。在受影响PC施法所用的魔法传统与你相同时，其法术DC上的等级增强调整值提高到2点。</p>\n<p><strong>正常</strong> 等级增强会使PC的法术DC提高1点，不提供额外准备法术或法术位。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.fh8TgCfiifVk0eqU]{效果：魔法导师福利 (PFS)}</p>"
+        },
+        "Naturalist": {
+            "name": "博物学家 Naturalist",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>When you apply this boon, choose a common alchemical item or potion of your level or lower to which you have access. The Verdant Wheel has taught you how to craft this item far more efficiently and provided you with a source for the rare herbs and ingredients needed to make 1 batch (typically 4 copies of the item). Making the item with the Verdant Wheel's method uses the standard rules for Crafting the item, with the following exceptions. First, you must use Nature, Survival, or Herbalism Lore in place of Crafting for all purposes. Second, you only need to spend 2 days of Downtime before attempting your first skill check and subsequently beginning to reduce the item's effective cost.</p>\n<p><strong>Special</strong>: You can purchase this boon multiple times. Each time you do so, you select a different item.</p>"
+        },
+        "Off-Hours Study": {
+            "name": "业余研究 Off-Hours Study",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>You spend your free time studying learning new trivia or practicing unfamiliar languages. When you acquire this boon, choose a common language you don't know or a Lore skill in which you are untrained. After purchasing this boon. you can spend Downtime practicing the selected language or skill. Once you have expended 50 days of Downtime in this way, you learn the chosen language or become trained in the chosen Lore skill. This boon then grants no further benefit.</p>\n<p><strong>Special</strong>: You can apply this boon multiple times to the same character. Each time you do so, select a different language or Lore skill.</p>"
+        },
+        "Wayfinder, Adamant": {
+            "name": "顽强寻路仪 Wayfinder, Adamant",
+            "description": "<p><strong>[道具]</strong></p>\n<p><strong>先决条件</strong> 警醒封印声望达到喜爱，你拥有一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}</p>\n<p><strong>开销</strong> 2声望</p>\n<p><strong>动作</strong> 反应</p>\n<hr />\n<p><strong>效果</strong> 你对你的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}进行了特殊强化，使该设备能够吸收有害能量。当你购买此福利时，将此福利的益处应用于你拥有的一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}上，当该@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}被装备且由你拥有时，你会获得以下反应：</p>\n<hr />\n<p>抵抗伤害 Resist Harm <span class=\"action-glyph\">R</span></p>\n<p><strong>触发</strong> 你即将受到伤害；</p>\n<hr />\n<p><strong>效果</strong> 对于一次攻击、法术或效果，你获得1点酸蚀、寒冷、电击、火焰、力场、虚能、命能和音波伤害抗性。这只影响初始效果，对该效果产生的后续攻击或伤害无效（比如持续性险情或持续伤害）。当你的警醒封印声望达到钦佩时，该抗性提高到2点，达到尊敬时抗性提高到4点。</p>\n<hr />\n<p>每场冒险，你可以安全使用一次这项益处。你也可以尝试第二次使用它，冒着毁掉@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}的风险将其过载。当你这么做时，进行一次@Check[flat|dc:10]检定。若成功，@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}只会破损。若失败，<em>寻路仪</em>会被摧毁。如果有人尝试过载一个已过载的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，它会自动被摧毁（即使已经修复），且不会产生激活效果。</p>"
+        },
+        "Wayfinder, Rugged": {
+            "name": "坚毅寻路仪 Wayfinder, Rugged",
+            "description": "<p><strong>[道具]</strong></p>\n<p><strong>先决条件</strong> 天际猎手声望达到喜爱，你拥有一台@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}</p>\n<p><strong>开销</strong> 2声望</p>\n<p><strong>动作</strong> 单动作</p>\n<hr />\n<p><strong>效果</strong> 你调整了你的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，使它吸走你的一点疲倦感，从而不受阻碍地继续探索。当你分配此福利时，将此福利的益处应用于你拥有的一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}上，当该@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}被装备且由你拥有时，它会赋予你一个特殊的能力。</p>\n<p>以一个动作，你可以将你承受的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled}或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened}状态程度降低1点。</p>\n<p>每场冒险，你可以安全使用一次这项益处。你可以尝试第二次使用它，冒着毁掉@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}的风险将其过载。当你这么做时，进行一次@Check[flat|dc:10]检定。若成功，@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}只会破损。若失败，<em>寻路仪</em>会被摧毁。如果有人尝试过载一个已过载的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，它会自动被摧毁（即使已经修复），且不会产生激活效果。</p>"
+        },
+        "Bring Them Back Alive": {
+            "name": "全员生还 Bring Them Back Alive",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>You are able to leverage your connections within the Society to raise funds for your allies' resurrection, ensuring that everyone lives to see another adventure. You and your allies treat your effective character levels as 1 lower for the purpose of the @UUID[Compendium.pf2e.spells-srd.Item.IkGYwHRLhkuoGReG]{Raise Dead} spell and the @UUID[Compendium.pf2e.spells-srd.Item.kqhPt9344UkcGVYO]{Resurrect} ritual. This applies to both the rank of the spell or ritual required, as well as to calculating the cost of the diamonds necessary to cast the spell or perform the ritual.</p>"
+        },
+        "Curse Breaker": {
+            "name": "破除诅咒 Curse Breaker",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>You have been entrusted with an accursed item from the Society's vaults, and you can spend your time in the Grand Lodge patiently unraveling its malign influence. When you acquire this boon, choose a permanent magic item of your level or lower to which you have access. You can spend Downtime erasing the item's stubborn curse. This uses the same rules as you would to Craft the item, with the following exceptions. First, you must use Arcana, Nature, Occultism, or Religion in place of Crafting for all purposes. Second, you only need to spend 2 days of Downtime before attempting your first skill check and subsequently beginning to reduce the item's effective cost.</p>\n<p>You can uncurse more than one magic item with this boon, but you must finish uncursing one item before beginning the next.</p>"
+        },
+        "Exotic Edge": {
+            "name": "异域优势 Exotic Edge",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>By traveling so widely, you have developed an intuitive talent for using esoteric techniques. Once per adventure, you can activate this boon as a free action to apply these techniques, gaining a +1 circumstance bonus to either all of your attack rolls or all of your skill checks for 1 round.</p>"
+        },
+        "Hireling, Expert": {
+            "name": "专家雇员 Hireling, Expert",
+            "description": "<p><strong>[无需分配]</strong></p>\n<p><strong>先决条件</strong> 任意势力声望达到喜爱，@UUID[Compendium.pf2e.pathfinder-society-boons.sBXsfT0uYltF8TFE]{雇员 Hireling}</p>\n<p><strong>开销</strong> 6声望</p>\n<hr />\n<p><strong>效果</strong> 获得此福利时，选择你已有的一项雇员福利。该盟友在所选技能上的熟练度提升为专家，技能检定调整值提高为4+你的等级。</p>\n<p><strong>特殊</strong> 你可以为同个角色多次购买本福利，每次购买都必须将其好处应用在不同的雇员福利上。</p>"
+        },
+        "Hireling, Master": {
+            "name": "大师雇员 Hireling, Master",
+            "description": "<p><strong>[无需分配]</strong></p>\n<p><strong>先决条件</strong> 任意势力声望达到尊敬，@UUID[Compendium.pf2e.pathfinder-society-boons.1VWMLe12ZFqF9jah]{专家雇员 Expert Hireling}</p>\n<p><strong>开销</strong> 8声望</p>\n<hr />\n<p><strong>效果</strong> 获得此福利时，选择你的一项被专家雇员调整过的雇员福利。该盟友在所选技能上的熟练度提升为大师，技能检定调整值提高为6+你的等级。</p>\n<p><strong>特殊</strong> 你可以为同个角色多次购买本福利，每次购买都必须将其好处应用在不同的@UUID[Compendium.pf2e.pathfinder-society-boons.sBXsfT0uYltF8TFE]{雇员 Hireling}福利上。</p>"
+        },
+        "Leshy Companion": {
+            "name": "莱西同伴 Leshy Companion",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>You can select the Leshy Familiar feat as a 2nd level class feat, even if you are not a druid. You can ignore the prerequisite of belonging to the leaf order.</p>\n<p>When you apply this boon, you can retrain your 2nd level class feat to Leshy Companion without spending Downtime.</p>"
+        },
+        "Mentor, Protective": {
+            "name": "庇护导师 Mentor, Protective",
+            "description": "<p><strong>[导师][社交]</strong></p>\n<p><strong>先决条件</strong> 光辉誓约声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你可以为这些较脆弱的同伴提供庇护，使他们远离死亡的威胁。你使所有获得了等级增强，且等级低于你的PC的当前生命值和最高生命值获得提升，提升量为你的光辉誓约声望等级的3倍（喜爱=1，钦佩=2，尊敬=3）。</p>\n<p><strong>正常</strong> 等级增强会使PC的生命值提高10%或10点，以较高的为准。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.OKOqC1wswrh9jXqP]{效果：庇护导师福利 （喜爱） (PFS)}</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.lbe8XDSZB8gwyg90]{效果：庇护导师福利 （钦佩） (PFS)}</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.0r2V1nK5pV31IUPY]{效果：庇护导师福利 （尊敬） (PFS)}</p>"
+        },
+        "Mentor, Rugged": {
+            "name": "坚毅导师 Mentor, Rugged",
+            "description": "<p><strong>[导师][社交]</strong></p>\n<p><strong>先决条件</strong> 天际猎手声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你可以提供关键的见解，使他们少受伤害。你使所有获得了等级增强，且等级低于你的PC在豁免检定上的等级增强调整值提高到2点。</p>\n<p><strong>正常</strong> 等级增强会使PC的豁免检定调整值提高1点。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.ZMFgz4GYSsFeaKKK]{效果：坚毅导师福利 (PFS)}</p>"
+        },
+        "Mentor, Skillful": {
+            "name": "娴熟导师 Mentor, Skillful",
+            "description": "<p><strong>[社交][导师]</strong></p>\n<p><strong>先决条件</strong> 特使盟声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你可以提供关键建议，使你的新同伴的技能变得更加高明。你使所有获得了等级增强，且等级低于你的PC在技能检定上的等级增强调整值提高到2点。</p>\n<p><strong>正常</strong> 等级增强会使PC的技能检定调整值提高1点。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.SKjVvQcRQmnDoouw]{效果：娴熟导师福利 (PFS)}</p>"
+        },
+        "Mentor, Worldly": {
+            "name": "老练导师 Mentor, Worldly",
+            "description": "<p><strong>[导师][社交]</strong></p>\n<p><strong>先决条件</strong> 苍翠之轮声望达到喜爱</p>\n<p><strong>开销</strong> 2声望</p>\n<hr />\n<p><strong>效果</strong> 在与资历较浅的开拓者盟友合作时，你帮助这些同伴识别和抵御危险。你使所有这些盟友获得了等级增强，且等级低于你的PC在察觉检定和先攻检定上的等级增强调整值提高到2点。</p>\n<p><strong>正常</strong> 等级增强会使PC的察觉检定调整值提高1点。</p>\n<p><strong>特殊</strong> 一位PC同时只能受益于两项导师福利。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.oKJr59FYdDORxLcR]{效果：老练导师福利 (PFS)}</p>"
+        },
+        "Practiced Medic": {
+            "name": "熟练医师 Practiced Medic",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>By spending your off-hours administering medical aid to those in need, you have developed extraordinary first aid instincts. After purchasing this boon, you can spend Downtime to provide medical services to others. Once you have expended 8 days of Downtime in this way, you can expend the boon as a free action before attempting a Medicine check to Administer First Aid, Treat Disease, Treat Poison, or Treat Wounds. You improve your check's degree of success by one step (such as if you roll a failure, you get a success instead); the boon is not expended if your original roll is a critical success. Once you expend this boon, it provides no other benefit.</p>\n<p><strong>Special</strong> You can purchase this boon multiple times, though you cannot expend more than one copy of this boon per adventure.</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.OJibRFm4JCVGQZnx]{Effect: Practiced Medic}</p>"
+        },
+        "Secondary Initiation": {
+            "name": "第二组织 Secondary Initiation",
+            "description": "<p><strong>Cost</strong>: 2 AcP</p><hr /><p>Your contacts have introduced you to an influential member of another organization, allowing you to join that group or train in some of their techniques. Select an organization other than the Pathfinder Society. For the purpose of fulfilling prerequisites and access conditions, you are treated as being a member of that group in addition to your belonging to the Pathfinder Society.</p>\n<p><strong>Special</strong>: You can purchase this boon multiple times, but each time you purchase it, you relinquish your membership in the previous group in order to join a different group. Before doing so, you must retrain any options that listed membership in your previous group as a prerequisite.</p>"
+        },
+        "Storied Talent": {
+            "name": "知名天赋 Storied Talent",
+            "description": "<p><strong>Cost</strong>: 4 AcP</p><hr /><p>Word of your skill and expertise is spreading, and you find that increasingly prestigious clients are prepared to pay for your services. When using Downtime to Earn Income, you can choose to attempt a task of your level.</p>\n<p><strong>Normal</strong>: When Earning Income, a PC can attempt a task of their level - 2 or lower.</p>"
+        },
+        "Untarnished Reputation": {
+            "name": "澄清声誉 Untarnished Reputation",
+            "description": "<p><strong>Cost</strong>: 12 AcP</p><hr /><p>When you purchase this boon, you remove one point of Infamy that you have accrued.</p>\n<p><strong>Special</strong>: You can purchase this boon only once, even if you qualify for it from multiple factions.</p>"
+        },
+        "Wayfinder, Esoteric": {
+            "name": "奥秘寻路仪 Wayfinder, Esoteric",
+            "description": "<p><strong>[道具]</strong></p>\n<p><strong>先决条件</strong> 宏文会声望达到喜爱，你拥有一台@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}</p>\n<p><strong>开销</strong> 2声望</p>\n<p><strong>动作</strong> 自由动作</p>\n<hr />\n<p><strong>效果</strong> 你调整了你的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，使它专注于你的精神能量，调动起更可靠的洞察力。当你分配此福利时，将此福利的益处应用于你拥有的一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}上，当该@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}被装备且由你拥有时，它会赋予你一个特殊的自由动作能力。</p>\n<p>在你回忆知识之前，你能够以自由动作激活该能力。若你在回忆知识检定中大失败，改为失败。</p>\n<p>每场冒险，你可以安全使用一次这项益处。你可以尝试第二次使用它，冒着毁掉@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}的风险将其过载。当你这么做时，进行一次@Check[flat|dc:10]检定。若成功，@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}只会破损。若失败，<em>寻路仪</em>会被摧毁。如果有人尝试过载一个已过载的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，它会自动被摧毁（即使已经修复），且不会产生激活效果。</p>"
+        },
+        "Wayfinder, Harmonic": {
+            "name": "共鸣寻路仪 Wayfinder, Harmonic",
+            "description": "<p><strong>[道具]</strong></p>\n<p><strong>先决条件</strong> 特使盟声望达到喜爱，你拥有一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}</p>\n<p><strong>开销</strong> 2声望</p>\n<p><strong>动作</strong> 自由动作</p>\n<hr />\n<p><strong>效果</strong> 你调整了你的@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}，使它与你的盟友的行动共鸣，从而在有需要时能够更好地帮助他们。当你分配此福利时，将此福利的益处应用于你拥有的一个@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}上，当该@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}被装备且由你拥有时，它会赋予你一个特殊的自由动作能力。</p>\n<p>在你@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助 Aid}盟友之前，你能够以自由动作激活该能力。若你在@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助 Aid}检定中成功，改为获得大成功。</p>\n<p>每场冒险，你可以安全使用一次这项益处。你可以尝试第二次使用它，冒着毁掉寻路仪的风险将其过载。当你这么做时，进行一次@Check[flat|dc:10]检定。若成功，寻路仪只会@UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损 Broken}。若失败，寻路仪会被摧毁。如果有人尝试过载一个已过载的寻路仪，它会自动被摧毁（即使已经修复），且不会产生激活效果。</p>"
+        },
+        "Translator": {
+            "name": "译者 Translator",
+            "description": "<p><strong>[盟友]</strong></p>\n<p><strong>先决条件</strong> 宏文会声望达到喜爱</p>\n<p><strong>开销</strong> 4声望</p>\n<hr />\n<p><strong>效果</strong> 你招募了一位优秀的语言学家，陪伴你一同冒险。这个盟友会说、读和理解通用语，以及另外两种常见语言，你在购买此福利时需要选择这两种常见语言。这个盟友可以为你快速翻译这些语言，相当于使你能够轻松用这两种额外语言交流。不过，在施放具有语言特征的法术时，你不被视为懂得这些语言。译员不会受到战斗影响，或是以任何方式影响战斗。</p>"
+        },
+        "Hireling, Professional": {
+            "name": "专业雇员 Hireling, Professional",
+            "description": "<p><strong>[无需分配]</strong></p>\n<p><strong>开销</strong> 6声望</p>\n<p><strong>先决条件</strong> 任意势力声望达到钦佩，@UUID[Compendium.pf2e.pathfinder-society-boons.1VWMLe12ZFqF9jah]{专家雇员 Expert Hireling}</p>\n<hr />\n<p><strong>效果</strong> 获得此福利时，选择你的一项@UUID[Compendium.pf2e.pathfinder-society-boons.sBXsfT0uYltF8TFE]{雇员 Hireling}福利。该盟友可尝试的技能检定列表增加第二项学识技能。此外，选择一项先决条件为雇员的某项所选技能受训的技能专长，该雇员在尝试技能检定时获得这项技能专长。 </p>\n<p><strong>特殊</strong> 你可以为同个角色多次购买本福利，每次购买都必须将其好处应用在不同的雇员福利上。</p>"
+        },
+        "Wayfinder": {
+            "name": "寻路仪 Wayfinder",
+            "description": "<p><strong>Cost</strong>: 0 AcP</p><hr /><p>To guide your path, your faction has secured a wayfinder for you to carry on your journeys and serve as a badge of office in the Pathfinder Society. This wayfinder has an effective sale price of 0 gp.</p>"
+        },
+        "S1-00 - Nexian Researcher": {
+            "name": "S1-00 - 奈克斯研究者 Nexian Researcher",
+            "description": "<p><strong>[通用][有限使用]</strong> □□□</p><hr /><p><strong>效果</strong> 当你尝试进行开拓者协会学识检定时，你能够以进行该检定所需动作的一部分，勾选此福利旁边的一个方框。若你在开拓者协会学识上未受训，你可以在判断该检定的加值时，在智力调整值上加上你的等级。若你至少在开拓者协会学识上受训，你改为在该检定中获得+2环境加值。如果该检定与杜尔文·格斯特、塞尔缪斯·福斯特、格雷加罗·沃斯或科琳哈·纳普苏纳尔有关，你在使用此福利时就无需勾选方框。</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.rEQP3SwRF9Zb1ppV]</p>"
+        },
+        "S1-18 - Narsen's Web": {
+            "name": "S1-18 - 纳森的罗网 Narsen's Web",
+            "description": "<p><strong>[通用]</strong></p>\n<hr />\n<p><strong>效果</strong> 阴谋或是义举，面具祭祀纳森的谋划让你百思不解。这个狡猾的邪教徒的目的是好是坏仍然有待观察。针对使用面具或伪装来掩饰自己特征的目标，你在@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色 Sense Motive}时的察觉检定获得+1环境加值。（包括魔法伪装和会改变外表的变形效果）</p>"
+        },
+        "S1-01 - Engraved Wayfinder": {
+            "name": "S1-01 - 铭刻寻路仪 Engraved Wayfinder",
+            "description": "<p><strong>[无需分配]</strong></p>\n<hr />\n<p><strong>效果</strong> 为了庆祝你成功成为开拓者探员，贾妮拉给了你一个刻有你名字和开拓者协会标志“前路开拓徽记”的指南针盖子。你可以将这个盖子安装在任何@UUID[Compendium.pf2e.equipment-srd.Item.wob6DB1FFdWs0mbp]{指南针 Compass}（包括@UUID[Compendium.pf2e.equipment-srd.Item.gbwr57aT9ou8yKWT]{寻路仪 Wayfinder}）上，使其变得独一无二。</p>"
+        },
+        "S1-01 - Society Connections": {
+            "name": "S1-01 - 协会关系 Society Connections",
+            "description": "<p><strong>[休整期][有限使用]</strong> □</p>\n<hr />\n<p><strong>效果</strong> 和开拓者协会领导者们建立的关系可帮助你寻找机遇，这包括新的任务和其他事业上的支持。当你在休整期@UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]{赚取收入 Earn Income}时，可以填写此福利前的方框以尝试一个＿级的任务。如果你在该检定中大失败，依然可以获得检定失败的结果。</p>"
+        },
+        "S1-02 - Cryptid Scholar": {
+            "name": "S1-02 - 谜之生物学者 Cryptid Scholar",
+            "description": "<p><strong>[无类型][有限使用]</strong> □□□</p>\n<p>你和蚊女巫的经历激发了你研究奇怪生物的灵感。当你回忆知识来识别一个稀有或独特的生物时，你可以使用以下反应。</p>\n<p><strong>触发</strong> 你试图对一个你能看到的生物回忆知识；</p>\n<hr />\n<p><strong>效果</strong> （幸运） 你掷骰两次并使用较好的结果。</p>"
+        },
+        "S1-03 - Team Player": {
+            "name": "S1-03 - 团队合作 Team Player",
+            "description": "<p><strong>[通用][有限使用]</strong> □□□</p>\n<p>你在死境坟场的经历迫使你学会如何和同伴高效合作。</p>\n<p><strong>动作</strong> 反应</p>\n<p><strong>触发</strong> （幸运） 你协助的盟友在检定中失败；</p>\n<hr />\n<p><strong>效果</strong> 他可以重骰检定并使用较好的结果。</p>"
+        },
+        "S1-04 - A Thorny Situation": {
+            "name": "S1-04 - 棘手的状况 A Thorny Situation",
+            "description": "<p><strong>[通用]</strong></p>\n<hr />\n<p><strong>效果</strong> 你被复仇荆棘的手下击败，然后捆起来扔在树林里。很难说这样一件强大神器被那个变节的半人马持有，会让巨木林发生什么事，但或许你在下次与那个德鲁伊交锋时，会有更好的运气。这项福利也许会在将来的模组中具有特殊效果。</p>"
+        },
+        "S1-04 - Touched by the Storm": {
+            "name": "S1-04 - 风暴浸染 Touched by the Storm",
+            "description": "<p><strong>[通用]</strong></p><hr /><p><strong>效果</strong> 由于暴露在<em>遭弃风暴之鳞</em>的风暴之力中，你在一定程度上适应了这种元素。在此福利被分配期间，你获得1点寒冷抗性和1点电击抗性。</p>"
+        },
+        "S1-05 - Experienced Mountaineer": {
+            "name": "S1-05 - 老练登山家 Experienced Mountaineer",
+            "description": "<p><strong>[通用]</strong></p>\n<hr />\n<p><strong>效果</strong> 从伊兹格到摩苏恩之间的跋涉教会了你穿越危险的陡峭山脉的技巧。分配此福利时，你将山地和其他陡坡视为困难地形，而不是高等困难地形。</p>"
+        },
+        "S1-06 - Traveler of the Spirit Road": {
+            "name": "S1-06 - 神灵之路旅者 Traveler of the Spirit Road",
+            "description": "<p><strong>[通用][有限使用]</strong> □□□</p>\n<hr />\n<p><strong>效果</strong> 你走过了神灵之森的 小路，不仅避免了迷路，更结识了当地的社神。社神的祝福伴随着你，庇护你免遭厄运。当在@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}、@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}、@UUID[Compendium.pf2e.actionspf2e.Item.fJImDBQfqfjKJOhk]{辨别方向 Sense Direction}或@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track}的检定中大失败时，你可用自由动作在此福利做1次记号，将之改为失败。</p>"
+        },
+        "S1-07 - Blast from the Past": {
+            "name": "S1-07 - 旧日风波 Blast from the Past",
+            "description": "<p><strong>[通用]</strong></p>\n<hr />\n<p><strong>效果</strong> 你选择将不死生物马尔孔·提诺尔交给冒险队长德兰德·德兰，相信这位经验丰富的开拓者有能力安全处理他。这项福利在未来的某篇模组中被分配时，可以带来独特的益处和结果。</p>"
+        },
+        "S1-07 - To Seal and Protect": {
+            "name": "S1-07 - 封印与保护 To Seal and Protect",
+            "description": "<p><strong>[通用]</strong></p>\n<hr />\n<p><strong>效果</strong> 你不愿意冒险将古老的死灵释放到外界，选择消灭不死生物马尔孔·提诺尔。这项福利在未来的某篇模组中可以带来独特的益处和结果。</p>"
+        },
+        "S1-09 - Ally of the Iruxi": {
+            "name": "S1-09 - 蜥蜴人盟友 Ally of the Iruxi",
+            "description": "<p><strong>[无需分配]</strong></p>\n<hr />\n<p><strong>效果</strong> 你与基希拉特的蜥蜴人交好。此福利将在未来的冒险中提供特殊益处。</p>"
+        },
+        "S1-09 - Iruxi Bane": {
+            "name": "S1-09 - 蜥蜴人仇敌 Iruxi Bane",
+            "description": "<p><strong>[无需分配]</strong></p>\n<hr />\n<p><strong>效果</strong> 你在基希拉特的蜥蜴人中间留下了不佳的印象。此福利将在未来的冒险中提供特殊益处。</p>"
+        },
+        "S1-12 - Valais's Assurance": {
+            "name": "S1-12 - 瓦莱丝的保证 Valais's Assurance",
+            "description": "<p><strong>[通用][有限使用]</strong> □□</p>\n<hr />\n<p><strong>效果</strong> 瓦莱丝·杜兰特之所以是光辉誓约的领袖，在很大程度上是因为她的善良和她愿意与有需要的人分享她的力量。你可以在此福利做1次记号，并花费一个动作使用聚能法术@UUID[Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS]{圣疗 Lay on Hands}，根据你的等级适当升阶。无需花费聚能点。</p>"
+        },
+        "S1-18 - Light in the Dark": {
+            "name": "S1-18 - 黑暗中的光 Light in the Dark",
+            "description": "<p><strong>[通用]</strong></p><hr /><p><strong>效果</strong> 你找到了具有成为协会探员潜力的人。</p>\n<p>当你在拉兹密尔境内冒险时，你在@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]或@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]的交涉检定中获得+1环境加值。请在冒险开始前告知GM你要使用该福利。</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.j2xuFnWfTov0VQoG]</p>"
+        },
+        "S1-15 - Finadar Leshy": {
+            "name": "S1-15 - 菲纳达尔莱西 Finadar Leshy",
+            "description": "<p><strong>[通用][无需分配]</strong></p>\n<hr />\n<p><strong>效果</strong> 在深渊的影响被赶出菲纳达尔森林后，那里的一些莱西开始进入更广阔的世界。你的所有角色均达成了以下背景的许可（所有选取了该背景的角色也可获得一份此战役记录单）。</p>\n<p>@UUID[Compendium.pf2e.backgrounds.NZY0r4Csjul6eVPp]{菲纳达尔莱西 Finadar Leshy}</p>"
+        },
+        "S1-22 - Doom Averted": {
+            "name": "S1-22 - 阻止灾难 Doom Averted",
+            "description": "<p><strong>[通用][有限使用] </strong>□</p>\n<hr />\n<p><strong>效果</strong> 在击败卡索米尔日益壮大的格罗图斯邪教时，你的精神充满了对他的祭司们在屋顶上喊出的末日预言的强力抵抗。当你的濒死值增加到正好会杀死你的数量时，这项福利就会自动激活。勾选此福利前面的选框，并将你的濒死值降低1点。</p>"
+        },
+        "S2-08 - Baba Yaga's Tutelage": {
+            "name": "S2-08 - 芭芭雅嘎的庇护 Baba Yaga's Tutelage",
+            "description": "<p>在伊利森的旅行后，你引起芭芭雅嘎的注意，她决定给你上一两课——要么是为了感谢你的行为，要么是相信只有通过她严厉的教导，你才能学会对永冬之地的尊重。在你的角色中选择一个，以获得以下福利之一；在该角色的记录中保留一份此恩惠的副本。</p>\n<p><strong>选项1</strong> 角色可以选择稀有女巫庇护主@UUID[Compendium.pf2e.classfeatures.Item.VVMMJdIWL7fAsQf3]{芭芭雅嘎 Baba Yaga}，获得相应的好处：@UUID[Compendium.pf2e.spells-srd.Item.yp4w9SG4RuqRM8KD]{识唤物品 Spirit Object}巫术、冻结女王的教诲、@UUID[Compendium.pf2e.spells-srd.Item.ZyREiMaul0VhDYh3]{冰雪心 Glacial Heart}巫术和一个非活化的物品作为魔宠。</p>\n<p><strong>选项2</strong> 角色可以不选择芭芭雅嘎庇护主，但他们仍然满足冻结女王的教诲和@UUID[Compendium.pf2e.spells-srd.Item.ZyREiMaul0VhDYh3]{冰雪心 Glacial Heart}巫术的许可。</p>\n<p><strong>选择角色</strong> -20_________</p>"
+        },
+        "S1-14 - Big Game Hunter": {
+            "name": "S1-14 - 王牌猎人 Big Game Hunter",
+            "description": "<p><strong>[通用][有限使用]</strong> □□□</p>\n<hr />\n<p><strong>效果</strong> 与卡塔佩什可怕的野生动物，以及操纵它们的幕后黑手的对抗过程，让你特别擅长对付危险的动物。每当你在@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪 Track}动物的检定中骰出大失败时，可以填写此福利前的方框，改为获得失败。</p>"
+        },
+        "Menace Under Otari": {
+            "name": "奥塔里地下的威胁 Menace Under Otari"
+        }
+    }
+}

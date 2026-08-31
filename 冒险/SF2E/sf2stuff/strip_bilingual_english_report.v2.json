@@ -1,0 +1,500 @@
+{
+  "meta": {
+    "target": "c:\\Users\\Taka\\Desktop\\fvtt\\_publish_sf2e_compendium_cn\\compendium\\cn\\sf2e-murder-in-metal-city.adventures.json",
+    "in_place": false,
+    "files_scanned": 1,
+    "files_changed": 1,
+    "nodes_changed": 348,
+    "segments_removed": 2346,
+    "backup_dir": ""
+  },
+  "files": [
+    {
+      "file": "c:\\Users\\Taka\\Desktop\\fvtt\\_publish_sf2e_compendium_cn\\compendium\\cn\\sf2e-murder-in-metal-city.adventures.json",
+      "changed_nodes": 348,
+      "removed_segments": 2346,
+      "samples": [
+        {
+          "path": "root.label",
+          "removed_segments": 1,
+          "before_preview": "金属之城谋杀案 Murder in Metal City",
+          "after_preview": "金属之城谋杀案"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.description",
+          "removed_segments": 1,
+          "before_preview": "一则奇怪的信息召唤六名陌生人前往奋进城——这是一座位于机器之星阿巴隆上的广阔巨型综合都市。在那里，他们聚集在一家霓虹闪烁的咖啡馆里，周围尽是安卓体和机器人，等待与一位老朋友会面。酒保为他们端来饮品——以及一段来自他们共同熟人的全息记录。 A",
+          "after_preview": "一则奇怪的信息召唤六名陌生人前往奋进城——这是一座位于机器之星阿巴隆上的广阔巨型综合都市。在那里，他们聚集在一家霓虹闪烁的咖啡馆里，周围尽是安卓体和机器人，等待与一位老朋友会面。酒保为他们端来饮品——以及一段来自他们共同熟人的全息记录。"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Remena.blurb",
+          "removed_segments": 1,
+          "before_preview": "富有同情心的女性卡萨萨草药师祭司 compassionate female kasatha herbalist-priest",
+          "after_preview": "富有同情心的女性卡萨萨草药师祭司"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Remena's Gift.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<section class=\"secret\" id=\"secret-RnpYL1dehhFKeUmo\"><p>第一次成功时，她会给他们一件低等级的商业级治疗物品（一件 @UUID[Compendium.sf2e.equipment.Ite",
+          "after_preview": "<section class=\"secret\" id=\"secret-RnpYL1dehhFKeUmo\"><p>第一次成功时，她会给他们一件低等级的商业级治疗物品（一件 @UUID[Compendium.sf2e.equipment.Ite"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.items.Charge Up.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发</strong> 一名瞭望员发现了威胁</p><hr /><p><strong>效果</strong> 胡拉就位于炮手位置。粒子炮进行先攻检定。</p> <p><strong>Trigger</strong> A",
+          "after_preview": "<p><strong>触发</strong> 一名瞭望员发现了威胁</p><hr /><p><strong>效果</strong> 胡拉就位于炮手位置。粒子炮进行先攻检定。</p> <hr />"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.disable",
+          "removed_segments": 1,
+          "before_preview": "<p>@Check[crafting|dc:14]（受训）或 @Check[thievery|dc:14]（受训）以停用或卡住粒子炮，@Check[arcana|dc:17]、@Check[occultism|dc:17]、@Check[n",
+          "after_preview": "<p>@Check[crafting|dc:14]（受训）或 @Check[thievery|dc:14]（受训）以停用或卡住粒子炮，@Check[arcana|dc:17]、@Check[occultism|dc:17]、@Check[n"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<p>飞船船体上睁开了一只怒目而视的紫色眼睛。暴露出的炮口内，一座巨型炮塔的三联炮管旋转起来，随后以冷酷无情的效率释放出一道由浓缩粒子构成的光束。</p> <p>A glowering purple eye opens in the shi",
+          "after_preview": "<p>飞船船体上睁开了一只怒目而视的紫色眼睛。暴露出的炮口内，一座巨型炮塔的三联炮管旋转起来，随后以冷酷无情的效率释放出一道由浓缩粒子构成的光束。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.reset",
+          "removed_segments": 1,
+          "before_preview": "<p>如果被禁用，大炮会有 1 轮处于未激活状态，此时胡拉会排查问题，随后它会恢复射击。如果瞭望员被杀死，或大炮被禁用三次或以上，胡拉就会停止射击。</p> <p>If disabled, the cannon is inactive fo",
+          "after_preview": "<p>如果被禁用，大炮会有 1 轮处于未激活状态，此时胡拉会排查问题，随后它会恢复射击。如果瞭望员被杀死，或大炮被禁用三次或以上，胡拉就会停止射击。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.routine",
+          "removed_segments": 1,
+          "before_preview": "<p>（2 个动作）胡拉从粒子加农炮发射一发充能射击，对 @Template[type:line|distance:90] 内的每个生物造成 @Damage[(1d6+3)[fire]|options:area-damage] 伤害（@Ch",
+          "after_preview": "<p>（2 个动作）胡拉从粒子加农炮发射一发充能射击，对 @Template[type:line|distance:90] 内的每个生物造成 @Damage[(1d6+3)[fire]|options:area-damage] 伤害（@Ch"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Particle Cannon.stealthdetails",
+          "removed_segments": 1,
+          "before_preview": "<p>（受训）</p> <p>(trained)</p>",
+          "after_preview": "<p>（受训）</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Cyberwing.items.Steel Wing.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发条件</strong> 一只赛博翼是一次针对其 AC 的攻击的目标</p><hr /><p><strong>效果</strong> 赛博翼将其强化的翅膀当作护盾使用，对触发该反应的攻击获得 AC +2 的处境加值。",
+          "after_preview": "<p><strong>触发条件</strong> 一只赛博翼是一次针对其 AC 的攻击的目标</p><hr /><p><strong>效果</strong> 赛博翼将其强化的翅膀当作护盾使用，对触发该反应的攻击获得 AC +2 的处境加值。"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Cyberwing.items.Shred.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p><strong>效果</strong> 赛博翼加速其翼部引擎，在金属残影中飞行两次。此移动不会触发反应，且赛博翼可以穿过其他生物所占据的空间。它穿过的生物",
+          "after_preview": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p><strong>效果</strong> 赛博翼加速其翼部引擎，在金属残影中飞行两次。此移动不会触发反应，且赛博翼可以穿过其他生物所占据的空间。它穿过的生物"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Cyberwing.publicNotes",
+          "removed_segments": 4,
+          "before_preview": "<p>异星卫士谴责将动物的身体与机器部件融合的做法，声称这些实验性原型是对自然的残酷拙劣模仿。支持者则辩称，用科技强化野生动物，与通过魔法唤醒它们并无不同。双方争论激烈，但《星契》法律仍迟迟不肯接受这种骇人的做法。赛博翼是一种简单型号，设计",
+          "after_preview": "<p>异星卫士谴责将动物的身体与机器部件融合的做法，声称这些实验性原型是对自然的残酷拙劣模仿。支持者则辩称，用科技强化野生动物，与通过魔法唤醒它们并无不同。双方争论激烈，但《星契》法律仍迟迟不肯接受这种骇人的做法。赛博翼是一种简单型号，设计"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.items.Quantum Field.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发</strong> 阴影般的复制体出现并威胁PC们</p><hr /><p><strong>效果</strong> 这些复制体扭曲现实，创造出一个量子场。该量子场是在复制体100英尺内任意一点为中心、半径30英尺的",
+          "after_preview": "<p><strong>触发</strong> 阴影般的复制体出现并威胁PC们</p><hr /><p><strong>效果</strong> 这些复制体扭曲现实，创造出一个量子场。该量子场是在复制体100英尺内任意一点为中心、半径30英尺的"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.items.Mind-Slicing Blast.description",
+          "removed_segments": 1,
+          "before_preview": "<p>无多重攻击减值</p> <p>no multiple attack penalty</p>",
+          "after_preview": "<p>无多重攻击减值</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.disable",
+          "removed_segments": 1,
+          "before_preview": "<p>@Check[arcana|dc:14] 或 @Check[occultism|dc:14] 通过将一个复制体封离此现实来将其禁用，@Check[Engineering Lore|dc:15] 或 @Check[Physical Sc",
+          "after_preview": "<p>@Check[arcana|dc:14] 或 @Check[occultism|dc:14] 通过将一个复制体封离此现实来将其禁用，@Check[Engineering Lore|dc:15] 或 @Check[Physical Sc"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<p>一个朦胧身影的四个复制体生成了一个半真实的量子场，扭曲了现实的结构，随后以切裂现实的魔法回响发动攻击。</p> <p>Four duplicates of a shadowy figure produce a quasi-real q",
+          "after_preview": "<p>一个朦胧身影的四个复制体生成了一个半真实的量子场，扭曲了现实的结构，随后以切裂现实的魔法回响发动攻击。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.reset",
+          "removed_segments": 1,
+          "before_preview": "<p>这些复制体会在1分钟后消失，且不会再次出现。</p> <p>The duplicates vanish after 1 minute and never reappear.</p>",
+          "after_preview": "<p>这些复制体会在1分钟后消失，且不会再次出现。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.routine",
+          "removed_segments": 1,
+          "before_preview": "<p>（4 个动作）每有一个阴影复制体被摧毁或失能，这些阴影复制体每回合就各失去 1 个动作。在该危害的每个动作中，一个复制体会移动至多 20 尺（无视量子场造成的困难地形），或使量子场移动至多 20 尺，然后对 40 尺内的一个生物释放一",
+          "after_preview": "<p>（4 个动作）每有一个阴影复制体被摧毁或失能，这些阴影复制体每回合就各失去 1 个动作。在该危害的每个动作中，一个复制体会移动至多 20 尺（无视量子场造成的困难地形），或使量子场移动至多 20 尺，然后对 40 尺内的一个生物释放一"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Shadowy Duplicates.stealthdetails",
+          "removed_segments": 1,
+          "before_preview": "<p>（受训）</p> <p>(trained)</p>",
+          "after_preview": "<p>（受训）</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Tier-99-Professor.blurb",
+          "removed_segments": 1,
+          "before_preview": "古怪的无性别新械族技法师 eccentric agender anacite technomancer",
+          "after_preview": "古怪的无性别新械族技法师"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Entropy Strike.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你释放出一道熵射线，使物质迅速且不分对象地衰变。对目标的 AC 进行一次远程法术攻击。若命中，目标受到 5d8 点虚空伤害；若其具有科技特征，则改为受到 2d6 持续性强酸伤害并陷入故障 1。若重击，伤害加倍；若该生物具有科技特征，则",
+          "after_preview": "<p>你释放出一道熵射线，使物质迅速且不分对象地衰变。对目标的 AC 进行一次远程法术攻击。若命中，目标受到 5d8 点虚空伤害；若其具有科技特征，则改为受到 2d6 持续性强酸伤害并陷入故障 1。若重击，伤害加倍；若该生物具有科技特征，则"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Time's Edge.description",
+          "removed_segments": 11,
+          "before_preview": "<p>你将来自时间维度的潜在能量折射到你当前的位面，形成一把巨大的刀刃。这把刀刃对区域内所有生物造成 5d6 点挥砍伤害，因为它会使其身体的一薄片区域中的时间快速流逝。区域内的生物必须进行一次强韧豁免。</p><hr /><p><stron",
+          "after_preview": "<p>你将来自时间维度的潜在能量折射到你当前的位面，形成一把巨大的刀刃。这把刀刃对区域内所有生物造成 5d6 点挥砍伤害，因为它会使其身体的一薄片区域中的时间快速流逝。区域内的生物必须进行一次强韧豁免。</p><hr /><p><stron"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Doom Scroll.description",
+          "removed_segments": 9,
+          "before_preview": "<p>你以魔法将可怕的消息广播到附近的设备、全息投影仪、屏幕和其他显示装置上（包括护甲上的通讯装置）。区域内能看到一个或多个显示装置的生物必须尝试进行一次意志豁免。</p><hr /><p><strong>大成功</strong> 该生物不",
+          "after_preview": "<p>你以魔法将可怕的消息广播到附近的设备、全息投影仪、屏幕和其他显示装置上（包括护甲上的通讯装置）。区域内能看到一个或多个显示装置的生物必须尝试进行一次意志豁免。</p><hr /><p><strong>大成功</strong> 该生物不"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Temporal Bullets.description",
+          "removed_segments": 3,
+          "before_preview": "<p><strong>触发条件</strong> 你使用武器进行的攻击检定失败（但非严重失败）。</p> <p>你回溯时间并调整概率，确保一次刚刚落空的攻击仍能对其预定目标造成伤害。你如同以此次Strike命中目标一般掷伤害，但目标只承受一",
+          "after_preview": "<p><strong>触发条件</strong> 你使用武器进行的攻击检定失败（但非严重失败）。</p> <p>你回溯时间并调整概率，确保一次刚刚落空的攻击仍能对其预定目标造成伤害。你如同以此次Strike命中目标一般掷伤害，但目标只承受一"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Akashic Download.description",
+          "removed_segments": 4,
+          "before_preview": "<p>你对阿卡西记录执行一次心灵检索，以获取关于某个特定主题的信息，并将这些数据以魔法方式传输到你的通讯器或电脑中。当你施放此法术时，选择任意一个你已受训且拥有 @UUID[Compendium.sf2e.actions.Item.1Oag",
+          "after_preview": "<p>你对阿卡西记录执行一次心灵检索，以获取关于某个特定主题的信息，并将这些数据以魔法方式传输到你的通讯器或电脑中。当你施放此法术时，选择任意一个你已受训且拥有 @UUID[Compendium.sf2e.actions.Item.1Oag"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Analyze Target.description",
+          "removed_segments": 5,
+          "before_preview": "<p>你专注于目标，收集数据，魔法全息影像会显示相关信息。施法完成后，你会了解目标的生物识别信息，包括其指纹、医疗状况以及其他基础生理信息。你，或任何接受你关于此次分析建议的人，在冒充该生物的检定、对该生物进行 @UUID[Compendi",
+          "after_preview": "<p>你专注于目标，收集数据，魔法全息影像会显示相关信息。施法完成后，你会了解目标的生物识别信息，包括其指纹、医疗状况以及其他基础生理信息。你，或任何接受你关于此次分析建议的人，在冒充该生物的检定、对该生物进行 @UUID[Compendi"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Detect Magic.description",
+          "removed_segments": 7,
+          "before_preview": "<p>你发出一阵脉冲，以感知魔法的存在。除了魔法是否存在之外，你不会获得任何信息。你可以选择忽略你完全知晓的魔法，例如你和盟友身上的魔法物品与持续中的法术。只有当幻术魔法的效果环阶低于你的<em>侦测魔法</em>法术环阶时，你才能探测到该",
+          "after_preview": "<p>你发出一阵脉冲，以感知魔法的存在。除了魔法是否存在之外，你不会获得任何信息。你可以选择忽略你完全知晓的魔法，例如你和盟友身上的魔法物品与持续中的法术。只有当幻术魔法的效果环阶低于你的<em>侦测魔法</em>法术环阶时，你才能探测到该"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Eldritch Lance.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你将来自群星之间黑暗空间、侵袭心智的邪异能量凝聚成一道光束，并将其射向目标。对目标的 AC 进行一次远程法术攻击检定。若命中，你造成 2d6 点精神伤害。若为重击成功，你造成双倍伤害。</p><hr /><p><strong>升阶（+",
+          "after_preview": "<p>你将来自群星之间黑暗空间、侵袭心智的邪异能量凝聚成一道光束，并将其射向目标。对目标的 AC 进行一次远程法术攻击检定。若命中，你造成 2d6 点精神伤害。若为重击成功，你造成双倍伤害。</p><hr /><p><strong>升阶（+"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Injury Echo.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你将来自未来或过去的一处伤势显现于现在，以伤害一个生物。选择钝击、穿刺或挥砍伤害。目标受到 1d8 所选类型的伤害，并进行一次基础意志豁免。若目标豁免失败，且在你的下个回合结束前再次受到相同类型的伤害，则它还会受到额外 1d4 持续流",
+          "after_preview": "<p>你将来自未来或过去的一处伤势显现于现在，以伤害一个生物。选择钝击、穿刺或挥砍伤害。目标受到 1d8 所选类型的伤害，并进行一次基础意志豁免。若目标豁免失败，且在你的下个回合结束前再次受到相同类型的伤害，则它还会受到额外 1d4 持续流"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Mind Skewer.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你以过量的灵能信息或神圣裁决令一个生物的心智超载。这次精神猛袭造成 2d6 点精神伤害。若目标严重失败，其还会陷入 @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{迟钝 ",
+          "after_preview": "<p>你以过量的灵能信息或神圣裁决令一个生物的心智超载。这次精神猛袭造成 2d6 点精神伤害。若目标严重失败，其还会陷入 @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{迟钝 "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Shield.description",
+          "removed_segments": 4,
+          "before_preview": "<p>你升起一面魔法力场护盾。这视为使用“举起护盾”动作，使你获得 AC +1 的处境加值，直到你的下一回合开始，但使用它不需要占用一只手。</p> <p>当该法术效果持续期间，你可以用你的魔法护盾使用 @UUID[Compendium.s",
+          "after_preview": "<p>你升起一面魔法力场护盾。这视为使用“举起护盾”动作，使你获得 AC +1 的处境加值，直到你的下一回合开始，但使用它不需要占用一只手。</p> <p>当该法术效果持续期间，你可以用你的魔法护盾使用 @UUID[Compendium.s"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Shifting Surge.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你释放出一股魔法能量浪涌，暂时改变武器所造成伤害的类型。该武器下一次进行的打击会造成你所选择的酸蚀、寒冷、电击、火焰或音波伤害，并额外造成 1d6 与该武器通常伤害类型相同的额外伤害。</p><hr /><p><strong>强化（+",
+          "after_preview": "<p>你释放出一股魔法能量浪涌，暂时改变武器所造成伤害的类型。该武器下一次进行的打击会造成你所选择的酸蚀、寒冷、电击、火焰或音波伤害，并额外造成 1d6 与该武器通常伤害类型相同的额外伤害。</p><hr /><p><strong>强化（+"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Rewind Wounds.description",
+          "removed_segments": 6,
+          "before_preview": "<p><strong>频率</strong> 每 10 分钟一次</p> <p><strong>触发条件</strong> 特工 Z 受到伤害</p><hr /><p><strong>效果</strong> 特工 Z 将时间倒回到自己先前处",
+          "after_preview": "<p><strong>频率</strong> 每 10 分钟一次</p> <p><strong>触发条件</strong> 特工 Z 受到伤害</p><hr /><p><strong>效果</strong> 特工 Z 将时间倒回到自己先前处"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Temporal Resistances.description",
+          "removed_segments": 1,
+          "before_preview": "<p>Z特工最初来自另一条时间线，与这个现实并未完全同步。他在对抗幻觉和全息影像的豁免检定中获得+1处境加值；如果他在此类豁免中严重失败，则改为按失败处理。</p> <p>Agent Z originally came from anoth",
+          "after_preview": "<p>Z特工最初来自另一条时间线，与这个现实并未完全同步。他在对抗幻觉和全息影像的豁免检定中获得+1处境加值；如果他在此类豁免中严重失败，则改为按失败处理。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Fly.description",
+          "removed_segments": 1,
+          "before_preview": "<p>Z特工激活他的喷气背包，以获得20英尺的飞行速度。该效果持续1分钟，或直到他将其撤销。他可以使用一个动作飞行0英尺以在原地悬浮，但在这样做时直到其下一回合开始前会变为@UUID[Compendium.sf2e.conditions.I",
+          "after_preview": "<p>Z特工激活他的喷气背包，以获得20英尺的飞行速度。该效果持续1分钟，或直到他将其撤销。他可以使用一个动作飞行0英尺以在原地悬浮，但在这样做时直到其下一回合开始前会变为@UUID[Compendium.sf2e.conditions.I"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Isolated Spell Matrix.description",
+          "removed_segments": 1,
+          "before_preview": "<p>如果特工Z接下来使用的动作是施放一个具有射程的法术，他将该法术的射程提高至100英尺。该法术只会影响其量子场内的目标，且该法术的区域不会延伸到其量子场之外。</p> <p>If the next action Agent Z uses",
+          "after_preview": "<p>如果特工Z接下来使用的动作是施放一个具有射程的法术，他将该法术的射程提高至100英尺。该法术只会影响其量子场内的目标，且该法术的区域不会延伸到其量子场之外。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Quantum Pulse.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发条件</strong> 特工Z掷先攻</p><hr /><p><strong>效果</strong> 特工Z使用“扭曲现实”。</p> <p><strong>Trigger</strong> Agent Z rol",
+          "after_preview": "<p><strong>触发条件</strong> 特工Z掷先攻</p><hr /><p><strong>效果</strong> 特工Z使用“扭曲现实”。</p> <hr />"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.items.Warp Reality.description",
+          "removed_segments": 5,
+          "before_preview": "<p>特工Z使用其残余力量激活一个量子场：一个以他在100英尺内选定一点为中心、半径20英尺的爆发区域。只要他进行维持，它就会持续，最长可达10分钟。每当特工Z使用孤立法术矩阵时，该动作也会自动维持该量子场。</p> <p>位于量子场内的敌",
+          "after_preview": "<p>特工Z使用其残余力量激活一个量子场：一个以他在100英尺内选定一点为中心、半径20英尺的爆发区域。只要他进行维持，它就会持续，最长可达10分钟。每当特工Z使用孤立法术矩阵时，该动作也会自动维持该量子场。</p> <p>位于量子场内的敌"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Agent Z.blurb",
+          "removed_segments": 1,
+          "before_preview": "来自另一个现实的人类男性巫战扭曲者 Male human witchwarper from another reality",
+          "after_preview": "来自另一个现实的人类男性巫战扭曲者"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Ruined Mall.items.Hacking Toolkit (Commercial).description",
+          "removed_segments": 1,
+          "before_preview": "<p>进行“侵入”计算机的计算机检定需要使用一套黑客工具包。你可以使用黑客工具包在不借助用户界面的情况下访问计算机，但这需要与计算机进行物理接触，或通过信息圈或类似的联网网络进行连接。</p> <p>A hacking toolkit is",
+          "after_preview": "<p>进行“侵入”计算机的计算机检定需要使用一套黑客工具包。你可以使用黑客工具包在不借助用户界面的情况下访问计算机，但这需要与计算机进行物理接触，或通过信息圈或类似的联网网络进行连接。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Ruined Mall.items.Repair Toolkit (Commercial).description",
+          "removed_segments": 1,
+          "before_preview": "<p>修理工具包包含各种精细工具和补给，使你能够在旅途中进行简单修理。你可以使用修理工具包，运用制作技能来修理物品。你可以在使用它的动作中，作为该动作的一部分，抽出并收起一套穿用中的修理工具包。</p> <p>A repair toolki",
+          "after_preview": "<p>修理工具包包含各种精细工具和补给，使你能够在旅途中进行简单修理。你可以使用修理工具包，运用制作技能来修理物品。你可以在使用它的动作中，作为该动作的一部分，抽出并收起一套穿用中的修理工具包。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Ruined Mall.items.Reusable Grenade Shell.description",
+          "removed_segments": 3,
+          "before_preview": "<p>这种军械最初被塑造成暴徒球的形状，目的是为这项本就危险的比赛增添视觉效果和额外风险。你可以投掷外壳来引爆内嵌的手雷，使用该手雷的射程、伤害和其他效果。外壳会保留下来，并在24小时内修复手雷，在此期间你无法再内嵌另一枚手雷。该外壳体积过",
+          "after_preview": "<p>这种军械最初被塑造成暴徒球的形状，目的是为这项本就危险的比赛增添视觉效果和额外风险。你可以投掷外壳来引爆内嵌的手雷，使用该手雷的射程、伤害和其他效果。外壳会保留下来，并在24小时内修复手雷，在此期间你无法再内嵌另一枚手雷。该外壳体积过"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Ruined Mall.items.Auto-CPR Unit.description",
+          "removed_segments": 1,
+          "before_preview": "<p>该装置会监测你的生命体征并自动实施救助。当你穿着这件护甲且具有濒死状态时，你的恢复检定DC等于 8 + 你的濒死值（而非 10 + 你的濒死值）。</p> <p>This device monitors your vital sign",
+          "after_preview": "<p>该装置会监测你的生命体征并自动实施救助。当你穿着这件护甲且具有濒死状态时，你的恢复检定DC等于 8 + 你的濒死值（而非 10 + 你的濒死值）。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Remena's Second Gift.items.Programmer's Plushie (Commercial).description",
+          "removed_segments": 6,
+          "before_preview": "<p>它看起来像一只紫色的松鼠狐，肚子上画着一个@UUID[Compendium.sf2e.deities.Item.N1eCNDynvJFIl154]{埃洛里图}的符号。</p><hr /><p>这些微缩模型有许多种外形，通常会做成程序员",
+          "after_preview": "<p>它看起来像一只紫色的松鼠狐，肚子上画着一个@UUID[Compendium.sf2e.deities.Item.N1eCNDynvJFIl154]{埃洛里图}的符号。</p><hr /><p>这些微缩模型有许多种外形，通常会做成程序员"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Stone.items.Vending Pass.description",
+          "removed_segments": 1,
+          "before_preview": "<p>一张还剩 3 信用点的自动售货通行证。</p> <p>A vending pass with 3 credits left. </p>",
+          "after_preview": "<p>一张还剩 3 信用点的自动售货通行证。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Spring Shoots Emerging Through Frost.blurb",
+          "removed_segments": 1,
+          "before_preview": "无忧无虑的男性基扎尔异星德鲁伊 happy-go-lucky male khizar xenodruid",
+          "after_preview": "无忧无虑的男性基扎尔异星德鲁伊"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.items.Intruder Alert!.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发条件</strong> 档案管理员404侦测到入侵者</p><hr /><p><strong>效果</strong> 数十个隐藏在墙壁、地板和天花板中的微小节点释放出万花筒般的激光齐射，对档案库404内所有非硬光生",
+          "after_preview": "<p><strong>触发条件</strong> 档案管理员404侦测到入侵者</p><hr /><p><strong>效果</strong> 数十个隐藏在墙壁、地板和天花板中的微小节点释放出万花筒般的激光齐射，对档案库404内所有非硬光生"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.items.Laser.description",
+          "removed_segments": 1,
+          "before_preview": "<p>无多重攻击减值</p> <p>no multiple attack penalty</p>",
+          "after_preview": "<p>无多重攻击减值</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.disable",
+          "removed_segments": 1,
+          "before_preview": "<p>@Check[计算机|dc:13]（受训）覆盖安全程序；@Check[crafting|dc:15] 或 @Check[thievery|dc:15]（受训）停用硬光投影仪；@Check[diplomacy|dc:17] 说服档案管理",
+          "after_preview": "<p>@Check[计算机|dc:13]（受训）覆盖安全程序；@Check[crafting|dc:15] 或 @Check[thievery|dc:15]（受训）停用硬光投影仪；@Check[diplomacy|dc:17] 说服档案管理"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<p>这个由安保摄像头、壁挂式可折叠炮塔和激光网组成的网络由档案管理员404控制，他会命令它们以毫不留情的方式轰击入侵者。</p> <p>This network of security cameras, wall-mounted retr",
+          "after_preview": "<p>这个由安保摄像头、壁挂式可折叠炮塔和激光网组成的网络由档案管理员404控制，他会命令它们以毫不留情的方式轰击入侵者。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.reset",
+          "removed_segments": 1,
+          "before_preview": "<p>每隔 6 小时，如果已被禁用，一个备份程序就会将档案管理员404的原始人格数据恢复到投影仪中。</p> <p>Every 6 hours, a backup program restores Archivist 404's origi",
+          "after_preview": "<p>每隔 6 小时，如果已被禁用，一个备份程序就会将档案管理员404的原始人格数据恢复到投影仪中。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.routine",
+          "removed_segments": 1,
+          "before_preview": "<p>（1动作）Archivist 404 以一个动作向档案库中的每名入侵者发射一道激光。PC每成功通过一次使其失能的检定，它的攻击检定便会承受累计-1的状态减值。</p> <p>(1 action) Archivist 404 fires",
+          "after_preview": "<p>（1动作）Archivist 404 以一个动作向档案库中的每名入侵者发射一道激光。PC每成功通过一次使其失能的检定，它的攻击检定便会承受累计-1的状态减值。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Archivist's Wrath.stealthdetails",
+          "removed_segments": 1,
+          "before_preview": "<p>（受训）</p> <p>(trained)</p>",
+          "after_preview": "<p>（受训）</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Detect Magic.description",
+          "removed_segments": 7,
+          "before_preview": "<p>你发出一道脉冲，以探知魔法的存在。除魔法是否存在之外，你不会获得任何其他信息。你可以选择忽略你完全知晓的魔法，例如你和盟友身上的魔法物品与持续中的法术。只有当幻术魔法的效果环阶低于你的<em>侦测魔法</em>法术的环阶时，你才能侦测",
+          "after_preview": "<p>你发出一道脉冲，以探知魔法的存在。除魔法是否存在之外，你不会获得任何其他信息。你可以选择忽略你完全知晓的魔法，例如你和盟友身上的魔法物品与持续中的法术。只有当幻术魔法的效果环阶低于你的<em>侦测魔法</em>法术的环阶时，你才能侦测"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Eldritch Lance.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你将来自群星之间黑暗空隙、侵袭心智的邪异能量凝聚成一道光束，并向目标发射。对目标的AC进行一次远程法术攻击检定。若命中，你造成2d6点精神伤害。若获得重击成功，则造成双倍伤害。</p><hr /><p><strong>升阶（+1）</",
+          "after_preview": "<p>你将来自群星之间黑暗空隙、侵袭心智的邪异能量凝聚成一道光束，并向目标发射。对目标的AC进行一次远程法术攻击检定。若命中，你造成2d6点精神伤害。若获得重击成功，则造成双倍伤害。</p><hr /><p><strong>升阶（+1）</"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Injury Echo.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你将来自未来或过去的一处伤势具现出来，在当下对一个生物造成伤害。选择钝击、穿刺或挥砍伤害。目标受到 1d8 所选类型的伤害，并进行一次基础意志豁免。若目标豁免失败，且在你下个回合结束前再次受到同类型的伤害，则它还会受到额外 1d4 持",
+          "after_preview": "<p>你将来自未来或过去的一处伤势具现出来，在当下对一个生物造成伤害。选择钝击、穿刺或挥砍伤害。目标受到 1d8 所选类型的伤害，并进行一次基础意志豁免。若目标豁免失败，且在你下个回合结束前再次受到同类型的伤害，则它还会受到额外 1d4 持"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Mind Skewer.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你用过量的灵能信息或神圣裁决使一个生物的心智超载。此次精神猛袭造成 2d6 点精神伤害。若严重失败，目标还会陷入 @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{呆滞 2",
+          "after_preview": "<p>你用过量的灵能信息或神圣裁决使一个生物的心智超载。此次精神猛袭造成 2d6 点精神伤害。若严重失败，目标还会陷入 @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{呆滞 2"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Shield.description",
+          "removed_segments": 4,
+          "before_preview": "<p>你升起一道由力场构成的魔法护盾。这视为使用了“举起护盾”动作，使你获得 AC +1 的处境加值，直到你的下一回合开始，但使用它不需要占用一只手。</p> <p>当该法术生效时，你可以用你的魔法护盾使用 @UUID[Compendium",
+          "after_preview": "<p>你升起一道由力场构成的魔法护盾。这视为使用了“举起护盾”动作，使你获得 AC +1 的处境加值，直到你的下一回合开始，但使用它不需要占用一只手。</p> <p>当该法术生效时，你可以用你的魔法护盾使用 @UUID[Compendium"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Sonic Scream.description",
+          "removed_segments": 3,
+          "before_preview": "<p>你发出一声宣泄般的尖叫，释放出一道令人疼痛的高速振动锥形区域，对区域内的生物造成1d8音波伤害，进行一次基础强韧豁免检定。豁免失败的生物还会陷入 @UUID[Compendium.sf2e.conditions.Item.fesd1n",
+          "after_preview": "<p>你发出一声宣泄般的尖叫，释放出一道令人疼痛的高速振动锥形区域，对区域内的生物造成1d8音波伤害，进行一次基础强韧豁免检定。豁免失败的生物还会陷入 @UUID[Compendium.sf2e.conditions.Item.fesd1n"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Vitality Network.description",
+          "removed_segments": 1,
+          "before_preview": "<p>誓纹之刃拥有一个生命力网络，可与至多10名缔约盟友共享。该网络最多可储存10点生命值，并在战斗开始时处于充满状态。</p> <p>The sworn blade of sigils has a vitality network the",
+          "after_preview": "<p>誓纹之刃拥有一个生命力网络，可与至多10名缔约盟友共享。该网络最多可储存10点生命值，并在战斗开始时处于充满状态。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Refill Vitality.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 烬蛛族为其活力网络恢复4点生命值。</p> <p><strong>Frequency</strong> once per",
+          "after_preview": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 烬蛛族为其活力网络恢复4点生命值。</p> <hr />"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Strider Leap.description",
+          "removed_segments": 1,
+          "before_preview": "<p>烬蛛族先移动，然后进行一次 @UUID[Compendium.sf2e.actions.Item.JUvAvruz7yRQXfz2]{跳远}。它可以先移动不足10尺，且不会因此自动失败其跳远检定。</p> <p>The jinsul ",
+          "after_preview": "<p>烬蛛族先移动，然后进行一次 @UUID[Compendium.sf2e.actions.Item.JUvAvruz7yRQXfz2]{跳远}。它可以先移动不足10尺，且不会因此自动失败其跳远检定。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.items.Transfer Vitality.description",
+          "removed_segments": 1,
+          "before_preview": "<p>誓印之刃将其活力网络中的任意数量生命值转移给一个可见的盟约目标，为其恢复生命值。</p> <p>The sworn blade of sigils transfers any number of Hit Points from the",
+          "after_preview": "<p>誓印之刃将其活力网络中的任意数量生命值转移给一个可见的盟约目标，为其恢复生命值。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Sworn Blade of Sigils.publicNotes",
+          "removed_segments": 6,
+          "before_preview": "<p>如同护盾誓刃一般，印记誓刃也立誓侍奉他们的上级。这些烬蛛族将全部精力都投入到确保上级存活上。</p><hr /><p>有少数零散的烬蛛族群体在阿巴隆建立了与世隔绝的基地。其中大多数是隶属于某位军官的小型士兵小队，通常由一位秘学者或战术",
+          "after_preview": "<p>如同护盾誓刃一般，印记誓刃也立誓侍奉他们的上级。这些烬蛛族将全部精力都投入到确保上级存活上。</p><hr /><p>有少数零散的烬蛛族群体在阿巴隆建立了与世隔绝的基地。其中大多数是隶属于某位军官的小型士兵小队，通常由一位秘学者或战术"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Rickety Table.items.Plasma Sword.description",
+          "removed_segments": 2,
+          "before_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这把剑会在由剑柄内发生器供能的局部力场周围生成一道聚焦的等离子体光束。只有在这把剑启动供能时，光束才会炽然亮起。</p> <p><strong>Upgrades:<",
+          "after_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这把剑会在由剑柄内发生器供能的局部力场周围生成一道聚焦的等离子体光束。只有在这把剑启动供能时，光束才会炽然亮起。</p> <p> 1</p><hr />"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Rickety Table.items.Disassembled Laser Pistol.description",
+          "removed_segments": 2,
+          "before_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这款袖珍手枪凭借其可靠性、耐用性和价格亲民，成为协约世界中最受欢迎的佩枪。大多数常见的激光手枪都采用轻质聚碳材料枪身，并以一根细长的枪管收尾。</p> <p><st",
+          "after_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这款袖珍手枪凭借其可靠性、耐用性和价格亲民，成为协约世界中最受欢迎的佩枪。大多数常见的激光手枪都采用轻质聚碳材料枪身，并以一根细长的枪管收尾。</p> <p> 1<"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Rickety Table.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<p>角色可以通过一次成功的 @Check[crafting|dc:13] 检定，将激光手枪重新组装至可正常运作的状态。</p> </section> <section class=\"secret\"> <p>A character can ",
+          "after_preview": "<p>角色可以通过一次成功的 @Check[crafting|dc:13] 检定，将激光手枪重新组装至可正常运作的状态。</p> </section> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Irising Shield.description",
+          "removed_segments": 1,
+          "before_preview": "<p>虹圈盾由柔性聚碳材料制成，采用可折叠设计。收起时，虹圈盾看起来像装饰性手镯、臂铠或手套。展开时，它的面板会向外张开，形成一面微型圆形护盾。</p> <p>An irising shield is made of flexible po",
+          "after_preview": "<p>虹圈盾由柔性聚碳材料制成，采用可折叠设计。收起时，虹圈盾看起来像装饰性手镯、臂铠或手套。展开时，它的面板会向外张开，形成一面微型圆形护盾。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Carbon Skin.description",
+          "removed_segments": 3,
+          "before_preview": "<p>这套护甲配有一个 @UUID[Compendium.sf2e.equipment.Item.7psnMwQ95uO5apQz]{黑暗视觉面罩}</p><hr /><p><strong>升级：</strong> 1</p><hr /><",
+          "after_preview": "<p>这套护甲配有一个 @UUID[Compendium.sf2e.equipment.Item.7psnMwQ95uO5apQz]{黑暗视觉面罩}</p><hr /><p><strong>升级：</strong> 1</p><hr /><"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Shock Pad.description",
+          "removed_segments": 3,
+          "before_preview": "<p>一种老式的震击垫，会奏出类似特雷门琴的旋律。</p><hr /><p><strong>升级：</strong> 1</p><hr /><p>这种柔性的纳米碳电路可以作为升级内嵌于手套、护膝或类似的肢体护具中，在用力施加到目标身上时释放",
+          "after_preview": "<p>一种老式的震击垫，会奏出类似特雷门琴的旋律。</p><hr /><p><strong>升级：</strong> 1</p><hr /><p>这种柔性的纳米碳电路可以作为升级内嵌于手套、护膝或类似的肢体护具中，在用力施加到目标身上时释放"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Akashic Download Spell Gem (Rank 1).description",
+          "removed_segments": 4,
+          "before_preview": "<p>@UUID[Compendium.sf2e.spells.Item.VynaowCerc7B4yvI]{阿卡西下载}</p><hr /><p>从卷轴施放法术需要将卷轴持于一只手中，并使用施放法术活动来启用它，所需动作数与该法术通常所需",
+          "after_preview": "<p>@UUID[Compendium.sf2e.spells.Item.VynaowCerc7B4yvI]{阿卡西下载}</p><hr /><p>从卷轴施放法术需要将卷轴持于一只手中，并使用施放法术活动来启用它，所需动作数与该法术通常所需"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Breaching Gun.description",
+          "removed_segments": 2,
+          "before_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这种短枪管霰弹枪常被用来轰开门和墙。它比反应破障霰弹枪更小，但也因其强大的后坐力而臭名昭著。</p> <p><strong>Upgrades:</strong> 1",
+          "after_preview": "<p><strong>升级：</strong> 1</p><hr /><p>这种短枪管霰弹枪常被用来轰开门和墙。它比反应破障霰弹枪更小，但也因其强大的后坐力而臭名昭著。</p> <p> 1</p><hr />"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Null Space Chamber (Commercial).description",
+          "removed_segments": 5,
+          "before_preview": "<p>这台流线型黑色装置可连接在背包、手提包或钥匙环上。当你按下装置侧面的按钮时，它会创造一个通往异次元囊袋空间的圆形传送门。该空间的容量取决于装置的类型。</p> <p>你可以对虚空空间舱进行【交互】以将物品存放其中或将其取出。虚空空间舱",
+          "after_preview": "<p>这台流线型黑色装置可连接在背包、手提包或钥匙环上。当你按下装置侧面的按钮时，它会创造一个通往异次元囊袋空间的圆形传送门。该空间的容量取决于装置的类型。</p> <p>你可以对虚空空间舱进行【交互】以将物品存放其中或将其取出。虚空空间舱"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Cellular Stimulant Spell Amp.description",
+          "removed_segments": 6,
+          "before_preview": "<p>在大多数世界中被称为“法术安瓿”，法术安瓿是可立即使用的魔法注射剂，能赋予特定环阶法术的益处。</p> <p><strong>激活—注射</strong> <span class=\"action-glyph\">1</span> (ma",
+          "after_preview": "<p>在大多数世界中被称为“法术安瓿”，法术安瓿是可立即使用的魔法注射剂，能赋予特定环阶法术的益处。</p> <p><strong>激活—注射</strong> <span class=\"action-glyph\">1</span></p>"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Smoke Grenade (Commercial).description",
+          "removed_segments": 3,
+          "before_preview": "<p><strong>激活</strong> <span class=\"action-glyph\">1</span> 区域 射击</p><hr /><p>这枚手雷会在一个 @Template[burst|distance:5] 内释放出一团",
+          "after_preview": "<p><strong>激活</strong> <span class=\"action-glyph\">1</span> 区域 射击</p><hr /><p>这枚手雷会在一个 @Template[burst|distance:5] 内释放出一团"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Starfall Pistol.description",
+          "removed_segments": 2,
+          "before_preview": "<p><strong>升级：</strong> 1</p><hr /><p>虽然它最初是由拼凑改装的等离子投射器发展而来，但商业型号能够发射超高温等离子流。阿基顿的狂欢者喜欢在户外庆典期间朝空中鸣放这些手枪。</p> <p><strong>",
+          "after_preview": "<p><strong>升级：</strong> 1</p><hr /><p>虽然它最初是由拼凑改装的等离子投射器发展而来，但商业型号能够发射超高温等离子流。阿基顿的狂欢者喜欢在户外庆典期间朝空中鸣放这些手枪。</p> <p> 1</p><h"
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.items.Chemalyzer.description",
+          "removed_segments": 1,
+          "before_preview": "<p>这个手持采样装置使你在辨识未知药物、药剂、毒药或其他化学物质时进行的技能检定获得+1处境加值。</p> <p>This handheld sampling unit grants a +1 circumstance bonus to ",
+          "after_preview": "<p>这个手持采样装置使你在辨识未知药物、药剂、毒药或其他化学物质时进行的技能检定获得+1处境加值。</p> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Commercial Null Space Chamber.hazarddescription",
+          "removed_segments": 1,
+          "before_preview": "<p>此外，每位 pc 还可获得 50 信用点。</p> </section> <section class=\"secret\"> <p>There are also 50 credits for each pc.</p> </section",
+          "after_preview": "<p>此外，每位 pc 还可获得 50 信用点。</p> </section> "
+        },
+        {
+          "path": "root.entries.Murder in Metal City.actors.Dewblossom.items.Detect Prey.description",
+          "removed_segments": 4,
+          "before_preview": "<p><strong>触发</strong> 一个生物进入露华花 60 英尺内</p><hr /><p><strong>效果</strong> 露华花敏感的根系网络侦测到了由 PCs 的移动所产生的震动。露华花张开它的诱引花朵；100 英尺",
+          "after_preview": "<p><strong>触发</strong> 一个生物进入露华花 60 英尺内</p><hr /><p><strong>效果</strong> 露华花敏感的根系网络侦测到了由 PCs 的移动所产生的震动。露华花张开它的诱引花朵；100 英尺"
+        }
+      ]
+    }
+  ]
+}

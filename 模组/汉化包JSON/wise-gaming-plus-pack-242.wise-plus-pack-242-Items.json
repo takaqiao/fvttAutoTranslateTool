@@ -1,0 +1,166 @@
+{
+  "label": "智者加值包 242（物品）\nWise Plus Pack 242 (Items)",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Set 2": "第2组\nSet 2",
+    "Set 1": "第 1 组\nSet 1",
+    "Item Sets (24.2 Plus Pack)": "物品套装（24.2 Plus Pack）\nItem Sets (24.2 Plus Pack)",
+    "Theme: Finding": "主题：寻获\nTheme: Finding",
+    "Theme: Infiltrating": "主题：渗透\nTheme: Infiltrating",
+    "Bonus Loot: Relic Return": "加值战利品：圣物归还\nBonus Loot: Relic Return",
+    "Bonus Loot: Shield Return": "加值战利品：护盾术回归\nBonus Loot: Shield Return"
+  },
+  "entries": {
+    "Sinew-Shock Serum (Moderate)": {
+      "name": "筋腱震荡血清（中等） Sinew-Shock Serum (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<hr />\n<p>该血清会刺激身体，以帮助摆脱身体上的衰弱。当你饮用该炼金药剂时，它会尝试进行一次反制检定，使用[[/r 1d20+8 #Counteract]]{1d20+8 反制调整值}来移除来自单一来源的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙}或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭（状态）}状态，并使用该状态的来源来决定反制阶位与DC。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<hr />\n<p>This serum jolts the body to help shake off physical debilitations. When you drink this elixir, it attempts a counteract check with a [[/r 1d20+8 #Counteract]]{1d20+8 Counteract Modifier} to remove the @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy} or @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled} condition from a single source, using the source of that condition to determine the counteract rank and DC.</p>"
+    },
+    "Backpack": {
+      "name": "背包 Backpack",
+      "description": "<p>一个背包最多可容纳4负载的物品，其中前2负载的这些物品不计入你的负载上限。如果你是携带或收纳该背包而不是将其背在背上，则它的负载为轻型而非可忽略。</p>\n<hr />\n<p>此背包特别包含 @UUID[Item.SvvXNgTAnUy0B0Ly]{黄铁矿鼠} 以及 2<strong>x</strong> @UUID[Item.m5DQMR142Bhb4HJD]{黑暗视觉灵药（中等）}</p>\n<p>A backpack holds up to 4 Bulk of items and the first 2 Bulk of these items don't count against your Bulk limits. If you're carrying or stowing the pack rather than wearing it on your back, its Bulk is light instead of negligible</p>\n<hr />\n<p>This pack specifically has @UUID[Item.SvvXNgTAnUy0B0Ly]{Pyrite Rat} and 2<strong>x</strong> @UUID[Item.m5DQMR142Bhb4HJD]{Darkvision Elixir (Moderate)}</p>"
+    },
+    "Healing Potion (Moderate)": {
+      "name": "治疗药水（中等） Healing Potion (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>治疗药水</em>是一小瓶红宝石般鲜红的液体；饮用者的伤口迅速愈合时会带来刺痛感。你喝下一瓶<em>治疗药水</em>时，你恢复[[/r (3d8+10)[healing]]]{3d8+10 生命值}。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>A <em>healing potion</em> is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a <em>healing potion</em>, you regain [[/r (3d8+10)[healing]]]{3d8+10 Hit Points}.</p>"
+    },
+    "Oil of Mending": {
+      "name": "修复术之油 Oil of Mending",
+      "description": "<p><strong>启动</strong> 1分钟（操作）</p>\n<hr />\n<p>一小瓶修复术之油看起来其中有无数半透明的丝线在翻涌。将这种油涂抹在一件物品上，会施放一个2环 @UUID[Compendium.pf2e.spells-srd.Item.dINQzhqGmIsqGMUY]{修复术} 法术来修理该物品。</p>\n<p><strong>Activate</strong> 1 minute (manipulate)</p>\n<hr />\n<p>A vial of oil of mending appears to have countless translucent threads swirling within. Applying this oil to an item casts a 2nd-rank @UUID[Compendium.pf2e.spells-srd.Item.dINQzhqGmIsqGMUY]{Mending} spell to repair the item.</p>"
+    },
+    "Magic Wand (1st-Rank Spell)": {
+      "name": "魔法魔杖（1环法术） Magic Wand (1st-Rank Spell)",
+      "description": "<p>这根短杖约一英尺长，并包含单个法术。其外观通常与其中的法术相关。</p>\n<p><strong>启动</strong> 施法</p>\n<p><strong>频率</strong> 每日一次，外加过载</p>\n<hr />\n<p><strong>效果</strong> 你以标示的环阶施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次以所列环阶施放该法术。</p>\n<hr />\n<p><em>注：要制造含有特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入 PC、NPC 或战利品演员的物品栏中。</em></p>\n<p>This baton is about a foot long and contains a single spell. The appearance typically relates to the spell within.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day, plus overcharge</p>\n<hr />\n<p><strong>Effect</strong> You Cast the Spell at the indicated rank.</p>\n<p><strong>Craft Requirements</strong> Supply a casting of the spell at the listed rank.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Healing Potion (Minor)": {
+      "name": "治疗药水（次级） Healing Potion (Minor)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>治疗药水</em>是一小瓶红宝石般鲜红的液体，饮用者在伤口迅速愈合时会感到一阵刺痛感。当你饮用一瓶<em>治疗药水</em>时，你恢复[[/r 1d8[healing]]]{1d8生命值}。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>A <em>healing potion</em> is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a <em>healing potion</em>, you regain [[/r 1d8[healing]]]{1d8 Hit Points}.</p>"
+    },
+    "Eagle Eye Elixir (Lesser)": {
+      "name": "鹰眼药剂（次级） Eagle Eye Elixir (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>你喝下该万灵药后，会注意到细微的视觉细节。在接下来的1小时内，你的察觉检定获得+1物品加值；而在尝试寻找密门与陷阱时，该加值为+2。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.VCypzSu659eC6jNi]{效果：鹰眼万灵药（次等）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>After you drink this elixir, you notice subtle visual details. For the next hour, you gain a +1 item bonus to Perception checks, or +2 when attempting to find secret doors and traps.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.VCypzSu659eC6jNi]{Effect: Eagle Eye Elixir (Lesser)}</p>"
+    },
+    "Snapleaf": {
+      "name": "迅叶 Snapleaf",
+      "description": "<p><strong>使用</strong> 固定于护甲上</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">R</span> 交互</p>\n<p><strong>触发</strong> 你开始坠落</p>\n<p>这枚小巧的晶体雕刻品呈树叶形状，用一条简单的绑带固定在护甲或衣物上。</p>\n<p>当你启动<em>啪嗒叶</em>时，你获得@UUID[Compendium.pf2e.spells-srd.Item.TTwOKGqmZeKSyNMH]{Gentle Landing}与一个2环@UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{隐形术}法术的好处，持续1分钟或直到你停止坠落，以先发生者为准。</p>\n<p><strong>Usage</strong> affixed to armor</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">R</span> Interact</p>\n<p><strong>Trigger</strong> You begin to fall</p>\n<p>This small, crystalline carving takes the shape of a tree leaf and attaches to armor or clothing with a simple strap.</p>\n<p>When you activate the <em>snapleaf</em>, you gain the benefits of @UUID[Compendium.pf2e.spells-srd.Item.TTwOKGqmZeKSyNMH]{Gentle Landing} and a 2nd-rank @UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{Invisibility} spell for 1 minute or until you stop falling, whichever comes first.</p>"
+    },
+    "Emerald Grasshopper": {
+      "name": "翡翠蚱蜢 Emerald Grasshopper",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<p><strong>需求</strong> 你受训于运动</p>\n<hr />\n<p>这只镶嵌祖母绿的金属蚱蜢通常扣在一套护甲的护腿上。</p>\n<p>当你启动它时，进行一次 @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃}，水平移动至多40英尺，垂直移动至多10英尺。</p>\n<p>如果你未在坚实地面上结束跳跃，你会在空中拍动翅膀直至你的回合结束，然后以每轮60英尺的速度无害地下落，直到到达地面。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (concentrate)</p>\n<p><strong>Requirements</strong> You're trained in Athletics</p>\n<hr />\n<p>This metal grasshopper studded with emeralds is usually clasped to the legs of a suit of armor.</p>\n<p>When you activate it, make a @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{Leap}, traveling up to 40 feet horizontally and up to 10 feet vertically.</p>\n<p>If you don't end your jump on solid ground, you flutter in the air until the end of your turn, then fall harmlessly at a rate of 60 feet per round until you reach the ground.</p>"
+    },
+    "Eagle Eye Elixir (Moderate)": {
+      "name": "鹰眼灵药（中等） Eagle Eye Elixir (Moderate)",
+      "description": "<p><strong>激活</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>在你喝下这瓶药剂后，你注意到微妙的视觉细节。在接下来的1小时内，你在察觉检定上获得+2物品加值；若用于尝试寻找隐藏门与陷阱，则改为+3。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Wa4317cqU4lJ8vAQ]{效果：鹰眼药剂（中等）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>After you drink this elixir, you notice subtle visual details. For the next hour, you gain a +2 item bonus to Perception checks, or +3 when attempting to find secret doors and traps.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Wa4317cqU4lJ8vAQ]{Effect: Eagle Eye Elixir (Moderate)}</p>"
+    },
+    "Bloodseeker Beak": {
+      "name": "嗜血者之喙 Bloodseeker Beak",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用已装配的武器命中一名措手不及的生物</p>\n<hr />\n<p>这根细长、中空的喙管取材自臭名昭著的吸血寻猎兽，末端滴落着一丝血液。</p>\n<p>当你启动该喙时，你在你的伤害掷骰上造成额外1d4点精准伤害。若你对该生物造成偷袭伤害，你还会造成 @Damage[1d4[bleed]]。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.5XdkHIUgc6psBxQq]{效果：吸血寻猎兽之喙}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> (concentrate)</p>\n<p><strong>Trigger</strong> You hit an off-guard creature with the affixed weapon</p>\n<hr />\n<p>This long, hollow proboscis is harvested from the notorious bloodseeker beast and drips a trickle of blood.</p>\n<p>When you activate the beak, you deal an extra 1d4 precision damage on your damage roll. If you deal sneak attack damage to the creature, you also deal @Damage[1d4[bleed]].</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.5XdkHIUgc6psBxQq]{Effect: Bloodseeker Beak}</p>"
+    },
+    "Focused Tracker": {
+      "name": "专注追踪者 Focused Tracker",
+      "description": "<p>你正在狩猎！</p>\n<p>你对状态与目标极为敏锐，因此在追踪或调查足迹时获得+2加值。</p>\n<p>You are on the hunt!</p>\n<p>You are so attuned to the conditions and the goal that you recieve a +2 to Track or Investigate the Tracks.</p>"
+    },
+    "Shining Ammunition": {
+      "name": "闪耀弹药 Shining Ammunition",
+      "description": "<p><em>闪光弹药</em>会发出微弱的发光。射出后，它在20尺半径内提供明亮光照（并在接下来的20尺内提供昏暗光照），持续10分钟。若击中目标，它会黏在上面，使目标在相同半径内施放光亮术。生物可以用“交互”动作移除该弹药，但弹药本身会在剩余的持续时间内继续发光，或直到被摧毁。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{效果：闪光弹药}</p>\n<p><em>Shining ammunition</em> gives off a faint glow. When shot, it sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 10 minutes. If it hits a target, it sticks, causing the target to shed light in the same radius. A creature can remove the ammunition with an Interact action, but the ammunition itself continues to glow for the rest of the duration or until destroyed.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{Effect: Shining Ammunition}</p>"
+    },
+    "Ghost Oil": {
+      "name": "幽灵油 Ghost Oil",
+      "description": "<p>装有这种半透明、无实体油液的小瓶摸起来总是冰冷。将<em>幽灵油</em>涂抹在你正持用或携带的一把近战武器上，会使其变得半透明，并获得<em>@UUID[Compendium.pf2e.equipment-srd.Item.JQdwHECogcTzdd8R]{幽冥}</em>符文的效果，但也会使该武器无法对有形生物造成伤害。将该油涂抹在其他生物的武器上时没有效果。该油的效果持续1分钟。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.sk5LgfXestDKxCnK]{效果：幽灵油}</p>\n<p>The vials containing this translucent, unsubstantial oil are always cold to the touch. Applying <em>ghost oil</em> to a melee weapon you're wielding or carrying causes it to become semitransparent and gain the effects of a <em>@UUID[Compendium.pf2e.equipment-srd.Item.JQdwHECogcTzdd8R]{Ghost Touch}</em> rune, but it also makes the weapon unable to harm corporeal creatures. The oil has no effect when applied to another creature's weapon. The effect of the oil lasts for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.sk5LgfXestDKxCnK]{Effect: Ghost Oil}</p>"
+    },
+    "Scroll of 2nd-rank Spell": {
+      "name": "2环法术卷轴 Scroll of 2nd-rank Spell",
+      "description": "<p>从卷轴施法需要用一只手持握卷轴，并使用施法（行动）以该法术通常所需的动作数量来激活它。</p>\n<p>该法术必须出现在你的法术列表上。因为由你来施法，使用你的法术攻击调整和法术DC。该法术也获得与你的根源相应的特征（奥术、神圣、玄秘或原初）。</p>\n<p>任何实体成本都会在制作卷轴时提供，因此你从卷轴施放时不需要提供这些成本。若法术需要法器，你必须拥有该法器才能从卷轴施法。</p>\n<hr />\n<p><em>注：要制作某个特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品Actor的物品栏中。</em></p>\n<p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>The spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack modifier and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical costs are provided when a scroll is created, so you don't need to provide them when casting from a scroll. If the spell requires a locus, you must have that locus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Scroll of 3rd-rank Spell (2nd)": {
+      "name": "3环法术卷轴（2环） Scroll of 3rd-rank Spell (2nd)",
+      "description": "<p>从卷轴施放法术需要用一只手握住卷轴，并使用施法（行动）来启动它，所需动作数量与该法术正常施放所需的动作数量相同。</p>\n<p>该法术必须出现在你的法术列表上。因为是你在施法，使用你的法术攻击调整和法术DC。该法术也会获得与你的根源相应的特征（奥术、神圣、异能或原初）。</p>\n<p>卷轴制作时已提供任何实体成本，因此你从卷轴施放时不需要再提供它们。如果该法术需要法器，你必须持有该法器才能从卷轴施法。</p>\n<hr />\n<p><em>注：要制作某个特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品角色的物品栏中。</em></p>\n<p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>The spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack modifier and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical costs are provided when a scroll is created, so you don't need to provide them when casting from a scroll. If the spell requires a locus, you must have that locus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Arboreal Boots": {
+      "name": "树栖长靴 Arboreal Boots",
+      "description": "<p>这双柔软的皮靴上压印着简单的林地景致。靴子使你获得+1杂技物品加值，并让你无视由植物与真菌造成的困难地形。</p>\n<p>These soft leather boots are embossed with simple woodland scenes. The boots grant a +1 item bonus to Acrobatics and allow you to ignore difficult terrain from plants and fungi.</p>"
+    },
+    "Pyrite Rat": {
+      "name": "黄铁矿鼠 Pyrite Rat",
+      "description": "<p>这尊闪闪发亮、老鼠形状的黄铁矿雕像高 1 英寸。激活后，雕像会变成有血有肉的巨鼠。当你握持<em>黄铁矿老鼠</em>时，你可以使用以下动作。你每天只能使用该动作一次，且老鼠会维持变形状态 1 小时。</p>\n<p><strong>雕像变形</strong> <span class=\"action-glyph\">2</span>（专注，操作）</p>\n<hr />\n<p><strong>效果</strong> 你把雕像放在坚实的地面上，并说出老鼠的秘密名字，使雕像变形为一只活着的 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.AYwdybUfm4meGUTJ]{巨鼠}。</p>\n<p>在生物形态下，巨鼠在你的回合行动。它获得 2 动作且不能使用反应动作。你必须在每个回合花费 1 个动作来告诉它要做什么；否则，它会试图逃离危险，或在原地畏缩不前。</p>\n<p>如果老鼠在动物形态下被杀死，它会恢复为雕像形态，并且在经过 1 周之前不能再次变形。如果小雕像在雕像形态下被摧毁，它会被粉碎，其魔法性质将永远消失。</p>\n<p>This lustrous, rat-shaped pyrite statuette is 1 inch tall. When activated, the statuette transforms into a flesh-and-blood giant rat. You can use the following action when you hold the <em>pyrite rat</em>. You can use this action only once per day, and the rat remains transformed for 1 hour.</p>\n<p><strong>Transform Statue</strong> <span class=\"action-glyph\">2</span> (concentrate, manipulate)</p>\n<hr />\n<p><strong>Effect</strong> You place the statue on solid ground and speak the rat's secret name, causing the statuette to transform into a living @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.AYwdybUfm4meGUTJ]{Giant Rat}.</p>\n<p>In creature form, the giant rat acts on your turn. It gets 2 actions and can't use reactions. You have to spend an action each turn to tell it what to do; otherwise, it tries to run away from danger or cowers where it is.</p>\n<p>If the rat is slain while in animal form, it reverts to its statue shape and can't be transformed again until 1 week has passed. If the figurine is destroyed while in its statue form, it's shattered and its magical properties are lost forever.</p>"
+    },
+    "Elixir of Life (Minor)": {
+      "name": "生命灵药（次级） Elixir of Life (Minor)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>生命药剂会加速活体生物的自然治疗过程与免疫系统。饮用该药剂后，你恢复[[/r 1d6[healing]]]{1d6 生命值}，并在 10 分钟内对抗疾病与毒素的豁免检定获得 +1 物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lPRuIRbu0rHBkoKY]{效果：生命药剂（次级）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain [[/r 1d6[healing]]]{1d6 Hit Points} and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lPRuIRbu0rHBkoKY]{Effect: Elixir of Life (Minor)}</p>"
+    },
+    "Soothing Tonic (Lesser)": {
+      "name": "舒缓补剂（次级） Soothing Tonic (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p>舒缓补剂是一种令人愉悦、风味醇厚的调配物，可加速你的自然治疗，使你的伤口在一段时间内恢复得更快。你获得快速治疗1，持续1分钟。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.FqSsAjkaHfVFCw0P]{效果：舒缓补剂（次级）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact</p>\n<p>Soothing tonic is a pleasantly savory concoction that speeds your natural healing, so your wounds recover faster over time. You gain fast healing 1 for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.FqSsAjkaHfVFCw0P]{Effect: Soothing Tonic (Lesser)}</p>"
+    },
+    "Focus Cathartic (Moderate)": {
+      "name": "宣泄聚念（中等） Focus Cathartic (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<hr />\n<p>短暂的专注能让你的神经元平静下来，帮助缓解心灵效果。当你饮用这瓶灵药时，灵药会尝试一次反制检定，使用[[/r 1d20+8]]反制调整值，以移除来自单一来源的@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}或@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞（状态）}状态，并使用该状态的来源来决定反制位阶与DC。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<hr />\n<p>Focus briefly calms your neurons, helping ease mental effects. When you drink this elixir, the elixir attempts a counteract check with a [[/r 1d20+8]] counteract modifier to remove the @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} or @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} condition from a single source, using the source of that condition to determine the counteract rank and DC.</p>"
+    },
+    "basalt mask of a demon’s face": {
+      "name": "恶魔面孔的玄武岩面具 basalt mask of a demon’s face",
+      "description": "<p>这件物品被雕刻成一名坚毅战士严肃的面孔。</p>\n<p>This item is carved to look like the stern face of a stoic warrior.</p>"
+    },
+    "Gecko Potion": {
+      "name": "壁虎药水 Gecko Potion",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>壁虎机油</em>是一种黏稠的黄褐色液体，内部悬浮着细小的沙粒。饮用该药水后5分钟内，你的指尖会长出成千上万根微小、带刷毛的绒毛，它们会附着在物体上，使你在进行@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]{攀爬}与@UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{藏匿物体}检定时获得+1物品加值，并使你对抗@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{缴械}尝试时的反射DC获得+1物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.buJnkFBzL4e22ASp]{效果：壁虎机油}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>A <em>gecko potion</em> is a sticky, tawny brown liquid with flecks of sand suspended in it. For 5 minutes after drinking this potion, your fingertips sprout thousands of microscopic, bristled hairs that cling to objects, granting you gain a +1 item bonus to @UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]{Climb} and @UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{Palm an Object} checks and to your Reflex DC against @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{Disarm} attempts.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.buJnkFBzL4e22ASp]{Effect: Gecko Potion}</p>"
+    },
+    "Sense suppression": {
+      "name": "感官压制 Sense suppression",
+      "description": "<p>你使自己能够在昏暗或黑暗中视物的正常感官似乎被压制了。</p>\n<p>Your normal senses that enable you to see in low or darkness seem to be suppressed.</p>"
+    },
+    "Retrieval Prism": {
+      "name": "回收棱镜 Retrieval Prism",
+      "description": "<p><strong>使用</strong> 固定于护甲</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">f</span> 命令术</p>\n<p><strong>需求</strong> 你有一只空手。</p>\n<hr />\n<p>这个三角棱柱内显示着旋动的黑色纹路，无论你将它固定在护甲的何处，它都会不断在护甲上移动。作为固定该护符过程的一部分，你将其与一件负载为1或更少的物品调谐。当你启动该护符时，调谐的物品会立刻传送到你的手中。</p>\n<p>取回棱柱无法取回不在你所在位面的物品，包括位于异次元空间中的物品，如次元袋中的物品。如果你尚未消耗该护符，你可以通过再次固定该护符来将其与另一件物品调谐。</p>\n<p><strong>Usage</strong> affixed to armor</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">f</span> command</p>\n<p><strong>Requirements</strong> You have a free hand.</p>\n<hr />\n<p>This triangular prism showing swirling black patterns inside constantly moves around on your armor, no matter where you affix it. As part of the process of Affixing this Talisman, you attune it to a single item of 1 Bulk or less. When you activate this talisman, the attuned item immediately teleports into your hand.</p>\n<p>The retrieval prism can't retrieve an item that's not on your plane, including one that's in an extradimensional space like a bag of holding. If you haven't expended the talisman, you can attune it to a different item by Affixing the Talisman again.</p>"
+    },
+    "Shrinking Potion": {
+      "name": "缩小药水 Shrinking Potion",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>这种带有菌菇风味的药水会赋予你@UUID[Compendium.pf2e.spells-srd.Item.PjhUmyKnq6K5uDby]{Shrink}法术的效果，使你和你所有的道具变小。在潜伏期之后，你会保持变小状态10分钟。</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.o0baLY5VdjLhdsS7]{效果：缩小药水}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>This fungus-flavored potion conveys the effects of the @UUID[Compendium.pf2e.spells-srd.Item.PjhUmyKnq6K5uDby]{Shrink} spell to make you and all your gear smaller. After the onset, you remain small for 10 minutes.</p>\n<p><strong>Onset</strong> 1 minute</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.o0baLY5VdjLhdsS7]{Effect: Shrinking Potion}</p>"
+    },
+    "Acid Flask (Moderate)": {
+      "name": "强酸瓶（中等） Acid Flask (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这只装满腐蚀性酸液的瓶子造成1点酸液伤害、2d6点持续酸液伤害以及2点酸液飞溅伤害。你在攻击掷骰上获得+1物品加值。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Strike</p>\n<hr />\n<p>This flask filled with corrosive acid deals 1 acid damage, 2d6 persistent acid damage, and 2 acid splash damage. You gain a +1 item bonus to attack rolls.</p>"
+    },
+    "Salve of Antiparalysis": {
+      "name": "抗麻痹药膏 Salve of Antiparalysis",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>将这种薄膜状的药膏涂抹在一个生物身上，有助于其克服魔法麻痹。药膏尝试反制麻痹（反制位阶3，反制调整值+22）</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>Applying this filmy salve to a creature helps it overcome magical paralysis. The salve attempts to counteract the paralysis (counteract rank 3rd, counteract modifier +22)</p>"
+    },
+    "Dazzling Rosary": {
+      "name": "耀目念珠 Dazzling Rosary",
+      "description": "<p><strong>启动</strong> 施法</p>\n<hr />\n<p>当能量在这些光泽的珠子中奔涌时，它们会以施法者信仰的神圣色彩明亮地发光。一个由该催化剂强化的 @UUID[Compendium.pf2e.spells-srd.Item.Fq9yCbqI2RDt6Orw]{灵体武器} 在重击命中一个目标时会以明亮光照闪烁，使该目标直到你下个回合开始前处于 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩} 状态。该念珠可与4级或更低等级的<em>灵体武器</em>一起使用。</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<hr />\n<p>When energy courses through these lustrous beads, they glow brightly in the sacred colors of the spellcaster's faith. A @UUID[Compendium.pf2e.spells-srd.Item.Fq9yCbqI2RDt6Orw]{Spiritual Weapon} empowered with this catalyst flashes with bright light when it critically Strikes a target, causing the target to be @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} until the beginning of your next turn. The rosary can be used with a <em>spiritual weapon</em> of 4th level or below.</p>"
+    },
+    "Vexing Vapor (Moderate)": {
+      "name": "恼人蒸汽（中等） Vexing Vapor (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 打击</p>\n<hr />\n<p>这只烧瓶内装有由有毒浆果制成的细腻红色粉末。你获得攻击掷骰 +1 物品加值。中等恼扰蒸汽炸弹造成 @Damage[2d6[mental]] 伤害与 [[/r (2[splash])[mental]]]{2 点心灵溅射伤害}。命中时，目标在进行具有专注（特征）的动作前，必须先成功通过一次 @Check[type:flat|dc:5] 检定。该效果持续至其下个回合结束（若为大成功或大失败，则持续 1 分钟）。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Strike</p>\n<hr />\n<p>This flask contains a fine red powder made from toxic berries. You gain a +1 item bonus to attack rolls. A moderate vexing vapor bomb deals @Damage[2d6[mental]] damage and [[/r (2[splash])[mental]]]{2 mental splash damage}. On a hit, the target must succeed at a @Check[type:flat|dc:5] check before taking actions with the concentrate trait. This lasts until the end of its next turn (1 minute on a critical hit).</p>"
+    },
+    "Darkvision Elixir (Moderate)": {
+      "name": "黑暗视觉炼金药剂（中等） Darkvision Elixir (Moderate)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p>\n<hr />\n<p>你饮下该炼金灵药后，你在黑暗中的视力变得更加敏锐。你获得黑暗视觉，持续1小时。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.bcxVvIbuZWOvsKcA]{效果：黑暗视觉炼金灵药（中等）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> (manipulate)</p>\n<hr />\n<p>After you drink this elixir, your sight becomes sharper in darkness. You gain darkvision for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.bcxVvIbuZWOvsKcA]{Effect: Darkvision Elixir (Moderate)}</p>"
+    },
+    "Potion of Fire Retaliation (Lesser)": {
+      "name": "火焰反击药水（次级） Potion of Fire Retaliation (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p>饮用一瓶火焰报复药水后的1分钟内，你以微弱的火焰能量灵光发光，任何接触你（例如进行徒手攻击或对你施放射程为接触的法术）的生物都会受到火焰伤害。</p>\n<p>该灵光造成 @Damage[1d4[fire]] 伤害。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact</p>\n<p>For 1 minute after drinking a potion of fire retaliation, you glow with a faint aura of fire energy, and a creature that touches you (such as by making an unarmed attack or using a spell with a range of touch against you) takes fire damage.</p>\n<p>The aura deals @Damage[1d4[fire]] damage.</p>"
+    },
+    "Invitation...": {
+      "name": "邀请…… Invitation...",
+      "description": "<p>这张便笺看起来是最近才收到并打开的。</p>\n<p>上面写着，</p>\n<p><em>拉玛什图的走狗们，</em></p>\n<p><em>你们那点可爱的兴趣既令人尴尬又可悲，而且显然需要监管。月底前到憎恨魔窟报到，否则你们自己美味的内脏和四肢就会成为真正创造力的新造物。</em></p>\n<p><em>唯有一人能战胜星石，而那便是空无之死</em></p>\n<p><em>早点报到，或许你们还能找到更好的座位……</em></p>\n<p style=\"text-align:center\"><em>“风，是她的声音；<br />微灵，是她的眼；<br />你的生命，由她抉择；<br />你的命运，唯有一死。”</em></p>\n<p style=\"text-align:left\"><em>不耐烦地，</em></p>\n<p style=\"text-align:left\"><em>贾法基</em></p>\n<p>This  note looks like it was recently received and opened.</p>\n<p>It reads,</p>\n<p><em>Lamashtu Lackeys,</em></p>\n<p><em>Your adorable interests are embrassing, pitiful, and certainly need oversight. Report into the Abomination Vaults by end of month less your own scrumtious innards and appendiges become new creations for true creativity. </em></p>\n<p><em>There is only one who can overcome the Starstone, and that is The Empty Death</em></p>\n<p><em>Report early, and you may find a better seat...</em></p>\n<p style=\"text-align:center\"><em>“The wind, her voice;<br />The wisp, her eye;<br />Your life, her choice;<br />Your lot, to die.”</em></p>\n<p style=\"text-align:left\"><em>Impatiently,</em></p>\n<p style=\"text-align:left\"><em>Jafaki</em></p>"
+    },
+    "Sturdy Shield (Minor)": {
+      "name": "坚固护盾术（次要） Sturdy Shield (Minor)",
+      "description": "<p>凭借更优越的设计与精湛的工艺，这面钢盾比非魔法同类具有更高的硬度，使其更难被击破与摧毁。</p>\n<p>该护盾术的硬度为8，HP为64，BT为32。</p>\n<p>With a superior design and excellent craftsmanship, this steel shield has higher Hardness than its non-magical counterparts, making it harder to break and destroy.</p>\n<p>The shield has Hardness 8, HP 64, and BT 32.</p>"
+    },
+    "elven lock box with runes": {
+      "name": "带符文的精灵锁盒 elven lock box with runes",
+      "description": "<p>一个更大的木箱最多可容纳 8 负载的物品。</p>\n<p>对收藏家来说很有价值</p>\n<p>A larger wooden chest can hold up to 8 Bulk of items.</p>\n<p>Valuable to a collector</p>"
+    },
+    "Skeleton Key": {
+      "name": "万能钥匙 Skeleton Key",
+      "description": "<p>这把阴森的钥匙弓端顶着一颗咧嘴而笑的骷髅头。尝试进行开锁时，这把钥匙可代替盗贼工具包使用，并在盗窃检定上给予+1物品加值。</p>\n<p>如果<em>万能钥匙</em>因检定中的大成功或大失败而损坏，它会如同普通盗贼工具包一样运作，并在被修理前失去其增益。</p>\n<p><strong>启动—松动锁具</strong> <span class=\"action-glyph\">F</span>（操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你尝试进行开锁但尚未掷骰</p>\n<hr />\n<p><strong>效果</strong> 这把钥匙在你正试图撬开的锁上施放 @UUID[Compendium.pf2e.spells-srd.Item.6Ot4N22t5tPD51BO]{Knock}。</p>\n<p>A grinning skull tops the bow of this macabre key. This key can be used in place of thieves' toolkit when attempting to Pick a Lock, and it grants a +1 item bonus to the Thievery check.</p>\n<p>If the <em>skeleton key</em> becomes broken due to a critical failure on the check, it works as normal thieves' toolkit and loses its benefits until repaired.</p>\n<p><strong>Activate—Loosen Lock</strong> <span class=\"action-glyph\">F</span> (manipulate)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You attempt to Pick a Lock but haven't rolled yet</p>\n<hr />\n<p><strong>Effect</strong> The key casts @UUID[Compendium.pf2e.spells-srd.Item.6Ot4N22t5tPD51BO]{Knock} on the lock you're trying to pick.</p>"
+    },
+    "Sun Wheel": {
+      "name": "太阳轮 Sun Wheel",
+      "description": "<p>由萨伦莱特的一个卡迪亚教派的祭司制造，太阳轮旨在保护黎明之花的追随者，协助他们在追猎一个危险的邪教时自保；该邪教试图唤起邪神罗伐古格的孽种。在他们完成十字军征程后，这些祭司解散，并前去为其他会众布道。他们各自带走了自己的太阳轮，并将其传给后代。</p>\n<p>这枚铜质奖章刻有一枚风格化的太阳，其光芒如同马车轮的辐条。暴露在阳光下时，它往往会明亮地闪光。佩戴这枚坠饰时，你获得宗教检定+1物品加值。你必须是善良阵营才能使用太阳轮的真正力量：以下启用，为你提供一面燃烧之力的护盾术。</p>\n<hr />\n<p><strong>启用</strong> <span class=\"action-glyph\">A</span> 专注</p>\n<p>太阳轮施放一个以你为受益者的@UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR]{护盾术}法术。</p>\n<p>当你使用该法术来防止伤害时，你防止10点伤害而非5点。若攻击者与你相邻，你可以选择对其造成[[/roll 2d6]]点火焰伤害，其可进行一次@Check[type:reflex|dc:21|basic:true|traits:consumable,talisman]豁免以抵抗。</p>\n<p>若你选择造成火焰伤害，则直到次日清晨前你都不能再次启用太阳轮。若你防止了伤害但未造成火焰伤害，则如同护盾术通常规则，你可以在10分钟后再次使用它</p>\n<p>Created by the priests of a Qadiran sect of Sarenites, the sun wheels were designed to protect the Dawnflower's followers in their quest to hunt down a dangerous cult trying to raise a spawn of the evil god Rovagug. Once they completed their crusade, these priests disbanded and went on to minister other congregations. They each took their sun wheels with them, handing them down to the next generations.</p>\n<p>This copper medallion is etched with a stylized sun, its rays shaped like the spokes of a wagon wheel. It tends to glint brightly when exposed to sunlight. While wearing this pendant, you gain a +1 item bonus to Religion checks. You must be good-aligned to use the sun wheel's true power: the following activation, which provides you a shield of burning force.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Concentrate</p>\n<p>The sun wheel casts a @UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR]{Shield} spell benefiting you.</p>\n<p>When you use the spell to prevent damage, you prevent 10 damage instead of 5. If the attacker is adjacent to you, you can choose to deal [[/roll 2d6]] fire damage to it, which it gets a @Check[type:reflex|dc:21|basic:true|traits:consumable,talisman] save to resist.</p>\n<p>If you choose to deal the fire damage, you can't Activate the sun wheel again until the next morning. If you prevent damage but don't deal the fire damage, you can use it again in 10 minutes, as normal for shield</p>"
+    }
+  }
+}

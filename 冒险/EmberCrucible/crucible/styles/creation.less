@@ -1,0 +1,606 @@
+.crucible-fullscreen {
+  --max-width: 1600px;
+  --ui-scale: 1.0;
+  --gap: 32px; // 2rem
+  --icon-size: 64px;
+
+  position: fixed;
+  width: calc((100vw / var(--ui-scale)) + 1px); // FIXME +1px because round(up) isn't compiling in LESS
+  height: calc((100vh / var(--ui-scale)) + 1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../ui/background-subtle.webp") no-repeat center;
+  background-size: cover;
+  color: var(--color-light-2);
+  transform-origin: top left;
+  transform: scale(var(--ui-scale));
+  z-index: calc(var(--z-index-window) + 1);
+
+  // Background Gradient
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: linear-gradient(to bottom, transparent 75%, rgb(178 50 53 / 15%) 100%);
+    z-index: -1000;
+  }
+
+  // Fullscreen Buttons
+  .fullscreen-buttons {
+    position: absolute;
+    top: var(--gap);
+    right: var(--gap);
+    align-items: flex-end;
+    font-size: var(--font-size-20);
+    pointer-events: all;
+    z-index: 1;
+    gap: 20px;
+
+    button {
+      --button-text-color: var(--color-light-3);
+      --button-focus-outline-color: transparent;
+      --button-hover-background-color: transparent;
+      --button-hover-border-color: transparent;
+      flex: none;
+      width: auto;
+      display: flex;
+      align-items: center;
+      font-family: var(--font-serif);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      > i {
+        font-size: 200%;
+        margin-right: 0.25rem;
+      }
+      &:hover {
+        text-shadow: 0 0 4px var(--color-active);
+        box-shadow: none;
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Header                                      */
+  /* -------------------------------------------- */
+
+  .fullscreen-header {
+    flex: none;
+    position: relative;
+    width: 100%;
+    gap: var(--gap);
+    align-items: center;
+  }
+
+  #hero-creation-nav {
+    padding-top: var(--gap);
+    gap: calc(var(--gap) * 2);
+    z-index: 1;
+
+    li.step {
+      --selection-color: #8a867c;
+      flex: none;
+      align-items: center;
+      width: 120px;
+      height: 160px;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+      pointer-events: all;
+      cursor: var(--cursor-pointer);
+      > * {
+        pointer-events: none;
+      }
+      .step-title {
+        color: var(--color-text-secondary);
+        white-space: nowrap;
+      }
+      .step-number {
+        color: var(--color-text-subtle);
+      }
+      .step-banner {
+        position: relative;
+        flex: 1;
+        width: 104px;
+        height: 100px;
+        align-items: center;
+        padding: 8px 0;
+        gap: 8px;
+        border-top: 4px ridge var(--color-light-5);
+        &::after {
+          content: "";
+          display: block;
+          width: 100px;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          margin: 0 2px;
+          background: linear-gradient(to bottom, var(--selection-color) 0%, transparent 100%);
+          border-radius: 0 0 30px 30px;
+          z-index: -1;
+        }
+        .step-icon {
+          width: var(--icon-size);
+          height: var(--icon-size);
+          border: 2px ridge var(--color-light-4);
+          border-radius: 100%;
+          box-sizing: content-box;
+        }
+        .step-label {
+          font-size: 12px;
+          line-height: 1em;
+        }
+      }
+
+      // Incomplete Steps
+      &.incomplete .step-icon {
+        opacity: 0.1;
+        border-color: transparent;
+      }
+
+      // Active Step
+      &.active {
+        .step-banner {
+          border-top: 4px ridge var(--color-light-3);
+        }
+        .step-title {
+          color: var(--color-text-emphatic);
+          text-shadow: 0 0 6px var(--color-text-accent);
+        }
+      }
+    }
+  }
+
+  #hero-creation-name {
+    flex: 0 0 60px;
+    width: 600px;
+    padding: 0;
+    background: var(--color-cool-5-50);
+    border: none;
+    border-radius: 8px;
+    color: var(--color-text-emphatic);
+    font-family: var(--font-h1);
+    letter-spacing: 0.1em;
+    font-size: 36px;
+    text-align: center;
+  }
+
+  /* -------------------------------------------- */
+  /*  Selection Tab                               */
+  /* -------------------------------------------- */
+
+  section.tab.active {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 0; // Flex hack
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--gap) 0;
+    max-width: var(--max-width);
+  }
+
+  /* -------------------------------------------- */
+  /*  Step Selection Menu                         */
+  /* -------------------------------------------- */
+
+  .step-selection {
+    flex: 0 0 440px;
+    height: 100%;
+    padding: 20px; // For overflow icons and scrollbars
+    overflow: hidden auto;
+  }
+
+  .selection-menu {
+    width: 100%;
+    height: min-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    .option {
+      --option-color: #FFFFFF;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      height: 48px;
+      padding-left: 48px;
+      background: var(--color-cool-5-50);
+      border-radius: 12px;
+      cursor: var(--cursor-pointer);
+
+      // Option Icon
+      .option-icon {
+        width: var(--icon-size);
+        height: var(--icon-size);
+        position: absolute;
+        left: calc(-0.25 * var(--icon-size));
+        top: calc(-0.125 * var(--icon-size));
+        background: linear-gradient(to bottom, var(--option-color) 0%, var(--color-cool-5) 100%);
+        border: 2px ridge var(--color-light-4);
+        border-radius: 100%;
+        box-sizing: content-box;
+        overflow: hidden;
+      }
+      h4 {
+        margin: 0;
+        padding: 8px;
+        font-family: var(--font-serif);
+        font-size: var(--font-size-14);
+        text-transform: uppercase;
+        justify-content: center;
+        text-align: center;
+        line-height: 1em;
+      }
+
+      // Diamond Pip
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        left: calc(50%  + 24px - 3px);
+        width: 6px;
+        height: 6px;
+        background: var(--color-light-4);
+        transform: rotate(45deg);
+      }
+
+      // Active selection
+      &.active {
+        h4 {
+          color: var(--color-text-emphatic);
+        }
+        .option-icon {
+          border: 2px solid var(--color-warm-1);
+          filter: drop-shadow(0 0 4px var(--color-warm-1));
+        }
+        &::after {
+          background: var(--color-light-1);
+          filter: drop-shadow(0 0 4px var(--color-warm-1));
+        }
+      }
+
+      // No icon options
+      &.noicon {
+        padding: 0 0.5rem;
+        &::after {
+          left: calc(50%  - 3px);
+        }
+      }
+
+      // Special Option
+      &.special {
+        --icon-size: 56px;
+        grid-column: 1 / span 2;
+        margin: 2rem 4rem 0;
+        h4 {
+          font-size: var(--font-size-12);
+        }
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Step Details                                */
+  /* -------------------------------------------- */
+
+  .step-details {
+    flex: 0 0 600px;
+    height: 100%;
+    overflow: hidden auto;
+    gap: var(--gap);
+
+    .step-header {
+      margin: 0;
+      height: 120px;
+      line-height: 80px;
+      font-size: var(--font-size-36);
+      text-align: center;
+      background: url("../ui/journal/h1-separator.png") no-repeat bottom center;
+    }
+
+    .step-summary {
+      font-size: var(--font-size-15);
+      text-align: justify;
+      line-height: 1.5em;
+    }
+
+    .step-feature {
+      > h4 {
+        color: var(--color-text-primary);
+        margin-bottom: 0.5rem;
+      }
+      > .tags {
+        justify-content: flex-start;
+        .tag {
+          font-size: var(--font-size-13);
+          padding: 2px 8px;
+        }
+      }
+      > .items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Step Figure                                 */
+  /* -------------------------------------------- */
+
+  .step-sidebar {
+    flex: 0 0 440px;
+    height: 100%;
+    overflow: visible;
+    h2 {
+      height: 120px;
+      line-height: 80px;
+      margin: 0;
+      font-size: var(--font-size-32);
+      text-align: center;
+      background: url("../ui/journal/h2-separator.png") no-repeat bottom center;
+    }
+    .hint {
+      font-size: var(--font-size-14);
+      color: var(--color-text-subtle);
+      opacity: 0.75;
+    }
+  }
+
+  .step-figure {
+    --figure-size: 440px;
+    width: var(--figure-size);
+    height: auto;
+    justify-content: flex-start;
+    max-height: 80%;
+    margin: 0 calc((440px - var(--figure-size)) / 2); // Overflow
+    gap: 16px;
+    z-index: -1; // Below content
+    img {
+      width: 100%;
+      height: auto;
+      object-position: bottom center;
+      border: none;
+      box-shadow: none;
+    }
+    figcaption {
+      margin: 0;
+      font-family: var(--font-serif);
+      color: var(--color-light-5);
+    }
+    &.banner {
+      --figure-size: 460px;
+      width: var(--figure-size);
+      height: auto;
+    }
+    &.portrait {
+      height: var(--figure-size);
+      width: var(--figure-size);
+      img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+    &.portrait-sm {--figure-size: 440px;}
+    &.portrait-med {--figure-size: 600px;}
+    &.portrait-lg {--figure-size: 760px;}
+  }
+
+  /* -------------------------------------------- */
+  /*  Background Ability Scores                   */
+  /* -------------------------------------------- */
+
+  .ability-scores {
+    gap: 1rem;
+    pointer-events: all;
+    .ability {
+      flex: 0 0 48px;
+      gap: 0.5rem;
+      padding: 0 0 0 1rem;
+      border: 1px solid #262431;
+      border-radius: 8px;
+      h4 {
+        flex: 1;
+        margin: 0;
+        font-family: var(--font-serif);
+        font-size: var(--font-size-14);
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .score {
+        --hex-size: 60px;
+        flex: none;
+        margin: -6px 0;
+        font-size: var(--font-size-28);
+        &.power {--hex-bg: url("../ui/elements/hex-fortitude.svg")}
+        &.resilience {--hex-bg: url("../ui/elements/hex-willpower.svg")}
+        &.speed {--hex-bg: url("../ui/elements/hex-reflex.svg")}
+      }
+      .increases {
+        flex: 0 0 32px;
+        color: var(--color-light-5);
+        background: var(--color-cool-5-75);
+        padding: 3px 6px;
+        border-radius: 4px;
+        text-align: center;
+        &:empty {
+          visibility: hidden;
+        }
+      }
+      .buttons {
+        flex: 0 0 32px;
+        align-content: center;
+        button {
+          --button-size: 20px;
+        }
+        button:disabled {
+          opacity: 0.25;
+        }
+      }
+    }
+
+    // Ability Point Pool
+    #ability-points {
+      flex: none;
+      margin: 0;
+      text-align: center;
+      .points {
+        background: var(--color-cool-5-75);
+        padding: 1px 10px;
+        margin-right: 0.25rem;
+        border: 1px solid var(--color-frame);
+        border-radius: 4px;
+        font-size: var(--font-size-20);
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Equipment Selection Step                    */
+  /* -------------------------------------------- */
+
+  .tab.equipment {
+    .step-selection.equipment-filters {
+      overflow: hidden; // .filter-list handles scrolling
+      margin-top: 120px;
+      padding-left: 200px;
+      height: calc(100% - 120px);
+      gap: 1rem;
+      .filter-heading {
+        margin: 0;
+      }
+      .filter-nav {
+        width: 220px;
+        gap: 0.5rem;
+        .filter-option {
+          font-size: var(--font-size-13);
+          color: var(--color-text-secondary);
+          &:hover {
+            color: var(--color-text-emphatic);
+          }
+          &.active {
+            color: var(--color-text-emphatic);
+            text-shadow: 0 0 4px var(--color-text-accent);
+          }
+        }
+        &.item-type-nav { flex: none; }
+        &.item-category-nav { flex: 1; } // Scrollable
+      }
+    }
+
+    .step-details.equipment-details {
+      gap: 1rem;
+      overflow: visible; // Scroll .items-list, not full details
+    }
+
+    .items-list {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 0;
+      gap: 0.5rem;
+    }
+
+    .line-item {
+      background: var(--color-cool-5-50);
+      border-radius: 8px;
+      &.unaffordable { opacity: 0.4; }
+      &[hidden] { display: none; }
+      crucible-currency {
+        flex: none;
+        margin-right: 1rem;
+      }
+      .item-quantity {
+        .quantity {
+          min-width: 20px;
+          text-align: center;
+        }
+      }
+    }
+
+    .equipment-list {
+      flex: 1 1 0;
+    }
+
+    .equipment-sidebar {
+      gap: 1rem;
+      .budget-display {
+        flex: none;
+        padding: 1rem 1.5rem;
+        background: var(--color-cool-5-50);
+        border-radius: 8px;
+        justify-content: space-between;
+        align-items: center;
+        font-size: var(--font-size-16);
+        h4 {
+          margin: 0;
+        }
+        > * {
+          flex: none;
+          font-size: inherit;
+        }
+      }
+    }
+
+  }
+
+  /* -------------------------------------------- */
+  /*  Talent Selection Step                       */
+  /* -------------------------------------------- */
+
+  &[data-step="talents"] {
+    transform: none;
+    width: 100vw;
+    height: 100vh;
+    #hero-creation-nav {
+      background: var(--color-cool-5-75);
+      border-radius: 0 0 16px 16px;
+      border: 1px solid var(--color-frame);
+      border-top: none;
+      transform: scale(var(--ui-scale));
+      transform-origin: top center;
+    }
+    #hero-creation-name {
+      display: none;
+    }
+    #crucible-talent-tree {
+      position: absolute;
+      inset: 0;
+      z-index: revert;
+    }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Dynamic Scaling                             */
+/*  Designed for base 1920x1080                 */
+/* -------------------------------------------- */
+
+.crucible-fullscreen {
+  @media (min-width: 2000px) { --ui-scale: 1.1; }
+  @media (max-width: 1660px) {
+    --ui-scale: 1.0;
+    --max-width: 1400px;
+  }
+  @media (max-width: 1480px) {
+    --ui-scale: 0.9;
+    --max-width: calc(100% - (2 * var(--gap)));
+  }
+  @media (max-width: 1340px) { --ui-scale: 0.9; }
+  @media (max-width: 1200px) { --ui-scale: 0.8; }
+
+  // Height Scaling
+  @media (max-height: 1200px) { --ui-scale: 1.0; }
+  @media (max-height: 1040px) { --ui-scale: 0.9; }
+  @media (max-height: 920px) { --ui-scale: 0.8; }
+  @media (max-height: 800px) { --ui-scale: 0.7; }
+}

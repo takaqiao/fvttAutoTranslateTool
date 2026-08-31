@@ -1,0 +1,50 @@
+<form>
+    {{> "systems/crucible/templates/dice/partials/action-use-header.hbs"}}
+
+    {{#if requiresComposition}}
+    <div class="form-group spell-component">
+        <label>{{localize "SPELL.COMPONENTS.Rune"}}</label>
+        <div class="form-fields">
+            <select name="rune" class="component">
+                {{selectOptions runes selected=action.rune.id valueAttr="id" labelAttr="name"}}
+            </select>
+        </div>
+        {{#if runeHint}}<p class="hint">{{runeHint}}</p>{{/if}}
+    </div>
+
+    <div class="form-group spell-component">
+        <label>{{localize "SPELL.COMPONENTS.Gesture"}}</label>
+        <div class="form-fields">
+            <select name="gesture" class="component">
+                {{selectOptions gestures selected=action.gesture.id valueAttr="id" labelAttr="name"}}
+            </select>
+        </div>
+        {{#if gestureHint}}<p class="hint">{{gestureHint}}</p>{{/if}}
+    </div>
+
+    {{#if canInflect}}
+    <div class="form-group spell-component">
+        <label>{{localize "SPELL.COMPONENTS.Inflection"}}</label>
+        <div class="form-fields">
+            <select name="inflection" class="component">
+                {{selectOptions inflections selected=action.inflection.id blank="" valueAttr="id" labelAttr="name"}}
+            </select>
+        </div>
+        {{#if inflectionHint}}<p class="hint">{{inflectionHint}}</p>{{/if}}
+    </div>
+    {{/if}}
+    {{/if}}
+
+    {{#if chooseDamageType}}
+    <div class="form-group spell-component">
+        <label>{{localize "SPELL.DamageType"}}</label>
+        <div class="form-fields">
+            <select name="damageType" class="component">
+                {{selectOptions damageTypes selected=action.damage.type}}
+            </select>
+        </div>
+    </div>
+    {{/if}}
+
+    {{> "systems/crucible/templates/dice/partials/action-use-footer.hbs"}}
+</form>

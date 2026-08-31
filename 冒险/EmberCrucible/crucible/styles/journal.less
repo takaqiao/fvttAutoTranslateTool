@@ -1,0 +1,324 @@
+/** ----------------------------------------- *
+ *  Journal Sheet                             *
+ * ------------------------------------------ */
+
+.crucible.journal-sheet {
+  --background-overlay: url("../ui/journal/overlay-dark.webp");
+  --background-texture: url("../ui/journal/background-texture.webp");
+  background: var(--background-texture) repeat;
+
+  &::before {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--background-overlay) no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    opacity: 0.75;
+    z-index: -1;
+  }
+
+  .journal-entry-content {
+    border: none;
+    background: none;
+  }
+
+  /** Journal Entry Header */
+  .journal-header {
+    position: relative;
+    padding-bottom: 60px;
+    margin-bottom: 20px;
+    background-image: url("../ui/journal/h1-separator.png"); // TODO convert SVG
+    background-repeat: no-repeat;
+    background-position: bottom center;
+
+    .title {
+      background: none;
+      border: none;
+      font-family: var(--font-h1);
+      font-size: 2.25rem;
+      color: var(--color-h1);
+    }
+  }
+
+  /** Journal Sidebar TOC */
+  .journal-sidebar {
+
+    // Category Labels
+    .toc li.category strong {
+      font-weight: normal;
+      font-size: var(--font-size-14);
+      line-height: 2rem;
+    }
+
+    // Action Buttons
+    .action-buttons {
+      margin: 1rem 0;
+      button.next, button.previous {
+        color: transparent;
+        border: none;
+        background: url("../ui/journal/arrow-left.png") no-repeat; // TODO convert to WEBP/SVG
+        background-size: contain;
+        background-position: center;
+      }
+      button.next {
+        background-image: url("../ui/journal/arrow-right.png"); // TODO convert to WEBP/SVG
+      }
+    }
+  }
+}
+
+/** ----------------------------------------- *
+ *  Single Page Styles                        *
+ * ------------------------------------------ */
+
+.crucible.journal-sheet .journal-entry-page {
+  --font-h1: "AwerySmallcaps", serif;
+  --font-h2: "AwerySmallcaps", serif;
+  --font-h3: "AwerySmallcaps", serif;
+
+  /* Page Headers */
+  .journal-page-header {
+    position: relative;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+    margin-right: -1rem; // Counteract scrollable padding to ensure h2-separator graphic is centered
+    background-image: url("../ui/journal/h2-separator.png"); // TODO convert SVG
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    h1 {
+      text-align: center;
+    }
+  }
+
+  /* Page Content */
+  .journal-page-content {
+    padding: 0 2rem;
+    font-size: var(--font-size-14);
+    line-height: var(--font-size-20);
+
+    // Immediate child paragraphs are justified
+    > p {
+      text-align: justify;
+    }
+
+    // Embedded items
+    document-embed .item-embed {
+      margin: 1rem 0;
+    }
+  }
+}
+
+/** ----------------------------------------- *
+ *  Skill Page Sheet                          *
+ * ------------------------------------------ */
+
+.crucible-skill-page {
+  height: 100%;
+  overflow: hidden;
+  .scrollable {
+    flex: 1;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: hidden auto;
+    h2.divider,
+    div.form-group {
+      margin: 0;
+    }
+  }
+  .form-footer {
+    flex: none;
+    margin: 1rem;
+  }
+}
+
+.crucible.skill {
+  .overview > p {
+    text-align: left;
+  }
+  figure.right {
+    float: right;
+    margin: 0 0 1rem 1rem;
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 6px;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Text Enrichers                           */
+/* ----------------------------------------- */
+
+enriched-content.skill-check,
+enriched-content.passive-check,
+enriched-content.hazard-check,
+enriched-content.award,
+enriched-content.milestone,
+enriched-content.counterspell {
+  --color-background: #000000;
+  --color-background-hover: #000000;
+  --color-border: #000000;
+  --color-border-hover: #000000;
+
+  display: inline-flex;
+  height: 1.5em;
+  line-height: 0;
+  gap: 4px;
+  padding: 0 4px;
+  margin: -3px 0;
+  align-items: center;
+  font-size: 90%;
+  background: var(--color-background);
+  color: var(--color-text-emphatic);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  cursor: var(--cursor-pointer);
+
+  &:before {
+    content: "\f6d2";
+    font-family: var(--font-awesome);
+    opacity: 0.5;
+    margin-right: 4px;
+    font-size: 80%;
+  }
+
+  &:hover {
+    background: var(--color-background-hover);
+    border-color: var(--color-border-hover);
+    &:before {
+      opacity: 1.0;
+    }
+  }
+
+  // Exploration and Talent checks, Counterspell
+  &.exp,
+  &.talent-check,
+  &.counterspell {
+    --color-background: #2c3921;
+    --color-background-hover: #365021;
+    --color-border: #5b9e26;
+    --color-border-hover: #81cc44;
+  }
+  &.talent-check:before {
+    content: "\e4e2";
+    font-weight: 900;
+  }
+  &.counterspell:before {
+    content: "\f72b";
+  }
+  // Knowledge Checks
+  &.kno,
+  &.knowledge-check {
+    --color-background: #1a1a37;
+    --color-background-hover: #242453;
+    --color-border: #4848ac;
+    --color-border-hover: #6c6cff;
+  }
+
+  &.knowledge-check:before {
+    content: "\e0c0";
+    font-weight: 900;
+  }
+
+  // Social and Language checks
+  &.soc,
+  &.language-check {
+    --color-background: #3a184a;
+    --color-background-hover: #4d2368;
+    --color-border: #752f9f;
+    --color-border-hover: #ab3fe8;
+  }
+  &.language-check:before {
+    content: "\f086";
+    font-weight: 900;
+  }
+
+  // Passive Checks
+  &.passive-check {
+    cursor: var(--cursor-help, help);
+  }
+
+  // Hazard Checks
+  &.hazard-check {
+    --color-background: #2b0606;
+    --color-background-hover: #681212;
+    --color-border: #9c1212;
+    --color-border-hover: #d11515;
+  }
+
+  // Awards
+  &.award,
+  &.milestone {
+    --color-background: #243437;
+    --color-background-hover: #163037;
+    --color-border: #9ea5a7;
+    --color-border-hover: #dae7eb;
+    &:before {
+      content: "\f091";
+      font-weight: 900;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+
+enriched-content.condition {
+  font-size: 90%;
+  color: var(--color-text-emphatic);
+  border: 1px dashed var(--color-border);
+  border-radius: 2px;
+  padding: 1px 4px;
+  margin: -1px 0;
+  cursor: var(--cursor-help, help);
+  &:before {
+    content: "\f02e";
+    font-family: var(--font-awesome);
+    font-weight: 900;
+    opacity: 0.5;
+    margin-right: 4px;
+    font-size: 80%;
+  }
+}
+
+/* ----------------------------------------- */
+
+enriched-content.action {
+  font-size: 90%;
+  color: var(--color-text-emphatic);
+  border: 1px dashed var(--color-border);
+  border-radius: 2px;
+  padding: 1px 4px;
+  margin: -1px 0;
+  cursor: var(--cursor-help, help);
+  &:before {
+    content: "\f0e7";
+    font-family: var(--font-awesome);
+    font-weight: 900;
+    opacity: 0.5;
+    margin-right: 4px;
+    font-size: 80%;
+  }
+  &.spell:before {
+    content: "\f890";
+  }
+}
+
+/* ----------------------------------------- */
+/*  Currency Display                         */
+/* ----------------------------------------- */
+.currencies-inline {
+  display: inline-flex;
+  height: 1.5em;
+  line-height: 0;
+  gap: 4px;
+  align-items: center;
+  i.currency {
+    width: 16px;
+    height: 16px;
+    margin-right: -4px;
+  }
+}

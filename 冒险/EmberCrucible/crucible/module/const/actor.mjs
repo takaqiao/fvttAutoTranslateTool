@@ -1,0 +1,488 @@
+import {freezeEnum} from "./enum.mjs";
+
+/**
+ * Creature types supported by the system.
+ * @type {Record<string, {label: string, skill: string, knowledge: string}>}
+ */
+export const CREATURE_CATEGORIES = {
+  beast: {
+    label: "TAXONOMY.CATEGORIES.Beast",
+    skill: "medicine",
+    knowledge: "beasts"
+  },
+  celestial: {
+    label: "TAXONOMY.CATEGORIES.Celestial",
+    skill: "arcana",
+    knowledge: "celestials"
+  },
+  construct: {
+    label: "TAXONOMY.CATEGORIES.Construct",
+    skill: "science",
+    knowledge: "machines"
+  },
+  dragon: {
+    label: "TAXONOMY.CATEGORIES.Dragon",
+    skill: "arcana",
+    knowledge: "dragons"
+  },
+  elemental: {
+    label: "TAXONOMY.CATEGORIES.Elemental",
+    skill: "arcana",
+    knowledge: "elementals"
+  },
+  elementalEarth: {
+    label: "TAXONOMY.CATEGORIES.ElementalEarth",
+    skill: "arcana",
+    knowledge: "elementals"
+  },
+  elementalFire: {
+    label: "TAXONOMY.CATEGORIES.ElementalFire",
+    skill: "arcana",
+    knowledge: "elementals"
+  },
+  elementalFrost: {
+    label: "TAXONOMY.CATEGORIES.ElementalFrost",
+    skill: "arcana",
+    knowledge: "elementals"
+  },
+  elementalStorm: {
+    label: "TAXONOMY.CATEGORIES.ElementalStorm",
+    skill: "arcana",
+    knowledge: "elementals"
+  },
+  fey: {
+    label: "TAXONOMY.CATEGORIES.Fey",
+    skill: "arcana",
+    knowledge: "fey"
+  },
+  giant: {
+    label: "TAXONOMY.CATEGORIES.Giant",
+    skill: "society",
+    knowledge: "legends"
+  },
+  humanoid: {
+    label: "TAXONOMY.CATEGORIES.Humanoid",
+    skill: "society",
+    knowledge: null
+  },
+  monstrosity: {
+    label: "TAXONOMY.CATEGORIES.Monstrosity",
+    skill: "medicine",
+    knowledge: "monsters"
+  },
+  ooze: {
+    label: "TAXONOMY.CATEGORIES.Ooze",
+    skill: "science",
+    knowledge: null
+  },
+  plant: {
+    label: "TAXONOMY.CATEGORIES.Plant",
+    skill: "wilderness",
+    knowledge: null
+  },
+  outsider: {
+    label: "TAXONOMY.CATEGORIES.Outsider",
+    skill: "arcana",
+    knowledge: "outsiders"
+  },
+  undead: {
+    label: "TAXONOMY.CATEGORIES.Undead",
+    skill: "arcana",
+    knowledge: "undeath"
+  }
+};
+
+/**
+ * The starting equipment budget in copper pieces (25 gp).
+ * @type {number}
+ */
+export const STARTING_EQUIPMENT_BUDGET = 25 * 100;
+
+/**
+ * @typedef CrucibleCurrencyDenomination
+ * @property {string} label                 A human-readable and localized label for the denomination
+ * @property {string} abbreviation          A short abbreviation for the denomination
+ * @property {number} multiplier            A numerical multiplier that quantifies the value of this denomination
+ *                                          relative to base currency units
+ * @property {string} [icon]                An optional image icon for the denomination.
+ *                                          Recommended size is 48px square or smaller
+ */
+
+/**
+ * Configure the set of currency denominations that are supported by the system.
+ * The keys of this object are unique abbreviations which are used to parse currency strings.
+ *
+ * Each denomination specifies a multiplier which defines how valuable that denomination is.
+ * Currency is stored as an integer value of the lowest denomination (multiplier=1).
+ *
+ * There should be at least one denomination which has a multiplier of 1 to ensure that a raw currency amount can be
+ * fully allocated.
+ *
+ * @type {Record{string, CrucibleCurrencyDenomination}
+ */
+export const CURRENCY_DENOMINATIONS = {
+  cp: {
+    label: "CURRENCY_DENOMINATIONS.CP.label",
+    abbreviation: "CURRENCY_DENOMINATIONS.CP.abbreviation",
+    icon: "systems/crucible/icons/currency/cp.webp",
+    multiplier: 1
+  },
+  sp: {
+    label: "CURRENCY_DENOMINATIONS.SP.label",
+    abbreviation: "CURRENCY_DENOMINATIONS.SP.abbreviation",
+    icon: "systems/crucible/icons/currency/sp.webp",
+    multiplier: 10
+  },
+  gp: {
+    label: "CURRENCY_DENOMINATIONS.GP.label",
+    abbreviation: "CURRENCY_DENOMINATIONS.GP.abbreviation",
+    icon: "systems/crucible/icons/currency/gp.webp",
+    multiplier: 100
+  },
+  pp: {
+    label: "CURRENCY_DENOMINATIONS.PP.label",
+    abbreviation: "CURRENCY_DENOMINATIONS.PP.abbreviation",
+    icon: "systems/crucible/icons/currency/pp.webp",
+    multiplier: 1000
+  }
+};
+
+/**
+ * Level advancement
+ * @type {Record<number, {level: number, milestones: {start: number, required: number, next: number}}>}
+ */
+export const LEVELS = {
+  0: {level: 0, milestones: {start: 0, required: 0, next: 0}},
+  1: {level: 1, milestones: {required: 2}},
+  2: {level: 2, milestones: {required: 3}},
+  3: {level: 3, milestones: {required: 4}},
+  4: {level: 4, milestones: {required: 4}},
+  5: {level: 5, milestones: {required: 5}},
+  6: {level: 6, milestones: {required: 5}},
+  7: {level: 7, milestones: {required: 5}},
+  8: {level: 8, milestones: {required: 6}},
+  9: {level: 9, milestones: {required: 6}},
+  10: {level: 10, milestones: {required: 6}},
+  11: {level: 11, milestones: {required: 6}},
+  12: {level: 12, milestones: {required: 7}},
+  13: {level: 13, milestones: {required: 7}},
+  14: {level: 14, milestones: {required: 7}},
+  15: {level: 15, milestones: {required: 7}},
+  16: {level: 16, milestones: {required: 7}},
+  17: {level: 17, milestones: {required: 8}},
+  18: {level: 18, milestones: {required: 8}}
+};
+for ( const l of Object.values(LEVELS) ) {
+  if ( l.level === 0 ) continue;
+  const p = LEVELS[l.level - 1];
+  l.milestones.start = p.milestones.next;
+  l.milestones.next = l.milestones.start + l.milestones.required;
+}
+LEVELS[18].milestones.next = Infinity;
+foundry.utils.deepFreeze(LEVELS);
+
+/**
+ * The token movement actions supported by the Crucible system.
+ * This constant is the shared source of truth used both to populate CONFIG.Token.movement.actions
+ * and to register the corresponding action tags.
+ * @type {Record<string, Partial<TokenMovementActionConfigDescriptor>>}
+ */
+export const MOVEMENT_ACTIONS = Object.freeze({
+  walk: {
+    order: 0,
+    label: "TOKEN.MOVEMENT.ACTIONS.walk.label",
+    icon: "fa-solid fa-person-walking",
+    img: "icons/svg/walk.svg",
+    costMultiplier: 1,
+    speedMultiplier: 1
+  },
+  step: {
+    order: 1,
+    label: "TOKEN.MOVEMENT.ACTIONS.step.label",
+    icon: "fa-solid fa-diamond-exclamation",
+    img: "icons/svg/hazard.svg",
+    costMultiplier: 2,
+    speedMultiplier: 0.5,
+    terrainAction: "walk"
+  },
+  crawl: {
+    order: 2,
+    label: "TOKEN.MOVEMENT.ACTIONS.crawl.label",
+    icon: "fa-solid fa-person-praying",
+    img: "icons/svg/leg.svg",
+    costMultiplier: 2,
+    speedMultiplier: 0.25,
+    terrainAction: "walk"
+  },
+  jump: {
+    order: 3,
+    label: "TOKEN.MOVEMENT.ACTIONS.jump.label",
+    icon: "fa-solid fa-person-running-fast",
+    img: "icons/svg/jump.svg",
+    costMultiplier: 2,
+    speedMultiplier: 1.5,
+    deriveTerrainDifficulty: ({walk, fly}) => Math.max(walk, fly)
+  },
+  climb: {
+    order: 4,
+    label: "TOKEN.MOVEMENT.ACTIONS.climb.label",
+    icon: "fa-solid fa-person-through-window",
+    img: "icons/svg/ladder.svg",
+    costMultiplier: 2,
+    speedMultiplier: 0.25,
+    terrainAction: "walk"
+  },
+  swim: {
+    order: 5,
+    label: "TOKEN.MOVEMENT.ACTIONS.swim.label",
+    icon: "fa-solid fa-person-swimming",
+    img: "icons/svg/whale.svg",
+    costMultiplier: 2,
+    speedMultiplier: 0.5
+  },
+  fly: {
+    order: 6,
+    label: "TOKEN.MOVEMENT.ACTIONS.fly.label",
+    icon: "fa-solid fa-person-fairy",
+    img: "icons/svg/wing.svg",
+    speedMultiplier: 1.5
+  },
+  blink: {
+    order: 7,
+    label: "TOKEN.MOVEMENT.ACTIONS.blink.label",
+    icon: "fa-solid fa-person-from-portal",
+    img: "icons/svg/teleport.svg",
+    teleport: true,
+    speedMultiplier: Infinity,
+    terrainAction: null
+  }
+});
+
+/**
+ * The travel paces which are possible for group actors.
+ * @type {Record<"hidden"|"slow"|"normal"|"fast"|"reckless", Partial<TokenMovementActionConfig>>}
+ */
+export const TRAVEL_PACES = freezeEnum({
+  hidden: {
+    order: 1,
+    label: "TRAVEL_PACES.Hidden",
+    costMultiplier: 4,
+    speedMultiplier: 0.25,
+    icon: "fa-solid fa-backward-fast"
+  },
+  slow: {
+    order: 2,
+    label: "TRAVEL_PACES.Slow",
+    costMultiplier: 2,
+    speedMultiplier: 0.5,
+    icon: "fa-solid fa-backward"
+  },
+  normal: {
+    order: 3,
+    label: "TRAVEL_PACES.Normal",
+    costMultiplier: 1,
+    speedMultiplier: 1,
+    icon: "fa-solid fa-equals"
+  },
+  fast: {
+    order: 4,
+    label: "TRAVEL_PACES.Fast",
+    costMultiplier: 0.66,
+    speedMultiplier: 1.5,
+    icon: "fa-solid fa-forward"
+  },
+  reckless: {
+    order: 5,
+    label: "TRAVEL_PACES.Reckless",
+    costMultiplier: 0.5,
+    speedMultiplier: 2,
+    icon: "fa-solid fa-forward-fast"
+  }
+});
+
+/**
+ * Categories a language can (optionally) belong to
+ * @type {Record<string, {label: string}>}
+ */
+export const LANGUAGE_CATEGORIES = {
+  nonSpoken: {
+    label: "LANGUAGE_CATEGORIES.Nonspoken"
+  },
+  spoken: {
+    label: "LANGUAGE_CATEGORIES.Spoken"
+  }
+};
+
+/**
+ * Languages a creature can know
+ * @type {Record<string, {label: string, category?: string}>}}
+ */
+export const LANGUAGES = {
+  common: {
+    label: "LANGUAGES.Common",
+    category: "spoken"
+  },
+  sign: {
+    label: "LANGUAGES.Sign",
+    category: "nonSpoken"
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Define the actor preparation hooks which are supported for Talent configuration.
+ * @enum {{group: string, argNames: string[], argLabels: string[]}}
+ */
+export const HOOKS = Object.freeze({
+
+  // Action Usage
+  prepareAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction"]
+  },
+  useAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction"]
+  },
+  preActivateAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction"]
+  },
+  rollAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action", "target", "token"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction", "target: CrucibleActor", "token: CrucibleToken"]
+  },
+  finalizeAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction"]
+  },
+  confirmAction: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action", "options"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction", "options: {reverse: boolean}"]
+  },
+  prepareStandardCheck: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["rollData"],
+    argLabels: ["item: CrucibleItem", "rollData: object"]
+  },
+  applyCriticalEffects: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction"]
+  },
+  defendAttack: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action", "origin", "rollData"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction", "origin: CrucibleActor", "rollData: object"]
+  },
+  receiveAttack: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action", "roll"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction", "roll: AttackRoll"]
+  },
+  prepareAttack: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["action", "target", "rollData"],
+    argLabels: ["item: CrucibleItem", "action: CrucibleAction", "target: CrucibleActor", "rollData: AttackRollData"]
+  },
+  prepareSkillCheck: {
+    group: "TALENT.HOOKS.GroupAction",
+    argNames: ["skill", "rollData"],
+    argLabels: ["item: CrucibleItem", "skill: string", "rollData: object"]
+  },
+
+  // Data Preparation
+  prepareAbilities: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["abilities"],
+    argLabels: ["item: CrucibleItem", "abilities: object"]
+  },
+  prepareActions: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["actions"],
+    argLabels: ["item: CrucibleItem", "actions: CrucibleAction[]"]
+  },
+  prepareResources: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["resources"],
+    argLabels: ["item: CrucibleItem", "resources: object"]
+  },
+  prepareDefenses: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["defenses"],
+    argLabels: ["item: CrucibleItem", "defenses: object"]
+  },
+  prepareInitiativeCheck: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["rollData"],
+    argLabels: ["item: CrucibleItem", "rollData: object"]
+  },
+  prepareMovement: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["movement"],
+    argLabels: ["item: CrucibleItem", "movement: object"]
+  },
+  prepareResistances: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["resistances"],
+    argLabels: ["item: CrucibleItem", "resistances: object"]
+  },
+  prepareSkills: {
+    group: "TALENT.HOOKS.GroupPreparation",
+    argNames: ["skills"],
+    argLabels: ["item: CrucibleItem", "skills: object"]
+  },
+
+  // Equipment Preparation
+  prepareArmor: {
+    group: "TALENT.HOOKS.GroupEquipment",
+    argNames: ["armor"],
+    argLabels: ["item: CrucibleItem", "armor: object"]
+  },
+  prepareWeapons: {
+    group: "TALENT.HOOKS.GroupEquipment",
+    argNames: ["weapons"],
+    argLabels: ["item: CrucibleItem", "weapons: object"]
+  },
+  prepareAccessories: {
+    group: "TALENT.HOOKS.GroupEquipment",
+    argNames: ["accessories"],
+    argLabels: ["item: CrucibleItem", "accessories: object"]
+  },
+  prepareToolbelt: {
+    group: "TALENT.HOOKS.GroupEquipment",
+    argNames: ["toolbelt"],
+    argLabels: ["item: CrucibleItem", "toolbelt: object"]
+  },
+
+  // Spell Preparation
+  prepareGrimoire: {
+    group: "TALENT.HOOKS.GroupSpellcraft",
+    argNames: ["grimoire"],
+    argLabels: ["item: CrucibleItem", "grimoire: object"]
+  },
+  prepareSpells: {
+    group: "TALENT.HOOKS.GroupSpellcraft",
+    argNames: ["grimoire"],
+    argLabels: ["item: CrucibleItem", "grimoire: object"]
+  },
+
+  // Turn Events
+  startTurn: {
+    group: "TALENT.HOOKS.GroupCombat",
+    argNames: ["turnStartConfig", "turnContext"],
+    argLabels: ["item: CrucibleItem", "turnStartConfig: object", "turnContext: object"]
+  },
+  endTurn: {
+    group: "TALENT.HOOKS.GroupCombat",
+    argNames: ["turnEndConfig", "turnContext"],
+    argLabels: ["item: CrucibleItem", "turnEndConfig: object", "turnContext: object"]
+  }
+});

@@ -1,0 +1,441 @@
+{
+    "label": "玩家选项 Player Options",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {
+        "Items": "物品 Items",
+        "Eidolon Toolkit": "幻灵工具包 Eidolon Toolkit",
+        "Alterations": "变更 Alterations",
+        "Suggested Changes": "建议变更 Suggested Changes",
+        "Class Feats": "职业专长 Class Feats",
+        "Kindred Warrior": "并身武者 Kindred Warrior",
+        "Feats": "专长 Feats",
+        "Manifestations": "显化 Manifestations",
+        "Link Spell Swaps": "灵渠法术替换 Link Spell Swaps",
+        "Alt. Eidolons": "替代幻灵 Alt. Eidolons",
+        "Eidolons": "幻灵 Eidolons"
+    },
+    "entries": {
+        "Dream Eidolon": {
+            "name": "梦境幻灵 Dream Eidolon",
+            "description": "<p>你的幻灵是被沉睡的心智凭空构想成真的存在。许多梦境幻灵来自梦境界中无穷泡沫所栖居的活化梦境——通常是召唤师在睡梦中塑形造成的。但还有许多其他来由：以太位面上的鬼婆、雷恩的梦魇生物及其他恐怖之物，常与梦境召唤师为伴。或许最不寻常的是那些召唤其「清明之身」的召唤师——那是他们入眠时所栖身的、自身的理想化版本。这类幻灵尤为聪慧，能完成真正难以置信的梦境逻辑壮举。</p>\n<p><strong>传统</strong> 灵能</p>\n<p><strong>特征</strong> 梦境，幻灵，幻象</p>\n<p><strong>本源位面</strong> 梦境界、以太位面、雷恩位面</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、肢（钝击）、武器形态徒手攻击</p>\n<p><strong>梦境造物</strong> 力量+4，敏捷+2，体质+1，智力+0，感知+1，魅力+1；+2护甲等级（敏捷上限+3）</p>\n<p><strong>梦魇造物</strong> 力量+2，敏捷+4，体质+0，智力+1，感知+0，魅力+2；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 欺诈、神秘</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 阿克洛语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.AGQdm4AsGXkaTzJR]{虚渺存在}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.woR8Dx2cxQAIE3Vf]{穿越纱幕}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.nTdtI5WYK1wrOeTo]{心想即成}</p>"
+        },
+        "Mage Eidolon": {
+            "name": "法师幻灵 Mage Eidolon",
+            "description": "<p>你的幻灵被原始的奥术魔法所赋能。其来源在所有幻灵中最为多样：被困戒指中的伟大法师之灵；具备深厚魔法造诣的古代先祖之幽魂；其他位面来的大法师，如来自幽冥界的死灵法师或来自元素位面的大学者。某些大法师幻灵并非人形，而是奇异的奥术造物或纯由原始魔法构成的实体。无论其源何方，大法师幻灵所驾驭之魔法都远胜其他任何幻灵。</p>\n<p><strong>传统</strong> 奥术</p>\n<p><strong>特征</strong> 幻灵，幽影，灵魂</p>\n<p><strong>本源位面</strong> 任意位面，常为星界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 拳（钝击）、武器形态徒手攻击</p>\n<p><strong>奥术升华者</strong> 力量+0，敏捷+3，体质+1，智力+0，感知+1，魅力+4；+1护甲等级（敏捷上限+4）</p>\n<p><strong>奥术求知者</strong>力量+0，敏捷+3，体质+1，智力+4，感知+1，魅力+0；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 奥秘、社交</p>\n<p><strong>感官</strong> 微光视觉</p>\n<p><strong>语言</strong> 一种通用语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.Item.RmiKsMvSsCydFpyx]{神秘训练}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.T5dZCPGuwYNQByZX]{奥术链结}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.Yjc6Hqpz3128k0rI]{真正大法师}</p>"
+        },
+        "Unleash Ally Eidolon": {
+            "name": "释放盟友幻灵 Unleash Ally Eidolon",
+            "description": "<p>你借盟友之心力召唤一个生灵与之并肩作战。选择30尺内一名盟友，使其获得一个幻灵——犹如它已具@UUID[Compendium.pf2e.feats-srd.SwzPqEsLzZpNufvm]{召唤师献身}架构专长，角色等级等同于你的等级，持续1分钟。该幻灵出现于所选盟友相邻方格。该幻灵具有你幻灵的初始能力。</p>"
+        },
+        "Fabricate Artifact": {
+            "name": "锻造神器 Fabricate Artifact",
+            "description": "<p>跨越时空，你召唤一件强力神器并加以挥使，哪怕只是片刻。这件遗物只是从过去某一独有节点抽出的复本，须立即送回原处。你必须深入研究过该神器或其能力，通常是在闲暇时间研习获得。GM裁定你能查到何种信息，并可能为这等知识设下任务——也可能裁定该神器完全抗拒被召唤。对@Check[type:arcana|dc:@self.level|adjustment:2]、@Check[type:nature|dc:@self.level|adjustment:2]、@Check[type:occultism|dc:@self.level|adjustment:2]或@Check[type:religion|dc:@self.level|adjustment:2]检定对抗你等级的困难DC。</p>\n<p><strong>大成功</strong> 你召唤一件等级须等于或低于4+你等级的神器。1天内不能再尝试召唤神器。</p>\n<p><strong>成功</strong> 同大成功，但神器等级须等于或低于2+你等级。1周内不能再尝试召唤神器。</p>\n<p><strong>失败</strong> 你未能召唤神器。</p>\n<p><strong>大失败</strong> 同失败，但你的行为引起神器持有者的注意。该持有者或神器（依其本性而定）可能因你的行为而生不快，并清晰看见你尝试召唤它的画面以及你当前所在位置。</p>"
+        },
+        "Fabricate Weapon": {
+            "name": "锻造武器 Fabricate Weapon",
+            "description": "<p>挥手之间，你从位面间抽出一柄武器以攻击。进行一次近战@Check[type:spell|defense:ac]{法术攻击检定}，造成@Damage[2d10[@actor.flags.pf2e.fabricate-weapon.damage1]]伤害；或一次射程30尺的远程法术攻击检定，造成@Damage[2d6[@actor.flags.pf2e.fabricate-weapon.damage1]]伤害。该伤害可为钝击、穿刺或挥砍，由你在使用「锻造武器」时选定。重击命中时造成双倍伤害，且目标额外承受@Damage[2d4[persistent,@actor.flags.pf2e.fabricate-weapon.damage2]]{2d4持续}酸性、寒冷、电击、火焰或音波持续伤害（由你于使用时选定）。后续回合，当你维持锻造武器时进行此法术攻击。</p>\n<p>若你至少为10级，初始伤害分别提升至@Damage[3d10[@actor.flags.pf2e.fabricate-weapon.damage1]]与@Damage[3d6[@actor.flags.pf2e.fabricate-weapon.damage1]]，重击时持续伤害为@Damage[3d4[persistent,@actor.flags.pf2e.fabricate-weapon.damage2]]{3d4持续}；若至少18级，初始伤害分别提升至@Damage[4d10[@actor.flags.pf2e.fabricate-weapon.damage1]]与@Damage[4d6[@actor.flags.pf2e.fabricate-weapon.damage1]]，重击时持续伤害为@Damage[4d4[persistent,@actor.flags.pf2e.fabricate-weapon.damage2]]{4d4持续}。</p>\n<hr />\n<ul>\n<li>@Check[type:spell|defense:ac|traits:summoner,fabrication,attack,damaging-effect,range-30]{法术攻击检定}</li>\n<li><strong>近战</strong> @Damage[(2 + floor(@actor.level/10) + floor(@actor.level/18) floor(@actor.level / 20))d10[@actor.flags.pf2e.fabricate-weapon.damage1]]</li>\n<li><strong>远程</strong> @Damage[(2 + floor(@actor.level/10) + floor(@actor.level/18) floor(@actor.level / 20))d6[@actor.flags.pf2e.fabricate-weapon.damage1]]</li>\n<li><strong>重击命中</strong> @Damage[(2 + floor(@actor.level/10) + floor(@actor.level/18) floor(@actor.level / 20))d4[persistent,@actor.flags.pf2e.fabricate-weapon.damage2]]</li>\n</ul>"
+        },
+        "Legendary Soul": {
+            "name": "传奇之魂 Legendary Soul",
+            "description": "<p>你幻灵的灵魂之力着实震撼。当你的幻灵因你被打降至0生命值而本应解显化时，它可在解显化前用一个反应对致使最终一击的生物造成@Damage[(@actor.level)d8[spirit]]{每等级1d8伤害}（基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免对抗你的法术DC）。当其使用此反应后，幻灵须经10分钟方能再次显化。</p>\n<p>每日一次，你的幻灵可花费一个具专注与幻灵特征的单一动作，获得等于你等级一半的快速治疗，持续1分钟。该效果激活期间若被打降至0生命值，则效果立即终止。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.bDdj5JXLVmfs3zDD]{效果：传奇之魂}</p>",
+            "prerequisites": [
+                {
+                    "value": "神圣或原始传统"
+                }
+            ]
+        },
+        "Aberration Eidolon": {
+            "name": "异种幻灵 Aberration Eidolon",
+            "description": "<p>你的幻灵是个动机难解或怪异的可憎之物，源自难以言述、不可见或来自异界的存在。异种幻灵很少符合单一形态，常具其特异本性——更确切说，特异之非性——所独有的特征。你们二者在精神、情感与灵魂上紧密相连，尽管你们的思考方式可能大相径庭，且因为你们彼此之间疏离的生命状态，你们的使命也常相左。</p>\n<p><strong>传统</strong> 灵能</p>\n<p><strong>特征</strong> 异种，幻灵</p>\n<p><strong>本源位面</strong> 幽冥界、宇宙</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 爪（穿刺）、颚（穿刺）、触手（钝击）</p>\n<p><strong>异种征服者</strong> 力量+4，敏捷+2，体质+3，智力-1，感知+1，魅力+0；+2护甲等级（敏捷上限+3）</p>\n<p><strong>异种使者</strong> 力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 神秘，由幻灵非自然生理决定的另一项技能</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 阿克洛语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.coFrRiztDPcMRkyp]{非自然生理}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.8BiLgJobTff2ftI4]{难言展示}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.Tzx5Kig7J0i5bsGE]{多余解剖}</p>"
+        },
+        "Ranged Primary Attack": {
+            "name": "远程主要攻击 Ranged Primary Attack",
+            "description": "<p>你幻灵的主要徒手攻击为远程徒手攻击，射程增量为30尺，造成1d4伤害，具增程特征，并造成下列类型之一的伤害：酸性、钝击、寒冷、电击、火焰、穿刺、挥砍、生命力或虚空。</p>\n<p><strong>特别</strong>若你选择@UUID[Compendium.pf2e.feats-srd.oVSlTmdmho8ZQo2k]{远程战士}职业专长，你将改为获得适合你幻灵的近战主要攻击，而非该专长授予的远程徒手攻击。若你选择@UUID[Compendium.pf2e.feats-srd.kFpVgcqREAfDmjXp]{高级武艺}职业专长，你幻灵的远程徒手攻击获得「多用」特征，并附带你1级时本可选择的另一种伤害类型。</p>"
+        },
+        "Extra Head": {
+            "name": "额外头颅 Extra Head",
+            "description": "<p>你的幻灵长出额外头颅。你的幻灵在察觉检定以@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}时获得+2环境加值，且每当成功探测到生物时，可作为反应@UUID[Compendium.pf2e.actionspf2e.sn2hIy1iIJX9Vpgj]{指明}。你幻灵每回合获得一个仅可用于「指明」的额外反应。</p>\n<p>任何会斩断你幻灵头颅的能力（如斩首武器特征）若幻灵仍有头颅，便不会使你被打降至0生命值，但会使其失去额外反应。你的幻灵可在1周内重新长出头颅。</p>"
+        },
+        "Change Shape": {
+            "name": "变形 Change Shape",
+            "description": "<p>你的幻灵已掌握隐藏于凡人之中的能力。它变化为它所选的特定人形（通常令人联想到其幻灵外形）。该形态有特定且持续的外观，对发现其伪装的@Check[type:deception|dc:resolve(@actor.attributes.classOrSpellDC.value + 5)]检定的DC为15+你的法术熟练加值，而非检测其非真形的常规DC（不过这并不会让人得知其真形）。这不会改变其速度或其打击的攻击与伤害加值，但会将其徒手攻击的伤害类型变更为它本可使用的另一种伤害类型。该形态会同时压制你与幻灵身上的召唤师印记，但你必须仍处于幻灵的范围内。</p>"
+        },
+        "Rider Manifestation": {
+            "name": "骑手显化 Rider Manifestation",
+            "description": "<p>你的幻灵为一特定目的而与你相系——使你能像它一样移动，作为坐骑供你骑乘。当你骑乘幻灵时，你的回合获得完整动作数而不缩减为2。这仅适用于你骑乘自己的幻灵，他人骑乘则不适用。你以@UUID[Compendium.pf2e-summoners-plus.misc.dpYPlCJdKzHhB1Hs]{显化坐骑幻灵}活动取代显化幻灵活动。即使幻灵与你同体型，你也可骑乘它，无需满足「至少比你大一个体型类别」的要求；它将获得相应的魔法附属物以承载你。除非你正骑乘幻灵、使用@UUID[Compendium.pf2e.actionspf2e.3ZzoI9MTtJFd1Kjl]{共享感官}、或动作为靠近你以便你重新@UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{骑乘}它，否则幻灵在该回合不能用动作。由于你与幻灵被设计为合而为一，你骑乘期间幻灵的移动动作不获得「同步」特征。你获得@UUID[Compendium.pf2e-summoners-plus.misc.dJCr7YPXuBTLnOUe]{同步骑乘}动作。</p>\n<p>若你选择@UUID[Compendium.pf2e.feats-srd.eCzIiTjI4mQFYe9D]{坐骑形态}召唤师专长，则当你显化坐骑幻灵时，你将完全与幻灵合一并保持骑乘状态，除非你再次使用显化坐骑幻灵才能下骑。在此显化期间，你可在原本仅能影响你自身的法术中（如@UUID[Compendium.pf2e.spells-srd.TVKNbcgTee19PXZR]{护盾术}戏法），将幻灵作为目标。</p>\n<p>在探索模式中，你可像显化幻灵并使用@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}的召唤师那样进行两项探索活动；但你的探索活动须为你与幻灵在骑乘状态下都可执行（由GM裁定）。</p>"
+        },
+        "Additional Appendage": {
+            "name": "附加肢体 Additional Appendage",
+            "description": "<p>你的幻灵长出一对额外手臂。你的幻灵可借此附肢进行简单交互动作，如开未上锁的门或拾取物品。此外，你的幻灵获得另一项原本可在1级时选择的近战徒手主要攻击。你的幻灵每回合获得一个仅可用于@UUID[Compendium.pf2e.actionspf2e.3yoajuKjwHZ9ApUY]{抓住边缘}的额外反应。</p>"
+        },
+        "Mighty Brain": {
+            "name": "强大头脑 Mighty Brain",
+            "description": "<p>你的幻灵具有非凡的大脑。它获得@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.kdhbPaBMK1d1fpbA]{心灵感应}（120尺），并能将其听闻的其他语言转译至所选生物的心智之中。</p>\n<p>每日一次，你的幻灵可花费一个具专注与幻灵特征的单一动作，将自身心灵与心灵感应范围内的另一生物连结，该生物须进行@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC。豁免失败的生物@UUID[Compendium.pf2e.conditionitems.yblD8fOR1J8rDwEQ]{困惑}1轮（大失败时为1分钟）。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术或灵能传统"
+                }
+            ]
+        },
+        "Spirit Synchronicity": {
+            "name": "灵能同步 Spirit Synchronicity",
+            "description": "<p>你与幻灵的攻击灌注操控生命的能量。当你使用「同步强化」之@UUID[Compendium.pf2e-summoners-plus.misc.VucxKRn4BC9O3gCf]{协同连招}时，你可将额外伤害由精准伤害更改为生命力或虚空伤害，该打击获得对应特征。此外，当你具协同状态并以打击重击命中时，目标@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级}1轮。10级时该力竭状态延长至2轮，18级时延长至3轮。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                },
+                {
+                    "value": "神圣或灵能\r\n幻灵传统"
+                }
+            ]
+        },
+        "Kindred Warriors": {
+            "name": "并身武者 Kindred Warriors",
+            "description": "<p>你已凭意志与体格的完美磨砺与一幻灵相系，将魔法能量集中于「以二为一」之战技。你须选择@UUID[Compendium.pf2e-summoners-plus.items.vrfLOHVVixrY5TwJ]{并身武者献身}作为你2级的职业专长。</p>\n<p><strong>前置：</strong>你须为召唤师。</p>\n<p><strong>关键属性：</strong>你的关键属性为敏捷或力量而非魅力。你的法术攻击调整值与法术DC使用魅力调整值。</p>\n<p><strong>并身武者调整：</strong>你不获得召唤师施法、法术汇总或无限制标志法术。你仍获得施放法术活动与灵渠法术，包括@UUID[Compendium.pf2e.spells-srd.HStu2Yhw3iQER9tY]{激励幻灵}，且你的施法属性为魅力。</p>\n<p><strong>特别</strong>若你选择@UUID[Compendium.pf2e.feats-srd.b1eGMNjBY3iqIt2S]{魔法导师}职业专长，你的幻灵可选择比你能施放的最高阶法术低2阶或更多的法术。</p>\n<p>当你获得能改进幻灵徒手攻击的职业特性时，你也对军用武器、简易武器及徒手攻击获得相同效益，包括如「幻灵武器专长」职业特性所授伤害提升。</p>\n<p>你除「无甲防御」外，还熟练于中甲与轻甲；当你提升「无甲防御」熟练度时，你也提升中甲与轻甲熟练度。你于11级（而非13级）获得「防御长袍」职业特性，并在19级时成为「无甲防御」精专者。你获得@UUID[Compendium.pf2e-summoners-plus.misc.0PBsvIdslXmuei5s]{同步强化}动作，以及@UUID[Compendium.pf2e-summoners-plus.misc.eCBKJ4SEwF7Hiuvb]{协同}与@UUID[Compendium.pf2e-summoners-plus.misc.VucxKRn4BC9O3gCf]{协同连招}职业特性。</p>\n<p> </p>"
+        },
+        "Shell Armor": {
+            "name": "甲壳护甲 Shell Armor",
+            "description": "<p>你的幻灵长出天然护甲，如硬化的石头或厚壳。这使其无甲状态被视作板甲组的护甲：+4护甲等级物品加值、敏捷上限+1、检定减值-2、速度减值-5尺、力量值+3。此外，你的幻灵在反射豁免对抗造成伤害效果时获得+1环境加值。</p>"
+        },
+        "We Feed on Fear": {
+            "name": "以恐惧为食 We Feed on Fear",
+            "description": "<p>你与幻灵在敌人惧怕你时形成同步。若你或你的幻灵使一生物变为「惊惧」，你便获得@UUID[Compendium.pf2e-summoners-plus.misc.H0W9EDjO1wwp38ty]{协同}。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Quick Miniaturize": {
+            "name": "迅捷缩小 Quick Miniaturize",
+            "description": "<p>你的幻灵可瞬间缩小。你回合开始时，你的幻灵可以一个免费动作使用@UUID[Compendium.pf2e-summoners-plus.items.ZGJhdhEWlxnu4W5B]{缩小}。</p>",
+            "prerequisites": [
+                {
+                    "value": "缩小"
+                }
+            ]
+        },
+        "Fabricate Tool": {
+            "name": "锻造工具 Fabricate Tool",
+            "description": "<p>你召唤一件完成工作所需的工具。选择1级或更低的常规物品（用于执行某项技能动作），将其带入你或与你相邻方格之内。若你召唤工具的方格为盟友占据且该盟友有足够的手，他们便可持握或挥使该物品。若该格为你占据，你可挥使或持握该物品，并可在锻造工具或维持时以单一动作使用该工具。该工具仅可用于进行技能检定，若用于其他用途，锻造将立即消散。</p>\n<p>若你为7级或更高，你以所召唤工具进行的检定获得+1物品加值。</p>\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.Item.10wsEzk2WHoU8ndk]</p>"
+        },
+        "Forever in Tandem": {
+            "name": "永世同步 Forever in Tandem",
+            "description": "<p>当你与幻灵同步时，获得以目眩速度执行动作的能力。选择一个具「同步」特征且以单一动作执行的动作。当你@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}时，可将所选动作作为你或幻灵的单一动作使用，无视「所用动作不得含同步特征」之常规要求。</p>"
+        },
+        "Opportunity Duplicity": {
+            "name": "时机双行 Opportunity Duplicity",
+            "description": "<p>你的幻灵已习得执行其他反应活动的能力。你的幻灵可花费由@UUID[Compendium.pf2e-summoners-plus.items.AgwucsLTEIT2HuCP]{附加肢体}或@UUID[Compendium.pf2e-summoners-plus.items.7vE2F7itS6coHQS6]{额外头颅}所获的额外反应来使用其@UUID[Compendium.pf2e.feats-srd.588O3jurogttvqgm]{幻灵借机}，而不使用其原有额外反应。你幻灵为「幻灵借机」获得的额外反应不能多于1个。</p>",
+            "prerequisites": [
+                {
+                    "value": "幻灵借机"
+                },
+                {
+                    "value": "附加肢体或额外头颅"
+                }
+            ]
+        },
+        "Devil (Demon) Eidolon": {
+            "name": "魔鬼（恶魔）幻灵 Devil (Demon) Eidolon",
+            "description": "<blockquote>\n<p>你的幻灵并非源自外裂渊、迷恋自私与仇恨欲望的恶魔；它是地狱军团的邪恶建筑师。</p>\n</blockquote>\n<p>你的幻灵是恶魔，于深渊的混乱与邪恶中由凡人罪行凝聚成形，借与你之链结而在你身侧散播混乱。为你的恶魔选定一种相关之罪。恶魔幻灵的外貌如同无尽深渊般千变万化。虽然恶魔本性不可信，但你的恶魔幻灵已与你达成约定并大体守约，但这并不意味它没有积极地推动你的人生陷入其相关之罪。虽然其为真正恶魔，但你恶魔幻灵与作为凡人之你的链结，使其无法施放深渊契约仪式——纵然它以某种方式习得该仪式。</p>\n<p><strong>传统</strong> 神圣</p>\n<p><strong>特征</strong> 恶魔，幻灵，邪魔</p>\n<p><strong>阵营</strong> 必为混乱邪恶</p>\n<p><strong>本源位面</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为深渊\">地狱</span></p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、角（穿刺）、尾（钝击）、触手（钝击）、翼（钝击）</p>\n<p><strong>毁灭恶魔</strong> 力量18，敏捷14，体质16，智力10，感知8，魅力12；+2护甲等级（敏捷上限+3）</p>\n<p><strong>魅惑恶魔</strong> 力量12，敏捷18，体质12，智力10，感知10，魅力16；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为威吓\">欺诈</span>、宗教</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为深渊语\">迪亚伯利克语</span></p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> 初始 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.o3P8heIfNr1z53Ay]{魔性打击}；<span style=\"text-decoration:underline\" data-tooltip=\"原为罪愿幻象\">共生</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.Hh72IZK36NLATQWF]{惩处契约}；超越 @UUID[Compendium.pf2e-animal-companions.AC-Features.C0zzz9wVwfmGtfIQ]{亵渎宣告}</p>"
+        },
+        "Splintered Manifestation": {
+            "name": "分裂显化 Splintered Manifestation",
+            "description": "<p>你的幻灵是一组生物的集合而非单一生物，每一个皆与你相系，方式与单一幻灵相同。出于法术与效果之考量，你各分裂幻灵皆作为单一生物运作；它们共享同一份生命值池，与正常幻灵一致。每一回合，你可将自己任意动作（含反应与免费动作）用于自身或任一幻灵。你的幻灵共可花费动作数等于你已显化幻灵的数量，但这些动作可由当前任意一已显化幻灵花费。例如：若你只显化2个分裂幻灵，则该回合幻灵共可花费2个动作（每只各1，或由其中一只花2个）。若一个区域效果会同时影响多个幻灵与你，则在判定结果（包括会减弱该结果的效果，如@UUID[Compendium.pf2e.feats-srd.knJlRpltciLNTZba]{防护羁绊}）时，使用你与其中调整值最低的幻灵之最差结果。</p>\n<p>选择一种幻灵类型，并以该类型创造三只不同幻灵。每当你须为幻灵进阶进行选择（如其幻灵组合）时，你须分别为每只幻灵进行选择。当你创造这些幻灵时，亦如它们各为独立幻灵般分别决定其外观与大致形态。当你获得进化专长时，你可选择两个你符合资格的进化专长，分别应用于其中两只不同幻灵。你幻灵之间的进化专长数差不能超过1，因其形态承受不了过多进化与同伴之差。如你的幻灵具有带使用次数或耗费的能力，则任一分裂幻灵使用该能力时，每只幻灵都受其使用次数与耗费约束（如龙幻灵的喷吐武器）。如你的幻灵具有带光环的能力，则一生物每回合只能受同一只幻灵光环影响一次。</p>\n<p>若某能力会以幻灵位置为效果起点，你须选择其中一只幻灵的位置以判定效果。若幻灵会因获得能力而获得「技能进化、专长、专注点或技能训练」（如构装幻灵的@UUID[Compendium.pf2e-animal-companions.AC-Features.AaVyAec0r17ocz42]{重塑进化}），你只获得该效益一次，并在首次获得该能力时选择由哪只分裂幻灵承接该效益。</p>\n<p>若你获得@UUID[Compendium.pf2e.feats-srd.E5ewlRE6Mh9ZqUMu]{目眩登场}职业专长，则当你以「显化分裂幻灵」显化第三只幻灵（而非以3动作活动显化幻灵）时，获得该效果。19级时当你应获得@UUID[Compendium.pf2e.classfeatures.H0iWhiyP0QqgmAKs]{即刻显现}召唤师职业特性时，你可在使用「显化分裂幻灵」时同时显化全部三只分裂幻灵。</p>\n<p>你以@UUID[Compendium.pf2e-summoners-plus.misc.nS8E2BNuiXTVzbY9]{显化分裂幻灵}动作将幻灵具现于现实。你与每只幻灵共享动作与多重攻击减值。当你使用@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}时，可选择一只幻灵与自身协调，或选择两只幻灵相互协调（按同步行动的所有要求执行）。你的幻灵获得@UUID[Compendium.pf2e-summoners-plus.misc.ENFrVTSjEnLVBTXo]{协调行走}动作与@UUID[Compendium.pf2e-summoners-plus.misc.jemFBuSq3gSWKIQ1]{协调攻击}活动。</p>"
+        },
+        "Fabricate Rift": {
+            "name": "锻造裂隙 Fabricate Rift",
+            "description": "<p>你召唤一道穿越空间的裂隙。在你当前方格相邻处创造一个传送门，并在你视野与效果路径所及的30尺内再创造一个传送门。你可在创造此活动的同时穿过该传送门行走。任何生物皆可经其方格穿过传送门——出于此移动之考量，传送门两端视为相邻方格。会使你进入传送门的移动动作获得「传送」特征。若一生物受另一生物之强制移动而进入传送门方格，则发起该强制移动的生物可决定是否使用传送门进行此移动。每轮该传送门只能传送一名生物，同回合后续穿过传送门的尝试自动失败。</p>\n<hr />\n<p>@Template[type:square|distance:5]{传送门模板}</p>"
+        },
+        "Dual Studies+": {
+            "name": "双修+ Dual Studies+",
+            "description": "<p>你与幻灵各自练习的部分技能。选择两项技能。你受训于这些技能。若你已受训于一项技能，则改为受训于另一项你选定的技能。7级时，你们各自在所选其中一项技能上成为精专；若你已精专这两项技能，则改为精专另一项你已受训的技能。</p>"
+        },
+        "Drastic Evolution": {
+            "name": "剧烈进化 Drastic Evolution",
+            "description": "<p>你的召唤之力爆发，将你的幻灵变为新事物。当你取此专长时，选择一项与你幻灵对应的生物特征。你召唤一只具该特征、等级不大于你等级–4的常规生物，且当你使用此活动时，它在该回合获得2个动作。该召唤生物出现在你幻灵所在的方格中，幻灵在效果持续期间消失。你可维持该效果至多1分钟。该召唤生物的心智为你幻灵之心智，但它不能使用任何具幻灵特征的能力，仍可被原本针对幻灵的效果所影响（如@UUID[Compendium.pf2e.spells-srd.HStu2Yhw3iQER9tY]{激励幻灵}）。当效果结束时，你的幻灵在该召唤生物的方格内重新出现。</p>\n<p><strong>特别</strong>此动作具与你幻灵传统对应的特征（奥术、神圣、灵能或原始）。</p>\n<p> </p>"
+        },
+        "Kindred in Range": {
+            "name": "并身远射 Kindred in Range",
+            "description": "<p>你与幻灵以远程攻击协调作战。你处于协同状态时，你或幻灵之一近战触及范围内的敌人，对你或幻灵在第一射程增量内的远程打击都处于措手不及状态。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Controlled Wrath": {
+            "name": "操控之怒 Controlled Wrath",
+            "description": "<p>你的幻灵已学会更深刻地引导其怒火。若你幻灵下一动作为施放@UUID[Compendium.pf2e.spells-srd.Item.kuZnUNrhXHRYQ2eM]{幻灵怒火}，它可将范围更改为@Template[distance:30|type:cone]、@Template[distance:60|type:line]或30尺内的@Template[distance:10|type:burst]。</p>",
+            "prerequisites": [
+                {
+                    "value": "幻灵怒火"
+                }
+            ]
+        },
+        "Cryptic Coloration": {
+            "name": "诡奇色变 Cryptic Coloration",
+            "description": "<p>你的幻灵能极佳地伪装自身，其皮肤纹理与色泽随周遭环境扭曲而变。你的幻灵在自身周围形成伪装，获得@UUID[Compendium.pf2e.conditionitems.DmAIPqOBomZ7H95W]{隐蔽}至下回合开始。该隐蔽持续至你的幻灵使用@UUID[Compendium.pf2e.actionspf2e.XMcnh4cSI32tljXa]{躲藏}、@UUID[Compendium.pf2e.actionspf2e.VMozDqMMuK5kpoX4]{潜行}或@UUID[Compendium.pf2e.actionspf2e.UHpkTuCtyaPqiCAB]{快步}以外的动作，或它进入与当前周围不匹配的区域为止（由GM裁定）。</p>"
+        },
+        "Oni Eidolon": {
+            "name": "鬼幻灵 Oni Eidolon",
+            "description": "<p>你已与一只「鬼」（天霞凶恶之自然守护者）相联系。原为神祇，你的幻灵因某场损及其本核之大灾而被腐化为今日之形。如今它与你相系，将由你的行动获得救赎……或被你的恶行所腐化。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 幻灵，巨人，鬼</p>\n<p><strong>本源位面</strong> 宇宙</p>\n<p><strong>体型</strong> 中型（参见暴怒之灵）</p>\n<p><strong>建议攻击</strong> 铁棒（钝击）、其他类武器形态徒手攻击（钝击、挥砍、穿刺）</p>\n<p><strong>诅咒之鬼</strong>力量+1，敏捷+4，体质+1，智力+0，感知+0，魅力+3；+1护甲等级（敏捷上限+4）</p>\n<p><strong>暴怒之鬼</strong>力量+4，敏捷+1，体质+3，智力–1，感知+0，魅力+2；+3护甲等级（敏捷上限+2）</p>\n<p><strong>技能</strong> 运动、自然</p>\n<p><strong>感官</strong> 微光视觉</p>\n<p><strong>语言</strong> 天语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.UgC7EEaeRZg4eoYp]{暴怒之灵}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.vwKyqC54slJGsXDx]{无尽力量瀑布}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.f77t4YLJkaKWVLuJ]{最终形态}</p>"
+        },
+        "Staff of The Eidolon Binder": {
+            "name": "幻灵束缚法杖 Staff of The Eidolon Binder",
+            "description": "<p>这柄黑色法杖侧面缠绕白色饰带，其上印刻异界力量之言。其末端镶嵌一颗大型宝石，似乎容纳着整个世界。挥使幻灵束缚法杖时，你可在该回合的第一个动作以免费动作使用@UUID[Compendium.pf2e.actionspf2e.3ZzoI9MTtJFd1Kjl]{共享感官}。</p>\n<p><strong>激活</strong> 施放法术</p>\n<p><strong>效果</strong> 你从法杖中消耗一定数量的充能以从其法术列表中施放一个法术。</p>\n<hr />\n<ul>\n<li><strong>戏法</strong> @UUID[Compendium.pf2e.spells-srd.AfOpnnwdZwHi2Tnc]{守护伙伴}</li>\n<li><strong>1阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n<li><strong>2阶</strong> @UUID[Compendium.pf2e.spells-srd.cwXiKPkZrIupjwlQ]{召唤师警备}、@UUID[Compendium.pf2e.spells-srd.vb2dFNtbofJ7A9BW]{召唤师容颜}</li>\n<li><strong>3阶</strong> @UUID[Compendium.pf2e.spells-srd.gWmLT5SkA0qH2mNE]{淬毒伙伴}、@UUID[Compendium.pf2e.spells-srd.HIY4XUJZKmFLAJTn]{生命联结}</li>\n</ul>\n<hr />\n<p><strong>制作要求</strong> 提供所列每阶每个法术各一次的施放。</p>"
+        },
+        "Staff of The Eidolon Binder (Major)": {
+            "name": "幻灵束缚法杖（高阶） Staff of The Eidolon Binder (Major)",
+            "description": "<p>这柄黑色法杖侧面缠绕白色饰带，其上印刻异界力量之言。其末端镶嵌一颗大型宝石，似乎容纳着整个世界。挥使幻灵束缚法杖时，你可在该回合的第一个动作以免费动作使用@UUID[Compendium.pf2e.actionspf2e.3ZzoI9MTtJFd1Kjl]{共享感官}。</p>\n<p><strong>激活</strong> 施放法术</p>\n<p><strong>效果</strong> 你从法杖中消耗一定数量的充能以从其法术列表中施放一个法术。</p>\n<hr />\n<ul>\n<li><strong>戏法</strong> @UUID[Compendium.pf2e.spells-srd.AfOpnnwdZwHi2Tnc]{守护伙伴}</li>\n<li><strong>1阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n<li><strong>2阶</strong> @UUID[Compendium.pf2e.spells-srd.cwXiKPkZrIupjwlQ]{召唤师警备}、@UUID[Compendium.pf2e.spells-srd.vb2dFNtbofJ7A9BW]{召唤师容颜}</li>\n<li><strong>3阶</strong> @UUID[Compendium.pf2e.spells-srd.gWmLT5SkA0qH2mNE]{淬毒伙伴}、@UUID[Compendium.pf2e.spells-srd.HIY4XUJZKmFLAJTn]{生命联结}</li>\n<li><strong>4阶</strong> @UUID[Compendium.pf2e.spells-srd.A2JfEKe6BZcTG1S8]{飞行术}、@UUID[Compendium.pf2e.spells-srd.HqTI6wRrck1YXp3F]{心灵感应}</li>\n<li><strong>5阶</strong> @UUID[Compendium.pf2e.spells-srd.bay4AfSu2iIozNNW]{放逐术}、@UUID[Compendium.pf2e.spells-srd.R9xqCBblkS5KE4y7]{短讯术}</li>\n<li><strong>6阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n<li><strong>7阶</strong> @UUID[Compendium.pf2e.spells-srd.HES5jvGiNZZnJycK]{力场监牢}、@UUID[Compendium.pf2e.spells-srd.2Vkd1IxylPceUAAF]{再生术}</li>\n<li><strong>8阶</strong> @UUID[Compendium.pf2e.spells-srd.wfleiawxsfhpRRwf]{无影无踪}、@UUID[Compendium.pf2e.spells-srd.4MOew29Z1oCX8O28]{再起时刻}</li>\n<li><strong>9阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n</ul>\n<hr />\n<p><strong>制作要求</strong> 提供所列每阶每个法术各一次的施放。</p>"
+        },
+        "Fabricate Demiplane": {
+            "name": "锻造半位面 Fabricate Demiplane",
+            "description": "<p>你可召唤其他世界的部分而非实体。你以30尺内一个@Template[distance:20|type:burst]之范围充满半位面的属性。你制作一个具下列其一位面本质特征的半位面，并获得对应特征的效果。若你的施法传统为神圣或灵能，可选择火、暗影、虚空或生命力特征；若为奥术或原始，可选择任何元素特征。</p>\n<p><strong>气：</strong>区域内所有生物对其速度获得+20尺状态加值，该状态加值同时使生物@UUID[Compendium.pf2e.actionspf2e.2HJ4yuEFY1Cast4h]{跳高}、@UUID[Compendium.pf2e.actionspf2e.JUvAvruz7yRQXfz2]{跳远}或@UUID[Compendium.pf2e.actionspf2e.d5I6018Mci2SWokk]{跳跃}的距离增加同等数值。区域内生物无须先行走10尺即可跳高或跳远；区域内生物若受强制移动影响，会比正常多移动10尺至同方向。</p>\n<p><strong>土：</strong>区域成为困难地形。生物若于区域内开始回合，须进行@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免；失败则@UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{禁足}至下回合结束。</p>\n<p><strong>火：</strong>区域温度极高，每回合开始时区域内的可燃物起火。区域内生物每回合开始时承受@Damage[max(1, floor(@actor.level/2))d4[fire]]{每两级你具备的1d4火焰伤害}，基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免。</p>\n<p><strong>金：</strong>区域为危险地形，生物每经过区域内方格时承受@Damage[@actor.level[slashing]]{等于你等级的挥砍伤害}。</p>\n<p><strong>暗影：</strong>区域内明亮光线降为昏暗光线，昏暗光线降为黑暗，黑暗降为更深黑暗。具光特征、阶级低于你等级一半（向上取整）的效果将自动熄灭。</p>\n<p><strong>虚空：</strong>区域内活体生物每回合开始时承受@Damage[max(1, floor(@actor.level/2))d4[void]]{每两级你具备的1d4虚空伤害}，基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免。区域内不死生物每回合开始时恢复@Damage[max(1, floor(@actor.level/2))d4[void,healing]]{每两级你具备的1d4生命值}。</p>\n<p><strong>生命力：</strong>区域内不死生物每回合开始时承受@Damage[max(1, floor(@actor.level/2))d4[vitality]]{每两级你具备的1d4生命力伤害}，基础强韧豁免。区域内活体生物每回合开始时恢复@Damage[max(1, floor(@actor.level/2))d4[vitality,healing]]{每两级你具备的1d4生命值}。</p>\n<p><strong>水：</strong>区域为水域，区域内生物无法施放火焰法术或使用具火焰特征的动作；若不能水中呼吸则须屏息。生物若于区域内开始回合，须进行@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免；失败时按你选择的方向移动5尺，大失败时移动10尺。</p>\n<p><strong>木：</strong>区域内含至多4座由木材构成的、由你选择的结构。这些结构占据至多10尺立方区域，并可组合形成单一结构（如桥梁或墙）。这些结构可延伸至原爆发范围之外，但其形状必须与爆发内某方格连成一片。这些结构提供高级掩护；每个10尺立方块具护甲等级10、硬度5、20生命值，且免疫重击命中与精准伤害。</p>"
+        },
+        "Tandem Ready": {
+            "name": "同步预备 Tandem Ready",
+            "description": "<p>你与幻灵预备一致行动。你以相同条件@UUID[Compendium.pf2e.actionspf2e.dLgAMt3TbkmLkUqE]{预备}，但你为自身与幻灵各指定一个动作或免费动作（在触发时使用），且当触发条件达成时你与幻灵同步行动。你与幻灵可指定不同动作，且使用「同步预备」时须确定二者动作的顺序。若你与幻灵预备的动作会增加多重攻击减值，则在二者动作均完成前不增加多重攻击减值。</p>"
+        },
+        "Unseemly (Beast) Eidolon": {
+            "name": "异貌（野兽）幻灵 Unseemly (Beast) Eidolon",
+            "description": "<blockquote>\n<p>你幻灵的躯体与生物结构异于传统野兽——可能具多重附肢、不寻常的解剖结构，以及产出怪异分泌物的能力。</p>\n</blockquote>\n<p>你的幻灵是自然生命力以强大魔法野兽形态显化之物，常具动物特征——甚至可能融合多个不同物种之特征。你或许通过特定哲学或修行（如萨柯里斯神召者之信念）学会与世间生命力相系；或自行结成羁绊。无论如何，你与幻灵的链结使你们二者得以共同成长，守护家园免受荼毒者侵扰。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 野兽，幻灵</p>\n<p><strong>本源位面</strong> 物质位面</p>\n<p><strong>体型</strong> 中型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、利齿（穿刺）、蹄（钝击）、角（穿刺）</p>\n<p><strong>残暴野兽</strong> 力量18，敏捷14，体质16，智力8，感知12，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>敏捷野兽</strong> 力量14，敏捷18，体质16，智力8，感知12，魅力10；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为威吓\">特技</span>、自然</p>\n<p><strong>感官</strong> 微光视觉</p>\n<p><strong>语言</strong> 森族语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> 初始 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.lonj7zEZdJD2pbai]{野兽冲锋}；<span style=\"text-decoration:underline\" data-tooltip=\"原为原始咆哮\">共生</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.YJuyhql7BgTmXMoN]{抑制分泌}；超越 @UUID[Compendium.pf2e-animal-companions.AC-Features.coBen1GA1czeBTOs]{旋风重锤}</p>"
+        },
+        "Fungus (Plant) Eidolon": {
+            "name": "真菌（植物）幻灵 Fungus (Plant) Eidolon",
+            "description": "<blockquote>\n<p>植物以阳光为食，真菌则借死亡的腐朽之力获得力量。你的幻灵是腐朽之实体，是生命循环不可或缺的一环。</p>\n</blockquote>\n<p>你的幻灵是有智慧的植物，源自自然生命能量的同一脱离碎片——这些碎片亦化作叶生灵。植物幻灵天性好奇、适应性强，性格随其对凡人文化中所亲近部分而成。尽管同源，植物幻灵并不总是像叶生灵；其形态变化巨大，可貌似任何已知植物造物。其中一些甚至像极了奇异到难以辨识的植物造物。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 幻灵，植物</p>\n<p><strong>本源位面</strong> 物质位面</p>\n<p><strong>体型</strong> 中型</p>\n<p><strong>建议攻击</strong> 藤蔓（钝击）、枝条（钝击）、根（钝击）</p>\n<p><strong>守护之植</strong> 力量18，敏捷14，体质16，智力8，感知12，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>蔓生之植</strong> 力量12，敏捷18，体质16，智力8，感知14，魅力10；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 自然、<span style=\"text-decoration:underline\" data-tooltip=\"原为生存\">潜行</span></p>\n<p><strong>感官</strong> 微光视觉</p>\n<p><strong>语言</strong> 森族语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为卷须打击\">初始</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.zE41sGx7afQPw97M]{孢子云}；<span style=\"text-decoration:underline\" data-tooltip=\"原为生长藤蔓\">共生</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.wbM1KHZr45mn8o8a]{孢子翎}；超越 @UUID[Compendium.pf2e-animal-companions.AC-Features.kpcL3Iz1KJnmEKwC]{盘根之地}</p>"
+        },
+        "Life Eidolon": {
+            "name": "生命幻灵 Life Eidolon",
+            "description": "<p>你的幻灵为蓬勃生命力所赋能。它可能形似不死鸟或衔尾蛇，或为造物熔炉之造物（如叶界游民），甚或某些精族生物（如菇后）。无论形态为何，生命力时刻自其涌出，将周围之物注以活力。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 幻灵，生命力</p>\n<p><strong>本源位面</strong> 星界、造物熔炉、初界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚或喙（穿刺）、拳或翼（钝击）</p>\n<p><strong>活力巨擘</strong>力量+4，敏捷+2，体质+3，智力–1，感知+1，魅力+0，+2护甲等级（敏捷上限+3）</p>\n<p><strong>活力使者</strong>力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2，+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 医疗、自然</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 启明语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.6b58rcxzSCpM2BbB]{纯净生命力}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.LVT1aZKpSBRkbCUd]{充沛活力}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.BwfIMZ7fGH3d9VFt]{生命力涌现}</p>"
+        },
+        "Shuffle Card": {
+            "name": "洗牌 Shuffle Card",
+            "description": "<p>这对磁性瓦片碎片嵌入相配的脚环之中，无人监管时温和地相互靠近又错过。当一名召唤师与其幻灵分别佩戴时，二者向彼此移动时获得+10尺状态加值至速度。若你的幻灵具「敏行进化」专长，则上述情形下该状态加值提升为+20尺。该状态加值除适用于你与幻灵的速度外，还适用于攀爬、飞行与游泳速度。</p>"
+        },
+        "Mighty Summons": {
+            "name": "强力召唤 Mighty Summons",
+            "description": "<p>与幻灵共处的经验使你成为召唤其他生物的大师。若你下一动作为以召唤师法术位施放具召唤特征的法术，你召唤生物时视该法术环为高1阶。若你以@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}施放具召唤特征的法术，则该塑法适用于你所施放法术——前提是它是「同步行动」紧前的动作。</p>\n<p><strong>特别</strong>若由此召唤的生物阶级须高于10阶法术（如你具@UUID[Compendium.pf2e.feats-srd.wPjNjyh60fYKrDXl]{传奇召唤师}），则改为召唤一只比指定等级高2级的生物。</p>"
+        },
+        "Incarnate Manifestation": {
+            "name": "化身显化 Incarnate Manifestation",
+            "description": "<p>你的幻灵为某强大存在的化身，仅能短期显化。你不获得「显化幻灵」，因为你的幻灵并非常驻。相反，你的幻灵被封缚于你体内，需借@UUID[Compendium.pf2e-summoners-plus.misc.0kiDkpkmr4ABMGZz]{显化化身幻灵}活动从你的印记中释放。除非你@UUID[Compendium.pf2e.actionspf2e.3f5DMFu8fPiqHpRg]{维持}其存在，否则它无法保持显化——其力量过强，无法长期显化。你的幻灵通过维持可保持显化最多1分钟，之后将自动解显化，且至少1分钟内不能再显化。你获得@UUID[Compendium.pf2e-summoners-plus.misc.tIkttSpMKNdtuRtP]{召唤化身}同步动作，你的幻灵获得@UUID[Compendium.pf2e-summoners-plus.misc.0fvd9aASh27TJYOj]{化身降临}活动与@UUID[Compendium.pf2e-summoners-plus.misc.LKTHOzyQjzuxDG66]{化身之力}动作。</p>\n<p>解显化时，你的幻灵仍可与你心灵感应通讯。你也获得@UUID[Compendium.pf2e-summoners-plus.misc.CXW8SdSskWNohW8w]{投射感官}动作，使你的幻灵在解显化时仍可将其感官授予你。在探索模式中，由于你不能长时间显化幻灵，你不能进行多于一项探索活动；但你可借「投射感官」之能力，除自身探索活动外，还使用幻灵可执行的探索活动。</p>"
+        },
+        "Shrink Down+": {
+            "name": "缩小+ Shrink Down+",
+            "description": "<p>你的幻灵可缩小以适合狭小空间。你的幻灵缩小一个体型，最低可缩至超小型。处于缩小状态时它可再次使用此动作恢复正常体型。</p>"
+        },
+        "Legend Eidolon": {
+            "name": "传奇幻灵 Legend Eidolon",
+            "description": "<p>你的幻灵是位面之外、力量惊人的战士，由奥术魔法赋形或赋能。它的来源可能是上代英雄（如伟大祖先或英勇英灵）；亦可能是某生物的星界投影，例如猪首巨斧大师、武器挥使的格里芬尼德、四臂独眼狂战士，或其他想象之中的怪诞武力造物。</p>\n<p><strong>传统</strong> 奥术</p>\n<p><strong>特征</strong> 幻灵，幽影，灵魂</p>\n<p><strong>本源位面</strong> 任意位面，常为星界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 拳（钝击）、武器形态徒手攻击</p>\n<p><strong>战士莽夫</strong> 力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>\n<p><strong>战士游袭者</strong> 力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 奥秘、运动</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 一种通用语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.BPn644yIO8XN3MGs]{战士之心}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.ZVZrbFQCJZmzpF8t]{求荣者}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.09GqtLpix3Tiv60D]{胜利之伴}</p>"
+        },
+        "Protean Eidolon": {
+            "name": "原蛋幻灵 Protean Eidolon",
+            "description": "<p>你的幻灵是元素混乱与不稳定的扭动具现。作为宇宙随机与无常本质的化身，它是一只极难驯服的野兽——同等地难解、不可预测且诡谲狡黠。虽然它们一般遵从召唤师之令，但原蛋幻灵素以暗藏自身计划闻名——某些主人不知不觉间已成其棋子。</p>\n<p><strong>传统</strong> 神圣</p>\n<p><strong>特征</strong> 幻灵，监督者，原蛋</p>\n<p><strong>本源位面</strong> 漩涡界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 颚（穿刺）、爪（挥砍）、尾（钝击）</p>\n<p><strong>原蛋谜师</strong> 力量+1，敏捷+4，体质+1，智力+0，感知+0，魅力+3；+1护甲等级（敏捷上限+4）</p>\n<p><strong>原蛋解构者</strong> 力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>\n<p><strong>技能</strong> 欺诈、宗教</p>\n<p><strong>感官</strong> 黑暗视觉，熵感（不精确）15尺</p>\n<p><strong>语言</strong> 原蛋语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.sx6MgQz2v05Jtk0M]{熵化实体}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.FAO2gAErpSxkn4RB]{扭曲波打击}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.9PDz7tZtDgOEWT5F]{扰乱现实}</p>"
+        },
+        "Strike Barrage": {
+            "name": "齐击连击 Strike Barrage",
+            "description": "<p><strong>需求</strong>你与幻灵相邻并具协同状态。</p>\n<hr />\n<p>伴一声喝喊，你与幻灵向对手倾泻一阵难以躲避的拳脚或武器攻击。区域内生物须以基础@Check[type:fortitude|dc:resolve(@actor.attributes.classOrSpellDC.value)|basic:true]豁免对抗你的法术DC。所用动作数决定区域与其他参数。</p>\n<p><span class=\"action-glyph\">2</span> 区域为@Template[type:cone|distance:10]或@Template[type:line|distance:20]；生物承受等于你幻灵两次打击的伤害。大失败时，目标还@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1级}。</p>\n<p><span class=\"action-glyph\">3</span> 同2动作版本，但区域为@Template[type:cone|distance:20]或@Template[type:line|distance:40]。若仅一名生物会受此影响，则伤害提升为三次打击。</p>\n<p><strong>协同连招</strong>你可选择将@Template[type:cone|distance:40]{锥形}或@Template[type:line|distance:80]{线形}的区域加倍；若使用3动作版本，对单一生物的伤害额外增加两次打击。</p>"
+        },
+        "Airborne (Beast) Eidolon": {
+            "name": "飞翔（野兽）幻灵 Airborne (Beast) Eidolon",
+            "description": "<blockquote>\n<p>并非所有野兽都受困于地面，如同我们一般。某些幻灵展翼翱翔天际，自高空捕猎。</p>\n</blockquote>\n<p>你的幻灵是自然生命力以强大魔法野兽形态显化之物，常具动物特征——甚至可能融合多个不同物种之特征。你或许通过特定哲学或修行（如萨柯里斯神召者之信念）学会与世间生命力相系；或自行结成羁绊。无论如何，你与幻灵的链结使你们二者得以共同成长，守护家园免受荼毒者侵扰。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 野兽，幻灵</p>\n<p><strong>本源位面</strong> 物质位面</p>\n<p><strong>体型</strong> 中型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、利齿（穿刺）、蹄（钝击）、角（穿刺）</p>\n<p><strong>残暴野兽</strong> 力量18，敏捷14，体质16，智力8，感知12，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>敏捷野兽</strong> 力量14，敏捷18，体质16，智力8，感知12，魅力10；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为威吓\">特技</span>、自然</p>\n<p><strong>感官</strong> 微光视觉</p>\n<p><strong>语言</strong> 森族语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为野兽冲锋\">初始</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.8HdHYssXliHclIT6]{翔兽}；共生 @UUID[Compendium.pf2e-animal-companions.AC-Features.Gn750G9nNM3GiI5k]{原始咆哮}；<span style=\"text-decoration:underline\" data-tooltip=\"原为旋风重锤\">超越</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.PV9OjHFK4tjR6sNh]{旋风之翼}</p>"
+        },
+        "Paired Performers": {
+            "name": "双人演者 Paired Performers",
+            "description": "<p>你与幻灵配合演出俱佳。你与幻灵获得@UUID[Compendium.pf2e.feats-srd.7LB00jkh6JaJr3vS]{迷魂表演}技能专长。你可选择将@UUID[Compendium.pf2e.actionspf2e.EEDElIyin4z60PXx]{表演}赋予同步特征，使你与幻灵可以单一动作进行表演。此外，遭遇战中若你或幻灵进行表演的检定结果超过一名观察敌人的意志DC（即便其未迷魂），你便获得@UUID[Compendium.pf2e-summoners-plus.misc.H0W9EDjO1wwp38ty]{协同}。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                },
+                {
+                    "value": "受训于表演"
+                }
+            ]
+        },
+        "Eager Synergy": {
+            "name": "急切协同 Eager Synergy",
+            "description": "<p><strong>触发</strong>你掷先攻。</p>\n<hr />\n<p>你与幻灵已习惯于进入战斗。你获得@UUID[Compendium.pf2e-summoners-plus.misc.H0W9EDjO1wwp38ty]{协同}。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Ooze Eidolon": {
+            "name": "黏液幻灵 Ooze Eidolon",
+            "description": "<p>你的幻灵是不寻常的标本，由过渡位面以太残骸的最末端创造而成。它并非如多数幻灵般已成形完整，而是一团黏液——一个由魔法残余凝结成的单细胞生命体，被你设法控制。某些召唤师视黏液幻灵为失败或意外召唤的标志；其他人则知，这些奇异之物隐藏着独特潜能。</p>\n<p><strong>传统</strong> 灵能</p>\n<p><strong>特征</strong> 幻灵，黏液</p>\n<p><strong>本源位面</strong> 星界、以太位面、初界、幽冥界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 伪足（穿刺）、撞击（钝击）、卷须（挥砍）</p>\n<p><strong>黏液征服者</strong> 力量+4，敏捷+2，体质+3，智力-1，感知+1，魅力+0；+2护甲等级（敏捷上限+3）</p>\n<p><strong>黏液使者</strong> 力量+2，敏捷+4，体质+2，智力+0，感知+1，魅力+0；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 特技、神秘</p>\n<p><strong>感官</strong> 动作感（不精确）30尺</p>\n<p><strong>语言</strong> 阿克洛语</p>\n<p><strong>速度</strong> 15尺，攀爬15尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.MysPtXRn4Y26cmwh]{黏液生理}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.7mHYbcgvRVykN0su]{胶状膨胀}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.QVxp8UefAgWx4axa]{吞没倾向}</p>"
+        },
+        "Eidolon Egg": {
+            "name": "幻灵之卵 Eidolon Egg",
+            "description": "<p>这枚奇特的卵在被召唤师看到之前显得平凡无奇，被看到时便呈现出令人联想到其幻灵的外貌。当你的幻灵将此卵作为附装物时，它可藏于卵中而非解显化，且其唯一可使用的活动便是激活幻灵之卵。</p>\n<p>即便此物已被幻灵附装，召唤师仍须在过去1分钟内对其进行过交互，幻灵才能激活该卵；召唤师可在该交互的同时将卵投掷至多30尺。你的幻灵自动知晓你正使用该交互动作，你可使用@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}进行交互并激活幻灵之卵。</p>\n<p><strong>激活：孵化幻灵</strong> <span class=\"action-glyph\">2</span>（专注）</p>\n<p><strong>使用次数</strong> 每小时一次</p>\n<p><strong>需求</strong> 召唤师在过去1分钟内与该卵进行过交互</p>\n<hr />\n<p><strong>效果</strong> 你的幻灵显化，如同你使用了显化幻灵——但用卵的位置而非你的位置来判定效果。</p>"
+        },
+        "Duo Defenses": {
+            "name": "双重防御 Duo Defenses",
+            "description": "<p>你与幻灵筑起对抗敌人之防御壁。只要你与幻灵相邻，则除非二者皆被夹击，否则你们都不会因夹击而处于措手不及。若你具协同状态，则你们彼此相邻时各获得+1环境加值至护甲等级。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Reinforce Eidolon Swap": {
+            "name": "援护幻灵替换 Reinforce Eidolon Swap",
+            "description": "<p>你的召唤师在1级时改为获得@UUID[Compendium.pf2e.spells-srd.TYbCj4dgXDOZou9k]{援护幻灵}戏法，而非@UUID[Compendium.pf2e.spells-srd.HStu2Yhw3iQER9tY]{激励幻灵}。若你选择@UUID[Compendium.pf2e.feats-srd.DxcjEcxTbjlOA2C0]{援护幻灵}职业专长，你将改为获得「激励幻灵」而非「援护幻灵」。</p>"
+        },
+        "Extend Boost Swap": {
+            "name": "延长激励替换 Extend Boost Swap",
+            "description": "<p>你的召唤师在1级时改为获得@UUID[Compendium.pf2e.spells-srd.CR8OKDbeFJoZbOCu]{延长激励}聚能法术，而非@UUID[Compendium.pf2e.spells-srd.lV8FkHZtzZu7Cy6j]{进化浪潮}。若你选择@UUID[Compendium.pf2e.feats-srd.u5cPwhuCd3xTAlWl]{延长激励}职业专长，则你改为获得「进化浪潮」而非「延长激励」。</p>"
+        },
+        "Linnorm (Dragon) Eidolon": {
+            "name": "巨蛇龙（龙）幻灵 Linnorm (Dragon) Eidolon",
+            "description": "<blockquote>\n<p>你的幻灵并非寻常之龙；它是一只强大的巨蛇龙——来自北方、具骇人之利齿与致命死亡诅咒的凶恶巨蟒。</p>\n</blockquote>\n<p>因龙与魔法关联深厚，其心智常会在星界留下回响。这等存在虽极为强大，却无法独自与外界交互。龙幻灵以其生前强大的鳞甲之形显现；多数化作真龙形态（虽然较小），但有些显现为飞龙或其他龙族生物。你已与这等龙幻灵结成连结，并寻求一同成长，强大如远古巨龙。</p>\n<p><strong>传统</strong> 原始</p>\n<p><strong>特征</strong> 星界，龙，幻灵，原始，及一项额外特征（参见喷吐武器）</p>\n<p><strong>本源位面</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为星界\">初界</span></p>\n<p><strong>体型</strong> 中型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、角（穿刺）、尾（钝击）、翼（钝击）</p>\n<p><strong>劫掠之龙</strong> 力量18，敏捷14，体质16，智力10，感知10，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>狡黠之龙</strong> 力量12，敏捷18，体质12，智力14，感知10，魅力12；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为威吓与一项与施法传统相关的技能\">运动、自然</span></p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 龙语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> 初始 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.I8fG26JJS29ZYwfZ]{喷吐武器}；<span style=\"text-decoration:underline\" data-tooltip=\"原为龙性狂乱\">共生</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.hGWaUVDJ9A4PLWX3]{死亡诅咒}；超越 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.P7qw5V2ylPwCWMPB]{古龙吐息}</p>"
+        },
+        "Invigorated by Pain": {
+            "name": "因痛振奋 Invigorated by Pain",
+            "description": "<p>当你或幻灵之一受伤时，你们二者都受到激励。若你或幻灵成为成功打击的目标，且另一方与之相邻或施加该成功打击的生物在另一方触及范围内，则你获得@UUID[Compendium.pf2e-summoners-plus.misc.H0W9EDjO1wwp38ty]{协同}。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Ancient Surge": {
+            "name": "远古涌动 Ancient Surge",
+            "description": "<p>你解锁过去之力，将幻灵恢复至时间之始的强力状态。当你施放@UUID[Compendium.pf2e.spells-srd.Item.lV8FkHZtzZu7Cy6j]{进化浪潮}时，可在常规效果之外另选下列效果：</p>\n<ul>\n<li>你的幻灵获得震感作为不精确感官，距离至多20尺。</li>\n<li>你的幻灵获得对酸性、寒冷、电击或火焰伤害的抗性，数值等于你等级一半。若你的幻灵对所选伤害类型有弱点，则改为减少同等数值的弱点。</li>\n</ul>\n<hr />\n<p><strong>提升（3阶）</strong>你的幻灵在强韧豁免上获得+1状态加值。</p>\n<p><strong>提升（5阶）</strong>你的幻灵在对抗会令其陷入「受擒、倒地或束缚」状态的效果之豁免成功度等级提升一阶。</p>\n<hr />\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.3BLKQTWLjbMxY3A9]{法术效果：远古涌动}</p>",
+            "prerequisites": [
+                {
+                    "value": "神圣或原始传统"
+                },
+                {
+                    "value": "进化浪潮聚能法术"
+                }
+            ]
+        },
+        "Synthesist Manifestation": {
+            "name": "合成显化 Synthesist Manifestation",
+            "description": "<p>你的幻灵被束缚于你的肉身之中，仅能显化于你的躯体。你获得@UUID[Compendium.pf2e.feats-srd.s97nKj9Uye1KXr7A]{融入幻灵}职业专长。你不能正常显化幻灵，必须使用「融入幻灵」。与其他融入幻灵的召唤师不同，即使在与幻灵合体期间，你仍可使用不需身体移动的动作——包括需要言语之动作（如@UUID[Compendium.pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}、@UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索}），或施放具专注但不具操作特征之法术（如激励幻灵）。此外，你在融入幻灵期间还能施放具操作特征之法术，前提是该法术仅以你或幻灵为目标，且若该法术原本仅可影响你，则改为影响你的幻灵。如某法术或效果会施加豁免（如@UUID[Compendium.pf2e.spells-srd.TVKNbcgTee19PXZR]{护盾术}戏法），则该豁免对你们二者皆适用。你获得@UUID[Compendium.pf2e-summoners-plus.misc.24bz4IzBHnZomtjE]{压制幻灵}免费动作。</p>\n<p>当你使用具同步特征之动作时，若你与幻灵应使用相同动作，你可改用「融入幻灵」时所允许的动作。若一同步动作要求你二者使用相同动作（如@UUID[Compendium.pf2e.feats-srd.qmx8QwVepqI9FqiD]{同步移动}），你可将指定的动作或活动替换为符合上述要求且所用动作数不多于该动作的动作或活动。在你的幻灵显化期间，你可激活具消耗品特征之魔法物品，前提是幻灵具有合适的肢体——并可选择由你或幻灵接受所用消耗品的影响。若该消耗品被用于施放法术，你显化幻灵期间仍须满足该「施放法术」之需求。</p>\n<p>例如，你可使用@UUID[Compendium.pf2e.actionspf2e.2KV87ponbWXgGIhZ]{同步行动}让幻灵进行打击而你回忆知识；或用同步移动让幻灵行走、而你尝试搜索敌人；但你不能使用「同步行动」施放具操作特征之法术；亦不能在使用协助动作时让幻灵行走同步移动。</p>\n<p>在探索模式中，你像一个显化幻灵的召唤师那样可执行两项探索活动；但当你处于「融入幻灵」状态时，你的探索活动须为符合「融入幻灵」之同等条件之动作。</p>\n<p>或者，你可选择共享你们任一活动之效益，使你二者各获其益。例如，你可选择@UUID[Compendium.pf2e.actionspf2e.OQaFzDtVEOMWizJJ]{复唱法术}「盾牌术」，使你的幻灵在你以此探索活动期间获得盾牌术效果。</p>\n<p>当你使用@UUID[Compendium.pf2e.actionspf2e.3ZzoI9MTtJFd1Kjl]{共享感官}时，你的幻灵可使用你所知的技能专长与技能动作——犹如它在合体期间已具备这些能力。</p>"
+        },
+        "Venomous Secondary Attack": {
+            "name": "剧毒次要攻击 Venomous Secondary Attack",
+            "description": "<p>你幻灵的次要徒手攻击其伤害骰减少1档，并获得<span style=\"text-decoration:underline\" data-tooltip=\"这些武器在每次命中时注入毒素。当你以此武器命中生物时，造成额外1点持续毒素伤害。若该武器具高级威能符文，则提升至2点持续毒素伤害。\">剧毒</span>特征。</p>\n<hr class=\"pf2e-summoners-plus-v11-disclaimer\" />"
+        },
+        "Ultimate Form": {
+            "name": "终极形态 Ultimate Form",
+            "description": "<p>你解开幻灵之束缚，将其力量提升至近乎神格。你的幻灵获得一个超大型（30尺×30尺空间）的战斗形态，基于与你幻灵相联系的魔法传统，持续1分钟。你可解除该效果。</p>\n<p>无论你幻灵获得何种战斗形态，它皆获得以下数据与能力：</p>\n<ul>\n<li>护甲等级 = 25 + 你的等级。</li>\n<li>30临时生命值。</li>\n<li>黑暗视觉。</li>\n<li>由所选战斗形态决定的一项或多项专属攻击，是你幻灵唯一可进行的打击。你幻灵的攻击调整值为+34，使用所列伤害。这些攻击基于力量（例如对力竭状态而言）。若你幻灵的徒手攻击调整值更高，可改用更高者。</li>\n<li>运动调整值+36，除非你自身的更高。</li>\n</ul>\n<hr />\n<p>你的幻灵按其传统获得下列效果：</p>\n<ul>\n<li><strong>@UUID[Compendium.pf2e-summoners-plus.misc.UQDNIDMzdVkwwrhG]{奥秘全知者}</strong>\n<ul>\n<li>速度50尺</li>\n<li>对魔法的5抗性</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 奥术之触（触及30尺，敏捷）<strong>伤害</strong>8d4+8力场</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 奥术箭矢（射程增量60尺，多用酸性、寒冷、电击、火焰、毒素、音波）<strong>伤害</strong>6d10+10力场</li>\n<li><strong>无所不知 <span class=\"action-glyph\">1</span></strong>（奥术，幸运）你的幻灵以你的奥秘调整值对任何主题进行回忆知识，掷两次取较高者。</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e-summoners-plus.misc.fghVMCaRPxrTNf1f]{神圣造物主}</strong>\n<ul>\n<li>速度40尺，飞行40尺</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 灵能爆裂（触及30尺，多用挥砍）<strong>伤害</strong>6d8+12灵魂</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 位面射线（射程增量100尺）<strong>伤害</strong>6d6+6灵魂</li>\n<li><strong>神性恩典</strong>（光环，神圣）60尺。注视你幻灵之敌人须以@Check[type:will|dc:resolve(@actor.attributes.classOrSpellDC.value)]豁免对抗你的法术DC，否则@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞1级}1轮（大失败时@UUID[Compendium.pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞2级}）。</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.yt7hz5G86vR2rAKB]{原始巅峰}</strong>\n<ul>\n<li>速度40尺，飞行40尺</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 野性之触（触及30尺）<strong>伤害</strong>6d10+10与你幻灵主要打击同种伤害类型</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 自然之声（射程增量100尺）<strong>伤害</strong>6d8+4音波</li>\n<li><strong>重塑大地 <span class=\"action-glyph\">3</span></strong><strong>使用次数</strong>每分钟一次；<strong>效果</strong>你幻灵之足迹使森林生长、群山崩塌。它创造一个@UUID[Compendium.pf2e.spells-srd.kOa055FIrO9Smnya]{石墙术}或@UUID[Compendium.pf2e.spells-srd.KsWhliKfUs3IpW3c]{棘墙术}，犹如以其施放该法术，且法术提升至8阶。</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e-summoners-plus.misc.Item.KWd6yzgaN270nSoh]{灵能现象}</strong>\n<ul>\n<li>速度40尺</li>\n<li>对物理伤害的5抗性</li>\n<li><strong>近战 <span class=\"action-glyph\">1</span></strong> 心智粉碎（触及30尺）<strong>伤害</strong>6d8+4心灵；</li>\n<li><strong>远程 <span class=\"action-glyph\">1</span></strong> 痛苦之念（射程增量60尺）<strong>伤害</strong>6d8+4灵魂；</li>\n<li><strong>异界世界</strong>（奥术，灵能）60尺。奇异现象自显，扭曲并改变你幻灵周围之世界。区域内所有生物获得25尺飞行速度；若已惊惧，则不能将「惊惧」状态降至1级以下。</li>\n</ul>\n</li>\n</ul>"
+        },
+        "Staff of The Eidolon Binder (Greater)": {
+            "name": "幻灵束缚法杖（中阶） Staff of The Eidolon Binder (Greater)",
+            "description": "<p>这柄黑色法杖侧面缠绕白色饰带，其上印刻异界力量之言。其末端镶嵌一颗大型宝石，似乎容纳着整个世界。挥使幻灵束缚法杖时，你可在该回合的第一个动作以免费动作使用@UUID[Compendium.pf2e.actionspf2e.3ZzoI9MTtJFd1Kjl]{共享感官}。</p>\n<p><strong>激活</strong> 施放法术</p>\n<p><strong>效果</strong> 你从法杖中消耗一定数量的充能以从其法术列表中施放一个法术。</p>\n<hr />\n<ul>\n<li><strong>戏法</strong> @UUID[Compendium.pf2e.spells-srd.AfOpnnwdZwHi2Tnc]{守护伙伴}</li>\n<li><strong>1阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n<li><strong>2阶</strong> @UUID[Compendium.pf2e.spells-srd.cwXiKPkZrIupjwlQ]{召唤师警备}、@UUID[Compendium.pf2e.spells-srd.vb2dFNtbofJ7A9BW]{召唤师容颜}</li>\n<li><strong>3阶</strong> @UUID[Compendium.pf2e.spells-srd.gWmLT5SkA0qH2mNE]{淬毒伙伴}、@UUID[Compendium.pf2e.spells-srd.HIY4XUJZKmFLAJTn]{生命联结}</li>\n<li><strong>4阶</strong> @UUID[Compendium.pf2e.spells-srd.A2JfEKe6BZcTG1S8]{飞行术}、@UUID[Compendium.pf2e.spells-srd.HqTI6wRrck1YXp3F]{心灵感应}</li>\n<li><strong>5阶</strong> @UUID[Compendium.pf2e.spells-srd.bay4AfSu2iIozNNW]{放逐术}、@UUID[Compendium.pf2e.spells-srd.R9xqCBblkS5KE4y7]{短讯术}</li>\n<li><strong>6阶</strong> @UUID[Compendium.pf2e.spells-srd.EE7Q5BHIrfWNCPtT]{魔躯术}、@UUID[Compendium.pf2e.spells-srd.TFitdEOpQC4SzKQQ]{符文武器}</li>\n</ul>\n<hr />\n<p><strong>制作要求</strong> 提供所列每阶每个法术各一次的施放。</p>"
+        },
+        "Kaiju Summoner": {
+            "name": "怪兽召唤师 Kaiju Summoner",
+            "description": "<p>你是所有生物（包括最强大的怪兽）之友与召唤者。每日一次，你可将@UUID[Compendium.pf2e.spells-srd.WRP8TDf36hqHyGv1]{召唤怪兽}作为你幻灵传统之内禀法术施放。</p>"
+        },
+        "Elemental Synchronicity": {
+            "name": "元素同步 Elemental Synchronicity",
+            "description": "<p>你与幻灵的攻击灌注元素之力。选择酸性、寒冷、电击或火焰。当你使用「同步强化」之<a class=\"content-link\" draggable=\"true\" data-uuid=\"Compendium.pf2e-summoners-plus.misc.Item.VucxKRn4BC9O3gCf\" data-id=\"VucxKRn4BC9O3gCf\" data-type=\"Item\" data-pack=\"pf2e-summoners-plus.misc\" data-tooltip=\"Feat/Feature Item\"><i class=\"fa-solid fa-medal\"></i>协同连招</a>时，你可将额外伤害由精准伤害更改为所选伤害类型，该打击获得对应特征。此外，每当你或幻灵在你具协同状态时打击重击命中，你额外造成3点同类伤害。10级时该额外伤害提升至6，18级时提升至9。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                },
+                {
+                    "value": "奥术或原始\r\n幻灵传统"
+                }
+            ]
+        },
+        "Aeon Eidolon": {
+            "name": "永恒幻灵 Aeon Eidolon",
+            "description": "<p>你的幻灵是宇宙仲裁者，被相系于你以维持秩序——无论是其宇宙构造或其自然状态的尽职管理。许多永恒幻灵被绑定于凡人是为了追踪他们、用作数据收集点，或防止他们破坏现实。这些幻灵通常对凡人情感颇感生疏，但随时间推移会与召唤师形成紧密羁绊。多数遵从责任、命运、知识或时间，但其他永恒幻灵亦广为存在。</p>\n<p><strong>传统</strong> 神圣</p>\n<p><strong>特征</strong> 永恒，监督者</p>\n<p><strong>本源位面</strong> 律轴界</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 拳（钝击）、武器形态徒手攻击</p>\n<p><strong>永恒执行者</strong> 力量+4，敏捷+2，体质+2，智力+1，感知+1，魅力–1；+2护甲等级（敏捷上限+3）</p>\n<p><strong>永恒裁定者</strong> 力量+1，敏捷+4，体质+1，智力+2，感知+2，魅力–1；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 宗教、社交</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 律法语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.j5iyHf7n3wylwfgt]{命定之路}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.JZ0TTfEBz6NdeWSA]{漫游之路}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.B8lMu6Q79ZpQnPTI]{路途仲裁者}</p>"
+        },
+        "Bizarre Surge": {
+            "name": "诡奇涌动 Bizarre Surge",
+            "description": "<p>你提取未来之秘密以重塑幻灵之形态，进化出适合当前所面问题的特征与构造。当你施放@UUID[Compendium.pf2e.spells-srd.Item.lV8FkHZtzZu7Cy6j]{进化浪潮}时，可在常规效果之外另选下列效果：</p>\n<ul>\n<li>你的幻灵获得回声定位，将听觉作为精确感官，距离至多20尺。</li>\n<li>你的幻灵对心灵伤害获得抗性，数值等于你等级一半。</li>\n</ul>\n<hr />\n<p><strong>提升（3阶）</strong>你的幻灵在意志豁免上获得+1状态加值。</p>\n<p><strong>提升（5阶）</strong>你的幻灵获得生命感作为不精确感官，距离至多30尺。</p>\n<hr />\n<p>@UUID[Compendium.pf2e-summoners-plus.misc.04ZqXLhTtwsh9jlq]{法术效果：诡奇涌动}</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术或灵能幻灵传统"
+                },
+                {
+                    "value": "进化浪潮聚能法术"
+                }
+            ]
+        },
+        "Kindred Warrior Dedication": {
+            "name": "并身武者献身 Kindred Warrior Dedication",
+            "description": "<p>你与幻灵已习于并肩作战、轻松应敌。你即便不满足前置条件也获得@UUID[Compendium.pf2e.feats-srd.qmx8QwVepqI9FqiD]{同步移动}职业专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "协同"
+                }
+            ]
+        },
+        "Archon (Angel) Eidolon": {
+            "name": "执政天使（天使）幻灵 Archon (Angel) Eidolon",
+            "description": "<blockquote>\n<p>你的幻灵是天堂之山的原住者之一；正义之兵，具多头、多目与火焰元素。</p>\n</blockquote>\n<p>你的幻灵是天界使者——天使军团的一员，具与你独特的链结，使其能与你并肩将特殊讯息带至凡间。多数天使幻灵大致呈人形，具羽翼、闪光之眼、光环或其他天使特征。然而有些则化作较小天使仆从，如戴翼盔的卡西斯天使。你们二者注定在天界领地的计划中扮演重要角色。虽其为真正天使，但你天使幻灵与作为凡人之你的链结，使其无法施放天使使者仪式——纵然它以某种方式习得该仪式。</p>\n<p><strong>传统</strong> 神圣</p>\n<p><strong>特征</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为天使\">执政天使</span>，天界，幻灵</p>\n<p><strong>阵营</strong> 必为善良，通常为中立善良</p>\n<p><strong>本源位面</strong> 天堂</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 拳（钝击）、翼（钝击）、武器形态徒手攻击</p>\n<p><strong>天使惩罚者</strong> 力量18，敏捷14，体质16，智力8，感知12，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>天使使者</strong> 力量12，敏捷18，体质12，智力10，感知12，魅力14；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> <span style=\"text-decoration:underline\" data-tooltip=\"原为外交\">威吓</span>、宗教</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 天界语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> 初始 @UUID[Compendium.pf2e-animal-companions.AC-Features.WyN2qQ2AP4cOMNxF]{神圣打击}；<span style=\"text-decoration:underline\" data-tooltip=\"原为旅人光环\">共生</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.1GrcVMZtL3xAay6x]{勿要惧怕！}；<span style=\"text-decoration:underline\" data-tooltip=\"原为天使慈悲\">超越</span> @UUID[Compendium.pf2e-summoners-plus.misc.Item.BwexjD0jncLH4bY3]{震慑击}</p>"
+        },
+        "Synchronized Counter": {
+            "name": "同步反击 Synchronized Counter",
+            "description": "<p><strong>触发</strong>你或幻灵对一生物的打击失败。</p>\n<p><strong>需求</strong>你具协同状态，且你与幻灵都能对触发生物进行打击。</p>\n<hr />\n<p>当你们之一无法把握攻击之机时，另一方则补上其位。你或幻灵以与触发打击相同的多重攻击减值对触发生物进行一次打击。若你的打击为触发动作，则该打击由你的幻灵进行；若幻灵的打击为触发动作，则你进行该打击。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Dragon Eidolon+": {
+            "name": "龙幻灵+ Dragon Eidolon+",
+            "description": "<p>因龙与魔法关联深厚，其心智常会在星界留下回响。这等存在虽极为强大，却无法独自与外界交互。龙幻灵以其生前强大的鳞甲之形显现；多数化作真龙形态（虽然较小），但有些显现为飞龙或其他龙族生物。你已与这等龙幻灵结成连结，并寻求一同成长，强大如远古巨龙。</p>\n<p><strong>传统</strong> 选择与你的龙相关联的传统，并以所选传统施法。</p>\n<p><strong>特征</strong> 星界，龙，幻灵，与所选传统对应的特征，及一项额外特征（参见喷吐武器）</p>\n<p><strong>本源位面</strong> 星界</p>\n<p><strong>体型</strong> 中型</p>\n<p><strong>建议攻击</strong> 爪（挥砍）、颚（穿刺）、角（穿刺）、尾（钝击）、翼（钝击）</p>\n<p><strong>劫掠之龙</strong> 力量18，敏捷14，体质16，智力10，感知10，魅力10；+2护甲等级（敏捷上限+3）</p>\n<p><strong>狡黠之龙</strong> 力量12，敏捷18，体质12，智力14，感知10，魅力12；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 威吓，与你施法传统相关联的一项技能</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 龙语</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> 初始 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.I8fG26JJS29ZYwfZ]{喷吐武器}；共生 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.oSjJ726kv8wvk1Rb]{龙之狂怒}；超越 @UUID[Compendium.pf2e-animal-companions.AC-Features.Item.P7qw5V2ylPwCWMPB]{古龙吐息}</p>"
+        },
+        "Tandem Casting": {
+            "name": "同步施法 Tandem Casting",
+            "description": "<p>你与幻灵以共同目标协调施法。若你或幻灵下一动作为施放2动作或更短之法术，则该法术获得同步特征，且你们之中另一方可在同一活动中施放一个所用动作数不多于该法术的法术。若该法术以特定生物为目标，则两个法术须共同至少以一个相同生物为目标；若该法术具区域效果，则两个法术须以重叠区域为目标，或（当法术不针对区域时）以区域内某生物为目标。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔法导师"
+                },
+                {
+                    "value": "能从法术位施放法术之能力"
+                }
+            ]
+        },
+        "Duo Assault": {
+            "name": "双重突击 Duo Assault",
+            "description": "<p>你与幻灵协调进攻。当你们各自威胁敌人时，无论是否处于协同状态，敌人对你们二人皆@UUID[Compendium.pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}。若你具协同状态，当你或幻灵成功打击一生物时，该生物对你们二人皆措手不及至下回合开始。</p>",
+            "prerequisites": [
+                {
+                    "value": "并身武者献身"
+                }
+            ]
+        },
+        "Genie Eidolon": {
+            "name": "巨灵幻灵 Genie Eidolon",
+            "description": "<p>你的幻灵是巨灵，作为大使与赞助者支持你的冒险事业，引导你与其共同走向终极目的——常将该巨灵授予「树叩」之衔。巨灵幻灵通常为元素位面四大显著巨灵之一：法易丹、伊弗利特、佳萨睦或佳巴里。然而其他类型巨灵希望与凡人结成羁绊的情形并不罕见。</p>\n<p><strong>传统</strong> 奥术</p>\n<p><strong>特征</strong> 幻灵，巨灵</p>\n<p><strong>本源位面</strong> 与其巨灵化身相对应的元素位面</p>\n<p><strong>体型</strong> 中型或小型</p>\n<p><strong>建议攻击</strong> 拳（钝击）、武器形态徒手攻击</p>\n<p><strong>巨灵宿敌</strong> 力量+4，敏捷+2，体质+2，智力+0，感知+0，魅力+1；+2护甲等级（敏捷上限+3）</p>\n<p><strong>巨灵信使</strong> 力量+1，敏捷+4，体质+1，智力+0，感知+1，魅力+2；+1护甲等级（敏捷上限+4）</p>\n<p><strong>技能</strong> 奥秘，由你巨灵化身决定的另一项技能</p>\n<p><strong>感官</strong> 黑暗视觉</p>\n<p><strong>语言</strong> 海洋语（法易丹）、火元语（伊弗利特）、风语（佳萨睦）、岩语（佳巴里）、土语（基兹哈）或滔语（祖乎拉）</p>\n<p><strong>速度</strong> 25尺</p>\n<p><strong>幻灵能力</strong> <em>初始</em> @UUID[Compendium.pf2e-summoners-plus.misc.lTnwOn1sqVIKG4Bd]{巨灵化身}；<em>共生</em> @UUID[Compendium.pf2e-summoners-plus.misc.uWDckJaTio7jsmzp]{巨灵之力}；<em>超越</em> @UUID[Compendium.pf2e-summoners-plus.misc.QNwQmJ6xABx30vWG]{舒由可崛起}</p>"
+        },
+        "Symbiotic Evolution": {
+            "name": "共生进化 Symbiotic Evolution",
+            "description": "<p>你与幻灵之链结开始反映在你自身的生理之上。你获得一个你幻灵当前已具有、阶级不大于你等级一半（最低1）的进化专长。你仍须满足该进化的任何前置条件或需求。例如，你可取@UUID[Compendium.pf2e-summoners-plus.items.PnVEfLnuSnBKHtGC]{诡奇色变}以发展类似伪装的肤色，但你不能取@UUID[Compendium.pf2e.feats-srd.kFpVgcqREAfDmjXp]{高级武艺}，因你不具幻灵之主要徒手攻击。只要进化专长不要求你缺乏的生理特征，你便可取得此等专长（由GM裁定）。</p>\n<p><strong>特别</strong>此专长可多次取得，每次为自身额外获得一个新的进化专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "至少一项具进化特征的专长"
+                }
+            ]
+        },
+        "Swarm Body": {
+            "name": "虫群之躯 Swarm Body",
+            "description": "<p>你的幻灵是一群作为单一生物运作的生物群，并获得「群」特征。其体型保持不变，但其改由超小型的小生物个体构成。你的幻灵群可与其他生物占据同一方格——使用「群体攻击」时必须如此。</p>\n<p>你的幻灵群没有徒手攻击，但获得一项群体攻击：造成1d6钝击、穿刺或挥砍伤害（在你获得幻灵时选定）。如果你的幻灵应获得需进行打击的、具幻灵特征之能力（如@UUID[Compendium.pf2e-animal-companions.AC-Features.ITQghUQFhbYpD2QM]{野兽冲锋}），幻灵可以群体攻击代替打击。该群体攻击在以单一动作使用时，对其方格内所有生物生效；以基础反射豁免对抗10+你幻灵徒手攻击调整值（含威能符文物品加值）。</p>\n<p>原本会因你群体幻灵徒手打击成功命中而生效之效果，将适用于豁免失败的生物；原本会因重击命中而生效之效果，将适用于大失败的生物。</p>\n<p>若你的幻灵具远程攻击（如来自@UUID[Compendium.pf2e.feats-srd.oVSlTmdmho8ZQo2k]{远程战士}专长），则你的群体幻灵每回合可使用群体攻击一次，伤害类型、伤害骰与射程同其远程徒手攻击，针对该射程内一个5尺方格内的所有生物。</p>\n<p>你的幻灵群免疫受擒、倒地与束缚状态，对精准伤害有等于你等级的抗性，对范围伤害与溅射伤害有等于你等级的弱点。你的幻灵并非单一心智，免疫仅针对特定数量生物的心灵效果，但仍受影响所有区域内生物的心灵效果。由于你的幻灵没有徒手攻击，它无法提供夹击。</p>\n<p><strong>特别</strong>若你取得@UUID[Compendium.pf2e.feats-srd.kFpVgcqREAfDmjXp]{高级武艺}专长，你幻灵之群体攻击在大失败时使目标@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心2级}。若你的幻灵获得@UUID[Compendium.pf2e.feats-srd.0PCDkVnRxVqxsp9j]{能量之心}专长，你群体幻灵之群体攻击伤害类型变为你所选类型。你可如同它是与其总体型相同的生物般@UUID[Compendium.pf2e.actionspf2e.PM5jvValFkbFH3TV]{骑乘}你的幻灵。</p>"
+        },
+        "Tandem Step": {
+            "name": "同步快步 Tandem Step",
+            "description": "<p>你与幻灵可一同小心移动。你们各自以单一动作进行快步。</p>"
+        }
+    }
+}

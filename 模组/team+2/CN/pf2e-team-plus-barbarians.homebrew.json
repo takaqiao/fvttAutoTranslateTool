@@ -1,0 +1,30 @@
+{
+    "moduleId": "pf2e-team-plus-barbarians",
+    "moduleTitle": "Barbarians+",
+    "homebrew": {
+        "baseWeapons": {
+            "axewheel": "斧轮 Axewheel",
+            "dire-lance": "恐怖长枪 Dire Lance",
+            "doubleblade": "双刃剑 Doubleblade",
+            "forestbutcher": "森林屠夫 Forestbutcher",
+            "fullsword": "阔剑 Fullsword",
+            "grip-needle": "握针 Grip Needle",
+            "moonscythe": "月镰 Moonscythe",
+            "mountain-hammer": "山岳重锤 Mountain Hammer",
+            "gigauntlets": "巨型护臂 Gigauntlets",
+            "mouthsword": "口剑 Mouthsword",
+            "palintonos-bow": "帕林托诺斯弓 Palintonos Bow",
+            "ship-chain": "舰船锁链 Ship Chain"
+        },
+        "weaponTraits": {
+            "modular-moonscythe": {
+                "label": "模块化（穿刺、叠劲、镐或挥砍、横扫、长武） Modular (P, Forceful, and Pick or S, Sweep, and Polearm)",
+                "description": "PF2E.TraitDescriptionModular"
+            },
+            "overkill": {
+                "label": "过度杀伤 Overkill",
+                "description": "具有过度杀伤特征的武器极难使用，除非你受到肾上腺素驱动或经过专门训练。除非你处于狂暴状态，否则你每轮无法使用过度杀伤武器超过一次，也不能将其用于反应（例如反应打击）的打击中。当你以过度杀伤武器进行打击并获得大成功时，你可以选择在该打击目标所占的方格中创造困难地形，以此替代该武器原本的关键专精效应。"
+            }
+        }
+    }
+}

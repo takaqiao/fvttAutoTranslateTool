@@ -1,0 +1,643 @@
+{
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "label": "惊世奇土+ 专长 Impossible Lands+ Feats",
+    "entries": {
+        "Wall Rider": {
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ],
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>通过先进的工程技术或压倒性的速度，你可以骑着改装车跨过陡峭的障碍。你的改装车获得等同于速度的攀爬速度，但是你必须在水平表面上结束移动。</p>",
+            "name": "骑墙手 Wall Rider"
+        },
+        "Reckless Rider": {
+            "name": "鲁莽骑手入门 Reckless Rider Dedication",
+            "description": "<p>你驾驶一辆由炼金引擎或发条装置驱动的两轮载具在简陋的街道上巡航，当你执行各种各样的冒险特技时，它的性能会超出你的期待。你获得一辆改装机车。这辆车使用@UUID[Compendium.pf2e.vehicles.Actor.fiSvQBWyyJuXnVvn]{自动机车 Automated Cycle}的数据，除了它为中型，5尺宽，并且无法携带乘客，也没有挎斗。你和这辆机车有着密切的羁绊，骑着它的时候你可以完成最疯狂的特技。</p>\n<p>你不断地调教你的座驾，每当你升级的时候，它的AC、强韧豁免、和硬度都会增加1点，生命值增加10点，破损阈值增加5点。当你驾驶你的改装机车时，如果你使用驾驶学识，则驾驶DC是你等级的标准DC；如果你使用其他技能，则DC是你等级的困难DC。你载具的碰撞DC等于你的职业DC或你的法术DC，以更高的为准。当你使用@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]{碾压 Run Over}动作时，你可以尝试碾过体型不大于小型的生物。</p>\n<p><strong>特殊</strong> 在你从鲁莽骑手变体中获得两个其他专长之前，你无法获得其他入门专长。</p>",
+            "prerequisites": [
+                {
+                    "value": "驾驶学识受训"
+                }
+            ]
+        },
+        "Riding Reload": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>你临时用膝盖控制你的机车，腾出手来装填武器。你花费一个单动作进行@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}，然后以交互动作装填。</p>",
+            "name": "骑乘装填 Riding Reload",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ]
+        },
+        "Modified Machine": {
+            "description": "<p>你升级了你机车的动力和效能，赋予它新的能力。你的改装机车的速度增加10尺，并且它的碰撞伤害增加到[[/r 3d8]]。在你的回合结束时，如果你未使用@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}动作，你能以一个自由动作进行一次单独的驾驶动作。当你使用@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]{碾压 Run Over}动作时，你可以尝试撞击体型不大于中型的生物，或碾过体型不大于小型的生物。机车活动时间增加到2小时，之后才需要再次上发条。</p>",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ],
+            "name": "改进机车 Modified Machine"
+        },
+        "Wheelie": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>你在骑乘时抬起车头，以后轮为支点前进，让机车遮挡你的身体。你进行@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}，获得你花费动作数量相同的驾驶动作效果。在此移动期间，你对敌人获得标准掩蔽。</p>",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ],
+            "name": "后轮特技 Wheelie"
+        },
+        "Crashing Dismount": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>你故意让你的机车侧滑，你则在机车撞击敌人的同时跳至安全位置。尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]{碾压 Run Over}动作，并且当你准备跳车时，尝试一次驾驶检定，对抗你等级的困难DC。你在跳车之前，你的改装机车必须前进至少20尺，否则你的检定结果视为下降一个成功度。</p>\n<hr />\n<p><strong>大成功</strong> 你不受碰撞伤害，并且你将在第一个受影响的目标的最远10尺范围内安全落地。如果你选择撞击目标，则目标@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>\n<p><strong>成功</strong> 类似大成功，但被撞击的目标不会倒地。</p>\n<p><strong>失败</strong> 你受到载具一半的撞击伤害，并且在第一个受影响的目标相邻的地方落地，并且你载具的移动立即结束。</p>\n<p><strong>大失败</strong> 类似失败，但你落地的时候倒地。</p>",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ],
+            "name": "冲撞跳车 Crashing Dismount"
+        },
+        "Advanced Machine": {
+            "name": "高级机车 Advanced Machine",
+            "description": "<p>你继续改装你的机车，进一步改善它的操纵性。你的改装机车的速度增加10尺，碰撞伤害增加到5d10。从手艺、欺骗、交涉、威吓、表演或贼活中选择一项。当你骑乘改装车时，你相应技能的技能检定有+1物品加值。当你使用@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]{碾压 Run Over}动作，你可以尝试撞击体型不大于大型的生物，或碾过体型不大于中型的生物。机车活动时间增加到4小时，之后才需要再次上发条。</p>",
+            "prerequisites": [
+                {
+                    "value": "改进机车"
+                }
+            ]
+        },
+        "Burn Rubber": {
+            "description": "<p><strong>频率</strong> 每小时一次</p>\n<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>你同时踩住刹车和油门，导致烟雾、灰尘和碎石在你的机车周围翻滚。你以改装机车为中心，创造@Template[burst|distance:20]范围的烟雾，效果类似<em>@UUID[Compendium.pf2e.spells-srd.Item.GKpEcy9WId6NJvtx]{臭云术 Stinking Cloud}</em>，但持续时间只有1轮。你能通过在下个回合使用至少一个单独的@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}动作，在原地旋转你的车轮，以延长效果的持续时间。此效果的DC等于你载具的碰撞DC。你对自己的烧胎行动尝试豁免时，有+2环境加值。</p>",
+            "name": "烧胎 Burn Rubber",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ]
+        },
+        "Wave Rider": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<hr />\n<p>即便是水面也无法减慢你的速度。当你沿着直线@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}时，如果你在坚实地表上至少移动了速度的一半距离，你可以在不增加驾驶DC的情况下，在平静水面或高等困难地形上移动剩余的距离。如果你没有在坚实地表上结束移动，你将从你的改装机车上跌落，你的改装机车会倾倒@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]（或者如果你经过水体的话，你会掉进水里）。</p>",
+            "name": "弄潮儿 Wave Rider",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ]
+        },
+        "Ride Along": {
+            "description": "<p><strong>需求</strong> 你在你的改装机车背上开始你的回合，你和一个盟友相邻，并且你有一只或更多空着的手。</p>\n<hr />\n<p>你抓住你的盟友并且迅速用改装机车带着他在战场上移动。尝试擒获一个相邻的自愿盟友，盟友的体型不能超过你，然后尝试一次单独的@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}动作。你能在驾驶途经过任意一个未被占据方格时松开（Release）他，或者当你驾驶结束时将其放开在你相邻的方格内。你的盟友将以站立姿态结束移动，并且如果他至少位于一个敌人的近战触及范围内，他能以一个反应动作对触及范围内的敌人进行一次近战打击。</p>",
+            "name": "开便车 Ride Along",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ]
+        },
+        "Incredible Machine": {
+            "description": "<p>你的改装机车成为工程学的奇迹。你的改装机车速度增加10尺，碰撞伤害变为10d10。你高阶机械专长所选择的技能的物品加值增加到+2。当你使用碾压（Run Over）动作，你可以尝试撞击体型不大于超大型的生物，或碾过体型不大于大型的生物。机车活动时间增加到8小时，之后才需要再次上发条。</p>",
+            "name": "惊人机车 Incredible Machine",
+            "prerequisites": [
+                {
+                    "value": "高级机车"
+                }
+            ]
+        },
+        "Road Rash": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车</p>\n<p>开阔道路可能让人苦恼，因为敌人将很快发现你。你@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}，获得你花费动作数量相同的驾驶动作效果。在此移动期间，你能试图抓住一个相邻的敌人，敌人不能超过你可以@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]{碾压 Run Over}的体型。尝试一次驾驶学识或@Check[athletics]检定对抗敌人的强韧DC，成功后能拖着敌人和你一起移动。你能在移动的任意一点放开敌人，如果你移动结束时仍然@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]敌人的话，你必须将其丢下。这是个强迫移动效果。</p>\n<hr />\n<p><strong>大成功</strong> 敌人受到你载具的碰撞伤害，并且当你丢下目标后它会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>\n<p><strong>成功</strong> 类似成功，但敌人受到一半伤害。</p>\n<p><strong>失败</strong> 敌人提前挣脱。敌人只移动10尺，不会倒地，也不受伤害。</p>\n<p><strong>大失败</strong> 敌人在你经过时将你从车上拉了下来。你在敌人的一个相邻空间内倒地，并且你的改装机车继续移动以远离你，直到在驾驶动作预定的终点停下。</p>",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ],
+            "name": "公路冲刺 Road Rush"
+        },
+        "Tethering Cable": {
+            "description": "<p><strong>需求</strong> 你正骑乘你的改装机车，并且你有一只空手</p>\n<hr />\n<p>你在机车后面拖着一根电缆、链条或绳子，当你绕着敌人转圈的时候，会把他捆得越来越紧。你@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}，获得你花费动作数量相同的驾驶动作效果。如果你在开始时的方格内结束你的驾驶，并且围绕一个敌人骑了一圈，你可以尝试@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}他，无论他的体型为多大，并且可以使用驾驶学识的熟练度代替你的运动技能。如果你检定大成功，目标会还会被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]1轮，之后缆绳会松开。</p>",
+            "name": "催命索 Tethering Cable",
+            "prerequisites": [
+                {
+                    "value": "鲁莽骑手入门"
+                }
+            ]
+        },
+        "Miraculous Machine": {
+            "description": "<p>你的改装机车是个真正令人惊叹的工程实例。你的改装机车速度增加10尺，碰撞伤害变为15d10。你高阶机械专长所选择的技能的物品加值增加到+3。当你使用碾压动作，你可以尝试撞击体型巨形生物，或碾过体型不大于超大型的生物。</p>",
+            "name": "奇迹机车 Miraculous Machine",
+            "prerequisites": [
+                {
+                    "value": "惊奇机车"
+                }
+            ]
+        },
+        "Stable Rider": {
+            "name": "稳定骑手 Stable Rider",
+            "description": "<p>你能瞬间调整你的重心，让你能完成大胆特技。当你驾驶你的改装机车时，你在尝试带有[鲁莽]特征动作时，驾驶检定有+2环境加值。</p>"
+        },
+        "Chariot of the Gods": {
+            "name": "诸神战车 Chariot of the Gods",
+            "description": "<p>你的载具展现了由你神祇所授予的强大力量。载具获得等同于地面速度的飞行速度。它的HP增加40并且BT增加20。此外，你获得@UUID[Compendium.impossible-lands.impossible-lands-actions.sR6Ymz3GusR2jni2]{呼唤载具 Call Vehicle}动作。</p>",
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ]
+        },
+        "Corrupt Collision": {
+            "name": "腐化冲撞 Corrupt Collision",
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                },
+                {
+                    "value": "虔诚法术 - 腐化之触"
+                }
+            ],
+            "description": "<p>你的载具充满了邪恶力量。当尝试@UUID[Compendium.pf2e.actionspf2e.Item.lID4rJHAVZB6tavf]动作时，你可以在载具上释放<em>@UUID[Compendium.pf2e.spells-srd.Item.jFmWSIpJGGebim6y]</em>。你的法术与你试图和影响你碾压的敌人，但只对碰撞的第一个敌人生效。碰撞的伤害和你<em>@UUID[Compendium.pf2e.spells-srd.Item.jFmWSIpJGGebim6y]</em>的伤害合并，敌人只需进行一次单独的@Check[reflex|basic|against:class]豁免，对抗你的职业DC。</p>"
+        },
+        "Divine Stability": {
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ],
+            "name": "神圣稳定 Divine Stability",
+            "description": "<p>在你的控制下，你的载具更加稳定。如果你的载具在上一轮中移动过，你不会因为搭乘载具而在攻击上受到减值。如果你的载具不受控制，或你的载具在上一轮中进行过[鲁莽]动作，那么你的攻击减值为-2。</p>"
+        },
+        "Efficient Motion": {
+            "name": "高效机动 Efficient Motion",
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ],
+            "description": "<p><strong>触发</strong> 你的回合开始</p>\n<hr />\n<p>你和载具的联系加深了 ，它可以轻松地载你去战场的每个角落。你@UUID[Compendium.pf2e.actionspf2e.Item.bG91dbtbgOnw7Ofx]{搭乘 Board}或@UUID[Compendium.pf2e.actionspf2e.Item.uS3qDAgOkZ7b8ERL]{驾驶 Drive}你的载具盟友。</p>"
+        },
+        "Forceful Conveyance": {
+            "name": "强力载具 Forceful Conveyance",
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ],
+            "description": "<p>当你亲手指挥你的载具时，它就会变成一个预示着毁灭的引擎。当你搭乘它时，它的外观会发生改变，因为它的轮胎、发动机或顶盖会燃烧着神圣的能量。当你驾驶你的载具盟友时，如果你是善良信条，你可以选择命能，如果你是邪恶信条，你可以选择虚能。只要你搭乘载具，你的载具就会获得相反伤害类型的10点抗力，任何触碰你载具的生物都会受到所选伤害类型的1d6点伤害；这包括生物用无武装攻击攻击载具、生物和载具相邻且用近战武器打击载具、以及你的载具和其他载具发生碰撞伤害的情况。在16级时，伤害增加到2d6，在20级时，伤害增加到3d6。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.3piaFOaX3MPRC6jt]{效果：强力载具}</p>"
+        },
+        "Holy Repair": {
+            "name": "神圣修复 Holy Repair",
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 （载具）"
+                },
+                {
+                    "value": "虔诚法术（圣疗）"
+                }
+            ],
+            "description": "<p>你对载具的虔诚意味着你可以召唤你的神祇来修复它的损伤。即便你的载具不是生物，你也可以对它施展<em>@UUID[Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS]{圣疗 Lay on Hands}</em>。当你如此做时，你可以修复10点生命值，法术每升一阶额外增加10点生命值。</p>\n<p>[[/r 10*ceil(@actor.level/2)]]{圣疗治疗量}</p>"
+        },
+        "Powerful Momentum": {
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ],
+            "name": "猛力冲击 Powerful Momentum",
+            "description": "<p>你使用你载具的惯性来增强你的攻击。当你驾乘载具时，你所持握的近战武器获得[骑战d6]，在判断是否满足骑战特征的需求时，你驾驶载具就视同为骑乘。如果武器或无武装攻击已经具有骑战特征，则将骑战的伤害骰增加一级，取代原本的d6。</p>\n<p><em>注意：骑战增加的骰面需要手动调整。或者，你可以通过修改规则元素达成这一效果。</em></p>"
+        },
+        "Spiritual Shielding": {
+            "prerequisites": [
+                {
+                    "value": "神圣盟友 - 载具"
+                }
+            ],
+            "name": "圣灵护盾 Spiritual Shielding",
+            "description": "<p><strong>触发</strong> 一个生物把你的载具作为攻击目标，并且你可以看到攻击者</p>\n<p><strong>需求</strong> 你正骑乘你的载具</p>\n<hr />\n<p>你呼唤神祇保护你的圣灵盟友，对触发的攻击在AC上有+1环境加值。如果攻击依然命中，你的载具获得针对此次攻击的全伤害抗力，数值等于2+你的等级。</p>"
+        },
+        "Advanced Tutelage": {
+            "prerequisites": [
+                {
+                    "value": "陵墓门徒入门"
+                }
+            ],
+            "name": "进阶指导 Advanced Tutelage",
+            "description": "<p>你进阶了你的学业，并将学院的指导发扬光大。你获得了黑色陵墓门徒的高阶聚能法术<em>@UUID[Compendium.impossible-lands.impossible-lands-spells.OpOJ4sInlNGm2PmI]{命流逆转 Invert Lifeforce}</em>。如果你已经通过职业调整获得了<em>命流逆转</em>，你可以选择你职业被替换掉的原始聚能法术。或者，你可以选择一项@UUID[Compendium.impossible-lands.impossible-lands-feats.Kz9YLvkIOLWj0nLI]{陵墓门徒入门 Student of the Ebon Mausoleum Dedication}专长中你未选择的其他可选项。</p>"
+        },
+        "Agitate Undead": {
+            "name": "鼓动不死 Agitate Undead",
+            "description": "<p>你鼓动你召唤的亡灵横冲直撞。当你施放<em>@UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]{召唤亡灵 Summon Undead}</em>或其他可以让你召唤带有仆从特征的不死生物的法术时，你可以花费2个动作维持法术，当你如此做时，你召唤的不死生物将有一个额外动作可用。</p>"
+        },
+        "Basic Spelldancer Spellcasting": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ]
+        },
+        "Counter Animation": {
+            "prerequisites": [
+                {
+                    "value": "陵墓门徒入门"
+                }
+            ],
+            "name": "反制活力 Counter Animation",
+            "description": "<p><strong>触发 </strong>一个生物施放一道来自死灵学派或咒法学派的法术。</p>\n<p><strong>需求</strong> 你的最后一个动作是施放一个非戏法法术。</p>\n<hr />\n<p>你精通死灵系法术，召唤不死仆从意味着你可以用它们来反制敌人的类似魔法。当一个敌人施放死灵系或咒法系法术，并且你可以看到法术显现时，你可以使用自己的法术来打断它。你失去一个死灵系法术，就如同你已经施放它一般。然后你尝试用你自己的法术反制触发的法术。</p>"
+        },
+        "Dance Partner": {
+            "name": "舞伴 Dance Partner",
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ],
+            "description": "<p>你指定一个盟友作为你的舞伴1分钟，并分享一些芭蕾舞动作的优雅给他。你必须能看到和听到你的舞伴，他也必须能看到或听到你。只要你的舞伴和你相邻，他的特技检定和反射豁免就有+1环境加值。你一次只能指定一个舞伴，指定新舞伴会立刻结束你对之前舞伴的影响。你获得@UUID[Compendium.impossible-lands.impossible-lands-actions.3i8T8IQmeTbzkOLN]{配对移动 Paired Movement}自由动作。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.dhNfdFt3yURxjsWk]{效果：舞伴 （标记）}</p>"
+        },
+        "Dancing Flicker": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ],
+            "name": "摇曳舞蹈 Dancing Flicker",
+            "description": "<p><strong>开销 </strong>耗费一个法术位</p>\n<hr />\n<p>你的身体优雅地舞动，随着魔法力量逐渐增强，你的动作以致命的节奏爆发。你打击，然后快步。打击造成所耗费法术的环级2倍的额外伤害。如果法术带有元素特征，额外伤害将带有相同的伤害类型，否则的话，额外伤害和你用于打击的武器的伤害类型相同。</p>"
+        },
+        "Dancing on Air": {
+            "name": "乘风而舞 Dancing on Air",
+            "prerequisites": [
+                {
+                    "value": "舞伴"
+                }
+            ],
+            "description": "<p><strong>需求</strong> 你和你的舞伴相邻，并且你至少有一只空手</p>\n<hr />\n<p>你紧紧拥抱你的舞伴，然后像微风中飘动的树叶一样在空中跳跃。你可以在不接触地面的情况下向任何方向@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}30尺，并且你的舞伴可以花费一个反应动作和你一起跳跃。你必须落在坚实表面上，否则你和你的舞伴将在使用你的下个动作后或在你的回合结束后@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，以先发生的为准。你和你的舞伴在着陆时彼此相邻，或者如果你们中有一个人将倒地的话，你们会在同一个方格中倒地。</p>"
+        },
+        "Danse Macabre": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                },
+                {
+                    "value": "表演技能熟练度为传奇"
+                }
+            ],
+            "name": "死亡之舞 Danse Macabre",
+            "description": "<p>你跳起最令人心碎的舞蹈，姿态美丽而可怕，观众会产生一种无法抗拒的冲动来表演死之舞。选择一个你视线内可以看见的生物。该生物必须对你的职业DC或法术DC尝试@Check[will|against:class-spell]豁免，以更高的为准。死之舞使用苦难的规则。</p>\n<p><strong>最大持续时间</strong> 5轮</p>\n<p><strong>阶段1</strong> 生物受到@Damage[5d6[mental]]伤害，并且陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，因为他开始跳舞（1轮）</p>\n<p><strong>阶段2</strong> @Damage[6d6[mental]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[7d6[mental]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 3}（1轮）</p>\n<p><strong>阶段4</strong> 舞蹈迎来了它绚丽的终局。生物在一阵狂喜中被杀死。</p>"
+        },
+        "Effortless Command": {
+            "prerequisites": [
+                {
+                    "value": "陵墓门徒入门"
+                }
+            ],
+            "name": "轻松下令 Effortless Command",
+            "description": "<p><strong>频率 </strong>每轮一次</p>\n<hr />\n<p>你在转念之间对亡灵发出指令。你立即对你施放的一个召唤不死生物的法术进行维持法术动作。如果你在本轮中已经维持过这个法术，你无法对其使用轻松下令。</p>"
+        },
+        "Electric Slide": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ],
+            "name": "带电舞步 Electric Slide",
+            "description": "<p><strong>开销 </strong>耗费一个法术位</p>\n<hr />\n<p>你的双脚因为魔法力量劈啪作响，你向前迈出一系列炽热的步伐，在身后留下了一道电幕。</p>\n<p>你行走或@UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{翻滚 Tumble Through}。在此行动期间，你无视困难地形和高等困难地形。在此移动中，你在你离开的每个方格内创造一道10尺高的电幕，持续到你的下个回合结束。任何在电幕内开始回合或试图经过电幕的生物，受到消耗的每个法术环级@Damage[1d6[electricity]]伤害，@Check[reflex|basic|against:class-spell]豁免，对抗你的职业DC或法术DC，以更高者为准。</p>"
+        },
+        "Enhanced School Project": {
+            "name": "强化学院课题 Enhanced School Project",
+            "description": "<p>你一直在努力修补你的学院课题。你每天可以选择两个额外魔宠能力，但其中一个必须是以下能力之一。你只能同时从下列魔宠能力中选择1个。你不能同时选择1项以上的摧毁魔宠能力。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.Ozj57uM68ERfphp0]{死亡连接 Deathlink}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.BEEZLKHKzTayWYLE]{爆炸死亡 Explosive Death}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.j827327z1qcUY30w]{盛宴 Feast}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.jsaAgt4Kcezxgbkj]{尖叫头颅 Screaming Head}</p>"
+        },
+        "Incredible School Project": {
+            "prerequisites": [
+                {
+                    "value": "强化学院课题"
+                }
+            ],
+            "name": "惊人学院课题 Incredible School Project",
+            "description": "<p>你继续改进你的学院课题。你每天可以选择两个额外魔宠能力，但其中一个必须是以下能力之一。你只能同时从下列魔宠能力中选择1个。你不能同时选择1项以上的摧毁魔宠能力。</p>\n<p>当你的魔宠生命值减少到0时，你可以通过死灵魔法取回它的精华，并在下次日常准备中恢复它的不死生命。</p>\n<p>以下魔宠能力现在可用：</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.idGuzEx55LBzovBF]{短暂修复 Brief Restoration}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.NchmA18NwEGWkCCq]{爆炸恶臭 Explosive Stench}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.vzbcY13TBuTg7mXI]{魔宠依附 Familiar Hug}</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.lISHwqW5BVFfWPqa]{逆转腐化 Reverse Rot}</p>"
+        },
+        "Metabolize Decay": {
+            "prerequisites": [
+                {
+                    "value": "陵墓门徒入门"
+                }
+            ],
+            "name": "代谢衰败 Metabolize Decay",
+            "description": "<p><strong>触发</strong> 敌人带有[死灵系]或[虚能]特征的法术或效果让你受到伤害</p>\n<hr />\n<p>你可以快速代谢对手法术中的死灵能量以获得能量提升。你获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态直到你的下个回合结束。你的额外动作只能用于行走或快步。</p>"
+        },
+        "Nature's Tapestry": {
+            "name": "自然帷幕 Nature's Tapestry",
+            "prerequisites": [
+                {
+                    "value": "精类派系"
+                }
+            ],
+            "description": "<p>你的精类影响赋予你对自然色彩更广的识别能力。在森林或类似原始的自然环境中，你在察觉检定、隐秘检定、对抗幻术系效果的豁免检定上有+1环境加值。</p>"
+        },
+        "Paired Opportunist": {
+            "name": "伺机拍档 Paired Opportunist",
+            "prerequisites": [
+                {
+                    "value": "舞伴"
+                }
+            ],
+            "description": "<p><strong>触发</strong> 你的舞伴在你30尺内，并且他以近战打击或近战法术攻击对敌人造成重击。</p>\n<hr />\n<p>你继续和你的舞伴跳着死亡之舞。你立即以最多一半的速度向舞伴攻击的目标行走。如果你结束移动时，触发攻击的目标位于你的触及范围内，你能以-2减值对目标进行一次近战打击。此外，你能耗费一个法术位，让你此次打击造成所耗费法术的环级2倍的额外伤害。</p>"
+        },
+        "Quicksteps": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ],
+            "name": "快步舞 Quicksteps",
+            "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 你的最后一个动作是施放一个非戏法法术</p>\n<hr />\n<p>你汲取流经身体的魔法力量，将其引导至你滑移、旋转的舞步中，直到你的身形朦胧不清。你的速度获得+10尺状态加值，该好处的持续轮数等于你刚施放的法术的环级。</p>"
+        },
+        "School Project": {
+            "name": "学院课题 School Project",
+            "description": "<p>你获得一只魔宠，它拥有一项魔宠能力。你的魔宠是不死生物。它拥有虚能治疗，免疫死亡、疾病、毒素和失去意识。它会在生命值减少至0时被摧毁。</p>"
+        },
+        "Seize Animation": {
+            "name": "夺取活力 Seize Animation",
+            "prerequisites": [
+                {
+                    "value": "反制活力"
+                }
+            ],
+            "description": "<p>当你使用反制活力（Counter Animation）专长来反制一个召唤生物的法术时，你能通过死灵魔法的操作来夺取召唤物的生命精华。当你成功反制触发的法术时，你可以不让法术结束，而是强迫被召唤的生物尝试@Check[will|dc:resolve(@actor.attributes.spellDC.value)]豁免，对抗你的法术DC。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受任何人控制，获得两个动作，用于攻击最近的生物，在这之后，它会被解除召唤，如同法术解消。</p>\n<p><strong>成功</strong> 你给该生物注入死灵能量，它会立即死亡，如果被召唤的不是活物，它会被摧毁。</p>\n<p><strong>失败</strong> 生物在你的控制之下，直到你的下个回合结束。之后它立即死亡，如果被召唤的不是活物，它会被摧毁。</p>\n<p><strong>大失败</strong> 生物立即死亡，你将获得触发法术相同环级的<em>@UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]{召唤亡灵 Summon Undead}</em>法术效果。</p>"
+        },
+        "Shades of Life": {
+            "prerequisites": [
+                {
+                    "value": "精类派系"
+                }
+            ],
+            "name": "生命之影 Shades of Life",
+            "description": "<p>你从第一世界召唤出虚构的精类幻影。你获得<em>@UUID[Compendium.impossible-lands.impossible-lands-spells.Y0YtKRguj6sx1oUi]{生命之影 Shades of Life}</em>派系法术。你聚能池内的聚能点增加1点。</p>"
+        },
+        "Spelldancer Dedication": {
+            "name": "魔法舞者入门 Spelldancer Dedication",
+            "prerequisites": [
+                {
+                    "value": "表演技能熟练度为专家"
+                },
+                {
+                    "value": "魅力14或能够从法术位施法。"
+                }
+            ],
+            "description": "<p>你已经掌握了魔法舞蹈的艺术，一种将魔法和优雅的力量融合的迷人艺术。</p>\n<p>如果你还不能从法术位施法，你将可以施放自发法术，并且获得施法行动。你获得一个法术库，以及一个由你选择的戏法，来自你所选择的法术列表。你对应根源的法术攻击骰和法术DC受训。</p>\n<p>你施放魔法舞者法术的关键属性为魅力。你获得@UUID[Compendium.impossible-lands.impossible-lands-actions.ETTgJRYgFrCa2Q28]{魔法舞蹈 Spelldance}行动。</p>"
+        },
+        "Student of the Ebon Mausoleum Dedication": {
+            "name": "陵墓门徒入门 Student of the Ebon Mausoleum Dedication",
+            "description": "<p>你曾行走在黑色陵墓的大殿中，将彼处的教诲化为己用，不过，定义了陵墓门徒身份的是其训导，而非单单的入学。当你获得此专长时，选择以下选项之一：</p>\n<ul>\n<li><strong>法术课程</strong> 你精通黑色陵墓所传授的法术。你获得陵墓门徒的初始聚能法术：<em>@UUID[Compendium.impossible-lands.impossible-lands-spells.OXVhLVynkA1b3KEM]{榨取生命 Bleed Life}</em>。如果你已经从一项职业调整中获得了<em>榨取生命</em>，你可以选择原本职业被替换掉的聚能法术。</li>\n<li><strong>训练军队 </strong>你学会了以盖布的名义组织军队。你获得@UUID[Compendium.pf2e.feats-srd.Item.5Cm2TYHzoO2DbQNM]{赋生者入门 Reanimator Dedication}。你从你的魔法根源中选择一个额外的1环级法术添加至你的法术列表中。</li>\n<li><strong>驯服亡者 </strong>你学会如何驯服亡者。你获得@UUID[Compendium.pf2e.feats-srd.Item.M6cWLywN0aWnX5Gl]{驭亡师入门 Undead Master Dedication}。</li>\n<li><strong>学院课题 </strong>在你的第一次期中考试中，你搞砸了一个召唤课题，搞出了一些弱到无法战斗的玩意儿。你获得学院课题（School Project）专长。对你来说，强化学院课题（Enhanced School Project）专长的先决条件为4级而不是6级，惊人学院课题（Incredible School Project）专长的先决条件是8级而不是10级。补充专长：强化魔宠（Enhanced Familiar，4级）、精通魔宠（Improved Familiar，6级）</li>\n</ul>"
+        },
+        "Stylish Tumble": {
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                },
+                {
+                    "value": "特技技能熟练度为受训"
+                },
+                {
+                    "value": "表演技能熟练度为大师"
+                }
+            ],
+            "name": "潇洒翻滚 Stylish Tumble",
+            "description": "<p>你已经学会了通过将你的舞蹈融入流畅的动作，分散敌人的注意力，让你穿过他们的空间。当你使用@UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{翻滚 Tumble Through}动作时，你可以尝试一次表演检定来跳舞，取代原本的特技检定，并且该动作获得[视觉]特征。</p>"
+        },
+        "Teeming With Unlife": {
+            "prerequisites": [
+                {
+                    "value": "陵墓门徒入门"
+                }
+            ],
+            "name": "死灵满盈 Teeming With Unlife",
+            "description": "<p>你充满死灵能量，试图创造更多不死生命。你将获得一个最高环级的额外法术位，但你只能用它来施放<em>@UUID[Compendium.pf2e.spells-srd.Item.9WGeBwIIbbUuWKq0]{召唤亡灵 Summon Undead}</em>。</p>"
+        },
+        "Throw Wide the Plane": {
+            "name": "撕开位面 Throw Wide the Plane",
+            "prerequisites": [
+                {
+                    "value": "精类派系"
+                }
+            ],
+            "description": "<p>你撕开了通往第一世界的缺口。你获得<em>@UUID[Compendium.impossible-lands.impossible-lands-spells.ofAjbSQB3tNIMNiZ]{位面撕裂 Planar Breach}</em>派系法术。</p>"
+        },
+        "Twirling Spelldance": {
+            "name": "高速旋转舞 Twirling Spelldance",
+            "prerequisites": [
+                {
+                    "value": "魔法舞者入门"
+                }
+            ],
+            "description": "<p>你的法术和你的舞步已经无缝融合，让你能进行更复杂的移动。对于你通过魔法舞者变体获得的动作，如果动作允许你进行快步作为动作的一部分，你可以改为进行行走或@UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{翻滚 Tumble Through}。</p>"
+        },
+        "A Soul's Truth": {
+            "name": "灵魂之实 A Soul's Truth",
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "description": "<p>你学会一项灵魂守卫能力，用来清除藏匿的魔族。你可将<em>@UUID[Compendium.pf2e.spells-srd.Item.aewxsale5xWEPKLk]{诚实之环 Ring of Truth}</em>作为神术内在法术施放。魔法区域内作为目标的任何带有魔族特征的生物，在豁免骰上有-2状态减值。在12级时，你能每小时施放一次该法术，16级时可以每10分钟施放一次。</p>"
+        },
+        "Anti-Fiend Magic: Eradication": {
+            "name": "降魔秘法: 灭 Anti-Fiend Magic: Eradication",
+            "prerequisites": [
+                {
+                    "value": "降魔秘法: 弑"
+                }
+            ],
+            "description": "<p>你已经把你的魔法磨练成一把致命的剑，可以像刀割绳子一样斩断恶魔。当你使用降魔秘法：弑时，造成的额外伤害提升为[[/r 1d8]]。此外，当你进入降魔秘法：弑架势时，你可以额外选择1把30尺内的武器，在你激活架势期间，它能造成额外[[/r 2[good]]]伤害。如果你至少18级，你的额外伤害再增加1d8，可以作为目标的额外武器数量变为2把。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.jcWNnFJ7EGbkWFzc]{效果：降魔秘法: 灭}</p>"
+        },
+        "Anti-Fiend Magic: Fortification": {
+            "name": "降魔秘法: 护 Anti-Fiend Magic: Fortification",
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "description": "<p>你学会引导你灵魂的力量来更好地抵御你追查的魔族。你对魔族在AC和豁免上有+1环级加值，并且对魔族造成的伤害有你等级一半的抗力。在此架势下，如果你或你的盟友将你30尺内的一个魔族的生命值减少至0，清理邪恶所产生的能量将让你恢复活力。你能在当天获得额外1次进入该架势的机会，每次持续时间内只能触发一次此效果。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.JyOj8W22VKkxkq0L]{效果：降魔秘法: 护}</p>"
+        },
+        "Anti-Fiend Magic: Phalanx": {
+            "name": "降魔秘法: 阵 Anti-Fiend Magic: Phalanx",
+            "prerequisites": [
+                {
+                    "value": "降魔秘法: 护"
+                }
+            ],
+            "description": "<p>当你使用降魔秘法：护时，你AC和豁免骰的状态加值增加到+2，并且你对魔族的抗力增加到和你等级相同。此外，当你激活降魔秘法：护架势时，你散发出@Template[emanation|distance:15]范围的灵魂能量。弥漫范围内的盟友获得针对魔族的2点伤害抗力。你获得@UUID[Compendium.impossible-lands.impossible-lands-actions.spgUMHirQHXLRMPV]{灵魂干预 Soul Intervention} 反应动作。如果你至少18级，你能增加弥漫范围至@Template[emanation|distance:30]，并且灵魂干预每日可以额外使用1次。</p>"
+        },
+        "Anti-Fiend Magic: Slayer": {
+            "name": "降魔秘法: 弑 Anti-Fiend Magic: Slayer",
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "description": "<p>你学会引导你灵魂的力量来更好地消灭你追查的魔族。你的无武装攻击和你持握的武器对魔族造成额外1d4伤害。该额外伤害可以为精魂伤害，也可以是和你灵魂颜色相关的伤害类型，当你进入该架势时进行选择。在此架势下，如果你或你的盟友将你30尺内的一个魔族的生命值减少至0，清理邪恶所产生的能量将让你恢复活力。你能在当天获得额外一次进入该架势的机会，每次持续时间内只能触发一次此效果。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.CxLIOVIhKBj0kXzz]{效果：降魔秘法: 弑}</p>"
+        },
+        "Call-Out": {
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                }
+            ],
+            "name": "点名 Call-Out",
+            "description": "<p><strong>需求</strong> 目标对你或你的盟友进行过敌对动作你通过展示你灵光中存在的一个危险分子来吸引观众们的注意力。你指出一个位于你灵光范围内的生物，他必须尝试@Check[will|against:class]豁免，对抗你的职业DC。</p>\n<hr />\n<p><strong>大成功</strong> 目标进行了迅速而有效的反驳。他不受影响，24小时内免疫。</p>\n<p><strong>成功</strong> 目标会因为你的突然关注而暂时受到阻碍。他的隐秘检定和意志豁免有-1状态减值，并且在1轮内无法从掩蔽或@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态中获得好处。</p>\n<p><strong>失败</strong> 目标对所面对的事实感到困惑，他不知道该怎么回应你的关注。类似成功，但状态减值-2，持续1分钟。</p>\n<p><strong>大失败</strong> 目标认为自己犯了个巨大错误，在震惊的同时失去了自己的情感和对事物的感知。他陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，并且在1分钟内无法从掩蔽、隐蔽或@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态中受益。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.ICtdnxE62Vo88uPP]{效果：点名}</p>"
+        },
+        "Comic's Visitation": {
+            "prerequisites": [
+                {
+                    "value": "灵丹妙药"
+                }
+            ],
+            "name": "欢乐巡演 Comic's Visitation",
+            "description": "<p>笑声的力量是不可低估的，尤其当你有众多观众的时候。当你使用@UUID[Compendium.impossible-lands.impossible-lands-feats.pT9gCsgaXtdDhfPV]{灵丹妙药 The Best Medicine}专长时，你可以将观众中的所有盟友作为恢复生命值的目标，而不仅仅只是一个目标。如果你拥有提神表演专长，作为使用相同动作的一部分，你将其中一个盟友作为提神表演的目标。</p>"
+        },
+        "Divine Comedy": {
+            "name": "神曲 Divine Comedy",
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                }
+            ],
+            "description": "<p>你的喜剧经过打磨，可以用来抨击那些需要吸取教训的人。根据你使用的动作数量，你可以获得以下效果。</p>\n<p><span class=\"\\&quot;action-glyph\\&quot; action-glyph\">2</span> 你从攻击骰、AC或豁免骰中选择一项，然后从你的观众中选择一个敌人，进行一次@Check[performance]检定对抗敌人的意志DC。</p>\n<p><span class=\"\\&quot;action-glyph\\&quot; action-glyph\">3</span> 你从攻击骰、AC或豁免骰中选择两项，然后从你的观众中选择一个敌人，进行一次@Check[performance]检定对抗敌人的意志DC。</p>\n<p><strong>2轮 </strong>你从攻击骰、AC或豁免骰中选择所有，然后从你的观众中选择一个敌人，进行一次@Check[performance]检定对抗敌人的意志DC。</p>\n<hr />\n<p><strong>大成功</strong> 目标在对抗你观众中的其他目标时，在你选择的数据上承受-3状态减值，持续1轮，之后受到-2减值，持续1分钟。</p>\n<p><strong>成功</strong> 目标在你选择的数据上承受-2状态减值，持续1轮，之后受到-1减值，持续1分钟。</p>\n<p><strong>失败</strong> 目标在你选择的数据上承受-1状态减值，持续1轮。</p>\n<p><strong>大失败</strong> 目标不受影响且免疫24小时。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.wBG5TjH5Cy8Oa3gn]{效果：神曲}</p>"
+        },
+        "Heckler Squelcher": {
+            "name": "回应质问 Heckler Squelcher",
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                }
+            ],
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你或你观众中的一位盟友，对一个听觉或视觉效果进行豁免</p>\n<hr />\n<p>在你的旅途中，你已经学会了如何应对那些无端打断你表演的人。尝试一次@Check[perform|traits:action:perform]检定，用喜剧的方式来表达不满。你或你观众中的的一位盟友，可以从你刚才的表演检定结果和豁免结果中选择更高的那个作为豁免的最终结果。</p>"
+        },
+        "Life's Reprise": {
+            "name": "生命的重奏 Life's Reprise",
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                }
+            ],
+            "description": "<p>你讲述过去经历来帮助那些可能处于类似情况的人。在你的听众中指定一个盟友；这一行动可被视为是对盟友协助的充分准备。当你使用协助反应动作来协助盟友时，你可以使用表演检定来代替通常的检定。如果你的协助检定成功，盟友除了使用正常的投掷结果外，还可以使用你的表演检定结果来代替他的投掷结果。如果你大成功，盟友可以投掷两次，并使用更好的结果。</p>"
+        },
+        "Live and Learn": {
+            "name": "活到老学到老 Live and Learn",
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你在豁免检定或技能检定中失败或大失败</p>\n<hr />\n<p>失败乃成功之母，它是你学习的机会。当下次遭遇相同或类似的敌人、效果或阻碍时，如果你进行同样的检定，你投掷两次并选择更好的结果。你必须在前一次失败的24小时内进行该检定，并且触发的结果必须不能是微不足道难度。</p>"
+        },
+        "Partial Soul Concentration: Cleanse": {
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "name": "魂力半集中: 净 Partial Soul Concentration: Cleanse",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p>反复的训练让你用灵魂能量包裹你的武器来切断恶魔的魔法。对你能看见的目标进行一次近战打击。如果命中，你将尝试反制目标身上的一个魔法效果，前提是目标为魔族，或者该效果由魔族施加在目标身上。你选择要反制的效果，如果你不选择的话默认为一个最高等级的效果。你的反制等级等于你等级的一半（向上取整），并且你的反制调整值等于你的[[/r 1d20 + @actor.attributes.classDC.value]]{职业DC - 10}。</p>"
+        },
+        "Partial Soul Concentration: Flow": {
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "name": "魂力半集中: 流 Partial Soul Concentration: Flow",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p>冥想训练让你学会如何调节你的灵魂能量，使其具有可塑性和治愈性。你获得等于你的等级加上你感知调整值的临时生命值。</p>\n<p>@Compendium[impossible-lands.impossible-lands-feats.pTp5Al2fkj1aLlCE]</p>"
+        },
+        "Refreshing Performance": {
+            "prerequisites": [
+                {
+                    "value": "灵丹妙药"
+                }
+            ],
+            "name": "提神表演 Refreshing Performance",
+            "description": "<p>你的喜剧有能力帮助你的观众处理生活中的许多问题。当你使用灵丹妙药时，进行一次表演检定，从你选择的盟友身上选择@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled}、或@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态之一，将其状态值减少1点。如果大成功，状态值减少2点。该表演DC通常为导致该状态的原始效果的DC。</p>"
+        },
+        "Sage's Coterie Dedication": {
+            "name": "山贤同道入门 Sage's Coterie Dedication",
+            "prerequisites": [
+                {
+                    "value": "魅力14"
+                },
+                {
+                    "value": "信仰腊格迪亚（Ragdya）"
+                }
+            ],
+            "description": "<p>你的表演受训。如果你已经受训，你提升为专家。 你获得@Template[emanation|distance:30]范围的小丑灵光（jester’s aura），这允许你在使用变体赋予你的动作时，将灵光范围内的盟友和敌人作为目标。灵光范围内的生物被认为是你的观众。如果你表演达到传奇熟练度，灵光增加到@Template[emanation|distance:60]。你获得@UUID[Compendium.impossible-lands.impossible-lands-actions.Ks0c15PShonpvdcI]{传染快乐 Infectious Antics}动作。</p>\n<p><strong>特殊 </strong>在你从山贤同道变体获得两个其他专长之前，你无法选择其他入门专长。</p>"
+        },
+        "Sniff Out": {
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                }
+            ],
+            "name": "嗅探 Sniff Out",
+            "description": "<p>你为了对抗魔族训练自己的灵魂，这也提升了你的感官。你获得魔族感知作为模糊感官，范围30尺。这允许你能闻到带有[魔族]特征的生物，如同灵敏嗅觉能力一般。你在@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}你嗅觉范围内的魔族时，察觉检定有+2状态加值。当你成功搜索出一个魔族，你能以自由动作对它@UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{指出位置 Point Out}。</p>"
+        },
+        "Soulguard Dedication": {
+            "name": "灵魂卫士入门 Soulguard Dedication",
+            "prerequisites": [
+                {
+                    "value": "任意善良阵营"
+                },
+                {
+                    "value": "加入灵魂卫士"
+                }
+            ],
+            "description": "<p>为了对抗潜伏在扎摩诔的魔族，知识就是力量，而你正尝试一种新的训练方式。你的宗教或社群受训。如果你两种技能都已受训，你将其中之一提升为专家。你获得一项额外的学识技能：魔族学识。在对魔族相关的线索进行收集信息时，你可以使用魔族学识代替交涉。</p>\n<p>作为成为灵魂卫士正式成员的一部分，你需要经历一个仪式。这个仪式要求你开始认清自己的灵魂，这样你就能加强它以对抗魔族的侵蚀。这是一个单独的过程，你需要在灵魂守卫的正式成员的帮助下经历一天的时间。在这一切完成之后，你会了解到你灵魂的真实颜色。从下表中选择一种颜色，你将获得相当于你等级一半的相关能量抗力。该选择一旦做出就无法改变。</p>\n<ul>\n<li><strong>蓝色 </strong>- 寒冷</li>\n<li><strong>绿色 </strong>- 力场</li>\n<li><strong>橙色 </strong>- 酸蚀</li>\n<li><strong>紫色 </strong>- 音波</li>\n<li><strong>红色 </strong>- 火焰</li>\n<li><strong>黄色 </strong>- 电击</li>\n</ul>\n<p><strong>特殊 </strong>在你从灵魂卫士变体获得两个其他专长之前，你无法选择其他入门专长。</p>"
+        },
+        "Stench of Evil": {
+            "prerequisites": [
+                {
+                    "value": "灵魂卫士入门"
+                },
+                {
+                    "value": "嗅探"
+                }
+            ],
+            "name": "邪秽恶臭 Stench of Evil",
+            "description": "<p>经过训练，你针对魔族的嗅觉得到提升。你的魔族感知变为精确感官，它的范围增加到60尺。当你尝试对一个通过变化系或幻术系效果伪装自己的魔族进行@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色 Sense Motive}时，GM暗骰两次你的察觉检定，并使用更高的结果。这是一个幸运效果。</p>"
+        },
+        "The Best Medicine": {
+            "name": "灵丹妙药 The Best Medicine",
+            "description": "<p><strong>每小时一次</strong></p>\n<p>你的言语给你周围的人带来短暂但宝贵的喘息时间。你从观众中选择一位盟友，他恢复1d6乘以你等级一半的生命值。</p>\n<p>[[/r floor(@actor.level / 2)d6]]{按等级计算的生命值}</p>",
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                }
+            ]
+        },
+        "Total Soul Concentration: Eruption": {
+            "name": "魂力全集中: 激 Total Soul Concentration: Eruption",
+            "description": "<p><strong>需求 </strong>你处于一种降魔秘法架势中</p>\n<hr />\n<p>你将整个灵魂引导为@Template[emanation|distance:30]范围的能量爆炸，造成每个等级1d6点伤害。伤害类型为善良，或者和你灵魂颜色相匹配的伤害类型。该区域内所有生物进行@Check[fortitude|against:class|basic]豁免，对抗你的职业DC。如果生物为魔族，则豁免有-3状态减值。失败时，受到伤害的生物还会@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 2}。大失败时，则震慑1轮。在使用此能力之后，你的降魔秘法架势立即结束。如果你或你的盟友将你30尺内的一个魔族的生命值减少至0，你能在[[/r 1d4 #rounds]]{1d4轮}后再次进入降魔秘法架势。此外，在使用此能力后，你陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}，或者如果你已经陷入毁灭，将你的毁灭状态值+1。以这种方式获得的毁灭需要花费正常2倍的休息时间才能降低，如果你的毁灭值等于你的最大濒死值，你会立即正常死亡。</p>",
+            "prerequisites": [
+                {
+                    "value": "降魔秘法：弑或降魔秘法：护"
+                }
+            ]
+        },
+        "Total Soul Concentration: Torrent": {
+            "name": "魂力全集中: 洪 Total Soul Concentration: Torrent",
+            "prerequisites": [
+                {
+                    "value": "魂力半集中: 流"
+                }
+            ],
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 你处于一种降魔秘法架势中</p>\n<hr />\n<p>你对灵魂操纵的精通让你能更高程度地治愈自己。在1分钟内，你获得再生，数值为你等级的一半加上感知调整值，它会在你每轮开始时恢复你的生命值。当你拥有再生时，你不会因为受到伤害而死亡，并且你的濒死状态不会增加到会杀死你的数值，但是你的受伤状态值如果达到4或更高的话，你依然会@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}，直到受伤被治愈。这些条件不适于受到来自魔族的精魂伤害。如果上述伤害将会导致你陷入濒死状态，你还会获得@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}。如果你已经有毁灭状态，将你的毁灭状态值+1。以这种方式获得的毁灭需要花费正常2倍的休息时间才能降低，如果你的毁灭值等于你的最大濒死值，你会立即正常死亡。</p>"
+        },
+        "Worldly Improvisation": {
+            "prerequisites": [
+                {
+                    "value": "山贤同道入门"
+                },
+                {
+                    "value": "即兴发挥"
+                }
+            ],
+            "name": "世俗即兴 Worldly Improvisation",
+            "description": "<p>你的旅行让你看惯人间百态，拓展了你的视野和能力。在你日常准备时，选择一项你未受训的技能。 当你使用即兴发挥专长进行该技能的检定时，你还能使用该技能的受训动作。</p>"
+        }
+    }
+}

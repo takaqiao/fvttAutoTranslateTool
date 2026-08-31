@@ -1,0 +1,81 @@
+{
+  "id": "pseudo-afflictions",
+  "title": "Pseudo Afflictions",
+  "description": "Module for handling afflictions",
+  "version": "0.4.17",
+  "authors": [
+    {
+      "name": "Reyzor",
+      "url": "https://github.com/reyzor1991",
+      "discord": "reyzor1991"
+    }
+  ],
+  "languages": [],
+  "esmodules": [
+    "main.mjs"
+  ],
+  "styles": [],
+  "packFolders": [
+    {
+      "name": "Pseudo Afflictions",
+      "sorting": "m",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "packs": [
+        "effects",
+        "macros"
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "label": "Pseudo Afflictions Effects",
+      "name": "effects",
+      "path": "packs/effects",
+      "system": "pf2e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "type": "Item",
+      "flags": {}
+    },
+    {
+      "label": "Pseudo Afflictions Macros",
+      "name": "macros",
+      "path": "packs/macros",
+      "system": "pf2e",
+      "private": false,
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "minimum": "13.341",
+    "verified": "13.344"
+  },
+  "socket": true,
+  "url": "https://github.com/reyzor1991/pf2e-wiki/wiki/Pseudo-Afflictions",
+  "manifest": "https://www.dropbox.com/scl/fi/vrfadcus8wh3m3873k2dp/module.json?rlkey=6euw2a4m9a47w7igvuj6a5xvc&st=77zt9jx1&dl=1",
+  "download": "https://www.dropbox.com/scl/fi/k5g4gz10lkg8g7xzo94es/pseudo-afflictions.zip?rlkey=nejlinhzt5fqvyu2nxkz8ysan&st=9702t958&dl=1",
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "manifest": "https://github.com/foundryvtt/pf2e/releases/latest/download/system.json",
+        "compatibility": {
+          "minimum": "7.0.0",
+          "verified": "7.1.1"
+        }
+      }
+    ],
+    "requires": []
+  }
+}

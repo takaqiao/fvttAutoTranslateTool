@@ -1,0 +1,54 @@
+<section class="tab {{tabs.ancestry.id}} {{tabs.ancestry.cssClass}}"
+         data-tab="{{tabs.ancestry.id}}" data-group="{{tabs.ancestry.group}}">
+
+    <div class="step-selection">
+        <menu id="ancestry-selection" class="selection-menu">
+            {{#each ancestries as |ancestry|}}
+            <li class="option flexrow {{ancestry.cssClass}}" style="--option-color:{{ancestry.color}};"
+                data-action="chooseAncestry" data-ancestry-id="{{ancestry.identifier}}">
+                <div class="option-icon">
+                    <img class="icon" src="{{ancestry.icon}}" alt="{{ancestry.name}}">
+                </div>
+                <h4 class="option-name">{{ancestry.name}}</h4>
+            </li>
+            {{/each}}
+        </menu>
+    </div>
+
+    <div id="ancestry-details" class="step-details flexcol">
+    {{#if ancestry}}
+        <h1 class="step-header">{{ancestry.name}}</h1>
+        <article class="step-summary">
+            {{{ancestry.summary}}}
+        </article>
+        {{#each ancestry.features as |feature|}}
+        <div class="step-feature">
+            <h4>{{feature.label}}</h4>
+            {{#if feature.tags}}
+            <div class="tags">
+            {{#each feature.tags as |tag|}}
+                <span class="tag" {{#if tag.tooltip}}data-tooltip aria-label="{{localize tab.tooltip}}"{{/if}}>{{tag.text}}</span>
+            {{/each}}
+            </div>
+            {{/if}}
+            {{#if feature.items}}
+            <div class="items">
+                {{#each feature.items as |item|}}
+                {{{item}}}
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <aside class="step-sidebar">
+        {{#if ancestry.figure}}
+        <figure class="step-figure flexcol {{ancestry.figure.cssClass}}">
+            <img src="{{ancestry.figure.src}}" alt="{{ancestry.figure.caption}}">
+            <figcaption>{{ancestry.figure.caption}}</figcaption>
+        </figure>
+        {{/if}}
+    </aside>
+</section>

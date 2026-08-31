@@ -1,0 +1,152 @@
+{
+    "label": "魔宠能力 Familiar Abilities",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Familiar of Churning Saltwater": {
+            "name": "翻腾盐水之魔宠 Familiar of Churning Saltwater",
+            "description": "<p>你的魔宠具有水生特征，如鳞片、鳍或鳃。当你施放或持续法咒时，你周围的空气会感觉浓如海水，使他人在 1轮内更容易被水所操控。位于魔宠 @Template[type:emanation|distance:10] 范围内的所有生物对抗水属性效果的强韧DC 与 AC 承受 -1环境减值，且区域内非魔法之火被熄灭。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.26gnYBUo83UkIPYr]{效果：翻腾盐水之魔宠}</p>"
+        },
+        "Familiar of Faraway Worlds": {
+            "name": "远方异界之魔宠 Familiar of Faraway Worlds",
+            "description": "<p>你的魔宠周身常有旋绕的幻象效果，并随兴改变颜色。当你施放或持续法咒时，你的魔宠在 @Template[type:emanation|distance:15] 范围内于 1轮内生成类似你故事场景的幻象，使范围内生物的识破幻象检定承受 -1 状态减值，且让你在该范围内施放的幻象获得隐微特征。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.YK3mVpz74OdcEaEK]{效果：远方异界之魔宠}</p>"
+        },
+        "Familiar of Ticking Parts": {
+            "name": "时钟齿轮之魔宠 Familiar of Ticking Parts",
+            "description": "<p>你的魔宠在某种程度上明显是机械造物，其机制远比最精巧的钟表更为复杂。即便不满足条件，你的魔宠也具有「构装体魔宠」能力。当你施放或持续法咒时，你的魔宠让其相邻方格之一充满蒸汽形成模糊，但该方格内的生物不能利用此模糊进行隐藏或潜行。蒸汽持续 1轮。</p>"
+        },
+        "Fungus+": {
+            "name": "真菌+ Fungus+",
+            "description": "<p>你的魔宠以真菌特征替代动物特征。你的魔宠对酸蚀伤害获得等同于你等级一半的抗力（最少抗力 1）。</p>"
+        },
+        "Undead": {
+            "name": "亡灵 Undead",
+            "description": "<p>你的魔宠以亡灵特征替代动物特征。它具有虚空治疗，且对死亡效果、疾病、毒素与失去意识免疫。它在 0 生命值时被摧毁。</p>"
+        },
+        "Familiar of Armageddon's Favor": {
+            "name": "末劫眷顾之魔宠 Familiar of Armageddon's Favor",
+            "description": "<p>你的魔宠似乎是灾难的导管，它周遭事物常以可疑的频率破裂或起火。当你施放或持续法咒时，你的魔宠可以使一个 30尺内、正承受持续伤害的生物在以其方格为中心的 @Template[type:burst|distance:5] 范围内制造危险地形。该危险地形造成等同于该目标所受持续伤害类型之一的 @Damage[2+floor(@actor.level/2)] 伤害，持续 1轮。</p>"
+        },
+        "Familiar of Disorienting Proximity": {
+            "name": "失向接近之魔宠 Familiar of Disorienting Proximity",
+            "description": "<p>由于其周身漂浮的失向与压迫感，你魔宠的存在或外观有时令人难以承受。当你施放或持续法咒时，你的魔宠在 @Template[type:emanation|distance:10] 范围内的生物心智上施加痛苦鞭笞，让它们每当进行具有专注或操作特征的动作时，都变为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}，持续 1轮。</p>"
+        },
+        "Familiar of Entrancing Temptation": {
+            "name": "诱惑勾引之魔宠 Familiar of Entrancing Temptation",
+            "description": "<p>只要你的魔宠在场，它便会引发眷恋的注视与被强化的情绪。当你施放或持续法咒时，你的魔宠让 15尺内一个迷魂的生物变为被动，且该生物在你下一回合开始或不再迷魂之前（以先到者为准）不能使用反应。</p>"
+        },
+        "Flora Form": {
+            "name": "植物形态 Flora Form",
+            "description": "<p>你的植物或真菌魔宠可以以一个单动作变化形态，变为一种与魔宠本性大致相似的微型植物或真菌。其余效果使用 @UUID[Compendium.pf2e.spells-srd.Item.dileJ0Yxqg76LMvu]{与植物合一}。你必须有具备植物或真菌特征的魔宠才能选择此能力。</p>"
+        },
+        "Familiar of Reprising Melody": {
+            "name": "回响旋律之魔宠 Familiar of Reprising Melody",
+            "description": "<p>你的魔宠似乎被音乐持续环绕，将狂想旋律灌入他人之心。当你施放或持续法咒时，你的魔宠可让 15尺内一个生物被音乐淹没，由你选择：将其 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧} 状态减少 1，或赋予其 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋} 状态直至其下一回合开始。</p>"
+        },
+        "Familiar of Flowing Script+": {
+            "name": "流动文字之魔宠+ Familiar of Flowing Script+",
+            "description": "<p>你的魔宠覆有形似某种未知语言字母的图案，吸引视线却又躲避理解。当你施放或持续法咒时，你魔宠身上的字母会在 15尺内一个方格中形成一个生物的轮廓，造成分心。直到你下一回合开始为止，该方格视为威胁你敌人的生物，并为你与你的盟友提供侧背，仿佛它能进行攻击且具有 5尺触及；这是视觉效果。</p>"
+        },
+        "Glow": {
+            "name": "光辉 Glow",
+            "description": "<p>你的魔宠如火炬般散发光芒，可以以一个具有专注特征的单动作压制或恢复此能力。</p>"
+        },
+        "Sanctum of Spirit": {
+            "name": "精魂圣所 Sanctum of Spirit",
+            "description": "<p>你的魔宠在 15尺弥漫范围内创造一个由受祝精魂构成的圣所，保护并滋养灵气内的生物，持续到你下一回合结束。你的魔宠可以在后续回合持续此灵气，最长 1分钟。你与灵气内的盟友对豁免获得 +1状态加值，并对心灵伤害获得等同于你等级的抗力。只要自精魂圣所形成以来你与盟友未采取过敌对动作，则生物对你以及圣所内盟友的攻击承受 -2环境减值。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.8Z1lbN4kP84vKcUq]{灵气：精魂圣所}</p>"
+        },
+        "Track Assistant": {
+            "name": "追踪助手 Track Assistant",
+            "description": "<p>每当你尝试求生检定进行追踪时，如果你的魔宠在附近且能够行动，它会借出其感官给你。这授予你 +1环境加值，若你在求生上为大师则为 +2。如果你的魔宠拥有你不具备的感官（如嗅觉），你也可以使用它的感官以及你自己的感官来追踪生物。</p>"
+        },
+        "Self-Preservation Magic": {
+            "name": "自保魔法 Self-Preservation Magic",
+            "description": "<p>每小时一次，你的魔宠可以对自己施放下列法术之一：@UUID[Compendium.pf2e.spells-srd.Item.3JG1t3T4mWn6vTke]{模糊术} 或 @UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{隐形术}。它将这些法术作为你根源的固有法术施放。你必须至少 8级且能够施法才能选择此能力。</p>"
+        },
+        "Familiar of Soul Consumption": {
+            "name": "食魂之魔宠 Familiar of Soul Consumption",
+            "description": "<p>你的魔宠呈骨骼、灵体甚或腐朽之态。当你施放或持续法咒时，你的魔宠选择 15尺内一个盟友加以保护，直至你下一回合开始。如果所选盟友被打击命中，你的魔宠会汲取该进行打击之生物的灵魂，造成 @Damage[(max(1,(floor(@actor.level/2))))[spirit]] 伤害，并使自身回复等量生命值。</p>"
+        },
+        "Plant+": {
+            "name": "植物+ Plant+",
+            "description": "<p>你的魔宠以植物特征替代动物特征。你的魔宠对毒素伤害获得等同于你等级一半的抗力（最少抗力 1）。</p>"
+        },
+        "Familiar of Murky Worlds": {
+            "name": "晦暗异界之魔宠 Familiar of Murky Worlds",
+            "description": "<p>你的晦暗魔宠以坚定不移的精准引导你与盟友走过险地的最安全路径。当你施放或持续法咒时，你的魔宠可让 30尺内一个生物在 1轮内忽略非魔法的模糊与因掩蔽获得的 AC 环境加值。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.l15SCSWGttzPOPOO]{效果：晦暗异界之魔宠}</p>"
+        },
+        "Ooze": {
+            "name": "软泥 Ooze",
+            "description": "<p>你的魔宠以软泥特征替代动物特征。它对重击与精准伤害免疫，但其 AC 仅为 10 + 你等级（而非与你等同的 AC）。</p>"
+        },
+        "Dragon+": {
+            "name": "巨龙+ Dragon+",
+            "description": "<p>你的魔宠以巨龙特征替代动物特征。选择以下之一：酸蚀、寒冷、电击、火焰或毒素。你的魔宠对所选伤害类型获得等同于你等级一半的抗力（最少抗力 1）。</p>"
+        },
+        "Familiar of Illogical Forms": {
+            "name": "诡异形态之魔宠 Familiar of Illogical Forms",
+            "description": "<p>你的魔宠之躯形不循常理，可以快速改变。当你施放或持续法咒时，你的魔宠获得以下魔宠能力之一，并将相同魔宠能力赋予 30尺内你所选的一个盟友，持续 1轮：两栖、攀爬者、暗视、回声定位、鳃、喷射、悬浮者或嗅觉。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.uMsJf4gXNiRKki6V]{效果：诡异形态之魔宠}</p>"
+        },
+        "Magic Item Adept": {
+            "name": "奇物达人 Magic Item Adept",
+            "description": "<p>尽管魔宠通常无法激活物品，你仍可以命令你的魔宠激活一个物品等级低于你等级 10级的卷轴或法杖。你必须能够激活该物品，你的魔宠才能激活；如果激活该物品需要检定，你的魔宠必须在相应技能上 @UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]{技能训练}，并须进行相应检定。你必须至少 11级且你的魔宠必须具备 @UUID[Compendium.pf2e.familiar-abilities.Item.cT5octWchU4gjrhP]{灵巧} 与 @UUID[Compendium.pf2e.familiar-abilities.Item.zyMRLQnFCQVpltiR]{言语} 能力才能选择此项。</p>"
+        },
+        "Illusory Projection": {
+            "name": "幻象投射 Illusory Projection",
+            "description": "<p>你的魔宠从自身在 @Template[type:burst|distance:30] 范围内（包括魔宠的方格）创造一个伴随声响的幻象，将其在范围内 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}，并在该区域内提供你所选的一个具说服力的幻象。你的魔宠在该区域内可以呈现为另一种生物，且幻象持续到你下一回合结束。你的魔宠可以在后续回合持续此幻象，最长 1分钟，并可作为持续的一部分移动幻象物体或其他实体。本会以你魔宠为目标的生物可在你的幻象内尝试搜索它，或尝试完全识破你的幻象——以你魔宠的隐密 DC 进行搜索，或以你的法术DC 识破你的幻象。一旦某生物识破你的幻象，它在持续时间内可以正常以你魔宠为目标；但如果你的魔宠仅是被搜索到，它仍可在幻象内再次隐藏，或持续效果以再次改变其外观。</p>"
+        },
+        "Produce Sustenance": {
+            "name": "产出食粮 Produce Sustenance",
+            "description": "<p>当你的魔宠以植物形态存在时，它若以此形态持续 1小时便能产出果实、坚果或其他食粮。该能力产出的产物等同于一个升阶至你等级一半（向上取整）的 @UUID[Compendium.pf2e.spells-srd.Item.vQuwLqtFFYt0K15N]{丰盛之角} 法术。可通过花费一个交互动作将产物从魔宠身上取下；但产物一经摘取，必须在 10分钟内被食用，否则便会枯萎。如果你的魔宠在产物仍连接其身的情况下恢复正常形态，产物会落地并在 10分钟内开始枯萎，如同被摘取一般。你必须至少 4级且你的魔宠必须具备 @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.Tjoy8m9g4hbpjsHb]{植物形态} 能力才能选择此项。</p>"
+        },
+        "Familiar of Conflicting Authority": {
+            "name": "冲突权能之魔宠 Familiar of Conflicting Authority",
+            "description": "<p>你的魔宠以让人感到被监视的方式注视他人。当你施放或持续法咒时，你的魔宠可瞄准 15尺内一个生物，使其下一次的交互、移步或跨步直至其下一回合结束需进行一次 @Check[type:flat|dc:15]。失败时，该生物的下一动作不能为该动作；大失败时，它完全失去该动作。如果该动作为某行动的一部分，则仅当该行动在缺少该动作的情况下仍能完成时（如「突然冲锋」的第一次跨步），才仅失去该从属动作。</p>"
+        },
+        "Familiar of Desires Granted": {
+            "name": "欲望成真之魔宠 Familiar of Desires Granted",
+            "description": "<p>你的魔宠似乎过于奢华与娇贵以至显得不真实——当然，是来监视你自身愿望的。当你施放或持续法咒时，你的魔宠可向 15尺内另一个生物提供从不适中的解脱：若它花费一个具有语言特征的反应说出移除该状态的愿望，便可将一个具有数值的状态减少 1。如果该状态有持续时间，则在 1轮内减少 1，并在 1轮过后恢复其原本的状态数值。</p>"
+        },
+        "Familiar of Stumbling Steps": {
+            "name": "绊步之魔宠 Familiar of Stumbling Steps",
+            "description": "<p>你的魔宠与城市中的动物相处自如，他人会下意识地朝它绊倒。当你施放或持续法咒时，你的魔宠可让 15尺内一个对你处于 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及} 的生物向你所选方向移动 5尺。如果该生物无法朝你所选方向移动，则它直至其下一回合开始为止变为措手不及。这是强制移动。</p>"
+        },
+        "Tool Savant": {
+            "name": "工具达人 Tool Savant",
+            "description": "<p>你的魔宠可以携带最多 1 体积的工具组，而非仅 L 体积。你的魔宠可以使用这些工具进行需要受训于其所携工具的技能动作或行动。如果该动作为探索行动，你必须能在持续时间内对其下达持续的命令，让它代为执行该行动；并消耗你自己的探索行动来命令你的魔宠。你的魔宠必须具备 @UUID[Compendium.pf2e.familiar-abilities.Item.cT5octWchU4gjrhP]{灵巧} 与 @UUID[Compendium.pf2e.familiar-abilities.Item.uUrsZ4WvhjKjFjnt]{工具携带} 能力才能选择此项，且必须在所需技能上 @UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]{技能训练} 才能使用工具进行受训之动作。</p>"
+        },
+        "Familiar of Keen Senses+": {
+            "name": "锐感魔宠+ Familiar of Keen Senses+",
+            "description": "<p>你的魔宠具有闪烁的眼眸、抽动的耳朵或某种野兽强大感官的迹象。当你施放或持续法咒时，你的魔宠在你下一回合开始前获得你所选的一种精确嗅觉、震波感知或波感（射程 60尺），且可以以一个自由动作立即 @UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]{指明}。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.DD0PQvN8azmegb01]{效果：锐感魔宠}</p>"
+        },
+        "Familiar of Ongoing Misery+": {
+            "name": "持续苦难之魔宠+ Familiar of Ongoing Misery+",
+            "description": "<p>你的魔宠似乎对除你以外的所有生物都怀敌意，若靠得过近便嘶嘶作声。当你施放或持续法咒时，你的魔宠可对 15尺内一个生物施加诅咒，将你施放的法咒所造成负面效果的持续时间延长 1轮。这是一个诅咒效果。此仅延长那些需要持续以维持效果或具有限定持续时间的效果（如「1轮」或「直至你下一回合结束」），且不阻止该效果以其他方式被移除。</p>"
+        },
+        "Fungal Expulsion": {
+            "name": "真菌喷散 Fungal Expulsion",
+            "description": "<p>每小时一次，你可以命令你的真菌魔宠在该回合花费它的 2 个动作，在 @Template[distance:10|type:emanation] 范围内喷出一团秽物之云，持续 3轮或直到被强风吹散。在该区域内结束回合的所有生物必须进行 @Check[type:fortitude|dc:resolve(@actor.master.attributes.classOrSpellDC.value)] 豁免。失败的生物变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1级}，大失败则变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心2级}。你必须至少 4级且你的魔宠必须为真菌才能选择此项。</p>"
+        },
+        "Breath Weapon": {
+            "name": "喷吐武器 Breath Weapon",
+            "description": "<p>每小时一次，你可以命令你的巨龙魔宠在该回合花费它的 2 个动作，在 @Template[distance:10|type:cone]、@Template[distance:15|type:line] 或 20尺内的 @Template[distance:5|type:burst] 范围内喷出一种元素。区域内每个生物每 2级你拥有，承受 @Damage[(floor(@actor.level / 2))d6[@actor.flags.witches-remaster.dragon.damage]] 伤害（@Check[type:reflex|dc:resolve(@actor.master.attributes.classOrSpellDC.value)|basic:true] 基础豁免）。伤害类型必须与其某项抗力相同。你必须至少 6级且你的魔宠必须具备一项抗力且为巨龙才能选择此项。你在每日准备时选定喷吐武器的形状。</p>"
+        },
+        "Menacing": {
+            "name": "威慑 Menacing",
+            "description": "<p>你的魔宠可以将视觉特征添加到其挫败士气中，以移除语言与听觉特征；并且当它不与目标共享语言时，其挫败士气不承受减值。如果你的魔宠对其挫败士气目标处于无踪或隐藏状态，则其检定获得 +1环境加值。你的魔宠必须具备 @UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]{技能训练（威吓）} 魔宠能力才能选择此项。</p>"
+        },
+        "Familiar of Sunlit Dawn": {
+            "name": "日出之魔宠 Familiar of Sunlit Dawn",
+            "description": "<p>你的魔宠时刻散发微弱的光辉，并在阳光下闪耀。当你施放或持续法咒时，你的魔宠选择一个 15尺内能看见它且亦在明亮光芒中的生物，使该生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}，直至你下一回合开始或它使用一个交互动作揉眼为止。</p>"
+        }
+    }
+}

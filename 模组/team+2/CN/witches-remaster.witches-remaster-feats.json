@@ -1,0 +1,306 @@
+{
+    "label": "专长 Feats",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Peculiar Vestige": {
+            "name": "怪异遗息 Peculiar Vestige",
+            "description": "<p>你的魔宠已学会使自身呈现得更加普通，以适合你品味的方式与你的遗息合一。你的魔宠可以变形为你所选的某件穿戴或持用的物品，例如帽、披风、书或项链。你的魔宠在物品形态下呈现为其自身的物品版本，使用相似的颜色与造型。它在此形态下不能进行具有操作特征的动作，且不受区域效果影响。要影响它必须单独瞄准它，这要求知晓它是一个生物。这意味着你与盟友可治疗或协助该魔宠，而大多数敌人对其真相毫不知情。要意识到该物品实际上是一只魔宠，生物必须进行 @Check[type:perception|dc:resolve(@actor.attributes.classOrSpellDC.value)|showDC:owner|traits:action:seek] 搜索检定（察觉 DC 等于你的职业DC 或法术DC，取较高者）；通常仅在该物品采取动作或使用能力时才会触发该检定。变形为穿戴物品或变回魔宠形态是一项 1分钟、具有专注特征的行动。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Mutable Familiar": {
+            "name": "多面手魔宠 Mutable Familiar",
+            "description": "<p>你的魔宠可以如黏土般塑形，使其呈现你所愿的任何外观。你可以花费 10分钟来更换你魔宠的一项能力。如果在更换中你被打断，原能力保留且你不获得新能力。你之后可再尝试更换该能力，但必须重新开始。你不能更换那些每日仅能使用一次的能力（在使用过后），也不能换入你魔宠当日先前已拥有的能力。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Accursed Armaments": {
+            "name": "诅咒战具 Accursed Armaments",
+            "description": "<p>你的战具已成为你法咒魔法的强化器，而你的魔法则增强你的战具能力。当你 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.OAKFEmT9z1Y6IGIH]{女巫武装} 攻击受你某个法咒影响的生物时，打击获得 +1环境加值。</p>\n<p>此外，当你以源自女巫战具的徒手攻击成功打击一个受你某个法咒影响的生物时，对方额外承受等同于该法咒等级两倍的持续流血伤害。</p>\n<p>如果你拥有 @UUID[Compendium.pf2e.feats-srd.Item.VOgAiCqC5kpIpLaf]{共鸣打击}，则其对你法咒豁免的减值持续到对方不再承受由诅咒战具造成的持续流血伤害为止。</p>",
+            "prerequisites": [
+                {
+                    "value": "女巫战具"
+                },
+                {
+                    "value": "施法咒能力"
+                }
+            ]
+        },
+        "Protection Circle": {
+            "name": "守护之环 Protection Circle",
+            "description": "<p>你掌握了一项神秘仪式——悬挂纸偶、以粉笔划界，以及类似的护佑做法以驱避生物。你花费 10分钟在 @Template[type:burst|distance:15] 范围内标定空间，让你免受危险。以你庇护主技能相关的技能进行一次秘密检定，并选择一种你能用此技能辨识的生物类型。GM 也许允许你瞄准你的根源本不允许的生物类型，比如以神秘瞄准某邪教的人型生物，或以宗教瞄准变种半魔。如果你的秘密检定超过该圈外目标类型生物的察觉 DC，则圈内生物对所选类型外的生物变为隐形。只要你与盟友仍处于该区域内，你对抗所选生物效果的豁免获得 +1状态加值（若你在庇护主技能上为传奇，则为 +2）。</p>\n<p>如果圈内生物对圈外生物采取敌对动作，或圈内任一生物离开圈外，则所有圈内生物的隐形立即结束。生物可以花费一个交互动作触碰区域以打破此圈。该圈持续 8小时、直到你创造另一圈、或被打破，以先到者为准。在圈内连夜休息时，你恢复的生命值是平时的两倍。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.GsUkq5v4rsBvpN1t]{效果：守护之环}</p>"
+        },
+        "Witch Dedication+": {
+            "name": "女巫献身+ Witch Dedication+",
+            "description": "<p>你像女巫一样施放法术。选择一位 @UUID[Compendium.pf2e.classfeatures.Item.KPtF29AaeX2sJW0K]{庇护主}；你获得一只魔宠以及两个由你选择的、来自该庇护主根源的常见戏法，但除根源外，你不获得该庇护主通常会授予的其他效果。你的魔宠拥有一项魔宠能力；但若你从 @UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.eNTStXeuABNPSLjw]{女巫架构} 选取另一个专长，你的魔宠便如常获得两项魔宠能力。</p>\n<p>你获得 @UUID[Compendium.pf2e.actionspf2e.Item.aBQ8ajvEBByv45yz]{施放法术} 行动。你每日可以从你的魔宠那里准备一个戏法。你在法术攻击调整值与法术DC 上受训。你架构法术的关键施法属性为智力，且这些法术为你庇护主根源的女巫法术。</p>\n<p>你在庇护主根源相关的技能上变为受训；如果你已在该技能上受训，则改为在你所选的某项技能上变为受训。</p>",
+            "prerequisites": [
+                {
+                    "value": "智力 +2"
+                }
+            ]
+        },
+        "Rites Of Transfiguration+": {
+            "name": "化形仪式+ Rites Of Transfiguration+",
+            "description": "<p>你能让你庇护主之力适应需求，将其他生物变形为更适合其行为或你心意的形态。你的魔宠学得 @UUID[Compendium.pf2e.spells-srd.Item.dN8QBNuTiaBHCKUe]{恶咒变形术}，即使<em>恶咒变形术</em>不在你根源的法术列表中也是如此。通过花费 10分钟与你的魔宠相通，你可以将你已准备的 6 阶或更高阶法术中的一个，替换为同阶的恶咒变形术法术。</p>\n<p>每日一次，你可以以一个具有专注特征的单动作将一个相宜的法术换出。</p>"
+        },
+        "Monstrous Familiar": {
+            "name": "异怪魔宠 Monstrous Familiar",
+            "description": "<p>你将魔宠变形为可怕的生物，将庇护主真正的愤怒释放给敌人。当你从法术位施放赋予战斗形态的法术时（如 @UUID[Compendium.pf2e.spells-srd.Item.5c692cCcTDXjSEzk]{巨龙形态} 或 @UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]{怪兽形态}），你可以将其施放于你的魔宠而非你自己。在此形态下，除战斗形态所赋予的临时生命值外，你的魔宠按你的等级，每等级额外获得 4点生命值。在此形态下你的魔宠仍具有从仆特征，但不能在该战斗形态下进行需要被下达命令的动作或行动。在此形态下，你的魔宠可以以源自其战斗形态的攻击进行打击。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.mno6c7vQg8UET8rg]{效果：异怪魔宠}</p>"
+        },
+        "Arch-Familiar": {
+            "name": "大魔宠 Arch-Familiar",
+            "description": "<p>你的魔宠已演化为名副其实的怪物，而非仅是你的助手。你的魔宠每日从下列项中获得 2 项额外魔宠能力：自主、灵巧、主形态、擅长、言语或施法。</p>\n<p>此外，在每日准备期间，你可以选择让你的魔宠变大至中型生物。它获得一种徒手攻击，并能够以此 5尺触及的徒手攻击进行打击。你魔宠的徒手攻击造成 1d6 由你选择的钝击、穿刺或挥砍伤害，属拳斗武器组，并具有敏捷、巧劲与徒手特征。你的魔宠以你徒手攻击的调整值进行其自身的徒手攻击；你「重击拳套」上的任何符文也施加于你魔宠的徒手攻击。</p>\n<hr />\n<p><strong>特殊</strong> 如果你拥有 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.OAKFEmT9z1Y6IGIH]{女巫武装}，则你魔宠也获得源自该专长的徒手攻击，作为另一种徒手攻击。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Guarded Sanctuary": {
+            "name": "庇佑圣域 Guarded Sanctuary",
+            "description": "<p>你的魔宠获得在其所选区域内提供守护的能力。你的魔宠获得 @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.XrVSnUkDRqzrOC6G]{精魂圣所} 行动。</p>",
+            "prerequisites": [
+                {
+                    "value": "神圣或原初庇护主"
+                },
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Bargain Soul": {
+            "name": "灵魂交易 Bargain Soul",
+            "description": "<p>你已获得你庇护主足够的尊重，能够与之缔结额外的次级契约。你可以以一部分生命之能交换更大的力量。你变为 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭1级} 与 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失1级}，若你已具备这些状态，则其数值各增加 1；并且你对抗死亡效果的豁免承受 -1环境减值。作为交换，你可以恢复一个比你最高法术环低至少一阶的法术位，并恢复 1点聚能点。这些减值会持续到你下一次每日准备，且无法通过任何方式被移除。如果你在受庇护主交易效果影响时死亡，你的灵魂便归你庇护主所有，很可能被化为一个无对前世记忆的异界生物，更直接地推进你庇护主的目标。除非事先与你的庇护主联系并交涉，否则你只能通过复活术或其他魔法被复原。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.AGTwxqEmV3MjZB9s]{效果：灵魂交易}</p>"
+        },
+        "Shared Mindscape": {
+            "name": "共享心境 Shared Mindscape",
+            "description": "<p>你的共享之境已塑造完备，超越了仅存于心眼之中的状态，成为一处「心境」。你的共享之境成为一座沉浸式心境，存于一个与你庇护主相宜的位面，且你获得能够前往并存于其中（而非仅借心眼访问）的能力。你的庇护主获得在你的心境中实体显现的能力，但它可以选择是否如此显现，并选择以何种形态显现。你可以带最多等同于你等级一半的自愿生物进入你的心境；但这些生物在 1小时后、你陷入失去意识或死亡时（以先到者为准）会立即被驱出你的心境。</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                }
+            ]
+        },
+        "Vermin Eye": {
+            "name": "虫眼 Vermin Eye",
+            "description": "<p>你之眼遍布各处——天空、阴沟，以及任何动物所至之处。你召集周遭野生生物献出它们的双眼：通过对你庇护主所授技能进行一次标准 DC 检定成功，召唤一只与该地域相宜的微型动物到你身边。一旦被召来，该生物允许你以你自己的感官透过该生物的位置观看，持续 10分钟。你可以使用其视觉或任意感官来察觉，且当你下达命令时它会遵循你的指引；但它会拒绝任何明显有害的动作，且若以任何方式受到威胁便会逃离。</p>\n<p>此效果生效期间，你的眼睛会显现于该生物身上，通常代替其原本的眼睛。看见该动物的生物若另一次 @Check[type:perception|dc:resolve(@actor.attributes.spellDC.value)|showDC:owner] 检定成功，便能察觉到你的存在；但它们只会得知该生物正被用于观察。此效果持续到你解除为止；解除后，该动物恢复正常。</p>"
+        },
+        "Greater Essence Practicum": {
+            "name": "高级精质实修 Greater Essence Practicum",
+            "description": "<p>你的跨精质魔法知识进一步发展。你可以另外准备一个 6 阶或更低阶的法术位，仅可用于施放你从 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.IFja5U3E6DHivhJW]{精质实修} 所获法术之一。在 14级及之后每 2级，此额外法术位的等级提升 1 阶。</p>",
+            "prerequisites": [
+                {
+                    "value": "精质实修"
+                }
+            ]
+        },
+        "Wayward Gifts": {
+            "name": "歧途馈赠 Wayward Gifts",
+            "description": "<p>你的庇护主授予你源自其神秘教诲的超自然馈赠。当你处于战斗中且至少有一项法咒激活时，你根据你的根源获得下列效果。</p>\n<ul style=\"list-style-type:none\">\n<li><strong>奥术</strong> 你的魔法漾出未驯之力。你的奥秘检定获得 +1状态加值；当你从法术位施放一个会造成伤害且无持续时间的法术时，该法术伤害获得等同于法术环的状态加值。</li>\n<li><strong>神圣</strong> 你获得神性之力。你的宗教检定获得 +1状态加值，且你获得圣洁特征或邪秽特征。如果你信奉某位神祇，且其神圣祝佑要求选定，则你必须选择你神祇的祝佑特征。</li>\n<li><strong>神秘</strong> 你已踏入真正黑暗的魔法之旅。你的神秘检定获得 +1状态加值，且对心灵伤害获得等同于你等级一半（最少 1）的抗力。</li>\n<li><strong>原初</strong> 你的魔法如自然之精魂。你的自然检定获得 +1状态加值；每次你持续法咒时获得等同于其等级的临时生命值，持续至你下一回合开始。</li>\n</ul>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.phm5kEBTaUT9hjDo]{效果：歧途馈赠}</p>",
+            "prerequisites": [
+                {
+                    "value": "初始秘传"
+                }
+            ]
+        },
+        "Fortune Reader": {
+            "name": "占卜师 Fortune Reader",
+            "description": "<p>你已掌握卜读命运之艺，能用其力量掌控自身的命运。你获得一副由庇护主授予力量的特殊牌组、骰子或水晶球。即使被赠出或被毁，该物品每日清晨都会出现在你身上。当你进行每日准备时，你可以使用该物品并掷一颗 d20 来预测一次命运，并获得 @UUID[Compendium.witches-remaster.witches-remaster-actions.Item.lr0mrp6v4TNFbUQr]{命中注定} 反应直至你下一次每日准备读出新命运为止。如果你的检定结果会要求你额外掷骰，则你忽略额外骰子上的 1 与 20。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-roll-tables.RollTable.RCxt9EzDj3qFPzKD]{占卜师}</p>"
+        },
+        "Essence Practicum": {
+            "name": "精质实修 Essence Practicum",
+            "description": "<p>你已学会操控魔法精质，得以学习原本无法取用的法术。从下方列表中选择一种施法根源；你的魔宠学得来自该根源的两个 1 阶法术，你可以将这些法术作为你的女巫法术施放与准备。每当你升级时，你可以选择以同根源中、低于你能施放最高阶 1 阶的法术替换你已学得的其中一个法术；你可以将新选择的法术作为你的女巫法术施放与准备。</p>\n<ul style=\"list-style-type:none\">\n<li><strong>奥术</strong> 神秘或原初</li>\n<li><strong>神圣</strong> 神秘或原初</li>\n<li><strong>神秘</strong> 奥术或神圣</li>\n<li><strong>原初</strong> 奥术或神圣</li>\n</ul>",
+            "prerequisites": [
+                {
+                    "value": "初始秘传"
+                }
+            ]
+        },
+        "Final Lesson": {
+            "name": "终极秘传 Final Lesson",
+            "description": "<p>你的庇护主向你揭示其本性的终极真相，并赋予你与新知识相称的难以言喻之力。选择一项终极秘传。你获得其相关的法咒，且你的魔宠学会与之相关的法术。</p>"
+        },
+        "Watchful Patron": {
+            "name": "戒备庇护主 Watchful Patron",
+            "description": "<p>你的印记会在危险临近时警告你，让你提前知晓即将到来的险情。你的印记以庇护主之警视眼的形态获得生命感知（模糊，15尺）；这是它感知他人的唯一方式。你的印记获得察觉 DC，其察觉调整值等于你的等级加上你的施法调整值。即便你通常无法察觉（如失明、眩目或失去意识），你的印记也能察觉事物。如果你花费一个动作与之交互，你可以使用你的印记来搜索，但只能瞄准你周围的区域。当一个生物被你的印记侦测到时，它会向你示警；该生物对你而言变为隐藏，而非无踪或被观察——前提是该生物没有隐藏的手段。如果你正在睡眠且你的印记侦测到危险，它会自动尝试以每回合 DC 5 的察觉来唤醒你（如果它认为你处于危险中）。随时间推移，你的印记会学会区分你的盟友与其他生物，但若它认为某盟友怀有敌意，它仍会向你示警。</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                }
+            ]
+        },
+        "Witch's Hut+": {
+            "name": "女巫之屋+ Witch's Hut+",
+            "description": "<p>你的家是一座听从你命令的活化建筑。通过进行一项耗时 1天的仪式，你将一间小屋、小型住宅、有篷货车、帐篷或类似建造物（最大可至庞大尺寸）变为活化物体。</p>\n<p>该屋使用你的 AC、豁免调整值与察觉调整值，具有 150 HP 与硬度 10。它具有「构装体护甲」能力，意味着一旦其生命值降至一半以下，或被重击命中后立即触发，其 AC 在被修理之前降低 4。</p>\n<p>你可以以一个具有听觉与专注特征的单动作向该屋下达命令。</p>\n<ul>\n<li><strong>攻击</strong> 该屋以其结构的一部分敲击相邻的敌人，对其进行一次攻击。此攻击为近战法术攻击骰，使用你的法术攻击骰调整值；命中时造成 4d8 加上你施法调整值的钝击伤害，重击则造成双倍伤害。</li>\n<li><strong>戒备</strong> 该屋以你的察觉调整值在 120尺内监视入侵者，并在发现时尖叫。</li>\n<li><strong>潜伏</strong> 该屋显现为同类的普通寻常物体。这是 10 阶幻象效果。</li>\n<li><strong>跃移</strong> 该屋旋转或腾空跃起，然后施放 10 阶 @UUID[Compendium.pf2e.spells-srd.Item.69L70wKfGDY66Mk9]{传送术}，将其自身与其内所有生物一同传送。</li>\n<li><strong>锁闭</strong> 该屋砰然关闭，每个入口被「固锁术」封闭。你可再次发出此命令以解锁其入口。</li>\n<li><strong>移动</strong> 该屋获得 60尺速度（必要时长出巨型鸟腿或骨腿），并执行你下达的极简单的移动命令，例如「跟着我」或「朝那个方向移动」。</li>\n<li><strong>位移</strong> 该屋静止 24小时后，作为一个 7 阶 <em><a class=\"content-link\" draggable=\"true\" data-pack=\"pf2e.spells-srd\" data-uuid=\"Compendium.pf2e.spells-srd.Item.5bTt2CvYHPvaR7QQ\" data-id=\"5bTt2CvYHPvaR7QQ\">异界传送</a></em> 法术前往另一个位面。你必须在下达命令时选定目的地，且必须对该目的地位面具有具体了解才能前往。当此命令完成时你必须在屋内，否则当屋抵达新位面时它会立即恢复为同类的普通建筑。</li>\n</ul>\n<p>你同时只能拥有一座女巫之屋。如果你激活一座新屋，则之前的屋立即恢复为其原本、寻常的形态。如果你死亡，该屋将无限期地遵循你最后下达的命令。</p>"
+        },
+        "Borrowed Lesson": {
+            "name": "借用秘传 Borrowed Lesson",
+            "description": "<p>你、你的庇护主或你的魔宠为某种只有最足智多谋者才能为自己取得的魔法达成了协议。从你庇护主以外的庇护主中选择一个法咒戏法。你获得该庇护主的法咒戏法，并能将其作为你根源的法术施放，无论所选庇护主的根源如何。</p>",
+            "prerequisites": [
+                {
+                    "value": "初始秘传"
+                }
+            ]
+        },
+        "Witch's Armaments+": {
+            "name": "女巫战具+ Witch's Armaments+",
+            "description": "<p>你庇护主之力改变你的躯体，确保你永不无防。你获得下列徒手攻击之一。</p>\n<ul>\n<li><strong>秘指</strong> 你的指甲超自然地长而锐利。你获得一种「指甲」徒手攻击，造成 1d6 挥砍伤害，属拳斗武器组，并具有徒手特征。当你首次获得此专长时，你为你的指甲选择凶猛或纤巧，根据所选获得敏捷或巧劲特征。你可以花费 1天的休息时间改造指甲以互换这些特征。</li>\n<li><strong>铁齿</strong> 颌骨咔嗒一声，你的牙齿变形为长长的金属尖。你获得一种「颚」徒手攻击，造成 1d8 穿刺伤害，属拳斗武器组。</li>\n<li><strong>活发</strong> 你可以瞬间将你的发丝、眉毛、胡须或八字胡延长或缩短数尺，并操控发丝作为武器使用，但你的控制不够精细以进行更需灵巧的工作。你获得一种「发丝」徒手攻击，造成 1d4 钝击伤害；属拳斗武器组；并具有敏捷、卸武、巧劲、绊倒与徒手特征。</li>\n</ul>\n<hr />\n<p><strong>特殊</strong> 你可以多次选择此专长，每次获得不同的徒手攻击。</p>"
+        },
+        "Marked Territory": {
+            "name": "秘印领域 Marked Territory",
+            "description": "<p>你已学会将你庇护主之力束缚于你能看见的区域，将印记之力转移至该目标区域。当你施放 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.7QcvUZh4dPjP8r3K]{奥秘之印} 时，你可以选择以 30尺内的 @Template[type:burst|distance:5] 区域为目标，而非一名盟友；区域内所有盟友获得被该法术作为目标的效果，且该区域作为你印记的位置。在后续回合中，你可以持续以此方式施放的奥秘之印，将爆裂区域移动至你 30尺内另一处区域。</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                },
+                {
+                    "value": "神圣或原初庇护主"
+                }
+            ]
+        },
+        "Hexmarked Witch Dedication": {
+            "name": "秘印女巫献身 Hexmarked Witch Dedication",
+            "description": "<p>作为秘印女巫，你显示你的印记并迅速将其施加至另一个生物。你学得一项基础秘传。</p>"
+        },
+        "Accursed Formation": {
+            "name": "诅咒阵形 Accursed Formation",
+            "description": "<p>你已学会将你召造的结构束缚更长时间。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.7tWv2AsrGat2h6Ge]{诅咒阵形} 法咒。</p>"
+        },
+        "Crystal Sage": {
+            "name": "水晶贤者 Crystal Sage",
+            "description": "<p>你已通过与庇护主的对话学得水晶所能传授的秘密。你时常在身上携带水晶器物，无论是水晶球、魔镜，或散装宝石的小袋。你可以花费 10分钟产生 @UUID[Compendium.pf2e.spells-srd.Item.HXhWYJviWalN5tQ2]{锐耳术} 的效果。如果你在施法上为大师，你可以改为产生 @UUID[Compendium.pf2e.spells-srd.Item.zvKWclOZ7A53DObE]{鹰眼术} 的效果；如果你在施法上为传奇，则你可以产生两者效果，但两个法术必须以同一位置为目标。</p>"
+        },
+        "Chant": {
+            "name": "诵唱 Chant",
+            "description": "<p>你可以通过一种影响周遭的强大诵唱来引导你的某个法咒。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.UHo5FPTAGkw8r8qs]{诵唱} 聚能法术。</p>"
+        },
+        "Rites of Shapeshifting": {
+            "name": "变形仪式 Rites of Shapeshifting",
+            "description": "<p>你的庇护主赋予你其领域生物的力量。你可以花费 10分钟与你的魔宠相通，将你已准备的女巫法术位中的一个法术替换为出现在你施法根源法术列表上的战斗形态法术（如 @UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{动物形态}、@UUID[Compendium.pf2e.spells-srd.Item.5c692cCcTDXjSEzk]{巨龙形态} 等）。被替换的法术阶位必须至少不低于该战斗形态法术的最低法术阶位。</p>"
+        },
+        "Forbidden Grimoire": {
+            "name": "禁忌魔法书 Forbidden Grimoire",
+            "description": "<p>你的魔宠看护一本你庇护主不允许你独自阅读的古老典籍。该书蕴含你庇护主的黑暗秘密；若没有你的魔宠在场，你可能因其知识自陷……或得到超出你庇护主期望掌控的力量。在你每日准备期间，你可以请求你的魔宠将魔法书带给你以准备法术。完成后，该黑书会被你的魔宠送回。</p>\n<p>每周一次，你可以尝试从你庇护主的魔法书中请求一个特定的常见法术用于「学习法术」行动：进行一次 @Check[type:diplomacy|dc:@self.level|showDC:owner|traits:action:request]{对你等级标准 DC 的请求外交检定}（稀有度更高的法术则使用更高 DC，由 GM 裁决）。你也可以使用庇护主所授技能代替外交进行该请求。如果你的请求成功，你仍须满足学习该法术的其他要求；你的庇护主会拨给你足够的时间使用该魔法书。</p>\n<p>你庇护主的魔法书赋予你 @UUID[Compendium.witches-remaster.witches-remaster-actions.Item.fuVn1ygSBm06cSD6]{黑书法咒}；它不计为你当日的一本魔法书。</p>",
+            "prerequisites": [
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Spirited Reprisal": {
+            "name": "精魂反噬 Spirited Reprisal",
+            "description": "<p><strong>触发</strong> 一个敌人对受你奥秘之印影响的盟友造成伤害。</p>\n<hr />\n<p>你印记的精魂之质让你得以汲取周遭精魂以提供守护。你的盟友对触发的伤害获得等同于 2 加上你等级的抗力。当你使用此反应后，你的奥秘之印法术立即结束；并且 10分钟内你不能以奥秘之印作用于该盟友。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.nxDSuTK0KFSbPwWB]{效果：精魂反噬}</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                },
+                {
+                    "value": "神圣或神秘庇护主"
+                }
+            ]
+        },
+        "Conduit of Illusions": {
+            "name": "幻象通道 Conduit of Illusions",
+            "description": "<p>你的魔宠获得在短时间内显现为非自身之物的能力，从而创造出由幻象掩盖的精妙幻视。你的魔宠获得 @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.q0enTUW1KeZsQFan]{幻象投射} 行动。</p>",
+            "prerequisites": [
+                {
+                    "value": "奥术或神秘庇护主"
+                },
+                {
+                    "value": "魔宠"
+                }
+            ]
+        },
+        "Hexmarked Object": {
+            "name": "秘印之物 Hexmarked Object",
+            "description": "<p>你已学会在你身上的物品上施加印记。在每日准备期间，你可以将你庇护主的印记施加于一件你身上 1 体积或更小的物品上，使你只要将该物品收藏起来，就能自动通过隐藏印记的隐密检定。</p>\n<p>此外，该物品视作你的印记，且其位置可被用于判定那些依赖你印记位置的效果（例如你印记的能力）。</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                },
+                {
+                    "value": "奥术或神秘庇护主"
+                }
+            ]
+        },
+        "Material Binding": {
+            "name": "物质拘束 Material Binding",
+            "description": "<p>你已学会运使物质精质以保护盟友。你的奥秘之印法咒让你与盟友更具韧性、更难被操控。你或受你奥秘之印影响的生物的 AC 获得 +1环境加值，且对抗强制移动或会让其获得倒地状态的效果获得 +2环境加值。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.V1mhfm5is6KUjXju]{效果：物质拘束}</p>",
+            "prerequisites": [
+                {
+                    "value": "秘印女巫献身"
+                },
+                {
+                    "value": "奥术或原初庇护主"
+                }
+            ]
+        },
+        "Ceremonial Knife+": {
+            "name": "祭仪之刃+ Ceremonial Knife+",
+            "description": "<p>你已准备好一柄用于在施法时引导能量的特殊之刀。在每日准备期间，你与你的魔宠可以对一件刀类武器组的武器（通常是匕首）进行一项简短仪式。这让该刀如同一根魔法法杖那样运作，蕴含一个你魔宠所知的 1 阶法术。你（且只有你）可以激活此刀以施放其内的法术，正如对法杖一样。你可以尝试过载该刀，这与法杖一样可能让该刀破损或被毁。</p>\n<p>你同时只能拥有一柄祭仪之刃，且你的祭仪之刃不能容纳高于你能施放最高等级之法术的法术。如果你创造另一柄祭仪之刃，则之前所造的祭仪之刃将失去其魔力，回复至你赋予其力量之前的状态。</p>\n<p>在 8级及之后每 2级，你的祭仪之刃可容纳法术的最高阶位提升 1 阶。</p>"
+        },
+        "Devour Misfortune": {
+            "name": "吞噬厄运 Devour Misfortune",
+            "description": "<p><strong>触发</strong> 你即将受到心灵或厄运效果的影响。</p>\n<hr />\n<p>你在厄运还未影响你前便将其吞噬。如果该效果需要豁免，你将成功等级视为高一级；如果该效果要求你掷骰两次取较差结果，则你只掷一次。此外，你获得等同于你等级一半的临时生命值，持续 1分钟。</p>"
+        },
+        "Hexed Name": {
+            "name": "诅咒之名 Hexed Name",
+            "description": "<p>你已对你的名字施法，使其每被高声念出你都能察觉。当一个生物高声念出你的名字时，它必须进行一次 @Check[type:will|dc:resolve(@actor.system.attributes.spellDC.value)]。如果生物豁免失败，你便得知其名字与该生物的模糊细节；如果该生物大失败，你还会得知其确切位置。</p>\n<p>每日一次，如果一个生物在短时间内连续念出你的名字 3次，你可以以一个 3动作的行动将自己传送至其位置，效果如同 @UUID[Compendium.pf2e.spells-srd.Item.69L70wKfGDY66Mk9]{传送术} 升阶到你能施放的最高阶位。你可以选择忽略某些特定生物对你名字的使用，或全部忽略；但若你这么做，它们便会被忽略，直到你决定再次允许为止。</p>"
+        },
+        "Witch's Bottle+": {
+            "name": "女巫之瓶+ Witch's Bottle+",
+            "description": "<p>你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.0LjAMzxSwfJbNEE4]{女巫之瓶} 法咒。</p>",
+            "prerequisites": [
+                {
+                    "value": "大釜"
+                }
+            ]
+        },
+        "Murksight+": {
+            "name": "晦视+ Murksight+",
+            "description": "<p>你的视力可穿透黑暗、幻象、天气与其他效果。如果一个生物对你处于模糊，你的攻击或察觉检定不会因此承受环境减值；当你以模糊生物为目标时，你不需要进行纯骰检定即可命中。</p>"
+        },
+        "Major Essence Practicum": {
+            "name": "主要精质实修 Major Essence Practicum",
+            "description": "<p>你已学会以如此轻松的方式运使魔法精质，以至模糊了不同施法根源之间的界线。你从 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.CrHzj4rzXMwt5AdJ]{高级精质实修} 获得另一个法术位，仅可用于准备你从 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.IFja5U3E6DHivhJW]{精质实修} 所获的另一个法术。</p>",
+            "prerequisites": [
+                {
+                    "value": "高级精质实修"
+                }
+            ]
+        },
+        "Hexing Familiar": {
+            "name": "施咒魔宠 Hexing Familiar",
+            "description": "<p>你优先安排你的法咒，让你的魔宠能更有效、更安全地行动。你学得你在 1级时未选择的另一个法咒法术，通常为 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 或 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相}。</p>",
+            "prerequisites": [
+                {
+                    "value": "初始秘传"
+                }
+            ]
+        },
+        "Rites Of Convocation+": {
+            "name": "召集仪式+ Rites Of Convocation+",
+            "description": "<p>你的庇护主授予你召唤其他生物以助你之力。选择一个出现在你施法根源法术列表上的召唤法术（如 @UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]{召唤动物}、@UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa]{召唤构装体} 等）。你可以花费 10分钟与你的魔宠相通，将你已准备的女巫法术位中的一个法术替换为你所选的法术，升阶至同阶。被替换的法术阶位必须至少不低于该召唤法术的最低法术阶位。</p>\n<p>每日一次，你可以以一个具有专注特征的单动作将一个相宜的法术换出。</p>"
+        },
+        "Patron's Form": {
+            "name": "庇护主之形 Patron's Form",
+            "description": "<p>你按你庇护主所愿变形，从而获得伴随外观改变而来的崭新强力之能。例如，效忠于 @UUID[Compendium.witches-remaster.witches-remaster-patrons.Item.J4sdoSsxrw2X5e4k]{巨兽之影} 的人可能长出鳞片与鳃，@UUID[Compendium.witches-remaster.witches-remaster-patrons.Item.wkg52K59bnXdlqPV]{化身之灾} 女巫可能长出怪物般的双翼与犄角，@UUID[Compendium.pf2e.classfeatures.Item.ghIsqhEsJTvjJiNl]{织线者} 女巫则可能长出第三只眼。当你在每日准备期间为你的魔宠选择能力时，你也获得它直到你下次每日准备时所拥有的所有同伴能力。如果你的魔宠是特定魔宠，你便获得它所授予的同伴能力。</p>\n<p>每日一次，你可以施放一个出现在你根源法术列表上、升阶至你等级一半（向上取整）阶位、且与你庇护主相宜的战斗形态法术。</p>"
+        }
+    }
+}

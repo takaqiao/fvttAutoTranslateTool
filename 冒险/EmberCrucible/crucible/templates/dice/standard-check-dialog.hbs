@@ -1,0 +1,117 @@
+{{#if customizeSkills}}
+<aside class="skills-form standard-form">
+    <h3 class="divider">{{localize "DICE.SKILLS.CustomizeSkills"}}</h3>
+    <div class="skill-dc-list flexcol">
+        {{#each customizeSkills.selected as |entry|}}
+        <div class="skill-dc-entry flexrow" data-skill-id="{{entry.id}}">
+            <select name="skillSelect.{{@index}}">
+                {{#each ../customizeSkills.skillChoices as |choice|}}
+                <option value="{{choice.id}}" {{#if choice.disabled}}disabled{{/if}} {{#if (eq choice.id entry.id)}}selected{{/if}}>{{choice.label}}</option>
+                {{/each}}
+            </select>
+            <input type="number" class="skill-dc" name="skillDc.{{entry.id}}" placeholder="{{../customizeSkills.defaultDc}}" {{#if entry.customDc}}value="{{entry.dc}}"{{/if}} min="0" max="50" step="1">
+            <button type="button" class="icon fa-solid fa-times" data-action="skillRemove" data-skill-id="{{entry.id}}"></button>
+        </div>
+        {{/each}}
+        {{#if customizeSkills.canAdd}}
+        <button type="button" class="skill-add frame-brown" data-action="skillAdd"><i class="fa-solid fa-plus"></i> {{localize "DICE.SKILLS.AddSkill"}}</button>
+        {{/if}}
+    </div>
+</aside>
+{{/if}}
+
+<div class="roll-form standard-form">
+    <section class="roller flexcol">
+        {{> "systems/crucible/templates/dice/partials/standard-check-roll.hbs"}}
+    </section>
+
+    {{#if (and isGM configurable)}}
+    <section class="difficulty form-group">
+        <div class="form-fields">
+            <select name="difficultyTier">
+                {{selectOptions difficulties selected=difficulty.dc valueAttr="dc" labelAttr="label" blank="DICE.DIFFICULTIES.Custom" localize=true}}
+            </select>
+            <label>{{localize "DICE.DC"}}</label>
+            {{numberInput difficulty.dc class="dc" name="dc" min=0 max=50}}
+        </div>
+    </section>
+    {{/if}}
+
+    {{#if showDetails}}
+    <section class="details flexcol">
+        {{> "systems/crucible/templates/dice/partials/standard-check-details.hbs"}}
+    </section>
+    {{/if}}
+
+    {{#if skillSelector.enabled}}
+    <section class="skill-choice form-group">
+        <div class="form-fields">
+            <select name="skillChoice">
+                {{#each skillSelector.selected as |entry|}}
+                <option value="{{entry.id}}" {{#if entry.current}}selected{{/if}}>{{entry.label}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </section>
+    {{/if}}
+</div>
+
+{{#if request}}
+<aside class="request-form standard-form">
+    <h3 class="divider">{{localize "ACTION.RequestedActors"}}</h3>
+    <div class="requested-actors flexcol droppable scrollable" {{#if request.resourceColor}}style="--resource-color:{{request.resourceColor}}"{{/if}}>
+        {{#each request.actors as |actor|}}
+        <div class="line-item member" data-actor-id="{{actor.id}}">
+            <img class="icon" src="{{actor.img}}">
+            <div class="title">
+                <h4>{{actor.name}}</h4>
+                <div class="tags">
+                    {{#each actor.tags as |label tag|}}
+                    <span class="tag">{{label}}</span>
+                    {{/each}}
+                    <div class="crucible-rank-pips flexrow" data-tooltip="{{actor.rankTooltip}}">
+                        {{#each actor.pips}}<span class="pip {{this}}"></span>{{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button type="button" class="icon fa-solid fa-times" aria-label="{{localize "ACTION.RemoveActor"}}"
+                        data-tooltip data-action="requestRemove"></button>
+            </div>
+        </div>
+        {{else}}
+        <p class="hint">{{localize "ACTION.RequestActorsHint"}}</p>
+        {{/each}}
+    </div>
+</aside>
+{{/if}}
+
+<footer class="form-footer">
+    {{#each buttons as |button|}}
+        {{#if (eq button.position "left")}}
+        <button type="{{button.type}}" class="dialog-button frame-brown {{button.cssClass}}" data-action="{{button.action}}" data-tooltip-text="{{button.tooltip}}" {{#if button.disabled}}disabled{{/if}}>
+            {{#if button.icon}}<i class="{{button.icon}}"></i>{{/if}}
+            {{#if button.label}}<span>{{button.label}}</span>{{/if}}
+        </button>
+        {{/if}}
+    {{/each}}
+    <div class="split-button">
+        {{#each messageModes as |mode|}}
+        {{#if mode.interactive}}
+        <button type="button" class="ui-control icon {{mode.icon}}" data-action="messageMode"
+                data-message-mode="{{mode.action}}" aria-pressed="{{mode.active}}"
+                data-tooltip aria-label="{{localize mode.label}}"></button>
+        {{else}}
+        <span class="ui-control icon {{mode.icon}} inactive" data-tooltip aria-label="{{localize mode.label}}"></span>
+        {{/if}}
+        {{/each}}
+    </div>
+    {{#each buttons as |button|}}
+        {{#unless (eq button.position "left")}}
+        <button type="{{button.type}}" class="dialog-button frame-brown {{button.cssClass}}" data-action="{{button.action}}" data-tooltip-text="{{button.tooltip}}" {{#if button.disabled}}disabled{{/if}}>
+            {{#if button.icon}}<i class="{{button.icon}}"></i>{{/if}}
+            {{#if button.label}}<span>{{button.label}}</span>{{/if}}
+        </button>
+        {{/unless}}
+    {{/each}}
+</footer>

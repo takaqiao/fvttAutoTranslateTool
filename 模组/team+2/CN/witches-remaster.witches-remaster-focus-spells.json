@@ -1,0 +1,192 @@
+{
+    "label": "聚能法术 Focus Spells",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Witch's Bottle": {
+            "name": "女巫之瓶 Witch's Bottle",
+            "description": "<p>你对触发的目标施放一个具有法咒特征的法术。如果你所选法术需 2 个动作施放，则你直至下一回合结束变为 @Compendium[pf2e.conditionitems.xYTAsEpcJE1Ccni3]{缓慢 1}；如果所选法术需 3 个动作，则变为 @Compendium[pf2e.conditionitems.xYTAsEpcJE1Ccni3]{缓慢 2}。如果该法咒法术需要 @Compendium[pf2e.actionspf2e.3f5DMFu8fPiqHpRg]{持续} 才能保持效果，你必须在下一回合如常持续此法术，否则法术结束。</p>"
+        },
+        "Demand Compliance": {
+            "name": "要求服从 Demand Compliance",
+            "description": "<p>你向目标怒喝一道命令并伴以手势。你可以命令目标花费一个单动作来：靠近你、逃离（如同具有 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 状态）、放下手中之物、捡起一件物品、倒地，或站立不动。该效果持续至法术保持激活，或直至目标完成所指定的动作（届时法术立即结束）。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标在其下一回合开始前对攻击骰、豁免与技能检定承受 -1 状态减值，且法术立即结束。</p>\n<p><strong>失败</strong> 在法术激活期间，目标对攻击骰、豁免与技能检定承受 -1 状态减值。</p>\n<p><strong>大失败</strong> 同失败，但状态减值为 -2。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.ol19i2os5AZkL6gf]{法术效果：要求服从}</p>"
+        },
+        "Nudge Fate+": {
+            "name": "推动命运+ Nudge Fate+",
+            "description": "<p>你庇护主纺锤的最轻一旋便足以改变命运。持续时间内一次，当目标进行攻击骰、技能检定或豁免，且 +1状态加值会让大失败变为失败、失败变为成功，或成功变为大成功时，你追溯地赋予目标 +1状态加值，相应改变结果。然后法术结束。</p>"
+        },
+        "Warped Visage": {
+            "name": "扭曲容貌 Warped Visage",
+            "description": "<p>你扭曲目标的容貌，使其变为难以辨认且丑陋的版本。该生物必须进行一次强韧豁免。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败</strong> 目标在持续时间内变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级}。每个回合你首次持续此法术时，目标 30尺内的一个盟友必须进行一次 @Check[type:will|dc:resolve(@actor.attributes.spellDC.value)]，否则变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}；大失败则为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。被此效果作为目标的生物 10分钟内对此暂时免疫。</p>\n<p><strong>大失败</strong> 同失败，但目标变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭2级}，且生物在惊惧期间不视目标为盟友。</p>"
+        },
+        "Famed Figure": {
+            "name": "传奇人物 Famed Figure",
+            "description": "<p>你创造出你故事中某个生物的幻象。你创造出一个中型或更小生物的幻象图像。它发出适宜的声音、气味，触感也令人信服。如果你与该图像距离超过 30尺，或你再次施放此法术，则法术结束。</p>\n<p>该图像不能说话，但你可以使用你的动作通过该生物说话，由法术对你的声音作出相宜的伪装。你可能需要进行欺瞒或表演检定来模仿该生物（由 GM 裁决）。当你试图模仿某特定人士并与认识此人之人交互时，尤其可能如此。在战斗中，该幻象在你施放此法术时及后续回合首次持续时各获得 2 个动作。它使用你的法术攻击调整值进行攻击骰，使用你的法术DC 作为其 AC；其豁免调整值等于你的法术DC - 10。它具有足够实质，可以与其他生物形成侧背。如果该图像被攻击命中或豁免失败，法术结束。</p>\n<p>幻象可以通过让目标相信其攻击是真实的来造成伤害，但除此之外不能直接影响物理世界。如果该幻象生物以打击命中目标，目标承受 @Damage[(1+@item.rank)d4[mental]] 心灵伤害（若为近战法术攻击骰）或 @Damage[(@item.rank)d4[mental]] 心灵伤害（若为远程法术攻击骰）。该幻象的打击为非致命；其远程攻击射程为 30尺；如果它每回合进行多次攻击，它会如同生物一样承受多重攻击减值。如果伤害与该怪物图像不符（例如幻象巨龙仅造成 5点伤害），GM 也许允许目标立即尝试一次察觉检定来识破此法术。</p>\n<p>如果目标认为相关的抗力与弱点适用，则其适用（由 GM 裁决）。例如，如果幻象持用战锤攻击对钝击伤害有抗力的生物，该生物便会承受较少的心灵伤害。然而，幻象伤害不会让再生失效，也不会触发要求特定伤害类型的其他效果。GM 应记录幻象造成的累计伤害。任何触摸该图像或使用搜索动作检视它的生物可尝试识破你的幻象。当一个生物识破该幻象，或法术在该幻象被观察时结束时，它从该幻象造成的伤害（若有）中恢复一半，且不再因此受伤。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 该图像近战与远程打击的伤害各增加 1d4，且你能创造的生物最大体型增加一级（最大至超巨型）。</p>"
+        },
+        "Autonomous Actor": {
+            "name": "自主行动者 Autonomous Actor",
+            "description": "<p>你知道你的魔宠不论你是否在场都能行动，因此你转而强化它的能力。你的魔宠在持续时间内从其自主魔宠能力获得 2 个动作。</p>\n<hr />\n<p><strong>升阶（4 阶）</strong> 持续时间内一次，你的魔宠可以使用一项通常需要你下达命令的动作，使用源自自主能力的动作来使用该能力。</p>"
+        },
+        "Mark of Mystery": {
+            "name": "奥秘之印 Mark of Mystery",
+            "description": "<p>你将秘印之质的连结分支至盟友。该目标盟友的身上某处亦获得你的庇护主之印，让你判定印记效果时可使用该盟友的位置（亦可使用你自己的）。</p>\n<p>此外，当生物在此法术激活期间以有害效果将你或盟友作为目标时，他们必须进行一次意志豁免。豁免失败的生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}；大失败则变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。无论结果如何，豁免成功或不再因你的印记惊惧的生物，1小时内对此效果免疫。下列与你根源相关类型的生物对你效果的豁免承受 -1 状态减值；无心智的生物不会因无心智而对惊惧状态免疫（但可能因其他原因免疫）。该减值也施加于你相应根源的施法者与巨龙。</p>\n<ul style=\"list-style:none\">\n<li><strong>奥术</strong> 野兽、构装体、元素</li>\n<li><strong>神圣</strong> 天界、邪魔、监临、亡灵</li>\n<li><strong>神秘</strong> 异常、星界、幽魂、软泥、精魂</li>\n<li><strong>原初</strong> 动物、野兽、元素、妖精、真菌、植物</li>\n</ul>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.0MYmoIO5mSb6QBFm]{法术效果：奥秘之印（状态减值）}</p>"
+        },
+        "Familiar Lesson": {
+            "name": "魔宠秘传 Familiar Lesson",
+            "description": "<p>你与你的魔宠合心思以发现某事，然后你的魔宠行动。你与你的魔宠对同一主题进行回忆知识，然后你命令你的魔宠。</p>"
+        },
+        "Accursed Formation": {
+            "name": "诅咒阵形 Accursed Formation",
+            "description": "<p>你已学会以你的法咒魔法束缚保护、危害与封锁。你可以以一个你已施放、持续时间至少 1分钟、能创造物理屏障、物体、结构或危险（如治疗之井或荆棘之墙）的法术作为目标，让该法术持续至你下一次每日准备。这样做时，你可以将一个针对生物的法咒灌注入你的诅咒阵形中：花费等同于该所选法咒所需动作数的额外动作来施放此法术，必要时可跨多回合分摊。被你的诅咒阵形伤害或以其他方式作用的生物会受该法咒影响，并承受该所选法术的通常效果。法咒效果在它们受目标法术影响的每回合都持续生效，仿佛你已持续了该法术；若不持续，则你的法咒正常结束。如果你所选法咒需要花费聚能点施放，则你必须花费 2 聚能点来施放此法术；且在你所选法术结束、被解除或被彻底毁灭终止之前，你不能恢复施放此法术所花费的聚能点。你可以在每日准备期间继续花费相宜的法术位与聚能点以维持你的阵形，且无须在被法咒之阵形的射程内即可如此。</p>"
+        },
+        "Binding Summon": {
+            "name": "拘束召唤 Binding Summon",
+            "description": "<p>你将被召唤的生物束缚于此界，让它能作为真实生物在你身侧战斗。你不再需要持续此法术以让被召唤生物保持，且法术持续至你下一次每日准备，而非通常的持续时间。当你施放拘束召唤时，在你所选召唤生物的法术被解除或目标死亡之前，你不能恢复施放此法术所花费的聚能点。即使你不持续法术，被召唤生物也获得它在你回合中可以使用的一个单动作。该生物不能进行需时超过 1分钟的行动，否则该束缚不稳并使法术立即结束。</p>"
+        },
+        "Secret of the Forebearers": {
+            "name": "先驱秘密 Secret of the Forebearers",
+            "description": "<p>当你施放此法咒时，你创造出尾随于你身后的先前女巫的残影，将其秘密传授于你。在持续时间内每回合一次，你的先驱者们 @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{协助} 你进行攻击骰或技能检定，可以使用你庇护主所授技能上的调整值进行掷骰，而非通常的技能检定。如果它们结果为失败，则改为获得成功。如果你在庇护主所授技能上为传奇，它们自动大成功。此外，每当你成功通过受先驱者协助的检定时，你直至下一回合开始前因其残影变为 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}。你不能利用此模糊进行隐藏或潜行。</p>"
+        },
+        "Conjure Gadget": {
+            "name": "召造装置 Conjure Gadget",
+            "description": "<p>你召造一件供你或盟友装备的装置。你可以召唤一件你魔宠已知配方、物品等级不超过此法术阶位、且激活所需动作不超过 2 个的装置。该装置在目标的相宜使用情境下显现并待激活，并在你持续此法术期间保持。目标必须能满足使用情境（例如有所需手数以持用该物品），否则法术自动失败。此法术结束后，目标在 10分钟内对<em>召造装置</em>暂时免疫。</p>\n<hr />\n<p><strong>升阶（7 阶）</strong> 你在施放此法术时最多可选择两个目标。</p>"
+        },
+        "Grant Wish": {
+            "name": "实现愿望 Grant Wish",
+            "description": "<p>你赋予生物高声说出一个微小愿望的能力，但其实现方式并不直白。在其回合内，生物可以以一个具有语言与听觉特征的自由动作说出一个愿望，使其下一个需要进行攻击骰或技能检定的动作或行动，对该动作或行动中由其所选其中一次攻击骰或技能检定获得 +1状态加值。</p>\n<p>然而，你的庇护主在你赋予愿望的同时扭曲它，吸食其生命使其更接近死亡。如果该生物在所赋予加值的检定中失败，则它变为 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失1级}；若已具备流失状态则其数值增加 1。来自此法术的流失状态为暂时性，仅在法术持续时间内存在，而非通常的时间；但移除该流失状态并不会恢复因流失通常会失去的生命值。</p>\n<hr />\n<p><strong>升阶（7 阶）</strong> 状态加值提升至 +2。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.i4AhIPLETqNqStN7]{法术效果：实现愿望}</p>"
+        },
+        "Sudden Outbreak": {
+            "name": "暴发瘟疫 Sudden Outbreak",
+            "description": "<p>你让目标生物突然急转恶化。目标必须进行一次强韧豁免。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标必须对其某项疾病的 DC 进行一次豁免（由目标选择该疾病），以推进至下一阶段；之后法术立即结束。</p>\n<p><strong>失败</strong> 同成功，但目标在你后续回合首次持续此法术时必须进行一次豁免以推进其某项疾病的下一阶段（由目标选择）。如果某生物推进下一阶段的豁免大成功，此法术结束。</p>\n<p><strong>大失败</strong> 同失败，但即便生物推进其疾病的豁免大成功，此法术也不会结束。</p>"
+        },
+        "Evil Eye+": {
+            "name": "邪眼+ Evil Eye+",
+            "description": "<p>你庇护主的怨怼显化为一道恶意而妒忌的凝视。如果目标意志豁免失败，它变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1级}（大失败则为恶心2级）。目标的恶心状态持续到你下一回合结束；每次你持续此法术，便将持续时间延长至你下一回合结束。当法术激活且你能看见目标时，恶心数值不能减至 1 以下。</p>"
+        },
+        "Aura of Violent Light": {
+            "name": "暴烈光华灵气 Aura of Violent Light",
+            "description": "<p>你向生物注入生机，赋予它光辉，并以强力的精魂能量灌注它。该生物在 5尺弥漫范围内散发明亮光芒（接下来 5尺为暗光）。在后续回合中，每轮你首次持续此法术时，弥漫范围扩大 5尺，最大至 15尺。</p>\n<p>当被照亮时，该盟友散发出强大能量，对在弥漫范围内明亮光芒中结束回合的所有敌人造成 @Damage[(1+@item.level)[fire],(1+@item.level)[spirit]] 伤害（基础强韧豁免）。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 火焰与精魂伤害各增加 1。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.bRjQx1Kqy70IDcss]{法术效果：暴烈光华灵气}</p>"
+        },
+        "Personal Blizzard+": {
+            "name": "私享暴风雪+ Personal Blizzard+",
+            "description": "<p>你庇护主的吐息变为一场隐蔽与刮削的冰之暴风雪，紧随你的目标。目标进行一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受 @Damage[1d6[cold]] 伤害，法术结束。</p>\n<p><strong>失败</strong> 目标承受 @Damage[1d6[cold]] 伤害与 @Damage[1d6[persistent,cold]] 伤害。该持续伤害在法术结束时自动结束。它对其他生物处于 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}，其他生物对它亦处于模糊。</p>\n<p><strong>大失败</strong> 同失败，但寒冷伤害与持续寒冷伤害皆增至 2d6。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 寒冷伤害增加 1d6，持续寒冷伤害增加 2（大失败时分别为 2d6 与 4）。</p>"
+        },
+        "Beguile": {
+            "name": "诱惑 Beguile",
+            "description": "<p>你以迷人的声音、面部幻象，或献上一份难以抗拒的礼物来召唤目标。选择「声音」或「外貌」，此法术分别获得听觉或视觉特征。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标对你 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂} 1轮，之后法术结束。</p>\n<p><strong>失败</strong> 目标对你迷魂；如果你选了外貌，则同时 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}；如果你选了声音，则同时 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋}。这些效果持续至法术结束或直到你对该生物或其盟友采取敌对动作为止。</p>\n<p><strong>大失败</strong> 同失败，但目标不能对你采取敌对动作，且其每回合开始时如果仍迷魂必须再进行一次意志豁免。如果失败，它必须将本回合的第一动作用于向你移步或跨步。如果该生物已与你相邻，则它直至你下一回合开始前对你处于 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}。</p>"
+        },
+        "Coiling Creepers": {
+            "name": "缠绕藤蔓 Coiling Creepers",
+            "description": "<p>你召唤适于你庇护主之物质所成的扭曲生长物，如荆棘、阴影或书中之像。当你施放此法术时，以及每次你持续此法术时，缠绕藤蔓使用你的法术攻击调整值对区域内或相邻方格中的某生物进行一次健体检定，以 @UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位} 或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊} 该生物。缠绕藤蔓不能离开区域，并就能进行健体检定的生物判定而言视为大型生物。如果你在一轮内多次持续此法术，则你每次获得此效果。缠绕藤蔓使用你的多重攻击减值。充满缠绕藤蔓的方格为困难地形。每个方格可由一次造成至少 @Damage[(10+(@item.rank -3)*5)[slashing]] 挥砍伤害或 @Damage[(2+@item.rank -3)[fire]] 火焰伤害的攻击或效果清除。每个方格 AC 为 5，且豁免自动失败。缠绕藤蔓不提供侧背，也无生物所有的其他属性。除指定的健体动作外，缠绕藤蔓无法进行其他攻击。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 挥砍伤害增加 5，火焰伤害增加 1。</p>"
+        },
+        "Spirit's Touch": {
+            "name": "精魂之触 Spirit's Touch",
+            "description": "<div>\n<div>你命令周遭精魂保护该生物。每回合首次该生物本会承受物理伤害时，它可选择将该伤害减少 [[/r 3+2*(@item.rank -1)]]。在受此法术影响期间，该生物每次进行交互动作时必须进行一次 @Check[type:flat|dc:5|immutable:true]，否则该动作丢失，因为它玄妙的形态阻碍了与现实的交互。目标在花费动作后但在任何效果应用之前掷此检定。每个法咒实例每回合此法咒效果不能触发多于一次。</div>\n</div>\n<hr />\n<p><strong>升阶（+1）</strong> 减少的伤害增加 2。</p>"
+        },
+        "Specular Portals": {
+            "name": "镜面之门 Specular Portals",
+            "description": "<p>你挥手液化你周围所有反光物质的表面，让你能从一面进入并从另一面离开。任何能呈现可见反射的表面（如镜子、闪亮金属或水）都成为你能穿过的门。你可以从一面进入，并从该法术区域内另一面所在的空间出现，仿佛它是相邻空间。以此方式穿越反射表面所耗费的移动量与穿越任何其他空间相同。如果该空间不足以容纳你的躯体（如硬币），则你需要额外一个动作把自己挤出该不可能空间。只要此法咒激活，其他生物也可以通过该空间移动。</p>\n<p>@Template[type:burst|distance:120]</p>"
+        },
+        "Protective Visitation": {
+            "name": "护佑现身 Protective Visitation",
+            "description": "<p><strong>触发</strong> 你即将因一次重击或一次造成伤害的大失败豁免被减至 0 生命值。</p>\n<hr />\n<p>你的魔宠立即行动。你的魔宠向你跨步。如果它在你的方格内结束此跨步，你将该重击视为通常命中、或将该大失败豁免视为通常豁免；并且你的魔宠在此效果减伤之后承受与你相同的伤害。</p>"
+        },
+        "Chant": {
+            "name": "诵唱 Chant",
+            "description": "<p>通过有节奏地按顺序念诵法术之词，你可以将其效果传播给能听见的人。如果你下一个动作是施放一个具有法咒特征、以单一生物为目标且其持续时间依赖持续的法术，你可以改为将其作用于 @Template[type:emanation|distance:30] 范围内所有盟友或敌人。这样做时，该法咒获得听觉特征，且生物仅在区域内时保持受影响。在你施放此法术后进入区域的生物不受你诵唱影响；而离开弥漫区域的生物，即便回到区域，若处于暂时免疫期间也不会重新获得效果。当你持续法咒时，你的持续动作获得听觉特征，且弥漫区域保持有效。如果你再次施放诵唱，则你先前诵唱所作用的法咒立即对所有生物结束，且先前诵唱的所有持续效果立即结束。</p>\n<p>如果你的法术在施放或持续法咒时对单一目标产生有效效果（如 @UUID[Compendium.pf2e.spells-srd.Item.vhMCd15ZwNJn0zen]{恶意暗影}），则你每次持续时在该弥漫区域中受该法咒影响的生物里选择一个作为该效果的目标。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 弥漫范围增加 5尺。</p>\n<hr />\n<p><strong>Foundry 快速模板</strong></p>\n<ul>\n<li><strong>5 阶</strong> @Template[type:emanation|distance:35]</li>\n<li><strong>7 阶</strong> @Template[type:emanation|distance:40]</li>\n<li><strong>9 阶</strong> @Template[type:emanation|distance:45]</li>\n</ul>"
+        },
+        "Eternal Slumber": {
+            "name": "永眠 Eternal Slumber",
+            "description": "<p>你让目标陷入难以自醒的深眠。该生物必须进行一次意志豁免。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标变得昏沉，@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索} 的察觉检定承受 -2 状态减值，且使用专注动作时必须进行一次 @Check[type:flat|dc:5]，失败则失去该动作。</p>\n<p><strong>失败</strong> 目标在持续时间内 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}，且本会让其苏醒的情境也不会自动唤醒，除非其意志豁免成功。</p>\n<p><strong>大失败</strong> 同失败，但即便法术结束该生物仍永久失去意识。你可以设定一个能终止此效果的条件；除此以外，该失去意识状态只能通过 @UUID[Compendium.pf2e.spells-srd.Item.6dDtGIUerazSHIOu]{愿望术} 或其他强力魔法移除。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.uUfYWgmWGTQnVcmr]{法术效果：永眠}</p>"
+        },
+        "Holding Glyph": {
+            "name": "拘禁字符 Holding Glyph",
+            "description": "<p>一个古老符印标记于目标生物身上，使其被拘锁于地。目标承受 1d4 力场伤害，并根据其强韧豁免承受额外效果。生物在你施放此法术时，以及在后续回合首次持续此法术时进行强韧豁免，并承受相应效果。</p>\n<p><strong>大成功</strong> 目标不受影响，法术立即结束。</p>\n<p><strong>成功</strong> 目标承受半额伤害，并对抗强制移动效果承受 -1 状态减值。</p>\n<p><strong>失败</strong> 目标承受全额伤害，并对抗强制移动效果承受 -2 状态减值。此外，每次该生物进行具有移动特征的动作时，承受 1点力场伤害。</p>\n<p><strong>大失败</strong> 同失败，但目标承受双倍初始力场伤害；并在使用具有移动特征的动作时承受双倍力场伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 初始力场伤害增加 1d4，使用移动动作时的力场伤害增加 1。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.7NepB112jMNylpkX]{法术效果：拘禁字符}</p>"
+        },
+        "Fabled Familiar": {
+            "name": "传说魔宠 Fabled Familiar",
+            "description": "<p>在你需要之时，你的魔宠激励你。你命令你的魔宠，它的下一次掷骰获得 +1状态加值，持续至你下一回合结束。如果你的魔宠与另一个生物相邻，它可以选择将此加值赋予该生物的下一次掷骰；但它必须在你施放此法术时即作出此选择。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.GPiEnqwyDab4goUM]{法术效果：传说魔宠}</p>"
+        },
+        "Cosmic Tune": {
+            "name": "宇宙之曲 Cosmic Tune",
+            "description": "<p>你赋予 30尺内一个盟友能在其心中听见你宇宙之曲的能力。该盟友的攻击骰与意志豁免获得 +1状态加值，但他们在持续时间内被该乐曲 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}，且敌对动作不会结束此迷魂状态。</p>\n<hr />\n<p><strong>升阶（7 阶）</strong> 状态加值提升至 +2。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.CEp7ZWZ2MJKljoC8]{法术效果：宇宙之曲}</p>"
+        },
+        "Patron's Apocalypse": {
+            "name": "庇护主末劫 Patron's Apocalypse",
+            "description": "<p>你向天空挥手，召来你庇护主预见的世界终结。你在射程内任意点（甚至空中）选择最多四个互不重叠的 @Template[type:burst|distance:10]。它们成为末劫之点，在区域内回合开始的生物承受相应伤害与你庇护主所设想末劫之效果。当你持续此法术时，你可以将其中一个爆裂区域移动至多 30尺，先前区域留下危险地形——造成 10点该法术所造成同型伤害，并对该法术区域内生物施加额外效果。你在初次取得末劫秘传时选定你庇护主所设想末劫的类型。此法术获得与你所选伤害类型相关的特征。</p>"
+        },
+        "Discern Secrets+": {
+            "name": "洞悉秘密+ Discern Secrets+",
+            "description": "<p>你的庇护主开始低语数则秘密。目标可以以一个自由动作进行 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}、@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索} 或 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色}。只要你持续此法术，目标对所用属性（某项技能或察觉）获得 +1状态加值。</p>\n<p>另外，你可以以一个 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽} 的生物为目标，只要你持续此法术便移除其模糊状态。如果该生物的模糊为某法术或效果所致，你可尝试一次对抗检定以移除模糊状态，但该法术的所有其他效果照旧；若你结束此法术时该效果仍激活，模糊状态会回复。</p>\n<hr />\n<p><strong>升阶（5 阶）</strong> 你可以以两个生物为目标而非一个。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.hdOb5Iu6Zd3pHoGI]{法术效果：洞悉秘密（回忆知识）}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.m1tQTBrolf7uZBW0]{法术效果：洞悉秘密（搜索）}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.dEsaufFnfYihu5Ex]{法术效果：洞悉秘密（察言观色）}</p>"
+        },
+        "Sensory Deprivation": {
+            "name": "感官剥夺 Sensory Deprivation",
+            "description": "<p>你在该生物的眼、口或手周围扭曲一道幻象，使其无法正常行动。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 选择眼、手或口。目标生物在 1轮内感到一种奇异的暖意以及无法使用某些动作的状况——其眼、手或口被假幻象所限。生物可以花费一个 @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索} 动作以将其识破为幻象。</p>\n<ul>\n<li><strong>眼</strong> 该生物 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}。</li>\n<li><strong>手</strong> 该生物不能进行具有操作特征的动作。</li>\n<li><strong>口</strong> 该生物不能进行具有听觉特征的动作。</li>\n</ul>\n<p><strong>失败</strong> 同成功，但法术持续整段持续时间。</p>\n<p><strong>大失败</strong> 同失败，但你可以选择两项而非一项。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.RWiUXoxDqN5HTBVZ]{法术效果：感官剥夺}</p>"
+        },
+        "Realityflicker": {
+            "name": "现实闪烁 Realityflicker",
+            "description": "<p>你以多个现实瞬息消生的压倒性诅咒随机攻击目标，造成 1d4 力场伤害与一项随机选定状态（依其意志豁免）。生物在你施放此法术时，以及在后续回合首次持续此法术时进行意志豁免，并承受相应效果。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受半额伤害。</p>\n<p><strong>失败 </strong>目标承受 1d4 伤害，然后掷 [[/r 1d4]] 并在其下一回合结束前获得以下状态。</p>\n<ol>\n<li>目标变为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}。</li>\n<li>目标变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级}。</li>\n<li>目标变为 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。</li>\n<li>由你选择，目标变为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙1级}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级} 或 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞1级}。</li>\n</ol>\n<p><strong>大失败</strong> 目标承受双倍伤害并掷 [[/r 2d4]]。如果其会获得相同状态两次，你可以将第二次结果视作 4。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 伤害增加 1d4。</p>"
+        },
+        "Unleash True Power": {
+            "name": "释放真力 Unleash True Power",
+            "description": "<p>你的双眼爆发光芒，你开始悬浮，拥抱你庇护主所书的命运。当你施放此法术时，你可以立即将施放时间不超过 2 个动作的另一个法术作为单动作施放，仿佛你的庇护主直接借你之口施放它。这样做时，命运本身将拉扯你的生命，造成 @Damage[1d6[spirit]] 伤害（基础强韧豁免），数值乘以该法术的等级。在此法咒激活期间施放的法术升阶 1 阶（最高至 10 阶）。每回合你首次持续此法术时，你可以将另一个 2 个动作或更短时长的法术作为单动作施放，每次以此方式施放法术都会承受同样伤害。当此法术结束时，你与 10尺弥漫范围内的所有生物因力量最终激涌而承受 10d6 精魂伤害（基础强韧豁免）。</p>"
+        },
+        "Tidal Grasp": {
+            "name": "潮汐之握 Tidal Grasp",
+            "description": "<div>\n<div>水流环绕目标之躯，以怒涛之力围束。当你施放此法咒时，你以法术攻击骰对抗目标的强韧DC。如果成功，目标在你下一回合结束之前或直到它 @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱} 之前被你的潮汐之环 @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒}。大成功时，目标还承受 @Damage[(2* @item.rank)[bludgeoning]] 钝击伤害（等同于该法术环的两倍）。当你持续此法术时，你再进行一次法术攻击骰。如果你对目标的法术攻击骰大失败，或目标对其擒拿状态的挣脱大成功，则它在 1分钟内对此法术暂时免疫。</div>\n</div>\n<hr />\n<p><strong>升阶（3 阶）</strong> 你可以以巨型或更小生物为目标。</p>\n<p><strong>升阶（7 阶）</strong> 你可以以超巨型或更小生物为目标。</p>"
+        },
+        "Lost in the Crowd": {
+            "name": "隐于人潮 Lost in the Crowd",
+            "description": "<p>你挥手让目标视线模糊，让他们看见周遭众人皆是自己的脸，并听见自己以怪异语言言语。生物在你施放此法术时，以及每个回合首次持续此法术时进行意志豁免，并承受相应效果。</p>\n<p><strong>大成功</strong> 法术立即结束。</p>\n<p><strong>成功</strong> 目标不受影响。</p>\n<p><strong>失败 </strong>目标无法分清谁是盟友谁是敌人。在 1轮内，目标对你处于 @Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}，且就侧背判定而言将所有生物都视作敌人。生物可以花费一个动作 @UUID[Compendium.pf2e.action-macros.Macro.tikhJ2b6AMh7wQU7]{搜索} 盟友：进行一次察觉检定对抗你的法术DC，成功时再次将其视作盟友。</p>\n<p><strong>大失败</strong> 同失败，但目标除对你处于措手不及外，对你的盟友也处于措手不及。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.5pJPytUOLY85MIZr]{法术效果：隐于人潮}</p>"
+        },
+        "Judge Soul": {
+            "name": "审判灵魂 Judge Soul",
+            "description": "<p>当你审判他人灵魂时，你的判决便是终决。在射程内选择一个目标。效果取决于该目标是活体还是亡灵。目标承受 6d6 虚空伤害；若它具有虚空治疗，则改为承受 6d6 生机伤害；并依其豁免承受相应效果。被此法术减至 0 生命值的生物会死亡；若是亡灵则永久被毁，且无法通过任何方式被复生或复活，唯有强力魔法（如 @UUID[Compendium.pf2e.spells-srd.Item.6dDtGIUerazSHIOu]{愿望术} 仪式）可救之。生物在你施放此法术时，以及在后续回合首次持续此法术时进行强韧豁免，并承受相应效果。</p>\n<p>所有因此法术死亡或被毁的生物会成为你庇护主之境的幽魂。如果你曾施放过此法术且导致他人死亡，那么当你死亡时，你将转生为天界生物、邪魔、元素、妖婆或其他与你庇护主相宜的实体。如同往常规则，你以这种方式仅会模糊地像梦一般记得你的前世。</p>\n<p><strong>大成功</strong> 目标不受影响，法术结束。</p>\n<p><strong>成功</strong> 目标承受半额伤害并变为 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失1级}，然后法术结束。</p>\n<p><strong>失败</strong> 目标承受全额伤害，变为 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失1级}；若已具备流失状态则其数值增加 1。</p>\n<p><strong>大失败</strong> 目标承受双倍伤害，变为 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失2级}；若已具备流失状态则其数值增加 2。</p>"
+        },
+        "Devoted Glory": {
+            "name": "虔诚荣光 Devoted Glory",
+            "description": "<p><strong>触发</strong> 你的魔宠即将对来自违反你禁忌生物之效果进行豁免。</p>\n<hr />\n<p>你的信仰赋予你保护，让你的故事得以延续。你的魔宠掷豁免两次，取较好结果。</p>"
+        },
+        "Brief Lesson": {
+            "name": "速成秘传 Brief Lesson",
+            "description": "<p>你暂时将信息与经验灌入目标心智，仿佛他们已研习此领域多年。你赋予目标在你也熟练的某项技能上的受训熟练度，并让他们在该技能的检定上获得 +1状态加值。如果目标尝试持续时间超出此法术持续时间的任务或行动，使用较低的熟练度调整值。你法术的目标必须能听见你；当你以你的持续动作维持此法术时，该动作获得听觉特征。</p>\n<hr />\n<p><strong>升阶（6 阶）</strong> 目标在所选技能上获得专家熟练度，且该技能检定的状态加值提升至 +2。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.MQKO63AMAJ2Z1Rai]{法术效果：速成秘传}</p>"
+        },
+        "Elemental Betrayal+": {
+            "name": "元素背叛+ Elemental Betrayal+",
+            "description": "<p>你的庇护主以其卓绝的元素掌控让其元素背叛你的敌人。当你施放此法术时，选择气、土、金、火、水或木。目标对该特征获得弱点 2。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.iYbOvjKFURLKJQ49]{法术效果：元素背叛+}</p>\n<hr />\n<p><strong>升阶（+1）</strong> 弱点增加 1。</p>"
+        },
+        "Melodious Provocateur": {
+            "name": "曲调挑动者 Melodious Provocateur",
+            "description": "<p>你的魔宠为你的某次表演添上其特有的点缀，使其更难被打断。你命令你的魔宠并进行表演，让你 @UUID[Compendium.pf2e.feats-srd.Item.7LB00jkh6JaJr3vS]{迷人表演} 的某位观察者变为迷魂。如果你处于战斗中，你只需要成功（而非大成功）即可使你的迷人表演成功；并且如果你的魔宠以其 @UUID[Compendium.pf2e.familiar-abilities.Item.92lgSEPFIDLvKOCF]{伴奏者} 魔宠能力辅助你，则只要它持续辅助你的表演，便只有你的敌对动作会终止该迷魂状态。每次你持续此法术时，你进行表演并然后向你的魔宠下达命令。</p>"
+        },
+        "Lurking Doom": {
+            "name": "潜伏厄运 Lurking Doom",
+            "description": "<p>你在目标心眼中催生黑暗的未来。这些图像造成 1d4 心灵伤害，并依其意志豁免使其难以专注。生物在你施放此法术时，以及在后续回合首次持续此法术时进行意志豁免，并承受相应效果。</p>\n<p><strong>大成功</strong> 目标不受影响，法术立即结束。</p>\n<p><strong>成功</strong> 目标承受半额伤害。</p>\n<p><strong>失败</strong> 目标承受全额伤害。</p>\n<p><strong>大失败</strong> 目标承受双倍伤害；如果目标尝试专注动作，必须通过 @Check[type:flat|dc:5|immutable:true] 检定否则该动作丢失；目标在花费动作后但在任何效果应用之前掷此检定。</p>\n<hr />\n<p><strong>升阶（+1） </strong>伤害增加 1d4。</p>"
+        },
+        "Ravaging End": {
+            "name": "蹂躏终末 Ravaging End",
+            "description": "<p>你向你能看见的一个敌人显化终结之相。当你施放此法术时，选择酸蚀、火焰或毒素，法术获得你所选的特征，并造成 1d4 伤害加上 2点同类型持续伤害。该持续伤害在法术结束时自动结束；它仍可以由 DC 15 纯骰检定移除，但在法术激活期间不能由协助自动移除。</p>\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受半额伤害。</p>\n<p><strong>失败</strong> 目标承受全额伤害。</p>\n<p><strong>大失败</strong> 目标承受双倍伤害，移除持续伤害的纯骰检定 DC 为 17。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加 1d4，持续伤害增加 2。</p>"
+        },
+        "Needle of Vengeance+": {
+            "name": "复仇之针+ Needle of Vengeance+",
+            "description": "<p>每当目标试图攻击你庇护主特别看重的生物时，一根又长又尖锐的针刺入它的心智。指明你自己或一名盟友。每当该目标对所指生物使用敌对动作时，承受 @Damage[2[mental]] 伤害（基础意志豁免）。大失败时，目标在法术持续期间首次对所指生物使用敌对动作时，亦变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1级}。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加 @Damage[2[mental]]{2 心灵}。</p>"
+        },
+        "Swamp Emergence": {
+            "name": "沼泽涌现 Swamp Emergence",
+            "description": "<p>你将指定区域（4 个相连的 5尺方格）变为浑浊的沼地。你让一片沼泽从地面涌出，伴有 5尺高、1尺厚的浓密植被，提供次级掩蔽。当你持续此法术时，你可以在任意方向添加最多 4 个相连的方格，且该方格必须与你的<em>沼泽涌现</em>的另一个方格相邻。</p>\n<hr />\n<p><strong>升阶（3 阶）</strong> 植被提供标准掩蔽。</p>\n<p><strong>升阶（7 阶）</strong> 植被提供强力掩蔽。</p>"
+        },
+        "Soothsayer's Prediction": {
+            "name": "预言家之占 Soothsayer's Prediction",
+            "description": "<p>你窥视未来，得到将临之事的零星画面。你获得对接下来你最可能遭遇的生物的模糊描述。下次你卷入战斗并掷先攻时，立即对你能看见的遭遇中一个生物进行回忆知识，且你的掷骰获得 +2环境加值。你使用施法根源相关技能，而非该生物通常对应的技能。完成此检定后，法术结束。这些效益持续整段持续时间，且在持续时间结束之前你不能恢复施放此法术所花费的聚能点。</p>\n<p>@UUID[Compendium.witches-remaster.witches-remaster-effects.Item.M0c7Yr4QtW6CenS7]{法术效果：预言家之占}</p>"
+        }
+    }
+}

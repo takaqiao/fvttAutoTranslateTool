@@ -1,0 +1,396 @@
+{
+ "unit": "ST-J05",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ST-J05.cn.html",
+ "summary": "Starter Set Rules chunk 4/5 (bytes 92833–120508) translated: the whole DAMAGE chapter (Armor / Barriers / Broken / Critical Injuries, the TYPICAL BARRIERS and CRITICAL INJURIES tables, the CHARACTER DEATH example, and the BROKEN NPCs / HANDLING DEATH / ADVANCED CRITS sidebars) plus the whole PANIC chapter (Stress Level, Panic Roll, the 13-row PANIC RESPONSE table, Stopping Panic, Relieving Stress).\n\nMethod: rather than retyping the page, I drove a generator script that reads ST-J05.en.html and substitutes only text nodes and {label} contents, each substitution asserted to hit an exact expected count (whitespace runs in the needles match the source's hard wrapping and its stray U+00A0 word-joiners). Structural markup was therefore never retyped and cannot drift. Script kept at C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/stj05.py — rerunning it reproduces the .cn.html byte-for-byte.\n\nRegister: the two evexamplebox tables and the CHARACTER DEATH box are rules/example voice; the three evblockquoteCenter boxes here are GM sidebars, not read-aloud, so they are written as tight rules prose rather than narration. The 13 panic-response rows are written as scannable labels + effect, following the R20 principle (2-char name reverse-engineered from the description).\n\nVolume: 27,675 raw chars in / 19,650 out; visible text 9,582 → 3,745 non-whitespace chars.\n\nTerminology anchored on the wave vocabulary and on cn.json's lowercase status-key block (ALIENRPG.spooked / noisy / twitchy / loseitem / paranoid / hesitant / freeze / seekcover / scream / flee / frenzy / catatonic), which independently confirms all 12 named panic responses I used. Cross-unit consistency taken from ST-J02.cn.html and ST-J03.cn.html already on disk: 完整动作 / 快速动作 / 打断动作, 杂乱／空旷区域, 轮·节·班, 海斯 / 娜特, 《希望的最后一日》, 《异形 RPG 核心规则书》, 盒装套件, and the heading id= convention.",
+ "chars_en": 27675,
+ "chars_cn": 19650,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html equals .en.html (every tag name counted, open + close)",
+   "result": "PASS — 19 distinct tag names, 660 total tag occurrences, Counter-equal in both directions. a6 blockquote8 br24 div9 figcaption5 figure8 h22 h38 img8 li24 ol1 p21 span20 strong25 table8 tbody8 td125 tr31 ul5, plus matching closers. Nothing was added or dropped, including the 24 <br /> and the 125 <td>."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in the English is present unchanged",
+   "result": "PASS — Counter of all class attribute values is identical, values AND counts: arpgtable5 die7 ev-content-link6 evblockquoteCenter3 evchapterheading2 evexamplebox5 evolvedlinestart15 evolvedsubheading8 evscol10:10 evscol2:47 evscol3:14 evscol9:14 evstable3 evstrhead3 liststyle20 textover8. Note this unit uses ev-content-link (starterset flavour), not content-link — kept verbatim."
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — this unit contains no @UUID[…] and no [[…]] (0 in EN, 0 in CN); its 6 links are the v10 anchor form. All 6 <a …> opening tags compare byte-identical as an ordered list, and the ordered list of every data-uuid / data-hash / data-id / data-type attribute is byte-identical. Only the 6 anchor labels changed: Cover→掩护, Fatigue→疲劳, Pushing Your Roll→追骰, Full Auto→全自动 (×2), Stress Response→压力反应. All <img> tags and all style=\"…\" attributes also compare byte-identical as ordered lists."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id= with the original English slug",
+   "result": "PASS — 10/10 headings carry id=: damage, armor, barriers, broken, critical-injuries, panic, stress-level, panic-roll, stopping-panic, relieving-stress. Slugs derived by strict slugify of the original English heading text (matches the corpus convention, cf. tannens-casino dropping the apostrophe). 4 of the 10 (barriers, critical-injuries, stress-level, relieving-stress) are actually targeted by data-hash= from elsewhere in the pack and were verified against the pack-wide data-hash inventory; the other 6 are unreferenced today but carry the English slug anyway so the page's own TOC keeps stable anchors."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — checked all 18 register literals against the English source: none of the adventurePackName / welcomeJournalEntry / rolltable_names strings occurs anywhere in this byte range. One near-miss reported honestly: the string 'Critical Injuries' occurs once, as the <h3> section heading, and I did translate it to 重伤. That is journal prose, not a document name; the register's freeze is on game.tables.getName(\"Critical Injuries\"), which it itself marks dead-but-reserved (matches no document in any pack). The heading now carries id=\"critical-injuries\" so the 2 data-hash links pointing at it still resolve. Also verified untouched: the crit_parse_lockstep colon-space/<br /> structure belongs to RollTable result text, not to this page."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 27,675 chars EN vs 19,650 chars CN; UTF-8, no BOM, LF-only, trailing whitespace after the final </p> preserved byte-for-byte. Zero untranslated English prose remains in any text node (verified after HTML-entity unescaping); the only Latin left in prose is the intended NPC / PC / GM / RPG / D6 / D66 abbreviations."
+  },
+  {
+   "check": "7. Every mechanic term used matches lang/cn.json byte-for-byte",
+   "result": "PASS — 41 terms checked programmatically against a flattened cn.json; 33 are byte-equal to a whole lang value and 8 more are byte-exact substrings of one (濒死, 压力等级, 压力骰子, 死亡检定, 先攻, 全掩护, 半掩护, 区域). Zero mismatches. Full list in lock_lookups. Two deliberate non-lock choices are flagged in open_issues (是/否 in the LETHAL column, and 轮/节/班 for the TIME LIMIT column) — both are lang keys that upstream still ships in English for crit_parse_lockstep reasons, and both follow the precedent ST-J03.cn.html already set in this same wave."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor / TYPES.Item.armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Armor Piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "armor level",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "weak spots",
+   "lang_key": "ALIENRPG.aimForWeakSpot ('瞄准弱点（-2）')",
+   "used": "弱点"
+  },
+  {
+   "english": "damage",
+   "lang_key": "ALIENRPG.Damage",
+   "used": "伤害"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health / ALIENRPG.creature.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "critical injury",
+   "lang_key": "TYPES.Item.critical-injury / ALIENRPG.CriticalInjuryfor",
+   "used": "重伤"
+  },
+  {
+   "english": "broken",
+   "lang_key": "ALIENRPG.Panic14 / ALIENRPG.TAH.dehydrated (substring)",
+   "used": "濒死"
+  },
+  {
+   "english": "death roll",
+   "lang_key": "ALIENRPG.TAH.dehydrated / TAH.freezing / TAH.radiation (substring)",
+   "used": "死亡检定"
+  },
+  {
+   "english": "Panic",
+   "lang_key": "ALIENRPG.Panic / ALIENRPG.Panicked",
+   "used": "恐慌"
+  },
+  {
+   "english": "panic roll",
+   "lang_key": "ALIENRPG.PanicResponseRoll ('恐慌反应检定')",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "panic response",
+   "lang_key": "ALIENRPG.PanicResponses",
+   "used": "恐慌反应"
+  },
+  {
+   "english": "More Panic",
+   "lang_key": "ALIENRPG.MorePanic",
+   "used": "更加恐慌"
+  },
+  {
+   "english": "stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "stress level",
+   "lang_key": "ALIENRPG.Panic7 / Panic9 / Panic10 (substring)",
+   "used": "压力等级"
+  },
+  {
+   "english": "stress dice",
+   "lang_key": "ALIENRPG.RollStressDice / ALIENRPG.HOWMANYSTRESS (substring)",
+   "used": "压力骰子"
+  },
+  {
+   "english": "Stress Response",
+   "lang_key": "ALIENRPG.StressResponses",
+   "used": "压力反应"
+  },
+  {
+   "english": "Resolve",
+   "lang_key": "ALIENRPG.Resolve / ALIENRPG.ResolveS",
+   "used": "精神强度"
+  },
+  {
+   "english": "push (a roll)",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "MEDICAL AID",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "COMMAND",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "STAMINA",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Adjacent range",
+   "lang_key": "ALIENRPG.Adjacent",
+   "used": "紧邻距离"
+  },
+  {
+   "english": "quick action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "action",
+   "lang_key": "ALIENRPG.Action",
+   "used": "动作"
+  },
+  {
+   "english": "full cover",
+   "lang_key": "ALIENRPG.fullcover ('全掩护（-3）')",
+   "used": "全掩护"
+  },
+  {
+   "english": "partial cover",
+   "lang_key": "ALIENRPG.partialcover ('半掩护（-2）')",
+   "used": "半掩护"
+  },
+  {
+   "english": "supply roll",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "fatigued / Fatigue",
+   "lang_key": "ALIENRPG.fatigued",
+   "used": "疲劳"
+  },
+  {
+   "english": "Full Auto",
+   "lang_key": "ALIENRPG.FullAuto",
+   "used": "全自动"
+  },
+  {
+   "english": "initiative (card)",
+   "lang_key": "ALIENRPG.SwapInitiative ('交换先攻') (substring)",
+   "used": "先攻"
+  },
+  {
+   "english": "zone",
+   "lang_key": "ALIENRPG.ShipPanic13 / TAH.radiation (substring)",
+   "used": "区域"
+  },
+  {
+   "english": "cinematic (adventures)",
+   "lang_key": "ALIENRPG.cinematic ('电影')",
+   "used": "电影模式"
+  },
+  {
+   "english": "INJURY (table column)",
+   "lang_key": "ALIENRPG.Injury",
+   "used": "伤势"
+  },
+  {
+   "english": "EFFECT (table column)",
+   "lang_key": "ALIENRPG.Effect",
+   "used": "效果"
+  },
+  {
+   "english": "TIME LIMIT (table column)",
+   "lang_key": "ALIENRPG.TimeLimit",
+   "used": "时限"
+  },
+  {
+   "english": "RESULT (table column)",
+   "lang_key": "ALIENRPG.Result",
+   "used": "结果"
+  },
+  {
+   "english": "RESPONSE (table column)",
+   "lang_key": "ALIENRPG.Response",
+   "used": "反应"
+  },
+  {
+   "english": "Spooked",
+   "lang_key": "ALIENRPG.spooked",
+   "used": "受惊"
+  },
+  {
+   "english": "Noisy",
+   "lang_key": "ALIENRPG.noisy",
+   "used": "喧闹"
+  },
+  {
+   "english": "Twitchy",
+   "lang_key": "ALIENRPG.twitchy",
+   "used": "躁动"
+  },
+  {
+   "english": "Lose Item",
+   "lang_key": "ALIENRPG.loseitem",
+   "used": "脱手"
+  },
+  {
+   "english": "Paranoid",
+   "lang_key": "ALIENRPG.paranoid",
+   "used": "猜忌"
+  },
+  {
+   "english": "Hesitant",
+   "lang_key": "ALIENRPG.hesitant",
+   "used": "犹豫"
+  },
+  {
+   "english": "Freeze",
+   "lang_key": "ALIENRPG.freeze",
+   "used": "怔住"
+  },
+  {
+   "english": "Seek Cover",
+   "lang_key": "ALIENRPG.seekcover",
+   "used": "掩蔽"
+  },
+  {
+   "english": "Scream",
+   "lang_key": "ALIENRPG.scream",
+   "used": "尖叫"
+  },
+  {
+   "english": "Flee",
+   "lang_key": "ALIENRPG.flee",
+   "used": "逃跑"
+  },
+  {
+   "english": "Frenzy",
+   "lang_key": "ALIENRPG.frenzy",
+   "used": "发狂"
+  },
+  {
+   "english": "Catatonic",
+   "lang_key": "ALIENRPG.catatonic (+ RULINGS R20/R20b)",
+   "used": "木僵"
+  },
+  {
+   "english": "Keeping Cool",
+   "lang_key": "(no key in cn.json — no 'keepingcool' status key exists; ALIENRPG.Panic1 is the core-rules D6 row '保持镇定', a different table)",
+   "used": "镇定"
+  }
+ ],
+ "frozen_kept": [
+  "Verified ABSENT from this byte range, so nothing to keep: Alien RPG System · MU/TH/ER Instructions. · Alien Evolved Core Rules · CORE RULES-HOW TO USE THIS MODULE · Alien Evolved Starter Set · STARTER SET - HOW TO USE THIS MODULE · Panic Table · Stress Response Table · Panic Response Table · EV - Critical Injuries · Critical Injuries on Synthetics · critical injuries on synthetics · Spaceship Minor Component Damage · Spaceship Major Component Damage · EV - 48a. LS - DANGER EVENT DETAIL · Alien Tables · Alien Creature Tables · Alien Mother Tables · None",
+  "Register structures verified untouched: the crit_parse_lockstep invariant (label + ':' + SPACE inside the tag, rows split by '<br />') governs RollTable result text, not this journal page — no such row exists here, and no ASCII ': ' was converted to a full-width '：' inside any tag.",
+  "U+2212 MINUS in '−2 dice' kept as U+2212 (1 in, 1 out) — NOT normalised to ASCII hyphen or to the U+2013 EN DASH used elsewhere on the page.",
+  "U+2264 in the '≤0' panic-result cell kept (1 in, 1 out).",
+  "The stray '&gt;' entity at the end of the More Panic paragraph kept byte-identical rather than silently cleaned up.",
+  "47 structural U+00A0 spacer cells (<td class=\"evscol2\"> </td>) and the 2 U+00A0 in the CHARACTER DEATH caption kept: 56 NBSP in → 49 out, the 7 lost being prose-internal word-joiners inside English sentences that no longer exist.",
+  "NOT kept, and reported deliberately: 'Critical Injuries' (1 occurrence) was translated to 重伤. It occurs only as the <h3> section heading — journal prose, not a document name. The register's freeze is on the game.tables.getName() lookup, which it marks dead-but-reserved (matches no document in any pack). Flag for the controller if the assembly rule is stricter than my reading."
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Barrier",
+   "proposed": "屏障",
+   "why": "Not in glossary_alien.json. Heading + table column + a rules keyword used 6× in this unit. 屏障 covers the full mount surface (bulkheads, furniture, vehicles) where 掩体 would collide with Cover=掩护 and 障碍 reads as an obstacle to movement rather than something you shoot through. Bulkhead=舱壁 is already in the glossary and nests under it cleanly."
+  },
+  {
+   "en": "Breach Limit",
+   "proposed": "击穿上限",
+   "why": "Not in glossary. An evolvedlinestart rules label. 击穿 is the standard Chinese for penetrating armour and pairs with 屏障; 上限 states that it is a hard ceiling ('cannot breach, no matter how many successes'), which 穿透限制 would leave ambiguous."
+  },
+  {
+   "en": "Weak Spots",
+   "proposed": "弱点",
+   "why": "Not in glossary, but cn.json ALIENRPG.aimForWeakSpot already ships '瞄准弱点（-2）'. Recording it so the glossary stops disagreeing with the shipped sheet button."
+  },
+  {
+   "en": "Rally",
+   "proposed": "鼓舞",
+   "why": "Not in glossary. One of the three named ways out of Broken, and a COMMAND-skill action, so it must not collide with 急救 (First Aid) or 指挥 (the skill itself). 鼓舞 is a verb you do to another character and carries the 'shout them back onto their feet' sense; 集结 (the D&D reading) would be wrong here."
+  },
+  {
+   "en": "First Aid",
+   "proposed": "急救",
+   "why": "Not in glossary. Distinct from the skill name 医疗 (ALIENRPG.SkillmedicalAid) — the rule reads 'give first aid with a MEDICAL AID roll', so the action and the skill must be two different words or the sentence collapses into a tautology."
+  },
+  {
+   "en": "On Your Own",
+   "proposed": "独自支撑",
+   "why": "Not in glossary. Appears twice in this unit as the same evolvedlinestart label (recovering from Broken unaided, and surviving three death rolls unaided), so it needs ONE rendering. 独自支撑 fits both; 靠自己 is too colloquial for a label and 自行恢复 would be wrong for the death-roll case."
+  },
+  {
+   "en": "Keeping Cool",
+   "proposed": "镇定",
+   "why": "The one panic response with no cn.json status key (the other 12 all have one). Used 镇定 per the wave vocabulary. Note cn.json ALIENRPG.Panic1 says '保持镇定', but that is the core rulebook's D6 panic table row, a different table on a different scale — flagging so the controller can decide whether the two should be unified when the core-rules pack is done."
+  },
+  {
+   "en": "Focused (critical injury #1)",
+   "proposed": "凝神",
+   "why": "Not in glossary; no cn.json key. Named from the effect per RULINGS R20's principle (2 chars, reverse-engineered from the description, not from the English word). Effect is 'Relieve all stress' — the pain snaps you into clarity. 专注 would read as a generic buff label; 凝神 carries the involuntary, bodily sense."
+  },
+  {
+   "en": "Intense Pain (critical injury #2)",
+   "proposed": "剧痛",
+   "why": "Not in glossary; no cn.json key. Straight, 2 chars, matches its sibling rows."
+  },
+  {
+   "en": "Wounded (critical injury #3 / status)",
+   "proposed": "负伤",
+   "why": "Not in glossary; no cn.json key. This one is a persistent STATUS ('you are Wounded', 'the effect of being Wounded remains until healed', 'there is a card for this in this boxed set'), used 6× in this unit, so it needs to survive as a stable 2-char label. 负伤 stays clear of 受伤 (generic 'get hurt') and of 重伤 (Critical Injury, already locked)."
+  },
+  {
+   "en": "Bleeding Out (critical injury #4)",
+   "proposed": "失血",
+   "why": "Not in glossary; no cn.json key. Lethal, time limit Shift — the slowest of the three lethal rows. 失血 + 是 + 班 carries the bleed-to-death reading without needing 血流不止 (4 chars, breaks column parity)."
+  },
+  {
+   "en": "Dying (critical injury #5)",
+   "proposed": "垂危",
+   "why": "Not in glossary; no cn.json key. Lethal, time limit Stretch. Must sit between 失血 and 弥留 on an escalating ladder — 垂危 is the standard clinical middle rung."
+  },
+  {
+   "en": "Last Breath (critical injury #6)",
+   "proposed": "弥留",
+   "why": "Not in glossary; no cn.json key. Lethal, time limit Round — the worst row. 弥留 literally names the state of lingering at death's door and is the strongest of the three; 断气 would state death as already done, which contradicts the death roll you still get."
+  },
+  {
+   "en": "Inner / Outer / Armored Bulkhead, Furniture",
+   "proposed": "内层舱壁 / 外层舱壁 / 装甲舱壁 / 家具",
+   "why": "TYPICAL BARRIERS table rows. Bulkhead=舱壁 is glossed; the three qualifiers are not. Kept parallel so the armour-level ladder 1/2/3/4+ reads down the column."
+  },
+  {
+   "en": "full action / interrupt action",
+   "proposed": "完整动作 / 打断动作",
+   "why": "Not in glossary. NOT invented here — I adopted what ST-J03.cn.html already shipped in this same wave, so the wave stays self-consistent. Worth recording formally because cn.json's own pair is ALIENRPG.FastAction=快速动作 / ALIENRPG.SlowAction=慢速动作, i.e. the sheet says 慢速动作 where the Evolved rules text says 完整动作. Quick action=快速动作 matches on both sides; the full/slow half does not. Controller call."
+  }
+ ],
+ "open_issues": [
+  "SOURCE DEFECT (success symbol dropped upstream): this byte range says 'recover 1 point of Health per rolled' (3×) and 'no matter how many are rolled' (1×) — the base-die success glyph is missing. Other units carry it as <span class=\"basesymbol\">…</span> (see ST-J02.cn.html), but there is no such span anywhere in ST-J05.en.html, and inserting one would break the tag-count gate. I rendered the sense in plain text: 按掷出的每个成功恢复 1 点生命值 / 无论掷出多少成功. If the controller re-injects symbol spans at assembly, these 4 spots are the ones to patch, and the Chinese wording is already shaped to accept a span in place of 成功.",
+  "SOURCE DEFECT (wrong link target, preserved): the bullet 'You become fatigued (…)' carries data-hash=\"full-auto\" and the label 'Full Auto' — it should point at the Fatigue section. I kept the anchor byte-identical and translated the label to 全自动 (matching what the anchor actually targets), rather than silently repointing it. Two units now depend on this: if the controller fixes the hash upstream, the label must change to 疲劳 in the same commit.",
+  "SOURCE DEFECT (edition mismatch, translated faithfully): the CHARACTER DEATH example says the crit roll 'gets 62 – a massive hemorrhage', a D66 core-rules result, while the Starter Set table right above it is a plain D6 with rows 1–6. Rendered literally as 掷出 62——大出血！. Not mine to fix inside a byte range, but the controller may want an editorial note or a Starter-Set-appropriate substitute.",
+  "SOURCE ARTEFACT (preserved): a stray '&gt;' dangles at the end of the More Panic paragraph (a leftover column marker). Kept byte-identical as &gt; rather than cleaned up, since gate 1/6 treat the English as the reference.",
+  "LOCKSTEP DIVERGENCE — LETHAL column: I wrote 是/否, but cn.json still ships ALIENRPG.Yes = 'Yes' (and has no ALIENRPG.No). Those keys are compared with === against crit RollTable cells in actor.mjs (crit_parse_lockstep), which is why they are still English upstream. Consequence today: the journal table reads 是/否 while a drawn crit's chat card reads Yes. Two consistent endings exist — translate the lang key AND the crit table rows together, or revert this column — and only the controller can pick. Same situation, same reasoning, for the TIME LIMIT column: I wrote 班/节/轮 while ALIENRPG.Shift='Shift', OneRound='One Round', OneTurn='One Turn' are still English. I followed the precedent ST-J03.cn.html set in this wave (its time-unit table is already 轮/节/班).",
+  "WHITESPACE EDIT (deliberate, 6 places): the source hard-wraps immediately after a </a>, leaving the closing punctuation alone on the next line. In English that wrap collapses to a harmless space ('Pushing Your Roll ).'); in Chinese it renders a visible gap before a full-width mark ('追骰 ）。'). I pulled the mark back onto the </a> line in all 6 cases (3 were ASCII ').' converted to ）。; 3 were already CJK marks). No tag, class, or attribute byte was touched — gates 1/2/3 all still pass.",
+  "NBSP accounting: 56 U+00A0 in, 49 out. Kept: the 47 <td class=\"evscol2\"> </td> spacer cells and the 2 trailing NBSP inside the CHARACTER DEATH caption. Dropped: 7 prose-internal word-joiners that sat mid-sentence inside English text now replaced (lines 8, 441, 459, 471, 472, 507 of the English). Flagging because DO-NOT-TRANSLATE's encoding_note calls U+00A0 load-bearing — that note governs the register's own entries, and the structural ones here are all intact.",
+  "Heading anchors: 6 of my 10 explicit id= slugs (damage, armor, broken, panic, panic-roll, stopping-panic) are not referenced by any data-hash in the pack today. I added them anyway so the page's own TOC keeps English slugs and any future cross-link resolves. The 4 that ARE referenced (barriers, critical-injuries, stress-level, relieving-stress) were checked against the pack-wide data-hash inventory and resolve.",
+  "Cross-unit dependency for the controller to verify at assembly: my 6 link labels must equal the translated heading text in the units that own those headings — 掩护/Cover and 全自动/Full Auto and 疲劳/Fatigue live in ST-J04's or a later unit's range. 追骰 (ST-J02, confirmed on disk) and 压力反应 (this wave's vocabulary) already match."
+ ]
+}

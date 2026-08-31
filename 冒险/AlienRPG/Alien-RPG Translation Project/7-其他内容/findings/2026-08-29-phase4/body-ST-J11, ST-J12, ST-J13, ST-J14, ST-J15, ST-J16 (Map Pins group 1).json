@@ -1,0 +1,260 @@
+{
+ "unit": "ST-J11, ST-J12, ST-J13, ST-J14, ST-J15, ST-J16 (Map Pins group 1)",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J11.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J12.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J13.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J14.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J15.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J16.cn.html",
+ "summary": "Six map-pin pages translated fresh (the \"100% duplicate\" claim was correctly refuted — every page needed real work). 4,753 visible EN chars → 1,618 CN chars across 6 files, one output file per unit, nothing outside my byte ranges touched.\n\nStructural work beyond prose:\n1. **Heading anchors.** I derived Foundry's exact anchor algorithm from source (`foundry.mjs:685` `slugify` + `:44691` `slugifyHeading`): CHAR_MAP substitution (`&`→`and`, `’`→`'`) → lowercase → collapse `[\\s-]+` to `-` → strip `\"` and `'` → truncate 64. Every translated heading carries an explicit `id=` with the English slug, verified programmatically against that algorithm. This matters for `ST-J14`: \"Stairway & Elevator\" slugs to **`stairway-and-elevator`**, not `stairway-elevator`.\n2. **Invisible chars.** `ST-J12`'s basesymbol span is wrapped in NBSPs in the source (`For each\\\\xa0<span…> \\\\xa0</span>\\\\xa0rolled`) — all 3 preserved. `ST-J16` carries 1 stray NBSP inside \"a PC removes\"; preserved in the analogous slot.\n3. **Shared-block identity.** The Sterile Lab block is byte-identical between ST-J11 and ST-J13; the Survey Office block is byte-identical between ST-J15 and ST-J16 (asserted in the gate script, both True).\n\nCross-unit reconciliation: I ran a term census against all 25 sibling `.cn.html` files that had landed. My independent choices **converged** with peers on 站务维护中心 (ST-J27), 工蜂异形 (ST-J10/J21/J23), 储藏室 (ST-J27), 中央区 + 南翼 (ST-J09), 运营主管 (4 units), 阿尔·辛普森 (majority), 通风道 (ST-J01/J19 + glossary), and 东/西地质实验室 pairs perfectly with ST-J19. I changed one label after the census: Landing Pad 起降坪 → **着陆坪**, matching ST-J09 (same journal as the target heading) and the glossary's 着陆舰 family.\n\nScratchpad: generator `…\\scratchpad\\gen_j11_j16.py`, gate `…\\scratchpad\\gate_j11_j16.py` (re-runnable).",
+ "chars_en": 4753,
+ "chars_cn": 1618,
+ "frozen_kept": [
+  "all 4 @UUID link machinery blocks copied byte-for-byte (data-uuid / data-id / data-type / data-hash / draggable / data-link) — only {label} translated",
+  "class=\"ev-content-link\" (starterset form, NOT content-link) verbatim ×4",
+  "class=\"evolvedsubheading\" ×10, class=\"evolvedpage\" style=\"height:600px\" ×6, class=\"alienrpg evolved\" ×6, class=\"evolvedlinestart\" ×5, class=\"basesymbol\" ×1",
+  "<span class=\"basesymbol\">  </span> content (SPACE + NBSP) verbatim",
+  "NBSP ×3 in ST-J12 and ×1 in ST-J16 preserved",
+  "LV-426 (T-LATIN, model/designation prefix)",
+  "PC / NPC / GM kept Latin per ST-J02/ST-J03 precedent",
+  "D6 / D3+1 dice notation",
+  "A、B、C、D duct access-point markers"
+ ],
+ "lock_lookups": [
+  {
+   "english": "Sterile Lab",
+   "lang_key": "h3 id=sterile-lab (live link target: data-hash=\"sterile-lab\" exists in pack)",
+   "used": "无菌实验室"
+  },
+  {
+   "english": "Storage Rooms",
+   "lang_key": "h3 id=storage-rooms; page name is \"Storage\"; scene notes \"Storage\" on Level 1 AND Level 2",
+   "used": "储藏室"
+  },
+  {
+   "english": "Geolab West",
+   "lang_key": "h3 id=geolab-west; scene note \"Geolab West\" on Level 1",
+   "used": "西地质实验室"
+  },
+  {
+   "english": "Stairway & Elevator",
+   "lang_key": "h3 id=stairway-and-elevator (NOT stairway-elevator — & maps to \"and\")",
+   "used": "楼梯与电梯"
+  },
+  {
+   "english": "Air Ducts",
+   "lang_key": "h3 id=air-ducts",
+   "used": "通风道"
+  },
+  {
+   "english": "Survey Office",
+   "lang_key": "h3 id=survey-office; scene note \"Survey Office\" on Level 1",
+   "used": "勘测办公室"
+  },
+  {
+   "english": "Weyland-Yutani Office",
+   "lang_key": "h3 id=weyland-yutani-office; scene note on Level 1",
+   "used": "韦兰德-汤谷公司办公室"
+  },
+  {
+   "english": "Station Maintenance Center",
+   "lang_key": "{label} of data-hash=\"station-maintenance-center\"; also its own pin page ST-J27 and a Level-2 scene note",
+   "used": "站务维护中心"
+  },
+  {
+   "english": "Landing Pad",
+   "lang_key": "{label} of data-hash=\"landing-pad\"; heading lives in ST-J07/ST-J08 (not yet translated)",
+   "used": "着陆坪"
+  },
+  {
+   "english": "We Got Movement",
+   "lang_key": "{label} of data-hash=\"we-got-movement\"; heading lives in ST-J07..ST-J10",
+   "used": "有动静了"
+  },
+  {
+   "english": "Crawlspaces",
+   "lang_key": "{label} of data-hash=\"crawlspaces\"; heading owned by ST-J03 which already ships id=\"crawlspaces\" 爬行管道",
+   "used": "爬行管道"
+  },
+  {
+   "english": "Medlab",
+   "lang_key": "glossary_alien.json Medlab; also an h3 (data-hash=\"medlab\") and pin page ST-J22",
+   "used": "医疗实验室"
+  },
+  {
+   "english": "Surgery Room",
+   "lang_key": "h3 in Hope's Last Day; pin page ST-J24",
+   "used": "手术室"
+  },
+  {
+   "english": "South Wing",
+   "lang_key": "h3 in Hope's Last Day",
+   "used": "南翼"
+  },
+  {
+   "english": "Central Unit",
+   "lang_key": "off-map area named in ST-J14 and ST-J09",
+   "used": "中央区"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation (LOCK, byte-exact)",
+   "used": "侦察"
+  },
+  {
+   "english": "HEAVY MACHINERY",
+   "lang_key": "ALIENRPG.SkillheavyMach (LOCK, byte-exact; RULINGS R5)",
+   "used": "机械"
+  },
+  {
+   "english": "MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility (LOCK, byte-exact)",
+   "used": "机动"
+  },
+  {
+   "english": "armor level",
+   "lang_key": "ALIENRPG.ArmorRating / glossary Armor Rating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "stress level",
+   "lang_key": "glossary Stress Level; ALIENRPG.Stress",
+   "used": "压力等级"
+  },
+  {
+   "english": "quick action",
+   "lang_key": "ALIENRPG.FastAction; established by ST-J03",
+   "used": "快速动作"
+  },
+  {
+   "english": "full action",
+   "lang_key": "established by ST-J03/ST-J04 (16 uses)",
+   "used": "完整动作"
+  },
+  {
+   "english": "stretch / shift / round",
+   "lang_key": "glossary Stretch/Shift/Round",
+   "used": "节 / 班 / 轮"
+  },
+  {
+   "english": "access point",
+   "lang_key": "established by ST-J03 (Crawlspaces section)",
+   "used": "接入口"
+  },
+  {
+   "english": "cutting torch",
+   "lang_key": "glossary Cutting Torch; also ST-J03/ST-J06/ST-J27",
+   "used": "切割炬"
+  },
+  {
+   "english": "keycard",
+   "lang_key": "glossary Keycard",
+   "used": "钥匙卡"
+  },
+  {
+   "english": "corporate agent",
+   "lang_key": "glossary Company Agent",
+   "used": "公司代理人"
+  },
+  {
+   "english": "Terraforming",
+   "lang_key": "glossary Terraforming",
+   "used": "地球化"
+  },
+  {
+   "english": "Weyland-Yutani",
+   "lang_key": "glossary; PROJECT.md §1.4",
+   "used": "韦兰德-汤谷公司"
+  },
+  {
+   "english": "Al Simpson / Miranda Reynolds / Dr. Komiskey",
+   "lang_key": "Actor \"Theodora Komiskey (Evolved)\" is a W-Y Science Officer, so 博士 not 医生",
+   "used": "阿尔·辛普森 / 米兰达·雷诺兹 / 科米斯基博士"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Drone (Stage IV Xenomorph)",
+   "proposed": "工蜂异形",
+   "why": "PROJECT.md §7.2.0: no Chinese precedent, en-gated 0 across every corpus rung. I adopted the Phase-0 coinage 工蜂异形 (pending.json), which is internally consistent with the settled hive metaphor of Queen=女王 (RULINGS R1). CORROBORATED: three peer units that landed independently during this wave — ST-J10 (the 'Stage IV: Drone' heading itself), ST-J21 and ST-J23 — all chose 工蜂异形 unprompted. Combined with ST-J09's 卵形体（卵）/抱脸虫 and ST-J10's 破胸体, the whole ladder is now de-facto consistent across 6 units. Recommend the controller promote the set into RESOLUTIONS.assertions.json now rather than waiting for ch.10, since 6 units are already committed to it."
+  },
+  {
+   "en": "Air Duct",
+   "proposed": "通风道 (glossary spine, kept)",
+   "why": "glossary_alien.json says 通风道, but ST-J03.cn.html and ST-J04.cn.html render 'air duct' / 'air shaft' as 通风管道, and ST-J02.cn.html renders 'air shafts' as 通风井. I followed the spine. Current census: 通风道 in ST-J01/ST-J14/ST-J19 (3 units) vs 通风管道 in ST-J03/ST-J04 (2 units) vs 通风井 in ST-J02 (1). Needs one unify_terms.py pass; note 'air shaft' and 'air duct' are DIFFERENT English words, so gate on the English before rewriting."
+  },
+  {
+   "en": "Landing Pad",
+   "proposed": "着陆坪",
+   "why": "Not in the glossary. Three renderings existed across the wave: 着陆坪 (ST-J09 ×2), 停机坪 (ST-J21), 起降坪 (my first draft). I switched to 着陆坪 because ST-J09 sits in the same journal as the `landing-pad` heading my link points at, and because it matches the glossary's 着陆舰 (Dropship) family. ST-J21's 停机坪 still needs correcting."
+  },
+  {
+   "en": "Motion Detector",
+   "proposed": "运动探测器",
+   "why": "glossary has only Motion Tracker = 运动追踪器 (also a level-3 hard key gate, TEXT_MOTIONTRACKER). 'motion detectors' in ST-J11/ST-J13 is different English for what is probably the same device. I kept them distinct rather than silently merging. Controller may prefer to collapse both to 运动追踪器."
+  },
+  {
+   "en": "Central Unit",
+   "proposed": "中央区",
+   "why": "Off-map area of Hadley's Hope, not in the glossary. Chosen for parallelism with South Wing = 南翼. ST-J09 independently used 中央区 as well, so this one is already converged."
+  },
+  {
+   "en": "Operations Manager",
+   "proposed": "运营主管",
+   "why": "Al Simpson's title, not in the glossary. Census: 运营主管 in ST-J16/ST-J18/ST-J20/ST-J21 (4 units) vs 运营经理 in ST-J25 (1). Majority form kept; ST-J25 needs the fix."
+  },
+  {
+   "en": "Station Maintenance Center / Survey Office / Sterile Lab / Geolab West / Storage Rooms",
+   "proposed": "站务维护中心 / 勘测办公室 / 无菌实验室 / 西地质实验室 / 储藏室",
+   "why": "Hadley's Hope room names, none in the glossary, each written in three places (pin page name, scene note label, Hope's Last Day h3). 站务维护中心 and 储藏室 already match ST-J27 exactly; 西地质实验室 pairs with ST-J19's 东地质实验室. Should all be pinned before the scene-note and page-name batches run."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "G1 — structural tag multiset equals English exactly (div/h3/p/br/strong/span/a)",
+   "result": "PASS 6/6"
+  },
+  {
+   "check": "G2 — every non-id attribute (name, key, value) identical in document order; class values verbatim including ev-content-link",
+   "result": "PASS 6/6"
+  },
+  {
+   "check": "G2b — data-uuid / data-id / data-hash sequences byte-identical to English; only {label} translated",
+   "result": "PASS 6/6 (4 links)"
+  },
+  {
+   "check": "G3 — every translated heading carries id= equal to the English slug, computed with Foundry's real algorithm (foundry.mjs:685 slugify + :44691 slugifyHeading)",
+   "result": "PASS 6/6 (10 headings)"
+  },
+  {
+   "check": "G4 — no untranslated English prose left (allowlist PC/NPC/GM/LV only); CJK present",
+   "result": "PASS 6/6"
+  },
+  {
+   "check": "G5 — NBSP count preserved (3 in ST-J12, 1 in ST-J16) and basesymbol span content byte-identical",
+   "result": "PASS 6/6"
+  },
+  {
+   "check": "G6 — LOCK conformance: <strong>OBSERVATION/HEAVY MACHINERY/MOBILITY</strong> map 1:1 onto lang/cn.json's 侦察/机械/机动",
+   "result": "PASS 6/6"
+  },
+  {
+   "check": "G7 — DO-NOT-TRANSLATE.json: no T-FROZEN string occurs in any of these six English sources",
+   "result": "PASS 6/6 (0 hits)"
+  },
+  {
+   "check": "Extra — cross-unit byte-identity of duplicated blocks",
+   "result": "PASS: Sterile Lab block ST-J11 == inside ST-J13; Survey Office block ST-J15 == inside ST-J16"
+  },
+  {
+   "check": "Extra — read-aloud register check (evblockquoteCenter)",
+   "result": "N/A: none of the six units contains a boxed read-aloud or evexamplebox block"
+  }
+ ],
+ "open_issues": [
+  "⚠ VERIFIED DEFECT IN A DELIVERED PEER — ST-J03.cn.html breaks two live deep links. Its heading ids drop the &→\"and\" step of Foundry's CHAR_MAP: it ships id=\"surprise-ambush\", id=\"combat-initiative\", id=\"space-time\" where the algorithm yields surprise-and-ambush / combat-and-initiative / space-and-time. The first two ARE live link targets — data-hash=\"surprise-and-ambush\" and data-hash=\"combat-and-initiative\" both exist in the English pack — so as shipped those two @UUID deep links silently scroll to the top of the page instead of the section. The other 16 ids in that file and all 26 in ST-J02.cn.html verify clean. Fix: three id= values in ST-J03.cn.html. Any other unit whose heading contains & needs the same audit.",
+  "ST-J07 and ST-J08 have no .cn.html yet, and ALL SEVEN of my sections exist verbatim as h3 sections inside ST-J07.en.html (Sterile Lab, Storage Rooms, Geolab West, Stairway & Elevator, Air Ducts, Survey Office, Weyland-Yutani Office). Whoever translates ST-J07 must reuse my paragraphs byte-for-byte, or the controller must reconcile. My blocks are self-contained inside <p>…</p> and can be lifted directly out of ST-J11..ST-J16. Note ST-J07's copy is pretty-printed (newline + 6-space indent inside <p>) while mine is single-line matching my own minified source — that whitespace difference is expected and is not a content divergence.",
+  "Landing Pad three-way split, partially resolved by me: ST-J21.cn.html still says 停机坪 where ST-J09.cn.html (×2) and my ST-J16 now say 着陆坪. The authoritative h3 lives in ST-J07/ST-J08, still untranslated — pin 着陆坪 before those land.",
+  "Al Simpson's name and title are split across peers: ST-J21 has 艾尔·辛普森 + 运营主管; ST-J25 has 阿尔·辛普森 + 运营经理; mine (ST-J16) has 阿尔·辛普森 + 运营主管. Majority is 阿尔·辛普森 (2) and 运营主管 (4). One unify pass fixes ST-J21's given name and ST-J25's title.",
+  "Floor numbering is split: I use \"1 层 / 2 层\" (matching ST-J27); ST-J21 uses \"第 1 层 / 第 2 层\". Cosmetic but reader-visible on adjacent pin pages. Also note ST-J07 carries an <h2 class=\"evchapterheading\">Level 1</h2> that will need to agree.",
+  "The Weyland-Yutani Office room is written three different ways across peers: my h3 韦兰德-汤谷公司办公室 (the page-name authority), ST-J21's 韦汤办公室, ST-J27's 韦汤经理办公室. The short form 韦汤 is sanctioned by PROJECT.md §1.4, so the peers are not wrong — but the room NAME should be one string. Recommend 韦兰德-汤谷公司办公室 for the heading/page name/scene note and let 韦汤办公室 stand only as an in-prose back-reference, or unify all three.",
+  "ST-J02.cn.html renders Hope's Last Day as 《希望的最后一天》 while ST-J03.cn.html renders it 《希望的最后一日》. Outside my units and I did not touch it, but it is the adventure title and appears on many pages — worth a unify pass.",
+  "Life-cycle ladder is now de-facto settled by usage across six units (卵形体（卵）/ 抱脸虫 / 破胸体 / 工蜂异形) but is still formally `pending` in glossary_alien.pending.json. Per PROJECT.md §7.2.0 item 4 it should go into RESOLUTIONS.assertions.json before the 25 creature actors and the RollTables are translated, or the actor names will diverge from the prose.",
+  "I did not run apply_translations.py --dry: that gate operates on a unit batch.json, and this wave's contract is one .cn.html per unit assembled by the controller. My gate script (…\\scratchpad\\gate_j11_j16.py) covers the same markup invariants (tag multiset, attribute identity, link-key identity) plus the anchor and NBSP checks that the standard gate does not have. Re-run it after assembly."
+ ]
+}

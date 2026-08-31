@@ -1,0 +1,311 @@
+{
+    "label": "杂项 Miscellaneous",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {
+        "Effects": "效果 Effects",
+        "Actions": "动作 Actions"
+    },
+    "entries": {
+        "Effect: Interlocked Shields": {
+            "name": "效果：联锁盾阵 Effect: Interlocked Shields",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.KjJxeCtiQrf6FQOm]{联锁盾墙} 授予</p><p>你的 AC 获得 +1环境加值，或你举盾的环境加值增加 1。</p>"
+        },
+        "Effect: Deep Meditation": {
+            "name": "效果：深度冥想 Effect: Deep Meditation",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.kjejKLqx7cFIlv9e]{深度冥想} 授予</p><p>你对假扮与说谎获得 +3环境加值（成功时为 +2）。</p>"
+        },
+        "Effect: Ward the Sanctified": {
+            "name": "效果：守护受祝者 Effect: Ward the Sanctified",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.kGTx0Ri0Rx5IPpXJ]{开场伴奏} 授予</p><p>你对受守护生物的攻击骰承受 -2 状态减值（成功时为 -1，大失败时获得 +2状态加值）。</p>"
+        },
+        "Feral Lunge": {
+            "name": "野性猛冲 Feral Lunge",
+            "description": "<p>你凶猛地扑向敌人。你向一个敌人跨步，然后向其 @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃} 或 @UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远}。如果你结束此移动时处于近战触及内，你可以以非拳头徒手攻击进行一次近战打击，且攻击骰获得 +1环境加值。</p>"
+        },
+        "Effect: Wrathful Protector": {
+            "name": "效果：愤怒护卫 Effect: Wrathful Protector",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.SrgRgADZEd2PAUHB]{盛怒护卫} 授予</p><p>你对被标记敌人的伤害获得 +4状态加值。如果你至少 16级，状态加值增至 +6。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.jnNObtugln5yFMjo]{狂怒回应} 无畏行动。</p>"
+        },
+        "Effect: Establish Etiquette": {
+            "name": "效果：确立礼仪 Effect: Establish Etiquette",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.hOZcktZvOn2aWQp9]{建立礼仪} 授予</p><p>每个回合该生物未遵循已确立的礼仪，其攻击骰承受 -1环境减值；如果你的社群检定大成功，则承受 -2环境减值。如果它遵循已确立的礼仪，其攻击骰直至下一回合获得 +1环境加值，或它打破礼仪（立即重新承受减值）。生物可以选择以一个具有听觉或专注特征的单动作过早结束你的「确立礼仪」，从而拒绝你对礼仪的诉求。</p><p>你与你的盟友在对该生物采取行动时必须选择遵循已确立的礼仪；如果你不遵循该礼仪，效果立即结束，所有目睹你或盟友违反者在 1天内对你的「确立礼仪」暂时免疫。</p><p><strong>十步</strong> 你选择仅以远程武器进行打击，且仅在其第一射程增量内。</p><p><strong>不光彩攻击</strong> 你选择忽略对 AC 的环境减值。</p><p><strong>仅手</strong> 你选择仅以非架势的徒手攻击进行打击。</p><p><strong>无言</strong> 你选择不使用听觉或语言动作。</p><p><strong>单手</strong> 你选择保留一只手空闲。</p><p><strong>让路</strong> 你选择每回合恰好进行一次具有移动特征的动作。</p><p><strong>独斗</strong> 你选择不攻击此轮内已被另一生物攻击过的生物。</p>"
+        },
+        "Crash Together": {
+            "name": "并肩冲撞 Crash Together",
+            "description": "<p><strong>触发</strong> 你的「卡斯林冲撞者」搭档尝试穿过你的方格</p><hr /><p><strong>效果</strong> 你与你的盟友一起移动。你以与盟友相同方向跨步至多半速。</p>"
+        },
+        "Effect: Peace with Death": {
+            "name": "效果：与死亡言和 Effect: Peace with Death",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.Mkd7Qhph9eP9g1tz]{与死和解} 授予</p><p>恢复检定的 DC 减少 5。当你恢复生命值时，额外获得等同于你等级的治疗量（成功时为等级一半）。</p>"
+        },
+        "Effect: Liturgical Performance": {
+            "name": "效果：礼拜表演 Effect: Liturgical Performance",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.IY3S7jaggi50IfUc]{礼仪表演} 授予</p><p>如果观众支持你的信仰，你的宗教检定获得 +1环境加值；若反对，则承受 -1环境减值。</p>"
+        },
+        "Effect: Hunger Pangs": {
+            "name": "效果：饥饿之痛 Effect: Hunger Pangs",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.ccmL4sIkXRrkCmiu]{饥饿之痛} 授予</p><p>你获得虚空治疗。</p>"
+        },
+        "Effect: Savage Success": {
+            "name": "效果：野性大胜 Effect: Savage Success",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.3hakMj2ZU7iSe1iu]{野蛮成功} 授予</p><p>你的非拳头近战徒手打击对伤害获得等同于武器伤害骰数量的环境加值。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.0sLZW5D6ziJY7yD0]{野性猛冲} 无畏行动。</p>"
+        },
+        "Effect: Opening Accompaniment": {
+            "name": "效果：开场伴奏 Effect: Opening Accompaniment",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.kGTx0Ri0Rx5IPpXJ]{开场伴奏} 授予</p><p>你的先攻获得 +2状态加值（成功时为 +1，大失败时为 -4）。</p>"
+        },
+        "Effect: Wrathful Protector (Temporary HP)": {
+            "name": "效果：愤怒护卫（临时 HP） Effect: Wrathful Protector (Temporary HP)",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.SrgRgADZEd2PAUHB]{盛怒护卫} 授予</p><p>你获得等同于你等级一半的临时生命值。这另外赋予 @UUID[Compendium.pf2e-feats-plus.misc.Item.1Byt0JWIVk6ijxE2]{效果：愤怒护卫}。</p>"
+        },
+        "Effect: May They Abandon You!": {
+            "name": "效果：愿其弃你！ Effect: May They Abandon You!",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.Y5UZqvxm8PYjISIT]{愿其弃你！} 授予</p><p>你对触发的检定获得 +1状态加值（失败时为 -1 状态减值，大失败时减值为 -2）。</p>"
+        },
+        "Effect: The End Times are Coming!": {
+            "name": "效果：末日将至！ Effect: The End Times are Coming!",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.ISkhd8FXFM31Di2Z]{终末将至！} 授予</p><p>你下一次对此效果起源的敌对动作获得 +1状态加值。</p>"
+        },
+        "Effect: Primary Threat": {
+            "name": "效果：首要威胁 Effect: Primary Threat",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.N6qvXuLkwxSRezt3]{主要威胁} 授予</p><p>你对发起者以外的目标的攻击承受 -1环境减值。</p>"
+        },
+        "Evoke Surge": {
+            "name": "激涌唤起 Evoke Surge",
+            "description": "<p>你将流转于身的静态魔法能量灌注为一个被大幅增强的法术。施放一个会造成伤害、无持续时间且最多 2动作施放的法术。该法术的伤害获得等同于法术环两倍的状态加值。</p>"
+        },
+        "Effect: Disrupting Performance": {
+            "name": "效果：扰乱表演 Effect: Disrupting Performance",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.7u3zhB89hKYh9O6Q]{扰乱表演} 授予</p><p>你对触发的检定承受 -2环境减值（大成功时为 -3）。</p>"
+        },
+        "Effect: Devastating Finish": {
+            "name": "效果：毁灭终结 Effect: Devastating Finish",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.QrDy2f0BYBWnzFCM]{毁灭终局} 授予</p><p>你的 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 获得 +2环境加值。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.UoIjmafqNeVuiKRc]{下一个？} 无畏动作。</p>"
+        },
+        "Effect: Ritual Glyphs": {
+            "name": "效果：仪式符印 Effect: Ritual Glyphs",
+            "description": "<p>当进行仪式时，你对所有主要与次要检定获得 +1环境加值，或将此效果的环境加值数值增加 1。</p><p>如果起源者在奥秘上为大师，则所应用的环境加值增加 2 而非 1。</p>"
+        },
+        "Effect: On Borrowed Time": {
+            "name": "效果：借时萦身 Effect: On Borrowed Time",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.govJQSn153dTqcVP]{借时萦身} 授予</p><p>你获得 60点临时生命值。</p>"
+        },
+        "Effect: Quick Cuisine": {
+            "name": "效果：快手料理 Effect: Quick Cuisine",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.u1Yj7NCED4myTRDu]{快速烹饪} 授予</p><p>你下次的强韧豁免获得 +1环境加值（如果该效果会施加恶心状态，则为 +2环境加值；失败时改为承受 -2环境减值）。大成功时，你获得等同于此效果起源者等级一半加上其智力调整值的临时生命值。</p>"
+        },
+        "Twist from Harm": {
+            "name": "扭身避害 Twist from Harm",
+            "description": "<p><strong>触发</strong> 你将因一次你借由「闪躲腾挪」获得 AC 环境加值的攻击骰承受物理伤害</p><hr /><p><strong>效果</strong> 你身体扭转避开，将所受伤害降至最低。你对触发攻击的物理伤害获得等同于你等级一半的抗力。</p>"
+        },
+        "Activate Glyph": {
+            "name": "激活符印 Activate Glyph",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>需求</strong> 你已创造两个铭刻传送符印且与其中之一处于物理接触</p><hr /><p>你激活该符印，对站于符印方格中的所有生物产生「传送术」法术效果，但目的地为另一个铭刻传送符印的位置，且无任何偏离预定目的地。</p>"
+        },
+        "Unleash Kaiju Strength": {
+            "name": "释放怪兽之力 Unleash Kaiju Strength",
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你让怪兽之力的一部分逃出你身，让毁灭性破坏紧随其后。你在你周围的 @Template[type:emanation|distance:40] 范围内产生 @UUID[Compendium.pf2e.spells-srd.Item.x7SPrsRxGb2Vy2nu] 的效果。在 1分钟内，你的徒手打击额外造成 2d8 与你所幸存怪兽相关能量类型的伤害；并对该能量类型获得 10点抗力。</p>"
+        },
+        "Pinpoint Assault": {
+            "name": "精准突击 Pinpoint Assault",
+            "description": "<p><strong>触发</strong> 你对「精准射击」所要求的敌人进行远程打击并掷伤害</p><hr /><p><strong>效果</strong> 你以神枪术直击灵魂。掷伤害两次并取较高结果。</p>"
+        },
+        "Effect: Echoing Earth": {
+            "name": "效果：回响大地 Effect: Echoing Earth",
+            "description": "<p>你获得 10尺的模糊震波感知；如果你在自然上为传奇，则为 20尺。</p>"
+        },
+        "Effect: Establish Etiquette (Dishonorable Striking)": {
+            "name": "效果：确立礼仪（不光彩攻击） Effect: Establish Etiquette (Dishonorable Striking)",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.hOZcktZvOn2aWQp9]{建立礼仪} 授予</p><p>瞬时效果，压制对 AC 的环境减值。</p>"
+        },
+        "Effect: Pinpoint Out": {
+            "name": "效果：精准锁定 Effect: Pinpoint Out",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.KLiIDI6iio7WbllX]{精准指出} 授予</p><p>你的察觉获得 +2环境加值。</p>"
+        },
+        "Effect: Unleash Kaiju Strength": {
+            "name": "效果：释放怪兽之力 Effect: Unleash Kaiju Strength",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.misc.Item.Ig8amOmlbl6VkzzK]{释放怪兽之力} 授予</p><p>你的徒手打击额外造成 2d8 与你所幸存怪兽相关能量类型的伤害；并对该能量类型获得 10点抗力。</p>"
+        },
+        "Effect: Off-Handed Insult": {
+            "name": "效果：旁敲讽语 Effect: Off-Handed Insult",
+            "description": "<p>你对触发的、由本则妙语之起源者结束「妙语」效果的技能检定承受 -2 状态减值。</p>"
+        },
+        "Effect: Seeking Spell": {
+            "name": "效果：寻迹法术 Effect: Seeking Spell",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.5GdNu5IBGAN9KhLV]{寻迹法术} 授予</p><p>瞬时效果。你将掩蔽的环境加值减少 2，最低至 0。</p>"
+        },
+        "Effect: Magical Feedback": {
+            "name": "效果：魔法反馈 Effect: Magical Feedback",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.0ScSmP7dkiE9a5uv]{魔法反馈} 授予</p><p>你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.BZizB3VFYoo6bGcs]{激涌唤起} 无畏行动。</p>"
+        },
+        "Effect: Moonscarred": {
+            "name": "效果：月伤 Effect: Moonscarred",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.rT5WPDD7zcFMRfMQ]{月伤} 授予</p><p>你获得 30尺的模糊嗅觉感官，以及等同于你等级的临时生命值。</p>"
+        },
+        "Effect: Spiritual Memories (Expert)": {
+            "name": "效果：精魂记忆（专家） Effect: Spiritual Memories (Expert)",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.4ZmVTOG4s65NXB6E]{灵魂记忆} 授予</p><p>选择一项技能，你在该技能上变为专家。</p>"
+        },
+        "Effect: Spiritual Memories (Trained)": {
+            "name": "效果：精魂记忆（受训） Effect: Spiritual Memories (Trained)",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.4ZmVTOG4s65NXB6E]{灵魂记忆} 授予</p><p>选择一项技能，你在该技能上变为受训。</p>"
+        },
+        "Effect: Warrior's Rally": {
+            "name": "效果：战士集结 Effect: Warrior's Rally",
+            "description": "<p>你的下一次攻击骰获得状态加值，之后此效果立即结束。</p>"
+        },
+        "Bastion's Guidance": {
+            "name": "智者指引 Bastion's Guidance",
+            "description": "<p><strong>触发</strong> 你尝试 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}</p><hr /><p><strong>效果</strong> 处于知识智者的临在让你能进行二度思考。你掷触发检定两次并取较好结果。之后你 10分钟内对「智者指引」免疫。</p>"
+        },
+        "Who's Next?": {
+            "name": "下一个？ Who's Next?",
+            "description": "<p><strong>需求</strong> 你在上一回合内将一个生物减至 0 生命值，且未使用 @UUID[Compendium.pf2e.feats-srd.Item.gjec0ts3wkFbjvHN]{下一个就是你} 反应</p><hr /><p><strong>效果</strong> 在击倒敌人之后，你挑衅他人冒犯你。所有 30尺内、目睹该所需生物被减至 0 生命值的敌人必须以你的威吓 DC 进行 @Check[will|against:intimidation] 豁免。</p><hr /><p><strong>成功</strong> 该生物不受影响。</p><p><strong>失败</strong> 该生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}，且只要它能看见你，便不能将惊惧状态降至 1 以下。</p><p><strong>大失败</strong> 同失败，但该生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。此外，如果该生物等级不高于你，它在惊惧期间获得 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑} 状态。</p>"
+        },
+        "Effect: Defensive Flight Maneuver": {
+            "name": "效果：防御飞行机动 Effect: Defensive Flight Maneuver",
+            "description": "<p>你直至下一回合开始前，你的 AC 获得 +1环境加值，或让此效果的环境加值增加 1。</p>"
+        },
+        "Effect: Delver's Intuition": {
+            "name": "效果：探险者直觉 Effect: Delver's Intuition",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.Mkd7Qhph9eP9g1tz]{与死和解} 授予</p><p>恢复检定的 DC 减少 5。当你恢复生命值时，额外获得等同于你等级的治疗量（成功时为等级一半）。</p>"
+        },
+        "Effect: Hypersenses": {
+            "name": "效果：超感官 Effect: Hypersenses",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.QhsW8mRh4mPh9Zkr]{超感官} 授予</p><p>选择以下感官之一以获取。如果你选择一项你已具备模糊感官的，你可以改为将其在所列范围内提升至精确。</p><ul><li>20尺范围的精确回声定位。</li><li>30尺范围的模糊嗅觉，或如果你已具备模糊嗅觉则改为 20尺范围的精确嗅觉。</li><li>30尺范围的模糊震波感知。</li><li>30尺范围的模糊波感。</li></ul>"
+        },
+        "Effect: Harden Heart": {
+            "name": "效果：心如铁石 Effect: Harden Heart",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.1uaBJa7Vzw9Mz32r]{心硬如铁} 授予</p><p>你对抗情绪效果的豁免获得 +2环境加值。如果你在求生上为传奇，此加值改为 +3。</p>"
+        },
+        "Effect: Shallows' Sallow Shadows": {
+            "name": "效果：浅滩苍影 Effect: Shallows' Sallow Shadows",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.9vL6eMCAwGYax0z0]{浅滩昏影} 授予</p><p>你对抗经你 @UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识} 辨识的能力的豁免获得 +1环境加值。</p>"
+        },
+        "Effect: Pick on Someone Your Own Size": {
+            "name": "效果：欺负与你同大者 Effect: Pick on Someone Your Own Size",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.YOvnL7QRWU3x2lgZ]{挑同等大小者} 授予</p><p>对于体型大于你、且因你的 @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气} 而 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL] 的生物，你的 @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞} 或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊} 获得 +1环境加值。</p>"
+        },
+        "Effect: Give Offerings": {
+            "name": "效果：献上贡品 Effect: Give Offerings",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.DQeBdmEuorx9aXkC]{献祭} 授予</p><p>你的下一次非平凡宗教检定获得 +1状态加值。</p>"
+        },
+        "Effect: Haughty Correction Critical Failure": {
+            "name": "效果：傲慢更正大失败 Effect: Haughty Correction Critical Failure",
+            "description": "<p>你的应答失措，你的智力相关技能检定与察觉检定及 DC 在 1分钟内承受 -2环境减值，或直到你以一个具有专注特征的单动作恢复镇定。</p>"
+        },
+        "Effect: Affliction Mithridatism": {
+            "name": "效果：苦疫抗性 Effect: Affliction Mithridatism",
+            "description": "<p>根据你的结果与选择，你将：</p><ul><li><p>对所选苦难免疫，</p></li><li><p>对所选苦难的豁免获得 +4环境加值，</p></li><li><p>或对所选毒素或苦难造成的伤害获得等同于你等级的抗力。</p></li></ul>"
+        },
+        "Effect: Can't Stop, Won't Stop": {
+            "name": "效果：永不停步 Effect: Can't Stop, Won't Stop",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.1VT95tETP9FBKDTU]{不停不息} 授予</p><p>你对你所选的某项豁免获得等同于你重伤值的状态加值。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.g92q06HvQQvyj445]{屹立不倒} 无畏反应。</p>"
+        },
+        "Still Standing": {
+            "name": "屹立不倒 Still Standing",
+            "description": "<p><strong>触发</strong> 你具备重伤状态时，将获得 @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死} 状态</p><hr /><p><strong>效果</strong> 你懂得在死亡面前屹立不倒。你恢复等同于你等级一半的生命值，并立即将 @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{受伤} 状态增加 1；如果该垂死状态源自重击或豁免大失败，则增加 2。</p>"
+        },
+        "Effect: Slope Slide": {
+            "name": "效果：滑坡 Effect: Slope Slide",
+            "description": "<p>你对一个生物的近战打击获得环境加值。</p>"
+        },
+        "Effect: Endorsing Jingle": {
+            "name": "效果：广告小调 Effect: Endorsing Jingle",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.oEneKAAytmKfvawK]{代言歌谣} 授予</p><p>你的表演检定承受 -2环境减值。</p>"
+        },
+        "Effect: Honed-Shot Precision": {
+            "name": "效果：精准射击 Effect: Honed-Shot Precision",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.NgBZh1OX80hX7OHA]{磨砺射击精准} 授予</p><p>你对被标记敌人的远程打击每颗武器伤害骰额外造成 1点精准伤害。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.Ig9HaamKNFhmhIYk]{精准突击} 无畏反应。</p>"
+        },
+        "Effect: Teacher's Aura": {
+            "name": "效果：教师之灵 Effect: Teacher's Aura",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.eMpnxZozr8UisFh5]{知识堡垒} 授予</p><p>你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.UN7IXaYjVOhxOh1T]{智者指引} 反应。</p>"
+        },
+        "Effect: Revitalizing Grove": {
+            "name": "效果：复元之丛 Effect: Revitalizing Grove",
+            "description": "<p>当你处于复元之丛中时，你在 1分钟内获得快速治疗。</p>"
+        },
+        "Furious Response": {
+            "name": "狂怒回应 Furious Response",
+            "description": "<p>你向冒犯你盟友的敌人猛进。你可以选择跨步或打击三次——为这三次选择中的每一次在跨步与打击之间作出选择。你的跨步必须朝向「愤怒护卫」所要求的敌人；你的打击必须以同一敌人为目标。</p><p>或者，你可以施放一个会造成伤害且最多 3动作施放的法术，而非跨步或打击三次。如果你选择施放一个 2动作或更短时间的法术，你可以在施放该法术之前作为「狂怒回应」的一部分使用一个你能取用的 1动作塑法。该法术必须以所要求的敌人为目标，或将其包含于其作用区域之中。</p>"
+        },
+        "Effect: Sprint Count": {
+            "name": "效果：冲刺计数 Effect: Sprint Count",
+            "description": "<p>增加此效果上的计数器以记录你迄今为止使用 @UUID[Compendium.pf2e-feats-plus.player-options.Item.Lsu7JP3zpS46SXOx]{冲刺} 的次数。</p>"
+        },
+        "Effect: Fungal Ward": {
+            "name": "效果：真菌护盾 Effect: Fungal Ward",
+            "description": "<p>对你受到的第一份虚空伤害源，你获得等同于起源者等级一半的虚空抗力。</p>"
+        },
+        "Effect: Contortionist's Escape": {
+            "name": "效果：柔术挣脱 Effect: Contortionist's Escape",
+            "description": "<p>当你使用 @UUID[Compendium.pf2e-feats-plus.player-options.Item.ghbxxTEmDslXGt40]{扭体逃脱} 尝试挣脱时，如果其中任一检定大失败，你改为获得失败。</p>"
+        },
+        "Best Defense": {
+            "name": "最佳防御 Best Defense",
+            "description": "<p>有时最好的防守是好的进攻！进行一次盾击打击，或以具有「附装于盾」特征的武器进行一次打击。只要你的打击不是大失败，你都可以以自由动作 @UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]{举盾}。</p>"
+        },
+        "Effect: Friends in High Places": {
+            "name": "效果：高处朋友 Effect: Friends in High Places",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.i4bw2SfXHwelysBR]{高位之交} 授予</p><p>你重掷触发掷骰时获得 +2环境加值。</p>"
+        },
+        "Effect: Illusory Infiltrator": {
+            "name": "效果：幻象渗透者 Effect: Illusory Infiltrator",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.lroFPG7RpQuAfOi9]{幻象渗透者} 授予</p><p>每轮你隐藏或潜行，承受 -1环境减值。</p><p>[[/act hide skill=arcana traits=concentrate,illusion]]</p><p>[[/act hide skill=occultism traits=concentrate,illusion]]</p><p>[[/act sneak skill=arcana traits=concentrate,illusion]]</p><p>[[/act sneak skill=occultism traits=concentrate,illusion]]</p>"
+        },
+        "Effect: Warding Protection": {
+            "name": "效果：守护庇护 Effect: Warding Protection",
+            "description": "<p>你的豁免获得 +2环境加值。</p>"
+        },
+        "Effect: Restricting Flora": {
+            "name": "效果：束缚草丛 Effect: Restricting Flora",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.3bCe2MXk8ik73eWP]{束缚草木} 授予</p><p>你的速度承受 -5尺状态减值（大成功时为 -10）。</p>"
+        },
+        "Mirror Mirror": {
+            "name": "镜中之镜 Mirror Mirror",
+            "description": "<p><strong>频率</strong> 每日一次</p><p><strong>需求</strong> 你已在两面镜子之间锻造了连结，并与其中之一处于物理接触。</p><hr /><p><strong>效果</strong> 你激活两面镜子之间已锻造的连结。在 5分钟内，两面镜子如同窗户。你可以以听觉或视觉方式与镜子另一侧的任何人交流，并能透过镜子看见，但你不能以其他方式影响该人或环境，除非你能够无视效果或视线限制以该人或位置为目标。你可以解除此效果。</p>"
+        },
+        "Aura: Teacher's Aura": {
+            "name": "灵气：教师之灵 Aura: Teacher's Aura",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.eMpnxZozr8UisFh5]{知识堡垒} 授予</p><p>30尺灵气内的盟友获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.UN7IXaYjVOhxOh1T]{智者指引} 反应。</p>"
+        },
+        "Spell Effect: Guidance (Murmured Prayer)": {
+            "name": "法术效果：导引（低语祈祷） Spell Effect: Guidance (Murmured Prayer)",
+            "description": "<p>由 @UUID[Compendium.pf2e.spells-srd.Item.izcxFQFwf3woCnFs]{导引} 授予</p><p>你获得神圣指引，让你在持续时间结束之前对一次攻击骰、察觉检定、豁免或技能检定获得 +2状态加值。你在掷骰之前选择将加值用于哪一次掷骰。如果你使用了该加值，法术结束。</p>"
+        },
+        "Effect: Skin of my Teeth": {
+            "name": "效果：险中得脱 Effect: Skin of my Teeth",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.CHOcmC4rmDAYTUWX]{千钧一发} 授予</p><p>触发盾牌的硬度增加 2。你获得 @UUID[Compendium.pf2e-feats-plus.misc.Item.lZdH7vYrwuAuCovT]{最佳防御} 动作。</p>"
+        },
+        "Effect: Become the Mask": {
+            "name": "效果：化为面具 Effect: Become the Mask",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.p8xNxYZwMppiVw03]{成为面具} 授予</p><p>你对假扮与说谎获得 +3环境加值（成功时为 +2）。</p>"
+        },
+        "Warding Protection": {
+            "name": "守护庇护 Warding Protection",
+            "description": "<p><strong>频率</strong> 每小时一次</p><p><strong>触发</strong> 受你守护的生物在 60尺内，且尝试对一项具有你所选特征的效果进行豁免。</p><hr /><p>受守护的生物豁免获得 +2环境加值。</p><p>@UUID[Compendium.pf2e-feats-plus.misc.Item.nkcSWI8WJbv10kFy]{效果：守护庇护}</p>"
+        },
+        "Effect: Breath Taker": {
+            "name": "效果：屏息凝气 Effect: Breath Taker",
+            "description": "<p>你对抗吸入与嗅觉效果承受 -1环境减值。</p>"
+        },
+        "Effect: Spiritual Memories (Master)": {
+            "name": "效果：精魂记忆（大师） Effect: Spiritual Memories (Master)",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.4ZmVTOG4s65NXB6E]{灵魂记忆} 授予</p><p>选择一项你至少受训的技能，你在该技能上变为大师。</p>"
+        },
+        "Effect: Fortunate One": {
+            "name": "效果：好运者 Effect: Fortunate One",
+            "description": "<p>由 @UUID[Compendium.pf2e-feats-plus.player-options.Item.GUW5QqqC5wmLwiVY]{幸运者} 授予</p><p>你下一次进行的检定获得 +1状态加值。</p>"
+        }
+    }
+}

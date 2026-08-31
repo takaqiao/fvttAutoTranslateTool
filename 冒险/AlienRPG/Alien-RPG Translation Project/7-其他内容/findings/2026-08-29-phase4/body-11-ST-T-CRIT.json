@@ -1,0 +1,209 @@
+{
+ "unit": "ST-T-CRIT",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/ST-T-CRIT.cn.json",
+ "summary": "5 张重伤表全部译完，84 行结果 + 2 条表描述。做法是**外科式替换**：只动 INJURY 名、EFFECTS 正文和五个字段标签，其余（分隔符、`<br />`、FATAL/TIME LIMIT/HEALING TIME 三格的值、span/strong/p 标签、`[[NdM]]` 富文本）逐字节从英文搬过来——译文由脚本在英文串上定点改写，不是重打，所以机器件根本没有被人手碰过的机会。字段标签按 lang/cn.json 译成 伤势/致命/时限/效果/治愈时间，`: ` 两个字节原样保留；先 grep 过整个 system（*.mjs/*.js/*.hbs/*.html）与两个包，**没有任何消费者匹配这五个标签字面量**，scan_crit_lockstep 也不看标签文本，所以译标签是安全的。两条铁律都按原文形状守住：EV 表 11-11 上游多出的那个尾随 `<br />`（11 段）保留、EV 若干行上游 `HEALING TIME:` 少一个空格（index 9 落空串）也保留，没有顺手\"修\"成标准 10 段；Xenomorphs 3-3 上游的空描述（1 段）与它对子表的引用同样原样不动。独立复核：把产物塞进临时 compendium/cn 跑项目自己的 `4-常用脚本/qa/scan_crit_lockstep.py`，得到 **checked=80 violations=0**。",
+ "chars_en": 17427,
+ "chars_cn": 11884,
+ "self_gate": [
+  {
+   "check": "(a) 复现解析：剥标签 → `<br />`→`<br>` → split(/[:] |<br>/gi)（character 支）与 split(/[:] |<br \\/>/gi) 无归一化（synthetic/creature 支），逐行比对段数与 FATAL[3]/TIME LIMIT[5]/HEALING TIME[9] 的位置与内容",
+   "result": "PASS — character 支 72 行段数与英文完全一致（含 EV 11-11 的 11 段例外），[3]/[5]/[9] 三格 **逐字节相等**；synthetic/creature 支 12 行全部 2 段，下标 [0]/[1] 均非空。另查 [1]/[7] 非空性与 [[NdM]] 起始形状，0 违规"
+  },
+  {
+   "check": "(b) 分隔符全部是 ASCII 冒号+空格",
+   "result": "PASS — 372 个标签分隔符，逐个与英文那一格**同位比对相等**，取值只在 ':' 与 ': ' 之间（后者 360 个，前者 12 个是上游 EV 行本来就少空格的位置，忠实保留）；全文 0 个全角 U+FF1A"
+  },
+  {
+   "check": "(c) EN DASH U+2013 未被转写",
+   "result": "PASS — 全单元 U+2013 计数 EN=61 / CN=61，逐行 CN≥EN；另单独核对 [3]/[5]/[9] 三个机器格与 [7] EFFECTS 格的 U+2013 计数逐行相等，且没有在英文用 en dash 的位置引入 ASCII 连字符。`Yes, –1 ` / `Yes, –2 ` / TIME LIMIT 的 `–` 均原样"
+  },
+  {
+   "check": "(d) 表名未改（T-FROZEN）",
+   "result": "PASS — 5 个 name 与英文全等；其中 3 个在 DO-NOT-TRANSLATE.rolltable_names 里（Critical injuries / EV - Critical Injuries / Critical Injuries on Synthetics），2 个 `Critical Injuries` 前缀仍在偏移 0（prefix_filters 的 folder.contents.filter 取用点）；Xenomorphs 3-3 对子表的 name 引用亦逐字节不动"
+  },
+  {
+   "check": "额外：markup 标签多重集 / `[[NdM]]` 富文本 / 英文残留 / CJK 存在",
+   "result": "PASS — 84 行标签多重集与英文相等（span 的 style、EV 64-66 span 内的 `<strong>` 全部保住），`[[1d6]]`…`[[4d6]]` 列表逐行相等，译出的 [1]/[7]（及另两表的 [0]/[1]）无 INJURY/android/dice/surgery 等英文残留，每行均含中文"
+  },
+  {
+   "check": "额外：跑项目自己的闸 `4-常用脚本/qa/scan_crit_lockstep.py`（产物放进临时 compendium/cn，--repo 指过去，不碰真仓库）",
+   "result": "PASS — checked=80 violations=0。CELL3_ok 29 / CELL5_ok 10 / CELL9_ok 2 / CELL9_roll_ok 19 / CELL9_shift_ok 2 / OTHER_index_ok 20 / LANG_ok 8；EV 11-11 记为「容忍 11 段」"
+  }
+ ],
+ "frozen_kept": [
+  "Critical injuries (表名)",
+  "EV - Critical Injuries (表名)",
+  "Critical Injuries on Synthetics (表名)",
+  "Critical Injuries on Xenomorphs (表名，前缀过滤点，英文留在偏移 0)",
+  "Sub Table Critical Injuries on Xenomorphs (表名 + Xenomorphs 3-3 的结果引用，两处同步不动)",
+  "FATAL 值：'' / ' ' / 'No ' / 'Yes ' / 'Yes, –1 ' / 'Yes, –2 '",
+  "TIME LIMIT 值：' ' / '–' / 'One Round ' / 'One Turn ' / 'One Shift ' / 'One Day ' / 'Shift' / 'Stretch' / 'Round'",
+  "HEALING TIME 值：'' / 'Shift' / 'Permanent' / '[[1d6]] days' / '[[1d6]]  days' / '[[2d6]] days' / '[[3d6]] days' / '[[4d6]] days'（含 days 一并留英文，按铁律二）",
+  "上游形状缺陷原样保留：EV 11-11 尾随 <br />（11 段）、EV 多行 'HEALING TIME:' 缺空格、Xenomorphs 3-3 空描述（1 段）"
+ ],
+ "lock_lookups": [
+  {
+   "english": "INJURY (字段标签)",
+   "lang_key": "ALIENRPG.Injury",
+   "used": "伤势"
+  },
+  {
+   "english": "FATAL (字段标签)",
+   "lang_key": "ALIENRPG.Fatal",
+   "used": "致命"
+  },
+  {
+   "english": "TIME LIMIT (字段标签)",
+   "lang_key": "ALIENRPG.TimeLimit",
+   "used": "时限"
+  },
+  {
+   "english": "EFFECTS (字段标签)",
+   "lang_key": "ALIENRPG.Effect",
+   "used": "效果"
+  },
+  {
+   "english": "HEALING TIME (字段标签)",
+   "lang_key": "ALIENRPG.HealTime",
+   "used": "治愈时间"
+  },
+  {
+   "english": "CLOSE COMBAT",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "RANGED COMBAT",
+   "lang_key": "ALIENRPG.SkillrangedCbt",
+   "used": "射击"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "STAMINA",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "MANIPULATION",
+   "lang_key": "ALIENRPG.Skillmanipulation",
+   "used": "操控"
+  },
+  {
+   "english": "COMTECH",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "COMMAND",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "MEDICAL AID",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Speed",
+   "lang_key": "ALIENRPG.Speed",
+   "used": "速度"
+  },
+  {
+   "english": "fast action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "slow action",
+   "lang_key": "ALIENRPG.SlowAction",
+   "used": "慢速动作"
+  },
+  {
+   "english": "STRESS LEVEL / Stress Level",
+   "lang_key": "glossary_alien.json + ALIENRPG.Panic7/9 行文",
+   "used": "压力等级（上升一级 / +1）"
+  },
+  {
+   "english": "Round",
+   "lang_key": "glossary_alien.json",
+   "used": "轮"
+  },
+  {
+   "english": "initiative",
+   "lang_key": "glossary_alien.json",
+   "used": "先攻"
+  },
+  {
+   "english": "Xenomorph",
+   "lang_key": "glossary_alien.json",
+   "used": "异形"
+  },
+  {
+   "english": "android",
+   "lang_key": "glossary_alien.json (Android)",
+   "used": "仿生人"
+  },
+  {
+   "english": "alien fury (形容词义)",
+   "lang_key": "PROJECT 词表口径：异形=生物 / 外星=形容词",
+   "used": "外星的暴怒嘶吼"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Virulence",
+   "proposed": "毒力",
+   "why": "经典表 46-46 'Disease with Virulence 6'。glossary_alien.json 无此条。毒力 是流行病学/中文 TRPG 对 virulence 的标准对应，且与「病毒」区分得开。核心书疾病规则里还会大量复用，建议入表"
+  },
+  {
+   "en": "Full Action",
+   "proposed": "完整动作",
+   "why": "进化版表里出现 8 次（'Movement in combat becomes full action'）。lang/cn.json 只有 FastAction=快速动作 / SlowAction=慢速动作，第三档没有任何权威值。选 完整动作 是为了与既有两档同构（X+动作），不用 整轮动作 以免和 轮(Round) 撞词"
+  },
+  {
+   "en": "Prone",
+   "proposed": "伏地",
+   "why": "合成人表 2-2 'must stay prone and can only crawl'。glossary 与 lang 都没有。伏地 是 TRPG 通行译法，且与同句的 爬行(crawl) 不冲突"
+  },
+  {
+   "en": "Analyze",
+   "proposed": "分析",
+   "why": "异形表 5-6 'can only be Analyzed with Observation –2'。这在进化版里是一个具名动作（用侦察分析生物、逐步揭示怪物卡），不是普通动词。若确认是具名动作，应入表并与怪物章正文统一"
+  },
+  {
+   "en": "Prosthesis",
+   "proposed": "义肢",
+   "why": "EV 55-55 / 56-56 'Requires surgery and prosthesis'。普通名词，但装备章大概率复用，登记一下省得后面出现 假肢/义体 的分歧"
+  },
+  {
+   "en": "Mental Trauma (table)",
+   "proposed": "精神创伤（表）",
+   "why": "EV 43-43 'Roll once on the table for mental trauma' 指向 corerules 的 RollTable `EV - Mental Trauma`（starterset 没有这张表）。我按普通散文译成「精神创伤表」；若该表名走 T-BILINGUAL，这条正文引用要跟着对齐"
+  }
+ ],
+ "open_issues": [
+  "**Phase 5 必须一个 commit 同时动三处**：`1-系统汉化插件/lang/cn.json` 的 8 个键 + starterset + corerules。今天这 8 个键在 cn.json 里仍是英文（Yes/None/Permanent/Shift/One Round/One Turn/One Shift/One Day），我这份译文与之逐字节对齐，闸 checked=80 violations=0。单方面翻任何一侧都会让 healTime 静默归零，`Shift` 那一支更会抛未捕获 TypeError。",
+  "**corerules 孪生表**：这 5 张表 corerules 里也有。传播时注意 DO-NOT-TRANSLATE 记的差异——corerules 的 `Critical injuries` 11-11/12-12 写的是 `<b>HEALING TIME:</b>`（少一个空格，切出 9 段），而 starterset 是 10 段。**直接把我这两行的字节搬过去会顺手把那个上游缺陷修掉**（9→10）。册子的 rule 说「翻译 corerules 那份时应当 RESTORE 这个 ': '」，所以方向是对的，但这是一次行为变更，请主控明确点头再落。",
+  "**上游缺陷一律保留、未擅自修复**：① EV 11-11 尾随多余 `<br />`（11 段而非 10，index 9 仍为空串，运行时无害）；② EV 多行 `HEALING TIME:` 缺空格（index 8 落成 '治愈时间:'，与英文 'HEALING TIME:' 同形，index 9 仍为空串）；③ Xenomorphs 3-3 描述为空（切出 1 段，testArray[1] 今天就是 undefined）；④ 进化版 index 5 吐 '–'/'Shift'/'Stretch'/'Round'，五个 One* case 一个都不命中、healTime 恒为 0——这是上游缺陷，与语言无关，没有改成 'One Shift '。",
+  "**字段标签译了**（伤势/致命/时限/效果/治愈时间，取自 lang/cn.json 的 Injury/Fatal/TimeLimit/Effect/HealTime）。依据：标签落在偶数下标、从不参与 `===`；已 grep 过 system 全部 *.mjs/*.js/*.hbs/*.html 与两个包的 macro command，**零个消费者匹配这些标签字面量**；scan_crit_lockstep 只核段数与 [3]/[5]/[9]，不看标签文本。若主控更想保守，把 LABELS 字典改回英文重跑脚本即可，其余一字不动。",
+  "**Xenomorphs 表描述的 h2 我加了 `id=\"critical-injuries-on-xenomorphs\"`**（按 §3.6 译标题即补英文 slug 的规矩）。严格说 RollTable 的 description 不走 `_makeHeadingNode`，没有 data-hash 会指向它，这个 id 是惰性的；scan_markup_drift 只数标签名不看属性，所以不会误报。主控若要求属性与英文全等，删掉这个 id 即可。",
+  "**Sub Table 的 description 我保留了英文表名**：译成「Critical Injuries on Xenomorphs 表上「3 拼死一搏」结果的子掷骰表」。表名是 T-FROZEN，侧栏里也显示英文，正文留英文才找得到；但英文原句引的是结果标签 '3 Desperate Action'，我换成了译名 拼死一搏，保持与表内一致。",
+  "**跨单元术语同步点**：`!adventures!SeKD8c6gQ4L9ovYs.journal[2].pages[0]`（页名 `Starter Set Rules`）里印着**另一张**简化版 D6 重伤表（Focused / Intense Pain / Wounded / Bleeding Out / Dying / Last Breath），是纯展示 HTML、不被解析，但与我这份有重叠词：Focused=专注、Intense Pain=剧烈疼痛、Last Breath=最后一口气、'Relieve all stress.'=解除全部压力。、'Stress level +1.'=压力等级 +1。请该页的单元照抄，别另起译法。",
+  "**未动的东西**：只写了 ST-T-CRIT.cn.json，没有碰 compendium/cn、没有碰 index.json、没有碰任何其他单元；跑项目闸时用的是 scratchpad 里的临时 fakerepo，已删。",
+  "生命周期六名（Chestburster/Ovomorph/Drone/Warrior/Praetorian 等）本单元一个都没用到，无需在此提案。"
+ ]
+}

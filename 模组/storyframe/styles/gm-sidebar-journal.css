@@ -1,0 +1,401 @@
+/* ========================================
+   GM Sidebar - Journal Integration
+   ======================================== 
+   Journal checks, journal images, journal actors
+   ======================================== */
+
+/* Journal Checks Inline */
+.journal-checks-inline {
+  margin-top: var(--sf-space-sm);
+  padding-top: var(--sf-space-sm);
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--sf-space-sm);
+  color: var(--sf-text-muted);
+  font-size: var(--sf-font-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.section-divider::before {
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1));
+}
+
+.section-divider::after {
+  background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.1));
+}
+
+.journal-checks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 6px;
+}
+
+.journal-skill-btn {
+  padding: 8px 10px;
+  background: linear-gradient(135deg, rgba(94, 129, 172, 0.25), rgba(94, 129, 172, 0.15));
+  border: 1px solid rgba(94, 129, 172, 0.4);
+  border-radius: var(--sf-radius-md);
+  color: var(--color-text-light-primary);
+  font-size: var(--sf-font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--sf-transition-base);
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.journal-skill-btn:hover {
+  background: linear-gradient(135deg, rgba(94, 129, 172, 0.35), rgba(94, 129, 172, 0.25));
+  border-color: rgba(94, 129, 172, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.journal-skill-btn:active {
+  transform: translateY(0);
+}
+
+.journal-skill-btn.in-view {
+  background: linear-gradient(135deg, rgba(94, 129, 172, 0.8), rgba(94, 129, 172, 0.6));
+  border-color: var(--sf-accent-primary);
+  box-shadow:
+    0 0 24px rgba(94, 129, 172, 0.9),
+    0 0 12px rgba(94, 129, 172, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.journal-skill-btn .dc-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--sf-accent-primary);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1px 4px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+/* Journal Lore Inline */
+.journal-lore-inline {
+  margin-top: var(--sf-space-md);
+  padding-top: var(--sf-space-sm);
+  width: 100%;
+}
+
+/* Journal Saves Inline */
+.journal-saves-inline {
+  margin-top: var(--sf-space-md);
+  padding-top: var(--sf-space-sm);
+  width: 100%;
+}
+
+.journal-save-btn .dc-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #e67e22;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1px 4px;
+  border-radius: 3px;
+  line-height: 1;
+}
+
+.journal-saves-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--sf-space-xs);
+}
+
+.journal-save-btn {
+  padding: 8px 10px;
+  background: linear-gradient(135deg, rgba(220, 118, 51, 0.25), rgba(220, 118, 51, 0.15));
+  border: 1px solid rgba(220, 118, 51, 0.4);
+  border-radius: var(--sf-radius-md);
+  color: var(--color-text-light-primary);
+  font-size: var(--sf-font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--sf-transition-base);
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.journal-save-btn:hover {
+  background: linear-gradient(135deg, rgba(220, 118, 51, 0.35), rgba(220, 118, 51, 0.25));
+  border-color: rgba(220, 118, 51, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.journal-save-btn:active {
+  transform: translateY(0);
+}
+
+.journal-save-btn.in-view {
+  background: linear-gradient(135deg, rgba(220, 118, 51, 0.8), rgba(220, 118, 51, 0.6));
+  border-color: var(--sf-accent-primary);
+  box-shadow:
+    0 0 24px rgba(220, 118, 51, 0.9),
+    0 0 12px rgba(220, 118, 51, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.journal-save-wrapper.batched .journal-save-btn {
+  background: rgba(235, 203, 139, 0.25);
+  border: 2px solid rgba(235, 203, 139, 0.7);
+  box-shadow: 0 0 8px rgba(235, 203, 139, 0.5);
+}
+
+/* Journal Images Inline */
+.journal-images-inline {
+  margin-top: var(--sf-space-md);
+  padding-top: var(--sf-space-sm);
+  width: 100%;
+}
+
+.journal-images-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: var(--sf-space-xs);
+  width: 100%;
+  padding: var(--sf-space-xs);
+}
+
+.journal-image-item {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--sf-radius-md);
+  background: rgba(0, 0, 0, 0.3);
+  transition: all var(--sf-transition-base);
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.journal-image-item:hover {
+  border-color: var(--sf-accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(94, 129, 172, 0.4);
+}
+
+.journal-image-item:active {
+  transform: translateY(0);
+}
+
+.journal-image-item-thumb {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journal-image-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.journal-image-item:hover .journal-image-item-thumb img {
+  opacity: 1;
+}
+
+.journal-image-label {
+  display: none;
+}
+
+.journal-image-add-icon {
+  display: none;
+}
+
+/* Journal Actors Inline */
+.journal-actors-inline {
+  margin-top: var(--sf-space-md);
+  padding-top: var(--sf-space-sm);
+  width: 100%;
+}
+
+.journal-actors-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: var(--sf-space-xs);
+  width: 100%;
+  padding: var(--sf-space-xs);
+}
+
+.journal-actor-item {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: var(--sf-radius-md);
+  background: rgba(0, 0, 0, 0.3);
+  transition: all var(--sf-transition-base);
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.journal-actor-item:hover {
+  border-color: var(--sf-accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(94, 129, 172, 0.4);
+}
+
+.journal-actor-item:active {
+  transform: translateY(0);
+}
+
+.journal-actor-item-thumb {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journal-actor-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.journal-actor-item:hover .journal-actor-item-thumb img {
+  opacity: 1;
+}
+
+.journal-actor-label {
+  display: none;
+}
+
+.journal-actor-add-icon {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transition: opacity var(--sf-transition-base);
+  color: var(--sf-accent-primary);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.journal-actor-item:hover .journal-actor-add-icon {
+  opacity: 1;
+}
+
+/* Sidebar toggle button in journal header */
+.window-header .storyframe-sidebar-toggle {
+  /* Inherits .header-button.control styles from Foundry */
+  transition: all 0.2s;
+}
+
+.window-header .storyframe-sidebar-toggle.active {
+  color: var(--sf-accent-primary, #5e81ac);
+  text-shadow: 0 0 4px rgba(94, 129, 172, 0.5);
+}
+
+.window-header .storyframe-sidebar-toggle.active:hover {
+  color: var(--sf-accent-primary-hover, #81a1c1);
+  text-shadow: 0 0 8px rgba(94, 129, 172, 0.6);
+}
+
+/* ========================================
+   Draggable Checks in Journal
+   ======================================== */
+
+.sf-check[data-check] {
+  cursor: grab;
+  text-decoration: underline dotted;
+  color: var(--sf-accent-success, #4ecdc4);
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.sf-check[data-check]:hover {
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.sf-check[data-check]:active {
+  cursor: grabbing;
+}
+
+/* ========================================
+   Check Drop Zone
+   ======================================== */
+
+.skill-config-panel.check-drag-over {
+  outline: 2px dashed var(--sf-accent-success, #4ecdc4);
+  outline-offset: 4px;
+  background: rgba(78, 205, 196, 0.05);
+  transition: all 0.2s;
+}
+
+/* ========================================
+   DC Preset Controls
+   ======================================== */
+
+.preset-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: visible;
+}
+
+.dc-input-group {
+  overflow: visible;
+}
+
+/* ========================================
+   Popup Styles (Active Challenges & Pending Rolls)
+   ======================================== */
+
+.storyframe-challenges-popup,
+.storyframe-pending-rolls-popup {
+  position: fixed;
+  z-index: 10001;
+  background: #1a1a2e;
+  border: 1px solid #3d3d5c;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.storyframe-challenges-popup {
+  width: 360px;
+}

@@ -1,0 +1,48 @@
+/* Translation safety overrides for long Chinese strings and malformed journal HTML. */
+.journal-sheet .journal-entry-content,
+.journal-sheet .journal-page-content,
+.journal-sheet .editor-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.journal-sheet .journal-page-content :is(p, li, td, th, span, div, h1, h2, h3, h4, h5, h6, a) {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.journal-sheet .journal-page-content table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.journal-sheet .journal-page-content img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+.journal-sheet .journal-page-content .split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
+.journal-sheet.metalcity-wrapper .journal-entry-page,
+.journal-sheet .metalcity-wrapper .journal-entry-page {
+  overflow: visible !important;
+}
+
+.journal-sheet :is(.metalcity, .metalcity-wrapper) .header {
+  overflow: visible !important;
+}
+
+.journal-sheet :is(.metalcity, .metalcity-wrapper) .handout {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  clip-path: none;
+}

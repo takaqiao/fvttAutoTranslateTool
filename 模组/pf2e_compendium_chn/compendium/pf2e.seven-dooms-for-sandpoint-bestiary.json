@@ -1,0 +1,1960 @@
+{
+    "entries": {
+        "Wolgur Wrabs": {
+            "publicNotes": "<p>妖鬼——凶残、恶臭、且总是饥肠辘辘——是食尸鬼中更强大的一支。他们在追杀猎物时从不留情。</p>\n<hr />\n<p>食尸鬼是一种食肉的不死生物，很少有生物会像他这样普遍存在于野外孤坟或破败墓穴这样的阴暗之地。</p>",
+            "hp": "虚能治疗",
+            "items": {
+                "Stench": {
+                    "description": "<p>10尺。若有生物进入灵光范围或者在回合开始时位于灵光范围内，则必须尝试一次@Check[fortitude|dc:19|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若为大失败，则只要处于恶心状态就还会附加@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。</p>\n<p>身处灵光之内时，生物在对抗疾病以及从恶心状态中恢复的豁免检定中会承受-2环境减值。成功豁免的生物会获得1分钟的临时免疫。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]</p>",
+                    "name": "恶臭 Stench"
+                },
+                "Ghast Fever": {
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[3d8[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[3d8[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.VC7rtYR4hLxwg7WZ]复生。</p>",
+                    "name": "妖鬼热 Ghast Fever"
+                },
+                "Paralysis": {
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:22]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>",
+                    "name": "麻痹 Paralysis"
+                },
+                "Swift Leap": {
+                    "description": "<p>食尸鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>",
+                    "name": "迅捷跳跃 Swift Leap"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Consume Flesh": {
+                    "name": "啃食尸体 Consume Flesh",
+                    "description": "<p><strong>需求</strong> 食尸鬼与刚死亡一小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[4d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取一次生命值恢复。</p>"
+                }
+            },
+            "blurb": "男性妖鬼变体",
+            "prototypeToken": {
+                "name": "沃尔格·沃布斯"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "沃尔格·沃布斯 Wolgur Wrabs"
+        },
+        "Promise of Plagues": {
+            "prototypeToken": {
+                "name": "瘟疫之诺"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "瘟疫之诺 Promise of Plagues",
+            "disable": "<p>进行三次@Check[arcana|dc:33]或@Check[nature|dc:33]检定，可以命令害虫保持安静或清除污秽和腐烂物，从而使该危害无害化；或者进行一次@Check[religion|dc:36]检定，通过祈祷切断与卡布里里的神圣联系；或者使用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（6环级，反制DC29），使该危害在10分钟内失效。</p>",
+            "hazarddescription": "<p>房间内布满了嗡嗡作响的苍蝇群和满地的害虫，到处都是腐烂的残肢碎体和恶臭的肉块。</p>",
+            "routine": "<p>（2动作）房间内的虫群弥漫在空气中，从墙壁和天花板上倾泻而下，同时从地板下方蜂拥而上。在危害的第一个动作中，房间内的所有生物都将受到虫群啃咬的攻击。在第二个动作中，虫群的注意力特别集中且急切地转向区域<strong>J3c</strong>内的一个随机选定的生物。如果该生物正患有妖鬼热且处于阶段4或更低阶段，它必须立即进行一次@Check[fortitude|dc:30]豁免检定。检定失败，其妖鬼热的阶段将向前推进一个阶段。</p>",
+            "reset": "<p>当所有生物离开房间后，该危害会在1轮后平息下来，并可以在下一轮开始时再次被触发。</p>",
+            "stealthdetails": "<p>（大师）</p>",
+            "items": {
+                "Swarming Bites": {
+                    "name": "虫群啃咬 Swarming Bites",
+                    "description": "<p><strong>触发</strong> 当有生物移动到北侧阶梯之外的房间内时</p>\n<hr />\n<p><strong>效果</strong> 一群叮咬的苍蝇和贪婪的爬虫蜂拥而至，围攻触发它们的生物。该生物会受到@Damage[6d6[piercing]]伤害（@Check[reflex|dc:30|basic]豁免检定）。如果生物受到任何伤害，它将自动感染上妖鬼热。之后，该危害将投掷先攻。</p>"
+                },
+                "Ghast Fever": {
+                    "name": "妖鬼热 Ghast Fever",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:30]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[3d8[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[3d8[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.VC7rtYR4hLxwg7WZ]复生。</p>"
+                }
+            }
+        },
+        "Geist": {
+            "publicNotes": "<p>阴魂是一团不断变化、生着牙齿的黑色麻袋布，不停折折叠叠，如同一千名疯狂又绝望的灵魂一般咯咯怪笑。阴魂诞生自被作祟杀死的邪恶之人；它们从那些被困于它们死亡的位面上的灵魂中复活，不再连接于葬身之地，而与各个地方的作祟辐射出的黑暗能量相连。它们漫游世界，找寻慰藉却永远得不到。沮丧之下，它们把自己的恶意转移到生者身上，惹恼周遭的任何生物，期望能将受害者引入作祟的魔掌，将它们也转化为阴魂来分担这痛苦。</p>\n<p>阴魂偶尔会被误认为别的虚体不死生物，例如缚灵和幽灵，但它们亲近作祟的特点是确定遭遇的不死生物本性最可靠的办法之一。</p>",
+            "blurb": "变体阴魂",
+            "items": {
+                "Power of the Haunt": {
+                    "name": "作祟之力 Power of the Haunt",
+                    "description": "<p>如果一个阴魂位于一个并未被解除或摧毁的作祟100尺内，它的AC会获得+2状态加值，且啃咬打击额外造成@Damage[1d6[void]]伤害。一个成功通过@Check[perception|dc:20|traits:action:seek]检定来进行搜索基本动作或回忆知识技能动作的生物，会看到阴魂斗篷上的触手越接近作祟就会变得越浓密而躁动。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Terrifying Laugh": {
+                    "name": "吓人狂笑 Terrifying Laugh",
+                    "description": "<p><strong>频率</strong> 每分钟一次</p>\n<hr />\n<p><strong>效果</strong> 阴魂发出刺穿灵魂的狂笑，影响@Template[emanation|distance:20]范围，持续至它的下个回合开始。任何身处该区域或进入该区域的生物必须成功通过@Check[will|dc:26]豁免否则会被带来恐慌的笑声征服，获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（大失败获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}）。一个生物只需要对每个吓人狂笑能力进行一次豁免，且豁免成功会临时免疫此能力24小时。</p>"
+                },
+                "Wrath of the Haunt": {
+                    "name": "作祟之怒 Wrath of the Haunt",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 阴魂位于一个活跃的作祟100尺内</p>\n<hr />\n<p><strong>效果</strong> 作祟将死灵能量注入阴魂，自己则变得不活跃直至阴魂的下个回合结束；作祟之力能力的效果在这个作祟重新活跃前也会失效。阴魂斗篷的边缘会变成鞭状的，看起来像是火与烟构成的卷须，攻击附近的生物。距离阴魂10尺内的任何活物受到@Damage[4d10[fire],4d6[void]]伤害（@Check[reflex|dc:28|basic]豁免）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "阴魂"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阴魂 Geist",
+            "hp": "虚能治疗"
+        },
+        "Ascended Disciple": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "进阶门徒 Ascended Disciple",
+            "blurb": "人类沙尖镇魔鬼门徒",
+            "items": {
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>进阶门徒对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成1d6精准伤害。</p>"
+                },
+                "Devil's Breath": {
+                    "name": "魔鬼吐息 Devil's Breath",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 魔鬼门徒用手中的锋利武器割伤自己的舌头（受到@Damage[1[slashing]]伤害），然后喷吐出@Template[cone|distance:15]的燃烧烟雾。该区域内的每个生物都必须尝试@Check[reflex|dc:22|options:area-effect,damaging-effect]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物受到@Damage[2d8[fire]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 生物受到@Damage[4d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>大失败</strong> 生物受到@Damage[6d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入恶心1，并由于烟雾陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，持续1分钟</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "进阶门徒"
+            }
+        },
+        "The Watching Lords": {
+            "hazarddescription": "<p>壁龛中的半神雕像似乎移动了，它们的头部转动，注视着路过的入侵者。</p>",
+            "stealthdetails": "<p>（受训）</p>",
+            "items": {
+                "Conjure the Guardians": {
+                    "name": "召唤守卫 Conjure the Guardians",
+                    "description": "<p><strong>触发</strong> 当一个非混乱邪恶的生物靠近通往<strong>G4</strong>区域的门20尺以内时</p><hr /><p><strong>效果</strong> 雕像似乎发出嘶嘶声和咆哮声，片刻之后，四只@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6UrgCT8MwC8CeGbu]出现在走廊上——两只在区域<strong>G1</strong>入口附近，两只在区域<strong>G4</strong>入口附近。这四只恶魔会立即发动攻击，并按照正常规则投掷先攻。它们会战斗至死，但在1分钟后便会消失。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "凝视的领主"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "凝视的领主 The Watching Lords",
+            "disable": "<p>@Check[thievery|dc:31]（刮去赋予雕像监视能力的隐藏符文），@Check[religion|dc:28]（通过向深渊领主祈祷来获得保护，避免被其注意），或者使用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级；反制DC26）来反制这个陷阱。</p>",
+            "reset": "<p>一旦凝视的领主陷阱被触发，它需要一个小时来重新充能，之后才能再次被触发。</p>"
+        },
+        "Serpentfolk Cultist": {
+            "prototypeToken": {
+                "name": "蛇人邪教徒"
+            },
+            "items": {
+                "Raise Serpent": {
+                    "name": "唤起蛇类 Raise Serpent",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 白骨先知操纵起@Template[emanation|distance:30]范围内的蛇、蛇人或类似蛇形生物的尸体。尸身上的任何血肉都会蜕去，接着它们会以骷髅的形态复活。白骨先知可以将一个大型生物复活成@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.sEgjgitJmwYYa4mV]或将最多三个中型生物复活为@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.FH58AcRBZIfrHKvv]；骷髅们的装备和打击可能会不同，这取决于尸体的所有物。</p>\n<p>这些骷髅具有仆从特征，并受白骨先知控制；先知可以用一个带有专注特征的单动作向所有仆从发出一个相同的命令。任何在被唤起10分钟后还存在着的骷髅仆从将会化为尘土。</p>"
+                },
+                "Serpentfolk Venom": {
+                    "description": "<p><strong>豁免骰</strong> @Check[fortitude|dc:25]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]且@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d4[poison]]且力竭1（1轮）</p>",
+                    "name": "蛇人毒素 Serpentfolk Venom"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "+4 Status to Will Saves vs. Mental": {
+                    "name": "对抗心灵效果的意志豁免+4状态加值 +4 Status to Will Saves vs. Mental"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>蛇人邪教徒的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物额外造成1d6精准伤害。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "蛇人邪教徒 Serpentfolk Cultist",
+            "publicNotes": "<p>那些为死者代言的蛇人被称为白骨先知，作为蛇人们被斩首之神的喉舌，先知们有着受人尊敬的地位。丧葬仪式，死灵仪式，以及那些据说是伊德修斯传达到他们耳畔的、语焉不详的低语，都归这些祭司管辖。</p>",
+            "allSaves": "对抗心灵效果的意志豁免+4状态加值",
+            "blurb": "变体蛇人白骨先知"
+        },
+        "Divine Warden Of Haagenti": {
+            "publicNotes": "<p>这具神圣守卫服务于@UUID[Compendium.pf2e.deities.Item.9EKyWmjLUu42evxC]，中立的魔法之神。它使用它的神圣馈赠来守护内西斯的庙宇或神龛。</p>\n<hr />\n<p>神圣守卫是宗教信徒通过复杂的仪式创造的，被灌注了某个特定神祇的神卫或牧师的一部分能量。这神圣的火花允许神圣守卫作为庙宇、神殿或其他圣地的保护者。这些守卫者本质上并非被束缚在一个固定的地点，但很少离开它们看守之处。</p>\n<p>大部分神圣守卫是用黏土、石头、木头或类似的材料制成的，通常具有神祇或神使的特征。神圣守卫通常具有那些构装体所具有常见特征，例如装甲板、伪装成雕像的能力，或其他类似的好处。</p>\n<p>制作神圣守卫的忠实信徒通常会使用一种特殊的仪式来激活构装体，在这种仪式中，追随者恳求他们的神祇赐予神圣守卫力量。这种由神祇赋予的神圣使命也允许哨兵识别其神祇的敌人，并防止构装体攻击其他相同信仰的信徒，除非这些守护者先受到对方的攻击。</p>\n<p>在极少数情况下或特别危急的时刻，神明可能会通过直接激活现有的雕像或构装体来创造神圣守卫去帮助忠实的追随者。这些神圣守卫最有可能离开它们初始的位置，协助那些流离失所的会众或追捕可能伤害信徒的人。</p>",
+            "items": {
+                "Divine Destruction": {
+                    "description": "<p>当神圣守卫的生命值减少至0时，它在@Template[emanation|distance:30]范围内爆发出神圣能量，造成@Damage[4d6[void]|options:area-damage]伤害。范围内的每个生物都必须尝试一次@Check[will|dc:17|options:area-effect,damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物受到一半伤害。</p>\n<p><strong>成功</strong> 生物受到全伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害，并且受到守护神的临时诅咒。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1日；这是一个诅咒效果，使用神圣守卫的意志DC作为其反制DC。</p>\n<p><strong>大失败</strong> 类似失败，只是生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>",
+                    "name": "神圣毁灭 Divine Destruction"
+                },
+                "Instrument of Faith": {
+                    "description": "<p>神圣守卫是其神祇信仰的信标。与神圣守卫拥有同一守护神的牧师，能从一个60尺内可见的神圣守卫身上引导@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]。该牧师可以决定该法术的目标或范围，就如同他们站在神圣守卫当前所处位置施法一般。</p>",
+                    "name": "信仰道标 Instrument of Faith"
+                },
+                "Faith Bound": {
+                    "name": "信仰束缚 Faith Bound",
+                    "description": "<p>神圣守卫无法攻击那些公开穿戴或展示其守护神圣徽的生物，除非该生物先对神圣守护者做出敌对动作。如果神圣守卫具有智慧，它也可能会对那些它认为信仰不够虔诚或仅仅是穿戴圣徽来骗自己的生物发动攻击（通常是通过一次察觉检定来进行@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]动作）。</p>"
+                },
+                "Faithful Weapon": {
+                    "name": "信仰武器 Faithful Weapon",
+                    "description": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.War0uyLBx1jA0Ge7]，<em>强击</em>符文</p>\n<hr />\n<p>神圣守卫总是持握着守护神祇的偏好武器。如果该武器为远程武器，神圣守卫每次进行远程攻击的时候会自动生成弹药。如果神圣守卫的等级达到4级以上，当神圣守卫持握着偏好武器时，该武器自动获得<em>@UUID[Compendium.pf2e.equipment-srd.Item.DxCuJKynlnMQZHgp]</em>符文；12级以上则为<em>@UUID[Compendium.pf2e.equipment-srd.Item.KCQRFvUgbyclvOGi]</em>符文，19级以上则为<em>@UUID[Compendium.pf2e.equipment-srd.Item.woxl2FrrgAcJDu0t]</em>符文。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "哈金提神圣守卫"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "哈金提神圣守卫 Divine Warden Of Haagenti",
+            "blurb": "变体神圣守卫"
+        },
+        "Fear of the Devil": {
+            "reset": "<p>这个作祟在当所有生物离开该区域后的1分钟后停止，但紧接着会立即重置。</p>",
+            "items": {
+                "Brimstone Cloud": {
+                    "description": "<p><strong>触发</strong> 当一个生物靠近坑洞边缘十尺以内时</p>\n<hr />\n<p><strong>效果</strong> 一个烟雾缭绕、燃烧着的沙尖镇魔鬼幻影似乎从坑中升起，伴随着一股硫磺味的浓烟在房间内翻涌。位于区域<strong>H6</strong>的所有生物必须成功通过一个@Check[fortitude|dc:28]豁免检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若检定大失败，则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。随后，这个作祟投掷先攻。</p>",
+                    "name": "硫磺云 Brimstone Cloud"
+                }
+            },
+            "stealthdetails": "<p>（专家）</p>",
+            "prototypeToken": {
+                "name": "魔鬼之惧"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "魔鬼之惧 Fear of the Devil",
+            "disable": "<p>@Check[diplomacy|dc:30]（大师）可用于安抚和平息被杀害的冒险者留下的不安情绪，或@Check[religion|dc:30]（大师）祈祷保护来阻碍幽灵的侵扰（在这两项技能中任意一项获得两次成功即可消除作祟的侵扰）</p>",
+            "hazarddescription": "<p>由烟雾和火焰构成沙尖镇魔鬼的显像随着一股恶臭的烟雾从坑洞中涌出。</p>",
+            "routine": "<p>（1动作；塑能系，火焰，异能）沙尖镇魔鬼的幻影伴随着烟雾悬浮在坑洞上方，它拍打着火焰般的翅膀，低下头向房间内喷吐出一道@Template[cone|distance:30]的火焰，将尽可能多的生物作为目标。请注意，阴魂自身也可能成为这道火焰喷射的目标，但请记得它对火焰具有抗力。该区域内的所有生物将受到@Damage[7d6[fire]]伤害（@Check[reflex|dc:28|basic|traits:fire,occult]豁免检定）。如果一个生物在这次豁免检定中大失败，它还会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}；这个效果具有情绪、恐惧和心灵特征。</p>"
+        },
+        "Flesh for the Hollow Star": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "向空洞之星奉献肉体 Flesh for the Hollow Star",
+            "disable": "<p>尝试@Check[thievery|dc:23]两次以解开浮雕的两个主要固定点之一，使皮革和骨头无害地坍塌到地面上；由一位信奉善良或守序神祗尝试@Check[religion|dc:26]检定以放逐阿撒托斯对此危害的影响；@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（3环级，反制DC20）来反制此危害。</p>",
+            "hazarddescription": "<p>肉与皮雕刻的阿撒托斯浮雕似乎在眼前泛起涟漪、涌动翻滚，其表面之上，眼睛逐一睁开，这些眼睛随后化作嘴巴，伸出长长的、抽打着的、布满粗糙细丝的触须，以赐予扭曲的肉身作为赐福。</p>",
+            "routine": "<p>（2动作；死灵系；异能）这些眼睛像嘴巴一样张开，挤出纠缠在一起的抽动着的触须，这些触须猛烈地抽打在区域<strong>F19</strong>或房间任一入口10尺范围内的目标上。每轮中，这些触须不能攻击同一个目标超过一次。被触须攻击的生物必须进行@Check[fortitude|traits:necromancy,occult|dc:22]豁免检定。被此危害的毒素伤害导致死亡的生物，其尸体会融化成一堆，然后裂开，让一只呓语之喉从中爬出；这种生物会攻击它看到的任何非阿撒托斯信徒，或者爬到区域<strong>F20</strong>，在湖水中溅起水花并徘徊在水中。</p>\n<hr>\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物承受@Damage[2d6[poison]]伤害</p>\n<p><strong>失败</strong> 生物承受@Damage[(2d6+7)[poison]]伤害并且因为肉体和肌肉变得松软下垂而陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}</p>\n<p><strong>大失败</strong> 同失败，但是伤害变为@Damage[(4d6+14)[poison]]且陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}</p>",
+            "reset": "<p>一名阿撒托斯信徒花费1个小时在浮雕前祈祷后，陷阱解除并重置。</p>",
+            "stealthdetails": "<p>（受训）</p>",
+            "items": {
+                "Open Eyes": {
+                    "name": "睁开眼睛 Open Eyes",
+                    "description": "<p><strong>触发</strong> 非阿撒托斯信徒接近至5尺以内，或非阿撒托斯信徒在此房间内攻击齐拉迪尼</p>\n<hr />\n<p><strong>效果</strong> 球体形状上会有十几只眼睛眨开，怒视触发陷阱的生物，该生物必须通过@Check[will|dc:22]豁免检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（若检定大失败，则陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。随后，陷阱开始投掷先攻。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "向空洞之星奉献肉体"
+            }
+        },
+        "Mnoghoth": {
+            "blurb": "无性别变体双尾虫怪",
+            "items": {
+                "Tremorsense (Imprecise) 30 feet": {
+                    "name": "震颤感知（模糊）30尺 Tremorsense (Imprecise) 30 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Command Confusion": {
+                    "name": "命令困惑 Command Confusion",
+                    "description": "<p><strong>触发</strong> 一个生物对姆诺戈斯的迷心灵光豁免失败</p>\n<hr />\n<p><strong>效果</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]之后，该轮中的攻击目标将由姆诺戈斯指定，而非由GM随机决定。如果指定的目标是其盟友，则该生物立即进行一次@Check[will|dc:25]豁免，若成功，该生物像正常困惑一样随机选择目标，如果大成功，该生物不再困惑。</p>"
+                },
+                "Mindfog Aura": {
+                    "name": "迷心灵光 Mindfog Aura",
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:25]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。姆诺戈斯能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                },
+                "Seugathi Venom": {
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:28]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}（1轮）</p>",
+                    "name": "双尾虫怪毒 Seugathi Venom"
+                },
+                "Envenom Weapon": {
+                    "name": "武器投毒 Envenom Weapon",
+                    "description": "<p>姆诺戈斯将双尾虫怪毒施加到长剑上。</p>"
+                },
+                "Magic Item Mastery": {
+                    "name": "精通魔法物品 Magic Item Mastery",
+                    "description": "<p>姆诺戈斯可以从魔法物品中施法（Cast a Spell），即便该法术不在其法术列表里。所有这些法术都视为异能法术，并且使用姆诺戈斯的内在法术DC和法术攻击调整值。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "姆诺戈斯"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "姆诺戈斯 Mnoghoth",
+            "publicNotes": "<p>夺心巨虫诞下的仆从中最常见的是双尾虫怪仆从。它们的主人会为它们配备用来执行任务的工具（通常为魔杖或武器），除了那些对于它们深深烙印在脑海里的任务目标有帮助的东西，它们很少会关注其他物质实体。</p>\n<hr />\n<p>扭曲恶毒的异形生物@UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.wxBQsGLdti2xcGVT]通过魔法仪式让自己孕育出了这种蠕虫般的仆从，它们叫做双尾虫怪。这些生物拥有强大的精神驱动力，完成那些夺心巨虫深谋远虑的任务。这些命令往往多样且怪异，对于类人生物来说是残酷的。</p>",
+            "allSaves": "对抗魔法的全豁免+1状态加值"
+        },
+        "Fungus-Covered Sinkhole": {
+            "prototypeToken": {
+                "name": "真菌覆盖的天坑"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "真菌覆盖的天坑 Fungus-Covered Sinkhole",
+            "disable": "<p>@Check[thievery|dc:19]贼活以迅速切断几片关键的纤维状真菌丝，以使整片真菌层松脱下垂。</p>",
+            "hazarddescription": "<p>一片真菌覆盖着一个深达30尺的坑洞，该坑洞向下延伸至下方的区域<strong>H7</strong>。</p>",
+            "stealthdetails": "<p>（或者如果覆盖在坑洞上的真菌层被破坏，则为0）</p>",
+            "items": {
+                "Pitfall": {
+                    "name": "坠入坑洞 Pitfall",
+                    "description": "<p><strong>触发</strong> 当一个生物踏上真菌层时</p>\n<hr />\n<p><strong>效果</strong> 触发生物会跌落30尺，坠入区域<strong>H7</strong>，受到@Damage[15[bludgeoning]|options:fall-damage]坠落伤害，以及因落在众多石笋上而额外承受@Damage[6d6[piercing]]伤害（@Check[reflex|dc:24|basic]豁免）。该生物可以使用@UUID[Compendium.pf2e.actionspf2e.Item.3yoajuKjwHZ9ApUY]反应来避免坠落（DC24）。</p>"
+                }
+            }
+        },
+        "Lightlock": {
+            "prototypeToken": {
+                "name": "光芒锁"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "光芒锁 Lightlock",
+            "disable": "<p>@Check[thievery|dc:27]（大师）以干扰聚焦陷阱能量的部分隐藏符文，或使用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级，反制DC25）或任何具有光亮特征的法术来反制陷阱</p>",
+            "hazarddescription": "<p>墙壁上那层奇异的雾旋转翻腾，然后突然向房间内喷射出几道暗黑色的雾束。</p>",
+            "reset": "<p>光芒锁需要1分钟来恢复能量，之后便可以再次触发。</p>",
+            "stealthdetails": "<p>（专家）</p>",
+            "items": {
+                "Freeze the Awful Light": {
+                    "name": "冻结骇人光辉 Freeze the Awful Light",
+                    "description": "<p><strong>触发</strong> 个携带光源的生物在其回合结束时位于区域<strong>F8</strong></p>\n<hr />\n<p><strong>效果</strong> 墙壁向触发陷阱的生物发射出冰冷的黑暗雾束，该生物受到@Damage[10d6[cold]]伤害（@Check[fortitude|dc:25|basic]豁免）。这些光束还会尝试反制触发陷阱的生物所携带的任何光源。7级或以下的非魔法光源会自动熄灭。对于其他光源，陷阱会施放一个4环级的@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]，使用[[/r 1d20+14 #Counteract]]{+14}的反制调整值，以尝试反制该光源。</p>"
+                }
+            }
+        },
+        "Minargul": {
+            "prototypeToken": {
+                "name": "米纳古尔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "米纳古尔 Minargul",
+            "blurb": "女性地精女巫",
+            "items": {
+                "equipment-Slender Brass Key": {
+                    "name": "细长的黄铜钥匙 Slender Brass Key"
+                },
+                "Goblin Scuttle": {
+                    "name": "地精快步 Goblin Scuttle",
+                    "description": "<p><strong>触发</strong> 一个地精盟友在与该地精相邻的位置结束其移动动作</p>\n<hr />\n<p><strong>效果</strong> 该地精@UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]。</p>"
+                },
+                "Familiar": {
+                    "name": "魔宠 Familiar",
+                    "description": "<p>哨翼（一只蝙蝠）</p>"
+                },
+                "Patron": {
+                    "name": "庇护主 Patron",
+                    "description": "<p>热忱</p>"
+                },
+                "Whistle Up Cursed Flames": {
+                    "name": "召唤咒焰之哨 Whistle Up Cursed Flames",
+                    "description": "<p>米纳古尔吹响了一声尖锐刺耳的口哨，同时呼出一团火焰和恶臭的烟雾。位于@Template[cone|distance:15]区域内的所有生物都必须进行一次@Check[reflex|dc:24|options:area-effect,damaging-effect,inflicts:sickened]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响</p>\n<p><strong>成功</strong> 目标受到@Damage[3d6[fire]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 目标受到@Damage[6d6[fire]|options:area-damage]伤害并因烧伤的剧痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>大失败</strong> 目标受到@Damage[6d6[fire]|options:area-damage]伤害，并被诅咒。由火焰造成的烧伤持续存在，烧焦的肉体持续起泡。被诅咒的生物因持续的疼痛而在所有检定中受到-1的状态减值。治疗无法改变烧伤的外观或降低减值，但解除诅咒可以。</p>"
+                }
+            }
+        },
+        "Adimar Scarnetti": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿迪玛·斯卡内蒂 Adimar Scarnetti",
+            "publicNotes": "<p>由于诅咒造成的影响，鼠化人倾向于成为贪婪、偏执且自私的机会主义者。由于鼠化人通常会居住在能够将自身藏匿于光天化日之下的城市地区，因此几乎任何城镇居民都可能是鼠化人的伪装——从安静的店铺老板到帮派的犯罪首脑。熙熙攘攘的人群以及无数的老鼠洞使得贫民窟和棚户区成为了鼠化人的理想居所，尤其因为在这些贫穷的地区里，鼠化人即便出于贪婪和恐惧杀人，也几乎不会被当局所关注。在一些城市中，鼠化人经营着整个盗贼行会或者有组织的犯罪团伙，成为团伙成员需要故意承受鼠化人带有诅咒的啃咬。鼠化人在混合形态下外观与鼠族十分相似，其差异一般体现在体型的区别上，然而鼠族并不喜欢鼠化人。</p>\n<hr />\n<p>化形生物是在满月的光芒照耀下注定会转变为动物以及动物与类人混合形态的类人生物。这些变形生物是一种古老原能诅咒的产物，这种诅咒能够在转化后通过自身牙齿的啃咬来传播。他们能够潜藏在野外或人群中，再加上这种状态的传染性，使得化形生物恒久不变地成为了引发人群恐慌般猜忌的诱因。</p>",
+            "items": {
+                "Change Shape": {
+                    "description": "<p>人类，拳头+18，1d4+5钝击或者小型老鼠（速度30尺，攀爬速度10尺）</p>\n<hr />\n<p>化形生物变为它的类人、混合、或动物形态。每个形态都有一种特定且可持续的外观。真正的化形生物的自然形态是其混合形态。</p>\n<p>在类人形态下，化形生物使用其原始的类人体型，失去爪抓和啃咬打击，并且获得造成钝击伤害的近战拳头打击，伤害量等同于爪抓造成的挥砍伤害。</p>\n<p>在动物形态，其速度和体型变为该动物的数据，它会获得其它形态下不具有的动物的任何特殊打击效果（比如擒获），并且失去它的任何武器打击。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
+                    "name": "变身 Change Shape"
+                },
+                "Curse of the Wererat": {
+                    "name": "鼠化人诅咒 Curse of the Wererat",
+                    "description": "<p>此诅咒仅影响类人生物。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:26]</p>\n<hr />\n<p>在每个月圆之夜，被诅咒的生物必须尝试另一次强韧豁免，失败则会变化为同种类的化形生物，直至黎明。</p>\n<p>该生物会在GM的控制之下，并在后半夜横冲直撞，直至天明并失去知觉。</p>"
+                },
+                "Moon Frenzy": {
+                    "name": "满月狂乱 Moon Frenzy",
+                    "description": "<p>当满月出现在夜空中时，化形生物必须变化为混合形态，在之后无法进行变身，体型增大1阶，触及增加5尺，啃咬伤害增加2点。</p>\n<p>当月亮落下或太阳升起时，化形生物会变回类人形态，并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]，持续[[/br 2d4 #Fatigued duration]]{2d4小时}。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.dRe8n1nBWMIXd8jh]</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>阿迪玛打击一个@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物时额外造成2d6精准伤害。</p>"
+                },
+                "Unexpected Transformation": {
+                    "name": "骤然变形 Unexpected Transformation",
+                    "description": "<p><strong>需求</strong> 阿迪玛处于人类或者老鼠形态中</p>\n<hr />\n<p><strong>效果</strong> 阿迪玛使用了化形将自己变成混种形态，并尝试对30尺范围内的一个目标进行@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]，他在该威吓检定上获得+2环境加值。所有目睹阿迪玛使用骤然变形的生物，在接下来的24小时内将不会再次被骤然变形挫败士气。</p>"
+                },
+                "Rat Empathy": {
+                    "name": "鼠类认同 Rat Empathy",
+                    "description": "<p>鼠化人能与啮齿动物沟通。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "阿迪玛·斯卡内蒂"
+            },
+            "blurb": "男性人类鼠化人游荡者"
+        },
+        "Sicklefang Longlegs": {
+            "items": {
+                "Noxious Spray": {
+                    "description": "<p>镰牙长腿蛛会向邻近的单个目标喷射有毒的化学物质，目标必须进行@Check[fortitude|dc:24]豁免检定。镰牙长腿蛛在1分钟内无法再次使用毒雾喷射。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响并临时免疫毒雾喷射1分钟。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}且只要该生物处于恶心状态，他们还陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。</p>",
+                    "name": "毒雾喷射 Noxious Spray"
+                },
+                "Bob": {
+                    "name": "晃动 Bob",
+                    "description": "<p>镰牙长腿蛛开始上下晃动，它的双腿就像弹簧一样使身体以一种令人不安的方式弹跳和摇摆。直到镰牙长腿蛛的下一回合开始前，它的AC获得+2状态加值。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "镰牙长腿蛛"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "镰牙长腿蛛 Sicklefang Longlegs",
+            "publicNotes": "<p>镰牙长腿蛛的体型比巨型长腿蛛还要大一些，因其异常巨大、弯曲的颚部而得名，它们用颚部以致命的高效来给猎物放血。</p>\n<hr />\n<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多（Taldor）聚居地的地下，而在西边的切利亚斯（Cheliax），体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原（The Mwangi EXPanse）。</p>"
+        },
+        "Isphinn": {
+            "publicNotes": "<p>土巨灵诞生自土元素位面，是骄傲且坚硬的巨灵。他们重视身体技巧，喜欢讨价还价，概率游戏，以及金工和石工。</p>\n<hr />\n<p>在凡人有史之前，巨灵是物质宇宙中最早拥有自由意志的造物之一。他们由元素物质组成，他们行遍物质宇宙和六大元素位面：气、土、火、金、水还有木。随着时间的推移，留在每个元素位面的巨灵发现他们的物质被这些元素所取代。金元素的金巨灵和木元素的木巨灵则见元素之怒。</p>",
+            "items": {
+                "Earth Glide": {
+                    "description": "<p>土巨灵可以用完整掘地速度@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]穿越泥土和岩石，不会留下隧道和经过痕迹。</p>",
+                    "name": "穿地 Earth Glide"
+                },
+                "Shove into Stone": {
+                    "description": "<p>当土巨灵推离一个生物撞上石制障碍物时，目标必须成功通过@Check[reflex|dc:22]豁免检定否则会和石制障碍物融合在一起（如同@UUID[Compendium.pf2e.spells-srd.Item.vh1RpbWfqdNC4L3P]法术）。受害者可以尝试[[/act escape dc=28]]。</p>",
+                    "name": "推敌入石 Shove into Stone"
+                },
+                "Push 10 feet": {
+                    "name": "推离10尺 Push 10 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知（模糊） 60尺 Tremorsense (Imprecise) 60 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "伊斯芬"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "伊斯芬 Isphinn",
+            "blurb": "精英女性土巨灵"
+        },
+        "Aliver \"Pillbug\" Podiker": {
+            "prototypeToken": {
+                "name": "阿利弗·“药丸虫”·波迪克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿利弗·“药丸虫”·波迪克 Aliver \"Pillbug\" Podiker",
+            "items": {
+                "Foul Concoction": {
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 阿利弗迅速地将炼金催化剂和材料混合在一起，产生出一股恶臭的烟雾，这股烟雾范围是@Template[emanation|distance:10]。这片烟雾的功能与@UUID[Compendium.pf2e.spells-srd.Item.GKpEcy9WId6NJvtx]（@Check[fortitude|dc:25]）相同，但不同之处在于阿利弗对由他调配物产生的腐臭气味免疫。</p>",
+                    "name": "污秽调配 Foul Concoction"
+                },
+                "Precise Poisoning": {
+                    "description": "<p>阿利弗将一剂毒药（通常是一剂@UUID[Compendium.pf2e.equipment-srd.Item.aBOPYlfHAcXUmhF7]）涂抹在他的弩的一支弩箭上，然后小心翼翼地用这支被涂毒的弩箭瞄准，并尝试用手弩进行远程打击。如果他击中目标，除了弩箭本身造成的伤害外，还会额外造成1d6穿刺伤害，并附加毒药的效果。</p>",
+                    "name": "精准施毒 Precise Poisoning"
+                },
+                "Infused Items": {
+                    "name": "灌注物品 Infused Items",
+                    "description": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.Y8115p3cmQJBqk5d]，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.T4ouD4mVFHA3EHs6]，4瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]，8瓶@UUID[Compendium.pf2e.equipment-srd.Item.nVvH1ZcM7OwIVIs8]，7瓶@UUID[Compendium.pf2e.equipment-srd.Item.aBOPYlfHAcXUmhF7]</p>"
+                },
+                "Quick Bomber": {
+                    "name": "高速投弹手 Quick Bomber",
+                    "description": "<p>阿利弗使用交互动作取出一枚炸弹，随后用它进行打击。</p>"
+                }
+            },
+            "blurb": "男性人类炼金术士"
+        },
+        "Jordus Munt": {
+            "items": {
+                "Devil's Cursed Breath": {
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 乔达斯咬伤自己的舌头（受到@Damage[1[slashing]]伤害），然后喷吐出@Template[cone|distance:15]的燃烧烟雾。该区域内的每个生物都必须尝试@Check[reflex|dc:26|options:area-effect,damaging-effect]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物受到@Damage[3d8[fire]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 生物受到@Damage[7d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>大失败</strong> 生物受到@Damage[10d8[fire]|options:area-damage]且由于烧伤的剧痛陷入恶心1，并受到诅咒，受害者的烧伤从未完全消失，而由于持续的疼痛，这个被诅咒的生物在所有攻击中都会受到-2的状态减值。治疗无法改变烧伤的外观或降低减值，但解除诅咒可以。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.khL2A1slsnufpJp4]</p>",
+                    "name": "魔鬼咒息 Devil's Cursed Breath"
+                }
+            },
+            "prototypeToken": {
+                "name": "乔达斯·蒙特"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "乔达斯·蒙特 Jordus Munt",
+            "blurb": "男性人类吟游诗人"
+        },
+        "Stickfoot": {
+            "publicNotes": "<p>这些和人类差不多大小的爬行动物有让人觉得不可思议的脚，能够紧紧抓住任何表面。巨壁虎通常温顺害羞，但当被逼急或保卫领地时，它们会变得好斗。这些大眼睛的蜥蜴生活在各种各样的栖息地，从雨林、沙漠到丘陵，甚至地下洞穴。他们大部分时间都待在树上或在岩石峭壁上，寻找小型猎物或躲避捕食者。巨壁虎的鳞片通常色彩鲜艳或装饰着复杂的图案，体长约8尺，体重约120磅。</p>\n<p>巨壁虎有时被体型较小的人形生物当作守卫或坐骑，因为它们温顺的天性使它们相对容易驯养和训练。巨壁虎高超的攀爬技能使得它们在位于地下或悬崖附近的社群中特别受欢迎，比如地精和狗头人。它们鲜艳的颜色也使它们成为上流社会中最受欢迎的异域宠物。</p>\n<hr />\n<p>蜥蜴们外表和能力各异，但大多数都具有爬行动物的基本形状——长长的尾巴，多齿的嘴和四条腿。虽然有一些蜥蜴种类能够在短时间内用两条腿运动，但大多数都是严格意义上的四足动物。这里列举了大型蜥蜴中最常见和最著名的三个物种。</p>",
+            "items": {
+                "Uncanny Climber": {
+                    "name": "不可思议的攀爬者 Uncanny Climber",
+                    "description": "<p>巨壁虎的脚能让它爬上任何表面，无论多么光滑或陡峭。如果巨壁虎在一次尝试@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]的运动检定中丢出大失败，则只承受失败的结果。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "棒脚"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "棒脚 Stickfoot"
+        },
+        "Chertus Jheed": {
+            "prototypeToken": {
+                "name": "切图斯·杰希德"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "切图斯·杰希德 Chertus Jheed",
+            "blurb": "男性人类战士",
+            "items": {
+                "equipment-Clockwork Songbird Component (Legs & Tail)": {
+                    "name": "发条鸣鸟部件（腿&尾巴） Clockwork Songbird Component (Legs & Tail)"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                },
+                "Brutal Brawler": {
+                    "name": "野蛮搏击者 Brutal Brawler",
+                    "description": "<p>切图斯可以选择用拳头造成致命伤害，并且他拳头攻击的伤害骰大小会增加到1d6。如果他这样做，那么在造成重击时，被击中的目标必须成功通过@Check[fortitude|dc:25]豁免检定，否则就会因为这一记令人震惊的重击而陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>"
+                },
+                "Exacting Strike": {
+                    "name": "精确打击 Exacting Strike",
+                    "description": "<p>切图斯进行1次打击，如果这次打击失败，这次攻击不计入他的多重攻击减值。</p>"
+                },
+                "Lunge": {
+                    "name": "突刺 Lunge",
+                    "description": "<p>切图斯用他的拳头进行1次打击，此次打击的触及范围提升5尺。</p>"
+                },
+                "Pummeling Flurry": {
+                    "name": "碎拳连击 Pummeling Flurry",
+                    "description": "<p>切图斯挥动拳头，以猛击的方式划出一道弧线，随后进行一次拳头打击，并将攻击骰结果与最多两名相邻敌人的AC进行比较。然后，他骰伤害，并将伤害结果应用于这些被击中的生物。这次攻击在计算攻击减值时视为两次攻击。</p>"
+                },
+                "Snatch Weapon": {
+                    "name": "抓取武器 Snatch Weapon",
+                    "description": "<p>切图斯试图对一个生物进行@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]。如果他成功地将对手的武器从手中击落，切图斯会拿起这把武器，并用它来对对手进行一次打击。这次攻击在计算攻击减值时视为两次。</p>"
+                }
+            }
+        },
+        "Vekensvok's Lampad": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>冥灯仙女守护着地底晦暗无光的隐匿之所。她们不仅保护地下洞穴免受威胁，也同样保护善意的无辜者免遭潜藏在地表之下的危险。冥灯之名源于她们常携一缕魔法之光，指引迷途之人前往安全之所，引诱威胁之物通向破灭之地。冥灯仙女反复无常的天性使得她们反应难以被预测，不过她们极少会在受到充分的挑衅前显露明显的恶意。</p>\n<hr />\n<p>宁芙是守护着大自然的精类，拥有着极致的美丽和形态，融汇了令人惊叹的类人特征与她们所守护的自然元素。宁芙仙后是拥有强大力量的宁芙，统治并且守护着更为广袤的未被染指的原始荒野。例如，一位冥灯仙女可能守护着一个美丽的地下洞穴，而一名冥灯仙后则会将整个洞穴系统称为自己的领土。</p>",
+            "items": {
+                "Cavern Dependent": {
+                    "description": "<p>冥灯仙女与一个特定的洞窟或是其他独立的地底区域有着神秘的关联，并且必须待在其300尺范围内。</p>\n<p>如果她移动超出了这个范围，她将会变为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，且无法移除此状态。她必须每小时都尝试通过一次@Check[fortitude|dc:19]豁免，否则恶心的状态值将增加1（最高值恶心4）。</p>\n<p>24小时后，她将变为@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，并且此状态值每24小时增加1点。一名冥灯仙女可以进行一个耗时24小时的仪式将自己与一个新的洞窟建立关联。</p>",
+                    "name": "洞窟依存 Cavern Dependent"
+                },
+                "Weep": {
+                    "name": "悲泣 Weep",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 冥灯仙女开始一阵揪心的悲泣，引起附近生物共情的抽噎。每一名@Template[emanation|distance:30]范围内听见冥灯仙女悲泣的非冥灯仙女生物必须成功通过一个@Check[will|dc:20]豁免，否则将会因为不由自主的抽泣而在1轮内无法使用反应动作并且在其下一轮@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "维克恩斯沃克的冥灯仙女"
+            },
+            "name": "维克恩斯沃克的冥灯仙女 Vekensvok's Lampad",
+            "blurb": "变体冥灯仙女"
+        },
+        "Breath of Blood": {
+            "disable": "<p>进行三次@Check[nature|dc:33]或@Check[occultism|dc:33]检定，可以从血液中抽取出其魔法本质，使其凝结并失去活性；或者进行一次@Check[religion|dc:36]检定，通过祈祷切断与卡布里里的神圣联系；或者使用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（6环级，反制DC29），使该危害在10分钟内失效。</p>",
+            "hazarddescription": "<p>一个翻腾的血池不断冒泡并汹涌翻滚，周期性地向空气中释放出有毒的蒸气。</p>",
+            "routine": "<p>（2动作）在危害的第一个动作中，气泡猛烈地喷溅并爆裂，释放出有毒蒸气充满空气，对区域<strong>J3b</strong>内的所有生物造成@Damage[6d6[poison]]伤害（@Check[fortitude|dc:30|basic]豁免检定）。正在屏息的生物在进行此豁免检定时可获得+4的环境加值。在危害的第二个动作中，气泡会向区域<strong>J3b</strong>内的一个随机目标排放毒素。</p>",
+            "items": {
+                "Vent Toxins": {
+                    "description": "<p><strong>触发</strong> 当有生物移动到北侧阶梯之外的房间内时</p>\n<hr />\n<p><strong>效果</strong> 地面上的血液剧烈冒泡，当气泡破裂时，会向触发该效果的生物周围释放出有毒气体。除非该生物正在屏息或不需要呼吸，否则它必须进行一次@Check[fortitude|dc:30]豁免检定；之后，该危害将投掷先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物因闻到恶臭的气体而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>失败</strong> 同成功，但该生物还因有毒气体陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。</p>\n<p><strong>大失败</strong> 同失败，但该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p>",
+                    "name": "排放毒素 Vent Toxins"
+                }
+            },
+            "prototypeToken": {
+                "name": "血之呼吸"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "血之呼吸 Breath of Blood",
+            "reset": "<p>当所有生物离开房间后，该危害会在1轮后平息下来，并可以在下一轮开始时再次触发。</p>",
+            "stealthdetails": "<p>（大师）</p>"
+        },
+        "Arika Avertin": {
+            "prototypeToken": {
+                "name": "阿丽卡·阿维尔坦"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿丽卡·阿维尔坦 Arika Avertin",
+            "blurb": "女性人类吟游诗人"
+        },
+        "Zalavexus": {
+            "prototypeToken": {
+                "name": "扎拉维克斯"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Fast Healing 10": {
+                    "name": "快速治疗10 Fast Healing 10",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+                },
+                "Discorporate": {
+                    "description": "<p>当蠕虫行者的生命值减少为0时，它会 解体，组成它身体各部分的蠕虫会四散奔逃。即便只有一只蠕虫逃脱，存活的蠕虫行者通常也可以在[[/gmr 1d10 #Re-Form]]{1d10天}后重生。</p>\n<p>虽然周围环境决定了蠕虫行者逃脱的时间长短，但通常它的敌人只有一轮时间。一般来说，这需要用范围效果或溅射武器覆盖蠕虫行者解体时所在的空间，在对空间造成任意数量的范围伤害或溅射伤害后，进行该尝试的角色必须通过@Check[flat|dc:15]检定。之后每次造成范围伤害或建设伤害都能将纯骰检定的DC-2，最低减少到DC 5。如果这些纯骰检定中有任意一个成功，则没有蠕虫逃脱，而蠕虫行者将被永久消灭。</p>\n<p>在GM的裁定下，巧妙地诱捕或阻碍蠕虫的方法可能会延长蠕虫的逃跑时间。</p>",
+                    "name": "解体 Discorporate"
+                },
+                "Swarm Shape": {
+                    "description": "<p>蠕虫行者解体为一大群蠕虫。它将所有持握、穿戴和携带的物品会原地掉落。当解体时，蠕虫行者不能进行攻击动作，也无法施放法术，但可以穿过足够让单个蠕虫通过的狭小空间，而不需要尝试@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]动作。它能使用同样的动作将身体重聚为正常的形态。</p>",
+                    "name": "虫群形态 Swarm Shape"
+                },
+                "Tremorsense 30 feet": {
+                    "name": "震颤感知（模糊）30尺 Tremorsense 30 feet",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                },
+                "Swarm Mind": {
+                    "name": "集群心智 Swarm Mind",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.SwarmMind]</p>"
+                },
+                "Quickened Casting": {
+                    "name": "快速施法 Quickened Casting",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 如果扎拉维克斯的下一个行动是施展一个3环级或更低的法术或戏法，则将其施放所需的动作数减少1（最少需1个动作）。</p>"
+                },
+                "Squirming Embrace": {
+                    "name": "蠕虫之拥 Squirming Embrace",
+                    "description": "<p>蠕虫行者行走，在结束移动时和一个生物共享空间，然后对该生物造成@Damage[4d8[piercing]]伤害。生物可以尝试@Check[reflex|dc:27|basic]豁免。</p>"
+                },
+                "Steady Spellcasting": {
+                    "name": "镇定施法 Steady Spellcasting",
+                    "description": "<p>如果一个反应动作会打断扎拉维克斯的施法动作，他尝试一次@Check[flat|dc:15]检定。如果成功，他的动作不会被打断。</p>"
+                }
+            },
+            "name": "扎拉维克斯 Zalavexus",
+            "publicNotes": "<p>这只蠕虫行者生前曾是“旧日支配者”哈斯塔（Hastur）的一名邪教徒。在它新的生命中，它仍在继续着它的阴谋，并竭力推进其邪恶的图谋。</p>",
+            "hp": "快速治疗10",
+            "blurb": "男性人类蠕虫行者术士",
+            "ac": "全域视野"
+        },
+        "Red Bishop": {
+            "publicNotes": "<p>关于这种被称为\"天蛾人\"的奇特生物，人们知之甚少，唯一所知的是，当它们现身时，灾难必将随之而来。天蛾人自视为命运的代理人——前提是，这种命运必须是毁灭性与破坏性的。那些遭遇过天蛾人的人，往往不记得那次会面，却会在余生中，不知不觉地推进并促成这些生物晦涩难懂的计划。</p>\n<p>当然，\"天蛾人\"这个名字并非这些生物对自己的称呼，而是那些瞥见它们身影、讲述骇人听闻目击经历的惊恐之人所赋予它们的称谓。它们各自都保有自己的名字，或一套用于不同情境的称呼，况且它们并不需要一个词来指代自己的同类。</p>",
+            "blurb": "男性天蛾人帕祖祖的代行者",
+            "items": {
+                "Portentous Gaze": {
+                    "name": "不详注视 Portentous Gaze",
+                    "description": "<p>30尺。当一个生物在灵光内结束其回合时，它必须尝试一次@Check[will|dc:31]豁免。失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。</p>\n<p>天蛾人可以用一个带有专注特征的单动作来关闭或开启此灵光。</p>"
+                },
+                "True Temptation": {
+                    "name": "真实诱惑 True Temptation",
+                    "description": "<p><strong>频率</strong> 每天三次</p>\n<p><strong>触发</strong> 红主祭周围 30尺范围内的生物一口气大声说出帕祖祖的名字三次</p>\n<hr />\n<p><strong>效果</strong> 红主祭对生物施放@UUID[Compendium.pf2e.spells-srd.Item.vLA0q0WOK2YPuJs6]。拥有飞行速度的生物对抗这次<em>魅惑术</em>的豁免检定会承受-4的环境减值。</p>"
+                },
+                "Agent of Fate": {
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 天蛾人施放任何需要2个或更少动作来施放的7环级或更低的法术，无论它们是否在其内在法术列表中。</p>\n<p>它们只能在这样做能引导命运之流朝向灾难或其他显著难忘事件的正确进程时使用此能力。</p>\n<p>正确的命运之流由GM决定，但一些例子包括施放@UUID[Compendium.pf2e.spells-srd.Item.Ucf8eynbZMfUucjE]以引导某人前往一个预兆之地，施放@UUID[Compendium.pf2e.spells-srd.Item.R9xqCBblkS5KE4y7]以在某人迫切需要听到某条重要信息时传递该信息，或施放@UUID[Compendium.pf2e.spells-srd.Item.0fYE64odlKqISzft]以削弱一个结构并引发某种必要的灾难。</p>",
+                    "name": "命运代言人 Agent of Fate"
+                },
+                "Command the Hateful Skies": {
+                    "description": "<p>当与能够战斗的邪恶生物进行心灵感应时，红主祭的心灵感应信息带有令人不安的重量和惩罚的誓言。对抗上述生物时，红主祭在@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]，@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]，@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]和@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]时获得+3环境加值，而且他使用的任何对抗上述生物的心灵效果的DC增加3。即使没有这些加成，邪恶的飞行生物对待红主祭的态度往往是尊敬与恐惧并存</p>",
+                    "name": "统御仇恨天幕 Command the Hateful Skies"
+                },
+                "Extract Fear": {
+                    "description": "<p>红主祭伸出一只手，伸向30尺范围内他能看到的处于@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}状态的生物，并做出一个攥紧的动作，将生物的恐惧拽出并吸食。红主祭自身回复@Damage[(7d8+8)[healing]]生命值，目标生物会失去惊惧状态，但必须尝试@Check[will|dc:34]豁免，因为其他情绪也会一起从他们的脑海中抽离，并无用地消散掉，导致心灵创伤和思维本身的诡异呆滞。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响</p>\n<p><strong>成功</strong> 目标承受@Damage[3d6[mental]]伤害</p>\n<p><strong>失败</strong> 目标承受@Damage[6d6[mental]]伤害且直到其下回合结束前陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}</p>\n<p><strong>大失败</strong> 目标承受@Damage[12d6[mental]]伤害且陷入呆滞1，直至该状态被类似复原术的效果移除</p>",
+                    "name": "提取恐惧 Extract Fear"
+                },
+                "Focus Gaze": {
+                    "description": "<p>天蛾人将它的视线放到30尺内它能看到的一个生物上。该目标必须立即尝试一次意志豁免以对抗天蛾人的不详注视（Portentous Gaze）。</p>\n<p>如果该生物在尝试此豁免时已经处于惊惧状态，则在失败时，它在惊惧效果之外，还会额外陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续24小时。</p>\n<p>尝试豁免后，该生物临时免疫1分钟。</p>",
+                    "name": "集中视线 Focus Gaze"
+                },
+                "Change Shape": {
+                    "name": "化形 Change Shape",
+                    "description": "<p>红主祭的外形变为一只超小型的红色海鸥或鹰。这不会改变他的速度，但他不能以这种形态发动攻击。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "红主祭"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "红主祭 Red Bishop"
+        },
+        "Pthuminin": {
+            "allSaves": "对抗魔法的全豁免+1状态加值",
+            "publicNotes": "<p>高斯瑞格是黑色支配者的特工，他们为了实现其危险主人的目标而亲自潜入到类人社会中。他们的任务通常是观察与等待，以伪装的形态潜伏起来，直到他们的位置成熟到足以收获。一旦时机成熟，他们就会化作活体信标，向遥远的主人发出信号，引导入侵部队。在多年的渗透过程中，高斯瑞格会扮演数十种角色，享受它们能激起的任何强烈情绪，同时为未来的身份奠定基础。</p>\n<p>在其原本形态下，高斯瑞格能靠着短粗的双腿和瘦长的手臂以不稳固的姿态快速飞奔。他们伪装成类人生物潜入到社会中，只有在认为自己到了最终要暴露且必须诉诸暴力才能保护计划运作时，才会卸下伪装。</p>",
+            "items": {
+                "Thoughtsense 60 feet": {
+                    "name": "思维感知60尺 Thoughtsense 60 feet",
+                    "description": "<p>高斯瑞格能用所列范围的精确感官感知到生物的心灵要素；它不能用思维感知来感知到无心智的生物。</p>"
+                },
+                "Change Shape": {
+                    "description": "<p>高斯瑞格呈现出任意小型或中型类人生物的样貌。这不会改变它的速度或者其打击的攻击和伤害调整值，但是可能会改变打击造成的伤害类型（通常为钝击）。在处于类人形态时，它不能使用颚打击。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
+                    "name": "变身 Change Shape"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Unsettled Aura": {
+                    "name": "干扰灵光 Unsettled Aura",
+                    "description": "<p>30尺。高斯瑞格投射出不和谐的能量场，这能扰乱正在思维的生物的心智。任何位于距离高斯瑞格30尺内的非无心智生物都会在意志豁免中承受-1状态减值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.aOpSI5tApXF5xHCM]</p>"
+                },
+                "Mind Bolt": {
+                    "description": "<p>高斯瑞格集中其不协调的心灵能量力场，将之投射到60尺内一个生物的心灵中。目标受到@Damage[6d6[mental]]伤害（@Check[will|dc:30|basic]豁免）。大失败时，生物还将陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1分钟或直到其受到伤害。</p>",
+                    "name": "心灵弹 Mind Bolt"
+                }
+            },
+            "prototypeToken": {
+                "name": "普图米宁"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "普图米宁 Pthuminin",
+            "blurb": "变体高斯瑞格"
+        },
+        "Vizmivool": {
+            "prototypeToken": {
+                "name": "维兹米沃尔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "维兹米沃尔 Vizmivool",
+            "allSaves": "对抗心灵效果的意志豁免+4状态加值",
+            "blurb": "女性蛇人伊德修斯牧师",
+            "items": {
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "+4 Status to Will Saves vs. Mental": {
+                    "name": "对抗心灵效果的意志豁免+4状态加值 +4 Status to Will Saves vs. Mental"
+                },
+                "Sacrifice Pawn": {
+                    "name": "献祭棋子 Sacrifice Pawn",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 维兹米沃尔对一名盟友尝试进行一次匕首打击，并将这次打击的结果提升一个成功度。如果这次打击杀死了盟友，那么被牺牲的盟友的生命力会像红色的火焰一样从伤口中涌出，流入维兹米沃尔的体内，为她恢复@Damage[10d6[healing]]生命值，并使她在接下来的1分钟内获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态。在这1分钟内，她可以使用额外的动作进行一次打击或行走。</p>"
+                },
+                "Serpentfolk Venom": {
+                    "name": "蛇人毒素 Serpentfolk Venom",
+                    "description": "<p><strong>豁免骰</strong> @Check[fortitude|dc:28]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害且@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d4[poison]]伤害且力竭1（1轮）</p>"
+                }
+            }
+        },
+        "Ghast Cultist": {
+            "items": {
+                "Stench": {
+                    "description": "<p>10尺。若有生物进入灵光范围或者在回合开始时位于灵光范围内，则必须尝试一次@Check[fortitude|dc:22|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若为大失败，则只要处于恶心状态就还会附加@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。</p>\n<p>身处灵光之内时，生物在对抗疾病以及从恶心状态中恢复的豁免检定中会承受-2环境减值。成功豁免的生物会获得1分钟的临时免疫。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]</p>",
+                    "name": "恶臭 Stench"
+                },
+                "Consume Flesh": {
+                    "description": "<p><strong>需求</strong> 妖鬼与刚死亡1小时内的生物尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 妖鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>妖鬼从每具尸体上只能获取一次生命值恢复。</p>\n<p>妖鬼邪教徒还能舀起一把蛆虫来食用，只要他们位于区域<strong>J1</strong>中央的大碗旁边。食用后，妖鬼邪教徒可恢复5d6点生命值。</p>",
+                    "name": "啃食尸体 Consume Flesh"
+                },
+                "Ghast Fever": {
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:25]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[3d8[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[3d8[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.VC7rtYR4hLxwg7WZ]复生。</p>",
+                    "name": "妖鬼热 Ghast Fever"
+                },
+                "Paralysis": {
+                    "name": "麻痹 Paralysis",
+                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:25]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                },
+                "Swift Leap": {
+                    "description": "<p>妖鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>",
+                    "name": "迅捷跳跃 Swift Leap"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "妖鬼邪教徒"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "妖鬼邪教徒 Ghast Cultist",
+            "hp": "虚能治疗",
+            "blurb": "尸鬼卡布里里祭司"
+        },
+        "Fungus Tyrant": {
+            "prototypeToken": {
+                "name": "真菌暴君"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "真菌暴君 Fungus Tyrant",
+            "publicNotes": "<p>数百年前，一群强大的魅魔刺客入侵了疾病和真菌的恶魔领主切斯-乌苏格（Cyth-v’Sug）的深渊领域。这些魅魔刺客试图杀死一名强大的女巫，因为她玷污了刺客们侍奉的亵渎神庙。这些魅魔的任务失败了，但从她们的尸体上长出了第一批真菌暴君。女巫对这一发展很满意，于是在物质位面的许多世界播种了真菌暴君的孢子，这些孢子在新的环境中生长繁衍，就像腐烂在尸体上滋生一样。如今，数以百计的真菌暴君栖息在物质位面最肮脏的地方。它们尤其喜欢大型洞穴系统和城市废墟，但也能在荒疫精怪（Blighted Fey）统治的腐朽林地或活跃城市的下水道中找到它们，这些下水道会排放大量含有魔力的废水。</p>\n<p>与一只通常没有智慧却有条不紊地行动着的植物怪物的遭遇可能是一只真菌暴君操纵的证据，但真菌暴君同样喜欢饲养其他类型的生物作为宠物和仆从，尤其是有吸引力的类人生物。特别受宠的奴仆会被赐予真菌暴君的拥抱，变成真菌奴仆，永远忠于他们毫无生气的统治者。然而，大多数真菌暴君都意识到，最好有一个多样的守卫阵容，他们通常会选择保留一些非真菌爪牙来保护他们的巢穴。</p>\n<p>真菌暴君嫉妒心极强。任何试图引诱他们拥有的宠物或治愈被感染者的人，都会招致他们恒久的愤怒。然而，最能激怒真菌暴君的却是魅魔。在这些恶魔身上，真菌暴君看到了他们再也无法获得的昔日的魅力和力量，只有残忍地摧毁这些嘲弄的记忆才能平息真菌暴君的怒火。真菌暴君面对他们怀疑可能是魅魔的人时确实非常可怕，因为在这种战斗中，这些邪恶真菌生物会放弃他们惯用的巧妙的心理诡计，使出浑身解数，试图将冒犯他们的生物撕成碎片。真菌暴君还非常喜欢把魅魔变成受他们控制的真菌生物。</p>\n<p>虽然它们的嫉妒心不会致使它们与其他真菌暴君开战，但它们总是小心翼翼地保持自己的领地与附近的任何同类保持距离，而且它们会竭力忍耐来避免\"偷猎\"其他真菌暴君被魅惑和侵扰的宠物。</p>\n<p>一只真菌暴君通常身高6尺，体重150磅。</p>\n<h2>孢子奴仆 Spore Thralls</h2>\n<p>当一种生物成为孢子奴仆时，它从死亡中复活时的数据与生前相同，但会获得真菌特征，以及对死亡效果、疾病、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]和中毒的免疫，其阵营也会转换为与创造它们的真菌暴君一致。孢子奴仆被杀死后，它的灵魂最终会被送往骨园接受审判，但被真菌包覆的肉体残骸往往会催生出新的真菌生物，如菌体人（Myceloid）、紫蕈（Violet Fungus）或盗袭瘤菌（Drakauthix）。这些真菌子嗣不受真菌暴君的控制，但通常会将他们视为盟友，或者更常见的是视为神灵。</p>",
+            "allSaves": "对抗魔法的全豁免+1状态加值",
+            "items": {
+                "Fungaltongue": {
+                    "name": "菌舌 Fungaltongue",
+                    "description": "<p>真菌暴君可以与所有形态的真菌对话，无论是真菌生物还是其他的真菌。大多数普通真菌无法识别生物的细节，也不了解它们周围以外的世界。真菌暴君在对真菌生物进行欺骗、交涉或威吓检定时会获得+3环境加值。</p>"
+                },
+                "Create Spawn": {
+                    "description": "<p>如果一个生物因为一个真菌暴君的噬智之吻降至0生命值后死亡，真菌暴君可以将自己的一些真菌物质转移给受害者，让他们在一块真菌中\"熟成\"24小时，从而将受害者变成孢子奴仆。24小时后，该生物将重获新生，但会获得真菌特征并成为孢子奴仆。这将阻止生物的灵魂进入来世，其方式与不死生物被带出轮回的方式类似—因此，那些将轮回奉为神圣的人（尤其是法莱斯玛（Pharasma）的信徒）认为孢子奴仆与不死生物一样糟糕，尽管它们是活着的生物。如果这个新孢子奴仆的等级低于它的创造者，那么它就会受到创造者的控制。如果真菌暴君同时控制了太多的孢子奴仆（由GM决定），意志坚强的孢子奴仆可以通过@Check[will|dc:28]豁免检定来解放自己。通常情况下，真菌暴君会避免从那些强大到无法控制的倒下的敌人中制造孢子奴仆，因为他们非常清楚这些受害者可能会对剥夺了他们来世的人怀有复仇的冲动。</p>",
+                    "name": "创造子嗣 Create Spawn"
+                },
+                "Grow Sporepod": {
+                    "description": "<p>真菌暴君会在他们能看到的60尺范围内的任何地方，使一个人形大小的孢子囊破土而出。孢子囊一旦生成，会持续存在1分钟，直到真菌暴君移动到距离它120尺以外的地方，或者直到它被摧毁（AC28，硬度10，20生命值）。真菌暴君在[[/gmr 1d4 #Recharge Grow Sporepod]]{1d4轮}内无法再次培育出孢子囊，但除了这一点和孢子囊1分钟的寿命外，一个真菌暴君在同一时间可以激活的孢子囊数量没有硬性限制。</p>",
+                    "name": "培育孢子囊 Grow Sporepod"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Mind-Draining Kiss": {
+                    "name": "噬智之吻 Mind-Draining Kiss",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 真菌暴君会与被他们@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]的生物发生激情行为，试图消耗其意志和人格。亲吻会使生物陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}或呆滞状态值增加1，最大至4。生物会受到@Damage[4d6[poison]]伤害，然后必须成功通过@Check[will|dc:28]豁免检定，否则受类似@UUID[Compendium.pf2e.spells-srd.Item.qwlh6aDgi86U3Q7H]的效果影响会保持不动而不是试图@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]。</p>"
+                },
+                "Sporestride": {
+                    "name": "孢子跨步 Sporestride",
+                    "description": "<p>真菌暴君进入邻近的孢子囊后，会立即传送到它们创造的任何其他激活的孢子囊中，并从目标孢子囊中冲出，在此过程中目标孢子囊会被摧毁。</p>"
+                },
+                "Sporewarp": {
+                    "name": "孢子扭曲 Sporewarp",
+                    "description": "<p>真菌暴君尝试一次触手打击，但会将120尺范围内自己可见的一个孢子囊作为触手打击的原点。</p>"
+                }
+            }
+        },
+        "Whispers from Long Ago": {
+            "prototypeToken": {
+                "name": "久远的低语"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "久远的低语 Whispers from Long Ago",
+            "disable": "<p>@Check[thievery|dc:27]（大师）用以破坏门周围巧妙隐藏的触发符文，或者施展@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级，反制DC23）以反制陷阱</p>",
+            "hazarddescription": "<p>当门被打开时，令人不安的低语向外散发，悄无声息地侵入敢于闯入者的思维。</p>",
+            "reset": "<p>陷阱在一轮的时间内重置，并在下一轮准备好对下一个尝试开门的人低语。</p>",
+            "stealthdetails": "<p>（专家）</p>",
+            "items": {
+                "Protect the Stone": {
+                    "name": "保护幽魂石 Protect the Stone",
+                    "description": "<p><strong>触发</strong> 当有生物试图打开这扇门，或用打击或法术破坏这扇门时</p>\n<hr />\n<p><strong>效果</strong> 门会对触发它的生物低语，使用以下三种语言之一：休昂提语、瑟西隆语或瓦瑞西亚语。如果目标生物会说这些语言中的任何一种，它就会以最擅长的语言听到这些低语。如果目标不会说这些语言，陷阱的低语就没有效果。如果目标听懂了这些低语，陷阱会对目标施加暗示术（@Check[will|dc:25]豁免），建议他们“在门前站岗，与任何试图通过此门进入里面房间的人战斗，直到里拉菈露女士的到来。”曾经，这些低语也会警告里拉菈露，但现在她早已不在，所以PC们不必担心强大的符文领主学徒的出现。</p>"
+                }
+            }
+        },
+        "Devil's Breath": {
+            "items": {
+                "Exhale Smoke": {
+                    "description": "<p><strong>触发</strong> 一个非地精生物接近沙尖镇魔鬼标本10尺以内</p>\n<hr />\n<p><strong>效果</strong> 沙尖镇魔鬼标本蹒跚向前，张开嘴巴，发出令人毛骨悚然的嚎叫和一股恶臭的灰色烟雾。在陷阱以南的@Template[cone|distance:30]范围中的所有生物（一直延伸到通往大深坑的门）必须尝试@Check[fortitude|dc:22|options:area-effect,inflicts:enfeebled]豁免检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}一小时（或在大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，持续8小时）。</p>",
+                    "name": "喷吐烟雾 Exhale Smoke"
+                }
+            },
+            "prototypeToken": {
+                "name": "魔鬼吐息"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "魔鬼吐息 Devil's Breath",
+            "disable": "<p>@Check[thievery|dc:23]以移除标本上的宝石眼睛</p>",
+            "hazarddescription": "<p>怪物标本蹒跚向前，嚎叫着，喷吐出一股恶臭的烟雾。</p>",
+            "reset": "<p>魔鬼吐息一小时后自动重置</p>"
+        },
+        "Tiluatchek": {
+            "publicNotes": "<p>噬智怪是被称作黑色支配者的强大外星势力的先行侦察兵和渗透者。这些怪物游荡在幽暗之地（Darklands），从此处秘密入侵着地表世界。当一只噬智怪渗透进某个社群，它的首要目标是获取一具身体。它或许会优先去墓地寻找一具新鲜的尸体，这比通过战斗再杀死某人要容易。当异怪将自己挤进宿主的颅腔内，它的真身就会感知迟钝，因为它会连接到宿主的神经系统中。如果被发现，噬智怪就会快速占据一具新的身躯来让自己逃脱，最好是某些不显眼的生物，例如家畜。</p>",
+            "items": {
+                "Body Thief": {
+                    "description": "<p>噬智怪缩小体型，掘地一个死亡不超过一天的尸体的大脑中。在噬智怪下个回合开始时，尸体恢复到最大生命值，被噬智怪控制。噬智怪可以意识和感知到被占据尸体所能感知的一切。</p>\n<p>任何能够结束占据的效果会杀死宿主尸体，与离开躯体具有相同效果。噬智怪不能以盗窃躯体来使用宿主生物的法术但可以使用自己的法术。</p>\n<p>宿主尸体会在被噬智怪栖身期间缓慢腐烂，在7天后变得不再适合栖身，除非使用@UUID[Compendium.pf2e.spells-srd.Item.xRgU9rrhmGAgG4Rc]或类似效果来保存尸体。</p>",
+                    "name": "盗窃身体 Body Thief"
+                },
+                "Stolen Identity": {
+                    "description": "<p>当噬智怪使用盗窃躯体，它获得理解与说出宿主知晓的所有语言的能力，同样包括宿主的能力，身份，社会地位，以及性格的知识。但是，它无法获得宿主尸体的特定记忆或知识。</p>",
+                    "name": "偷窃身份 Stolen Identity"
+                },
+                "Exit Body": {
+                    "name": "离开躯体 Exit Body",
+                    "description": "<p><strong>需求</strong> 噬智怪正使用盗窃躯体控制着一具尸体。</p>\n<hr />\n<p><strong>效果</strong> 噬智怪离开宿主尸体，尸体将立即死亡，且不再适合作为盗窃躯体能力的宿主。噬智怪以完整体型出现在一个相邻空间中。</p>"
+                },
+                "Nightmare Curse": {
+                    "name": "梦魇诅咒 Nightmare Curse",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 提鲁阿切克用意念触及60尺范围内他能看见的一个生物，侵入其梦境。目标会突然经历一段短暂却异常强烈的记忆，那是它在过去某个时刻经历过的恐怖噩梦，并且必须进行一次@Check[will|dc:32]豁免。此诅咒的效果是永久的，直到目标被治愈（尽管由诅咒引发的任何惊惧状态值会按正常方式消退并结束）。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响，噩梦般的幻象出现得有多快就消失得有多快。</p>\n<p><strong>成功</strong> 幻象使目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。目标还被诅咒。每次尝试入睡时，它都会被噩梦所困扰，梦中自己在无尽的洞穴迷宫中被某个想要窃取它的身体并吃掉它的大脑的东西追踪。被诅咒的生物现在需要10个小时的休息（而不是8个小时）才能进行每日准备，并且完全无法进行长休活动。</p>\n<p><strong>失败</strong> 与成功情况相同，但陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}，并且每次目标入睡时，都会受到@UUID[Compendium.pf2e.spells-srd.Item.Uqj344bezBq3ESdq]（@Check[will|dc:32]豁免检定）的影响。</p>\n<p><strong>大失败</strong> 与失败情况相同，但@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}，并且只要保持惊惧状态就会一直@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]。如果被诅咒的目标在被诅咒期间对梦魇术（包括由诅咒本身引起的梦魇术）掷出了大失败，它将在睡眠中死亡。如果在这时提鲁阿切克也已经死亡（但不超过1年），那么噬智怪将在目标生物体内复活，就好像他使用了盗窃身体夺取了身体控制权一样。</p>"
+                },
+                "Ravage": {
+                    "name": "夺舍 Ravage",
+                    "description": "<p>噬智怪对一个处于@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物进行两次利爪打击，以其最高的攻击修正使用相同的攻击修正。</p>\n<p>两次打击获得死亡特征。如果夺舍杀死目标，噬智怪可以以一个自由动作对其使用盗窃躯体。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "提鲁阿切克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "提鲁阿切克 Tiluatchek",
+            "blurb": "流性人噬智怪转化者"
+        },
+        "Ziradini": {
+            "name": "齐拉迪尼 Ziradini",
+            "blurb": "男性颠儒牧师",
+            "items": {
+                "Vulnerable to Sunlight": {
+                    "name": "阳光易伤 Vulnerable to Sunlight",
+                    "description": "<p>齐拉迪尼若暴露于阳光下，每小时会受到@Damage[16[untyped]]伤害。</p>"
+                },
+                "Grim Curse of Azathoth": {
+                    "name": "阿撒托斯的可怖诅咒 Grim Curse of Azathoth",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 齐拉迪尼以邪灵语呼唤阿撒托斯的名讳，同时凝视着30尺内的一只生物。他的双眼闪烁着橙色的光芒，目标生物因此经历了一段短暂的幻象，看到了物质位面中心汹涌翻滚的混沌景象，并在那一刻意识到了自己在宇宙中的渺小。目标生物必须进行一次@Check[will|dc:26]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1小时。</p>\n<p><strong>失败</strong> 生物陷入呆滞1，并且每当夜晚第一次凝视夜空时，必须进行一次@Check[will|dc:26]豁免检定，否则其呆滞状态值增加1（最高可达@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 4}，如果之前没有此状态则变为呆滞1）。即使呆滞状态被移除，目标每晚在凝视夜空时仍需继续进行意志豁免检定，直到诅咒被解除。</p>\n<p><strong>大失败</strong> 与失败相同，但当太阳在他们的故乡落下时，无论他们身处物质位面的哪个角落，或是浩瀚众界，目标都能感受到宇宙的重量——他们无需凝视夜空就能感受到这种力量。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "齐拉迪尼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            }
+        },
+        "Coloxus": {
+            "items": {
+                "Siphon": {
+                    "name": "虹吸管 Siphon",
+                    "description": "<p>当蝇魔用颚咬攻击对生物造成伤害时，它会吸走目标的生命力，榨取他们的自我价值感和自信心。蝇魔会获得10点临时生命值，生物必须通过@Check[will|dc:32]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。蝇魔造成的进一步伤害会使呆滞状态值在豁免失败的情况下增加1，呆滞状态值最高可达@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 4}。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>蝇魔对一个@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成2d6额外精准伤害。</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Filth Vulnerability": {
+                    "name": "污物易伤 Filth Vulnerability",
+                    "description": "<p>蝇魔厌恶与污物和泥土的接触。手持一定量的污物可以对蝇魔发动具有投掷5尺特征的打击，命中后会造成@Damage[2d6[mental]]伤害。强迫蝇魔掉入或浸入大量污物中会造成每轮@Damage[6d6[mental]]伤害。</p>"
+                },
+                "Vanishing Words": {
+                    "name": "销迹之语 Vanishing Words",
+                    "description": "<p><strong>触发</strong> 蝇魔使用欺骗或交涉骰先攻并能够施放@UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]</p>\n<hr />\n<p><strong>效果</strong> 蝇魔对自身施放4环级<em>隐形术</em>。</p>"
+                },
+                "Droning Wings": {
+                    "name": "震动双翼 Droning Wings",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 蝇魔扇动着闪闪发光的薄纱般的翅膀，在发出听起来低沉的嗡嗡声的同时，还展现出令人着迷的色彩。如果蝇魔处于@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]状态，该效果结束后它就会变得可见。@Template[emanation|distance:30]范围内的所有生物都必须通过@Check[will|dc:29]豁免检定，否则就会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}），直到蝇魔的下一回合开始。只要震动双翼持续，蝇魔免疫音波伤害。蝇魔可以维持震动双翼至多1分钟。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "蝇魔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "蝇魔 Coloxus",
+            "publicNotes": "<p>虽然蝇魔长着怪物般的像苍蝇一样的狰狞头颅，但这些恶魔却非常勤快、爱干净，总是穿着时尚的衣服，身上没有一点瑕疵。蝇魔是操盘手和阴谋家，诞生于极端虚荣的灵魂。恶人们喜欢让他们担任使者或间谍，但他们也是出色的杀手。即使是作为谋杀者，蝇魔也装模做样地保持着礼貌与端庄，沉醉于在得体礼仪的掩盖下持续如此滔天罪行的讽刺意味，就好像这是一种精致的交涉活动一样。</p>\n<h2>污物之敌 Enemies Of Filth</h2>\n<p>在深渊（Abyss）中，污物往往是随处可见的，因此蝇魔特别渴望被召唤离开深渊，到更干净的环境中继续他们的邪恶事业。当使用<em>异界盟友</em>或<em>异界誓缚</em>召唤蝇魔时，将它召唤到一个干净的环境中，并保证不会强迫它在肮脏的条件下工作，可能会让你更容易和蝇魔议价。根据GM的裁定，蝇魔可能会同意为你服务更长时间，或者以比正常情况更低的代价为你服务。</p>",
+            "allSaves": "对抗魔法的全豁免+1状态加值"
+        },
+        "Iazmilor": {
+            "prototypeToken": {
+                "name": "伊兹米罗"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Light Blindness": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>",
+                    "name": "强光致盲 Light Blindness"
+                },
+                "No Breath": {
+                    "name": "无需呼吸 No Breath",
+                    "description": "<p>格里欧斯除了说话外不呼吸，对需要呼吸的效果（如吸入性毒药）免疫。</p>"
+                },
+                "Echolocation (Precise) 30 feet": {
+                    "description": "<p>格里欧斯可以以听觉察觉事物，这视为30尺的精准感官。</p>",
+                    "name": "回声定位（精准）30尺 Echolocation (Precise) 30 feet"
+                },
+                "Grim Curse of Azathoth": {
+                    "name": "阿撒托斯的可怖诅咒 Grim Curse of Azathoth",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 伊兹米罗以邪灵语呼唤阿撒托斯的名讳，同时凝视着30尺内的一只生物。他的双眼闪烁着橙色的光芒，目标生物因此经历了一段短暂的幻象，看到了物质位面中心汹涌翻滚的混沌景象，并在那一刻意识到了自己在宇宙中的渺小。目标生物必须进行一次@Check[will|dc:26]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1小时。</p>\n<p><strong>失败</strong> 生物陷入呆滞1，并且每当夜晚第一次凝视夜空时，必须进行一次@Check[will|dc:26]豁免检定，否则其呆滞状态值增加1（最高可达@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 4}，如果之前没有此状态则变为呆滞1）。即使呆滞状态被移除，目标每晚在凝视夜空时仍需继续进行意志豁免检定，直到诅咒被解除。</p>\n<p><strong>大失败</strong> 与失败相同，但当太阳在他们的故乡落下时，无论他们身处物质位面的哪个角落，或是浩瀚众界，目标都能感受到宇宙的重量——他们无需凝视夜空就能感受到这种力量。</p>"
+                },
+                "Grioth Venom": {
+                    "description": "<p><strong>豁免骰</strong> @Check[fortitude|dc:26]</p>\n<hr />\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（1轮）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（1轮）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}（1轮）</p>",
+                    "name": "格里欧斯毒液 Grioth Venom"
+                },
+                "Shock Mind": {
+                    "name": "心灵震击 Shock Mind",
+                    "description": "<p>格里欧斯用虚空玻璃武器进行一次打击。</p>\n<p>如果打击命中，会造成额外@Damage[4d6[mental]]伤害，并且目标必须通过@Check[will|dc:26|traits:incapacitation]豁免（这具有失能特征），否则会@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮。</p>"
+                }
+            },
+            "name": "伊兹米罗 Iazmilor",
+            "blurb": "格里欧斯阿撒托斯祭司"
+        },
+        "Sticky Greeter": {
+            "items": {
+                "Spray Webbing": {
+                    "name": "喷射蛛网 Spray Webbing",
+                    "description": "<p><strong>触发</strong> 一个生物踩到了黏腻的欢迎旁边的压力板</p>\n<hr />\n<p><strong>效果</strong> 黏腻的欢迎突然向前倾斜，腹腔打开，向触发者喷射厚厚的炼金造物蛛网。与此同时，黏腻的欢迎发出一声尖锐的哨声。该生物必须进行@Check[reflex|dc:26]豁免检定，否则将被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]并禁锢在原地，如果大失败，则会陷入@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]状态，直到成功[[/act escape dc=22]]或这些蛛网被破坏。 </p>"
+                },
+                "Web": {
+                    "name": "蛛网 Web",
+                    "description": "<p><strong>蛛网硬度</strong> 5</p>\n<p><strong>蛛网HP</strong> 20</p>\n<p><strong>免疫</strong> 钝击伤害、重击、物体免疫、穿刺伤害、精准伤害</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "黏腻的欢迎"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "黏腻的欢迎 Sticky Greeter",
+            "disable": "<p>@Check[thievery|dc:23]检定以让触发黏腻的欢迎的压力板失效</p>",
+            "hazarddescription": "<p>一只巨型蜘蛛标本的腹部张开，在它前面的区域喷洒黏腻的蛛网。</p>",
+            "reset": "<p>黏腻的欢迎必须手动重置。</p>"
+        },
+        "Gurlunk": {
+            "items": {
+                "Goblin Scuttle": {
+                    "description": "<p><strong>触发</strong> 一个地精盟友在与该地精相邻的位置结束其移动动作</p>\n<hr />\n<p><strong>效果</strong> 该地精@UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]。</p>",
+                    "name": "地精快步 Goblin Scuttle"
+                },
+                "Disorienting Shot": {
+                    "name": "搅扰射击 Disorienting Shot",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 古伦克用他的短弓对他的猎杀目标进行了两次打击。如果两次都命中了同一个生物，则该生物需要通过一个@Check[will|dc:21]豁免检定，否则将在其下一回合开始之前（或在大失败的情况下，于古伦克的下一回合开始时）处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的状态。</p>"
+                },
+                "Hunt Prey": {
+                    "name": "猎杀目标 Hunt Prey",
+                    "description": "<p>古伦克指定一个他能看到或听到的生物，在@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]和@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]猎杀目标的察觉检定上获得+2环境加值，他一次只能指定一个生物，如果他选择了一个新的猎杀目标，先前的指定结束。</p>"
+                },
+                "Hunter's Edge": {
+                    "name": "猎手优势 Hunter's Edge",
+                    "description": "<p>古伦克在一轮中第一次击中他的猎杀目标时额外造成1d8精准伤害。</p>"
+                },
+                "Whistling Threat": {
+                    "name": "警戒威胁 Whistling Threat",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 古伦克对30尺范围内他能看见的一头中型或更大的动物或魔兽发出尖锐的口哨声，用他的声音使该生物的神智变得迟钝，并迫使其降低防御。目标必须进行@Check[will|dc:21]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}</p>\n<p><strong>大失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}和持续一轮的@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "古伦克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "古伦克 Gurlunk",
+            "blurb": "男性地精游侠"
+        },
+        "Ziondriel": {
+            "blurb": "女性变体蛛化精灵",
+            "items": {
+                "Web Trap": {
+                    "name": "蛛网牢笼 Web Trap",
+                    "description": "<p>被蛛化精灵的蛛网攻击命中的生物会被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，并被卡在最近的表面上（[[/act escape dc=28]]）。</p>"
+                },
+                "equipment-Bracelets and Necklaces": {
+                    "name": "手镯和项链 Bracelets and Necklaces"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Drider Venom": {
+                    "name": "蛛化精灵毒 Drider Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:28]</p>\n<hr />\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d8[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "齐昂德莉尔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "齐昂德莉尔 Ziondriel",
+            "allSaves": "对抗魔法的全豁免+1状态加值",
+            "publicNotes": "<p>卓尔精灵所掌握的首个畸肉仪式仍然是他们最成功的且最臭名昭著的作品：蛛化精灵。卓尔精灵的身体与巨大蜘蛛相融，化身而成的蛛化精灵是具有两性差异的畸肉体——已知畸肉体中唯一能生育后代的存在。尽管雌性蛛化精灵有着卓尔女性那优雅的上身躯干，仅仅口中生有带毒的锋利尖牙而已，然而雄性蛛化精灵则长着进一步将蜘蛛与类人形态融合的丑陋、变异的面孔；这种外貌上的差异也许也反映了卓尔精灵那母系社会的性质。而在战斗中，所有蛛化精灵都一样充满危险性。</p>\n<p>尽管畸肉仪式的最初是用于惩罚那些堕落的卓尔精灵，但这种可怖转化带来的巨大力量与优势对部分卓尔精灵也极具吸引力，在卓尔城市中有越来越多的低级公民自愿承受这痛苦的过程。这些自愿变化为蛛化精灵的个体会被强制性赋予士兵、守卫或者其他公职来作为参加仪式的回报（这一过程通常会持续数十年），并在之后允许过上自己的生活，通常是居住在城市外围的洞穴中。然而惨痛的现实是，对于大多数蛛化精灵来说，他们没有足够长的寿命来领取这一奖励，因为卓尔精灵喜欢把这些畸肉奴隶使唤到死，或者把他们部署到几乎无法存活的致命战争任务中去。</p>\n<p>大多数蛛化精灵使用奥术，但众所周知的是蛛化精灵也能使用神术，只有极罕见的少数存在会使用异能或原能法术。无论其蛛化精灵的根源为何，其内在法术总是与之相同，但那些准备法术时使用完全不同种类法术的蛛化精灵则可能会有与后述数据完全不同的法术。</p>\n<hr />\n<p>有些生物，并不满足于单纯杀死他们的敌人，这点在卓尔精灵身上尤为明显。他们沉迷于通过一种被称作畸肉仪式（fleshwarping）的骇人转化技术来彻底退化敌人。尽管畸肉仪式的流程并非卓尔精灵原创，但很多人认为是他们将其改良了。卓尔精灵把敌人扔进翻腾着魔法试剂的大桶里加以折磨，将其血肉与灵魂塑造成怪异畸形的物体。肉体的重塑产生了无数不同的畸肉体，后文列出的只是这些可怖造物中的几个例子。</p>"
+        },
+        "Scarhorn": {
+            "prototypeToken": {
+                "name": "疤角"
+            },
+            "items": {
+                "Tail Lash": {
+                    "description": "<p><strong>触发</strong> 一个位于龙的尾击触及范围内的生物将使用一个动作进行打击或者尝试一次技能检定</p>\n<hr />\n<p><strong>效果</strong> 龙使用它的尾击打击触发的生物，它在此次打击中需承受-2减值。如果命中，则该生物在触发效果的投掷中承受-2环境减值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.QqC9xymSXSVunDgl]</p>",
+                    "name": "尾扫 Tail Lash"
+                },
+                "Breath Weapon": {
+                    "name": "吐息武器 Breath Weapon",
+                    "description": "<p>疤角会喷出一束酸液，在@Template[line|distance:80]范围内造成@Damage[15d6[acid]|options:area-damage]伤害（@Check[reflex|dc:34|basic|options:area-effect]豁免）。在接下来的[[/gmr 1d4 #Recharge Breath Weapon]]{1d4轮}内，她无法再次使用吐息武器。</p>"
+                },
+                "Corrupt Water": {
+                    "name": "腐蚀之水 Corrupt Water",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 龙永久性地污染了90尺范围内总计10立方尺的液体。这些水变得无法饮用，并且也无法让生命在里面进行水下呼吸。</p>\n<p>如果液态的魔法物品或炼金物品的等级低于龙的生物等级，那么这些物品也将会被摧毁（一个生物可以尝试一次@Check[will|dc:31]检定来保护其所携带的液体）。该效果不会影响生物体内的液体。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "Frightful Presence": {
+                    "name": "恐怖威压 Frightful Presence",
+                    "description": "<p>90尺。@Check[will|dc:31|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
+                },
+                "Draconic Frenzy": {
+                    "name": "龙之狂怒 Draconic Frenzy",
+                    "description": "<p>龙以任意顺序进行两次爪击打击和一次角抵打击。</p>"
+                },
+                "Draconic Momentum": {
+                    "name": "龙之威势 Draconic Momentum",
+                    "description": "<p>当龙在一次打击中造成重击时，它立刻为吐息武器充能。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "疤角 Scarhorn",
+            "allSaves": "对抗魔法的全豁免+1状态加值",
+            "blurb": "女性老年黑龙"
+        },
+        "Nualia": {
+            "name": "纽莉雅 Nualia",
+            "hp": "虚能治疗，复生",
+            "items": {
+                "Site Bound": {
+                    "name": "束缚之地 Site Bound",
+                    "description": "<p>典型的灵魂通常只能距离在他被杀死或作祟的地点很近的区域逗留。这个限制一般为120尺远。部分幽灵会被限制在对他来说具有特殊意义的房间、建筑、物品或生物上，而非具体的某个地点。</p>"
+                },
+                "Rejuvenation": {
+                    "name": "复生 Rejuvenation",
+                    "description": "<p>完成幽灵的心愿能让它安息前往来世。</p>\n<hr />\n<p>当幽灵被摧毁时，它会在[[/br 2d4 #days]]{2d4日}后在被束缚的地点重新成型，被完全治愈。只有在任何阻止幽灵安息的因素都被纠正时，幽灵才能被永久摧毁。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Frightful Moan": {
+                    "name": "骇人悲叹 Frightful Moan",
+                    "description": "<p>幽灵为自身的命运而哀悼，迫使@Template[emanation|distance:30]{30尺}内的每个活物尝试一次@Check[will|dc:29|options:area-effect,inflicts:frightened]豁免。豁免失败时，该生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（大失败则为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}）。豁免成功时，该生物会在1分钟内临时免疫幽灵的骇人悲叹。</p>"
+                },
+                "Telekinetic Assault": {
+                    "name": "念力袭击 Telekinetic Assault",
+                    "description": "<p>幽灵痛苦地尖啸并使得小物体和物体碎片在@Template[emanation|distance:30]区域内迸发飞溅。此区域内的生物会受到@Damage[6d6[bludgeoning]|options:area-damage]伤害，具有@Check[reflex|dc:29|basic|options:area-effect]豁免。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "纽莉雅"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            }
+        },
+        "Skulls of Fear and Flame": {
+            "prototypeToken": {
+                "name": "恐惧与火焰之骷髅头"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "恐惧与火焰之骷髅头 Skulls of Fear and Flame",
+            "hp": "骷髅",
+            "disable": "<p>@Check[stealth|dc:27]以不被骷髅头察觉的方式穿过房间（这不会解除陷阱，但会阻止陷阱被触发）。@Check[thievery|dc:27]，连续三次，通过灵巧地从眼眶内侧刮去隐藏的符文来“致盲”相邻的一个骷髅头。@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级，反制DC25）来反制陷阱。</p>",
+            "hazarddescription": "<p>一排骷髅头整齐地摆放在地面上，每个骷髅头上都插着黑色的蜡烛，它们利用黑暗视觉来察觉入侵者。地图上的红色箭头指示了骷髅头所朝向的方向。</p>",
+            "routine": "<p>（6动作）在陷阱的回合中，它首先使用一个动作将那些无法看到目标的骷髅头旋转360度，直到骷髅头发现目标为止。它会重复这个动作，直到所有六个骷髅头都在盯着目标，然后使用剩余的动作从它们的眼睛中射出火焰光束。陷阱每轮只能瞄准一个生物，因此如果目标数量少于动作数量，陷阱将失去任何额外的动作。每摧毁一个骷髅头，陷阱就会失去一个动作。</p>",
+            "reset": "<p>如果没有可见的目标，陷阱会在其回合结束时停止运作，然后自动重置。</p>",
+            "stealthdetails": "<p>（专家）才能注意到骷髅头上未点燃的蜡烛上开始冒出袅袅细烟。</p>",
+            "items": {
+                "Fearful Cry": {
+                    "name": "恐惧嚎泣 Fearful Cry",
+                    "description": "<p><strong>触发</strong> 当有生物走进骷髅头的视线范围内并被它们发现时</p>\n<hr />\n<p><strong>效果</strong> 所有六个骷髅头顶上的蜡烛突然点燃，骷髅头发出可怕而令人心智麻木的嚎叫。所有在区域<strong>F6</strong>、阶梯或东部沟槽内的生物都必须进行一次@Check[will|dc:25]豁免检定。之后，陷阱开始投掷先攻。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}</p>\n<p><strong>失败</strong>生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}且在处于惊惧时一直@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]</p>\n<p><strong>大失败</strong> 同失败，但一旦生物不再惊惧，它之前一分钟内的记忆会被抹去——这很可能导致它忘记区域<strong>E7a</strong>阶梯顶部的暗门，只会留下一些奇怪的、挥之不去的对返回该区域的恐惧感。</p>"
+                }
+            }
+        },
+        "Corpselight Mist": {
+            "prototypeToken": {
+                "name": "尸光迷雾"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "尸光迷雾 Corpselight Mist",
+            "disable": "<p>@Check[religion|dc:28]来向任意非邪恶神祗祈祷以反制卡布里里的影响使迷雾消散；或者@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（3环级环，反制DC23）来反制迷雾24小时。</p>",
+            "hazarddescription": "<p>翻涌的绿光迷雾充斥着一条30尺深的裂隙。</p>",
+            "reset": "<p>该危害在回合结束时自动重置，并可在下一轮再次触发。</p>",
+            "items": {
+                "Decay Flesh": {
+                    "name": "腐蚀肉体 Decay Flesh",
+                    "description": "<p><strong>触发</strong> 一个生物在迷雾中结束回合</p>\n<hr />\n<p><strong>效果</strong> 迷雾会迅速腐蚀坑洞中所有生物的肉体，造成@Damage[10d6[void]]伤害（@Check[fortitude|dc:27|basic]强韧豁免检定）。</p>"
+                }
+            }
+        },
+        "Abstalar Zantus": {
+            "prototypeToken": {
+                "name": "阿布斯塔拉·赞图斯"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "blurb": "男性黛丝娜牧师",
+            "items": {
+                "Communal Healing Hands": {
+                    "name": "共用治疗之手 Communal Healing Hands",
+                    "description": "<p>当阿布斯塔拉施放@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]时，他投掷d10而不是d8。当他施放<em>治疗术</em>为除自己以外的单个生物治疗时，他恢复等于<em>治疗术</em>环级的生命值。</p>"
+                }
+            },
+            "name": "阿布斯塔拉·赞图斯 Abstalar Zantus"
+        },
+        "Kanker": {
+            "prototypeToken": {
+                "name": "坎克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "坎克 Kanker",
+            "hp": "虚能治疗",
+            "blurb": "男性妖鬼炼金术士",
+            "items": {
+                "equipment-Pouch of Black Onyx": {
+                    "name": "一袋黑玛瑙 Pouch of Black Onyx"
+                },
+                "equipment-Incense and Offerings for Planar Ally": {
+                    "name": "异界盟友用的焚香和贡物 Incense and Offerings for Planar Ally"
+                },
+                "Infused Items": {
+                    "name": "灌注物品 Infused Items",
+                    "description": "<p>坎克随身携带以下灌注物品，这些物品可持续效力24小时或直到他下一次进行每日准备：8瓶@UUID[Compendium.pf2e.equipment-srd.Item.jC8GmH0Un6vDxdMj]，8瓶@UUID[Compendium.pf2e.equipment-srd.Item.n5yTlTs63o53n3k6]，@UUID[Compendium.pf2e.equipment-srd.Item.Cc4SokzVBoBCkHId]，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.t4X6GDybqLmt7UkN]，5瓶@UUID[Compendium.pf2e.equipment-srd.Item.EX8Ta6J56SNrYbqJ]，@UUID[Compendium.pf2e.equipment-srd.Item.04giYigfDL5geu5f]，5瓶@UUID[Compendium.pf2e.equipment-srd.Item.Wjkw0lEUOhypYvzo]，8个@UUID[Compendium.pf2e.equipment-srd.Item.dsMkvuLgpOOGLWDy]。</p>"
+                },
+                "Stench": {
+                    "description": "<p>10尺。若有生物进入灵光范围或者在回合开始时位于灵光范围内，则必须尝试一次@Check[fortitude|dc:29|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若为大失败，则只要处于恶心状态就还会附加@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。</p>\n<p>身处灵光之内时，生物在对抗疾病以及从恶心状态中恢复的豁免检定中会承受-2环境减值。成功豁免的生物会获得1分钟的临时免疫。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]</p>",
+                    "name": "恶臭 Stench"
+                },
+                "Quick Bomber": {
+                    "description": "<p>坎克使用交互动作取出一枚炼金炸弹，并投掷它进行一次远程打击。</p>",
+                    "name": "高速投弹手 Quick Bomber"
+                },
+                "Swift Leap": {
+                    "name": "迅捷跳跃 Swift Leap",
+                    "description": "<p>妖鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>"
+                },
+                "Toxic Effluvium": {
+                    "name": "毒液散放 Toxic Effluvium",
+                    "description": "<p>多年来，坎克接触了大量的毒素和毒药，这些毒素和毒药已经渗入了他的不死之身。当他使用毒液散放时，这些恶臭的液体会从他的肉体中渗出，使他的颚部和爪子分泌出垂涎流下的腥臭绿色毒液，这些毒液会包裹他的牙齿和利爪，以及他挥舞的任何武器。在他的下一回合开始前，坎克的近战打击会造成额外的2d6毒素伤害。</p>"
+                },
+                "Evasion": {
+                    "name": "反射闪避 Evasion",
+                    "description": "<p>当坎克在反射豁免检定上骰出成功时，取而代之获得大成功效果。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Consume Flesh": {
+                    "name": "啃食尸体 Consume Flesh",
+                    "description": "<p><strong>需求</strong> 妖鬼与刚死亡1小时内的生物尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 妖鬼吞食一大块尸体并恢复@Damage[7d6[healing]]生命值。</p>\n<p>妖鬼从每具尸体上只能获取一次生命值恢复。</p>\n<p>如果坎克在实验室北侧凹室（区域<strong>J12</strong>）附近，他可以从那里的血槽里啃食尸体。</p>"
+                },
+                "Expanded Splash": {
+                    "name": "溅射扩展 Expanded Splash",
+                    "description": "<p>当坎克投掷炸弹时，他可以最大限度地发挥炸弹的爆炸潜能，使炸弹造成不同于寻常溅射伤害的7点溅射伤害，并且溅射伤害会影响目标周围10尺范围内的所有生物。</p>"
+                },
+                "Ghast Fever": {
+                    "name": "妖鬼热 Ghast Fever",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:32]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[3d8[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[3d8[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.VC7rtYR4hLxwg7WZ]复生。</p>"
+                },
+                "Paralysis": {
+                    "name": "麻痹 Paralysis",
+                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:32]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                }
+            }
+        },
+        "Fires of Abraxas": {
+            "prototypeToken": {
+                "name": "阿巴拉克萨斯之火"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿巴拉克萨斯之火 Fires of Abraxas",
+            "disable": "<p>@Check[thievery|dc:23]检定以破坏墙上的小型触发符文中的一个，或者通过@Check[religion|dc:23]检定以向一位善良神祗祈祷来压制陷阱</p>\n<p><strong>避免触发</strong> 墙壁上用瑟西隆语刻着对阿巴拉克萨斯的祈祷，说出其中一个祈祷会使陷阱失效1小时。</p>",
+            "stealthdetails": "<p>（受训）</p>",
+            "hazarddescription": "<p>除非用瑟西隆语向阿巴拉克萨斯祈祷，否则火柱会从七芒秘印内的火焰中喷射出来，席卷整个房间。</p>",
+            "reset": "<p>陷阱在1小时后自动重置。</p>",
+            "items": {
+                "Fiery Beam": {
+                    "name": "凶猛光束 Fiery Beam",
+                    "description": "<p><strong>触发</strong> 当通往区域<strong>B3</strong>的门打开或损坏时。</p>\n<hr />\n<p><strong>效果</strong> 两根火焰光束从西面和北面的七芒秘印中射出，然后扫过房间。区域<strong>B2</strong>的所有生物都会受到@Damage[6d10[fire]]伤害（@Check[reflex|dc:22|basic]豁免）。</p>"
+                }
+            }
+        },
+        "Narlo Nyrell": {
+            "publicNotes": "<p>当一位牧师背叛了他的神明并在渎神之怒的控制下死去时，他们在生前犯下的亵渎之罪会促使他们转变成不死生物叛教尸。叛教尸们试图向他们曾经崇拜的神复仇，玷污庙宇，杀死信徒，聚集次级不死生物和崇拜死亡的邪教徒来协助它们进行不洁的任务。虽然叛教尸的神赐能力大部分都被腐化为卑劣的不死形态，但它们仍然顽固地依靠着它们先前力量的残余，仍然施展并挥舞着他们如此鄙视的神所青睐的魔法和武器。</p>\n<p>一群亵渎了同一个神祇的叛教尸有时会联合起来组成一个以嘲弄为目的圣会，以近乎狂喜的方式进行亵渎仪式。这些圣会通常是由一个亵渎神明的邪教中的成员们组成，他们生前一起践行他们的异端邪说，并一同赴死。但也有一些是由先前的信仰相同的落单叛教尸聚集到了一起所组成。</p>",
+            "hp": "虚能治疗",
+            "blurb": "男性叛教尸先知",
+            "items": {
+                "Final Blasphemy": {
+                    "name": "最后的亵渎 Final Blasphemy",
+                    "description": "<p>当叛教尸被摧毁时，它爆裂成一股虚能，效果等同于3动作版的@UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]（@Check[fortitude|dc:18]）。</p>\n<p>因叛教尸已被摧毁，所以它不会从这个<em>伤害术</em>的效果中获得任何生命值，也不需要保有任何可用的<em>伤害术</em>来发动该技能。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Swarming Curse": {
+                    "name": "集群诅咒 Swarming Curse",
+                    "description": "<p>成百上千的叮咬飞蝇在纳尔洛的骨骼上爬行，几乎填满了他的盔甲，就像他曾经的血肉一样。当这些飞蝇被火焰焚烧时，纳尔洛也会受到伤害，并因此获得对火焰的5点弱点。每当纳尔洛施放法术时，这些飞蝇便会从他的体内爆发出来，在他周围形成一个@Template[emanation|distance:10]范围的嗡嗡作响、不断叮咬的云雾，这种状态会一直持续到他的下一个回合开始。在这段时间里，他失去了对火焰的弱点，而任何在其回合结束时位于该范围内的生物，都会受到@Damage[4d6[piercing]|options:area-damage]伤害（@Check[reflex|dc:23|basic|options:area-effect]豁免），这是由叮咬的飞蝇群造成的。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "纳尔洛·奈瑞尔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "纳尔洛·奈瑞尔 Narlo Nyrell"
+        },
+        "Kaleb Valdemar's Body": {
+            "prototypeToken": {
+                "name": "卡勒布·瓦尔德玛的身体"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "卡勒布·瓦尔德玛的身体 Kaleb Valdemar's Body",
+            "publicNotes": "<p>噬智怪是被称作黑色支配者的强大外星势力的先行侦察兵和渗透者。这些怪物游荡在幽暗之地（Darklands），从此处秘密入侵着地表世界。当一只噬智怪渗透进某个社群，它的首要目标是获取一具身体。它或许会优先去墓地寻找一具新鲜的尸体，这比通过战斗再杀死某人要容易。当异怪将自己挤进宿主的颅腔内，它的真身就会感知迟钝，因为它会连接到宿主的神经系统中。如果被发现，噬智怪就会快速占据一具新的身躯来让自己逃脱，最好是某些不显眼的生物，例如家畜。</p>",
+            "blurb": "男性人类法师，死亡"
+        },
+        "Fiendish Flock": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>群聚的渡鸦本来就以刻薄无情而为人所知，而这种色彩在一帮渡鸦决定分工协作的时候就更为浓重了。在大多数情况下，乌鸦群不会攻击更大的敌人，但当它们被超自然力量或因为饥饿导致的绝望操纵时，无情的鸦群会成为致命的敌人。</p>\n<hr />\n<p>很少有群居的鸟类像渡鸦那样狡猾。</p>",
+            "blurb": "鸦群变体",
+            "items": {
+                "Swarm Mind": {
+                    "name": "集群心智",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.SwarmMind]</p>"
+                },
+                "Beaks and Talons": {
+                    "name": "尖喙与利爪 Beaks and Talons",
+                    "description": "<p>魔化鸟群愤怒地用喙啄击和用爪撕扯，对集群空间内的每个敌人造成@Damage[2d6[piercing],2d6[slashing]]伤害（@Check[reflex|dc:25|basic]豁免）。若某生物豁免大失败，则会陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2][[/gmr 1d4 #rounds]]{1d4轮}，因为飞鸟们会集中攻击该生物的脸部。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "魔化鸟群"
+            },
+            "name": "魔化鸟群 Fiendish Flock"
+        },
+        "Statue of Alaznist": {
+            "prototypeToken": {
+                "name": "阿拉兹尼斯特雕像"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿拉兹尼斯特雕像 Statue of Alaznist",
+            "blurb": "变体活化雕像",
+            "ac": "（破损时19）；构装护甲",
+            "items": {
+                "Construct Armor (Hardness 7)": {
+                    "name": "构装护甲（硬度7） Construct Armor (Hardness 7)",
+                    "description": "<p>与普通的物体一样，活化雕像同样拥有硬度。硬度可以减少其所受到的任何伤害，其数值等同于硬度的数值。</p>\n<p>一旦活化雕像的生命值降低至一半以下，或是受到重击伤害后，其构装护甲将会破损，其AC降低至15。</p>"
+                }
+            },
+            "publicNotes": "<p>活化雕像通常都被用于守护墓穴、小型神庙、或是政府大楼中的某些区域，它们通常都会混杂在其他普通雕像之中，借此隐藏它们作为活化生物的特性，直到它们因为入侵者而被激怒。许多不那么谨慎的妄想雕像会活化并发动攻击的冒险者，会砸碎他们所遇到的一切雕像，从而使得那些无害的古老的文物惨遭破坏。</p>\n<hr />\n<p>通过某些仪式或是其他怪异的魔法，活物物体有着诸多形态和多种用途。这类生物中有很大一部分都被作为守卫，对那些毫无戒心的冒险者发起突然袭击。剩下的则是作为土豪们的玩物，被用于处理一些零活，诸如此类。</p>"
+        },
+        "False Devil": {
+            "prototypeToken": {
+                "name": "冒牌魔鬼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "冒牌魔鬼 False Devil",
+            "publicNotes": "<p>这些恶名昭著的掠食者对鲜血有着极端的渴望。卓柏卡布拉偏爱捕食弱小而缓慢的猎物，它们在捕食前往往会藏起来观察猎物很长时间。卓柏卡布拉灵活而又隐秘，喜欢待在草丛茂盛或岩石密布的地方，它们微微反光的鳞片可以让它们很好地融入这种环境。</p>\n<p>卓柏卡布拉偏好袭击落单的旅人和家畜（特别是山羊），除了那些被吸干血液的猎物残余的恐怖而又鲜血淋漓的皮囊外，它们几乎不会留下任何曾经出现过的痕迹。它们倾向于远离人们的视线，再加上其夜行的天性，往往会使得迷信的当地人得出最糟糕的结论，想象着有一个特别鲁莽的吸血鬼生活在这个地区。</p>\n<p>一只典型的卓柏卡布拉从口部到带刺的尾巴尖有近4尺长，站立时高不到3.5尺。它们体态轻盈，骨头轻巧，体重大约50磅。它们极少、并且仅在最为炎热的月份里才会进行交配，每只雌性会生下一个蛋，并孵化出一个羸弱、脱水的生物。母亲通常会把一只无助的猎物留在洞穴里，让幼崽立刻就能进食。</p>\n<p>尽管卓柏卡布拉是典型的独行生物，但在猎物丰富的地方它们也会组成小群行动。这些小队协作良好，变得足够大胆去攻击大群的动物、小型兽群、或者其他更危险的猎物。那些关于卓柏卡布拉袭击旅人或者围攻农庄的故事，大多数都来源于这些群体的狩猎行为。在卓柏卡布拉活动更为常见的地区，通常会有复杂多彩的传说与怪谈诉说着它们的能力和机动性——并且其中的一些传言，例如会飞的卓柏卡布拉，都是千真万确的。</p>",
+            "blurb": "变体卓柏卡布拉",
+            "items": {
+                "Chupar": {
+                    "name": "吸血 Suck Blood",
+                    "description": "<p><strong>需求</strong> 一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于卓柏卡布拉</p>\n<hr />\n<p><strong>效果</strong> 卓柏卡布拉从受擒的生物上吸血。卓柏卡布拉获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态，持续1分钟，并且只能使用该额外动作来执行打击和行走动作。当卓柏卡布拉因此法获得迅捷状态时便不能再次使用吸血。</p>\n<p>被卓柏卡布拉吸血的生物将获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，直到其接受了治疗（任意种类或数值）。</p>"
+                },
+                "Pounce": {
+                    "description": "<p>卓柏卡布拉行走，并且在此次移动结束时进行一次打击，如果卓柏卡布拉在此动作开始时为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态，那么在完成此能力的打击之前都其保持藏匿状态。</p>",
+                    "name": "猛扑 Pounce"
+                },
+                "Wing Flurry": {
+                    "name": "翅膀狂舞 Wing Flurry",
+                    "description": "<p>冒牌魔鬼带刺的翅膀并不具备典型的近战攻击能力，但它可以用刺翼对飞过的敌人进行刮蹭和劈砍。长着翅膀的卓柏卡布拉会尝试@UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]穿过敌人的空间。当它这样做时，它会猛烈地扇动翅膀，并在其特技检定中获得+2环境加值。如果成功，它会对被翻滚越过的生物造成@Damage[4d6[slashing]]伤害（或在大成功时造成@Damage[8d6[slashing]]伤害）。</p>"
+                }
+            }
+        },
+        "Glorkus": {
+            "prototypeToken": {
+                "name": "格洛克斯"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "格洛克斯 Glorkus",
+            "hp": "虚能治疗",
+            "items": {
+                "Consume Flesh": {
+                    "description": "<p><strong>需求</strong> 食尸鬼与刚死亡1小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取1次生命值恢复。</p>",
+                    "name": "啃食尸体 Consume Flesh"
+                },
+                "Ghoul Fever": {
+                    "name": "食尸鬼热 Ghoul Fever",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:21]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[2d6[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]复生。</p>"
+                },
+                "Paralysis": {
+                    "name": "麻痹 Paralysis",
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:21]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                },
+                "Swift Leap": {
+                    "name": "迅捷跳跃 Swift Leap",
+                    "description": "<p>食尸鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                }
+            },
+            "publicNotes": "<p>食尸鬼跟踪者是在墓地出没、享用尸体的贪婪不死生物。</p>\n<hr />\n<p>在孤独的墓地和破败的墓穴等阴森之地，没什么生物能比食尸鬼这种肉食性不死生物更常见的了。</p>",
+            "blurb": "男性地精食尸鬼卡布里里牧师"
+        },
+        "Ripnugget": {
+            "items": {
+                "Rejuvenation": {
+                    "description": "<p>当死墓骑士被摧毁时，其护甲会在为期[[/gmr 1d10]]{1d10日}的过程中重塑身体——若护甲被活着的宿主穿戴则会更加迅速。若身体在此之前被破坏，重塑过程将重新开始。</p>\n<p>只有摧毁护甲（比如使用@UUID[Compendium.pf2e.spells-srd.Item.r7ihOgKv19eJQnik]）、把死墓骑士传送至创世熔炉、或者丢进火山之中才能够永久摧毁死墓骑士。</p>",
+                    "name": "复生 Rejuvenation"
+                },
+                "Sacrilegious Aura": {
+                    "name": "亵渎灵光 Sacrilegious Aura",
+                    "description": "<p>30尺。当有生物在灵光射程内使用命能法术或能力时，死墓骑士会自动尝试反制它，反制调整值[[/r 1d20+17 #Counteract]]{+17}。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Devastating Blast": {
+                    "name": "毁灭爆震 Devastating Blast",
+                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]的能量。区域内的生物承受@Damage[4d12[fire]|options:area-damage]伤害，进行@Check[reflex|dc:24|basic|options:area-effect]豁免。</p>\n<p>死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]轮只能使用该能力1次。</p>"
+                },
+                "Dogslicer Cruelty": {
+                    "name": "犬刃残暴 Dogslicer Cruelty",
+                    "description": "<p>在使用屠狗刀进行重击时，裂金在抽出刀刃时会从受害者身上撕下肉块。目标因疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，并且在他们持续恶心的期间，会处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的状态。</p>"
+                },
+                "Phantom Mount": {
+                    "description": "<p>裂金的坐骑为一只名叫棒脚的巨壁虎（HP 37；AC 19，强韧 +11，反射 +8，意志 +17）。</p>\n<hr />\n<p>死墓骑士召唤出1匹超自然坐骑，就如同升阶@UUID[Compendium.pf2e.spells-srd.Item.WPKJOhEihhcIm2uQ]，它升阶至的法术环级等于死墓骑士等级的一半。</p>\n<p>与<em>异影驹</em>不同的是，坐骑的AC和豁免检定加值均比死墓骑士的数值低4点，坐骑的生命值为死墓骑士生命值的三分之一（向下取整）。</p>\n<p>若坐骑被摧毁，死墓骑士必须等待1小时才能再次使用该能力。</p>",
+                    "name": "魅影坐骑 Phantom Mount"
+                },
+                "Weapon Master": {
+                    "name": "武器大师 Weapon Master",
+                    "description": "<p>死墓骑士无论持用何种武器，均可以使用该武器的重击专精效果。</p>"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                },
+                "Graveknight's Curse": {
+                    "name": "死墓骑士诅咒 Graveknight's Curse",
+                    "description": "<p>诅咒会影响任何穿戴死墓骑士护甲超过1小时以上的生物。</p>\n<p><strong>豁免骰</strong> @Check[will|dc:24]</p>\n<hr />\n<p><strong>潜伏期</strong> 1小时</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}且无法脱下护甲（1天）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 2}、速度承受-10尺状态减值、且无法脱下护甲（1天）</p>\n<p><strong>阶段3</strong> 死亡并转化为护甲的死墓骑士。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.6rnB7nK6J6zF4vea]</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "裂金"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "裂金 Ripnugget",
+            "publicNotes": "<p>死墓骑士是由被诅咒的铠甲赋予不死身的亡灵战士。</p>",
+            "hp": "虚能治疗，复生",
+            "blurb": "男性地精死墓骑士"
+        },
+        "Tunch": {
+            "prototypeToken": {
+                "name": "图奇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "图奇 Tunch",
+            "allSaves": "对抗毒素+1状态加值",
+            "blurb": "男性地精炼金术士",
+            "items": {
+                "Infused Items": {
+                    "name": "灌注物品 Infused Items",
+                    "description": "<p>图奇随身携带以下灌注物品，这些物品可持续效力24小时或直到他下一次进行每日准备：8瓶@UUID[Compendium.pf2e.equipment-srd.Item.gWr4q4HiyGhETA8H]，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.ktjFOp3U0wQD9t0Z]，4瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.evBPzM1VsuYcoenn]</p>"
+                },
+                "Quick Bomber": {
+                    "name": "高速投弹手 Quick Bomber",
+                    "description": "<p>图奇使用交互动作取出一枚炸弹，随后用它进行打击。</p>"
+                },
+                "+1 Status vs. Poison": {
+                    "name": "对抗毒素+1状态加值 +1 Status vs. Poison"
+                },
+                "Goblin Scuttle": {
+                    "name": "地精快步 Goblin Scuttle",
+                    "description": "<p><strong>触发</strong> 一个地精盟友在与该地精相邻的位置结束其移动动作</p>\n<hr />\n<p><strong>效果</strong> 该地精@UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]。</p>"
+                },
+                "Calculated Splash": {
+                    "name": "溅射演算 Calculated Splash",
+                    "description": "<p>当图奇投掷具有溅射特征的炸弹时，造成等同于智力调整值的溅射伤害。</p>"
+                },
+                "Distracting Whistle": {
+                    "name": "干扰哨声 Distracting Whistle",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 图奇的哨声具有一种特殊效果，能使声音在别处显现，从而可能分散敌人的注意力。图奇可以选择他视线范围内30尺内的一个目标，该目标必须进行一次@Check[will|dc:22]豁免检定，否则将因听起来似乎来自其背后的干扰哨声而陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，这种状态将持续到图奇的下一个回合开始。之后，该目标将在1小时内对干扰哨声技能暂时免疫。</p>"
+                }
+            }
+        },
+        "Zoog Swarm": {
+            "name": "祖格鼠群 Zoog Swarm",
+            "publicNotes": "<p>如果一个祖格鼠家族避免了内讧，并找到了足够可靠的食物来源，它们的数量会激增，形成真正的庞大族群。</p>\n<hr />\n<p>祖格鼠看起来毛茸茸的，长着触角，总是发出叽叽喳喳的叫声，它们居住在世界的阴影中，在那里，梦会不可思议地变成现实。</p>\n<h2>祖格鼠Vs猫 Zoogs Vs. Cats</h2>\n<p>祖格鼠和猫之间的仇恨源远流长，尽管双方都不记得最初的原因。众所周知，祖格鼠会捕食幼猫，但面对成猫，它们的勇气很快就会丧失。而猫则总是迅速地扑上去，追逐并攻击祖格鼠。</p>",
+            "items": {
+                "Spell Sight": {
+                    "name": "视法之眼 Spell Sight",
+                    "description": "<p>祖格鼠的眼睛会在@Template[emanation|distance:15]范围内发出明亮光照（接下来的15尺内则是昏暗光照）。该区域内的任何魔法效果都会发出微弱的光。祖格鼠可以在自己的回合中以一个自由动作消散或恢复这种光芒。</p>"
+                },
+                "Gnash and Slash": {
+                    "name": "咬合挥砍 Gnash and Slash",
+                    "description": "<p>在祖格鼠群空间内的每个敌人都会受到@Damage[2d6[piercing],2d6[slashing]]伤害和@Damage[1d6[persistent,bleed]]伤害（@Check[reflex|dc:26|basic]豁免）。豁免成功可免受流血伤害。挥砍伤害可以伤害虚体生物，就像被幽冥性能符文强化过一样。</p>"
+                },
+                "Overwhelming Clutches": {
+                    "name": "凶猛紧握 Overwhelming Clutches",
+                    "description": "<p>祖格鼠群尝试@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]其空间内的中型或小型生物。如果祖格鼠群擒获或束缚了该生物，祖格鼠群就可以进行两次行走，在移动时拖着@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的生物一起移动。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "祖格鼠群"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            }
+        },
+        "Charn Scarnetti": {
+            "prototypeToken": {
+                "name": "查恩·斯卡内蒂"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "查恩·斯卡内蒂 Charn Scarnetti",
+            "publicNotes": "<p>许多人羡慕贵族，还有些人憎恶贵族，贵族散发着自信和文雅。八卦和赌博通常是贵族们最爱的消遣。贵族的日常生活通常结合了商业活动和社交休闲，而对外人来说，这样的生活可能只是一连串的宴席、聚会和游戏。然而，另一些人则相信贵族生活通常是相当危险的，而且需要比表面上看起来更多的智慧——以及对健康状况的怀疑。</p>\n<hr />\n<p>虽然冒险家们穿过黑暗的地牢，跨过危险的荒野，但有时候对他们来说最险象环生的地方其实是贵族宫廷。</p>",
+            "blurb": "男性人类贵族",
+            "items": {
+                "equipment-Silver Flask": {
+                    "name": "银酒壶 Silver Flask"
+                },
+                "Lip Reader": {
+                    "name": "读唇 Lip Reader",
+                    "description": "<p>贵族在刺探情报方面经过长年累月的的努力之后掌握了读唇的方法，获得@UUID[Compendium.pf2e.feats-srd.Item.yUuU9xyotrpwpTyC]专长的效果。</p>"
+                },
+                "equipment-Signet Ring": {
+                    "name": "图章戒指 Signet Ring"
+                },
+                "Noble's Ruse": {
+                    "name": "贵族诡谋 Noble's Ruse",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 贵族进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]，一旦成功，贵族对目标进行一次打击。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>贵族对陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的敌人额外造成1d6精准伤害。</p>"
+                }
+            }
+        },
+        "Goblin Ghoul": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "地精食尸鬼"
+            },
+            "name": "地精食尸鬼 Goblin Ghoul",
+            "publicNotes": "<p>食尸鬼跟踪者是在墓地出没、享用尸体的贪婪不死生物。</p>\n<hr />\n<p>在孤独的墓地和破败的墓穴等阴森之地，没什么生物能比食尸鬼这种肉食性不死生物更常见的了。</p>",
+            "hp": "虚能治疗",
+            "blurb": "变体食尸鬼",
+            "items": {
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Ghoul Fever": {
+                    "name": "食尸鬼热 Ghoul Fever",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:15]</p>\n<hr />\n<p><strong>阶段1</strong> 携带病原但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害且从任何治疗获得的生命值恢复均减半（1天）</p>\n<p><strong>阶段3</strong> 如阶段2（1天）</p>\n<p><strong>阶段4</strong> @Damage[2d6[void]]伤害且无法从治疗获得任何好处（1天）</p>\n<p><strong>阶段5</strong> 如阶段4（1天）</p>\n<p><strong>阶段6</strong> 死亡，并在下一日的午夜作为@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼 Ghoul}复生。</p>"
+                },
+                "Consume Flesh": {
+                    "name": "啃食尸体 Consume Flesh",
+                    "description": "<p><strong>需求</strong> 食尸鬼与刚死亡一小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[1d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取一次生命值恢复。</p>"
+                },
+                "Paralysis": {
+                    "name": "麻痹 Paralysis",
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:15]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                },
+                "Swift Leap": {
+                    "name": "迅捷跳跃 Swift Leap",
+                    "description": "<p>食尸鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>"
+                }
+            }
+        },
+        "Jervis Stoot": {
+            "name": "杰维斯·斯图特 Jervis Stoot",
+            "items": {
+                "Rejuvenation": {
+                    "name": "复生 Rejuvenation",
+                    "description": "<p>如果杰维斯被摧毁，他会在分尸狂岛下方的地下密室中复苏，并会在携带@UUID[Compendium.pf2e.equipment-srd.Item.mnEj7ll9WffO8WLu]头颅的人仍位于沙尖镇周围5英里范围内时，继续寻找此人。如果造成他悲惨命运的始作俑者——红主祭被杀，斯图特便能步入来世。</p>\n<hr />\n<p>当幽灵被摧毁时，它会在[[/br 2d4 #days]]{2d4日}后在被束缚的地点重新成型，被完全治愈。只有在任何阻止幽灵安息的因素都被纠正时，幽灵才能被永久摧毁。</p>"
+                },
+                "Tears of Blood": {
+                    "name": "血之泪 Tears of Blood",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 杰维斯·斯图特用手指做出一个挖出的动作。他能感知到的30尺范围内的任意一个生物将经历眼睛被挖出的剧痛，并因此承受@Damage[12d6[mental]]伤害（@Check[fortitude|dc:30|basic]豁免检定，若大失败，则@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1分钟）。</p>"
+                },
+                "Avian Vulnerability": {
+                    "description": "<p>杰维斯的对所有伤害的抗性对来自鸟类或禽类生物（包括那些用翅膀飞行的生物，但不包括仅通过魔法飞行的生物）的打击无效。</p>",
+                    "name": "禽类弱点 Avian Vulnerability"
+                },
+                "Trinket Bound": {
+                    "name": "小物牵绊 Trinket Bound",
+                    "description": "<p>杰维斯·斯图特通常只能在沙尖镇正北分尸狂岛（Chopper’s Isle）上那些地下密室附近短暂徘徊，但是，一旦有人将发条鸣鸟的头颅带出那片区域，斯图特便能尾随其后。只要被他附身的生物携带着那颗头，他就能随心所欲地移动，但距离沙尖镇不能超过5英里。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Ghostly Murder": {
+                    "name": "幽灵谋杀 Ghostly Murder",
+                    "description": "<p>杰维斯·斯图特高高举起一只手，一群幽灵般的乌鸦在他手上方的漩涡中显现。接着，他把手放下指向一个方向，这群幽灵乌鸦便以@Template[cone|distance:20]范围蜂拥而出。所有身处该区域内的生物都必须进行一次@Check[reflex|dc:30|options:area-effect,damaging-effect]豁免检定。在接下来的[[/gmr 1d4 #Recharge Ghostly Murder]]{1d4轮}内，杰维斯无法使用幽灵谋杀技能。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物承受@Damage[6d6[slashing]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 生物承受@Damage[10d6[slashing],2d6[bleed]|options:area-damage]伤害</p>\n<p><strong>大失败</strong> 生物承受@Damage[15d6[slashing],5d6[bleed]|options:area-damage]伤害，且@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]。目盲状态将持续存在，直到通过如复原感官（Restore Senses）等的效果治愈。</p>"
+                },
+                "Malevolent Possession": {
+                    "name": "恶毒占据 Malevolent Possession",
+                    "description": "<p>幽灵尝试占据它邻接的，身上某处携带着@UUID[Compendium.pf2e.equipment-srd.Item.mnEj7ll9WffO8WLu]头颅的实体生物。效果如同法术@UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]（@Check[will|dc:34]），但持续时间无限。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "杰维斯·斯图特"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "hp": "虚能治疗，复生",
+            "blurb": "男性人类幽灵"
+        },
+        "The Three Steps": {
+            "prototypeToken": {
+                "name": "三步走"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "三步走 The Three Steps",
+            "reset": "<p>每个陷阱10分钟后会自动重置。</p>",
+            "stealthdetails": "<p>（受训）</p>",
+            "disable": "<p>@Check[thievery|dc:23]改装门把手上的凹槽，使其大小能够适配别的东西而不是特定石榴石珠，或者每轮都通过@Check[stealth|dc:18]检定以避免被陷阱探测到。</p>",
+            "hazarddescription": "<p>魔法能量光束从七芒星内爆发，席卷整个房间。</p>",
+            "items": {
+                "Wrathful Blast": {
+                    "name": "怒能爆发 Wrathful Blast",
+                    "description": "<p><strong>触发</strong> 一个生物在这个房间内结束回合</p>\n<hr />\n<p><strong>效果</strong> 能量光束从东西墙上的七芒秘印里爆发，对房间里的所有生物造成9d6能量伤害（@Check[reflex|dc:22|basic]豁免）。区域<strong>B4a</strong>的陷阱造成@Damage[9d6[fire]]伤害，区域<strong>B4b</strong>中的陷阱造成@Damage[9d6[cold]]伤害，区域<strong>B4c</strong>中的陷阱造成@Damage[9d6[poison]]伤害。</p>"
+                }
+            }
+        },
+        "Shadows of Everglut": {
+            "hazarddescription": "<p>盘旋的阴影如同活化的墨水池一般，当有人踏入这个房间过深时，它们会飞溅并蜿蜒缠绕上那人的四肢。</p>",
+            "routine": "<p>（1动作）地板上扭曲的影子延伸出一股由烟雾和黑暗组成的、如漆黑的暴风雨般的触手，它们在房间内肆意挥舞、扭曲，空气中充满了令人不安的痛苦尖叫和嘶吼声。区域<strong>J3a</strong>内的所有生物受到@Damage[8d6[void]]伤害（@Check[fortitude|dc:30|basic]豁免检定）。</p>",
+            "reset": "<p>当所有生物离开房间后，该危害会在1轮后平息下来，并可以在下一轮开始时再次触发。</p>",
+            "stealthdetails": "<p>（大师）</p>",
+            "items": {
+                "Sap Strength": {
+                    "name": "削减力量 Sap Strength",
+                    "description": "<p><strong>触发</strong> 当有生物移动到北侧阶梯之外的房间内时</p>\n<hr />\n<p><strong>效果</strong> 从下方的黑暗中升起一道道阴影般的触须，轻轻拂过触发该反应的生物的身体。该生物必须进行一次@Check[fortitude|dc:30]豁免检定，否则其力量将从其身体中被抽离。之后，该危害将投掷先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响</p>\n<p><strong>成功</strong> 该生物的速度在1轮内减少10尺</p>\n<p><strong>失败</strong> 与成功相同，但该生物同时@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]</p>\n<p><strong>大失败</strong> 与失败相同，生物还陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，它可以在每个回合结束时尝试一次新的豁免检定，并且每次进行这样的检定，DC会累计减少1。</p>"
+                }
+            },
+            "name": "永饿城之影 Shadows of Everglut",
+            "prototypeToken": {
+                "name": "永饿城之影"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "disable": "<p>进行三次@Check[arcana|dc:33]或@Check[occultism|dc:33]检定，以将虚能反噬其身并破坏危害的能量来源；或者进行一次@Check[religion|dc:36]检定，通过祈祷切断与卡布里里的神圣联系；或者使用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（6环级，反制DC29），使该危害在10分钟内失效。</p>"
+        },
+        "Cruncher": {
+            "prototypeToken": {
+                "name": "嘎吱嘎吱"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "嘎吱嘎吱 Cruncher",
+            "blurb": "虚弱的豪达格",
+            "items": {
+                "Trackless": {
+                    "description": "<p>豪达格一边移动一边同时用尾巴扫过身后的地面，模糊了它的踪迹。@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]一头豪达格的检定的DC增加10。</p>",
+                    "name": "无踪 Trackless"
+                },
+                "Ferocity": {
+                    "name": "凶猛 Ferocity",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
+                },
+                "Rip and Tear": {
+                    "name": "连撕带咬 Rip and Tear",
+                    "description": "<p>豪达格以任意顺序作出2次爪抓打击和1次啃咬打击。</p>"
+                },
+                "Sickly": {
+                    "name": "虚弱 Sickly",
+                    "description": "<p>由于地精的虐待，嘎吱嘎吱陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。此外，他的眼睛充血且布满眼屎，导致他在进行基于视觉的察觉检定时承受-4的环境减值，并且使他在5尺范围外@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]。如果他逃到野外，在几个晚上的休息和一顿大餐之后，他会逐渐恢复健康。另外，PC也可以通过进行一次@Check[medicine|dc:20]检定来加速他的恢复，具体结果如下；这个过程需要10分钟来完成，因此嘎吱嘎吱必须处于无助状态或愿意接受治疗。</p>\n<hr />\n<p><strong>大成功</strong> 嘎吱嘎吱的视力恢复了并失去力竭状态</p>\n<p><strong>成功</strong> 嘎吱嘎吱的视力恢复了并在8小时的休息后失去力竭状态</p>\n<p><strong>失败</strong> 治疗没有提供帮助</p>\n<p><strong>大失败</strong> 与失败相同，但嘎吱嘎吱还受到@Damage[2d6]伤害，这可能会导致他失去对PC们的信任，并驱使他发起攻击。</p>"
+                },
+                "Toss": {
+                    "name": "抛掷 Toss",
+                    "description": "<p>豪达格行走，然后对触及范围内的一个目标进行一次打击。如果它移动了至少20尺，并且其打击成功，豪达格如常造成伤害，并且尝试一次@Check[athletics|defense:fortitude]检定对抗该生物的强韧DC，以此将敌人抛到空中。</p>\n<p>当成功时，被抛掷的生物将朝豪达格选定的方向被直线飞掷出10尺远，并在着陆时@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。如果生物被撞到一个固态物体上，在倒地前还会受到@Damage[1d6[bludgeoning]]伤害。豪达格可以将生物直线往上抛掷。该生物在其被抛起的起始位置着陆，受到@Damage[1d6[bludgeoning]]伤害，并且倒地。</p>"
+                }
+            },
+            "publicNotes": "<p>由于豪达格通常只出现在烂醉的伐木工与矿工的胡言乱语之中，许多人都认为它们只不过是僻壤之地民俗传说。然而，有些人确实得以亲眼见证这些危险的魔兽，只是能够活着讲述这些故事的人着实是太少了。</p>\n<p>豪达格是一种体型与公牛相仿的爬行生物。这些凶残掠食者的长爪能在几秒钟内就将生物撕碎。它们的背上长有数十根长长的尖刺，从鼻子一路排列至它们强有力的尾巴上。它们的大嘴上满是尖利扭曲的牙齿，看上去就和鲨鱼的牙齿没什么不同。豪达格粗糙有鳞的皮肤带有绿色和棕色的色调，使它们能够融入森林的环境，在那里伏击猎物。只有它们闪烁着红光的眼睛才会显示出它们的存在，然而豪达格却反而学会了如何利用这一点，将猎物的注意力吸引到它们眼睛所在的区域，而后闭上眼睛，偷偷转移至另一个地点，好让猎物错判它们的位置。</p>\n<p>在冬季，当冰雪覆盖之时，豪达格会从鳞片的间隙里长出一层油腻的、深棕色的、散发着恶臭的毛皮。一头典型的豪达格从鼻到尾体长超过10尺，重达700磅以上。</p>"
+        },
+        "Giant Longlegs": {
+            "prototypeToken": {
+                "name": "巨型长腿蛛"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<hr />\n<p>虽然这些看起来令人不安的蛛形纲动物（在当地被称为收割者（Harvesters）、痒痒蛛（Tickle Spiders）或长腿爸爸（Daddy Longlegs））的小体型品种是无害的，但它们更大的表亲，也就是人们所熟知的长腿蛛，却并非如此。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多（Taldor）聚居地的地下，而在西边的切利亚斯（Cheliax），体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原（The Mwangi EXPanse）。</p>",
+            "items": {
+                "Cluster": {
+                    "name": "群聚 Cluster",
+                    "description": "<p>一只巨型长腿蛛可以与另一只巨型长腿蛛共享同一空间，但占用同一空间的巨型长腿蛛不能超过三只。</p>"
+                },
+                "Bob": {
+                    "name": "晃动 Bob",
+                    "description": "<p>巨型长腿蛛开始上下晃动，它的双腿就像弹簧一样使身体以一种令人不安的方式弹跳和摇摆。直到巨型长腿蛛的下一回合开始前，它的AC获得+2状态加值。</p>"
+                },
+                "Noxious Spray": {
+                    "name": "毒雾喷射 Noxious Spray",
+                    "description": "<p>巨型长腿蛛会向邻近的单个目标喷射有毒的化学物质，目标必须进行@Check[fortitude|dc:20]豁免检定。巨型长腿蛛在1分钟内无法再次使用毒雾喷射。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响并临时免疫毒雾喷射1分钟。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}且只要该生物处于恶心状态，他们还陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。</p>"
+                }
+            },
+            "name": "巨型长腿蛛 Giant Longlegs"
+        },
+        "Zoog": {
+            "items": {
+                "Spell Sight": {
+                    "description": "<p>祖格鼠的眼睛会在@Template[cone|distance:15]范围内发出明亮光照（接下来的15尺内则是昏暗光照）。该区域内的任何魔法效果都会发出微弱的光。祖格鼠可以在自己的回合中以一个自由动作消散或恢复这种光芒。</p>",
+                    "name": "视法之眼 Spell Sight"
+                },
+                "Otherworldly Touch": {
+                    "name": "异界之触 Otherworldly Touch",
+                    "description": "<p>祖格鼠的爪击可以对虚体生物造成伤害，就好像它们被@UUID[Compendium.pf2e.equipment-srd.Item.JQdwHECogcTzdd8R]性能符文强化了一样。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "祖格鼠"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "祖格鼠 Zoog",
+            "publicNotes": "<p>祖格鼠看起来毛茸茸的，长着触角，总是发出叽叽喳喳的叫声，它们居住在世界的阴影中，在那里，梦会不可思议地变成现实。</p>\n<h2>祖格鼠 Zoogs Vs. Cats</h2>\n<p>祖格鼠和猫之间的仇恨源远流长，尽管双方都不记得最初的原因。众所周知，祖格鼠会捕食幼猫，但面对成猫，它们的勇气很快就会丧失。而猫则总是迅速地扑上去，追逐并攻击祖格鼠。</p>"
+        },
+        "Asmerelli": {
+            "prototypeToken": {
+                "name": "阿斯梅雷利"
+            },
+            "items": {
+                "Reach Spell": {
+                    "name": "及远法术 Reach Spell",
+                    "description": "<p>如果阿斯梅雷利的下一个动作是施放一个具有射程的法术，该法术的射程提高30尺。</p>"
+                },
+                "Devil's Cursed Breath": {
+                    "name": "魔鬼咒息 Devil's Cursed Breath",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 阿斯梅雷利咬伤自己的舌头（受到@Damage[1[slashing]]伤害），然后喷吐出@Template[cone|distance:15]的燃烧烟雾。该区域内的每个生物都必须尝试@Check[reflex|dc:26|options:area-effect,damaging-effect]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物受到@Damage[3d8[fire]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 生物受到@Damage[7d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>大失败</strong> 生物受到@Damage[10d8[fire]|options:area-damage]且由于烧伤的剧痛陷入恶心1，并受到诅咒，受害者的烧伤从未完全消失，而由于持续的疼痛，这个被诅咒的生物在所有攻击中都会受到-2的状态减值。治疗无法改变烧伤的外观或降低减值，但解除诅咒可以。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.khL2A1slsnufpJp4]</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "阿斯梅雷利 Asmerelli",
+            "blurb": "女性半身人术士"
+        },
+        "Greedspawn": {
+            "prototypeToken": {
+                "name": "贪婪罪生怪"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "贪婪罪生怪 Greedspawn",
+            "publicNotes": "<p>罪生怪是由被共称为符文领主的七名古代巫师中的一位所创造的——他们每人接纳并呈现出七原罪中的一罪。第一名罪生怪由愤怒符文领主所创造，这源于他对影响并扭曲肉体的技术实践（详见畸肉体）。这种技术在用于创造罪生怪不久之后便落入了其他符文领主手中，之后他们每人都尝试根据自己的设计创造变种，时至今日愤怒罪生怪仍旧是同类中数量最多也最知名的存在。罪生怪与肉体被重塑的类人原型之间只有极为模糊的相似之处，他们通常看起来骨瘦嶙峋，长着不自然地修长手臂和反关节的腿部，每根肢体末端都长着短粗的爪状指头。凸起的血管遍及罪生怪全身，血红色的凸起仿佛构成了扭曲的符文，其皮肤苍白无毛。他们的头部被拉长，五官只剩下鼻子、红色的双眼、以及从下巴处裂开成两瓣的下颚，其中露出长长的下垂舌头，舌头尖端分成了三根宛若手指的触须。</p>\n<hr />\n<p>罪生怪站起来有6.5尺，体重与同体型的人类相仿。罪生怪的行为模式与和其相关联的原罪有关，他们的体貌特征也会对此有所暗示。举例说明，贪婪罪生怪的血管里流淌的是金色的液体，而嫉妒罪生怪比其他类型的罪生怪更加瘦弱。</p>",
+            "allSaves": "对抗魔法全豁免+1状态，对抗心灵全豁免+4状态",
+            "items": {
+                "Sin Scent (Imprecise) 30 feet": {
+                    "name": "嗅探原罪（模糊）30尺 Sin Scent (Imprecise) 30 feet",
+                    "description": "<p>罪生怪能通过嗅觉闻到生物所反映出的原罪，此能力在其他方面同灵敏嗅觉。由GM判断哪些生物与哪些原罪相符。</p>"
+                },
+                "+1 Status to All Saves vs. Magic": {
+                    "name": "对抗魔法的全豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "+4 Status to All Saves vs. Mental": {
+                    "name": "对抗心灵时全豁免+4状态 +4 Status to All Saves vs. Mental"
+                },
+                "Attack of Opportunity": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+                },
+                "Sinful Bite": {
+                    "name": "原罪之噬 Sinful Bite",
+                    "description": "<p>被罪生怪的颚命中的生物必须尝试一次@Check[will|dc:18]豁免，因为他们的心智被充满罪孽的思维所侵袭。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>失败</strong> @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}</p>\n<p><strong>大失败</strong> 恶心2和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}，持续1分钟</p>"
+                }
+            }
+        },
+        "Devil's Disciple": {
+            "prototypeToken": {
+                "name": "魔鬼门徒"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "魔鬼门徒 Devil's Disciple",
+            "blurb": "人类及半精灵邪教徒",
+            "items": {
+                "Devil's Breath": {
+                    "name": "魔鬼吐息 Devil's Breath",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 魔鬼门徒用手中的锋利武器割伤自己的舌头（受到@Damage[1[slashing]]伤害），然后喷吐出@Template[cone|distance:15]的燃烧烟雾。该区域内的每个生物都必须尝试@Check[reflex|dc:18|options:area-effect,damaging-effect]豁免检定。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物受到@Damage[1d8[fire]|options:area-damage]伤害</p>\n<p><strong>失败</strong> 生物受到@Damage[2d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}</p>\n<p><strong>大失败</strong> 生物受到@Damage[4d8[fire]|options:area-damage]伤害且由于烧伤的剧痛陷入恶心1，并由于烟雾陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，持续1分钟</p>"
+                }
+            }
+        },
+        "Clockwork Serpent": {
+            "items": {
+                "Wind-Up": {
+                    "name": "上发条 Wind-Up",
+                    "description": "<p>24小时，[[/act disable-device dc=26]]{DC26贼活}，待机</p>\n<hr />\n<p>要让发条机械运转，必须由另一个生物用一把独特的钥匙给它上发条。这需要1分钟时间。一旦上紧发条，它们能在列出的时间内活动，通常为24小时，时间耗尽之后它们就无法察觉周围的环境且无法行动，直到再次被上紧发条。一些发条机械的能力在使用时需要以减少活动时间为代价。它们消耗的活动时间不能超过当前剩余的活动时间，一旦活动时间为0，它们就会立即关机。如果不清楚发条机械上一次上发条是什么时候，大多数发条机械的管理员都会在早上8点上发条。</p>\n<p>有些发条机械在上发条能力中列出了“待机”条目，它们可以通过一个3动作行动进入待机模式。在待机模式下，它的活动时间不会减少，但它可以感知周围环境（察觉检定有-2减值）。它无法行动，只有一个例外：当它感知到一个生物时，能以一个反应动作退出待机模式（并且如果状况合适，则进行先攻检定）。</p>\n<p>一个生物可以尝试对上了发条的发条机械进行@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]，解除DC在上发条能力中列出。每次成功的尝试都能减少发条机械1小时活动时间。这对于处于待机模式中的发条机械也能正常生效。</p>"
+                },
+                "Activate Serpent Mode": {
+                    "name": "激活蛇类模式 Activate Serpent Mode",
+                    "description": "<p><strong>触发</strong> 发条巨蛇开始自身回合</p>\n<hr />\n<p><strong>效果</strong> 发条巨蛇转换为不同的模式。骰1d6并参考下面的选项。如果掷出了当前无法激活的模式，发条巨蛇直到自身下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}。在回合结束时，它会自动解除蛇类模式。</p>\n<p><strong>1 眼镜蛇模式 Cobra Mode</strong> 发条巨蛇可以使用威吓头冠。</p>\n<p><strong>2 巨蟒模式 Constrictor Mode</strong> 发条巨蛇可以使用卷缠攻击和紧勒。</p>\n<p><strong>3 响尾蛇模式 Rattlesnake Mode</strong> 发条巨蛇可以使用破空扫尾。</p>"
+                },
+                "Critical Deactivation": {
+                    "name": "临界失效 Critical Deactivation",
+                    "description": "<p>如果发条巨蛇受到任何精准伤害或受到重创，且蛇类模式处于激活状态，则必须进行@Check[flat|dc:16]检定。如果失败，它就会像正常情况一样受到重击伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，同时它的蛇类模式也会失效。</p>"
+                },
+                "Shattering Rattle": {
+                    "name": "破空扫尾 Shattering Rattle",
+                    "description": "<p><strong>需求</strong> 发条巨蛇处于响尾蛇模式</p>\n<hr />\n<p><strong>效果</strong> 发条巨蛇摇动尾巴，然后像鞭子一样甩动尾巴，在@Template[cone|distance:30]范围内产生毁灭性的音波能爆。该区域内的生物会受到@Damage[9d6[sonic]|options:area-damage]伤害（@Check[fortitude|dc:26|basic|options:area-effect]豁免）。</p>"
+                },
+                "Clockwork Serpent Venom": {
+                    "name": "发条巨蛇毒 Clockwork Serpent Venom",
+                    "description": "<p><strong>豁免骰</strong> @Check[fortitude|dc:26]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[2d6[poison]]伤害且@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}且措手不及（1轮）</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(2d10+6)[bludgeoning]]，@Check[fortitude|dc:26|basic]</p>\n<p><strong>需求</strong> 发条巨蛇处于巨蟒模式</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                },
+                "Intimidating Hood": {
+                    "name": "威吓头冠 Intimidating Hood",
+                    "description": "<p><strong>需求</strong> 发条巨蛇处于眼镜蛇模式</p>\n<hr />\n<p><strong>效果</strong> 发条巨蛇张开眼镜蛇头冠。@Template[emanation|distance:15]范围内的所有生物都必须成功进行@Check[will|dc:26]豁免，否则就会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "发条巨蛇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "发条巨蛇 Clockwork Serpent",
+            "publicNotes": "<p>发条巨蛇经常在蛇人（Serpentfolk）的实验室或神庙中担任守卫。</p>\n<h2>实验性蛇械 Experimental Serpents</h2>\n<p>据传，在蛇人聚居地的中心还存在着更奇怪的发条巨蛇。据说，这些构造体在改变蛇类模式时可以修复自身受到的伤害，激活额外的形态以游泳或战斗，甚至可以分裂成许多更小的发条蛇组成的集群。</p>"
+        },
+        "Angry Townsfolk": {
+            "prototypeToken": {
+                "name": "愤怒的镇民"
+            },
+            "items": {
+                "Troop Defenses": {
+                    "description": "<p><strong>阈值</strong> 50（3部分），25（2部分）</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>",
+                    "name": "部队防御 Troop Defenses"
+                },
+                "Pitchforks and Torches": {
+                    "name": "干草叉和火把 Pitchforks and Torches",
+                    "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 愤怒的镇民对@Template[emanation|distance:10]范围内的每个敌人进行整齐划一的近战攻击（@Check[reflex|dc:19|basic|options:area-effect]豁免）。该伤害取决于花费的动作：</p>\n<p><span class=\"action-glyph\">1</span> @Damage[1d10[untyped]|options:area-damage]</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(1d10+7)[untyped]|options:area-damage]</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(1d10+10)[untyped]|options:area-damage]</p>"
+                },
+                "Troop Movement": {
+                    "name": "部队移动 Troop Movement",
+                    "description": "<p>当愤怒的镇民行走时，它首先以一个自由动作@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.OvqohW9YuahnFaiX]，聚集成20尺*20尺方格的队列（减去任何损失的方格），然后以满速度移动。</p>\n<p>它在移动时如同一个巨形生物那般；举例来说，如果任何方格进入了困难地形，则整个部队都需要花费额外的移动力。</p>"
+                },
+                "Urban Chasers": {
+                    "name": "城区搜查 Urban Chasers",
+                    "description": "<p>愤怒的镇民无视拥挤的人群或小巷这样狭窄空间导致的困难地形。</p>"
+                },
+                "Seek Quarry": {
+                    "name": "搜寻嫌犯 Seek Quarry",
+                    "description": "<p>愤怒的镇民能花费1分钟时间，指定一个有外貌描述的生物作为他们的搜索目标。他们针对该目标的察觉检定有+2环境加值。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "愤怒的镇民 Angry Townsfolk",
+            "hp": "部队防御",
+            "blurb": "变体城市卫兵小队"
+        },
+        "Toxic Crystals": {
+            "prototypeToken": {
+                "name": "毒性水晶"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "毒性水晶 Toxic Crystals",
+            "disable": "<p>@Check[thievery|dc:30]（专家）通过精准击打晶体的特定位置，引发晶体间的连锁反应，使它们碎裂并以无害的方式释放能量；@Check[performance|dc:27]（专家）使用乐器演奏或歌唱，使晶体产生共鸣，从而无害地释放其有毒能量。</p>",
+            "hazarddescription": "<p>在有生物存在时，绿色的晶体开始以更加明亮的光芒闪烁。这些来自不同晶体的光照波动诡异地与洞穴内生物的呼吸节奏和心跳频率相匹配。</p>",
+            "routine": "<p>（1动作）（光亮，毒素）每轮轮到它们行动时，这些有毒的晶体会发出尖锐的嗡嗡声，并以明亮的绿光闪烁。区域<strong>E14</strong>内的所有生物，或从此区域任一出口通道的前10尺范围内的生物，都必须进行@Check[fortitude|traits:light,poison|dc:25]豁免检定。</p>\n<hr>\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物受到@Damage[2d8[poison]]伤害</p>\n<p><strong>失败</strong> 生物受到@Damage[4d8[poison]]且@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1分钟</p>\n<p><strong>大失败</strong> 生物受到@Damage[4d8[poison]]伤害且@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，同时@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1分钟。</p>",
+            "reset": "<p>当没有生物在范围内时，这些有毒的晶体会进入休眠状态，但只要再有生物进入范围，它们就会再次被激活。</p>",
+            "stealthdetails": "<p>（受训）</p>",
+            "items": {
+                "Nauseating Pulse": {
+                    "name": "恶心脉动 Nauseating Pulse",
+                    "description": "<p><strong>触发</strong> 当有生物进入距离绿色晶体20尺的范围内时</p>\n<hr />\n<p><strong>效果</strong> 晶体闪烁着令人作呕的光芒。区域<strong>E14</strong>内的所有生物，或从此区域任一出口通道的前10尺范围内的生物，都必须通过@Check[fortitude|dc:25]豁免检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若豁免检定大失败，则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 3}）。</p>"
+                }
+            }
+        },
+        "Gorlak": {
+            "prototypeToken": {
+                "name": "戈尔拉克"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "戈尔拉克 Gorlak",
+            "blurb": "食人魔守卫",
+            "items": {
+                "Embed Hook": {
+                    "name": "嵌入铁钩 Embed Hook",
+                    "description": "<p><strong>需求</strong> 戈尔拉克的上一个动作是使用食人魔铁钩对一个生物成功进行打击</p>\n<hr />\n<p><strong>效果</strong> 戈尔拉克扭转他的铁钩，试图通过进行一次@Check[athletics|defense:fortitude]检定与目标的强韧DC对抗来将铁钩嵌入生物体内。如果成功，该生物将受到@Damage[(1d10+9)[piercing]]伤害（@Check[fortitude|dc:25|basic]豁免检定），并且直到戈尔拉克再次使用他的食人魔铁钩进行攻击或尝试对该生物使用抛掷敌人之前，该生物都将被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。</p>"
+                },
+                "Fling Foe": {
+                    "name": "抛掷敌人 Fling Foe",
+                    "description": "<p><strong>需求</strong> 戈尔拉克的上一个动作是对一个中等体型或更小的生物使用嵌入铁钩</p>\n<hr />\n<p><strong>效果</strong> 戈尔拉克尝试通过进行一次@Check[athletics|defense:fortitude]检定对抗嵌入铁钩的生物的强韧DC，来将该生物从铁钩上甩向空中。</p>\n<hr />\n<p><strong>大成功</strong> 铁钩在甩出时撕扯开生物的身体，造成@Damage[(2d10+9)[piercing]]伤害（@Check[fortitude|dc:25|basic]豁免检定），生物被甩出15尺远，落在戈尔拉克选择的空地上，并@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>\n<p><strong>成功</strong> 铁钩在甩出时撕扯开生物的身体，造成@Damage[(1d10+9)[piercing]]伤害（@Check[fortitude|dc:25|basic]豁免检定），生物被甩出5尺远，落在地上并倒地。</p>\n<p><strong>失败</strong> 铁钩在甩出时撕扯开生物的身体，造成@Damage[1d10[piercing]]伤害（@Check[fortitude|dc:25|basic]豁免检定），但生物仍然站在原地，紧挨着戈尔拉克。</p>\n<p><strong>大失败</strong> 铁钩在甩出时未能对生物造成伤害，生物仍然站在原地，紧挨着戈尔拉克。戈尔拉克对自己的失败感到十分沮丧，以至于他必须使用下一个回合的第一个动作诅咒、尖叫并在空中挥舞拳头。</p>"
+                }
+            }
+        }
+    },
+    "mapping": {
+        "name": "name",
+        "portrait": {
+            "path": "img",
+            "converter": "npc-portrait-path"
+        },
+        "token": {
+            "path": "prototypeToken",
+            "converter": "npc-token-translation"
+        },
+        "data": {
+            "path": "system",
+            "converter": "npc-data-translation"
+        },
+        "items": {
+            "path": "items",
+            "converter": "npc-item-translation"
+        },
+        "publicNotes": "system.details.publicNotes",
+        "privateNotes": "system.details.privateNotes",
+        "allSaves": "system.attributes.allSaves.value",
+        "senses": "system.traits.senses.value",
+        "hp": "system.attributes.hp.details",
+        "blurb": "system.details.blurb",
+        "speed": "system.attributes.speed.details",
+        "languages": "system.traits.languages.custom",
+        "ac": "system.attributes.ac.details",
+        "di": "system.traits.di.custom",
+        "prototypeToken": {
+            "path": "prototypeToken",
+            "converter": "structured",
+            "cardinality": "one",
+            "mapping": {
+                "name": "name"
+            }
+        }
+    },
+    "label": "沙尖七灾 Seven Dooms for Sandpoint Bestiary"
+}

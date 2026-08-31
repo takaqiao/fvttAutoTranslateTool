@@ -1,0 +1,12 @@
+<div class="node">
+    <header class="flexcol">
+        {{#each tagGroups as |tagGroup|}}
+        <div class="tags {{tagGroup.cssClass}}" data-tags="{{tagGroup.id}}">
+            {{#if tagGroup.label}}<label>{{tagGroup.label}}</label>{{/if}}
+            {{#each tagGroup.tags as |tag|}}
+            <span class="tag {{tag.class}}">{{tag.label}}</span>
+            {{/each}}
+        </div>
+        {{/each}}
+    </header>
+</div>

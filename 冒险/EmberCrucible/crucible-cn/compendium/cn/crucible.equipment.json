@@ -1,0 +1,1162 @@
+{
+  "label": "装备\nEquipment",
+  "mapping": {
+    "description": "system.description",
+    "actions": {
+      "path": "system.actions",
+      "converter": "actions_converter"
+    }
+  },
+  "folders": {
+    "Consumables": "消耗品",
+    "Accessories": "配件",
+    "Melee (1h)": "近战（单手）",
+    "Implements": "法器",
+    "Bombs": "炸弹",
+    "Other": "其他",
+    "Unarmored": "无甲",
+    "Clothing": "服装",
+    "Ranged": "远程",
+    "Armor": "护甲",
+    "Scrolls": "卷轴",
+    "Flasks": "瓶子",
+    "Heavy": "重型",
+    "Jewelry": "珠宝",
+    "Wilderness": "荒野",
+    "Ingredients": "材料",
+    "Light": "光",
+    "Weapons": "武器",
+    "Medium": "中型",
+    "Traps": "陷阱",
+    "Light Sources": "光源",
+    "Tools": "工具",
+    "Toxins": "毒素",
+    "Unarmed": "徒手",
+    "Melee (2h)": "近战（双手）",
+    "Adventuring Gear": "冒险装备",
+    "Shields": "盾牌",
+    "Talisman": "护符",
+    "Crafting Kits": "制作工具包"
+  },
+  "entries": {
+    "Blast Flask": {
+      "name": "爆炸瓶 Flask",
+      "description": {
+        "public": "<p>一个装满红色液体的烧瓶在破裂时会爆炸，产生一小团爆炸性的火焰，并迅速消散。</p>",
+        "private": "<p>这些炼金瓶子主要用于击碎大块矿石，蕴含着高度集中的重拳般威力。若组合的数量足够多，它们还可用于引发锁链式反应，从而造成更大的爆炸。</p>"
+      },
+      "actions": {
+        "blastFlask": {
+          "name": "爆炸瓶 Flask",
+          "description": "<p>你点燃并掷出@ref[name]，对爆破半径内的所有敌人造成<strong>火焰</strong>伤害。<strong>爆破</strong>的半径取决于炸弹的品质：</p><ul><li><p><strong>Shoddy</strong> - 3英尺</p></li><li><p><strong>Standard</strong> - 4英尺</p></li><li><p><strong>Fine</strong> - 6英尺</p></li><li><p><strong>Superior</strong> - 8英尺</p></li><li><p><strong>Masterwork</strong> - 10英尺</p></li></ul>"
+        }
+      }
+    },
+    "Alchemist's Fire": {
+      "name": "炼金火焰 Fire",
+      "description": {
+        "public": "<p>一种易燃的混合物，撞击时会点燃，并会在短时间内剧烈燃烧。</p>"
+      },
+      "actions": {
+        "alchemistsFire": {
+          "name": "炼金火焰 Fire",
+          "description": "<p>你掷出@ref[name]，造成<strong>虚弱</strong>的即时伤害，并使所有位于 4 尺半径<strong>爆发</strong>范围内且未能避开此次攻击的敌人陷入@Condition[burning]状态。</p><p>燃烧伤害的数值及其持续时间取决于@ref[name]的品质：</p><ul><li><p><strong>粗制</strong> - 2 伤害，持续 2 轮</p></li><li><p><strong>标准</strong> - 3 伤害，持续 3 轮</p></li><li><p><strong>精良</strong> - 4 伤害，持续 4 轮</p></li><li><p><strong>优异</strong> - 6 伤害，持续 5 轮</p></li><li><p><strong>大师级</strong> - 8 伤害，持续 6 轮</p></li></ul>",
+          "effects": [
+            {
+              "name": "炼金火焰 Fire"
+            }
+          ]
+        }
+      }
+    },
+    "Alchemist's Portable Workbench": {
+      "name": "炼金术士的便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一种便携式铜制蒸馏设备，因其可折叠的特性而受到无法使用个人工坊的炼金术士青睐。其许多配件都可以拧下并收纳在蒸馏器主体内部，以便携带。虽然这件物品需要时间来安装和拆卸，但对于经常旅行的人来说，它可以替代更为永久性的工坊。</p>"
+      }
+    },
+    "Alchemist's Toolkit": {
+      "name": "炼金术士工具包 Toolkit",
+      "description": {
+        "public": "<p>一个包裹着皮革的木盒，内含石制研钵和研杵、用于固定数个带塞小瓶的凹槽、一把木勺，以及一个小型可折叠铁架和小型黄铜锅，用于在火上混合材料。</p>"
+      }
+    },
+    "Amulet": {
+      "name": "护符 Amulet",
+      "description": {
+        "public": "<p>一枚朴素的护符系在简单的绳索上，等待技艺娴熟的附魔师触碰。</p>",
+        "private": "<p>这是一个基础配饰模板，用于进行品质升级以及通过词缀进行附魔。</p>"
+      }
+    },
+    "Amulet of Nimbleness": {
+      "name": "灵巧护符 Nimbleness",
+      "description": {
+        "public": "<blockquote><p>这条色彩鲜艳的项链上挂着一枚石制护符，其上有一道微微迸发电鸣的发光符文。当你持有它时，你会产生一种超现实的感觉，仿佛周围的世界都稍稍慢了下来。</p></blockquote><p>这枚魔法护符会为<strong>反射</strong>防御提供加值。</p>",
+        "private": "<p>此物品作为一个带有 @UUID[Compendium.crucible.affixes.ActiveEffect.nimbleness000000]{敏捷} 后缀的优质护符示例展示。</p><p>这个词缀可以应用于任何护甲或饰品，而这枚护符还可以进一步附魔一个第1阶前缀。</p>"
+      }
+    },
+    "Antitoxin": {
+      "name": "抗毒剂 Antitoxin",
+      "description": {
+        "public": "<p>一个细长的小瓶，内含略带金色的液体。它闻起来很难闻，但含有中和多种毒素所必需的炼金药剂。</p>"
+      },
+      "actions": {
+        "antitoxin": {
+          "name": "抗毒剂 Antitoxin",
+          "description": "<p>服用此@ref[name]能够中和目标身上任何 @Condition[poisoned] 状态。更强的毒药需要更强的抗毒剂才能中和。</p><p>此@ref[name]可抵消的毒药类别取决于其品质：</p><ul><li><p><strong>粗制</strong> - 每轮造成 3 点伤害或以下的毒药</p></li><li><p><strong>标准</strong> - 每轮造成 5 点伤害或以下的毒药</p></li><li><p><strong>精制</strong> - 每轮造成 7 点伤害或以下的毒药</p></li><li><p><strong>优质</strong> - 每轮造成 9 点伤害或以下的毒药</p></li><li><p><strong>大师工艺</strong> - 每轮造成 11 点伤害或以下的毒药</p></li></ul>"
+        }
+      }
+    },
+    "Arcane Orb": {
+      "name": "奥术法球 Orb",
+      "description": {
+        "public": "<p>一个水晶或玻璃制成的球体——在一位有能力的施法者掌中——会成为其力量的传导媒介。它先在其法珠内汇聚伏打能量，然后以电击之力轰击目标。</p>"
+      }
+    },
+    "Bag of Holding": {
+      "name": "收纳袋 Holding",
+      "description": {
+        "public": "<p>这个制作精良的挎包饰有精美繁复的装饰，让人一眼就能看出它并非普通背包。处于<strong>已装备</strong>且<strong>注入</strong>状态时，你的负重容量变为三倍。</p>"
+      }
+    },
+    "Bastard Sword": {
+      "name": "手半剑 Sword",
+      "description": {
+        "public": "<p>手半剑，也称为一手半剑，是一种多用武器，拥有一把约40英寸长的笔直双刃剑身。这种武器被打造得既适合单手灵活挥舞，也能发挥双手持用的力量。</p>"
+      }
+    },
+    "Battle Axe": {
+      "name": "战斧 Axe",
+      "description": {
+        "public": "<p>一把重型的新月刃武器，打造出来就是为了劈开护甲与骨头。它的长柄上布满了无数次劈砍留下的痕迹。此武器既可单手持握，也可双手持握。</p>"
+      }
+    },
+    "Belt": {
+      "name": "腰带 Belt",
+      "description": {
+        "public": "<p>一条朴素的皮带，配有一个简单的金属带扣。</p>",
+        "private": "<p>这是一个基础饰品模板，用于品质升级以及通过词缀进行附魔。</p>"
+      }
+    },
+    "Blanket": {
+      "name": "毯子 Blanket",
+      "description": {
+        "public": "<p>一种厚实的毡制羊毛或纤维布，有着无数用途。</p>"
+      }
+    },
+    "Book": {
+      "name": "书籍 Book",
+      "description": {
+        "public": "<p>一本木质封面、以布或皮革装订的书。</p>"
+      }
+    },
+    "Bracer": {
+      "name": "护腕 Bracer",
+      "description": {
+        "public": "<p>一副结实的皮质护腕，用于保护前臂。</p>",
+        "private": "<p>这是一个基础饰品模板，用于品质升级以及通过词缀进行附魔。</p>"
+      }
+    },
+    "Brigandine": {
+      "name": "布面甲 Brigandine",
+      "description": {
+        "public": "<p>一种外层为布料或皮革、内衬隐藏着小块铆接钢板的外套或背心，布面甲因其兼具灵活性与坚实防护的出色特性，而深受雇佣兵和卫兵青睐。</p>"
+      }
+    },
+    "Buckler": {
+      "name": "圆盾 Buckler",
+      "description": {
+        "public": "<p>圆盾是一种小型、圆形的金属盾牌，大致有餐盘大小，是决斗者用来格挡刀刃并控制空间的工具，可佩戴在前臂上，或像武器一样握持。</p>"
+      }
+    },
+    "Candle": {
+      "name": "蜡烛 Candle",
+      "description": {
+        "public": "<p>一根由蜡压制在中央烛芯周围的小柱体，点燃后会发出昏暗而温暖的光。每根蜡烛可燃烧约八小时。</p>"
+      }
+    },
+    "Caustic Phial": {
+      "name": "腐蚀瓶 Phial",
+      "description": {
+        "public": "<p>腐蚀性液体在这个刻意制成薄壁玻璃的小瓶内翻涌，设计上会在撞击时破碎，并将这种腐蚀性物质泼洒到目标身上。</p>"
+      },
+      "actions": {
+        "causticPhial": {
+          "name": "腐蚀瓶 Phial",
+          "description": "<p>你掷出@ref[name]，造成<strong>虚弱</strong>的即时伤害，并使所有未能避开此次攻击、位于 4 尺半径内<strong>爆破</strong>范围的敌人陷入@Condition[corroding]状态。</p><p>腐蚀伤害的数值及其持续时间取决于@ref[name]的品质：</p><ul><li><p><strong>粗制</strong> - 2 伤害，持续 2 轮</p></li><li><p><strong>标准</strong> - 3 伤害，持续 3 轮</p></li><li><p><strong>精制</strong> - 4 伤害，持续 4 轮</p></li><li><p><strong>优制</strong> - 6 伤害，持续 5 轮</p></li><li><p><strong>大师工艺</strong> - 8 伤害，持续 6 轮</p></li></ul>",
+          "effects": [
+            {
+              "name": "腐蚀瓶 Phial"
+            }
+          ]
+        }
+      }
+    },
+    "Ceremonial Dagger": {
+      "name": "仪式匕首 Dagger",
+      "description": {
+        "public": "<p>这把刀刃比起普通匕首，实用性较低而装饰性更强。它的铭文与工艺都是为将其作为施法工具而精心设计的。在战斗中，它会射出带有穿刺效果的奥术能量爆破。</p>"
+      }
+    },
+    "Chain": {
+      "name": "锁链 Chain",
+      "description": {
+        "public": "<p>一段 30 英尺长的钢制锁链，可用于辅助攀爬，或与固定装备配合使用，将物体固定在原位。</p>"
+      }
+    },
+    "Chain Hook": {
+      "name": "链钩 Hook",
+      "description": {
+        "public": "<p>一条结实而灵活的锁链，末端固定着一个带倒刺的钩子。在熟练的战士手中，这条锁链可以投向目标，撕裂其血肉或装备。</p>"
+      }
+    },
+    "Chain Mail": {
+      "name": "锁子甲 Mail",
+      "description": {
+        "public": "<p>穿在衬垫外的一层由相互连接的钢环编成的网状甲衣，锁子甲能对劈砍提供出色的保护，对刺击也有不错的防御，尽管它会将重量分散到全身。</p>"
+      }
+    },
+    "Charm of Tenacity": {
+      "name": "坚韧护符 Tenacity",
+      "description": {
+        "public": "<blockquote><p>这条挂满护符的项链看起来很朴素，但仔细观察后，你会发现其工艺中蕴含着精巧的技艺。握着它时，你会感到自己的呼吸变得更加深沉，肌肉中的轻微酸痛也逐渐消散。</p></blockquote><p>这件附魔护符会为<strong>坚韧</strong>防御提供加值。</p>",
+        "private": "<p>此物品作为一个带有 @UUID[Compendium.crucible.affixes.ActiveEffect.tenacity00000000]{坚韧} 后缀的精良魅惑示例展示。</p><p>此词缀可应用于任何护甲或饰品，而这个魅惑还可以进一步附加一个第1阶前缀。</p>"
+      }
+    },
+    "Chirurgeon's Toolkit": {
+      "name": "外科医生工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订的木制工具包。内含剃刀、手锯、钳子、绷带、一瓶炼金烈酒、针线，以及一根用皮革包裹的四英寸木枝。里面有进行截肢或切除手术所需的一切。</p>"
+      }
+    },
+    "Choking Ampoule": {
+      "name": "窒息安瓿 Ampoule",
+      "description": {
+        "public": "<p>这个密封的玻璃小瓶内装有一团旋转翻腾的浓密绿色气体，并被加压封存在其中。打碎这支安瓿瓶会释放出其中封存的烟雾，使暴露于其中的人受到令人丧胆且窒息的影响。</p>"
+      },
+      "actions": {
+        "chokingAmpoule": {
+          "name": "窒息安瓿 Ampoule",
+          "description": "<p>你投掷@ref[name]，其即时效果是<strong>无害</strong>的，但会使 8 尺半径<strong>爆发</strong>范围内所有未能以其<strong>坚韧</strong>抗拒此次攻击的敌人陷入@Condition[poisoned]状态。</p><p>该气体会对<strong>士气</strong>造成毒素伤害，数值取决于@ref[name]的品质。若获得重大成功，受影响的目标还会在持续时间内同时陷入@Condition[silenced]状态。</p><ul><li><p><strong>粗制</strong> - 3 轮内造成 2 点伤害</p></li><li><p><strong>标准</strong> - 3 轮内造成 6 点伤害</p></li><li><p><strong>精良</strong> - 3 轮内造成 12 点伤害</p></li><li><p><strong>优异</strong> - 3 轮内造成 20 点伤害</p></li><li><p><strong>大师级</strong> - 3 轮内造成 30 点伤害</p></li></ul>",
+          "effects": [
+            {}
+          ]
+        }
+      }
+    },
+    "Claw Hammer": {
+      "name": "爪锤 Hammer",
+      "description": {
+        "public": "<p>爪锤看似只是种朴素的工具，带有平坦的敲击面和弯曲的爪部，但到了意志坚定者手中，也能成为凶悍的武器。</p>"
+      }
+    },
+    "Claws": {
+      "name": "爪 Claws",
+      "description": {
+        "public": "<p>如同第二副利爪般戴在手上，爪类武器——无论是钢制延伸物还是骨铸的怪物——都能以凶狠而迅疾的挥击撕裂切割。</p>"
+      }
+    },
+    "Cloak": {
+      "name": "斗篷 Cloak",
+      "description": {
+        "public": "<p>一件用原色羊毛制成的简单旅行斗篷。</p>",
+        "private": "<p>这是一个基础饰品模板，用于进行品质升级以及附魔。</p>"
+      }
+    },
+    "Cloak of Kindly Visage": {
+      "name": "慈颜斗篷 Visage",
+      "description": {
+        "public": "<blockquote><p>一件毫不起眼的黑色斗篷，看起来几乎能与任何装束相配。</p></blockquote><p>这件附魔斗篷为<strong>外交</strong>技能检定提供附魔加值，并赋予穿戴者伪装出虚幻<strong>和善面容</strong>的能力。</p>",
+        "private": "<p>此物品作为一个精制斗篷的示例呈现，带有 @UUID[Compendium.crucible.affixes.ActiveEffect.diplomacySkill00]{外交} 前缀和 @UUID[Compendium.crucible.affixes.ActiveEffect.disguise00000000]{伪装} 后缀。</p>"
+      }
+    },
+    "Club": {
+      "name": "棍棒 Club",
+      "description": {
+        "public": "<p>棍棒是一种粗陋却有效的武器，是一段用于砸碎而非切割的钝木或骨制器具。即使在未受训的战士手中，它也能成为危险的武器。</p>"
+      }
+    },
+    "Common Clothing": {
+      "name": "普通服装 Clothing",
+      "description": {
+        "public": "<p>一件衬衫、一条裤子、内衣、袜子，以及适合粗活劳动或旅行穿着的鞋子或靴子。</p>"
+      }
+    },
+    "Cooking Oil": {
+      "name": "食用油 Oil",
+      "description": {
+        "public": "<p>一个用皮革包裹的玻璃或陶土瓶，内装适合用于烹饪的植物油。</p>"
+      }
+    },
+    "Cook's Toolkit": {
+      "name": "厨师工具包 Toolkit",
+      "description": {
+        "public": "<p>一口带可固定锅盖的铁锅、一把宽刀，以及可在旅途中收纳于锅内的木制器具，内部还留有空间放置一个皮革材料小袋，用于安全存放谷物、一小瓶食用油、香料或盐，以及其他少量食物。</p>"
+      }
+    },
+    "Crowbar": {
+      "name": "撬棍 Crowbar",
+      "description": {
+        "public": "<p>一根略微弯曲的坚固金属棒，一端带有扁平头部的钩爪。用来施加杠杆力，将一个物体从另一个物体上撬开。</p>"
+      }
+    },
+    "Dagger": {
+      "name": "匕首 Dagger",
+      "description": {
+        "public": "<p>匕首小巧、迅捷且致命，能轻易从肋骨间或护甲的缝隙中滑入；它那凶险的锋刃深受刺客、盗贼以及偏好无声杀戮之人的青睐。</p>"
+      }
+    },
+    "Dart Gun": {
+      "name": "飞镖枪 Gun",
+      "description": {
+        "public": "<p>飞镖枪是一种紧凑的管状武器，设计用于无声地发射小型且常常带毒的投射物，深受刺客、驯兽师和行踪诡秘的炼金术士青睐。</p>"
+      }
+    },
+    "Disarming Toolkit": {
+      "name": "解除武装工具包 Toolkit",
+      "description": {
+        "public": "<p>一个小皮革小袋，里面装有一套钳子、剪钳、锥子，以及一组可拧接在一起的可折叠金属杆。其设计用途是用于解除或触发圈套、绊线、压力板以及其他常见陷阱。</p>"
+      }
+    },
+    "Dress Clothing": {
+      "name": "礼服服装 礼服 Clothing",
+      "description": {
+        "public": "<p>一套庄严华贵的精美礼服，适合出席庆典和上流社会活动，包括一件外套或连衣裙、一条领巾或领带、一件精致衬衫或紧身胸衣、一件马甲或女式紧身上衣、长裤或衬裙、腰带或背带、长袜以及精美鞋履。</p>"
+      }
+    },
+    "Enchanter's Portable Workbench": {
+      "name": "附魔师便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一个可折叠的木盒，可以展开成一座小型装饰祭坛。内含一个石制供碗、一块用于覆盖工作台面的皮垫，以及用于存放附魔棒、仪式蜡烛、熏香包和雕刻工具的空间。</p>"
+      }
+    },
+    "Enchanter's Toolkit": {
+      "name": "附魔师工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订的木制工具包。内含仪式用蜡烛、一个小型供奉碗、熏香包和粉末状试剂，以及一块可用作工作台面的布垫。</p>"
+      }
+    },
+    "Expanded Toolbelt": {
+      "name": "扩展工具腰带 Toolbelt",
+      "description": {
+        "public": "<p>一种扩展工具带，其形式可以是公用腰带、斜挎弹带，或缝制在你的装备上的一组口袋。</p><p>该物品会根据其品质阶级提供若干额外的工具带槽位：</p><ul><li><p><strong>标准</strong>：+1 工具带槽位</p></li><li><p><strong>精良</strong>：+2 工具带槽位</p></li><li><p><strong>优异</strong>：+3 工工具带槽位</p></li><li><p><strong>大师工艺</strong>：+4 工具带槽位</p></li></ul>"
+      }
+    },
+    "Firestarter": {
+      "name": "点火器 Firestarter",
+      "description": {
+        "public": "<p>一个小巧的蜡制皮革小袋，内装干燥的植物纤维碎屑和木刨花，里面还有一个小扣件，用于固定一块燧石，以及一个钢制击火环，用于生火。</p>"
+      }
+    },
+    "Fishing Pole": {
+      "name": "钓竿 Pole",
+      "description": {
+        "public": "<p>一根可折叠的木杆，配有金属环和一个用于连接钓线的支架。可轻松放入背包内或系在背包旁。</p>"
+      }
+    },
+    "Flame Staff": {
+      "name": "火焰木杖 Staff",
+      "description": {
+        "public": "<p>这根法师法杖是一件护符，可辅助施法，或向敌人投掷成股的奥术火焰。</p>"
+      }
+    },
+    "Fletcher's Toolkit": {
+      "name": "制箭师工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订、末端可密封的箭袋，内含一个可固定的夹具、辐刀、刷子和一个用于缠绕编织细绳的小型绕线器。若将其解开，它会展开成一张垫子，可用作平整的工作表面。</p>"
+      }
+    },
+    "Glaive": {
+      "name": "长柄刀 Glaive",
+      "description": {
+        "public": "<p>长柄刀是一种长柄武器，其末端装有弯曲如剑的刀刃，挥舞时能以宽阔的弧形打击横扫敌人。</p>"
+      }
+    },
+    "Glue": {
+      "name": "胶水 Glue",
+      "description": {
+        "public": "<p>一小瓶普通的动物胶水。</p>"
+      }
+    },
+    "Glyphweaver's Portable Workbench": {
+      "name": "符文织匠便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一个可折叠的木箱，可以展开成一张小型工作台，作为制作雕文的工作表面。内含雕刻凿和锥子、一把宝石匠锤、装饰性皮垫，以及用于存放雕文和其他仪式材料的空间。</p>"
+      }
+    },
+    "Glyphweaver's Toolkit": {
+      "name": "符文织匠工具包 Toolkit",
+      "description": {
+        "public": "<p>一个用皮革装订的木制工具包。内含雕刻凿和锥子、一把宝石匠锤子、一张装饰性皮革垫，以及用于存放符文和其他仪式材料的空间。</p>"
+      }
+    },
+    "Grapnel": {
+      "name": "抓钩 Grapnel",
+      "description": {
+        "public": "<p>一种简单的钢制双爪或四爪钩，设计用于配合绳索或锁链使用，将绳索固定在木质结构上。</p>"
+      }
+    },
+    "Great Hammer": {
+      "name": "巨锤 Hammer",
+      "description": {
+        "public": "<p>这种双手持用的巨型武器有着巨大的铁制或石制锤头，每一次雷霆万钧的重击都能同样粉碎护甲、骨头与意志。</p>"
+      }
+    },
+    "Greataxe": {
+      "name": "巨斧 Greataxe",
+      "description": {
+        "public": "<p>巨斧是一种高大的武器，拥有宽阔、通常为双刃的斧头，专为施展毁灭性的顺劈而打造，能以可怕的力量劈砍人类与野兽。</p>"
+      }
+    },
+    "Greatclub": {
+      "name": "巨棒 Greatclub",
+      "description": {
+        "public": "<p>巨棒是一段粗糙扭曲的重型木材，有时还镶有铁钉；这是一种简陋却可怖的武器，即使在未受训者手中也同样危险。</p>"
+      }
+    },
+    "Greatsword": {
+      "name": "巨剑 Greatsword",
+      "description": {
+        "public": "<p>巨剑比标准长剑更长也更重，是一种双手持用的刀刃武器，专为强力的横扫打击而设计；其长度既带来延伸，也令人心生敬畏。</p>"
+      }
+    },
+    "Grimoire": {
+      "name": "魔典 Grimoire",
+      "description": {
+        "public": "<p>这本重型巨著既可作为知识的储存载体，也可用作施法法器。在奥术施法者手中，它能够向目标投射出震荡性的力场冲击。</p>"
+      }
+    },
+    "Hacksaw": {
+      "name": "钢锯 Hacksaw",
+      "description": {
+        "public": "<p>一种用于切割金属的常见手工具。</p>"
+      }
+    },
+    "Halberd": {
+      "name": "戟 Halberd",
+      "description": {
+        "public": "<p>将斧刃、矛尖和钩结合在一根长杆上，戟是一种多用武器，能够刺击、劈砍，或钩住武器以发动反击。</p>"
+      }
+    },
+    "Hammer": {
+      "name": "锤 Hammer",
+      "description": {
+        "public": "<p>一种常见的手工具，用于木工或金属加工。并非为战斗而设计。</p>"
+      }
+    },
+    "Hand Axe": {
+      "name": "手斧 Axe",
+      "description": {
+        "public": "<p>紧凑而致命，手斧是一种单手砍斫武器，斧柄短、刃口锋利，非常适合投掷或在近距离打击中使用，在这种情况下速度胜过延伸。</p>"
+      }
+    },
+    "Hand Crossbow": {
+      "name": "手弩 Crossbow",
+      "description": {
+        "public": "<p>这把手掌大小的十字弓以牺牲威力换取隐蔽性，非常适合近距离的突然射击，或是走投无路的游荡者射出的最后一支弩箭。</p>"
+      }
+    },
+    "Handmirror": {
+      "name": "手镜 Handmirror",
+      "description": {
+        "public": "<p>一块简单的手持抛光玻璃，背面有反光金属层，可用来照见自己的倒影。</p>"
+      }
+    },
+    "Handsaw": {
+      "name": "手锯 Handsaw",
+      "description": {
+        "public": "<p>一种常见的手工工具，用于切割木材。</p>"
+      }
+    },
+    "Harness": {
+      "name": "挽具 Harness",
+      "description": {
+        "public": "<p>一种可调节的皮革与钢制挽具，设计用于贴合人型生物的躯干，可与绳索或锁链一同使用，以辅助攀爬或用于束缚。</p>"
+      }
+    },
+    "Healer's Toolkit": {
+      "name": "治疗者工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革包边的木制医药包。内含绷带、一瓶炼金烈酒、针线，以及各种用于治疗常见疾病和伤势的常用草药与化合物。</p>"
+      }
+    },
+    "Healing Elixir": {
+      "name": "治疗灵药 Elixir",
+      "description": {
+        "public": "<p>这瓶灵药含有一种特殊的炼金配方，能够迅速闭合创伤并改善身体生命。</p>"
+      },
+      "actions": {
+        "healingElixir": {
+          "name": "治疗灵药 Elixir",
+          "description": "<p>立即恢复相当于该灵药<strong>品质</strong>对应数值的<strong>生命值</strong>。</p><ul><li><p><strong>粗劣</strong> - 立即恢复 6 点<strong>生命值</strong>。</p></li><li><p><strong>标准</strong> - 立即恢复 12 点<strong>生命值</strong>。</p></li><li><p><strong>精良</strong> - 立即恢复 24 点<strong>生命值</strong>。</p></li><li><p><strong>卓越</strong> - 立即恢复 48 点<strong>生命值</strong>。</p></li><li><p><strong>大师级</strong> - 立即恢复 96 点<strong>生命值</strong>。</p></li></ul>"
+        }
+      }
+    },
+    "Healing Tonic": {
+      "name": "治疗药剂 Tonic",
+      "description": {
+        "public": "<p>这瓶药水含有一种特殊的炼金配方，能够逐渐愈合创伤并改善身体健康。</p>"
+      },
+      "actions": {
+        "healingTonic": {
+          "name": "治疗药剂 Tonic",
+          "description": "<p>立即，以及在接下来 5 <strong>轮</strong>中每一轮开始时，根据药剂的品质恢复一定数量的<strong>生命值</strong>。</p><ul><li><p><strong>粗制滥造</strong> - 每轮恢复 2 点<strong>生命值</strong></p></li><li><p><strong>标准</strong> - 每轮恢复 4 点<strong>生命值</strong></p></li><li><p><strong>精良</strong> - 每轮恢复 8 点<strong>生命值</strong></p></li><li><p><strong>卓越</strong> - 每轮恢复 16 点<strong>生命值</strong></p></li><li><p><strong>大师级</strong> - 每轮恢复 32 点<strong>生命值</strong></p></li></ul>",
+          "effects": [
+            {
+              "name": "治疗药剂 Tonic"
+            }
+          ]
+        }
+      }
+    },
+    "Heater Shield": {
+      "name": "鸢形盾 Shield",
+      "description": {
+        "public": "<p>鸢形盾因其铁质外形酷似熨斗底板而得名，在防护范围与机动性之间提供了良好的平衡。</p>"
+      }
+    },
+    "Heavy Crossbow": {
+      "name": "重弩 Crossbow",
+      "description": {
+        "public": "<p>这是一种强力的钢臂十字弩，需要用曲柄或杠杆来上弦，能够射出威力惊人的弩矢，足以击穿护甲或将敌人钉在墙上。</p>"
+      }
+    },
+    "Heavy Hides": {
+      "name": "厚重毛皮 Hides",
+      "description": {
+        "public": "<p>这些粗犷的护甲由大型野兽或怪物的坚韧皮革制成，常被猎人和荒野居民穿戴，在野外提供耐用但粗糙的防御。</p>"
+      }
+    },
+    "Helm": {
+      "name": "头盔 Helm",
+      "description": {
+        "public": "<p>一顶由硬化皮革制成的基础开放式头盔。</p>",
+        "private": "<p>这是一个基础饰品模板，用于进行品质升级和带词缀的附魔。</p>"
+      }
+    },
+    "Holy Symbol": {
+      "name": "圣徽 Symbol",
+      "description": {
+        "public": "<p>这件护符是其持用者信仰及其所赋予力量的可见宣示。在战斗中，它可用于向敌人射出一道灼热的辉光光束。</p>",
+        "private": "<p>此护符造成的伤害类型可以调整，以契合其持用者所崇拜的神祇的领域。</p>"
+      }
+    },
+    "Ice Staff": {
+      "name": "寒冰法杖 Staff",
+      "description": {
+        "public": "<p>这根法师法杖是一件护符，可用于辅助施法，或向敌人投掷寒冰冲击。</p>"
+      }
+    },
+    "Incense": {
+      "name": "熏香 Incense",
+      "description": {
+        "public": "<p>由树脂、木粉和花香精油制成的棒状或锥状物，点燃后会散发出香甜气味的烟雾。每包内含 12 个独立单品。</p>"
+      }
+    },
+    "Ink": {
+      "name": "墨水 Ink",
+      "description": {
+        "public": "<p>一小瓶普通的书写墨水。</p>"
+      }
+    },
+    "Javelin": {
+      "name": "标枪 Javelin",
+      "description": {
+        "public": "<p>标枪顶部装有锋利的金属枪头，安装在长杆之上，既足够轻，便于投掷，又足够结实，在近距离作战中依然实用。</p>"
+      }
+    },
+    "Jeweler's Portable Workbench": {
+      "name": "珠宝匠便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一个皮革装订的浅木盒，内含可折叠的砂轮、磨石和抛光石、一把宝石匠锤，以及一块小型钢制铁砧，并留有空间，可在旅行时安全存放当前的加工项目。</p>"
+      }
+    },
+    "Jeweler's Toolkit": {
+      "name": "珠宝匠工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订的木制工具包。内含锉刀、卡尺、一块小磨刀石、抛光剂和抹布，以及各种廉价的镶托。箱子可以完全展开，提供一个平整的工作台面。</p>"
+      }
+    },
+    "Katana": {
+      "name": "武士刀 Katana",
+      "description": {
+        "public": "<p>武士刀以一丝不苟的精度锻造而成，是一柄以折叠钢打造的单刃弧形刀，其致命的优雅映照出持有者的修为。</p>"
+      }
+    },
+    "Katar": {
+      "name": "拳刃 Katar",
+      "description": {
+        "public": "<p>拳刃是一种带有直刃和横向握柄的拳匕，能以凶猛的力量向前突刺，专为以一次直接的刺击穿透护甲与身体而设计。</p>"
+      }
+    },
+    "Kite Shield": {
+      "name": "鸢盾 Shield",
+      "description": {
+        "public": "<p>为提供全身保护而设计得高大且渐收，鸢盾沿持用者身体弯曲，因其出色的覆盖范围与标志性的轮廓而同样受到骑兵与步兵的青睐。</p>"
+      }
+    },
+    "Lantern": {
+      "name": "提灯 Lantern",
+      "description": {
+        "public": "<p>一盏燃油或以魔法照明的提灯，可在20英尺半径内提供明亮光照，并在40英尺半径内提供微光。</p>"
+      }
+    },
+    "Leather Armor": {
+      "name": "皮甲 Armor",
+      "description": {
+        "public": "<p>皮甲由厚实的煮制皮革制成，硬化成甲片或胸甲，提供轻便的保护，非常适合侦察兵、游荡者和轻装的散兵。</p>"
+      }
+    },
+    "Lockpicks": {
+      "name": "开锁工具 Lockpicks",
+      "description": {
+        "public": "<p>一套细长的金属针，末端略带钩状，用于操控锁具的内部机构，另配有一根用于施加扭力的金属杆。在熟练的人手中，这些工具开锁的效果不亚于任何钥匙。</p>"
+      }
+    },
+    "Longbow": {
+      "name": "长弓 Longbow",
+      "description": {
+        "public": "<p>长弓是一种高大的单体弓，往往比拉弓的弓箭手还高；它需要极大的力量和多年的练习才能精通，能将箭矢以致命的力量射过战场。</p>"
+      }
+    },
+    "Longsword": {
+      "name": "长剑 Longsword",
+      "description": {
+        "public": "<p>长剑是一种双刃剑，双手持握以保持平衡并增强力量，通常配有一个大型十字护手，用于招架攻击。</p>"
+      }
+    },
+    "Luminary Band": {
+      "name": "辉耀指环 Band",
+      "description": {
+        "public": "<blockquote><p>一枚雕刻精美的金色戒指，环绕着一颗椭圆形、闪耀的橙色宝石。</p></blockquote><p>这枚附魔戒环会为包含<strong>词缀</strong>的<strong>防御</strong><strong>动作</strong>提供惠骰。</p>",
+        "private": "<p>此物品作为带有 @UUID[Compendium.crucible.affixes.ActiveEffect.luminary00000000]{辉耀} 前缀的优质戒指示例呈现。</p><p>此词缀可应用于任何饰品，而这枚戒指还可以进一步附魔一个第1阶后缀。</p>"
+      }
+    },
+    "Lyre": {
+      "name": "里拉琴 Lyre",
+      "description": {
+        "public": "<p>一种带有弯曲框架的弦乐器。里拉琴是许多游移的吟游诗人或说书人偏爱的乐器，他们用乐曲来增强自己的魔法或演说。</p>"
+      }
+    },
+    "Mace": {
+      "name": "硬头锤 Mace",
+      "description": {
+        "public": "<p>一种单手钝击武器，带有一个通常由金属锻造而成的重型头部，能将其持用者挥动时的动能转化为震碎骨骼的冲击力。</p>"
+      }
+    },
+    "Mealkit": {
+      "name": "餐包 Mealkit",
+      "description": {
+        "public": "<p>一个皮革小袋，内含一个金属杯、盘子、叉子，以及一块用来把它们擦干净的布。</p>"
+      }
+    },
+    "Messenger Coin": {
+      "name": "信使硬币 Coin",
+      "description": {
+        "public": "<p>一枚小巧的黄铜硬币，上面是一张咧嘴大笑的宽脸，还有两只小小的红色石榴石眼睛。硬币上压印着一组特定的西吉尔，将它与另一枚配对硬币连接起来，使两位持有者能够跨越遥远距离进行交流。</p><p>如果你拿着这枚硬币并对它说话，硬币会立刻连接到与之配对的另一枚，并开始大声说话，转述你所说的话以及对方说回来的内容。该连接最多持续1分钟，之后便会中断。每枚硬币每次长休后可使用一次。</p><p>这枚硬币可使用5次，之后其魔法便会消退，变得几乎一文不值。</p>"
+      }
+    },
+    "Net": {
+      "name": "网 Net",
+      "description": {
+        "public": "<p>这些厚实编织的纤维经过加固，可用于战斗，以困住并缠绕即使最危险的敌人，使其陷入易伤。</p>"
+      },
+      "actions": {
+        "net": {
+          "name": "抛网 Net",
+          "description": "<p>被投掷出去的网捕获的目标处于@Condition[restrained]状态，直到其能够脱身。</p>",
+          "effects": [
+            {
+              "name": "网缚 Netted"
+            }
+          ]
+        }
+      }
+    },
+    "Padded Armor": {
+      "name": "衬垫护甲 Armor",
+      "description": {
+        "public": "<p>由填塞碎布或羊毛的绗缝布层构成，衬垫护甲能缓冲身体所受的钝击，并作为较重装备之下的基础层。</p>"
+      }
+    },
+    "Paralytic Vial": {
+      "name": "麻痹小瓶 Vial",
+      "description": {
+        "public": "<p>这个小瓶里装着一种油状液体，其黏稠度明显高于水。它散发出一股刺鼻的气味，引发一种不对劲的感觉。</p>"
+      },
+      "actions": {
+        "paralyticIngest": {
+          "name": "摄入麻痹毒素 Paralytic",
+          "description": "<p>当这种毒素被摄入或以其他方式进入某个生物的血液时，它最初是<strong>无害</strong>的，但目标必须对其<strong>坚韧</strong>进行一次攻击的防御，否则会变为@Condition[paralyzed]。</p><p>持续时间取决于@ref[name]的品质：</p><ul><li><p><strong>粗劣</strong> - 1 轮</p></li><li><p><strong>标准</strong> - 2 轮</p></li><li><p><strong>优良</strong> - 4 轮</p></li><li><p><strong>卓越</strong> - 8 轮</p></li><li><p><strong>大师工艺</strong> - 无限期</p></li></ul><p><em>此动作应在毒药被摄入时使用，而不是在其首次被涂抹时使用。</em></p>",
+          "effects": [
+            {
+              "name": "麻痹毒素 Toxin"
+            }
+          ]
+        },
+        "paralyticApply": {
+          "name": "施加麻痹毒素 Paralytic",
+          "description": "<p>这瓶药剂中的内容物可以加入食物或饮料中，涂抹在刃类武器上，或与某种其他的传递方式结合使用。</p><p><em>此动作会消耗该毒药的可用次数，应在首次施加时使用。</em></p>"
+        }
+      }
+    },
+    "Pen": {
+      "name": "笔 Pen",
+      "description": {
+        "public": "<p>一种抄写员常用的书写工具，可以更换各种笔尖以适应不同的笔画风格。</p>"
+      }
+    },
+    "Perfume": {
+      "name": "香水 Perfume",
+      "description": {
+        "public": "<p>一种温和的精致香油，带有花香气息，旨在用更令人愉悦的嗅觉体验掩盖自然体味。每个小瓶包含20次使用量。</p>"
+      }
+    },
+    "Periapt of Determination": {
+      "name": "决心护符 Determination",
+      "description": {
+        "public": "<blockquote><p>一枚嵌有蓝色宝石的优雅银质护符，在你紧握它时，会让你心中充满坚定之感，仿佛已准备好经受任何挑战。</p></blockquote><p>这枚附魔饰品为<strong>意志</strong>防御提供加值。</p>",
+        "private": "<p>此物品作为带有 @UUID[Compendium.crucible.affixes.ActiveEffect.determination000]{决心} 后缀的精良护符示例展示。</p><p>这个词缀可以应用于任何护符或饰品，并且这个护符还可以进一步附加一个第1阶前缀。</p>"
+      }
+    },
+    "Pickaxe": {
+      "name": "鹤嘴锄 Pickaxe",
+      "description": {
+        "public": "<p>鹤嘴锄是在坚固长柄顶部装有弯月形尖镐的工具，通常用于采矿，但也可在战斗中挥舞，用来施以危险的穿刺打击。</p>"
+      }
+    },
+    "Pistol": {
+      "name": "手枪 Pistol",
+      "description": {
+        "public": "<p>燧发手枪是一种早期的黑火药火器，只能发出一声雷鸣般的射击；它是赌徒偏爱的武器——瞬间便可致命，但在战斗的混乱中装填缓慢。</p>"
+      }
+    },
+    "Plate Mail": {
+      "name": "板甲 Mail",
+      "description": {
+        "public": "<p>个人防护的巅峰之作，板甲以精心贴合的钢板包裹全身，在为受过训练的穿戴者提供近乎完全的保护的同时，仍能保持令人惊叹的机动性。</p>"
+      }
+    },
+    "Poison Vial": {
+      "name": "毒药瓶 Vial",
+      "description": {
+        "public": "<p>这个小瓶中装着浑浊的液体，明显比水更黏稠。它散发出一种令人不安的气味，引发一种不对劲的感觉。</p>"
+      },
+      "actions": {
+        "poisonIngest": {
+          "name": "摄入毒药 Poison",
+          "description": "<p>当这种毒素被摄入或以其他方式进入某个生物的血液时，它起初是<strong>无害</strong>的，但目标必须以其<strong>坚韧</strong>进行一次防御攻击，否则会变为@Condition[poisoned]。</p><p>毒素伤害的数值及其持续时间取决于@ref[name]的品质：</p><ul><li><p><strong>粗劣</strong> - 2点伤害，持续4轮</p></li><li><p><strong>标准</strong> - 4点伤害，持续6轮</p></li><li><p><strong>精良</strong> - 6点伤害，持续8轮</p></li><li><p><strong>优异</strong> - 8点伤害，持续10轮</p></li><li><p><strong>大师工艺</strong> - 10点伤害，持续12轮</p></li></ul><p><em>应在毒药被摄入时使用此动作，而不是在其最初被施用时使用。</em></p>",
+          "effects": [
+            {
+              "name": "中毒 Poisoned"
+            }
+          ]
+        },
+        "poisonApply": {
+          "name": "施加中毒 Poison",
+          "description": "<p>这瓶小瓶中的内容物可以加入食物、饮料中，涂抹在带刃武器上，或与某种替代性的传递机制结合使用。</p><p><em>此动作会消耗该毒药的可用次数，应在其首次施用时使用。</em></p>"
+        }
+      }
+    },
+    "Poisoner's Toolkit": {
+      "name": "毒师工具包 Toolkit",
+      "description": {
+        "public": "<p>一个包裹着皮革的木盒，上面饰有十字针脚，以清楚表明其中装有危险物品。内含一个石制研钵和研杵、若干用于固定塞好瓶塞的毒性材料小瓶的槽位、一把银勺，以及一个可折叠的小型铁架和一个小黄铜锅，用于在火上混合材料。</p>"
+      }
+    },
+    "Primordial Seed": {
+      "name": "原初之种 Seed",
+      "description": {
+        "public": "<p>这种护符深受与大地之力调谐的德鲁伊信徒青睐，能辅助施法，也可在战斗中用来朝敌人喷射一股有毒孢子。</p>"
+      }
+    },
+    "Quarterstaff": {
+      "name": "长棍 Quarterstaff",
+      "description": {
+        "public": "<p>长约六到八英尺的简易木棍，长棍是一种平衡性好得出奇的武器，在受过训练的人手中会十分致命。</p>"
+      }
+    },
+    "Rallying Elixir": {
+      "name": "振奋灵药 Elixir",
+      "description": {
+        "public": "<p>这种药水含有一种特殊的炼金配方，能够迅速强化心智并提升士气。</p>"
+      },
+      "actions": {
+        "rallyingElixir": {
+          "name": "振奋灵药 Elixir",
+          "description": "<p>立即恢复一定数量的<strong>士气</strong>，具体数值取决于该灵药的品质。</p><ul><li><p><strong>粗劣</strong> - 立即恢复 6 点<strong>士气</strong>。</p></li><li><p><strong>标准</strong> - 立即恢复 12 点<strong>士气</strong>。</p></li><li><p><strong>优良</strong> - 立即恢复 24 点<strong>士气</strong>。</p></li><li><p><strong>卓越</strong> - 立即恢复 48 点<strong>士气</strong>。</p></li><li><p><strong>杰作</strong> - 立即恢复 96 点<strong>士气</strong>。</p></li></ul>"
+        }
+      }
+    },
+    "Rallying Tonic": {
+      "name": "振奋补剂 Tonic",
+      "description": {
+        "public": "<p>这瓶药水含有一种专门的炼金配方，能逐步强化心智并提升士气。</p>"
+      },
+      "actions": {
+        "rallyingTonic": {
+          "name": "振奋补剂 Tonic",
+          "description": "<p>立即，并在接下来 5 <strong>轮</strong>中的每一轮开始时，根据药剂的品质恢复一定量的<strong>士气</strong>。</p><ul><li><p><strong>粗制滥造</strong> - 每轮恢复 2 <strong>士气</strong></p></li><li><p><strong>标准</strong> - 每轮恢复 4 <strong>士气</strong></p></li><li><p><strong>精良 </strong>- 每轮恢复 8 <strong>士气 </strong></p></li><li><p><strong>优异</strong> - 每轮恢复 16 <strong>士气</strong></p></li><li><p><strong>大师之作</strong> - 每轮恢复 32 <strong>士气</strong></p></li></ul>",
+          "effects": [
+            {
+              "name": "振奋补剂 Tonic"
+            }
+          ]
+        }
+      }
+    },
+    "Rapier": {
+      "name": "细剑 Rapier",
+      "description": {
+        "public": "<p>细长、纤细且平衡绝佳，细剑是击剑手的首选武器，其针尖般的剑锋非常适合闪电般迅捷的突刺与致命的决斗。</p>"
+      }
+    },
+    "Rations": {
+      "name": "口粮 Rations",
+      "description": {
+        "public": "<p>干面包、坚果、熏制奶酪和肉类，适合作为一顿简陋的餐食，足以维持单人一天的生命。</p>"
+      }
+    },
+    "Razor": {
+      "name": "剃刀 Razor",
+      "description": {
+        "public": "<p>一种特别锋利的刀片，用于剃刮，或在某些情况下用于外科手术。</p>"
+      }
+    },
+    "Repair Kit (smith)": {
+      "name": "修理工具包（铁匠） Repair Kit (smith)",
+      "description": {
+        "public": "<p>一个皮革装订的袋子，内含磨刀石和砂轮、一个小锤子、一个用于熔化金属的小坩埚，以及各种各样的废金属小碎片。可用于修理金属护甲、武器和配件。</p>"
+      }
+    },
+    "Repair Kit (tailor)": {
+      "name": "修理工具包（裁缝） Repair Kit (tailor)",
+      "description": {
+        "public": "<p>一个皮革装订的袋子，内含剪刀、针、编织架，以及各种小块碎布、皮革、线和绳。可用于修理布制和皮制的护甲及配件。</p>"
+      }
+    },
+    "Ring": {
+      "name": "戒指 Ring",
+      "description": {
+        "public": "<p>一枚由普通金属制成的朴素无饰戒指。</p>",
+        "private": "<p>这是一个基础饰品模板，用于进行品质升级以及附魔词缀。</p>"
+      }
+    },
+    "Ring Mail": {
+      "name": "环甲 Mail",
+      "description": {
+        "public": "<p>环甲是在衬垫底层上缝有金属环的护甲，在防护性上不如更重型的锁甲，但作为交换提供了更高的机动性。</p>"
+      }
+    },
+    "Ring of Evasion": {
+      "name": "闪避戒指 Evasion",
+      "description": {
+        "public": "<blockquote><p>这枚饰纹精美的戒指摸起来略微发滑，难以抓牢。拿在手中时，它会几乎难以察觉地轻微震动。</p></blockquote><p>这枚附魔戒指为<strong>闪避</strong>防御提供加值。</p>",
+        "private": "<p>此物品作为带有 @UUID[Compendium.crucible.affixes.ActiveEffect.evasion000000000]{闪避} 后缀的精良戒指示例展示。</p><p>这个词缀可以应用于任何护甲或饰品，而这枚戒指还可以进一步附魔一个第1阶前缀。</p>"
+      }
+    },
+    "Ring of Gliding": {
+      "name": "滑翔戒指 Gliding",
+      "description": {
+        "public": "<blockquote><p>一枚优雅的淡蓝色钢制戒指，金属表面带有螺旋纹路，营造出一种幻象，仿佛它在佩戴者的手指上始终缓慢旋转。</p></blockquote><p>这枚附魔戒指赋予佩戴者在坠落时横向滑翔的能力。</p>",
+        "private": "<p>该物品作为一个带有 @UUID[Compendium.crucible.affixes.ActiveEffect.gliding000000000]{滑翔} 前缀的精良戒指示例呈现。</p><p>该词缀可应用于任何饰品，而这枚戒指还可以进一步附加一个第1阶后缀。</p>"
+      }
+    },
+    "Ring of Reinforcement": {
+      "name": "强化戒指 Reinforcement",
+      "description": {
+        "public": "<blockquote><p>这枚钢制戒指摸起来始终冰凉，而且尽管环身很窄，却给人一种比预想更沉的感觉。</p></blockquote><p>这枚附魔戒指为<strong>护甲</strong>防御提供加值。</p>",
+        "private": "<p>此物品作为一个带有 @UUID[Compendium.crucible.affixes.ActiveEffect.reinforcement000]{强化} 后缀的精良戒指示例呈现。</p><p>这个词缀可以应用于任何护甲或饰品，而这枚戒指还可以进一步附魔一个第1阶前缀。</p>"
+      }
+    },
+    "Rope": {
+      "name": "绳索 Rope",
+      "description": {
+        "public": "<p>一段 30 英尺长的植物纤维绳索，可用于辅助攀爬或许多其他用途。</p>"
+      }
+    },
+    "Rope Ladder": {
+      "name": "绳梯 Ladder",
+      "description": {
+        "public": "<p>25英尺长的木条和打结的绳索绑在一起，并卷成一种便于攀爬的装置。固定在一端后，能显著降低攀爬者坠落的几率。</p>"
+      }
+    },
+    "Round Shield": {
+      "name": "圆盾 Shield",
+      "description": {
+        "public": "<p>一种直径近两英尺的圆形金属盾牌，是缺乏盾牌战斗训练的步兵的基本防御装备。</p>"
+      }
+    },
+    "Sai": {
+      "name": "钗 Sai",
+      "description": {
+        "public": "<p>一把形似三叉戟、带有钝头叉齿与尖锐长柄的武器，钗是一种讲求精准与控制的武器，可用于格挡刀刃，并以一闪而过的克制怒意发起打击。</p>"
+      }
+    },
+    "Scale Mail": {
+      "name": "鳞甲 Mail",
+      "description": {
+        "public": "<p>缝缀或铆接在皮革或布料衬底上的重叠金属片，使鳞甲看起来如同巨龙的鳞皮，并能很好地防护劈砍与刺击——不过它很吵，而且不够灵活。</p>"
+      }
+    },
+    "Scimitar": {
+      "name": "弯刀 Scimitar",
+      "description": {
+        "public": "<p>凭借其宽阔的弯曲刀刃与致命的弧线，弯刀在战斗中飞舞，锋刃以大开大阖而优雅的打击划过敌人。</p>"
+      }
+    },
+    "Scrivener's Portable Workbench": {
+      "name": "文书吏便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一个裹着皮革的木盒，比一本普通书籍大不了多少。里面装有书法刷和笔尖、针线，并留有空间将墨水小瓶与折叠的纸张分开存放。打开搭扣后，盒子可以展开，作为平整的书写表面使用。</p>"
+      }
+    },
+    "Scrivener's Toolkit": {
+      "name": "文书吏工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革包边的木制工具包。内有一个涂蜡的文件小袋，用于保持纸张干燥，一包封蜡、几支羽毛笔和墨水，以及一块平整的木板，可用作书写台面。</p>"
+      }
+    },
+    "Shortbow": {
+      "name": "短弓 Shortbow",
+      "description": {
+        "public": "<p>短弓结构紧凑，便于快速拔出，擅长快速的近距离射箭与小规模冲突，深受侦察兵、猎人和行动敏捷的袭击者青睐。</p>"
+      }
+    },
+    "Shortsword": {
+      "name": "短剑 Shortsword",
+      "description": {
+        "public": "<p>短剑是一种直刃武器，挥舞灵活，能在近身战斗中迅速打击。它配有一个十字护手，非常适合招架来袭的攻击。</p>"
+      }
+    },
+    "Shovel": {
+      "name": "铲子 Shovel",
+      "description": {
+        "public": "<p>一种常见的双手持用工具，用于挖掘土壤和石头。</p>"
+      }
+    },
+    "Skull Fetish": {
+      "name": "颅骨护符 Fetish",
+      "description": {
+        "public": "<p>这枚骇人的护符会引动恐惧与死亡的能量，以辅助施法，或以腐化性的影响折磨敌人。</p>"
+      }
+    },
+    "Sling": {
+      "name": "投石索 Sling",
+      "description": {
+        "public": "<p>一种看似简单的绳索或皮带，用于高速投掷石块；投石索是历史上最古老的武器之一——虽然需要技巧，但在训练有素的人手中却极其致命。</p>"
+      }
+    },
+    "Smith's Portable Forge": {
+      "name": "铁匠便携式熔炉 Forge",
+      "description": {
+        "public": "<p>一个厚实的、内衬黏土的密封铁罐，上有一个用于连接手动风箱的孔，以及一个用于放入待加热金属的小开口。配有一套风箱和一个小铁砧。这件重型装置让铁匠在旅途中也能从事他们的手艺，不过搬运它可能需要强健的背力。适合制作大多数常见的金属工具和武器，但不足以胜任高品质的工作。</p>"
+      }
+    },
+    "Smith's Toolkit": {
+      "name": "铁匠工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订的木制工具包。内有锥子、钳子、废金属和一块小铁砧，并留有空间用于存放零碎的废金属。</p>"
+      }
+    },
+    "Soap": {
+      "name": "肥皂 Soap",
+      "description": {
+        "public": "<p>一块用于个人清洁卫生的普通清洁肥皂。每块约可使用20次。</p>"
+      }
+    },
+    "Spear": {
+      "name": "矛 Spear",
+      "description": {
+        "public": "<p>矛是一种兼具延伸与节奏感的武器，配有长柄和钢制矛尖，无论是在盾墙后稳住战线，还是借助致命的力量掷出，都非常合适。</p>"
+      }
+    },
+    "Spell Scroll (Fine)": {
+      "name": "法术卷轴（精制） 法术卷轴 (Fine) Spell Scroll",
+      "description": {
+        "public": "<p>法术卷轴是一种经过特殊处理的犊皮纸或羊皮纸，其上被精心嵌入了一个或多个施法构件的符文。激活这张法术卷轴会暂时赋予其阅读者对这些构件的深刻熟悉感，仿佛他们已经了解了这些构件多年。</p><p>一张卷轴能够容纳的施法构件数量取决于其制作的品质。</p><ul><li><p><strong>精良</strong>：可包含一个施法构件</p></li><li><p><strong>卓越</strong>：可包含两个施法构件</p></li><li><p><strong>杰作</strong>：可包含三个施法构件</p></li></ul>"
+      },
+      "actions": {
+        "readScroll": {
+          "name": "阅读卷轴 Scroll",
+          "description": "<p>阅读此法术卷轴，暂时获得其施法构成的知识，持续10分钟。</p><p>你在任意时刻只能有一个法术卷轴效果处于主动状态。阅读另一张卷轴会替换当前的任何效果。</p>",
+          "effects": [
+            {}
+          ]
+        }
+      }
+    },
+    "Spell Scroll (Masterwork)": {
+      "name": "法术卷轴（大师级） 法术卷轴 (Masterwork) Spell Scroll",
+      "description": {
+        "public": "<p>法术卷轴是一种特制的犊皮纸或羊皮纸，其上精心嵌入了一个或多个施法构件的符文。激活这张法术卷轴会暂时赋予其阅读者对这些构件的深刻熟悉感，仿佛他们已经了解它们多年。</p><p>一张卷轴能够容纳多少个施法构件，取决于其制作的品质。</p><ul><li><p><strong>精良</strong>：可包含一个施法构件</p></li><li><p><strong>优异</strong>：可包含两个施法构件</p></li><li><p><strong>大师级</strong>：可包含三个施法构件</p></li></ul>"
+      },
+      "actions": {
+        "readScroll": {
+          "name": "阅读卷轴 Scroll",
+          "description": "<p>阅读此法术卷轴，暂时获得其施法成分的知识，持续10分钟。</p><p>你在任意时刻只能有一个法术卷轴效果处于主动状态。阅读不同的卷轴会替换当前的任何效果。</p>",
+          "effects": [
+            {}
+          ]
+        }
+      }
+    },
+    "Spell Scroll (Superior)": {
+      "name": "法术卷轴（上级） 法术卷轴 (Superior) Spell Scroll",
+      "description": {
+        "public": "<p>法术卷轴是一种专门制作的犊皮纸或羊皮纸，其上被精心嵌入了一个或多个施法构件的符文。激活这张法术卷轴会暂时赋予阅读者对这些构件的深刻熟悉感，仿佛他们已经了解多年。</p><p>一张卷轴能够容纳多少个施法构件，取决于其制作的品质。</p><ul><li><p><strong>精良</strong>：可包含一个施法构件</p></li><li><p><strong>卓越</strong>：可包含两个施法构件</p></li><li><p><strong>精制</strong>：可包含三个施法构件</p></li></ul>"
+      },
+      "actions": {
+        "readScroll": {
+          "name": "阅读卷轴 Scroll",
+          "description": "<p>阅读这张法术卷轴，暂时获得其施法构成的知识，持续10分钟。</p><p>你在同一时间只能有一个法术卷轴效果处于主动状态。阅读另一张卷轴会替换当前的任何效果。</p>",
+          "effects": [
+            {}
+          ]
+        }
+      }
+    },
+    "Spellband": {
+      "name": "法术带 Spellband",
+      "description": {
+        "public": "<blockquote><p>这枚戒指由一块不透明的石料制成，经过精心雕琢，呈现出优雅而流畅的层次，唤起一种古老的美感。对于<strong>注入</strong>了它的佩戴者而言，这枚戒指可作为强力的施法专注。</p></blockquote><p>这枚附魔戒指赋予佩戴者在危急时刻汲取额外<strong>专注</strong>储备的能力。</p>",
+        "private": "<p>此物品作为一个带有 @UUID[Compendium.crucible.affixes.ActiveEffect.focusing00000000]{保留专注} 前缀的精良戒指示例展示。</p><p>该词缀可应用于任何饰品，而这枚戒指还可以进一步附魔一个第1阶后缀。</p>"
+      }
+    },
+    "Spiked Greatclub": {
+      "name": "带钉巨棒 Greatclub",
+      "description": {
+        "public": "<p>这段粗糙扭曲的重型木材上嵌有凶恶的凸出尖刺，使其在攻击时更加骇人而凶暴，但代价是多余的体积。</p>"
+      }
+    },
+    "Spiked Knuckles": {
+      "name": "带刺指虎 Knuckles",
+      "description": {
+        "public": "<p>带刺指虎是拳部武器与穿刺工具的残暴结合，让每一次重拳都化为致残一击，极其适合那些想让双拳带来流血与恐惧的斗殴者。</p>"
+      }
+    },
+    "Splint Mail": {
+      "name": "板条甲 Mail",
+      "description": {
+        "public": "<p>一层垂直的金属条铆接在皮革或链甲衬底上，条甲护甲在牺牲一定灵活性的同时，为四肢提供了强大的保护。</p>"
+      }
+    },
+    "Spyglass": {
+      "name": "望远镜 Spyglass",
+      "description": {
+        "public": "<p>一架由黄铜和木材制成的手持望远镜，配有高度抛光的玻璃镜片。用于放大远处的景象。</p>"
+      }
+    },
+    "Steel-Jaw Trap": {
+      "name": "钢颚陷阱 Trap",
+      "description": {
+        "public": "<p>一种特别残忍且锋利的机械陷阱，旨在使毫无防备者无法动弹并将其杀死。当生物踩到中央的压力板时，一个锯齿状的钢环会猛然闭合</p>"
+      },
+      "actions": {
+        "steelJawArm": {
+          "name": "设置钢颚陷阱 Trap",
+          "description": "<p>设置这个陷阱会放置一个危险的隐患；若被触发，会造成大量伤害。它必须用重型锁链固定在一个不可移动的物体上，例如树木或钉入地面的尖桩。陷阱的区域是一个半径为 2 英尺的圆。</p>"
+        },
+        "steelJawTrigger": {
+          "name": "触发钢颚陷阱 Trap",
+          "description": "<p>当被触发时，设置陷阱的生物对触发陷阱的单一目标进行一次<strong>荒野</strong>技能攻击，对抗其<strong>反射</strong><strong>防御</strong>。若未被抵抗，则造成穿刺伤害并施加 @Condition[restrained] 状态。陷阱造成的基础伤害根据陷阱的品质而变化。</p><ul><li><p><strong>粗制</strong> - 1 伤害</p></li><li><p><strong>标准</strong> - 2 伤害</p></li><li><p><strong>精制</strong> - 4 伤害</p></li><li><p><strong>优质</strong> - 8 伤害</p></li><li><p><strong>大师级</strong> - 16 伤害</p></li></ul>",
+          "effects": [
+            {
+              "name": "钢颚陷阱 Trap"
+            }
+          ]
+        }
+      }
+    },
+    "Stiletto": {
+      "name": "细剑 Stiletto",
+      "description": {
+        "public": "<p>细长、尖削，并为穿刺而制，细剑是杀手的武器——专为从肋骨之间或护甲的缝隙中滑入而设计，几乎不留痕迹。</p>"
+      }
+    },
+    "Studded Leather Armor": {
+      "name": "镶钉皮甲 Armor",
+      "description": {
+        "public": "<p>以皮革为基础，并用小型金属饰钉或铆接金属片加固，这种护甲在机动性与对劈砍伤害的适度保护之间取得了平衡。</p>"
+      }
+    },
+    "Tailor's Portable Workbench": {
+      "name": "裁缝便携式工作台 Workbench",
+      "description": {
+        "public": "<p>一个皮革装订的浅木盒，内含线轴、合适的针和别针、一把剥皮刀、钩刀、冲子、锥子，以及适合在旅途中处理布料和皮革的烙印工具。打开后，可折叠成一个平坦的工作台。</p>"
+      }
+    },
+    "Tailor's Toolkit": {
+      "name": "裁缝工具包 Toolkit",
+      "description": {
+        "public": "<p>一个皮革装订的木制工具包，内含线轴、合适的针和别针、剥皮刀、锥子，适合加工布料和皮革。</p>"
+      }
+    },
+    "Tent (caravan)": {
+      "name": "帐篷（商队） Tent (caravan)",
+      "description": {
+        "public": "<p>一大块可折叠或可卷起的篷布，用于搭建临时庇护所，最多可容纳十二名 occupants。包含绳索、地钉和六根可折叠的十字支撑杆，必须先将其组装好，才能把篷布撑在上面。</p>"
+      }
+    },
+    "Tent (large)": {
+      "name": "帐篷（大型） Tent (large)",
+      "description": {
+        "public": "<p>一大块可折叠或可卷起的篷布，用于搭建临时庇护所，最多可容纳六人。包括绳索、地钉和用于中央的可折叠支撑杆。</p>"
+      }
+    },
+    "Tent (small)": {
+      "name": "帐篷（小型） Tent (small)",
+      "description": {
+        "public": "<p>一种可折叠或可卷起的篷布，用于搭建临时庇护所，适合一到两名使用者。包括绳索、地钉和一个用于其中央的可折叠横撑。</p>"
+      }
+    },
+    "Torch": {
+      "name": "火把 Torch",
+      "description": {
+        "public": "<p>将浸满油的层状材料固定在骨头或其他不可燃材料制成的杆子末端，构成一种廉价但效率不高的临时光源。每支火把可燃烧一小时，之后便无法再使用。</p>"
+      }
+    },
+    "Tower Shield": {
+      "name": "塔盾 Shield",
+      "description": {
+        "public": "<p>塔盾是一面巨大、长方形的木质与金属壁垒，使其持用者化身为行走的堡垒，非常适合把守狭窄通道——但代价是速度与视野都会受限。</p>"
+      }
+    },
+    "Travel Jug": {
+      "name": "旅行水壶 Jug",
+      "description": {
+        "public": "<p>一个带塞子的陶制水壶，外面包裹着皮革，可固定在腰带上或挂在背包外侧，便于取用。可装 40 盎司液体。</p>"
+      }
+    },
+    "War Hammer": {
+      "name": "战锤 Hammer",
+      "description": {
+        "public": "<p>战锤专为击碎板甲、砸裂盾牌而打造，配有沉重的钝头，安装在加固的长柄顶端，在那些崇尚力量胜于灵巧之人的手中带来毁灭。</p>"
+      }
+    },
+    "War Lance": {
+      "name": "战枪 Lance",
+      "description": {
+        "public": "<p>战枪专为骑乘战斗而设计，是一种细长、逐渐收尖的武器，借助冲锋坐骑的冲势击碎护甲，其枪杆经过加固，能够造成毁灭性的冲击。</p>"
+      }
+    },
+    "Weather Clothing": {
+      "name": "御寒服装 Clothing",
+      "description": {
+        "public": "<p>一套用于保护穿戴者免受恶劣天气影响的服装，例如极端温度、风或湿气。</p>"
+      }
+    },
+    "Wetskin": {
+      "name": "水囊 Wetskin",
+      "description": {
+        "public": "<p>一个包裹皮革的囊袋，可固定在腰带上或背包外侧，便于取用。可容纳 26 盎司液体。</p>"
+      }
+    },
+    "Whistle": {
+      "name": "口哨 Whistle",
+      "description": {
+        "public": "<p>一种由雕刻木材或骨头制成的器具，向其中吹气时会发出一种尖锐的单一声音，能够在很远的距离外被听见。常被猎人和渔夫用来在荒野中或海上彼此发出信号。</p>"
+      }
+    }
+  }
+}

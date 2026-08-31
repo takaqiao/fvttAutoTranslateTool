@@ -1,0 +1,2522 @@
+{
+    "entries": {
+        "Magnegor": {
+            "name": "磁牛 Magnegor",
+            "items": {
+                "Metal Allergy": {
+                    "name": "金属过敏 Metal Allergy",
+                    "description": "<p>当磁牛受到金属武器或具有金特征的效果造成的伤害时，它会额外受到@Damage[5[untyped]]伤害，并且必须进行一次@Check[flat|dc:5]检定。如果检定失败，它将陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。每次磁牛未能通过此类检定时，恶心状态值都会增加，最高可达恶心3。</p>"
+                },
+                "Excavating Spines": {
+                    "name": "开掘沟渠 Excavating Spines",
+                    "description": "<p>磁牛在经过的任何方格中，会无意中挖掘出一个深10尺的连续沟渠，只要该空间的地面不是由石头、岩石或其他过于坚硬的表面构成。该沟渠被视为高等困难地形。在GM的裁定下，任何被挖掘出的方格可能会发现一个充满金属矿石的沉积岩矿床，该矿床具有7的硬度和28的生命值。</p>"
+                },
+                "Wallow": {
+                    "name": "打滚 Wallow",
+                    "description": "<p><strong>需求</strong> 磁牛处于@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]状态</p>\n<hr />\n<p><strong>效果</strong> 磁牛用长满尖刺的背部在地上滚动，至多以满速移动，犁地并碾碎路径上的任何大型或更小的生物。这会造成@Damage[4d10[piercing]]伤害，@Check[reflex|dc:24|basic]豁免；如果豁免失败，穿戴金属盔甲或由金属构成的生物会被磁牛的磁化外衣@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]（[[/act escape dc=24]]）。每当被束缚的生物选择将一个金属物品或装备留在磁牛身上时，它在逃脱尝试中会获得+1环境加值。如果生物放弃了所有金属物品，则自动逃脱成功。磁牛在以这种方式束缚生物时，可以以全速移动，并将该生物带着一同移动。</p>"
+                },
+                "Magnetized Coat": {
+                    "name": "磁化外衣 Magnetized Coat",
+                    "description": "<p>当磁牛靠近30尺范围内的金属物体或金属矿床时，它数千根细长的毛发会竖起来，指向金属并产生磁场。负载为轻或忽略不计的金属物品接触到磁牛的外衣时，会被磁性吸附，需要一个交互动作才能将其取下。主要由金属构成或穿戴金属装备的生物在磁牛周围10尺半径内的所有方格都被视为困难地形，除非它们正朝磁牛移动。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "磁牛"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>磁牛在格拉利昂的山脉中游荡，以野生浆果、可食用的根茎和其他喜欢富铁土壤和高海拔的植物为食。这些笨重的、毛茸茸的牛类动物有四只弯曲的角——两只从耳后延伸，另两只从下颚延伸，形成一个X形框架。它们的身体覆盖着厚重的、质地类似铜线的缠绕毛发，只有由密集且几乎不可摧毁的角蛋白构成的巨大神经棘可以将其分开。</p>\n<p>磁牛展示了通过它们的皮毛和神经棘操控磁场的独特能力，并且有一种奇怪的嗜好，喜欢反复在金属和珍贵矿石上滚动以将其压碎。因此，误闯入磁牛群中的冒险者很少能活着出来。</p>"
+        },
+        "Stonefish": {
+            "prototypeToken": {
+                "name": "石头鱼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "石头鱼 Stonefish",
+            "publicNotes": "<p>石头鱼利用其卓越的伪装能力等待并吞食小猎物，使自己与它们称之为家的珊瑚礁融为一体。较大的生物也不一定能幸免，尽管主要是由于意外接触到石头鱼的刺和它们剧烈的毒液。</p>",
+            "items": {
+                "Stonefish Venom": {
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:16]</p>\n<p><strong>最大持续时间</strong> 3小时</p>\n<p><strong>Stage 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1轮）</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} (10分钟）</p>\n<p><strong>Stage 3</strong> @Damage[3d6[poison]]和笨拙2 (1小时）</p>",
+                    "name": "石头鱼毒液 Stonefish Venom"
+                },
+                "Camouflage": {
+                    "name": "伪装 Camouflage",
+                    "description": "<p>石头鱼即便没有掩蔽，也可以在自然环境中@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]。</p>"
+                },
+                "Defensive Spines": {
+                    "name": "防御性尖刺 Defensive Spines",
+                    "description": "<p>当一个生物进入某个已经有至少一条石头鱼的空间时，生物受到@Damage[1d4[piercing]]伤害，并且暴露于石头鱼毒液的影响。</p>"
+                }
+            }
+        },
+        "Flynkett": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "飞壶兽 Flynkett",
+            "items": {
+                "Glide": {
+                    "name": "滑翔 Glide",
+                    "description": "<p>飞壶兽展开皮瓣来在空中滑翔。它会在空中向下移动5尺并向前移动至多25尺。只要每轮至少花费1个动作来滑翔且还未围成壶状（Kettle Up），飞壶兽就能在空中停留。</p>"
+                },
+                "Kettle Up": {
+                    "name": "围成壶状 Kettle Up",
+                    "description": "<p>飞壶兽用它的皮瓣来围成粗略的壶形。在围成壶状时，飞壶兽无法使用爪子打击或采取移动动作。若飞壶兽在围成壶状中持续了1分钟或更长时间的话，它围成的壶就会装满了水（这通常是因为飞壶兽站在雨中），飞壶兽的壶会开始沸腾，发出刺耳的鸣响，导致30尺内飞壶兽之外的所有生物在源自听觉的察觉检定中承受-2减值；这是个听觉效果。飞壶兽能以自由动作结束围成壶状。</p>"
+                },
+                "Spill": {
+                    "name": "壶液泼洒 Spill",
+                    "description": "<p><strong>需求</strong> 飞壶兽已经围成壶状（Kettle Up）</p>\n<p><strong>触发</strong> 飞壶兽承受物理伤害或者被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]</p><hr /><p><strong>效果</strong> 飞壶兽将皮瓣盛放的全部内容物洒出来，释放其消化液来形成酸性蒸汽云，这会对@Template[emanation|distance:20]内的所有非飞壶兽生物造成@Damage[2d8[acid]|options:area-damage]伤害（@Check[fortitude|dc:18|basic|options:area-effect]豁免）。若飞壶兽的壶已沸腾，伤害会增加至4d8。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "飞壶兽"
+            },
+            "publicNotes": "<p>在严酷的雨林中，经常可以听到飞壶兽那尖锐的鸣叫声，当它与族群中其他同类的鸣叫声结合在一起时，便会产生不和谐的尖锐鸣响。尽管这些尖锐叫声通常能有效第警告周遭的捕食者，但这种声音同样也会吸引那些渴望研究该生物的强效生物酶的鲁莽炼金术士。</p>\n<p>关于飞壶兽的名字，最理论化的说法是“抛掷的壶”或“飞行的壶”的变体。它们并不能真正地飞行，而是使用自身的皮瓣来用类似飞鼠的方式来滑翔。然而，它们的皮瓣的主要用途是消化，而非移动。在下雨时，飞壶兽会卷起它们那松散的外皮，制成粗略的近似水壶的形状来收集雨水。这种奇异生物的酸液与降下的雨水相结合，可以将木材、土壤、或者甚至岩石分解为含有营养的炖菜。因此，当飞壶兽被引入到任何频繁降雨、具有某种坚固支撑物、并且缺乏天敌的环境中时，它们的种群就能茁壮成长。</p>\n<p>尽管在不伤害飞壶兽的情况下就可以收集它们的酸液，但这些生物很少会乖乖配合。在被打扰，尤其是在进食期间时，它们会释放出酸性蒸汽云。飞壶兽还能以致命的准确度喷吐酸液。对于那些与飞壶兽发生冲突的人来说值得庆幸的是，尸体对飞壶兽来说没什么用，因此在闯入者离开它们的领地时，它们通常就会停止追击。</p>\n<p>少数组织和独立学者不顾一切地想要试图驯化飞壶兽，从而将它们用于炼金生产。但截止目前为止，这些努力都没有成功，而且几处废弃的实验室内仍旧住着一群好斗的飞壶兽，它们会以极强的韧性保护自己的新领地。</p>"
+        },
+        "Giant Fangtooth": {
+            "prototypeToken": {
+                "name": "巨尖牙鱼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "巨尖牙鱼 Giant Fangtooth",
+            "items": {
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(2d8)[piercing]], @Check[fortitude|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                },
+                "Deep Puncture": {
+                    "name": "深度穿刺 Deep Puncture",
+                    "description": "<p>被尖牙鱼噬咬命中并受到重击的生物会额外承受1d8点持续流血伤害。</p>"
+                },
+                "Sunless Sight": {
+                    "name": "无光视觉 Sunless Sight",
+                    "description": "<p>当在明亮光照下时，尖牙鱼陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                }
+            },
+            "publicNotes": "<p>这种生物标志性的大牙齿只需咬一口，就可以在几分钟内导致失血死亡；更糟糕的是，巨尖牙鱼愿意攻击比自己大得多的生物。</p>"
+        },
+        "Stargut Hydra": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "星腑多头蛇 Stargut Hydra",
+            "hp": "多头蛇再生",
+            "ac": "全域视野",
+            "items": {
+                "Skymetal Metamorphosis": {
+                    "name": "天金蜕变 Skymetal Metamorphosis",
+                    "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.Bds5RP9grJxhZALW]{精金 Adamantine}</strong> 星腑多头蛇的打击能绕开硬度，并视作为精金。星腑多头蛇获得对物理伤害的抗力10（精金除外）。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.lFRU108HnGlnMwqS]{渊铀Abysium}</strong> （灵光，毒素） 星腑多头蛇以体内的渊铀发出令人作呕辐射的灵光。任何在星腑多头蛇30尺内开始回合的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.N4l6y6v9pKy8Nj5i]{血汞 Djezet}</strong> （魔法） 星腑多头蛇对抗魔法时豁免获得+1状态加值。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.5bRdhgghjtWF1Vuu]{虚铅 Inubrix}</strong> 星腑多头蛇的打击忽视金属护甲的护甲专精效果带来的伤害抗力，且不会触发盾牌格挡反应动作，或是来自护甲性能符文的反应动作。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.sTlptNnUX2eA0DIH]{零晶 Noqual}</strong> 星腑多头蛇的打击和能力对有能力施放法术的生物造成的伤害获得+2状态加值。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.6Z0v9Tsthm9hyzb3]{山铜 Orichalcum}</strong> 当星腑多头蛇只剩下两颗头时，它会获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态。它只能用此额外动作进行行走或打击。</p>\n<p><strong>@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.SXJRjw4R8m7NPDGc]{漠石 Siccatite}</strong> 星腑多头蛇受到火焰伤害时，它会变得过热，获得免疫火焰，以及对寒冷的弱点10。在处于过热时，寒冷伤害可以用于灼烧断颈。在星腑多头蛇受到寒冷伤害后，它会变得冰冷，获得免疫寒冷，以及对火焰的弱点10。</p>"
+                },
+                "Head Regrowth": {
+                    "description": "<p>星腑多头蛇初始拥有五颗头。生物可以专门将头作为目标并造成等同于头部生命值的伤害，来切断多头蛇的一颗头。任何生物的回合结束时，未被完全切断的头部都将恢复全部生命值。多头蛇可以使用多头蛇再生能力使被切断的头部重新长出。生物可以通过对断颈造成酸蚀或火焰伤害，灼烧它来阻止其重生。对于单目标的酸蚀或火焰效果必须指定灼烧某个特定的断颈，但溅射伤害或影响整个多头蛇占据空间的酸蚀或火焰效果能对所有断颈进行灼烧。如果切断头部的攻击造成任意酸蚀或火焰伤害，则断颈立即被灼烧。如果五颗头都被灼烧，则多头蛇会死亡。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uZJOdounIHaFDC1t]{效果：多头}</p>",
+                    "name": "头部重生 Head Regrowth"
+                },
+                "Reactive Heads": {
+                    "name": "多头反应 Reactive Heads",
+                    "description": "<p>星腑多头蛇除第一个头外，每多一个头，都能获得一个额外的反应动作，但只能用此反应动作进行反应打击。多头蛇针对同一个触发动作只能使用一次反应动作，即便一个生物在它的触及范围离开多个方格，并且每次反应打击都必须使用不同的头部。每当多头蛇被砍掉一个头，它每轮就失去一个额外的反应动作。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "All-Around Vision": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>",
+                    "name": "全域视野 All-Around Vision"
+                },
+                "Hydra Regeneration": {
+                    "name": "多头蛇再生 Hydra Regeneration",
+                    "description": "<p>星腑多头蛇拥有等同于3×头部数量的再生。如果多头蛇的身体失去了任意头颅并且余下的断颈还没有被灼烧，多头蛇可以通过再生能力恢复生命值之后尝试一次@Check[fortitude|immutable:true|dc:29]检定。如果成功，一个未被灼烧的断颈重新长出两颗头；如果大成功，两个未被灼烧的断颈分别各自长出两颗头。多头蛇长出的头的数量无法超过原本头数量的两倍。多头蛇的再生能力只有在它所有头都被砍断、所有断颈都被灼烧的情况下才会完全失效，此时它会死亡。</p>"
+                },
+                "Stargut Hydra Heads": {
+                    "name": "星腑多头蛇之头 Stargut Hydra Heads",
+                    "description": "<p><strong>HP</strong> （头）22，头部重生</p>\n<p><strong>免疫</strong> 区域伤害</p>\n<p><strong>弱点</strong> 挥砍10</p>"
+                },
+                "Vomit Meteorites": {
+                    "name": "喷吐陨石 Vomit Meteorites",
+                    "description": "<p>星腑多头蛇摇摆整具身体，朝@Template[cone|distance:30]范围喷吐陨石块，对区域内所有生物造成@Damage[5d6[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:25|basic|options:area-effect]豁免）。区域内成为困难地形，持续1分钟，不过生物可以使用一个交互动作来清理一格的碎石。星腑多头蛇在[[/gmr 1d4 #Recharge Vomit Meteorites]]{1d4轮}内无法再次使用喷吐陨石。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "星腑多头蛇"
+            },
+            "publicNotes": "<p>最常见的多头蛇出了名的有五颗头，它用五颗头一起攻击猎物或攻击者。有更多奇特的多头蛇品种散布在内海地区，每种多头蛇都有自己奇特的进化过程和狩猎行为。</p><hr /><p>虽然多头蛇是天然的肉食性动物，但其适应性强的特性导致了多头蛇物种和其偏好食物的有趣分化。有机猎物匮乏的钮梅利亚的多头蛇种群已经发展出消化石头和金属合金的能力。那些找到了天金矿脉的多头蛇可能会永远被其特性所改变，从而产生各种潜在的变异。由于天金是钮梅利亚社会的基石，因此人们对待星腑九头蛇的态度就像农民对待玉米象鼻虫群那样。黑君科沃斯-库为杀死星腑多头蛇的人提供了可观的赏金，此外还会购买从它们胃里挖出的任何矿石。</p>"
+        },
+        "Protoceratops": {
+            "prototypeToken": {
+                "name": "原角龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "原角龙 Protoceratops",
+            "items": {
+                "Frill Block": {
+                    "name": "壳皱格挡 Frill Block",
+                    "description": "<p><strong>需求</strong> 原角龙处于防御姿态</p>\n<p><strong>触发</strong> 一个相邻盟友将要受到物理伤害</p><hr /><p><strong>效果</strong> 原角龙用壳皱部分挡下攻击，减少5点伤害。</p>"
+                },
+                "Defensive Posture": {
+                    "name": "防御姿态 Defensive Posture",
+                    "description": "<p>原角龙收紧头部，露出坚固的壳皱，赋予相邻盟友AC+1环境加值。原角龙保持防御姿态直到其下回合开始，但只有在盟友保持相邻时才会赋予加值。</p>"
+                }
+            },
+            "publicNotes": "<p>虽然原角龙没有像它更大的亲戚三角龙那样独特的角，但它在战斗中却游刃有余，它能用尾巴将敌人击倒在地，并用坚固的壳皱挡住攻击。</p>"
+        },
+        "Rumindrol": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "锐鸣蜈蚣 Rumindrol",
+            "items": {
+                "Dreadful Resonance": {
+                    "name": "恐怖共鸣 Dreadful Resonance",
+                    "description": "<p>60尺。每个进入弥漫范围或在弥漫范围内开始回合的生物都必须成功通过一次@Check[fortitude|dc:36]豁免，否则就陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}）并受到@Damage[3d8[sonic]]伤害。</p>"
+                },
+                "Enthralling Call": {
+                    "name": "迷情呼唤 Enthralling Call",
+                    "description": "<p>1英里。每个进入弥漫范围或在弥漫范围内开始回合的非锐鸣蜈蚣生物，必须成功通过一次@Check[will|dc:26]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]状态。生物随后临时免疫此效果1天（大失败时候为1小时）。任何以这种方式陷入迷魂的生物都会试图找到锐鸣蜈蚣呼喊的源头，无心智地向它走去。</p>"
+                },
+                "Entropic Cry": {
+                    "name": "熵能呼号 Entropic Cry",
+                    "description": "<p>锐鸣蜈蚣将它的声波聚集在它能感知到的迷情呼唤范围内的一个生物身上。目标必须尝试一次@Check[fortitude|dc:31]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物临时免疫熵能呼号1小时。</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。.</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</p>\n<p><strong>大失败</strong> 目标陷入恶心2，@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}。</p>"
+                },
+                "Fast Swallow": {
+                    "name": "快速吞咽 Fast Swallow",
+                    "description": "<p><strong>触发</strong> 锐鸣蜈蚣擒获着一个生物</p>\n<hr />\n<p><strong>效果</strong> 锐鸣蜈蚣使用活吞。</p>"
+                },
+                "Inexorable": {
+                    "name": "势不可挡 Inexorable",
+                    "description": "<p>锐鸣蜈蚣在其回合结束时会从@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]和@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]状态中恢复。它还免疫其速度上承受的减值以及@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]状态，而且它能忽略困难地形和高等困难地形。</p>"
+                },
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>超大型，@Damage[(3d10+9)[bludgeoning]]，破裂30</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Thrash": {
+                    "name": "重殴 Thrash",
+                    "description": "<p>锐鸣蜈蚣对触及范围内的每个生物尝试独立打击。它可以尝试至多一次颚打击，任意数量腿打击。每次攻击都会计入锐鸣蜈蚣的多重攻击减值，但直到所有攻击完成减值才会增加。</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>超大型或更小体型，腿，@Check[reflex|dc:36|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                },
+                "Motion Sense": {
+                    "description": "<p>锐鸣蜈蚣可以通过振动和空气流动来感知附近的运动。</p>",
+                    "name": "运动感知 Motion Sense"
+                }
+            },
+            "prototypeToken": {
+                "name": "锐鸣蜈蚣"
+            },
+            "publicNotes": "<p>难以寻觅的锐鸣蜈蚣是幽暗地域的顶级掠食者，生活在格拉里昂地表以下深处。它能发出海妖般的叫声，在其巢穴周围的隧道系统中回荡到极深远的区域，锐鸣蜈蚣以被其叫声吸引而来的巨大地底蠕虫为食——也包括以蠕虫为食的地鼠怪和其他生物——通过在目标体内产生令人作呕的亚音速振动，直至目标无法移动。</p>"
+        },
+        "Titanosaur": {
+            "items": {
+                "Majestic Presence": {
+                    "name": "威严气势 Majestic Presence",
+                    "description": "<p>90尺，DC 38。进入灵光范围的超大型或更小体型的生物必须尝试一次@Check[will|dc:38]豁免。无论豁免结果如何，生物都将临时免疫泰坦巨龙的威严气势1小时。</p><hr /><p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物被泰坦巨龙@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}，持续1轮。</p>\n<p><strong>失败</strong> 生物被迷魂2轮。</p>\n<p><strong>大失败</strong> 生物被迷魂1分钟。</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>超大型或更小体型，脚踩，@Check[reflex|dc:38|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                },
+                "Seismic Slam": {
+                    "name": "地震猛击 Seismic Slam",
+                    "description": "<p><strong>频率</strong> 每分钟一次</p>\n<hr />\n<p><strong>效果</strong> 泰坦巨龙用后腿支撑站起，前腿重重地砸在地面上，发出雷鸣般的巨响，产生局部震颤，效果如同以自身为中心的@UUID[Compendium.pf2e.spells-srd.Item.x7SPrsRxGb2Vy2nu]{地震术 Earthquake} ，不过此效果是非魔法的。裂隙不会在泰坦巨龙身下形成。</p>"
+                },
+                "Sweeping Tail": {
+                    "name": "巨尾横扫 Sweeping Tail",
+                    "description": "<p>泰坦巨龙将尾巴在@Template[cone|distance:30]范围内扫动。区域内的生物受到@Damage[8d10[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:38|basic|options:area-effect]豁免）。泰坦巨龙扫尾的动量会让它陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]直到其下回合开始。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "泰坦巨龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "泰坦巨龙 Titanosaur",
+            "publicNotes": "<p>泰坦巨龙是有史以来在格拉利昂地面上行走过的最大陆地动物，这种巨大的蜥脚类动物身长可达100尺以上，体重超过80吨。虽然它们通常只满足于吃下大量的植被，从而忽视较小生物的存在，但当泰坦巨龙在感到威胁时能造成堪比自然灾害的破坏。</p>"
+        },
+        "Carnotaurus": {
+            "items": {
+                "Vicious Mauling": {
+                    "name": "凶猛撕咬 Vicious Mauling",
+                    "description": "<p>食肉牛龙的颚打击对@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的目标造成额外1d8持续流血伤害。</p>"
+                },
+                "Headbutt": {
+                    "name": "头撞 Headbutt",
+                    "description": "<p><strong>触发</strong> 一个生物在食肉牛龙角打击的触及范围内结束移动动作</p>\n<hr />\n<p><strong>效果</strong> 食肉牛龙对触发生物进行一次角打击。</p>"
+                },
+                "Powerful Charge": {
+                    "name": "强力冲锋 Powerful Charge",
+                    "description": "<p>食肉牛龙垂下角，向敌人冲去。它行走两次，然后进行一次角打击。如果它从起始位置开始移动了至少20尺，角打击的伤害会增加到2d12+9，并且在成功命中时将目标击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "食肉牛龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "食肉牛龙 Carnotaurus",
+            "publicNotes": "<p>这种重达2000磅的掠食者名副其实，它低垂着独特的角冲撞猎物，将猎物撞到在地，然后在猎物重新站稳之前凶狠地撕咬倒地的受害者。不要被它们的体型所迷惑；这种巨大的恐龙在冲向潜在的猎物时，速度非常快。食肉牛龙具有很强的攻击性和领地意识，会毫不犹豫地猎杀任何不幸与它擦肩而过的生物。</p>"
+        },
+        "Mocking Chorus": {
+            "prototypeToken": {
+                "name": "齐笑魔"
+            },
+            "items": {
+                "Uncanny Mimicry": {
+                    "description": "<p>虽然无法长时间交流，但齐笑魔可以精确地模仿类人的声音。如果有生物在齐笑魔听觉范围内说话，齐笑魔就能用该生物的声音说话，即使它所说出的话语与该生物说出的不同。听到齐笑魔说话的生物可以尝试一次@Check[will|dc:40]豁免来辨别声音来源。如果成功，该生物在对抗齐笑魔能力时所有豁免获得+1环境加值，持续1分钟。</p>",
+                    "name": "诡异模仿 Uncanny Mimicry"
+                },
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Head Regrowth": {
+                    "name": "头部重生 Head Regrowth",
+                    "description": "<p>多头蛇初始拥有10颗头。生物可以专门将头作为目标并造成等同于头部生命值的伤害，来切断多头蛇的一颗头。任何生物的回合结束时，未被完全切断的头部都将恢复全部生命值。多头蛇可以使用多头蛇再生能力使被切断的头部重新长出。生物可以通过对断颈造成酸蚀或火焰伤害，灼烧它来阻止其重生。对于单目标的酸蚀或火焰效果必须指定灼烧某个特定的断颈，但溅射伤害或影响整个多头蛇占据空间的酸蚀或火焰效果能对所有断颈进行灼烧。如果切断头部的攻击造成任意酸蚀或火焰伤害，则断颈立即被灼烧。如果10颗头都被灼烧，则多头蛇会死亡。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uZJOdounIHaFDC1t]</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Petty Whispers": {
+                    "name": "琐碎低语 Petty Whispers",
+                    "description": "<p>齐笑魔使用敌人的声音，在可能的盟友中间散播谎言和嘲笑，撕碎朋友间的信任。齐笑魔@Template[emanation|distance:60]范围内的生物必须尝试一次@Check[will|dc:37|options:area-effect,damaging-effect]豁免。齐笑魔在1分钟内不能再次使用琐碎低语。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响且临时免疫1天。</p>\n<p><strong>成功</strong> 同失败，但生物受到一半伤害且不陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]。</p>\n<p><strong>失败</strong> 生物受到@Damage[12d10[mental]|options:area-damage]伤害，且陷入困惑1分钟。它可以在每回合结束时尝试一次新的豁免来结束困惑。</p>\n<p><strong>大失败</strong> 生物受到@Damage[15d10[mental]|options:area-damage]伤害，且陷入困惑1分钟，不能进行豁免提前结束困惑。</p>"
+                },
+                "Hydra Regeneration": {
+                    "name": "多头蛇再生 Hydra Regeneration",
+                    "description": "<p>多头蛇拥有等同于3×头部数量的再生。如果多头蛇的身体失去了任意头颅并且余下的断颈还没有被灼烧，多头蛇可以通过再生能力恢复生命值之后尝试一次@Check[fortitude|immutable:true|dc:43]检定。如果成功，一个未被灼烧的断颈重新长出两颗头；如果大成功，两个未被灼烧的断颈分别各自长出两颗头。多头蛇长出的头的数量无法超过原本头数量的两倍。多头蛇的再生能力只有在它所有头都被砍断、所有断颈都被灼烧的情况下才会完全失效，此时它会死亡。</p>"
+                },
+                "Mocking Chorus Head": {
+                    "name": "齐笑魔之头 Mocking Chorus Head",
+                    "description": "<p><strong>HP</strong> （头部） 35，头部重生</p>\n<p><strong>免疫</strong> 区域伤害</p>\n<p><strong>弱点</strong> 挥砍10</p>"
+                },
+                "Reactive Heads": {
+                    "name": "多头反应 Reactive Heads",
+                    "description": "<p>多头蛇除第一个头外，每多一个头，都能获得一个额外的反应动作，但只能用此反应动作进行反应打击。多头蛇针对同一个触发动作只能使用一次反应动作，即便一个生物在它的触及范围离开多个方格，并且每次反应打击都必须使用不同的头部。每当多头蛇被砍掉一个头，它每轮就失去一个额外的反应动作。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "齐笑魔 Mocking Chorus",
+            "hp": "多头蛇再生",
+            "ac": "全域视野",
+            "publicNotes": "<p>在内海的众多独特生物中，被称为齐笑魔的多头蛇可能是在河域诸国活动的最令人憎恶的生物之一。虽然在直接战斗中与其他同类一样凶猛，但合唱团对猎杀它们的战士来说是一种独特的挑战，不是因为它们锋利的牙齿，而是因为其尖锐而灵巧的舌头。它们诡异狡猾的战术和将多年好友变为劲敌的能力，甚至会在最亲密盟友间带来怀疑。</p>\n<p>齐笑魔所展现的行为似乎表明它们的智力高于其他多头蛇。它们似乎不会大量进食，经过时几乎不留痕迹，因此有传言说它们在聚居地捕食更多的是为了运动而不是维生。每隔几年就能看到整个村庄自相残杀的新故事。邻里相争，村落自陷；部分人失踪，而在事件发生之前只能听到嘶嘶笑声。</p>"
+        },
+        "Mirror Wolf": {
+            "prototypeToken": {
+                "name": "镜影狼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "镜影狼 Mirror Wolf",
+            "items": {
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Visage Strike": {
+                    "name": "残影击 Visage Strike",
+                    "description": "<p><strong>触发</strong> 与镜影狼的残影相邻的生物对镜影狼的盟友造成伤害</p>\n<hr />\n<p><strong>效果</strong> 镜影狼传送至残影的位置，摧毁残影，然后作出啃咬打击。</p>"
+                },
+                "Bond with Mortal": {
+                    "name": "联结凡人 Bond with Mortal",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 精魂向导花费10分钟来与1名凡人生物建立联系。当联结存在时，精魂向导会将它们的当前和最大生命值增加14点，使它们的攻击和伤害检定获得+2状态加值，而且只要两者都处于相同的位面中，能够与联结的凡人进行心灵感应沟通。精魂向导同一时间只能与1个凡人产生联结，而且它可以再次采取该行动来结束联结或形成新的联结（这也将会结束旧有的联结）。如果精魂向导或凡人死亡，联结也会结束。</p>\n<p>这种联结加强了精魂向导和物质宇宙的联系。在产生联结后，精魂向导会失去虚体和精魂特征，失去对疾病、麻痹和毒素的免疫以及对全伤害的抗力，而且会改变它们的打击，使其造成恰当的物理伤害（通常为穿刺或挥砍）来取代力场伤害。</p>"
+                },
+                "Bonded Strike": {
+                    "name": "联结打击 Bonded Strike",
+                    "description": "<p><strong>需求</strong> 镜影狼目前与凡人具有联结</p>\n<hr />\n<p><strong>效果</strong> 镜影狼作出啃咬打击。若攻击命中，联结凡人也能利用它的反应动作来对相同目标进行打击。</p>"
+                },
+                "Lingering Assailant": {
+                    "name": "侵袭残影 Lingering Assailant",
+                    "description": "<p>镜影狼的攻击速度之快，以至于会在身后留下残影。当镜影狼行走时，它会在相邻方格内留下1个残影。在判断夹击和群起攻之（Pack Attack）这样的效果时，残影被视同为盟友。残影具有AC10和1点生命值，持续1轮。</p>"
+                },
+                "Pack Attack": {
+                    "name": "群起攻之 Pack Attack",
+                    "description": "<p>若有生物位于镜影狼的至少2名盟友的触及范围之内，则镜影狼的打击对该生物造成1d8点额外伤害。</p>"
+                },
+                "Strafing Strike": {
+                    "name": "侧移连击 Strafing Strike",
+                    "description": "<p>镜影狼对触及之内的1个生物作出1次啃咬打击。之后镜影狼行走，然后对相同生物作出第2次啃咬打击。</p>"
+                }
+            }
+        },
+        "Vibrant Pup Swarm": {
+            "items": {
+                "Focused Reflection": {
+                    "name": "折光聚焦 Focused Reflection",
+                    "description": "<p><strong>需求</strong> 折光小鼠群处于明亮光照下</p><hr /><p><strong>效果</strong> 集群同时将光线聚焦为弧形的光束，对@Template[cone|distance:30]区域内的所有生物造成@Damage[(6d12)[fire]|options:area-damage]伤害（@Check[reflex|dc:30|basic|options:area-effect]豁免）。豁免失败的生物还会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1轮（大失败时为1分钟）。集群在[[/gmr 1d4 #Recharge Focused Reflection]]{1d4轮}内无法再次使用折光聚焦。</p>"
+                },
+                "Swarming Bites": {
+                    "name": "集群啮咬 Swarming Bites",
+                    "description": "<p>集群占据空间内的每名敌人承受@Damage[(2d6)[piercing]|options:area-damage]伤害（@Check[reflex|dc:30|basic|options:area-effect]豁免）。</p>"
+                },
+                "Feel No Pain": {
+                    "name": "不惧疼痛 Feel No Pain",
+                    "description": "<p><strong>触发</strong> 折光小鼠群受到造成重击的打击</p><hr /><p><strong>效果</strong> 负责工作的折光小鼠的痛感变得迟钝，然后跳到前方抵御伤害。集群获得10点临时生命值，持续1轮。</p>"
+                },
+                "Reflective Skin": {
+                    "name": "折光外皮 Reflective Skin",
+                    "description": "<p>10尺。灵光内的其他生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]。当集群处于明亮光照下，灵光会自动启动；在昏暗光照或黑暗中时会自动关闭。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "折光小鼠群"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "折光小鼠群 Vibrant Pup Swarm",
+            "publicNotes": "<p>这些顽强的小啮齿动物成群结队地穿过沙漠，在漫长的行进途中将太阳当做自己的盾与剑。和其他啮齿动物不同，折光小鼠是群居生物，这使它们表现得更像是虫类而非其他啮齿动物。只有女王才能繁殖，因此她会受到严密的保护。这种社会结构使得它们能够作为整体充满敌意地攻击和行动。每只折光小鼠在家庭和集群中都有特定的角色。负责工作的折光小鼠在巢穴中采集和挖掘，但在结群行动时，它们将作为盾牌保护更为宝贵的战斗折光小鼠。</p>\n<p>折光小鼠大部分时间在地下生活，为了寻找食物而挖掘复杂的隧道。然而，在苏威雅严酷的沙漠中，食物可能会很匮乏。折光小鼠家族会放弃它们的巢穴，踏上艰辛的多日旅程，寻找能够长久维持女王生活的土地，以便再生下一窝幼崽。随着资源的季节性变化，这样的迁徙每年最多可以发生三次。除了这种移居的迁徙之外，折光小鼠群只会为了击退严重威胁到女王的存在而离开巢穴。</p>\n<p>折光小鼠有不同寻常且很好看的解刨特征。它们的皮肤虽然柔软，但却有极强的反光性质，这对于这些啮齿动物来说有双重作用，一方面可以反射刺眼的阳光以便更好地调节体温，另一方面能将光线聚焦到威胁身上，尤其是当大量折光小鼠一起这么做时。折光小鼠群在迁徙中发出的光亮从远处就可以看到——这并非是为了招致挑战者，而明显是为了向潜在的捕食者发出要绕开它们的信号。</p>\n<p>近期，这些反光、柔软的皮革在有钱人的圈子里变得十分时尚。尽管为了皮毛而猎杀这种小生物是极端不明智且危险的行为，但重赏之下仍导致了更为频繁的捕猎行为。尽管这些啮齿动物确实占据着独特的生态位，但许多农夫更乐于把这些贪婪的食客从自家的田地撵走，通常会向当地的猎人指出附近的巢穴位置。</p>"
+        },
+        "Mjolgat": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "嗅矿牦貘"
+            },
+            "name": "嗅矿牦貘 Mjolgat",
+            "items": {
+                "Orescent": {
+                    "name": "矿石嗅觉 Orescent",
+                    "description": "<p>嗅矿牦貘能凭借其强大的嗅觉探测到未精炼的贵金属矿石。普通的泥土和岩石无法妨碍嗅矿牦貘嗅探到地下深处的矿石。</p>"
+                },
+                "Head On": {
+                    "name": "迎头格挡 Head On",
+                    "description": "<p><strong>触发</strong> 有生物将嗅矿牦貘作为目标进行攻击，且嗅矿牦貘能看到该生物</p>\n<hr />\n<p><strong>效果</strong> 嗅矿牦貘向着危险的方向摆动头顶，在对抗触发攻击时AC获得+2环境加值。</p>"
+                },
+                "Hammerhead": {
+                    "name": "锤头 Hammerhead",
+                    "description": "<p>嗅矿牦貘的后蹄猛蹬地面，用锯齿状的骨质头顶击溃敌人。嗅矿牦貘作出骨质头顶打击；命中时，嗅矿牦貘造成1个额外伤害骰。在计算多重攻击减值时，这被视同为2次攻击。</p>"
+                },
+                "Punch-Drunk": {
+                    "name": "晕头转向 Punch-Drunk",
+                    "description": "<p>若嗅矿牦貘在骨质头顶打击中得到大失败，则会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1轮。</p>"
+                },
+                "Rockbreaker": {
+                    "name": "碎岩者 Rockbreaker",
+                    "description": "<p>当嗅矿牦貘对物体造成伤害时（比如盾牌或者矿床），它能造成双倍伤害。</p>"
+                },
+                "Shrieking Slam": {
+                    "name": "尖啸捶地 Shrieking Slam",
+                    "description": "<p>嗅矿牦貘发出可怕的尖叫声，然后用头猛砸地面。距离嗅矿牦貘@Template[emanation|distance:30]内的生物必须尝试一次@Check[will|dc:21]豁免。无论豁免结果如何，它们之后都会免疫尖啸捶地。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}且@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]1轮。</p>"
+                }
+            },
+            "publicNotes": "<p>在开采破碎山脉（Shattered Range）的丰富矿藏的数千年岁月间，顿加堡的矮人们发现了健壮的嗅矿牦貘，这是一种具有神奇能力的野兽，它能通过不可思议的嗅觉嗅出矿床。时至今日，格拉利昂各地的矮人都会饲养嗅矿牦貘作为伙伴和役畜，训练它们寻找隐藏于地下深处的贵金属。一些无畏的矮人甚至把嗅矿牦貘当成坐骑使用，不过这些胆识过人的家伙通常需要给自己的耳朵设置充足的防护装备，因为这种生物在遭受威胁时会发出可怕的尖叫。</p>\n<p>嗅矿牦貘能展现出甚至于矮人媲美的粗暴气质，它们巨大的颅骨宽阔而又厚重，就好像巨人战锤的锤头一般。尽管嗅矿牦貘面部的其余部分像是大象和牦牛的杂交体一般——细长的吻部、啮齿动物样的口鼻和两对角——但它们的身体却更像是矮胖的野猪。浓密的棕色鬃毛覆盖着嗅矿牦貘那巨大的脖子，它们的脖子会在一生的时间内逐渐发育和增长出巨大的骨柱，用以支撑它们的头部。未成熟的嗅矿牦貘通常缺乏这种特质，因此只倒着走，将头拖在身后，直至自己可以自主挺直脖子为止。走霉运的矮人经常被人比作为无法把头抬离地面的幼年嗅矿牦貘。</p>"
+        },
+        "Warden of Oceans and Rivers": {
+            "prototypeToken": {
+                "name": "海洋与江河的守望者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "All Are One": {
+                    "name": "众成一 All Are One",
+                    "description": "<p><strong>频率</strong> 每回合一次</p><hr /><p><strong>效果</strong> 守望者吸引能扩大其影响力的有机物。生物光大漩涡的范围和其触手触手打击的触及范围提高10尺，持续1分钟，最高到额外30尺。</p>"
+                },
+                "Arctic Embrace": {
+                    "name": "极地之拥 Arctic Embrace",
+                    "description": "<p>所有被守望者生物光大漩涡影响的生物受到@Damage[10d6[cold]]伤害（@Check[fortitude|dc:45|basic]豁免）。失败时，生物还将陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。 </p>"
+                },
+                "Grasp of the Deep": {
+                    "name": "深渊抓握 Grasp of the Deep",
+                    "description": "<p>被守望者触手打击的生物获得寒冷弱点10，并在强韧豁免上承受-2状态减值，持续1轮。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.HzPg4iUmO3F6tbK6]{效果：深渊抓握}</p>"
+                },
+                "I Am The Tide": {
+                    "name": "吾既潮汐 I Am The Tide",
+                    "description": "<p>守望者创造出三道线形的湍急水流，每道@Template[line|distance:120|width:10]{宽10尺，长120尺}。区域内的生物受到@Damage[18d8[bludgeoning]|options:area-damage]伤害（@Check[fortitude|dc:45|basic|options:area-effect]豁免）。守望者可以选择推离或拉近，所有在此次豁免中失败的生物朝所选方向移动至多40尺。守望者不能在[[/gmr 1d4 #Recharge I Am The Tide]]{1d4轮}内再次使用吾即潮汐。</p>"
+                },
+                "Scent (Imprecise) 200 feet": {
+                    "name": "灵敏嗅觉 （模糊） 200 尺",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
+                },
+                "Bioluminescent Maelstrom": {
+                    "name": "生物光大漩涡 Bioluminescent Maelstrom",
+                    "description": "<p>30尺。@Check[will|dc:45|options:area-effect,inflicts:dazzled]</p>\n<hr />\n<p>守望者的愤怒会在其周围形成炫目的风暴，使得该区域成为困难地形。进入风暴的生物必须尝试一次DC 45的意志豁免。豁免成功的生物临时免疫这引诱视觉效果24小时。</p>\n<hr />\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮，且其下轮进行第一个动作时，生物必须使用一个单动作尽可能地移动靠近守望者。</p>\n<p><strong>大失败</strong> 生物只要处于灵光范围内便陷入目眩状态。当生物在灵光内开始回合时，它必须使用其回合的第一个动作尽可能地移动靠近守望者。它在其回合结束时可以尝试一次新的豁免，成功时结束此效果。</p>"
+                },
+                "What Lurks Beneath": {
+                    "name": "深渊潜袭 What Lurks Beneath",
+                    "description": "<p>守望者用其触手攻击6次。</p>"
+                },
+                "Voice of Nature": {
+                    "name": "自然之声 Voice of Nature",
+                    "description": "<p>虽然荒野的守望者不会说话，但它们能够通过持续的眼神交流与任何动物，魔兽，植物，自然世界的其他生物完美地交流复杂概念。与自然世界有足够强烈联系的智慧生物，例如动物本能的野蛮人或则会说荒野之歌的德鲁伊，能够稍微理解荒野的守护者，尽管其含义是模糊的。</p>"
+                },
+                "Warden's Crown": {
+                    "name": "守望者之冠 Warden's Crown",
+                    "description": "<p>荒野的守望者其角冠能够引得野生生物的尊敬。守望者所属生物群落的野生生物对其态度会自动改善一级（最高至友善），且在守望者面前通常不会相互使用敌对动作。</p>"
+                },
+                "+1 To All Saves vs. Primal": {
+                    "name": "对抗原能全豁免+1 +1 To All Saves vs. Primal"
+                }
+            },
+            "name": "海洋与江河的守望者 Warden of Oceans and Rivers",
+            "publicNotes": "<h2>复仇的当下 A Vengeful Present</h2>\n<p>在过去的时代，海洋与江河的守望者曾与陆地生物的世界息息相关，并且与他们的贸易渠道有着千丝万缕的联系。现在这些生物的后代无法依靠海洋的恩惠，并且认为自己必须尽其所能才能生存。渔人现在必须迅速和慎重了，海洋和河流都在热情地保护着它们的财产。因此，并非所有人都赞同新守望者的策略.……有些人希望看到旧时的方式得到恢复。</p>",
+            "allSaves": "对抗原能时所有豁免+1状态加值"
+        },
+        "Drthak": {
+            "items": {
+                "Auditory Hunter": {
+                    "name": "循声猎手 Auditory Hunter",
+                    "description": "<p><strong>触发</strong> 有15尺之内的生物使用听觉动作</p>\n<hr />\n<p><strong>效果</strong> 聆水兽向着该生物行走或游泳。</p>"
+                },
+                "Deep Breath": {
+                    "name": "深呼吸 Deep Breath",
+                    "description": "<p>聆水兽能屏息约2小时。</p>"
+                },
+                "Pull Under": {
+                    "name": "拉下水 Pull Under",
+                    "description": "<p>当有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于聆水兽的啃咬时，聆水兽能携带该生物以半速游泳。</p>"
+                },
+                "Resonant Jaws": {
+                    "name": "谐振下颚 Resonant Jaws",
+                    "description": "<p>当有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或受@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于自身的啃咬时，若聆水兽对该生物作出的尖啸打击失手的话，此次打击会对该生物造成@Damage[2d6[sonic]]伤害。</p>"
+                },
+                "Sensitive Echolocation": {
+                    "name": "灵敏回声定位 Sensitive Echolocation",
+                    "description": "<p>聆水兽能在该能力列出射程内将听觉作为精确感官来使用。若聆地兽承受的音波伤害高于其抗力，那么它的感官便会超载，所有生物对它来说都会处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，持续1轮。</p>"
+                },
+                "Bubble Burst": {
+                    "name": "气泡震爆 Bubble Burst",
+                    "description": "<p><strong>需求</strong> 聆水兽在水下</p>\n<hr />\n<p><strong>效果</strong> 聆水兽使用音波的力量推挤@Template[emanation|distance:30]区域内的水流，这会迸发出一股湍急的洪流。区域内除聆水兽之外的所有生物会承受@Damage[3d10[bludgeoning]|options:area-damage]伤害（@Check[fortitude|dc:24|basic|options:area-effect]豁免）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "聆水兽"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "聆水兽 Drthak",
+            "publicNotes": "<p>聆音兽是一种只凭借听觉进行狩猎的掠食者。尽管它们具有看起来眼睛的头部突触，但那实际上是听觉器官，可以捕捉到极轻微的声响，而且能以极高的精准度定位猎物。</p>\n<p>目前已确认的聆音兽仅有数种，但它们都具有共同的特征：面相前方的伪眼器官、具有欺骗性的速度、以及贪婪的食欲。它们对噪音极其敏感，并且还具有将声音武器化的能力，而这也应该是该种生物在绝大多数情况下单独行动的主要原因。</p>\n<hr />\n<p>聆水兽是一种具有修长尾鳍的水栖掠食者，这种很少有人见过的生物依附在海岸和河口周边，此类地点较高的含沙量让它们能在捕食者和猎物面前几近隐身。人们已经知晓部分聆水兽会进入内陆，在发动袭击之前沿上游追踪猎物数英里之远。水下环境会改变常规聆音兽的狩猎习性，聆水兽会制造能产生内爆的气泡来震晕猎物。</p>"
+        },
+        "Barded Manticore": {
+            "prototypeToken": {
+                "name": "铠甲蝎狮"
+            },
+            "items": {
+                "Metallic Coating": {
+                    "name": "金属涂层 Metallic Coating",
+                    "description": "<p>铠甲蝎狮的无武装攻击（包括尖刺）视作精金，寒铁，朝银和银。</p>"
+                },
+                "At-Will Spells": {
+                    "name": "随意施法 At-Will Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
+                },
+                "Spell Reflection": {
+                    "name": "法术反射 Spell Reflection",
+                    "description": "<p><strong>触发</strong> 对手以蝎狮作为施法目标且需要进行豁免</p>\n<hr />\n<p><strong>效果</strong> 蝎狮在豁免上获得+4环境加值。如果它豁免大成功，它可以选择30尺内一个非法术原本目标的生物。该生物成为法术的新目标，必须尝试自己的豁免对抗相同的DC。</p>"
+                },
+                "Arrange Scales": {
+                    "name": "排列鳞片 Arrange Scales",
+                    "description": "<p>铠甲蝎狮弯曲鳞片下的肌肉，以临时获得更好的防护。铠甲蝎狮的AC获得+2环境加值，且由其选择对于钝击，穿刺或挥砍伤害获得抗力15。这些增益会持续到铠甲蝎狮下回合开始，或直到它再次使用排列鳞片。</p>"
+                },
+                "Paired Spikes": {
+                    "name": "成对尖刺 Paired Spikes",
+                    "description": "<p>铠甲蝎狮从尾部甩出两根尖刺，至多以两个相互间距20尺的生物为目标。它对每个生物分别进行一次远程打击，每次为铠甲蝎狮的多重攻击减值算作一次单独的打击，但减值直到它进行完两次打击后才会增加。如果蝎狮只以一个生物为目标且命中了，该生物受到单独一次尖刺的正常伤害，但还会获得电击伤害弱点15，直到使用一个交互动作来移除尖刺。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.nW9GbEP1NqFodqE0]{效果：成对尖刺}</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "铠甲蝎狮 Barded Manticore",
+            "publicNotes": "<p>铠甲蝎狮是奸诈而危险的魔兽，也是唯一已知的具有内在施法能力的蝎狮物种。幸运地是，这种蝎狮非常罕见，大多数出现在战场或其他加工过的金属源附近，不过有故事说，一只特别聪明的铠甲蝎狮试图在玛甘比深处安家。</p>\n<p>与该物种的其他成员不同，铠甲蝎狮有一张貌似人类的脸，躯干上覆盖着不同的金属鳞片，其具体成分取决于它们的食物。得益于这些材料，大多数铠甲蝎狮都能抵御任何试图侵占它们领地的生物，尤其是魔族和其他对特定金属具有弱点的生物。铠甲蝎狮会筛选从受害者身上获取的金属，无论是胁迫当地村民进贡，还是来自于倒霉的旅行者，从中寻找最稀有，最有价值的金属，作为它们下一餐的一部分。</p>\n<p>这还包括了刻有符文的盔甲和武器，这些符文能赋予铠甲蝎狮施法的能力，不过能施放的法术根据其所居住的地区和它们所吃下的符文类型有所变化。在极少数魔法被压制的地区，铠甲蝎狮将无法长出它们的符文鳞片，使它们不如其他同类强大。指出这一点往往会导致自己过早死于此类铠甲蝎狮的爪与刺下，它们的锋利并不会因为缺乏附魔而降低。</p>"
+        },
+        "Soniphak": {
+            "prototypeToken": {
+                "name": "聆空兽"
+            },
+            "items": {
+                "Snatch": {
+                    "name": "捉取 Snatch",
+                    "description": "<p>当有1个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或受@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于聆空兽的爪抓时，聆空兽能携带该生物以半速飞行。</p>"
+                },
+                "Aftershock": {
+                    "name": "余波 Aftershock",
+                    "description": "<p>当聆空兽的尖啸打击命中时，反馈的余波会对@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或受@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于聆空兽的每个生物造成@Damage[1d6[sonic]]伤害。</p>"
+                },
+                "Sensitive Echolocation": {
+                    "name": "灵敏回声定位 Sensitive Echolocation",
+                    "description": "<p>聆空兽能在该能力列出射程内将听觉作为精确感官来使用。若聆地兽承受的音波伤害高于其抗力，那么它的感官便会超载，所有生物对它来说都会处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，持续1轮。</p>"
+                },
+                "Disruptive Screech": {
+                    "name": "破坏尖啸 Disruptive Screech",
+                    "description": "<p><strong>触发</strong> 有生物在距离聆空兽30尺射程之内使用听觉动作</p>\n<hr />\n<p><strong>效果</strong> 聆空兽进行一次尖啸打击对抗触发生物。此次打击如果重击则会打断触发的专注动作。</p>"
+                },
+                "Shattering Scream": {
+                    "name": "粉碎尖啸 Shattering Scream",
+                    "description": "<p>聆空兽能用尖啸专注于60尺射程内的一处石头或岩石的表面，从该点制造@Template[burst|distance:15]区域的爆炸。区域内的生物承受@Damage[5d6[piercing]|options:area-damage]伤害（@Check[reflex|dc:28|basic|options:area-effect]豁免），且该区域会由于散落的碎石变为困难地形。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "聆空兽 Soniphak",
+            "publicNotes": "<p>聆音兽是一种只凭借听觉进行狩猎的掠食者。尽管它们具有看起来眼睛的头部突触，但那实际上是听觉器官，可以捕捉到极轻微的声响，而且能以极高的精准度定位猎物。</p>\n<p>目前已确认的聆音兽仅有数种，但它们都具有共同的特征：面相前方的伪眼器官、具有欺骗性的速度、以及贪婪的食欲。它们对噪音极其敏感，并且还具有将声音武器化的能力，而这也应该是该种生物在绝大多数情况下单独行动的主要原因。</p>\n<hr />\n<p>聆空兽总是被误认为龙兽，它们在布满岩石或荒芜的地面上滑翔，用听觉来挑选猎物。聆空兽会在狩猎过程中全力使用音爆来使目标丧失行动能力之后，再将其抓起并于移动之中享用猎物。尽管能够说话，但聆空兽的社交性与其他聆音兽相比并无二致，即便以最平静的方式尝试与其交流，聆空兽通常也会使用破坏尖啸进行回应。</p>"
+        },
+        "Stony Bat": {
+            "prototypeToken": {
+                "name": "石蝙蝠"
+            },
+            "items": {
+                "Petrify Body Part": {
+                    "description": "<p>石化蝙蝠向相邻生物喷出一股石化气体，针对特定的身体部位。目标必须通过@Check[fortitude|dc:20]豁免，否则该部位部分石化1分钟，效果根据被石化的部位而变化。</p>\n<ul>\n<li><strong>脸部</strong> 生物的脸部僵硬，一层薄石部分遮住视觉。生物被@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]。</li>\n<li><strong>手部</strong> 生物的一只手被石化。该手无法放开物品，也无法进行精细操作。使用该手持有的武器进行攻击时，攻击检定受到-2状态减值。</li>\n<li><strong>腿部</strong> 生物的一部分腿变得僵硬沉重。其速度受到-10状态减值。如果生物的所有腿都被石化，其速度降低到5尺。由GM决定，不依赖腿进行移动的生物，例如用翅膀飞行的生物，它的其他移动速度不受影响。\n\n</li>\n</ul>",
+                    "name": "石化身体部位 Petrify Body Part"
+                },
+                "Petrify Vapor": {
+                    "name": "石化水汽 Petrify Vapor",
+                    "description": "<p>石化蝙蝠喷出@Template[cone|distance:15]石化气体，这种气体太稀薄以致不会对区域内的生物造成伤害。然而，它会石化空气中的水分，使得小石块雨落在锥形范围正下方的生物上。坠落的石块造成@Damage[4d6[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:20|basic|options:area-effect]豁免）。石化蝙蝠在[[/gmr 1d4 #Recharge Petrify Vapor]]{1d4轮}内不能再次使用石化水汽。.</p>"
+                },
+                "Stone Feast": {
+                    "name": "石头盛宴 Stone Feast",
+                    "description": "<p>石化蝙蝠专门攻击石化的身体部位，虽然它不能吃鲜肉，但可以吞食这些被石化的部位。对于部分或完全石化的生物，石化蝙蝠的咬击造成额外的1d6伤害，并忽略石化生物的硬度。</p>"
+                },
+                "Echolocation": {
+                    "name": "回声定位 Echolocation",
+                    "description": "<p>石蝙蝠的听觉在所列范围内为精确感官。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "石蝙蝠 Stony Bat",
+            "publicNotes": "<p>戈耳工是一大类动物，它们共享一些奇特的特征。所有的戈耳工都被厚重的甲片覆盖，并能呼出石化气体。除了这些特征外，戈耳工可能看起来像任何动物。尽管有些戈耳工看起来可能威胁不那么大，但它们绝不应该被低估。戈耳工是狡猾的猎手，即使是一小口吐息也能使几乎任何猎物瘫痪。</p><hr /><p>这些生物类似于胖乎乎的蝙蝠，身上覆盖着小而重叠的金属板。它们无法呼出足够的石化气体来麻痹一个正常大小的人形生物，但对于它们通常的猎物——昆虫和其他小动物，这种气体是有效的，它们在食用前会将猎物石化。然而，石蝙蝠已经学会了如何使用它们的石化气体来防御更大的生物，石化敌人的部分肢体或将水蒸气石化成小石块来砸人。</p>\n<p>此外，它们可以合作将更大的生物击倒，肢解并食用它们。</p>\n<p>石蝙蝠通常生活在大型洞穴中，虽然它们经常以小群外出狩猎。它们通常对非猎物的外来者不具有攻击性，但它们保护自己的洞穴的意识非常强烈。土元素裔和其他不惧怕石化的生物有时会把石蝙蝠当作宠物。</p>"
+        },
+        "Crying Cicada": {
+            "prototypeToken": {
+                "name": "鸣泣蝉"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "鸣泣蝉 Crying Cicada",
+            "items": {
+                "Steal Voice": {
+                    "name": "夺声 Steal Voice",
+                    "description": "<p><strong>需求</strong> 自上次鸣泣蝉的回合以来，敌方生物曾说话</p>\n<hr />\n<p><strong>效果</strong> 鸣泣蝉学习并模仿对手的声音。它不能创造新句子，但可以选择重复它所听到的短语的某些部分。30尺范围内的所有非蝉生物（除了声音所有者）必须在成功通过@Check[will|dc:19]豁免，才能识破这种模仿。</p>"
+                },
+                "Wings Flat": {
+                    "name": "翅膀平展 Wings Flat",
+                    "description": "<p>当鸣泣蝉静止地停歇在树上时，它与环境无缝融合。在伪装成树木的一部分时，它的欺骗检定和DC自动取30。</p>"
+                },
+                "Crying Cicada Poison": {
+                    "name": "鸣泣蝉毒素 Crying Cicada Poison",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:19]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} (1轮）</p>\n<p><strong>阶段2</strong> 1d6毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2} (1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害、缓慢2和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1} (1轮）</p>"
+                },
+                "Sob": {
+                    "name": "啜泣 Sob",
+                    "description": "<p>鸣泣蝉模仿受伤动物或哭泣孩子的声音。@Template[emanation|distance:150]范围内的非蝉类生物必须尝试进行@Check[will|dc:19]豁免，否则会因求助声感到不安。该效果持续1轮，但如果蝉在后续回合再次使用此能力，则为所有受影响生物增加1轮持续时间。一旦生物在对抗啜泣的豁免中成功，则该生物在24小时内临时免疫啜泣效果。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物认为附近有动物或孩子需要帮助。该生物会被@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]，必须在每次行动中尽可能迅速地@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]或移动到蝉附近，同时避开明显的危险。如果该生物停留在蝉相邻的位置，它将保持静止并不采取行动。</p>"
+                },
+                "Wing Flurry": {
+                    "name": "振翅 Wing Flurry",
+                    "description": "<p>鸣泣蝉拍打翅膀，使@Template[burst|distance:10]范围内的所有生物暴露于鸣泣蝉毒素中。</p>"
+                }
+            },
+            "publicNotes": "<p>这些小昆虫对布雷斡的小村庄构成了骚扰和危险，它们占据整个森林并与树叶融为一体。也被称为呼救甲虫，因为它们能模仿并重复它们之前受害者的声音，鸣泣蝉会等待路过的人来诱使他们进入树林，用它们的叫声迷住受害者，然后扇动翅膀释放有毒尘埃。一旦目标接近死亡，鸣泣蝉会从树上起飞，并降落在尸体上进食。</p>\n<p>鸣泣蝉的鳞尘可以转化为有效的摄入毒药，但获取一只蝉并收集这些鳞片非常危险，以至于大多数想成为毒药制造者的人在这一过程中直接丧命。即使是找到这些昆虫也足够危险；鸣泣蝉天生的隐匿性和深色的颜色使它们在森林的树木中难以被发现，而跟随它们的叫声通常会导致猎人反而成为猎物。</p>\n<p>鸣泣蝉的群落在森林中停留的时间越长，它们收集的叫声就越广泛。通常情况下，一个年轻的群落只能模仿小型、垂死生物的声音，但更大、更成熟的群落将有能力模仿孩子和龙的声音。</p>"
+        },
+        "Weremoose": {
+            "items": {
+                "Deer Empathy": {
+                    "description": "<p>鹿化人能与鹿沟通，这也包括麋鹿。</p>",
+                    "name": "鹿类认同 Deer Empathy"
+                },
+                "Cold Adaptation": {
+                    "name": "适应寒冷 Cold Adaptation",
+                    "description": "<p>鹿化人将环境寒冷效果视同为向着更不极端的方向调整1阶。</p>"
+                },
+                "Thundering Charge": {
+                    "name": "轰鸣冲锋 Thundering Charge",
+                    "description": "<p>鹿化人行走2次，然后作出鹿角打击。中型或更小的生物若因该攻击而受到伤害的话，则必须成功通过@Check[fortitude|dc:17]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>中型人类，具有拳头+11，造成1d4+6钝击；</p>\n<p>或</p>\n<p>大型麋鹿，具有鹿角和蹄子+11，造成1d8+6钝击。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Curse of the Weremoose": {
+                    "name": "鹿化人诅咒 Curse of the Weremoose",
+                    "description": "<p>此诅咒仅能影响类人生物。</p>\n<hr />\n<p><strong>豁免检定</strong> @Check[fortitude|dc:17]</p>\n<p>在每个月圆之夜，被诅咒的生物必须尝试另一次强韧豁免，失败则会变化为同种类的化形生物，直至黎明。</p>\n<p>该生物会在GM的控制之下，并在后半夜横冲直撞，直至天明并失去知觉。</p>"
+                },
+                "Moon Frenzy": {
+                    "name": "满月狂乱 Moon Frenzy",
+                    "description": "<p>当满月出现在夜空中时，化形生物必须变化为混合形态，在之后无法进行变身，体型增大1阶，触及增加5尺，鹿角打击的伤害增加2点。</p>\n<p>当月亮落下或太阳升起时，化形生物会变回类人形态，并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]，持续[[/br 2d4 #hours]]{2d4小时}。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.dRe8n1nBWMIXd8jh]{效果：满月狂乱}</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "鹿化人"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "鹿化人 Weremoose",
+            "publicNotes": "<p>化形生物是能变形为动物的类人生物，他们在满月的月光下会变为动物与类人混合体。这些变形生物的宿命源于一种古老的原能诅咒，它能通过这些生物的啃咬来进行传播。后文中的数据反应了处于混合形态的化形生物。</p><hr /><p>鹿化人往往具有固执且暴躁易怒的脾性，这使得他们难以与人相处。大多数情况下，他们会以猎人或隐士的身份生活，享受大自然环绕带来的宁静。当鹿化人的领地遭到入侵时，他们虽然不避不退，但也不太会主动发动袭击。倘若有人找茬打架，鹿化人便会毫不留情地进行反击。</p>"
+        },
+        "Chaos Falcon": {
+            "prototypeToken": {
+                "name": "混沌隼"
+            },
+            "name": "混沌隼 Chaos Falcon",
+            "items": {
+                "Storm Bolt": {
+                    "name": "风暴束 Storm Bolt",
+                    "description": "<p>混沌隼的电束打击总是造成与其风暴核心灵光相同的伤害类型。</p>"
+                },
+                "Stormsight": {
+                    "name": "风暴视觉 Stormsight",
+                    "description": "<p>风、降雨和云不会阻挡混沌隼的视觉；它忽略风暴、雾、降雨和类似状况带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Dive-bomb": {
+                    "name": "俯冲轰炸 Dive-bomb",
+                    "description": "<p><strong>需求</strong> 混沌隼正在飞行</p>\n<hr />\n<p><strong>效果</strong> 混沌隼向下直线飞行两次。如果它在此次移动结束时触及地面或类似坚固物体，它的着陆会破碎表面，形成锋利的碎片和熔岩石滴，对@Template[emanation|distance:20]{20尺}内所有其他生物造成@Damage[4d6[fire],3d8[piercing]|options:area-damage]伤害（@Check[reflex|dc:26|basic|options:area-effect]豁免）。</p>"
+                },
+                "Flash Storm": {
+                    "name": "瞬时风暴 Flash Storm",
+                    "description": "<p>水在混沌隼的15尺灵光内的灰烬微粒周围凝结，形成倾盆大雨冲刷下方的一切。该区域内的所有生物必须成功通过一次@Check[reflex|dc:26|options:area-effect,forced-movement,inflicts:prone]豁免，否则会被推离20尺，如果它们在地面上开始或结束此次移动，则将陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                },
+                "Storm Nexus": {
+                    "name": "风暴核心 Storm Nexus",
+                    "description": "<p>15尺，@Damage[3d6[untyped]|options:area-damage]，@Check[reflex|dc:26|basic|options:area-effect]豁免。混沌隼被一团火山灰云包围，闪电在云中划出弧线，火山灰云在某些区域发出热光，在其他区域则结成冰。混沌隼可以通过一个具有专注特征单动作来将灵光的伤害类型改为寒冷，电击或火焰。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>极端的天气孕育了混沌隼，赋予了它们其他元素鸟所没有的混合能力。对它们来说，闪电就像火焰一样自然，酷热就像严寒一样舒适。它们的攻击手段千变万化，即使是准备充分的人也会感到危险。</p>\n<p>就像它们的元素表亲一样，混沌隼通常是风暴的预兆。它们也被视为火山活动的预兆，因为它们会跨越遥远的距离，在火山爆发时嬉戏起舞。由于这种联系，再加上它们喜欢降下冰与火的雨，附近的居民认为它们的存在很危险。</p>\n<p>幸运的是，混沌隼是独居鸟类，它们喜欢远离文明的喧嚣。它们在火山喷口或地热活动区筑巢，依靠地热孵蛋，同时在附近的荒野中狩猎。除非它们的平静受到破坏或安全受到威胁，否则它们不太可能攻击在其栖息地活动的生物。</p>"
+        },
+        "Skyfisher": {
+            "items": {
+                "Abduct": {
+                    "name": "Abduct",
+                    "description": "<p>The sky fisher reels in a target @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} by its tentacles, pulling them into an adjacent space, and then attempts to Swallow them Whole (Large, 3d8+12 acid, Rupture 25). The sky fisher can only use Swallow Whole when using Abduct.</p>"
+                },
+                "Enzymic Vent": {
+                    "description": "<p>) The sky fisher vents flesh-eating enzymes into the air, dealing @Damage[3d6[persistent,acid]] damage and @Damage[3d6[persistent,bleed]] damage in a @Template[emanation|distance:20] (@Check[reflex|dc:25|basic] save). It can't use Enzymic Vent again for [[/gmr 1d4 #rounds]]{1d4 rounds}.</p>",
+                    "name": "Enzymic Vent"
+                },
+                "Jet": {
+                    "name": "Jet",
+                    "description": "<p>The sky fisher quickly expels some of its gases to move swiftly through the air, Flying up to 100 feet in a straight line; this movement doesn’t trigger reactions.</p>"
+                },
+                "Sky Fisher Venom": {
+                    "name": "Sky Fisher Venom",
+                    "description": "<p><strong>Saving Throw</strong> @Check[fortitude|dc:25]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[3d6[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}, and can't speak above a whisper (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[3d8[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2}, and can't speak (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[3d10[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} (1 round)</p>"
+                },
+                "Transparency": {
+                    "name": "Transparency",
+                    "description": "<p>y Unless it has fed recently, the sky fisher is naturally @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}. Using non-hostile actions does not cause the sky fisher to become @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}. When it takes a hostile action of any kind, the sky fisher is hidden instead of undetected until the start of its next turn, as the vague outline of its many tendrils temporarily becomes faintly visible.</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "Skyfisher"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "Skyfisher"
+        },
+        "Decapod Dinghy": {
+            "items": {
+                "All Aboard": {
+                    "name": "全员上船 All Aboard",
+                    "description": "<p>艇蟹可以承载最多30负载的生物或无人看管的物品，例如五个中型生物。海葵对乘客的温和抓握在大多数情况下足够，但在战斗中，如果乘客想在保持在艇蟹背上的同时进行其他动作，他们会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                },
+                "Anemone Transport": {
+                    "name": "海葵传送 Anemone Transport",
+                    "description": "<p>艇蟹和其所有自愿的乘客传送到10英里内大小足以容纳艇蟹的海葵群中。虽然艇蟹不需要看到该位置，但它们必须曾经去过那里。所有被传送的生物在24小时内对这个能力临时免疫。</p>"
+                },
+                "Inflate Anemones": {
+                    "name": "充气海葵 Inflate Anemones",
+                    "description": "<p>艇蟹背上的海葵充气，包裹所有乘客，并给予每位乘客AC+2环境加值，直到艇蟹的下回合开始。</p>"
+                },
+                "Protect Passenger": {
+                    "name": "保护乘客 Protect Passenger",
+                    "description": "<p><strong>触发</strong> 20尺内的敌人对艇蟹的乘客之一造成伤害</p>\n<hr />\n<p><strong>效果</strong> 艇蟹的海葵伸出触手，对触发的生物进行一次触手攻击。</p>"
+                },
+                "Stinging Anemones": {
+                    "name": "刺击海葵 Stinging Anemones",
+                    "description": "<p>艇蟹的海葵刺击其选择的任意数量的乘客，以及被艇蟹@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的生物。刺击造成@Damage[5d6[poison]]伤害（@Check[fortitude|dc:26|basic]豁免）。豁免失败时，该生物还会@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，持续1小时。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "艇蟹"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "艇蟹 Decapod Dinghy",
+            "publicNotes": "<p>艇蟹是生活在御海洋中的巨大螃蟹，它们经常帮助当地的类人生物进行运输。它们能理解水元素语，而且它们背上和前爪中携带的五颜六色的海葵使它们非常好认。常常能看到阿萨鱼人和人鱼在艇蟹上舒适地躺着，在海葵之间悠闲地休息，与艇蟹共享食物。</p>\n<p>这种和平的合作关系是由传说中的甲壳动物——盗船者塔希阿莱间接引起的。由于塔希阿莱在御海洋的狂暴行为是一个持续的威胁，艇蟹的祖先与其他海洋生物建立了联系以共同生存。艇蟹与海葵的关系特别紧密，它们使用这些小生物作为自己身体的有毒扩展，并利用海葵对水中运动的反应来弥补艇蟹本身较差的视力。在被塔希阿莱的风暴蹂躏的地区，毕竟大家都需要团结起来。</p>"
+        },
+        "Marp": {
+            "name": "吞金猴 Marp",
+            "items": {
+                "Scampering Theft": {
+                    "name": "奔跑偷窃 Scampering Theft",
+                    "description": "<p>吞金猴跑过去并尝试偷窃钱包、吊坠或其他类似的物体。吞金猴行走，距离至多等同于其速度。之后它尝试从目标身上盗窃有价值的物体，目标必须尝试@Check[reflex|dc:22]豁免。</p>\n<p><strong>成功</strong> 吞金猴未能从目标身上盗窃任何东西。</p>\n<p><strong>失败</strong> 吞金猴从目标的私人携带物品中盗窃1件物体，该物体由黄金制成或者含有黄金。它不能盗窃该生物持有或者永久性附着在该生物身上的物体。若该物体含有铅，吞金猴就会将它丢在目标的脚边。在盗窃物体（或丢下物体）之后，吞金猴行走，距离至多等同于其速度。</p>"
+                },
+                "Goldsense": {
+                    "name": "黄金感知 Goldsense",
+                    "description": "<p>吞金猴能感知到射程之内的任何黄金聚积物。它们还能够通过触摸来精确地测量黄金的纯度。</p>"
+                },
+                "Panicked Withdrawal": {
+                    "name": "惊慌逃窜 Panicked Withdrawal",
+                    "description": "<p><strong>触发</strong> 吞金猴由于近战打击而承受伤害</p>\n<hr />\n<p><strong>效果</strong> 吞金猴丢下手中的任何物品，然后攀爬或行走至多15尺。</p>"
+                },
+                "Gold?": {
+                    "name": "金子？ Gold?",
+                    "description": "<p>吞金猴向@Template[emanation|distance:30]区域内的所有生物索要黄金。每个生物必须尝试@Check[will|dc:22]豁免或者以自由动作取出并丢下有价值的黄金制品。</p>\n<hr />\n<p><strong>大成功</strong> 目标能拒绝请求，但它们也可以选择自愿交出任意数额的黄金。若它们这样做，则会在1分钟内尝试的下一次豁免检定中获得+1状态加值，而且它们还能在1分钟内临时免疫奔跑偷窃（Scampering Theft）。</p>\n<p><strong>成功</strong> 目标能拒绝请求。</p>\n<p><strong>失败</strong> 目标必须丢下价值20gp的钱币、黄金珠宝或者其他物体。</p>\n<p><strong>大失败</strong> 同失败，但是价值为40gp。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "吞金猴"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>尽管有许多生物都强烈渴求着黄金，但蓝毛吞金猴是字面意义上会将食用这种贵金属当作其饮食中的重要组成部分。虽然有少量吞金猴族群生活在天然金矿附近，但大多数黄金的来源都已经落入到了其他生物的控制之下。因此，吞金猴通常会通过努力巴结这些生物来谋求生存之道。当它们适应了这些群体的生活之后，就会收集它们所能找到的所有黄金。</p>\n<p>即便是饿肚子的吞金猴也会先开口发问，这种表现根据不同地区而有所差异，但询问流程的复杂程度不会超出攥紧双手举到空中然后用悲哀的声调说“金子？”。在吞金猴的文化中，先问再吃是有道德的做法，但它们从根本上会将黄金认知为食物，而非贸易品。因此，当它们遭到拒绝时就会去偷窃黄金，就像人们在饥饿之时会偷窃面包一般。话虽如此，吞金猴往往也会通过帮助探矿者和钱币检验员打工来维持生计，因为它们对黄金的敏锐感知力非常适合担任此类职位。</p>\n<p>吞金猴很少直接与人争斗，在遭到攻击时，它们更愿意撒腿就跑。在极少数情况下，吞金猴也会遇到其他吞食矿物的生物，此时它们通常会愿意与这些生物达成公平的交易协定。</p>\n<p>铅的味道和触感让吞金猴感到厌恶。若有生物把铅交于吞金猴，这些吞金猴便会不再靠近该生物，从此离它远远的。即便在一袋黄金中混入一枚铅币，也能够保护袋子免遭它们偷窃，而这也使得铅币在吞金猴经常出没的地区成为了一种能有效遏制它们的道具。</p>"
+        },
+        "Prismhydra": {
+            "prototypeToken": {
+                "name": "虹彩多头蛇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "虹彩多头蛇 Prismhydra",
+            "hp": "多头蛇再生",
+            "ac": "全域视野",
+            "items": {
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Prismatic Backlash": {
+                    "name": "虹彩反冲 Prismatic Backlash",
+                    "description": "<p><strong>触发</strong> 一个生物成功灼烧了虹彩多头蛇的一个断颈</p>\n<hr />\n<p><strong>效果</strong> 虹彩多头蛇体内不稳定的虹彩能量涌出。与虹彩多头蛇相邻的每个生物承受混乱爆炸。</p>"
+                },
+                "Prismhydra Heads": {
+                    "name": "虹彩多头蛇之头 Prismhydra Heads",
+                    "description": "<p><strong>HP</strong> （头） 36，虹彩头部重生</p>\n<p><strong>免疫</strong> 区域伤害</p>\n<p><strong>弱点</strong> 挥砍15</p>"
+                },
+                "Chromatic Explosion": {
+                    "name": "混乱爆炸 Chromatic Explosion",
+                    "description": "<p>虹彩多头蛇的头部充满了充满奥术能量。每当虹彩多头蛇成功用唾液打击一个目标，或当一个对手烧灼了虹彩多头蛇的一个头，该对手受到6d6与此头部易伤相同类型的伤害（通常为@Damage[6d6[acid]]{酸蚀}，@Damage[6d6[cold]]{寒冷}，@Damage[6d6[fire]]{火焰}或@Damage[6d6[electricity]]{电击}），进行@Check[reflex|dc:37|basic]豁免。</p>"
+                },
+                "Hydra Regeneration": {
+                    "name": "多头蛇再生 Hydra Regeneration",
+                    "description": "<p>多头蛇拥有等同于3×头部数量的再生。如果多头蛇的身体失去了任意头颅并且余下的断颈还没有被灼烧，多头蛇可以通过再生能力恢复生命值之后尝试一次@Check[fortitude|immutable:true|dc:39]检定。如果成功，一个未被灼烧的断颈重新长出两颗头；如果大成功，两个未被灼烧的断颈分别各自长出两颗头。多头蛇长出的头的数量无法超过原本头数量的两倍。多头蛇的再生能力只有在它所有头都被砍断、所有断颈都被灼烧的情况下才会完全失效，此时它会死亡。</p>"
+                },
+                "Prismatic Head Regrowth": {
+                    "name": "虹彩头部重生 Prismatic Head Regrowth",
+                    "description": "<p>星腑多头蛇初始拥有8颗头。生物可以专门将头作为目标并造成等同于头部生命值的伤害，来切断多头蛇的一颗头。任何生物的回合结束时，未被完全切断的头部都将恢复全部生命值。多头蛇可以使用多头蛇再生能力使被切断的头部重新长出。生物可以通过对断颈造成特定类型伤害，灼烧它来阻止其重生。对于单目标的特定类型伤害必须指定灼烧某个特定的断颈，但溅射伤害或影响整个多头蛇占据空间的酸蚀或火焰效果能对所有断颈进行灼烧。如果切断头部的攻击造成任意特定类型伤害，则断颈立即被灼烧。</p>\n<p>每颗头需要不同伤害类型来灼烧；通常，每两颗头分别容易受到酸蚀，寒冷，电击和火焰伤害，但也可能出现其他组合或更奇特的易伤。当虹彩多头蛇成功重生头部时，所有重新长出的头具有相同的易伤，且必须与虹彩多头蛇某个未被砍断的头的易伤相同。</p>\n<p>如果8颗头都被灼烧，则多头蛇会死亡。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uZJOdounIHaFDC1t]{效果：多头}</p>"
+                },
+                "Reactive Heads": {
+                    "name": "多头反应 Reactive Heads",
+                    "description": "<p>多头蛇除第一个头外，每多一个头，都能获得一个额外的反应动作，但只能用此反应动作进行反应打击。多头蛇针对同一个触发动作只能使用一次反应动作，即便一个生物在它的触及范围离开多个方格，并且每次反应打击都必须使用不同的头部。每当多头蛇被砍掉一个头，它每轮就失去一个额外的反应动作。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                }
+            },
+            "publicNotes": "<p>最常见的多头蛇出了名的有五颗头，它用五颗头一起攻击猎物或攻击者。有更多奇特的多头蛇品种散布在内海地区，每种多头蛇都有自己奇特的进化过程和狩猎行为。</p><hr /><p>虹彩多头蛇是法力废土那动荡魔法特性的又一种无法解释的副产品，它们徘徊在奈克斯和盖布之间的土地上，以巨型动物，变异体和其他任何碰巧路过的生物为食。它们的鳞片呈现出各种颜色，变幻出美丽的图案，掩盖了其强力大颚的威胁。只有准备得最充分的冒险者才能杀死虹彩多头蛇，因为阻止其再生的方法就像从一套爆炸性的卡组里抽一张牌。</p>"
+        },
+        "Hexmoth": {
+            "items": {
+                "Arcanotaxis": {
+                    "name": "趋魔性 Arcanotaxis",
+                    "description": "<p><strong>需求</strong> 巫术蛾使用其奥法感知侦测到一处魔力源</p>\n<p><strong>触发</strong> 巫术蛾回合开始</p>\n<hr />\n<p><strong>效果</strong> 巫术蛾朝被其侦测到的最近魔力源飞行或行走至多其速度的距离。</p>"
+                },
+                "Hexdust Wind": {
+                    "name": "巫尘之风 Hexdust Wind",
+                    "description": "<p>巫术蛾猛烈地拍打几下翅膀，在@Template[cone|distance:30]范围内喷出魔法鳞尘。这会造成@Damage[10d6[untyped]|options:area-damage]伤害（@Check[fortitude|dc:23|basic|options:area-effect]豁免），伤害类型为巫术蛾免疫的能量。它在[[/gmr 1d4 #Recharge Hexdust Wind]]{1d4轮}内无法再次使用巫尘之风。</p>"
+                },
+                "Arcanosense": {
+                    "name": "奥法感知 Arcanosense",
+                    "description": "<p>巫术蛾能够感知到所列范围内的魔力源，如同它拥有4环级的@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]常驻内在法术。</p>"
+                },
+                "Advanced Arcanovore": {
+                    "name": "进阶噬魔 Advanced Arcanovore",
+                    "description": "<p>巫术蛾对由法术造成的所有伤害具有抗力10。它免疫一种在巫术蚕时期吃过最多的能量类型，通常为酸蚀，寒冷，电击，火焰或音波。</p>"
+                },
+                "Arcane Consumption": {
+                    "name": "奥术吞噬 Arcane Consumption",
+                    "description": "<p>巫术蛾尝试吞噬相邻魔法效果或无主魔法物品中的魔力。它以+16调整值对目标尝试一次反制检定。如果成功，魔法效果结束。魔法物品会变为平凡物品，持续1回合。巫术蛾恢复@Damage[2d8[healing]]生命值。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "巫术蛾"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "巫术蛾 Hexmoth",
+            "publicNotes": "<p>巫术蚕在摄入足够数量的魔力后，会用注入魔力的蚕丝结成茧，蜕变成其成虫形态。</p>"
+        },
+        "Desert Manticore": {
+            "prototypeToken": {
+                "name": "沙漠蝎狮"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Venomous Flight": {
+                    "name": "毒液飞行 Venomous Flight",
+                    "description": "<p>沙漠蝎狮飞行两次，从尾刺上滴下毒液。在飞行过程中，它选择一个从正上方飞过的生物，该生物暴露于蝎狮毒。沙漠蝎狮不能飞到目标上空60尺以上，否则毒液会在下落过程中变得过于分散而无法生效。</p>"
+                },
+                "Indomitable Beast": {
+                    "name": "不屈之兽 Indomitable Beast",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 沙漠蝎狮降至0 HP</p>\n<hr />\n<p><strong>效果</strong> 沙漠蝎狮避免被击败，保持在1 HP，然后对触及范围内的一个生物进行一次尾刺打击。</p>"
+                },
+                "Manticore Venom": {
+                    "name": "蝎狮毒 Manticore Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:32]</p>\n<p><strong>豁免检定</strong> 6 轮</p>\n<p><strong>阶段1</strong> @Damage[3d8[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[4d8[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[5d8[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 3}（1轮）</p>"
+                },
+                "Scorpion Sting": {
+                    "name": "蝎刺 Scorpion Sting",
+                    "description": "<p>沙漠蝎狮用尾刺打击一个@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物。此次攻击会深深地注入毒液，造成额外4d8毒素伤害，并且给予目标在对抗毒素时的初始豁免上-2环境减值。</p>"
+                }
+            },
+            "name": "沙漠蝎狮 Desert Manticore",
+            "publicNotes": "<p>沙漠蝎狮不仅比它们的普通表亲危险得多，而且要稍微聪明一些。与通常的豪猪般的刺尾不同，沙漠蝎狮有一条大蝎子尾巴，这就要求它们采取更近距离的接近和狡猾的伏击。沙漠蝎狮以自负著称，并不断试图在自己选定的领地内击败斯芬克斯。没有报告表明沙漠蝎狮子的此类尝试有成功过。</p>"
+        },
+        "Taldan Cave Squirrel": {
+            "prototypeToken": {
+                "name": "塔尔多洞穴松鼠"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "塔尔多洞穴松鼠 Taldan Cave Squirrel",
+            "items": {
+                "Forage for Gems": {
+                    "name": "寻找宝石 Forage for Gems",
+                    "description": "<p>洞穴松鼠潜入地下寻找宝石。洞穴松鼠至多以其速度进行掘地。在它掘地过程中，能发现至多[[/gmr 1d4 #Gems]]个廉价宝石（比如盐块或石英），它会把这些宝石塞进颊囊，至多储存6个。</p>"
+                },
+                "Studded Cheeks": {
+                    "name": "满载颊囊 Studded Cheeks",
+                    "description": "<p>洞穴松鼠能在其颊囊内储存至多6个宝石。它通常在存有6个宝石的状态下开始战斗，每次使用吐宝石都会失去1个宝石。</p>"
+                },
+                "Defensive Scream": {
+                    "name": "戒备尖叫 Defensive Scream",
+                    "description": "<p><strong>触发</strong> 洞穴松鼠投掷先攻或在先攻前承受伤害</p>\n<hr />\n<p><strong>效果</strong> 洞穴松鼠发出刺耳的尖叫，向区域内的其他洞穴松鼠发出自己陷入困境的警报。它使用巨力尖叫。</p>"
+                },
+                "Concussive Gem": {
+                    "name": "震荡宝石 Concussive Gem",
+                    "description": "<p>吐宝石打击造成重击时，目标必须成功通过@Check[fortitude|dc:22]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>"
+                },
+                "Natural Speed": {
+                    "name": "天然疾速 Natural Speed",
+                    "description": "<p>洞穴松鼠不会受到由于土或石头产生的困难地形的影响。</p>"
+                },
+                "Screaming Force": {
+                    "name": "巨力尖叫 Screaming Force",
+                    "description": "<p>洞穴松鼠发出可怕的尖叫。@Template[emanation|distance:30]{30尺}内的非洞穴松鼠生物必须成功通过@Check[fortitude|dc:22|options:area-effect,damaging-effect,inflicts:deafened]豁免，失败则承受@Damage[2d10[sonic]|options:area-damage]伤害。大失败时，该生物还会@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1分钟。洞穴松鼠在[[/gmr 1d4 #Recharge Screaming Force]]{1d4轮}内无法再次使用巨力尖叫。</p>"
+                }
+            },
+            "publicNotes": "<p>塔尔多洞穴松鼠，也被称为陶霍蒂鼠（tauhotis），是那些体型小巧许多的普通地松鼠的一类奇异表亲，出没于所有广大绿草平原。这种生物在地下打洞，在极短时间内就能修成足以容纳巨人的洞穴系统。而在洞穴挖掘完毕后，这种松鼠就会将注意力转向它们能够找到的最大数量的宝石与金属——甚至包括存放在附近建筑底层或地下室里的。这些松鼠在搜寻宝石时根本就是肆无忌惮不择手段。</p>\n<p>洞穴松鼠对于珍贵宝石和矿物的渴望并非源自贪婪，而是出于实用目的。当颊囊装满宝藏的雄性松鼠返回洞穴，它们便会将盗窃所得摆在雌性松鼠面前，而后者舔唾并用将其塑成建构支柱。鉴于洞穴松鼠不知疲倦的工作习性，这些支柱可以在几小时内固化，轻易置换掉原本的石头和泥土。许多欧帕拉庭师在享受过愉快的下午茶后回到户外，然后便发现自己几个月的辛勤工作付之东流，被光彩夺目的混乱光景彻底取代。自古至今的建筑师们一直试图重现或模仿这种闪耀支柱；然而他们的尝试罕能成功，因为他们往往缺乏洞穴松鼠那种随机应变、难以捉摸的实用主义天性。</p>\n<p>在遭受威胁时，洞穴松鼠会发出尖厉的叫声警告族群。它们能以致命的速度吐出颊囊中的食物或建筑材料用以攻击侵略者。</p>"
+        },
+        "Wereshark": {
+            "items": {
+                "Blood Scent": {
+                    "description": "<p>鲨化人能在水中闻到至多1英里远的血。</p>",
+                    "name": "嗅探鲜血 Blood Scent"
+                },
+                "Shark Empathy": {
+                    "name": "鲨类认同 Shark Empathy",
+                    "description": "<p>鲨化人能与鲨鱼沟通。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>中型人类，具有拳头+14，造成1d4+7钝击；</p>\n<p>或大型鲨鱼，具有啃咬+14，造成1d12+7穿刺，不具有陆上速度，具有游泳速度40尺。</p>\n<p>鲨化人在人类或鲨鱼形态下不具有两栖特征，他在鲨鱼形态下具有水栖特征。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
+                },
+                "Curse of the Wereshark": {
+                    "name": "鲨化人诅咒 Curse of the Wereshark",
+                    "description": "<p>此诅咒仅能影响类人生物。</p>\n<hr />\n<p><strong>豁免检定</strong> @Check[fortitude|dc:18]</p>\n<p>在每个月圆之夜，被诅咒的生物必须尝试另一次强韧豁免，失败则会变化为同种类的化形生物，直至黎明。</p>\n<p>该生物会在GM的控制之下，并在后半夜横冲直撞，直至天明并失去知觉。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Fish Fork": {
+                    "name": "钩鱼叉 Fish Fork",
+                    "description": "<p><strong>需求</strong> 鲨化人本回合最近的动作是使用三叉戟打击造成重击；</p><hr /><p><strong>效果</strong> 鲨化人将三叉戟深深刺入目标体内，在对其大快朵颐之前死死插住。打击目标陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]（[[/act escape dc=18]]）并承受@Damage[1d4[bleed]]伤害，然后鲨化人对其尝试一次啃咬打击。当有生物由于鲨化人的三叉戟而陷入受擒时，鲨化人无法使用它的三叉戟，但他能够以具有操作特征的单动作将三叉戟拔出。</p>"
+                },
+                "Moon Frenzy": {
+                    "name": "满月狂乱 Moon Frenzy",
+                    "description": "<p>当满月出现在夜空中时，化形生物必须变化为混合形态，在之后无法进行变身，体型增大1阶，触及增加5尺，啃咬打击的伤害增加2点。</p>\n<p>当月亮落下或太阳升起时，化形生物会变回类人形态，并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]，持续[[/br 2d4 #hours]]{2d4小时}。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.dRe8n1nBWMIXd8jh]{效果：满月狂乱}</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "鲨化人"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "鲨化人 Wereshark",
+            "publicNotes": "<p>化形生物是能变形为动物的类人生物，他们在满月的月光下会变为动物与类人混合体。这些变形生物的宿命源于一种古老的原能诅咒，它能通过这些生物的啃咬来进行传播。后文中的数据反应了处于混合形态的化形生物。</p><hr /><p>鲨化人诅咒会逐渐向人灌输残忍且嗜血的态度以及进行海上旅行的冲动。他们通常会成为海盗或武装海员，很快就因反复无常的暴行而声名大噪。鲨化人会因内在的鲨性而成为天生的幸存者。当他们置身于真正的险境时，会快速逃跑，并认为遵从荣誉感的行为是完全荒谬的做法。</p>"
+        },
+        "Leopard Seal": {
+            "items": {
+                "Deep Breath": {
+                    "name": "深呼吸 Deep Breath",
+                    "description": "<p>豹海豹能屏息最多30分钟。</p>"
+                },
+                "Protective Blubber": {
+                    "name": "保护性脂肪层 Protective Blubber",
+                    "description": "<p>豹海豹遭受的环境寒冷效果将降低一个级别（酷寒变极寒，极寒变严寒，依此类推）。</p>"
+                },
+                "Whisker Sense": {
+                    "name": "胡须感知 Whisker Sense",
+                    "description": "<p>海豹可以使用其胡须精确感知指定范围内的振动，但这种感官仅限于水下。</p>"
+                },
+                "Aquatic Ambush": {
+                    "name": "水下伏击 Aquatic Ambush",
+                    "description": "<p>50尺。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
+                },
+                "Predatory Slam": {
+                    "name": "捕食猛击 Predatory Slam",
+                    "description": "<p><strong>需求</strong> 豹海豹在水中</p>\n<hr />\n<p><strong>效果</strong> 豹海豹最多可以移动40尺，最终在陆地上停止移动。当它终止移动时，相邻的敌人会受到@Damage[2d10[bludgeoning]]伤害（@Check[reflex|dc:21|basic]豁免），如果反射检定失败，敌人将@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "豹海豹"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "豹海豹 Leopard Seal",
+            "publicNotes": "<p>豹海豹是一种大型海豹，通常可长到十尺长。它们是唯一已知会追捕类人生物的海豹种类。</p>"
+        },
+        "Storm Snake": {
+            "prototypeToken": {
+                "name": "风暴蛇"
+            },
+            "items": {
+                "Static Field": {
+                    "name": "静电场 Static Field",
+                    "description": "<p>风暴蛇收集一片区域内的所有静电，然后向着@Template[emanation|distance:30]区域释放，这会对所有非植物生物造成@Damage[3d12[electricity]|options:area-damage]伤害（@Check[reflex|dc:19|options:area-effect,damaging-effect]豁免）并赋予植物生物5点临时生命值，持续1分钟。该区域的植被的成长速度会明显比同属植物的平均生长速度快得多；在森林、田野或者其他有花的地方，这会立即将此区域变为非魔法困难地形。风暴蛇在[[/gmr 1d4 #Recharge Static Field]]{1d4轮}内无法再次使用静电场</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.MGlENdqYCAwBkyXt]</p>"
+                },
+                "Static Shock": {
+                    "name": "静电冲击 Static Shock",
+                    "description": "<p><strong>触发</strong> 有生物以无武装近战攻击或非长触及近战武器触碰或伤害风暴蛇</p>\n<hr />\n<p><strong>效果</strong> 触发敌人受到冲击，承受@Damage[2d8[electricity]]伤害（@Check[fortitude|dc:19|basic]豁免）。豁免失败时，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>"
+                },
+                "Lightning Strike": {
+                    "name": "闪电打击 Lightning Strike",
+                    "description": "<p>风暴蛇能够重定向自己从风暴中吸收的雷电，对20尺内的单个生物造成@Damage[2d10[electricity]]伤害（@Check[reflex|dc:19|basic]豁免）。失败时，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]，持续至它的下个回合结束为止。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "风暴蛇 Storm Snake",
+            "publicNotes": "<p>风暴蛇是一种离群索居的生物，只有在风暴期间才能在野外看到它。覆盖在它们体表的金属鳞片会吸引并吸收附近的雷击，使得这种生物的周围弥漫着蓝或白光构成的光环。由于风暴蛇通常都是单独出现在人们的视野中，而且会随着风暴的退去而消失得无影无踪，因此许多格拉利昂的民间传说都会把它们认作风暴的使者或灾难的预兆。</p>\n<p>在首次发现一窝活的风暴蛇幼体之前，人们都猜测它是由薄雾和蒸汽构成的生物；许多人认为它们是云层中形成的幻象或转瞬即逝的巨龙身影。最新的动物学研究发现，风暴蛇实际上是龙类的远亲。风暴蛇在山顶上的蛇窝中长大，具有发育不完全的肢体并且没有任何形式的翅膀。不过，它们能展开和收起自己的金属鳞片来捕捉气流中的静电，使它们能在狂风和风暴期间将自身维持在高空中。</p>\n<p>研究还阐明了这些生性胆小的生物的饮食习惯。风暴蛇并不会像人们观察到的那般以电力为食，它们是草食性生物，喜爱大多数种类的草、植株或树叶。这种饮食习惯与它们在雷暴期间飞行的模式被认为是一种共生关系；毕竟，风暴蛇在风暴期间吸收的任何雷电都不会损害到下方的植物的生长。此外，风暴蛇的平稳放出的电能已经被观测到可以刺激各种植物群系的生长，同时这种行为对植物的口味和营养没有任何不利的影响。许多农夫都试图在艰难的时期去捕捉、驯服或者以其他方式吸引风暴蛇到它们的田地里，想要以此让庄稼恢复生机，但成功者寥寥。</p>"
+        },
+        "Helicoprion": {
+            "items": {
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>超大型，@Damage[(2d10+10)[bludgeoning]]，破裂22</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Blood Scent": {
+                    "name": "血液嗅觉 Blood Scent",
+                    "description": "<p>鲨鱼能闻到水中最远1英里范围内的血腥味。</p>"
+                },
+                "Deshell": {
+                    "name": "剥壳 Deshell",
+                    "description": "<p><strong>需求</strong> 一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于旋齿鲨的颚部</p>\n<hr />\n<p><strong>效果</strong> 鲨鱼撕咬该生物，造成@Damage[3d10[slashing]]伤害（@Check[reflex|dc:26|basic]豁免）</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "旋齿鲨"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "旋齿鲨 Helicoprion",
+            "publicNotes": "<p>多种鲨鱼生活在海洋深处，陆地生物很少能遇到它们。</p><hr /><p>虽然旋齿鲨并非真正的鲨鱼，但它属于类似的软骨鱼类谱系。这种掠食者最引人注目的特征是其螺旋状的牙齿，这些牙齿在它的下颚中向外螺旋排列。</p>"
+        },
+        "Plated Python": {
+            "prototypeToken": {
+                "name": "装甲蟒"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Towering Bite": {
+                    "name": "高耸咬击 Towering Bite",
+                    "description": "<p>装甲蟒向前猛伸，进行一次60尺触及的颚打击。如果打击命中，它的目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]，并被拉拽至装甲蟒相邻的开放空间。装甲蟒的这次攻击能穿透任何它可以掘进的材质，并如常留下岩石隧道。</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(2d10+10)[bludgeoning]], @Check[fortitude|dc:32|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                },
+                "Crumbling Earth": {
+                    "name": "地面崩塌 Crumbling Earth",
+                    "description": "<p>装甲蟒将其吐息渗入地面，将@Template[emanation|distance:30]范围的地面转化为易碎的石头。这些碎石对于其他生物是困难地形。当地面崩解时，区域内的其他生物必须通过@Check[reflex|dc:29]豁免，否则因为地面崩解塌陷而被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。以这种方式被禁足的生物可以正常@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]，或使用三个交互动作来把自己挖出来从而脱身。</p>"
+                },
+                "Petrify Prey": {
+                    "name": "石化猎物 Petrify Prey",
+                    "description": "<p><strong>需求</strong> 有个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于装甲蟒</p>\n<p><strong>触发</strong> 装甲蟒开始它的回合</p>\n<hr />\n<p><strong>效果</strong> 装甲蟒的呼吸渗入受擒生物。该生物必须进行一次@Check[fortitude|dc:32]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物的身体变硬，导致其@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>失败</strong> 生物被@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]1轮并被装甲蟒活吞。</p>\n<p><strong>大失败</strong> 生物被永久石化并被装甲蟒活吞。</p>"
+                },
+                "Stone Tunnel": {
+                    "name": "岩石隧道 Stone Tunnel",
+                    "description": "<p>当装甲蟒掘地时，会石化并摧毁前方的材质，留下一个直径5尺的隧道。装甲蟒通过任何至少5尺宽的空间时无需@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]。</p>"
+                },
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>大型，@Damage[(3d10+5)[acid]]，破裂20</p>\n<hr />\n<p>该伤害无视石化生物的硬度。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                }
+            },
+            "name": "装甲蟒 Plated Python",
+            "publicNotes": "<p>戈耳工是一大类动物，它们共享一些奇特的特征。所有的戈耳工都被厚重的甲片覆盖，并能呼出石化气体。除了这些特征外，戈耳工可能看起来像任何动物。尽管有些戈耳工看起来可能威胁不那么大，但它们绝不应该被低估。戈耳工是狡猾的猎手，即使是一小口吐息也能使几乎任何猎物瘫痪。</p><hr /><p>最令人畏惧的戈耳工之一是巨大的装甲蟒，从头到尾覆盖着大型金属鳞片。与许多其他蛇类使用的毒液不同，它的吐息能将生物和物体变成石头。虽然这对于被它的嘴咬住的猎物来说最为致命，但它也能将大片区域变成脆弱且无生命的石头，而装甲蟒可以轻松地在其间穿行。</p>\n<p>装甲蟒通常成对或成群生活，并且极其领地化。装甲蟒之间为争夺领地的战斗非常激烈，往往会对地形产生长期影响。它们对它们视为威胁的其他生物，包括人类和大型动物，保卫领地非常积极。它们的栖息地可以通过它们挖掘后留下的石隧道来识别，谨慎的旅行者会以此作为改变路线的标志。特别大胆的冒险者可能会尝试利用这些隧道通行，因为这可以免受自然元素和其他野生动物的侵扰，但又确实面临与装甲蟒迎面撞上的风险。</p>"
+        },
+        "Hexworm": {
+            "prototypeToken": {
+                "name": "巫术蚕"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "巫术蚕 Hexworm",
+            "items": {
+                "Arcanosense": {
+                    "name": "奥法感知 Arcanosense",
+                    "description": "<p>巫术蚕能够感知到所列范围内的魔力源，如同它拥有4环级的@UUID[Compendium.pf2e.spells-srd.Item.gpzpAAAJ1Lza2JVl]）常驻内在法术。</p>"
+                },
+                "Arcane Consumption": {
+                    "name": "奥术吞噬 Arcane Consumption",
+                    "description": "<p>巫术蚕尝试吞噬相邻魔法效果或无主魔法物品中的魔力。它以+11调整值对目标尝试一次反制检定。如果成功，魔法效果结束。魔法物品会变为平凡物品，持续1回合。巫术蚕恢复@Damage[2d8[healing]]生命值。</p>"
+                },
+                "Arcanovore": {
+                    "name": "噬魔 Arcanovore",
+                    "description": "<p> 巫术蚕对由法术造成的所有伤害具有抗力5。</p>"
+                },
+                "Arcanotaxis": {
+                    "name": "趋魔性 Arcanotaxis",
+                    "description": "<p><strong>需求</strong> 巫术蚕使用其奥法感知侦测到一处魔力源</p>\n<p><strong>触发</strong> 巫术蚕回合开始</p>\n<hr />\n<p><strong>效果</strong> 巫术蚕朝被其侦测到的最近魔力源行走至多其速度的距离。</p>"
+                }
+            },
+            "publicNotes": "<p>这些灰色幼虫在地面上缓慢爬行，本能地以魔法为食。</p>"
+        },
+        "Virtuosic Lyrebird": {
+            "items": {
+                "Arcane Harmony": {
+                    "name": "奥法和音 Arcane Harmony",
+                    "description": "<p><strong>效果</strong> 魔技琴鸟唱出巧妙的颤音，让其他人能用这些发音来修饰自身的魔法。位于第一只使用奥法和音的魔技琴鸟60尺射程内的下一只魔技琴鸟在施法时能从后述两个好处中选择其一，在此之后，奥法和音结束</p>\n<ul>\n<li>法术的伤害获得每法术环级+2点状态加值</li>\n<li>法术的其中1个目标在对抗法术时，豁免承受-2点状态减值</li>\n</ul>"
+                },
+                "Spell Mimicry": {
+                    "name": "模仿法术 Spell Mimicry",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 在魔技琴鸟的上个回合结束后，有生物施放3环级或更低环级的法术，且魔技琴鸟听到了法术的咒语</p><hr /><p><strong>效果</strong> 魔技琴鸟学会了足矣模仿法术的咒语，并且在该回合内施放该法术，使用与原始法术相同的动作。</p>"
+                },
+                "Spellsong Casting": {
+                    "name": "咒歌施法 Spellsong Casting",
+                    "description": "<p>魔技琴鸟的对发音的掌控让它能够以纯粹的歌声施法。尽管它必须发声才能够施法，但它并不需要手势，移除魔技琴鸟所施放的所有法术中的操作特征。若它施放的法术具有语言特征（通常是使用模仿法术能力时），则能够以通用语施放该法术，尽管魔技琴鸟实质上并不是真的理解了这种语言。</p>"
+                },
+                "Counter-Melody": {
+                    "name": "反制旋律 Counter-Melody",
+                    "description": "<p><strong>触发</strong> 60尺内的敌人施法</p>\n<hr />\n<p><strong>效果</strong> 魔技琴鸟作出反制检定对抗触发法术（反制调整值[[/r 1d20+14 #Counteract]]{+14}）。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "魔技琴鸟"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "魔技琴鸟 Virtuosic Lyrebird",
+            "publicNotes": "<p>魔技琴鸟为特殊培育的动物是怎么逃脱囚笼并成为害兽这一课题上提供了很好的研究案例。最初的魔技琴鸟被公认为是一小群法师学徒的毕业论文的一环，他们试图创造出一种能够更好地辅助施法的魔宠。这些鸟的声音模仿能力确实能够让它们与自己连结的施法者和谐相处；然而，最初的研究进展十分缓慢，不耐烦的学徒们选择在论文截止日期前使用实验性的魔法匆忙提升这些鸟的能力。不幸的是，这些样本新获得的声音模仿能力过于强大，以至于它们能够像模仿其他声音一般轻松地模仿咒语。魔技琴鸟很快就通过气化、传送、或魅惑它们的饲养员来逃离笼子，逃进野外并繁衍生息。</p>\n<p>魔技琴鸟主要使用它们的施法能力来进行恶作剧和缓解无聊的情绪。它们倾向于成对同行，但当这些鸟儿聚集成更庞大的群体时，它们的调皮与乐趣很快就会变得十分危险。</p>"
+        },
+        "Giant Tardigrade": {
+            "prototypeToken": {
+                "name": "巨水熊虫"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "巨水熊虫 Giant Tardigrade",
+            "items": {
+                "Eyespots": {
+                    "name": "眼点 Eyespots",
+                    "description": "<p>巨水熊虫无法看见30尺外的任何事物。</p>"
+                },
+                "Tun State": {
+                    "name": "休眠状态 Tun State",
+                    "description": "<p><strong>触发</strong> 水熊虫因为挨饿，窒息或类似环境原因生命值降至0</p>\n<p><strong>频率</strong> 每周一次</p>\n<p><strong>需求</strong> 水熊虫没有处于休眠状态</p>\n<hr />\n<p><strong>效果</strong> 巨水熊虫不会死亡，而是改为保持在1生命值，缩成一个干瘪的球，称之为休眠状态。当处于这种休眠状态时，巨水熊虫@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]，不需要吃，喝，或呼吸，抗力加倍到20。它将无期限保持休眠状态，直到被足够数量的水覆盖，此时它开始补充水分，获得再生5。再生会持续到它达到最大生命值。然后巨水熊虫脱离休眠状态。</p>"
+                },
+                "Vacuum Mouth": {
+                    "name": "真空吸口 Vacuum Mouth",
+                    "description": "<p><strong>需求</strong> 巨水熊虫没有使一个目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 巨水熊虫用嘴吸入空气。@Template[cone|distance:20]范围内的所有生物都必须成功通过一次@Check[reflex|dc:25]豁免，否则就会被拉至与巨水熊虫相邻。巨水熊虫会选择一个豁免失败的生物，用爪擒获目标，然后进行一次口针打击。</p>"
+                }
+            },
+            "publicNotes": "<p>水熊虫体宽不比头发丝更宽，但当它们的河畔环境暴露于高浓度的魔法中时，这些八条腿的杂食动物能长到非常巨大。</p>"
+        },
+        "Giant Coppermouth": {
+            "items": {
+                "Quickening Jolt": {
+                    "description": "<p>铜口蛇通过增加自身神经系统的反应时间来操控自己，行走并在移动过程中对两个不同目标各进行一次打击。这两次攻击都会计算在其多重攻击减值中，但该减值在它完成两次攻击后才会增加。</p>",
+                    "name": "加速电击 Quickening Jolt"
+                },
+                "Venomous Spit": {
+                    "name": "毒液喷射 Venomous Spit",
+                    "description": "<p>铜口蛇在@Template[line|distance:30]内喷射一股带电的毒液。毒液造成@Damage[8d6[electricity]|options:area-damage]伤害（@Check[reflex|dc:22|basic|options:area-effect]豁免），并且受到毒液伤害的生物会立即暴露在铜口蛇毒液中。铜口蛇在[[/gmr 1d4 #rounds]]{1d4轮}内无法再次使用毒液喷射。</p>"
+                },
+                "Coppermouth Venom": {
+                    "name": "铜口蛇毒液 Coppermouth Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:25]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison],1d6[electricity]]{1d6毒素和1d6电击} (1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison],1d6[electricity]]{2d6毒素和1d6电击}并且@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison],2d6[electricity]]{2d6毒素和2d6电击}并且@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}</p>"
+                },
+                "Deep Breath": {
+                    "name": "深呼吸 Deep Breath",
+                    "description": "<p>巨铜口蛇能屏息最多1小时。</p>"
+                },
+                "Greater Electrolocation": {
+                    "name": "高等回声定位 Greater Electrolocation",
+                    "description": "<p>巨铜口蛇能感知到活物产生的微小电流，他们将其作为20尺范围的精确感官使用。如果有任何生物在过去1分钟内使用过电击效果，那么该感官的作用范围扩展至100尺。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "巨铜口蛇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "巨铜口蛇 Giant Coppermouth",
+            "publicNotes": "<p>铜口蛇依靠其毒液和操纵生物电脉冲的能力，即使单独一只也极为凶猛和好斗，</p>"
+        },
+        "Greater Chimera": {
+            "prototypeToken": {
+                "name": "高等奇美拉"
+            },
+            "items": {
+                "Multiple Reactions": {
+                    "name": "多重反应 Multiple Reactions",
+                    "description": "<p>高等奇美拉每轮获得两个额外反应动作，它仅能将其用于反应打击。它在使用每个反应动作时必须使用不同的头部。若高等奇美拉失去自身的一个头部，它也会失去这其中的一个额外反应动作。</p>"
+                },
+                "Three-Headed Strike": {
+                    "name": "三头同击 Three-Headed Strike",
+                    "description": "<p>高等奇美拉用它每个头部分别各作出一次打击，每次都有-2减值并且必须选择不同的目标。这些打击在计算高等奇美拉的多重攻击减值时视为一次攻击，并且多重攻击减值在三次攻击都结束之后才会增加。</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Three-Headed": {
+                    "name": "三颗头颅 Three-Headed",
+                    "description": "<p>任何能够将高等奇美拉的头部砍下的能力（比如@UUID[Compendium.pf2e.equipment-srd.Item.6xaxxKfvXED6LfIY]武器的重击）都会随机砍下其中一个头部。失去一个头部不会杀死奇美拉（只要它至少还保留一个头部），但这么做确实能够防止它使用失去的头部作出打击或使用该头部赋予的任何能力。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "高等奇美拉 Greater Chimera"
+        },
+        "Royal Basilisk": {
+            "prototypeToken": {
+                "name": "皇冠蛇怪"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "皇冠蛇怪 Royal Basilisk",
+            "items": {
+                "equipment-Iron Crown": {
+                    "name": "铁皇冠 Iron Crown"
+                },
+                "Crowned Royalty": {
+                    "name": "戴冠皇室 Crowned Royalty",
+                    "description": "<p>皇冠蛇怪的皇冠牢固地附着在其头上，但可以像持有的物品一样被@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]。失去皇冠之后，皇冠蛇怪对毒素的掌控会被削弱，失去其毒雾遮蔽能力。皇冠蛇怪可以通过交互动作，装备一顶在其尾巴触及范围内的皇冠。皇冠蛇怪的皇冠通常由铁制成，可以使其使用毒雾遮蔽能力，但由其他更奇异材料制成的皇冠可能赋予不同的能力。</p>"
+                },
+                "Miasmatic Shroud": {
+                    "name": "毒雾遮蔽 Miasmatic Shroud",
+                    "description": "<p>15尺。皇冠蛇怪呼吸中的毒素使其周围的空气变得模糊，使它对灵光范围外所有生物获得隐蔽，但是它不能利用这种隐蔽来躲藏或@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}。当一个生物在灵光内结束其回合时，会暴露于皇冠蛇怪毒液之中。</p>"
+                },
+                "Greater Constrict": {
+                    "name": "高等紧勒 Greater Constrict",
+                    "description": "<p>@Damage[(4d8+3)[bludgeoning]], @Check[fortitude|dc:32|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.GreaterConstrict]</p>"
+                },
+                "Royal Basilisk Venom": {
+                    "name": "皇冠蛇怪毒液 Royal Basilisk Venom",
+                    "description": "<p><strong>豁免检定</strong> DC 36</p>\n<p><strong>最大持续</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[2d10[poison]]和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[3d10[poison]]和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[4d10[poison]]、笨拙3和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}（1轮）</p>"
+                },
+                "Stone-Hewing Spit": {
+                    "name": "破石吐息 Stone-Hewing Spit",
+                    "description": "<p>皇冠蛇怪以巨大的力量喷出其毒液，对@Template[line|distance:240]范围内的生物造成@Damage[5d10[acid],5d8[piercing]|options:area-damage]伤害（@Check[reflex|dc:32|basic|options:area-effect]豁免），并使每个受伤的生物暴露于皇冠蛇怪毒液之中。该直线攻击能穿透硬度小于20的障碍物，无视其提供的任何掩蔽带来的好处。皇冠蛇怪在[[/gmr 1d4 #Recharge Stone-Hewing Spit]]{1d4轮}内不能再次使用破石吐息。</p>"
+                },
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>大型，@Damage[(5d10)[acid]]，破裂30</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Wrap in Coils": {
+                    "name": "缠卷 Wrap in Coils",
+                    "description": "<p><strong>需求</strong> 一个大型或更小的生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]于皇冠蛇怪的嘴</p>\n<hr />\n<p><strong>效果</strong> 皇冠蛇怪将生物移动到其卷起的躯干中，解放自己的嘴用于攻击，然后对该生物使用高等紧勒。皇冠蛇怪的缠卷可以容纳最多能填满其占据空间的任意数量的生物。</p>"
+                }
+            },
+            "publicNotes": "<p>皇冠蛇怪这个名字非常恰当，不仅因为它们头上的金属皇冠，还因为它们独特且强效的毒素。该生物的毒素表现为一种粘稠的蒸汽，接触到任何东西都会附着并侵蚀。它们对毒素的掌控确实付出了一定的代价，因为皇冠蛇怪没有能力将猎物石化。尽管皇冠蛇怪可以精心塑造皇冠，有些是由简单的铁制成，有些则由稀有的天金制成，但它们更喜欢收集由其他生物制作的皇冠。</p>"
+        },
+        "Almiraj": {
+            "prototypeToken": {
+                "name": "独角兔"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "独角兔 Almiraj",
+            "publicNotes": "<p>独角兔在几乎所有方面都与黄色的野兔极为相似……除了额头上突出的两尺长的黑色犄角。虽然它与温顺的独角兽都具有这一特征，但它们的相似之处也仅此而已。独角兔是凶猛的生物，以屠杀体型远大于自己的牲畜而闻名，而在绝境时，甚至会袭击人类。据说它们的凝视足以让即使是最勇敢的战士也逃之夭夭。</p>\n<p>不同于普通的野兔，独角兔独来独往，领地意识极强。它们是适应性强的伏击猎手，具有追踪任何猎物所需的耐力和速度。它们会用颚和爪攻击，但主要以其犄角猛刺猎物的腹部而闻名。许多学者相信，这些生物散发出来的恐怖魔法光环源自它们的犄角。这种思维导致了独角兔攻击事件的增加，因为当地居民试图活捉这种生物并移除它的犄角，希望这能使其变得更加温顺。然而，这种希望并未实现，因为即使犄角被移除，独角兔的攻击性也丝毫未减，甚至可能更加凶猛。</p>\n<p>冒险者如果能避开这种凶猛捕食者恐怖的犄角通常会觉得自己很幸运，但与被其锋利的牙咬住相比，这确实是一个更好的选择。独角兔有个坏习惯，它们会用嘴啃住猎物并猛烈地摇晃直到猎物变得软弱无力。如果这一招失败，它们会将猎物拖入地下，直到猎物在地底深处窒息身亡。几乎没有人能从独角兔的洞穴中逃生。</p>",
+            "items": {
+                "Frightful Presence": {
+                    "name": "恐怖威压 Frightful Presence",
+                    "description": "<p>5尺，@Check[will|dc:22|options:area-effect,inflicts:frightened,inflicts:fleeing]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence] 豁免大失败的生物还会@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D1轮。</p>"
+                },
+                "Final Shake": {
+                    "name": "终结摇晃 Final Shake",
+                    "description": "<p><strong>需求</strong> 一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于独角兔</p>\n<hr />\n<p><strong>效果</strong> 独角兔紧紧咬住该生物并剧烈摇晃，试图将其终结。该生物受到@Damage[2d6[bludgeoning]]伤害，并且必须通过@Check[fortitude|dc:20]豁免，否则@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。对于小型或更小的生物，豁免会受到-2环境减值。</p>"
+                },
+                "Reactive Strike (Horn only)": {
+                    "name": "反应打击 Reactive Strike （仅角抵）",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>\n<p>@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}的生物受到额外1d6点持续流血伤害。重击时，目标还会被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。 </p>"
+                },
+                "Goring Charge": {
+                    "name": "冲锋刺击 Goring Charge",
+                    "description": "<p>独角兔低下头，向选定的猎物凶猛地冲去。独角兔行走两次。如果它的移动结束时进入了至少一个敌人的近战触及范围内，它对该敌人进行一次角打击。该打击会额外造成1d6持续流血伤害。</p>"
+                },
+                "Into the Earth": {
+                    "name": "入土 Into the Earth",
+                    "description": "<p><strong>需求</strong> 一只中型或更小的生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于独角兔</p>\n<hr />\n<p><strong>效果</strong> 独角兔试图带着猎物逃跑，钻入地下。独角兔最多以满速掘地，受擒的生物必须通过一次@Check[reflex|dc:20]豁免，否则将被拖入地下。如果目标通过豁免，它将逃脱并且独角兔继续正常掘地；如果豁免失败，受擒的生物必须立即屏住呼吸，否则将在泥土下窒息。</p>"
+                }
+            }
+        },
+        "Majungasaurus": {
+            "prototypeToken": {
+                "name": "玛君龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "玛君龙 Majungasaurus",
+            "items": {
+                "Frightened Prey": {
+                    "name": "恐吓猎物 Frightened Prey",
+                    "description": "<p>处于@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态的生物对玛君龙@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                },
+                "Startling Roar": {
+                    "name": "开场咆哮 Startling Roar",
+                    "description": "<p>当玛君龙使用隐秘掷骰先攻时，它可以用自由动作对@Template[emanation|distance:30]内每个生物进行[[/act demoralize]]。无论结果如何，每个生物随后都将临时免疫1小时。</p>"
+                },
+                "Crack Bones": {
+                    "name": "裂骨 Crack Bones",
+                    "description": "<p><strong>需求</strong> 玛君龙用颚@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒获 Grabbed}着一个生物</p><hr /><p><strong>效果</strong> 玛君龙对该生物造成@Damage[3d8[bludgeoning]]伤害（@Check[fortitude|dc:24|basic]豁免）。此次豁免失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到其生命值完全恢复。</p>"
+                }
+            },
+            "publicNotes": "<p>玛君龙以蹲伏的姿势游走，它的姿态非常低，与猎物的视线紧紧相接。与大多数食肉恐龙不同的是，玛君龙主要是一种伏击型掠食者，它耐心地等待猎物来到近前，然后从掩体中冲出，发出一声标志性的吼声发动攻击。</p>"
+        },
+        "Blooming Guardian": {
+            "prototypeToken": {
+                "name": "绽放守护者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "绽放守护者 Blooming Guardian",
+            "items": {
+                "Petal Form": {
+                    "name": "花瓣形态 Petal Form",
+                    "description": "<p>绽放守护者可以暂时化为一团旋转的花瓣和花粉云，从而越过荆棘并穿过裂缝。在林地地形中行走时，绽放守护者无视困难地形，并且只要有很小的通道即可穿过障碍物。</p>"
+                },
+                "Buck": {
+                    "name": "甩脱 Buck",
+                    "description": "<p>@Check[reflex|dc:36]</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Buck]</p>"
+                },
+                "Budding Siphon": {
+                    "name": "萌芽虹吸 Budding Siphon",
+                    "description": "<p>20尺。绽放守护者处于持续分解状态；为了阻止这种熵增，覆盖其鹿角的花朵不断从周围区域虹吸生命。所有进入灵光或在其范围内开始回合的生物都会受到@Damage[6d4[void]|options:area-damage]伤害（@Check[fortitude|dc:36|basic|options:area-effect]豁免）。在绽放守护者任何一轮开始时，只要其通过萌芽虹吸造成伤害，它会获得10点临时生命值，并且除了上回合第一个伤害的生物之外，上回合每多伤害一个生物，临时生命值就增加2点，最大达到20点生命值。</p>"
+                },
+                "Full Bloom": {
+                    "name": "完全绽放 Full Bloom",
+                    "description": "<p>绽放守护者鹿角上的花朵绽放，展现其光辉，同时侵蚀宿主。在这种架势下，绽放守护者的攻击额外造成2d4毒素伤害和5持续毒素伤害；命中时，目标必须通过@Check[fortitude|dc:36]豁免，否则会变得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。只要架势生效，绽放守护者就会受到@Damage[5[persistent,poison]]伤害。</p>"
+                },
+                "Goring Charge": {
+                    "name": "冲刺撞击 Goring Charge",
+                    "description": "<p>绽放守护者行走两次，并在任一次行走后进行鹿角打击。如果打击命中，绽放守护者会额外造成2d12钝击伤害，并且目标在下次针对萌芽虹吸的强韧豁免中受到-2环境减值。</p>"
+                },
+                "Wail of the Forest": {
+                    "name": "森林哀号 Wail of the Forest",
+                    "description": "<p><strong>需求</strong> 绽放守护者处于完全绽放中</p>\n<hr />\n<p><strong>效果</strong> 绽放守护者直面自己的死亡，使其花朵爆裂并喷洒花粉。所有@Template[cone|distance:40]范围内的生物受到@Damage[10d10[void]|options:area-damage]伤害，尝试@Check[fortitude|dc:36|options:area-effect,damaging-effect,inflicts:drained]豁免。绽放守护者随后退出完全绽放，并在[[/gmr 1d4 #Recharge Full Bloom]]{1d4轮}内无法重新进入。</p>\n<hr />\n<p><strong>大成功</strong> 无效果。</p>\n<p><strong>成功</strong> 生物受到一半伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]的生物失去力竭，并获得相同层数的流逝。</p>\n<p><strong>大失败</strong> 同失败，但伤害翻倍。</p>"
+                }
+            },
+            "publicNotes": "<p>绽放守护者鹿角上的瘟疫之花在月光下最为美丽，此时它们完全绽放，散发出天体般的光辉。当绽放守护者接近生命周期的末尾时，它们会在森林中进行最后一次巡逻，其古老的身体会分解融入林下植被。</p>"
+        },
+        "Hooplamander": {
+            "name": "环蝾螈 Hooplamander",
+            "items": {
+                "Flexible Dodge": {
+                    "name": "曲体闪避 Flexible Dodge",
+                    "description": "<p><strong>需求</strong> 环蝾螈已经展开身体</p>\n<p><strong>触发</strong> 环蝾螈成为打击的目标</p>\n<hr />\n<p><strong>效果</strong> 环蝾螈的AC在对抗触发攻击时获得+2环境加值，并且进入卷成轮形架势。</p>"
+                },
+                "Rollout Trample": {
+                    "name": "滚动践踏 Rollout Trample",
+                    "description": "<p><strong>需求</strong> 环蝾螈已经卷成轮形</p>\n<hr />\n<p><strong>效果</strong> 同@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3]（大型或更小，脊形尾，@Check[reflex|dc:22|basic]），不过反射豁免大失败的目标会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，而且环蝾螈在其移动结束后展开身体。</p>"
+                },
+                "Unfurl": {
+                    "name": "展开身体 Unfurl",
+                    "description": "<p><strong>需求</strong> 环蝾螈已经卷成轮形</p>\n<hr />\n<p><strong>效果</strong> 环蝾螈松开尾巴，@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]至多20尺并退出轮子形态，展开身体，四肢着陆。</p>"
+                },
+                "Wheels Up": {
+                    "name": "卷成轮形 Wheels Up",
+                    "description": "<p><strong>需求</strong> 环蝾螈已经展开身体</p>\n<hr />\n<p><strong>效果</strong> 环蝾螈@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]，然后卷成轮子形态。5尺内的任何生物必须成功通过@Check[reflex|dc:22]豁免，失败则会在1轮内陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。在卷成轮形时，环蝾螈无法作出打击，并且其速度增加至40尺。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "环蝾螈"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "publicNotes": "<p>许多旅行者都会因身后传来巨响而转过头去，却看到一个怪异的轮子已经快要压到自己脸上。而即使躲过这个轮子危险也还未解除，因为轮子会停下来然后展开成环蝾螈。尽管阿卡迪亚的偏远地区有关于这种生物的传言，而且芒吉莽原的草原上都畏惧着它们，但许多城市地区的人认为这些看似荒谬的环蝾螈只不过是个夸张的故事。然而，正如许多被碾平的商队残骸所证明的那般，这些顶级掠食者确实存在于世上。</p>\n<p>环蝾螈形似大型蝾螈。它们生来就长着可伸缩的后腿以及异常强壮且灵活的脊椎。它们锋利的前爪就如同尖锐的铁钩一般，可以撕碎肉体或者在自己进入轮子形态时稳住身体。随着自身的成长，它们学会如何跳跃和滚动，它会将尾巴衔在嘴里，用前肢稳住身体，形成粗略的轮形，然后用尾巴上的肌肉向前推进。它们的背部有类似轮胎的花纹，这提供了显著的牵引力和操纵力。环蝾螈用钩爪造成的流血伤口尤为致命，留下伤口之后它们就会进入“卷成轮形”的形态并在战场上奔跑、践踏敌人，等待猎物因流血而亡。</p>\n<p>你可以在任何平坦且开阔的地带找到环蝾螈。它们的表皮颜色会与其狩猎的地点相匹配，在草原上长着棕绿色的表皮，雪域中则长着白色的表皮。部分博物学家认为这种生物最初是从传说中衔尾蛇的酸性痕迹中孵化出的蝾螈。而其他人则认为，大自然中的物种种类繁多，不需要什么魔法就能诞生这种生物——只需要足够平坦的环境来对它们狡诈的适应性作出回报即可。</p>"
+        },
+        "Thruneosaurus Rex": {
+            "prototypeToken": {
+                "name": "斯戎暴龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "斯戎暴龙 Thruneosaurus Rex",
+            "publicNotes": "<p>名为斯戎暴龙的邪秽骇物并非自然的魔兽。它们是由尝试将恐龙的凶残与地狱之力结合起来的，切利亚斯的魔鬼信徒所创造，他们通过将一窝来自梅迪奥伽尔提岛的暴龙卵注入了魔鬼的腐液，并将孵化出来的怪物小恐龙以其赞助人的名字命名。尽管很少有记录和幸存者能准确说出实验是如何出错的，但实验对象还是逃脱了，它们的后代现在最常出没于切利亚斯东部的默语森林中。</p>",
+            "items": {
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>超大型，@Damage[(3d12+10)[bludgeoning]]，破裂40</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Trample": {
+                    "description": "<p>超大型或更小体型，脚踩，@Check[reflex|dc:38|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>",
+                    "name": "践踏 Trample"
+                },
+                "Frightful Presence": {
+                    "name": "恐怖威压 Frightful Presence",
+                    "description": "<p>90尺。@Check[will|dc:38|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
+                },
+                "Instinctive Teleportation": {
+                    "name": "本能传送 Instinctive Teleportation",
+                    "description": "<p><strong>触发</strong> 斯戎暴龙受到来自圣洁效果的伤害</p><hr /><p><strong>效果</strong> 斯戎暴龙带着任何被它活吞的生物，传送到它能看见的60尺内的一处开放空间内。</p>"
+                },
+                "Hellfire Blast": {
+                    "name": "狱火爆 Hellfire Blast",
+                    "description": "<p>斯戎暴龙以三种方式之一引导硫磺狱火。斯戎暴龙选择一种效果，但不能连续两轮做出相同的选择。</p><ul><li><strong>炎炎烈日 Blistering Sun</strong> （神术，火，邪秽） 斯戎暴龙在两角间燃起一团狱火球，能够向@Template[emanation|distance:30]范围辐射热量，造成@Damage[2d8[persistent,fire]]伤害。</li><li><strong>窒息毒烟 Choking Fumes</strong> （神术，毒素，邪秽） 斯戎暴龙突出一道@Template[cone|distance:60]的硫磺烟雾，造成@Damage[6d8[poison]|options:area-damage]伤害（@Check[fortitude|dc:38|traits:divine,poison,unholy|basic|options:area-effect]豁免）。豁免失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</li><li><strong>火焰光束 Fiery Beam</strong> （神术，火，邪秽） 斯戎暴龙的眼中发出一道@Template[line|distance:120]的地狱烈焰，造成@Damage[6d10[fire]|options:area-damage]伤害（@Check[reflex|dc:38|traits:divine,fire,unholy|basic|options:area-effect]豁免）。</li></ul>"
+                }
+            }
+        },
+        "Warden of Peaks and Skies": {
+            "prototypeToken": {
+                "name": "山峰与天空的守望者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "山峰与天空的守望者 Warden of Peaks and Skies",
+            "allSaves": "对抗原能时所有豁免+1状态加值",
+            "items": {
+                "Stormsight": {
+                    "name": "风暴视觉 Stormsight",
+                    "description": "<p>风、降雨和云不会阻挡守望者的视觉；她忽略风暴、雾、降雨和类似状况带来的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Song of the Skies": {
+                    "description": "<p>守望者发出欢快的鸟鸣，为@Template[emanation|distance:60]内的所有盟友带来恩惠，并唤起飞行的自由。在接下来的1分钟内，受影响的盟友获得@UUID[Compendium.pf2e.spells-srd.Item.aqRYNoSvxsVfqglH]{行动无碍 Unfettered Movement}，60尺飞行速度，并且在他们处于空中时将所有位于地面的生物视作@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.dZDpfgU63rXbBHpe]{效果：天空之歌}</p>",
+                    "name": "天空之歌 Song of the Skies"
+                },
+                "Tempest Downdrafts": {
+                    "name": "降下暴风 Tempest Downdrafts",
+                    "description": "<p><strong>触发</strong> 守望者飞行</p>\n<hr />\n<p><strong>效果</strong> 守望者扇动的翅膀会产生出强大的阵风，将较小的生物吹离航道。以守望者为中心，@Template[emanation|distance:60]范围，会充满闪电狂风，直到守望者下回合开始。生物必须成功通过@Check[reflex|dc:42|options:area-effect,damaging-effect,inflicts:prone]豁免才能在风中使用任意移动动作；飞行生物使用比掷骰结果差一级的成功度。大失败的生物将被吹离守望者30尺，击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]，并受到@Damage[4d6[electricity]|options:area-damage]伤害。</p>"
+                },
+                "Crystal Exhalation": {
+                    "name": "冰晶呼吸 Crystal Exhalation",
+                    "description": "<p>守望者吐息，形成冰晶风暴。@Template[cone|distance:60]范围内所有生物受到@Damage[4d8[cold],4d8[slashing]|options:area-damage]伤害（@Check[reflex|dc:44|basic|options:area-effect]豁免）。大失败时，生物还将被冰@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。守望者不能在[[/gmr 1d4 #Recharge Crystal Exhalation]]{1d4轮}内再次使用冰晶呼吸。</p>"
+                },
+                "Orogenesis Dive": {
+                    "name": "造山俯冲 Orogenesis Dive",
+                    "description": "<p>守望者朝上直线飞行240尺。当她如此做时，从她起点开始的@Template[burst|distance:30]范围内地面升起一座120尺高的顶部为山峰的石柱，成为高等困难地形。该爆发范围内所有生物必须成功通过一次@Check[fortitude|dc:44]豁免，否则会因突然的高度变化而陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]状态。守望者然后向下直线飞到石柱山峰的顶部，将她的角插入岩石中。在她着陆时，新形成的山峰颤动起来。区域内所有生物必须成功通过一次@Check[reflex|dc:42]豁免，否则会跌落山峰，坠落120尺，并在区域外最近的方格中着陆。石柱是永久性的。</p>"
+                },
+                "Voice of Nature": {
+                    "name": "自然之声 Voice of Nature",
+                    "description": "<p>虽然荒野的守望者不会说话，但它们能够通过持续的眼神交流与任何动物，魔兽，植物，自然世界的其他生物完美地交流复杂概念。与自然世界有足够强烈联系的智慧生物，例如动物本能的野蛮人或则会说荒野之歌的德鲁伊，能够稍微理解荒野的守护者，尽管其含义是模糊的。</p>"
+                },
+                "Warden's Crown": {
+                    "name": "守望者之冠 Warden's Crown",
+                    "description": "<p>荒野的守望者其角冠能够引得野生生物的尊敬。守望者所属生物群落的野生生物对其态度会自动改善一级（最高至友善），且在守望者面前通常不会相互使用敌对动作。</p>"
+                },
+                "+1 To All Saves vs. Primal": {
+                    "name": "对抗原能时全豁免+1 +1 To All Saves vs. Primal"
+                }
+            },
+            "publicNotes": "<h2>守望者的祝福 Warden's Blessing</h2>\n<p>传说中，山峰和天空的守守望者会邀请那些他特别青睐的人进入他的家——科达山脉深处一座中空山峰上的巢穴。在那里，客人将享受一场盛大的宴会，之后守望者会把他们变成雷鸟，这样他们就可以在余下的日子里享受天空了。如果有人拒绝，他也不会生气。</p>"
+        },
+        "Warden of Caverns and Burrows": {
+            "prototypeToken": {
+                "name": "岩窟与洞穴的守望者"
+            },
+            "items": {
+                "Magmatic Reflex": {
+                    "description": "<p><strong>触发</strong> 守望者成为一次攻击的目标</p>\n<hr />\n<p><strong>效果</strong> 守望者在跳离危险时喷出岩浆。此次喷射会对所有相邻生物造成@Damage[6d12[fire]]伤害（@Check[reflex|dc:42|basic]豁免）。它随后@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}或快步离开，并在对抗触发攻击时AC获得+2环境加值。</p>",
+                    "name": "岩浆反射 Magmatic Reflex"
+                },
+                "Bury Beneath Stone": {
+                    "name": "葬于岩底 Bury Beneath Stone",
+                    "description": "<p><strong>需求</strong> 守望者@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒获 Grabbed}一个生物；</p><hr /><p><strong>效果</strong> 守望者尝试将受擒于其虫颚的生物楔入它下方打开的地缝中。守望者尝试一次@Check[athletics|defense:reflex]检定对抗受擒生物的反射DC。如果成功，它将该生物埋于地里。生物受到@Damage[10d10[bludgeoning]]伤害。它还将陷入@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，且必须屏住呼吸否则将开始窒息，直到其[[/act escape dc=42]]{逃脱}。如果生物在回合结束时仍然被埋葬，它受到@Damage[5d10[bludgeoning]]伤害。</p>"
+                },
+                "Called to Depths": {
+                    "name": "唤至深穴 Called to Depths",
+                    "description": "<p>深穴呼唤着守望者，尤其是在它在空中移动时。当它@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}时，它可以使用任何跳远未用完的移动来进行@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]移动。此外，守望者可以掘地穿越任何泥土物质，包括岩石。当它如此做时，它以全额掘地速度移动。</p>"
+                },
+                "Erupting Jump": {
+                    "name": "爆发跳跃 Erupting Jump",
+                    "description": "<p>守望者引出一股熔岩，然后随着其冷却跳跃降下一大团凝固重物。守望者@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]至多其两倍速度。当它着陆时，冲击力会对@Template[emanation|distance:15]范围内的所有生物造成@Damage[6d12[bludgeoning]|options:area-damage]伤害，进行@Check[fortitude|dc:42|basic|options:area-effect]豁免。大失败时，生物还将被推离守望者10尺远。</p>"
+                },
+                "Wall Cling": {
+                    "name": "攀墙 Wall Cling",
+                    "description": "<p>岩窟与洞穴的守望者用它分节的足附着在表面上。它无需用手来保持留在墙壁或天花板上。</p>"
+                },
+                "Tremorsense (Imprecise) 60 feet": {
+                    "name": "震颤感知 （模糊）60尺",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+                },
+                "Obsidian Cage": {
+                    "name": "黑曜石囚笼 Obsidian Cage",
+                    "description": "<p>迅速冷却的黑曜石会附着在目标身上，凝固在其肢体周围。目标必须尝试一次@Check[reflex|dc:42]豁免。失败时，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]状态直到[[/act escape dc=42]]{逃脱}。大失败时，目标只要处于禁足状态便陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                },
+                "Vibratory Excavation": {
+                    "name": "振动挖掘 Vibratory Excavation",
+                    "description": "<p>守望者嘹亮的叫声撕裂土石。它在60尺内泥土物质或岩石上创造出10尺见方，50尺深的坑。</p>"
+                },
+                "Voice of Nature": {
+                    "name": "自然之声 Voice of Nature",
+                    "description": "<p>虽然荒野的守望者不会说话，但它们能够通过持续的眼神交流与任何动物，魔兽，植物，自然世界的其他生物完美地交流复杂概念。与自然世界有足够强烈联系的智慧生物，例如动物本能的野蛮人或则会说荒野之歌的德鲁伊，能够稍微理解荒野的守护者，尽管其含义是模糊的。</p>"
+                },
+                "Warden's Crown": {
+                    "name": "守望者之冠 Warden's Crown",
+                    "description": "<p>荒野的守望者其角冠能够引得野生生物的尊敬。守望者所属生物群落的野生生物对其态度会自动改善一级（最高至友善），且在守望者面前通常不会相互使用敌对动作。</p>"
+                },
+                "+1 To All Saves vs. Primal": {
+                    "name": "对抗原能时全豁免+1 +1 To All Saves vs. Primal"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "岩窟与洞穴的守望者 Warden of Caverns and Burrows",
+            "publicNotes": "<h2>相连的深穴 The Connected Depths</h2>\n<p>就像气流在天空中流动，海洋连接着世上的水域一样，岩洞和深穴也通过多种方式相互连接。地下熔岩流形成了隧道和通路。水的侵蚀也会在石头上形成洞穴系统。</p>",
+            "allSaves": "对抗原能时所有豁免+1状态加值"
+        },
+        "Shotalashu": {
+            "prototypeToken": {
+                "name": "念力巨蜥"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Jungle Stride": {
+                    "description": "<p>念力巨蜥忽略由于植被产生的困难地形。</p>",
+                    "name": "穿林阔步 Jungle Stride"
+                },
+                "Empathic Communication": {
+                    "name": "移情沟通 Empathic Communication",
+                    "description": "<p>尽管念力巨蜥无法说话，甚至不能用心灵感应表达，但它能理解自己知晓语言发出的简单命令。它会将情绪的感受通过心灵感应反馈给任何与其建立心灵链接的人（不限距离）或者正在碰触它的生物。</p>"
+                },
+                "Telepathic Link": {
+                    "name": "心灵链接 Telepathic Link",
+                    "description": "<p>想要驯服念力巨蜥作为坐骑的骑手必须首先与它形成心灵链接。建立这种链接需要在想要当做坐骑的念力巨蜥身上花费1星期的时间，并且成功通过@Check[occultism|dc:21]检定。任何能进行心灵感应的生物，比如心灵感应、接触心灵感应、移情感知或者能够施放此类法术（比如@UUID[Compendium.pf2e.spells-srd.Item.HqTI6wRrck1YXp3F]）的人，都可以在该检定中获得+4环境加值。这种链接会一直存续下去，且直至链接的一方死亡之前无法形成新的链接。伴侣死亡的冲击会让幸存的一方陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续24小时，而且至少在1个月之内无法形成新的链接。</p>"
+                },
+                "Telepathic Pounce": {
+                    "name": "心灵猛击 Telepathic Pounce",
+                    "description": "<p>念力巨蜥通过以心智压制敌人的手段来狩猎。30尺内的1个生物必须尝试@Check[will|dc:18]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物的速度承受-5尺状态减值，持续1轮。</p>\n<p><strong>失败</strong> 生物的速度承受-10尺状态减值，持续1轮。念力巨蜥随后可以@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]。</p>\n<p><strong>大失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]和@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，持续1轮。念力巨蜥随后可以跳跃。</p>"
+                }
+            },
+            "name": "念力巨蜥 Shotalashu",
+            "publicNotes": "<p>这些爬行类驮兽以其与骑手的密切联系以及心灵感应的特征而闻名。念力巨蜥是名为卡斯卓韦的星球的原生生物，是拉申塔战士（lashunta warriors）的传统坐骑，不过由于两个世界间的往来，这种生物已经出现到了格拉利昂。精灵与拉申塔人都会把念力巨蜥带到格拉利昂，不过精灵更有可能出售或赠送这种生物。</p>\n<p>尽管驯服这种外星生物并不像购买马匹或骆驼那样轻松简单，但骑乘作战人员都渴求着这种生物。念力巨蜥必须与其骑手形成心灵链接才会允许对方骑乘，这种生物一旦形成这种链接，就不会再允许任何其他人骑乘它们。尽管能进行心灵感应的人最容易形成这种链接，但没有此类能力的人也能找到证明自身价值的手段。</p>\n<p>在格拉利昂的荒野中遭遇的任何念力巨蜥都很有可能是从围栏中逃脱的个体——寇托斯岛上的野生念力巨蜥种群就是这种逃脱个体的后代。想要骑乘这种生物的人最有可能在艾巴萨罗姆、奇奥尼和伽伦德南部找到念力巨蜥。在格拉利昂养育念力巨蜥的成本过于高昂，因此它们在市场上的价格也会相应变得十分昂贵。不过，当念力巨蜥的骑手过世之后，骑手的朋友通常会在幸存的念力巨蜥再次做好建立链接的准备后帮它寻找新的骑手。</p>"
+        },
+        "Ascendant Griffon": {
+            "items": {
+                "Razor-Edged Flight": {
+                    "name": "利刃飞行 Razor-Edged Flight",
+                    "description": "<p>腾云狮鹫猛烈地向前滑翔，飞行两次。它可以在移动过程中任意位置对至多两个不同的目标进行一次翅膀打击；如果其中有打击重击，目标还将受到2d6持续流血伤害。</p>"
+                },
+                "Terrifying Screech": {
+                    "description": "<p>腾云狮鹫发出可怕的叫声，让猎物感到恐惧。@Template[emanation|distance:100]内的每个生物必须尝试一次@Check[will|dc:30]豁免。无论结果如何，生物都将临时免疫1分钟。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 生物陷入惊惧2，且@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}1轮。</p>",
+                    "name": "恐惧尖嚣 Terrifying Screech"
+                },
+                "Disembowel": {
+                    "name": "开膛破肚 Disembowel",
+                    "description": "<p><strong>需求</strong> 有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于腾云狮鹫的鸟爪</p>\n<hr />\n<p><strong>效果</strong> 狮鹫进行一次喙打击，撕裂猎物的血肉。如果此次打击命中，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（或增加1点流失状态值，最大到4）。</p>"
+                },
+                "Dread Gaze": {
+                    "name": "恐惧凝视 Dread Gaze",
+                    "description": "<p><strong>触发</strong> 一个生物在腾云狮鹫30尺内结束移动</p>\n<hr />\n<p><strong>效果</strong> 腾云狮鹫转过头来盯着触发生物，对其尝试@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize}。此次挫败士气的使用具有视觉特征而非听觉特征，且不会因为狮鹫语言不通而在检定上受到减值。</p>"
+                },
+                "Carry Off": {
+                    "name": "携行 Carry Off",
+                    "description": "<p>腾云狮鹫可以在有生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于鸟爪时全速飞行，且能带着受擒的生物一起移动。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "腾云狮鹫"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "腾云狮鹫 Ascendant Griffon",
+            "publicNotes": "<p>这种狮鹫的名字很贴切，因为它在飞行时外形雄伟，而且比普通狮鹫更加凶猛。尽管体型庞大，但它身上的肌肉却让飞行显得毫不费力，甚至有些荒谬。它栖息在最古老森林的树冠间和最高山峰的山巅，自高空而下无声而准确地捕猎猎物。腾云狮鹫更喜欢在自己的领地内捕猎其他大型生物，如熊，但它们也会毫不犹豫地攻击它们认为对领地构成威胁的小型猎物。至于腾云狮鹫是一种新进化的生物，还是一种更原始的生物，目前还很难确定。对这些特殊生物的进一步研究可能会让人们了解它们的起源，或许也会让人们了解所有狮鹫的起源。</p>"
+        },
+        "Therizinosaurus": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "镰刀龙 Therizinosaurus",
+            "prototypeToken": {
+                "name": "镰刀龙"
+            },
+            "publicNotes": "<p>乍一看，镰刀龙有着丰满，长着羽毛的身体和鸟类一样的喙。给许多观察者留下了近乎滑稽的印象。但当看到它的爪子时，这种印象很快就会消失，因为这种生物的爪子是六把邪恶的镰刀状利刃，只要轻轻一划，就能将敌人开膛破肚。尽管它们的外表令人生畏，但这些巨大的爪子主要是用来从高大的树木顶端分离出美味的树叶和树枝。尽管如此，旅行者通过镰刀龙领地时，明智的做法是远远躲开这种生物，以免惹上它出了名的臭脾气。</p>",
+            "items": {
+                "Stomp Pests": {
+                    "name": "踩踏虫豸 Stomp Pests",
+                    "description": "<p>镰刀龙四处踩踏，对每个相邻的生物造成@Damage[5d8[bludgeoning]]伤害（@Check[reflex|dc:28|basic]豁免）。大型或更小体型的生物豁免失败时将被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p>"
+                },
+                "Swiping Claws": {
+                    "name": "横扫利爪 Swiping Claws",
+                    "description": "<p>镰刀龙进行两次爪打击，每次针对不同目标。两次打击都会计入多重攻击减值，但在完成两次攻击后才会增加。</p>"
+                },
+                "Winnowing Claws": {
+                    "name": "振翅利爪 Winnowing Claws",
+                    "description": "<p>每当镰刀龙成功用爪打击一个大型或更小体型生物时，它都会将该生物拉向自己5尺（重击时为10尺）。</p>"
+                }
+            }
+        },
+        "Morthak": {
+            "prototypeToken": {
+                "name": "聆地兽"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Auditory Swipe": {
+                    "name": "循声扫爪 Auditory Swipe",
+                    "description": "<p><strong>触发</strong> 有生物在聆地兽的触及之内使用听觉动作</p>\n<hr />\n<p><strong>效果</strong> 聆地兽进行一次爪抓打击对抗触发生物。</p>"
+                },
+                "Shattering Scrape": {
+                    "name": "粉碎切削 Shattering Scrape",
+                    "description": "<p>聆地兽进行一次爪抓打击对抗一个穿戴石制或金属护甲的生物。若打击命中并且护甲的硬度为12或更低的话，该护甲破损。</p>"
+                },
+                "Sensitive Echolocation": {
+                    "name": "灵敏回声定位 Sensitive Echolocation",
+                    "description": "<p>聆地兽能在该能力列出射程内将听觉作为精确感官来使用。若聆地兽承受的音波伤害高于其抗力，那么它的感官便会超载，所有生物对它来说都会处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，持续1轮。</p>"
+                }
+            },
+            "name": "聆地兽 Morthak",
+            "publicNotes": "<p>聆音兽是一种只凭借听觉进行狩猎的掠食者。尽管它们具有看起来眼睛的头部突触，但那实际上是听觉器官，可以捕捉到极轻微的声响，而且能以极高的精准度定位猎物。</p>\n<p>目前已确认的聆音兽仅有数种，但它们都具有共同的特征：面相前方的伪眼器官、具有欺骗性的速度、以及贪婪的食欲。它们对噪音极其敏感，并且还具有将声音武器化的能力，而这也应该是该种生物在绝大多数情况下单独行动的主要原因。</p>\n<hr />\n<p>聆地兽身形低矮扁平，就像是把鳄鱼重组成了能如同鼹鼠一般挖洞的样子。它们以广袤的草地与平原的地下为家，所过之处留下的痕迹只有出洞狩猎时的土堆。在荒野中遭遇聆地兽的人会提及它们用音爆分解泥土所产生低于听觉阈值的低鸣，一种触知而非听得的声音。</p>"
+        },
+        "Apothecary Bee": {
+            "prototypeToken": {
+                "name": "炼药蜂"
+            },
+            "items": {
+                "Drain Potion": {
+                    "name": "吸取药水 Drain Potion",
+                    "description": "<p><strong>需求</strong> 炼药蜂没有储存药水</p>\n<hr />\n<p><strong>效果</strong> 炼药蜂吸取其触及内的药水，将其储存在内部。一个生物可以尝试进行@Check[reflex|dc:25]豁免以保护其所持有的药水。</p>"
+                },
+                "Ingest Potion": {
+                    "name": "摄取药水 Ingest Potion",
+                    "description": "<p>炼药蜂消耗其体内储存的药水。如果药水具有治疗特征，炼药蜂将获得最大量的治疗效果。</p>"
+                },
+                "Inject Potion": {
+                    "name": "注射药水 Inject Potion",
+                    "description": "<p>炼药蜂将其储存的药水注射到其范围内的一个自愿生物体内。这会造成@Damage[1[piercing]]伤害，并使接受者获得正常饮用药水的效果。</p>"
+                },
+                "Internal Cauldron": {
+                    "name": "内在坩埚 Internal Cauldron",
+                    "description": "<p>在适当的饮食下，炼药蜂每两周会制造一个等级不超过6级的药水。大多数情况下，这是一个@UUID[Compendium.pf2e.equipment-srd.Item.G7haQ5gDt30ftJLC]{中等治疗药水 Healing Potion (Moderate)}。每只炼药蜂一次只能储存一个完成的药水。通常可以通过成功的@Check[nature|dc:23]或@Check[survival|dc:23]检定，从炼药蜂身上收获未使用的药水。</p>"
+                },
+                "Potionsight": {
+                    "name": "药水视野 Potionsight",
+                    "description": "<p>炼药蜂复杂的眼睛可以让它们看到魔法药水的灵光，并本能地辨识出与其等级相同或更低的药水。这些灵光可以通过普通容器看到，但它们的眼睛没有特殊能力来感知或辨识非魔法溶液，如炼金灵药。</p>"
+                },
+                "Smoke Susceptibility": {
+                    "description": "<p>如果炼药蜂在浓烟中开始其回合，它陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>",
+                    "name": "烟雾敏感 Smoke Susceptibility"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "炼药蜂 Apothecary Bee",
+            "publicNotes": "<p>这些巨大的蜜蜂以药草和魔法花朵的花蜜为食，自然地将液体加工成浓甜的药水。根据炼药蜂的具体饮食，它们能生产多种多样的药水，并将多余的存储在巢穴的蜂蜡房中。炼药蜂工蜂体长大约一尺，有着黄色和黑色的条纹。当携带药水时，蜜蜂的腹部会明显膨胀，并经常变色以匹配内部的药水。</p>\n<p>炼药蜂制成的药水价值巨大，这导致了无数尝试驯化它们的危险而昂贵的尝试，这是一个风险和回报都很高的梦想。一旦建立起魔法花园，炼药蜂的蜂箱就趋于自给自足。蜂农可以潜在地指导它们的培育，但对于蜂巢的生存来说，他们不再是必需的。在奥西里昂的斯芬克斯河沿岸，一些古老且早已废弃的花园仍在生长，许多炼药蜂在那里寻觅符合它们标准的花朵。在最近一次挖掘到地表时，瑟基虫人社群迅速开始了与蜜蜂的“贸易”过程，建立栖息地并利用它们的自然魔法感应更好地照料一个大型蜂巢所需的大面积地块。另一方面，螨精通常会融入蜜蜂的社会结构中。</p>\n<p>蜂巢生产的药水随着季节的变化而变化，这取决于可用的花朵。蜂农在创造专门产出特定药水的花园方面取得了进展，并且甚至开发了增加药水效果的采集技术。这些技术极其宝贵，严格保密，但甚至连带有诅咒效果的次品药水也在卡莉丝翠和诺格巴的追随者中找到了用途。</p>"
+        },
+        "Sunscale Serpent": {
+            "items": {
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Reactive Strike (Tail only)": {
+                    "name": "Reactive Strike (Tail only)",
+                    "description": "<p><strong>Trigger</strong> A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p>You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn't count toward your multiple attack penalty, and your multiple attack penalty doesn't apply to this Strike.</p>"
+                },
+                "Bond with Mortal": {
+                    "name": "联结凡人 Bond with Mortal",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 精魂向导花费10分钟来与1名凡人生物建立联系。当联结存在时，精魂向导会将它们的当前和最大生命值增加28点，使它们的攻击和伤害检定获得+2状态加值，而且只要两者都处于相同的位面中，能够与联结的凡人进行心灵感应沟通。精魂向导同一时间只能与1个凡人产生联结，而且它可以再次采取该行动来结束联结或形成新的联结（这也将会结束旧有的联结）。如果精魂向导或凡人死亡，联结也会结束。</p>\n<p>这种联结加强了精魂向导和物质宇宙的联系。在产生联结后，精魂向导会失去虚体和精魂特征，失去对疾病、麻痹和毒素的免疫以及对全伤害的抗力，而且会改变它们的打击，使其造成恰当的物理伤害（通常为穿刺或挥砍）来取代力场伤害。</p>"
+                },
+                "Bonded Strike": {
+                    "name": "联结打击 Bonded Strike",
+                    "description": "<p><strong>需求</strong> 日鳞巨蛇目前与凡人具有联结</p>\n<hr />\n<p><strong>效果</strong> 日鳞巨蛇作出啃咬打击。若攻击命中，联结凡人也能利用它的反应动作来对相同目标进行打击。</p>"
+                },
+                "Sun's Heat": {
+                    "name": "灼热太阳 Sun's Heat",
+                    "description": "<p>日鳞巨蛇飞行，距离至多等同于其飞行速度。其移动所经过空间正下方的所有生物必须成功通过DC 31的强韧豁免，失败则会染上日灼之毒。日鳞巨蛇不能飞到目标上方60尺以上的高度，否则毒素就会在播撒过程中由于过于分散从而无法产生效果。</p>"
+                },
+                "Sun's Touch": {
+                    "name": "日灼之毒 Sun's Touch",
+                    "description": "<p><strong>豁免骰</strong> @Check[fortitude|dc:34]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[6d8[poison]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[8d6[poison]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[6d10[poison]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1轮）</p>"
+                },
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>大型，@Damage[(2d10+9)[force],(2d10)[fire]]伤害，破裂值32</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Unleash the Sun": {
+                    "name": "释放太阳 Unleash the Sun",
+                    "description": "<p><strong>需求</strong> 日鳞巨蛇正在飞行</p>\n<hr />\n<p><strong>效果</strong> 日鳞巨蛇飞行，距离至多等同于其飞行速度，然后坠向地面，对@Template[burst|distance:60]区域内的所有生物施放触一股高热来造成@Damage[5d10[fire]|options:area-damage]伤害，并且用鳞片绽放出的辉光来灼烧它们的眼睛。区域内的每个生物必须尝试@Check[reflex|dc:31|options:area-effect,damaging-effect,inflicts:blinded,inflicts:dazzled]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物承受一半伤害</p>\n<p><strong>失败</strong> 生物承受全额伤害并且@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮</p>\n<p><strong>大失败</strong> 生物承受全额伤害，@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1轮，并且目眩1分钟</p>"
+                },
+                "Push": {
+                    "name": "推离 Push",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
+                },
+                "Reactive Strike (Tail Only)": {
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>",
+                    "name": "反应打击（仅尾扫） Reactive Strike (Tail Only)"
+                }
+            },
+            "prototypeToken": {
+                "name": "日鳞巨蛇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "日鳞巨蛇 Sunscale Serpent"
+        },
+        "Tardigrade Swarm": {
+            "items": {
+                "Stylets": {
+                    "name": "口针 Stylets",
+                    "description": "<p>集群空间内的每个敌人都受到@Damage[4d8[piercing]]伤害（@Check[reflex|dc:32|basic]豁免）。豁免失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}或流失状态值增加1，最高到@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 4}。</p>"
+                },
+                "Eyespots": {
+                    "name": "眼点 Eyespots",
+                    "description": "<p>水熊虫群无法看见30尺外的任何事物。</p>"
+                },
+                "Tun Marbles": {
+                    "description": "<p>随着水熊虫群受到伤害，这些水熊虫的身体会进入休眠状态，使得地面变得崎岖。当水熊虫群生命值低于70时，它占据的空间视作困难地形。</p>",
+                    "name": "休眠地面 Tun Marbles"
+                }
+            },
+            "prototypeToken": {
+                "name": "水熊虫群"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "水熊虫群 Tardigrade Swarm",
+            "publicNotes": "<p>水熊虫体宽不比头发丝更宽，但当它们的河畔环境暴露于高浓度的魔法中时，这些八条腿的杂食动物能长到非常巨大。</p>"
+        },
+        "Troodon": {
+            "items": {
+                "Running Attack": {
+                    "name": "奔袭 Running Attack",
+                    "description": "<p>伤齿龙行走，并在该次移动中任意一点进行一次爪打击。</p>"
+                },
+                "Mimicry": {
+                    "name": "仿声 Mimicry",
+                    "description": "<p>伤齿龙可以重复至多12个上周听到的单词。如果它对成功通过一次对抗听众察觉DC的@Check[deception|defense:perception]检定，则声音与原声无异。伤齿龙无法复制基于声音的能力或法术，尽管它可以模仿法术的声音。</p>"
+                }
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "伤齿龙"
+            },
+            "name": "伤齿龙 Troodon",
+            "publicNotes": "<p>伤齿龙大约有3尺高，身长则为此两倍，有着有着细长的脖子和好奇的大眼睛。虽然它们不能完全理解语言，但它们在模仿语言方面有着非凡的天赋。</p>"
+        },
+        "Magnetic Gecko": {
+            "items": {
+                "Launch Metal": {
+                    "name": "发射金属 Launch Metal",
+                    "description": "<p>壁虎将附着在其身体上的金属向各个方向排斥，对@Template[emanation|distance:10]范围的所有生物造成@Damage[2d6[bludgeoning]|options:area-damage]伤害（@Check[reflex|dc:17|basic|options:area-effect]豁免）。壁虎在[[/gmr 1d4 #Recharge Launch Metal]]{1d4轮}内无法再次使用发射金属。</p>"
+                },
+                "Repel": {
+                    "name": "排斥 Repel",
+                    "description": "<p>壁虎操控其磁场排斥金属，发出可闻的嗡嗡声，对来自金属武器和金效果造成的伤害有2点抗力，直到其下个回合开始。</p>"
+                },
+                "Greater Electrolocation": {
+                    "name": "高等回声定位 Greater Electrolocation",
+                    "description": "<p>磁性壁虎能感知到活物产生的微小电流，他们将其作为20尺范围的精确感官使用。如果有任何生物在过去1分钟内使用过电击效果，那么该感官的作用范围扩展至100尺。</p>"
+                },
+                "Uncanny Climber": {
+                    "name": "神奇攀爬者 Uncanny Climber",
+                    "description": "<p>磁性壁虎的脚可以让它攀爬几乎任何表面，无论多么光滑或陡峭。如果壁虎尝试进行攀爬的运动检定并且大失败，它会改为失败。</p>"
+                },
+                "Static Cling": {
+                    "name": "静电粘附 Static Cling",
+                    "description": "<p>如果壁虎用舌打击命中一个体型为小型或更小的生物，且目标是由金属制成或穿着金属盔甲，壁虎的舌头会粘附在该生物上。该生物必须进行一次@Check[reflex|dc:17]豁免，否则@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]。在壁虎以这种方式擒获生物时，它可以对目标的强韧DC尝试一次@Check[athletics|defense:fortitude]检定，以将该生物拉到壁虎相邻的一个空间。因这种方式受擒的生物可以正常@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "磁性壁虎"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "磁性壁虎 Magnetic Gecko"
+        },
+        "Alicorn": {
+            "prototypeToken": {
+                "name": "天角兽"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "items": {
+                "Aerial Attack": {
+                    "name": "腾空攻击 Aerial Attack",
+                    "description": "<p>天角兽飞行，在移动中任意点用翅膀打击两次。每次攻击均计入天角兽的多重攻击减值，但减值只会在此次所有攻击完成后才会增加。</p>"
+                },
+                "Beam of Light": {
+                    "name": "明光射线 Beam of Light",
+                    "description": "<p>天角兽从角上发出强大的灼热射线。@Template[line|distance:120]范围内的生物受到@Damage[16d6[fire]|options:area-damage]伤害（@Check[fortitude|dc:36|basic|options:area-effect]豁免）。区域内的邪秽生物受到额外@Damage[8d6[spirit]|options:area-damage]伤害。如果光线穿过魔法黑暗区域，或是以受到魔法黑暗影响的生物为目标，光线尝试反制黑暗（反制调整+28，反制环级8环级）。天角兽在[[/gmr 1d4 #Recharge its Beam of Light]]{1d4轮}内不能再次使用明光射线。</p>"
+                },
+                "Ghost Touch": {
+                    "name": "幽冥 Ghost Touch",
+                    "description": "<p>天角兽的打击具有幽冥性能符文的效果。</p>"
+                },
+                "Wild Empathy": {
+                    "name": "荒野共情 Wild Empathy",
+                    "description": "<p>天角兽能与自然界的生物共感。天角兽可以使用交涉来对动物[[/act make-an-impression]]，并可以对它们[[/act request]]{提出请求}。</p>"
+                },
+                "At-Will Spells": {
+                    "name": "随意施法 At-Will Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
+                },
+                "Draw in Magic": {
+                    "name": "绘制魔法 Draw in Magic",
+                    "description": "<p><strong>触发</strong> 天角兽30尺内一个生物施放法术</p>\n<hr />\n<p><strong>效果</strong> 天角兽尝试反制触发法术（反制调整+28，反制环级8环级）。如果成功，天角兽可以选择作为法术唯一目标获得触发法术的效果。</p>"
+                }
+            },
+            "name": "天角兽 Alicorn",
+            "publicNotes": "<p>天角兽是奥术干预的产物，当独角兽接触到大型魔力源时，就会发生这种稀有的转变。它们体型庞大，强壮身躯的背上有两只大翅膀，长着螺旋长角，以及在看不见的风中不断荡漾的鬃毛。</p>"
+        },
+        "Mist Bear": {
+            "items": {
+                "Mist Form": {
+                    "name": "迷雾形态 Mist Form",
+                    "description": "<p>通过一分钟的过程，迷雾熊可以将自己的形态转化为一团灵体水汽。在这种状态下，它具有物理伤害抗力10，免疫精准伤害，并且不能使用任何带有攻击或操作特征的动作。它具有10尺飞行速度，可以从细小的缝隙中钻入。迷雾熊可通过一个单动作恢复成实体形态。</p>"
+                },
+                "Clouded Charge": {
+                    "description": "<p>迷雾熊行走两次，在移动过程中，它的身上会冒出缕缕虚幻的烟雾，使它获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。迷雾熊随后进行打击。如果迷雾熊移动了至少20尺，则目标对此次攻击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>",
+                    "name": "化云冲锋 Clouded Charge"
+                },
+                "Misty Mauling": {
+                    "name": "迷雾撕咬 Misty Mauling",
+                    "description": "<p><strong>需求</strong> 迷雾熊使一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 迷雾熊化为迷雾消散，同时将爪子伸入受擒的生物体内。受擒的生物受到@Damage[3d8[slashing]]伤害（@Check[fortitude|dc:25|basic]豁免）。迷雾熊会获得迷雾形态的增益，飞行至多10尺，然后恢复实体形态。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "迷雾熊"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "迷雾熊 Mist Bear",
+            "publicNotes": "<p>迷雾熊和普通的熊一样，追求简单的食物。与其他熊科动物不同的是，迷雾熊可以化作一团灵体水汽，这让附近的人类在保护自己的食物不被迷雾熊掠夺方面的工作变得更加复杂。</p>\n<p>幸运的是，迷雾熊的行为模式是可以预测的，它通常每年只在物质宇宙中觅食几个月，大快朵颐。一旦饱餐一顿，它就会进入类似冬眠的状态，化作一团无形的水蒸气在灵界飘荡。</p>"
+        },
+        "Swordfish": {
+            "prototypeToken": {
+                "name": "剑鱼"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "剑鱼 Swordfish",
+            "publicNotes": "<p>与普遍的看法相反，剑鱼的喙并不是用来刺穿猎物的，而是用来击晕或划伤猎物的。专门的器官帮助它在最冷的水域中保持温暖，从而提高其本已相当高的速度和反应能力。</p>",
+            "items": {
+                "Warm Brain": {
+                    "name": "温暖大脑 Warm Brain",
+                    "description": "<p><strong>需求</strong> 剑鱼在寒冷水域中</p>\n<p><strong>触发</strong> 剑鱼投掷先攻</p><hr /><p><strong>效果</strong> 剑鱼尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]或@UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]。</p>"
+                },
+                "Fast Sweep": {
+                    "name": "快速横扫 Fast Sweep",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 剑鱼对两个相邻目标进行两次长喙打击，这两次攻击掷骰有+1环境加值。</p>"
+                }
+            }
+        },
+        "Holdfast": {
+            "items": {
+                "Lithe": {
+                    "name": "柔软 Lithe",
+                    "description": "<p>迅爪兽将任何可以刚好容纳其头部或更宽的狭窄空间视同为困难地形，而不需要通过@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]动作来穿过它。</p>"
+                },
+                "Burst from Below": {
+                    "name": "掘地突袭 Burst from Below",
+                    "description": "<p>迅爪兽掘地，然后打击。若迅爪兽开始移动时处于@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态，那么直至该能力的打击结束为止会一直处于藏匿状态。</p>"
+                },
+                "Constrict": {
+                    "name": "紧勒 Constrict",
+                    "description": "<p>@Damage[(2d6+2)[piercing]]外加挤压喉咙，@Check[fortitude|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                },
+                "Hold Tight": {
+                    "name": "紧紧咬住 Hold Tight",
+                    "description": "<p><strong>触发</strong>@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于迅爪兽的啃咬打击的生物由于其他生物的打击而承受伤害</p>\n<hr />\n<p><strong>效果</strong> 迅爪兽用啃咬紧勒该生物。</p>"
+                },
+                "Crush Throat": {
+                    "name": "挤压喉咙 Crush Throat",
+                    "description": "<p>当有生物在对抗迅爪兽的紧勒的豁免中失败时，该生物的喉咙会遭到挤压，只要仍处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]状态就无法说话。这能防止该生物施放具有声音咒语的法术，还能防止它使用多种音波和听觉能力。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "迅爪兽"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "迅爪兽 Holdfast",
+            "publicNotes": "<p>光滑的身体，巨大的爪子和敏锐的感官让迅爪兽成为了捕猎能手，其致命的程度远超它那细小的体型所带来的表象。它通常会从地下接近猎物，然后迅速用尖牙和利爪猛扑上去，试图用强有力的下颚咬断目标的气管。这种伏击策略在它那灰色皮毛的帮助下更进一步，让它得以在自己的栖息地内的岩石地形中伪装自己。如今，由于兽人把它收为狩猎伙伴饲养，因此迅爪兽的分布地区已经变得十分广阔。而这又导致迅爪兽与其他人的紧张关系，因为它们发现迅爪兽难以相处，并将其视为入侵物种——即便是能与迅爪兽沟通的侏儒和德鲁伊也觉得这种生物容易分心且杀戮欲旺盛。</p>\n<p>尽管迅爪兽会非常小心地照顾自己的幼崽，但除了短暂的交配期之外，成年个体都会避免靠近彼此。虽然迅爪兽厌恶同种的其他个体，但它们往往会追随其他物种的猎食者，充当伺机而动的食腐者。这通常会以迅爪兽霸凌其他生物，并窃取了它们杀戮成果中的更大份额而告终，但它通常会发展成一种互利共生的约定。人们目击到了许多迅爪兽和老鹰以及其他猛禽狩猎的案例，迅爪兽将地下生物驱赶到地表，然后这些猛禽负责拦截。</p>\n<p>想关住迅爪兽十分困难，因为它能钻过很小的开口，而且还能再围栏下打洞，这意味着适合它们的围场要用石材或金属拦住所有方向。部分兽人社区的狩猎队在需要迅爪兽时，会用它们喜欢的食物作为诱饵设下人道的陷阱。在兽人统治的国家贝尔克赞，霸主白发的阿达克斯的首席驯兽师声称他有一种独特且保密的训练流程，可以抑制迅爪兽逃跑的冲动，但目前其他驯兽师还未能复现或揭示具体的做法。在死坟末土，这里的主要兽人社区面临着默语暴君率领的不死生物的入侵。在这里，尽管兽人们与迅爪兽仍维持着原先的狩猎伙伴的关系，但它们的目标已经从提供食物转变成了消灭亡灵。</p>"
+        },
+        "Mammoth Land Star": {
+            "items": {
+                "Limb Regrowth": {
+                    "name": "肢体重生 Limb Regrowth",
+                    "description": "<p>健康的猛犸陆星一般有五条肢体。生物可以通过瞄准肢体并造成肢体生命值数量的伤害来切断它。猛犸陆星在失去肢体24小时后能重新长出一条新的。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Dby3ecpqPheBrgnT]{效果：猛犸陆星肢体}</p>"
+                },
+                "Glide": {
+                    "name": "滑翔 Glide",
+                    "description": "<p>猛犸陆星通过足部吹气悬浮在空中1尺高度，并以+5尺环境加值的速度进行两次行走，忽略其下方的不稳表面和困难地形。</p>"
+                },
+                "Pry": {
+                    "name": "撬开 Pry",
+                    "description": "<p><strong>需求</strong> 一个穿戴护甲的目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于猛犸陆星</p>\n<hr />\n<p><strong>效果</strong> 猛犸陆星对目标进行一次足打击。如果打击命中，并且生物穿戴的护甲的硬度不高于12，则护甲破损。此打击对已经破损的护甲不会造成更进一步的伤害。</p>"
+                },
+                "Spiny Venom": {
+                    "name": "尖刺毒液 Spiny Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:26]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}</p>\n<p><strong>阶段3</strong> @Damage[2d8[poison]]和@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]</p>"
+                },
+                "Limbs": {
+                    "name": "肢体 Limbs",
+                    "description": "<p><strong>HP</strong>（肢体） 25，重新生长；<strong>免疫</strong> 心灵</p>"
+                },
+                "Regeneration 20 (reduced by 4 for each missing limb)": {
+                    "name": "再生20 （每缺一条肢体减少4点）",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                },
+                "Regrowth": {
+                    "name": "重新生长 Regrowth",
+                    "description": "<p>当肢体被切断后，它必须尝试@Check[flat|dc:5]检定。一旦成功肢体会缓慢地开始成长，大约经过一周后成为一个新的猛犸陆星，除非它被浇上酸液或火焰。</p>"
+                },
+                "Detach": {
+                    "name": "分离 Detach",
+                    "description": "<p><strong>需求</strong> 猛犸陆星的生命值降至一半以下</p>\n<hr />\n<p><strong>效果</strong> 猛犸陆星切断一条肢体以分散注意力，然后进行三次行走。该行动不会触发反应动作。</p>"
+                },
+                "Digest": {
+                    "name": "消化 Digest",
+                    "description": "<p><strong>需求</strong> 一个目标@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于猛犸陆星</p><hr /><p><strong>效果</strong> 猛犸陆星将胃部伸出覆盖在猎物上并活活消化它。目标受到@Damage[(2d12+6)[acid]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "猛犸陆星"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "猛犸陆星 Mammoth Land Star",
+            "hp": "再生20 （每缺一条肢体减少4点）；肢体重生",
+            "publicNotes": "<p>猛犸陆星是不懈的掠食者，依靠数百只管状足无声地向它们的潜在猎物靠近。猛犸陆星有几种变种，但最常见的直径在8到12尺之间，总共有五条肢体。这些无意识的生物在猎食过程中，无论遭遇何种挑战，都会坚持不懈地吞噬猎物，利用其出色的嗅觉和对周围动静的敏锐观察，从远处追踪猎物。它们的麻痹毒素和快速消化过程会迅速终结那些不幸落入它们掌握中的生物。</p>\n<p>经历猛犸陆星袭击而幸存的旅行者必须小心地摧毁其残骸，因为其重新生长能力最终会使其复活并继续其使命：觅食。不少猛犸陆星的袭击往往会在一周后接连发生，而且每次的数量都会增加。这通常是因为留下的肢体会重新生长并继续攻击。</p>"
+        },
+        "Tyrafdir": {
+            "items": {
+                "Hydra Regeneration": {
+                    "name": "多头蛇再生 Hydra Regeneration",
+                    "description": "<p>豁免失败时幻头蛇会长出两颗幻术头颅。</p>\n<p>多头蛇拥有等同于3×头部数量的再生。如果多头蛇的身体失去了任意头颅并且余下的断颈还没有被灼烧，多头蛇可以通过再生能力恢复生命值之后尝试一次@Check[fortitude|immutable:true|dc:31]检定。如果成功，一个未被灼烧的断颈重新长出两颗头；如果大成功，两个未被灼烧的断颈分别各自长出两颗头。多头蛇长出的头的数量无法超过原本头数量的两倍。多头蛇的再生能力只有在它所有头都被砍断、所有断颈都被灼烧的情况下才会完全失效，此时它会死亡。</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
+                },
+                "Deceptive Regrowth": {
+                    "name": "虚幻再生 Deceptive Regrowth",
+                    "description": "<p>幻头蛇初始拥有六颗头。生物可以专门将头作为目标并造成等同于头部生命值的伤害，来切断幻头蛇的一颗头。任何生物的回合结束时，未被完全切断的头部都将恢复全部生命值。幻头蛇可以使用多头蛇再生能力使被切断的头部重新长出。生物可以通过对断颈造成火焰伤害，灼烧它来阻止其重生。对于单目标的火焰效果必须指定灼烧某个特定的断颈，但溅射伤害或影响整个多头蛇占据空间的火焰效果能对所有断颈进行灼烧。如果切断头部的攻击造成任意火焰伤害，或是由寒铁武器造成，则断颈立即被灼烧。如果六颗头都被灼烧，则多头蛇会死亡。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uZJOdounIHaFDC1t]{效果：多头}</p>"
+                },
+                "Reactive Strike": {
+                    "name": "反应打击 Reactive Strike",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                },
+                "Tyrafdir Heads": {
+                    "name": "幻头蛇之头 Tyrafdir Heads",
+                    "description": "<p><strong>HP</strong> （头） 30，虚幻重生</p>\n<p><strong>免疫</strong> 区域伤害</p>\n<p><strong>弱点</strong> 寒铁10，挥砍10</p>"
+                },
+                "Noxious Exhalation": {
+                    "name": "喷吐毒气 Noxious Exhalation",
+                    "description": "<p>幻头蛇从所有口中喷出毒雾，扩散至@Template[emanation|distance:20]范围，对区域内所有生物造成@Damage[4d10[poison]|options:area-damage]伤害（@Check[reflex|dc:24|basic|options:area-effect]豁免）。任何豁免失败的生物必须尝试一次@Check[will|dc:24]豁免，否则会获得心灵弱点10，以及意志豁免承受-1状态减值，持续24小时。幻头蛇在[[/gmr 1d4 #Recharge Noxious Exhalation]]{1d4轮}内不能再次使用喷吐毒气。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.G1pvduwOVRz4YFUF]</p>"
+                },
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Deceptive Heads": {
+                    "name": "虚幻头颅 Deceptive Heads",
+                    "description": "<p>幻头蛇虽然不聪明，但却十分狡猾，它会利用再生头颅的幻术来迷惑干扰对手。当幻头蛇重生头颅的强韧豁免失败，但没有大失败时，它会具现出幻影来模仿重生。这会产生两颗虚幻头颅，其功能与真实的头颅不同。只要存在一颗虚幻头颅，幻头蛇便会获得虚幻之颚打击。任何攻击虚幻头颅或使用@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}动作检查的生物能能够尝试识破幻术（@Check[will|dc:27]豁免）。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.NZ3MrmXkmfQuJp7S]{效果：虚幻头颅}</p>"
+                },
+                "Reactive Heads": {
+                    "name": "多头反应 Reactive Heads",
+                    "description": "<p>多头蛇除第一个头外，每多一个头，都能获得一个额外的反应动作，但只能用此反应动作进行反应打击。多头蛇针对同一个触发动作只能使用一次反应动作，即便一个生物在它的触及范围离开多个方格，并且每次反应打击都必须使用不同的头部。每当多头蛇被砍掉一个头，它每轮就失去一个额外的反应动作。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "幻头蛇"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "幻头蛇 Tyrafdir",
+            "hp": "多头蛇再生",
+            "ac": "全域视野",
+            "publicNotes": "<p>最常见的多头蛇出了名的有五颗头，它用五颗头一起攻击猎物或攻击者。有更多奇特的多头蛇品种散布在内海地区，每种多头蛇都有自己奇特的进化过程和狩猎行为。</p><hr /><p>有智慧的物种与自我意识较弱的物种建立亲缘关系的过程在整个自然界都很容易观察到。人类饲养狗，狗头人照顾爬行动物等等。更可怕的是，在更大的范围内，对第一世界有着强烈眷念的蛇龙会饲养变异的多头蛇作为宠物和护卫。这些魔兽被乌尔芬人称之为幻头蛇，拥有一种独特的能力，能在断颈上制造出幻术替身。这些蛇形的卫兵在蛇龙诸王之地是强大的保护者，它们被精类扭曲的生理机制阻碍了许多想要砍下其主人头颅来称王的人。幻头蛇被极其强大的施法者驯化用作守卫也为人所知，经常会与魔法陷阱一起攻击入侵者的心智。</p>"
+        },
+        "Scroungefeather": {
+            "prototypeToken": {
+                "name": "集武鸟"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "集武鸟 Scroungefeather",
+            "items": {
+                "Junk Nest": {
+                    "name": "垃圾鸟巢 Junk Nest",
+                    "description": "<p>集武鸟的鸟巢由锋利的金属废料构成，占地范围为15尺乘15尺的区域。该区域对非集武鸟的生物是困难地形和有害地形。在这片区域内的地面上移动的生物所经过的每个方格会使其承受@Damage[3[piercing]]伤害。集武鸟可以在鸟巢内的任意一点@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]。</p>"
+                },
+                "Tossed Scraps": {
+                    "name": "抛掷废料 Tossed Scraps",
+                    "description": "<p><strong>需求</strong> 集武鸟已经叼取杂物</p>\n<hr />\n<p><strong>效果</strong> 集武鸟将杂物掷向20尺内的1个目标，作出具有+12调整值的攻击检定。成功时，目标承受@Damage[(2d10+5)[bludgeoning]]伤害。</p>"
+                },
+                "Grab Debris": {
+                    "name": "叼取杂物 Grab Debris",
+                    "description": "<p><strong>需求</strong> 集武鸟在自己的巢里或者其他含有丰富杂物的环境</p><hr /><p><strong>效果</strong> 集武鸟使用一个交互动作来用喙来叼住1件随机选择的物品；投掷1d4来判断杂物的类别。集武鸟获得后述能力的许可，直至它使用抛掷废料来投掷杂物或直至它放开杂物为止。集武鸟在使用自己的喙叼取杂物时无法用喙攻击。</p><table class=\"pf2e remaster\"><thead><tr><th>d4</th><th>物品</th><th>效果</th></tr></thead><tbody><tr><td>1</td><td>护甲碎片</td><td>集武鸟的AC获得+2环境加值。</td></tr><tr><td>2</td><td>破碎利刃</td><td>集武鸟获得破碎利刃近战打击，这具有+12攻击调整值，造成2d10+6点挥砍伤害。</td></tr><tr><td>3</td><td>未爆炸弹</td><td>当集武鸟用抛掷废料投掷时，造成的伤害均为火焰伤害，而且炸弹还会造成3点火焰溅射伤害</td></tr><tr><td>4</td><td>故障魔杖</td><td>集武鸟获得魔法矢远程打击，这具有+14攻击调整值，造成2d6+6力场伤害。</td></tr></tbody></table>"
+                }
+            },
+            "publicNotes": "<p>名为集武鸟的大型食腐鸟类会在大规模战场附近安家。这些鸟以血液和腐肉为食，而且能立即意识到战场上蕴含着丰富的食物。尽管这种鸟类赖以为生的食物如此吓人，但最为人所知的是另一种奇特的适应力：它们会利用从战场上捡来的护甲、武器和魔法物品的碎片来筑巢。这让集武鸟的幼鸟得到了良好的保护，让父母可以同时离巢觅食。</p>\n<p>令人惊讶的是，集武鸟已经学会如何利用它们筑巢时搜集的物品来抵御袭击者，投掷箭头、用刀片劈砍、有时候甚至能启动魔杖。集武鸟的巢成为了对冒险者和窃贼来说十分诱人的目标，因为这里囤积的宝藏很可能价值不菲，但这些鸟会凶猛地保卫自己的鸟巢，尤其当鸟巢之内还有鸟蛋或幼鸟的情况之时。</p>\n<p>尽管集武鸟的羽毛没有任何魔法性质，但这种羽毛在盗贼的圈子里很受欢迎。盗贼行会的徽记上通常会包含这种羽毛的图案，即带有两条深红色条纹的黑色羽毛，此类组织经常派遣新人劫掠集武鸟的鸟巢，并将其作为训练的一环。</p>"
+        },
+        "Karkadann": {
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "prototypeToken": {
+                "name": "犀角兽"
+            },
+            "name": "犀角兽 Karkadann",
+            "items": {
+                "Fearless Rush": {
+                    "name": "无畏冲刺 Fearless Rush",
+                    "description": "<p><strong>触发</strong> 犀角兽陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态</p>\n<hr />\n<p><strong>效果</strong> 犀角兽减少自身1点惊惧状态值（最低到0）。犀角兽随后朝一名敌人行走。</p>"
+                },
+                "Ghost Touch": {
+                    "name": "幽冥 Ghost Touch",
+                    "description": "<p>犀角兽的打击具有幽冥性能符文的效果。</p>"
+                },
+                "Impaling Charge": {
+                    "name": "刺穿冲锋 Impaling Charge",
+                    "description": "<p>犀角兽行走两次，然后用角进行一次打击。如果此次打击命中，还将造成1d10持续流血伤害。</p>"
+                },
+                "Trample": {
+                    "name": "践踏 Trample",
+                    "description": "<p>中型或更小体型，蹄踢，@Check[reflex|dc:25|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                }
+            },
+            "publicNotes": "<p>犀角兽是独角兽的远亲，比起它们林中的亲戚更喜欢开阔地形。犀角兽有着水牛般的体型，灰色的鳞片状身体，较厚的蹄子，没有鬃毛。尽管它们有领地意识且性情凶猛，但许多犀角兽都能与那些真正心怀对大自然的敬畏之情的人成为朋友。</p>"
+        },
+        "Warden of Forests and Meadows": {
+            "items": {
+                "Idyllic Panorama": {
+                    "name": "田园风光 Idyllic Panorama",
+                    "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 守望者创造出一片宁静祥和的区域。这等同于5环级的@UUID[Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX]{海市蜃楼 Mirage}，描绘了宁静草场或森林的风光，除了区域为@Template[burst|distance:200]范围。</p>\n<p>当处于田园风光的区域内时，守望者对区域内生物的感官有显著的掌控力，并且可以随意施放@UUID[Compendium.pf2e.spells-srd.Item.WPXzPl7YbMEIGWfi]{假象术 Mislead}和2环级的@UUID[Compendium.pf2e.spells-srd.Item.gIdDLrbswTV3OBJy]{沉默术 Silence}。</p>"
+                },
+                "Sneak Attack": {
+                    "name": "偷袭 Sneak Attack",
+                    "description": "<p>守望者对处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成额外3d6精准伤害。</p>"
+                },
+                "Scent (Imprecise) 1 mile": {
+                    "name": "灵敏嗅觉 （模糊） 1 英里",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
+                },
+                "At-Will Spells": {
+                    "name": "随意施法 At-Will Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
+                },
+                "Constant Spells": {
+                    "name": "常驻法术 Constant Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+                },
+                "Wild Trickery": {
+                    "name": "荒野诡计 Wild Trickery",
+                    "description": "<p><strong>触发</strong> 60尺内一名敌人以守望者为攻击，法术或其他能力的目标</p>\n<hr />\n<p><strong>效果</strong> 触发生物必须尝试一次@Check[will|dc:45]豁免。如果失败，守望者发出一阵心灵笑声，将触发能力重定向到射程内一个不同生物身上；如果没有其他符合条件的目标，则无效果。触发生物之后临时免疫24小时，除非他豁免大失败。</p>"
+                },
+                "Change Shape": {
+                    "name": "变身 Change Shape",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>\n<hr />\n<p>守望者将其体型变为超小型，小型，中形，或超大型（变为超小型时其触及变为0尺，中型或大型变为5尺，超大型变为10尺）。守望者的外形不变，但可以将其颜色变为任意季节的色系。</p>"
+                },
+                "Forest Passage": {
+                    "name": "林地穿行 Forest Passage",
+                    "description": "<p>森林与草场的守望者忽视由非魔法植物形成的困难地形和高等困难地形。</p>"
+                },
+                "Fox's Wager": {
+                    "name": "狐之赌注 Fox's Wager",
+                    "description": "<p>守望者授予他能看见的一个除他以外的自愿生物一道恩惠，请求该生物承诺使用被授予的来摧毁或根除文明的造物。目标在对由类人生物制造的构装体，物体和建筑的攻击掷骰上获得+1状态加值，在伤害上获得+5状态加值。它还将在对抗类人生物时，在隐秘检定上获得+2状态加值。守望者一次只能授予一份赌注。赌注会在目标被捕获或死亡时结束。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Hc0BhuLHaldO3vqG]{效果：狐之赌注}</p>"
+                },
+                "Magical Pounce": {
+                    "name": "魔法扑击 Magical Pounce",
+                    "description": "<p>守望者行走至多其速度的距离，跳跃至多其速度的距离，或是施放@UUID[Compendium.pf2e.spells-srd.Item.VlNcjmYyu95vOUe8]{次元移位 Translocate}；在该次移动结束时，守望者进行打击。如果守望者在开始此动作前处于@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态，他会保持藏匿直到此能力的打击结束。</p>"
+                },
+                "Voice of Nature": {
+                    "name": "自然之声 Voice of Nature",
+                    "description": "<p>虽然荒野的守望者不会说话，但它们能够通过持续的眼神交流与任何动物，魔兽，植物，自然世界的其他生物完美地交流复杂概念。与自然世界有足够强烈联系的智慧生物，例如动物本能的野蛮人或则会说荒野之歌的德鲁伊，能够稍微理解荒野的守护者，尽管其含义是模糊的。</p>"
+                },
+                "Warden's Crown": {
+                    "description": "<p>荒野的守望者其角冠能够引得野生生物的尊敬。守望者所属生物群落的野生生物对其态度会自动改善一级（最高至友善），且在守望者面前通常不会相互使用敌对动作。</p>",
+                    "name": "守望者之冠 Warden's Crown"
+                },
+                "+1 To All Saves vs. Primal": {
+                    "name": "对抗原能时全豁免+1 +1 To All Saves vs. Primal"
+                }
+            },
+            "prototypeToken": {
+                "name": "森林与草场的守望者"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "森林与草场的守望者 Warden of Forests and Meadows",
+            "allSaves": "对抗原能时所有豁免+1状态加值"
+        },
+        "Rift Chameleon": {
+            "items": {
+                "Flickering Dash": {
+                    "name": "闪现冲刺 Flickering Dash",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 变色龙行走两次。在这次移动期间，它将在物质宇宙和灵界之间快速穿梭，获得对物理伤害的抗力5。</p>"
+                },
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Swallow Whole": {
+                    "name": "活吞 Swallow Whole",
+                    "description": "<p>大型，@Damage[(1d12+2)[bludgeoning]]，破裂10</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                },
+                "Extradimensional Gullet": {
+                    "name": "异次元食道 Extradimensional Gullet",
+                    "description": "<p>裂隙变色龙的内脏部分存在于灵界，因此它可以吞下任何数量的生物，甚至是比自己更大的生物。从变色龙胃中@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]或切开胃重获自由的生物会重新出现在变色龙所在位置附近的物质宇宙中。生物无法使用传送效果从裂隙变色龙的胃中逃脱，除非这些效果也能跨越位面边界。</p>"
+                },
+                "Ethereal Camouflage": {
+                    "name": "灵界伪装 Ethereal Camouflage",
+                    "description": "<p>裂隙变色龙可以在即便没有掩蔽时进行@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]，但它不会对灵界的生物视作@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>"
+                },
+                "Tongue Pull": {
+                    "name": "舌头拉拽 Tongue Pull",
+                    "description": "<p>任何被裂隙变色龙舌头命中的生物都会被拉至与变色龙相邻。该生物对裂隙变色龙本回合进行的下次打击@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "裂隙变色龙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "裂隙变色龙 Rift Chameleon",
+            "publicNotes": "<p>裂隙变色龙最出名的地方在于它们令人不安的吞食能力，因为它们的消化道连接着自己的灵界口袋，可以吞下比自己大得多的生物。当两只或更多的裂隙变色龙长时间待在一起时，它们的部分异次元特性会开始微妙地扭曲周围的地形。除了变色龙之外，其他人都无法辨别方向和距离，因此当地人很容易在他们曾经认为熟悉的地方迷路。</p>",
+            "ac": "全域视野"
+        },
+        "Hardhead Mole": {
+            "prototypeToken": {
+                "name": "硬头鼹鼠"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "硬头鼹鼠 Hardhead Mole",
+            "items": {
+                "Burrowing Retreat": {
+                    "name": "掘地撤退 Burrowing Retreat",
+                    "description": "<p><strong>触发</strong> 硬头鼹鼠被一次打击命中</p>\n<hr />\n<p><strong>效果</strong> 若周围20尺内有地道的话，硬头鼹鼠会立即掘地来挖向地道。该移动不会触发反应动作。</p>"
+                },
+                "Shovel Earth": {
+                    "name": "铲土 Shovel Earth",
+                    "description": "<p>硬头鼹鼠在与其相邻的1个方格内挖出一个地道。该方格变为困难地形，不过可以通过交互动作来把它弄平整来变回普通地形。</p>"
+                },
+                "Unbalancing Burrow": {
+                    "name": "失衡掘地 Unbalancing Burrow",
+                    "description": "<p>硬头鼹鼠顺着直线掘地至多20尺，这会使得地表的泥土翻起。它途中路过的任何生物都会承受@Damage[1d6[bludgeoning]]伤害（@Check[reflex|dc:14|basic]豁免）。豁免失败时，该生物会被击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。这会在掘地路线的起点和终点创造地道。</p>"
+                }
+            },
+            "publicNotes": "<p>穴居且淘气的硬头鼹鼠主要生活在草原和平原上。人们通常可以通过看到掘地后翻起的地面来找到它们掘地的轨迹，这通常会跨越数百尺之远。它们最具标志性的生理特征是如同宝石一般的闪亮颅骨，它坚固到能够反复承受撞击，而每次冲击都会使其头顶发出彩色光芒。</p>\n<p>农耕侏儒社区与硬头鼹鼠有着密切的联系。侏儒孩童尤其喜爱这些生物，喜爱到会为它们单独起名字。当他们在野外漫步并和这些鼹鼠玩耍时——通常会用小木棍、木槌或任何带着钝头的物体击打鼹鼠——而鼹鼠们也十分愿意一起嬉戏，在一次次捉迷藏或类似的友好游戏中从一个洞口逃到另一个洞口，并在每次击打中闪闪发光。</p>\n<p>最知名的硬头鼹鼠有可能是侏儒女神妮薇·炫棱的异界侍从朗穆拔拉（Rummbrrlar），这只硬头鼹鼠被妮薇注入了土元素的力量。许久以前，这只强大的鼹鼠在妮薇教派的孤儿院拯救孩童时被杀害。作为对它那无私行为的奖励，朗穆拔拉被转化为异界侍从，它获得了钻石般的皮肤和变得和巨龙一般庞大的能力。若硬头鼹鼠和侏儒们共同生活的社区遭受威胁，朗穆拔拉往往会现身，将面临自然灾害的人们带到安全的地点，或者出面防范其他可怕的威胁。因此，硬头鼹鼠被侏儒社区视为好兆头和保护的象征。</p>\n<p>硬头鼹鼠能长到3尺长，但有些个体会随着年龄的增长而变短，它们坚硬的头骨会在长年与年轻侏儒的嬉戏中变得略微扁平。当它们玩耍时，其头部（以及它们发出的闪光）的颜色会变暗，包含粉色、红色、暗红色和淡紫色；当看到它们的头顶颜色变暗时，侏儒们通常会给鼹鼠们留些时间来恢复，因为这种现象代表着鼹鼠的头部供血不足。尽管生性淘气，但硬头鼹鼠在其他方面都算是温顺友好的生物。如果置身于要判断是战斗还是逃跑的形势中时，它们会通过在地下深处挖出地道网络来逃跑，这些地道可能向着任何方向延伸上百尺。</p>"
+        },
+        "Goblin Shark": {
+            "prototypeToken": {
+                "name": "地精鲨"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "地精鲨 Goblin Shark",
+            "items": {
+                "Blood Scent": {
+                    "name": "血液嗅觉 Blood Scent",
+                    "description": "<p>鲨鱼能闻到水中最远1英里范围内的血腥味。</p>"
+                },
+                "Camouflage": {
+                    "name": "伪装 Camouflage",
+                    "description": "<p>地精鲨的颜色和水融为一体。当它在水下尝试@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]的隐秘检定时不需要掩蔽。</p>"
+                },
+                "Electrolocation": {
+                    "name": "回声定位 Electrolocation",
+                    "description": "<p>地精鲨能感知活物产生的微小电流，它可以在20尺内使用这种精确感官。</p>"
+                },
+                "Grasping Jaws": {
+                    "name": "紧咬之颚 Grasping Jaws",
+                    "description": "<p>成功从地精鲨的颚中@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]的生物会受到@Damage[1d6[bleed]]伤害，因为鲨鱼的咬合会撕裂其肌肉。</p>"
+                },
+                "Lunging Bite": {
+                    "name": "突刺咬击 Lunging Bite",
+                    "description": "<p>地精向前冲刺，伸出颚咬击生物。它可以直线游泳最多10尺，并进行一次具有10尺触及范围的颚打击。</p>"
+                }
+            },
+            "publicNotes": "<p>多种鲨鱼生活在海洋深处，陆地生物很少能遇到它们。</p><hr /><p>地精鲨是一种深海猎手，栖息于海底附近。它们游泳速度较慢，但通过隐秘的伏击来弥补，让猎物进入攻击范围后，便会用可伸展的下颚猛然袭击。</p>"
+        },
+        "Fangtooth School": {
+            "prototypeToken": {
+                "name": "尖牙鱼群"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "尖牙鱼群 Fangtooth School",
+            "publicNotes": "<p>这种鱼的可怕牙齿十分巨大，以至于它很难把嘴合上。这些鱼类甚至会将比自己大得多的生物视为潜在的食物，并在夜晚的黑暗中向水面上升。</p>",
+            "items": {
+                "Sunless Sight": {
+                    "name": "无光视觉 Sunless Sight",
+                    "description": "<p>当在明亮光照下时，尖牙鱼陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]和@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>"
+                },
+                "Bite and Gnaw": {
+                    "name": "噬咬咀嚼 Bite and Gnaw",
+                    "description": "<p>鱼群占据空间内的每个敌人受到@Damage[2d8[piercing]]伤害（@Check[reflex|dc:19|basic]豁免）。</p>"
+                }
+            }
+        },
+        "Concert Frog": {
+            "prototypeToken": {
+                "name": "奏鸣蛙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "奏鸣蛙 Concert Frog",
+            "publicNotes": "<p>这些巨大的蛙类将它们的卵储存在胃里。当卵孵化时，小蝌蚪会爬到父母的嘴里，加入庆祝的鸣叫和呱呱声，融入家庭的歌声中。</p>",
+            "hp": "25 （小蛙，免疫 区域伤害）",
+            "items": {
+                "Conduct": {
+                    "name": "指挥演奏 Conduct",
+                    "description": "<p>其中一只小蛙开始唱歌，给予奏鸣蛙和所有在60尺范围内的盟友三种效果中的一种，效果持续到奏鸣蛙的下一个回合开始。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.I4C55X7AzchlF9FM]{效果：指挥演奏}</p>\n<ul>\n<li><strong>红色</strong> 给予速度+10尺的状态加值。</li>\n<li><strong>Blue</strong> 给予AC和强韧豁免+1的状态加值。</li>\n<li><strong>Yellow</strong> 盟友在攻击检定上获得+1的状态加值，并成功的近战打击会额外造成@Damage[1d4[sonic]]伤害，因为它们的攻击会产生共鸣。\n\n</li>\n</ul>"
+                },
+                "Three-Frog Orchestra": {
+                    "name": "三蛙乐团 Three-Frog Orchestra",
+                    "description": "<p>奏鸣蛙的嘴唇后面蹲着三只颜色各异的小蛙。生物可以特意攻击其中一只小蛙。如果有任何小蛙死亡，奏鸣蛙在其回合结束时进行一次@Check[flat|dc:11]检定；成功时，新的小蛙会在其胃中孵化并出现在音乐蛙的嘴唇处。</p>"
+                }
+            }
+        },
+        "Harbor Seal": {
+            "prototypeToken": {
+                "name": "港湾海豹"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "港湾海豹 Harbor Seal",
+            "items": {
+                "Deep Breath": {
+                    "name": "深呼吸 Deep Breath",
+                    "description": "<p>港湾海豹能屏息最多30分钟。</p>"
+                },
+                "Whisker Sense": {
+                    "name": "胡须感知 Whisker Sense",
+                    "description": "<p>海豹可以使用其胡须精确感知指定范围内的振动，但这种感官仅限于水下。</p>"
+                },
+                "Aquatic Ambush": {
+                    "name": "水下伏击 Aquatic Ambush",
+                    "description": "<p>40尺。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
+                },
+                "Aquatic Feast": {
+                    "name": "水中佳肴 Aquatic Feast",
+                    "description": "<p><strong>需求</strong> 一个中型或更小体型的生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]于港湾海豹的颚</p>\n<hr />\n<p><strong>效果</strong> 港湾海豹游泳最多10尺，带着受擒的生物一同移动，并且造成@Damage[1d8[slashing]]伤害（@Check[fortitude|dc:18|basic]豁免）。</p>"
+                }
+            },
+            "publicNotes": "<p>港湾海豹是格拉利昂最常见的海豹，以其柔软的毛茸茸身体而著称。它们在水下是凶猛的猎手，但在地面上通常对类人生物有所畏惧，更愿意藏身于海浪之间，不愿面对那些看起来像是可怕的陆地捕食者的生物。</p>"
+        },
+        "Ghost Ape": {
+            "prototypeToken": {
+                "name": "鬼猿"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "鬼猿 Ghost Ape",
+            "items": {
+                "Ghost Stance": {
+                    "name": "幽灵架势 Ghost Stance",
+                    "description": "<p>鬼猿部分消失，形态变得模糊，难以捉摸。出于这种架势时，它对任何不与其相邻的生物视作@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。它无法利用这种隐蔽状态躲藏或@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]。它们还会获得对物理伤害的抗力5。如果鬼猿受到力场伤害，该架势就会结束，并且在[[/gmr 1d3 #rounds]]{1d3轮}内无法再次进入该架势。</p>"
+                },
+                "Phantom Step": {
+                    "name": "魅影步 Phantom Step",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 鬼猿移动迅速，穿过灵界。它传送到视线内至多等同其速度两倍的距离。</p>"
+                },
+                "Terrifying Display": {
+                    "name": "骇人示威 Terrifying Display",
+                    "description": "<p>鬼猿捶胸的样子十分吓人。@Template[emanation|distance:30]{30尺}内的生物必须成功通过一次@Check[will|dc:20]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（如果大失败为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。当生物因此能力处于惊惧状态，就会对鬼猿@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。如果成功，生物会临时免疫1分钟。</p>"
+                }
+            },
+            "publicNotes": "<p>鬼猿是一种隐居的领地性生物，通常只有在家园受到威胁时才会现身。大多数鬼猿首先会试图利用自己的气势和天生传送来吓唬和迷惑敌人，使其逃离。鬼猿会说话，但并不特别健谈，不过在极少数情况下，它们会以尊重的态度对待接近它们的人。如果有共同的目标，鬼猿可以成为强大的盟友，不过它们对外人往往心存疑虑，而且它们的信任并不容易赢得。</p>"
+        },
+        "Stony Goat": {
+            "prototypeToken": {
+                "name": "岩山羊"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "岩山羊 Stony Goat",
+            "items": {
+                "equipment-Cud": {
+                    "name": "反刍物 Cud"
+                },
+                "Cliff Climber": {
+                    "name": "攀崖者 Cliff Climber",
+                    "description": "<p>岩山羊快步穿过最陡峭的悬崖。它不需要尝试@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]检定就能攀上斜坡，而且在攀爬陡坡时也不会陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。它会忽略岩石、碎石、和土石构成的崎岖地形所产生的困难地形。</p>"
+                },
+                "All-Around Vision": {
+                    "name": "全域视野 All-Around Vision",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+                },
+                "Self-Petrify": {
+                    "name": "自我石化 Self-Petrify",
+                    "description": "<p><strong>触发</strong> 岩山羊获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态或者在单次命中内承受8点或更多伤害</p>\n<hr />\n<p><strong>效果</strong> 岩山羊为了自保而变为岩石。它获得@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]状态，持续[[/gmr 1d4 #rounds]]{1d4轮}。若岩山羊在石化期间受到伤害，它会立即通过吸收其反刍物中的矿物质来自愈，导致其反刍物损失等同于其恢复生命值的价值（举例来说，损失5gp价值来恢复5点生命值）；若岩山羊的反刍物价值减少到0gp，反刍物的矿物质就完全流失了，且岩山羊在吃下足量的岩石并睡觉之前不会形成更多的反刍物。</p>"
+                },
+                "Stone Bolt": {
+                    "description": "<p><strong>触发</strong> 岩山羊失去@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]状态</p>\n<hr />\n<p><strong>效果</strong> 岩山羊的第一反应是逃跑。它行走，此次行走的速度带有+20尺环境加值。</p>",
+                    "name": "宛若石箭 Stone Bolt"
+                },
+                "Overhead Leap": {
+                    "name": "越顶跳跃 Overhead Leap",
+                    "description": "<p>岩山羊@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]，距离至多为垂直距离12尺和水平距离20尺；这种移动不会触发反应动作。</p>"
+                },
+                "Shove and Run": {
+                    "name": "推开逃走 Shove and Run",
+                    "description": "<p>岩山羊尝试@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]距离最近的生物，然后行走，此次行走的速度带有+20尺环境加值。</p>"
+                }
+            },
+            "publicNotes": "<p>岩山羊以其宛若岩石的角和独特的饮食习惯而与其他普通同类区隔开来。这些温顺的生物喜爱啃食矿石，用它们那比钻石还坚硬的牙齿碾碎岩石和金属。难以消化的成分，比如提纯的金属块和宝石，则会凝结起来，被山羊进一步反刍。在紧急情况下，岩山羊甚至能从自己的反刍物中汲取营养。这些特性使得岩山羊成为了矿工和金属工人的绝佳伴侣；然而，这种野兽相当稀有，而且出了名地难以训练。</p>\n<p>岩山羊是一种容易受到惊吓的生物，具有被捕食动物的广阔视野和强烈的生存本能。它们还有一种独特的防御机制：在受到惊吓时，岩山羊会短暂石化成坚硬的岩石，通过把自己变得无法食用来劝退捕食者。这种脆弱的神经和强大的攀爬能力结合在一起后的结果，就是会让旅行者在原本无人居住的山区中发现一尊孤独的山羊雕像。</p>\n<p>敏锐的观察者能通过山羊角中的矿物质薄片来辨别岩山羊近期的饮食，比如淡银色的条纹代表它吃过朝银矿石。收藏家通常会猎杀岩山羊并展示它们那具有稀有特质的角。若岩山羊为了急需的营养而破坏了自己的反刍物的话，它的角就会在消化这些物质后彻底变为矿物质块，并在大约1小时后恢复到岩石状的常态。</p>"
+        },
+        "Stonefish Swarm": {
+            "prototypeToken": {
+                "name": "石头鱼群"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "石头鱼群 Stonefish Swarm",
+            "publicNotes": "<p>石头鱼偶尔会在食物丰富的地方聚集在一起，填满珊瑚礁的各个角落和缝隙。当数量众多时，石头鱼可以捕猎比它们自身大得多的猎物。</p>",
+            "items": {
+                "Defensive Spines": {
+                    "name": "防御性尖刺 Defensive Spines",
+                    "description": "<p>当生物进入石头鱼群占据的空间时，生物受到@Damage[1d4[piercing]]伤害，并且暴露于石头鱼群毒液的影响下。</p>"
+                },
+                "Reef Camouflage": {
+                    "name": "珊瑚礁伪装 Reef Camouflage",
+                    "description": "<p>直到下一次行动，石头鱼群能让自己看上去像一块五彩斑斓的珊瑚礁。在掩饰成珊瑚礁的欺骗检定和DC中，它自动获得26的结果。</p>"
+                },
+                "Inject Poison": {
+                    "name": "注射毒液 Inject Poison",
+                    "description": "<p>集群占据空间内的每个敌人受到@Damage[2d4[piercing]]伤害（@Check[reflex|dc:18|basic]豁免）。豁免失败的生物还会暴露于石头鱼群毒液的影响下。</p>"
+                },
+                "Stonefish Swarm Venom": {
+                    "name": "石头鱼群毒液 Stonefish Swarm Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:18]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]] 和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1轮）</p>\n<p><strong>阶段2</strong> 1d6毒素伤害@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} (1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害和笨拙2 (1轮）</p>"
+                }
+            }
+        },
+        "Sporeback Frog": {
+            "items": {
+                "Soporific Spores": {
+                    "name": "催眠孢子 Soporific Spores",
+                    "description": "<p>孢背蛙摇动背上的植物和真菌，直到它们释放出一片@Template[emanation|distance:20]范围的孢子云。该区域内的所有生物必须通过一次@Check[fortitude|dc:22]豁免，否则会变得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1分钟（若大失败则为@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 3}）。此能力在[[/gmr 1d4 #Recharge Soporific Spores]]{1d4轮}内不能再次使用。</p>"
+                },
+                "Seed Spores": {
+                    "name": "种植孢子 Seed Spores",
+                    "description": "<p>被孢背蛙舌打击命中的生物会受到@Damage[1d6[persistent,poison]]伤害，因为真菌孢子开始在其体内生长。</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "孢背蛙"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "孢背蛙 Sporeback Frog",
+            "publicNotes": "<p>这种掘地蛙会将自己埋在潮湿的土壤中，让有毒的苔藓和毒蘑菇在它的身体上生长。</p>"
+        },
+        "Pale Horse": {
+            "prototypeToken": {
+                "name": "灰马"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "灰马 Pale Horse",
+            "hp": "虚能治疗",
+            "items": {
+                "Spectral Mount": {
+                    "name": "幽魂坐骑 Spectral Mount",
+                    "description": "<p>灰马可以被具有肉体的骑手骑乘，但如果灰马穿过一个生物或物体，骑手就会被留下。</p>"
+                },
+                "At-Will Spells": {
+                    "name": "随意施法 At-Will Spells",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
+                },
+                "Aura of Despair": {
+                    "name": "绝望灵光 Aura of Despair",
+                    "description": "<p>30尺。在灵光范围内开始回合的活物必须成功通过一次@Check[will|dc:27]豁免，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。取得大成功的生物临时免疫此灵光1小时。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Spectral Charge": {
+                    "name": "幽魂冲锋 Spectral Charge",
+                    "description": "<p>灰马行走两次，然后进行一次角打击。灰马可以移动穿越生物。</p>"
+                }
+            },
+            "publicNotes": "<p>一只独角兽以特别残忍的方式死去便会导致灰马的诞生——希望和纯洁的象征转变为了无望与绝望的象征。</p>"
+        },
+        "Lightning Turtle": {
+            "prototypeToken": {
+                "name": "闪电龟"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "闪电龟 Lightning Turtle",
+            "items": {
+                "Deep Breath": {
+                    "name": "深呼吸 Deep Breath",
+                    "description": "<p>闪电龟能屏息长达30分钟。</p>"
+                },
+                "Shell Shock": {
+                    "name": "龟壳放电 Shell Shock",
+                    "description": "<p><strong>触发</strong> 闪电龟被一次近战或无武装攻击命中</p>\n<hr />\n<p><strong>效果</strong> 闪电龟施放一些储存的电能，对攻击它的生物造成@Damage[7d6[electricity]]伤害。</p>"
+                },
+                "Greater Electrolocation": {
+                    "name": "高等回声定位 Greater Electrolocation",
+                    "description": "<p>闪电龟能感知到活物产生的微小电流，他们将其作为20尺范围的精确感官使用。如果有任何生物在过去1分钟内使用过电击效果，那么该感官的作用范围扩展至100尺。</p>"
+                },
+                "Healing Pulse": {
+                    "name": "治疗脉冲 Healing Pulse",
+                    "description": "<p>闪电龟从身体释放出低强度的电流脉冲以促进愈合。这会为闪电龟自身和它10尺每个活着的盟友恢复@Damage[5d8[healing]]，包括通常对电击免疫的生物。闪电龟在1分钟内不能再使用愈合脉冲，并且在1分钟内对任何闪电龟的愈合脉冲临时免疫。</p>"
+                },
+                "Sparking Shell": {
+                    "name": "带电龟壳 Sparking Shell",
+                    "description": "<p>闪电龟缩入壳中。这会将它的AC增加到36，但它无法行动，除非使用带电龟壳或以一个单动作重新现身。缩在壳中时，闪电龟的龟壳放电能力会造成额外的4d6伤害，并失去非致命特征。</p>"
+                }
+            },
+            "publicNotes": "<p>闪电龟以慈善的保护者而著称，保护那些在海上迷失或受伤的人。它们独特的能力可以通过刺激身体的自然生物电流来促进愈合，这导致多年来许多人尝试驯服这些生物，但都没有成功。</p>"
+        },
+        "Sky Fisher": {
+            "items": {
+                "Transparency": {
+                    "description": "<p>除非最近进食过，否则空钓客是天生UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]的。使用非敌对动作不会导致空钓客变为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态。当它采取任何敌对动作时，空钓客会变为藏匿状态而非@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]，直到它的下回合开始，因为它的许多卷须的模糊轮廓会暂时变得隐约可见。</p>",
+                    "name": "透明 Transparency"
+                },
+                "Abduct": {
+                    "description": "<p>空钓客会卷住被其触须@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]的目标，将其拉入一处相邻空间，然后尝试将其@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu]（大型，@Damage[(3d8+12)[acid]]，破裂25）。空钓客只有在使用劫持时才能使用活吞。</p>",
+                    "name": "劫持 Abduct"
+                },
+                "Enzymic Vent": {
+                    "description": "<p>空钓客向空气中喷射食肉酶，对@Template[emanation|distance:20]范围内造成@Damage[3d6[persistent,acid],3d6[bleed]|options:area-damage]伤害（@Check[reflex|dc:25|basic|options:area-effect]豁免）。它在[[/gmr 1d4 #Recharge Enzymic Vent]]{1d4轮}内无法再次使用酶素喷发。</p>",
+                    "name": "酶素喷发 Enzymic Vent"
+                },
+                "Jet": {
+                    "description": "<p>空钓客会迅速排出一些气体，在空中快速移动，直线飞行至多100尺；此次移动不会触发反应动作。</p>",
+                    "name": "喷气 Jet"
+                },
+                "Sky Fisher Venom": {
+                    "name": "空钓客毒 Sky Fisher Venom",
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:25]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[3d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，且只能小声说话 (1轮）</p>\n<p><strong>阶段2</strong> @Damage[3d8[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}，且无法说话 (1轮）</p>\n<p><strong>阶段3</strong> @Damage[3d10[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF] (1轮）</p>"
+                }
+            },
+            "prototypeToken": {
+                "name": "空钓客"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "空钓客 Sky Fisher",
+            "publicNotes": "<p>空钓客是一种不寻常的空中掠食者，主要分布在热带丛林地区，但偶尔也会在遥远北端的瓦瑞西亚出现。自然学家认为，它是水母的远亲，通过长期接触来自气元素位面的元素能量，进化成一种新的生态位。最大，最具攻击性的空钓客被发现（并被认为起源于）于强大的气元素场附近，如伽伦德的泰尔瓦高地（Terwa Uplands）或阿本迪戈暴风眼周围，这进一步增强了这一理论的可信度。</p>\n<p>从外形上看，空钓客就像一只巨大的水母，在透明的球形身体下垂挂着许多垂下的卷须。虽然它的外表很难准确判断，因为它天生透明的外观几乎完全看不见，但它的内部包含一个复杂的化学工厂，可以产生比空气还轻的气体，麻痹毒素和食肉酶。这些酶具有很强的效力，由于其独特的性质，毒理学家通常都想得到它们。这种生物利用触须末端的眼状集群作为一种倒置的潜望镜，悬停在森林树冠的正上方进行捕猎。当它发现猎物时，就会漂浮到猎物附近，等待时机进行刺杀。然后，当猎物被麻痹时，空钓客就会将猎物吊到空中慢慢吞食。在其体内，酶会将死亡或麻痹的受害者分解成血浆。</p>\n<p>一只刚进食完的空钓客总能很快从在它身体里循环往复的一圈圈血液中辨认出来——那会是一种美丽而可怕的景象。</p>"
+        }
+    },
+    "mapping": {
+        "name": "name",
+        "portrait": {
+            "path": "img",
+            "converter": "npc-portrait-path"
+        },
+        "token": {
+            "path": "prototypeToken",
+            "converter": "npc-token-translation"
+        },
+        "data": {
+            "path": "system",
+            "converter": "npc-data-translation"
+        },
+        "items": {
+            "path": "items",
+            "converter": "npc-item-translation"
+        },
+        "publicNotes": "system.details.publicNotes",
+        "privateNotes": "system.details.privateNotes",
+        "allSaves": "system.attributes.allSaves.value",
+        "senses": "system.traits.senses.value",
+        "hp": "system.attributes.hp.details",
+        "blurb": "system.details.blurb",
+        "speed": "system.attributes.speed.details",
+        "languages": "system.traits.languages.custom",
+        "ac": "system.attributes.ac.details",
+        "di": "system.traits.di.custom",
+        "prototypeToken": {
+            "path": "prototypeToken",
+            "converter": "structured",
+            "cardinality": "one",
+            "mapping": {
+                "name": "name"
+            }
+        }
+    },
+    "label": "荒野之嚎 Howl of the Wild"
+}

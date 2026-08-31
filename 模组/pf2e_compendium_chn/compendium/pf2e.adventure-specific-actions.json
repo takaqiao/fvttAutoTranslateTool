@@ -1,0 +1,242 @@
+{
+    "label": "冒险特定行动 Adventure Specific Actions",
+    "mapping": {
+        "gmnote": "system.description.gm"
+    },
+    "entries": {
+        "Topple Crates": {
+            "name": "推翻木箱 Topple Crates",
+            "description": "<p><strong>需求</strong> 你与一处箱子堆成的柱子相邻</p>\n<hr />\n<p>你尝试将沉重的板条箱推翻并使其倒向一名敌人。尝试@Check[athletics|dc:22]检定。</p>\n<hr />\n<p><strong>成功</strong> 你将木箱推向处于箱柱@Template[line|distance:15]{15尺线形}范围内的 1 个目标。倒塌的箱子会造成@Damage[(3d10+6)[bludgeoning]]伤害，这需要进行@Check[reflex|dc:26|basic]豁免。豁免大失败的生物还会@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。木箱倒塌的所有方格均会成为困难地形（difficult terrain）。</p>\n<p><strong>失败</strong> 你未能推翻箱子。</p>\n<p><strong>大失败</strong> 箱子向着你倒了下来，其效果与成功相同，但只影响你和你所占据的方格。</p>"
+        },
+        "Mesmerizing Performance": {
+            "description": "<p><strong>需求</strong> 动物伙伴的前个动作是@UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{表演 Perform}检定获得成功。动物伙伴保持它的表演，使30尺内目睹其成功表演的一个目标着迷。该目标必须尝试意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 目标不受影响，并临时免疫1小时。</p>\n<p><strong>失败</strong> 目标因动物伙伴的下一个动作而承受@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}状态，然后临时免疫1小时。</p>\n<p><strong>大失败</strong> 目标因动物伙伴而承受迷魂状态，持续1轮，在迷魂期间目标无法使用反应。</p>"
+        },
+        "Protector's Interdiction": {
+            "name": "守护拦截 Protector's Interdiction",
+            "description": "<p><strong>触发</strong> 一个相邻盟友被一次攻击命中或重击</p>\n<hr />\n<p><strong>效果</strong> 你将自身介入盟友与攻击之间。攻击改为命中你，或是如果重击你的盟友则重击命中你。</p>"
+        },
+        "Dream Research": {
+            "name": "梦中研究 Dream Research",
+            "description": "<p><strong>触发</strong> 你在夏尔文庄园5 英里范围内睡着了。</p>\n<p><strong>频率</strong> 每12 小时一次</p>\n<hr />\n<p>当你入眠时，你会经历那些近乎梦魇一般的噩梦。在这些梦里，你感觉你的心智被从灵魂中抽离，你所知的一切都仿佛被星辰间黑暗的宇宙吞噬。在梦境里，你可以专注于某个尚未研究完成的课题。如果队友在梦中研究完了这个课题，你可以立即切换为另一个课题。</p>\n<p>你所使用的技能和DC 依据每个课题而有所不同，详见每个课题的梦境节点。如果你不是在庄园内部做梦，和咒怨的心灵连接就会变弱，你的研究检定会承受-2 减值。</p>\n<hr />\n<p><strong>大成功</strong> 你获得2 RP。</p>\n<p><strong>成功</strong> 你获得1 RP。</p>\n<p><strong>大失败</strong> 你对咒怨的探究过于深入了，它已盯上了你。在你的一部分记忆被它贪婪地吞噬之前，你必须设法打破心灵连接。你的咒怨状态值上升1 点。</p>"
+        },
+        "Forge Documents": {
+            "name": "伪造文件 Forge Documents"
+        },
+        "Secure Disguises": {
+            "name": "获取伪装 Secure Disguises"
+        },
+        "Costar": {
+            "name": "共演 Costar",
+            "description": "<p><strong>触发</strong> 另一位与你在相同幕剧的表演者即将进行把戏检定。</p>\n<p><strong>需求</strong> 表演者愿意接受你的协助。</p>\n<hr />\n<p>你帮助另一个表演者完成他们的把戏，可能会给他们带来触发把戏检定的加值。尝试进行与你试图协助的把戏相同的检定。 共演的DC等于把戏检定的DC。 NPC不能进行共演。这个反应的作用与@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]动作相同。</p>"
+        },
+        "Cram": {
+            "name": "突击应考 Cram",
+            "description": "<p><strong>需求</strong> 你是入门生（initiate）、助研生（attendant）或者上级生（conversant），并且你的主分支或副分支等级比限制低2级以上。</p>\n<hr />\n<p>你意识到自己在学习上落后了，因此需要花更多的时间进行填鸭式学习。你进行两次学习行动，每次都必须选择满足要求的分支。然而，熬夜学习是有代价的。直到你有机会进行下一次学习行动之前，你会因为将所有时间用来突击学习而变得特别累。在你冒险中的每一天开始前，你必须通过@Check[flat|dc:8]检定，否则@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]一天。</p>"
+        },
+        "Perform a Trick": {
+            "name": "表演把戏 Perform a Trick",
+            "description": "<p>你表演你的马戏团招牌把戏。尝试与你的把戏相关的一个把戏检定。把戏检定的DC由你的等级决定。每个把戏检定的结果决定你是否能产生兴奋值、期待值，或是失去他们。</p>\n<hr />\n<p><strong>大成功</strong> 你产生的兴奋值相当于该把戏的等级；这个兴奋值将被添加到马戏团的总兴奋值中。你还会产生相当于该把戏等级一半的期待值（向上取整）；这种期待值会被添加到马戏团的总期待值中。</p>\n<p><strong>成功</strong> 你产生的兴奋值相当于该把戏的等级；这个兴奋值将被添加到马戏团的总兴奋值中。</p>\n<p><strong>失败</strong> 无效果。</p>\n<p><strong>大失败</strong> 马戏团的兴奋值减少了把戏等级的一半（向上取整）。</p>\n<hr />\n<p>你可以在每幕剧中多次进行表演把戏，并且为每次尝试选择不同的把戏检定。如果你在同一剧幕中表演了两次把戏，你的第二次把戏检定将受到 -5 减值。如果你表演了三次把戏，第三次检定有 -10 减值。如果你的把戏具有灵巧特征，则减值会分别减少到 -4 和 -8。</p>\n<p>这个动作总是具有马戏团特征。从1级开始，你可以为你的招牌把戏选择一个额外的把戏特征，并将其也应用于这个动作。随着你等级的提高，你可以增加额外的特征。</p>"
+        },
+        "Practical Research": {
+            "name": "实践研究 Practical Research",
+            "description": "<p><strong>需求</strong> 你是上级生（conversant）或讲师（lore-speaker）</p>\n<hr />\n<p>你在某个领域里发现了一些有趣的东西，并对其进行专门的研究。这需要一个适当的技能检定，当这种机会出现时，GM会进行描述。检定的结果各不相同。虽然结果通常都会为你带来学术上的好处，但是一些实践研究也能提供一些独特的好处，例如将会给你的角色开启一些新的角色选项。</p>"
+        },
+        "Send in the Clowns": {
+            "name": "小丑入场 Send in the Clowns",
+            "description": "<p><strong>需求</strong> 你或其他表演者在当前幕剧中的把戏检定失败或大失败。</p>\n<hr />\n<p>你发出信号，让马戏团的小丑们上台，拯救搞砸的把戏。能将一个失败的把戏改为成功，或者如果它是一个大失败，则改为失败。小丑在每场幕剧中只能被派出场一次，而且只能影响一次把戏检定。</p>"
+        },
+        "Study": {
+            "name": "学习 Study",
+            "description": "<p><strong>需求</strong> 你是入门生（initiate）、助研生（attendant）或者上级生（conversant）。</p>\n<hr />\n<p>你把所有的精力都投入对应分支的到学习中去。选择你的主要或副分支，尝试用分支相关技能之一进行一次技能检定，DC为基于当前分支的等级的标准DC。</p>\n<hr />\n<p><strong>大成功</strong> 难以置信的结果！你每次考试都取得好成绩，引起了所有老师的关注。增加你选择的分支等级2</p>\n<p><strong>成功</strong> 你很好地完成了你的学业。增加你选择的分支等级1</p>\n<p><strong>失败</strong> 你需要更努力一点并且再试一次。你的分支等级没有变化</p>\n<p><strong>大失败</strong> 你犯了一个大错因此你需要补课。当你下次有机会再次尝试此项休整期行动时，你必须跳过这次行动才能赶上你的同学们。</p>"
+        },
+        "Shootist's Draw": {
+            "name": "射手快拔 Shootist's Draw",
+            "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 你以一个交互动作拔出@UUID[Compendium.pf2e.equipment-srd.Item.XyA6PKV46aNlLXOd]{手弩 Hand Crossbow}然后用它进行1次打击，或者你以一把已经上弦的、持握中的手弩进行打击，然后以一个交互动作收起它。</p>"
+        },
+        "De-Animating Gestures (True)": {
+            "description": "<p>你指定一个在30尺内你能看到或听到的构装体。这个构装体会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。</p>",
+            "name": "解除动力手势 De-Animating Gestures （真）"
+        },
+        "Spin Tale": {
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p><strong>效果</strong> 你讲述一个故事，指定你的一个盟友（不包括你自己）作为故事中的“英雄”，指定一个敌人作为故事中的“反派”；二者必须都距离你60尺以内。直到你下回合开始前，“英雄”对“反派”的攻击骰和豁免骰获得+1状态加值。如果你在下回合继续编故事，故事将会延续到下一轮，最多延续10轮。当故事持续的时候，微小的、粗糙的幻象会在你所在的空间里出现。这些奥术幻象除了作为你故事的动态图解以外没有任何其他作用。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.UzIamWcEJTOjwfoA]{效果：编故事}</p>"
+        },
+        "De-Animating Gestures (False)": {
+            "description": "<p>指定一个在30尺内你能看到或听到的构装体。这个构装体会获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened 1}，持续1分钟，并在24小时内免疫该效果。它只能用它的额外动作来行走或打击。</p>",
+            "name": "解除动力手势 De-Animating Gestures （假）"
+        },
+        "Exhale Poison": {
+            "name": "呼吐毒素 Exhale Poison"
+        },
+        "Prove Peace": {
+            "description": "<p><strong>需求</strong> 你必须知晓产生该围城碎片的那次战斗，并且围城碎片被禁足@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。</p>\n<hr />\n<p>你触碰围城碎片，建立心灵链接，并且传达战斗已经结束的事实。</p>\n<p>尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识 Recall Knowledge}检定来回想那场导致围城碎片产生的战斗，并对抗围城碎片的意志DC。如果你成功，你证实战斗已经结束，围城碎片就会变成普通的石头。如果你大失败，过往的画面会压垮你的精神，你陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}状态直到你的下一回合结束。</p>",
+            "name": "证实和平 Prove Peace"
+        },
+        "Influence Regent": {
+            "description": "<p>你试图获得一名寇夫拉的摄政者的青睐，可以选择得体并尊重地回应他们的问题，这需要尝试一次交涉检定；或者你也可以利用在其他技能上的聪明才智。第二种策略通常无法成功，除非该技能刚好是这名摄政者的行会所偏好技能。根据 GM 的判断，你也可以使用合适的学识（Lore）技能来替代交涉检定。若你尝试交涉或学识检定，需要通过@Check[diplomacy|dc:32]或@Check[lore|dc:32]检定才能成功；若你尝试的是行会偏好技能的检定，则通过@Check[diplomacy|dc:28]或@Check[lore|dc:28]检定便可以成功。</p>\n<p>根据 GM 的判断，若角色在影响摄政者的尝试中提出了令人信服的观点或者进行了让人印象深刻的扮演，则可以在该检定中获得+2 环境加值。</p>\n<hr />\n<p><strong>大成功</strong> 你让摄政者的疑虑降低了 2 点</p>\n<p><strong>成功</strong> 你让摄政者的疑虑降低了 1 点</p>\n<p><strong>失败</strong> 你未能改变摄政者的疑虑</p>\n<p><strong>大失败</strong> 你让摄政者的疑虑增加了 1 点</p>",
+            "name": "影响摄政者 Influence Regent"
+        },
+        "Deduce Traditions": {
+            "name": "推测传统 Deduce Traditions",
+            "description": "<p>通过解读摄政者的性格，利用你对矮人传统的了解，并由此作出合理的推论，你能够推测出该名矮人摄政者的行会最看重的是什么技巧——并由此推断出何种技能最有可能得到这名摄政者的青睐。推测传统需要成功通过@Check[perception|dc:30]检定或者成功通过@Check[society|dc:25]检定才能得到精准的结果。</p>\n<hr />\n<p><strong>大成功</strong> 你了解到该行会的一项偏好技能，并且得知该名摄政者的疑虑数值。</p>\n<p><strong>成功</strong> 你了解到该行会的一项偏好技能。</p>\n<p><strong>失败</strong> 你未能了解到该行会偏好技能。</p>\n<p><strong>大失败</strong> 你误认为一项错误的技能是该行会偏好技能。</p>"
+        },
+        "Check the Walls": {
+            "name": "巡查围墙 Check the Walls",
+            "description": "<p>一名PC花费一整日时间来研究城墙并在墙上巡查。之后该PC尝试@Check[arcana|dc:32]检定或@Check[crafting|dc:27]检定。</p>\n<hr />\n<p><strong>大成功</strong> PC 发现西侧围墙上排列着的保护符文中有一些错位——石材与魔法以不易察觉的形式错开了，该迹象是此区域长期承重的结果，但从表面上无法看出这种结果的直接成因，承重造成的形变说明这片城墙所在地区的地下某处有隐藏的空间。但不幸的是，在城市保存的记录以及建筑规划中进一步研究后，得到的结论是此区域并不存在任何地下密室，这表明要不然这片区域确实不存在密室；要不然就是密室存在，但与之相关的记录要么错误要么就是遗失了。</p>\n<p><strong>成功</strong> PC 发现西侧围墙的一片区域产生了不整齐的错位——这足够证实万用榫卯佳尼斯所担心的事情，但目前还无法判明造成该错位的成因。</p>\n<p><strong>失败</strong> 尽管 PC 们能够识别出关于这座城市的围墙的基本信息，但他们的能力还不足以发现它在结构上的缺陷。当 PC 们向万用榫卯佳尼斯回报时，她会建议 PC 们再次巡查围墙以证实他们的怀疑，因为她认为可以从中挖出更多信息。</p>\n<p><strong>大失败</strong> PC 们在东侧墙壁上发现了一处他们认为是缺陷的设计，但实际上，这只不过是古代魔法在设计时的古怪惯例而已。当 PC 们回报自己找到的内容后，万用榫卯佳尼斯会向大法师瑙鲁温确认这一情况，后者立即检查了该区域并准确地指出了 PC 们犯下的错误。这次 PC 行动的失败导致万用榫卯佳尼斯以及山脉之心凿石不会再对 PC 们在寇夫拉的行动进行支持。</p>"
+        },
+        "Guild Investigation": {
+            "description": "<p>一名PC花费一整日时间来尝试一次DC30的技能检定，并以此来推进对行会的调查。</p>\n<hr />\n<p><strong>大成功</strong> PC 们的调查结果令人信服，证实布里根是这些劣质武器背后的罪犯，此外调查还向PC们揭示出了他的店铺的所在位置。这些证据使得PC们在布里根的店铺中与其对峙时便让他认罪了，而非通过审问迫使他招供。</p>\n<p><strong>成功</strong> 调查表明布里根是这些劣质武器的幕后黑手，并且还向 PC 们揭示出了他的店铺位置。</p>\n<p><strong>失败</strong> 调查未能得出结论，但也没有打草惊蛇地惊动到布里根。</p>\n<p><strong>大失败</strong> 调查未能得出结论，但布里根知道 PC 们已经盯上他了。他抛下了自己的店铺并逃到了隐蔽锻铁厂向其他卓斯卡信徒寻求庇护。在此情况下，PC 们能够在区域 D2 遭遇到布里根——你可以在这场遭遇中使用缇娅（Thea）的数据来扮演布里根。</p>",
+            "name": "调查行会 Guild Investigation"
+        },
+        "Set Traps": {
+            "name": "设置陷阱 Set Traps",
+            "description": "<p>PC 可以在周围的树林或狭窄的小巷中设置一些快速搭建的陷阱来阻碍进攻方的行动，甚至对他们造成伤害。设置陷阱需要进行生存（受训）检定。</p>\n<hr />\n<p><strong>大成功</strong> 泰兹尔滩战斗的每一轮结束时，PC选择一支敌军使其获得迟滞1，并且使其受到1点伤害。</p>\n<p><strong>成功</strong> 泰兹尔滩战斗的每一轮结束时，PC选择一支敌军使其获得迟滞1或者使其受到1点伤害。</p>\n<p><strong>大失败</strong> 设置陷阱的尝试不仅失败了，而且还误触了其中一个在设置过程的陷阱：尝试将一根镶满尖钉的圆木设置成陷阱的动作失败了，把PC撞向一栋建筑的墙上。该PC受到@Damage[5d6[piercing],5d6[bludgeoning]]伤害（@Check[reflex|dc:25|basic]豁免）。</p>"
+        },
+        "Holy Light": {
+            "name": "灼热圣光 Holy Light"
+        },
+        "Seasonal Boon (Close Ties)": {
+            "description": "<p><strong>频率</strong> 每季节一次</p>\n<p><strong>触发</strong> 小队中某人使柳岸镇一名NPC态度变为友善</p>\n<hr />\n<p><strong>效果</strong> 你的声望彰显，即便你不是尝试影响NPC的人。NPC会变为乐于帮助而非友善。使得一名NPC变为乐于帮助会从他们在柳岸镇的地点解锁额外的支援——你的GM对于此机制拥有更多信息。</p>",
+            "name": "季节恩惠-亲密友人 Seasonal Boon (Close Ties)"
+        },
+        "Seasonal Boon (Outskirt Dweller)": {
+            "description": "<p><strong>频率</strong> 每个季节一次</p>\n<p><strong>触发</strong> 你将要掷骰先攻</p>\n<hr />\n<p><strong>效果</strong> 当前状况中的某些事触发了你的防御，让你对突然的危险迅速做出反应。你在先攻骰上获得等同于你开始《肆季鬼志》后度过的季节数量（第一场冒险+1，最大到最后第四场冒险+4）的状态加值。如果你可以给其他PC传达警告，他们也将在先攻上获得此加值。</p>",
+            "name": "季节恩惠-郊区居民 Seasonal Boon (Outskirt Dweller)"
+        },
+        "Seasonal Boon (Southbank Traditionalist)": {
+            "name": "季节恩惠-南岸传统派 Seasonal Boon (Southbank Traditionalist)",
+            "description": "<p><strong>频率</strong> 每个季度一次</p>\n<p><strong>触发</strong> 小队的南岸声望增加</p>\n<hr />\n<p><strong>效果</strong> 额外提高小队的南岸声望2点（你的GM有着有关柳岸镇声望的额外信息）。</p>"
+        },
+        "Seasonal Boon (Northridge Scholar)": {
+            "name": "季节恩惠-北岭学者 Seasonal Boon (Northridge Scholar)",
+            "description": "<p><strong>频率</strong> 每个季节一次</p>\n<p><strong>触发</strong> 小队的北岭声望增加</p>\n<hr />\n<p><strong>效果</strong> 额外提高小队的北岭声望2点（你的GM有着有关柳岸镇声望的额外信息）。</p>"
+        },
+        "Seasonal Boon (Folklore Enthusiast)": {
+            "name": "季节恩惠-民俗爱好者 Seasonal Boon (Folklore Enthusiast)",
+            "description": "<p><strong>频率</strong> 每个季节一次</p>\n<p><strong>触发</strong> 你将要为回忆知识做出任意检定</p>\n<hr />\n<p><strong>效果</strong> 你具有一种洞察力，随着你回忆起了一个古老的寓言，模糊的传说，或适合手头主题的故事。此次回忆知识失去秘密特征。提高一级你回忆知识检定结果的成功度。</p>"
+        },
+        "Seasonal Boon (Willowshore Urchin)": {
+            "name": "季节恩惠-柳岸镇流浪儿 Seasonal Boon (Willowshore Urchin)",
+            "description": "<p><strong>频率</strong> 每个季度一次</p>\n<p><strong>触发</strong> 你（或一名相邻的PC）将要掷骰恢复检定</p>\n<hr />\n<p><strong>效果</strong> 你不进行掷骰恢复检定而是自动取得大成功，因为你有健硕的体格，顽强的态度，或只是老好运继续让你存活下来就跟儿时一样。如果你与一名将要掷骰恢复检定的PC相邻，你可以改为用此恩惠来给予其本效果。</p>"
+        },
+        "Deadly Spark": {
+            "description": "<p><strong>性相</strong> 气</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 专注，操作</p><hr /><p><strong>效果</strong> 圣物对20尺内的敌人发射一道电火花，造成@Damage[(1+max(0,floor((@actor.level -2)/4)))d12[electricity]]伤害（@Check[reflex|against:class-spell|basic]豁免）。该伤害在6级时增加1d12，之后每4级增加1d12。</p>",
+            "name": "致命火花 Deadly Spark"
+        },
+        "Elemental Attack": {
+            "description": "<p>从气，土，火，金，水，木中选择一项（此选择一旦你为模仿者作出便不能改变）。无面鬼模仿者以60尺内一个生物为目标，制造一道该种元素的爆炸；该生物受到@Damage[4d6[@item.flags.system.rulesSelections.damage]]挥砍（气），钝击（土，水，木），穿刺（金），或火焰（火）伤害（@Check[reflex|dc:24|basic]豁免）。元素攻击获得相应元素特征。</p>",
+            "name": "元素攻击 Elemental Attack"
+        },
+        "Fight Fires": {
+            "description": "<p>你尝试灭火，踩踏着火的碎屑、扑灭较小的火焰、或者将还未燃烧的物品搬离火焰。尝试@Check[acrobatics|dc:15]、@Check[athletics|dc:15]或@Check[survival|dc:15]检定，并根据你的等级来判断成功度。若你在进行该动作的过程中用了水的话，则会在检定中获得+2物品加值。另外，你也能够在施法中尝试法术攻击检定来使用法术灭火，不过你需要向GM描述你会如何使用法术灭火，GM 将会判断该计划是否有成功的可能性。若法术具有[水]特征，可以自动给予大成功结果或者立即熄灭火焰。</p>\n<hr />\n<p><strong>大成功</strong> 你获得2点灭火点数</p>\n<p><strong>成功</strong> 你获得1点灭火点数</p>\n<p><strong>大失败</strong> 你失去1点灭火点数</p>",
+            "name": "灭火 Fight Fires"
+        },
+        "Prepare Firepots": {
+            "name": "准备火盆 Prepare Firepots",
+            "description": "<p>由于得知敌军中农有一些巨魔，准备装有炽火胶、油或者其他能快速燃烧的材料的火盆可能会对战斗非常有帮助。准备火盆需要进行手艺（受训）检定。</p>\n<hr />\n<p><strong>大成功</strong> 制造了足够多的火盆，在战场上的任何地点都能快速取用，因此攻击泰兹尔滩的巨魔军队失去再生战术。</p>\n<p><strong>成功</strong> 没能制造出足够多确保能快速部署的火盆。在巨魔军队的回合结束时，它必须进行DC20的机动检定。如果失败它将在下一轮结束前失去再生战术。</p>\n<p><strong>大失败</strong> 准备火盆导致了一场壮观的爆炸，对PC造成@Damage[10d6[fire]]伤害（@Check[reflex|dc:25|basic]豁免）。</p>"
+        },
+        "Assessing Tatzlford's Defenses": {
+            "name": "评估泰兹尔滩的防御 Assessing Tatzlford's Defenses",
+            "description": "<p>队伍花了一个小时浏览泰兹尔滩，评估该镇的防御措施还有哪些改进的地方。他们会直接得出设置路障会有作用的结论，使他们可以进行下文提到的设置路障动作。尝试进行一次@Check[defense|dc:23|roller:party]或@Check[warfare|dc:27|roller:party]王国技能检定来确定额外进行的防御措施改进，可以进行以下动作：@UUID[Compendium.pf2e.adventure-specific-actions.Item.pWxRtCeAw4XnyzoM]、@UUID[Compendium.pf2e.adventure-specific-actions.Item.tay92zbn04IR40qv]、@UUID[Compendium.pf2e.adventure-specific-actions.Item.sWTvJahHpdz4CC6E]或@UUID[Compendium.pf2e.adventure-specific-actions.Item.z1noqZiavhnqQL50]。如果玩家自己提出了上述其中之一想法（或者根据你的判断还有其他类似想法），无论检定结果如何他们都可以进行对应动作。</p>\n<hr />\n<p><strong>大成功</strong> 队伍获得全部四次额外防御动作。</p>\n<p><strong>成功</strong> 队伍获得两次额外防御动作，随机确定动作种类。</p>\n<p><strong>失败</strong> 队伍获得一次额外防御动作，随机确定动作种类。</p>\n<p><strong>大失败</strong> PC只意识到可以进行设置路障防御动作。</p>"
+        },
+        "Erect Barricades": {
+            "name": "设置路障 Erect Barricades",
+            "description": "<p>可以用木材、树干、木桶、马车、垃圾、或者尖刺在墙壁上、小巷里甚至街道上的空隙中设置路障，从而防止敌人轻易进入城镇。设置路障需要进行手艺检定。可以由多名PC执行这一动作来设置多个路障。</p>\n<hr />\n<p><strong>大成功</strong> 成功设置了路障。当一支防守方军队进行防御动作时，其机动检定获得+2物品加值。路障被敌人摧毁前只能赋予2次该项加值。</p>\n<p><strong>成功</strong> 类似大成功，但路障只能在进行防御动作起到一次作用。</p>\n<p><strong>大失败</strong> 发生了灾难性的事故！不仅路障损坏了，而且尝试设置路障的PC会受到@Damage[10d6[bludgeoning]]伤害（@Check[reflex|dc:25|basic]豁免）。</p>"
+        },
+        "Recruit Wildlife": {
+            "name": "招募野兽 Recruit Wildlife",
+            "description": "<p>泰兹尔滩周围的森林里有着数量相当多的野兽。虽然没法将这些动物组织成一支真正的军队，但PC依然可以使用自己的技能将当地的动物族群转化为自身优势。招募野兽需要进行自然（专家）检定。如果PC有荒野认同专长，或者可以施展动物交谈法术，他们也可以选择用交涉（受训）来进行这项检定。</p>\n<hr />\n<p><strong>大成功</strong> PC解释了动物对敌军接近的反应。友方军队在泰兹尔滩战斗中进行先攻检定时获得+3环境加值。此外，一群饥饿的狐尾袋狼会在战斗中的某个时刻袭击敌军。这次攻击发生在由玩家选择的某个回合结束之时，此时PC可以尝试对任何未接战的军队进行[[/r {1d20+20} #melee strike]]{+20}近战打击。在动物逃回树林之前，袋狼的打击命中会对敌军造成1点伤害（重击则为2点）。</p>\n<p><strong>成功</strong> 类似大成功（包括袋狼攻击），但先攻检定的环境加值仅为+1。</p>\n<p><strong>大失败</strong> 当地的动物不仅拒绝援助，而且PC的动作还意外地导致一群疯狂的袋狼来到镇上进行攻击。泰兹尔滩城镇守卫成功击败了进攻，但他们会以受到1点伤害的状态开始战争遭遇。</p>"
+        },
+        "Post Snipers": {
+            "description": "<p>纳玛彻斯守林人都是熟练的猎手，但PC将其中的一些弓箭手从军队中抽掉出来，安置在战场中的屋顶和树上的隐蔽位置，就可以最大限度地发挥出他们的潜力。</p>\n<hr />\n<p><strong>大成功</strong> 神射手部署在了几个关键位置。泰兹尔滩战斗的每一轮结束时，尝试对任何未接战的军队进行[[/r 1d20+18 #Ranged Strike]]{+18}远程打击。神箭手每次命中造成1点伤害（重击造成2点伤害）。神箭手在泰兹尔滩战斗中最多可以进行3次额外攻击，但在任何一轮结束时都只能攻击一次。</p>\n<p><strong>成功</strong> 类似大成功，但神箭手在战斗中只能进行一次额外攻击。</p>\n<p><strong>大失败</strong> 不仅没能将神箭手派驻在具有优势的区域，而且PC从军队中抽调了太多弓箭手。在泰兹尔滩战役中，纳玛彻斯猎人进行远程攻击会受到-2减值。</p>",
+            "name": "派驻神射手 Post Snipers"
+        },
+        "Rotate the Wheel": {
+            "name": "旋转轮盘 Rotate the Wheel",
+            "description": "<p>该角色花费时间旋转轮盘。这是一项耗费体力的工作，在本轮结束时，PC必须进行@Check[fortitude|dc:25]豁免。此豁免DC会随着旋转轮盘的次数而增加。旋转七圈后，这个房间的两扇双开门都会打开（24小时后自动关闭）。</p>\n<hr />\n<p><strong>大成功</strong> 轮盘旋转2圈。旋转轮盘的DC增加1点。</p>\n<p><strong>成功</strong> 轮盘旋转1圈。旋转轮盘的DC增加1点。</p>\n<p><strong>失败</strong> 该角色未能推动轮盘。旋转轮盘的DC增加2点。</p>\n<p><strong>大失败</strong> 该角色跌跌撞撞失去了对轮盘的控制，触发了耐力试炼危害。轮盘反向转动，圈数重置为0，DC重置为25。</p>"
+        },
+        "Righteous Call": {
+            "name": "正义召唤 Righteous Call",
+            "description": "<p><strong>性相</strong> 天族赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> （专注，操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 神圣的魔法充满了你的武器，使之成为对抗邪恶的真正利器。在1分钟内，你的武器和无武装攻击获得圣洁武器符文武器符文。如果一把武器的性能符文数量达到了上限，你可以选择让其中一个性能符文暂时休眠来激活圣洁符文的效果。此外，当你的盟友在你30尺范围内时，其攻击会附带圣洁特征。</p>"
+        },
+        "Wind Barrier": {
+            "description": "<p><strong>性相</strong> 气赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 专注</p>\n<hr />\n<p><strong>效果</strong> 产生一道隐形的空气屏障，可以偏转受到的远程攻击。直到你下回合开始前，你的AC在针对远程攻击时获得+2环境加值。达到13级时，该加值提升为+3。</p>",
+            "name": "风之屏障 Wind Barrier"
+        },
+        "Forgive Foe": {
+            "name": "宽恕敌人 Forgive Foe",
+            "description": "<p>你试图迫使一名敌人直面自己的愧疚，并为自己的行为而感到羞愧。当你这么做时，尝试一次@Check[diplomacy|defense:will]检定或该生物羞愧条目中所指示的其他检定；该DC为该生物的意志DC。 </p>\n<hr />\n<p><strong>大成功</strong> 你的言辞直切要害、一针见血，并且允许该生物逃离时间边缘之屋的奴役。具体效果会在该生物的羞愧条目中列出。</p>\n<p><strong>成功</strong> 你的言辞让敌人身形一顿。它在所有攻击、效果DC和对抗额外的宽恕敌人尝试的意志DC中承受-2状态减值，直至你的下一回合结束。</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.tWFcPYueuOdSgSgg]</p>\n<p><strong>大失败</strong> 你过于戏剧性的失败反而激发了该生物的愤怒，有效地蒙蔽了他的羞愧感和内疚感。在接下来的24小时中，当他在攻击你时不会再承受羞愧的效果，并且你也无法再试图宽恕这名敌人。</p>"
+        },
+        "Fey Luck": {
+            "name": "精类幸运 Fey Luck",
+            "description": "<p><strong>触发</strong> 你在一次豁免骰中失败或大失败</p>\n<p><strong>频率</strong> 一次</p>\n<hr />\n<p>在将小精灵从残忍的笼子中释放出来后，你所获得的运气将使你免遭不幸的命运。将失败的豁免骰调整为成功，或者将大失败的豁免骰调整为失败。</p>"
+        },
+        "Beginner's Luck": {
+            "name": "新手之运 Beginner's Luck",
+            "description": "<p><strong>性相</strong> 机运赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">r</span> 想象</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 尝试某个你未受训的d20检定</p>\n<hr />\n<p><strong>效果</strong> 你获得你等级一半的熟练度加值，或者如果圣物达到7级，你获得和你等级相同的熟练度加值。然后，你投掷2次，选择更好的结果。这并不能让你尝试某个技能的受训动作。</p>"
+        },
+        "Shed Time": {
+            "name": "超脱时间 Shed Time",
+            "description": "<p><strong>触发</strong> 你在一次豁免骰中失败或大失败，被一次打击命中，或是将增加你的濒死状态值</p>\n<p><strong>需求</strong> 你位于时间边缘之屋（包括任何娜芮莎的寓言），且正在受到螺旋法则的保护。</p>\n<p><strong>效果</strong> 你摆脱了当前所处的时间线，在触发的事件发生后重新回到其开始时。确切的效果取决于触发效果为何，如下所述。你不再受到螺旋法则的保护；一旦失去了这一保护，便无法再恢复。</p>\n<hr />\n<ul>\n<li><strong>在豁免骰中失败</strong> 将触发的豁免骰的成功度从失败提升为成功，或者从大失败提升为失败。</li>\n<li><strong>被一次打击命中</strong> 如果触发的打击是一次大成功，则将其改为成功。如果触发的打击是成功，则将其改为失败。</li>\n<li><strong>增加濒死状态值</strong> 你失去了濒死状态值，以此取代增加你的濒死状态值。</li>\n</ul>"
+        },
+        "Steal Luck": {
+            "name": "盗取机运 Steal Luck",
+            "description": "<p><strong>性相</strong> 机运赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">r</span> 想象</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你或某个距离你30尺内的生物在幸运或厄运效果的影响下投掷2次d20，并且你想要得到更高的结果</p>\n<hr />\n<p><strong>效果</strong> 你偷取触发的两次掷骰中较高的那个结果；目标必须使用剩下那个作为结果。直到你下次每日准备，你在尝试对来自敌人、危害或环境的效果进行豁免时，你可以将之前偷取的结果作为你检定的结果。这么做将是一个幸运效果。如果你在下次每日准备前没有如此做，你失去你偷取的数字。</p>"
+        },
+        "Navigate Steamgrotto": {
+            "name": "穿越蒸汽岩地 Navigate Steamgrotto",
+            "description": "<p>你耗费时间观察蒸汽岩地的间歇泉爆发的规律，然后为了避免陷入危险而尽可能规划你在该地区内的移动路线。你能够尝试自然、察觉，或生存技能来尝试穿越蒸汽岩地，这需要成功投掷DC35的检定，但使用察觉无法让你更加深入地认知到这些危险的本质，因此察觉检定会受到-4环境减值。</p>\n<hr />\n<p><strong>大成功</strong> 你避开了危险，且跟随专家的人在检定时从该行动中获得加值为正常的两倍。</p>\n<p><strong>成功</strong> 你避开了危险。</p>\n<p><strong>失败</strong> 在通过部分间歇泉的时候你靠得太近，且穿过的时机太差。你承受@Damage[10d6[fire]]伤害（@Check[reflex|dc:36|basic]豁免）。</p>\n<p><strong>大失败</strong> 你严重地误判了自己的行进路线，不慎被间歇泉直接喷中。你承受@Damage[20d6[fire]]伤害（@Check[reflex|dc:36|basic]豁免）。</p>"
+        },
+        "Kick Dust": {
+            "name": "踢起尘土 Kick Dust",
+            "description": "<p><strong>需求</strong> 你正站在具有充足松软泥土的区域内</p>\n<hr />\n<p>通过用你的脚扬起或踢起尘土，你把一团灰土扬到相邻的空间内。尝试@Check[acrobatics|dc:15]或@Check[athletics|dc:15]检定。扬起灰土的规模取决于你的检定结果。</p>\n<hr />\n<p><strong>大成功</strong> 尘土填满了@Template[cone|distance:15]区域。锥形区域内的生物在2轮内会被尘土覆盖，被尘土覆盖的生物为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态而非@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]状态。以1个动作，该生物能尝试@Check[reflex|dc:15]豁免来抖掉尘土。</p>\n<p><strong>成功</strong> 如同大成功，但是尘土会填满@Template[cone|distance:10]区域。</p>\n<p><strong>失败</strong> 你只踢起了些微的尘土。</p>\n<p><strong>大失败</strong> 你误判了踢腿的力度，这搞得你跌跌撞撞并陷入了@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，持续至你的下个回合开始为止。</p>"
+        },
+        "Linguistic Nexus": {
+            "description": "<p><strong>性相</strong> 心智</p>\n<hr />\n<p>你的圣物赋予你强大的神经可塑性，结果是你可以更容易地学习语言。圣物每有2个等级，你就可以学习1种额外语言（至少1种）。你只需要花费1周的修整期就能通过圣物重训一种语言。</p>",
+            "name": "语言链接 Linguistic Nexus"
+        },
+        "Ease Burden": {
+            "name": "减轻负担 Ease Burden",
+            "description": "<p><strong>性相</strong> 土</p>\n<p>你的圣物从脚下的大地中汲取力量，减少你的负担。只要你的遗物在你身上，并且你站在地面上，你的超载阈值+1，最大负载+2。在6级时，并且之后每升4级，都会使你的超载阈值+1，最大负载+2。</p>"
+        },
+        "Raise Ramparts": {
+            "name": "构筑壁垒 Raise Ramparts",
+            "description": "<p><strong>性相</strong> 土</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 圣物重塑了你周围的土地。你施展5环级@UUID[Compendium.pf2e.spells-srd.Item.kOa055FIrO9Smnya]。</p>"
+        },
+        "Word of Faith": {
+            "name": "信仰真言 Word of Faith",
+            "description": "<p><strong>性相</strong> 天族</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 通过用手触碰你自己或你的盟友，你可以治愈他们的伤口并抚慰他们的精神。圣物每级都能让目标恢复@Damage[1d8[healing]]HP，并且能让目标的@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态值-1。</p>"
+        },
+        "Divine Retribution": {
+            "name": "神圣复仇 Divine Retribution",
+            "description": "<p><strong>性相</strong> 天族</p>\n<p><strong>先决条件</strong> 圣物是一件武器</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令</p>\n<hr />\n<p><strong>效果</strong> 利用神之怒火，你选择一个在上一轮中对你或你的盟友造成伤害的目标，然后将充满圣物的神圣怒火倾泻到敌人身上。对那个敌人进行一次打击，如果命中则增加一个伤害骰。如果目标为邪恶阵营，它被命中的同时陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，造成重击则陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，直到你的下个回合开始。</p>"
+        },
+        "Shadow Smith": {
+            "description": "<p><strong>性相</strong> 阴影</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 你圣物聚集周围的影子，把它们扭曲成简单的武器、简单的工具或物品的形状，例如绳子或撬棍。它能持续到被用于一次单独的活动，或直到你再次使用此能力，或持续存在1分钟，以先发生的情况为准。之后它会消散。</p>",
+            "name": "阴影锻造 Shadow Smith"
+        },
+        "Dancing Shadow": {
+            "name": "舞动之影 Dancing Shadow",
+            "description": "<p><strong>性相</strong> 阴影</p>\n<p><strong>先决条件</strong> 圣物是一件武器</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 你的圣物的影子从武器上分离，在空中舞动着攻击敌人。当你启动圣物时，指定一个目标。圣物的影子能飞到最远60尺远距离，直到它和那个敌人相邻，然后对目标进行一次打击，命中时造成5d8伤害，重击时造成双倍伤害；伤害类型通常是你的圣物能造成的任何伤害类型。影子武器使用你持握圣物时的攻击加值，使用且会增加你的多重攻击减值。当此效果激活时，你能使用一个具有攻击和专注特征的单动作，以精神引导影子对同一个目标进行另一次打击。影子武器会一直持续直到目标生命值减少至0，或直到目标距离你超过400尺，或直到目标移动到一个没有阴影的地方，例如完全黑暗的区域，以先发生的情况为准。</p>\n<p>影子武器不占据空间，不提供夹击，也不拥有任何生物所具有的其他属性，它会自动跟随所选择的目标。除了它本来具有的打击之外，影子武器无法进行其他方式的攻击。影响武器的专长或法术对它不起作用。</p>"
+        },
+        "Shattered Earth": {
+            "name": "破碎之地 Shattered Earth",
+            "description": "<p><strong>性相</strong> 土</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> S你圣物发出的地震脉冲在附近的地面上激起涟漪，让地面冒出许多尖刺。60尺内的一片半径为10尺的石头或泥土会成为困难地形。在移动动作期间进入效果范围内的生物必须通过1次特技检定或反射检定，否则受到@Damage[1d6[piercing]]伤害；每次移动即使穿过了多个受影响的方格，也只需进行1次检定。在6级时，并且之后每升4级，伤害都会增加1d6。</p>"
+        },
+        "Obscure": {
+            "name": "融入黑暗 Obscure",
+            "description": "<p><strong>性相</strong> 阴影</p>\n<hr />\n<p>你的圣物吸收周围光线，用阴影将你包裹，使你隐藏在黑暗中。只要你位于阴影下的昏暗环境中，你就能尝试1次隐蔽检定来@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]，即使你并没有对目标生物@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，例如一个具有黑暗视觉的生物。</p>"
+        },
+        "Propelling Winds": {
+            "name": "推进之风 Propelling Winds",
+            "description": "<p><strong>性相</strong> 气</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 圣物以你为目标施放@UUID[Compendium.pf2e.spells-srd.Item.A2JfEKe6BZcTG1S8]。</p>"
+        },
+        "Repository of Knowledge": {
+            "name": "知识宝库 Repository of Knowledge",
+            "description": "<p><strong>性相</strong> 心智</p>\n<hr />\n<p>你的遗物充满了过往时代的精神刻印。当你携带圣物的时候，你将获得额外三种受训的学识技能，具体由GM根据圣物的历史来选择，并在获得此赋礼的时候决定。在圣物9级时，这些额外学识技能提升为专家熟练度，在圣物17级时，这些额外学识技能提升到大师熟练度。</p>"
+        },
+        "Perception Filter": {
+            "name": "察觉过滤 Perception Filter",
+            "description": "<p><strong>性相</strong> 心智</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 想象</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你的圣物能过滤附近所有生物的心智，阻止对方意识到你的存在。在接下来的10分钟里，一个进入以你为中心@Template[emanation|distance:120]范围内的生物，必须尝试一次@Check[will|against:class-spell|traits:secret]检定，在这之后该生物对此效果临时免疫1天。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受影响</p>\n<p><strong>成功</strong> 生物在@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]或侦测你的时候，察觉检定有-2状态减值</p>\n<p><strong>失败</strong> 生物的所有感官被你过滤，让它很难注意到你。当你对该生物具有@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]或无踪状态时，即使你进行潜行、躲藏、快步以外的其他动作，你也不会暴露。如果它试图以察觉检定对你进行搜索或侦测，则检定结果会下降一个成功级别。如果你尝试以隐秘检定进行@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]、@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]或其他任何避免引起注意的行动，你的检定结果会提高一个成功级别。如果你对目标采取具有敌意的动作，对该生物的效果在你具有敌意的动作完成后结束。</p>\n<p><strong>大失败</strong> 同失败，但是你对目标生物进行具有敌意的动作不会导致效果结束</p>"
+        }
+    }
+}

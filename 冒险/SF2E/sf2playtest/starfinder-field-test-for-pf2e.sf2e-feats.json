@@ -1,0 +1,442 @@
+{
+  "label": "专长\nFeats",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Class Feats": "职业专长\nClass Feats",
+    "Mechanic": "技师\nMechanic",
+    "Technomancer": "科技法师\nTechnomancer"
+  },
+  "entries": {
+    "Instant Deployment": {
+      "name": "即时部署 Instant Deployment",
+      "description": "<p><strong>触发条件</strong> 你进行先攻检定。</p><hr /><p>你总是准备好释放你的外骨骼中枢。如果你拥有无人机外骨骼中枢，你的无人机进行Stride。如果你拥有地雷或炮塔外骨骼中枢，你可以@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{部署地雷}或@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.1vWiNk1jbqCq4O16]{部署炮塔}。</p>\n<p><strong>Trigger</strong> You roll initiative.</p><hr /><p>You're always ready to unleash your exocortex. If you have a drone exocortex, your drone Strides. If you have a mine or turret exocortex, you can @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{Deploy Mine} or @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.1vWiNk1jbqCq4O16]{Deploy Turret}.</p>"
+    },
+    "Multidisciplinary Mechanic": {
+      "name": "多学科技师 Multidisciplinary Mechanic",
+      "description": "<p>除了工业与科技工程学之外，你还研究了一种专门化的发明形式。选择生物工程、魔法科技或死灵科技之一。此外，你在对应的技能上变为受训，并获得对应学识的@UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore}专长。</p><p><strong>生物工程</strong>：你的发明融入了合成或槽培的血肉，或者它们看起来像是有机机械的混合体。你在自然上变为受训。你获得用于生物工程学识的 Additional Lore 技能专长。</p><p><strong>魔法科技</strong>：你的装置闪烁着奥术符文或混合电路，或者以其奇异构造违逆现实。你的外骨骼中枢的打击获得魔法特性。你在奥秘上变为受训。你获得用于魔法科技学识的 Additional Lore 技能专长。</p><p><strong>死灵科技</strong>：你那骇人的科技造物可能看起来像是一颗在金属胸腔中搏动的死灵心脏，或者一根骨头。你在宗教上变为受训。你获得用于死灵植入学识的 Additional Lore 技能专长。</p><hr /><p><strong>特殊</strong> 如果你拥有@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.zsXV8mcHVZqx6FVj]{Critical Explosion}专长并埋设一枚地雷，你可以根据自己选择的学派，选择造成不同类型的伤害。如果你拥有@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.JoA3Q3W5a70g3aZV]{Explosive Shot}专长，那么当你用 Explosive Shot @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.neyS5TJB8fTmQEKu]{Modify}一件武器时，你可以根据自己选择的学派，选择其造成的溅射伤害为不同类型的伤害。生物工程造成强酸伤害，魔法科技造成力场伤害，而死灵科技造成虚空伤害。</p>\n<p>In addition to industrial and technological engineering, you've studied a specialized form of invention. Select either biotech, magitech, or necrotech. In addition, you become trained in the associated skill and gain the @UUID[Compendium.sf2e.feats.Item.BocFD2KV0qgUC76x]{Additional Lore} feat in the associated lore.</p><p><strong>Biotech</strong>: Your inventions incorporate synthetic or vatgrown flesh, or they might resemble hybrid organic machines. You become trained in Nature. You gain the Additional Lore skill feat for Biotech Lore.</p><p><strong>Magitech</strong>: Your devices shimmer with arcane runes or hybrid circuitry, or defy reality with their strange configurations. Your exocortex's Strikes gain the magic trait. You become trained in Arcana. You gain the Additional Lore skill feat for Magitech Lore.</p><p><strong>Necrotech</strong>: Your grisly tech might resemble a necrotic heart pulsating inside a metal ribcage or a bone. You become trained in Religion. You gain the Additional Lore skill feat for Necrograft Lore.</p><hr /><p><strong>Special</strong> If you have the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.zsXV8mcHVZqx6FVj]{Critical Explosion} feat and plant a mine, you can choose to deal a different type of damage depending on your choice of discipline. If you have the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.JoA3Q3W5a70g3aZV]{Explosive Shot} feat, when you @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.neyS5TJB8fTmQEKu]{Modify} a weapon with Explosive Shot, you can choose the splash damage dealt to be a different type of damage depending on your choice of discipline. Biotech deals acid damage, magitech deals force damage, and necrotech deals void damage.</p>"
+    },
+    "Denial of Safety": {
+      "name": "否认安全感 Denial of Safety",
+      "description": "<p>你操控法术的能量，毫不留情地轰击更广的区域。如果你接下来使用的动作是施放一个区域为爆发、锥形或线形且没有持续时间的法术，则扩大该法术的区域。对于通常半径至少为 10 英尺的爆发，将其半径增加 5 英尺（半径更小的爆发不受影响）。对于通常长度为 15 英尺或更短的锥形或线形，将其长度增加 5 英尺；对于更大的锥形或线形，将其长度增加 10 英尺。</p><p><strong>越狱</strong> 如果你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} 来使用这个法术塑形，则对于通常半径至少为 10 英尺的爆发，其半径额外增加 5 英尺；对于通常长度为 15 英尺或更短的锥形或线形，其长度额外增加 5 英尺；对于更大的锥形或线形，其长度额外增加 10 英尺。</p>\n<p>You manipulate the energy of a spell to mercilessly blast a wider area. If the next action you use is to Cast a Spell that has an area of a burst, cone, or line and does not have a duration, increase the area of that spell. Add 5 feet to the radius of a burst that normally has a radius of at least 10 feet (a burst with a smaller radius is not affected). Add 5 feet to the length of a cone or line that is normally 15 feet long or smaller, and add 10 feet to the length of a larger cone or line.</p><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape, add an additional 5 feet to the radius of a burst that normally has a radius of at least 10 feet or the length of a cone or line that is normally 15 feet long or smaller, and add an additional 10 feet to the length of a larger cone or line.</p>"
+    },
+    "Expansive Array": {
+      "name": "扩展阵列 Expansive Array",
+      "description": "<p>你为自己的炮塔设计额外的自定义阵列。从以下阵列中选择两个。将所选阵列加入你的可用阵列列表。</p><ul><li>2d8精神伤害，射程增量60英尺，科技特征，精神武器组</li><li>2d8毒素伤害，射程增量60英尺，科技特征，飞镖武器组</li><li>2d8活力伤害，射程增量60英尺，科技特征，激光武器组</li><li>2d8虚空伤害，射程增量60英尺，科技特征，虚空武器组</li></ul><hr /><p><strong>特殊</strong> 你可以第二次选取此专长。如此做时，你必须选择不同的阵列。</p>\n<p>You design additional custom arrays for your turret. Select two of the following arrays. Add the selected arrays to your list of available arrays.</p><ul><li>2d8 mental damage, range increment 60 feet, tech trait, mental weapon group</li><li>2d8 poison damage, range increment 60 feet, tech trait, dart weapon group</li><li>2d8 vitality damage, range increment 60 feet, tech trait, laser weapon group</li><li>2d8 void damage, range increment 60 feet, tech trait, void weapon group</li></ul><hr /><p><strong>Special</strong> You can take this feat a second time. When you do, you must select different arrays.</p>"
+    },
+    "Advanced Customization": {
+      "name": "高级定制 Advanced Customization",
+      "description": "<p>你进一步改装了你的无人机，赋予它一项新的能力。你的无人机获得一项先进定制。</p><hr /><p><strong>特殊</strong> 你至多可以选择此专长三次。</p>\n<p>You've further modified your drone, granting it a new ability. You drone gains one advanced customization.</p><hr /><p><strong>Special</strong> You can select this feat up to three times.</p>"
+    },
+    "Sudo Spell": {
+      "name": "Sudo 法术 Sudo Spell",
+      "description": "<p>你以超乎寻常的精确度把握法术的构成要素，建立起一种会复制该法术效果的共振。如果你的下一个动作是施放一个4环或以下且没有持续时间的法术，则该法术的能量会回响并产生回声。你可以在你下个回合结束前再次施放该法术一次，而无需消耗法术位。</p><p><strong>越狱</strong> 如果你使用“越狱法术”来运用此法术塑形，你可以将“伪指令法术”用于一个5环或以下且没有持续时间的法术。</p>\n<p>You time the components of your spell with ultraprecision, setting up a resonance that duplicates the spell's effects. If your next action is to Cast a Spell of 4th rank or lower that has no duration, the spell's energy reverberates and echoes. You can Cast the Spell a second time before the end of your next turn without expending a spell slot. </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, you can use Sudo Spell with a spell of 5th rank or lower that has no duration.</p>"
+    },
+    "Tactical Drone": {
+      "name": "战术无人机 Tactical Drone",
+      "description": "<p>你改进了你的无人机，使其成为成熟伙伴，并获得额外的能力。在遭遇中，即使你没有指挥你的机器人伙伴，它在该轮中仍然可以在你的回合使用1个动作来大步移动或打击。只要你当前没有在执行动作，它就可以在你回合中的任何时点这样做。如果它这么做了，那就是它该轮获得的全部动作——你之后不能再指挥它。</p>\n<p>You've improved your drone, making it a mature companion and gaining additional capabilities. During an encounter, even if you don't Command your robot companion, it can still use 1 action that round on your turn to Stride or Strike. It can do this at any point during your turn, as long as you aren't currently taking an action. If it does, that's all the actions it gets that round—you can't Command it later.</p>"
+    },
+    "Commercial Customization": {
+      "name": "商业定制 Commercial Customization",
+      "description": "<p>你进一步改装了你的无人机，赋予它一项新的能力。你的无人机获得一项商用定制。</p><hr /><p><strong>特殊</strong> 你最多可以选择此专长三次。</p>\n<p>You've further modified your drone, granting it a new ability. You drone gains one commercial customization.</p><hr /><p><strong>Special</strong> You can select this feat up to three times.</p>"
+    },
+    "Master Code Cracker": {
+      "name": "破解大师代码者 Master Code Cracker",
+      "description": "<p>对于你这等水准的技魔师而言，魔法与科技的理论极限不过是些仅供参考的建议。你可以在对使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.tsJhRqRqLNX5bhLF]{双重越狱}修改的法术应用越狱增益时，同时获得原始越狱增益。</p>\n<p>The theoretical limits of both magic and technology are mere suggestions for a technomancer of your caliber. You can apply the original jailbreak benefits in addition to the jailbreak benefits of spells you modify with @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.tsJhRqRqLNX5bhLF]{Double Jailbreak}.</p>"
+    },
+    "Flickering Shield": {
+      "name": "闪烁护盾 Flickering Shield",
+      "description": "<p>你学会了如何安装一种能够暂时阻挡伤害的基础护盾。你获得以下新模组。</p><p><strong>闪烁护盾（护甲）：</strong>该物品会生成一个临时护盾，保护其穿戴者免受伤害。穿戴已改装护甲的生物获得等同于5 + 你的智力调整值的临时生命值，并且在护盾处于激活状态的每个回合恢复等同于你的智力调整值的生命值。闪烁护盾持续1分钟，或直到被解除。已改装物品或神经外壳随后会暂时免疫你的闪烁护盾模组，持续10分钟。</p>\n<p>You learn how to install a rudimentary shield that temporarily blocks damage. You gain the following new mod.</p><p><strong>Flickering Shield (armor):</strong> The item produces a temporary shield that protects its wearer from harm. The creature wearing the modded armor gains temporary Hit Points equal to 5 + your Intelligence modifier and regains Hit Points equal to your Intelligence modifier for every round the shield is active. The flickering shield lasts for 1 minute or until dismissed. The modded item or exocortex then becomes temporarily immune to your flickering shield mod for 10 minutes.</p>"
+    },
+    "Mobile Deployment": {
+      "name": "机动部署 Mobile Deployment",
+      "description": "<p>你在移动时迅速部署你的外置核心。你进行两次大步移动。在此次移动中的任意时刻，你都可以部署地雷或部署炮塔。</p>\n<p>You rapidly deploy your exocortex while on the move. You Stride twice. At any point during this movement, you can Deploy Mine or Deploy Turret.</p>"
+    },
+    "Energy Explusion": {
+      "name": "能量爆发 Energy Explusion",
+      "description": "<p><strong>需求</strong> 你的炮塔的武装配置造成能量伤害。</p><hr /><p>你已将炮塔改装为发射爆炸冲击。用你的炮塔进行一次远程打击。若命中，此次射击的额外能量会在你的炮塔周围喷发，对你选择的以你的炮塔为中心的 @Template[type:emanation|distance:10] 或从你的炮塔发出的 @Template[type:cone|distance:15] 内的生物造成伤害。区域内所有生物受到等同于你炮塔远程打击的伤害，并进行一次对抗你技师职业 DC 的 @Check[reflex|against:mechanic|basic] 豁免。</p>\n<p><strong>Requirements</strong> Your turret's array deals energy damage.</p><hr /><p>You've customized your turret to fire explosive blasts. Make a ranged Strike with your turret. On a hit, additional energy from this shot is expelled around your turret, dealing damage to creatures in your choice of a @Template[type:emanation|distance:10] around your turret or a @Template[type:cone|distance:15] from your turret. All creatures in the area take damage equal to your turret's ranged Strike, with a @Check[reflex|against:mechanic|basic] save against your mechanic class DC.</p>"
+    },
+    "Permanent Mod": {
+      "name": "永久模组 Permanent Mod",
+      "description": "<p>作为一项具有专注和操作特征、耗时10分钟的活动，你可以将一个永久模块安装到一件非消耗品物品上。这个模块不计入你维持的模块总数，并会持续到你下次以这种方式安装模块为止。</p>\n<p>As a 10-minute activity with the concentrate and manipulate traits, you can apply one permanent mod to a non-consumable item. This mod does not count toward your total number of maintained mods and lasts until you next apply a mod in this way.</p>"
+    },
+    "Advanced Targeting System": {
+      "name": "先进瞄准系统 Advanced Targeting System",
+      "description": "<p>你已改进了你的瞄准系统，以获得更高的精准度。每10分钟一次，当你进行一次受“激活瞄准系统”影响的攻击检定时，你可以选择为该检定添加幸运特征。若你如此做，则将该攻击检定掷两次，并使用较高的结果。</p>\n<p>You've improved your targeting system for higher accuracy. Once per 10 minutes, when you roll an attack roll that's affected by Activate Targeting System, you can choose to add the fortune trait to that roll. If you do, you roll the attack roll twice and use the higher result.</p>"
+    },
+    "Activate Targeting System": {
+      "name": "激活瞄准系统 Activate Targeting System",
+      "description": "<p>你激活了你植入外骨骼中构建的先进瞄准系统，确保你的攻击能在混乱的交火中准确命中。直到你的回合结束前，下一次你、你的无人机或你的炮塔进行攻击检定时，该攻击忽略对此次攻击检定的境况减值，以及因目标处于 @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{隐蔽} 或 @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{隐藏} 而需要进行的任何平检。</p>\n<p>You activate the advanced targeting system you've built into your exocortex, ensuring your attacks strike true through the chaotic crossfire. The next time before the end of your turn that you, your drone, or your turret makes an attack roll, the attack ignores circumstance penalties to the attack roll, as well as any flat check required due to the target being @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{Concealed} or @UUID[Compendium.sf2e.conditions.Item.iU0fEDdBp3rXpTMC]{Hidden}.</p>"
+    },
+    "Auto Spellshape": {
+      "name": "自动法术塑形 Auto Spellshape",
+      "description": "<p>由于你已经学会了如何利用魔法捷径，改变你的法术并不会比正常施放它们花费更长时间。你可以将法术塑形动作作为自由动作使用。</p>\n<p>Altering your spells doesn't take any longer than casting them normally because you've learned how to exploit magical shortcuts. You can use spellshape actions as free actions.</p>"
+    },
+    "Biometric Assessor": {
+      "name": "生物特征评估仪 Biometric Assessor",
+      "description": "<p>你已将一个生物特征与基因数据库上传至你的外脑。你获得以下新的模组。</p><p><strong>生物特征评估器（武器）：</strong>你改装该武器，使其在接触时采集基因样本，然后你可以使用外脑将其与数据库进行快速比对。当已改装的武器成功对一个生物造成伤害时，你可以立即对目标执行 @Compendium[sf2e.actions.Recall Knowledge]{回忆知识}，作为一个自由动作，且此次技能检定获得+1处境加值。若你在此次回忆知识检定所需掷骰的技能上未受训，则你进行该检定时视为已受训于该技能。</p>\n<p>You've uploaded a biometric and genetic database to your exocortex. You gain the following new mod.</p><p><strong>Biometric Assessor (weapon):</strong> You modify the weapon to take a genetic sample upon contact, which you can rapidly compare to a database using your exocortex. When the modded weapon successfully deals damage to a creature, you can immediately @Compendium[sf2e.actions.Recall Knowledge]{Recall Knowledge} about the target as a free action, with a +1 circumstance bonus to the skill check. If you are untrained in the skill you would roll for this Recall Knowledge check, you roll the check as if you were trained in that skill.</p>"
+    },
+    "Self-Repairing Exocortex": {
+      "name": "自我修复外脑皮层 Self-Repairing Exocortex",
+      "description": "<p>你将自我修复纳米机器人整合进了你外脑外壳之中。你的无人机或炮塔之一获得快速治疗 5。若它受到电击伤害，则此快速治疗会失效，直到你下个回合结束。</p>\n<p>You integrated self-repairing nanites into the casing of your exocortex. Either your drone or your turret gains fast healing 5. If it takes electricity damage, this fast healing deactivates until the end of your next turn.</p>"
+    },
+    "Modify Drone": {
+      "name": "改装无人机 Modify Drone",
+      "description": "<p>你将与你的外骨骼智核相连的无人机设计得适应性十足。你可以像对待武器一样为你的无人机应用模块，并将这些模块的增益应用于其一体化武器挂载中的任何武器。</p>\n<p>You designed the drone linked to your exocortex to be adaptable. You can apply mods to your drone as if it were a weapon, applying the benefits of those mods to any weapon in its integrated weapon mount.</p>"
+    },
+    "White Hat Hack": {
+      "name": "白帽黑客 White Hat Hack",
+      "description": "<p><strong>触发</strong> 你施放了一个非戏法法术，且该法术未被 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{越狱法术} 修改。</p><p><strong>需求</strong> 你的装备处于超频状态。</p><hr /><p>你是测试科技装备网络防御并强化其抵御传入伤害能力的专家。你利用自己上一次施放的法术中的魔法能量，使100尺内至多一个科技生物或科技物品每触发法术1环，其 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd] 状态值减少该法术环阶的一半（最低为1）。在接下来1分钟内，受影响目标为从故障状态恢复而进行平检时掷两次，并采用较高结果；这是一个幸运效果。</p>\n<p><strong>Trigger</strong> You cast a non-cantrip spell that is not modified by @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell}.</p><p><strong>Requirements</strong> Your gear is overclocked.</p><hr /><p>You are an expert in testing the cyber defenses of tech gear and bolstering it against incoming damage. You use the magic energy of the last spell you cast to reduce the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd] condition by half the spell's rank (minimum 1) of up to one tech creature or tech item within 100 feet for every rank of the triggering spell. For the next minute, affected targets roll flat checks to recover from the glitching condition twice and take the higher result; this is a fortune effect.</p>"
+    },
+    "Self-Destruct": {
+      "name": "自毁 Self-Destruct",
+      "description": "<p><strong>要求</strong> 你的炮塔已部署，且位于100英尺内。</p><hr /><p>你使炮塔的系统过载，导致其在剧烈爆炸中自毁。你的炮塔对 @Template[type:emanation|distance:20] 内的所有生物造成 @Damage[((floor((@actor.level - 2)/2))d6)[piercing],1d6[fire]] 伤害。区域内的生物可以针对你的职业 DC 进行一次 @Check[reflex|against:class|basic] 豁免。你的炮塔被摧毁。</p><hr /><p><strong>等级（+2）</strong> 穿刺伤害增加1d6。</p>\n<p><strong>Requirements</strong> your turret is Deployed and within 100 feet.</p><hr /><p>You overload your turret's systems, causing it to selfdestruct in a volatile explosion. Your turret deals @Damage[((floor((@actor.level - 2)/2))d6)[piercing],1d6[fire]] damage to all creatures in a @Template[type:emanation|distance:20]. Creatures in the area can attempt a @Check[reflex|against:class|basic] save against your class DC. Your turret is destroyed.</p><hr /><p><strong>Level (+2)</strong> The piercing damage increases by 1d6.</p>"
+    },
+    "Split Tunneling": {
+      "name": "分裂掘进 Split Tunneling",
+      "description": "<p>你编程使一个远程法术从你的目标处分裂出去，并连接到第二个敌人。如果你的下一个动作是施放一个没有持续时间、且需要对单一目标进行攻击检定的法术，你可以选择一个位于射程内的第二目标。你进行一次攻击检定，并将结果与两个目标的 AC 比较。这视为一次攻击，用于计算你的多重攻击减值。对于第二目标，该法术只造成其在对应成功等级下通常会造成的一半伤害，且除了法术的初始伤害外，不会产生任何其他效果（例如施加状态或减值）。</p><p><strong>越狱</strong> 如果你使用越狱法术来施展此塑法，并且未能影响你的主要目标（无论是你的攻击失败，还是目标对该法术免疫），则你的次要目标成为你的主要目标，承受该法术的全部伤害及所有效果。</p>\n<p>You program a ranged spell to split off from your target and connect to a second foe. If your next action is to Cast a Spell without a duration that requires an attack roll against a single target, you can choose a second target within range. You roll a single attack roll and compare the result to the AC of both targets. This counts as one attack for your multiple attack penalty. To the second target, the spell deals only half the amount of damage it would normally deal for its degree of success, and it has no effects beyond the spell's initial damage (such as imposing conditions or penalties). </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape and fail to affect your primary target (whether your attack fails or the target is immune to the spell), your secondary target becomes your primary target, taking full damage and all effects of the spell.</p>"
+    },
+    "Booming Bootloader": {
+      "name": "轰鸣引导程序 Booming Bootloader",
+      "description": "<p>你已编入一段自定义音效，使你召唤出的生物登场时伴随着出人意料的喧闹声势。若你的下一个动作是施放一个具有召唤特征的法术，则你所召唤的生物周围 @Template[type:emanation|distance:10] 内的所有生物每法术环阶受到 1d4 点音波伤害。</p><p><strong>越狱</strong> 若你使用“越狱法术”来运用这个法术塑形，则由你选择的、位于你所召唤生物 10 尺内的一个生物必须成功通过一次对抗你法术 DC 的意志豁免，否则陷入 @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 1} 状态（若为重度失败，则为 @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 2}）。</p>\n<p>You've programmed a custom sound to play so your summoned creature appears with unexpected fanfare. If your next action is to Cast a Spell with the summon trait, all creatures in a @Template[type:emanation|distance:10] around the creature you summoned take 1d4 sonic damage per spell rank.</p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, one creature of your choice within 10 feet of the creature you summoned must succeed at a Will save against your spell DC or become @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 1} (or @UUID[Compendium.sf2e.conditions.Item.TBSHQspnbcqxsmjL]{Frightened 2} on a critical failure).</p>"
+    },
+    "Soft Reboot": {
+      "name": "软重启 Soft Reboot",
+      "description": "<p><strong>触发条件</strong> 你施放越狱法术，且你的装备不再处于超频状态。</p><hr /><p> 你重新捕获了恰到好处的魔法，得以迅速再次将你的装备超频。你的装备变为超频状态。</p><p></p>\n<p><strong>Trigger</strong> You Jailbreak Spell and your gear is no longer overclocked.</p><hr /><p> You recapture just enough magic to quickly overclock your gear again. Your gear becomes overclocked.</p><p></p>"
+    },
+    "Tashtari Cluster": {
+      "name": "塔什塔里星团 Tashtari Cluster",
+      "description": "<p>你已经学会将这种把相同系统集群化以形成并行计算集群的古老技术应用于你的魔法，使你能够同时管理许多件超频装备。你可以同时拥有两件超频装备，而在你下一次使用 Jailbreak Spell 时，由你选择哪件装备不再处于超频状态。</p>\n<p>You've learned to apply this ancient technique of clustering identical systems to form a parallel computing cluster to your magic, allowing you to manage many pieces of overclocked gear at once. You can have two pieces of overclocked gear at once, and you choose which gear is no longer overclocked the next time you use Jailbreak Spell.</p>"
+    },
+    "Hunker Down": {
+      "name": "隐蔽起来 Hunker Down",
+      "description": "<p>你冲过战场，在掩护后俯身隐蔽，然后对敌人倾泻猛烈火力。你进行一次 Stride 并且 @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{Take Cover}。你可以选择引爆地雷、让你的炮塔进行一次远程 Strike，或者让你的无人机进行一次 Strike。</p>\n<p>You dash across the battlefield and hunker down behind cover before unleashing hell on your enemies. You Stride and @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{Take Cover}. You can either Detonate Mine, make a ranged Strike with your turret, or your drone can make a Strike.</p>"
+    },
+    "Signal Boost": {
+      "name": "信号增强 Signal Boost",
+      "description": "<p>你可以延长你的魔法作用距离。若你接下来使用的动作是施放一个具有射程的法术，则将该法术的射程增加30尺。按照增加法术射程的标准规则，若该法术通常的射程为接触，则你将其射程延长至30尺。</p><p><strong>越狱</strong> 若你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{越狱法术} 来使用此塑法，则你将该法术的射程增加60尺。</p>\n<p>You can extend the reach of your magic. If the next action you use is to Cast a Spell that has a range, increase that spell's range by 30 feet. As is standard for increasing spell ranges, if the spell normally has a range of touch, you extend its range to 30 feet.</p><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape, you increase the spell's range by 60 feet.</p>"
+    },
+    "Tactical Customization": {
+      "name": "战术定制 Tactical Customization",
+      "description": "<p>你进一步改装了你的无人机，赋予它一项新的能力。你的无人机获得一项战术定制。</p><hr /><p><strong>特殊</strong> 你至多可以选择此专长三次。</p>\n<p>You've further modified your drone, granting it a new ability. You drone gains one tactical customization.</p><hr /><p><strong>Special</strong> You can select this feat up to three times.</p>"
+    },
+    "Concentrated Explosion": {
+      "name": "聚能爆炸 Concentrated Explosion",
+      "description": "<p>说到引爆爆炸物，只有一条规则：轰鸣越大，越好。你获得以下新的模组。</p><p><strong>聚能爆炸（手雷）：</strong>你在手雷的外壳内装填了额外的炸药。该物品的区域减半（向下取整；@Template[type:burst|distance:5] 会缩减为一个5英尺方格），但它造成额外一个伤害骰的伤害。</p>\n<p>When it comes to setting off explosions, there's only one rule: the bigger the boom, the better. You gain the following new mod.</p><p><strong>Concentrated Explosion (grenade):</strong> You pack extra explosives into the grenade's casing. The item's area is halved (rounded down; a @Template[type:burst|distance:5] is reduced to one 5-foot square) but it deals one additional die of damage.</p>"
+    },
+    "Shielded Turret": {
+      "name": "带护盾炮塔 Shielded Turret",
+      "description": "<p>你为你的炮塔加装了装甲板或偏转护盾，以便更好地保护你和任何蜷伏在其后的盟友。你的炮塔提供掩护，而非次级掩护。在你的炮塔后方 @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{采取掩护} 会提供高等掩护。</p>\n<p>You've added armored plates or deflective shielding to your turret, to better protect you and any allies who hunker down behind it. Your turret provides cover, rather than lesser cover. @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{Taking Cover} behind your turret provides greater cover.</p>"
+    },
+    "Pirate Spell": {
+      "name": "海盗法术 Pirate Spell",
+      "description": "<p>你会迅速把自己喜欢的法术复制并粘贴到你的缓存库中。当你成功使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.onqxEjE7qYDBT6nV]{Counterspell} 来反制一个影响目标生物或一个区域的法术时，你可以将该法术的临时副本安装到你的法术缓存库中；该副本会持续到你使用 Download a Spell 以该临时副本替换一个已准备法术，或直到你的下一次每日准备，以先发生者为准。</p>\n<p>You're quick to copy and paste spells you like into your cache. When you successfully use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.onqxEjE7qYDBT6nV]{Counterspell} to counteract a spell that affects targeted creatures or an area, you can install a temporary copy of that spell into your spell cache that lasts until you use Download a Spell to replace a prepared spell with the temporary copy or your next daily preparations, whichever comes first.</p>"
+    },
+    "Sleep Mode": {
+      "name": "休眠模式 Sleep Mode",
+      "description": "<p><strong>触发条件</strong> 你进行先攻检定。</p><hr /><p>你在每日准备期间将休眠的魔法储存进你的装备中。你的装备变为超频状态。</p>\n<p><strong>Trigger</strong> You roll for initiative.</p><hr /><p>You store dormant magic into your gear during your daily preparations. Your gear becomes overclocked.</p>"
+    },
+    "Explosive Shot": {
+      "name": "爆裂射击 Explosive Shot",
+      "description": "<p>你设计了一种可安装在单体目标武器上的喷嘴，能将武器的射击分裂成危险的新形态。你获得以下新模组。</p><p><strong>爆炸射击（非区域武器）</strong>：经改装的物品每有1个武器伤害骰，就会造成1点溅射伤害。此溅射伤害的类型与经改装物品造成的伤害类型相同。</p>\n<p>You've designed a nozzle that can be fitted onto single-target weapons, splitting the weapon's fire into dangerous new shapes. You gain the following new mod. </p><p><strong>Explosive Shot (non-area weapon)</strong>: The modded item deals 1 splash damage per weapon damage dice. This splash damage is the same damage type the modded item deals.</p>"
+    },
+    "Deploy Bunker": {
+      "name": "部署地堡 Deploy Bunker",
+      "description": "<p>可折叠屏障从你的无人机或炮塔外骨骼中伸出，形成一道临时墙壁。你要么在与你的无人机或炮塔相邻的一个空间中创造一道5英尺宽的金属墙，要么将你已经创造出的墙再延长5英尺。由你的外骨骼创造的墙壁厚1英寸、高5英尺，并垂直放置在方格之间的边界上。它们必须放置在坚实、水平的表面上。这些墙壁是你外骨骼的一部分，使用相同的属性值和生命值。</p><p>如果创造这些墙壁的无人机或炮塔离开其位置移动（或被迫移动），这些墙壁会自动缩回你的外骨骼中。</p>\n<p>Retractable barriers extend from your drone or turret exocortex to create a temporary wall. You either create a 5-foot-wide metal wall in a space adjacent to your drone or turret, or you extend a wall you've already created by 5 additional feet. The walls created by your exocortex are 1 inch thick, 5 feet high, and are placed vertically on the border between squares. They must be placed on a solid, horizontal surface. The walls are a part of your exocortex, sharing the same statistics and Hit Points. </p><p>These walls automatically retract back into your exocortex if the drone or turret that created the walls moves (or is forced to move) from its location.</p>"
+    },
+    "Liminal Hyperlink": {
+      "name": "阈限超链接 Liminal Hyperlink",
+      "description": "<p>你获得@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.gsRkwKLDOTIShasJ]魔法破解。</p>\n<p>You gain the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.gsRkwKLDOTIShasJ] magic hack.</p>"
+    },
+    "God Mode": {
+      "name": "上帝模式 God Mode",
+      "description": "<p>你理解奥术代码的微妙之美，并以其他施法者几乎难以想象的方式加以修改。你可以将至多三个技法师法术塑形专长作为自由动作使用，并将它们全部应用于你本回合接下来施放的法术。你可以使用“越狱法术”施加第四个法术塑形专长，但你对所施放法术至多只能应用两个法术塑形专长的越狱增益。</p>\n<p>You understand the nuanced beauty of arcane code and modify it in ways other spellcasters can hardly fathom. You can use up to three technomancer spellshape feats as free actions and apply all of them to the next spell you cast this turn. You can apply a fourth spellshape feat using Jailbreak Spell, but you can only apply the jailbreak benefit of up to two spellshape feats to the spell you cast.</p>"
+    },
+    "Double Spellshape": {
+      "name": "双重塑法 Double Spellshape",
+      "description": "<p>通过破解某个法术塑形上的防护，你可以将其应用于一个已经被另一种法术塑形修改过的法术。如果你的下一个动作是“越狱法术”，则将该法术塑形的所有越狱收益替换为以下内容：</p><p><strong>越狱</strong> 如果你使用“越狱法术”来施用这种法术塑形，你还可以将另一个你已知的技法师法术塑形应用于该法术的效果，但你不会获得该法术塑形的越狱收益。</p>\n<p>By jailbreaking the protections on a spellshape, you can apply it to a spell already modified by another spellshape. If your next action is to Jailbreak Spell, replace all jailbreak benefits of that spellshape with the following: </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, you can also apply another technomancer spellshape you know to the effects of the spell, but you do not gain that spellshape's jailbreak benefit.</p>"
+    },
+    "Coordinated Fire": {
+      "name": "协同火力 Coordinated Fire",
+      "description": "<p>你与自己的外置皮层协同开火，以突破敌人的防御。你和你的无人机或炮塔各自对同一目标进行一次远程打击，使用你当前的多重攻击减值。若两次攻击均命中，则合并它们的伤害。目标的抗性与弱点只结算一次。在计算你的多重攻击减值时，这算作两次攻击。</p>\n<p>You fire in tandem with your exocortex to overcome your enemy's defenses. You and either your drone or your turret each make a ranged Strike against the same target, using your current multiple attack penalty. If both attacks hit, combine their damage. Apply the target's resistances and weaknesses only once. This counts as two attacks when calculating your multiple attack penalty.</p>"
+    },
+    "Convertible Chassis": {
+      "name": "可转换底盘 Convertible Chassis",
+      "description": "<p>你的无人机可以轻松转换为额外的形态。将你的无人机重构为不同的机体是一项持续 1 小时、具有专注和操作特征的活动。当你选择此专长时，选择一种机体作为你的备用机体。你的无人机获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.8yr4VNRWAvrLtzb3]{机动重构} 动作。</p>\n<p>Your drone easily converts into additional forms. Reconfiguring your drone into a different chassis is a 1-hour activity with the concentrate and manipulate traits. When you select this feat, choose one chassis as your alternate chassis. Your drone gains the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.8yr4VNRWAvrLtzb3]{Mobile Reconfiguration} action.</p>"
+    },
+    "Tactical Team-Up": {
+      "name": "战术协同 Tactical Team-Up",
+      "description": "<p>你的炮塔向其第一距离增量内的一个生物倾泻出密集弹雨，为你乘势攻击创造破绽。你的炮塔对目标进行一次远程Strike，然后你对目标进行一次远程Strike。目标针对你的Strike处于@UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{措手不及}状态。</p>\n<p>Your turret unleashes a hail of gunfire at a creature within its first range increment, creating an opening for you to press the attack. Your turret makes a ranged Strike against the target, and then you make a ranged Strike against the target. The target is @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} against your Strike.</p>"
+    },
+    "Synchronized Advance": {
+      "name": "同步推进 Synchronized Advance",
+      "description": "<p>你与自己的外骨骼智能并肩向前移动，在保持防御的同时发动攻击。若你拥有无人机，则你进行同步步伐。若你拥有炮塔，则你疾行并 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.cMJvHMtzcdbA2stn]{重定位外骨骼智能}。若你在此次移动结束时与自己的无人机或炮塔相邻，则你进行一次远程打击，然后躲到自己的无人机或炮塔后方 @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{寻找掩护}。</p>\n<p>You move forward alongside your exocortex, attacking while remaining defensive. If you have a drone, you Synchronized Step. If you have a turret, you Stride and @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.cMJvHMtzcdbA2stn]{Reposition Exocortex}. If you end this movement adjacent to your drone or turret, you make a ranged Strike and then @UUID[Compendium.sf2e.actions.Item.ust1jJSCZQUhBZIz]{Take Cover} behind your drone or turret.</p>"
+    },
+    "High-Tech Medic": {
+      "name": "高科技医疗员 High-Tech Medic",
+      "description": "<p>你知道银河系是个危险的地方，而你也取得了一些技术突破，帮助你最大限度利用有限的医疗物资。你可以在你的自定义装备中储存至多3件具有治疗特征的物品。你获得以下新模块。</p><p><strong>浓缩剂量（物品）：</strong>你拆解该物品，以输送一剂强效镇痛药。如果目标生物具有笨拙或恶心状态，该物品会使该状态的值减少1。到6级时，你可以选择压制影响目标的持续性伤害，直到你的下一回合开始。到12级时，你可以选择令目标获得等同于你的智力调整值或该物品等级（取较高者）的快速治疗，直到你的下一回合开始。</p><p><strong>治疗机器人（无人机外脑）：</strong>你指挥你的外脑将储存的药物输送给附近的一名盟友。你的无人机会以一个具有操作特征的动作来施用该物品。以这种方式施用的治疗物品会额外恢复等同于你的智力调整值或该物品等级一半（取较高者）的生命值。</p>\n<p>You know the galaxy is a dangerous place, and you've made a few technological breakthroughs to help you make the most of limited medical supplies. You can store up to 3 items with the healing trait in your custom rig. You gain the following new mods.</p><p><strong>Concentrated Dosage (item):</strong> You disassemble the item to deliver a powerful dose of analgesics. If a targeted creature has the clumsy or sickened condition, the item decreases the value of that condition by 1. At 6th level, you can choose to suppress persistent damage afflicting the target until the beginning of your next turn. At 12th level, you can choose to grant the target fast healing equal to your Intelligence modifier or the item's level (whichever is higher) until the beginning of your next turn.</p><p><strong>Healbot (drone exocortex):</strong> You command your exocortex to deliver stored medication to a nearby ally. Your drone administers the item as an action with the manipulate trait. Healing items administered in this way heal an additional amount of Hit Points equal to your Intelligence modifier or half the item's level, whichever is higher.</p>"
+    },
+    "Gear Authentication": {
+      "name": "装备验证 Gear Authentication",
+      "description": "<p>你确保自己最重要的一件装备始终触手可及，并使用你的法术数据库的独特签名完成认证。在你的每日准备期间，你可以锁定一件与你的编程语言兼容的物品，使得只有你才能使用它。其他生物可以拾起、持有、收起和携带该物品，但除非它们在一次 @Check[computers|against:computers|rollerRole:target] 检定中成功将其骇入，且结果等于 10 + 你的计算机调整值，否则该物品不会发挥作用。你获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.CDhVCtDy0aBJMchp]{远程获取装备} 动作。</p>\n<p>You make sure your most important piece of gear is always on hand and authenticated using the unique signature of your spell database. During your daily preparations, you can lock an item compatible with your programming language so only you can use it. Other creatures can pick up, hold, stow, and carry the item, but it will not function unless they succeed at a @Check[computers|against:computers|rollerRole:target] check to Hack it equal to 10 + your Computers modifier. You gain the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.CDhVCtDy0aBJMchp]{Access Remote Gear} action.</p>"
+    },
+    "Alakablam": {
+      "name": "阿拉卡布拉姆 Alakablam",
+      "description": "<p><strong>需求</strong> 你正持有一把武器，且你的上一个动作是从<em>法术宝石</em>或<em>法术芯片</em>施放法术。</p><hr /><p>你可以在被消耗的<em>法术宝石</em>或<em>法术芯片</em>最后残存的魔法消散前，将其脆弱的残骸当作弹药，通过发射它来使用。你使用被消耗的物品为一把远程武器进行装填，并使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.VMH34bRidGNubqYz]{超频装备}。如果该法术不造成伤害，则该武器额外造成 1d6 点力场伤害，并获得奥术和魔法特征。如果该法术造成了伤害，则此次打击改为造成该类型的伤害（若该法术能够造成多种类型的伤害，则由你选择其中一种）。</p><p></p>\n<p><strong>Requirements</strong> You are holding a weapon and your last action was to Cast a Spell from a <em>spell gem</em> or <em>spell chip</em>.</p><hr /><p>You can use the delicate remains of a consumed <em>spell gem</em> or <em>spell chip</em> as ammunition by firing it before the last of its magic fades away. You Reload a ranged weapon using the consumed item and @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.VMH34bRidGNubqYz]{Overclock Gear}. If the spell was not damaging, the weapon deals an extra 1d6 force damage and gains the arcane and magical traits. If the spell dealt damage, the Strike deals this type of damage instead (or one type of your choice if the spell could deal multiple types of damage).</p><p></p>"
+    },
+    "Overvolt Resistor": {
+      "name": "过载电阻器 Overvolt Resistor",
+      "description": "<p>你将法术过载，使其弧光越过敌人的防御。如果你接下来使用的动作是施放法术，则该法术无视目标等同于你等级数值的酸蚀、寒冷、电击、火焰或音波伤害抗性。这适用于该法术造成的所有伤害，包括持续伤害以及由该法术持续性效果导致的伤害，例如火墙制造出的墙壁。生物的免疫不受影响。</p><p><strong>越狱</strong> 如果你使用越狱法术来运用此塑法，你造成等同于你等级的伤害，即使目标免疫酸蚀、寒冷、电击、火焰或音波伤害也是如此。以这种方式只无视第一个列出的免疫，即使目标对多个列出的伤害类型具有免疫也是如此。</p>\n<p>You overcharge your spell to arc past your enemy's defenses. If the next action you use is to Cast a Spell, the spell ignores an amount of the target's resistance to acid, cold, electricity, fire, or sonic damage equal to your level. This applies to all damage the spell deals, including persistent damage and damage caused by an ongoing effect of the spell, such as the wall created by wall of fire. A creature's immunities are unaffected. </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, you deal damage equal to your level even if the target is immune to acid, cold, electricity, fire, or sonic damage. Only ignore the first listed immunity this way, even if the target has immunities to multiple listed damage types.</p>"
+    },
+    "Greater Magic Hack": {
+      "name": "高等魔法破解 Greater Magic Hack",
+      "description": "<p>你习得你所选编程语言的高阶魔法破解。</p>\n<p>You learn the greater magic hack of your chosen programming language.</p>"
+    },
+    "Ultimate Drone": {
+      "name": "终极无人机 Ultimate Drone",
+      "description": "<p>在你的指引和意识升级的作用下，你的无人机超越了自身代码，发展出了真正的人工智能。你的无人机成为一个具有科技特征的生物，拥有自由意志，但除此之外仍使用其同伴数据。即使你超出范围或处于 @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf]{Unconscious}，你的无人机也能独立行动。你和你的无人机分别掷先攻，并可以选择采用较好的结果。你还要进行以下调整。</p><ul><li>将它的两个属性调整值各提高 2。</li><li><p>应用下列一种路线的额外收益。</p></li></ul><p><strong>Bodyguard</strong>：你的无人机的 Athletics 熟练等级提升至大师。该无人机的力量和体质调整值各提高 1。它的徒手攻击和内置武器的熟练等级提升至大师，并获得一个额外的内置武器。</p><p><strong>Diplomat</strong>：你的无人机的 Diplomacy 熟练等级提升至大师，且其魅力调整值提高 2。它获得专长 @UUID[Compendium.sf2e.feats.Item.6ON8DjFXSMITZleX]{No Cause for Alarm}。</p><p><strong>Diva</strong>：你的无人机的 Performance 和 Media Lore 熟练等级提升至大师。该无人机的魅力调整值提高 2。它获得专长 @UUID[Compendium.sf2e.feats.Item.7LB00jkh6JaJr3vS]{Fascinating Performance}。</p><p><strong>Hacker</strong>：你的无人机的计算机熟练等级提升至大师，且其智力调整值提高 2。它获得专长 @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{Combat Hack}。</p><p><strong>Nurse</strong>：你的无人机的 Medicine 熟练等级提升至大师，且其感知调整值提高 2。它获得专长 @UUID[Compendium.sf2e.feats.Item.wYerMk6F1RZb0Fwt]{Battle Medicine}。</p>\n<p>With your guidance and consciousness upgrades, your drone transcends its code and develops true artificial intelligence. Your drone becomes a creature with the tech trait that has free will but otherwise uses its companion statistics. Your drone can act independently even if you're out of range or @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf]{Unconscious}. You and your drone each roll initiative and can choose to act on the better result. You also make the following adjustments.</p><ul><li>Increase two of its attribute modifiers by 2.</li><li><p>Apply the extra benefits of one path listed below.</p></li></ul><p><strong>Bodyguard</strong>: Your drone is a master in Athletics. The drone's Strength and Constitution modifiers increase by 1. Its proficiency rank for unarmed attacks and integrated weapons increases to master, and it gains an additional integrated weapon.</p><p><strong>Diplomat</strong>: Your drone is a master in Diplomacy, and its Charisma modifier increases by 2. It gains the @UUID[Compendium.sf2e.feats.Item.6ON8DjFXSMITZleX]{No Cause for Alarm} feat.</p><p><strong>Diva</strong>: Your drone is a master in Performance and Media Lore. The drone's Charisma modifier increases by 2. It gains the @UUID[Compendium.sf2e.feats.Item.7LB00jkh6JaJr3vS]{Fascinating Performance} feat.</p><p><strong>Hacker</strong>: Your drone is a master in Computers, and its Intelligence modifier increases by 2. It gains the @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{Combat Hack} feat.</p><p><strong>Nurse</strong>: Your drone is a master in Medicine, and its Wisdom modifier increases by 2. It gains the @UUID[Compendium.sf2e.feats.Item.wYerMk6F1RZb0Fwt]{Battle Medicine} feat.</p>"
+    },
+    "Compressed Casting": {
+      "name": "压缩施法 Compressed Casting",
+      "description": "<p>你同时压榨自己的心智与装备，尽可能压缩你的法术编程，从而得到更快的编译，但代码也会复杂得多。如果你的下一动作是施放一个技法师戏法，或一个环级至少比你所拥有的最高环级技法师法术位低 2 环的技法师法术，则施放它所需的动作数减少 1（最低为 1 个动作）。</p><p><strong>越狱</strong> 如果你使用“越狱法术”，通过专长 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.MKgHjc8DEB2XsRa8]{双重法术塑形} 来使用此法术塑形，你可以将此越狱增益和另一种法术塑形原本的越狱增益都应用于该法术。</p>\n<p>Straining both your mind and your equipment, you compress as much of your spell's programming as you can, resulting in a faster compiling but much more complex code. If your next action is to cast a technomancer cantrip or a technomancer spell that is at least 2 ranks lower than the highest-rank technomancer spell slot you have, reduce the number of actions to cast it by 1 (minimum 1 action).</p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape using the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.MKgHjc8DEB2XsRa8]{Double Spellshape} feat, you can apply both this jailbreak benefit and the other spellshape's original jailbreak benefit to the spell.</p>"
+    },
+    "Vigilant Administrator": {
+      "name": "警觉的行政官 Vigilant Administrator",
+      "description": "<p>你已准备好反制任何来袭的魔法效果。你每轮获得一个额外反应，该反应只能用于 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.onqxEjE7qYDBT6nV]{反制法术}。</p>\n<p>You are ready to counter any incoming magic effects. You gain an extra reaction each round that can only be used to @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.onqxEjE7qYDBT6nV]{Counterspell}.</p>"
+    },
+    "Area Denial Turret": {
+      "name": "区域封锁炮塔 Area Denial Turret",
+      "description": "<p>你将炮塔打造得既能进行定点射击，也能倾泻大范围的毁灭。你可以用2个动作让你的炮塔进行区域射击。当你这么做时，你的炮塔获得 area（锥形）或 area（线形）特征（每次你进行区域射击时由你选择），且其射程减半。</p>\n<p>You've built your turret so it can rain down widespread destruction, in addition to performing targeted shots. You can use 2 actions to Area Fire your turret. When you do, your turret gains the area (cone) or area (line) trait (your choice whenever you Area Fire) and its range is halved.</p>"
+    },
+    "Grenade Spell": {
+      "name": "手雷法术 Grenade Spell",
+      "description": "<p><strong>需求</strong> 你正持有一枚手雷。</p><hr /><p>你让自己的法术伴随着一声爆响送出。若你的下一动作是施放一个具有爆发效果且需要进行反射豁免的法术，该法术不会立即生效，而是会改为内嵌进你手中持有的手雷中。直到你下个回合结束前，任何被该手雷的区域火力波及的生物也会受到该内嵌法术的影响；生物不会针对该法术进行单独的反射豁免，而是改为使用它们对抗该手雷时掷出的同一结果。</p><p><strong>越狱</strong> 若你使用“越狱法术”来施加此法术塑形，你可以将任何法术内嵌进一枚手雷中。在这种情况下，如果该法术不是反射豁免，则生物需针对你的法术DC进行一次单独的豁免检定。若你将此法术塑形的效果应用于一个具有基础反射豁免的法术，你可以让该手雷使用你的法术DC而非你的职业DC。</p><p></p>\n<p><strong>Requirements</strong> You are holding a grenade.</p><hr /><p>You deliver your spells with a bang. If your next action is to Cast a Spell with a burst effect that requires a Reflex save, the spell does not immediately take effect, but it instead is installed into the held grenade. Until the end of your next turn, any creatures caught in the Area Fire of the grenade are also affected by the installed spell; creatures do not make a separate Reflex save against the spell and instead use the same result they rolled against the grenade. </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, you can install any spell into a grenade. In that case, creatures roll a separate saving throw against your spell DC if it's not a Reflex save. If you apply the effects of this spellshape to a spell with a basic Reflex save, you can use your spell DC instead of your class DC for the grenade.</p><p></p>"
+    },
+    "Glitch Pulse": {
+      "name": "故障脉冲 Glitch Pulse",
+      "description": "<p>你的装置可以释放一道干扰脉冲，导致科技发生故障。你获得以下新的模组。</p><p><strong>故障脉冲（外骨骼中枢或武器）：</strong>经该模组改装的外骨骼中枢或武器所进行的打击会扰乱科技。若命中，打击会使目标持有的一件随机科技物品获得持续 1 轮的@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd]{故障 3}状态。若该生物具有科技特征，则该生物必须尝试一次对抗你职业 DC 的 @Check[fortitude|against:mechanic]豁免。</p><hr /><p><strong>大成功</strong> 该生物在 24 小时内免疫你的故障脉冲。</p><p><strong>成功</strong> 无效果。</p><p><strong>失败</strong> 该生物陷入故障 3，持续 1 轮。</p><p><strong>大失败</strong> 该生物陷入故障 3，持续 1 分钟。</p>\n<p>Your devices can emit a disrupting pulse that causes tech to malfunction. You gain the following new mod.</p><p><strong>Glitch Pulse (exocortex or weapon):</strong> Strikes from the modded exocortex or weapon disrupt technology. On a hit, Strikes cause a random tech item held by the target to gain the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd]{Glitching 3} condition for 1 round. If the creature has the tech trait, the creature must attempt a @Check[fortitude|against:mechanic] save against your class DC.</p><hr /><p><strong>Critical Success</strong> The creature is immune to your glitch pulse for 24 hours.</p><p><strong>Success</strong> No effect.</p><p><strong>Failure</strong> The creature is glitching 3 for 1 round.</p><p><strong>Critical Failure</strong> The creature is glitching 3 for 1 minute.</p>"
+    },
+    "Root Access": {
+      "name": "根源访问 Root Access",
+      "description": "<p>你已攻破奥术魔法本身的根权限。你获得一个额外的10环法术位。</p>\n<p>You have cracked the root access of arcane magic itself. You gain an additional 10th-rank spell slot.</p>"
+    },
+    "Debug Spell": {
+      "name": "调试法术 Debug Spell",
+      "description": "<p>你可以根据法术将要施放时的具体情况，调整其参数，使其以最高效率运作并将出错几率降到最低。如果你的下一个动作是施放一个造成伤害的法术，那么你为伤害掷出的任何骰子，若结果低于2，则改为2。 </p><p><strong>越狱</strong> 如果你使用越狱法术来运用这个塑法，任何你为伤害掷出的骰子，若结果低于3，则改为3。</p>\n<p>You can adjust the parameters of a spell to operate at maximum efficiency with minimal chances of error based on the circumstances in which it'll be cast. If your next action is to Cast a Spell that deals damage, any die you roll for damage that has a result lower than 2 becomes a result of 2 instead. </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, any die you roll for damage with a result lower than 3 becomes a result of 3 instead.</p>"
+    },
+    "Shockwave Pulse": {
+      "name": "震波脉冲 Shockwave Pulse",
+      "description": "<p>你的物品可以释放一股突发的力场脉冲，将敌人掀翻在地。你获得以下新的改装。</p><p><strong>冲击波脉冲（手雷、武器）：</strong>该物品在使用时会释放一股力场脉冲。如果该物品具有区域（特征），所有未能通过对抗该物品豁免的生物还会被击倒为 @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{倒地}。否则，被该物品伤害的生物会被击倒，除非其通过一次对抗你职业 DC 的 @Check[fortitude|against:mechanic] 豁免。</p>\n<p>Your items can release a sudden pulse of force to topple enemies over. You gain the following new mod.</p><p><strong>Shockwave Pulse (grenade, weapon):</strong> The item releases a pulse of force upon use. If the item has the area trait, all creatures who fail their save against the item are additionally knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}. Otherwise, a creature damaged by the item is knocked prone unless they succeed at a @Check[fortitude|against:mechanic] save against your class DC.</p>"
+    },
+    "Overclock Focus": {
+      "name": "超频专注 Overclock Focus",
+      "description": "<p><strong>触发</strong> 你施放了一个非戏法且未越狱的法术。</p><p><strong>需求</strong> 你的装备处于超频状态。</p><hr /><p>你的魔法回路成为你思维程序的一部分。你将法术中的多余能量导回自身，恢复1点专注点。</p><p></p>\n<p><strong>Trigger</strong> You cast a non-cantrip spell that is not jailbroken.</p><p><strong>Requirements</strong> Your gear is overclocked.</p><hr /><p>Your magical circuit becomes part of your thought routines. You route the excess energy from your spell back into yourself, regaining 1 Focus Point.</p><p></p>"
+    },
+    "Healing Mines": {
+      "name": "治疗地雷 Healing Mines",
+      "description": "<p>你设计出了一种独特的爆炸装置，能够向附近的生物释放一阵治疗药剂。你获得以下新的模组。</p><p><strong>治疗地雷（外骨骼核心）：</strong> 你将轻羽弹匣装填为内含无菌注射器的配置，注射器中装满了高浓度止痛药。你的地雷会治疗原本将作为伤害造成的等量生命值。</p>\n<p>You've designed a unique type of explosive device that administers a burst of healing medicine to nearby creatures. You gain the following new mod.</p><p><strong>Healing Mines (exocortex):</strong> You've packed featherlight cartridges with sterile syringes full of concentrated analgesics. Your mines heal the amount of Hit Points they would have dealt as damage.</p>"
+    },
+    "Speedrun": {
+      "name": "速通 Speedrun",
+      "description": "<p>你短暂地侵入现实，使自己能够穿过墙壁、无视伤害，并相位穿过敌人。你获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.q0uvyDi1wQgre2u3] 魔法破解。</p>\n<p>You briefly hack reality, allowing you to pass through walls, ignore damage, and phase through enemies. You gain the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.q0uvyDi1wQgre2u3] magic hack.</p>"
+    },
+    "Elite Drone": {
+      "name": "菁英无人机 Elite Drone",
+      "description": "<p>你对自己的无人机进行个性化改造，将其打造成一项既是技术奇迹、又是精美艺术作品的造物。你的无人机成为一个专门化的伙伴。</p>\n<p>You personalize your drone, creating a marvel of technology that's also an exquisite work of art. Your drone becomes a specialized companion.</p>"
+    },
+    "Cantrip Expansion": {
+      "name": "戏法扩展 Cantrip Expansion",
+      "description": "<p>专注的研习让你能够准备更广泛的简单法术。你每天可以额外准备两个戏法。</p>\n<p>Dedicated study allows you to prepare a wider range of simple spells. You can prepare two additional cantrips each day.</p>"
+    },
+    "Remote Operation": {
+      "name": "远程操作 Remote Operation",
+      "description": "<p>你学会了如何通过与你的外脑接口，从远处操控机器。你可以使用黑客工具包来操作载具，而且你不需要在载具内部也能@UUID[Compendium.sf2e.actions.Item.uS3qDAgOkZ7b8ERL]{驾驶}它。由GM裁定，你可以远程操作你在30英尺内看见的载具或其他机器。</p>\n<p>You've learned how to operate machines from a distance by interfacing with your exocortex. You can use a hacking toolkit to operate a vehicle, and you don't need to be inside the vehicle to @UUID[Compendium.sf2e.actions.Item.uS3qDAgOkZ7b8ERL]{Drive} it. You can remotely operate a vehicle or other machine you can see within 30 feet at the GM's discretion.</p>"
+    },
+    "Gravitic Dampener": {
+      "name": "引力阻尼器 Gravitic Dampener",
+      "description": "<p>你远程激活你外置核心中的阻尼器，使运动减缓并增强重力。你的炮塔、你的无人机，或你已部署的一枚地雷会散发出一个半径10英尺的困难地形散发区域，且该区域会随无人机移动。它免疫由自身灵光产生的困难地形。该灵光持续的轮数等于你的智力调整值。</p>\n<p>You remotely activate dampeners in your exocortex that slow motion and increase gravity. Either your turret, your drone, or one of your deployed mines radiates a 10-foot radius emanation of difficult terrain, which moves with the drone. It is immune to difficult terrain created by its own aura. This aura lasts for a number of rounds equal to your Intelligence modifier.</p>"
+    },
+    "Hardlight Illusion": {
+      "name": "硬光幻象 Hardlight Illusion",
+      "description": "<p>你将硬光科技编织进你的幻术中，使其更加逼真。如果你的下一个动作是施放一个具有幻术特征的法术，生物不能仅通过触碰或尝试对其造成伤害来试图识破你的幻术，但它们仍然可以使用 @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek} 动作来检视它，并尝试识破你的幻术。当一个生物在感知检定或意志豁免上成功（但并非大成功）以识破该幻术时，你可以以反应尝试一次对抗目标感知DC的计算机检定来对其重新编程。如果你成功，则目标识破该幻术失败。</p><p><strong>越狱</strong> 如果你使用“越狱法术”来运用这个法术塑形并修改一个造成精神伤害的幻术法术，则该法术会根据幻术的类型额外造成另一种合适类型的伤害。此伤害不需要为非致命伤害，可以使再生失效，并且在其他方面如同普通伤害一样运作。</p>\n<p>You weave hardlight technology into your illusions to make them more believable. If your next action is to Cast a Spell with the illusion trait, creatures cannot attempt to disbelieve your illusion by merely touching or attempting to damage it, but they can still use the @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek} action to examine it and attempt to disbelieve your illusion. When a creature succeeds (but not critically succeeds) at a Perception check or Will save to disbelieve the illusion, you can reprogram it as a reaction by attempting a Computers check against the target's Perception DC. If you succeed, the target fails to disbelieve the illusion.</p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape and modify an illusion spell that deals mental damage, that spell deals another appropriate type of damage based on the type of illusion. This damage does not need to be nonlethal, can deactivate regeneration, and otherwise functions like normal damage.</p>"
+    },
+    "Cross Platform Application": {
+      "name": "跨平台应用程序 Cross Platform Application",
+      "description": "<p>你学会了一种你所选编程语言之外的另一种编程语言的初始魔法破解。</p>\n<p>You learn the initial magic hack of a programming language other than your chosen programming language.</p>"
+    },
+    "Auto-Loop": {
+      "name": "自动循环 Auto-Loop",
+      "description": "<p>你已将自动化快捷程序写入你的外核心智，使你能在激战中行动得更快、更频繁。在每个敌人回合开始时，你获得一个额外反应，你可以在该回合中将其用于一个技师反应。</p>\n<p>You've programmed automated shortcuts into your exocortex, enabling you to act faster and more frequently in the heat of battle. At the start of each enemy's turn, you gain an additional reaction you can use on that turn for a mechanic reaction.</p>"
+    },
+    "Overclock Spell Database": {
+      "name": "超频法术数据库 Overclock Spell Database",
+      "description": "<p><strong>触发</strong> 你施放了一个未被“越狱法术”修改的、非戏法法术。</p><p><strong>需求</strong> 你的装备处于超频状态。</p><hr /><p>你将法术中的过剩能量导入你的法术数据库。在接下来的1分钟内，你可以有一次机会直接从你的法术缓存库中施放一个法术，其最高环阶不超过触发该效果的法术，且无需消耗法术位。</p><p></p>\n<p><strong>Trigger</strong> You cast a non-cantrip spell that is not modified by Jailbreak Spell.</p><p><strong>Requirements</strong> Your gear is overclocked.</p><hr /><p>You route the excess energy from your spell into your spell database. Once during the next minute, you can Cast a Spell directly from your spell cache, up to the same rank as the triggering spell, without using a spell slot.</p><p></p>"
+    },
+    "Quine Relay": {
+      "name": "奎因中继器 Quine Relay",
+      "description": "<p><strong>触发</strong> 你的回合开始时。</p><hr /><p>你运行一个简单的例程，几乎不费什么力气就能维持你的法术。你立即获得“维持法术”动作的效果，使你能够延长一个你当前生效中的技法师法术的持续时间。</p><p></p>\n<p><strong>Trigger</strong> Your turn begins.</p><hr /><p>You run a simple routine that maintains your spells without much effort. You immediately gain the effects of the Sustain a Spell action, allowing you to extend the duration of one of your active technomancer spells.</p><p></p>"
+    },
+    "Spell Library": {
+      "name": "法术库 Spell Library",
+      "description": "<p>你的法术缓存库已经扩展，因此你能学会比大多数人更多的法术。在你每日准备期间，你可以将你所知的每个环阶各加入一个法术到你的法术缓存库中，直到你下一次每日准备为止。</p>\n<p>You've expanded your spell cache to learn more spells than most. During your daily preparations, you can add one spell of each rank you know to your spell cache until your next daily preparations.</p>"
+    },
+    "Spinning Blades": {
+      "name": "旋舞刀刃 Spinning Blades",
+      "description": "<p>你的无人机可以在用其内置武器攻击时旋转。它获得@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ZMP8wqASFRTl8gfc]{旋转制胜}动作。</p>\n<p>Your drone can spin around while attacking with its integrated weapons. It gains the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ZMP8wqASFRTl8gfc]{Spin to Win} action.</p>"
+    },
+    "Superior Customization": {
+      "name": "卓越定制 Superior Customization",
+      "description": "<p>你进一步改装了你的无人机，赋予它一项新能力。你的无人机获得一项卓越改装。</p><hr /><p><strong>特殊</strong> 你最多可以选择此专长三次。</p>\n<p>You've further modified your drone, granting it a new ability. You drone gains one superior customization.</p><hr /><p><strong>Special</strong> You can select this feat up to three times.</p>"
+    },
+    "Defensive Programming": {
+      "name": "防御式编程 Defensive Programming",
+      "description": "<p>你的无人机被编程为保护你的盟友和其他附近的生物。你的无人机获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.tZhKyMiM7q3KLHfN]{掩护姿态} 动作。</p>\n<p>Your drone is programmed to protect your allies and other nearby creatures. Your drone gains the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.tZhKyMiM7q3KLHfN]{Covering Posture} action.</p>"
+    },
+    "Magical Shorthand": {
+      "name": "魔法速记 Magical Shorthand",
+      "description": "<p>你学习法术很容易。当你成功学习一个法术时，无论该法术的阶级为何，都只需花费10分钟。如果你本会在检定中成功，则改为获得大成功。如果你失败了，可以在一周后或在你获得一个等级后再次尝试，以较早者为准。</p>\n<p>你可以利用停工期来学习并抄录新的法术。这如同你在使用 @UUID[Compendium.sf2e.actions.Item.QyzlsLrqM0EEwd7j]{Earn Income} 且采用该传统对应的技能，但你不是获得金钱，而是选择一个你可以学习的法术来学习，并在学习它时获得折扣；如果你赚取的收入等于或超过其花费，则你可以免费学会它。</p>\n<p>Learning spells comes easily to you. When you succeed at Learning a Spell, it takes 10 minutes regardless of the spell's rank. If you would succeed on the check, you critically succeed instead. If you fail, you can try again after a week or after you gain a level, whichever is first.</p>\n<p>You can use downtime to learn and inscribe new spells. This works as if you were using @UUID[Compendium.sf2e.actions.Item.QyzlsLrqM0EEwd7j]{Earn Income} with the tradition's associated skill, but instead of gaining money, you choose a spell available to you to learn and gain a discount on learning it, learning it for free if your earned income equals or exceeds its cost.</p>"
+    },
+    "Cloaking Companion": {
+      "name": "隐形伙伴 Cloaking Companion",
+      "description": "<p>你的无人机或炮塔会激活一个基础的隐形力场，使敌人更难锁定其位置。你的无人机或炮塔会激活其专用的伪装装置，并获得 @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{隐蔽}，直到你下个回合开始。</p><hr /><p><strong>等级（+8）</strong> 该隐蔽效果持续 1 分钟。</p>\n<p>Your drone or turret activates a rudimentary cloaking field, making it harder for enemies to pinpoint. Your drone or turret activates its specialized camouflage device and gains @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{concealment} until the beginning of your next turn.</p><hr /><p><strong>Level (+8)</strong> The concealment lasts for 1 minute.</p>"
+    },
+    "Auto-Target": {
+      "name": "自动目标 Auto-Target",
+      "description": "<p><strong>触发条件</strong> 你的无人机或炮塔30英尺内的一个生物使用了一个移动动作，或在其正在使用的移动动作期间离开了一个方格。</p><hr /><p>得益于你的外脑反应迅速以及一流的运动传感器，你的无人机或炮塔可以根据接近程度自动锁定敌人。你的无人机或炮塔对触发该效果的生物进行一次远程打击。此次打击不计入你的多重攻击减值，且你的多重攻击减值也不适用于此次打击。</p>\n<p><strong>Trigger</strong> A creature within 30 feet of your drone or turret uses a move action or leaves a square during a move action it's using. </p><hr /><p>Thanks to the quick response time of your exocortex and top-notch motion sensors, your drone or turret can automatically target enemies based on proximity. Your drone or turret makes a ranged Strike against the triggering creature. This Strike doesn't count toward your multiple attack penalty, and your multiple attack penalty doesn't apply to this Strike.</p>"
+    },
+    "Gravitic Mines": {
+      "name": "引力地雷 Gravitic Mines",
+      "description": "<p>你的地雷会以高密度重力爆发来推拉生物。当你@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{部署}一枚地雷时，为该地雷选择以下效果之一：</p><p><strong>黑洞</strong>：当你的地雷爆炸时，它们会将生物朝地雷拉动5尺（若重度失败，则拉动10尺并附加@UUID[Compendium.sf2e.conditions.Item.xYTAsEpcJE1Ccni3]{迟缓 1}）。</p><p><strong>大爆炸</strong>：当你的地雷爆炸时，它们会将生物朝远离地雷的随机方向推动5尺（若重度失败，则推动10尺并使其@UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{俯卧}）。</p><p>这属于强制移动，不会触发反应。如果此次移动会使某个生物进入其无法占据的空间，则该生物会在它最后一个能够占据的空间停止移动。</p>\n<p>Your mines push or pull creatures in a burst of concentrated gravity. When you @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{Deploy} a mine, choose one of the following effects for that mine:</p><p><strong>Black Hole</strong>: When your mines detonate, they pull creatures 5 feet toward the mine (10 feet plus @UUID[Compendium.sf2e.conditions.Item.xYTAsEpcJE1Ccni3]{Slowed 1} on a critical failure).</p><p><strong>Big Bang</strong>: When your mines detonate, they push creatures 5 feet away from the mine in a random direction (10 feet plus knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} on a critical failure).</p><p>This is forced movement and does not trigger reactions. If this movement would move a creature into a space it can't occupy, the creature stops moving in the last space it can occupy.</p>"
+    },
+    "Incognito Spell": {
+      "name": "隐匿法术 Incognito Spell",
+      "description": "<p>凭借纯粹的精神努力，你可以简化施法所需的咒语与手势，使其几乎难以察觉。如果你接下来使用的动作是施放法术，则该法术获得晦匿（特征），隐藏通常会暴露你正在施法的发光符文、魔法火花以及其他显现。该特征只会隐藏法术的施法动作与显现，不会隐藏其效果，因此观察者仍可能看到一道射线从你身上飞射而出，或看到你凭空消失。</p><p><strong>越狱</strong> 如果你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} 来运用此法术塑形，你可以尝试以奥秘代替威吓，对一个生物进行 @UUID[Compendium.sf2e.actions.Item.2u915NdUyQan6uKF]{Demoralize}，方法是让该法术的效果看起来像是你毫不费力地施展出来的。</p>\n<p>Through sheer mental effort, you can simplify the incantations and gestures needed to cast, leaving them barely noticeable. If the next action you use is to Cast a Spell, the spell gains the subtle trait, hiding the shining runes, sparks of magic, and other manifestations that would usually give away your spellcasting. The trait hides only the spell's spellcasting actions and manifestations, not its effects, so an observer might still see a ray streak out from you or see you vanish into thin air.</p><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape, you can attempt to @UUID[Compendium.sf2e.actions.Item.2u915NdUyQan6uKF]{Demoralize} one creature using Arcana instead of Intimidation by making the effects of the spell seem effortless on your part.</p>"
+    },
+    "Spell Circuit": {
+      "name": "法术回路 Spell Circuit",
+      "description": "<p>你创造出一个由魔法电路构成的网络，将你的法术缓存库与你持有的魔法硬件连接起来。如果你接下来使用的动作是从<em>法术芯片</em>或<em>法术宝石</em>中施放法术，你无需手持该物品。</p><p><strong>越狱</strong> 如果你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{越狱法术} 以<em>法术宝石</em>配合此法术塑形，你可以改为选择另一颗你的、物品等级相同或更高的<em>法术宝石</em>来消耗。</p>\n<p>You create a network of magical circuitry linking your spell cache to magical hardware in your possession. If the next action you use is to Cast a Spell from a <em>spell chip</em> or <em>spell gem</em>, you do not have to be holding the item.</p><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape with a <em>spell gem</em>, you can pick another of your <em>spell gems</em> with an equal or higher item level that is consumed instead.</p>"
+    },
+    "Ammo Infector Virus": {
+      "name": "弹药感染病毒 Ammo Infector Virus",
+      "description": "<p>你迅速将一段蠕虫程序写入你的弹药中，以感染目标所穿戴的科技物品。使用远程武器进行一次打击。若你的打击命中，你可以尝试对该生物或该生物持握或挥舞的一件物品进行 @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{战斗骇入}。</p>\n<p>You quickly program a worm into your ammo to infect tech worn by your target. Strike with a ranged weapon. If your Strike hits, you can attempt to @UUID[Compendium.sf2e.feats.Item.abcKcLvAGE5AKig4]{Combat Hack} the creature or an item the creature is holding or wielding.</p>"
+    },
+    "Cloaking Field": {
+      "name": "隐形力场 Cloaking Field",
+      "description": "<p>你安装了一个装置，可部署静电、烟雾或自我填充的全息影像来制造隐蔽场。你获得以下新模组。</p><p><strong>隐蔽场（护甲或外骨骼核心）：</strong> 你定制护甲，使其在一个 @Template[type:emanation|distance:5] 内发射隐蔽场。隐蔽场内的所有生物都会变为 @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{隐蔽}，而区域外的目标对区域内的生物而言也会处于隐蔽状态。你（以及你的无人机，如果适用）可以不受阻碍地看穿隐蔽场。</p>\n<p>You install a device that deploys static, smoke, or self populating holograms to create a cloaking field. You gain the following new mod.</p><p><strong>Cloaking Field (armor or exocortex):</strong> You customize the armor to emit a cloaking field in a @Template[type:emanation|distance:5]. All creatures within the cloaking field become @UUID[Compendium.sf2e.conditions.Item.DmAIPqOBomZ7H95W]{Concealed}, and those outside the area become concealed to those within. You (and your drone, if applicable) can see through the cloaking field unhindered.</p>"
+    },
+    "Enduring Exocortex": {
+      "name": "不朽城外脑皮层 Enduring Exocortex",
+      "description": "<p>一丝不苟的应急预案和可靠的备用能源使你的外骨骼中枢即使在你处于 @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf] 或 @UUID[Compendium.sf2e.conditions.Item.yZRUzMqrMmfLu0V1] 时，也能继续处理数据并遵循你的程序设定。当你的生命值为 0 或因其他原因无法行动时，你的外骨骼中枢仍然保持运作，并且在你的回合中每轮可以执行 3 个动作。你的不朽城外骨骼中枢可以在你濒死或失去意识时行动，但如果你死亡，它就会停止运作。</p>\n<p>Painstaking contingency plans and a reliable backup power source allow your exocortex to continue processing data and following your programming even when you're @UUID[Compendium.sf2e.conditions.Item.fBnFDH2MTzgFijKf] or @UUID[Compendium.sf2e.conditions.Item.yZRUzMqrMmfLu0V1]. When you have 0 Hit Points or are otherwise unable to act, your exocortex remains functional and can take 3 actions per round on your turn. Your enduring exocortex can act while you're dying or unconscious, but it ceases to function if you are dead.</p>"
+    },
+    "Advanced Cross Platform Application": {
+      "name": "先进跨平台应用程序 Advanced Cross Platform Application",
+      "description": "<p>你学会了与你通过 Cross Platform Application 学到的魔法破解属于同一种编程语言的先进魔法破解。</p>\n<p>You learn the advanced magic hack of the same programming language as the magic hack you learned with Cross Platform Application.</p>"
+    },
+    "Shatter Spell": {
+      "name": "碎裂法术 Shatter Spell",
+      "description": "<p>你不只是解除敌方法术——你会以一阵魔法力场将其粉碎。若你接下来使用的动作是施放 @UUID[Compendium.sf2e.spells.Item.9HpwDN4MYQJnW0LG]，且你成功反制了目标，则你选择的一个与该法术效果或魔法物品占据同一空间的生物会受到等于 1d4 × 目标反制等级的力场伤害，并须以你的法术DC进行一次基础反射豁免；若目标具有对应某种伤害类型的特征，例如火焰，则此效果造成该类型的伤害而非力场伤害。</p><p><strong>越狱</strong> 若你使用“越狱法术”来运用此法术塑形，则选择一项：你可以对法术效果区域内的每个生物，或与目标魔法物品相邻的每个生物造成伤害；或者你造成 1d6 × 目标反制等级的伤害，而非 1d4。</p>\n<p>You don't simply defuse enemy spells—you shatter them in a blast of magical force. If the next action you use is to cast @UUID[Compendium.sf2e.spells.Item.9HpwDN4MYQJnW0LG] and you successfully counteract the target, one creature of your choice occupying the same space as the spell effect or magic item takes force damage equal to 1d4 × the target's counteract rank with a basic Reflex save against your spell DC; if the target has a trait corresponding to a type of damage, such as fire, this effect deals that damage instead of force.</p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, choose one: you can deal damage to every creature in the area of the spell effect or adjacent to the targeted magic item, or you can deal 1d6 damage × the target's counteract rank instead of 1d4 damage.</p>"
+    },
+    "Clever Counterspell": {
+      "name": "巧妙反制法术 Clever Counterspell",
+      "description": "<p>你能创造性地运用你已准备的法术，以<span class=\"pf2-icon\">A</span>反制法术</span>更广泛地反制对手的魔法。你不再只能在准备了与敌人相同的法术时，才能用反制法术反制敌人的法术；只要你拥有敌人正在施放的法术并将其录入你的法术数据库，你就可以使用反制法术。以这种方式使用反制法术时，你仍然必须消耗一个已准备的法术；你所消耗的已准备法术必须与触发法术共享一个特征，但不能是专注、操作或其传统特征。GM也可能允许你改为使用一个具有对立特征的法术，或使用一个在逻辑上能够反制该触发法术的法术（例如使用一个寒冷或水系法术来反制@UUID[Compendium.sf2e.spells.Item.sxQZ6yqTn0czJxVd]，或使用@UUID[Compendium.sf2e.spells.Item.EfFMLVbmkBWmzoLF]来反制一个@UUID[Compendium.sf2e.spells.Item.4koZzrnMXhhosn0D]法术）。</p>\n<p>You creatively apply your prepared spells to Counterspell a much wider variety of your opponents' magic. Instead of being able to counter a foe's spell with Counterspell only if you have that same spell prepared, you can use Counterspell as long as you have the spell the foe is casting in your spell database. When you use Counterspell in this way, you must still expend a prepared spell; the prepared spell you expend must share a trait with the triggering spell other than concentrate, manipulate, or its tradition trait. The GM might allow you to instead use a spell that has an opposing trait or that otherwise logically would counter the triggering spell (such as using a cold or water spell to counter @UUID[Compendium.sf2e.spells.Item.sxQZ6yqTn0czJxVd] or using @UUID[Compendium.sf2e.spells.Item.EfFMLVbmkBWmzoLF] to counter a @UUID[Compendium.sf2e.spells.Item.4koZzrnMXhhosn0D] spell).</p>"
+    },
+    "Adaptive Camouflage": {
+      "name": "自适应伪装 Adaptive Camouflage",
+      "description": "<p>你将一个改装过的全息投影仪安装到一套护甲中，使其获得基础的隐形能力。你获得以下新的模组。</p><p><strong>自适应伪装（护甲）：</strong> 你使用自动生成的全息影像来遮蔽目标。穿戴这件改装护甲的生物无需掩护或隐蔽，便可 @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide} 或 @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}。</p>\n<p>You install a modified hologram projector into a suit of armor, giving it rudimentary cloaking capabilities. You gain the following new mod.</p><p><strong>Adaptive Camouflage (armor):</strong> Using auto-populating holograms, you veil the target. The creature wearing the modded armor does not need cover or concealment to @UUID[Compendium.sf2e.actions.Item.XMcnh4cSI32tljXa]{Hide} or @UUID[Compendium.sf2e.actions.Item.VMozDqMMuK5kpoX4]{Sneak}.</p>"
+    },
+    "Safemode Spell": {
+      "name": "安全模式法术 Safemode Spell",
+      "description": "<p>你可以调整攻击性法术，使其不那么致命。如果你的下一个动作是施放一个造成伤害且不具有死亡或虚能特征的法术，则该法术获得非致命特征。</p><p><strong>越狱</strong> 如果你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} 来运用此法术塑形，你可以选择使该法术变为一个造成非致命心灵伤害的幻术。如果该法术需要进行强韧或反射豁免，则改为意志豁免。如果该法术要求对 AC 进行法术攻击检定，则你改为对目标的意志 DC 进行你的法术攻击检定。该法术获得幻术和心灵特征。</p>\n<p>You can alter offensive spells to be less deadly. If your next action is to Cast a Spell that deals damage and doesn't have the death or void trait, that spell gains the nonlethal trait.</p><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape, you can choose to make the spell an illusion that deals nonlethal mental damage. If the spell requires a Fortitude or Reflex save, it becomes a Will save. If the spell requires a spell attack roll against AC, you make your spell attack roll against the target's Will DC instead. The spell gains the illusion and mental traits.</p>"
+    },
+    "Spell Protection Protocol": {
+      "name": "法术防护协议 Spell Protection Protocol",
+      "description": "<p>你运行一个应用程序，暂时转移传入的法术能量。你或30英尺内的一名盟友获得一个5英尺灵光，使目标及灵光内的盟友对抗具有魔法特质的法术和效果时的豁免检定获得+1状态加值。对抗由你施放的法术时，此加值提高至+3。该灵光持续至你下个回合结束，且你可以维持它，最长持续3轮。</p>\n<p>You run an app that temporarily diverts incoming spell energy. You or an ally within 30 feet gain a 5-foot aura that grants the target and allies within the aura a +1 status bonus to saving throws against spells and effects with the magic trait. Increase this bonus to +3 against spells you cast. The aura lasts until the end of your next turn, and you can Sustain it, to a maximum duration of 3 rounds.</p>"
+    },
+    "Transmutative Casing": {
+      "name": "嬗变外壳 Transmutative Casing",
+      "description": "<p>你可以给子弹涂上一种能够即时模仿稀有材料的物质。你获得以下新的模组。</p><p><strong>嬗变弹壳（外骨骼核心或武器）：</strong>该物品造成的伤害视为由你所选择的以下一种特殊材料所造成：冷铁或银。16级时，将精金和奥克腾岩加入可选列表。</p>\n<p>You can coat bullets with a substance capable or mimicking rare materials on the fly. You gain the following new mod.</p><p><strong>Transmutative Casing (exocortex or weapon):</strong> Damage dealt by the item is inflicted by one of the following special materials of your choice: cold iron or silver. At 16th level, add adamantine and aucturnite to the list of options.</p>"
+    },
+    "Reflect Spell": {
+      "name": "反射法术 Reflect Spell",
+      "description": "<p>当你成功使用反制法术来反制一个影响目标生物或一个区域的法术时，你可以将该法术的效果反弹回其施法者身上。当法术被反弹时，该法术只影响原施法者，即使它是区域法术，或者它通常会影响一个以上的生物。原施法者可以照常尝试进行豁免，并使用其他防御来对抗被反弹的法术。</p>\n<p>When you successfully use Counterspell to counteract a spell that affects targeted creatures or an area, you can turn that spell's effect back on its caster. When reflected, the spell affects only the original caster, even if it's an area spell or it would normally affect more than one creature. The original caster can attempt a save and use other defenses against the reflected spell as normal.</p>"
+    },
+    "Double Detonation": {
+      "name": "双重引爆 Double Detonation",
+      "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p>你同时引爆两枚地雷，释放出一连串同步爆炸。你进行两次 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{引爆地雷}。如果某个生物同时处于这两次爆炸的区域内，则在计算该生物的抗性与弱点时，将伤害合并计算。</p>\n<p><strong>Frequency</strong> once per round</p><hr /><p>You unleash a flurry of synchronized explosions by activating two of your mines at once. You @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{Detonate Mine} twice. If a creature is in the area of both of these detonations, combine the damage for the purposes of calculating that creature's resistances and weaknesses.</p>"
+    },
+    "Rocket Boosters": {
+      "name": "火箭推进器 Rocket Boosters",
+      "description": "<p>你将火箭推进器整合进你无人机的底盘。你的无人机获得 20 英尺的飞行速度。此外，它还获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.RxWzbcEMvoBFduQ8]{激活推进器} 动作。</p>\n<p>You incorporate rocket boosters into your drone's chassis. Your drone gains a fly Speed of 20 feet. Additionally, it gains the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.RxWzbcEMvoBFduQ8]{Activate Thrusters} action.</p>"
+    },
+    "Counterspell": {
+      "name": "反制法术 Counterspell",
+      "description": "<p><strong>触发条件</strong> 一名生物施放了你已准备的法术。 </p><hr /><p>当一名敌人施放法术且你能看见其显现时，你可以使用你自己的魔法来反制它。你消耗一个已准备的法术，来反制触发该反应的生物对此同一法术的施放。你失去该法术位，如同你施放了该触发法术一样。然后你尝试反制该触发法术。</p>\n<p><strong>Trigger</strong> A creature Casts a Spell that you have prepared. </p><hr /><p>When a foe Casts a Spell and you can see its manifestations, you can use your own magic to counter it. You expend a prepared spell to counter the triggering creature's casting of that same spell. You lose your spell slot as if you had cast the triggering spell. You then attempt to counteract the triggering spell.</p>"
+    },
+    "Advanced Magic Hack": {
+      "name": "先进魔法破解 Advanced Magic Hack",
+      "description": "<p>你学会了你所选编程语言的进阶魔法技巧。</p>\n<p>You learn the advanced magic hack of your chosen programming language.</p>"
+    },
+    "Instant Install": {
+      "name": "即时安装 Instant Install",
+      "description": "<p>你在自己的定制装置中加入了一些捷径，使你能够迅速安装和拆卸升级件。若你使用自己的定制装置而非维修工具包来 @UUID[Compendium.sf2e.actions.Item.d4vJxq49lUb7fGXq]{安装升级件}，你可以将安装升级件作为单个动作执行。</p>\n<p>You've worked a few shortcuts into your custom rig, enabling you to install and uninstall upgrades swiftly. If you use your custom rig to @UUID[Compendium.sf2e.actions.Item.d4vJxq49lUb7fGXq]{Install Upgrade}, rather than a repair toolkit, you can Install Upgrade as a single action.</p>"
+    },
+    "Spellshape Modifier": {
+      "name": "塑法修饰符 Spellshape Modifier",
+      "description": "<p><strong>触发</strong> 你的回合开始时。</p><hr /><p>你将信息圈中可用的魔法脚本与你自定义的法术代码融合，使你能够获得你通常并不知晓的法术塑型。直到你的回合结束时，你获得一个技法师职业的法术塑型专长，其等级要求不超过你等级的一半。你不能应用该法术塑型专长的越狱增益。</p><p></p>\n<p><strong>Trigger</strong> Your turn begins.</p><hr /><p> You fuse magic scripts available on the infosphere with your custom spell code, granting you access to spellshapes you don't normally know. Until the end of your turn, you gain a single spellshape feat from the technomancer class that has a level requirement of no more than half your level. You cannot apply the jailbreak benefit of that spellshape feat.</p><p></p>"
+    },
+    "Programming Prodigy": {
+      "name": "编程奇才 Programming Prodigy",
+      "description": "<p>你擅长学习和书写新的代码。你获得@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.brgFUH6vHVkSbyrX]{魔法速记}技能专长，且无需满足其前置条件。此外，当你在学习法术的检定中掷出严重失败时，改为失败。</p>\n<p>You are adept at learning and writing new code. You gain the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-feats.Item.brgFUH6vHVkSbyrX]{Magical Shorthand} skill feat without needing to meet its prerequisites. Further, when you roll a critical failure on your check to Learn a Spell, you get a failure instead.</p>"
+    },
+    "Advanced Drone": {
+      "name": "先进无人机 Advanced Drone",
+      "description": "<p>你进一步自定义了你的无人机。它成为了先进伙伴。</p>\n<p>You further customize your drone. It becomes an advanced companion.</p>"
+    },
+    "Reactive Firewall": {
+      "name": "反应式防火墙 Reactive Firewall",
+      "description": "<p><strong>需求</strong> 你的装备已超频。</p><hr /><p>一堵数据之墙从你超频的装备中迸发而出，保护你免受伤害。攻击者必须再次进行一次攻击检定，并采用较低的结果。</p><p></p>\n<p><strong>Requirements</strong> Your gear is overclocked.</p><hr /><p>A wall of data bursts from your overclocked gear to shield you from harm. The attacker must roll its attack roll a second time and take the lower result.</p><p></p>"
+    },
+    "Multitasker": {
+      "name": "多任务者 Multitasker",
+      "description": "<p>你已经如此习惯于维护和操控你的地雷网络，以至于可以不假思索地激活它们。你永久处于@UUID[Compendium.sf2e.conditions.Item.nlCjDvLMf2EkV2dl]{迅捷}状态。你可以用你的额外动作来指挥你的无人机、发射你的炮塔，或@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{引爆地雷}。</p>\n<p>You've become so accustomed to maintaining and manipulating your network of mines, you can activate them without a thought. You're permanently @UUID[Compendium.sf2e.conditions.Item.nlCjDvLMf2EkV2dl]{Quickened}. You can use your extra action to Command your drone, fire your turret, or @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{Detonate Mine}.</p>"
+    },
+    "High Voltage": {
+      "name": "高压 High Voltage",
+      "description": "<p>你改装了无人机的动力电池，使其能够产生并储存多余的电能，而你的无人机可以将其以突然的电击形式释放出来。你的无人机获得 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.KMq4iGwE0RU2WpLU]{放电} 动作。</p>\n<p>You've modified your drone's power cell to create and store excess electricity, which your drone can release in a sudden jolt. Your drone gains the @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.KMq4iGwE0RU2WpLU]{Electrical Discharge} action.</p>"
+    },
+    "Terraforming Mines": {
+      "name": "地球化矿井 Terraforming Mines",
+      "description": "<p>你在地雷中安装了人工重力场，使其在爆炸时激活。当你@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{部署}一枚地雷时，选择以下效果之一。</p><p><strong>大爆炸</strong>：当你的地雷引爆时，它们会将生物从地雷处沿随机方向推开 5 尺（若重击失败，则推开 10 尺并使其 @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{俯卧}）。</p><p><strong>重力场</strong>：当你的地雷引爆时，爆炸影响的区域会变成由你选择的高重力、低重力、正常重力或零重力，持续 1 分钟。</p>\n<p>You install artificial gravity fields into your mines that activate when they explode. When you @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{Deploy} a mine, choose one of the following effects.</p><p><strong>Big Bang</strong>: When your mines detonate, they push creatures 5 feet away from the mine in a random direction (10 feet plus knocked @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone} on a critical failure).</p><p><strong>Gravity Field</strong>: When your mines detonate, the area affected by the explosion becomes your choice of high gravity, low gravity, normal gravity, or zero gravity for 1 minute.</p>"
+    },
+    "Double Jailbreak": {
+      "name": "双重越狱 Double Jailbreak",
+      "description": "<p>对你来说，魔法的规则不过是些建议而已。如果你的下一个动作是越狱法术，则将该法术塑形的所有越狱增益替换为以下内容。</p><p><strong>越狱</strong> 如果你使用越狱法术来运用此法术塑形，你还可以将另一个你已知的技法师法术塑形及其越狱增益应用于该法术的效果。</p>\n<p>The rules of magic are mere suggestions for you. If your next action is to Jailbreak Spell, replace all jailbreak benefits of that spellshape with the following. </p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, you can also apply another technomancer spellshape you know and its jailbreak benefits to the effects of the spell.</p>"
+    },
+    "Proximity Alert Mines": {
+      "name": "近距警报地雷 Proximity Alert Mines",
+      "description": "<p>每当你@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{部署地雷}时，你可以选择使已部署的地雷成为近接警报地雷。若你如此做，当一个生物进入或离开该地雷爆发区域内的一个方格时，该地雷会自动@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{引爆}。这不需要动作，且当地雷本应触发时，你不能选择延迟其引爆。</p>\n<p>Whenever you @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{Deploy a Mine}, you can choose to make the deployed mine a proximity alert mine. If you do, the mine automatically @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.S3iCDy8ppR8eXp8V]{Detonates} when a creature enters or leaves a square within the burst area of the mine. This does not take an action, and you can't choose to delay the mine's detonation when it would trigger.</p>"
+    },
+    "Double Deployment": {
+      "name": "双重部署 Double Deployment",
+      "description": "<p>你已将你的外骨骼中枢编程为同时部署地雷，以制造一个瓶颈点。你执行 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{部署地雷} 两次。两枚地雷彼此之间必须位于 30 英尺内。</p>\n<p>You've programmed your exocortex to deploy mines together to create a choke point. You @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.ccVcznj9KVYHLVaY]{Deploy Mine} twice. Both mines must be within 30 feet of one another.</p>"
+    },
+    "Delete Root Access": {
+      "name": "删除 Root Access Delete Root Access",
+      "description": "<p>如果你的下一个动作是施放 @UUID[Compendium.sf2e.spells.Item.yXD9uU8w8uFD2OBQ]，将其目标替换为“一个构装体或科技生物”。不采用删除的通常效果，若目标的等级等于或低于你的等级 – 3，则它会被你施加 @UUID[Compendium.sf2e.conditions.Item.9qGBRpbX9NEwtAAr]。它可以尝试进行一次意志豁免检定，以抗拒被你控制。若目标已处于他人的指挥之下，则控制该目标的生物也要进行一次豁免检定，而该构装体采用较好的结果。</p><hr /><p><strong>大成功</strong> 目标不受影响，并在24小时内暂时免疫。</p><p><strong>成功</strong> 目标不受影响。</p><p><strong>失败</strong> 该构装体或科技生物成为受你控制的仆从。该法术获得1分钟的持续时间，但如果你或你的盟友攻击该构装体或科技仆从，则该法术被解除。</p><p><strong>大失败</strong> 如失败，但持续时间为1小时。</p><hr /><p><strong>越狱</strong> 如果你使用 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{越狱法术} 来使用此塑法，若该构装体或科技生物的豁免成功但非大成功，则它成为你的仆从，持续1轮。若该构装体豁免失败，则它成为你的仆从，持续10分钟。若其大失败，则它成为你的仆从，持续24小时。</p>\n<p>If your next action is to cast @UUID[Compendium.sf2e.spells.Item.yXD9uU8w8uFD2OBQ], replace its target with \"one construct or tech creature.\" Instead of delete's normal effects, the target becomes @UUID[Compendium.sf2e.conditions.Item.9qGBRpbX9NEwtAAr] by you if its level is equal to or lower than your level – 3. It can attempt a Will saving throw to resist being controlled by you. If the target is already under someone else's command, the controlling creature also rolls a saving throw, and the construct uses the better result.</p><hr /><p><strong>Critical Success</strong> The target is unaffected and is temporarily immune for 24 hours.</p><p><strong>Success</strong> The target is unaffected.</p><p><strong>Failure</strong> The construct or tech creature becomes a minion under your control. The spell gains a duration of 1 minute, but it is dismissed if you or an ally attacks the construct or tech minion.</p><p><strong>Critical Failure</strong> As failure, but the duration is 1 hour.</p><hr /><p><strong>Jailbreak</strong> If you use @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-actions.Item.EE07CnQmn8Xg4gkd]{Jailbreak Spell} to use this spellshape, if the construct or tech creature succeeds at its save but doesn't critically succeed, it is your minion for 1 round. If the construct fails its save, it is your minion for 10 minutes. If it critically fails, it is your minion for 24 hours.</p>"
+    },
+    "Backup Spell": {
+      "name": "后备法术 Backup Spell",
+      "description": "<p><strong>动作</strong> <span class=\"action-glyph\">1</span> 至 <span class=\"action-glyph\">3</span></p><hr /><p>频繁备份可防止数据丢失。你恢复一个已消耗的法术位，该法术位的环阶必须至少比你的最高环阶法术位低 2，且可施放一个施法动作数为 1、2 或 3 的法术。然后你立即施放一个可使用该法术位施放的已缓存法术。Backup Spell 所需的动作数等于所施放法术的动作消耗。然而，能够如此快速地编写这样的法术会造成精神负担。施放该法术后，你会陷入 @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{迟钝 3}，并且直到你下个回合结束前，你尝试使用的任何科技装备都会处于 @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd]{故障 3}。</p><p><strong>越狱</strong> 如果你使用 Jailbreak Spell 来使用此法术塑形，则直到你下个回合结束前，你尝试使用的科技装备不会处于故障 3。</p>\n<p><strong>Actions</strong> <span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p><hr /><p>Frequent backups prevent data loss. You regain one expended spell slot that is at least 2 ranks lower than your highest-rank spell slot and takes 1, 2, or 3 actions to cast. You then immediately cast a cached spell that can be cast using that slot. The number of actions required for Backup Spell is equal to the action cost of the spell cast. Being able to quickly program such a spell is mentally taxing, however. After Casting the Spell, you're @UUID[Compendium.sf2e.conditions.Item.e1XGnhKNSQIm5IXg]{Stupefied 3}, and any tech gear you attempt to use is @UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-conditions.Item.6A2QDy8wRGCVQsSd]{Glitching 3} until the end of your next turn.</p><p><strong>Jailbreak</strong> If you use Jailbreak Spell to use this spellshape, tech gear you attempt to use until the end of your next turn isn't glitching 3.</p>"
+    },
+    "Refined Chassis": {
+      "name": "精制底盘 Refined Chassis",
+      "description": "<p>你进一步升级了你的无人机。它成为了一个灵巧或魁梧的同伴。</p>\n<p>You've further upgraded your drone. It becomes a graceful or burly companion.</p>"
+    },
+    "Critical Explosion": {
+      "name": "致命爆炸 Critical Explosion",
+      "description": "<p>你的地雷会在一团弹片云中爆炸，撕裂生物最脆弱的部位，造成持久伤害。将你的智力调整值加入你地雷的伤害中。若一个生物对你的某个地雷进行豁免检定时严重失败，则还会额外受到等同于你智力调整值的持续伤害。若该地雷造成的是物理伤害，则这会是持续流血伤害。否则，该持续伤害与该地雷造成的伤害类型相同。</p>\n<p>Your mines explode in a cloud of shrapnel that shreds through a creature's weakest points to cause lasting harm. Add your Intelligence modifier to your mines' damage. A creature that critically fails its saving throw against one of your mines is additionally dealt persistent damage equal to your Intelligence modifier. If the mine dealt physical damage, this is persistent bleed damage. Otherwise, the persistent damage is of the same type dealt by the mine.</p>"
+    }
+  }
+}

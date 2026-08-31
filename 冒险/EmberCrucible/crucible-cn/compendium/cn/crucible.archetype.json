@@ -1,0 +1,163 @@
+{
+  "label": "原型\nArchetypes",
+  "mapping": {
+    "description": "system.description"
+  },
+  "folders": {
+    "Humanoids": "人型生物",
+    "Dragons": "巨龙",
+    "Constructs": "构装体",
+    "Elementals": "元素生物",
+    "Beasts": "野兽"
+  },
+  "entries": {
+    "Adult Drake": {
+      "name": "成年龙兽 Drake",
+      "description": "<p>完全长成的龙兽，是危险的潜行猎手和群猎者。</p>"
+    },
+    "Archer": {
+      "name": "弓箭手 Archer",
+      "description": "接受过训练的远程战斗者会使用弓。"
+    },
+    "Brigand": {
+      "name": "强盗 Brigand",
+      "description": "<p>无论是强盗、海盗、恶棍还是其他无赖，皆为邪恶的违法之徒。</p>"
+    },
+    "Commonfolk": {
+      "name": "平民百姓 Commonfolk",
+      "description": "<p>世界上没有特殊冒险技能或能力的普通公民。</p>"
+    },
+    "Scout": {
+      "name": "侦察兵 Scout",
+      "description": "<p>受过侦察与未知区域前期探索训练的人员。</p>"
+    },
+    "Spellblade": {
+      "name": "咒刃 Spellblade",
+      "description": "<p>咒刃是受到魔法强化的战士，他们将施法融入武器攻击中，制造出毁灭性的打击。</p>"
+    },
+    "Bard": {
+      "name": "吟游诗人 Bard",
+      "description": "<p>你研习英雄叙事的口述与音乐传统，以此激发盟友的勇气、打击敌人的士气，并迅速以非传统方式解决问题。</p>"
+    },
+    "Berserker": {
+      "name": "狂战士 Berserker",
+      "description": "一名由狂怒驱动、偏好使用重型武器进行双手攻击的战士。"
+    },
+    "Burrower": {
+      "name": "掘穴者 Burrower",
+      "description": "<p>擅长在坚实物质中掘穴穿行的野兽或类野兽生物。</p>"
+    },
+    "Chomper": {
+      "name": "碎咬兽 Chomper",
+      "description": "<p>依靠巨大口部凶狠啃咬的野兽。</p>"
+    },
+    "Drakeling": {
+      "name": "幼龙兽 Drakeling",
+      "description": "<p>体型较小或较年轻的龙兽，个体尺寸偏小，但作为成群狩猎的潜猎者依然危险。</p>"
+    },
+    "Elemental Mote": {
+      "name": "元素微粒 Mote",
+      "description": "<p>元素微粒是仍具有实体形态的最小元素化身。它们通常没有智能，会根据环境刺激行动，或遵循附近更强大元素生物的本能指引。</p>"
+    },
+    "Elemental Sprite": {
+      "name": "元素精灵 Sprite",
+      "description": "<p>元素精灵是低等元素生物，是其原始元素的化身，但缺乏其高等同类所具备的智慧。</p>"
+    },
+    "Elemental Visitor": {
+      "name": "元素访客 Visitor",
+      "description": "<p>访客是原始元素能量的具现化，会呈现出大致具有人型生物轮廓的形态。与它们较低阶的同类不同，元素访客具备沟通与理解的能力，尽管它们的动机很少与凡人的动机一致。</p>"
+    },
+    "Elemental Wanderer": {
+      "name": "元素漫游者 Wanderer",
+      "description": "<p>流浪者是元素能量的重要显化，会呈现出一种令人敬畏或庄严雄伟的形态。它们具有自我意识与智慧，并且明白当自己身处其典型领域之外时，便是不自然的闯入者。它们往往受某种本能或预先谋划的目的驱使，而正是这种目的将它们引至此处。</p>"
+    },
+    "Fighter": {
+      "name": "战士 Fighter",
+      "description": "坚韧的近战战士，擅长运用单手武器、盾牌和重型护甲。"
+    },
+    "Geomancer": {
+      "name": "地脉师 Geomancer",
+      "description": "<p>专精于大地与火焰符文的法师。</p>"
+    },
+    "Grappler": {
+      "name": "擒抱者 Grappler",
+      "description": "专精于以身体手段制住对手，并使其更容易受到后续攻击的战士。"
+    },
+    "Guardian Beast": {
+      "name": "守护野兽 Beast",
+      "description": "<p>作为守卫的野兽，守望着某些地点或人，它们对其忠贞不渝。</p>"
+    },
+    "Herd Beast": {
+      "name": "群居野兽 Beast",
+      "description": "<p>牛、役畜，以及其他会群居成群的猎物动物。</p>"
+    },
+    "Justiciar": {
+      "name": "审判官 Justiciar",
+      "description": "<p>审判官是神圣的勇士，他们将神力的愤怒与审判带给邪恶或不配之人。</p>"
+    },
+    "Lawkeeper": {
+      "name": "律法守卫 Lawkeeper",
+      "description": "<p>负责维持治安并追捕破坏治安者的警员、侦探、调查员以及其他执法人员。</p>"
+    },
+    "Mage": {
+      "name": "法师 Mage",
+      "description": "一名在战斗中操纵火焰与电流的施法者。"
+    },
+    "Necromancer": {
+      "name": "死灵法师 Necromancer",
+      "description": "<p>死灵法师是施法者，他们将自己的才智与智慧用于消解死亡终结性的研究，钻研徘徊于生命与湮灭之间的死灵与心灵力量。他们很少独自出现——任何威胁等级的死灵法师都会将附近的不死生物纳入自己的意志之下，若不先扰乱其召唤出的仆从就想击败他们，往往代价高昂。在正面交锋中，他们的身体十分脆弱，闪避较低，也没有像样的招架或格挡；但他们能够维持持续性的死灵效果，削弱敌人的专注与士气，并从他人的痛苦中补充自己的资源，这使他们在任何等级都是危险的对手。</p>"
+    },
+    "Occultist": {
+      "name": "秘学家 Occultist",
+      "description": "运用异界与诡秘力量进行施法的魔法使用者。"
+    },
+    "Operator": {
+      "name": "操作者 Operator",
+      "description": "<p>操作者是能够在紧张局势中周旋的专家，善于将敏锐的政治判断力与机敏和果断行动相结合。</p>"
+    },
+    "Pack Member": {
+      "name": "群体成员 Member",
+      "description": "成群猎食的野兽。"
+    },
+    "Priest": {
+      "name": "牧师 Priest",
+      "description": "<p>虔诚侍奉诸神之人，他们通过对神祇的信仰与奉献获得力量。</p>"
+    },
+    "Protector": {
+      "name": "守护者 Protector",
+      "description": "<p>坚毅的战士们挺身挡在盟友与危险之间，首要目标是保护自己和他人免受伤害。</p>"
+    },
+    "Servitor": {
+      "name": "仆从 Servitor",
+      "description": "<p>专门从事间谍活动或在控制其的大师远程指挥下执行任务的生物。</p>"
+    },
+    "Shapeshifter": {
+      "name": "变形者 Shapeshifter",
+      "description": "<p>变形者修习兽性变形之术，这是一种古老的原始魔法，与通常修习的符文施法不同。</p>"
+    },
+    "Skirmisher": {
+      "name": "散兵 Skirmisher",
+      "description": "一名不屈不挠且意志坚定的近战战斗者，运用敏捷与力量的结合来制服敌人。"
+    },
+    "Swashbuckler": {
+      "name": "侠客 Swashbuckler",
+      "description": "<p>你过着帆船上的危险生活，或以公海海盗为业。你以机智、魅力，以及有时不计后果的勇敢而闻名。</p>"
+    },
+    "Thief": {
+      "name": "盗贼 Thief",
+      "description": "<p>擅长潜入他们不该进入的区域，并拿走他们不该拥有之物的流氓式角色。</p>"
+    },
+    "Trader": {
+      "name": "商人 Trader",
+      "description": "<p>你的专长在于游历世界，并促成货物的交换。</p>"
+    },
+    "Tusker": {
+      "name": "长牙兽 Tusker",
+      "description": "<p>凭借自身的体型、冲势与锐利獠牙作战的野兽。</p>"
+    },
+    "Ultra Drake": {
+      "name": "究极龙兽 Drake",
+      "description": "<p>已经成熟、位于其同类食物链顶端的龙兽。</p>"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+    "label": "庇护主 Patrons",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Primordial Trickster": {
+            "name": "原初诡术师 Primordial Trickster",
+            "description": "<p>一阵甜香与窃笑声首次预告了你庇护主的到来。你的庇护主是一个以反复无常的面具掩盖真实意图的存在。它可能是一个深不可测的妖精、一个面带微笑的糖果妖婆，或一个来自密林深处的其他诡谋者。你或许并不清楚你庇护主的真实意图，也不清楚自己在它的游戏中扮演何种角色；但目前，它赋予你的力量确实奇妙无比。</p>\n<p><strong>法术列表</strong> 原初</p>\n<p><strong>庇护主技能</strong> 自然</p>\n<p><strong>蜜语秘传</strong> 你已亲眼见识庇护主蜜语糖衣礼物所能成就之事，而它也乐于将其手段倾囊相授。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.NVorc9c4ThpLtOCE]{诱惑} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.rerNA6YZsdxuJYt3]{既视感}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.PI6xqyZ8o6kl9LUX]{诱惑勾引之魔宠}</p>"
+        },
+        "Infinite Chorus": {
+            "name": "无尽合唱 Infinite Chorus",
+            "description": "<p>声音之诞生或许在先，但音乐则是紧抓其踝的孪生。一音可弯，亦能弯曲周遭之情绪与感受，有时甚至以排山倒海般的感受充盈一人之心。正是这一道无可避免的曲调首先入你之耳，你的庇护主借此向你指引方向，如悬崖般起伏的乐谱倾泻而下。一位吹奏排笛的萨提尔、一位拨竖琴的莉伦德，或自气位面而来的一缕风中之曲；任何一者皆可能教你如今所演的和声。然而你之造作虽形态多样，本质上都是同一首无尽之歌。</p>\n<p><strong>法术列表</strong> 神秘</p>\n<p><strong>庇护主技能</strong> 神秘</p>\n<p><strong>雕塑和声秘传</strong> 你的庇护主教会你以魔法为乐器塑造世间之声。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.Zs9oPQnZYDUd6n6m]{宇宙之曲} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.yV7Ouzaoe7DHLESI]{腹语术}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.Uez6qnF2tiTMFLpx]{回响旋律之魔宠}</p>"
+        },
+        "Silhouette of the Leviathan": {
+            "name": "巨兽之影 Silhouette of the Leviathan",
+            "description": "<p>你与庇护主的契约缔结于海上——你新主的领地。或许是在一场可怕的风暴中，与楼宇齐高的巨浪威胁要将你溺毙；或许是在探索一处沉没遗迹之时，寻找早被遗忘的某物。它的形态可能是一条水生灵蛇、一头古老的奥古鲁苏或一只邪恶的海妖婆，但如今盐潮如血般在你血脉中跳动，海洋之力归你掌控。</p>\n<p><strong>法术列表</strong> 原初</p>\n<p><strong>庇护主技能</strong> 自然</p>\n<p><strong>碎涛秘传</strong> 你的庇护主向你示明：在万物之上，海洋是这世界最强大的力量。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.oA7qGKi5PQ0hAwzm]{潮汐之握} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.jfVCuOpzC6mUrf6f]{水流冲击}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.0Ai7ZSVNVIOHkCuI]{翻腾盐水之魔宠}</p>"
+        },
+        "Evershifting Entropy": {
+            "name": "万变熵流 Evershifting Entropy",
+            "description": "<p>当你与你混乱的庇护主相会时，狂野多变的感官席卷你身。显然，它对常态的瓦解感到喜悦，并以你为达成此事的一枚棋子。你的庇护主可能是混乱中某种不可知的使者——比如一个原蕴体、一个混沌兽，或更怪异之物。无论其本质如何，你越少试图预测其善变之念，便越有可能从中学得东西。</p>\n<p><strong>法术列表</strong> 奥术</p>\n<p><strong>庇护主技能</strong> 奥秘</p>\n<p><strong>理性之愚秘传</strong> 你的庇护主向你证明：意义与理性是何等容易溃于无形，又能给你带来何等巨大的益处。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.ju68drrYV8hQn2El]{现实闪烁} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.r8g7oSumKOHDqJsd]{躁动术}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.mtc929TcevKfxYgG]{诡异形态之魔宠}</p>"
+        },
+        "Mechanism of the Otherworldly": {
+            "name": "异界机制 Mechanism of the Otherworldly",
+            "description": "<p>当你首次站在你的庇护主面前时，时钟齿轮的滴答与机械的嘶气将你淹没。它是一位创造之实体，希望你将魔法与机械相融，以推进它那不可解的目标。它可能是「光辉时钟之堡」（@UUID[Compendium.pf2e.deities.Item.vEMCpm7iidycRT5D]{布莱} 的圣域）的居民，或是一位「天劫」、一只金属元素，或一具威能极盛的构装体。无论起源如何，它都驱使你像它一样不断创新。</p>\n<p><strong>法术列表</strong> 奥术</p>\n<p><strong>庇护主技能</strong> 制造</p>\n<p><strong>蓝图分析秘传</strong> 你已获得将魔法与时钟机械相结合的图纸。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.FM0Xu9ixPpOeRj2Z]{召造装置} 法咒戏法，且你的魔宠学得一个 1级常见或非常见装置的配方。当你的魔宠每升级要学习新法术时，你可以改让它学得一个等级不超过你的非常见或常见装置的配方。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.7HZp8TrEV2wHolfH]{时钟齿轮之魔宠}</p>\n<hr />\n<p><strong>特殊</strong> 你以 @UUID[Compendium.pf2e.feats-srd.Item.DQN7YC7s7T0pL6Aa]{装置专家} 发明家职业专长作为 6级女巫职业专长，并失去 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.d8puGs28uZXv5Baa]{仪典短刃} 职业专长。你可以选取以装置专家为先决条件的发明家专长以及后续专长，如同你的发明家等级等于你的女巫等级 - 2。</p>"
+        },
+        "The Great and Powerful Wishcrafter": {
+            "name": "伟大而强大的愿望编织者 The Great and Powerful Wishcrafter",
+            "description": "<p>当你许下愿望时，你的庇护主便来到你身边，提议帮你实现……要价不菲。精灵、邪魔、妖精等存在皆乐于向凡人提供愿望，而那些极具表演天赋者更喜欢将其许愿者变为女巫，并在实现其最终极愿望前送他们去完成不可知之任务。在你的旅程结束时，你也会实现许多愿望——并扭曲更多。</p>\n<p><strong>法术列表</strong> 奥术</p>\n<p><strong>庇护主技能</strong> 奥秘</p>\n<p><strong>戏弄漏洞秘传</strong> 你的庇护主向你展示：对一句直白请求的另类解读会带来何等的灾难性后果。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.IgXLgysKIqYAdnnC]{实现愿望} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.vLA0q0WOK2YPuJs6]{魅惑术}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.sToq6b8DV1deSyHE]{欲望成真之魔宠}</p>"
+        },
+        "Spirit of Labyrinthine Roads": {
+            "name": "迷宫街巷之灵 Spirit of Labyrinthine Roads",
+            "description": "<p>你初次相见时也许并未意识到你的庇护主是何物——一个酒馆里陌生的人，或一名路边的乞讨者？但当你与之缔约后，便清楚明白：它要么是一个借街道为伪装的强大存在，要么或许就是城市本身的「场地之灵」。如今，铺路上脚步的节拍在你心中跳动，你也握有「巷间女巫」的奇异力量。</p>\n<p><strong>法术列表</strong> 奥术</p>\n<p><strong>庇护主技能</strong> 奥秘</p>\n<p><strong>都市孤行秘传</strong> 你的庇护主向你示明，如何在繁忙聚落中独自生存——这是别人难以做到之事。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.p5raHrW97ArzBadP]{隐于人潮} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.iohRnd4gUCmJlh54]{迷失方向}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.vJBcIkIhWREGILYd]{绊步之魔宠}</p>"
+        },
+        "Grasp of the Grave": {
+            "name": "墓茔之握 Grasp of the Grave",
+            "description": "<p>也许是一阵骤降的低温首先预告了你庇护主的存在，或一股恶臭，或镜中悄然立于你身后的影子。是巫妖？是吸血鬼？还是鬼魂？也许是一位决意让死者长眠的灵魂导引者？无论你的庇护主曾是何物，它对死亡了若指掌——若你细细聆听其低语，它或许能将其秘密授予你。</p>\n<p><strong>法术列表</strong> 神圣</p>\n<p><strong>庇护主技能</strong> 宗教</p>\n<p><strong>超越死亡秘传</strong> 你的庇护主向你示明，死亡并非永远是终结。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.QQ17VS1dg0kPRpZE]{精魂之触} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.yHujiDQPdtXW797e]{灵魂链接}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.aA4IzWrW2E2JeuF8]{食魂之魔宠}</p>"
+        },
+        "The Shambling Thing in the Mire": {
+            "name": "泥沼之中蹒跚之物 The Shambling Thing in the Mire",
+            "description": "<p>你首次遭遇你的庇护主是在一片沼泽、泥潭或湿地的深处。如泥般浓稠的水、纠结成网隐蔽天空的枝条，以及栖于沼泽中的阴沉生物，如今对你而言已如羊皮纸对学者一般熟悉。你的庇护主或许是一只被沼泽居民奉为神祇的两栖或昆虫怪物、一具神秘的沼地干尸、一头可悲且具神智的可憎之物，或更怪异得多的存在。</p>\n<p><strong>法术列表</strong> 原初</p>\n<p><strong>庇护主技能</strong> 自然</p>\n<p><strong>蔓延荒野秘传</strong> 你的庇护主教会你如何散播它的本性。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.yzfwpM0IldqOaLWH]{沼泽涌现} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.yAiSNmz39qXOIlco]{泥洼术}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.djd6TZqfcsPd4uHg]{晦暗异界之魔宠}</p>\n<hr />\n<p><strong>特殊</strong> 如果你选取 @UUID[Compendium.witches-remaster.witches-remaster-feats.Item.OAKFEmT9z1Y6IGIH]{女巫武装} 职业专长，则你以下列选项替换「活发」：</p>\n<ul>\n<li><strong>蟾舌</strong> 你的舌头如蛙般从口中弹出。你获得一种徒手舌头攻击，造成 1d4 钝击伤害，属拳斗武器组，并具有卸武、触及与徒手特征。你的舌头能够抓握其触及内重量不超过 1 体积的无主物品。</li>\n</ul>"
+        },
+        "The Ultimate Chain of Order": {
+            "name": "至高秩序之链 The Ultimate Chain of Order",
+            "description": "<p>你的庇护主以一袭威严的权能斗篷显现，发出你无从抗拒的轰然命令。它向你启示了秩序的至高重要性。它是事物之间一种不可违背的纽带，必须如此存在以确保宇宙的纯净与神圣。你的庇护主很可能是一位严守律法的看守者：恶魔、永恒、神武，乃至遵循不可破之准则的巨龙。你所立之契约严格至极，是一段不可动摇地履行预定职责的连结。你被期望严格遵循它，如此你将获得难以想象的力量。</p>\n<p><strong>法术列表</strong> 神圣</p>\n<p><strong>庇护主技能</strong> 宗教</p>\n<p><strong>不破之律秘传</strong> 你与你的庇护主之间已达成不会因善变而破裂的默契。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.4czsKd8LPYPQJ8NL]{要求服从} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.B0FZLkoHsiRgw7gv]{召唤下位神仆}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.rQOtPHWhk38SBs7B]{冲突权能之魔宠}</p>"
+        },
+        "Herald of Daylight's Touch": {
+            "name": "日光之触使者 Herald of Daylight's Touch",
+            "description": "<p>你的庇护主初次相见时光辉夺目，将炽烈的太阳生命能量充盈你身。你的魔法浸染日光之力，助生命延续并将黑暗与绝望之力推退。你的庇护主可能是太阳神或其他光明之神的使者、一位创世之初的强大存在，乃至太阳本身——以奖赏你对日光的崇敬。如今你的使命便是将日光散布至它无法独自抵达之处。</p>\n<p><strong>法术列表</strong> 神圣</p>\n<p><strong>庇护主技能</strong> 宗教</p>\n<p><strong>明耀光线秘传</strong> 你的庇护主向你示明太阳作为「创造熔炉」之门的角色，以及生机与虚空之间的角力。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.KAWM4Ipy7ZBgZewv]{暴烈光华灵气} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{治疗术}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.zEmYY8001YEtSvHf]{日出之魔宠}</p>"
+        },
+        "Raconteur of Never-Ending Tales": {
+            "name": "永续故事讲述者 Raconteur of Never-Ending Tales",
+            "description": "<p>你在一本旧故事书、一些纸牌中，或一段童话回忆里遇见你的庇护主。梦境、谎言、历史与谚语，它们共有什么？故事填补了我们理解之间的虚空，正是借着故事，世界才得以塑形。你的庇护主可能是一只试图逃离星界的梦境、一本智慧的故事书或一副哈罗牌，或失落且至关重要圣典的守护者。无论动机如何，需要倾听之故事的人都必须听到它。</p>\n<p><strong>法术列表</strong> 神秘</p>\n<p><strong>庇护主技能</strong> 神秘</p>\n<p><strong>逸事倾向秘传</strong> 你的庇护主以故事教导你，使你领悟即便是简单谚语也能蕴含的力量。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.6NvV6OUs1kKsmO1W]{传奇人物} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.2oH5IufzdESuYxat]{幻象造物}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.1bDk3BxR8Ipwqgyd]{远方异界之魔宠}</p>"
+        },
+        "Calamity Incarnate": {
+            "name": "化身之灾 Calamity Incarnate",
+            "description": "<p>你在一场灾难的余烬中遇见你的庇护主——一位毁灭与灾厄的化身。在这种庇护主之下的女巫形态多样，从被火元素择定的炎术师、追随怪兽的灾祸邪教徒，到饱受怪物侵袭村庄的守护者。无论你被召唤去散播毁灭还是阻止毁灭，你的魔法都蕴含赋予你法术的存在的纯粹之力。</p>\n<p><strong>法术列表</strong> 原初</p>\n<p><strong>庇护主技能</strong> 自然</p>\n<p><strong>横扫毁灭秘传</strong> 唯有亲眼见过庇护主毁灭之力者才能真正理解；而你确保自己时常如此目睹。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.wePHiiUSJa3xubHh]{蹂躏终末} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t]{喷吐烈焰}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.OdTctuvfYskyimD6]{末劫眷顾之魔宠}</p>"
+        },
+        "Outsider in the Eternal Void": {
+            "name": "永恒虚空之外族 Outsider in the Eternal Void",
+            "description": "<p>厄运降临于直视你庇护主之人，你也不敢自己直视。它来自外虚空的异常访客？还是来自冥域的影子？或更糟之物？也许你崇拜这位来自现实之外的恐怖；又或许你狂热研究它以求驱退之。无论何种缘由，你已自其可怕之力中汲取一缕，以增强自己以达成此目标。</p>\n<p><strong>法术列表</strong> 神秘</p>\n<p><strong>庇护主技能</strong> 神秘</p>\n<p><strong>安然失措秘传</strong> 你的庇护主教会你拥抱不适与不确定，因为适应才是最真之德。你学得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.v8yeZZnni32IbnZn]{潜伏厄运} 法咒戏法，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.D442XMADp01qJ7Cs]{讯息传递}。</p>\n<p><strong>专属魔宠能力</strong> @UUID[Compendium.witches-remaster.witches-remaster-familiar-abilities.Item.OyRPlHK5kqgwqIg7]{失向接近之魔宠}</p>"
+        }
+    }
+}

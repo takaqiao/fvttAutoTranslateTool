@@ -1,0 +1,286 @@
+{
+ "unit": "ST-A-CAST",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\ST-A-CAST.cn.json",
+ "summary": "8 个预设角色全译完毕，形状与 payload 逐键相同。命名档定为 T-BILINGUAL（`中文 English`，一个 ASCII 空格，英文尾巴逐字节含 `(Evolved)`），依据是 glossary_alien.byrole.json 里 franchise-character 的 document.name 角色（Aaron → 「亚伦 Aaron」）以及 scan_missing_bilingual_tail.py 对 actors/items 桶的判据（en 必须是 cn 的子串）。relOne/relTwo 走 T-PLAIN 裸中文姓氏，取值恰好是对应 actor 名字中文半部的子串——这条不变式我用脚本跑过，10 条人物指向全部唯一命中，4 条 None 走 prose 语义译作「无」（byrole 的 None 条目明写「THE SENTINEL IS NOT THE WORD」，只有下拉选项与 ALIENRPG.None 是冻结的，而 relOne/sigItem/agenda 实测是 character-general.hbs 上的裸 text input，代码零比对）。内嵌物品名全部按 T-BILINGUAL 发；与 ST-I 重叠的 10 件、与 Phase 2 已发布的 SYS-I1 重叠的 5 件职业物品都按已发布值/词表值对齐。自查发现并修掉一处标记缺陷：Holroyd 的 Resilient 里 `<span class=\"basesymbol\">` 内部是「空格+U+00A0」而不是两个 ASCII 空格，已逐字节复原。",
+ "chars_en": 14801,
+ "chars_cn": 8528,
+ "frozen_kept": [
+  "[object Object]（5 处 specialty/career 物品的 notes，沿用 Phase 2 SYS-I1.cn.json 的先例逐字保留）",
+  "LV-426（T-LATIN，byrole 明列）",
+  "USCMC（pending 未裁，保留缩写——pending 条目自己列的候选之一就是「keep the acronym」）",
+  "P-DAT / M314 / M4A3（T-LATIN 型号标识）",
+  "Rexim / Pharmax（零证据品牌名，按 T-LATIN 留拉丁，不新造译名）",
+  "class=\"alienrpg a.entity-link\" ×5、class=\"basesymbol\" ×1（属性逐字复制，EN/CN 计数相等）",
+  "<span class=\"basesymbol\">  </span> 的内部内容（空格+NBSP，逐字节复原）"
+ ],
+ "lock_lookups": [
+  {
+   "english": "Angela Lin (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "安吉拉·林 Angela Lin (Evolved)｜被引用：0 次"
+  },
+  {
+   "english": "Hannah Singleton (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "汉娜·辛格尔顿 Hannah Singleton (Evolved)｜姓氏 辛格尔顿｜relOne=麦克惠尔(MacWhirr) relTwo=赫希(Hirsch)"
+  },
+  {
+   "english": "Holroyd (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "霍尔罗伊德 Holroyd (Evolved)｜姓氏 霍尔罗伊德｜relOne=赫希(Hirsch) relTwo=西格(Sigg)"
+  },
+  {
+   "english": "Janice Macwhirr (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "珍妮丝·麦克惠尔 Janice Macwhirr (Evolved)｜姓氏 麦克惠尔｜relOne=辛格尔顿(Singleton) relTwo=赫希(Hirsch)"
+  },
+  {
+   "english": "Morgan Hirsch (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "摩根·赫希 Morgan Hirsch (Evolved)｜姓氏 赫希｜relOne=西格(Sigg) relTwo=麦克惠尔(MacWhirr)"
+  },
+  {
+   "english": "Sonny Sigg (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "桑尼·西格 Sonny Sigg (Evolved)｜姓氏 西格｜relOne=赫希(Hirsch) relTwo=麦克惠尔(MacWhirr)"
+  },
+  {
+   "english": "Theodora Komiskey (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "西奥多拉·科米斯基 Theodora Komiskey (Evolved)｜relOne=无 relTwo=无（源为 None）"
+  },
+  {
+   "english": "Wes Osterman (Evolved)",
+   "lang_key": "actor.name / T-BILINGUAL",
+   "used": "韦斯·奥斯特曼 Wes Osterman (Evolved)｜relOne=无 relTwo=无（源为 None）"
+  },
+  {
+   "english": "None（relOne/relTwo/sigItem/agenda 共 10 处）",
+   "lang_key": "byrole None → roles.prose",
+   "used": "无（不是哨兵：哨兵只在 system.rTables/cTables 与 ALIENRPG.None）"
+  },
+  {
+   "english": "Close Combat（weaponClass ×3）",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "Melee（weaponClass ×1）",
+   "lang_key": "ALIENRPG.WepTypeMelee",
+   "used": "肉搏"
+  },
+  {
+   "english": "COMMAND（Field Commander / Seegson P-DAT 描述）",
+   "lang_key": "ALIENRPG.Skillcommand",
+   "used": "指挥"
+  },
+  {
+   "english": "OBSERVATION（Xenomorphology 描述）",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "MEDICAL AID / Medical Aid（PDT ×5、Personal Medkit）",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "push / pushing",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "stress level",
+   "lang_key": "ALIENRPG.Stress + 压力等级",
+   "used": "压力等级"
+  },
+  {
+   "english": "panic roll",
+   "lang_key": "ALIENRPG.Panic + 恐慌检定",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "broken",
+   "lang_key": "glossary Broken",
+   "used": "濒死"
+  },
+  {
+   "english": "turn（Overkill）",
+   "lang_key": "glossary Turn = 节",
+   "used": "节"
+  },
+  {
+   "english": "Colonial Marine / Pilot / Officer / Scientist / Roughneck",
+   "lang_key": "已发布 1-系统汉化插件/compendium/cn 的物品名",
+   "used": "殖民海军陆战队 Colonial Marine / 驾驶员 Pilot / 飞行官 Officer / 科学家 Scientist / 杂工 Roughneck（逐字节沿用已发布值）"
+  },
+  {
+   "english": "Combat Knife / Cutting Torch / Personal Medkit / Motion Tracker / Comm Unit / Service Pistol / Seegson / Xenomorphology / Keycard / Weyland-Yutani / Hadley's Hope / Facehugger / Xenomorph / Frontier / Armor Piercing",
+   "lang_key": "glossary_alien.json",
+   "used": "战斗刀 / 切割炬 / 个人医疗包 / 运动追踪器 / 通信单元 / 制式手枪 / 西格森 / 异形生物学 / 钥匙卡 / 韦兰德-汤谷公司 / 哈德利的希望 / 抱脸虫 / 异形 / 边境 / 破甲"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Janice Macwhirr / MacWhirr",
+   "proposed": "珍妮丝·麦克惠尔 / 麦克惠尔",
+   "why": "本模组原创人名，取词阶梯 1–7 级全部零命中。Mac→麦克、Whirr→惠尔（照 Wh→惠、-irr→尔 的既有规则，如 Wheeler→惠勒、Kerr→克尔）。⚠ 这一条同时管住 ST-I 的 3 个 agenda 物品名 MACWHIRR - ACT 1/2/3 与 ST-J07 的正文。"
+  },
+  {
+   "en": "Hannah Singleton / Singleton",
+   "proposed": "汉娜·辛格尔顿 / 辛格尔顿",
+   "why": "同上，零证据。辛格尔顿 是 Singleton 的既定通行译法。管住 SINGLETON - ACT 1/2/3 与 ST-J07。"
+  },
+  {
+   "en": "Morgan Hirsch / Hirsch",
+   "proposed": "摩根·赫希 / 赫希",
+   "why": "同上，零证据。管住 HIRSCH - ACT 1/2/3。"
+  },
+  {
+   "en": "Sonny Sigg / Sigg",
+   "proposed": "桑尼·西格 / 西格",
+   "why": "同上，零证据。⚠ 与词表里 Seegson=西格森 有前两字重合；判为可接受（一个是人、一个是企业品牌，且 西格森 只以完整品牌名出现），但若主控要拉开距离，备选 希格。管住 SIGG - ACT 1/2/3。"
+  },
+  {
+   "en": "Holroyd",
+   "proposed": "霍尔罗伊德",
+   "why": "同上，零证据。管住 HOLROYD - ACT 1/2/3 与 ST-J07。"
+  },
+  {
+   "en": "Theodora Komiskey / Komiskey",
+   "proposed": "西奥多拉·科米斯基 / 科米斯基",
+   "why": "同上，零证据。Komiskey 照 Comiskey→科米斯基。⚠ 本名在 ST-J07/08/09/16/21/22/24 共出现 41 次，是七个期刊单元的同步点。"
+  },
+  {
+   "en": "Wes Osterman / Osterman",
+   "proposed": "韦斯·奥斯特曼 / 奥斯特曼",
+   "why": "同上，零证据。在 ST-J07/08/21 出现 9 次。"
+  },
+  {
+   "en": "Angela Lin / Lin",
+   "proposed": "安吉拉·林 / 林",
+   "why": "同上，零证据。Lin 按华裔姓氏取 林。"
+  },
+  {
+   "en": "Miranda Reynolds",
+   "proposed": "米兰达·雷诺兹",
+   "why": "剧本 NPC，零证据；与词表里 Meredith Vickers=梅雷迪思·维克尔斯 同构处理。"
+  },
+  {
+   "en": "Quick Action / Full Action",
+   "proposed": "快速动作 / 完整动作",
+   "why": "进化版的两类动作（corerules 实测 quick 58 次 / full 43 次），词表只有经典版的 Fast/Slow Action=快速动作/慢速动作，quick/full 一条没有。快速动作 与 Fast Action 合流是有意的（同一概念），完整动作 为新造。这是 corerules 全书的高频词，**建议主控优先裁定**。"
+  },
+  {
+   "en": "Power Supply",
+   "proposed": "电力供应",
+   "why": "装备属性（corerules 10 次），照 Air Supply=空气供应 构词；Power=电力 已在表内。'make a Power Supply roll' 本单元译作「电力供应检定」。"
+  },
+  {
+   "en": "Overkill",
+   "proposed": "过度杀戮",
+   "why": "starterset 天赋名，词表缺。⚠ 与 ST-I 的同名物品是同一条，必须同步。"
+  },
+  {
+   "en": "Reckless",
+   "proposed": "鲁莽",
+   "why": "同上，与 ST-I 同步。"
+  },
+  {
+   "en": "Resilient",
+   "proposed": "坚韧",
+   "why": "同上，与 ST-I 同步。⚠ 注意与 T-FROZEN 的 TOUGH/HARDENED 不是一回事。"
+  },
+  {
+   "en": "Field Commander",
+   "proposed": "战地指挥官",
+   "why": "同上，与 ST-I 同步。"
+  },
+  {
+   "en": "Seismic Survey Charge",
+   "proposed": "地震勘探炸药",
+   "why": "同上，与 ST-I 同步。地震勘探 是中文地质学定译。"
+  },
+  {
+   "en": "Personal Data Transmitter (PDT)",
+   "proposed": "个人数据发射器（正文内简称 PDT）",
+   "why": "装备名，词表缺。正文沿用英文原文自己的 'PDT's' 简称写法。"
+  },
+  {
+   "en": "Spectrograph Mapping Device",
+   "proposed": "光谱测绘仪",
+   "why": "装备名（corerules 12 次），词表缺；普通名词，可由现代汉语惯例定。"
+  },
+  {
+   "en": "Auto-Doc",
+   "proposed": "自动医生",
+   "why": "装备名（corerules 6 次），词表缺。⚠ 不能用 医疗舱——那是 MedPod 的既有译名。"
+  },
+  {
+   "en": "Weapon class 值族：Pistol / Heavy / Rifle / Vehicle Weapon / Heavy Weapon",
+   "proposed": "手枪 / 重型 / 步枪 / 载具武器 / 重型武器",
+   "why": "system.attributes.class.value 是自由文本（全库实测只有 8 个取值），代码只比 'RPG' 一个字面量，故可译。本单元只用到 手枪 与 重型；其余四个列出来是给 ST-I 与 corerules 对齐用的。"
+  },
+  {
+   "en": "Rexim / Pharmax",
+   "proposed": "（保持拉丁）备选 雷克西姆 / 法玛克斯",
+   "why": "零证据品牌名。按 pending._meta 的「专有名词不得由惯例定」，本单元一律留拉丁，不新造。⚠ Rexim 那句同时在 ST-I 的 Cutting Torch 描述里。"
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "形状：输出与 payload 的键树逐键相同",
+   "result": "PASS（missing=[] extra=[]，含 5 处 [object Object] 与 4 个 agenda/None 字段）"
+  },
+  {
+   "check": "标记：每个叶子的标签序列与英文逐字节相等（<[^>]+> 全序列比对）",
+   "result": "PASS（div×5、p×14、strong×22、br×15、span×1，class 属性 EN/CN 各 6 处完全一致）"
+  },
+  {
+   "check": "残留：没有任何叶子与英文逐字节相同",
+   "result": "PASS（唯一例外是 5 处刻意保留的 [object Object]，已白名单）"
+  },
+  {
+   "check": "覆盖：每个应译叶子都含汉字",
+   "result": "PASS"
+  },
+  {
+   "check": "T-BILINGUAL：每个 .name 都是「汉字 + 一个 ASCII 空格 + 逐字节英文原名」",
+   "result": "PASS（8 个 actor + 30 个内嵌物品，共 38 个 name，英文全部是中文的后缀子串——即 scan_missing_bilingual_tail.py 的判据）"
+  },
+  {
+   "check": "关系网：每个 relOne/relTwo 恰好唯一命中一个 actor 名",
+   "result": "PASS（10 条人物指向全部唯一解析；4 条 None→无 按哨兵语义单独判）"
+  },
+  {
+   "check": "LOCK：与 lang/cn.json 撞面的机制词逐字节相等",
+   "result": "PASS（近战/指挥/侦察/医疗/追骰/压力/恐慌/肉搏 八项当场读 cn.json 核对）"
+  },
+  {
+   "check": "硬冻结登记表：本单元是否碰到 T-FROZEN 物品名或 name_substring_tests",
+   "result": "PASS（PACK MULE/TAKE CONTROL/NERVES OF STEEL/TOUGH/HARDENED/STOIC 一个都不在本单元；' RPG ' 子串测试零命中）"
+  },
+  {
+   "check": "NBSP / 特殊字符审计：英文里的 U+00A0 是否落在承重位置",
+   "result": "查出 1 处缺陷并已修：Holroyd 的 Resilient 里 <span class=\"basesymbol\"> 内部是「空格+U+00A0」，我原先写成两个 ASCII 空格，已逐字节复原。其余 U+00A0 全部落在 notes 表头的 PDF 复制残渣（Full Name:␠␠ 一类），中文侧省略是正确本地化，不是漂移。"
+  },
+  {
+   "check": "长度比：可见字符 CN/EN，对照 RATIO-BAND.json（band 0.32–0.44，TRUNCATED<0.25，INFLATED>0.60）",
+   "result": "整体 0.40，在带内。逐叶子只有 14 个 .name 落在 1.26–1.52 —— 全部是 T-BILINGUAL 双语名的必然结果，没有一个散文叶子出带。"
+  },
+  {
+   "check": "跨单元：与 ST-I 重叠的物品名/weaponClass 是否已对齐",
+   "result": "10 件重叠已按词表与已发布值给出（见 open_issues 第 1 条），但 ST-I 本轮尚未落盘，无法逐字节比对——列为待合并项，不是 PASS。"
+  }
+ ],
+ "open_issues": [
+  "⚠ 与 ST-I 的 10 件同名物品必须逐字节一致，ST-I 本轮尚未落盘，控制方需在合并时比对：Combat Knife=战斗刀 Combat Knife(近战) · Cutting Torch=切割炬 Cutting Torch(近战) · Field Commander=战地指挥官 Field Commander · M4A3 Service Pistol=M4A3制式手枪 M4A3 Service Pistol(手枪) · Overkill=过度杀戮 Overkill · Reckless=鲁莽 Reckless · Resilient=坚韧 Resilient · Scalpel=手术刀 Scalpel(肉搏) · Seismic Survey Charge=地震勘探炸药 Seismic Survey Charge(重型) · Xenomorphology=异形生物学 Xenomorphology。注意描述文本 EN 两侧本来就不同（内嵌版更长），只有 name 与 weaponClass 需要相等。",
+  "⚠⚠ 人名裁定外溢到三个地方，不是本单元能收口的：① ST-I 的 15 个 agenda 物品名带姓氏（MACWHIRR/HIRSCH/SINGLETON/SIGG/HOLROYD - ACT 1/2/3）；② 七个期刊单元 ST-J07/08/09/16/21/22/24 正文共 41 次 Komiskey、9 次 Osterman、2 次 Holroyd、1 次 MacWhirr/Osterman/Singleton；③ 本单元的 relOne/relTwo。这三处今天还没有任何一处落盘时能看见我的选择。建议控制方把 glossary_gaps 里那 8 个人名先钉进词表，再放这几个单元。",
+  "⚠ byrole 与已发布包对不上：glossary_alien.byrole.json 把 career 类（Pilot/Officer/Scientist/Roughneck/Colonial Marine）的 document.name 判为 T-PLAIN 裸中文（驾驶员），而已公开发布的 1-系统汉化插件/compendium/cn 里是双语（驾驶员 Pilot）。我按**已发布值**走（同一批文档，玩家已经在看），但这两处必须有一处改，且要同一个 commit。scan_missing_bilingual_tail.py 的判据站在已发布值这一边。",
+  "⚠ 型号类物品名的双语尾巴显得重复：西格森 P-DAT Seegson P-DAT / M314运动追踪器 M314 Motion Tracker / M4A3制式手枪 M4A3 Service Pistol。我按 §3.4 机械执行了 T-BILINGUAL（好处是「英文是中文子串」这条判据可机检）。scan_missing_bilingual_tail.py 对「中文里已有拉丁串」的条目是 skip 而非 PASS，也就是明确把它交给人判——若主控觉得难看，可统一裁定「中文半部已含完整拉丁型号时省略尾巴」，届时这三条一起改。",
+  "上游数据自相矛盾，我原样保留、没有替上游修：① Holroyd 的 appearance 写 Personality: Hard-working，notes 里写 PERSONALITY: Loyal（我分别译作 勤恳 / 忠诚）；② Holroyd 的正文提到 Sigg 与 MacWhirr，但 relOne/relTwo 存的是 Hirsch/Sigg；③ Sonny Sigg 的 notes 以半句 'and you..' 结尾（我译作「而你……」保留未完成感）；④ 同一个 Comm Unit 在不同角色身上英文不同（一处是 'com- munication' 的 PDF 断词残渣），两处给了同一句中文。",
+  "上游英文的大小写本来就不一致——actor 名是 Macwhirr，relOne/relTwo 写 MacWhirr，ST-I 的 agenda 物品名写 MACWHIRR。这证明这三处**不是**逐字节机器键，耦合只在人眼可读性上。我据此把 relOne/relTwo 定为裸中文姓氏（与 actor 名的中文半部逐字相同），而不是双语——角色卡上 朋友/敌人 两格是窄 input，短形更合适。",
+  "关于 None：本单元把 relOne/relTwo/sigItem/agenda 里的 10 处 'None' 译作 无。依据是 byrole 的 None 条目原话「THE SENTINEL IS NOT THE WORD」，冻结面只有 RollTable 下拉选项与 ALIENRPG.None；我另行实测过这四个字段在 character-general.hbs / crtui-character-general.hbs / *-enhanced-general.hbs 上都是裸 <input type='text'>，全系统源码里对它们零 === 比对。若主控另有判断，这 10 处是一次性可回滚的。",
+  "RATIO-BAND.json 自己写明「Phase 4 落地后必须重量一次」。本单元的实测数供追加：可见字 EN=10379 / CN=4119，比值 0.40；但 actors 单元含大量双语 name，与期刊单元不同币种，建议单独立一档而不是并进期刊那组。"
+ ]
+}

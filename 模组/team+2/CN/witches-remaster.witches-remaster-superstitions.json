@@ -1,0 +1,52 @@
+{
+    "label": "迷信 Superstitions",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Familiar: Beckoned by Beauty": {
+            "name": "魔宠：受美所召 Familiar: Beckoned by Beauty",
+            "description": "<p>一项辅助魔宠「能力」，用以自动施加 @UUID[Compendium.witches-remaster.witches-remaster-superstitions.Item.9eE6mkw8YuF8ijSV]{受美所召} 的减值。</p>"
+        },
+        "Beckoned by Beauty": {
+            "name": "受美所召 Beckoned by Beauty",
+            "description": "<p>你确信自己曾在古老民谣与舞蹈中听过类似你魔宠的存在；那些诗歌、寓言与曲调旨在传授有关人生欢愉与恐怖的奇异教训。难道你的魔宠是你庇护主仿照这般生物所造……抑或它来自这些描绘与民间传说乃为史实的位面？</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠获得 @UUID[Compendium.pf2e.familiar-abilities.Item.92lgSEPFIDLvKOCF]{伴奏者} 魔宠能力。你获得 @UUID[Compendium.pf2e.feats-srd.Item.7LB00jkh6JaJr3vS]{迷人表演} 技能专长，无视其先决条件。你可以使用庇护主授予的技能进行表演，使用你在该技能上的熟练度判定你能影响的观察者，并满足那些要求表演达到特定熟练度的技能专长所需的先决条件。</p>\n<p>当你处于战斗中时，在你或你的魔宠尚未在该战斗中使用过表演之前，你与你的魔宠对抗心灵效果承受 -1 状态减值；如果该心灵效果具有情绪特征，则承受 -2 状态减值。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.uvoUTlKWB0XJ8r7H]{曲调挑动者} 与魔宠虚相之间选择。</p>\n<h3>高级迷信</h3>\n<p>你和你的魔宠现在已是表演搭档。你不会在 12级获得额外的魔宠能力，而是让你的魔宠在你庇护主所授技能上获得 @UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]{技能训练} 魔宠能力。你的魔宠可以使用该技能进行表演，并在它进行表演时获得迷人表演的效果，如同它在表演上为专家。</p>\n<hr />\n<p><strong>Foundry 提示</strong> 你可以添加 @UUID[Compendium.witches-remaster.witches-remaster-superstitions.Item.3IetqDBC4vTTyo0L]{魔宠：受美所召} 魔宠「能力」，让魔宠在你受到状态减值时自动获得相同减值。</p>"
+        },
+        "The Foretold Harbinger": {
+            "name": "预言中的先兆 The Foretold Harbinger",
+            "description": "<p>你已意识到你的魔宠对你庇护主的计划至关重要——若失之，必有可怕之事发生。你或许注意到它与导致世界终极拯救或末日的预言实体之间的相似之处，或许你的庇护主借由你的魔宠给了你晦涩的指示。无论如何，你都不希望知道失去魔宠后会发生什么。</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠获得 @UUID[Compendium.pf2e.familiar-abilities.Item.deC1yIM2S5szGdzT]{命脉相连} 大师能力。你在医疗上变为受训；3级时变为专家，7级变为大师，15级变为传奇。</p>\n<p>当你处于战斗中且你的魔宠被减至 0 生命值或被杀时，你变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}，且在惊惧期间你不能将除魔宠以外的生物作为目标。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.Z2H0gIC7p4P6iSnV]{传说魔宠} 与魔宠虚相之间选择。</p>\n<h3>高级迷信</h3>\n<p>你已对守护魔宠充满信心，并知晓自己将完成目标。你不会在 12级获得额外的魔宠能力；当你的魔宠被减至 0 生命值或死亡时，你只会变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级} 而非惊惧2级，并且你可以以自由动作而非反应使用命脉相连大师能力。</p>\n<hr />\n<p><strong>Foundry 提示</strong> 你可以将 @UUID[Compendium.witches-remaster.witches-remaster-superstitions.Item.QdCElETzlH5H6TCd]{魔宠：预言中的先兆} 魔宠「能力」施加给魔宠，使其带有「死亡注记」——它会被标记上骷髅图标，让你知道这是在魔宠死亡时触发。</p>"
+        },
+        "Protect Us O Spirit": {
+            "name": "护佑吾辈，灵啊 Protect Us O Spirit",
+            "description": "<p>你的魔宠似乎将守护你视为最高使命。当你受伤时它舔舐你的伤口，对你危险的选择发出警告。在你心中，你想到守护天使、来访的祖灵或自然之灵的故事，并好奇你庇护主究竟派来的是何人来引导你。</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠获得 @UUID[Compendium.pf2e.familiar-abilities.Item.Q42nrq9LwDdbeZM5]{治愈魔宠} 大师能力。你获得 @UUID[Compendium.pf2e.feats-srd.Item.AmP0qu7c5dlBSath]{健壮} 一般专长。</p>\n<p>当你处于战斗中，如果你被重击或豁免大失败，你的魔宠变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}，且在不再惊惧之前不能使用以你以外生物为目标的动作。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在庇护主之傀与 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.SBQLTWQnfKP5Rohm]{护佑现身} 之间选择。</p>\n<h3>高级迷信</h3>\n<p>你的魔宠明白冒险生涯之凶险，而最佳应对方式是冷静思考。你不会在 12级获得额外的魔宠能力；你的魔宠每小时一次而非每日一次使用治愈魔宠；并且只有当你被重击或豁免大失败时它才变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}。</p>"
+        },
+        "Familiar: The Foretold Harbinger": {
+            "name": "魔宠：预言中的先兆 Familiar: The Foretold Harbinger",
+            "description": "<p>魔宠的主人变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}，且在惊惧期间不能将除魔宠以外的生物作为目标。</p>"
+        },
+        "Heed the Call": {
+            "name": "回应召唤 Heed the Call",
+            "description": "<p>你的魔宠向你低语秘密，告知你之伟大，引导你走上一条你尚不理解的道路。你知道神话中，正义女神曾被一只白袜黑猫引导，而世界上最古老魔法学派的创始人也曾与鸟兽对话以获得指引。你的处境真有那么不同吗……？</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠获得言语魔宠能力。你在社交上变为受训；3级时变为专家，7级变为大师，15级变为传奇。</p>\n<p>你与你的魔宠获得与你庇护主相称的某项准则或神祇的典范与禁忌。如果你或你的魔宠违反这些典范或禁忌，则在你或它进行 @UUID[Compendium.pf2e.spells-srd.Item.7Fd4lxozd11MQ55N]{赎罪术} 或加以补偿之前，你不能向魔宠下达命令。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.pliuO4sFCloEfdda]{虔诚荣光} 与庇护主之傀之间选择。</p>\n<h3>高级迷信</h3>\n<p>你已对你的使命充满信心，且你的魔宠已将完成它的信任授予了你。你不会在 12级获得额外的魔宠能力；当你遭遇本性或所行违反你典范或禁忌的生物时，只要你的魔宠在你的方格内，你就可以使用社交代替威吓对这些生物进行挫败士气或胁迫。</p>"
+        },
+        "It Is Ever-Learning": {
+            "name": "永学不辍 It Is Ever-Learning",
+            "description": "<p>你的魔宠似乎对古老与被遗忘的知识情有独钟。你或许曾在巫术时辰瞥见它阅读你的笔记，或许它似乎知道远超寻常动物所能掌握的内容。你或许曾试图以更深的研习来满足它……或者你已将它拖回家中的那些不可焚毁之书钉合封死，试图阻止它变得过于强大。</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠在你庇护主所授技能上获得 @UUID[Compendium.pf2e.familiar-abilities.Item.jevzf9JbJJibpqaI]{技能训练} 魔宠能力。你获得 @UUID[Compendium.pf2e.feats-srd.Item.IlOQuCQIhjJpig3S]{快速辨识} 技能专长。3级时，你在庇护主所授技能上变为专家，7级变为大师，15级变为传奇。</p>\n<p>当你首次进入战斗时，在你或你的魔宠尚未在该战斗中使用过回忆知识之前，你的魔宠在该回合获得动作时少 1 个动作。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.7ikAnqUXnnnBjl5n]{魔宠秘传} 与魔宠虚相之间选择。</p>\n<h3>高级迷信</h3>\n<p>你与你的魔宠已彼此适应，知识相互交融。你不会在 12级获得额外的魔宠能力；你的魔宠改为获得「次要意见」魔宠能力。你的魔宠在回忆知识检定上获得 +2状态加值，且当它在你的回忆知识上协助你时，你也获得相同的状态加值。</p>"
+        },
+        "Familiar: It Is Ever-Learning": {
+            "name": "魔宠：永学不辍 Familiar: It Is Ever-Learning",
+            "description": "<p>12级时，魔宠在回忆知识检定上获得 +2状态加值。</p>"
+        },
+        "None Shall Own It": {
+            "name": "无人能据其有 None Shall Own It",
+            "description": "<p>你的魔宠——若你能称之为「你的」——是一个极为独立的存在。它表现得犹如远观即足的善变之物，或如一只朝你嘶吼，靠太近便可能抓伤你的动物。也许你曾试图以贡品换取它的协助，正如妖精或精魂的故事中那样——又或者，你只是希望平安度过它的存在，而不得不进行小型仪式以阻止它在夜里悄悄逼近。</p>\n<p>你不再获得 1级时可自由花费的第二项额外魔宠能力，而是改为让你的魔宠获得 @UUID[Compendium.pf2e.familiar-abilities.Item.2fiQzoEKu6YUnrU9]{独行魔宠} 魔宠能力。你在外交上变为受训；3级时变为专家，7级变为大师，15级变为传奇。</p>\n<p>当你处于战斗中时，每次你向魔宠下达命令，你必须尝试一次 @Check[type:diplomacy|traits:action:none-shall-own-it-command|dc:@self.level] 检定（对抗你等级的标准 DC）来说服魔宠采取你要求的动作。一旦成功，1分钟内你不必再进行此外交检定。即便你下达命令的外交检定失败，你的魔宠仍能依其自主能力进行其动作。</p>\n<p>1级时，当你本应在 @UUID[Compendium.pf2e.spells-srd.Item.rMOI8JFJ0nT2mrCF]{魔宠虚相} 与 @UUID[Compendium.pf2e.spells-srd.Item.aq1yonHeYpbaj3XI]{庇护主之傀} 之间选择时，你改为在 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.76bM9W6HBzwBbKtq]{自主行动者} 与魔宠虚相之间选择。</p>\n<h3>高级迷信</h3>\n<p>你已意识到你永远无法「驯服」你的魔宠，但你已知如何与它共存。你不会在 12级获得额外的魔宠能力；你的魔宠改为获得 @UUID[Compendium.pf2e.familiar-abilities.Item.asOhEdyF8CWFbR96]{施法} 魔宠能力。命令魔宠的 @Check[type:diplomacy|traits:action:none-shall-own-it-command|dc:@self.level|adjustment:-2] 检定 DC 由你等级的标准 DC 改为简单 DC。</p>"
+        }
+    }
+}

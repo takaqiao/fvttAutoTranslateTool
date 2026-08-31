@@ -1,0 +1,10 @@
+{
+  "label": "SF2e 宏\nSF2e Macros",
+  "folders": {},
+  "entries": {
+    "Treat Wounds": {
+      "name": "治疗伤势 Treat Wounds",
+      "command": "game.pf2e.actions.treatWounds({ event, actors: [token?.actor ?? actor ?? game.user.character].filter((actor) => actor) })"
+    }
+  }
+}

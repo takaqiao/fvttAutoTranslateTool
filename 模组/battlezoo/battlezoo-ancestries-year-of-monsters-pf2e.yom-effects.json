@@ -1,0 +1,259 @@
+{
+  "label": "效果\nEffects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Nymph Queen": "宁芙女王\nNymph Queen",
+    "Yai Adept": "雅伊宗师\nYai Adept",
+    "Demonic Marauder": "恶魔掠夺者\nDemonic Marauder",
+    "Nymph": "宁芙\nNymph",
+    "Doppelganger": "变形怪\nDoppelganger",
+    "Minotaur": "牛头人\nMinotaur",
+    "Slime": "黏液怪\nSlime",
+    "Dungeon": "地城\nDungeon",
+    "Demon": "恶魔\nDemon",
+    "Sidhe": "西狄尔\nSidhe",
+    "Mimic": "拟形怪\nMimic",
+    "Stheno": "斯忒诺\nStheno",
+    "Gremlin": "小魔怪\nGremlin",
+    "Oni": "恶鬼\nOni",
+    "Intelligent Weapon": "智能武器\nIntelligent Weapon"
+  },
+  "entries": {
+    "Effect: Flying Weapon": {
+      "name": "效果：飞行武器 Effect: Flying Weapon",
+      "description": "<p>你获得等同于你速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your Speed.</p>"
+    },
+    "Effect: Dungeon Armor": {
+      "name": "效果：地城护甲 Effect: Dungeon Armor",
+      "description": "<p>你获得对物理伤害的抗力10，但精金除外。然而，每当该抗力生效时，抗力值降低1。</p>\n<p>You gain resistance 10 against physical damage, except adamantine. However, each time the resistance applies the resistance value decreases by 1.</p>"
+    },
+    "Effect: Slime Hug": {
+      "name": "效果：黏液怪拥抱 Effect: Slime Hug",
+      "description": "<p>该生物的各项速度承受–5英尺环境减值。</p>\n<p>The creature takes a –5-foot circumstance penalty to its Speeds.</p>"
+    },
+    "Aura: Unluck Aura": {
+      "name": "灵光：厄运灵光 Aura: Unluck Aura",
+      "description": "<p>你获得一道厄运灵光。</p>\n<p>You gain an unluck aura.</p>"
+    },
+    "Effect: Yai's Growth": {
+      "name": "效果：亚伊的成长 Effect: Yai's Growth",
+      "description": "<p>你变为巨型，并获得近战伤害+4状态加值。你的触及增加10英尺，并变为@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}。 </p>\n<p>You become Huge and gain a +4 status bonus to melee damage. Your reach increases by 10 feet and you become @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}. </p>"
+    },
+    "Effect: Asteria Queen's Beauty (Failure)": {
+      "name": "效果：阿斯特里亚女王的美貌（失败） Effect: Asteria Queen's Beauty (Failure)"
+    },
+    "Effect: Pugwampi Jinx": {
+      "name": "效果：普格万皮厄运诅咒 Effect: Pugwampi Jinx",
+      "description": "<p>你必须掷骰两次，并在攻击掷骰和技能检定中使用较差的结果。</p>\n<p>You must roll twice and use the worse result on attack rolls and skills checks.</p>"
+    },
+    "Effect: Oni's Regeneration": {
+      "name": "效果：恶鬼的再生 Effect: Oni's Regeneration",
+      "description": "<p>你获得再生 15（如果你是火焰 yai，则会被酸或寒冷使其失效。否则会被酸或火焰使其失效）。</p>\n<p>You gain regeneration 15 (Deactivated by acid or cold if you're a fire yai.  Deactivated by acid or fire otherwise).</p>"
+    },
+    "Effect: Soaring Disguise": {
+      "name": "效果：翱翔伪装 Effect: Soaring Disguise",
+      "description": "<p>你获得等同于你陆地速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Effect: Deepsight": {
+      "name": "效果：深视 Effect: Deepsight",
+      "description": "<p>你获得强效黑暗视觉。</p>\n<p>You gain greater darkvision.</p>"
+    },
+    "Effect: Nature's Flight": {
+      "name": "效果：自然之翔 Effect: Nature's Flight",
+      "description": "<p>你获得等同于你陆地速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Effect: Return to Sin": {
+      "name": "效果：重返罪孽 Effect: Return to Sin"
+    },
+    "Effect: Collapse Into Sludge": {
+      "name": "效果：坍塌成污泥 Effect: Collapse Into Sludge",
+      "description": "<p>你将自身的凝聚形态部分塌陷成酸性污泥，更接近深渊的欧莫克斯。持续1分钟，你从欧莫克斯传承获得的酸蚀伤害抗力从你等级的一半提高到你的等级，并且你获得对精准伤害以及来自大成功或大失败的额外伤害的抗力，数值等于你等级的一半。若受到大成功或大失败的命中，若该抗力高于额外伤害，则将额外伤害降低至0，但不会降低该攻击的正常伤害。</p>\n<p>You collapse your coherent form partway into acidic sludge more closely resembling an Abyssal omox. For 1 minute, your resistance to acid damage from the omox heritage increases from half your level to your level, and you gain resistance to precision damage and the extra damage from critical hits equal to half your level. On a critical hit, if the resistance is greater than the extra damage, it reduces the extra damage to 0 but doesn't reduce the attack's normal damage.</p>"
+    },
+    "Effect: Epimelid Queen's Beauty (Critical Failure)": {
+      "name": "效果：牧羊女王的美貌（大成功或大失败：失败） Effect: Epimelid Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Cower": {
+      "name": "效果：畏缩 Effect: Cower",
+      "description": "<p>你获得AC的+1环境加值。</p>\n<p>You gain a +1 circumstance bonus to AC.</p>"
+    },
+    "Effect: Maenad Queen's Beauty (Critical Failure)": {
+      "name": "效果：狂女王后的美貌（大成功或大失败：失败） Effect: Maenad Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Demon Wings": {
+      "name": "效果：恶魔之翼 Effect: Demon Wings",
+      "description": "<p>你获得等同于你陆地速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Effect: Profane Gift (Bonus)": {
+      "name": "效果：亵渎赋礼（加值） Effect: Profane Gift (Bonus)",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你可以通过触摸，给予一个相邻且自愿的生物一份亵渎赋礼，不过取决于你的宿主与倾向，你的赋礼可能没有典型魅魔的那么亵渎。该生物在至多1小时内，其攻击掷骰、技能检定与豁免获得+1状态加值，不过你可以以令目标付出巨大代价为代价提前终止该效果（见下文）。只要赋礼仍在持续，你便可在任何距离与目标进行心灵感应沟通，通过该生物的感官视物，并通过心灵链接向该生物提出请求。此外，你在对目标进行交涉检定以@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request}某事，或进行欺瞒检定以对目标@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie}时，你使用比你掷骰结果高一级的成功度结果。</p>\n<p>一个生物在同一时间内不能拥有超过一份来自魅魔的亵渎赋礼（包括本专长与该生物能力所提供的两种亵渎赋礼），且一个魅魔在同一时间内也不能授予超过一份亵渎赋礼。若一个生物将获得第二份亵渎赋礼，则持续时间更长的赋礼取代另一份赋礼（这意味着该生物能力取代本专长）。提前移除亵渎赋礼需要一个赎罪仪式，但由于该仪式通常耗时比赋礼持续时间更久，因此通常更容易等待赋礼自行结束。</p>\n<p>你可以以自由动作（）移除赋礼，该动作具有专注（特征），使受赠者获得永久的@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞（状态） 3}状态。需要一个4环@UUID[Compendium.pf2e.spells-srd.Item.SnaLVgxZ9ryUFmUr]{Restoration}法术，才能将此呆滞（状态）降低1点。</p>\n<p><strong>Frequency</strong> Once per day</p>\n<hr />\n<p>You can give an adjacent willing creature a profane gift by touching it, though depending on your host and inclinations, your gift might be less profane than a usual succubus's. That creature gains a +1 status bonus to attack rolls, skill checks, and saving throws for up to 1 hour, though you can end the effect early at great cost to the target (see below). As long as the gift persists, you can communicate telepathically with the target at any distance, see through the creature's senses, and make Requests of the creature through the telepathic link. In addition, you use an outcome one degree of success better than you roll on Diplomacy checks to @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request} something from the target or Deception checks to @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} to the target.</p>\n<p>A creature can't have more than one profane gift from a succubus at a time (including both profane gifts from this feat and from the creature ability), and a succubus can't grant more than one profane gift at a time. If a creature would gain a second profane gift, the gift with the longer duration supersedes the other gift (which means the creature ability supersedes the feat). Removing the profane gift early requires an atone ritual, but since the ritual normally takes longer than the gift's duration, it's usually easier to wait for the gift to end instead.</p>\n<p>You can remove the gift as a free action, which has the concentrate trait, to give the recipient a permanent @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 3} condition. A 4th‑level @UUID[Compendium.pf2e.spells-srd.Item.SnaLVgxZ9ryUFmUr]{Restoration} spell is required to reduce this stupefied condition by 1.</p>"
+    },
+    "Effect: Cat Form": {
+      "name": "效果：猫形态 Effect: Cat Form",
+      "description": "<p>处于猫形态时，你无法使用武器、盾牌或任何其他类型的手持物品，并且你在可执行的带有操作（特征）的动作方面会受到限制。你唯一能执行的操作动作是施放带有姿势成分的法术，或诸如打开一扇未上锁的门之类的简单交互动作。你的猫形态无法执行需要手指或显著手部灵巧性的动作，包括任何需要进行检定才能完成的动作。GM 可能会判定其他操作动作也适用于你的猫形态。你可以在猫形态下说话。在猫形态下，你唯一可以进行的徒手攻击是颚部徒手攻击，造成 1d4 穿刺伤害，具有灵巧与娴熟特征，并属于斗殴武器组。你可以无限期保持猫形态，直到你选择切换回来。</p>\n<p>While in cat form, you can't use weapons, shields, or other held items of any sort, and you are limited in what actions you can take that have the manipulate trait. The only manipulate actions you can take are to Cast a Spell with somatic components or simple Interact actions such as opening an unlocked door. Your cat form can't perform actions that require fingers or significant manual dexterity, including any action that would require a check to accomplish. The GM might determine other manipulate actions are appropriate for your cat form. You can speak in your cat form. In your cat form, the only unarmed attacks you can make are jaws unarmed attacks that deal 1d4 piercing damage, have the agile and finesse traits, and are in the brawling weapon group. You can remain in cat form indefinitely until you choose to switch back.</p>"
+    },
+    "Effect: Serpentine Discorporation": {
+      "name": "效果：蛇形离体 Effect: Serpentine Discorporation",
+      "description": "<p>处于虫群形态时，你具有集群（特征），并获得对挥砍与穿刺伤害的抗力10，以及对区域与溅射伤害的弱点10。</p>\n<p>While in swarm form, you have the swarm trait, and you gain resistance 10 to slashing and piercing damage and weakness 10 to area and splash damage.</p>"
+    },
+    "Effect: Lampad Queen's Beauty (Critical Failure)": {
+      "name": "效果：兰帕德女王之美（大成功或大失败：失败） Effect: Lampad Queen's Beauty (Critical Failure)"
+    },
+    "Spell Effect: Shrink": {
+      "name": "法术效果：缩小 Spell Effect: Shrink",
+      "description": "<p>由<em>@UUID[Compendium.pf2e.spells-srd.Item.PjhUmyKnq6K5uDby]{Shrink}</em>授予</p>\n<p>你扭曲空间使一名生物变小。目标缩小至超小体型。其装备随之缩小，但若被移除则会恢复至原本体型。该生物的触及变为0英尺。此法术对超小生物没有效果。</p>\n<p><em>注：此Shrink法术效果的副本包含在该模组中，用以提供不同于基础法术的修改后持续时间。</em></p>\n<p>Granted by <em>@UUID[Compendium.pf2e.spells-srd.Item.PjhUmyKnq6K5uDby]{Shrink}</em></p>\n<p>You warp space to make a creature smaller. The target shrinks to become Tiny in size. Its equipment shrinks with it but returns to its original size if removed. The creature's reach changes to 0 feet. This spell has no effect on a Tiny creature.</p>\n<p><em>Note: This copy of the Shrink spell effect is included in the module to provide a modified duration from the base spell.</em></p>"
+    },
+    "Effect: Naiad Queen's Beauty (Failure)": {
+      "name": "效果：宁芙女王之美（失败） Effect: Naiad Queen's Beauty (Failure)"
+    },
+    "Effect: Haniver Wind Rider": {
+      "name": "效果：哈尼弗风骑士 Effect: Haniver Wind Rider",
+      "description": "<p>你可以在需要时将柔韧的鳍当作翅膀使用，离地升空并在天空中翱翔一段时间。通过绷紧你的鳍，你获得等同于你陆地速度的飞行速度，持续10分钟。</p>\n<p>You can use your rubbery fins as wings to lift off and soar through the sky, for a stretch when needed. By straining your fins, you gain a fly Speed equal to your land Speed for 10 minutes.</p>"
+    },
+    "Effect: Shift Claw": {
+      "name": "效果：移位利爪 Effect: Shift Claw",
+      "description": "<p>你可以将你的爪子变形为多种构型，每一种都有特定的优点与缺点。直到你下一次使用 Shift Claw，或你切换形态以至于不再拥有可见的爪子为止，从以下选项中选择一项：</p>\n<ul>\n<li>你的爪子变得巨大，带 Patch 长刃，既能轻易穿刺也能挥砍。你的爪子造成 1d8 挥砍伤害，并获得多用穿刺特征，但它失去灵巧特征。</li>\n<li>你的爪子变得更小更薄，更容易用于后续攻击或缴械，同时依然同样危险。你的爪子获得灵活与缴械特征。</li>\n<li>你的爪子变得更大并向外展开，使你能在积蓄动能的同时进行横扫攻击。你的爪子获得横扫与强力特征，但它失去灵巧特征。</li>\n<li>你的爪子变得格外锋利、穿刺且致命。它获得致命 d8 与多用穿刺特征。</li>\n</ul>\n<p>You can transform your claws into several configurations, each of which has specific strengths and weaknesses. Until the next time you use Shift Claw or you shift forms to not have a visible claw, choose one of the following:</p>\n<ul>\n<li>Your claw becomes oversized, with lengthy blades that can pierce as easily as slash. Your claw deals 1d8 slashing damage and gains the versatile piercing trait, but it loses the finesse trait.</li>\n<li>Your claw becomes smaller and thinner, easier to use in follow- up attacks or to disarm, while still being no less dangerous. Your claw gains the agile and disarm traits.</li>\n<li>Your claw becomes larger and fans out, allowing you to make sweeping attacks while building momentum. Your claw gains the sweep and forceful traits, but it loses the finesse trait.</li>\n<li>Your claw becomes especially sharp, piercing, and deadly. It gains the deadly d8 and versatile piercing traits.</li>\n</ul>"
+    },
+    "Effect: Perfect Attunement": {
+      "name": "效果：完美调谐 Effect: Perfect Attunement",
+      "description": "<p>你使用自己进行攻击掷骰时获得+3状态加值，并且使用自己进行伤害掷骰时获得+3状态加值。</p>\n<p>You gain a +3 status bonus to attack rolls with yourself and damage rolls with yourself.</p>"
+    },
+    "Effect: Dryad Queen's Beauty (Critical Failure)": {
+      "name": "效果：树精女王的美貌（大成功或大失败：失败） Effect: Dryad Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Profane Gift (Penalty)": {
+      "name": "效果：亵渎赋礼（减值） Effect: Profane Gift (Penalty)",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你可以通过触碰，给予一个相邻且自愿的生物一份亵渎赋礼，不过取决于你的宿主与倾向，你的赋礼可能不如寻常魅魔的那般亵渎。该生物在至多 1 小时内获得对攻击掷骰、技能检定与豁免的 +1 状态加值，不过你可以付出令目标代价高昂的方式来提前结束该效果（见下文）。只要赋礼仍在持续，你就能在任何距离与目标进行心灵传讯、通过该生物的感官视物，并通过心灵链接向该生物提出请求。此外，你在进行交涉检定以通过 @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request} 向目标索求某物时，或在进行欺瞒检定以对目标施行 @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} 时，你使用比你掷骰结果高一级成功度的结果。</p>\n<p>一个生物同一时间不能拥有多于一份来自魅魔的亵渎赋礼（包括来自本专长与来自生物能力的两种亵渎赋礼），且一名魅魔同一时间不能授予多于一份亵渎赋礼。若一个生物将要获得第二份亵渎赋礼，则持续时间更长的那份赋礼将取代另一份赋礼（这意味着生物能力会取代本专长）。提前移除亵渎赋礼需要一个赎罪仪式，但由于该仪式通常比赋礼的持续时间更长，因此通常更容易等待赋礼自行结束。</p>\n<p>你可以以一个带有专注（特征）的自由动作（）移除赋礼，使受赠者获得永久性的 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞（状态） 3} 状态。需要一个 4 环的 @UUID[Compendium.pf2e.spells-srd.Item.SnaLVgxZ9ryUFmUr]{Restoration} 法术，才能使该呆滞（状态）状态降低 1。</p>\n<p><strong>Frequency</strong> Once per day</p>\n<hr />\n<p>You can give an adjacent willing creature a profane gift by touching it, though depending on your host and inclinations, your gift might be less profane than a usual succubus's. That creature gains a +1 status bonus to attack rolls, skill checks, and saving throws for up to 1 hour, though you can end the effect early at great cost to the target (see below). As long as the gift persists, you can communicate telepathically with the target at any distance, see through the creature's senses, and make Requests of the creature through the telepathic link. In addition, you use an outcome one degree of success better than you roll on Diplomacy checks to @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request} something from the target or Deception checks to @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} to the target.</p>\n<p>A creature can't have more than one profane gift from a succubus at a time (including both profane gifts from this feat and from the creature ability), and a succubus can't grant more than one profane gift at a time. If a creature would gain a second profane gift, the gift with the longer duration supersedes the other gift (which means the creature ability supersedes the feat). Removing the profane gift early requires an atone ritual, but since the ritual normally takes longer than the gift's duration, it's usually easier to wait for the gift to end instead.</p>\n<p>You can remove the gift as a free action, which has the concentrate trait, to give the recipient a permanent @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 3} condition. A 4th‑level @UUID[Compendium.pf2e.spells-srd.Item.SnaLVgxZ9ryUFmUr]{Restoration} spell is required to reduce this stupefied condition by 1.</p>"
+    },
+    "Effect: In Vino Veritas (Failure)": {
+      "name": "效果：酒后吐真言（失败） Effect: In Vino Veritas (Failure)",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p> 你唤起一场酒香四溢的狂欢，迫使参与者更加坦诚。你在30尺内布置这场派对，其范围为一个@Template[type:burst|distance:20]，并持续至多10分钟。你使用In Vino Veritas时，区域内的每个生物，以及之后进入该区域的任何生物，都必须进行一次@Check[will|against:class-spell]意志豁免，对抗你的职业DC与法术DC中较高者。若其离开并再次进入该区域，则沿用这次初始豁免的结果；但若其在区域内首次自愿饮酒，则必须再进行一次意志豁免。受影响的生物知晓自己说谎的困难，并可避免回答自己通常会用谎言作答的问题；或在仍处于真实的界限内时，选择闪烁其词或具有误导性，只要它们仍在该区域的边界之内。</p>\n<hr />\n<p><strong>大成功或大失败：成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物在欺瞒检定上承受–2状态减值。</p>\n<p><strong>失败</strong> 该生物无法故意说出谎言，并在欺瞒检定上承受–2状态减值。</p>\n<p><strong>大成功或大失败：失败</strong> 同失败，但该生物在欺瞒检定上的状态减值为–4。</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p> You call forth a wine-soaked revelry that compels those who partake to be more truthful. You set up the party in a @Template[type:burst|distance:20] within 30 feet, and it lasts for up to 10 minutes. Every creature in the area when you use In Vino Veritas, and any creature that enters the area later, must attempt a @Check[will|against:class-spell] save against the higher of your class DC and spell DC. It uses the results of this initial save if it leaves and reenters the area, but if the first time it imbibes in alcohol willingly while in the area, it must attempt a second Will save. Affected creatures are aware of their difficulty lying and can avoid answering questions to which they would normally respond with a lie, or they can be evasive or misleading, as long as they remain within the boundaries of the truth.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes a –2 status penalty to Deception checks.</p>\n<p><strong>Failure</strong> The creature can't intentionally speak a lie and takes a –2 status penalty to Deception checks.</p>\n<p><strong>Critical Failure</strong> As failure, but the creature's status penalty on Deception checks is –4.</p>"
+    },
+    "Effect: Naiad Queen's Beauty (Critical Failure)": {
+      "name": "效果：水泽仙女女王之美（大失败） Effect: Naiad Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Wind's Howl (Failure)": {
+      "name": "效果：狂风的咆哮（失败） Effect: Wind's Howl (Failure)"
+    },
+    "Effect: Void Form": {
+      "name": "效果：虚空形态 Effect: Void Form"
+    },
+    "Effect: Leanan Sidhe Muse": {
+      "name": "效果：莱南·西德缪斯 Effect: Leanan Sidhe Muse",
+      "description": "<p>你拥有一位leannan sidhe缪斯。你在所有工艺和表演检定上都获得一次成功的援助的益处，但你也在对抗由你的缪斯创造的效果的豁免上承受–2环境减值。</p>\n<p>You have a leanan sidhe muse. You gain the benefit of a successful Aid on all your Craft and Performance checks, but also take a –2 circumstance penalty to saving throws against effects created by your muse.</p>"
+    },
+    "Effect: In Vino Veritas (Critical Failure)": {
+      "name": "效果：酒后吐真言（大成功或大失败：失败） Effect: In Vino Veritas (Critical Failure)",
+      "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p> 你召唤出一场浸透美酒的狂欢，迫使参与其中者更加诚实。你在30英尺内设置派对，形成一个 @Template[type:burst|distance:20] ，并持续至多10分钟。你使用In Vino Veritas时处于该区域内的每个生物，以及之后进入该区域的任何生物，都必须尝试一次 @Check[will|against:class-spell] ，其难度为你的职业DC与法术DC中较高者。若其离开并重新进入该区域，则沿用这次初始豁免的结果；但若其在区域内第一次自愿饮用含酒精饮品，则必须再进行第二次意志豁免。受影响的生物知晓自己难以说谎，并且可以避免回答那些它通常会以谎言作答的问题，或在仍然保持在真相边界内的前提下闪烁其词或误导他人，只要它们仍在该区域的边界之内。</p>\n<hr />\n<p><strong>大成功或大失败：成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物在欺瞒检定上承受–2状态减值。</p>\n<p><strong>失败</strong> 该生物无法故意说谎，并在欺瞒检定上承受–2状态减值。</p>\n<p><strong>大成功或大失败：失败</strong> 同失败，但该生物在欺瞒检定上的状态减值为–4。</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p> You call forth a wine-soaked revelry that compels those who partake to be more truthful. You set up the party in a @Template[type:burst|distance:20] within 30 feet, and it lasts for up to 10 minutes. Every creature in the area when you use In Vino Veritas, and any creature that enters the area later, must attempt a @Check[will|against:class-spell] save against the higher of your class DC and spell DC. It uses the results of this initial save if it leaves and reenters the area, but if the first time it imbibes in alcohol willingly while in the area, it must attempt a second Will save. Affected creatures are aware of their difficulty lying and can avoid answering questions to which they would normally respond with a lie, or they can be evasive or misleading, as long as they remain within the boundaries of the truth.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes a –2 status penalty to Deception checks.</p>\n<p><strong>Failure</strong> The creature can't intentionally speak a lie and takes a –2 status penalty to Deception checks.</p>\n<p><strong>Critical Failure</strong> As failure, but the creature's status penalty on Deception checks is –4.</p>"
+    },
+    "Effect: Warding Strikes": {
+      "name": "效果：守护打击 Effect: Warding Strikes",
+      "description": "<p>你根据你打击的结果获得对AC的状态加值。在大成功时，你获得+3状态加值，持续1轮。</p>\n<p>You gain a status bonus to AC based on the outcome of your strike. On a critical success you gain a +3 status bonus for 1 round.</p>"
+    },
+    "Effect: Aura Queen's Beauty (Failure)": {
+      "name": "效果：灵光 女王的美貌（失败） Effect: Aura Queen's Beauty (Failure)"
+    },
+    "Effect: Insubstantial Form": {
+      "name": "效果：非实体形态 Effect: Insubstantial Form",
+      "description": "<p>你失去任何对AC的物品加值。你获得对物理伤害的抗力8，并免疫精准伤害。如果你不是水岈夷，你获得10尺的飞行速度。如果你是水岈夷，你的游泳速度获得+30尺的状态加值。</p>\n<p>You lose any item bonus to AC. You gain resistance 8 to physical damage and are immune to precision damage. If you're not a water yai, you gain a fly Speed of 10 feet. If you're a water yai, you gain a +30-foot status bonus to your swim Speed.</p>"
+    },
+    "Effect: Charming Beauty": {
+      "name": "效果：迷人美貌 Effect: Charming Beauty",
+      "description": "<p>你强化了自身美貌的力量，可能魅惑所有过于近距离凝视你华彩的人。持续1分钟，你在自身周围获得一个 @Template[type:emanation|distance:20] 的迷人美貌灵光。进入该灵光的敌人（或你启动时已在灵光内的敌人）必须尝试一次 @Check[will|against:class-spell] 意志豁免，对抗你更高的职业DC或法术DC，结果如下。之后，它们在24小时内暂时免疫。</p>\n<hr />\n<p><strong>大成功或大失败 成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物对你的态度提升一级。若这使其态度至少变为冷漠，它不能对你采取敌对动作，不过一旦你对该生物或其盟友采取敌对动作，该效果立即结束。</p>\n<p><strong>失败</strong> 该生物对你的态度提升两级。它不能对你采取敌对动作，不过一旦你对该生物或其盟友采取敌对动作，该效果立即结束。</p>\n<p><strong>大成功或大失败 失败</strong> 该生物对你的态度变为乐于助人，不过一旦你对该生物或其盟友采取敌对动作，该效果立即结束。只要该生物处于乐于助人状态，它就不能对你采取敌对动作。</p>\n<p>You amplify the power of your beauty, potentially charming all those who gaze too closely upon your splendor. For 1 minute, you gain a charming beauty aura in a @Template[type:emanation|distance:20] around you. Enemies who enter the aura (or are in the aura when you activate it) must attempt a @Check[will|against:class-spell] save against the higher of your class DC or spell DC with the following results. Afterwards, they are temporarily immune for 24 hours.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature's attitude toward you improves by one step. If that improves its attitude to at least indifferent, it can't take hostile actions against you, though the effect ends as soon as you take a hostile action against the creature or its allies.</p>\n<p><strong>Failure</strong> The creature's attitude toward you improves by two steps. It can't take hostile actions against you, though the effect ends as soon as you take a hostile action against the creature or its allies.</p>\n<p><strong>Critical Failure</strong> The creature's attitude becomes helpful to you, though the effect ends as soon as you take a hostile action against the creature or its allies. While the creature is helpful, it can't take hostile actions against you.</p>"
+    },
+    "Effect: Ice's Chill": {
+      "name": "效果：寒冰的刺骨 Effect: Ice's Chill"
+    },
+    "Effect: Energy Avatar": {
+      "name": "效果：能量化身 Effect: Energy Avatar",
+      "description": "<p>你的假足与能量吐射攻击会造成所选类型的额外 1d8 伤害，而你的其他徒手攻击会造成所选类型的额外 1d4 伤害。</p>\n<p>Your pseudopod and energy spit attacks deal 1d8 additional damage of the chosen type, and your other unarmed attacks deal 1d4 additional damage of the chosen type.</p>"
+    },
+    "Effect: Wind's Howl (Critical Failure)": {
+      "name": "效果：风之嚎（大成功或大失败：失败） Effect: Wind's Howl (Critical Failure)"
+    },
+    "Effect: Electricity's Shock (Critical Failure)": {
+      "name": "效果：电击冲击（大成功或大失败：失败） Effect: Electricity's Shock (Critical Failure)"
+    },
+    "Effect: This Isn't Even...": {
+      "name": "效果：这甚至都不算…… Effect: This Isn't Even...",
+      "description": "<p>你在攻击掷骰、AC和豁免上获得+1状态加值。</p>\n<p>You gain a +1 status bonus on attack rolls, AC, and saving throws.</p>"
+    },
+    "Effect: Guiding Strike": {
+      "name": "效果：引导打击 Effect: Guiding Strike",
+      "description": "<p>在你的回合结束前，你下一次进行攻击掷骰时，将该次攻击掷骰掷两次并使用较好的结果。该次攻击无视对攻击掷骰的环境罚值，以及因目标处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}或@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{潜藏}而需要进行的任何纯骰检定。</p>\n<p>The next time you make an attack roll before the end of your turn, roll the attack twice and use the better result. The attack ignores circumstance penalties to the attack roll and any flat check required due to the target being @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} or @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}.</p>"
+    },
+    "Effect: Hesperid Queen's Beauty (Critical Failure)": {
+      "name": "效果：赫斯珀里德女王之美（大成功或大失败：失败） Effect: Hesperid Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Protective Ring Curse": {
+      "name": "效果：护身戒指诅咒 Effect: Protective Ring Curse",
+      "description": "<p>该生物的攻击掷骰和技能检定承受–1状态减值。</p>\n<p>The creature takes a –1 status penalty to attack rolls and skill checks.</p>"
+    },
+    "Effect: Cait Sidhe Jinx (Critical Failure)": {
+      "name": "效果：凯特·西德厄运（大成功或大失败：失败） Effect: Cait Sidhe Jinx (Critical Failure)",
+      "description": "<p>该生物在攻击掷骰、豁免和技能检定上承受–1状态减值</p>\n<p>The creature takes a –1 status penalty on attack rolls, saving throws, and skill checks</p>"
+    },
+    "Effect: Asteria Queen's Beauty (Critical Failure)": {
+      "name": "效果：阿斯忒里亚女王之美（大成功或大失败：失败） Effect: Asteria Queen's Beauty (Critical Failure)"
+    },
+    "Effect: Oni's Levitation": {
+      "name": "效果：恶鬼的漂浮 Effect: Oni's Levitation",
+      "description": "<p>你获得等同于你陆地速度的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Effect: Bacchanalia": {
+      "name": "效果：巴克纳利亚 Effect: Bacchanalia",
+      "description": "<p>你释放一场狂野派对，用你醉酒狂欢的力量驱使你的盟友陷入野性的狂怒。选择至多6个30尺内自愿的生物（可以包括你自己），使其进入醉狂状态，持续1分钟。你所选择的生物获得5点临时生命值，其速度获得+10尺状态加值，并具有对冷铁的弱点5。它们也长出凶狠的獠牙与利爪，这些都是徒手攻击。獠牙造成@Damage[2d8[piercing]]伤害；利爪造成@Damage[2d6[slashing]]伤害，并具有灵巧与娴熟特征。目标使用其最高的武器或徒手攻击熟练度来进行这些攻击。用这些徒手攻击之一造成大成功或大失败时，被击中的生物受到@Damage[1d4[persistent,poison]]伤害。</p>\n<p> 目标不能使用专注动作，除非这些动作也具有狂暴（特征），但@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek}除外。生物可以用单动作（具有狂暴（特征））尝试结束自身受到的酒神狂欢效果，以进行一次@Check[will|against:class-spell]豁免，对抗你职业DC或法术DC中较高者；成功时结束其自身的酒神狂欢效果。在第17等级时，临时生命值与对冷铁的弱点从5提高到10；獠牙伤害从@Damage[2d8[piercing]]提高到@Damage[3d8[piercing]]；利爪伤害从@Damage[2d6[slashing]]提高到@Damage[3d6[slashing]]。</p>\n<p>You unleash a wild party, driving your allies into a feral fury with the power of your drunken revels. Choose up to 6 willing creatures within 30 feet (which can include yourself) to enter a state of drunken fury for 1 minute. The creatures you chose gain 5 temporary Hit Points, a +10-foot status bonus to their Speeds, and weakness 5 to cold iron. They also grow vicious fangs and claws, which are unarmed attacks. The fangs deal @Damage[2d8[piercing]] damage; the claws deal @Damage[2d6[slashing]] damage and have the agile and finesse traits. The targets use their highest weapon or unarmed attack proficiency with these attacks. On a critical hit with one of these unarmed attacks, the creature struck takes @Damage[1d4[persistent,poison]] damage.</p>\n<p> The targets can't use concentrate actions unless those actions also have the rage trait, with the exception of @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek}. A creature can attempt to end the Bacchanalia's effect on itself by using a single action, which has the rage trait, to attempt a @Check[will|against:class-spell] save against the higher of your class DC or spell DC, ending the Bacchanalia's effects on itself on a success. At 17th level, the temporary Hit Points and weakness to cold iron increase from 5 to 10, the fangs increase from @Damage[2d8[piercing]] damage to @Damage[3d8[piercing]] damage, and the claws increase from @Damage[2d6[slashing]] damage to @Damage[3d6[slashing]] damage.</p>"
+    },
+    "Effect: Warding Strikes (Critical Success)": {
+      "name": "效果：守护打击（大成功或大失败） Effect: Warding Strikes (Critical Success)",
+      "description": "<p>你获得AC的+3状态加值。</p>\n<p>You gain a +3 status bonus to AC.</p>"
+    },
+    "Effect: Dungeon World Aura": {
+      "name": "效果：地城世界 灵光 Effect: Dungeon World Aura"
+    },
+    "Effect: Electricity's Shock (Failure)": {
+      "name": "效果：电击（失败） Effect: Electricity's Shock (Failure)"
+    },
+    "Effect: Dryad Queen's Beauty (Failure)": {
+      "name": "效果：树精女王的美貌（失败） Effect: Dryad Queen's Beauty (Failure)"
+    },
+    "Effect: Hunted Fear": {
+      "name": "效果：猎物恐惧 Effect: Hunted Fear",
+      "description": "<p>塔格尔特在进行生存检定以避免迷路时承受–2环境减值。</p>\n<p>The tagrte takes a –2 circumstance penalty to Survival checks to avoid getting lost.</p>"
+    },
+    "Effect: Epimelid Queen's Beauty (Failure)": {
+      "name": "效果：厄庇墨利得女王之美（失败） Effect: Epimelid Queen's Beauty (Failure)"
+    },
+    "Effect: Frenzied Slashes": {
+      "name": "效果：狂乱斩击 Effect: Frenzied Slashes",
+      "description": "<p>你狂野地挥击并拥抱混沌，进行一连串可能撕碎你敌人的攻击。对同一目标并使用同一武器或徒手攻击进行三次近战打击，每次承受–4减值。这算作三次攻击用于你的多重攻击减值，但在你完成全部三次攻击之前不会提高该减值。你获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}状态，直到你下个回合开始。如果你使用由@UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-feats.Item.RQBlbzOPd4h3Scsj]{恶魔打击}专长赋予的灵巧徒手攻击进行这三次打击，则三次攻击各自承受–2减值，而非–4减值。</p>\n<p>You lash out wildly and embrace the chaos, making a series of attacks that might maul your foe. Make three melee Strikes against the same target and using the same weapon or unarmed attack, each at a –4 penalty. This counts as three attacks for your multiple attack penalty, but you don't increase the penalty until after you make all three attacks. You gain the @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2} condition until the beginning of your next turn. If you made your three Strikes with an agile unarmed attack granted by the @UUID[Compendium.battlezoo-ancestries-year-of-monsters-pf2e.yom-feats.Item.RQBlbzOPd4h3Scsj]{Demonic Strikes} feat, you take a –2 penalty on the three attacks instead of a –4 penalty.</p>"
+    },
+    "Effect: Maenad Queen's Beauty (Failure)": {
+      "name": "效果：迈那得女王之美（失败） Effect: Maenad Queen's Beauty (Failure)"
+    },
+    "Effect: Hesperid Queen's Beauty (Failure)": {
+      "name": "效果：赫斯珀里得女王之美（失败） Effect: Hesperid Queen's Beauty (Failure)"
+    },
+    "Effect: Aura Queen's Beauty (Critical Failure)": {
+      "name": "效果：灵光 女王之美（大成功或大失败） Effect: Aura Queen's Beauty (Critical Failure)"
+    },
+    "Spell Effect: Enlarge": {
+      "name": "法术效果：变巨 Spell Effect: Enlarge",
+      "description": "<p>在魔法力量的增强下，目标的体型变为大型。其装备也随之变大，但如果被移除则恢复为自然体型。该生物陷拙 1。其触及增加 5 尺（如果起始为微型则增加 10 尺），并获得近战伤害 +2 状态加值。</p>\n<p><em>注：该“变巨术”法术效果的副本被包含在此模块中，以提供不同于基础法术的修改后持续时间。</em></p>\n<p>Bolstered by magical power, the target grows to size Large. Its equipment grows with it but returns to natural size if removed. The creature is clumsy 1. Its reach increases by 5 feet (or by 10 feet if it started out Tiny), and it gains a +2 status bonus to melee damage.</p>\n<p><em>Note: This copy of the Enlarge spell effect is included in the module to provide a modified duration from the base spell.</em></p>"
+    },
+    "Effect: Dog Form": {
+      "name": "效果：狗形态 Effect: Dog Form",
+      "description": "<p>处于狗形态时，你不能使用武器、盾牌或任何其他种类的手持物品，并且你在能进行哪些带有操作（特征）的动作方面会受到限制。你唯一能进行的操作动作是施放带有姿势成分的法术，或诸如打开一扇未上锁的门等简单的交互动作。你的狗形态不能进行需要手指或显著手部灵巧的动作，包括任何需要进行检定才能完成的动作。GM 可能会判定其他操作动作也适用于你的狗形态。你可以在狗形态下说话。在你的狗形态下，你唯一能进行的徒手攻击是颚部徒手攻击，造成 1d6 穿刺伤害，并且属于斗殴武器组。你可以无限期保持狗形态，直到你选择切换回来。</p>\n<p>While in dog form, you can't use weapons, shields, or other held items of any sort, and you are limited in what actions you can take that have the manipulate trait. The only manipulate actions you can take are to Cast a Spell with somatic components or simple Interact actions such as opening an unlocked door. Your dog form can't perform actions that require fingers or significant manual dexterity, including any action that would require a check to accomplish. The GM might determine other manipulate actions are appropriate for your dog form. You can speak in your dog form. In your dog form, the only unarmed attacks you can make are jaws unarmed attacks that deal 1d6 piercing damage and are in the brawling weapon group. You can remain in dog form indefinitely until you choose to switch back.</p>"
+    },
+    "Effect: Corrosive Adhesive": {
+      "name": "效果：腐蚀性黏合剂 Effect: Corrosive Adhesive",
+      "description": "<p>你获得酸液免疫。任何触碰你或用徒手近战攻击或非触及近战武器伤害你的生物会受到[[/r 3d6[acid]]]伤害，且你的徒手攻击额外造成1d4点酸液伤害。每轮第一次你以这种方式对生物造成酸液伤害时，你获得[[/r 3d6 #Temporary Hit Points]]临时生命值，因为你的身体消化被侵蚀的物质并将其转化为防护性的酸液。当转化结束时，任何剩余的临时生命值也会一并失效。你的酸液法术造成的酸液伤害额外增加一个伤害骰（与该法术使用的伤害骰相同）。你可以将@Compendium[pf2e.spells-srd.gISYsBFby1TiXfBt]{Acid Splash}作为通灵天生法术施放；其飞溅伤害影响15尺内的所有生物，而非通常的5尺。</p>\n<p>You gain acid immunity. Any creature that touches you or damages you with an unarmed melee attack or non-reach melee weapon takes [[/r 3d6[acid]]] damage, and your unarmed attacks deal 1d4 additional acid damage. The first time each round that you deal acid damage to a creature in this way, you gain [[/r 3d6 #Temporary Hit Points]] temporary HP as your body digests the eroded material and transforms it into a protective acid. When the transformation ends, any remaining temporary HP expires as well. Your acid spells deal one additional die of acid damage (of the same damage die the spell uses). You can cast @Compendium[pf2e.spells-srd.gISYsBFby1TiXfBt]{Acid Splash} as an occult innate spell; the splash damage affects all creatures within 15 feet instead of the normal 5 feet.</p>"
+    },
+    "Effect: Doppelganger's Disguise": {
+      "name": "效果：变形怪的伪装 Effect: Doppelganger's Disguise",
+      "description": "<p>你转变为另一种形态。</p>\n<p>You shift into an alternate form.</p>"
+    }
+  }
+}

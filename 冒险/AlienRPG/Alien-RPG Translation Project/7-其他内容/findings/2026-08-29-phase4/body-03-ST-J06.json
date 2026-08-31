@@ -1,0 +1,366 @@
+{
+ "unit": "ST-J06",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J06.cn.html",
+ "summary": "Starter Set Rules 5/5 (byte range 120508–137575) translated: OTHER HAZARDS chapter — Fatigue / Falling / Explosions / Fire (+ FIRE D6 table) / Synthetics (+ ANDROID CRITICAL SYSTEM DAMAGE table) and the 13-row WEAPONS stat table. Built by exact text-node substitution over the English so every tag, class, style and src stayed byte-identical: the tag skeleton of the two files is literally equal (505 tags each) except for the six `id=` attributes I added to headings. No @UUID / [[…]] constructs and no DO-NOT-TRANSLATE register literal occur anywhere in this unit. Terminology follows the lock (lang/cn.json), glossary_alien + RULINGS (破甲 per R2, 通信科技 per R3), and the conventions already set by ST-J02.cn / ST-J03.cn in this same wave: 快速动作/完整动作, PC & NPC kept Latin, 《希望的最后一日》, always a space between Latin and CJK, and the missing die-glyph restored as 成功符号 (ST-J02.cn line 232 handles the identical upstream defect the same way). Register kept plain-rules — no evblockquoteCenter read-aloud text in this chunk; the two evexamplebox tables are rules tables, translated as such.",
+ "chars_en": 17067,
+ "chars_cn": 13693,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset .cn == .en (every tag name counted)",
+   "result": "PASS — 505 tags each, 17 distinct names, all counts equal: blockquote 6, br 17, div 10, figcaption 6, figure 8, h2 2, h3 10, img 4, li 6, p 14, span 20, strong 24, table 12, tbody 12, td 296, tr 56, ul 2. Stronger check also run: the ordered list of raw tag strings is byte-identical between the two files once the six added id= attributes are stripped."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in EN present unchanged in CN",
+   "result": "PASS — identical multisets: arpgtable 3, die 65, evchapterheading 1, evexamplebox 3, evolvedlinestart 7, evolvedsubheading 5, evscol1 11, evscol2 11, evscol3 11, evscol4 28, evstable 3, evstrhead 2, liststyle 3, strhead 1, textover 4, tim 13. Note this page uses the starterset-only `evstrhead`/`strhead` pair — both preserved verbatim. style= and src= multisets also verified identical (no change)."
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical, only {label} differs",
+   "result": "PASS (vacuously) — the unit contains zero @UUID / @TEXTDRAW / @DRAW / [[…]] constructs and zero <a> tags; EN and CN both scan to 0 of each, so nothing could drift."
+  },
+  {
+   "check": "4. Every translated heading carries explicit id= with the ORIGINAL English slug",
+   "result": "PASS — 6/6: OTHER HAZARDS→id=\"other-hazards\" 其他危害; Fatigue→id=\"fatigue\" 疲劳; Falling→id=\"falling\" 坠落; Explosions→id=\"explosions\" 爆炸; Fire→id=\"fire\" 火焰; Synthetics→id=\"synthetics\" 合成人. Two of these are LIVE deep-link targets in the shipped pack (data-hash=\"fatigue\" ×2, data-hash=\"synthetics\" ×1) — verified against the full anchor inventory of alien-evolved-starterset.alien-evolved-starter-set.json."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — all 35 register literals tested against the English: 0 occur in this unit (no lookup names, no RollTable names, no folder names, no frozen item names, no `None` sentinel, no M5A3 RPG Launcher). Therefore 0 could be lost, and 0 were."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 17067 → 13693 chars; visible text (whitespace stripped) 4449 → 1781."
+  },
+  {
+   "check": "7. Mechanic terms match lang/cn.json byte-for-byte",
+   "result": "PASS — 32 terms checked programmatically against the flattened cn.json; see lock_lookups. 24 hit a key whose value is byte-equal to the term; the other 8 (压力等级/死亡检定/濒死/基础骰子/全掩护/半掩护/区域/轮) are byte-exact substrings of lock values that carry a parenthetical or sit inside a sentence (e.g. ALIENRPG.fullcover = 全掩护（-3）), which is the correct bare form for prose."
+  },
+  {
+   "check": "EXTRA — invisible/confusable character preservation",
+   "result": "PASS — NBSP (U+00A0) 11 in EN / 11 in CN (all in <td class=\"evscol2\">); ½ 2/2; ¼ 1/1. EN DASH 19→16: exactly the 3 prose dashes became —— per the ST-J03.cn convention; all 16 tabular dashes (– as n/a marker, –1 as a negative modifier) and all numeric ranges (6–9, 1–2, 5–6) are untouched."
+  },
+  {
+   "check": "EXTRA — no stray untranslated English left in text nodes",
+   "result": "PASS — only intended Latin survives: DV-303, HEDP, NPC, PC, D6, M4A3, M240, M40, M41A, 37A2, $ prices, and the range/damage codes (see open_issues #1). No file BOM, no CRLF introduced, tail bytes identical to the English (the chunk's unbalanced closing </div></div> preserved)."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Fatigued",
+   "lang_key": "ALIENRPG.fatigued",
+   "used": "疲劳"
+  },
+  {
+   "english": "Critical Injury",
+   "lang_key": "TYPES.Item.critical-injury",
+   "used": "重伤"
+  },
+  {
+   "english": "Stamina",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "Survival",
+   "lang_key": "ALIENRPG.Skillsurvival",
+   "used": "生存"
+  },
+  {
+   "english": "Mobility",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Comtech",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "First aid (= Medical Aid skill)",
+   "lang_key": "ALIENRPG.SkillmedicalAid",
+   "used": "医疗"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Armor piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "Full auto",
+   "lang_key": "ALIENRPG.FullAuto",
+   "used": "全自动"
+  },
+  {
+   "english": "Push",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Panic",
+   "lang_key": "ALIENRPG.Panic",
+   "used": "恐慌"
+  },
+  {
+   "english": "Adjacent (range)",
+   "lang_key": "ALIENRPG.Adjacent",
+   "used": "紧邻距离"
+  },
+  {
+   "english": "Quick action (= Fast Action)",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "Damage",
+   "lang_key": "ALIENRPG.Damage / ALIENRPG.DAMAGE",
+   "used": "伤害"
+  },
+  {
+   "english": "Range",
+   "lang_key": "ALIENRPG.Range",
+   "used": "射程"
+  },
+  {
+   "english": "Ammo",
+   "lang_key": "ALIENRPG.ammo",
+   "used": "弹药"
+  },
+  {
+   "english": "Weight",
+   "lang_key": "ALIENRPG.Weight",
+   "used": "重量"
+  },
+  {
+   "english": "Cost",
+   "lang_key": "ALIENRPG.Cost",
+   "used": "费用"
+  },
+  {
+   "english": "Special",
+   "lang_key": "ALIENRPG.Special",
+   "used": "特殊"
+  },
+  {
+   "english": "Synthetic",
+   "lang_key": "ALIENRPG.Synthetic",
+   "used": "合成人"
+  },
+  {
+   "english": "Attributes",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Stress level",
+   "lang_key": "ALIENRPG.Panic10 (substring; no standalone key)",
+   "used": "压力等级"
+  },
+  {
+   "english": "Death roll",
+   "lang_key": "ALIENRPG.TAH.dehydrated / TAH.starving (substring)",
+   "used": "死亡检定"
+  },
+  {
+   "english": "Broken",
+   "lang_key": "ALIENRPG.Panic14 (substring)",
+   "used": "濒死"
+  },
+  {
+   "english": "Base dice",
+   "lang_key": "ALIENRPG.HOWMANYDICE = 基础骰子有几颗？ (substring)",
+   "used": "基础骰子"
+  },
+  {
+   "english": "Full cover",
+   "lang_key": "ALIENRPG.fullcover = 全掩护（-3） (substring, parenthetical dropped for prose)",
+   "used": "全掩护"
+  },
+  {
+   "english": "Partial cover",
+   "lang_key": "ALIENRPG.partialcover = 半掩护（-2） (substring, parenthetical dropped for prose)",
+   "used": "半掩护"
+  },
+  {
+   "english": "Zone",
+   "lang_key": "ALIENRPG.ShipPanic13 (substring) + glossary_alien 'Zone'",
+   "used": "区域"
+  },
+  {
+   "english": "Round",
+   "lang_key": "ALIENRPG.Panic10 = …怔住一轮… (substring) + glossary_alien 'Round'",
+   "used": "轮"
+  }
+ ],
+ "frozen_kept": [
+  "(zero DO-NOT-TRANSLATE.json register literals occur in this unit — the list below is the T-LATIN / code material I deliberately kept byte-exact)",
+  "M4A3",
+  "DV-303",
+  "M41A",
+  "M240",
+  "M40",
+  "HEDP",
+  "37A2",
+  "D6",
+  "PC",
+  "NPC",
+  "$200 / $300 / $400 / $1,200 / $500 / $60 / $50",
+  "A/M · S/M · A/S · S/L · S/S · A (range codes — see open_issues #1)",
+  "2E · 3E (explosive damage codes — see open_issues #1)",
+  "½ · ¼ · – (tabular fraction and n/a glyphs)"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Watatsumi",
+   "proposed": "绵津见",
+   "why": "Manufacturer of the DV-303 Bolt Gun; no glossary entry. Corporations in glossary_alien are transliterated (Seegson→西格森), and Watatsumi is the Japanese sea deity written 綿津見, so 绵津见 is the established Chinese form rather than a coinage. Appears in corerules gear tables too — worth pinning once."
+  },
+  {
+   "en": "Armat",
+   "proposed": "阿玛特",
+   "why": "Manufacturer of the M41A Pulse Rifle and the 37A2 shotgun; no glossary entry. Straight transliteration, consistent with 西格森."
+  },
+  {
+   "en": "Magnum Revolver",
+   "proposed": "马格南左轮手枪",
+   "why": "No entry. 马格南 is the settled Chinese for the Magnum cartridge; 左轮手枪 for revolver."
+  },
+  {
+   "en": "Pump Action Shotgun",
+   "proposed": "泵动霰弹枪",
+   "why": "No entry. Standard Chinese firearms terminology; '12 Gauge' rendered 12 号."
+  },
+  {
+   "en": "Seismic Survey Charge",
+   "proposed": "地震勘探炸药",
+   "why": "No entry. It is a prospecting explosive, not a weapon by design — 勘探 keeps that."
+  },
+  {
+   "en": "Fire Axe",
+   "proposed": "消防斧",
+   "why": "No entry (glossary has Combat Knife and Cutting Torch but not this). 消防斧 is the standard object name; avoids reading as '火焰斧'."
+  },
+  {
+   "en": "Blunt Instrument",
+   "proposed": "钝器",
+   "why": "No entry. Two characters, matches the table's other short melee entries, and 钝器 is the existing Chinese category noun."
+  },
+  {
+   "en": "Unarmed Attack",
+   "proposed": "徒手攻击",
+   "why": "No entry. Distinguishes from 近战 (the Close Combat skill) and from 肉搏 (the weapon class, per D2-engaged)."
+  },
+  {
+   "en": "Full Action",
+   "proposed": "完整动作",
+   "why": "Evolved-edition action type; NOT in glossary and NOT in lang/cn.json (which only has FastAction=快速动作 / SlowAction=慢速动作 from the classic edition). ST-J02.cn and ST-J03.cn already use 完整动作 — I followed them, but it should be entered in the glossary before ST-J04 (11 instances) lands."
+  },
+  {
+   "en": "Interrupt Action",
+   "proposed": "中断动作",
+   "why": "No entry, no lang key. An action taken out of turn; 中断 names what it does to someone else's turn. Also occurs in ST-J05."
+  },
+  {
+   "en": "Turn (combat, as in 'loses its next turn')",
+   "proposed": "出手 (as 失去它的下一次出手)",
+   "why": "No entry. 轮 is already Round and 节 is already Stretch/Turn-as-time-unit, so a third word is needed for a character's go in the initiative order. 出手 is the phrasing 主控 itself used in RULINGS R21's rationale. ST-J04/ST-J05 contain many more instances — settle it before they land."
+  },
+  {
+   "en": "Critical System Damage / critical systems damage (android)",
+   "proposed": "关键系统损伤",
+   "why": "No entry. Table title ANDROID CRITICAL SYSTEM DAMAGE → 仿生人关键系统损伤, column header CRITICAL DAMAGE → 关键损伤. Kept distinct from 重伤 (Critical Injury) because the English prose in the same paragraph still calls the result 'the critical injury' — I used 重伤 there and 关键系统损伤 for the table, mirroring the English."
+  },
+  {
+   "en": "System Shutdown",
+   "proposed": "系统停机",
+   "why": "No entry. Result #6 on the android table and the condition the prose keys off."
+  },
+  {
+   "en": "Ruptured Fluid Pump",
+   "proposed": "体液泵破裂",
+   "why": "No entry. The android's white-fluid circulation pump."
+  },
+  {
+   "en": "Servos (Leg/Arm)",
+   "proposed": "伺服机构 (腿部/臂部伺服机构损毁)",
+   "why": "No entry. 伺服机构 is the standard engineering term; 伺服马达 would over-specify a motor."
+  },
+  {
+   "en": "Chassis Breach",
+   "proposed": "机体严重破裂",
+   "why": "No entry. 机体 rather than 底盘/机身 — the android's body shell, not a vehicle frame."
+  },
+  {
+   "en": "Head Dislocation",
+   "proposed": "头部脱位",
+   "why": "No entry. 脱位 is the medical term and reads correctly for an artificial neck."
+  },
+  {
+   "en": "Contained Spaces",
+   "proposed": "封闭空间",
+   "why": "No entry. The explosion sub-rule for zones with only blocked borders."
+  },
+  {
+   "en": "Catching Fire",
+   "proposed": "着火",
+   "why": "No entry. Two characters, matches the sibling sub-heading style in the same paragraph block."
+  },
+  {
+   "en": "Fire Spreading",
+   "proposed": "火势蔓延",
+   "why": "No entry. 火势 rather than 火焰 because what spreads is the blaze's extent."
+  },
+  {
+   "en": "Intensity (of a fire)",
+   "proposed": "强度",
+   "why": "No entry. The fire's rating that sets the base-dice pool."
+  },
+  {
+   "en": "Body Armor",
+   "proposed": "身体护甲",
+   "why": "No entry. Needs to stay distinguishable from ship 护甲 (ALIENRPG.SHIP-ARMOR is also 护甲)."
+  },
+  {
+   "en": "Single-shot / Single use",
+   "proposed": "单发 / 一次性",
+   "why": "No entries. AMMO-column values; 单发 = reload after each shot, 一次性 = expended entirely."
+  },
+  {
+   "en": "Fire effect",
+   "proposed": "火焰效果",
+   "why": "No entry. The M240's Special value, pointing back at the Fire section in this same unit."
+  },
+  {
+   "en": "Other Hazards",
+   "proposed": "其他危害",
+   "why": "Chapter heading, no entry. 危害 covers fatigue/falling/explosions/fire as a class better than 危险."
+  },
+  {
+   "en": "Falling",
+   "proposed": "坠落",
+   "why": "Heading, no entry."
+  }
+ ],
+ "open_issues": [
+  "RANGE AND DAMAGE CODES LEFT IN LATIN — needs a controller ruling, not a per-unit choice. The WEAPONS table carries A/M, S/M, A/S, S/L, S/S, A in the RANGE column and 2E / 3E in the DAMAGE column. These are English-initial abbreviations of terms that ARE translated (紧邻距离/近距离/中距离/远距离 are locked in lang/cn.json; explosive = 爆炸), so a Chinese reader cannot decode them — but there is NO legend for them anywhere in the Starter Set, and corerules carries the same codes at scale (I counted >A/M< ×4, >S/M< ×15, >S/L< ×10 in 6-工作区/raw-dumps/corerules.json, also with no legend). Translating them in this one unit would put starterset and corerules in open contradiction, so I kept them byte-exact and am escalating instead. Proposal if you want them translated: A→紧, S→近, M→中, L→远, and 2E/3E→2爆/3爆, applied to BOTH corpora in one pass; the change is a trivial sed on <td class=\"die\"> cells.",
+  "UPSTREAM SOURCE DEFECT (not mine to fix, flagging it): the shipped English has `<li class=\"liststyle\">li ou can no longer recover Health.</li>` — 'li ou' is a corruption of 'You', present in 2-新手包汉化插件/compendium/en/alien-evolved-starterset.alien-evolved-starter-set.json itself, not an artifact of the chunking. I translated the intended meaning (你无法再恢复生命值。). If there is an errata channel to Free League this is one for it.",
+  "UPSTREAM SOURCE DEFECT: the base-die success glyph is missing from two sentences in the shipped English — 'roll MOBILITY – each rolled reduces the damage done by 1' and 'For every rolled, you suffer 1 point of damage'. (Same class of defect as ST-J02's 'For every rolled, the supply rating…'.) I restored it in prose as 成功符号, exactly as ST-J02.cn line 232 did for its instance, rather than leaving a hole in the sentence.",
+  "SYMBOL NAME NOT UNIFIED: this wave's ST-J02.cn calls the base-die 6 face 成功符号 (and it is the chapter that DEFINES the dice, so it is the reader's first encounter), while lang/cn.json's ALIENRPG.TAH.radiation calls the same face 基础符号 in running text. Same referent, two names. I used 成功符号 for wave-internal consistency. Controller should unify — if 基础符号 wins, this unit needs two edits (坠落 and 火焰 paragraphs) and ST-J02.cn needs one.",
+  "LATIN↔CJK SPACING vs GLOSSARY BYTES: I wrote 阿玛特 M41A 脉冲步枪 with spaces, following this wave's hard convention (ST-J02.cn and ST-J03.cn contain zero Latin-adjacent-CJK pairs — always a space). glossary_alien's entry 'M41A Pulse Rifle' → 'M41A脉冲步枪' has no space. One of the two should be normalised; I judged the running-prose convention to outrank the glossary's byte form for a table cell, but it is the controller's call.",
+  "WEAPON NAMES ARE A HARD SYNC POINT WITH THE ITEM DOCUMENTS. This table names 6 things that also exist as Items in the pack (Armat M41A Pulse Rifle, M4A3 Service Pistol, Watatsumi DV-303 Bolt Gun, M240 Incinerator Unit, Combat Knife, Fire Axe, Blunt Instrument). Those Item .name fields are T-BILINGUAL per PROJECT.md §3.4, so their Chinese halves MUST equal the strings in this table or the rules table and the item list will disagree on screen. My strings: 阿玛特 M41A 脉冲步枪 / M4A3 制式手枪 / 绵津见 DV-303 气矢枪 / M240 焚烧器 / 战斗刀 / 消防斧 / 钝器. (制式手枪, 气矢枪, 战斗刀, 切割炬, 脉冲步枪, 焚烧器 all come straight from glossary_alien; the rest are the coinages listed in glossary_gaps.)",
+  "'MOD.' column header rendered 修正, not the lock's 检定修正 (ALIENRPG.Item.General.FIELDS.rollMod.label, whose English is 'Roll Modifier', not 'MOD.'). No byte-lock obligation is triggered — the English here is the abbreviated form and the cell is a writing-mode:vertical-rl column where two characters read far better than four. Flagging so it is a decision, not a drift.",
+  "'Turn' in the android table ('The android loses its next turn') is a COMBAT turn, not the time unit — in this Starter Set the units are Round/Stretch/Shift (ST-J03), so 节 would be wrong here. I used 失去它的下一次出手. ST-J04 and ST-J05 contain many more instances of combat 'turn'; if the controller settles on something other than 出手, this unit has exactly one occurrence to change."
+ ]
+}

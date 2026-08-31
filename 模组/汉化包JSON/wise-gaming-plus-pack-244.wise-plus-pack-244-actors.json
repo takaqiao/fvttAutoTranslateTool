@@ -1,0 +1,1342 @@
+{
+  "label": "智者增强包 244（角色）\nWise Plus Pack 244 (Actors)",
+  "mapping": {
+    "name": "name",
+    "publicNotes": "system.details.publicNotes",
+    "privateNotes": "system.details.privateNotes",
+    "disable": "system.details.disable",
+    "hazarddescription": "system.details.description",
+    "reset": "system.details.reset",
+    "routine": "system.details.routine",
+    "blurb": "system.details.blurb",
+    "stealthdetails": "system.attributes.stealth.details",
+    "hp": "system.attributes.hp.details",
+    "senses": "system.traits.senses.value",
+    "allSaves": "system.attributes.allSaves.value",
+    "ac": "system.attributes.ac.details",
+    "prototypeToken": "prototypeToken.name",
+    "di": "system.traits.di.custom",
+    "languages": "system.traits.languages.custom",
+    "speed": "system.attributes.speed.details",
+    "dr": "system.traits.dr"
+  },
+  "folders": {
+    "Set 2": "第2组\nSet 2",
+    "Set 1": "第 1 组\nSet 1",
+    "Theme: Ruined Keep": "主题：毁坏要塞\nTheme: Ruined Keep",
+    "Theme: The Library": "主题：图书馆\nTheme: The Library",
+    "Theme: Servant's Quarters": "主题：仆役宿舍\nTheme: Servant's Quarters",
+    "Actor Set (24.4 Plus Pack)": "角色套装（24.4 Plus Pack）\nActor Set (24.4 Plus Pack)"
+  },
+  "entries": {
+    "Vengeful Furnace": {
+      "name": "复仇焚烧炉 Vengeful Furnace",
+      "tokenName": "复仇焚烧炉 Vengeful Furnace",
+      "items": {
+        "Burn Knowledge": {
+          "name": "焚烧知识 Burn Knowledge",
+          "description": "<p>灵异初始的幽灵袭击的目标，以及之后任何被燃烧鞭挞打击命中的生物，都会失去随机的记忆，仿佛这些思绪像燃烧的书页一样被焚毁。</p>\n<p>该生物必须尝试一次 @Check[will|dc:23] 意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物获得 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{迟钝 1} 状态，持续1分钟；在此期间，他们会遗忘随机记忆，仿佛这些思绪像燃烧的书页一样被焚毁。</p>\n<p><strong>失败</strong> 如成功，但迟钝 1 状态持续24小时。</p>\n<p><strong>大失败</strong> 如失败，但为 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{迟钝 2}。</p>\n<p>The target of the haunt's initial Ghostly Assault, as well as any creature later hit by a burning lash Strike, loses random memories, as if these thoughts were incinerated like pages in a burning book.</p>\n<p>The creature must attempt a @Check[will|dc:23] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 1 minute while they forget random memories, as if these thoughts were incinerated like pages in a burning book.</p>\n<p><strong>Failure</strong> As success, but the stupefied 1 condition persists for 24 hours.</p>\n<p><strong>Critical Failure</strong> As failure, but @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}.</p>"
+        },
+        "Burning Lash": {
+          "name": "燃烧鞭笞 Burning Lash"
+        },
+        "Ghostly Assault": {
+          "name": "幽灵袭击 Ghostly Assault",
+          "description": "<p><strong>触发</strong> 一名智力属性为15或更高的活体生物进入房间，或任意生物触碰熔炉</p>\n<hr />\n<p><strong>效果</strong> 燃烧的幽灵从熔炉中迸发而出，使触发生物暴露于该怨灵的焚烧知识效果。该怨灵掷骰先攻。</p>\n<p><strong>Trigger</strong> A living creature with an Intelligence score of 15 or higher enters the room, or any creature touches the furnace</p>\n<hr />\n<p><strong>Effect</strong> Burning ghosts burst from the furnace, exposing the triggering creature to the haunt's burn knowledge effect. The haunt rolls initiative.</p>"
+        }
+      },
+      "disable": "<p>@Check[intimidation|dc:22|name:威慑一名灵体]（受训）以威慑其中一个复仇的灵体，或 @Check[religion|dc:25|name:驱魔灵体]（受训）以驱逐该灵体。该祸害在两名灵体都被威慑或驱逐，或熔炉被摧毁之前一直保持活跃。</p>\n<p>@Check[intimidation|dc:22|name:Cow a Spirit] (trained) to cow one of the vengeful spirits or @Check[religion|dc:25|name:Exorcise the Spirit] (trained) to exorcise the spirit. The haunt remains active until both spirits are cowed or exorcised, or until the furnace is destroyed.</p>",
+      "hazarddescription": "<p>闹鬼熔炉顶部的舱门猛地翻开，喷出一对尖叫着、燃烧的幽灵。</p>\n<p>The hatch atop the haunted furnace flips open and disgorges a pair of shrieking, burning ghosts.</p>",
+      "reset": "<p>当房间内没有生物后，该怨灵在1小时后重置。</p>\n<p>The haunt resets 1 hour after there are no creatures in the room.</p>",
+      "routine": "<p>（3 动作）燃烧的幽灵鞭挞房间内一名随机的 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} 生物（如果房间内没有陷入 stupefied 的生物，则改为随机选择任意生物）。</p>\n<p>(3 actions) The burning ghosts lash at a random @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} creature in the room (or any random creature, if no creatures in the room are stupefied).</p>",
+      "stealthdetails": "<p>（专家）</p>\n<p>(expert)</p>",
+      "prototypeToken": "复仇焚烧炉 Vengeful Furnace"
+    },
+    "Shadow": {
+      "name": "幽影 Shadow",
+      "tokenName": "幽影 Shadow",
+      "items": {
+        "Shadow Hand": {
+          "name": "幽影之手 Shadow Hand"
+        },
+        "Light Vulnerability": {
+          "name": "光亮术易伤 Light Vulnerability",
+          "description": "<p>若攻击由处于魔法光亮术中的生物发出，或使用处于魔法光亮术中的物体发出（例如来自 @UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]{Light} 法术），则针对幽影的攻击被视为魔法攻击。</p>\n<p>Attacks against the shadow are treated as magical if made by a creature who is in magical light or with an object that is in magical light (such as from the @UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]{Light} spell).</p>"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Shadow Spawn": {
+          "name": "幽影衍生物 Shadow Spawn",
+          "description": "<p>当一个生物的幽影被偷取幽影拉离身体时，它会成为一个幽影裔，从属于创造它的幽影的命令术之下。这个 @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.clzHAfegb9Rn6DOe]{幽影裔} 不具有偷取幽影，并且永远且无法治愈地处于 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}。</p>\n<p>如果幽影裔所被拉离的那个生物死亡，幽影裔就会变成一个完全成熟、拥有自主意识的幽影。如果该生物从其衰弱中恢复，它的幽影会回到它身上，而幽影裔会被熄灭。</p>\n<p>When a creature's shadow is pulled free by Steal Shadow, it becomes a shadow spawn under the command of the shadow that created it. This @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.clzHAfegb9Rn6DOe]{Shadow Spawn} doesn't have Steal Shadow and is perpetually and incurably @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2}.</p>\n<p>If the creature the shadow spawn was pulled from dies, the shadow spawn becomes a full-fledged, autonomous shadow. If the creature recovers from its enfeeblement, its shadow returns to it and the shadow spawn is extinguished.</p>"
+        },
+        "Slink in Shadows": {
+          "name": "潜入幽影 Slink in Shadows",
+          "description": "<p>幽影可以在生物或物体的幽影中 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏} 或结束其 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}。</p>\n<p>The shadow can @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} or end its @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} in a creature's or object's shadow.</p>"
+        },
+        "Steal Shadow": {
+          "name": "窃取幽影 Steal Shadow",
+          "description": "<p><strong>需求</strong> 幽影在其上一动作中以幽影之手打击命中了一名活的生物</p>\n<hr />\n<p><strong>效果</strong> 幽影拉扯目标的幽影，使该生物 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭（状态）1}。这会与来自幽影的其他力竭（状态）累加，最高至 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭（状态）4}。如果这使一名生物的力竭（状态）数值提高到3或更高，目标的幽影会与其身体分离（见幽影孳生）。来自窃取幽影的力竭（状态）数值每小时降低1。</p>\n<p><strong>Requirements</strong> The shadow hit a living creature with a shadow hand Strike on its previous action</p>\n<hr />\n<p><strong>Effect</strong> The shadow pulls at the target's shadow, making the creature @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}. This is cumulative with other enfeebled conditions from shadows, to a maximum of @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 4}. If this increases a creature's enfeebled value to 3 or more, the target's shadow is separated from its body (see shadow spawn). The enfeebled value from Steal Shadow decreases by 1 every hour.</p>"
+        }
+      },
+      "publicNotes": "<p>被称为幽影的神秘不死生物潜伏在黑暗之处，并以那些远离光亮术的人为食。</p>\n<p>The mysterious undead known as shadows lurk in dark places and feed on those who stray too far from the light.</p>",
+      "hp": "void healing",
+      "prototypeToken": "幽影 Shadow"
+    },
+    "Boss Skrawng": {
+      "name": "斯夸老大 Boss Skrawng",
+      "tokenName": "斯夸老大 Boss Skrawng",
+      "items": {
+        "Primal Innate Spells": {
+          "name": "原初先天法术 Primal Innate Spells"
+        },
+        "Speak with Animals (At Will) (Arthropods Only)": {
+          "name": "与动物交谈（随意）（仅限节肢动物） Speak with Animals (At Will) (Arthropods Only)",
+          "description": "<p>你可以向动物提问、从它们那里获得回答，并对动物使用交涉（技能）。该法术不会让它们比平时更友善。狡猾的动物很可能言辞简短且闪烁其词，而不那么聪明的动物则常常会发表一些愚蠢的评论。</p>\n<p>You can ask questions of, receive answers from, and use the Diplomacy skill with animals. The spell doesn't make them more friendly than normal. Cunning animals are likely to be terse and evasive, while less intelligent ones often make inane comments.</p>"
+        },
+        "Bane": {
+          "name": "绝望术 Bane",
+          "description": "<p>你让敌人的心智充满疑虑。</p>\n<p>区域内的敌人必须在意志豁免中成功，否则只要他们仍在区域内，就会在攻击掷骰上承受-1状态减值。</p>\n<p>每回合一次，从你施放绝望术后的下一回合开始，你可以使用一个单动作（具有专注（特征）），将该发散的半径增加5英尺，并迫使区域内尚未受到影响的敌人尝试进行另一次豁免。</p>\n<p>绝望术可以反制 @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果：绝望术}</p>\n<p>You fill the minds of your enemies with doubt.</p>\n<p>Enemies in the area must succeed at a Will save or take a -1 status penalty to attack rolls as long as they are in the area.</p>\n<p>Once per turn, starting the turn after you cast bane, you can use a single action, which has the concentrate trait, to increase the emanation's radius by 5 feet and force enemies in the area that weren't yet affected to attempt another saving throw.</p>\n<p>Bane can counteract @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{Bless}.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{Spell Effect: Bane}</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法会听从你的命令。只要你维持法术，你就能施展简单的魔法效果。每次你维持法术时，你可以从四个选项中选择一个。</p>\n<ul>\n<li><strong>烹饪</strong> 冷却、加热或为1磅非生物材料调味。</li>\n<li><strong>提起</strong> 缓慢将一个无人看管、负载为光亮或更低的物体抬离地面1英尺。</li>\n<li><strong>制造</strong> 创造一个负载可忽略不计的临时物体，由凝结的魔法物质制成。该物体看起来粗糙且人造，并且极其脆弱——它不能用作工具、武器或法术成分。</li>\n<li><strong>整理</strong> 为一个负载为光亮或更低的物体上色、清洁或弄脏。你可以用10轮的专注影响一个负载为1的物体，而更大的物体则每1负载需要1分钟。</li>\n</ul>\n<p>魔法伎俩无法造成伤害或导致不利状态。对物体的任何实际改变（超出上述内容之外）仅在你维持法术期间持续。</p>\n<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
+        },
+        "Blowgun": {
+          "name": "吹箭管 Blowgun",
+          "description": "<p>两枚涂毒吹箭飞镖。</p>\n<p>Two poisoned Blowgun Darts.</p>"
+        },
+        "Trident": {
+          "name": "三叉戟 Trident"
+        },
+        "Mud and Bug Crown": {
+          "name": "泥与虫之冠 Mud and Bug Crown"
+        },
+        "Blowgun Darts": {
+          "name": "吹箭 飞镖 Blowgun Darts",
+          "description": "<p>这些纤细、轻便的飞镖通常由硬木制成，并用绒毛或毛皮的羽翎来稳定。它们往往是空心的，因此可以用来递送毒药。</p>\n<p>These thin, light darts are typically made of hardwood and stabilized with fletching of down or fur. They are often hollow so they can be used to deliver poison.</p>"
+        },
+        "Blowgun Darts (Poisoned)": {
+          "name": "吹箭 飞镖（涂毒） Blowgun Darts (Poisoned)",
+          "description": "<p>这些细长、轻巧的飞镖通常由硬木制成，并用绒毛或兽毛羽翎来稳定。它们通常是中空的，因此可以用来递送毒药。</p>\n<hr />\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.CeKPffF0FaEyhLMp]{矛蛙毒}</p>\n<p>These thin, light darts are typically made of hardwood and stabilized with fletching of down or fur. They are often hollow so they can be used to deliver poison.</p>\n<hr />\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.CeKPffF0FaEyhLMp]{Spear Frog Poison}</p>"
+        },
+        "Self-Loathing": {
+          "name": "自我厌恶 Self-Loathing",
+          "description": "<p>米特弗利特的自我厌恶使其很容易被影响。它对抗用于胁迫、挫败士气、建立印象与提出请求的检定的意志DC时承受-4减值。</p>\n<p>A mitflit's self-loathing makes it easy to influence. It takes a -4 penalty to its Will DC against checks to Coerce, Demoralize, Make an Impression, and Request.</p>"
+        },
+        "Vermin Empathy": {
+          "name": "害虫共情 Vermin Empathy",
+          "description": "<p>螨精可以使用交涉来对节肢动物（昆虫、蜘蛛、蝎子、螃蟹以及类似的无脊椎动物）@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象}并@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{提出请求}事物。大多数节肢动物对螨精的起始态度为不关心。</p>\n<p>Mitflits can use Diplomacy to @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} on and @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request} things of arthropods (insects, spiders, scorpions, crabs, and similar invertebrate animals). Most arthropods have a starting attitude of indifferent to mitflits.</p>"
+        },
+        "Spear Frog Poison": {
+          "name": "矛蛙毒 Spear Frog Poison",
+          "description": "<p><strong>豁免投掷</strong> @Check[fortitude|dc:15]</p>\n<p><strong>最大持续时间</strong> 6 轮</p>\n<p><strong>阶段 1</strong> @Damage[1d4[poison]] 伤害（1 轮）</p>\n<p><strong>阶段 2</strong> @Damage[1d6[poison]] 伤害且 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1}（1 轮）</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:15]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d4[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} (1 round)</p>"
+        },
+        "Vengeful Anger": {
+          "name": "复仇之怒 Vengeful Anger",
+          "description": "<p>只要他未处于 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{恐惧} 状态，斯夸老大对曾经伤害或折磨过他的生物进行的伤害掷骰获得+2状态加值。</p>\n<p>As long as he isn't @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}, Boss Skrawng gains a +2 status bonus to damage rolls against a creature that has previously damaged or tormented him.</p>"
+        }
+      },
+      "blurb": "男性米特弗利特帮派头目\nMale mitflit gang boss",
+      "prototypeToken": "斯夸老大 Boss Skrawng"
+    },
+    "Dead Thief": {
+      "name": "死亡盗贼 Dead Thief",
+      "tokenName": "死窃贼 Dead Thief",
+      "items": {
+        "Elegant Rapier": {
+          "name": "优雅的+1 细剑 Elegant Rapier",
+          "description": "细剑的性质暂不清楚。"
+        },
+        "Dagger": {
+          "name": "匕首 Dagger",
+          "description": "<p>这4种小型刃类武器可单手持握，用于在近身战斗中刺击生物。它们也可以投掷。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/dagger-1-alpha.webp\" />\n<p>These 4 small, bladed weapons are held in one hand and used to stab a creature in close combat. They can also be thrown.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/dagger-1-alpha.webp\" />"
+        },
+        "Silver Ring": {
+          "name": "银戒指 Silver Ring",
+          "description": "<p>这枚银戒指制作精美，但曾经镶嵌的一颗宝石已经被取下或遗失。</p>\n<p>This silver ring is nicely crafted, but once held a stone that has been removed or lost.</p>"
+        },
+        "Red Liquid with a mist": {
+          "name": "带雾的红色液体 Red Liquid with a mist",
+          "description": "液体的性质暂不清楚。"
+        },
+        "Purple Liquid": {
+          "name": "紫色液体 Purple Liquid",
+          "description": "液体的性质暂不清楚。"
+        }
+      },
+      "prototypeToken": "亡窃贼 Dead Thief"
+    },
+    "Dead Kobold": {
+      "name": "死去的狗头人 Dead Kobold",
+      "tokenName": "死去的狗头人 Dead Kobold",
+      "items": {
+        "Gold Pieces": {
+          "name": "金币 Gold Pieces"
+        },
+        "A kitbashed item": {
+          "name": "一件拼装改造的物品 A kitbashed item",
+          "description": "圈套的性质暂不清楚。"
+        }
+      },
+      "prototypeToken": "死去的狗头人 Dead Kobold"
+    },
+    "River Drake": {
+      "name": "河流龙兽 River Drake",
+      "tokenName": "河流龙兽 River Drake",
+      "items": {
+        "Fangs": {
+          "name": "尖牙 Fangs"
+        },
+        "Tail": {
+          "name": "尾巴 Tail"
+        },
+        "Tail Lash": {
+          "name": "尾击 Tail Lash",
+          "description": "<p><strong>触发</strong> 一个位于河流龙兽尾巴触及范围内的生物使用一个动作进行打击或尝试一次技能检定。</p>\n<hr />\n<p><strong>效果</strong> 河流龙兽尝试用尾巴对触发的生物进行打击。若命中，该生物在触发的掷骰上承受-2环境减值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.QqC9xymSXSVunDgl]{效果：尾击}</p>\n<p><strong>Trigger</strong> A creature within reach of the river drake's tail uses an action to Strike or attempt a skill check.</p>\n<hr />\n<p><strong>Effect</strong> The river drake attempts to Strike the triggering creature with its tail. If it hits, the creature takes a -2 circumstance penalty to the triggering roll.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.QqC9xymSXSVunDgl]{Effect: Tail Lash}</p>"
+        },
+        "Caustic Mucus": {
+          "name": "腐蚀性黏液 Caustic Mucus",
+          "description": "<p>河流龙兽会向至多 50 尺的射程吐出一团腐蚀性黏液球，并在 @Template[burst|distance:10] 内爆炸。爆发范围内的生物受到 @Damage[4d6[acid]] 伤害（@Check[reflex|dc:19|basic] 豁免）。豁免失败者还会受到 @Damage[1d6[persistent,acid]] 伤害，并且其速度承受 –5 尺的状态减值。此速度降低会在持续性酸液伤害结束时终止。</p>\n<p>河流龙兽在 [[/br 1d6 #Recharge Caustic Mucus]]{1d6 轮} 内无法再次使用腐蚀性黏液。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.TbmkcfpKIs558skY]{效果：腐蚀性黏液}</p>\n<p>The river drake spits a ball of caustic mucus up to a range of 50 feet that explodes in a @Template[burst|distance:10]. Creatures within the burst take @Damage[4d6[acid]] damage (@Check[reflex|dc:19|basic] save). Those that fail this save also take @Damage[1d6[persistent,acid]] damage and take a –5-foot status penalty to their Speed. This Speed reduction ends with the persistent acid damage.</p>\n<p>The river drake can't use Caustic Mucus again for [[/br 1d6 #Recharge Caustic Mucus]]{1d6 rounds}.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.TbmkcfpKIs558skY]{Effect: Caustic Mucus}</p>"
+        },
+        "Draconic Frenzy": {
+          "name": "龙狂乱 Draconic Frenzy",
+          "description": "<p>河流龙兽进行一次獠牙打击和两次尾巴打击，顺序不限。</p>\n<p>The river drake makes one Fangs Strike and two Tail Strikes in any order.</p>"
+        },
+        "Speed Surge": {
+          "name": "速度激增 Speed Surge",
+          "description": "<p><strong>频率</strong> 每日三次；</p>\n<hr />\n<p><strong>效果</strong> 河流龙兽疾走或飞行两次。</p>\n<p><strong>Frequency</strong> three times per day;</p>\n<hr />\n<p><strong>Effect</strong> The river drake Strides or Flies twice.</p>"
+        }
+      },
+      "publicNotes": "<p>尽管这些河流龙兽闪亮的鳞片与流线型的鳍状翅膀让它们看起来像河鱼，但它们实际上是统治海洋的巨龙的远亲。河流龙兽比大多数龙兽更小，却完全有能力祸害河道旅人，并且在水面之上与之下都同样如鱼得水。这种适应性让它们能捕食种类繁多的猎物，从鱼类与沼蜍人（特征）到鹿，以及偶尔落单的渡船乘客。</p>\n<hr />\n<p>龙兽贪婪、兽性十足，并受本能驱使；它们是龙裔怪物，仅具与其共享进化渊源的原初巨龙那可怖威能的一小部分。尽管它们比巨龙更弱、更慢，也更缺乏理性，但龙兽依旧是周遭生物与聚居地的威胁。它们倾向于组成劫掠队——一种小型社会群体，贴切地被称为“暴走群”——这让它们更加危险；一支河流龙兽的暴走群就能迅速摧毁河畔村落，而游荡的沙漠龙兽暴走群则是商队行旅的瘟疫。</p>\n<p>尽管栖息地与能力差异极大，龙兽仍共享若干将它们归为同一物种的生理特征。例如，龙兽没有前臂，使它们在近战中只能依靠强有力的啃咬与覆有厚鳞的尾巴。然而，多数龙兽宁愿避免近身，更偏好在头顶飞行、从舒适的距离以其魔法吐息在大片区域造成破坏。最后，所有龙兽体内都保有少量祖先的龙之力量储备，可供它们汲取以施展惊人的速度专长。</p>\n<p>不同种类的龙兽很少发生冲突。部分原因在于它们各自不同的栖息地，但龙兽也愿意在不同暴走群之间协商简单的约定。这种礼遇不会延伸到幼龙，龙兽乐于将其视为猎物。被单独驯养的龙兽也被排除在此类约定之外；若其驯养者不足以保护它们，它们就会被视作任人宰割。</p>\n<h3>龙兽卵</h3>\n<p>尽管龙兽皮并不比同等体型的生物更有价值，龙兽卵却是备受追捧的商品。它们既可作为强大法术的材料，也被多种文化食用，但龙兽卵最常见的用途是孵化并饲育龙兽，使其作为坐骑与守卫。</p>\n<p>典型的龙兽每5年会产下一窝2d4枚卵。卵会在3到6周内孵化，在此期间必须维持适合其自然环境的状态——这或许是龙兽饲育中最困难的性相。一般而言，繁育者孵化沙漠或丛林龙兽的卵（需要温和偏暖的温度才能孵化）或河流龙兽的卵（必须浸没在流动的水中）都较为容易；但焰龙兽与霜龙兽的卵则需要极端温度才能孵化，而安全地复现这种温度可能很困难。</p>\n<p>一枚龙兽卵是一个物体，具有硬度3、5 HP，且没有破坏阈值。龙兽卵的颜色在不同物种之间只有轻微差异。生物必须在一次 @Check[nature|dc:20] 检定中成功，或在一次相关的DC 20学识检定中成功，才能辨认某枚特定卵所属的龙兽物种。</p>\n<p>龙兽一旦孵化，就会对它见到的第一个生物产生印刻。以这种方式被印刻的生物可以使用自然来训练并命令术该龙兽。龙兽卵的市场价格会因龙兽种类与具体法律状况而变化。由于龙兽是危险且聪明的生物，许多社会不认可龙兽卵贸易，并将从事者定为犯罪。</p>\n<p>龙兽幼体需要2年才能成长到完全体型。一头训练有素的龙兽可以成为可怕的坐骑或守卫，但许多粗心大意、想当龙兽训练师的人会被他们照料的对象吞噬。</p>\n<p>Although the glistening scales and sleek, fin-like wings on these drakes give them an appearance reminiscent of river fish, they are actually distant relatives of the dragons that rule the oceans. While smaller than most drakes, river drakes are more than capable of plaguing river travelers and are equally at home above and below the water's surface. This flexibility allows them to catch a wide variety of prey, from fish and boggards to deer and the occasional ferry passenger.</p>\n<hr />\n<p>Ravenous, bestial, and driven by instinct, drakes are draconic monsters who bear a fraction of the terrifying might of the primal dragons they share evolutionary roots with. While they're weaker, slower, and less inclined toward reason than dragons, drakes are nonetheless a menace to creatures and settlements around them. Their propensity for forming raiding parties—small social groups fittingly called \"rampages\"—makes them all the more dangerous; a single rampage of river drakes can quickly lay waste to a waterside village, and roving rampages of desert drakes are a plague to caravan traders.</p>\n<p>Drakes share a number of physical characteristics that unite them as one species despite their wide variety of habitats and abilities. For example, drakes lack forearms, leaving them with their formidable jaws and thickscaled tails to use in close combat. Most drakes would rather avoid this, however, preferring to use their magical breath to wreak havoc in wide swaths from comfortable distances while flying overhead. Finally, all drakes have small reservoirs of their ancestral draconic power that they can tap into to perform incredible feats of speed.</p>\n<p>Different species of drakes rarely come into conflict. Part of this is their distinct habitats, but drakes are open to negotiating simple agreements between rampages. This courtesy does not extend to dragonets, which drakes happily take as prey. Solitary tamed drakes are also excluded from such agreements and considered free game if their tamer isn't strong enough to protect them.</p>\n<h3>Drake Eggs</h3>\n<p>While drake hides aren't any more valuable than those of similarly sized creatures, drake eggs are prized commodities. They are used as components in powerful spells as well as eaten by various cultures, but the most common use for drake eggs is hatching and rearing drakes to serve as mounts and guardians.</p>\n<p>A typical drake lays a clutch of 2d4 eggs every 5 years. Eggs hatch within 3 to 6 weeks, during which time they must be kept in conditions appropriate to their natural environment, perhaps the most difficult aspect of drake husbandry. While it is generally easy for breeders to incubate the eggs of desert or jungle drakes (which require mildly warm temperatures to hatch) or river drakes (which must be submerged in running water), the eggs of flame and frost drakes require extreme temperatures in order to hatch, which can be difficult to replicate safely.</p>\n<p>A drake egg is an object with Hardness 3, 5 HP, and no Broken Threshold. The coloration of drake eggs varies only slightly from one species to the next. A creature must succeed at a @Check[nature|dc:20] check, or a relevant DC 20 Lore check, to identify the drake species of a specific egg.</p>\n<p>Once a drake hatches, they imprint on the first creature that they see. A creature imprinted on in this way can use Nature to Train and Command that drake. The market price of a drake egg varies depending on the type of drake and the exact legal situation. Because drakes are dangerous and intelligent creatures, many societies do not condone the trade of drake eggs and criminalize those who engage in it.</p>\n<p>It takes 2 years for a drake hatchling to grow to full size. A well-trained drake can make a fearsome mount or guardian, but many careless would-be drake trainers are devoured by their charges.</p>",
+      "prototypeToken": "河流龙兽 River Drake"
+    },
+    "Augrael": {
+      "name": "奥格雷尔 Augrael",
+      "tokenName": "奥格雷尔 Augrael",
+      "items": {
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Light Blindness": {
+          "name": "强光致盲 Light Blindness",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 奥格雷尔邻接于一具在过去一小时内被摧毁的不死生物的尸体。</p>\n<hr />\n<p><strong>效果</strong> 奥格雷尔吞食一块被摧毁的不死生物残骸，并恢复 @Damage[2d6[healing]] 生命值。</p>\n<p>他从任意一具特定尸体中只能恢复一次生命值。</p>\n<p><strong>Requirements</strong> Augrael is adjacent to the corpse of an undead creature that was destroyed within the last hour.</p>\n<hr />\n<p><strong>Effect</strong> Augrael devours a chunk of the destroyed undead creature and regains @Damage[2d6[healing]] Hit Points.</p>\n<p>He can regain Hit Points from any given corpse only once.</p>"
+        },
+        "Ghoul Fever": {
+          "name": "食尸鬼热 Ghoul Fever",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者，无不良效果（1天）</p>\n<p><strong>阶段 2</strong> @Damage[2d6[void]] 伤害，并且从所有治疗中恢复的生命值减半（1天）</p>\n<p><strong>阶段 3</strong> 同阶段2（1天）</p>\n<p><strong>阶段 4</strong> @Damage[2d6[void]] 伤害，并且无法从治疗中获得任何益处（1天）</p>\n<p><strong>阶段 5</strong> 同阶段4（1天）</p>\n<p><strong>阶段 6</strong> 死亡，并在下一个午夜作为一只 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼} 复起。</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[void]] damage and regains half as many Hit Points from all healing (1 day)</p>\n<p><strong>Stage 3</strong> as stage 2 (1 day)</p>\n<p><strong>Stage 4</strong> @Damage[2d6[void]] damage and gains no benefit from healing (1 day)</p>\n<p><strong>Stage 5</strong> as stage 4 (1 day)</p>\n<p><strong>Stage 6</strong> dead, and rises as a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{Ghoul} the next midnight.</p>"
+        },
+        "Paralysis": {
+          "name": "麻痹 Paralysis",
+          "description": "<p>任何被奥格雷尔的攻击命中的活体、非精灵生物必须成功通过一次@Check[fortitude|dc:20] 豁免，否则将变为@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}。它可以在其每个回合结束时尝试一次新的豁免，且在每次此类豁免时DC累积降低1。</p>\n<p>Any living, non-elf creature hit by Augrael's attack must succeed at a @Check[fortitude|dc:20] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭 Sneak Attack",
+          "description": "<p>奥格雷尔对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}生物造成额外1d6精准伤害。</p>\n<p>Augrael deals an extra 1d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>奥格雷尔跳跃至其速度的一半。此移动不会触发反应动作。</p>\n<p>Augrael jumps up to half his Speed. This movement doesn't trigger reactions.</p>"
+        }
+      },
+      "blurb": "男性摩洛克食尸鬼被流放者\nMale morlock ghoul exile",
+      "hp": "void healing",
+      "prototypeToken": "奥格雷尔 Augrael"
+    },
+    "Dung Pile": {
+      "name": "粪堆 Dung Pile",
+      "tokenName": "粪堆 Dung Pile",
+      "items": {
+        "Chipped Tooth": {
+          "name": "崩裂牙齿 Chipped Tooth",
+          "description": "<p>一颗小型生物的断牙</p>\n<p>A broken tooth of a small creature</p>"
+        },
+        "Peridot Bead": {
+          "name": "橄榄石珠 Peridot Bead",
+          "description": "<p>宝石是自然形成的矿物，通常呈结晶形态；在少数情况下，则是如琥珀、珊瑚和珍珠等有机材料。</p><hr /><p>除最大的宝石外，所有宝石的重量大约是硬币的一半，因此约2,000颗宝石为1负载。</p><hr /><p>未经加工的宝石价值为成品宝石价格的一半，并可作为制作成品宝石所需的最低限度原材料。</p><ul><li><p>低等半宝石为等级0物品</p></li><li><p>中等与高等半宝石为1级物品，低等</p></li><li><p>中等宝石为等级4物品，制作时需要专家熟练度</p></li><li><p>高等宝石为等级7物品，制作时需要大师熟练度</p></li></ul>\n<p>Gems are naturally occurring minerals, typically in a crystalline form, or, in a few cases, organic material such as amber, coral, and pearls. </p><hr /><p>All but the largest gems weigh about half as much as a coin, so about 2,000 gems is 1 Bulk.</p><hr /><p> Unworked gems are worth half the Price of a finished gem and can serve as the minimum raw materials necessary to Craft the finished gem. </p><ul><li><p>Lesser semiprecious stones are level 0 items</p></li><li><p>Moderate and greater semiprecious stones are 1st-level items, lesser</p></li><li><p>Moderate precious stones are 4th-level items that require expert proficiency to Craft</p></li><li><p>Greater precious stones are 7th-level items that require master proficiency to Craft</p></li></ul>"
+        }
+      },
+      "prototypeToken": "粪堆 Dung Pile"
+    },
+    "Doom's of Tomorrow - Possessed City": {
+      "name": "《明日之厄》-《被附身之城》 Doom's of Tomorrow - Possessed City",
+      "tokenName": "明日之厄运 Doom's of Tomorrow",
+      "items": {
+        "Apocalypse Beam": {
+          "name": "天启射线 Apocalypse Beam",
+          "description": "<p><strong>触发</strong> 一名生物快步进入距离立体模型壁龛背面10英尺以内</p><p><strong>效果</strong> 陷阱向该生物发射其对应的天启射线。</p>\n<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p><p><strong>Effect</strong> The trap fires its corresponding apocalypse beam at that creature.</p>"
+        },
+        "Bloodless Beam": {
+          "name": "无血光束 Bloodless Beam",
+          "description": "<p>一名生物触发了天启射线且位于10尺内。这是反应动作（）的一部分。</p>\n<p>A creature triggerd Apocalypse Beam and is within 10 feet. This is part of the Reaction.</p>"
+        }
+      },
+      "disable": "<ul><li><p><strong>两个选项</strong></p><hr></li></ul><ol><li><p><strong>DC 20 盗窃（受训）</strong>以在凄凉灯塔的模型触发之前迅速将其停用</p></li></ol><ul><li><p><strong>DC 23 潜行（受训）</strong>以悄悄绕过一个陷阱而不触发它</p></li></ul>\n<ul><li><p><strong>Two Options</strong></p><hr></li></ul><ol><li><p><strong>DC 20 Thievery (trained)</strong> to quickly deactivate the model of Gauntlight before it triggers</p></li></ol><ul><li><p><strong>DC 23 Stealth (trained)</strong> to creep by a trap without triggering it</p></li></ul>",
+      "hazarddescription": "<p>一个小型立体模型，描绘一座城市正面临一场悲剧性的危机。</p><p>毁灭的声音从立体模型中升起，一道闪烁的能量光束从微缩的凄凉灯塔向外刺射而出。</p><hr /><h3>在一名玩家查看立体模型后朗读</h3><p>立体模型呈现的场景描绘了艾巴萨罗姆，这是一幅出自贝科拉想象的奇诡末日景象。你看到一个小型幻术，表现出无魂者在城市中蹒跚、横冲直撞。</p><p>一个小小的凄凉灯塔，仿佛远在数英里之外，坐落在每个场景的边缘。</p><hr /><p>一名英雄在研究这个特定立体模型时，若在<strong>DC 16 宗教检定</strong>中成功，会注意到当凄凉之光射线照耀它们时，不死生物正从艾巴萨罗姆的坟墓中升起。</p>\n<p>A small diorama of a city facing a tragic peril.</p><p>The sounds of devastation rise from the diorama, and a beam of shimmering energy lances outward from the tiny model of Gauntlight.</p><hr /><h3>Read after a player looks at the diorama</h3><p>The diorama presents a scene depicting the city of Absalom in a fanciful doom from Belcorra’s imagination. You see a minor illusion of the souless shambling and rampaging over the city.</p><p>A tiny Gauntlight, as though miles distant, sits at the edge of each scene.</p><hr /><p> A hero who succeeds at a <strong>DC 16 Religion check</strong> while studying this specific diorama notes that the undead are rising from Absalom’s graves as Gauntlight’s beam shines upon them.</p>",
+      "reset": "<p>立体模型陷阱会在1小时后自动重置。</p>\n<p>The diorama trap resets automatically after 1 hour.</p>",
+      "routine": "<p>不适用</p>\n<p>N/A</p>",
+      "stealthdetails": "<p>（专家）</p>\n<p>(expert)</p>",
+      "hp": "(BT 28)",
+      "prototypeToken": "明日之厄运 Doom's of Tomorrow"
+    },
+    "Dead Acolyte B": {
+      "name": "亡侍徒 B Dead Acolyte B",
+      "tokenName": "死去侍祭 B Dead Acolyte B",
+      "items": {
+        "A Polished Tektite Amulet": {
+          "name": "一枚抛光的玻璃陨石护身符 A Polished Tektite Amulet",
+          "description": "物体的性质暂不清楚。"
+        }
+      },
+      "prototypeToken": "亡灵侍祭 B Dead Acolyte B"
+    },
+    "Mister Beak": {
+      "name": "喙先生 Mister Beak",
+      "tokenName": "喙先生 Mister Beak",
+      "items": {
+        "Occult Innate Spells": {
+          "name": "天赋秘术法术 Occult Innate Spells"
+        },
+        "Levitate": {
+          "name": "浮空术 Levitate",
+          "description": "<p>你违抗重力，施放浮空术使目标离地5尺。在法术持续时间内，你可以用单动作让目标向上或向下移动10尺，该动作具有专注（特征）。因浮空术而漂浮在空中的生物，其攻击掷骰承受-2环境减值。漂浮的生物可以花费一个交互动作来稳定伤势自身，并在其回合剩余时间内无视该减值。若目标邻接一个固定的物体或足够稳定的地形，它可以通过攀爬（若表面为垂直，例如墙壁）或匍匐（若表面为水平，例如天花板）沿表面移动。GM决定哪些表面可以被攀爬或匍匐通过。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.JqrTrvwV7pYStMXz]{法术效果：浮空术}</p>\n<p>You defy gravity and levitate the target 5 feet off the ground. For the duration of the spell, you can move the target up or down 10 feet with a single action, which has the concentrate trait. A creature floating in the air from levitate takes a -2 circumstance penalty to attack rolls. A floating creature can spend an Interact action to stabilize itself and negate this penalty for the remainder of its turn. If the target is adjacent to a fixed object or terrain of suitable stability, it can move across the surface by climbing (if the surface is vertical, like a wall) or crawling (if the surface is horizontal, such as a ceiling). The GM determines which surfaces can be climbed or crawled across.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.JqrTrvwV7pYStMXz]{Spell Effect: Levitate}</p>"
+        },
+        "Light": {
+          "name": "光亮术 Light",
+          "description": "<p>该物体发光，如同火把一般，在20尺半径内投射明亮光照（并在接下来的20尺内提供昏暗光照）。如果你再次将此法术施放在第二个物体上，第一个物体上的光亮术法术结束。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>升阶（4环）</strong> 该物体在60尺半径内散发明亮光照（并在接下来的60尺内提供昏暗光照）。</p>\n<p>The object glows, casting bright light in a 20-foot radius (and dim light for the next 20 feet) like a torch. If you cast this spell again on a second object, the light spell on the first object ends.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{Spell Effect: Light}</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The object sheds bright light in a 60-foot radius (and dim light for the next 60 feet).</p>"
+        },
+        "Mage Hand": {
+          "name": "法师之手 Mage Hand",
+          "description": "<p>你创造一只单独的魔法之手，它可以是隐形的或幽灵般的，它会抓住目标物体并将其缓慢移动至多20英尺。因为你在使物体悬浮，你可以将其朝任意方向移动。当你维持该法术时，你可以让该物体额外移动20英尺。若该法术结束时物体仍在空中，则物体会坠落。</p>\n<hr />\n<p><strong>增幅（3环）</strong>你可以以一件负载为1或更少的无人持用物体为目标。</p>\n<p><strong>增幅（5环）</strong>射程增加至60英尺，且你可以以一件负载为1或更少的无人持用物体为目标。</p>\n<p><strong>增幅（7环）</strong>射程增加至60英尺，且你可以以一件负载为2或更少的无人持用物体为目标。</p>\n<p>You create a single magical hand, either invisible or ghostlike, that grasps the target object and moves it slowly up to 20 feet. Because you're levitating the object, you can move it in any direction. When you Sustain the Spell, you can move the object an additional 20 feet. If the object is in the air when the spell ends, the object falls.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (5th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (7th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 2 or less.</p>"
+        },
+        "Phantom Pain": {
+          "name": "幻痛术 Phantom Pain",
+          "description": "<p>幻觉般的痛苦折磨着目标，造成2d4精神伤害与1d4持续精神伤害。目标必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功或大失败 成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受全部初始伤害但不承受持续伤害，且该法术立即结束。</p>\n<p><strong>失败</strong> 目标承受全部初始伤害与持续伤害，且目标为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。若目标从恶心状态中恢复，持续伤害结束且该法术结束。</p>\n<p><strong>大成功或大失败 失败</strong> 同失败，但目标为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加2d4，持续伤害增加1d4。</p>\n<p>@Damage[(@item.level)d4[persistent,mental]]{Scaling Persistent Mental Damage}</p>\n<p>Illusory pain wracks the target, dealing 2d4 mental damage and 1d4 persistent mental damage. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes full initial damage but no persistent damage, and the spell ends immediately.</p>\n<p><strong>Failure</strong> The target takes full initial and persistent damage, and the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. If the target recovers from being Sickened, the persistent damage ends and the spell ends.</p>\n<p><strong>Critical Failure</strong> As failure, but the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2}.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d4 and the persistent damage by 1d4.</p>\n<p>@Damage[(@item.level)d4[persistent,mental]]{Scaling Persistent Mental Damage}</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法会听从你的差遣。只要你维持法术，你就能施展简单的魔法效果。每次你维持法术时，你可以从四个选项中选择一个。</p>\n<ul>\n<li><strong>烹饪</strong> 冷却、加热，或为1磅的非生物材料调味。</li>\n<li><strong>提举</strong> 缓慢将一件无人看管、负载为光亮术或更低的物体抬离地面1英尺。</li>\n<li><strong>制造</strong> 创造一件临时物体，其负载可忽略不计，由凝结的魔法物质构成。该物体外观粗糙且人工痕迹明显，并且极其脆弱——不能被用作工具、武器或法术材料。</li>\n<li><strong>整理</strong> 为一件负载为光亮术或更低的物体上色、清洁或弄脏。你可以用10轮的专注影响一件负载为1的物体；更大的物体则每1点负载需要1分钟。</li>\n</ul>\n<p>魔法伎俩无法造成伤害或导致不利状态。对物体所做的任何实际改变（除了上述内容）仅会在你维持法术期间持续。</p>\n<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
+        },
+        "Soul Gem": {
+          "name": "灵魂宝石 Soul Gem",
+          "description": "<p>喙先生的灵魂聚焦宝石位于他的背部，夹在他的双翼之间。</p>\n<p>Mister Beak's soul focus gem is located on his back, nestled between his wings.</p>"
+        },
+        "Fist": {
+          "name": "拳头 Fist"
+        },
+        "Personality Fragments": {
+          "name": "人格碎片 Personality Fragments",
+          "description": "<p>喙先生分享了其捐赠者——地精波波——的灵魂碎片，但没有波波的任何记忆。</p>\n<p>Mister Beak shares fragments of the soul of its donor, the goblin Borbo, but none of Borbo's memories.</p>"
+        }
+      },
+      "publicNotes": "<p>缚魂娃娃是令人毛骨悚然的人偶或玩具，被灌注了已故凡人灵魂的一小片碎片。这些小型构装体出于多种原因被制造——例如作为伙伴或仆从——但它们的自由意志意味着它们是否服从其创造者绝非理所当然。法莱斯玛的信徒通常憎恶缚魂娃娃，将其视为对灵魂自然循环的亵渎；而崇拜坟冢夫人的人则认为，无论该构装体的阵营如何，摧毁一个缚魂娃娃都是对浩瀚众界的重要奉献。缚魂娃娃是缚魂构装体系列中最简单的一种，该系列还包括人类体型的缚魂人体模型、强大的缚魂外壳，以及哨兵式的缚魂兵马俑武者。用不情愿的活体生物来制造它们属于邪恶行为；而不情愿的供体可以以一次成功的意志豁免（对抗创造者的制造 DC）来抵抗该过程，即便无法阻止供体死亡，也会使娃娃毁坏。非邪恶的娃娃只能由某人在其死亡发生前已同意此用途的灵魂来制作</p>\n<p>冒险者所遭遇的缚魂娃娃通常是某种守卫；尽管它们体型矮小，灵魂碎片的力量却使得娃娃的拳击比漫不经心的旁观者所预期的更为致命。此外，它还赋予娃娃一个与其身形不相称、威力过大的单一法术。由于其自主性与卓越智能，缚魂娃娃偶尔会被其制作者雇用为更强大却无心智的构装体（如魔像）的管理者，使这些娃娃能够操控远超自身能力的防御。尽管缚魂娃娃包含的是在某人死亡期间或死亡后不久提取的一小片灵魂碎片，这并不会影响死者的复活或其前往来世的进程。对原本仍活着的潜在灵魂供体而言，这种提取过程是致命的，尽管有传闻称存在更昂贵的工艺，能让某人在不产生后果的情况下捐献活体灵魂的一部分。</p>\n<p>灵魂碎片栖居于一颗灵魂焦点宝石中，通常嵌在娃娃的颈部或胸口。灵魂碎片并非静止不变，娃娃会在其初始状态基础上持续学习，这意味着它的性格与能力会发生变化，可能更接近供体，也可能沿着自身的独立道路渐行渐远。即使娃娃被摧毁，缚魂娃娃的焦点宝石仍会保留娃娃的记忆。被摧毁娃娃的完好灵魂焦点宝石甚至可以被懂得制造缚魂（特征）生物的人置入新的娃娃躯体中，从而有效地重组该缚魂娃娃。</p>\n<p>Soulbound dolls are eerie mannequins or playthings that have been imbued with a small piece of a deceased mortal's soul. These little constructs are created for a variety of reasons-such as to serve as companions or servants-but their free will means their obedience to their creators is hardly a given. Followers of Pharasma generally abhor soulbound dolls, viewing them as a perversion of the natural cycle of souls, and those who worship the Lady of Graves see the destruction of a soulbound doll, regardless of the construct's alignment, as an important service to the Great Beyond. Soulbound dolls are the simplest in a series of soulbound constructs including human-sized soulbound mannequins, powerful soulbound shells, and sentinel soulbound terra-cotta warriors. Creating them from unwilling living creatures is evil, and an unwilling donor can resist the process with a successful Will save against the creator's Craft DC, ruining the doll if not preventing the donor's death. A non-evil doll can only be crafted from the soul of a person who has given consent to such use before their death occurred</p>\n<p>Soulbound dolls encountered by adventurers are typically guardians of some sort; despite their diminutive size, the soul fragment's power makes the doll's flst more dangerous than a casual observer would expect. Further, it grants the doll a single spell of outsized power given its stature. Because of their autonomy and remarkable intelligence, soulbound dolls are occasionally employed by their crafters as administrators over much more powerful but mindless constructs such as golems, allowing such dolls to control defenses far beyond their own capabilities. Though soulbound dolls contain a small fragment of a soul extracted during or shortly after a person's death, this doesn't affect the deceased's resurrection or progress to the afterlife. This extraction process is lethal to otherwise-living prospective soul donors, though there are rumors of more expensive processes that allows someone to donate a fragment of a living soul without repercussions.</p>\n<p>The soul fragment resides in a soul focus gem typically embedded in the doll's neck or chest. The soul fragment isn't static, and the doll continues to learn from its initial state, meaning its personality and abilities can change, possibly growing closer to the donor's or moving farther afield on its own individual path. The soulbound doll's focus gem retains the doll's memories even after the doll's destruction. The the intact soul focus gem of a destroyed doll can even be placed into a new doll body by someone knowledgeable in the creation of soulbound creatures, effectively reconstituting the soulbound doll.</p>",
+      "blurb": "变体缚魂娃娃\nVariant soulbound doll",
+      "prototypeToken": "喙先生 Mister Beak"
+    },
+    "Mitflit": {
+      "name": "米特弗利特 Mitflit",
+      "tokenName": "米特弗利特 Mitflit",
+      "items": {
+        "Primal Innate Spells": {
+          "name": "原初先天法术 Primal Innate Spells"
+        },
+        "Speak with Animals (Arthropods Only, At Will)": {
+          "name": "与动物交谈（仅限节肢动物，随意） Speak with Animals (Arthropods Only, At Will)",
+          "description": "<p>你可以向动物提问、从它们那里获得回答，并对动物使用交涉（技能）。该法术不会让它们比平常更友善。狡猾的动物可能会言辞简短且闪烁其词，而不那么聪明的动物则常常会发表愚蠢的评论。</p>\n<p>You can ask questions of, receive answers from, and use the Diplomacy skill with animals. The spell doesn't make them more friendly than normal. Cunning animals are likely to be terse and evasive, while less intelligent ones often make inane comments.</p>"
+        },
+        "Bane": {
+          "name": "绝望术 Bane",
+          "description": "<p>你以疑惧充斥敌人的心智。区域内的敌人必须通过一次意志豁免，否则只要仍在该区域内，其攻击掷骰就会承受–1状态减值。在后续回合中，每轮一次，你可以维持该法术，使光环半径增加10英尺，并迫使区域内尚未受到影响的敌人再尝试一次豁免。</p>\n<p>绝望术可以反制 @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果：绝望术}</p>\n<p>You fill the minds of your enemies with doubt. Enemies in the area must succeed at a Will save or take a –1 status penalty to attack rolls as long as they are in the area. Once per round on subsequent turns, you can Sustain the spell to increase the emanation's radius by 10 feet and force enemies in the area that weren't yet affected to attempt another saving throw.</p>\n<p>Bane can counteract @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{Bless}.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{Spell Effect: Bane}</p>"
+        },
+        "Prestidigitation": {
+          "name": "魔法伎俩 Prestidigitation",
+          "description": "<p>最简单的魔法听从你的差遣。只要你<em>维持</em>该法术，你就能施展简单的魔法效果。每次你<em>维持</em>该法术时，你可以从以下四个选项中选择一个。</p>\n<ul>\n<li><strong>烹调</strong> 冷却、加热或调味 1 磅的非生物材料。</li>\n<li><strong>提起</strong> 缓慢将一个无人看管、负载为轻或更低的物体抬离地面 1 英尺。</li>\n<li><strong>制造</strong> 创造一个临时物体，其负载可忽略不计，由凝结的魔法物质构成。该物体看起来粗糙且不自然，并且极其脆弱——它不能用作工具、武器或法器，也不能作为法术的花费。</li>\n<li><strong>整理</strong> 为一个负载为轻或更低的物体上色、清洁或弄脏。你可以用 10 轮专注影响一个负载为 1 的物体；影响更大的物体则每 1 负载需要 1 分钟。</li>\n</ul>\n<p><em>魔法伎俩</em>不能造成伤害或施加不利状态。对物体造成的任何实际改变（超出上述内容者）仅在你<em>维持</em>该法术期间持续。</p>\n<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the spell. Each time you Sustain the spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or locus or cost for a spell.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p><em>Prestidigitation</em> can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the spell.</p>"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword"
+        },
+        "Dart": {
+          "name": "飞镖 Dart"
+        },
+        "Self-Loathing": {
+          "name": "自我厌恶 Self-Loathing",
+          "description": "<p>米特弗利特的自我厌恶使其很容易受到影响。它的意志DC在对 @UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]{胁迫}、@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气}、@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象}和 @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{提出请求} 的检定对抗时承受-4减值。</p>\n<p>A mitflit's self-loathing makes it easy to influence. It takes a -4 penalty to its Will DC against checks to @UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]{Coerce}, @UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{Demoralize}, @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression}, and @UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]{Request}.</p>"
+        },
+        "Vengeful Anger": {
+          "name": "复仇之怒 Vengeful Anger",
+          "description": "<p>只要它没有@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}，米特弗利特对先前伤害或折磨过它的生物进行伤害掷骰时获得+2状态加值。</p>\n<p>As long as it isn't @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}, a mitflit gains a +2 status bonus to damage rolls against a creature that has previously damaged or tormented it.</p>"
+        }
+      },
+      "publicNotes": "<p>螨精自我厌弃、可怜而怯懦，极易被其他生物，甚至仅仅稍强一些的螨精首领胁迫而沦为奴仆。他们驯养昆虫、蜘蛛与其他小型害兽，让其作为忠诚的盟友效力。螨精已失去大部分祖先的魔法，这使他们感到残缺不全，满心疑虑与不安。螨精在世上其他低等生物中寻得陪伴，并与害兽结下牢固的友谊纽带——这些害兽似乎是唯一愿意接纳他们的其他存在。某种社会结构——哪怕其中他们受人欺凌——也能在一定程度上填补大多数螨精性格中的空洞，因此他们很少反抗或坚持对抗，除非他们的愤怒达到崩溃的临界点。</p>\n<hr />\n<p>小魔怪是残忍的精类恶作剧者与破坏者，已完全适应了宇宙中的生活，并为其充满创造性的毁灭欲找到了各自鲜明的生态位。几乎所有小魔怪都乐于毁坏或弄坏事物，无论是装置、载具等有形之物，还是同盟、关系等无形之物。小魔怪最大的快乐，是目睹复杂造物的崩塌——最好是在小魔怪以极其轻微、精心针对的一下推力之后发生。小魔怪往往会贬低、欺凌，甚至屠杀其更弱小的同类，尤其是螨精；更强的小魔怪会轻蔑地称他们为“袋子”。</p>\n<p>Mitflits are self-loathing and pitiful cowards, easily bullied into servitude by other creatures or even slightly more powerful mitflit leaders. They tame insects, spiders, and other small vermin to serve as faithful allies. Mitflits have lost most of their ancestral magic, leaving them to feel incomplete and full of doubt and insecurity. Mitflits find companionship in the other base creatures of the world, and forge strong bonds of friendship with vermin, the only other beings that seem willing to accept them. A social structure, even one in which they are bullied, partially fills the hole within most mitflits' personalities, and they rarely rebel or last out unless their rage hits a breaking point.</p>\n<hr />\n<p>Gremlins are cruel fey tricksters and saboteurs who have fully acclimated to life in the Universe, finding distinct niches for their inventive destructiveness. Nearly all gremlins delight in ruining or breaking things, whether it's something physical like a device or vehicle or something intangible such as an alliance or relationship. A gremlin's greatest joy is watching the collapse of complex creations, preferably after the slightest, carefully targeted nudge from the gremlin. Gremlins tend to denigrate, bully, or even slaughter their lesser kin, particularly mitflits, whom stronger gremlins derisively call \"baggies.\"</p>",
+      "prototypeToken": "米特弗利特 Mitflit"
+    },
+    "Skeletal Giant": {
+      "name": "骸骨巨人 Skeletal Giant",
+      "tokenName": "骸骨巨人 Skeletal Giant",
+      "items": {
+        "Glaive": {
+          "name": "长柄刀 Glaive"
+        },
+        "Half Plate": {
+          "name": "半身板甲 Half Plate",
+          "description": "<p>半身板甲由全身板甲使用的大部分上半身甲板构成，而手臂与腿部则使用更轻或更稀疏的钢板防护。这使其在提供部分全身板甲防护的同时，具备更高的灵活性与速度。一套此护甲附带一件 @UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]{加衬护甲} 内衬，以及一副 @UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]{护手}。</p>\n<p>Half plate consists of most of the upper body plates used in full plate, with lighter or sparser steel plate protection for the arms and legs. This provides some of the protection of full plate with greater flexibility and speed. A suit of this armor comes with an undercoat of @UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]{Padded Armor} and a pair of @UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]{gauntlets}.</p>"
+        },
+        "Horns": {
+          "name": "犄角 Horns"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Broad Swipe": {
+          "name": "横扫攻击 Broad Swipe",
+          "description": "<p>巨人用其长柄刀对两个相邻的敌人各进行一次打击，这两个敌人都在其触及内。两次攻击都计入巨人的多重攻击减值，但减值在两次攻击结束后才会增加。</p>\n<p>The giant makes two Strikes with its glaive against two adjacent foes, both of whom are within its reach. Both attacks count toward the giant's multiple attack penalty, but the penalty doesn't increase until after both attacks.</p>"
+        },
+        "Terrifying Charge": {
+          "name": "骇人冲锋 Terrifying Charge",
+          "description": "<p>巨人疾走并以其角进行一次打击，该打击的伤害获得+4环境加值。</p>\n<p>如果该打击命中，巨人尝试对目标进行[[/act demoralize]]。</p>\n<p>The giant Strides and makes a horns Strike with a +4 circumstance bonus to damage.</p>\n<p>If the strike hits, the giant attempts to [[/act demoralize]] the target.</p>"
+        }
+      },
+      "publicNotes": "<p>巨人的复苏骸骨会成为极佳的死灵仆从。</p>\n<hr />\n<p>活动的骷髅（特征）是最常见的亡灵类型之一。</p>\n<p>The reanimated bones of giants make excellent necromantic thralls.</p>\n<hr />\n<p>Animated skeletons are among the most common types of undead.</p>",
+      "hp": "void healing",
+      "prototypeToken": "骸骨巨人 Skeletal Giant"
+    },
+    "Skeleton Statue": {
+      "name": "骷髅（特征）雕像 Skeleton Statue",
+      "tokenName": "骷髅（特征）雕像 Skeleton Statue",
+      "items": {
+        "Old Morningstar": {
+          "name": "旧的+1 钉头锤 Old Morningstar",
+          "description": "钉头锤的性质暂不清楚。"
+        }
+      },
+      "prototypeToken": "骷髅（特征）雕像 Skeleton Statue"
+    },
+    "Mist Stalker": {
+      "name": "迷雾追踪者 Mist Stalker",
+      "tokenName": "迷雾追踪者 Mist Stalker",
+      "items": {
+        "Tentacle": {
+          "name": "触手 Tentacle"
+        },
+        "Mist Vision": {
+          "name": "迷雾视觉 Mist Vision",
+          "description": "<p>迷雾追踪者无视由薄雾与浓雾造成的@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽（状态）}状态。</p>\n<p>The mist stalker ignores the @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} condition from mist and fog.</p>"
+        },
+        "Mist Cloud": {
+          "name": "迷雾云 Mist Cloud",
+          "description": "<p>15英尺。迷雾追踪者被迷雾环绕。光环中的生物为 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{隐蔽}。如果风驱散该光环，它会在迷雾追踪者的回合开始时自动返回。该云雾在水中被压制。</p>\n<p>15 feet. The mist stalker is surrounded by mist. Creatures in the aura are @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}. If wind disperses the aura, it returns automatically at the start of the mist stalker's turn. This cloud is suppressed in water.</p>"
+        },
+        "Constrict": {
+          "name": "紧勒 Constrict",
+          "description": "<p>@Damage[(1d8+4)[bludgeoning]] 伤害, @Check[fortitude|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>\n<p>@Damage[(1d8+4)[bludgeoning]] damage, @Check[fortitude|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+        },
+        "Solidify Mist": {
+          "name": "凝固迷雾 Solidify Mist",
+          "description": "<p>迷雾追踪者使其雾云凝结，使该灵光在迷雾追踪者下个回合开始前成为困难地形。</p>\n<p>此外，迷雾追踪者可以使雾在云中围绕一名单独的中型或更小的生物变得更加浓厚。该生物必须成功通过一次 @Check[reflex|dc:20] 豁免，否则将直到其 @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱} 或其不再处于雾云灵光的放射范围内为止，变为 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}。</p>\n<p>The mist stalker makes its mist cloud congeal, causing the aura to be difficult terrain until the start of the mist stalker's next turn.</p>\n<p>In addition, the mist stalker can make the mist even thicker around a single Medium or smaller creature within the cloud. The creature must succeed at a @Check[reflex|dc:20] save or become @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} until it @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escapes} or it is no longer in the mist cloud's emanation.</p>"
+        },
+        "Grab": {
+          "name": "抓取 Grab",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        }
+      },
+      "publicNotes": "<p>长触手的迷雾追踪者用一层薄雾斗篷包裹自身，它那只永不眨动的独眼能清晰地透过薄雾视物，使其在追踪猎物时占据优势。</p>\n<hr />\n<p>被寒冷或薄雾灌注的水元素，在水域之外的地区拥有更高的机动性。</p>\n<p>The tentacled mist stalker shrouds itself in a cloak of mist through which its single, never-blinking eye can see with clarity, allowing it an advantage when stalking its prey.</p>\n<hr />\n<p>Water elementals that become infused with cold or mist have increased mobility in regions outside of bodies of water.</p>",
+      "prototypeToken": "迷雾追踪者 Mist Stalker"
+    },
+    "Doom's of Tomorrow - Tsunami'd City": {
+      "name": "《明日厄运——海啸肆虐之城》 Doom's of Tomorrow - Tsunami'd City",
+      "tokenName": "明日的厄运 Doom's of Tomorrow",
+      "items": {
+        "Apocalypse Beam": {
+          "name": "天启射线 Apocalypse Beam",
+          "description": "<p><strong>触发</strong> 一个生物快步进入距离一个立体模型壁龛背面10尺以内</p><p><strong>效果</strong> 陷阱向该生物发射其对应的天启射线。</p>\n<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p><p><strong>Effect</strong> The trap fires its corresponding apocalypse beam at that creature.</p>"
+        },
+        "Bludgeoning Beam": {
+          "name": "钝击光束 Bludgeoning Beam",
+          "description": "<p>一个生物触发了天启射线并且在10英尺内。这是该反应动作（）的一部分。</p>\n<p>A creature triggerd Apocalypse Beam and is within 10 feet. This is part of the Reaction.</p>"
+        }
+      },
+      "disable": "<ul><li><p><strong>两个选项</strong></p><hr></li></ul><ol><li><p><strong>DC 20 盗窃（受训）</strong>在凄凉灯塔模型触发前迅速将其停用</p></li></ol><ul><li><p><strong>DC 23 潜行（受训）</strong>悄悄绕过陷阱而不触发它</p></li></ul>\n<ul><li><p><strong>Two Options</strong></p><hr></li></ul><ol><li><p><strong>DC 20 Thievery (trained)</strong> to quickly deactivate the model of Gauntlight before it triggers</p></li></ol><ul><li><p><strong>DC 23 Stealth (trained)</strong> to creep by a trap without triggering it</p></li></ul>",
+      "hazarddescription": "<p>一座小型立体模型，描绘了一座城市正面临悲惨的危难。</p><p>毁灭的声响从立体模型中升起，一束闪烁的能量光束从凄凉灯塔的微缩模型中向外刺出。</p><hr /><h3>在一名玩家查看立体模型后朗读</h3><p>这座立体模型呈现出一幕场景：艾巴萨罗姆城正处于贝科拉想象中的奇幻末日之中。你看到一个小型幻术：巨浪轰然拍下，吞没了整座城市。</p><p>在每一幕场景的边缘，都有一座小小的凄凉灯塔，仿佛远在数英里之外。</p>\n<p>A small diorama of a city facing a tragic peril.</p><p>The sounds of devastation rise from the diorama, and a beam of shimmering energy lances outward from the tiny model of Gauntlight.</p><hr /><h3>Read after a player looks at the diorama</h3><p>The diorama presents a scene depicting the city of Absalom in a fanciful doom from Belcorra’s imagination. You see a minor illusion of enormous waves crashing down and engulfing the city.</p><p>A tiny Gauntlight, as though miles distant, sits at the edge of each scene.</p>",
+      "reset": "<p>立体模型陷阱会在 1 小时后自动重置。</p>\n<p>The diorama trap resets automatically after 1 hour.</p>",
+      "routine": "<p>不适用</p>\n<p>N/A</p>",
+      "stealthdetails": "<p>(专家)</p>\n<p>(expert)</p>",
+      "hp": "(BT 28)",
+      "prototypeToken": "明日之厄运 Doom's of Tomorrow"
+    },
+    "Lurker In Light": {
+      "name": "伏光精 Lurker In Light",
+      "tokenName": "伏光精 Lurker In Light",
+      "items": {
+        "Primal Innate Spells": {
+          "name": "原初先天法术 Primal Innate Spells"
+        },
+        "Dimension Door (Only when in bright light, and only to an area in bright light)": {
+          "name": "次元门（仅当处于明亮光照中，且仅能前往处于明亮光照中的区域） Dimension Door (Only when in bright light, and only to an area in bright light)",
+          "description": "<p>打开一扇绕过正常空间的门，你立即将自己以及你所穿戴和持握的所有物品从你当前的空间传送到射程内你能看见的一处空旷空间中。若这会把另一个生物一同带上——即使你把它装在一个异次元容器里携带——该法术会失效。</p>\n<hr />\n<p><strong>升阶（5环）</strong> 射程增加至1英里。你不需要能够看见你的目的地，只要你过去曾到过那里，并且知道它相对于你的位置与距离即可。你暂时免疫1小时。</p>\n<p>Opening a door that bypasses normal space, you instantly transport yourself and any items you're wearing and holding from your current space to a clear space within range you can see. If this would bring another creature with you-even if you're carrying it in an extradimensional container-the spell is lost.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> The range increases to 1 mile. You don't need to be able to see your destination, as long as you have been there in the past and know its relative location and distance from you. You are temporarily immune for 1 hour.</p>"
+        },
+        "Blindness": {
+          "name": "目盲术 Blindness",
+          "description": "<p>你使目标目盲。该效果由目标的强韧豁免决定。随后目标在1分钟内获得暂时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} 直到其下个回合开始。</p>\n<p><strong>失败</strong> 目标目盲1分钟。</p>\n<p><strong>大失败</strong> 目标永久目盲。</p>\n<p>You blind the target. The effect is determined by the target's Fortitude save. The target then becomes temporarily immune for 1 minute.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} until its next turn begins.</p>\n<p><strong>Failure</strong> The target is Blinded for 1 minute.</p>\n<p><strong>Critical Failure</strong> The target is Blinded permanently.</p>"
+        },
+        "Searing Light": {
+          "name": "灼热光辉 Searing Light",
+          "description": "<p>你射出一道炽烈光线，带有神圣能量的气息。进行一次远程法术攻击。光线造成 5d6 火焰伤害。若目标为恶魔或不死生物，你额外造成 5d6 灵魂伤害。</p>\n<p>若光线穿过一片魔法黑暗术区域，或以受魔法黑暗术影响的生物为目标，<em>灼热光辉</em>会尝试反制该黑暗术。若你需要判定光线是否穿过一片黑暗区域，在你与该法术的目标之间画一条线</p><hr /><p><strong>大成功或大失败</strong> 目标受到双倍火焰伤害，若为恶魔或不死生物，还会受到双倍灵魂伤害。</p>\n<p><strong>成功</strong> 目标受到全额伤害</p><hr /><p><strong>升阶（+1）</strong> 火焰伤害增加 2d6，对恶魔与不死生物的灵魂伤害增加 2d6。</p>\n<p>@Damage[((@item.level*2)-1)d6[spirit]]{分级灵魂伤害}</p>\n<p>You shoot a blazing ray of light tinged with holy energy. Make a ranged spell attack. The ray deals 5d6 fire damage. If the target is a fiend or undead, you deal an extra 5d6 spirit damage.</p>\n<p>If the light passes through an area of magical darkness or targets a creature affected by magical darkness, <em>searing light</em> attempts to counteract the darkness. If you need to determine whether the light passes through an area of darkness, draw a line between yourself and the spell's target</p><hr /><p><strong>Critical Success</strong> The target takes double fire damage, as well as double spirit damage if a fiend or undead.</p>\n<p><strong>Success</strong> The target takes full damage</p><hr /><p><strong>Heightened (+1)</strong> The fire damage increases by 2d6, and the spirit damage against fiends and undead increases by 2d6.</p>\n<p>@Damage[((@item.level*2)-1)d6[spirit]]{Leveled Spirit Damage}</p>"
+        },
+        "Dancing Lights": {
+          "name": "舞光术 Dancing Lights",
+          "description": "<p>你创造至多四个漂浮的光亮，每两个之间相距不超过10英尺。每个都像火把一样照明。当你维持该法术时，你可以将任意数量的光亮移动至多60英尺。每个光亮必须保持在距你120英尺内并且与所有其他光亮相距不超过10英尺，否则它会熄灭。</p>\n<p>You create up to four floating lights, no two of which are more than 10 feet apart. Each sheds light like a torch. When you Sustain the Spell, you can move any number of lights up to 60 feet. Each light must remain within 120 feet of you and within 10 feet of all others, or it winks out.</p>"
+        },
+        "Ghost Sound": {
+          "name": "幻音术 Ghost Sound",
+          "description": "<p>你创造一个简单声音的听觉幻象，其最大音量相当于四个正常人喊叫。声音从你在射程内指定的一个方格发出。你无法创造可理解的词语或其他复杂声音（例如音乐）。</p>\n<hr />\n<p><strong>升阶（3环）</strong> 射程增加至60英尺。</p>\n<p><strong>升阶（5环）</strong> 射程增加至120英尺。</p>\n<p>You create an auditory illusion of simple sounds that has a maximum volume equal to four normal humans shouting. The sounds emanate from a square you designate within range. You can't create intelligible words or other intricate sounds (such as music).</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The range increases to 60 feet.</p>\n<p><strong>Heightened (5th)</strong> The range increases to 120 feet.</p>"
+        },
+        "Light": {
+          "name": "光亮术 Light",
+          "description": "<p>该物体发光，如同火把一般，在20尺半径内投射明亮光照（并在接下来的20尺内提供昏暗光照）。如果你再次将此法术施放在第二个物体上，第一个物体上的光亮术结束。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{法术效果：光亮术}</p>\n<hr />\n<p><strong>强化（4环）</strong> 该物体在60尺半径内散发明亮光照（并在接下来的60尺内提供昏暗光照）。</p>\n<p>The object glows, casting bright light in a 20-foot radius (and dim light for the next 20 feet) like a torch. If you cast this spell again on a second object, the light spell on the first object ends.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.cVVZXNbV0nElVOPZ]{Spell Effect: Light}</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The object sheds bright light in a 60-foot radius (and dim light for the next 60 feet).</p>"
+        },
+        "Mage Hand": {
+          "name": "法师之手 Mage Hand",
+          "description": "<p>你创造一只单独的魔法之手，它要么是隐形的，要么如幽灵般虚幻，用以抓住目标物体并将其缓慢移动至多20英尺。由于你在使该物体漂浮，你可以将其朝任意方向移动。当你维持法术时，你可以使该物体额外移动20英尺。若法术结束时物体仍在空中，该物体会坠落。</p>\n<hr />\n<p><strong>升阶（3环）</strong>你可以以负载为1或更低的无人持用物体为目标。</p>\n<p><strong>升阶（5环）</strong>射程增加至60英尺，且你可以以负载为1或更低的无人持用物体为目标。</p>\n<p><strong>升阶（7环）</strong>射程增加至60英尺，且你可以以负载为2或更低的无人持用物体为目标。</p>\n<p>You create a single magical hand, either invisible or ghostlike, that grasps the target object and moves it slowly up to 20 feet. Because you're levitating the object, you can move it in any direction. When you Sustain the Spell, you can move the object an additional 20 feet. If the object is in the air when the spell ends, the object falls.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (5th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (7th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 2 or less.</p>"
+        },
+        "Summon Fey": {
+          "name": "召唤妖精 Summon Fey",
+          "description": "<p>你召唤一个精类为你战斗。这与召唤动物相同，但你召唤的是一个具有精类（特征）的普通生物，且其等级为-1。</p>\n<hr />\n<p><strong>升阶（2环）</strong> 等级 1</p>\n<p><strong>升阶（3环）</strong> 等级 2</p>\n<p><strong>升阶（4环）</strong> 等级 3</p>\n<p><strong>升阶（5环）</strong> 等级 5</p>\n<p><strong>升阶（6环）</strong> 等级 7</p>\n<p><strong>升阶（7环）</strong> 等级 9</p>\n<p><strong>升阶（8环）</strong> 等级 11</p>\n<p><strong>升阶（9环）</strong> 等级 13</p>\n<p><strong>升阶（10环）</strong> 等级 15</p>\n<p>You conjure a fey to fight for you. This works like summon animal, except you summon a common creature that has the fey trait and whose level is -1.</p>\n<hr />\n<p><strong>Heightened (2nd)</strong> Level 1</p>\n<p><strong>Heightened (3rd)</strong> Level 2</p>\n<p><strong>Heightened (4th)</strong> Level 3</p>\n<p><strong>Heightened (5th)</strong> Level 5</p>\n<p><strong>Heightened (6th)</strong> Level 7</p>\n<p><strong>Heightened (7th)</strong> Level 9</p>\n<p><strong>Heightened (8th)</strong> Level 11</p>\n<p><strong>Heightened (9th)</strong> Level 13</p>\n<p><strong>Heightened (10th)</strong> Level 15</p>"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Mote of Light": {
+          "name": "光亮术微粒 Mote of Light"
+        },
+        "Blend with Light": {
+          "name": "与光亮术融为一体 Blend with Light",
+          "description": "<p><strong>触发</strong> 伏光精使用一个移动动作</p>\n<p><strong>需求</strong> 伏光精位于明亮光照的区域内</p>\n<hr />\n<p><strong>效果</strong> 伏光精变为 @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形}，直到它进入昏暗光照或黑暗的区域，或直到它使用一个敌对动作。</p>\n<p><strong>Trigger</strong> The lurker in light uses a move action</p>\n<p><strong>Requirements</strong> The lurker in light is in an area of bright light</p>\n<hr />\n<p><strong>Effect</strong> The lurker in light becomes @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible} until it enters an area of dim light or darkness, or until it uses a hostile action.</p>"
+        },
+        "Lurker's Glow": {
+          "name": "潜伏者的发光 Lurker's Glow",
+          "description": "<p>因伏光精的光点造成伤害的生物必须尝试一次 @Check[will|dc:22] 意志豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响，并在24小时内暂时免疫伏光精的发光。</p>\n<p><strong>失败</strong> 该生物被金色光线勾勒1分钟，并且在此期间不能处于 @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}。若该生物变为 @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}，它会处于隐蔽而非 @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{Undetected}。</p>\n<p><strong>大成功或大失败 失败</strong> 同失败，但该生物在效果的持续时间内于20英尺散发范围内散发明亮光照。此外，该生物在该豁免失败后的第一个回合承受 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled}。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.6E8bOkwFzFuQ3ZAw]{效果：伏光精的发光（大成功或大失败 失败）}</p>\n<p>A creature that takes damage from a lurker in light's mote of light must attempt a @Check[will|dc:22] save.</p>\n<hr />\n<p><strong>Success</strong> The creature is unaffected and is temporarily immune to lurker's glow for 24 hours.</p>\n<p><strong>Failure</strong> The creature is lined in golden light for 1 minute and can't be @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} during this time. If the creature becomes @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}, it is concealed rather than being @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{Undetected}.</p>\n<p><strong>Critical Failure</strong> As failure, but the creature sheds bright light in a 20-foot emanation for the duration of the effect. In addition, the creature is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} on its first turn after failing this save.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.6E8bOkwFzFuQ3ZAw]{Effect: Lurker's Glow (Critical Failure)}</p>"
+        },
+        "Ritual Gate": {
+          "name": "仪式之门 Ritual Gate",
+          "description": "<p><strong>需求</strong> 伏光精在此回合或其上一回合将一个活着的生物的生命值降至0，且拥有可用的 @UUID[Compendium.pf2e.spells-srd.Item.hs7h8f4Z1ZNdUt3s]{Summon Fey} 天生法术</p>\n<hr />\n<p><strong>效果</strong> 伏光精施放<em>summon fey</em>，且仅使用言语成分，并以屠杀之举替代该法术通常所需的材料与姿势成分。若被召唤的精类生物与伏光精具有相同的阵营，则伏光精可将<em>summon fey</em>法术维持至多1小时，而非1分钟。</p>\n<p><strong>Requirements</strong> The lurker in light has reduced a living creature to 0 Hit Points on this turn or its previous turn and has a @UUID[Compendium.pf2e.spells-srd.Item.hs7h8f4Z1ZNdUt3s]{Summon Fey} innate spell available</p>\n<hr />\n<p><strong>Effect</strong> The lurker in light casts <em>summon fey</em> with only a verbal component, using the act of slaughter to replace the normal material and somatic components for the spell. If the fey creature summoned has the same alignment as the lurker in light, the lurker in light can sustain the <em>summon fey</em> spell for up to 1 hour instead of 1 minute.</p>"
+        },
+        "Sneak Attack": {
+          "name": "偷袭 Sneak Attack",
+          "description": "<p>伏光精的打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}的生物额外造成2d6精准伤害。</p>\n<p>A lurker in light's Strikes deal an additional 2d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
+        }
+      },
+      "publicNotes": "<p>这些恶毒而古怪的精类看起来像约2英尺高的仙子，长有昆虫般的翅膀、巨大的眼睛和鼓胀的头颅。它们以一种只有其异样智慧才能理解的模式进行屠戮与恶作剧，但有人见过它们对矮人、侏儒以及生活在黑暗中的生物怀有特别的憎恨。凭借其怨恨以及对自身邪恶而残虐的冲动的追逐，伏光精巧妙地颠覆了“与光亮术相关的生物都是仁善而友善的”这一传统观念。</p>\n<p>尽管伏光精是精类并与第一世界有所关联，这些生物却常常出现在浩瀚众界的其他地方。它们尤其喜爱入侵幽影位面，把光亮术带给那里栖居者——不是为了帮助，而是为了在那些被光亮术折磨得痛苦不堪的家伙之间散播悲惨与疼痛。</p>\n<p>These malicious and strange fey appear as fairies about 2 feet tall, with insectile wings, large eyes, and bulbous heads. They slaughter and cause mischief in a pattern only their alien intellect understands, but they've been seen to take particular umbrage against dwarves, gnomes, and creatures who live in darkness. With their grudges and pursuit of their own wicked and sadistic whims, lurkers in light deftly overturn the conventional wisdom that creatures associated with light are benign and friendly.</p>\n<p>While lurkers in light are fey and have ties to the First World, these creatures are often found elsewhere in the Great Beyond. They are particularly fond of invading the Shadow Plane to bring light to those who dwell there-not to help, but to spread misery and pain among those to whom light is agonizing.</p>",
+      "prototypeToken": "伏光精 Lurker In Light"
+    },
+    "Poisonous Mold": {
+      "name": "毒性霉菌 Poisonous Mold",
+      "tokenName": "毒霉 Poisonous Mold",
+      "items": {
+        "Feed on Decay": {
+          "name": "以衰败为食 Feed on Decay",
+          "description": "<p>当霉菌被鲜血或衰败滋养时便会扩张。如果在任何时候，一名生物在与霉菌相邻时受到流血伤害，或有一具垂死或死亡的尸体与霉菌相邻，霉菌便会生长，扩张到与其当前空间相邻的每一个方格中。这种情况每天只能发生一次。</p>\n<p>The mold expands when fed by blood or decay. If at any point a creature takes bleed damage while adjacent to the mold or a dying or dead body is adjacent to the mold, the mold grows to expand into every square adjacent to its current space. This can happen only once per day.</p>"
+        },
+        "Spore Burst": {
+          "name": "孢子爆发 Spore Burst",
+          "description": "<p><strong>频率</strong> 每天一次</p>\n<p><strong>触发</strong> 一名生物触碰霉菌、击中它或对其造成伤害</p>\n<hr />\n<p><strong>效果</strong> 霉菌在一阵孢子与霉菌簇的爆炸中炸开，对其10英尺内的生物造成 @Damage[(2d6+6)[poison]] 伤害，具有一次 @Check[fortitude|dc:18|basic] 豁免。</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> A creature touches the mold, hits it, or damages it</p>\n<hr />\n<p><strong>Effect</strong> The mold explodes in a burst of spores and mold clusters, dealing @Damage[(2d6+6)[poison]] damage to creatures within 10 feet of it, with a @Check[fortitude|dc:18|basic] save.</p>"
+        },
+        "Floating Spores": {
+          "name": "漂浮孢子 Floating Spores",
+          "description": "<p>5尺。进入该光环或在该光环内开始其回合的生物受到 @Damage[2d6[poison]] 伤害。</p>\n<p>5 feet. A creature that enters or starts its turn in the aura takes @Damage[2d6[poison]] damage.</p>"
+        }
+      },
+      "disable": "<p>@Check[survival|dc:18]（受训）以安全移除霉菌</p>\n<p>@Check[survival|dc:18] (trained) to safely remove the mold</p>",
+      "hazarddescription": "<p>这种怪诞的真菌会在生物靠近时释放有毒孢子。</p>\n<p>This grotesque fungus releases poisonous spores when a creature comes near.</p>",
+      "reset": "<p>除非被彻底根除（通常使用酸或火），否则霉菌会在2周内重新生长。</p>\n<p>Unless entirely eradicated (typically with acid or fire), the mold regrows over the course of 2 weeks.</p>",
+      "stealthdetails": "<p>(受训)</p>\n<p>(trained)</p>",
+      "prototypeToken": "毒性霉菌 Poisonous Mold"
+    },
+    "Doom's of Tomorrow - Swallowed City": {
+      "name": "明日之厄运 - 被吞噬之城 Doom's of Tomorrow - Swallowed City",
+      "tokenName": "明日之厄运 Doom's of Tomorrow",
+      "items": {
+        "Apocalypse Beam": {
+          "name": "天启射线 Apocalypse Beam",
+          "description": "<p><strong>触发</strong> 一名生物快步进入距离立体模型壁龛背面10尺以内</p><p><strong>效果</strong> 陷阱向该生物发射其对应的天启射线。</p>\n<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p><p><strong>Effect</strong> The trap fires its corresponding apocalypse beam at that creature.</p>"
+        },
+        "Monstrous Beam": {
+          "name": "怪物光束 Monstrous Beam",
+          "description": "<p>一个生物触发了天启射线且位于10英尺内。这是反应动作（）的一部分。</p>\n<p>A creature triggerd Apocalypse Beam and is within 10 feet. This is part of the Reaction.</p>"
+        }
+      },
+      "disable": "<ul><li><p><strong>两个选项</strong></p><hr></li></ul><ol><li><p><strong>DC 20 盗窃（受训）</strong> 在凄凉灯塔的模型触发之前迅速将其停用</p></li></ol><ul><li><p><strong>DC 23 潜行（受训）</strong> 悄悄绕过一个陷阱而不触发它</p></li></ul>\n<ul><li><p><strong>Two Options</strong></p><hr></li></ul><ol><li><p><strong>DC 20 Thievery (trained)</strong> to quickly deactivate the model of Gauntlight before it triggers</p></li></ol><ul><li><p><strong>DC 23 Stealth (trained)</strong> to creep by a trap without triggering it</p></li></ul>",
+      "hazarddescription": "<p>一座小型立体模型，展示着一座城市正面临悲惨的危难。</p><p>毁灭的声响自模型中升起，一道闪烁能量光束从凄凉灯塔的微型模型中激射而出。</p><hr /><h3>在一名玩家观看立体模型后宣读</h3><p>立体模型呈现出一幕场景：艾巴萨罗姆城正遭受一场源自贝科拉想象的奇诡末日。你看见一个小型幻象：巨大的触手从城市四周涌现，将其撕裂，吞噬其中的人民。</p><p>每一幕场景的边缘，都坐落着一座微小的凄凉灯塔，仿佛在数英里之外。</p>\n<p>A small diorama of a city facing a tragic peril.</p><p>The sounds of devastation rise from the diorama, and a beam of shimmering energy lances outward from the tiny model of Gauntlight.</p><hr /><h3>Read after a player looks at the diorama</h3><p>The diorama presents a scene depicting the city of Absalom in a fanciful doom from Belcorra’s imagination. You see a minor illusion of enormous tentacles spawning from all around the city ripping it apart and consuming its people.</p><p>A tiny Gauntlight, as though miles distant, sits at the edge of each scene.</p>",
+      "reset": "<p>立体模型陷阱会在 1 小时后自动重置。</p>\n<p>The diorama trap resets automatically after 1 hour.</p>",
+      "routine": "<p>不适用</p>\n<p>N/A</p>",
+      "stealthdetails": "<p>(专家)</p>\n<p>(expert)</p>",
+      "hp": "(BT 28)",
+      "prototypeToken": "明日之厄运 Doom's of Tomorrow"
+    },
+    "Korlok": {
+      "name": "科罗克 Korlok",
+      "tokenName": "胡须魔 Barbazu",
+      "items": {
+        "Divine Innate Spells": {
+          "name": "神圣天生法术 Divine Innate Spells"
+        },
+        "Dimension Door": {
+          "name": "次元门 Dimension Door",
+          "description": "<p>打开一扇绕过正常空间的门，你会瞬间将自己以及你所穿戴和持有的任何物品，从你当前的空间传送到射程内你能看见的一处空旷空间。如果这会把另一名生物也一同带上——即使你正将其装在一个异次元容器中携带——该法术将失效。</p>\n<hr />\n<p><strong>升阶（5环）</strong> 射程增加至1英里。你不需要能够看见目的地，只要你过去曾到过那里，并且知道它相对你的位置与距离即可。你在1小时内暂时免疫。</p>\n<p>Opening a door that bypasses normal space, you instantly transport yourself and any items you're wearing and holding from your current space to a clear space within range you can see. If this would bring another creature with you-even if you're carrying it in an extradimensional container-the spell is lost.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> The range increases to 1 mile. You don't need to be able to see your destination, as long as you have been there in the past and know its relative location and distance from you. You are temporarily immune for 1 hour.</p>"
+        },
+        "Dimension Door (At Will)": {
+          "name": "次元门（随意） Dimension Door (At Will)",
+          "description": "<p>打开一扇绕过正常空间的门，你会立刻将自己以及你穿着和持有的任何物品从你当前的空间传送到射程内你能看见的一处空旷空间。若这会让另一名生物与你一同到达——即使你正把它装在一个异次元容器里携带——该法术将失效。</p>\n<hr />\n<p><strong>强化（5环）</strong> 射程增加至 1 英里。你不需要能看见你的目的地，只要你过去曾到过那里并知道其相对位置以及与你之间的距离即可。你暂时免疫 1 小时。</p>\n<p>Opening a door that bypasses normal space, you instantly transport yourself and any items you're wearing and holding from your current space to a clear space within range you can see. If this would bring another creature with you-even if you're carrying it in an extradimensional container-the spell is lost.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> The range increases to 1 mile. You don't need to be able to see your destination, as long as you have been there in the past and know its relative location and distance from you. You are temporarily immune for 1 hour.</p>"
+        },
+        "Infernal Pact": {
+          "name": "地狱契约 Infernal Pact",
+          "description": "<p>你向一位强大的魔鬼提出请求，恳求其将一些下属束缚来为你效劳。若你成功，该魔鬼会派出它所挑选的以下其一：1个魔鬼，其等级不超过<em>炼狱契约</em>阶位的两倍；2个魔鬼，其等级各自至少比该法术阶位两倍低2；或3个魔鬼，其等级各自至少比该法术阶位两倍低3。</p>\n<hr />\n<p><strong>大成功</strong> 这些魔鬼被派到你身边，并为你效劳[[/r 1d4 #weeks]]{1d4周}。</p>\n<p><strong>成功</strong> 这些魔鬼被派到你身边，并为你效劳[[/r 1d4 #days]]{1d4天}。</p>\n<p><strong>失败</strong> 你的提出请求被拒绝。</p>\n<p><strong>大失败</strong> 不仅你的提出请求被拒绝，这位强大的魔鬼还会将其不悦之情传话给你的主人。</p>\n<p>You make an appeal to a powerful devil, asking it to bind some of its subordinates to your service. If you succeed, the devil sends you its choice of one devil whose level is no more than double <em>infernal pact's</em> rank, two devils whose levels are each at least 2 less than double the spell rank, or three devils whose levels are each at least 3 less than double the spell rank.</p>\n<hr />\n<p><strong>Critical Success</strong> The devils are sent to you and serve you for [[/r 1d4 #weeks]]{1d4 weeks}.</p>\n<p><strong>Success</strong> The devils are sent to you and serve you for [[/r 1d4 #days]]{1d4 days}.</p>\n<p><strong>Failure</strong> Your request is denied.</p>\n<p><strong>Critical Failure</strong> Not only is your request denied, but the powerful devil sends word of its displeasure to your master.</p>"
+        },
+        "Glaive": {
+          "name": "长柄刀 Glaive"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Beard": {
+          "name": "胡须 Beard"
+        },
+        "Greater Darkvision": {
+          "name": "强效黑暗视觉 Greater Darkvision",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.GreaterDarkvision]</p>"
+        },
+        "Telepathy 100 feet": {
+          "name": "心灵感应 100尺 Telepathy 100 feet",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Telepathy]</p>"
+        },
+        "+1 Status to All Saves vs. Magic": {
+          "name": "对所有对抗魔法的豁免获得+1状态加值 +1 Status to All Saves vs. Magic"
+        },
+        "Attack of Opportunity": {
+          "name": "借机攻击 Attack of Opportunity",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+        },
+        "Avernal Fever": {
+          "name": "炼狱热病 Avernal Fever",
+          "description": "<p><strong>豁免投掷</strong> @Check[fortitude|dc:23]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者且无不良效果 (1 day)</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{衰弱 1} (1 day)</p>\n<p><strong>阶段 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{衰弱 2} (1 day)</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:23]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} (1 day)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} (1 day)</p>"
+        },
+        "Infernal Wound": {
+          "name": "地狱创伤 Infernal Wound",
+          "description": "<p>一只髯魔的戟Strike还会造成 @Damage[1d6[bleed]]，并对试图治疗它的行为具有抗性。</p>\n<p>停止流血的纯骰检定起始为 @Check[flat|dc:20]。只有当流血的生物或一名盟友成功援助恢复时，DC才会降低至 @Check[flat|dc:15]。对具有地狱创伤的生物进行 @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{实施急救} 的DC增加5。</p>\n<p>施法者或物品试图对正遭受地狱创伤的生物使用治疗魔法时，必须在DC 21的反制检定中成功，否则该魔法无法治疗该生物。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.inLBsuLRE5xmVHdn]{效果：地狱创伤}</p>\n<p>A bearded devil's glaive Strike also deals @Damage[1d6[bleed]] that resists attempts to heal it.</p>\n<p>The flat check to stop the bleeding starts at @Check[flat|dc:20]. The DC is reduced to @Check[flat|dc:15] only if the bleeding creature or an ally successfully assists with the recovery. The DC to @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{Administer First Aid} to a creature with an infernal wound is increased by 5.</p>\n<p>A spellcaster or item attempting to use healing magic on a creature suffering from an infernal wound must succeed at a DC 21 counteract check or the magic fails to heal the creature.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.inLBsuLRE5xmVHdn]{Effect: Infernal Wound}</p>"
+        },
+        "Reposition": {
+          "name": "重新定位 Reposition",
+          "description": "<p><strong>触发</strong> 该魔鬼以长柄刀打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 该魔鬼将该生物向任意方向移动5尺。目的方格必须在该魔鬼长柄刀的触及范围内。</p>\n<p>该次移动不会触发反应动作（）。</p>\n<p><strong>Trigger</strong> The devil hits a creature with a glaive Strike.</p>\n<hr />\n<p><strong>Effect</strong> The devil moves the creature 5 feet in any direction. The destination square must be within reach of the devil's glaive.</p>\n<p>This movement doesn't trigger reactions.</p>"
+        },
+        "Wriggling Beard": {
+          "name": "蠕动胡须 Wriggling Beard",
+          "description": "<p><strong>频率</strong> 每轮一次。</p>\n<hr />\n<p><strong>效果</strong> 胡须魔进行一次胡须打击。此打击无视其多重攻击减值，且不计入该减值。</p>\n<p><strong>Frequency</strong> once per round.</p>\n<hr />\n<p><strong>Effect</strong> The barbazu makes a beard Strike. This Strike ignores their multiple attack penalty and doesn't count toward that penalty.</p>"
+        }
+      },
+      "publicNotes": "<p>胡须魔，也被称为有须魔鬼或步兵魔鬼，是嗜杀的邪魔，它们通过充当地狱军团的步卒来满足自己对毁灭的渴望，常常率领小魔鬼与劣魔等低等魔鬼的乌合之众投入战斗。有须魔鬼挥舞带锯齿的长柄刀，造成参差不齐的裂口，令其难以被治疗魔法修复，从而导致惊人的失血。当敌人靠得太近时，有须魔鬼便用其蠕动胡须上的尖刺发动打击，传播一种名为“阿弗纳斯热”的可憎瘟疫，并乐于观赏受害者的力量从体内被缓慢吞噬的景象。</p>\n<p>胡须魔常见于地狱各层，野蛮地放纵邪恶炼狱领主的心血来潮，并在它们随心所欲地散播谋杀、苦难与痛楚时欢欣鼓舞。</p>\n<hr />\n<p>作为堕落的大师与征服的设计师，魔鬼既寻求诱惑凡俗生命加入它们对一切亵渎之物的追逐，也寻求将暴政散播到所有世界。它们给予凡人的诱惑形形色色：从签署一份炼狱契约而获赐的强大力量，到对某位恶魔赞助者低声立誓后得到的扭曲恩惠，乃至更多更加隐晦的交换。那些屈服于这些诱惑的人，会被判入地狱深坑中无尽折磨的来世，唯有逃脱的希望在于有机会获得晋升，成为炼狱阶序中的一名魔鬼。每个魔鬼都在维系地狱这台冷酷无情的官僚机器中扮演着特定角色，从士兵、学者到审判官、律师、法官与刽子手。卑微的劣魔与小魔鬼为更强大且更专门化的魔鬼执行卑下劳役，例如契约魔鬼与艾莉妮厄斯，而最强大的坑狱魔则命令着整支炼狱大军。</p>\n<p>Barbazus, known also as bearded devils or infantry devils, are murderous fiends who satiate their lust for annihilation by serving as the foot soldiers of Hell's armies, often leading hordes of lesser devils such as imps and lemures into battle. Bearded devils wield serrated glaives to inflict jagged gashes that resist healing magic, resulting in tremendous blood loss. When enemies come too close, bearded devils strike with the spines of their wriggling beards to deliver a wretched contagion called Avernal fever, savoring the sight of their victim's strength being slowly devoured from within.</p>\n<p>Barbazus can be found savagely indulging the whims of evil infernal lords from all layers of Hell, rejoicing as they disseminate murder, misery, and anguish as they see fit.</p>\n<hr />\n<p>Masters of corruption and architects of conquest, devils seek both to tempt mortal life to join in their pursuit of all things profane and to spread tyranny throughout all worlds. The temptations they offer mortals range from great powers granted by the signing of an infernal contract to twisted favors following a whispered pledge to a diabolic patron, or any number of even subtler exchanges. Those who succumb to these temptations find themselves consigned to an afterlife of endless torment in the pits of Hell, wherein the only hope of escape lies in the chance of being promoted to become a devil in the infernal ranks. Every devil has a specific role to play in the upkeep of the remorseless bureaucratic machine that is Hell, from soldiers and scholars to inquisitors, lawyers, judges, and executioners. Lowly lemures and imps perform subservient labor to more powerful and specialized devils, such as contract devils and erinyes, while the greatest pit fiends command entire infernal armies.</p>",
+      "allSaves": "+1 status to all saves vs. magic",
+      "prototypeToken": "胡须魔 Barbazu"
+    },
+    "Nhakazarin": {
+      "name": "纳卡扎林 Nhakazarin",
+      "tokenName": "纳卡扎林 Nhakazarin",
+      "items": {
+        "Divine Prepared Spells": {
+          "name": "神圣预备法术 Divine Prepared Spells"
+        },
+        "Domain Spells": {
+          "name": "领域法术 Domain Spells"
+        },
+        "Chilling Darkness": {
+          "name": "冻寒黑暗 Chilling Darkness",
+          "description": "<p>你射出一道极度寒冷的黑暗射线，带着些许亵渎能量。对目标进行一次远程法术攻击。你造成5d6寒冷伤害；若目标为天界生物，则额外造成5d6灵魂伤害。</p>\n<p>若射线穿过魔法光亮术的区域，或以受到魔法光亮术影响的生物为目标，冻寒黑暗会尝试反制该光亮术。若你需要判定射线是否穿过一片光亮术区域，则在你与该法术的目标之间画一条线。</p>\n<hr />\n<p><strong>大成功</strong> 目标受到双倍伤害。</p>\n<p><strong>成功</strong> 目标受到全额伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 寒冷伤害增加2d6，且对天界生物造成的灵魂伤害增加2d6。</p>\n<p>You shoot an utterly cold ray of darkness tinged with unholy energy. Make a ranged spell attack against the target. You deal 5d6 cold damage, plus 5d6 spirit damage if the target is a celestial.</p>\n<p>If the ray passes through an area of magical light or targets a creature affected by magical light, chilling darkness attempts to counteract the light. If you need to determine whether the ray passes through an area of light, draw a line between yourself and the spell's target.</p>\n<hr />\n<p><strong>Critical Success</strong> The target takes double damage.</p>\n<p><strong>Success</strong> The target takes full damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The cold damage increases by 2d6, and the spirit damage against celestials increases by 2d6.</p>"
+        },
+        "Vampiric Touch": {
+          "name": "吸血鬼之触 Vampiric Touch",
+          "description": "<p>你的接触从一个目标身上吸取生命之血以强化自身。你对该目标造成 6d6 虚空伤害。你获得等于该目标承受的虚空伤害一半的临时生命值（在计算抗力等因素之后）。1 分钟后，你失去所有剩余的临时生命值。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害提高 2d6。</p>\n<p>Your touch leeches the lifeblood out of a target to empower yourself. You deal 6d6 void damage to the target. You gain temporary Hit Points equal to half the void damage the target takes (after applying resistances and the like). You lose any remaining temporary Hit Points after 1 minute.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d6.</p>"
+        },
+        "Dispel Magic": {
+          "name": "解除魔法 Dispel Magic",
+          "description": "<p>你解构一个法术或效果背后的魔法。针对该目标尝试一次反制检定。如果你成功反制一个魔法物品，该物品在10分钟内变为其类型的普通物品。这不会改变该物品的非魔法属性。如果该目标是神器或类似物品，你自动失败。</p>\n<p>You unravel the magic behind a spell or effect. Attempt a counteract check against the target. If you successfully counteract a magic item, the item becomes a mundane item of its type for 10 minutes. This doesn't change the item's non-magical properties. If the target is an artifact or similar item, you automatically fail.</p>"
+        },
+        "Silence": {
+          "name": "沉默术 Silence",
+          "description": "<p>目标不发出任何声音，使生物无法仅凭听觉注意到它。目标无法使用音波攻击，也无法使用带有听觉（特征）的动作。这会阻止它施放包含言语成分的法术。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.mmJNE57hC7G3SPae]{法术效果：沉默术}</p>\n<hr />\n<p><strong>升阶（4环）</strong> 该法术效果从被触及的生物向外散发，在10尺半径内及穿过该半径的所有声音都会被消除，并阻止受影响区域内的任何听觉与音波效果。处于该半径内时，生物承受与目标相同的效果。根据效果的位置，生物可能会注意到没有声音传到它那里（例如阻隔了来自队伍的噪音）。</p>\n<p>The target makes no sound, preventing creatures from noticing it using hearing alone. The target can't use sonic attacks, nor can it use actions with the auditory trait. This prevents it from casting spells that include verbal components.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.mmJNE57hC7G3SPae]{Spell Effect: Silence}</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The spell effect emanates from the touched creature, silencing all sound in or passing through a 10- foot radius and preventing any auditory and sonic effects in the affected area. While within the radius, creatures are subject to the same effects as the target. Depending upon the position of the effect, a creature might notice the lack of sound reaching it (blocking off the noise coming from a party, for example).</p>"
+        },
+        "Sound Burst": {
+          "name": "音鸣爆 Sound Burst",
+          "description": "<p>一阵刺耳的噪音爆发而出，造成2d10音波伤害。每个生物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功或大失败 Success</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半伤害。</p>\n<p><strong>失败</strong> 该生物承受全部伤害，并在1轮内处于@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened}状态。</p>\n<p><strong>大成功或大失败 Failure</strong> 该生物承受双倍伤害，在1分钟内处于Deafened状态，并处于@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}状态。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加1d10。</p>\n<p>A cacophonous noise blasts out, dealing 2d10 sonic damage. Each creature must attempt a Fortitude save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened} for 1 round.</p>\n<p><strong>Critical Failure</strong> The creature takes double damage, is Deafened for 1 minute, and is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d10.</p>"
+        },
+        "Bane": {
+          "name": "绝望术 Bane",
+          "description": "<p>你用疑惑充斥敌人的心智。</p>\n<p>区域内的敌人必须在意志豁免中成功，否则只要他们仍在该区域内，就会在攻击掷骰上承受-1状态减值。</p>\n<p>每回合一次，从你施放绝望术后的下一回合开始，你可以使用一个具有专注（特征）的单动作，将该散发的半径增加5尺，并迫使区域内尚未受影响的敌人再尝试一次豁免。</p>\n<p>绝望术可以反制 @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{祝福术}。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{法术效果：绝望术}</p>\n<p>You fill the minds of your enemies with doubt.</p>\n<p>Enemies in the area must succeed at a Will save or take a -1 status penalty to attack rolls as long as they are in the area.</p>\n<p>Once per turn, starting the turn after you cast bane, you can use a single action, which has the concentrate trait, to increase the emanation's radius by 5 feet and force enemies in the area that weren't yet affected to attempt another saving throw.</p>\n<p>Bane can counteract @UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]{Bless}.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.UTLp7omqsiC36bso]{Spell Effect: Bane}</p>"
+        },
+        "Chill Touch": {
+          "name": "恐吓之触 Chill Touch",
+          "description": "<p>将虚空能量虹吸进体内，你的手散发出苍白的黑暗。你的接触会削弱活物并扰乱不死生物，甚至可能使其逃离。其效果取决于目标是活物还是不死生物。</p>\n<ul>\n<li><strong>活物生物</strong> 该法术造成等同于1d4加上你的施法调整值的虚空伤害。目标尝试一次基础强韧豁免，但若大失败，还会在1轮内受到@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}。</li>\n<li><strong>不死生物</strong> 若强韧豁免失败，目标会在1轮内受到@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}。若大失败，除非其通过一次意志豁免，否则目标还会在1轮内受到@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing}。</li>\n</ul>\n<hr />\n<p><strong>升阶（+1）</strong> 对活物生物造成的虚空伤害增加1d4。</p>\n<p>Siphoning void energy into yourself, your hand radiates a pale darkness. Your touch weakens the living and disorients undead, possibly even causing them to flee. The effect depends on whether the target is living or undead.</p>\n<ul>\n<li><strong>Living Creature</strong> The spell deals void damage equal to 1d4 plus your spellcasting modifier. The target attempts a basic Fortitude save, but is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} for 1 round on a critical failure.</li>\n<li><strong>Undead Creature</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} for 1 round on a failed Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} for 1 round unless it succeeds at a Will save.</li>\n</ul>\n<hr />\n<p><strong>Heightened (+1)</strong> The void damage to living creatures increases by 1d4.</p>"
+        },
+        "Command": {
+          "name": "命令术 Command",
+          "description": "<p>你大声喊出一道难以忽视的命令。你可以命令目标接近你、逃离（如同其具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑（状态）}状态）、放开其正握持之物、倒下@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}，或原地不动。在其服从你的命令之前，它不能延后或进行任何反应动作（）。其效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下个回合的第一个动作中，该生物必须使用一个单动作来照你的命令行事。</p>\n<p><strong>大成功或大失败</strong> 目标必须在其下个回合使用所有动作来服从你的命令。</p>\n<hr /><p><strong>升阶（5环）</strong> 你最多可以以10个生物为目标。</p>\n<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}, or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr /><p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr /><p><strong>Heightened (5th)</strong> You can target up to 10 creatures.</p>"
+        },
+        "Daze": {
+          "name": "眩晕术 Daze",
+          "description": "<p>你使目标的心智变得混乱，并用一次心灵冲击使其陷入眩晕术状态。这次冲击造成等同于你施法能力调整值的精神伤害；目标必须进行一次基础意志豁免。若目标在豁免中大失败，它还会获得 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 伤害增加1d6。</p>\n<p>You cloud the target's mind and daze it with a mental jolt. The jolt deals mental damage equal to your spellcasting ability modifier; the target must attempt a basic Will save. If the target critically fails the save, it is also @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The damage increases by 1d6.</p>"
+        },
+        "Harm": {
+          "name": "伤害术 Harm",
+          "description": "<p>你引导虚空能量来伤害活物或治疗亡灵。若目标为活体生物，你对其造成1d8虚空伤害，且其进行一次基础强韧豁免。若目标为自愿的亡灵生物，你恢复等量生命值。你在施放此法术时花费的动作数量决定其目标、射程、区域及其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(verbal, 姿势)</strong> 该法术的射程为30尺。若你在治疗亡灵生物，将恢复的生命值提高8点。</p>\n<p><span class=\"action-glyph\">3</span> <strong>(材料, verbal, 姿势)</strong> 你在30尺发散中散布虚空能量。此法术以区域内所有活体与亡灵生物为目标。</p>\n<hr />\n<p><strong>增幅（+1）</strong> 治疗或伤害的数值提高1d8，且2动作版本的额外治疗提高8点。</p>\n<p>You channel void energy to harm the living or heal the undead. If the target is a living creature, you deal 1d8 void damage to it, and it gets a basic Fortitude save. If the target is a willing undead creature, you restore that amount of Hit Points. The number of actions you spend when Casting this Spell determines its targets, range, area, and other parameters.</p>\n<p><span class=\"action-glyph\">1</span> <strong>(somatic)</strong> The spell has a range of touch.</p>\n<p><span class=\"action-glyph\">2</span> <strong>(verbal, somatic)</strong> The spell has a range of 30 feet. If you're healing an undead creature, increase the Hit Points restored by 8.</p>\n<p><span class=\"action-glyph\">3</span> <strong>(material, verbal, somatic)</strong> You disperse void energy in a 30-foot emanation. This targets all living and undead creatures in the area.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The amount of healing or damage increases by 1d8, and the extra healing for the 2-action version increases by 8.</p>"
+        },
+        "Ray of Enfeeblement": {
+          "name": "衰弱射线 Ray of Enfeeblement",
+          "description": "<p>一道削弱敌人力量的射线从你手中闪出。对目标进行一次远程法术攻击。若你成功，则该生物尝试一次强韧豁免以决定该法术的效果。若你的攻击掷骰为大成功，则使用其豁免结果降低一个成功等级的结果。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}。</p>\n<p><strong>失败</strong> 目标变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2}。</p>\n<p><strong>大失败</strong> 目标变为 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 3}。</p>\n<p>A ray that saps a foe's strength flashes from your hand. Attempt a ranged spell attack against the target. If you succeed, that creature attempts a Fortitude save to determine the spell's effect. If your attack roll is a critical success, use the outcome for one degree of success worse than the result of its save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}.</p>\n<p><strong>Failure</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2}.</p>\n<p><strong>Critical Failure</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 3}.</p>"
+        },
+        "Read Aura": {
+          "name": "阅读灵光 Read Aura",
+          "description": "<p>你专注于目标物体，敞开心扉以感知魔法灵光。当施法完成时，你会知道该物品是否具有魔法；若具有魔法，你还会得知其魔法学派。</p>\n<p>如果该物体是幻象，只有当该效果的等级低于你的阅读灵光法术的环阶时，你才会侦测到这一点。</p>\n<hr />\n<p><strong>强化（3环）</strong> 你可以以最多10个物体为目标。</p>\n<p><strong>强化（6环）</strong> 你可以以任意数量的物体为目标。</p>\n<p>You focus on the target object, opening your mind to perceive magical auras. When the casting is complete, you know whether that item is magical, and if it is, you learn the school of magic.</p>\n<p>If the object is illusory, you detect this only if the effect's level is lower than the rank of your read aura spell.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to 10 objects.</p>\n<p><strong>Heightened (6th)</strong> You can target any number of objects.</p>"
+        },
+        "Shield": {
+          "name": "护盾术 Shield",
+          "description": "<p>你升起一道魔法力场护盾。这算作使用“举起护盾”动作，使你在下个回合开始前获得对AC的+1环境加值，但不需要空出一只手来使用。</p>\n<p>当该法术处于效果期间，你可以用你的魔法护盾使用@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{盾牌格挡}反应动作（）。该护盾具有硬度5。在你使用盾牌格挡后，法术结束，且你在10分钟内无法再次施放它。不同于普通的盾牌格挡，你可以用该法术的反应动作（）来对抗@UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{力场弹幕}法术。</p>\n<p>升阶该法术会提高护盾的硬度。</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{法术效果：护盾术}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{效果：护盾术免疫}</p>\n<hr />\n<p><strong>升阶（3环）</strong> 护盾具有硬度10。</p>\n<p><strong>升阶（5环）</strong> 护盾具有硬度15。</p>\n<p><strong>升阶（7环）</strong> 护盾具有硬度20。</p>\n<p><strong>升阶（9环）</strong> 护盾具有硬度25。</p>\n<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{Shield Block} reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the @UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{Force Barrage} spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{Effect: Shield Immunity}</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
+        },
+        "Sigil": {
+          "name": "魔法印记 Sigil",
+          "description": "<p>你无害地将自己独特的魔法印记（约为1平方英寸的体型）置于目标生物或物体上。该印记可以是可见或隐形的，你可以用一个交互动作来接触目标，将其从一种状态变为另一种状态。该印记可以通过5分钟的擦洗或刮除工作去除。如果它在一个生物身上，它会在一周内自然淡化。印记淡化前的时代会随你升阶后的等级而增加。</p>\n<hr />\n<p><strong>升阶（3环）</strong> 魔法印记改为在1个月后淡化。</p>\n<p><strong>升阶（5环）</strong> 魔法印记改为在1年后淡化。</p>\n<p><strong>升阶（7环）</strong> 魔法印记永不淡化。</p>\n<p>You harmlessly place your unique magical sigil, which is about 1 square inch in size, on the targeted creature or object. The mark can be visible or invisible, and you can change it from one state to another by using an Interact action to touch the target. The mark can be scrubbed or scraped off with 5 minutes of work. If it's on a creature, it fades naturally over the course of a week. The time before the mark fades increases depending on your heightened level.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The sigil instead fades after 1 month.</p>\n<p><strong>Heightened (5th)</strong> The sigil instead fades after 1 year.</p>\n<p><strong>Heightened (7th)</strong> The sigil never fades.</p>"
+        },
+        "Touch of Undeath": {
+          "name": "亡灵之触 Touch of Undeath",
+          "description": "<p>你以不死之力攻击目标的生命力，造成1d6虚空伤害。目标必须进行一次强韧豁免。</p>\n<hr /><p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标受到一半伤害。</p>\n<p><strong>失败</strong> 目标受到全部伤害，且活力效果对其的治疗术量仅为正常的一半，持续1轮。</p>\n<p><strong>大失败</strong> 目标受到双倍伤害，且活力效果对其的治疗术量仅为正常的一半，持续1分钟。</p>\n<hr /><p><strong>强化（+1）</strong> 伤害增加1d6。</p>\n<p>You attack the target's life force with undeath, dealing 1d6 void damage. The target must attempt a Fortitude save.</p>\n<hr /><p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes half damage.</p>\n<p><strong>Failure</strong> The target takes full damage, and vitality effects heal it only half as much as normal for 1 round.</p>\n<p><strong>Critical Failure</strong> The target takes double damage, and vitality effects heal it only half as much as normal for 1 minute.</p>\n<hr /><p><strong>Heightened (+1)</strong> The damage increases by 1d6.</p>"
+        },
+        "Staff of Necromancy": {
+          "name": "死灵师法杖 Staff of Necromancy",
+          "description": "<p>这根扭曲且阴森可怖的法杖装饰着骇人的头骨与骨骼图案。持用该法杖时，你在用于识别死灵系魔法的检定中获得+2环境加值。</p>\n<p><strong>启动</strong> 施法</p>\n<hr />\n<p><strong>效果</strong> 你从法杖中消耗一定数量的充能，以从其列表中施放一个法术。</p>\n<ul>\n<li><strong>戏法</strong> @UUID[Compendium.pf2e.spells-srd.Item.mAMEt4FFbdqoRnkN]{虚空扭曲}</li>\n<li><strong>1环</strong> @UUID[Compendium.pf2e.spells-srd.Item.k34hDOfIIMAxNL4a]{邪影触须}, @UUID[Compendium.pf2e.spells-srd.Item.J7Y7tl0bbdz7TcCc]{衰弱}</li>\n<li><strong>2环</strong> @UUID[Compendium.pf2e.spells-srd.Item.fZPCv2VHuM2yPbC8]{耳聋}, @UUID[Compendium.pf2e.spells-srd.Item.xRgU9rrhmGAgG4Rc]{安宁休息}</li>\n</ul>\n<p><strong>制作需求</strong> 提供所有已列出等级的所有已列出法术各一次施放。</p>\n<p>This twisted and grim-looking staff is adorned with hideous skull and bone motifs. While wielding the staff, you gain a +2 circumstance bonus to checks to identify necromancy magic.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<hr />\n<p><strong>Effect</strong> You expend a number of charges from the staff to cast a spell from its list.</p>\n<ul>\n<li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.mAMEt4FFbdqoRnkN]{Void Warp}</li>\n<li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.k34hDOfIIMAxNL4a]{Grim Tendrils}, @UUID[Compendium.pf2e.spells-srd.Item.J7Y7tl0bbdz7TcCc]{Enfeeble}</li>\n<li><strong>2nd</strong> @UUID[Compendium.pf2e.spells-srd.Item.fZPCv2VHuM2yPbC8]{Deafness}, @UUID[Compendium.pf2e.spells-srd.Item.xRgU9rrhmGAgG4Rc]{Peaceful Rest}</li>\n</ul>\n<p><strong>Craft Requirements</strong> Supply one casting of all listed levels of all listed spells.</p>"
+        },
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Staff": {
+          "name": "法杖 Staff"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 纳卡扎林与一具在过去一小时内死亡的生物的尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 纳卡扎林吞食尸体的一块，并恢复 @Damage[3d6[治疗]] 生命值。</p>\n<p>纳卡扎林从任意一具给定的尸体中恢复生命值只能一次。</p>\n<p><strong>Requirements</strong> Nhakazarin is adjacent to the corpse of a creature that died within the last hour.</p>\n<hr />\n<p><strong>Effect</strong> Nhakazarin devours a chunk of the corpse and regains @Damage[3d6[healing]] Hit Points.</p>\n<p>Nhakazarin can regain Hit Points from any given corpse only once.</p>"
+        },
+        "Consume Masterpiece": {
+          "name": "啃食杰作 Consume Masterpiece",
+          "description": "<p><strong>需求</strong> 纳卡扎林与<strong>C34</strong>区域中贝科拉的腐烂雕像相邻</p>\n<hr />\n<p><strong>效果</strong> 纳卡扎林从雕像上吞食一大块血肉，恢复 @Damage[3d6[治疗]] 生命值，并在1轮内获得 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速 1}。她只能用这个额外动作进行一次啃咬打击或施法。</p>\n<p>她每天只能从雕像中进食一次。</p>\n<p><strong>Requirements</strong> Nhakazarin is adjacent to the rotting statue of Belcorra in area <strong>C34</strong></p>\n<hr />\n<p><strong>Effect</strong> Nhakazarin devours a chunk of flesh from the statue and regains @Damage[3d6[healing]] Hit Points and is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1} for 1 round. She can use this extra action only to make a jaws Strike or Cast a Spell.</p>\n<p>She can feed from the statue only once each day.</p>"
+        },
+        "Ghoul Fever": {
+          "name": "食尸鬼热 Ghoul Fever",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者，无不良效果（1天）</p>\n<p><strong>阶段 2</strong> @Damage[2d6[void]] 伤害，且从所有治疗中恢复的生命值减半（1天）</p>\n<p><strong>阶段 3</strong> 同阶段2（1天）</p>\n<p><strong>阶段 4</strong> @Damage[2d6[void]] 伤害，且无法从治疗中获得任何益处（1天）</p>\n<p><strong>阶段 5</strong> 同阶段4（1天）</p>\n<p><strong>阶段 6</strong> 死亡，并于次日午夜以 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼} 的形态复起。</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[void]] damage and regains half as many Hit Points from all healing (1 day)</p>\n<p><strong>Stage 3</strong> as stage 2 (1 day)</p>\n<p><strong>Stage 4</strong> @Damage[2d6[void]] damage and gains no benefit from healing (1 day)</p>\n<p><strong>Stage 5</strong> as stage 4 (1 day)</p>\n<p><strong>Stage 6</strong> dead, and rises as a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{Ghoul} the next midnight.</p>"
+        },
+        "Paralysis": {
+          "name": "麻痹 Paralysis",
+          "description": "<p>任何被食尸鬼（特征）的攻击命中的活着的非精灵生物必须在一次 @Check[fortitude|dc:22] 豁免中成功，否则将变为 @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}。它可以在其每个回合结束时尝试一次新的豁免，并且在每次此类豁免时DC累积降低1。</p>\n<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:22] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>纳卡扎林跳跃至多不超过她速度的一半。这次移动不会触发反应动作（）。</p>\n<p>Nhakazarin jumps up to half her Speed. This movement doesn't trigger reactions.</p>"
+        }
+      },
+      "blurb": "女性食尸鬼邪教领袖\nFemale ghoul cult leader",
+      "hp": "void healing",
+      "prototypeToken": "纳卡扎林 Nhakazarin"
+    },
+    "Flickerwisp": {
+      "name": "闪火 Flickerwisp",
+      "tokenName": "闪火 Flickerwisp",
+      "items": {
+        "Shock": {
+          "name": "震荡 Shock"
+        },
+        "Glow": {
+          "name": "发光 Glow",
+          "description": "<p>5英尺。闪火本身天生处于隐形状态，但会发出淡黄色的发光，令其灵光范围内成为明亮光照，并使其可见。</p>\n<p>5 feet. A flickerwisp is itself naturally invisible, but glows with pale yellow light, casting bright light in the aura and making it visible.</p>"
+        },
+        "Innocuous": {
+          "name": "无害 Innocuous",
+          "description": "<p>闪火的外貌会在处于困惑（状态）的生物心中产生怪异的印象。带有 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑（状态）} 状态的生物永远不会用攻击以闪火为目标，除非该生物在过去24小时内曾被闪火的电击能力伤害过。</p>\n<p>A flickerwisp's appearance registers strangely in the minds of creatures who are confused. A creature with the @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} condition never targets a flickerwisp with attacks unless the creature has been damaged by the flickerwisp's shock ability within the last 24 hours.</p>"
+        },
+        "Magic Immunity": {
+          "name": "魔法免疫 Magic Immunity",
+          "description": "<p>闪火免疫除 @UUID[Compendium.pf2e.spells-srd.Item.HRb2doyaLtaoCfi3]{妖火术}、@UUID[Compendium.pf2e.spells-srd.Item.g8QqHpv2CWDwmIm1]{造风术}、@UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{Force Barrage} 与 @UUID[Compendium.pf2e.spells-srd.Item.Oj1PJBMQD9vuwCv7]{Quandary} 之外的所有法术。</p>\n<p>A flickerwisp is immune to all spells except @UUID[Compendium.pf2e.spells-srd.Item.HRb2doyaLtaoCfi3]{Faerie Fire}, @UUID[Compendium.pf2e.spells-srd.Item.g8QqHpv2CWDwmIm1]{Gust of Wind}, @UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{Force Barrage}, and @UUID[Compendium.pf2e.spells-srd.Item.Oj1PJBMQD9vuwCv7]{Quandary}.</p>"
+        },
+        "Consume Confusion": {
+          "name": "吞食困惑 Consume Confusion",
+          "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 一个位于闪火 15 英尺内的生物处于 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑（状态）}</p>\n<hr />\n<p><strong>效果</strong> 闪火以该生物的困惑术为食；同时，其闪烁的身体与不连贯的扭动会使现有的困惑术效果持续不散。</p>\n<p>它恢复 @Damage[1d4[治疗]] 生命值，且若该生物的困惑（状态）具有有限的持续时间，则其持续时间延长 1 轮。</p>\n<p><strong>Frequency</strong> once per round</p>\n<p><strong>Requirement</strong> A creature within 15 feet of the flickerwisp is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}</p>\n<hr />\n<p><strong>Effect</strong> The flickerwisp feeds on the creature's confusion, even as its flashing body and disjointed gyrations cause existing confusion effects to persist.</p>\n<p>It regains @Damage[1d4[healing]] Hit Points, and if the creature's confused condition has a limited duration, it lasts 1 additional round.</p>"
+        },
+        "Flicker": {
+          "name": "闪动 Flicker",
+          "description": "<p>闪火在相邻生物的头部周围的空中翻涌飞舞，其长度以令人眼花缭乱的一连串分散注意力的闪烁脉动闪光与火花。</p>\n<p>该生物必须在一次 @Check[will|dc:18] 豁免中成功，否则将陷入 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑} 状态，持续1轮（大失败则为2轮）。若大成功，则该生物在24小时内暂时免疫。</p>\n<p>The flickerwisp churns and flits in the air around an adjacent creature's head, and its length flashes and sparkles in a bewildering array of distracting pulsations.</p>\n<p>The creature must succeed at a @Check[will|dc:18] save or become @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 round (2 rounds on a critical failure). On a critical success, the creature is temporarily immune to for 24 hours.</p>"
+        }
+      },
+      "publicNotes": "<p>舞动、扭曲的闪火是一种力量较弱但同样恶毒的鬼火。与更危险的同类一样，闪火偏爱在偏僻的沼泽地或荒凉的河流与溪涧地带出没，尤其是在岸边附近——在那里，它们可以伪装成不过是一小群萤火虫。闪火的身体是一段3英尺长、如发丝般的纤维束，当这只生物在空中飘忽穿梭时，其上会闪烁脉动，迸发出诡异的黄色光带与光点。</p>\n<p>尽管闪火能品尝恐惧术，并觉得那滋味无比可口，但它并不以这种情绪为食。相反，闪火以困惑术与疑虑求生。当旅人在林中迷失方向而散发出的不安感，正是闪火最爱的佳肴。它们能啜饮这种迷乱感而不暴露自身存在，也不会伤害猎物。最终，闪火会变得过于饥饿，被迫飘近，令猎物陷入困惑术，并大口吞食那未经加工的情绪。闪火会尽力在死亡发生前俯冲离去，而这些折磨者中最娴熟者甚至能让选定的“餐点”存活数日，以小口小口地啜饮困惑术。</p>\n<p>The dancing, twisting flickerwisp is a less powerful but no less malevolent type of will-o'-wisp. Like their more dangerous kin, flickerwisps prefer to haunt lonely swamps or stretches of lonely rivers or creeks, particularly near the shorelines where they can pass themselves off as nothing more than a small gathering of fireflies. A flickerwisp's body is a 3-foot-long length of hair-like fibers that flashes and pulses with ribbons and points of eerie yellow light as the creature flits through the air.</p>\n<p>While a flickerwisp can taste fear, and finds the flavor delectable, it does not feed on this emotion. Instead, flickerwisps subsist on confusion and doubt. The sense of unease a traveler exudes when they become lost in the woods is flickerwisps' favorite repast. They can sip from this sense of disorientation without betraying their presence or harming their prey. Eventually, the flickerwisps grow too hungry and are compelled to flit closer, confuse their prey, and glut on the raw emotions. Flickerwisps do their best to swoop away before death occurs, and the most skilled of these tormentors can keep a chosen meal alive for days, sipping from confusion in small doses.</p>",
+      "prototypeToken": "闪火 Flickerwisp"
+    },
+    "Corpselight": {
+      "name": "尸火 Corpselight",
+      "tokenName": "尸火 Corpselight",
+      "items": {
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Corpse Sense (Precise) 30 feet": {
+          "name": "尸体感知（精确）30英尺 Corpse Sense (Precise) 30 feet",
+          "description": "<p>尸火可以感知射程内的尸体。这是一种精确感官，可穿透厚度小于5英尺的实体障碍。</p>\n<p>A corpselight can sense dead bodies within range. This is a precise sense that functions through solid barriers less than 5 feet thick.</p>"
+        },
+        "Sunlight Powerlessness": {
+          "name": "阳光虚弱 Sunlight Powerlessness",
+          "description": "<p>一只暴露在阳光下的尸火会陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2} 和 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2}，并且无法认领尸体。</p>\n<p>A corpselight exposed to sunlight is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2} and @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 2}, and cannot Claim a Corpse.</p>"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Wisp Form": {
+          "name": "鬼火形态 Wisp Form",
+          "description": "<p>当尸火与一具尸体融合时，其生命值降至0时，改为降至1生命值；与此同时，该尸体倒塌在地，而尸火以其鬼火形态现身。</p>\n<p>处于鬼火形态时，尸火为超小型，且除占据尸体或飞行外，不能执行任何动作。</p>\n<p>以鬼火形态开始其回合的尸火，必须在其回合结束时尝试一次@Check[flat|dc:16|immutable:true]；若失败，则失去1生命值。处于鬼火形态时生命值降至0的尸火会被摧毁。</p>\n<p>When a corpselight is reduced to 0 Hit Points while merged with a corpse, it is instead reduced to 1 Hit Point as the corpse collapses to the ground and the corpselight emerges in its wisp form.</p>\n<p>While in wisp form, a corpselight is Tiny and can take no actions other than Claim Corpse or Fly.</p>\n<p>A corpselight that starts its turn in wisp form must attempt a @Check[flat|dc:16|immutable:true] at the end of its turn; if it fails, it loses 1 Hit Point. A corpselight reduced to 0 Hit Points while in wisp form is destroyed.</p>"
+        },
+        "Claim Corpse": {
+          "name": "占据尸体 Claim Corpse",
+          "description": "<p><strong>先决条件</strong> 尸火处于鬼火形态，且与一具在过去24小时内未被尸火占据过的中型或小型尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 尸火与尸体融合，使尸体站起，并恢复 @Damage[3d6[治疗]] 生命值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.auJ02rr1Jr88oD3Z]{效果：占据尸体 - 血肉}</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.3np7EyJ8pyrVlpie]{效果：占据尸体 - 骸骨}</p>\n<p><strong>Prerequisites</strong> The corpselight is in wisp form and is adjacent to a Medium or Small corpse that hasn't been claimed by a corpselight in the past 24 hours</p>\n<hr />\n<p><strong>Effect</strong> The corpselight merges with the corpse, causes the corpse to Stand, and regains @Damage[3d6[healing]] Hit Points.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.auJ02rr1Jr88oD3Z]{Effect: Claim Corpse - Fleshy}</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.3np7EyJ8pyrVlpie]{Effect: Claim Corpse - Skeletal}</p>"
+        },
+        "Death Light": {
+          "name": "死亡之光 Death Light",
+          "description": "<p><strong>先决条件</strong> 尸火在一具尸体中</p>\n<hr />\n<p><strong>效果</strong> 尸火从口中与眼中发出一道病态的蓝色光亮术光束，形成一个 @Template[cone|distance:20]。该区域内的所有活着的生物必须尝试一次 @Check[fortitude|dc:18|traits:damaging-effect] 豁免。若至少有1个生物豁免失败，尸火恢复 @Damage[2d6[healing]] 生命值；任何超过其最大值的部分转化为临时生命值，持续1分钟。</p>\n<p>尸火在 [[/br 1d4 #Recharge Death Light]]{1d4轮} 内无法再次使用死亡之光。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到 @Damage[1d6[void]] 伤害。</p>\n<p><strong>失败</strong> 该生物受到 @Damage[2d6[void]] 伤害，且陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}。</p>\n<p><strong>大失败</strong> 该生物受到 @Damage[4d6[void]] 伤害，且陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}。</p>\n<p><strong>Prerequisites</strong> The corpselight is in a corpse</p>\n<hr />\n<p><strong>Effect</strong> The corpselight emits a sickly blue beam of light from its mouth and eyes in a @Template[cone|distance:20]. All living creatures in this area must attempt a @Check[fortitude|dc:18|traits:damaging-effect] saving throw. If at least 1 creature fails its save, the corpselight regains @Damage[2d6[healing]] Hit Points, gaining any that exceed its maximum as temporary Hit Points that last for 1 minute.</p>\n<p>The corpselight can't use again for [[/br 1d4 #Recharge Death Light]]{1d4 rounds}.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[1d6[void]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[2d6[void]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[4d6[void]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}.</p>"
+        }
+      },
+      "publicNotes": "<p>一只饿死的鬼火可能会以冰冷的蓝色发光球体、带着海绵般湿润的形态复起——尸火。尸火会本能地搜寻一具宿主尸体以栖身其中，因为若不藏身于死去的生物体内，它的实体形态会迅速劣化。</p>\n<p>A will-o'-wisp that starves to death might rise as a cold, blue, glowing sphere of spongy wetness-a corpselight. A corpselight instinctively seeks out a host corpse to dwell within, as its physical form quickly deteriorates if not hidden within a dead creature.</p>",
+      "hp": "void healing",
+      "prototypeToken": "尸火 Corpselight"
+    },
+    "Gibbering Mouther": {
+      "name": "呓语之喉 Gibbering Mouther",
+      "tokenName": "呓语之喉 Gibbering Mouther",
+      "items": {
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Spittle": {
+          "name": "唾液 Spittle"
+        },
+        "All-Around Vision": {
+          "name": "全域视野 All-Around Vision",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+        },
+        "Gibbering": {
+          "name": "呓语灵光 Gibbering",
+          "description": "<p>60尺。每个在其回合开始时位于呓语之喉60尺内的生物必须尝试一次@Check[will|dc:19]意志豁免。失败时，它们在1轮内变为@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}。成功时，它们获得1分钟的暂时免疫。</p>\n<p>60 feet. Each creature that begins its turn within 60 feet of a gibbering mouther must attempt a @Check[will|dc:19] save. On a failure, they are @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 round. On a success, they are temporarily immune for 1 minute.</p>"
+        },
+        "Reactive Gnaw": {
+          "name": "反应性啃咬 Reactive Gnaw",
+          "description": "<p><strong>触发</strong> 一个相邻的生物对呓语之喉造成挥砍伤害。</p>\n<hr />\n<p><strong>效果</strong> 呓语之喉的伤口张开成另一张巨口。它对触发生物进行一次啃咬打击。</p>\n<p><strong>Trigger</strong> An adjacent creature deals the gibbering mouther slashing damage.</p>\n<hr />\n<p><strong>Effect</strong> The gibbering mouther's wound opens into another maw. It makes a jaws Strike against the triggering creature.</p>"
+        },
+        "Burn Eyes": {
+          "name": "灼目 Burn Eyes",
+          "description": "<p>一个因呓语之喉的唾液而受到伤害的生物必须在一次 @Check[fortitude|dc:22] 豁免中成功，否则陷入 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩} 1 轮（若大失败则陷入 @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲} 1 轮）。</p>\n<p>A creature that takes damage from a gibbering mouther's spittle must succeed at a @Check[fortitude|dc:22] save or be @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round (or @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round on a critical failure).</p>"
+        },
+        "Engulf": {
+          "name": "吞噬 Engulf",
+          "description": "<p>@Check[reflex|dc:22|traits:伤害效果], @Damage[3d8[穿刺]], [[/act 逃脱 dc=22]], 破裂 8</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>\n<p>@Check[reflex|dc:22|traits:damaging-effect], @Damage[3d8[piercing]], [[/act escape dc=22]], Rupture 8</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+        },
+        "Ground Manipulation": {
+          "name": "地面操控 Ground Manipulation",
+          "description": "<p>呓语之喉会使其身体下方的石头和土变得柔软泥泞，并在呓语之喉离开该位置后仍保持 1 分钟。呓语之喉可以轻松穿行这些区域，但其他生物将其视为困难地形。</p>\n<p>The gibbering mouther causes stone and earth under its body to grow soft and muddy, remaining so for 1 minute after the mouther moves off the location. A gibbering mouther can move through these areas with ease, but other creatures treat them as difficult terrain.</p>"
+        },
+        "Grab": {
+          "name": "抓取 Grab",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        }
+      },
+      "publicNotes": "<p>由喋喋不休的嘴巴与渗出体液的肉质污泥构成的无定形团块，呓语之喉是地表或地下所能发现的最怪异生物之一。它们永远饥饿，这些异怪总在寻找下一顿食物，不停吞噬却从不满足。凭借勉强的智力，呓语之喉能够理解甚至说出阿克洛语，但它们极少以可理解的方式这么做。相反，它们无数的嘴巴持续不断地叽里咕噜、嘟囔乱语，形成一股连绵不断的声流，扰乱区域内其他生物的思维模式。</p>\n<p>呓语之喉从何而来、如何诞生、为何出现，这些问题都没有答案。它们与更为强大的修格斯在某些方面存在相似之处，因此有人提出两种生物同源的理论；不那么厚道的学者则认为，呓语之喉其实是某个凡人试图创造类似修格斯之物的产物——只是“为什么要这么做”的问题依旧无人能解。还有人相信，呓语之喉是神祇为惩罚某种被遗忘但必然可怖的罪行而将其送入世界。至于呓语之喉自身，对此几乎无话可说——至少说不出任何有意义的内容。学者们为尝试理解呓语之喉的噪声而浪费了无数时间——这些研究不仅让研究者身陷险境，其所得结论充其量也只是自相矛盾、令人困惑。</p>\n<p>不论其起源为何，呓语之喉遍布格拉利昂全境。在古老城市与遗迹之下的地城中已有目击记录；在幽暗地域更深层的塞卡米纳与奥尔夫的许多地区也同样有所记载。它们在纳尔-沃斯的上层地区稍为少见，或许是因为那里聚居地众多，而这些聚居地无法容忍呓语之喉的存在。</p>\n<p>Amorphous blobs of yammering mouths and oozing, fleshy sludge, gibbering mouthers are among the strangest creatures found either aboveground or below. Perpetually ravenous, these aberrations are always seeking their next meals, ever eating but never sated. With a nominal intelligence, gibbering mouthers can understand and even speak Aklo, but they do so in an intelligible manner only rarely. Instead, their innumerable mouths constantly jabber and babble in a stream of sound that disrupts the thought patterns of other creatures in the area.</p>\n<p>Where, how, and why gibbering mouthers originated are questions without answers. They share certain similarities with the much more powerful shoggoths, leading to theories that the two creatures share an origin; less charitable scholars have suggested that the gibbering mouther is instead a mortal's attempt to create something akin to a shoggoth-though the question of why remains unanswered. Still others believe gibbering mouthers were sent to the world by the gods as a punishment for some forgotten but surely terrible transgression. Gibbering mouthers themselves have little to say on the matter-at least, not in any sort of sense. Scholars have wasted countless hours in attempts to make sense of gibbering mouthers' noises-studies that put researchers into danger and give results that are contradictory and confusing at best.</p>\n<p>Whatever their origin, gibbering mouthers range the entirety of Golarion. Sightings have been recorded in dungeons below ancient cities and ruins as well as many regions of the deeper Darklands layers of Sekamina and Orv. They are somewhat less common in the upper region of Nar-Voth, perhaps due to the prevalence of settlements that don't tolerate gibbering mouthers' presence.</p>",
+      "ac": "all-around vision",
+      "prototypeToken": "呓语之喉 Gibbering Mouther"
+    },
+    "Jarelle Kaldrian": {
+      "name": "贾瑞尔·卡德瑞恩 Jarelle Kaldrian",
+      "tokenName": "贾瑞尔·卡德瑞恩 Jarelle Kaldrian",
+      "items": {
+        "Ghostly Hand": {
+          "name": "幽灵之手 Ghostly Hand"
+        },
+        "Site Bound": {
+          "name": "束缚之地 Site Bound",
+          "description": "<p>区域 <strong>C13</strong></p>\n<hr />\n<p>一只典型的幽灵（特征）只能离它被杀害之处或其盘踞之地不远。典型限制为120英尺。有些幽灵（特征）则并非受缚于某个地点，而是被束缚在对它而言意义重大的房间、建筑、物品或生物上。</p>\n<p>Area <strong>C13</strong></p>\n<hr />\n<p>A typical ghost can stray only a short distance from where it was killed or the place it haunts. A typical limit is 120 feet. Some ghosts are instead bound to a room, building, item, or creature that was special to it rather than a location.</p>"
+        },
+        "Rejuvenation": {
+          "name": "复生 Rejuvenation",
+          "description": "<p>移除这个房间的桌子和工具会让贾蕾尔得以前往来世。</p>\n<hr />\n<p>当一个幽灵（特征）被摧毁时，它会在其所束缚的地点内于[[/br 2d4 #days]]{2d4天}后重塑，且完全痊愈。只有当有人确定其存在的原因，并纠正任何阻止其灵魂休息的事物时，幽灵（特征）才能被永久摧毁。</p>\n<p>Removing this room's tables and tools allows Jarelle to move on to the afterlife.</p>\n<hr />\n<p>When a ghost is destroyed, it re-forms after [[/br 2d4 #days]]{2d4 days} within the location it's bound to, fully healed. A ghost can be permanently destroyed only if someone determines the reason for its existence and sets right whatever prevents the spirit from resting.</p>"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Malevolent Possession": {
+          "name": "恶意占据 Malevolent Possession",
+          "description": "<p>Jarelle 试图占据一个相邻的有形生物。这具有与 @UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]{占据术} 法术相同的效果（法术DC为22），但由于 Jarelle 没有实体身体，她不受该法术此项限制的影响。</p>\n<p>Jarelle attempts to possess an adjacent corporeal creature. This has the same effect as the @UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]{Possession} spell (with a spell DC of 22), except since Jarelle doesn't have a physical body, she is unaffected by that restriction of the spell.</p>"
+        },
+        "Poisoned Breath": {
+          "name": "剧毒吐息 Poisoned Breath",
+          "description": "<p>雅蕾尔呼出一团@Template[cone|distance:15]的剧毒雾霭，造成@Damage[5d6[poison]|options:area-damage]伤害（@Check[fortitude|dc:22|basic|options:area-effect] 豁免；在大失败时，目标还会受到@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1}，持续24小时）。</p>\n<p>随后，她在[[/gmr 1d4 #Recharge Poisoned Breath]]{1d4 轮}内无法再次使用剧毒吐息。</p>\n<p>Jarelle exhales a @Template[cone|distance:15] of toxic mist that deals @Damage[5d6[poison]|options:area-damage] damage (@Check[fortitude|dc:22|basic|options:area-effect] save; on a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} for 24 hours).</p>\n<p>She then can't use Poisoned Breath again for [[/gmr 1d4 #Recharge Poisoned Breath]]{1d4 rounds}.</p>"
+        },
+        "Library Lore": {
+          "name": "图书馆学识 Library Lore"
+        }
+      },
+      "blurb": "女性人类，幽灵图书管理员\nFemale human ghost librarian",
+      "hp": "void healing, rejuvenation",
+      "prototypeToken": "贾瑞尔·卡德瑞恩 Jarelle Kaldrian"
+    },
+    "Aller Rosk": {
+      "name": "阿勒·罗斯克 Aller Rosk",
+      "tokenName": "阿勒·罗斯克 Aller Rosk",
+      "items": {
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Consume Tattooed Flesh": {
+          "name": "啃食刺青尸体 Consume Tattooed Flesh",
+          "description": "<p><strong>需求</strong> Aller与一块带纹身的碎肉相邻，或与一具在过去1小时内死亡的生物尸体相邻</p>\n<p>Aller吞食一口血肉并恢复 @Damage[4d6[治疗]] 生命值。如果这块血肉带有纹身，他还会获得 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{加速 1}，并且可以使用这个额外动作进行一次啃咬 打击。</p>\n<p>随后Aller在[[/gmr 1d4 #Recharge Consume Flesh]]{1d4轮}内无法再次使用啃食尸体。他随身携带一块带纹身的血肉。</p>\n<p><strong>Requirements</strong> Aller is adjacent to a tattooed scrap of flesh or to the corpse of a creature that died within the last hour</p>\n<p>Aller devours a bite of flesh and regains @Damage[4d6[healing]] Hit Points. If the piece of flesh was tattooed, he is also @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1} and can use this extra action to make a jaws Strike.</p>\n<p>Aller then can't Consume Flesh for [[/gmr 1d4 #Recharge Consume Flesh]]{1d4 rounds}. He has one piece of tattooed flesh on his person.</p>"
+        },
+        "Ghoul Fever": {
+          "name": "食尸鬼热 Ghoul Fever",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者，无不良效果（1天）</p>\n<p><strong>阶段 2</strong> @Damage[2d6[void]] 伤害，且从所有治疗中恢复的生命值减半（1天）</p>\n<p><strong>阶段 3</strong> 同阶段2（1天）</p>\n<p><strong>阶段 4</strong> @Damage[2d6[void]] 伤害，且无法从治疗中获得任何好处（1天）</p>\n<p><strong>阶段 5</strong> 同阶段4（1天）</p>\n<p><strong>阶段 6</strong> 死亡，并在下一个午夜作为一只 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼（特征）} 复起。</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[void]] damage and regains half as many Hit Points from all healing (1 day)</p>\n<p><strong>Stage 3</strong> as stage 2 (1 day)</p>\n<p><strong>Stage 4</strong> @Damage[2d6[void]] damage and gains no benefit from healing (1 day)</p>\n<p><strong>Stage 5</strong> as stage 4 (1 day)</p>\n<p><strong>Stage 6</strong> dead, and rises as a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{Ghoul} the next midnight.</p>"
+        },
+        "Paralysis": {
+          "name": "麻痹 Paralysis",
+          "description": "<p>任何被阿勒的攻击命中的活着的、非精灵生物都必须在一次 @Check[fortitude|dc:22] 豁免中成功，否则将陷入 @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}。它可以在其每个回合结束时尝试一次新的豁免，并且在每次此类豁免时DC都会累计降低1。</p>\n<p>Any living, non-elf creature hit by Aller's attack must succeed at a @Check[fortitude|dc:22] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>阿勒跳跃至最多其速度的一半。此移动不会触发反应动作（）。</p>\n<p>Aller jumps up to half his Speed. This movement doesn't trigger reactions.</p>"
+        }
+      },
+      "blurb": "男性食尸鬼刺青艺术家\nMale ghoul tattoo artist",
+      "hp": "void healing",
+      "prototypeToken": "阿勒·罗斯克 Aller Rosk"
+    },
+    "Grothlut": {
+      "name": "胶化人 Grothlut",
+      "tokenName": "胶化人 Grothlut",
+      "items": {
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Digestive Spew": {
+          "name": "消化喷吐 Digestive Spew"
+        },
+        "Disgusting Demise": {
+          "name": "恶心的死法 Disgusting Demise",
+          "description": "<p>当胶化人被降至0生命值时，它的消化器官破裂，向所有处于@Template[emanation|distance:30]内的生物喷涌出炼金酸液与毒素。区域内的每个生物必须在一次@Check[fortitude|dc:19]豁免中成功，否则将受到@Damage[2d6[acid]]伤害并获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（大失败时伤害加倍并获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}）。</p>\n<p>When the grothlut is reduced to 0 Hit Points, its digestive organs rupture, unleashing alchemical acid and poison upon all creatures in a @Template[emanation|distance:30]. Each creature in the area must succeed at a @Check[fortitude|dc:19] save or take @Damage[2d6[acid]] damage and become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (double damage and @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} on a critical failure).</p>"
+        },
+        "Piteous Moan": {
+          "name": "悲惨哀鸣 Piteous Moan",
+          "description": "<p>60英尺。</p>\n<p>每个非胶化人生物进入或在该区域内开始其回合时，必须成功通过一次 @Check[will|dc:17] 豁免检定，否则将变为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（大失败时为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}）。随后该生物获得持续1分钟的暂时免疫。</p>\n<p>胶化人可以解消该光环。</p>\n<p>胶化人通常直到其感官到非胶化人生物的存在才会开始呻吟，并且一旦它不再感官到任何此类生物，通常就会停止。</p>\n<p>60 feet.</p>\n<p>Each nongrothlut creature that enters or starts its turn within the area must succeed at a @Check[will|dc:17] saving throw or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} on a critical failure). The creature then becomes temporarily immune for 1 minute.</p>\n<p>The grothlut can Dismiss this aura.</p>\n<p>A grothlut usually does not begin moaning until it senses the presence of a non-grothlut creature, and it usually stops once it doesn't sense any more such creatures.</p>"
+        }
+      },
+      "publicNotes": "<p>如蛞蝓般的憎邪，胶化人是塑肉仪式过程所剩下的丑陋残渣。尽管它们的头部与躯干隐约呈类人形态，但手臂如橡胶般柔软，笨拙地垂在身侧摇摆。作为可悲的生物，当其他生物靠近时它们会凄厉呻吟，或许是其心智最后的残存正恳求从这骇人的扭曲形体中解脱。</p>\n<p>许多塑肉者认为胶化人是一项造物的失败，因为转化几乎彻底抹去了意识。也有人不同意，认为扭曲生物的心智反而更有用处，因为它会变得顺从且易于驱赶。哈艮地的邪教徒通常让胶化人充当守卫，缓慢巡逻其聚居地的边缘。一旦就位，胶化人便可作为粗糙的突击兵使用，被释放出去以削弱敌军，随后更珍贵的武者再涉入战场，将那些被胶化人爆裂的内脏与血肉所熏得作呕的敌人砍倒。</p>\n<hr />\n<p>魔法事故、神祇诅咒与未经测试的科技都能对身体造成剧烈变形；在格拉利昂乃至其外的世界中，这些现象皆极为猖獗。经历了如此剧烈变化、以至于不再能被视为与先前相同族裔的生物，被称为塑肉仪式造物。此类存在相当罕见，而其令人不安的外貌常会引起旁人惊骇的反应。</p>\n<p>有些生物沉溺于借由塑肉仪式让被击败的敌人彻底堕落。尽管这项技艺最初由恶魔领主哈艮地传授给凡人，但凡人数千上万年来不断改造并完善该方法。塑肉工匠把敌人折磨于翻涌的魔法试剂大缸之中，将其血肉与心灵一并重塑为骇人而怪诞之物。</p>\n<p>Sluglike abominations, grothluts are grotesque dregs of the fleshwarping process. While their head and torso are vaguely humanoid, their arms are rubbery and move awkwardly at their sides. Wretched creatures, they moan piteously when other creatures are near, perhaps as the last remnants of their mind pleads to be free from their horrid warped form.</p>\n<p>Many fleshwarpers consider the grothlut to be a failure of a creation, as the transformation all but stamps out consciousness. Others disagree, arguing that warping the creature's mind makes it all the more useful, since it becomes pliable and easy to herd. Cultists of Haagenti typically use grothluts as guardians that slowly patrol the edges of their enclaves. Once in position, grothluts can be used as crude shock troops, unleashed to soften enemy forces before more valuable warriors wade in and cut down the enemies who have been nauseated by the grothluts' exploded organs and flesh.</p>\n<hr />\n<p>Magical mishaps, divine curses, and untested technology are all capable of wreaking drastic transformations on the body, and are all rampant on the world of Golarion and beyond. Creatures that have undergone changes so drastic they no longer can be considered the same ancestry as they were before are known as fleshwarps. These beings are rare, and their unsettling appearance often provokes horrified responses from other people.</p>\n<p>Some creatures revel in the total degradation of their defeated foes through fleshwarping. Though the technique was originally taught to mortals by the demon lord Haagenti, mortals have spent eons modifying and perfecting the method. Fleshcrafters torture their enemies in vats of churning magical reagents, reshaping their flesh and psyche alike into horrid and monstrous things.</p>",
+      "prototypeToken": "胶化人 Grothlut"
+    },
+    "Blood of Belcorra": {
+      "name": "贝科拉之血 Blood of Belcorra",
+      "tokenName": "贝科拉之血 Blood of Belcorra",
+      "items": {
+        "Gauntlight Beam": {
+          "name": "凄凉之光射线 Gauntlight Beam",
+          "description": "<p><strong>触发</strong> 一个位于夜晚的活体生物在区域<strong>A11</strong>结束其回合</p>\n<hr />\n<p><strong>效果</strong> 一个可怖的贝科拉影像，似乎由新鲜血液构成，从地板上的血渍中升起，并如同灯塔般原地旋转。冰冷的蓝色光束从贝科拉的双眼与张开的口中射出，导致水疱与衰败在血肉上蔓延。位于以区域<strong>A11</strong>中心为起点的@Template[burst|distance:30]内的活体生物必须尝试一次@Check[fortitude|dc:20|traits:damaging-effect]豁免。</p>\n<p>随后，此灵异现象进行先攻掷骰。</p>\n<hr />\n<p><strong>大成功或大失败 成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[1d8[void]]伤害。</p>\n<p><strong>失败</strong> 该生物受到@Damage[(1d8+6)[void]]伤害，并在1轮内处于@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}。</p>\n<p><strong>大成功或大失败 失败</strong> 该生物受到@Damage[(2d8+6)[void]]伤害，并在1轮内处于@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{失明}，随后在1轮内目眩。</p>\n<p><strong>Trigger</strong> A living creature ends its turn in area <strong>A11</strong> at night</p>\n<hr />\n<p><strong>Effect</strong> A ghastly image of Belcorra, seemingly composed of fresh blood, rises from the bloodstain on the floor and rotates in place like a lighthouse. Beams of cold blue light shine from Belcorra's eyes and open mouth, causing blisters and decay to spread across flesh. Living creatures within a @Template[burst|distance:30] from the center of area <strong>A11</strong> must attempt a @Check[fortitude|dc:20|traits:damaging-effect] save.</p>\n<p>The haunt then rolls initiative.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[1d8[void]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[(1d8+6)[void]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[(2d8+6)[void]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round then dazzled for 1 round.</p>"
+        }
+      },
+      "disable": "<p>@Check[thievery|dc:22|name:擦去血迹] (trained) 以擦去足够的血迹来扰乱闹鬼的死灵能量，或 @Check[宗教|dc:20|name:驱除闹鬼] (trained) 以驱除闹鬼</p>\n<p>@Check[thievery|dc:22|name:Wipe Away Blood] (trained) to wipe away enough of the bloodstain to disrupt the haunt's necromantic energies, or @Check[religion|dc:20|name:Excorcise Haunt] (trained) to exorcise the haunt</p>",
+      "hazarddescription": "<p>贝科拉的血腥影像浮现，放射出吸魂的光亮术，随后从房间内的活体生物身上吸入鲜血。</p>\n<p>A bloody image of Belcorra arises, emits a soul‑draining light, then inhales blood from living creatures in the room.</p>",
+      "reset": "<p>如果该闹鬼因被禁用或通过伤害被摧毁，贝科拉的血腥魅影会以螺旋状向上喷涌，浸透通往区域 <strong>A25</strong> 的活板门，然后通过钥匙孔向上吸入，使 @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁} 的盗窃 DC 降至 @Check[thievery|dc:20|name:Pick Trap Door|traits:action:pick-a-lock,skill,manipulate]。</p>\n<p>在下一次日出时，血液会再度向下流回此房间，闹鬼重置。一旦拉斯达·范克维尔从区域 <strong>D9</strong> 被救出，该闹鬼将被永久摧毁。</p>\n<p>If the haunt is disabled or destroyed through damage, the bloody phantom of Belcorra sprays upward in a spiral, dousing the trap door leading to area <strong>A25</strong> before draining upward through the keyhole, which reduces the Thievery DC to @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick the Lock} to @Check[thievery|dc:20|name:Pick Trap Door|traits:action:pick-a-lock,skill,manipulate].</p>\n<p>At the next sunrise, the blood drains back down to this room and the haunt resets. The haunt is destroyed permanently once Lasda Venkervale is rescued from area <strong>D9</strong>.</p>",
+      "routine": "<p>（1动作）血腥影像张开嘴，似乎吸气，从其中心<strong>A11</strong>区域90尺内其视觉线中的1个生物的身体中抽取鲜血。被选为目标的生物必须尝试一次@Check[fortitude|dc:20|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功或大失败 成功</strong>该生物不受影响。</p>\n<p><strong>成功</strong>该生物受到@Damage[1d10[bleed]]。</p>\n<p><strong>失败</strong>该生物受到@Damage[(1d10+6)[bleed]]伤害。</p>\n<p><strong>大成功或大失败 失败</strong>该生物受到@Damage[(2d10+6)[bleed]]伤害，并在其流血期间处于@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{衰弱 2}。</p>\n<p>(1 action) The bloody image opens its mouth and appears to inhale, drawing blood from the body of one creature in its line of sight within 90 feet from the center of area <strong>A11</strong>. The creature targeted must attempt a @Check[fortitude|dc:20|traits:damaging-effect] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[1d10[bleed]].</p>\n<p><strong>Failure</strong> The creature takes @Damage[(1d10+6)[bleed]] damage.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[(2d10+6)[bleed]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} as long as it's bleeding.</p>",
+      "stealthdetails": "<p>（专家）</p>\n<p>(expert)</p>",
+      "prototypeToken": "贝科拉之血 Blood of Belcorra"
+    },
+    "Doom's of Tomorrow - Shaken City": {
+      "name": "《明日末日——震颤之城》 Doom's of Tomorrow - Shaken City",
+      "tokenName": "明日的厄运 Doom's of Tomorrow",
+      "items": {
+        "Apocalypse Beam": {
+          "name": "天启射线 Apocalypse Beam",
+          "description": "<p><strong>触发</strong> 一个生物快步进入距立体景观壁龛背面10英尺以内</p><p><strong>效果</strong> 陷阱向该生物发射其对应的天启射线。</p>\n<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p><p><strong>Effect</strong> The trap fires its corresponding apocalypse beam at that creature.</p>"
+        },
+        "Shattering Beam": {
+          "name": "碎裂光束 Shattering Beam",
+          "description": "<p>一个生物触发了天启射线，并且在10英尺内。这是反应动作（）的一部分。</p>\n<p>A creature triggerd Apocalypse Beam and is within 10 feet. This is part of the Reaction.</p>"
+        }
+      },
+      "disable": "<ul><li><p><strong>两种选择</strong></p><hr></li></ul><ol><li><p><strong>DC 20 盗窃（受训）</strong>以在凄凉灯塔的模型触发之前迅速将其停用</p></li></ol><ul><li><p><strong>DC 23 潜行（受训）</strong>在不触发陷阱的情况下悄悄绕过它</p></li></ul>\n<ul><li><p><strong>Two Options</strong></p><hr></li></ul><ol><li><p><strong>DC 20 Thievery (trained)</strong> to quickly deactivate the model of Gauntlight before it triggers</p></li></ol><ul><li><p><strong>DC 23 Stealth (trained)</strong> to creep by a trap without triggering it</p></li></ul>",
+      "hazarddescription": "<p>一座小型立体模型，展现一座城市正面临悲惨的危难。</p><p>毁灭的声响从立体模型中升起，一道闪烁的能量光束从凄凉灯塔的微型模型中向外刺出。</p><hr /><h3>在一名玩家观看立体模型后宣读</h3><p>立体模型呈现出一幕场景：艾巴萨罗姆城在贝科拉的想象中遭遇一场奇诡的末日。你看到一段小型幻象：巨大的土震撼动，大地在轰鸣中裂开，将整座城市吞没。</p><p>一座微小的凄凉灯塔仿佛远在数里之外，矗立在每一幕场景的边缘。</p>\n<p>A small diorama of a city facing a tragic peril.</p><p>The sounds of devastation rise from the diorama, and a beam of shimmering energy lances outward from the tiny model of Gauntlight.</p><hr /><h3>Read after a player looks at the diorama</h3><p>The diorama presents a scene depicting the city of Absalom in a fanciful doom from Belcorra’s imagination. You see a minor illusion of massive earth shakes, thunderous splits in the earth swallowing up the city.</p><p>A tiny Gauntlight, as though miles distant, sits at the edge of each scene.</p>",
+      "reset": "<p>微缩景观陷阱会在1小时后自动重置。</p>\n<p>The diorama trap resets automatically after 1 hour.</p>",
+      "routine": "<p>不适用</p>\n<p>N/A</p>",
+      "stealthdetails": "<p>(专家)</p>\n<p>(expert)</p>",
+      "hp": "(BT 28)",
+      "prototypeToken": "明日的厄运 Doom's of Tomorrow"
+    },
+    "Canker Cultist": {
+      "name": "溃烂教徒 Canker Cultist",
+      "tokenName": "溃烂教徒 Canker Cultist",
+      "items": {
+        "Occult Prepared Spells": {
+          "name": "神秘 备妥法术 Occult Prepared Spells"
+        },
+        "Chill Touch": {
+          "name": "恐吓之触 Chill Touch",
+          "description": "<p>将虚空能量虹吸入自身，你的手散发出苍白的黑暗。你的接触会削弱活物并扰乱不死生物，甚至可能使其逃离。该效果取决于目标是活物还是不死生物。</p>\n<ul>\n<li><strong>活体生物</strong> 该法术造成等同于1d4加上你的施法调整值的虚空伤害。目标进行一次基础强韧豁免，但若大失败，则还会在1轮内承受@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}。</li>\n<li><strong>不死生物</strong> 若强韧豁免失败，目标在1轮内处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}。若大失败，目标还会在1轮内处于@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing}，除非其通过一次意志豁免。</li>\n</ul>\n<hr />\n<p><strong>升阶（+1）</strong> 对活体生物造成的虚空伤害提高1d4。</p>\n<p>Siphoning void energy into yourself, your hand radiates a pale darkness. Your touch weakens the living and disorients undead, possibly even causing them to flee. The effect depends on whether the target is living or undead.</p>\n<ul>\n<li><strong>Living Creature</strong> The spell deals void damage equal to 1d4 plus your spellcasting modifier. The target attempts a basic Fortitude save, but is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} for 1 round on a critical failure.</li>\n<li><strong>Undead Creature</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} for 1 round on a failed Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} for 1 round unless it succeeds at a Will save.</li>\n</ul>\n<hr />\n<p><strong>Heightened (+1)</strong> The void damage to living creatures increases by 1d4.</p>"
+        },
+        "Command": {
+          "name": "命令术 Command",
+          "description": "<p>你大声喊出一道难以忽视的命令。你可以命令目标靠近你、逃离（如同它具有@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑（状态）}状态）、放开它正握着的东西、卧倒@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}，或原地不动。在它服从你的命令之前，它不能延迟或进行任何反应动作（）。这些效果取决于目标的意志豁免。</p>\n<hr /><p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 在其下个回合的第一个动作中，该生物必须使用一个单动作来按你的命令行事。</p>\n<p><strong>大失败</strong> 目标必须在其下个回合使用全部动作来服从你的命令。</p>\n<hr /><p><strong>升阶（5环）</strong> 你最多可以以10个生物为目标。</p>\n<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}, or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr /><p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr /><p><strong>Heightened (5th)</strong> You can target up to 10 creatures.</p>"
+        },
+        "Daze": {
+          "name": "眩晕术 Daze",
+          "description": "<p>你使目标的心智变得混乱，并以一道精神冲击使其陷入眩晕术。冲击造成等同于你的施法能力调整值的精神伤害；目标必须尝试一次基础意志豁免。若目标在豁免中大失败，它还会获得 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 伤害提高 1d6。</p>\n<p>You cloud the target's mind and daze it with a mental jolt. The jolt deals mental damage equal to your spellcasting ability modifier; the target must attempt a basic Will save. If the target critically fails the save, it is also @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The damage increases by 1d6.</p>"
+        },
+        "Grim Tendrils": {
+          "name": "邪影触须 Grim Tendrils",
+          "description": "<p>黑暗触须从你的指尖卷出，穿过空气疾驰。你对直线中的活体生物造成2d4虚空伤害以及@Damage[(@item.level)[bleed]]伤害。直线中的每个活体生物必须尝试一次强韧豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物承受一半的虚空伤害，且不承受持续流血伤害。</p>\n<p><strong>失败</strong> 该生物承受全部伤害。</p>\n<p><strong>大失败</strong> 该生物承受双倍虚空伤害与双倍持续流血伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 虚空伤害增加2d4，且持续流血伤害增加1。</p>\n<p>Tendrils of darkness curl out from your fingertips and race through the air. You deal 2d4 void damage and @Damage[(@item.level)[bleed]] damage to living creatures in the line. Each living creature in the line must attempt a Fortitude save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half the void damage and no persistent bleed damage.</p>\n<p><strong>Failure</strong> The creature takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature takes double void damage and double persistent bleed damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The void damage increases by 2d4, and the persistent bleed damage increases by 1.</p>"
+        },
+        "Harm": {
+          "name": "伤害术 Harm",
+          "description": "<p>你引导虚空能量来伤害生者或治疗不死生物。若目标为活体生物，你对其造成1d8虚空伤害，并且它必须进行一次基础强韧豁免。若目标为自愿的不死生物，你恢复等量的生命值。你在施放该法术时花费的动作数量决定其目标、射程、区域以及其他参数。</p>\n<p><span class=\"action-glyph\">1</span> <strong>(姿势)</strong> 该法术的射程为接触。</p>\n<p><span class=\"action-glyph\">2</span> <strong>(verbal, 姿势)</strong> 该法术的射程为30尺。若你在治疗一个不死生物，将恢复的生命值提高8点。</p>\n<p><span class=\"action-glyph\">3</span> <strong>(材料, verbal, 姿势)</strong> 你在30尺的涌动范围内驱散虚空能量。这会以区域内所有活体与不死生物为目标。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 治疗或伤害的数值提高1d8，并且2动作版本的额外治疗提高8点。</p>\n<p>You channel void energy to harm the living or heal the undead. If the target is a living creature, you deal 1d8 void damage to it, and it gets a basic Fortitude save. If the target is a willing undead creature, you restore that amount of Hit Points. The number of actions you spend when Casting this Spell determines its targets, range, area, and other parameters.</p>\n<p><span class=\"action-glyph\">1</span> <strong>(somatic)</strong> The spell has a range of touch.</p>\n<p><span class=\"action-glyph\">2</span> <strong>(verbal, somatic)</strong> The spell has a range of 30 feet. If you're healing an undead creature, increase the Hit Points restored by 8.</p>\n<p><span class=\"action-glyph\">3</span> <strong>(material, verbal, somatic)</strong> You disperse void energy in a 30-foot emanation. This targets all living and undead creatures in the area.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The amount of healing or damage increases by 1d8, and the extra healing for the 2-action version increases by 8.</p>"
+        },
+        "Mage Hand": {
+          "name": "法师之手 Mage Hand",
+          "description": "<p>你创造出一只魔法手，可以是隐形的或幽灵般的，它抓住目标物体并将其缓慢移动最多20英尺。由于你在使物体悬浮，你可以将其向任意方向移动。当你维持该法术时，你可以让该物体额外移动20英尺。如果该法术结束时物体仍在空中，物体会坠落。</p>\n<hr />\n<p><strong>升阶（3环）</strong>你可以以负载为1或更低的无主物体为目标。</p>\n<p><strong>升阶（5环）</strong>射程增加至60英尺，且你可以以负载为1或更低的无主物体为目标。</p>\n<p><strong>升阶（7环）</strong>射程增加至60英尺，且你可以以负载为2或更低的无主物体为目标。</p>\n<p>You create a single magical hand, either invisible or ghostlike, that grasps the target object and moves it slowly up to 20 feet. Because you're levitating the object, you can move it in any direction. When you Sustain the Spell, you can move the object an additional 20 feet. If the object is in the air when the spell ends, the object falls.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (5th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (7th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 2 or less.</p>"
+        },
+        "Phantom Pain": {
+          "name": "幻痛术 Phantom Pain",
+          "description": "<p>幻痛折磨着目标，造成2d4精神伤害以及1d4持续精神伤害。目标必须尝试一次意志豁免。</p>\n<hr />\n<p><strong>大成功或大失败 成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标承受全部初始伤害但不承受持续伤害，且该法术立即结束。</p>\n<p><strong>失败</strong> 目标承受全部初始伤害与持续伤害，且目标为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心1}。若目标从恶心中恢复，持续伤害结束且该法术结束。</p>\n<p><strong>大成功或大失败 失败</strong> 同失败，但目标为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心2}。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加2d4，持续伤害增加1d4。</p>\n<p>@Damage[(@item.level)d4[persistent,mental]]{随等级增长的持续精神伤害}</p>\n<p>Illusory pain wracks the target, dealing 2d4 mental damage and 1d4 persistent mental damage. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes full initial damage but no persistent damage, and the spell ends immediately.</p>\n<p><strong>Failure</strong> The target takes full initial and persistent damage, and the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. If the target recovers from being Sickened, the persistent damage ends and the spell ends.</p>\n<p><strong>Critical Failure</strong> As failure, but the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2}.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d4 and the persistent damage by 1d4.</p>\n<p>@Damage[(@item.level)d4[persistent,mental]]{Scaling Persistent Mental Damage}</p>"
+        },
+        "Ray of Enfeeblement": {
+          "name": "衰弱射线 Ray of Enfeeblement",
+          "description": "<p>一道削弱敌人力量的射线从你手中闪现。对目标进行一次远程法术攻击。若你成功，则该生物进行一次强韧豁免以决定该法术的效果。若你的攻击掷骰为大成功，则使用其豁免结果差一级的结果。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}。</p>\n<p><strong>失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2}。</p>\n<p><strong>大失败</strong> 目标获得 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 3}。</p>\n<p>A ray that saps a foe's strength flashes from your hand. Attempt a ranged spell attack against the target. If you succeed, that creature attempts a Fortitude save to determine the spell's effect. If your attack roll is a critical success, use the outcome for one degree of success worse than the result of its save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1}.</p>\n<p><strong>Failure</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2}.</p>\n<p><strong>Critical Failure</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 3}.</p>"
+        },
+        "Telekinetic Projectile": {
+          "name": "念动射弹 Telekinetic Projectile",
+          "description": "<p>你将一个射程内松散、无人看管且负载为1或更低的物体掷向目标。对目标进行一次法术攻击掷骰。若你命中，你造成钝击、穿刺或挥砍伤害——取决于你掷出的物体——其数值等于1d6加上你的施法能力调整值。被掷出的物品不具有任何会影响该攻击或伤害的特定特征或魔法属性。</p>\n<hr />\n<p><strong>大成功或大失败</strong> 你造成双倍伤害。</p>\n<p><strong>成功</strong> 你造成全额伤害。</p>\n<hr />\n<p><strong>强化（+1）</strong> 伤害增加1d6。</p>\n<p>You hurl a loose, unattended object that is within range and that has 1 Bulk or less at the target. Make a spell attack roll against the target. If you hit, you deal bludgeoning, piercing, or slashing damage-as appropriate for the object you hurled-equal to 1d6 plus your spellcasting ability modifier. No specific traits or magic properties of the hurled item affect the attack or the damage.</p>\n<hr />\n<p><strong>Critical Success</strong> You deal double damage.</p>\n<p><strong>Success</strong> You deal full damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d6.</p>"
+        },
+        "Lump of Decayed Flesh Strung on a Necklace": {
+          "name": "腐烂肉块项链 Lump of Decayed Flesh Strung on a Necklace"
+        },
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪 Claw"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 溃烂教徒与一具在过去1小时内死亡的生物的尸体相邻，或正携带一块经过特殊处理的腐烂肉块。</p>\n<hr />\n<p><strong>效果</strong> 溃烂教徒吞食一块尸体或那块腐烂肉块并恢复生命值。他们通过食用在过去1小时内死亡的生物的血肉恢复 @Damage[1d6[healing]] 生命值，通过腐烂肉块恢复 @Damage[2d6[healing]] 生命值。</p>\n<p>教徒从任意一具给定的尸体中恢复生命值只能一次。</p>\n<p><strong>Requirements</strong> The Canker cultist is adjacent to the corpse of a creature that died within the last hour, or is carrying a specially prepared lump of decaying flesh.</p>\n<hr />\n<p><strong>Effect</strong> The Canker cultist devours a chunk of the corpse or the lump of decaying flesh and regains Hit Points. They regain @Damage[1d6[healing]] Hit Points from consuming the flesh of a creature that died within the last hour, and @Damage[2d6[healing]] Hit Points from the lump.</p>\n<p>The cultist can regain Hit Points from any given corpse only once.</p>"
+        },
+        "Ghoul Fever": {
+          "name": "食尸鬼热 Ghoul Fever",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者，无任何不良效果（1天）</p>\n<p><strong>阶段 2</strong> @Damage[2d6[void]] 伤害，且从所有治疗中恢复的生命值减半（1天）</p>\n<p><strong>阶段 3</strong> 同阶段2（1天）</p>\n<p><strong>阶段 4</strong> @Damage[2d6[void]] 伤害，且无法从治疗中获得任何益处（1天）</p>\n<p><strong>阶段 5</strong> 同阶段4（1天）</p>\n<p><strong>阶段 6</strong> 死亡，并在下一个午夜复起为一只 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼}。</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[void]] damage and regains half as many Hit Points from all healing (1 day)</p>\n<p><strong>Stage 3</strong> as stage 2 (1 day)</p>\n<p><strong>Stage 4</strong> @Damage[2d6[void]] damage and gains no benefit from healing (1 day)</p>\n<p><strong>Stage 5</strong> as stage 4 (1 day)</p>\n<p><strong>Stage 6</strong> dead, and rises as a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{Ghoul} the next midnight.</p>"
+        },
+        "Paralysis": {
+          "name": "麻痹 Paralysis",
+          "description": "<p>任何被溃烂教徒的攻击命中的活体、非精灵生物必须成功通过一次 @Check[fortitude|dc:20] 豁免，否则将变为 @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}。它可以在其每个回合结束时尝试一次新的豁免，且在每次此类豁免时 DC 累积降低 1。</p>\n<p>Any living, non-elf creature hit by a Canker cultist's attack must succeed at a @Check[fortitude|dc:20] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>邪教徒跳跃至其速度的一半。此移动不会触发反应动作（）。</p>\n<p>The cultist jumps up to half its Speed. This movement doesn't trigger reactions.</p>"
+        }
+      },
+      "blurb": "食尸鬼狂热者\nGhoul zealot",
+      "hp": "void healing",
+      "prototypeToken": "溃烂教徒 Canker Cultist"
+    },
+    "Dead Acolyte A": {
+      "name": "死亡侍祭 A Dead Acolyte A",
+      "tokenName": "死去的侍僧 A Dead Acolyte A",
+      "items": {
+        "Gold Tooth": {
+          "name": "金牙 Gold Tooth",
+          "description": "<p>从一名死去的侍祭口中取出</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/gold-tooth-alpha.webp\" />\n<p>Extracted from the mouth of a dead acolyte</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/gold-tooth-alpha.webp\" />"
+        }
+      },
+      "prototypeToken": "死去的侍僧 A Dead Acolyte A"
+    },
+    "Wood Golem": {
+      "name": "木魔像 Wood Golem",
+      "tokenName": "木魔像 Wood Golem",
+      "items": {
+        "Fist": {
+          "name": "拳头 Fist"
+        },
+        "Splinter": {
+          "name": "碎片 Splinter",
+          "description": "<p><strong>触发</strong> 木魔像受到物理伤害</p>\n<hr />\n<p><strong>效果</strong> 一根锯齿状、尺寸可观的木刺猛然刺向攻击木魔像的生物。木魔像对一名相邻生物进行一次木刺打击，且不会触发反应动作（）。</p>\n<p><strong>Trigger</strong> The wood golem takes physical damage</p>\n<hr />\n<p><strong>Effect</strong> A jagged, sizable splinter of wood lances out at the golem's attacker. The golem makes a splinter Strike against an adjacent creature without triggering reactions.</p>"
+        },
+        "Golem Antimagic": {
+          "name": "魔像反魔法 Golem Antimagic",
+          "description": "<p>受到火焰伤害（@Damage[4d8[untyped]]，来自区域或持续伤害则为@Damage[2d6[untyped]]）；被植物治疗（区域@Damage[2d6[healing]] HP）；被土减速</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.GolemAntimagic]</p>\n<p>Harmed by fire (@Damage[4d8[untyped]], @Damage[2d6[untyped]] from areas or persistent damage); healed by plant (area @Damage[2d6[healing]] HP); slowed by earth</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.GolemAntimagic]</p>"
+        },
+        "Vulnerable to Shape Wood": {
+          "name": "易受塑木术影响 Vulnerable to Shape Wood",
+          "description": "<p>一个木魔像若成为@UUID[Compendium.pf2e.spells-srd.Item.CXICME10TkEJxz0P]{塑木术}的目标，则每个法术环阶受到@Damage[2d8[untyped]]伤害，并须以施法者的法术DC进行一次基础强韧豁免。</p>\n<p>若大失败，魔像还会获得@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{定身}，持续[[/gmr 1d4 #Shape Wood Immobilization]]{1d4轮}。</p>\n<p>A wood golem targeted by @UUID[Compendium.pf2e.spells-srd.Item.CXICME10TkEJxz0P]{Shape Wood} takes @Damage[2d8[untyped]] damage per spell rank, with a basic Fortitude save against the caster's spell DC.</p>\n<p>On a critical failure, the golem is also @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} for [[/gmr 1d4 #Shape Wood Immobilization]]{1d4 rounds}.</p>"
+        },
+        "Splinter Volley": {
+          "name": "碎片齐射 Splinter Volley",
+          "description": "<p>木魔像至多进行四次木刺打击，每次针对不同的目标。</p>\n<p>这些攻击计入木魔像的多重攻击减值，但多重攻击减值直到木魔像完成其所有攻击后才会增加。</p>\n<p>The wood golem makes up to four splinter Strikes, each against a different target.</p>\n<p>These attacks count toward the wood golem's multiple attack penalty, but the multiple attack penalty doesn't increase until after the wood golem makes all of its attacks.</p>"
+        }
+      },
+      "publicNotes": "<p>木魔像通常会被塑造成模糊的人形，几乎就像用柴火碎料与被丢弃的树瘤东拼西凑而成。木魔像带有雕刻纹样等艺术性点缀，或被雕成不同类型的生物以迎合其主人品味的情况则不太常见。虽然人们知道有些富有的赞助者会委托工匠将木魔像精雕细琢，使其酷似自己或祖先，以同时达到防护与满足虚荣心的双重目的，但大多数木魔像匠人并不费这个工夫。德鲁伊以及守护林地的生物（如树人）通常将木魔像视为一种冒犯或亵渎，近似于类人生物在面对食腐魔像或血肉魔像时常会产生的恐惧感。因此，尽管木魔像的外观与妖精或德鲁伊的圣地在主题上十分契合，但在这些地点见到此类生物担任守卫仍然十分罕见。</p>\n<hr />\n<p>魔像的形态与结构仅受其制作者的力量与创造力所限。历经多个年代，技艺高超的头脑与双手不断完善制造特定类型魔像的配方，从而促成了常见形态的发展。此处所介绍的各类魔像，其制造秘辛可能被珍藏于著名魔像工坊的殿堂之内，或尘封在诸多世界的遗忘图书馆中。</p>\n<p>Wood golems are often given vaguely humanoid shapes, almost as if cobbled together from scraps of firewood and discarded burls. It's less common for wood golems to have artistic embellishments such as engraved patterns, or to be carved in the shapes of different types of creatures to meet the tastes of their owners. While wealthy patrons have been known to commission wood golems to be painstakingly carved to resemble themselves or their ancestors, to serve dual purposes of protection and ego bolstering, most wood golem crafters don't bother. Druids and creatures who protect woodlands, such as arboreals, typically see wood golems as an affront or an abomination, akin to the horror humanoids often feel when facing a carrion or flesh golem. As a result, it is rare to see such creatures serving as guardians for fey or druidic holy sites, despite the thematic match between the wood golem's appearance and such locations.</p>\n<hr />\n<p>The shape and structure of a golem are limited only by the power and creativity of its crafter. Over the ages, skilled minds and hands have refined the formulas for creating specific types of golems, resulting in the development of common forms. The secrets of creating the types of golems presented here may be guarded within the halls of famous golemworks or the forgotten libraries of many worlds.</p>",
+      "prototypeToken": "木魔像 Wood Golem"
+    },
+    "FishCake Bag": {
+      "name": "鱼糕袋 FishCake Bag",
+      "tokenName": "鱼饼袋 FishCake Bag",
+      "items": {
+        "Fishcakes": {
+          "name": "鱼饼 Fishcakes",
+          "description": "<p>一批糕点——烟熏三文鱼、莳萝和奶酪包裹在鱼形的面团外皮中。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/pastry-fish-black.webp\" />\n<p>A stash of pastries—smoked salmon, dill, and cheese in a fish-shaped doughy exterior.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/pastry-fish-black.webp\" />"
+        }
+      },
+      "prototypeToken": "鱼糕袋 FishCake Bag"
+    },
+    "Rowboat": {
+      "name": "划艇 Rowboat",
+      "tokenName": "划艇 Rowboat",
+      "items": {
+        "Portaged": {
+          "name": "搬运 Portaged",
+          "description": "<p>划艇可以由2个中型生物或1个大型生物在陆地上搬运。在这样做时，这些生物处于负重状态。</p>\n<p>The rowboat can be carried overland by 2 Medium creatures or 1 Large creature. Those creatures are encumbered when doing so.</p>"
+        }
+      },
+      "prototypeToken": "划艇 Rowboat"
+    },
+    "Slurk": {
+      "name": "泥蛙 Slurk",
+      "tokenName": "泥蛙 Slurk",
+      "items": {
+        "Tusks": {
+          "name": "獠牙 Tusks"
+        },
+        "Slime Squirt": {
+          "name": "黏液喷射 Slime Squirt"
+        },
+        "+2 Status to Fortitude Saves vs. Grapple, Reposition, or Shove": {
+          "name": "对抗擒抱、重新定位或推撞的强韧豁免获得+2状态加值 +2 Status to Fortitude Saves vs. Grapple, Reposition, or Shove"
+        },
+        "Belly Grease": {
+          "name": "肚皮油腻术 Belly Grease",
+          "description": "<p>泥蛙从其腹侧腺体分泌出滑腻的油脂，覆盖其身下以及以其为中心的5尺放射范围内的地面，使受影响的区域变为不平整的地面，持续10分钟，随后其会干燥成恶臭的硬壳。穿越这层黏液进行@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{Balance}的DC为18。</p>\n<p>The slurk extrudes a slippery grease from its ventral glands to coat the floor under it and in a 5-foot emanation, turning the affected area into uneven ground for 10 minutes, after which it dries to a putrid crust. The DC to @UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{Balance} across the slime is 18.</p>"
+        },
+        "Entangling Slime": {
+          "name": "纠缠黏液 Entangling Slime",
+          "description": "<p>被泥蛙的黏液喷射击中的生物会变为 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1} 并在1小时内或直到黏液被移除前，速度承受–5尺减值。</p>\n<p>被缠住的生物或与该生物相邻的生物累计进行三次交互动作即可移除黏液。这些动作不需要连续进行，也不需要由同一个生物完成。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.jQmfZcPD6xVYx5nb]{效果：缠绕黏液}</p>\n<p>A creature struck by a slurk's slime squirt becomes @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1} and takes a –5-foot penalty to Speed for 1 hour or until the slime is removed.</p>\n<p>The slime can be removed with a total of three Interact actions by the entangled creature or creatures adjacent to the creature. These actions don't need to be consecutive or made by the same creature.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.jQmfZcPD6xVYx5nb]{Effect: Entangling Slime}</p>"
+        }
+      },
+      "publicNotes": "<p>泥蛙是一种黏稠、长有獠牙的蛙兽，常见于地下巢穴与洞窟之中。它有两根巨大的獠牙，用来戳刺猎物并与竞争的泥蛙纠缠搏斗。凭借泥蛙天生攀爬墙壁、轻松附着在天花板上的能力，粗心的洞窟探险者很容易就会被这些可怖的象牙獠牙刺中要害。</p>\n<p>泥蛙会从其苍白的白色皮肤中分泌两种截然不同、气味恶臭的分泌物。泥蛙背部的大型脓疱会滴落一种黏性的、树脂状的黏液，这种黏液一接触空气便会迅速硬化。泥蛙通过绷紧皮肤，能将这些脓疱朝入侵者的方向爆裂开来，使敌人被黏糊糊的胶质覆盖，并严重限制他们抵御该怪物其他攻击的能力，其中也包括其另一种分泌物的效果。沿着泥蛙腹侧分布的腺体会排出一种极其滑溜且腐臭的油腻术，这能保护泥蛙免受其背部黏液造成的定身效果影响，同时也让它极难被擒抱与捕获。判断附近是否有泥蛙的最佳方式，是寻找这种油腻术干结后形成的硬块——它们会在洞窟角落以及泥蛙在两餐之间休息的岩石堆中积累并干燥。</p>\n<p>人们认为泥蛙是矮人一次失败的尝试的后裔——他们试图驯化并繁育大型地下蛙类，作为食物与劳作动物。尽管显然以失败告终，其他生活在地下的群体却常常与泥蛙结为伙伴。这些黏稠的蛙兽对狗头人（page 210）而言极具吸引力，如今狗头人已将泥蛙驯养并训练为强力的坐骑与守卫。虽然其他生物，尤其是沼蜍人（特征），有时也会训练泥蛙担任守卫，但使用这些生物最多的仍是狗头人。骑乘泥蛙的狗头人往往会躲藏在洞窟上方的岩架处，利用高度与突袭的优势，以远程攻击骚扰敌人。狗头人骑手也会利用泥蛙的攀爬能力，从洞穴墙壁上向敌人发起冲锋。</p>\n<p>The slurk is a sticky, tusked frog-beast found in underground lairs and caves. It has two massive tusks that it uses to gore prey and tangle with rival slurks. With the slurk's natural ability to climb walls and cling effortlessly to ceilings, it can be easy for unwary cave explorers to end up on the wrong end of these formidable ivory tusks.</p>\n<p>Slurks exude two very different types of foul-smelling secretions from their pale white skin. Large pustules on the slurk's back drip a sticky resin-like slime that quickly hardens upon exposure to air. By flexing its skin, the slurk can burst these pustules in the direction of intruders, covering its foes in sticky goo and severely limiting their ability to withstand the monster's other attacks, including the effects of its other secretion. Glands along the slurk's ventral side excrete an incredibly slippery and fetid grease, which protects the slurk from the immobilizing effects of its own back slime but also has the added benefit of making it extremely difficult to grapple and capture. The best way to discover if a slurk is in the vicinity is to look for hard clumps of such grease, which accumulate and dry in cave corners and amid rock piles where slurks rest between meals.</p>\n<p>Slurks are thought to be descendants of a failed dwarven attempt to domesticate and breed large subterranean frogs as food and labor animals. Despite this apparent failure, others who live underground often befriend slurks. The sticky frog-beasts have proven extremely desirable to kobolds (page 210), who now domesticate and train slurks as powerful mounts and guardians. While other creatures, particularly boggards, sometimes train slurks to serve as guardians, kobolds remain those who use these creatures the most. A kobold mounted on a slurk will often hide in the upper ledges of a cave, using the advantages of height and surprise to harry foes with ranged attacks. Kobold riders also take advantage of the slurk's ability to climb, and charge at their enemies from the walls of a cavern.</p>",
+      "allSaves": "+12 to fortitude saves vs. Grapple, Reposition, or Shove",
+      "prototypeToken": "泥蛙 Slurk"
+    },
+    "Giant Scorpion": {
+      "name": "巨蝎 Giant Scorpion",
+      "tokenName": "巨蝎 Giant Scorpion",
+      "items": {
+        "Pincer": {
+          "name": "钳击 Pincer"
+        },
+        "Stinger": {
+          "name": "刺针 Stinger"
+        },
+        "Tremorsense (Imprecise) 60 feet": {
+          "name": "震颤感知（不精确）60尺 Tremorsense (Imprecise) 60 feet",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+        },
+        "Reactive Strike (Stinger Only)": {
+          "name": "反应打击（仅限毒刺） Reactive Strike (Stinger Only)",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+        },
+        "Constrict": {
+          "name": "紧勒 Constrict",
+          "description": "<p>@Damage[(1d6+4)[钝击]], @Check[fortitude|dc:20|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.紧勒]</p>\n<p>@Damage[(1d6+4)[bludgeoning]], @Check[fortitude|dc:20|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+        },
+        "Giant Scorpion Venom": {
+          "name": "巨蝎毒 Giant Scorpion Venom",
+          "description": "<p><strong>豁免</strong> @Check[fortitude|dc:18]</p><hr /><p><strong>最大持续时间</strong> 6 轮</p>\n<p><strong>阶段 1</strong> @Damage[1d10[poison]] 伤害并且 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1}（1 轮）</p>\n<p><strong>阶段 2</strong> @Damage[2d10[poison]] 伤害并且虚弱 1（1 轮）</p>\n<p><strong>阶段 3</strong> 2d10 毒素伤害并且 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 2}（1 轮）</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:18]</p><hr /><p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d10[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[2d10[poison]] damage and enfeebled 1 (1 round)</p>\n<p><strong>Stage 3</strong> 2d10 poison damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} (1 round)</p>"
+        },
+        "Grab": {
+          "name": "擒抱 Grab",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+        }
+      },
+      "publicNotes": "<p>这些巨大的、令人恐惧的蛛形纲动物通常从头到尾根长达8英尺。巨蝎是多种沙漠栖居生物喜爱的驮兽与战兽，尤其是科洛斯。不过，它们最常见的遭遇地点仍是在野外。在那里，它们会在山坡洞穴中筑巢，或在浅浅的沙层下掘洞潜伏，等待猎物游荡靠近。</p>\n<hr />\n<p>蝎子是沙漠、森林、稀树草原与荒地中的几丁质灾厄，是致命的蛛形纲动物，拥有强有力的螯与令人痛苦的毒刺。几乎在每一种气候中都能找到蝎子；它们以耐心的隐匿与原始的力量相结合来猎捕猎物。多数蝎子生活在地下洞穴中，要么作为独行猎手，要么作为更大群落的一部分。这些蛛形纲动物令人畏惧且极度危险，以至于在许多文化中，它们被视为神祇，或作为兼具死亡与免于该死亡之保护的二元象征。</p>\n<p>These massive, terrifying arachnids are typically 8 feet long from head to the base of the tail. Giant scorpions are the favored pack animals and war beasts of various desert-dwelling creatures, particularly kholos. They are most commonly encountered in the wild, however. There they lair in mountainside caves or burrow beneath shallow layers of sand where they lie in wait for prey to wander near.</p>\n<hr />\n<p>Chitinous scourges of deserts, forests, savannas, and badlands, scorpions are deadly arachnids with powerful pincers and a painful sting. Scorpions can be found in nearly every climate, where they hunt their prey with a mixture of patient stealth and raw strength. Most scorpions live in underground burrows, either as lone hunters or part of a larger colony. These arachnids are so feared and dangerous that in many cultures, they are treated as deities or dualistic symbols of both death and protection from said death.</p>",
+      "prototypeToken": "巨蝎 Giant Scorpion"
+    },
+    "Ghoul": {
+      "name": "食尸鬼（特征） Ghoul",
+      "tokenName": "食尸鬼（特征） Ghoul",
+      "items": {
+        "Jaws": {
+          "name": "啃咬 Jaws"
+        },
+        "Claw": {
+          "name": "爪击 Claw"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Consume Flesh": {
+          "name": "啃食尸体 Consume Flesh",
+          "description": "<p><strong>需求</strong> 食尸鬼（特征）与一具在过去1小时内死亡的生物的尸体相邻。</p><hr /><p><strong>效果</strong> 食尸鬼（特征）吞食尸体的一块肉，并恢复 @Damage[1d6[healing]] 生命值。</p>\n<p>它从任意一具特定尸体中恢复生命值只能一次。</p>\n<p><strong>Requirements</strong> The ghoul is adjacent to the corpse of a creature that died within the last hour.</p><hr /><p><strong>Effect</strong> The ghoul devours a chunk of the corpse and regains @Damage[1d6[healing]] Hit Points.</p>\n<p>It can regain Hit Points from any given corpse only once.</p>"
+        },
+        "Ghoul Fever": {
+          "name": "食尸鬼热 Ghoul Fever",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:15]</p>\n<hr />\n<p><strong>阶段 1</strong> 携带者，无不良效果（1天）</p>\n<p><strong>阶段 2</strong> @Damage[2d6[void]] 伤害，且从所有治疗中恢复的生命值减半（1天）</p>\n<p><strong>阶段 3</strong> 同阶段2（1天）</p>\n<p><strong>阶段 4</strong> @Damage[2d6[void]] 伤害，且无法从治疗中获得任何益处（1天）</p>\n<p><strong>阶段 5</strong> 同阶段4（1天）</p>\n<p><strong>阶段 6</strong> 死亡，并在下一个午夜作为一只 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{食尸鬼} 苏醒。</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:15]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 day)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[void]] damage and regains half as many Hit Points from all healing (1 day)</p>\n<p><strong>Stage 3</strong> as stage 2 (1 day)</p>\n<p><strong>Stage 4</strong> @Damage[2d6[void]] damage and gains no benefit from healing (1 day)</p>\n<p><strong>Stage 5</strong> as stage 4 (1 day)</p>\n<p><strong>Stage 6</strong> dead, and rises as a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.LHHgGSs0ELCR4CYK]{Ghoul} the next midnight.</p>"
+        },
+        "Paralysis": {
+          "name": "麻痹 Paralysis",
+          "description": "<p>任何被食尸鬼（特征）的攻击命中的活体、非精灵生物必须在一次 @Check[fortitude|dc:15] 豁免中成功，否则成为 @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}。它可以在其每个回合结束时尝试一次新的豁免，并且该DC在每次此类豁免时累积降低1。</p>\n<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:15] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+        },
+        "Swift Leap": {
+          "name": "迅捷跳跃 Swift Leap",
+          "description": "<p>食尸鬼跃起至多其速度的一半。此移动不会触发反应动作。</p>\n<p>The ghoul jumps up to half its Speed. This movement doesn't trigger reactions.</p>"
+        }
+      },
+      "publicNotes": "<p>食尸鬼是贪婪的亡灵，会出没于墓地并吞食尸体。</p>\n<hr />\n<p>很少有生物能比被称为食尸鬼的食肉亡灵更常见于诸如荒僻墓地与破败地窖等邪恶之地。</p>\n<p>Ghouls are ravenous undead who haunt graveyards and eat corpses.</p>\n<hr />\n<p>Few creatures are more ubiquitous to sinister locations such as lonely graveyards and ruined crypts than the flesh-eating undead known as ghouls.</p>",
+      "hp": "void healing",
+      "prototypeToken": "食尸鬼（特征） Ghoul"
+    },
+    "Chandriu Invisar": {
+      "name": "尚德里·尹萨 Chandriu Invisar",
+      "tokenName": "尚德里·尹萨 Chandriu Invisar",
+      "items": {
+        "Ghostly Hand": {
+          "name": "幽灵之手 Ghostly Hand"
+        },
+        "Site Bound": {
+          "name": "束缚之地 Site Bound",
+          "description": "<p>区域 <strong>C36</strong> 和 <strong>C37</strong>。</p>\n<hr />\n<p>典型的幽灵（特征）只能离它被杀害之处或其徘徊之地不远。一个典型的限制是120英尺。有些幽灵（特征）则不是被束缚于某个地点，而是被束缚于对它而言特殊的房间、建筑、物品或生物。</p>\n<p>Area <strong>C36</strong> and <strong>C37</strong>.</p>\n<hr />\n<p>A typical ghost can stray only a short distance from where it was killed or the place it haunts. A typical limit is 120 feet. Some ghosts are instead bound to a room, building, item, or creature that was special to it rather than a location.</p>"
+        },
+        "Rejuvenation": {
+          "name": "复生 Rejuvenation",
+          "description": "<p>要让钱德丽乌永久地获得休息，英雄必须通过一次成功的 @Check[diplomacy|dc:21|name:Convince Chandriu|overrideTraits:true] 检定来说服她停止对沃鲁克的痴恋。</p>\n<p>无论这次检定结果如何，钱德丽乌都会勃然大怒并发动攻击；但若交涉检定成功，她在战斗期间会在 10 轮内处于 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{迟缓 1}。如果在她迟缓时被击败，她将获得休息。</p>\n<hr />\n<p>当一个 幽灵（特征） 被摧毁时，它会在 [[/br 2d4 #days]]{2d4 days} 后于其所绑定的位置内重新形成，并完全恢复。只有当有人查明其存在的原因，并纠正任何阻止该灵魂获得休息的事物时，一个 幽灵（特征） 才能被永久摧毁。</p>\n<p>To put Chandriu to rest permanently, a hero must convince her to stop pining over Volluk with a successful @Check[diplomacy|dc:21|name:Convince Chandriu|overrideTraits:true] check.</p>\n<p>Regardless of the result of this check, Chandriu flies into a rage and attacks, but if the Diplomacy check is successful, she is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for 10 rounds while she fights. If defeated while she is slowed, she is put to rest.</p>\n<hr />\n<p>When a ghost is destroyed, it re-forms after [[/br 2d4 #days]]{2d4 days} within the location it's bound to, fully healed. A ghost can be permanently destroyed only if someone determines the reason for its existence and sets right whatever prevents the spirit from resting.</p>"
+        },
+        "Void Healing": {
+          "name": "虚空治疗 Void Healing",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Despairing Cry": {
+          "name": "绝望哭喊 Despairing Cry",
+          "description": "<p>钱德丽乌因自己的失落与背叛而绝望哀嚎，迫使每个处于 @Template[emanation|distance:30]{30尺} 内的活着的生物尝试一次 @Check[will|dc:24|options:area-effect,inflicts:slowed] 意志豁免。</p>\n<p>失败时，生物会变为 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}（大失败时为 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2}），持续1轮，因为他们被对自己错失机会的悲伤所淹没。成功时，生物在1分钟内暂时免疫钱德丽乌的绝望哭喊。</p>\n<p>Chandriu wails in despair at her loss and betrayal, forcing each living creature within @Template[emanation|distance:30]{30 feet} to attempt a @Check[will|dc:24|options:area-effect,inflicts:slowed] save.</p>\n<p>On a failure, a creature becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} (@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} on a critical failure) for 1 round as they are overcome with sadness over their own missed opportunities. On a success, a creature is temporarily immune to Chandriu's Despairing Cry for 1 minute.</p>"
+        },
+        "Scriptorium Lore": {
+          "name": "抄写间学识 Scriptorium Lore"
+        }
+      },
+      "blurb": "女性卓尔幽灵管理员\nFemale drow ghost administrator",
+      "hp": "void healing, rejuvenation",
+      "prototypeToken": "尚德里·尹萨 Chandriu Invisar"
+    },
+    "Stonescale Spirits": {
+      "name": "石鳞之魂 Stonescale Spirits",
+      "tokenName": "石鳞之魂 Stonescale Spirits",
+      "items": {
+        "Confusing Confrontation": {
+          "name": "令人困惑的对峙 Confusing Confrontation",
+          "description": "<p><strong>触发</strong> 一名生物进入房间中央一处被瓦砾完全或部分填满的方格</p>\n<hr />\n<p><strong>效果</strong> 六只幽灵般的狗头人伴随着诡异的嚎叫从瓦砾中冲出。区域 <strong>A7</strong> 内的每个生物都必须尝试一次 @Check[will|dc:18] 豁免，结果如下。随后，此怨灵进行先攻掷骰。</p>\n<hr />\n<p><strong>大成功或大失败</strong> 该生物不受影响，获得对“混乱对峙”的24小时暂时免疫，并意识到展示具威吓性的支配力或许能平息幽灵狗头人的袭击。</p>\n<p><strong>成功</strong> 该生物获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}。</p>\n<p><strong>失败</strong> 该生物获得 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} 1轮，且获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}。</p>\n<p><strong>大成功或大失败</strong> 该生物获得 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} 2轮，且获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}。</p>\n<p><strong>Trigger</strong> A creature enters a square either fully or partially filled with rubble in the middle of the room</p>\n<hr />\n<p><strong>Effect</strong> Six ghostly kobolds surge out of the rubble with eerie yowls. Each creature in area <strong>A7</strong> must attempt a @Check[will|dc:18] save with the following results. The haunt then rolls initiative.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected, is temporarily immune to Confusing Confrontation for 24 hours, and realizes that a display of intimidating dominance might quell the ghostly kobolds' assault.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 round and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 2 rounds and is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}.</p>"
+        }
+      },
+      "disable": "<p>@Check[intimidation|dc:18|name:惊吓灵体] (trained) 通过威胁性的展示来惊吓灵体，或 @Check[religion|dc:21|name:驱逐灵体] (trained) 通过宗教检定来驱逐灵体</p>\n<p>@Check[intimidation|dc:18|name:Frighten the Spirits] (trained) to frighten the spirits with a threatening display, or @Check[religion|dc:21|name:Excorcise the Spirits] (trained) to exorcise the spirits</p>",
+      "hazarddescription": "<p>半打幽魂般的狗头人从瓦砾中升起，置身于一阵呼啸的漩涡之中。</p>\n<p>A half-dozen ghostly kobolds rise from the rubble in a howling vortex.</p>",
+      "reset": "<p>如果在其回合开始时，<strong>A7</strong>区域内没有恐惧的生物，则此灾祸会停用。幽灵般的狗头人会回到瓦砾堆中。</p>\n<p>此灾祸在1小时内无法再次启动。</p>\n<p>The haunt deactivates if there are no frightened creatures in area <strong>A7</strong> at the start of its turn. The ghostly kobolds return to the rubble pile.</p>\n<p>The haunt can't activate again for 1 hour.</p>",
+      "routine": "<p>（1动作）灵体俯冲并汇聚，朝向<strong>A7</strong>区域内一个处于@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}的生物，灌输背叛与困惑的感觉。目标受到@Damage[(1d10+4)[mental]] 伤害（@Check[will|dc:18|basic] 意志豁免）。</p>\n<p>(1 action) The spirits swoop together toward one creature in area <strong>A7</strong> who's @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}, instilling feelings of betrayal and confusion. The target takes @Damage[(1d10+4)[mental]] damage (@Check[will|dc:18|basic] save).</p>",
+      "stealthdetails": "<p>（受训）</p>\n<p>(trained)</p>",
+      "prototypeToken": "石鳞之魂 Stonescale Spirits"
+    },
+    "Watching Wall": {
+      "name": "偷窥墙 Watching Wall",
+      "tokenName": "偷窥墙 Watching Wall",
+      "items": {
+        "Someone is Watching": {
+          "name": "身后有眼 Someone is Watching",
+          "description": "<p><strong>触发</strong> 一名活着的生物在<strong>C4</strong>区域内停留至少1轮</p>\n<hr />\n<p><strong>效果</strong> 一股压倒性的狂乱偏执浪潮充满<strong>C4</strong>区域。房间内的每个生物必须尝试一次@Check[will|dc:25]意志豁免，结果如下。随后，一只诡异的红眼在西侧墙壁的中央睁开，环视房间，而该祟灵掷骰先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物变为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}，并在其保持恐惧时，感觉仿佛有人或某物在注视着它。</p>\n<p><strong>失败</strong> 该生物变为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}，并在其保持恐惧时，不将任何人视为盟友。</p>\n<p><strong>大失败</strong> 该生物变为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}，并在其保持恐惧时，处于@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}状态。</p>\n<p><strong>Trigger</strong> A living creature remains in area <strong>C4</strong> for at least 1 round</p>\n<hr />\n<p><strong>Effect</strong> An overwhelming wave of paranoia fills area <strong>C4</strong>. Each creature in the room must attempt a @Check[will|dc:25] save, with the following results. An eerie red eye then opens in the center of the western wall, looking about the room, and the haunt rolls initiative.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1} and feels like someone or something is watching them for as long as they remain frightened.</p>\n<p><strong>Failure</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} and treats no one as an ally as long as they remain frightened.</p>\n<p><strong>Critical Failure</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3} and is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} as long as they remain frightened.</p>"
+        }
+      },
+      "disable": "<p>@Check[deception|dc:22|name:显得毫不起眼|traits:haunt]（受训）以显得毫不起眼于注视的眼睛（从而被它忽视），或 @Check[religion|dc:22|name:防止被看见|traits:haunt]（受训）以防止被那只眼睛看见或影响。</p>\n<p>@Check[deception|dc:22|name:Appear Uninteresting|traits:haunt] (trained) to appear uninteresting to the watching eye (and thus be ignored by it) or @Check[religion|dc:22|name:Ward Against Being Seen|traits:haunt] (trained) to ward against being seen by or affected by the eye.</p>",
+      "hazarddescription": "<p>一股被监视的强烈感觉在房间里所有人的脑海中涌起，就在下一瞬间，西侧墙壁上睁开了一只诡异的红色眼睛。</p>\n<p>An overwhelming feeling of being watched wells up in the minds of those in the room, an instant before an eerie red eye opens in the western wall.</p>",
+      "reset": "<p>在任意一轮结束时，若该灵异无法看见任何处于 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{恐惧} 状态的生物，则该灵异会变为惰性。它会保持休眠 1 小时，之后会重置。</p>\n<p>The haunt becomes inert at the end of any round in which there are no @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened} creatures it can see. It stays dormant for 1 hour, after which point it resets.</p>",
+      "routine": "<p>（1动作）眼睛环顾四周，它能看见的那些生物（无论在<strong>C4</strong>区域内还是在区域外）受到 @Damage[4d6[mental]] 伤害（@Check[will|dc:21|basic|traits:haunt] 豁免），被注视的恐惧术带来阵阵痛楚的涟漪。</p>\n<p>因该效果而受到精神伤害的生物，在其下个回合结束时不降低其 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened} 数值。</p>\n<p>(1 action) The eye glances about, and those it can see (whether in area <strong>C4</strong> or outside of it) take @Damage[4d6[mental]] damage (@Check[will|dc:21|basic|traits:haunt] save) as fears of being watched impart ripples of pain.</p>\n<p>A creature that takes mental damage from this effect doesn't reduce their @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened} value at the end of their next turn.</p>",
+      "stealthdetails": "<p>（专家）</p>\n<p>(expert)</p>",
+      "prototypeToken": "偷窥墙 Watching Wall"
+    },
+    "Violet Fungus": {
+      "name": "紫罗兰真菌 Violet Fungus",
+      "tokenName": "紫罗兰真菌 Violet Fungus",
+      "items": {
+        "Tentacle": {
+          "name": "触手 Tentacle"
+        },
+        "Tremorsense 60 feet": {
+          "name": "震感 60 尺 Tremorsense 60 feet",
+          "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+        },
+        "Violet Rot": {
+          "name": "紫罗兰腐朽 Violet Rot",
+          "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>最大持续时间</strong> 6 轮</p>\n<p><strong>阶段 1</strong> @Damage[1d6[poison]] 伤害 外加 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{虚弱 1}（1 轮）</p>\n<p><strong>阶段 2</strong> @Damage[1d6[poison]] 伤害 外加 虚弱 1 和 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drain 1}（1 轮）</p>\n<p><strong>阶段 3</strong> @Damage[2d6[poison]] 伤害 外加 虚弱 1 和 Drain 1（1 轮）</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:20]</p>\n<hr />\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d6[poison]] damage plus @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d6[poison]] damage plus enfeebled 1 and @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage plus enfeebled 1 and drained 1 (1 round)</p>"
+        }
+      },
+      "publicNotes": "<p>乍一看，紫色真菌似乎不过是一朵体型异常、外观丑陋且紫得令人作呕的蘑菇而已。只有当人们靠近——当那滴落着腐肉毒液的鞭状触手从真菌坑洼的菌盖下蜿蜒伸出——这株食肉伞菌的可怖真相才会显现。许多业余洞穴探险者都曾在这头怪物般真菌的触手钳制下不幸丧命，因为在格拉利昂，紫色真菌几乎就是洞窟的代名词。</p>\n<p>任何曾长时间冒险深入世界洞穴的人，都知道致命紫色真菌的危险。幽暗地域的居民，例如卓尔与灰矮人，往往身带至少一次与这种凶残植物那残酷、浸满毒液的触手擦身而过所留下的细长鞭痕。精明的地下陷阱师与斥候有时会利用人工培育的紫色真菌，在地表世界之下的巨大洞窟中捕捉猎物。有些幽暗地域的族群也会栽培紫色真菌，用以保卫他们的领地。尤其是地蜥人（特征），会在其聚居地的周边布置紫色真菌，作为第一道防线。</p>\n<p>At a glance, a violet fungus might seem to be little more than an unsightly and sickeningly purple mushroom of unusual size. Only once one draws closer-once whip-like tentacles dripping with flesh-rotting venom slither out from the fungus's cratered cap-does the terrifying truth of this carnivorous toadstool become apparent. Many amateur spelunkers have met untimely ends in the clutches of this monstrous fungus's tentacles, since violet fungi are practically synonymous with caverns on Golarion.</p>\n<p>Anyone who has ever braved the world's caves for an extended period of time know the dangers of the deadly violet fungus. Darklands dwellers such as drow and duergars often bear the long, whip-like scars of at least one brush with this vicious plant's cruel, poison-infused tentacles. Canny subterranean trappers and scouts sometimes make use of cultivated violent fungi to catch game in the enormous caverns below the surface world. Some Darklands peoples also cultivate violet fungi as a means to defend their territory. Xulgaths in particular place violet fungi around the perimeters of their settlements as a first line of defense.</p>",
+      "prototypeToken": "紫罗兰真菌 Violet Fungus"
+    },
+    "Doom's of Tomorrow - Burning City": {
+      "name": "《明日之厄运——燃烧之城》 Doom's of Tomorrow - Burning City",
+      "tokenName": "明日的厄运 Doom's of Tomorrow",
+      "items": {
+        "Apocalypse Beam": {
+          "name": "天启射线 Apocalypse Beam",
+          "description": "<p><strong>触发</strong> 一个生物快步进入立体模型壁龛背面10英尺范围内</p><p><strong>效果</strong> 陷阱向该生物发射其对应的天启射线。</p>\n<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p><p><strong>Effect</strong> The trap fires its corresponding apocalypse beam at that creature.</p>"
+        },
+        "Burning Beam": {
+          "name": "燃烧光束 Burning Beam",
+          "description": "<p>一名生物触发了天启射线且位于10尺内。这是反应动作（）的一部分。</p>\n<p>A creature triggerd Apocalypse Beam and is within 10 feet. This is part of the Reaction.</p>"
+        }
+      },
+      "disable": "<ul><li><p><strong>两个选项</strong></p><hr></li></ul><ol><li><p><strong>DC 20 盗窃（受训）</strong>以在凄凉灯塔的模型触发之前迅速将其解除</p></li></ol><ul><li><p><strong>DC 23 潜行（受训）</strong>以悄悄绕过一个陷阱而不触发它</p></li></ul>\n<ul><li><p><strong>Two Options</strong></p><hr></li></ul><ol><li><p><strong>DC 20 Thievery (trained)</strong> to quickly deactivate the model of Gauntlight before it triggers</p></li></ol><ul><li><p><strong>DC 23 Stealth (trained)</strong> to creep by a trap without triggering it</p></li></ul>",
+      "hazarddescription": "<p>一个小型立体模型，展示了一座城市正面临悲惨的危难。</p><p>毁灭的声响从立体模型中传出，一道闪烁的能量光束从凄凉灯塔的微型模型中射出，直刺外界。</p><hr /><h3>在一名玩家查看立体模型后朗读</h3><p>立体模型呈现出一幅场景：艾巴萨罗姆城在贝科拉的想象中陷入一种奇诡的毁灭。你看到微弱的幻象火焰闪烁着，吞没整座城市。</p><p>一座小小的凄凉灯塔，仿佛相距数里之遥，坐落在每一幕场景的边缘。</p>\n<p>A small diorama of a city facing a tragic peril.</p><p>The sounds of devastation rise from the diorama, and a beam of shimmering energy lances outward from the tiny model of Gauntlight.</p><hr /><h3>Read after a player looks at the diorama</h3><p>The diorama presents a scene depicting the city of Absalom in a fanciful doom from Belcorra’s imagination. You see a minor illusion of flames flickering and engulfing the city.</p><p>A tiny Gauntlight, as though miles distant, sits at the edge of each scene.</p>",
+      "reset": "<p>立体模型陷阱会在1小时后自动重置。</p>\n<p>The diorama trap resets automatically after 1 hour.</p>",
+      "routine": "<p>不适用</p>\n<p>N/A</p>",
+      "stealthdetails": "<p>(专家)</p>\n<p>(expert)</p>",
+      "hp": "(BT 28)",
+      "prototypeToken": "明日之厄运 Doom's of Tomorrow"
+    }
+  }
+}

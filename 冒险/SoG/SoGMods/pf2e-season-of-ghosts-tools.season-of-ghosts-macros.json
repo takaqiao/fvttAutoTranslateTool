@@ -1,0 +1,29 @@
+{
+    "label": "肆季鬼志宏\nSeason of Ghosts Macros",
+    "folders": {
+        "Macros": "宏\nMacros",
+        "Macros Remastered": "宏重制版 Macros Remastered"
+    },
+    "entries": {
+        "Roll Hinterlands Random Encounters": {
+            "name": "掷骰荒野随机遭遇 Roll Hinterlands Random Encounters",
+            "command": "const table = await fromUuid(\"Compendium.pf2e-season-of-ghosts-tools.season-of-ghosts-rolltables.RollTable.4VEJ3IeK4nZWXb35\");\nawait table.draw({roll: true, displayChat: true, rollMode: CONST.DICE_ROLL_MODES.PRIVATE});"
+        },
+        "Roll Hinterlands Near Town Random Encounters": {
+            "name": "在城镇附近的荒野随机遭遇中掷骰 Roll Hinterlands Near Town Random Encounters",
+            "command": "const table = await fromUuid(\"Compendium.pf2e-season-of-ghosts-tools.season-of-ghosts-rolltables.RollTable.bbw38BChTodFClxB\");\nawait table.draw({roll: true, displayChat: true, rollMode: CONST.DICE_ROLL_MODES.PRIVATE});"
+        },
+        "Blood Rain Flat Check": {
+            "name": "血雨 纯骰检定 Blood Rain Flat Check",
+            "command": "const flatcheckName = \"Blood Rain\";\nconst flatCheckDC = 14;\n\nconst flatCheckRoll = await new Roll('1d20').evaluate();\n\nif (game.dice3d) {\n  await game.dice3d.showForRoll(flatCheckRoll, game.user, true);\n}\n\nconst flatCheckRollResult = flatCheckRoll.result < flatCheckDC\n  ? 'Failure'\n  : 'Success';\n\n  const successText = `Roll Result: ${flatCheckRoll.total} - ${flatCheckRollResult}<hr>Cloud cover increases fully, and at some point during the night, what appears to be blood rains down on Willowshore. This \"blood\" seemingly coats everything with a layer of gore. Any PC who witnesses the blood rain must immediately attempt a save against the effects of the crimson moon, taking a -4 circumstance penalty to the save if they're out in the rain. A PC whose frightened condition increases as the result of this saving throw becomes fleeing for 1 minute and must attempt to escape to an indoor location. The blood rain ends after a few minutes, transitioning back to overcast skies for the remainder of the night. Fallen rain reverts to normal water once the bloody rain ends.`;\n  const failText = `Roll Result: ${flatCheckRoll.total} - ${flatCheckRollResult}<hr>No Rain this evening, just the normal crimson moon effects.`;\n\nconst hidden = true;\n\nconst content = flatCheckRoll.result < flatCheckDC\n  ? failText\n  : successText;\n\nawait ChatMessage.create({\n  content: content,\n  whisper: hidden ? ChatMessage.getWhisperRecipients(\"GM\").map((u) => u.id) : null,\n  blind: hidden\n});"
+        },
+        "Hinterlands Random Encounter Flat Check": {
+            "name": "荒野随机遭遇纯骰检定 Hinterlands Random Encounter Flat Check",
+            "command": "let dc = 17;\n\nconsole.log(dc);\n\nconst flatCheckRoll = await new Roll('1d20').evaluate();\n\nif (game.dice3d) {\n  await game.dice3d.showForRoll(flatCheckRoll, game.user, true);\n}\n\nconst successText = `DC${dc} Roll Result: ${flatCheckRoll.total}<hr>The party comes across a Random Encounter in the Hinterlands!\n<hr>If within 2 hexes of Willowshore, roll @UUID[Compendium.pf2e-season-of-ghosts-tools.season-of-ghosts-macros.Macro.gsFOdM2nRK1CBg5c]{Roll Hinterlands Near Town Random Encounters}\n<br>Otherwise @UUID[Compendium.pf2e-season-of-ghosts-tools.season-of-ghosts-macros.Macro.lvyxZ5808JulRuM7]{Roll Hinterlands Random Encounters}`;\nconst failText = `DC${dc} Roll Result: ${flatCheckRoll.total}<hr>The party is safe... for now.`;\n\nconst hidden = true;\nconst success = flatCheckRoll.result >= dc;\n\nconst content = success\n  ? successText\n  : failText ;\n\nawait ChatMessage.create({\n  content: content,\n  whisper: hidden ? ChatMessage.getWhisperRecipients(\"GM\").map((u) => u.id) : null,\n  blind: hidden\n});"
+        },
+        "Willowshore Random Encounter Flat Check": {
+            "name": "柳岸镇随机遭遇纯骰检定 Willowshore Random Encounter Flat Check",
+            "command": "let dc = 10;\n\nconst actor = game.actors.find(a => a.type === \"party\");\nconst members = actor.members;\n\nif (!actor || !Array.isArray(actor.members)) {\n  ui.notifications.error(\"Party actor or members not found!\");\n  return;\n}\n\nactor.members.forEach((member) => {\n  const selectedActivities = member.system?.exploration;\n\n  if (!Array.isArray(selectedActivities)) return;\n\n  selectedActivities.forEach((activity) => {\n    const item = member.items.get(activity);\n    if (!item?.name) return;\n\n    if ([\"Hustle\", \"Search\"].includes(item.name)) {\n      dc -= 2;\n    } else if ([\"Avoid Notice\", \"Scout\"].includes(item.name)) {\n      dc += 1;\n    }\n  });\n});\n\nconst flatCheckRoll = await new Roll('1d20').evaluate();\n\nif (game.dice3d) {\n  await game.dice3d.showForRoll(flatCheckRoll, game.user, true);\n}\n\nconst successText = `DC${dc} Roll Result: ${flatCheckRoll.total}<hr>The party comes across a Random Encounter in Willowshore!`;\nconst failText = `DC${dc} Roll Result: ${flatCheckRoll.total}<hr>The party is safe... for now.`;\n\nconst hidden = true;\nconst success = flatCheckRoll.result >= dc;\n\nconst content = success\n  ? successText\n  : failText ;\n\nawait ChatMessage.create({\n  content: content,\n  whisper: hidden ? ChatMessage.getWhisperRecipients(\"GM\").map((u) => u.id) : null,\n  blind: hidden\n});\n\nif (success){\n  const table = await fromUuid(\"Compendium.pf2e-season-of-ghosts-tools.season-of-ghosts-rolltables.RollTable.ixB77nbzx0lPqi9S\");\n  await table.draw({roll: true, displayChat: true, rollMode: CONST.DICE_ROLL_MODES.PRIVATE});\n  console.log(table);\n}"
+        }
+    }
+}

@@ -1,0 +1,432 @@
+{
+  "STORYFRAME": {
+    "Title": "StoryFrame",
+    "Settings": {
+      "Debug": "调试模式",
+      "DebugHint": "启用控制台调试日志"
+    },
+    "WindowTitles": {
+      "PresentChallenge": "展示挑战",
+      "ChallengeLibrary": "挑战库",
+      "RequestRolls": "请求掷骰",
+      "DCPresets": "DC 预设",
+      "PlayerSidebar": "StoryFrame 玩家侧栏",
+      "PlayerViewer": "StoryFrame 玩家查看器",
+      "GMSidebar": "StoryFrame",
+      "TargetSelector": "目标选择器"
+    },
+    "Dialogs": {
+      "RollRequest": {
+        "FoundChecks": "找到 {count} 个检定：",
+        "FoundSaves": "找到 {count} 个豁免：",
+        "FoundChecksAndSaves": "找到 {count} 个检定和豁免：",
+        "SelectPCs": "选择要请求掷骰的 PC：",
+        "SendRollRequests": "发送掷骰请求",
+        "Secret": "秘密",
+        "AllowOnlyOne": "只允许一次掷骰（在有一次掷骰后关闭）",
+        "RemoveCheck": "移除检定"
+      },
+      "AddSpeaker": {
+        "Title": "添加发言者",
+        "Content": "输入该发言者名称：",
+        "Button": "添加"
+      },
+      "DeleteScene": {
+        "Title": "删除场景",
+        "Content": "删除场景“{name}”？",
+        "Button": "删除"
+      },
+      "DeletePreset": {
+        "Title": "删除预设",
+        "Content": "删除预设“{name}”（DC {dc}）？",
+        "Button": "删除"
+      },
+      "AddDCPreset": {
+        "Title": "添加 DC 预设",
+        "Button": "添加"
+      },
+      "ClearAllPCs": {
+        "Title": "清空所有 PC",
+        "Content": "从列表中移除所有 PC？",
+        "Button": "全部清空"
+      },
+      "ClearAllChallenges": {
+        "Title": "清空所有挑战",
+        "Content": "清空所有进行中的挑战？",
+        "Button": "全部清空"
+      },
+      "DeleteChallenge": {
+        "Title": "删除挑战",
+        "Content": "从库中删除该挑战？",
+        "Button": "删除"
+      },
+      "EnterDC": {
+        "Title": "输入 DC 值",
+        "Label": "输入 DC 值",
+        "Validation": "请输入有效的 DC（1-60）"
+      },
+      "EnterNPCName": {
+        "Title": "NPC 名称",
+        "Label": "输入 NPC 名称"
+      },
+      "EditNPCName": {
+        "Title": "编辑 NPC 名称",
+        "Label": "输入新名称",
+        "Button": "保存"
+      },
+      "ClearAllNPCs": {
+        "Title": "清空所有 NPC"
+      },
+      "CreateChallenge": {
+        "Title": "创建挑战",
+        "Content": "为此挑战输入名称：",
+        "Button": "创建"
+      },
+      "Cancel": "取消",
+      "Close": "关闭",
+      "TargetSelector": {
+        "Rolling": "掷骰中",
+        "SelectTargets": "选择目标：",
+        "RollDamage": "掷伤害",
+        "NoTokens": "场景中没有指示物"
+      }
+    },
+    "Notifications": {
+      "Scene": {
+        "NoSpeakersToAdd": "没有可添加的当前发言者",
+        "SpeakersAdded": "已添加 {count} 名发言者",
+        "ActorNotFound": "未找到角色",
+        "CannotAddLootOrHazard": "无法添加战利品或危害角色",
+        "SpeakerAlreadyInScene": "该发言者已在场景中",
+        "SpeakerAdded": "已添加 {actor}",
+        "SceneNameRequired": "场景名称必填",
+        "AddAtLeastOneSpeaker": "请至少添加一名发言者",
+        "SceneUpdated": "已更新场景“{name}”",
+        "SceneCreated": "已创建场景“{name}”",
+        "NoSavedScenes": "没有已保存场景",
+        "SceneDeleted": "已删除场景“{name}”",
+        "SceneLoaded": "已加载场景“{name}”",
+        "SceneUpdatedWithCurrentSpeakers": "已用当前 {count} 名发言者更新“{name}”"
+      },
+      "Speaker": {
+        "AlreadyInList": "{label} 已在列表中",
+        "AddedAsNPC": "已将 {label} 作为 NPC 添加",
+        "NameUpdated": "已将发言者名称更新为“{name}”",
+        "OpeningForPlayers": "正在为所有玩家客户端打开 StoryFrame",
+        "ClosingForPlayers": "正在为所有玩家客户端关闭 StoryFrame",
+        "NoSpeakersToSave": "没有可保存的发言者",
+        "NoNPCsAvailable": "没有可用 NPC",
+        "SceneHasNoSpeakers": "场景中没有发言者",
+        "NoScenesRemaining": "没有剩余场景。下次将直接显示发言者。",
+        "OpeningSidebarsForPlayers": "正在为所有玩家客户端打开 StoryFrame 侧栏",
+        "ClosingSidebarsForPlayers": "正在为所有玩家客户端关闭 StoryFrame 侧栏"
+      },
+      "Participant": {
+        "NoPCsFound": "未找到玩家角色",
+        "PCsAdded": "已添加 {count} 名 PC",
+        "NoPartyFound": "未找到队伍",
+        "NoMembersInParty": "队伍中没有成员",
+        "NoValidMembersInParty": "队伍中没有有效成员",
+        "PartyMembersAdded": "已添加 {count} 名队伍成员",
+        "OpeningSidebarsForPlayers": "正在为所有玩家客户端打开 StoryFrame 侧栏",
+        "ClosingSidebarsForPlayers": "正在为所有玩家客户端关闭 StoryFrame 侧栏"
+      },
+      "DC": {
+        "PresetAdded": "已添加 DC {value} 预设",
+        "PresetDeleted": "已删除预设：DC {value}",
+        "PresetApplied": "已应用：{name}（DC {dc}）",
+        "InvalidDC": "请输入有效的 DC（1-60）",
+        "DCAdded": "已添加 DC {value}",
+        "DCSet": "DC 已设为 {dc}"
+      },
+      "SkillCheck": {
+        "SelectPCsForBatch": "请先选择 PC 才能使用批量选择",
+        "NoPCsSelected": "未选择 PC",
+        "CheckRequested": "已向 {count} 名 PC 请求 {checkName} 检定",
+        "SaveRequested": "已向 {count} 名 PC 请求 {checkName} 豁免",
+        "PlayersOffline": "{names} 离线 - 已跳过",
+        "PlayersLackSkill": "{names} 没有 {skillName} - 已跳过",
+        "MultipleChecksRequested": "已向 {uniqueCount} 名 PC 请求 {checkCount} 个检定",
+        "MultipleSavesRequested": "已向 {uniqueCount} 名 PC 请求 {checkCount} 个豁免",
+        "MultipleChecksAndSavesRequested": "已向 {uniqueCount} 名 PC 请求 {checkCount} 个检定和豁免",
+        "UnknownSkill": "未知技能：{skillName}",
+        "SelectPCsFirst": "请先选择 PC 再请求掷骰",
+        "NoSpecificActions": "{skillName} 没有具体动作",
+        "PlayerMissingSkills": "{name}（缺少 {skillList}）",
+        "SkippedMissingSkills": "{details} - 已跳过"
+      },
+      "PendingRolls": {
+        "NoPendingRolls": "没有待处理掷骰",
+        "RollCancelled": "掷骰请求已取消",
+        "AllRollsCancelled": "所有掷骰请求已取消"
+      },
+      "Challenge": {
+        "NoChallenges": "没有进行中的挑战",
+        "AllChallengesCleared": "所有挑战已清空",
+        "ChallengeCleared": "挑战已清空",
+        "ChallengeNotFound": "未找到挑战",
+        "ChallengeDuplicateName": "名为“{name}”的挑战已在进行中。请先清除它或重命名此挑战。",
+        "ChallengeDuplicateNamePrompt": "名为“{name}”的挑战已在进行中。请使用不同名称或清除现有挑战。",
+        "ChallengePresentedAll": "挑战“{name}”已展示给所有玩家",
+        "ChallengePresentedPCs": "挑战“{name}”已展示给 {count} 名 PC",
+        "ChallengeUpdated": "挑战“{name}”已更新并展示给 {count} 名 PC",
+        "ChallengeDeleted": "挑战已从库中删除",
+        "NoJournalContent": "未找到日志内容",
+        "NoTextSelected": "日志中未选中文本",
+        "SelectionNotInContent": "所选内容必须位于日志正文内",
+        "NoSkillChecksFound": "在所选文本中未找到技能检定",
+        "ChallengeCreated": "已创建挑战“{name}”，包含 {count} 个检定",
+        "NoParticipantsAdded": "未添加参与者。请先添加 PC。"
+      },
+      "Roll": {
+        "RequestNotFound": "未找到掷骰请求",
+        "ParticipantNotFound": "未找到参与者",
+        "ActorNotFound": "未找到角色",
+        "SkillNotFound": "在 {actor} 上未找到技能“{skill}”",
+        "SaveNotFound": "在 {actor} 上未找到豁免“{save}”",
+        "UnsupportedSystem": "不支持的系统：{system}",
+        "RollFailed": "执行掷骰失败",
+        "ChallengeNoLongerActive": "挑战已不再处于激活状态",
+        "InvalidSkill": "无效技能",
+        "NoParticipantForUser": "未找到与你用户对应的参与者",
+        "CheckCompleted": "{skill} 检定完成（{total}）",
+        "NA": "不适用",
+        "GroupRollsDismissed": "同组其余 {count} 次掷骰已关闭"
+      },
+      "NoContent": "没有待处理的掷骰、挑战或发言者可显示。",
+      "NoSpeakers": "没有可显示的发言者。请在侧栏查看掷骰和挑战。"
+    },
+    "UI": {
+      "Tabs": {
+        "NPCs": "NPC",
+        "PCs": "PC"
+      },
+      "Labels": {
+        "Skills": "技能",
+        "SceneName": "场景名称",
+        "SelectSkill": "选择技能...",
+        "SelectSave": "选择豁免...",
+        "OptionName": "选项名称...",
+        "PendingRolls": "待处理掷骰（{count}）",
+        "ActiveChallenges": "进行中的挑战（{count}）",
+        "SavedScenes": "已保存场景（{count}）",
+        "ByPC": "按 PC",
+        "BySkill": "按技能",
+        "AddSkill": "添加技能",
+        "AddSave": "添加豁免",
+        "AddDCPreset": "添加 DC 预设",
+        "ClearAll": "全部清空",
+        "CancelAll": "全部取消",
+        "Remove": "移除",
+        "RemoveOption": "移除选项",
+        "Update": "更新",
+        "SaveToLibrary": "保存到库",
+        "ToggleLayout": "切换布局",
+        "ToggleGrouping": "切换分组",
+        "Close": "关闭",
+        "Unknown": "未知",
+        "NowSpeaking": "正在发言",
+        "Challenges": "挑战",
+        "Rolls": "掷骰",
+        "NoPendingActions": "无待处理操作",
+        "WaitingForGM": "等待 GM...",
+        "WaitingForGMFull": "等待 GM 请求掷骰或展示挑战",
+        "Delete": "删除",
+        "PresentToAllPlayers": "展示给所有玩家",
+        "NoSavedChallenges": "没有已保存挑战",
+        "CreateChallengeHint": "创建挑战并勾选“保存到库”",
+        "DragActorsHere": "将角色拖到这里",
+        "JournalImages": "日志图片",
+        "JournalActors": "日志角色",
+        "JournalChecks": "日志检定",
+        "JournalSkills": "日志技能",
+        "JournalSaves": "日志豁免",
+        "JournalLore": "日志知识",
+        "ActorDeleted": "角色已删除",
+        "HiddenFromPlayers": "对玩家隐藏",
+        "Deselect": "取消选择",
+        "SelectAll": "全选",
+        "LevelShort": "级",
+        "AllowOnlyOne": "仅允许一个",
+        "ChooseOne": "选择一个"
+      },
+      "Categories": {
+        "Physical": "物理",
+        "Magical": "魔法",
+        "Social": "社交",
+        "Utility": "实用",
+        "SavingThrows": "豁免"
+      },
+      "Tooltips": {
+        "MinProficiency": "所需最低熟练度",
+        "SecretRoll": "秘密掷骰（仅 GM）",
+        "DragToSidebar": "拖到 StoryFrame 侧栏",
+        "ToggleSidebar": "切换 StoryFrame 侧栏",
+        "SelectedCount": "已选择 {selected}/{total}",
+        "SelectAll": "全选",
+        "DeselectAll": "取消全选",
+        "AddCurrentSpeakers": "添加当前发言者",
+        "AddToScene": "添加到场景",
+        "ClearChallenge": "清除 {name}",
+        "EditScene": "编辑 {name}",
+        "UpdateScene": "用当前发言者更新 {name}",
+        "DeleteScene": "删除 {name}",
+        "RollSkill": "掷 {skill}",
+        "RollSkillWithAction": "掷 {skill}（{action}）",
+        "InsufficientProficiency": "熟练度不足",
+        "LockedInsufficientProficiency": "已锁定 - 熟练度不足",
+        "RollSkillCheck": "掷 {skill} 检定",
+        "EditChallenge": "编辑挑战",
+        "DeleteChallenge": "删除挑战",
+        "AddNPC": "添加 NPC",
+        "ClearActiveNPC": "清除当前 NPC",
+        "ClearAllNPCs": "清空所有 NPC",
+        "SaveSpeakersAsScene": "将发言者保存为场景",
+        "ManageSpeakerScenes": "管理发言者场景",
+        "EditName": "编辑 {name}",
+        "RemoveName": "移除 {name}",
+        "NameHiddenFromPlayers": "该名称对玩家隐藏",
+        "ToggleNameVisibility": "切换对玩家的名称可见性",
+        "HiddenFromPlayers": "该发言者对玩家隐藏",
+        "ToggleSpeakerHidden": "切换发言者对玩家可见性",
+        "PrevImage": "上一张图片",
+        "NextImage": "下一张图片",
+        "AddAltImage": "添加替代图片",
+        "RemoveAltImage": "移除此图片",
+        "HoldAltToHide": "拖动时按住 ALT 可对玩家隐藏名称",
+        "ClickToAddAsNPC": "点击将 {name} 添加为 NPC",
+        "PendingRollsCount": "{count} 个待处理掷骰",
+        "AddPartyMembers": "添加队伍成员",
+        "AddAllPCs": "添加所有 PC",
+        "OpenCloseOnPlayers": "在玩家端打开/关闭",
+        "OpenCloseViewerOnPlayers": "在玩家端打开/关闭查看器",
+        "OpenCloseSidebarsOnPlayers": "在玩家端打开/关闭侧栏",
+        "ClearAllPCs": "清空所有 PC",
+        "ConfigureQuickSkills": "配置快捷技能",
+        "RequestRollsFromSelection": "从选中内容请求掷骰",
+        "DCPresets": "DC 预设",
+        "AddPreset": "添加预设",
+        "PartyLevel": "队伍等级",
+        "GMOnlyRoll": "仅 GM 掷骰",
+        "SendBatchedSkillChecks": "发送批量技能检定",
+        "SkillChecks": "{skill} 检定",
+        "SavingThrows": "{save} 豁免",
+        "RequestSave": "请求 {save} 豁免",
+        "RollSave": "掷 {save} 豁免",
+        "ActiveChallengesCount": "{count} 个进行中挑战",
+        "PresentChallenge": "展示挑战",
+        "CreateFromSelection": "从选中内容创建",
+        "AllowOnlyOne": "启用后，此组仅第一条掷骰结果生效，其余待处理掷骰将自动关闭。"
+      },
+      "AriaLabels": {
+        "AddNPCFromImage": "从图片添加 NPC",
+        "DeselectActiveNPC": "取消选择当前 NPC",
+        "RemoveAllNPCs": "移除所有 NPC",
+        "SaveSpeakersAsScene": "将当前发言者保存为场景",
+        "ManageSpeakerScenes": "管理已保存发言者场景",
+        "NPCSpeakers": "NPC 发言者",
+        "EditName": "编辑 {name}",
+        "RemoveName": "移除 {name}",
+        "ViewPendingRolls": "查看待处理掷骰",
+        "AddPartyMembers": "添加所有队伍成员",
+        "AddAllPCs": "添加所有玩家角色",
+        "OpenViewerOnPlayers": "在所有玩家客户端打开 StoryFrame 查看器",
+        "OpenSidebarsOnPlayers": "在所有玩家客户端打开 StoryFrame 侧栏",
+        "RemoveAllPCs": "移除所有 PC",
+        "ConfigureQuickSkills": "配置快捷技能按钮",
+        "RequestRollsFromSelection": "解析所选文本中的行内检定并请求掷骰",
+        "DCControls": "DC 控件",
+        "PlayerCharacters": "玩家角色",
+        "DifficultyClass": "难度等级（DC）",
+        "DifficultyByLevel": "按等级难度",
+        "SelectDifficulty": "选择难度",
+        "ToggleSecretRoll": "切换秘密掷骰",
+        "SendBatch": "发送批量",
+        "SkillChecks": "{skill} 检定",
+        "SavingThrows": "{save} 豁免检定",
+        "RequestSkillCheck": "请求 {skill} 检定",
+        "RequestSave": "请求 {save} 豁免",
+        "RollCheck": "掷 {check}",
+        "SkillButtonsByCategory": "按分类显示技能按钮",
+        "ViewActiveChallenges": "查看进行中的挑战",
+        "PresentChallenge": "向所有玩家展示多选项挑战",
+        "CreateFromSelection": "从所选日志文本创建挑战"
+      },
+      "Placeholders": {
+        "EnterSceneName": "输入场景名称",
+        "EnterDC": "输入 DC 值",
+        "EnterNPCName": "输入 NPC 名称",
+        "AddDC": "添加 DC"
+      }
+    },
+    "Difficulty": {
+      "PF2e": {
+        "Trivial": "微不足道",
+        "Low": "低",
+        "LowMed": "低-中",
+        "Standard": "标准",
+        "MedHigh": "中-高",
+        "High": "高",
+        "Extreme": "极端"
+      },
+      "DND5e": {
+        "VeryEasy": "非常简单",
+        "Easy": "简单",
+        "Medium": "中等",
+        "Hard": "困难",
+        "VeryHard": "非常困难",
+        "NearlyImpossible": "近乎不可能",
+        "SaveLabel": "{ability} 豁免"
+      }
+    },
+    "Errors": {
+      "ProficiencyFilteringNotImplemented": "基础类中尚未实现熟练度过滤"
+    },
+    "SpeakerWheel": {
+      "Back": "返回"
+    },
+    "SceneEditor": {
+      "TitleCreate": "创建发言者场景",
+      "TitleEdit": "编辑发言者场景",
+      "SpeakersCount": "发言者（{count}）",
+      "JournalImagesCount": "日志图片（{count}）",
+      "JournalActorsCount": "日志角色（{count}）",
+      "Current": "当前",
+      "NoSpeakersMessage": "没有发言者。可从下方来源添加或将角色拖到这里。",
+      "SaveChanges": "保存更改",
+      "CreateScene": "创建场景"
+    },
+    "ChallengeBuilder": {
+      "ChallengeName": "挑战名称",
+      "ChallengeNamePlaceholder": "例如：加固营地",
+      "ChallengeImage": "挑战图片（可选）",
+      "ChallengeImagePlaceholder": "path/to/image.png",
+      "PickImage": "选择图片",
+      "SaveToLibrary": "将此挑战保存到库",
+      "ChallengeOptions": "挑战选项",
+      "OptionLabel": "选项 {num}",
+      "AddOption": "再添加一个选项",
+      "LoreSkills": "学识",
+      "NoAction": "无动作",
+      "DC": "DC",
+      "Proficiency": {
+        "Any": "任意",
+        "Trained": "受训",
+        "Expert": "专家",
+        "Master": "大师",
+        "Legendary": "传奇",
+        "Proficient": "熟练",
+        "Expertise": "专精"
+      },
+      "Validation": {
+        "AddAtLeastOneOption": "请至少添加一个含技能的选项",
+        "AtLeastOneSkill": "必须至少有一个技能",
+        "AtLeastOneOption": "必须至少有一个选项"
+      },
+      "SavedToLibrary": "已将“{name}”保存到库",
+      "UpdatedInLibrary": "已在库中更新“{name}”",
+      "UpdateAndPresent": "更新并展示",
+      "PresentChallenge": "展示挑战"
+    }
+  }
+}

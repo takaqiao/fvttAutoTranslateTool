@@ -1,0 +1,17 @@
+<div class="action line-item" data-effect-id="{{effect.id}}">
+    <header class="action-header">
+        <div class="icon-frame">
+            <img class="icon" src="{{effect.img}}" alt="{{effect.name}}">
+        </div>
+        <div class="title">
+            <h4>{{effect.name}}</h4>
+            {{#unless tags.activation.empty}}
+            {{crucibleTags tags.activation}}
+            {{/unless}}
+        </div>
+    </header>
+    {{#unless tags.statuses.empty}}
+    {{crucibleTags tags.statuses tagType="status"}}
+    {{/unless}}
+    <div class="description">{{{effect.description}}}</div>
+</div>

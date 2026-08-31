@@ -1,0 +1,343 @@
+import {PROPERTIES as ITEM_PROPERTIES} from "./items.mjs";
+
+/**
+ * @import {CrucibleItemCategory} from "./items.mjs";
+ */
+
+/**
+ * @typedef {CrucibleItemCategory} WeaponCategory     A category of weapon which can exist in the system
+ * @property {string} id                      The category id
+ * @property {string} label                   The localized label for the category
+ * @property {number} hands                   The number of hands required, 1 or 2
+ * @property {boolean} main                   Can this weapon be used in the main-hand
+ * @property {boolean} off                    Can this weapon be used in the off-hand
+ * @property {string} scaling                 What scaling formula does this weapon use?
+ * @property {number} damage                  Base damage for the weapon category
+ * @property {number} actionCost              The action point cost to strike with this weapon
+ * @property {WeaponTrainingTypes[]} training Training categories which apply skill bonuses to this weapon category
+ */
+
+import Enum from "./enum.mjs";
+
+/**
+ * @typedef {"talisman"|"heavy"|"light"|"mechanical"|"natural"|"projectile"|"shield"|"simple"|"unarmed"}
+ *   WeaponTrainingTypes
+ */
+
+/**
+ * Training categories which apply to weapons.
+ * @type {Record<WeaponTrainingTypes, {label: string}>}
+ **/
+export const TRAINING = Object.freeze({
+  talisman: {label: "WEAPON.CATEGORIES.Talisman"},
+  heavy: {label: "WEAPON.CATEGORIES.Heavy"},
+  light: {label: "WEAPON.CATEGORIES.Light"},
+  mechanical: {label: "WEAPON.CATEGORIES.Mechanical"},
+  natural: {label: "WEAPON.TAGS.Natural"},
+  projectile: {label: "WEAPON.CATEGORIES.Projectile"},
+  shield: {label: "WEAPON.CATEGORIES.Shield"},
+  simple: {label: "WEAPON.CATEGORIES.Simple"},
+  unarmed: {label: "WEAPON.CATEGORIES.Unarmed"}
+});
+
+// Helper function for labeling categories
+const label = (category, hands) => {
+  category = _loc(category);
+  return _loc("WEAPON.CATEGORIES.CategoryHands", {category, hands});
+};
+
+/**
+ * Enumerate the weapon categories which are allowed by the system.
+ * Record certain mechanical metadata which applies to weapons in each category.
+ * @type {Record<string, WeaponCategory>}
+ */
+export const CATEGORIES = Object.freeze({
+
+  // One-Handed Melee
+  unarmed: {
+    id: "unarmed",
+    label: "WEAPON.CATEGORIES.Unarmed",
+    hands: 1,
+    main: true,
+    off: true,
+    scaling: "strength.dexterity",
+    actionCost: 2,
+    damage: 3,
+    range: 1,
+    training: ["unarmed"]
+  },
+  light1: {
+    id: "light1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Light", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    scaling: "dexterity",
+    actionCost: 2,
+    damage: 3,
+    range: 1,
+    training: ["light"]
+  },
+  simple1: {
+    id: "simple1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Simple", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    scaling: "strength",
+    damage: 4,
+    actionCost: 2,
+    range: 1,
+    training: ["heavy"]
+  },
+  balanced1: {
+    id: "balanced1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Balanced", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    scaling: "strength.dexterity",
+    damage: 5,
+    actionCost: 2,
+    range: 2,
+    training: ["heavy", "light"]
+  },
+  heavy1: {
+    id: "heavy1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Heavy", 1),
+    hands: 1,
+    main: true,
+    off: false,
+    scaling: "strength",
+    damage: 6,
+    actionCost: 3,
+    range: 2,
+    training: ["heavy"]
+  },
+
+  // Two-Handed Melee
+  simple2: {
+    id: "simple2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Simple", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    scaling: "strength",
+    actionCost: 3,
+    damage: 6,
+    range: 2,
+    training: ["heavy"]
+  },
+  balanced2: {
+    id: "balanced2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Balanced", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    scaling: "strength.dexterity",
+    damage: 7,
+    actionCost: 3,
+    range: 3,
+    training: ["light", "heavy"]
+  },
+  heavy2: {
+    id: "heavy2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Heavy", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    scaling: "strength",
+    damage: 8,
+    actionCost: 4,
+    range: 3,
+    training: ["heavy"]
+  },
+
+  // One-Handed Ranged
+  projectile1: {
+    id: "projectile1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Projectile", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    ranged: true,
+    scaling: "strength.dexterity",
+    actionCost: 2,
+    damage: 4,
+    range: 60,
+    training: ["projectile"]
+  },
+  talisman1: {
+    id: "talisman1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Talisman", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    ranged: true,
+    scaling: "presence",
+    actionCost: 2,
+    damage: 2,
+    range: 30,
+    training: ["talisman"]
+  },
+  mechanical1: {
+    id: "mechanical1",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Mechanical", 1),
+    hands: 1,
+    main: true,
+    off: true,
+    ranged: true,
+    reload: true,
+    scaling: "dexterity",
+    actionCost: 2,
+    damage: 4,
+    range: 60,
+    training: ["mechanical"]
+  },
+
+  // Two-Handed Ranged
+  projectile2: {
+    id: "projectile2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Projectile", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    ranged: true,
+    scaling: "strength.dexterity",
+    actionCost: 3,
+    damage: 6,
+    range: 120,
+    training: ["projectile"]
+  },
+  talisman2: {
+    id: "talisman2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Talisman", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    ranged: true,
+    scaling: "presence",
+    actionCost: 3,
+    damage: 3,
+    range: 30,
+    training: ["talisman"]
+  },
+  mechanical2: {
+    id: "mechanical2",
+    label: label.bind(globalThis, "WEAPON.CATEGORIES.Mechanical", 2),
+    hands: 2,
+    main: true,
+    off: false,
+    ranged: true,
+    reload: true,
+    scaling: "dexterity",
+    actionCost: 2,
+    damage: 6,
+    range: 120,
+    training: ["mechanical"]
+  },
+
+  // Shields
+  shieldLight: {
+    id: "shieldLight",
+    label: "WEAPON.CATEGORIES.ShieldLight",
+    hands: 1,
+    main: false,
+    off: true,
+    ranged: false,
+    scaling: "dexterity",
+    actionCost: 2,
+    damage: 2,
+    defense: {
+      block: 2
+    },
+    range: 1,
+    training: ["shield"]
+  },
+  shieldHeavy: {
+    id: "shieldHeavy",
+    label: "WEAPON.CATEGORIES.ShieldHeavy",
+    hands: 1,
+    main: false,
+    off: true,
+    ranged: false,
+    scaling: "strength",
+    actionCost: 2,
+    damage: 3,
+    range: 1,
+    defense: {
+      block: 4
+    },
+    training: ["shield"]
+  }
+});
+
+/**
+ * The boolean properties which a Weapon may have.
+ * @enum {{label: string, tooltip: string, deprecated?: string}}
+ */
+export const PROPERTIES = {
+  ...foundry.utils.deepClone(ITEM_PROPERTIES),
+  ambush: {label: "WEAPON.TAGS.Ambush", tooltip: "WEAPON.TAGS.AmbushTooltip"},
+  blocking: {label: "WEAPON.TAGS.Blocking", tooltip: "WEAPON.TAGS.BlockingTooltip"},
+  engaging: {label: "WEAPON.TAGS.Engaging", tooltip: "WEAPON.TAGS.EngagingTooltip"},
+  intuitive: {label: "WEAPON.TAGS.Intuitive", tooltip: "WEAPON.TAGS.IntuitiveTooltip"},
+  natural: {label: "WEAPON.TAGS.Natural", tooltip: "WEAPON.TAGS.NaturalTooltip"},
+  oversized: {label: "WEAPON.TAGS.Oversized", tooltip: "WEAPON.TAGS.OversizedTooltip"},
+  parrying: {label: "WEAPON.TAGS.Parrying", tooltip: "WEAPON.TAGS.ParryingTooltip"},
+  thrown: {label: "WEAPON.TAGS.Thrown", tooltip: "WEAPON.TAGS.ThrownTooltip"},
+  versatile: {label: "WEAPON.TAGS.Versatile", tooltip: "WEAPON.TAGS.VersatileTooltip"},
+  /** @deprecated since 0.9.1 */
+  keen: {label: "WEAPON.TAGS.Keen", tooltip: "WEAPON.TAGS.KeenTooltip", deprecated: "0.9.1"},
+  /** @deprecated since 0.9.1 */
+  reach: {label: "WEAPON.TAGS.Reach", tooltip: "WEAPON.TAGS.ReachTooltip", deprecated: "0.9.1"},
+  /** @deprecated since 0.9.1 */
+  reliable: {label: "WEAPON.TAGS.Reliable", tooltip: "WEAPON.TAGS.ReliableTooltip", deprecated: "0.9.1"},
+  /** @deprecated since 0.9.1 */
+  returning: {label: "WEAPON.TAGS.Returning", tooltip: "WEAPON.TAGS.ReturningTooltip", deprecated: "0.9.1"}
+};
+
+/**
+ * Designate which equipped slot the weapon is used in.
+ * @type {Enum<number>}
+ */
+export const SLOTS = new Enum({
+  EITHER: {value: 0, label: "WEAPON.SLOTS.Either"},
+  MAINHAND: {value: 1, label: "WEAPON.SLOTS.Mainhand"},
+  OFFHAND: {value: 2, label: "WEAPON.SLOTS.Offhand"},
+  TWOHAND: {value: 3, label: "WEAPON.SLOTS.Twohand"}
+});
+
+/**
+ * The configuration of the default unarmed Weapon.
+ * @type {object}
+ */
+export const UNARMED_DATA = {
+  name: "WEAPON.SPECIFIC.Unarmed",
+  type: "weapon",
+  img: "icons/skills/melee/unarmed-punch-fist.webp",
+  system: {
+    category: "unarmed",
+    quality: "standard",
+    enchantment: "mundane",
+    damageType: "bludgeoning",
+    properties: ["intuitive"]
+  }
+};
+
+/**
+ * A special weapon configuration used for Nosferatu bite attack.
+ * @type {CrucibleWeaponItem}
+ */
+export const VAMPIRE_BITE = {
+  name: "WEAPON.SPECIFIC.VampireBite",
+  type: "weapon",
+  img: "icons/magic/death/mouth-bite-fangs-vampire.webp",
+  system: {
+    category: "balanced1",
+    quality: "superior",
+    enchantment: "mundane",
+    damageType: "piercing",
+    properties: ["natural"]
+  }
+};

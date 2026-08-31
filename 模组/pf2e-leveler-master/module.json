@@ -1,0 +1,66 @@
+{
+  "id": "pf2e-leveler",
+  "title": "PF2e Leveler",
+  "description": "<p>Create, Plan and auto-apply character level-ups for Pathfinder 2E. Plan your entire build from level 1 to 20, with prerequisite validation and automatic application on level change.</p>",
+  "version": "2.1.12",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "RoiLeaf",
+      "discord": "RoiLeaf",
+      "flags": {}
+    }
+  ],
+  "esmodules": ["scripts/main.js"],
+  "styles": [
+    { "src": "styles/variables.css" },
+    { "src": "styles/components.css" },
+    { "src": "styles/level-planner.css" },
+    { "src": "styles/compendium-picker.css" },
+    { "src": "styles/character-wizard.css" }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json",
+      "flags": {}
+    },
+    {
+      "lang": "cn",
+      "name": "中文",
+      "path": "lang/cn.json",
+      "flags": {}
+    }
+  ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "hbs", "json"],
+      "paths": ["styles", "templates", "lang"]
+    }
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "7.0.0",
+          "verified": "7.7.1"
+        }
+      }
+    ]
+  },
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#"
+}

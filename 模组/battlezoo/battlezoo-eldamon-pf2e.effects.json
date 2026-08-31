@@ -1,0 +1,456 @@
+{
+  "label": "埃尔达蒙效果\nEldamon Effects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Powers": "力量\nPowers",
+    "Features": "特性\nFeatures",
+    "Feats": "专长\nFeats",
+    "Darkness": "黑暗\nDarkness",
+    "Water": "水\nWater",
+    "Wood": "木材\nWood",
+    "Air": "空气\nAir",
+    "Death": "死亡\nDeath",
+    "Earth": "大地\nEarth",
+    "Fire": "火\nFire",
+    "Force": "力场\nForce",
+    "Ice": "冰\nIce",
+    "Life": "生命\nLife",
+    "Light": "光\nLight",
+    "Mind": "心智\nMind"
+  },
+  "entries": {
+    "Effect: Retributive Mindlink": {
+      "name": "效果：惩戒心灵链接 Effect: Retributive Mindlink",
+      "description": "<p>该敌人在1轮内，对抗你的心智力量的意志豁免承受环境减值。在此期间，它还会因你首次对其造成伤害的心智力量而获得等同于1加上你等级一半的弱点，适用于来自该心智力量的精神伤害。在因该弱点额外受到伤害一次后，该弱点结束。</p>\n<p>The foe takes a circumstance penalty to its Will saves against your mind powers for 1 round. During that time, it also gain weakness equal to 1 plus half your level to mental damage from your first mental power that damages it. After taking the additional damage from the weakness once, the weakness ends.</p>"
+    },
+    "Effect: Entangling Vines (Failure)": {
+      "name": "效果：纠缠藤蔓（失败） Effect: Entangling Vines (Failure)",
+      "description": "<p>该生物在2轮内或直到其以你的力量DC成功逃脱为止（以先发生者为准），其速度受到–20英尺的环境减值。</p>\n<p>The creature takes a –20-foot circumstance penalty to its Speeds for 2 rounds or until it Escapes against your power DC, whichever comes first.</p>"
+    },
+    "Effect: Healing Mote": {
+      "name": "效果：治疗微粒 Effect: Healing Mote",
+      "description": "<p>当一个拥有微粒的活生物受到伤害时，他们会获得等同于2加上你等级的两倍的同时治疗，至多不超过所受的伤害，如同恢复效果的通常规则。</p>\n<p>When a living creature with a mote takes damage, they receive an amount of simultaneous healing equal to 2 plus twice your level, up to a maximum of the damage taken, as normal for a recovery effect.</p>"
+    },
+    "Effect: Retreat Into Pot": {
+      "name": "效果：退入壶中 Effect: Retreat Into Pot",
+      "description": "<p>你获得AC+2环境加值并且处于@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{束缚}。这些效果持续至你的下个回合结束，不过你可以用单动作提前结束该效果。</p>\n<p>You gain a +2 circumstance bonus to AC and are @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}. These effects last until the end of your next turn, though you can end the effect early with a single action.</p>"
+    },
+    "Effect: Yggdrasil": {
+      "name": "效果：世界之树 Effect: Yggdrasil",
+      "description": "<p>在花瓣坠落的区域内的盟友获得 AC 和所有豁免的 +2 状态加值。</p>\n<p>Allies in the area where the petals are falling gain a +2 status bonus to AC and all saving throws.</p>"
+    },
+    "Effect: Pallid Frostbite": {
+      "name": "效果：苍白冻伤 Effect: Pallid Frostbite",
+      "description": "<p>你让一个生物受冻伤影响，使其冻结的躯体变得脆弱，并容易受到物理攻击的伤害。</p>\n<p>You give a creature frostbite, making its frozen body brittle and easily harmed by physical attacks.</p>"
+    },
+    "Effect: Bubble Burst (High Tide)": {
+      "name": "效果：泡泡爆裂（高潮） Effect: Bubble Burst (High Tide)",
+      "description": "<p>你在AC上承受–2减值，直到你下一回合结束</p>\n<p>You take a –2 penalty to AC until the end of your next turn</p>"
+    },
+    "Effect: Leviathan (Low Tide)": {
+      "name": "效果：利维坦（低潮） Effect: Leviathan (Low Tide)",
+      "description": "<p>直到你下个回合结束前，你在攻击掷骰、察觉检定、豁免以及技能检定上获得+2状态加值。</p>\n<p>You gain a +2 status bonus to attack rolls, Perception checks, saving throws, and skill checks until the end of your next turn.</p>"
+    },
+    "Effect: Peaceful Impulse": {
+      "name": "效果：宁静冲动 Effect: Peaceful Impulse",
+      "description": "<p>敌人每次采取敌对动作时，都会受到等于1加上你等级的精神伤害，并且其用于执行敌对动作的攻击掷骰、技能检定与DC承受–1环境减值（若为大成功或大失败中的大失败则为-2）。</p>\n<p>The foe takes mental damage equal to 1 plus your level each time they take a hostile action and takes a –1 circumstance penalty (or -2 on a critical failure) to their attack rolls, skill checks, and DCs used to perform hostile actions.</p>"
+    },
+    "Effect: Entangling Vines": {
+      "name": "效果：纠缠藤蔓 Effect: Entangling Vines",
+      "description": "<p>该生物在2轮内，其各项速度受到–10英尺的环境减值，或直到其对抗你的力量DC成功【逃脱】，以先发生者为准。</p>\n<p>The creature takes a –10-foot circumstance penalty to its Speeds for 2 rounds or until it Escapes against your power DC, whichever comes first.</p>"
+    },
+    "Effect: Evolved Giant": {
+      "name": "效果：进化的巨人 Effect: Evolved Giant",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.OW9fmZpU6F8yIoSd]{进化巨人} 授予</p>\n<p>你与艾达兽一起训练，以增大其进化形态的体型。当你或你的艾达兽使用相位艾达兽将一只艾达兽以其进化战斗形态相位现身时，你可以选择让其以超大型战斗形态现身，而非其进化战斗形态的正常体型；并且如果你的艾达兽的进化战斗形态通常为超大型，你可以选择让其改为巨型。当你选择让你的艾达兽的进化战斗形态变得更大时，该艾达兽的触及为15尺（除非其触及通常更大）。</p>\n<hr />\n<p><em>注：将此效果放置在你的艾达兽角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.OW9fmZpU6F8yIoSd]{Evolved Giant}</p>\n<p>You've trained with your eldamon in order to increase the size of their evolved forms. When you or your eldamon use Phase Eldamon to phase in an eldamon in their evolved battle form, you can choose to phase them into a Huge battle form instead of their evolved battle form's normal size, and if your eldamon's evolved battle form is normally Huge, you can choose to have it become Gargantuan instead. When you choose to make your eldamon's evolved battle form larger, the eldamon has a reach of 15 feet (unless its reach is normally greater).</p>\n<hr />\n<p><em>Note: Place this effect on your Eldamon actors</em></p>"
+    },
+    "Effect: Toughness Training": {
+      "name": "效果：坚韧训练 Effect: Toughness Training",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.2wb309hNRajdO9E8]{坚韧训练}授予</p>\n<p>当艾达兽处于相位状态时，在我们的现实中可能是短暂无常的；你训练你的艾达兽朋友变得格外坚韧，甚至与其他艾达兽战斗者相比也是如此。你所有受训的艾达兽将其最大生命值增加等同于其等级的数值。此项增益可与艾达兽战斗者感召的益处累加。</p>\n<hr />\n<p><em>注：将此效果放置在你每一个艾达兽角色卡上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.2wb309hNRajdO9E8]{Toughness Training}</p>\n<p>While phased in eldamon can be ephemeral in our reality, you train your eldamon friends to be especially tough, even compared to other eldamon battlers. All your trained eldamon increase their maximum Hit Points by their level. This is cumulative with the benefits of the eldamon battler calling.</p>\n<hr />\n<p><em>Note: Place this effect on each of your Eldamon actors</em></p>"
+    },
+    "Effect: Intrusive Analysis": {
+      "name": "效果：侵入性分析 Effect: Intrusive Analysis",
+      "description": "<p>你获得+1环境加值，应用于对抗该敌人时的AC与豁免。</p>\n<p>You gain a +1 circumstance bonus to your AC and saves against the foe.</p>"
+    },
+    "Effect: Elysium": {
+      "name": "效果：极乐世界 Effect: Elysium",
+      "description": "<p>从极乐境恢复生命值的生物，在其下个回合开始前，攻击掷骰、豁免和技能检定获得+2状态加值。</p>\n<p>A creature who recovers Hit Points from Elysium gains a +2 status bonus to attack rolls, saving throws, and skill checks until their next turn.</p>"
+    },
+    "Effect: Vital Touch (Living)": {
+      "name": "效果：活力接触（活） Effect: Vital Touch (Living)",
+      "description": "<p>一个活目标获得6点临时生命值，外加你每有1个等级再获得6点临时生命值。</p>\n<p>A living target gains 6 temporary Hit Points plus 6 temporary Hit Points per level you have.</p>"
+    },
+    "Effect: Breathtaker": {
+      "name": "效果：夺息 Effect: Breathtaker",
+      "description": "<p>当你的死亡力量杀死一名敌人时，你会被他们的垂死吐息所激励。直到你下个回合结束前，你在察觉检定、豁免和技能检定上获得+1状态加值。</p>\n<p>若你在从该加值中受益时对该敌人使用收割生命，或若你用收割生命杀死一名生物，则该状态加值提升至+2。</p>\n<p>When your death power kills a foe, you’re energized by their dying breath. You gain a +1 status bonus on Perception checks, saving throws, and skill checks until the end of your next turn.</p>\n<p>If you use Reap Lives on that foe while benefiting for this bonus, or if you kill a creature with Reap Lives, the status bonus increases to +2.</p>"
+    },
+    "Effect: Brainstorm": {
+      "name": "效果：头脑风暴 Effect: Brainstorm",
+      "description": "<p>如果你在区域内且一名敌人变为迟钝，你会窃取他们的想法，并在你下个回合结束前获得+1状态加值，适用于意志豁免、察觉检定、以心智力量进行的力量攻击掷骰，以及基于智力、感知和魅力的技能检定。</p>\n<p>If you’re in the area when a foe becomes stupefied, you steal their ideas and gain a +1 status bonus to Will saves, Perception checks, power attack rolls with mind powers, and skill checks based on Intelligence, Wisdom, and Charisma until the end of your next turn.</p>"
+    },
+    "Effect: Harden": {
+      "name": "效果：硬化 Effect: Harden",
+      "description": "<p>你获得等于5加上你的等级的物理伤害抗力（但不包括精金），以对抗触发的攻击。</p>\n<p>You gain resistance equal to 5 plus your level to physical damage (except adamantine) against the triggering attack.</p>"
+    },
+    "Effect: Undying Flame": {
+      "name": "效果：不灭之焰 Effect: Undying Flame",
+      "description": "<p>你来自元素力量的持续火焰伤害的纯骰检定DC从DC 15提高至DC 16，或在特别有效的协助后从DC 10提高至DC 12。</p>\n<p>The flat check DCs for the persistent fire damage from your elemental powers increase from DC 15 to DC 16, or from DC 10 to DC 12 after especially effective assistance.</p>"
+    },
+    "Effect: Avatar Form": {
+      "name": "效果：化身形态 Effect: Avatar Form",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.y59ZQTkmGgpxyIpS]{化身形态} 授予</p>\n<p>你将居住在你灵魂中的艾达蒙的特性注入自身，同时以纯粹的元素能量增大你的体型，使你变为介于你原本形态与所化身的艾达蒙之间的巨大混合体。若你的体型通常小于大型（体型），你成长为大型（体型）；若你的触及通常小于10尺，则你的触及增加至10尺。你的大型（体型）形态在外观上仍大致呈类人形，但会带有与你体内艾达蒙相呼应的显著特征，例如若你体内的艾达蒙是一只松鼠灰烬兽，你会获得耳朵、松鼠般的面孔，或一条蓬松的燃烧尾巴。此变形持续，直到你再次使用化身形态以回到你通常的形态。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.y59ZQTkmGgpxyIpS]{Avatar Form}</p>\n<p>You infuse your body with the features of the eldamon residing within your soul, and at the same time, you increase your size with pure elemental energy, transforming you into an enormous hybrid between your original form and the eldamon you embody. You grow to Large size, if your size is normally smaller than Large, and your reach increases to 10 feet if it's normally less than 10 feet. Your Large form is still roughly humanoid in shape but bears distinctive features paralleling the eldamon within you, such as gaining ears, a squirrel face, or a bushy flaming tail if the eldamon within you is a squirrelash. This transformation lasts until you use Avatar Form again to return to your usual form.</p>"
+    },
+    "Effect: Boulder Smash": {
+      "name": "效果：巨石猛击 Effect: Boulder Smash",
+      "description": "<p>直到你下个回合开始前，你获得AC+2环境加值。</p>\n<p>You gain a +2 circumstance bonus to AC until the beginning of your next turn.</p>"
+    },
+    "Effect: Soothing Recovery": {
+      "name": "效果：舒缓恢复 Effect: Soothing Recovery",
+      "description": "<p>你获得等于起源等级的临时生命值。如果你在对抗持续的毒素或疾病的豁免上掷骰获得成功，则改为获得大成功。</p>\n<p>You gain temporary hit points equal to the origin's level. If you roll a success on an ongoing saving throw against a poison or disease, they get a critical success instead.</p>"
+    },
+    "Enhanced Resistance (Eldamon)": {
+      "name": "强化抗力（Eldamon） Enhanced Resistance (Eldamon)",
+      "description": "<p>你训练你的艾尔达兽伙伴以强化他们天生的艾尔达兽抗力，使得用他们自身的元素使其过载，或用他们已具备抗力的元素克制他们，都变得更加困难。你的艾尔达兽会基于其元素，将其天生的艾尔达兽抗力从等同于其等级的数值提升为等同于其等级的1.5倍；从2级时的抗力3开始，并在20级时达到抗力30。</p><hr /><p><em>注：将此特性放置在你每个艾尔达兽角色上</em></p>\n<p>You train your eldamon friends to enhance their natural eldamon resistances, making it harder to overload them with their own element or overcome them with an elemental they already resist. Your eldamon increase their natural eldamon resistances based on their element from an amount equal to their level to an amount equal to one and a half times their level, starting at resistance 3 at 2nd level and ending at resistance 30 at 20th level.</p><hr /><p><em>Note: Place this feature on each of your Eldamon actors</em></p>"
+    },
+    "Effect: Storm Surge (Low Tide)": {
+      "name": "效果：风暴涌动（低潮） Effect: Storm Surge (Low Tide)",
+      "description": "<p>直到你下个回合结束前，你的反射豁免获得+2环境加值。</p>\n<p>You gain a +2 circumstance bonus to Reflex saves until the end of your next turn.</p>"
+    },
+    "Water Barrier Helper": {
+      "name": "水障助手 Water Barrier Helper",
+      "description": "<p>直到你下个回合开始前，使用钝击和挥砍攻击的敌人在对你进行攻击时承受–2环境减值，你获得等同于你等级的酸与火焰伤害抗力。</p>\n<p>Until the beginning of your next turn, enemies using bludgeoning and slashing attacks take a –2 circumstance penalty against you and you gain resistance equal to your level to acid and fire damage.</p>"
+    },
+    "Effect: Unrelenting Jet (Low Tide)": {
+      "name": "效果：无情喷射（低潮） Effect: Unrelenting Jet (Low Tide)",
+      "description": "<p>除非目标在其豁免中大成功，否则直到你下个回合结束前，目标对你进行攻击掷骰时承受–2环境减值。</p>\n<p>The target takes a –2 circumstance penalty to attack rolls against you until the end of your next turn unless they critically succeed at their saving throw.</p>"
+    },
+    "Incandescent Guardian Helper": {
+      "name": "白炽守护者助手 Incandescent Guardian Helper",
+      "description": "<p>只要其仍处于@UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{显映的}，你和你的盟友对抗该敌人的AC获得+2环境加值。</p>\n<p>As long as it remains @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{Limned}, you and your allies gain a +2 circumstance bonus to AC against the foe.</p>"
+    },
+    "Effect: Shadow Betrayal": {
+      "name": "效果：暗影背叛 Effect: Shadow Betrayal",
+      "description": "<p>由于阴影限制了他们的移动，目标的各项速度承受–10英尺的环境减值。</p>\n<p>The target takes a –10-foot circumstance penalty to their Speeds as the shadow restricts their movement.</p>"
+    },
+    "Effect: Exploding Bulwark": {
+      "name": "效果：爆炸壁垒 Effect: Exploding Bulwark",
+      "description": "<p>你从岩石壁垒获得对AC的+4环境加值，持续至你下个回合开始；届时壁垒会爆炸，释放出无数石块，这些石块会偏转飞出，寻觅并猛击任意被选中的敌人。</p>\n<p>You gain a +4 circumstance bonus to AC from the rock bulwark until the beginning of your next turn, upon which the bulwark explodes, sending out countless stones that veer off to seek out and pummel any of the chosen foes.</p>"
+    },
+    "Effect: Vital Singularity": {
+      "name": "效果：生命奇点 Effect: Vital Singularity",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.mDZPll8XXrmQUSGX]{Vital Singularity} 授予。</p><p>你获得等同于起源的等级的临时生命值。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.mDZPll8XXrmQUSGX]{Vital Singularity}.</p><p>You gain temporary Hit Points equal to the origin's level.</p>"
+    },
+    "Effect: Elemental Steps": {
+      "name": "效果：元素步伐 Effect: Elemental Steps",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.6sAJu5oEkHWPdbwm]{元素步伐} 授予</p>\n<p>你所有受训的艾达兽的速度增加5尺。此外，它们可以步入困难地形。</p>\n<hr />\n<p><em>注：将此效果放置在你每个艾达兽角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.6sAJu5oEkHWPdbwm]{Elemental Steps}</p>\n<p>All your trained eldamon increase their Speeds by 5 feet. Additionally, they can Step into difficult terrain.</p>\n<hr />\n<p><em>Note: Place this effect on each of your Eldamon actors</em></p>"
+    },
+    "Effect: Vengeful Backlash": {
+      "name": "效果：复仇反噬 Effect: Vengeful Backlash",
+      "description": "<p>直到你下个回合开始（或直到你不再站在坚实的表面上，以先发生者为准），所有以近战打击命中你的生物都会因「复仇反噬」而受到钝击伤害，数值等同于其伤害掷骰的结果；该伤害在为大成功或大失败命中而将伤害加倍之前结算，且在调整抗力、弱点或类似情况之前结算。此效果持续期间，你可以选择让自己对抗敌人攻击的AC承受环境减值（最大减值为–4），以便承受更多命中；你可以针对每次攻击分别选择该减值。</p>\n<p>Until the beginning of your next turn (or until you are no longer standing on a solid surface, whichever comes first), all creatures that hit you with melee Strikes take bludgeoning damage from Vengeful Backlash equal to the result of their damage roll, before doubling the damage for a critical hit or adjusting for resistance, weakness, or the like. While this effect lasts, you can choose to give yourself a circumstance penalty to AC against your foes’ attacks, up to a maximum penalty of –4, in order to take more hits; you can select the penalty separately against each attack.</p>"
+    },
+    "Effect: Incandescent Guardian": {
+      "name": "效果：白炽守护者 Effect: Incandescent Guardian",
+      "description": "<p>只要它仍然处于@UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{显映的}状态，你和你的盟友在对抗该敌人的AC时获得+2环境加值。</p>\n<p>As long as it remains @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{Limned}, you and your allies gain a +2 circumstance bonus to AC against this foe.</p>"
+    },
+    "Effect: Illuminate Weakness": {
+      "name": "效果：照亮弱点 Effect: Illuminate Weakness",
+      "description": "<p>一只光 eldamon 或元素化身及其盟友只要目标仍然处于 @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{显映的}，其对目标进行打击时便会额外造成 2 点精准伤害，并且其以光力量对目标造成的精准伤害额外增加 4 点。在第11等级时，精准伤害提高至：打击为 3 点、光力量为 6 点；在第15等级时，提高至：打击为 4 点、光力量为 8 点；在第19等级时，提高至：打击为 5 点、光力量为 10 点。</p>\n<p>A light eldamon or elemental avatar and their allies add 2 additional precision damage with their Strikes against the target as long as it remains @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{Limned}, and they add 4 additional precision damage with their light powers against the target. At 11th level, the precision damage increases to 3 for Strikes and 6 for light powers, at 15th level, it increases to 4 for Strikes and 8 for light powers, and at 19th level it increases to 5 for Strikes and 10 for light powers.</p>"
+    },
+    "Frozen (Deathly Chill)": {
+      "name": "冻结（死亡寒意） Frozen (Deathly Chill)",
+      "description": "<p>在其每个回合结束时，目标受到数量等同于其当前 @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.OyojvmEKkLrUxX1W]{冻结} 数值的d10 伤害（例如，如果它当前冻结 5，则在其回合结束时受到 5d10）。此伤害不是持续性伤害，且不能以与持续性伤害相同的方式移除；相反，它会持续到目标不再冻结为止，此时效果结束。</p>\n<p>@Damage[(@item.badge.value)d10[cold]]</p>\n<p>At the end of each of its turns, the target takes a number of d10s of damage equal to its current @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.OyojvmEKkLrUxX1W]{Frozen} value (for instance, 5d10 at the end of its turn if it's currently frozen 5). This damage isn't persistent damage and can't be removed in the same way as persistent damage; instead, it lasts until the target is no longer frozen, at which point the effect ends.</p>\n<p>@Damage[(@item.badge.value)d10[cold]]</p>"
+    },
+    "Effect: Vital Touch (AC bonus)": {
+      "name": "效果：活力接触（AC 加值） Effect: Vital Touch (AC bonus)",
+      "description": "<p>你获得AC +2状态加值。</p>\n<p>You gain a +2 status bonus to AC.</p>"
+    },
+    "Effect: Charybdis (Low Tide)": {
+      "name": "效果：卡律布狄斯（低潮） Effect: Charybdis (Low Tide)",
+      "description": "<p>只要漩涡持续，你的AC就获得+2状态加值。</p>\n<p>You gain a +2 status bonus to AC as long as the maelstrom lasts.</p>"
+    },
+    "Effect: Caduceus Flow": {
+      "name": "效果：蛇杖流动 Effect: Caduceus Flow",
+      "description": "<p>你获得1点临时生命值。如果你在力量DC上为专家，则增加至2点临时生命值；如果你在力量DC上为大师，则为3点临时生命值；如果你在力量DC上为传奇，则为4点临时生命值。</p>\n<p>You gain 1 temporary Hit Point. This increases to 2 temporary Hit Points if you're an expert in power DC, 3 temporary Hit Points if you're a master in power DC, and 4 temporary Hit Points if you're legendary in power DC.</p>"
+    },
+    "Effect: Vibrant Inoculation (Undead Critical Failure))": {
+      "name": "效果：活力接种（不死生物大失败） Effect: Vibrant Inoculation (Undead Critical Failure))",
+      "description": "<p>在大失败时，他们在1轮内对所有强韧豁免承受–2状态减值</p>\n<p>On a critical failure, they take a –2 status penalty on all Fortitude saving throws for 1 round</p>"
+    },
+    "Effect: Aegis of Immortal Stone": {
+      "name": "效果：不朽之石的神盾 Effect: Aegis of Immortal Stone",
+      "description": "<p>直到你下个回合开始时，你获得AC、反射豁免和强韧豁免的+2环境加值，并获得等于你等级四倍的物理伤害抗力（精金除外）。</p>\n<p>Until the beginning of your next turn, you gain a +2 circumstance bonus to AC, Reflex saves, and Fortitude saves, as well as resistance to physical damage (except adamantine) equal to four times your level.</p>"
+    },
+    "Effect: Bubble Swarm": {
+      "name": "效果：泡泡虫群 Effect: Bubble Swarm",
+      "description": "<p>泡泡聚集在你周围，使你在你下一个回合开始前获得AC+2环境加值。</p>\n<p>The bubbles gather around you, granting you a +2 circumstance bonus to your AC until the beginning of your next turn.</p>"
+    },
+    "Effect: Elemental Shield": {
+      "name": "效果：元素护盾 Effect: Elemental Shield",
+      "description": "<p>直到你下个回合开始前，你从元素护盾获得对你AC的+1环境加值。你也会根据你的元素获得元素护盾的益处。</p>\n<p>You gain a +1 circumstance bonus to your AC until the beginning of your next turn from the elemental shield. You also gain the elemental shield benefit based on your element.</p>"
+    },
+    "Effect: Moment of Contemplation": {
+      "name": "效果：沉思片刻 Effect: Moment of Contemplation",
+      "description": "<p>你获得+2状态加值于意志豁免。若你使用心智宫殿，你改为获得+4状态加值。</p>\n<p>You gain a +2 status bonus to Will saves. If you use Mind Palace, you gain a +4 status bonus instead.</p>"
+    },
+    "Effect: Predict Assaults": {
+      "name": "效果：预判攻击 Effect: Predict Assaults",
+      "description": "<p>直到你下一次刷新之前，对于这些敌人中的每一个，你要么在对抗该敌人的第一次反射豁免时掷骰两次并取较高结果，要么该敌人在对你进行第一次攻击掷骰时掷骰两次并取较低结果，以该敌人先发生的两者之一为准。若你掷骰两次并取较高结果，这是一个好运效果；若你迫使敌人掷骰两次并取较低结果，这是一个厄运效果。</p>\n<p>Until the next time you Refresh, for each of those foes, you either roll twice and take the higher result on your first Reflex save against the foe or the foe rolls twice and takes the lower result on its first attack roll against you, whichever of the two comes first for that foe. If you roll twice and take the higher result, it’s a fortune effect, and if you force the foe to roll twice and take the lower results, it’s a misfortune effect.</p>"
+    },
+    "Effect: Raging Cycle": {
+      "name": "效果：狂暴循环 Effect: Raging Cycle",
+      "description": "<p>在使用高潮力量后，你的 AC 在 1 轮内承受 –1 减值。在使用低潮力量后，你的 AC 获得 +1 状态加值。</p>\n<p>After using a high tide power, you take a –1 penalty to your AC for 1 round. After using a low tide power, you gain a +1 status bonus to AC.</p>"
+    },
+    "Effect: Force Shield": {
+      "name": "效果：力场护盾 Effect: Force Shield",
+      "description": "<p>你在AC上获得+2环境加值，直到触发的生物的回合结束。</p>\n<p>若在力场护盾生效期间，触发的生物对你的攻击掷骰大失败，你可以选择除攻击者以外的另一个目标，该目标与你相邻且在触及内（用于近战攻击）或在射程内（用于远程攻击）；攻击者对新目标重骰其攻击掷骰，并应用新掷骰的效果。</p>\n<p>You gain a +2 circumstance bonus to your AC until the end of the triggering creature's turn.</p>\n<p>If the triggering creature's attack roll critically fails against you while the force shield is active, you can choose another target other than the attacker that's adjacent to you and within reach (for a melee attack) or range (for a ranged attack); the attacker rerolls their attack roll against the new target and applies the effects of the new roll.</p>"
+    },
+    "Effect: Questing Beast": {
+      "name": "效果：探求兽 Effect: Questing Beast"
+    },
+    "Effect: Ocean Torrent (High Tide)": {
+      "name": "效果：海洋洪流（高潮） Effect: Ocean Torrent (High Tide)",
+      "description": "<p>直到你下个回合结束前，你的强韧豁免承受–2环境减值。</p>\n<p>You take a –2 circumstance penalty to Fortitude saves until the end of your next turn.</p>"
+    },
+    "Effect: Red String of Fate": {
+      "name": "效果：命运红线 Effect: Red String of Fate",
+      "description": "<p>被你的围巾擒抱的敌人，在对抗你的死亡力量的强韧豁免时承受 –1 环境减值。</p>\n<p>Foes Grabbed by your scarf take a –1 circumstance penalty to Fortitude saves against your death powers.</p>"
+    },
+    "Effect: Aqua Punch": {
+      "name": "效果：水之重拳 Effect: Aqua Punch",
+      "description": "<p>成功时，目标在1轮内对你进行攻击掷骰时承受–1环境减值；若为大成功或大失败，则改为承受–2环境减值。</p>\n<p>On success, the target takes a –1 circumstance penalty to their attack rolls against you for 1 round, and on a critical success, they take a –2 circumstance penalty instead.</p>"
+    },
+    "Effect: Confounding Force": {
+      "name": "效果：迷惑力场 Effect: Confounding Force",
+      "description": "<p>你的下一次伤害掷骰承受–2环境减值。若来源在力量DC方面为专家，该环境减值提高至–4；若为大师，提高至–6；若为传奇，提高至–8。</p>\n<p>You take a –2 circumstance penalty on your next damage roll. This increases to a –4 circumstance penalty if the source is an expert in power DCs, –6 if master in power DCs, and –8 if legendary in power DCs.</p>"
+    },
+    "Effect: You Can Do It!": {
+      "name": "效果：你能做到！ Effect: You Can Do It!",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.actions.Item.JRM2xldo9FdB1NDT]{你能做到！} 给予</p>\n<p>即使你处于相位移出状态，你仍会对你的艾达兽朋友喊出鼓励的话语，协助他们接下来的努力。若成功，你的艾达兽在本回合结束前进行的下一次攻击掷骰或技能检定获得+1环境加值。若大成功，则改为获得+2环境加值。即使你在相位移出时通常无法行动，你仍可以使用此动作。</p>\n<hr />\n<p><em>注：将此效果放在你的艾达兽角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.actions.Item.JRM2xldo9FdB1NDT]{You Can Do It!}</p>\n<p>Even though you're phased out, you call out encouraging messages to your eldamon friend, assisting them in their next endeavor. On a success, your eldamon gains a +1 circumstance bonus to their next attack roll or skill check before the end of this turn. On a critical success, they gain a +2 circumstance bonus instead. You can use this action even though you normally can't act while phased out.</p>\n<hr />\n<p><em>Note: Place this effect on your Eldamon actors</em></p>"
+    },
+    "Effect: Auto-Petrification": {
+      "name": "效果：自动石化 Effect: Auto-Petrification",
+      "description": "<p>你受到 @UUID[Compendium.pf2e.conditionitems.dTwPJuKgBQCMxixg]{石化} 直到你下个回合开始，但你的硬度等于你等级的四倍，而不是通常的硬度 8。</p>\n<p>You are @UUID[Compendium.pf2e.conditionitems.dTwPJuKgBQCMxixg]{Petrified} until the beginning of your next turn, except that your Hardness is equal to four times your level, instead of the ordinary Hardness of 8.</p>"
+    },
+    "Effect: Vital Touch (Undead, Critical Success)": {
+      "name": "效果：活力接触（不死生物，大成功） Effect: Vital Touch (Undead, Critical Success)",
+      "description": "<p>该不死生物的 AC 承受 –2 状态减值。</p>\n<p>The undead a –2 status penalty to AC.</p>"
+    },
+    "Effect: Elemental Apotheosis (Overload)": {
+      "name": "效果：元素神化（过载） Effect: Elemental Apotheosis (Overload)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.E9IcyrxCQRZcI9bJ]{元素神化} 授予</p>\n<p>你汲取体内艾达蒙的全部元素潜能，将自身重铸为强大的复合存在，远非各部分相加可比。当你处于元素神化的狂潮之中时，元素能量在你周身翻涌，你的双眼闪耀着与你的元素相关的色彩，且转化的其他视觉特性会让你那满溢的元素能量对周围所有人都一目了然。此神化持续1分钟，在此期间，你的攻击掷骰、技能检定与豁免获得+4状态加值，并获得40点临时生命值。当神化结束后，你的身体必须从以元素能量过载自身的冲击中恢复。你变为 @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{疲乏}，且你的力量攻击掷骰与力量DC承受-2减值；这两个效果都会在你休息10分钟、让身体获得恢复时间后结束。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.E9IcyrxCQRZcI9bJ]{Elemental Apotheosis}</p>\n<p>You draw upon the full elemental potential of the eldamon within you, reforging yourself into a powerful composite being far greater than the sum of your parts. While within the throes of your elemental apotheosis, elemental energies swirl around you, your eyes glow with a color associated with your element, and other visual features of the transformation make your overflowing elemental energy abundantly clear to everyone around you. This apotheosis lasts for 1 minute, during which time you gain a +4 status bonus to attack rolls, skill checks, and saving throws, as well as 40 temporary Hit Points. When the apotheosis ends, your body must recover from the shock of overloading yourself with elemental energy. You become @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} and you take a -2 penalty to your power attack rolls and power DCs; both effects end after you rest for 10 minutes to give your body time to recover.</p>"
+    },
+    "Effect: Ice Armor": {
+      "name": "效果：冰霜护甲 Effect: Ice Armor",
+      "description": "<p>你获得对AC的+2环境加值，以及等同于你等级的临时生命值</p>\n<p>You gain a +2 circumstance bonus to AC and temporary Hit Points equal to your level</p>"
+    },
+    "Effect: Rock and Roll": {
+      "name": "效果：摇滚 Effect: Rock and Roll",
+      "description": "<p>你作为巨石的移动正常触发反应，但当你处于巨石形态时，你对抗此类反应时的AC获得+4环境加值，且硬度等于你等级的两倍。</p>\n<p>Your movement as a giant boulder triggers reactions as normal, but you have a +4 circumstance bonus to AC and Hardness equal to twice your level against such reactions while you’re a boulder.</p>"
+    },
+    "Effect: Eldamon Coordinator": {
+      "name": "效果：埃尔达蒙协调员 Effect: Eldamon Coordinator",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.8OeYqmt1qfSiygVa]{Eldamon Coordinator} 赋予</p>\n<p>你可以使用表演来 @UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{Perform} 或通过展示你的艾达兽来进行一场表演。当你这么做时，你的艾达兽就像最精良的乐器一样好用。如果你拥有进阶训练职业特性，则当你以这种方式使用你的艾达兽时，你的表演检定获得 +1 物品加值；如果你拥有艾达兽进化职业特性，该加值提高至 +2；如果你拥有艾达兽怪物职业特性，该加值提高至 +3。你将此物品加值与你的艾达兽共享。</p>\n<hr />\n<p><em>注：将此效果放在你的艾达兽角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.8OeYqmt1qfSiygVa]{Eldamon Coordinator}</p>\n<p>You can use Performance to @UUID[Compendium.pf2e.actionspf2e.Item.EEDElIyin4z60PXx]{Perform} or stage a performance by showing off your eldamon. When you do, your eldamon serve just as well as the finest musical instruments. If you have the advanced training class feature, you gain a +1 item bonus on your Performance checks when using your eldamon in this way, and the bonus increases to +2 if you have the eldamon evolution class feature and +3 if you have the eldamon monster class feature. You share this item bonus with your eldamon.</p>\n<hr />\n<p><em>Note: Place this effect on your Eldamon actors</em></p>"
+    },
+    "Effect: Vine Infestation": {
+      "name": "效果：藤蔓侵染 Effect: Vine Infestation",
+      "description": "<p>在持续伤害持续期间，敌人会根据其豁免结果承受对其速度的环境减值；成功时为–5英尺环境减值，失败时为–10英尺环境减值，大失败时为–20英尺环境减值。</p>\n<p>While the persistent damage lasts the foe takes a circumstance penalty to their Speeds depending on the result of their saving throw; a –5-foot circumstance penalty on a success, a –10-foot circumstance penalty on a failure, and a –20 foot circumstance penalty on a critical failure.</p>"
+    },
+    "Effect: Reap Lives": {
+      "name": "效果：收割生命 Effect: Reap Lives",
+      "description": "<p>直到你下个回合结束前，你在察觉检定、豁免和技能检定上获得+1状态加值</p>\n<p>You gain a +1 status bonus on Perception checks, saving throws, and skill checks until the end of your next turn</p>"
+    },
+    "Effect: Rushing Current (High Tide)": {
+      "name": "效果：奔涌激流（高潮） Effect: Rushing Current (High Tide)",
+      "description": "<p>你在进行反射豁免时承受 –2 减值，直到你下个回合结束。</p>\n<p>You take a –2 penalty to Reflex saves until the end of your next turn.</p>"
+    },
+    "Effect: Rainbow Banner": {
+      "name": "效果：彩虹旗帜 Effect: Rainbow Banner",
+      "description": "<p>30英尺内能看见旗帜的盟友获得对抗恐惧的豁免检定+1状态加值。</p>\n<p>Allies within 30 feet who can see the banner gain a +1 status bonus to saving throws against fear.</p>"
+    },
+    "Effect: Ocean Torrent (Low Tide)": {
+      "name": "效果：海洋洪流（低潮） Effect: Ocean Torrent (Low Tide)",
+      "description": "<p>你获得 +2 环境加值至强韧豁免，持续至你的下个回合结束。</p>\n<p>You gain a +2 circumstance bonus to Fortitude saves until the end of your next turn.</p>"
+    },
+    "Effect: Flamewrack (Success)": {
+      "name": "效果：焰疮（成功） Effect: Flamewrack (Success)",
+      "description": "<p>该生物的豁免和AC承受–1状态减值，直到其花费单动作移除该减值。</p>\n<p>The creature takes a –1 status penalty to saving throws and AC until they spend a single action to remove the penalty.</p>"
+    },
+    "Effect: Vital Breath": {
+      "name": "效果：活力吐息 Effect: Vital Breath",
+      "description": "<p>你获得1d4临时生命值，外加每当源头拥有1个等级便再获得1d4临时生命值，并且你的攻击掷骰获得+1状态加值。</p>\n<p>You gain 1d4 temporary Hit Points plus 1d4 temporary Hit Points for every level the origin has and gain a +1 status bonus to attack rolls.</p>"
+    },
+    "Effect: Sea Spray (Low Tide)": {
+      "name": "效果：海浪飞沫（低潮） Effect: Sea Spray (Low Tide)",
+      "description": "<p>你获得AC+1环境加值，持续至你下个回合开始；对未在对抗海之喷洒的豁免中大成功的生物，该加值提升为AC+2环境加值；对在对抗海之喷洒的豁免中大失败的生物，该加值提升为AC+4环境加值。</p>\n<p>You gain a +1 circumstance bonus to AC until the beginning of your next turn, which increases to a +2 circumstance bonus to AC against creatures that didn't critically succeed on their saving throw against the Sea Spray, and a +4 circumstance bonus to AC against creatures that critically failed their saving throw against the Sea Spray.</p>"
+    },
+    "Effect: Garland of Salvation": {
+      "name": "效果：救赎花环 Effect: Garland of Salvation"
+    },
+    "Effect: Deteriorating Stream (Success)": {
+      "name": "效果：恶化之流（成功） Effect: Deteriorating Stream (Success)",
+      "description": "<p>该生物在其下个回合开始前，豁免和AC承受–1状态减值。</p>\n<p>The creature takes a –1 status penalty to saving throws and AC until the beginning of their next turn.</p>"
+    },
+    "Effect: Mirror's Reflections": {
+      "name": "效果：镜中倒影 Effect: Mirror's Reflections",
+      "description": "<p>三个由光构成的你的影像在你的空间周围盘旋，可能导致那些攻击你的人击中其中一个影像而非你。任何本应命中你的攻击都有一定的随机几率改为命中你的某个影像而非你。若三个影像都还在，则有1/4的几率命中你（在[[/r 1d4]]中掷出1）。若还剩两个影像，则有1/3的几率命中你（在[[/r 1d6]]中掷出1–2）。若只剩一个影像，则几率为1/2（在[[/r 1d6]]中掷出1–3）。</p>\n<p>一旦某个影像被命中，它就会被摧毁。若一次攻击掷骰未能命中你的AC但没有大成功或大失败，则它会摧毁一个影像，但没有额外效果（即使该攻击通常会在失败时产生某种效果）。若一次攻击掷骰为大成功或大失败，且本应命中某个影像，则摧毁一个影像，并且该次攻击掷骰对你改为成功。一旦所有影像都被摧毁，或当你刷新时，该力量的效果结束。</p>\n<p>Three images of you formed out of light swirl about your space, potentially causing those who attack you to hit one of the images instead of you. Any attack that would hit you has a random chance of hitting one of your images instead of you. If all three images remain, there is a 1 in 4 chance of hitting you (1 on [[/r 1d4]]). With two images remaining, there is a 1 in 3 chance of hitting you (1–2 on [[/r 1d6]]). With only one image, the chances are 1 in 2 (1–3 on [[/r 1d6]]).</p>\n<p>Once an image is hit, it is destroyed. If an attack roll fails to hit your AC but doesn’t critically fail, it destroys an image but has no additional effect (even if the attack would normally have an effect on a failure). If an attack roll is a critical success and would hit one of the images, one of the images is destroyed and the attack roll becomes a success against you. Once all the images are destroyed, or when you Refresh, the power’s effect ends.</p>"
+    },
+    "Effect: Piercing Spike Fragment": {
+      "name": "效果：穿刺尖刺碎片 Effect: Piercing Spike Fragment",
+      "description": "<p>你在其下一次攻击掷骰上承受–2状态减值（或在一轮内对所有攻击掷骰承受该减值），除非你或一名盟友花费一个@Compendium[pf2e.actionspf2e.pvQ5rY2zrtPI614F]{交互}动作来移除碎片。</p>\n<p>You take a –2 status penalty on their next attack roll (or all attack rolls for one round) unless you or an ally spends an @Compendium[pf2e.actionspf2e.pvQ5rY2zrtPI614F]{Interact} action to remove the fragment.</p>"
+    },
+    "Effect: Ice Shield": {
+      "name": "效果：冰霜护盾 Effect: Ice Shield",
+      "description": "<p>你获得对抗该次攻击掷骰的AC+2环境加值，持续到当前生物的回合结束；并且你获得等同于你等级的临时生命值，持续到当前生物的回合结束。</p>\n<p>You gain a +2 circumstance bonus to your AC against the attack roll and until the end of the current creature's turn, and you gain temporary Hit Points equal to your level that last until the end of the current creature's turn.</p>"
+    },
+    "Effect: Bubble Burst (Low  Tide)": {
+      "name": "效果：泡泡爆裂（低潮） Effect: Bubble Burst (Low Tide)",
+      "description": "<p>区域内的敌人在对你进行攻击掷骰时承受–2环境减值，直到你下个回合结束，除非他们在豁免中大成功。</p>\n<p>Foes in the area take a –2 circumstance penalty to attack rolls against you until the end of your next turn unless they critically succeed at their saving throw.</p>"
+    },
+    "Effect: Stone Shell": {
+      "name": "效果：石壳 Effect: Stone Shell",
+      "description": "<p>你获得抗力 7，以抵抗所有物理伤害（除精金外）。每当此抗力防止伤害时，它降低 1。该抗力持续到你刷新为止，或直到它降低至 0 为止，以先发生者为准。</p>\n<p>You gain resistance 7 against all physical damage (except adamantine). Whenever this resistance prevents damage, it decreases by 1. The resistance lasts until you refresh or until it decreases to 0, whichever comes first.</p>"
+    },
+    "Effect: Storm Surge (High Tide)": {
+      "name": "效果：风暴涌动（高潮） Effect: Storm Surge (High Tide)",
+      "description": "<p>你在进行反射豁免时承受–2环境减值，直到你下个回合结束。</p>\n<p>You take a –2 circumstance penalty to Reflex saves until the end of your next turn.</p>"
+    },
+    "Effect: Vibrant Inoculation (Living)": {
+      "name": "效果：鲜活接种（活） Effect: Vibrant Inoculation (Living)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.a7qZ46X8yHC1Gt2d]{鲜活接种} 授予。</p><p>你获得1d4临时生命值，外加起源每有1等级再获得1d4临时生命值，并且在所有强韧豁免上获得+2状态加值。</p><p></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.a7qZ46X8yHC1Gt2d]{Vibrant Inoculation}.</p><p>You gain 1d4 temporary Hit Points plus 1d4 temporary Hit Points for every level the origin has and gain a +2 status bonus on all Fortitude saving throws.</p><p></p>"
+    },
+    "Effect: Retreat Into Shell": {
+      "name": "效果：缩入壳中 Effect: Retreat Into Shell",
+      "description": "<p>你获得AC+2环境加值，并且陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}。这些效果持续到你下个回合结束，不过你可以用单动作提前结束该效果。</p>\n<p>You gain a +2 circumstance bonus to AC and are @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}. These effects last until the end of your next turn, though you can end the effect early with a single action.</p>"
+    },
+    "Effect: Heart of Darkness": {
+      "name": "效果：黑暗之心 Effect: Heart of Darkness",
+      "description": "<p>你变为@UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.SXQzSmgPZv0IFSlN]{笼罩的 1}，并在所有豁免和技能检定上获得+1状态加值，这两者都持续到你下个回合结束。</p>\n<p>You become @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.SXQzSmgPZv0IFSlN]{Shrouded 1} and gain a +1 status bonus on all saving throws and skill checks, which both last until the end of your next turn.</p>"
+    },
+    "Effect: Rushing Current (Low Tide)": {
+      "name": "效果：奔涌水流（低潮） Effect: Rushing Current (Low Tide)",
+      "description": "<p>直到你下个回合结束前，你的反射豁免获得+2环境加值。</p>\n<p>You gain a +2 circumstance bonus to Reflex saves until the end of your next turn.</p>"
+    },
+    "Effect: Shiny Eldamon": {
+      "name": "效果：闪耀的埃尔达蒙 Effect: Shiny Eldamon",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.xTTxj8V6gPPwninm]{Shiny Eldamon} 授予</p>\n<p>当它们与你共享你的相位时，你的eldamon会以一种代表你内在灵体的特定颜色发出辉光。根据你的性格决定颜色。eldamon的辉光像火把一样照亮它们周围的区域（20尺的明亮光照以及另外20尺的昏暗光照）。当你或你的eldamon相位eldamon时，你可以选择让你的eldamon不发出辉光，而黑暗eldamon永远不会发出辉光。如果该eldamon已经会发出辉光（例如大多数火与光eldamon），若你选择叠加来自此专长的辉光，则它们的明亮光照与昏暗光照的区域各自扩大20尺。</p>\n<hr />\n<p><em>注：将此效果放置在你的Eldamon角色卡上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.xTTxj8V6gPPwninm]{Shiny Eldamon}</p>\n<p>While they are sharing your phase, your eldamon glow with a specific color that represents your inner spirit. Decide the color based on your personality. The eldamons' glow illuminates the area around them like a torch (20 feet of bright light and another 20 feet of dim light). When you or your eldamon Phase Eldamon, you can choose for your eldamon not to glow, and darkness eldamon never glow. If the eldamon already glows (such as most fire and light eldamon), if you choose to add the glow from this feat, the area of their bright light and dim light each expand by 20 feet.</p>\n<hr />\n<p><em>Note: Place this effect on your Eldamon actors</em></p>"
+    },
+    "Effect: Entrench": {
+      "name": "效果：筑垒 Effect: Entrench",
+      "description": "<p>你处于@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{定身}状态，并且对抗试图移动你的效果的豁免和DC获得+4状态加值，并且壕沟会对这些效果进行一次反制检定，其反制调整值等于你的力量DC – 10，其反制等级等于你等级的一半（向上取整）。</p>\n<p>You're @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} and gain a +4 status bonus to saving throws and DCs against effects that attempt to move you, and Entrench attempts a counteract check against those effects with a counteract modifier equal to your power DC – 10 and a counteract level equal to half your level rounded up.</p>"
+    },
+    "Effect: Curl Up": {
+      "name": "效果：蜷缩起来 Effect: Curl Up",
+      "description": "<p>你获得对AC的+2环境加值（或者如果你已拥有标准掩蔽，则将你的标准掩蔽提升为强效掩蔽），并且处于@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{定身}，无法进行徒手攻击，且除反应动作（）力量外无法使用力量。</p>\n<p>当你蜷缩时，用近战徒手打击或非触及近战打击命中你的生物会受到@Damage[(1+(floor(@actor.level/4)))[piercing]]伤害，此外你在1级之后每超过4个等级再额外受到1点穿刺伤害，在19级时最多为5点伤害，并可进行一次以你的力量DC为目标的@Check[reflex|against:eldamon|basic:true]豁免。</p>\n<p>You gain a +2 circumstance bonus to AC (or increase your standard cover to greater cover if you already have standard cover) and are @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}, can't make unarmed attacks, and can't use powers except reaction powers.</p>\n<p>A creature that hits you with a melee unarmed Strike or a non-reach melee Strike while you're curled up takes @Damage[(1+(floor(@actor.level/4)))[piercing]] damage, plus 1 additional piercing damage for every 4 levels you have beyond 1st, to a maximum of 5 damage at 19th level, with a @Check[reflex|against:eldamon|basic:true] save against your power DC.</p>"
+    },
+    "Effect: Mental Assistance": {
+      "name": "效果：精神援助 Effect: Mental Assistance",
+      "description": "<p>你在下一次攻击掷骰中获得+1环境加值。</p>\n<p>You gain a +1 circumstance bonus to your next attack roll.</p>"
+    },
+    "Effect: Harvest Shield": {
+      "name": "效果：收割护盾 Effect: Harvest Shield",
+      "description": "<p>你在对抗该次攻击掷骰以及直到你下个回合开始为止的AC上获得+2环境加值。你还会针对触发该反应的攻击，获得等同于你等级的钝击与穿刺伤害抗力。</p>\n<p>You gain a +2 circumstance bonus to your AC against the attack roll and until the beginning of your next turn. You additionally gain resistance to bludgeoning and piercing damage equal to your level against the triggering attack.</p>"
+    },
+    "Effect: Elemental Apotheosis": {
+      "name": "效果：元素神化 Effect: Elemental Apotheosis",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.E9IcyrxCQRZcI9bJ]{元素神化} 授予</p>\n<p>你汲取你体内艾尔达蒙的全部元素潜能，将自身重新锻造为强大的复合存在，远远超越各部分之和。在你的元素神化的狂潮之中，元素能量在你周围翻涌，你的眼睛闪耀着与你的元素相关联的颜色，而转化的其他视觉特征也让你那满溢的元素能量对周围所有人都一目了然。此神化持续1分钟，在此期间你获得对攻击掷骰、技能检定和豁免的+4状态加值，以及40点临时生命值。当神化结束时，你的身体必须从以元素能量超载自身的冲击中恢复。你变为 @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{疲乏} 且你的力量攻击掷骰与力量DC承受-2减值；这两个效果都会在你休息10分钟、让身体有时间恢复后结束。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.E9IcyrxCQRZcI9bJ]{Elemental Apotheosis}</p>\n<p>You draw upon the full elemental potential of the eldamon within you, reforging yourself into a powerful composite being far greater than the sum of your parts. While within the throes of your elemental apotheosis, elemental energies swirl around you, your eyes glow with a color associated with your element, and other visual features of the transformation make your overflowing elemental energy abundantly clear to everyone around you. This apotheosis lasts for 1 minute, during which time you gain a +4 status bonus to attack rolls, skill checks, and saving throws, as well as 40 temporary Hit Points. When the apotheosis ends, your body must recover from the shock of overloading yourself with elemental energy. You become @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} and you take a -2 penalty to your power attack rolls and power DCs; both effects end after you rest for 10 minutes to give your body time to recover.</p>"
+    },
+    "Effect: Water Barrier": {
+      "name": "效果：水之屏障 Effect: Water Barrier",
+      "description": "<p>直到你下个回合开始前，敌人使用钝击与挥砍攻击对你进行攻击时承受–2环境减值，且你获得等同于你等级的酸与火焰伤害抗力。</p>\n<p>Until the beginning of your next turn, enemies using bludgeoning and slashing attacks take a –2 circumstance penalty against you and you gain resistance equal to your level to acid and fire damage.</p>"
+    },
+    "Effect: Inexorable Demise": {
+      "name": "效果：无可避免的终结 Effect: Inexorable Demise",
+      "description": "<p>三个不祥的骷髅出现在你选择的一个60英尺内的生物头顶。在该生物每个回合结束时，一阵哀伤的钟声响起，其中一个骷髅燃烧殆尽并消失。</p>\n<p>Three ominous skulls appear over the head of a creature you choose within 60 feet. At the end of each of the creature’s turns, a mournful bell tolls as one of the skulls burns up and disappears.</p>"
+    },
+    "Effect: Flowing River (Low Tide)": {
+      "name": "效果：奔流之河（低潮） Effect: Flowing River (Low Tide)",
+      "description": "<p>直到你下个回合结束前，你获得对你的速度的+30英尺状态加值。</p>\n<p>You gain a +30-foot status bonus to your Speeds until the end of your next turn.</p>"
+    },
+    "Effect: Rock Shield": {
+      "name": "效果：岩石护盾 Effect: Rock Shield",
+      "description": "<p>你获得对抗触发的攻击掷骰的AC +4环境加值。在触发的攻击掷骰之后，此AC加值降低1；其持续至你下个回合开始或其降低至0为止，以先发生者为准。</p>\n<p>You gain a +4 circumstance bonus to your AC against the triggering attack roll. After the triggering attack roll, this AC bonus reduces by 1; it lasts until the beginning of your next turn or until it reduces to 0, whichever comes first.</p>"
+    },
+    "Effect: Life Cocoon": {
+      "name": "效果：生命茧 Effect: Life Cocoon",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.ozMb4QgqbPJAGEMG]{生命茧} 授予</p><p>你变为 @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{动弹不得}，并获得等于3加上你等级三倍的临时生命值。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.ozMb4QgqbPJAGEMG]{Life Cocoon}</p><p>You become @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} and gain temporary Hit Points equal to 3 plus three times your level.</p>"
+    },
+    "Mitigated Weakness (Eldamon)": {
+      "name": "减轻的弱点（Eldamon） Mitigated Weakness (Eldamon)",
+      "description": "<p>你训练你的eldamon伙伴以缓解它们天生的eldamon弱点，保护它们免受通常对它们伤害最大的元素影响。你的eldamon会基于其元素将它们天生的eldamon弱点从等同于其等级的数值降低为等同于其等级一半的数值。</p><hr /><p><em>注：将此特性放在你的每个eldamon上</em></p>\n<p>You train your eldamon friends to mitigate their natural eldamon weaknesses, protecting them against the elements that normally do them the most harm. Your eldamon decrease their natural eldamon weaknesses based on their element from an amount equal to their level to an amount equal to half their level.</p><hr /><p><em>Note: Place this feature on each of your eldamon</em></p>"
+    },
+    "Calling: Eldamon Battler": {
+      "name": "感召：艾尔达蒙战斗者 Calling: Eldamon Battler",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.QZgXHHRPN7XqpSvR]{Eldamon Battler} 授予</p><p>你的所有eldamon将其最大生命值增加等同于你的等级的数值（最低2）。</p><hr /><p><em>注：将此专长放置在你的每个Eldamon角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.QZgXHHRPN7XqpSvR]{Eldamon Battler}</p><p>All of your eldamon increase their maximum Hit Points by an amount equal to your level (minimum 2).</p><hr /><p><em>Note: Place this feat on each of your Eldamon actors</em></p>"
+    },
+    "Effect: Force Missile Fusillade (Miss)": {
+      "name": "效果：力场飞弹齐射（未命中） Effect: Force Missile Fusillade (Miss)",
+      "description": "<p>力场飞弹或许没有击中你，但它们正在盘旋回来再试一次！</p>\n<p>进行一次 @Check[type:eldamon|defense:ac]{力量攻击掷骰}</p>\n<p><strong>大成功</strong> 你的飞弹对目标造成大成功命中，造成双倍伤害。</p>\n<p><strong>成功</strong> 你的飞弹命中目标，造成 [[/r (@item.badge.value)d6[force]]] 伤害。</p>\n<p><strong>失败</strong> 部分飞弹命中，其余的则盘旋起来准备再次尝试。你指向目标的飞弹中有一半命中（向下取整），造成 [[/r (floor(@item.badge.value /2))d6[force]]]。在你刷新之前，你的每个回合开始时，使用剩余的飞弹对该生物再尝试一次攻击掷骰。</p>\n<p><strong>大失败</strong> 同失败，但所有飞弹都未命中并盘旋起来准备再次尝试。</p>\n<p>The force missiles may have missed you, but they are circling around to have another go!</p>\n<p>Make a @Check[type:eldamon|defense:ac]{power attack roll}</p>\n<p><strong>Critical Success</strong> Your missiles critically hit the target, dealing double damage.</p>\n<p><strong>Success</strong> Your missiles hit the target, dealing [[/r (@item.badge.value)d6[force]]] damage.</p>\n<p><strong>Failure</strong> Some of the missiles hit, and the others circle around to try again. Half of the missiles you directed at the target hit (rounded down), dealing [[/r (floor(@item.badge.value /2))d6[force]]]. At the beginning of each of your turns until you refresh, attempt another attack roll against the creature with the remaining missiles.</p>\n<p><strong>Critical Failure</strong> As failure, except all the missiles miss and circle around to try again.</p>"
+    },
+    "Effect: Leviathan (High Tide)": {
+      "name": "效果：利维坦（高潮） Effect: Leviathan (High Tide)",
+      "description": "<p>你在你的下个回合结束前，你的意志豁免承受–2减值。</p>\n<p>You take a –2 penalty to your Will saves until the end of your next turn.</p>"
+    },
+    "Effect: Life Buffer": {
+      "name": "效果：生命缓冲 Effect: Life Buffer",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.6xep3uGlHDZcmO7J]{生命缓冲} 赋予</p><p>你获得 1d10 临时生命值，外加每当起源具有 1 个等级时再获得额外 1d10 临时生命值。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.6xep3uGlHDZcmO7J]{Life Buffer}</p><p>You gain 1d10 temporary Hit Points plus an additional 1d10 temporary Hit Points for each level the origin has.</p>"
+    },
+    "Effect: Aegis of Immortal Stone (Lingering)": {
+      "name": "效果：不朽之石的庇护（持续） Effect: Aegis of Immortal Stone (Lingering)",
+      "description": "<p>你获得对AC、反射豁免和强韧豁免的+1环境加值，以及等于你等级的物理伤害抗力（精金除外），这些效果持续到守护之誓的增益首次生效或你刷新为止，以先发生者为准。</p>\n<p>You gain a +1 circumstance bonus to AC, Reflex saves, and Fortitude saves, as well as resistance to physical damage (except adamantine) equal to your level, which last until either the first time the aegis's benefits apply or until you refresh, whichever comes first.</p>"
+    },
+    "Effect: Vital Touch (Undead)": {
+      "name": "效果：生命接触（不死生物） Effect: Vital Touch (Undead)",
+      "description": "<p>该亡灵的 AC 承受 –1 状态减值。若成功，则此减值为 –2。</p>\n<p>The undead a –1 status penalty to AC. On a success this penalty is –2.</p>"
+    },
+    "Effect: Lifebond Primary": {
+      "name": "效果：生命连结（主要） Effect: Lifebond Primary",
+      "description": "<p>你获得等于起源的等级的临时生命值。</p>\n<p>You gain temporary Hit Points equal to the origin's level.</p>"
+    },
+    "Effect: Vibrant Inoculation (Undead)": {
+      "name": "效果：活力接种（不死生物） Effect: Vibrant Inoculation (Undead)",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.a7qZ46X8yHC1Gt2d]{活力接种} 授予。</p><p>你在所有强韧豁免上承受–1状态减值。若为大失败，该减值为–2。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.a7qZ46X8yHC1Gt2d]{Vibrant Inoculation}.</p><p>You take a –1 status penalty on all Fortitude saving throws. On a critical failure this penalty is –2.</p>"
+    },
+    "Effect: Unrelenting Jet (High Tide)": {
+      "name": "效果：不屈喷流（高潮） Effect: Unrelenting Jet (High Tide)",
+      "description": "<p>直到你下个回合结束前，你的AC承受–2减值。</p>\n<p>You take a –2 penalty to AC until the end of your next turn.</p>"
+    },
+    "Effect: Wind Barrier": {
+      "name": "效果：风之屏障 Effect: Wind Barrier",
+      "description": "<p>在1轮内，对你或30英尺放射范围内的盟友进行的物理远程攻击会根据远程武器的体型承受环境减值。使用箭、弩矢、子弹或类似弹药的攻击承受–4环境减值；使用更大的远程武器（如标枪）的攻击承受–2环境减值。巨大的远程武器，以及不依赖物理物体的法术效果，会无减值地穿过这些风。</p>\n<p>For 1 round, physical ranged attack against you or an ally within a 30-foot emanation take a circumstance penalty depending on the size of the ranged weapon. Attacks that use arrows, bolts, bullets, or similar ammunition take a –4 circumstance penalty, attacks with bigger ranged weapons, such as javelins, take a –2 circumstance penalty. Massive ranged weapons and spell effects that don't rely on physical objects pass through the winds with no penalty.</p>"
+    },
+    "Effect: Life Conductor": {
+      "name": "效果：生命导体 Effect: Life Conductor",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.9Q6Ufd1S3At1Z9Is]{生命导体} 赋予。</p><p>你获得等同于你等级两倍的临时生命值。</p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.powers.Item.9Q6Ufd1S3At1Z9Is]{Life Conductor}.</p><p>You gain temporary Hit Points equal to twice your level.</p>"
+    },
+    "Effect: Vital Rest": {
+      "name": "效果：活力休息 Effect: Vital Rest",
+      "description": "<p>当你休息时，你会以生命能量涌动。在一次遭遇中，如果你整整一轮都没有行动（通常因为诸如目眩或 @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹} 之类的状态，或者因为你延迟了整整一轮直到回到你原本的先攻），你获得等同于 2 加上你的等级的临时生命值，持续 2 轮。</p>\n<p>When you take a break, you surge with vital energy. During an encounter, if you don't act for a full round (usually because of a condition such as stunned or @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, or because you Delayed for an entire round until your original initiative came again), you gain temporary Hit Points equal to 2 plus your level, which last for 2 rounds.</p>"
+    },
+    "Effect: Evolved Colossus": {
+      "name": "效果：进化的巨像 Effect: Evolved Colossus",
+      "description": "<p>由 @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.GR4InrRFnSLyXjcW]{进化巨像} 给予</p>\n<p>你已帮助你的进化艾达蒙学会如何达到真正荒谬的体型。当你或你的艾达蒙使用相位艾达蒙将一只处于进化战斗形态的艾达蒙相位召入时，你可以选择将其相位为超巨型的进化战斗形态，而非其进化战斗形态的正常体型。你这样做时，你的艾达蒙的触及为20英尺（除非其触及通常更大）。如果该进化战斗形态通常为巨型，则你的艾达蒙在超巨型战斗形态下的触及改为25英尺（除非其触及通常更大）。</p>\n<hr />\n<p><em>注：将此效果放置在你的艾达蒙角色上</em></p>\n<p>Granted by @UUID[Compendium.battlezoo-eldamon-pf2e.feats.Item.GR4InrRFnSLyXjcW]{Evolved Colossus}</p>\n<p>You've helped your evolved eldamon learn how to reach truly preposterous sizes. When you or your eldamon use Phase Eldamon to phase in an eldamon in their evolved battle form, you can choose to phase them into a Gargantuan evolved battle form instead of their evolved battle form's normal size. When you do, your eldamon has a reach of 20 feet (unless its reach is normally greater). If the evolved battle form was normally Huge, your eldamon has a reach of 25 feet in the Gargantuan battle form instead (unless its reach is normally greater).</p>\n<hr />\n<p><em>Note: Place this effect on your Eldamon actors</em></p>"
+    },
+    "Effect: Rainbow Light": {
+      "name": "效果：彩虹光 Effect: Rainbow Light",
+      "description": "<p>当你用你的光力量造成伤害时，不再造成火焰伤害，而是掷骰 [[/r 1d8]]。结果为：</p>\n<p><strong>1</strong> 光为红色，你的力量造成火焰伤害<br /><strong>2</strong> 光为橙色，你的力量造成酸蚀伤害<br /><strong>3</strong> 光为黄色，你的力量造成电击伤害<br /><strong>4</strong> 光为绿色，你的力量造成毒素伤害<br /><strong>5</strong> 光为蓝色，你的力量造成音波伤害<br /><strong>6</strong> 光为靛色，你的力量造成精神伤害<br /><strong>7</strong> 光为紫罗兰色，你的力量造成力场伤害<br /><strong>8</strong> 你从7种颜色与伤害类型中选择一种。</p>\n<p>如果你的力量造成持续伤害，你仍然只掷骰一次来决定光的颜色，并在该力量的持续时间内造成该伤害类型。</p>\n<p>When you deal damage with your light powers, instead of dealing fire damage, roll [[/r 1d8]]. On a:</p>\n<p><strong>1</strong> the light is red and your power deals fire damage<br /><strong>2</strong> the light is orange and your power deals acid damage<br /><strong>3</strong> the light is yellow and your power deals electricity damage<br /><strong>4</strong> the light is green and your power deals poison damage<br /><strong>5</strong> the light is blue and your power deals sonic damage<br /><strong>6</strong> the light is indigo and your power deals mental damage<br /><strong>7</strong> the light is violet and your power deals force damage<br /><strong>8</strong> you choose one of the 7 colors and damage types.</p>\n<p>If your power deals damage over time, you still only roll once to determine the color of the light and deal that damage type for the duration of the power.</p>"
+    },
+    "Effect: Muninn": {
+      "name": "效果：穆宁 Effect: Muninn",
+      "description": "<p>渡鸦周围15尺散发区域内的盟友在渡鸦协助下，只要他们在该区域内，就会在攻击掷骰、察觉检定、豁免和技能检定上获得+1环境加值。</p>\n<p>Allies within a 15-foot emanation of the ravens gain a +1 circumstance bonus to attack rolls, Perception checks, saving throws, and skill checks while they are in the area as the ravens assist them.</p>"
+    },
+    "Illuminated Weakness": {
+      "name": "照明弱点 Illuminated Weakness",
+      "description": "<p>在该时代期间，只要目标仍处于@UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{显映的}状态，你和你的盟友用打击对目标造成伤害时会额外增加2点精准伤害，并且你用光力量对目标造成伤害时会额外增加4点精准伤害。在11级时，打击的精准伤害提高至3点，而你的光力量提高至6点；在15级时，打击提高至4点，而你的光力量提高至8点；在19级时，打击提高至5点，而你的光力量提高至10点。</p>\n<p>During that time, you and your allies add 2 additional precision damage with your Strikes against the target as long as it remains @UUID[Compendium.battlezoo-eldamon-pf2e.conditions.Item.5tWqbv3Iu1FlrOx6]{Limned}, and you add 4 additional precision damage with your light powers against the target. At 11th level, the precision damage increases to 3 for Strikes and 6 for your light powers, at 15th level, it increases to 4 for Strikes and 8 for your light powers, and at 19th level it increases to 5 for Strikes and 10 for your light powers.</p>"
+    },
+    "Effect: Mind Palace": {
+      "name": "效果：心智宫殿 Effect: Mind Palace",
+      "description": "<p>持续1轮，你和所有在20尺半径发散范围内的盟友获得对所有意志豁免的+2状态加值</p>\n<p>For 1 round, you and all allies within a 20-foot radius emanation gain a +2 status bonus all Will saves</p>"
+    },
+    "Effect: Gather Pollen": {
+      "name": "效果：采集花粉 Effect: Gather Pollen",
+      "description": "<p>目标在1轮内对攻击掷骰、察觉检定与技能检定承受–1状态减值</p>\n<p>The target takes a –1 status penalty to attack rolls, Perception checks, and skill checks for 1 round</p>"
+    }
+  }
+}

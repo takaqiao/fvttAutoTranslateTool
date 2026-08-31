@@ -1,0 +1,70 @@
+{
+  "label": "装备效果\nEquipment Effects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Jetpack": {
+      "name": "效果：喷气背包 Effect: Jetpack",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.CIZ3Walj6DmiaJGq]{喷气背包（商用）}、@UUID[Compendium.sf2e.equipment.Item.DnuTMCJFBDj9nNRx]{喷气背包（战术型）} 赋予</p>\n<p>你获得飞行速度。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.CIZ3Walj6DmiaJGq]{Jetpack (Commercial)}, @UUID[Compendium.sf2e.equipment.Item.DnuTMCJFBDj9nNRx]{Jetpack (Tactical)}</p>\n<p>You gain a fly Speed.</p>"
+    },
+    "Effect: Raise a Shield": {
+      "name": "效果：举起盾牌 Raise a Shield",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.xjGwis0uaC2305pm]{Raise a Shield}</p>\n<p>当你举起盾牌时，你将盾牌所列的环境加值添加到自己的AC上。</p>"
+    },
+    "Effect: Explorer's Canteen": {
+      "name": "效果：探索者的水壶 Effect: Explorer's Canteen",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.WGdcokSMynEyF332]{探索者水壶} 赋予</p>\n<p>你在对抗食物或水中存在的任何毒素或疾病的豁免检定上获得 +1 物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.WGdcokSMynEyF332]{Explorer's Canteen}</p>\n<p>You gain a +1 item bonus to saves against any poisons or diseases present in food or water.</p>"
+    },
+    "Effect: Artificial Immortalizer": {
+      "name": "效果：人工永生化者 Effect: Artificial Immortalizer",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.0J8PMTLDGIIP1KGE]{Artificial Immortalizer} 赋予</p>\n<p>你获得 50 点临时生命值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.0J8PMTLDGIIP1KGE]{Artificial Immortalizer}</p>\n<p>You gain 50 temporary Hit Points.</p>"
+    },
+    "Effect: Force Field": {
+      "name": "效果：力场 Effect: Force Field",
+      "description": "<p>用于追踪你的力场护盾生命值的效果。</p>\n<p>Tracking effect for your force field's HP.</p>"
+    },
+    "Effect: Bone Serum": {
+      "name": "效果：骨骼血清 Effect: Bone Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.dvvYuzx0QUORXMl1]{骨髓血清} 赋予</p>\n<p>你获得虚空治疗。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.dvvYuzx0QUORXMl1]{Bone Serum}</p>\n<p>You gain void healing.</p>"
+    },
+    "Effect: Sharpshooter Serum (Reduce Cover)": {
+      "name": "效果：神射手血清（降低掩护） Effect: Sharpshooter Serum (Reduce Cover)",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.xBlfbu0fUmV6ucqR]{神射手血清}、@UUID[Compendium.sf2e.equipment.Item.vcCeNRokXv5HSlRf]{神射手血清（战术型）} 通过短暂效果赋予</p>\n<p>你因掩蔽获得的 AC 状况加值减少。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.xBlfbu0fUmV6ucqR]{Sharpshooter Serum}, @UUID[Compendium.sf2e.equipment.Item.vcCeNRokXv5HSlRf]{Sharpshooter Serum (Tactical)} via Ephemeral Effect</p>\n<p>Your circumstance bonus to AC from cover is reduced.</p>"
+    },
+    "Effect: Hypopen (Quickened or Fast Healing)": {
+      "name": "效果：希波笔（加速或快速治疗） Effect: Hypopen (Quickened or Fast Healing)",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.gRZxPwfmz3O0bgOt]{Hypopen（菁英型）} 或 @UUID[Compendium.sf2e.equipment.Item.6JzH3VDHqv2rZJer]{Hypopen（终极型）} 赋予</p>\n<p>选择以下一项好处。</p><ul><li>你获得加速。你可以将这个额外动作用于垫步、疾奔或打击。</li><li>你获得快速治疗 10。</li></ul>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.gRZxPwfmz3O0bgOt]{Hypopen (Elite)} or @UUID[Compendium.sf2e.equipment.Item.6JzH3VDHqv2rZJer]{Hypopen (Ultimate)}</p>\n<p>Choose one of the following benefits.</p><ul><li>You become quickened. You can use the extra action to Step, Stride, or Strike.</li><li>You gain fast healing 10.</li></ul>"
+    },
+    "Effect: Sharpshooter Serum": {
+      "name": "效果：神射手血清 Effect: Sharpshooter Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.xBlfbu0fUmV6ucqR]{神射手血清（商用）}、@UUID[Compendium.sf2e.equipment.Item.vcCeNRokXv5HSlRf]{神射手血清（战术型）} 授予</p>\n<p>你的目标因掩蔽而获得、用于对抗你远程打击的 AC 情境加值会降低。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.xBlfbu0fUmV6ucqR]{Sharpshooter Serum (Commercial)}, @UUID[Compendium.sf2e.equipment.Item.vcCeNRokXv5HSlRf]{Sharpshooter Serum (Tactical)}</p>\n<p>The circumstance bonus to AC your targets gain from cover against your ranged Strikes is reduced.</p>"
+    },
+    "Effect: Medpatch": {
+      "name": "效果：医用贴片 Effect: Medpatch",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.B0FiYMxy7iDiHh48]{医疗贴片（商业型）}、@UUID[Compendium.sf2e.equipment.Item.HWHdAQArhRauTpm6]{医疗贴片（战术型）}、@UUID[Compendium.sf2e.equipment.Item.55nSLw1aQ0K0rK2L]{医疗贴片（先进型）}、@UUID[Compendium.sf2e.equipment.Item.6VDHl7xkSp8Sc8yy]{医疗贴片（卓越型）}、@UUID[Compendium.sf2e.equipment.Item.KFjPEG7kw733splu]{医疗贴片（菁英型）}、@UUID[Compendium.sf2e.equipment.Item.dJyYifMFfgbIwT3c]{医疗贴片（终极型）}赋予</p>\n<p>你在对抗疾病和毒素的豁免检定中获得物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.B0FiYMxy7iDiHh48]{Medpatch (Commercial)}, @UUID[Compendium.sf2e.equipment.Item.HWHdAQArhRauTpm6]{Medpatch (Tactical)}, @UUID[Compendium.sf2e.equipment.Item.55nSLw1aQ0K0rK2L]{Medpatch (Advanced)}, @UUID[Compendium.sf2e.equipment.Item.6VDHl7xkSp8Sc8yy]{Medpatch (Superior)}, @UUID[Compendium.sf2e.equipment.Item.KFjPEG7kw733splu]{Medpatch (Elite)}, @UUID[Compendium.sf2e.equipment.Item.dJyYifMFfgbIwT3c]{Medpatch (Ultimate)}</p>\n<p>You gain an item bonus to saving throws against diseases and poisons.</p>"
+    },
+    "Effect: Celebrity Serum": {
+      "name": "效果：名流血清 Effect: Celebrity Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.JgVv4m4sh9faVSDD]{名流血清} 赋予</p>\n<p>你在表演检定上获得 +1 物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.JgVv4m4sh9faVSDD]{Celebrity Serum}</p>\n<p>You gain a +1 item bonus to Performance checks.</p>"
+    },
+    "Effect: Parry": {
+      "name": "效果：格挡 Parry",
+      "description": "<p>你在AC上获得环境加值。</p>"
+    },
+    "Effect: Commando Serum": {
+      "name": "效果：突击队血清 Effect: Commando Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.Yuws1too4LhO7Cu9]{突击队血清} 赋予</p>\n<p>你获得 1d10+5 临时生命值，以及对任意速度的 +5-foot 物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.Yuws1too4LhO7Cu9]{Commando Serum}</p>\n<p>You gain 1d10+5 temporary Hit Points, as well as a +5-foot item bonus to any Speed.</p>"
+    },
+    "Effect: Aeon Stone (Uplifting)": {
+      "name": "效果：万世石（振奋） Effect: Aeon Stone (Uplifting)",
+      "description": "<p>你获得 1 分钟的飞行速度，其数值等于你的速度或 20 尺，以较高者为准。</p>\n<p>You gain a fly Speed for 1 minute equal to your Speed or 20 feet, whichever is greater.</p>"
+    },
+    "Effect: Infiltrator Serum": {
+      "name": "效果：渗透者血清 Effect: Infiltrator Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.u82tssnDgj4f9UCS]{潜入者血清} 赋予</p>\n<p>你在“潜行”和“解除装置”的检定中获得 +1 物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.u82tssnDgj4f9UCS]{Infiltrator Serum}</p>\n<p>You gain a +1 item bonus to checks to Sneak and Disable a Device.</p>"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "sf2e_compendium",
+  "title": "Translation: 中文 [SF2e 合集包]",
+  "description": "本模组为 FVTT 的 SF2e 系统提供了中文翻译，包含系统主体、动作元素、规则元素等多个部分。",
+  "authors": [
+    {
+      "name": "Taka"
+    }
+  ],
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": 13,
+    "verified": 13.344
+  },
+  "esmodules": [
+    "register.js"
+  ],
+  "styles": [
+    "styles/journal-fixes.css"
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "babele",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  }
+}

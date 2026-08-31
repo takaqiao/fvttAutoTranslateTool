@@ -1,0 +1,981 @@
+{
+  "summary": {
+    "target_files": 18,
+    "corpus_pairs": 3768,
+    "valid_terms": 4592,
+    "en_regex_hit_count": 1379,
+    "zh_contains_hit_count": 1429,
+    "both_hit_count": 1333,
+    "none_hit_count": 3117,
+    "en_regex_hit_rate": 30.03,
+    "zh_contains_hit_rate": 31.12,
+    "both_hit_rate": 29.03,
+    "none_hit_rate": 67.88,
+    "base_glossary_count": 4399,
+    "extra_glossary_count": 4621,
+    "merged_glossary_count": 4621,
+    "conflict_count": 4399
+  },
+  "missing_samples_first_120": [
+    {
+      "en_term": "Amulet of Proof against Detection and Location",
+      "zh_values": [
+        "防探测与定位护符"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Decontamination Station",
+      "zh_values": [
+        "炼金净化站"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Agrimagical Artifact:Everbloom",
+      "zh_values": [
+        "农魔法神器：永绽之花"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amaranthine Archives Artifacts",
+      "zh_values": [
+        "安玛兰辛档案馆神器"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Afflicted Pallid Drakeling",
+      "zh_values": [
+        "受难苍白幼龙"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Annotated Yakoshta Mine Map",
+      "zh_values": [
+        "带注释的雅科什塔矿井地图"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Conversation with Jasper",
+      "zh_values": [
+        "与贾斯珀的交谈"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "An Unexpected Requisition",
+      "zh_values": [
+        "一项意外的征用"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Antimagic Susceptibility",
+      "zh_values": [
+        "反魔法易感性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcane Disruption Moments",
+      "zh_values": [
+        "奥术干扰时刻"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Song for Lady Stonecraft",
+      "zh_values": [
+        "献给石艺女士的一首歌"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amphibious Adaptability",
+      "zh_values": [
+        "水陆适应性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arctus Plateau Gazetteer",
+      "zh_values": [
+        "阿克图斯高原地名志"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Adamantine Breastplate",
+      "zh_values": [
+        "精金胸甲"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Contaminant",
+      "zh_values": [
+        "炼金污染物"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anachraenum Adventurer",
+      "zh_values": [
+        "阿纳克雷努姆冒险者"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcturel Investigation",
+      "zh_values": [
+        "阿克图雷尔调查"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Area Walkthrough Tables",
+      "zh_values": [
+        "区域流程表"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Attunement Progression",
+      "zh_values": [
+        "调谐进阶"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Avilla,the Spellbreaker",
+      "zh_values": [
+        "阿维拉，破法者"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyss-Warped Undaunted",
+      "zh_values": [
+        "深渊扭曲的无畏者"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Afflicted Pallid Drake",
+      "zh_values": [
+        "受苦的苍白龙兽"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anachraenum Medallion",
+      "zh_values": [
+        "阿纳克拉埃努姆徽章"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anticoagulation Tonic",
+      "zh_values": [
+        "抗凝药剂"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcturian Tobacco Pipe",
+      "zh_values": [
+        "阿克图里安烟斗"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Conflagration of Lumé",
+      "zh_values": [
+        "卢梅之焚"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Peculiar Encampment",
+      "zh_values": [
+        "一处古怪的营地"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Construct Fluid",
+      "zh_values": [
+        "艾迪尔构装流体"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "After Rescuing Jasper",
+      "zh_values": [
+        "救出贾斯珀之后"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Agraband's Lunar Charm",
+      "zh_values": [
+        "阿格拉班德的月华护符"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Decisions",
+      "zh_values": [
+        "炼金抉择"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amalthea's Manuscript",
+      "zh_values": [
+        "阿玛尔忒亚的手稿"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amaranthine Archives",
+      "zh_values": [
+        "绛华档案库"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "An Upcoming Challenge",
+      "zh_values": [
+        "即将到来的挑战"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcturian Automatons",
+      "zh_values": [
+        "阿克图瑞安自动机工坊"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Sensitivity",
+      "zh_values": [
+        "深渊敏感性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "activator compounds",
+      "zh_values": [
+        "活化化合物"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Afflicted Thornling",
+      "zh_values": [
+        "受折磨的荆棘幼体"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Recharge",
+      "zh_values": [
+        "炼金充能"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "alchemical toxicity",
+      "zh_values": [
+        "炼金毒性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amalthea Stonecraft",
+      "zh_values": [
+        "阿玛尔忒亚·石艺"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ancient Lunar Shrine",
+      "zh_values": [
+        "远古月神殿"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Apron of Many Pockets",
+      "zh_values": [
+        "多口袋围裙"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Attunement Features",
+      "zh_values": [
+        "调谐特性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aversion to Radiance",
+      "zh_values": [
+        "对辉耀的厌恶"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Troubled Tradeway",
+      "zh_values": [
+        "一条麻烦重重的贸易道"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Interloper",
+      "zh_values": [
+        "深渊闯入者"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Protection",
+      "zh_values": [
+        "深渊防护"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Resistance",
+      "zh_values": [
+        "深渊抗性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Activating the Lift",
+      "zh_values": [
+        "启动升降梯"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Grenade",
+      "zh_values": [
+        "炼金手雷"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anachraenum Member",
+      "zh_values": [
+        "阿纳克雷努姆成员"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ancient Aediri Coin",
+      "zh_values": [
+        "古代艾迪里硬币"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ancient Projectors",
+      "zh_values": [
+        "古代投影装置"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Answers From On High",
+      "zh_values": [
+        "来自高天的答案"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Antifungal Draught",
+      "zh_values": [
+        "抗真菌药剂"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcane Adversaries",
+      "zh_values": [
+        "奥术型敌人"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcturian Trinkets",
+      "zh_values": [
+        "阿克图里安小饰品"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Associated Culture",
+      "zh_values": [
+        "关联文化"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aythorn's Blessings",
+      "zh_values": [
+        "艾索恩的祝福"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Bare Holding Cell",
+      "zh_values": [
+        "一间空荡荡的牢房"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Strange New World",
+      "zh_values": [
+        "一个陌生的新世界"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Test of Endurance",
+      "zh_values": [
+        "耐力试炼"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Harbinger",
+      "zh_values": [
+        "深渊先驱"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Adversary Options",
+      "zh_values": [
+        "对手选项"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Age of Rediscovery",
+      "zh_values": [
+        "重新发现时代"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Agraband's Kithara",
+      "zh_values": [
+        "阿格拉班德的西萨拉琴"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Silver",
+      "zh_values": [
+        "炼金银"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ambassador Tezran",
+      "zh_values": [
+        "特兹兰大使"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amorphous Tendril",
+      "zh_values": [
+        "无定形触须"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ancient Shent Gate",
+      "zh_values": [
+        "远古申特之门"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Animal Friendship",
+      "zh_values": [
+        "动物交友"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Animated Rune Tome",
+      "zh_values": [
+        "活化符文典籍"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anydrath Training",
+      "zh_values": [
+        "安尼德拉斯训练"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Apothecary Arvoda",
+      "zh_values": [
+        "药剂师阿尔沃达"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ashvale Mausoleum",
+      "zh_values": [
+        "灰谷陵墓"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aterican Diseases",
+      "zh_values": [
+        "阿特里坎疾病"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Attunement Points",
+      "zh_values": [
+        "调谐点数"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Award Attunements",
+      "zh_values": [
+        "授予调谐"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Brush With Death",
+      "zh_values": [
+        "与死亡擦肩"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Chat With Tauric",
+      "zh_values": [
+        "与陶里克交谈"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Message from Sin",
+      "zh_values": [
+        "辛的讯息"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyss Attunement",
+      "zh_values": [
+        "深渊调谐"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Darkness",
+      "zh_values": [
+        "深渊黑暗"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Insights",
+      "zh_values": [
+        "深渊洞见"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Whispers",
+      "zh_values": [
+        "深渊低语"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Acolyte Quarters",
+      "zh_values": [
+        "侍僧宿舍"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Acquired Talents",
+      "zh_values": [
+        "习得天赋"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Active Abilities",
+      "zh_values": [
+        "主动能力"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Signalpost",
+      "zh_values": [
+        "艾迪尔信号哨站"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Alchemical Spill",
+      "zh_values": [
+        "炼金泄漏物"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amazing Brambles",
+      "zh_values": [
+        "惊人荆棘"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amorphous Entity",
+      "zh_values": [
+        "无定形实体"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "An Ancient Battle",
+      "zh_values": [
+        "一场古老的战斗"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anchorite Marine",
+      "zh_values": [
+        "隐修士陆战队员"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Animal Messenger",
+      "zh_values": [
+        "动物信使"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anterior Chamber",
+      "zh_values": [
+        "前房"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcturian Liquor",
+      "zh_values": [
+        "阿克图瑞安烈酒"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Area Walkthrough",
+      "zh_values": [
+        "区域导览"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Armor Properties",
+      "zh_values": [
+        "护甲属性"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arrival at Helkas",
+      "zh_values": [
+        "抵达赫尔卡斯"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Attunement Point",
+      "zh_values": [
+        "调谐点数"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Cevher Summons",
+      "zh_values": [
+        "杰夫赫尔家的召唤"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "A Watchful Spire",
+      "zh_values": [
+        "一座警戒的尖塔"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Ability Scaling",
+      "zh_values": [
+        "能力成长"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Monster",
+      "zh_values": [
+        "深渊怪物"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Abyssal Remains",
+      "zh_values": [
+        "深渊遗骸"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Academy Dropout",
+      "zh_values": [
+        "学院辍学生"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Longsword",
+      "zh_values": [
+        "艾迪尔长剑"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Scale Mail",
+      "zh_values": [
+        "艾迪尔鳞甲胸甲"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Spellband",
+      "zh_values": [
+        "艾迪尔法术带"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aedir Wellstone",
+      "zh_values": [
+        "艾狄尔井石"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Aediri War Knife",
+      "zh_values": [
+        "艾迪里战刀"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Agrimage Circle",
+      "zh_values": [
+        "农法师环会"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Akon Attunement",
+      "zh_values": [
+        "阿肯调谐"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Amulet of Scoris",
+      "zh_values": [
+        "斯科里斯护符"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Anrak Mausoleum",
+      "zh_values": [
+        "安拉克陵墓"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Antimagic Field",
+      "zh_values": [
+        "反魔法力场"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arachnid Chitin",
+      "zh_values": [
+        "蛛形纲几丁质"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    },
+    {
+      "en_term": "Arcane Workshop",
+      "zh_values": [
+        "奥术工坊"
+      ],
+      "en_regex_hit": false,
+      "zh_contains_hit": false
+    }
+  ]
+}

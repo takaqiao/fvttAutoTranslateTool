@@ -1,0 +1,361 @@
+{
+  "label": "效果与状态\nEffects and Conditions",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Rebellious Defiance": {
+      "name": "效果：反叛的蔑抗 Effect: Rebellious Defiance",
+      "description": "<p>你对被标记生物进行的攻击检定获得+1处境加值。你对该生物的攻击、法术和效果进行的豁免检定也获得此加值。</p>\n<p>You gain a +1 circumstance bonus on your attack rolls against the marked creature. You also get this bonus to saving throws against the attacks, spells, and effects of this creature.</p>"
+    },
+    "Effect: Cellular Regeneration": {
+      "name": "效果：细胞再生 Effect: Cellular Regeneration",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.SiVWK0ksapz0Y8UU]{细胞再生}赋予</p><p>你获得等同于你等级一半的再生。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.SiVWK0ksapz0Y8UU]{Cellular Regeneration}</p><p>You gain regeneration equal to half your level.</p>"
+    },
+    "Effect: Deadlift": {
+      "name": "效果：硬拉 Effect: Deadlift",
+      "description": "<p>在变为负重之前，你能比平常多携带 4 Bulk。达到专家时可携带的额外数量增加到 6，大师时为 8，传奇时为 10。</p>\n<p>You can carry 4 more Bulk than normal before becoming encumbered. The amount you can carry increases to 6 at expert, 8 at master, and 10 at legendary.</p>"
+    },
+    "Spell Effect: Skyfire Wings": {
+      "name": "法术效果：天火之翼 Spell Effect: Skyfire Wings",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{Skyfire Wings}赋予</p><p>你获得等同于你的速度或20英尺的飞行速度，取其较高者。你的翅膀是徒手攻击，造成1d8点火焰伤害，并具有backswing、reach和无武装特征；在重击时，你的翼击目标会受到2点持续电击伤害。</p><hr /><p><strong>升阶（5环）</strong> 你的翅膀造成2d8点火焰伤害，并在重击时造成4点持续电击伤害。持续时间增加至5分钟。</p><p><strong>升阶（7环）</strong> 你的翅膀造成3d8点火焰伤害，并在重击时造成6点持续电击伤害。持续时间增加至1小时。</p><p><strong>升阶（9环）</strong> 你的翅膀造成4d8点火焰伤害，并在重击时造成8点持续电击伤害。持续时间增加至8小时。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{Skyfire Wings}</p><p>You gain a fly Speed equal to your Speed or 20 feet. Your wings are unarmed attacks that deal 1d8 fire damage and has the backswing, reach, and unarmed traits; On a critical hit, a target of your wing attack takes 2 persistent electricity damage.</p><hr /><p><strong>Heightened (5th)</strong> Your wings do 2d8 fire damage and 4 persistent electricity damage on a critical hit. The duration increases to 5 minutes.</p><p><strong>Heightened (7th)</strong> Your wings do 3d8 fire damage and 6 persistent elecricity damage on a critical hit. The duration increases to 1 hour.</p><p><strong>Heightened (9th)</strong> Your wings do 4d8 fire damage and 8 persistent electricity damage on a critical hit. The duration increases to 8 hours.</p>"
+    },
+    "Effect: Constellation Vortex": {
+      "name": "效果：星座涡旋 Effect: Constellation Vortex"
+    },
+    "Effect: Relentless Endurance": {
+      "name": "效果：不屈耐力 Effect: Relentless Endurance",
+      "description": "<p>你获得 1d8+4 临时生命值，并且你的等级每超过 2 级 4 级，便额外获得 1d8+4 临时生命值。</p>\n<p>You gain 1d8+4 temporary hit points, plus an additional 1d8+4 for every 4 levels you have beyond 2nd level.</p>"
+    },
+    "Effect: Cloud Storage": {
+      "name": "效果：云端储存 Effect: Cloud Storage",
+      "description": "<p>追踪你当前可用的记忆库</p>\n<p>Tracks your currently available memory bank</p>"
+    },
+    "Effect: Improvised Mastery": {
+      "name": "效果：即兴精通 Effect: Improvised Mastery",
+      "description": "<p><strong>频率</strong> 每天一次</p><p><strong>触发条件</strong> 你将要使用一项你尚未拥有大师熟练等级的技能进行一次技能检定，但你还没有掷骰。</p><hr /><p>你相信自己的直觉会帮助你渡过难关。你在此次技能检定中，对触发该效果的技能获得大师熟练等级。</p>\n<p><strong>Frequency</strong> once per day</p><p><strong>Trigger</strong> You are about to attempt a skill check using a skill that you don't have master proficiency in, but you haven't rolled yet.</p><hr /><p>You trust your instincts to see you through. You gain master proficiency with the triggering skill for the skill check.</p>"
+    },
+    "Effect: Medpatch": {
+      "name": "效果：医疗贴片 Effect: Medpatch",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.B0FiYMxy7iDiHh48]{医疗贴片（商业型）}、@UUID[Compendium.sf2e.equipment.Item.HWHdAQArhRauTpm6]{医疗贴片（战术型）}、@UUID[Compendium.sf2e.equipment.Item.55nSLw1aQ0K0rK2L]{医疗贴片（先进型）}、@UUID[Compendium.sf2e.equipment.Item.6VDHl7xkSp8Sc8yy]{医疗贴片（卓越型）}、@UUID[Compendium.sf2e.equipment.Item.KFjPEG7kw733splu]{医疗贴片（菁英型）}、@UUID[Compendium.sf2e.equipment.Item.dJyYifMFfgbIwT3c]{医疗贴片（终极型）}赋予</p><p>你获得对抗疾病和毒素的物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.B0FiYMxy7iDiHh48]{Medpatch (Commercial)}, @UUID[Compendium.sf2e.equipment.Item.HWHdAQArhRauTpm6]{Medpatch (Tactical)}, @UUID[Compendium.sf2e.equipment.Item.55nSLw1aQ0K0rK2L]{Medpatch (Advanced)}, @UUID[Compendium.sf2e.equipment.Item.6VDHl7xkSp8Sc8yy]{Medpatch (Superior)}, @UUID[Compendium.sf2e.equipment.Item.KFjPEG7kw733splu]{Medpatch (Elite)}, @UUID[Compendium.sf2e.equipment.Item.dJyYifMFfgbIwT3c]{Medpatch (Ultimate)}</p><p>You gain an item bonus against disease and poisons.</p>"
+    },
+    "Glitching": {
+      "name": "故障 Glitching",
+      "description": "<p>故障是一种会影响具有科技特征的物体或生物的状态，并且它总是带有一个数值。处于故障状态的生物或物体会同时承受一系列妨害性效果，并不时发生卡顿。如果你的装备处于故障状态，且你进行任何涉及该装备的动作，你必须进行一次 @Check[type:flat|dc:10] 以确定会发生什么。如果你自身处于故障状态，则你必须在每轮开始时进行这次平检。</p>\n<hr />\n<p><strong>大成功</strong> 将故障值减少 1。</p>\n<p><strong>成功</strong> 你如常行动，或如常使用你的装备。</p>\n<p><strong>失败</strong> 你所有检定和 DC 都承受等于你的故障值，或你试图使用之物品上的故障值的物品减值。</p>\n<p><strong>大失败</strong> 在本轮中，你视为 @UUID[Compendium.sf2e.conditions.Item.dfCMdR4wnpbYNTix]{Stunned 1}。或者，你试图使用的物体无法运作，且你失去为尝试使用它而采取的动作。</p>\n<p>Glitching is a condition that affects objects or creatures with the tech trait, and it always includes a value. A glitching creature or object experiences a combination of debilitating effects and moments of seizing up. If you have glitching equipment and take any action involving that equipment, you must attempt a @Check[type:flat|dc:10] to see what occurs. If you have the glitching condition on yourself, you must make this flat check at the beginning of every round.</p>\n<hr />\n<p><strong>Critical Success</strong> Reduce the glitching value by 1.</p>\n<p><strong>Success</strong> You act as normal or use your equipment as normal.</p>\n<p><strong>Failure</strong> You take an item penalty on all your checks and DCs equal to your glitching value or the glitching value on the item you're attempting to use.</p>\n<p><strong>Critical Failure</strong> You count as @UUID[Compendium.sf2e.conditions.Item.dfCMdR4wnpbYNTix]{Stunned 1} for the round. Alternatively, the object you tried to use doesn't function, and you lose the actions you took to attempt to use it.</p>"
+    },
+    "Spell Effect: Song of the Spheres": {
+      "name": "法术效果：天球之歌 Spell Effect: Song of the Spheres",
+      "description": "<p>由<em>@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.L5xqxo9onL2zcMCe]{天球之歌}</em>赋予</p>\n<hr />\n<p><strong>严重成功</strong> 同成功，但效果持续3轮。</p>\n<p><strong>成功</strong> 你和所有建立链接的盟友在1轮内的攻击检定和伤害检定获得+1状态加值。</p>\n<p><strong>失败</strong> 同成功，但只影响你和范围内一名你所选择的建立链接的盟友。</p>\n<p><strong>严重失败</strong> 该法术没有效果。</p>\n<p>Granted by <em>@UUID[Compendium.starfinder-field-test-for-pf2e.sf2e-spells.Item.L5xqxo9onL2zcMCe]{Song of the Spheres}</em></p>\n<hr />\n<p><strong>Critical Success</strong> As success, except the effect lasts 3 rounds.</p>\n<p><strong>Success</strong> You and all bonded allies gain a +1 status bonus to attack rolls and damage rolls for 1 round.</p>\n<p><strong>Failure</strong> As success, except this only affects you and one selected bonded ally within range.</p>\n<p><strong>Critical Failure</strong> The spell has no effect.</p>"
+    },
+    "Effect: Rally the Troops": {
+      "name": "效果：集结部队 Effect: Rally the Troops",
+      "description": "<p>你获得5点临时生命值；如果其在移动结束时位于指挥官相邻的位置，则获得双倍数量的临时生命值。</p>\n<p>You gain 5 temporary Hit Points, or double that number of temporary Hit Points if they end their movement adjacent to the commander.</p>"
+    },
+    "Effect: Manifest Energy Wings": {
+      "name": "效果：显现能量之翼 Effect: Manifest Energy Wings",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.NEYVJWYtgl0rRSwg]{显化能量之翼}赋予</p><p>你获得等同于你的陆地速度再加 10 英尺的飞行速度。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.NEYVJWYtgl0rRSwg]{Manifest Energy Wings}</p><p>You gain a fly Speed equal to your land Speed plus 10 feet.</p>"
+    },
+    "Effect: Telekinetic Sprint": {
+      "name": "效果：心灵动力冲刺 Effect: Telekinetic Sprint",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.r1bUsyDwcwuN3MUG]{念动冲刺}赋予</p><p>你获得对你的各项速度的 +5 英尺状态加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.r1bUsyDwcwuN3MUG]{Telekinetic Sprint}</p><p>You gain a +5-foot status bonus to your Speeds.</p>"
+    },
+    "Effect: Bullet Fever": {
+      "name": "效果：子弹热 fever Effect: Bullet Fever",
+      "description": "<ul><li>你获得等同于你的等级加上你的关键属性调整值数量的临时生命值。</li><li>你自动对所有目标施加精准伤害，如同你正在瞄准一般。</li><li>你的 AC 承受 –2 处境减值。</li><li>你的意志豁免承受 –2 处境减值。</li></ul>\n<ul><li>You gain a number of temporary Hit Points equal to your level plus your key attribute modifier.</li><li>You automatically apply precision damage to all targets as though you were Aiming.</li><li>You take a –2 circumstance penalty to AC.</li><li>You take a –2 circumstance penalty to Will saves.</li></ul>"
+    },
+    "Effect: Holo-Roger": {
+      "name": "效果：全息“罗杰” Effect: Holo-Roger",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.8zWFGKRXg1SxIwFH]{Holo-Roger} 赋予</p><p>你在进行用于胁迫的威吓检定时获得 +1 处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.8zWFGKRXg1SxIwFH]{Holo-Roger}</p><p>You gain a +1 circumstance bonus to Intimidation checks to Coerce.</p>"
+    },
+    "Spell Effect: Skyfire Wings (5 Minutes)": {
+      "name": "法术效果：天火之翼（5分钟） Spell Effect: Skyfire Wings (5 Minutes)",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{天火之翼}赋予</p><p>你获得等同于你的速度或20英尺的飞行速度。你的翅膀是徒手攻击，造成2d8火焰伤害，并具有backswing、reach和无武装特征；若造成重击，你的翅膀攻击的目标会受到4点持续电击伤害。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{Skyfire Wings}</p><p>You gain a fly Speed equal to your Speed or 20 feet. Your wings are unarmed attacks that deal 2d8 fire damage and has the backswing, reach, and unarmed traits; On a critical hit, a target of your wing attack takes 4 persistent electricity damage.</p>"
+    },
+    "Spell Effect: Anthem": {
+      "name": "法术效果：赞歌 Spell Effect: Anthem",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.smCC1LNhMb7Z1lrU]{颂歌}赋予</p><p>你对导致着迷或困惑的效果进行攻击检定、伤害掷骰和豁免时，获得 +1 状态加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.smCC1LNhMb7Z1lrU]{Anthem}</p><p>You gain a +1 status bonus to attack rolls, damage rolls, and saves against effects that cause fascinated or confusion.</p>"
+    },
+    "Effect: Elemental Harmony": {
+      "name": "效果：元素和谐 Effect: Elemental Harmony",
+      "description": "<p>你额外造成 1d4 点持续伤害。</p>\n<p>You deal an additional 1d4 persistent damage.</p>"
+    },
+    "Effect: Mobile Aim (Ephemeral)": {
+      "name": "效果：移动瞄准（短暂） Effect: Mobile Aim (Ephemeral)",
+      "description": "<p>你获得的 AC 掩护加值减少 1。</p>\n<p>Your cover bonus to AC is reduced by 1.</p>"
+    },
+    "Effect: Get 'Em!": {
+      "name": "效果：干掉他们！ Effect: Get 'Em!",
+      "description": "<p>该生物的AC和反射豁免承受–1处境减值。</p><p><strong>以身作则</strong> 如果你在本回合结束前攻击了你所选择的目标，你就会揭示敌人防御中的弱点。你对该目标的伤害掷骰获得等于1 + 你魅力调整值一半的处境加值，而你的盟友对该目标的伤害掷骰获得+1处境加值。随着你的特使等级提高，此伤害也会增加。在5级、10级、15级和20级时，伤害提高1。</p>\n<p>That creature takes a –1 circumstance penalty to AC and Reflex saves.</p><p><strong>Lead by Example</strong> If you attack the target you select before the end of your turn, you reveal a weak point in your foe's defenses. You gain a circumstance bonus to damage rolls against the target equal to 1 + half your Charisma modifier, and your allies gain a +1 circumstance bonus to damage rolls against the target. As your envoy level increases, so does this damage. Increase the damage by 1 at 5th, 10th, 15th, and 20th levels.</p>"
+    },
+    "Effect: Adaptive Locomotion": {
+      "name": "效果：自适应移动方式 Effect: Adaptive Locomotion",
+      "description": "<p>如果你选择鳍肢，你获得 20 英尺的游泳速度。如果你选择带钩的拟足，你获得 20 英尺的攀爬速度。</p>\n<p>If you select flippers, you gain a swim Speed of 20 feet. If you select hooked pseudopods, you gain a climb Speed of 20 feet.</p>"
+    },
+    "Effect: Bolstering Biopod": {
+      "name": "效果：强化生体舱 Effect: Bolstering Biopod",
+      "description": "<p>样本62获得5点临时生命值</p>\n<p>Sample 62 gains 5 temporary Hit Points</p>"
+    },
+    "Spell Effect: Genetic Regeneration": {
+      "name": "法术效果：基因再生 Spell Effect: Genetic Regeneration",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.s6J1Q0e28Gb42epQ]{基因再生}赋予</p><p>你获得等于该法术环阶两倍的再生能力。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.s6J1Q0e28Gb42epQ]{Genetic Regeneration}</p><p>You gain regeneration equal to twice the spell rank.</p>"
+    },
+    "Spell Effect: Detect Thoughts": {
+      "name": "法术效果：侦测思想 Spell Effect: Detect Thoughts",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.qOLMHvkAGsVYLhtn]{侦测思想}赋予</p><p>当该法术被维持时，你在感知检定上获得+1状态加值，以感应目标的动机。意志豁免成功的目标可阻止此效果。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.qOLMHvkAGsVYLhtn]{Detect Thoughts}</p><p>You gain a +1 status bonus to Perception to Sense the target's Motives while the spell is sustained. A target who succeeds at its Will save prevents this.</p>"
+    },
+    "Effect: Solar Weapon (Twin)": {
+      "name": "效果：太阳武器（双持） Effect: Solar Weapon (Twin)",
+      "description": "<p>你塑造出你的双生太阳武器。</p>\n<p>You forge your twin solar weapon.</p>"
+    },
+    "Effect: Celebrity Serum": {
+      "name": "效果：名人血清 Effect: Celebrity Serum",
+      "description": "<p>由 @UUID[Compendium.sf2e.equipment.Item.JgVv4m4sh9faVSDD]{名人血清}赋予</p><p>你获得对表演检定的 +1 物品加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.equipment.Item.JgVv4m4sh9faVSDD]{Celebrity Serum}</p><p>You gain a +1 item bonus to Performance checks.</p>"
+    },
+    "Effect: Brace For Impact": {
+      "name": "效果：准备承受冲击 Effect: Brace For Impact",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.gZr207z8Q7AuH2RT]{Steel Yourselves!}赋予</p><p>你获得等于来源的魅力调整值 + 其等级一半的临时生命值</p><p><strong>以身作则</strong> 如果你在你的回合结束前花费1个动作来 Brace For Impact，则你和任何在你的下个回合开始前 Brace for Impact 的盟友也会获得对抗造成伤害的效果时豁免检定的 +1 状态加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.gZr207z8Q7AuH2RT]{Steel Yourselves!}</p><p>You gain Temporary Hit Points equal to the origin's Charisma modifier + half their level</p><p><strong>Lead by Example</strong> If you spend an action to Brace For Impact before the end of your turn, you and any ally who Braces for Impact before the start of your next turn also gain a +1 status bonus to saving throws against effects that deal damage.</p>"
+    },
+    "Effect: You'll Have to Go Through Me!": {
+      "name": "效果：你得先过我这关！ Effect: You'll Have to Go Through Me!",
+      "description": "<p>你获得@UUID[Compendium.sf2e.feats.Item.M8kAxAXWRRWMRTzT]{活体护盾}反应。</p>\n<p>You gain the @UUID[Compendium.sf2e.feats.Item.M8kAxAXWRRWMRTzT]{Living Shield} reaction.</p>"
+    },
+    "Effect: Confounding Disquisition": {
+      "name": "效果：惑乱论述 Effect: Confounding Disquisition",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.WR4Ziq4PIq2HFWyv]{混淆论述}赋予</p><p>你在察觉检定和意志豁免上承受 –1 状态减值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.WR4Ziq4PIq2HFWyv]{Confounding Disquisition}</p><p>You take a –1 status penalty to Perception checks and Will saves.</p>"
+    },
+    "Effect: Meditative Recovery": {
+      "name": "效果：冥想恢复 Effect: Meditative Recovery",
+      "description": "<p>你对抗精神效果的豁免检定获得+1处境加值。</p>\n<p>You gain a +1 circumstance bonus to saving throws against mental effects.</p>"
+    },
+    "Effect: Elemental Perfect Harmony": {
+      "name": "效果：元素至臻和谐 Effect: Elemental Perfect Harmony",
+      "description": "<p>你获得在秘学者每日准备期间选择的两种元素的抗性。</p>\n<p>You gain resistance to two elements chosen during the mystic's daily preparations.</p>"
+    },
+    "Effect: Willful Defiance": {
+      "name": "效果：意志反抗 Effect: Willful Defiance",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.NUZClDNinM6oVgJN]{意志反抗} 赋予</p><p>你对抗被标记生物的攻击、法术和其他效果时，护甲等级和豁免检定获得+1处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.NUZClDNinM6oVgJN]{Willful Defiance}</p><p>You gain a +1 circumstance bonus to Armor Class and saving throws against the marked creature's attacks, spells, and other effects.</p>"
+    },
+    "Effect: Size of the Ancients": {
+      "name": "效果：远古者的体型 Effect: Size of the Ancients",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.ri5qV0g9RwwWLiBk]{远古者之体型}赋予</p><p>你的体型变为超巨型。你的触及增加 5 英尺（若你是舰生龙人，则增加 10 英尺），并且你获得近战伤害 +4 状态加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.ri5qV0g9RwwWLiBk]{Size of the Ancients}</p><p>You grow to size Huge. Your reach increases by 5 feet (or by 10 feet if you are a shipborn dragonkin), and you gain a +4 status bonus to melee damage.</p>"
+    },
+    "Spell Effect: Skyfire Wings (8 Hours)": {
+      "name": "法术效果：天火之翼（8小时） Spell Effect: Skyfire Wings (8 Hours)",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{天火之翼} 赋予</p><p>你获得等同于你速度或 20 尺的飞行速度。你的翼膀是徒手攻击，造成 4d8 火焰伤害，并具有 backswing、reach 和 无武装 特征；在重击时，你的翼膀攻击目标会受到 8 点持续电击伤害。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{Skyfire Wings}</p><p>You gain a fly Speed equal to your Speed or 20 feet. Your wings are unarmed attacks that deal 4d8 fire damage and has the backswing, reach, and unarmed traits; On a critical hit, a target of your wing attack takes 8 persistent electricity damage.</p>"
+    },
+    "Effect: Dual Aim": {
+      "name": "效果：双重瞄准 Effect: Dual Aim",
+      "description": "<p>你瞄准第二个标记。</p>\n<p>You Aim at a second mark.</p>"
+    },
+    "Effect: Get in There!": {
+      "name": "效果：冲进去！ Effect: Get in There!",
+      "description": "<p>你的速度获得 +5 英尺的状态加值。到达 7 级、12 级和 17 级时，该距离额外增加 5 英尺。</p>\n<p>You gain a +5-foot status bonus to Speed. Increase the distance by an additional 5 feet at 7th level, 12th level, and 17th level.</p>"
+    },
+    "Effect: Show 'Em What You Got!": {
+      "name": "效果：让他们见识见识你的本事！ Effect: Show 'Em What You Got!",
+      "description": "<p>你的盟友获得等同于你等级的临时生命值。</p>\n<p>Your allies gain temporary Hit Points equal to your level.</p>"
+    },
+    "Effect: Vent Gas": {
+      "name": "效果：排放气体 Effect: Vent Gas",
+      "description": "<p>你的所有速度获得 +10 尺的处境加值。</p>\n<p>You gain a +10-foot circumstance bonus to all your Speeds.</p>"
+    },
+    "Effect: Unfurl Wings": {
+      "name": "效果：展开双翼 Effect: Unfurl Wings",
+      "description": "<p>你获得等同于你的陆地速度外加10英尺的飞行速度。</p>\n<p>You gain a fly Speed equal to your land Speed plus 10 feet.</p>"
+    },
+    "Effect: Skillful Encouragement": {
+      "name": "效果：熟练鼓舞 Effect: Skillful Encouragement",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.EFkWRLQwain42TFm]{娴熟鼓励}赋予</p><p>你获得技能检定的 +2 处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.EFkWRLQwain42TFm]{Skillful Encouragement}</p><p>You gain a +2 circumstance bonus to skill checks.</p>"
+    },
+    "Effect: Got 'Em!": {
+      "name": "效果：干掉他们！ Effect: Got 'Em!",
+      "description": "<p>你获得等同于源等级一半数量的临时生命值；若该次打击为重击，则改为等同于源等级的临时生命值。</p>\n<p>You gain a number of temporary Hit Points equal to half the origin level, or equal to the origin level if the Strike was a critical hit.</p>"
+    },
+    "Effect: Watch Out!": {
+      "name": "效果：当心！ Effect: Watch Out!",
+      "description": "<p>你向盟友大声示警，使其对触发此次反应的攻击的 AC 获得 +2 处境加值。</p>\n<p>You shout a warning to your ally, granting them a +2 circumstance bonus to AC against the triggering attack.</p>"
+    },
+    "Effect: Mobile Aim": {
+      "name": "效果：移动瞄准 Effect: Mobile Aim",
+      "description": "<p>艾兰指挥官用所选武器进行的攻击会额外造成 2d6 精确伤害，并使目标对 AC 的掩护加值减少 1。</p>\n<p>Commander Eiran's attacks made with the chosen weapon deal an additional 2d6 precision damage and reduce the target's cover bonus to AC by 1.</p>"
+    },
+    "Effect: Telepredict": {
+      "name": "效果：心灵预知 Effect: Telepredict",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.bqQ80aCjgigKSJMY]{Telepredict} 赋予</p><p>你对该生物进行的欺瞒检定和威吓检定获得 +1 处境加值，对抗目标具有恐惧特征的效果所进行的豁免也获得该加值。若你对目标造成精神伤害，则此加值提高至 +2。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.bqQ80aCjgigKSJMY]{Telepredict}</p><p>You gain a +1 circumstance bonus to Deception checks and Intimidation checks targeting the creature, and to saves against the target's effects that have the fear trait. If you deal mental damage to the target, increase this bonus to +2.</p>"
+    },
+    "Effect: Force Field": {
+      "name": "效果：力场 Effect: Force Field",
+      "description": "<p>用于追踪你的力场生命值的效果。</p>\n<p>Tracking effect for your force field's HP.</p>"
+    },
+    "Effect: Unbound Mind": {
+      "name": "效果：无拘心灵 Effect: Unbound Mind",
+      "description": "<p>你对抗精神效果的豁免检定获得 +1 处境加值。</p>\n<p>You gain a +1 circumstance bonus to saving throws against mental effects.</p>"
+    },
+    "Effect: Sway the Heart, Stoke the Spirit": {
+      "name": "效果：动摇心弦，激发精神 Effect: Sway the Heart, Stoke the Spirit",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.ypSQT2urAcrgaoQ1]{动摇心灵，激发精神}赋予</p><p>你获得意志豁免检定的+1处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.ypSQT2urAcrgaoQ1]{Sway the Heart, Stoke the Spirit}</p><p>You gain a +1 circumstance bonus to Will saves.</p>"
+    },
+    "Effect: Lead the Charge": {
+      "name": "效果：率先冲锋 Effect: Lead the Charge",
+      "description": "<p>你对七芒星卫队指挥官打击的目标进行攻击时，获得+1处境加值。</p>\n<p>You gain a +1 circumstance bonus to attack the target of the Sihedron Guard Commander's strike.</p>"
+    },
+    "Effect: Magnetic Field": {
+      "name": "效果：磁场 Effect: Magnetic Field",
+      "description": "<p>在灵光内使用的具有科技特征的物品，使用这些物品进行的所有检定都承受 –1 情况减值</p>\n<p>Items with the tech trait used within the aura take a –1 circumstance penalty to all checks made using them</p>"
+    },
+    "Effect: Get 'Em! (Lead by Example)": {
+      "name": "效果：给我上！（以身作则） Effect: Get 'Em! (Lead by Example)",
+      "description": "<p>短暂效果。</p><p>如果你在自己回合结束前攻击了你所选定的目标，你就会揭露敌人防御中的弱点。你对该目标的伤害掷骰获得等于 1 + 你魅力调整值一半的处境加值，而你的盟友对该目标的伤害掷骰获得 +1 处境加值。随着你的特使等级提升，该伤害也会随之提高。在 5级、10级、15级和20级时，该伤害各增加 1。</p>\n<p>Ephermeral effect.</p><p>If you attack the target you select before the end of your turn, you reveal a weak point in your foe's defenses. You gain a circumstance bonus to damage rolls against the target equal to 1 + half your Charisma modifier, and your allies gain a +1 circumstance bonus to damage rolls against the target. As your envoy level increases, so does this damage. Increase the damage by 1 at 5th, 10th, 15th, and 20th levels.</p>"
+    },
+    "Effect: Enraging Presence": {
+      "name": "效果：激怒气场 Effect: Enraging Presence",
+      "description": "<p>你在伤害掷骰上获得+2状态加值。</p>\n<p>You gain a +2 status bonus to damage rolls.</p>"
+    },
+    "Effect: Focus Senses": {
+      "name": "效果：专注感官 Effect: Focus Senses",
+      "description": "<p>由@UUID[Compendium.sf2e.actions.Item.0vqXr3SYakIa19k3]{专注感官}赋予</p><p>你获得30英尺回声定位（精确）。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.0vqXr3SYakIa19k3]{Focus Senses}</p><p>You gain echolocation (precise) 30 feet.</p>"
+    },
+    "Effect: Effortless Influencer": {
+      "name": "效果：毫不费力的影响者 Effect: Effortless Influencer",
+      "description": "<p>你在下一次使用所选技能进行的检定中获得+1状态加值（若你的检定为重度成功，则改为获得+2加值）。</p>\n<p>Your gain a +1 status bonus to the next check you attempt with the chosen skill (or a +2 bonus if your check was a critical success).</p>"
+    },
+    "Effect: Shift Energy": {
+      "name": "效果：转移能量 Effect: Shift Energy",
+      "description": "<p>你的下一个法术会造成一种不同类型的伤害，其类型通过掷一个 d6 决定，具体如下表所示。这适用于该法术造成的所有伤害。</p><table class=\"pf2-table\"><thead><tr><th>D6</th><th>伤害类型</th></tr></thead><tbody><tr><td>1</td><td>强酸</td></tr><tr><td>2</td><td>寒冷</td></tr><tr><td>3</td><td>火焰</td></tr><tr><td>4</td><td>电击</td></tr><tr><td>5</td><td>虚空</td></tr><tr><td>6</td><td>音波</td></tr></tbody></table>\n<p>Your next spell deals a different type of damage, determined by rolling a d6, as detailed on the table below. This applies to all damage the spell deals.</p><table class=\"pf2-table\"><thead><tr><th>D6</th><th>Damage Type</th></tr></thead><tbody><tr><td>1</td><td>acid</td></tr><tr><td>2</td><td>cold</td></tr><tr><td>3</td><td>fire</td></tr><tr><td>4</td><td>electricity</td></tr><tr><td>5</td><td>void</td></tr><tr><td>6</td><td>sonic</td></tr></tbody></table>"
+    },
+    "Spell Effect: Wild Bond": {
+      "name": "法术效果：野性联结 Spell Effect: Wild Bond",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.ssOpTABjuHAqNTPu]{Wild Bond} 赋予</p><hr /><p>你汲取宇宙生命编码的力量，将另一种活体生物的原初精华注入目标体内，并赋予其以下能力之一。</p><ul><li>15 英尺的掘穴速度</li><li>20 英尺的攀爬速度</li><li>20 英尺的飞行速度</li><li>25 英尺的游泳速度</li><li>40 英尺的速度</li><li>一种造成 @Damage[1d8[piercing]] 伤害的颚部徒手攻击</li><li>一种造成 @Damage[1d6[slashing]] 伤害且具有灵巧和娴熟特征的爪击徒手攻击</li><li>黑暗视觉</li></ul><hr /><p><strong>升阶（3环）</strong> 这些攻击造成的伤害增加为两个骰子。</p><p><strong>升阶（6环）</strong> 这些攻击造成的伤害增加为三个骰子。</p><p><strong>升阶（9环）</strong> 这些攻击造成的伤害增加为四个骰子。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.ssOpTABjuHAqNTPu]{Wild Bond}</p><hr /><p>Tapping into the universal life code, you infuse the target with the primal essence of another living creature and grant them one of the following abilities.</p><ul><li>A burrow Speed of 15 feet</li><li>A climb Speed of 20 feet</li><li>A fly Speed of 20 feet</li><li>A swim Speed of 25 feet</li><li>A Speed of 40 feet</li><li>A jaw unarmed attack that deals @Damage[1d8[piercing]] damage</li><li>A claw unarmed attack that deals @Damage[1d6[slashing]] damage and has the agile and finesse traits</li><li>Darkvision</li></ul><hr /><p><strong>Heightened (3rd)</strong> The damage dealt by the attacks increases to two dice.</p><p><strong>Heightened (6th)</strong> The damage dealt by the attacks increases to three dice.</p><p><strong>Heightened (9th)</strong> The damage dealt by the attacks increases to four dice.</p>"
+    },
+    "Effect: Shielding Arrogance": {
+      "name": "效果：傲慢庇护 Effect: Shielding Arrogance",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.wI0g2nRfu2d0YFAd]{Shielding Arrogance} 赋予</p><p>你获得等同于你等级的临时生命值。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.wI0g2nRfu2d0YFAd]{Shielding Arrogance}</p><p>You gain temporary Hit Points equal to your level.</p>"
+    },
+    "Spell Effect: Reorient": {
+      "name": "法术效果：重新定向 Spell Effect: Reorient",
+      "description": "<p>目标失去@UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{措手不及}状态（如果其具有该状态）。目标对措手不及状态免疫，直到其下个回合开始为止，即使该状态本会因情境而被施加，例如被夹击或@UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{伏地}。</p>\n<p>The target loses the @UUID[Compendium.sf2e.conditions.Item.AJh5ex99aV6VTggg]{Off-Guard} condition if they have it. The target becomes immune to the off-guard condition until the start of their next turn, even if it would be circumstantially applied, such as being flanked or @UUID[Compendium.sf2e.conditions.Item.j91X7x0XSomq8d60]{Prone}.</p>"
+    },
+    "Effect: Arcane Intuition": {
+      "name": "效果：奥术直觉 Effect: Arcane Intuition",
+      "description": "<p>你在对抗法术和持续中的魔法效果的反制检定时获得 +1 处境加值。如果你的奥秘学达到传奇，则改为获得 +2 处境加值。</p>\n<p>You gain a +1 circumstance bonus to counteract checks against spells and ongoing magic effects. If you are legendary in Arcana, you gain a +2 circumstance bonus instead.</p>"
+    },
+    "Effect: Sparkling Performance": {
+      "name": "效果：闪耀演出 Effect: Sparkling Performance",
+      "description": "<p>你在20英尺半径内施放微光。如果你的表演达到传奇，你可以在20英尺半径内施放明亮光照。</p>\n<p>You cast dim light in a 20-foot radius. If you are legendary in Performance, you can cast bright light in a 20-foot radius.</p>"
+    },
+    "Effect: Redirect Energy": {
+      "name": "效果：重定向能量 Effect: Redirect Energy",
+      "description": "<p>所选武器会额外造成 1d4 点触发伤害类型的伤害。在此期间，你会失去由“完美平衡”赋予你的对此触发伤害类型的任何抗性。</p>\n<p>The selected weapon deals an additional 1d4 damage of the triggering damage type. During this time, you lose any resistance to the triggering damage type granted to you by Perfectly Balanced.</p>"
+    },
+    "Effect: Soothing Anchor": {
+      "name": "效果：抚慰之锚 Effect: Soothing Anchor",
+      "description": "<p>你获得等同于你等级的临时生命值。</p>\n<p>You gain temporary Hit Points equal to your level.</p>"
+    },
+    "Effect: Bolstered by Battle": {
+      "name": "效果：受战斗鼓舞 Effect: Bolstered by Battle",
+      "description": "<p>你获得等同于你等级数量的临时生命值。</p>\n<p>You gain a number of temporary Hit Points equal to your level.</p>"
+    },
+    "Effect: Sharpshooter": {
+      "name": "效果：神枪手 Effect: Sharpshooter",
+      "description": "<p>你从次级或标准掩护获得的 AC 加值减少 1。</p>\n<p>Your AC bonus from lesser or standard cover is reduced by 1.</p>"
+    },
+    "Effect: Telekinetic Titan": {
+      "name": "效果：念动巨像 Effect: Telekinetic Titan",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.Cj9UI2RZL6WBJ6EB]{心灵动能泰坦}赋予</p><p>你在陷入负重前可携带相当于 7 + 所选属性调整值的负重，且你总共可以持有和携带 12 + 所选属性调整值的负重。你获得@UUID[Compendium.sf2e.actions.Item.gNUrQ8jimAvAA0xg]{心灵动能抬举}动作。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.Cj9UI2RZL6WBJ6EB]{Telekinetic Titan}</p><p>You can carry Bulk equal to 7 + the chosen attribute modifier before becoming encumbered, and you can hold and carry a total Bulk of 12 + the chosen attribute modifier. You gain the @UUID[Compendium.sf2e.actions.Item.gNUrQ8jimAvAA0xg]{Telekinetic Lift} action.</p>"
+    },
+    "Effect: Lead the Charge (Bonus)": {
+      "name": "效果：率先冲锋（加值） Effect: Lead the Charge (Bonus)",
+      "description": "<p>你对七芒星卫队指挥官打击的目标进行攻击时获得 +1 处境加值。</p>\n<p>You gain a +1 circumstance bonus to attack the target of the Sihedron Guard Commander's strike.</p>"
+    },
+    "Effect: Quantum Aura": {
+      "name": "效果：量子灵光 Effect: Quantum Aura",
+      "description": "<p>每次你使用“扭曲现实”来激活你的量子场时，你都可以选择让你的量子场成为环绕你的、并随你移动的灵光。如果你这样做，你的“扭曲现实”动作获得灵光特征，而你创造的量子场则成为以你为目标、半径10英尺的散发。</p>\n<p>Each time you use Warp Reality to activate your quantum field, you can choose for your quantum field to be an aura around you that moves with you. If you do, your Warp Reality action gains the aura trait and the quantum field you create is a 10-foot-radius emanation targeting you.</p>"
+    },
+    "Effect: Undead Slayer": {
+      "name": "效果：不死生物杀手 Effect: Undead Slayer",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.kC42tjY689rma6Uc]{Undead Slayer}赋予</p><p>你获得所有武器和徒手攻击的重击专精效果，但仅适用于你对被标记生物进行的攻击。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.kC42tjY689rma6Uc]{Undead Slayer}</p><p>You gain access to the critical specialization effects of all weapons and unarmed attacks for attacks you make against the marked creature.</p>"
+    },
+    "Effect: Meandering Mind": {
+      "name": "效果：漫游心智 Effect: Meandering Mind",
+      "description": "<p>你在豁免检定上获得 +2 处境加值。如果你在对抗精神效果的豁免检定中掷出成功，则改为获得重度成功。</p>\n<p>You gain a +2 circumstance bonus to saving throws. If you roll a success at a saving throw against a mental effect, you get a critical success instead.</p>"
+    },
+    "Effect: Solar Weapon": {
+      "name": "效果：太阳武器 Effect: Solar Weapon",
+      "description": "<p>你锻造出你的太阳武器。</p>\n<p>You forge your solar weapon.</p>"
+    },
+    "Effect: Hang In There!": {
+      "name": "效果：坚持住！ Effect: Hang In There!",
+      "description": "<p>你获得临时生命值。</p>\n<p>You gain temporary hit points.</p>"
+    },
+    "Effect: Broken Cycle": {
+      "name": "效果：破碎循环 Effect: Broken Cycle",
+      "description": "<p>你获得 cold 或 fire 5 点抗性。</p>\n<p>You gain resistance 5 to cold or fire.</p>"
+    },
+    "Effect: Search High and Low": {
+      "name": "效果：四处搜寻 Effect: Search High and Low",
+      "description": "<p>你在进行@UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{寻找}的察觉检定时获得+2处境加值。该加值在7级时提高至+3，12级时提高至+4，17级时提高至+5。</p>\n<p>You gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.sf2e.actions.Item.BlAOM2X92SI6HMtJ]{Seek}. Increase the bonus to +3 at 7th level, +4 at 12th level, and +5 at 17th level.</p>"
+    },
+    "Effect: Apocalypse Smite": {
+      "name": "效果：天启重击 Effect: Apocalypse Smite",
+      "description": "<p>尖牙对被标记的目标额外造成 2d8 点虚空伤害。</p>\n<p>The Fang deals an additional 2d8 void damage to the marked target.</p>"
+    },
+    "Effect: Harmonic Convergence": {
+      "name": "效果：谐波汇流 Effect: Harmonic Convergence",
+      "description": "<p>你获得等同于你等级一半的临时生命值。</p>\n<p>You gain a number of temporary Hit Points equal to half your level.</p>"
+    },
+    "Effect: Tactical Tutelage": {
+      "name": "效果：战术教导 Effect: Tactical Tutelage",
+      "description": "<p>你额外造成 2d4 点精准伤害，并使目标的 AC 掩护加值减少 1。</p>\n<p>Your deal an additional 2d4 precision damage and reduce the target's cover bonus to AC by 1.</p>"
+    },
+    "Spell Effect: Skyfire Wings (1 Hour)": {
+      "name": "法术效果：天火之翼（1小时） Spell Effect: Skyfire Wings (1 Hour)",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{天火之翼} 赋予</p><p>你获得等同于你的速度或20英尺的飞行速度。你的翅膀是造成 3d8 火焰伤害的徒手攻击，并具有 backswing、触及和无武装特征；在重击时，翼击攻击的目标会受到 6 持续电击伤害。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.VmtQlZqeraTv0Eer]{Skyfire Wings}</p><p>You gain a fly Speed equal to your Speed or 20 feet. Your wings are unarmed attacks that deal 3d8 fire damage and has the backswing, reach, and unarmed traits; On a critical hit, a target of your wing attack takes 6 persistent electricity damage.</p>"
+    },
+    "Effect: Tactical Strike": {
+      "name": "效果：战术打击 Effect: Tactical Strike",
+      "description": "<p>你获得攻击掷骰和伤害掷骰的+1状态加值。</p>\n<p>You gain a +1 status bonus to attack and damage rolls.</p>"
+    },
+    "Effect: Solar Shield": {
+      "name": "效果：太阳护盾 Effect: Solar Shield",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.hKkUTNTjRztyRSJr]{Solar Shield}赋予</p><p>你可以举起护盾，使你获得 AC +1 处境加值。护盾举起时，你可以用你的护盾使用“护盾格挡”反应。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.hKkUTNTjRztyRSJr]{Solar Shield}</p><p>You can Raise a Shield, giving you a +1 circumstance bonus to AC. While the shield is raised, you can use the Shield Block reaction with your shield.</p>"
+    },
+    "Effect: Mark": {
+      "name": "效果：标记 Effect: Mark",
+      "description": "<p>对被标记目标的短暂效果。</p>\n<p>Ephermeral effect for the marked target.</p>"
+    },
+    "Effect: Size Up": {
+      "name": "效果：体型升级 Effect: Size Up",
+      "description": "<p>如果目标认识你的资产，则你在针对你的资产或与其相关时进行的 Deception、Diplomacy、Intimidation 和 Perception 检定获得 +1 处境加值；而且你在尝试对你的资产进行 @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{回忆知识} 时也获得 +1 处境加值。</p>\n<p>You gain a +1 circumstance bonus to Deception, Diplomacy, Intimidation, and Perception checks made against your asset or in relation to your asset if the target knows your asset, and a +1 circumstance bonus to attempts to @UUID[Compendium.sf2e.actions.Item.1OagaWtBpVXExToo]{Recall Knowledge} about your asset.</p>"
+    },
+    "Effect: Kindle Blaze": {
+      "name": "效果：点燃烈焰 Effect: Kindle Blaze",
+      "description": "<p>由 @UUID[Compendium.sf2e.feats.Item.dp3jTnxAb98E2BCk]{点燃烈焰}赋予</p><p>你在30英尺半径内发出明亮光照，并使接下来的30英尺范围内成为微光。你还获得对抗具有寒冷特征的攻击、法术和其他效果时的豁免检定+1处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.dp3jTnxAb98E2BCk]{Kindle Blaze}</p><p>You shed bright light in a 30-foot radius and dim light to the next 30 feet. You also gain a +1 circumstance bonus to saves against attacks, spells, and other effects that have the cold trait.</p>"
+    },
+    "Spell Effect: Elemental Barrier": {
+      "name": "法术效果：元素屏障 Spell Effect: Elemental Barrier",
+      "description": "<p>由 @UUID[Compendium.sf2e.spells.Item.5apI8Yamauo02VYR]{元素屏障} 赋予</p><p>你获得 AC +1 处境加值。该法术生效期间，目标可以如同元素屏障是一个已举起的护盾一样，使用护盾格挡反应。与通常的护盾格挡不同，你可以对以该生物为目标施放、具有所选元素特征的法术使用该法术的反应。</p>\n<p>Granted by @UUID[Compendium.sf2e.spells.Item.5apI8Yamauo02VYR]{Elemental Barrier}</p><p>You gain +1 circumstance bonus to AC. While the spell is in effect, the target can use the Shield Block reaction as if the elemental barrier was a raised shield. Unlike a normal Shield Block, you can use the spell's reaction against spells with the chosen elemental trait cast against the creature.</p>"
+    },
+    "Effect: Electric Kalo": {
+      "name": "效果：电卡洛 Effect: Electric Kalo",
+      "description": "<p>由 @UUID[Compendium.sf2e.heritages.Item.ZAOKze0PTYPPbUua]{Electric Kalo} 赋予</p><p>你获得等同于你等级一半的电击抗性（最低为 1）。</p>\n<p>Granted by @UUID[Compendium.sf2e.heritages.Item.ZAOKze0PTYPPbUua]{Electric Kalo}</p><p>You gain electricity resistance equal to half your level (minimum 1).</p>"
+    },
+    "Effect: Cooperative": {
+      "name": "效果：协作 Effect: Cooperative",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.LHtaCR4gS4kozJyP]{合作}赋予</p><p>你在进行援助的检定时获得+2处境加值。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.LHtaCR4gS4kozJyP]{Cooperative}</p><p>You gain a +2 circumstance bonus to checks to Aid.</p>"
+    },
+    "Effect: Bring It On!": {
+      "name": "效果：放马过来！ Effect: Bring It On!",
+      "description": "<p>你获得 AC 的 –2 处境减值，并获得对所有伤害的抗性，数值等于你等级的一半。若你拥有装甲风暴战斗风格，则对于来自受压制敌人的攻击，你获得等同于你等级的抗性。</p>\n<p>You take a –2 circumstance penalty to AC and gain resistance to all damage equal to half your level. If you have the armor storm fighting style, you gain resistance equal to your level against attacks made by Suppressed enemies.</p>"
+    },
+    "Effect: Phase Shift": {
+      "name": "效果：位面转移 Effect: Phase Shift",
+      "description": "<p>该虫群变为虚体，直到其下个回合开始。它还获得对所有伤害 10 的抗性（原力、幽灵碰触或灵魂除外；对非魔法伤害的抗性加倍）。处于虚体状态时，虫群对未能通过其对“虫群噬咬”进行豁免的生物额外造成 1d10 精确伤害。</p>\n<p>The swarm becomes incorporeal until the start of its next turn. It also gains resistance 10 to all damage (except force, ghost touch, or spirit; double resistance vs non-magical). While incorporeal, the swarm deals an additional 1d10 precision damage to creatures that fail its save against Swarming Bites.</p>"
+    },
+    "Effect: Atmospheric Flight": {
+      "name": "效果：大气飞行 Effect: Atmospheric Flight",
+      "description": "<p>由@UUID[Compendium.sf2e.feats.Item.wZyBTTRM2BjC93gg]{大气飞行}赋予</p><p>你获得等同于你的地面速度再加10尺的飞行速度。</p>\n<p>Granted by @UUID[Compendium.sf2e.feats.Item.wZyBTTRM2BjC93gg]{Atmospheric Flight}</p><p>You gain a fly Speed equal to your land Speed plus 10 feet.</p>"
+    }
+  }
+}

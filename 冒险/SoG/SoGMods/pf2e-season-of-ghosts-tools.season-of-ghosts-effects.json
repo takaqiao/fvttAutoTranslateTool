@@ -1,0 +1,39 @@
+{
+    "label": "肆季鬼志效果\nSeason of Ghosts Effects",
+    "mapping": {
+        "name": "name",
+        "description": "system.description.value"
+    },
+    "folders": {
+        "Book 1": "第1卷\nBook 1",
+        "Book 2": "第 2 卷\nBook 2"
+    },
+    "entries": {
+        "Powerful Gusts": {
+            "name": "强劲阵风 Powerful Gusts"
+        },
+        "Effect: Blessed Coins": {
+            "name": "效果：祝福钱币 Effect: Blessed Coins",
+            "description": "<p>来自三个不同神祇的三枚受祝福钱币，被放入长明灯中以保持其燃烧。每枚钱币都会给予一项技能 +1 物品加值。编辑该规则元素，以根据所选神祇设置合适的技能。</p>\n<p>Three blessed coins from three separate deities, placed in the Eternal Lantern to keep it lit. Each coin gives a +1 item bonus to a skill. Edit the rule element to set appropriate skills from chosen deities.</p>"
+        },
+        "Effect: Mirage Mist": {
+            "name": "效果：蜃景雾 Effect: Mirage Mist",
+            "description": "<p>在蜃景雾内进行的所有察觉检定因此承受–1状态减值，而辨别方向的求生检定DC全部提高5。</p>\n<p>All Perception checks attempted within mirage mist suffer a –1 status penalty as a result, and all DCs for Survival checks to Sense Direction are increased by 5.</p>"
+        },
+        "Effect: Field of Past Regrets": {
+            "name": "效果：前尘憾事气场 Effect: Field of Past Regrets",
+            "description": "<p>由@UUID[Compendium.pf2e.season-of-ghosts-bestiary.Actor.ExTKQvgLI72XGk98]{辛月}的前尘憾事气场赋予。</p> <p>Granted by @UUID[Compendium.pf2e.season-of-ghosts-bestiary.Actor.ExTKQvgLI72XGk98]{Xin Yue}'s aura Field of Past Regrets</p>"
+        },
+        "Effect: Lantern": {
+            "name": "效果：提灯 Effect: Lantern",
+            "description": "<p>对猩红月光的豁免骰获得 +2 物品加值。</p>\n<p>+2 item bonus to saving throws against the crimson moonlight.</p>"
+        },
+        "Effect: Aura of Forgetfulness": {
+            "name": "效果：健忘灵光 Effect: Aura of Forgetfulness",
+            "description": "<p>由@UUID[Compendium.pf2e.season-of-ghosts-bestiary.Actor.QCTOHTwnEo6eq82T]{爱怛魔}的健忘灵光赋予。</p>\n<p>Granted by the @UUID[Compendium.pf2e.season-of-ghosts-bestiary.Actor.QCTOHTwnEo6eq82T]{Ijda}'s Aura of Forgetfulness.</p>"
+        },
+        "Rain Storm": {
+            "name": "雨风暴 Rain Storm"
+        }
+    }
+}

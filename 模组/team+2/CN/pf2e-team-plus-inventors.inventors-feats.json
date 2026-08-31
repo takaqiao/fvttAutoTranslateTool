@@ -1,0 +1,267 @@
+{
+    "label": "发明家+ 专长 Inventors+ Feats",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Genius Appendages": {
+            "name": "天才附肢 Genius Appendages",
+            "description": "<p>你为你的装置增加了一组额外肢体。这第二组机械附肢的运作方式与之前相同，让你在最多两条附肢持用物品的情况下仍可使用机械附肢的不稳定功能。此外，你获得等同于陆上速度的攀爬速度，并可将陆上速度提高 5尺。当使用此攀爬速度或提升的陆上速度时，你必须使用所有附肢，且不能用任何附肢持用物品。</p>"
+        },
+        "Technomantic Breadth": {
+            "name": "科法广博 Technomantic Breadth",
+            "description": "<p>你的大发明承载更大的奥术储能。除你最高两阶法术位之外，将你由科法大发明专长所获每一法术阶位的法术位增加 1。</p>",
+            "prerequisites": [{"value": "基础科法施法"}]
+        },
+        "Basic Magitek Spellcasting": {
+            "name": "基础科法施法 Basic Magitek Spellcasting",
+            "description": "<p>你获得基础施法效益。</p>",
+            "prerequisites": [{"value": "科法大发明"}]
+        },
+        "Master Magitek Spellcasting": {
+            "name": "大师科法施法 Master Magitek Spellcasting",
+            "description": "<p>你获得大师施法效益。</p>",
+            "prerequisites": [{"value": "专家科法施法"}]
+        },
+        "Initiate Self-Destruct": {
+            "name": "启动自毁 Initiate Self-Destruct",
+            "description": "<p>你为你的大发明设置了一项最终防御措施。<strong>触发：</strong>你的大发明将被减至 0 生命值。<strong>效果：</strong>你的大发明自毁，对其周围 10尺弥漫范围造成 @Damage[(@actor.level)d6[fire]] 火焰伤害（基础反射豁免，DC 为你的职业DC）。该弥漫不影响你。被自毁伤害减至 0 生命值的生物会立即死亡。该装置自毁后被毁。</p>\n<p><strong>特殊 </strong>如果你的大发明是从仆，则触发条件改为它将被减至 0 生命值，且弥漫围绕它而非你。即使从仆通常无法采取反应或在非自身回合行动，它仍可代你使用此反应。</p>"
+        },
+        "Lightning-Paced Productivity": {
+            "name": "闪电级生产力 Lightning-Paced Productivity",
+            "description": "<p>你能像别人数到 3 一样轻易地构思详尽蓝图，仅在转瞬之间完成。每日一次，你可以以一个 3动作、具有专注与操作特征的行动尝试制作一件物品。该物品等级不能高于你等级的一半，且你必须知晓其配方。你仍须以原料形式提供其费用并至少有一只手空闲才能进行此行动。</p>",
+            "prerequisites": [{"value": "超高效专注"}]
+        },
+        "Expert Magitek Spellcasting": {
+            "name": "专家科法施法 Expert Magitek Spellcasting",
+            "description": "<p>你获得专家施法效益。</p>",
+            "prerequisites": [{"value": "基础科法施法"}]
+        },
+        "Eureka!": {
+            "name": "我想到了！ Eureka!",
+            "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>",
+            "prerequisites": [{"value": "超载"}]
+        },
+        "Dual-Form Weapon+": {
+            "name": "双形态武器+ Dual-Form Weapon+",
+            "description": "<p>你将大发明设计成可拆装的零件，让你能将其完全转化为另一类武器。当你选择此专长时，选择一种 0级或 1级的简易或军用武器。它必须是常见武器，或是你能取用的另一种武器。该武器成为你武器大发明的第二种配置。</p>\n<p>为这一新配置选择一组新的武器改装。你可以花费一个交互动作，在两种配置间切换你的武器。无论你的武器处于何种配置，其体积始终取两种配置中较大者；如果一种武器比另一种更小，你仍需将武器零件随身携带。任何无法适用于新形态的属性符文将被压制，直至物品变为可适用的形态。如果新形态需要不同手数才能挥舞，你可以在改变形态的交互动作中重新握持武器。</p>"
+        },
+        "Elemental Entanglement Theory": {
+            "name": "元素纠缠理论 Elemental Entanglement Theory",
+            "description": "<p>你机械与其能源之间的相互作用，让你揭示了至今未见、能在敌人与元素之间触发交互的方式。你产生一个理论时进行预测。</p>\n<p><strong>预测</strong>：正如寒冷使铜收缩、煤炭燃烧产生烟雾，元素对敌人也存在尚未被发现的应用方式。你预测敌人潜在的弱点。该弱点数值为你等级的一半，须为下列伤害类型之一：酸蚀、寒冷、电击、火焰、毒素或音波。在你下一回合开始时，你进入理论的「测试」阶段。</p>\n<p><strong>测试</strong>：当 30尺内某敌人首次承受与你预测弱点同型的伤害时，你进行 @Check[type:flat|dc:11|showDC:all]。无论成功与否，你都进入「分析」阶段。</p>\n<p><strong>分析</strong>：如果纯骰检定失败，你确定该生物的弱点不在此处。你得知它是否拥有任何弱点，然后立即可预测另一伤害类型，并在下一回合开始时再次进入「测试」阶段。如果纯骰检定成功，你已发现它们与你所选元素之间的不寻常关联。当 30尺内的生物受到你所选类型的伤害时，它在你停止维持你的理论之前也获得你预测的弱点。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.Le1So8MIZG3t6NbD]{效果：元素纠缠成功}</p>"
+        },
+        "Hyperproductive Focus": {
+            "name": "超高效专注 Hyperproductive Focus",
+            "description": "<p>当你专心做事时，你便进入超高效迷狂状态，忽略一切干扰直到完成工作。你制作物品所需时间减半。如果你在制作上为传奇、拥有该物品的配方且检定大成功，你可以将制作所需时间额外减少 1天，最低至 1小时。</p>"
+        },
+        "Full Metal Sheeting": {
+            "name": "全金属甲衣 Full Metal Sheeting",
+            "description": "<p>你利用金属甲衣根据你所选套装施加特殊效果。你根据你的护甲大发明选择获得所列效果。</p>\n<p><strong>动力套装</strong>：你以重型甲板强化你的护甲。在每日准备期间，除了护甲大发明的常规属性外，你可以选择以下属性数据。当你处于「超载」效果之下时，你完全移除速度减值，而非将其减少 5尺。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.EGobYeH3R2N6iSP6]{动态甲衣} AC 加值 +5；敏捷上限 +1；检定减值 –2；速度减值 –10尺；力量 +3；体积 3；类别 板甲。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.x5kg1rT1E0BLJep3]{全金属甲衣} AC 加值 +6；敏捷上限 +0；检定减值 –3；速度减值 –10尺；力量 +4；体积 4；类别 板甲。</p>\n<p><strong>潜行套装</strong>：你的护甲不仅让你能进行潜行，其反光本性还使你在隐藏时更难被瞄准。当你被隐蔽或隐藏时，针对你的纯骰检定 DC 增加 1；如果你处于「超载」效果之下，则增加 2。</p>\n<p><strong>特殊 </strong>如果你拥有 @Compendium[pf2e.classfeatures.yEfHCwsbsbP6K13Q]{重型构造} 改装，则当你满足其力量需求时（无须处于「超载」），你便完全移除速度减值，而非通常的效益；并且你的护甲获得壁垒特征。此外，你来自壁垒护甲特征的加值适用于所有反射豁免，而非仅适用于造成伤害的反射豁免；处于「超载」效果之下时，该加值由 +3 提升至 +4。</p>"
+        },
+        "Body Swap Apparatus": {
+            "name": "身体置换装置 Body Swap Apparatus",
+            "description": "<p>你完善了一种让你与他人交换身体的装置。你将两个生物分别置于一对配套的台面上，并将一个金属冠戴在每个生物头上。手柄一拉——过程开始！你学得 <em>@Compendium[pf2e.spells-srd.RWwiFnjxoJXn7H6D]{心灵交换}</em> 仪式，但其代价改为驱动机器所需能源；它失去魔法特征；主要与次要的神秘检定改为制作检定。由于此版心灵交换不具魔法特征，它不能被解除魔法之类对抗魔法效果的项目作为目标，但仍可被其他方式对抗。</p>"
+        },
+        "Remote Activation": {
+            "name": "遥控激活 Remote Activation",
+            "description": "<p>你借由遥控触发器代盟友激活装置。选择 30尺内某盟友持用或穿戴的、激活成本为 2 个动作或更少的装置，并指定一个触发条件。你的回合结束。如果你指定的触发条件在你下一回合开始前出现，你可以代该盟友以反应使用激活动作（前提是该生物满足使用要求）。穿戴该装置的生物仍可决定如何使用装置激活的效果。</p>\n<p>如果你的盟友存在多重攻击减值且该装置激活为攻击动作，你的盟友仍对此攻击施加多重攻击减值，并如常因此次攻击增加其多重攻击减值。</p>",
+            "prerequisites": [{"value": "装置师献身"}]
+        },
+        "Fail-Safe Restoration": {
+            "name": "故障安全修复 Fail-Safe Restoration",
+            "description": "<p>你已学会通过你的大发明精确连结线路传送治疗。你可以每轮一次而非每 10分钟一次使用 @UUID[Compendium.pf2e-team-plus-inventors.inventors-feats.impC2V1v0OKk7PsU]{双重防护修复}。</p>",
+            "prerequisites": [{"value": "双重防护修复"}]
+        },
+        "Variable Core+": {
+            "name": "可变核心+ Variable Core+",
+            "description": "<p>你调整你大发明的核心，改变其爆炸方式。当你选择此专长时，选择酸蚀、寒冷、电击、毒素或音波。你的大发明核心使用该能源运作。当使用「爆炸」动作，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰更改为你所选的类型。</p>\n<p>如果你拥有「攻击性增能」职业特性并将「可变核心」重训为另一种伤害类型，你也可以根据需要切换到造成相同伤害类型的另一种攻击性增能。</p>\n<p><strong>特殊 </strong>如果你拥有武器大发明，你可以选择让「超载」的额外伤害为你所选类型，而非火焰伤害。</p>"
+        },
+        "Maniacal Laughter!": {
+            "name": "狂笑！ Maniacal Laughter!",
+            "description": "<p><strong>触发 </strong>你或你的大发明使用了至少以一名敌人为目标的不稳定动作。</p>\n<hr />\n<p>你抬头狂笑，因自己的天才而扬眉吐气。对触发动作所影响的每个敌人尝试 @Compendium[pf2e.actionspf2e.2u915NdUyQan6uKF]{威吓}，使用你的制作熟练度而非威吓。你为此检定只掷一次，并将结果分别与每个敌人比较。无论结果如何，每个生物在 1分钟内对「狂笑！」暂时免疫。</p>"
+        },
+        "Directed Explosion": {
+            "name": "定向爆炸 Directed Explosion",
+            "description": "<p>你已学会将爆炸引向特定方向。在每日准备期间，你可以调校你的大发明并选择线形、锥形或爆裂。当你使用 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 时，你可以选择以你所选区域为其作用区域：20尺内的 @Template[type:line|distance:15]、@Template[type:cone|distance:10] 或 @Template[type:burst|distance:5]，作为 5尺弥漫的替代选项。</p>\n<p>如果你拥有「突破性大发明」职业特性，你为区域选项加上 20尺内的 @Template[type:line|distance:30]、@Template[type:cone|distance:15] 或 @Template[type:burst|distance:10]；如果你拥有「革命性大发明」职业特性，你为区域选项加上 20尺内的 @Template[type:line|distance:45]、@Template[type:cone|distance:30] 或 @Template[type:burst|distance:15]。</p>",
+            "prerequisites": [{"value": "爆炸"}]
+        },
+        "Gadget Conglomeration": {
+            "name": "装置集合 Gadget Conglomeration",
+            "description": "<p>你已学会创造可多次使用的装置，有时甚至能让两次激活同时进行以产生更有利的效果。当你在每日准备期间创建临时装置时，你可以选择将两件临时装置合并为一件装置，过程消耗两件装置，并将它们融合成一个单元。当该装置被激活时，可以使用其中任一效果，或两种效果都使用；并以激活动作数较多的那件来确定所需动作数。使用该装置的生物决定该装置效果的发生顺序。</p>",
+            "prerequisites": [{"value": "装置师献身"}, {"value": "传奇制作"}]
+        },
+        "Gadgeteer Dedication": {
+            "name": "装置师献身 Gadgeteer Dedication",
+            "description": "<p><strong>触发 </strong>你为使用装置大发明进行的不稳定纯骰检定失败。</p>\n<hr />\n<p>你的装置技艺已发展至足以提供可靠的故障保险——以应对计划之外的情况。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>"
+        },
+        "Variable Gadgetry": {
+            "name": "可变装置 Variable Gadgetry",
+            "description": "<p>你调整你大发明的临时装置，按需改变其伤害类型。当你创建造成伤害的临时装置时，你可以在酸蚀、寒冷、电击或火焰之间选择，让你的装置造成所选伤害类型，而非其原本的伤害类型。</p>",
+            "prerequisites": [{"value": "装置师献身"}]
+        },
+        "Clockwork Celerity+": {
+            "name": "时钟敏捷+ Clockwork Celerity+",
+            "description": "<p><strong>触发</strong> 你的回合开始。</p>\n<hr />\n<p>你可以使用大发明中的不稳定时钟器件，推动你的发明更快地运作。本回合你处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你可以使用额外动作进行移步、跨步，或使用你大发明所授予的另一种移动动作（如有「潜水护甲」专长则为游泳）。</li>\n<li><strong>构装体</strong> 你可以使用额外动作来命令你的构装体大发明（或在你花费 2 个动作命令构装体时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你可以使用额外动作施放科法射线。</li>\n<li><strong>装置</strong> 你可以使用额外动作来激活你的装置大发明或使用「速制装置」。</li>\n</ul>",
+            "prerequisites": [{"value": "护甲、构装体、武器、治疗、科法或装置大发明"}]
+        },
+        "Armor Apparatus": {
+            "name": "护甲机件 Armor Apparatus",
+            "description": "<p>你为护甲改装上鳍、转子、传感器及其他装置，以便在不同地形中生存并具备额外的感官能力。从下列选项中选择两项，当你穿戴护甲大发明时获得：</p>\n<ul>\n<li>你对会被吸入或要求你呼吸的效果获得 +2环境加值。</li>\n<li>你获得等同于陆上速度的攀爬速度。</li>\n<li>你获得 30尺范围的回声定位作为模糊感官。</li>\n<li>你获得等同于陆上速度的游泳速度。</li>\n<li>你获得水下呼吸的能力。</li>\n</ul>",
+            "prerequisites": [{"value": "护甲大发明"}]
+        },
+        "Megaton Strike+": {
+            "name": "百万吨打击+ Megaton Strike+",
+            "description": "<p>你激活大发明中的齿轮、爆炸物及其他隐藏机件，进行一次强力攻击。你进行一次打击，造成额外一颗武器伤害骰。如果你至少 10级，则增至两颗额外伤害骰；至少 18级，则增至三颗额外伤害骰。可进行的打击类型取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你以一次近战徒手攻击或近战武器进行打击。要使用近战武器，你必须在每日准备时事先用特殊机件准备好它。</li>\n<li><strong>构装体</strong> 你的从仆大发明进行打击。</li>\n<li><strong>武器</strong> 你以你的武器大发明进行打击。</li>\n<li><strong>治疗 </strong>你以你的大发明进行打击。</li>\n<li><strong>科法 </strong>你施放科法射线。你将额外伤害骰加在成功上，或加在大成功上将其翻倍。</li>\n<li><strong>装置 </strong>你以一次近战徒手攻击或近战武器进行打击。要使用近战武器，你必须在每日准备时事先用特殊机件准备好它。</li>\n</ul>\n<p><strong>不稳定功能</strong> 你向打击注入更多力量，但有让大发明出现应力裂缝的风险。在「百万吨打击」上添加不稳定特征。该打击多得另外一颗额外伤害骰，使总数为：4级 2 颗、10级 3 颗、18级 4 颗。</p>\n<p><strong>特殊</strong> 如果你的大发明是从仆，它可代你执行此动作。</p>",
+            "prerequisites": [{"value": "护甲、构装体、武器、治疗、科法或装置大发明"}]
+        },
+        "Perfect Appendages": {
+            "name": "完美附肢 Perfect Appendages",
+            "description": "<p>你的机械附肢运作几近真肢——或许更强。每条单独的附肢可举起最多 3 体积，并能在其基础动作之外进行复杂动作（如 @Compendium[pf2e.actionspf2e.cYdz2grcOcRt4jk6]{解除装置} 或 @Compendium[pf2e.actionspf2e.1kGNdIIhuglAjIp9]{治疗伤势}）。此外，当你使用机械附肢的不稳定功能时，仅需使用一条附肢，且可以擒拿或打击生物，而非将它们移位。如果你选择进行打击，你的附肢视为徒手攻击，造成 1d4 由你选择的钝击、穿刺或挥砍伤害，并具有触及特征，属拳斗武器组。你在获得此专长时即选定伤害类型，但可以花费 1小时调整附肢以将伤害更改为另一种你所选的类型。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.K8OvnmW45Z6516jN]{效果：完美附肢}</p>",
+            "prerequisites": [{"value": "天才附肢"}]
+        },
+        "Manifold Gadgets": {
+            "name": "多重装置 Manifold Gadgets",
+            "description": "<p>你已改装你的装置大发明，使其零件可互换。你可以花费 10分钟将你的装置大发明更换为你在每日准备时所选之外的另一种装置。</p>",
+            "prerequisites": [{"value": "装置师献身"}]
+        },
+        "Basic Gadgets": {
+            "name": "基础装置 Basic Gadgets",
+            "description": "<p>对你而言，某些装置过于基础，制作起来不值一提。当你在每日准备期间创建临时装置时，只要它们等级不高于你等级的一半，你便可以使用其中一件临时装置创建出两件相同类型的临时装置。如果你在制作上为传奇，则可改为创建四件相同类型的装置。</p>",
+            "prerequisites": [{"value": "装置师献身"}, {"value": "大师制作"}]
+        },
+        "Architected Manipulation": {
+            "name": "架构操控 Architected Manipulation",
+            "description": "<p><strong>需求 </strong>你处于「超载」效果之下。</p>\n<hr />\n<p>你已建立一种在不向攻击暴露自己的情况下取出或使用武器大发明的方法。你可以与你的武器大发明交互，例如拔出、收纳、装填或类似动作；并且你的交互不触发会因操作动作触发的反应。</p>\n<p><strong>不稳定功能</strong> 你的架构操控以闪电触发施行。你以自由动作使用「架构操控」。</p>\n<p><strong>特殊 </strong>如果你拥有「双形态武器」，你可以使用此专长的交互动作来切换配置。</p>",
+            "prerequisites": [{"value": "武器大发明"}, {"value": "超载"}]
+        },
+        "Split Links": {
+            "name": "分离链接 Split Links",
+            "description": "<p>你已学会分离你的链接，让你能瞄准多个生物。你可以同时持有两个 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接}。如果你在制作上为传奇，则可同时持有四个。</p>",
+            "prerequisites": [{"value": "治疗大发明"}]
+        },
+        "Theory of Everything": {
+            "name": "万物理论 Theory of Everything",
+            "description": "<p>你提出万物相连的命题。借由细致的数学考量、机械操控以及对你与他人物理位置的安排，你可在量子层面影响宇宙及其居民的行动。你产生一个理论时进行预测。</p>\n<p><strong>预测</strong>：你假设所有存在共享一种深植于宇宙纤维的羁绊，并预测 @Check[type:fortitude|dc:resolve(@actor.attributes.classDC.value)|basic:false]、@Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:false] 或 @Check[type:will|dc:resolve(@actor.attributes.classDC.value)|basic:false]。在你下一回合开始时，你进入「测试」阶段。</p>\n<p><strong>测试</strong>：当 30尺内的敌人在其回合首次进行动作时，你可以尝试 @Check[type:flat|dc:11|showDC:all]。无论成功与否，你都进入「分析」阶段。</p>\n<p><strong>分析</strong>：当一个生物的回合开始时，你可以花费你的反应做一件小事（轻轻向右半步、说一串看似随机的数字或类似行为），以拨动现实的理论之弦。如果纯骰检定失败，你注意到自己的计算只差一丝，但仍获得了有价值的数据。你得知该生物你预测的豁免值，且该生物以它选择的豁免对你的发明家职业DC 进行一次豁免。豁免失败的生物必须以一个单动作进行你所选的基础动作。然后你可以立即预测另一种豁免，并在下一回合开始时进入「测试」阶段。如果纯骰检定成功，你已计算出如何刚好影响宇宙以重新引导现实的宇宙数学。当你花费反应时，该生物会进行同样的豁免，但生物使用你预测的豁免类型而非它所选的豁免类型；并且你可以在后续回合继续花费反应以产生此效果。</p>"
+        },
+        "Proximity Scanner": {
+            "name": "近距扫描 Proximity Scanner",
+            "description": "<p>你为大发明添加了扫描器，让你能侦测区域内的目标。当你与同一表面上的其他生物处于相邻范围时，扫描器会发出鸣响，赋予你 30尺的模糊震波感知。鸣响在你越靠近时变得越响，但通常足够安静，以至于其他生物需要主动倾听才能察觉，使用你的制作DC 作为听见它的察觉 DC。你可以在每日准备时为扫描器编程，让它忽略特定生物（如你的盟友）。</p>\n<p>此外，你的扫描器可大幅缩窄搜索范围，专注于特定物体、生物或材料。你可以加入目标的样本或图像，让你的震波感知专门侦测同类型目标，并对 @Compendium[pf2e.actionspf2e.TiNDYUGlMmxzxBYU]{搜索}、@Compendium[pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索} 或 @Compendium[pf2e.actionspf2e.EA5vuSgJfiHH7plD]{追踪} 这些目标的检定获得 +1环境加值。同一时间你只能选定一个目标。如果你向扫描器提供另一目标的样本或图像，它可以在剩余持续时间内更换为侦测新类型目标。</p>\n<p><strong>不稳定功能</strong> 你可以花费一个具有操作特征的单动作，在 1分钟内将你的震波感知变为 60尺的模糊感官，并将其检定的环境加值提升至 +2。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.x4dx0HDWEs3zMhN1]{效果：近距扫描}</p>\n<p><strong>特殊 </strong>如果你的大发明是从仆，它获得此震波感知，并可代你使用不稳定功能。</p>"
+        },
+        "Fail-Proof Gadgetry": {
+            "name": "无失装置技艺 Fail-Proof Gadgetry",
+            "description": "<p>你已学到，一次快速修复就足以将彻底的失败转为成功。你可以每轮一次而非每 10分钟一次使用「装置师献身」反应。</p>",
+            "prerequisites": [{"value": "装置师献身"}]
+        },
+        "Unstable Redundancies+": {
+            "name": "不稳定冗余+ Unstable Redundancies+",
+            "description": "<p><strong>触发</strong> 你将进行不稳定动作的纯骰检定，但你尚未掷该纯骰检定。</p>\n<hr />\n<p>你为你的大发明内置了三重冗余，并加入各类缓冲以防止它在你的不稳定实验中受损。你自动通过触发的纯骰检定。由于自动通过而非掷骰，即使你拥有多个不稳定动作，你也不会增加不稳定纯骰检定的 DC。</p>\n<p>你必须再花费 10分钟重新设置后才能再次依赖你的不稳定冗余。如果你花费 10分钟重新调校大发明以再次使用不稳定动作，你可以在同一时间内重新设置不稳定冗余。</p>"
+        },
+        "Personality Module": {
+            "name": "人格模块 Personality Module",
+            "description": "<p>你创造了一个内嵌于大发明中的人工智能。你的大发明成为带有从仆特征的智能物品，可由你下令。你的大发明获得等同于你的智力、感知与魅力调整值，并能说话与理解你所说的所有语言。你的大发明能够以你拥有的所有感官（包括你由发明家职业专长所获的任何感官）侦察事物。你的大发明可以使用这些调整值进行技能检定，前提是这些检定不需要任何形式的操控；你的大发明使用你的技能熟练度。你的大发明获得等同于你意志豁免的意志豁免；如果某效果会强制其执行会伤害你的动作，则其意志豁免获得 +2环境加值。</p>"
+        },
+        "Unstable Gadget Installation": {
+            "name": "不稳定装置安装 Unstable Gadget Installation",
+            "description": "<p>当你安装一件临时装置时，你可以应用一项更危险的组件以延长其效果。当你安装其中一件临时装置时，你可以将其与你的装置大发明连接，从而让其激活获得不稳定特征。你的临时装置在使用后不会被消耗，除非你的不稳定纯骰检定大失败；让它得以再次激活，并在第二次激活时如常被消耗。如果你以外的生物正持用或穿戴你的装置，你仍须进行该纯骰检定；并且当大失败时，你们俩都会承受伤害——因为与你装置大发明的连结会让其反噬你。</p>",
+            "prerequisites": [{"value": "装置师献身"}]
+        },
+        "Full Automation+": {
+            "name": "全自动+ Full Automation+",
+            "description": "<p>你与你的大发明已交融至无需多想便能使用它们的程度。你永久处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你的护甲会对最微小的刺激作出反应，将你引向正确方向，前提是你正穿戴它。你可以使用额外动作进行跨步、移步，或使用你大发明所提供的某种移动方式（如飞行或游泳）。</li>\n<li><strong>构装体</strong> 你命令构装体的能力变得本能化。你可以使用额外动作命令你的构装体大发明（或在你选择花费 2 个动作命令时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你的武器在你手中变得更易挥舞，以致命的高效近乎成为你身体的延伸。只要你持用着它，它便能毫不费力地飞向你所选的目标。你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你的大发明被毫不费力地操控。你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你的大发明让你充满魔法数据。你可以使用额外动作施放科法射线。</li>\n<li><strong>装置 </strong>你的装置处于一触即发的激活状态，距离激活只差一念。你可以使用额外动作激活你的装置大发明或使用「速制装置」。</li>\n</ul>\n<p><strong>特殊 </strong>如果你拥有 @UUID[Compendium.pf2e-team-plus-inventors.inventors-feats.MoXof6ptZgNSQT4H]{时钟敏捷}，则当你使用「时钟敏捷」时，你不再变为迅捷，而是改为为你的大发明使用所列其中一项动作。</p>",
+            "prerequisites": [{"value": "护甲、构装体、武器、治疗、科法或装置大发明"}]
+        },
+        "Calculated Spellshape": {
+            "name": "算计塑法 Calculated Spellshape",
+            "description": "<p>你以你的大发明塑法。你获得一个具有塑法特征的法师职业专长。就满足其先决条件而言，你的法师等级等同于你的角色等级。</p>",
+            "prerequisites": [{"value": "科法大发明"}]
+        },
+        "Blast-Proof": {
+            "name": "抗爆 Blast-Proof",
+            "description": "<p>在被炸飞无数次后，你已让自己对爆炸与各类故障具备完美抗力。你对火焰获得等同于你等级的抗力。如果你将因不稳定纯骰检定大失败而受到伤害，你可以选择如常承受伤害（忽略你的抗力）以重掷你的不稳定纯骰检定。你必须采用新结果，即便它更差；并且你在 10分钟内不能再使用「抗爆」的重掷。</p>\n<p><strong>特殊 </strong>如果你拥有「可变核心」，你改为对你可变核心的伤害类型获得等同于你等级的抗力。</p>"
+        },
+        "Kaboom!!": {
+            "name": "轰！！ Kaboom!!",
+            "description": "<p>当你想让某物炸开时，你将爆炸推至难以想象的高度。你让你的大发明进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸}，并将其作用区域加倍。</p>"
+        },
+        "Reverse Engineer": {
+            "name": "逆向工程师 Reverse Engineer",
+            "description": "<p>你极擅长对物品进行逆向工程以获取配方，或仅是拆解之以让其失效。你的制作检定在从物品逆向工程出配方时获得 +2环境加值。如果你的制作检定大成功，你可以选择同时获得配方并将原物品重新组装；让你保留配方与该物品，而非配方与等同于该物品价值一半的原料。此外，你可以使用制作代替盗术来「解除装置」或「撬锁」。</p>",
+            "prerequisites": [{"value": "受训制作"}]
+        },
+        "Condition Causation Theory": {
+            "name": "状态致因理论 Condition Causation Theory",
+            "description": "<p>你认为，正如机器中弱点之间存在连锁效应——利用一种状态会让进一步的缺陷显而易见。你产生一个理论时进行预测。</p>\n<p><strong>预测</strong>：你预测一种会让敌人对额外倾向开放的状态。从下列状态中选择一项：@Compendium[pf2e.conditionitems.i3OJZU2nk64Df3xm]{笨拙}、@Compendium[pf2e.conditionitems.9PR9y0bi4JPKnHPR]{耳聋}、@Compendium[pf2e.conditionitems.MIRkyAjyBeXivMa7]{力竭}、@Compendium[pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧}、@Compendium[pf2e.conditionitems.fesd1n5eVhpCSS18]{恶心} 或 @Compendium[pf2e.conditionitems.e1XGnhKNSQIm5IXg]{呆滞}。在你下一回合开始时，你进入「测试」阶段。</p>\n<p><strong>测试</strong>：当你能看见的 30尺内某敌人首次获得你预测的状态时，进行 @Check[type:flat|dc:11|showDC:all]。无论成功与否，你都进入「分析」阶段。</p>\n<p><strong>分析</strong>：如果纯骰检定失败，你发现它们虽不受你理论左右，但仍存在其他可利用之处。你得知它最弱的豁免，并可立即预测另一种状态，并在下一回合开始时再次进入「测试」阶段。如果纯骰检定成功，你发现具有该状态会降低你目标的整体效率。只要生物具有所列状态，或直到你停止维持你的理论之前，它们对你均处于 @Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}。</p>"
+        },
+        "Voice Modulation": {
+            "name": "语音调制 Voice Modulation",
+            "description": "<p>你已安装语音调制器，识别你特定声音的频率并允许你按需调整。你能以特定方式改变嗓音，让试图从你声音辨别你另一身份的尝试需要使用 @Compendium[pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索} 动作进行察觉检定对抗你的欺瞒 DC，仿佛你正在使用 @Compendium[pf2e.actionspf2e.AJstokjdG6iDjVjE]{假扮} 动作。你针对此类尝试的欺瞒 DC 为 20 加上你的制作熟练度调整值，而非通常的 DC。你可以选择让你的嗓音复制特定的音色、频率、回响或其他效果，但被改变的声音终究仍是你。当你借由语音调制将自己的嗓音调到与你听过的特定嗓音相近频率时，你假扮该嗓音的检定获得 +4环境加值。</p>"
+        },
+        "Robotic Familiar": {
+            "name": "机械魔宠 Robotic Familiar",
+            "description": "<p>你获得一只机械魔宠——一只通过人造手段创造出的微型构装体。你获得一只魔宠，但其能力之一必须是 @Compendium[pf2e.familiar-abilities.5eqcXtPsYunphMOZ]{构装体} 魔宠能力。如果你选择一只构装体的特定魔宠，你获得该特定魔宠所需的魔宠能力数量减少 1。</p>"
+        },
+        "Targeting Ray": {
+            "name": "瞄准射线 Targeting Ray",
+            "description": "<p>你激活奥术小器械以随心射出射线。你回忆知识或搜索，然后施放科法射线。</p>",
+            "prerequisites": [{"value": "科法大发明"}, {"value": "超载"}]
+        },
+        "Double-Proofed Restoration": {
+            "name": "双重防护修复 Double-Proofed Restoration",
+            "description": "<p>你明白，在医疗情境下，失败是不可接受的。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>",
+            "prerequisites": [{"value": "治疗大发明"}, {"value": "灼热修复"}]
+        },
+        "Fast Burst": {
+            "name": "急速爆发 Fast Burst",
+            "description": "<p>你已学会一项特殊技巧，让你的第二波快于第一波发出。你使用 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。如果这是你在过去 10分钟内首次对该生物使用灼热修复，你不必进行不稳定特征所要求的纯骰检定。</p>",
+            "prerequisites": [{"value": "治疗大发明"}]
+        },
+        "Spontaneous Ingenuity Theory": {
+            "name": "即兴妙策理论 Spontaneous Ingenuity Theory",
+            "description": "<p>你发现最好的点子常在你承受巨大压力时浮现，而你能在这种情境下迅速拼凑出解决方案。你产生一个理论时预测一份蓝图。</p>\n<p><strong>预测</strong>：你预测某份特定蓝图能助你由身上小物拼凑而成；选择一项需要 2 个动作或更少进行的基础技能动作。在你下一回合开始时，你进入「测试」阶段。</p>\n<p><strong>测试</strong>：你可以花费一个交互动作尝试创造一件辅助你的临时工具。进行 @Check[type:flat|dc:11|showDC:all]。无论成功与否，你都进入「分析」阶段。</p>\n<p><strong>分析</strong>：如果纯骰检定失败，你创造的发明对你下一次进行该技能的检定提供 +1环境加值，之后该物品被毁；你可以预测一项新的发明，以辅助你所选的另一项符合条件的技能动作。如果纯骰检定成功，你发明出一件完美适合当下情境的工具。只要你正在维持此理论，你进行所预测技能动作的检定获得 +1环境加值；之后该物品被毁。</p>"
+        },
+        "Stable Instability": {
+            "name": "稳定不稳 Stable Instability",
+            "description": "<p>你已学会以无与伦比的速度让你的大发明恢复功能。当你花费 10分钟重新调校你的大发明以恢复源自不稳定特征的功能时，你也将不稳定纯骰检定降至基于你所拥有不稳定动作数量的最低值，而非仅减少 4。</p>"
+        },
+        "Devastating Weaponry+": {
+            "name": "毁灭性武装+ Devastating Weaponry+",
+            "description": "<p>你从武器中释放一阵投射物，或为其充能让其在战场各方向飞行并打击多个生物。对你 30尺内的每个敌人以你的武器大发明进行一次打击。在完成所有攻击之前不增加你的多重攻击减值。如果你的大发明是近战武器，且任一攻击在你触及之外，你在打击前将武器释放，所有攻击完成后它会回到你掌中。如果武器返回时你的双手已满，它会落在你的方格内。如果你的武器大发明在打击间需要 1 个或更多动作来装填，你可以在打击间交互以装填，但每次交互装填会让你的攻击累计承受 -2减值。</p>",
+            "prerequisites": [{"value": "武器大发明"}]
+        },
+        "Mechanical Appendages": {
+            "name": "机械附肢 Mechanical Appendages",
+            "description": "<p>你已建造从背部伸出的额外附肢，以助你进行科学研究。它们虽不完美，但可以执行简单的交互动作，如开未上锁的门或拾起物品。你的附肢不能执行需要手指或显著手指灵活度的动作，包括任何需要检定才能完成的动作。你的附肢可持用最重 1 体积的物品，但不能用其所持物品激活或攻击。</p>\n<p><strong>不稳定功能</strong> 你借助两条附肢来执行单条附肢本可执行的动作（尽管处于较弱状态）。你可以使用两条附肢来移位与你相邻的生物。你的附肢必须未持物才能进行此不稳定功能。</p>\n<p><strong>特殊 </strong>如果你的大发明是从仆，触发条件改为它将被减至 0 生命值，且弥漫围绕它而非你。即使从仆通常无法采取反应或在非自身回合行动，它仍可代你使用此反应。</p>"
+        },
+        "Gateway Engine": {
+            "name": "传送门引擎 Gateway Engine",
+            "description": "<p>你已设计出一种撕裂现实结构以快速通行的方法。当你激活该引擎时，会创造出半径 20尺、由金属环包围的传送门。该传送门通往第二只传送门环。这些环可以折叠为 2 体积的方块，并通过 10分钟的行动重新组装回原形。两环之间没有最大距离。作为 8小时的行动，你可以将一只传送门链接到另一位面；该传送门便可通行至该位面上的随机一点；不过你可以将一支音叉插入其指令面板以让其稍微更精准——如同 <em>@Compendium[pf2e.spells-srd.5bTt2CvYHPvaR7QQ]{异界传送术}</em> 法术。另一只环必须在另一侧部署以稳定该门，否则它会在 10分钟内被毁。再造一对「传送门引擎」需要一周的时间。</p>"
+        },
+        "Unavoidable Ray": {
+            "name": "无可避免射线 Unavoidable Ray",
+            "description": "<p>你的 <em>@UUID[Compendium.pf2e-team-plus-inventors.inventors-spells.rLpTFGCUUdXtUbaL]{科法射线}</em> 可以蜿蜒曲折以确保命中你的对手。在你下一次回合结束前施放科法射线时，你获得「料敌机先」的效果。</p>",
+            "prerequisites": [{"value": "科法大发明"}]
+        },
+        "Stasis Capsule": {
+            "name": "停滞胶囊 Stasis Capsule",
+            "description": "<p>你能创造一座停滞胶囊，将奄奄一息者重新唤回。你可以花费 10分钟构建一座停滞胶囊，能容纳最多 4 名小型或中型生物，占据 @Template[type:square|distance:10]。当生物在胶囊内时，你可以使用制作代替医疗来「治疗伤势」，包括使用你较高的制作熟练度尝试更困难的「治疗伤势」检定。当你以这种方式「治疗伤势」时，你只进行一次检定并将相应数值施加于停滞胶囊内的所有生物（包括大失败时造成伤害）。如果你在制作上为传奇，你可以将胶囊扩展为 @Template[type:square|distance:20]，并容纳两倍数量的小型或中型生物，或更大体型的生物。就容量而言，你可以将一只大型生物视为两只中型生物，将一只巨型生物视为两只大型生物。</p>",
+            "prerequisites": [{"value": "受训医疗"}, {"value": "专家制作"}]
+        },
+        "Identify Flaws": {
+            "name": "识别缺陷 Identify Flaws",
+            "description": "<p>你能发现别人看不见的构造缺陷。选择一具构装体或一处占据 5尺方格的障碍物，例如门、窗、围栏或墙壁。对该目标的强韧DC、效果 DC，或如其无 DC 则对其物品等级 + 10 进行一次制作检定。如果你在制作上为大师，你可以以占据 10尺方格的障碍物为目标；传奇时，可以以占据 15尺方格的障碍物为目标。</p>\n<hr />\n<p><strong>大成功</strong> 哈！业余手艺！你在 1轮内忽略目标的硬度。如果目标是构装体且具有物理抗力，你可以改为在 1轮内忽略等同于你等级的物理抗力。</p>\n<p><strong>成功 </strong>同成功，但你忽略目标硬度的一半，或如目标为带物理抗力的构装体则忽略你等级一半的物理抗力。</p>\n<p><strong>大失败</strong> 你完全低估了目标的坚固。你在 1轮内对目标的攻击骰承受 –2环境减值。</p>"
+        },
+        "Death Link": {
+            "name": "死亡链接 Death Link",
+            "description": "<p>你已学会让链接同时瞄准敌人与盟友。你可以以敌人代替盟友作为「充能连接」的目标。如果如此，敌人在你每个链接激活回合开始时承受与原本会赋予的临时生命值数量相同的 @Damage[(floor((@actor.level)/2) +2)[void]] 伤害（若敌人具有虚空治疗，则为 @Damage[(floor((@actor.level)/2) +2)[vitality]] 伤害），基础强韧豁免。如果生物在对你「死亡链接」的豁免上大成功，则该链接立即结束。你也可以以正受激活链接影响的敌人作为你「灼热修复」的目标，造成与本会恢复同等数量的伤害（基础强韧豁免）；之后该「充能连接」结束。在你「灼热修复」上豁免失败的生物变为恶心 1，大失败则恶心 2。在你以这种方式使用「灼热修复」之后，你在 1天内不能再以该生物为「充能连接」的目标。</p>",
+            "prerequisites": [{"value": "治疗大发明"}]
+        }
+    }
+}

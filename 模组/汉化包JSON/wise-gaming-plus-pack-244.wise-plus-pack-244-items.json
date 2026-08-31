@@ -1,0 +1,362 @@
+{
+  "label": "智者加强包 244（物品）\nWise Plus Pack 244 (Items)",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Theme:Ruined Keep": "主题：废墟要塞\nTheme:Ruined Keep",
+    "Set 2": "第2组\nSet 2",
+    "Theme: Seasdie Town": "主题：海滨小镇\nTheme: Seasdie Town",
+    "Theme: Servant's Quarters (New)": "主题：仆役宿舍（新）\nTheme: Servant's Quarters (New)",
+    "Set 1": "套装 1\nSet 1",
+    "Theme: The Library": "主题：图书馆\nTheme: The Library",
+    "Item Sets (24.4 Plus Pack)": "物品套装（24.4 Plus Pack）\nItem Sets (24.4 Plus Pack)"
+  },
+  "entries": {
+    "Slick": {
+      "name": "光滑 Slick",
+      "description": "<p>这块石头上刻着诡异的符文</p><p>此属性使护甲变得湿滑，仿佛涂覆了一层薄薄的油膜。你在用于逃脱与挤入空间的特技检定上获得+1物品加值。</p>\n<p>This stone has eldritch runes etched into it</p><p>This property makes armor slippery, as though it were coated with a thin film of oil. You gain a +1 item bonus to Acrobatics checks to Escape and Squeeze.</p>"
+    },
+    "Healing Potion (Minor)": {
+      "name": "治疗药水（次级） Healing Potion (Minor)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一小瓶红宝石般鲜红的液体，饮用者的伤口迅速愈合时会带来一阵刺痛感。当你饮用一瓶<em>治疗药水</em>时，你恢复 @Damage[1d8[healing]] 生命值。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p><hr /><p>A <em>healing potion</em> is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a <em>healing potion</em>, you regain @Damage[1d8[healing]] Hit Points.</p>"
+    },
+    "Silver Statuette": {
+      "name": "银色小雕像 Silver Statuette",
+      "description": "<p>这尊小巧的银制小雕像上有两名魅魔站岗守卫</p>\n<p>This small silver statuette has two succubi standing watch</p>"
+    },
+    "Wolf Fang": {
+      "name": "狼牙 Wolf Fang",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你成功对一个敌人使用 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{绊摔} </p>\n<hr />\n<p>这枚狼之犬齿被绑在一条皮革带上，并系在一套护甲的扣环或带子上。</p>\n<p>当你启动该犬齿时，你对你绊摔的目标造成等同于你力量调整值的 @Damage[(@actor.abilities.str.mod)[bludgeoning]]{钝击} 伤害。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> (concentrate)</p>\n<p><strong>Trigger</strong> You successfully @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip} a foe</p>\n<hr />\n<p>This wolf canine is bound in a strip of leather and tied to a buckle or strap of a suit of armor.</p>\n<p>When you activate the fang, you deal @Damage[(@actor.abilities.str.mod)[bludgeoning]]{bludgeoning} damage equal to your Strength modifier to the target of your Trip.</p>"
+    },
+    "Jade Shard": {
+      "name": "翡翠碎片 Jade Shard"
+    },
+    "Magic Wand (1st-Rank Spell)": {
+      "name": "魔法魔杖（1环法术） Magic Wand (1st-Rank Spell)",
+      "description": "<p>这根短杖约一英尺长，内含一个法术。其外观通常与其中的法术相关。</p><p><strong>启动</strong> 施法</p><p><strong>频率</strong> 每日一次，另加过载</p><hr /><p><strong>效果</strong> 你以标示的环阶施放该法术。</p><p><strong>制作需求</strong> 提供以所列环阶施放该法术一次。</p><hr /><p><em>注：要创建特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品演员的物品栏中。</em></p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/wand-1-alpha.webp\" />\n<p>This baton is about a foot long and contains a single spell. The appearance typically relates to the spell within.</p><p><strong>Activate</strong> Cast a Spell</p><p><strong>Frequency</strong> once per day, plus overcharge</p><hr /><p><strong>Effect</strong> You Cast the Spell at the indicated rank.</p><p><strong>Craft Requirements</strong> Supply a casting of the spell at the listed rank.</p><hr /><p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/wand-1-alpha.webp\" />"
+    },
+    "Skeptic's Elixir (Moderate)": {
+      "name": "怀疑者灵药（中等） Skeptic's Elixir (Moderate)",
+      "description": "<p><strong>持续时间</strong> 10 minute</p>\n<p><strong>启用</strong> <span class=\"action-glyph\">1</span> Interact</p>\n<hr />\n<p>这剂灵药会磨砺你的心智，使你能看穿说谎、虚假陈述与魔法诡计。你获得+2物品加值，应用于用以察觉虚假陈述的察觉检定与察觉DC，无论是口头说谎还是书面欺骗。你也将此相同的物品加值应用于意志豁免。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.mG6S6zm6hxaF7Tla]{效果: 怀疑者灵药（中等）}</p>\n<p><strong>Duration</strong> 10 minute</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact</p>\n<hr />\n<p>This elixir sharpens your mind and allows you to see through lies, falsehoods, and magical trickery. You gain a +2 item bonus to Perception checks and Perception DCs to notice falsehoods, whether they're spoken lies or written deceit. You gain this same item bonus to Will saves.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.mG6S6zm6hxaF7Tla]{Effect: Skeptic's Elixir (Moderate)}</p>"
+    },
+    "Crafter's Eyepiece": {
+      "name": "工匠护目镜 Crafter's Eyepiece",
+      "description": "<p>这款坚固的金属目镜上刻有方形图案，设计为覆盖单只眼睛佩戴。旋转镜片会显现出你计划制造或修理的某件物品的淡淡三维轮廓，并在各个部件上标注有用的标签。</p>\n<p>你在制作检定上获得+1物品加值。当你修理一件物品时，在成功时将恢复的生命值提高至10 + 每个熟练度等级10，或在大成功时提高至15 + 每个熟练度等级15。</p>\n<p>This rugged metal eyepiece etched with square patterns is designed to be worn over a single eye. Twisting the lens reveals a faint three-dimensional outline of an item you plan to build or repair, with helpful labels on the component parts.</p>\n<p>You gain a +1 item bonus to Crafting checks. When you Repair an item, increase the Hit Points restored to 10 + 10 per proficiency rank on a success or 15 + 15 per proficiency rank on a critical success.</p>"
+    },
+    "Black Adder Venom": {
+      "name": "黑蝰毒 Black Adder Venom",
+      "description": "<p>蝰蛇毒液是一种简单但有效的方式来强化武器。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:18]</p>\n<p><strong>最大持续时间</strong> 3 轮</p>\n<p><strong>阶段 1</strong> @Damage[1d4[poison]] 伤害（1 轮）</p>\n<p><strong>阶段 2</strong> @Damage[1d6[poison]] 伤害（1 轮）</p>\n<p><strong>阶段 3</strong> @Damage[1d8[poison]] 伤害（1 轮）</p>\n<p>Adder venom is a simple but effective way to enhance a weapon.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> (manipulate)</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:18]</p>\n<p><strong>Maximum Duration</strong> 3 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d4[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d6[poison]] damage (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[1d8[poison]] damage (1 round)</p>"
+    },
+    "Key - Silver": {
+      "name": "钥匙 - 银质 Key - Silver",
+      "description": "<p>这把大钥匙由银制成。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-silver-1-alpha.webp\" />\n<p>This large key is made of silver.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-silver-1-alpha.webp\" />"
+    },
+    "Key - Tiny Iron": {
+      "name": "钥匙 - 微型铁制 Key - Tiny Iron"
+    },
+    "Spike Snare": {
+      "name": "尖刺圈套 Spike Snare",
+      "description": "<p>这个基础陷阱由隐藏的尖钉组成，利用生物的动量在其进入陷阱的方格时撕裂或可能将其刺穿，造成 @Damage[2d8[piercing]] 伤害。该生物必须尝试进行一次 @Check[reflex|showDC:all|dc:17|basic] 豁免。</p>\n<p>This basic snare consists of hidden spikes that rely on a creature's momentum to lacerate or potentially impale it as it enters the snare's square, dealing @Damage[2d8[piercing]] damage. The creature must attempt a @Check[reflex|showDC:all|dc:17|basic] saving throw.</p>"
+    },
+    "Ventriloquist's Ring": {
+      "name": "腹语师之戒 Ventriloquist's Ring",
+      "description": "<p>这枚优雅的铜戒指在其圆周上镌刻着微小的鸣禽图案。你在欺瞒检定上获得+1物品加值。</p>\n<p><strong>启动—投声</strong> <span class=\"action-glyph\">2</span>（操控）</p>\n<p><strong>频率</strong> 每天一次</p>\n<hr />\n<p><strong>效果</strong> 将戒指在手指上旋转可让你以魔法投掷你的声音，产生@UUID[Compendium.pf2e.spells-srd.Item.yV7Ouzaoe7DHLESI]{腹语术}法术的效果（@Check[perception|dc:19]）。</p>\n<p>This elegant copper ring has miniature images of songbirds engraved around its circumference. You gain a +1 item bonus to Deception checks.</p>\n<p><strong>Activate—Throw Voice</strong> <span class=\"action-glyph\">2</span> (manipulate)</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> Twisting the ring around your finger allows you to magically throw your voice, with the effects of a @UUID[Compendium.pf2e.spells-srd.Item.yV7Ouzaoe7DHLESI]{Ventriloquism} spell (@Check[perception|dc:19]).</p>"
+    },
+    "Books (C33)": {
+      "name": "书籍（C33） Books (C33)",
+      "description": "<p>这些书对学者和研究人员来说非常有价值。主题范围从深奥学识、虚空之蕨，到扰乱墓之女士，以及对异变魔法与不洁实践历史的深入研究。</p><p>有些书涵盖了为制作美味佳肴而处理各种生物的食谱。</p>\n<p>These books are very valuable to scholars and researchers. Subjects range from the escoteric, the voidbracken, to disrupting the lady of graves, and deep study into the history of abberant magic and unholy practiices.</p><p>Some books cover receipes for preparing various creatures for delicacy meals.</p>"
+    },
+    "The Whispering Reeds": {
+      "name": "《呓语芦苇》 The Whispering Reeds",
+      "description": "<p>这本厚重的巨著由一位匿名作者于数个世纪前编纂而成，其目的在于收集所有与外神宁布洛斯有关的寓言、神话、故事，以及与其相关的遭遇。根据序言所述，作者最初的意图是创作一部可供空无之死的敌人用来对抗其影响的著作，但随着阅读深入，便会发现实际产生的却是相反的效果——作者在汇编这些故事时，无意间创造出一部反而让宁布洛斯更容易影响世界的作品。崇敬空无之死之人会寻求本书的抄本，将其作为指引与宗教典籍；而那些不明就里、仅将其当作故事选集来翻阅的人，则会在不知不觉间沦为宁布洛斯的邪教或该存在之代理人的猎物。那些研读《呓语芦苇》过久的人，往往会被诅咒在死后化为幽灵——尽管他们的存在从不长久，因为他们终将不可避免地被宁布洛斯吞噬。</p>\n<p>这位匿名编纂者原本打算为《呓语芦苇》进行规模极大的印刷发行，但在首批印制后便意识到其危险性，于是放弃了这些计划，转而试图销毁已制成的抄本。这场“清剿”引起了宁布洛斯邪教的注意，他们迅速刺杀了编纂者。据信现存的这部稀有巨著的抄本不足二十四本。本书的险恶本质会导致一切誊写它的尝试都以失败告终，最终只能得到一堆胡言乱语、毫无意义的文本。</p>\n<p>《呓语芦苇》提供数项能力，但除非你是宁布洛斯的追随者，否则当你处于@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied}状态时，你无法启动其中任何一项。</p>\n<hr />\n<p><strong>启动</strong> 10分钟（调查）</p>\n<p><strong>效果</strong> 你获得+2物品加值，用于进行与回忆知识相关的技能检定，以了解宁布洛斯、她的信仰，或与她有关的生物（例如无形的不死生物、吸血魔雾、微灵，以及其他与死亡相关的无形生物）。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令术，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<p><strong>效果</strong> 你从书中高声诵读一句话，并以30尺内一只无形的不死生物为目标。该不死生物受到@Damage[5d6[vitality]]伤害（@Check[will|dc:27|basic]意志豁免），因为其无形存在的一部分被吞噬，化作七个等距分布的孔洞的斑块。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 命令术，交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>效果</strong> 你从《呓语芦苇》中援引一则与当前情境、环境或附近生物相呼应的故事。诡异的雾气与模糊不清的低语在你周围的@Template[emanation|distance:20]范围内升起，同时，七个完美等距的杂草簇在地面、植被，以及范围内除你之外且不超过你在启动时指定的三只生物的血肉上显现。受这些杂草影响的生物会因致残的绝望而承受撕心裂肺的精神痛苦，并受到@Damage[4d6[mental]]伤害（@Check[will|dc:27|basic]意志豁免）。雾气、低语与怪异的杂草会在该轮结束时淡化消失，但任何因该效果而受到精神伤害的生物，还会在1分钟内对带有情绪（特征）的效果进行豁免时承受-1减值。</p>\n<hr />\n<p><strong>启动</strong> 施法</p>\n<p><strong>频率</strong> 每日三次</p>\n<p><strong>效果</strong> 你以尽可能低的等级施放下列法术之一（除非另有说明）：@UUID[Compendium.pf2e.spells-srd.Item.GaRQlC9Yw1BGKHfN]{Wave of Despair}（仅限30尺内一个目标），@UUID[Compendium.pf2e.spells-srd.Item.4koZzrnMXhhosn0D]{Fear}（第3等级），@UUID[Compendium.pf2e.spells-srd.Item.Mkbq9xlAUxHUHyR2]{Paranoia}，或@UUID[Compendium.pf2e.spells-srd.Item.tlcrVRqW1MSKJ5IC]{Phantasmal Killer}。</p>\n<p>This hefty tome was compiled centuries ago by an anonymous author who sought to collect all parables, myths, stories, and encounters with the Outer Goddess Nhimbaloth. According to the introduction, the author's original intent was to create a work that foes of the Empty Death could use to fight against her influence, but as one reads through the book, it becomes apparent that the opposite effect has been achieved—by compiling these stories, the author inadvertently generated a work that made it easier for Nhimbaloth to influence the world. Those who venerate the Empty Death seek copies of this book to use as a guide and religious text, while those who don't know better and peruse the book as though it were merely an anthology of stories find themselves unwittingly falling prey to Nhimbaloth's cult or agents of the entity herself. Those who study from <em>The Whispering Reeds</em> for too long are often cursed to rise as ghosts after death—though their existence never lasts for long, as they are inevitably consumed by Nhimbaloth.</p>\n<p>The anonymous compiler wanted to produce an enormous print run of <em>The Whispering Reeds</em>, but after the initial run they realized the danger and scuttled those plans, instead attempting to destroy those copies already created. This crusade caught the attention of Nhimbaloth's cult, who swiftly assassinated the compiler. Fewer than two dozen copies of this rare tome are believed to still exist. The book's sinister nature causes all attempts to transcribe it to fail, resulting in bodies of gibberish, nonsense text.</p>\n<p><em>The Whispering Reeds</em> provides several abilities, but you can't activate any of them while you are @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied} unless you are a follower of Nhimbaloth.</p>\n<hr />\n<p><strong>Activate</strong> 10 minutes (Investigate)</p>\n<p><strong>Effect</strong> You gain a +2 item bonus to skill checks to Recall Knowledge about Nhimbaloth, her faith, or creatures associated with her (such as incorporeal undead, vampiric mists, wisps, and other incorporeal creatures associated with death).</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> command, Interact</p>\n<p><strong>Frequency</strong> once per hour</p>\n<p><strong>Effect</strong> You read aloud a phrase from the book and target a single incorporeal undead creature within 30 feet. That undead creature takes @Damage[5d6[vitality]] damage (@Check[will|dc:27|basic] save) as portions of their incorporeal being are consumed in patches of seven equally spaced holes.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> command, Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You invoke a tale from <em>The Whispering Reeds</em> that parallels the situation, environment, or creatures nearby. Eerie mists and indistinct whispers rise in a @Template[emanation|distance:20] around you, and clusters of seven perfectly spaced divots manifest in the ground, vegetation, and flesh of creatures in the emanation other than yourself and up to three creatures you designate at the time of activation. Creatures afflicted with these divots suffer from agonizing mental anguish in the form of crippling despair and take @Damage[4d6[mental]] damage (@Check[will|dc:27|basic] save). The mists, whispers, and strange divots fade away at the end of the round, but any creature that takes mental damage from the effect also takes a -1 penalty to saving throws against effects with the emotion trait for 1 minute.</p>\n<hr />\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> three times per day</p>\n<p><strong>Effect</strong> You cast one of the following spells at the lowest level possible (unless otherwise specified): @UUID[Compendium.pf2e.spells-srd.Item.GaRQlC9Yw1BGKHfN]{Wave of Despair} (one target within 30 feet only), @UUID[Compendium.pf2e.spells-srd.Item.4koZzrnMXhhosn0D]{Fear} (3rd), @UUID[Compendium.pf2e.spells-srd.Item.Mkbq9xlAUxHUHyR2]{Paranoia}, or @UUID[Compendium.pf2e.spells-srd.Item.tlcrVRqW1MSKJ5IC]{Phantasmal Killer}.</p>"
+    },
+    "Healing Potion (Lesser)": {
+      "name": "治疗药水（次级） Healing Potion (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一小瓶红宝石般的红色液体，饮用者的伤口迅速愈合时会感到一阵刺痛感。当你饮用一瓶<em>治疗药水</em>时，你恢复 @Damage[(2d8+5)[healing]] 生命值。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p><hr /><p>A <em>healing potion</em> is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a <em>healing potion</em>, you regain @Damage[(2d8+5)[healing]] Hit Points.</p>"
+    },
+    "Fear Gem": {
+      "name": "恐惧宝石 Fear Gem",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（专注）</p><hr /><p>黑暗的烟雾似乎在这颗黑曜石宝石内部翻腾扭动。当你启动宝石时，进行一次近战打击。若你命中并造成伤害，则目标获得 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧（状态） 1}，若为大成功则为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧（状态） 2}。</p>\n<p>若你拥有 @UUID[Compendium.pf2e.feats-srd.Item.lkcM4V3VDAtjlR9P]{威吓打击} 专长，则该打击造成的惊惧（状态）值提高为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧（状态） 2}，若为大成功则为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧（状态） 3}。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> (concentrate)</p><hr /><p>Dark smoke seems to writhe within this obsidian gem. When you activate the gem, make a melee Strike. If you hit and deal damage, the target is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}, or @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} on a critical hit.</p>\n<p>If you have the @UUID[Compendium.pf2e.feats-srd.Item.lkcM4V3VDAtjlR9P]{Intimidating Strike} feat, increase the frightened condition value caused by the Strike to @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}, or @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3} on a critical hit.</p>"
+    },
+    "Books (C30)": {
+      "name": "书籍（C30） Books (C30)",
+      "description": "<p>这些书记录了截至500年前艾巴萨罗姆遭受的所有历史围城。</p>\n<p>These books record all historical seiges on Absalom up until 500 years ago.</p>"
+    },
+    "Rapier": {
+      "name": "+1 细剑 Rapier",
+      "description": "<p>+1 细剑是一种细长的穿刺刃，带有篮式护手。它在许多人心中被视为决斗武器而备受珍视。</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/rapier-stone-black.webp\" />\n<p>The rapier is a long and thin piercing blade with a basket hilt. It is prized among many as a dueling weapon.</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/rapier-stone-black.webp\" />"
+    },
+    "framed portrait of Volluk": {
+      "name": "沃卢克的镶框肖像 framed portrait of Volluk",
+      "description": "<p>她紧抱的物体是一幅装裱好的沃鲁克·阿兹里尼肖像画。肖像画捕捉到了这位卓尔的美貌，以及他那傲慢、自负的得意冷笑。</p><p>他的名字出现在肖像画底座上一块小小的金色铭牌上。</p><p>这件艺术品经受住了时代的流逝，保存得相当完好，而且</p>\n<p>The object she clutches is a framed portrait of Volluk Azrinae. The portrait captures the drow’s beauty as well as his imperious, vain smirk. </p><p>His name appears on a tiny gold plaque at the portrait’s base. </p><p>The work of art has endured the passage of time quite well and</p>"
+    },
+    "+1 Warhammer": {
+      "name": "+1 战锤 +1 Warhammer",
+      "description": "<p>这把武器拥有一根木质握柄，末端连接着一个巨大而沉重的金属锤头。锤头可能是单面或双面，但它始终能够施加强力的钝击。</p>\n<p>This weapon has a wooden shaft ending in a large, heavy metal head. The head of the hammer might be single-sided or double-sided, but it's always capable of delivering powerful bludgeoning blows.</p>"
+    },
+    "Bravo's Brew (Lesser)": {
+      "name": "布拉沃的佳酿（次等） Bravo's Brew (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p>这瓶起泡的啤酒赐予勇气。饮用该炼金灵药后的接下来1小时内，你在意志豁免检定上获得+1物品加值；若尝试对抗恐惧术的意志豁免检定，则该加值为+2。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.eh7EqmDBDW30ShCu]{效果：勇士佳酿}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p><hr /><p>This flask of foaming beer grants courage. For the next hour after drinking this elixir, you gain a +1 item bonus to Will saves, or +2 when attempting Will saves against fear.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.eh7EqmDBDW30ShCu]{Effect: Bravo's Brew}</p>"
+    },
+    "A Scrap Note": {
+      "name": "一张废纸条 A Scrap Note",
+      "description": "<p></p><section class=\"secret\" id=\"secret-0MvUSAz3Lp7CyqvJ\"><p>GM注记：精灵语</p></section><hr /><section class=\"secret\" id=\"secret-pLXuGhGlzxXfcK6n\"><p>我已收到你提出请求，索要：</p><ol><li><p>如虫所晓</p></li><li><p>墓地之宴</p></li><li><p>颅骨之秘</p></li></ol><p>誊写需要耗时数月，但我会尽力尽快把这些书还给你，亲爱的！</p></section>\n<p></p><section class=\"secret\" id=\"secret-0MvUSAz3Lp7CyqvJ\"><p>GM Note: Elven</p></section><hr /><section class=\"secret\" id=\"secret-pLXuGhGlzxXfcK6n\"><p>I have received your request for:</p><ol><li><p>What The Worm Knows</p></li><li><p>Grave Feasts</p></li><li><p>Secrets of the Skull</p></li></ol><p>Transcription will take months, but I’ll try to have these books back to you as soon as possible, my love!</p></section>"
+    },
+    "Books (C27) - Ineffable Hauntings": {
+      "name": "书籍（C27）- 《不可言说的鬼故事》 Books (C27) - Ineffable Hauntings",
+      "description": "<p>这本书包含一些关于仪式和魔法制作的魔法信息。</p><p>@UUID[Compendium.pf2e.spells-srd.Item.c3b6LdLlQDPngNIb]{唤起死灵}</p><p>@UUID[Compendium.pf2e.spells-srd.Item.AMEu5zzLN7uCX645]{幽冥武器}</p>\n<p>This book has some magical information about rituats and magical crafting.</p><p>@UUID[Compendium.pf2e.spells-srd.Item.c3b6LdLlQDPngNIb]{Create Undead}</p><p>@UUID[Compendium.pf2e.spells-srd.Item.AMEu5zzLN7uCX645]{Ghostly Weapon}</p>"
+    },
+    "Scroll of 2nd-rank Spell (Sound Body)": {
+      "name": "2环法术卷轴（健康之躯） Scroll of 2nd-rank Spell (Sound Body)",
+      "description": "<p>从卷轴施法需要用一只手持握卷轴，并以施法（行动）启动它，使用该法术通常所需的动作数量。</p>\n<p>该法术必须出现在你的法术列表上。因为是你在施法，使用你的法术攻击调整和法术DC。该法术还会获得与你的根源相应的特征（奥术、神圣、秘术或原初）。</p>\n<p>卷轴制作时已提供任何物理成本，因此你从卷轴施法时不需要再提供它们。若该法术需要法器，你必须持有该法器才能从卷轴施法。</p>\n<hr />\n<p><em>注意：要创建特定法术的卷轴或魔杖，将该法术从宝典或宝典浏览器拖入PC、NPC或战利品actor的物品栏中。</em></p>\n<p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>The spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack modifier and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical costs are provided when a scroll is created, so you don't need to provide them when casting from a scroll. If the spell requires a locus, you must have that locus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Elixir of Life (Minor)": {
+      "name": "生命灵药（次级） Elixir of Life (Minor)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p>生命药剂会加速一名活体生物的自然治疗过程与免疫系统。饮用该药剂后，你恢复 @Damage[1d6[healing]] 生命值，并在 10 分钟内对抗疾病与毒素的豁免检定获得 +1 物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lPRuIRbu0rHBkoKY]{效果：生命药剂}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p><hr /><p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain @Damage[1d6[healing]] Hit Points and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lPRuIRbu0rHBkoKY]{Effect: Elixir of Life}</p>"
+    },
+    "Folioi (C35) - Teleportation Blueprints": {
+      "name": "Folioi（C35）- 传送蓝图 Folioi (C35) - Teleportation Blueprints",
+      "description": "<p>一份包含数幅深奥图示的手稿夹在北侧书架上几本关于传送的书籍之间。</p><p>这份手稿详述了贝科拉为在憎恨魔窟中快速移动而设置的一系列相互连接的传送法阵，并指出：若因时代流逝或意外导致其力量耗尽，使用 @UUID[Compendium.pf2e.spells-srd.Item.AkF4yFcSCdhoULyZ]{唤醒传送门}仪式来启动它们至关重要。</p><p>@UUID[Compendium.pf2e.spells-srd.Item.AkF4yFcSCdhoULyZ]{唤醒传送门}仪式收录于此。</p><p></p>\n<p>A folio containing several esoteric diagrams is sandwiched between several books on teleportation on the north shelf.</p><p>The folio details Belcorra’s series of linked teleportation circles to quickly move around the Abomination Vaults, and it notes the importance of using the @UUID[Compendium.pf2e.spells-srd.Item.AkF4yFcSCdhoULyZ]{Awaken Portal} ritual to activate them should time or mischance deplete them of power.</p><p>The @UUID[Compendium.pf2e.spells-srd.Item.AkF4yFcSCdhoULyZ]{Awaken Portal} ritual is included here.</p><p></p>"
+    },
+    "Barkskin Potion": {
+      "name": "树肤药水 Barkskin Potion",
+      "description": "<p>在你饮下这杯苦涩的药剂后，你的皮肤如树皮般变厚。你获得一个2级<em>@Compendium[pf2e.spells-srd.YWrfKetOqDwVFut7]{树肤术}</em>法术的效果，持续10分钟。</p>\n<p>After you drink this bitter draft, your skin thickens like bark. You gain the effects of a 2nd-level <em>@Compendium[pf2e.spells-srd.YWrfKetOqDwVFut7]{Barkskin}</em> spell for 10 minutes.</p>"
+    },
+    "Books (C14)": {
+      "name": "书籍（C14） Books (C14)",
+      "description": "<p>这些书看起来像是私人藏本，上面有大量与个人兴趣相关的注释。</p>\n<p>These books look like private copies highly annotated with personal interests.</p>"
+    },
+    "Channel Protection Amulet": {
+      "name": "导能防护项链 Channel Protection Amulet",
+      "description": "<p>这块抛光过的玻陨石碎片被困在一个编织金属丝的笼子里，并悬挂在一根丝质绳索上。佩戴这枚护身符时，若你是活物，你获得 5 点抗力以对抗来自 @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{伤害术} 法术的伤害；若你是不死生物，则获得 5 点抗力以对抗来自 @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{治疗术} 法术的伤害。</p>\n<p>This nugget of polished tektite is trapped in a cage of braided wire and hangs from a silken cord. When wearing this amulet, you gain resistance 5 against damage from @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{Harm} spells if you're living, or against @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]{Heal} spells if you're undead.</p>"
+    },
+    "Peridot Bead": {
+      "name": "橄榄石珠子 Peridot Bead",
+      "description": "<p>宝石是自然形成的矿物，通常呈晶体形态；在少数情况下则为有机材料，如琥珀、珊瑚和珍珠。</p><hr /><p>除最大号的宝石外，宝石的重量大约只有一枚硬币的一半，因此约2,000颗宝石为1 负载。</p><hr /><p>未加工的宝石价值为成品宝石价格的一半，并可作为制作成品宝石所需的最低限度原材料。</p><ul><li><p>低等半宝石为等级0物品</p></li><li><p>中等与高等半宝石为1级物品，低等</p></li><li><p>中等宝石为4级物品，制作需要专家熟练度</p></li><li><p>高等宝石为7级物品，制作需要大师熟练度</p></li></ul>\n<p>Gems are naturally occurring minerals, typically in a crystalline form, or, in a few cases, organic material such as amber, coral, and pearls. </p><hr /><p>All but the largest gems weigh about half as much as a coin, so about 2,000 gems is 1 Bulk.</p><hr /><p> Unworked gems are worth half the Price of a finished gem and can serve as the minimum raw materials necessary to Craft the finished gem. </p><ul><li><p>Lesser semiprecious stones are level 0 items</p></li><li><p>Moderate and greater semiprecious stones are 1st-level items, lesser</p></li><li><p>Moderate precious stones are 4th-level items that require expert proficiency to Craft</p></li><li><p>Greater precious stones are 7th-level items that require master proficiency to Craft</p></li></ul>"
+    },
+    "Comprehension Elixir (Lesser)": {
+      "name": "理解灵药（次级） Comprehension Elixir (Lesser)",
+      "description": "<p>启动 <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>这种苦涩的饮剂会让你的心智对文字的潜能敞开。在饮用该炼金灵药后的所列持续时间内，只要你阅读的文字是以通用语言书写，你就能理解其中的任何词语。该炼金灵药不会自动让你理解密码或极其晦涩的段落——你仍需要尝试进行一次技能检定来进行文书解读。持续时间为1分钟。</p>\n<p>Activate <span class=\"action-glyph\">1</span> (manipulate)</p><hr /><p>This bitter draught opens your mind to the potential of the written word. For the listed duration after drinking this elixir, you can understand any words you read, so long as they are written in a common language. This elixir doesn't automatically allow you to understand codes or extremely esoteric passages-you still need to attempt a skill check to Decipher Writing. The duration is 1 minute.</p>"
+    },
+    "Sound Body": {
+      "name": "强健体魄 Sound Body",
+      "description": "<p>你释放一股治疗能量来恢复目标的身体。尝试反制一个你选择、对目标施加下列状态之一的效果：@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded}、@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled}、@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled}，或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened}。若你未能反制该效果，但如果它的反制阶级低2阶你本会反制成功，则你改为将该效果压制直到你下个回合开始。效果被压制期间，其持续时间不会流逝。</p>\n<p>此法术无法反制或压制诅咒、疾病，或作为目标正常状态一部分的状态。</p>\n<hr />\n<p><strong>升阶（4环）</strong> 将@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained}与@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed}加入状态列表。</p>\n<p><strong>升阶（8环）</strong> 将@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned}加入状态列表。</p>\n<p>You send a surge of healing energy to restore the target's body. Attempt to counteract an effect of your choice imposing one of these conditions on the target: @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded}, @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled}, @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened}, @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled}, or @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened}. If you didn't counteract the effect, but you would have if its counteract rank were 2 lower, instead suppress the effect until the beginning of your next turn. The effect's duration doesn't elapse while it's suppressed.</p>\n<p>This spell can't counteract or suppress curses, diseases, or conditions that are part of the target's normal state.</p>\n<hr />\n<p><strong>Heightened (4th)</strong> Add @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained} and @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed} to the list of conditions.</p>\n<p><strong>Heightened (8th)</strong> Add @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned} to the list of conditions.</p>"
+    },
+    "Key: Bronze Book": {
+      "name": "键：青铜书 Key: Bronze Book",
+      "description": "<p>这把钥匙由青铜制成，上面有一本书。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-bronze-lh-alpha.webp\" />\n<p>This key is made of bronze and has a book on it.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-bronze-lh-alpha.webp\" />"
+    },
+    "Hypercognition": {
+      "name": "极化认知 Hypercognition",
+      "description": "<p>你迅速编目并整理与你当前处境相关的信息。作为施放该法术的一部分，你可以立即使用至多6次回忆知识动作。对于这些动作，当你回忆知识时触发的任何特殊能力、反应动作（）或自由动作（）都不能使用。</p>\n<p>You rapidly catalog and collate information relevant to your current situation. You can instantly use up to 6 Recall Knowledge actions as part of Casting this Spell. For these actions, you can't use any special abilities, reactions, or free actions that trigger when you Recall Knowledge.</p>"
+    },
+    "Silver Ring": {
+      "name": "银戒指 Silver Ring",
+      "description": "<p>这枚银戒指做工精美，但曾经镶嵌的一颗宝石已被取下或遗失。</p>\n<p>This silver ring is nicely crafted, but once held a stone that has been removed or lost.</p>"
+    },
+    "Chipped Tooth": {
+      "name": "崩裂牙齿 Chipped Tooth",
+      "description": "<p>一枚小型生物的断齿</p>\n<p>A broken tooth of a small creature</p>"
+    },
+    "Books (C36)": {
+      "name": "书籍（C36） Books (C36)",
+      "description": "<p>里面存放着几本书——都是抄写员抄录的文本副本，原本打算出售，或作为赋礼送给贝科拉在异国的盟友，但那些盟友如今都已死去。</p>\n<p>Several books are stored within—copies of texts produced by scribes and once intended for sale or as gifts to Belcorra’s allies in other lands, all of whom are now dead.</p>"
+    },
+    "Force Barrage (for wand)": {
+      "name": "力场弹幕（用于魔杖） Force Barrage (for wand)",
+      "description": "<p>你向一名你能看见的生物发射一枚凝固的魔法碎片。它自动命中并造成1d4+1力场伤害。你在施放法术时每额外使用1个动作，便使你发射的碎片数量增加1枚，至多为3个动作时发射3枚碎片。你为每枚碎片分别选择目标。如果你向同一目标发射多于一枚碎片，在应用伤害加值或减值、抗力、弱点等之前，先将伤害合并。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你每花费1个动作便额外发射1枚碎片。</p>\n<p>You fire a shard of solidified magic toward a creature that you can see. It automatically hits and deals 1d4+1 force damage. For each additional action you use when Casting the Spell, increase the number of shards you shoot by one, to a maximum of three shards for 3 actions. You choose the target for each shard individually. If you shoot more than one shard at the same target, combine the damage before applying bonuses or penalties to damage, resistances, weaknesses, and so forth.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> You fire one additional shard with each action you spend.</p>"
+    },
+    "Magic Wand (2nd-Rank Quench)": {
+      "name": "魔法魔杖（2环止渴） Magic Wand (2nd-Rank Quench)",
+      "description": "<p>这根短杖大约一英尺长，内含一个法术。其外观通常与其中的法术有关。</p>\n<p><strong>启动</strong> 施法</p>\n<p><strong>频率</strong> 每天一次，外加过载</p>\n<hr />\n<p><strong>效果</strong> 你以所示环阶施放该法术。</p>\n<p><strong>制作需求</strong> 提供一次以所列环阶施放该法术。</p>\n<hr />\n<p><em>注：要制作某个特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品actor的物品栏中。</em></p>\n<p>This baton is about a foot long and contains a single spell. The appearance typically relates to the spell within.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day, plus overcharge</p>\n<hr />\n<p><strong>Effect</strong> You Cast the Spell at the indicated rank.</p>\n<p><strong>Craft Requirements</strong> Supply a casting of the spell at the listed rank.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Books (C36) - Named Books": {
+      "name": "书籍（C36）- 命名书籍 Books (C36) - Named Books",
+      "description": "<p>三本关于死灵法术阴森论述的特定典籍被单独放置：</p><ol><li><p>如虫所晓</p></li><li><p>墓地之宴</p></li><li><p>颅骨之秘</p></li></ol><p></p>\n<p>Three particular tomes concerning grim treatises on necromancy are set aside:</p><ol><li><p>What The Worm Knows</p></li><li><p>Grave Feasts</p></li><li><p>Secrets of the Skull</p></li></ol><p></p>"
+    },
+    "Eternal Eruption": {
+      "name": "永恒喷发 Eternal Eruption",
+      "description": "<p>外形类似于<em>冻结的熔岩</em>，永恒喷发由同类型的时代魔法制成，但被构筑为在时代中循环，在使用后会重塑自身。要分辨两者的差异，需要仔细检查才能看到一层微弱的、连发的红色符文图样。</p>\n<p><strong>启用—熔岩炸弹</strong> <span class=\"action-glyph\">2</span>（专注，操控）</p><hr /><p><strong>效果</strong> 你投掷<em>永恒喷发</em>，其效果等同于<em>@UUID[Compendium.pf2e.equipment-srd.Item.5lpBiEqrxiyj48JB]{冻结的熔岩}</em>。在[[/br 2d4 #hours]]{2d4小时}后，<em>永恒喷发</em>会在你身上的某个容器中重塑自身，通常是你最近一次将其收纳的那个。</p><hr /><p><em>永恒喷发</em>在一次@Check[reflex|dc:21|basic|options:area-effect]中造成@Damage[5d6[fire]|options:area-damage]。</p>\n<p>Resembling <em>frozen lava</em>, an eternal eruption is made with the same type of time magic, but is built to loop through time, reforming itself after it's used. Determining the difference between the two requires a close examination to see a faint, repeating pattern of red runes.</p>\n<p><strong>Activate—Lava Bomb</strong> <span class=\"action-glyph\">2</span> (concentrate, manipulate)</p><hr /><p><strong>Effect</strong> You fling the <em>eternal eruption</em>, with the effect of <em>@UUID[Compendium.pf2e.equipment-srd.Item.5lpBiEqrxiyj48JB]{Frozen Lava}</em>. After [[/br 2d4 #hours]]{2d4 hours}, the <em>eternal eruption</em> reforms itself in a container on your person, typically the one you most recently stored it in.</p><hr /><p><em>Eternal Eruption</em> deals @Damage[5d6[fire]|options:area-damage] on a @Check[reflex|dc:21|basic|options:area-effect].</p>"
+    },
+    "Scroll of 2nd-level [Mendinig]": {
+      "name": "2环[Mendinig]卷轴 Scroll of 2nd-level [Mendinig]",
+      "description": "<p>从卷轴施放法术需要你一只手持握卷轴，并以施法（行动）来启动它，使用该法术通常所需数量的动作。</p>\n<p>要从卷轴施法，该法术必须出现在你的法术列表上。因为是你在施法，使用你的法术攻击掷骰和法术DC。该法术也会获得与你的根源相应的特征（奥术、神圣、秘术或原初）。</p>\n<p>卷轴在被制作时就已提供任何实体材料成分及其花费，因此当你从卷轴施法时不需要再提供它们。你必须将该法术任何所需的材料成分替换为一个姿势成分。若该法术需要一件法器，你必须持有该法器才能从卷轴施法。</p>\n<hr />\n<p><em>注：要创建某个特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品角色的物品栏中。</em></p>\n<p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "+1 Low-Grade Silver Hatchet": {
+      "name": "+1 低纯度银质短柄斧 +1 Low-Grade Silver Hatchet",
+      "description": "<p>这把小斧可以用于近战或投掷。</p>\n<p>This small axe can be used in close combat or thrown.</p>"
+    },
+    "Spyglass": {
+      "name": "望远镜 Spyglass",
+      "description": "<p>一支典型的望远镜能让你看得比平常远八倍。</p><p>这支镶嵌宝石的望远镜确实制作得非常精良。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/spyglass-alpha.webp\" />\n<p>A typical spyglass lets you see eight times farther than normal.</p><p>This bejeweled spyglass in a very fine crafted indeed.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/spyglass-alpha.webp\" />"
+    },
+    "Loose Papers & Plans (C35) - Gauntlight Plans": {
+      "name": "散落的纸张与计划（C35）- 凄凉灯塔计划 Loose Papers & Plans (C35) - Gauntlight Plans",
+      "description": "<p>这一摞散乱的纸张与卷轴包含大量关于 @UUID[Compendium.pf2e.equipment-srd.Item.Y12bRscT79LCpz4k]{凄凉灯塔} 的财富信息。</p><p>这些纸张以阿克洛语写成；整理并阅读它们需要 8 小时，之后阅读者便能了解凄凉灯塔的功能，如同他们已彻底研究过这件神器一般。</p><p></p>\n<p>The stack of loose papers and scrolls contain a wealth of information about @UUID[Compendium.pf2e.equipment-srd.Item.Y12bRscT79LCpz4k]{Gauntlight}.</p><p>These papers are written in Aklo; sorting and then reading them takes 8 hours, after which the reader can learn about Gauntlight’s functions as if they’d fully researched the artifact.</p><p></p>"
+    },
+    "Bloodstone": {
+      "name": "血石 Bloodstone"
+    },
+    "Effect: Darkvision Elixir (Lesser)": {
+      "name": "效果：黑暗视觉灵药（次等） Effect: Darkvision Elixir (Lesser)",
+      "description": "<p>由 @UUID[Item.jTuSpyE45Ns7lXYy]{黑暗视觉药剂（次等）}赋予</p><p>你获得黑暗视觉。</p>\n<p>Granted by  @UUID[Item.jTuSpyE45Ns7lXYy]{Darkvision Elixir (Lesser)}</p><p>You gain Darkvision.</p>"
+    },
+    "Key: Bronze Lighthouse": {
+      "name": "钥匙：青铜灯塔 Key: Bronze Lighthouse",
+      "description": "<p>这把钥匙由青铜制成，上面有一座灯塔。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-bronze-lh-alpha.webp\" />\n<p>This key is made of bronze and has a lighthouse on it.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-bronze-lh-alpha.webp\" />"
+    },
+    "Magic Wand (1st-Level Spell)": {
+      "name": "魔法魔杖（1环法术） Magic Wand (1st-Level Spell)",
+      "description": "<p>这根警棍约一英尺长，包含一个单一法术。其外观通常与其中的法术相关。</p>\n<p><strong>启动</strong> 施法</p>\n<p><strong>频率</strong> 每日一次，外加过载</p>\n<hr />\n<p><strong>效果</strong> 你以所示等级施放该法术。</p>\n<p><strong>制作需求</strong> 提供一次以所列等级施放该法术。</p>\n<hr />\n<p><em>注：要创建特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入 PC、NPC 或战利品角色的物品栏中。</em></p>\n<p>This baton is about a foot long and contains a single spell. The appearance typically relates to the spell within.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day, plus overcharge</p>\n<hr />\n<p><strong>Effect</strong> You Cast the Spell at the indicated level.</p>\n<p><strong>Craft Requirements</strong> Supply a listed-level casting of the spell.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Mesmerizing Opal": {
+      "name": "迷心蛋白石 Mesmerizing Opal",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<hr />\n<p>这枚镶银的蛋白石吊坠闪耀着虹彩光辉。当你启动它时，尝试一次欺瞒检定以进行@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{虚招}。如果结果为成功，则你改为获得大成功或大失败中的大成功。如果结果为大成功或大失败中的大失败，则你改为获得失败。</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (concentrate)</p>\n<hr />\n<p>This silver-bound opal pendant is afire with iridescence. When you activate it, attempt a Deception check to @UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{Feint}. If the outcome is a success, you get a critical success instead. If the outcome is a critical failure, you get a failure instead.</p>"
+    },
+    "Mending": {
+      "name": "修复术 Mending",
+      "description": "<p>你修理目标物品。你每个法术环阶为目标恢复5点生命值，若此修理使其超过该物品的破损阈值，则可能移除 @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{破损（状态）} 状态。你无法替换遗失的部件，也无法修理已被完全摧毁的物体。</p>\n<hr />\n<p><strong>强化（2环）</strong> 你可以以一个负载不超过1的非魔法物体为目标。</p>\n<p><strong>强化（3环）</strong> 你可以以一个负载不超过2的非魔法物体为目标，或以一个负载不超过1的魔法物体为目标。</p>\n<p>You repair the target item. You restore 5 Hit Points per spell rank to the target, potentially removing the @UUID[Compendium.pf2e.conditionitems.Item.6dNUvdb1dhToNDj3]{Broken} condition if this repairs it past the item's Broken Threshold. You can't replace lost pieces or repair an object that's been completely destroyed.</p>\n<hr />\n<p><strong>Heightened (2nd)</strong> You can target a non-magical object of 1 Bulk or less.</p>\n<p><strong>Heightened (3rd)</strong> You can target a non-magical object of 2 Bulk or less, or a magical object of 1 Bulk or less.</p>"
+    },
+    "Scroll of 2nd-level [Hypercognition]": {
+      "name": "2级[极化认知]卷轴 Scroll of 2nd-level [Hypercognition]",
+      "description": "<p>从卷轴施法需要你用一只手持握卷轴，并使用施法（行动）来启动它，所需动作数量与该法术的正常动作数量相同。</p>\n<p>要从卷轴施法，该法术必须出现在你的法术列表上。因为是你在施法，使用你的法术攻击掷骰与法术DC。该法术也会获得与你的根源相对应的特征（奥术、神圣、秘术或原初）。</p>\n<p>卷轴在被制作时就已提供所有实体的材料成分与花费，因此你在从卷轴施法时不需要再提供它们。你必须将该法术所需的任何材料成分替换为姿势成分。如果该法术需要法器，你必须持有该法器才能从卷轴施法。</p>\n<hr />\n<p><em>注：要创建特定法术的卷轴或魔杖，将该法术从资料库或资料库浏览器拖入PC、NPC或战利品角色的物品栏中。</em></p>\n<p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+    },
+    "Wayfinder": {
+      "name": "寻路仪 Wayfinder",
+      "description": "<p><strong>许可</strong> 通常为开拓者协会的成员</p><hr /><p>这款小巧的罗盘重新利用了古老科技，从一种被称为<em>永劫石</em>的神秘魔法物品中汲取奇异力量。它既是开拓者协会特工的职务徽章，也是各类冒险者之间的身份象征。<em>寻路仪</em>可作为指南针使用。</p><p><em>寻路仪</em>中央的凹槽可容纳一枚<em>永劫石</em>。将<em>永劫石</em>放入该凹槽，你将获得如同让<em>永劫石</em>绕头部盘旋时的全部好处，但它更不易被注意到或被偷走。你会同时灌注一枚<em>寻路仪</em>及其内的<em>永劫石</em>，且它们在你的灌注上限中仅计为一件物品。嵌入<em>寻路仪</em>的已灌注<em>永劫石</em>同样会赋予其共鸣力量。</p><p>若在同一时间你身上携带了多于一枚、且都嵌入已灌注<em>永劫石</em>的<em>寻路仪</em>，它们的共鸣会产生破坏性干涉，使你无法从其中任何一枚获得好处。你仍可从额外绕头部盘旋的<em>永劫石</em>获得好处，只是不能来自<em>寻路仪</em>中的<em>永劫石</em>。</p><p><strong>启动—光亮术</strong> <span class=\"action-glyph\">A</span>（专注）</p><hr /><p><strong>效果</strong> <em>寻路仪</em>成为一个1环 @UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]{Light} 法术的目标。</p>\n<p><strong>Access</strong> usually a member of the Pathfinder Society</p><hr /><p>This compact compass repurposes ancient technology to draw fantastic powers from the mysterious magical items called <em>aeon stones</em>. It serves as a badge of office for agents of the Pathfinder Society and as a status symbol among adventurers of any stripe. A <em>wayfinder</em> functions as a compass.</p><p>An indentation in the middle of the <em>wayfinder</em> can hold a single <em>aeon stone</em>. Placing an <em>aeon stone</em> in this indentation provides you all the benefits of having the <em>aeon stone</em> orbiting your head, but it protects the stone from being noticed or stolen as easily. You invest a <em>wayfinder</em> and the <em>aeon stone</em> within it simultaneously, and they count as only one item toward your investiture limit. An invested <em>aeon stone</em> slotted in a <em>wayfinder</em> also grants its resonant power.</p><p>If you have more than one <em>wayfinder</em> with an invested <em>aeon stone</em> on your person at a given time, destructive interference from their resonance prevents you from gaining benefits from any of them. You can still benefit from additional <em>aeon stones</em> orbiting your head, just not in <em>wayfinders</em>.</p><p><strong>Activate—Light</strong> <span class=\"action-glyph\">A</span> (concentrate)</p><hr /><p><strong>Effect</strong> The <em>wayfinder</em> is targeted by a 1st-rank @UUID[Compendium.pf2e.spells-srd.Item.WBmvzNDfpwka3qT4]{Light} spell.</p>"
+    },
+    "Gold Tooth": {
+      "name": "金牙 Gold Tooth",
+      "description": "<p>从一名死去的侍僧口中拔出</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/gold-tooth-alpha.webp\" />\n<p>Extracted from the mouth of a dead acolyte</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/gold-tooth-alpha.webp\" />"
+    },
+    "Clockwork Gemstone": {
+      "name": "发条宝石 Clockwork Gemstone",
+      "description": "<p>在发条装置中用作轴承的成形石头。</p>\n<p>Shaped stones used as bearings in the clockworks.</p>"
+    },
+    "Thieves' Tools": {
+      "name": "盗贼工具 Thieves' Tools",
+      "description": "<p>你需要盗贼工具来使用贼活（技能）进行 @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick Locks} 或 @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{Disable Devices}（某些类型）。</p>\n<p>如果你的盗贼工具损坏了，你可以通过用适用于你工具的 @UUID[Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44]{Replacement Picks} 替换开锁镐来修理它们；这不需要使用 Repair 动作。</p>\n<p>You need thieves' tools to @UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{Pick Locks} or @UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{Disable Devices} (of some types) using the Thievery skill.</p>\n<p>If your thieves' tools are broken, you can repair them by replacing the lock picks with @UUID[Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44]{Replacement Picks} appropriate to your tools; this doesn't require using the Repair action.</p>"
+    },
+    "Shining Sling Bullets": {
+      "name": "闪光投石索弹丸 Shining Sling Bullets",
+      "description": "<p><em>闪耀弹药</em>会发出微弱的发光。被射出后，它会在20英尺半径内提供明亮光照（并在接下来的20英尺提供昏暗光照），持续10分钟。若它命中一个目标，它会黏附其上，使该目标在相同半径内发出光亮术。一名生物可以用一个交互动作移除该弹药，但该弹药本身会在剩余的持续时间内继续发光，或直到被摧毁为止。</p><p>@UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{效果：闪耀弹药}</p>\n<p><em>Shining ammunition</em> gives off a faint glow. When shot, it sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 10 minutes. If it hits a target, it sticks, causing the target to shed light in the same radius. A creature can remove the ammunition with an Interact action, but the ammunition itself continues to glow for the rest of the duration or until destroyed.</p><p>@UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{Effect: Shining Ammunition}</p>"
+    },
+    "Weapon Potency (+1)": {
+      "name": "武器威能（+1） Weapon Potency (+1)",
+      "description": "<p>魔法强化使这把武器攻击精准。用这把武器进行的攻击掷骰获得+1物品加值，且该武器可蚀刻一道属性符文。</p>\n<p>你可以将一把武器上已蚀刻的<em>武器强效</em>符文升级为更强的版本，将现有符文的数值提高至新符文的数值。你必须拥有更强符文的配方才能如此做，而升级的价格为两道符文价格之间的差额。</p>\n<p><strong>制造需求</strong> 你是制造的专家。</p>\n<p>Magical enhancements make this weapon strike true. Attack rolls with this weapon gain a +1 item bonus, and the weapon can be etched with one property rune.</p>\n<p>You can upgrade the <em>weapon potency</em> rune already etched on a weapon to a stronger version, increasing the values of the existing rune to those of the new rune. You must have the formula of the stronger rune to do so, and the Price of the upgrade is the difference between the two runes' Prices.</p>\n<p><strong>Craft Requirements</strong> You are an expert in Crafting.</p>"
+    },
+    "Intricate Gear": {
+      "name": "精巧道具 Intricate Gear",
+      "description": "<p>在保留其价值的同时移除该道具需要一次<strong>DC 16 制作检定。</strong> </p><hr /><p><strong>成功：</strong>40 gp</p><p><strong>失败：</strong>20 gp</p><p><strong>大失败：</strong>该道具损坏且一文不值</p>\n<p>Removing the gear while preserving its value requires a successful <strong>DC 16 Crafting check.</strong> </p><hr /><p><strong>Success:</strong> 40 gp</p><p><strong>Failure:</strong> 20 gp</p><p><strong>Critical Failure:</strong> the gear breaks and is worth nothing</p>"
+    },
+    "Pharasma - Minor Boon": {
+      "name": "法莱斯玛 - 次级恩赐 Pharasma - Minor Boon",
+      "description": "<p>你看见了你命运的短暂、预言性一瞥。</p>\n<p>一次，你获得对一次单独检定的+2状态加值；你可以在你确定结果后再应用此加值，并且它可能改变成功等级。</p>\n<p>You see a momentary, prophetic glimpse of your fate.</p>\n<p>Once, you gain a +2 status bonus to a single check; you can apply this bonus after you determine the result, and it can potentially change the degree of success.</p>"
+    },
+    "Books (C19)": {
+      "name": "书籍（C19） Books (C19)",
+      "description": "<p>这些书是关于纹身艺术以及莫里宾特感兴趣的历史纹身。</p>\n<p>These books are about tattoo artistry and historical tattoos of interest to Morlibint.</p>"
+    },
+    "Darkvision Elixir (Lesser)": {
+      "name": "黑暗视觉灵药（次等） Darkvision Elixir (Lesser)",
+      "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>在你饮下这瓶药剂后，你在黑暗中的视力变得更敏锐。你获得黑暗视觉，持续10分钟。</p><p> @UUID[Item.aj3bvVPgjdyTm50q]{效果：黑暗视觉药剂（次等）}</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> (manipulate)</p><hr /><p>After you drink this elixir, your sight becomes sharper in darkness. You gain darkvision for 10 minutes.</p><p> @UUID[Item.aj3bvVPgjdyTm50q]{Effect: Darkvision Elixir (Lesser)}</p>"
+    },
+    "Studded Leather Armor": {
+      "name": "镶嵌皮甲 Studded Leather Armor",
+      "description": "<p>这套皮革护甲用金属铆钉加固，有时还会加上小型金属板，在提供与皮革护甲相近的大部分灵活性的同时，提供更强的防护。</p>\n<p>This leather armor is reinforced with metal studs and sometimes small metal plates, providing most of the flexibility of leather armor with more robust protection.</p>"
+    },
+    "Map 2": {
+      "name": "地图 2 Map 2",
+      "description": "<p>斯夸老大的他曾经家园地图</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/boss-map-2.webp\" />\n<p>Boss Skrawng's Map of his former home</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/boss-map-2.webp\" />"
+    },
+    "Books (C11)": {
+      "name": "书籍（C11） Books (C11)",
+      "description": "<p>这里保存的书籍都是一般常识，因此对莫里宾特没什么兴趣。</p>\n<p>The books kept here are of general knowledge and thus little interest to Morlibint.</p>"
+    },
+    "Dagger": {
+      "name": "匕首 Dagger",
+      "description": "<p>这4把小型刃类武器可单手持用，并用于在近战中刺击一名生物。它们也可以投掷。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/dagger-1-alpha.webp\" />\n<p>These 4 small, bladed weapons are held in one hand and used to stab a creature in close combat. They can also be thrown.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/dagger-1-alpha.webp\" />"
+    },
+    "+1 Chain Shirt": {
+      "name": "+1 链甲衫 +1 Chain Shirt",
+      "description": "<p>有时也被称为锁子甲袍，这是一种长衫，由与铁链甲相同的金属环构成。然而，它比铁链甲轻得多，并且只保护穿戴者的躯干、上臂和大腿。</p>\n<p>Sometimes called a hauberk, this is a long shirt constructed of the same metal rings as chain mail. However, it is much lighter than chain mail and protects only the torso, upper arms, and upper legs of its wearer.</p>"
+    },
+    "Books (C27)": {
+      "name": "书籍（C27） Books (C27)",
+      "description": "<p>这些关于神秘知识与上古神祇的书籍令莫里宾特感兴趣。</p>\n<p>These books of escoteric knowledge and elder gods are of interest to Morlibint.</p>"
+    },
+    "+1 Striking Pick": {
+      "name": "+1 强击鹤嘴锄 +1 Striking Pick",
+      "description": "<p>一把专为战斗而设计的镐，配有坚固的木制柄和沉重的尖头，能够造成毁灭性的打击。</p>\n<p>A pick designed solely for combat has a sturdy wooden shaft and a heavy, pointed head to deliver devastating blows.</p>"
+    },
+    "Gold Paper Weight": {
+      "name": "金纸镇纸 Gold Paper Weight",
+      "description": "<p>一个由纯金制成的精致简易纸镇。</p>\n<p>An intricate simple paper weight made of solid gold.</p>"
+    },
+    "Key Ring": {
+      "name": "钥匙环 Key Ring",
+      "description": "<p>锈蚀已经毁坏了其中六把铁钥匙，但仍有两把青铜钥匙可以使用：</p><ul><li><p>一把装饰有灯塔</p></li><li><p>一把装饰有书本</p></li></ul><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-ring-set-alpha.webp\" />\n<p>Rust has ruined six of its iron keys, but two bronze keys remain usable:</p><ul><li><p>one decorated with a lighthouse</p></li><li><p>one decorated with a book</p></li></ul><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/key-ring-set-alpha.webp\" />"
+    },
+    "Sword Cane": {
+      "name": "剑杖 Sword Cane",
+      "description": "<p>这把纤细、类似+1 细剑的剑隐藏在作为剑鞘的木质或金属手杖之中，使其成为一种不显眼的武器，容易在检查中蒙混过关或带入上流社会活动。剑杖在入鞘时通常长4英尺，其剑柄通常以木质或金属装饰封顶。</p>\n<p>This slender, rapier-like sword is concealed within a wooden or metal cane that serves as a sheath, making it an inconspicuous weapon easy to slip past inspections or into high-society events. A sword cane is typically 4 feet long when sheathed, and its hilt is usually capped with a wooden or metal decoration.</p>"
+    },
+    "Black Onyx Gemstone": {
+      "name": "黑色缟玛瑙宝石 Black Onyx Gemstone"
+    },
+    "Caltrop Snare": {
+      "name": "铁蒺藜圈套 Caltrop Snare",
+      "description": "<p>这个陷阱由一个隐藏的、装有 @UUID[Compendium.pf2e.equipment-srd.Item.7fSnvJ2xoSfa6JXD]{铁蒺藜} 的容器组成，并连接在一根绊线上。当陷阱被触发时，它会将铁蒺藜抛洒到陷阱所在的方格，或陷阱相邻的一个方格中。你在布设陷阱时选择要落入的方格。</p>\n<p>如果铁蒺藜散落到与某个生物相同的方格，该生物必须立刻尝试一次特技检定。</p><hr /><p><strong>制造需求</strong> 提供一个装有铁蒺藜的容器。</p>\n<p>This snare consists of a hidden canister of @UUID[Compendium.pf2e.equipment-srd.Item.7fSnvJ2xoSfa6JXD]{Caltrops} attached to a trip wire. When the snare is triggered, it flings the caltrops into either the snare's square or a square adjacent to the snare. You choose which square when you set up the snare.</p>\n<p>If the caltrops scatter into the same square as a creature, that creature must attempt the Acrobatics check immediately.</p><hr /><p><strong>Craft Requirements</strong> Supply a container of caltrops.</p>"
+    },
+    "Fishcakes": {
+      "name": "鱼饼 Fishcakes",
+      "description": "<p>一批点心——烟熏三文鱼、莳萝和奶酪，包裹在鱼形的柔软面皮中。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/pastry-fish-black.webp\" />\n<p>A stash of pastries—smoked salmon, dill, and cheese in a fish-shaped doughy exterior.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/pastry-fish-black.webp\" />"
+    },
+    "Books (C35) - Belcorra's Diary": {
+      "name": "书籍（C35）- 贝科拉的日记 Books (C35) - Belcorra's Diary",
+      "description": "<section id=\"secret-3r3EffUhfDKmkJyU\" class=\"secret\"><p>北侧书架上最大的一本书是一册厚重的日记，内容主要聚焦于贝科拉对艾巴萨罗姆的憎恨。</p><p>它以阿克洛语写成，英雄花费8小时阅读后会得知：</p><ul><li><p>她的家族史：从被放逐并陷入贫困，到她最终回到该地区，建造一处巢穴，并希望以此向那座使她家族蒙羞、致其贫困的城市复仇。</p></li><li><p>日记最后几页记载了她在建造憎恨魔窟方面的大量工作。</p></li><li><p>虽然日记没有提供太多具体细节，但提到了塑肉仪式实验室的建造、她让敌人与怪物勇士相互厮杀以取乐的竞技场、牢房、拷问室</p></li><li><p>通往幽暗地域的连接，以及一座宏伟的神殿——“空无之死本人曾经触及过这个脆弱的世界。”</p></li><li><p>贝科拉的记录常以抽象方式谈及她的爪牙，仿佛在吹嘘有多少人前来侍奉她、协助她建造这处复合体。</p></li><li><p>她只提到过一人姓名：她那位“可笑地虚荣”的学徒，沃鲁克·阿兹里尼。</p></li><li><p>倒数几则记录之一描述这名学徒如何从“下方一个暴发又爱多管闲事的卓尔社群”来到此处，侍奉贝科拉。笔记未提供关于该卓尔社群的更多信息。</p></li></ul></section>\n<section id=\"secret-3r3EffUhfDKmkJyU\" class=\"secret\"><p>The largest book on the northern shelf is a large journal that focuses largely on Belcorra’s hatred of Absalom.</p><p>It’s written in Aklo, and a hero who spends 8 hours reading it learns:</p><ul><li><p>Her family history from their exile to poverty and her eventual return to the region to build a lair from which she hoped to exact revenge on the city that disgraced and impoverished her family.</p></li><li><p>The last several pages of the journal document much of her work in building the Abomination Vaults.</p></li><li><p>While the journal doesn’t offer many specific details, it mentions construction of fleshwarping laboratories, arenas where she pitted enemies against monstrous champions for her amusement, prisons, torture chambers</p></li><li><p>Links to the Darklands, and a great temple where “once the Empty Death herself brushed against this fragile world.”</p></li><li><p>Belcorra’s entries often speak of her minions in the abstract, as if bragging about how many have come to serve her in creating the complex</p></li><li><p>She only ever mentions one by name: her “amusingly vain” apprentice, Volluk Azrinae.</p></li><li><p>One of the last entries describes how this apprentice arrived from “a community of upstart and meddlesome drow below” to serve Belcorra. The notes don’t provide any further information about this drow community.</p></li></ul></section>"
+    },
+    "Retribution Axe": {
+      "name": "复仇斧 Retribution Axe",
+      "description": "<p>这把<em><strong>+1巨斧</strong></em>的刃部带有一枚人类头骨的图案。</p><hr /><p>每当某个生物以一次攻击对你造成伤害时，这枚头骨就会改变外观，看起来像那个生物的面孔。</p><p>在你下个回合结束前，你对该生物的下一次伤害掷骰获得<strong>+2环境加值</strong>。</p><p>由于每次你受到伤害时面孔都会重塑，只有在你攻击最近一次对你造成伤害的生物时，你才会获得这额外伤害。</p>\n<p>The blade of this <em><strong>+1 greataxe</strong></em> bears a design of a human skull.</p><hr /><p>Whenever a creature damages you with an attack, the skull changes its appearance to look like the face of that creature. </p><p>You gain a <strong>+2 circumstance bonus to your next damage roll</strong> against that creature <strong>before the end of your next turn.</strong></p><p>Because the face reshapes each time you're damaged, you get the additional damage only <strong>if you attack the creature that damaged you most recently.</strong></p>"
+    },
+    "Books (C37)": {
+      "name": "书籍（C37） Books (C37)",
+      "description": "<p>这些书是关于卓尔（或如某些人所称的 jinen）的文化，以及一些可追溯至星陨之灾久远年代的不同家族谱系的笔记</p>\n<p>These books are about the culture of the drow (or jinen as some may call them) and some notes on the different familiy trees dating far back to Earthfall</p>"
+    },
+    "Morningstar": {
+      "name": "+1 钉头锤 Morningstar",
+      "description": "<p>这把武器有一根短柄，末端是一颗镶满尖钉的金属球。</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/mace-1-alpha.webp\" />\n<p>This weapon has a short shaft ending in a metal ball studded with spikes.</p><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/mace-1-alpha.webp\" />"
+    },
+    "Honed-mind Elixir (Lesser)": {
+      "name": "磨砺心智灵药（次级） Honed-mind Elixir (Lesser)",
+      "description": "<p><strong>持续时间</strong> 1分钟</p><p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p><hr /><p>该魔药会使你的思维更加敏锐，让你能够看穿说谎、虚假陈述与魔法诡计。你获得+1物品加值，用于察觉检定与察觉DC，以注意到虚假之处并进行察言观色，或判断某人是否在隐瞒某些事情，无论是口头说谎还是书面欺瞒。</p><p></p><p>@UUID[Item.v3hNCOH0wlH5J6i3]{效果：磨砺心智魔药（次级）}</p>\n<p><strong>Duration</strong> 1 minute</p><p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact</p><hr /><p>This elixir sharpens your mind and allows you to see through lies, falsehoods, and magical trickery. You gain a +1 item bonus to Perception checks and Perception DCs to notice falsehoods and to sense motives or if someone is concealing something, whether they're spoken lies or written deceit.</p><p></p><p>@UUID[Item.v3hNCOH0wlH5J6i3]{Effect: Honed Mind Elixir (Lesser)}</p>"
+    },
+    "Contract": {
+      "name": "契约 Contract",
+      "description": "<p><strong>语言：</strong>Diaboliic</p><p><strong>文书解读：</strong>察觉，社交 DC18（或受训于法律学识）</p><hr /><p>科罗克已与贝科拉达成一项协议</p><p><strong>益处：</strong>你必须站岗守卫，永远不得离开你的岗位，并逮捕任何进入房间的人。</p><p><strong>报酬： </strong>每日1GP</p><p></p><section class=\"secret\" id=\"secret-6L6RrRTGyftJoVwC\"><p><strong>藏匿（状态）：</strong>若连续99周又99天未收到我（贝科拉）的新命令，则服务结束。</p></section><p></p><section class=\"secret\" id=\"secret-NeBE9t8dLcqqDsEj\"><p><strong>终止条款：</strong>除非双方同意，否则不得终止</p></section><hr /><p>规则</p><ul><li><p>炼狱契约的规则效果等同于一件带有<strong>契约特征</strong>的魔法物品。</p></li><li><p>该物品没有实体，且<strong>无法被驱散、改变或摧毁，除非</strong>摧毁该契约的两份实体副本（这几乎不可能完成，因为大多数魔鬼会将他们的副本送至迪斯的“堕落要塞”，一座几乎完全禁止凡人进入的炼狱图书馆）。</p></li><li><p>炼狱契约会<strong>自动受容</strong>，并计入角色10件已受容物品的上限——因此，所有此类契约都会将交易者用于使用其他魔法物品的能力的一部分，作为其成本的一部分。</p></li><li><p>一旦受容，<strong>炼狱契约将不可见</strong>——尽管它们的效果可能可见——但任何拥有者都会持续察知其存在。<strong>若某个生物在受容炼狱契约的状态下死亡，其灵魂将被送入地狱，且除非其灵魂被解放，否则无法复活</strong></p></li></ul>\n<p><strong>Language:</strong> Diaboliic</p><p><strong>Decipher Writing:</strong> Perception, Society DC18 (or trained in Legal Lore)</p><hr /><p>Korlok has set an agreement with Belcorra</p><p><strong>Benefit:</strong> You are required to stand guard and not leave your post ever and arrest anyone who enters the room.</p><p><strong>Payment: </strong>1GP per day</p><p></p><section class=\"secret\" id=\"secret-6L6RrRTGyftJoVwC\"><p><strong>Hidden Condition:</strong>Service ends if 99 weeks and 99 days pass without a new order from me ( Belcorra).</p></section><p></p><section class=\"secret\" id=\"secret-NeBE9t8dLcqqDsEj\"><p><strong>Termination Clause:</strong> Not unless both parties agree</p></section><hr /><p>Rules</p><ul><li><p>The rules effect of an infernal contract is that of a magic item with the <strong>contract trait.</strong></p></li><li><p>This item has no physical substance and <strong>can't be dispelled, altered, or destroyed except</strong> by destroying both physical copies of the contract (a virtually impossible task, as most devils send their copy to the Fallen Fastness in Dis, an infernal library all but off-limits to mortals).</p></li><li><p>An infernal contract is <strong>automatically invested</strong> and counts toward a character's limit of 10 invested items—all such contracts therefore include, as part of their cost, a fraction of the bargainer's ability to use other magic items.</p></li><li><p>Once invested, <strong>infernal contracts aren't visible</strong>—though their effects can be—but anyone who has one is constantly aware of its presence. <strong>If a creature dies with an infernal contract invested, its soul is consigned to Hell and it can't be restored to life unless its soul is freed</strong></p></li></ul>"
+    },
+    "Map 1": {
+      "name": "地图 1 Map 1",
+      "description": "<p>斯夸老大的凄凉灯塔要塞地图</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/boss-map-1.webp\" />\n<p>Boss Skrawng's Map of Gauntlight Keep</p><hr /><img src=\"modules/wise-gaming-plus-pack-244/Mod_Assets/Tiles/Icons/boss-map-1.webp\" />"
+    },
+    "Effect: Honed Mind Elixir (Lesser)": {
+      "name": "效果：磨砺心智灵药（次级） Effect: Honed Mind Elixir (Lesser)",
+      "description": "<p>由 @UUID[Item.sxFo0kOa5hbLkT2V]{精炼心智灵药（次等）} 赋予</p><p>你在用于察觉谎言、察言观色或察觉他人是否在隐瞒某事的察觉检定与察觉DC上获得+1物品加值。你在意志豁免上也获得同样的物品加值。</p>\n<p>Granted by  @UUID[Item.sxFo0kOa5hbLkT2V]{Honed-mind Elixir (Lesser)}</p><p>You gain a +1 item bonus to Perception checks and Perception DCs to notice falsehoods and to sense motives or if someone is concealing somethingYou gain this same item bonus to Will saves.</p>"
+    },
+    "Quench": {
+      "name": "淬灭 Quench",
+      "description": "<p>你使区域内的空气因水蒸气而达到过饱和状态。区域内的非魔法火焰会自动熄灭。区域内的火焰生物受到[[/r 4d8]]伤害（基础强韧豁免）。从区域内选择一个魔法火焰、火焰法术或火焰物品，并尝试对其进行反制。若你对一件物品反制成功，该物品失去其火焰属性10分钟（例如，一把<em>+1 Flaming Longsword</em>会变成<em>+1 Longsword</em>）。若目标是一件神器或类似强大的物品，你会自动反制失败。</p>\n<p>每轮你第一次维持此法术时，你可以将蒸汽区域移动到射程内任意位置，但你这么做时唯一的效果是自动熄灭非魔法火焰。</p>\n<p>如果你拥有反制法术反应动作（），你可以使用<em>quench</em>来反制任何带有火焰（特征）的法术，而不必需要事先准备触发的火焰法术或将其纳入你的法术库。</p>\n<hr />\n<p><strong>升阶（+1）</strong>将对火焰生物造成的伤害提高[[/r 2d8]]。</p>\n<p>You cause the air in the area to become supersaturated with water vapor. Non-magical fires within the area are automatically extinguished. Fire creatures within the area take [[/r 4d8]] damage (basic Fortitude save). Choose one magical fire, fire spell, or fire item in the area and attempt to counteract it. If you succeed against an item, the item loses its fire properties for 10 minutes (for instance, a <em>+1 Flaming Longsword</em> would become a <em>+1 Longsword</em>). If the target is an artifact or similarly powerful item, you automatically fail to counteract it.</p>\n<p>The first time each round you Sustain this spell, you can move the area of vapor anywhere within range, but the only effect when you do so is to automatically extinguish non-magical fires.</p>\n<p>If you have the Counterspell reaction, you can use <em>quench</em> to counter any spell with the fire trait instead of needing to have the triggering fire spell prepared or in your repertoire.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage to fire creatures by [[/r 2d8]].</p>"
+    },
+    "Sack": {
+      "name": "麻袋 Sack",
+      "description": "<p>一个麻袋最多可装下相当于 8 负载的物品。装有 2 负载或更少的麻袋可以穿戴在身上，通常塞进腰带里。你可以用一只手提着麻袋，但要将物品放入或取出时必须用两只手。</p><hr /><p>包含：@UUID[Item.pHGV0tl1kcq018TV]{鱼饼}</p>\n<p>A sack can hold up to 8 Bulk worth of items. A sack containing 2 Bulk or less can be worn on the body, usually tucked into a belt. You can carry a sack with one hand, but must use two hands to transfer items in and out.</p><hr /><p>Contains: @UUID[Item.pHGV0tl1kcq018TV]{Fishcakes}</p>"
+    },
+    "Everlight Crystal": {
+      "name": "永光水晶 Everlight Crystal",
+      "description": "<p><em>恒光水晶</em>是恒久魔法最常见的应用之一。这种石头或宝石会持续不断地散发魔法光亮术，不需要氧气且不产生热量。水晶可以被遮盖，但光亮术无法被熄灭。</p>\n<p>An <em>everlight crystal</em> is one of the most common applications of permanent magic. This stone or gem sheds magical light constantly, requiring no oxygen and generating no heat. The crystal can be covered, but the light can't be extinguished.</p>"
+    }
+  }
+}

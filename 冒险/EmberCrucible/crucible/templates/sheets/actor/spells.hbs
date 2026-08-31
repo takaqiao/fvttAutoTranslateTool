@@ -1,0 +1,33 @@
+<section class="tab secondary flexcol scrollable {{tabs.spells.id}} {{tabs.spells.cssClass}}"
+         data-tab="{{tabs.spells.id}}" data-group="{{tabs.spells.group}}">
+
+    {{#each spells as |section id|}}
+    <div class="sheet-section item-section flexcol">
+        <h3 class="section-header">{{section.label}}</h3>
+        <ol class="items-list" data-tooltip-direction="LEFT">
+            {{#each section.known as |item|}}
+            <li class="line-item" data-component="{{item.id}}" {{#if item.isItem}}data-crucible-tooltip="spell" data-uuid="{{item.uuid}}" data-item-id="{{item.id}}"{{/if}}>
+                <img class="icon" src="{{item.img}}" alt="{{item.name}}">
+                <div class="title">
+                    <h4>{{item.name}}</h4>
+                    <div class="tags">
+                        {{#each item.tags as |tag|}}
+                        <span class="tag">{{tag}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                {{#if item.isItem}}
+                <div class="controls">
+                    <a class="button icon fa-solid fa-edit" data-action="itemEdit" aria-label="{{localize "ITEM.ACTIONS.Edit"}}" data-tooltip></a>
+                    <a class="button icon fa-solid fa-trash" data-action="itemDelete" aria-label="{{localize "ITEM.ACTIONS.Delete"}}" data-tooltip></a>
+                </div>
+                {{/if}}
+            </li>
+            {{/each}}
+            {{#if section.emptyLabel}}
+            <li class="hint">{{section.emptyLabel}}</li>
+            {{/if}}
+        </ol>
+    </div>
+    {{/each}}
+</section>

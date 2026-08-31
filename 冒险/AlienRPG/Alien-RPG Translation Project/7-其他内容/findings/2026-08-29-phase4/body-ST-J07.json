@@ -1,0 +1,216 @@
+{
+ "unit": "ST-J07",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J07.cn.html",
+ "summary": "Hope's Last Day 1/4 (scenario opener through Level 1 room descriptions) translated. Structure is byte-faithful: identical tag multiset, identical class multiset, all 16 @UUID anchors' attribute strings byte-identical (only inner label text differs), all 27 translated headings carry an explicit id= holding the original English slug, computed against the real Foundry slugify (common/primitives/string.mjs CHAR_MAP maps ’→' and &→and; slugifyHeading then strips ASCII quotes) and cross-checked against the corpus's live data-hash values (sterile-lab, tannens-casino both reproduce exactly). The two evblockquoteCenter boxes got the highest prose pass: \"WHAT'S THE STORY MOTHER?\" is written for the mouth — short declarative clauses, no stacked pre-modifiers, verbs at the end of beats (\"某种寄生虫钻进了基地的肚子里，再没出来。\" / \"没有人会来。\"). Terminology follows the LOCK (lang/cn.json) for all 15 mechanic terms, the settled vocabulary (轮/节/班, 电影模式, 潜行模式, 抱脸虫, 韦兰德-汤谷公司/韦汤, 异形 vs 外星 — \"alien ship\" is 外星飞船, \"alien egg\" is 外星卵), and the two already-delivered sibling units ST-J02/ST-J03 for 游戏管理员·GM·PC·NPC, 完整动作/快速动作, 运动追踪器, 爬行管道, 通风管道, 区域, 《希望的最后一日》. The three unsettled life-cycle names were given one consistent 体-suffixed set used without variation throughout.",
+ "chars_cn": 6441,
+ "chars_en": 16420,
+ "frozen_kept": [
+  "(none present) — checked every T-FROZEN string in DO-NOT-TRANSLATE.json (name_lookups 9, rolltable_names 11, folder_names 3, item_names 6) against the English source: zero occur in ST-J07, so zero could be translated. name_substring_tests (' RPG ' on item names) also has no hit in this unit."
+ ],
+ "lock_lookups": [
+  {
+   "english": "SURVIVAL",
+   "lang_key": "ALIENRPG.Skillsurvival",
+   "used": "生存"
+  },
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "COMTECH",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "HEAVY MACHINERY",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "机械"
+  },
+  {
+   "english": "MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "close combat",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "armor level",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "armor piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲"
+  },
+  {
+   "english": "quick action",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  },
+  {
+   "english": "story point",
+   "lang_key": "ALIENRPG.StoryPoints",
+   "used": "故事点"
+  },
+  {
+   "english": "Personal Agenda / personal agenda",
+   "lang_key": "ALIENRPG.PersonalAgenda",
+   "used": "个人任务"
+  },
+  {
+   "english": "fatigued / fatigue",
+   "lang_key": "ALIENRPG.fatigued",
+   "used": "疲劳"
+  },
+  {
+   "english": "Synthetics",
+   "lang_key": "ALIENRPG.Synthetic",
+   "used": "合成人"
+  },
+  {
+   "english": "points of damage",
+   "lang_key": "ALIENRPG.Damage",
+   "used": "伤害"
+  },
+  {
+   "english": "stress (die / level)",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "full action",
+   "lang_key": "(not in cn.json — cn.json's ALIENRPG.SlowAction=慢速动作 is the CLASSIC-mode term and was deliberately NOT used)",
+   "used": "完整动作"
+  },
+  {
+   "english": "stress level",
+   "lang_key": "(not a standalone cn.json key; appears verbatim inside ALIENRPG.Panic7-15 / ShipPanic strings, and in glossary_alien.json Stress Level)",
+   "used": "压力等级"
+  },
+  {
+   "english": "stress die",
+   "lang_key": "(glossary_alien.json Stress Die; cn.json ALIENRPG.HOWMANYSTRESS carries the same string)",
+   "used": "压力骰子"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Drone",
+   "proposed": "工兵体",
+   "why": "PROJECT.md §7.2.0 unsettled; pending file confirms zero hits across 11,088 subtitle pairs and absent from the Isolation localisation, so nothing above rung 7 reaches it. Chose a 体-suffixed morphological set so the whole life cycle reads as one taxonomy: 卵形体 → 抱脸虫 (settled) → 破胸体 → 工兵体, extensible to 战士体 (Warrior) / 禁卫体 (Praetorian). Picked 工兵 over 工蜂 because in THIS scenario the Drone is the active predator that stalks, headbites doors open and kills — 工蜂 would read harmless — while still keeping the worker-caste sense that R1-queen's 蜂巢 rationale depends on. Used 12× with no second form; 'Drone Xenomorph' / 'Xenomorph Drone' render as 工兵体异形 (2×), which is the English's own longer phrase, not a variant."
+  },
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "Same unsettled set. 破胸体 is the standard Chinese fan term AND is the form PARALLEL-RUNBOOK.md §6 names in its already-unified list, so adopting it costs nothing and probably matches what the checker expects. Used 4×."
+  },
+  {
+   "en": "Ovomorph",
+   "proposed": "卵形体",
+   "why": "Same unsettled set. Literal morphological reading of ovo-morph, keeps the 体 series, and stays distinct from bare Egg=卵 (glossary) which the English itself glosses alongside it ('One Ovomorph (alien egg)'). Used 2×."
+  },
+  {
+   "en": "motion detector",
+   "proposed": "运动追踪器",
+   "why": "NOT a new term — a deliberate merge. The device is MacWhirr's, and her actor sheet carries the item 'M314 Motion Tracker'; ST-J03.cn already renders that 运动追踪器. Upstream English is simply inconsistent (ST-J07/J08/J11/J13 say 'motion detector', ST-J03 says 'motion tracker'). Splitting them would hand the player a device name that matches nothing on their own character sheet. A term-gate scanning EN 'motion detector' will flag this — it is intentional."
+  },
+  {
+   "en": "Watatsumi (in 'Watatsumi Bolt Gun')",
+   "proposed": "瓦塔祖米",
+   "why": "Bolt Gun=气矢枪 is already ruled (provenance: declared ladder deviation to level 3). The manufacturer half is not. Level 1 fan text renders it semantically as 海神 (Watatsumi = Japanese sea deity); glossary_alien.pending.json's sibling note explicitly says a manufacturer must be TRANSLITERATED not glossed ('Armat' → 阿玛特), which rules 海神 out by the same rule. Phonetic per Seegson=西格森 precedent. Single occurrence in this unit."
+  },
+  {
+   "en": "Daihotai (in 'Daihotai Tractor')",
+   "proposed": "戴霍泰",
+   "why": "Vehicle manufacturer/model from Aliens; zero corpus evidence anywhere in glossary, mined_fan_translation or subtitles. Transliterated rather than left Latin because it sits inside READ-ALOUD text, where a Latin run breaks the GM's delivery. Single occurrence."
+  },
+  {
+   "en": "Starcub (in 'Starcub shuttle')",
+   "proposed": "Starcub（保持拉丁）",
+   "why": "Kept Latin as T-LATIN: it is a craft model designation and corerules already carries @UUID[Actor.d8GcCHXV1KpltgK1]{STARCUB SHUTTLE} as an explicit label, so a Chinese rendering here would go stale against that hard sync point. 2 occurrences, both in GM text, not read-aloud."
+  },
+  {
+   "en": "Calpamos",
+   "proposed": "卡尔帕莫斯",
+   "why": "LV-426's parent planet. glossary_alien.pending.json lists it in the 'proper nouns — a SET, to be ruled on as a set' bucket at en-gated 0. Plain transliteration; flagged so it can be ruled with Thedus / Torin Prime / Volcus etc. as one set."
+  },
+  {
+   "en": "Ilium Range / Sacrum Range",
+   "proposed": "伊利姆山脉 / 萨克拉姆山脉",
+   "why": "Two LV-426 mountain ranges, both named after pelvic bones (ilium 髂骨 / sacrum 骶骨) — almost certainly deliberate on the author's part. Transliterated rather than calqued because they are place names and the anatomical joke does not survive into Chinese without reading as a medical term. Same pending set as Calpamos."
+  },
+  {
+   "en": "Rapture Protocol",
+   "proposed": "《狂喜协议》",
+   "why": "Title of a published boxed adventure, cited once. No corpus evidence. 狂喜 takes the ecstatic sense; the religious 'the Rapture' (被提/升天) reading is the alternative if the controller has a publisher-side source."
+  },
+  {
+   "en": "Central Unit",
+   "proposed": "中央区",
+   "why": "Structural block of Hadley's Hope, sibling to South Wing 南翼 / East Wing 东翼. Chose 中央区 over literal 中央单元 for map-label brevity. 5 occurrences here; ST-J08/J09 also reference it, so it needs unifying."
+  },
+  {
+   "en": "Headbite",
+   "proposed": "头咬",
+   "why": "The Drone's inner-jaw attack; it is also a row name in the creature attack RollTables that corerules has not translated yet. Naming it here first creates a sync point — the RollTable row must end up with the same string."
+  },
+  {
+   "en": "Character and location names (first appearance in the corpus)",
+   "proposed": "霍尔罗伊德 Holroyd · 麦克沃尔 MacWhirr · 辛格尔顿 Singleton · 拉斯·乔登 Russ Jorden · W·艾伦·“阿尔”·辛普森 Al Simpson · 米兰达·雷诺兹 Miranda Reynolds · 西奥多拉·科米斯基 Theodora Komiskey · 韦斯·奥斯特曼 Wes Osterman · 莱德克 Lydecker · 约翰·J·马拉丘克 John J. Marachuk · 坦纳赌场 Tannen's Casino · 阿克塞尔·海斯特 Axel Heyst",
+   "why": "None are in glossary_alien.json (only Ripley=蕾普丽 is). The five PC surnames are Conrad characters (Heyst/MacWhirr/Singleton/Holroyd), so a published-Conrad-translation axis exists — e.g. MacWhirr is 麦克惠尔 in Chinese editions of Typhoon, and I chose the plain phonetic 麦克沃尔 instead. ST-A-CAST is the unit that pins these on the actor documents; whatever it lands on must be back-propagated here."
+  },
+  {
+   "en": "Cross-unit deep-link labels I had to coin",
+   "proposed": "最后的恐怖 FINAL HORRORS · 有动静 We Got Movement · 站务维护中心 Station Maintenance Center · 停机坪 Landing Pad · 事件 EVENTS · 医疗实验室 Medlab · 异形 XENOMORPHS",
+   "why": "These 7 label strings are the visible text of @UUID links whose TARGET headings live in ST-J08 and ST-J09. The data-hash carries navigation so nothing breaks if they diverge, but the reader sees two different names for one section. 有动静 deliberately echoes the Aliens line 'We got movement!'."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html == .en.html (every tag name counted)",
+   "result": "PASS — exact equality on all 19 tag names: div 16, figure 8, img 4, h2 8, table 8, tbody 8, tr 22, td 50, i 2, span 42, p 66, strong 36, br 77, h3 46, a 32, figcaption 4, blockquote 8, ul 4, li 22."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in the English is present unchanged",
+   "result": "PASS — class-value multisets are equal, all 21 distinct values at identical counts, including the starterset-specific ev-content-link ×16, evblockquoteCenter ×2, evexamplebox ×2, evolvedlinestart ×17, basesymbol ×1, liststyle ×11, evscol1/2/3 ×7 each."
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — 16 anchors, and the full attribute string of each (class/draggable/data-link/data-uuid/data-id/data-type/data-hash) compares byte-identical in order. Only the inner label text differs. Zero [[…]] constructs in the English, zero introduced."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id= with the original English slug",
+   "result": "PASS — 27/27 headings (4 h2 + 23 h3). Slugs derived by reimplementing Foundry's real slugify (CHAR_MAP ’→' and &→and, then strip ASCII quotes, 64-char cap) and verified against live corpus data-hash values: sterile-lab and tannens-casino both reproduce exactly. Non-obvious ones: hopes-last-day, hadleys-hope, stairway-and-elevator, asset/claims-office, level-1."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS (vacuously, and verified rather than assumed) — mechanically intersected every T-FROZEN string in the register against the English source; the intersection is empty, so no frozen literal exists in this unit to lose. name_substring_tests (' RPG ' item-name test) also has no candidate here."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 32,232 CN bytes vs 32,923 EN bytes; 6,441 visible non-whitespace CN chars vs 16,420 EN (0.39 ratio, normal for EN→CN). CJK present throughout."
+  },
+  {
+   "check": "7. Every mechanic term used that exists in lang/cn.json matches byte-for-byte",
+   "result": "PASS — 15/15 verified programmatically against the flattened cn.json (see lock_lookups): 生存·侦察·通信科技·机械·机动·近战·护甲等级·破甲·快速动作·故事点·个人任务·疲劳·合成人·伤害·压力. Two terms used are NOT in cn.json and are declared as such: 完整动作 (Evolved 'Full Action'; cn.json's 慢速动作 = classic SlowAction was deliberately not used) and 压力等级 (appears verbatim inside the Panic strings but is not its own key)."
+  }
+ ],
+ "open_issues": [
+  "UPSTREAM DEFECT, reproduced not repaired — MOVING OUTSIDE box: the English reads \"For each stretch spent outside, roll a stress die. On a (or whenever you feel it's dramatically appropriate)a Drone Xenomorph approaches\". The stress-die symbol span is missing and the space before 'a Drone' was eaten. I translated the gap faithfully as \"掷出 时（或任何你觉得在戏剧上合适的时刻），一只工兵体异形便向 PC 逼近。\" — the empty slot after 掷出 mirrors the missing icon exactly. If the controller repairs the English, this sentence needs the symbol span inserted at that point (tag counts change on BOTH sides together).",
+  "UPSTREAM DEFECT, reproduced — Doors / Sealing Doors: the English has no period after \"(full action)\" before \"Opening such a sealed door…\". The Chinese supplies a normal 。 boundary because a Chinese sentence cannot run on there; no content added.",
+  "UPSTREAM ARTIFACT, preserved — the stray \" &gt;\" at the very end of Asset/Claims Office is kept verbatim (1 occurrence, matching ST-J02.cn's treatment of the same artifact).",
+  "CLASS SEMANTICS — the brief says evblockquoteCenter is read-aloud, and that holds for \"WHAT'S THE STORY MOTHER?\" which I wrote for the mouth. But the second evblockquoteCenter box, \"MOVING OUTSIDE\", is pure GM procedure addressed to the GM (\"whenever YOU feel it's dramatically appropriate\", opposed rolls, stress dice). I translated it as rules prose, not read-aloud. Flagging because the class alone is not a reliable read-aloud signal in this corpus.",
+  "ENTITY DRIFT, intentional and precedented — the two &amp; in the English (heading \"Stairway & Elevator\", linestart \"Open & Cluttered Zones:\") become 与 in Chinese, so &amp; count goes 2→0. This matches what ST-J02.cn (5→1) and ST-J03.cn (8→0) already did. The single &gt; is preserved 1→1.",
+  "NBSP — 20 in the English, 12 in the Chinese. All 12 STRUCTURAL ones are byte-preserved: 7 × <td class=\"evscol2\"> </td>, the 2 trailing after the epigraph attribution (阿克塞.·海斯特  , same pattern ST-J03.cn used for Tyler), and the 3 around <span class=\"basesymbol\">  </span>. The 8 that dropped were all mid-sentence English typographic NBSPs (\"If you\", \"A nasty\") that have no Chinese equivalent. Same net behaviour as ST-J03 (21→20).",
+  "CROSS-UNIT SYNC — 7 deep-link labels in this unit name headings that live in ST-J08 and ST-J09 (最后的恐怖, 有动静, 站务维护中心, 停机坪, 事件, 医疗实验室, 异形). Navigation is safe either way because data-hash carries it, but the label and the heading it lands on should read the same. Please diff mine against theirs at assembly.",
+  "CROSS-UNIT SYNC — the 5 PC surnames (Holroyd / MacWhirr / Singleton, plus Komiskey, Osterman, Lin) appear as actor document names in ST-A-CAST. Whatever that unit pins wins; my renderings here should be overwritten to match, not the reverse.",
+  "TERM RULING NEEDED before the wave closes — 工兵体 / 破胸体 / 卵形体 are my proposals for the unsettled life-cycle set, used consistently and with no second form anywhere in this unit. ST-J09 is the chapter that defines the six stages (Stage I–VI headings) and ST-J22/J26 already reference \"Stage I: Ovomorph (Egg)\" and \"Stage III: Chestburster\" — if the controller rules differently, all four units must move in the same commit along with the EV - Drone/Ovomorph/Chestburster actor names.",
+  "Zero writes outside my unit: only pages/ST-J07.cn.html was created. compendium/cn untouched."
+ ]
+}

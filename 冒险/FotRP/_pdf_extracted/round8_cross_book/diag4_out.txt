@@ -1,0 +1,44 @@
+﻿Entries type: dict
+  Keys count: 138
+  [Shino Hakusa (Level 16)] name='�׹���Ұ��16���� Shino Hakusa (Level 16)'
+  [Takatorra (Level 13)] name='ӥ����13���� Takatorra (Level 13)'
+  [Arms of Balance (Ranya Shibhatesh)] name='���š�ʲ������˿���˱۵��ͣ� Arms of Balance (Ranya Shibhatesh)'
+  [Golarion's Finest (Mingyu)] name='���񣨸���������ǿ�ӣ� Golarion's Finest (Mingyu)'
+  [Surjit Hamelan] name='�ռ��ء���÷�� Surjit Hamelan'
+  [Tino (Oni Form)] name='ǧҰ�������̬��'
+  [Rivka (Kujiba)] name='���������ֿ����� Rivka (Kujiba)'
+  [Arms of Balance (Jivati Rovat)] name='���ߵ١������أ��˱۵��ͣ� Arms of Balance (Jivati Rovat)'
+  [Arms of Balance (Usvani)] name='��˹�������˱۵��ͣ� Arms of Balance (Usvani)'
+  [Kas Xi Rai] name='������ Kas Xi Rai'
+  [Taiga Yai] name='���־޹� Taiga Yai'
+  [Spirit Turtle] name='�麣��'
+  [Laruhao] name='�����'
+  [Tino Tung (Level 13)] name='ǧҰ������13���� Tino Tung (Level 13)'
+  [Yabin the Just (Level 13)] name='������ġ��Ǳ�13���� Yabin the Just (Level 13)'
+  [Bul-Gae] name='��ʴ��'
+  [Swatting Tail] name='����֮β Swatting Tail'
+  [Ran-to (Level 16)] name='���16���� Ran-to (Level 16)'
+  [Razu] name='���� Razu'
+  [Mage of Many Styles] name='�ɱ䷨ʦ Mage of Many Styles'
+  [Lophiithu] name='��Ԩ�c�K'
+  [Agile Warrior] name='����սʿ Agile Warrior'
+  [Floating Flamethrower] name='��������� Floating Flamethrower'
+  [Golarion's Finest (Han)] name='��������������ǿ�ӣ� Golarion's Finest (Han)'
+  [Dread Roc] name='�־���� Dread Roc'
+  [Air Rift] name='������϶ Air Rift'
+  [Angoyang] name='��լè Angoyang'
+  [Rivka (Yorak)] name='��������Լ���ˣ� Rivka (Yorak)'
+  [Rai Sho Disciple] name='��Ф����'
+  [Weapon Master (Under the Pale Sun Dervishes)] name='����֮�¿����� Weapon Master (Under the Pale Sun Dervishes)'
+
+--- mapping field ---
+  name: name
+  portrait: {'path': 'img', 'converter': 'npc-portrait-path'}
+  token: {'path': 'prototypeToken', 'converter': 'npc-token-translation'}
+  data: {'path': 'system', 'converter': 'npc-data-translation'}
+  items: {'path': 'items', 'converter': 'npc-item-translation'}
+  publicNotes: system.details.publicNotes
+  privateNotes: system.details.privateNotes
+  allSaves: system.attributes.allSaves.value
+  senses: system.traits.senses.value
+  hp: system.attributes.hp.details

@@ -1,0 +1,37 @@
+{
+    "label": "惊世奇土+ 动作 Impossible Lands+ Actions",
+    "entries": {
+        "Sweet Treats": {
+            "description": "<p><strong>需求</strong> 你可以使用厨房或其他烹饪区域。</p>\n<hr />\n<p>你烘焙一份甜点，当被吃下的时候可以恢复盟友的生命。这个过程需要1个小时，但你可以在这个过程中做另一个10分钟的行动，而不会影响你的烘焙。吃了你甜点的生物，在经过整晚休息后恢复2倍生命值。这种甜点的有效性持续1天，但在之后的几天内依然可以作为普通食物食用，直到它自然变质。如果你的烹饪学识达到专家，你能烘焙2份甜点，大师则为4份，传奇则为8份。</p>",
+            "name": "甜蜜小吃 Sweet Treats"
+        },
+        "Flora Expert": {
+            "description": "<p><strong>触发</strong> 你受到来自植物的效果</p>\n<hr />\n<p><strong>效果</strong> 你可以对触发效果的植物或环境进行回忆知识，并且检定有+1环境加值。</p>",
+            "name": "植物专家 Flora Expert"
+        },
+        "Fey Favor": {
+            "name": "精类亲和 Fey Favor",
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你尝试和一只精类生物进行交涉并且尚未掷骰</p>\n<hr />\n<p><strong>效果</strong> 你投掷触发的检定两次，并且使用更高的结果。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-feats.9sRralDD3ETCtFnB]{效果：精类亲和}</p>"
+        },
+        "Call Vehicle": {
+            "name": "呼唤载具 Call Vehicle",
+            "description": "<p>你呼唤和你载具之间的神圣纽带，将其召至面前。只要你的载具距离你不到1英里，并且在同一个位面，它就会出现在你相邻的位置。现场必须有足够载具存放的空间，载具必须被召唤至可以正常行驶的环境。</p>"
+        },
+        "Paired Movement": {
+            "name": "配对移动 Paired Movement",
+            "description": "<p><strong>触发 </strong>你开始行走或结束行走时和你的舞伴相邻，并且你还有剩余的速度用于行走。</p>\n<hr />\n<p>你和你的舞伴相伴而行。你可以继续行走，直到用完你剩余的速度，并且你的舞伴也可以花费一个反应动作跟随你一起行走。在你的行走期间，你的舞伴必须始终和你保持相邻，直到你停止移动，或他已经移动了他最大速度的距离。</p>"
+        },
+        "Spelldance": {
+            "name": "魔法舞蹈 Spelldance",
+            "description": "<p>你将复杂的手势和优雅的运动合为一体，在舞蹈中完成你的法术和绝技！你站立、@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}、或快步，然后施放一个需要2或3动作施放的法术。如果你花费2个动作，你在魔法舞蹈中施放的法术必须为2动作法术，如果你花费3个动作，你在魔法舞蹈中施放的法术必须为3个动作。</p>"
+        },
+        "Infectious Antics": {
+            "description": "<p><strong>需求</strong> 你处于遭遇模式，并且你的小丑灵光里至少有一个盟友</p>\n<hr />\n<p><strong>效果</strong> 随着生活的热情在你身上流淌，你的盟友被你感染加入你的表演。进行一次@Check[perform|traits:action:perform|dc:resolve(@actor.level)]检定，对抗你等级的标准难度DC。如果成功，你选择以下选项之一获得+1状态加值：攻击骰、意志豁免、或基于魅力的技能检定，直到你的下个回合开始。当你从该效果中受益时，小丑灵光内观察到你成功表演的一个盟友可以使用一个带有专注特征的单动作，获得你选择的选项相同的好处，直到他的下个回合开始。</p>\n<p>@UUID[Compendium.impossible-lands.impossible-lands-effects.pALITgJTbG500DPa]{效果：传染快乐}</p>",
+            "name": "传染快乐 Infectious Antics"
+        },
+        "Soul Intervention": {
+            "name": "灵魂干预 Soul Intervention",
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你或弥漫范围内的盟友对抗由魔族施放的心灵效果时，豁免失败或大失败。</p>\n<hr />\n<p>重投豁免结果，使用更高的结果。</p>"
+        }
+    }
+}

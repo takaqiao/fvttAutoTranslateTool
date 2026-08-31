@@ -1,0 +1,364 @@
+=== Round 8 — Bestiary canonical 名跨 journal 一致性 ===
+
+# 找出: bestiary canonical 中名 = X, 但 journal 中 X 罕见或不存在
+
+# (说明 journal 可能用了不同中文渲染)
+
+
+
+• Shino Hakusa                        canonical 中文 = '白谷真野'
+    中文分布: {'book1_ch3': 2, 'book1_back': 2, 'book2_ch2': 1, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 1}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Takatorra                           canonical 中文 = '鹰虎'
+    中文分布: {'book1_ch1': 5, 'book1_ch3': 1, 'book1_back': 3, 'book2_ch1': 3, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1, 'book1_back': 1, 'book2_back': 2}
+
+• Arms of Balance                     canonical 中文 = '兰雅·什瓦纳特丝（八臂调和）'
+    EN短形式分布: {'book1_ch3': 1, 'book2_back': 1}
+    book1_ch3: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Golarion's Finest                   canonical 中文 = '明玉（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Surjit Hamelan                      canonical 中文 = '苏吉特·哈梅兰'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+
+• Arms of Balance                     canonical 中文 = '吉瓦蒂·罗瓦特（八臂调和）'
+    EN短形式分布: {'book1_ch3': 1, 'book2_back': 1}
+    book1_ch3: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Arms of Balance                     canonical 中文 = '乌斯瓦利（八臂调和）'
+    EN短形式分布: {'book1_ch3': 1, 'book2_back': 1}
+    book1_ch3: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Kas Xi Rai                          canonical 中文 = '卡熙莱'
+    中文分布: {'book2_ch1': 15, 'book2_ch2': 13}
+
+• Taiga Yai                           canonical 中文 = '寒林巨鬼'
+    中文分布: {'book2_ch2': 5, 'book2_back': 4}
+    EN短形式分布: {'book2_back': 2}
+
+• Tino Tung                           canonical 中文 = '千野·董'
+    中文分布: {'book1_ch1': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 2, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 1}
+
+• Yabin the Just                      canonical 中文 = '“正义的”亚彬'
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Swatting Tail                       canonical 中文 = '重拍之尾'
+    中文分布: {'book2_back': 1}
+
+• Ran-to                              canonical 中文 = '捣达'
+    中文分布: {'book1_ch3': 2, 'book1_back': 2, 'book2_ch2': 1, 'book2_back': 8, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 2}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Razu                                canonical 中文 = '拉祖'
+    中文分布: {'book2_ch1': 8, 'book2_ch2': 1, 'book2_ch3': 30, 'book2_back': 17, 'book3_ch1': 2, 'book3_ch2': 1}
+    EN短形式分布: {'book2_ch1': 2, 'book2_ch3': 1}
+
+• Mage of Many Styles                 canonical 中文 = '巧变法师'
+    中文分布: {'book1_ch2': 7, 'book1_ch3': 1, 'book1_back': 3}
+
+• Agile Warrior                       canonical 中文 = '灵巧战士'
+    中文分布: {'book1_ch2': 9, 'book1_ch3': 1, 'book1_back': 2}
+
+• Floating Flamethrower               canonical 中文 = '浮动喷火器'
+    中文分布: {'book2_ch1': 1, 'book2_ch2': 2}
+
+• Golarion's Finest                   canonical 中文 = '韩（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Dread Roc                           canonical 中文 = '恐惧大鹏'
+    中文分布: {'book1_ch2': 4}
+    EN短形式分布: {'book1_ch2': 1}
+
+• Angoyang                            canonical 中文 = '旺宅猫'
+    中文分布: {'book2_ch1': 4, 'book2_back': 12}
+
+• Weapon Master                       canonical 中文 = '灰日之下狂舞者'
+    中文分布: {'book2_back': 1}
+
+• Artus Rodrivan                      canonical 中文 = '阿图斯·罗德里万'
+    中文分布: {'book2_ch2': 1, 'book3_ch1': 1}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Quaking Footfall                    canonical 中文 = '撼地步伐'
+    中文分布: {'book2_back': 1}
+
+• Urnak Lostwind                      canonical 中文 = '乌尔纳克·遗风'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1, 'book3_ch1': 3}
+    EN短形式分布: {'book1_back': 1}
+
+• Nai Yan Fei                         canonical 中文 = '奈燕妃'
+    中文分布: {'book1_ch3': 12, 'book1_back': 27, 'book2_ch1': 3, 'book2_ch3': 4, 'book2_back': 4, 'book3_ch1': 9, 'book3_back': 2}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 1, 'book2_ch3': 1, 'book2_back': 1, 'book3_ch1': 1, 'book3_back': 1}
+
+• Old Man Statue                      canonical 中文 = '老衲像'
+    中文分布: {'book1_ch1': 5, 'book1_ch2': 4}
+
+• Syndara the Sculptor                canonical 中文 = '雕匠辛达拉'
+    中文分布: {'book1_ch1': 3, 'book1_ch2': 3, 'book1_ch3': 1, 'book1_back': 9, 'book2_ch1': 12, 'book2_ch2': 2, 'book2_back': 2, 'book3_ch1': 3, 'book3_ch2': 1, 'book3_ch3': 11, 'book3_back': 6}
+    EN短形式分布: {'book1_ch1': 1, 'book1_back': 1, 'book3_ch3': 1}
+
+• Takatorra                           canonical 中文 = '鹰虎'
+    中文分布: {'book1_ch1': 5, 'book1_ch3': 1, 'book1_back': 3, 'book2_ch1': 3, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1, 'book1_back': 1, 'book2_back': 2}
+
+• Golarion's Finest                   canonical 中文 = '路莫里兹（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Sigbin                              canonical 中文 = '吮影兽'
+    中文分布: {'book1_back': 18}
+
+• Grandfather Mantis                  canonical 中文 = '螳螂爷爷'
+    中文分布: {'book2_ch2': 1, 'book3_ch1': 1}
+
+• Tamikan                             canonical 中文 = '塔米坎'
+    中文分布: {'book1_ch2': 12}
+    EN短形式分布: {'book1_ch2': 2}
+
+• Huldrin Skolsdottir                 canonical 中文 = '胡尔德林·斯科尔斯多蒂'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1}
+    EN短形式分布: {'book1_back': 1}
+
+• Kannitri                            canonical 中文 = '卡尼翠'
+    中文分布: {'book1_ch1': 9}
+    EN短形式分布: {'book1_ch1': 1}
+
+• Golarion's Finest                   canonical 中文 = '俊（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Joon-seo                            canonical 中文 = '俊森'
+    中文分布: {'book1_back': 4, 'book2_ch2': 1, 'book3_ch1': 2}
+
+• Freezing Floor Tiles                canonical 中文 = '寒冰地砖'
+    中文分布: {'book2_ch2': 2}
+
+• Ji-yook                             canonical 中文 = '纪幽'
+    中文分布: {'book1_ch1': 3, 'book1_ch3': 1, 'book1_back': 2, 'book2_ch1': 3, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1}
+
+• Hantu Belian                        canonical 中文 = '欲从'
+    中文分布: {'book1_back': 4}
+
+• Blue Viper                          canonical 中文 = '蓝蝮蛇'
+    中文分布: {'book1_ch3': 2, 'book1_back': 8, 'book2_ch2': 1, 'book2_back': 6, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 1}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Blue Viper                          canonical 中文 = '蓝蝮蛇'
+    中文分布: {'book1_ch3': 2, 'book1_back': 8, 'book2_ch2': 1, 'book2_back': 6, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 1}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Syu Tak-nwa                         canonical 中文 = '苏塔奴'
+    中文分布: {'book1_ch2': 2, 'book1_ch3': 4, 'book1_back': 7, 'book2_ch1': 2, 'book2_ch2': 1, 'book2_back': 9, 'book3_ch1': 1, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 2}
+    EN短形式分布: {'book1_ch2': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 1, 'book3_ch1': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Grave Spinosaurus                   canonical 中文 = '死墓棘龙'
+    中文分布: {'book1_ch2': 3}
+
+• Troff Frostknuckles                 canonical 中文 = '特罗夫·霜指'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1}
+    EN短形式分布: {'book1_back': 1}
+
+• Ghost Monk                          canonical 中文 = '鬼灵武僧'
+    中文分布: {'book1_ch1': 2}
+
+• Melodic Squall                      canonical 中文 = '旋律暴风'
+    中文分布: {'book2_ch3': 6}
+
+• Broken Rebus Attack                 canonical 中文 = '破迷障突袭'
+    中文分布: {'book1_ch1': 1}
+
+• Ran-to                              canonical 中文 = '捣达'
+    中文分布: {'book1_ch3': 2, 'book1_back': 2, 'book2_ch2': 1, 'book2_back': 8, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 2}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Koto Zekora                         canonical 中文 = '琴·禅古罗'
+    中文分布: {'book1_ch1': 2, 'book1_ch2': 1, 'book1_ch3': 7}
+    EN短形式分布: {'book1_ch1': 1, 'book1_ch3': 1}
+
+• Mogaru's Breath                     canonical 中文 = '魔加鲁的吐息'
+    中文分布: {'book2_back': 1}
+
+• Archery Specialist                  canonical 中文 = '箭道精英'
+    中文分布: {'book1_ch2': 6, 'book1_back': 2}
+
+• Caustic Monitor                     canonical 中文 = '酸蚀王蜥'
+    中文分布: {'book1_ch2': 5, 'book1_back': 13}
+    EN短形式分布: {'book1_ch2': 1}
+
+• Tyrannosaurus Imperator             canonical 中文 = '帝皇暴龙'
+    中文分布: {'book1_ch2': 3}
+
+• Syu Tak-nwa                         canonical 中文 = '苏塔奴'
+    中文分布: {'book1_ch2': 2, 'book1_ch3': 4, 'book1_back': 7, 'book2_ch1': 2, 'book2_ch2': 1, 'book2_back': 9, 'book3_ch1': 1, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 2}
+    EN短形式分布: {'book1_ch2': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 1, 'book3_ch1': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Mafika Ayuwari                      canonical 中文 = '马菲卡·阿尤瓦里'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1, 'book2_back': 3, 'book3_ch1': 1}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 2}
+
+• Shadow Yai                          canonical 中文 = '影巨鬼'
+    中文分布: {'book2_ch3': 7, 'book2_back': 10}
+
+• Anugobu Apprentice                  canonical 中文 = '阿努学徒'
+    中文分布: {'book1_back': 3}
+
+• Watchtower Shadow                   canonical 中文 = '哨塔幽影'
+    中文分布: {'book1_ch2': 1}
+
+• Hummingbird                         canonical 中文 = '无境·蜂鸟'
+    中文分布: {'book1_back': 2, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 2}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+
+• Weapon Master                       canonical 中文 = '武器大师'
+    中文分布: {'book1_ch2': 8, 'book1_ch3': 1, 'book1_back': 2, 'book2_back': 1}
+
+• Ji-yook                             canonical 中文 = '纪幽'
+    中文分布: {'book1_ch1': 3, 'book1_ch3': 1, 'book1_back': 2, 'book2_ch1': 3, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1}
+
+• Wronged Monk's Wrath                canonical 中文 = '枉僧之怒'
+    中文分布: {'book1_ch1': 2, 'book1_back': 6, 'book3_ch3': 1}
+    EN短形式分布: {'book1_ch1': 1, 'book3_ch3': 1}
+
+• Ki Adept                            canonical 中文 = '阿莫扎双子'
+    EN短形式分布: {'book1_ch1': 1}
+    book1_ch1: en=1, zh canonical=0 ⚠
+
+• Hana's Hundreds                     canonical 中文 = '花之百人众'
+    中文分布: {'book1_ch2': 6, 'book1_back': 3, 'book2_ch1': 1, 'book2_back': 2, 'book3_back': 1}
+    EN短形式分布: {'book1_ch2': 1, 'book2_back': 1}
+
+• Juspix Rammel                       canonical 中文 = '朱斯皮克斯·拉梅尔'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1}
+    EN短形式分布: {'book1_back': 1}
+
+• Portal Eater                        canonical 中文 = '传送门吞噬者'
+    中文分布: {'book2_ch3': 6}
+
+• Butterfly Blade Warrior             canonical 中文 = '蝶刃战士'
+    中文分布: {'book1_ch3': 1}
+
+• Watchtower Wraith                   canonical 中文 = '哨塔缚灵'
+    中文分布: {'book1_ch2': 1}
+
+• Shino Hakusa                        canonical 中文 = '白谷真野'
+    中文分布: {'book1_ch3': 2, 'book1_back': 2, 'book2_ch2': 1, 'book2_back': 3, 'book3_ch2': 1, 'book3_ch3': 2, 'book3_back': 1}
+    EN短形式分布: {'book1_ch3': 1, 'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch2': 1, 'book3_ch3': 1, 'book3_back': 1}
+
+• Amihan                              canonical 中文 = '阿米汉'
+    中文分布: {'book1_back': 4, 'book2_ch2': 1, 'book3_ch1': 3}
+    EN短形式分布: {'book1_back': 1}
+
+• Umbasi                              canonical 中文 = '乌木巴西'
+    中文分布: {'book2_ch2': 1, 'book2_back': 1}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+
+• Watchtower Poltergeist              canonical 中文 = '哨塔骚灵'
+    中文分布: {'book1_ch2': 5}
+
+• Gomwai                              canonical 中文 = '工崴'
+    中文分布: {'book1_ch2': 1}
+    EN短形式分布: {'book1_ch2': 2}
+
+• Ki Adept                            canonical 中文 = '内家好手'
+    中文分布: {'book1_ch1': 3, 'book1_ch2': 8, 'book1_back': 5, 'book2_back': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1}
+
+• Golarion's Finest                   canonical 中文 = '拉贾娜（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Lantondo                            canonical 中文 = '兰托多'
+    中文分布: {'book2_ch2': 1, 'book3_ch1': 3}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Tino Tung                           canonical 中文 = '千野·董'
+    中文分布: {'book1_ch1': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 2, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 1, 'book3_back': 1}
+    EN短形式分布: {'book1_ch1': 1, 'book1_ch3': 1, 'book1_back': 1, 'book2_ch1': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 1}
+
+• Mammoth Turtle                      canonical 中文 = '猛犸象龟'
+    中文分布: {'book1_ch2': 5}
+    EN短形式分布: {'book1_ch2': 1}
+
+• Sand Whirlwind                      canonical 中文 = '沙旋风'
+    中文分布: {'book1_ch1': 1}
+
+• Muckish Creep                       canonical 中文 = '淤泥蹒跚怪'
+    中文分布: {'book1_back': 10}
+
+• Golarion's Finest                   canonical 中文 = '库拉克丝（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Dromornis                           canonical 中文 = '奔鸟'
+    中文分布: {'book1_ch2': 5, 'book1_back': 22}
+    EN短形式分布: {'book1_ch2': 1}
+
+• Yoh Souran                          canonical 中文 = '叶索兰'
+    中文分布: {'book3_ch1': 14, 'book3_ch2': 5, 'book3_ch3': 1, 'book3_back': 18}
+
+• Golarion's Finest                   canonical 中文 = '布拉托克（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Yabin the Just                      canonical 中文 = '“正义的”亚彬'
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Maalya                              canonical 中文 = '马尔雅'
+    中文分布: {'book1_back': 4, 'book2_ch2': 1, 'book3_ch1': 3}
+    EN短形式分布: {'book1_back': 1}
+
+• Hantu Denai                         canonical 中文 = '怨迹'
+    中文分布: {'book1_back': 4}
+
+• Golarion's Finest                   canonical 中文 = '保宁玛（格拉利昂最强队）'
+    EN短形式分布: {'book2_back': 1}
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Arms of Balance                     canonical 中文 = '普拉万·马吉纳普蒂（八臂调和）'
+    EN短形式分布: {'book1_ch3': 1, 'book2_back': 1}
+    book1_ch3: en=1, zh canonical=0 ⚠
+    book2_back: en=1, zh canonical=0 ⚠
+
+• Akila Stormheel                     canonical 中文 = '阿基拉·暴风踵'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 1}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}
+
+• Anugobu Wondercrafter               canonical 中文 = '阿努巡游工匠'
+    中文分布: {'book1_ch1': 1, 'book1_back': 2}
+
+• Halspin the Stung                   canonical 中文 = '哈尔斯丁·刺痛'
+    中文分布: {'book2_ch2': 1, 'book2_ch3': 1, 'book3_ch1': 2}
+    EN短形式分布: {'book1_back': 1}
+    book1_back: en=1, zh canonical=0 ⚠
+
+• Jaiban                              canonical 中文 = '贾班'
+    中文分布: {'book1_ch2': 6}
+    EN短形式分布: {'book1_ch2': 2}
+
+• Collapsing Structure                canonical 中文 = '崩塌的建筑'
+    中文分布: {'book2_back': 1}
+
+• Yarrika Mulandez                    canonical 中文 = '雅利卡·穆兰德兹'
+    中文分布: {'book1_back': 1, 'book2_ch2': 1, 'book2_back': 1, 'book3_ch1': 3}
+    EN短形式分布: {'book1_back': 1, 'book2_back': 1}

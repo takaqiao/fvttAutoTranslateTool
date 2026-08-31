@@ -1,0 +1,2362 @@
+{
+  "label": "试玩测试",
+  "mapping": {
+    "actors": {
+      "items": {
+        "path": "items",
+        "converter": "adventure_items_converter"
+      },
+      "actions": {
+        "path": "system.actions",
+        "converter": "actions_converter"
+      },
+      "ancestry": {
+        "path": "system.details.ancestry",
+        "converter": "nested_object_converter"
+      },
+      "background": {
+        "path": "system.details.background",
+        "converter": "nested_object_converter"
+      },
+      "biography": {
+        "path": "system.details.biography",
+        "converter": "nested_object_converter"
+      },
+      "archetype": {
+        "path": "system.details.archetype",
+        "converter": "nested_object_converter"
+      },
+      "taxonomy": {
+        "path": "system.details.taxonomy",
+        "converter": "nested_object_converter"
+      }
+    },
+    "items": {},
+    "journals": {},
+    "scenes": {},
+    "macros": {}
+  },
+  "folders": {},
+  "entries": {
+    "Playtest 1 - The Ring of Valor": {
+      "name": "试玩测试 1 - 英勇之戒",
+      "caption": "在“英勇之戒”中检验你的勇气吧，这是一款 Crucible 游戏系统目前首个开放的试玩测试。",
+      "description": "<p><em>英勇之戒</em>是对《Crucible》中角色成长与战斗机制的引导式引言，让玩家扮演一支英雄队伍，面对一连串不断升级的挑战。</p>",
+      "scenes": {
+        "Arena of Valor": {
+          "name": "英勇竞技场"
+        }
+      },
+      "folders": {
+        "Crucible Playtest": "Crucible 试玩测试",
+        "The Ring of Valor": "英勇之戒",
+        "Day 1": "第1天",
+        "Day 2": "第2天",
+        "Day 3": "第3天",
+        "Day 4": "第4天",
+        "Day 5": "第5天",
+        "Pregenerated Heroes": "预生成英雄",
+        "Level 1": "1级",
+        "Level 6": "6级"
+      },
+      "journals": {
+        "Playtest One: The Ring of Valor": {
+          "name": "试玩测试一：英勇之戒",
+          "pages": {
+            "Introduction": {
+              "name": "引言",
+              "text": "<p><strong>试玩测试一：英勇之戒</strong>是对 Crucible 中角色晋升与战斗机制的引导式介绍，让玩家扮演一支角斗士队伍，在英勇之戒中面对一连串挑战。</p><p>玩家既可以按照 @UUID[Compendium.crucible.rules.JournalEntry.gszlBVQ5fGh3y0I6]{角色创造} 流程从零开始创建自己的角色（推荐），也可以使用 <strong>预生成英雄</strong> compendium 包中提供的 1级预制角色。</p><p>这一挑战是为一支由四名玩家角色组成的队伍设计并平衡的，不过我们也鼓励你用人数更少或更多的队伍进行测试。挑战的难度可以通过调整 @UUID[Compendium.crucible.rules.JournalEntry.v1dqTT3NI35lFNxM]{对手} 的威胁等级来改变。</p><p>英勇之戒由六场战斗组成，每天一场。在此期间，队伍将面对越来越危险的对手，最终迎来与现任冠军的决战——也就是上一支征服这座竞技场的英雄团队。每次遭遇结束后，队伍都会提升等级，然后再面对下一场考验。每场战斗都旨在引入新的游戏机制，并让玩家有机会测试通过升级获得的新能力。</p><h2 class=\"divider\">提供反馈</h2><p>如果你试玩测试了 Crucible 并体验了英勇之戒，请花一点时间在我们的社区 Discord 服务器中的 <strong>#crucible</strong> 频道 @UUID[Compendium.crucible.rules.JournalEntry.5SgXrAKS2EnqVggJ.JournalEntryPage.4Ggutuh9uzhcEXSK]{提供反馈}，帮助我们改进。</p><h2 class=\"divider\">关于失败</h2><p>通常在 Crucible 中——无论是因<strong>疯狂</strong>还是<strong>死亡</strong>而失败——都意味着角色旅程的终结。不过，在这次初始试玩测试中，我们建议你作为游戏主持人采取一种更灵活的处理方式。</p><p>为了测试系统并收集有用的反馈，我们建议允许遭遇失败的队伍反复尝试同一挑战直到成功；或者如果某一天的挑战过于困难、无法克服，也可以允许他们照常进入下一项挑战。</p>"
+            },
+            "Day One - The Feral Scramble": {
+              "name": "第1天——野性争夺战",
+              "text": "<p>在第1天的挑战中，4名1级英雄将对上一群狂暴的野兽：</p><ul><li><p>4x @UUID[Actor.tqLT327VnrBXrLtj]{惠安娜}（½级仆从）</p></li><li><p>4x @UUID[Actor.owg68yqumk7KxV9B]{Baizaz}（½级仆从）</p></li></ul><p><strong>主角威胁</strong>：1 × 4 = 4</p><p><strong>对手威胁</strong>：⅓ × 8 = 2.66</p><p><strong>遭遇难度</strong>：困难</p><h2 class=\"divider\">引言</h2><p>队伍踏上沙地，发现自己置身于一座巨大的竞技场中，四周看台上坐满了欢呼的人群。一名解说员在俯瞰沙地的包厢中观战，竞技场的主人也坐在那里。解说员的声音经由魔法放大，传遍整座竞技场。</p><blockquote><p>这里是英勇之戒盛大展演的第一天，观众们已经彻底沸腾了！今天的第一场比赛即将开始，而当这些新人第一次踏上沙地时，观众显然都迫不及待想看看他们会有怎样的表现。混战一向是观众最喜爱的项目之一——这些新人能否在这些饥肠辘辘的野兽面前活下来并取得胜利呢？！</p></blockquote><p>队伍被指示前进并站到竞技场中央。惠安娜和 Baizas 分成两组，各4只，分别部署在竞技场两侧。等队伍抵达竞技场中央后，先留出片刻时间营造紧张气氛，然后野兽从地图东侧和西侧的隧道中现身。将所有人加入一个<strong>战斗</strong>遭遇，并开始战斗，为<strong>第1轮</strong>投掷<strong>先攻</strong>。</p><h2 class=\"divider\">战术</h2><p><strong>惠安娜</strong>是群猎者，依赖夹击战术包围并袭扰单个主角，从而受益于它们的<strong>群猎者</strong>特性。这个挑战也可作为对@UUID[Compendium.crucible.rules.JournalEntry.QhZgmBrdLAGwYy5c.JournalEntryPage.KGXiKFUWrPgb7wsx]{移动与夹击}机制的介绍。</p><p><strong>Baisaz</strong>在冲锋时具有惊人的冲势与力量。Baisaz 会使用它们的<strong>獠牙冲锋</strong>冲向目标，同时利用它们的移动或任何剩余动作来重新拉开与目标的距离，以便再次冲锋。</p><p><strong>惠安娜</strong>和 <strong>Baisaz</strong> 都容易受到其@UUID[Compendium.crucible.rules.JournalEntry.gszlBVQ5fGh3y0I6.JournalEntryPage.FmmADsI9qo1uIIT3]{士气}伤害的影响。当这些野兽变为破碎时，它们就会逃离竞技场，沿最近的隧道撤回下方的地下墓穴。这场初始挑战也可以作为一次学习体验，让玩家明白打击敌人士气是通向胜利的有效途径。</p><h2 class=\"divider\">晋升</h2><p>当八只野兽全部被击败时，战斗结束。观众对队伍的表现很满意，解说员宣布队伍将在明天回来参加另一场比赛。</p><p>准备继续时，每名角色都应使用<strong>恢复</strong>动作来找回失去的资源，并且所有角色都应提升1级，晋升至2级，以迎战 @UUID[.eQdArtcrGi4wobap]{第2天 - 锤子与铁砧}。</p>"
+            },
+            "Day Two - Hammer and Anvil": {
+              "name": "第2天——锤与铁砧",
+              "text": "<p>在第2天的挑战中，4名2级英雄将对决角斗双人组——@UUID[Actor.XA9W38PGmAs3ZLDa]{锤}与@UUID[Actor.KSoJR8uwT5Qzka7p]{铁砧}（挑战等级9）。</p><ul><li><p>@UUID[Actor.XA9W38PGmAs3ZLDa]{锤}（3级精英）</p></li><li><p>@UUID[Actor.KSoJR8uwT5Qzka7p]{铁砧}（3级精英）</p></li></ul><p><strong>主角威胁</strong>：2 × 4 = 8</p><p><strong>对手威胁</strong>：4 × 2 = 8</p><p><strong>遭遇难度</strong>：致命</p><h2 class=\"divider\">引言</h2><blockquote><p>“今天的英勇之戒天气正好，看来我们将迎来一场精彩对决。今天的比赛标志着那对致命双人组的回归——赛场上的巨人，可怕的二人组：锤和铁砧。”</p><p>播报员在观众的欢呼声中停顿片刻，随后继续说道：“多么热烈的欢迎！你们完全能听出粉丝们有多么渴望再次看到这两位登场。让我们看看新的挑战者们能否顶住这场考验！”</p></blockquote><p>队伍被指示在竞技场西侧的通道前集结。等队伍就位后，锤和铁砧会从对面东侧的通道现身，战斗随即开始！</p><h2 class=\"divider\">战术</h2><p>锤和铁砧是一对以协调配合作战的对手。</p><p><strong>铁砧</strong>的战术主要集中在设法贴近并擒抱一名敌人，从而为锤创造攻击机会。铁砧会使用<strong>锤 Toss</strong>将锤迅速送入战局，然后使用<strong>Wrestler</strong>来压制敌人，并以<strong>强力打击</strong>施加沉重一击。</p><p><strong>锤</strong>是一名散兵，会在战斗中进进出出，寻找机会，以<strong>连击</strong>施展一连串毁灭性的双持攻击，或使用<strong>打击 + 副手攻击</strong>的组合。任何试图脱离接战的敌人，锤都会用<strong>断筋打击</strong>将其制伏。</p><h2 class=\"divider\">晋升</h2><p>当锤和铁砧都被击败时，战斗结束。观众对队伍的表现十分满意，解说员宣布队伍将在明天回归，参加另一场比赛。</p><p>队伍将获得一次休息机会，可以使用<strong>恢复</strong>动作，并提升1级，晋升至3级，以迎战@UUID[.v5EIDeTtHdQ7Wb5J]{第3天 - 骷髅军团}。</p>"
+            },
+            "Day Three - The Skeletal Army": {
+              "name": "第3天——骷髅军团",
+              "text": "<p>在第三场挑战中，4名3级英雄将与死灵法师奥里维奇及其骷髅大军展开对决！</p><ul><li><p>@UUID[Actor.JuobjWohGACVeoyn]{奥里维奇}（3级 Boss）</p><ul><li><p>召唤了 @UUID[Compendium.crucible.summons.Actor.56puGK932Qc0cowe]{死亡造物}（1级 仆从）</p></li></ul></li><li><p>6x @UUID[Actor.aQkmEcwfImmdUINF]{骷髅枪兵}（1级 仆从）</p></li><li><p>6x @UUID[Actor.7jL3UmgXbqxXKClM]{骷髅弓箭手}（1级 仆从）</p></li></ul><p><strong>主角威胁</strong>：3 × 4 = 12</p><p><strong>对手威胁</strong>：6 + (½ × 6) + (½ × 6) = 12</p><p><strong>遭遇难度</strong>：致命</p><h2 class=\"divider\">引言</h2><p>在这场挑战中，队伍被要求背靠竞技场北侧的悬崖列队。</p><blockquote><p>“欢迎各位再次来到英勇之戒，迎接我们这场扣人心弦的试炼在第3天的赛事！今天，我们将重现历史上的一场著名战役。这几位勇敢的斗士，背临湮灭深渊的边缘，迎战可怖的死灵法师奥里维奇和他的骷髅军团！”</p><p>人群发出兴奋的吼声，热切期待着奥里维奇和他的骷髅爪牙从南侧台阶现身，进入竞技场。</p></blockquote><p>奥里维奇和骷髅们从南侧入口出现，并在遭遇开始前摆出战斗阵型！</p><h2 class=\"divider\">战术</h2><p>奥里维奇会采取防御性的打法，依靠他的骷髅军团制服敌人。作为 Boss 敌人，奥里维奇每轮拥有<strong>10 动作</strong>，并且会在大多数法术上使用<strong>Compose</strong>屈折以节省<strong>专注</strong>，并将剩余的动作用于<strong>恢复专注</strong>。</p><p>奥里维奇的战术核心是使用<strong>创造</strong>手势来召唤更多的 @UUID[Compendium.crucible.summons.Actor.56puGK932Qc0cowe]{死亡造物} 爪牙。由于拥有<strong>召唤师</strong>天赋，奥里维奇最多可同时维持3个这样的爪牙。若直接受到威胁，他会使用<strong>Push </strong>屈折强行将敌人向后推开。</p><p>骷髅弓箭手会用<strong>打击</strong>集中火力攻击奥里维奇指定的目标，并使用<strong>闪避射击</strong>来调整位置。骷髅枪兵则会冲上前去牵制敌方战士并阻挡他们的去路，试图用<strong>扫腿</strong>将其绊倒。</p><h2 class=\"divider\">晋升</h2><p>当奥里维奇被击败时，战斗结束。死灵法师倒下时，他的骷髅爪牙也会随他一同化为尘土。观众对队伍的表现十分满意，解说员宣布队伍将在明天返回参加另一场比赛。</p><p>队伍将获得一次休息的机会，使用恢复动作，并提升1级晋升至4级。所有英雄还可以将其已装备武器的品质提升至<strong>Fine</strong>。休息后，试炼将继续进行，进入 @UUID[.hEpGF7rbNFVUMm86]{第4天 - Koy Rent}。</p>"
+            },
+            "Day Four - Koy Rent": {
+              "name": "第4天 - 科伊·伦特",
+              "text": "<p>在这第四项挑战中，4名4级英雄将与狼人威胁科伊·伦特正面对决。</p><ul><li><p>@UUID[Actor.3sGYsiKtgYLLkadw]{科伊·伦特}（7级Boss）</p></li></ul><p><strong>主角威胁</strong>：4 × 4 = 16</p><p><strong>对手威胁</strong>：14</p><p><strong>遭遇难度</strong>：困难</p><h2 class=\"divider\">引言</h2><p>在这项挑战中，队伍在竞技场东侧集结。</p><blockquote><p>“今天的比赛很特别——一位退役冠军将回归，参加一日限定的表演赛！各位，你们认识他，你们喜爱他，他在这里，他在那里，他无处不在！——科伊·伦特！伦特在一次重伤后离开了擂台，在观众理解的欢呼声中告别了胜利的赛场。如今他重返赛场，我们不禁要问：他会再次攀上冠军之位，还是会败给这些新的挑战者？”</p></blockquote><p>科伊·伦特从西侧入口进入竞技场，并立刻发动攻击！</p><h2 class=\"divider\">战术</h2><p>科伊·伦特是一名强大的战士。作为一名7级Boss，他拥有可观的生命值和士气池，队伍几乎不可能在正面近战中扛住他的猛攻。</p><p>伦特会使用<strong>凶暴嚎叫</strong>施加<strong>恐慌</strong>状态，并迅速移动，拉近距离进入近战范围，尽可能贴近更多敌人。面对单个目标时，伦特会使用<strong>连击</strong>，以无情的爪击猛攻迅速将其压制，并通过<strong>放血者</strong>天赋造成额外的流血伤害。</p><p>队伍不可能在近战中承受这轮猛攻，因此必须仔细思考该如何拖慢科伊·伦特。</p><h2 class=\"divider\">晋升</h2><p>当科伊·伦特被击败时，战斗结束。观众对队伍的表演很满意，解说员宣布队伍将在明天回归，参加另一场比赛。</p><p>队伍将获得一次休息机会，使用<strong>恢复</strong>动作，并提升1级；晋升至5级。所有英雄还可以将其已装备护甲的品质提升至<strong>精良</strong>。队伍将在次日返回，面对@UUID[.sISxZXCLNvpjkY02]{第5天 - 虚空先驱者}。</p>"
+            },
+            "Day Five - Void Harbingers": {
+              "name": "第5天 - 虚空先驱者",
+              "text": "<p>在这项挑战中，4名5级英雄将对阵三名虚空先驱者：</p><ul><li><p>@UUID[Actor.YVvIKp7fUIduZchE]{恐惧先驱}（L4 精英）</p></li><li><p>@UUID[Actor.TZT7ybsmI8yV5hWg]{疫病先驱}（L4 精英）</p></li><li><p>@UUID[Actor.CTpEm0WlmFAAosBD]{疯狂先驱}（L4 精英）</p></li></ul><p><strong>主角威胁</strong>：4 × 5 = 20</p><p><strong>对手威胁</strong>：3 × 6 = 18</p><p><strong>遭遇难度</strong>：致命</p><h2 class=\"divider\">引言</h2><blockquote><p>“今晚我们将迎来真正令人热血沸腾的场面，因为召唤师们从暗影帷幕彼端的领域中 conjured 出了一项全新的挑战！女士们、先生们，从现实边缘之外最黑暗的幽深角落与阈限空间而来，欢迎来到英勇之戒：虚空先驱者！”</p></blockquote><h2 class=\"divider\">战术</h2><p><strong>恐惧先驱</strong>是一名以恐惧思绪为食的机动型掠食者。它会使用<strong>以太扭曲</strong>在战场上自由穿梭，并以<strong>Eldritch Emanataion</strong>对成群敌人施加恐惧。一旦它孤立出一名处于恐慌中的敌人，便会用它的灵能巨口进行<strong>打击</strong>。</p><p><strong>疫病先驱</strong>是瘟疫的传播者，会利用它的<strong>疫病鞭笞</strong>能力施加<strong>染病</strong>状态。这名先驱者也具有施法能力，会借此进一步吸取生命与士气，对成群敌人使用<strong>脉冲</strong>手势，或以<strong>影响</strong>针对单个目标。</p><p><strong>疯狂先驱</strong>是一名精神层面的掠食者，它会先逼近到近战距离，再对成群敌人使用<strong>精神鞭笞</strong>能力，或对单个敌人施展<strong>Devour Thoughts</strong>。</p><h2 class=\"divider\">晋升</h2><p>当三名先驱者全部被击败时，战斗结束。观众对队伍的表演感到满意，解说员宣布队伍将于明天返回参加另一场比赛。</p><p>队伍获得一次休息、使用<strong>恢复</strong>动作并提升等级的机会；晋升至6级。所有英雄还可以将其已装备<strong>护甲</strong>的品质提升至<strong>精良</strong>。队伍将在次日返回，面对 @UUID[.UxIXSvvJCdqx2Tar]{第六天 - 镜像对决}。</p>"
+            },
+            "Day Six - Mirror Match": {
+              "name": "第6天 - 镜像对决",
+              "text": "<p>在这场最终挑战中，4名6级英雄将与一支由4名6级英雄组成的敌对冒险队伍正面对决。</p><ul><li><p>@UUID[Actor.iLUfMcYjAbZFY4CJ]{Duurath}（6级）</p></li><li><p>@UUID[Actor.0crVYYsPvV9KDEJ2]{Belladonna}（6级）</p></li><li><p>@UUID[Actor.2lvTCCOj4dnBI774]{艾利奥文}（6级）</p></li><li><p>@UUID[Actor.Il4NDaNBdHNcjJ9d]{Kagura}（6级）</p></li></ul><p><strong>主角威胁</strong>：4 × 6 = 24</p><p><strong>对手威胁</strong>：4 × 6 = 24</p><p><strong>遭遇难度</strong>：致命</p><h2 class=\"divider\">引言</h2><blockquote><p>“好，好……你们的勇士已经证明了自己，击败了这座竞技场所能提供的所有强大对手，所以现在，是时候让他们与往届赛事中那些声名显赫的老将与冠军一较高下了。准备迎接一场冠军之战吧！”</p></blockquote><p>这是一项尤其困难的挑战，因为对方的四名英雄都经过了单独优化，并且作为团队配合得极好。</p><h2 class=\"divider\">战术</h2><p>本挑战中的每个对手都作为一名英雄式主角运作，拥有各自的一系列天赋、动作和装备。</p><h4>Duurath</h4><p><strong>Duurath </strong>是一名危险的近战战斗者，拥有很高的<strong>交战</strong>、强大的物理防御，以及能够打击敌人士气并令其恐惧的<strong>恐惧领主</strong>签名天赋。Duurath会使用<strong>盾牌冲锋</strong>逼近敌方战斗者，并利用<strong>节奏</strong>打出高额伤害，或在格挡来袭攻击时使用<strong>反击</strong>进行报复。防御方面，Duurath可以使用<strong>Kinetic Ward</strong>来保护自己，免受所选类型的物理伤害。</p><h4>Belladonna</h4><p><strong>Belladonna</strong>是一名狡猾而难以捉摸的近战战斗者，拥有<strong>下毒者</strong>天赋。战斗开始时，她会启动<strong>毒刃</strong>。她会对敌方法术施放者使用<strong>分散注意力</strong>来消耗其<strong>专注</strong>，并使用<strong>战斗医疗</strong>恢复盟友的生命值。Belladonna会寻找更脆弱的敌方战斗者，必要时使用<strong>翻滚</strong>接近至近战范围，并以<strong>连击</strong>迅速施加伤害和中毒状态。</p><h4>艾利奥文</h4><p><strong>艾利奥文</strong>是一名致命的弓箭手，凭借她的<strong>奥术弓手</strong>天赋，将闪电法术灌注到她的长弓射击之中。艾利奥文会识别出一个危险的敌人，并以<strong>标记猎物</strong>锁定对方，降低其对她自己及其盟友的防御。她会使用<strong>精准射击</strong>配合降低消耗的<strong>Voltaic 箭头</strong>，从远距离稳定地持续输出伤害。</p><h4>Kagura</h4><p><strong>Kagura</strong>是一名多用的支援角色，能够治疗盟友的身心。她会使用<strong>生命</strong>符文，并通过<strong>影响</strong>、<strong>脉冲</strong>或<strong>射线</strong>手势之一来触发其<strong>修补匠</strong>天赋带来的额外治疗。Kagura还可以通过谨慎运用<strong>Compose</strong>屈折以及<strong>节省精力</strong>，几乎无限期地维持治疗。Kagura会避免直接对抗，而是脱离战斗并寻求盟友的保护。</p><h2 class=\"divider\">晋升</h2><p>当四名对手全部被击败时，这场战斗即告结束。观众会为队伍的表演激动不已，并将他们欢庆为英勇之戒的永恒冠军。目前英勇之戒暂无更多预定活动，但如果你希望继续测试，为队伍即兴设计新的挑战，请参见 @UUID[.aNlzMnfUkwpLrSox]{Further Challenges}。</p>"
+            },
+            "Further Challenges": {
+              "name": "进一步的挑战",
+              "text": "<p>感谢你完成<strong>《Crucible》试玩测试</strong>。我们希望你和你的玩家都喜欢这次测试体验。为了进一步挑战并评估该系统，我们建议如下：</p><ol><li><p>重复进行 @UUID[.UxIXSvvJCdqx2Tar]{第六天 - 镜像对决} 挑战，但改用不同组合的6级预生角色作为对手。</p></li><li><p>通过测试分类法和原型的初始系统，创建你自己的 @UUID[Compendium.crucible.rules.JournalEntry.v1dqTT3NI35lFNxM]{对手}。</p></li></ol><p>也请考虑抽出时间 @UUID[Compendium.crucible.rules.JournalEntry.5SgXrAKS2EnqVggJ.JournalEntryPage.4Ggutuh9uzhcEXSK]{提供反馈}，这将有助于我们进一步开发和改进这套新的角色扮演游戏系统。</p>"
+            }
+          }
+        }
+      },
+      "actors": {
+        "Baizaz": {
+          "name": "拜扎兹 Baizaz",
+          "tokenName": "拜扎兹 Baizaz",
+          "archetype": {
+            "name": "长牙兽 长牙兽",
+            "description": "<p>凭借自身的体型、冲势和锋利獠牙作战的野兽。</p>"
+          },
+          "taxonomy": {
+            "name": "野猪 野猪",
+            "description": "<p>厚皮、危险的獠牙，以及低而靠下的强力重心的哺乳动物。</p>"
+          },
+          "items": {
+            "Heavy Hide": {
+              "name": "厚皮 厚皮"
+            },
+            "Tusks": {
+              "name": "獠牙 獠牙"
+            },
+            "Tusk Charge": {
+              "name": "獠牙冲锋 獠牙冲锋",
+              "description": "野猪低下头，以疯狂的速度冲来，獠牙从流着口涎的喉部下方突出来。",
+              "actions": {
+                "tuskCharge": {
+                  "name": "獠牙冲锋 獠牙冲锋",
+                  "description": "<p>沿直线进行一次最远至你步幅的冲锋，并对你遭遇到的第一个生物进行一次打击。若成功，目标被击倒至倒地状态。</p>",
+                  "effects": [
+                    {
+                      "name": "獠牙冲锋 獠牙冲锋"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Huiana": {
+          "name": "惠安娜 惠安娜",
+          "tokenName": "惠安娜 惠安娜",
+          "archetype": {
+            "name": "群体成员 群体成员",
+            "description": "成群结队狩猎的野兽。"
+          },
+          "taxonomy": {
+            "name": "鬣狗 鬣狗",
+            "description": "鬣狗科的哺乳动物。鬣狗是食肉的群猎者，拥有强力的颈部和颌部。"
+          },
+          "items": {
+            "Bite": {
+              "name": "噬咬 Bite"
+            },
+            "Fur": {
+              "name": "毛皮 Fur"
+            },
+            "Pack Hunter": {
+              "name": "群猎者 群猎者",
+              "description": "<p>这种生物是群猎者，会依靠盟友对目标进行夹击和骚扰，使其暴露在进一步的伤害之下。</p><p>这种生物在攻击<strong>被夹击</strong>的敌人时，获得的恩惠数量翻倍。</p>"
+            }
+          }
+        },
+        "Anvil": {
+          "name": "铁砧 铁砧",
+          "tokenName": "铁砧 铁砧",
+          "archetype": {
+            "name": "擒抱者 擒抱者",
+            "description": "擅长以身体压制对手，并使其更易受到后续攻击的战士。"
+          },
+          "taxonomy": {
+            "name": "食人魔 食人魔",
+            "description": "<p>以蛮力和直截了当的问题解决方式而闻名的魁梧巨人裔。</p>"
+          },
+          "items": {
+            "Heavy Hides": {
+              "name": "厚重毛皮",
+              "description": {
+                "public": "<p>由大型野兽或怪物的坚韧皮革制成，这些结实耐用的护甲由猎人和荒野居民穿着，在野外提供持久但粗糙的防御。</p>"
+              }
+            },
+            "Greatclub": {
+              "name": "巨棒",
+              "description": {
+                "public": "<p>巨棒是一段粗糙扭曲的重型木材，有时钉有铁钉；它虽构造简陋，却令人畏惧，即使在未受训者手中也同样危险。</p>"
+              }
+            },
+            "Powerful Physique": {
+              "name": "强健体魄",
+              "description": "你可以挥舞具有缓慢特性的武器，并穿着具有笨重特性的护甲，而不会在先攻掷骰时承受祸骰。"
+            },
+            "Leg Sweep": {
+              "name": "扫腿",
+              "description": "<p>你使用一把依靠<strong>力量</strong>成长的武器横扫敌人使其失去平衡，低挥一击，将其从脚下击倒。</p>",
+              "actions": {
+                "legSweep": {
+                  "name": "扫腿",
+                  "description": "<p>你用主手武器进行一次<strong>打击</strong>攻击。此技巧施展起来<strong>困难</strong>，且造成的伤害降低，但如果成功，会使目标<strong>倒地</strong>。</p>",
+                  "effects": [
+                    {
+                      "name": "扫腿"
+                    }
+                  ]
+                }
+              }
+            },
+            "Concussive Blows": {
+              "name": "震荡重击 震荡重击",
+              "description": "<p>你使用造成钝击伤害的近战武器进行的物理攻击，在对生命值造成伤害的暴击时，可以施加<strong>踉跄</strong>状态。</p>\n<p>踉跄效果持续 1 轮，并使目标的最大动作减少 1。</p>"
+            },
+            "Strong Grip": {
+              "name": "强力握持",
+              "description": "你对自己武器装备的掌控稳固而坚定。你在持用双手近战武器时，仍可执行需要空出一只手的动作。试图缴械你时，攻击者的检定获得+2祸骰。"
+            },
+            "Hammer Toss": {
+              "name": "锤子投掷 锤 Toss",
+              "description": "铁砧抓住锤，把锤子掷进混战之中。",
+              "actions": {
+                "hammerToss": {
+                  "name": "锤子投掷 锤 Toss",
+                  "description": "<p>锤子抓住铁砧，并将他猛掷至多10格，在兽人军阀落地处的效果区域内造成伤害。</p>",
+                  "condition": "锤子与铁砧相邻。"
+                }
+              }
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何运用重型武器打出沉重而凶狠的攻击，在每一次挥击中都倾注全身的力量。你对<strong>重型</strong>和<strong>平衡</strong>类别中的所有武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用<strong>主手</strong>武器发动一次<strong>强力</strong><strong>打击</strong>。这次攻击施展起来较为缓慢，但经过<strong>强化</strong>，可造成额外<strong>伤害</strong>。</p>"
+                }
+              }
+            },
+            "Unarmed Combat Training": {
+              "name": "徒手战斗训练 徒手战斗训练",
+              "description": "<p>你熟悉基础武术和徒手战斗。你知道如何运用自身的体魄力量来制服或压制对手。你在<strong>徒手</strong><strong>武器</strong>的使用上达到<strong>受训</strong>等级。</p>",
+              "actions": {
+                "grapple": {
+                  "name": "擒抱 擒抱",
+                  "description": "<p>你试图以身体方式限制或制服一个对手。对一个相邻目标进行一次<strong>运动</strong>技能攻击。若成功，你和你的目标都陷入 @状态[受缚] 状态，持续 1 轮。</p>",
+                  "effects": [
+                    {
+                      "name": "被擒抱 被擒抱"
+                    },
+                    {
+                      "name": "擒抱 擒抱"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Hammer": {
+          "name": "锤",
+          "tokenName": "锤",
+          "archetype": {
+            "name": "散兵",
+            "description": "一名无情而坚定的近战战士，运用敏捷与力量的结合来制服敌人。"
+          },
+          "taxonomy": {
+            "name": "兽人语 兽人语",
+            "description": "<p>你的出生被一支自豪而坚韧不拔的民族的星象与传统所铭刻。你高大而结实匀称的身躯，以及天生坚韧的倾向，起源于一个暴露在严酷北方气候无情磨砺之下的民族。你的族人首先以力量与韧性闻名于世。</p>"
+          },
+          "items": {
+            "Hand Axe": {
+              "name": "手斧",
+              "description": {
+                "public": "<p>紧凑而致命，手斧是一种单手劈砍武器，配有短柄和锋利的刃部，非常适合投掷或在近距离打击中使用，在这种情况下速度胜过延伸。</p>"
+              }
+            },
+            "Scale Mail": {
+              "name": "鳞甲",
+              "description": {
+                "public": "<p>缝制或铆接在皮革或布料衬底上的重叠金属片，鳞甲宛如巨龙的鳞皮，能很好地防护劈砍和刺击——不过它声音很大，而且不够灵活。</p>"
+              }
+            },
+            "Skirmisher": {
+              "name": "散兵",
+              "description": "<p>你很擅长进出战团。当你移出敌人的<strong>交战</strong>半径时，该敌人对你进行的任何<strong>脱离打击</strong>都会获得 2 个祸骰。</p>"
+            },
+            "Flurry": {
+              "name": "连击 连击",
+              "description": "<p>一种使用两把武器，以连绵不绝的攻击序列压制单一目标的武术技巧。</p>",
+              "actions": {
+                "flurry": {
+                  "name": "连击 连击",
+                  "description": "<p>你用每把武器各<strong>打击</strong>两次，但每次<strong>打击</strong>都很<strong>困难</strong>。</p>"
+                }
+              }
+            },
+            "Hamstring": {
+              "name": "断筋打击 断筋打击",
+              "description": "<p>你用一把挥砍武器攻击敌人的双腿，使其移动受阻。</p>",
+              "actions": {
+                "hamstring": {
+                  "name": "断筋打击 断筋打击",
+                  "description": "<p>你进行一次<strong>打击</strong>攻击，此次攻击为<strong>困难</strong>，但若成功，则会施加<strong>迟缓</strong>状态，持续<strong>3 轮</strong>。</p>",
+                  "effects": [
+                    {
+                      "name": "断筋打击 断筋打击"
+                    }
+                  ]
+                }
+              }
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何使用重型武器施加强力打击，在每一次挥击中都倾注你的全部力量。你对<strong>重型</strong>和<strong>平衡</strong>类别中的所有武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用你的主手武器施展一次强力<strong>打击</strong>。这次攻击施展起来较为缓慢，但经过<strong>强化</strong>，可造成额外伤害。</p>"
+                }
+              }
+            },
+            "Dual Wield": {
+              "name": "双持",
+              "description": "<p>你擅长同时使用两把武器进行战斗。你可以将攻击交织在一起，以比使用单一武器时更快的速度发起打击。</p>",
+              "actions": {
+                "offhandStrike": {
+                  "name": "副手攻击",
+                  "description": "<p>在你用主手武器进行一次基础打击后，你立刻用<strong>副手</strong>武器进行一次减耗的后续<strong>打击</strong>。</p>"
+                }
+              }
+            },
+            "Bastard Sword": {
+              "name": "手半剑",
+              "description": {
+                "public": "<p>手半剑，也称为“一手半剑”，是一种多用武器，拥有一柄约40英寸长的笔直双刃剑身。此武器被打造得既适合单手灵活挥舞，也适合双手持用时发挥强大威力。</p>"
+              }
+            }
+          }
+        },
+        "Orivech": {
+          "name": "奥里维奇 奥里维奇",
+          "tokenName": "奥里维奇 奥里维奇",
+          "archetype": {
+            "name": "秘学家",
+            "description": "运用异界与诡秘力量进行施法的魔法使用者。"
+          },
+          "taxonomy": {
+            "name": "人类",
+            "description": "<p>在无数境况与遥远之地之间，你生来便是适应力极强的人类。无论高矮、瘦削、强壮，还是圆胖，你的外貌可谓千差万别。人类最为人所知的是其基因中对决心的倾向，而他们的传统也进一步塑造出顽强的求生意志。</p>"
+          },
+          "items": {
+            "Skull Fetish": {
+              "name": "颅骨护符",
+              "description": {
+                "public": "<p>这枚骇人的护符会引动恐惧与死亡的能量，以辅助施法，或以腐化性的影响折磨敌人。</p>"
+              }
+            },
+            "Studded Leather Armor": {
+              "name": "镶钉皮甲",
+              "description": {
+                "public": "<p>由皮革制成的底层，并以小型金属饰钉或铆接板加固，这种护甲在机动性与对劈砍伤害的适度防护之间取得了平衡。</p>"
+              }
+            },
+            "Gesture: Influence": {
+              "name": "手势：影响",
+              "description": "<p>你将一个符文中的奥术力量强化为一种集中的直接接触，这通常是基础触碰手势的更强力进阶形式。</p><p>影响手势以<strong>Presence</strong>进行成长，并以一个相邻的单个生物为目标。它对未能抵抗该法术的目标造成<strong>10 基础伤害</strong>。施放该手势需要<strong>1 只手</strong>，其基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Inflection: Compose": {
+              "name": "屈折：作曲",
+              "description": "<p>通过在塑造法术时投入额外时间来强化法术，并以此换取降低其他资源消耗。Compose 屈折会使法术的<strong>专注</strong>消耗降低 1，作为交换，其<strong>动作</strong>消耗提高 1。</p>"
+            },
+            "Gesture: Create": {
+              "name": "手势：创造",
+              "description": "<p>你将奥术力量凝聚为有形之物，显现出一个<strong>精灵</strong>，它会出现在10英尺内并以先攻 1 加入战斗。你的精灵是一个等于你自身等级一半的<strong>仆从</strong>。</p><p>创造手势会随<strong>感知</strong>而成长，且该精灵会存活<strong>6轮</strong>。你同时只能拥有一个生效中的精灵，若施放另一个使用创造手势的法术，则会替换掉你之前的精灵。此手势施放时需要<strong>2只手</strong>，基础消耗为<strong>4动作</strong>和<strong>1专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>并非所有符文都已定义精灵执行体。尚未定义创造效果的符文——目前——会显现为一个<strong>火焰精灵</strong>。</p>"
+            },
+            "Gesture: Arrow": {
+              "name": "手势：箭头",
+              "description": "<p>你将一枚注入了符文魔法力量的投射物掷向远处的目标。</p><p>箭头手势基于<strong>智力</strong>进行成长，并以60英尺内的单个生物为目标，对未能抵抗该法术的目标造成<strong>8基础伤害</strong>。施放该手势需要<strong>1只手</strong>，其基础消耗为<strong>3动作</strong>和<strong>1专注</strong>。</p>"
+            },
+            "Conjurer": {
+              "name": "召唤师",
+              "description": "<p>你是召唤学派和创造手势的大师，能够将奥术能量显化为实体形态。你可以同时维持至多 3 个这样的造物，而不再仅限于一个。</p>"
+            },
+            "Inflection: Push": {
+              "name": "屈折：推开",
+              "description": "<p>强化一个法术，使其将受影响的生物从施法者身边击退。受到具有 Push 屈折的法术影响的生物会向远离施法者的方向移动 4 英尺，前提是该目的地未被占据。</p>"
+            },
+            "Talisman Weapon Training": {
+              "name": "护符武器训练",
+              "description": "<p>你理解如何运用护符、法珠、法器或其他类似法器来引导魔法或强化施法中的奥术用法。你对<strong>护符</strong>类别中的<strong>武器</strong>拥有<strong>受训</strong>熟练。</p>",
+              "actions": {
+                "refocus": {
+                  "name": "重新聚焦",
+                  "description": "<p>你使用自己已装备的护符，尝试重新获得一些<strong>专注</strong>。你对自己的<strong>Rallying</strong>阈值进行一次<strong>无害</strong>的<strong>打击</strong>。</p><p>成功时，若使用单手护符，则<strong>恢复 +1 专注</strong>；若使用双手持用护符，则<strong>恢复 +2 专注</strong>。若大成功，恢复的专注量额外增加 +1。</p>"
+                }
+              }
+            },
+            "Intercept": {
+              "name": "拦截",
+              "description": "你保护盟友，拦截那些原本可能会指向同伴的打击。",
+              "actions": {
+                "intercept": {
+                  "name": "拦截",
+                  "description": "<p>你拦截进入你<strong>交战</strong>半径内的敌人路径，立即进行至多等同于你<strong>步幅</strong>的移动，插入其间并阻挡他们的去路。</p><p>如果敌人在其回合中移出你的交战半径，或攻击任何其他生物，你可以对其进行一次<strong>脱离交战打击</strong>。</p>",
+                  "condition": "一名敌人移动到你的交战半径内或穿过你的交战半径。"
+                }
+              }
+            },
+            "Gesture: Ray": {
+              "name": "手势：射线",
+              "description": "<p>你将一个符文的奥术力量汇聚于一点，并将其以光束的形式向外投射。</p><p>射线手势基于<strong>感知</strong>进行成长，产生一条宽 1 尺、长 30 尺、从施法者处发出的线状区域，对未能抵抗该法术的目标造成<strong>6 基础伤害</strong>。该手势需要<strong>1 只手</strong>施放，基础消耗为<strong>4 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Rune: Oblivion": {
+              "name": "符文：湮灭",
+              "description": "<p>一种混乱的力量，象征着毁灭与存在的湮灭。湮灭符文支配着物质的消解或精神的涣散。</p><p>湮灭符文以 <strong>智力</strong> 进行成长，目标为 <strong>Willpower</strong>，并对 <strong>士气</strong> 造成 <strong>虚空</strong> 伤害。它与有序的 <strong>灵魂</strong> 符文相对。</p>",
+              "actions": {
+                "erase": {
+                  "name": "擦除",
+                  "description": "<p>你对湮灭符文的掌控使你得以在存在的结构上拆解出细小的孔洞，产生以下效果之一：</p><ul><li><p>将你手中一个小于 6 英寸立方体的非魔法物体分解，使其碎裂为由其组成元素构成的细微颗粒尘埃。</p></li><li><p>麻痹你自己或你所触碰的一名自愿目标感受情绪的能力，使其进入平静、坚忍或冷漠的状态。只要你不再进行进一步的<strong>动作</strong>，此效果便可维持。</p></li><li><p>压制一个光源的强度，使其可见半径减半，只要你与其保持物理接触，此效果便会持续。任一时刻只能以此法削弱一个光源。</p></li></ul><p>擦除只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Soul": {
+              "name": "符文：灵魂",
+              "description": "<p>一种有序的创造与灵魂本质之力。灵魂符文掌管灵魂在生命与死亡中的基本流转，并与感知力、人格和心理健康相关。</p><p>灵魂符文使用 <strong>Presence</strong> 进行成长，能够提供 <strong>恢复</strong> 以恢复 <strong>士气</strong>，或造成由 <strong>意志</strong> 抵抗的 <strong>灵能</strong> 伤害。它与混沌的 <strong>湮灭</strong> 符文相对立。</p>",
+              "actions": {
+                "evoke": {
+                  "name": "引发",
+                  "description": "<p>你对灵魂符文的掌控使你能够促成基础形式的灵性影响，产生以下效果之一：</p><ul><li><p>使你自己或另一名自愿的人重温其过去某一时刻的一段核心记忆，持续时间最长为一分钟，仿佛那是最近发生的一样。</p></li><li><p>鉴定影响某人的一种负面灵性状态，例如 @状态[broken]、@状态[frightened]、@状态[confused] 或 @状态[insane]。</p></li><li><p>与另一名自愿的生物建立短暂的灵性连接，使其能够识别一个可以用单个词表达的想法。</p></li></ul><p>引发的用途只能影响你自己或另一名你能够以身体接触到的生物。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            },
+            "Rune: Death": {
+              "name": "符文：死亡",
+              "description": "<p>毁灭的有序力量，负责腐化所有生物材料。死亡符文掌管衰败与毁灭。</p><p>死亡符文以 <strong>Presence</strong> 进行成长，目标为 <strong>坚韧</strong>，对 <strong>生命值</strong> 造成 <strong>腐化</strong> 伤害。它的对立面是混乱的 <strong>生命</strong> 符文。</p>",
+              "actions": {
+                "ennervate": {
+                  "name": "失神术",
+                  "description": "<p>你对死亡符文的掌控使你能够与死者进行基础交流，并对亵渎之力进行初步操纵，从而产生以下效果之一：</p><ul><li><p>将腐朽扩散至一个不大于1立方英尺的物体上，使植物枯萎、金属物体生锈、木头腐烂、食物变质，或使一具尸体迅速分解。魔法物品通常不受影响。</p></li><li><p>使一具死亡未满七天或以其他方式得到保存的尸体，毫无生气地重现其生命最后时刻。它的动作会模仿该生物生命最后30秒内发生过的行为。你无法控制该生物，它也不能以任何其他方式交流。</p></li><li><p>加速一名当前处于濒死状态且自愿的生物的死亡，使其迅速而平静地逝去。</p></li></ul><p>失神术只能影响你能够以身体接触到的生物或物体。你也可以尝试进行其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Grimoire": {
+              "name": "魔典",
+              "description": {
+                "public": "<p>这本重型巨著既可用作知识的储藏库，也可作为施法的器具。在奥术修行者手中，它能够向目标投射震荡性的力场冲击。</p>"
+              }
+            }
+          }
+        },
+        "Skeletal Archer": {
+          "name": "骷髅弓箭手",
+          "tokenName": "骷髅弓箭手",
+          "archetype": {
+            "name": "弓箭手",
+            "description": "接受过训练的远程战斗者会使用弓。"
+          },
+          "taxonomy": {
+            "name": "骷髅",
+            "description": "<p>由骨骼与筋肉塑成的不死住民。</p>"
+          },
+          "items": {
+            "Deathly Armor": {
+              "name": "亡骸护甲"
+            },
+            "Shortbow": {
+              "name": "短弓",
+              "description": {
+                "public": "<p>短弓结构紧凑、易于快速拔出，擅长快速的近距离射箭与小规模冲突，深受侦察兵、猎人和行动敏捷的袭击者青睐。</p>"
+              }
+            },
+            "Precision Shot": {
+              "name": "精准射击",
+              "description": "你花时间稳住瞄准，锁定敌人最薄弱的部位。你或许只有一次出手的机会，但你会让这一击发挥最大效果。",
+              "actions": {
+                "precisionShot": {
+                  "name": "精准射击",
+                  "description": "<p>你稳住瞄准，射出精准的一击。</p>"
+                }
+              }
+            },
+            "Evasive Shot": {
+              "name": "闪避射击",
+              "description": "<p>你擅长在闪避敌人攻击的同时使用远程武器进行射击。在进行一次远程武器攻击后，你获得额外的免费移动，其距离为你<strong>步幅</strong>的一半。</p>"
+            },
+            "Projectile Weapon Training": {
+              "name": "投射武器训练",
+              "description": "<p>你受过基础的弓术和其他投射武器装备方面的训练。对于<strong>投射</strong>类别中的武器，你不再被视为<strong>未受训</strong>。</p>",
+              "actions": {
+                "quickDraw": {
+                  "name": "快速拔取",
+                  "description": "<p>你可以在压力下勉强开出一枪，尽管准确性会降低。你进行一次<strong>打击</strong>，该次<strong>打击</strong>为<strong>困难</strong>，但其动作成本会降低。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Skeletal Spearman": {
+          "name": "持矛骷髅",
+          "tokenName": "持矛骷髅",
+          "archetype": {
+            "name": "战士",
+            "description": "身经百战的近战战士，精于运用单手武器、盾牌和重型护甲。"
+          },
+          "taxonomy": {
+            "name": "骷髅",
+            "description": "<p>由骨骼与筋腱塑造而成的不死住民。</p>"
+          },
+          "items": {
+            "Deathly Armor": {
+              "name": "亡骸护甲"
+            },
+            "Spear": {
+              "name": "矛",
+              "description": {
+                "public": "<p>矛是一种讲究延伸与节奏的武器，具有一根长柄，顶端包有钢制矛头，无论是在盾墙后方以致命的力量投出，还是用于坚守战线，都非常合适。</p>"
+              }
+            },
+            "Bulwark": {
+              "name": "壁垒",
+              "description": "<p>你精通使用<strong>盾牌</strong>来保护自己和他人。</p><p>每回合一次，当你已装备盾牌时，你可以用减少后的消耗使用<strong>防御</strong>动作，只需 1 点动作点。</p>"
+            },
+            "Armored Efficiency": {
+              "name": "装甲效率 装甲效率",
+              "description": "<p>你受过训练，能够穿戴最重型的护甲，同时仍保有机动性。穿着重型护甲时，你每回合可以进行一次免费的移动动作。</p>"
+            },
+            "Leg Sweep": {
+              "name": "扫腿",
+              "description": "<p>你使用一把依靠<strong>力量</strong>成长的武器横扫敌人使其失去平衡，低挥一击将其打得双脚离地。</p>",
+              "actions": {
+                "legSweep": {
+                  "name": "扫腿",
+                  "description": "<p>你用你的<strong>主手</strong>武器进行一次<strong>打击</strong>攻击。此技巧执行起来<strong>困难</strong>，且造成的<strong>伤害</strong>会降低，但如果成功，则会使目标<strong>倒地</strong>。</p>",
+                  "effects": [
+                    {
+                      "name": "扫腿"
+                    }
+                  ]
+                }
+              }
+            },
+            "Light Weapon Training": {
+              "name": "轻型武器训练",
+              "description": "<p>你知道如何以高度的机动性与优雅在战斗中流畅地运用轻型武器。你对<strong>轻型</strong>和<strong>平衡</strong>类别中的所有武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "lunge": {
+                  "name": "突刺",
+                  "description": "<p>你灵巧地向前突进，以突如其来的迅捷发动一次打击，对单个目标使用一把以<strong>敏捷</strong>进行加值成长的武器进行一次<strong>打击 </strong>，且<strong>射程</strong>增加<strong>+2 feet</strong>。</p><p>此次<strong>攻击</strong>为<strong>困难</strong>，但你不会从当前位置<strong>移动</strong>，且此次攻击不会引发脱离接战。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Koy Rent": {
+          "name": "科伊·伦特",
+          "tokenName": "科伊·伦特",
+          "archetype": {
+            "name": "狂战士",
+            "description": "一名由怒火驱动、偏好使用重型武器进行双手攻击的战士。"
+          },
+          "taxonomy": {
+            "name": "狼人",
+            "description": "<p>行走如人却能化作狼形的狼人变形者。</p>"
+          },
+          "items": {
+            "Thick Fur": {
+              "name": "浓密毛皮"
+            },
+            "Rending Claw": {
+              "name": "裂爪"
+            },
+            "Thick Skin": {
+              "name": "厚皮肤",
+              "description": "你的身体坚韧，使你更能抵御伤害。你获得对钝击、挥砍和穿刺伤害的 +2 抗性。"
+            },
+            "Ferocious Howl": {
+              "name": "凶暴嚎叫",
+              "description": "<p>狼人发出一声令人毛骨悚然的嚎叫，让你因恐惧而停下脚步。</p>",
+              "actions": {
+                "ferociousHowl": {
+                  "name": "凶暴嚎叫",
+                  "description": "<p>你对30英尺内所有敌人的<strong>意志</strong>防御进行一次威吓技能攻击，对其<strong>士气</strong>造成虚空伤害，并使其陷入<strong>恐慌状态</strong>，持续<strong>3轮</strong>。</p>",
+                  "effects": [
+                    {
+                      "name": "凶暴嚎叫"
+                    }
+                  ]
+                }
+              }
+            },
+            "Intimidator": {
+              "name": "威吓者",
+              "description": "你专精于运用自己威吓性的存在感来击溃敌人的士气。",
+              "actions": {
+                "intimidate": {
+                  "name": "威吓",
+                  "description": "<p>你以肢体动作威吓一名处于你交战范围内的敌人，对目标进行一次威吓技能攻击。若成功，其士气承受虚空伤害。</p>"
+                }
+              }
+            },
+            "Blood Frenzy": {
+              "name": "嗜血狂乱",
+              "description": "<p>你的战斗欲望激励你做出更高效的行动。当你造成对生命值造成伤害的<strong>暴击</strong>时，你立即获得+1动作。此增益每轮只能触发一次。</p>"
+            },
+            "Lesser Regeneration": {
+              "name": "次级再生 次级再生",
+              "description": "<p>你惊人的坚韧赋予你一种超自然的能力，使你能从创伤中迅速恢复。在你的回合开始时，若你未处于虚弱状态，则获得 <strong>+1 生命值</strong>。</p>"
+            },
+            "Bloodletter": {
+              "name": "放血者 放血者",
+              "description": "<p>你使用造成挥砍或穿刺伤害的武器时，若以暴击对生命值造成伤害，你的精准打击会导致流血状态。</p><p>流血效果持续 1 轮，并额外对生命值造成等同于你敏捷属性值的伤害。</p>"
+            },
+            "Ferocious Leap": {
+              "name": "凶猛飞跃 凶猛飞跃",
+              "description": "<p>你猛然跃入战斗，用你的主手武器对附近的一名敌人施以沉重一击。</p>",
+              "actions": {
+                "ferociousLeap": {
+                  "name": "凶猛飞跃 凶猛飞跃",
+                  "description": "<p>你跃击至多10英尺，并对你落地位置近战范围内的一名敌人进行一次打击。你的移动无视困难地形，且不会被敌方生物阻挡。</p>"
+                }
+              }
+            },
+            "Natural Weapon Proficiency": {
+              "name": "天生武器熟练度 天生武器熟练度",
+              "description": "<p>你熟练掌握了天生武器的使用。你在<strong>天生</strong><strong>类别</strong>的武器上获得<strong>熟练工</strong><strong>训练等级</strong>以及<strong>+1 技能加值</strong>。</p>"
+            },
+            "Berserker": {
+              "name": "狂战士",
+              "description": "<p>你沉醉于战斗带来的刺激，毫无顾忌地投身于混战之中。</p>",
+              "actions": {
+                "berserkerRage": {
+                  "name": "狂战士狂怒",
+                  "description": "你陷入激怒状态。处于激怒状态期间，你的所有近战攻击额外造成4点伤害。你可以在自己的回合中尝试进行一次意志检定，DC为20，若成功则结束该效果。战斗结束时，该效果自动结束。",
+                  "condition": "自你在战斗中的上一回合以来，你的生命值池已受到伤害。",
+                  "effects": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "Frenzied Claws": {
+              "name": "狂乱之爪 狂乱之爪",
+              "description": "<p>@ref[actor.name]{该生物}以其爪发动了一连串狂乱的胡乱挥击。</p>",
+              "actions": {
+                "frenziedClaws": {
+                  "name": "狂乱之爪 狂乱之爪",
+                  "description": "<p>该@ref[actor.name]{生物}用其爪对单一目标进行四次攻击。</p>"
+                }
+              }
+            },
+            "Pouncing Strike": {
+              "name": "猛扑打击 猛扑打击",
+              "description": "<p>这个生物向前突刺，将它的全部重量都倾注在一次跳跃打击之中。</p>",
+              "actions": {
+                "pouncingStrike": {
+                  "name": "猛扑打击 猛扑打击",
+                  "description": "<p>此次攻击可在一次<strong>移动</strong>后使用，前提是该次移动使 @ref[actor.name]{生物} 至少接近其目标 10 英尺。若该生物原本位于目标上方，则此次攻击每因该次移动下降 10 英尺<strong>高度</strong>，便获得 <strong>+1 恩惠骰</strong>。</p><p>如果此次攻击为<strong>暴击</strong>，则攻击目标会立即击至 @状态[prone]。</p>",
+                  "effects": [
+                    {
+                      "name": "猛扑打击 猛扑打击"
+                    }
+                  ]
+                }
+              }
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何运用重型武器打出沉重的攻击，在每一次挥击中都灌注你全部的力量。你对<strong>重型</strong>和<strong>平衡</strong>类别中的所有武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用主手武器发动一次强力的<strong>打击</strong>。这次攻击出手较慢，但经过<strong>强化</strong>，可造成额外伤害。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Harbinger of Disease": {
+          "name": "疫病先驱 疫病先驱",
+          "tokenName": "疫病先驱 疫病先驱",
+          "archetype": {
+            "name": "疫病先驱 Plaguebearer",
+            "description": "<p>带来瘟疫与腐朽的先驱者。</p>"
+          },
+          "taxonomy": {
+            "name": "先驱者",
+            "description": "<p>来自彼界虚空的异界存在。</p>"
+          },
+          "items": {
+            "Pestilent Tongue": {
+              "name": "疫病鞭笞"
+            },
+            "Claws": {
+              "name": "爪"
+            },
+            "Void Chitin": {
+              "name": "虚空几丁质",
+              "description": {
+                "public": "<p>一些虚空几丁质的描述。</p>"
+              }
+            },
+            "Pestilent Lash": {
+              "name": "疫病鞭笞",
+              "description": "先驱者用带有毒液且布满疾病的舌头猛然挥出一道宽阔的弧线。",
+              "actions": {
+                "pestilentLash": {
+                  "name": "疫病鞭笞",
+                  "description": "<p>以 120 度弧形鞭击<strong>10 尺</strong>内的所有敌人，命中时造成毒素伤害并施加<strong>染病</strong>状态。</p>",
+                  "effects": [
+                    {
+                      "name": "疫病鞭笞"
+                    }
+                  ]
+                }
+              }
+            },
+            "Gesture: Influence": {
+              "name": "手势：影响",
+              "description": "<p>你将符文的奥术力量强化为一种集中的直接接触，这通常是基础触碰手势的更强力进阶形式。</p><p>影响手势使用<strong>Presence</strong>进行成长，并以单个邻近生物为目标。它对未能抵抗该法术的目标造成<strong>10 基础伤害</strong>。此手势需要<strong>1 Hand</strong>来施放，基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Gesture: Pulse": {
+              "name": "手势：脉冲",
+              "description": "<p>将符文中的奥术力量以你为中心向外扩散，形成一个随你一同移动的半径区域。</p><p>脉冲手势按<strong>Presence</strong>进行成长，并产生一个10英尺半径的散发区域，对未能抵抗该法术的目标造成<strong>8基础伤害</strong>。该手势施放需要<strong>2只手</strong>，基础消耗为<strong>5动作</strong>和<strong>2专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>该天赋目前位于一个<strong>第4阶</strong>节点。它最终将只能在更高等级时获得（可能需要<strong>6级</strong>）。目前为了测试而“提前”开放。</p>"
+            },
+            "Inflection: Pull": {
+              "name": "屈折：拉拽",
+              "description": "<p>为一个法术赋予将受影响生物吸引向施法者的能力。受带有 Pull 屈折的法术影响的生物会向施法者方向移动 1 格，前提是该目标格未被占据。</p>"
+            },
+            "Rune: Oblivion": {
+              "name": "符文：湮灭",
+              "description": "<p>一种混乱的力量，代表对存在的毁灭与彻底抹消。湮灭符文掌管物质的消解或精神的涣散。</p><p>湮灭符文基于<strong>智力</strong>进行成长，目标为<strong>意志</strong>，并对<strong>士气</strong>造成<strong>虚空</strong><strong>伤害</strong>。它与秩序的<strong>灵魂</strong>符文相对立。</p>",
+              "actions": {
+                "erase": {
+                  "name": "擦除",
+                  "description": "<p>你对湮灭符文的掌控使你能够在存在的结构上解开微小的孔洞，产生以下效果之一：</p><ul><li><p>将你手中一个小于 6 英寸立方体的非魔法物体分解，使其碎裂成由其组成元素构成的细微尘埃。</p></li><li><p>麻痹你自己或一名你所触及的自愿目标感受情绪的能力，使其进入平静、坚忍或冷漠的状态。只要你不再进行进一步的<strong>动作</strong>，此效果便可维持。</p></li><li><p>抑制一个光源的强度，使其可见半径减半，只要你与其保持物理接触即可持续。任一时刻只能以此方式削弱一个光源。</p></li></ul><p>擦除只能影响你能够实际触碰到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Death": {
+              "name": "符文：死亡",
+              "description": "<p>有序的毁灭之力，负责腐化所有生物材料。死亡符文掌管腐朽与毁灭。</p><p>死亡符文基于 <strong>Presence</strong> 进行成长，以 <strong>坚韧</strong> 为目标，并对 <strong>生命值</strong> 造成 <strong>腐化</strong> 伤害。它与混沌的 <strong>生命</strong> 符文相对。</p>",
+              "actions": {
+                "ennervate": {
+                  "name": "失神术",
+                  "description": "<p>你对死亡符文的掌控使你能够与死者进行基础交流，并对邪恶力量进行初步操纵，从而产生以下效果之一：</p><ul><li><p>将腐朽扩散到一个不大于1英尺立方体的物体上，使植物枯萎、金属物体生锈、木头腐烂、食物变质，或让一具尸体迅速分解。魔法物品通常不受影响。</p></li><li><p>使一具死亡时间不足七天或以其他方式保存完好的尸体，重演其生命最后时刻的无生命动作。它的动作会模仿该生物生命最后30秒内发生的举动。你无法控制该生物，它也不能以任何其他方式交流。</p></li><li><p>加速一名当前濒死且自愿的生物的死亡，使其迅速而安详地离世。</p></li></ul><p>失神术只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Harbinger of Fear": {
+          "name": "恐惧先驱",
+          "tokenName": "恐惧先驱",
+          "archetype": {
+            "name": "惧怖散播者 Fearmonger",
+            "description": "<p>恐惧与绝望的带来者。</p>"
+          },
+          "taxonomy": {
+            "name": "先驱者",
+            "description": "<p>来自彼方虚空的异界存在。</p>"
+          },
+          "items": {
+            "Psychic Maw": {
+              "name": "灵能巨口"
+            },
+            "Void Chitin": {
+              "name": "虚空几丁质",
+              "description": {
+                "public": "<p>一些虚空几丁质描述。</p>"
+              }
+            },
+            "Eldritch Emanation": {
+              "name": "邪异流溢",
+              "description": "<p>恐惧先驱从其绽开的巨口中投射出一道充满恶意的绝望锥形区域。</p>",
+              "actions": {
+                "eldritchEmanation": {
+                  "name": "邪异流溢",
+                  "description": "<p>投射一个至多 10 英尺的锥形攻击，造成作用于士气的灵能伤害，并在命中时使目标陷入<strong>1 轮</strong>的恐慌状态。</p>",
+                  "effects": [
+                    {
+                      "name": "邪异流溢"
+                    }
+                  ]
+                }
+              }
+            },
+            "Ethereal Warp": {
+              "name": "以太扭曲",
+              "description": "先驱者逐渐淡出现实，在重新出现于最远 6 格外的位置之前，会短暂地变为虚体。",
+              "actions": {
+                "etherealWarp": {
+                  "name": "以太扭曲",
+                  "description": "<p>消失并在距离你当前位置最多<strong>30 Feet</strong>处重新出现。此次移动不会引发任何脱离接战攻击。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Harbinger of Madness": {
+          "name": "疯狂先驱者 先驱者 of 疯狂",
+          "tokenName": "疯狂先驱者 先驱者 of 疯狂",
+          "archetype": {
+            "name": "心灵扭曲者 先驱者 of 疯狂",
+            "description": "一种庞大的生物，会摧毁目睹它的人类理智。"
+          },
+          "taxonomy": {
+            "name": "先驱者",
+            "description": "<p>来自彼界虚空的异界存在。</p>"
+          },
+          "items": {
+            "Inchoate Tendrils": {
+              "name": "初生触须 Inchoate Tendrils"
+            },
+            "Void Chitin": {
+              "name": "虚空几丁质",
+              "description": {
+                "public": "<p>一些虚空几丁质的描述。</p>"
+              }
+            },
+            "Devour Thoughts": {
+              "name": "吞噬思绪 Devour Thoughts",
+              "description": "疯狂先驱者专注于单个目标，用多条触须缠绕他们。",
+              "actions": {
+                "devourThoughts": {
+                  "name": "吞噬思绪 Devour Thoughts",
+                  "description": "<p>用多条触须鞭击单个敌人，造成虚弱心灵伤害，并在成功时施加震慑。</p>",
+                  "effects": [
+                    {
+                      "name": "吞噬思绪 Devour Thoughts"
+                    }
+                  ]
+                }
+              }
+            },
+            "Mind Flay": {
+              "name": "精神鞭笞 精神鞭笞",
+              "description": "用旋舞的触须鞭击并剥裂附近的敌人，造成钝击伤害并引发疯狂。",
+              "actions": {
+                "mindFlay": {
+                  "name": "精神鞭笞 精神鞭笞",
+                  "description": "<p>用可怕的触手鞭击所有附近的敌人。被此次攻击命中的目标会<strong>迷失方向</strong>，持续一轮。</p>",
+                  "effects": [
+                    {
+                      "name": "精神鞭笞 精神鞭笞"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Zarajah": {
+          "name": "扎拉贾",
+          "tokenName": "扎拉贾",
+          "ancestry": {
+            "name": "魔裔",
+            "description": "<p>你生来便对自身的创造拥有出人意料的魔法影响。你的外貌显露出一些明显特征，迷信之人会将其与位面生物联系起来——绯红的血肉、无用的翅膀或角、爬行动物般的眼睛。你对光的厌恶以及对火焰的非自然抗性，更让人难以打消他们认为你是真正恶魔的念头。</p>"
+          },
+          "background": {
+            "name": "表演者",
+            "description": "你曾是一名巡回表演者。你学会了从容地出席各种社交场合，懂得如何迎合观众，在表演中润饰细节，以引发特定的情绪反应。"
+          },
+          "biography": {
+            "public": "<p>扎拉贾是一名性情活泼的魔裔，热衷于火焰魔法，能够编织危险与防护性的法术来控制战场。扎拉贾渴望获得<strong>战斗法师</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Flame Staff": {
+              "name": "火焰木杖 火焰木杖",
+              "description": {
+                "public": "<p>这根火焰木杖是一件护符，可用于辅助施法，或向敌人喷射成股的奥术火焰。</p>"
+              }
+            },
+            "Ring Mail": {
+              "name": "环甲",
+              "description": {
+                "public": "<p>环甲是在带衬垫的底料上缝制金属环制成的，在防护性上不如更重型的锁甲，但作为交换提供了更高的机动性。</p>"
+              }
+            },
+            "Inspire Heroism": {
+              "name": "激励英勇 激励英勇",
+              "description": "你英勇的存在激励着附近的盟友，让他们能够自信地发起攻击。",
+              "actions": {
+                "inspireHeroism": {
+                  "name": "激励英勇 激励英勇",
+                  "description": "<p>每位盟友（不包括你自己）在<strong>10 格</strong>内，在其下个<strong>回合</strong>结束前进行的<strong>动作</strong>获得<strong>+1 恩惠骰</strong>。</p>",
+                  "effects": [
+                    {
+                      "name": "激励英勇 激励英勇"
+                    }
+                  ]
+                }
+              }
+            },
+            "Gesture: Influence": {
+              "name": "手势：影响",
+              "description": "<p>你将一个符文的奥术力量强化为一种集中的直接接触，这通常是基础触碰的更强力进阶形式。</p><p>手势：影响手势以<strong>气场</strong>进行成长，并以一个相邻的单个生物为目标。它对未能抵抗该法术的目标造成<strong>10 基础伤害</strong>。该手势施放时需要<strong>1 只手</strong>，其基础消耗为<strong>3 动作</strong>和<stro<strong>1 专注</strong>。</p>"
+            },
+            "Light Weapon Training": {
+              "name": "轻型武器训练",
+              "description": "<p>你知道如何灵活地运用轻型武器，在战斗中以极高的机动性与优雅挥舞它们。你对所有属于<strong>轻型</strong>和<strong>平衡</strong>类别的武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "lunge": {
+                  "name": "突刺",
+                  "description": "<p>你敏捷地向前突进，以突然而出其不意的迅捷发动一次打击，对单一目标使用一件以<strong>敏捷</strong>作为加值成长属性的<strong>武器</strong>进行一次<strong>打击 </strong>，且<strong>射程</strong>增加<strong>+2 feet</strong>。</p><p>此次<strong>攻击</strong>为<strong>困难</strong>，但你不会从当前位置<strong>移动</strong>，且此次攻击不会引发脱离接战。</p>"
+                }
+              }
+            },
+            "Rune: Oblivion": {
+              "name": "符文：湮灭",
+              "description": "<p>一种混乱的毁灭力量，能够歼灭存在本身。湮灭符文支配着对物质的消解，或对精神的解离。</p><p>湮灭符文以<strong>智力</strong>进行成长，目标为<strong>意志</strong>，并对<strong>士气</strong>造成<strong>虚空</strong><strong>伤害</strong>。它与秩序井然的<strong>灵魂</strong>符文相对立。</p>",
+              "actions": {
+                "erase": {
+                  "name": "擦除",
+                  "description": "<p>你对湮灭符文的掌控使你能够在存在的结构上解开微小的孔洞，产生以下效果之一：</p><ul><li><p>将你持有的一件小于 6 英寸立方体的非魔法物体分解，使其碎裂成由其构成元素组成的细微颗粒粉尘。</p></li><li><p>从你自己或你所触碰的一名自愿目标身上麻痹感受情绪的能力，使其进入平静、坚忍或淡漠的状态。只要你不再进行进一步的<strong>动作</strong>，此效果就可以维持。</p></li><li><p>压制一个光源的强度，使其可见半径减少一半，只要你与其保持物理接触即可持续。以这种方式削弱的光源在任意时刻只能有一个。</p></li></ul><p>擦除只能影响你能够实际触碰到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Flame": {
+              "name": "符文：火焰",
+              "description": "<p>元素热能的混沌之力。火焰符文掌管火焰与热量。</p><p>火焰符文基于<strong>智力</strong>进行成长，以<strong>反射</strong>为目标，并对<strong>生命值</strong>造成<strong>火元素</strong>伤害。与之对立的是秩序的<strong>霜冻</strong>符文。</p>",
+              "actions": {
+                "enkindle": {
+                  "name": "引燃 引燃",
+                  "description": "<p>你对火焰符文的掌握使你能够以富有创造性的方式操纵火焰与热能，产生以下效果之一：</p><ul><li><p>在一英寸的球形范围内显现出一团元素火焰，可点燃蜡烛、火把或其他可燃材料。</p></li><li><p>为你的身体注入短暂的热能护盾，使你在紧接着进行的、消耗<strong>1 动作</strong>或更少的一个动作中，获得对火焰伤害的免疫。</p></li><li><p>控制一小片区域内火焰的移动，使其闪烁、舞动或偏转，呈现出一场由光与影构成的生动表演。</p></li></ul><p>引燃只能影响你能够以身体接触到的一个生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Gesture: Arrow": {
+              "name": "手势：箭头",
+              "description": "<p>你向远处的目标投出一枚灌注了符文魔力的投射物。</p><p>箭头手势以<strong>智力</strong>进行成长，并以60英尺内的单个生物为目标；未能抵抗该法术的目标会受到<strong>8 基础伤害</strong>。施放该手势需要<strong>1 只手</strong>，其基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            }
+          }
+        },
+        "Agnath": {
+          "name": "阿格纳斯",
+          "tokenName": "阿格纳斯",
+          "ancestry": {
+            "name": "兽人语",
+            "description": "<p>你的出生承载着一个骄傲而坚韧民族的星辰与传统印记。你高大而匀称的身躯，以及与生俱来的坚韧禀赋，起源于一个暴露在严酷北方气候无情磨炼之下的民族。你的族人最为人所知的，首先便是他们的力量与韧性。</p>"
+          },
+          "background": {
+            "name": "士兵",
+            "description": "<p>你曾是某种军事组织中的一名普通成员。纪律让你得以生存，也强调了向他人展现力量与支配力的重要性，而多年骑马或行军的经历教会了你如何应对各种地形。</p>"
+          },
+          "biography": {
+            "public": "<p>阿格纳斯是一名挥舞长剑的死灵法师，能将死亡魔法灌注进其沉重的打击中。阿格纳斯渴望获得<strong>咒刃</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Splint Mail": {
+              "name": "板条甲 板条甲",
+              "description": {
+                "public": "<p>由铆接在皮革或锁子甲衬底上的竖直金属条组成的一层结构，条甲护甲在牺牲一定灵活性的同时，为四肢提供了强力保护。</p>"
+              }
+            },
+            "Cadence": {
+              "name": "节奏 节奏",
+              "description": "<p>你经过训练，能够以富有节奏的精准度连续发动近战攻击。当你使用单手近战武器连续多次进行<strong>打击</strong>时，每一次后续攻击都会使你获得可叠加的<strong>+1 恩惠骰</strong>。</p>"
+            },
+            "Gesture: Arrow": {
+              "name": "手势：箭头",
+              "description": "<p>你将一枚灌注了符文魔法力量的投射物掷向远处的目标。</p><p>箭矢手势以<strong>智力</strong>进行成长，并以60英尺内的单个生物为目标，对未能抵抗该法术的目标造成<strong>8 基础伤害</strong>。该手势需要<strong>1 只手</strong>施放，基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Spellblade": {
+              "name": "咒刃",
+              "description": "<p>你是一名奥术战士，能够在战斗中结合打击与法术，同时依靠武艺与奥术技巧。你武器装备造成的物理打击可部分替代传统施法所需的姿势手势。</p><p>当你以<strong>近战</strong>武器作为<strong>主手</strong>武器持用时，使用<strong>手势：打击</strong>施放的法术可获得该武器的伤害加值。</p><p>在你使用近战武器进行一次<strong>打击</strong>后，你可以立即施放一个其<strong>动作</strong>消耗减少 1 的法术。</p>"
+            },
+            "Strong Grip": {
+              "name": "强力握持",
+              "description": "你对自己武器的掌握稳固而不容动摇。你可以在持用双手近战武器时，执行需要空手的动作。试图缴械你时，攻击方承受+2祸骰。"
+            },
+            "Gesture: Strike": {
+              "name": "手势：打击 手势: 打击",
+              "description": "<p>你以符文的奥术精华强化一次直接的近距离攻击，使用你已装备的武器进行一次打击。</p><p>该打击手势基于<strong>力量</strong>进行成长，造成的伤害取决于你所用的武器，但其伤害类型为所融入符文的伤害类型。此手势不需要任何空闲手，且除你的武器打击消耗外，基础消耗还需<strong>1专注</strong>。</p>"
+            },
+            "Powerful Physique": {
+              "name": "强健体魄",
+              "description": "你可以挥舞具有缓慢特性的武器，并穿戴具有笨重特性的护甲，而不会在先攻掷骰时承受祸骰。"
+            },
+            "Counter Riposte": {
+              "name": "反制还击 反制还击",
+              "description": "<p>你擅长将一次被招架的攻击转化为对暴露敌人的迅捷反击。</p>",
+              "actions": {
+                "counterRiposte": {
+                  "name": "反制还击 反制还击",
+                  "description": "<p>当你以<strong>招架</strong>来<strong>防御</strong>一次<strong>近战</strong>攻击时，你可以进行反应并消耗<strong>专注</strong>，以较低代价进行一次<strong>打击</strong>反击，并从<strong>暴露</strong>状态中获益。</p>",
+                  "condition": "你招架一次来袭的近战打击。"
+                }
+              }
+            },
+            "Ruthless Momentum": {
+              "name": "无情动量",
+              "description": "<p>你乐于享受自己能在战斗中造成的杀戮，并在每个敌人倒下时继续向激战中推进。</p>",
+              "actions": {
+                "ruthlessMomentum": {
+                  "name": "无情动量",
+                  "description": "<p>击败一名敌人后，你可以移动，最多到你的<strong>步幅</strong>，并攻击另一名处于近战范围内的敌人。</p>",
+                  "condition": "你用一次近战攻击使一名敌人失去行动能力。"
+                }
+              }
+            },
+            "Lesser Regeneration": {
+              "name": "次级再生 次级再生",
+              "description": "<p>你非凡的坚韧赋予你一种超自然的能力，使你能迅速从创伤中恢复。在你的回合开始时，若你未处于<strong>虚弱</strong>状态，你获得 <strong>+1 生命值</strong>。</p>"
+            },
+            "Glaive": {
+              "name": "长柄刀 长柄刀",
+              "description": {
+                "public": "<p>长柄刀是一种长柄武器，长杆末端固定着弯曲如剑的刀刃，挥舞时可划出宽阔的弧形打击，横扫敌人。</p>"
+              }
+            },
+            "Athletics Novice": {
+              "name": "运动新手 运动新手",
+              "description": "<p>你已接受基础运动训练。你在<strong>运动</strong>技能中获得<strong>新手</strong>等级，且不再被视为在该技能上<strong>未受训</strong>。</p><p>你知道地表是否能够承受你的重量，知道在攀爬时如何寻找手点，以及在游泳时如何分配重量以获得浮力。你知道如何进行长跑，以及如何调整节奏以避免力竭。</p>"
+            },
+            "Intimidation Novice": {
+              "name": "威吓新手 威吓新手",
+              "description": "<p>你理解威胁与胁迫如何能够达成期望结果的基本原理。你在<strong>威吓</strong>技能上获得<strong>新手</strong><strong>等级</strong>，且不再被视为该技能的<strong>未受训</strong>状态。</p><p>你知道如何通过简单的暴力展示或公开威胁来让他人听从你的引导，但你并不擅长隐晦行事。</p>"
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何使用重型武器施加强力打击，在每一次挥击中都灌注你的全部力量。你获得所有<strong>重型</strong>和<strong>平衡</strong>类别武器的<strong>受训</strong>熟练度。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用主手武器使出一次强力<strong>打击</strong>。这次攻击施展起来较为迟缓，但经过<strong>强化</strong>，可造成额外伤害。</p>"
+                }
+              }
+            },
+            "Opportunistic Spellcraft": {
+              "name": "借机施法 借机施法",
+              "description": "<p>你的敏捷思维能编织魔法，利用稍纵即逝的机会之窗。你可以使用<strong>接触</strong>手势发动一次<strong>脱离攻击</strong>，而非进行一次近战武器攻击。</p>"
+            },
+            "Awareness Novice": {
+              "name": "察觉新手 察觉新手",
+              "description": "<p>你已经接受过情境察觉基础训练，能够注意到你的环境中的重要细节。你获得<strong>察觉</strong>技能的<strong>新手</strong>等级，并且在该技能上不再被视为<strong>未受训</strong>。</p><p>你知道进入房间时要检查出口，也知道如何寻找隐藏的武器、隐蔽的陷阱以及其他威胁。你知道如何发现自己何时被跟踪，以及如何搜查常见的藏身之处。</p>"
+            },
+            "Athletics Journeyman": {
+              "name": "运动熟练工 运动熟练工",
+              "description": "<p>你的<strong>运动</strong>技能获得<strong>熟练工</strong><strong>等级</strong>，并获得<strong>+1 技能加值</strong>。</p>"
+            },
+            "Heavy Weapon Proficiency": {
+              "name": "重型武器熟练度 重型武器熟练度",
+              "description": "<p>你在军用武器的使用方面受过熟练教育。你获得<strong>熟练工</strong>训练等级，并在<strong>简易</strong>、<strong>重型</strong>和<strong>平衡</strong>类别的武器上获得<strong>+1技能加值</strong>。</p>"
+            },
+            "Sundering Strike": {
+              "name": "粉碎打击",
+              "description": "<p>你掌握了一种武技，能够利用敌人防御中最薄弱的环节，使其暴露于进一步的伤害之下。</p>",
+              "actions": {
+                "sunderingStrike": {
+                  "name": "粉碎打击",
+                  "description": "<p>你用你的<strong>主手</strong>武器进行一次<strong>打击</strong>；若成功，则会使目标陷入<strong>暴露</strong>状态，持续 3 轮。此次攻击<strong>困难</strong>，且造成的伤害降低。</p>",
+                  "effects": [
+                    {
+                      "name": "破损的护甲 破损的护甲"
+                    }
+                  ]
+                }
+              }
+            },
+            "Pyromancer": {
+              "name": "炎术师",
+              "description": "<p>你极其擅长编织火焰符文。使用该符文的法术在暴击时会造成 @状态[burning]。</p><p>燃烧效果持续 <strong>1 轮</strong>，并对<strong>生命值</strong>和<strong>士气</strong>造成等同于你的<strong>智力</strong>数值的<strong>火元素</strong>伤害。</p>"
+            },
+            "Gesture: Blast": {
+              "name": "手势：爆破 手势: Blast",
+              "description": "<p>你将一个符文的奥术力量猛掷到附近一个你能看见的点上，引发一场强烈的能量爆破。</p><p><strong>爆破</strong>手势随<strong>智力</strong>而成长，并在施法者60英尺内的一个点上制造一次半径6英尺的爆破。若目标未能抵抗该法术，爆破会造成<strong>8基础伤害</strong>。此手势需要<strong>2只手</strong>施放，基础消耗为<strong>5动作</strong>和<strong>2专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>该天赋当前位于一个<strong>第4阶</strong>节点上。它最终将只能在更高等级时获得（可能需要<strong>6级</strong>）。目前为测试而“提前”开放。</p>"
+            },
+            "Rune: Lightning": {
+              "name": "符文：闪电",
+              "description": "<p>原始电能的混沌之力。符文：闪电支配电荷的来源与放电。</p><p>符文：闪电以 <strong>智力</strong> 进行成长，目标为 <strong>反射</strong>，并对 <strong>生命值</strong>造成 <strong>闪电</strong>伤害。它与秩序井然的 <strong>大地</strong>符文相对。</p>",
+              "actions": {
+                "energize": {
+                  "name": "充能",
+                  "description": "<p>你对闪电符文的命令使你能够引导气流与电流的流动，操控电荷与空气动力学，从而产生以下效果之一：</p><ul><li><p>为你所接触的一个不大于一立方英尺的金属物体注入电磁电荷，使其能够强力吸附于其他金属。在任意时刻，只能有一个物体以这种方式被充能；若对不同物体施放此法术，则先前物体会失去其磁性效果。</p></li><li><p>在你当前位置周围六码半径内聚集起一阵狂风，使其要么作为朝单一受控方向吹袭的阵风，要么作为向各个方向施加向心力的气旋。附近区域内的空气传播效果会被驱散，且重量小于1的未固定物体会被朝阵风方向抛飞。</p></li><li><p>在你当前所在位置15英尺内、你能够看见的一个地点，制造出如雷鸣炸响般的震荡声音。</p></li></ul><p>充能只能影响你能够实际触碰到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Flame": {
+              "name": "符文：火焰",
+              "description": "<p>元素性热能的混沌力量。符文：火焰掌管火焰与热量。</p><p>符文：火焰以<strong>智力</strong>进行成长，目标为<strong>反射</strong>，并对<strong>生命值</strong>造成<strong>火焰</strong>伤害。它的对立面是有序的<strong>霜冻</strong>符文。</p>",
+              "actions": {
+                "enkindle": {
+                  "name": "引燃 引燃",
+                  "description": "<p>你对火焰符文的掌握让你能够以富有创意的方式操纵火焰与热能，产生以下效果之一：</p><ul><li><p>显现出一个一英寸球体大小的元素火焰爆发，可以点燃蜡烛、火把或其他可燃材料。</p></li><li><p>为你的身体赋予瞬间的热能护盾，使你在紧接着的一个消耗<strong>1 动作</strong>或更少的动作中获得对火焰伤害的免疫。</p></li><li><p>控制一小片区域内火焰的移动，使其闪烁、舞动或变换，呈现出一场光影的动态表演。</p></li></ul><p>引燃只能影响你能够实际触碰到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Belladonna": {
+          "name": "颠茄 Belladonna",
+          "tokenName": "颠茄 Belladonna",
+          "ancestry": {
+            "name": "人类",
+            "description": "<p>你生于无数境况与遥远异地之间，是一名适应力极强的人类。无论高矮、瘦削、健壮还是圆胖，你的外貌若有什么特点，那就是多种多样。人类最广为人知的是其基因中对决心的天生倾向，以及那些激发顽强求生意志的传统。</p>"
+          },
+          "background": {
+            "name": "街头流浪儿",
+            "description": "<p>很少有人能像你那样学会生存。你所受的，是一场关于不信任的残酷教育。你学会了观察他人，从那些预示危险或不忠的迹象中察觉端倪；学会了避开他人的注意，在某片城市蔓延的街头捡拾残羹冷炙。</p>"
+          },
+          "biography": {
+            "public": "<p>贝拉多娜是一名狡猾的游荡者，使用两把匕首战斗，对毫无防备的目标发动一连串迅猛的攻击。贝拉多娜渴望获得<strong>下毒者</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Dagger": {
+              "name": "匕首 匕首",
+              "description": {
+                "public": "<p>匕首小巧、迅捷且致命，能轻易从肋骨间或护甲的缝隙中刺入；它那锋利的刃口深受刺客、盗贼以及偏好无声杀戮之人的青睐。</p>"
+              }
+            },
+            "Studded Leather Armor": {
+              "name": "镶钉皮甲",
+              "description": {
+                "public": "<p>以皮革为基础，并以小型金属饰钉或铆接金属片加固，这种护甲在机动性与对劈砍提供的适度保护之间取得了平衡。</p>"
+              }
+            },
+            "Diversionist": {
+              "name": "佯攻者 佯攻者",
+              "description": "<p>你擅长运用诡计在战斗中分散对手的注意力，或欺骗对手。</p>",
+              "actions": {
+                "distract": {
+                  "name": "分散注意力 分散注意力",
+                  "description": "<p>你对 30 尺内一个能看见或听见你的目标发动一次基于<strong>欺瞒</strong>的<strong>技能攻击</strong>，对抗其<strong>意志</strong><strong>防御</strong>。成功时，该目标失去<strong>1 专注</strong>。</p>"
+                }
+              }
+            },
+            "Flurry": {
+              "name": "连击 连击",
+              "description": "<p>一种使用两把武器，以连绵不绝的攻击序列压倒单一目标的武技。</p>",
+              "actions": {
+                "flurry": {
+                  "name": "连击 连击",
+                  "description": "<p>你用每把武器各<strong>打击</strong>两次，但每次打击都是<strong>困难</strong>的。</p>"
+                }
+              }
+            },
+            "Bloodletter": {
+              "name": "放血者 放血者",
+              "description": "<p>你使用造成挥砍或穿刺伤害的武器时，若以暴击对生命值造成伤害，凭借你的精准可使目标陷入流血状态。</p><p>流血效果持续 1 轮，并额外对生命值造成等同于你敏捷属性值的伤害。</p>"
+            },
+            "Counter Evade": {
+              "name": "反制闪避 反制闪避",
+              "description": "<p>你精通运用闪避型战斗风格：利用敌人攻击落空的瞬间寻找破绽，并发动反击。</p>",
+              "actions": {
+                "counterEvade": {
+                  "name": "反制闪避 反制闪避",
+                  "description": "<p>当你以<strong>闪避</strong>来<strong>防御</strong>一次近战攻击时，你可以消耗<strong>专注</strong>，用你的主手武器进行一次减耗的<strong>打击</strong>作为反击。</p>",
+                  "condition": "你闪避一次来袭的近战打击。"
+                }
+              }
+            },
+            "Strike First": {
+              "name": "先发制人 先发制人",
+              "description": "先开枪，后提问。对任何先攻值低于你的敌人进行的任何打击或法术攻击，你都获得<strong>+1 恩惠</strong>。"
+            },
+            "Preternatural Instinct": {
+              "name": "超自然直觉",
+              "description": "你的思维与身体同样敏捷，令人印象深刻。你在所有先攻检定上获得 +2 恩惠骰。"
+            },
+            "Defensive Roll": {
+              "name": "防御翻滚 防御翻滚",
+              "description": "<p>你是一名灵活的散兵，始终保持移动，以便在战斗中始终比敌人快一步。</p>",
+              "actions": {
+                "defensiveRoll": {
+                  "name": "防御翻滚 防御翻滚",
+                  "description": "<p>当你<strong>闪避</strong>一次近战攻击时，你可以消耗<strong>专注</strong>，以防御翻滚跃出，向任意方向移动，距离最多相当于你的<strong>体型</strong>。</p>",
+                  "condition": "你闪避一次来袭的近战打击。"
+                }
+              }
+            },
+            "Skirmisher": {
+              "name": "散兵",
+              "description": "<p>你很擅长进入和脱离混战。当你移出敌人的<strong>交战</strong>半径时，该敌人对你进行的任何<strong>脱离打击</strong>都会获得 2 个祸骰。</p>"
+            },
+            "Impetus": {
+              "name": "动因 动因",
+              "description": "<p>你擅长利用他人思考迟缓的弱点。如果你在战斗的一轮中处于先攻顺序的第一位，你获得+1当前和最大动作点数。</p>"
+            },
+            "Light Weapon Training": {
+              "name": "轻型武器训练",
+              "description": "<p>你知道如何以高度的机动性与优雅在战斗中自如地挥舞轻型武器。你对<strong>轻型</strong>和<strong>平衡</strong>类别中的所有武器均为<strong>受训</strong>。</p>",
+              "actions": {
+                "lunge": {
+                  "name": "突刺",
+                  "description": "<p>你敏捷地向前窜出，以突然而出其不意的迅捷发动一次打击，使用一件以<strong>敏捷</strong>为加值属性的武器，对单个目标进行一次<strong>打击</strong>，其<strong>射程</strong>增加<strong>+2 feet</strong>。</p><p>此次<strong>攻击</strong>为<strong>困难</strong>，但你不会从当前位置<strong>移动</strong>，且此次攻击不会引发脱离接战。</p>"
+                }
+              }
+            },
+            "Intercept": {
+              "name": "拦截",
+              "description": "你保护你的盟友，拦截原本可能会打向同伴的攻击。",
+              "actions": {
+                "intercept": {
+                  "name": "拦截",
+                  "description": "<p>你拦截进入你<strong>交战</strong>半径内的敌人的路径，立即进行至多等同于你<strong>步幅</strong>的移动，以介入其间并阻挡他们的路线。</p><p>如果敌人在其回合中移出你的交战半径，或攻击任何其他生物，你可以对其进行一次<strong>脱离打击</strong>。</p>",
+                  "condition": "敌人移动到你的交战半径内或穿过该半径。"
+                }
+              }
+            },
+            "Stealth Novice": {
+              "name": "潜行新手",
+              "description": "<p>你已接受过潜行、渗透与诡计基础的训练。你获得<strong>潜行 </strong>技能的<strong>新手</strong>等级，并且在该技能上不再被视为<strong>未受训</strong>。</p><p>你知道如何利用光线与阴影来掩盖自己的存在，如何在行走时分配重量以便更安静地移动，也学会了一些伪装技巧，好让自己融入人群之中。你能够在他人环绕时显得不惹人生疑，藏身于昏暗的房间里，并且能无声移动到足以避开普通人的察觉。</p>"
+            },
+            "Deception Novice": {
+              "name": "欺瞒新手 欺瞒新手",
+              "description": "<p>你是个骗子和操纵者，而欺瞒是你一直磨练的技能。你在<strong>欺瞒</strong>技能上获得<strong>新手</strong>等级，并且不再被视为该技能<strong>未受训</strong>。</p><p>你知道如何编造基本的谎言与骗局，也知道那些往往会暴露拙劣骗子的明显迹象。你可以为大多数常见文件制作基础伪造品，但它们经不起任何程度的仔细审查。</p>"
+            },
+            "Stiletto": {
+              "name": "细剑",
+              "description": {
+                "public": "<p>细长、渐尖且专为穿刺而造，细剑是杀手的武器——专门用来从肋骨间或护甲的缝隙中滑入，几乎不留痕迹。</p>"
+              }
+            },
+            "Healing Elixir": {
+              "name": "治疗灵药",
+              "description": {
+                "public": "<p>这瓶药水含有一种专门调配的炼金配方，能迅速闭合创伤并改善身体健康。</p>"
+              },
+              "actions": {
+                "healingElixir": {
+                  "name": "治疗灵药",
+                  "description": "<p>立即恢复等同于该灵药品质所对应数值的<strong>生命值</strong>。</p><ul><li><p><strong>粗制</strong> - 立即恢复 6 点<strong>生命值</strong>。</p></li><li><p><strong>标准</strong> - 立即恢复 12 点<strong>生命值</strong>。</p></li><li><p><strong>精制</strong> - 立即恢复 24 点<strong>生命值</strong>。</p></li><li><p><strong>优异</strong> - 立即恢复 48 点<strong>生命值</strong>。</p></li><li><p><strong>大师级</strong> - 立即恢复 96 点<strong>生命值</strong>。</p></li></ul>"
+                }
+              }
+            },
+            "Antitoxin": {
+              "name": "抗毒剂",
+              "description": {
+                "public": "<p>一支细长的小瓶，内含略带金色的液体。它闻起来很难闻，但其中含有中和多种毒素所需的炼金试剂。</p>"
+              },
+              "actions": {
+                "antitoxin": {
+                  "name": "抗毒剂",
+                  "description": "<p>服用此@ref[name]能够中和影响目标的任何@状态[中毒]状态。更强的毒药需要更强的抗毒剂才能中和。</p><p>此@ref[name]可抵消的毒药类别取决于其品质：</p><ul><li><p><strong>粗制滥造</strong> - 每轮造成 3 点伤害或更少的毒药</p></li><li><p><strong>标准</strong> - 每轮造成 5 点伤害或更少的毒药</p></li><li><p><strong>精制</strong> - 每轮造成 7 点伤害或更少的毒药</p></li><li><p><strong>优异</strong> - 每轮造成 9 点伤害或更少的毒药</p></li><li><p><strong>大师工艺</strong> - 每轮造成 11 点伤害或更少的毒药</p></li></ul>"
+                }
+              }
+            },
+            "Poison Vial": {
+              "name": "毒药瓶",
+              "description": {
+                "public": "<p>这个小瓶里装着浑浊的液体，明显比水更稠。它散发出一种令人不安的气味，引发一种不对劲的感觉。</p>"
+              },
+              "actions": {
+                "poisonIngest": {
+                  "name": "摄入毒药",
+                  "description": "<p>当这种毒素被摄入或以其他方式进入某个生物的血液时，它起初是<strong>无害</strong>的，但目标必须针对其<strong>坚韧</strong>进行一次攻击防御，否则便会成为 @状态[poisoned]。</p><p>毒素造成的伤害量及其持续时间取决于 @ref[name] 的品质：</p><ul><li><p><strong>粗劣</strong> - 4轮内造成2伤害</p></li><li><p><strong>标准</strong> - 6轮内造成4伤害</p></li><li><p><strong>精良</strong> - 8轮内造成6伤害</p></li><li><p><strong>优异</strong> - 10轮内造成8伤害</p></li><li><p><strong>大师级</strong> - 12轮内造成10伤害</p></li></ul><p><em>应在毒药被摄入时使用此动作，而不是在首次涂抹时使用。</em></p>",
+                  "effects": [
+                    {
+                      "name": "中毒"
+                    }
+                  ]
+                },
+                "poisonApply": {
+                  "name": "施加中毒",
+                  "description": "<p>这瓶小瓶中的内容物可以加入食物或饮料，涂抹在刃类武器上，或与某种替代性的传递机制结合使用。</p><p><em>此动作会消耗该毒药的可用使用次数，应在首次施加时使用。</em></p>"
+                }
+              }
+            },
+            "Medicine Novice": {
+              "name": "医疗新手",
+              "description": "<p>你接受过解剖学、生理学和医疗方面的基础教育。你获得<strong>医疗</strong>技能的<strong>新手</strong>等级，且不再被视为该技能<strong>未受训</strong>。</p><p>你已经学会了处理常见创伤和疾病的基础方法，并持续记录已知的炼金与草药化合物清单，这些化合物可用于治疗特定疾病。只要花一点时间研究一名受伤、染病或以其他方式患病的个体，你就可以进行基础诊断并据此治疗。</p>"
+            },
+            "Flash of Steel": {
+              "name": "钢光一闪",
+              "description": "<p>你是使用投掷武器来扰乱或暴露目标，以便后续打击的专家。</p>",
+              "actions": {
+                "flashOfSteel": {
+                  "name": "钢光一闪",
+                  "description": "<p>你进行一次<strong>投掷</strong>武器攻击，瞄准敌人防御中的弱点。若攻击命中，目标将变为<strong>暴露</strong>，直到其下个<strong>回合</strong>开始时。</p>",
+                  "effects": [
+                    {
+                      "name": "钢光一闪"
+                    }
+                  ]
+                }
+              }
+            },
+            "Anticipate Harm": {
+              "name": "预判伤害",
+              "description": "你敏锐的反应与洞察力让你能够预判迫近的危险，并及时做出反应以避开它。",
+              "actions": {
+                "anticipateHarm": {
+                  "name": "预判伤害",
+                  "description": "<p>在该攻击的效果区域被宣告后，你可以立即移动 4 尺。若此次移动使你脱离该攻击的区域，则你不受其影响。</p>",
+                  "condition": "你成为一次范围效果攻击的目标，且你能看见其来源。"
+                }
+              }
+            },
+            "Assassin": {
+              "name": "刺客",
+              "description": "<p>你专精于为毫无防备者带来死亡。任何针对<strong>未察觉</strong>目标的<strong>打击</strong>或<strong>法术</strong>攻击都会变为<strong>致命</strong>。</p><p>被你攻击命中的未察觉生物，在战斗中直到其自己的回合之前，都无法提醒其盟友。</p>",
+              "actions": {
+                "markForDeath": {
+                  "name": "标记死亡",
+                  "description": "你花费1分钟研究一个生物。对你的目标进行一次知识检定。若成功，你会知晓目标易伤的所有伤害类型。在战斗第一轮中，你的最低先攻变为比你已标记目标的先攻高1。</p>\nYou spend 1 minute studying a creature. Perform a 知识检定 about your 目标. If successful, you learn all damage types against which the 目标 is Vulnerable. Your minimum 先攻 during the first round of Combat becomes one greater than the 先攻 of your marked 目标.</p>",
+                  "condition": "你未被观察到。"
+                }
+              }
+            },
+            "Interrupting Throw": {
+              "name": "打断投掷",
+              "description": "<p>你保持警觉，并准备使用你已装备的武器来打断敌人的施法。</p>",
+              "actions": {
+                "interruptingThrow": {
+                  "name": "打断投掷",
+                  "description": "<p>当一个你能看见的敌人施放一个耗费 <strong>3 动作</strong>或更多的<strong>法术</strong>时，你可以进行一个<strong>反应</strong>，对施法者进行一次<strong>投掷</strong>武器攻击。若你的攻击造成<strong>暴击</strong>，该法术会被打断，且其魔力将会消散。</p>",
+                  "condition": "一名你能看见的敌人施放一个需要 3 个或更多动作的法术。"
+                }
+              }
+            },
+            "Light Weapon Proficiency": {
+              "name": "轻型武器熟练度 轻型武器熟练度",
+              "description": "<p>你在军用武器的使用方面受过熟练教育。你获得<strong>熟练工</strong>训练等级，并在<strong>轻型</strong>和<strong>平衡</strong>类别的武器上获得<strong>+1 技能加值</strong>。</p>"
+            },
+            "Awareness Novice": {
+              "name": "察觉新手 察觉新手",
+              "description": "<p>你已经接受过情境察觉基础训练，能够注意到环境中的重要细节。你在<strong>察觉</strong>技能中获得<strong>新手</strong>等级，且不再被视为该技能<strong>未受训</strong>。</p><p>你知道在进入房间时要检查出口，也知道如何寻找隐藏的武器、隐蔽的陷阱以及其他威胁。你知道如何发现自己何时被跟踪，以及如何搜查常见的藏身之处。</p>"
+            },
+            "Dual Wield": {
+              "name": "双持",
+              "description": "<p>你擅长同时使用两把武器作战。你可以将攻击交织在一起，以比使用单一武器更快的速度打击。</p>",
+              "actions": {
+                "offhandStrike": {
+                  "name": "副手攻击",
+                  "description": "<p>在你用主手武器进行一次基础打击后，你立刻用<strong>副手</strong>武器进行一次降低代价的后续<strong>打击</strong>。</p>"
+                }
+              }
+            },
+            "Backstab": {
+              "name": "背刺 背刺",
+              "description": "<p>你将自己狡黠的本能专注于利用被夹击目标的弱点。你发现一个机会，并以致命的效率打击。</p>",
+              "actions": {
+                "backstab": {
+                  "name": "背刺 背刺",
+                  "description": "<p>你用<strong>主手</strong>武器对一个处于<strong>夹击</strong>状态的目标进行<strong>打击</strong>，造成<strong>致命</strong><strong>伤害</strong>。</p>",
+                  "condition": "你正在攻击一个处于夹击状态的目标。"
+                }
+              }
+            }
+          }
+        },
+        "Duurath": {
+          "name": "杜拉斯",
+          "tokenName": "杜拉斯",
+          "ancestry": {
+            "name": "矮人",
+            "description": "<p>如同你的父母以及先辈一样，你生来便具有矮人持久的坚韧。你敦实的身材与魁梧的体貌，正是一个由大地与岩石所孕育的民族的显著标志。身体韧性的传承由你继承，因为在你的胸膛中，跳动着一颗石之心。</p>"
+          },
+          "background": {
+            "name": "警员",
+            "description": "<p>你曾是一个执法组织的一员。你学会了如何对周围环境保持警觉，在复杂的社交结构中开展工作，并展现出令人望而生畏的气场。</p>"
+          },
+          "biography": {
+            "public": "<p>杜拉特是一名强壮的矮人防御者，使用锤和盾牌来保护他的盟友，并通过打击敌人士气来惩罚敌人。杜拉特立志获得<strong>符文守卫</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Scale Mail": {
+              "name": "鳞甲",
+              "description": {
+                "public": "<p>缝制或铆接在皮革或布料衬底上的重叠金属片，鳞甲看起来像巨龙的鳞皮，能很好地抵御劈砍和刺击——不过它会发出噪声，而且不够灵活。</p>"
+              }
+            },
+            "Intimidator": {
+              "name": "威吓者",
+              "description": "你专精于施展自己那令人畏惧的气场，以击垮敌人的士气。",
+              "actions": {
+                "intimidate": {
+                  "name": "威吓",
+                  "description": "<p>你对处于你交战范围内的一名敌人进行肢体威吓，对你的目标发动一次威吓技能攻击。若成功，其士气承受虚空伤害。</p>"
+                }
+              }
+            },
+            "Second Wind": {
+              "name": "二次振作 二次振作",
+              "description": "你的身体强韧使你能够把自己逼到超越常规极限的地步。",
+              "actions": {
+                "secondWind": {
+                  "name": "二次振作 二次振作",
+                  "description": "<p>你集中精力，恢复等同于你坚韧值的生命值。</p>"
+                }
+              }
+            },
+            "Gesture: Ward": {
+              "name": "手势：防护 手势: Ward",
+              "description": "<p>你将符文中的奥术力量塑造成一道保护屏障，用以保护自己免受伤害。</p><p>Ward手势以<strong>坚韧</strong>进行倍率计算，并针对该法术中所用符文的伤害类型提供<strong>+6 抗性</strong>。该抗性持续<strong>1 轮</strong>，且你同一时间只能拥有一个Ward。使用Ward手势施放另一道法术会替代你先前的Ward。该手势需要<strong>1 只手</strong>来施放，基础消耗为<strong>2 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Body Block": {
+              "name": "躯体格挡 躯体格挡",
+              "description": "你顺势承受一次原本由你的护甲防御的攻击，转而将其结果改为格挡。",
+              "actions": {
+                "bodyBlock": {
+                  "name": "躯体格挡 躯体格挡",
+                  "description": "<p>一次原本由你的护甲防御或仅造成擦击的攻击会被转化为格挡，且不造成伤害。</p>",
+                  "condition": "你以你的护甲进行防御，或视为一次擦击，来抵御一次近战攻击。"
+                }
+              }
+            },
+            "Counter Strike": {
+              "name": "反击 反击",
+              "description": "<p>你受过训练，能够在用盾牌防御与迅捷反击之间流畅切换。</p>",
+              "actions": {
+                "counterStrike": {
+                  "name": "反击 反击",
+                  "description": "<p>当你用<strong>格挡</strong>防御一次近战攻击时，你可以消耗<strong>专注</strong>，用你的主手武器进行一次消耗降低的<strong>打击</strong>作为反击。</p>",
+                  "condition": "你格挡一次来袭的近战打击。"
+                }
+              }
+            },
+            "Dread Lord": {
+              "name": "恐惧领主 恐惧领主",
+              "description": "<p>你在战场上散发出可怖的威势，考验着目睹你的附近敌人的士气，并击溃那些意志薄弱者的决心。</p>",
+              "actions": {
+                "formidablePresence": {
+                  "name": "威严气场 威严气场",
+                  "description": "<p>你对12英尺内的敌人进行一次针对意志防御的威吓技能攻击，对其士气造成虚空伤害，并使其中防御被你压制的目标陷入恐慌状态，持续1轮。</p>",
+                  "effects": [
+                    {
+                      "name": "威严气场 威严气场"
+                    }
+                  ]
+                }
+              }
+            },
+            "Rallying Cry": {
+              "name": "振奋战吼 振奋战吼",
+              "description": "你是一名战场领袖，运用你的气场与声音来坚定盟友的决心。",
+              "actions": {
+                "rallyingCry": {
+                  "name": "振奋战吼 振奋战吼",
+                  "description": "<p>你发出一声充满勇气的怒吼，激励你12英尺内的盟友在危险面前保持坚强。你对盟友的疯狂阈值进行一次<strong>威吓</strong>技能检定。成功时，受影响的盟友获得 @状态[resolute] ，持续一轮。</p>",
+                  "effects": [
+                    {
+                      "name": "振奋战吼 振奋战吼"
+                    }
+                  ]
+                }
+              }
+            },
+            "Bulwark": {
+              "name": "壁垒",
+              "description": "<p>你精通使用<strong>盾牌</strong>来保护自己和他人。</p><p>每回合一次，当你已装备盾牌时，你可以用降低后的消耗，即 1 点动作点，来使用<strong>防御</strong>动作。</p>"
+            },
+            "Testudo": {
+              "name": "泰斯图多 泰斯图多",
+              "description": "你极其擅长运用盾牌采取防御姿态。持用盾牌时，你在对抗<strong>武器攻击</strong>时，从<strong>戒备</strong>状态获得的收益翻倍。"
+            },
+            "Hold Fast": {
+              "name": "坚守不退 坚守不退",
+              "description": "<p>你是战斗汹涌之海中的平静之锚。当你已装备盾牌时，你的<strong>交战</strong>增加 +1，使你能够同时与更多邻近的敌人交战。</p>"
+            },
+            "Awareness Novice": {
+              "name": "察觉新手 察觉新手",
+              "description": "<p>你已经接受过情境察觉基础训练，能够注意到周围环境中的重要细节。你在<strong>察觉</strong>技能中获得<strong>新手</strong>等级，并且不再被视为该技能<strong>未受训</strong>。</p><p>你知道在进入房间时检查出口，以及如何寻找隐藏的武器、隐蔽的陷阱和其他威胁。你知道如何发现自己何时被跟踪，以及如何搜查常见的藏身之处。</p>"
+            },
+            "Intimidation Novice": {
+              "name": "威吓新手 威吓新手",
+              "description": "<p>你理解威胁与胁迫如何达成预期结果的基本原理。你在<strong>威吓</strong>技能上获得<strong>新手</strong><strong>等级</strong>，并且在该技能上不再被视为<strong>未受训</strong>。</p><p>你知道如何利用简单的暴力展示或公开威胁来让他人听从你的引导，但你并不十分巧妙。</p>"
+            },
+            "Unarmed Combat Training": {
+              "name": "徒手战斗训练 徒手战斗训练",
+              "description": "<p>你熟悉基础武术与徒手战斗。你知道如何运用自身的体魄力量制服或压制对手。你在<strong>徒手</strong><strong>武器</strong>类别上处于<strong>受训</strong>等级。</p>",
+              "actions": {
+                "grapple": {
+                  "name": "擒抱 擒抱",
+                  "description": "<p>你试图以肢体动作束缚或制服一名对手。对一个邻近目标进行一次<strong>运动</strong>技能攻击。若成功，你和目标双方都将陷入 @状态[受缚] 状态，持续 1 轮。</p>",
+                  "effects": [
+                    {
+                      "name": "被擒抱 被擒抱"
+                    },
+                    {
+                      "name": "擒抱 擒抱"
+                    }
+                  ]
+                }
+              }
+            },
+            "Intercept": {
+              "name": "拦截",
+              "description": "你保护你的盟友，拦截原本可能会朝你的同伴袭来的攻击。",
+              "actions": {
+                "intercept": {
+                  "name": "拦截",
+                  "description": "<p>你拦截进入你<strong>交战</strong>半径内的敌人，立即进行至多等同于你<strong>步幅</strong>的移动，插入其间并挡住他们的去路。</p><p>如果敌人在其回合中移出你的交战半径，或攻击任何其他生物，你可以对其进行一次<strong>脱离交战打击</strong>。</p>",
+                  "condition": "一名敌人移动到你的交战半径内，或穿过你的交战半径。"
+                }
+              }
+            },
+            "Shield Ward": {
+              "name": "盾牌防护 盾牌防护",
+              "description": "<p>你已掌握一项专门技巧，能将实体盾牌融入<strong>防护</strong>手势之中。当你已装备<strong>盾牌</strong>时，对于使用防护手势的法术，你可以无视其空手需求。</p>"
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何运用重型武器打出沉重的猛击，在每一次挥动中都倾注你全部的力量。你对<strong>重型</strong>和<strong>均衡</strong>类别中的所有武器都拥有<strong>受训</strong>熟练度。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用主手武器施展一次强力<strong>打击</strong>。这次攻击施展较慢，但经过<strong>强化</strong>，可造成额外伤害。</p>"
+                }
+              }
+            },
+            "Athletics Novice": {
+              "name": "运动新手 运动新手",
+              "description": "<p>你已接受基础运动训练。你在<strong>训练运动</strong>技能中获得<strong>新手</strong><strong>等级</strong>，并且不再被视为该技能的<strong>未受训</strong>。</p><p>你知道某个<strong>地表</strong>是否能够承受你的<strong>重量</strong>，知道攀爬时如何寻找抓手点，以及游泳时如何分配体重以获得浮你知道如何进行长跑，也知道如何调整节奏以避免<strong>力竭</strong>。</p>"
+            },
+            "Armored Shell": {
+              "name": "装甲壳体 装甲壳体",
+              "description": "<p>你是将护甲与盾牌结合使用以形成防御外壳的专家。</p><p>当你处于<strong>戒备</strong>状态且已装备<strong>重型盾牌</strong>时，你的基础<strong>护甲</strong>防御减半，但你的<strong>格挡</strong>防御会相应增加同等数值。</p>"
+            },
+            "Shield Combat Training": {
+              "name": "盾牌战斗训练 盾牌战斗训练",
+              "description": "<p>你擅长持盾作战，能用它猛撞敌人并使其失衡。你在<strong>盾牌</strong><strong>类别</strong>的<strong>武器</strong>方面达到<strong>受训</strong>训练等级。</p>",
+              "actions": {
+                "shieldBash": {
+                  "name": "盾牌猛击 盾牌猛击",
+                  "description": "<p>在用你的主手武器进行一次基础打击后，你用你的盾牌<strong>打击</strong>，使目标陷入 @状态[staggered] 状态，持续一轮。</p>",
+                  "effects": [
+                    {
+                      "name": "盾牌猛击 盾牌猛击"
+                    }
+                  ]
+                }
+              }
+            },
+            "Shield Combat Proficiency": {
+              "name": "盾牌战斗熟练度 盾牌战斗熟练度",
+              "description": "<p>你在战斗中使用盾牌方面受过流利的教育。你获得<strong>熟练工</strong>训练等级，以及在<strong>盾牌</strong><strong>类别</strong>武器上的<strong>+1技能加值</strong>。</p>"
+            },
+            "Crowbar": {
+              "name": "撬棍 撬棍",
+              "description": {
+                "public": "<p>一根略微弯曲的坚固金属杆，一端带有扁平头部的钩爪。用于施加杠杆力，将一个物体从另一个物体上撬开。</p>"
+              }
+            },
+            "Healing Elixir": {
+              "name": "治疗灵药",
+              "description": {
+                "public": "<p>这瓶药水含有一种专门的炼金配方，能迅速闭合创伤并改善身体健康。</p>"
+              },
+              "actions": {
+                "healingElixir": {
+                  "name": "治疗灵药",
+                  "description": "<p>立即恢复相当于该灵药<strong>品质</strong>的<strong>生命值</strong>。</p><ul><li><p><strong>粗制</strong> - 立即恢复 6 点<strong>生命值</strong>。</p></li><li><p><strong>标准</strong> - 立即恢复 12 点<strong>生命值</strong>。</p></li><li><p><strong>精良</strong> - 立即恢复 24 点<strong>生命值</strong>。</p></li><li><p><strong>卓越</strong> - 立即恢复 48 点<strong>生命值</strong>。</p></li><li><p><strong>大师级</strong> - 立即恢复 96 点<strong>生命值</strong>。</p></li></ul>"
+                }
+              }
+            },
+            "Expanded Toolbelt": {
+              "name": "扩展工具腰带 扩展工具腰带",
+              "description": {
+                "public": "<p>一种扩展工具腰带，可以是效用腰带、弹带，或是缝在你的装备上的一组口袋。</p><p>此物品会根据其品质阶级提供若干额外的工具带栏位：</p><ul><li><p><strong>标准</strong>：+1 工具带栏位</p></li><li><p><strong>精良</strong>：+2 工具带栏位</p></li><li><p><strong>优异</strong>：+3 工具带栏位</p></li><li><p><strong>大师工艺</strong>：+4 工具带栏位</p></li></ul>"
+              }
+            },
+            "Rune: Kinesis": {
+              "name": "符文：念动力",
+              "description": "<p>空间与物理移动的混沌力量。念动力符文掌管一切与移动行为和物理性相关的事物。</p><p>念动力符文的成长基于<strong>Presence</strong>，以<strong>Physical</strong>防御为目标，并造成<strong>Bludgeoning</strong>、<strong>Piercing</strong>或<strong>Slashing</strong>伤害至<strong>生命值</strong>。它与秩序的<strong>控制</strong>符文相对立。</p>",
+              "actions": {
+                "propel": {
+                  "name": "推进",
+                  "description": "<p>你对念动力符文的掌控使你能够对重力施加局部控制，以执行基础的念动操作，产生以下效果之一：</p><ul><li><p>将15英尺内一个未固定且重量不大于1的物体拉向你并接住它。由生物已装备或持有的物体，除非该生物自愿松手，否则绝不会被视为未固定。</p></li><li><p>将一个你手持且重量不大于1的物体弹向一个最远30英尺外的目标。该物体会以中等速度笔直且准确无误地飞向该目标。物体飞行路径上的任何生物都可以作出反应来接住它，只要他们有一只空着的手即可。</p></li><li><p>使一个你接触到、重量小于或等于你<strong>Presence</strong>10倍的物体或自愿生物悬浮在半空中，并将其位置从原本所在处向任意方向改变最多20英尺。只要你不再进行进一步的动作且未处于@状态[incapacitated]，你就可以无限期维持这种悬浮。</p></li></ul><p>除非另有说明，推进只能影响你能够以身体实际接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Runewarden": {
+              "name": "符文守卫 符文守卫",
+              "description": "<p>你对奥术的精通使你对元素和精神伤害更加坚韧。对于每一种你已知晓与该伤害类型协调的奥术符文的元素或精神伤害类型，你获得等同于你一半感知的<strong>抗性</strong>加值。</p><p>当你使用<strong>护卫</strong>手势时，你的护卫所提供的抗性也会提高你一半的感知值。</p>"
+            },
+            "Heater Shield": {
+              "name": "鸢形盾",
+              "description": {
+                "public": "<p>因其铁制外形酷似熨斗底座而得名，鸢形盾在防护范围与机动性之间提供了良好的平衡。</p>"
+              }
+            },
+            "War Hammer": {
+              "name": "战锤",
+              "description": {
+                "public": "<p>战锤专为击碎板甲与粉碎盾牌而打造，其沉重而钝实的锤头安装在加固的锤柄顶端，在那些崇尚力量胜过灵巧之人的手中带来毁灭。</p>"
+              }
+            },
+            "Heavy Crossbow": {
+              "name": "重弩",
+              "description": {
+                "public": "<p>一种拥有钢制弩臂的强力十字弓，需要用曲柄或杠杆上弦；它射出的毁灭性弩矢足以击穿护甲，或将敌人钉在墙上。</p>"
+              }
+            }
+          }
+        },
+        "Eliorwen": {
+          "name": "艾利奥文",
+          "tokenName": "艾利奥文",
+          "ancestry": {
+            "name": "精灵语 精灵语",
+            "description": "<p>你生来就是长寿的精灵，举止优雅，思维敏捷。你轻盈灵巧的身形与雕琢般的面容，是一个将优雅视为生活方式的族群所传承下来的特质。你天生倾向于快速思考与精确的移动，这是数百年传统演化而来的结果。</p>"
+          },
+          "background": {
+            "name": "流浪者",
+            "description": "<p>你过着四处漂泊的生活。对你而言，没有什么比坐在货车上或骑在坐骑上、看着异乡的天空从头顶缓缓掠过更令人愉悦。你学会了仔细留意周围的环境及其需求，照料那些你所依赖的生物，并善用你所能找到的一切。</p>"
+          },
+          "biography": {
+            "public": "<p>艾利奥文是一名敏捷的散兵，运用箭术和施法在极远距离压制并消灭敌人。艾利奥文立志获得<strong>奥术弓手</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Longbow": {
+              "name": "长弓",
+              "description": {
+                "public": "<p>长弓是一种高大的单体木弓，往往比拉开它的弓箭手还高；它需要极大的力量和多年的练习才能精通，能将箭矢以致命的力道射过战场。</p>"
+              }
+            },
+            "Scimitar": {
+              "name": "弯刀",
+              "description": {
+                "public": "<p>凭借其宽阔的弧形刀刃和致命的弧光，弯刀在战斗中翩然起舞，其锋刃以优雅而横扫般的打击劈开敌人。</p>"
+              }
+            },
+            "Studded Leather Armor": {
+              "name": "镶钉皮甲",
+              "description": {
+                "public": "<p>以皮革为基础，并用小型金属饰钉或铆接金属片加固，这种护甲在机动性与对劈砍提供的适度保护之间取得了平衡。</p>"
+              }
+            },
+            "Pinning Shot": {
+              "name": "钉射",
+              "description": "你发射一记战术性布置的射击，将目标钉制在附近的地表上。",
+              "actions": {
+                "pinningShot": {
+                  "name": "钉射",
+                  "description": "<p>你从远处进行<strong>打击</strong>。这次攻击是<strong>困难</strong>的，不过如果你的目标被其命中，则其会处于<strong>受拘束</strong>状态，直到其下个<strong>回合</strong>结束时。</p>",
+                  "effects": [
+                    {
+                      "name": "钉射"
+                    }
+                  ]
+                }
+              }
+            },
+            "Arcane Archer": {
+              "name": "奥术弓手",
+              "description": "<p>你在箭术上的技巧能够塑造你的施法，部分替代传统施法中的姿势手势。</p><p>当你将<strong>投射</strong>武器作为主手武器使用时，你无视施放带有<strong>箭头</strong>手势的法术所需的空手要求，且这些法术的射程变为你的武器射程。</p><p>在以投射武器进行一次<strong>打击</strong>后，你可以立即施放一个法术，其<strong>动作</strong>消耗减少 1。</p>"
+            },
+            "Weak Points": {
+              "name": "弱点",
+              "description": "<p>你能识别出攻击敌人弱点的时机。当你使用一件以<strong>敏捷</strong>为成长属性的武器攻击处于@状态[未察觉]、@状态[夹击]或@状态[暴露]状态的目标时，你的任何打击都会获得 +2 伤害。</p>"
+            },
+            "Mark Prey": {
+              "name": "标记猎物",
+              "description": "<p>你射出一发特殊弹药，它不会造成伤害，但会爆炸成发光粉末，清晰地标记你的目标。</p>",
+              "actions": {
+                "markPrey": {
+                  "name": "标记猎物",
+                  "description": "<p>你使用一次特殊射击进行打击。若你的攻击成功，目标在接下来的3回合内处于<strong>暴露</strong>状态。</p>",
+                  "effects": [
+                    {
+                      "name": "已标记"
+                    }
+                  ]
+                }
+              }
+            },
+            "Evasive Shot": {
+              "name": "闪避射击",
+              "description": "<p>你擅长在闪避敌人攻击的同时使用远程武器射击。进行一次远程武器攻击后，你获得相当于你<strong>跨步</strong>一半的额外免费移动。</p>"
+            },
+            "Gesture: Arrow": {
+              "name": "手势：箭头",
+              "description": "<p>你将一枚注入了符文魔法力量的投射物掷向远处的目标。</p><p>箭头 手势基于<strong>智力</strong>进行成长，并以单个距离至多 60 英尺的生物为目标，对未能抵抗该法术的目标造成<strong>8 基础伤害</strong>。施放此手势需要<strong>1 只手</strong>，基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Precision Shot": {
+              "name": "精准射击",
+              "description": "你花时间稳住瞄准，锁定敌人最薄弱的部位。你也许只有一次出手机会，但你会让这一击发挥作用。",
+              "actions": {
+                "precisionShot": {
+                  "name": "精准射击",
+                  "description": "<p>你稳住瞄准，射出精准的一击。</p>"
+                }
+              }
+            },
+            "Stealth Novice": {
+              "name": "潜行新手",
+              "description": "<p>你已接受过潜行、渗透与诡计基础方面的训练。你在<strong>潜行</strong>技能中获得<strong>新手</strong>等级，且在该技能上不再被视为<strong>未受训</strong>。</p><p>你知道如何利用光影来掩饰自己的存在，如何在行走时分配重量以便更安静地移动，也学会了一些伪装的小技巧，以便混入人群之中。你能在他人环绕时显得不惹人怀疑，能藏身于昏暗的房间中，并且能够无声地移动到足以避开普通人的察觉。</p>"
+            },
+            "Fan of Arrows": {
+              "name": "箭雨扇射 箭雨扇射",
+              "description": "这项困难的远程武器装备技巧使你能够用武器向前方锥形区域内扫射出多发攻击，每次攻击都以效果区域内的不同敌人为目标。",
+              "actions": {
+                "fanOfArrows": {
+                  "name": "箭雨扇射 箭雨扇射",
+                  "description": "<p>你用你的远程武器以弧形射出多枚投射，打击40英尺锥形范围内的所有敌方目标。</p>"
+                }
+              }
+            },
+            "Twinned Shot": {
+              "name": "双生射击",
+              "description": "<p>你准备两次射击，同时向单一目标开火。</p>",
+              "actions": {
+                "twinnedShot": {
+                  "name": "双生射击",
+                  "description": "<p>运用这项<strong>困难</strong>技巧，你会同时发射两枚投射，对同一目标进行两次<strong>打击</strong>攻击。</p>"
+                }
+              }
+            },
+            "Projectile Weapon Proficiency": {
+              "name": "投射武器熟练度 投射武器熟练度",
+              "description": "<p>你在使用投射武器方面受过熟练的训练。你获得<strong>熟练工</strong>训练等级，并在<strong>投射</strong><strong>类别</strong>的武器上获得<strong>+1技能加值</strong>。</p>"
+            },
+            "Gesture: Step": {
+              "name": "手势：踏步 手势: 踏步",
+              "description": "<p>你将符文之力灌注进一次移动中，跨越物理与空间的边界。</p><p>踏步手势随<strong>敏捷</strong>成长，并允许你沿直线移动最多20英尺，宽度等于你的<strong>体型</strong>。它会对该直线上的目标造成<strong>2基础伤害</strong>，前提是这些目标未能抵抗该法术。施放此手势不需要任何空闲的手，其基础消耗为<strong>3动作</strong>和<strong>1专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>此天赋的移动部分尚未自动化，必须作为该法术的结果手动执行。</p>"
+            },
+            "Skirmisher": {
+              "name": "散兵",
+              "description": "<p>你很擅长切入和脱离战局。当你移出敌人的<strong>交战</strong>半径时，该敌人对你进行的任何<strong>脱离交战打击</strong>都会承受 2 个祸骰。</p>"
+            },
+            "Diversionist": {
+              "name": "佯攻者 佯攻者",
+              "description": "<p>你擅长在战斗中运用诡计来分散对手的注意力或欺骗对手。</p>",
+              "actions": {
+                "distract": {
+                  "name": "分散注意力 分散注意力",
+                  "description": "<p>你对30英尺内一个能够看见或听见你的目标的<strong>意志</strong><strong>防御</strong>进行一次基于<strong>欺瞒</strong>的<strong>技能攻击</strong>。成功时，目标失去<strong>1专注</strong>。</p>"
+                }
+              }
+            },
+            "Surgeweaver": {
+              "name": "激涌编织者",
+              "description": "<p>你极其擅长编织闪电符文。使用该符文的法术在造成暴击时会施加 @状态[shocked] 状态。</p><p>电击效果持续<strong>1 轮</strong>，对<strong>士气</strong>造成你<strong>智力</strong>属性一半的<strong>闪电</strong>伤害，并施加 @状态[staggered] 状态。</p>"
+            },
+            "Awareness Novice": {
+              "name": "察觉新手 察觉新手",
+              "description": "<p>你已经接受过情境察觉基础训练，能够注意到你的环境中的重要细节。你在<strong>察觉</strong>技能上获得<strong>新手</strong>等级，并且在该技能上不再被视为<strong>未受训</strong>。</p><p>你知道进入房间时要检查出口，也知道如何寻找隐藏的武器、隐蔽的陷阱以及其他威胁。你知道如何发现自己何时被跟踪，以及如何搜查通用的藏身之处。</p>"
+            },
+            "Rune: Illusion": {
+              "name": "符文：幻象",
+              "description": "<p>诡计与奇想的混沌力量。幻象符文掌管虚假或误导的魔法显现。</p><p>幻象符文以<strong>智力</strong>进行成长，目标为<strong>意志</strong>防御，并对<strong>士气</strong>造成<strong>心灵</strong>伤害。它与秩序的<strong>照明</strong>符文相对。</p>",
+              "actions": {
+                "seeming": {
+                  "name": "表象 表象",
+                  "description": "<p>你对幻象符文的掌控使你能够以多种简单方式捏造察觉，并操纵阴影与光来制造干扰或娱乐，产生以下效果之一：</p><ul><li><p>修改你自身外貌的一个单独方面。这类改变可能包括调整你的声音、改变你眼睛的颜色、获得幻象般的角，或看起来稍微更高或更矮。该改变会持续，直到你休息或施行另一种不同的改变，并且可通过身体检查验证其为幻象。</p></li><li><p>显现一种令人信服的短促声音或单一气味的休憩室，你必须能够清晰回忆起它。该幻象从你所在的位置发出，并持续10秒。你可以控制声音的音量或气味的浓烈程度，使其能在最远60英尺或更短范围内被察觉。</p></li><li><p>将你的影子与你的形体分离，并专门分别控制它的移动。只要你不执行任何其他会消耗<strong>专注</strong>的动作，你就可以维持这一幻象。</p></li></ul><p>表象只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Subtle Extrication": {
+              "name": "巧妙脱身 巧妙脱身",
+              "description": "<p>你知道如何在远离对手时，不让自己暴露于对方最凶狠的反击之下。任何针对你的<strong>脱离交战打击</strong>在进行时，都不会获得原本通常会适用于此类攻击的2个恩惠骰。</p>"
+            },
+            "Focused Anticipation": {
+              "name": "专注预判 专注预判",
+              "description": "预判带来果断行动。当你在一轮战斗中拥有最高的<strong>先攻</strong>值时，你获得<strong>+1 专注</strong>。"
+            },
+            "Blast Flask": {
+              "name": "爆炸瓶",
+              "description": {
+                "public": "<p>一个装满红色液体的烧瓶在打破时会爆炸，产生一团很快消散的小型爆炸火焰。</p>",
+                "private": "<p>这些炼金瓶子主要用于击碎大块矿石，威力十足。如果组合的数量足够多，它们也可用于引发锁链反应，从而造成更大的爆炸。</p>"
+              },
+              "actions": {
+                "blastFlask": {
+                  "name": "爆炸瓶",
+                  "description": "<p>你点燃并投掷@ref[name]，对爆炸半径内的所有敌人造成<strong>火元素</strong>伤害。<strong>爆裂</strong>的半径取决于炸弹的品质：</p><ul><li><p><strong>粗制滥造</strong> - 3英尺</p></li><li><p><strong>标准</strong> - 4英尺</p></li><li><p><strong>优良</strong> - 6英尺</p></li><li><p><strong>卓越</strong> - 8英尺</p></li><li><p><strong>大师级</strong> - 10英尺</p></li></ul>"
+                }
+              }
+            },
+            "Rune: Lightning": {
+              "name": "符文：闪电",
+              "description": "<p>原始电能的混沌力量。闪电符文支配电荷的来源与放电。</p><p>闪电符文以 <strong>智力</strong> 进行成长，目标为 <strong>反射</strong>，并对 <strong>生命值</strong> 造成 <strong>电击</strong>伤害。它与秩序井然的 <strong>大地</strong>符文相对立。</p>",
+              "actions": {
+                "energize": {
+                  "name": "充能",
+                  "description": "<p>你对闪电符文的掌控使你能够引导气流与电流，操纵电荷与空气动力学，从而产生以下效果之一：</p><ul><li><p>为你所触碰的一个不大于 1 立方英尺的金属物体注入电磁电荷，使其强力吸附在其他金属上。同一时间只能以这种方式为一个物体充能；若对不同物体施放此法术，则先前物体会失去其磁性效果。</p></li><li><p>在你当前位置周围 6 英尺半径内聚集一阵狂风，可令其作为一股朝单一受控方向吹袭的阵风，或作为一个向各个方向施加向心力的气旋。附近区域中的空中效果会被驱散，且重量小于 1 的未固定物体会被朝阵风吹袭的方向抛飞。</p></li><li><p>在你当前所在位置 15 英尺内、你能看见的一个地点，制造出一声雷霆炸响般的冲击性声音。</p></li></ul><p>充能只能影响你能够以身体直接触碰到的生物或物体。你也可以尝试进行其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Projectile Weapon Training": {
+              "name": "投射武器训练",
+              "description": "<p>你接受过箭术和其他投射武器训练的基础教育。对于<strong>投射</strong>类别中的武器，你不再被视为<strong>未受训</strong>。</p>",
+              "actions": {
+                "quickDraw": {
+                  "name": "快速拔取",
+                  "description": "<p>即使在压力下，你也可以射出一击，尽管命中精度会降低。你进行一次<strong>困难</strong>的<strong>打击</strong>，但其动作成本会降低。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Fizzit": {
+          "name": "菲兹特 Fizzit",
+          "tokenName": "菲兹特 Fizzit",
+          "ancestry": {
+            "name": "侏儒",
+            "description": "<p>你的诞生伴随着洋溢的欢庆。你娇小的身躯与精致的面容，伴随着一种近乎超自然的探索天赋。你的族群传统崇尚对生活的热爱，以及敏捷思考与迅速行动的重要性。</p>"
+          },
+          "background": {
+            "name": "学者",
+            "description": "<p>你总是在图书馆或教室里最感自在。你的学习专注于揭开你周围世界的奥秘，而且几乎没有哪门理论学科是你尚不熟悉的。</p>"
+          },
+          "biography": {
+            "public": "<p>Fizzit是一位聪明的法术匠师和学者，能够在远处施放法术，并试图驾驭元素力量来为自己效劳。Fizzit渴望获得<strong>召唤师</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Ring Mail": {
+              "name": "环甲",
+              "description": {
+                "public": "<p>环甲的特点是在衬垫底层上缝有金属环，相较于更重的链甲选项，它提供的保护较少，但换来了更高的机动性。</p>"
+              }
+            },
+            "Arcane Orb": {
+              "name": "奥术法球",
+              "description": {
+                "public": "<p>一枚水晶或玻璃制成的球体——在熟练施法者的掌心中——会成为其力量的导体。它先在其法珠内汇聚伏特能量，然后以带电的力量轰击目标。</p>"
+              }
+            },
+            "Grimoire": {
+              "name": "魔典",
+              "description": {
+                "public": "<p>这本厚重的巨著既可作为知识的储藏，也可作为施法的法器。在奥术 practitioners手中，它能够向目标投射震荡性的力场冲击。</p>"
+              }
+            },
+            "Intuit Weakness": {
+              "name": "洞悉弱点",
+              "description": "<p>你平静心神，研究敌人的生理结构，寻找其防御中的弱点。</p><p>进行一次<strong>知识检定</strong>，使用由游戏主持人选择的合适技能。若成功，你会得知该生物最易受到哪种伤害类型的伤害（如果有的话）。若大成功，你会得知其最易受到的两种伤害类型。</p>",
+              "actions": {
+                "intuitWeakness": {
+                  "name": "洞悉弱点",
+                  "description": "<p>你平静心神，研究敌人的生理构造，试图找出其防御中的弱点。</p>"
+                }
+              }
+            },
+            "Gesture: Arrow": {
+              "name": "手势：箭头",
+              "description": "<p>你向远处的目标投掷一枚灌注了符文魔法力量的投射物。</p><p>箭头手势基于<strong>智力</strong>进行成长，并以至多60英尺内的单个生物为目标；未能抵抗该法术的目标会受到<strong>8基础伤害</strong>。此手势需要<strong>1只手</strong>来施放，基础消耗为<strong>3动作</strong>和<strong>1专注</strong>。</p>"
+            },
+            "Gesture: Create": {
+              "name": "手势：创造",
+              "description": "<p>你将奥术之力凝聚为有形之物，显现出一个<strong>精灵</strong>，其出现在10尺内，并以先攻 1 加入战斗。你的精灵是一个<strong>仆从</strong>，等级为你自身等级的一半。</p><p>创造手势基于<strong>感知</strong>进行成长，且该精灵会存续<strong>6轮</strong>。你同时只能拥有一个生效中的精灵；若你施放另一个使用创造手势的法术，则会替换你先前的精灵。此手势需要<strong>2只手</strong>施放，基础消耗为<strong>4动作</strong>和<strong>1专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>并非所有符文都已定义精灵角色。尚未定义创造效果的符文目前会显现为一个<strong>火焰精灵</strong>。</p>"
+            },
+            "Inflection: Compose": {
+              "name": "屈折：作曲",
+              "description": "<p>通过在法术构建时花费额外时间来强化法术，作为交换减少其他资源消耗。屈折：作曲使法术的<strong>专注</strong>消耗降低 1，但作为交换，其<strong>动作</strong>消耗提高 1。</p>"
+            },
+            "Conjurer": {
+              "name": "召唤师",
+              "description": "<p>你是“咒法学派”和“创造手势”的大师，能够将奥术能量显化为实体形态。你可以同时维持至多 3 个此类造物，而非仅限一个。</p>"
+            },
+            "Rimecaller": {
+              "name": "霜唤者 霜唤者",
+              "description": "<p>你极其擅长编织霜冻符文。使用此符文的法术在暴击时会造成@状态[freezing]状态。</p><p>冰冻效果持续<strong>1轮</strong>，对<strong>生命值</strong>造成相当于你<strong>感知</strong>属性一半的<strong>霜冻</strong>伤害，并施加@状态[slowed]状态。</p>"
+            },
+            "Recognize Spellcraft": {
+              "name": "识别施法 识别施法",
+              "description": "<p>你可以解读他人的奥术咒语，以辨明其施法的本质。当你能看见并听见的、40英尺内的一名敌人开始施放法术时，若你也知晓该符文，你就可以识别施法。</p>"
+            },
+            "Counterspell": {
+              "name": "反制法术 反制法术",
+              "description": "<p>你会立刻对正在施放的法术作出反应，并构筑一个旨在瓦解并抵消敌方法师施法的符文与手势。</p><h2 class=\"divider\">试玩测试说明</h2><p>这个动作现在可以在试玩测试中使用，但它尚未<em>完全自动化</em>。反制法术可以执行，但需要由游戏主持人手动撤销一个先前已应用的法术，并手动扣除其<strong>动作</strong>和<strong>专注</strong>消耗。在后续更新中，反制法术整体流程中的这些步骤<em>将会自动化</em>，这样一来，已确认的反制法术也会同时确认被反制的法术，但会移除其效果。</p>",
+              "actions": {
+                "counterspell": {
+                  "name": "反制法术 反制法术",
+                  "description": "<p>你将奥术能量塑造成一道对抗性的施法，目标为你在30尺内可见的一名施法者。</p><p>指定一个你已知的<strong>符文</strong>和<strong>手势</strong>，以尝试反制该法术。若你选择的符文与该法术所使用的某个符文相对立，则你的此次尝试获得<strong>+2恩惠</strong>。若你选择的手势与正在施放的手势完全相同，你的此次尝试也获得<strong>+2恩惠</strong>。</p><p>对你的目标的<strong>意志</strong><strong>防御</strong>进行一次无害的法术攻击。若你的掷骰结果超过其防御，则该法术被反制，其魔法被消除，不产生任何<strong>效果</strong>。</p>",
+                  "condition": "另一个你能看见的生物正在施放一个法术。"
+                }
+              }
+            },
+            "Tactician": {
+              "name": "战术家 战术家",
+              "description": "<p>你是一位狡猾的战场战术家，能够组织并指挥你的盟友，使其行动更加有效。</p>",
+              "actions": {
+                "tacticalPlan": {
+                  "name": "战术计划 战术计划",
+                  "description": "用不超过10个词，向一名在先攻顺序中于你之后行动的盟友描述一项行动方案。若该盟友在同一轮稍后执行了你所描述的计划，则其与该计划相关的任何掷骰获得+2恩惠。游戏主持人可以裁定该计划是否被遵循。"
+                }
+              }
+            },
+            "Wildspeaker": {
+              "name": "荒野言者",
+              "description": "<p>你天生就擅长与野兽交流。通过肢体语言和声音，你能够理解并使用荒野语进行沟通。</p>",
+              "actions": {
+                "wildspeak": {
+                  "name": "荒野语",
+                  "description": "<p>如果你成功通过一次 [[/skillCheck wilderness 14]] 检定，你可以向一只能够感知到你的<strong>野兽</strong>提出简单的问题。只要该生物并不怀有敌意，它就会在自身知识所限的范围内如实作答。</p><ul><li><p><strong>智力</strong>值为 0 的野兽无法理解你。</p></li><li><p><strong>智力</strong>值为 1 的野兽只能回答“是”或“否”。</p></li><li><p><strong>智力</strong>值大于 1 的野兽可以提供简单的多词回答。</p></li></ul>"
+                }
+              }
+            },
+            "Rune: Illusion": {
+              "name": "符文：幻象",
+              "description": "<p>诡计与奇想的混沌之力。符文：幻象掌管虚假或误导性的魔法显现。</p><p>符文：幻象以<strong>智力</strong>进行成长，针对<strong>意志</strong>防御，并对<strong>士气</strong>造成<strong>灵能</strong>伤害。它与秩序的<strong>照明</strong>符文相对立。</p>",
+              "actions": {
+                "seeming": {
+                  "name": "表象 表象",
+                  "description": "<p>你对幻象符文的掌握使你能够以各种简单方式捏造察觉，并操纵阴影与光来制造干扰或娱乐，产生以下效果之一：</p><ul><li><p>修改你自身外貌的单一方面。此类改变可能包括调整你音的声音调、改变你眼睛的颜色、获得幻象犄角，或看起来略高或略矮。该改变会持续，直到你休息或施行另一种不同的改变，并且可通过身体检查验证其为幻象。</p></li><li><p>显现出一种你能清晰回忆起的短促声音或单一气味的逼真再现。该幻象自你所在位置发出，并持续10秒。你可以控制声音的音量或气味的浓度，使其能在最远60英尺或更短范围内被察觉。</p></li><li><p>将你的影子与身体分离，并专门控制它的移动，使其独立于你自身。只要你不执行任何其他会消耗<strong>专注</strong>的动作，你就可以维持这一幻象。</p></li></ul><p>表象只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            },
+            "Surgeweaver": {
+              "name": "激涌编织者",
+              "description": "<p>你极其擅长编织闪电符文。使用此符文的法术在暴击时会造成 @状态[shocked] 状态。</p><p>电击效果持续<strong>1 轮</strong>，对<strong>士气</strong>造成你<strong>智力</strong>值一半的<strong>闪电</strong>伤害，并施加 @状态[staggered] 状态。</p>"
+            },
+            "Mesmer": {
+              "name": "迷魅师",
+              "description": "<p>你极其擅长编织幻象符文。使用该符文的法术在暴击时会造成@状态[confused]。</p><p>混乱效果持续<strong>1 轮</strong>，对<strong>士气</strong>造成你<strong>智力</strong>数值一半的<strong>灵能</strong>伤害，并施加@状态[disoriented]状态。</p>"
+            },
+            "Rune: Lightning": {
+              "name": "符文：闪电",
+              "description": "<p>原始电能的混沌力量。闪电符文掌管电荷的来源与放电。</p><p>闪电符文以<strong>智力</strong>进行成长，目标为<strong>反射</strong>，并对<strong>生命值</strong>造成<strong>电击</strong>伤害。它与秩序井然的<strong>大地</strong>符文相对。</p>",
+              "actions": {
+                "energize": {
+                  "name": "充能",
+                  "description": "<p>你对闪电符文的掌控使你能够引导气流与电流，操纵电荷与空气动力学，以产生以下效果之一：</p><ul><li><p>为你触碰到的一个不大于一立方英尺的金属物体注入电磁电荷，使其强力吸附在其他金属上。在任意时刻，只有一个物体能以这种方式被充能；对此法术施加于另一个物体时，先前物体的磁性效果会消失。</p></li><li><p>在你当前位置周围六码半径内聚集一阵狂风，使其要么作为沿单一受控方向吹袭的阵风，要么作为向各个方向施加向心力的气旋。近处区域内的气载效果会被驱散，且重量小于1的未固定物体会被抛向阵风吹袭的方向。</p></li><li><p>在你当前所在位置15尺内一个你能看见的位置制造一声雷鸣般的震荡巨响。</p></li></ul><p>充能只可影响你能够实际触碰到的一个生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Kinesis": {
+              "name": "符文：念动力",
+              "description": "<p>空间与物理移动的混沌之力。念动力符文统御一切与移动行为及物理性相关的事物。</p><p>念动力符文基于<strong>Presence</strong>进行成长，以<strong>Physical</strong>防御为目标，并对<strong>Health</strong>造成<strong>Bludgeoning</strong>、<strong>Piercing</strong>或<strong>Slashing</strong>伤害。它与秩序的<strong>控制</strong>符文相对。</p>",
+              "actions": {
+                "propel": {
+                  "name": "推进",
+                  "description": "<p>你对念动力符文的掌控使你能够对重力施加局部控制，以执行基础的念动操纵，产生以下效果之一：</p><ul><li><p>将15尺内一个未固定且重量不大于1的物体拉向你并接住它。由生物已装备或持有的物体，除非该生物自愿放手，否则绝不视为未固定。</p></li><li><p>将你手中一个重量不大于1的物体弹向一个最远30尺外的目标。该物体会以适中的速度沿直线准确无误地飞向该目标。物体路径上的任何生物都可以作出反应来接住它，只要他们有一只空闲的手即可。</p></li><li><p>使你所触碰的一个物体或自愿生物悬浮于半空中，其重量小于或等于你<strong>Presence</strong>的10倍，并将其位置从原本所在处向任意方向改变最多20尺。只要你不再执行进一步的动作且未处于@状态[incapacitated]，你就可以无限期维持这种悬浮。</p></li></ul><p>除非另有说明，推进只能影响你能够以身体实际接触到的生物或物体。你也可以尝试与上述类似的其他用途，其效果由游戏主持人裁定。</p>"
+                }
+              }
+            },
+            "Rune: Frost": {
+              "name": "符文：霜冻",
+              "description": "<p>水与寒冷的秩序之力。霜冻符文掌管水或其他流体的创造，以及它们在液态与冻结状态之间的转变。</p><p>霜冻符文以<strong>感知</strong>进行成长，目标为<strong>坚韧</strong>，造成<strong>寒冷</strong><strong>伤害</strong>至<strong>生命值</strong>。它与混沌的<strong>火焰</strong>符文相对立。</p>",
+              "actions": {
+                "condense": {
+                  "name": "凝结",
+                  "description": "<p>你对霜冻符文的掌控使你能够操纵液体及其热性质，产生以下效果之一：</p><ul><li><p>从大气中抽取至多四分之一加仑的淡水，置入一个容器中，或置于你所接触的一个地表上。所创造的水可能会受到你当前位置相关大气性质的影响。</p></li><li><p>操纵至多1加仑水的温度，使其立即冻结或解冻。该水不必置于容器中；此技法可用于覆盖一个地表，或通过再冻结将两个物体连接在一起。以这种方式制造的冰会在环境的周围温度允许的时间内保持冻结。</p></li><li><p>聚集附近至多一个六码尺立方的雪，将其塑形成一个固化的雕塑、形状或庇护所。</p></li></ul><p>凝结只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            },
+            "Talisman Weapon Training": {
+              "name": "护符武器训练",
+              "description": "<p>你理解将护符、法珠、法器或其他类似器具用于引导魔法或强化施法的奥术用法。你对<strong>护符</strong>类别中的<strong>武器</strong>具有<strong>受训</strong>熟练等级。</p>",
+              "actions": {
+                "refocus": {
+                  "name": "重新聚焦",
+                  "description": "<p>你使用已装备的护符，尝试重新获得一些<strong>专注</strong>。你对自己的<strong>振奋</strong>阈值进行一次<strong>无害</strong>的<strong>打击</strong>。</p><p>成功时，若使用单手护符，则恢复<strong>+1 专注</strong>；若使用双手持用护符，则恢复<strong>+2 专注</strong>。若大成功，恢复的专注量额外增加 +1。</p>"
+                }
+              }
+            },
+            "Mechanical Weapon Training": {
+              "name": "机械武器训练",
+              "description": "<p>你熟悉弩、火器及其他类似武器的设计与使用。你对<strong>机械</strong>类别的武器拥有<strong>受训</strong>熟练度。</p>",
+              "actions": {
+                "rapidReload": {
+                  "name": "快速装填",
+                  "description": "<p>你深深集中精神，平静自己的神经，以惊人的速度迅速<strong>装填</strong>你的机械武器。</p>"
+                }
+              }
+            },
+            "Unshakeable Poise": {
+              "name": "不动如山的沉着 不动如山的沉着",
+              "description": "<p>你在压力情境下展现出非凡的沉着；当周围的人失去镇定时，你依然能够保持冷静。</p>",
+              "actions": {
+                "unshakeablePoise": {
+                  "name": "不动如山的沉着 不动如山的沉着",
+                  "description": "<p>你消耗<strong>英雄气概</strong>，立即在<strong>专注</strong>中恢复你的<strong>智慧</strong>。你可以在<strong>战斗</strong>中于自己回合之外、进行<strong>反应</strong>之前执行此<strong>动作</strong>。</p>"
+                }
+              }
+            },
+            "Gesture: Conjure": {
+              "name": "手势：召唤",
+              "description": "<p>你将奥术力量凝聚为一种更高阶的形态，显现出一个<strong>访客</strong>，其会出现在30尺内，并以<strong>先攻</strong> 1加入<strong>战斗</strong>。你的访客是一个与你自身等级相同的仆从。</p><p>召唤手势随<strong>感知</strong>成长，且该访客会存续<strong>12轮</strong>。你同时只能拥有一个生效中的访客。施放另一个使用召唤手势的法术会替代你先前的访客。该手势需要<strong>2只手</strong>来施放，基础消耗为<strong>5动作</strong>和<strong>2专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>这个天赋目前位于一个<strong>第4阶</strong>节点。它最终将只能在更高等级时获得（可能需要<strong>6级</strong>）。当前为了测试，它被“提前”开放。</p><p>并非所有符文都已定义访客角色。尚未定义召唤物的符文目前都会显现为一个<strong>火焰访客</strong>。</p>"
+            },
+            "Stiletto": {
+              "name": "细剑",
+              "description": {
+                "public": "<p>细长、尖细，专为穿刺而制，细剑是杀手的武器——设计用来滑入肋骨之间或护甲的缝隙中，几乎不留痕迹。</p>"
+              }
+            }
+          }
+        },
+        "Kagura": {
+          "name": "神乐 Kagura",
+          "tokenName": "神乐 Kagura",
+          "ancestry": {
+            "name": "巨人裔",
+            "description": "<p>元素之力主宰了你的降生，赋予你超自然的活力。你高大的身躯和强壮的体格常常让他人以为你只是个不动脑子的肌肉块，但你的族群最为人所知的，是他们强健的体魄与深厚的知识。你继承了群山的力量。</p>"
+          },
+          "background": {
+            "name": "医师",
+            "description": "<p>你曾是一名某种意义上的治疗者或医疗专业人士。你一生中有一段时间都在学习医学科学，并且你很善于察觉他人的疾病。你知道如何治疗创伤、疾病，以及如何鉴定它们的来源。</p>"
+          },
+          "biography": {
+            "public": "<p>神乐是一位坚毅的治疗者，能在激烈的战斗中增强盟友的生命值与士气。神乐立志获得<strong>治疗者</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Ice Staff": {
+              "name": "寒冰法杖",
+              "description": {
+                "public": "<p>这根法师法杖是一件护符，可用于辅助施法，或向敌人投掷严寒冰霜冲击。</p>"
+              }
+            },
+            "Scale Mail": {
+              "name": "鳞甲",
+              "description": {
+                "public": "<p>将重叠的金属片缝制或铆接在皮革或布料衬底上的鳞甲，看起来像巨龙的皮肤，能很好地防护切割和刺击——尽管它很吵且不灵活。</p>"
+              }
+            },
+            "Gesture: Influence": {
+              "name": "手势：影响",
+              "description": "<p>你将符文的奥术力量强化为一种集中的直接接触，这通常是基础触碰手势的更强力进阶形式。</p><p>影响手势以<strong>Presence</strong>进行成长，并以一个相邻的单一生物为目标。它会对未能抵抗该法术的目标造成<strong>10 基础伤害</strong>。该手势需要<strong>1 只手</strong>来施放，基础消耗为<strong>3 动作</strong>和<strong>1 专注</strong>。</p>"
+            },
+            "Gesture: Ray": {
+              "name": "手势：射线",
+              "description": "<p>你将符文中的奥术力量汇聚于一点，并将其向外投射成一道光束。</p><p>射线手势以<strng>感知</strong>进行缩放，产生一条由施法者发出、宽1英尺且长30英尺的直线，对未能抵抗该法术的目标造成<strong>6基础伤害</strong>。该手势需要<strong>1只手</strong>来施放，基础消耗为<strong>4动作</strong>和<strong>1专注</strong>。</p>"
+            },
+            "Conserve Effort": {
+              "name": "节省精力 节省精力",
+              "description": "<p>你会在战斗中节省精力的过程中找到平静与专注。当你在自己的<strong>回合</strong>结束时仍有未消耗的<strong>动作</strong>，你获得<strong>+1专注</strong>。</p>"
+            },
+            "Healer": {
+              "name": "治疗者 治疗者",
+              "description": "<p>你在操控生命奥术以治疗伤势方面无与伦比。若你尚未习得<strong>符文：生命</strong>，则你学会它。使用生命符文治疗盟友时，你的掷骰获得<strong>+2恩惠骰</strong>。</p>",
+              "actions": {
+                "fontOfLife": {
+                  "name": "生命之泉 生命之泉",
+                  "description": "<p>你唤出一道赋予生命的魔法灵气。激活时立即生效，并且在<strong>3轮</strong>内每到你的<strong>回合</strong>开始时，20英尺内的每名盟友都会恢复等同于你<strong>感知</strong>属性值的生命值。</p><p><strong>开发中：该动作目前被视为范围效果，会为初始范围内的对象赋予持续治疗效果。当灵气在 Foundry VTT 版本 14 中由系统自动化后，该动作的机制实现将与描述一致。</strong></p>",
+                  "effects": [
+                    {
+                      "name": "生命之泉 生命之泉"
+                    }
+                  ]
+                }
+              }
+            },
+            "Mental Fortress": {
+              "name": "心灵堡垒 心灵堡垒",
+              "description": "<p>你坚定的意志让你极难被影响。你的<strong>意志</strong>防御获得 +1，且对<strong>心灵</strong>伤害获得 +5 抗性。</p>"
+            },
+            "Inflection: Compose": {
+              "name": "屈折：作曲",
+              "description": "<p>通过在法术形成过程中投入额外时间来强化法术，以此换取降低其他资源消耗。屈折：作曲使法术的<strong>专注</strong>消耗减少1，作为交换，其<strong>动作</strong>消耗增加1。</p>"
+            },
+            "Dustbinder": {
+              "name": "缚尘者 缚尘者",
+              "description": "<p>你非常擅长编织大地符文。使用该符文的法术在暴击时会造成 @状态[corroding] 状态。</p><p>腐蚀效果会持续<strong>3轮</strong>，并且每轮对<strong>生命</strong>造成等同于你的<strong>感知</strong>属性值的<strong>酸液</strong>伤害。</p>"
+            },
+            "Talisman Weapon Training": {
+              "name": "护符武器训练",
+              "description": "<p>你理解如何运用护符、法珠、法器或其他类似器具来引导魔法或强化施法中的奥术用法。你对<strong>护符</strong>类别中的<strong>武器</strong>拥有<strong>受训</strong>熟练度。</p>",
+              "actions": {
+                "refocus": {
+                  "name": "重新聚焦",
+                  "description": "<p>你使用已装备的护符，尝试重新获得一些<strong>专注</strong>。你对自己的<strong>振奋</strong>阈值进行一次<strong>无害</strong>的<strong>打击</strong>。</p><p>成功时，若使用的是<strong>单手</strong>护符，则<strong>恢复 +1 专注</strong>；若使用的是<strong>双手持用</strong>护符，则<strong>恢复 +2 专注</strong>。若大成功，恢复的专注量额外增加 +1。</p>"
+                }
+              }
+            },
+            "Runewarden": {
+              "name": "符文守卫 符文守卫",
+              "description": "<p>你对奥术的精通使你对元素与灵性伤害更为坚韧。对于每一种你已知晓与该伤害类型调谐的奥术符文的元素或灵性伤害类型，你获得等同于你一半感知的<strong>抗性</strong>加值。</p><p>当你使用<strong>Ward</strong>手势时，你的 Ward 所提供的抗性也会提高你一半的感知。</p>"
+            },
+            "Wildspeaker": {
+              "name": "荒野言者",
+              "description": "<p>你天生就擅长与野兽交流。通过肢体语言和声音，你能够理解并使用荒野语进行沟通。</p>",
+              "actions": {
+                "wildspeak": {
+                  "name": "荒野语",
+                  "description": "<p>如果你成功通过一次[[/skillCheck wilderness 14]]检定，你可以向一只能够感知到你的<strong>野兽</strong>提出简单的问题。只要该生物并不怀有敌意，它就会在自身知识所限的范围内如实回答。</p><ul><li><p><strong>智力</strong>值为 0 的野兽无法理解你。</p></li><li><p><strong>智力</strong>值为 1 的野兽只能回答“是”或“否”。</p></li><li><p><strong>智力</strong>值大于 1 的野兽可以给出简单的多词回答。</p></li></ul>"
+                }
+              }
+            },
+            "Healing Elixir Formula": {
+              "name": "治疗灵药配方 治疗灵药配方",
+              "description": {
+                "public": "一种广为人知的基础治疗灵药配方。",
+                "private": "你可以使用炼金术师工具，将野外发现的特定治疗草药制成瓶装治疗灵药。"
+              }
+            },
+            "Versatile Translator": {
+              "name": "多才多艺的翻译者",
+              "description": "<p>你拥有语言学方面的学术背景，或对语言有着敏锐的直觉。你的能力使你能够解读用各种语言写成的文本的基本含义。</p><p>你可以将一种你不懂、但使用通用字形或字符系统书写的语言文本，翻译成一种你所懂的语言。进行这样的译文时，你需要为每个词花费一分钟，将文本转写成一种你能理解的语言。</p><p>你的译文较为粗略，且往往缺乏细微之处，但仍包含文本中的所有要点。</p>"
+            },
+            "Soothe": {
+              "name": "抚慰",
+              "description": "你进行了一场抚慰人心的表演，鼓舞了你的盟友，恢复其士气。",
+              "actions": {
+                "soothe": {
+                  "name": "抚慰",
+                  "description": "<p>你吟唱一段平静心神的诗句，使所有位于 12 英尺内且能感知到你的盟友受益。对每位盟友的疯狂阈值进行一次<strong>表演检定</strong>。若成功，则每位盟友的士气都会恢复。</p>"
+                }
+              }
+            },
+            "Gesture: Pulse": {
+              "name": "手势：脉冲",
+              "description": "<p>将一个符文的奥术力量驱逐出去，形成以你为中心、随你向外扩散的半径效果。</p><p>脉冲手势按<strong>灵势</strong>进行缩放，产生一个半径10英尺的散发范围，对未能抵抗该法术的目标造成<strong>8基础伤害</strong>。该手势需要<strong>2只手</strong>施放，基础消耗为<strong>5动作</strong>和<strong>2专注</strong>。</p><h3 class=\"divider\">试玩测试说明</h3><p>该天赋目前位于一个<strong>第4阶</strong>节点。它最终将只能在更高等级时获得（可能需要<strong>6级</strong>）。目前为了测试而“提前”开放。</p>"
+            },
+            "Inspirator": {
+              "name": "鼓舞者",
+              "description": "<p>你极其擅长编织灵魂符文。使用该符文的法术在造成暴击时会施加 @状态[inspired] 状态。</p><p>鼓舞效果持续<strong>1 轮</strong>，并额外对<strong>士气</strong>造成等同于你<strong>Presence</strong>数值的<strong>恢复</strong>。</p>"
+            },
+            "Mender": {
+              "name": "修补匠",
+              "description": "<p>你极其擅长编织生命符文。使用此符文的法术在暴击时会施加 @状态[mending] 状态。</p><p>修补效果持续 <strong>1 轮</strong>，并将你的<strong>感知</strong>属性值作为额外的<strong>恢复</strong>施加到<strong>生命值</strong>上。</p>"
+            },
+            "Arcana Novice": {
+              "name": "奥术新手",
+              "description": "<p>你的教育涵盖了形而上学与魔法理论的基础、符文之间的关系、秩序与混沌的对立本质，以及对灵体的粗浅介绍，其中包括最广为人知的被神化与被妖魔化的崇拜对象。你获得<strong>奥术</strong>技能的<strong>新手</strong>等级，且在该技能上不再被视为<strong>未受训</strong>。</p><p>你对魔法基本语法原则的初步理解，足以让你鉴别一个法术或仪式可能使用的是哪一种低阶符文，以及所使用的手势（即便无法判断其屈折）。你能够辨认一个个体更受混沌还是秩序的影响，也能看出常见灵体（无论低阶还是高阶）的迹象。你对宗教习俗了解得足够多，因此在与崇拜某位灵体或神祇的人交流时，不至于让自己出丑。</p>"
+            },
+            "Rune: Soul": {
+              "name": "符文：灵魂",
+              "description": "<p>一种有序的创造与精神本质之力。灵魂符文支配着灵魂在生命与死亡之间的根本流转，并与智能、人格和心理健康等事务相关。</p><p>灵魂符文以 <strong>Presence</strong> 进行成长，能够提供<strong>士气</strong>的<strong>恢复</strong>，或造成由<strong>意志</strong>对抗的<strong>灵能</strong><strong>伤害</strong>。它与混沌的<strong>湮灭</strong>符文相对。</p>",
+              "actions": {
+                "evoke": {
+                  "name": "引发",
+                  "description": "<p>你对灵魂符文的掌握使你能够促成基础形式的灵性影响，产生以下效果之一：</p><ul><li><p>使你自己或另一位自愿者重温其过去某一时刻的一段核心记忆，持续时间最长为一分钟，仿佛那是最近才发生的事。</p></li><li><p>鉴定影响某人的一种负面灵性状态，例如 @状态[broken]、@状态[frightened]、@状态[confused] 或 @状态[insane]。</p></li><li><p>与另一名自愿生物建立短暂的灵性连接，使其能够识别一个可由单个词语表达的概念。</p></li></ul><p>引发的用途只能影响你自己或你能够以身体接触到的另一生物。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            },
+            "Irrepressible Spirit": {
+              "name": "不屈灵魂",
+              "description": "你的坚韧赋予你不屈灵魂，使你能够抗拒绝望的侵袭。在你的回合开始时，若你未处于破碎状态，则获得 1 点士气。"
+            },
+            "Eye of the Storm": {
+              "name": "风暴之眼",
+              "description": "<p>在你延迟你的回合后，若你对本轮中因你而得以先于你行动的敌人进行任何打击或法术攻击，获得 +2 恩惠。</p><p>TODO: 需要自动化。暂时请手动应用恩惠。</p>"
+            },
+            "Rune: Earth": {
+              "name": "符文：大地",
+              "description": "<p>元素大地的有序之力，负责物质实体。大地符文支配矿物、金属、土壤及其他物理化合物。</p><p>大地符文以<strong>感知</strong>进行成长，目标为<strong>反射</strong>，并对<strong>生命值</strong>造成<strong>强酸</strong>伤害。它与混乱的<strong>闪电</strong>符文相对。</p>",
+              "actions": {
+                "mould": {
+                  "name": "塑形",
+                  "description": "<p>你对大地符文的掌控使你能够以基础方式操纵岩石、矿物和土壤的原始力量，产生以下效果之一：</p><ul><li><p>迅速将至多 1 立方英尺的现有材料塑形成一种简单的几何形状，如长方体、椭球体或多面体。</p></li><li><p>精确复制一个手持物体的物理形状，该物体需小于一个 6 英寸的立方体，并以现有的黏土、石材或金属将其重现。该复制品除物理形状外，不保留任何有用性质。</p></li><li><p>将你所触及的一个物体、生物或液体表面的土质微粒分离并收集起来，使目标在片刻间被彻底清洁或净化。</p></li></ul><p>塑形只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            },
+            "Rune: Life": {
+              "name": "符文：生命",
+              "description": "<p>一种混沌的创造之力，负责活体物质。生命符文掌管生命值，以及与生物生长相关的事务。</p><p>生命符文以 <strong>感知</strong> 进行成长，能够提供 <strong>恢复</strong> 以恢复 <strong>生命值</strong>，或造成由 <strong>坚韧</strong> 对抗的 <strong>毒药</strong> 伤害。它与秩序的 <strong>死亡</strong> 符文相对立。</p>",
+              "actions": {
+                "bloom": {
+                  "name": "绽放",
+                  "description": "<p>你对生命符文的掌控使你能够刺激生物材料的生长并滋养身体的生命值，从而产生以下效果之一：</p><ul><li><p>培育 1 立方英尺的现有植物或真菌，使其迅速生长到健康、开花或可收获的状态。</p></li><li><p>鉴定术影响某个生物的负面身体状况，例如 @状态[diseased]、@状态[poisoned]、@状态[bleeding] 或 @状态[weakened]。</p></li><li><p>检验一份食物或饮品是否未受细菌、寄生虫或毒物污染。</p></li></ul><p>绽放只能影响你能够以身体接触到的生物或物体。你也可以尝试其他与上述类似的用途，其效果由游戏主持人决定。</p>"
+                }
+              }
+            }
+          }
+        },
+        "Ulfen": {
+          "name": "乌尔芬",
+          "tokenName": "乌尔芬",
+          "ancestry": {
+            "name": "人类",
+            "description": "<p>在无数状态与遥远异乡之间，你生来便是一个适应力极强的人类。无论高矮、纤瘦、强壮还是圆胖，你的外貌可谓千差万别。人类最广为人知的是其在基因上更倾向于坚定决心，并拥有推动顽强求生意志的传统。</p>"
+          },
+          "background": {
+            "name": "警员",
+            "description": "<p>你曾是某个执法组织的一员。你学会了如何对周遭环境保持警惕，在复杂的社交结构中开展工作，并展现出令人望而生畏的气场。</p>"
+          },
+          "biography": {
+            "public": "<p>乌尔芬是一名凶猛的战士，使用一把双手持用巨斧作战，偏好施展重型打击，造成可观的伤害或命中多个目标。乌尔芬渴望获得<strong>狂战士</strong>签名天赋。</p>"
+          },
+          "items": {
+            "Scale Mail": {
+              "name": "鳞甲",
+              "description": {
+                "public": "<p>将重叠的金属片缝制或铆接在皮革或布料衬底上的鳞甲，形似巨龙的鳞皮，能很好地防护劈砍和刺击——不过它很吵，而且不够灵活。</p>"
+              }
+            },
+            "Greataxe": {
+              "name": "巨斧",
+              "description": {
+                "public": "<p>巨斧是一种高大的武器，拥有宽阔且通常为双刃的斧头，专为施展毁灭性的顺劈而打造，能以可怕的力量劈砍人类与野兽。</p>"
+              }
+            },
+            "Intimidator": {
+              "name": "威吓者",
+              "description": "你专精于施展自己令人生畏的气势，以击溃敌人的士气。",
+              "actions": {
+                "intimidate": {
+                  "name": "威吓",
+                  "description": "<p>你以身体姿态威吓一名处于你交战范围内的敌人，对你的目标进行一次威吓技能攻击。若成功，其士气承受虚空伤害。</p>"
+                }
+              }
+            },
+            "Uppercut": {
+              "name": "上勾拳",
+              "description": "一种双手持用武器的技巧，你向上挥动武器，并借助武器回摆之势进行第二次打击。",
+              "actions": {
+                "uppercut": {
+                  "name": "上勾拳",
+                  "description": "<p>在一次未造成严重失误的基础打击攻击之后，你以更低的<strong>动作</strong>消耗用武器的回摆再次<strong>打击</strong>同一目标。</p>"
+                }
+              }
+            },
+            "Cleave": {
+              "name": "顺劈",
+              "description": "这项武技是一种专门的双手持用战斗动作，依靠蛮力将你的武器大幅挥出，沿途击中多个敌人。",
+              "actions": {
+                "cleave": {
+                  "name": "顺劈",
+                  "description": "<p>凶猛的双手持用挥击以120度弧形顺劈敌人。</p>"
+                }
+              }
+            },
+            "Powerful Physique": {
+              "name": "强健体魄",
+              "description": "你可以使用带有“缓慢”特性的武器，并穿戴带有“笨重”特性的护甲，而不会在先攻掷骰时承受祸骰。"
+            },
+            "Berserker": {
+              "name": "狂战士",
+              "description": "<p>你沉醉于战斗带来的刺激之中，毫无顾忌地投身于混战。</p>",
+              "actions": {
+                "berserkerRage": {
+                  "name": "狂战士狂怒",
+                  "description": "你陷入激怒状态。处于激怒状态时，你的所有近战攻击都会额外造成 4 点伤害。你可以在自己的回合中尝试结束该效果，方法是通过一次 DC 为 20 的意志检定。战斗结束时，该效果会自动结束。",
+                  "condition": "自你在战斗中的上一回合以来，你的生命值池已受到了伤害。",
+                  "effects": [
+                    {}
+                  ]
+                }
+              }
+            },
+            "Strong Grip": {
+              "name": "强力握持",
+              "description": "你对自己武器装备的掌握稳固而坚定。你在持用双手近战武器时，仍可执行需要空余手的动作。试图缴械你时，要额外承受 +2 祸骰。"
+            },
+            "Blood Frenzy": {
+              "name": "嗜血狂乱",
+              "description": "<p>你的战斗渴望激励你施展更加高效的动作。当你达成一次对生命值造成伤害的<strong>暴击</strong>时，你立即获得 +1 动作。此收益每轮只会生效一次。</p>"
+            },
+            "Executioner's Strike": {
+              "name": "刽子手的打击",
+              "description": "<p>你对一名受伤的敌人发动一次果断的打击。</p>",
+              "actions": {
+                "executionersStrike": {
+                  "name": "刽子手的打击",
+                  "description": "<p>你使用双手持用的重型武器发动一次致命打击。若你的攻击成功，你的对手还会陷入持续 3 轮的流血状态，并在每一轮受到等同于你力量值的额外伤害。</p>",
+                  "condition": "你的目标处于受伤状态。",
+                  "effects": [
+                    {
+                      "name": "刽子手的打击"
+                    }
+                  ]
+                }
+              }
+            },
+            "Unshakeable Stance": {
+              "name": "不动如山姿态 不动如山姿态",
+              "description": "除非是由敌人掷出的严重成功，或是由你自己掷出的严重失败，否则你不会被任何动作非自愿地移动或击倒至倒地状态。"
+            },
+            "Ruthless Momentum": {
+              "name": "无情动量",
+              "description": "<p>你沉醉于自己在战斗中能够造成的杀戮，并在每个敌人倒下时继续紧逼战局。</p>",
+              "actions": {
+                "ruthlessMomentum": {
+                  "name": "无情动量",
+                  "description": "<p>击败一名敌人后，你可以移动，距离最多等同于你的<strong>步幅</strong>，并攻击另一名位于近战范围内的敌人。</p>",
+                  "condition": "你用一次近战攻击使一名敌人失去行动能力。"
+                }
+              }
+            },
+            "Second Wind": {
+              "name": "二次振作 二次振作",
+              "description": "你的身体韧性让你能够将自己逼至超越常规极限的程度。",
+              "actions": {
+                "secondWind": {
+                  "name": "二次振作 二次振作",
+                  "description": "<p>你集中精力，恢复等同于你坚韧值的生命值。</p>"
+                }
+              }
+            },
+            "Intercept": {
+              "name": "拦截",
+              "description": "你保护盟友，拦截那些原本可能会击中同伴的攻击。",
+              "actions": {
+                "intercept": {
+                  "name": "拦截",
+                  "description": "<p>你拦截进入你<strong>交战</strong>半径内的敌人的路径，立即进行最多等同于你<strong>步幅</strong>的移动，挡在其前方并阻挡其去路。</p><p>如果该敌人在其回合中移出你的交战半径，或攻击任何其他生物，你可以对其进行一次<strong>脱离交战打击</strong>。</p>",
+                  "condition": "敌人移动进入或穿过你的交战半径。"
+                }
+              }
+            },
+            "Unarmed Combat Training": {
+              "name": "徒手战斗训练 徒手战斗训练",
+              "description": "<p>你熟悉基础武术和徒手战斗。你知道如何运用自身的身体力量制服或压制对手。你在<strong>徒手</strong><strong>类别</strong>的武器上达到<strong>受训</strong>等级。</p>",
+              "actions": {
+                "grapple": {
+                  "name": "擒抱 擒抱",
+                  "description": "<p>你试图以身体力量限制或制服对手。对一个相邻目标进行一次<strong>运动</strong>技能攻击。若成功，你和你的目标都将陷入 @状态[受缚] 状态，持续 1 轮。</p>",
+                  "effects": [
+                    {
+                      "name": "被擒抱 被擒抱"
+                    },
+                    {
+                      "name": "擒抱 擒抱"
+                    }
+                  ]
+                }
+              }
+            },
+            "Sundering Strike": {
+              "name": "粉碎打击",
+              "description": "<p>你掌握了一种武技，能够利用敌人防御中最薄弱的环节，使其暴露于进一步的伤害之下。</p>",
+              "actions": {
+                "sunderingStrike": {
+                  "name": "粉碎打击",
+                  "description": "<p>你用你的主手武器进行一次<strong>打击</strong>；若成功，则对目标施加<strong>暴露</strong>状态，持续 3 轮。此次攻击<strong>难度较高</strong>，且造成的伤害减少。</p>",
+                  "effects": [
+                    {
+                      "name": "破损的护甲 破损的护甲"
+                    }
+                  ]
+                }
+              }
+            },
+            "Heavy Weapon Training": {
+              "name": "重型武器训练",
+              "description": "<p>你知道如何使用重型武器施加强力打击，在每一次挥击中都倾注你的全部力量。你在<strong>重型</strong>和<strong>平衡</strong>类别中的所有武器上均为<strong>受训</strong>等级。</p>",
+              "actions": {
+                "heavyStrike": {
+                  "name": "强力打击",
+                  "description": "<p>你用<strong>主手</strong>武器发动一次<strong>强力</strong><strong>打击</strong>。这次攻击施展起来较为缓慢，但会被<strong>强化</strong>以造成额外<strong>伤害</strong>。</p>"
+                }
+              }
+            },
+            "Heavy Weapon Proficiency": {
+              "name": "重型武器熟练度 重型武器熟练度",
+              "description": "<p>你在使用军用武器方面受过熟练的教育。你获得<strong>熟练工</strong>训练等级，并在<strong>简易</strong>、<strong>重型</strong>和<strong>平衡</strong>类别的武器上获得<strong>+1技能加值</strong>。</p>"
+            },
+            "Thick Skin": {
+              "name": "厚皮肤",
+              "description": "你的身体坚韧让你更能抵御伤害。你获得对钝击、挥砍和穿刺伤害的 +2 抗性。"
+            },
+            "Armored Efficiency": {
+              "name": "装甲效率 装甲效率",
+              "description": "<p>你受训于穿戴最重型的护甲，同时仍保有机动性。你能够在穿着重型护甲时，每回合使用一次免费的移动。</p>"
+            },
+            "Penetrating Throw": {
+              "name": "穿透投掷 穿透投掷",
+              "description": "<p>你能以如此凶猛的力道掷出武器，使其打击一条直线上的所有目标。</p>",
+              "actions": {
+                "penetratingThrow": {
+                  "name": "穿透投掷 穿透投掷",
+                  "description": "<p>你进行一次<strong>投掷</strong>武器打击，贯穿并命中一条直线上的所有敌人。</p>"
+                }
+              }
+            },
+            "Stiletto": {
+              "name": "细剑",
+              "description": {
+                "public": "<p>细长、尖细，专为穿刺而造，细剑是杀手的武器——设计用来从肋骨之间或护甲的缝隙间滑入，几乎不留痕迹。</p>"
+              }
+            },
+            "Adrenaline Surge": {
+              "name": "肾上腺素涌动 肾上腺素涌动",
+              "description": "<p>你可以调动非凡的体力储备，以应对施加于你身体的挑战。</p>",
+              "actions": {
+                "adrenalineSurge": {
+                  "name": "肾上腺素涌动 肾上腺素涌动",
+                  "description": "<p>你消耗<strong>英雄气概</strong>，并在 3 轮内，任何使用力量进行缩放的动作获得<strong>+2 恩惠骰</strong>。在战斗中，于进行一次<strong>反应</strong>之前，你可以在自己的回合外执行此动作。</p>",
+                  "effects": [
+                    {
+                      "name": "肾上腺素涌动 肾上腺素涌动"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Party": {
+          "name": "队伍 队伍",
+          "tokenName": "队伍 队伍"
+        }
+      }
+    }
+  }
+}

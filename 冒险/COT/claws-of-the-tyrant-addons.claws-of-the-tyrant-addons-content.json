@@ -1,0 +1,87 @@
+{
+    "label": "暴君之爪：附加内容（内容）",
+    "mapping": {
+        "actors": {
+            "name": "name",
+            "publicNotes": "system.details.publicNotes",
+            "privateNotes": "system.details.privateNotes",
+            "disable": "system.details.disable",
+            "hazarddescription": "system.details.description",
+            "reset": "system.details.reset",
+            "routine": "system.details.routine",
+            "blurb": "system.details.blurb",
+            "stealthdetails": "system.attributes.stealth.details",
+            "hp": "system.attributes.hp.details",
+            "senses": "system.traits.senses.value",
+            "allSaves": "system.attributes.allSaves.value",
+            "ac": "system.attributes.ac.details",
+            "prototypeToken": "prototypeToken.name",
+            "di": "system.traits.di.custom",
+            "languages": "system.traits.languages.custom",
+            "speed": "system.attributes.speed.details",
+            "dr": "system.traits.dr"
+        },
+        "items": {
+            "name": "name",
+            "description": "system.description.value"
+        },
+        "journals": {}
+    },
+    "folders": {},
+    "entries": {
+        "Claws of the Tyrant: Addons": {
+            "name": "暴君之爪：附加内容 Claws of the Tyrant: Addons",
+            "description": "<p>“暴君之爪”的附加内容</p>",
+            "caption": "暴君之爪的附加内容",
+            "actors": {
+                "Path to Vellumis": {
+                    "name": "前往维鲁米斯 Path to Vellumis",
+                    "tokenName": "前往维鲁米斯 Path to Vellumis",
+                    "prototypeToken": "前往维鲁米斯 Path to Vellumis"
+                }
+            },
+            "items": {
+                "Effect: Lung Bonus": {
+                    "name": "效果：肺部加值 Effect: Lung Bonus",
+                    "description": "<p>在接下来的一分钟内，每名PC的攻击和DC都获得+2状态加值，并获得持续1分钟的10点临时生命值。这些增益是在血石其他属性之外额外获得的。</p>"
+                },
+                "Evade the Undead": {
+                    "name": "规避不死生物 Evade the Undead",
+                    "description": "<section class=\"skill\"><p>在探索尤娅之望的废墟时，你一边从一个地点移动到另一个地点，一边规避在镇上游荡的不死生物。尝试进行一次 @Check[type:stealth|dc:10|traits:action:sneak,secret,action:evade-the-undead] 检定，以@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}穿过不死生物身边；或者进行一次 @Check[type:acrobatics|dc:13|traits:action:evade-the-undead] 或 @Check[type:athletics|dc:13|traits:action:evade-the-undead]，快速移动到让不死生物失去你位置的踪迹。或者，你也可以尝试进行一次 @Check[type:society|dc:15|traits:action:recall-knowledge,secret,action:evade-the-undead] 检定，以@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}并规划前往目的地的最高效路线。</p><ul class=\"outcomes\"><li><strong>大成功</strong>：你获得 1 点规避点。</li><li><strong>成功</strong>：你不会获得或失去规避点。</li><li><strong>失败</strong>：你失去 1 点规避点。</li><li><strong>大失败</strong>：你失去 2 点规避点。</li></ul></section>"
+                }
+            },
+            "folders": {
+                "Claws of the Tyrant: Addons": "暴君之爪：附加内容",
+                "1. Gravelands Survivors": "1. 死坟末土幸存者"
+            },
+            "journals": {
+                "Claws of the Tyrant: Addons": {
+                    "name": "暴君之爪：附加内容 Claws of the Tyrant: Addons",
+                    "pages": {
+                        "Claws of the Tyrant: Addons": {
+                            "name": "暴君之爪：附加内容 Claws of the Tyrant: Addons",
+                            "text": "<p class=\"bio center\">作者：Chasarooni</p><section class=\"description\"><p>嗨 |˶˙ᵕ˙ )ﾉﾞ，我是这个模组的作者。我把它整理成了一组我觉得有帮助的杂项资源，以及我一路制作的各种地图等等，这样这些成果就不会遗失。希望你会喜欢它们，也祝你在这场冒险中玩得开心！</p></section><h3>模组内容</h3><p>请查看以下章节，了解其中具体包含了哪些内容。</p><ul><li><p>@UUID[JournalEntry.ntwh8NNYToNZNUVq.JournalEntryPage.TncFN3HfVIpIk59L]{1. 死坟末土幸存者}</p></li><li><p>@UUID[JournalEntry.ntwh8NNYToNZNUVq.JournalEntryPage.B1fogQPE8sjY5Qjh]{2. 献给奥泽姆的余烬}</p></li><li><p>@UUID[JournalEntry.ntwh8NNYToNZNUVq.JournalEntryPage.kWKbOhCv7Mjxadbr]{3. 血与信仰}</p></li></ul>"
+                        },
+                        "1. Gravelands Survivors": {
+                            "name": "1. 死坟末土幸存者 1. Gravelands Survivors",
+                            "text": "<aside><h3>资源</h3><p>这是对这场冒险各个章节的 Addons 中所包含资源的总结。</p></aside><article class=\"blockgroup\"><section class=\"block\"><h3>@UUID[JournalEntry.E7pPpCO9yKvEJH9Z.JournalEntryPage.LUrawCr6IwG4hg95]{准备告别}</h3><p>添加了一些地图，以帮助展示前几个事件中的场景。</p><ul><li><p>@UUID[Compendium.claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-maps.Scene.s1IrAOohrVxXuAzA]{事件10：未知墓志铭}</p></li><li><p>@UUID[Compendium.claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-maps.Scene.dXgvX8G980HbbCws]{事件 2：工作继续}</p></li><li><p>@UUID[Compendium.claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-maps.Scene.bwNLCb6FTHJAnbKT]{事件 3：整理遗体}</p></li><li><p>@UUID[Compendium.claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-maps.Scene.MTyXPofYNUuWkq4v]{事件 4：葬礼挽歌}</p></li></ul></section><section class=\"block\"><h3>@UUID[JournalEntry.E7pPpCO9yKvEJH9Z.JournalEntryPage.Yk6QotH2TPPC2e4Z]{尤娅之望}</h3><p>包含了 @UUID[Item.o0Dy04c8xUi4fIf9]{规避不死生物} 这个探索动作，以便在探索尤娅之望时简化玩家为其进行掷骰。</p><p>另外还有一份 @UUID[JournalEntry.ntwh8NNYToNZNUVq.JournalEntryPage.IQG2zLulF99TdI4F]{尤娅之望地图} 作为给玩家的指引（基于他们对这座城镇及其布局的记忆）。</p></section><section class=\"block\"><h3>@UUID[JournalEntry.q09cHXJPCUX6TluO.JournalEntryPage.DeALWKnwYbayA4Ag]{前往维鲁米斯}</h3><p>感谢可爱的 <em><strong>@Icarus</strong></em>，这里附上了一张地图来展示前往维鲁米斯的路线。</p><ul><li><p>@UUID[Compendium.claws-of-the-tyrant-addons.claws-of-the-tyrant-addons-maps.Scene.z78KUiOJBV4Xoa0Z]{前往维鲁米斯}</p></li></ul><p>此外，这里还提供了带路径和不带路径的图片。</p><aside class=\"flex50 left\"><img width=\"256\" src=\"modules/claws-of-the-tyrant-addons/assets/maps/VellumisMap-1300x1100-GridScale_8.webp\" /><h3>带路径</h3></aside><aside class=\"flex50 right\"><img width=\"256\" src=\"modules/claws-of-the-tyrant-addons/assets/maps/VellumisMap-1300x1100-GridScale_8-NoPaths.webp\" /><h3>无路径</h3></aside></section></article>"
+                        },
+                        "2. Ashes for Ozem": {
+                            "name": "2. 献给奥泽姆的余烬 2. Ashes for Ozem",
+                            "text": "<section class=\"milestone\n        head\"><article><p>正在进行中</p><p>我还没做到这部分</p><p>这里没什么可看的</p></article></section>"
+                        },
+                        "3. Of Blood and Faith": {
+                            "name": "3. 血与信仰 3. Of Blood and Faith",
+                            "text": "<section class=\"milestone\n        head\"><article><p>正在进行中</p><p>我还没做到这部分</p><p>这里没什么可看的</p></article></section>"
+                        },
+                        "Yua's Hope Map": {
+                            "name": "尤娅之望地图 Yua's Hope Map",
+                            "caption": "由 Chasarooni 绘制的地图（基于幸存者所记得的内容）",
+                            "src": "modules/claws-of-the-tyrant-addons/assets/maps/Yuas_Hope_map.webp"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

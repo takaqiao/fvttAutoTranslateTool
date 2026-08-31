@@ -1,0 +1,338 @@
+{
+ "unit": "ST-J02",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J02.cn.html",
+ "summary": "锚点单元 ST-J02（Starter Set Rules 第 1 块，chunk 1/5，字节区间 0–34068）已完成。26 个标题、12 条 @UUID 深链、15 个骰面符号 span、全部 evexamplebox / evblockquoteCenter 侧栏均已译。7 道自闸全过（GATE OK）。可见字符 16155 → 6243，比 0.386，落在 RATIO-BAND.json 的 0.32–0.44 带内（中位 0.36）；原始字符 34068 → 21022，字节 34294 → 33024。尾部 4 个空格的 chunk 边界原样保留，控制端可直接拼接。\n\n【方法】没有手写整页，而是对英文原文做逐条断言式替换（每条 old 必须命中且仅命中 1 次），因此 tag、class、@UUID 机器件、`class=\"basesymbol\"/\"stresssymbol\"` 内的 ` \\u00a0` 载荷、THIN SPACE、EN DASH 全部按字节继承，只有散文被换掉。\n\n【译文取材】本单元约 60% 的内容与《异形RPG：进化版》中文连载第 1、2 章（一级源）逐段对应，已按其口径落地：太空开篇、1.5 角色扮演、1.6 游戏模式、2.1 属性/技能/天赋/精神强度/生命值、2.2 个人任务与 PVP、2.3 负重/消耗品。技能检定一章（英文对应核心书第 3 章）一级源没有连载，由本单元自裁，并已按 lock 的机制词对齐。业主钉死的 Wits=机智 / Empathy=共情 已覆盖一级源的 智力/同理心；R3/R5/R6 的 通信科技/机械/射击 已覆盖一级源的 计算机科学/重型机械。\n\n【slug 的验证不是猜的】从 `C:\\Program Files\\Foundry Virtual Tabletop\\resources\\app\\public\\scripts\\foundry.mjs:685` 的 `slugify()` 与 `:44689` 的 `slugifyHeading()` 读了实现，并用 starterset 英文基线里 44 个实际 data-hash 反查校准：CHAR_MAP 把 `&` 映射成 `and`（所以 `COMBAT & INITIATIVE` → `combat-and-initiative` 其实是**能**解析的，册子 heading_anchor_hashes 里把它列进 not_resolving 是那次测量用了朴素 slugifier，不是上游真断）；`’`/`'` 被 `.replace(/[\"']/g,\"\")` 剥掉；`:` `(` `)` `?` 全部保留（所以 `stage-i` 那几条确实是真断链）。26 个标题的 id 一律按英文原文重算并写死。\n\n【值得下一个单元注意的一处上游缺陷】英文原文里有 4 处骰面符号 span 被上游抽取时**整个丢掉了**，只剩语义空洞的句子：`have the symbol on the 6 side` / `Rolling usually means` / `at least one 6 ( on the custom dice)` / `roll a on one or more stress dice` / `The more you roll` / `what extra can be used for`。不能补 span（会破坏 tag 多重集），所以统一用「成功符号」「压力符号」把语义补回散文里。整本书凡遇同类空洞，请沿用这两个词。",
+ "chars_en": 16155,
+ "chars_cn": 6243,
+ "self_gate": [
+  {
+   "check": "1 tag 多重集与英文相等（按 tag name 计数，含闭合标签）",
+   "result": "PASS — 36 个不同标签名、504 个标签，差集为空 {}"
+  },
+  {
+   "check": "2 英文里出现的每个 class=\"…\" 值原样存在",
+   "result": "PASS — 14 个 class 值计数完全一致：alienrpg evolved / arpgtable / basesymbol / ev-content-link / evblockquoteCenter / evchapterheading / evexamplebox / evolvedlinestart / evolvedpage / evolvedsubheading / liststyle / nostyle / stresssymbol / textover。注意本单元用的是 starterset 的 ev-content-link，不是 corerules 的 content-link"
+  },
+  {
+   "check": "3 @UUID[…] / [[…]] 构件逐字节相同，只有 {label} 变",
+   "result": "PASS — 本单元无 @UUID/[[ ]] 语法（0 条），链接全部是 12 个 <a data-link data-uuid=…> 形式；12 个开标签的属性串逐字节相等，只有标签文字换成中文"
+  },
+  {
+   "check": "4 每个译后标题带显式 id=，值为英文原 slug",
+   "result": "PASS — 26/26。id 由 foundry.mjs 的真实 slugify 复现并对 44 个实际 data-hash 校准：whats-the-story-mother? / roleplaying-alien / the-game-mother / safety-tools / player-characters / character-sheets / attributes / skills / talents / resolve / health / personal-agenda / gear / consumables / making-skill-rolls / base-dice-and-stress-dice / when-to-roll / means-success / modifiers / helping / multiple-successes / failure / pushing-your-roll / stress-response / passive-rolls / opposed-rolls"
+  },
+  {
+   "check": "5 无 DO-NOT-TRANSLATE 冻结字面量被翻译",
+   "result": "PASS — 用册子 sections 里全部 string / string_compared / documents[].actual_name 反查，本单元英文中**一条都没出现**，因此不存在可违反面。MU/TH/UR、USCSS 属 T-LATIN，已原样保留"
+  },
+  {
+   "check": "6 输出与英文不逐字节相同",
+   "result": "PASS — 34294 → 33024 字节；正文无残留英文句（去标签后扫描，仅剩 Free League / GM / NPC / PC 等有意保留的拉丁串）"
+  },
+  {
+   "check": "7 用到的机制词与 lang/cn.json 逐字节一致",
+   "result": "PASS — 25 条命中整值（见 lock_lookups）。另有 基础骰子 / 压力骰子 / 压力等级 / 濒死 / 潜行模式 / 先攻 不是 lang 整值，但与 lock 串内写法（ALIENRPG.HOWMANYDICE「基础骰子有几颗？」、HOWMANYSTRESS、Panic 系「压力等级上升一级」）及 glossary_alien 一致"
+  },
+  {
+   "check": "附加：可见字符比落在本语料实测带内",
+   "result": "PASS — 0.386，RATIO-BAND.json band 为 0.32–0.44（中位 0.36），远离 TRUNCATED 0.25 与 INFLATED 0.60"
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Skills",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "Attributes",
+   "lang_key": "ALIENRPG.Attributes",
+   "used": "属性"
+  },
+  {
+   "english": "Strength",
+   "lang_key": "ALIENRPG.AbilityStr",
+   "used": "力量"
+  },
+  {
+   "english": "Agility",
+   "lang_key": "ALIENRPG.AbilityAgl",
+   "used": "敏捷"
+  },
+  {
+   "english": "Wits",
+   "lang_key": "ALIENRPG.AbilityWit",
+   "used": "机智"
+  },
+  {
+   "english": "Empathy",
+   "lang_key": "ALIENRPG.AbilityEmp",
+   "used": "共情"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Resolve",
+   "lang_key": "ALIENRPG.Resolve",
+   "used": "精神强度"
+  },
+  {
+   "english": "Stress",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力"
+  },
+  {
+   "english": "Stress Responses",
+   "lang_key": "ALIENRPG.StressResponses",
+   "used": "压力反应"
+  },
+  {
+   "english": "Panic",
+   "lang_key": "ALIENRPG.Panic",
+   "used": "恐慌"
+  },
+  {
+   "english": "Push",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "Story Points",
+   "lang_key": "ALIENRPG.StoryPoints",
+   "used": "故事点"
+  },
+  {
+   "english": "Personal Agenda",
+   "lang_key": "ALIENRPG.PersonalAgenda",
+   "used": "个人任务"
+  },
+  {
+   "english": "Talents",
+   "lang_key": "ALIENRPG.Talents",
+   "used": "天赋"
+  },
+  {
+   "english": "Encumbrance",
+   "lang_key": "ALIENRPG.Encumbrance",
+   "used": "负重"
+  },
+  {
+   "english": "Consumables",
+   "lang_key": "ALIENRPG.Consumables",
+   "used": "消耗品"
+  },
+  {
+   "english": "Supply (roll)",
+   "lang_key": "ALIENRPG.Supply",
+   "used": "余量检定"
+  },
+  {
+   "english": "Air",
+   "lang_key": "ALIENRPG.Air",
+   "used": "空气"
+  },
+  {
+   "english": "Ammo",
+   "lang_key": "ALIENRPG.ammo",
+   "used": "弹药"
+  },
+  {
+   "english": "Power",
+   "lang_key": "ALIENRPG.Power",
+   "used": "电力"
+  },
+  {
+   "english": "Heavy Machinery (skill, T-EXACT)",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "机械"
+  },
+  {
+   "english": "Comtech (skill, T-EXACT)",
+   "lang_key": "ALIENRPG.Skillcomtech",
+   "used": "通信科技"
+  },
+  {
+   "english": "Observation (skill, T-EXACT)",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Stamina (skill, T-EXACT)",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "Action",
+   "lang_key": "ALIENRPG.Action",
+   "used": "动作"
+  },
+  {
+   "english": "Character Sheet",
+   "lang_key": "ALIENRPG.SheetLabels.Character",
+   "used": "角色卡"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Starter Set / boxed set",
+   "proposed": "入门套装 / 本套装",
+   "why": "一级源《进化版》第 1 章把 Hope's Last Day Starter Set 译作「入门套装」，直接采纳。行文里反复出现的 this boxed set 一律作「本套装」，与之同族又不啰嗦。本单元出现 7 次，是全书出现频次最高的自造词之一"
+  },
+  {
+   "en": "ALIEN RPG Core Rulebook",
+   "proposed": "《异形 RPG 核心规则书》",
+   "why": "一级源第 1、2 章一律作「核心规则书」。书名号 + 半角空格分隔拉丁缩写，与 §3.4 T-LATIN 一致"
+  },
+  {
+   "en": "cinematic adventure",
+   "proposed": "电影模式冒险",
+   "why": "glossary 只有 Cinematic Mode=电影模式，没有这个复合词。一级源「所有电影模式冒险均包含预设角色」已用此形；不用「电影冒险」是因为它读起来像一部电影而不是一种玩法"
+  },
+  {
+   "en": "Hope's Last Day",
+   "proposed": "《希望的最后一天》",
+   "why": "一级源第 1 章原文如此。本单元 4 次，且是 27 个单元共用的模组名"
+  },
+  {
+   "en": "Safety Tools",
+   "proposed": "安全工具",
+   "why": "一级源**自相矛盾**：小标题写「安全道具」，同一段末句写「安全工具」。取后者——tools 在这里指界限/遮蔽/安全卡这一整套约定与流程，不是道具；且「安全工具」是中文桌游圈既有说法"
+  },
+  {
+   "en": "lines and veils",
+   "proposed": "界限与遮蔽",
+   "why": "一级源原文「关于……界限和遮蔽的讨论」，直接继承，改「和」为「与」以对齐本项目并列词习惯"
+  },
+  {
+   "en": "Gear",
+   "proposed": "装备",
+   "why": "glossary 只收了 Equipment=装备。Gear 与 Equipment 在本书中不作区分（Gear 是章节名，Equipment 出现在同一段正文里），合并为「装备」；本单元里 h3 标题、@UUID 链接标签、span 行首标签三处必须同字"
+  },
+  {
+   "en": "supply dial",
+   "proposed": "余量转盘",
+   "why": "⚠ **有意偏离一级源**。一级源作「余量计数器」，但盒内实物是一个可旋转的纸质刻度盘，counter 是意译、dial 是实指。corerules 同句（The Hope's Last Day Starter Set includes a useful supply dial）在 Phase 5 会继承本条，两包必须同字"
+  },
+  {
+   "en": "dice pool",
+   "proposed": "骰池",
+   "why": "lock 与 glossary 都没有。中文 TRPG 通用译法，两字，与「基础骰子/压力骰子」不撞字"
+  },
+  {
+   "en": "Modifiers (rule heading)",
+   "proposed": "修正",
+   "why": "lock 里 4 个 *Mod 键一律作「修正」（BaseMod 基础修正 / RollMod 检定修正 / StressMod 压力修正 / ResolveMod 精神强度修正），而「调整值」只出现在 Panic8/ShipPanic8 两条散文里。按键面数量取「修正」，并请在译 Panic8 时一并统一"
+  },
+  {
+   "en": "+1 die / –1 die",
+   "proposed": "+1 骰 / –1 骰",
+   "why": "lock 的 ALIENRPG.Dice 是「颗骰子」，但那是计数框标签，塞进修正记号里会变成「+1 颗骰子」，在正文和例子里反复出现太长。⚠ EN DASH U+2013 已按册子 encoding_note 原样保留，未归一成 ASCII 连字符"
+  },
+  {
+   "en": "Helping",
+   "proposed": "协助",
+   "why": "机制名（每人 +1 骰、最多 3 人、战斗中吃掉完整动作），需要一个名词性的词；lock 散文里的「帮助」是动词用法，不冲突。h3 标题与 evexamplebox 标题「技能修正与协助」同字"
+  },
+  {
+   "en": "Full Action",
+   "proposed": "完整动作",
+   "why": "glossary 有 Fast Action=快速动作、Slow Action=慢速动作，但进化版改用 Full Actions & Quick Actions，缺一条。取「完整动作」与「快速动作」对称。⚠ 这是 ACTION & MOVEMENT 单元的标题词，请与本条对齐"
+  },
+  {
+   "en": "Passive Roll / Opposed Roll / Open Roll",
+   "proposed": "被动检定 / 对抗检定 / 开放检定",
+   "why": "三条都是 h3 标题，glossary 无。统一以「检定」收尾，与 lock 的 攻击检定/恐慌检定/余量检定 同构"
+  },
+  {
+   "en": "Multiple Successes",
+   "proposed": "多重成功",
+   "why": "h3 标题，glossary 无"
+  },
+  {
+   "en": "MAKING SKILL ROLLS (chapter heading + 链接标签)",
+   "proposed": "进行技能检定",
+   "why": "⚠ **跨单元同步点**：本单元里既是 h2 也是 Skills 段的链接标签，corerules 第 3 章同名。不译作「制作技能检定」这类直译"
+  },
+  {
+   "en": "Relieving Stress / COMBAT & INITIATIVE / Ammunition / STEALTH MODE (链接标签)",
+   "proposed": "缓解压力 / 战斗与先攻 / 弹药 / 潜行模式",
+   "why": "⚠ **跨单元同步点**：这四个 data-hash 指向本单元之外的标题（PANIC、COMBAT、RANGED COMBAT、STEALTH 单元）。拥有那些 h3 的单元必须译成同样四个词，否则链接文字与落点标题对不上（链接本身靠 data-hash，不会断，但读起来是两个名字）。STEALTH MODE 已有 glossary 背书"
+  },
+  {
+   "en": "agenda card",
+   "proposed": "任务卡",
+   "why": "lock 的 ALIENRPG.AgendaStory 是「任务/故事卡」，拆出「任务卡」与之自洽；Agenda=任务 已在 glossary"
+  },
+  {
+   "en": "Player Versus Player / PvP",
+   "proposed": "玩家对抗玩家 / PvP",
+   "why": "侧栏标题用全称，行内保留 PvP 拉丁缩写（一级源亦用 PVP，本项目按 §3.4 T-LATIN 处理缩写，且 span 行首标签 `PvP:` 若中译会与全称重复）"
+  },
+  {
+   "en": "maintenance jack",
+   "proposed": "维修撬棒",
+   "why": "⚠ **跨仓同步点**：corerules 装备表里有同名 Item（Maintenance Jack，T-BILINGUAL）。它是撬杠/撬棒类工具（蕾普丽在《异形》里用的那件），不是千斤顶；「维修撬棒」保住工具属性又不与 Cutting Torch 切割炬 撞字。Phase 5 译该 Item 时应写作「维修撬棒 Maintenance Jack」"
+  },
+  {
+   "en": "the symbol (被上游剥掉 span 的骰面符号)",
+   "proposed": "成功符号 / 压力符号",
+   "why": "英文原文有 6 处骰面 span 被上游抽取时整个丢失，只剩「have the symbol on the 6 side」这类空洞句。补 span 会破坏 tag 多重集，故在散文里补语义。全书凡遇同类空洞请沿用这两个词"
+  },
+  {
+   "en": "Murphy (prisoner)",
+   "proposed": "囚犯墨菲",
+   "why": "六级源 Alien 3 CnSCG 字幕原句「早上八点 囚犯墨菲」。译文保留了 shit hits the fan 的双关（墨菲被卷进风扇）：「屎会溅上风扇——就像囚犯墨菲那样」"
+  },
+  {
+   "en": "Shaw",
+   "proposed": "肖",
+   "why": "五级源 Prometheus / Covenant 字幕一致作「肖博士」。引文本身也直接取自 Prometheus 官方字幕「我绝不可能怀孕三个月」"
+  },
+  {
+   "en": "USCSS Miranda / Nat / Jeffries / Charlize",
+   "proposed": "USCSS 米兰达号 / 内特 / 杰弗里斯 / 查里兹",
+   "why": "一级源第 1、2 章的航行日志与建角示例里全部出现过，逐条继承。Charlize 在本单元是 Captain，按 R4 域分裂取「船长」（USCSS = Commercial）"
+  },
+  {
+   "en": "Free League (publisher)",
+   "proposed": "Free League（不译）",
+   "why": "出版社名，本单元里指的是官网与论坛这两个可点击的现实实体，译成中文会让读者找不到；按 §3.4 T-LATIN 处理，不进 T-FROZEN（没有代码在比对它）"
+  },
+  {
+   "en": "mainframe",
+   "proposed": "主机",
+   "why": "指 MU/TH/UR 7000 那台船载大型机。不用「大型机」是因为同句已有 MU/TH/UR 7000 型号，「主机」更贴玩家语感；R3 的技能描述论证里 mainframes 也归在计算机侧"
+  },
+  {
+   "en": "Things alien.",
+   "proposed": "外星之物。",
+   "why": "§1.3 第 4 条钉死「异形=生物名词 / 外星=形容词」，此处 alien 是形容词，故不能作「异形」。一级源作「外星生命。」，改为「外星之物」以接住上一句「诡谲、殊异且致命的东西」的排比"
+  }
+ ],
+ "frozen_kept": [
+  "（DO-NOT-TRANSLATE.json 的冻结字面量在本单元英文中一条都没有出现——已用册子全部 string / string_compared / documents[].actual_name 反查确认，因此本单元不存在可违反面）",
+  "MU/TH/UR（T-LATIN，glossary 亦映射为自身）",
+  "USCSS（船级前缀，T-LATIN，3 处）",
+  "D6 / D3 / 2D6 / D66（骰式记号）",
+  "PvP（缩写，2 处）",
+  "GM / NPC / PC（书中自定义的缩写，英文原文即以缩写形式反复使用）",
+  "Free League（出版社名）",
+  "U+2013 EN DASH（–1 骰 / –2 骰，按册子 encoding_note 未归一）",
+  "U+2009 THIN SPACE（力量 × 4 两侧，原样保留）",
+  "class=\"basesymbol\" / class=\"stresssymbol\" 内的 '  ' 载荷（15 处，逐字节保留）",
+  "结尾的孤立 &gt;（2 处）与 &amp;（1 处）——上游 PDF 转换残留的装饰符，位置未动"
+ ],
+ "open_issues": [
+  "⚠ 册子 heading_anchor_hashes.starterset.data_hash_not_resolving_today 把 combat-and-initiative、surprise-and-ambush、tannens-casino 列为「今天就断」，但读 foundry.mjs:685 的 CHAR_MAP 后可确认这是**误报**：CHAR_MAP 把 & 映射成 and，slugifyHeading 又用 /[\"']/g 剥掉撇号，所以这三条其实解析得通。真正断的只有 stage-i / stage-iii（'Stage I: Ovomorph (Egg)' 会 slug 成 stage-i:-ovomorph-(egg)，冒号与括号在非严格模式下保留）。建议主控重跑那次测量时换用真实 slugify，否则后续单元会为了「修」这三条去改 data-hash，那是改坏不是改好。",
+  "⚠ 上游缺陷：英文原文有 6 处骰面符号 span 被整个剥掉（'have the symbol on the 6 side' / 'Rolling usually means' / 'at least one 6 ( on the custom dice)' / 'roll a on one or more stress dice' / 'The more you roll' / 'what extra can be used for'），其中 'at least one 6 ( on the custom dice)' 还留下一个空括号。已在中文里用「成功符号/压力符号」补回语义，未增删任何标签。corerules 同段在 Phase 5 会遇到同一批空洞。",
+  "⚠ 英文 Failure 段用的是 class=\"stresssymbol\"，但语义上应当是 basesymbol（「没掷出任何成功」才叫失败）。这是上游的 class 用错，**未修**——修它会动 class 多重集。中文照原样挂 stresssymbol，读者看到的图标与英文版一致。",
+  "id=\"whats-the-story-mother?\" 带一个问号。这是 foundry slugify 非严格模式的真实产物（? 不在剥除表里），HTML5 也允许，且没有任何 data-hash 指向它，属惰性锚点；保留原 slug 是为了让未来从英文标题烘焙的深链仍能命中。",
+  "跨单元一致性待主控收口的 5 个链接标签：进行技能检定 / 缓解压力 / 战斗与先攻 / 弹药 / 潜行模式 —— 拥有对应 h3 的单元必须用同样的词，否则同一个概念在正文里会出现两个中文名（链接功能不受影响，靠 data-hash）。",
+  "本单元把 supply dial 定为「余量转盘」，**有意偏离一级源的「余量计数器」**。若主控更看重一级源一致性，改这一条只需动 1 处（starterset 与 corerules 各 1）。",
+  "生命周期六词（Chestburster / Ovomorph / Drone / Warrior / Praetorian）本单元一次都没用到，未做任何提议，留给第 10 章 / XENOMORPHS 单元按 PROJECT.md §7.2.0 定稿。",
+  "本单元只写了自己的 pages/ST-J02.cn.html，未触碰 compendium/cn，也未改动 index.json、glossary 或 lang 文件。glossary_gaps 里的 26 条需要主控裁定后再落进 glossary_alien.json —— 其中「跨单元同步点」标注的 5 条建议优先钉进 RESOLUTIONS.assertions.json，因为剩下 26 个单元会引用它们。"
+ ]
+}

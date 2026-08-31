@@ -1,0 +1,90 @@
+{
+  "label": "专长\nFeats",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Vestige's Senses (Vision)": {
+      "name": "遗迹的感官（视野） Vestige's Senses (Vision)",
+      "description": "<p>你融合了一个来自拥有额外感官的怪物的遗蜕，使你获得了那些你尚未从你的第一批遗蜕中获得的感官。这通常以将该怪物的眼睛安置在你的装备某处的形态呈现。你获得黑暗视觉与微光视野。</p>\n<p>You incorporated a vestige from a monster with additional senses, granting you those you had not yet gained from your first vestiges. This often takes the form of the monster's eyes placed somewhere in your equipment. You gain darkvision and low-light vision.</p>"
+    },
+    "Vestige Hunter Dedication (Scent)": {
+      "name": "遗物猎人奉献（嗅觉） Vestige Hunter Dedication (Scent)",
+      "description": "<p>你已经学会如何从你的敌人身上保留残迹，并将其融入你自己的道具中，附着那些从你最重要的战斗中浸染意义的部件。你最初添加的残迹强化了你的感官。你获得不精确嗅觉，射程为30英尺。</p>\n<p><strong>特殊</strong> 在你从残迹猎人变体中获得另外两个专长之前，你不能选择另一个奉献专长。</p>\n<p>You have learned how to retain vestiges from your foes and incorporate them into your own gear, attaching pieces imbued with meaning from your most important battles. The first vestiges you added have enhanced your senses. You gain imprecise scent with a range of 30 feet.</p>\n<p><strong>Special</strong> You can't select another dedication feat until you have gained two other feats from the vestige hunter archetype.</p>"
+    },
+    "Monster Scavenger": {
+      "name": "怪物拾荒者 Monster Scavenger",
+      "description": "<p>你特别擅长利用你击败的生物的每一个部分。你可以使用生存来进行 @Compendium[pf2e.actionspf2e.Earn Income]{Earn Income}，以拾荒怪物部件谋生。如果你选择改用合适的学识（技能），你在该次检定中获得+1环境加值。若你在生存中为大师，该加值提升为+2环境加值。</p>\n<p>You are particularly adept at using every part of the creatures you defeat. You can use Survival to @Compendium[pf2e.actionspf2e.Earn Income]{Earn Income} scavenging monster parts. If you choose to use an appropriate Lore skill instead, you gain a +1 circumstance bonus to the check. The bonus increase to a +2 circumstance bonus if you're a master in Survival.</p>"
+    },
+    "Vestige's Ferocity": {
+      "name": "遗留物的凶猛 Vestige's Ferocity",
+      "description": "<p><strong>频率</strong> 每小时一次</p>\n<p><strong>触发</strong> 你将被降至0生命值但不会立即死亡。</p>\n<hr />\n<p>你融合了一件来自某个拥有凶猛坚韧、顽强求生的生物的遗存。那还不足以在你将其击败时保护它，但也许那股凶猛的生命力会在你需要之时拯救你。你避免被击败并以1生命值维持状态，且你的受伤（状态）增加1。</p>\n<p><strong>Frequency</strong> once per hour</p>\n<p><strong>Trigger</strong> You would be reduced to 0 Hit Points but not immediately killed.</p>\n<hr />\n<p>You incorporated a vestige from a creature with the ferocious tenacity to cling to life. It wasn't enough to protect the creature when you defeated it, but perhaps that ferocious life force will save you now in your time of need. You avoid being knocked out and remain at 1 Hit Point, and your wounded condition increases by 1.</p>"
+    },
+    "Vestige's Climb": {
+      "name": "遗迹的攀爬 Vestige's Climb",
+      "description": "<p>你将来自一只攀爬怪物的遗留物附着在你的道具上，使你能够攀爬。这可能是一套攀爬爪、吐丝器、黏附垫，或各种其他攀爬特性。你获得一个等同于你陆地速度的攀爬速度。</p>\n<p>You attached a vestige from a climbing monster to your gear, allowing you to climb. This might be a set of climbing claws, spinnerets, sticky pads, or various other climbing features. You gain a climb Speed equal to your land Speed.</p>"
+    },
+    "Vestige's Wings": {
+      "name": "遗蜕之翼 Vestige's Wings",
+      "description": "<p>你接纳了一件来自会飞的怪物的遗珍，使你能够飞行。这几乎总是以你背上的一对翅膀的形态出现，但也可能是来自某种无需翅膀也能飞行的生物的、更为玄奥的东西。你获得等同于你陆地速度的飞行速度。</p>\n<p>You embraced a vestige from a flying monster allowing you to fly. This is almost always in the form of a set of wings on your back, but it could be something more esoteric from a creature that flies without wings. You gain a fly Speed equal to your land Speed.</p>"
+    },
+    "Vestige's Constrict": {
+      "name": "遗蜕的缠绕 Vestige's Constrict",
+      "description": "<p><strong>需求</strong> 你有一个敌人处于@Compendium[pf2e.conditionitems.Grabbed]{Grabbed}状态。</p>\n<hr />\n<p>你将一段遗痕移植到你的道具上，来源是一种以绞缠敌人而闻名的生物，通常是触手、卷须、盘绕或其他绞缠特性。该遗痕会本能地碾压你所擒抱的敌人。敌人受到等同于[[/r @actor.level + @actor.abilities.str.mod]]{你的等级 + 你的力量调整值}的伤害，并进行一次基础强韧豁免，使用你的职业DC或法术DC（取较高者）。</p>\n<p><strong>Requirements</strong> You have a foe @Compendium[pf2e.conditionitems.Grabbed]{Grabbed}.</p>\n<hr />\n<p>You grafted a vestige into your gear from a creature known for constricting its foes, often a tentacle, tendril, coil, or other constricting feature. The vestige instinctively crushes your grabbed foe. The foe takes damage equal to [[/r @actor.level + @actor.abilities.str.mod]]{your level + your Strength modifier}, with a basic Fortitude save, using your class DC or spell DC, whichever is higher.</p>"
+    },
+    "Master Monster Mage Spellcasting": {
+      "name": "大师 怪物 法师 施法 Master Monster Mage Spellcasting",
+      "description": "<p>你会成为你能从你的标记中施放的法术的法术攻击掷骰与法术 DC 的大师，无论其根源为何，但你不会成为你施放的其他法术的法术攻击掷骰与法术 DC 的大师。你获得一个第 7 等级法术位来施放怪物法师法术。在第 20 等级时，你获得一个第 8 等级法术位。</p>\n<p>You become a master in spell attack rolls and spell DCs with the spells you can from your tokens regardless of their tradition, but you don't become a master in spell attack rolls and spell DCs for other spells you cast. You gain a 7th-level spell slot to cast monster mage spells. At 20th level, you gain an 8th-level spell slot.</p>"
+    },
+    "Vestige Hunter Dedication (Vision)": {
+      "name": "遗留猎人奉献（视野） Vestige Hunter Dedication (Vision)",
+      "description": "<p>你已经学会如何保留敌人身上的遗物并将其融入你自己的道具中，附加那些从你最重要的战斗中获得、被赋予意义的部件。你最初添加的遗物增强了你的感官。你获得微光视野与黑暗视觉。</p>\n<p><strong>特殊</strong> 在你从遗迹猎人变体中获得另外两个专长之前，你不能选择另一个献身专长。</p>\n<p>You have learned how to retain vestiges from your foes and incorporate them into your own gear, attaching pieces imbued with meaning from your most important battles. The first vestiges you added have enhanced your senses. You gain low-light vision and darkvision.</p>\n<p><strong>Special</strong> You can't select another dedication feat until you have gained two other feats from the vestige hunter archetype.</p>"
+    },
+    "Vestige's Stampede": {
+      "name": "遗物的狂奔 Vestige's Stampede",
+      "description": "<p>你将一件来自践踏型怪物的遗珍加装在你的腿部或鞋靴上，使你能够将敌人踩踏在脚下。这通常会融合该怪物自身腿与足部的部件；当你使用遗珍奔踏时，你自己的双腿可能会短暂变得更大，并更充分地体现该生物的本质。你疾走至多为你速度的两倍，并且可以穿过至少比你小一档体型的生物的空间，践踏你进入其空间的每个生物。在一次遗珍奔踏的单次使用中，你只能尝试践踏同一生物一次。你以你的足部徒手攻击造成钝击伤害，但被践踏的生物可以尝试一次对抗你的职业DC或法术DC（取更高者）的基础反射豁免。</p>\n<p><strong>特殊</strong> 当你获得此专长时，你获得一次足部徒手攻击，造成[[/r 1d6[bludgeoning]]]伤害，且属于斗殴武器组。若你已经拥有更好的足部徒手攻击，你可以改用那个。</p>\n<p>You added a vestige from a trampling monster to your leg or footwear, allowing you to trample your foes underfoot. This often incorporates parts from the monster's own legs and feet, and when you use Vestige's Stampede, your own legs might briefly grow larger and embody the creature's essence more fully. You Stride up to double your Speed and can move through the spaces of creatures at least one size smaller, trampling each creature whose space you enter. You can attempt to trample the same creature only once in a single use of Vestige's Stampede. You deal bludgeoning damage for your foot unarmed attack, but trampled creatures can attempt a basic Reflex save against your class DC or spell DC, whichever is better.</p>\n<p><strong>Special</strong> When you take this feat, you gain a foot unarmed attack that deals [[/r 1d6[bludgeoning]]] damage and is in the brawling weapon group. If you already have a better foot unarmed attack, you can use that instead.</p>"
+    },
+    "Vestige's Fins": {
+      "name": "遗蜕之鳍 Vestige's Fins",
+      "description": "<p>你吸纳了一个来自水栖（特征）怪物的残存力量，使你能够游泳或在水下呼吸。这通常以在护甲中内置的一套鳍和鳃的形态出现。你获得等同于你陆地速度的游泳速度，且你可以在水下呼吸。</p>\n<p>You subsumed a vestige from an aquatic monster, allowing you to swim or breathe underwater. This usually takes the form of a set of fins and gills built into armor. You gain a swim Speed equal to your land Speed and you can breathe underwater.</p>"
+    },
+    "Vestige's Grab": {
+      "name": "遗蜕之攫 Vestige's Grab",
+      "description": "<p><strong>需求</strong> 你的上一个动作是一次成功的打击，且你要么有一只手空闲，要么你的打击使用了擒抱武器。</p>\n<hr />\n<p>你将一个抓握型怪物的残片附着在你的武器上或靠近你进行徒手攻击的位置，通常是怪物过去用来抓住敌人的一部分。你用攻击分散敌人注意力后，这残片会猛然甩出，帮助你抓住一个敌人。你命中的敌人变为 @Compendium[pf2e.conditionitems.Grabbed]{Grabbed}，如同你成功通过一次运动检定来 @Compendium[pf2e.actionspf2e.Grapple]{Grapple} 该敌人一般。</p>\n<p><strong>Requirements</strong> Your last action was a successful Strike, and either you have a hand free or your Strike used a grapple weapon.</p>\n<hr />\n<p>You attached a vestige from a grabbing monster either to your weapons or near where you make your unarmed attacks, typically a piece of the monster that it used to grab foes. The vestige lashes out to help you grab an enemy after you distract the foe with your attack. The foe you hit becomes @Compendium[pf2e.conditionitems.Grabbed]{Grabbed}, as if you had succeeded at an Athletics check to @Compendium[pf2e.actionspf2e.Grapple]{Grapple} the foe.</p>"
+    },
+    "Monster Breadth": {
+      "name": "怪物广度 Monster Breadth",
+      "description": "<p>你每天可以施放更多怪物法师法术。对于除你最高的两个怪物法师法术位以外的每个法术等级，将你从怪物法师变体专长中获得的法术位数量各提高 1。</p>\n<p>You can cast more monster mage spells each day. Increase the spell slots you gain from monster mage archetype feats by 1 for each spell level other than your two highest monster mage spell slots.</p>"
+    },
+    "Basic Monster Mage Spellcasting": {
+      "name": "基础怪物法师施法 Basic Monster Mage Spellcasting",
+      "description": "<p>你获得一个1级法术位，你可以用它来从你的标记中准备怪物法师法术。在6级时，你获得一个2级法术位。在8级时，你获得一个3级法术位。当你从一个标记中准备一个法术时，你可以升阶该法术（或在该生物的天生法术被升阶到高于最低等级时降低其等级）；你不必以该生物施放该法术时相同的法术等级来施放它。如果你想在一天中多次施放该法术，你可以从同一个标记中多次准备一个法术。</p>\n<p>You gain a 1st-level spell slot, which you can use to prepare monster mage spells from your tokens. At 6th level, you gain a 2nd-level spell slot. At 8th level, you gain a 3rd-level spell slot. When you prepare a spell from a token, you can heighten the spell (or reduce its level if the creature's innate spell was heightened above the minimum level); you need not cast it at the same spell level as the creature did. You can prepare a spell from the same token multiple times if you want to cast the spell several times during the day.</p>"
+    },
+    "Vestige's Breath": {
+      "name": "遗迹的吐息 Vestige's Breath",
+      "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p>你将一件带有吐息武器的生物之遗物融入你的道具中，例如把龙头装在你的盾牌上，并且你可以让它向你的敌人吐息。你造成 [[/r (@actor.level)d6[untyped]]]{每等级1d6伤害}，其伤害类型取决于你在获得此专长时所选择的怪物之吐息武器。吐息武器影响范围为 @Template[type:cone|distance:30|damaging:true] 或 @Template[type:line|distance:60|damaging:true]，目标进行一次基于你的职业DC或法术DC（取较高者）的基础反射豁免。</p>\n<p><strong>特殊</strong> 当你获得此专长时，选择一个你已击败且拥有吐息武器的怪物，并根据先决条件中“伤害类型”列表，为该吐息武器选择一种伤害类型，依据你击败过的怪物与收集到的遗物来决定。若该怪物的吐息武器造成多种符合条件的伤害类型，则从中选择一种。吐息武器的形状（锥形或线形）取决于你所选择的怪物。一旦你为吐息武器选择了怪物，除非对该专长进行重训，否则你无法更改该选择。</p>\n<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p>You incorporated a vestige into your gear from a creature with a breath weapon, such as a dragon's head on your shield, and you can make it breathe on your foes. You deal [[/r (@actor.level)d6[untyped]]]{1d6 damage per level} of a type of damage depending on the breath weapon of the monster you chose when you took this feat. The breath weapon affects either @Template[type:cone|distance:30|damaging:true] or a @Template[type:line|distance:60|damaging:true], with a basic Reflex save based on your class DC or spell DC, whichever is higher.</p>\n<p><strong>Special</strong> When you gain this feat, choose a monster with a breath weapon you've defeated and type of damage for the breath weapon from the list of damage types in the prerequisite, based on the monsters you've defeated and the vestiges you've collected. If the monster has a breath weapon that deals multiple qualifying damage types, choose one of them. The breath weapon's shape, cone or line, depends on the monster you chose. Once you choose a monster for the breath weapon, you can't change that choice without retraining this feat.</p>"
+    },
+    "Monster Mage Dedication": {
+      "name": "怪物法师奉献 Monster Mage Dedication",
+      "description": "<p>你已通过击败一只怪物并制作一个标记完成成为怪物法师的流程。标记是一种小型魔法容器，由怪物的一部分制成，使你能够储存怪物的魔法。选择你所击败怪物的一个先天戏法作为先决条件；你从那只怪物的身体制作一个标记，其中包含该戏法，并使用该怪物所用的相同根源。记录怪物的种类、该法术、该根源，以及对标记外观的简要描述。你通过从自己的标记中准备法术来施放法术；这些标记是你用制造标记行动从所击败的怪物身上收集而来。你的标记仅对你有效，你不能与其他施法者（即使是其他怪物法师）分享法术，也不能使用学习法术行动来学习更多怪物法师法术。你获得 @Compendium[pf2e.actionspf2e.Cast a Spell]{Cast a Spell} 施法（行动）。你每天最多可以从你标记中的法术里准备两个戏法（不过你起初只拥有一个，直到你击败另一只具有不同先天戏法的怪物为止）。无论这些法术的根源为何，你都在你能从标记中施放的法术的法术攻击掷骰与法术DC上受训，但你不会在你施放的其他法术的法术攻击掷骰与法术DC上受训。你的怪物法师变体法术的关键施法能力为感知，并且当你施放它们时，它们是由法术位施放的怪物法师法术，而非先天法术。你获得额外学识（技能）专长，并且必须选择一个与某种怪物相关的学识（技能）。你还获得 @UUID[Compendium.battlezoo-bestiary-pf2e.pf2e-battlezoo-actions.YUteSwXyhoAe63IN]{Create Token} 制造标记行动。</p>\n<p><strong>特殊</strong> 在你从怪物法师变体获得另外两个专长之前，你不能选择另一个奉献专长。</p>\n<p>You have completed the process to become a monster mage by defeating a monster and creating a token, a small magical receptacle created from a piece of the monster allowing you to store the monster's magic. Choose one of the innate cantrips from the monster you defeated for the prerequisite; you create a token from that monster's body which contains that cantrip, using the same tradition as the monster did. Write down the kind of monster, the spell, the tradition, and a quick description of the token's appearance. You cast spells by preparing them from your tokens, which you collect from the monsters you defeat using the Create Token activity. Your tokens only work for you, and you can't share spells with other spellcasters, even other monster mages, or use the Learn a Spell activity to learn more monster mage spells. You gain the @Compendium[pf2e.actionspf2e.Cast a Spell]{Cast a Spell} activity. You can prepare up to two cantrips each day from the spells in your tokens (though you only start with one initially until you defeat another monster with a different innate cantrip). You're trained in spell attack rolls and spell DCs with the spells you can from your tokens regardless of their tradition, but you don't become trained in spell attack rolls and spell DCs for other spells you cast. Your key spellcasting ability for monster mage archetype spells is Wisdom, and when you cast them they are monster mage spells cast from spell slots, not innate spells. You gain the Additional Lore skill feat, and must choose a Lore skill associated with a monster. You also gain the @UUID[Compendium.battlezoo-bestiary-pf2e.pf2e-battlezoo-actions.YUteSwXyhoAe63IN]{Create Token} activity.</p>\n<p><strong>Special</strong> You can't select another dedication feat until you have gained two other feats from the monster mage archetype.</p>"
+    },
+    "Vestige's Senses (Scent)": {
+      "name": "遗迹的感官（嗅觉） Vestige's Senses (Scent)",
+      "description": "<p>你从一个具有额外感官的怪物身上融入了一件残痕，赋予你那些你尚未从最初残痕中获得的感官。这通常以怪物的鼻吻被安置在你某件装备上的形态呈现。你获得不精确嗅觉，射程为30英尺。</p>\n<p>You incorporated a vestige from a monster with additional senses, granting you those you had not yet gained from your first vestiges. This often takes the form of the monster's snouts placed somewhere in your equipment. You gain imprecise scent with a range of 30 feet.</p>"
+    },
+    "Expert Monster Mage Spellcasting": {
+      "name": "专家怪物法师施法 Expert Monster Mage Spellcasting",
+      "description": "<p>你在使用你可以从你的标记中施放的法术进行法术攻击掷骰与法术DC时成为专家，无论其根源为何，但你在施放其他法术时不会在法术攻击掷骰与法术DC上成为专家。你获得一个4环法术位来施放怪物法师法术。在14等级时，你获得一个5环法术位；在16等级时，你获得一个6环法术位。</p>\n<p>You become an expert in spell attack rolls and spell DCs with the spells you can from your tokens regardless of their tradition, but you don't become an expert in spell attack rolls and spell DCs for other spells you cast. You gain a 4th-level spell slot to cast monster mage spells. At 14th level, you gain a 5th-level spell slot, and at 16th level, you gain a 6th-level spell slot.</p>"
+    },
+    "Vestige's Opportunity": {
+      "name": "遗珍的机会 Vestige's Opportunity",
+      "description": "<p><strong>需求</strong> 一个位于你触及内的生物使用操控动作或移动动作、进行远程攻击，或在其正在使用的移动动作期间离开一个方格。</p>\n<hr />\n<p>你将一份遗蜕嵌入了你的武器中，这份遗蜕来自某个懂得利用破绽的怪物，通常是该怪物用来进行徒手攻击的一部分。怪物的部位在战斗中会轻微抽动，而当敌人放松警惕时，它们就会发动攻击。对触发的生物进行一次近战打击。若你的攻击是一次大成功或大失败，且触发为操控动作，你便会扰乱该动作。此次打击不计入你的多重攻击减值，且你的多重攻击减值也不适用于此次打击。</p>\n<p><strong>Requirements</strong> A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p>You built a vestige into your weapons from a monster that knew how to take advantage of openings, typically a piece of the monster that it used to make unarmed attacks. The monster's parts twitch slightly during battles, and when a foe drops their guard, they attack. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn't count toward your multiple attack penalty, and your multiple attack penalty doesn't apply to this Strike.</p>"
+    },
+    "Taste of Their Own Medicine": {
+      "name": "自食其果 Taste of Their Own Medicine",
+      "description": "<p>由于连接你与标记的交感魔法，你的法术对你用来施放它们的标记所对应的生物格外有效。每当你以怪物法师法术对抗与你用来准备该法术的标记所对应的完全相同种类的生物时，你的目标在对抗该法术时，其AC与豁免承受-2状态减值。由GM酌情决定，若该生物非常相似但并非同一种（例如，蛇发女妖与蛇发女妖女族长可能足够相似，但不包括仅共同点是它们都是恶魔的两个生物），则目标在对抗该法术时，其AC与豁免可能承受-1状态减值。</p>\n<p>Due to the sympathetic magic connecting you and your tokens, your spells are particular effective against the creatures whose token you used to cast them. Whenever you cast a monster mage spell against the exact same kind of creature whose token you used to prepare that spell, your target takes a -2 status penalty to their AC and saves against the spell. At the GM's discretion, if the creature is very similar but not the same (for instance, a lamia and a lamia matriarch might be similar enough, but not two creatures whose only thing they share in common is that they are both demons) the target might take a -1 status penalty to their AC and saves against the spell.</p>"
+    }
+  }
+}

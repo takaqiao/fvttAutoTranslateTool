@@ -1,0 +1,88 @@
+{
+    "label": "牧师+ 法术 Clerics+ Spells",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Cursed Mark": {
+            "name": "诅咒之印 Cursed Mark",
+            "description": "<p><strong>触发 </strong>射程内的一个生物对你造成伤害。</p>\n<hr />\n<p>你将诅咒之力赋予目标，使其更易屈从。目标必须进行一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标在身上获得一道诅咒之印，持续 1轮。当目标身上带有此印时，它下一次进行的豁免必须掷骰两次并取较差的结果。该豁免之后，此印消失。目标可花费一个交互动作以移除此印。</p>\n<p><strong>失败 </strong>同成功，但印记持续 1分钟。</p>\n<p><strong>大失败</strong> 同失败，但目标必须至少花费 2 个交互动作才能移除此印。</p>"
+        },
+        "State of the Art": {
+            "name": "巧匠之造 State of the Art",
+            "description": "<p><strong>区域 </strong>每花费一个动作施放此法术增加若干立方体。</p>\n<hr />\n<p>你创造出执行任务的构造体。当你施放此法术时，以及在后续回合中你每次持续此法术时，每个 10尺立方体内会形成一个构造体，并执行你为它选定的动作。如果你花费多于 1 个动作来施放此法术，你可以在后续回合每回合多次持续此法术，每次为不同的构造体选择其动作。构造体所做的任何检定都使用你的法术攻击调整值。</p>\n<hr />\n<p><strong>分析构造</strong> 你的构造体尝试 @UUID[Compendium.pf2e.actionspf2e.BlAOM2X92SI6HMtJ]{搜索} 距其 30尺内的一个生物。如果它在搜索范围内成功察觉到一个生物，便能得知该敌人最高的弱点、调整值最低的豁免、其拥有的某项免疫，或最高的抗力。</p>\n<p><strong>蛮力构造</strong> 你的构造体尝试对距其 10尺内的一个生物进行 @UUID[Compendium.pf2e.actionspf2e.7blmbDrQFNfdT731]{推撞} 或 @UUID[Compendium.pf2e.actionspf2e.lOE4yjUnETTdaf2T]{移位}。</p>\n<p><strong>束缚构造</strong> 你的构造体尝试对距其 10尺内的一个生物进行 @UUID[Compendium.pf2e.actionspf2e.PMbdMWc2QroouFGD]{擒拿}。</p>\n<p><strong>烟雾构造</strong> 你的构造体在 10尺弥漫范围内喷出烟雾。烟雾内的所有生物变为 @UUID[Compendium.pf2e.conditionitems.DmAIPqOBomZ7H95W]{隐蔽}，且烟雾外的所有生物对烟雾内生物而言也变为模糊。每次你持续此法术并以该构造体为目标时，烟雾的弥漫范围增加 5尺。</p>"
+        },
+        "Mantle of Nobility": {
+            "name": "贵族披风 Mantle of Nobility",
+            "description": "<p>你披上你所效忠贵族的徽印，并伴随一小群幻象侍从。你呈现出贵族的相貌，使你的外交检定获得 +1状态加值，且在 5尺弥漫范围内出现一小群幻象信众。这些信众的群组视作人群，且形成困难地形。试图穿过该人群的生物可以尝试看穿你的幻象。可作用于人群的能力与效果同样可作用于你的幻象侍从。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.vOOBUyShmhdrQdaP]{效果：贵族披风}</p>"
+        },
+        "Virtue's Light": {
+            "name": "贤德之光 Virtue's Light",
+            "description": "<p>你高举圣徽，让它发出一道驱散邪恶与绝望的光芒。弥漫范围内所有邪恶生物对圣洁获得等同于法术环两倍的弱点。如果它们已具备对圣洁的弱点，则该弱点提高同等数值。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.qblHDaq9VTKUYQAQ]{效果：贤德之光}</p>"
+        },
+        "Ruler of Everything": {
+            "name": "万物统御 Ruler of Everything",
+            "description": "<p>你的魔法唤起王者威仪，使他人臣服跪伏。区域内所有敌人必须进行一次意志豁免。本身为贵族，或直接服侍贵族（如皇家卫队）的生物对此豁免获得 +2环境加值。无论结果如何，生物在 10分钟内对此法术暂时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功 </strong>该生物必须 @UUID[Compendium.pf2e.actionspf2e.HYNhdaPtF1QmQbR3]{倒地}。该生物可以花费其反应反驳你的贵族宣示，从而避免此效果。</p>\n<p><strong>失败 </strong>该生物必须倒地，且除非你或你的盟友对其采取敌对动作，否则它不能对你采取敌对动作。</p>\n<p><strong>大失败</strong> 同失败，但该生物在你或你的盟友对其采取敌对动作之前，或你与它距离超过 15尺之前，无法站起。</p>"
+        },
+        "Honorable Death": {
+            "name": "光荣赴死 Honorable Death",
+            "description": "<p>你让对手认清自身死亡的不可避免，并在你神祇的注目下赐予其英勇之终结。选择你自己或 30尺内的一个盟友，目标必须进行一次意志豁免。在此法术生效期间，被减至 0 生命值的生物会立即被杀死，其灵魂被传送至你神祇的领域成为幽魂或相应实体。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响，法术结束。</p>\n<p><strong>成功 </strong>如果目标在其回合结束前未对你或你所选盟友采取敌对动作，则它对一次基础意志豁免承受等同于此法术环两倍的精魂伤害，之后法术结束。</p>\n<p><strong>失败 </strong>同成功，但该生物在 4轮内每个回合结束时承受伤害。在每个回合结束时，它可以再尝试一次意志豁免以将剩余持续时间减少 1轮，大成功则完全结束。</p>\n<p><strong>大失败</strong> 同失败，但持续时间为 1分钟。</p>"
+        },
+        "Residual Bad Luck": {
+            "name": "残余厄运 Residual Bad Luck",
+            "description": "<p>你向目标灌入厄运的幻视，使其因怕失败而忐忑。目标必须进行一次意志豁免。</p>\n<hr />\n<p><strong>成功 </strong>目标不受影响。</p>\n<p><strong>失败 </strong>目标变为 @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧1级}。如果目标在其下个回合结束之前的某次攻击骰或技能检定中失败，那么该回合结束时它的惊惧状态不会减 1。</p>\n<p><strong>大失败</strong> 同失败，但目标变为惊惧 2。</p>"
+        },
+        "Repairomancy": {
+            "name": "修复术 Repairomancy",
+            "description": "<p><strong>触发 </strong>你能看见的一件物品即将获得破损状态。</p>\n<hr />\n<p>你让你目标的物品恢复原状。该目标物品恢复 5点生命值。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 恢复的生命值增加 5。</p>"
+        },
+        "If Walls Could Talk": {
+            "name": "墙若能言 If Walls Could Talk",
+            "description": "<p>你与遗迹通灵，轻松了解它们的久远过往。遗迹可以是一座废城、一栋鬼屋、一座废弃陵墓或其他类似的人造场所（由 GM 裁决）。如果在过去 1天内有人对重叠区域施过此法术，则此法术自动失败。GM 为遗迹掷一次秘密意志豁免，意志豁免调整值等于 4 加上区域内你不知晓的最高等级敌人、灵骚或无人物品的等级。</p>\n<hr />\n<p><strong>成功 </strong>遗迹不向你提供任何信息。如果遗迹将你视为不受欢迎之客，它可以对你的提问进行 @UUID[Compendium.pf2e.actionspf2e.ewwCglB7XOPLUz72]{说谎}（由 GM 裁决）。</p>\n<p><strong>失败 </strong>遗迹将答案低声告知你的脑海。你可任选一项：得知附近是否有敌人、灵骚或无人物品。遗迹不会给出准确细节或数量，但会告诉你大致方向以及你所选项目的力量大致感觉。</p>\n<p><strong>大失败</strong> 同失败，但你可以在生物、灵骚或无人物品中再多选择一项。</p>"
+        },
+        "Fall to Ruin": {
+            "name": "倾颓为墟 Fall to Ruin",
+            "description": "<p><strong>区域 </strong>4 个相连的 5尺方格的人造天花板、地板或墙壁。</p>\n<hr />\n<p>你呼唤时间的侵蚀力量，将人之造物化为废墟。你影响的每个方格根据其原本是天花板、地板或墙壁，分别获得下列对应效果。你可以持续此法术再增加 4 个相连的 5尺方格，但你不能以此法术对同一方格作用一次以上。这些效果在你施放后仍持续存在，但通常可在 10分钟内被修复。</p>\n<p><strong>天花板 </strong>天花板坍塌，对站于其下的任何生物造成 4d6 钝击伤害。</p>\n<p><strong>地板 </strong>地板老化失稳，变为困难地形。</p>\n<p><strong>墙壁 </strong>墙壁出现裂缝并易于崩塌。其硬度降至此法术环的一半。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 伤害增加 1d6，所需修复时间增加 10分钟。</p>"
+        },
+        "Divine Adjudication": {
+            "name": "神圣裁决 Divine Adjudication",
+            "description": "<p>你凝视敌人灵魂，搜索其对你神祇所犯下的罪孽。目标承受 1d8 精魂伤害，并必须进行一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响，法术结束。</p>\n<p><strong>成功 </strong>目标承受半额伤害，法术结束。</p>\n<p><strong>失败 </strong>你彻查对手的恶行，让神圣力量鞭挞其灵魂。目标承受全额伤害。如果目标在过去一周内对你的神祇犯下任何严重的禁忌行为（对极端行为甚至更早），你在 1分钟内对该生物的攻击骰获得 +1状态加值。</p>\n<p><strong>大失败</strong> 你的判决毫无悬念。同失败，但你造成双倍伤害。</p>\n<hr />\n<p><strong>升阶（+1）</strong> 精魂伤害增加 1d8。</p>"
+        },
+        "Planar Court": {
+            "name": "异界审庭 Planar Court",
+            "description": "<p>你将自己与目标传送至另一位面的法庭，对你对手灵魂的命运作出裁决。你与你的对手从场上消失，直到对手下一回合开始。这场异界庭辩对你与对手而言往往漫长而艰苦，但对其他人而言只在一瞬之间。你在异界审庭上指控目标犯下某项过错，并选择其一项属性作为补偿之惩罚目标，目标必须进行一次意志豁免。</p>\n<hr />\n<p><strong>大成功</strong> 你的指控不仅被驳回，反而在陪审团面前让你的灵魂受疑。你变为 @UUID[Compendium.pf2e.conditionitems.3uh1r86TzbQvosxv]{毁灭1级}。</p>\n<p><strong>成功 </strong>目标心满意足地离开异界审庭。它不受影响，法术结束。</p>\n<p><strong>失败 </strong>审庭裁定你的指控成立。审庭对你法术的目标加以惩罚，该生物在你持续此法术期间，对你所选属性的所有检定、DC 与豁免承受 –1 状态减值。</p>\n<p><strong>大失败</strong> 审庭严斥目标，宣告其无可辩驳之罪。同失败，但状态减值为 –2。</p>"
+        },
+        "Sacrosanct Promise": {
+            "name": "神圣誓约 Sacrosanct Promise",
+            "description": "<p>你与目标握手，承诺只要他们完成另一项行动作为交换，你便会完成商定之举。所宣布的行动通常是一句话能说清且有明确判定标准的事，比如「将这个箱子带去给客栈老板」或「黄昏时到码头来」。当某项行动被完成时，对方会立即知晓其完成，并对其下一次有助于完成自身宣告之事的检定获得 +1状态加值。如果不能明确判断行动是否完成，由 GM 裁定。当双方的行动都完成时，法术结束。</p>\n<p>如果你们任一方未能完成行动，对方在持续时间结束后会得知此事。在法术结束前，你不能恢复施放此法术所花费的聚能点。</p>\n<hr />\n<p><strong>升阶（7级）</strong> 状态加值提升至 +2。</p>"
+        },
+        "Liberator's Ferocity": {
+            "name": "解放者之凶 Liberator's Ferocity",
+            "description": "<p><strong>触发 </strong>一个对你拥有权威（无论是地位还是法律意义上）的生物即将对你造成伤害。</p>\n<hr />\n<p>你紧守解放的理念，抵挡冥土的召唤。对触发的攻击，你对所有伤害获得等同于法术环两倍的抗力；并在 1轮内，对触发该效果的生物的伤害获得等量的状态加值。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.zGMYLv9wqNV74xj8]{效果：解放者之凶}</p>"
+        },
+        "Hope Prevails": {
+            "name": "希望永存 Hope Prevails",
+            "description": "<p>你向目标生物倾注汹涌的希望，试图抚平其恐惧与忧伤。你立即将目标的 @UUID[Compendium.pf2e.conditionitems.TBSHQspnbcqxsmjL]{惊惧} 状态减少 2。如果这会使惊惧状态减至 0，且该状态由持续效果造成，你可以尝试对抗该目标所遭受的某一恐惧效果。你施放此法术所花费的动作数决定其目标、范围、区域和其他参数。</p>\n<p><span class=\"action-glyph\">1 </span>该法术距离为接触。</p>\n<p><span class=\"action-glyph\">2</span>  （专注）该法术距离 30尺。目标在 1分钟内对抗恐惧效果的豁免另外获得 +2状态加值。@UUID[Compendium.clerics-remaster.clerics-effects.Item.ePFN29cDDvUqLuQc]{效果：希望永存}</p>\n<p><span class=\"action-glyph\">3 </span>（专注）你在 @Template[type:emanation|distance:30] 范围内散播希望。这以爆裂内的所有生物为目标。</p>"
+        },
+        "Long Live the Revolution": {
+            "name": "革命万岁 Long Live the Revolution",
+            "description": "<p>在施放与持续期间你不间断地说话或歌唱。选择一项反叛行动，例如攻陷城堡、解放俘虏或摧毁纪念碑。注意到你言语、歌声或其他号召的目标必须进行一次意志豁免，否则会被激励参与你的反叛之举。你必须选择一项可以推翻权威，且作为目标的生物有可能共同完成的行动，否则法术自动失败。</p>\n<p>生物可以选择放弃意志豁免并直接接受失败的效果；与你反叛之举对立的生物（例如平民起义中君主的卫兵）对豁免获得 +4环境加值（由 GM 裁决）。</p>\n<p>每个进入你范围的生物在你持续此法术时都需进行一次豁免。豁免成功或解除此效果的生物在 1小时内对此免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响，且在后续回合中为范围内的生物对豁免提供 +1环境加值。该环境加值与其他大成功的生物所提供的加值可累计，最高累至 +4。</p>\n<p><strong>成功 </strong>目标不受影响。</p>\n<p><strong>失败 </strong>目标对反叛之举迷魂，且对完成你反叛行动的检定获得 +1状态加值。该目标对反对反叛行动者的态度降低一级。如果它目击到与之意见相左的言行，便可再次尝试一次意志豁免。如果其他生物对它进行外交或威吓检定并成功，该效果立即结束。</p>\n<p><strong>大失败</strong> 同失败，但对其使用外交或威吓的尝试不会结束此效果。</p>"
+        },
+        "From Thine Sight": {
+            "name": "脱汝之视 From Thine Sight",
+            "description": "<p>你让一件物品彻底隐形，除非生物具备你设定的特定特征。你让目标物品 @UUID[Compendium.pf2e.conditionitems.zJxUflt9np0q4yML]{隐形}，但对你设定的具有特定信念的生物例外；你必须设定一项可被某人合理持有的特征。比如，你可以设定黛丝娜的信徒能看见此物，但不能指定一位不存在或你不知晓的神祇的信徒（由 GM 裁决）。除此之外，此法术效果与「无形之物」相同。</p>\n<hr />\n<p><strong>升阶（+2）</strong> 你可以作为目标的物品体积上限增加 1。</p>"
+        },
+        "Heretic's Disguise": {
+            "name": "异端伪装 Heretic's Disguise",
+            "description": "<p>你将自身裹于神圣能量中，使你能行某些便宜之事，并让你在你神祇的敌人之中行走时不被识破。你改变你的服饰、物品以及外观的某些细节，使你看起来像是某一邪教、派系或组织的成员。你的幻象服饰与物品赋予你 +4环境加值，用于尝试假扮成该组织的成员；即便组织成员不认识你，他们通常也会给你一次自陈是新人或不知名成员的机会。如果尝试对你察言观色的生物属于你伪装所对应的组织，你的察觉 DC 对其察言观色获得 +2状态加值。</p>\n<p>如果你信奉某位神祇，你将能够在不引起神祇不悦或丧失能力的前提下进行违反典范与禁忌的行为，但你必须处于受胁迫或有被你神祇之敌发现的风险之下，否则你行为的正常后果照旧（由 GM 裁决）。</p>\n<p>@UUID[Compendium.clerics-remaster.clerics-effects.Item.q05kPdAVtyGYX90K]{效果：异端伪装}</p>"
+        }
+    }
+}

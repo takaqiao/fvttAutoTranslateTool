@@ -1,0 +1,8374 @@
+{
+ "segments": [
+  {
+   "i": 0,
+   "style": "Title",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Season of Ghosts GM Guide / FAQ: Book 2",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "674EA7",
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Frontmatter",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "link",
+     "text": "Landing Page",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://docs.google.com/document/d/1y-grtLgfJmWZKaKW65Q80AFPOaoWSDHzIeJR81XB6xs/edit?tab=t.0#heading=h.w236995f7j7g",
+     "anchor": null
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This guide has massive spoilers for the whole Season of Ghosts AP",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Throughout this document, I will use the standard colour system for rating encounters:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Great",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Good",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Average",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "ffd966"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Bad",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "e06666"
+     }
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Last updated: ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "2026/02/15",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Hardcover Remaster",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The new SoG ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "hardcover compilation",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://store.paizo.com/pathfinder-adventure-path-season-of-ghosts/",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " introduced a number of changes. This guide will be defaulting to the Remastered version of the AP but I may include some ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Legacy",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "c27ba0"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " notes, highlighted in magenta.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "❗ Warning – PF2e Rituals",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "There’s a big issue with ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Ritual rules",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Rules.aspx?ID=2255&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", which I need to warn you about immediately: They’re way too hard to cast, and the math skews results heavily toward failure.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Issue 1: ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Rituals are almost always designed on-level, but require a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Very Hard DC primary check",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", for example DC 24 to ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Open the Wall of Ghosts",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Rituals.aspx?ID=128",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " at level 4-5.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Issue 2:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Despite the primary caster already needing to roll really well, secondary casters provide +0 on a Success, ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "-4 on a Failure",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", and an effective ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "-14 (!!) on a Critical Failure",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Flavour-wise, it feels like a “secondary caster” should make a ritual easier. Mechanically, it is the opposite! If a single caster rolls poorly, the whole ritual will almost certainly fail.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Example:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " A sample level 4 party with +12 Primary, and +11/10/9 Secondary casters trying to Open the Wall of Ghosts only succeeds less than 30% of the time (and crit fails about 25% of the time).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "tl;dr",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " These ritual rules are awful. Paizo knows it, because the hardcover version has added a bandaid solution (Page 310): Reducing the DCs to cast a ritual by 2 to 5 with each repeated attempt.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 24,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This still makes the process an unsatisfying crapshoot of trial-and-error, and will average several fails and crit fails before a success. In the 5th-rank ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Transmigrate",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " ritual the PCs will cast at the end of Book 3, it still means ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "the entire fate of Willowshore could come down to just one bad d20 roll",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "!!",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 25,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I highly recommend the following houserules to rituals:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 26,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Secondary Casters provide a +2 / +1 / -2 / -4 untyped bonus",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " on a Crit / Success / Fail / Crit Fail.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    }
+   ]
+  },
+  {
+   "i": 27,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Hero Points can be used on ritual checks.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    }
+   ]
+  },
+  {
+   "i": 29,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "❗ Complex Hazards",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 31,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Complex hazards are theoretically one of the coolest things in the PF2 system – unfortunately, they’re often poorly used in adventures.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 32,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Complex hazards have the potential to be very exciting fight mechanics, which force your PCs to use tactics other than “beat up enemies until every health bar hits 0”. But, in practice, almost every complex hazard can be disabled with ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "1 skill check",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", which makes them extremely anticlimactic.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 33,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Especially in SoG, because Religion works on every single haunt in this book, and maxing out your Religion is kind of a no-brainer in this AP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 34,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Here is a mechanic I use in my games, which you can steal to make SoG more exciting:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 36,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Suppress Haunt (1a to 3a)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (concentrate)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 37,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Frequency",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " once per round",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 38,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Effect",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " You interact with an ongoing complex haunt to suppress it. Attempt a Religion check, or another appropriate check (GM discretion). At the GM's discretion, this may require you to be in a particular location, touch a particular object, or may gain other traits like manipulate or mental. The DC is determined by the number of actions:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 39,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(1a) Very Hard DC for the haunt’s level",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 40,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(2a) Standard DC for the haunt’s level",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 41,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(3a) Easy DC for the haunt’s level",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 42,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The GM may adjust the DC further for particularly effective or ineffective tactics.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 43,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Critical Success",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The party achieves 2 Suppression Points (SP).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 44,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Success",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The party achieves 1 SP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 45,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Failure",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " You fail to suppress the haunt.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 46,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Critical Failure",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The party loses 1 SP. If the party already had 0 SP, you instead take a -2 circumstance penalty to your AC or saving throw against the haunt’s next ability.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 48,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Since ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "stealing this from ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": true,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Doomsday Dawn",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": true,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://pathfinderwiki.com/wiki/Doomsday_Dawn",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " inventing this a few years ago, I’ve truly used it in every single campaign I run. The difficulty can be adjusted as follows:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 49,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "For an ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "ordinary",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " haunt (for example, ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "E3: Main Hall",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_mkgmin2qsbob"
+    },
+    {
+     "kind": "text",
+     "text": "), disable it at 2 or 3 SP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 50,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "For a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "challenging",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " haunt, disable it at 4 or 5 SP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 51,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "For the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "most difficult",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " and unique haunts (for example, on boss fights, or the haunt ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Within the Wall of Ghosts",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_fq6jabmynjo3"
+    },
+    {
+     "kind": "text",
+     "text": "), the haunt cannot be permanently disabled. Instead, the haunt is weakened for 1 round when it reaches 1 SP (e.g. -2 or -4 to its attacks or DCs), or disabled for 1 round when it reaches 2 SP. It resets its SP to 0 at the start of its turn.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 52,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "These most powerful haunts can only be deactivated permanently by achieving some other objective in the encounter, but Suppress Haunt will still help the PCs defend against it.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 53,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "It is important to avoid confusion or a feeling that the encounter is “unfair” or “there’s nothing we can do”, so explain the mechanic clearly and openly!!",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 55,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Chapter 1 – Downtime and Weekly Events",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 60,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Pacing – Avoid Too Much Filler!",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 62,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Unlike Book 1, Book 2 opts for a series of “Weekly Events” to give you enough sidequests to fill all 3 months of fall.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 63,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Some players will love every weekly event, some will start to feel like it’s filler. YMMV.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 64,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Personally, I think these events work really well at the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "start",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " of the book, slowly building tension, and providing small distractions as the players research the Open the Wall of Ghosts ritual and earn necessary Preparation Points.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 65,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "However, sometime in Week 4, 5, 6, maybe 7, your PCs will inevitably finish their research and leave for the Monastery, where they will find ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "THE BIG REVEAL",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " that is the crux of this AP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 66,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "After coming back from this, with new, earth-shattering information and several leads swimming in their head, the book seems to expect you to….. go back to downtime and keep running Weekly Events until Fall is done. 🤔",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 67,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "IMO this makes for terrible narrative pacing, and I’d recommend considering a time skip (see below).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 69,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Cutting Events",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 71,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Before starting Fall, it may be a good idea to look ahead at all the weekly events and only pick your ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "6-8 favourites",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " ahead of time. Instead of forcing your players to grind through all 12 of them, just skip through some weeks here and there.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 72,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you do, you can rearrange and run them in any order.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 73,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Remember: the Pilgrim's Path and Monastery are the meat of the book and essentially the climax of the AP",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ". They contain the best encounters, and hugely thematic plot and reveals. ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Chapter 2 and 3 will be the longest single “arc” your players experience in the whole AP!",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 74,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I chose to run Haunted Hair, Missing Corpse, and First Long Night before my PCs opened the Wall of Ghosts. Upon returning from the Monastery, the party learned about the Stable Fire and Vanishings that had happened in their absence (getting some opportunity for fun investigation), and then experienced the Faceless Ghost event in one of the last weeks of fall.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 75,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Vanished NPCs can potentially return as trapped souls in Book 4, so choose wisely!",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 77,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Optional: Time Skip",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 79,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "When the PCs travel up the Pilgrim’s Path, they are in a parallel mindscape. You can use this opportunity to introduce time dilation – e.g. while they are only gone 1 week, 1 to 2 months pass in Willowshore.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 80,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "In my case, I did a literal time skip – when they emerged from fighting Xin Yue, time had “slipped” and it was suddenly late fall, with snow falling around them.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 81,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This allowed my party to leave Willowshore in Week 4 of Fall and return in Week 11! Thus I could transition from the Monastery into Book 3 without too much delay.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 83,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Chapter 2 – Pilgrim’s Path",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 87,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "General",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 89,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "You can fudge the moon cycle required for Open the Wall of Ghosts to anything.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 90,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Level 5 is a huge breakpoint in PF2e. If your players don’t hit 5 before entering the Wall of Ghosts, they will be at a significant disadvantage! Beware.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 91,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "At the 3 Shrines on the Path, the PCs gain +1 Item bonuses to their saves for the rest of Act/Book 2. This is like getting free Resilient runes 3 levels early, and makes a fairly noticeable difference in the PCs’ power at the Monastery.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 92,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you use ABP, you might as well let them keep the Shrine Blessings after the book since +1 Saving Throw Potency kicks in at level 8 anyway.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 94,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Foreshadowing",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 96,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Pilgrim’s Path is the moment to really start ramping up the themes of the AP with hints and foreshadowing",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 97,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Bridge, Garden, and Mountain shrines represent the pilgrims’ ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "past",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "future",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", and ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "present",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " lives, respectively. (Page 117) ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "(Legacy: Page 31)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "c27ba0"
+     }
+    }
+   ]
+  },
+  {
+   "i": 98,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "There are significantly more temporal anomalies and other magical events here than in Book 1 to hint at the big plot twists.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 99,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Some encounters, like the one inside the Wall of Ghosts, are almost ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "entirely metaphorical!",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 100,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Remember that, as a general rule, players understand plot or “guess” twists far less accurately than GMs think they do – you can probably be more blunt and obvious than you realize.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 101,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Also remember that it’s ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "ok",
+     "fmt": {
+      "bold": true,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " if some players predict your reveal – this just means your foreshadowing was good. Be confident and stick to the plan.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 103,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Within the Wall of Ghosts",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 105,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Dangerous but awesome, 10/10 flavour.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    }
+   ]
+  },
+  {
+   "i": 106,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The haunt has a fairly high Reflex DC of 22 and hits the whole map. Any characters that hit Dying (especially if they are Wounded from the Vulture fight) can very quickly die on subsequent rounds (with a -4 to Reflex for being Unconscious).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 107,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Even the check to suppress the haunt has a DC of 23, which level 5 players may struggle with.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 108,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Sidebar - Haunt Mechanics",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_4kpk55o53n30"
+    },
+    {
+     "kind": "text",
+     "text": " for my haunt suppression houserule",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 109,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "At 1SP, disable the roar. At 2SP, lower the Reflex DC by 4 for 1 round. This haunt can’t be disabled with skill checks, even temporarily.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 110,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Disabling it requires carrying the heart to the corpse, which will take at least 3 rounds for most characters.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 111,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I suggest erring on the side of ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "overexplaining",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " the mechanics here – if your players don’t know what’s happening (especially if they’re new and don’t recognize a complex hazard), they could easily spend a couple rounds fumbling and get into a death spiral.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 112,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This encounter is super cool and thematic – one of the most memorable in the AP. Just be careful to avoid a TPK with what may feel like a “confusing” or “unfair” mechanic.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 114,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Serpent Ambush",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 116,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Filler but decent. Focus on threatening Enko to make it more interesting.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 117,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The amphisbaenas can overperform because of their Twin Bites and poison.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 118,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you just tunnel vision on attacking players, this will feel quite dull. Send 1 snake after Enko to make them scramble to protect their kappa friend.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 119,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Make 1 Amphisbaena Elite (send the weaker one after Enko). The pair is now an adult + juvenile.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 121,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Bridge Shrine",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 123,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Good flavour, but anticlimactic if just 1 check disables haunt.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 124,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Sidebar - Haunt Mechanics",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_4kpk55o53n30"
+    },
+    {
+     "kind": "text",
+     "text": " yet again. I recommend 3-4 SP to disable this.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 125,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " I also used 2 of the leech swarms.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 129,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Hungry Foliage",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 131,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: It’s a filler encounter, but don’t underestimate their (surprisingly nasty) stat block. Play up the flavour and it can still be fun though.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 132,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Mandragora",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Monsters.aspx?ID=4471&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " is an odd creature, having an extremely high ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "DC 25",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (!!) AoE ability at only CL 4. Be prepared that, statistically, your whole party will fail or crit fail.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 133,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Their melee capability is nasty too. This encounter, written as ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "“Low”",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", can easily feel Moderate or Severe in practice.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 134,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Play up the flavour. Mandragoras are plants ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "watered with the blood of a fiend",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " to grow into monstrous shapes – obvious parallel to the Tan Sugi and Shadow of Kugaptee.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 136,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Girl in the Tree",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 138,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Cool “social encounter”, will probably be a bit anticlimactic if players just fight her on the spot.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 139,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This will play completely differently depending on how you and your party roleplay the “deception”. Ultimately, an Elite Penanggalan is a bit dangerous, but shouldn’t pose too much of a threat alone.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 140,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " make it harder to find clues about her (e.g. Perception only reveals “she’s hiding something beneath her collar”, not the full scar) and try to convince the party to take her to the Garden Shrine. Together with the Combusted, this will be a high Severe / low Extreme, but you can delay her activation by a few rounds to stagger the danger. (or remove her Elite adjustment)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 142,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Garden Shrine",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 144,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Excellent flavour, great mechanics with the incense and rain. Will be quite easy if players combine all the special “mechanics”.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    }
+   ]
+  },
+  {
+   "i": 145,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The caretakers are Slowed by incense and Sickened by rain. Having rain + burning creatures in the same fight is a very intuitive mechanic that everyone should understand.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 146,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendation:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " make the fire damage on the caretakers’ attacks and abilities higher, but have the rain grant Fire resistance 5 and automatically extinguish persistent fire damage. This will create a more dynamic and tactical encounter.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 147,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The caretakers look like normal charred corpses (Deception DC: 22). Entering their reach triggers a reaction where they attempt to Grab you – then roll initiative and try to burn grabbed players to death.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 149,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "A Voice In the Fog",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 151,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Will-o’-Wisps suck. I don’t understand how they survived the Remaster.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "e06666"
+     }
+    }
+   ]
+  },
+  {
+   "i": 152,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Will-o’-Wisps’ magic immunity is a tremendously unfun mechanic for casters, and being Invisible isn’t exactly great for martials either.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 153,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendation:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Replace this with a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Chouchin-Obake",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Monsters.aspx?ID=1351",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " for a stat block that’s much more fun, and thematically fitting for the AP. Beware that this creature can really punch above its XP weight because of its high stats, nasty aura, and reaction.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 154,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " I ran this with 2x Weak Chouchin-Obake, disguised as lanterns hanging on a tree along the path. This is a Moderate encounter that feels much more like a Severe.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 155,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "A Whisper in the Woods",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 157,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: I didn’t run this, but it seems like a decent filler encounter that’s more about the flavour than the mechanics.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "b7b7b7"
+     }
+    }
+   ]
+  },
+  {
+   "i": 158,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The taunting Skull has a strong attack and gets to Strike as a reaction, but as a solo PL+1, it should ultimately die pretty quickly.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 160,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Mountain Shrine",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 164,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Highly flavourful and unique encounter that can get very frustrating or borderline unfair depending on party comp and tactics.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 165,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Iogaka has nonmagical flight, a 30-ft ranged attack, and can fly even in strong winds.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 166,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "At level 5, there is ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "virtually no counterplay",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " to that for many parties, and melee players will simply have to resort to ranged attacks (which, on top of being inherently worse for them, also get a -2 from the storm).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 167,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Swimming requires a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "DC 25",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (!!) Athletics, which isn’t easy even for high-Str Expert-proficiency swimmers. Untrained PCs will literally drown attempting this.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 168,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If she is played 100% optimally, Wall of Wind can even disable the players’ ranged attacks, as she just floats behind it, blasting from complete safety.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 169,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Caveat: There are two major hints that were planted earlier for this fight:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 170,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "1) Iogaka is Sickened by Incense (pg 119) (Legacy: pg 33)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 171,
+   "style": "normal",
+   "list": 2,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Unfortunately, in practice, the incense is almost impossible to use given her Fly speed and the high winds, which seems almost like the encounter designer trolling you.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 172,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "2) ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "(Legacy)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "c27ba0"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The Anchor Feather Token can stop the raft from moving (pg 30)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 173,
+   "style": "normal",
+   "list": 2,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I give it 70% odds your party completely forgets they have this token.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 174,
+   "style": "normal",
+   "list": 2,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This was also removed in the hardcover, giving the party no option to use it at all! Whoops! 🙃",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 175,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "love",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " the setup of challenging players with stormy weather, and stranding them in the middle of a raft on the lake, needing to find a creative solution to the encounter – but it’s easy for it to become a “no-win” situation where Athletics is useless, the rope is severed, and their ranged options all suck. This can turn unfun (or even TPK) very very quickly.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 177,
+   "style": "Heading 3",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendations",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 179,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Lower the Swim DC to 15 or 20 (and/or use more creative mechanics, like allowing players to grab the long dangling rope after the pulley breaks). Otherwise, the encounter will likely play out in a fairly static manner as your players simply won’t be able to move.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 180,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Then, if your party doesn’t have a lot of ranged damage, either:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 181,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "A) encourage them to “lure her in” by seeking shelter in the cave, on the stairs, or amidst trees",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 182,
+   "style": "normal",
+   "list": 2,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you do, make sure the Swim DC is actually possible for them.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 183,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "B) Plant some sort of consumable(s) earlier on the Path to let them deal with the Flying problem – scrolls of ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Earthbind",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=94",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " or Fly, ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Emerald Grasshoppers",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Equipment.aspx?ID=2972&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", etc",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 184,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Making Iogaka more “fair” in this way also allows you to make her stronger! Give her more spells, starting with 3x ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Rank 2 ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Thunderstrike",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1721",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 185,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Extra Challenge",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "f6b26b"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " – I added even more spells:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 186,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "1x ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Erratic Wisp",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Floating Flame",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1533",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " reflavoured to air / bludgeoning)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 187,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "1x ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Crackling Lightning Bolt",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (Like the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "wand",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Equipment.aspx?ID=3424&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", a 10-ft wide Lightning Bolt that applies Off-guard. She opens combat with it for a flashy and powerful Round 1)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 188,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "1x ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Pressure Zone",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1318",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " (This is a 5th-rank spell, but it deals no damage. If you reduce range to 60ft and area to 15ft burst, it’s completely fine at this level)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 190,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Fourth Shrine",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 192,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Redesigned Pilgrim’s Rewards: ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "https://imgur.com/a/65xcBTn",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://imgur.com/a/65xcBTn",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " and ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "JSONs for Foundry",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://drive.google.com/file/d/1N8yN6bj08qQxIZbjwZdLpYmjzB3rd8-L/view?usp=drive_link",
+     "anchor": null
+    }
+   ]
+  },
+  {
+   "i": 193,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "These are fairly high-powered items, stronger than most Level 7s. But this is basically the climax of the AP, and I wanted cool, thematic rewards that would stay relevant for most of the campaign. 🤷‍♂️",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 194,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The reward chest appearing out of nowhere is yet another hint toward the mindscape.\n",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 195,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Tan Sugi Monastery – General",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 199,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Overall, the Monastery fights are not as difficult (for their level) as the Pilgrim’s Path.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 200,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Especially because there is no time pressure to do 3 encounters in 1 day, and the PCs can retreat and rest at almost any point.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 201,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Monastery is also the first real open-ended “dungeon” the players have experienced! After the scripted Weekly Events, and the completely linear nature of the Pilgrim’s Path, ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "play up that freedom!!",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Let the PCs go in any direction they wish, try weird stuff, or even “sequence break” the dungeon.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 202,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Monastery environment physically changes throughout the four purifications (Page 131) (Legacy: Page 44) – emphasize how creepy and dilapidated it is initially, to create a noticeable contrast.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 204,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Zhi Hui’s Answers",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 206,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Purifying shrines lets the party summon Master Zhi Hui to answer a limited amount of questions before she disappears. This is a fantastic setup! It trickles information and gives a story reason to clear most of the encounters.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 207,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "However, I ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "really",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " don’t like the presentation of her answers on Pages 364-365 (Legacy: Pages 92-93). Simply asking “what is the Willowshore Curse” makes her ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "immediately",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " reveal the Mindscape, which I find to be extremely anticlimactic. 😐 All my GM instincts say that the big reveal should be saved for before / during the big boss encounter.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 208,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "As such, I had Zhi Hui stick to answers about Kugaptee and the Monastery, and only revealed the big twist in a final scene just before Xin Yue (see below).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 210,
+   "style": "Heading 3",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Four Statues",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 212,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "There’s actually no obvious hint to purify the four statues. If your PCs don’t intuit it on their own, feel free to narrate: “you feel a warm presence trying to communicate, but it’s being blocked out by a dark spiritual energy”. If they need it even more bluntly, just say “make a Religion check”. 🤷‍♂️",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 213,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Pharasma (E5), Tree (E3), and Kodama (E2) statues already have pretty satisfying challenges and gameplay hooks, almost turning them into short quests.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 214,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I changed the Stag statue (E12) to also be decapitated, with the head in the Guhdggi’s treasure pile (E9). This also creates a narrative reason to visit the Dorms and see the cool frog nindoru.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 216,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Big Reveal",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 218,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Actual Play Video: ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "https://www.youtube.com/watch?v=T3-h1jO8Ud0",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://www.youtube.com/watch?v=T3-h1jO8Ud0",
+     "anchor": null
+    }
+   ]
+  },
+  {
+   "i": 219,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I wanted to accomplish several things here:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 220,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Present the two massive reveals of the AP at a dramatically appropriate time. ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 221,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Unambiguously answer several hanging plot threads to clear up any confusion.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 222,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "More payoff for the Open the Wall of Ghosts ritual.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 223,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Introduce Xin Yue in a cool way.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 224,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I chose to do this with a final scene where the PCs help Zhi Hui dispel a “mini Wall of Ghosts” before the final chamber.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 226,
+   "style": "Heading 3",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Optional Narrative Sidebar: Combining the Two Reveals",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 228,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This is a complex and somewhat controversial decision, but I chose to move the “You are actually dead” reveal here, slightly ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "earlier",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " than where it normally happens in Book 3.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 229,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "My reasoning for this was that I simply did not think my players would believe the explanation “you are alive and have simply been stuck in a time loop” – the first two books have way too many hints about death, ghosts, reincarnation, etc.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 230,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I also think that, compared to the climactic buildup and payoff of the journey to the Monastery (and all the fighting required to reach Kugaptee’s Grave), the 2nd reveal – merely taking place in a conversation with the Governor – simply lacks the same punch.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 231,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "So even if my players did not guess the 2nd reveal immediately, it could still turn out to be a fairly underwhelming follow-up to the 1st one.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 232,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I also couldn’t wait to get to the Shinzo conversation in Book 3, and this let me move it several sessions earlier. 🙂",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 233,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you don’t want to change this, there’s nothing wrong with running the reveals as written. This is a highly individual decision I leave to each GM.\n",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 234,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Tan Sugi Monastery – Overall Creature Balance",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 236,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "There are four types of nindoru in the Monastery: Meokdans (CL 2), Sojiruh (CL 4), Guhdggi (CL 5), and Ijda (CL 6).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 237,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Since the PCs should be Level 6, this creates a weird dynamic where the dangerous, scary fiends that have been foreshadowed for 1.5 books are actually… almost all lower level than the PCs, and may feel somewhat underwhelming.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 238,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Furthermore, the Monks of Kugaptee are also Level 6 Creatures, but they are ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "incredibly",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " overtuned (see below) and will easily overshadow the nindoru – which feels like another mechanical flavour fail.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 239,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendation: ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Rescale the creatures like this. Use Weak and Elite adjustments, or see below for more advanced breakdowns.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 240,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Meokdan 2 (unchanged)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 241,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Sojiruh 4 (unchanged)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 242,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Kurobozu 5 (lowered by 1)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 243,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Guhdggi 6 (increased by 1)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 244,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Ijda 7 (increased by 1)",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 245,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "link",
+     "text": "Foundry JSONs",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://drive.google.com/file/d/1i3N-CbIZ1gTb1wqZ4FcVHLTitzPNQ_gU/view?usp=drive_link",
+     "anchor": null
+    }
+   ]
+  },
+  {
+   "i": 246,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "IMO this fits the intended flavour more (the monks should not be scarier than the fiends!), and creates several “miniboss” encounters with the Guhdggi and Ijdas.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 249,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Holy vs Unholy",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 251,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Nindoru are in weird design middle ground, where they have the unholy trait like other fiends, but don’t have a holy weakness.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 252,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This sort of makes sense flavour-wise, since nindoru are Material Plane fiends and overall do feel “less unholy” than demons or devils.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 253,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The problem is, most holy effects don’t actually gain any additional damage against unholy creatures. Holy strikes from a champion, angel eidolon, or ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Infuse Vitality",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1574",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " buff don’t do anything special against nindoru. Holy-sanctified spells like ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Spiritual Armament",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1687",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " or ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Divine Wrath",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1499",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", likewise, affect a nindoru or a human exactly the same. Overall, this can definitely be very confusing and disappointing to some players.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 254,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Only a few effects in the game, like ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Holy Light",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=1557&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", can take advantage of the unholy trait without a weakness.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 255,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Optional:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " I changed all the nindoru by ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "adding a Holy weakness",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (equal to their Silver weakness), which made fighting them simpler and cooler. YMMV.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 256,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Increase their HP by at least 2-4x the Weakness value to compensate.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 258,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "❗ Monks of Kugaptee (variant Kurobozu)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 260,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Oh boy. 😬",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 261,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "kurobozu",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Monsters.aspx?ID=1215",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " is already an absurd stat block. It has ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "high Athletics, high AC, high atk,",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Rules.aspx?ID=2874&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " it’s fast, it has Flurry of Blows + Stunning Fist, and a total of ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "FIVE",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " (!) abilities on its stat block that force a saving throw.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 262,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "An on-hit DC 24 Fort that causes Stupefied absolutely ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "destroys spellcasters",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 263,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Stunning Flurry and Brawling Critical can lead to death spirals where you simply cannot do anything against these creatures if they roll well.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 264,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Overall, they put out lots of damage and debuffs, and aren’t easy to kill either.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 265,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "And then… Paizo decided to ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "buff their stat block in the Hardcover version.",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 266,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The new “Monks of Kugaptee” have +2 to their Brawling Critical DC, and their fist damage has gone from 1d6+8+1d4 to 2d6+8+1d6… an increase of more than ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "30%!",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 267,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I have no words for this except that it is a colossal balance mistake.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 268,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Even 1 of these (E14) can be tough. Fighting 2 (E4) is brutal. Fighting 3 (E6) is suicide.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 269,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendation:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Use the legacy kurobozu, remove Brawling Critical, AND add the Weak adjustment. Then, try to avoid most or all of the fights with RP. (see E4 below)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    }
+   ]
+  },
+  {
+   "i": 271,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Guhdggi",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 273,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "love ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "this creature. The art of the guhdggi got more excited and visceral reactions from my players than almost anything else in the whole AP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 274,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Sadly, maybe it’s just bad RNG, but the guhdggi has failed to do anything for me both times I’ve used it. Unlike the kurobozu, which has a million passive and “on-hit” effects, perhaps the guhdggi is too “fair”.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 275,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Recommendations: ",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Start with Elite adjustment.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 276,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "15ft speed is just too low. If the Giant Toad has 25ft, this can too.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 277,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The breath weapon is also too small and should be a 30ft cone.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 278,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Remaster Grab is actually a nerf to Swallow Whole creatures. I recommend using the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "legacy Grab",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://pf2easy.com/index.php?id=5270&name=Grab",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " rules to make Cage Prey a bit more likely to land.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 279,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "link",
+     "text": "Lose the Path",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Spells.aspx?ID=940",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " at-will (mostly for flavour… it’s the Wandering Nindoru!)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 281,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Ijda",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 283,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "These large nindoru are SO cool and I really wanted them to feel like Elden Ring bosses",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 284,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Slow aura and AoE confusion ability on this are already fairly strong, but I still buffed them further to CL7. Present this fight as a “miniboss”; don’t just spring it on your party.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 285,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "+1 to all stats and DCs except attack.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 286,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Change strike to “Ruined Great Katana”: Remove the deadly trait, increase reach to 15ft, increase slashing dice to d12s.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 287,
+   "style": "normal",
+   "list": 2,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Massive Blade:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " The broken katana the ijda wields is so massive that it cannot make Strikes against the same target more than once per turn.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 288,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Weakness holy 7, silver 7, increase hp by 20 to 40",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 289,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "They already have the RAW combo of Athletics (Disarm) + Shatter, but if you really want this to be extra spicy:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 291,
+   "style": "normal",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(I run with ABP so losing a weapon is not that bad. YMMV)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 293,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Tan Sugi Monastery – Locations",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 295,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E2: Courtyard",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 297,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: This isn’t really an encounter, since it’s solvable with very basic RP.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 298,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If you want to keep the flavour, but also get a bit of a fight out of this:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 299,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Have the phantom leopard (CL 6-7, e.g. Weak ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Phantom Beast",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Monsters.aspx?ID=3136&Redirected=1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ") attack Yuni, recreating the circumstances of her death.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 300,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Yuni does not attack directly, but gains the Share Pain reaction:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 301,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If she is saved from the leopard, the fight ends, and you get the same touching moment.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 303,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E3: Main Hall",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 305,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Cool fight, as long as the tree haunt lasts more than 1 round.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 306,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Sidebar - Haunt Mechanics",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_4kpk55o53n30"
+    }
+   ]
+  },
+  {
+   "i": 307,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Normally I would roll my eyes at the inclusion of PL-4 enemies, but here it’s actually neat to see the Ittan-Momen again – the PCs have gained 4-5 levels since their fight with Gray Butcher, and it will be a cool moment to feel that power increase.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 309,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E4: Infirmary",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 311,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: The kurobozu are extremely cool, creepy, thematic undead. But their stat block is absolutely miserable. I recommend avoiding this via an RP scene similar to E6.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "ffd966"
+     }
+    }
+   ]
+  },
+  {
+   "i": 312,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Kurobozu",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_6rpjygc2fyb"
+    },
+    {
+     "kind": "text",
+     "text": " for my recommended nerfs.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 313,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I rewrote this room as 4 heavily damaged kurobozu lying in the infirmary, asking for someone to “heal their wounds”.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 314,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If the PCs help them with Medicine (or even Deception), they answer a few questions and then crumble to dust, just like in E6.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 316,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E5: Pharasma’s Shrine",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 318,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Decent introduction to the sojiruh.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 319,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Start the sojiruh with their armor manifested (it’s permanent) so they don’t have to waste actions on round 1.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 320,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "As written, these are the only sojiruh the PCs see until Xin Yue Phase 2 – try to use this room to deliver lore and hints about what they are (individuals who deliberately turned their backs on the cycle of reincarnation).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 321,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "[Aside: Wow, that Pharasma statue art is…….. weird]",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 323,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E6: Refectory",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 325,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Great RP scene",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    }
+   ]
+  },
+  {
+   "i": 326,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "3 kurobozu is a brutally, almost impossibly difficult encounter – see ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Kurobozu",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_6rpjygc2fyb"
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 327,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Fortunately, this is not an encounter, as long as your players have basic RP instincts.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 328,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Instead of just 1 cryptic hint, I let each PC make a check related to the tea ceremony, and then let the party ask 1 question for each Success they got.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 330,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E7: Kitchen",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 332,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Gross. Great haunt.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    }
+   ]
+  },
+  {
+   "i": 334,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E9: Dorms",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 336,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: I love the guhdggi but it’s underperformed every time.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 337,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Guhdggi",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_2sn0rejnmjt1"
+    },
+    {
+     "kind": "text",
+     "text": " for my recommended changes.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 338,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Meokdans are pretty basic CL2s, but fine as minions in an encounter like this.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 339,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I moved the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "stag shrine’s head",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_3g5blvj8ln9"
+    },
+    {
+     "kind": "text",
+     "text": " here, to connect this room to the plot a bit more.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 340,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "If your players ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "somehow",
+     "fmt": {
+      "bold": true,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " fall for the “soup trap”, this becomes an S-tier encounter. 💀",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 342,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E10: Library",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 344,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: I love the Ijda to death. The visual of these towering Dark Souls bosses smashing the library apart with their giant katanas is awesome.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "6d9eeb"
+     }
+    }
+   ]
+  },
+  {
+   "i": 345,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "See ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Ijda",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_jq9q9uifcn7j"
+    },
+    {
+     "kind": "text",
+     "text": " for my recommended changes.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 346,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Ijda start the scene by asking PCs questions – but if PCs are within 30ft, they are also affected by Aura of Forgetfulness, and ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "may not remember the answers!",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 347,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This is a great RP moment, and depending on how well your PCs resist, you can grant them larger and larger advantages to start the fight, as the Ijda are shocked and slow to react (the book just recommends them rolling initiative with +0)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 349,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E12: Burial Garden",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 351,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Filler encounter.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "ffd966"
+     }
+    }
+   ]
+  },
+  {
+   "i": 352,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Sometimes you need a filler encounter to defuse tension, but sometimes it’s also okay to cut it. I did.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 354,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E13: The Tan Sugi",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 356,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: 11/10 potential but this fight is rather underwhelming as written.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "ffd966"
+     }
+    }
+   ]
+  },
+  {
+   "i": 357,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Chewer has one of the coolest arts in the AP. He has a unique name. He is in one of the coolest locations in the AP – the Tan Sugi that has been foreshadowed for 2 books.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 358,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "And his stat block is just a generic kurobozu with a buffed melee attack. 😐",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 359,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Adding a random spider does not make this better.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 361,
+   "style": "Heading 3",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Chewer V2 – A New Boss Fight (Severe 6)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 363,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I chose to reimagine the Chewer as the lead woodcutter, who had swung the axe at the Tan Sugi and was instantly slain by the spiritual backlash.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 364,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(This is not canon, but doesn’t really affect anything else)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 365,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Since his death, the axe has become a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "+1 striking vitalizing battle axe",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", and the chewer gains a special Axe Vulnerability ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "(see below)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    }
+   ]
+  },
+  {
+   "i": 366,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I literally placed a loot token on the map as an ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "obvious",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " hint:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 367,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Chewer is now a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Bodak",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Monsters.aspx?ID=573",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " – the flavour already fits perfectly with the Chewer’s art!!",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 368,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "“These eyes, sunken deep into their sockets, nevertheless glow with an unholy light, stare with unremitting malevolence, and constantly weep noxious vapor.”",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 369,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Chewer becomes Large and gains 10ft reach.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 370,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Add a Temple Sword attack (+18, 2d8+6 slashing plus 1d6 void).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 371,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Chewer loses the bodak’s holy weakness, loses Sunlight Vulnerability, gains vitality weakness 8, and gains ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Axe Vulnerability",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ":\n",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 372,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The mechanic here should be pretty intuitive as long as you describe the scene well, but you can have Yen Rui, Zhi Hui, or even the kurobozu plant this hint too.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 373,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "On Round 2, Kugaptee additionally animates the tree – use the same ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Kugaptee’s Anger",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Hazards.aspx?ID=427",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " haunt from the Wall of Ghosts encounter, only now it can be disabled with 3 Successes (see ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "PF2e Haunt Mechanics",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_4kpk55o53n30"
+    },
+    {
+     "kind": "text",
+     "text": ")",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 374,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Optionally, withdrawing the axe from the tree makes Kugaptee roar in pain, suppressing the haunt for one round",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 375,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(The spider is completely removed)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 376,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This is a pretty tough encounter, but your players should ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "know",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " it’s dangerous if you’ve done your job as a GM. They will prepare, prebuff, and hopefully intuit the axe mechanic ahead of time. They will probably also expect the tree haunt since it’s happened twice before.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 377,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "As a small bonus, retreat is possible since a Large creature has trouble pursuing through the small archways that surround the courtyard.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 379,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E14: Storage Room",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 381,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict: Decent fight.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 382,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "You can’t avoid this kurobozu fight, but there’s only one of them. The Hell Hounds have a fun tendency to “chain reaction” if they can breathe on each other.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 384,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E15: Treasure Chamber",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 386,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Before the PCs breached the final barrier, I did an additional scene, which led up to the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "major Mindscape reveal",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": null,
+     "anchor": "_ui72snn7fcq0"
+    }
+   ]
+  },
+  {
+   "i": 388,
+   "style": "Heading 1",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "E16: Kugaptee’s Grave (Xin Yue)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 392,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Verdict:",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " Epic setpiece. 10/10 flavour. Great ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    },
+    {
+     "kind": "text",
+     "text": "ideas",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    },
+    {
+     "kind": "text",
+     "text": " in the stat block, but poor execution.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "93c47d"
+     }
+    }
+   ]
+  },
+  {
+   "i": 393,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "I really love that Paizo came up with a 2-phase boss fight, gave Zhi Hui and the Tan Sugi key roles, and literally had Xin Yue reincarnate into a nindoru before the players’ eyes.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 394,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Near-Death Experience and Field of Past Regrets are 10/10 flavour.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 395,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "But… there are some serious flaws with this fight:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 396,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "She is a solo Level 7 caster against a Level 6-7 party… Mathematically, she stands no chance and will simply get zerged and die in 1-2 rounds.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 397,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Solo spellcasters are ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "generally",
+     "fmt": {
+      "bold": false,
+      "italic": true,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " bad boss design, because they simply don’t have the action economy to win against a party. They need minions to be effective.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 398,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "You could cheese your players by using Air Walk to float out of range, but this is a great recipe for a very unfun encounter. Ranged flying spellcasters turn fights into an all-or-nothing battle over Dispel Magic or Fly spells – very polarizing.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 399,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "She has a bizarre reaction that completely shuts down divine casters. Once again, extremely polarizing. Your Cleric could get counterspelled on every spell they try to cast, or she could fail once and the ability becomes useless. Or your party could have no Divine casters at all. (And it doesn’t even cost her a spell slot to counterspell?)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 400,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The big “downside” to her Field of Past Regrets is mental weakness… but she has almost zero mental damage on her stat block. 🤷‍♂️ This weakness does virtually nothing.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 401,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Near-Death Experience can leave a caster Stupefied for 24 hours. This really sucks.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 402,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Her Profane Reincarnation, which should be the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "climax of the whole AP",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": " so far, instead brings her back as a level 5 Sojiruh with some minions. This is even more underwhelming, and this phase will flop even harder than the first one.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 404,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Homebrew: Xin Yue v2 - Phase 1 (Severe 6)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 406,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "link",
+     "text": "Stat Block",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://monster.pf2.tools/v/xLJHWdSd-xin-yue-phase-1",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Foundry JSON",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://drive.google.com/file/d/1TyZs9biSyuH0G_u5bVDt2QpvE7eBYGUJ/view?usp=drive_link",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 407,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Xin Yue is bumped to level 8 and her spell list is adjusted. Now has 2 defensive reactions, while Near-Death Experience becomes a free action.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 408,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Add ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "40 to 60XP",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://2e.aonprd.com/Rules.aspx?ID=2718",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": " of nindoru minions to complement her. This will fix the “solo spellcaster” problem, and also let the nindoru attacks trigger the aura’s mental weakness.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 409,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "For example, for a level 6 party, you could use one CL 6 Ijda (40XP), two CL 4 sojiruh (2*20XP), or one of each (60XP).",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 410,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "In this phase, Xin Yue is drawing power from the Shadow of Kugaptee, which is currently submerged in the blood pool. This is what gives her the Divine Font ability.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 411,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "She will need some spells left over for Phase 2, so avoid just spamming Divine Font every round. (This would also be boring and somewhat unfair.)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 412,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Zhi Hui fights with the PCs in this phase. Give Zhi Hui a few extra spells – I added one Tomorrow’s Dawn, one 2nd-rank Heal, and one 1st-rank Heal.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 413,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Zhi Hui is a divine caster, so Xin Yue may very well use Chastise Heretic on her own former master! Again perfect 10/10 flavour.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 415,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Homebrew: Xin Yue v2 – Intermission",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 417,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "As Xin Yue is reduced to 0hp, the Shadow of Kugaptee rises from the blood pool and starts to reanimate all of the slain creatures.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 418,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Zhi Hui sacrifices herself (as written on Page 146) to empower the Tan Sugi, the roots of which extend, crushing Xin Yue and all of the nindoru.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 419,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Continue initiative for 1 round. This gives the PCs a moment to heal and recover.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 420,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "(If Zhi Hui had Life’s Fresh Bloom or a Heal spell left, you can cast it here as her “parting gift”. The imagery of grass sprouting from the floor of the cavern is great)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 421,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "After each PC has taken a turn, Xin Yue cuts her way out of the roots binding her, immediately reincarnating into a buffed sojiruh with level 8 stats:",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 423,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Homebrew: Xin Yue v2 – Phase 2 (Severe 6)",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 425,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "link",
+     "text": "Stat Block",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://monster.pf2.tools/v/DPvLjJOo-xin-yue-reborn",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Foundry JSON",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://drive.google.com/file/d/1X1DspqOXNatHiK7J3EkLDpoOIhyGqypW/view?usp=sharing",
+     "anchor": null
+    },
+    {
+     "kind": "text",
+     "text": ", ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "link",
+     "text": "Foundry Token",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": "1155CC",
+      "shade": null
+     },
+     "href": "https://drive.google.com/file/d/1kXMIekY9bRItcl4nLy0luR5Gvk5kXXWN/view?usp=drive_link",
+     "anchor": null
+    }
+   ]
+  },
+  {
+   "i": 426,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "In this phase, Xin Yue is a level 8 sojiruh with more of a “warpriest” or “magus” feel",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 427,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Ignore the 6 meokdans – level 2 creatures are worthless vs a level 6 party. Instead, the ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "Shadow of Kugaptee",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", now awoken, joins the encounter as a ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "complex hazard",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 428,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Shadow of Kugaptee has 2 actions per round and can ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "cast her remaining spells from Phase 1",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": "8e7cc3"
+     }
+    },
+    {
+     "kind": "text",
+     "text": ", including Divine Font. Vision of Death is the most flavourful spell here, but beware that its death trait can be very easily kill PCs.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 429,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The Shadow can’t be disabled or suppressed – only destroying Xin Yue can banish it from the encounter. Use the visual of a “soul tether” between the two of them to clearly show the players what’s going on.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 431,
+   "style": "Heading 2",
+   "list": null,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Summary",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 433,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "This is a long, complex, difficult fight, considering of two back-to-back Severe phases.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 434,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "But the PCs also know they’re walking into a boss fight, they know the weaknesses of the nindoru, they have Item bonuses from the Shrines, and they have the aid of Zhi Hui. ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 435,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "Additionally, if things are going poorly, you can hand out Hero Points like candy to represent the intervention of fate or past experiences.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 436,
+   "style": "normal",
+   "list": 0,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "The goal here is to have a very climatic boss fight at what is also the story climax of the AP – but it’s also important to ",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": "not overshadow the plot reveals",
+     "fmt": {
+      "bold": true,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    },
+    {
+     "kind": "text",
+     "text": ".",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  },
+  {
+   "i": 437,
+   "style": "normal",
+   "list": 1,
+   "chunks": [
+    {
+     "kind": "text",
+     "text": "You can tune the difficulty as appropriate to be for your group – the main goal is cool, flashy mechanics.",
+     "fmt": {
+      "bold": false,
+      "italic": false,
+      "strike": false,
+      "color": null,
+      "shade": null
+     }
+    }
+   ]
+  }
+ ],
+ "images": {
+  "2": [
+   "img01.png"
+  ],
+  "57": [
+   "img02.png"
+  ],
+  "85": [
+   "img03.png"
+  ],
+  "113": [
+   "img04.png"
+  ],
+  "127": [
+   "img05.png"
+  ],
+  "136": [
+   "img06.png"
+  ],
+  "162": [
+   "img07.png"
+  ],
+  "194": [
+   "img08.png",
+   "img09.png"
+  ],
+  "197": [
+   "img10.png"
+  ],
+  "236": [
+   "img11.png",
+   "img12.png"
+  ],
+  "290": [
+   "img13.png"
+  ],
+  "300": [
+   "img14.png"
+  ],
+  "322": [
+   "img15.png"
+  ],
+  "366": [
+   "img16.png"
+  ],
+  "371": [
+   "img17.png"
+  ],
+  "390": [
+   "img18.png"
+  ],
+  "439": [
+   "img19.png"
+  ]
+ }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "宏\nMacros",
+  "folders": {},
+  "entries": {
+    "Create Eldamon": {
+      "name": "创造艾达蒙 Create Eldamon",
+      "command": "game.modules.get(\"battlezoo-eldamon-pf2e\").api.eldamonDialog()"
+    },
+    "Toggle Battle Mode": {
+      "name": "切换战斗模式 Toggle Battle Mode",
+      "command": "game.modules.get(\"battlezoo-eldamon-pf2e\").api.toggleBattleMode()"
+    }
+  }
+}

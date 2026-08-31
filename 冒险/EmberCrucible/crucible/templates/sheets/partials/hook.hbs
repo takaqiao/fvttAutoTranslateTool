@@ -1,0 +1,15 @@
+<fieldset class="hook module-hook" {{#if hookId}}data-hook-id="{{hookId}}"{{/if}}>
+    {{#if legend}}<legend>{{legend}}</legend>{{/if}}
+    <div class="form-group stacked">
+        <label class="flexrow">
+            <code>{{label}}</code>
+        </label>
+        <button type="button" class="icon fa-solid fa-code" data-action="hookToggleSource"
+                data-tooltip="HOOKS.ToggleSource"></button>
+        {{#if expanded}}
+        <code-mirror class="hook-editor" language="javascript" indent="2" disabled>
+            {{~source~}}
+        </code-mirror>
+        {{/if}}
+    </div>
+</fieldset>

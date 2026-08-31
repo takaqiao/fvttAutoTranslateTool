@@ -1,33 +1,118 @@
-# Python
+# fvtt 汉化工作区 —— 版本控制范围
+#
+# 入库的只有「源文本与代码」：翻译 JSON、术语表、脚本、文档。
+# 原书 PDF、影音素材、抓取缓存、离线站点等体量大且可再获取的内容一律排除。
+# 结构说明见根目录 目录说明.md。
+
+# ── Python / Node / 构建产物 ──────────────────────────────
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+venv/
 *.spec
-
-# PyInstaller
+node_modules/
 build/
 dist/
+target/
 
-# Backups
-backups/
+# ── 备份、临时、一次性产物 ────────────────────────────────
 *.bak
+*.bak.*
+*.tmp
+*.orig
+~$*
+_backup*/
+_tmp_*/
+_qa_tmp/
+_qa_pages/
+backups/
+.playwright-mcp/
 
-# Logs and reports
-运行日志.txt
-失败漏翻记录.txt
-翻译审查报告.xlsx
-~$*.xlsx
-translation_diff_report.html
+# ── 大体积二进制：原书、影音、图像、压缩包、可执行文件 ────
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.zip
+*.7z
+*.rar
+*.exe
+*.dll
+*.pkl
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.avi
+*.mp3
+*.m4a
+*.ogg
+*.wav
+*.flac
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.ico
+*.svg
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.psd
+*.gfx
 
-# Generated glossary/history
-术语表_本地提取.csv
-translation_history.json
-audit_history.json
-translator_config.json
+# Foundry LevelDB 包数据与 OCR 训练数据（二进制，可从源重建）
+*.ldb
+*.traineddata
 
-# Test outputs
-pf2e-beginner-box.adventures.test.json
+# 影视字幕（异形 RPG 的参考素材，非翻译源文件）
+*.srt
+*.sub
+*.idx
+*.ssa
+*.ass
+*.vtt
 
-# OS
+# ── 整体不入库的分区 ──────────────────────────────────────
+素材/
+归档/
+其他项目/
+moulinette-bulk-dl/
+
+# 跨冒险 GM 资料库：约 10GB 社区存档与 Discord 附件
+冒险/GMGUIDE/
+
+# 聊天记录 / 社区存档目录
+*Chat/
+*聊天记录/
+*社区资源汇总/
+
+# ── 缓存、运行日志、抽取中间态 ────────────────────────────
+*.log
+*_cache.json
+*_cache_*.json
+*_run.log
+tm_cache/
+glossary_extract_cache*.json
+term_extractor_governor_cache.json
+term_extractor_governor_state.json
+pdf_vision_cache.json
+
+# ── 系统 ──────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ── 例外：这些必须入库 ────────────────────────────────────
+!.gitignore
+!目录说明.md
+!_整理清单.txt
+!**/README.md
+!**/PROJECT.md
+!**/CHANGELOG.md

@@ -1,0 +1,27 @@
+<fieldset class="effect">
+    <div class="form-group">
+        <label>{{fields.name.label}}</label>
+        <div class="form-fields">
+            {{formInput fields.name name=(concat effect.fieldPath ".name") placeholder=placeholder value=effect.name}}
+            <button type="button" class="icon frame-brown fa-solid fa-trash"
+                    data-action="deleteEffect" aria-label="{{localize "ACTION.EFFECTS.Delete"}}" data-tooltip></button>
+        </div>
+    </div>
+    {{formGroup fields.scope name=(concat effect.fieldPath ".scope") value=effect.scope localize=true}}
+    <div class="form-group">
+        <label>{{fields.result.label}}</label>
+        <div class="form-fields">
+            {{formInput fields.result.fields.type name=(concat effect.fieldPath ".result.type") value=effect.result.type}}
+            <label class="checkbox">
+                {{fields.result.fields.all.label}}
+                {{formInput fields.result.fields.all name=(concat effect.fieldPath ".result.all") value=effect.result.all}}
+            </label>
+        </div>
+    </div>
+    {{formGroup fields.statuses name=(concat effect.fieldPath ".statuses") value=effect.statuses valueAttr="id" labelAttr="name" localize=true}}
+    {{formGroup fields.duration.fields.value name=(concat effect.fieldPath ".duration.value") value=effect.duration.value}}
+    {{formGroup fields.duration.fields.units name=(concat effect.fieldPath ".duration.units")
+                value=effect.duration.units options=effectDurations}}
+    {{formGroup fields.duration.fields.expiry name=(concat effect.fieldPath ".duration.expiry")
+                value=effect.duration.expiry options=effectExpiryEvents}}
+</fieldset>

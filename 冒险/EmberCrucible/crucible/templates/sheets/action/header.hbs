@@ -1,0 +1,9 @@
+<header class="sheet-header flexrow">
+    <img class="profile" src="{{action.img}}" alt="{{action.name}}" data-action="editImage" data-edit="img">
+    <div class="name flexcol">
+        <h1 class="title">
+            <input name="name" type="text" value="{{action.name}}" placeholder="Action Name">
+        </h1>
+        {{crucibleTags headerTags additionalClasses="header-tags"}}
+    </div>
+</header>

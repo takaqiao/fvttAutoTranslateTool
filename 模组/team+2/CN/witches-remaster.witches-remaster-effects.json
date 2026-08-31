@@ -1,0 +1,144 @@
+{
+    "label": "效果 Effects",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Spell Effect: Mark of Mystery (Status Penalty)": {
+            "name": "法术效果：奥秘之印（状态减值） Spell Effect: Mark of Mystery (Status Penalty)",
+            "description": "<p>你对抗奥秘之印效果的豁免承受 -1 状态减值。</p>"
+        },
+        "Effect: Familiar of Churning Saltwater": {
+            "name": "效果：翻腾盐水之魔宠 Effect: Familiar of Churning Saltwater",
+            "description": "<p>你对抗水属性效果的强韧DC 与 AC 承受 -1环境减值。</p>"
+        },
+        "Spell Effect: Lost in the Crowd": {
+            "name": "法术效果：隐于人潮 Spell Effect: Lost in the Crowd",
+            "description": "<p>就侧背判定而言，你将所有生物都视作敌人。</p>"
+        },
+        "Spell Effect: Holding Glyph": {
+            "name": "法术效果：拘禁字符 Spell Effect: Holding Glyph",
+            "description": "<p>你对抗强制移动效果承受状态减值。</p>\n<p>如果你对抗该法术的豁免为失败或更差，则当你使用具有移动特征的动作时，你额外承受 @Damage[(@item.flags.pf2e.rulesSelections.holding * @item.level)[force]] 伤害。</p>"
+        },
+        "Aura: Sanctum of Spirit": {
+            "name": "灵气：精魂圣所 Aura: Sanctum of Spirit",
+            "description": "<p>你与灵气内的盟友对豁免获得 +1状态加值，并对心灵伤害获得等同于你等级的抗力。只要自精魂圣所形成以来你与盟友未采取过敌对动作，则生物对你以及圣所内盟友的攻击承受 -2环境减值。</p>"
+        },
+        "Effect: Bargain Soul": {
+            "name": "效果：灵魂交易 Effect: Bargain Soul",
+            "description": "<p>你变为 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭1级} 与 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失1级}，若你已具备这些状态，则其数值各增加 1；并且你对抗死亡效果的豁免承受 -1环境减值。</p>"
+        },
+        "Spell Effect: Cosmic Tune": {
+            "name": "法术效果：宇宙之曲 Spell Effect: Cosmic Tune",
+            "description": "<p>你对攻击骰与意志豁免获得 +1状态加值，但你被该乐曲 @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}。敌对动作不会结束迷魂状态。</p>"
+        },
+        "Effect: Familiar of Keen Senses": {
+            "name": "效果：锐感魔宠 Effect: Familiar of Keen Senses",
+            "description": "<p>目标在 1轮内获得以下魔宠能力之一：精确嗅觉、震波感知或波感，射程 60尺。</p>"
+        },
+        "Spell Effect: Fabled Familiar": {
+            "name": "法术效果：传说魔宠 Spell Effect: Fabled Familiar",
+            "description": "<p>你的下一次掷骰获得 +1状态加值，持续至施法者下一回合结束。</p>"
+        },
+        "Effect: Protection Circle": {
+            "name": "效果：守护之环 Effect: Protection Circle",
+            "description": "<p>只要你与盟友仍处于该区域内，你对抗所选生物效果的豁免获得 +1状态加值（若你在庇护主技能上为传奇，则为 +2）。</p>"
+        },
+        "Ephemeral Effect: Sanctum of Spirit": {
+            "name": "瞬时效果：精魂圣所 Ephemeral Effect: Sanctum of Spirit",
+            "description": "<p>你对所瞄准生物的攻击承受 -2环境减值，因为自他们所在的圣所形成以来，他们或其盟友未采取过敌对动作。</p>\n<p><strong>Foundry 提示</strong> 你大概想要的是 @UUID[Compendium.witches-remaster.witches-remaster-effects.Item.qLdSyaeVxUxp3mhn]{效果：精魂圣所}（更具体地说是 @UUID[Compendium.witches-remaster.witches-remaster-effects.Item.8Z1lbN4kP84vKcUq]{灵气：精魂圣所}），前者会秘密地将此效果施加于攻击受其保护者的敌人。</p>"
+        },
+        "Spell Effect: Soothsayer's Prediction": {
+            "name": "法术效果：预言家之占 Spell Effect: Soothsayer's Prediction",
+            "description": "<p>你的先攻骰获得 +2环境加值。</p>"
+        },
+        "Spell Effect: Brief Lesson": {
+            "name": "法术效果：速成秘传 Spell Effect: Brief Lesson",
+            "description": "<p>你在某项技能上获得受训或专家熟练度，且在持续时间内对该技能的检定获得额外的状态加值。</p>"
+        },
+        "Spell Effect: Sensory Deprivation": {
+            "name": "法术效果：感官剥夺 Spell Effect: Sensory Deprivation",
+            "description": "<p>根据施法者的选择，你感到一种奇异的暖意以及无法使用某些动作的状况——你的眼、手或口被限制。</p>\n<ul>\n<li><strong>眼</strong> 你 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}。</li>\n<li><strong>手</strong> 你不能进行具有操作特征的动作。</li>\n<li><strong>口</strong> 你不能进行具有听觉特征的动作。</li>\n</ul>"
+        },
+        "Effect: Material Binding": {
+            "name": "效果：物质拘束 Effect: Material Binding",
+            "description": "<p>你的 AC 获得 +1环境加值，对抗强制移动或会让你获得 @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地} 状态的效果获得 +2环境加值。</p>"
+        },
+        "Effect: Familiar of Faraway Worlds": {
+            "name": "效果：远方异界之魔宠 Effect: Familiar of Faraway Worlds",
+            "description": "<p>你识破幻象的检定承受 -1 状态减值。</p>"
+        },
+        "Spell Effect: Aura of Violent Light": {
+            "name": "法术效果：暴烈光华灵气 Spell Effect: Aura of Violent Light",
+            "description": "<p>你在灵气中散发出明亮光芒。</p>\n<p>当被照亮时，你散发出强大能量，对在弥漫范围内明亮光芒中结束回合的所有敌人造成 @Damage[(1+@item.level)[fire],(1+@item.level)[spirit]] 伤害（基础强韧豁免）。</p>"
+        },
+        "Spell Effect: Mark of Mystery": {
+            "name": "法术效果：奥秘之印 Spell Effect: Mark of Mystery",
+            "description": "<p>你身上带有施法者庇护主的印记。施法者在判定其印记效果时可使用你的位置，亦可使用施法者自身的位置。</p>\n<p>当此法术激活期间你被有害效果作为目标时，瞄准你的生物必须对该法术进行一次意志豁免。豁免失败的生物变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧1级}，大失败则变为 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧2级}。</p>"
+        },
+        "Ephemeral Effect: Familiar of Murky Worlds": {
+            "name": "瞬时效果：晦暗异界之魔宠 Ephemeral Effect: Familiar of Murky Worlds",
+            "description": "<p>瞄准你的生物忽略你因掩蔽获得的 AC 环境加值。</p>\n<p><strong>Foundry 提示</strong> 你大概想要的是 @UUID[Compendium.witches-remaster.witches-remaster-effects.Item.l15SCSWGttzPOPOO]{效果：晦暗异界之魔宠}，它会秘密地将此效果施加于你瞄准的生物。</p>"
+        },
+        "Spell Effect: Grant Wish": {
+            "name": "法术效果：实现愿望 Spell Effect: Grant Wish",
+            "description": "<p>你以一个具有语言与听觉特征的自由动作大声说出一个愿望，使你下一个需要进行攻击骰或技能检定的动作或行动，对你所选其中一次该动作或行动的攻击骰或技能检定获得 +1状态加值。</p>"
+        },
+        "Spell Effect: Elemental Betrayal+": {
+            "name": "法术效果：元素背叛+ Spell Effect: Elemental Betrayal+",
+            "description": "<p>由 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.u17aLLTqu5O8UYFu]{元素背叛+} 授予</p>\n<p>当你施放此法术时，选择气、土、金、火、水或木。目标对该特征获得弱点。</p>"
+        },
+        "Effect: Familiar of Murky Worlds": {
+            "name": "效果：晦暗异界之魔宠 Effect: Familiar of Murky Worlds",
+            "description": "<p>你在 1轮内忽略非魔法的模糊与因掩蔽获得的 AC 环境加值。</p>"
+        },
+        "Effect: Monstrous Familiar": {
+            "name": "效果：异怪魔宠 Effect: Monstrous Familiar",
+            "description": "<p>你的魔宠按你的等级，每等级额外获得 4点生命值。</p>\n<p><strong>Foundry 提示</strong> 你仍须将形态法术的效果应用于魔宠，以及此效果。</p>"
+        },
+        "Effect: Spirited Reprisal": {
+            "name": "效果：精魂反噬 Effect: Spirited Reprisal",
+            "description": "<p>你对触发的伤害获得等同于 2 加上施法者等级的抗力。</p>"
+        },
+        "Spell Effect: Patron's Apocalypse: Floods": {
+            "name": "法术效果：庇护主末劫：洪水 Spell Effect: Patron's Apocalypse: Floods",
+            "description": "<p>你对抗强制移动与水属性效果承受 -2减值。</p>"
+        },
+        "Spell Effect: Demand Compliance": {
+            "name": "法术效果：要求服从 Spell Effect: Demand Compliance",
+            "description": "<p>你的攻击骰、豁免与技能检定承受状态减值。</p>"
+        },
+        "Effect: Wayward Gifts": {
+            "name": "效果：歧途馈赠 Effect: Wayward Gifts",
+            "description": "<p>当你处于战斗中且至少有一项法咒激活时，你根据你的根源获得下列效果：</p>\n<ul style=\"list-style-type:none\">\n<li><strong>奥术</strong> 你的魔法漾出未驯之力。你的奥秘检定获得 +1状态加值；当你从法术位施放一个会造成伤害且无持续时间的法术时，该法术伤害获得等同于法术环的状态加值。</li>\n<li><strong>神圣</strong> 你获得神性之力。你的宗教检定获得 +1状态加值，且你获得圣洁特征或邪秽特征。如果你信奉某位神祇，且其神圣祝佑要求选定，则你必须选择你神祇的祝佑特征。</li>\n<li><strong>神秘</strong> 你已踏入真正黑暗的魔法之旅。你的神秘检定获得 +1状态加值，且对心灵伤害获得等同于你等级一半（最少 1）的抗力。</li>\n<li><strong>原初</strong> 你的魔法如自然之精魂。你的自然检定获得 +1状态加值；每次你持续法咒时获得等同于其等级的临时生命值，持续至你下一回合开始。</li>\n</ul>\n<p><strong>Foundry 提示</strong> 原初女巫持续法咒所获临时生命值需手动施加。</p>"
+        },
+        "Effect: Sanctum of Spirit": {
+            "name": "效果：精魂圣所 Effect: Sanctum of Spirit",
+            "description": "<p><strong>由</strong> @UUID[Compendium.witches-remaster.witches-remaster-effects.Item.8Z1lbN4kP84vKcUq]{灵气：精魂圣所} 授予</p>\n<hr />\n<p>你对豁免获得 +1状态加值，并对心灵伤害获得等同于灵气源生物等级的抗力。只要自精魂圣所形成以来你与盟友未采取过敌对动作，则生物对你的攻击承受 -2环境减值。</p>"
+        },
+        "Spell Effect: Patron's Apocalypse: Rapture": {
+            "name": "法术效果：庇护主末劫：升天 Spell Effect: Patron's Apocalypse: Rapture",
+            "description": "<p>你忽略此法术区域的伤害，且在其内时你的攻击骰获得 +1状态加值。</p>"
+        },
+        "Effect: Familiar of Illogical Forms": {
+            "name": "效果：诡异形态之魔宠 Effect: Familiar of Illogical Forms",
+            "description": "<p>目标在 1轮内获得以下魔宠能力之一：两栖、攀爬者、暗视、回声定位、鳃、喷射、悬浮者或嗅觉。</p>"
+        },
+        "Spell Effect: Eternal Slumber": {
+            "name": "法术效果：永眠 Spell Effect: Eternal Slumber",
+            "description": "<p>豁免成功时，你变得昏沉，搜索的察觉检定承受 -2 状态减值；并且使用专注动作时必须进行一次 @Check[type:flat|dc:5]，失败则失去该动作。</p>\n<p>豁免失败时，你在持续时间内 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}，且本会让你苏醒的情境也不会自动唤醒你，除非你对该法术的意志豁免成功。</p>\n<p>豁免大失败时，你永久陷入失去意识。</p>"
+        },
+        "Spell Effect: Patron's Apocalypse: Frost": {
+            "name": "法术效果：庇护主末劫：霜冻 Spell Effect: Patron's Apocalypse: Frost",
+            "description": "<p>你的速度承受 -10尺状态减值。</p>"
+        }
+    }
+}

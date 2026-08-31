@@ -1,0 +1,1487 @@
+{
+    "label": "Inventors+ Iconic",
+    "mapping": {
+        "tokenName": "prototypeToken.name",
+        "prototypeToken": "prototypeToken.name",
+        "blurb": "system.details.blurb",
+        "publicNotes": "system.details.publicNotes",
+        "items": {
+            "path": "items",
+            "converter": "fromPack"
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Rutaiba El-Majid (Level 20)": {
+            "name": "鲁泰巴·艾尔-马吉德（20级） Rutaiba El-Majid (Level 20)",
+            "tokenName": "鲁泰巴·艾尔-马吉德（20级） Rutaiba El-Majid (Level 20)",
+            "prototypeToken": "鲁泰巴·艾尔-马吉德（20级） Rutaiba El-Majid (Level 20)",
+            "items": {
+                "Magical Crafting": {
+                    "name": "魔法制作 Magical Crafting",
+                    "description": "<p>你可以@UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作 Craft}魔法物品，不过某些物品会有其它条件。选取此专长时，你立即将四种2级或更低级常见魔法物品的配方加入你的配方簿中。</p>"
+                },
+                "Master Overdrive": {
+                    "name": "大师超载 Master Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Anklets of Alacrity": {
+                    "name": "敏捷脚镯 Anklets of Alacrity",
+                    "description": "<p>这个镶嵌着宝石的黄金脚镯能够为你的特技检定提供+3物品加值。若绑定了该脚镯，你能将你的敏捷提升2点，或将其提升至18点，选择结果更高的选项。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你将脚镯互相敲击，为你所有种类的速度提供+20尺状态加值，并得到 @UUID[Compendium.pf2e.spells-srd.Item.Seaah9amXg70RKw2]{水上行走 Water Walk} 的效果，持续10分钟。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.iK6JeCsZwm5Vakks]{效果：敏捷脚镯}</p>"
+                },
+                "Legendary Sneak": {
+                    "name": "传奇潜行者 Legendary Sneak",
+                    "description": "<p>除非你想被看见，否则你可以始终保持潜行，即便没有可藏身的地方。你可以在没有掩蔽或@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]的情况下@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}和@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}。你在采取@UUID[Compendium.pf2e.actionspf2e.Item.IE2nThCmoyhQA0Jn]{避人耳目 Avoiding Notice}之外的探索行动时，同样可以获得避人耳目的好处，除非你不想得到其好处。</p>"
+                },
+                "Explode+": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你刻意将自己的大发明推过常规安全极限，让它爆炸并对附近生物造成伤害——希望同时不会损坏大发明本身。该爆炸对你周围 @Template[type:emanation|distance:5]（若你正穿戴或持握该大发明）或大发明周围（若大发明为随从）内所有生物造成 @Damage[max(2, @actor.level)d6[@actor.flags.pf2e.inventor.explode]] 伤害，并进行 @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。</p>\n<p>从 3 级开始，且此后每升一级，你的爆炸伤害增加 1d6。</p>\n<p>如果你拥有突破性大发明职业特性，则使用爆炸时你可以选择 5 尺或 @Template[type:emanation|distance:10] 作为作用区域；若你拥有革命性大发明职业特性，则可以选择 5 尺、10 尺或 @Template[type:emanation|distance:15]。</p>"
+                },
+                "Blazing Aura": {
+                    "name": "炽燃光环 Blazing Aura",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你的回合开始时</p><hr /><p>你会在火焰中爆发。在@Template[emanation|distance:20]内的敌人将受到@Damage[7d6[fire]|options:area-damage]伤害（@Check[reflex|against:class-spell|basic|options:area-effect]豁免对抗你的职业DC或法术DC，取其中较高者）。该区域内的盟友将@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]1轮，并可以使用额外的动作执行攻击或移动动作。</p>"
+                },
+                "Marbles": {
+                    "name": "弹珠 Marbles",
+                    "description": "<p>这些小圆球由抛光的石子和彩色玻璃制成，一袋200个。你可以用一个交互动作将弹珠倒在与你邻接的空方格中。第一个进入该方格的生物必须成功通过@Check[acrobatics|dc:13]检定或@Check[reflex|dc:13]豁免（由它选择），否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。一旦一个生物进入了铺满弹珠的空间，足量弹珠就会散落四周，其他进入该方格的生物不再需要掷骰来避免跌倒。</p>"
+                },
+                "Effect: Offensive Boost+ (+1 Striking Wish Knife)": {
+                    "name": "效果：攻势增益+（+1 强击愿望之刀） Effect: Offensive Boost+ (+1 Striking Wish Knife)",
+                    "description": "<p>如果你的大发明是护甲，该增益施加于你每日预备时所选定的一件武器之近战打击；如果你的大发明是构装体，则增益施加于你的构装体伙伴之打击。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>"
+                },
+                "Formula Book": {
+                    "name": "配方书 Formula Book",
+                    "description": "<p>炼金术士将每一件他能够制作的物品的配方都一丝不苟地记录了下来。你在起始便免费获得一本标准@UUID[Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx]。这本配方簿包含了两个由你选择的常见一级炼金物品配方，外加你从@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]专长和研究课题中获得的配方。</p>\n<p>每当你获得一个等级，你可以将两个常见炼金物品的配方添加到你的配方簿中。这些新的配方可以对应任何等级的物品，只要是你能够制作的。你自动学会这些配方，不过你也可以从定居点或其他炼金术士那里找到或买到额外的配方，你还可以用@UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]专长发明它们。</p>\n<p>你只需要掌握最基本的配方便足以制作升级版本的物品——你不需要学习高等级的公式。例如，如果你掌握1级的下等生命灵药配方，只要满足等级和其他先决条件，你就可以制作全部下等、次等、中等、高等、上等和真实生命灵药。有着不同功能条目的炼金物品需要单独的配方，而大多数炼金物品的结构都类似生命灵药。</p>"
+                },
+                "Fail-Proof Gadgetry": {
+                    "name": "无失装置技艺 Fail-Proof Gadgetry",
+                    "description": "<p>你已学到，一次快速修复就足以将彻底的失败转为成功。你可以每轮一次而非每 10分钟一次使用「装置师献身」反应。</p>"
+                },
+                "Revolutionary Innovation": {
+                    "name": "革命性大发明 Revolutionary Innovation",
+                    "description": "<p>你是空前绝后的天才，发明了一种能彻底颠覆学术领域的技术——至少暂时颠覆了你的大发明！为你的大发明选择一种革命性改进。如果愿意，你也可以选择一种同类的初始或突破性改进。</p><h3>革命性护甲改进 Revolutionary Armor Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.HC99e4WoM36W3lrL]：</strong> 你的护甲使用了一种电磁场，分谐波失真器，或其他技术让接近你的人难以移动，除非得到你的允许。当穿戴你的护甲时，对你的敌人来说，邻接你的所有空间都变成困难地形。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.vUt71oX9QNLAUmZn]：</strong> 你护甲的防御能消融任何种类的朝你袭来的能量。当穿戴你的护甲时，你获得所有能量伤害的抗力（酸蚀，寒冷，电击，火焰，力场，音波，命能和虚能），数值等于2+你等级的一半。你必须有谐波振荡器，金属电抗或燃素校准器改进才能选择该改进。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.82rxCGBb5qf9fwbp]：</strong> 你改善了你的突破性改进所提供的抵抗伤害的能力。从你的大发明具有的下述突破性改进中选择一种：致密甲片，叠层网状织物，或张力吸收系统。将你从该改进中获得的抗力提升至你的等级而非你等级的一半。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ZrkyPG41iFicYsdX]（仅限隐秘套装）：</strong> 你在你的护甲上内建了一种多重传感遮罩，能从所有感官中扭曲你的轮廓，让你只留下朦胧的图像，沉闷的响声等等。当穿戴该护甲时，你对所有生物获得隐蔽，即使他们使用了非视觉的精确感官，例如蝙蝠的回声定位。和其他让你的位置保持明显的效果一样，你不能使用这种隐蔽躲藏或潜行。如果你使用了敌对动作，隐蔽终止，直到你花费单动作重置了遮罩，这具有操作特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.Q172fARBaNDR8Gqx]（仅限力量套装）：</strong> 你用如此重量级的防御系统全面强化了你的护甲，即使最致命的攻击也可能失去锋芒。每当你在穿戴这种护甲时承受重击，尝试一次DC13的纯骰检定。成功时，重击变成普通命中。这不能与<em>护命</em>符文或其他通过纯骰检定抵消重击的效果叠加。另外，你获得2+你等级一半的精准伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.8jELNQUBMAXUj3zR]：</strong> 你的护甲有如此多的调整和预案，能够抵抗所有物理伤害。当穿戴你的护甲时，你获得全物理伤害（钝击，穿刺和挥砍伤害，也包括持续性流血伤害）的抗力，数值等于你等级的一半。你必须有致密甲片，叠层网状织物或张力吸收系统的突破性改进才能选择该改进。</li><li><p><strong>@UUID[Compendium.pf2e.classfeatures.Item.rYfmpMBy7wd1VHeO]：</strong> 你可能涉猎了一些山铜合金的研究，或发现了其他工程学解决方案，你按照某种方式建造了你的大发明，使其能够容纳一个额外的性能符文。你的大发明比普通的同类物品可以容纳1个额外的性能符文（最大可以用+3潜能<em>护甲</em>容纳4个性能符文）。</p></li></ul><h3>革命性构装体改进 Revolutionary Construct Modifications</h3><ul><li><strong>飞行底盘（Flight Chassis）：</strong> 你为构装体适配了一种飞行方式，例如添加了螺旋桨或用飞翼和轻质结构再造了构装体。你的大发明获得25尺飞行速度。</li><li><strong>奇迹器械（Miracle Gears）：</strong> 你完美配置了大发明的脑皮层，它变得更加智能。它的智力属性提升2，它从你知晓的语言中学会一种你所选的语言。你的构装体获得使用需要较高智力才能使用的动作，例如@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]和解译文书。最后，你的构装体在两项你所选的基于智力或魅力的技能上获得传奇熟练度。你必须有惊奇器械改进才能选择该改进。</li><li><strong>抗性涂层（Resistant Coating）：</strong> 你的大发明难以被任何方式伤害。它获得5点全伤害抗力（除了精金）。</li><li><strong>符文基石（Runic Keystone）：</strong> 你在大发明中设计了一种类似<em>符文石</em>的装置，让它能够容纳一个性能符文，即使它不是武器或护甲。如果护甲性能符文能影响护甲的穿戴者，则能影响你的大发明自身。武器性能符文通常情况为武器提供的任何性能都应用在你的大发明的无武装攻击上，如常遵循所有需求（例如，<em>斩首</em>符文只能应用在挥砍近战无武装攻击上）；如果符文只影响远程武器，除非大发明有内置的远程攻击（例如来自弹丸发射器初始改进的远程攻击），否则不会生效。如果符文通常影响武器的物理形态和外观，例如<em>衣装</em>，该符文雕刻在你的构装体中时不会生效。</li><li><p><strong>防壁部署（Wall Configuration）：</strong> 你的大发明能够从可移动的构装体变成静止的战场碉堡。它可以花费2动作的行动展开，该行动具有操作特征，并从通常形态转变成又薄又直的金属墙，高10尺且长30尺。这堵墙必须穿过大发明的起始空间。当你的构装体是墙时，它不能进行任何动作，除了使用相同的行动变回来，它也不能轻易保护自己，陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]并在AC上承受额外的-2状态减值。墙会阻挡视线和效果线，除非你的大发明的HP降低至最大值的一半以下，此时墙上的洞能让生物看穿并利用掩蔽攻击，超小型生物也能直接穿过墙壁。</p></li></ul><h3>革命性武器改进 Revolutionary Weapon Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ZcoOMwEY8FX7UzMo]：</strong> 你的武器在每次失手后都会精确地重新校准，保证下一击的命中。你的大发明获得回摆和叠劲特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.KcK3d8zw0bCEoaEG]：</strong> 通过精确计算，你找到了大发明的完美形状，得以在恰到好处的打击中造成极大的伤害。你的大发明获得致命d8特征。如果你的大发明已经致命，如果你的大发明已经具有致命特征，将致命骰至多增加2个级别大小（d6到d10，d8到d12），最高为致命d12。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.KmFz27FVNXYWwgIc]：</strong> 你让你的大发明比同类武器更强。将大发明的武器伤害骰提升1级（d4到d6，d6到d8，d8到d10，d10到d12）。如常，你不能将你的骰子提升超过1级，因此这个改进不能和简易复杂化叠加。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.YQs4G9YK3VskY2F6]（仅限近战）：</strong> 你找到了一种建造武器的方法，让他能在平衡性不变的情况下延展出去。你的大发明获得长触及特征。如果该武器已经有长触及特征，将你的触及提升10尺，而非通常的5尺。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.2xVLO3JDe4gYlqv4]：</strong> 其他发明家声称这在技术上绝不成立，但你成功创造了数种似乎。只有你能使用的金属合金。这些合金能够伤害对7种天金中任意一种易伤的对手。你的大发明被视为所有7种天金（渊铀，精金，血汞，虚铅，零晶，山铜，漠石）。这意味着你能对多种生物造成更多的伤害，但你不会应用任何这些天金制成的武器所具有的特殊效果。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.g9UMdKV1TxNdhpDO]：</strong> 一种特殊装置可让你的武器以惊人的速度运动。你的大发明获得了灵巧特征；如果它具有装填能力，你可以每轮一次以一个自由动作装填。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.GoMoEtTu9uP7nxkg]（仅限远程）：</strong> 你调整了你的大发明，让它在任何射程上都十分危险和高效。如果你的大发明具有远射特征，则移除远射特征。否则，将大发明的射程增量提升50尺或武器的基本射程增量，选择更大的数值。</li><li><p><strong>@UUID[Compendium.pf2e.classfeatures.Item.rYfmpMBy7wd1VHeO]：</strong> 你可能涉猎了一些山铜合金的研究，或发现了其他工程学解决方案，你按照某种方式建造了你的大发明，使其能够容纳一个额外的性能符文。你的大发明比普通的同类物品可以容纳1个额外的性能符文（最大可以用+3<em>潜能</em>武器容纳4个性能符文）。</p>\n</li></ul>"
+                },
+                "Waterskin": {
+                    "name": "水袋 Waterskin",
+                    "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+                },
+                "Unconvention": {
+                    "name": "非常规 Unconvention",
+                    "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+                },
+                "Reconfigure": {
+                    "name": "重构 Reconfigure",
+                    "description": "<p>你是所有制作领域的专家，而且总是在调整你的大发明。你可以花费1天休整期进行修补，以改变大发明的一项改进。你尝试一次制作检定，使用符合你等级的高DC。成功时，你选择一个大发明上的改进，将其改为相同类别（初始、突破或革命）的不同改进。</p>\n<p>如果你有任何改进专长，在成功的检定后你可以改为将改进专长重训成其他的改进专长。新专长必须满足重训的标准限制。</p>"
+                },
+                "Toughness": {
+                    "name": "坚韧 Toughness",
+                    "description": "<p>在支撑到极限前，你的身体可以经受比大多数人更沉重的损伤。你的最大生命值提高等于你的等级的数值。你的恢复检定DC降低1点。</p>"
+                },
+                "Expert Overdrive": {
+                    "name": "专家超载 Expert Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Medium Armor Mastery": {
+                    "name": "中型护甲精通 Medium Armor Mastery",
+                    "description": "<p>你非常擅长改良护甲，让你避免更多的攻击。你在轻甲和中甲，以及无甲防御上的熟练度提升至大师。 </p>"
+                },
+                "Armbands of Athleticism (Greater)": {
+                    "name": "健身腕带（高等） Armbands of Athleticism (Greater)",
+                    "description": "<p>技艺精湛的木工在这对多层的皮带护臂上钻出了一位举重肌肉男的雕刻，它会赋予你在运动锻炼上更强的技艺与耐性。</p>\n<p>当被绑到你的上臂时，这对护臂赋予你在运动检定上的+3物品加值。</p>\n<p>此外，当你使用一个动作来攀爬或游泳并在相应的运动检定中成功时，你会在移动距离上获得+10尺物品加值。</p>"
+                },
+                "Planar Sidestep": {
+                    "name": "位面侧步 Planar Sidestep",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 一个生物的近战打击击中你。</p>\n<hr />\n<p>你短暂将身体转移到位面之间，减少敌人造成的伤害。你对触发的打击获得25点抗力。观察者只能看到攻击落下时你发出了元素能量的微光。</p>"
+                },
+                "Playing Cards": {
+                    "name": "扑克牌 Playing Cards",
+                    "description": "<p>一副标准的扑克牌由54张厚纸制成的牌组成，装在一个纸套里。最常见的游戏和赌博用牌被称为 \"老法师牌\"，以魔法的四种精髓为主题的花色，每种花色有13张牌，还有两张万用牌。这套牌的名称和外观因地区不同而不同。如塔尔多的”魔术师牌”或镣铐群岛的”面具牌”。</p>"
+                },
+                "Breakthrough Innovation": {
+                    "name": "突破性大发明 Breakthrough Innovation",
+                    "description": "<p>你在你的研究领域上实现了突破，发现了一种强力的新方式以强化你的大发明。为你的大发明选择一种对应类型的突破性改进。如果愿意，你也可以选择大发明的初始改进。</p><h3>突破性护甲改进 Breakthrough Armor Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ySkTxnoNuDluk6Cb]</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都强化了护甲针对魔法的防御力。当穿戴该护甲时，你在对抗法术的AC和所有豁免骰上获得+1环境加值。对抗直接瞄准护甲的法术（例如灼热金属Heat Metal）时，你改为在AC和所有豁免骰上获得+4环境加值。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hxjdHBJHaB47mBUT]（隐秘套装专用）</strong> 你调整了护甲的表层，让它能够轻易融入周围环境，只要你保持不动。当穿戴你的护甲时，即使你没有掩蔽或隐蔽，你依然能躲藏Hide，变色系统的色彩能匹配你的周围环境。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.svGLZdD4PF7miAKA]</strong> 你将护甲包复在坚实的甲片下。当穿戴该护甲时，你获得等于你等级一半的挥砍伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.T3742fu7oIM3W6Gz]</strong> 你改良了初始改进抵抗伤害的能力。你从初始改进中获得的抗力改为添加你的等级而非你等级的一半（例如，燃素校准器的抗力会提升至你的等级）。如果你有超过一种提供抗力的初始改进，选择一种初始改进应用强化抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.yEfHCwsbsbP6K13Q]（力量套装专用）</strong> 你将你的大发明扩展成一种重型堡垒，你开创性的设计也保证了你不会承受如此沉重的防御带来的缺陷。你的大发明变成重甲，你在大发明护甲上（不包括其他重甲）的熟练度提升至和你中甲熟练度一致。如果你有至少3点力量调整值，你完全移除速度减值而非将其降低至-5尺。护甲调整后的数据为：<em>AC加值</em>+5；<em>敏捷上限</em>+1；<em>检定减值</em>-2；<em>速度减值</em>-10尺；<em>力量</em>+3；<em>负载</em> 3；<em>护甲组</em> 复合甲；<em>护甲特征</em> 壁垒，固守。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.V5qmKLmI3RL68RGb]</strong> 你通过一个突破改良了加速器的力量，能够在不引发爆炸的情况下极大地对能量增压。你的速度上获得+10尺状态加值，当你处于超载中时，提升为+20尺状态加值。如果你在手艺上的熟练度为传奇，在超载中时的加值提升为+30尺状态加值。你必须有加速器改进才能选择该改进。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hwqaS9m2RwGe0kJk]</strong> 你在护甲上编织了一种非常强力的联锁网状织物，能捕获穿刺攻击并分散其攻击力。当穿戴该护甲时，你获得等同于你等级一半的穿刺伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.SRS8102DGTzJ4NmC]</strong> 你强化了护甲的抗张能力，让它能够在遭到钝击攻击时柔软弯曲。当穿戴该护甲时，你获得等同于你等级一半的钝击伤害抗力。</li></ul><h3>突破性构装体改进 Breakthrough Construct Modification</h3><ul><li><strong>进阶武装 Advanced Weaponry</strong> 你强化了你的构装体的武装系统。选择一种你的构装体的无武装攻击，其获得一种你所选的初始武器改进，从上述列表中或其他获得许可的初始武器改进中选择。该无武装攻击必须满足所选特征的全部需求（例如纠缠形态需要近战武器），且由于这是无武装攻击，便永远不可能满足某些需求，例如简易复杂化所需求的简易武器。</li><li><strong>抗魔构装 Antimagic Construction</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都让你的大发明在法术面前格外坚韧。你的构装体大发明在针对法术的AC和所有豁免骰上获得+2环境加值。</li><li><strong>攀爬肢 Climbing Limbs</strong> 你的构装体具有可以抓握或产生吸力的附肢，是攀爬能手。你的构装体获得等同于陆地速度一半的攀爬速度。</li><li><strong>坚韧结构 Durable Construction</strong> 你的大发明建造得非常坚固；它能在被摧毁之前承受非常多的冲击。将它的HP最大值提升等于你等级的数值。</li><li><strong>惊奇器械 Marvelous Gears</strong> 你的大发明在威吓，隐秘，和生存上获得专家熟练度。对于这些技能中已经达到专家熟练度的任意技能（例如因称为进阶构装伙伴而获得的熟练度），该技能改为获得大师熟练度。如果你有革命性大发明职业特性，这些熟练度提升至大师，对于已经是专家的技能则改为提升至传奇。你必须有神奇器械改进才能选择该改进。</li><li><strong>炮台部署 Turret Configuration</strong> 你的大发明能够从移动的构装体变成固定炮台。你的构装伙伴能够使用一个单动作来变形，其具有操作特征，并转变成占据其空间的一个炮台（或者从炮台变回通常的形态）。当它是炮台时，你的大发明陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]状态，但来自弹丸发射器的伤害骰提升至1d6，且射程增量提升至60尺。你必须有弹丸发射器改进才能选择该改进。</li></ul><h3>突破性武器改进 Breakthrough Weapon Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.P1GbGEePC8zDi8K4]（远程专用）</strong> 一个小心校准的目镜或锁定装置让你的武器特别擅长攻击弱点。你的大发明获得背刺特征，且射程增量提升20尺。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.7Zw83ysONrNhJMr8]（近战专用）</strong> 你小心设计武器的形状，在攻击连续目标时依然能保持动量。你的大发明获得横扫和多用S特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.h1hNr4jABip2ERDd]（近战专用）</strong> 你为大发明设计了能轻易隐藏并发动突袭的外观。它获得被背刺和多用P特征。如果该武器具有轻负载，它也获得隐蔽特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.tPL4lrGLCB5XbgeV]（单手武器专用；不能具有双手特征）</strong> 你将武器和护手套组合在一起，能够快速地在用武器攻击和用手修补之间切换。你的大发明获得不占手特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.y62b9R6RUBbkZECA]</strong> 你设计了多种合金，包含了多种金属的有利特性，且你将武器和弹药的许多部件替换成了这些合金。你的武器大发明是寒铁和银。这意味着你能对许多超自然生物，例如恶魔，魔鬼和精类造成更多伤害。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ptBLVvRqn1fA3A4l]（远程专用）</strong> 你的武器能够射出一种投射物，可以展开成一根绳索或网，能缠绕敌人的脚部并摔绊你的目标，也能利用武器内建的爪钩进行攀爬。你的武器获得攀爬和远程摔绊特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.WxkZMlETXo165XnC]（投掷专用）</strong> 你的武器有一种可延伸的线，能用来绊倒敌人并快速将武器收回手中。你的大发明获得远程摔绊和栓绳特征。</li></ul>"
+                },
+                "Juggernaut": {
+                    "name": "钢铁壁垒 Juggernaut",
+                    "description": "<p><strong>野蛮人</strong> 你的身体习惯于对抗物理疼痛，并能够很好的抵抗疾病。你在强韧豁免上的熟练度提升至大师。当你在强韧豁免中骰出成功，将其改为大成功。</p>\n<p><strong>魔战士</strong> 你的身体习惯于承受物理伤害和抵抗大多数疾病。你在强韧豁免上的熟练等级提升至大师等级。当你在一个强韧豁免检定上取得成功时，你可以将其替换为大成功。</p>"
+                },
+                "Basic Gadgets": {
+                    "name": "基础装置 Basic Gadgets",
+                    "description": "<p>对你而言，某些装置过于基础，制作起来不值一提。当你在每日准备期间创建临时装置时，只要它们等级不高于你等级的一半，你便可以使用其中一件临时装置创建出两件相同类型的临时装置。如果你在制作上为传奇，则可改为创建四件相同类型的装置。</p>"
+                },
+                "Repair Toolkit": {
+                    "name": "修补工具包 Repair Toolkit",
+                    "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+                },
+                "Clockwork Celerity+": {
+                    "name": "时钟敏捷+ Clockwork Celerity+",
+                    "description": "<p><strong>触发</strong> 你的回合开始。</p>\n<hr />\n<p>你可以使用大发明中的不稳定时钟器件，推动你的发明更快地运作。本回合你处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你可以使用额外动作进行移步、跨步，或使用你大发明所授予的另一种移动动作（如有「潜水护甲」专长则为游泳）。</li>\n<li><strong>构装体</strong> 你可以使用额外动作来命令你的构装体大发明（或在你花费 2 个动作命令构装体时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你可以使用额外动作施放科法射线。</li>\n<li><strong>装置</strong> 你可以使用额外动作来激活你的装置大发明或使用「速制装置」。</li>\n</ul>"
+                },
+                "Innovation": {
+                    "name": "大发明 Innovation",
+                    "description": "<p>虽然你总是在发明，但还是有一件发明是代表你的最高杰作，你希望这件发明在经过各种调整后能改变世界。从下列大发明中选择一种。你的大发明等级等于你的等级。如果你的大发明被摧毁，你可以花费1天的休整期，进行一次手艺检定，使用符合你等级的高DC；成功时，你重新建造了它。大发明只有在你对其持续性地维护和修补时才能正常工作，因此不存在市场价格。</p>"
+                },
+                "Infinite Invention": {
+                    "name": "无尽创制 Infinite Invention",
+                    "description": "<p>你调整大发明的能力达到了不可能的高度，你能使用这种技能在你的空闲时间中进行大量的调整。在你的每日准备期间，如果大发明被摧毁或受损，你自动修复你的大发明，你也能够改成另一种大发明（护甲，构装体，武器，或其他你获得许可的类型）并改变你的改进和攻势增压。</p>\n<p>如果你有以之前的大发明为先决条件的专长，你无法使用它们，除非按照通常的方式重训。然而，你只需要1天就能将其改为以新的大发明为先决条件的专长，而非1周。</p>"
+                },
+                "Quick Gadgetry": {
+                    "name": "速制装置 Quick Gadgetry",
+                    "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+                },
+                "Canny Acumen (Reflex)": {
+                    "name": "精明洞察（反射） Canny Acumen (Reflex)",
+                    "description": "<p>你躲避危险的能力和观察力让大多数同僚相形见绌。选择强韧豁免、反射豁免、意志豁免或察觉。你在所选能力上的熟练度变为专家。达到17级时，所选能力的熟练度变为大师。</p>"
+                },
+                "Gadget Specialist": {
+                    "name": "装置专家 Gadget Specialist",
+                    "description": "<p>你不仅仅用你的小装置来增压或调校，你每天也能制作一些特殊的临时消耗小装置。你获得3个常见或罕见的小装置（66页）的配方。每天在每日准备期间，你可以从配方簿中制造两个临时小装置。按这种方式准备的小装置不会消耗你任何资源来制作，也不存在出售价格。它们是临时物品，如果到你下一次进行每日准备时还没使用就会解离。</p>\n<p>如果你在手艺达到大师，你每天可以制作3个小装置，你也获得3个额外的常见或罕见小装置配方。如果你在手艺上达到传奇，你每天可以制作4个小装置，你也获得3个额外的常见或罕见小装置配方，总共加起来有9个。</p>"
+                },
+                "Legendary Codebreaker": {
+                    "name": "传奇破译员 Legendary Codebreaker",
+                    "description": "<p>你在语言和密码上的造诣极高，单凭快速浏览文本，就能破译其信息。你能够在以正常速度阅读时用社群技能@UUID[Compendium.pf2e.actionspf2e.Item.d9gbpiQjChYDYA2L]{解译文书 Decipher Writing}。若你放慢速度，花费通常情况所需的完整时间，并在检定中成功，则改为获得大成功。若你花费通常情况需要的完整时间，并获得大成功，则可几乎逐字逐句地细致理解文本。</p>"
+                },
+                "Gadgeteer Dedication": {
+                    "name": "装置师献身 Gadgeteer Dedication",
+                    "description": "<p><strong>触发 </strong>你为使用装置大发明进行的不稳定纯骰检定失败。</p>\n<hr />\n<p>你的装置技艺已发展至足以提供可靠的故障保险——以应对计划之外的情况。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>"
+                },
+                "Overdrive/Explode": {
+                    "name": "超载／爆炸 Overdrive/Explode",
+                    "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+                },
+                "Legendary Overdrive": {
+                    "name": "传奇超载 Legendary Overdrive",
+                    "description": "<p>你的超凡发明力和工艺能力强化了你的超载能力。你在手艺上获得传奇熟练度。在成功使用超载时，你将额外伤害提升到3点，替换掉从超载大师中获得的提升。</p>"
+                },
+                "Medium Armor Expertise (Inventor)": {
+                    "name": "中型护甲熟练（发明家） Medium Armor Expertise (Inventor)",
+                    "description": "<p>你学会了如何从攻击中更好地保护自己。你在轻甲，中甲和无甲防御上的熟练度提升至专家。</p>\n<p>如果你有中甲或重甲大发明，你能使用护甲大发明的重击专精效果。</p>"
+                },
+                "Resolve": {
+                    "name": "决志 Resolve",
+                    "description": "<p>你的决意使你的意志如钢铁般坚毅。你在意志豁免上的熟练度提升至大师。当你在意志豁免中骰出了成功，你改为获得大成功。</p>"
+                },
+                "Tradecraft Tattoo (Greater)": {
+                    "name": "工艺纹身（高等） Tradecraft Tattoo (Greater)",
+                    "description": "<p>工匠们会用刺青来表现他们所专擅的领域和技能及其选择的行业。这种刺青可以用于装饰手臂、手指或眼睛，表现形式为使用艺术图案绘制的谋生工具，比如铁毡、画笔或者铲子。你在手艺检定中获得+3物品加值。此外，当你在@UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]的手艺检定中投掷出大失败结果时，将其视为失败以取代大失败。</p>\n<p><strong>启动</strong> 1分钟（专注，操作）</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 刺青施放@UUID[Compendium.pf2e.spells-srd.Item.TUj8eugNqAvB1vVR]。你能够选择物品及其外观，以及法术是4环级还是5环级。造物术的持续时间变为无限，但是当你再次启动刺青时就会终止。</p>"
+                },
+                "Heat Wave": {
+                    "name": "热浪 Heat Wave",
+                    "description": "<p><strong>触发</strong> 一个效果会对你造成火焰伤害，即使你抵抗了所有伤害。</p>\n<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你驾驭迎面而来的火焰，将它们扭曲成一个由热气和烟雾组成的薄幕，直到你的下个回合的开始前，你获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Doubling Rings (Greater)": {
+                    "name": "双倍指环（高等） Doubling Rings (Greater)",
+                    "description": "<p>这件物品包含了两只通过魔法相连的戒指：一只精细锃亮的金戒指，上面镶嵌着一颗切割成方形的红宝石，以及一只厚重朴素的铁戒指。当你用戴着金戒指的手持用着一件近战武器，这件武器的基础符文会被复制到你戴着铁戒指的那只手所持用的任何近战武器上。（基础符文包括<em>武器潜能符文</em> 和 <em>强击符文</em>，分别能够在攻击骰上提供物品加值以及增加额外的武器伤害骰。）带着铁戒指的手所持握的武器上面原本的所有基础符文都会被压制。</p>\n<p>复制的效果只会在你同时戴着两只戒指的时候发生，并在你停止持用一只手上的近战武器时消失。因此，复制的增益无法用于投掷攻击，也无法作用于你持握但未持用的武器上（例如用单手持握一件需要双手持用的武器）。</p>\n<p>对戒也会复制佩戴金戒指的手上的武器的性能符文，前提是佩戴铁戒指的手上的武器满足符文要求的全部条件，而且不是一件特殊武器。铁戒指的手上的武器会获得复制的这些符文带来的增益，而它本身所拥有的全部符文都会被压制。当你绑定这对戒指时，你也可以选择让戒指只复制基础符文，如同标准的<em>双持对戒</em>一般。</p>"
+                },
+                "Genie Weapon Familiarity": {
+                    "name": "精灵武器熟悉 Genie Weapon Familiarity",
+                    "description": "<p>你曾使用你的巨灵先祖所使用的武器训练过。你在@UUID[Compendium.pf2e.equipment-srd.Item.XGtIUZ4ZNKuFx1uL]{弯刃大刀 Falchions}、@UUID[Compendium.pf2e.equipment-srd.Item.UfurZQK6H6SgOjqe]{刺叉 Ranseurs}、@UUID[Compendium.pf2e.equipment-srd.Item.grmaV4GdoGD7sKbn]{弯刀 Scimitars}、@UUID[Compendium.pf2e.equipment-srd.Item.FJrsDoaIXksVjld9]{三叉戟 Tridents}武器上受训。</p>\n<p>此外，所有[罕见][巨灵]武器对你为可用。对你而言，军用[巨灵]武器是简易武器，进阶[巨灵]武器是军用武器。</p>"
+                },
+                "Inventor Weapon Expertise": {
+                    "name": "发明家武器熟练 Inventor Weapon Expertise",
+                    "description": "<p>你开发了一种技巧，能更有效率地使用你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至专家。</p>\n<p>如果你有 @UUID[Compendium.pf2e.classfeatures.Item.bok3P78CMchFibxC]{武器大发明 Weapon Innovation}，你可以使用大发明的重击专精效果。</p>"
+                },
+                "Greater Weapon Specialization": {
+                    "name": "高等武器专精 Greater Weapon Specialization",
+                    "description": "<p>你源自武器专精职业特性的伤害，在武器熟练度至专家的武器和无武装攻击上提升至4，若熟练度至大师则为6，若熟练度为传奇则为8。</p>"
+                },
+                "Bedroll": {
+                    "name": "行军床 Bedroll",
+                    "description": "<p>一床卷起来的被子</p>"
+                },
+                "Wish Knife": {
+                    "name": "愿望之刀 Wish Knife",
+                    "description": "<p>这把匕首很像一把祈愿剑，它的刃上刻有复杂的凹槽，能够维持能量。祈愿刃比其他同类型的剑（应该是指祈愿剑）更轻，这使得它们成为敏捷战士的首选武器。</p>"
+                },
+                "Copper Pieces": {
+                    "name": "铜币 Copper Pieces"
+                },
+                "Crafter's Appraisal": {
+                    "name": "工匠鉴定 Crafter's Appraisal",
+                    "description": "<p>你对物品的知识储备让你可以辨识魔法效果。你可以使用手艺技能而非对应魔法根源的关联技能来对魔法物品使用@UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]行动，不过也只能对魔法物品。</p>"
+                },
+                "Unstable Redundancies+": {
+                    "name": "不稳定冗余+ Unstable Redundancies+",
+                    "description": "<p><strong>触发</strong> 你将进行不稳定动作的纯骰检定，但你尚未掷该纯骰检定。</p>\n<hr />\n<p>你为你的大发明内置了三重冗余，并加入各类缓冲以防止它在你的不稳定实验中受损。你自动通过触发的纯骰检定。由于自动通过而非掷骰，即使你拥有多个不稳定动作，你也不会增加不稳定纯骰检定的 DC。</p>\n<p>你必须再花费 10分钟重新设置后才能再次依赖你的不稳定冗余。如果你花费 10分钟重新调校大发明以再次使用不稳定动作，你可以在同一时间内重新设置不稳定冗余。</p>"
+                },
+                "Peerless Inventor": {
+                    "name": "无双发明家 Peerless Inventor",
+                    "description": "<p>你不断发明，你的手艺技能不可质疑。你获得 @UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]{发明家} 技能专长，即使你不满足先决条件。</p>"
+                },
+                "Silver Pieces": {
+                    "name": "银币 Silver Pieces"
+                },
+                "Variable Gadgetry": {
+                    "name": "可变装置 Variable Gadgetry",
+                    "description": "<p>你调整你大发明的临时装置，按需改变其伤害类型。当你创建造成伤害的临时装置时，你可以在酸蚀、寒冷、电击或火焰之间选择，让你的装置造成所选伤害类型，而非其原本的伤害类型。</p>"
+                },
+                "Miraculous Repair": {
+                    "name": "神迹修补 Miraculous Repair",
+                    "description": "<p>巨灵子嗣无法实现神奇的愿望，但这种力量的残余仍留在你体内。面对一个受损但并未被摧毁的装置，你能许愿让它恢复运作10分钟。该物品必须是平凡无奇的物品，不超过5负载，比如门上的一个残缺锁具。10分钟内，该物品能正常运作，无视结构上的任何损坏。这并不会赋予你该装置能做什么或它如何运作的知识。10分钟后，该物品回归未修复状态，且对奇迹修复临时免疫一天。</p>"
+                },
+                "Rope": {
+                    "name": "绳索 Rope",
+                    "description": "<p>50尺长的麻绳</p>"
+                },
+                "Swift Sneak": {
+                    "name": "迅捷潜行 Swift Sneak",
+                    "description": "<p>你在@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}时可以全速移动。只要你拥有相应的移动类型，就可以在掘地、攀爬、飞行、游泳时潜行，而非仅在行走时。</p>"
+                },
+                "Shield Block": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Incredible Initiative": {
+                    "name": "神速先攻 Incredible Initiative",
+                    "description": "<p>你的反应比他人更迅速。你的先攻检定获得+2环境加值。</p>"
+                },
+                "Flint and Steel": {
+                    "name": "火石与火柴 Flint and Steel",
+                    "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+                },
+                "Stable Instability": {
+                    "name": "稳定不稳 Stable Instability",
+                    "description": "<p>你已学会以无与伦比的速度让你的大发明恢复功能。当你花费 10分钟重新调校你的大发明以恢复源自不稳定特征的功能时，你也将不稳定纯骰检定降至基于你所拥有不稳定动作数量的最低值，而非仅减少 4。</p>"
+                },
+                "Backpack": {
+                    "name": "背包 Backpack",
+                    "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+                },
+                "Gadget Innovations": {
+                    "name": "装置大发明 Gadget Innovations",
+                    "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+                },
+                "Explode+ (93x8)": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你的大发明是一件几乎完全靠你自己的工艺勉强维系的造物，时刻处于完全崩散的边缘。这虽然增添了风险，但也意味着你可以借由特殊的不稳定动作驱使它发挥远超其设计规格的表现。请参阅「不稳定」特征的定义及其对你大发明的影响。</p>\n<p>发明家在职业生涯中可以学到各种不稳定动作，但所有发明家至少都知道如何让自己的大发明 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH]{爆炸+}。</p>"
+                },
+                "Fleet": {
+                    "name": "步履矫健 Fleet",
+                    "description": "<p>你的脚步变得更快。你的速度提高5尺。</p>"
+                },
+                "Specialty Crafting (Blacksmithing)": {
+                    "name": "专项制作（铁匠） Specialty Crafting",
+                    "description": "<p>你专攻于制作特定的一类物品。从下表中选择一个专攻方向，你在用来制作金属物件的手艺技能检定上获得+1环境加值。当你在手艺技能上达大师级熟练度时，这个加值提升到+2。</p>\n<hr />\n<p><strong>范例工艺造物</strong> 金属制品，如金属盔甲</p>\n<p>如果不能确定某一件物品的制作是否属于本专长影响的范围，则GM具有最终裁判权。在某些情况下，本专长只会部分地对某些物品的制作提供帮助。举例来说，如果你的专攻方向是“木工”，那么如果你要制作一把钉头锤的话，GM只会允许你获得本专长提供的加值的一半，因为制作这样的一件物品会同时需要锻造和木工加工方式。</p>"
+                },
+                "Craft Anything": {
+                    "name": "天工开物 Craft Anything",
+                    "description": "<p>你可以突破限制，找出办法制造任何东西。只要你有相应的手艺技能专长（比如用来制作魔法物品的魔法手艺），等级达到物品等级，并且熟练度达到需求，就可以忽略其它所有条件，比如特定族裔或提供法术的需求。若某项需求会增加物品的价格，你依然必须支付该价格（包括施放本身有金钱花费的法术）。你无法忽略有专门许可和制作方法的特殊物品的需求，比如神器。由GM决定你能忽略哪些需求。</p>"
+                },
+                "Waffle Iron": {
+                    "name": "华夫饼烙铁 Waffle Iron",
+                    "description": "<p>这套铰链式金属板的特点是每张金属板内侧都有凹槽，让烹制的糕点烤出所需质地。将面糊倒在金属板上，关闭华夫饼机，然后将它放在火或炉灶上烤。</p>"
+                },
+                "Overdrive+": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p>你拥有一系列由你自己发明的小型装置——从肌肉刺激剂到冲击活塞应有尽有。在必要时，你可以将它们投入 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR]{超载} 来在战斗中助你一臂之力。</p>"
+                },
+                "Weapon Specialization": {
+                    "name": "武器专精 Weapon Specialization",
+                    "description": "<p>你已懂得如何运用自己最熟悉的武器造成更大伤害。使用熟练度为专家的武器和无武装攻击时，你额外造成2点伤害。若熟练度为大师则该伤害增加至3点，熟练度为传奇则增加至4点。</p>"
+                },
+                "Inventor+": {
+                    "name": "发明家+ Inventor+",
+                    "description": "<p><em>任何工匠都能照着图纸造出一件装置，但你发明的是不可能！你梦想出的每一件奇异造物都是一项突破极限的独特实验，是一台似乎只为你工作的神秘机器。你始终处在下一次重大突破的边缘，每一次试错与磨砺都是测试与调校的契机。只要你能想象，你就能制造。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家}</em></p>"
+                },
+                "Inventor": {
+                    "name": "发明家 Inventor",
+                    "description": "<p><em>无论哪个修补匠都能依葫芦画瓢地鼓捣一些技术装置出来，但你发明的玩意儿前所未有！你通过独一无二的实验，设计出来的每件稀奇古怪的奇思妙想都推进了可能性的界限，并创造出了一种可能只有你才了解如何使用的神秘机器。你总是立足于实现技术突破的风口浪尖，每一次试验，每一次磨练都是调试的机会。没有做不到，只有想不到。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家 Inventor}</em></p>"
+                },
+                "Complete Reconfiguration": {
+                    "name": "完全重构 Complete Reconfiguration",
+                    "description": "<p>当进行制作和修补时，你是改变改进以调整大发明功能的绝对行家。当你花费休整期重构你的大发明，并在制作检定中成功时，你可以切换任意数量的改进，切换你的攻势增压，或重训任意数量的改进专长，而非只能选择一个。你仍然必须将改进切换成同类别的其他改进（初始、突破或革命）。</p>"
+                },
+                "Titan Wrestler": {
+                    "name": "巨人摔角手 Titan Wrestler",
+                    "description": "<p>你可以对体型最多比你大两级的生物尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}、@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}，若你在运动技能上的熟练度达到传奇，则目标可以是体型最多比你大三级的生物。</p>"
+                },
+                "Engineering Lore": {
+                    "name": "工程学识 Engineering Lore"
+                },
+                "Gadget Conglomeration": {
+                    "name": "装置集合 Gadget Conglomeration",
+                    "description": "<p>你已学会创造可多次使用的装置，有时甚至能让两次激活同时进行以产生更有利的效果。当你在每日准备期间创建临时装置时，你可以选择将两件临时装置合并为一件装置，过程消耗两件装置，并将它们融合成一个单元。当该装置被激活时，可以使用其中任一效果，或两种效果都使用；并以激活动作数较多的那件来确定所需动作数。使用该装置的生物决定该装置效果的发生顺序。</p>"
+                },
+                "Chalk": {
+                    "name": "白垩 Chalk"
+                },
+                "Quick Repair": {
+                    "name": "快速修补 Quick Repair",
+                    "description": "<p>对你而言，@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}行动失去探索特征，只需花费1分钟而非正常情况的10分钟。若你在手艺技能上的熟练度达到大师，只需花费3个动作；若达到传奇，只需1个动作。</p>"
+                },
+                "Acid Flask (Lesser)": {
+                    "name": "酸液瓶（弱级） Acid Flask (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个装满强酸的烧瓶会造成1点酸蚀伤害，1d6点酸蚀持续伤害，和1点酸蚀溅射伤害。</p>"
+                },
+                "Inventive Mastery": {
+                    "name": "发明大师 Inventive Mastery",
+                    "description": "<p>你的发明极其有效。你在发明家职业DC上的熟练度提升至大师。</p>"
+                },
+                "Alertness": {
+                    "name": "警觉 Alertness",
+                    "description": "<p>你对细节的注意力让你维持对周遭威胁的警觉。你在察觉上的熟练度提升至专家。</p>"
+                },
+                "Offensive Boost+ (Ignition (Fire))": {
+                    "name": "攻势增益+（点火（火）） Offensive Boost+ (Ignition (Fire))",
+                    "description": "<p>你为大发明做出补强以提升进攻能力。你的改进使得任何依赖大发明的打击额外造成 1d6 伤害，伤害类型由所选增益决定。如果你的大发明是护甲，该增益施加于你的近战徒手打击及你每日预备时选定一件武器之近战打击；如果你的大发明是构装体，该增益施加于你构装体伙伴之打击；如果你的大发明是武器，该增益施加于你以大发明进行之打击；如果你的大发明是治疗，该增益施加于你治疗大发明之打击；如果你的大发明是科法，该增益施加于无持续时间且仅以单一生物为目标的法术攻击骰所造成的伤害——若你的法术对同一生物造成多次伤害，该增益的额外伤害也只施加一次；如果你的大发明是装置，则你的进攻增益施加于你的近战徒手打击、你每日预备时选定一件武器之打击、以装置进行的打击，或以装置大发明所附着物品进行的打击。你可以利用空闲时间像更换改良一样切换到不同的增益。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>\n<hr />\n<p><em>注意：所附效果仅用于构装体大发明、护甲大发明，以及装置大发明每日预备时选定武器之需要。</em></p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.k2T7Er8Xn8Iry5HA]{效果：进攻增益+}</p>"
+                },
+                "+3 Major Striking Greater Flaming Greater Shock Conducting Alchemical Gauntlet": {
+                    "name": "+3 重型强击高等烈焰高等震击导能炼金战手套 +3 Major Striking Greater Flaming Greater Shock Conducting Alchemical Gauntlet",
+                    "description": "<p>炼金铁手套和敌人接触时会发出小型的炼金爆炸。作为一个交互动作，你可以在铁手套手腕附近的金属支架上放置一个炸弹。炸弹必须是能造成能量伤害的，例如强酸瓶、炽火胶、暴雷石、瓶装闪电或霜冻瓶。在接下来用铁手套进行的三次攻击中，除了正常的铁手套伤害外，还能造成炸弹伤害类型的1d4伤害。如果在做出第一次攻击之后，第二次和第三次攻击没有在1分钟内做出，炸弹的能量就会被浪费掉。这些攻击不会造成炸弹的溅射伤害或其他特殊效果，也不会被任何增幅或修改炸弹效果的能力影响。</p>"
+                },
+                "Reflex Expertise": {
+                    "name": "反射熟练 Reflex Expertise",
+                    "description": "<p>你磨练出了回避危险的能力。你在反射豁免上的熟练度提升至专家。</p>\n<p><strong>守护者</strong> 即便身披沉重甲胄，你也能想方设法抵御范围攻击。你在反射豁免上的熟练度提升至专家。</p>"
+                },
+                "Shield Block (7TDn)": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Studded Leather Armor": {
+                    "name": "镶钉皮甲 Studded Leather Armor",
+                    "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+                },
+                "Thunderstone (Lesser)": {
+                    "name": "雷震石（弱级） Thunderstone (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 打击</p>\n<hr />\n<p>当这枚石头命中一个生物或一个坚硬表面时，它会爆发出震耳欲聋的巨响。在暴雷石爆发的空间周围10尺内的所有生物必须在一次 @Check[fortitude|dc:17|name:Lesser Thunderstone|showDC:all] 豁免检定，否则直到它的下一轮结束位置都陷入 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened} 。</p>\n<p>暴雷石造成1d4点音波伤害和1点音波溅射伤害</p>"
+                },
+                "Gold Pieces": {
+                    "name": "金币 Gold Pieces"
+                },
+                "Soap": {
+                    "name": "肥皂 Soap",
+                    "description": "<p>一根棒状肥皂。</p>"
+                },
+                "Inventor's Fulu": {
+                    "name": "发明家之符 Inventor's Fulu",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">f</span> （专注）</p>\n<p><strong>触发</strong> 你在具有不稳定特征的动作中掷出大失败</p><hr /><p>部分天夏的发明家会把油炸零食放在他们的大发明旁边，这是一种让设备按照预期运作的护身符。这种做法也影响了其他发明家，他们用<em>发明家符箓</em>上的食物画作来替代食物。当你启动符箓时，你的大失败变为失败，而且你只需要花费1分钟就能让你的大发明再度正常工作。之后符箓便会烧成灰烬，其效果结束。</p>"
+                },
+                "Impeccable Crafting": {
+                    "name": "完美手艺 Impeccable Crafting",
+                    "description": "<p>你能以极高的效率制作出完美无瑕的成品。制作你在@UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{独门手艺 Specialty Crafting}中所选类型的物品时，每当你的手艺检定掷出成功，改为获得大成功。</p>"
+                },
+                "Mechanical Torch": {
+                    "name": "机械火炬 Mechanical Torch",
+                    "description": "<p>机械火把由电力驱动，你能以一个交互动作拨动机械火把身上的一个开关来打开或关闭它。当启动时，机械火把会在20尺半径范围内发出明亮光照（20-40尺范围内发出昏暗光照），或在40尺锥形范围内发出明亮光照（40-80尺锥形范围发出昏暗光照）。切换模式需要用单一的交互动作来搬动开关。机械火把携带的电量足够使用10分钟。你可以花费1分钟时间通过一个集成的曲柄充电机构来给机械火把充电，它的原理是用发条齿轮转动时发出的电火花来充电。但是这样做的话你需要使用两只手。</p>"
+                },
+                "Human": {
+                    "name": "人类 Human",
+                    "description": "<p><em>人类与格拉利昂上的任何居民一样，变化莫测又不可捉摸，他们有着强大的行动力和生产力用以隐忍和扩张。虽然人类崛起之前有着许多兴旺发达的文明，但纵观历史，人类已然建立了众多极其伟岸亦或极其可怖的社会，而时至今日，人类的人口数量已在整个内海地区居于首位。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{人类 Human}</em></p>"
+                },
+                "Overdrive+ (Etsv)": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p>临时把你身上的装置零件推入超载状态，试图为你的攻击注入更强的力量。进行一次 @Check[type:crafting|dc:@self.level]，DC 为对应你等级的标准 DC。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb]{效果：超载+}</p>\n<hr />\n<p><strong>大成功</strong> 你的装置进入一种被称为「极限超载」的极致高效状态，为你的攻击注入巨大力量。你的打击在 1 分钟内造成等同于你的智力修正之额外伤害。超载结束后，你的装置因冷却或复位而暂时无法使用，你在 1 分钟内不能再使用超载。</p>\n<p><strong>成功</strong> 你的装置进入超载，为你的攻击增添力量。如同大成功，但额外伤害等同于你的智力修正的一半。</p>\n<p><strong>失败</strong> 你计算失误，什么都没发生。</p>\n<p><strong>大失败</strong> 哎呀！有什么东西爆炸了。你受到 [[/r @actor.level[fire]]]{相当于你等级的火焰伤害}，并且在你的装置冷却复位的 1 分钟内不能再使用超载。</p>\n<hr />\n<p><strong>特殊</strong> 在超载效果期间，你仍然可以使用 @UUID[Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A]{超载} 动作。你不能借此延长超载持续时间，但若大成功，你可以将一次超载升级为极限超载。失败对当前超载无效，大失败则结束你当前的超载效果。</p>"
+                },
+                "Eureka!": {
+                    "name": "我想到了！ Eureka!",
+                    "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>"
+                },
+                "Gadgeteer Innovation": {
+                    "name": "装置师大发明 Gadgeteer Innovation",
+                    "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+                },
+                "Rations": {
+                    "name": "干粮 Rations"
+                },
+                "Inventor Weapon Mastery": {
+                    "name": "发明家武器精通 Inventor Weapon Mastery",
+                    "description": "<p>你完全理解了你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至大师。</p>"
+                },
+                "Choker of Elocution (Greater)": {
+                    "name": "雄辩颈饰（高等） Choker of Elocution (Greater)",
+                    "description": "<p>这只白金颈圈上刻着一种语言的字母表，能提供一种语言以及相关文化的知识。</p>\n<p>你在社群技能检定上获得+2物品加值，并能够理解、说和写这种语言。</p>\n<p>你精彩的雄辩能力能够将在耳聋状态下执行一次听觉动作的纯骰检定DC从5降低至3。</p>\n<p><strong>制作需求</strong> 你掌握了颈圈提供的所有语言。</p>"
+                },
+                "Lubaiko": {
+                    "name": "鲁拜科 Lubaiko",
+                    "description": "<p>从点燃面粉厂的那一缕火星到足以撕裂一整个国家的群情激奋，火焰与爆炸便是卢拜寇的激情所在。她是燃光了引线的火药桶，无论好坏，她要爆裂成更盛大的模样。她漫游于格拉利昂的天空，无论何时何地，她绝不会拒绝任何一个能将“闪电”炸进农田或人们脑海里的机会。有些人觉得，那来自卢拜寇火焰的滚滚烟尘，乃是弥漫在空气中、渗入到地底里的不幸与诅咒。然而，她所带来的的大火却也时常为“新生”清出了道路。</p>\n<p>纵然危险，但卢拜寇也有俏皮捣蛋的一面，她就如同舞动火花与烛焰低语间那不稳定的美。她酷爱男装，特爱白兰地所带来的激情与喧乱，更别说那些让人情绪高涨、慷慨激昂的故事了。她的幽默感中夹杂着小小的“施虐”倾向——只要没有人受伤（至少罪不至此的人没有），那么她会为了好玩去点燃别人的袖子，亦或者歇斯底里地嘲笑他人的霉运。尽管她不曾参与火药的发明，但她兴高采烈地拥抱了它们，她可太喜欢那些火药祭品与爆桶礼炮了。</p>\n<p>革命者、发明家、艺术家还有纵火犯都会向卢拜寇祈祷，希望他们的“功业”能迅速地传播开来。她还因为介入冲突施以制止而为人所知，就比如拯救一株特别的兰花，挽救了某人赖以生存的家园。当然，她做这些很有可能只是因为一时兴起，而不是出于对绝望中祈求的回应。许多想要引发动荡、改变世界的人都被卢拜寇所吸引，而她的那些信徒大多都与她一样，深深地迷恋着不断膨胀的力量，哪怕它会焚尽一切。</p>\n<hr />\n<p>崇拜卢拜寇——燃烧无定的火焰与爆炸之神——的火种者，往往在这位反复无常、变幻莫测的神祇身上看见自己。尽管她可以残酷甚至肆意破坏，她的火种者信徒更专注于她的野心与热忱，并从她无视代价、敢于点燃变革的勇气中汲取灵感。她颁布「改变世界」的圣谕对他们意义非凡——他们以此号召作为旗帜，煽动叛乱与动荡，或在格拉利昂各地散播亡命壮举的刺激。被卢拜寇吸引的火种者往往是死硬的冒险家与流浪者，因为这位漂泊女神自己从不安居一处，并禁止过任何安定式的生活。</p>\n<p>虽然卢拜寇常被归咎于霉运，甚至吸引了一些以敌人（有时是自己）的不幸为乐的信徒，她的火种者信徒却很少承认这一面。同所有火种者一样，他们自身往往运气惊人，并从对潜在恶果毫不在意的态度中受益匪浅。从卢拜寇那里，他们学会拥抱意外与偶然，将失控的局面（无论是象征性还是字面意义上）善加利用。在火种者之中，对她的崇拜主要由简单的仪式与典礼组成——比如点火或引燃火药时的一句祈祷。这种灵活与简朴帮助她的崇拜得以传播；许多火种者信徒在亡命冒险或鼓动人群时戏谑地以她之名相唤，亦如此。</p>\n<p>崇敬卢拜寇的火种者并不觉得需要以特定方式着装或炫耀巨大的宗教标志。和她许多崇拜者一样，他们往往偏好比典型火种者更务实的衣着，但并无规定法袍。崇拜者常会佩戴一枚以她标志为图案的小纹身或挂坠，也可能穿戴绣有火花或火焰装饰的配件或布料。但由于火种者珍视他们在压迫社会中往来潜行、暗中颠覆暴政的能力，他们深知不该公开张扬对一位常被那些社会视为大忌的神祇之忠诚。</p>\n<p><strong>典范</strong> 纵火，改变世界，要么默默无闻要么一鸣惊人</p>\n<p><strong>禁忌</strong> 安抚群众，扑灭大火，连续三晚在同一个地方睡觉</p>\n<p><strong>关注领域</strong> 霉运、灵感、动荡、野火</p>\n<h2>天神下凡</h2>\n<p>当施放@UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]法术时，卢拜寇的信徒会得到以下的额外能力。</p>\n<p><strong>卢拜寇</strong> 速度30尺，飞行速度70尺</p>\n<p><span class=\"action-glyph\">1</span> 长矛 （触及20尺）, 伤害@Damage[(6d12+6)[piercing]]</p>\n<p><span class=\"action-glyph\">1</span> 焱火雷矢 （多用火焰，射程120尺），伤害@Damage[(6d6+3)[electricity]]</p>"
+                },
+                "Bottled Lightning (Lesser)": {
+                    "name": "瓶装闪电（弱级） Bottled Lightning (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p><hr /><p>瓶装闪电里面装满了一接触空气就会创造出强烈电流的不稳定液体试剂。一旦命中，目标还会在你的下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。 这枚炸弹造成1d6点闪电伤害和1点闪电溅射伤害。</p>"
+                },
+                "Naari": {
+                    "name": "娜阿丽 Naari",
+                    "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+                },
+                "Diehard": {
+                    "name": "斗志昂扬 Diehard",
+                    "description": "<p>你比大多数人更难被杀死。你在@UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死 Dying 5}时才会死亡，而非濒死4。</p>"
+                },
+                "Inventive Expertise": {
+                    "name": "发明专家 Inventive Expertise",
+                    "description": "<p>通过不断的发明与实验，你的发明更加高效且可靠。你发明家的职业DC提升至专家。</p>"
+                },
+                "Powerful Leap": {
+                    "name": "强力跳跃 Powerful Leap",
+                    "description": "<p>未采取@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}行动时，你的垂直@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}可达5尺高度。你还会在跳跃时增加5尺水平距离，包括跳高和@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}。</p>"
+                },
+                "Mechanic": {
+                    "name": "技师 Mechanic",
+                    "description": "<p>机器错综复杂的内部运作对您来说并不陌生。无论它们是普通的设备还是复杂的发条装置，你都知道是什么让它们运转，以及如何维护它们。一个探险团体可能会让你跟随来修理他们的设备，或者你可能会四处旅行，为那些有需要的人提供你的稀有服务——当然，要钱！</p>\n<p>选择两项属性提升。一项必须是<strong>力量</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺和工程学识（Engineering Lore）技能上受训。你获得@UUID[Compendium.pf2e.feats-srd.Item.ASy9AKEIRxPYUi5o]技能专长。</p>"
+                },
+                "Full Automation+": {
+                    "name": "全自动+ Full Automation+",
+                    "description": "<p>你与你的大发明已交融至无需多想便能使用它们的程度。你永久处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你的护甲会对最微小的刺激作出反应，将你引向正确方向，前提是你正穿戴它。你可以使用额外动作进行跨步、移步，或使用你大发明所提供的某种移动方式（如飞行或游泳）。</li>\n<li><strong>构装体</strong> 你命令构装体的能力变得本能化。你可以使用额外动作命令你的构装体大发明（或在你选择花费 2 个动作命令时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你的武器在你手中变得更易挥舞，以致命的高效近乎成为你身体的延伸。只要你持用着它，它便能毫不费力地飞向你所选的目标。你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你的大发明被毫不费力地操控。你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你的大发明让你充满魔法数据。你可以使用额外动作施放科法射线。</li>\n<li><strong>装置 </strong>你的装置处于一触即发的激活状态，距离激活只差一念。你可以使用额外动作激活你的装置大发明或使用「速制装置」。</li>\n</ul>\n<p><strong>特殊 </strong>如果你拥有 @UUID[Compendium.pf2e-team-plus-inventors.inventors-feats.MoXof6ptZgNSQT4H]{时钟敏捷}，则当你使用「时钟敏捷」时，你不再变为迅捷，而是改为为你的大发明使用所列其中一项动作。</p>"
+                }
+            }
+        },
+        "Rutaiba El-Majid (Level 15)": {
+            "name": "鲁泰巴·艾尔-马吉德（15级） Rutaiba El-Majid (Level 15)",
+            "tokenName": "鲁泰巴·艾尔-马吉德（15级） Rutaiba El-Majid (Level 15)",
+            "prototypeToken": "鲁泰巴·艾尔-马吉德（15级） Rutaiba El-Majid (Level 15)",
+            "items": {
+                "Magical Crafting": {
+                    "name": "魔法制作 Magical Crafting",
+                    "description": "<p>你可以@UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作 Craft}魔法物品，不过某些物品会有其它条件。选取此专长时，你立即将四种2级或更低级常见魔法物品的配方加入你的配方簿中。</p>"
+                },
+                "Master Overdrive": {
+                    "name": "大师超载 Master Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Explode+": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你刻意将自己的大发明推过常规安全极限，让它爆炸并对附近生物造成伤害——希望同时不会损坏大发明本身。该爆炸对你周围 @Template[type:emanation|distance:5]（若你正穿戴或持握该大发明）或大发明周围（若大发明为随从）内所有生物造成 @Damage[max(2, @actor.level)d6[@actor.flags.pf2e.inventor.explode]] 伤害，并进行 @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。</p>\n<p>从 3 级开始，且此后每升一级，你的爆炸伤害增加 1d6。</p>\n<p>如果你拥有突破性大发明职业特性，则使用爆炸时你可以选择 5 尺或 @Template[type:emanation|distance:10] 作为作用区域；若你拥有革命性大发明职业特性，则可以选择 5 尺、10 尺或 @Template[type:emanation|distance:15]。</p>"
+                },
+                "Copper Pieces": {
+                    "name": "铜币 Copper Pieces"
+                },
+                "Marbles": {
+                    "name": "弹珠 Marbles",
+                    "description": "<p>这些小圆球由抛光的石子和彩色玻璃制成，一袋200个。你可以用一个交互动作将弹珠倒在与你邻接的空方格中。第一个进入该方格的生物必须成功通过@Check[acrobatics|dc:13]检定或@Check[reflex|dc:13]豁免（由它选择），否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。一旦一个生物进入了铺满弹珠的空间，足量弹珠就会散落四周，其他进入该方格的生物不再需要掷骰来避免跌倒。</p>"
+                },
+                "Effect: Offensive Boost+ (+1 Striking Wish Knife)": {
+                    "name": "效果：攻势增益+（+1 强击愿望之刀） Effect: Offensive Boost+ (+1 Striking Wish Knife)",
+                    "description": "<p>如果你的大发明是护甲，该增益施加于你每日预备时所选定的一件武器之近战打击；如果你的大发明是构装体，则增益施加于你的构装体伙伴之打击。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>"
+                },
+                "Formula Book": {
+                    "name": "配方书 Formula Book",
+                    "description": "<p>炼金术士将每一件他能够制作的物品的配方都一丝不苟地记录了下来。你在起始便免费获得一本标准@UUID[Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx]。这本配方簿包含了两个由你选择的常见一级炼金物品配方，外加你从@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]专长和研究课题中获得的配方。</p>\n<p>每当你获得一个等级，你可以将两个常见炼金物品的配方添加到你的配方簿中。这些新的配方可以对应任何等级的物品，只要是你能够制作的。你自动学会这些配方，不过你也可以从定居点或其他炼金术士那里找到或买到额外的配方，你还可以用@UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]专长发明它们。</p>\n<p>你只需要掌握最基本的配方便足以制作升级版本的物品——你不需要学习高等级的公式。例如，如果你掌握1级的下等生命灵药配方，只要满足等级和其他先决条件，你就可以制作全部下等、次等、中等、高等、上等和真实生命灵药。有着不同功能条目的炼金物品需要单独的配方，而大多数炼金物品的结构都类似生命灵药。</p>"
+                },
+                "Fail-Proof Gadgetry": {
+                    "name": "无失装置技艺 Fail-Proof Gadgetry",
+                    "description": "<p>你已学到，一次快速修复就足以将彻底的失败转为成功。你可以每轮一次而非每 10分钟一次使用「装置师献身」反应。</p>"
+                },
+                "Revolutionary Innovation": {
+                    "name": "革命性大发明 Revolutionary Innovation",
+                    "description": "<p>你是空前绝后的天才，发明了一种能彻底颠覆学术领域的技术——至少暂时颠覆了你的大发明！为你的大发明选择一种革命性改进。如果愿意，你也可以选择一种同类的初始或突破性改进。</p><h3>革命性护甲改进 Revolutionary Armor Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.HC99e4WoM36W3lrL]：</strong> 你的护甲使用了一种电磁场，分谐波失真器，或其他技术让接近你的人难以移动，除非得到你的允许。当穿戴你的护甲时，对你的敌人来说，邻接你的所有空间都变成困难地形。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.vUt71oX9QNLAUmZn]：</strong> 你护甲的防御能消融任何种类的朝你袭来的能量。当穿戴你的护甲时，你获得所有能量伤害的抗力（酸蚀，寒冷，电击，火焰，力场，音波，命能和虚能），数值等于2+你等级的一半。你必须有谐波振荡器，金属电抗或燃素校准器改进才能选择该改进。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.82rxCGBb5qf9fwbp]：</strong> 你改善了你的突破性改进所提供的抵抗伤害的能力。从你的大发明具有的下述突破性改进中选择一种：致密甲片，叠层网状织物，或张力吸收系统。将你从该改进中获得的抗力提升至你的等级而非你等级的一半。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ZrkyPG41iFicYsdX]（仅限隐秘套装）：</strong> 你在你的护甲上内建了一种多重传感遮罩，能从所有感官中扭曲你的轮廓，让你只留下朦胧的图像，沉闷的响声等等。当穿戴该护甲时，你对所有生物获得隐蔽，即使他们使用了非视觉的精确感官，例如蝙蝠的回声定位。和其他让你的位置保持明显的效果一样，你不能使用这种隐蔽躲藏或潜行。如果你使用了敌对动作，隐蔽终止，直到你花费单动作重置了遮罩，这具有操作特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.Q172fARBaNDR8Gqx]（仅限力量套装）：</strong> 你用如此重量级的防御系统全面强化了你的护甲，即使最致命的攻击也可能失去锋芒。每当你在穿戴这种护甲时承受重击，尝试一次DC13的纯骰检定。成功时，重击变成普通命中。这不能与<em>护命</em>符文或其他通过纯骰检定抵消重击的效果叠加。另外，你获得2+你等级一半的精准伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.8jELNQUBMAXUj3zR]：</strong> 你的护甲有如此多的调整和预案，能够抵抗所有物理伤害。当穿戴你的护甲时，你获得全物理伤害（钝击，穿刺和挥砍伤害，也包括持续性流血伤害）的抗力，数值等于你等级的一半。你必须有致密甲片，叠层网状织物或张力吸收系统的突破性改进才能选择该改进。</li><li><p><strong>@UUID[Compendium.pf2e.classfeatures.Item.rYfmpMBy7wd1VHeO]：</strong> 你可能涉猎了一些山铜合金的研究，或发现了其他工程学解决方案，你按照某种方式建造了你的大发明，使其能够容纳一个额外的性能符文。你的大发明比普通的同类物品可以容纳1个额外的性能符文（最大可以用+3潜能<em>护甲</em>容纳4个性能符文）。</p></li></ul><h3>革命性构装体改进 Revolutionary Construct Modifications</h3><ul><li><strong>飞行底盘（Flight Chassis）：</strong> 你为构装体适配了一种飞行方式，例如添加了螺旋桨或用飞翼和轻质结构再造了构装体。你的大发明获得25尺飞行速度。</li><li><strong>奇迹器械（Miracle Gears）：</strong> 你完美配置了大发明的脑皮层，它变得更加智能。它的智力属性提升2，它从你知晓的语言中学会一种你所选的语言。你的构装体获得使用需要较高智力才能使用的动作，例如@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]和解译文书。最后，你的构装体在两项你所选的基于智力或魅力的技能上获得传奇熟练度。你必须有惊奇器械改进才能选择该改进。</li><li><strong>抗性涂层（Resistant Coating）：</strong> 你的大发明难以被任何方式伤害。它获得5点全伤害抗力（除了精金）。</li><li><strong>符文基石（Runic Keystone）：</strong> 你在大发明中设计了一种类似<em>符文石</em>的装置，让它能够容纳一个性能符文，即使它不是武器或护甲。如果护甲性能符文能影响护甲的穿戴者，则能影响你的大发明自身。武器性能符文通常情况为武器提供的任何性能都应用在你的大发明的无武装攻击上，如常遵循所有需求（例如，<em>斩首</em>符文只能应用在挥砍近战无武装攻击上）；如果符文只影响远程武器，除非大发明有内置的远程攻击（例如来自弹丸发射器初始改进的远程攻击），否则不会生效。如果符文通常影响武器的物理形态和外观，例如<em>衣装</em>，该符文雕刻在你的构装体中时不会生效。</li><li><p><strong>防壁部署（Wall Configuration）：</strong> 你的大发明能够从可移动的构装体变成静止的战场碉堡。它可以花费2动作的行动展开，该行动具有操作特征，并从通常形态转变成又薄又直的金属墙，高10尺且长30尺。这堵墙必须穿过大发明的起始空间。当你的构装体是墙时，它不能进行任何动作，除了使用相同的行动变回来，它也不能轻易保护自己，陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]并在AC上承受额外的-2状态减值。墙会阻挡视线和效果线，除非你的大发明的HP降低至最大值的一半以下，此时墙上的洞能让生物看穿并利用掩蔽攻击，超小型生物也能直接穿过墙壁。</p></li></ul><h3>革命性武器改进 Revolutionary Weapon Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ZcoOMwEY8FX7UzMo]：</strong> 你的武器在每次失手后都会精确地重新校准，保证下一击的命中。你的大发明获得回摆和叠劲特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.KcK3d8zw0bCEoaEG]：</strong> 通过精确计算，你找到了大发明的完美形状，得以在恰到好处的打击中造成极大的伤害。你的大发明获得致命d8特征。如果你的大发明已经致命，如果你的大发明已经具有致命特征，将致命骰至多增加2个级别大小（d6到d10，d8到d12），最高为致命d12。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.KmFz27FVNXYWwgIc]：</strong> 你让你的大发明比同类武器更强。将大发明的武器伤害骰提升1级（d4到d6，d6到d8，d8到d10，d10到d12）。如常，你不能将你的骰子提升超过1级，因此这个改进不能和简易复杂化叠加。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.YQs4G9YK3VskY2F6]（仅限近战）：</strong> 你找到了一种建造武器的方法，让他能在平衡性不变的情况下延展出去。你的大发明获得长触及特征。如果该武器已经有长触及特征，将你的触及提升10尺，而非通常的5尺。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.2xVLO3JDe4gYlqv4]：</strong> 其他发明家声称这在技术上绝不成立，但你成功创造了数种似乎。只有你能使用的金属合金。这些合金能够伤害对7种天金中任意一种易伤的对手。你的大发明被视为所有7种天金（渊铀，精金，血汞，虚铅，零晶，山铜，漠石）。这意味着你能对多种生物造成更多的伤害，但你不会应用任何这些天金制成的武器所具有的特殊效果。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.g9UMdKV1TxNdhpDO]：</strong> 一种特殊装置可让你的武器以惊人的速度运动。你的大发明获得了灵巧特征；如果它具有装填能力，你可以每轮一次以一个自由动作装填。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.GoMoEtTu9uP7nxkg]（仅限远程）：</strong> 你调整了你的大发明，让它在任何射程上都十分危险和高效。如果你的大发明具有远射特征，则移除远射特征。否则，将大发明的射程增量提升50尺或武器的基本射程增量，选择更大的数值。</li><li><p><strong>@UUID[Compendium.pf2e.classfeatures.Item.rYfmpMBy7wd1VHeO]：</strong> 你可能涉猎了一些山铜合金的研究，或发现了其他工程学解决方案，你按照某种方式建造了你的大发明，使其能够容纳一个额外的性能符文。你的大发明比普通的同类物品可以容纳1个额外的性能符文（最大可以用+3<em>潜能</em>武器容纳4个性能符文）。</p>\n</li></ul>"
+                },
+                "Waterskin": {
+                    "name": "水袋 Waterskin",
+                    "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+                },
+                "Unconvention": {
+                    "name": "非常规 Unconvention",
+                    "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+                },
+                "Reconfigure": {
+                    "name": "重构 Reconfigure",
+                    "description": "<p>你是所有制作领域的专家，而且总是在调整你的大发明。你可以花费1天休整期进行修补，以改变大发明的一项改进。你尝试一次制作检定，使用符合你等级的高DC。成功时，你选择一个大发明上的改进，将其改为相同类别（初始、突破或革命）的不同改进。</p>\n<p>如果你有任何改进专长，在成功的检定后你可以改为将改进专长重训成其他的改进专长。新专长必须满足重训的标准限制。</p>"
+                },
+                "Toughness": {
+                    "name": "坚韧 Toughness",
+                    "description": "<p>在支撑到极限前，你的身体可以经受比大多数人更沉重的损伤。你的最大生命值提高等于你的等级的数值。你的恢复检定DC降低1点。</p>"
+                },
+                "Expert Overdrive": {
+                    "name": "专家超载 Expert Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Thunderstone (Lesser)": {
+                    "name": "雷震石（弱级） Thunderstone (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 打击</p>\n<hr />\n<p>当这枚石头命中一个生物或一个坚硬表面时，它会爆发出震耳欲聋的巨响。在暴雷石爆发的空间周围10尺内的所有生物必须在一次 @Check[fortitude|dc:17|name:Lesser Thunderstone|showDC:all] 豁免检定，否则直到它的下一轮结束位置都陷入 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened} 。</p>\n<p>暴雷石造成1d4点音波伤害和1点音波溅射伤害</p>"
+                },
+                "Lubaiko": {
+                    "name": "鲁拜科 Lubaiko",
+                    "description": "<p>从点燃面粉厂的那一缕火星到足以撕裂一整个国家的群情激奋，火焰与爆炸便是卢拜寇的激情所在。她是燃光了引线的火药桶，无论好坏，她要爆裂成更盛大的模样。她漫游于格拉利昂的天空，无论何时何地，她绝不会拒绝任何一个能将“闪电”炸进农田或人们脑海里的机会。有些人觉得，那来自卢拜寇火焰的滚滚烟尘，乃是弥漫在空气中、渗入到地底里的不幸与诅咒。然而，她所带来的的大火却也时常为“新生”清出了道路。</p>\n<p>纵然危险，但卢拜寇也有俏皮捣蛋的一面，她就如同舞动火花与烛焰低语间那不稳定的美。她酷爱男装，特爱白兰地所带来的激情与喧乱，更别说那些让人情绪高涨、慷慨激昂的故事了。她的幽默感中夹杂着小小的“施虐”倾向——只要没有人受伤（至少罪不至此的人没有），那么她会为了好玩去点燃别人的袖子，亦或者歇斯底里地嘲笑他人的霉运。尽管她不曾参与火药的发明，但她兴高采烈地拥抱了它们，她可太喜欢那些火药祭品与爆桶礼炮了。</p>\n<p>革命者、发明家、艺术家还有纵火犯都会向卢拜寇祈祷，希望他们的“功业”能迅速地传播开来。她还因为介入冲突施以制止而为人所知，就比如拯救一株特别的兰花，挽救了某人赖以生存的家园。当然，她做这些很有可能只是因为一时兴起，而不是出于对绝望中祈求的回应。许多想要引发动荡、改变世界的人都被卢拜寇所吸引，而她的那些信徒大多都与她一样，深深地迷恋着不断膨胀的力量，哪怕它会焚尽一切。</p>\n<hr />\n<p>崇拜卢拜寇——燃烧无定的火焰与爆炸之神——的火种者，往往在这位反复无常、变幻莫测的神祇身上看见自己。尽管她可以残酷甚至肆意破坏，她的火种者信徒更专注于她的野心与热忱，并从她无视代价、敢于点燃变革的勇气中汲取灵感。她颁布「改变世界」的圣谕对他们意义非凡——他们以此号召作为旗帜，煽动叛乱与动荡，或在格拉利昂各地散播亡命壮举的刺激。被卢拜寇吸引的火种者往往是死硬的冒险家与流浪者，因为这位漂泊女神自己从不安居一处，并禁止过任何安定式的生活。</p>\n<p>虽然卢拜寇常被归咎于霉运，甚至吸引了一些以敌人（有时是自己）的不幸为乐的信徒，她的火种者信徒却很少承认这一面。同所有火种者一样，他们自身往往运气惊人，并从对潜在恶果毫不在意的态度中受益匪浅。从卢拜寇那里，他们学会拥抱意外与偶然，将失控的局面（无论是象征性还是字面意义上）善加利用。在火种者之中，对她的崇拜主要由简单的仪式与典礼组成——比如点火或引燃火药时的一句祈祷。这种灵活与简朴帮助她的崇拜得以传播；许多火种者信徒在亡命冒险或鼓动人群时戏谑地以她之名相唤，亦如此。</p>\n<p>崇敬卢拜寇的火种者并不觉得需要以特定方式着装或炫耀巨大的宗教标志。和她许多崇拜者一样，他们往往偏好比典型火种者更务实的衣着，但并无规定法袍。崇拜者常会佩戴一枚以她标志为图案的小纹身或挂坠，也可能穿戴绣有火花或火焰装饰的配件或布料。但由于火种者珍视他们在压迫社会中往来潜行、暗中颠覆暴政的能力，他们深知不该公开张扬对一位常被那些社会视为大忌的神祇之忠诚。</p>\n<p><strong>典范</strong> 纵火，改变世界，要么默默无闻要么一鸣惊人</p>\n<p><strong>禁忌</strong> 安抚群众，扑灭大火，连续三晚在同一个地方睡觉</p>\n<p><strong>关注领域</strong> 霉运、灵感、动荡、野火</p>\n<h2>天神下凡</h2>\n<p>当施放@UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]法术时，卢拜寇的信徒会得到以下的额外能力。</p>\n<p><strong>卢拜寇</strong> 速度30尺，飞行速度70尺</p>\n<p><span class=\"action-glyph\">1</span> 长矛 （触及20尺）, 伤害@Damage[(6d12+6)[piercing]]</p>\n<p><span class=\"action-glyph\">1</span> 焱火雷矢 （多用火焰，射程120尺），伤害@Damage[(6d6+3)[electricity]]</p>"
+                },
+                "Doubling Rings (Greater)": {
+                    "name": "双倍指环（高等） Doubling Rings (Greater)",
+                    "description": "<p>这件物品包含了两只通过魔法相连的戒指：一只精细锃亮的金戒指，上面镶嵌着一颗切割成方形的红宝石，以及一只厚重朴素的铁戒指。当你用戴着金戒指的手持用着一件近战武器，这件武器的基础符文会被复制到你戴着铁戒指的那只手所持用的任何近战武器上。（基础符文包括<em>武器潜能符文</em> 和 <em>强击符文</em>，分别能够在攻击骰上提供物品加值以及增加额外的武器伤害骰。）带着铁戒指的手所持握的武器上面原本的所有基础符文都会被压制。</p>\n<p>复制的效果只会在你同时戴着两只戒指的时候发生，并在你停止持用一只手上的近战武器时消失。因此，复制的增益无法用于投掷攻击，也无法作用于你持握但未持用的武器上（例如用单手持握一件需要双手持用的武器）。</p>\n<p>对戒也会复制佩戴金戒指的手上的武器的性能符文，前提是佩戴铁戒指的手上的武器满足符文要求的全部条件，而且不是一件特殊武器。铁戒指的手上的武器会获得复制的这些符文带来的增益，而它本身所拥有的全部符文都会被压制。当你绑定这对戒指时，你也可以选择让戒指只复制基础符文，如同标准的<em>双持对戒</em>一般。</p>"
+                },
+                "Planar Sidestep": {
+                    "name": "位面侧步 Planar Sidestep",
+                    "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 一个生物的近战打击击中你。</p>\n<hr />\n<p>你短暂将身体转移到位面之间，减少敌人造成的伤害。你对触发的打击获得25点抗力。观察者只能看到攻击落下时你发出了元素能量的微光。</p>"
+                },
+                "Playing Cards": {
+                    "name": "扑克牌 Playing Cards",
+                    "description": "<p>一副标准的扑克牌由54张厚纸制成的牌组成，装在一个纸套里。最常见的游戏和赌博用牌被称为 \"老法师牌\"，以魔法的四种精髓为主题的花色，每种花色有13张牌，还有两张万用牌。这套牌的名称和外观因地区不同而不同。如塔尔多的”魔术师牌”或镣铐群岛的”面具牌”。</p>"
+                },
+                "Breakthrough Innovation": {
+                    "name": "突破性大发明 Breakthrough Innovation",
+                    "description": "<p>你在你的研究领域上实现了突破，发现了一种强力的新方式以强化你的大发明。为你的大发明选择一种对应类型的突破性改进。如果愿意，你也可以选择大发明的初始改进。</p><h3>突破性护甲改进 Breakthrough Armor Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ySkTxnoNuDluk6Cb]</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都强化了护甲针对魔法的防御力。当穿戴该护甲时，你在对抗法术的AC和所有豁免骰上获得+1环境加值。对抗直接瞄准护甲的法术（例如灼热金属Heat Metal）时，你改为在AC和所有豁免骰上获得+4环境加值。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hxjdHBJHaB47mBUT]（隐秘套装专用）</strong> 你调整了护甲的表层，让它能够轻易融入周围环境，只要你保持不动。当穿戴你的护甲时，即使你没有掩蔽或隐蔽，你依然能躲藏Hide，变色系统的色彩能匹配你的周围环境。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.svGLZdD4PF7miAKA]</strong> 你将护甲包复在坚实的甲片下。当穿戴该护甲时，你获得等于你等级一半的挥砍伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.T3742fu7oIM3W6Gz]</strong> 你改良了初始改进抵抗伤害的能力。你从初始改进中获得的抗力改为添加你的等级而非你等级的一半（例如，燃素校准器的抗力会提升至你的等级）。如果你有超过一种提供抗力的初始改进，选择一种初始改进应用强化抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.yEfHCwsbsbP6K13Q]（力量套装专用）</strong> 你将你的大发明扩展成一种重型堡垒，你开创性的设计也保证了你不会承受如此沉重的防御带来的缺陷。你的大发明变成重甲，你在大发明护甲上（不包括其他重甲）的熟练度提升至和你中甲熟练度一致。如果你有至少3点力量调整值，你完全移除速度减值而非将其降低至-5尺。护甲调整后的数据为：<em>AC加值</em>+5；<em>敏捷上限</em>+1；<em>检定减值</em>-2；<em>速度减值</em>-10尺；<em>力量</em>+3；<em>负载</em> 3；<em>护甲组</em> 复合甲；<em>护甲特征</em> 壁垒，固守。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.V5qmKLmI3RL68RGb]</strong> 你通过一个突破改良了加速器的力量，能够在不引发爆炸的情况下极大地对能量增压。你的速度上获得+10尺状态加值，当你处于超载中时，提升为+20尺状态加值。如果你在手艺上的熟练度为传奇，在超载中时的加值提升为+30尺状态加值。你必须有加速器改进才能选择该改进。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hwqaS9m2RwGe0kJk]</strong> 你在护甲上编织了一种非常强力的联锁网状织物，能捕获穿刺攻击并分散其攻击力。当穿戴该护甲时，你获得等同于你等级一半的穿刺伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.SRS8102DGTzJ4NmC]</strong> 你强化了护甲的抗张能力，让它能够在遭到钝击攻击时柔软弯曲。当穿戴该护甲时，你获得等同于你等级一半的钝击伤害抗力。</li></ul><h3>突破性构装体改进 Breakthrough Construct Modification</h3><ul><li><strong>进阶武装 Advanced Weaponry</strong> 你强化了你的构装体的武装系统。选择一种你的构装体的无武装攻击，其获得一种你所选的初始武器改进，从上述列表中或其他获得许可的初始武器改进中选择。该无武装攻击必须满足所选特征的全部需求（例如纠缠形态需要近战武器），且由于这是无武装攻击，便永远不可能满足某些需求，例如简易复杂化所需求的简易武器。</li><li><strong>抗魔构装 Antimagic Construction</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都让你的大发明在法术面前格外坚韧。你的构装体大发明在针对法术的AC和所有豁免骰上获得+2环境加值。</li><li><strong>攀爬肢 Climbing Limbs</strong> 你的构装体具有可以抓握或产生吸力的附肢，是攀爬能手。你的构装体获得等同于陆地速度一半的攀爬速度。</li><li><strong>坚韧结构 Durable Construction</strong> 你的大发明建造得非常坚固；它能在被摧毁之前承受非常多的冲击。将它的HP最大值提升等于你等级的数值。</li><li><strong>惊奇器械 Marvelous Gears</strong> 你的大发明在威吓，隐秘，和生存上获得专家熟练度。对于这些技能中已经达到专家熟练度的任意技能（例如因称为进阶构装伙伴而获得的熟练度），该技能改为获得大师熟练度。如果你有革命性大发明职业特性，这些熟练度提升至大师，对于已经是专家的技能则改为提升至传奇。你必须有神奇器械改进才能选择该改进。</li><li><strong>炮台部署 Turret Configuration</strong> 你的大发明能够从移动的构装体变成固定炮台。你的构装伙伴能够使用一个单动作来变形，其具有操作特征，并转变成占据其空间的一个炮台（或者从炮台变回通常的形态）。当它是炮台时，你的大发明陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]状态，但来自弹丸发射器的伤害骰提升至1d6，且射程增量提升至60尺。你必须有弹丸发射器改进才能选择该改进。</li></ul><h3>突破性武器改进 Breakthrough Weapon Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.P1GbGEePC8zDi8K4]（远程专用）</strong> 一个小心校准的目镜或锁定装置让你的武器特别擅长攻击弱点。你的大发明获得背刺特征，且射程增量提升20尺。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.7Zw83ysONrNhJMr8]（近战专用）</strong> 你小心设计武器的形状，在攻击连续目标时依然能保持动量。你的大发明获得横扫和多用S特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.h1hNr4jABip2ERDd]（近战专用）</strong> 你为大发明设计了能轻易隐藏并发动突袭的外观。它获得被背刺和多用P特征。如果该武器具有轻负载，它也获得隐蔽特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.tPL4lrGLCB5XbgeV]（单手武器专用；不能具有双手特征）</strong> 你将武器和护手套组合在一起，能够快速地在用武器攻击和用手修补之间切换。你的大发明获得不占手特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.y62b9R6RUBbkZECA]</strong> 你设计了多种合金，包含了多种金属的有利特性，且你将武器和弹药的许多部件替换成了这些合金。你的武器大发明是寒铁和银。这意味着你能对许多超自然生物，例如恶魔，魔鬼和精类造成更多伤害。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ptBLVvRqn1fA3A4l]（远程专用）</strong> 你的武器能够射出一种投射物，可以展开成一根绳索或网，能缠绕敌人的脚部并摔绊你的目标，也能利用武器内建的爪钩进行攀爬。你的武器获得攀爬和远程摔绊特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.WxkZMlETXo165XnC]（投掷专用）</strong> 你的武器有一种可延伸的线，能用来绊倒敌人并快速将武器收回手中。你的大发明获得远程摔绊和栓绳特征。</li></ul>"
+                },
+                "Basic Gadgets": {
+                    "name": "基础装置 Basic Gadgets",
+                    "description": "<p>对你而言，某些装置过于基础，制作起来不值一提。当你在每日准备期间创建临时装置时，只要它们等级不高于你等级的一半，你便可以使用其中一件临时装置创建出两件相同类型的临时装置。如果你在制作上为传奇，则可改为创建四件相同类型的装置。</p>"
+                },
+                "Clockwork Celerity+": {
+                    "name": "时钟敏捷+ Clockwork Celerity+",
+                    "description": "<p><strong>触发</strong> 你的回合开始。</p>\n<hr />\n<p>你可以使用大发明中的不稳定时钟器件，推动你的发明更快地运作。本回合你处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你可以使用额外动作进行移步、跨步，或使用你大发明所授予的另一种移动动作（如有「潜水护甲」专长则为游泳）。</li>\n<li><strong>构装体</strong> 你可以使用额外动作来命令你的构装体大发明（或在你花费 2 个动作命令构装体时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你可以使用额外动作施放科法射线。</li>\n<li><strong>装置</strong> 你可以使用额外动作来激活你的装置大发明或使用「速制装置」。</li>\n</ul>"
+                },
+                "Innovation": {
+                    "name": "大发明 Innovation",
+                    "description": "<p>虽然你总是在发明，但还是有一件发明是代表你的最高杰作，你希望这件发明在经过各种调整后能改变世界。从下列大发明中选择一种。你的大发明等级等于你的等级。如果你的大发明被摧毁，你可以花费1天的休整期，进行一次手艺检定，使用符合你等级的高DC；成功时，你重新建造了它。大发明只有在你对其持续性地维护和修补时才能正常工作，因此不存在市场价格。</p>"
+                },
+                "Quick Gadgetry": {
+                    "name": "速制装置 Quick Gadgetry",
+                    "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+                },
+                "Gadget Specialist": {
+                    "name": "装置专家 Gadget Specialist",
+                    "description": "<p>你不仅仅用你的小装置来增压或调校，你每天也能制作一些特殊的临时消耗小装置。你获得3个常见或罕见的小装置（66页）的配方。每天在每日准备期间，你可以从配方簿中制造两个临时小装置。按这种方式准备的小装置不会消耗你任何资源来制作，也不存在出售价格。它们是临时物品，如果到你下一次进行每日准备时还没使用就会解离。</p>\n<p>如果你在手艺达到大师，你每天可以制作3个小装置，你也获得3个额外的常见或罕见小装置配方。如果你在手艺上达到传奇，你每天可以制作4个小装置，你也获得3个额外的常见或罕见小装置配方，总共加起来有9个。</p>"
+                },
+                "Gadgeteer Dedication": {
+                    "name": "装置师献身 Gadgeteer Dedication",
+                    "description": "<p><strong>触发 </strong>你为使用装置大发明进行的不稳定纯骰检定失败。</p>\n<hr />\n<p>你的装置技艺已发展至足以提供可靠的故障保险——以应对计划之外的情况。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>"
+                },
+                "Overdrive/Explode": {
+                    "name": "超载／爆炸 Overdrive/Explode",
+                    "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+                },
+                "Inventor's Fulu": {
+                    "name": "发明家之符 Inventor's Fulu",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">f</span> （专注）</p>\n<p><strong>触发</strong> 你在具有不稳定特征的动作中掷出大失败</p><hr /><p>部分天夏的发明家会把油炸零食放在他们的大发明旁边，这是一种让设备按照预期运作的护身符。这种做法也影响了其他发明家，他们用<em>发明家符箓</em>上的食物画作来替代食物。当你启动符箓时，你的大失败变为失败，而且你只需要花费1分钟就能让你的大发明再度正常工作。之后符箓便会烧成灰烬，其效果结束。</p>"
+                },
+                "Legendary Overdrive": {
+                    "name": "传奇超载 Legendary Overdrive",
+                    "description": "<p>你的超凡发明力和工艺能力强化了你的超载能力。你在手艺上获得传奇熟练度。在成功使用超载时，你将额外伤害提升到3点，替换掉从超载大师中获得的提升。</p>"
+                },
+                "Medium Armor Expertise (Inventor)": {
+                    "name": "中型护甲熟练（发明家） Medium Armor Expertise (Inventor)",
+                    "description": "<p>你学会了如何从攻击中更好地保护自己。你在轻甲，中甲和无甲防御上的熟练度提升至专家。</p>\n<p>如果你有中甲或重甲大发明，你能使用护甲大发明的重击专精效果。</p>"
+                },
+                "Resolve": {
+                    "name": "决志 Resolve",
+                    "description": "<p>你的决意使你的意志如钢铁般坚毅。你在意志豁免上的熟练度提升至大师。当你在意志豁免中骰出了成功，你改为获得大成功。</p>"
+                },
+                "Heat Wave": {
+                    "name": "热浪 Heat Wave",
+                    "description": "<p><strong>触发</strong> 一个效果会对你造成火焰伤害，即使你抵抗了所有伤害。</p>\n<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你驾驭迎面而来的火焰，将它们扭曲成一个由热气和烟雾组成的薄幕，直到你的下个回合的开始前，你获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Genie Weapon Familiarity": {
+                    "name": "精灵武器熟悉 Genie Weapon Familiarity",
+                    "description": "<p>你曾使用你的巨灵先祖所使用的武器训练过。你在@UUID[Compendium.pf2e.equipment-srd.Item.XGtIUZ4ZNKuFx1uL]{弯刃大刀 Falchions}、@UUID[Compendium.pf2e.equipment-srd.Item.UfurZQK6H6SgOjqe]{刺叉 Ranseurs}、@UUID[Compendium.pf2e.equipment-srd.Item.grmaV4GdoGD7sKbn]{弯刀 Scimitars}、@UUID[Compendium.pf2e.equipment-srd.Item.FJrsDoaIXksVjld9]{三叉戟 Tridents}武器上受训。</p>\n<p>此外，所有[罕见][巨灵]武器对你为可用。对你而言，军用[巨灵]武器是简易武器，进阶[巨灵]武器是军用武器。</p>"
+                },
+                "Inventor Weapon Expertise": {
+                    "name": "发明家武器熟练 Inventor Weapon Expertise",
+                    "description": "<p>你开发了一种技巧，能更有效率地使用你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至专家。</p>\n<p>如果你有 @UUID[Compendium.pf2e.classfeatures.Item.bok3P78CMchFibxC]{武器大发明 Weapon Innovation}，你可以使用大发明的重击专精效果。</p>"
+                },
+                "Greater Weapon Specialization": {
+                    "name": "高等武器专精 Greater Weapon Specialization",
+                    "description": "<p>你源自武器专精职业特性的伤害，在武器熟练度至专家的武器和无武装攻击上提升至4，若熟练度至大师则为6，若熟练度为传奇则为8。</p>"
+                },
+                "Bedroll": {
+                    "name": "行军床 Bedroll",
+                    "description": "<p>一床卷起来的被子</p>"
+                },
+                "Crafter's Appraisal": {
+                    "name": "工匠鉴定 Crafter's Appraisal",
+                    "description": "<p>你对物品的知识储备让你可以辨识魔法效果。你可以使用手艺技能而非对应魔法根源的关联技能来对魔法物品使用@UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]行动，不过也只能对魔法物品。</p>"
+                },
+                "Peerless Inventor": {
+                    "name": "无双发明家 Peerless Inventor",
+                    "description": "<p>你不断发明，你的手艺技能不可质疑。你获得 @UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]{发明家} 技能专长，即使你不满足先决条件。</p>"
+                },
+                "Repair Toolkit": {
+                    "name": "修补工具包 Repair Toolkit",
+                    "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+                },
+                "Gold Pieces": {
+                    "name": "金币 Gold Pieces"
+                },
+                "Variable Gadgetry": {
+                    "name": "可变装置 Variable Gadgetry",
+                    "description": "<p>你调整你大发明的临时装置，按需改变其伤害类型。当你创建造成伤害的临时装置时，你可以在酸蚀、寒冷、电击或火焰之间选择，让你的装置造成所选伤害类型，而非其原本的伤害类型。</p>"
+                },
+                "Miraculous Repair": {
+                    "name": "神迹修补 Miraculous Repair",
+                    "description": "<p>巨灵子嗣无法实现神奇的愿望，但这种力量的残余仍留在你体内。面对一个受损但并未被摧毁的装置，你能许愿让它恢复运作10分钟。该物品必须是平凡无奇的物品，不超过5负载，比如门上的一个残缺锁具。10分钟内，该物品能正常运作，无视结构上的任何损坏。这并不会赋予你该装置能做什么或它如何运作的知识。10分钟后，该物品回归未修复状态，且对奇迹修复临时免疫一天。</p>"
+                },
+                "Rope": {
+                    "name": "绳索 Rope",
+                    "description": "<p>50尺长的麻绳</p>"
+                },
+                "Swift Sneak": {
+                    "name": "迅捷潜行 Swift Sneak",
+                    "description": "<p>你在@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行 Sneak}时可以全速移动。只要你拥有相应的移动类型，就可以在掘地、攀爬、飞行、游泳时潜行，而非仅在行走时。</p>"
+                },
+                "Acid Flask (Lesser)": {
+                    "name": "酸液瓶（弱级） Acid Flask (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个装满强酸的烧瓶会造成1点酸蚀伤害，1d6点酸蚀持续伤害，和1点酸蚀溅射伤害。</p>"
+                },
+                "Shield Block": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Incredible Initiative": {
+                    "name": "神速先攻 Incredible Initiative",
+                    "description": "<p>你的反应比他人更迅速。你的先攻检定获得+2环境加值。</p>"
+                },
+                "Flint and Steel": {
+                    "name": "火石与火柴 Flint and Steel",
+                    "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+                },
+                "Stable Instability": {
+                    "name": "稳定不稳 Stable Instability",
+                    "description": "<p>你已学会以无与伦比的速度让你的大发明恢复功能。当你花费 10分钟重新调校你的大发明以恢复源自不稳定特征的功能时，你也将不稳定纯骰检定降至基于你所拥有不稳定动作数量的最低值，而非仅减少 4。</p>"
+                },
+                "Wish Knife": {
+                    "name": "愿望之刀 Wish Knife",
+                    "description": "<p>这把匕首很像一把祈愿剑，它的刃上刻有复杂的凹槽，能够维持能量。祈愿刃比其他同类型的剑（应该是指祈愿剑）更轻，这使得它们成为敏捷战士的首选武器。</p>"
+                },
+                "Backpack": {
+                    "name": "背包 Backpack",
+                    "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+                },
+                "Gadget Innovations": {
+                    "name": "装置大发明 Gadget Innovations",
+                    "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+                },
+                "Explode+ (93x8)": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你的大发明是一件几乎完全靠你自己的工艺勉强维系的造物，时刻处于完全崩散的边缘。这虽然增添了风险，但也意味着你可以借由特殊的不稳定动作驱使它发挥远超其设计规格的表现。请参阅「不稳定」特征的定义及其对你大发明的影响。</p>\n<p>发明家在职业生涯中可以学到各种不稳定动作，但所有发明家至少都知道如何让自己的大发明 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH]{爆炸+}。</p>"
+                },
+                "Lifting Belt": {
+                    "name": "举重腰带 Lifting Belt",
+                    "description": "<p>这条宽皮带为你在运动技能检定上提供+1物品加值，并能让你携带更多的物品。你可以携带负载值为6+你的力量调整值的物品而不受到超载状态，你最多可以携带11+你的力量调整值的物品。</p>\n<hr />\n<p><strong>启动——协助提举</strong> <span class=\"action-glyph\">2</span> （操作）</p>\n<hr />\n<p><strong>效果</strong> 你可以提起最多8负载的物品，就如同它没有重量。这需要你空出两只手，如果这物品被锁，或被用什么方式固定在原地的话，作为启动动作的一部分，你也可以以运动技能技能尝试一次破拆。在其他所有情况下，这件物品仍然有着完整的重量和负载――你只是忽略了它的重量。这个效果持续到你的下一回合结束。</p>"
+                },
+                "Fleet": {
+                    "name": "步履矫健 Fleet",
+                    "description": "<p>你的脚步变得更快。你的速度提高5尺。</p>"
+                },
+                "Specialty Crafting (Blacksmithing)": {
+                    "name": "专项制作（铁匠） Specialty Crafting",
+                    "description": "<p>你专攻于制作特定的一类物品。从下表中选择一个专攻方向，你在用来制作金属物件的手艺技能检定上获得+1环境加值。当你在手艺技能上达大师级熟练度时，这个加值提升到+2。</p>\n<hr />\n<p><strong>范例工艺造物</strong> 金属制品，如金属盔甲</p>\n<p>如果不能确定某一件物品的制作是否属于本专长影响的范围，则GM具有最终裁判权。在某些情况下，本专长只会部分地对某些物品的制作提供帮助。举例来说，如果你的专攻方向是“木工”，那么如果你要制作一把钉头锤的话，GM只会允许你获得本专长提供的加值的一半，因为制作这样的一件物品会同时需要锻造和木工加工方式。</p>"
+                },
+                "Waffle Iron": {
+                    "name": "华夫饼烙铁 Waffle Iron",
+                    "description": "<p>这套铰链式金属板的特点是每张金属板内侧都有凹槽，让烹制的糕点烤出所需质地。将面糊倒在金属板上，关闭华夫饼机，然后将它放在火或炉灶上烤。</p>"
+                },
+                "Overdrive+": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p>你拥有一系列由你自己发明的小型装置——从肌肉刺激剂到冲击活塞应有尽有。在必要时，你可以将它们投入 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR]{超载} 来在战斗中助你一臂之力。</p>"
+                },
+                "Weapon Specialization": {
+                    "name": "武器专精 Weapon Specialization",
+                    "description": "<p>你已懂得如何运用自己最熟悉的武器造成更大伤害。使用熟练度为专家的武器和无武装攻击时，你额外造成2点伤害。若熟练度为大师则该伤害增加至3点，熟练度为传奇则增加至4点。</p>"
+                },
+                "Choker of Elocution": {
+                    "name": "雄辩颈饰 Choker of Elocution",
+                    "description": "<p>这只白金颈圈上刻着一种语言的字母表，能提供一种语言以及相关文化的知识。</p>\n<p>你在社群技能检定上获得+1物品加值，并能够理解、说和写这种语言。</p>\n<p>你精彩的雄辩能力能够将在耳聋状态下执行一次听觉动作的纯骰检定DC从5降低至3。</p>\n<p><strong>制作需求</strong> 你掌握了颈圈提供的所有语言。</p>"
+                },
+                "Inventor+": {
+                    "name": "发明家+ Inventor+",
+                    "description": "<p><em>任何工匠都能照着图纸造出一件装置，但你发明的是不可能！你梦想出的每一件奇异造物都是一项突破极限的独特实验，是一台似乎只为你工作的神秘机器。你始终处在下一次重大突破的边缘，每一次试错与磨砺都是测试与调校的契机。只要你能想象，你就能制造。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家}</em></p>"
+                },
+                "+2 Greater Striking Conducting Flaming Alchemical Gauntlet": {
+                    "name": "+2 高等强击导能烈焰炼金战手套 +2 Greater Striking Conducting Flaming Alchemical Gauntlet",
+                    "description": "<p>炼金铁手套和敌人接触时会发出小型的炼金爆炸。作为一个交互动作，你可以在铁手套手腕附近的金属支架上放置一个炸弹。炸弹必须是能造成能量伤害的，例如强酸瓶、炽火胶、暴雷石、瓶装闪电或霜冻瓶。在接下来用铁手套进行的三次攻击中，除了正常的铁手套伤害外，还能造成炸弹伤害类型的1d4伤害。如果在做出第一次攻击之后，第二次和第三次攻击没有在1分钟内做出，炸弹的能量就会被浪费掉。这些攻击不会造成炸弹的溅射伤害或其他特殊效果，也不会被任何增幅或修改炸弹效果的能力影响。</p>"
+                },
+                "Inventor": {
+                    "name": "发明家 Inventor",
+                    "description": "<p><em>无论哪个修补匠都能依葫芦画瓢地鼓捣一些技术装置出来，但你发明的玩意儿前所未有！你通过独一无二的实验，设计出来的每件稀奇古怪的奇思妙想都推进了可能性的界限，并创造出了一种可能只有你才了解如何使用的神秘机器。你总是立足于实现技术突破的风口浪尖，每一次试验，每一次磨练都是调试的机会。没有做不到，只有想不到。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家 Inventor}</em></p>"
+                },
+                "Complete Reconfiguration": {
+                    "name": "完全重构 Complete Reconfiguration",
+                    "description": "<p>当进行制作和修补时，你是改变改进以调整大发明功能的绝对行家。当你花费休整期重构你的大发明，并在制作检定中成功时，你可以切换任意数量的改进，切换你的攻势增压，或重训任意数量的改进专长，而非只能选择一个。你仍然必须将改进切换成同类别的其他改进（初始、突破或革命）。</p>"
+                },
+                "Titan Wrestler": {
+                    "name": "巨人摔角手 Titan Wrestler",
+                    "description": "<p>你可以对体型最多比你大两级的生物尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}、@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}，若你在运动技能上的熟练度达到传奇，则目标可以是体型最多比你大三级的生物。</p>"
+                },
+                "Bracelet of Dashing": {
+                    "name": "飞奔手镯 Bracelet of Dashing",
+                    "description": "<p>这枚叮当作响的印制手镯使你脚步轻盈，赋予你在特技检定上的+1物品加值。</p>\n<p><strong>启动——叮铃冲刺</strong> <span class=\"action-glyph\">A</span> （专注）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 在速度上获得+10尺状态加值，持续1分钟。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lLP56tbG689TNKW5]{效果：冲刺手镯}</p>"
+                },
+                "Engineering Lore": {
+                    "name": "工程学识 Engineering Lore"
+                },
+                "Chalk": {
+                    "name": "白垩 Chalk"
+                },
+                "Bottled Lightning (Lesser)": {
+                    "name": "瓶装闪电（弱级） Bottled Lightning (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p><hr /><p>瓶装闪电里面装满了一接触空气就会创造出强烈电流的不稳定液体试剂。一旦命中，目标还会在你的下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。 这枚炸弹造成1d6点闪电伤害和1点闪电溅射伤害。</p>"
+                },
+                "Propulsive Boots": {
+                    "name": "推进之靴 Propulsive Boots",
+                    "description": "<p>这双有着优雅曲线的靴子使你感到自己的双腿仿佛能迸发出无限的能量。你在你的陆地速度和你拥有的任何攀爬或游泳速度上获得+5尺物品加值。</p>\n<p><strong>启动——迅捷践踏</strong> <span class=\"action-glyph\">A</span> （操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你重踏地面三次，在1分钟内获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态。你可以使用这个额外动作来行走，@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]或@UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]。（你仍然必须在攀爬或游泳时尝试运动检定，除非你拥有对应的移动速度类型。）</p>"
+                },
+                "Quick Repair": {
+                    "name": "快速修补 Quick Repair",
+                    "description": "<p>对你而言，@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}行动失去探索特征，只需花费1分钟而非正常情况的10分钟。若你在手艺技能上的熟练度达到大师，只需花费3个动作；若达到传奇，只需1个动作。</p>"
+                },
+                "Alertness": {
+                    "name": "警觉 Alertness",
+                    "description": "<p>你对细节的注意力让你维持对周遭威胁的警觉。你在察觉上的熟练度提升至专家。</p>"
+                },
+                "Offensive Boost+ (Ignition (Fire))": {
+                    "name": "攻势增益+（点火（火）） Offensive Boost+ (Ignition (Fire))",
+                    "description": "<p>你为大发明做出补强以提升进攻能力。你的改进使得任何依赖大发明的打击额外造成 1d6 伤害，伤害类型由所选增益决定。如果你的大发明是护甲，该增益施加于你的近战徒手打击及你每日预备时选定一件武器之近战打击；如果你的大发明是构装体，该增益施加于你构装体伙伴之打击；如果你的大发明是武器，该增益施加于你以大发明进行之打击；如果你的大发明是治疗，该增益施加于你治疗大发明之打击；如果你的大发明是科法，该增益施加于无持续时间且仅以单一生物为目标的法术攻击骰所造成的伤害——若你的法术对同一生物造成多次伤害，该增益的额外伤害也只施加一次；如果你的大发明是装置，则你的进攻增益施加于你的近战徒手打击、你每日预备时选定一件武器之打击、以装置进行的打击，或以装置大发明所附着物品进行的打击。你可以利用空闲时间像更换改良一样切换到不同的增益。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>\n<hr />\n<p><em>注意：所附效果仅用于构装体大发明、护甲大发明，以及装置大发明每日预备时选定武器之需要。</em></p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.k2T7Er8Xn8Iry5HA]{效果：进攻增益+}</p>"
+                },
+                "Reflex Expertise": {
+                    "name": "反射熟练 Reflex Expertise",
+                    "description": "<p>你磨练出了回避危险的能力。你在反射豁免上的熟练度提升至专家。</p>\n<p><strong>守护者</strong> 即便身披沉重甲胄，你也能想方设法抵御范围攻击。你在反射豁免上的熟练度提升至专家。</p>"
+                },
+                "Shield Block (7TDn)": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Crafter's Eyepiece (Greater)": {
+                    "name": "工匠目镜（高等） Crafter's Eyepiece (Greater)",
+                    "description": "<p>这只粗糙的金属目镜上蚀刻着方块形状的图纹，是设计用来单眼佩戴的。旋转镜片能够为你准备制作或修复的物品展现一个模糊的三维轮廓，上面还能为每个部件显示一些有用的标签。。</p>\n<p>穿戴时，这只目镜能在手艺技能检定上为你提供+2物品加值。当你修理一件物品时，将成功时恢复的生命值提升至10+每熟练等级10点，大成功时恢复的生命值提升至15+每熟练等级15点。</p>\n<hr />\n<p><strong>启动——原型机</strong> 1 分钟 （操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你校准目镜，令其在1分钟内施放5环级@UUID[Compendium.pf2e.spells-srd.Item.TUj8eugNqAvB1vVR]{造物术 Creation}法术，创造出一件临时物品。</p>"
+                },
+                "Soap": {
+                    "name": "肥皂 Soap",
+                    "description": "<p>一根棒状肥皂。</p>"
+                },
+                "Impeccable Crafting": {
+                    "name": "完美手艺 Impeccable Crafting",
+                    "description": "<p>你能以极高的效率制作出完美无瑕的成品。制作你在@UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{独门手艺 Specialty Crafting}中所选类型的物品时，每当你的手艺检定掷出成功，改为获得大成功。</p>"
+                },
+                "Silver Pieces": {
+                    "name": "银币 Silver Pieces"
+                },
+                "Mechanical Torch": {
+                    "name": "机械火炬 Mechanical Torch",
+                    "description": "<p>机械火把由电力驱动，你能以一个交互动作拨动机械火把身上的一个开关来打开或关闭它。当启动时，机械火把会在20尺半径范围内发出明亮光照（20-40尺范围内发出昏暗光照），或在40尺锥形范围内发出明亮光照（40-80尺锥形范围发出昏暗光照）。切换模式需要用单一的交互动作来搬动开关。机械火把携带的电量足够使用10分钟。你可以花费1分钟时间通过一个集成的曲柄充电机构来给机械火把充电，它的原理是用发条齿轮转动时发出的电火花来充电。但是这样做的话你需要使用两只手。</p>"
+                },
+                "Human": {
+                    "name": "人类 Human",
+                    "description": "<p><em>人类与格拉利昂上的任何居民一样，变化莫测又不可捉摸，他们有着强大的行动力和生产力用以隐忍和扩张。虽然人类崛起之前有着许多兴旺发达的文明，但纵观历史，人类已然建立了众多极其伟岸亦或极其可怖的社会，而时至今日，人类的人口数量已在整个内海地区居于首位。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{人类 Human}</em></p>"
+                },
+                "Overdrive+ (Etsv)": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p>临时把你身上的装置零件推入超载状态，试图为你的攻击注入更强的力量。进行一次 @Check[type:crafting|dc:@self.level]，DC 为对应你等级的标准 DC。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb]{效果：超载+}</p>\n<hr />\n<p><strong>大成功</strong> 你的装置进入一种被称为「极限超载」的极致高效状态，为你的攻击注入巨大力量。你的打击在 1 分钟内造成等同于你的智力修正之额外伤害。超载结束后，你的装置因冷却或复位而暂时无法使用，你在 1 分钟内不能再使用超载。</p>\n<p><strong>成功</strong> 你的装置进入超载，为你的攻击增添力量。如同大成功，但额外伤害等同于你的智力修正的一半。</p>\n<p><strong>失败</strong> 你计算失误，什么都没发生。</p>\n<p><strong>大失败</strong> 哎呀！有什么东西爆炸了。你受到 [[/r @actor.level[fire]]]{相当于你等级的火焰伤害}，并且在你的装置冷却复位的 1 分钟内不能再使用超载。</p>\n<hr />\n<p><strong>特殊</strong> 在超载效果期间，你仍然可以使用 @UUID[Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A]{超载} 动作。你不能借此延长超载持续时间，但若大成功，你可以将一次超载升级为极限超载。失败对当前超载无效，大失败则结束你当前的超载效果。</p>"
+                },
+                "Studded Leather Armor": {
+                    "name": "镶钉皮甲 Studded Leather Armor",
+                    "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+                },
+                "Eureka!": {
+                    "name": "我想到了！ Eureka!",
+                    "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>"
+                },
+                "Gadgeteer Innovation": {
+                    "name": "装置师大发明 Gadgeteer Innovation",
+                    "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+                },
+                "Rations": {
+                    "name": "干粮 Rations"
+                },
+                "Inventor Weapon Mastery": {
+                    "name": "发明家武器精通 Inventor Weapon Mastery",
+                    "description": "<p>你完全理解了你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至大师。</p>"
+                },
+                "Naari": {
+                    "name": "娜阿丽 Naari",
+                    "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+                },
+                "Diehard": {
+                    "name": "斗志昂扬 Diehard",
+                    "description": "<p>你比大多数人更难被杀死。你在@UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{濒死 Dying 5}时才会死亡，而非濒死4。</p>"
+                },
+                "Inventive Expertise": {
+                    "name": "发明专家 Inventive Expertise",
+                    "description": "<p>通过不断的发明与实验，你的发明更加高效且可靠。你发明家的职业DC提升至专家。</p>"
+                },
+                "Powerful Leap": {
+                    "name": "强力跳跃 Powerful Leap",
+                    "description": "<p>未采取@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}行动时，你的垂直@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}可达5尺高度。你还会在跳跃时增加5尺水平距离，包括跳高和@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}。</p>"
+                },
+                "Mechanic": {
+                    "name": "技师 Mechanic",
+                    "description": "<p>机器错综复杂的内部运作对您来说并不陌生。无论它们是普通的设备还是复杂的发条装置，你都知道是什么让它们运转，以及如何维护它们。一个探险团体可能会让你跟随来修理他们的设备，或者你可能会四处旅行，为那些有需要的人提供你的稀有服务——当然，要钱！</p>\n<p>选择两项属性提升。一项必须是<strong>力量</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺和工程学识（Engineering Lore）技能上受训。你获得@UUID[Compendium.pf2e.feats-srd.Item.ASy9AKEIRxPYUi5o]技能专长。</p>"
+                }
+            }
+        },
+        "Rutaiba El-Majid (Level 10)": {
+            "name": "鲁泰巴·艾尔-马吉德（10级） Rutaiba El-Majid (Level 10)",
+            "tokenName": "鲁泰巴·艾尔-马吉德（10级） Rutaiba El-Majid (Level 10)",
+            "prototypeToken": "鲁泰巴·艾尔-马吉德（10级） Rutaiba El-Majid (Level 10)",
+            "items": {
+                "Magical Crafting": {
+                    "name": "魔法制作 Magical Crafting",
+                    "description": "<p>你可以@UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作 Craft}魔法物品，不过某些物品会有其它条件。选取此专长时，你立即将四种2级或更低级常见魔法物品的配方加入你的配方簿中。</p>"
+                },
+                "Master Overdrive": {
+                    "name": "大师超载 Master Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Explode+": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你刻意将自己的大发明推过常规安全极限，让它爆炸并对附近生物造成伤害——希望同时不会损坏大发明本身。该爆炸对你周围 @Template[type:emanation|distance:5]（若你正穿戴或持握该大发明）或大发明周围（若大发明为随从）内所有生物造成 @Damage[max(2, @actor.level)d6[@actor.flags.pf2e.inventor.explode]] 伤害，并进行 @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。</p>\n<p>从 3 级开始，且此后每升一级，你的爆炸伤害增加 1d6。</p>\n<p>如果你拥有突破性大发明职业特性，则使用爆炸时你可以选择 5 尺或 @Template[type:emanation|distance:10] 作为作用区域；若你拥有革命性大发明职业特性，则可以选择 5 尺、10 尺或 @Template[type:emanation|distance:15]。</p>"
+                },
+                "Gold Pieces": {
+                    "name": "金币 Gold Pieces"
+                },
+                "Marbles": {
+                    "name": "弹珠 Marbles",
+                    "description": "<p>这些小圆球由抛光的石子和彩色玻璃制成，一袋200个。你可以用一个交互动作将弹珠倒在与你邻接的空方格中。第一个进入该方格的生物必须成功通过@Check[acrobatics|dc:13]检定或@Check[reflex|dc:13]豁免（由它选择），否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。一旦一个生物进入了铺满弹珠的空间，足量弹珠就会散落四周，其他进入该方格的生物不再需要掷骰来避免跌倒。</p>"
+                },
+                "Effect: Offensive Boost+ (+1 Striking Wish Knife)": {
+                    "name": "效果：攻势增益+（+1 强击愿望之刀） Effect: Offensive Boost+ (+1 Striking Wish Knife)",
+                    "description": "<p>如果你的大发明是护甲，该增益施加于你每日预备时所选定的一件武器之近战打击；如果你的大发明是构装体，则增益施加于你的构装体伙伴之打击。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>"
+                },
+                "Formula Book": {
+                    "name": "配方书 Formula Book",
+                    "description": "<p>炼金术士将每一件他能够制作的物品的配方都一丝不苟地记录了下来。你在起始便免费获得一本标准@UUID[Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx]。这本配方簿包含了两个由你选择的常见一级炼金物品配方，外加你从@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]专长和研究课题中获得的配方。</p>\n<p>每当你获得一个等级，你可以将两个常见炼金物品的配方添加到你的配方簿中。这些新的配方可以对应任何等级的物品，只要是你能够制作的。你自动学会这些配方，不过你也可以从定居点或其他炼金术士那里找到或买到额外的配方，你还可以用@UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]专长发明它们。</p>\n<p>你只需要掌握最基本的配方便足以制作升级版本的物品——你不需要学习高等级的公式。例如，如果你掌握1级的下等生命灵药配方，只要满足等级和其他先决条件，你就可以制作全部下等、次等、中等、高等、上等和真实生命灵药。有着不同功能条目的炼金物品需要单独的配方，而大多数炼金物品的结构都类似生命灵药。</p>"
+                },
+                "Waterskin": {
+                    "name": "水袋 Waterskin",
+                    "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+                },
+                "Unconvention": {
+                    "name": "非常规 Unconvention",
+                    "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+                },
+                "Reconfigure": {
+                    "name": "重构 Reconfigure",
+                    "description": "<p>你是所有制作领域的专家，而且总是在调整你的大发明。你可以花费1天休整期进行修补，以改变大发明的一项改进。你尝试一次制作检定，使用符合你等级的高DC。成功时，你选择一个大发明上的改进，将其改为相同类别（初始、突破或革命）的不同改进。</p>\n<p>如果你有任何改进专长，在成功的检定后你可以改为将改进专长重训成其他的改进专长。新专长必须满足重训的标准限制。</p>"
+                },
+                "Toughness": {
+                    "name": "坚韧 Toughness",
+                    "description": "<p>在支撑到极限前，你的身体可以经受比大多数人更沉重的损伤。你的最大生命值提高等于你的等级的数值。你的恢复检定DC降低1点。</p>"
+                },
+                "Expert Overdrive": {
+                    "name": "专家超载 Expert Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Playing Cards": {
+                    "name": "扑克牌 Playing Cards",
+                    "description": "<p>一副标准的扑克牌由54张厚纸制成的牌组成，装在一个纸套里。最常见的游戏和赌博用牌被称为 \"老法师牌\"，以魔法的四种精髓为主题的花色，每种花色有13张牌，还有两张万用牌。这套牌的名称和外观因地区不同而不同。如塔尔多的”魔术师牌”或镣铐群岛的”面具牌”。</p>"
+                },
+                "Breakthrough Innovation": {
+                    "name": "突破性大发明 Breakthrough Innovation",
+                    "description": "<p>你在你的研究领域上实现了突破，发现了一种强力的新方式以强化你的大发明。为你的大发明选择一种对应类型的突破性改进。如果愿意，你也可以选择大发明的初始改进。</p><h3>突破性护甲改进 Breakthrough Armor Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ySkTxnoNuDluk6Cb]</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都强化了护甲针对魔法的防御力。当穿戴该护甲时，你在对抗法术的AC和所有豁免骰上获得+1环境加值。对抗直接瞄准护甲的法术（例如灼热金属Heat Metal）时，你改为在AC和所有豁免骰上获得+4环境加值。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hxjdHBJHaB47mBUT]（隐秘套装专用）</strong> 你调整了护甲的表层，让它能够轻易融入周围环境，只要你保持不动。当穿戴你的护甲时，即使你没有掩蔽或隐蔽，你依然能躲藏Hide，变色系统的色彩能匹配你的周围环境。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.svGLZdD4PF7miAKA]</strong> 你将护甲包复在坚实的甲片下。当穿戴该护甲时，你获得等于你等级一半的挥砍伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.T3742fu7oIM3W6Gz]</strong> 你改良了初始改进抵抗伤害的能力。你从初始改进中获得的抗力改为添加你的等级而非你等级的一半（例如，燃素校准器的抗力会提升至你的等级）。如果你有超过一种提供抗力的初始改进，选择一种初始改进应用强化抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.yEfHCwsbsbP6K13Q]（力量套装专用）</strong> 你将你的大发明扩展成一种重型堡垒，你开创性的设计也保证了你不会承受如此沉重的防御带来的缺陷。你的大发明变成重甲，你在大发明护甲上（不包括其他重甲）的熟练度提升至和你中甲熟练度一致。如果你有至少3点力量调整值，你完全移除速度减值而非将其降低至-5尺。护甲调整后的数据为：<em>AC加值</em>+5；<em>敏捷上限</em>+1；<em>检定减值</em>-2；<em>速度减值</em>-10尺；<em>力量</em>+3；<em>负载</em> 3；<em>护甲组</em> 复合甲；<em>护甲特征</em> 壁垒，固守。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.V5qmKLmI3RL68RGb]</strong> 你通过一个突破改良了加速器的力量，能够在不引发爆炸的情况下极大地对能量增压。你的速度上获得+10尺状态加值，当你处于超载中时，提升为+20尺状态加值。如果你在手艺上的熟练度为传奇，在超载中时的加值提升为+30尺状态加值。你必须有加速器改进才能选择该改进。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.hwqaS9m2RwGe0kJk]</strong> 你在护甲上编织了一种非常强力的联锁网状织物，能捕获穿刺攻击并分散其攻击力。当穿戴该护甲时，你获得等同于你等级一半的穿刺伤害抗力。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.SRS8102DGTzJ4NmC]</strong> 你强化了护甲的抗张能力，让它能够在遭到钝击攻击时柔软弯曲。当穿戴该护甲时，你获得等同于你等级一半的钝击伤害抗力。</li></ul><h3>突破性构装体改进 Breakthrough Construct Modification</h3><ul><li><strong>进阶武装 Advanced Weaponry</strong> 你强化了你的构装体的武装系统。选择一种你的构装体的无武装攻击，其获得一种你所选的初始武器改进，从上述列表中或其他获得许可的初始武器改进中选择。该无武装攻击必须满足所选特征的全部需求（例如纠缠形态需要近战武器），且由于这是无武装攻击，便永远不可能满足某些需求，例如简易复杂化所需求的简易武器。</li><li><strong>抗魔构装 Antimagic Construction</strong> 你可能用能够抵消魔法的天金——零晶制作了一种精巧的适配件，也可能采用了一种你自己设计的抗魔系统，无论如何，你都让你的大发明在法术面前格外坚韧。你的构装体大发明在针对法术的AC和所有豁免骰上获得+2环境加值。</li><li><strong>攀爬肢 Climbing Limbs</strong> 你的构装体具有可以抓握或产生吸力的附肢，是攀爬能手。你的构装体获得等同于陆地速度一半的攀爬速度。</li><li><strong>坚韧结构 Durable Construction</strong> 你的大发明建造得非常坚固；它能在被摧毁之前承受非常多的冲击。将它的HP最大值提升等于你等级的数值。</li><li><strong>惊奇器械 Marvelous Gears</strong> 你的大发明在威吓，隐秘，和生存上获得专家熟练度。对于这些技能中已经达到专家熟练度的任意技能（例如因称为进阶构装伙伴而获得的熟练度），该技能改为获得大师熟练度。如果你有革命性大发明职业特性，这些熟练度提升至大师，对于已经是专家的技能则改为提升至传奇。你必须有神奇器械改进才能选择该改进。</li><li><strong>炮台部署 Turret Configuration</strong> 你的大发明能够从移动的构装体变成固定炮台。你的构装伙伴能够使用一个单动作来变形，其具有操作特征，并转变成占据其空间的一个炮台（或者从炮台变回通常的形态）。当它是炮台时，你的大发明陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]状态，但来自弹丸发射器的伤害骰提升至1d6，且射程增量提升至60尺。你必须有弹丸发射器改进才能选择该改进。</li></ul><h3>突破性武器改进 Breakthrough Weapon Modifications</h3><ul><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.P1GbGEePC8zDi8K4]（远程专用）</strong> 一个小心校准的目镜或锁定装置让你的武器特别擅长攻击弱点。你的大发明获得背刺特征，且射程增量提升20尺。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.7Zw83ysONrNhJMr8]（近战专用）</strong> 你小心设计武器的形状，在攻击连续目标时依然能保持动量。你的大发明获得横扫和多用S特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.h1hNr4jABip2ERDd]（近战专用）</strong> 你为大发明设计了能轻易隐藏并发动突袭的外观。它获得被背刺和多用P特征。如果该武器具有轻负载，它也获得隐蔽特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.tPL4lrGLCB5XbgeV]（单手武器专用；不能具有双手特征）</strong> 你将武器和护手套组合在一起，能够快速地在用武器攻击和用手修补之间切换。你的大发明获得不占手特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.y62b9R6RUBbkZECA]</strong> 你设计了多种合金，包含了多种金属的有利特性，且你将武器和弹药的许多部件替换成了这些合金。你的武器大发明是寒铁和银。这意味着你能对许多超自然生物，例如恶魔，魔鬼和精类造成更多伤害。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.ptBLVvRqn1fA3A4l]（远程专用）</strong> 你的武器能够射出一种投射物，可以展开成一根绳索或网，能缠绕敌人的脚部并摔绊你的目标，也能利用武器内建的爪钩进行攀爬。你的武器获得攀爬和远程摔绊特征。</li><li><strong>@UUID[Compendium.pf2e.classfeatures.Item.WxkZMlETXo165XnC]（投掷专用）</strong> 你的武器有一种可延伸的线，能用来绊倒敌人并快速将武器收回手中。你的大发明获得远程摔绊和栓绳特征。</li></ul>"
+                },
+                "Basic Gadgets": {
+                    "name": "基础装置 Basic Gadgets",
+                    "description": "<p>对你而言，某些装置过于基础，制作起来不值一提。当你在每日准备期间创建临时装置时，只要它们等级不高于你等级的一半，你便可以使用其中一件临时装置创建出两件相同类型的临时装置。如果你在制作上为传奇，则可改为创建四件相同类型的装置。</p>"
+                },
+                "Clockwork Celerity+": {
+                    "name": "时钟敏捷+ Clockwork Celerity+",
+                    "description": "<p><strong>触发</strong> 你的回合开始。</p>\n<hr />\n<p>你可以使用大发明中的不稳定时钟器件，推动你的发明更快地运作。本回合你处于 @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷}。如何使用额外动作取决于你的大发明。</p>\n<ul>\n<li><strong>护甲</strong> 你可以使用额外动作进行移步、跨步，或使用你大发明所授予的另一种移动动作（如有「潜水护甲」专长则为游泳）。</li>\n<li><strong>构装体</strong> 你可以使用额外动作来命令你的构装体大发明（或在你花费 2 个动作命令构装体时，提供其中 1 个动作）。</li>\n<li><strong>武器</strong> 你可以使用额外动作以你的大发明进行打击或装填。</li>\n<li><strong>治疗 </strong>你可以使用额外动作进行 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.OAJJz0ey8LU37Ghc]{充能连接} 或 @Compendium[pf2e.feats-srd.obGGzuPcgO5Xiz6P]{灼热修复}。</li>\n<li><strong>科法 </strong>你可以使用额外动作施放科法射线。</li>\n<li><strong>装置</strong> 你可以使用额外动作来激活你的装置大发明或使用「速制装置」。</li>\n</ul>"
+                },
+                "Innovation": {
+                    "name": "大发明 Innovation",
+                    "description": "<p>虽然你总是在发明，但还是有一件发明是代表你的最高杰作，你希望这件发明在经过各种调整后能改变世界。从下列大发明中选择一种。你的大发明等级等于你的等级。如果你的大发明被摧毁，你可以花费1天的休整期，进行一次手艺检定，使用符合你等级的高DC；成功时，你重新建造了它。大发明只有在你对其持续性地维护和修补时才能正常工作，因此不存在市场价格。</p>"
+                },
+                "Quick Gadgetry": {
+                    "name": "速制装置 Quick Gadgetry",
+                    "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+                },
+                "Gadget Specialist": {
+                    "name": "装置专家 Gadget Specialist",
+                    "description": "<p>你不仅仅用你的小装置来增压或调校，你每天也能制作一些特殊的临时消耗小装置。你获得3个常见或罕见的小装置（66页）的配方。每天在每日准备期间，你可以从配方簿中制造两个临时小装置。按这种方式准备的小装置不会消耗你任何资源来制作，也不存在出售价格。它们是临时物品，如果到你下一次进行每日准备时还没使用就会解离。</p>\n<p>如果你在手艺达到大师，你每天可以制作3个小装置，你也获得3个额外的常见或罕见小装置配方。如果你在手艺上达到传奇，你每天可以制作4个小装置，你也获得3个额外的常见或罕见小装置配方，总共加起来有9个。</p>"
+                },
+                "Gadgeteer Dedication": {
+                    "name": "装置师献身 Gadgeteer Dedication",
+                    "description": "<p><strong>触发 </strong>你为使用装置大发明进行的不稳定纯骰检定失败。</p>\n<hr />\n<p>你的装置技艺已发展至足以提供可靠的故障保险——以应对计划之外的情况。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>"
+                },
+                "Overdrive/Explode": {
+                    "name": "超载／爆炸 Overdrive/Explode",
+                    "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+                },
+                "Heat Wave": {
+                    "name": "热浪 Heat Wave",
+                    "description": "<p><strong>触发</strong> 一个效果会对你造成火焰伤害，即使你抵抗了所有伤害。</p>\n<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你驾驭迎面而来的火焰，将它们扭曲成一个由热气和烟雾组成的薄幕，直到你的下个回合的开始前，你获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Genie Weapon Familiarity": {
+                    "name": "精灵武器熟悉 Genie Weapon Familiarity",
+                    "description": "<p>你曾使用你的巨灵先祖所使用的武器训练过。你在@UUID[Compendium.pf2e.equipment-srd.Item.XGtIUZ4ZNKuFx1uL]{弯刃大刀 Falchions}、@UUID[Compendium.pf2e.equipment-srd.Item.UfurZQK6H6SgOjqe]{刺叉 Ranseurs}、@UUID[Compendium.pf2e.equipment-srd.Item.grmaV4GdoGD7sKbn]{弯刀 Scimitars}、@UUID[Compendium.pf2e.equipment-srd.Item.FJrsDoaIXksVjld9]{三叉戟 Tridents}武器上受训。</p>\n<p>此外，所有[罕见][巨灵]武器对你为可用。对你而言，军用[巨灵]武器是简易武器，进阶[巨灵]武器是军用武器。</p>"
+                },
+                "Tradecraft Tattoo": {
+                    "name": "工艺纹身 Tradecraft Tattoo",
+                    "description": "<p>工匠们会用刺青来表现他们所专擅的领域和技能及其选择的行业。这种刺青可以用于装饰手臂、手指或眼睛，表现形式为使用艺术图案绘制的谋生工具，比如铁毡、画笔或者铲子。你在手艺检定中获得+2物品加值。此外，当你在@UUID[Compendium.pf2e.actionspf2e.Item.QyzlsLrqM0EEwd7j]的手艺检定中投掷出大失败结果时，将其视为失败以取代大失败。</p>\n<p><strong>启动</strong> 1分钟（专注，操作）</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 刺青施放@UUID[Compendium.pf2e.spells-srd.Item.TUj8eugNqAvB1vVR]。你能够选择物品及其外观，以及法术是4环级还是5环级。</p>"
+                },
+                "Inventor Weapon Expertise": {
+                    "name": "发明家武器熟练 Inventor Weapon Expertise",
+                    "description": "<p>你开发了一种技巧，能更有效率地使用你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至专家。</p>\n<p>如果你有 @UUID[Compendium.pf2e.classfeatures.Item.bok3P78CMchFibxC]{武器大发明 Weapon Innovation}，你可以使用大发明的重击专精效果。</p>"
+                },
+                "Bedroll": {
+                    "name": "行军床 Bedroll",
+                    "description": "<p>一床卷起来的被子</p>"
+                },
+                "Crafter's Appraisal": {
+                    "name": "工匠鉴定 Crafter's Appraisal",
+                    "description": "<p>你对物品的知识储备让你可以辨识魔法效果。你可以使用手艺技能而非对应魔法根源的关联技能来对魔法物品使用@UUID[Compendium.pf2e.actionspf2e.Item.eReSHVEPCsdkSL4G]行动，不过也只能对魔法物品。</p>"
+                },
+                "Peerless Inventor": {
+                    "name": "无双发明家 Peerless Inventor",
+                    "description": "<p>你不断发明，你的手艺技能不可质疑。你获得 @UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]{发明家} 技能专长，即使你不满足先决条件。</p>"
+                },
+                "Thunderstone (Lesser)": {
+                    "name": "雷震石（弱级） Thunderstone (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 打击</p>\n<hr />\n<p>当这枚石头命中一个生物或一个坚硬表面时，它会爆发出震耳欲聋的巨响。在暴雷石爆发的空间周围10尺内的所有生物必须在一次 @Check[fortitude|dc:17|name:Lesser Thunderstone|showDC:all] 豁免检定，否则直到它的下一轮结束位置都陷入 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened} 。</p>\n<p>暴雷石造成1d4点音波伤害和1点音波溅射伤害</p>"
+                },
+                "Doubling Rings": {
+                    "name": "双倍指环 Doubling Rings",
+                    "description": "<p>这件物品包含了两只通过魔法相连的戒指：一只精细锃亮的金戒指，上面镶嵌着一颗切割成方形的红宝石，以及一只厚重朴素的铁戒指。当你用戴着金戒指的手持用着一件近战武器，这件武器的基础符文会被复制到你戴着铁戒指的那只手所持用的任何近战武器上。（基础符文包括<em>武器潜能符文</em> 和 <em>强击符文</em>，分别能够在攻击骰上提供物品加值以及增加额外的武器伤害骰。）带着铁戒指的手所持握的武器上面原本的所有基础符文都会被压制。</p>\n<p>复制的效果只会在你同时戴着两只戒指的时候发生，并在你停止持用一只手上的近战武器时消失。因此，复制的增益无法用于投掷攻击，也无法作用于你持握但未持用的武器上（例如用单手持握一件需要双手持用的武器）。</p>"
+                },
+                "Variable Gadgetry": {
+                    "name": "可变装置 Variable Gadgetry",
+                    "description": "<p>你调整你大发明的临时装置，按需改变其伤害类型。当你创建造成伤害的临时装置时，你可以在酸蚀、寒冷、电击或火焰之间选择，让你的装置造成所选伤害类型，而非其原本的伤害类型。</p>"
+                },
+                "Miraculous Repair": {
+                    "name": "神迹修补 Miraculous Repair",
+                    "description": "<p>巨灵子嗣无法实现神奇的愿望，但这种力量的残余仍留在你体内。面对一个受损但并未被摧毁的装置，你能许愿让它恢复运作10分钟。该物品必须是平凡无奇的物品，不超过5负载，比如门上的一个残缺锁具。10分钟内，该物品能正常运作，无视结构上的任何损坏。这并不会赋予你该装置能做什么或它如何运作的知识。10分钟后，该物品回归未修复状态，且对奇迹修复临时免疫一天。</p>"
+                },
+                "Rope": {
+                    "name": "绳索 Rope",
+                    "description": "<p>50尺长的麻绳</p>"
+                },
+                "Shield Block": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Flint and Steel": {
+                    "name": "火石与火柴 Flint and Steel",
+                    "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+                },
+                "Backpack": {
+                    "name": "背包 Backpack",
+                    "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+                },
+                "Gadget Innovations": {
+                    "name": "装置大发明 Gadget Innovations",
+                    "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+                },
+                "Explode+ (93x8)": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你的大发明是一件几乎完全靠你自己的工艺勉强维系的造物，时刻处于完全崩散的边缘。这虽然增添了风险，但也意味着你可以借由特殊的不稳定动作驱使它发挥远超其设计规格的表现。请参阅「不稳定」特征的定义及其对你大发明的影响。</p>\n<p>发明家在职业生涯中可以学到各种不稳定动作，但所有发明家至少都知道如何让自己的大发明 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH]{爆炸+}。</p>"
+                },
+                "Fleet": {
+                    "name": "步履矫健 Fleet",
+                    "description": "<p>你的脚步变得更快。你的速度提高5尺。</p>"
+                },
+                "Specialty Crafting (Blacksmithing)": {
+                    "name": "专项制作（铁匠） Specialty Crafting",
+                    "description": "<p>你专攻于制作特定的一类物品。从下表中选择一个专攻方向，你在用来制作金属物件的手艺技能检定上获得+1环境加值。当你在手艺技能上达大师级熟练度时，这个加值提升到+2。</p>\n<hr />\n<p><strong>范例工艺造物</strong> 金属制品，如金属盔甲</p>\n<p>如果不能确定某一件物品的制作是否属于本专长影响的范围，则GM具有最终裁判权。在某些情况下，本专长只会部分地对某些物品的制作提供帮助。举例来说，如果你的专攻方向是“木工”，那么如果你要制作一把钉头锤的话，GM只会允许你获得本专长提供的加值的一半，因为制作这样的一件物品会同时需要锻造和木工加工方式。</p>"
+                },
+                "Waffle Iron": {
+                    "name": "华夫饼烙铁 Waffle Iron",
+                    "description": "<p>这套铰链式金属板的特点是每张金属板内侧都有凹槽，让烹制的糕点烤出所需质地。将面糊倒在金属板上，关闭华夫饼机，然后将它放在火或炉灶上烤。</p>"
+                },
+                "Overdrive+": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p>你拥有一系列由你自己发明的小型装置——从肌肉刺激剂到冲击活塞应有尽有。在必要时，你可以将它们投入 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR]{超载} 来在战斗中助你一臂之力。</p>"
+                },
+                "Copper Pieces": {
+                    "name": "铜币 Copper Pieces"
+                },
+                "Weapon Specialization": {
+                    "name": "武器专精 Weapon Specialization",
+                    "description": "<p>你已懂得如何运用自己最熟悉的武器造成更大伤害。使用熟练度为专家的武器和无武装攻击时，你额外造成2点伤害。若熟练度为大师则该伤害增加至3点，熟练度为传奇则增加至4点。</p>"
+                },
+                "Silver Pieces": {
+                    "name": "银币 Silver Pieces"
+                },
+                "Inventor+": {
+                    "name": "发明家+ Inventor+",
+                    "description": "<p><em>任何工匠都能照着图纸造出一件装置，但你发明的是不可能！你梦想出的每一件奇异造物都是一项突破极限的独特实验，是一台似乎只为你工作的神秘机器。你始终处在下一次重大突破的边缘，每一次试错与磨砺都是测试与调校的契机。只要你能想象，你就能制造。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家}</em></p>"
+                },
+                "Inventor": {
+                    "name": "发明家 Inventor",
+                    "description": "<p><em>无论哪个修补匠都能依葫芦画瓢地鼓捣一些技术装置出来，但你发明的玩意儿前所未有！你通过独一无二的实验，设计出来的每件稀奇古怪的奇思妙想都推进了可能性的界限，并创造出了一种可能只有你才了解如何使用的神秘机器。你总是立足于实现技术突破的风口浪尖，每一次试验，每一次磨练都是调试的机会。没有做不到，只有想不到。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家 Inventor}</em></p>"
+                },
+                "Titan Wrestler": {
+                    "name": "巨人摔角手 Titan Wrestler",
+                    "description": "<p>你可以对体型最多比你大两级的生物尝试@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}、@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}、@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}、@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}或 @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊 Trip}，若你在运动技能上的熟练度达到传奇，则目标可以是体型最多比你大三级的生物。</p>"
+                },
+                "Engineering Lore": {
+                    "name": "工程学识 Engineering Lore"
+                },
+                "Chalk": {
+                    "name": "白垩 Chalk"
+                },
+                "Acid Flask (Lesser)": {
+                    "name": "酸液瓶（弱级） Acid Flask (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个装满强酸的烧瓶会造成1点酸蚀伤害，1d6点酸蚀持续伤害，和1点酸蚀溅射伤害。</p>"
+                },
+                "Quick Repair": {
+                    "name": "快速修补 Quick Repair",
+                    "description": "<p>对你而言，@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}行动失去探索特征，只需花费1分钟而非正常情况的10分钟。若你在手艺技能上的熟练度达到大师，只需花费3个动作；若达到传奇，只需1个动作。</p>"
+                },
+                "Offensive Boost+ (Ignition (Fire))": {
+                    "name": "攻势增益+（点火（火）） Offensive Boost+ (Ignition (Fire))",
+                    "description": "<p>你为大发明做出补强以提升进攻能力。你的改进使得任何依赖大发明的打击额外造成 1d6 伤害，伤害类型由所选增益决定。如果你的大发明是护甲，该增益施加于你的近战徒手打击及你每日预备时选定一件武器之近战打击；如果你的大发明是构装体，该增益施加于你构装体伙伴之打击；如果你的大发明是武器，该增益施加于你以大发明进行之打击；如果你的大发明是治疗，该增益施加于你治疗大发明之打击；如果你的大发明是科法，该增益施加于无持续时间且仅以单一生物为目标的法术攻击骰所造成的伤害——若你的法术对同一生物造成多次伤害，该增益的额外伤害也只施加一次；如果你的大发明是装置，则你的进攻增益施加于你的近战徒手打击、你每日预备时选定一件武器之打击、以装置进行的打击，或以装置大发明所附着物品进行的打击。你可以利用空闲时间像更换改良一样切换到不同的增益。从下列增益中选择一项，括号中为对应的伤害类型。</p>\n<ul>\n<li><strong>寒冷（冷冻）</strong> 你的大发明迅速吸收热量，制造刺骨严寒。</li>\n<li><strong>点火（火焰）</strong> 你的大发明喷出灼热的火焰。</li>\n<li><strong>电震（电击）</strong> 你的大发明以电流冲击敌人。</li>\n<li><strong>冲量（钝击）</strong> 你的大发明以增强的动量撞击敌人。</li>\n<li><strong>锯刃（挥砍）</strong> 你的大发明在你攻击时显露旋转的锯片。</li>\n<li><strong>尖刺（穿刺）</strong> 你的大发明在你攻击时显露邪恶的尖刺。</li>\n<li><strong>腐蚀（强酸）</strong> 你的大发明喷洒腐蚀性酸液。</li>\n</ul>\n<hr />\n<p><em>注意：所附效果仅用于构装体大发明、护甲大发明，以及装置大发明每日预备时选定武器之需要。</em></p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.k2T7Er8Xn8Iry5HA]{效果：进攻增益+}</p>"
+                },
+                "Reflex Expertise": {
+                    "name": "反射熟练 Reflex Expertise",
+                    "description": "<p>你磨练出了回避危险的能力。你在反射豁免上的熟练度提升至专家。</p>\n<p><strong>守护者</strong> 即便身披沉重甲胄，你也能想方设法抵御范围攻击。你在反射豁免上的熟练度提升至专家。</p>"
+                },
+                "Shield Block (7TDn)": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Soap": {
+                    "name": "肥皂 Soap",
+                    "description": "<p>一根棒状肥皂。</p>"
+                },
+                "Inventor's Fulu": {
+                    "name": "发明家之符 Inventor's Fulu",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">f</span> （专注）</p>\n<p><strong>触发</strong> 你在具有不稳定特征的动作中掷出大失败</p><hr /><p>部分天夏的发明家会把油炸零食放在他们的大发明旁边，这是一种让设备按照预期运作的护身符。这种做法也影响了其他发明家，他们用<em>发明家符箓</em>上的食物画作来替代食物。当你启动符箓时，你的大失败变为失败，而且你只需要花费1分钟就能让你的大发明再度正常工作。之后符箓便会烧成灰烬，其效果结束。</p>"
+                },
+                "Wish Knife": {
+                    "name": "愿望之刀 Wish Knife",
+                    "description": "<p>这把匕首很像一把祈愿剑，它的刃上刻有复杂的凹槽，能够维持能量。祈愿刃比其他同类型的剑（应该是指祈愿剑）更轻，这使得它们成为敏捷战士的首选武器。</p>"
+                },
+                "Mechanical Torch": {
+                    "name": "机械火炬 Mechanical Torch",
+                    "description": "<p>机械火把由电力驱动，你能以一个交互动作拨动机械火把身上的一个开关来打开或关闭它。当启动时，机械火把会在20尺半径范围内发出明亮光照（20-40尺范围内发出昏暗光照），或在40尺锥形范围内发出明亮光照（40-80尺锥形范围发出昏暗光照）。切换模式需要用单一的交互动作来搬动开关。机械火把携带的电量足够使用10分钟。你可以花费1分钟时间通过一个集成的曲柄充电机构来给机械火把充电，它的原理是用发条齿轮转动时发出的电火花来充电。但是这样做的话你需要使用两只手。</p>"
+                },
+                "Human": {
+                    "name": "人类 Human",
+                    "description": "<p><em>人类与格拉利昂上的任何居民一样，变化莫测又不可捉摸，他们有着强大的行动力和生产力用以隐忍和扩张。虽然人类崛起之前有着许多兴旺发达的文明，但纵观历史，人类已然建立了众多极其伟岸亦或极其可怖的社会，而时至今日，人类的人口数量已在整个内海地区居于首位。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{人类 Human}</em></p>"
+                },
+                "Lubaiko": {
+                    "name": "鲁拜科 Lubaiko",
+                    "description": "<p>从点燃面粉厂的那一缕火星到足以撕裂一整个国家的群情激奋，火焰与爆炸便是卢拜寇的激情所在。她是燃光了引线的火药桶，无论好坏，她要爆裂成更盛大的模样。她漫游于格拉利昂的天空，无论何时何地，她绝不会拒绝任何一个能将“闪电”炸进农田或人们脑海里的机会。有些人觉得，那来自卢拜寇火焰的滚滚烟尘，乃是弥漫在空气中、渗入到地底里的不幸与诅咒。然而，她所带来的的大火却也时常为“新生”清出了道路。</p>\n<p>纵然危险，但卢拜寇也有俏皮捣蛋的一面，她就如同舞动火花与烛焰低语间那不稳定的美。她酷爱男装，特爱白兰地所带来的激情与喧乱，更别说那些让人情绪高涨、慷慨激昂的故事了。她的幽默感中夹杂着小小的“施虐”倾向——只要没有人受伤（至少罪不至此的人没有），那么她会为了好玩去点燃别人的袖子，亦或者歇斯底里地嘲笑他人的霉运。尽管她不曾参与火药的发明，但她兴高采烈地拥抱了它们，她可太喜欢那些火药祭品与爆桶礼炮了。</p>\n<p>革命者、发明家、艺术家还有纵火犯都会向卢拜寇祈祷，希望他们的“功业”能迅速地传播开来。她还因为介入冲突施以制止而为人所知，就比如拯救一株特别的兰花，挽救了某人赖以生存的家园。当然，她做这些很有可能只是因为一时兴起，而不是出于对绝望中祈求的回应。许多想要引发动荡、改变世界的人都被卢拜寇所吸引，而她的那些信徒大多都与她一样，深深地迷恋着不断膨胀的力量，哪怕它会焚尽一切。</p>\n<hr />\n<p>崇拜卢拜寇——燃烧无定的火焰与爆炸之神——的火种者，往往在这位反复无常、变幻莫测的神祇身上看见自己。尽管她可以残酷甚至肆意破坏，她的火种者信徒更专注于她的野心与热忱，并从她无视代价、敢于点燃变革的勇气中汲取灵感。她颁布「改变世界」的圣谕对他们意义非凡——他们以此号召作为旗帜，煽动叛乱与动荡，或在格拉利昂各地散播亡命壮举的刺激。被卢拜寇吸引的火种者往往是死硬的冒险家与流浪者，因为这位漂泊女神自己从不安居一处，并禁止过任何安定式的生活。</p>\n<p>虽然卢拜寇常被归咎于霉运，甚至吸引了一些以敌人（有时是自己）的不幸为乐的信徒，她的火种者信徒却很少承认这一面。同所有火种者一样，他们自身往往运气惊人，并从对潜在恶果毫不在意的态度中受益匪浅。从卢拜寇那里，他们学会拥抱意外与偶然，将失控的局面（无论是象征性还是字面意义上）善加利用。在火种者之中，对她的崇拜主要由简单的仪式与典礼组成——比如点火或引燃火药时的一句祈祷。这种灵活与简朴帮助她的崇拜得以传播；许多火种者信徒在亡命冒险或鼓动人群时戏谑地以她之名相唤，亦如此。</p>\n<p>崇敬卢拜寇的火种者并不觉得需要以特定方式着装或炫耀巨大的宗教标志。和她许多崇拜者一样，他们往往偏好比典型火种者更务实的衣着，但并无规定法袍。崇拜者常会佩戴一枚以她标志为图案的小纹身或挂坠，也可能穿戴绣有火花或火焰装饰的配件或布料。但由于火种者珍视他们在压迫社会中往来潜行、暗中颠覆暴政的能力，他们深知不该公开张扬对一位常被那些社会视为大忌的神祇之忠诚。</p>\n<p><strong>典范</strong> 纵火，改变世界，要么默默无闻要么一鸣惊人</p>\n<p><strong>禁忌</strong> 安抚群众，扑灭大火，连续三晚在同一个地方睡觉</p>\n<p><strong>关注领域</strong> 霉运、灵感、动荡、野火</p>\n<h2>天神下凡</h2>\n<p>当施放@UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]法术时，卢拜寇的信徒会得到以下的额外能力。</p>\n<p><strong>卢拜寇</strong> 速度30尺，飞行速度70尺</p>\n<p><span class=\"action-glyph\">1</span> 长矛 （触及20尺）, 伤害@Damage[(6d12+6)[piercing]]</p>\n<p><span class=\"action-glyph\">1</span> 焱火雷矢 （多用火焰，射程120尺），伤害@Damage[(6d6+3)[electricity]]</p>"
+                },
+                "Overdrive+ (Etsv)": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p>临时把你身上的装置零件推入超载状态，试图为你的攻击注入更强的力量。进行一次 @Check[type:crafting|dc:@self.level]，DC 为对应你等级的标准 DC。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb]{效果：超载+}</p>\n<hr />\n<p><strong>大成功</strong> 你的装置进入一种被称为「极限超载」的极致高效状态，为你的攻击注入巨大力量。你的打击在 1 分钟内造成等同于你的智力修正之额外伤害。超载结束后，你的装置因冷却或复位而暂时无法使用，你在 1 分钟内不能再使用超载。</p>\n<p><strong>成功</strong> 你的装置进入超载，为你的攻击增添力量。如同大成功，但额外伤害等同于你的智力修正的一半。</p>\n<p><strong>失败</strong> 你计算失误，什么都没发生。</p>\n<p><strong>大失败</strong> 哎呀！有什么东西爆炸了。你受到 [[/r @actor.level[fire]]]{相当于你等级的火焰伤害}，并且在你的装置冷却复位的 1 分钟内不能再使用超载。</p>\n<hr />\n<p><strong>特殊</strong> 在超载效果期间，你仍然可以使用 @UUID[Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A]{超载} 动作。你不能借此延长超载持续时间，但若大成功，你可以将一次超载升级为极限超载。失败对当前超载无效，大失败则结束你当前的超载效果。</p>"
+                },
+                "Repair Toolkit": {
+                    "name": "修补工具包 Repair Toolkit",
+                    "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+                },
+                "Eureka!": {
+                    "name": "我想到了！ Eureka!",
+                    "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>"
+                },
+                "Gadgeteer Innovation": {
+                    "name": "装置师大发明 Gadgeteer Innovation",
+                    "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+                },
+                "Rations": {
+                    "name": "干粮 Rations"
+                },
+                "Choker of Elocution": {
+                    "name": "雄辩颈饰 Choker of Elocution",
+                    "description": "<p>这只白金颈圈上刻着一种语言的字母表，能提供一种语言以及相关文化的知识。</p>\n<p>你在社群技能检定上获得+1物品加值，并能够理解、说和写这种语言。</p>\n<p>你精彩的雄辩能力能够将在耳聋状态下执行一次听觉动作的纯骰检定DC从5降低至3。</p>\n<p><strong>制作需求</strong> 你掌握了颈圈提供的所有语言。</p>"
+                },
+                "Bottled Lightning (Lesser)": {
+                    "name": "瓶装闪电（弱级） Bottled Lightning (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p><hr /><p>瓶装闪电里面装满了一接触空气就会创造出强烈电流的不稳定液体试剂。一旦命中，目标还会在你的下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。 这枚炸弹造成1d6点闪电伤害和1点闪电溅射伤害。</p>"
+                },
+                "Naari": {
+                    "name": "娜阿丽 Naari",
+                    "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+                },
+                "Studded Leather Armor": {
+                    "name": "镶钉皮甲 Studded Leather Armor",
+                    "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+                },
+                "Inventive Expertise": {
+                    "name": "发明专家 Inventive Expertise",
+                    "description": "<p>通过不断的发明与实验，你的发明更加高效且可靠。你发明家的职业DC提升至专家。</p>"
+                },
+                "Powerful Leap": {
+                    "name": "强力跳跃 Powerful Leap",
+                    "description": "<p>未采取@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}行动时，你的垂直@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}可达5尺高度。你还会在跳跃时增加5尺水平距离，包括跳高和@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}。</p>"
+                },
+                "+1 Striking Flaming Alchemical Gauntlet": {
+                    "name": "+1 强击烈焰炼金战手套 +1 Striking Flaming Alchemical Gauntlet",
+                    "description": "<p>炼金铁手套和敌人接触时会发出小型的炼金爆炸。作为一个交互动作，你可以在铁手套手腕附近的金属支架上放置一个炸弹。炸弹必须是能造成能量伤害的，例如强酸瓶、炽火胶、暴雷石、瓶装闪电或霜冻瓶。在接下来用铁手套进行的三次攻击中，除了正常的铁手套伤害外，还能造成炸弹伤害类型的1d4伤害。如果在做出第一次攻击之后，第二次和第三次攻击没有在1分钟内做出，炸弹的能量就会被浪费掉。这些攻击不会造成炸弹的溅射伤害或其他特殊效果，也不会被任何增幅或修改炸弹效果的能力影响。</p>"
+                },
+                "Mechanic": {
+                    "name": "技师 Mechanic",
+                    "description": "<p>机器错综复杂的内部运作对您来说并不陌生。无论它们是普通的设备还是复杂的发条装置，你都知道是什么让它们运转，以及如何维护它们。一个探险团体可能会让你跟随来修理他们的设备，或者你可能会四处旅行，为那些有需要的人提供你的稀有服务——当然，要钱！</p>\n<p>选择两项属性提升。一项必须是<strong>力量</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺和工程学识（Engineering Lore）技能上受训。你获得@UUID[Compendium.pf2e.feats-srd.Item.ASy9AKEIRxPYUi5o]技能专长。</p>"
+                }
+            }
+        },
+        "Rutaiba El-Majid": {
+            "name": "鲁泰巴·艾尔-马吉德 Rutaiba El-Majid",
+            "tokenName": "鲁泰巴·艾尔-马吉德 Rutaiba El-Majid",
+            "prototypeToken": "鲁泰巴·艾尔-马吉德 Rutaiba El-Majid",
+            "items": {
+                "Torch": {
+                    "name": "火炬 Torch",
+                    "description": "<p>火把在20尺半径范围内散发出明亮的光芒（昏暗的光线照射到接下来的20尺）。它可以被用作临时武器，造成1d4钝击伤害加1点火焰伤害。</p>"
+                },
+                "Explode+": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你刻意将自己的大发明推过常规安全极限，让它爆炸并对附近生物造成伤害——希望同时不会损坏大发明本身。该爆炸对你周围 @Template[type:emanation|distance:5]（若你正穿戴或持握该大发明）或大发明周围（若大发明为随从）内所有生物造成 @Damage[max(2, @actor.level)d6[@actor.flags.pf2e.inventor.explode]] 伤害，并进行 @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。</p>\n<p>从 3 级开始，且此后每升一级，你的爆炸伤害增加 1d6。</p>\n<p>如果你拥有突破性大发明职业特性，则使用爆炸时你可以选择 5 尺或 @Template[type:emanation|distance:10] 作为作用区域；若你拥有革命性大发明职业特性，则可以选择 5 尺、10 尺或 @Template[type:emanation|distance:15]。</p>"
+                },
+                "Marbles": {
+                    "name": "弹珠 Marbles",
+                    "description": "<p>这些小圆球由抛光的石子和彩色玻璃制成，一袋200个。你可以用一个交互动作将弹珠倒在与你邻接的空方格中。第一个进入该方格的生物必须成功通过@Check[acrobatics|dc:13]检定或@Check[reflex|dc:13]豁免（由它选择），否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。一旦一个生物进入了铺满弹珠的空间，足量弹珠就会散落四周，其他进入该方格的生物不再需要掷骰来避免跌倒。</p>"
+                },
+                "Formula Book": {
+                    "name": "配方书 Formula Book",
+                    "description": "<p>炼金术士将每一件他能够制作的物品的配方都一丝不苟地记录了下来。你在起始便免费获得一本标准@UUID[Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx]。这本配方簿包含了两个由你选择的常见一级炼金物品配方，外加你从@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]专长和研究课题中获得的配方。</p>\n<p>每当你获得一个等级，你可以将两个常见炼金物品的配方添加到你的配方簿中。这些新的配方可以对应任何等级的物品，只要是你能够制作的。你自动学会这些配方，不过你也可以从定居点或其他炼金术士那里找到或买到额外的配方，你还可以用@UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]专长发明它们。</p>\n<p>你只需要掌握最基本的配方便足以制作升级版本的物品——你不需要学习高等级的公式。例如，如果你掌握1级的下等生命灵药配方，只要满足等级和其他先决条件，你就可以制作全部下等、次等、中等、高等、上等和真实生命灵药。有着不同功能条目的炼金物品需要单独的配方，而大多数炼金物品的结构都类似生命灵药。</p>"
+                },
+                "Waterskin": {
+                    "name": "水袋 Waterskin",
+                    "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+                },
+                "Unconvention": {
+                    "name": "非常规 Unconvention",
+                    "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+                },
+                "Ablative Armor Plating (Lesser)": {
+                    "name": "消蚀装甲板（弱级） Ablative Armor Plating (Lesser)",
+                    "description": "<p>烧蚀护甲甲片是护甲上附着的保护层，结合了弹簧、巧妙的发条装置和临时创造出的衬垫，通过撞击时爆裂成碎片来吸收伤害。随着时间和运动，护甲甲片会慢慢地自我崩解。安装护甲甲片需要10分钟，并且在1分钟内给与穿戴者5点临时生命值，直到崩解。提前移除护甲甲片会破坏甲片。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.jlVYoiPVRRVGBj5G]</p>"
+                },
+                "Playing Cards": {
+                    "name": "扑克牌 Playing Cards",
+                    "description": "<p>一副标准的扑克牌由54张厚纸制成的牌组成，装在一个纸套里。最常见的游戏和赌博用牌被称为 \"老法师牌\"，以魔法的四种精髓为主题的花色，每种花色有13张牌，还有两张万用牌。这套牌的名称和外观因地区不同而不同。如塔尔多的”魔术师牌”或镣铐群岛的”面具牌”。</p>"
+                },
+                "Lubaiko": {
+                    "name": "鲁拜科 Lubaiko",
+                    "description": "<p>从点燃面粉厂的那一缕火星到足以撕裂一整个国家的群情激奋，火焰与爆炸便是卢拜寇的激情所在。她是燃光了引线的火药桶，无论好坏，她要爆裂成更盛大的模样。她漫游于格拉利昂的天空，无论何时何地，她绝不会拒绝任何一个能将“闪电”炸进农田或人们脑海里的机会。有些人觉得，那来自卢拜寇火焰的滚滚烟尘，乃是弥漫在空气中、渗入到地底里的不幸与诅咒。然而，她所带来的的大火却也时常为“新生”清出了道路。</p>\n<p>纵然危险，但卢拜寇也有俏皮捣蛋的一面，她就如同舞动火花与烛焰低语间那不稳定的美。她酷爱男装，特爱白兰地所带来的激情与喧乱，更别说那些让人情绪高涨、慷慨激昂的故事了。她的幽默感中夹杂着小小的“施虐”倾向——只要没有人受伤（至少罪不至此的人没有），那么她会为了好玩去点燃别人的袖子，亦或者歇斯底里地嘲笑他人的霉运。尽管她不曾参与火药的发明，但她兴高采烈地拥抱了它们，她可太喜欢那些火药祭品与爆桶礼炮了。</p>\n<p>革命者、发明家、艺术家还有纵火犯都会向卢拜寇祈祷，希望他们的“功业”能迅速地传播开来。她还因为介入冲突施以制止而为人所知，就比如拯救一株特别的兰花，挽救了某人赖以生存的家园。当然，她做这些很有可能只是因为一时兴起，而不是出于对绝望中祈求的回应。许多想要引发动荡、改变世界的人都被卢拜寇所吸引，而她的那些信徒大多都与她一样，深深地迷恋着不断膨胀的力量，哪怕它会焚尽一切。</p>\n<hr />\n<p>崇拜卢拜寇——燃烧无定的火焰与爆炸之神——的火种者，往往在这位反复无常、变幻莫测的神祇身上看见自己。尽管她可以残酷甚至肆意破坏，她的火种者信徒更专注于她的野心与热忱，并从她无视代价、敢于点燃变革的勇气中汲取灵感。她颁布「改变世界」的圣谕对他们意义非凡——他们以此号召作为旗帜，煽动叛乱与动荡，或在格拉利昂各地散播亡命壮举的刺激。被卢拜寇吸引的火种者往往是死硬的冒险家与流浪者，因为这位漂泊女神自己从不安居一处，并禁止过任何安定式的生活。</p>\n<p>虽然卢拜寇常被归咎于霉运，甚至吸引了一些以敌人（有时是自己）的不幸为乐的信徒，她的火种者信徒却很少承认这一面。同所有火种者一样，他们自身往往运气惊人，并从对潜在恶果毫不在意的态度中受益匪浅。从卢拜寇那里，他们学会拥抱意外与偶然，将失控的局面（无论是象征性还是字面意义上）善加利用。在火种者之中，对她的崇拜主要由简单的仪式与典礼组成——比如点火或引燃火药时的一句祈祷。这种灵活与简朴帮助她的崇拜得以传播；许多火种者信徒在亡命冒险或鼓动人群时戏谑地以她之名相唤，亦如此。</p>\n<p>崇敬卢拜寇的火种者并不觉得需要以特定方式着装或炫耀巨大的宗教标志。和她许多崇拜者一样，他们往往偏好比典型火种者更务实的衣着，但并无规定法袍。崇拜者常会佩戴一枚以她标志为图案的小纹身或挂坠，也可能穿戴绣有火花或火焰装饰的配件或布料。但由于火种者珍视他们在压迫社会中往来潜行、暗中颠覆暴政的能力，他们深知不该公开张扬对一位常被那些社会视为大忌的神祇之忠诚。</p>\n<p><strong>典范</strong> 纵火，改变世界，要么默默无闻要么一鸣惊人</p>\n<p><strong>禁忌</strong> 安抚群众，扑灭大火，连续三晚在同一个地方睡觉</p>\n<p><strong>关注领域</strong> 霉运、灵感、动荡、野火</p>\n<h2>天神下凡</h2>\n<p>当施放@UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]法术时，卢拜寇的信徒会得到以下的额外能力。</p>\n<p><strong>卢拜寇</strong> 速度30尺，飞行速度70尺</p>\n<p><span class=\"action-glyph\">1</span> 长矛 （触及20尺）, 伤害@Damage[(6d12+6)[piercing]]</p>\n<p><span class=\"action-glyph\">1</span> 焱火雷矢 （多用火焰，射程120尺），伤害@Damage[(6d6+3)[electricity]]</p>"
+                },
+                "Innovation": {
+                    "name": "大发明 Innovation",
+                    "description": "<p>虽然你总是在发明，但还是有一件发明是代表你的最高杰作，你希望这件发明在经过各种调整后能改变世界。从下列大发明中选择一种。你的大发明等级等于你的等级。如果你的大发明被摧毁，你可以花费1天的休整期，进行一次手艺检定，使用符合你等级的高DC；成功时，你重新建造了它。大发明只有在你对其持续性地维护和修补时才能正常工作，因此不存在市场价格。</p>"
+                },
+                "Quick Gadgetry": {
+                    "name": "速制装置 Quick Gadgetry",
+                    "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+                },
+                "Overdrive/Explode": {
+                    "name": "超载／爆炸 Overdrive/Explode",
+                    "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+                },
+                "Genie Weapon Familiarity": {
+                    "name": "精灵武器熟悉 Genie Weapon Familiarity",
+                    "description": "<p>你曾使用你的巨灵先祖所使用的武器训练过。你在@UUID[Compendium.pf2e.equipment-srd.Item.XGtIUZ4ZNKuFx1uL]{弯刃大刀 Falchions}、@UUID[Compendium.pf2e.equipment-srd.Item.UfurZQK6H6SgOjqe]{刺叉 Ranseurs}、@UUID[Compendium.pf2e.equipment-srd.Item.grmaV4GdoGD7sKbn]{弯刀 Scimitars}、@UUID[Compendium.pf2e.equipment-srd.Item.FJrsDoaIXksVjld9]{三叉戟 Tridents}武器上受训。</p>\n<p>此外，所有[罕见][巨灵]武器对你为可用。对你而言，军用[巨灵]武器是简易武器，进阶[巨灵]武器是军用武器。</p>"
+                },
+                "Bedroll": {
+                    "name": "行军床 Bedroll",
+                    "description": "<p>一床卷起来的被子</p>"
+                },
+                "Repair Toolkit": {
+                    "name": "修补工具包 Repair Toolkit",
+                    "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+                },
+                "Peerless Inventor": {
+                    "name": "无双发明家 Peerless Inventor",
+                    "description": "<p>你不断发明，你的手艺技能不可质疑。你获得 @UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]{发明家} 技能专长，即使你不满足先决条件。</p>"
+                },
+                "Rope": {
+                    "name": "绳索 Rope",
+                    "description": "<p>50尺长的麻绳</p>"
+                },
+                "Shield Block": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Flint and Steel": {
+                    "name": "火石与火柴 Flint and Steel",
+                    "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+                },
+                "Backpack": {
+                    "name": "背包 Backpack",
+                    "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+                },
+                "Gadget Innovations": {
+                    "name": "装置大发明 Gadget Innovations",
+                    "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+                },
+                "Explode+ (93x8)": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你的大发明是一件几乎完全靠你自己的工艺勉强维系的造物，时刻处于完全崩散的边缘。这虽然增添了风险，但也意味着你可以借由特殊的不稳定动作驱使它发挥远超其设计规格的表现。请参阅「不稳定」特征的定义及其对你大发明的影响。</p>\n<p>发明家在职业生涯中可以学到各种不稳定动作，但所有发明家至少都知道如何让自己的大发明 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH]{爆炸+}。</p>"
+                },
+                "Waffle Iron": {
+                    "name": "华夫饼烙铁 Waffle Iron",
+                    "description": "<p>这套铰链式金属板的特点是每张金属板内侧都有凹槽，让烹制的糕点烤出所需质地。将面糊倒在金属板上，关闭华夫饼机，然后将它放在火或炉灶上烤。</p>"
+                },
+                "Overdrive+": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p>你拥有一系列由你自己发明的小型装置——从肌肉刺激剂到冲击活塞应有尽有。在必要时，你可以将它们投入 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR]{超载} 来在战斗中助你一臂之力。</p>"
+                },
+                "Inventor+": {
+                    "name": "发明家+ Inventor+",
+                    "description": "<p><em>任何工匠都能照着图纸造出一件装置，但你发明的是不可能！你梦想出的每一件奇异造物都是一项突破极限的独特实验，是一台似乎只为你工作的神秘机器。你始终处在下一次重大突破的边缘，每一次试错与磨砺都是测试与调校的契机。只要你能想象，你就能制造。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家}</em></p>"
+                },
+                "Inventor": {
+                    "name": "发明家 Inventor",
+                    "description": "<p><em>无论哪个修补匠都能依葫芦画瓢地鼓捣一些技术装置出来，但你发明的玩意儿前所未有！你通过独一无二的实验，设计出来的每件稀奇古怪的奇思妙想都推进了可能性的界限，并创造出了一种可能只有你才了解如何使用的神秘机器。你总是立足于实现技术突破的风口浪尖，每一次试验，每一次磨练都是调试的机会。没有做不到，只有想不到。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家 Inventor}</em></p>"
+                },
+                "Engineering Lore": {
+                    "name": "工程学识 Engineering Lore"
+                },
+                "Chalk": {
+                    "name": "白垩 Chalk"
+                },
+                "Studded Leather Armor": {
+                    "name": "镶钉皮甲 Studded Leather Armor",
+                    "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+                },
+                "Quick Repair": {
+                    "name": "快速修补 Quick Repair",
+                    "description": "<p>对你而言，@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}行动失去探索特征，只需花费1分钟而非正常情况的10分钟。若你在手艺技能上的熟练度达到大师，只需花费3个动作；若达到传奇，只需1个动作。</p>"
+                },
+                "Gauntlet": {
+                    "name": "战手套 Gauntlet",
+                    "description": "<p>全身甲、半身甲和板条甲都配有一副这种金属手套，也可以单独购买并与其他类型的盔甲一起佩戴。他们不仅保护你的手，而且把你的手变成致命的武器。</p>"
+                },
+                "Shield Block (7TDn)": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Soap": {
+                    "name": "肥皂 Soap",
+                    "description": "<p>一根棒状肥皂。</p>"
+                },
+                "Human": {
+                    "name": "人类 Human",
+                    "description": "<p><em>人类与格拉利昂上的任何居民一样，变化莫测又不可捉摸，他们有着强大的行动力和生产力用以隐忍和扩张。虽然人类崛起之前有着许多兴旺发达的文明，但纵观历史，人类已然建立了众多极其伟岸亦或极其可怖的社会，而时至今日，人类的人口数量已在整个内海地区居于首位。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{人类 Human}</em></p>"
+                },
+                "Wish Knife": {
+                    "name": "愿望之刀 Wish Knife",
+                    "description": "<p>这把匕首很像一把祈愿剑，它的刃上刻有复杂的凹槽，能够维持能量。祈愿刃比其他同类型的剑（应该是指祈愿剑）更轻，这使得它们成为敏捷战士的首选武器。</p>"
+                },
+                "Overdrive+ (Etsv)": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p>临时把你身上的装置零件推入超载状态，试图为你的攻击注入更强的力量。进行一次 @Check[type:crafting|dc:@self.level]，DC 为对应你等级的标准 DC。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb]{效果：超载+}</p>\n<hr />\n<p><strong>大成功</strong> 你的装置进入一种被称为「极限超载」的极致高效状态，为你的攻击注入巨大力量。你的打击在 1 分钟内造成等同于你的智力修正之额外伤害。超载结束后，你的装置因冷却或复位而暂时无法使用，你在 1 分钟内不能再使用超载。</p>\n<p><strong>成功</strong> 你的装置进入超载，为你的攻击增添力量。如同大成功，但额外伤害等同于你的智力修正的一半。</p>\n<p><strong>失败</strong> 你计算失误，什么都没发生。</p>\n<p><strong>大失败</strong> 哎呀！有什么东西爆炸了。你受到 [[/r @actor.level[fire]]]{相当于你等级的火焰伤害}，并且在你的装置冷却复位的 1 分钟内不能再使用超载。</p>\n<hr />\n<p><strong>特殊</strong> 在超载效果期间，你仍然可以使用 @UUID[Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A]{超载} 动作。你不能借此延长超载持续时间，但若大成功，你可以将一次超载升级为极限超载。失败对当前超载无效，大失败则结束你当前的超载效果。</p>"
+                },
+                "Eureka!": {
+                    "name": "我想到了！ Eureka!",
+                    "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>"
+                },
+                "Gadgeteer Innovation": {
+                    "name": "装置师大发明 Gadgeteer Innovation",
+                    "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+                },
+                "Rations": {
+                    "name": "干粮 Rations"
+                },
+                "Naari": {
+                    "name": "娜阿丽 Naari",
+                    "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+                },
+                "Mechanic": {
+                    "name": "技师 Mechanic",
+                    "description": "<p>机器错综复杂的内部运作对您来说并不陌生。无论它们是普通的设备还是复杂的发条装置，你都知道是什么让它们运转，以及如何维护它们。一个探险团体可能会让你跟随来修理他们的设备，或者你可能会四处旅行，为那些有需要的人提供你的稀有服务——当然，要钱！</p>\n<p>选择两项属性提升。一项必须是<strong>力量</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺和工程学识（Engineering Lore）技能上受训。你获得@UUID[Compendium.pf2e.feats-srd.Item.ASy9AKEIRxPYUi5o]技能专长。</p>"
+                }
+            }
+        },
+        "Rutaiba El-Majid (Level 5)": {
+            "name": "鲁泰巴·艾尔-马吉德（5级） Rutaiba El-Majid (Level 5)",
+            "tokenName": "鲁泰巴·艾尔-马吉德（5级） Rutaiba El-Majid (Level 5)",
+            "prototypeToken": "鲁泰巴·艾尔-马吉德（5级） Rutaiba El-Majid (Level 5)",
+            "items": {
+                "Magical Crafting": {
+                    "name": "魔法制作 Magical Crafting",
+                    "description": "<p>你可以@UUID[Compendium.pf2e.actionspf2e.Item.rmwa3OyhTZ2i2AHl]{制作 Craft}魔法物品，不过某些物品会有其它条件。选取此专长时，你立即将四种2级或更低级常见魔法物品的配方加入你的配方簿中。</p>"
+                },
+                "Explode+": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你刻意将自己的大发明推过常规安全极限，让它爆炸并对附近生物造成伤害——希望同时不会损坏大发明本身。该爆炸对你周围 @Template[type:emanation|distance:5]（若你正穿戴或持握该大发明）或大发明周围（若大发明为随从）内所有生物造成 @Damage[max(2, @actor.level)d6[@actor.flags.pf2e.inventor.explode]] 伤害，并进行 @Check[type:reflex|dc:resolve(@actor.attributes.classDC.value)|basic:true]。</p>\n<p>从 3 级开始，且此后每升一级，你的爆炸伤害增加 1d6。</p>\n<p>如果你拥有突破性大发明职业特性，则使用爆炸时你可以选择 5 尺或 @Template[type:emanation|distance:10] 作为作用区域；若你拥有革命性大发明职业特性，则可以选择 5 尺、10 尺或 @Template[type:emanation|distance:15]。</p>"
+                },
+                "Marbles": {
+                    "name": "弹珠 Marbles",
+                    "description": "<p>这些小圆球由抛光的石子和彩色玻璃制成，一袋200个。你可以用一个交互动作将弹珠倒在与你邻接的空方格中。第一个进入该方格的生物必须成功通过@Check[acrobatics|dc:13]检定或@Check[reflex|dc:13]豁免（由它选择），否则@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。一旦一个生物进入了铺满弹珠的空间，足量弹珠就会散落四周，其他进入该方格的生物不再需要掷骰来避免跌倒。</p>"
+                },
+                "Formula Book": {
+                    "name": "配方书 Formula Book",
+                    "description": "<p>炼金术士将每一件他能够制作的物品的配方都一丝不苟地记录了下来。你在起始便免费获得一本标准@UUID[Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx]。这本配方簿包含了两个由你选择的常见一级炼金物品配方，外加你从@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]专长和研究课题中获得的配方。</p>\n<p>每当你获得一个等级，你可以将两个常见炼金物品的配方添加到你的配方簿中。这些新的配方可以对应任何等级的物品，只要是你能够制作的。你自动学会这些配方，不过你也可以从定居点或其他炼金术士那里找到或买到额外的配方，你还可以用@UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]专长发明它们。</p>\n<p>你只需要掌握最基本的配方便足以制作升级版本的物品——你不需要学习高等级的公式。例如，如果你掌握1级的下等生命灵药配方，只要满足等级和其他先决条件，你就可以制作全部下等、次等、中等、高等、上等和真实生命灵药。有着不同功能条目的炼金物品需要单独的配方，而大多数炼金物品的结构都类似生命灵药。</p>"
+                },
+                "Waterskin": {
+                    "name": "水袋 Waterskin",
+                    "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+                },
+                "Unconvention": {
+                    "name": "非常规 Unconvention",
+                    "description": "<p>大发明的诞生在于追求另类，发明家总在不断推动可能性的极限。尽管有些人会认为这些方法非常规，但它们仍然有效并能产出结果。</p>\n<p>当你首次成为发明家时，你可以选择获得一项「非常规」。当你选择「非常规」时，你失去「超载」与「爆炸」发明家职业特性，并改为获得列出的职业特性。当你从「专家超载」、「大师超载」与「传奇超载」获得额外伤害时，你改为提高所列动作的伤害。当使用所列动作时，或当你的大发明在大失败时爆炸并对你造成伤害时，将伤害类型从火焰改为你「超载」替代项所对应的伤害类型。如果某专长或能力会使用或要求使用「超载」或「爆炸」，你改为使用「非常规」的替代动作来满足这些动作的效果或先决条件。</p>\n<p>如果你选取「可变核心」或「可变装置」职业专长，则当这些专长的伤害类型选项中包含火焰时，你将火焰加入伤害类型可选项中，而非你「非常规」对应的不稳定动作所属的伤害类型。此外，如果你从某发明家职业特性或职业专长获得会造成火焰伤害的能力，则你改为造成你所选「非常规」对应的不稳定动作相关伤害。</p>\n<p>当处于「超载」替代项的效果之下时，你仍可使用替代动作。你不能以此方式延长你的「超载」替代项的持续时间，但若你大成功则可将「超载」替代项变为「重击超载」替代项。失败对你当前的「超载」替代项无影响；大失败则会结束你的「超载」。</p>"
+                },
+                "Reconfigure": {
+                    "name": "重构 Reconfigure",
+                    "description": "<p>你是所有制作领域的专家，而且总是在调整你的大发明。你可以花费1天休整期进行修补，以改变大发明的一项改进。你尝试一次制作检定，使用符合你等级的高DC。成功时，你选择一个大发明上的改进，将其改为相同类别（初始、突破或革命）的不同改进。</p>\n<p>如果你有任何改进专长，在成功的检定后你可以改为将改进专长重训成其他的改进专长。新专长必须满足重训的标准限制。</p>"
+                },
+                "Toughness": {
+                    "name": "坚韧 Toughness",
+                    "description": "<p>在支撑到极限前，你的身体可以经受比大多数人更沉重的损伤。你的最大生命值提高等于你的等级的数值。你的恢复检定DC降低1点。</p>"
+                },
+                "Expert Overdrive": {
+                    "name": "专家超载 Expert Overdrive",
+                    "description": "<p>你提升了你的手艺技能，你可以将设备推入更强力的超载状态。你在手艺上获得专家熟练度，在成功使用超载时，你将额外伤害提升1点。</p>"
+                },
+                "Playing Cards": {
+                    "name": "扑克牌 Playing Cards",
+                    "description": "<p>一副标准的扑克牌由54张厚纸制成的牌组成，装在一个纸套里。最常见的游戏和赌博用牌被称为 \"老法师牌\"，以魔法的四种精髓为主题的花色，每种花色有13张牌，还有两张万用牌。这套牌的名称和外观因地区不同而不同。如塔尔多的”魔术师牌”或镣铐群岛的”面具牌”。</p>"
+                },
+                "+1 Alchemical Gauntlet": {
+                    "name": "+1 炼金战手套 +1 Alchemical Gauntlet",
+                    "description": "<p>炼金铁手套和敌人接触时会发出小型的炼金爆炸。作为一个交互动作，你可以在铁手套手腕附近的金属支架上放置一个炸弹。炸弹必须是能造成能量伤害的，例如强酸瓶、炽火胶、暴雷石、瓶装闪电或霜冻瓶。在接下来用铁手套进行的三次攻击中，除了正常的铁手套伤害外，还能造成炸弹伤害类型的1d4伤害。如果在做出第一次攻击之后，第二次和第三次攻击没有在1分钟内做出，炸弹的能量就会被浪费掉。这些攻击不会造成炸弹的溅射伤害或其他特殊效果，也不会被任何增幅或修改炸弹效果的能力影响。</p>"
+                },
+                "Innovation": {
+                    "name": "大发明 Innovation",
+                    "description": "<p>虽然你总是在发明，但还是有一件发明是代表你的最高杰作，你希望这件发明在经过各种调整后能改变世界。从下列大发明中选择一种。你的大发明等级等于你的等级。如果你的大发明被摧毁，你可以花费1天的休整期，进行一次手艺检定，使用符合你等级的高DC；成功时，你重新建造了它。大发明只有在你对其持续性地维护和修补时才能正常工作，因此不存在市场价格。</p>"
+                },
+                "Quick Gadgetry": {
+                    "name": "速制装置 Quick Gadgetry",
+                    "description": "<p><strong>需求 </strong>你已准备一件未使用的临时装置，且该装置由你持用、储存或穿戴。</p>\n<hr />\n<p>你已学会将已准备的装置改造为当下所需的装置。你立即销毁所需装置，将其化作零件，从你的配方书中创造一件你所选的、激活所需 2 个动作或更少的新装置。该新装置必须在你下一回合开始前激活，否则便会变得不可用。装置在被激活后会持续其正常的持续时间。</p>"
+                },
+                "Gadgeteer Dedication": {
+                    "name": "装置师献身 Gadgeteer Dedication",
+                    "description": "<p><strong>触发 </strong>你为使用装置大发明进行的不稳定纯骰检定失败。</p>\n<hr />\n<p>你的装置技艺已发展至足以提供可靠的故障保险——以应对计划之外的情况。你重掷触发的不稳定纯骰检定，即便新结果更差也须采用。</p>"
+                },
+                "Overdrive/Explode": {
+                    "name": "超载／爆炸 Overdrive/Explode",
+                    "description": "<p>你获得 @UUID[Compendium.pf2e.actionspf2e.3D9kGfwg4LUZBR9A]{超载} 与 @UUID[Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf]{爆炸} 职业特性。</p>"
+                },
+                "Heat Wave": {
+                    "name": "热浪 Heat Wave",
+                    "description": "<p><strong>触发</strong> 一个效果会对你造成火焰伤害，即使你抵抗了所有伤害。</p>\n<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你驾驭迎面而来的火焰，将它们扭曲成一个由热气和烟雾组成的薄幕，直到你的下个回合的开始前，你获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Genie Weapon Familiarity": {
+                    "name": "精灵武器熟悉 Genie Weapon Familiarity",
+                    "description": "<p>你曾使用你的巨灵先祖所使用的武器训练过。你在@UUID[Compendium.pf2e.equipment-srd.Item.XGtIUZ4ZNKuFx1uL]{弯刃大刀 Falchions}、@UUID[Compendium.pf2e.equipment-srd.Item.UfurZQK6H6SgOjqe]{刺叉 Ranseurs}、@UUID[Compendium.pf2e.equipment-srd.Item.grmaV4GdoGD7sKbn]{弯刀 Scimitars}、@UUID[Compendium.pf2e.equipment-srd.Item.FJrsDoaIXksVjld9]{三叉戟 Tridents}武器上受训。</p>\n<p>此外，所有[罕见][巨灵]武器对你为可用。对你而言，军用[巨灵]武器是简易武器，进阶[巨灵]武器是军用武器。</p>"
+                },
+                "Inventor Weapon Expertise": {
+                    "name": "发明家武器熟练 Inventor Weapon Expertise",
+                    "description": "<p>你开发了一种技巧，能更有效率地使用你的武器。你在简易和军用武器，以及无武装攻击上的熟练度提升至专家。</p>\n<p>如果你有 @UUID[Compendium.pf2e.classfeatures.Item.bok3P78CMchFibxC]{武器大发明 Weapon Innovation}，你可以使用大发明的重击专精效果。</p>"
+                },
+                "Bedroll": {
+                    "name": "行军床 Bedroll",
+                    "description": "<p>一床卷起来的被子</p>"
+                },
+                "Peerless Inventor": {
+                    "name": "无双发明家 Peerless Inventor",
+                    "description": "<p>你不断发明，你的手艺技能不可质疑。你获得 @UUID[Compendium.pf2e.feats-srd.Item.XR95taODq1sq82Du]{发明家} 技能专长，即使你不满足先决条件。</p>"
+                },
+                "Variable Gadgetry": {
+                    "name": "可变装置 Variable Gadgetry",
+                    "description": "<p>你调整你大发明的临时装置，按需改变其伤害类型。当你创建造成伤害的临时装置时，你可以在酸蚀、寒冷、电击或火焰之间选择，让你的装置造成所选伤害类型，而非其原本的伤害类型。</p>"
+                },
+                "Rope": {
+                    "name": "绳索 Rope",
+                    "description": "<p>50尺长的麻绳</p>"
+                },
+                "Shield Block": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Flint and Steel": {
+                    "name": "火石与火柴 Flint and Steel",
+                    "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+                },
+                "Backpack": {
+                    "name": "背包 Backpack",
+                    "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+                },
+                "Gadget Innovations": {
+                    "name": "装置大发明 Gadget Innovations",
+                    "description": "<p>你的大发明每日通过一组特殊机械工具——装置——来创造。你可以创造临时与永久装置。这些机器在你的冒险中各司其职，让你在冒险进程中扩充配方书并推进工程极限。如果你选择此职业架构，你必须在 2级时选择装置师献身作为你的职业专长。</p>\n<p><strong>先决条件：</strong>你必须是发明家。</p>\n<p><strong>装置师调整：</strong>你不再获得常规大发明；你将装置指定为你的大发明。你不获得「重构」或「彻底重构」职业特性。取而代之，你每升一级时，学得两个常见或非常见装置或你能取用的其他装置的配方。</p>\n<p>每日的每日准备期间，你可以从你已知配方中选择一个等级不超过你的装置作为你的装置大发明。只有你能激活你的装置大发明。作为你的大发明，你可以使用你装置的位置或穿戴装置生物的位置来判定源自你装置的能力（如「爆炸」）。</p>\n<p>你装置大发明的激活获得不稳定特征，且使用此激活后该装置不会被消耗。取而代之，你的装置获得使用具有不稳定特征动作的常规效果。你可以花费 10分钟重新调校你的装置大发明并作出调整以恢复其功能，从而恢复其使用。你的装置在其激活的持续时间内保持可用；如果你的装置需要你持续激活效果，则只有第一次激活具有不稳定特征。如果你选择一个其激活效果持续时间超过 1分钟的装置作为你的装置大发明，它会持续 1分钟而非通常的持续时间。</p>\n<p>每日的每日准备期间，你从配方书中获得一个临时装置。以这种方式准备的装置不消耗你任何资源进行制作，且不具销售价值。它们是临时物品，下次每日准备时若仍未使用便会瓦解。该临时装置是你由职业专长（如「装置专家」）所获临时装置的额外补充。这些临时装置必须等级不超过你。你获得「速制装置」动作。</p>\n<p>在 7级你本应获得「突破性大发明」职业特性时，及在 15级你本应获得「革命性大发明」职业特性时，你改为可每日创造额外一个装置大发明。这些装置也视为你装置大发明的一部分，因为它们形成精心构造的、带组织化触发的工具网络。</p>\n<p>如果你的装置大发明会变得不可用或破损（如因不稳定动作），你的所有装置大发明都会变得不可用。就判定能力（如「爆炸」）的位置而言，你可以使用你任意一个装置大发明的位置。</p>"
+                },
+                "Explode+ (93x8)": {
+                    "name": "爆炸+ Explode+",
+                    "description": "<p>你的大发明是一件几乎完全靠你自己的工艺勉强维系的造物，时刻处于完全崩散的边缘。这虽然增添了风险，但也意味着你可以借由特殊的不稳定动作驱使它发挥远超其设计规格的表现。请参阅「不稳定」特征的定义及其对你大发明的影响。</p>\n<p>发明家在职业生涯中可以学到各种不稳定动作，但所有发明家至少都知道如何让自己的大发明 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH]{爆炸+}。</p>"
+                },
+                "Specialty Crafting (Blacksmithing)": {
+                    "name": "专项制作（铁匠） Specialty Crafting",
+                    "description": "<p>你专攻于制作特定的一类物品。从下表中选择一个专攻方向，你在用来制作金属物件的手艺技能检定上获得+1环境加值。当你在手艺技能上达大师级熟练度时，这个加值提升到+2。</p>\n<hr />\n<p><strong>范例工艺造物</strong> 金属制品，如金属盔甲</p>\n<p>如果不能确定某一件物品的制作是否属于本专长影响的范围，则GM具有最终裁判权。在某些情况下，本专长只会部分地对某些物品的制作提供帮助。举例来说，如果你的专攻方向是“木工”，那么如果你要制作一把钉头锤的话，GM只会允许你获得本专长提供的加值的一半，因为制作这样的一件物品会同时需要锻造和木工加工方式。</p>"
+                },
+                "Waffle Iron": {
+                    "name": "华夫饼烙铁 Waffle Iron",
+                    "description": "<p>这套铰链式金属板的特点是每张金属板内侧都有凹槽，让烹制的糕点烤出所需质地。将面糊倒在金属板上，关闭华夫饼机，然后将它放在火或炉灶上烤。</p>"
+                },
+                "Overdrive+": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p>你拥有一系列由你自己发明的小型装置——从肌肉刺激剂到冲击活塞应有尽有。在必要时，你可以将它们投入 @UUID[Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR]{超载} 来在战斗中助你一臂之力。</p>"
+                },
+                "Acid Flask (Lesser)": {
+                    "name": "酸液瓶（弱级） Acid Flask (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个装满强酸的烧瓶会造成1点酸蚀伤害，1d6点酸蚀持续伤害，和1点酸蚀溅射伤害。</p>"
+                },
+                "Lubaiko": {
+                    "name": "鲁拜科 Lubaiko",
+                    "description": "<p>从点燃面粉厂的那一缕火星到足以撕裂一整个国家的群情激奋，火焰与爆炸便是卢拜寇的激情所在。她是燃光了引线的火药桶，无论好坏，她要爆裂成更盛大的模样。她漫游于格拉利昂的天空，无论何时何地，她绝不会拒绝任何一个能将“闪电”炸进农田或人们脑海里的机会。有些人觉得，那来自卢拜寇火焰的滚滚烟尘，乃是弥漫在空气中、渗入到地底里的不幸与诅咒。然而，她所带来的的大火却也时常为“新生”清出了道路。</p>\n<p>纵然危险，但卢拜寇也有俏皮捣蛋的一面，她就如同舞动火花与烛焰低语间那不稳定的美。她酷爱男装，特爱白兰地所带来的激情与喧乱，更别说那些让人情绪高涨、慷慨激昂的故事了。她的幽默感中夹杂着小小的“施虐”倾向——只要没有人受伤（至少罪不至此的人没有），那么她会为了好玩去点燃别人的袖子，亦或者歇斯底里地嘲笑他人的霉运。尽管她不曾参与火药的发明，但她兴高采烈地拥抱了它们，她可太喜欢那些火药祭品与爆桶礼炮了。</p>\n<p>革命者、发明家、艺术家还有纵火犯都会向卢拜寇祈祷，希望他们的“功业”能迅速地传播开来。她还因为介入冲突施以制止而为人所知，就比如拯救一株特别的兰花，挽救了某人赖以生存的家园。当然，她做这些很有可能只是因为一时兴起，而不是出于对绝望中祈求的回应。许多想要引发动荡、改变世界的人都被卢拜寇所吸引，而她的那些信徒大多都与她一样，深深地迷恋着不断膨胀的力量，哪怕它会焚尽一切。</p>\n<hr />\n<p>崇拜卢拜寇——燃烧无定的火焰与爆炸之神——的火种者，往往在这位反复无常、变幻莫测的神祇身上看见自己。尽管她可以残酷甚至肆意破坏，她的火种者信徒更专注于她的野心与热忱，并从她无视代价、敢于点燃变革的勇气中汲取灵感。她颁布「改变世界」的圣谕对他们意义非凡——他们以此号召作为旗帜，煽动叛乱与动荡，或在格拉利昂各地散播亡命壮举的刺激。被卢拜寇吸引的火种者往往是死硬的冒险家与流浪者，因为这位漂泊女神自己从不安居一处，并禁止过任何安定式的生活。</p>\n<p>虽然卢拜寇常被归咎于霉运，甚至吸引了一些以敌人（有时是自己）的不幸为乐的信徒，她的火种者信徒却很少承认这一面。同所有火种者一样，他们自身往往运气惊人，并从对潜在恶果毫不在意的态度中受益匪浅。从卢拜寇那里，他们学会拥抱意外与偶然，将失控的局面（无论是象征性还是字面意义上）善加利用。在火种者之中，对她的崇拜主要由简单的仪式与典礼组成——比如点火或引燃火药时的一句祈祷。这种灵活与简朴帮助她的崇拜得以传播；许多火种者信徒在亡命冒险或鼓动人群时戏谑地以她之名相唤，亦如此。</p>\n<p>崇敬卢拜寇的火种者并不觉得需要以特定方式着装或炫耀巨大的宗教标志。和她许多崇拜者一样，他们往往偏好比典型火种者更务实的衣着，但并无规定法袍。崇拜者常会佩戴一枚以她标志为图案的小纹身或挂坠，也可能穿戴绣有火花或火焰装饰的配件或布料。但由于火种者珍视他们在压迫社会中往来潜行、暗中颠覆暴政的能力，他们深知不该公开张扬对一位常被那些社会视为大忌的神祇之忠诚。</p>\n<p><strong>典范</strong> 纵火，改变世界，要么默默无闻要么一鸣惊人</p>\n<p><strong>禁忌</strong> 安抚群众，扑灭大火，连续三晚在同一个地方睡觉</p>\n<p><strong>关注领域</strong> 霉运、灵感、动荡、野火</p>\n<h2>天神下凡</h2>\n<p>当施放@UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]法术时，卢拜寇的信徒会得到以下的额外能力。</p>\n<p><strong>卢拜寇</strong> 速度30尺，飞行速度70尺</p>\n<p><span class=\"action-glyph\">1</span> 长矛 （触及20尺）, 伤害@Damage[(6d12+6)[piercing]]</p>\n<p><span class=\"action-glyph\">1</span> 焱火雷矢 （多用火焰，射程120尺），伤害@Damage[(6d6+3)[electricity]]</p>"
+                },
+                "Crafter's Eyepiece": {
+                    "name": "工匠目镜 Crafter's Eyepiece",
+                    "description": "<p>这只粗糙的金属目镜上蚀刻着方块形状的图纹，是设计用来单眼佩戴的。旋转镜片能够为你准备制作或修复的物品展现一个模糊的三维轮廓，上面还能为每个部件显示一些有用的标签。。</p>\n<p>穿戴时，这只目镜能在手艺技能检定上为你提供+1物品加值。当你修理一件物品时，将成功时恢复的生命值提升至10+每熟练等级10点，大成功时恢复的生命值提升至15+每熟练等级15点。</p>"
+                },
+                "Inventor+": {
+                    "name": "发明家+ Inventor+",
+                    "description": "<p><em>任何工匠都能照着图纸造出一件装置，但你发明的是不可能！你梦想出的每一件奇异造物都是一项突破极限的独特实验，是一台似乎只为你工作的神秘机器。你始终处在下一次重大突破的边缘，每一次试错与磨砺都是测试与调校的契机。只要你能想象，你就能制造。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家}</em></p>"
+                },
+                "Inventor": {
+                    "name": "发明家 Inventor",
+                    "description": "<p><em>无论哪个修补匠都能依葫芦画瓢地鼓捣一些技术装置出来，但你发明的玩意儿前所未有！你通过独一无二的实验，设计出来的每件稀奇古怪的奇思妙想都推进了可能性的界限，并创造出了一种可能只有你才了解如何使用的神秘机器。你总是立足于实现技术突破的风口浪尖，每一次试验，每一次磨练都是调试的机会。没有做不到，只有想不到。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.kzxu2dI7tFxv6Ix6.JournalEntryPage.gcRmL4Id1ggKDhvg]{发明家 Inventor}</em></p>"
+                },
+                "Engineering Lore": {
+                    "name": "工程学识 Engineering Lore"
+                },
+                "Bottled Lightning (Lesser)": {
+                    "name": "瓶装闪电（弱级） Bottled Lightning (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p><hr /><p>瓶装闪电里面装满了一接触空气就会创造出强烈电流的不稳定液体试剂。一旦命中，目标还会在你的下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。 这枚炸弹造成1d6点闪电伤害和1点闪电溅射伤害。</p>"
+                },
+                "Thunderstone (Lesser)": {
+                    "name": "雷震石（弱级） Thunderstone (Lesser)",
+                    "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 打击</p>\n<hr />\n<p>当这枚石头命中一个生物或一个坚硬表面时，它会爆发出震耳欲聋的巨响。在暴雷石爆发的空间周围10尺内的所有生物必须在一次 @Check[fortitude|dc:17|name:Lesser Thunderstone|showDC:all] 豁免检定，否则直到它的下一轮结束位置都陷入 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋 Deafened} 。</p>\n<p>暴雷石造成1d4点音波伤害和1点音波溅射伤害</p>"
+                },
+                "Chalk": {
+                    "name": "白垩 Chalk"
+                },
+                "Studded Leather Armor": {
+                    "name": "镶钉皮甲 Studded Leather Armor",
+                    "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+                },
+                "Quick Repair": {
+                    "name": "快速修补 Quick Repair",
+                    "description": "<p>对你而言，@UUID[Compendium.pf2e.actionspf2e.Item.bT3skovyLUtP22ME]{修理 Repair}行动失去探索特征，只需花费1分钟而非正常情况的10分钟。若你在手艺技能上的熟练度达到大师，只需花费3个动作；若达到传奇，只需1个动作。</p>"
+                },
+                "Telescopic Monocle": {
+                    "name": "望远单片镜 Telescopic Monocle",
+                    "description": "<p><strong>激活</strong> <span class=\"action-glyph\">1</span> 交互（操作）</p>\n<hr />\n<p>这只单片镜可以放大焦距，让你看见远方。激活后，你可以查看 30尺以外、最远 300尺范围内的生物、物体与地形特征，仿佛它们仅在 30尺外，移除任何因距离超过 30尺而对视觉察觉检定造成的环境减值。10分钟后，该镜片裂开，你便无法再聚焦。</p>"
+                },
+                "Shield Block (7TDn)": {
+                    "name": "盾牌格挡 Shield Block",
+                    "description": "<p>你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]通用专长，这是一个能让你利用盾牌降低受到伤害的反应。</p>"
+                },
+                "Soap": {
+                    "name": "肥皂 Soap",
+                    "description": "<p>一根棒状肥皂。</p>"
+                },
+                "Mechanical Torch": {
+                    "name": "机械火炬 Mechanical Torch",
+                    "description": "<p>机械火把由电力驱动，你能以一个交互动作拨动机械火把身上的一个开关来打开或关闭它。当启动时，机械火把会在20尺半径范围内发出明亮光照（20-40尺范围内发出昏暗光照），或在40尺锥形范围内发出明亮光照（40-80尺锥形范围发出昏暗光照）。切换模式需要用单一的交互动作来搬动开关。机械火把携带的电量足够使用10分钟。你可以花费1分钟时间通过一个集成的曲柄充电机构来给机械火把充电，它的原理是用发条齿轮转动时发出的电火花来充电。但是这样做的话你需要使用两只手。</p>"
+                },
+                "Human": {
+                    "name": "人类 Human",
+                    "description": "<p><em>人类与格拉利昂上的任何居民一样，变化莫测又不可捉摸，他们有着强大的行动力和生产力用以隐忍和扩张。虽然人类崛起之前有着许多兴旺发达的文明，但纵观历史，人类已然建立了众多极其伟岸亦或极其可怖的社会，而时至今日，人类的人口数量已在整个内海地区居于首位。</em></p>\n<p><em>@UUID[Compendium.pf2e.journals.JournalEntry.45SK8rdbbxvEHfMn.JournalEntryPage.7pU8yM7yPMw92SY3]{人类 Human}</em></p>"
+                },
+                "Wish Knife": {
+                    "name": "愿望之刀 Wish Knife",
+                    "description": "<p>这把匕首很像一把祈愿剑，它的刃上刻有复杂的凹槽，能够维持能量。祈愿刃比其他同类型的剑（应该是指祈愿剑）更轻，这使得它们成为敏捷战士的首选武器。</p>"
+                },
+                "Overdrive+ (Etsv)": {
+                    "name": "超载+ Overdrive+",
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p>临时把你身上的装置零件推入超载状态，试图为你的攻击注入更强的力量。进行一次 @Check[type:crafting|dc:@self.level]，DC 为对应你等级的标准 DC。</p>\n<p>@UUID[Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb]{效果：超载+}</p>\n<hr />\n<p><strong>大成功</strong> 你的装置进入一种被称为「极限超载」的极致高效状态，为你的攻击注入巨大力量。你的打击在 1 分钟内造成等同于你的智力修正之额外伤害。超载结束后，你的装置因冷却或复位而暂时无法使用，你在 1 分钟内不能再使用超载。</p>\n<p><strong>成功</strong> 你的装置进入超载，为你的攻击增添力量。如同大成功，但额外伤害等同于你的智力修正的一半。</p>\n<p><strong>失败</strong> 你计算失误，什么都没发生。</p>\n<p><strong>大失败</strong> 哎呀！有什么东西爆炸了。你受到 [[/r @actor.level[fire]]]{相当于你等级的火焰伤害}，并且在你的装置冷却复位的 1 分钟内不能再使用超载。</p>\n<hr />\n<p><strong>特殊</strong> 在超载效果期间，你仍然可以使用 @UUID[Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A]{超载} 动作。你不能借此延长超载持续时间，但若大成功，你可以将一次超载升级为极限超载。失败对当前超载无效，大失败则结束你当前的超载效果。</p>"
+                },
+                "Eureka!": {
+                    "name": "我想到了！ Eureka!",
+                    "description": "<p><strong>需求 </strong>你处于非平凡的遭遇中。</p>\n<hr />\n<p>你将知识转化为迅速行动。你对一个你能看见的生物 @Compendium[pf2e.actionspf2e.1OagaWtBpVXExToo]{回忆知识}，然后使用「超载」。</p>"
+                },
+                "Gadgeteer Innovation": {
+                    "name": "装置师大发明 Gadgeteer Innovation",
+                    "description": "<p>你认为将才智倾注于单一发明并非通往发现的有效道路。毕竟，没有失败何来成功？以装置的迭代式与扩展式测试方案——这正是你衡量自己成败的方式。</p>\n<p>你能创造不会永久破损的装置，甚至能让你的临时装置在合适的条件下存续。</p>"
+                },
+                "Rations": {
+                    "name": "干粮 Rations"
+                },
+                "Bracelet of Dashing": {
+                    "name": "飞奔手镯 Bracelet of Dashing",
+                    "description": "<p>这枚叮当作响的印制手镯使你脚步轻盈，赋予你在特技检定上的+1物品加值。</p>\n<p><strong>启动——叮铃冲刺</strong> <span class=\"action-glyph\">A</span> （专注）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 在速度上获得+10尺状态加值，持续1分钟。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.lLP56tbG689TNKW5]{效果：冲刺手镯}</p>"
+                },
+                "Naari": {
+                    "name": "娜阿丽 Naari",
+                    "description": "<p>你作为火元素的后裔或拥有来自于内环宇宙的印记，你的特征表明了火元素对你的影响。除了你原本的族裔特征外，你还获得了火元素裔特征。你获得等于你的等级的一半的火焰抗力（最小1），并且你可以将环境的炎热效果视为低一级别（酷热变为极热，极热变为炎热，以此类推）。当你获得族裔专长提升时，你可以从火元素裔专长和族裔专长中选择。</p>"
+                },
+                "Repair Toolkit": {
+                    "name": "修补工具包 Repair Toolkit",
+                    "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+                },
+                "Mechanic": {
+                    "name": "技师 Mechanic",
+                    "description": "<p>机器错综复杂的内部运作对您来说并不陌生。无论它们是普通的设备还是复杂的发条装置，你都知道是什么让它们运转，以及如何维护它们。一个探险团体可能会让你跟随来修理他们的设备，或者你可能会四处旅行，为那些有需要的人提供你的稀有服务——当然，要钱！</p>\n<p>选择两项属性提升。一项必须是<strong>力量</strong>或<strong>智力</strong>，另一项为自选属性提升。</p>\n<p>你在手艺和工程学识（Engineering Lore）技能上受训。你获得@UUID[Compendium.pf2e.feats-srd.Item.ASy9AKEIRxPYUi5o]技能专长。</p>"
+                }
+            }
+        }
+    }
+}

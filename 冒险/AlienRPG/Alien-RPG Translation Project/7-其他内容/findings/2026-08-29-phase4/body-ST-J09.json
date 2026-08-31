@@ -1,0 +1,220 @@
+{
+ "unit": "ST-J09",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J09.cn.html",
+ "summary": "Hope's Last Day 3/4 translated: FINAL HORRORS (虫潮 / 冲向穿梭机 / 起飞 / 恶劣的意外, incl. the read-aloud \"通话结束\" sign-off broadcast and the Ripley–Burke exchange from Aliens) plus the whole XENOMORPHS chapter (战斗规则, 濒死的异形 D6 表, 酸血飞溅, 第一阶段：卵形体（卵）, 第二阶段：抱脸虫 + 抱脸虫攻击表 + two stat blocks). Structure is byte-faithful: 588 tags in identical order, the only skeleton delta is the 10 heading id= attributes. Terminology was aligned against the units already delivered in this wave (ST-J03/J04/J05/J10) rather than invented: Turn=回合, Stretch=节, Shift=班, signature attack=招牌攻击, initiative card=先攻牌, Drone=工蜂异形, Chestburster=破胸体, Broken=濒死, and the id-slug style stage-i:-ovomorph-(egg) matches ST-J10.cn's stage-iii:-chestburster. Heading ids were derived by porting Foundry's real slugifyHeading (foundry.mjs:44689 + String#slugify:685, CHAR_MAP &→and, non-strict so ':' '(' ')' survive) and each was asserted equal to the English heading's slug.",
+ "chars_en": 11783,
+ "chars_cn": 4580,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset of .cn.html equals .en.html (every tag name counted, open + close separately)",
+   "result": "PASS — identical Counter over 588 tags: a 8/8, blockquote 7/7, br 58, div 12/12, em 1/1, figcaption 5/5, figure 8/8, h2 2/2, h3 8/8, i 1/1, img 8, li 3/3, p 13/13, span 23/23, strong 33/33, table 11/11, tbody 11/11, td 78/78, tr 36/36, ul 1/1. <br /> count 58 = 58."
+  },
+  {
+   "check": "2. Every class=\"…\" value present in the English is present unchanged",
+   "result": "PASS — class multiset equal: arpgtable 6, die 15, ev-content-link 8, evblockquoteCenter 2, evchapterheading 2, evexamplebox 5, evolvedlinestart 15, evolvedsubheading 8, evstable 5, nostyle 3, oddcol1 13, oddcol3 6, scol2 10, scol3 15, scol7 7, stresssymbol 2, textover 8, tim 5. Kept ev-content-link (starterset spelling), not content-link."
+  },
+  {
+   "check": "3. Every @UUID[…] / [[…]] construct byte-identical; only {label} differs",
+   "result": "PASS — the 8 <a> attribute strings compare byte-equal as ordered lists (data-uuid, data-id, data-type, data-hash, draggable, data-link all untouched); zero [[…]] constructs in EN and zero in CN. Only the 8 labels changed: Medlab→医疗实验室, Surprise & Ambush→突袭与伏击, Leaving Combat→脱离战斗 (×2), Special Attacks→特殊攻击 (×2), Groups In Stealth Mode→潜行模式中的团队, CLOSE COMBAT→近战 — each byte-equal to the corresponding translated heading already shipped in ST-J03.cn / ST-J04.cn."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id= with the original English slug",
+   "result": "PASS — all 10 headings; each id asserted == slugifyHeading(english text) with a Python port of foundry.mjs:44689/:685: final-horrors, the-swarm, to-the-shuttle, taking-off, a-nasty-surprise, xenomorphs, combat-rules, acid-splash, stage-i:-ovomorph-(egg), stage-ii:-facehugger. The four inbound hashes that must keep resolving (final-horrors from J07/J08, xenomorphs from J03/J07, combat-rules from J03) land exactly. Verified the ':' '(' ')' are safe: Foundry looks anchors up as object keys (toc[anchor]) and via a quoted attribute selector li[data-anchor=\"…\"], never an unquoted #id selector."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS with one examined exception. Scanned all string/value/name leaves of DO-NOT-TRANSLATE.json against the English chunk: the only hit is the literal \"None\" (Ovomorph 'Skills' stat row). That register entry is none_sentinel, scoped to actor system.rTables / system.cTables (produced at rollTableData.mjs:12/:30, compared at actor.mjs:2493) — a <select> value, never journal prose — so I rendered it 技能／无. No RollTable name, folder name, item name (PACK MULE / TAKE CONTROL / NERVES OF STEEL / TOUGH / HARDENED / STOIC), macro command or name-lookup literal occurs in this chunk."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — 30121 B EN vs 20862 B CN; 3886 CJK characters; residual Latin is only GM / PC / NPC / LV-426 / XX121 / Manumala noxhydria / Plagiarus, all deliberate."
+  },
+  {
+   "check": "7. Every mechanic term matches lang/cn.json byte-for-byte",
+   "result": "PASS for all sheet-bearing terms — see lock_lookups (19 entries verified by exact string equality against the flattened cn.json). One term has no lang key and is flagged in open_issues: 完整动作 (\"full action\"; the sheet's ALIENRPG.SlowAction is 慢速动作)."
+  },
+  {
+   "check": "Bonus: number drift",
+   "result": "PASS — ordered digit-token diff vs EN shows no dropped or altered value (158, 157, 6-12-79, 0.6, 1.2, 13 (8+5), all dice counts, +1/+2, –1/–2, 1–3, 1–2, 3–4, 5–6). Three insertions only, all forced by Chinese: 0 for the spelled-out \"zero Health\", 1 for \"每减免 1 点伤害\" where EN says \"each point of damage\", and reordering of \"+1 to the D6 roll\"→\"D6 检定 +1\"."
+  },
+  {
+   "check": "Bonus: invisible-but-load-bearing whitespace",
+   "result": "PASS — restored U+00A0 after the Write step: <span class=\"stresssymbol\">  </span> ×2 byte-exact, the 10 scol2 and 5 tim spacer cells, the 2 stat-block spacer cells, and the two trailing U+00A0 in the attribution span (艾伦·蕾普丽与卡特·巴克  ). File ends with '    </div>\\n' like the English."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "PILOTING",
+   "lang_key": "ALIENRPG.Skillpiloting",
+   "used": "驾驶"
+  },
+  {
+   "english": "STAMINA",
+   "lang_key": "ALIENRPG.Skillstamina",
+   "used": "耐力"
+  },
+  {
+   "english": "CLOSE COMBAT",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "HEAVY MACHINERY",
+   "lang_key": "ALIENRPG.SkillheavyMach",
+   "used": "机械"
+  },
+  {
+   "english": "Skills",
+   "lang_key": "ALIENRPG.Skills",
+   "used": "技能"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health / ALIENRPG.creature.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Speed",
+   "lang_key": "ALIENRPG.Speed",
+   "used": "速度"
+  },
+  {
+   "english": "Armor Level",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "Armor",
+   "lang_key": "ALIENRPG.Armor",
+   "used": "护甲"
+  },
+  {
+   "english": "Vs Fire (in \"1 (0 Vs Fire)\")",
+   "lang_key": "ALIENRPG.ArmorVsFire = 对火护甲",
+   "used": "1（对火 0）— cell form, matches ST-J10.cn's 2（对火 1）"
+  },
+  {
+   "english": "Acid Splash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "Adjacent range",
+   "lang_key": "ALIENRPG.Adjacent",
+   "used": "紧邻距离"
+  },
+  {
+   "english": "Short range",
+   "lang_key": "ALIENRPG.Short",
+   "used": "近距离"
+  },
+  {
+   "english": "stress level",
+   "lang_key": "ALIENRPG.Stress + the 压力等级 wording used throughout ALIENRPG.Panic7–15",
+   "used": "压力等级"
+  },
+  {
+   "english": "panic roll",
+   "lang_key": "ALIENRPG.CREWPANIC / ALIENRPG.PanicResponseRoll",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "push (rolls)",
+   "lang_key": "ALIENRPG.Push",
+   "used": "追骰"
+  },
+  {
+   "english": "base dice",
+   "lang_key": "ALIENRPG.HOWMANYDICE (基础骰子有几颗？)",
+   "used": "基础骰子"
+  },
+  {
+   "english": "stress die",
+   "lang_key": "ALIENRPG.HOWMANYSTRESS (压力骰子有几颗？)",
+   "used": "压力骰子"
+  },
+  {
+   "english": "android",
+   "lang_key": "ALIENRPG.SynthDontNeed (…仿生人通常也不受外星病原体影响。)",
+   "used": "仿生人"
+  },
+  {
+   "english": "broken",
+   "lang_key": "ALIENRPG.TAH.dehydrated / TAH.freezing (若你在…状态下濒死)",
+   "used": "濒死"
+  },
+  {
+   "english": "EFFECT (table column)",
+   "lang_key": "ALIENRPG.Effect",
+   "used": "效果"
+  },
+  {
+   "english": "quick actions",
+   "lang_key": "ALIENRPG.FastAction",
+   "used": "快速动作"
+  }
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Ovomorph",
+   "proposed": "卵形体（本单元 \"Stage I: Ovomorph (Egg)\" → 第一阶段：卵形体（卵）；Egg 单用时仍作 卵）",
+   "why": "六个生命周期词之一，PROJECT.md §7.2.0 判定无中文先例、待第 10 章定稿。卵形体 是 ovo-+-morph 的直译，与已定的 破胸体（ST-J10.cn 已用）同取 …体 后缀，满足 §7.2.0 第 2 条「组内自洽」。glossary_alien.json 只有 Egg=卵，没有 Ovomorph 条目。"
+  },
+  {
+   "en": "Drone",
+   "proposed": "工蜂异形（正文一律用四字全称，不单用 工蜂）",
+   "why": "不是我新造的——ST-J10.cn（同一波、我下游的 4/4 单元）已经把 \"Stage IV: Drone\" 定为 第四阶段：工蜂异形，本单元 3 处 Drone/Drone Xeno 跟随它。⚠ 但请在定稿前处理一个碰撞：ST-A-CRE 的怪物描述里 Drone 会 \"molt into a Worker or Soldier\"，而 Worker 的自然对译正是 工蜂（蜂群学里 Drone=雄蜂、Worker=工蜂，恰好反了）。建议 Worker 另取 工虫／劳役体，不要让两者撞车。"
+  },
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体（沿用 ST-J10.cn）",
+   "why": "本单元 2 处（\"Facehuggers and Chestbursters\" 与 \"a Chestburster (Stage III) is born\"）。ST-J10.cn 已大量使用，我只做跟随，不另立。仍属 §7.2.0 未定稿的六词之一。"
+  },
+  {
+   "en": "Signature Attack",
+   "proposed": "招牌攻击",
+   "why": "glossary_alien.json 只有 Signature Item / Signature Weapon，没有 Signature Attack。ST-J05.cn 已把 \"Xenomorph signature attacks\" 译作 异形的招牌攻击，本单元 8 处跟随。它是 123 张 RollTable 的门面词，值得进 RESOLUTIONS 钉死。"
+  },
+  {
+   "en": "Interrupt Actions",
+   "proposed": "打断动作",
+   "why": "词表与 cn.json 都没有。ST-J04.cn 正文已用「把快速动作留作打断动作」，本单元的小标题跟随它。"
+  },
+  {
+   "en": "Tail Grapple / Face Grapple / The Final Embrace / Skittering Menace",
+   "proposed": "尾部缠击 / 扑面擒抱 / 最后的拥抱 / 窸窣逼近",
+   "why": "抱脸虫攻击表的四个招式名。Grapple 取 擒抱 与 ST-J04.cn（擒抱）、ST-J10.cn（致命擒抓／擒抱）一致。这四个名字同时是 starterset 包内 RollTable \"EV - Facehugger Attacks\" 的行文本，ST-T* 表单元必须逐字用同一套，否则同一招在日志与聊天卡里出两个名字。"
+  }
+ ],
+ "frozen_kept": [
+  "LV-426（T-LATIN，型号/坐标前缀）",
+  "XX121（异形 XX121，T-LATIN）",
+  "D6 / D6 检定（骰型记号）",
+  "Manumala noxhydria（拉丁学名，未译）",
+  "Plagiarus（拉丁属名，\"Plagiarus 细菌\"）",
+  "PC / NPC / GM（全书既有写法，ST-J02–J05.cn 一致）",
+  "6-12-79（Burke 那道指令的签发日期）",
+  "158 / 157（殖民地人数，读出声的两个数字，未改写为汉字数字）",
+  "[PC 姓名] / [人数]（占位符，ASCII 方括号原样保留，只译括号内文字）",
+  "systems/… 与 modules/… 的 8 个 img src、全部 style 值、8 条 @UUID 链接的 data-* 属性"
+ ],
+ "open_issues": [
+  "⚠ 需要主控裁决：Stage I/II 两个小标题的 id。我按闸门 4 的字面要求写了**英文原生 slug** `stage-i:-ovomorph-(egg)` 与 `stage-ii:-facehugger`（与下游 ST-J10.cn 的 `stage-iii:-chestburster` 同构）。但 ST-J08 里指向它们的 `data-hash=\"stage-i\"` / `\"stage-iii\"` **今天在英文下就已经打不中**——这一条 DO-NOT-TRANSLATE.json §heading_anchor_hashes.measured.starterset.data_hash_not_resolving_today 已经登记在案。所以我的写法= 与英文行为完全一致（不回归），但那两条链接依旧滚到页顶。若主控愿意顺手修上游 bug，把 id 改成 `stage-i` 即可，一处编辑，无副作用；我没有擅自改，因为那是对英文行为的静默偏离。（同一列表里的 combat-and-initiative / surprise-and-ambush / tannens-casino 三条是**测量脚本对 &amp; 与引号处理的假阳性**，实际能解析，不用管。）",
+  "⚠ 偏离任务书词汇块一处，已核对后故意为之：任务书写「节(Stretch/Turn)」，我把 **Turn 译作 回合、Stretch 译作 节**。理由：(a) 本单元同一段里 Turn 与 Stretch 并存（Grappling「spend every turn」vs Recovery「a single stretch」、Facehugging 段「each stretch」vs「their next turn」），合并成一个字会让规则读不通；(b) 本波已交付的 ST-J03.cn（「每一点速度就多得一个回合——以及多一张先攻牌」）、ST-J04.cn（「完整动作只能在你本轮的回合里进行」）、ST-J05.cn、ST-J10.cn（「异形会在它的下一个回合使用咬头攻击」）**已经全部用 回合**。若主控要回到 节，需要连带改那四个文件，不能只改我这一个。",
+  "「完整动作」（full action）在 lang/cn.json 里**没有对应键**——卡面上的 ALIENRPG.SlowAction 是 慢速动作。ST-J04.cn 已把进化版的 \"Full Actions & Quick Actions\" 定为 完整动作与快速动作，我跟随。这是一个**日志正文 ↔ 角色卡**的口径裂缝（玩家在正文读 完整动作、在卡上看 慢速动作），值得在 Phase 5 前决定是加 lang 键还是统一措辞。",
+  "卵形体数据框 \"Skills: None\" 我译成 技能／无。判据写在 self_gate 第 5 条：DO-NOT-TRANSLATE 的 none_sentinel 只管 actor 的 system.rTables/cTables 下拉值，不管日志散文。副作用是玩家在日志看 无、在生物卡下拉框看 None（cn.json 有意保留 ALIENRPG.None=\"None\"）。要消除这点不一致就得动 lang 键，超出本单元。",
+  "本单元**首次落地**的几个专名，ST-J07/J08 才是它们的主场（那两章有对应小标题），交付时请对齐：中央区 (Central Unit)、地下层 (Sublevels)、南翼 (South Wing)、着陆坪 (Landing Pad)、科米斯基博士 (Dr. Theodora Komiskey)、米兰达 (Miranda Reynolds)。我这边只是引用，没有权威性。",
+  "链接标签 医疗实验室 (Medlab) 取自 glossary_alien.json，但 ST-J08 里那个 h3 小标题尚未交付；若 J08 用了别的译名，这条 @UUID 的 {label} 要跟着改（label 是显式的，不会自动更新）。",
+  "蕾普丽/巴克 那段是《异形2》原片对白，我按口语重写而非直译（\"It was a bad call\" → 「那是个糟糕的判断」）。若项目日后确定采用某个官方中字版本的措辞，这 12 行值得整段替换——它是全章唯一一处有既有中文影视文本可对的内容。"
+ ]
+}

@@ -1,0 +1,62 @@
+{
+  "label": "其他效果\nOther Effects",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Effect: Treat Poison": {
+      "name": "效果：治疗中毒 Treat Poison",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.KjoCEEmPGTeFE4hh]{Treat Poison}</p>\n<p>你在下次对抗毒素的豁免上获得环境加值或减值。</p>"
+    },
+    "Effect: Remaining Air": {
+      "name": "效果：剩余空气 Remaining Air",
+      "description": "<p>见@UUID[Compendium.sf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.OiRwxbfLNUniLg15#drowning-and-suffocating]{Drowning and Suffocating}</p>\n<p>你可以屏息等于5 + 体质调整值的轮数。屏息时在你每个回合结束时减少1轮屏息时间，若该回合内施法过或攻击过则减少2轮。</p>\n<p>每次你被重击或对抗伤害效果豁免大失败时，屏息时间也会立刻减少1轮。若你说话（包括使用声音成分的法术或用命令词启动魔法物品），你立刻失去所有屏息的空气。 </p>"
+    },
+    "Effect: Mounted": {
+      "name": "效果：骑乘 Mounted",
+      "description": "<p>参见@UUID[Compendium.sf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.OiRwxbfLNUniLg15#mounted-combat]{Mounted Combat}</p>\n<p>骑乘中你的反射豁免拥有-2环境减值。</p>"
+    },
+    "Effect: Aid": {
+      "name": "效果：协助 Aid",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.HCl3pzVefiv9ZKQW]{Aid}</p>\n<p>你在被协助检定上获得环境加值，数值取决于盟友协助检定的结果。</p>"
+    },
+    "Effect: Scout": {
+      "name": "效果：侦察 Scout",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.kV3XM0YJeS2KCSOb]{Scout}</p>\n<p>你在你的先攻骰上获得+1环境加值。</p>"
+    },
+    "Effect: Disarm (Bonus)": {
+      "name": "效果：卸武（加值） Disarm (Bonus)",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.Dt6B1slsBy8ipJu9]{Disarm}</p>\n<p>你在卸武上获得+2环境加值。</p>"
+    },
+    "Effect: Cover": {
+      "name": "效果：掩蔽 Cover",
+      "description": "<p>当你位于可以抵挡武器、抗住爆炸、遮挡身影的障碍物后时，你就处于掩蔽中。标准掩蔽给AC、对抗区域效果的反射豁免、躲藏/潜行/其它避免侦查的隐秘技能检定都提供+2环境加值。用寻找掩蔽基本动作可将标准掩蔽提升为高等掩蔽，环境加值变为+4。若掩蔽十分有限，例如由生物提供，则一般视为次等掩蔽，只会给AC提供+1环境加值。处于标准掩蔽或高等掩蔽下的生物可以尝试用隐秘技能躲藏，次等掩蔽则不行。</p>"
+    },
+    "Effect: Disarm (Success)": {
+      "name": "效果：卸武（成功） Disarm (Success)",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.Dt6B1slsBy8ipJu9]{Disarm}</p>\n<p>你使用该物品攻击的检定承受-2环境减值。之后对你的卸武检定获得+2环境加值。</p>"
+    },
+    "Effect: Treat Disease": {
+      "name": "效果：治疗疾病 Treat Disease",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.TC7OcDa7JlWbqMaN]{Treat Disease}</p>\n<p>你在下次对抗疾病的豁免上获得环境加值或减值。</p>"
+    },
+    "Effect: Aquatic Combat": {
+      "name": "效果：水中战斗 Aquatic Combat",
+      "description": "<p>参见@UUID[Compendium.sf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.OiRwxbfLNUniLg15#aquatic-combat]{Aquatic Combat}</p>\n<p>对于水中或水下战斗使用下列规则：</p><ul><li>除非你拥有游泳速度，否则措手不及。</li><li>你获得5点酸蚀抗力和火焰抗力。</li><li>你进行的穿过水的钝击或挥砍攻击承受-2环境减值。</li><li>水下发出的或对水下生物的远程攻击的射程增量减半。</li><li>水下的你无法施放火焰法术也无法使用具有火焰特征的动作。例如，一把<em>炽焰战斧</em>仍然可以造成物理伤害，而不会产生火焰伤害。</li></ul><p>@UUID[Compendium.sf2e.other-effects.Item.2u26bmArDPuoCljc]{Effect: Remaining Air}</p>"
+    },
+    "Effect: Follow The Expert": {
+      "name": "效果：跟随专家 Follow The Expert",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.tfa4Sh7wcxCEqL29]{Follow the Expert}</p>\n<p>你在相关的技能检定上加上熟练加值，数值与你的等级相同，即便你在该技能上未受训也如此。此外，基于该盟友的熟练度，你还会在技能检定上获得环境加值（专家+2，大师+3，传奇+4）。</p>"
+    },
+    "Effect: Avert Gaze": {
+      "name": "效果：转移目光 Avert Gaze",
+      "description": "<p>由 @UUID[Compendium.sf2e.actions.Item.UWdRX1VelipCzrCg]{移开视线} 赋予</p>\n<p>你在对抗那些要求你看向某个生物或物体的视觉能力的豁免上获得 +2 处境加值，例如太阳宁芙的辉耀凝视。</p>\n<p>Granted by @UUID[Compendium.sf2e.actions.Item.UWdRX1VelipCzrCg]{Avert Gaze}</p>\n<p>You gain a +2 circumstance bonus to saves against visual abilities that require you to look at a creature or object, such as the radiant gaze of a solar nymph.</p>"
+    },
+    "Effect: Adverse Subsist Situation": {
+      "name": "效果：恶劣的生存环境 Adverse Subsist Situation",
+      "description": "<p>效果来自@UUID[Compendium.sf2e.actions.Item.49y9Ec4bDii8pcD3]{Subsist}</p>\n<p>你在求生检定上承受-2环境减值。</p>"
+    }
+  }
+}

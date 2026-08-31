@@ -1,0 +1,45 @@
+{
+  "_comment": "校准配置: 用 en_new 作为源参照校准 cn_new 的双语翻译。运行: cd fvtt/crucible-cn && python ../翻译工具/crucible_calibrator.py --apply",
+  "openai_api_key": "",
+  "openai_base_url": "https://api.openai.com/v1",
+  "model": "gpt-4.1",
+  "fallback_model": "gpt-4.1-mini",
+  "max_retries": 2,
+  "request_timeout_seconds": 90,
+  "long_text_timeout_seconds": 180,
+  "long_text_char_threshold": 8000,
+  "target_rpm": 500,
+  "max_workers": 8,
+
+  "glossary_path": "C:\\Users\\Taka\\Desktop\\fvtt\\glossary_crucible_merged.json",
+  "extra_glossary_path": "C:\\Users\\Taka\\Desktop\\fvtt\\glossary_adaptive_crucible.json",
+  "system_name": "Crucible",
+
+  "files": [],
+  "file_pairs": [
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.adversary-talents.json", "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.adversary-talents.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.affixes.json",           "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.affixes.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.ancestry.json",          "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.ancestry.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.archetype.json",         "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.archetype.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.background.json",        "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.background.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.equipment.json",         "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.equipment.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.macros.json",            "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.macros.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.playtest.json",          "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.playtest.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.pregens.json",           "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.pregens.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.rules.json",             "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.rules.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.spell.json",             "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.spell.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.summons.json",           "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.summons.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.talent.json",            "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.talent.json"],
+    ["C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\en_new\\crucible.taxonomy.json",          "C:\\Users\\Taka\\Desktop\\fvtt\\crucible-cn\\compendium\\cn_new\\crucible.taxonomy.json"]
+  ],
+
+  "batch_max_chars": 8000,
+  "batch_max_fields": 40,
+  "group_depth": 3,
+  "skip_untranslated": true,
+  "skip_markup_only": true,
+  "skip_keys": ["command", "formula", "img", "src", "flags"],
+  "include_keys_only": [],
+  "report_path": "calibration_report_cn_new.json",
+  "dry_run_sample_batches": 3
+}

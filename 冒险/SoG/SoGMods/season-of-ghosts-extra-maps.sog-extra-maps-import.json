@@ -1,0 +1,174 @@
+{
+    "label": "SoG 额外地图导入\nSoG Extra Maps Import",
+    "mapping": {
+        "actors": {
+            "name": "name",
+            "publicNotes": "system.details.publicNotes",
+            "privateNotes": "system.details.privateNotes",
+            "disable": "system.details.disable",
+            "hazarddescription": "system.details.description",
+            "reset": "system.details.reset",
+            "routine": "system.details.routine",
+            "blurb": "system.details.blurb",
+            "stealthdetails": "system.attributes.stealth.details",
+            "hp": "system.attributes.hp.details",
+            "senses": "system.traits.senses.value",
+            "allSaves": "system.attributes.allSaves.value",
+            "ac": "system.attributes.ac.details",
+            "prototypeToken": "prototypeToken.name",
+            "di": "system.traits.di.custom",
+            "languages": "system.traits.languages.custom",
+            "speed": "system.attributes.speed.details",
+            "dr": "system.traits.dr"
+        },
+        "items": {
+            "name": "name",
+            "description": "system.description.value"
+        },
+        "journals": {}
+    },
+    "folders": {},
+    "entries": {
+        "SoG Extra Maps Import": {
+            "name": "SoG 额外地图导入 SoG Extra Maps Import",
+            "description": "<p>《肆季鬼志》的若干额外地图！其中包含以下内容的预配置地图：</p><ul><li><p>6种玩家宅邸选项</p></li><li><p>慈母之环（也可用作玩家宅邸）</p></li><li><p>重制版晨步桥</p></li><li><p>东侧瞭望塔</p></li><li><p>松木宅（附带雾气覆盖层）</p></li><li><p>最糟糕的谜题</p></li></ul><p>还包含若干宏和日志，便于配合《肆季鬼志》官方模组使用。</p> <p>Several extra maps for Season of Ghosts! Included are preconfigured maps for the following:</p><ul><li><p>6 Player House Options</p></li><li><p>Mothers Coil (Can be used as a player house too)</p></li><li><p>Remade Dawnstep Bridge</p></li><li><p>Eastern Watchtower</p></li><li><p>Matsuki's Estate (with overlay for mist)</p></li><li><p>The Wort Puzzle</p></li></ul><p>Several Macros and Journals are also included for ease of use with the official Seasons of Ghosts Module.</p>",
+            "scenes": {
+                "Dawnstep Bridge Remake": {
+                    "name": "晨步桥重制版 Dawnstep Bridge Remake",
+                    "notes": {}
+                },
+                "Eastern Watchtower": {
+                    "name": "东侧瞭望塔 Eastern Watchtower",
+                    "notes": {}
+                },
+                "Matsuki's Estate": {
+                    "name": "松木宅邸 Matsuki's Estate",
+                    "notes": {}
+                },
+                "Mother's Coil": {
+                    "name": "主母之绾 Mother's Coil",
+                    "notes": {}
+                },
+                "The Worst Puzzle": {
+                    "name": "最糟糕的谜题 The Worst Puzzle",
+                    "notes": {}
+                },
+                "Player 1 House": {
+                    "name": "1号玩家房屋 Player 1 House"
+                },
+                "Player 2 House": {
+                    "name": "2号玩家房屋 Player 2 House",
+                    "notes": {}
+                },
+                "Player 3 House": {
+                    "name": "3号玩家房屋 Player 3 House"
+                },
+                "Player 4 House": {
+                    "name": "4号玩家房屋 Player 4 House"
+                },
+                "Player 5 House (Downtown)": {
+                    "name": "5号玩家房屋（市中心）"
+                },
+                "Player 6 House (Outskirts)": {
+                    "name": "6号玩家房屋（郊区）"
+                }
+            },
+            "macros": {
+                "Toggle Easter Watchtower Mess": {
+                    "name": "切换复活节瞭望塔混乱 Toggle Easter Watchtower Mess",
+                    "command": "const tiles = [\n  fromUuidSync(\"Scene.fQhh2gLTX3w4lGSB.Tile.4CYQwRWqRHFeoMgK\")\n];\ntiles.forEach(p => p.update({ hidden: !p.hidden }));"
+                },
+                "Toggle The Worst Puzzle Trap": {
+                    "name": "切换最糟糕的谜题陷阱 Toggle The Worst Puzzle Trap",
+                    "command": "const {NONE} =  CONST.WALL_SENSE_TYPES;\nconst scene = fromUuidSync(\"Scene.k00aKaNPsITajfm8\");\nconst toggleableWalls = scene.walls.filter(w => w.flags?.world?.toggleable);\ntoggleableWalls.forEach(w => {\n  w.update({\n  light: w.light === NONE ? w.flags.world.toggleable.light : NONE,\n  sight: w.sight === NONE ? w.flags.world.toggleable.sight : NONE,\n  sound: w.sound === NONE ? w.flags.world.toggleable.sound : NONE,\n  move: w.move === NONE ? w.flags.world.toggleable.move : NONE\n  });\n});\n\nconst tiles = [\n  fromUuidSync(\"Scene.k00aKaNPsITajfm8.Tile.mHKnmqqUSHCVhZhx\"),\n  fromUuidSync(\"Scene.k00aKaNPsITajfm8.Tile.uE1YLw8vgdG5x3J8\")\n];\ntiles.forEach(p => p.update({ hidden: !p.hidden }));"
+                },
+                "Toggle Matsuki Estate Refuge Overlay": {
+                    "name": "切换松木宅避难覆盖层 Toggle Matsuki Estate Refuge Overlay",
+                    "command": "const {NONE} =  CONST.WALL_SENSE_TYPES;\nconst scene = fromUuidSync(\"Scene.ftKMojTMJ49qVU69\");\nconst toggleableWalls = scene.walls.filter(w => w.flags?.world?.toggleable);\ntoggleableWalls.forEach(w => {\n  w.update({\n  light: w.light === NONE ? w.flags.world.toggleable.light : NONE,\n  sight: w.sight === NONE ? w.flags.world.toggleable.sight : NONE,\n  sound: w.sound === NONE ? w.flags.world.toggleable.sound : NONE,\n  move: w.move === NONE ? w.flags.world.toggleable.move : NONE\n  });\n});\n\nconst tiles = [\n  fromUuidSync(\"Scene.ftKMojTMJ49qVU69.Tile.YHBTUOMy8ydzZu4I\")\n];\ntiles.forEach(p => p.update({ hidden: !p.hidden }));"
+                },
+                "Toggle Mess on Bridge": {
+                    "name": "切换桥上的混乱状态 Toggle Mess on Bridge",
+                    "command": "const tiles = [\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.Tile.VMeOfSIzXJRAbvjj\")\n];\ntiles.forEach(p => p.update({ hidden: !p.hidden }));"
+                },
+                "Light Eternal Lantern": {
+                    "name": "光明 长明灯 Light Eternal Lantern",
+                    "command": "const officialMacro = await fromUuid(\"Macro.8KtgPGYgJdlDgXwI\");\nif(officialMacro) officialMacro.execute();\n\nawait new Promise(r => setTimeout(r, 2000));\nconst lights = [\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.AmbientLight.1m4ZfrgP2ZegUytM\"),\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.AmbientLight.j45OsbFR4vvS2L72\"),\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.AmbientLight.uvGMdvMKb8vO3Qt5\"),\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.AmbientLight.o6NNDgdcmzzH1O97\"),\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT.AmbientLight.fXLvmbme5wq5oPHG\")\n];\nlights.forEach(p => p.update({ hidden: !p.hidden }));\n\nawait new Promise(r => setTimeout(r, 1000));\nconst scenes = [\n  fromUuidSync(\"Scene.neSOEw3WiM2XLgTT\"),\n  fromUuidSync(\"Scene.fQhh2gLTX3w4lGSB\"),\n  fromUuidSync(\"Scene.ftKMojTMJ49qVU69\"),\n  fromUuidSync(\"Scene.k00aKaNPsITajfm8\"),\n  fromUuidSync(\"Scene.eXvJ218vHcvJFu1d\"),\n  fromUuidSync(\"Scene.kCfX3uILH55qBJWh\"),\n  fromUuidSync(\"Scene.WEhJmKTApHfom8PK\"),\n  fromUuidSync(\"Scene.XxiLzMgTJWtprZ6p\"),\n  fromUuidSync(\"Scene.LnLMM1svGSnuduEP\"),\n  fromUuidSync(\"Scene.Ak2gTGsdYA71oKxU\"),\n  fromUuidSync(\"Scene.RMrjitkzTR4lbJgU\")\n];\nscenes.forEach(s => s && s.update({weather: s.weather === \"fog\" ? '' : \"fog\"}));"
+                },
+                "Toggle Player House 2 Mess": {
+                    "name": "切换玩家房屋 2 混乱 Toggle Player House 2 Mess",
+                    "command": "const tiles = [\n  fromUuidSync(\"Scene.WEhJmKTApHfom8PK.Tile.ZB8ZIsi2kj9fUnY5\")\n];\ntiles.forEach(p => p.update({ hidden: !p.hidden }));"
+                }
+            },
+            "folders": {
+                "SoG Extra Scenes": "SoG 额外场景\nSoG Extra Scenes",
+                "Player Houses": "玩家宅邸\nPlayer Houses",
+                "SoG Extra Maps Journals": "SoG 额外地图日志\nSoG Extra Maps Journals",
+                "SoG Macros": "SoG 宏\nSoG Macros"
+            },
+            "journals": {
+                "Icarus' Notes": {
+                    "name": "伊卡洛斯的笔记 Icarus' Notes",
+                    "pages": {
+                        "Icarus' Mother's Coil Notes": {
+                            "name": "伊卡洛斯的主母之绾笔记 Icarus' Mother's Coil Notes",
+                            "text": "<p>我为我其中一位与十兵卫有紧密联系的玩家制作了这张地图。我们决定让十兵卫和主母之绾充当柳岸镇的学校，因此这里有一间教室。</p><p>这和书中提到的纳迦卓风格、以深色玄武岩建成的法师塔非常不同。你完全可以忽略这张地图。</p>\n<p>I made this map for one of my player's with Close Ties to Jubei. We decided that Jubei and the Mother's Coil acted as Willowshore's school, hence the classroom.</p><p>This is pretty different from the Nagajor-styled dark basalt style wizard tower mentioned in the book. Feel free to ignore this map.</p>"
+                        },
+                        "Nalinivati Shrine": {
+                            "name": "娜利妮伐蒂圣龛 Nalinivati Shrine",
+                            "text": "<p>主母之绾中的主圣祠，十兵卫在此敬奉安贾尔的莲华天女。学校里的几个孩子也会向这位神明献上感谢。</p>\n<p>The main shrine at the Mother's Coil, where Jubei worships Nalinivati. Several kids from the school also give thanks to the god.</p>"
+                        },
+                        "Master Anjal's Study": {
+                            "name": "安贾尔大师的书房 Master Anjal's Study",
+                            "text": "<p>安贾尔大师，井川十兵卫的教师兼养父，于7107去世。这是他从前的书房。在我的游戏里，十兵卫会以仪式性的方式打扫这个房间，并偶尔拿一些书籍/卷轴回她的房间研读。除此之外，由于他去世带来的悲痛，她会避开这里。</p>\n<p>Master Anjal, Igawa Jubei's teacher and adoptive father, died last year 7107. This is his old study. In my game, Jubei cleans this room ritually and occassionally takes some books/scrolls to her room to study. Otherwisem, she avoids it due to the greif of his death.</p>"
+                        },
+                        "Master Anjal's Mitamaya": {
+                            "name": "安贾尔大师的御魂屋 Master Anjal's Mitamaya",
+                            "text": "<p>这里有一座供奉死者（Mitamaya）的、为安贾尔而设的圣祠。在我的游戏里，十兵卫仍在悲伤之中，因此会定期前来祭拜这座圣祠。</p>\n<p>A shrine for the dead (Mitamaya) for Anjal is here. In my game Jubei is still greiving and therfore pays respects to the shrine regularly.</p>"
+                        },
+                        "Jubei's lecture room": {
+                            "name": "十兵卫的讲堂 Jubei's lecture room",
+                            "text": "<p>这里是十兵卫教当地孩子们的地方。</p>\n<p>This is where Jubei teaches the local kids.</p>"
+                        },
+                        "Shizuru and Tsukiyo Shrine": {
+                            "name": "诗孜璐与月夜尊圣祠 Shizuru and Tsukiyo Shrine",
+                            "text": "<p>这里是诗孜璐和月夜尊的圣祠。诗孜璐的在东边，月夜尊的在西边。</p><p></p>\n<p>Here are the Shizuru and Tsukiyo Shrines. Shizuru's is to the East and Tsukiyo's to the West.</p><p></p>"
+                        },
+                        "Icarus' Player Home 2 Notes": {
+                            "name": "伊卡洛斯的玩家之家 2 笔记 Icarus' Player Home 2 Notes",
+                            "text": "<p>我决定让几名幸存者（其中可能有些是玩家角色的家人）在这栋房子里避难。不幸的是，两只蹑影小魔怪（如果想降低挑战难度，可以把一只蹑影小魔怪替换成一条蝰蛇）发现了他们，并以折磨他们为乐。蹑影小魔怪在夜晚中袭击了几次，杀死了几名村民。</p><p>剩下的村民尽可能安葬了死者。随后，蹑影小魔怪再次返回，弄伤了一名村民，其余人则尖叫着逃进了厨房和浴室。这些尖叫声可以提醒玩家！</p><p>玩家进入这栋房子时，会看到一两只蹑影小魔怪正在后屋和其他尸体一起攻击一名濒死的村民。</p><p>在玩家赶到他们身边之前，这名村民很可能会陷入昏迷。务必使用濒死规则，给玩家一个机会救下他们！</p>\n<p>I decided to have a few survivors (potentially some are family of a Player Character) take refuge in this house. Unfortunately, two Jinkins (feel free to substitute a Jinkin for a Viper for an easier challenge) found them, taking revelry in tormenting them. The jinkins attacked a few times over the night killing a couple of villagers. </p><p>The remaining villagers tried to put the dead to rest, as best they could. The jinkins then returned injuring one villager while the rest fled screaming into the kitchen and bathroom areas. These screams can alert the Players!</p><p>The Players will walk into the house with a Jinkin or two attacking a nearly dead villager in the back room with the other bodies.</p><p>The Villager will likely be knocked unconsious before the players get to them. Make sure to use the dying rules to give the Players a chance to save them!</p>"
+                        },
+                        "Icarus' Matsuki's Estate Notes": {
+                            "name": "伊卡洛斯的松木宅笔记 Icarus' Matsuki's Estate Notes",
+                            "text": "<p>我选择将松木宅邸设为柳岸镇遭入侵期间的集结点，这一点从大量帐篷和房间里额外铺设的寝具中便可见一斑。如果这不适合你的战役，请随意使用场景左上角的宏将它们关闭。</p>\n<p>I opted to make the Matsuki Estate a gathering point during the invasion of Willowshore, as depicted by the multitude of tents and extra bedding in rooms. Feel free to use the macro in the top left of the scene to turn them off if this does not fit your campaign.</p>"
+                        }
+                    }
+                },
+                "SoG Extra Maps Macro Journal": {
+                    "name": "SoG 额外地图宏日志 SoG Extra Maps Macro Journal",
+                    "pages": {
+                        "Dawnstep Bridge Macros": {
+                            "name": "晨步桥宏 Dawnstep Bridge Macros",
+                            "text": "<p>@UUID[Macro.c1n5NxAPdhoGcQcM]{切换桥上的污秽}：切换晨步桥上咕噜肚污秽的可见性。</p><p>@UUID[Macro.mNdLW6JrcMSbhGdd]{点亮光明 长明灯}：点亮晨步桥场景中的长明灯，移除所有肆季鬼志额外地图场景中的迷雾，并运行官方肆季鬼志宏（如果存在）。</p>\n<p>@UUID[Macro.c1n5NxAPdhoGcQcM]{Toggle Mess on Bridge} : Toggles the visability of Gurglegut's Mess on the bridge.</p><p>@UUID[Macro.mNdLW6JrcMSbhGdd]{Light Eternal Lantern} : Lights the Eternal Lantern on the Dawnstep Bridge scene, removes fog from all SoG Extra Map scenes, and runs the Official Season of Ghosts Macro (if it exists).</p>"
+                        },
+                        "Eastern Watchtower Macros": {
+                            "name": "东侧瞭望塔宏 Eastern Watchtower Macros",
+                            "text": "<p>@UUID[Macro.5zVKkbGfiWVmNfJT]{切换复活节瞭望塔混乱状态}：切换死去守卫和马车的可见性。</p>\n<p>@UUID[Macro.5zVKkbGfiWVmNfJT]{Toggle Easter Watchtower Mess} : Toggles Visibility of the dead guards and carraige.</p>"
+                        },
+                        "Matsuki's Estate Macros": {
+                            "name": "松木宅宏 Matsuki's Estate Macros",
+                            "text": "<p>@UUID[Macro.VUN4lXIMlODw1phv]{切换松木宅邸避难营地覆盖层}：切换该场景中避难帐篷的覆盖层和墙体。</p>\n<p>@UUID[Macro.VUN4lXIMlODw1phv]{Toggle Matsuki Estate Refuge Overlay} : Toggles the overlay and walls for the scene's refuge tents.</p>"
+                        },
+                        "The Worst Puzzle Macros": {
+                            "name": "最糟糕的谜题宏 The Worst Puzzle Macros",
+                            "text": "<p>@UUID[Macro.TohPNh6COTGUa5JP]{切换最糟糕的谜题陷阱}：切换该陷阱的显示状态，将其从玩家视野中移除。若陷阱已被清理，或你想去掉这些杂乱内容时可使用。</p>\n<p>@UUID[Macro.TohPNh6COTGUa5JP]{Toggle The Worst Puzzle Trap} : Toggles the Trap removing it from the player's view. Used if the trap is cleaned up, or if you want to get rid of the clutter.</p>"
+                        },
+                        "Player 2 House Macros": {
+                            "name": "玩家 2 房屋宏 Player 2 House Macros",
+                            "text": "<p>@UUID[Macro.wJMUoHXK59d9edVN]{切换玩家房屋 2 的混乱场景}：切换房屋中的血迹和尸体显示。</p>\n<p>@UUID[Macro.wJMUoHXK59d9edVN]{Toggle Player House 2 Mess} : toggles the blood and bodies in the house.</p>"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

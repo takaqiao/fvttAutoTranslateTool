@@ -1,0 +1,167 @@
+import CrucibleBaseActorSheet from "./base-actor-sheet.mjs";
+
+/**
+ * A CrucibleBaseActorSheet subclass used to configure Actors of the "hero" type.
+ */
+export default class HeroSheet extends CrucibleBaseActorSheet {
+
+  /** @inheritDoc */
+  static DEFAULT_OPTIONS = {
+    actor: {
+      type: "hero"
+    },
+    actions: {
+      editAncestry: HeroSheet.#onEditAncestry,
+      editBackground: HeroSheet.#onEditBackground,
+      levelUp: HeroSheet.#onLevelUp
+    }
+  };
+
+  static {
+    this._initializeActorSheetClass();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const {actor: a, source: s, incomplete: i} = context;
+    const {isL0} = a;
+    const points = context.points = a.system.points;
+    Object.assign(i, {isL0});
+
+    // Expand Context
+    Object.assign(context, {
+      ancestryName: s.system.details.ancestry?.name || _loc("ANCESTRY.SHEET.Choose"),
+      backgroundName: s.system.details.background?.name || _loc("BACKGROUND.SHEET.Choose"),
+      capacity: a.system.capacity,
+      knowledge: this._prepareBackgroundDetailSet({
+        type: "knowledge",
+        tooltip: "ACTOR.LABELS.BackgroundKnowledgeTooltip"
+      }),
+      talentTreeButtonText: _loc(`ACTOR.ACTIONS.TalentTree${game.system.tree.actor === a ? "Close" : "Open"}`)
+    });
+
+    // Advancement
+    const adv = a.system.advancement;
+    i.level = isL0 ? !i.progress : (adv.pct === 100);
+    context.advancementTooltip = _loc("ADVANCEMENT.MilestoneTooltip", adv);
+
+    // Progression Issues
+    const issues = [];
+    if ( !s.system.details.ancestry?.name ) issues.push("ACTOR.WARNINGS.NoAncestry");
+    if ( !s.system.details.background?.name ) issues.push("ACTOR.WARNINGS.NoBackground");
+    if ( !isL0 ) {
+      if ( points.ability.available < 0 ) issues.push("ACTOR.WARNINGS.OverspentAbility");
+      else if ( points.ability.requireInput ) issues.push("ACTOR.WARNINGS.UnderspentAbility");
+      if ( points.talent.available < 0 ) issues.push("ACTOR.WARNINGS.OverspentTalent");
+      else if ( points.talent.available ) issues.push("ACTOR.WARNINGS.UnderspentTalent");
+    }
+    i.progress = !!issues.length;
+    if ( i.progress ) {
+      const items = issues.reduce((s, text) => `${s}<li>${_loc(text)}</li>`, "");
+      i.progressTooltip = `<h4>${_loc("ACTOR.ProgressionRequirements")}</h4><ol>${items}</ol>`;
+    }
+
+    // Allow extension of sheet context
+    Hooks.callAll("crucible.prepareHeroSheetContext", this, context, options);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async close(options) {
+    await super.close(options);
+    await this.actor.toggleTalentTree(false);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onClickAction(event, target) {
+    event.preventDefault();
+    event.stopPropagation();
+    switch ( target.dataset.action ) {
+      case "abilityDecrease":
+        return this.actor.purchaseAbility(target.closest(".ability").dataset.ability, -1);
+      case "abilityIncrease":
+        return this.actor.purchaseAbility(target.closest(".ability").dataset.ability, 1);
+      case "talentTree":
+        return this.actor.toggleTalentTree();
+      case "talentReset":
+        return this.actor.resetTalents();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle click action to level up.
+   * @this {HeroSheet}
+   * @param {PointerEvent} event
+   * @returns {Promise<void>}
+   */
+  static async #onLevelUp(event) {
+    game.tooltip.deactivate();
+    await this.actor.levelUp(1);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle click action to choose or edit your Ancestry.
+   * @this {HeroSheet}
+   * @param {PointerEvent} event
+   * @returns {Promise<void>}
+   */
+  static async #onEditAncestry(event) {
+    await this.actor._viewDetailItem("ancestry", {editable: false});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle click action to choose or edit your Background.
+   * @this {HeroSheet}
+   * @param {PointerEvent} event
+   * @returns {Promise<void>}
+   */
+  static async #onEditBackground(event) {
+    await this.actor._viewDetailItem("background", {editable: false});
+  }
+
+  /* -------------------------------------------- */
+  /*  Drag and Drop                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDropItem(event, item) {
+    if ( !this.actor.isOwner ) return;
+    switch (item.type) {
+      case "ancestry":
+        await this.actor.system.applyAncestry(item);
+        return;
+      case "background":
+        await this.actor.system.applyBackground(item);
+        return;
+      case "spell":
+        try {
+          this.actor.canLearnIconicSpell(item);
+        } catch(err) {
+          ui.notifications.warn(err.message);
+          return;
+        }
+        break;
+      case "talent":
+        if ( !crucible.developmentMode ) {
+          ui.notifications.error(_loc("ACTOR.WARNINGS.NoDragTalent"));
+          return;
+        }
+    }
+    return super._onDropItem(event, item);
+  }
+}

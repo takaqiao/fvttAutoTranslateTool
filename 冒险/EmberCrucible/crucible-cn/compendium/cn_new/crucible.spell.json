@@ -1,0 +1,220 @@
+{
+  "label": "标志性法术",
+  "mapping": {
+    "description": "system.description",
+    "actions": {
+      "path": "system.actions",
+      "converter": "actions_converter"
+    }
+  },
+  "folders": {
+    "Gesture: Aura": "手势：灵气",
+    "Gesture: Strike": "手势：打击",
+    "Gesture: Aspect": "手势：化相",
+    "Gesture: Pulse": "手势：脉冲",
+    "Gesture: Infuence": "手势：影响",
+    "Gesture: Creation": "手势：创造",
+    "Gesture: Sense": "手势：感知"
+  },
+  "entries": {
+    "Bind Armament": {
+      "name": "绑定武装 绑定武装",
+      "description": "<p>你将当前主手已装备的武器绑定为你的束缚武装。</p><p>在绑定期间，你可以不消耗任何资源，将该武器召唤到一只空闲的手中。无论距离多远，你都可以召唤这把武器，即使它已被<strong>缴械</strong>。</p>",
+      "actions": {
+        "bindArmament": {
+          "name": "绑定武装 绑定武装",
+          "description": "<p>你将当前主手已装备的武器绑定为你的束缚武装。</p>"
+        },
+        "conjureArmament": {
+          "name": "召唤武装 召唤武装",
+          "description": "<p>你将自己的束缚武装召回手中。只要你有足够的空闲手来持握它，这把武器就会瞬间回到你手中，并且不再处于<strong>缴械</strong>状态。</p>"
+        }
+      }
+    },
+    "Curse of Atrophy": {
+      "name": "萎缩诅咒 萎缩诅咒",
+      "description": "<p>你削弱目标的体力，使其肌肉萎缩并虚弱下来，而且这种衰弱无法通过普通的休息或恢复来消除。</p>",
+      "actions": {
+        "curseAtrophy": {
+          "name": "萎缩诅咒 萎缩诅咒",
+          "description": "<p>触碰目标，使其受到一种衰败诅咒，令其<strong>力量</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "萎缩诅咒 萎缩诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Curse of Delusion": {
+      "name": "妄想诅咒 妄想诅咒",
+      "description": "<p>你使目标的头脑变得混沌，永久损害其察觉与判断力，而且这种损害无法通过普通治疗恢复。</p>",
+      "actions": {
+        "curseDelusion": {
+          "name": "妄想诅咒 妄想诅咒",
+          "description": "<p>触碰目标，用诅咒蒙蔽其感知，使其<strong>感知</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "妄想诅咒 妄想诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Curse of Dullness": {
+      "name": "迟钝诅咒 迟钝诅咒",
+      "description": "<p>你令目标体内的智慧火花黯淡下来，永久损害其迅速思考与推理的能力，而这种损伤并非仅靠休息就能修复。</p>",
+      "actions": {
+        "curseDullness": {
+          "name": "迟钝诅咒 迟钝诅咒",
+          "description": "<p>触碰目标，以一道诅咒钝化其心智，使其<strong>智力</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "迟钝诅咒 迟钝诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Curse of Exhaustion": {
+      "name": "疲惫诅咒 疲惫诅咒",
+      "description": "<p>你汲取目标的生命韧性，使其在体质上变得虚弱，而且这种状态会持续，无法通过任何普通的恢复手段消除。</p>",
+      "actions": {
+        "curseExhaustion": {
+          "name": "疲惫诅咒 疲惫诅咒",
+          "description": "<p>触碰目标，以一道诅咒汲取其生命力，使其<strong>坚韧</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "疲惫诅咒 疲惫诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Curse of Lethargy": {
+      "name": "倦怠诅咒 倦怠诅咒",
+      "description": "<p>你扼灭了目标体内迅捷的火花，使其反应变得迟钝，并让其身体的应对速度减缓，而且这种影响会永久持续。</p>",
+      "actions": {
+        "curseLethargy": {
+          "name": "倦怠诅咒 倦怠诅咒",
+          "description": "<p>触碰目标，使其陷入迟缓状态，并使其<strong>敏捷</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "倦怠诅咒 倦怠诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Curse of Scorn": {
+      "name": "轻蔑诅咒 轻蔑诅咒",
+      "description": "<p>你削弱目标人格的力量，使其不再那么有感染力，也更难让他人听从，而且这种影响被证明是永久性的。</p>",
+      "actions": {
+        "curseScorn": {
+          "name": "轻蔑诅咒 轻蔑诅咒",
+          "description": "<p>触碰目标，以一道诅咒枯萎其意志之力，使其<strong>气场</strong>永久降低 2 点。</p>",
+          "effects": [
+            {
+              "name": "轻蔑诅咒 轻蔑诅咒"
+            }
+          ]
+        }
+      }
+    },
+    "Dawn Beacon": {
+      "name": "曙光信标 曙光信标",
+      "description": "<p>你唤出黎明的刺目光芒，穿透你周围的黑暗，照亮该区域，并驱散魔法黑暗的源头。</p>",
+      "actions": {
+        "dawnBeacon": {
+          "name": "曙光信标 曙光信标",
+          "description": "<p>你以当前位置为中心创造一根魔法光柱，形成一个光照圆柱，提供30英尺的明亮光照，以及额外30英尺的微光。该光柱会在原地持续6轮，直到被驱散为止。</p><p>这道魔法光照会对抗魔法黑暗，并摧毁任何起源位于其区域内的魔法黑暗源头。</p><p>光照首次生成时，区域内的敌人必须抵抗一次针对其<strong>坚韧</strong>的攻击，否则会陷入@状态[blinded]状态，持续一轮。</p><p><strong>WIP：该法术目前尚不会自动创建光源，暂时必须手动完成。最终这将通过 Foundry VTT 第14版中用于模板放置的新框架实现自动化。</strong></p>",
+          "effects": [
+            {
+              "name": "曙光信标 曙光信标"
+            }
+          ]
+        }
+      }
+    },
+    "Engulfing Darkness": {
+      "name": "吞噬黑暗 吞噬黑暗",
+      "description": "<p>你召唤出一个充满压迫感的魔法黑暗球体，笼罩视野，并在其区域内扼杀光亮。</p>",
+      "actions": {
+        "engulfingDarkness": {
+          "name": "吞噬黑暗 吞噬黑暗",
+          "description": "<p>你在当前位置周围创造一个半径20英尺的魔法黑暗球体，它会保持在原地持续6轮，直到被驱散为止。</p><p>在这片黑暗区域内，所有非魔法光源都会熄灭，且生物视为处于@状态[blinded]状态。</p><p>该球体的区域会受到实体墙壁的限制。该区域外的生物无法看入其中，而该区域外的光源其有效照明范围会止于其边界。</p><p><strong>WIP：此法术目前尚不会自动创建一个黑暗源，暂时必须手动完成。未来将使用 Foundry VTT 第14版中用于模板放置的新框架实现自动化。</strong></p>"
+        }
+      }
+    },
+    "Invisibility": {
+      "name": "隐形 隐形",
+      "description": "<p>隐形法术是幻术魔法的一种精妙运用，它让施法者能够像披上斗篷一样将光与影裹在自己周围，反射其周遭的世界，仿佛他们根本不在那里。既然连自己的眼睛都告诉人们那里什么也没有，又有谁会不相信呢？</p>",
+      "actions": {
+        "invisibility": {
+          "name": "隐形 隐形",
+          "description": "<p>你获得@状态[invisible]，且无法通过基于视觉的察觉被发现。你不能成为任何动作的直接目标。此法术必须被<strong>维持</strong>才能持续生效。</p>",
+          "effects": [
+            {
+              "name": "隐形 隐形"
+            }
+          ]
+        }
+      }
+    },
+    "Lifebloom": {
+      "name": "生命绽放 生命绽放",
+      "description": "<p>能够在物质世界中充当导体、让生命与灵魂的原初力量交融，并使天平向自己倾斜者，寥寥无几。这个法术使施法者成为丰沛力量的泉源，而正是这些力量将一切拥有灵魂的生命带入存在。伴随着一阵轻柔的气流低语，施法者周身环绕着生命与灵魂纯粹能量所化的跃动微光，宛如数十只萤火虫或火中迸出的火星；而范围内的人都会被一种平静的感受充盈，仿佛浸没在令人舒适的温水之中。周围所有植物生命都会立刻跨越数个生长阶段而绽放，空气中也随即弥漫起花粉与繁茂草木的气息。</p>",
+      "actions": {
+        "lifebloom": {
+          "name": "生命绽放 生命绽放",
+          "description": "<p>你将生命魔法注入一个灵气之中，恢复你周围30英尺内所有盟友的生命值和士气。每一轮，回合开始时位于此灵气内的盟友都会恢复等同于你的<strong>感知</strong>的<strong>生命值</strong>和<strong>士气</strong>。该法术必须维持。</p><p><strong>开发中：该法术目前被视为一个范围效果，会对初始范围内的目标赋予持续治疗效果。若该法术不再被维持，则这些效果目前需要手动移除。等到 Foundry VTT 第14版中的灵气实现系统自动化后，该法术的机制实现将与描述一致。</strong></p>",
+          "effects": [
+            {
+              "name": "生命绽放 生命绽放"
+            }
+          ]
+        }
+      }
+    },
+    "Protective Mirage": {
+      "name": "护佑幻影 护佑幻影",
+      "description": "<p>你让自身<strong>显现</strong>于由不断变幻的<strong>照明</strong>与<strong>阴影</strong>构成的海市蜃楼中，借此掩盖你当前的位置，并使你能够<strong>闪避</strong>来袭的攻击。</p>",
+      "actions": {
+        "protectiveMirage": {
+          "name": "护佑幻影 护佑幻影",
+          "description": "<p>你会被三个幻象分身环绕，最多持续 10 轮。任何针对你的传入<strong>打击</strong>，都要承受数量等于你剩余分身数量两倍的<strong>祸骰</strong>。每当一次打击未命中你时，你的一个分身就会消失。</p>",
+          "effects": [
+            {
+              "name": "幻景 幻景"
+            }
+          ]
+        }
+      }
+    },
+    "Revive": {
+      "name": "救醒 救醒",
+      "description": "<p>作为生命与控制魔法的强力体现，救醒使施法者能够通过将一股生命精华的激涌注入新近死者的身体，介入死亡的自然过程。经历过救醒的人往往不愿谈论此事，但他们形容那感觉令人不快地让人联想到：从沉沉酣睡中被突然唤醒，却发现自己一直冷得发僵——肌肤刺痛酸楚，神智眩乱，而灵魂则因离去被中断的记忆而隐隐作痛。</p>",
+      "actions": {
+        "revive": {
+          "name": "救醒 救醒",
+          "description": "<p>你使一个最近刚刚 @状态[dead] 的生物恢复生命，并将其<strong>创伤</strong>减少你的<strong>感知</strong>值。若成功，复活的生物将陷入 @状态[disoriented] 和 @状态[staggered] 状态，持续10分钟。</p>",
+          "effects": [
+            {
+              "name": "复生者 复生者"
+            }
+          ]
+        }
+      }
+    },
+    "Telecognition": {
+      "name": "遥感认知 遥感认知",
+      "description": "<p>这是渗透他人心智这一复杂技艺的一个粗浅示例，遥感认知会像从池塘地表撇去树叶一样，从目标心智的表层掠取思绪。虽然它未必会造成扰乱，但却并不隐蔽——正如触碰池塘地表时会泛起涟漪，心智也同样如此。</p>",
+      "actions": {
+        "telecognition": {
+          "name": "遥感认知 遥感认知",
+          "description": "<p>你将意识探入一个<strong>人型生物</strong>或<strong>巨人</strong>生物的心智，试图突破其<strong>意志</strong><strong>防御</strong>，以理解他们的想法与动机。该法术的目标会察觉到这种入侵，即使他们无法感知到你。</p><p>若成功，游戏主持人（当目标为对手时）或玩家（当目标为英雄时）必须用不超过3个词向你描述此刻其思绪最前端的想法或情绪。</p><p>在大成功时，该描述最多可使用10个词，以传达更深层的理解。</p>"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="pf2e chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
+    <header class="card-header flexrow" data-visibility="gm" style="display: flex;">
+        <img src="{{item.img}}" alt="{{item.name}}" />
+        <h3>{{item.name}}</h3>
+    </header>
+
+    <section class="tags" data-tooltip-class="pf2e" data-visibility="gm">
+        {{#each data.traits as |trait|}}
+            <span class="tag" data-trait="{{trait.name}}" data-tooltip="{{trait.description}}">{{localize trait.label}}</span>
+        {{/each}}
+    </section>
+
+    <div class="card-content" data-visibility="gm">
+        {{{data.description.value}}}
+    </div>
+
+    {{#if actor}}
+        <section class="card-buttons">
+            <button type="button" data-action="aff-save" data-save="{{data.save.type}}" data-dc="{{data.save.value}}" data-owner-title="{{data.save.breakdown}}">
+                {{{data.save.label}}}
+            </button>
+        </section>
+
+    {{/if}}
+</div>

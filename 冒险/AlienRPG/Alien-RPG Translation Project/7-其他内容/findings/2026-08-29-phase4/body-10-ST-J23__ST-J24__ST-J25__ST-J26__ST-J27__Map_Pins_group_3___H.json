@@ -1,0 +1,246 @@
+{
+ "unit": "ST-J23, ST-J24, ST-J25, ST-J26, ST-J27 (Map Pins group 3 — Hadley's Hope room pins)",
+ "output_file": "C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J23.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J24.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J25.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J26.cn.html; C:\\Users\\Taka\\Desktop\\fvtt\\Alien-RPG Translation Project\\6-工作区\\phase4-starterset\\pages\\ST-J27.cn.html",
+ "summary": "Five map-pin pages translated, one output file each, no merging. All five treated as real translation work per the brief.\n\nMEASURED, not assumed: I re-ran the overlap myself against the Hope's Last Day chunk that actually contains these rooms — ST-J08 (whose h3 list is Operations / Medlab / Stasis Room / Surgery Room / Morgue / Station Maintenance Center / Life Support/Power + the events). Split into sentences >15 chars, 43/43 = 100.0% of my units' prose appears VERBATIM inside ST-J08.en.html. So the group-3 five happen to sit entirely inside the overlapping subset — the 60.8% figure and the three zero-overlap pages (Asset/Claims, Assistant Manager, Geological Managers) live in the OTHER pin groups, not this one. ST-J08.cn.html does not exist yet, so nothing could be reused verbatim; every line here is new and every line is a reconciliation point (see open_issues #1).\n\nRegister: GM-facing horror description, not read-aloud — no evblockquoteCenter and no evexamplebox in any of the five, so I wrote for a GM reading at the table, kept the sentences short at the shock beats (破胸体 breaking out, the five bodies coming down), and left the mechanics clauses flat.\n\nMarkup: tag-name multisets, class attributes, all style/src/data-* attributes, and the whole @UUID machinery on the one link in ST-J26 are byte-identical to the English. starterset's class=\"ev-content-link\" preserved (not corerules' content-link). The 10 U+00A0 in ST-J27 (one inside the basesymbol span, one either side of it, seven in the evscol2 spacer cells) are preserved exactly, 10 -> 10. The one U+00A0 in ST-J25 was an English word-joiner inside \"All PCs\" with no Chinese counterpart and was dropped (open_issues #5).\n\nHeadings: all six translated headings carry an explicit id= holding the original English slug, per PROJECT.md §1.2 ④ / the register's heading_anchor_hashes remediation. station-maintenance-center is the load-bearing one — it is a live data-hash with 2 occurrences in the pack. tannens-casino is the deliberate exception, see open_issues #2.\n\nTerm spine: COMTECH 通信科技 / OBSERVATION 侦察 / 压力等级 / 恐慌检定 / 护甲等级 / 电力 / 电力余量 all byte-match lang/cn.json. Note ST-J23 and ST-J25 carry the skill names WITHOUT strong in the English, so I did not add strong there — only ST-J26 and ST-J27 have them, and there the strong count is 2 and 3 exactly as in the source.\n\nDash discipline: EN DASH U+2013 kept only where it is a minus sign (–2 骰子, matching the ST-J03 house style); the English's parenthetical – became —— in Chinese, as ST-J02/ST-J03 already do (28 and 20 occurrences). PC is left as \"PC\" with ASCII spaces, again following ST-J03.",
+ "chars_en": 4716,
+ "chars_cn": 1681,
+ "lock_lookups": [
+  {
+   "english": "Stasis Room",
+   "used": "休眠室",
+   "lang_key": "glossary Stasis=休眠; h3 in ST-J23 + Map Pins page name + ST-J08 h3 + scene note label"
+  },
+  {
+   "english": "Surgery Room",
+   "used": "手术室",
+   "lang_key": "h3 in ST-J24; also named inside ST-J23 body and ST-J21 NPC placement list"
+  },
+  {
+   "english": "Morgue",
+   "used": "停尸间",
+   "lang_key": "h3 in ST-J25; also named inside ST-J23 body and ST-J27 body (key location)"
+  },
+  {
+   "english": "Life Support/Power",
+   "used": "生命维持/电力",
+   "lang_key": "h3 in ST-J26; Power=电力 per glossary + ALIENRPG.Power"
+  },
+  {
+   "english": "Tannen’s Casino",
+   "used": "坦嫩赌场",
+   "lang_key": "h2 in ST-J26; Tannen=坦嫩 per 新华社英语姓名译名手册"
+  },
+  {
+   "english": "Station Maintenance Center",
+   "used": "站务维护中心",
+   "lang_key": "h3 in ST-J27; live data-hash target (2 occurrences)"
+  },
+  {
+   "english": "Medlab",
+   "used": "医疗实验室",
+   "lang_key": "glossary_alien.json Medlab"
+  },
+  {
+   "english": "Armory",
+   "used": "军械库",
+   "lang_key": "subheading in ST-J27 + the door key found in ST-J25, written 「军械库」"
+  },
+  {
+   "english": "W-Y Manager Office",
+   "used": "韦汤经理办公室",
+   "lang_key": "Weyland-Yutani=韦兰德-汤谷公司, 简称韦汤 per PROJECT.md §1.4"
+  },
+  {
+   "english": "South Wing",
+   "used": "南翼",
+   "lang_key": "referenced in ST-J26; ST-J07 h3 owns the heading"
+  },
+  {
+   "english": "Office (Morgue back office)",
+   "used": "办公室",
+   "lang_key": "evolvedlinestart label in ST-J25"
+  },
+  {
+   "english": "Mortuary Coolers",
+   "used": "停尸冷柜",
+   "lang_key": "evolvedlinestart label in ST-J25"
+  },
+  {
+   "english": "Surgical Access",
+   "used": "手术室通道",
+   "lang_key": "evolvedlinestart label in ST-J23"
+  },
+  {
+   "english": "COMTECH",
+   "used": "通信科技",
+   "lang_key": "ALIENRPG.Skillcomtech (RULINGS R3, T-EXACT)"
+  },
+  {
+   "english": "OBSERVATION",
+   "used": "侦察",
+   "lang_key": "ALIENRPG.Skillobservation"
+  },
+  {
+   "english": "stress level",
+   "used": "压力等级",
+   "lang_key": "glossary Stress Level; cn.json 压力等级"
+  },
+  {
+   "english": "panic roll",
+   "used": "恐慌检定",
+   "lang_key": "ALIENRPG.CREWPANIC / glossary Panic Roll"
+  },
+  {
+   "english": "armor level",
+   "used": "护甲等级",
+   "lang_key": "ALIENRPG.ArmorRating"
+  },
+  {
+   "english": "Power supply (rechargeable)",
+   "used": "电力余量",
+   "lang_key": "ALIENRPG.Power + ALIENRPG.Supply(余量检定)"
+  },
+  {
+   "english": "stretch",
+   "used": "节",
+   "lang_key": "glossary Stretch=节 (Round/Stretch/Shift = 轮/节/班)"
+  },
+  {
+   "english": "Cutting Torch",
+   "used": "切割炬",
+   "lang_key": "glossary_alien.json Cutting Torch"
+  },
+  {
+   "english": "colonist",
+   "used": "殖民者",
+   "lang_key": "glossary Colonist"
+  },
+  {
+   "english": "Xenomorph / Xenos",
+   "used": "异形",
+   "lang_key": "glossary Xenomorph; PROJECT.md §1.3 #4 (异形=生物, never 异型)"
+  },
+  {
+   "english": "Facehugger",
+   "used": "抱脸虫",
+   "lang_key": "glossary Facehugger (owner-ruled)"
+  }
+ ],
+ "frozen_kept": [
+  "data-uuid=\"JournalEntry.UiDWuSkkUFSZg2xh.JournalEntryPage.1x3YCWOHYWkJeLFJ\" — copied byte-for-byte in ST-J26",
+  "data-id=\"1x3YCWOHYWkJeLFJ\", data-type=\"JournalEntryPage\", data-hash=\"stage-iii\", draggable=\"false\", the bare data-link attribute — all verbatim",
+  "class=\"ev-content-link\" — starterset's variant, NOT corerules' content-link",
+  "class values verbatim: alienrpg evolved / evolvedpage / evolvedsubheading / evchapterheading / evolvedlinestart / basesymbol / evstable / evstrhead / evscol1 / evscol2 / evscol3",
+  "style=\"height:600px\", style=\"margin-top:30px\", style=\"background:none;border:none;color:hsl(175, 91%, 22%)\", style=\"text-align:center\" — untouched",
+  "<span class=\"basesymbol\">U+00A0</span> plus the U+00A0 on each side of it (ST-J27) — the icon and its spacing are machinery",
+  "the seven U+00A0-only evscol2 spacer cells in the ST-J27 table",
+  "D6 — die notation left as-is (T-LATIN)",
+  "M4A3 / M240 / 37A2 / M41A / M40 / HEDP / .357 — model and designation strings left Latin (T-LATIN, PROJECT.md §3.4)"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "PROJECT.md §7.2.0 declares the six life-cycle names have no Chinese precedent and are self-ruled. 破胸体 is the pending file's phase0_cn AND the sequence PROJECT.md itself writes out (卵 → 抱脸虫 → 破胸体 → 成体), and zh.wikipedia 异形(虚构生物) + 异形：夺命舰 both use it. Used consistently in ST-J25 (2x: the evolvedlinestart label and the body) and in ST-J26's link label. NOT a second form anywhere. Final calibration belongs to ch.10 per §7.2.0 item 3."
+  },
+  {
+   "en": "Drone",
+   "proposed": "工蜂异形",
+   "why": "Zero-hit across all 11,088 subtitle pairs and absent from the Alien: Isolation loc; pending file's phase0_cn is 工蜂异形. I adopted it rather than coining a seventh variant, because §7.2.0 item 2 says group self-consistency beats per-word optimality and this is the only caste rendering with ANY attestation (terminology-web, confidence medium). Appears once, in ST-J23. ⚠ It reads as a bee metaphor; if the owner rules the whole ladder at once (pending's own next_step), this one word in ST-J23 is the only place in my five units that has to change."
+  },
+  {
+   "en": "Stage III: Chestburster",
+   "proposed": "第三阶段：破胸体",
+   "why": "Link label in ST-J26. Stage III=第三阶段 is already in glossary_alien.json; the caste half is the proposal above. This label must end up byte-identical to ST-J10's h3 for the same string."
+  },
+  {
+   "en": "Station Maintenance Center",
+   "proposed": "站务维护中心",
+   "why": "Not in the glossary. Glossary renders Station as 站 in facility names (锚点站, 塞瓦斯托波尔站). 站务 = the station's service/operations side, which is what a maintenance center maintains. Rejected 站点维护中心 (站点 reads as 'site/stop') and 基地维护中心 (drifts from Station, even though the same page calls the place 'the base')."
+  },
+  {
+   "en": "Tannen’s Casino",
+   "proposed": "坦嫩赌场",
+   "why": "Tannen → 坦嫩 per 新华社《英语姓名译名手册》. Rejected 坦南 and 坦纳 (the latter is Tanner). Not in the glossary."
+  },
+  {
+   "en": "Armory",
+   "proposed": "军械库",
+   "why": "Not in the glossary. Appears twice in ST-J27 (label + body), once in ST-J25 as the text ON a key, written 「军械库」 following ST-J02's 「」 convention for quoted labels."
+  },
+  {
+   "en": "Armat Model 37A2 12 Gauge Pump Action",
+   "proposed": "阿玛特37A2 12号口径泵动霰弹枪",
+   "why": "⚠ This CORRECTS the level-1 source. The 《异形RPG：进化版》 ch.2 serial renders it 军用型37A2 12号口径霰弹枪, and mined_fan_translation.json's own note flags that as an ERROR: Armat is the manufacturer, not the adjective 'armed/military', and should transliterate to 阿玛特. I kept the level-1 word order and 12号口径 shape, swapped 军用型→阿玛特, and restored 泵动 which the level-1 rendering dropped. Precedent for overriding level 1 with a stated reason: RULINGS R5/R6."
+  },
+  {
+   "en": "Armat M41A Pulse Rifle",
+   "proposed": "阿玛特M41A脉冲步枪",
+   "why": "glossary has M41A Pulse Rifle=M41A脉冲步枪 (no space between Latin and CJK — I followed that byte-form so a later term sweep can still grep it); 阿玛特 from the same Armat ruling, attested at bilibili cv22321766 阿玛特防务M41A脉冲步枪."
+  },
+  {
+   "en": "M4A3 Service Pistol / M240 Incinerator Unit / .357 Magnum / M40 HEDP Grenade",
+   "proposed": "M4A3制式手枪 / M240焚烧器 / .357马格南 / M40 HEDP手榴弹",
+   "why": "Built from glossary parts (Service Pistol=制式手枪, Incinerator Unit=焚烧器, Grenade=手榴弹) plus level-1's .357马格南左轮手枪 trimmed to what the English table cell actually says. All four are pack Item names that will get T-BILINGUAL treatment elsewhere — the Chinese half must match these."
+  },
+  {
+   "en": "Pauling Surgical & Scanner MedPod",
+   "proposed": "鲍林外科与扫描医疗舱",
+   "why": "corerules ships the Item 'Pauling MedPod'; glossary has MedPod=医疗舱 but not Pauling. 鲍林 is the standard transliteration (Linus Pauling 莱纳斯·鲍林). The prose name is longer than the Item name, so 鲍林医疗舱 should be the Item's Chinese half and this the prose form."
+  },
+  {
+   "en": "John J. Marachuk / Al Simpson / Angela Lin / Theodora Komiskey",
+   "proposed": "约翰·J·马拉丘克 / 阿尔·辛普森 / 安吉拉·林 / 科米斯基",
+   "why": "None in the glossary. Lin is a Chinese surname so 林, not a transliteration. These four are the same people the ST-A-CAST actor unit is naming, and that unit's note says system.general.relOne/relTwo store OTHER characters' surnames — so 马拉丘克/辛普森/林/科米斯基 have to be the surnames it uses."
+  },
+  {
+   "en": "Operations Manager",
+   "proposed": "运营经理",
+   "why": "Paired with 'W-Y Manager Office'→韦汤经理办公室 so Manager is 经理 in both. Note 'Operations' is also a sibling page name (ST-J08 h3) that another unit owns — if that unit picks 指挥中心 or 作业中心 rather than 运营, this title should follow it."
+  }
+ ],
+ "self_gate": [
+  {
+   "check": "1. Tag-name multiset identical to the English (order-insensitive, same shape as apply_translations.markup_signature)",
+   "result": "PASS 5/5. J23 div2 h3 p br4 span2; J24 div2 h3 p; J25 div2 h3 p br6 span3; J26 div2 h3 p2 h2 br2 span strong2 a; J27 div3 h3 p22 br2 span2 strong3 table tbody tr7 td21. No merged, split or dropped block."
+  },
+  {
+   "check": "2. class attributes verbatim (multiset)",
+   "result": "PASS 5/5. Zero drift. ev-content-link kept as-is, not normalised to corerules' content-link."
+  },
+  {
+   "check": "3. Link/machinery attributes verbatim — data-uuid, data-id, data-type, data-hash, draggable, style, src, href",
+   "result": "PASS 5/5. The single @UUID-derived anchor in ST-J26 is byte-identical outside its label; only the label text is Chinese."
+  },
+  {
+   "check": "4. Every translated heading carries an explicit id holding the original English slug (PROJECT.md §1.2 ④)",
+   "result": "PASS 5/5 with one deliberate exception. stasis-room, surgery-room, morgue, life-support/power, station-maintenance-center are byte-equal to the register's own slugify_heading output. tannens-casino is intentionally NOT the English slug — see open_issues #2."
+  },
+  {
+   "check": "5. LOCK terms byte-match lang/cn.json wherever the English term is present (COMTECH, OBSERVATION, stress level, panic roll, armor level, Power, stretch, damage, Facehugger, Xeno)",
+   "result": "PASS 5/5, zero misses."
+  },
+  {
+   "check": "6. No untranslated English residue in visible text; CJK actually present",
+   "result": "PASS 5/5. Only allowed Latin survives: PC, D6, HEDP, and the T-LATIN model strings M4A3/M240/37A2/M41A/M40/.357. CJK 365/69/347/284/316."
+  },
+  {
+   "check": "7. Structural whitespace and NBSP preserved; visible-length ratio sane",
+   "result": "PASS 5/5. ST-J27 NBSP 10→10 in the same 10 structural positions. Ratios 0.37/0.33/0.35/0.34/0.37, all inside the 0.30–1.05 band — no TRUNCATED-class silent paragraph loss. Files are UTF-8, no BOM, no CRLF, no trailing newline (matches the .en.html files)."
+  },
+  {
+   "check": "TOTAL",
+   "result": "0 hard failures across 35 checks. Gate script: C:\\Users\\Taka\\AppData\\Local\\Temp\\claude\\C--Users-Taka-Desktop-fvtt\\feb81eee-4341-49b2-9e89-4452e4e3e72f\\scratchpad\\gate_j23_27.py"
+  }
+ ],
+ "open_issues": [
+  "1. RECONCILIATION REQUIRED — all five units are 100% shared with ST-J08, and ST-J08.cn.html DID NOT EXIST when I ran. I measured it rather than assuming: sentence-split at >15 chars, 43/43 of my units' sentences appear verbatim inside ST-J08.en.html (J23 10/10, J24 3/3, J25 10/10, J26 10/10, J27 10/10). So the group-3 five sit entirely inside the overlapping subset — the 60.8% figure and the three zero-overlap pages belong to the other pin groups. Nothing could be reused, so the cross-check must force ST-J08's five location sections to come out byte-identical to these files, headings and ids included. If ST-J08's translator picked different room names, MY files are the ones that also have to match the scene note labels, so reconcile toward whichever the note labels use.",
+  "2. DELIBERATE DEVIATION, needs a controller ruling — ST-J26's h2 got id=\"tannens-casino\", NOT the true English slug. Foundry's non-strict slugify turns 'Tannen’s Casino' into tannen’s-casino because the apostrophe is U+2019, so the two live data-hash=\"tannens-casino\" anchors in Hope's Last Day resolve to NOTHING today — the register lists it under data_hash_not_resolving_today. I had to write some id, and I chose the one that makes those links work rather than the one that byte-preserves an upstream defect. This REPAIRS an upstream bug, which PROJECT.md §7.3 says is not our job. Revert to id=\"tannen’s-casino\" if strict behaviour preservation is wanted; the same call has to be made in ST-J08, which owns the other copy of this heading.",
+  "3. ST-J10 must add id=\"stage-iii\" to its 'Stage III: Chestburster' h3, or my ST-J26 link stays broken. Same root cause: the English heading slugifies to stage-iii:-chestburster, so the data-hash=\"stage-iii\" I copied verbatim resolves to nothing today (2 occurrences, both listed as non-resolving). I could not fix it from inside my unit — the id belongs on the target heading. My label reads 第三阶段：破胸体 and must equal ST-J10's h3 text.",
+  "4. ST-J27 says 'the W-Y Manager Office on level 1' but the page/heading is 'Weyland-Yutani Office' (ST-J07) and ST-J21 says 'W-Y Office'. Three spellings of one room. I used 韦汤经理办公室; ST-J07's heading will presumably be 韦兰德-汤谷办公室. Someone should decide whether the short in-text references collapse to the heading form.",
+  "5. ST-J25 dropped one U+00A0 — it was an English word-joiner inside 'All PCs' with no Chinese counterpart. All 10 structural NBSPs in ST-J27 are preserved 10→10. No gate counts NBSP (checked apply_translations.py, scan_markup_drift.py, validate_translations.py), so this is a note, not a violation.",
+  "6. ST-J24 dropped the &amp; from 'Pauling Surgical & Scanner MedPod', rendering it 鲍林外科与扫描医疗舱. Not markup — markup_signature only tracks &Reference[...] — but flagging since it is an entity that vanished.",
+  "7. 'Operations Manager' → 运营经理 is coupled to whatever ST-J08's 'Operations' h3 becomes. If that page picks 指挥中心/作业中心 over 运营, my ST-J25 title should follow.",
+  "8. Six item names in the ST-J27 table are the prose face of pack Items whose T-BILINGUAL Chinese halves are decided elsewhere. I used the glossary's no-space Latin+CJK byte-form (M41A脉冲步枪, not M41A 脉冲步枪) so a later term sweep can still grep them, which means the table cells look denser than the surrounding prose where house style spaces Latin runs. Worth a consistency ruling, and worth checking against corerules ch.5 GEAR & TECH, where 39 @UUID{Label} labels are hard sync points for the same names."
+ ]
+}

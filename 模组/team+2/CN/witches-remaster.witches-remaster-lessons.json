@@ -1,0 +1,72 @@
+{
+    "label": "秘传 Lessons",
+    "mapping": {
+        "prerequisites": {
+            "path": "system.prerequisites.value",
+            "converter": "structured",
+            "cardinality": "many",
+            "mapping": {
+                "value": "value"
+            }
+        }
+    },
+    "folders": {},
+    "entries": {
+        "Lesson of Brambles": {
+            "name": "荆棘秘传 Lesson of Brambles",
+            "description": "<p>你必须时刻准备好抵御任何敢于伤害你的人。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.PB5cKSpPFeShAcJV]{缠绕藤蔓} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.KsWhliKfUs3IpW3c]{荆棘之墙}。</p>"
+        },
+        "Lesson of Destiny": {
+            "name": "命运秘传 Lesson of Destiny",
+            "description": "<p>这正是你命中注定要做之事。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.nLPIv4DdLPDDu6N7]{释放真力} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.AuIiqc7jjiy1GZ75]{显化}。</p>"
+        },
+        "Lesson of Legacy": {
+            "name": "传承秘传 Lesson of Legacy",
+            "description": "<p>你并非第一位侍奉你庇护主的女巫。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.DZtgq345ra0HZtg8]{先驱秘密} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.hghGRzOSzEl4UXdS]{召请精魂}。</p>"
+        },
+        "Lesson of Mirrors": {
+            "name": "镜面秘传 Lesson of Mirrors",
+            "description": "<p>镜中世界藏有诸多可供你学习的秘密。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.RvEtKvWzlGlnCFNk]{镜面之门} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.A7w3YQBrFNH8KYsB]{镜中厄运}。</p>"
+        },
+        "Lesson of Apocalypses": {
+            "name": "末劫秘传 Lesson of Apocalypses",
+            "description": "<p>世界的终结将以你庇护主预见的方式准时到来。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.dtRMSLa2GJK6XPM0]{庇护主末劫} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.wLIvH0AT1u7oa64N]{天灾}。</p>"
+        },
+        "Lesson of Senses": {
+            "name": "感官秘传 Lesson of Senses",
+            "description": "<p>相信你的感官——若不能信，便须适应。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.hPimFSXw5UxmDCFN]{感官剥夺} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.i35dpZFI7jZcRoBo]{幻象伪装}。</p>"
+        },
+        "Lesson of Nightmares": {
+            "name": "梦魇秘传 Lesson of Nightmares",
+            "description": "<p>梦境之力强大，但梦魇之恐怖更为凶猛。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.XPEKWkreDnAMJoul]{永眠} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.U58aQWJ47VrI36yP]{镜花水月}。</p>"
+        },
+        "Lesson of Prophecy": {
+            "name": "预言秘传 Lesson of Prophecy",
+            "description": "<p>凝视诸般未来，从时间之流中撷取一道。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.zqHHwUxFcbdFvTzW]{预言家之占} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.EUMjrJJwSgsqNidi]{预知危险}。</p>"
+        },
+        "Lesson of Disease": {
+            "name": "疾病秘传 Lesson of Disease",
+            "description": "<p>最微小的病毒亦能击倒最巨大的巨龙。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.J76UyZrMV8XdyIKa]{暴发瘟疫} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.zJQnkKEKbJqGB3iB]{哥布林痘}。</p>"
+        },
+        "Lesson of Aging": {
+            "name": "时光秘传 Lesson of Aging",
+            "description": "<p>所有丑陋之物皆有其美，所有美丽之物亦有其丑；不能识此者，皆为愚者。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.5IxpPxEQWsoha7Gx]{扭曲容貌} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.MNiT0dHol5fEcKlz]{三相之姿}。</p>"
+        },
+        "Lesson of Studiousness": {
+            "name": "勤学秘传 Lesson of Studiousness",
+            "description": "<p>对你庇护主教诲的敏锐理解将带你抵达远方。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.tM0BhVmf8Ylz4f2G]{速成秘传} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.TjWHgXqPv5jywMti]{袖珍图书馆}。</p>"
+        },
+        "Lesson of Judgement": {
+            "name": "审判秘传 Lesson of Judgement",
+            "description": "<p>你的庇护主授予你最终仲裁者的角色，决定谁生谁死。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.pj7DPwmlbWWqe1Un]{审判灵魂} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.ckUOoqOM7Kg7VqxB]{天神下凡}。</p>"
+        },
+        "Lesson of Sigils": {
+            "name": "符印秘传 Lesson of Sigils",
+            "description": "<p>古老的符文与印记蕴含难以想象的力量。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.YFusnK3S1rkhfy55]{拘禁字符} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.DgcSiOCR1uDXGaEA]{同步}。</p>"
+        },
+        "Lesson of Binding": {
+            "name": "拘束秘传 Lesson of Binding",
+            "description": "<p>异界存在能成为绝佳的助手——前提是你懂得如何让它们留在身边。你获得 @UUID[Compendium.witches-remaster.witches-remaster-focus-spells.Item.A3321ycmFdKzgoNO]{拘束召唤} 法咒，且你的魔宠学会 @UUID[Compendium.pf2e.spells-srd.Item.GUeRTriJkMlMlVrk]{拘束亡灵}。</p>"
+        }
+    }
+}

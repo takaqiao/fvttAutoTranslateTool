@@ -1,0 +1,30 @@
+{
+  "name": "压制作祟 Suppress Haunt",
+  "type": "script",
+  "command": "/*\n压制作祟 Suppress Haunt\n\n用法：在画布上选中作祟的 token 后运行本宏；没选中（或选中的不是危害）时，\n会先弹出当前场景的危害清单让你挑。确认 DC / 动作数 / 技能后点「确定」，\n宏会把一条内联检定发到聊天栏，玩家点它掷骰。\n\n检定串带 action:suppress-haunt 骰点选项，物品「压制作祟」上的 4 条 Note 规则\n据此把大成功／成功／失败／大失败的判定文字挂到掷骰结果下方 ——\n所以那件物品要放在掷骰玩家的角色卡上，否则只会得到一次普通技能检定。\n*/\n\n// PF2e 等级基准 DC 表（-1 ~ 25 级）\nconst DCS = new Map([\n  [-1, 13], [0, 14], [1, 15], [2, 16], [3, 18], [4, 19],\n  [5, 20], [6, 22], [7, 23], [8, 24], [9, 26],\n  [10, 27], [11, 28], [12, 30], [13, 31],\n  [14, 32], [15, 34], [16, 35], [17, 36],\n  [18, 38], [19, 39], [20, 40], [21, 42],\n  [22, 44], [23, 46], [24, 48], [25, 50]\n]);\n\n// 动作数决定 DC 档位：1 动作极难、2 动作标准、3 动作简单\nconst TIERS = [\n  { actions: 1, adjustment: 5, label: \"极难\" },\n  { actions: 2, adjustment: 0, label: \"标准\" },\n  { actions: 3, adjustment: -2, label: \"简单\" }\n];\n\nconst DEFAULT_SKILL = \"religion\";\nconst isHazard = (a) => a?.type === \"hazard\";\n\n/*\n只认你亲手选中的那个危害。Foundry 在没有选中任何 token 时，会把宏作用域里的\ntoken / actor 回退到你绑定的角色（见 macro.mjs 的 #executeScript），\n沿用那个回退值会静默按 PC 的等级算出 DC。\n*/\nconst controlled = canvas.tokens?.controlled ?? [];\nconst selected = controlled.length === 1 && isHazard(controlled[0].actor)\n  ? controlled[0].actor\n  : null;\n\nif (selected) promptSuppress(selected);\nelse chooseHazard();\n\n/* 列出当前场景上的全部危害。用 token id 回查，因为同名作祟经常不止一个。 */\nfunction chooseHazard() {\n  const tokens = (canvas.scene?.tokens.filter((t) => isHazard(t.actor)) ?? [])\n    .sort((a, b) => a.name.localeCompare(b.name, \"zh-Hans\"));\n\n  if (!tokens.length) {\n    ui.notifications.warn(\"当前场景上没有危害类 token。\");\n    return;\n  }\n\n  const options = tokens.map((t) =>\n    `<option value=\"${t.id}\">${foundry.utils.escapeHTML(t.name)}（等级 ${t.actor.level}）</option>`\n  ).join(\"\");\n\n  new foundry.applications.api.DialogV2({\n    window: { title: \"压制作祟\" },\n    content: `<p>选择危害</p>\n  <select name=\"hazard\" id=\"hazard\" style=\"width:100%\">${options}</select>`,\n    buttons: [{\n      action: \"hazard\",\n      label: \"确认选择\",\n      default: true,\n      callback: (event, button) => button.form.elements.hazard.value\n    }],\n    submit: (id) => {\n      const hazard = tokens.find((t) => t.id === id)?.actor;\n      if (hazard) promptSuppress(hazard);\n    }\n  }).render(true);\n}\n\nfunction promptSuppress(hazard) {\n  const level = Math.clamp(hazard.level, -1, 25);\n  const dc = DCS.get(level);\n\n  const tiers = TIERS.map((t) => `\n  <label style=\"display:block;line-height:1.7\">\n    <input type=\"radio\" name=\"actions\" value=\"${t.actions}\"${t.actions === 2 ? \" checked\" : \"\"}>\n    ${t.actions} 动作 · ${t.label} DC（${t.adjustment >= 0 ? \"+\" : \"\"}${t.adjustment}）\n  </label>`).join(\"\");\n\n  // 技能名直接取 pf2e 的本地化条目，由 pf2_cn 翻译；下拉框也杜绝了手打出无效 slug\n  const skills = Object.entries(CONFIG.PF2E.skills)\n    .map(([slug, s]) => [slug, game.i18n.localize(s.label)])\n    .concat([[\"perception\", game.i18n.localize(\"PF2E.PerceptionLabel\")]])\n    .sort((a, b) => a[1].localeCompare(b[1], \"zh-Hans\"))\n    .map(([slug, label]) =>\n      `<option value=\"${slug}\"${slug === DEFAULT_SKILL ? \" selected\" : \"\"}>${label}</option>`)\n    .join(\"\");\n\n  new foundry.applications.api.DialogV2({\n    window: { title: `压制作祟：${hazard.name}` },\n    content: `\n  <p>基于等级的 DC（等级 ${level}）：</p>\n  <input type=\"number\" id=\"dc\" name=\"dc\" value=\"${dc}\" style=\"width:100%\">\n  <p>动作数：</p>${tiers}\n  <p>使用的技能：</p>\n  <select id=\"skill\" name=\"skill\" style=\"width:100%\">${skills}</select>`,\n    buttons: [{\n      action: \"details\",\n      label: \"确定\",\n      default: true,\n      callback: (event, button) => ({\n        skill: button.form.elements.skill.value,\n        dc: button.form.elements.dc.value,\n        actions: Number(button.form.elements.actions.value)\n      })\n    }],\n    submit: (result) => postCheck(hazard, result)\n  }).render(true);\n}\n\n// 同时把检定串打到控制台，同一场要反复发很多次时可以复制出来改参数直接贴聊天栏\nfunction postCheck(hazard, { skill, dc, actions }) {\n  const { adjustment } = TIERS.find((t) => t.actions === actions) ?? TIERS[1];\n  const message = `@Check[${skill}|dc:${dc}|adjustment:${adjustment}|name:压制作祟|traits:haunt,hazard|options:action:suppress-haunt]`;\n  console.log(message);\n  // 只给 alias 不给 actor：内联检定会把 message.actor 当作掷骰者的回退，\n  // 绑上危害的话，玩家没选中自己的 token 时点击就变成危害自己掷了。\n  ChatMessage.create({\n    content: message,\n    speaker: { alias: hazard.name }\n  });\n}",
+  "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
+  "author": "UmkW69tElQslax2y",
+  "scope": "global",
+  "folder": "bn0jbic0NIrllTZk",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Macro.9AtRaJhc9zz2MNND",
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "season-of-ghosts",
+      "uuid": "Macro.9AtRaJhc9zz2MNND",
+      "coreVersion": "13.351",
+      "systemId": "pf2e",
+      "systemVersion": "7.10.1"
+    },
+    "coreVersion": "13.351",
+    "systemId": "pf2e",
+    "systemVersion": "7.10.1",
+    "createdTime": 1772752279738,
+    "modifiedTime": 1772774007596,
+    "lastModifiedBy": "UmkW69tElQslax2y"
+  },
+  "ownership": {
+    "default": 0
+  }
+}

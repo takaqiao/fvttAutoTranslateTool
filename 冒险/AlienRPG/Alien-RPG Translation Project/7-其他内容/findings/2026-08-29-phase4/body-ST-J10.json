@@ -1,0 +1,202 @@
+{
+ "unit": "ST-J10",
+ "output_file": "C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/6-工作区/phase4-starterset/pages/ST-J10.cn.html",
+ "summary": "Hope's Last Day 4/4 — the XENOMORPHS bestiary tail: Stage III: Chestburster (stat block + prose + 4-row D6 attack table) and Stage IV: Drone (stat block + prose + Silent Assassin bullet + 6-row D6 attack table). Built by structural substitution on the English source so every tag, style attribute, img src, NBSP layout cell and the single ev-content-link anchor survive byte-for-byte; only text nodes changed. Two h3 headings translated and given explicit id= carrying the Foundry non-strict slug of the original English text (stage-iii:-chestburster, stage-iv:-drone). Mechanic vocabulary pulled from lang/cn.json (速度/生命值/机动/侦察/护甲等级/对火护甲/酸血飞溅/近战/破甲/恐慌检定/压力/近距离/伤害) and from the settled glossary (基础骰子/潜行模式/区域/班/重伤/压力等级/异形). Combat \"turn\" rendered 回合 per ST-J03.cn's established 轮/节/班/回合 split, not the time-unit 节. Three life-cycle caste names have no Chinese precedent and are flagged as gaps: Chestburster=破胸体, Drone=工蜂异形, Imp=小鬼异形 — each used consistently throughout the unit. The generator script is kept in sync and reproduces the delivered file byte-identically (sha256 4b9090292e0ed291…).",
+ "chars_en": 3798,
+ "chars_cn": 1483,
+ "self_gate": [
+  {
+   "check": "1. Tag multiset .cn.html == .en.html (every tag name counted)",
+   "result": "PASS — identical Counter, 338 tag tokens each side: a2 blockquote8 br2 div18 figcaption4 figure8 h3:4 img4 li2 p4 span8 strong56 table12 tbody12 td132 tr60 ul2"
+  },
+  {
+   "check": "2. Every class=\"…\" value from the English present unchanged",
+   "result": "PASS — class multiset identical (arpgtable2 die12 ev-content-link1 evblockquoteCenter2 evexamplebox2 evolvedlinestart2 evolvedsubheading2 evstable4 gevcol1 gevcol2 grid-evolved-2col liststyle scol3:12 scol7:28 textover4 tim12). Also verified beyond the gate: style=\"…\" multiset identical, and all 4 <img> tags byte-identical."
+  },
+  {
+   "check": "3. @UUID / [[…]] constructs byte-identical, only {label} differs",
+   "result": "PASS — no @UUID/@TEXTDRAW/[[…]] constructs exist in this unit (0 in EN, 0 in CN). The one link is an <a class=\"ev-content-link\"> element; its complete open tag (draggable, data-link, data-uuid=JournalEntry.zltxHqT7puDlMica.JournalEntryPage.lgOF383Fh8ONxlgY, data-id, data-type, data-hash=\"special-attacks\") is byte-identical. Only the label changed: \"Special Attacks\" -> \"特殊攻击\"."
+  },
+  {
+   "check": "4. Every translated heading carries explicit id= with the original English slug",
+   "result": "PASS — 2/2. \"Stage III: Chestburster\" -> 第三阶段：破胸体 id=\"stage-iii:-chestburster\"; \"Stage IV: Drone\" -> 第四阶段：工蜂异形 id=\"stage-iv:-drone\". Slug rule verified empirically against corerules, which ships data-hash=\"stage-i:-ovomorph-(egg)\" — i.e. Foundry String#slugify with strict:false (colons/parens kept, spaces -> '-', lowercased), not strict:true."
+  },
+  {
+   "check": "5. No DO-NOT-TRANSLATE frozen literal was translated",
+   "result": "PASS — zero frozen literals occur in this unit's English (checked every string/value/label/target_name/en field in DO-NOT-TRANSLATE.json against the source), so none could be lost. Specifically NOT touched by this unit: the RollTable names \"EV - Chestburster Attacks\" and \"EV - Stalker, Scout and Drone Attacks\" live in actor system.rTables, not here; the two figcaption headings \"CHESTBURSTER ATTACKS\"/\"DRONE ATTACKS\" are page chrome and are safe to translate."
+  },
+  {
+   "check": "6. Output is not byte-identical to the English",
+   "result": "PASS — EN 13,235 bytes / CN 12,965 bytes; 1,483 visible CJK chars vs 3,798 visible EN chars. Only 4 Latin residues survive outside tags, all intentional: GM x2, PC x1, and the upstream stray '&gt;' entity."
+  },
+  {
+   "check": "7. Mechanic terms match lang/cn.json byte-for-byte",
+   "result": "PASS — 13/13 verified programmatically against the flattened lock file; see lock_lookups."
+  },
+  {
+   "check": "extra: NBSP (U+00A0) preservation",
+   "result": "PASS — all 14 structural NBSPs (the empty layout cells '>\\xa0</td>') preserved exactly. EN's 15th NBSP was a word-joiner inside English prose (\"one dreadful\\xa0blow\"); it correctly disappears with the translated sentence since Chinese has no word gap there."
+  },
+  {
+   "check": "extra: build reproducibility",
+   "result": "PASS — the generator asserts an exact occurrence count for all 30 substitutions before applying any, and re-running it reproduces the delivered file byte-identically (sha256 4b9090292e0ed291…)."
+  }
+ ],
+ "lock_lookups": [
+  {
+   "english": "Speed",
+   "lang_key": "ALIENRPG.Speed",
+   "used": "速度"
+  },
+  {
+   "english": "Health",
+   "lang_key": "ALIENRPG.Health",
+   "used": "生命值"
+  },
+  {
+   "english": "Mobility / MOBILITY",
+   "lang_key": "ALIENRPG.Skillmobility",
+   "used": "机动"
+  },
+  {
+   "english": "Observation / OBSERVATION",
+   "lang_key": "ALIENRPG.Skillobservation",
+   "used": "侦察"
+  },
+  {
+   "english": "Armor Level",
+   "lang_key": "ALIENRPG.ArmorRating",
+   "used": "护甲等级"
+  },
+  {
+   "english": "Vs fire (in \"2 (1 Vs fire)\")",
+   "lang_key": "ALIENRPG.ArmorVsFire",
+   "used": "对火护甲 — rendered as 2（对火护甲 1）"
+  },
+  {
+   "english": "Acid Splash",
+   "lang_key": "ALIENRPG.SkillAcidSplash",
+   "used": "酸血飞溅"
+  },
+  {
+   "english": "CLOSE COMBAT",
+   "lang_key": "ALIENRPG.SkillcloseCbt",
+   "used": "近战"
+  },
+  {
+   "english": "armor piercing",
+   "lang_key": "ALIENRPG.ArmorPiercing",
+   "used": "破甲 (also RULINGS R2)"
+  },
+  {
+   "english": "panic roll",
+   "lang_key": "ALIENRPG.CREWPANIC",
+   "used": "恐慌检定"
+  },
+  {
+   "english": "stress (in \"+1 stress level\")",
+   "lang_key": "ALIENRPG.Stress",
+   "used": "压力 — rendered as 压力等级 +1"
+  },
+  {
+   "english": "Short range",
+   "lang_key": "ALIENRPG.Short",
+   "used": "近距离"
+  },
+  {
+   "english": "damage / 1 point of damage",
+   "lang_key": "ALIENRPG.DAMAGE",
+   "used": "伤害 — rendered as 1 点伤害, 基础伤害 N"
+  },
+  {
+   "english": "broken (\"even if not broken\")",
+   "lang_key": "ALIENRPG.Panic14 (Broken rendered 濒死)",
+   "used": "濒死"
+  },
+  {
+   "english": "Critical Injury",
+   "lang_key": "glossary_alien 'Critical Injury'",
+   "used": "重伤 (= TYPES.Item.critical-injury)"
+  },
+  {
+   "english": "Base Dice",
+   "lang_key": "glossary_alien 'Base Dice'",
+   "used": "基础骰子"
+  },
+  {
+   "english": "Stealth mode",
+   "lang_key": "glossary_alien 'Stealth Mode'",
+   "used": "潜行模式"
+  },
+  {
+   "english": "zone",
+   "lang_key": "glossary_alien 'Zone'",
+   "used": "区域"
+  },
+  {
+   "english": "shift",
+   "lang_key": "glossary_alien 'Shift'",
+   "used": "班"
+  },
+  {
+   "english": "Stage III / Stage IV",
+   "lang_key": "glossary_alien 'Stage III' / 'Stage IV'",
+   "used": "第三阶段 / 第四阶段"
+  },
+  {
+   "english": "Xenomorph / Xeno",
+   "lang_key": "glossary_alien 'Xenomorph'",
+   "used": "异形"
+  }
+ ],
+ "frozen_kept": [
+  "(none applicable) — no DO-NOT-TRANSLATE literal occurs in this unit's English",
+  "adjacent-register note: 'EV - Chestburster Attacks' and 'EV - Stalker, Scout and Drone Attacks' are the frozen RollTable names for these two creatures; they live in actor system.rTables and were NOT introduced or altered here",
+  "'Critical Injuries on Xenomorphs' prefix contract untouched — this unit names the injury in prose only, never the table"
+ ],
+ "glossary_gaps": [
+  {
+   "en": "Chestburster",
+   "proposed": "破胸体",
+   "why": "PENDING per glossary_alien.pending.json (moved out of the spine in v1.0; en-gated 0 across all 11,088 subtitle pairs, absent from Alien: Isolation, level-1 fan translation stops at ch.2 and the life cycle is ch.10). I adopted the recorded phase0_cn value 破胸体 (zh.wikipedia, ladder level 7) because PROJECT.md §7.2.0 itself writes it in its own illustrative sequence 卵 → 抱脸虫 → 破胸体 → 成体. Used 9x in this unit (h3 heading, stat-block header, attack-table caption, prose). ⚠ §7.2.0 point 2 (group coherence) is NOT satisfied: 抱脸虫 is owner-settled with 虫 while 破胸体 uses 体. Blast radius if the owner rules otherwise: this file + corerules Actors + the EV - Chestburster Attacks RollTable rows."
+  },
+  {
+   "en": "Drone",
+   "proposed": "工蜂异形",
+   "why": "PENDING per glossary_alien.pending.json. Adopted the recorded phase0_cn 工蜂异形 (terminology-web, confidence medium, from the wiki's bee metaphor) rather than coining a new form — the pending file explicitly forbids extending a two-point sample into a taxonomy. Used 4x (h3 heading, stat-block header, attack-table caption, prose 'the drone in stealth mode'). Shipped actor is 'EV - Drone (Stage IV Xenomorph)'."
+  },
+  {
+   "en": "Imp",
+   "proposed": "小鬼异形",
+   "why": "PENDING per glossary_alien.pending.json (sole recorded candidate 小鬼异形, marked 'composed this session, NOT a source'). One occurrence, in the Chestburster Terrorizing Hiss row. Shipped actor is 'EV - Imp (Stage III Xenomorph)'."
+  },
+  {
+   "en": "Impaled Thigh (critical injury name)",
+   "proposed": "大腿贯穿伤",
+   "why": "Not in glossary_alien or lang/cn.json. This is a named row of the 'Critical injuries' RollTable (result 25, EFFECTS 'To run becomes a slow action'), which another unit will translate. I rendered it in prose as “大腿贯穿伤” inside curly quotes so it reads as a table reference. HARD SYNC POINT: whatever the crit-table unit picks must be find-replaced here, or the pointer dangles."
+  },
+  {
+   "en": "Grapple / grappled",
+   "proposed": "擒抱",
+   "why": "Not in glossary_alien or lang/cn.json, yet it is a named Special Attack defined in ST-J04 ('Grapple: Your enemy cannot move or perform any actions except trying to break free'). I used 被擒抱. Should be settled together with the ST-J04 Special Attacks list."
+  },
+  {
+   "en": "Headbite",
+   "proposed": "咬头",
+   "why": "Signature Stage IV+ attack name, referenced self-consistently inside this unit ('a Headbite attack (#6 below)'). No source. Recurs in the corerules attack tables for Stalker/Scout/Soldier/Sentry, so it needs one global ruling."
+  },
+  {
+   "en": "Special Attacks (link label)",
+   "proposed": "特殊攻击",
+   "why": "Not a term dispute but a cross-unit sync: the label must equal the h3 that ST-J04 gives to 'Special Attacks' at data-hash=\"special-attacks\". 特殊攻击 is the near-inevitable rendering, but if ST-J04 picks anything else the link text goes stale."
+  }
+ ],
+ "open_issues": [
+  "UPSTREAM BROKEN DEEP LINK — needs a controller decision, and it is the one thing in this unit I could not fix from inside my own byte range. Two links target this page's Stage headings by hash: ST-J08 line 264 and ST-J26 both emit data-hash=\"stage-iii\" with the label 'Stage III: Chestburster', and ST-J08 line 54 / ST-J22 emit data-hash=\"stage-i\" for 'Stage I: Ovomorph (Egg)'. Neither hash can ever resolve: Foundry builds the page TOC with String#slugify({strict:false}), which turns those headings into 'stage-iii:-chestburster' and 'stage-i:-ovomorph-(egg)' — exactly the form corerules uses in its own data-hash values. So both links already scroll to the top in the shipped ENGLISH pack; this is not a translation regression. I followed the gate and stamped the true English slug (id=\"stage-iii:-chestburster\"), which keeps parity with English and keeps a mechanical 'id == slugify(english heading)' check green. If the controller would rather FIX it in the Chinese pack, the correct edit is in the LINKING units, not here: change data-hash=\"stage-iii\" -> \"stage-iii:-chestburster\" in ST-J08/ST-J26 and data-hash=\"stage-i\" -> \"stage-i:-ovomorph-(egg)\" in ST-J08/ST-J22. Do NOT instead set my heading id to the bare 'stage-iii' — that would silently diverge from the slug rule and invite a later 'fix' back.",
+  "STRAY '&gt;' PRESERVED — the Chestburster paragraph ends 'organ transformation. &gt;' in the English, a stray literal '>' with no markup role. It renders as a visible '>' mid-page. I kept it byte-for-byte rather than silently dropping a visible character. If the controller wants upstream typos cleaned, this is one; the fix is deleting ' &gt;' on line 43 of the .cn.html.",
+  "CROSS-CHUNK CONSISTENCY, chunks 3/4 and 4/4 — ST-J09 (not yet translated) holds the Stage I and Stage II stat blocks that share my label rows. When it lands, its Facehugger block must use the same renderings I used here: 速度 / 生命值 / 机动 / 侦察 / 护甲等级 / 酸血飞溅, and its 'Armor Level 1 (0 Vs Fire)' must read 1（对火护甲 0）to match my 2（对火护甲 1）. Its two h3 headings need id=\"stage-i:-ovomorph-(egg)\" and id=\"stage-ii:-facehugger\".",
+  "COMBAT TURN vs TIME-UNIT TURN — 'on its next turn' in the Ready To Kill row is a combat slot, not the 5–10 minute time unit. I rendered it 回合, following ST-J03.cn which already writes 你所行动的位置称为你的回合 and 异形在它的下一个回合移动. The settled vocabulary list maps Turn -> 节, which is the TIME unit; applying 节 here would be wrong. Worth pinning as a domain split so a later 'terminology unification' pass does not overwrite it.",
+  "REGISTER — nothing in this unit is class=\"evblockquoteCenter\" read-aloud prose in the narrative sense; the two evblockquoteCenter blocks are stat tables, and the two evexamplebox blocks are D6 attack tables (rules examples, not read-aloud). I therefore wrote the attack rows for a GM reading them out at the table — short clauses, verb-first, horror diction (破膛而出 / 喷得四处飞溅 / 怔立在原地 / 一记骇人的重击) — while keeping every number and mechanic term flat and scannable.",
+  "Reproducible build kept at C:/Users/Taka/AppData/Local/Temp/claude/C--Users-Taka-Desktop-fvtt/feb81eee-4341-49b2-9e89-4452e4e3e72f/scratchpad/mk_j10.py (generator, asserts an exact hit count for all 30 substitutions before applying any) and gate_j10.py (the 7-point self-gate). Re-running the generator reproduces the delivered file byte-identically."
+ ]
+}

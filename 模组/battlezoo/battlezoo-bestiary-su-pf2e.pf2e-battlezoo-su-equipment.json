@@ -1,0 +1,14 @@
+{
+  "label": "装备\nEquipment",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {},
+  "entries": {
+    "Liquid Euphoria": {
+      "name": "液态狂喜 Liquid Euphoria",
+      "description": "<p><strong>启动</strong> 交互</p>\n<hr />\n<p>熟练的炼金术士可以从欣快泥浆怪中提取油脂，制成一种易燃液体，其蒸气可被吸入以获得强烈的快乐，尽管副作用可能很糟。</p>\n<p><strong>豁免</strong> @Check[type:fortitude|dc:21]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 1小时</p>\n<p><strong>阶段 1</strong> 对抗恐惧与情绪效果的意志豁免获得+2物品加值（10分钟）</p>\n<p><strong>阶段 2</strong> @Compendium[pf2e.conditionitems.Stupefied]{Stupefied 2}，@Compendium[pf2e.conditionitems.Clumsy]{Clumsy 2}（1分钟）</p>\n<p><strong>阶段 3</strong> @Compendium[pf2e.conditionitems.Confused]{Confused}（1小时）</p>\n<p><strong>Activate</strong> Interact</p>\n<hr />\n<p>Skilled alchemists can extract the oil from a euphoria ooze to make a flammable liquid whose vapors can be inhaled for intense joy, though the side effects can be nasty.</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:21]</p>\n<p><strong>Onset</strong> 1 minute</p>\n<p><strong>Maximum Duration</strong> 1 hour</p>\n<p><strong>Stage 1</strong> +2 item bonus to Will saves against fear and emotion effects (10 minutes)</p>\n<p><strong>Stage 2</strong> @Compendium[pf2e.conditionitems.Stupefied]{Stupefied 2}, @Compendium[pf2e.conditionitems.Clumsy]{Clumsy 2} (1 minute)</p>\n<p><strong>Stage 3</strong> @Compendium[pf2e.conditionitems.Confused]{Confused} (1 hour)</p>"
+    }
+  }
+}

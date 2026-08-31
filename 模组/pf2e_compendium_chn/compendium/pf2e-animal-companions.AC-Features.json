@@ -1,0 +1,452 @@
+{
+    "label": "动物伙伴特性 Features",
+    "entries": {
+        "Advanced Maneuver": {
+            "name": "进阶战技 Advanced Maneuver",
+            "description": " "
+        },
+        "Anchored Incorporeality": {
+            "name": "被锚定虚体 Anchored Incorporeality",
+            "description": "<p>大多数幽灵束缚于他们死亡、埋葬之地，而另一些则会被发现束缚于具体的物品，例如一块特定的宝石、一片衣物、一个宠物项圈，或是他们居住地的一块石头。这些物品，被称为锚定物，对于幽灵生前意义重大，甚至对于他们的死亡和难忘之事而言至关重要。</p>\n<p>一个被锚定虚体生物具有虚体特征，意味着它可以穿过物理形态的生物并且这类生物能穿过它。他无法尝试基于力量的检定（例如@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapple}）一个实体生物，并且实体生物也无法对它进行相同的检定。即使是虚体，一个被锚定虚体生物无法离开他的锚定物超出60尺，并且必须与锚定物存在效果线。这一般会让其无法像其他虚体生物一样穿过墙壁，一个被锚定虚体生物对所有伤害不具备抗性，也不能免疫精准伤害。</p>\n<p>一个拥有被锚定虚体的动物伙伴或魔宠的角色可以通过特定仪式将锚定物转变为一个新的物品。与伙伴协商创造一个新的锚定物需要花费1星期。一个知道这种技艺的角色可能将其运用在一个幽灵束缚之地能力（或相似限制）上以将其与锚定物相连，而非固定地点。</p>"
+        },
+        "Angelic Avenger": {
+            "name": "天界复仇者 Angelic Avenger",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 8, 感知 12, 魅力 10; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Angelic Emissary": {
+            "name": "天界密使 Angelic Emissary",
+            "description": "<p>力量 12, 敏捷 18, 体质 12, 智力 10, 感知 12, 魅力 14; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Angelic Mercy": {
+            "name": "天使慈悲 Angelic Mercy",
+            "description": "<p>你的幻灵的天使力量让他能够如其他多数强大的天使一样缓和众多病症。你的幻灵可以每日一次以神术内在法术的形式施展9环级的<em>@UUID[Compendium.pf2e.spells-srd.Item.SUKaxVZW2TlM8lu0]{净化苦难 Cleanse Affliction}</em>、<em>@UUID[Compendium.pf2e.spells-srd.Item.SUKaxVZW2TlM8lu0]{净化苦难 Cleanse Affliction}</em>、<em>@UUID[Compendium.pf2e.spells-srd.Item.EfFMLVbmkBWmzoLF]{清神醒脑 Clear Mind}</em>和<em>@UUID[Compendium.pf2e.spells-srd.Item.BCuHKrDeJ4eq53M6]{稳固脚步 Sure Footing}</em>。</p>"
+        },
+        "Anger Aura": {
+            "name": "愤怒灵光 Anger Aura",
+            "description": "<p>你的幻灵将愤怒从自身渗出，形成了环绕自身的灵光，能点燃周围生物的怒火，让它们的防御因失控的愤怒而崩溃。你的幻灵获得一个20尺的愤怒灵光，具有灵光、情绪、惑控系、精神以及异能特征。任何灵光内生物的抗力，包括你、你的盟友、你的敌人、以及你的幻灵，都减少等同于3+幻灵体质调整值的数值。你的幻灵能够花费1个具有专注特征的单动作抑制愤怒。这会减少灵光的效果，只会影响你的幻灵。它也可以再次使用该动作重新释放完整效果的灵光。处于野蛮人狂暴，沸腾狂怒或类似可以引导愤怒的能力中的生物不受愤怒灵光的影响。</p>"
+        },
+        "Animal Companion": {
+            "name": "动物伙伴 Animal Companion",
+            "description": "<p>以下是幼年动物伙伴的基础数据，为大多数角色获得的第一只动物伙伴。你依照所选择的动物种类来调整这些数据。动物伙伴在计算调整值和DC时与你一样，但有一点不同：它只能在速度和AC上获得物品加值（其AC最大物品加值为+3）。随着你等级提升，你可以依照211页所述来进阶动物伙伴从而使得它变得更强。</p><p>动物伙伴的初始数据如下。</p><ul><li><strong>等级 Level：</strong>动物伙伴等级与你相同。</li><li><strong>熟练度 Proficiencies：</strong>你的动物伙伴在无武装攻击，无甲防御，动物护甲，所有豁免，察觉，特技，和运动上受训。动物伙伴不能使用需要高等智慧的能力，如@UUID[Compendium.pf2e.actionspf2e.Item.tHCqgwjtQtzNqVvd]或解译文书，即便它在相应的技能上受训，除非它具有一种特化允许它这么做。</li><li><strong>属性调整值 Attribute Modifiers：</strong> 动物伙伴的初始属性调整值在数据表中列出。</li><li><strong>生命值 Hit Points：</strong>你的动物伙伴从其种类中获得族裔生命值，外加你每等级给予其6加上其体质调整值的生命值。</li></ul>"
+        },
+        "Badger Rage": {
+            "name": "獾之狂暴 Badger Rage",
+            "description": "<p>在狂暴期间，獾受到下述效果的影响。</p>\n<p>它的啮咬攻击造成4点额外伤害，爪抓攻击造成2点额外伤害。</p>\n<p>它的AC承受-1的减值。</p>\n<p>它不能使用带有专注特征的动作，除非它们同时也带有狂暴特征。动物伙伴即使在狂暴中也能进行搜索动作。</p>"
+        },
+        "Beast's Charge": {
+            "name": "野兽冲锋 Beast's Charge",
+            "description": "<p>你的幻灵对敌人进行凶猛的冲锋或猛扑，让它能够迅速接战。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.ITQghUQFhbYpD2QM]{野兽冲锋 Beast's Charge}行动。</p>\n<p>你的幻灵向前冲刺，并借助动能增加幻灵的攻击的力量。你的幻灵行走两次，并在之后进行打击，只要幻灵从起始位置远离了至少20尺，且完全走在一条直线上，则这次攻击骰上获得+1环境加值。</p>"
+        },
+        "Blasphemous Decree": {
+            "name": "亵渎裁决 Blasphemous Decree",
+            "description": "<p>你的恶魔吐出无法描述的词语，缠绕着它关联的罪恶。它可以每日一次以9环级法术的形式施展邪恶的<em>@UUID[Compendium.pf2e.spells-srd.Item.sX2o0HH4RjJDAZ8C]{神圣裁决 Divine Decree}</em>。你不受判决影响，即使你不邪恶。在19级，这变成了10环级的神圣裁决。</p>"
+        },
+        "Breath Weapon": {
+            "name": "吐息 Breath Weapon",
+            "description": "<p>你的幻灵拥有强大的喷吐武器，可以定期对你的敌人造成巨大的破坏。它获得喷吐武器行动。从酸蚀、寒冷、电击、火焰、虚能、穿刺、或毒素中选择一种伤害类型，并从@Template[line|distance:60]或@Template[cone|distance:30]中选择一种区域。除非你选择了穿刺伤害，否则喷吐武器和幻灵都获得对应伤害类型的特征。</p>"
+        },
+        "Breath Weapon (Acid)": {
+            "name": "喷吐武器-酸蚀 Breath Weapon (Acid)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[acid]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Cold)": {
+            "name": "喷吐武器-寒冷 Breath Weapon (Cold)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[cold]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Electricity)": {
+            "name": "喷吐武器-电击 Breath Weapon (Electricity)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[electricity]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Fire)": {
+            "name": "喷吐武器-火焰 Breath Weapon (Fire)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[fire]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Negative)": {
+            "name": "喷吐武器-虚能 Breath Weapon (Negative)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[void]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Piercing)": {
+            "name": "喷吐武器-穿刺 Breath Weapon (Piercing)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[piercing]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Breath Weapon (Poison)": {
+            "name": "喷吐武器-毒素 Breath Weapon (Poison)",
+            "description": "<p>你的幻灵喷出破坏性的能量波。幻灵对区域内的所有生物造成[[/r 1d6[poison]]]伤害，需要对抗你法术DC的基础反射豁免。区域和伤害类型为幻灵取得该能力时所选的类型。你的幻灵在接下来的[[/r 1d4 #Breath Weapon Cooldown]]{1d4轮}内无法再次使用喷吐武器。</p>\n<p>在3级以及之后的每2级，伤害提升1d6。</p>\n<p>@Template[cone|distance:30]</p>\n<p>@Template[line|distance:60]</p>"
+        },
+        "Brutal Beast": {
+            "name": "凶蛮野兽 Brutal Beast",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 8, 感知 12, 魅力 10; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Charisma Boost": {
+            "name": "魅力提升 Charisma Boost",
+            "description": " "
+        },
+        "Constitution Boost": {
+            "name": "体质提升 Constitution Boost",
+            "description": " "
+        },
+        "Construct Companion": {
+            "name": "构装伙伴 Construct Companion",
+            "description": " "
+        },
+        "Construct Heart": {
+            "name": "构装之心 Construct Heart",
+            "description": "<p>你的构装幻灵与你的生命力量直接相连，这将其渲染成了一种活生生的生物，因此容易受到许多只影响活物的病症，尽管它仍然对这些效果保有一些抵抗力。它没有构装体通常的免疫力，但在对抗死亡效果、疾病、死灵系、以及毒素效果的豁免骰中获得+2环境加值。该加值也适用于造成@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]或恶心的效果。另外，它的星界精华形成的血只会缓慢流出，只需要成功通过DC 10的<span data-pf2-check=\"flat\" data-pf2-dc=\"10\" data-pf2-show-dc=\"owner\">纯骰检定</span>就能移除持续流血伤害（在接受了特定有效的看护后改为<span data-pf2-check=\"flat\" data-pf2-dc=\"5\" data-pf2-show-dc=\"owner\">纯骰检定</span>）。</p>"
+        },
+        "Creeping Plant": {
+            "name": "蜿蜒植物 Creeping Plant",
+            "description": "<p>力量 12, 敏捷 18, 体质 16, 智力 8, 感知 14, 魅力 10; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Cunning Dragon": {
+            "name": "狡诈龙 Cunning Dragon",
+            "description": "<p>力量 12, 敏捷 18, 体质 12, 智力 14, 感知 10, 魅力 12; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Demonic Strikes": {
+            "name": "恶魔打击 Demonic Strikes",
+            "description": "<p>你的幻灵的打击被深渊所腐化，灌注了纯粹的邪恶和狡诈的混乱。幻灵的无武装攻击造成额外1点邪秽伤害；这个额外伤害只能伤害圣洁生物，或对邪秽伤害具有弱点的生物。另外，选择幻灵的一种造成物理伤害的无武装攻击；它获得多用特征，由你选择获得多用B，多用P，或多用S。</p>"
+        },
+        "Devotion Aura": {
+            "name": "奉献灵光 Devotion Aura",
+            "description": "<p>你们长期共同作战，你的幻灵变得如初衷一般全力以赴地保护你和你的盟友。它获得20尺奉献灵光，其具有防护系、灵光以及异能特征。当灵光范围内的某个盟友承受伤害，你可以将伤害减去幻灵的体质调整值。你失去减去伤害数值一半（取低）的生命值。如果造成的伤害低于体质调整值，计算结果基于你实际阻挡的伤害数值。</p>"
+        },
+        "Dexterity Boost": {
+            "name": "敏捷提升 Dexterity Boost",
+            "description": " "
+        },
+        "Draconic Frenzy": {
+            "name": "龙之狂怒 Draconic Frenzy",
+            "description": "<p>你的幻灵可以进行凶残的突袭，并有可能恢复喷吐武器的使用能力。你的幻灵获得@UUID[Compendium.pf2e-animal-companions.AC-Features.HiVt4B5bE2hi0FWc]{龙之狂怒 Draconic Frenzy}行动。</p>\n<p>你的幻灵用主要无武装攻击进行一次打击，并用次要无武装攻击进行两次打击（顺序任意）。如果这些攻击中的任意一个对敌人造成重击，幻灵立刻恢复喷吐武器的使用能力。</p>"
+        },
+        "Drain Life": {
+            "name": "汲取生命 Drain Life",
+            "description": "<p>你与幻灵的链接供养着它，但它依然渴望生者的生命要素，无论是通过血液还是纯粹的要素。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.3Ns5BmFpAcoGQIY5]{汲取生命 Drain Life}动作。</p>\n<p>你的幻灵攻击一个生物并汲取其部分生命力以反哺你们共有的链接。你的幻灵打击一个活着的敌人。如果打击命中并造成伤害，目标必须进行一次强韧豁免，以决定后续效果。一旦重击，敌人使用比其掷骰结果差一级的结果。</p>\n<hr />\n<p><strong>大成功</strong> 无效果。</p>\n<p><strong>成功</strong> 你的幻灵汲取了少量生命力。敌人额外受到数值等于你等级一半的虚能伤害。</p>\n<p><strong>失败</strong> 你的幻灵汲取了足以让其满足的生命力。敌人额外受到数值等于你等级一半的虚能伤害，并@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。你的幻灵获得等于敌人等级数值的临时生命值，持续1分钟。</p>\n<p><strong>大失败</strong> 你的幻灵获得了不可估量的生命力，让其精力爆发。如同失败，但是敌人@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}并且临时生命值等于两倍敌人等级的数值。</p>"
+        },
+        "Dutiful Retaliation": {
+            "name": "尽忠反击 Dutiful Retaliation",
+            "description": "<p>你的幻灵对你的存在极其尊敬，并将它不移的忠心延伸到你身上，攻击任何胆敢伤害你的人。你的幻灵获得@UUID[Compendium.pf2e-animal-companions.AC-Features.4NuAF8jxWDWzia9Z]{尽忠反击 Dutiful Retaliation}反应。</p>\n<p><strong>触发</strong> 离你15尺内的一名敌人用一次打击命中了你，并对你造成了伤害。</p>\n<p><strong>需求</strong> 你的幻灵在你的15尺范围内。</p>\n<hr />\n<p>你的幻灵本能地放出灵质能量，允许他对胆敢伤害你的敌人回敬一次打击。你的幻灵对触发的敌人进行一次近战无武装打击，即使该敌人不在幻灵的触及内。</p>"
+        },
+        "Effect: Seething Frenzy": {
+            "name": "效果：沸腾狂怒 Seething Frenzy",
+            "description": "<p>生物在AC上承受-2减值。</p>"
+        },
+        "Eidolon": {
+            "name": "幻灵 Eidolon",
+            "description": " "
+        },
+        "Eidolon Ability": {
+            "name": "幻灵能力 Eidolon Ability",
+            "description": "<p>幻灵开始时学会幻灵类别对应的初始能力。</p>"
+        },
+        "Eidolon Ability Boosts (10th)": {
+            "name": "幻灵属性提升 Eidolon Ability Boosts (10级）",
+            "description": " "
+        },
+        "Eidolon Ability Boosts (15th)": {
+            "name": "幻灵属性提升 Eidolon Ability Boosts (15级）",
+            "description": " "
+        },
+        "Eidolon Ability Boosts (20th)": {
+            "name": "幻灵属性提升 Eidolon Ability Boosts (20级）",
+            "description": " "
+        },
+        "Eidolon Ability Boosts (5th)": {
+            "name": "幻灵属性提升 Eidolon Ability Boosts (5级）",
+            "description": " "
+        },
+        "Eidolon Defensive Expertise": {
+            "name": "幻灵防御精通 Eidolon Defensive Expertise",
+            "description": "<p>你的幻灵提升了回避攻击的能力。幻灵在无甲防御上的熟练等级提升至专家。</p>"
+        },
+        "Eidolon Defensive Mastery": {
+            "name": "幻灵防御大师 Eidolon Defensive Mastery",
+            "description": "<p>你的幻灵更难以被袭击。幻灵在无甲防御上的熟练等级提升至大师。</p>"
+        },
+        "Eidolon Symbiosis": {
+            "name": "幻灵共生 Eidolon Symbiosis",
+            "description": "<p>你与幻灵之间的联结得到了强化，根据幻灵类型，幻灵获得了一项新能力，见每个幻灵条目中幻灵能力的描述。</p>"
+        },
+        "Eidolon Transcendence": {
+            "name": "超凡幻灵 Eidolon Transcendence",
+            "description": "<p>你与幻灵之间了联结强化至了巅峰，根据其类型，幻灵获得了一项强力的新能力，见每个幻灵条目中幻灵能力的描述。该能力也将幻灵的一项属性值提升2点。</p>"
+        },
+        "Eidolon Unarmed Expertise": {
+            "name": "幻灵无武装精通 Eidolon Unarmed Expertise",
+            "description": "<p>你的幻灵更加擅长使用无武装攻击。幻灵的无武装攻击的熟练等级提升至专家。</p>"
+        },
+        "Eidolon Unarmed Mastery": {
+            "name": "幻灵无武装大师 Eidolon Unarmed Mastery",
+            "description": "<p>你的幻灵确实掌握了无武装攻击的精髓。幻灵在无武装攻击上的熟练等级提升至大师。</p>"
+        },
+        "Eidolon Weapon Specialization": {
+            "name": "幻灵武器专精 Eidolon Weapon Specialization",
+            "description": "<p>你的幻灵掌握了如何使用无武装攻击造成更大的伤害。幻灵在使用专家熟练度的无武装攻击时造成2点额外伤害。该伤害在大师熟练度时提升至3点，在传奇熟练度时提升至4点。</p>"
+        },
+        "Enraged Assassin": {
+            "name": "怨愤刺客 Enraged Assassin",
+            "description": "<p>力量 14, 敏捷 18, 体质 16, 智力 10, 感知 8, 魅力 12; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Fey Chicanery": {
+            "name": "妖精花招 Fey Chicanery",
+            "description": "<p>你的妖精的脑袋里装满了诡计，能将魔法的防护力转变为你们共享的生命力，在绝望的情况下也能从其后备口袋中掏出预备方案。在你的每日准备中，你的幻灵能够施展@UUID[Compendium.pf2e.spells-srd.Item.WG91Z5TiR6oO5FOw]{触发术 Contingency}法术。它所选择的4环级法术必须来自原能或妖精赠礼法术表，而且必须是常见的或其他你能接触到的法术。</p>"
+        },
+        "Fey Gift Spells": {
+            "name": "妖精赠礼法术 Fey Gift Spells",
+            "description": "<p>你的幻灵用惑控系和幻术系魔法扩展了你的原能法术，让你们两者都能运用妖精的魅惑魔力。当你添加法术到法术库时，除了从原能法术表中选择外，你还能从奥术法术表中选择有幻术或心灵特征的法术。和往常一样，当你将不同根源的法术添加到你的法术列表时，你仍然是原能施法者，因此你的所有法术都是原能法术。</p><p>你的幻灵获得@UUID[Compendium.pf2e.feats-srd.Item.WfbmFsRxbVyzMmCz]召唤师专长，即使还没满足先决条件的等级，且它在原能戏法外还能选择妖精赠礼的戏法。像其他获得指定名称的专长的情况一样，你不能将魔法替身重训为其他专长。</p>"
+        },
+        "Fey Mischief": {
+            "name": "妖精捣蛋 Fey Mischief",
+            "description": "<p>的幻灵的妖精魔法变得更加强力且顽皮。你的幻灵获得@UUID[Compendium.pf2e.feats-srd.Item.b1eGMNjBY3iqIt2S]{魔法导师 Magical Adept}专长，即使还没满足先决条件的等级，而且除了原能法术外还能选择妖精赠礼法术表的法术。</p>"
+        },
+        "Field of Roots": {
+            "name": "根生领域 Field of Roots",
+            "description": "<p>你的幻灵知道如何将根深入地底并阻碍敌人。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.4ZCaD8Y817JjbrX2]{根生领域 Field of Roots}行动。</p>\n<p>你的幻灵将根植入地底，纠缠并可能伤害所有附近的敌人。所有在幻灵触及内的敌人承受伤害，类型和数值相当于幻灵伤害最高的打击，且具体效果根据反射豁免结果确定。任何持续性的豁免效果持续到敌人成功逃脱或离开了幻灵的触及。使用根生领域后，你的幻灵陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，直到它进行了一个具有操作特征的单动作与地面分离；这也会终止敌人身上来自根生领域的剩余效果。</p>\n<hr />\n<p><strong>大成功</strong> 敌人不受影响。</p>\n<p><strong>成功</strong> 敌人不承受伤害，但在速度上承受-10尺环境减值。</p>\n<p><strong>失败</strong> 敌人承受一半的伤害，速度承受-10尺环境减值，以及，在他的每个回合结束时，再次承受一半的伤害。</p>\n<p><strong>大失败</strong> 敌人被禁足，承受完整的伤害，以及，在他的每个回合结束时，再次承受完整的伤害。</p>"
+        },
+        "Fleet Beast": {
+            "name": "疾驰野兽 Fleet Beast",
+            "description": "<p>力量 14, 敏捷 18, 体质 16, 智力 8, 感知 12, 魅力 10; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Furious Strike": {
+            "name": "狂怒打击 Furious Strike",
+            "description": "<p>你的幻灵将愤怒引导进一次狂怒的攻击。它进行一次近战打击，且在计算多重攻击减值时记为两次攻击。如果这次打击命中，你的幻灵造成一个额外的武器伤害骰，并在伤害掷骰上获得+1环境加值。</p>\n<p>如果你有至少10级，提升至额外两个骰子以及+2环境加值；如果你有至少18级，提升至额外三个骰子以及+3环境加值。</p>"
+        },
+        "Greater Eidolon Specialization": {
+            "name": "高等幻灵专精 Greater Eidolon Specialization",
+            "description": "<p>你的幻灵从武器专精中获得的伤害增加到4点，大师是6点，传奇是8点。</p>"
+        },
+        "Growing Vines": {
+            "name": "藤蔓生长 Growing Vines",
+            "description": "<p>你的幻灵的藤蔓和枝条长得更长。幻灵所有的近战无武装攻击获得长触及特征。</p>"
+        },
+        "Guardian Plant": {
+            "name": "守卫植物 Guardian Plant",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 8, 感知 12, 魅力 10; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Hallowed Strikes": {
+            "name": "崇圣打击 Hallowed Strikes",
+            "description": "<p>你幻灵的攻击被天界灌注了神圣的慈悲力量。你的幻灵的无武装攻击获得圣洁特征，并对邪秽生物和拥有圣洁弱点的生物额外造成1点精魂伤害。此外，你的幻灵在用其无武装攻击进行非致命攻击时不会承受-2环境减值。</p>"
+        },
+        "Hidden Watcher": {
+            "name": "隐藏守望 Hidden Watcher",
+            "description": "<p>你的幻灵能将你们二者都从视野中消去。每小时一次，它可以对你，对它，或同时对你们二者施展@UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{隐形术 Invisibility}。如果该法术目标为你们二者，则你们中的任意一人进行敌意动作时法术都会终止。</p>"
+        },
+        "Intelligence Boost": {
+            "name": "智力提升 Intelligence Boost",
+            "description": " "
+        },
+        "Marauding Dragon": {
+            "name": "劫掠龙 Marauding Dragon",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 10, 感知 10, 魅力 10; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Mindless Companion": {
+            "name": "无心智伙伴 Mindless Companion",
+            "description": "<p>一些不死伙伴是无心智的。无心智特征让他们如常免疫所有心灵效果。一个无心智伙伴的受训技能只能是特技和运动，并且其不能在其他技能上受训。即使无心智伙伴获得了在战斗中无需命令就能有限行动的能力，例如从成年动物伙伴专长，它也只能重复上一次命令的行动；它无法自行采取新的行动。一个无心智伙伴无法获得提升其智力或赋予其在特技和运动以外技能获益的特化能力，并且它无法使用和受益于动物伙伴的那些一般需要生物具有心智、能够思考、做出选择的专长和其他选项。当存在疑问时，由GM决定无心智伙伴能够使用那些能力。</p>"
+        },
+        "Negative Essence": {
+            "name": "虚能要素 Negative Essence",
+            "description": "<p>你的不死幻灵与你的生命力直接相连，赋予它一种介于生死之间的模糊状态。其使他如生者一般，因此让其会被许多只会困扰生者的病痛所影响，然而它依然具有针对这些效果的抗性。幻灵具有虚能治疗，意味着它从治疗不死者的虚能效果中获取治疗并被伤害不死生物的命能效果中受伤。他不具备一个不死生物的常规免疫能力，但它在对抗死亡、疾病、毒素效果和只以不死生物为目标的非伤害类效果时，豁免骰获得 +2 环境加值。额外的，它的暗蚀要素让其更容易凝固伤口。幻灵在移除持续流血伤害时的纯骰检定DC为10（在获得特别有效的援助时则为5）。</p>"
+        },
+        "Negative Healing": {
+            "name": "虚能治疗 Void Healing",
+            "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+        },
+        "Primal Roar": {
+            "name": "原始咆哮 Primal Roar",
+            "description": "<p>你的幻灵释放出原始的怒吼或其他与幻灵形态相符的令人恐惧的噪音。你的幻灵对能听见咆哮的30尺内的每个敌人进行威吓检定以@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]。这次挫败士气不会因语言不通而承受减值。</p>"
+        },
+        "Primary (1d6, deadly d8, finesse)": {
+            "name": "主要攻击 Primary (1d6伤害, 致命d8, 娴熟）",
+            "description": " "
+        },
+        "Primary (1d6, fatal d10)": {
+            "name": "主要攻击 Primary (1d6伤害, 夺命d10)",
+            "description": " "
+        },
+        "Primary (1d6, forceful, sweep)": {
+            "name": "主要攻击 Primary (1d6伤害, 叠劲, 横扫）",
+            "description": " "
+        },
+        "Primary (1d8, disarm)": {
+            "name": "主要攻击 Primary (1d8伤害, 卸武）",
+            "description": " "
+        },
+        "Primary (1d8, nonlethal)": {
+            "name": "主要攻击 Primary (1d8伤害, 非致命）",
+            "description": " "
+        },
+        "Primary (1d8, shove)": {
+            "name": "主要攻击 Primary (1d8伤害, 推撞）",
+            "description": " "
+        },
+        "Primary (1d8, trip)": {
+            "name": "主要攻击 Primary (1d8伤害, 摔绊）",
+            "description": " "
+        },
+        "Reconfigured Evolution": {
+            "name": "重设进化 Reconfigured Evolution",
+            "description": "<p>你的构装幻灵十分容易重新配置，获得一项符合你们两者想象的额外进化。选择1个6级或更低的额外进化专长。你的幻灵获得该专长。你只要花费1天休整期，并成功通过<span data-pf2-check=\"crafting\" data-pf2-label=\"Reconfigured Evolution DC\" data-pf2-dc=\"@self.level\" data-pf2-show-dc=\"gm\">手艺</span>检定（DC为符合召唤师等级的标准DC），就能将该专长重训为其他任何6级或更低的进化专长。如果检定失败，你能在之后某天再次尝试。许多召唤师为该能力选择幻灵怒火专长。</p>"
+        },
+        "Rejuvenation": {
+            "name": "复苏 Rejuvenation",
+            "description": "<p>幻灵与你那非同寻常的链接让你们得以在被击败时复苏。每日一次，在你回合开始时你处于濒死状态，则你立刻获得等同于三倍你等级数值的生命值并苏醒。（你的受伤状态如常增加。）你可以立刻以一个自由动作显现你的幻灵。随后，你可以正常进行你的回合。</p>"
+        },
+        "Scout Construct": {
+            "name": "斥候构装体 Scout Construct",
+            "description": "<p>力量 14, 敏捷 18, 体质 16, 智力 12, 感知 10, 魅力 8; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Scribe of the Dead": {
+            "name": "亡者书吏 Scribe of the Dead",
+            "description": "<p>力量 12, 敏捷 18, 体质 12, 智力 14, 感知 12, 魅力 10; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Secondary Attack": {
+            "name": "次要攻击 Secondary Attack",
+            "description": " "
+        },
+        "Seething Frenzy": {
+            "name": "沸腾狂怒 Seething Frenzy",
+            "description": "<p>你的幻灵能驱动自己进入狂怒状态。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.7K6UJ3D3owmOQS03]{沸腾狂怒 Seething Frenzy}动作。</p>\n<p>你的幻灵的愤怒沸腾成了一种鲁莽、失控的狂怒。狂怒中，你的幻灵受到@UUID[Compendium.pf2e.spells-srd.Item.HStu2Yhw3iQER9tY]{激励幻灵 Boost Eidolon}的影响，并获得等同于你等级的临时生命值，但在AC上承受-2减值。你的幻灵无法自愿终止狂怒，或者在狂怒中开始另一个狂怒。暴怒持续1分钟，之后它会@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]1分钟，而且在1分钟内无法开始另一个狂怒 。</p>\n<p>@UUID[Compendium.pf2e-animal-companions.AC-Features.yE9n6h53psgbYThV]{效果：沸腾狂怒}</p>"
+        },
+        "Skirmisher Fey": {
+            "name": "妖精散兵 Skirmisher Fey",
+            "description": "<p>力量 14, 敏捷 18, 体质 14, 智力 10, 感知 10, 魅力 12; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Soul Guardian": {
+            "name": "灵魂守卫 Soul Guardian",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 10, 感知 12, 魅力 8; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Spirit Taker": {
+            "name": "招魂 Spirit Taker",
+            "description": "<p>你的幻灵十分擅长处理无躯体的灵魂以及让不死生物永眠。你的幻灵可以看到固态物体中的虚体生物，并能无惩罚地使用打击对其进行攻击；在固态物体中的虚体生物如果承受了来自你的幻灵的打击伤害，就会被从固态物体中推出到最近的开放空间，如果可能的话需要接近你的幻灵。</p>\n<p>另外，你的幻灵能瞄准或影响正在投射意识的生物（例如通过投影术）或占据其他生物的生物，即使它的身体在别的地方，但你的幻灵必须知道投射或占据的事实并选择这么做。</p>\n<p>最后，被你幻灵的打击摧毁的不死生物的灵魂会被直接送到骨园接受审判；拥有某种能自动回避该命运的能力的不死生物，例如拥有复生能力的幽灵，可以尝试一个针对你法术DC的反制检定以通过该能力回归。在这种情况下，它使用意志豁免调整值作为它的反制调整值。</p>"
+        },
+        "Spirit Touch": {
+            "name": "灵魂之触 Spirit Touch",
+            "description": "<p>你的幻灵的攻击具有招魂者伤害活物和死物的能力。你的幻灵的无武装打击能如幽冥性能符文一般影响虚体生物，并对活物造成额外1点虚能伤害，对不死生物造成额外1点命能伤害。</p>"
+        },
+        "Stalwart Guardian": {
+            "name": "坚定卫士 Stalwart Guardian",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 10, 感知 10, 魅力 10; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Steadfast Devotion": {
+            "name": "忠心不移 Steadfast Devotion",
+            "description": "<p>你的幻灵的献身精神令你的敌人极难扭曲它的意志。你的幻灵在针对所有对抗精神效果的豁免骰中获得+2环境加值，如果他在对抗这样的效果时投出了成功，则用大成功替换。如果你获得了共享决意职业特性，且你的幻灵在对抗精神效果时投出了大失败，则用失败替换。</p>"
+        },
+        "Strength Boost": {
+            "name": "力量提升 Strength Boost",
+            "description": " "
+        },
+        "Swift Protector": {
+            "name": "迅捷护卫 Swift Protector",
+            "description": "<p>力量 14, 敏捷 18, 体质 16, 智力 10, 感知 10, 魅力 10; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Tempter Demon": {
+            "name": "魅惑恶魔 Tempter Demon",
+            "description": "<p>力量 12, 敏捷 18, 体质 12, 智力 10, 感知 10, 魅力 16; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Tendril Strike": {
+            "name": "藤条打击 Tendril Strike",
+            "description": "<p>你的幻灵能伸出藤蔓和根须，攻击触及外的敌人。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.fNTyFkFxNCi5O5SE]{藤条打击 Tendril Strike}动作。</p>\n<p>你的幻灵将身体伸展到极限，攻击通常无法触及到的敌人。你的幻灵进行一次近战无武装打击，将这次打击的触及延伸5尺。如果这个无武装打击具有卸武、猛推或摔绊特征，幻灵也可以使用对应的动作取代打击。</p>"
+        },
+        "Traveler's Aura": {
+            "name": "旅者灵光 Traveler's Aura",
+            "description": "<p>你的幻灵散发出一种强大的灵光——就像是星界神使的一样——能在生物旅行时为其提供保护。该灵光具有防护系、灵光和神术特征。你的幻灵及其@Template[emanation|distance:20]范围内的盟友都不受严重炎热和寒冷的影响，你的幻灵永远不会对灵光范围内且等级低于自己生物@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>\n<p>当你获得超凡幻灵职业特性，这个灵光进化成星界神使的灵光的完整效果；你的幻灵及其灵光范围内的盟友都不受任何位面的环境伤害的影响，包括严重和极端的炎热和寒冷，以及其他更加罕见的危险。</p>"
+        },
+        "Trickster Fey": {
+            "name": "妖精诡术师 Trickster Fey",
+            "description": "<p>力量 12, 敏捷 18, 体质 12, 智力 12, 感知 8, 魅力 16; +1 AC (+4 敏捷上限）</p>"
+        },
+        "Ultimate Reconfiguration": {
+            "name": "究极重置 Ultimate Reconfiguration",
+            "description": "<p>你的构装幻灵变得极其容易定制。选择1个16级或更低的进化专长。你的幻灵获得该专长。你可以花费休整期，使用制作行动调整它，就如调整重设进化能力所提供的专长一样。许多召唤师为这个能力选择无寐感官。</p>"
+        },
+        "Undead Brute": {
+            "name": "不死狂暴者 Undead Brute",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 8, 感知 10, 魅力 12</p>"
+        },
+        "Undead Stalker": {
+            "name": "不死潜伏者 Undead Stalker",
+            "description": "<p>力量 14, 敏捷 18, 体质 16, 智力 8, 感知 12, 魅力 10</p>"
+        },
+        "Visions of Sin": {
+            "name": "罪恶异象 Visions of Sin",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你的幻灵在30尺内一个目标生物的心中召唤出其罪恶的景象，折磨并扰乱目标。目标必须进行一个意志豁免对抗你的法术DC，效果如下所示。该效果持续到你的下一回合结束，但你的幻灵可以使用1个具有专注特征的单动作将效果延长到你的再下一个回合结束（如维持法术），直到1分钟的最大持续时间。如果目标邪恶，则在豁免骰中承受-2环境减值。无论是否成功，目标都获得一天的临时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标无法使用反应。</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}而且无法使用反应。</p>\n<p><strong>大失败</strong> 和失败一样，而且目标也@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮。困惑无法被延长，但其他效果可以。</p>"
+        },
+        "Warrior Construct": {
+            "name": "战士构装体 Warrior Construct",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 12, 感知 10, 魅力 8; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Whirlwind Maul": {
+            "name": "旋风撕咬 Whirlwind Maul",
+            "description": "<p>你的幻灵暴力地摆动，伤害触及内的多个敌人。它获得@UUID[Compendium.pf2e-animal-companions.AC-Features.W4VCL85CO77MYkQH]{旋风撕咬 Whirlwind Maul}行动。</p>\n<p>你的幻灵对所有方向同时发动攻击。它对触及内的最多4名敌人进行1次近战无武装打击。幻灵可以对每个敌人选择不同的无武装攻击。每次攻击都会算入你的多重攻击减值，但直到幻灵完成全部攻击之前，减值都不会提升。</p>"
+        },
+        "Wisdom Boost": {
+            "name": "感知提升 Wisdom Boost",
+            "description": " "
+        },
+        "Wrathful Berserker": {
+            "name": "怒火狂战士 Wrathful Berserker",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 8, 感知 10, 魅力 12; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Wrecker Demon": {
+            "name": "毁坏恶魔 Wrecker Demon",
+            "description": "<p>力量 18, 敏捷 14, 体质 16, 智力 10, 感知 8, 魅力 12; +2 AC (+3 敏捷上限）</p>"
+        },
+        "Wyrm's Breath": {
+            "name": "巨龙吐息 Wyrm's Breath",
+            "description": "<p><strong>频率</strong> 每分钟一次</p>\n<hr />\n<p>你的幻灵聚集最强大的巨龙的力量，以令魔法喷吐变得更壮观。如果你的幻灵的下一个动作是使用喷吐武器，喷吐武器的伤害和范围都加倍。</p>"
+        },
+        "Gulp Blood": {
+            "description": "<p><strong>需求</strong> 水缚灵上一个动作是一次对敌人的成功啃咬攻击。</p>\n<hr />\n<p>水缚灵获得持续1轮的[[/r 2d8 #Temporary Hit Points]]{2d8}临时生命值，并且敌人受到[[/r 2d6[persistent,bleed]]]伤害。如果水缚灵具有特化，水缚灵取而代之获得[[/r 3d8 #Temporary Hit Points]]{3d8}临时生命值，并且目标受到[[/r 3d6[persistent,bleed]]]伤害。如果目标生物完全没有维持生命所需的体液，此能力可能不会生效，由GM决定。</p>"
+        },
+        "Adaptable Elemental": {
+            "description": "<p>力量 +1，敏捷 +4，体质 +3，智力 +0，感知 +1，魅力 +0；+1 AC（+4 敏捷上限）</p>",
+            "name": "适性元素 Adaptable Elemental"
+        },
+        "Elemental Burst": {
+            "name": "元素爆发 Elemental Burst",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p>你的幻灵从其身形中撕扯下一大块元素物质，并将其投掷到一群敌人身上。你的幻灵失去等同于你等级的生命值。在60尺距离内@Template[type:burst|distance:20]中的所有生物受到@Damage[(@actor.level - 1)d6]伤害，这需要进行你法术DC的基础反射豁免。你每超过7级一级就增加1d6伤害。如果你的幻灵是火元素，则伤害类型为火焰；如果你的幻灵不是火元素，则伤害类型与你幻灵的初始无武装攻击的物理伤害类型相同。元素爆发获得幻灵从元素核心获得的无武装攻击特征。</p>"
+        },
+        "Elemental Core": {
+            "name": "元素核心 Elemental Core",
+            "description": "<p>你的元素幻灵是由元素物质和凡人生命力量构成的混合物，对于能对凡人造成比元素生物更多伤害的具体效果，这种特性保护着他们。针对毒素、睡眠以及能造成@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]状态的效果，元素幻灵在豁免骰上获得+2环境加值。另外，他们的元素要素要比血肉更难以流血，所以在他们针对移除持续流血伤害的纯骰检定DC是10（在受到具体有效的援助时则为5）。为你的幻灵选择成为气、土、火、金、木或水元素。你的幻灵和他所有的无武装攻击获得对应元素的特征，并且根据你的选择，幻灵获得以下一种额外效果。</p>\n<p><strong>气 Air</strong>：你的幻灵是由气元素组成，轻如微风。你的幻灵可以在@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]，@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]，和@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]时跳出两倍的距离，并且不会受到坠落伤害。</p>\n<p><strong>土 Earth</strong>：你的幻灵是由土元素组成，难以强行移动。你的幻灵在对抗@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]时，其强韧或反射 DC 获得 +2 环境加值。此加值也适用于尝试将他击至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的法术或效果的豁免检定。此外，如果有任何效果会迫使它们移动10尺或更多，它们只会移动一半的距离。</p>\n<p><strong>火 Fire</strong>：你的幻灵是由火元素组成，燃烧着火焰的余烬。你的幻灵获得等同于你等级一半（最低为1）数值的火焰伤害抗力和同等的寒冷伤害和水特征弱点。</p>\n<p><strong>金 Metal</strong>：你的幻灵是由金元素组成，可以转换他们的金属形态进行战斗。你的幻灵学会了如何将金属转化为不同的武器形态，幻灵的一项初始近战无武装攻击获得多用钝击、穿刺或挥砍特征。</p>\n<p><strong>水 Water</strong>：你的幻灵是由水元素组成，游弋自如。你的幻灵获得两栖特征，使它们可以在水中和空气中呼吸，并免受在水下进行钝击和挥砍无武装打击的 -2 的减值。幻灵的陆地速度降低到15 尺，并且它们的获得25尺游泳速度。你可以选择两栖形态专长，如专长中所述将他的陆地速度提高到25尺。</p>\n<p><strong>木 Wood</strong>：你的幻灵是由木元素组成，当你汇集元素能量时，它们的活化树木形态会盘曲再生。你可以选择让你的幻灵获得植物特征。每当你再聚能时，你的幻灵恢复两倍于你等级数值的生命值。</p>"
+        },
+        "Elemental Maelstrom": {
+            "name": "元素漩涡 Elemental Maelstrom",
+            "description": "<p>你的幻灵暂时化身成一团由元素物质组成的漩涡，并在敌人之间横冲直撞。你的幻灵行走。在他移动的过程中，他可以尝试打击处于他触及范围内的每一个敌人。如果一个敌人不止一次出现在你的幻灵的触及范围内，你的幻灵只能对该敌人进行一次打击。这些攻击都会计入你幻灵的多重攻击减值，但直到所有攻击结束后才会增加减值。如果你的幻灵有对应速度，他们可以使用攀爬、飞行、或游泳取代行走。</p>"
+        },
+        "Primordial Elemental": {
+            "name": "本初元素 Primordial Elemental",
+            "description": "<p>力量 +4，敏捷 +2，体质 +3，智力 –1，感知 +1，魅力 +0；+2 AC（+3 敏捷上限）</p>"
+        },
+        "Follower": {
+            "name": "追随者 Follower"
+        },
+        "Brazen Swarm": {
+            "name": "侵袭集群 Brazen Swarm",
+            "description": "<p><em>力量</em> +4，<em>敏捷</em> +2，<em>体质</em> +3，<em>智力</em> +0，<em>感知</em> +0，<em>魅力</em> +0；+2 AC（+3 敏捷上限）</p>"
+        },
+        "Exploit Injury": {
+            "name": "趁虚而入 Exploit Injury"
+        }
+    },
+    "mapping": {
+        "description": "system.description.value",
+        "gmnote": "system.description.gm"
+    },
+    "folders": {
+        "Actions": "动作 Actions",
+        "Angel": "天使幻灵 Angel",
+        "Anger Phantom": "愤怒魅影幻灵 Anger Phantom",
+        "Beast": "魔兽幻灵 Beast",
+        "Construct": "构装幻灵 Construct",
+        "Demon": "恶魔幻灵 Demon",
+        "Devotion Phantom": "忠诚魅影幻灵 Devotion Phantom",
+        "Dragon": "龙类幻灵 Dragon",
+        "Eidolons": "幻灵 Eidolons",
+        "Elemental": "元素幻灵 Elemental",
+        "Fey": "精类幻灵 Fey",
+        "Followers": "追随者 Followers",
+        "Plant": "植物幻灵 Plant",
+        "Psychopomp": "招魂者幻灵 Psychopomp",
+        "Swarm": "集群幻灵 Swarm",
+        "Undead": "不死幻灵 Undead"
+    }
+}

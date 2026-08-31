@@ -1,0 +1,117 @@
+{
+  "folder": "NnAMbR7oItI0E9RL",
+  "name": "压制作祟 Suppress Haunt",
+  "type": "action",
+  "effects": [],
+  "system": {
+    "_migration": {
+      "version": 0.955,
+      "previous": null
+    },
+    "description": {
+      "value": "<p><strong>频率</strong> 每轮一次</p><p>你与一个进行中的复杂作祟互动，尝试压制它。进行一次宗教检定（或由 GM 裁定的另一项合适的检定）。GM 可能要求你位于特定位置、触碰特定物体，或满足其他条件才能进行此活动，这也可能为其追加操作 manipulate 或精神 mental 等特征。</p><p>检定的 DC 由你花费的动作数决定：</p><p><span class=\"action-glyph\">1</span> 该作祟等级的极难 DC</p><p><span class=\"action-glyph\">2</span> 该作祟等级的标准 DC</p><p><span class=\"action-glyph\">3</span> 该作祟等级的简单 DC</p><p>对于特别有效（或特别无效）的战术，GM 可以进一步调整 DC</p><p><strong>大成功</strong> 队伍获得 2 点压制点数（SP）</p><p><strong>成功</strong> 队伍获得 1 点 SP</p><p><strong>失败</strong> 你未能压制该作祟</p><p><strong>大失败</strong> 队伍失去 1 点 SP。如果队伍已经是 0 SP，则改为你在对抗该作祟下一次攻击时 AC 承受 -2 环境减值，或在你对抗该作祟某个能力的下一次豁免上承受同样的减值。</p><hr /><p>有些作祟无法被压制作祟彻底解除，而是需要完成某个其他目标。在这些情况下，当累积到足够的压制点数时，GM 可以暂时给该作祟的检定和 DC 一个减值，或让它的流程暂停一轮，或采取类似处理。</p>",
+      "gm": ""
+    },
+    "publication": {
+      "title": "",
+      "authors": "",
+      "license": "OGL",
+      "remaster": false
+    },
+    "rules": [
+      {
+        "key": "Note",
+        "selector": [
+          "skill-check"
+        ],
+        "title": "压制作祟",
+        "outcome": [
+          "criticalFailure"
+        ],
+        "text": "<hr><strong>大失败</strong> 队伍失去 1 点 SP。如果队伍已经是 0 SP，则改为你在对抗该作祟下一次攻击时 AC 承受 -2 环境减值，或在你对抗该作祟某个能力的下一次豁免上承受同样的减值。",
+        "predicate": [
+          "action:suppress-haunt"
+        ]
+      },
+      {
+        "key": "Note",
+        "selector": [
+          "skill-check"
+        ],
+        "title": "压制作祟",
+        "text": "<hr><strong>失败</strong> 你未能压制该作祟",
+        "predicate": [
+          "action:suppress-haunt"
+        ],
+        "outcome": [
+          "failure"
+        ]
+      },
+      {
+        "key": "Note",
+        "selector": [
+          "skill-check"
+        ],
+        "title": "压制作祟",
+        "text": "<hr><strong>成功</strong> 队伍获得 1 点 SP",
+        "predicate": [
+          "action:suppress-haunt"
+        ],
+        "outcome": [
+          "success"
+        ]
+      },
+      {
+        "key": "Note",
+        "selector": [
+          "skill-check"
+        ],
+        "title": "压制作祟",
+        "text": "<hr><strong>大成功</strong> 队伍获得 2 点压制点数（SP）",
+        "predicate": [
+          "action:suppress-haunt"
+        ],
+        "outcome": [
+          "criticalSuccess"
+        ]
+      }
+    ],
+    "slug": "suppress-haunt",
+    "traits": {
+      "otherTags": [],
+      "value": [
+        "concentrate"
+      ]
+    },
+    "actionType": {
+      "value": "action"
+    },
+    "actions": {
+      "value": 2
+    },
+    "category": "interaction",
+    "deathNote": false
+  },
+  "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Item.2G1BE6MnqHE3IDz8",
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "season-of-ghosts",
+      "uuid": "Item.2G1BE6MnqHE3IDz8",
+      "coreVersion": "13.351",
+      "systemId": "pf2e",
+      "systemVersion": "7.10.1"
+    },
+    "coreVersion": "13.351",
+    "systemId": "pf2e",
+    "systemVersion": "7.10.1",
+    "createdTime": 1772771788902,
+    "modifiedTime": 1772773751951,
+    "lastModifiedBy": "UmkW69tElQslax2y"
+  },
+  "ownership": {
+    "default": 0
+  }
+}

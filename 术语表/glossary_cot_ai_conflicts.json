@@ -1,0 +1,630 @@
+{
+  "meta": {
+    "vs_ref_glossary": 18,
+    "vs_existing_cot": 106
+  },
+  "vs_ref_glossary": [
+    {
+      "english": "Gear",
+      "ai_zh": "装备",
+      "glossary_zh": "道具"
+    },
+    {
+      "english": "ghost",
+      "ai_zh": "幽灵",
+      "glossary_zh": "幽灵（特征）"
+    },
+    {
+      "english": "ghoul",
+      "ai_zh": "食尸鬼",
+      "glossary_zh": "食尸鬼（特征）"
+    },
+    {
+      "english": "Hold of Belkzen",
+      "ai_zh": "贝尔克岑领",
+      "glossary_zh": "贝尔克赞堡垒"
+    },
+    {
+      "english": "Inner Sea",
+      "ai_zh": "内海地区",
+      "glossary_zh": "内海"
+    },
+    {
+      "english": "lines and veils",
+      "ai_zh": "界线与幕帘",
+      "glossary_zh": "底线和避讳"
+    },
+    {
+      "english": "mummy",
+      "ai_zh": "木乃伊",
+      "glossary_zh": "木乃伊（特征）"
+    },
+    {
+      "english": "Nex",
+      "ai_zh": "内克斯",
+      "glossary_zh": "奈克斯"
+    },
+    {
+      "english": "Nirmathas",
+      "ai_zh": "尼尔玛萨斯",
+      "glossary_zh": "涅玛萨斯"
+    },
+    {
+      "english": "phantom",
+      "ai_zh": "魅影",
+      "glossary_zh": "魅影（特征）"
+    },
+    {
+      "english": "Shining Crusade",
+      "ai_zh": "闪耀远征",
+      "glossary_zh": "闪耀远征军"
+    },
+    {
+      "english": "skeleton",
+      "ai_zh": "骷髅",
+      "glossary_zh": "骷髅（特征）"
+    },
+    {
+      "english": "Tar-Baphon",
+      "ai_zh": "塔-巴丰",
+      "glossary_zh": "塔巴丰"
+    },
+    {
+      "english": "vampire",
+      "ai_zh": "吸血鬼",
+      "glossary_zh": "吸血鬼（特征）"
+    },
+    {
+      "english": "Whispering Tyrant",
+      "ai_zh": "低语暴君",
+      "glossary_zh": "默语暴君"
+    },
+    {
+      "english": "wraith",
+      "ai_zh": "缚灵",
+      "glossary_zh": "缚灵（特征）"
+    },
+    {
+      "english": "X-Card",
+      "ai_zh": "X 卡",
+      "glossary_zh": "X卡片"
+    },
+    {
+      "english": "zombie",
+      "ai_zh": "丧尸",
+      "glossary_zh": "丧尸（特征）"
+    }
+  ],
+  "vs_existing_cot": [
+    {
+      "english": "Ascetivores",
+      "existing_zh": "嗜圣种",
+      "ai_zh": "苦食兽"
+    },
+    {
+      "english": "Ashes for Ozem",
+      "existing_zh": "献给奥泽姆的余烬",
+      "ai_zh": "焚尽奥泽姆"
+    },
+    {
+      "english": "Awareness",
+      "existing_zh": "警觉点数",
+      "ai_zh": "警觉度"
+    },
+    {
+      "english": "Aylunna Varvatos",
+      "existing_zh": "艾伦娜·瓦尔瓦托斯",
+      "ai_zh": "艾露娜·瓦瓦托斯"
+    },
+    {
+      "english": "Beirivelle Starshine",
+      "existing_zh": "贝里维尔·星光",
+      "ai_zh": "贝里维尔·星辉"
+    },
+    {
+      "english": "Body Barrier",
+      "existing_zh": "肉身屏障",
+      "ai_zh": "以身为障"
+    },
+    {
+      "english": "Breach",
+      "existing_zh": "跃浪击",
+      "ai_zh": "破水跃击"
+    },
+    {
+      "english": "breath of life",
+      "existing_zh": "生命之息",
+      "ai_zh": "生命吐息"
+    },
+    {
+      "english": "Broken Triumvirate",
+      "existing_zh": "破碎三司命",
+      "ai_zh": "破碎三位一体"
+    },
+    {
+      "english": "CHAINED NORN",
+      "existing_zh": "链缚纺命女",
+      "ai_zh": "锁链诺恩"
+    },
+    {
+      "english": "Change Shape",
+      "existing_zh": "变身",
+      "ai_zh": "变形"
+    },
+    {
+      "english": "Chernasardo Ranger",
+      "existing_zh": "切尔那萨多游侠",
+      "ai_zh": "切尔纳萨多游侠"
+    },
+    {
+      "english": "Cinderland Brews",
+      "existing_zh": "烬地佳酿",
+      "ai_zh": "烬地酿坊"
+    },
+    {
+      "english": "Claidius Barronmor",
+      "existing_zh": "克雷迪乌斯·巴隆莫",
+      "ai_zh": "克莱狄乌斯·巴隆莫尔"
+    },
+    {
+      "english": "Claw Feint",
+      "existing_zh": "爪击虚招",
+      "ai_zh": "爪击佯攻"
+    },
+    {
+      "english": "CLEANSING SUITE",
+      "existing_zh": "净化组件",
+      "ai_zh": "净化套间"
+    },
+    {
+      "english": "Copied Clutter",
+      "existing_zh": "复制杂物",
+      "ai_zh": "复制杂物雨"
+    },
+    {
+      "english": "Crumbling Ground",
+      "existing_zh": "碎地",
+      "ai_zh": "崩塌地面"
+    },
+    {
+      "english": "Devastating Blast",
+      "existing_zh": "毁灭爆震",
+      "ai_zh": "毁灭爆裂"
+    },
+    {
+      "english": "Dirgespire",
+      "existing_zh": "丧歌尖塔",
+      "ai_zh": "挽歌尖塔"
+    },
+    {
+      "english": "Disappearing Door",
+      "existing_zh": "消失的门",
+      "ai_zh": "消失之门"
+    },
+    {
+      "english": "Disperse",
+      "existing_zh": "分散",
+      "ai_zh": "散离"
+    },
+    {
+      "english": "DIVINE WARDEN OF IOMEDAE",
+      "existing_zh": "艾奥梅黛神圣守卫",
+      "ai_zh": "艾奥梅黛的神圣守卫"
+    },
+    {
+      "english": "Dortrot Ranch",
+      "existing_zh": "多托特牧场",
+      "ai_zh": "多特罗特牧场"
+    },
+    {
+      "english": "Draconic Frenzy",
+      "existing_zh": "龙之狂怒",
+      "ai_zh": "巨龙狂乱"
+    },
+    {
+      "english": "Dying Breath",
+      "existing_zh": "垂死之息",
+      "ai_zh": "将死之息"
+    },
+    {
+      "english": "Eastside Docks",
+      "existing_zh": "东码头",
+      "ai_zh": "东侧码头"
+    },
+    {
+      "english": "Ectoplasmic Form",
+      "existing_zh": "灵质形态",
+      "ai_zh": "灵浆形态"
+    },
+    {
+      "english": "Endless Eats",
+      "existing_zh": "永不停口",
+      "ai_zh": "无尽食铺"
+    },
+    {
+      "english": "Engerra",
+      "existing_zh": "萤火灵",
+      "ai_zh": "恩格拉"
+    },
+    {
+      "english": "Evni Zongnoss",
+      "existing_zh": "艾夫尼·宗诺斯",
+      "ai_zh": "埃芙妮·宗格诺斯"
+    },
+    {
+      "english": "Faction-Bound",
+      "existing_zh": "派系誓缚",
+      "ai_zh": "派系束缚"
+    },
+    {
+      "english": "Fair Feathered Ranch",
+      "existing_zh": "羽丰牧场",
+      "ai_zh": "锦羽牧场"
+    },
+    {
+      "english": "Final Words of Doom",
+      "existing_zh": "毁灭终言",
+      "ai_zh": "末日遗言"
+    },
+    {
+      "english": "Final Words of Wisdom",
+      "existing_zh": "智慧终言",
+      "ai_zh": "智慧遗言"
+    },
+    {
+      "english": "Firefly’s Remembrance",
+      "existing_zh": "萤火虫之忆",
+      "ai_zh": "萤火追忆"
+    },
+    {
+      "english": "Flaying Flurry",
+      "existing_zh": "急速剥皮",
+      "ai_zh": "剥皮乱击"
+    },
+    {
+      "english": "Freedom’s Hall",
+      "existing_zh": "自由厅",
+      "ai_zh": "自由大厅"
+    },
+    {
+      "english": "Frightful Battle Cry",
+      "existing_zh": "惊惧战吼",
+      "ai_zh": "骇人战吼"
+    },
+    {
+      "english": "Gallowspire",
+      "existing_zh": "绞首塔",
+      "ai_zh": "绞刑尖塔"
+    },
+    {
+      "english": "Garrholdion",
+      "existing_zh": "信念灵卫",
+      "ai_zh": "加尔霍迪昂"
+    },
+    {
+      "english": "Ghostly Blades",
+      "existing_zh": "鬼灵战刃",
+      "ai_zh": "幽魂刀刃"
+    },
+    {
+      "english": "Gilded Tongue",
+      "existing_zh": "金舌",
+      "ai_zh": "镀金之舌"
+    },
+    {
+      "english": "Gonnal Linorax",
+      "existing_zh": "戈纳尔·利诺拉克斯",
+      "ai_zh": "贡纳尔·利诺拉克斯"
+    },
+    {
+      "english": "GRASPING GAUNTLET",
+      "existing_zh": "攫抓爪",
+      "ai_zh": "攫握护手"
+    },
+    {
+      "english": "Griffon Reach",
+      "existing_zh": "狮鹫高地",
+      "ai_zh": "狮鹫岗"
+    },
+    {
+      "english": "Hail of Arrows",
+      "existing_zh": "箭雨",
+      "ai_zh": "箭雨齐发"
+    },
+    {
+      "english": "Harlot Queen",
+      "existing_zh": "娼妓女皇",
+      "ai_zh": "娼后"
+    },
+    {
+      "english": "Heart Bloodstone of Arazni",
+      "existing_zh": "心血石",
+      "ai_zh": "阿拉兹尼的心血石"
+    },
+    {
+      "english": "Herald’s Tower",
+      "existing_zh": "令使之塔",
+      "ai_zh": "传令官高塔"
+    },
+    {
+      "english": "Honor’s Field",
+      "existing_zh": "荣誉田野",
+      "ai_zh": "荣誉原野"
+    },
+    {
+      "english": "Iron Command",
+      "existing_zh": "严酷铁律",
+      "ai_zh": "钢铁号令"
+    },
+    {
+      "english": "Knight Vigilant Dedication",
+      "existing_zh": "警醒骑士入门",
+      "ai_zh": "警戒骑士奉献"
+    },
+    {
+      "english": "Last Guard",
+      "existing_zh": "终焉卫士",
+      "ai_zh": "最后守卫"
+    },
+    {
+      "english": "Liver Bloodstone of Arazni",
+      "existing_zh": "肝血石",
+      "ai_zh": "阿拉兹尼的肝脏血石"
+    },
+    {
+      "english": "Lung Bloodstone of Arazni",
+      "existing_zh": "肺血石",
+      "ai_zh": "阿拉兹尼的肺血石"
+    },
+    {
+      "english": "Mirmicette",
+      "existing_zh": "觅宝精",
+      "ai_zh": "米尔米凯特"
+    },
+    {
+      "english": "Moldering Steed",
+      "existing_zh": "腐朽战马",
+      "ai_zh": "腐朽战驹"
+    },
+    {
+      "english": "Molgah Dawnspromise",
+      "existing_zh": "莫尔加·黎明之誓",
+      "ai_zh": "莫尔加·晨誓"
+    },
+    {
+      "english": "Muscular Leap",
+      "existing_zh": "肌肉跳跃",
+      "ai_zh": "肌力飞跃"
+    },
+    {
+      "english": "Newdock",
+      "existing_zh": "新埠区",
+      "ai_zh": "新港区"
+    },
+    {
+      "english": "Niskar Balefire",
+      "existing_zh": "尼斯卡·烽火",
+      "ai_zh": "尼斯卡尔·灾焰"
+    },
+    {
+      "english": "Oceanius",
+      "existing_zh": "欧申尼乌斯",
+      "ai_zh": "欧辛尼乌斯"
+    },
+    {
+      "english": "OSSUARY WARDEN",
+      "existing_zh": "骨冢守卫",
+      "ai_zh": "骸骨看守"
+    },
+    {
+      "english": "Ozem-bound garrholdion",
+      "existing_zh": "奥泽姆誓缚信念灵卫",
+      "ai_zh": "誓约效忠奥泽姆骑士团的信念灵卫"
+    },
+    {
+      "english": "Parchot",
+      "existing_zh": "帕尔乔特",
+      "ai_zh": "帕尔肖特"
+    },
+    {
+      "english": "Phantom Mount",
+      "existing_zh": "魅影坐骑",
+      "ai_zh": "幻影坐骑"
+    },
+    {
+      "english": "Phase Lurch",
+      "existing_zh": "灵界蹒跚",
+      "ai_zh": "位面突进"
+    },
+    {
+      "english": "Pick a Lock",
+      "existing_zh": "开锁",
+      "ai_zh": "撬锁"
+    },
+    {
+      "english": "Priestly Affairs",
+      "existing_zh": "牧师遗志",
+      "ai_zh": "牧师遗务"
+    },
+    {
+      "english": "Pristine Produce",
+      "existing_zh": "生态农产",
+      "ai_zh": "纯鲜农产"
+    },
+    {
+      "english": "Queenie’s Combs",
+      "existing_zh": "奎妮蜂坊",
+      "ai_zh": "奎妮的梳匣"
+    },
+    {
+      "english": "Radiant Fire",
+      "existing_zh": "辐辉之火",
+      "ai_zh": "辉耀之火"
+    },
+    {
+      "english": "radiant veranallia",
+      "existing_zh": "辐辉圣藤使",
+      "ai_zh": "辉耀维拉娜莉亚"
+    },
+    {
+      "english": "Raise Defenses",
+      "existing_zh": "提升防御",
+      "ai_zh": "升起防御"
+    },
+    {
+      "english": "Reactive Strike",
+      "existing_zh": "反应打击",
+      "ai_zh": "借机攻击"
+    },
+    {
+      "english": "Respite Row",
+      "existing_zh": "喘息街",
+      "ai_zh": "歇息街"
+    },
+    {
+      "english": "River Jump",
+      "existing_zh": "水中跳跃",
+      "ai_zh": "河跃"
+    },
+    {
+      "english": "Rubble",
+      "existing_zh": "石砾",
+      "ai_zh": "瓦砾伪装"
+    },
+    {
+      "english": "Ruinous Weapons",
+      "existing_zh": "破灭武器",
+      "ai_zh": "毁灭武装"
+    },
+    {
+      "english": "Sacrilegious Aura",
+      "existing_zh": "亵渎灵光",
+      "ai_zh": "渎神灵光"
+    },
+    {
+      "english": "Seize Thief",
+      "existing_zh": "擒住盗贼",
+      "ai_zh": "擒拿窃贼"
+    },
+    {
+      "english": "SELDEG BHEDLIS EMBITTERED",
+      "existing_zh": "塞尔德格·贝德利斯",
+      "ai_zh": "愤恨的塞尔德格·贝德利斯"
+    },
+    {
+      "english": "Shuffle Forces",
+      "existing_zh": "蹒跚大军",
+      "ai_zh": "调换阵列"
+    },
+    {
+      "english": "Slithering Vine",
+      "existing_zh": "爬行藤蔓",
+      "ai_zh": "滑行藤蔓"
+    },
+    {
+      "english": "Sow and Sprout",
+      "existing_zh": "播种发芽",
+      "ai_zh": "播种与萌发"
+    },
+    {
+      "english": "Spleen Bloodstone of Arazni",
+      "existing_zh": "脾血石",
+      "ai_zh": "阿拉兹尼的脾血石"
+    },
+    {
+      "english": "Splinter Officer",
+      "existing_zh": "碎灵军官",
+      "ai_zh": "裂片军官"
+    },
+    {
+      "english": "Splintered Ground",
+      "existing_zh": "粉碎地面",
+      "ai_zh": "碎骨地面"
+    },
+    {
+      "english": "Squeeze",
+      "existing_zh": "挤入",
+      "ai_zh": "挤压穿行"
+    },
+    {
+      "english": "Stelemora",
+      "existing_zh": "藤塑精",
+      "ai_zh": "斯特勒莫拉"
+    },
+    {
+      "english": "Sunlight Powerlessness",
+      "existing_zh": "阳光失能",
+      "ai_zh": "日光无力"
+    },
+    {
+      "english": "Swap Fates",
+      "existing_zh": "调换命运",
+      "ai_zh": "命运互换"
+    },
+    {
+      "english": "Synchronized Step",
+      "existing_zh": "步调一致",
+      "ai_zh": "同步步伐"
+    },
+    {
+      "english": "Tail Spin",
+      "existing_zh": "甩尾",
+      "ai_zh": "尾巴旋舞"
+    },
+    {
+      "english": "Tallusian",
+      "existing_zh": "塔砾兽",
+      "ai_zh": "塔卢西安"
+    },
+    {
+      "english": "Timber Town",
+      "existing_zh": "木屋镇",
+      "ai_zh": "木镇"
+    },
+    {
+      "english": "Tower District",
+      "existing_zh": "塔楼区",
+      "ai_zh": "高塔区"
+    },
+    {
+      "english": "Treasured Things General Store",
+      "existing_zh": "珍奇百货店",
+      "ai_zh": "珍物杂货店"
+    },
+    {
+      "english": "Undead Steed",
+      "existing_zh": "不死战马",
+      "ai_zh": "亡灵战驹"
+    },
+    {
+      "english": "Ustalin Lodge",
+      "existing_zh": "乌斯卡林分部",
+      "ai_zh": "乌斯塔林会馆"
+    },
+    {
+      "english": "Viora Skedrin",
+      "existing_zh": "维奥拉·斯凯德林",
+      "ai_zh": "薇奥拉·斯凯德林"
+    },
+    {
+      "english": "Watchmoor",
+      "existing_zh": "望沼",
+      "ai_zh": "守望沼港"
+    },
+    {
+      "english": "Wear Skin",
+      "existing_zh": "穿皮",
+      "ai_zh": "披皮"
+    },
+    {
+      "english": "Whispering Tyrant",
+      "existing_zh": "默语暴君",
+      "ai_zh": "低语暴君"
+    },
+    {
+      "english": "Ysmett",
+      "existing_zh": "伊斯梅特",
+      "ai_zh": "伊丝梅特"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "openai_api_key": "",
+  "openai_base_url": "https://api.openai.com/v1",
+  "model": "gpt-5.4",
+
+  "mode": "dual_pdf",
+
+  "en_pdf": "COT/PZO14003E - Claws Of The Tyrant.pdf",
+  "zh_pdf": "COT/暴君之爪+Claws+Of+The+Tyrant.pdf",
+  "zh_extra_files": [
+    "COT/[预排版]PZO14003E - Claws Of The Tyrant.docx",
+    "COT/《暴君之爪》 冒险工具箱.txt",
+    "COT/《暴君之爪》 冒险工具箱（怪物部分）.txt",
+    "COT/塞尔德格·贝德利斯 Seldeg Bhedlis.txt"
+  ],
+
+  "reference_glossary": "glossary.json",
+  "existing_glossary": "glossary_cot.json",
+
+  "en_page_start": 4,
+  "en_page_end": null,
+  "zh_page_start": 4,
+  "zh_page_end": null,
+  "page_offset": 0,
+
+  "pages_per_batch": 6,
+  "max_workers": 1,
+  "target_rpm": 30,
+  "max_retries": 3,
+  "max_chars_per_batch": 24000,
+
+  "cache_enabled": true,
+  "cache_path": "glossary_extract_cache_cot.json",
+  "log_path": "glossary_extract_cot.log",
+  "output_json": "glossary_cot_ai.json",
+  "output_candidates_json": "glossary_cot_ai_candidates.json",
+  "output_conflicts_json": "glossary_cot_ai_conflicts.json"
+}

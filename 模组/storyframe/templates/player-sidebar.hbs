@@ -1,0 +1,133 @@
+<div class="player-sidebar-container">
+  <!-- Tab Navigation -->
+  <div class="tab-navigation">
+    <button type="button"
+            class="tab-btn {{#unless currentTab}}active{{/unless}}{{#if hasActiveChallenges}} {{else}} disabled{{/if}}"
+            data-action="switchTab"
+            data-tab="challenge"
+            {{#unless hasActiveChallenges}}disabled{{/unless}}>
+      <i class="fas fa-scroll" aria-hidden="true"></i>
+      <span>{{localize "STORYFRAME.UI.Labels.Challenges"}}</span>
+      {{#if activeChallenges.length}}
+        <span class="notification-badge-challenges">{{activeChallenges.length}}</span>
+      {{/if}}
+    </button>
+    <button type="button"
+            class="tab-btn {{#if currentTab}}active{{/if}} {{#unless actorRollGroups.length}}disabled{{/unless}}"
+            data-action="switchTab"
+            data-tab="rolls">
+      <i class="fas fa-dice-d20" aria-hidden="true"></i>
+      <span>{{localize "STORYFRAME.UI.Labels.Rolls"}}</span>
+      {{#if actorRollGroups.length}}
+        <span class="notification-badge-rolls">{{totalPendingRolls}}</span>
+      {{/if}}
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    {{#if hasActiveChallenges}}
+    <section class="challenge-tab {{#if currentTab}}hidden{{/if}}" data-tab-content="challenge">
+      <div class="tab-scroll-content">
+        {{#each activeChallenges}}
+        <div class="player-challenge-card {{#if this.collapsed}}collapsed{{/if}}" data-challenge-id="{{this.id}}">
+          <div class="player-challenge-header"
+               data-action="toggleChallengeCollapse"
+               role="button"
+               tabindex="0"
+               aria-expanded="{{#unless this.collapsed}}true{{else}}false{{/unless}}">
+            <i class="fas fa-chevron-{{#if this.collapsed}}right{{else}}down{{/if}} collapse-icon" aria-hidden="true"></i>
+            {{#if this.image}}
+            <img src="{{this.image}}" alt="{{this.name}}" class="challenge-image-small" loading="lazy">
+            {{/if}}
+            <h3 class="challenge-title-compact">{{this.name}}</h3>
+          </div>
+
+          {{#unless this.collapsed}}
+          <div class="player-challenge-content">
+            <div class="challenge-options-list">
+              {{#each this.options}}
+              <div class="challenge-option-group">
+                {{#if this.name}}<div class="option-name">{{this.name}}</div>{{/if}}
+                <div class="option-description">{{this.description}}</div>
+                <div class="option-skills-grid">
+                  {{#each this.skillOptionsDisplay}}
+                  <button type="button"
+                          class="challenge-btn-grid {{#unless this.canRoll}}proficiency-locked{{/unless}}"
+                          data-action="selectChallengeOption"
+                          data-option-id="{{../id}}"
+                          data-skill="{{this.skill}}"
+                          data-check-type="{{this.checkType}}"
+                          data-dc="{{this.dc}}"
+                          data-action-slug="{{this.action}}"
+                          data-is-secret="{{this.isSecret}}"
+                          {{#unless this.canRoll}}disabled{{/unless}}
+                          data-tooltip="{{this.tooltip}}"
+                          aria-label="{{this.ariaLabel}}">
+                    {{#unless this.canRoll}}<i class="fas fa-lock proficiency-lock-icon" aria-hidden="true"></i>{{/unless}}
+                    <i class="fas {{this.skillIcon}}" aria-hidden="true"></i>
+                    <span class="skill-name-short">{{#if this.actionName}}{{this.actionName}}{{else}}{{this.skillName}}{{/if}}</span>
+                    {{#if this.showDC}}<span class="dc-badge-grid" data-difficulty="{{this.dcDifficulty}}">{{this.dc}}</span>{{/if}}
+                  </button>
+                  {{/each}}
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+          {{/unless}}
+        </div>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}}
+
+    {{#if actorRollGroups.length}}
+    <section class="rolls-tab {{#unless currentTab}}hidden{{/unless}}" data-tab-content="rolls">
+      <div class="tab-scroll-content">
+        {{#each actorRollGroups}}
+          <div class="actor-roll-group {{#if this.hasAllowOnlyOne}}allow-only-one-group{{/if}}">
+            <div class="actor-header-compact">
+              <img src="{{this.actorImg}}" alt="{{this.actorName}}" loading="lazy" class="actor-avatar-small">
+              <span class="actor-name">{{this.actorName}}</span>
+              {{#if this.hasAllowOnlyOne}}
+                <span class="allow-only-one-badge">
+                  <i class="fas fa-hand-pointer" aria-hidden="true"></i>
+                  {{localize "STORYFRAME.UI.Labels.ChooseOne"}}
+                </span>
+              {{/if}}
+            </div>
+            <div class="rolls-grid">
+              {{#each this.rolls}}
+                <button type="button"
+                        class="roll-btn-grid"
+                        data-action="executeRoll"
+                        data-request-id="{{this.id}}"
+                        data-check-type="{{this.checkType}}"
+                        data-tooltip="{{this.tooltip}}"
+                        aria-label="{{this.ariaLabel}}">
+                  <i class="fas {{this.skillIcon}}" aria-hidden="true"></i>
+                  <span class="skill-name-short">{{this.skillName}}{{#if this.actionName}}<span class="action-name-micro"> ({{this.actionName}})</span>{{/if}}</span>
+                  {{#if this.dc}}<span class="dc-badge-grid" data-difficulty="{{this.dcDifficulty}}">{{this.dc}}</span>{{/if}}
+                </button>
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}}
+
+    {{#unless hasActiveChallenges}}
+      {{#unless actorRollGroups.length}}
+      <div class="empty-state-sidebar">
+        <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+        <div class="empty-message">
+          <p>{{localize "STORYFRAME.UI.Labels.NoPendingActions"}}</p>
+          <span class="empty-hint">{{localize "STORYFRAME.UI.Labels.WaitingForGM"}}</span>
+        </div>
+      </div>
+      {{/unless}}
+    {{/unless}}
+  </div>
+</div>

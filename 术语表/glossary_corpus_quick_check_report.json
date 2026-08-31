@@ -1,0 +1,667 @@
+{
+  "summary": {
+    "target_files": 18,
+    "corpus_pairs": 3768,
+    "glossary_total_terms_checked": 4621,
+    "en_hit_count": 3199,
+    "zh_hit_count": 172,
+    "both_hit_count": 171,
+    "none_hit_count": 1421,
+    "en_hit_rate": 69.23,
+    "zh_hit_rate": 3.72,
+    "both_hit_rate": 3.7,
+    "none_hit_rate": 30.75,
+    "base_glossary_count": 4399,
+    "extra_glossary_count": 4621,
+    "merged_glossary_count": 4621,
+    "conflict_count": 4399
+  },
+  "missing_samples_first_80": [
+    {
+      "en_term": "A Chat With Tauric",
+      "zh_values": [
+        "与陶里克交谈"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Conflagration of Lumé",
+      "zh_values": [
+        "卢梅之焚"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Conversation with Jasper",
+      "zh_values": [
+        "与贾斯珀的交谈"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Hum of Warning",
+      "zh_values": [
+        "警示嗡鸣"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Peculiar Encampment",
+      "zh_values": [
+        "一处古怪的营地"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Song for Lady Stonecraft",
+      "zh_values": [
+        "献给石艺女士的一首歌"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Troubled Tradeway",
+      "zh_values": [
+        "一条麻烦重重的贸易道"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "A Watchful Spire",
+      "zh_values": [
+        "一座警戒的尖塔"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abduct",
+      "zh_values": [
+        "掳走"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aberin",
+      "zh_values": [
+        "阿伯林"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aberin's Folly",
+      "zh_values": [
+        "阿贝林的愚举"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aburyx",
+      "zh_values": [
+        "阿布里克斯"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyss",
+      "zh_values": [
+        "深渊"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyss Attunement",
+      "zh_values": [
+        "深渊调谐"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyss-Warped Undaunted",
+      "zh_values": [
+        "深渊扭曲的无畏者"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal",
+      "zh_values": [
+        "深渊语",
+        "深渊之物",
+        "深渊实体",
+        "深渊存在",
+        "深渊"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Echo",
+      "zh_values": [
+        "深渊回响"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Echoes",
+      "zh_values": [
+        "深渊回响"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Eels",
+      "zh_values": [
+        "深渊鳗"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Sensitivity",
+      "zh_values": [
+        "深渊敏感性"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Shear",
+      "zh_values": [
+        "深渊裂斩"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssal Whispers",
+      "zh_values": [
+        "深渊低语"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Abyssals",
+      "zh_values": [
+        "深渊裔"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Academy Dropout",
+      "zh_values": [
+        "学院辍学生"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Adair",
+      "zh_values": [
+        "阿代尔"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Adamantine Breastplate",
+      "zh_values": [
+        "精金胸甲"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Adelyne",
+      "zh_values": [
+        "阿德琳"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Adonia's Gazebo",
+      "zh_values": [
+        "阿多尼娅凉亭"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aedir",
+      "zh_values": [
+        "艾迪尔"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aedir Signalpost",
+      "zh_values": [
+        "艾迪尔信号哨站"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aedir Wellstone",
+      "zh_values": [
+        "艾狄尔井石"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aetherial",
+      "zh_values": [
+        "以太灵"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Affiliation",
+      "zh_values": [
+        "所属"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "After Rescuing Jasper",
+      "zh_values": [
+        "救出贾斯珀之后"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aftermath",
+      "zh_values": [
+        "余波"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aggressive",
+      "zh_values": [
+        "侵略性强"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agraband",
+      "zh_values": [
+        "阿格拉班德"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agraband's Kithara",
+      "zh_values": [
+        "阿格拉班德的西萨拉琴"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agraband's Lunar Charm",
+      "zh_values": [
+        "阿格拉班德的月华护符"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agrimage",
+      "zh_values": [
+        "农艺法师"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "agrimage",
+      "zh_values": [
+        "农法师",
+        "农艺法师"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agrimagic",
+      "zh_values": [
+        "农艺魔法"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "agrimagic",
+      "zh_values": [
+        "农法",
+        "农艺魔法"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Agrimagical Artifact:Everbloom",
+      "zh_values": [
+        "农魔法神器：永绽之花"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Akazea",
+      "zh_values": [
+        "阿卡泽娅"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Akon",
+      "zh_values": [
+        "阿肯"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Akon Attunement",
+      "zh_values": [
+        "阿肯调谐"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Alar",
+      "zh_values": [
+        "阿拉尔"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Alarm",
+      "zh_values": [
+        "警报"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Alchemical Decontamination Station",
+      "zh_values": [
+        "炼金净化站"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Altyra",
+      "zh_values": [
+        "阿尔提拉"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Altyra Lineage",
+      "zh_values": [
+        "阿尔提拉血统"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amalthea Stonecraft",
+      "zh_values": [
+        "阿玛尔忒亚·石艺"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amalthea's Manuscript",
+      "zh_values": [
+        "阿玛尔忒亚的手稿"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amaranthine Archives",
+      "zh_values": [
+        "绛华档案库"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amaranthine Archives Artifacts",
+      "zh_values": [
+        "安玛兰辛档案馆神器"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amazing Brambles",
+      "zh_values": [
+        "惊人荆棘"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ambassador",
+      "zh_values": [
+        "大使"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ambassador Tezran",
+      "zh_values": [
+        "特兹兰大使"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ambusher",
+      "zh_values": [
+        "伏击者"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amphibious",
+      "zh_values": [
+        "两栖"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Amphibious Adaptability",
+      "zh_values": [
+        "水陆适应性"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anachraenum",
+      "zh_values": [
+        "阿纳克瑞纽姆"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anachraenum Medallion",
+      "zh_values": [
+        "阿纳克拉埃努姆徽章"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ancalen",
+      "zh_values": [
+        "安卡伦"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anchorite Marine",
+      "zh_values": [
+        "隐修士陆战队员"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ancient Lunar Shrine",
+      "zh_values": [
+        "远古月神殿"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ancient Shent Gate",
+      "zh_values": [
+        "远古申特之门"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Ankarist",
+      "zh_values": [
+        "安卡里斯特"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Annotated Yakoshta Mine Map",
+      "zh_values": [
+        "带注释的雅科什塔矿井地图"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anrak Mausoleum",
+      "zh_values": [
+        "安拉克陵墓"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Antechamber",
+      "zh_values": [
+        "前厅"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anterior Chamber",
+      "zh_values": [
+        "前房"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Antifungal Draught",
+      "zh_values": [
+        "抗真菌药剂"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Antimagic Susceptibility",
+      "zh_values": [
+        "反魔法易感性"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Anydrath",
+      "zh_values": [
+        "安伊德拉斯"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aparon Bay",
+      "zh_values": [
+        "阿帕隆湾"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Apothecary Arvoda",
+      "zh_values": [
+        "药剂师阿尔沃达"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Apprentice",
+      "zh_values": [
+        "学徒"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    },
+    {
+      "en_term": "Aran",
+      "zh_values": [
+        "阿兰"
+      ],
+      "en_hit": false,
+      "zh_hit": false
+    }
+  ]
+}

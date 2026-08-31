@@ -1,0 +1,499 @@
+import StandardCheckDialog from "./standard-check-dialog.mjs";
+
+/**
+ * @typedef DiceBoon
+ * @property {string} [id]                    An identifier for the source of boon or bane. This is auto-populated.
+ * @property {string} label                   A string label for the source of the boon or bane.
+ * @property {number} number                  The number of boons or banes applied by this source.
+ */
+
+/**
+ * @typedef DiceCheckBonuses
+ * @property {Record<string, DiceBoon>} [boons] An object of advantageous boons applied to the roll.
+ *                                            Keys of the object are identifiers for sources of boons.
+ * @property {Record<string, DiceBoon>} [banes] An object of disadvantageous banes applied to the roll.
+ *                                            Keys of the object are identifiers for sources of banes.
+ * @property {number} [ability=0]             The ability score which modifies the roll, up to a maximum of 12
+ * @property {number} [skill=0]               The skill bonus which modifies the roll, up to a maximum of 12
+ * @property {number} [enchantment=0]         An enchantment bonus which modifies the roll, up to a maximum of 6
+ * @property {string} [messageMode]           The messageMode which should be used if this check is displayed in chat
+ */
+
+/**
+ * @typedef {DiceCheckBonuses} StandardCheckData
+ * @property {string} actorId                 The ID of the actor rolling the check
+ * @property {number} dc                      The target difficulty of the check
+ * @property {string} type                    The type of check being performed
+ * @property {number} totalBoons              The computed total number of boons applied to the roll
+ * @property {number} totalBanes              The computed total number of banes applied to the roll
+ */
+
+/**
+ * @typedef {object} DiceResultContext
+ * @property {string} outcome                         The localization key shown on the primary result line.
+ * @property {number} total                           The overall roll total.
+ * @property {StandardCheckData} data                 The configured roll data.
+ * @property {{denom: string, result: number}[]} pool The rendered dice pool.
+ * @property {number} diceTotal                       The sum of the dice before bonuses.
+ * @property {object|undefined} damage                The rendered damage breakdown, or undefined if not applicable.
+ * @property {string} targetLabel                     Secondary text shown on the primary result line.
+ * @property {number} dc                              The difficulty class the roll is checked against.
+ * @property {string} defenseType                     The defense type label shown alongside the target value.
+ * @property {string} formula                         The rendered roll formula.
+ * @property {string} cssClass                        CSS classes applied to the rendered dice check wrapper.
+ */
+
+/**
+ * The standard 3d8 dice pool check used by the system.
+ * The rolled formula is determined by:
+ *
+ * @param {string|StandardCheckData} formula  This parameter is ignored
+ * @param {StandardCheckData} [data]          An object of roll data, containing the following optional fields
+ */
+export default class StandardCheck extends Roll {
+  constructor(formula, data) {
+    if ( typeof formula === "object" ) {
+      data = formula;
+      formula = ""; // Replaced later
+    }
+    super(formula, data);
+    this.actor = game.actors.get(this.data.actorId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Define the default data attributes for this type of Roll
+   * @type {object}
+   */
+  static defaultData = {
+    actorId: null,
+    ability: 0,
+    banes: {},
+    boons: {},
+    dc: 15,
+    enchantment: 0,
+    skill: 0,
+    type: "general",
+    criticalSuccessThreshold: undefined,
+    criticalFailureThreshold: undefined,
+    messageMode: undefined
+  };
+
+  /* -------------------------------------------- */
+
+  /**
+   * Which Dialog subclass should display a prompt for this Roll type?
+   * @type {StandardCheckDialog}
+   */
+  static dialogClass = StandardCheckDialog;
+
+  /* -------------------------------------------- */
+
+  /**
+   * The HTML template path used to render dice checks of this type
+   * @type {string}
+   */
+  static CHAT_TEMPLATE = "systems/crucible/templates/dice/standard-check-chat.hbs";
+
+  /* -------------------------------------------- */
+
+  /**
+   * The defense type label used when rendering this check.
+   * @type {string}
+   */
+  static DEFENSE_TYPE = "DC";
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default timeout for remote roll requests.
+   * @type {number}
+   */
+  static QUERY_TIMEOUT = 120_000;
+
+  /* -------------------------------------------- */
+
+  /**
+   * The Actor performing the check.
+   * @type {CrucibleActor}
+   */
+  actor;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Did this check result in a success?
+   * @returns {boolean}
+   */
+  get isSuccess() {
+    if ( !this._evaluated ) return undefined;
+    return this.total > this.data.dc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Did this check result in a critical success?
+   * @returns {boolean}
+   */
+  get isCriticalSuccess() {
+    if ( !this._evaluated ) return undefined;
+    return this.total > (this.data.dc + (this.data.criticalSuccessThreshold ?? 6));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Did this check result in a failure?
+   * @returns {boolean}
+   */
+  get isFailure() {
+    if ( !this._evaluated ) return undefined;
+    return this.total <= this.data.dc;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Did this check result in a critical failure?
+   * @returns {boolean}
+   */
+  get isCriticalFailure() {
+    if ( !this._evaluated ) return undefined;
+    return this.total <= (this.data.dc - (this.data.criticalFailureThreshold ?? 6));
+  }
+
+  /* -------------------------------------------- */
+  /*  Roll Configuration                          */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _prepareData(data={}) {
+    if ( ("boons" in data) && (typeof data.boons !== "object") ) {
+      console.warn("StandardCheck received boons passed as a number instead of an object");
+      data.boons = {special: {label: "Special", number: Number.isNumeric(data.boons) ? data.boons : 0}};
+    }
+    if ( ("banes" in data) && (typeof data.banes !== "object") ) {
+      data.banes = {special: {label: "Special", number: Number.isNumeric(data.banes) ? data.banes : 0}};
+      console.warn("StandardCheck received boons passed as a number instead of an object");
+    }
+    const current = this.data || foundry.utils.deepClone(this.constructor.defaultData);
+    for ( const [k, v] of Object.entries(data) ) {
+      if ( v === undefined ) delete data[k];
+    }
+    data = foundry.utils.mergeObject(current, data, {insertKeys: false});
+    StandardCheck.#configureData(data);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configure the provided data used to customize this type of Roll
+   * @param {object} data     The initially provided data object
+   */
+  static #configureData(data) {
+
+    // Bonuses
+    data.dc = Math.max(data.dc, 0);
+    data.ability = Math.clamp(data.ability, 0, 12);
+    data.skill = Math.clamp(data.skill, -4, 12);
+    data.enchantment = Math.clamp(data.enchantment, 0, 6);
+
+    // Boons and Banes
+    data.totalBoons = StandardCheck.#prepareBoons(data.boons);
+    data.totalBanes = StandardCheck.#prepareBoons(data.banes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare an object of boons or banes to compute the total which apply to the roll.
+   * @param {Record<string, DiceBoon>} boons    Boons applied to the roll
+   * @returns {number}                          The total number of applied boons
+   */
+  static #prepareBoons(boons) {
+    let total = 0;
+    for ( const [id, boon] of Object.entries(boons) ) {
+      boon.id = id;
+      boon.number ??= 1;
+      if ( (total + boon.number) > SYSTEM.DICE.MAX_BOONS ) {
+        boon.number = SYSTEM.DICE.MAX_BOONS - total;
+      }
+      total += boon.number;
+    }
+    return total;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static parse(_, data) {
+
+    // Configure the pool
+    const pool = [8, 8, 8];
+
+    // Apply boons from the left
+    let d = 0;
+    for (let i = 0; i < data.totalBoons; i++) {
+      pool[d] = pool[d] + SYSTEM.DICE.DIE_STEP;
+      if (pool[d] === SYSTEM.DICE.MAX_DIE) d++;
+    }
+
+    // Apply banes from the right
+    d = 2;
+    for (let i = 0; i < data.totalBanes; i++) {
+      pool[d] = pool[d] - SYSTEM.DICE.DIE_STEP;
+      if (pool[d] === SYSTEM.DICE.MIN_DIE) d--;
+    }
+
+    // Construct the formula
+    const terms = pool.map(p => `1d${p}`).concat([data.ability, data.skill]);
+    if ( data.enchantment > 0 ) terms.push(data.enchantment);
+    const formula = terms.join(" + ");
+    return super.parse(formula, data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare damage data for chat rendering.
+   * @returns {object|undefined}
+   */
+  prepareRenderedDamage() {
+    if ( !this.data.damage ) return;
+    const damage = foundry.utils.deepClone(this.data.damage);
+    damage.display = Number.isNumeric(damage.total) && !damage.harmless;
+    if ( !damage.display ) return damage;
+
+    damage.label = _loc(damage.restoration ? "DICE.Healing" : "DICE.Damage");
+    damage.baseLabel = _loc("DICE.DamageBase", {type: damage.label});
+    damage.hasMultiplier = damage.multiplier !== 1;
+    if ( damage.restoration ) damage.typeLabel = SYSTEM.RESOURCES[damage.resource].label;
+    else if ( damage.type ) damage.typeLabel = SYSTEM.DAMAGE_TYPES[damage.type].label;
+    damage.resistanceLabel = damage.resistance < 0 ? "DICE.DamageVulnerability" : "DICE.DamageResistance";
+    damage.resistanceValue = (damage.resistance ?? Infinity) === Infinity ? "∞" : Math.abs(damage.resistance);
+    damage.cssClass = "";
+    if ( damage.resistance < 0 ) damage.cssClass = "vulnerable";
+    else if ( damage.resistance > 0 ) damage.cssClass = "resistance";
+    if ( damage.total === 0 ) damage.cssClass += " ineffective";
+    return damage;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the localized outcome key and CSS classes for this evaluated check.
+   * @returns {{outcome: string, classes: string[]}}
+   */
+  prepareOutcome() {
+    if ( !this.data.dc ) return {outcome: "COMMON.Unknown", classes: ["unknown"]};
+    let outcome = "ACTION.EFFECT_RESULT_TYPES.";
+    const classes = [];
+    if ( this.isCriticalSuccess || this.isCriticalFailure ) {
+      outcome += "Critical";
+      classes.push("critical");
+    }
+    if ( this.isSuccess ) {
+      outcome += "Success";
+      classes.push("success");
+    }
+    else {
+      outcome += "Failure";
+      classes.push("failure");
+    }
+    return {outcome, classes};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Shared dice result data used when rendering this check.
+   * @param {object} [options]             Options for the context preparation.
+   * @param {string} [options.targetLabel] The secondary result label.
+   * @returns {DiceResultContext}
+   */
+  prepareDiceResultContext({targetLabel}={}) {
+    const {outcome, classes} = this.prepareOutcome();
+    const dc = this.data.dc;
+    const defenseType = this.constructor.DEFENSE_TYPE;
+    if ( targetLabel === undefined ) {
+      const skill = SYSTEM.SKILLS[this.data.type];
+      const label = skill?.label ?? defenseType;
+      const dcLabel = game.user.isGM ? (dc || "??") : "";
+      targetLabel = dcLabel ? `${label} ${dcLabel}` : label;
+    }
+    return {
+      outcome,
+      total: this.total,
+      data: this.data,
+      pool: this.dice.map(d => ({denom: `d${d.faces}`, result: d.total})),
+      diceTotal: this.dice.reduce((t, d) => t + d.total, 0),
+      damage: this.prepareRenderedDamage(),
+      dc,
+      defenseType,
+      formula: this.formula,
+      cssClass: ["crucible", "dice-roll", "standard-check", ...classes].join(" "),
+      targetLabel
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareChatRenderContext({flavor, isPrivate=false}={}) {
+    const rollContext = this.prepareDiceResultContext();
+    const actor = game.actors.get(this.data.actorId);
+    const cardData = {
+      isPrivate,
+      isGM: game.user.isGM,
+      flavor,
+      actor: actor ? {name: actor.name, img: actor.img} : null,
+      ...rollContext
+    };
+    return cardData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Used to re-initialize the pool with different data
+   * @param {object} data
+   */
+  initialize(data) {
+    this.data = this._prepareData(data);
+    this.terms = this.constructor.parse("", this.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Present a Dialog instance for this pool
+   * @param {object} [options]           Options for the dialog
+   * @param {string} [options.title]     The title of the roll request
+   * @param {string} [options.flavor]    Any flavor text attached to the roll
+   * @param {boolean} [options.request]  Display the request tray
+   * @param {CrucibleActor[]} [options.requestedActors] An array of actors to request rolls
+   *                                     from in a group check context
+   * @param {string} [options.messageMode]  The requested message mode
+   * @returns {Promise<{roll:StandardCheck, messageMode: string}|null>}
+   */
+  async dialog({title, ...options}={}) {
+    return this.constructor.dialogClass.prompt({
+      window: {title},
+      ...options,
+      roll: this
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Submit this check as a queried group check for the provided actors.
+   * @param {object} [options={}]
+   * @param {Iterable<CrucibleActor>} [options.requestedActors] Actors to include in the group check
+   * @param {Record<string, GroupCheckSkillConfig>} [options.skills] Skill configurations with per-skill DCs
+   * @param {string} [options.messageMode] The chat message visibility mode
+   * @returns {Promise<void>}
+   */
+  async requestGroupCheck({requestedActors, skills, messageMode}={}) {
+    const groupCheckInstance = new crucible.api.dice.GroupCheck(foundry.utils.deepClone(this.data));
+    return groupCheckInstance.requestSubmit({requestedActors, skills, messageMode});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Construct a StandardCheck instance from a CrucibleAction which involves dice rolls.
+   * @param {CrucibleAction} action   The action from which to construct the check
+   * @returns {StandardCheck}         The constructed check instance
+   */
+  static fromAction(action) {
+    const {boons, banes, bonuses} = action.usage;
+    return new this({boons, banes, ...bonuses});
+  }
+
+  /* -------------------------------------------- */
+  /*  Saving and Loading                          */
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  toJSON() {
+    const data = super.toJSON();
+    data.data = foundry.utils.deepClone(this.data);
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  async toMessage(messageData, options={}) {
+    options.messageMode = options.messageMode || this.data.messageMode;
+    messageData.content ||= "";
+    this.#addDiceSoNiceEffects();
+    return super.toMessage(messageData, options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Augment the Roll with custom DiceSoNice module effects.
+   */
+  #addDiceSoNiceEffects() {
+    for ( const die of this.dice ) {
+      if ( die.faces > 8 ) die.options.sfx = {
+        specialEffect: "PlayAnimationBright",
+        options: {muteSound: true}
+      };
+      if ( die.faces < 8 ) die.options.sfx = {
+        specialEffect: "PlayAnimationDark",
+        options: {muteSound: true}
+      };
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Interactions                         */
+  /* -------------------------------------------- */
+
+  /**
+   * Dispatch a request to perform a roll
+   * @param {object} [options]            Options for the request
+   * @param {User} [options.user]         The user making the request
+   * @param {string} [options.title]      The title of the roll request
+   * @param {string} [options.flavor]     Any flavor text attached to the roll
+   * @param {string} [options.actorId]    The actor ID for whom the check is being requested
+   */
+  request({user, title, flavor, actorId}={}) {
+    const data = foundry.utils.deepClone(this.data);
+    if ( actorId ) data.actorId = actorId;
+    return user.query("requestSkillCheck", {title, flavor, check: data}, {timeout: this.constructor.QUERY_TIMEOUT});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle a request to roll a standard check
+   * @param {object} [options]                   Options for the handler
+   * @param {string} [options.title]             The title of the roll request
+   * @param {string} [options.flavor]            Any flavor text attached to the roll
+   * @param {StandardCheckData} [options.check]  Data for the handled check request
+   */
+  static async handle({title, flavor, check}={}) {
+    const actor = game.actors.get(check.actorId);
+    if ( actor.testUserPermission(game.user, "OBSERVER") ) {
+      const skill = SYSTEM.SKILLS[check.type];
+      check.boons = check.totalBoons;
+      check.banes = check.totalBanes;
+      const pool = skill ? actor.getSkillCheck(skill.id, check) : new this(check);
+      if ( skill ) flavor ??= _loc("SKILL.RollFlavor", {name: actor.name, skill: skill.label});
+      const response = await pool.dialog({title, flavor});
+      if ( response === null ) return;
+      return pool.toMessage({flavor});
+    }
+  }
+}
+
+StandardCheck.PARTS = ["3d8", "@ability", "@skill", "@enchantment"];
+StandardCheck.FORMULA = StandardCheck.PARTS.join(" + ");

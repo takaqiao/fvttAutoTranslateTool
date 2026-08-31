@@ -1,0 +1,374 @@
+{
+  "label": "传承\nHeritages",
+  "mapping": {
+    "name": "name",
+    "description": "system.description.value"
+  },
+  "folders": {
+    "Sphinx": "斯芬克斯\nSphinx",
+    "Swarmblood": "群血\nSwarmblood",
+    "Versatile": "多用\nVersatile",
+    "Fusion": "融合\nFusion",
+    "Cerebrophage": "噬脑者\nCerebrophage",
+    "Psychopomp": "灵魂引渡者\nPsychopomp",
+    "Evil Eye": "邪眼\nEvil Eye",
+    "Lamia": "拉弥亚\nLamia",
+    "Golemborn": "魔像裔\nGolemborn",
+    "Angel": "天使\nAngel",
+    "Giants": "巨人\nGiants",
+    "Werecreature": "兽化生物\nWerecreature",
+    "Devil": "魔鬼\nDevil",
+    "Gargoyle": "石像鬼\nGargoyle",
+    "Arboreal": "林栖\nArboreal"
+  },
+  "entries": {
+    "Barbazu": {
+      "name": "钩魔 Barbazu",
+      "description": "<p>你是一名巴巴祖，一种擅长通过暴力造成痛苦与折磨的魔鬼。当你以近战打击对敌人造成大成功时，你可以选择将敌人向任意方向移动5尺。目的地格必须在你的触及范围内。与强迫移动的常规规则一致，此次移动不会触发反应动作（）。这是一个大成功专精效果；如果你的大成功是以长柄武器造成，并且你本可以应用长柄武器的大成功专精效果，则你可以改为使用该传承提供的大成功专精，将目标移动10尺（若带有<em>@UUID[Compendium.pf2e.equipment-srd.Item.qUnDHEXteUQGE8yp]{Grievous}</em>符文，则为15尺）。你的体型为中型。</p>\n<p>You are a barbazu, a devil adept at causing pain and suffering through violence. When you critically hit a foe with a melee Strike, you can choose to move the foe 5 feet in any direction. The destination square must be within your reach. As usual for forced movement, this movement doesn't trigger reactions. This is a critical specialization effect, and if your critical hit was with a polearm and you could apply the polearm critical specialization effect, you can instead use the critical specialization from this heritage to move the target 10 feet (or 15 feet with a <em>@UUID[Compendium.pf2e.equipment-srd.Item.qUnDHEXteUQGE8yp]{Grievous}</em> rune). Your size is Medium.</p>"
+    },
+    "Arboreal Archive": {
+      "name": "树栖秘库 Arboreal Archive",
+      "description": "<p>你是一座树栖档案库——一位庞大的树栖者，通常作为整个地区的知识储藏所。通常情况下，濒死的树栖档案库会将他们的知识转移给继任者，但在你的情况中，某些地方出了问题；要么你在转移后意外存活了下来，要么你没有接收到完整的转移，要么你是一座从零开始的新档案库。无论如何，你被连根拔起。你是大型而非中型；如同通常对拥有大型族裔或传承的角色那样，除非另有说明，你的触及为5英尺。你获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.vduGvThsBEtwNaTd]{树栖学识} 族裔专长作为加值专长。</p>\n<p>You’re an arboreal archive—a massive arboreal who typically serves as the repository of knowledge for an entire region. Normally a dying arboreal archive transfers their knowledge to their successor, but in your case, something went wrong; either you survived unexpectedly after transferring, you didn’t receive the full transfer, or you’re a new archive starting from scratch. Whatever the case, you became uprooted. You’re Large instead of Medium; as normal for a character with a Large ancestry or heritage, your reach is 5 feet unless stated otherwise. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.vduGvThsBEtwNaTd]{Arboreal Lore} ancestry feat as a bonus feat.</p>"
+    },
+    "Weretiger": {
+      "name": "虎狼人 Weretiger",
+      "description": "<p>如同老虎一般，你在灌木丛中潜行的能力无与伦比，并且能够与猎物扭打。你在运动和潜行上成为受训，并且在灌木丛中获得 @UUID[Compendium.pf2e.feats-srd.Item.beyw5bdA5hkQbmaG]{Terrain Stalker} 技能专长。你不再采用标准的中型混合形态，而是以大型作为你的混合形态。你的动物形态是一只老虎。</p>\n<p>Like a tiger, your ability to stalk in underbrush is unparalleled, and you can tussle your prey. You become trained in Athletics and Stealth, and you gain the @UUID[Compendium.pf2e.feats-srd.Item.beyw5bdA5hkQbmaG]{Terrain Stalker} skill feat for underbrush. Instead of the standard Medium hybrid form, your hybrid form is Large. Your animal form is a tiger.</p>"
+    },
+    "Blasphemous Lamia": {
+      "name": "亵渎拉弥亚 Blasphemous Lamia",
+      "description": "<p>随着你的成长，你终究在皮肤上发现了亵渎的印记——亵圣的符号蜷曲成你鳞片的纹路，或你毛皮上的莲座斑纹指向某位特定的神祇。选择一位你熟悉的神祇，并获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.kBDUqeAxPJAlO6M2]{亵渎否认} 反应动作（）。你可以是拉弥亚女族长或猎手拉弥亚。</p>\n<p>As you grew up, you eventually found the marks of blasphemy on your skin, sacrilegious symbols curled in the pattern of your scales, or the rosettes on your fur directed at one god in particular. Select one deity you are familiar with and gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.kBDUqeAxPJAlO6M2]{Blasphemous Denial} reaction. You can be either a lamia matriarch or a hunter lamia.</p>"
+    },
+    "Shoki": {
+      "name": "尚奇 Shoki",
+      "description": "<p>你是一名shoki，一位能够将灵魂碎片或生命能量捕获于法杖或其他武器中的引魂者。你获得@UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.d60RYnaY5rPbn6YQ]{捕捉生命的最后一息}动作。</p>\n<p>You are a shoki, a psychopomp capable of capturing fragments of spirits or life energy in a staff or other weapon. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.d60RYnaY5rPbn6YQ]{Capture Life's Last Gasp} action.</p>"
+    },
+    "Hieracosphinx": {
+      "name": "鹰身斯芬克斯 Hieracosphinx",
+      "description": "<p>创造第一只狮鹰斯芬克斯的那位被遗忘的神祇，心中有着非常直白的想法——斯芬克斯应当是守护者，因此，斯芬克斯应当能够发现想要偷偷溜过去的入侵者。而执行这项任务，还有谁比拥有猎鹰之眼的生物更合适呢？你在使用察觉进行先攻掷骰时获得+2环境加值，并且你的察觉DC获得+1环境加值，但你的察觉检定不获得该加值。</p>\n<p>Whichever forgotten god created the first hieracosphinx had a very straightforward idea in mind—a sphinx should be a guardian, therefore, the sphinx should be able to spot intruders wanting to sneak past them. And who better for this task than a creature with the eyes of a falcon? You gain a +2 circumstance bonus to your initiative rolls using Perception and a +1 circumstance bonus to your Perception DC, though not to your Perception checks.</p>"
+    },
+    "Aquatic Eye": {
+      "name": "水栖之眼（特征） Aquatic Eye",
+      "description": "<p>你的身体长出了鳍，并适应了水下生活。你获得两栖（特征），意味着你既能呼吸空气也能呼吸水。你的陆地速度为15尺而非20尺，并且你获得20尺游泳速度。</p>\n<p>Your body has grown fins and adapted for life underwater. You gain the amphibious trait, meaning you can breathe both air and water. Your land Speed is 15 feet instead of 20 feet, and you gain a 20 foot swim Speed.</p>"
+    },
+    "Vanth": {
+      "name": "凡斯 Vanth",
+      "description": "<p>你是一名凡斯，一位身经百战的引魂使，能够将自己所持的武器注入自身灵性本质的一小部分，使其暂时嬗变为另一种材料。为了确定你的熟练度，你将长柄镰视为简易武器。你获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.VWusswtjXrv3O5gR]{Infuse Weapon} 动作。</p>\n<p>You are a vanth, a battle-hardened psychopomp who can infuse the weapons they wield with a fragment of their own spiritual essence, temporarily transmuting it into another material. You treat scythes as simple weapons for the purpose of determining your proficiency. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.VWusswtjXrv3O5gR]{Infuse Weapon} action.</p>"
+    },
+    "Balloon Eye": {
+      "name": "气球眼 Balloon Eye",
+      "description": "<p>你的身体大部分充满空气，如同气球一般，让坠落对你而言轻而易举。你不会因坠落而受到任何伤害，无论你坠落的距离有多远。</p>\n<p>Your body is mostly full of air, like a balloon, making falls a breeze for you. You take no damage from falling, regardless of the distance you fall.</p>"
+    },
+    "Arboreal Regent": {
+      "name": "树栖摄政者 Arboreal Regent",
+      "description": "<p>你是一位树栖摄政者，你为树木发声。你曾经谨慎地守护过一片森林区域，并且你可能曾在某个时候领导过一群树栖者或一个更大的树栖议会。你可以向植物与真菌提问、从它们那里获得回答，并对植物与真菌使用交涉（技能）。</p>\n<p>You're an arboreal regent, and you speak for the trees. You once carefully guarded a forested area, and it's possible that you led a group of arboreals or a larger arboreal council at some point. You can ask questions of, receive answers from, and use the Diplomacy skill with plants and fungi.</p>"
+    },
+    "Hydra": {
+      "name": "九头蛇 Hydra",
+      "description": "<p>你是一条四头巨蛇，拥有八条外观如蛇尾的肢体，每条都能够持握物体并进行交互动作。你由四个不同的角色组成，每个角色控制一个头和两条肢体。你获得一种肢体徒手攻击，取代拳头徒手攻击，其余数据与拳头徒手攻击相同。你还获得一种颌部徒手攻击，造成 1d6 穿刺伤害，具有灵巧特征，且属于搏斗武器组。除非某个生物知道你的弱点或一次性将你们全部杀死，否则大多数手段都很难杀死你。当生命值为 0 时，你的头会被斩断，但除非你是因死亡效果而被降至 0 生命值，否则你不会死亡。如果某个效果明确将你斩首，你仍不会死亡，但你会立即降至 0 生命值并陷入垂死 4。即使你的垂死值达到 4 或更高，你也不会死亡，除非你的所有头在同一时间都处于 0 生命值，或使你的垂死值达到 4 或更高的效果造成了火焰或酸性伤害。然而作为交换，造成酸性或火焰伤害的效果会使你的垂死值比正常情况额外增加 1。当你在 0 生命值且不处于垂死时陷入 @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{昏迷}，只要你的重伤值不为 4 或更高，则在 [[/r 1d4+1 #Rounds]] 轮后，你恢复 1 生命值，你的头再生，并且你变为清醒。只要你的重伤值不为 4 或更高，若你通过任何其他方式恢复生命值，你的头也会再生并且你变为清醒。如果你的重伤值为 4 或更高，则在你的伤势得到治疗之前，你的头不会再生。你是一只野兽，你的额外语言为龙语。</p>\n<p>You're a four-headed serpent, with eight limbs with the appearance of snake tails, each capable of holding objects and taking Interact actions. You're composed of four different characters, each controlling one head and two of the limbs. You gain a limb unarmed attack instead of a fist unarmed attack, which otherwise has the same statistics as a fist unarmed attack. You also gain a jaws unarmed attack that deals 1d6 piercing damage, has the finesse trait, and is in the brawling weapon group. You're difficult to kill by most means unless a creature knows your weakness or kills all of you at once. When at 0 Hit Points, your head is cut off, but you don't die unless you were brought to 0 Hit Points by a death effect. If an effect explicitly decapitates you, you still don't die, but you're immediately reduced to 0 Hit Points and dying 4. Even when your dying value reaches 4 or more, you don't die, unless all your heads are at 0 Hit Points at the same time or the effect that brought your dying value to 4 or more dealt fire or acid damage. However, in exchange, effects that deal acid or fire damage increase your dying value by 1 more than normal. When @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious} at 0 Hit Points but not dying, as long as you don't have a wounded value of 4 or higher, after [[/r 1d4+1 #Rounds]] rounds, you regain 1 Hit Point, your head regrows, and you become conscious. Your head also regrows and you become conscious if you regain Hit Points by any other means, as long as you don't have a wounded value of 4 or higher. If your wounded value is 4 or higher, your head doesn't regrow until your wounds are treated. You're a beast, and your additional language is Draconic.</p>"
+    },
+    "Astral Deva": {
+      "name": "星界天使 Astral Deva",
+      "description": "<p>作为一名星界天使，你曾是天堂的先驱，同等地担任信使与使节。你可以去任何地方，从冰封的冰川到炽热的沙漠，都如在家一般自在。你在堕落中失去了部分力量，但仍残留一丝。你将环境热与冷的效果视为比实际程度低一级（因此难以置信的高温变为极端高温，极端严寒变为严酷严寒，依此类推）。你可以将此效果延伸至你选择的20英尺内一名盟友。</p>\n<p>As an astral deva, you were a herald of Heaven, serving as messenger and emissary in equal measure. You could go anywhere, from frozen glaciers to burning deserts, and be at home. You lost some of this power in the fall, but a smidgen remains. You treat environmental heat and cold effects as if they were one step less extreme (so incredible heat becomes extreme heat, extreme cold becomes severe cold, and so forth). You can extend this effect to one ally within 20 feet of your choice.</p>"
+    },
+    "Criosphinx": {
+      "name": "克里奥斯芬克斯 Criosphinx",
+      "description": "<p>所有斯芬克斯都以智慧著称，但大多数也同样以突如其来的狂怒与一阵阵暴躁而闻名——只有冷静、忧郁的公羊头克里俄斯芬克斯例外。当你在对抗情绪效果的豁免中掷出成功时，你改为获得大成功或大失败。</p>\n<p>All sphinxes have a reputation for wisdom, but most also have an equal reputation for sudden rages and bouts of temper—except for calm, melancholy ram-headed criosphinxes. When you roll a success on a saving throw against an emotion effect, you get a critical success instead.</p>"
+    },
+    "Lashingtail Gargoyle": {
+      "name": "鞭尾石像鬼 Lashingtail Gargoyle",
+      "description": "<p>你可以用你修长而有力的尾巴来稳住自己，或猛击你的敌人。你在进行特技检定以@UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{平衡}时获得+2环境加值。你不需要空着一只手就能@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{绊摔}，因为你可以用尾巴来这么做；但如果你同时有一只空手并且你的尾巴也可用，你在推撞（但不适用于绊摔）时获得+1环境加值。</p>\n<p>You can use your long, powerful tail to steady yourself, or batter around your foes. You gain a +2 circumstance bonus to Acrobatics checks to @UUID[Compendium.pf2e.actionspf2e.Item.M76ycLAqHoAgbcej]{Balance}. You don't need an open hand to @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{Shove} or @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip}, as you can do so with your tail, but if you have both an open hand and your tail available, you gain a +1 circumstance bonus to Shove (but not to Trip).</p>"
+    },
+    "Balisse": {
+      "name": "巴莉丝 Balisse",
+      "description": "<p>作为一名火翼巴利斯，你也被称为“告解天使”，你的职责是引导凡人站在善的一方。为此，你在理解凡人的情绪、并看穿各种自利的欺骗方面格外擅长。你在用于 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} 的察觉检定上获得 +1 环境加值，并且在对抗他人对你进行 @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} 的尝试时，你的察觉 DC 也获得该加值。该加值同样适用于你对抗幻觉的察觉检定与察觉 DC。</p>\n<p>As a fiery-winged balisse, you are also known as a confessor angel, and your job was to guide mortals to the side of good. To that end, you are exceptionally good at understanding mortal emotions and piercing all manner of self-serving deception. You gain a +1 circumstance bonus to Perception checks to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} and to Perception DCs against attempts to @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} to you. This bonus also applies to your Perception checks and DCs against illusions.</p>"
+    },
+    "Cornugon": {
+      "name": "角魔 Cornugon",
+      "description": "<p>你是一名角魔鬼，一名被重铸以指挥魔鬼军队的魔鬼，能够用一次具有宣告意味的重击击晕敌人。当你以近战打击对敌人造成大成功或大失败时，他们必须在对抗你的职业DC进行一次 @Check[fortitude|against:class-spell] 豁免检定中成功，否则将陷入 @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}。这是一个大成功或大失败专精效果，若你的大成功或大失败是使用徒手武器造成，且你可以应用徒手大成功或大失败专精效果，则敌人的豁免检定承受 –2 状态减值。你的体型为大型。</p>\n<p>You are a cornugon, a devil reforged to command devil armies, capable of stunning foes with a telling blow. When you critically hit a foe with a melee Strike, they must succeed at a @Check[fortitude|against:class-spell] saving throw against your class DC or be @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}. This is a critical specialization effect, and if your critical hit was with a brawling weapon and you could apply the brawling critical specialization effect, the foe takes a –2 status penalty to their saving throw. Your size is Large.</p>"
+    },
+    "Tiny Cerebrophage": {
+      "name": "微型食脑虫 Tiny Cerebrophage",
+      "description": "<p>组成你的、除脑鹦鹉螺之外的有感知生物尤其娇小，像小妖精（特征）一样，因此你比其他食脑者要小得多。你的体型为超小型，而非中型或小型，并且你在用于 @UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{Squeeze} 的特技检定以及用于 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} 的隐匿检定上获得+1环境加值。作为超小型生物的常规规则，你的触及为0尺而非5尺，并且你可以进入对手所在的方格而不需要 @UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{Tumble Through}。此外，你只需要吃有感知的超小型生物的大脑就能生存，而不需要吃小型或更大型的有感知生物的大脑。</p>\n<p>The sapient creature other than a brain nautilus that formed you was especially tiny, like a sprite, and so you're much smaller than other cerebrophages. You are Tiny instead of Medium or Small, and you gain a +1 circumstance bonus to Acrobatics checks to @UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{Squeeze} and Stealth checks to @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide}. As normal for a Tiny creature, you have a reach of 0 feet instead of 5 feet and can enter an opponent's square without needing to @UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{Tumble Through}. Additionally, you only need to eat the brains of sapient Tiny creatures to survive, rather than needing to eat the brains of Small or larger sapient creatures.</p>"
+    },
+    "Stalking Eye": {
+      "name": "潜行之眼 Stalking Eye",
+      "description": "<p>你对自身茎梗的控制力优于其他邪眼，使你能更快地旅行并跟踪猎物或感兴趣的生物。你的陆地速度为25尺，而非20尺。</p>\n<p>Your control over your stalks is superior to other evil eyes, allowing you to travel and stalk prey or creatures of interest more quickly. Your land Speed is 25 feet, instead of 20 feet.</p>"
+    },
+    "Crawling Swarm": {
+      "name": "爬行虫群 Crawling Swarm",
+      "description": "<p>一群爬行的昆虫、蜘蛛、蛇或小壁虎生活在你的体内。你的虫群通常躲藏在你的皮肤之下，但它们有时会从你的孔口爬出，并在你身体外侧缓慢爬行。你获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.5NnBbxblFe25R4tt]{Creeping Crawlers} 反应动作（）。</p>\n<p>A swarm of crawling insects, spiders, snakes, or small geckos live within your body. Your brood usually takes refuge beneath your skin, but they sometimes crawl out through your orifices and creep across the outside of your body. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.5NnBbxblFe25R4tt]{Creeping Crawlers} reaction.</p>"
+    },
+    "Frost Giant": {
+      "name": "霜巨人 Frost Giant",
+      "description": "<p>你是一名能够在极端寒冷中生存的霜巨人。你获得等同于你等级一半的寒冷抗力（最低为1），并且你将环境寒冷效果视为比实际低一个级别的极端程度（难以置信的寒冷变为极端寒冷，极端寒冷变为严酷寒冷，依此类推）。</p>\n<p>You're a frost giant capable of surviving extreme cold. You gain cold resistance equal to half your level (minimum 1), and you treat environmental cold effects as if they were one step less extreme (incredible cold becomes extreme, extreme cold becomes severe, and so on).</p>"
+    },
+    "Massive Cerebrophage": {
+      "name": "巨型噬脑虫 Massive Cerebrophage",
+      "description": "<p>组成你的、除脑鹦鹉螺以外的有智生物格外巨大，因此你比其他夺脑虫更庞大，也更难被推来推去。你的体型为大型，而非中型或小型。针对试图@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{Shove}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip}你的尝试（或以类似方式移动你，例如怪物的Pull能力），你的强韧或反射DC获得+2环境加值。此加值同样适用于对试图强迫你移动或将你击倒为@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}的法术或效果的豁免。此外，若任何效果将迫使你移动10尺或更多，你只会被移动一半距离。照常，你的触及为5尺。另此外，你需要食用有智中型或更大型生物的大脑才能生存，而不是需要食用有智小型或更大型生物的大脑。</p>\n<p>The sapient creature other than a brain nautilus that formed you was especially large, and so you're much bigger than other cerebrophages and harder to push around. You are Large instead of Medium or Small. You gain a +2 circumstance bonus to your Fortitude or Reflex DC against attempts to @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{Shove} or @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip} you (or to move you in a similar fashion, such as the monster Pull ability). This bonus also applies to saving throws against spells or effects that attempt to force you to move or knock you @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. In addition, if any effect would force you to move 10 feet or more, you are moved only half the distance. As normal, your reach is 5 feet. Additionally, you need to eat the brains of sapient Medium or larger creatures to survive, rather than needing to eat the brains of Small or larger sapient creatures.</p>"
+    },
+    "Anthrosphinx": {
+      "name": "拟人斯芬克斯 Anthrosphinx",
+      "description": "<p>拟人斯芬克斯拥有人类的面孔，因此也具备做出人类表情与人类微笑的能力。大多数人觉得拟人斯芬克斯天生就比它们更为离群索居的同族来得令人安心，尤其是当它们愿意花时间强调自己正式的礼仪时——最好是在一位介绍人的协助下。你受训于交涉（若你已受训于交涉，则改为受训于另一项技能）。此外，若现场有第三方负责进行正式引荐，你在进行 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{留下印象} 的检定时获得+1环境加值；若你在交涉上为大师，则该环境加值提升为+2。</p>\n<p>The anthrosphinx has a human face and, with it, the ability to make human expressions and human smiles. Most find anthrosphinxes inherently more comforting a presence than their more reclusive kin, especially when they take the time to highlight their formal manners, preferably through the help of an interlocutor. You are trained in Diplomacy (or another skill if you were already trained in Diplomacy). You also gain a +1 circumstance bonus to checks to @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} if a third party is on hand to make formal introductions, which increases to a +2 circumstance bonus if you're a master in Diplomacy.</p>"
+    },
+    "Flesh Golemborn": {
+      "name": "血肉魔像裔 Flesh Golemborn",
+      "description": "<p>你由其他生物的死肉缝合而成，并被赋予生命，通常是通过大量的电击魔法。你有时会在记忆边缘瞥见一些碎片，它们可能来自那些其身体构成了你自身的人，从而赐予你一些你从未知道自己学过的技能。你在你选择的一项技能上成为受训。到第5等级时，你在所选技能上成为专家。</p>\n<p>You have been stitched together from the dead flesh of other creatures and given life, usually through massive amounts of electricity magic. You can sometimes glimpse fragments at the edge of memory that might have come from the people whose bodies formed your own, granting you skills you never knew you had learned. You become trained in one skill of your choice. At 5th level, you become an expert in the chosen skill.</p>"
+    },
+    "Deep Psyche Cerebrophage": {
+      "name": "深层心魂 脑髓噬者 Deep Psyche Cerebrophage",
+      "description": "<p>你的大脑充盈着比典型的噬脑者更多的心灵魔法。你因你的心灵魔法族裔能力而获得第二个异界先天戏法。第二个戏法遵循与第一个相同的规则与可用性。</p>\n<p>Your brain is fueled with even more psychic magic than a typical cerebrophage. You gain a second occult innate cantrip for your psychic magic ancestry ability. The second cantrip follows the same rules and availability as the first.</p>"
+    },
+    "Choral": {
+      "name": "合唱团 Choral",
+      "description": "<p>作为一名合唱天使，你曾在天堂的殿堂中吟唱赞美与感恩的圣歌；而即使到了现在，你依然是一位技艺惊人的歌者与乐师。你那不可思议的嗓音也可以用于更具攻击性的方式，震碎玻璃或撕裂鼓膜。你获得一种名为穿刺之歌的远程徒手攻击，射程增量为20尺，造成1d4音波伤害。若大成功，则目标陷入 @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋} 状态，持续的轮数等同于武器伤害骰的数量。你的穿刺之歌没有武器组，也没有致命专精效果。</p>\n<p>As a choral angel, you once sung hymns of praise and thanksgiving in the halls of Heaven, and even now, you are an impressively skilled singer and musician. Your amazing voice can also be used in a more aggressive fashion, shattering glass or rupturing eardrums. You gain a piercing song ranged unarmed attack with a range increment of 20 feet that deals 1d4 sonic damage. On a critical hit, the target is @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened} for a number of rounds equal to the number of weapon damage dice. Your piercing song doesn't have a weapon group or a critical specialization effect.</p>"
+    },
+    "Stoneskin Gargoyle": {
+      "name": "石肤石像鬼 Stoneskin Gargoyle",
+      "description": "<p>你的血肉坚硬粗糙，外观如同石头或岩石。你从石之容貌获得的对欺瞒检定与DC的加值提升至+4，而非+2。</p>\n<p>此外，你可以改变皮肤的颜色以匹配附近任何石材的外观，使你能更好地与周遭环境融为一体或模仿雕像。当你与石头或岩石相邻（例如砾石、巨石、大理石雕像、玄武岩墓碑或石墙）时，你可以花费单动作来将你的肤色匹配为该岩石的颜色。这使你在靠近成分或颜色相近的岩石时进行潜行检定获得+2环境加值。此颜色持续生效，直到你下次选择花费一个动作来改变它为止。</p>\n<p>Your flesh is hard and rough, with the appearance of stone or rock. The bonus to Deception checks and DCs you get from Stone's Visage increases to +4, rather than +2.</p>\n<p>Additionally, you can alter the coloration of your skin to match any appearance of nearby stone, enabling you to better blend in with your surroundings or imitate a statue. While adjacent to stone or rock (such as gravel, a boulder, a marble statue, a basalt gravemarker, or a stone wall) you can spend a single action to match your coloration to that rock. This grants you a +2 circumstance bonus to Stealth checks when near rocks of a similar composition or coloration. This coloration lasts until you next choose to spend an action to change it.</p>"
+    },
+    "Erinys": {
+      "name": "埃里倪厄斯 Erinys",
+      "description": "<p>你是一名艾瑞妮丝，一种擅长惩罚亡魂的魔鬼。你性情火爆，在被激怒时能够将其显现出来。你获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.IlXbpXztU75cB0BF]{烈焰缠身} 动作。你的体型为中型。</p>\n<p>You are an erinys, a devil adept at punishing the damned. You have a fiery temper, which you can manifest when angered. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.IlXbpXztU75cB0BF]{Wreathe in Flames} action. Your size is Medium.</p>"
+    },
+    "Samaran": {
+      "name": "萨马兰 Samaran",
+      "description": "<p>你是一个被称为萨玛兰（samaran）的微小树栖橡果，并配备了用于安全翻滚的枫树种子翅膀。你可能穿着类似叶子的微型护甲，并挥舞由荆棘和针叶构成的武器。你是超小型而非中型。作为超小型生物的常规规则，你的触及为0英尺而非5英尺，并且你可以进入对手的方格而无需@UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{Tumble Through}。你的身体构成与大多数其他树栖者的传承不同。你失去树皮皮肤族裔能力。取而代之的是，你不会因坠落而受到任何伤害，并且你可以@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{Leap}向任意方向跳跃最多30英尺，甚至可以直直向上。</p>\n<p>You are a tiny arboreal acorn known as a samaran, and you're equipped with maple seed wings designed for safe tumbling. You might wear tiny armor resembling leaves and wield weapons formed from thorns and needles. You are Tiny instead of Medium. As normal for a Tiny creature, you have a reach of 0 feet instead of 5 feet and can enter an opponent's square without needing to @UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{Tumble Through}. Your body's composition is different than that of most other heritages of arboreals. You lose the skin of bark ancestry ability. Instead, you take no damage from falling, and you can @UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{Leap} up to 30 feet in any direction, even straight up.</p>"
+    },
+    "Inescapable Lamia": {
+      "name": "无可逃避的拉弥亚 Inescapable Lamia",
+      "description": "<p>一旦你捕捉到猎物的气味，就几乎没有任何办法从你手中逃脱。你获得不精确嗅觉，射程为30英尺。这意味着你可以用嗅觉来确定一个生物的位置。GM通常会在你位于该生物的下风处时将射程加倍，或在你位于上风处时将射程减半。此外，如果你之前有机会闻过它的气味，你在对一个生物或物体进行[[/act track]]时获得+2环境加值。你可以是蛇女族主母或猎手蛇女。</p>\n<p>Once you’ve caught the scent of your prey, there isn’t really any getting away from you. You gain imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine a creature’s location. The GM will usually double the range if you’re downwind from the creature or halve the range if you’re upwind. In addition, you gain a +2 circumstance bonus to [[/act track]] a creature or object if you’ve had a chance to smell it before. You can be either a lamia matriarch or a hunter lamia.</p>"
+    },
+    "Royal Lamia": {
+      "name": "皇家拉弥亚 Royal Lamia",
+      "description": "<p>所有的拉米娅主母都具有拉米娅本尊的形态，但在你的情况下，这不仅仅是随意的相似。你的鳞片带有辉煌而鲜艳的纹样，你的头发同样带有靛蓝与深红的条纹。你受训于外交，并获得 @UUID[Compendium.pf2e.feats-srd.Item.KpFetnUqTiweypZk]{Group Impression} 专长。此外，你在对其他拉米娅进行 @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} 的检定上获得 +2 环境加值。你是一名拉米娅主母。</p>\n<p>All lamia matriarchs bear the form of Lamia herself, but in your case, it goes beyond just a casual similarity. Your scales bear glorious, vivid patterns, and your hair is likewise marked with bands of indigo and crimson. You are trained in Diplomacy and gain the @UUID[Compendium.pf2e.feats-srd.Item.KpFetnUqTiweypZk]{Group Impression} feat. Furthermore, you gain a +2 circumstance bonus to checks to @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} on other lamias. You are a lamia matriarch.</p>"
+    },
+    "Werewolf": {
+      "name": "狼人 Werewolf",
+      "description": "<p>如同你的狼族亲族一般，你知道如何以狼群作战。你在进行@UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{援助}的检定时获得+4环境加值。你的动物形态是一只狼。</p>\n<p>Like your lupine kin, you know how to fight in a pack. You gain a +4 circumstance bonus to checks made to @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{Aid}. Your animal form is a wolf.</p>"
+    },
+    "Two-Headed Giant": {
+      "name": "双头巨人 Two-Headed Giant",
+      "description": "<p>两个脑袋总比一个强！你是一个拥有两个头、并且有两条或四条手臂的人型巨人。你由两个不同的角色组成，每个角色控制一个头和一半的手臂（若你有两条手臂则每个角色控制一条手臂，若你有四条手臂则每个角色控制两条手臂）。无论是为了与你的对应同伴更好地合作，还是为了向对方证明谁更强，你都在比大多数人所能应付的更多技能上受过训练。你在你选择的一项技能上受训。在第5等级时，你在所选技能上成为专家。你是人型与巨人，你的额外语言是约顿语。</p>\n<p>Two heads are better than one! You're a humanoid giant with two heads and either two or four arms. You're composed of two different characters, each controlling one head and half the arms (one arm if you have two arms or two arms if you have four arms). Whether to work together better with your counterpart or to show them who's better, you've trained in more skills than most could manage. You're trained in a skill of your choice. At 5th level, you become an expert in the chosen skill. You're a humanoid and a giant, and your additional language is Jotun.</p>"
+    },
+    "Wereboar": {
+      "name": "兽猪人 Wereboar",
+      "description": "<p>伴随着猪一般的哼声与凶狠的眼神，你能吓倒大多数人，而当别人逼你到绝境时，你也能把他们推回去。你在威吓与运动中成为受训，并获得 @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} 技能专长。你不再使用标准的颚部徒手攻击，而是由你的混合形态获得一次獠牙徒手近战攻击，其伤害与特征相同。你的动物形态是一头野猪。</p>\n<p>With a porcine snort and a mean look, you can frighten most, and when push comes to shove, you can shove back. You become trained in Intimidation and Athletics, and you gain the @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} skill feat. Instead of the standard jaws unarmed attack, your hybrid form grants you a tusk unarmed melee attack with the same damage and traits. Your animal form is a boar.</p>"
+    },
+    "Movanic Deva": {
+      "name": "莫瓦尼克天使 Movanic Deva",
+      "description": "<p>与在生前与死后守护灵魂的独尊天使不同，作为一名莫瓦尼天使，你曾在从出生到死亡的整个过程中如此守护。你也被授予对所有走兽与飞禽的守护职责，以助你完成使命，同时也是因为动物有时同样需要你的保护。作为一名堕落天使，你已不再拥有曾经那般广泛的力量，但你仍能发问并得到回应。你可以向动物提问、从动物处获得回答，并对动物使用交涉（技能）；在大多数情况下，野生动物会给你时间来提出问题。你对动物进行@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{留下印象}时获得+1环境加值。</p>\n<p>Whereas monadic devas guard the soul before and after death, as a movanic deva, you once did so from birth to death. You were given guardianship over all beasts and birds as well, to aid you in your mission but also because animals occasionally required your protection as well. As a fallen deva, you don't have quite the broad powers you once did, but you can still ask and be answered. You can ask questions of, receive answers from, and use the Diplomacy skill with animals, and in most cases, wild animals will give you time to ask your questions. You gain a +1 circumstance bonus to @UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{Make an Impression} on animals.</p>"
+    },
+    "Psychic Duelist Cerebrophage": {
+      "name": "心灵决斗家 脑食者 Psychic Duelist Cerebrophage",
+      "description": "<p>你可以从你的大脑直接向附近的生物射出灵能脑爆冲击，并投射出一道思想护盾，保护你自己的心智免受反击。你获得一个脑爆冲击远程徒手攻击，射程为20英尺，造成1d4精神伤害。你的脑爆冲击徒手攻击属于斗殴武器组。你获得等同于你等级一半的精神伤害抗力。</p>\n<p>You can shoot psychic brain blasts from your brain directly into nearby creatures, and you project a thought shield that protects your own mind from retaliation. You gain a brain blast ranged unarmed attack with a range of 20 feet that deals 1d4 mental damage. Your brain blast unarmed attack is in the brawling weapon group. You gain resistance to mental damage equal to half your level.</p>"
+    },
+    "Wingswarm": {
+      "name": "翼群 Wingswarm",
+      "description": "<p>成群的飞行生物，例如蝙蝠、鸟或飞蛾，生活在你的皮肤下和你的眼睛后面。当你坠落时，你的虫群会猛烈地拍打翅膀将你托起。无论你坠落多远，你都不会因坠落而受到伤害。</p>\n<p>Scores of flying creatures, such as bats, birds, or moths live under your skin and behind your eyes. When you fall, your brood vigorously flaps their wings to carry you aloft. You take no damage from falling, regardless of the distance you fall.</p>"
+    },
+    "Cynosphinx": {
+      "name": "犬首斯芬克斯 Cynosphinx",
+      "description": "<p>盗贼或许能悄悄溜过犬头狮身人面像，但想从它手下逃脱则完全是另一回事。在所有狮身人面像之中，犬头狮身人面像凭借犬科的鼻子无疑是最擅长追踪的。你获得射程为30英尺的不精确嗅觉。这意味着你可以用嗅觉来确定生物的位置。若你处于该生物的下风处，GM通常会将该射程加倍；若你处于上风处，则通常将射程减半。此外，作为亡者的守护者，你能以正常距离的两倍闻到尸体与亡灵。除此之外，若你曾闻过某个生物或物体的气味，你在对其进行@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{追踪}时获得+2环境加值。</p>\n<p>A thief might sneak past a cynosphinx, but getting away from one is an entirely different matter. Of all the sphinxes, cynosphinxes are by far the best trackers with their canine noses. You gain imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine a creature's location. The GM will usually double the range if you're downwind from the creature or halve the range if you're upwind, and as a guardian of the dead, you can smell corpses and undead at twice the normal distance. In addition, you gain a +2 circumstance bonus to @UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]{Track} a creature or object if you've smelled it before.</p>"
+    },
+    "Wood Golemborn": {
+      "name": "木魔像裔 Wood Golemborn",
+      "description": "<p>由于你作为木魔像裔那部分由木材构成的形态，你与自然有着深刻的联系，使你能以轻松而不可思议的流畅性穿行于以木质为主的灌木丛与矮林之中。你无视由植物与真菌造成的任何困难地形，例如纠结的灌木、盘绕的藤蔓与茂密的下层植被；而由这些来源造成的强效困难地形则改为视作普通困难地形。</p>\n<p>Because of your partially wooden form as a wood golemborn, you have a deep connection to nature that allows you to move through wood-based thickets and brush with ease and uncanny fluidity. You ignore any difficult terrain caused by plants and fungi, such as tangled bushes, twisting vines, and dense undergrowth, and you treat greater difficult terrain caused by those sources as normal difficult terrain instead.</p>"
+    },
+    "Mini Eye": {
+      "name": "迷你眼球 Mini Eye",
+      "description": "<p>你是一只迷你眼球，比其他邪眼小得多，因此你很容易穿过狭小的缝隙、藏身，并窥探你感兴趣的任何事物。你为超小体型而非中型，并且在用于挤入的特技检定以及用于躲藏的隐匿检定上获得+1环境加值。</p>\n<p>You are a mini eye, much smaller than other evil eyes, and it's easy for you to fit through small gaps, hide, and spy on whatever interests you. You are Tiny instead of Medium, and you gain a +1 circumstance bonus to Acrobatics checks to Squeeze and Stealth checks to Hide.</p>"
+    },
+    "Morrigna": {
+      "name": "莫里格娜 Morrigna",
+      "description": "<p>你是一名莫里格纳，一种与蜘蛛有灵性联结的引魂使者。尽管你曾经能随意召来成群的蜘蛛，如今只剩下一只蜘蛛仍伴随在你身边。你获得一只超小型蜘蛛作为魔宠。</p>\n<p>You are a morrigna, a psychopomp with a spiritual connection to spiders. While you once had swarms of spiders at your beck and call, today only a single spider remains. You gain a Tiny spider as a familiar.</p>"
+    },
+    "Aquatic Swarm": {
+      "name": "水栖（特征）虫群 Aquatic Swarm",
+      "description": "<p>在你的体内，许多小型水栖生物（如鱼、鳗鱼、浮游生物或软体动物）安家。你体内的水足以支援你的幼群，即使你在陆地上也是如此，但当你的身体完全浸没在水中时，它们会更加茁壮。你获得30尺的游泳速度，但你的陆地速度只有20尺。此外，你获得两栖（特征），并且如同所有具有两栖（特征）的生物一样，你既能在水中呼吸也能在空气中呼吸。</p>\n<p>Inside your body, a host of small aquatic creatures such as fish, eels, plankton, or mollusks make their home. The water in your body is enough to support your brood even while you are on land, but they thrive when your body is fully submerged in water. You gain a swim Speed of 30 feet, but your land speed is only 20 feet. In addition, you gain the amphibious trait, and like all creatures with the amphibious trait, you can breathe both water and air.</p>"
+    },
+    "Werecrocodile": {
+      "name": "狼人鳄 Werecrocodile",
+      "description": "<p>得益于鳄鱼传承带来的本能，你可以轻松地在水中移动。你获得15尺的游泳速度。你的混合形态并非标准的中型混合形态，而是大型。你的动物形态是一只鳄鱼。</p>\n<p>Thanks to the instincts from crocodilian heritage, you can move through the water easily. You gain a swim Speed of 15 feet. Instead of the standard Medium hybrid form, your hybrid form is Large. Your animal form is a crocodile.</p>"
+    },
+    "Cloud Giant": {
+      "name": "云巨人 Cloud Giant",
+      "description": "<p>你是云巨人，尽管你和任何巨人一样沉重，但当你坠落时，你会像下沉的云一样轻柔地飘向地面。无论你坠落的距离多远，你都不会因坠落而受到伤害。</p>\n<p>You are a cloud giant, and though you're as heavy as any giant, you drift gently to the ground like a sinking cloud when you fall. You take no damage from falling, regardless of the distance you fall.</p>"
+    },
+    "Arboreal Warden": {
+      "name": "树灵守望者 Arboreal Warden",
+      "description": "<p>你是一名树栖守卫，在最终离开故土、前往他处寻求财富之前，你曾在林地中巡逻——或是独自一人，或与一小片志同道合的人结伴同行。你获得@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{Shield Block}通用专长。若你已从你的职业自动获得Shield Block通用专长，则改为获得你选择的另一个1级通用专长。此外，你的原初魔法能量会用你自身的树皮强化木制盾牌，将其硬度从3提升至5，生命值从12提升至20，破坏阈值从6提升至10。此增益同样适用于@UUID[Compendium.pf2e.equipment-srd.Item.LZAwOTKk3dKwsGDd]{Wovenwood Shields}，使其硬度提高2点，生命值提高16点，破坏阈值提高8点。</p>\n<p>You're an arboreal warden who wandered the woods on patrol, either alone or in a copse of like-minded individuals, before eventually becoming uprooted and seeking your fortune elsewhere. You gain the @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{Shield Block} general feat. If you automatically gained the Shield Block general feat from your class, you gain a different 1st level general feat of your choice instead. Additionally, your primal magic energy strengthens wooden shields with your own bark, improving their Hardness from 3 to 5, their Hit Points from 12 to 20, and their Break Threshold from 6 to 10. This benefit also applies to @UUID[Compendium.pf2e.equipment-srd.Item.LZAwOTKk3dKwsGDd]{Wovenwood Shields}, increasing their Hardness by 2, their Hit Points by 16, and their Break Threshold by 8.</p>"
+    },
+    "Giantblood": {
+      "name": "巨人血统 Giantblood",
+      "description": "<p>与同族裔的其他成员相比，你无论在身躯还是名望上都更为超凡脱俗。无论你是巨人的后裔、你的身体成长到足以匹配你传奇的体型，还是你在一次与压倒性力量源泉的遭遇中幸存，你都是一股不可忽视的力量。除你族裔所带的特征外，你额外获得巨人血脉特征。你的体型变为大型；如常规规则所述，除非另有说明，你的触及为5尺。你还将你的最大负载上限与负载状态上限各提高2。每当你获得一个族裔专长时，你都可以从巨人血脉专长以及你族裔的专长中进行选择。由GM裁定，你可能不符合选择那些以“矮小与轻盈”为主题的族裔专长的资格。</p><p>从巨人族裔的传承列表中选择一个巨人血脉谱系，以决定你的外貌。这不会让你能够选择那些以前提要求特定巨人传承的专长，除非你先获得相应的谱系专长。</p>\n<p>You are larger-than-life compared to other members of your ancestry, in both body and reputation. Whether you're descended from giants, your body grew to match the size of your legend, or you survived an encounter with an overwhelming source of power, you are a force to be reckoned with. You gain the giantblood trait in addition to the traits from your ancestry. Your size becomes Large; as normal unless stated otherwise, your reach is 5 feet. You also increase your maximum and encumbered Bulk limits by 2. You can choose from giantblood feats and feats from your ancestry whenever you gain an ancestry feat. At the GM's discretion, you might not qualify to take feats from your ancestry that are themed around being small and lightweight.</p><p>Select a giantblood lineage from the list of heritages for the giant ancestry to determine your physical appearance. This doesn't allow you to take feats that require a specific giant heritage as a prerequisite, unless you first take the appropriate lineage feat.</p>"
+    },
+    "Chimera": {
+      "name": "奇美拉 Chimera",
+      "description": "<p>你是一个三头四足的混合体，由三种动物融合而成，拥有六条肢体，通常呈现为蛇尾的外观，每条都能够持握物体并执行交互动作。你由三个不同的角色组成，每名角色控制一个头部与两条肢体。你获得一个肢体徒手攻击来替代拳头徒手攻击，其余数据与拳头徒手攻击相同。决定你的头部像哪种动物、野兽或龙。你获得以下徒手攻击之一作为选择，属于斗殴武器组，且最符合你所选头部：一个颚部徒手攻击，造成1d6穿刺伤害并具有灵巧特征；一个颚部徒手攻击，造成1d8穿刺伤害；或一个角徒手攻击，造成1d6钝击伤害并具有推撞与多用（穿刺）特征。若你的头部不应具有颚或角，你可以加入具有相同数据的不同特性（例如喙、獠牙或颚钳）。你获得黑暗视觉。你是野兽，你的额外语言为龙语。</p>\n<p>You’re a three-headed quadrupedal amalgam of three animals, with six limbs that typically have the appearance of snake tails, each capable of holding objects and taking Interact actions. You’re composed of three different characters, each controlling one head and two of the limbs. You gain a limb unarmed attack instead of a fist unarmed attack, which otherwise has the same statistics as a fist unarmed attack. Decide what animal, beast, or dragon your head resembles. You gain your choice of one of the following unarmed attacks, which is in the brawling weapon group, that best fits the head you chose: a jaws unarmed attack that deals 1d6 piercing damage and has the finesse trait, a jaws unarmed attack that deals 1d8 piercing damage, or a horn unarmed attack that deals 1d6 bludgeoning damage and has the shove and versatile (piercing) traits. If your head wouldn’t have jaws or horns, you can add a different feature with the same statistics (such as a beak, fangs, or mandibles). You gain darkvision. You’re a beast, and your additional language is Draconic.</p>"
+    },
+    "Stone Giant": {
+      "name": "石巨人 Stone Giant",
+      "description": "<p>你是一个石巨人，能够在你喜欢称之为家的黑暗洞穴与隧道中看见。你获得黑暗视觉。</p>\n<p>You're a stone giant, capable of seeing in the dark caves and tunnels you prefer to call home. You gain darkvision.</p>"
+    },
+    "Elder Eye": {
+      "name": "长者之眼 Elder Eye",
+      "description": "<p>你的身体比其他邪眼老化得慢得多，你已活了很长时间，见过许多事物，并在时代的推移中积累了大量知识。你获得@UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{额外学识}专长三次。</p>\n<p>Your body ages far more slowly than other evil eyes, and you've lived a long time, seeing many things and gathering plenty of knowledge over time. You gain the @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{Additional Lore} feat three times.</p>"
+    },
+    "Ice Golemborn": {
+      "name": "冰魔像裔 Ice Golemborn",
+      "description": "<p>魔法冻结的冰构成了你身体的大部分，包括一个被塑形成锋利冰锥的附肢。你获得一个冰锥徒手攻击，造成1d4穿刺伤害与1点寒冷伤害。你的冰锥属于斗殴武器组。若你有额外的徒手攻击伤害骰，则你用冰锥造成的额外寒冷伤害等于冰锥的徒手攻击伤害骰数量（使用强效强击符文时，最多为4点寒冷伤害）。</p>\n<p>Magically frozen ice comprises a large portion of your body, including an appendage shaped into a sharp icicle. You gain an icicle unarmed attack that deals 1d4 piercing damage and 1 cold damage. Your icicle is in the brawling weapon group. If you have additional unarmed attack damage dice, the additional cold damage you deal with your icicle is equal to the icicle's number of unarmed attack damage dice (to a maximum of 4 cold damage with a major striking rune).</p>"
+    },
+    "Bestial Cerebrophage": {
+      "name": "兽化噬脑者 Bestial Cerebrophage",
+      "description": "<p>除了塑造你的脑鹦鹉螺之外的那只具有知性的生物是四足而非典型的人形，因此你拥有本能，能在电光火石的触发时更快行动，并在前肢空闲时移动得更快。只要你没有拿着任何东西，你的速度从25尺提高到30尺。此外，当你与敌人的先攻掷骰打成平手时，你先行动。</p>\n<p>The sapient creature other than a brain nautilus that formed you was quadrupedal instead of a typical humanoid shape, and as a result, you have instincts that help you act faster on a split-second trigger and can move faster when your forelimbs are free. As long as you're not holding anything, your Speed increases from 25 feet to 30 feet. Additionally, when you tie a foe's initiative roll, you go first.</p>"
+    },
+    "Midnight Eye": {
+      "name": "午夜之眼 Midnight Eye",
+      "description": "<p>你在黑暗深处的视觉敏锐度甚至比其他邪眼更为惊人，使你能够洞穿最深的魔法黑暗。你获得强等黑暗视觉。</p>\n<p>Your visual acuity in the depths of darkness is even more astounding than that of other evil eyes, allowing you to pierce the deepest magical darkness. You gain greater darkvision.</p>"
+    },
+    "Firmwing Gargoyle": {
+      "name": "坚翼石像鬼 Firmwing Gargoyle",
+      "description": "<p>你的翅膀巨大而有力，尽管不足以让你飞行，但确实能防止你在坠落时受伤。只要你能够行动并且有足够的空间，你就可以张开翅膀减缓任何坠落的速度，刚好足以避免受到伤害（你是否有足够的空间由GM酌情决定）。</p>\n<p>Your wings are large and powerful, which, while not strong enough to allow you to fly, do prevent you from getting hurt in a fall. As long as you can act and have enough room, you can spread your wings to slow any fall just enough to avoid taking damage (whether you have the room to do so depends on the GM's discretion).</p>"
+    },
+    "Twilight Cerebrophage": {
+      "name": "暮光食脑虫 Twilight Cerebrophage",
+      "description": "<p>你的视觉皮层比一般的食脑者更为强健，尤其是在能见度较差的情况下，使你能在昏暗光照条件下看得更清楚。你获得昏暗视觉。</p>\n<p>Your visual cortex is more robust than normal for a cerebrophage, especially in conditions of poor visibility, allowing you to see better in dim light conditions. You gain low-light vision.</p>"
+    },
+    "Calaca": {
+      "name": "卡拉卡 Calaca",
+      "description": "<p>你是一名骷髅使者（calaca），一种精通演奏优美乐曲以影响凡人之心的魂灵引导者（psychopomp）。你获得表演的受训熟练度。如果你将自动在表演上成为受训（例如来自你的背景或职业），则你改为在你选择的一项技能上成为受训。你还获得 @UUID[Compendium.pf2e.feats-srd.Item.xqAdXRd2gSQcqp5E]{Impressive Performance} 技能专长。</p>\n<p>You are a calaca, a psychopomp skilled at playing beautiful music in order to influence mortal hearts. You gain the trained proficiency in Performance. If you would automatically become trained in Performance (from your background or class for example, you instead become trained in a skill of your choice). You also gain the @UUID[Compendium.pf2e.feats-srd.Item.xqAdXRd2gSQcqp5E]{Impressive Performance} skill feat.</p>"
+    },
+    "Clay Golemborn": {
+      "name": "黏土魔像裔 Clay Golemborn",
+      "description": "<p>你形体的黏土至少部分是通过神圣魔法赋予生命的。从神圣法术列表中选择一个戏法。你可以将该法术作为神圣先天法术随意施放。戏法会被升阶到等于你等级一半（向上取整）的法术环阶。你每天一次可以通过祈求神祇介入或以其他方式调谐你体内的神圣魔法，将该戏法更换为同一列表中的另一个；这是一项10分钟的行动，具有专注（特征）。</p>\n<p>The clay of your form was brought to life at least partially through divine magic. Choose one cantrip from the divine spell list. You can cast this spell as a divine innate spell at will. A cantrip is heightened to a spell rank equal to half your level rounded up. You can change this cantrip to a different one from the same list once per day by praying for divine intercession or otherwise attuning to the divine magic within you; this is a 10-minute activity that has the concentrate trait.</p>"
+    },
+    "Deimavigga": {
+      "name": "戴玛维伽 Deimavigga",
+      "description": "<p>你是一名deimavigga，一种几乎完全由谎言与欺骗构成的魔鬼，因此能够采用另一种形态来欺骗他人，或将你的魔鬼本性从他们眼中隐藏起来。你获得@UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.BIXe8tmp0xSMDGfM]{Change Shape}魔鬼族裔专长作为加值专长。你的体型为中型。</p>\n<p>You are a deimavigga, a devil formed of little more than lies and deceit, and thus able to take on an alternate form to deceive others or hide your devilish nature from their eyes. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.BIXe8tmp0xSMDGfM]{Change Shape} devil ancestry feat as a bonus feat. Your size is Medium.</p>"
+    },
+    "Arboreal Reaper": {
+      "name": "树栖收割者 Arboreal Reaper",
+      "description": "<p>你是一名树栖收割者，一种外表略显诡异、专注于腐烂与衰败等自然过程的树栖族。你受训于威吓，并且你获得 @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} 技能专长作为加值专长；当你使用 Intimidating Glare 时，你通常是用自己诡异的外表来惊吓生物，而不是直接怒视它们，不过如果你愿意也可以怒视。</p>\n<p>You're an arboreal reaper, an arboreal with a slightly eerie appearance focused on the natural processes of rot and decay. You are trained in Intimidation, and you gain the @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} skill feat as a bonus feat; when you use Intimidating Glare, you typically scare creatures with your eerie appearance, rather than directly glaring at them, though you're free to glare if you wish.</p>"
+    },
+    "Catrina": {
+      "name": "卡特里娜 Catrina",
+      "description": "<p>你是一名卡特里娜，一位能言善辩、能够安抚强烈情绪的灵魂引渡者。你在交涉中获得受训的熟练度。如果你会自动在交涉中变为受训（例如来自你的背景或职业），则你改为在你选择的一项技能中变为受训。你还获得 @UUID[Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX]{无须惊慌} 技能专长。</p>\n<p>You are a catrina, a silver-tongued psychopomp capable of calming strong emotions. You gain the trained proficiency in Diplomacy. If you would automatically become trained in Diplomacy (from your background or class for example), you instead become trained in a skill of your choice. You also gain the @UUID[Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX]{No Cause for Alarm} skill feat.</p>"
+    },
+    "Waveglider Gargoyle": {
+      "name": "踏浪石像鬼 Waveglider Gargoyle",
+      "description": "<p>你已经适应了在波涛之下的生活。你获得两栖（特征）并获得10尺的游泳速度。</p>\n<p>You've adapted to a life lived below the waves. You gain the amphibious trait and a swim Speed of 10 feet.</p>"
+    },
+    "Clamberlimb Gargoyle": {
+      "name": "攀爬肢石像鬼 Clamberlimb Gargoyle",
+      "description": "<p>与你见过的大多数其他种类的石像鬼不同，你既没有翅膀，也不是双足体态。相反，你有四条强壮的腿和四足的身体形态。你可以选择自己是否还拥有两条手臂，像半人马那样，或者让你的前腿末端是能够握持物体的利爪。不过，无论哪种方式，你都可以像其他具有类人生物体形和两只手的生物一样握持物体。你的速度为30尺。</p>\n<p>Unlike most other kinds of gargoyles, you have neither wings nor a bipedal stature. Instead, you have four powerful legs and a quadrupedal body shape. You choose whether you also have two arms, like a centaur, or whether your forelegs end in claws capable of holding objects. However, either way, you can hold objects like other creatures with a humanoid body shape and two hands. Your Speed is 30 feet.</p>"
+    },
+    "Storm Giant": {
+      "name": "风暴巨人 Storm Giant",
+      "description": "<p>你是一名风暴巨人，适应了部分生活在波涛之下。你获得10英尺的游泳速度并获得两栖（特征）。如同所有具有两栖（特征）的生物一样，你可以同时在水中与空气中呼吸。</p>\n<p>You're a storm giant, adapted to a live partially beneath the waves. You have a swim Speed of 10 feet and gain the amphibious trait. Like all creatures with the amphibious trait, you can breathe both water and air.</p>"
+    },
+    "Pest Swarm": {
+      "name": "害虫虫群 Pest Swarm",
+      "description": "<p>你与一群啮齿动物、鼬类或其他陆生害兽共享你的身体。你获得不精确嗅觉，射程为30尺。这意味着你可以用嗅觉来确定一个生物的位置。若你位于该生物的下风处，GM通常会将射程加倍；若你位于其上风处，GM通常会将射程减半。此外，在你嗅觉射程内对生物或物体进行@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek}的察觉检定时，你获得+2环境加值。</p>\n<p>You share your body with a colony of rodents, weasels, or other terrestrial vermin. You gain imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine a creature's location. The GM will usually double the range if you're downwind from the creature or halve the range if you're upwind. In addition, you gain a +2 circumstance bonus to Perception checks to @UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{Seek} a creature or object within the range of your scent.</p>"
+    },
+    "Quintron": {
+      "name": "奎因特隆 Quintron",
+      "description": "<p>你是由五个昆特里特组成的组合体——拥有金属身躯、能够变形并合体为单一人形形态的活体野兽。每个昆特里特在身体的某处都有两条可抓握的附肢（可能是手臂、尾巴、大象的长鼻等），每条都能够握持物体并进行交互动作。你由五个不同的角色构成，每个角色控制一个昆特里特。你获得一种附肢徒手攻击以取代拳头徒手攻击；除此之外，它与拳头徒手攻击具有相同的数据。你获得以下徒手攻击中的一种选择（属于斗殴武器组），以最符合你所选择的头部：一种颚部徒手攻击，造成1d6穿刺伤害并具有灵巧特征；一种颚部徒手攻击，造成1d8穿刺伤害；或一种角徒手攻击，造成1d6钝击伤害并具有推挤与多用（穿刺）特征。若你的头部本不该有颚或角，你可以添加一个具有相同数据的不同特性（例如鸟喙、獠牙或颚钳）。你获得 @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.vaqDRgwx8noi7ZK0]{Let's Split Up, Gang!} 合体专长作为奖励专长，使你能够在对你有利时分裂为五个独立的昆特里特。尽管外表如此，你是一只活体野兽，你的额外语言为乌托邦语。</p>\n<p>You're a combination of five quintrites, living beasts with metal bodies that can transform and combine into a single humanoid form. Each quintrite has two prehensile appendages somewhere on their body (which might be arms, a tail, an elephant's trunk, and so on), each capable of holding objects and taking Interact actions. You're composed of five different characters, each controlling one quintrite. You gain an appendage unarmed attack instead of a fist unarmed attack, which otherwise has the same statistics as a fist unarmed attack. You gain your choice of one of the following unarmed attacks, which is in the brawling weapon group, that best fits the head you chose: a jaws unarmed attack that deals 1d6 piercing damage and has the finesse trait, a jaws unarmed attack that deals 1d8 piercing damage, or a horn unarmed attack that deals 1d6 bludgeoning damage and has the shove and versatile (piercing) traits. If your head wouldn't have jaws or horns, you can add a different feature with the same statistics (such as a beak, fangs, or mandibles). You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-feats.Item.vaqDRgwx8noi7ZK0]{Let's Split Up, Gang!} combined feat as a bonus feat, allowing you to split into five separate quintrites when it would be to your advantage. Despite your appearance, you are a living beast, and your additional language is Utopian.</p>"
+    },
+    "Aquatic Cerebrophage": {
+      "name": "水栖（特征） 脑噬者 Aquatic Cerebrophage",
+      "description": "<p>你保留了鹦鹉螺形态在水下呼吸与移动的能力，不过作为交换，你在陆地上更慢。你获得两栖（特征），这意味着你既能呼吸空气也能呼吸水。你的陆地速度为20尺而非25尺，并且你获得20尺游泳速度。</p>\n<p>You retain a nautiloid ability to breathe and move underwater, though in exchange you're slower on land. You gain the amphibious trait, meaning you can breathe both air and water. Your land Speed is 20 feet instead of 25 feet, and you gain a 20 foot swim Speed.</p>"
+    },
+    "Gelugon": {
+      "name": "冰魔（Gelugon） Gelugon",
+      "description": "<p>你是一名冰狱魔，一种擅长谋划与规划的魔鬼。你获得用于战争学识的 @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{额外学识} 与 @UUID[Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0]{把握} 专长，以及 @UUID[Compendium.pf2e.feats-srd.Item.qvLcZGsV0HP2O0CG]{战斗策划者} 技能专长，即使你不满足战斗策划者专长的先决条件。你的体型为大型。</p>\n<p>You are a gelugon, a devil adept at strategizing and planning. You gain the @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{Additional Lore} and @UUID[Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0]{Assurance} feats for Warfare Lore, as well as the @UUID[Compendium.pf2e.feats-srd.Item.qvLcZGsV0HP2O0CG]{Battle Planner} skill feat, even if you don't meet the Battle Planner feat's prerequisites. Your size is Large.</p>"
+    },
+    "Hamatula": {
+      "name": "哈马图拉 Hamatula",
+      "description": "<p>你是一只哈玛图拉，一种擅长守卫重要地点和贵重物体的魔鬼。你的身体覆盖着细小的倒钩与尖刺。你获得@UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.1UeQ1xT5fxEHw2dm]{Flare Barbs}反应动作（）。你的体型为中型。</p>\n<p>You are a hamatula, a devil adept at guarding locations and objects of value. Your body is covered with thin barbs and spines. You gain the @UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-actions.Item.1UeQ1xT5fxEHw2dm]{Flare Barbs} reaction. Your size is Medium.</p>"
+    },
+    "Osyluth": {
+      "name": "奥西鲁斯 Osyluth",
+      "description": "<p>你是一名奥西鲁斯，一种擅长追踪、审讯并折磨异端的魔鬼。你在用于@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察觉谎言}的察觉检定上获得+1环境加值，并且在对抗试图对你@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{说谎}的察觉DC上获得+1环境加值。你获得威吓的受训熟练度。若你将自动变为威吓受训（例如来自你的背景或职业），你改为在你选择的一项技能上变为受训。你的体型为大型。</p>\n<p>You are an osyluth, a devil adept at seeking out, interrogating, and tormenting heretics. You gain a +1 circumstance bonus to Perception checks to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} and to Perception DCs against attempts to @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} to you. You gain the trained proficiency in Intimidation. If you would automatically become trained in Intimidation (from your background or class, for example), you instead become trained in a skill of your choice. Your size is Large.</p>"
+    },
+    "Phistophilus": {
+      "name": "菲斯托菲勒斯 Phistophilus",
+      "description": "<p>你是一名菲斯托菲鲁斯，一种擅长交易、拟定契约并操纵他人的魔鬼。你在欺瞒与交涉中获得受训（熟练度）等级。如果你本应自动在这些技能之一中成为受训（熟练度）（例如来自你的背景或职业），则你改为在你选择的一项技能中成为受训（熟练度）。你获得 @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{额外学识} 专长，用于法律学识。你的体型为中型。</p>\n<p>You are a phistophilus, a devil adept at making deals, crafting contracts, and manipulating others. You gain the trained proficiency rank in Deception and Diplomacy. If you would automatically become trained in one of those skills (from your background or class, for example), you instead become trained in a skill of your choice. You gain the @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{Additional Lore} feat for Legal Lore. Your size is Medium.</p>"
+    },
+    "Irontalon Gargoyle": {
+      "name": "铁塔隆石像鬼 Irontalon Gargoyle",
+      "description": "<p>你拥有强力的利爪与惊人的握力，使你更容易攀爬。你在进行攀爬的运动检定时获得+2环境加值，并获得@UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{战斗攀爬者}运动专长。</p>\n<p>You have powerful claws and a formidable grip, which makes it easier for you to climb. You gain a +2 circumstance bonus to Athletics checks to Climb and you gain the @UUID[Compendium.pf2e.feats-srd.Item.09PurtIanNUPfNRq]{Combat Climber} skill feat.</p>"
+    },
+    "Rapacious Lamia": {
+      "name": "贪婪的拉弥亚 Rapacious Lamia",
+      "description": "<p>獠牙当然很适合咬住敌人并进食，但要彻底解决对手时，有时没有什么比用满脸利爪迎面痛击更痛快的了。你获得一次爪子徒手攻击，造成 1d6 挥砍伤害。你的爪子属于拳斗组，并具有 灵巧、娴熟 和 徒手 特征。你是一名猎人拉米亚。此外，你从拉米亚族裔获得的颚部徒手攻击获得 擒抱 特征。</p>\n<p>Fangs are all well and good for grabbing onto your foe and feeding, but when it comes to finishing them off, sometimes there's nothing quite like meeting a foe with a face full of nails. You gain a claw unarmed attack that deals 1d6 slashing damage. Your claws are in the brawling group and have the agile, finesse, and unarmed traits. You are a hunter lamia. Additionally, your jaws unarmed attack from the lamia ancestry gains the grapple trait.</p>"
+    },
+    "Hill Giant": {
+      "name": "丘陵巨人 Hill Giant",
+      "description": "<p>你是山丘巨人，虽然你也拥有大多数巨人的动力与野心，但你同样理解一次良好、扎实的休息的力量。每小时一次，你可以用一次10分钟的行动来小睡片刻，这会给予你等同于你等级的临时生命值，持续10分钟。</p><p>@UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-effects.Item.3Nh1U4ebz1cXNBjF]{效果: 小睡}</p>\n<p>You're a hill giant and while you share the drive and ambition of most giants, you also understand the power of a good, solid, rest. Once per hour, you can take a quick power nap as a 10-minute activity, which gives you temporary Hit Points equal to your level that last for 10 minutes.</p><p>@UUID[Compendium.battlezoo-ancestries-living-legends-pf2e.yol-effects.Item.3Nh1U4ebz1cXNBjF]{Effect: Power Nap}</p>"
+    },
+    "Cerberus": {
+      "name": "刻耳柏洛斯 Cerberus",
+      "description": "<p>你是一只三头的犬科守卫，周围环绕着六条类似手臂的附肢，能够持握物体并执行“交互”动作，通常以锁链的形式呈现。你由三个不同的角色组成，每个角色控制一个头部与两条附肢。你获得一种“附肢”徒手攻击，替代“拳头”徒手攻击；除攻击名称不同外，其数据与拳头徒手攻击相同。你还获得一种“颚部”徒手攻击，造成1d6穿刺伤害，具有灵巧特征，并且属于斗殴武器组。你获得一种特殊感官：不精确嗅觉，射程30英尺。这意味着你可以用嗅觉来确定一个生物的确切位置。若你处于该生物的下风处，GM通常会将射程加倍；若你处于上风处，则将射程减半。此外，当你尝试定位位于你嗅觉射程内的未被侦测生物时，你的察觉检定获得+2环境加值。你是一只野兽，你的额外语言可以在炼狱语或天界语中自选一种。</p>\n<p>You're a three-headed canine guardian, surrounded by six armlike appendages capable of holding objects and taking Interact actions, which typically take the form of chains. You're composed of three different characters, each controlling one head and two of the appendages. You gain an appendage unarmed attack instead of a fist unarmed attack, which otherwise has the same statistics as a fist unarmed attack. You also gain a jaws unarmed attack that deals 1d6 piercing damage, has the finesse trait, and is in the brawling weapon group. You gain a special sense: imprecise scent with a range of 30 feet. This means you can use your sense of smell to determine the exact location of a creature. The GM will usually double the range if you're downwind from the creature or halve the range if you're upwind. In addition, you gain a +2 circumstance bonus to Perception checks whenever you're trying to locate an undetected creature that is within the range of your scent. You're a beast, and your additional language is your choice of Diabolic or Requian.</p>"
+    },
+    "Clutchswapped Gargoyle": {
+      "name": "离合交换的石像鬼 Clutchswapped Gargoyle",
+      "description": "<p>你是换巢者之一——一种极其罕见的石像鬼，尽管你出生于巢群的卵中，却看起来更像普通的人类、精灵或其他类似的人形生物。你的体色与当地人形族群相匹配，而不是你同族鲜艳的颜色，并且你没有翅膀、尾巴或其他明显的“怪物”特征。尽管这个名字多少带有贬义，换巢者仍因其能够担任石像鬼巢群或氏族与任何胆怯或恐惧的邻居之间的使者与调停者而备受尊崇。你并非看起来像石像鬼；你的天生外貌会让你在粗略检查下显得像所选定的人形生物类型的一员（事实上，如果其他人没听说过换巢者，他们可能不会相信你是石像鬼）。了解石像鬼并与你互动的人，可能会使用 @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察觉动机} 或以其他方式察觉到能揭示你族裔的线索，例如你缺乏多余动作，以及你为了避免显得完全静止而刻意伪装出坐立不安或摇晃的那种不自然方式。即便如此，你在避免被识破时，你的欺瞒检定与DC获得+4环境加值。</p>\n<p>You're one of the clutchswapped—a very rare gargoyle who, despite being born from an egg of the clutch, looks more like a mundane human, elf, or other similar humanoid. Your coloration matches that of the local humanoid population rather than the vibrant colors of your kin, and you don't have wings, a tail, or other obvious \"monstrous\" features. Despite the somewhat derogatory name, clutchswapped are highly revered for their ability to serve as envoys and mediators between a gargoyle clutch or clan and any skittish or fearful neighbors. Instead of a gargoyle, your natural appearance makes you appear to be a member of the chosen type of humanoid to a brief inspection (in fact, others might not believe you're a gargoyle if they haven't heard of clutchswapped). It's possible for someone who knows about gargoyles and interacts with you to use @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive} or otherwise detect cues that reveal your ancestry, such as your lack of wasted motion and the unnatural way you fake a fidget or sway in order to avoid appearing completely still. Even then, you gain a +4 circumstance bonus to your Deception checks and DCs to avoid detection.</p>"
+    },
+    "Werebear": {
+      "name": "熊人 Werebear",
+      "description": "<p>与你的熊族亲族相似，你有着强壮的体格。你从你的族裔获得12点生命值而非10点。你还获得@UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{顽强}专长。你不使用标准的混合形态，而是你的混合形态为大型，并且你的爪子徒手攻击造成1d6劈砍伤害并失去灵巧特征。你的动物形态是一只熊。</p>\n<p>Similar to your ursine kin, you have a sturdy frame. You gain 12 Hit Points from your ancestry instead of 10. You also gain the @UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{Diehard} feat. Instead of the standard hybrid form, your hybrid form is Large and your claw unarmed attack deals 1d6 slashing damage and loses the finesse trait. Your animal form is a bear.</p>"
+    },
+    "Vespin Swarm": {
+      "name": "维斯平虫群 Vespin Swarm",
+      "description": "<p>你的身体里寄居着一群带刺针的节肢动物，例如黄蜂、大黄蜂、蝎子或蜜蜂。受到威胁时，你的育群成员会从你的口中或鼻中滑出，并蜇刺你的敌人。你获得一次刺针徒手攻击，造成 1d4 穿刺伤害与 1 点毒素伤害；穿刺伤害是该徒手攻击的武器伤害骰，但如果你拥有多个伤害骰（例如来自强袭符文），毒素伤害会提高为每个武器伤害骰 1 点。你的刺针属于拳斗组，并具有灵巧特征。</p>\n<p>Your body contains a swarm of arthropods with stingers, such as wasps, hornets, scorpions, or bees. When threatened, members of your brood slip out of your mouth or nose and sting your enemies. You gain a stinger unarmed attack that deals 1d4 piercing damage and 1 poison damage; the piercing damage is the unarmed attack's weapon damage die, but if you have multiple damage dice (such as from a striking rune), the poison damage increases to 1 per weapon damage die. Your stinger is in the brawling group and has the finesse trait.</p>"
+    },
+    "Feral Lamia": {
+      "name": "野性拉弥亚 Feral Lamia",
+      "description": "<p>你是真正的荒野与荒漠住民，因此它们不会试图阻挡你的道路。你无视由灌木丛造成的困难地形，而由灌木丛造成的更高等困难地形对你而言仅为困难地形。你可以是拉弥亚族母或狩猎拉弥亚。</p>\n<p>You are a true denizen of the wild and the wastes, and thus they do not seek to bar your path. You ignore difficult terrain from undergrowth, and greater difficult terrain from undergrowth is only difficult terrain for you. You can be either a lamia matriarch or a hunter lamia.</p>"
+    },
+    "Monadic Deva": {
+      "name": "莫纳德天人 Monadic Deva",
+      "description": "<p>作为两类守护提婆之一（与摩瓦尼同族并列），你曾肩负守护灵魂循环的职责，并确保无人试图操纵来世的正当进程。即便堕落，你仍保有独特的灵魂安稳感，并与灵魂引渡者保持友好关系（他们往往认为堕落与未堕落天使之间的差别只是学术问题）。当你在对抗死亡效果、造成虚无伤害的效果，或以你的灵魂为目标或操纵你的灵魂的效果的豁免上掷骰得到成功时，你改为获得大成功或大失败。</p>\n<p>As one of the two guardian devas, alongside your movanic kin, you were once charged with guarding the cycle of souls and ensuring that no one attempted to manipulate the proper course of the afterlife. Even fallen, you retain a distinct security of soul and friendly relations with psychopomps (who tend to find the difference between fallen and unfallen angels academic). When you roll a success on a saving throw against a death effect, an effect that deals void damage, or an effect that targets or manipulates your soul, you get a critical success instead.</p>"
+    },
+    "Nosoi": {
+      "name": "诺索伊 Nosoi",
+      "description": "<p>你是一只诺索伊，一种鸟类外形的引魂使。虽然你已失去真正飞行的能力，但得益于你紧凑而轻巧的体型，你仍能在短时间内扑扇滑翔。你可以穿戴、持握、挥持并使用物品，而且你的翅膀和类人生物的手一样灵巧。对于处于你空间内且中型生物能够触及的东西，你不需要花费任何额外动作来触及它。举例来说，如果你想转动一个离地四英尺的门把手，你只需要花费一个“交互”动作即可。你比其他引魂使更小。你是超小型，而非中型；按照超小型生物的常规，你的触及为0英尺，而非5英尺。</p>\n<p>You are a nosoi, a bird-like psychopomp. While you’ve lost the ability to truly fly, thanks to your compact and lightweight build, you can still flutter for brief spurts. You can wear, hold, wield, and use items, and your wings are as dexterous as humanoid hands. You don’t need to spend any additional actions to reach something in your space that a Medium creature could reach. For instance, if you wanted to turn a door handle located four feet off the ground, you only need to spend a single Interact action to do so. You’re smaller than other psychopomps. You’re Tiny, rather than Medium; as normal for a Tiny creature, your reach is 0 feet, rather than 5 feet.</p>"
+    },
+    "Fire Giant": {
+      "name": "火焰巨人 Fire Giant",
+      "description": "<p>你是一个能够在极端高温中生存的火巨人。你获得等于你等级一半的火焰抗力（最低 1），并且你将环境高温效果视为比原本低一个等级的极端程度（难以置信的高温变为极端高温，极端高温变为严重高温，依此类推）。</p>\n<p>You're a fire giant capable of surviving extreme heat. You gain fire resistance equal to half your level (minimum 1), and you treat environmental heat effects as if they were one step less extreme (incredible heat becomes extreme, extreme heat becomes severe, and so on).</p>"
+    },
+    "Stone Golemborn": {
+      "name": "石魔像裔 Stone Golemborn",
+      "description": "<p>坚实的石质四肢与躯干让你难以被撼动。你在对抗试图将你@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{Shove}或@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip}的企图时，你的强韧或反射DC获得+2环境加值。此加值同样适用于对抗试图强迫你移动或将你击倒至@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}的法术或效果的豁免。此外，若任何效果将迫使你移动10尺或更多，你只会被移动一半距离。</p>\n<p>Solid stone limbs and torso make you hard to shift. You gain a +2 circumstance bonus to your Fortitude or Reflex DC against attempts to @UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{Shove} or @UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{Trip} you. This bonus also applies to saving throws against spells or effects that attempt to force you to move or knock you @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. In addition, if any effect would force you to move 10 feet or more, you are moved only half the distance.</p>"
+    },
+    "Burning Eye": {
+      "name": "燃烧之眼 Burning Eye",
+      "description": "<p>你的眼睛炽烈燃烧，使你能够从眼中射出火焰光束，并反过来保护你免受火焰热量的侵袭。你获得一次眼部光束的远程徒手攻击，射程为20英尺，造成1d4火焰伤害。你获得等同于你等级一半的火焰伤害抗力（最低1）。</p>\n<p>Your eye is ablaze, allowing you to shoot beams of fire from your eye and protecting you from the heat of the flames in turn. You gain an eye beam ranged unarmed attack with a range of 20 feet that deals 1d4 fire damage. You gain resistance to fire damage equal to half your level (minimum 1).</p>"
+    },
+    "Loremaster Cerebrophage": {
+      "name": "博学秘典师 脑噬者 Loremaster Cerebrophage",
+      "description": "<p>你不仅保留了多年来吞食的大脑中有用的技能，还保留了各种琐碎知识，并且你也能在日常生活中很好地加以利用。你获得@UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{额外学识}专长三次。</p>\n<p>You've retained not only useful skills but also various forms of trivia from the brains you've consumed over the years, and you can put them to good use in your daily life as well. You gain the @UUID[Compendium.pf2e.feats-srd.Item.BocFD2KV0qgUC76x]{Additional Lore} feat three times.</p>"
+    },
+    "Suffocating Lamia": {
+      "name": "窒息拉弥亚 Suffocating Lamia",
+      "description": "<p>大多数蛇妖女族长的下半身都是某种有毒蛇类。而你则相反，拥有某种巨型绞杀蛇的身躯——蟒蛇、森蚺，或其他同样危险的种类。你拥有一次尾巴攻击，造成1d8钝击伤害，属于徒手格斗武器组，并具有擒抱与徒手特征。你是一名蛇妖女族长。</p>\n<p>Most lamia matriarchs have the lower bodies of some kind of venomous snake. You, on the other hand, have the body of some enormous constrictor—a python, anaconda, or something else suitably dangerous. You have a tail attack that deals 1d8 bludgeoning damage, is in the brawling weapon group, and has the grapple and unarmed traits. You are a lamia matriarch.</p>"
+    },
+    "Olethros": {
+      "name": "奥莱斯洛斯 Olethros",
+      "description": "<p>你是一名olethros，一种具有绢蛾美学并与命运有强烈联系的引魂使。即使你已被切断，仍残存着某种联系，使你得以窥见未来将至的片段。你在休息时会做奇异的预言之梦，然后在你的每日准备期间，你可以指定30英尺内的任意生物，以从其当日可能的命运中得知一小段信息，其形式为GM所选择的一个单词。</p>\n<p>You are an olethros, a psychopomp with a silk moth aesthetic and a strong connection to fate. Even though you've been Severed, some connection yet remains, allowing you to catch glimpses of what is to come. You receive strange prophetic dreams while you rest, and then during your daily preparations, you can designate any creature within 30 feet to learn a small piece of their possible fate for the day, in the form of a single word chosen by the GM.</p>"
+    },
+    "Wererat": {
+      "name": "鼠人​​狼人 Wererat",
+      "description": "<p>你知道如何融入拥挤的城市景观或其他生物之中，就像几乎在任何大都市街道下都能找到的大群啮齿动物一样。你对抗疾病的豁免获得+1环境加值。此外，你可以将至少比你大一级体型的生物（通常为中型或更大），或由至少四个同体型生物组成的人群，作为进行 @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} 与 @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} 动作的掩蔽，但你仍然不能将这些生物作为掩蔽用于其他用途，例如 @UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{Take Cover} 动作。你的动物形态是一只老鼠。</p>\n<p>You know how to blend into crowded cityscapes or among other creatures, much like the masses of rodents that can usually be found under any metropolitan street. You gain a +1 circumstance bonus to saving throws against diseases. In addition, you can use creatures that are at least one size larger than you (usually Medium or larger), or crowds of at least four creatures of the same size, as cover for the @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} and @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} actions, though you still can't use such creatures as cover for other uses, such as the @UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{Take Cover} action. Your animal form is a rat.</p>"
+    },
+    "Iron Golemborn": {
+      "name": "铁魔像裔 Iron Golemborn",
+      "description": "<p>你的身体部分或全部由坚固的铁铸成，使你更难被杀死。你获得@UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{Diehard}专长，作为一项加值通用专长。每天第一次当你将要获得或提高你的@UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{Wounded}状态时，你不会获得或提高你的受伤（状态）。</p>\n<p>Parts or all of your body have been formed from sturdy iron, making you more difficult to kill. You gain the @UUID[Compendium.pf2e.feats-srd.Item.I0BhPWqYf1bbzEYg]{Diehard} feat as a bonus general feat. The first time each day you would gain or increase your @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{Wounded} condition, you don't gain or increase your wounded condition.</p>"
+    },
+    "Planetar": {
+      "name": "行星天使 Planetar",
+      "description": "<p>天堂的大多数任务都涉及和平、耐心与温和的劝说。然而，有时也需要从天穹降下神圣之火，用燃烧的利剑惩击邪恶，而在那些时候，你曾被召唤。作为一名星界天使，你曾是强大却极其不懂得迂回的存在——而你现在或许仍是如此。你受训于威吓，并且获得 @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} 技能专长，作为额外技能专长。</p>\n<p>Most of Heaven's tasks involve peace, patience, and gentle persuasion. On occasion, however, they involve raining holy fire down from the heavens and smiting evil with a burning sword, and in those cases, you were once summoned. As a planetar, you were a powerful but exceedingly unsubtle being—and you still might be. You are trained in Intimidation, and you gain the @UUID[Compendium.pf2e.feats-srd.Item.xQMz6eDgX75WX2ce]{Intimidating Glare} skill feat as a bonus skill feat.</p>"
+    }
+  }
+}

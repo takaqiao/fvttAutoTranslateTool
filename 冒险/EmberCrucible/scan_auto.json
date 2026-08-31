@@ -1,0 +1,398 @@
+[
+ {
+  "src": "crucible",
+  "pack": "playtest",
+  "owner": "Playtest 1 - The Ring of Valor > Orivech",
+  "name": "Intercept",
+  "id": "intercept0000000",
+  "actionIds": [
+   "intercept"
+  ],
+  "actionCount": 1,
+  "hasEffects": false,
+  "tags": [
+   "reaction",
+   "movement"
+  ],
+  "hits": [
+   {
+    "where": "动作 intercept",
+    "text": "may make a @Action[default reactiveStrike] against them. Playtest Notes The interruption of enemy movement is not yet automated."
+   }
+  ],
+  "copies": 14
+ },
+ {
+  "src": "crucible",
+  "pack": "playtest",
+  "owner": "Playtest 1 - The Ring of Valor > Belladonna",
+  "name": "Assassin",
+  "id": "assassin00000000",
+  "actionIds": [
+   "markForDeath"
+  ],
+  "actionCount": 1,
+  "hasEffects": false,
+  "tags": [
+   "undetectable"
+  ],
+  "hits": [
+   {
+    "where": "动作 markForDeath",
+    "text": " round of Combat becomes one greater than the Initiative of your marked target. Playtest Notes This action is not yet automated."
+   }
+  ],
+  "copies": 3
+ },
+ {
+  "src": "crucible",
+  "pack": "playtest",
+  "owner": "Playtest 1 - The Ring of Valor > Eliorwen",
+  "name": "Gesture: Step",
+  "id": "gesturestep00000",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "ds to cast and has a base cost of 3 Action and 1 Focus . Playtest Notes The movement aspect of this talent is not yet automated and must be manually performed as a consequence of the spell."
+   }
+  ],
+  "copies": 3
+ },
+ {
+  "src": "crucible",
+  "pack": "playtest",
+  "owner": "Playtest 1 - The Ring of Valor > Ulfen",
+  "name": "Unshakeable Stance",
+  "id": "unshakeablestanc",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "a Critical Success rolled by an enemy or a Critical Failure rolled by yourself. Playtest Notes This talent is not yet automated."
+   }
+  ],
+  "copies": 3
+ },
+ {
+  "src": "crucible",
+  "pack": "playtest",
+  "owner": "Playtest 1 - The Ring of Valor > Zarajah",
+  "name": "Strategic Repositioning",
+  "id": "strategicreposit",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "batants have this feature, repositioning occurs in reverse order of Initiative. Playtest Notes This talent is not yet automated."
+   }
+  ],
+  "copies": 3
+ },
+ {
+  "src": "crucible",
+  "pack": "talent",
+  "owner": "(包级条目)",
+  "name": "Beastmaster",
+  "id": "beastmaster00000",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "in combat. Your companion may participate in encounters as an allied combatant. Playtest Notes This talent is not yet automated."
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "crucible",
+  "pack": "talent",
+  "owner": "(包级条目)",
+  "name": "Fulcrum",
+  "id": "fulcrum000000000",
+  "actionIds": [
+   "conserveMomentum"
+  ],
+  "actionCount": 1,
+  "hasEffects": false,
+  "tags": [
+   "reaction"
+  ],
+  "hits": [
+   {
+    "where": "动作 conserveMomentum",
+    "text": "nt enemy. Your attacker must re-roll their attack targeting their ally instead. Playtest Notes This action is not yet automated."
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "crucible",
+  "pack": "talent",
+  "owner": "(包级条目)",
+  "name": "Inflection: Extend",
+  "id": "inflectionextend",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "onditions that they cause are increased in duration. Effect duration increases from the Extend inflection are not yet automated in Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system."
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "crucible",
+  "pack": "talent",
+  "owner": "(包级条目)",
+  "name": "Inflection: Negate",
+  "id": "inflectionnegate",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": " inflicts vulnerability to Corruption damage upon an adjacent enemy. The effects of the Negate inflection are not yet automated for Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system"
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "crucible",
+  "pack": "talent",
+  "owner": "(包级条目)",
+  "name": "Shapeshifter",
+  "id": "shapeshifter0000",
+  "actionIds": [
+   "beastShape",
+   "beastShapeRevert"
+  ],
+  "actionCount": 2,
+  "hasEffects": true,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "mation ends and any excess damage becomes Madness . Playtest Notes This talent and its associated actions are not yet automated."
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Kern",
+  "name": "Shapeshifter",
+  "id": "shapeshifter0000",
+  "actionIds": [
+   "beastShape",
+   "beastShapeRevert"
+  ],
+  "actionCount": 2,
+  "hasEffects": true,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "mation ends and any excess damage becomes Madness . Playtest Notes This talent and its associated actions are not yet automated."
+   }
+  ],
+  "copies": 2
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Kern",
+  "name": "Gesture: Step",
+  "id": "gesturestep00000",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "ds to cast and has a base cost of 3 Action and 1 Focus . Playtest Notes The movement aspect of this talent is not yet automated and must be manually performed as a consequence of the spell."
+   }
+  ],
+  "copies": 7
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Tethra Shùl",
+  "name": "Inflection: Negate",
+  "id": "inflectionnegate",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": " inflicts vulnerability to Corruption damage upon an adjacent enemy. The effects of the Negate inflection are not yet automated for Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system"
+   }
+  ],
+  "copies": 4
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Tethra Shùl",
+  "name": "Inflection: Extend",
+  "id": "inflectionextend",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "onditions that they cause are increased in duration. Effect duration increases from the Extend inflection are not yet automated in Playtest 1. This inflection is included as an example of the intended direction for the Spellcraft system."
+   }
+  ],
+  "copies": 7
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Silver Beam Guard",
+  "name": "Intercept",
+  "id": "intercept0000000",
+  "actionIds": [
+   "intercept"
+  ],
+  "actionCount": 1,
+  "hasEffects": false,
+  "tags": [
+   "reaction",
+   "movement"
+  ],
+  "hits": [
+   {
+    "where": "动作 intercept",
+    "text": "may make a @Action[default reactiveStrike] against them. Playtest Notes The interruption of enemy movement is not yet automated."
+   }
+  ],
+  "copies": 4
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Juro Wandren",
+  "name": "Wirrun Lineage",
+  "id": "emberWirrunLinea",
+  "actionIds": [
+   "implacableHunter"
+  ],
+  "actionCount": 1,
+  "hasEffects": true,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "our vision is not impaired by fog, mist, snow, or other atmospheric effects. Alpha One: This vision effect is not yet automated."
+   }
+  ],
+  "copies": 2
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Juro Wandren",
+  "name": "Strategic Repositioning",
+  "id": "strategicreposit",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "batants have this feature, repositioning occurs in reverse order of Initiative. Playtest Notes This talent is not yet automated."
+   }
+  ],
+  "copies": 3
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Abyssal Echo",
+  "name": "Abyssal Remains",
+  "id": "abyssalRemains00",
+  "actionIds": [
+   "abyssalRemains"
+  ],
+  "actionCount": 1,
+  "hasEffects": true,
+  "tags": [
+   "weakened",
+   "reflex",
+   "corruption"
+  ],
+  "hits": [
+   {
+    "where": "动作 abyssalRemains",
+    "text": "annot perceive sources of dim light and sources of bright light appear dim. Playtest Notes : Cursed Vision is not yet automated, but will be some time after Foundry VTT version 14 becomes stable."
+   }
+  ],
+  "copies": 4
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Jahud Assassin",
+  "name": "Assassin",
+  "id": "assassin00000000",
+  "actionIds": [
+   "markForDeath"
+  ],
+  "actionCount": 1,
+  "hasEffects": false,
+  "tags": [
+   "undetectable"
+  ],
+  "hits": [
+   {
+    "where": "动作 markForDeath",
+    "text": " round of Combat becomes one greater than the Initiative of your marked target. Playtest Notes This action is not yet automated."
+   }
+  ],
+  "copies": 1
+ },
+ {
+  "src": "ember",
+  "pack": "crucible-adventure",
+  "owner": "Ember Early Access > Slaith",
+  "name": "Unshakeable Stance",
+  "id": "unshakeablestanc",
+  "actionIds": [],
+  "actionCount": 0,
+  "hasEffects": false,
+  "tags": [],
+  "hits": [
+   {
+    "where": "天赋描述",
+    "text": "a Critical Success rolled by an enemy or a Critical Failure rolled by yourself. Playtest Notes This talent is not yet automated."
+   }
+  ],
+  "copies": 2
+ }
+]

@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>暴君之爪 — 故事与历史完整整理</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* =================================================================
+   暴君之爪 — 故事整理 · 自包含样式
+   主题:暗沉羊皮纸 + 暗金 + 暗红 (适合长时间阅读 / 打印为 PDF)
+   ================================================================= */
+:root{
+  --bg:#1c1815;
+  --bg-2:#241f1b;
+  --bg-card:#2c2723;
+  --bg-card-2:#332d28;
+  --border:#3a342e;
+  --border-2:#4a423a;
+  --text:#ece4d3;
+  --text-soft:#cbc1ad;
+  --muted:#9a8e76;
+  --gold:#cda66f;
+  --gold-2:#e6c489;
+  --gold-dim:#7a6442;
+  --crimson:#c25656;
+  --crimson-2:#e07474;
+  --crimson-dim:#6a2828;
+  --good:#8fae6c;
+  --bad:#c25656;
+  --neutral:#b89968;
+  --shadow-sm:0 2px 8px rgba(0,0,0,.35);
+  --shadow:0 6px 24px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font:16px/1.75 "Source Han Sans SC","PingFang SC","Microsoft YaHei","微软雅黑",
+       "Hiragino Sans GB","Noto Sans SC",sans-serif;
+  font-feature-settings:"palt";
+  letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+::selection{background:var(--crimson-dim);color:#fff}
+
+/* ---------- Layout ---------- */
+.layout{
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  max-width:1280px;
+  margin:0 auto;
+  gap:0;
+}
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  aside.toc{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+}
+
+/* ---------- 顶部 Hero ---------- */
+.hero{
+  position:relative;
+  padding:56px 48px 44px;
+  background:
+    radial-gradient(1200px 400px at 20% 0%,rgba(205,166,111,.08),transparent 70%),
+    radial-gradient(900px 300px at 100% 100%,rgba(194,86,86,.08),transparent 70%),
+    linear-gradient(180deg,#1f1a16 0%,#1c1815 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold) 25%,var(--crimson) 50%,var(--gold) 75%,transparent);
+}
+.hero h1{
+  margin:0 0 6px;
+  font:600 38px/1.2 "EB Garamond","Cinzel",Georgia,"Source Han Serif SC","PingFang SC",serif;
+  color:var(--gold-2);
+  letter-spacing:.02em;
+}
+.hero h1 .en{display:block;font-size:18px;color:var(--muted);font-weight:400;letter-spacing:.18em;margin-top:6px}
+.hero p.lede{
+  margin:18px 0 0;color:var(--text-soft);max-width:780px;font-size:15.5px;
+}
+.hero .meta{
+  margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 10px;
+}
+.hero .meta .chip{
+  padding:4px 12px;border:1px solid var(--border-2);border-radius:999px;
+  background:rgba(0,0,0,.18);color:var(--text-soft);font-size:13px;
+}
+.hero .meta .chip strong{color:var(--gold)}
+
+/* ---------- TOC 侧边栏 ---------- */
+aside.toc{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  padding:32px 22px 32px 32px;
+  border-right:1px solid var(--border);
+  background:var(--bg-2);
+  font-size:14px;
+}
+aside.toc h3{
+  margin:0 0 14px;color:var(--gold);font-size:12px;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:600;
+}
+aside.toc ol{list-style:none;margin:0;padding:0;counter-reset:tocnum}
+aside.toc ol li{counter-increment:tocnum;margin:0}
+aside.toc ol li a{
+  display:block;padding:7px 8px 7px 28px;color:var(--text-soft);text-decoration:none;
+  border-radius:6px;position:relative;line-height:1.45;
+  transition:background .15s,color .15s;
+}
+aside.toc ol li a::before{
+  content:counter(tocnum,decimal-leading-zero);
+  position:absolute;left:6px;top:7px;color:var(--gold-dim);font-size:11px;font-family:Georgia,serif;
+}
+aside.toc ol li a:hover{background:rgba(205,166,111,.08);color:var(--gold-2)}
+aside.toc .sub{margin:4px 0 8px 28px;padding-left:10px;border-left:1px solid var(--border)}
+aside.toc .sub a{padding:4px 8px;font-size:13px;color:var(--muted)}
+aside.toc .sub a:hover{color:var(--gold-2)}
+
+/* ---------- 主内容 ---------- */
+main{padding:0 48px 80px;min-width:0}
+@media (max-width:980px){ main{padding:0 24px 60px} .hero{padding:40px 24px 32px} aside.toc{padding:20px 24px}}
+
+section{padding-top:56px;scroll-margin-top:20px}
+section.first{padding-top:40px}
+
+/* ---------- 标题 ---------- */
+h2{
+  margin:0 0 20px;
+  font:600 26px/1.3 "EB Garamond",Georgia,"Source Han Serif SC",serif;
+  color:var(--gold-2);
+  border-bottom:1px solid var(--border);
+  padding-bottom:10px;
+  position:relative;letter-spacing:.02em;
+}
+h2 .num{
+  display:inline-block;color:var(--gold-dim);margin-right:14px;font-size:18px;
+  font-family:Georgia,serif;letter-spacing:.18em;vertical-align:2px;
+}
+h3{
+  margin:32px 0 12px;font-size:18px;color:var(--gold);font-weight:600;letter-spacing:.02em;
+  font-family:"PingFang SC","Source Han Serif SC",sans-serif;
+}
+h3::before{content:"◆";color:var(--crimson);margin-right:8px;font-size:13px;vertical-align:1px}
+h4{
+  margin:22px 0 8px;font-size:15.5px;color:var(--gold-2);font-weight:600;
+}
+h4::before{content:"▸";color:var(--gold-dim);margin-right:6px}
+
+p{margin:0 0 12px;color:var(--text-soft)}
+strong{color:var(--gold-2);font-weight:600}
+em{color:var(--text);font-style:normal;background:rgba(205,166,111,.1);padding:1px 4px;border-radius:3px}
+
+ul,ol{margin:8px 0 14px;padding-left:24px}
+ul li,ol li{margin:4px 0;color:var(--text-soft)}
+ul li::marker{color:var(--gold-dim)}
+
+/* 引述 / 备注 */
+.note,blockquote{
+  margin:14px 0;padding:12px 16px 12px 18px;
+  background:rgba(205,166,111,.06);border-left:3px solid var(--gold);
+  color:var(--text-soft);font-size:14.5px;border-radius:0 6px 6px 0;
+}
+.warn{
+  background:rgba(194,86,86,.07);border-left-color:var(--crimson);
+}
+
+/* ---------- 角色 / 神祇卡片 ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:14px 0 20px}
+.card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:10px;
+  padding:16px 18px;box-shadow:var(--shadow-sm);
+  transition:border-color .15s,transform .15s;
+}
+.card:hover{border-color:var(--border-2);transform:translateY(-1px)}
+.card .title{
+  display:flex;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap;
+}
+.card .title .name{color:var(--gold-2);font-size:16px;font-weight:600}
+.card .title .en{color:var(--muted);font-size:12.5px;letter-spacing:.04em}
+.card .role{
+  display:inline-block;font-size:12px;color:var(--muted);margin-bottom:8px;
+  padding:2px 8px;border:1px solid var(--border-2);border-radius:4px;background:rgba(0,0,0,.2);
+}
+.card.bad .role{color:var(--crimson-2);border-color:rgba(194,86,86,.4)}
+.card.good .role{color:var(--good);border-color:rgba(143,174,108,.4)}
+.card.god .role{color:var(--gold-2);border-color:rgba(205,166,111,.4)}
+.card p{margin:0;font-size:14px;line-height:1.7}
+.card p + p{margin-top:6px}
+
+/* ---------- 表格 ---------- */
+.table-wrap{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--border);border-radius:10px}
+table{
+  width:100%;border-collapse:collapse;font-size:14px;background:var(--bg-card);
+}
+table th{
+  background:var(--bg-card-2);color:var(--gold);
+  text-align:left;padding:10px 14px;font-weight:600;font-size:13px;letter-spacing:.04em;
+  border-bottom:1px solid var(--border-2);
+}
+table td{
+  padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-soft);
+  vertical-align:top;
+}
+table tr:last-child td{border-bottom:none}
+table tr:hover td{background:rgba(205,166,111,.04)}
+
+/* ---------- 时间线 ---------- */
+.timeline{
+  position:relative;margin:18px 0 24px 0;padding-left:0;list-style:none;
+}
+.timeline::before{
+  content:"";position:absolute;top:6px;bottom:6px;left:96px;width:2px;
+  background:linear-gradient(180deg,transparent,var(--gold-dim) 6%,var(--gold-dim) 94%,transparent);
+}
+.timeline li{
+  position:relative;padding:10px 0 10px 130px;min-height:34px;margin:0;
+}
+.timeline li::before{
+  content:"";position:absolute;left:90px;top:18px;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--gold);
+}
+.timeline li.major::before{background:var(--crimson);border-color:var(--crimson-2);box-shadow:0 0 0 3px rgba(194,86,86,.18)}
+.timeline li .year{
+  position:absolute;left:0;top:14px;width:84px;text-align:right;
+  color:var(--gold);font-family:Georgia,serif;font-weight:600;font-size:14.5px;letter-spacing:.04em;
+}
+.timeline li .ev{color:var(--text);font-size:14.5px;line-height:1.7}
+.timeline li .ev em{background:rgba(194,86,86,.12);color:var(--crimson-2)}
+.timeline li.major .ev{color:var(--text)}
+.timeline li.major .year{color:var(--crimson-2)}
+
+/* ---------- 血石/圣物卡 ---------- */
+.relics{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0 20px}
+.relic{
+  background:linear-gradient(145deg,#2a2521 0%,#241f1b 100%);
+  border:1px solid var(--border);border-radius:10px;padding:14px 16px;
+  position:relative;overflow:hidden;
+}
+.relic::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--crimson);
+}
+.relic .organ{color:var(--gold-2);font-size:15.5px;font-weight:600;margin-bottom:2px}
+.relic .meaning{color:var(--muted);font-size:12.5px;margin-bottom:8px;letter-spacing:.04em}
+.relic .field{font-size:13.5px;color:var(--text-soft);margin:3px 0}
+.relic .field b{color:var(--gold);font-weight:500;margin-right:6px}
+
+/* ---------- 章节大块 (三场冒险) ---------- */
+.chapter{
+  border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin:18px 0 20px;
+  background:linear-gradient(180deg,#262119 0%,#221e1a 100%);
+  position:relative;
+}
+.chapter::before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--crimson),var(--gold));
+  opacity:.7;border-radius:12px 12px 0 0;
+}
+.chapter .head{
+  display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap;
+}
+.chapter .head .label{
+  font-family:Georgia,serif;color:var(--gold-dim);font-size:13px;letter-spacing:.22em;
+}
+.chapter .head .ttl{
+  color:var(--gold-2);font-size:21px;font-weight:600;
+  font-family:"EB Garamond",Georgia,"Source Han Serif SC",serif;
+}
+.chapter .head .lvl{
+  margin-left:auto;padding:3px 10px;border:1px solid var(--border-2);border-radius:999px;
+  font-size:12px;color:var(--muted);background:rgba(0,0,0,.25);
+}
+.chapter h3{margin-top:18px}
+.chapter h4{margin-top:14px}
+
+/* ---------- 标签 / 角色色卡 ---------- */
+.pill{
+  display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;
+  border:1px solid var(--border-2);background:rgba(0,0,0,.25);color:var(--text-soft);margin:0 2px;
+}
+.pill.evil{color:var(--crimson-2);border-color:rgba(194,86,86,.45)}
+.pill.good{color:var(--good);border-color:rgba(143,174,108,.45)}
+.pill.god{color:var(--gold-2);border-color:rgba(205,166,111,.45)}
+.pill.lvl{color:var(--neutral);border-color:rgba(184,153,104,.4)}
+
+/* ---------- 主题分析三幕 ---------- */
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:14px 0 20px}
+.act{
+  border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--bg-card);
+  position:relative;
+}
+.act .actnum{
+  font-family:Georgia,serif;font-size:34px;line-height:1;color:var(--gold-dim);
+  position:absolute;right:14px;top:10px;opacity:.5;
+}
+.act h4{margin:0 0 6px}
+.act .when{color:var(--muted);font-size:12.5px;margin-bottom:8px}
+.act .quote{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);color:var(--gold-2);font-size:14px;font-style:italic}
+
+/* ---------- 速查 ---------- */
+.cheat{
+  background:linear-gradient(180deg,#2a2521,#241f1b);
+  border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:14px 0;
+}
+.cheat ul{padding-left:18px}
+.cheat li{margin:6px 0}
+.cheat li b{color:var(--gold-2)}
+
+/* ---------- 链接 ---------- */
+a{color:var(--gold-2);text-decoration:none;border-bottom:1px solid var(--gold-dim)}
+a:hover{color:var(--crimson-2);border-color:var(--crimson)}
+
+/* ---------- 顶部回到目录按钮 ---------- */
+.toTop{
+  position:fixed;right:24px;bottom:24px;z-index:20;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--border-2);
+  background:rgba(28,24,21,.92);color:var(--gold-2);
+  display:none;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:var(--shadow);font-size:18px;
+}
+.toTop:hover{color:var(--crimson-2);border-color:var(--crimson)}
+.toTop.on{display:flex}
+
+/* ---------- 打印 (Ctrl+P → 另存 PDF) ---------- */
+@media print{
+  body{background:#fff;color:#1c1c1c}
+  .layout{grid-template-columns:1fr;max-width:none}
+  aside.toc,.toTop{display:none}
+  main{padding:0 18mm}
+  .hero{background:#fff;color:#1c1c1c;padding:0 18mm 12mm;border:none}
+  .hero h1{color:#3a2a18}.hero h1 .en{color:#777}
+  .hero p.lede,.hero .meta .chip{color:#444;background:#f5f0e6;border-color:#ccc}
+  h2{color:#3a2a18;border-color:#bbb;break-before:page}
+  section.first h2{break-before:auto}
+  h3{color:#5a3e2b}h4{color:#5a3e2b}
+  p,li,td{color:#1c1c1c}
+  strong{color:#3a2a18}
+  .note,blockquote{background:#f7f1e2;border-left-color:#a07a36;color:#333}
+  .card,.relic,.act,.chapter,.cheat,table{
+    background:#fff !important;border-color:#bbb;box-shadow:none;color:#1c1c1c;
+    break-inside:avoid;
+  }
+  .card .title .name,.relic .organ,.chapter .head .ttl,.act h4{color:#3a2a18}
+  .card .role,.chapter .head .lvl,.pill,.relic .meaning,.muted{color:#666;background:#f5f0e6;border-color:#bbb}
+  table th{background:#f0e8d4;color:#3a2a18;border-bottom-color:#bbb}
+  table td{border-bottom-color:#ddd}
+  .timeline::before{background:#a07a36}
+  .timeline li::before{background:#fff;border-color:#a07a36}
+  .timeline li.major::before{background:#8b3a3a;border-color:#8b3a3a;box-shadow:none}
+  .timeline li .year{color:#5a3e2b}
+  .timeline li.major .year{color:#8b3a3a}
+  .chapter::before{background:linear-gradient(90deg,#a07a36,#8b3a3a,#a07a36)}
+  a{color:#5a3e2b;border-color:#bbb}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ============ 左侧目录 ============ -->
+  <aside class="toc">
+    <h3>目 录 · TABLE OF CONTENTS</h3>
+    <ol>
+      <li><a href="#s1">背景:终焉之墙 → 死坟末土</a></li>
+      <li><a href="#s2">大事年表 (4000+ 年)</a></li>
+      <li><a href="#s3">主要人物</a></li>
+      <li><a href="#s4">关键派系</a></li>
+      <li><a href="#s5">关键地点</a></li>
+      <li><a href="#s6">核心圣物</a>
+        <div class="sub">
+          <a href="#bloodstones">阿拉兹尼血石 ×4</a>
+          <a href="#chalice">奥泽姆圣杯</a>
+        </div>
+      </li>
+      <li><a href="#s7">三章冒险剧情</a>
+        <div class="sub">
+          <a href="#ch1">Ⅰ 死坟末土的幸存者</a>
+          <a href="#ch2">Ⅱ 献给奥泽姆的余烬</a>
+          <a href="#ch3">Ⅲ 血与信仰</a>
+        </div>
+      </li>
+      <li><a href="#s8">主题分析</a></li>
+      <li><a href="#s9">与 Pathfinder 总线衔接</a></li>
+      <li><a href="#s10">速查备忘录</a></li>
+      <li><a href="#s11">资料来源</a></li>
+    </ol>
+  </aside>
+
+  <!-- ============ 主内容 ============ -->
+  <main>
+
+    <!-- Hero -->
+    <header class="hero">
+      <h1>暴君之爪 · 故事与历史完整整理
+        <span class="en">CLAWS OF THE TYRANT — LORE & STORY DIGEST</span>
+      </h1>
+      <p class="lede">
+        Pathfinder 2E 三章合集型冒险《暴君之爪》的完整剧情、世界观、人物关系与时间线整理。
+        核心母题:<strong>死墓骑士塞尔德格・贝德利斯</strong>、<strong>默语暴君塔–巴丰</strong>、
+        <strong>女神艾奥梅黛</strong>、<strong>女神阿拉兹尼</strong> 之间纠缠了六千余年的恩怨终局。
+      </p>
+      <div class="meta">
+        <span class="chip"><strong>设定</strong> · 格拉利昂 / 阿维斯坦内海 · 4725 AR</span>
+        <span class="chip"><strong>结构</strong> · 三章 · 1–2 / 7 / 18–20 级</span>
+        <span class="chip"><strong>类型</strong> · 生存恐怖 + 反派渗透 + 史诗终章</span>
+        <span class="chip"><strong>整理日期</strong> · 2026-05-06</span>
+      </div>
+    </header>
+
+    <!-- ========== Section 1 ========== -->
+    <section id="s1" class="first">
+      <h2><span class="num">Ⅰ</span>背景:从「终焉之墙」到「死坟末土」</h2>
+
+      <h3>1. 终焉之墙 (Lastwall) 的诞生</h3>
+      <p>约 900 年前,<strong>闪耀远征 (Shining Crusade)</strong> 在 3827 AR 把巫妖王塔–巴丰封印于其本人的塔楼监狱
+        <em>绞首塔 (Gallowspire)</em>。为了永远监视这位囚徒,加上向北镇守贝尔克森 (Belkzen) 的兽人,
+        十字军建立新的国度——<strong>终焉之墙</strong>,以 <em>奥泽姆骑士团 (Knights of Ozem)</em> 为核心,首都 <em>警醒城 (Vigil)</em>。</p>
+      <p>近九个世纪里,这个国家做的事只有一件:<strong>守望</strong>。</p>
+
+      <h3>2. 大灾变:辐辉之火 (4719 AR)</h3>
+      <p>4719 AR,塔–巴丰研发出毁灭性魔法 <em>辐辉之火 (Radiant Fire)</em>。他先在 <em>罗斯拉之棺</em> 镇上做实验,
+        接着借由警醒城内 <em>碎裂之盾</em> 残片把辐辉之火引向城市本身——<strong>一夜之间烧死八千多人</strong>,
+        并震碎了维系绞首塔封印的「大封印」。</p>
+      <p>巫妖王挣脱囚笼,亡灵大军倾巢而出,终焉之墙在数月内崩盘。同年塔–巴丰意图进军阿巴萨隆 (Absalom),
+        被一群英雄阻退,撤回 <em>恐怖之岛 (Isle of Terror)</em> 蓄势。</p>
+
+      <h3>3. 死坟末土 (Gravelands) — 故事的现在 (4725 AR)</h3>
+      <ul>
+        <li>警醒城已成废墟。</li>
+        <li>港口城市 <strong>维鲁米斯 (Vellumis)</strong> 成为难民之城与新组建的 <strong>终焉之墙骑士团 (Knights of Lastwall)</strong> 总部。</li>
+        <li>死坟末土遍布亡灵,但仍存零星活人据点。</li>
+        <li><strong>默语之道</strong> 与塔–巴丰的爪牙正在四处搜寻某种东西——他们不知道,塞尔德格在背后另起炉灶。</li>
+      </ul>
+    </section>
+
+    <!-- ========== Section 2 ========== -->
+    <section id="s2">
+      <h2><span class="num">Ⅱ</span>大事年表 · 阿拉兹尼 / 艾奥梅黛 / 塔–巴丰 / 塞尔德格 的命运链</h2>
+      <p>红色节点为关键转折。这条故事链是整本冒险的「骨架」。</p>
+
+      <ul class="timeline">
+        <li>
+          <span class="year">−1524 ~ −1491</span>
+          <div class="ev">凡人时代的 <strong>阿罗登 (Aroden)</strong> 与凡人冒险家 <strong>阿拉兹尼</strong> 在阿卡迪亚的 <em>修帕特兰 (Xopatl)</em> 结伴行侠;阿拉兹尼于 −1491 战死,灵魂赴极乐境,后化身天使。</div>
+        </li>
+        <li>
+          <span class="year">~1 AR</span>
+          <div class="ev">阿罗登从黯星海中带回 <em>星石 (Starstone)</em>,成神。</div>
+        </li>
+        <li>
+          <span class="year">1121 AR</span>
+          <div class="ev">阿罗登重新找到化为天使的阿拉兹尼,任命她为自己的 <strong>神使 (Herald)</strong>。她成为 demigod 级别的存在。</div>
+        </li>
+        <li class="major">
+          <span class="year">896 AR</span>
+          <div class="ev">凡人法师 <strong>塔–巴丰</strong> 被神祇阿罗登亲自击杀。</div>
+        </li>
+        <li>
+          <span class="year">3203 AR</span>
+          <div class="ev">塔–巴丰以巫妖之姿复活,化身 <strong>默语暴君 (Whispering Tyrant)</strong>,数百年间把乌斯塔拉夫化为恐怖之国。</div>
+        </li>
+        <li>
+          <span class="year">3207 AR</span>
+          <div class="ev">塔–巴丰首次南下,焚毁矮人城邦 <em>奥泽姆 (Ozem)</em>。塔丹骑士带着 <strong>奥泽姆圣杯</strong> 突围,自命「奥泽姆骑士团」。</div>
+        </li>
+        <li>
+          <span class="year">3754 AR</span>
+          <div class="ev">闪耀远征军在湖畔小镇守望沼登陆,重燃「光」灯塔,易名 <strong>维鲁米斯</strong>,成为主基地。</div>
+        </li>
+        <li class="major">
+          <span class="year">3818 AR</span>
+          <div class="ev">闪耀远征陷入苦战,奥泽姆骑士团 <strong>强行召唤并以法术绑缚</strong> 阿拉兹尼上阵——这是第一颗背叛的种子,在阿拉兹尼心里埋下对骑士团的怨怼。</div>
+        </li>
+        <li class="major">
+          <span class="year">3823 AR</span>
+          <div class="ev"><strong>三悲恸之战 (Battle of Three Sorrows)</strong>:塔–巴丰击杀阿拉兹尼;艾奥梅黛 (尚为凡人将军) 用奥泽姆圣杯击败默语暴君手下大将 <em>埃鲁姆–赫尔</em>。</div>
+        </li>
+        <li>
+          <span class="year">3827 AR</span>
+          <div class="ev">闪耀远征军把塔–巴丰封印在绞首塔。阿拉兹尼遗体安葬于警醒城。<strong>终焉之墙立国</strong>。</div>
+        </li>
+        <li>
+          <span class="year">3832 AR</span>
+          <div class="ev"><strong>艾奥梅黛通过星石试炼</strong> 成神,被阿罗登选为新的神使。</div>
+        </li>
+        <li>
+          <span class="year">3852 AR</span>
+          <div class="ev">科拉赫堡加建「小礼拜堂」,真正用途是地下密室准备存放四枚 <strong>阿拉兹尼血石</strong>。</div>
+        </li>
+        <li class="major">
+          <span class="year">3889 AR</span>
+          <div class="ev">老指挥官克雷迪乌斯·巴隆莫派遣六名精锐骑士潜入盖布首都 <em>梅吉塔尔</em>,企图从内部颠覆。<strong>塞尔德格·贝德利斯</strong> 是其中之一。</div>
+        </li>
+        <li class="major">
+          <span class="year">3889 AR</span>
+          <div class="ev">塞尔德格沉迷盖布享乐,与吸血鬼情人 <em>伊斯梅特</em> 厮混并不慎泄密;同伴遭擒,塞尔德格在幽灵王盖布的恐吓与诱惑下供出一切。盖布以一道法术将他焚为焦炭、灵魂封进熔铸的盔甲——<strong>他成为死墓骑士</strong>。</div>
+        </li>
+        <li class="major">
+          <span class="year">3890 AR</span>
+          <div class="ev">塞尔德格率五名同袍潜回警醒城,<strong>盗走阿拉兹尼遗体</strong>,献予盖布。盖布将她复活为巫妖,封号 <em>娼妓女皇</em>;取出心、肺、肝、脾,封入四只脏器罐——是为 <strong>阿拉兹尼血石</strong>。塞尔德格组成 <strong>放荡理事会 (Council Libertine)</strong>,看守阿拉兹尼长达 800 余年。</div>
+        </li>
+        <li>
+          <span class="year">3942 AR</span>
+          <div class="ev">默语之道在小镇 <em>莫德沙</em> 地下墓穴开启通往虚空的传送门,镇被奥泽姆骑士夷平。后开拓者协会封住此门,镇上重建为 <strong>尤娅之望 (Yua's Hope)</strong>。</div>
+        </li>
+        <li>
+          <span class="year">4606 AR</span>
+          <div class="ev">阿罗登 <strong>死亡 / 失踪</strong>;艾奥梅黛继承大量信徒与领域,得到尊号 <strong>「继承者 (The Inheritor)」</strong>。</div>
+        </li>
+        <li class="major">
+          <span class="year">4719 AR · 春</span>
+          <div class="ev">阿拉兹尼摆脱放荡理事会,逃到终焉之墙;她预见塔–巴丰将逃脱,联合凡人英雄 <strong>诱使塔–巴丰用辐辉之火轰碎她自己的肉身</strong>。爆炸毁去她的躯体,但也斩断了盖布的神秘链锁。她的灵魂自由,<strong>升格为完整意义上的神</strong>——<em>阿拉兹尼·不屈者</em>,司职被滥用者、尊严、不情愿的不死。</div>
+        </li>
+        <li class="major">
+          <span class="year">4719 AR</span>
+          <div class="ev">塔–巴丰借机用辐辉之火轰垮警醒城与绞首塔大封印,<strong>逃出囚笼</strong>,亡灵大军屠戮终焉之墙。终焉之墙更名 <strong>死坟末土</strong>。</div>
+        </li>
+        <li class="major">
+          <span class="year">4719 AR</span>
+          <div class="ev">塞尔德格在盖布失去地位(他没看住阿拉兹尼);盖布甚至打算销毁他的死墓铠甲。塞尔德格 <strong>逃到死坟末土,效忠塔–巴丰</strong>。</div>
+        </li>
+        <li>
+          <span class="year">4719 AR</span>
+          <div class="ev"><strong>绯红守护者 (Crimson Keepers)</strong> 在尤娅之望被毁的前数小时,把 <strong>肺血石</strong> 藏入镇内艾奥梅黛神殿底下的墓穴,与一封信留给后人。同时,十几位幸存者也躲进了同一片墓穴。</div>
+        </li>
+        <li>
+          <span class="year">4719 → 4725 AR</span>
+          <div class="ev">幸存者在墓穴中靠牧师 <em>康斯坦·鲁西</em> 念造食术维生六年。地表是亡灵世界。</div>
+        </li>
+        <li class="major">
+          <span class="year">4725 AR · Gozran 月</span>
+          <div class="ev"><strong>《暴君之爪》冒险开始</strong>。</div>
+        </li>
+      </ul>
+
+      <div class="note">
+        <strong>注</strong>:本书 p. 6 时间表把 3890 AR 阿拉兹尼遗体被盗 / 化为巫妖的时间点排在 3832 AR 艾奥梅黛通过星石试炼<strong>之后</strong>——
+        即阿拉兹尼成为巫妖时,艾奥梅黛已是神祇 / 神使。这一点对最终冒险中「调换命运」仪式的逻辑也很重要。
+      </div>
+    </section>
+
+    <!-- ========== Section 3 ========== -->
+    <section id="s3">
+      <h2><span class="num">Ⅲ</span>主要人物</h2>
+
+      <h3>核心四角</h3>
+      <div class="cards">
+        <div class="card bad">
+          <div class="title"><span class="name">塞尔德格·贝德利斯</span><span class="en">Seldeg Bhedlis</span></div>
+          <div class="role">死墓骑士 · 反派核心 · 20 级</div>
+          <p>生前奥泽姆圣武士;堕落于盖布,化为不死后任放荡理事会指挥,数百年充当阿拉兹尼的看守 / 情夫。
+          对阿拉兹尼又爱又怨,认为她和自己一样是「非自愿堕落」的同病相怜者——他相信只要 <strong>把阿拉兹尼的命运改回光明</strong>,自己也能得到救赎。</p>
+          <p>第三章登场时刻意伪装成「面色苍白的中年人类男性」。</p>
+        </div>
+
+        <div class="card god">
+          <div class="title"><span class="name">阿拉兹尼</span><span class="en">Arazni · The Unyielding</span></div>
+          <div class="role">女神 · 被滥用者 / 尊严 / 不情愿的不死</div>
+          <p>灰肤、深色长发、戴兜帽斗篷,常带不悦表情。对奥泽姆骑士团 (现终焉之墙骑士团) 与艾奥梅黛 (继任神使) 都怀有强烈芥蒂。</p>
+          <p><strong>不能主动接触自己的血石</strong>,除非血石被他人 <strong>自愿献给她</strong>。暗中是 <em>绯红复国团</em> 的真正主祀对象。</p>
+        </div>
+
+        <div class="card god">
+          <div class="title"><span class="name">艾奥梅黛</span><span class="en">Iomedae · The Inheritor</span></div>
+          <div class="role">女神 · 荣誉 / 十字军 / 正义 / 勇武</div>
+          <p>凡人时期是奥泽姆骑士团将军;3823 年三悲恸之战中持奥泽姆圣杯击败 Erum-Hel;3832 年通过星石试炼成神;4606 年继承阿罗登的大半信徒。</p>
+          <p>第三章未直接登场,但是塞尔德格阴谋的「被害人」——若仪式成功,她会替代阿拉兹尼当年的悲剧。</p>
+        </div>
+
+        <div class="card bad">
+          <div class="title"><span class="name">塔–巴丰</span><span class="en">Tar-Baphon · The Whispering Tyrant</span></div>
+          <div class="role">默语暴君 · 远景大山</div>
+          <p>整个故事的终极阴影。事件六年后他在恐怖之岛蓄积兵力,塞尔德格只是众多手下之一。</p>
+          <p>他对塞尔德格的真实计划<strong>并不知情</strong>,塞尔德格故意瞒着他做仪式。</p>
+        </div>
+      </div>
+
+      <h3>第一章 NPC · 尤娅之望幸存者社区</h3>
+      <div class="cards">
+        <div class="card">
+          <div class="title"><span class="name">塔莉亚·吉尔德女爵</span><span class="en">Dame Talia Gildar</span></div>
+          <div class="role">人类女性 70+ · 退役奥泽姆战略官</div>
+          <p>六年里幸存者社区的精神支柱。<strong>冒险开局当晚,她在睡眠中安详死去</strong>——但尸体后来被僵尸腐感染而起尸。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">康斯坦·鲁西</span><span class="en">Constan Russi</span></div>
+          <div class="role">人类男性 · 艾奥梅黛牧师</div>
+          <p>带众人进入墓穴并以造食术供养六年。葬礼上被起尸的塔莉亚撕咬而死。临终前秘密把 <strong>肺血石</strong> 的钥匙交给一位 PC。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">马科·枯萎终结者</span><span class="en">Marko Blightender</span></div>
+          <div class="role">人类青少年 · 孤儿</div>
+          <p>父母都是奥泽姆骑士,事发时正在外出执勤。进入墓穴时仅 10 岁,如今是阴郁少年,仍盼有一天能再见到父母。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">加拉格·日印</span><span class="en">Garaag Sunbrand</span></div>
+          <div class="role">兽人男性 · 改邪归正者</div>
+          <p>原贝尔克森兽人袭击者,因大灾难被迫与人类幸存者共存。冷淡暴躁,但乐于扛重活。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">刷尾一家</span><span class="en">The Brushpaws</span></div>
+          <div class="role">狐族 (Kitsune) · 游侠</div>
+          <p>乔诺 + 伊露瓦 + 两个幼狐。亡灵来临时挨家挨户警告各定居点,救了不少人。墓穴里大多以狐狸形态生活节省食物。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">洛克维尔·硬额</span><span class="en">Rokvel Hardbrow</span></div>
+          <div class="role">矮人女性 · 铁匠</div>
+          <p>原镇上铁匠,墓穴年间想清楚自己的性别身份。不太介意地下生活,擅长逻辑谜题。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">牢骚四人组</span><span class="en">The Querulous Quartet</span></div>
+          <div class="role">人类 / 半身人 / 地精 · 流浪乐队</div>
+          <p>阿利佐 (词曲) + 克拉斯安 (笛) + 克莱布 + 比基姊妹 (打击乐)。他们的演奏鼓舞士气,但音量稍大就会被地表亡灵察觉。</p>
+        </div>
+        <div class="card">
+          <div class="title"><span class="name">赫道乌 & 吉斯托洛</span><span class="en">Hurdauw & Jystolo Pulsoma</span></div>
+          <div class="role">人类母子 · 旅馆厨娘</div>
+          <p>事发当晚刚得知丈夫和别人私奔,六年里靠对康斯坦的暗恋撑着;儿子吉斯托洛在墓穴中出生。</p>
+        </div>
+      </div>
+
+      <h3>第二章 NPC · 反派 / 奥泽姆要塞守军</h3>
+      <div class="cards">
+        <div class="card bad">
+          <div class="title"><span class="name">塞尔德格·贝德利斯 (伪装)</span></div>
+          <div class="role">死墓骑士 · 任务派发人</div>
+          <p>在血色花园伪装成「中年面色苍白的人类男性」,给玩家下达 12 小时盗杯任务。</p>
+        </div>
+        <div class="card good">
+          <div class="title"><span class="name">阿尔塞拉·黛伊</span><span class="en">Arsiella Dei · Commander</span></div>
+          <div class="role">半精灵女性 · 9 级 · 切尔那萨多监护官</div>
+          <p>父亲是尼尔玛萨斯国父级人物 <em>伊尔加·涅玛斯</em>。奥泽姆要塞现任指挥官,圣杯的最后守护者。</p>
+        </div>
+        <div class="card good">
+          <div class="title"><span class="name">要塞驻军 16 人</span></div>
+          <div class="role">三方联盟</div>
+          <p>9 切尔那萨多游侠 + 3 艾奥梅黛祭司 + 3 复国骑士 + 阿尔塞拉。三方全部听命于阿尔塞拉。</p>
+        </div>
+      </div>
+
+      <h3>第三章 NPC · 维鲁米斯权贵 / 终战爪牙</h3>
+      <div class="cards">
+        <div class="card good">
+          <div class="title"><span class="name">贝丽维尔·星辉</span><span class="en">Beirivelle Starshine</span></div>
+          <div class="role">人类女性 · 11 级 · 警醒骑士 / Shelyn 救赎吟游</div>
+          <p>战略会议召集人,长期怀疑克拉雷瑟与阿拉兹尼有联络。</p>
+        </div>
+        <div class="card good">
+          <div class="title"><span class="name">艾露纳·瓦尔瓦托斯</span><span class="en">Aylunna Varvatos</span></div>
+          <div class="role">人类女性 · 14 级 · 艾奥梅黛大祭司</div>
+          <p>白象牙圣堂大祭司、维鲁米斯第二剑骑士。第一章肺血石的接收人。</p>
+        </div>
+        <div class="card good">
+          <div class="title"><span class="name">克拉雷瑟·艾奥梅达尔</span><span class="en">Clarethe Iomedar · Sunset Angel</span></div>
+          <div class="role">人类非二元 · 15 级 · 复仇判官</div>
+          <p>绯红复国团领袖,首位发下绯红誓言之人。<strong>实质上是阿拉兹尼在凡间的代言</strong>。</p>
+        </div>
+        <div class="card bad">
+          <div class="title"><span class="name">翁图拉特 (假阿迪特)</span><span class="en">Onturat / Addit Kalakin</span></div>
+          <div class="role">碎颅者 · 塞尔德格爪牙</div>
+          <p>偷取学者阿迪特的脸与记忆,在科拉赫堡假装受难学者引导 PC,一旦取出脾血石就翻脸抢夺。</p>
+        </div>
+        <div class="card bad">
+          <div class="title"><span class="name">辐辉藤宁</span><span class="en">Radiant Veranallia</span></div>
+          <div class="role">不死天使 · D2 区 boss</div>
+          <p>被辐辉之火意外改造为亡灵的高位天使,主持锤石堡的诅咒花园。</p>
+        </div>
+        <div class="card bad">
+          <div class="title"><span class="name">被锁的诺恩</span><span class="en">Chained Norn</span></div>
+          <div class="role">不死命运女神 · D3 区</div>
+          <p>命运三女神之一,被塞尔德格强行不死化、剪刀做仪式材料。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Section 4 ========== -->
+    <section id="s4">
+      <h2><span class="num">Ⅳ</span>关键派系</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:24%">派系</th><th style="width:14%">立场</th><th>简介</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>终焉之墙骑士团</strong><br><span style="color:var(--muted)">Knights of Lastwall</span></td>
+              <td><span class="pill good">善</span></td>
+              <td>由旧奥泽姆骑士团于 4719 后重组,总部维鲁米斯。两大主流路线:<strong>闪耀守望 (Shining Sentinels)</strong> 偏传统骑士;<strong>绯红复国团 (Crimson Reclaimers)</strong> 偏激进——其誓言其实是面向阿拉兹尼的誓言 (普通成员并不知晓)。</td>
+            </tr>
+            <tr>
+              <td><strong>奥泽姆骑士团</strong><br><span style="color:var(--muted)">Knights of Ozem</span></td>
+              <td><span class="pill good">善 (历史)</span></td>
+              <td>上述骑士团的旧名,3207 AR 因奥泽姆陷落而立。</td>
+            </tr>
+            <tr>
+              <td><strong>绯红守护者</strong><br><span style="color:var(--muted)">Crimson Keepers</span></td>
+              <td><span class="pill good">秘密派系</span></td>
+              <td>原为奥泽姆骑士团内部小团体,后期被并入艾奥梅黛教会;自视为阿拉兹尼血石的看护者。4719 AR 之前正在把四枚血石分散秘藏,塔–巴丰入侵让他们没能完成,只把肺血石藏进了尤娅之望墓穴。</td>
+            </tr>
+            <tr>
+              <td><strong>切尔那萨多游侠</strong><br><span style="color:var(--muted)">Chernasardo Rangers</span></td>
+              <td><span class="pill good">善 / 中立</span></td>
+              <td>来自南牙林,长期反抗摩尔苏恩;4719 后开始抗击亡灵,在奥泽姆要塞设立基地。</td>
+            </tr>
+            <tr>
+              <td><strong>默语之道</strong><br><span style="color:var(--muted)">Whispering Way</span></td>
+              <td><span class="pill evil">邪</span></td>
+              <td>古老的「亡灵化即至高存在」邪教。塔–巴丰是其最著名成员。</td>
+            </tr>
+            <tr>
+              <td><strong>放荡理事会</strong><br><span style="color:var(--muted)">Council Libertine</span></td>
+              <td><span class="pill evil">邪</span></td>
+              <td>6 名因渗透盖布失败而被改造的死墓骑士,塞尔德格为首。曾担任阿拉兹尼的贴身护卫 / 看守长达 800 年。</td>
+            </tr>
+            <tr>
+              <td><strong>盖布</strong><br><span style="color:var(--muted)">Geb</span></td>
+              <td><span class="pill evil">邪</span></td>
+              <td>不死人国家,曾以四枚血石操控阿拉兹尼为「娼妓女皇」近 800 年。<em>幽灵王盖布</em> 是其领主。</td>
+            </tr>
+            <tr>
+              <td><strong>玛甘比学院</strong><br><span style="color:var(--muted)">Magaambya</span></td>
+              <td><span class="pill good">盟友</span></td>
+              <td>南方文森的魔法学院,辐辉之火事件后第一个伸出援手。本书工具箱也提供了「玛甘比旁听生」专长。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== Section 5 ========== -->
+    <section id="s5">
+      <h2><span class="num">Ⅴ</span>关键地点</h2>
+      <div class="cards">
+        <div class="card"><div class="title"><span class="name">维鲁米斯</span><span class="en">Vellumis</span></div>
+          <div class="role">幸存者总部</div>
+          <p>1 万人口左右的港口城,死坟末土最大据点。<em>继承者灯塔 (Inheritor's Light)</em> 高耸,<em>白象牙圣堂、瓦利坦城堡 (Castle Varitan)</em> 是政治与宗教中心。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">警醒城</span><span class="en">Vigil</span></div>
+          <div class="role">已毁旧首都</div>
+          <p>4719 年被辐辉之火夷平。阿拉兹尼遗体曾安葬于此(后被盗)。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">绞首塔</span><span class="en">Gallowspire</span></div>
+          <div class="role">塔–巴丰旧监狱</div>
+          <p>4719 年大封印破裂,巫妖王自此地逃出。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">尤娅之望 / 莫德沙</span><span class="en">Yua's Hope / Mordesha</span></div>
+          <div class="role">第一章发生地</div>
+          <p>建在莫德沙遗址上;艾奥梅黛神殿地下墓穴藏 <em>肺血石</em> + 15 名幸存者。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">奥泽姆要塞</span><span class="en">Fort Ozem</span></div>
+          <div class="role">第二章发生地</div>
+          <p>在南牙林,凡人艾奥梅黛曾短暂驻扎;<em>奥泽姆圣杯</em> 现藏地下墓穴。采用「剑–柄」布局——前部装饰陷阱,后部要害。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">科拉赫堡</span><span class="en">Corlach Keep</span></div>
+          <div class="role">脾血石所在</div>
+          <p>松流河 (Pineflow) 与四步小溪交汇处。绯红守护者把脾血石封存在地下圣库的力场之后。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">多尔特罗特牧场</span><span class="en">Dortrot Ranch</span></div>
+          <div class="role">肝血石所在</div>
+          <p>佩斯河南岸养马场,现为塞尔德格盟友 lich (Lady Siccale) 的造兵基地。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">菲林堡</span><span class="en">Castle Firrine</span></div>
+          <div class="role">心血石所在</div>
+          <p>东岸河堡,被烈日兽人部落 (Burning Sun Hold) 占据。首领 <em>查尔古·亮剑</em> 视守护圣物为部族职责。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">锤石堡</span><span class="en">Hammer Rock</span></div>
+          <div class="role">第三章终战</div>
+          <p>建在矮人堡 <em>格勒哈德林</em> 废墟之上;4719 年遭辐辉之火轰击,主体奇迹般保住,周围地形已成无生命炼狱。塞尔德格在此施仪式。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">盖布</span><span class="en">Geb</span></div>
+          <div class="role">不死人国度</div>
+          <p>首都 <em>梅吉塔尔 (Mechitar)</em>;塞尔德格旧据点 <em>哈尔格堡 (Fort Halg)</em> 在书末附录详述。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">血色花园</span><span class="en">Blighted Bower</span></div>
+          <div class="role">第二章集合点</div>
+          <p>南牙林深处一片被「暗朽 (Darkblight)」污染的小树林,塞尔德格用作玩家集合处。</p>
+        </div>
+        <div class="card"><div class="title"><span class="name">剥皮档案室</span><span class="en">The Flayed Files</span></div>
+          <div class="role">塞尔德格异空间图书馆</div>
+          <p>书页是失败者灵魂被扒下来做成的人皮书。第二章 PC 在此调研奥泽姆要塞。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Section 6 ========== -->
+    <section id="s6">
+      <h2><span class="num">Ⅵ</span>核心圣物</h2>
+
+      <h3 id="bloodstones">阿拉兹尼血石 · 四枚</h3>
+      <p>每只罐子盖上都雕成怪物头骨,罐身常年带着干涸的血迹与温热感。<strong>谁拥有四枚的全套,理论上能再次完整控制阿拉兹尼。</strong>
+        她无法主动触碰它们,<em>除非别人自愿献给她</em>。每枚血石的销毁方式各不相同(详见本书工具箱)。</p>
+
+      <div class="relics">
+        <div class="relic">
+          <div class="organ">肺血石 · Lung</div>
+          <div class="meaning">代表 · 痛苦</div>
+          <div class="field"><b>当前位置</b>尤娅之望墓穴 → 第一章后送到维鲁米斯</div>
+          <div class="field"><b>守护者</b>绯红守护者 / 幸存者</div>
+        </div>
+        <div class="relic">
+          <div class="organ">脾血石 · Spleen</div>
+          <div class="meaning">代表 · 自由</div>
+          <div class="field"><b>当前位置</b>科拉赫堡 地下圣库</div>
+          <div class="field"><b>守护者</b>末守 (Last Guard) 部队 + 力场封印</div>
+        </div>
+        <div class="relic">
+          <div class="organ">肝血石 · Liver</div>
+          <div class="meaning">代表 · 信心</div>
+          <div class="field"><b>当前位置</b>多尔特罗特牧场 地下</div>
+          <div class="field"><b>守护者</b>Lady Siccale 与亡灵军</div>
+        </div>
+        <div class="relic">
+          <div class="organ">心血石 · Heart</div>
+          <div class="meaning">代表 · 保护</div>
+          <div class="field"><b>当前位置</b>菲林堡</div>
+          <div class="field"><b>守护者</b>烈日兽人部落 (Chargug Brightsword)</div>
+        </div>
+      </div>
+
+      <div class="note warn">
+        <strong>终战玄机</strong>:第三章中阿拉兹尼承诺——若 PC 把所获血石献给她,她也会「借」一枚出来给他们。
+        因为 <strong>将四枚血石齐齐贴上塞尔德格的盔甲,可摧毁他不死之身</strong>(死墓骑士铠甲常规销毁需要火山或造物之炉;血石是另一种途径)。
+      </div>
+
+      <h3 id="chalice">奥泽姆圣杯 · Chalice of Ozem</h3>
+      <p>朝银制圣餐杯,镶若干红宝石血滴。3823 年艾奥梅黛在三悲恸之战中曾持此杯击败 Erum-Hel;艾奥梅黛升神后,圣杯升格为神器。</p>
+      <ul>
+        <li><strong>不会被任何容物腐蚀</strong>,液体永不溢出。</li>
+        <li><strong>销毁方式</strong>:杯中盛满艾奥梅黛之血,由阿拉兹尼亲口饮下,杯即碎裂——这一条本身就暗示了塞尔德格仪式所需的核心象征:让阿拉兹尼「喝下」另一位女神的命运。</li>
+        <li><strong>第二章后落入塞尔德格之手</strong>。</li>
+      </ul>
+    </section>
+
+    <!-- ========== Section 7 ========== -->
+    <section id="s7">
+      <h2><span class="num">Ⅶ</span>三章冒险剧情详述</h2>
+
+      <!-- Chapter 1 -->
+      <div class="chapter" id="ch1">
+        <div class="head">
+          <span class="label">CHAPTER · I</span>
+          <span class="ttl">死坟末土的幸存者</span>
+          <span class="lvl">Lv. 1–2 · 生存恐怖</span>
+        </div>
+
+        <h4>出发点</h4>
+        <ul>
+          <li>4725 AR 春。15 位幸存者(包括 PC)躲在尤娅之望艾奥梅黛神殿地下墓穴已 6 年。</li>
+          <li>唯一的食物来自康斯坦的造食术。</li>
+          <li>故事从 <strong>塔莉亚女爵的葬礼</strong> 开始,一系列温情铺垫——抒情诗人写挽歌、加拉格修补墙、马科沉默对石、赫道乌偷偷看康斯坦……</li>
+        </ul>
+
+        <h4>灾变 (Catastrophe in the Crypts)</h4>
+        <p>仪式高潮时,塔莉亚的尸体起身——她其实感染了被墓穴底层虚空残能强化过的 <em>僵尸腐</em>——一口咬死康斯坦,引发邪疫亡灵袭击。
+        <strong>康斯坦死。没有造食术者,墓穴里的食物只够撑几天。</strong></p>
+
+        <h4>转折点 — 肺血石</h4>
+        <p>PC 中被康斯坦秘密指定为「第二人 (second)」 者,凭藏在脖子上的银钥打开康斯坦房间的红木箱:
+        里面有一只盖刻有四眼怪的陶罐——<strong>肺血石</strong>——以及一封 <em>绯红守护者</em> 留下的信。</p>
+        <p>同时,塞尔德格的食尸鬼猎手 <em>奥梅利亚 (Omelia)</em> 已被派往尤娅之望搜罗这件神器。</p>
+
+        <h4>领导真空 → 影响检定</h4>
+        <p>康斯坦与塔莉亚双亡后,PC 必须用 10 分钟现场说服 4 组幸存者(矮人、狐族、四人组、孕母…)接受新领导地位,这关乎之后旅程中的「幸存者增益 (survivor boon)」。</p>
+
+        <h4>上路:尤娅之望 → 维鲁米斯</h4>
+        <ul>
+          <li>团队在镇里穿梭、搜物资,<strong>偷偷溜出</strong> 是关键(Evasion Points 子系统)。</li>
+          <li>行至中段被 <em>奥梅利亚</em> 埋伏:她可以从尸体里抽信息,所以不一定非杀人不可。</li>
+          <li>沿途遭遇兽人侦察小队、亡灵游荡者、感染症等。</li>
+          <li>幸存者们带着肺血石抵达维鲁米斯,把它交给 <strong>艾露纳·瓦尔瓦托斯</strong>——这就是第三章主线开端的那枚血石。</li>
+        </ul>
+
+        <div class="note">
+          <strong>意义</strong>:这章证明「生者还在」,亡灵并非完胜;并把第一枚血石送上历史的「对的一边」。
+        </div>
+      </div>
+
+      <!-- Chapter 2 -->
+      <div class="chapter" id="ch2">
+        <div class="head">
+          <span class="label">CHAPTER · II</span>
+          <span class="ttl">献给奥泽姆的余烬</span>
+          <span class="lvl">Lv. 7 · 反派渗透</span>
+        </div>
+
+        <h4>集合点:血色花园</h4>
+        <ul>
+          <li>PC 全是默语之道的代理人——动机邪恶或至少道德模糊。</li>
+          <li>塞尔德格化身「中年面色苍白的人类男性」,在血色花园下达任务:<strong>潜入奥泽姆要塞,带回奥泽姆圣杯,顺手把要塞烧成灰</strong>。</li>
+          <li>他给 PC 12 小时;并允许他们使用异空间图书馆 <em>剥皮档案室</em> 做情报工作(每 3 轮要承受 4d6 切伤——书本会把「真相」刻进读者血肉)。</li>
+        </ul>
+
+        <h4>要塞侧写</h4>
+        <ul>
+          <li>奥泽姆要塞采用「剑–柄」布局。前部 (剑身) 为废墟陷阱,后部 (剑柄) 是真正要害。</li>
+          <li>守军共 16 人:9 切尔那萨多游侠 + 3 艾奥梅黛祭司 + 3 复国骑士 + 指挥官阿尔塞拉。</li>
+          <li>圣杯藏在地下墓穴 B9。</li>
+        </ul>
+
+        <h4>渗透 — Awareness Points 子系统</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>AP</th><th>守军反应</th><th>圣火变色</th></tr></thead>
+            <tbody>
+              <tr><td><strong>4</strong></td><td>钟楼 A14 第一次小钟响,守军开始结伴。</td><td>白</td></tr>
+              <tr><td><strong>8</strong></td><td>大钟 + 三小钟,触发「游荡守军」事件。</td><td>黄</td></tr>
+              <tr><td><strong>12</strong></td><td>全员撤回剑柄区。</td><td>蓝</td></tr>
+              <tr><td><strong>16</strong></td><td>大钟 ×2 + 三小钟,守军开始挨房间搜,触发「谁在那?」事件。</td><td>红</td></tr>
+              <tr><td><strong>21</strong></td><td>大铃六响,<strong>阿尔塞拉亲自下到墓穴取走圣杯,从密道撤离</strong>——PC 仅剩最后一次「快速撤退」事件追上她。</td><td>红</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>任务结局</h4>
+        <p>最理想结局:PC 拿到圣杯,把要塞夷为废墟,带回血色花园交给塞尔德格。
+        战役层面,这一章把 <strong>奥泽姆圣杯</strong> 直接送进了塞尔德格的手中——为第三章的最终仪式备齐了核心元素之一。</p>
+
+        <div class="note">
+          <strong>意义</strong>:让玩家从反派视角理解塞尔德格的执念;同时让「善方」在第三章里失去重要圣物,造成压力。
+        </div>
+      </div>
+
+      <!-- Chapter 3 -->
+      <div class="chapter" id="ch3">
+        <div class="head">
+          <span class="label">CHAPTER · III</span>
+          <span class="ttl">血与信仰</span>
+          <span class="lvl">Lv. 18–20 · 史诗终章</span>
+        </div>
+
+        <h4>Chapter 1 — 维鲁米斯 → 科拉赫堡</h4>
+        <ul>
+          <li>开场:维鲁米斯瓦利坦城堡的战略会议厅。Aylunna 与 Beirivelle 把一桌铸铁标记摆在地图上——亡灵在死坟末土多个旧据点周边异常活跃,似乎在 <em>找东西</em>。</li>
+          <li>紧急任务:去 <strong>科拉赫堡</strong> 看下一个 likely 目标。</li>
+          <li>科拉赫堡分两期建造,第二期「小礼拜堂」其实是 3852 AR 绯红守护者用来藏血石的密室。</li>
+          <li>PC 在堡中遇到塞尔德格派来的 <strong>碎颅者翁图拉特</strong>——他偷了学者阿迪特的脸与记忆,假装受难学者引导 PC。一旦取出脾血石,他就翻脸抢夺。</li>
+          <li>拿走血石的瞬间,堡内长眠的奥泽姆骑士英魂化为 <strong>末守 (Last Guard) 部队</strong> 起身咆哮——他们在抗议不死的复活;PC 可以选择强攻,也可以以 <em>送葬礼仪</em> 安抚四次让他们平息。</li>
+          <li>任务回到维鲁米斯。</li>
+        </ul>
+
+        <h4>Chapter 2 — 血石议会 + 阿拉兹尼亲临 + 两路并行</h4>
+        <ul>
+          <li>城堡战厅召开 <strong>血石议会</strong>。Aylunna 当场公开:第一章幸存者们当年带回来的肺血石,加上 PC 在科拉赫堡得到的脾血石,骑士团已掌握两枚。</li>
+          <li>辩论:(a) 用血石控制阿拉兹尼夺回死坟末土?(b) 销毁?(c) 交给阿拉兹尼?</li>
+          <li>PC 的发言会换算成 <strong>信任点 (Trust Points)</strong> ── 这是阿拉兹尼对玩家的态度量表。<strong>任何「用血石控制阿拉兹尼」的提议直接清零</strong>。</li>
+          <li>Beirivelle 决定带 PC 去找 <strong>克拉雷瑟·艾奥梅达尔</strong>——绯红复国团团长,绯红誓言其实是给阿拉兹尼的誓言。</li>
+          <li>克拉雷瑟揉碎花瓶里那朵红紫色莲花瓣,<strong>阿拉兹尼亲临</strong>:灰肤、深色长发、不悦表情。
+            <ul>
+              <li>PC 必须 <strong>诚实</strong> 地把血石、塞尔德格、阴谋全告诉她。</li>
+              <li>若 PC 主动把手中的血石献给她,信任点猛涨;若拒绝则丢分。</li>
+              <li>阿拉兹尼答应:已知血石的 PC 把两枚给她,她也愿意 <strong>借出一枚</strong> 让 PC 携带——这枚血石将在最终战中用来摧毁塞尔德格的铠甲。</li>
+            </ul>
+          </li>
+          <li>接下来 PC 兵分两路(可顺序也可并行):
+            <ul>
+              <li><strong>多尔特罗特牧场</strong>:lich Lady Siccale 集结亡灵大军;此处藏 <em>肝血石</em>。</li>
+              <li><strong>菲林堡</strong>:被烈日兽人占据,首领 Chargug Brightsword 守 <em>心血石</em>。兽人首领自有英雄气质,可以谈也可以打。</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>Chapter 3 — 锤石堡决战:阿拉兹尼的清算</h4>
+        <p>锤石堡建在矮人堡格勒哈德林的废墟之上,4719 年遭辐辉之火轰击但奇迹般保住了主体结构,周围地形已成「无生命的炼狱」。</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:18%">区域</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>D1 血肉之门</strong></td><td>辐辉之火 + 虚空能量长出的活肉墙。</td></tr>
+              <tr><td><strong>D2 凋零花园</strong></td><td>由辐辉之火意外不死化的高位天使 <em>辐辉藤宁</em> 主持,她手下的诅咒花园不停发芽腐败。</td></tr>
+              <tr><td><strong>D3 诺恩之笼</strong></td><td>被强行不死化、灵魂被锁的命运三女神之一 <em>Chained Norn</em>——她的剪刀正是塞尔德格仪式的核心介质。</td></tr>
+              <tr><td><strong>D4 仪式平台</strong></td><td>塞尔德格本人 + 一头 <em>丧灵巨龙 (Ravener)</em> + 命运混乱漩涡 (Twist of Fate) 危险物;塞尔德格在此施 3 动作的「重启 (Reset)」仪式动作,只要玩家拖太久,他就会重置进度。</td></tr>
+              <tr><td><strong>D5 最终仪式室</strong></td><td>若 PC 一路放跑了爪牙,这里会汇集所有 boss(轻松 410 XP / 超级极致级别)。</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note warn">
+          <strong>真正的杀招</strong>:DC 40 阿拉兹尼学识 / DC 44 宗教检定可知——
+          <strong>把四枚血石全数贴到塞尔德格的铠甲上,可一次性彻底毁灭他</strong>。
+          所以最后一战的玩法,实质是「PC 在战斗中把携带的血石(+ 阿拉兹尼借出的那枚)依次接触塞尔德格盔甲」,每接触一枚都对他造成本质伤害。
+        </div>
+
+        <h4>路上的余波</h4>
+        <p>PC 离开锤石堡,阿拉兹尼现身:「这是我应得的,把剩余血石还我吧。」</p>
+        <ul>
+          <li>若 PC 把血石全数交还,她释然微笑离去;<strong>当夜每位英雄枕下都会出现一片莲花瓣——危急时捏碎,可召唤她</strong>。</li>
+          <li>若 PC 拒绝交回,阿拉兹尼的怨气会再次膨胀,从此与终焉之墙骑士团结仇——可能成为下一段故事的种子。</li>
+        </ul>
+
+        <h4>终章影响</h4>
+        <ul>
+          <li><strong>成功结局</strong>:阿拉兹尼公开承认绯红复国团是她的教众,她在凡间的形象逐渐被重新理解。终焉之墙骑士团获得真正的女神盟友。</li>
+          <li><strong>失败结局</strong>(仪式完成或部分完成):艾奥梅黛与阿拉兹尼的命运被部分交换、部分扭曲——两位女神都失去一部分神力,阿罗登的旧领域因此失衡,造成<strong>远比塞尔德格预想还失控</strong>的灾变,Golarion 进入新阶段的灾祸。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== Section 8 ========== -->
+    <section id="s8">
+      <h2><span class="num">Ⅷ</span>主题分析 — 暴君之爪到底在讲什么?</h2>
+      <p>把三章合在一起看,《暴君之爪》其实是一部 <strong>三幕的女神肖像剧</strong>——主角是 <em>阿拉兹尼</em>,反派是 <em>塞尔德格</em>。</p>
+
+      <div class="acts">
+        <div class="act">
+          <span class="actnum">Ⅰ</span>
+          <h4>第一幕:尤娅之望</h4>
+          <div class="when">凡人视角 · 1–2 级</div>
+          <p>从最微小的视角进入主题。一群普通人的生与死,一枚被遗忘几百年的血石,被善意的凡人一路护送到正确的人手里。</p>
+          <div class="quote">凡人即使在末世也能做对一件事。</div>
+        </div>
+        <div class="act">
+          <span class="actnum">Ⅱ</span>
+          <h4>第二幕:奥泽姆要塞</h4>
+          <div class="when">反派视角 · 7 级</div>
+          <p>转换到反派视角。塞尔德格不是简单复仇,他想「修正」阿拉兹尼的命运、顺便修正自己。玩家在邪恶视角中,不知不觉成了悲剧的一部分。</p>
+          <div class="quote">反派的自我感动有多危险。</div>
+        </div>
+        <div class="act">
+          <span class="actnum">Ⅲ</span>
+          <h4>第三幕:死坟末土的清算</h4>
+          <div class="when">英雄视角 · 18–20 级</div>
+          <p>把善方与女神本人放在同一张桌子上对话。骑士团必须承认错误,玩家必须在「不自动信任神祇、神祇也不自动信任凡人」的张力中,挣得女神的信任。</p>
+          <div class="quote">真正的救赎不是改写历史,而是承担它。</div>
+        </div>
+      </div>
+
+      <h3>隐含母题</h3>
+      <ul>
+        <li><strong>历史 vs. 命运</strong>:塞尔德格想用魔法重写历史;玩家最终选择尊重历史、修复关系。</li>
+        <li><strong>被滥用者的自决</strong>:阿拉兹尼的信任不能用言语换,只能用<em>行动一致</em>换。</li>
+        <li><strong>不死的诱惑与代价</strong>:从塔–巴丰到塞尔德格再到 Council Libertine——本书里几乎每个反派,都是「逃避审判 → 自愿不死 → 反受其害」的同一模板。</li>
+        <li><strong>死坟末土仍有希望</strong>:从乡野墓穴的孤儿到维鲁米斯的灯塔,到女神归位——叙事走向是从沉沦走向重建。</li>
+      </ul>
+    </section>
+
+    <!-- ========== Section 9 ========== -->
+    <section id="s9">
+      <h2><span class="num">Ⅸ</span>与 Pathfinder 总线衔接</h2>
+      <ul>
+        <li>本书剧情建立在 <strong>《暴君之握》(Tyrant's Grasp) AP</strong> 的结局之上(阿拉兹尼升神 / 警醒城被毁)。</li>
+        <li>与 <strong>《鲜血领主 / Blood Lords》AP</strong> 共享塞尔德格这条人物线:在 BL 中他是盖布的间谍统领,玩家被请去刺杀他但失败,本书「官方钦定」他在那之后逃到了死坟末土。<em>本书的塞尔德格是真正的、最终的告别战</em>。</li>
+        <li>4725 AR 是 PF2E 主线「预言破灭之年」以来世界的最新切片。书末的 <strong>维鲁米斯志、调和语者 / 复国骑士 / 警醒骑士 / 终焉之墙哨兵 / 玛甘比旁听生</strong> 高级专长,直接对接 <em>《终焉之墙骑士团》、《角色指南》、《魔法之秘》</em> 等参考书。</li>
+        <li>世界长远影响:
+          <ul>
+            <li><strong>成功</strong>:阿拉兹尼正式回到内海宗教版图;绯红复国团从「阴谋小教派」变为「女神实锤教众」;死坟末土的反攻多了一位正式神祇盟友。</li>
+            <li><strong>失败</strong>:Golarion 神话格局会被进一步改写,可能引爆下一次大型 AP。</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ========== Section 10 ========== -->
+    <section id="s10">
+      <h2><span class="num">Ⅹ</span>速查备忘录(GM / 玩家)</h2>
+      <div class="cheat">
+        <ul>
+          <li><b>时间线锚点</b> · 4719 = 大灾变;4725 = 现在。</li>
+          <li><b>结构</b> · 三章皆独立 PC——剧情连续,但角色每章重做一组。</li>
+          <li><b>反派</b> · 只有一个名字要记 — 塞尔德格·贝德利斯。</li>
+          <li><b>圣物</b> · 只有两类要记 — 四枚阿拉兹尼血石 + 奥泽姆圣杯。</li>
+          <li><b>神祇关系</b> · 艾奥梅黛 = 替补转正(继承者);阿拉兹尼 = 被三方背叛后被迫自救(奥泽姆 / 阿罗登 / 盖布)。</li>
+          <li><b>战略地理</b> · 维鲁米斯=幸存者总部;锤石堡=终局;尤娅之望/科拉赫/多尔特罗特/菲林=四枚血石原藏处。</li>
+          <li><b>阿拉兹尼地雷</b> · ① 谈「控制她」 ② 拒还血石 ③ 替奥泽姆骑士团洗白 — 这些都会让她翻脸。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== Section 11 ========== -->
+    <section id="s11">
+      <h2><span class="num">Ⅺ</span>资料来源 (Sources)</h2>
+
+      <h3>本地</h3>
+      <ul>
+        <li><code>PZO14003E - Claws Of The Tyrant.pdf</code>、<code>[预排版]PZO14003E - Claws Of The Tyrant.docx</code> — 本书原文</li>
+        <li><code>暴君之爪 - 玩家指南(中文版).md</code> / <code>…-v2.md</code></li>
+        <li><code>《暴君之爪》冒险工具箱.txt</code> + <code>《暴君之爪》冒险工具箱(怪物部分).txt</code></li>
+        <li><code>塞尔德格·贝德利斯 Seldeg Bhedlis.txt</code></li>
+        <li><code>chat_export.txt</code> — Foundry/Discord 跑团社群讨论</li>
+        <li><code>第三方.txt</code>、<code>Gravelands Survivors Player's Guide.txt</code></li>
+        <li>7 张玩家指南漫画图(<code>1~7 Claws of The Tyrant Player's Guide.webp</code>)</li>
+      </ul>
+
+      <h3>网络</h3>
+      <ul>
+        <li><a href="https://pathfinderwiki.com/wiki/Arazni" target="_blank" rel="noopener">Arazni — PathfinderWiki</a></li>
+        <li><a href="https://2e.aonprd.com/Deities.aspx?ID=326&Redirected=1" target="_blank" rel="noopener">Arazni — Archives of Nethys</a></li>
+        <li><a href="https://pathfinderwiki.com/wiki/Tar-Baphon" target="_blank" rel="noopener">Tar-Baphon — PathfinderWiki</a></li>
+        <li><a href="https://pathfinderwiki.com/wiki/Iomedae" target="_blank" rel="noopener">Iomedae — PathfinderWiki</a></li>
+        <li><a href="https://2e.aonprd.com/Deities.aspx?ID=285" target="_blank" rel="noopener">Iomedae — Archives of Nethys</a></li>
+        <li><a href="https://pathfinderwiki.com/wiki/Seldeg_Bhedlis" target="_blank" rel="noopener">Seldeg Bhedlis — PathfinderWiki</a></li>
+        <li><a href="https://2e.aonprd.com/NPCs.aspx?ID=3832" target="_blank" rel="noopener">Seldeg Bhedlis (Claws of the Tyrant) — Archives of Nethys</a></li>
+        <li><a href="https://www.pathfindercommunity.net/magic-items/artifacts/major-artifacts/bloodstones-of-arazni" target="_blank" rel="noopener">Bloodstones of Arazni — Pathfinder Community Wiki</a></li>
+        <li><a href="https://www.aonprd.com/MythicMonsterDisplay.aspx?ItemName=The+Whispering+Tyrant" target="_blank" rel="noopener">The Whispering Tyrant — Mythic Monsters / AON</a></li>
+      </ul>
+
+      <p style="margin-top:32px;color:var(--muted);font-size:13px;text-align:center;">
+        — 整理日期 · 2026-05-06 — <br>
+        提示:在浏览器内 <kbd style="background:#332d28;padding:1px 6px;border-radius:4px;border:1px solid var(--border-2);font-family:Georgia,serif;color:var(--gold-2)">Ctrl + P</kbd> 即可另存为 PDF。
+      </p>
+    </section>
+
+  </main>
+
+</div>
+
+<button class="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<script>
+// 简单的回到顶部按钮显示控制
+const btn=document.querySelector('.toTop');
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>400) btn.classList.add('on'); else btn.classList.remove('on');
+},{passive:true});
+
+// 当前阅读章节高亮
+const tocLinks=document.querySelectorAll('aside.toc a');
+const sections=[...document.querySelectorAll('main section[id]')];
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(a=>{
+        a.style.background=a.getAttribute('href')==='#'+e.target.id?'rgba(205,166,111,.12)':'';
+        a.style.color=a.getAttribute('href')==='#'+e.target.id?'var(--gold-2)':'';
+      });
+    }
+  });
+},{rootMargin:'-30% 0px -65% 0px'});
+sections.forEach(s=>obs.observe(s));
+</script>
+
+</body>
+</html>
