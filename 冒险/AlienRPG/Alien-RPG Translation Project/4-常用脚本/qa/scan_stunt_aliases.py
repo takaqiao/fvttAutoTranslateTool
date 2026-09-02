@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""闸：技能炫技的**中文键别名**必须与技能名逐条对上。
+"""闸：技能特技的**中文键别名**必须与技能名逐条对上。
 
 这条闸在防什么
 --------------
-经典（非进化版）角色卡上的炫技按钮走的是一条**按名字拼 key** 的路径：
+经典（非进化版）角色卡上的特技按钮走的是一条**按名字拼 key** 的路径：
 
     templates/actor/character-skills.hbs:15
         data-pmbut='{{skill.description}}'
@@ -14,15 +14,15 @@
         temp3 = game.i18n.localize("ALIENRPG." + newLangStr);
 
 也就是说 key 是用**已经本地化的技能名**拼出来的。英文下 "Close Combat" → 去空格 →
-`ALIENRPG.CloseCombat`，正好命中 alien-evolved-* 两个模块提供的炫技键。
+`ALIENRPG.CloseCombat`，正好命中 alien-evolved-* 两个模块提供的特技键。
 中文下技能名是「近战」，拼出来是 `ALIENRPG.近战` —— **上游没有这个键，永远落空**，
-按钮只会显示「未录入炫技」。这是系统自身的 i18n 缺陷，只在英文下成立。
+按钮只会显示「未录入特技」。这是系统自身的 i18n 缺陷，只在英文下成立。
 
 我们的处理：在 evolved-stunts-cn.json 里额外提供 12 个**中文键别名**，
 内容与对应的英文键逐字节相同。于是中文下那条查找也能命中。
 
 ⚠ 别名是跟着**技能名**走的。哪天把「近战」改成别的说法，别名就对不上了，
-而且**不会报错**——按钮只是又变回「未录入炫技」。这道闸就是那个警报。
+而且**不会报错**——按钮只是又变回「未录入特技」。这道闸就是那个警报。
 
     python scan_stunt_aliases.py
 """
@@ -35,7 +35,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 HUB = os.path.join(ROOT, "1-系统汉化插件")
 
-# CONFIG.ALIENRPG.skills 的 key → (技能名的 lang 键, 炫技内容的 lang 键)
+# CONFIG.ALIENRPG.skills 的 key → (技能名的 lang 键, 特技内容的 lang 键)
 # 取自 systems/alienrpg/module/helpers/config.mjs:53-64
 SKILLS = {
     "heavyMach": ("ALIENRPG.SkillheavyMach", "ALIENRPG.HeavyMachinery"),
@@ -80,12 +80,12 @@ def main():
         # 系统会去掉空白再拼 key
         alias = "ALIENRPG." + "".join(name.split())
         if stunt_key not in st:
-            print("  ✗ %s：炫技本体 %s 不在 evolved-stunts-cn.json 里" % (skl, stunt_key))
+            print("  ✗ %s：特技本体 %s 不在 evolved-stunts-cn.json 里" % (skl, stunt_key))
             bad += 1
             continue
         if alias not in st:
             print("  ✗ %s：技能名是「%s」，但缺少别名键 %s —— "
-                  "经典角色卡的炫技按钮会显示「未录入炫技」" % (skl, name, alias))
+                  "经典角色卡的特技按钮会显示「未录入特技」" % (skl, name, alias))
             bad += 1
             continue
         if st[alias] != st[stunt_key]:

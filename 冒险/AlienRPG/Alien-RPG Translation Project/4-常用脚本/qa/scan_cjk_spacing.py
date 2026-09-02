@@ -75,7 +75,7 @@ def main():
         else:
             files.append(t)
 
-    total, bad = 0, 0
+    checked, total, bad = 0, 0, 0
     for f in sorted(files):
         try:
             s = io.open(f, encoding="utf-8").read()
@@ -89,6 +89,7 @@ def main():
                 continue
         else:
             hits = scan_text(s)
+        checked += 1
         if hits:
             bad += 1
             total += len(hits)
@@ -96,7 +97,8 @@ def main():
             for h in hits[:a.show]:
                 print("     …%s…" % h)
 
-    print("\n文本节点内部的 CJK 裸空格：%d 处 / %d 个文件" % (total, bad))
+    print("\n文本节点内部的 CJK 裸空格：%d 处 / %d 个异常文件 / %d 个已检查文件" %
+          (total, bad, checked))
     return 1 if total else 0
 
 

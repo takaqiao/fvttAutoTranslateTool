@@ -261,6 +261,58 @@
       "ruled_by": "主控",
       "ruled_on": "2026-08-29",
       "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 搞砸 是口语，放在状态栏里不像一个状态名（业主实机反馈第 2 条直指这一点）。描述是“无论掷出什么，你的动作都失败”。失手 是第一候选，被否掉两次：一是日常中文里 失手 最常用于“不小心掉了 / 打硕了”，正好是 Lose Item 脱手 的意思，同时挂两个图标时会互干；二是 失手 只管得了手上的活，而这条状态对**任何**技能检定都生效，包括指挥与通信科技。失误 不挑动作类型，也不歧义。"
+    },
+    {
+      "id": "R29-freezing",
+      "en": "Freezing",
+      "adopt": "受冻",
+      "reject": [
+        "冷冻",
+        "失温"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "状态说明涵盖角色在冰点以上、零度以下和太空极寒中的持续受寒，并明确以“回暖”解除。冷冻 通常表示对某个对象施加冻结动作；失温 又把冰点以上的轻度寒冷暴露说得过重。受冻 是能够覆盖整段规则的角色状态。",
+      "blast_radius": "lang ALIENRPG.Freezing · ALIENRPG.TAH.freezing · 状态指示物与规则提示。"
+    },
+    {
+      "id": "R30-encumbered",
+      "en": "Encumbered",
+      "adopt": "超重",
+      "reject": [
+        "受阻",
+        "超载"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "受阻 只说行动不便，没有告诉玩家原因。该键的 TAH 说明把真正触发检定的状态写成 OVER-ENCUMBERED，正文现有标题与状态句都已经使用 超重，因此状态图标也采用同一词。超载 更像载具或电气系统。",
+      "blast_radius": "lang ALIENRPG.Encumbered · TAH.encumbered · 状态指示物。"
+    },
+    {
+      "id": "R31-stunts",
+      "en": "Stunts",
+      "adopt": "特技",
+      "reject": [
+        "炫技",
+        "额外效果"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "Stunt 是用额外成功换取的可选规则效果；列表包括增伤、加快、静音、交换先攻等，只有 show off 那一项真的是炫耀。把整类机制叫 炫技 会让类别名与其中一个具体选项混为一谈。特技 是中文 TRPG 的通行机制词，也不会和“意料之外的额外效果”那一项撞名。",
+      "blast_radius": "lang ALIENRPG.Stunts / EvolvedStunts · 19 个 Evolved 插件键 · 系统与新手包正文 · 角色卡按钮。"
+    },
+    {
+      "id": "R31b-skill-stunts",
+      "en": "Skill-Stunts",
+      "adopt": "技能特技",
+      "reject": [
+        "技能炫技",
+        "技能效果"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "跟随 R31-stunts。用于物品类型和文件夹时加 技能 前缀，以区别普通叙事中的特技；正文谈具体选项时只写 特技。",
+      "blast_radius": "ITEM.TypeSkill-stunts · TYPES.Item.skill-stunts · Babele folders.Skill-Stunts · 世界重译映射。"
     }
   ],
   "_ui_label_rulings_not_glossary_terms": "同样格式的裁定，但 en 不是 glossary_alien.json 的 terms 键，因此**不放进上面的 rulings[]**——build_glossary_v1.py 对 rulings[] 里找不到的 term 会直接 SystemExit。这些是纯 UI 标签（en.json 键），归 6-工作区/phase1 分片管，词表不收。",
@@ -291,6 +343,33 @@
       "rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 保持冷静 四字，在两张表里都是唯一超宽的那一行，而它的描述只有一句“无效果”。镇定 两字，与其余 20 行齐平。",
       "note": "⚠ 故意**不**等于经典版 Panic Table 的 KEEPING IT TOGETHER 保持镇定，也不等于 Keeping Guard 保持警戒；SAME_STRING_GROUPS 没有把它们配对。Keeping Cool 至今不在 glossary_alien.json 的 terms 里（keepingcool 在 alienrpg.mjs:267 的 toRemove 名单里，根本没有 ALIENRPG.* 值），因此只能落在本数组。",
       "blast_radius": "Stress Response Table 0-0 · Panic Response Table 0-0（两处，无 lang 键）。"
+    },
+    {
+      "id": "R32-gravity-dyspraxia",
+      "en": "Gravity Dyspraxia",
+      "adopt": "重力失调",
+      "reject": [
+        "重力运动障碍",
+        "重力失适",
+        "动作失调"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "这是状态栏短标签，表示变重力环境造成的空间定向、平衡与动作协调失调。重力运动障碍 是六字医学释义式直译；动作失调 丢掉病因；重力失适 不够直观。重力失调 保留原因且适合状态菜单宽度。",
+      "blast_radius": "lang ALIENRPG.gravitydyspraxia · config.mjs conditionEffects · MU/TH/ER 使用说明更新历史。"
+    },
+    {
+      "id": "R33-critical-injuries-ui",
+      "en": "Critical injuries（UI label role）",
+      "adopt": "重伤",
+      "reject": [
+        "Critical injuries"
+      ],
+      "ruled_by": "业主",
+      "ruled_on": "2026-09-01",
+      "rationale": "config.mjs 把 ALIENRPG.CriticalInjuries 直接显示为状态名称。actor.mjs 的查表逻辑在本地化名称未命中后仍会依次尝试两个冻结英文表名，因此翻译 UI 键安全；必须保持英文的是 RollTable 文档名，而不是状态标签。",
+      "note": "⚠ 这是按角色分裂：glossary 的冻结表名 Critical injuries 继续保持英文，只有 i18n UI 键采用 重伤。不要用平面 TM 全局替换表名。",
+      "blast_radius": "lang ALIENRPG.CriticalInjuries · 状态图标；不改任何 RollTable 文档名。"
     }
   ],
   "_still_open_after_this_file": [

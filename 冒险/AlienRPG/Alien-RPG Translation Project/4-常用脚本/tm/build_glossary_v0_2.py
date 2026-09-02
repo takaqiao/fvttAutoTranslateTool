@@ -23,7 +23,8 @@ Run:  python build_glossary_v0_2.py
 """
 import json, collections, io, os, sys
 
-G = r"C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/7-其他内容/glossary"
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+G = os.path.join(ROOT, "7-其他内容", "glossary")
 LANG = r"C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg/lang"
 
 SUBS = "CnSCG subtitle corpus (ONE vote — single fansub lineage)"
@@ -247,9 +248,10 @@ for en_, zh, alt, ev in [
     ("Exhausted", "精疲力竭", None, "cn.json TAH.exhausted, re-derived this session."),
     ("Starving", "挨饿", None, "cn.json TAH.starving '一天没有食物后，您就会挨饿'."),
     ("Dehydrated", "脱水", None, "cn.json TAH.dehydrated '脱水有多种影响'."),
-    ("Freezing", "冷冻", "受冻",
-     "cn.json TAH.freezing '冷冻有几个影响'. 冷冻 is transitive-ish (to freeze something); "
-     "受冻 is the state a character is in. Kept as attested, alias recorded."),
+    ("Freezing", "受冻", "冷冻",
+     "Owner ruling 2026-09-01. The rule covers a character exposed to cold, including above-"
+     "freezing temperatures, until they get warm. 受冻 names that state; 冷冻 reads as an "
+     "action performed on an object."),
 ]:
     cands = [C(zh, STRB, "en-gated 1", ev)]
     if alt:
@@ -258,6 +260,28 @@ for en_, zh, alt, ev in [
                  "Trials-and-Hazards state. Attested in cn.json; stratum B, but these four are "
                  "plain vocabulary where MT and a human land in the same place.",
                  cands, **({"aliases": [alt]} if alt else {}))
+
+ADD["Encumbered"] = T(
+    "超重", "T-PLAIN", "yze-mechanics",
+    "Owner ruling 2026-09-01. The TAH prose names the mechanically active state "
+    "OVER-ENCUMBERED and already renders it as 超重; 受阻 hides the cause.",
+    [C("超重", STD, "en-gated 0 — owner ruling", "State label aligned with TAH.encumbered."),
+     C("受阻", STRB, "en-gated 1 — REJECTED", "Old cn.json label; wrong-sense.")],
+)
+ADD["Gravity Dyspraxia"] = T(
+    "重力失调", "T-PLAIN", "yze-condition",
+    "Owner ruling 2026-09-01. Compact HUD label for altered-gravity sensorimotor and "
+    "coordination dysfunction; the full medical gloss is too long for a status chip.",
+    [C("重力失调", STD, "en-gated 0 — owner ruling", "config.mjs condition id gravitydyspraxia."),
+     C("重力运动障碍", STRB, "en-gated 1 — REJECTED", "Literal but awkward status label.")],
+)
+ADD["Stunts"] = T(
+    "特技", "T-PLAIN", "yze-mechanics",
+    "Owner ruling 2026-09-01. A stunt is a selectable effect bought with extra successes; "
+    "only one listed option is literally showing off, so 炫技 cannot name the category.",
+    [C("特技", STD, "en-gated 0 — owner ruling", "Common Chinese TRPG mechanic term."),
+     C("炫技", STRB, "en-gated 1 — REJECTED", "Wrongly narrows the entire mechanic to showing off.")],
+)
 
 # --- structural folder / type labels the Babele folders mapping needs
 FOLDERS = [
@@ -277,7 +301,7 @@ FOLDERS = [
     ("Talents (Career)", "天赋（职业）", "cn.json ALIENRPG.Talents -> 天赋, ALIENRPG.Career -> 职业. Full-width parentheses because the whole label is Chinese.", "T-PLAIN"),
     ("Talents (General)", "天赋（通用）", "cn.json ALIENRPG.GeneralTalent 'General Talent' -> 通用天赋.", "T-PLAIN"),
     ("Careers", "职业", "cn.json:76.", "T-PLAIN"),
-    ("Skill-Stunts", "技能炫技", "cn.json ALIENRPG.Skills -> 技能 and ALIENRPG.Stunts -> 炫技.", "T-PLAIN"),
+    ("Skill-Stunts", "技能特技", "cn.json ALIENRPG.Skills -> 技能 and ALIENRPG.Stunts -> 特技.", "T-PLAIN"),
     ("Alien Sub-Tables", "异形子表", "NOT frozen — see the citation-path correction. 子表 is the standard word for a nested RollTable.", "T-PLAIN"),
     # The one bilingual folder label: the others are generic category words, this one
     # is a proper-noun book title, and the owner's T-BILINGUAL tier covers proper nouns.

@@ -3,11 +3,11 @@
 > 这是本项目的**唯一长期入口**。新会话请先读 §1，再按需跳读。
 > §8 裁决日志**只追加、不重写**——被推翻的结论加脚注保留，不许改成"一直是对的"。
 
-**发版状态（2026-08-29）：Phase 0/1/2 已完成。`alienrpg-cn 0.1.0` **已公开发布** ——
-系统 UI 600 键 + 系统自带 Adventure 包全译，仓库 https://github.com/takaqiao/alienrpg-cn 。
-`alien-evolved-starterset-cn 0.1.0` / `alien-evolved-corerules-cn 0.1.0` 仍是**未发布的空壳**：
-两个内容包（34 万字 / 229 万字）**一个字都还没译**。
-⚠ 已发布的这一版**没做过实机冒烟**，见 §7.1。**
+**发版状态（2026-09-02）：`alienrpg-cn 0.2.5` 与 `alien-evolved-starterset-cn 0.2.2`
+均已公开发布——系统 UI 600 键、系统自带 Adventure 包、六份插件语言文件（七个条件入口）
+与 Starter Set 内容包已汉化。`alien-evolved-corerules-cn 0.1.0` 仍是**未提交、未发布的空壳**，
+Core Rules（229 万字符）是唯一尚未汉化的内容包。
+⚠ 已发布内容仍**没做过完整实机冒烟**，见 §7.1。**
 
 > ⚠ **本行就是「抬头」**。版本号全文只写两处：**本行**与 **§2 的版本矩阵**。别处一律指过来。
 > EC 项目实测：§1 里那个「第二真相」曾停在旧版本达四个发布版没人发现。
@@ -27,7 +27,7 @@
 
 | 槽位 | 模块 id | 覆盖 | 体量 |
 |---|---|---|---|
-| `1-系统汉化插件` | `alienrpg-cn` | 系统 UI（590 键）+ 系统自带 Adventure 包 + 五个插件的 lang + 运行时补丁 + CJK 字体 + **唯一一份全局 babele mapping** | 7.6 万字 + UI |
+| `1-系统汉化插件` | `alienrpg-cn` | 系统 UI（590 键）+ 系统自带 Adventure 包 + 六份插件 lang（七个条件入口）+ 运行时补丁 + CJK 字体 + **唯一一份全局 babele mapping** | 7.6 万字 + UI |
 | `2-新手包汉化插件` | `alien-evolved-starterset-cn` | Starter Set 内容包 | 34.1 万字 |
 | `3-核心书汉化插件` | `alien-evolved-corerules-cn` | Core Rules 内容包 | 228.7 万字 |
 
@@ -163,19 +163,22 @@ B 层的招牌错误：
 
 ## 2. 版本矩阵
 
-> **这是版本号的第二处也是最后一处。**由 `qa/assert_resolutions.py` 的 `R-version-matrix` 机械看守。
+> **这是版本号的第二处也是最后一处。**⚠ 目前尚未机械化：现存
+> `qa/assert_resolutions.py` 仍依赖从未建立的 Alien 专用 `RESOLUTIONS.assertions.json`，直接运行会失败；
+> 不得拿它的缺席当成“已通过”。发布版本与 tag / download / changelog 的一致性由三个仓各自的
+> GitHub Actions 发版闸看守，抬头与本矩阵仍须人工同步。
 
 | 模块 | 本仓版本 | 已发布 | 上游依赖 | 上游版本（本机实测） |
 |---|---|---|---|---|
-| `alienrpg-cn` | 0.1.0 | **v0.1.0 · 2026-08-29 公开发布** | system `alienrpg` | 4.1.13 |
-| `alien-evolved-starterset-cn` | 0.1.0 | —（空壳，正文未译） | module `alien-evolved-starterset` | 1.0.2 |
-| `alien-evolved-corerules-cn` | 0.1.0 | —（空壳，正文未译） | module `alien-evolved-corerules` | 1.0.2 |
+| `alienrpg-cn` | 0.2.5 | **v0.2.5 · 2026-09-02 公开发布** | system `alienrpg` | 4.1.13 |
+| `alien-evolved-starterset-cn` | 0.2.2 | **v0.2.2 · 2026-09-02 公开发布** | module `alien-evolved-starterset` | 1.0.2 |
+| `alien-evolved-corerules-cn` | 0.1.0 | —（未提交、未发布空壳） | module `alien-evolved-corerules` | 1.0.2 |
 | （运行时依赖） | — | — | `babele` | 2.9.1 |
 
-> **Phase 0 收尾状态（2026-08-29）**：三个模块的骨架齐了（`module.json` / `register.js` / 发版工作流），
-> `compendium/en` 已按上表这三个上游版本抽全，并**一个不落**地快照进 `7-其他内容/english-baseline/`。
-> 三个仓的 `compendium/cn` 都还只有 `.gitkeep`，三个仓都是 **0 commit、0 tag**——"已发布"列的 `—` 是字面意思。
-> ⚠ 模组一的发版工作流**还缺一道"有东西可发"的闸**（模组二、三都有），照现状打 tag 会发出一个空壳，见 §8。
+> **当前交付状态（2026-09-02）**：三个上游包的英文基线均已抽取并完整快照进
+> `7-其他内容/english-baseline/`。中枢与新手包译文已经通过发版工作流公开出货；核心书仓仍只有
+> 骨架与英文基线，`compendium/cn` 没有正文。中枢工作流现在也有“确实有内容可发”、插件语言非空、
+> 命令词锁定与登记表完整性闸，不再允许空壳发布。
 
 **插件覆盖面**（都由 `alienrpg-cn` 的 gated lang 条目承载）：
 
@@ -186,6 +189,9 @@ B 层的招牌错误：
 | `motion-tracker-multideck` | 1.0.2 | 纯运行时（无任何 i18n 管线） | 2.2k |
 | `token-action-hud-alien` | 1.3.0 | **无需单独做**——它的标签全是 `ALIENRPG.*` 键，翻系统即翻它 | 14 字符 |
 | `terminal` | 4.0.11 | 纯运行时；先只做玩家可见切片 | 1.6k（全量 33k） |
+| `babele` | 2.9.1 | gated lang，设置界面全量汉化 | 全量 |
+| `alien-evolved-starterset` / `alien-evolved-corerules` | 1.0.2 | 共用一份 gated lang；技能特技、天赋正文与 12 个中文动态键别名 | 19 上游键 + 12 别名 |
+| `yze-combat` | 1.7.1 | gated lang；界面 80 键全译。Foundry v14 使用 takaqiao 修复分支 | 80 键 |
 
 > ⚠ **VPS 版本尚未录入。** 发版前必须填这一列并跑对齐断言——本机装的不等于 VPS 装的。
 
@@ -1200,3 +1206,24 @@ yze 的默认牌堆是**扑克牌**（`cards/light-soft/spades-ace.webp`），�
 
 ⚠ 上游 yze-combat 在 v14 + alienrpg 下有 statusEffect 重复注册崩溃，
 用 takaqiao fork（`module.json` 的 description 里写明了）。
+
+---
+
+### 2026-09-01 实机反馈：状态标签与 Stunts 术语重裁（R29-R33）
+
+这轮不是追求“全部两字”，而是把 HUD 短标签与规则描述逐项对齐；英文名称、实际效果、
+解除条件三者一致才改。车主确认后定稿：
+
+| 英文 | 旧译 | 定稿 | 理由 |
+|---|---|---|---|
+| Freezing | 冷冻 | **受冻** | 规则涵盖寒冷、零下与太空暴露，角色是“受寒冷影响”，不是被冷冻保存；又不武断诊断为失温。 |
+| Encumbered | 受阻 | **超重** | 触发条件就是携带重量超过负重上限；“受阻”没有指出原因。TAH 的 Over-Encumbered 同步为同一字符串。 |
+| Gravity Dyspraxia | 重力运动障碍 | **重力失调** | HUD 需要短标签；规则指改变重力造成的感觉运动/协调失常，不是泛称运动障碍。 |
+| Critical Injuries（状态 UI） | Critical Injuries | **重伤** | 仅翻玩家看到的状态标签。代码查找的 RollTable 名 `Critical Injuries` / `Critical injuries` 仍按 T-FROZEN 保持英文；查找失败还有英文回退，因此两种角色不冲突。 |
+| Stunts | 炫技 | **特技** | 这里是“额外成功可购买的规则效果”这一机制类别；只有个别条目的 `show off` 才是炫耀。 |
+| Skill-Stunts | 技能炫技 | **技能特技** | 跟随 Stunts 的机制名，并同步 `TYPES.Item.*`、合集文件夹、Evolved 正文与 12 个中文动态键别名。 |
+
+防回退：新增 `qa/scan_status_and_stunt_terms.py`，对 15 个运行时落点做精确值断言，并禁止
+出货文件再出现“炫技”；`scan_stunt_aliases.py` 继续锁住 12 个由本地化技能名动态拼出的键。
+本轮同时把 `gate_plugin_lang.mjs` 从旧的“四插件”假设升级为七个条件入口，逐项核验
+YZE Combat 80 键、两份 Evolved 上游语言文件与共享别名。

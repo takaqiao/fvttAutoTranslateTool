@@ -26,9 +26,10 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const HUB = 'C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project/1-系统汉化插件';
+const PROJ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const HUB = path.join(PROJ, '1-系统汉化插件');
 const SYS = 'C:/Users/Taka/AppData/Local/FoundryVTT/Data/systems/alienrpg';
 const DATA = 'C:/Users/Taka/AppData/Local/FoundryVTT/Data';
 const CORE_LANG = 'C:/Program Files/Foundry Virtual Tabletop/resources/app/public/lang';

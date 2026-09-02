@@ -615,6 +615,9 @@ SAME_STRING_GROUPS = [
     (["TREMBLE", "Shakes"],
      "Panic-table result row and Evolved condition key. ⚠ Note the English differs (TREMBLE vs "
      "Shakes) while the Chinese must not — the table row and the condition are the same result."),
+    (["Encumbered", "Over-Encumbered"],
+     "The status icon and the mechanically active TAH state are one condition. Owner ruling "
+     "2026-09-01 aligns both to 超重 so the short label and its expanded rule text cannot drift."),
 ]
 for _keys, _why in SAME_STRING_GROUPS:
     _present = [k for k in _keys if k in terms]
@@ -740,20 +743,30 @@ if "Ellen Ripley" in pending:
 # （2026-08-29 实测：RULINGS 已把 4 条的值落进 terms，disputes 里却还挂着未决。）
 for _en, _r in RULING_BY_EN.items():
     _hit = None
+    _target_dispute = _r.get("closes_dispute")
     if isinstance(DISPUTES, dict):
         _pool = DISPUTES.get("disputes", DISPUTES)
-        _seq = _pool.values() if isinstance(_pool, dict) else _pool
+        _seq = _pool.items() if isinstance(_pool, dict) else (
+            (d.get("id") if isinstance(d, dict) else None, d) for d in _pool)
     else:
-        _seq = DISPUTES
-    for _d in _seq:
+        _seq = ((d.get("id") if isinstance(d, dict) else None, d) for d in DISPUTES)
+    for _did, _d in _seq:
         if not isinstance(_d, dict):
             continue
-        if _d.get("id") == _r.get("closes_dispute") or _d.get("en") == _en:
+        if _target_dispute is not None:
+            _matches = _did == _target_dispute
+        else:
+            _matches = _d.get("en") == _en
+        if _matches:
             _hit = _d
             break
     if _hit is None:
+        # 大多数裁定只是在词表里定稿，并不关闭争议；它们没有 closes_dispute，
+        # 且英文词条也不在 disputes 里，应该安静跳过。
+        if _target_dispute is None:
+            continue
         raise SystemExit("RULING %s closes %r but no such dispute exists"
-                         % (_r["id"], _r.get("closes_dispute")))
+                         % (_r["id"], _target_dispute))
     _hit["status"] = "closed_by_ruling"
     _hit["closed_by"] = _r["id"]
     _hit["settled_cn"] = _r["adopt"]
@@ -851,6 +864,21 @@ def assertions():
     for en, t in terms.items():
         if t.get("dispute") and t["dispute"] not in DISPUTES:
             fail.append("DISPUTE-GHOST %s points at %s" % (en, t["dispute"]))
+    # 17 — closed_by 必须真的指向关闭本争议的裁定。缺失字段的 None == None
+    # 绝不能把一条无关裁定误认成争议 id。
+    rulings_by_id = {r["id"]: r for r in RULINGS.get("rulings", [])}
+    for did, d in DISPUTES.items():
+        if d.get("status") != "closed_by_ruling":
+            continue
+        rid = d.get("closed_by")
+        ruling = rulings_by_id.get(rid)
+        if ruling is None:
+            fail.append("DISPUTE-BAD-CLOSURE %s names unknown ruling %r" % (did, rid))
+            continue
+        if ruling.get("closes_dispute") != did and ruling.get("en") != d.get("en"):
+            fail.append(
+                "DISPUTE-BAD-CLOSURE %s <- %s (%r / %r)" %
+                (did, rid, ruling.get("en"), ruling.get("closes_dispute")))
     # 11 — nothing is in both the glossary and pending
     for en in pending:
         if en in terms:
@@ -925,7 +953,7 @@ def main():
             print("  " + f)
         print("NOTHING WRITTEN.")
         return 1
-    print("INVARIANTS: all 16 pass over %d terms." % len(terms))
+    print("INVARIANTS: all 17 pass over %d terms." % len(terms))
     if check_only:
         return 0
 

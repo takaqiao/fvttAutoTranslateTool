@@ -21,9 +21,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const PROJ = 'C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project';
+const PROJ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const HUB = path.join(PROJ, '1-系统汉化插件');
 const STARTER = path.join(PROJ, '2-新手包汉化插件');
 const DATA = 'C:/Users/Taka/AppData/Local/FoundryVTT/Data';
@@ -138,7 +138,7 @@ check('C', '冻结 Folder「Alien Tables」不许改', blockedBy('Folder', 'Alie
 check('C', '冻结 Folder「Alien Creature Tables」不许改', blockedBy('Folder', 'Alien Creature Tables', '异形生物表'), 'T-FROZEN/name');
 check('C', '冻结 RollTable「Panic Table」不许改', blockedBy('RollTable', 'Panic Table', '恐慌表'), 'T-FROZEN/name');
 check('C', '未冻结 Folder「Careers」可以改', blockedBy('Folder', 'Careers', '职业'), null);
-check('C', '未冻结 Folder「Skill-Stunts」可以改', blockedBy('Folder', 'Skill-Stunts', '技能炫技'), null);
+check('C', '未冻结 Folder「Skill-Stunts」可以改', blockedBy('Folder', 'Skill-Stunts', '技能特技'), null);
 check('C', 'Macro 名可以改', blockedBy('Macro', 'Alien -  GM Dice Roller', '异形 -  GM 投骰器'), null);
 
 // —— 陷阱 1：同一个字符串，冻结范围只在 Adventure/Scene，**不含 Folder** ——
@@ -407,7 +407,7 @@ const world4 = worldFromRaw(firstAdventure(RAW_SYSTEM));
 }
 const r6 = planRetranslation({ sources: SOURCES, world: world4, guard });
 check('W', '按名字兜底能修到手工重建的文件夹',
-  r6.ops.some((o) => o.kind === 'name' && o.docId === 'RebuiltByHand0001' && o.to === '技能炫技' && o.match === 'name'), true);
+  r6.ops.some((o) => o.kind === 'name' && o.docId === 'RebuiltByHand0001' && o.to === '技能特技' && o.match === 'name'), true);
 check('W', '关掉兜底就修不到（选项确实生效，不是摆设）',
   planRetranslation({ sources: SOURCES, world: world4, guard, options: { nameFallback: false } })
     .ops.some((o) => o.docId === 'RebuiltByHand0001'), false);
@@ -612,7 +612,7 @@ if (!fs.existsSync(RAW_CORE_PATH)) {
   // ── 车主的症状：文件夹与宏修好，3 张表修不了（译文文件里就是英文）────────
   const nameOpFor = (t, n) => rMute.ops.find((o) => o.kind === 'name' && o.docType === t && o.from === n);
   check('R', '车主症状：Careers -> 职业', nameOpFor('Folder', 'Careers')?.to, '职业');
-  check('R', '车主症状：Skill-Stunts -> 技能炫技', nameOpFor('Folder', 'Skill-Stunts')?.to, '技能炫技');
+  check('R', '车主症状：Skill-Stunts -> 技能特技', nameOpFor('Folder', 'Skill-Stunts')?.to, '技能特技');
   check('R', '车主症状：4 个宏全部改名',
     ['Alien - Player Ad-hoc YZE Dice Roller', 'Alien -  GM Dice Roller',
       'Alien - Roll on selected Creature table V10', 'Alien - Roll on selected Mother table V10']

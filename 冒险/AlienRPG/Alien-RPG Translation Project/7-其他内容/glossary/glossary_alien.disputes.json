@@ -130,10 +130,10 @@
    "what_would_settle_it": "ch.10 of the fan serial (level 1) would settle it in one line, and the owner has confirmed it does not exist. Failing that, an owner ruling. Do NOT settle it by counting CnSCG lines: that is a bare count inside one vote, which is the exact failure mode the project's hard rules forbid.",
    "blast_radius": "The Queen Actor(s) in the core-rules pack, the compound Alien Queen, and all hive prose.",
    "status": "closed_by_ruling",
-   "closed_by": "R27-mess-up",
-   "settled_cn": "失误",
-   "ruling_rationale": "本轮的总原则（业主实机反馈第 8 条）：状态名是玩家在恐慌中扫一眼的标签，它必须（a）与兄弟条目等宽、（b）告诉玩家刚刚发生了什么。因此名字从**描述**反推，而不是从英文单词直译；全部取 2 字，但**不以牺牲含义为代价**。 搞砸 是口语，放在状态栏里不像一个状态名（业主实机反馈第 2 条直指这一点）。描述是“无论掷出什么，你的动作都失败”。失手 是第一候选，被否掉两次：一是日常中文里 失手 最常用于“不小心掉了 / 打硕了”，正好是 Lose Item 脱手 的意思，同时挂两个图标时会互干；二是 失手 只管得了手上的活，而这条状态对**任何**技能检定都生效，包括指挥与通信科技。失误 不挑动作类型，也不歧义。",
-   "counter_argument_acknowledged": null
+   "closed_by": "R1-queen",
+   "settled_cn": "女王",
+   "ruling_rationale": "三条理由，按强弱：① 本项目真正需要的是**复合词** Alien Queen → 异形女王，而不是孤立的 Queen；异形女王 是中文语境里压倒性的既有说法。② 生物学上错不得：异形女王是**孤雌生殖的蜂巢首领**，是统治者本人；「王后」在中文里是「国王的配偶」，指向一个并不存在的国王。③ 证据侧 3-2（扣掉那条蜜蜂比喻的命中），且 zh.wikipedia 的《异形(虚构生物)》条目用的就是 女王。",
+   "counter_argument_acknowledged": "王后 在《异形4》全片一致，且同片把 'Her Majesty' 译作 异形王后。但《异形4》属于 CnSCG 那一条血脉，按 §3.3 折成一票——这是**一票在自己内部打架**，不是两票对立。"
   },
   "D9-armor-piercing": {
    "en": "Armor Piercing",
@@ -250,40 +250,6 @@
     "船长": "默认。商船、拖船、运输船、打捞船——即 USCSS（United States Commercial Ship）与「太空卡车司机」战役框架下的绝大多数船。",
     "舰长": "仅限具名军舰。殖民海军陆战队框架下的 UAS/USS 战斗舰艇。"
    }
-  },
-  "D12-mother": {
-   "id": "D12-mother",
-   "en": "MOTHER / MU/TH/UR (the ship AI)",
-   "status": "deferred_by_owner",
-   "deferred_on": "2026-08-29",
-   "current": "老妈",
-   "owner_reaction": "「我只是觉得老妈有点奇怪」——业主实机看到后提出，但当轮裁定暂不改。",
-   "why_kept_for_now": "证据侧 老妈 有量（CnSCG 四片 + Covenant 共 15 处），且它确实是电影里船员对 MU/TH/UR 主机的**昵称**语感。改动要跨 lang + 三个包，不值得在业主尚未确定替代词时动。",
-   "candidates": [
-    {
-     "zh": "老妈",
-     "for": "船员昵称语感准确；15 处影视证据；一级源用它称呼 Game MOTHER",
-     "against": "中文里滑向「我妈」的家常味，当船载 AI 的名字读起来发噱"
-    },
-    {
-     "zh": "母亲",
-     "for": "Romulus 2024 与 Alien: Earth 2025 两部最新影视都用它（4 处）；正式、冷；与 2024 院线版一致",
-     "against": "丢掉了昵称语感——电影里那是船员起的外号，不是官方称谓"
-    },
-    {
-     "zh": "母体",
-     "for": "更冷、更像机器代号",
-     "against": "无影视依据；且「母体」在中文科幻里已被《黑客帝国》占用"
-    },
-    {
-     "zh": "MU/TH/UR（不译）",
-     "for": "**一级源（《进化版》中文连载）就是这么做的**；T-LATIN 已允许型号与船级前缀保留拉丁",
-     "against": "正文里反复出现拉丁串会打断阅读"
-    }
-   ],
-   "⚠_not_width_constrained": "业主提出时以为受两字限制。**不受**——两字统一那条只约束面板标签（状态名/技能名/物品栏列头），而本词只出现在正文与一个文件夹名（异形RPG老妈辅助工具）里，宽度自由。下次裁定时候选不必是两字。",
-   "domain_split_worth_considering": "MOTHER 作为**那台主机** 与 Game MOTHER 作为**GM 的称呼**可以分开取词——后者本来就是玩笑式自称（一级源作「老妈 / 游戏管理员」），前者不该是。",
-   "blast_radius": "lang/cn.json 若干键 · 系统包文件夹「异形RPG老妈辅助工具」与两个宏名 · corerules 第 7 章（Being the Game Mother）全章 · ⚠ 文件夹 'Alien Mother Tables' 是 T-FROZEN，无论怎么裁都不能动。"
   }
  }
 }

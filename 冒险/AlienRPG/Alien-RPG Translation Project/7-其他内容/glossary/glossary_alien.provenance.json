@@ -19,14 +19,14 @@
    "1": 138,
    "2": 11,
    "3": 8,
-   "4": 41,
+   "4": 38,
    "5": 1,
    "6": 50,
    "7": 6,
-   "C": 96,
+   "C": 95,
    "FROZEN": 31,
    "LATIN": 4,
-   "RULING": 18
+   "RULING": 22
   },
   "category_counts": {
    "attribute": 5,
@@ -3697,11 +3697,11 @@
    "beats_a_higher_level": 1
   },
   "Encumbered": {
-   "cn": "受阻",
+   "cn": "超重",
    "tier": "T-PLAIN",
    "category": "yze-condition",
-   "source_level": 4,
-   "why_this_won": "Condition form, attested.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R30-encumbered：受阻 只说行动不便，没有告诉玩家原因。该键的 TAH 说明把真正触发检定的状态写成 OVER-ENCUMBERED，正文现有标题与状态句都已经使用 超重，因此状态图标也采用同一词。超载 更像载具或电气系统。",
    "candidates": [
     {
      "zh": "受阻",
@@ -3712,7 +3712,26 @@
      "evidence": "cn.json ALIENRPG.Encumbered -> \"受阻\"; the MT tooltip says 过度负担 instead.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "same_string_as": [
+    "Over-Encumbered"
+   ],
+   "same_string_reason": "The status icon and the mechanically active TAH state are one condition. Owner ruling 2026-09-01 aligns both to 超重 so the short label and its expanded rule text cannot drift.",
+   "ruled": {
+    "id": "R30-encumbered",
+    "by": "业主",
+    "on": "2026-09-01",
+    "was": "超重",
+    "rejected": [
+     "受阻",
+     "超载"
+    ],
+    "rationale": "受阻 只说行动不便，没有告诉玩家原因。该键的 TAH 说明把真正触发检定的状态写成 OVER-ENCUMBERED，正文现有标题与状态句都已经使用 超重，因此状态图标也采用同一词。超载 更像载具或电气系统。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": "lang ALIENRPG.Encumbered · TAH.encumbered · 状态指示物。",
+    "closes_dispute": null
+   }
   },
   "Encumbrance": {
    "cn": "负重",
@@ -4374,11 +4393,11 @@
    "ruling_note": "⚠ 呆滞 是四级源（stratum A 人工）的锚点，本条是**有意推翻一个四级锚点**，理由不是风格而是与 R20 的可区分性。"
   },
   "Freezing": {
-   "cn": "冷冻",
+   "cn": "受冻",
    "tier": "T-PLAIN",
    "category": "yze-mechanics",
-   "source_level": "C",
-   "why_this_won": "Trials-and-Hazards state. Attested in cn.json; stratum B, but these four are plain vocabulary where MT and a human land in the same place.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R29-freezing：状态说明涵盖角色在冰点以上、零度以下和太空极寒中的持续受寒，并明确以“回暖”解除。冷冻 通常表示对某个对象施加冻结动作；失温 又把冰点以上的轻度寒冷暴露说得过重。受冻 是能够覆盖整段规则的角色状态。",
    "candidates": [
     {
      "zh": "冷冻",
@@ -4402,7 +4421,20 @@
    "aliases": [
     "受冻"
    ],
-   "level_note": "RE-LEVELLED IN v1.0. Phase 0 recorded this value's only attestation as cn.json stratum B (maintainer bulk MT 2022-2026), which the project's hard rules say is NEVER a source. The value stands — it is an ordinary Chinese common noun any translator would reach — but it stands as a CONVENTION at level C, not as an attestation. That stratum B independently produced the same string is corroboration of the obvious reading, not evidence."
+   "ruled": {
+    "id": "R29-freezing",
+    "by": "业主",
+    "on": "2026-09-01",
+    "was": "受冻",
+    "rejected": [
+     "冷冻",
+     "失温"
+    ],
+    "rationale": "状态说明涵盖角色在冰点以上、零度以下和太空极寒中的持续受寒，并明确以“回暖”解除。冷冻 通常表示对某个对象施加冻结动作；失温 又把冰点以上的轻度寒冷暴露说得过重。受冻 是能够覆盖整段规则的角色状态。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": "lang ALIENRPG.Freezing · ALIENRPG.TAH.freezing · 状态指示物与规则提示。",
+    "closes_dispute": null
+   }
   },
   "Frenzy": {
    "cn": "发狂",
@@ -6717,7 +6749,11 @@
    ],
    "tier": "T-PLAIN",
    "category": "yze-condition",
-   "added_in_v1_0": true
+   "added_in_v1_0": true,
+   "same_string_as": [
+    "Encumbered"
+   ],
+   "same_string_reason": "The status icon and the mechanically active TAH state are one condition. Owner ruling 2026-09-01 aligns both to 超重 so the short label and its expanded rule text cannot drift."
   },
   "Overwatch": {
    "cn": "警戒",
@@ -8662,11 +8698,11 @@
    ]
   },
   "Skill-Stunts": {
-   "cn": "技能炫技",
+   "cn": "技能特技",
    "tier": "T-PLAIN",
    "category": "pack-structure",
-   "source_level": 4,
-   "why_this_won": "Folder label shipped by the packs; re-derived from raw-dumps this session. Needed by the Babele folders mapping.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R31b-skill-stunts：跟随 R31-stunts。用于物品类型和文件夹时加 技能 前缀，以区别普通叙事中的特技；正文谈具体选项时只写 特技。",
    "candidates": [
     {
      "zh": "技能炫技",
@@ -8677,7 +8713,22 @@
      "evidence": "cn.json ALIENRPG.Skills -> 技能 and ALIENRPG.Stunts -> 炫技.",
      "carried_from": "phase0"
     }
-   ]
+   ],
+   "level_note": "The adopted value is not among the recorded candidates. Phase 0 justified that in why_this_won by a documented corpus GAP; it is a derivation, so it is levelled C. It must never be treated as attested.",
+   "ruled": {
+    "id": "R31b-skill-stunts",
+    "by": "业主",
+    "on": "2026-09-01",
+    "was": "技能特技",
+    "rejected": [
+     "技能炫技",
+     "技能效果"
+    ],
+    "rationale": "跟随 R31-stunts。用于物品类型和文件夹时加 技能 前缀，以区别普通叙事中的特技；正文谈具体选项时只写 特技。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": "ITEM.TypeSkill-stunts · TYPES.Item.skill-stunts · Babele folders.Skill-Stunts · 世界重译映射。",
+    "closes_dispute": null
+   }
   },
   "Slow Action": {
    "cn": "慢速动作",
@@ -9506,11 +9557,11 @@
    "bilingual_name": "电棍 Stun Baton"
   },
   "Stunts": {
-   "cn": "炫技",
+   "cn": "特技",
    "tier": "T-PLAIN",
    "category": "yze-mechanics",
-   "source_level": 4,
-   "why_this_won": "Attested; kept rather than coined. 特技 is the more usual Chinese TRPG word for a stunt and reads better, but is unsourced — flagged for review, not adopted.",
+   "source_level": "RULING",
+   "why_this_won": "主控裁定 R31-stunts：Stunt 是用额外成功换取的可选规则效果；列表包括增伤、加快、静音、交换先攻等，只有 show off 那一项真的是炫耀。把整类机制叫 炫技 会让类别名与其中一个具体选项混为一谈。特技 是中文 TRPG 的通行机制词，也不会和“意料之外的额外效果”那一项撞名。",
    "candidates": [
     {
      "zh": "炫技",
@@ -9533,7 +9584,21 @@
    ],
    "aliases": [
     "特技"
-   ]
+   ],
+   "ruled": {
+    "id": "R31-stunts",
+    "by": "业主",
+    "on": "2026-09-01",
+    "was": "特技",
+    "rejected": [
+     "炫技",
+     "额外效果"
+    ],
+    "rationale": "Stunt 是用额外成功换取的可选规则效果；列表包括增伤、加快、静音、交换先攻等，只有 show off 那一项真的是炫耀。把整类机制叫 炫技 会让类别名与其中一个具体选项混为一谈。特技 是中文 TRPG 的通行机制词，也不会和“意料之外的额外效果”那一项撞名。",
+    "counter_argument_acknowledged": null,
+    "blast_radius": "lang ALIENRPG.Stunts / EvolvedStunts · 19 个 Evolved 插件键 · 系统与新手包正文 · 角色卡按钮。",
+    "closes_dispute": null
+   }
   },
   "Sulaco": {
    "cn": "萨拉科号",
@@ -10195,7 +10260,7 @@
     "id": "R25-tunnel-vision",
     "by": "主控",
     "on": "2026-08-29",
-    "was": "失神",
+    "was": "恍惚",
     "rejected": [
      "视野狭窄",
      "失神",

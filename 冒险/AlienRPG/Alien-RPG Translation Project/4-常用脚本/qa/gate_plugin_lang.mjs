@@ -1,5 +1,5 @@
 /**
- * gate_plugin_lang.mjs —— `lang/plugins/*.json` 四份插件语言文件的闸门。
+ * gate_plugin_lang.mjs —— `lang/plugins/*.json` 六份插件语言文件、七个条件入口的闸门。
  *
  * 为什么要有这个文件：v0.1.0 把四份 `{}` 空壳一路发了出去。发布闸只看 `lang/cn.json`，
  * QA 目录里 **没有任何一个脚本** 碰过 `lang/plugins/`（2026-08-29 实测：
@@ -23,10 +23,19 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const PROJ = 'C:/Users/Taka/Desktop/fvtt/Alien-RPG Translation Project';
+const PROJ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const WORKSPACE = path.resolve(PROJ, '..', '..', '..');
 const HUB = path.join(PROJ, '1-系统汉化插件');
 const MODULES = 'C:/Users/Taka/AppData/Local/FoundryVTT/Data/modules';
+const LOCAL_YZE = path.join(WORKSPACE, '模组', 'yearzero-combat-fvtt', 'dist');
+
+const EVOLVED_STUNT_ALIASES = [
+  'ALIENRPG.机械', 'ALIENRPG.近战', 'ALIENRPG.耐力', 'ALIENRPG.射击',
+  'ALIENRPG.机动', 'ALIENRPG.驾驶', 'ALIENRPG.指挥', 'ALIENRPG.操控',
+  'ALIENRPG.医疗', 'ALIENRPG.侦察', 'ALIENRPG.生存', 'ALIENRPG.通信科技',
+];
 
 /** 每份插件语言文件的判据表。upstreamLang 为 null 表示上游没有语言文件。 */
 const SPEC = {
@@ -57,6 +66,29 @@ const SPEC = {
     frozenKeys: [],
     /** 上游 en.json 是 `{"tokenActionHud":{}}`，标签全是 ALIENRPG.* —— 这份必须保持空。 */
     mustBeEmpty: true,
+  },
+  'alien-evolved-starterset': {
+    upstreamLang: 'lang/en.json',
+    srcGlob: ['module'],
+    namespaces: ['ALIENRPG'],
+    frozenKeys: [],
+    allowSystemNamespace: true,
+    allowedExtraKeys: EVOLVED_STUNT_ALIASES,
+  },
+  'alien-evolved-corerules': {
+    upstreamLang: 'lang/en.json',
+    srcGlob: ['module'],
+    namespaces: ['ALIENRPG'],
+    frozenKeys: [],
+    allowSystemNamespace: true,
+    allowedExtraKeys: EVOLVED_STUNT_ALIASES,
+  },
+  'yze-combat': {
+    upstreamLang: 'lang/en.json',
+    srcGlob: [],
+    namespaces: ['COMBAT', 'SETTINGS', 'YZEC'],
+    frozenKeys: [],
+    moduleDir: LOCAL_YZE,
   },
 };
 
@@ -127,7 +159,7 @@ console.log('gate_plugin_lang —— lang/plugins/*.json 闸门\n');
 const manifest = JSON.parse(read(path.join(HUB, 'module.json')));
 const declared = manifest.languages.filter(l => l.path.startsWith('lang/plugins/'));
 
-check('P0 module.json 声明了四份插件语言文件', declared.length, 4);
+check('P0 module.json 声明了七个条件式插件语言入口', declared.length, 7);
 check('P0 每一条都带 module 门（少一个门 = 没装插件也写全局表）',
   declared.filter(l => !l.module).map(l => l.path), []);
 check('P0 每一条的 lang 都是 cn', [...new Set(declared.map(l => l.lang))], ['cn']);
@@ -141,11 +173,11 @@ for (const l of declared) {
   if (!spec) { failures.push(`未知的 module 门 ${l.module}，判据表里没有它`); console.log('  FAIL 判据表缺项'); continue; }
 
   /* P1 —— module 门必须与已装模块的 id 逐字节相同。抄错一个字节 = 文件永不装载。 */
-  const modDir = path.join(MODULES, l.module);
+  const modDir = spec.moduleDir ?? path.join(MODULES, l.module);
   const modManifest = path.join(modDir, 'module.json');
   if (!fs.existsSync(modManifest)) {
-    failures.push(`P1 ${l.module} 没装在本机，无法核对 id（闸门要求本机装齐四个插件）`);
-    console.log('  FAIL P1 插件未安装，无法核对'); continue;
+    failures.push(`P1 ${l.module} 源码/安装目录不存在，无法核对 id：${modDir}`);
+    console.log('  FAIL P1 插件源码或安装目录不存在，无法核对'); continue;
   }
   const installedId = JSON.parse(read(modManifest)).id;
   check(`P1 module 门与已装 id 逐字节相同（${l.module}）`, installedId, l.module);
@@ -197,15 +229,20 @@ for (const l of declared) {
     cnKeys.filter(k => (k in en) && JSON.stringify(placeholders(en[k])) !== JSON.stringify(placeholders(cn[k]))), []);
 
   /* P6 —— 命名空间：不许有 ALIENRPG.* 泄漏，不许跑到插件命名空间之外。 */
-  check('P6 没有 ALIENRPG.* 泄漏（那是系统文件的地盘）',
-    cnKeys.filter(k => k.startsWith('ALIENRPG.')), []);
+  if (!spec.allowSystemNamespace) {
+    check('P6 没有 ALIENRPG.* 泄漏（那是系统文件的地盘）',
+      cnKeys.filter(k => k.startsWith('ALIENRPG.')), []);
+  }
   check(`P6 全部落在 ${spec.namespaces.join(' / ')} 之内`,
     cnKeys.filter(k => !spec.namespaces.some(n => k === n || k.startsWith(`${n}.`))), []);
 
   /* P7 —— 不许有死键：既不在上游 en.json、插件源码里也没人读。 */
   const src = pluginSource(modDir, spec.srcGlob);
-  check('P7 上游没有的键，插件源码里必须真的读它（否则是死键）',
-    cnKeys.filter(k => !(k in en) && !src.includes(k)), []);
+  const allowedExtraKeys = spec.allowedExtraKeys ?? [];
+  check('P7 上游没有的键，必须是源码读取键或登记过的动态别名',
+    cnKeys.filter(k => !(k in en) && !src.includes(k) && !allowedExtraKeys.includes(k)), []);
+  check('P7 登记的动态别名全部存在',
+    allowedExtraKeys.filter(k => !(k in cn)), []);
 
   /* P8 —— 命令词表冻结（见文件头）。 */
   for (const k of spec.frozenKeys) {
@@ -227,7 +264,9 @@ for (const l of declared) {
     cnKeys.filter(a => cnKeys.some(b => b !== a && b.startsWith(`${a}.`))), []);
 
   for (const k of cnKeys) {
-    if (ownerOf[k]) failures.push(`P10 跨文件撞键：${k}（${ownerOf[k]} 与 ${l.path}）`);
+    if (ownerOf[k] && ownerOf[k] !== l.path) {
+      failures.push(`P10 跨文件撞键：${k}（${ownerOf[k]} 与 ${l.path}）`);
+    }
     ownerOf[k] = l.path; allFlat[k] = cn[k];
   }
 }
