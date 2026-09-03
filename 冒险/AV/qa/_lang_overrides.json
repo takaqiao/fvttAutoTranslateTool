@@ -1,0 +1,13 @@
+{
+  "_comment": "Hand-translated leaves of abomination-vaults-expanded's own languages/cn.json that no mechanical rule can supply. Keys are the dotted i18n path.",
+  "abomination-vaults-expanded.module-settings.insert-journal.hint": "将 AV:E 日志中的相关部分插入付费模组自带的官方《憎恨魔窟》日志中",
+  "_fragments": {
+    "abomination-vaults-expanded.journals.side-content.av-e-integrating-the-beginner-box-and-troubles-in-otari.second-floor.content": [
+      [
+        "not only thought this plan risky and unlikely to succeed, but he was less hostile towards the townsfolk of Otari.",
+        "不仅认为这个计划既冒险又难以成功，而且他对奥塔里镇民的敌意也没那么深。"
+      ]
+    ]
+  },
+  "_comment_fragments": "Sentence-level patches applied after the whole-leaf rules. This one is an UPSTREAM defect: the module's own English carries a dangling subject-less clause after 'until later.' The Chinese left it untranslated; we render it faithfully as a fragment so the leaf is pure Chinese."
+}

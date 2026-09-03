@@ -1,0 +1,88 @@
+{
+ "pack": "abomination-vaults-addons.abomination-vaults-addons",
+ "unit": "02",
+ "translations": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Effect: Ysondkhelir's Control",
+    "description"
+   ],
+   "zh": "<p><strong>一次成功</strong> 伊松德赫利对物理伤害的抗力降至 5。他窗墙的南侧部分消失。</p><p><strong>两次成功</strong> 不再会生成伏行之手。伊松德赫利窗墙的北侧部分消失。</p><p><strong>三次成功</strong> 伊松德赫利不再处于迅捷状态。他窗墙余下的各部分消失。</p><p><strong>四次成功</strong> 伊松德赫利失去借机攻击以及对物理伤害的抗力。他也恢复为正常体型，并在近战打击上失去 15 尺触及。多莉安娜暂时摆脱了他的心灵影响，但若任其存活，他最终仍会重新夺回控制。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Never Caught Unaware",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 贝科拉骰先攻。</p><hr /><p>贝科拉对任何情况都备有预案。她从自己的法术列表中施展一个防御性法术，该法术不会以其他非自愿生物为目标，也不会直接影响它们。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Release Spirit",
+    "description"
+   ],
+   "zh": "<section><p>你呼求下列三位神祇之一，恳求该神祇让困在器物中的魂魄于死亡中得到慈悲的解脱，从而永久摧毁该器物。</p><ul><li><p><strong>法莱斯玛</strong> 将这个饱受折磨的魂魄从违逆自然、强行延命的苦楚中解放出来，赐予其死亡的尊严。</p></li><li><p><strong>塞恩蕾</strong> 终结该生物在此凡世的苦难，使其能在来世获得灵性的治愈。</p></li><li><p><strong>托拉格</strong> 赐予这个受尽折磨的生物一个荣耀的死亡，将其从被扭曲以顺从他人意志的耻辱中解脱出来。</p></li></ul><p>若在一次「发送伪信号」检定尝试之后的 1 分钟内没有尝试释放魂魄，被驾驭的灵性能量便会消散，必须重新尝试「发送伪信号」检定。</p><p><strong>选项</strong></p><ul><li><p>@Check[type:Religion|dc:31|showDC:all]{神秘（大师）}</p></li><li><p>@Check[type:Religion|dc:30|showDC:all]{宗教（大师）}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{魂魄学识（大师）}</p></li></ul></section>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Rouse Sentience",
+    "description"
+   ],
+   "zh": "<section><p>你必须设法唤起这个生物残存的心智碎片，从而在器物中制造出轻微的紊乱，让你得以发现解除它的方法。以这种方式唤醒该生物的效果持续 1 分钟，并使该器物在一轮内变为 @UUID[Actor.8xX9yeGs7iCSoQ7m.Item.RpJ9AbFpL8ZWsJSX]{缓慢 1}。</p><p><strong>选项</strong></p><ul><li><p>@Check[type:Medicine|dc:28|showDC:all]{医疗（专家）}</p></li><li><p>@Check[type:Society|dc:30|showDC:all]{社群（大师）}</p></li><li><p>@Check[type:Diplomacy|dc:31|showDC:all]{交涉（大师）}</p></li></ul></section>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Send False Signal (Optional)",
+    "description"
+   ],
+   "zh": "<section><p><strong>选项</strong></p><ul><li><p>@Check[type:Arcana|dc:33|showDC:all]{奥法（大师）}</p></li><li><p>@Check[type:Occultism|dc:30|showDC:all]{神秘（大师）}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{魂魄学识（专家）}</p></li></ul><p><strong>大成功</strong> 你驾驭该区域中残留的灵性能量，在器物中制造出持续 2 小时的虚假运转信号。</p><p><strong>成功</strong> 同大成功，但虚假信号只持续 1 小时。</p><p><strong>失败</strong> 你未能发出虚假信号。该器物的创造者仍会照常在其被解除后的 10 分钟内察觉此事。</p><p><strong>大失败</strong> 你在操纵灵性能量时的笨拙不仅未能发出虚假信号，还引发了不良的副作用。该器物的创造者会在其被解除后的 1 分钟内察觉此事。</p></section>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Set Her Free",
+    "description"
+   ],
+   "zh": "<section class=\"statblock\"><p>用合适的技能检定削弱伊松德赫利对多莉安娜的控制。</p><ul><li><p><strong>射程</strong> 进行检定的PC必须与多莉安娜或伊松德赫利相邻。其他角色可以使用 @UUID[Compendium.pf2e.actionspf2e.HCl3pzVefiv9ZKQW]{协助} 行动来支援一次检定，但前提是他们位于距多莉安娜、伊松德赫利或当前行动的PC（依其行动的适用对象而定）30 尺以内。若角色身处梦魇空间中，则不能进行检定或协助。</p></li><li><p><strong>大成功</strong> 两次成功。</p></li><li><p><strong>成功</strong> 一次成功。</p></li><li><p><strong>失败</strong> 无变化。</p></li><li><p><strong>大失败</strong> 该PC陷入 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 1}。</p></li></ul><hr /><ul><li><p><strong>奥法</strong> 运用你对魔法的知识，削弱伊松德赫利与多莉安娜之间的灵性联系。</p><ul><li><p>@Check[type:Arcana|dc:31|traits:arcane,mental,spirit]{奥法（非常困难）}</p></li></ul></li><li><p><strong>交涉</strong> 给予多莉安娜与折磨她者抗争的勇气。</p><ul><li><p>@Check[type:Diplomacy|dc:28|traits:auditory,mental,spirit,visual|showDC:all]{交涉（困难）}</p></li></ul></li><li><p><strong>威吓</strong> 以报复的威胁吓阻这名捕梦者。</p><ul><li><p>@Check[type:Intimidation|dc:31|traits:auditory,mental,spirit|showDC:all]{威吓（非常困难）}</p></li></ul></li><li><p><strong>医疗</strong> 照料多莉安娜的伤口，使她恢复气力。</p><ul><li><p>@Check[type:Medicine|dc:26|traits:manipulate,mental,spirit|showDC:all]{医疗（普通）}</p></li></ul></li><li><p><strong>神秘</strong> 破译伊松德赫利控制多莉安娜的秘奥根基。</p><ul><li><p>@Check[type:Occultism|dc:26|traits:mental,occult,spirit|showDC:all]{神秘（普通）}</p></li></ul></li><li><p><strong>社群</strong> 提醒多莉安娜她的家人与朋友，以及她与奥塔里之间的羁绊。</p><ul><li><p>@Check[type:Society|dc:28|traits:auditory,mental,spirit|showDC:all]{社群（困难）}</p></li></ul></li><li><p><strong>魂魄学识</strong> 借助你对灵性事物的知识，支持多莉安娜对抗捕梦者。</p><ul><li><p>@Check[type:Spirit-Lore|dc:24|traits:mental,spirit|showDC:all]{魂魄学识（简单）}</p></li></ul></li></ul></section>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Study Implement",
+    "description"
+   ],
+   "zh": "<section><p>这件器物的构造表明，一旦它被解除，其创造者会在 10 分钟内察觉。为应对这种可能，PC 可以在尝试解除该作祟之前先尝试「发送伪信号」行动。</p><p><strong>选项</strong></p><ul><li><p>@Check[type:Occultism|dc:30|showDC:all]{神秘（大师）}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{魂魄学识（专家）}</p></li></ul></section>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "journals",
+    "Abomination Vaults: Addons",
+    "pages",
+    "H38. Murmur the Implement of Empty Death",
+    "text"
+   ],
+   "zh": "<p><em>此内容由用户 weepingminotaur 创作</em></p><h2>概览</h2><p>心智被削弱的美杜莎喃喃已被改造成 @UUID[Actor.aYaE9C8F2bjV7c2Q]{空无之死之器}。该器物目前置于 @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39}（取代了虐戾怪）。此外，喃喃本人也不再驻守于 @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.pnTCbvQqpz0arkpz]{H38}。</p><p>贝科拉采取了一些防范措施，以确保喃喃既不会被发现，也不会被解除。通往 @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39} 的坚固石门被上了锁，并以 @UUID[Item.CyWfBIXA8CKVFMK4]{宁布洛斯 - 重大诅咒} 设下陷阱。察觉该诅咒需要一次 @Check[perception|dc:30|traits:secret] 检定。解除该诅咒则需要一次 [[/act disable-device dc=33]]{解除装置（专家）} 检定，或一次 @Check[type:Occultism|dc:33|showDC:all]{神秘（大师）} 检定。</p><p>打开这扇门需要它的钥匙（由<strong>卡利多</strong>携带），或是五次成功的 [[/act pick-a-lock dc=35]]{开锁（专家）} 检定，又或是一次 @Check[type:Athletics|dc:40|showDC: all|traits:action:force-open]{破拆（专家）} 检定。</p><p>当空无之死之器这个危险处于活跃状态时，凄凉灯塔下层的若干要素会变得更加危险：</p><ul><li><p>幽灵女王之眼（@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.0EtecMBSYJDok7n7]{H02. 眼之厅}）与幽灵女王之握（@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.uWdCP78aS1lts5kr]{I64. 入会者之厅}）这两个危险，只要区域内没有生物，即便已被解除，也会在 1 分钟后重置。</p></li><li><p>下列生物获得 @UUID[Item.fPWpoxS7837pkegk]{再生 10（命能）}：</p><ul><li><p>空无之死波达尸（@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.hD6CSfmfkrSopsaw]{H21. 远古者洞穴}）</p></li><li><p>恐怖鬼火（所有地点）</p></li><li><p>惧栗缚灵（@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.Vwd8vMBerJCAoN4N]{H23. 影幕码头)}</p></li><li><p>乌塔古尔（@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.f02YPQGkiBbZ0Ijt]{H12. 岛屿洞窟}）</p></li><li><p>光明行者（@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.iduGvMRKIN2B46hv]{I24. 奇怪的死者}）</p></li></ul></li><li><p>贝科拉可以将自身投射到 H 层至 J 层的任何地方，而不再局限于凄凉灯塔的塔基范围之内。</p></li></ul><h2>设计考量</h2><blockquote><p>我不知道除了我自己之外，还有谁会喜欢这个改动。我做它纯粹是为了我自己那支憎恨魔窟队伍。举例来说，对魂魄学识的侧重，让我队伍中那位托拉格的神卫得以在解除这个危险的过程中扮演重要角色，释放魂魄行动里可以呼求托拉格这一选项也是同样的用意。如果你的队伍中没有人信奉托拉格，可以考虑把他换成凯登·凯连，着眼于凯登神职中「自由」的那一面，来为他被呼求提供理由。</p><p>促使我写下这段增补内容的，是我对喃喃在憎恨魔窟中被使用方式的不满。有些GM可能会觉得喃喃（或是我安置在 H02 与 I64 的那两个幽灵女王危险）过强或调校过度，如果你属于这一类，那也完全说得过去。贝科拉是这场冒险的最终首领，我想在凄凉灯塔的下层就展现出她邪恶天才的痕迹，同时进一步强化宁布洛斯式的恐怖氛围。</p><p>-weepingminotaur</p></blockquote><h2>解除该作祟</h2><p>队伍必须依次完成三项检定才能解除该作祟：唤醒心智、研究器物与释放魂魄。若队伍成功通过一次回忆知识（神秘）检定以查明该危险的解除条件，便向他们揭示唤醒心智的描述与选项。在唤醒心智上取得<strong>成功</strong>后，揭示研究器物的选项。在研究器物上取得<strong>成功</strong>后，揭示其后续发展、发送伪信号一栏，以及释放魂魄的完整段落。</p><p>若PC选择中途搁下这项工作、之后再回来完成，他们必须重新依次进行同样的三项检定；除非他们此前已在研究器物上取得成功，在这种情况下他们只需进行唤醒心智与释放魂魄。</p><hr /><p>@Embed[Item.Q5N7Px8ZVaocxC92]{唤醒心智}</p><hr /><p>@Embed[Item.aEZqJZBbCp3fJSV0]{研究器物}</p><hr /><p>@Embed[Item.WFCyQ30Rj6DXwrxk]{发送伪信号（可选）}</p><hr /><p>@Embed[Item.pkCt6MdQHmoPKHyV]{释放魂魄}</p><p></p>"
+  }
+ ]
+}

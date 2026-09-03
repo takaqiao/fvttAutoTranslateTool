@@ -1,16 +1,7 @@
 {
  "pack": "pf2e-abomination-vaults.av",
  "unit": "06",
- "leaves": 18,
- "chars": 641,
- "styles": {
-  "prose": 18
- },
- "convention": {
-  "bilingual": "中文 English - one ASCII space, no parentheses",
-  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
- },
- "items": [
+ "translations": [
   {
    "path": [
     "entries",
@@ -20,10 +11,7 @@
     "drawings",
     "To Urdefhan Camp"
    ],
-   "style": "prose",
-   "field": "To Urdefhan Camp",
-   "en": "To Urdefhan Camp",
-   "current": "To Urdefhan Camp"
+   "zh": "通往透肌魔人营地"
   },
   {
    "path": [
@@ -34,10 +22,7 @@
     "drawings",
     "To Yldaris"
    ],
-   "style": "prose",
-   "field": "To Yldaris",
-   "en": "To Yldaris",
-   "current": "To Yldaris"
+   "zh": "通往伊尔达里斯"
   },
   {
    "path": [
@@ -48,10 +33,7 @@
     "drawings",
     "To J1"
    ],
-   "style": "prose",
-   "field": "To J1",
-   "en": "To J1",
-   "current": "To J1"
+   "zh": "通往 J1"
   },
   {
    "path": [
@@ -62,10 +44,7 @@
     "drawings",
     "To H34"
    ],
-   "style": "prose",
-   "field": "To H34",
-   "en": "To H34",
-   "current": "To H34"
+   "zh": "通往 H34"
   },
   {
    "path": [
@@ -76,10 +55,7 @@
     "drawings",
     "To H3"
    ],
-   "style": "prose",
-   "field": "To H3",
-   "en": "To H3",
-   "current": "To H3"
+   "zh": "通往 H3"
   },
   {
    "path": [
@@ -90,10 +66,7 @@
     "drawings",
     "To Hunting Grounds"
    ],
-   "style": "prose",
-   "field": "To Hunting Grounds",
-   "en": "To Hunting Grounds",
-   "current": "To Hunting Grounds"
+   "zh": "通往狩猎场"
   },
   {
    "path": [
@@ -104,10 +77,7 @@
     "drawings",
     "To Hunting Grounds"
    ],
-   "style": "prose",
-   "field": "To Hunting Grounds",
-   "en": "To Hunting Grounds",
-   "current": "To Hunting Grounds"
+   "zh": "通往狩猎场"
   },
   {
    "path": [
@@ -118,10 +88,7 @@
     "drawings",
     "To H41"
    ],
-   "style": "prose",
-   "field": "To H41",
-   "en": "To H41",
-   "current": "To H41"
+   "zh": "通往 H41"
   },
   {
    "path": [
@@ -132,10 +99,7 @@
     "drawings",
     "To I64"
    ],
-   "style": "prose",
-   "field": "To I64",
-   "en": "To I64",
-   "current": null
+   "zh": "通往 I64"
   },
   {
    "path": [
@@ -147,10 +111,7 @@
     "af2jY51IBuLw3tWT",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "No Encounter",
-   "current": null
+   "zh": "无遭遇"
   },
   {
    "path": [
@@ -162,10 +123,7 @@
     "G73iP0cd0Gx1c4dE",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "@UUID[Actor.bif3iQcDPi27rx6x]{Salaisa Malthulas} and [[1d4]] @UUID[Actor.DawBQWRyrM4cKfGI]{Drow Warden}",
-   "current": null
+   "zh": "@UUID[Actor.bif3iQcDPi27rx6x]{萨莱莎·马尔苏拉斯} 与 [[1d4]] 名 @UUID[Actor.DawBQWRyrM4cKfGI]{卓尔卫士}"
   },
   {
    "path": [
@@ -177,10 +135,7 @@
     "6HAqLIyXDwSRjFEj",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "2 @UUID[Actor.tZCFmJonHkhGg1Vs]{Urdefhan Death Scout} and 2 @UUID[Actor.Sbxt8YT0AOFfVCPX]{Urdefhan Lasher}",
-   "current": null
+   "zh": "2 名 @UUID[Actor.tZCFmJonHkhGg1Vs]{透肌魔人死亡斥候} 与 2 名 @UUID[Actor.Sbxt8YT0AOFfVCPX]{透肌魔人鞭笞者}"
   },
   {
    "path": [
@@ -192,10 +147,7 @@
     "7ve0OgGWqQIBv8Zo",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "4 @UUID[Actor.e5yE4RkwLQojRYHm]{Urdefhan Warrior} and 2 @UUID[Actor.NW1Ax1QGE9W4DmiN]{Ceustodaemon}",
-   "current": null
+   "zh": "4 名 @UUID[Actor.e5yE4RkwLQojRYHm]{透肌魔人武者} 与 2 只 @UUID[Actor.NW1Ax1QGE9W4DmiN]{仆役邪魔}"
   },
   {
    "path": [
@@ -207,10 +159,7 @@
     "JAnHhIapT5gTYPXo",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "1 @UUID[Actor.OTT7CCkonkfwhJ8Y]{Urdefhan Blood Mage} and 3 @UUID[Actor.FJr7Rc9MQEwxjAcz]{Urdefhan Tormentor}",
-   "current": null
+   "zh": "1 名 @UUID[Actor.OTT7CCkonkfwhJ8Y]{透肌魔人血法师} 与 3 名 @UUID[Actor.FJr7Rc9MQEwxjAcz]{透肌魔人折磨者}"
   },
   {
    "path": [
@@ -222,10 +171,7 @@
     "af2jY51IBuLw3tWT",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "No Encounter",
-   "current": null
+   "zh": "无遭遇"
   },
   {
    "path": [
@@ -237,10 +183,7 @@
     "CEyok4njnR2C4LUB",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "Four @Actor[vHei0y2PKlXfxQ8Z]{Children of Belcorra}",
-   "current": null
+   "zh": "四只 @Actor[vHei0y2PKlXfxQ8Z]{贝科拉之子}"
   },
   {
    "path": [
@@ -252,10 +195,7 @@
     "A1nWQVIREvwxVRtA",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "Two @Actor[dvZM7hGNDu8olV7A]{Brood Leech Swarms}",
-   "current": null
+   "zh": "两群 @Actor[dvZM7hGNDu8olV7A]{幼水蛭群}"
   },
   {
    "path": [
@@ -267,10 +207,7 @@
     "af2jY51IBuLw3tWT",
     "description"
    ],
-   "style": "prose",
-   "field": "description",
-   "en": "No Encounter",
-   "current": null
+   "zh": "无遭遇"
   }
  ]
 }

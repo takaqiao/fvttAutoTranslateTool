@@ -97,6 +97,28 @@ def build_reference_index(keys_manifest, collection_id, cn_data):
     return index
 
 
+def _case_and_number_variants(label):
+    """Lowercase forms of the label, plus a de-pluralised one."""
+    base = label.lower()
+    out = [base]
+    if base.endswith("ies") and len(base) > 4:
+        out.append(base[:-3] + "y")
+    if base.endswith("es") and len(base) > 3:
+        out.append(base[:-2])
+    if base.endswith("s") and len(base) > 2:
+        out.append(base[:-1])
+    seen, uniq = set(), []
+    for v in out:
+        if v and v not in seen:
+            seen.add(v)
+            uniq.append(v)
+    return uniq
+
+
+# Case-insensitive view of the TM, built once per run by main().
+tm_lower = {}
+
+
 def resolve(raw_label, target, ref_index, tm, overrides, stats):
     label = raw_label.strip()
     if label in overrides:
@@ -142,6 +164,17 @@ def resolve(raw_label, target, ref_index, tm, overrides, stats):
             zh = chinese_only(entry.get("name", ""))
             if zh:
                 stats["tm-grade"] += 1
+                return zh
+
+    # Prose writes creature and skill names in running case and often in the plural
+    # (`leng spider`, `flumphs`, `athletics`); the TM is keyed in the compendium's
+    # Title Case singular.
+    for variant in _case_and_number_variants(label):
+        entry = tm_lower.get(variant)
+        if entry:
+            zh = chinese_only(entry.get("name", ""))
+            if zh:
+                stats["tm-case"] += 1
                 return zh
 
     # Index-style labels invert the head word: `Goblin, Charhide` is the compendium's
@@ -213,11 +246,18 @@ def main(argv=None):
     parser.add_argument("--tm", required=True, type=Path)
     parser.add_argument("--overrides", type=Path)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--tree", type=Path,
+                        help="also process an arbitrary JSON tree (e.g. a module's own "
+                             "languages/cn.json), walking every leaf instead of `entries`")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args(argv)
 
     keys_manifest = json.loads(args.keys.read_text(encoding="utf-8"))
     tm = json.loads(args.tm.read_text(encoding="utf-8"))
+    global tm_lower
+    tm_lower = {}
+    for english, entry in tm.items():
+        tm_lower.setdefault(english.lower(), entry)
     overrides = {}
     if args.overrides and args.overrides.exists():
         overrides = json.loads(args.overrides.read_text(encoding="utf-8"))
@@ -265,8 +305,33 @@ def main(argv=None):
             cn_path.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n",
                                encoding="utf-8", newline="\n")
 
+    if args.tree and args.tree.exists():
+        tree = json.loads(args.tree.read_text(encoding="utf-8"))
+        stats = Counter()
+        unresolved = Counter()
+        before = collect_strings(tree)
+        out = walk(tree, global_ref, tm, overrides, stats, unresolved, ())
+        after = collect_strings(out)
+        for key, value in before.items():
+            assert_machine_parts_intact(value, after.get(key, value), f"{args.tree.name}:{key}")
+        grand.update(stats)
+        unresolved_all.update(unresolved)
+        changed = out != tree
+        report[args.tree.name] = {"changed": changed, "stats": dict(stats),
+                                  "unresolved": dict(unresolved)}
+        print(f"[{'write' if (args.write and changed) else 'dry  '}] {args.tree.name[:56]:<56} "
+              f"ref={stats['reference']:>4} tm={stats['tm']:>4} rank={stats['tm-rank']:>3} "
+              f"ovr={stats['overrides']:>3} code={stats['keep-latin']:>4} unresolved={stats['unresolved']:>4}")
+        if args.write and changed:
+            backup = args.tree.parent.parent.parent / "_backup" / f"labels_{stamp}"
+            backup.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(args.tree, backup / args.tree.name)
+            args.tree.write_text(json.dumps(out, ensure_ascii=False, indent=2) + "\n",
+                                 encoding="utf-8", newline="\n")
+
     total = sum(grand[k] for k in ("reference", "tm", "tm-rank", "tm-inverted", "tm-grade",
-                                   "measure", "overrides", "keep-latin", "unresolved"))
+                                   "tm-case", "measure", "overrides", "keep-latin",
+                                   "unresolved"))
     print(f"\nlabels considered {total}")
     for key in ("reference", "tm", "tm-rank", "tm-inverted", "tm-grade", "measure", "overrides",
                 "keep-latin", "unresolved", "already-chinese", "empty-label"):

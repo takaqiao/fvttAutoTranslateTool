@@ -84,6 +84,9 @@ def main(argv=None):
     parser.add_argument("--pack", action="append", default=None)
     parser.add_argument("--max-leaves", type=int, default=120)
     parser.add_argument("--max-chars", type=int, default=24000)
+    parser.add_argument("--max-leaf-chars", type=int, default=20000,
+                        help="leaves bigger than this are carved out for manual handling; "
+                             "they are almost always credit/attribution lists, not prose")
     args = parser.parse_args(argv)
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
@@ -98,6 +101,7 @@ def main(argv=None):
         cn_data = json.loads(cn_path.read_text(encoding="utf-8")) if cn_path.exists() else {}
 
         todo = []
+        oversize = []
         stats = Counter()
         for path, english in walk(en_data.get("entries", {}), ("entries",)):
             key = path[-1]
@@ -114,11 +118,22 @@ def main(argv=None):
             if not WORD.search(visible(english)):
                 stats["markup-only"] += 1
                 continue
+            if len(english) > args.max_leaf_chars:
+                # e.g. AV's `Audio Credits` page: 125k chars, 1,588 Syrinscape entries of
+                # `"track" by "artist"`. Those are attribution and stay in English; only
+                # the short intro is prose. Handle such leaves by hand, not in bulk.
+                stats["oversize"] += 1
+                oversize.append({"path": list(path), "chars": len(english),
+                                 "head": english[:400]})
+                continue
             style = style_for(path, key)
             todo.append({"path": list(path), "style": style, "field": key,
                          "en": english, "current": current})
             stats["todo"] += 1
 
+        if oversize:
+            (args.out_dir / f"_oversize.{collection_id}.json").write_text(
+                json.dumps(oversize, ensure_ascii=False, indent=1), encoding="utf-8")
         if not todo:
             summary[collection_id] = dict(stats)
             continue
@@ -132,12 +147,15 @@ def main(argv=None):
         for stale in pack_dir.glob("*.json"):
             stale.unlink()
 
+        # Prefer to break on a document boundary, but never let a unit run away: a
+        # single journal can hold 130k characters, which is far too much for one pass.
+        hard_chars = int(args.max_chars * 1.5)
         units, current_unit, chars = [], [], 0
         last_group = None
         for leaf in todo:
             group = unit_group(leaf["path"])
             over = (len(current_unit) >= args.max_leaves or chars >= args.max_chars)
-            if current_unit and over and group != last_group:
+            if current_unit and ((over and group != last_group) or chars >= hard_chars):
                 units.append(current_unit)
                 current_unit, chars = [], 0
             current_unit.append(leaf)
