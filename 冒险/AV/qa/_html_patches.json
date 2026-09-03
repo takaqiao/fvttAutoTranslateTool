@@ -1,0 +1,30 @@
+[
+ {
+  "file": "冒险/AV/工作区/pf2e-abomination-vaults.av.json",
+  "path": [
+   "Abomination Vaults",
+   "actors",
+   "Jaul Mezmin",
+   "items",
+   "Change Shape",
+   "description"
+  ],
+  "why": "CN lost the outer <ul>; because the tag sequences then could not align, the de-bilingual pass also failed and the English block is still attached. Restoring <ul> lets normalize_bilingual strip it on the next run.",
+  "op": "prepend",
+  "text": "<ul>\n"
+ },
+ {
+  "file": "冒险/AV/工作区/tianzes-gauntlight-extras.tianzes-gauntlight-extras.json",
+  "path": [
+   "Tianze's Gauntlight Extras",
+   "actors",
+   "Chafkhem",
+   "items",
+   "Command",
+   "description"
+  ],
+  "why": "CN carries one spurious trailing </p> with no opener; the English is balanced.",
+  "op": "rstrip_suffix",
+  "text": "</p>"
+ }
+]

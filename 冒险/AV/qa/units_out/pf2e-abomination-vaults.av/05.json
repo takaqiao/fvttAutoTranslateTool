@@ -1,0 +1,1316 @@
+{
+ "pack": "pf2e-abomination-vaults.av",
+ "unit": "05",
+ "translations": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Seugathi Servant",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shad Nunder",
+    "items",
+    "Shiv",
+    "description"
+   ],
+   "zh": "<p>这件小型带刃武器以单手持握，用于在近身搏斗中刺击生物。它也可以被投掷出去。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shanrigol Behemoth",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shanrigol Behemoth",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shanrigol Heap",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shanrigol Heap",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shrine Corpselight",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Skeletal Giant",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Skeletal Hulk",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Slurk",
+    "allSaves"
+   ],
+   "zh": "对抗擒拿、移位或推撞的强韧豁免+12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Soul Feeder",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Specter",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Spike Launcher",
+    "items",
+    "BFiMEADLB2Qw0lL1",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 一个生物越过了其中一条绊线</p>\n<hr>\n<p><strong>效果</strong> 一根尖刺沿着该绊线的路径射向触发它的生物，进行一次远程打击。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Squabbling Poltergeist",
+    "hp"
+   ],
+   "zh": "虚能治疗，复苏"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Taklitur",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值，对抗精神的所有豁免+2 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Tanieth",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值，对抗精神的所有豁免+2 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Tanieth",
+    "items",
+    "cfM8s4VVlCf81rzl",
+    "description"
+   ],
+   "zh": "<p>以弹匣装填时装填值为 2（@UUID[Compendium.pf2e.equipment-srd.Item.oJZe5rRitvioUgRh]{射手弹带}）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Blood Mage",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Death Scout",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Lasher",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Tormentor",
+    "items",
+    "Gentle Landing (Self Only)",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 射程内的一个生物正在坠落</p>\n<hr>\n<p>你掀起一股魔法上升气流以中止坠落。目标的坠落速度减缓至每轮 60 尺，且法术持续时间内的这段坠落高度不计入坠落伤害的计算。若目标在法术生效期间落地，它不会受到任何坠落伤害。该法术在目标落地时立即结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Warrior",
+    "items",
+    "Gentle Landing (At Will, Self Only)",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 射程内的一个生物正在坠落</p>\n<hr>\n<p>你掀起一股魔法上升气流以中止坠落。目标的坠落速度减缓至每轮 60 尺，且法术持续时间内的这段坠落高度不计入坠落伤害的计算。若目标在法术生效期间落地，它不会受到任何坠落伤害。该法术在目标落地时立即结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urevian",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vaulgrist",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vaulgrist",
+    "items",
+    "Grievous Wound",
+    "description"
+   ],
+   "zh": "<p>当该颂教魔以钉头锤打击造成重击命中时，目标的伤口格外骇人，并令其昏乱失措。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}，且从其持续流血伤害中恢复的 DC 为 17（获得特别恰当的协助时 DC 为 12）。在该生物从持续流血中恢复之前，笨拙状态不会结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vaulgrist",
+    "items",
+    "Unleash Weapon",
+    "description"
+   ],
+   "zh": "<p>该颂教魔松开自己的钉头锤，命令囚禁于其中的邪窥魔发动攻击。武器飞射而出，颂教魔至多进行两次钉头锤打击，每次针对 20 尺内一个不同的目标。这些攻击计入颂教魔的多重攻击减值，但多重攻击减值直到所有攻击结束之后才会提升。随后钉头锤飞回颂教魔手中。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vischari",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Volluk Azrinae",
+    "hp"
+   ],
+   "zh": "快速治疗 7"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Volluk Azrinae",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Warped Brew Morlock",
+    "allSaves"
+   ],
+   "zh": "对抗疾病与毒素的所有豁免+2 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Witchfire Warden",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Wood Golem",
+    "items",
+    "CquGR1meZf8Szzmo",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 木魔像受到物理伤害</p>\n<hr>\n<p><strong>效果</strong> 一根参差不齐的粗大木刺激射向魔像的攻击者。木魔像对一个相邻生物进行一次木刺打击，且不会触发反应。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Yrorix",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值，对抗精神的所有豁免+2 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Yrorix",
+    "items",
+    "cfM8s4VVlCf81rzl",
+    "description"
+   ],
+   "zh": "<p>以弹匣装填时装填值为 2（@UUID[Compendium.pf2e.equipment-srd.Item.oJZe5rRitvioUgRh]{射手弹带}）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ysondkhelir",
+    "hp"
+   ],
+   "zh": "异界快速治疗 5"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ysondkhelir",
+    "items",
+    "C91ggah5Ye65LrMH",
+    "description"
+   ],
+   "zh": "<p>许多冷原住民都随身携带着从冷原采石场中开采出的怪异红宝石。只要一个生物持有它自愿从某位冷原住民手中作为礼物或报酬收下的冷原红宝石，任何冷原住民便可在 1 英里的距离上以@UUID[Compendium.pf2e.spells-srd.Item.KSAEhNfZyXMO7Z7V]{流放诅咒}、@UUID[Compendium.pf2e.spells-srd.Item.R8bqnYiThB6MYTxD]{幻痛术}或@UUID[Compendium.pf2e.spells-srd.Item.KHnhPHL4x1AQHfbC]{读心术}将其作为目标；而持有者在对抗<em>流放诅咒</em>的豁免中，须以比掷出结果差一级的成功等级来结算。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Translocate (At Will)",
+    "description"
+   ],
+   "zh": "<p>你瞬间将自己以及所有穿戴和持有的物品从当前空间传送至射程内你能看见的一处未被占据的空间。如果这么做会将另一个生物一同带走——即便你把它携带在异次元容器中——法术便会失效。</p>\n<hr>\n<p><strong>升阶（5环）</strong> 射程增加至 1 英里。你不需要能够看见目的地，只要你曾经去过那里，并知晓它相对于你的位置与距离即可。之后你会获得 1 小时的临时免疫。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Invisibility (at will, self only)",
+    "description"
+   ],
+   "zh": "<p>幻术使光线在目标周围弯折，令其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形}。这使它对所有生物而言处于@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪}状态，不过这些生物可以尝试找出目标，使其转而对它们处于@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿}状态。若目标使用敌对动作，法术会在该敌对动作完成之后结束。</p>\n<hr>\n<p><strong>升阶（4环）</strong> 法术持续 1 分钟，且不会因目标使用敌对动作而结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Summon Animal (swarm creatures only)",
+    "description"
+   ],
+   "zh": "<p>你召唤一个具有动物特征、等级为 –1 的生物为你战斗。</p><hr><p><strong>升阶</strong> 如@UUID[Compendium.pf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.8gcp880pEWZ9VPnF]{召唤}特征中所列。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Diabolic Eye",
+    "description"
+   ],
+   "zh": "<p>蝇魔会记录下自己看到的一切；尽管它们并不记得所有观察内容，却能把这些内容传递给另一个生物。</p>\n<p>蝇魔向一个被它触碰的自愿生物重放 10 分钟的目击事件，该生物会在一瞬的信息闪现中接收这些记忆。只要保持接触，蝇魔便可花费额外的 3 动作活动来重放更多信息。</p>\n<p>在把自己的所见转述给他人之后，蝇魔就再也无法回想起那些事件了。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ziskilly Theed",
+    "items",
+    "Shiv",
+    "description"
+   ],
+   "zh": "<p>这件小型带刃武器以单手持握，用于在近身搏斗中刺击生物。它也可以被投掷出去。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zombie Shambler",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "allSaves"
+   ],
+   "zh": "对抗魔法的所有豁免+1 状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Translocate (At Will)",
+    "description"
+   ],
+   "zh": "<p>你瞬间将自己以及所有穿戴和持有的物品从当前空间传送至射程内你能看见的一处未被占据的空间。如果这么做会将另一个生物一同带走——即便你把它携带在异次元容器中——法术便会失效。</p>\n<hr>\n<p><strong>升阶（5环）</strong> 射程增加至 1 英里。你不需要能够看见目的地，只要你曾经去过那里，并知晓它相对于你的位置与距离即可。之后你会获得 1 小时的临时免疫。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Invisibility (at will, self only)",
+    "description"
+   ],
+   "zh": "<p>幻术使光线在目标周围弯折，令其@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形}。这使它对所有生物而言处于@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{无踪}状态，不过这些生物可以尝试找出目标，使其转而对它们处于@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿}状态。若目标使用敌对动作，法术会在该敌对动作完成之后结束。</p>\n<hr>\n<p><strong>升阶（4环）</strong> 法术持续 1 分钟，且不会因目标使用敌对动作而结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Summon Animal (swarm creatures only)",
+    "description"
+   ],
+   "zh": "<p>你召唤一个具有动物特征、等级为 –1 的生物为你战斗。</p><hr><p><strong>升阶</strong> 如@UUID[Compendium.pf2e.journals.JournalEntry.S55aqwWIzpQRFhcq.JournalEntryPage.8gcp880pEWZ9VPnF]{召唤}特征中所列。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Diabolic Eye",
+    "description"
+   ],
+   "zh": "<p>蝇魔会记录下自己看到的一切；尽管它们并不记得所有观察内容，却能把这些内容传递给另一个生物。</p>\n<p>蝇魔向一个被它触碰的自愿生物重放 10 分钟的目击事件，该生物会在一瞬的信息闪现中接收这些记忆。只要保持接触，蝇魔便可花费额外的 3 动作活动来重放更多信息。</p>\n<p>在把自己的所见转述给他人之后，蝇魔就再也无法回想起那些事件了。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "01. A Light in the Fog",
+    "categories",
+    "A Light in the Fog"
+   ],
+   "zh": "雾中之光"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "01. A Light in the Fog",
+    "categories",
+    "Gauntlight Ruins"
+   ],
+   "zh": "凄凉灯塔废墟"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "02. The Forgotten Dungeon",
+    "categories",
+    "Servants' Quarters"
+   ],
+   "zh": "仆役住区"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "02. The Forgotten Dungeon",
+    "categories",
+    "The Forgotten Dungeon"
+   ],
+   "zh": "被遗忘的地城"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "02. The Forgotten Dungeon",
+    "categories",
+    "Deadtide for Otari"
+   ],
+   "zh": "奥塔里的尸潮"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "03. Cult of the Canker",
+    "categories",
+    "Library"
+   ],
+   "zh": "图书馆"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "03. Cult of the Canker",
+    "categories",
+    "Cult of the Canker"
+   ],
+   "zh": "溃烂教团"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "04. Long Dream the Dead",
+    "categories",
+    "Belcorra's Retreat"
+   ],
+   "zh": "贝科拉的隐居所"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "04. Long Dream the Dead",
+    "categories",
+    "Long Dream the Dead"
+   ],
+   "zh": "亡者长梦"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "05. Into the Training Grounds",
+    "categories",
+    "Arena"
+   ],
+   "zh": "竞技场"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "05. Into the Training Grounds",
+    "categories",
+    "Into the Training Grounds"
+   ],
+   "zh": "深入训练场"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "06. Experiments in Flesh",
+    "categories",
+    "Laboratory"
+   ],
+   "zh": "实验室"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "06. Experiments in Flesh",
+    "categories",
+    "Experiments in Flesh"
+   ],
+   "zh": "血肉实验"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "07. Soul Keepers",
+    "categories",
+    "Prison"
+   ],
+   "zh": "监牢"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "07. Soul Keepers",
+    "categories",
+    "Soul Keepers"
+   ],
+   "zh": "守魂者"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "08. Decaying Gardens",
+    "categories",
+    "Farm"
+   ],
+   "zh": "农场"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "08. Decaying Gardens",
+    "categories",
+    "Decaying Gardens"
+   ],
+   "zh": "腐朽庭园"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "09. On the Hunt",
+    "categories",
+    "Hunting Grounds"
+   ],
+   "zh": "狩猎场"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "09. On the Hunt",
+    "categories",
+    "On the Hunt"
+   ],
+   "zh": "开始狩猎"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "10. To Draw the Baleful Glare",
+    "categories",
+    "Temple"
+   ],
+   "zh": "神殿"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "10. To Draw the Baleful Glare",
+    "categories",
+    "To Draw The Baleful Glare"
+   ],
+   "zh": "引来恶毒凝视"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Abomination Vaults",
+    "categories",
+    "Introduction"
+   ],
+   "zh": "简介"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Abomination Vaults",
+    "categories",
+    "Credits"
+   ],
+   "zh": "制作人员"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Abomination Vaults",
+    "categories",
+    "Using This Module"
+   ],
+   "zh": "使用本模组"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Adventure Toolbox",
+    "categories",
+    "Characters"
+   ],
+   "zh": "角色"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Adventure Toolbox",
+    "categories",
+    "Background"
+   ],
+   "zh": "背景"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Adventure Toolbox",
+    "categories",
+    "Otari"
+   ],
+   "zh": "奥塔里"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Artwork",
+    "categories",
+    "Scenes"
+   ],
+   "zh": "场景"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "journals",
+    "Artwork",
+    "categories",
+    "Items"
+   ],
+   "zh": "物品"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To C10"
+   ],
+   "zh": "通往 C10"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To C7"
+   ],
+   "zh": "通往 C7"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To A1"
+   ],
+   "zh": "通往 A1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To C1"
+   ],
+   "zh": "通往 C1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To C22"
+   ],
+   "zh": "通往 C22"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To A21"
+   ],
+   "zh": "通往 A21"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "drawings",
+    "To A8"
+   ],
+   "zh": "通往 A8"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To D1"
+   ],
+   "zh": "通往 D1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To D16"
+   ],
+   "zh": "通往 D16"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To B2"
+   ],
+   "zh": "通往 B2"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To B32"
+   ],
+   "zh": "通往 B32"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To B5"
+   ],
+   "zh": "通往 B5"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To B16"
+   ],
+   "zh": "通往 B16"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "drawings",
+    "To D14"
+   ],
+   "zh": "通往 D14"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "drawings",
+    "To E1"
+   ],
+   "zh": "通往 E1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "drawings",
+    "To C29"
+   ],
+   "zh": "通往 C29"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "drawings",
+    "To C33"
+   ],
+   "zh": "通往 C33"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "drawings",
+    "To C40"
+   ],
+   "zh": "通往 C40"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F26"
+   ],
+   "zh": "通往 F26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F9"
+   ],
+   "zh": "通往 F9"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F8"
+   ],
+   "zh": "通往 F8"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To Smuggler's Refuge"
+   ],
+   "zh": "通往走私者避难所"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F1"
+   ],
+   "zh": "通往 F1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To D12"
+   ],
+   "zh": "通往 D12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F4"
+   ],
+   "zh": "通往 F4"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "drawings",
+    "To F11"
+   ],
+   "zh": "通往 F11"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To G12"
+   ],
+   "zh": "通往 G12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To E21"
+   ],
+   "zh": "通往 E21"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To E9"
+   ],
+   "zh": "通往 E9"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To E25"
+   ],
+   "zh": "通往 E25"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To E1"
+   ],
+   "zh": "通往 E1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "drawings",
+    "To G1"
+   ],
+   "zh": "通往 G1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To H17"
+   ],
+   "zh": "通往 H17"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To F10"
+   ],
+   "zh": "通往 F10"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To F1"
+   ],
+   "zh": "通往 F1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To H1"
+   ],
+   "zh": "通往 H1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To G17"
+   ],
+   "zh": "通往 G17"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "drawings",
+    "To G21"
+   ],
+   "zh": "通往 G21"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "drawings",
+    "To I27"
+   ],
+   "zh": "通往 I27"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "drawings",
+    "To J1"
+   ],
+   "zh": "通往 J1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "drawings",
+    "To I22"
+   ],
+   "zh": "通往 I22"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "drawings",
+    "To G3"
+   ],
+   "zh": "通往 G3"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "drawings",
+    "To G1"
+   ],
+   "zh": "通往 G1"
+  }
+ ]
+}

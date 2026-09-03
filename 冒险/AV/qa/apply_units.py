@@ -86,6 +86,8 @@ def main(argv=None):
     parser.add_argument("--units-dir", required=True, type=Path)
     parser.add_argument("--results-dir", required=True, type=Path)
     parser.add_argument("--cn-dir", required=True, type=Path)
+    parser.add_argument("--en-dir", type=Path,
+                        help="English baselines; supplies `label` when a pack file is created")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--partial", action="store_true",
                         help="write the leaves that passed even when others failed")
@@ -149,7 +151,18 @@ def main(argv=None):
         stamp = time.strftime("%Y%m%d_%H%M%S")
         for pack, items in accepted.items():
             cn_path = args.cn_dir / f"{pack}.json"
-            data = json.loads(cn_path.read_text(encoding="utf-8")) if cn_path.exists() else {"entries": {}}
+            if cn_path.exists():
+                data = json.loads(cn_path.read_text(encoding="utf-8"))
+            else:
+                # A brand-new pack file still needs a `label`, or Babele shows the pack
+                # name in English in the sidebar and check_pack_targets fails it.
+                label = pack
+                if args.en_dir:
+                    en_path = args.en_dir / f"{pack}.json"
+                    if en_path.exists():
+                        label = json.loads(en_path.read_text(encoding="utf-8")).get("label", pack)
+                data = {"label": label, "entries": {}}
+                print(f"  created {cn_path.name} with label {label!r}")
             data.setdefault("entries", {})
             for path, zh in items:
                 set_at(data, list(path), zh)     # path[0] is already "entries"

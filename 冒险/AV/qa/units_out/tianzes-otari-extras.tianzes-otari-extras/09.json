@@ -1,0 +1,426 @@
+{
+  "pack": "tianzes-otari-extras.tianzes-otari-extras",
+  "unit": "09",
+  "translations": [
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Fish Camp Base",
+        "pages",
+        "Fish Camp Base",
+        "text"
+      ],
+      "zh": "<p>本地图基于最初出现在<em>奥塔里的麻烦</em>中的渔营，相对原图旋转了 90 度。我把它收进来，作为你的英雄们可能的家园基地。</p><p><strong>位置</strong></p><p>在原始剧本里，渔营距离镇子有一段路——当然不在镇界之内。以我自己的经验，你的英雄们大概会更喜欢一个方便些的地点。</p><p>因此在我自己的战役里，我把它挪到了运木滑槽的另一侧，位于崖壁上一片开阔处（奥塔里地图上并未画出），高出沙滩二三十尺。一条折返小径通往沙滩。</p><p>从这里出发，沿沙滩走一小段，再从滑槽下方穿过，就到镇上了。</p><p><strong>为什么窗户全都是门？</strong></p><p>正如你大概已从本模组的其他场景猜到的，我很讲究符合时代的建筑做法，而玻璃对多数房屋来说根本不现实。玛吉洛的店里用油布做窗帘，但对渔营而言，百叶窗更合适——那里多半要经受相当恶劣的天气。</p><p>因此，所有窗户其实都是小门，用来表现玩家应当可以自行开合的百叶窗。体型小的角色也能轻松从中进出。</p><p><strong>遭遇</strong></p><p>我为这个场景准备了一场遭遇：@UUID[JournalEntry.mW1pwcr2Wi5l31gp.JournalEntryPage.yhHq5Eif2VdeuPfi]{入室来袭}</p><p><strong>导览</strong></p><p>这座房子包括：</p><ul><li><p>四间单人卧室</p></li><li><p>房屋中央的一间双人房。可以留给拥有黑暗视觉的类人生物。</p></li><li><p>带炉灶与烤炉的厨房</p></li><li><p>餐厅</p></li><li><p>起居室</p></li><li><p>门厅</p></li><li><p>书房</p></li></ul><p>外围建筑，其中有</p><ul><li><p>炼金制作台</p></li><li><p>通用制作台</p></li><li><p>魔法制作台，并分设符文制作区与卷轴书写区。</p></li><li><p>环绕式门廊</p></li><li><p>两间储物棚</p></li><li><p>可容一匹马的马厩，附带储物空间</p></li></ul><p></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Fish Camp Base",
+        "pages",
+        "Home Base Decorating",
+        "text"
+      ],
+      "zh": "<p>我给玩家留出了一些发挥创意与个性化的空间。我认为花上一部分游戏时间来装点家园基地是值得的，尤其考虑到大量休整时间都会在这里度过。</p><p>理想情况下，每间卧室都该有一条铺盖卷，或者床上铺一张床垫，并且各配一个用战利品角色实现、可以真正打开的箱子。</p><p>你可以在 Forgotten Adventures 免费下载这些素材。</p><p><strong>卧室陈设</strong></p><ul><li><p>铺盖卷 - https://forgottenadventures.piwigo.com/index?/category/811-bedrolls_and_sleeping_bags</p></li><li><p>带毯子的床垫 - https://forgottenadventures.piwigo.com/index?/category/987-single_beds</p></li><li><p>箱子 - https://forgottenadventures.piwigo.com/index?/category/934-chests</p></li></ul><p><strong>户外乐趣</strong></p><p>另外，篝火总是很有意思。挑一个地方，摆上一堆篝火，或者更讲究一些的户外炊事区：</p><ul><li><p>篝火 - https://forgottenadventures.piwigo.com/index?/category/1047-campfires_and_firepits</p></li><li><p>户外烹饪 - https://forgottenadventures.piwigo.com/index?/category/2004-outdoor_cooking</p></li></ul><p>火焰方面，我在厨房的炉灶上放了一处闪烁的火光。你可以把那盏光源复制给篝火本身，再复制一份并启用“闪烁”特效选项，把范围扩大到 40/20。</p><p><strong>树木与灌木</strong></p><p>树木与植物可以在这里找到：</p><ul><li><p>植被：https://forgottenadventures.piwigo.com/index?/category/952-trees</p></li></ul><p>我喜欢把“树冠”素材用作头顶图块，遮挡模式设为渐隐，遮挡度 50%。如果你想做得更精致，可以下载配套的阴影，放到树的下面。</p><h2>装点环节</h2><p>让玩家参与的装点环节需要一点准备，但应该会很有趣。我没能找到任何办法让玩家自己往地图上放置图块，所以我想出了下面这套做法。</p><ul><li><p>把上面链接里挑好的一批图块下载下来，放进你游戏世界的“tiles”文件夹。不要放进 Tianze's Otari Extras 文件夹，否则下次更新时会被覆盖。</p></li><li><p>然后把同样的文件夹复制一份到云盘，例如 Dropbox、OneDrive 或 Google Drive，并分享给你的玩家，让他们可以浏览。</p></li><li><p>接着让每位玩家认领一间卧室，再一个一个陪他们过一遍，挑选床铺与箱子的样式。</p></li><li><p>他们挑好之后，你就把对应图块从 tiles 文件夹里拖出来，摆到想要的位置。</p></li></ul><p>尽量别让玩家玩得太疯，否则场景会因素材过多而变卡。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Fishery Sundries",
+        "pages",
+        "Fishery Sundries",
+        "text"
+      ],
+      "zh": "<p>塔米是塔米莉的侄女。她只有十四岁，却已是一位十分能干的商人。 </p>\n<p>每天早上有几个小时，塔米莉会到摊位上陪她。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Hunk's Hunks of Meat",
+        "pages",
+        "Hunk's Hunks of Meat",
+        "text"
+      ],
+      "zh": "<p>汉克是贾拉的弟弟。两人一起经营家里的农场，多数日子都在这里售卖农场的出产。</p>\n<p>贾拉讨厌这个摊位的名字，汉克自己却乐在其中。他也很喜欢客人拿它开玩笑，谁把他逗笑了就能拿到折扣。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Thirsty Alpaca Ruin",
+        "text"
+      ],
+      "zh": "<blockquote><p>你面前是一个壮观的、堆满瓦砾的深坑。镇民们已经清走了墙体与屋顶较大的残块，剩下的是建筑石料、木材、被褥与家具混作一团。</p><p>坑的北墙附近搭着一座简易棚屋。</p></blockquote><hr /><p>这个坑深 6 到 8 尺，有绳子的话爬进爬出毫无难度，没有绳子也只需 DC 10。</p><h1>诡异的灯火</h1><p>如果玩家在天完全黑透之后前来，废墟南端附近的两处光源会亮起。龙术士每晚都会点上这些灯火几个小时，好把那些好奇又胆大的人挡在自己的棚屋之外。</p><h1>吓人的声响</h1><p>无论白天黑夜，当玩家靠近棚屋时，里面的狗头人就会发出吓人的呻吟声，好把胆小的人赶走。</p><h1>死去的狗头人</h1><p>在坑的中央附近，一片血迹与带血的脚印一路通向一具狗头人战士的尸体。</p><p>用这个宏让这只狗头人显现出来：</p><p>@UUID[Macro.ZxEchksOJCeaGiLk]{切换死亡狗头人的可见性}</p><p><em><strong>注意</strong>：这只狗头人是用图块而非角色来表现的，以免某个模组或系统强制让死亡指示物隐形。</em></p><p>这只狗头人身上值钱的东西已经被搜刮一空。</p><h1>简易棚屋</h1><p>棚屋后面藏着两名狗头人战士和一名狗头人斥候，正盯着玩家角色。如果玩家角色靠得太近，他们会先用远程攻击开打。其中一名战士会试图下到坑洞里去向首领报信。</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.rPaHIh0ICnTLnRO6]{狗头人斥候}</p><p>2: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{狗头人战士}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Kobold Warren Entry",
+        "text"
+      ],
+      "zh": "<p>这道梯子通向的区域大体位于“口渴的羊驼”原址的北面。旅店倒塌时，一条隧道被完全压垮，还连带毁掉了一整片房间网络；另一条隧道则部分坍塌。狗头人正在清理这些塌方区域。</p><blockquote><p>你顺着梯子往下爬，看到下方岩石地面上映着微弱的光。落地之后，你发现自己身处一座洞穴之中，它在上方旅店坍塌时被部分掩埋。</p><p>成堆的碎石与泥土把你围在中间。</p><p>北面有一点摇曳的火光。</p><p>南面是一条被堵死的隧道。</p></blockquote><p></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Kobold Warren",
+        "text"
+      ],
+      "zh": "<blockquote><p>越过成堆的碎石，三只狗头人围坐在一张破旧的桌子旁，吃着令人作呕的食物，用他们含混不清的语言交谈。桌边燃着一堆篝火。</p></blockquote><img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Kobolds-Dining.jpg\" /><p><em>（图片由 Bing Image Creator 提供）</em></p><p>这支胆大包天的狗头人入侵小队由一名红鳞狗头人龙术士率领：</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.CJuHwIRCAgTB1SEl]{红鳞狗头人龙术士}</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.rPaHIh0ICnTLnRO6]{狗头人斥候}</p><p>1: @UUID[Compendium.pf2e.troubles-in-otari-bestiary.Actor.fhItdltCmcAZkvcI]{狗头人陷阱大师}</p><p>2:@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{狗头人战士}</p><p>狗头人斥候在西北侧的巢穴中熟睡，其中一名狗头人战士在西南侧的巢穴中熟睡。</p><h1>遭遇要点</h1><ul><li><p>如果地面上的那名狗头人战士成功爬下梯子向首领报了信，而英雄们又紧随其后追了下来，那么就在战斗中追加一名狗头人战士，外加入口附近洞穴里的那两只狗头人，并唤醒睡觉洞穴中的狗头人。</p></li><li><p>如果玩家角色一次性招惹了所有这些狗头人，这场战斗会非常艰难。不过狗头人不会追着玩家角色爬上梯子。而且他们只会警戒一两个小时，之后就会散开去做各自的日常事务。</p></li><li><p>红鳞狗头人龙术士带着一只玛瑙犬。为了不让这场遭遇失衡，龙术士在尝试激活它时应当失手，让它掉在地上。@Check[perception|dc:15]才能看见它落地。否则，在搜刮战利品时也很容易发现这只犬。</p></li><li><p>在巢穴中熟睡的狗头人斥候与狗头人战士需要完整的一轮来醒来、起身、抓起武器并开始向战场移动。</p></li></ul><h1>狗头人战术</h1><ul><li><p>所有狗头人都拥有偷袭，能造成额外伤害。虽然他们不用隐匿来投先攻，但可以用一个动作躲藏，从而让对手对他们处于措手不及状态。</p></li><li><p>狗头人战士拥有匆忙撤退这一特长，能让他们迅速脱身，且很少给对手反应打击的机会。</p></li><li><p>狗头人陷阱大师可以用快速陷阱动作布设陷阱，用三个动作架起一处尖刺陷阱。陷阱大师只应在处于隐蔽状态或正在撤退时尝试这么做。</p></li><li><p>狗头人斥候带着一把弩，比战士更难对付。</p></li></ul><h1>财宝</h1><p>每只狗头人都把自己大部分值钱的东西带在身上。此外，他们各自还在睡垫附近或下面放着装东西的口袋。所有这些物品都汇总在火坑旁的@UUID[Actor.eNli7XDXWRou3i0C]{狗头人巢穴财宝}指示物中。</p><h1>经验</h1><p>整场冒险大约应为每位玩家提供 100 点经验值。</p><p></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Into the Ruins",
+        "text"
+      ],
+      "zh": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Into-the-Ruins-Cover.jpg\" /><p><em>（图片由 Bing Image Creator 提供）</em></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Introduction",
+        "text"
+      ],
+      "zh": "<p>这是一场短篇冒险，适合已经开始在奥塔里闯出名号的英雄——也许他们刚打完新手包的冒险——但还没有深入涉足奥塔里一带的其他冒险。</p><h1>冒险如何开始</h1><p>冒险始于鸦之酒桶酒馆的女老板玛吉洛派人捎信，请队伍去见她。</p><p>（注：这条冒险引子取自<em>憎恨魔窟</em>。）</p><p>玛吉洛曾是海盗——咳——是航海者，同时也是一位造诣不俗的炼金术士。她经营着镇上人气最旺的旅店。让她挂心的不只是那家旅店的坍塌，还有近来的一些新动静。</p><p>他们到达后，她把他们领出后门，指了指河对岸。</p><blockquote><p>河对岸那个大坑——得有人管管了。住在附近的人说，那里开始冒出诡异的灯火和吓人的声响。而且，还有<strong>什么东西</strong>在坑里搭了个棚子。我担心在底下捣鬼的那玩意儿会让靠河的地方也塌下来，把这一整片都冲垮。</p></blockquote><p>一些可能的问答：</p><p>店主后来怎么样了？</p><blockquote><p>惨得很。我们把他的尸体从瓦砾里拖了出来，还有他家里的好几口人。剩下的只能当作是埋在更深的废墟底下了。</p></blockquote><p>卫队为什么不管这事？</p><blockquote><p>唉，他们本来是在看着那地方的，可那边的动静——尤其是夜里的——把他们吓得不轻。他们是来保护镇子不受强盗和海盗侵扰的，对付那类人他们还算称职。可要他们去查闹鬼的事，他们一点都不想沾。</p></blockquote><p>那个棚子是什么时候出现的？</p><blockquote><p>两天前的夜里。卫兵去把它拆了，结果被那些灯火和声响吓跑了。他们还在琢磨该怎么办，可我受够了这种拖拖拉拉，我的邻居们也一样。</p></blockquote><p>等他们问完问题后，她会补上一句：</p><blockquote><p>作为报酬，我可以给你们每人 10 枚金币，另外我会向镇长递一份请愿书，请他把那块地的地契授予你们。我还能找些邻居在请愿书上签名。我不敢打包票，不过凭你们来到这儿之后做的那些事，我觉得那老头会愿意把你们留在身边。</p></blockquote><h1>进一步调查</h1><p>如果玩家向“口渴的羊驼”的邻居打听发生了什么，他们会确认那些怪异的景象与声响，但也提供不了别的什么。如今他们尽量绕着那片地方走，并且很希望这个麻烦能被解决。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Afterward",
+        "text"
+      ],
+      "zh": "<p>英雄们向玛吉洛报捷之后，她欣喜不已，并按承诺给队伍中每人 10 枚金币。</p><p>她也如约把请愿书拿到河两岸的邻居中间传阅，并亲自把请愿书送到镇长手上。</p><p>塌方之后那条隧道的问题仍有待解决，而它的存在也让镇长干脆决定把这处地产直接给玩家角色。</p><p>于是三天之后，玛吉洛亲自把这处地产的地契交到了他们手中。</p><p></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Hazard",
+        "text"
+      ],
+      "zh": "<p>梯子正西侧有一处危险：</p><p>@UUID[Compendium.pf2e.abomination-vaults-bestiary.Actor.6NijRSpkIuQpSxUp]{尖刺发射器}</p><p>@Check[perception|dc:19]才能发现这具尖刺发射器。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Blocked Passages",
+        "text"
+      ],
+      "zh": "<p>南面是两处被部分挖开的区域，正是“口渴的羊驼”真正塌陷下去的地方。每条通道里都有一只狗头人在清理瓦砾。他们专注于手上的活计，直到玩家角色走到 15 尺以内才有机会察觉。</p><p>2 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{狗头人战士}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Into the Ruins",
+        "pages",
+        "Glimpse of Passage Beyond",
+        "text"
+      ],
+      "zh": "<p>如果玩家搜查东南隧道的尽头，就能找到几处可以望见后方隧道的缝隙，看出这条隧道在堵塞处之后仍朝东南方向延伸。</p><p>这条通道通向何处已超出本次冒险的范围，但它完全可能通往一座更大的狗头人巢穴、奥塔里周边的某座地城、某个与狗头人勾结之人的地窖，或是别的什么地方。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Lathenar's Pots",
+        "pages",
+        "Lathenar's Pots",
+        "text"
+      ],
+      "zh": "<p>基莱诺是这座市场以及附近那家杂货店的主人，同时也做陶匠。他是个鳏夫，始终没能走出亡妻离世的伤痛。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Lathenar's Shop",
+        "pages",
+        "Lathenar's Shop",
+        "text"
+      ],
+      "zh": "<p>莱诺是基莱诺的长子兼继承人，他与父亲合伙拥有这家店铺。</p>\n<p>店铺的全部责任与权限都归他。他和妻子黛布兰住在店铺后面与楼上。他们的第一个孩子即将出世。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Magical Sundries",
+        "pages",
+        "Magical Sundries",
+        "text"
+      ],
+      "zh": "<p>贝瑟拉十七岁，最近刚从艾巴萨罗姆的魔法进修中归来。</p>\n<p>尽管家人就住在镇上，她已经习惯了独立生活，如今租住在艾利莫拉·印科霍兹家的一个房间里。</p>\n<p>上午她售卖来自瓦琳妙妙屋与奇谈的魔法物品，下午则给印科霍兹家的孩子们当家教。</p>\n<p>她正在攒钱，打算回到艾巴萨罗姆，开一家属于自己的魔法物品摊位。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Osprey Club Store",
+        "pages",
+        "Osprey Club Store",
+        "text"
+      ],
+      "zh": "<p>音雅丝米拉的秘密店铺只对赢得了她支持、且本身也是盗贼的英雄开放。</p>\n<p>这样的盗贼若加入她的鱼鹰俱乐部，可享九折优惠。</p>\n<p>她只收购她感兴趣、并且看起来对盗贼一类人有用的物品。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Otari Market",
+        "text"
+      ],
+      "zh": "<p>奥塔里市场由基莱诺·拉瑟纳所有并经营，上午十点前后进入热闹时段，下午四点左右开始收摊。每位摊主自定营业时间，或者卖完存货就收摊。</p><p>@UUID[JournalEntry.qZmKiVdN1Gi72Fws]{遭遇——敌对帮派}就发生在这里。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Fishery Sundries",
+        "text"
+      ],
+      "zh": "<p>售卖以鱼为原料的中世纪街头小吃，以及来自奥塔里渔场的海中收获。</p><p>摊主：@UUID[Actor.WTOucHvTsv6Cnb5I]{塔米}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Lathenar's Pots",
+        "text"
+      ],
+      "zh": "<p>售卖由基莱诺·拉瑟纳亲手制作的炊具与陶器。</p><p>这个摊位同时也是市场的管理处。</p><p>摊主：@UUID[Actor.4QttEBRfNtwti5i6]{基莱诺·拉瑟纳}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Hunk's Hunks of Meat",
+        "text"
+      ],
+      "zh": "<p>售卖以肉类为主的中世纪街头小吃。</p><p>摊主：@UUID[Actor.YIdym8aYOgcwL6yv]{汉克·海斯泰珀}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Stall 4",
+        "text"
+      ],
+      "zh": "<p>牌子上写着</p><p style=\"text-align:center\"><em>4 号摊位待租</em></p><p style=\"text-align:center\"><em>请到拉瑟纳陶器铺找基莱诺</em></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Stall 5",
+        "text"
+      ],
+      "zh": "<p>牌子上写着</p><p style=\"text-align:center\"><em>5 号摊位待租</em></p><p style=\"text-align:center\"><em>请到拉瑟纳陶器铺找基莱诺</em></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Magical Sundries",
+        "text"
+      ],
+      "zh": "<p>贝瑟拉是市场上最年轻的独立摊主。她售卖魔法消耗品。</p><p>摊主：@UUID[Actor.BU9rGVV9FsX8Pikq]{贝瑟拉}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Crow's Elixirs",
+        "text"
+      ],
+      "zh": "<p>齐克是玛吉洛的学徒，售卖来自鸦之酒桶的低阶灵药与消耗品。</p><p>摊主：@UUID[Actor.mGmjwfNEVx95hNS8]{齐克}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Stall 8",
+        "text"
+      ],
+      "zh": "<p><span style=\"font-family:Signika, sans-serif\">牌子上写着</span></p><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;min-height:unset;color:rgb(25, 24, 19);font-family:Signika, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:center\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">8 号摊位待租</em></span></p><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;min-height:unset;color:rgb(25, 24, 19);font-family:Signika, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:center\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">请到拉瑟纳陶器铺找基莱诺</em></span></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Crisp and Fresh",
+        "text"
+      ],
+      "zh": "<p>贾拉售卖新鲜水果、口粮与牲口饲料。</p><p>摊主：@UUID[Actor.k25Iq4RxkpleszB8]{贾拉·海斯泰珀}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Clodia's Clothery",
+        "text"
+      ],
+      "zh": "<p>克洛迪娅是本地的一位老姑娘，也是一位技艺精湛的女装裁缝与成衣师。</p><p>摊主：@UUID[Actor.okJ7kB3aRPOUKW1E]{克洛迪娅}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Brelda's Bakery",
+        "text"
+      ],
+      "zh": "<p>一位本地的矮人寡妇替她的好友布雷达·范克维尔照看这个摊位，后者正忙于经营儿子的客栈。</p><p>摊主：@UUID[Actor.nc9zNVOrlfUwjC9m]{德拉尔达·汉利}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Otari Market",
+        "pages",
+        "Also Crisp and Fresh",
+        "text"
+      ],
+      "zh": "<p>镇长的女儿在这里做贾拉的学徒，售卖蔬菜。</p><p>摊主：@UUID[Actor.u61cBE2NGSCqTedZ]{多莉安娜·门哈姆斯}</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Rowdy Rockfish Inn and Tavern",
+        "pages",
+        "Rowdy Rockfish Inn and Tavern",
+        "text"
+      ],
+      "zh": "<p>喧闹石斑鱼是一家安静、服务齐全、住着舒服的客栈。</p><p>布雷达·范克维尔在儿子拉斯达失踪的这几个月里代为经营这家客栈。</p><p>阿格纳是一种不含酒精的提神热饮。</p><p>加热温饮是一项把任何饮品加热的服务。</p><p>以下内容已体现在物品清单中。</p><ul><li>2 间双人床客房</li><li>8 间单人床客房</li><li>8 个马厩隔间</li><li>每晚可提供 8 次沐浴</li></ul><p> </p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Shop Journals (MEJ Required)",
+        "pages",
+        "Shop Journals",
+        "text"
+      ],
+      "zh": "<p><strong>注意</strong>：自 v13 发布以来，Monk's Enhanced Journals 已无限期失效。作者在他的 github 上表示，他不知道什么时候能修好。</p><p>我暂时把这些日志留在本模组中，但请注意，店铺日志可能无法正常工作。我没有测试过它们。</p><hr /><p>应用户要求，我提供了一套商人日志。它们需要<strong>Monk's Enhanced Journal</strong>模组才能运作。它位于一个名为“Tianze's Otari Shops”的独立可选纲要中。</p><p>在导入之前请注意，它需要一些设置工作。</p><ul><li><p>由于许多场景上本来就已经有商人指示物，这些日志会造成重复。我的建议是：</p><ul><li><p>在角色文件夹中，把每个商人角色的“所有玩家”权限设为“无”</p></li><li><p>替换每个场景中的商人。这样一来，他们仍然可见，但玩家无法与之交互。</p></li><li><p>把商人的日志拖出来，摆在每个商人角色的前面。我已经把“所有玩家”权限设为“观察者”，因此你的玩家可以与之交互。</p></li></ul></li></ul><p>日志中店铺库存的内容，是我用为每家店铺定制的随机表生成的。它们大概不会与商人角色的店铺库存一致。</p><p></p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Shop Rolltables (Item Piles required)",
+        "pages",
+        "Shop Rolltables",
+        "text"
+      ],
+      "zh": "<p>如果你使用 Item Piles，就可以用这些随机表来填充任何你在其物品堆设置中设为“商人”的战利品角色。</p><p>把它们设为商人之后，前往“填充”标签页，然后添加随机表。</p><p>大多数随机表的权重都只是 1。克洛迪娅的衣坊是唯一的例外，我在那里给较常见的物品设了更高的权重。</p>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Tianze's Otari Extras",
+        "pages",
+        "Introduction",
+        "text"
+      ],
+      "zh": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Otari-Street.jpg\" /><p>Tianze's Otari Extras 是一套以奥塔里镇为背景的地图与内容合集。奥塔里镇是多部探索者剧本的舞台，其中包括<em>奥塔里地下的威胁</em>（新手包冒险）、<em>憎恨魔窟冒险路线</em>以及<em>奥塔里的麻烦</em>。</p><p>我决定把这个模组作为我的冒险与地图的免费入门作品发布。这些地图的最初版本是我在跑团时做的；后来我开始用 Forgotten Adventures 的素材改进它们，于是就想试试自己做模组。</p><p><span style=\"font-family:Signika, sans-serif\">地图使用<a href=\"https://dungeondraft.net/\">DungeonDraft </a>制作，素材来自<a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>。</span></p><p><span style=\"font-family:Signika, sans-serif\">肖像与小插图使用<a href=\"https://www.bing.com/images/create\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Bing Image Creator</a>制作，然后再加以润饰并制成指示物。</span></p><p>宏是我东拼西凑做出来的，参考的例子分别来自 Foundry 的 Reddit 版块、Foundry 官方 Discord 的 Macro Polo 频道，以及憎恨魔窟冒险路线。</p><h2>3.1 版更新——总体清理</h2><p>我清理了一些被配置为 Item Piles 的商人角色，它们可能会导致价格为零。</p><p>新增了一张武器与护甲的随机表。</p><p>重新填充了若干商人角色的库存。</p><p>移除了一些不再有指示物美术、本该上次就删掉的角色。</p><h2>包含内容</h2><ul><li><p>鸦之酒桶</p><ul><li><p>带指示物的地图</p></li><li><p>地点日志页</p></li><li><p>遭遇——喧闹的赌徒</p></li></ul></li><li><p>骗子之角</p><ul><li><p>桥梁地图</p></li><li><p>带指示物的酒馆地图</p></li><li><p>带指示物的二层地图</p></li><li><p>地点日志页</p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">鱼鹰俱乐部的邀请</em>，一场为游荡者角色准备的短篇冒险。</span></p></li></ul></li><li><p>奥塔里市场</p><ul><li><p>带指示物的地图</p></li><li><p>地点日志页</p></li><li><p>遭遇——敌对帮派</p></li></ul></li><li><p><em>深入废墟</em>，一场短篇冒险，取材自下列作品中的冒险引子：<em>憎恨魔窟</em>。</p><ul><li><p>带指示物的废墟地图</p></li><li><p>带指示物的巢穴地图</p></li><li><p>地点日志页</p></li><li><p>角色与物品</p></li></ul></li><li><p>渔营</p><ul><li><p>渔营地图</p></li><li><p>地点日志页</p></li><li><p>遭遇——入室来袭，附带指示物</p></li></ul></li><li><p>酒馆物品</p><ul><li><p>一份消耗品清单，用于给客栈、市场摊贩与马厩等服务型商人补货。</p></li></ul></li><li><p>库存充足的商人角色</p><ul><li><p>7 名以奥塔里各地点为原型的商人角色</p></li><li><p>7 名为奥塔里市场原创的商人</p></li></ul></li><li><p>便捷宏</p><ul><li><p>许多地图都带有小巧的宏，可以切换图块的可见性，或者同时开关灯光。这些宏可以在相关的日志页里找到，也可以在宏文件夹中找到——请找 Otari Extras 文件夹。</p></li></ul></li></ul><h2>遭遇的前提假设</h2><p>这些遭遇假定队伍在 2 级左右，并且已经在奥塔里一带冒险过。也许他们已经完成了下列之一：</p><ul><li><p><em>探索者新手包</em></p></li><li><p>下列作品中的开篇剧本：<em>奥塔里的麻烦</em></p></li><li><p>下列作品的第一层：<em>憎恨魔窟</em></p></li></ul><p>他们此时应当已经开始在镇上积累正面声望，多数商人至少知道他们是谁。</p><h2>遭遇与地图理念</h2><p>在做了许多除了赏心悦目之外毫无用处的地图之后——比如那些我永远凑不齐足够微缩模型或指示物去填满的客栈与店铺——我给自己定下了这样一条规矩：</p><p style=\"text-align:center\"><em>每张地图都值得拥有一场遭遇。</em></p><p>把它想成你作为创作者给这张地图的祝福。毕竟，一旦你在上面办过一场战斗或其他推动剧情的遭遇，这张地图依然可以回到它原本的用途：可以住宿的客栈、可以采购的市场，或是可以改建成家园基地的废墟。</p><p>但为了让这张地图的存在站得住脚，我喜欢把它用在某场能推动我所讲述之故事的遭遇里——不管其中是否包含战斗。</p><p>基于这一点，本模组中的每张地图都至少配有一场遭遇，并且应当能融入任何以奥塔里为舞台的游戏。</p><h2>酒馆物品</h2><p>玩家喜欢有东西可买，也喜欢看点养眼的玩意儿。这些物品能给他们一些真正会进入背包的东西，而且他们随后可以点击那个<em>消耗</em>按钮来使用它们。把它想成一杯虚拟麦酒、一次虚拟沐浴，或者在客栈房间里虚拟地住上一晚。这些在我自己的游戏里大受欢迎。</p><p>所有酒馆物品都使用 Foundry 核心图标，应该能在你的游戏世界中长期保留。</p><p>饮品<em>阿格纳</em>是一种类似咖啡或茶的提神热饮，由我自己虚构。</p><h2>商人角色</h2><p>这些商人角色的灵感来自一个很棒的小型内容模组：<em>PF2e a shopping experience</em>。不过我自己重新做了一套。</p><p>多数商人的灵感来自<em>憎恨魔窟</em>中的角色，或与之相关联，还有少数直接取自那个模组。每位商人的描述中都写有店铺名称，以及该商人的简短生平或值得一提的信息。</p><p>我只为本模组所含的地图创建了角色。你还可以为这些地图创建的其他可能商人有：</p><ul><li><p>奥塔里渔场的塔米莉，售卖饮品与中世纪街头小吃。</p></li><li><p>加仑丁快递的奥罗瑞亚，提供马匹寄养服务。</p></li><li><p>奥塔里卫队的拉杜斯，提供马匹寄养服务</p></li></ul><p>我也收录了下面这些商人角色，但对应的实际场景属于 Tianze's Gauntlight Extras：</p><ul><li><p>喧闹石斑鱼，提供食物、饮品、床位、沐浴与马匹寄养。</p></li><li><p>晨花图书馆的店铺，提供药水、教士用品、魔法消耗品与武器，以及符文。</p></li></ul><p>我强烈推荐使用<em><strong>Item Piles</strong></em>模组来充实商人角色，并加入完整的买卖功能，以及营业时间、专属库存随机表之类的其他调整。</p><h2>来自憎恨魔窟的角色</h2><p>为了避免依赖随<em>憎恨魔窟</em>一同安装的肖像与指示物美术，我重新制作了各场遭遇所需的全部角色。</p><h2>官方角色与物品</h2><p>角色与物品标签页中的所有内容，除了上文所述由我创建的那些之外，都直接来自纲要。</p><p>地图上完整放置的正是角色标签页中的同一批角色。日志中的角色则指向纲要。</p><p>为了方便与试玩测试，我还收录了一套调整到 2 级的标志性角色。</p><h2>推荐</h2><p>我想借此机会感谢并推荐下列附加模组与服务的创作者。</p><h3>付费模组</h3><ul><li><p><em><strong>憎恨魔窟</strong></em>不仅是一部出色的冒险路线，更是一次完整的多媒体体验：地图、角色、小插图、音乐、环境音效以及场景专属音效一应俱全。它塞满了各种好用的工具，你会发现自己在别处也用得上。而且，它还在教我怎么写出更好的宏。:)</p></li><li><p><em><strong>奥塔里的麻烦</strong></em>，是 Paizo 出品的一系列短篇冒险，故事全部发生在奥塔里及其周边地区。</p></li><li><p><em><strong>Mercenary Marketplace</strong></em>，我在凄凉灯塔扩充包里用过它，它能帮你按职业、工作或角色定位来搭建 NPC 角色。</p></li></ul><h3>免费模组</h3><ul><li><p>作为本模组的配套，我要极力推荐<em><strong>Footsteps of Otari</strong></em>，作者是<a href=\"https://github.com/MarkPearce\">马克·皮尔斯</a>。马克的合集启发我做出了这一套，而我只做了他合集里没有的地图。它确实包含若干重绘自憎恨魔窟的地图，但并不依赖那个模组。</p></li><li><p><em><strong>PF2e a shopping experience</strong></em>是一个精巧的小型内容模组，其中一套是为奥塔里商人预置的店铺，另一套则是按等级划分、适用于任何战役的预置店铺。</p></li><li><p><em><strong>Item Piles</strong></em>。我强烈推荐使用这个模组，它能让商人角色更便捷、更自动化。我太喜欢这个模组了，甚至差点把它列为本模组的依赖。不过，每位商人具体该怎么运作，还是应该由游戏主持人决定。</p></li></ul>"
+    },
+    {
+      "path": [
+        "entries",
+        "Tianze's Otari Extras",
+        "journals",
+        "Tianze's Otari Extras",
+        "pages",
+        "Credits and Licenses",
+        "text"
+      ],
+      "zh": "<h2>致谢</h2><p><span style=\"font-family:Signika, sans-serif\">地图使用<a href=\"https://dungeondraft.net/\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink)\">DungeonDraft </a>制作，素材来自<a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>。</span></p><p><span style=\"font-family:Signika, sans-serif\">俯视角指示物图像同样来自<a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>。肖像与小插图使用<a href=\"https://www.bing.com/images/create\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Bing Image Creator</a>制作。</span></p><h2>Paizo</h2><p>本模组 Tianze's Otari Extras 使用由 Paizo Inc. 拥有的商标和／或版权，并依据 Paizo 的社区使用政策（<a href=\"http://paizo.com/communityuse\">paizo.com/communityuse</a>）加以使用。我们被明确禁止就使用或获取本内容向你收取费用。本模组并非由 Paizo 出版、认可或特别批准。有关 Paizo Inc. 及其产品的更多信息，请访问 <a href=\"http://paizo.com/\">paizo.com</a>。</p><h2>开放游戏许可协议 版本 1.0a</h2><p>以下文本为威世智公司之财产，版权归威世智公司所有，2000 年（“Wizards”）。保留所有权利。</p><ol><li><p>定义：</p><ol><li>“Contributors（贡献者）”指贡献了开放游戏内容的版权和／或商标所有者；</li><li>“Derivative Material（衍生材料）”指受版权保护的材料，包括衍生作品与翻译（含译为其他计算机语言）、节略、修改、校正、增补、扩展、升级、改进、汇编、删节，或既有作品得以被重铸、转换或改编的其他形式；</li><li>“Distribute（分发）”指复制、许可、出租、租赁、出售、广播、公开展示、传输或以其他方式分发；</li><li>“Open Game Content（开放游戏内容）”指游戏机制，并包括方法、程序、流程与例程，但以该等内容不体现产品标识、且相较既有技艺有所增益为限；亦包括由贡献者明确标识为开放游戏内容的任何附加内容；并指受本许可协议涵盖的任何作品，包括依版权法产生的翻译与衍生作品，但明确排除产品标识。</li><li>“Product Identity（产品标识）”指产品与产品线名称、标志及识别性标记（包括商业外观）；器物；生物 角色；故事、故事线、情节、主题元素、对白、事件、语言、美术作品、符号、设计、描绘、肖像、版式、姿态、概念、主题，以及图形、照片与其他视觉或听觉表现；角色、法术、魔法附魔、个性、团队、人格形象、肖像与特殊能力的名称与描述；地点、位置、环境、生物、装备、魔法或超自然能力或效果、标志、符号或图形设计；以及由产品标识所有者明确标识为产品标识的任何其他商标或注册商标；并明确排除开放游戏内容；</li><li>“Trademark（商标）”指贡献者用以标识其自身或其产品，或标识由该贡献者向开放游戏许可协议所贡献之相关产品的标志、名称、标记、标识、格言与设计；</li><li>“Use（使用）”、“Used（已使用）”或“Using（正在使用）”指使用、分发、复制、编辑、排版、修改、翻译，以及以其他方式基于开放游戏内容创作衍生材料。</li><li>“You（你）”或“Your（你的）”指本协议项下的被许可方。</li></ol></li><li>许可协议：本许可协议适用于任何载有通知、表明其仅可依本许可协议并按其条款使用的开放游戏内容。你必须为你所使用的任何开放游戏内容附加该等通知。除本许可协议自身载明者外，不得对本许可协议增删任何条款。对使用本许可协议分发的任何开放游戏内容，不得适用任何其他条款或条件。</li><li>要约与承诺：使用开放游戏内容即表示你接受本许可协议的条款。</li><li>授权与对价：作为你同意使用本许可协议的对价，贡献者依照本许可协议的确切条款，授予你一项永久的、全球范围的、免版税的、非排他的许可，以使用开放游戏内容。</li><li>贡献授权之声明：若你以开放游戏内容的形式贡献原创材料，即表示你声明你的贡献系你之原创成果，和／或你拥有足够权利以授予本许可协议所转让的权利。</li><li>许可协议版权声明：你必须更新本许可协议中的版权声明部分，以纳入你正在复制、修改或分发的任何开放游戏内容之版权声明的确切文本；并且你必须在你所分发的任何原创开放游戏内容的版权声明中，加入标题、版权年份与版权持有人姓名。</li><li>产品标识的使用：你同意不使用任何产品标识（包括用作兼容性的指示），除非你与该产品标识每一元素的所有者另行订立独立协议并获得明确许可。你同意，不得就含有开放游戏内容的作品，结合任何商标或注册商标来表示兼容性或可共同改编性，除非你与该商标或注册商标的所有者另行订立独立协议并获得明确许可。在开放游戏内容中使用任何产品标识，并不构成对该产品标识所有权的挑战。任何在开放游戏内容中被使用之产品标识的所有者，应保留对该产品标识的一切权利、所有权与利益。</li><li>标识：若你分发开放游戏内容，你必须清楚标明你所分发之作品中哪些部分属于开放游戏内容。</li><li>许可协议的更新：威世智或其指定代理可以发布本许可协议的更新版本。你可以使用本许可协议的任何授权版本，以复制、修改并分发最初依本许可协议任一版本分发的任何开放游戏内容。</li><li>本许可协议的副本：你必须在你所分发的每一份开放游戏内容副本中，附上一份本许可协议副本。</li><li>贡献者署名的使用：除非你已获得贡献者的书面许可，否则不得使用任何贡献者的名称来营销或宣传开放游戏内容。</li><li>无法遵守：若因法规、司法命令或政府管制，致使你不可能就部分或全部开放游戏内容遵守本许可协议的任何条款，则你不得使用受此影响的任何开放游戏材料。</li><li>终止：若你未能遵守本协议中的所有条款，且未在知悉违约之日起 30 日内纠正该违约，本许可协议将自动终止。所有分许可在本许可协议终止后继续有效。</li><li>修正：若本许可协议的任何条款被认定为不可执行，则该条款仅应在使其可执行所必需的范围内予以修正。</li><li><p>版权声明</p><p><em>开放游戏许可协议</em> v 1.0a 版权所有 2000，威世智公司。</p><p><em>系统参考文档</em> 版权所有 2000-2003，威世智公司；作者：乔纳森·特威特、蒙特·库克、斯基普·威廉姆斯、里奇·贝克、安迪·柯林斯、大卫·努南、里奇·雷德曼、布鲁斯·R·科德尔、约翰·D·拉特利夫、托马斯·里德、詹姆斯·怀亚特，基于 E·加里·吉盖克斯与戴夫·阿尼森的原始材料。</p><p><em>探索者核心规则书（第二版）</em> © 2019，Paizo Inc.；作者：洛根·邦纳、杰森·布尔曼、斯蒂芬·拉德尼-麦克法兰与马克·塞弗特。</p><p><em>憎恨魔窟冒险路线</em> © 2022，Paizo Inc.；作者：凡妮莎·霍斯金斯、詹姆斯·雅各布斯与斯蒂芬·拉德尼-麦克法兰，罗恩·伦丁参与。</p><p><em>Tianze's Otari Extras</em> © 2024，帕特里夏·内维特</p></li></ol><p></p>"
+    }
+  ]
+}
