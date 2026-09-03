@@ -23,9 +23,14 @@
         "allSaves": "system.attributes.allSaves.value",
         "senses": "system.traits.senses.value",
         "hp": "system.attributes.hp.details",
+        "disable": "system.details.disable",
+        "hazarddescription": "system.details.description",
+        "reset": "system.details.reset",
+        "routine": "system.details.routine",
         "blurb": "system.details.blurb",
         "speed": "system.attributes.speed.details",
         "languages": "system.traits.languages.custom",
+        "stealthdetails": "system.attributes.stealth.details",
         "ac": "system.attributes.ac.details",
         "di": "system.traits.di.custom",
         "prototypeToken": {
@@ -67,7 +72,7 @@
                 },
                 "Corrupting Sap": {
                     "name": "腐化树液 Corrupting Sap",
-                    "description": "<p>一轮中首次有生物暴露于第二子嗣的腐化树液下时，该生物必须尝试一次 @Check[will|dc:44] 的意志豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响，且在1分钟内暂时免疫腐化树液。</p>\n<p><strong>成功</strong> 侵入性的魔化念头和残忍的冲动在该生物的脑海中涌现，导致该生物在其下一回合结束前处于 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 状态。</p>\n<p><strong>失败</strong> 该生物陷入 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused} 状态，持续1分钟。</p>\n<p><strong>大失败</strong> 该生物被第二子嗣控制，持续1分钟。</p>"
+                    "description": "<p>一轮中首次有生物暴露于第二子嗣的腐化树液下时，该生物必须尝试一次 @Check[will|dc:44] 的意志豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响，且在1分钟内临时免疫腐化树液。</p>\n<p><strong>成功</strong> 侵入性的魔化念头和残忍的冲动在该生物的脑海中涌现，导致该生物在其下一回合结束前处于 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard} 状态。</p>\n<p><strong>失败</strong> 该生物陷入 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused} 状态，持续1分钟。</p>\n<p><strong>大失败</strong> 该生物被第二子嗣控制，持续1分钟。</p>"
                 }
             },
             "prototypeToken": {
@@ -97,7 +102,7 @@
                 },
                 "Teratomatous Display": {
                     "name": "畸胎瘤展示 Teratomatous Display",
-                    "description": "<p>畸变魔张开中央巨口，展示出一团翻滚的畸胎瘤。目睹这一恶心景象的生物身体会自行发生变化，长出自己的畸胎瘤。30尺弥漫范围内的生物必须尝试 @Check[will|dc:36|options:area-effect,damaging-effect,inflicts:drained,inflicts:sickened] 意志豁免，之后在 1 分钟内对下一次的畸胎瘤展示暂时免疫。此能力产生的肿瘤在生物不再处于恶心状态时消失。</p><hr /><p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物受到 @Damage[3d6[piercing]|options:area-damage] 点穿刺伤害，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>失败</strong> 生物受到 @Damage[6d6[piercing]|options:area-damage] 点穿刺伤害，陷入 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。</p>\n<p><strong>大失败</strong> 生物受到 @Damage[12d6[piercing]|options:area-damage] 点穿刺伤害，陷入恶心2，并陷入流失2。</p>"
+                    "description": "<p>畸变魔张开中央巨口，展示出一团翻滚的畸胎瘤。目睹这一恶心景象的生物身体会自行发生变化，长出自己的畸胎瘤。30尺弥漫范围内的生物必须尝试 @Check[will|dc:36|options:area-effect,damaging-effect,inflicts:drained,inflicts:sickened] 意志豁免，之后在1分钟内对下一次的畸胎瘤展示临时免疫。此能力产生的肿瘤在生物不再处于恶心状态时消失。</p><hr /><p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物受到 @Damage[3d6[piercing]|options:area-damage] 点穿刺伤害，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>失败</strong> 生物受到 @Damage[6d6[piercing]|options:area-damage] 点穿刺伤害，陷入 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。</p>\n<p><strong>大失败</strong> 生物受到 @Damage[12d6[piercing]|options:area-damage] 点穿刺伤害，陷入恶心2，并陷入流失2。</p>"
                 },
                 "Frightful Presence": {
                     "name": "恐怖威压 Frightful Presence",
@@ -184,7 +189,7 @@
                     "description": "<p>巨捕蝇草针对不同目标以-2减值进行四次叶荚打击。这些攻击计算巨捕蝇草的多重攻击减值，但是在攻击结束之后才会生效。</p>"
                 },
                 "Tremorsense (Imprecise) 60 feet": {
-                    "name": "震颤感知（模糊） 60尺",
+                    "name": "震颤感知（模糊）60尺",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
                 "Focused Assault": {
@@ -260,7 +265,7 @@
                     "description": "<p><strong>触发</strong> 一个生物施放了德尔瓦尼斯知晓的法术</p><hr /><p><strong>效果</strong> 德尔瓦尼斯消耗一个同环法术位然后尝试反制触发法术，检定加值为 [[/gmr 1d20+18 #Counteract]]{+18} .</p>"
                 },
                 "Otherworldly Will": {
-                    "description": "<p> 德尔瓦尼斯被一种独特而超凡的意志所驱使，指引其动作。每当德尔瓦尼斯针对一种试图控制或支配其动作的心灵效果进行意志豁免检定时，其检定结果的成功度提升一级.</p>",
+                    "description": "<p>德尔瓦尼斯被一种独特而超凡的意志所驱使，指引其动作。每当德尔瓦尼斯针对一种试图控制或支配其动作的心灵效果进行意志豁免检定时，其检定结果的成功度提升一级.</p>",
                     "name": "异界意志 Otherworldly Will"
                 },
                 "Unexplained Demise": {
@@ -293,7 +298,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "真菌菌落 Fungal Colony",
-            "reset": "<p>真菌菌落爆发 24 小时后，该危害将重新激活并可能再次触发。若战殁巨虫已被激活并被摧毁，则在后续的触发中它们不会再出现.</p>",
+            "reset": "<p>真菌菌落爆发24小时后，该危害将重新激活并可能再次触发。若战殁巨虫已被激活并被摧毁，则在后续的触发中它们不会再出现.</p>",
             "stealthdetails": "<p>（传奇）</p>",
             "prototypeToken": {
                 "name": "真菌菌落 Fungal Colony"
@@ -335,7 +340,7 @@
                 },
                 "Skilled Diplomat": {
                     "name": "娴熟外交官 Skilled Diplomat",
-                    "description": "<p>当阿扎瑞斯尝试通过交涉技能进行@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象 Make an Impression} （Make an Impression）时，他可同时对最多50个生物的意志DC进行检定。若他专注于对单一目标进行建立印象，则将成功视为大成功。最后，当他提出请求时，只要目标对其态度并非敌对，他可将目标的态度视为比当前高一级.</p>"
+                    "description": "<p>当阿扎瑞斯尝试通过交涉技能进行@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象 Make an Impression}时，他可同时对最多50个生物的意志DC进行检定。若他专注于对单一目标进行建立印象，则将成功视为大成功。最后，当他提出请求时，只要目标对其态度并非敌对，他可将目标的态度视为比当前高一级.</p>"
                 },
                 "Quickened Casting": {
                     "name": "快速施法 Quickened Casting",
@@ -388,7 +393,7 @@
             "items": {
                 "Camouflage": {
                     "name": "伪装 Camouflage",
-                    "description": "<p>扎格拉高尔可以在扭曲棘林的外部环境中@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide} ，即使他没有掩蔽.</p>"
+                    "description": "<p>扎格拉高尔可以在扭曲棘林的外部环境中[[/act hide]] ，即使他没有掩蔽.</p>"
                 },
                 "Old Wound": {
                     "name": "旧伤 Old Wound",
@@ -544,7 +549,7 @@
                 },
                 "Wild Swing": {
                     "name": "狂挥乱砍 Wild Swing",
-                    "description": "<p><span class=\"action-glyph\">1</span> 至 <span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮1次</p>\n<hr />\n<p><strong>效果</strong> 怨毒祭司团的成员鲁莽地挥动武器——通常是巨斧，对部队相邻的敌人进行胡乱攻击（@Check[reflex|dc:27|basic] 豁免）。该伤害取决于花费的动作：</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d12+2)[slashing]] 伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d12+9)[slashing]] 伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d12+9)[slashing]] 伤害</p>"
+                    "description": "<p><span class=\"action-glyph\">1</span> 至 <span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 怨毒祭司团的成员鲁莽地挥动武器——通常是巨斧，对部队相邻的敌人进行胡乱攻击（@Check[reflex|dc:27|basic] 豁免）。该伤害取决于花费的动作：</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d12+2)[slashing]] 伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d12+9)[slashing]] 伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d12+9)[slashing]] 伤害</p>"
                 }
             }
         },
@@ -578,7 +583,7 @@
                 },
                 "Maddening Cacophony": {
                     "name": "致狂尖嚎 Maddening Cacophony",
-                    "description": "<p>60尺。修格斯不断发出凡人不应听到的音节与呢喃。进入灵光范围或在灵光范围内开始回合的生物都需要成功通过一个@Check[will|dc:38]检定，否则将陷入困惑1轮（大失败时为[[/br 2d4 #rounds]]{2d4轮}）。成功豁免的生物将暂时免疫此效果24小时。</p>"
+                    "description": "<p>60尺。修格斯不断发出凡人不应听到的音节与呢喃。进入灵光范围或在灵光范围内开始回合的生物都需要成功通过一个@Check[will|dc:38]检定，否则将陷入困惑1轮（大失败时为[[/br 2d4 #rounds]]{2d4轮}）。成功豁免的生物将临时免疫此效果24小时。</p>"
                 },
                 "Constrict": {
                     "name": "紧勒 Constrict",
@@ -586,7 +591,7 @@
                 },
                 "Engulf": {
                     "name": "包卷 Engulf",
-                    "description": "<p>@Check[reflex|dc:40|traits:damaging-effect]，@Damage[6d6[acid]]伤害，[[/act escape dc=40]]，破裂40</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "description": "<p>@Check[reflex|dc:40|options:damaging-effect,inflicts:grabbed,inflicts:slowed]，@Damage[6d6[acid]]伤害，[[/act escape dc=40]]，破裂40</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "Toxic Sporecloud": {
                     "name": "毒性孢子云 Toxic Sporecloud",
@@ -714,11 +719,11 @@
                 },
                 "Devastating Blast": {
                     "name": "毁灭爆震 Devastating Blast",
-                    "description": "<p>死墓骑士释放出 @Template[cone|distance:30] 的能量。区域内的生物承受 @Damage[12d6[cold]|options:area-damage] 伤害，进行 @Check[reflex|dc:30|basic|options:area-effect] 豁免。死墓骑士每 [[/gmr 1d4 #Recharge Devastating Blast]] 轮只能使用该能力 1 次。</p>"
+                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]的能量。区域内的生物承受@Damage[12d6[cold]|options:area-damage]伤害，进行@Check[reflex|dc:30|basic|options:area-effect]豁免。死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]轮只能使用该能力1次。</p>"
                 },
                 "Graveknight's Curse": {
                     "name": "死墓骑士诅咒 Graveknight's Curse",
-                    "description": "<p>诅咒会影响任何穿戴死墓骑士护甲超过 1 小时以上的生物。</p>\n<p><strong>豁免检定</strong> @Check[will|dc:34] 豁免</p>\n<p><strong>潜伏期</strong> 1 小时</p>\n<p><strong>阶段 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 且无法脱下护甲（1 天）</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 2}、速度承受 –10 尺状态减值、且无法脱下护甲（1 天）</p>\n<p><strong>阶段 3</strong> 死亡并转化为护甲的死墓骑士。</p>"
+                    "description": "<p>诅咒会影响任何穿戴死墓骑士护甲超过 1 小时以上的生物。</p>\n<p><strong>豁免检定</strong> @Check[will|dc:34] 豁免</p>\n<p><strong>潜伏期</strong> 1小时</p>\n<p><strong>阶段 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 且无法脱下护甲（1 天）</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 2}、速度承受 –10 尺状态减值、且无法脱下护甲（1 天）</p>\n<p><strong>阶段 3</strong> 死亡并转化为护甲的死墓骑士。</p>"
                 }
             },
             "data": {
@@ -797,7 +802,7 @@
                 },
                 "Aura of Spores": {
                     "name": "孢子灵光 Aura of Spores",
-                    "description": "<p>30尺。在孢子暴龙的孢子灵光范围内开始回合的生物，时刻面临着吸入其不断散发的有毒孢子的风险。不具备真菌或植物特征的生物，在踏入该灵光区域时，或在其灵光范围内开始回合时，会受到@Damage[4d6[poison]]伤害（@Check[fortitude|dc:30|basic]豁免）。若失败，这些生物还会因孢子而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
+                    "description": "<p>30尺。在孢子暴龙的孢子灵光范围内开始回合的生物，时刻面临着吸入其不断散发的有毒孢子的风险。不具备真菌或植物特征的生物，在踏入该灵光区域时，或在其灵光范围内开始回合时，会受到@Damage[4d6[poison]|options:area-damage]伤害（@Check[fortitude|dc:30|basic|options:area-effect,inflicts:sickened]豁免）。若失败，这些生物还会因孢子而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
                 },
                 "Fungal Empowerment": {
                     "name": "真菌赋能 Fungal Empowerment",
@@ -813,7 +818,7 @@
                 },
                 "Spore Breath": {
                     "name": "孢子吐息 Spore Breath",
-                    "description": "<p>孢子暴龙从其巨口中喷出一道@Template[type:cone|distance:60]区域的剧毒孢子。处于该区域内的生物将受到@Damage[14d6[poison]|options:area-damage]伤害（@Check[fortitude|dc:33|basic|options:area-effect]豁免）。未能通过豁免检定的生物，会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若豁免检定大失败，则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。孢子暴龙在接下来的[[/gmr 1d4 #Recharge the spore breath weapon]]{1d4 轮}内，将无法再次使用孢子吐息武器。</p>"
+                    "description": "<p>孢子暴龙从其巨口中喷出一道@Template[type:cone|distance:60]区域的剧毒孢子。处于该区域内的生物将受到@Damage[14d6[poison]|options:area-damage]伤害（@Check[fortitude|dc:33|basic|options:area-effect]豁免）。未能通过豁免检定的生物，会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（若豁免检定大失败，则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。孢子暴龙在接下来的[[/gmr 1d4 #Recharge the spore breath weapon]]{1d4轮}内，将无法再次使用孢子吐息武器。</p>"
                 },
                 "Trample": {
                     "name": "践踏 Trample",
@@ -834,7 +839,7 @@
                     "description": "<p>紊传畸体可以选择其50尺范围内能够看见的至多两名失衡生物并调换他们的位置，亦或者它可以选择单独一名失衡生物，将其移动到上述范围内的任意一处未占据空间。如果紊传畸体选择指定两名生物，那么它可以选择自己作为其中的一方，此外，这两名生物必须体型相同。</p>\n<p>一名非自愿的生物可以尝试一次@Check[will|dc:33]豁免。如果目标中的任意一个豁免成功，那么两者皆不受影响。</p>\n<p>如果紊传畸体在对PC使用易位时被藤蔓缠绕，紊传畸体失去它的飞行速度而PC必须进行@Check[reflex|dc:33]豁免</p><hr /><p><strong>大成功</strong> PC未被藤蔓抓住。他们要么坠落，或抓住藤蔓在其间攀爬。\n</p><p><strong>成功</strong> 同大成功，但PC需额外通过一次@Check[reflex|dc:33]豁免以@UUID[Compendium.pf2e.actionspf2e.Item.3yoajuKjwHZ9ApUY]来附着在藤蔓上。</p>\n<p><strong>失败</strong> PC被藤蔓@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，无法移动，直至[[/act escape dc=33]]。</p>\n<p><strong>大失败</strong> 同失败，但PC被@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]。</p>"
                 },
                 "Regeneration 10 (Deactivated by Piercing)": {
-                    "name": "再生10 （穿刺失效）Regeneration 10 (Deactivated by Piercing)",
+                    "name": "再生10（穿刺失效）Regeneration 10 (Deactivated by Piercing)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Destabilizing Field": {
@@ -858,7 +863,7 @@
             },
             "name": "真菌紊传畸体 Fungal Amalgamite",
             "publicNotes": "<p>即便是对于那些经验丰富的施法者而言，传送魔法也是一项高难度的挑战。它要求施术者拥有着精确的计算能力和时机把握能力，还需要对目的地有着充分的了解，并能在过程中对汹涌的咒法系魔力进行细致的掌控。在施放此类魔法时，哪怕是最微小的错误，也会给参与者带来灾难性的后果。无论是出于傲慢还是单纯的误判，当一名特别强大的施法者犯下这种错误时，他们便有可能转变成一只紊传畸体。</p>\n<p>紊传畸体那大堆肉块与错位肢体拼接而成的身躯，便是一名前施法者如今的外在模样，有时它们还会与其它版本的自己结合在一起，拼接上额外的肢块或是其它错乱之物。尽管它们依旧“活着”，但无论是它们的肉体还是精神都已经彻底地扭曲，过往的一切都化为了模糊不清的记忆，让它们成为了危险而诡异的敌人。它们那畸形、扭曲的肉体构造会不断地变化、再生，除非穿透它们的血肉、捣毁它们的核心，否则它们总是能够在物理的打击中保全自身。</p>\n<p>紊传畸体在“创造”过程中所残余的魔力从它们体内辐射而出，透入那些过于接近的生物并破坏他们机体的稳定性。而那些受影响的生物还会进一步地将紊传畸体的灵光扩散给更多的盟友与敌人。紊传畸体便会利用这种力量来操纵和迷惑对手，将他们传送进陷阱当中、迫使他们与其它敌人对峙、亦或者利用它们自己那怪异的附肢将敌人拉入到打击范围之内。</p>",
-            "hp": "再生10 （穿刺失效）",
+            "hp": "再生10（穿刺失效）",
             "blurb": "变种紊传畸体"
         },
         "Rift Pulper": {
@@ -904,7 +909,7 @@
                     "name": "沼泽穿行 Swamp Stride"
                 },
                 "Regeneration 10 (Deactivated by Cold)": {
-                    "name": "再生10（寒冷使其无效） Regeneration 10 (Deactivated by Cold)",
+                    "name": "再生10（寒冷使其无效）Regeneration 10 (Deactivated by Cold)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Host Scent": {
@@ -983,7 +988,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Regeneration 40 (Deactivated by Holy)": {
-                    "name": "再生40（可被圣洁效果解除） Regeneration 40 (Deactivated by Holy)",
+                    "name": "再生40（可被圣洁效果解除）Regeneration 40 (Deactivated by Holy)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Reactive Strike": {
@@ -1033,7 +1038,7 @@
             "items": {
                 "Infesting Exhalation": {
                     "name": "寄生吐息 Infesting Exhalation",
-                    "description": "<p>仇怒魔吐出一波@Template[type:cone|distance:30]范围的剧毒魔化黄蜂，对范围内所有生物造成 @Damage[4d8[poison]|options:area-damage] 伤害（@Check[reflex|dc:28|basic|options:area-effect] 豁免）。魔化黄蜂群会在该区域徘徊 6 轮，或直至仇怒魔能够再次使用寄生吐息（以先实现者为准）。任何被寄生吐息伤害，或进入该区域的生物，必须通过 @Check[fortitude|dc:28] 豁免，否则将承受 @Damage[2d8[persistent,poison]] 伤害，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} 因为毒素导致眩晕与恶心。受影响生物在每轮结束时，可尝试新的强韧豁免以结束此效果。仇怒魔在 @[[/gmr 1d6 #Recharge Infesting Exhalation]]{1d6} 轮内无法再次使用寄生吐息。</p>"
+                    "description": "<p>仇怒魔吐出一波@Template[type:cone|distance:30]范围的剧毒魔化黄蜂，对范围内所有生物造成 @Damage[4d8[poison]|options:area-damage] 伤害（@Check[reflex|dc:28|basic|options:area-effect] 豁免）。魔化黄蜂群会在该区域徘徊6轮，或直至仇怒魔能够再次使用寄生吐息（以先实现者为准）。任何被寄生吐息伤害，或进入该区域的生物，必须通过 @Check[fortitude|dc:28] 豁免，否则将承受 @Damage[2d8[persistent,poison]] 伤害，并陷入 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} 因为毒素导致眩晕与恶心。受影响生物在每轮结束时，可尝试新的强韧豁免以结束此效果。仇怒魔在 @[[/gmr 1d6 #Recharge Infesting Exhalation]]{1d6}轮内无法再次使用寄生吐息。</p>"
                 },
                 "Change Shape": {
                     "name": "变形 Change Shape",
@@ -1065,13 +1070,13 @@
             "name": "灵魂荚 Soul Pod",
             "disable": "<p>进行三次@Check[religion|dc:40]，从荚中驱散阿拉瓦什尼亚的灵魂；或进行两次@Check[nature|dc:43]，方可拔除将孢子囊与尖塔其余部分相连的隐秘菌丝。</p>",
             "hazarddescription": "<p>一个椭圆形的、形似球孢的真菌，其外形阴森可怖，宛如一具肿胀的棺材，其中隐约可见阿拉瓦什尼亚扭曲的面容，正无声地尖叫着。</p>",
-            "routine": "<p>（2动作） 灵魂荚用第一个动作释放灵魂撕裂之嚎。之后的第二个动作向 @Template[type:cone|distance:40] 范围内呼出一股孢子弥漫的疾风。范围内的生物必须通过 @Check[fortitude|dc:36] 豁免。此疾风具有气与毒素特征。</p><hr><p><strong>大成功</strong> 生物不受影响。</p><p><strong>成功</strong> 生物受到 @Damage[4d6[poison]] 伤害。</p><p><strong>失败</strong> 生物受到 @Damage[8d6[poison]] 伤害，并被风吹@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p><p><strong>大失败</strong> 生物受到 @Damage[16d6[poison]] 伤害，被吹倒地，并被直接吹离灵魂荚10尺，可能被吹下平台或楼梯边缘。</p>",
+            "routine": "<p>（2动作）灵魂荚用第一个动作释放灵魂撕裂之嚎。之后的第二个动作向 @Template[type:cone|distance:40] 范围内呼出一股孢子弥漫的疾风。范围内的生物必须通过 @Check[fortitude|dc:36] 豁免。此疾风具有气与毒素特征。</p><hr><p><strong>大成功</strong> 生物不受影响。</p><p><strong>成功</strong> 生物受到 @Damage[4d6[poison]] 伤害。</p><p><strong>失败</strong> 生物受到 @Damage[8d6[poison]] 伤害，并被风吹@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。</p><p><strong>大失败</strong> 生物受到 @Damage[16d6[poison]] 伤害，被吹倒地，并被直接吹离灵魂荚10尺，可能被吹下平台或楼梯边缘。</p>",
             "reset": "<p>当尖塔内无PC时，灵魂荚停止活动，随后自动重置。</p>",
             "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Soulrending Shriek": {
                     "name": "灵魂撕裂之嚎 Soulrending Shriek",
-                    "description": "<p><strong>触发</strong> 尖塔内所有恶魔被消灭后的下一轮开始时；</p><hr /><p><strong>效果</strong> 阿拉瓦什尼亚扭曲的面容释放出令人崩溃的痛苦嚎叫，威胁将所有入侵者的思维彻底扭曲。灵魂荚周围20尺内的所有生物必须通过 @Check[will|dc:36] 豁免，否则将陷入 @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ] 1轮（大失败时持续 1 分钟）。困惑生物可在每回合结束时尝试新的豁免检定以提前结束困惑。灵魂荚骰先攻。</p>"
+                    "description": "<p><strong>触发</strong> 尖塔内所有恶魔被消灭后的下一轮开始时；</p><hr /><p><strong>效果</strong> 阿拉瓦什尼亚扭曲的面容释放出令人崩溃的痛苦嚎叫，威胁将所有入侵者的思维彻底扭曲。灵魂荚周围20尺内的所有生物必须通过 @Check[will|dc:36] 豁免，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮（大失败时持续1分钟）。困惑生物可在每回合结束时尝试新的豁免检定以提前结束困惑。灵魂荚骰先攻。</p>"
                 }
             }
         },
@@ -1092,7 +1097,7 @@
                 },
                 "Tentacle Eruption": {
                     "name": "触须爆发 Tentacle Eruption",
-                    "description": "<p>文塔拉克斯将触须插入地面，导致区域<strong>B9</strong>内的真菌触须四处爆发。这会对该区域内的每个生物造成@Damage[2d8[bludgeoning],3d6[acid]]{2d8点钝击伤害加3d6点酸蚀伤害} （@Check[reflex|dc:34|basic]豁免）。对抗触须爆发检定失败者会被触须抓住，速度降低10尺，直到文塔拉克斯的下一回合开始（或大失败时被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}）。</p>"
+                    "description": "<p>文塔拉克斯将触须插入地面，导致区域<strong>B9</strong>内的真菌触须四处爆发。这会对该区域内的每个生物造成@Damage[2d8[bludgeoning],3d6[acid]]{2d8点钝击伤害加3d6点酸蚀伤害}（@Check[reflex|dc:34|basic]豁免）。对抗触须爆发检定失败者会被触须抓住，速度降低10尺，直到文塔拉克斯的下一回合开始（或大失败时被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足 Immobilized}）。</p>"
                 },
                 "Otherworldly Will": {
                     "name": "异界意志 Otherworldly Will",
@@ -1128,7 +1133,7 @@
                 },
                 "Veil of Lies": {
                     "name": "谎言帷幕 Veil of Lies",
-                    "description": "<p>15尺，背叛魔在其灵光中发出腐烂野花的微弱气味—一种能麻痹心智的恶臭。处于灵光内的生物在回合结束时必须尝试 @Check[will|dc:30] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响，且在1分钟内对谎言帷幕暂时免疫。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物位于灵光内时陷入 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，离开光环后持续 10 分钟。</p>\n<p><strong>大失败</strong> 同失败，但陷入 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
+                    "description": "<p>15尺，背叛魔在其灵光中发出腐烂野花的微弱气味—一种能麻痹心智的恶臭。处于灵光内的生物在回合结束时必须尝试 @Check[will|dc:30] 豁免。</p><hr /><p><strong>大成功</strong> 该生物不受影响，且在1分钟内对谎言帷幕临时免疫。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物位于灵光内时陷入 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，离开光环后持续10分钟。</p>\n<p><strong>大失败</strong> 同失败，但陷入 @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
                 },
                 "All-Around Vision": {
                     "name": "全域视野 All-Around Vision",
@@ -1168,7 +1173,7 @@
                 },
                 "Rejuvenation": {
                     "name": "复苏 Rejuvenation",
-                    "description": "<p>若荒疫在其诅咒领域内被击杀，其身体会融入周围环境，除非在此之前解除诅咒，否则同类型的新荒疫将在[[/gmr 1d10 #Days]]天后于诅咒领域的中心点自发形成。新荒疫将保留之前荒疫的所有记忆。</p>"
+                    "description": "<p>若荒疫在其诅咒领域内被击杀，其身体会融入周围环境，除非在此之前解除诅咒，否则同类型的新荒疫将在[[/gmr 1d10 #days]]{1d10天}后于诅咒领域的中心点自发形成。新荒疫将保留之前荒疫的所有记忆。</p>"
                 },
                 "Splatter Viscera": {
                     "name": "内脏飞溅 Splatter Viscera",
@@ -1180,11 +1185,11 @@
                 },
                 "Call of the Mire": {
                     "name": "沼泽呼唤 Call of the Mire",
-                    "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 沼泽荒疫周围环绕着一圈闪烁的灵光，迫使 60尺内其能看见的目标向其移动。这不是强制移动，但会迫使生物穿越危险地形。目标必须尝试进行@Check[will|dc:38]豁免。</p><hr /><p><strong>大成功</strong> 生物在1小时内对沼泽呼唤暂时免疫。</p>\n<p><strong>成功</strong> 目标立即行走或使用最快的速度向沼泽荒疫靠近。此移动不消耗目标的动作。在目标的下一回合，他们不能自愿远离荒疫，但可以正常行动。</p>\n<p><strong>失败</strong> 与成功相同，但目标在其下一回合如果尚未与荒疫相邻，则会花费所有动作靠近荒疫，并且在1轮内不能采取任何其他行动。此外，目标在1分钟内不能自愿远离荒疫。</p>\n<p><strong>大失败</strong> 与失败相同，但生物在1分钟内只能采取靠近荒疫的行动。</p>"
+                    "description": "<p><strong>频率</strong> 每轮一次</p><hr /><p><strong>效果</strong> 沼泽荒疫周围环绕着一圈闪烁的灵光，迫使 60尺内其能看见的目标向其移动。这不是强制移动，但会迫使生物穿越危险地形。目标必须尝试进行@Check[will|dc:38]豁免。</p><hr /><p><strong>大成功</strong> 生物在1小时内对沼泽呼唤临时免疫。</p>\n<p><strong>成功</strong> 目标立即行走或使用最快的速度向沼泽荒疫靠近。此移动不消耗目标的动作。在目标的下一回合，他们不能自愿远离荒疫，但可以正常行动。</p>\n<p><strong>失败</strong> 与成功相同，但目标在其下一回合如果尚未与荒疫相邻，则会花费所有动作靠近荒疫，并且在1轮内不能采取任何其他行动。此外，目标在1分钟内不能自愿远离荒疫。</p>\n<p><strong>大失败</strong> 与失败相同，但生物在1分钟内只能采取靠近荒疫的行动。</p>"
                 },
                 "Cursed Domain": {
                     "name": "诅咒领域 Cursed Domain",
-                    "description": "<p>在沼泽荒疫的诅咒领域内死亡的类人生物会被虚能灌注。24 小时后，它们会以低于或等于其生前等级的不死生物形态复活。身体完好的生物通常会变成僵尸或木乃伊，而身体严重受损的生物通常会变成幽影或浮陀（《亡者之书》76页）。这些不死生物不会自动受到沼泽荒疫的直接控制，但它们有可能被沼泽荒疫支配。</p><hr /><p>每年一次，当处于与其类型相契合的地形（例如沼泽荒疫处于沼泽中）时，荒疫可通过进行一场耗时一天的仪式，将其腐化精髓注入周围土地。半径5英里内的区域将成为其诅咒领域；此效果不会延伸至不相容的地形，也不会随荒疫移动。荒疫诅咒该领域的地点将成为其中心点。</p>\n<p>在其诅咒领域内，荒疫可无视所有非魔法困难地形，并始终能获得@UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]行动带来的好处。荒疫还能模糊感知领域内所有生物的位置，并可通过心灵感应与所有察觉到在其领域内的智慧生物交流。每种荒疫的诅咒领域还具备与其类型相关的额外特征。荒疫若处于诅咒领域之外，会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{ 缓慢 Slowed 1}，直至返回自身或其他荒疫的诅咒领域。</p>\n<p>解除此诅咒需要拥有破除诅咒专长（或类似能力）的角色；该行动必须在诅咒领域的中心点进行。若施加诅咒的荒疫已死亡，反制诅咒领域的检定将获得+4的环境加值。</p>"
+                    "description": "<p>在沼泽荒疫的诅咒领域内死亡的类人生物会被虚能灌注。24 小时后，它们会以低于或等于其生前等级的不死生物形态复活。身体完好的生物通常会变成丧尸或木乃伊，而身体严重受损的生物通常会变成幽影或浮陀（《亡者之书》76页）。这些不死生物不会自动受到沼泽荒疫的直接控制，但它们有可能被沼泽荒疫支配。</p><hr /><p>每年一次，当处于与其类型相契合的地形（例如沼泽荒疫处于沼泽中）时，荒疫可通过进行一场耗时一天的仪式，将其腐化精髓注入周围土地。半径5英里内的区域将成为其诅咒领域；此效果不会延伸至不相容的地形，也不会随荒疫移动。荒疫诅咒该领域的地点将成为其中心点。</p>\n<p>在其诅咒领域内，荒疫可无视所有非魔法困难地形，并始终能获得@UUID[Compendium.pf2e.actionspf2e.Item.SB7cMECVtE06kByk]行动带来的好处。荒疫还能模糊感知领域内所有生物的位置，并可通过心灵感应与所有察觉到在其领域内的智慧生物交流。每种荒疫的诅咒领域还具备与其类型相关的额外特征。荒疫若处于诅咒领域之外，会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{ 缓慢 Slowed 1}，直至返回自身或其他荒疫的诅咒领域。</p>\n<p>解除此诅咒需要拥有破除诅咒专长（或类似能力）的角色；该行动必须在诅咒领域的中心点进行。若施加诅咒的荒疫已死亡，反制诅咒领域的检定将获得+4的环境加值。</p>"
                 },
                 "Oversee Domain": {
                     "name": "监视领域 Oversee Domain",
@@ -1209,7 +1214,7 @@
                 },
                 "Exorcism Vulnerability": {
                     "name": "驱魔易伤 Exorcism Vulnerability",
-                    "description": "<p>若遁影魔试图附身一个生物，而该生物在抵抗@UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]的豁免中掷出大成功，或者遁影魔对某生物的附身因成功施放<em>@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]</em>等手段而提前结束，遁影魔将受到@Damage[6d6[mental]]伤害，并且在 24 小时内无法施放<em>占据术</em>能力。</p>"
+                    "description": "<p>若遁影魔试图附身一个生物，而该生物在抵抗@UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]的豁免中掷出大成功，或者遁影魔对某生物的附身因成功施放<em>@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]</em>等手段而提前结束，遁影魔将受到@Damage[6d6[mental]]伤害，并且在24小时内无法施放<em>占据术</em>能力。</p>"
                 },
                 "Share Pain": {
                     "name": "共享痛苦 Share Pain",
@@ -1315,7 +1320,7 @@
             "disable": "<p>七次@Check[nature|dc:41] 检定以搜寻并移除七个控制能量输入与分散的特定真菌节点；三次@Check[religion|dc:47] 检定以驱散困于引擎内的灵魂并强制关闭引擎。</p>",
             "hazarddescription": "<p>腔室墙壁被一层厚厚的充斥着幽灵般的形体的脉动真菌与霉菌覆盖。</p>",
             "routine": "<p>（1动作）引擎在自身回合释放毒性孢子云，使房间内所有非真菌、非恶魔生物承受@Damage[10d6[poison]]伤害（@Check[fortitude|dc:41|basic]豁免）</p><hr><p><strong>灰裹病</strong></p><p><strong>豁免检定</strong> @Check[fortitude|dc:40]</p><p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1日）</p><p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}且疲乏（1日）</p><p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}且疲乏（1日）</p><p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 3}、疲乏且无法说话（1日）</p><p><strong>阶段5</strong> 死亡</p>",
-            "reset": "<p>引擎在1分钟后停止运作并重置，但被召唤的恶魔将留守区域 1 小时，以防止入侵者返回。</p>",
+            "reset": "<p>引擎在1分钟后停止运作并重置，但被召唤的恶魔将留守区域1小时，以防止入侵者返回。</p>",
             "stealthdetails": "<p>（传奇）以发现真菌存在潜在危险性，中央两株蘑菇为承重结构，且通过破坏这两株蘑菇可解除该危害；而直接察觉引擎本体DC为0。</p>"
         },
         "The Putrid": {
@@ -1391,7 +1396,7 @@
                 },
                 "Ghoul Whispers": {
                     "name": "食尸鬼低语 Ghoul Whispers",
-                    "description": "<p><strong>需求</strong> 一个@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物正处于食尸鬼的触及内</p><hr /><p><strong>效果</strong> 食尸鬼在生物耳畔低语着黑暗的念头与卑劣的渴望。该生物必须进行豁免来对抗禁忌渴望诅咒。</p>\n<p><strong>禁忌渴望 Forbidden Cravings</strong> （诅咒）被此诅咒影响时，生物仍然可以吃喝</p>\n<p><strong>豁免骰</strong> @Check[will|dc:17|traits:curse]</p>\n<p><strong>阶段1</strong> 携带诅咒但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}直至他吃下生肉（1天）</p>\n<p><strong>阶段3</strong> 同阶段2</p>\n<p><strong>阶段4</strong> 同阶段2，除非该生物在过去24小时内吃过生肉，那样他会转而受到@Damage[4d6[void]]伤害且获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}直至他吃下生肉</p>\n<p><strong>阶段5</strong> 如果该生物在过去24小时内吃过生肉，他死亡并复活为食尸鬼，否则诅咒退回阶段4</p>"
+                    "description": "<p><strong>需求</strong> 一个@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物正处于食尸鬼的触及内</p><hr /><p><strong>效果</strong> 食尸鬼在生物耳畔低语着黑暗的念头与卑劣的渴望。该生物必须进行豁免来对抗禁忌渴望诅咒。</p>\n<p><strong>禁忌渴望 Forbidden Cravings</strong>（诅咒）被此诅咒影响时，生物仍然可以吃喝</p>\n<p><strong>豁免骰</strong> @Check[will|dc:17|traits:curse]</p>\n<p><strong>阶段1</strong> 携带诅咒但没有不良效果（1天）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}直至他吃下生肉（1天）</p>\n<p><strong>阶段3</strong> 同阶段2</p>\n<p><strong>阶段4</strong> 同阶段2，除非该生物在过去24小时内吃过生肉，那样他会转而受到@Damage[4d6[void]]伤害且获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}直至他吃下生肉</p>\n<p><strong>阶段5</strong> 如果该生物在过去24小时内吃过生肉，他死亡并复活为食尸鬼，否则诅咒退回阶段4</p>"
                 },
                 "Grave Knowledge": {
                     "name": "坟墓知识 Grave Knowledge",
@@ -1447,7 +1452,7 @@
                 "name": "长矛之颌陷阱"
             },
             "name": "长矛之颌陷阱 Spear Jaw Trap",
-            "disable": "<p>从相邻空间对长矛所在的地板进行@Check[thievery|dc:30] 检定（专家），或通过 @Check[nature|dc:32] （大师）检定来缓慢刮除感应运动的触须而不触发陷阱。</p>",
+            "disable": "<p>从相邻空间对长矛所在的地板进行@Check[thievery|dc:30] 检定（专家），或通过 @Check[nature|dc:32]（大师）检定来缓慢刮除感应运动的触须而不触发陷阱。</p>",
             "hazarddescription": "<p>感应运动的真菌触须会使长矛从地面和天花板上射出，几乎就像牙齿一样。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "items": {
@@ -1467,7 +1472,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "disable": "<p>进行三次@Check[thievery|dc:45] （大师） 检定，以破坏沿墙刻画的@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden}聚焦符文；或@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（10环级，反制DC 38）以反制虚能栏杆。</p>",
+            "disable": "<p>进行三次@Check[thievery|dc:45]（大师）检定，以破坏沿墙隐蔽刻画的聚焦符文；或@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（10环级，反制DC38）以反制虚能栏杆。</p>",
             "name": "虚能栏杆 Void Bars",
             "routine": "<p>（1动作）每组虚空栏杆都会显现一条由黑暗构成的长臂，伸向并试图打击囚室内的生物，优先攻击之前曾损坏栏杆或试图解除其的生物，否则会随机选择可攻击的目标。此虚能爪可延伸攻击囚室内或外厅囚室门20尺范围内的任何生物，但外厅生物在此攻击中可获得掩蔽加成。</p>",
             "items": {
@@ -1497,7 +1502,7 @@
                 },
                 "Loathsome Bite": {
                     "name": "厌恶啃咬 Loathsome Bite",
-                    "description": "<p>当卢卡拉齐尔以颚咬打击命中生物时，目标将感染恶魔的自我厌恶。目标需通过@Check[will|dc:34]豁免，否则在基于魅力的检定中受到-1状态减值。此减值可叠加至-3，即使伤口愈合仍会持续。每24小时减少1点减值，直至归零。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LgZx5xotO08JzhVc]{效果: 毁灭之咬 Mutilating Bite}</p>"
+                    "description": "<p>当卢卡拉齐尔以颚咬打击命中生物时，目标将感染恶魔的自我厌恶。目标需通过@Check[will|dc:34]豁免，否则在基于魅力的检定中受到-1状态减值。此减值可叠加至-3，即使伤口愈合仍会持续。每24小时减少1减值，直至归零。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LgZx5xotO08JzhVc]{效果: 毁灭之咬 Mutilating Bite}</p>"
                 },
                 "Wreck": {
                     "name": "破坏 Wreck",
@@ -1544,7 +1549,7 @@
                 },
                 "Earth Glide": {
                     "name": "潜地 Earth Glide",
-                    "description": "<p>秽岩恶鬼可以@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]{掘进 Burrow}通过任何土质的东西，包括岩石。当它这样做的时候，它以其完整的掘进速度移动，不留下任何隧道或经过的痕迹。</p>"
+                    "description": "<p>秽岩恶鬼可以@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]{掘地 Burrow}通过任何土质的东西，包括岩石。当它这样做的时候，它以其完整的掘地速度移动，不留下任何隧道或经过的痕迹。</p>"
                 },
                 "Steady Spellcasting": {
                     "name": "稳定施法 Steady Spellcasting",
@@ -1567,11 +1572,11 @@
                 "placeHolder": "placeHolder"
             },
             "name": "孢子胃囊 Spore Stomach",
-            "disable": "<p> @Check[nature|dc:37]（大师）三次以小心剪除连接下方花园的真菌根系；或者@Check[religion|dc:37]（大师）三次以驱除真菌中的恶魔能量。</p>",
+            "disable": "<p>@Check[nature|dc:37]（大师）三次以小心剪除连接下方花园的真菌根系；或者@Check[religion|dc:37]（大师）三次以驱除真菌中的恶魔能量。</p>",
             "hazarddescription": "<p>一种类似球孢的真菌，会周期性地向空气中喷出灰色孢子。</p>",
             "reset": "<p>若孢子胃囊在回合开始时，区域<strong>E1</strong>内无非真菌生物，则停止活动。随后，孢子胃囊将立即重置。</p>",
-            "routine": "<p>（1动作，神术，毒素）第一轮，孢子胃囊向区域<strong>E1</strong>的左半侧喷出一个40尺长的锥形孢子区域。第二轮，孢子胃囊向区域<strong> E1 </strong>的右半侧喷吐孢子。第三轮：孢子胃囊不采取任何动作。此后每 3 轮：重复上述模式。处于孢子区域内的生物将受到@Damage[10d6[poison]]伤害（@Check[fortitude|dc:37|basic|traits:divine,poison] 豁免）。</p>",
-            "stealthdetails": "<p>（大师） 以发现孢子胃囊的有害性；注意到孢子胃囊的DC为0</p>",
+            "routine": "<p>（1动作；神术，毒素）第一轮，孢子胃囊向区域<strong>E1</strong>的左半侧喷出一个40尺长的锥形孢子区域。第二轮，孢子胃囊向区域<strong> E1 </strong>的右半侧喷吐孢子。第三轮：孢子胃囊不采取任何动作。此后每3轮：重复上述模式。处于孢子区域内的生物将受到@Damage[10d6[poison]]伤害（@Check[fortitude|dc:37|basic|traits:divine,poison] 豁免）。</p>",
+            "stealthdetails": "<p>（大师）以发现孢子胃囊的有害性；注意到孢子胃囊的DC为0</p>",
             "items": {
                 "Defensive Spray": {
                     "name": "防御性喷吐 Defensive Spray",
@@ -1590,13 +1595,13 @@
             "items": {
                 "Whistling Decay": {
                     "name": "尖啸腐化 Whistling Decay",
-                    "description": "<p><strong>触发</strong> 真菌帷幕遭受伤害，或解除尝试大失败</p><hr /><p><strong>效果</strong> 真菌帷幕上的荚状突起物骤然收缩，随后发出刺耳的尖啸并喷出食肉孢子云。尖啸会惊动区域<strong>E6</strong>的居民。真菌帷幕30尺范围内所有非真菌、非恶魔生物将暴露于食肉孢子中，承受@Damage[8d6[poison],4d6[persistent,void]]{8d6点毒素伤害与4d6点持续虚能伤害}（@Check[fortitude|dc:42|basic]豁免）。随后真菌帷幕骰先攻。</p>"
+                    "description": "<p><strong>触发</strong> 真菌帷幕遭受伤害，或解除尝试大失败</p><hr /><p><strong>效果</strong> 真菌帷幕上的荚状突起物骤然收缩，随后发出刺耳的尖啸并喷出食肉孢子云。尖啸会惊动区域<strong>E6</strong>的居民。真菌帷幕@Template[emanation|distance:30]范围内所有非真菌、非恶魔生物将暴露于食肉孢子中，承受@Damage[8d6[poison],4d6[persistent,void]|options:area-damage]伤害（@Check[fortitude|dc:42|basic|options:area-effect]豁免）。随后真菌帷幕骰先攻。</p>"
                 },
                 "HP 134 (BT 67) Per Five-Foot Cube": {
                     "name": "每五尺见方生命值134（BT 67）"
                 }
             },
-            "disable": "<p>六次@Check[nature|dc:42]检定（大师）以需识别并剪除真菌帷幕的六个感知球茎（此操作不会移除真菌帷幕，仍需劈砍方可进入后方区域） 两次@Check[religion|dc:48]检定（传奇）以驱散赋予真菌帷幕力量的魔化能量，使其凋零为腐泥</p>",
+            "disable": "<p>六次@Check[nature|dc:42]检定（大师）以需识别并剪除真菌帷幕的六个感知球茎（此操作不会移除真菌帷幕，仍需劈砍方可进入后方区域）两次@Check[religion|dc:48]检定（传奇）以驱散赋予真菌帷幕力量的魔化能量，使其凋零为腐泥</p>",
             "hazarddescription": "<p>一堵由苔藓、地衣、霉菌与纤维状蘑菇交织而成的发光菌墙，凝聚成一座由不断颤动的物质组成紫色高墙。</p>",
             "routine": "<p>（3 动作）真菌帷幕每轮按以下顺序进行动作；其可通过黑暗视觉感知目标，察觉调整值为+38。它的第一个动作是伸出一根棘刺触须，对最近的可触及目标发动近战打击——若无可触及目标，真菌帷幕跳过此动作。第二动作是向区域<strong>E5</strong>进行棘刺孢子齐射，对区域内所有潜在目标发动远程棘刺孢子打击。第三个动作则再次释放尖啸腐化效果。</p>",
             "reset": "<p>若某轮结束时区域 <strong>E5</strong> 内无敌人，真菌帷幕将停止活动，并于下一轮开始时重置。其每小时为每处受损区域恢复 10 点生命值。</p>",
@@ -1646,7 +1651,7 @@
             "items": {
                 "Stench": {
                     "name": "恶臭 Stench",
-                    "description": "<p>60尺。瓦莫拉罗斯散发出一种几乎实质化的恶臭。进入灵光或在其灵光内开始回合的生物必须成功通过@Check[fortitude|dc:41|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}（在大失败时，在恶心期间还会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。在灵光内，受影响的生物在对抗毒素以及从恶心状态中恢复的豁免检定时会受到-2的环境减值。成功通过豁免检定的生物在1分钟内会暂时免疫。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.xhkVNfgFMUhalqib]{效果:瓦莫拉罗斯恶臭 Vamollaroth Stench}</p>"
+                    "description": "<p>60尺。瓦莫拉罗斯散发出一种几乎实质化的恶臭。进入灵光或在其灵光内开始回合的生物必须成功通过@Check[fortitude|dc:41|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}（在大失败时，在恶心期间还会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。在灵光内，受影响的生物在对抗毒素以及从恶心状态中恢复的豁免检定时会受到-2的环境减值。成功通过豁免检定的生物在1分钟内会临时免疫。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.xhkVNfgFMUhalqib]{效果:瓦莫拉罗斯恶臭 Vamollaroth Stench}</p>"
                 },
                 "Song of the Swamp": {
                     "name": "沼泽之歌 Song of the Swamp",
@@ -1668,7 +1673,7 @@
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
                 },
                 "Regeneration 30 (Deactivated by Acid, Cold, or Fire)": {
-                    "name": "再生30 （酸蚀、寒冷或火焰使其失效） Regeneration 30 (Deactivated by Acid, Cold, or Fire)",
+                    "name": "再生30（酸蚀、寒冷或火焰使其失效）Regeneration 30 (Deactivated by Acid, Cold, or Fire)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Purity Vulnerability": {
@@ -1689,7 +1694,7 @@
                 }
             },
             "allSaves": "对魔法的豁免+1状态加值",
-            "hp": "再生30 （酸蚀、寒冷或火焰使其失效）",
+            "hp": "再生30（酸蚀、寒冷或火焰使其失效）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -1746,11 +1751,11 @@
             "items": {
                 "Create Spawn": {
                     "name": "创造子嗣 Create Spawn",
-                    "description": "<p>孢子女王能从敌人身上创造后代，但她不会在战斗中使用这一能力，因为她宁愿看到PC们死去，也不愿给予他们这份真菌的礼物。</p><hr /><p>如果一个生物因为一个真菌暴君的噬智之吻降至0 HP后死亡，真菌暴君可以将自己的一些真菌物质转移给受害者，让他们在一块真菌中\"成熟\"24小时，从而将受害者变成孢子奴仆。24小时后，该生物将重获新生，但会获得真菌特征并成为孢子奴仆。这将阻止生物的灵魂进入来世，其方式与不死生物被带出轮回的方式类似--因此，那些将轮回奉为神圣的人（尤其是法莱斯玛（Pharasma）的信徒）认为孢子奴仆与不死生物一样糟糕，尽管它们是活着的生物。如果这个新孢子奴仆的等级低于它的创造者，那么它就会受到创造者的控制。如果真菌暴君同时控制了太多的孢子奴仆（由GM决定），意志坚强的孢子奴仆可以通过@Check[will|dc:28]检定来解放自己。通常情况下，真菌暴君会避免从那些强大到无法控制的倒下的敌人中制造孢子奴仆，因为他们非常清楚这些受害者可能会对剥夺了他们来世的人怀有复仇的冲动。</p>"
+                    "description": "<p>孢子女王能从敌人身上创造后代，但她不会在战斗中使用这一能力，因为她宁愿看到PC们死去，也不愿给予他们这份真菌的礼物。</p><hr /><p>如果一个生物因为一个真菌暴君的噬智之吻降至0 HP后死亡，真菌暴君可以将自己的一些真菌物质转移给受害者，让他们在一块真菌中\"成熟\"24小时，从而将受害者变成孢子奴仆。24小时后，该生物将重获新生，但会获得真菌特征并成为孢子奴仆。这将阻止生物的灵魂进入来世，其方式与不死生物被带出轮回的方式类似--因此，那些将轮回奉为神圣的人（尤其是法莱斯玛的信徒）认为孢子奴仆与不死生物一样糟糕，尽管它们是活着的生物。如果这个新孢子奴仆的等级低于它的创造者，那么它就会受到创造者的控制。如果真菌暴君同时控制了太多的孢子奴仆（由GM决定），意志坚强的孢子奴仆可以通过@Check[will|dc:28]检定来解放自己。通常情况下，真菌暴君会避免从那些强大到无法控制的倒下的敌人中制造孢子奴仆，因为他们非常清楚这些受害者可能会对剥夺了他们来世的人怀有复仇的冲动。</p>"
                 },
                 "Grow Sporepod": {
                     "name": "培育孢子囊 Grow Sporepod",
-                    "description": "<p>孢子女王能在她60尺内视线所及的任何一点让一个人类大小的真菌物质荚从地面爆出。一旦被创造，孢子囊持续1分钟，直到她移动超过120尺远离它，或直到它被摧毁（AC 45，硬度20，60HP）。她在[[/gmr 1d4 #Recharge Grow Sporepod]]{1d4 轮}内不能再次培育孢子囊，但除了这一点和孢子囊1分钟的生命周期外，同一时间她能拥有的孢子囊数量没有硬性限制。</p>"
+                    "description": "<p>孢子女王能在她60尺内视线所及的任何一点让一个人类大小的真菌物质荚从地面爆出。一旦被创造，孢子囊持续1分钟，直到她移动超过120尺远离它，或直到它被摧毁（AC 45，硬度20，60HP）。她在[[/gmr 1d4 #Recharge Grow Sporepod]]{1d4轮}内不能再次培育孢子囊，但除了这一点和孢子囊1分钟的生命周期外，同一时间她能拥有的孢子囊数量没有硬性限制。</p>"
                 },
                 "Mind-Draining Kiss": {
                     "name": "噬智之吻 Mind-Draining Kiss",
@@ -1805,8 +1810,8 @@
                     "name": "渴求生机 Meant to Live"
                 },
                 "Reactive Strike (Special)": {
-                    "name": "反应打击（特殊） Reactive Strike (Special)",
-                    "description": "<p>误生的滑喉每轮除首次反应外额外获得12次反应，仅可用于发动反应打击。它不能对同一个触发动作使用超过1次反应，即使一个生物在同一触发动作中离开了多个格子。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
+                    "name": "反应打击（特殊）Reactive Strike (Special)",
+                    "description": "<p>误生的滑喉每轮除首次反应外额外获得12次反应，仅可用于发动反应打击。它不能对同一个触发动作使用超过一次反应，即使一个生物在同一触发动作中离开了多个格子。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
                 },
                 "Storm of Jaws": {
                     "name": "颚咬风暴 Storm of Jaws",
@@ -1838,7 +1843,7 @@
                 },
                 "Poisonous Breath": {
                     "name": "毒性吐息 Poisonous Breath",
-                    "description": "<p>误生的滑喉从其头部同时向四面八方喷出一团有毒的恶臭雾气。@Template[type:emanation|distance:30]范围内的生物将受到 @Damage[15d8[poison]|options:area-damage] 伤害（@Check[fortitude|dc:40|basic|options:area-effect] 豁免）。误生的滑喉在[[/gmr 1d4 #Recharge Poisonous Breath]]{1d4 轮}轮内无法再次使用毒性吐息。</p>"
+                    "description": "<p>误生的滑喉从其头部同时向四面八方喷出一团有毒的恶臭雾气。@Template[type:emanation|distance:30]范围内的生物将受到@Damage[15d8[poison]|options:area-damage]伤害（@Check[fortitude|dc:40|basic|options:area-effect]豁免）。误生的滑喉在[[/gmr 1d4 #Recharge Poisonous Breath]]{1d4轮}内无法再次使用毒性吐息。</p>"
                 }
             },
             "name": "误生的滑喉 Unrisen Slithermaw",
@@ -1869,12 +1874,12 @@
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
                 },
                 "Regeneration 40 (Deactivated by Holy)": {
-                    "name": "再生 40（圣洁使其失效） Regeneration 40 (Deactivated by Holy)",
+                    "name": "再生 40（圣洁使其失效）Regeneration 40 (Deactivated by Holy)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Aura of Spores": {
                     "name": "孢子灵光 Aura of Spores",
-                    "description": "<p>60尺.毁木者的孢子后裔周身环绕着一层淡薄的绿色雾霭，导致区域内植物表面生长真菌。灵光内的活体生物必须通过 @Check[fortitude|dc:42]豁免，否则会因孢子在体内扎根而陷入 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。若生物已处于恶心状态且豁免失败，则因体内真菌过度生长而陷入 @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1回合。</p>"
+                    "description": "<p>60尺。毁木者的孢子后裔周身环绕着一层淡薄的绿色雾霭，导致区域内植物表面生长真菌。灵光内的活体生物必须通过@Check[fortitude|dc:42|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，否则会因孢子在体内扎根而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时为 @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。若生物已处于恶心状态且豁免失败，则因体内真菌过度生长而陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1回合。</p>"
                 },
                 "Reactive Strike": {
                     "name": "反应打击 Reactive Strike",
@@ -1894,16 +1899,16 @@
             "name": "女巫树核心 Witchbole's Heart",
             "disable": "<p>@Check[nature|dc:50] 以驱散女巫树之心内被困的腐化灵魂；或三次成功通过 @Check[thievery|dc:47] 以解除球体上刻写的 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{藏匿 Hidden} 符文，这些符文允许腐化灵魂活化树枝（每次成功的贼活检定都会使该危害的流程减少1动作）。</p>",
             "hazarddescription": "<p>一个由缠结的枝条和根须构成的球体，表面覆盖着真菌和霉菌，突然活动起来，伸出几只爪状的树枝。</p>",
-            "routine": "<p>（3动作） 女巫树之心会形成几只细长、尖刺的肢体，末端带有有毒的利爪。在其每个动作中，它会试图打击中央球体触及范围内的一只非恶魔生物。女巫树之心在一轮中不会对同一目标尝试打击超过一次。</p>",
+            "routine": "<p>（3动作）女巫树之心会形成几只细长、尖刺的肢体，末端带有有毒的利爪。在其每个动作中，它会试图打击中央球体触及范围内的一只非恶魔生物。女巫树之心在一轮中不会对同一目标尝试打击超过一次。</p>",
             "items": {
                 "Soulshriek": {
                     "name": "灵魂尖叫 Soulshriek",
-                    "description": "<p><strong>触发</strong> 非恶魔生物在区域 <strong>D3</strong> 内结束回合，或区域 <strong>D3</strong> 内的恶魔向女巫树之心发出唤醒命令；</p><hr /><p><strong>效果</strong> 女巫树之心的一侧浮现出一张扭曲的树形面孔，发出一声恐怖的尖叫，仿佛是通过一个由研磨木材构成的巨大喉咙发出的。区域 <strong>D3</strong> 内或区域 <strong>D3</strong> 任何入口30尺范围内的所有非恶魔生物都会受到 @Damage[10d6[spirit]] 伤害（@Check[will|dc:41|basic] 豁免），因为他们自己的灵魂在痛苦中扭曲和挣扎。之后，陷阱骰先攻。</p>"
+                    "description": "<p><strong>触发</strong> 非恶魔生物在区域<strong>D3</strong>内结束回合，或区域<strong>D3</strong>内的恶魔向女巫树之心发出唤醒命令；</p><hr /><p><strong>效果</strong> 女巫树之心的一侧浮现出一张扭曲的树形面孔，发出一声恐怖的尖叫，仿佛是通过一个由研磨木材构成的巨大喉咙发出的。区域<strong>D3</strong>内或区域<strong>D3</strong>任何入口30尺范围内的所有非恶魔生物都会受到@Damage[10d6[spirit]|options:area-damage]伤害（@Check[will|dc:41|basic|options:area-effect]豁免），因为他们自己的灵魂在痛苦中扭曲和挣扎。之后，陷阱骰先攻。</p>"
                 }
             }
         },
         "Fungal Heart": {
-            "stealthdetails": "<p>（大师） 发现真菌核心的危险性；但注意到真菌核心DC为0。</p>",
+            "stealthdetails": "<p>（大师）发现真菌核心的危险性；但注意到真菌核心DC为0。</p>",
             "prototypeToken": {
                 "name": "真菌核心"
             },
@@ -1911,14 +1916,14 @@
                 "placeHolder": "placeHolder"
             },
             "name": "真菌核心 Fungal Heart",
-            "disable": "<p>@Check[nature|dc:33] （大师） 三次：小心切断维系真菌核心活性的关键茎秆，或 @Check[religion|dc:33] （大师） 三次：放逐真菌核心中的恶魔能量。</p>",
+            "disable": "<p>@Check[nature|dc:33]（大师）三次：小心切断维系真菌核心活性的关键茎秆，或 @Check[religion|dc:33]（大师）三次：放逐真菌核心中的恶魔能量。</p>",
             "hazarddescription": "<p>由粗壮的纤维茎干悬吊在球形洞穴中央的脉动绿色真菌团簇。</p>",
-            "routine": "<p>（1动作，神术，毒素） 真菌核心如真实心脏般收缩搏动，随后喷涌出翻腾的毒孢子云，充斥整个区域 <strong>D1</strong> 与 <strong>D2</strong>。所有位于这两个区域内的生物受到 @Damage[10d6[poison]] 伤害（@Check[fortitude|dc:34|basic] 豁免，区域 <strong>D1</strong> 内的生物因孢子随气流扩散至更大的空间，浓度降低，故此次豁免获得 +4 环境加值。）</p>",
+            "routine": "<p>（1动作，神术，毒素）真菌核心如真实心脏般收缩搏动，随后喷涌出翻腾的毒孢子云，充斥整个区域 <strong>D1</strong> 与 <strong>D2</strong>。所有位于这两个区域内的生物受到 @Damage[10d6[poison]] 伤害（@Check[fortitude|dc:34|basic] 豁免，区域 <strong>D1</strong> 内的生物因孢子随气流扩散至更大的空间，浓度降低，故此次豁免获得 +4 环境加值。）</p>",
             "reset": "<p>若连续3轮无人尝试破坏或伤害真菌核心，其将停止运作并重置。此后若再次触发\"毁木者的注视\"，不再传递心灵感应讯息——仅会带来一种压倒性的末日降临的预感。</p>",
             "items": {
                 "Treerazer Notices": {
                     "name": "毁木者的注视 Treerazer Notices",
-                    "description": "<p><strong>触发</strong> 真菌核心受伤害或解除尝试失败</p><hr /><p><strong>效果</strong> 一道充满恶意的声音直接在区域 <strong>D1</strong> 与 <strong>D2</strong> 所有生物脑海中响起，用恶魔语低吟：\"看来我的仆从失败了...但你们找到的并非救赎——奇奥尼的陷落已成定局。你们谁愿第一个赴死？抑或苟延残喘，眼睁睁看着珍视的一切归于吾之手？\" PC们立即辨认出这是毁木者的声音，必须立即进行 @Check[will|dc:39] 豁免，失败将陷入 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 与 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2} （大失败则陷入 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 与 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 4}，并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}，直到惊惧状态结束）。真菌核心之后骰先攻。</p>"
+                    "description": "<p><strong>触发</strong> 真菌核心受伤害或解除尝试失败</p><hr /><p><strong>效果</strong> 一道充满恶意的声音直接在区域 <strong>D1</strong> 与 <strong>D2</strong> 所有生物脑海中响起，用恶魔语低吟：\"看来我的仆从失败了...但你们找到的并非救赎——奇奥尼的陷落已成定局。你们谁愿第一个赴死？抑或苟延残喘，眼睁睁看着珍视的一切归于吾之手？\" PC们立即辨认出这是毁木者的声音，必须立即进行 @Check[will|dc:39] 豁免，失败将陷入 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 与 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}（大失败则陷入 @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1} 与 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 4}，并且 @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{逃跑 Fleeing}，直到惊惧状态结束）。真菌核心之后骰先攻。</p>"
                 }
             }
         },
@@ -2049,7 +2054,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "棘爪怪 Grizzer",
-            "publicNotes": "<p>这些身形瘦长的精类蜥蜴以两大特质闻名。其一，它们奔跑时的模样滑稽至极——仅凭后腿疾驰，前腿却在空中胡乱挥舞。其二，它们是积习难改的窃贼，能将海量物品藏于腹中。十多年前，大批棘爪怪突然现身于河域诸国，但经过数次协同围剿后，它们被迫向西南迁徙，如今已在拉兹密尔的森林中繁衍生息。</p><h2>奇异的精类饮食癖好</h2><p>棘爪怪的古怪饮食癖好在精类中并非独树一帜。例如，阿扎帕尔（Azarpal） 能将食物藏于腹中，并注入剧毒，在盛宴与宴席上制造灾祸。传说中，某些游弋于异界之海的巨鲸曾吞噬整座村庄；而狡诈的蛇形精类则能化作所吞噬生物的模样——这些故事无不表明，在第一世界，拥有奇异饮食癖好的精类绝非异类。</p>"
+            "publicNotes": "<p>这些身形瘦长的精类蜥蜴以两大特质闻名。其一，它们奔跑时的模样滑稽至极——仅凭后腿疾驰，前腿却在空中胡乱挥舞。其二，它们是积习难改的窃贼，能将海量物品藏于腹中。十多年前，大批棘爪怪突然现身于河域诸国，但经过数次协同围剿后，它们被迫向西南迁徙，如今已在拉兹密尔的森林中繁衍生息。</p><h2>奇异的精类饮食癖好</h2><p>棘爪怪的古怪饮食癖好在精类中并非独树一帜。例如，阿扎帕尔（Azarpal）能将食物藏于腹中，并注入剧毒，在盛宴与宴席上制造灾祸。传说中，某些游弋于异界之海的巨鲸曾吞噬整座村庄；而狡诈的蛇形精类则能化作所吞噬生物的模样——这些故事无不表明，在第一世界，拥有奇异饮食癖好的精类绝非异类。</p>"
         },
         "Klacktel": {
             "items": {
@@ -2059,7 +2064,7 @@
                 },
                 "Hungry Bones": {
                     "name": "饥饿骨骸 Hungry Bones",
-                    "description": "<p>克拉克特尔所在空间内的每个敌人受到@Damage[4d8[bludgeoning]] 伤害和@Damage[4d8[void]]伤害，需进行@Check[reflex|dc:42|basic]豁免。</p>"
+                    "description": "<p>克拉克特尔所在空间内的每个敌人受到@Damage[4d8[bludgeoning],4d8[void]|options:area-damage]伤害，需进行@Check[reflex|dc:42|basic|options:area-effect]豁免。</p>"
                 },
                 "Consume Vitality": {
                     "name": "吞噬命能 Consume Vitality",
@@ -2095,7 +2100,7 @@
             "items": {
                 "Reactive Strike (Fist or Claw Only)": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>",
-                    "name": "反应打击（仅限拳头或利爪） Reactive Strike (Fist or Claw Only)"
+                    "name": "反应打击（仅限拳头或利爪）Reactive Strike (Fist or Claw Only)"
                 },
                 "Restoration Vulnerability": {
                     "name": "恢复易伤 Restoration Vulnerability",
@@ -2214,7 +2219,7 @@
             "prototypeToken": {
                 "name": "牢骚精"
             },
-            "publicNotes": "<p>尽管大多数古魔专注于将凡人从存在中抹去，岩蟹魔则遵循一个不同的计划，他们将凡人困在无法理解自己行为的形态中，从而无法执行任何值得被放逐到外环裂隙的罪行。对于某些人来说，这可能看起来像是一种仁慈，但对于岩蟹魔来说，这是一种极其必要的行为，他们认为杀死有罪的凡人等同于帮助他们的敌人。</p>\n<hr />\n<p>很久以前，在外环裂缝中诞生的恶魔成为其主导力量之前，古魔统治着外环宇宙的无数裂隙。这些敌意的生物是一种原始而外星的邪恶形态，比凡人更加古老，甚至比大部分不朽者都要古老。自从凡人的罪孽兴起以及与之相关的恶魔通过外部裂缝扩张，古魔被驱逐到了最深处，并为失去领地而怀恨在心。然而，古魔并没有直接对抗恶魔，而是将目光转向了源头——凡人的罪孽，并发动了一场无休止的战争，以消灭所有有罪行能力的生物，从而扭转恶魔的洪潮。为了确保他们不增加敌人的人数，他们对目标进行可怕的变形，将受害者转化为无法分辨是非的存在；这使他们无法被法拉斯玛的法庭审判，也因此无法成为恶魔。大多数凡人认为古魔的折磨比他们在来世面临的任何命运都要糟糕得多。</p>",
+            "publicNotes": "<p>尽管大多数古魔专注于将凡人从存在中抹去，岩蟹魔则遵循一个不同的计划，他们将凡人困在无法理解自己行为的形态中，从而无法执行任何值得被放逐到外环裂隙的罪行。对于某些人来说，这可能看起来像是一种仁慈，但对于岩蟹魔来说，这是一种极其必要的行为，他们认为杀死有罪的凡人等同于帮助他们的敌人。</p>\n<hr />\n<p>很久以前，在外环裂缝中诞生的恶魔成为其主导力量之前，古魔统治着外环宇宙的无数裂隙。这些敌意的生物是一种原始而外星的邪恶形态，比凡人更加古老，甚至比大部分不朽者都要古老。自从凡人的罪孽兴起以及与之相关的恶魔通过外部裂缝扩张，古魔被驱逐到了最深处，并为失去领地而怀恨在心。然而，古魔并没有直接对抗恶魔，而是将目光转向了源头——凡人的罪孽，并发动了一场无休止的战争，以消灭所有有罪行能力的生物，从而扭转恶魔的洪潮。为了确保他们不增加敌人的人数，他们对目标进行可怕的变形，将受害者转化为无法分辨是非的存在；这使他们无法被法莱斯玛的法庭审判，也因此无法成为恶魔。大多数凡人认为古魔的折磨比他们在来世面临的任何命运都要糟糕得多。</p>",
             "items": {
                 "Disquieting Display": {
                     "name": "不安展示 Disquieting Display",
@@ -2263,10 +2268,10 @@
                 },
                 "Tanglebriar Dependent": {
                     "name": "扭曲棘林依存 Tanglebriar Dependent",
-                    "description": "<p> 荆棘阴魂受缚于扭曲棘林，必须留在其中。若荆棘阴魂离开扭曲棘林，将立即被摧毁。</p>"
+                    "description": "<p>荆棘阴魂受缚于扭曲棘林，必须留在其中。若荆棘阴魂离开扭曲棘林，将立即被摧毁。</p>"
                 },
                 "Bewildering Toxin": {
-                    "description": "<p><strong>豁免检定</strong> @Check[will|dc:36]</p>\n<p><strong>最大持续时间</strong> 6 轮</p>\n<p><strong>阶段 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled} 且 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}（1 轮）</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused} 且措手不及（1 轮）</p>\n<p><strong>阶段 3</strong> @Damage[3d10[mental]] 伤害，困惑且措手不及（1 轮）</p>",
+                    "description": "<p><strong>豁免检定</strong> @Check[will|dc:36]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled} 且 @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及 Off-Guard}（1轮）</p>\n<p><strong>阶段 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused} 且措手不及（1轮）</p>\n<p><strong>阶段 3</strong> @Damage[3d10[mental]]伤害，困惑且措手不及（1轮）</p>",
                     "name": "迷惑毒素 Bewildering Toxin"
                 },
                 "Briarvine": {
@@ -2325,7 +2330,7 @@
             "items": {
                 "Spore Spray": {
                     "name": "孢子喷射 Spore Spray",
-                    "description": "<p>扭曲棘林树精王从其体内喷射出一股孢子，对@Template[type:cone|distance:50]范围内的所有生物造成@Damage[14d6[poison]|options:area-damage] 伤害（@Check[fortitude|dc:33|basic|options:area-effect]豁免）。扭曲棘林树精王在接下来的 [[/gmr 1d4 #Recharge Spore Spray]]{1d4 轮}内无法再次使用孢子喷射。</p>"
+                    "description": "<p>扭曲棘林树精王从其体内喷射出一股孢子，对@Template[type:cone|distance:50]范围内的所有生物造成@Damage[14d6[poison]|options:area-damage] 伤害（@Check[fortitude|dc:33|basic|options:area-effect]豁免）。扭曲棘林树精王在接下来的 [[/gmr 1d4 #Recharge Spore Spray]]{1d4轮}内无法再次使用孢子喷射。</p>"
                 },
                 "Constant Spells": {
                     "name": "常驻法术 Constant Spells",
@@ -2387,7 +2392,7 @@
                 },
                 "Engulf": {
                     "name": "包卷 Engulf",
-                    "description": "<p>@Check[reflex|dc:32], @Damage[3d10[acid]] 伤害外加消化, [[/act escape dc=32]], 破裂 18</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "description": "<p>@Check[reflex|dc:32|options:damaging-effect,inflicts:grabbed,inflicts:slowed]，@Damage[3d10[acid]]伤害外加消化，[[/act escape dc=32]]，破裂18</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "Sinmold Infestation": {
                     "name": "罪孽霉怪侵染 Sinmold Infestation",
@@ -2514,7 +2519,7 @@
             "blurb": "女性精灵游侠"
         },
         "Gorging Passage": {
-            "routine": "<p>(2 动作） 陷阱在自身回合的首个动作是剧烈震颤，使区域 <strong>E4</strong>全段成为困难地形直至暴食通道下一回合开始，随后对内部生物进行碾磨并同时从墙壁渗出酸液，区域 <strong>E4</strong>内所有生物承受 @Damage[4d10[bludgeoning]] 点钝击伤害与 @Damage[8d6[acid]] 点酸蚀伤害（@Check[reflex|dc:45|basic] ）；</p>",
+            "routine": "<p>（2动作）陷阱在自身回合的首个动作是剧烈震颤，使区域 <strong>E4</strong>全段成为困难地形直至暴食通道下一回合开始，随后对内部生物进行碾磨并同时从墙壁渗出酸液，区域 <strong>E4</strong>内所有生物承受@Damage[4d10[bludgeoning]]点钝击伤害与@Damage[8d6[acid]]点酸蚀伤害（@Check[reflex|dc:45|basic] ）。</p>",
             "prototypeToken": {
                 "name": "暴食通道"
             },
@@ -2522,7 +2527,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "暴食通道 Gorging Passage",
-            "disable": "<p>@Check[thievery|dc:50] （传奇）三次以刮除地面与墙壁上的 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{隐藏 Hidden}感应器，或 @Check[nature|dc:55] （传奇）召唤女巫树中残留的原能能量使陷阱失效</p>",
+            "disable": "<p>@Check[thievery|dc:50]（传奇）三次以刮除地面与墙壁上的 @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{隐藏 Hidden}感应器，或 @Check[nature|dc:55]（传奇）召唤女巫树中残留的原能能量使陷阱失效</p>",
             "hazarddescription": "<p>通道会向入侵者合拢，其柔软的木质表面裂开孔洞并试图吞噬内部的一切.</p>",
             "reset": "<p>若某轮开始时区域<strong>E4</strong>内无存活目标，陷阱立即停止运作，并于下一轮开始时重置.</p>",
             "stealthdetails": "<p>（传奇）以辨识墙壁的异常蠕动</p>",
@@ -2645,11 +2650,11 @@
             "hazarddescription": "<p>一株六尺高、菌盖带有红点的绿色蘑菇，通过蒸汽触须与周围壁龛中的七个裂隙相连。</p>",
             "routine": "<p>每轮，七个裂隙中的每一个都会向腔室内发射一道恶魔能量束，随机瞄准一个生物（无论其是否与扭曲棘林结盟）。每轮中，单个生物不会被超过一个裂隙能量束瞄准，因此，如果潜在目标少于七个，裂隙传送门网络在该轮中会失去剩余的动作。</p>",
             "reset": "<p>如果1分钟内区域<strong>D4</strong>内没有任何生物移动，且没有任何尝试解除网络的行动，则该网络会停用并重置。</p>",
-            "stealthdetails": "<p>（传奇） 才能注意到该网络具有危险性；而仅注意到裂隙和蘑菇本身的检定DC为0</p>",
+            "stealthdetails": "<p>（传奇）才能注意到该网络具有危险性；而仅注意到裂隙和蘑菇本身的检定DC为0</p>",
             "items": {
                 "Demonic Attention": {
                     "name": "恶魔的注意 Demonic Attention",
-                    "description": "<p><strong>触发</strong> 蘑菇受到伤害、七个裂隙中的任何一个被触碰，或任何尝试解除网络的行动大失败</p><hr /><p><strong>效果</strong> 七道裂隙中涌动的恶魔能量有所察觉，随即，群魔嘶吼的嘈杂声响彻整个腔室。位于区域 <strong>D4</strong> 的所有生物都必须进行一次 @Check[will|dc:41] 豁免，若检定失败则会陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（若出现大失败，则陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。随后，危害骰先攻。</p>"
+                    "description": "<p><strong>触发</strong> 蘑菇受到伤害、七个裂隙中的任何一个被触碰，或任何尝试解除网络的行动大失败</p><hr /><p><strong>效果</strong> 七道裂隙中涌动的恶魔能量有所察觉，随即，群魔嘶吼的嘈杂声响彻整个腔室。位于区域 <strong>D4</strong> 的所有生物都必须进行一次@Check[will|dc:41|options:area-effect,inflicts:frightened]豁免，若检定失败则会陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（若出现大失败，则陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。随后，危害骰先攻。</p>"
                 }
             }
         },
@@ -2662,7 +2667,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "獠牙真菌牢笼 Fang Fungus Cage",
-            "disable": "<p> 三次成功通过@Check[nature|dc:41]检定，以小心翼翼地割开束缚精灵的真菌而不引发其反应；或 两次 @Check[medicine|dc:47]，以轻柔地将真菌从其触须已刺入肉体的地方分离；或 成功通过 @Check[athletics|dc:50]检定，在真菌作出反应前迅速将精灵从牢笼中扯出。</p>",
+            "disable": "<p>三次成功通过@Check[nature|dc:41]检定，以小心翼翼地割开束缚精灵的真菌而不引发其反应；或 两次 @Check[medicine|dc:47]，以轻柔地将真菌从其触须已刺入肉体的地方分离；或 成功通过 @Check[athletics|dc:50]检定，在真菌作出反应前迅速将精灵从牢笼中扯出。</p>",
             "hazarddescription": "<p>数百根细长的獠牙状真菌从墙壁上突出，包裹并刺穿了一名精灵囚徒的肉体。</p>",
             "stealthdetails": "<p>（大师）才能意识到若触碰该真菌，它会伤害其中囚徒；而仅注意到真菌本身的检定DC为0</p>",
             "items": {

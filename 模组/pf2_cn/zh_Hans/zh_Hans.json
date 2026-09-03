@@ -920,7 +920,8 @@
                     "swarmsuit": "集群服",
                     "tempweave": "保温织服",
                     "thinplate": "薄板甲",
-                    "veskarium-imperial-plate": "维斯卡里姆帝国板甲"
+                    "veskarium-imperial-plate": "维斯卡里姆帝国板甲",
+                    "estex-suit": "Estex Suit"
                 },
                 "Category": {
                     "light-barding": "轻型坐骑护甲",
@@ -1599,7 +1600,8 @@
                 "ChangeEquipmentSystem": {
                     "ToPathfinder": "移除{removedTrait}特征会将此{type}从寻星者更改为开拓者。您的等级将会丢失。你确定吗？",
                     "Title": "变换系统",
-                    "ToStarfinder": "添加{newTrait}特征会将此{type}从开拓者更改为寻星者。所有符文将丢失。你确定吗？"
+                    "ToStarfinder": "添加{newTrait}特征会将此{type}从开拓者更改为寻星者。所有符文将丢失。你确定吗？",
+                    "ToPathfinderOrSwap": "移除{removedTrait}特性会将此{type}从寻星者（Starfinder）更改为开拓者（Pathfinder）。您的等级将会丢失。你确定吗？或者，你可以将其替换为{otherTrait}。"
                 },
                 "Grade": {
                     "advanced": "进阶",
@@ -1630,7 +1632,19 @@
                     "sling": "目标必须成功通过@Check[fortitude|against:class|name:Sling Critical Specialization]豁免对抗你的职业DC，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。",
                     "spear": "该类型的武器刺穿目标，会使其攻击变得软弱无力。目标陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你的下一回合开始。",
                     "sword": "目标因为你的攻击而失去平衡，变得@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]直到你的下一回合开始。",
-                    "crossbow": "目标受到@Damage[1d8[persistent,bleed]]。你在此流血伤害上获得等同该武器给予攻击检定的物品加值。"
+                    "crossbow": "目标受到@Damage[1d8[persistent,bleed]]。你在此流血伤害上获得等同该武器给予攻击检定的物品加值。",
+                    "corrosive": "目标受到@Damage[(1d6 + @item.system.runes.potency)[persistent,acid]]。你在此强酸伤害上获得一个物品加值，该加值等于武器对攻击骰的物品加值。",
+                    "cryo": "这把武器冻结了目标的部分身体，使其难以移动。目标在直到你的下一回合开始前陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}状态。",
+                    "flame": "目标受到@Damage[(1d6 + @item.system.runes.potency)[persistent,fire]]。你在此火焰伤害上获得一个物品加值，该加值等于武器在攻击骰上的物品加值。",
+                    "grenade": "对每个在对抗榴弹效果时掷出大失败的生物，应用榴弹条目中列出的效果。",
+                    "laser": "目标必须尝试一次@Check[fortitude|against:class]豁免检定，对抗你的职业 DC，若失败则陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}状态，持续至你的下回合开始。",
+                    "mental": "目标必须尝试一次@Check[will|against:class]豁免，对抗你的职业 DC，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 1}状态，持续至你的下一回合开始。",
+                    "plasma": "目标受到@Damage[(1d6 + @item.system.runes.potency)[persistent,electricity]]。你在此电击伤害上获得一个物品加值，该加值等于武器对攻击检定的物品加值。",
+                    "poison": "目标必须成功通过一次@Check[fortitude|against:class]检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}状态，持续至你的下一回合开始。",
+                    "projectile": "目标必须成功通过一次@Check[fortitude|against:class]检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 1}状态，持续至你的下一回合开始。",
+                    "shock": "目标必须成功通过一次@Check[fortitude|against:class]检定，否则将陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 1}状态，持续至你的下一回合开始。",
+                    "sniper": "目标每个武器伤害骰额外受到 2 点伤害。",
+                    "sonic": "目标必须成功通过一次@Check[fortitude|against:class]豁免，否则将@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{耳聋}1 分钟。"
                 },
                 "FromMaterialAndRunes": "此物品上的珍贵材料和符文的{property}调整为{value}。",
                 "GeneratedName": {
@@ -1745,9 +1759,13 @@
                 "Tracking": "追踪",
                 "AnyBasicAmmo": "任意基础弹药",
                 "Reloader": {
-                    "EmptyMessage": "库存中没有兼容弹药",
+                    "EmptyMessage": "物品栏中没有兼容弹药",
                     "Reload1": "装填",
                     "ReloadAll": "全部装填"
+                },
+                "Modular": {
+                    "Default": "B、P 或 S",
+                    "Title": "模块化配置"
                 }
             },
             "Rules": {
@@ -1931,7 +1949,8 @@
                     "compact-shield": "袖珍盾",
                     "deflecting-field": "偏斜力场",
                     "phase-shield": "相位盾",
-                    "riot-shield": "镇暴盾"
+                    "riot-shield": "镇暴盾",
+                    "fiendsbane-shield": "Fiendsbane Shield"
                 },
                 "Specific": {
                     "Hint": "将此盾牌标记为<i>特殊魔法盾牌</i>，表明其性能超出了其构成材料以及镶嵌符文所允许的范围。在标记之时，其名称、等级、稀有度和价格将不再被贵重材料或符文所改写。然而，这些材料和符文仍将作为后续升级、稀有度和价格调整的基准。",
@@ -2213,11 +2232,16 @@
                         "max": {
                             "label": "最大射程"
                         }
+                    },
+                    "subjectToMAP": {
+                        "label": "MAP相关？",
+                        "hint": "这次攻击会增加MAP或受到MAP影响吗？"
                     }
                 },
                 "Tags": {
                     "RangeN": "射程{n}尺",
-                    "RangeIncrementN": "射程增量{n}尺"
+                    "RangeIncrementN": "射程增量{n}尺",
+                    "MagN": "Mag {n}"
                 },
                 "LinkedWeapon": "已链接武器"
             },
@@ -2295,7 +2319,9 @@
                     "rounds-double-barreled-pistol": "枪弹（双管手枪）",
                     "8-round-magazine": "8发弹匣",
                     "backpack-catapult-stones": "背包投石器弹丸",
-                    "backpack-ballista-bolts": "背包重弩矢"
+                    "backpack-ballista-bolts": "背包重弩矢",
+                    "chem-tank": "Chem Tank",
+                    "projectile-ammo": "投射物弹药"
                 },
                 "Groups": {
                     "OwnWeapons": "拥有的武器",
@@ -2357,7 +2383,7 @@
             }
         },
         "ActionsActionsHeader": "动作",
-        "ActionsFreeActionsHeader": "自由动作列表",
+        "ActionsFreeActionsHeader": "自由动作",
         "ActionsReactionsHeader": "反应动作列表",
         "Actor": {
             "ApplyDamage": {
@@ -2377,7 +2403,8 @@
                     "FinePowder": "他们被还原成细粉末；他们的装备仍然存在。",
                     "DeathEffect": "死亡效果立即杀死了他们。",
                     "Destroyed": "它被摧毁了。"
-                }
+                },
+                "TroopThresholdReached": "部队已抵达下一个阈值（剩余 {segments} 个部分）。"
             },
             "Character": {
                 "AbilityBuilder": {
@@ -2453,7 +2480,16 @@
                     "LegacyFlaws": "遗留缺陷",
                     "Partial": "部分",
                     "Increase": "增加",
-                    "DoubleFlaw": "双倍缺陷"
+                    "DoubleFlaw": "双倍缺陷",
+                    "Locked": "锁定",
+                    "Selected": "已选",
+                    "Aria": {
+                        "AncestrySection": "{name}的族裔提升",
+                        "BackgroundSection": "{name}的背景提升",
+                        "ClassSection": "{name}的职业关键属性",
+                        "LevelSection": "{level}的自由提升",
+                        "Remaining": "剩余{count} 个选择"
+                    }
                 },
                 "Attribute": {
                     "Apex": "巅峰属性",
@@ -2595,7 +2631,7 @@
                 "Configure": {
                     "Alliance": {
                         "Label": "盟友",
-                        "Hint": "生物可以与玩家团队敌对、结盟或是中立。这会在遭遇中影响一些自动化运行，例如夹击。"
+                        "Hint": "生物可以与玩家队伍敌对、结盟或是中立。这会在遭遇中影响一些自动化运行，例如夹击。"
                     }
                 },
                 "Spellcasting": {
@@ -2640,7 +2676,8 @@
                         "MotionSense": "动态感知",
                         "InfraredVision": "红外线视觉",
                         "Magicsense": "魔法感知",
-                        "Bloodsense": "血液感知"
+                        "Bloodsense": "血液感知",
+                        "ElectromagneticSense": "Electromagnetic Sense"
                     },
                     "Label": "感官",
                     "RangeLabel": "距离",
@@ -2783,7 +2820,7 @@
                     "wayang": "剪影人",
                     "yaksha": "夜叉语",
                     "aishmayar": "艾什玛雅语",
-                    "mahwek": "马赫韦克",
+                    "mahwek": "马赫韦克语",
                     "tang": "Tang",
                     "kovintal": "Kovintal",
                     "ratajin": "Ratajin",
@@ -2814,7 +2851,32 @@
                     "vesk": "维斯克语",
                     "vlaka": "弗拉卡语",
                     "first-one": "先驱语",
-                    "gfolian": "火蟹语"
+                    "gfolian": "火蟹语",
+                    "kucharn": "虫族语",
+                    "shirren": "希伦语",
+                    "bantridi": "Bantridi",
+                    "brenneri": "Brenneri",
+                    "copaxi": "Copaxi",
+                    "elindrian": "Elindrian",
+                    "embri": "Embri",
+                    "entu": "Entu",
+                    "garaggakal": "Garaggakal",
+                    "izalguun": "Izalguun",
+                    "madrosarai": "Madrosarai",
+                    "maratan": "Maratan",
+                    "nchaki": "Nchaki",
+                    "orbian": "Orbian",
+                    "osharu": "Osharu",
+                    "primacy": "Primacy",
+                    "raxi": "Raxi",
+                    "rodnarthian": "Rodnarthian",
+                    "starsong": "Starsong",
+                    "szandite": "Szandite",
+                    "talphirian": "Talphirian",
+                    "triaxian": "Triaxian",
+                    "trinary": "Trinary",
+                    "urog": "Urog",
+                    "worlanisi": "Worlanisi"
                 }
             },
             "Dead": "死亡",
@@ -2870,9 +2932,9 @@
                     "LorePlaceholder": "木工学识",
                     "Special": "特殊",
                     "Note": "笔记",
-                    "Predicate": "谓词",
+                    "Predicate": "谓语",
                     "Error": {
-                        "PredicateArray": "谓词必须是一个数组"
+                        "PredicateArray": "谓语必须是一个数组"
                     },
                     "AddSpecial": "添加特殊"
                 },
@@ -2881,7 +2943,9 @@
                 "BonusLabel": {
                     "modifier": "攻击调整值",
                     "save": "豁免DC"
-                }
+                },
+                "SegmentsN": "{n}部分",
+                "Thresholds": "阈值"
             },
             "Plural": "角色",
             "IWREditor": {
@@ -2964,7 +3028,7 @@
             "Familiar": {
                 "Master": {
                     "Perception": "主人察觉",
-                    "ArmorClass": "主人防护等级"
+                    "ArmorClass": "主人护甲等级"
                 },
                 "Blurb": "{master}的魔宠",
                 "NoAttribute": "无（宠物）",
@@ -3108,8 +3172,8 @@
         "ArmorBaseLabel": "基础",
         "ArmorCheckLabel": "检定减值",
         "ArmorCheckPenalty": "护甲检定减值",
-        "ArmorClassBase": "基础防护等级 10",
-        "ArmorClassLabel": "防护等级",
+        "ArmorClassBase": "基础护甲等级 10",
+        "ArmorClassLabel": "护甲等级",
         "ArmorClassShortLabel": "AC",
         "ArmorDexLabel": "敏捷调整值上限",
         "ArmorGreaterResilientRune": "高等韧性",
@@ -4385,20 +4449,20 @@
         "MartialUnarmed": "无武装",
         "MartialUnarmored": "无护甲",
         "MasterAbility": {
-            "cha": "魅力熟练",
-            "con": "体质熟练",
-            "dex": "敏捷熟练",
-            "int": "智力熟练",
-            "str": "力量熟练",
-            "wis": "感知熟练"
+            "cha": "主人魅力",
+            "con": "主人体质",
+            "dex": "主人敏捷",
+            "int": "主人智力",
+            "str": "主人力量",
+            "wis": "主人感知"
         },
-        "MasterArmorClass": "防护等级熟练 {base}",
-        "MasterLevel": "熟练等级",
+        "MasterArmorClass": "主人护甲等级 {base}",
+        "MasterLevel": "主人等级",
         "MasterLevelHP": "熟练等级",
         "MasterSavingThrow": {
-            "fortitude": "强韧熟练",
-            "reflex": "反射熟练",
-            "will": "意志熟练"
+            "fortitude": "主人强韧",
+            "reflex": "主人反射",
+            "will": "主人意志"
         },
         "MaxHPTitle": "你的最大生命值将自动计算。",
         "MaxHPTitleNPC": "最大生命值.",
@@ -4969,7 +5033,7 @@
                     "Hint": "如果开启本选项，玩家将无法在遭遇追踪和聊天记录中看到他们不知道姓名的NPC的名字。"
                 },
                 "PartyVision": {
-                    "Name": "共享团队视野",
+                    "Name": "共享队伍视野",
                     "Hint": "无论权限或角色选择如何，所有玩家都将相互共享角色视野。"
                 },
                 "SecretDamage": {
@@ -4997,7 +5061,7 @@
                     "All": "所有"
                 },
                 "ShowPartyStats": {
-                    "Name": "显示小队成员信息",
+                    "Name": "显示队伍成员信息",
                     "Hint": "玩家可以在队伍角色表中看到其他队伍成员的数据"
                 },
                 "ShowBreakdowns": {
@@ -5095,7 +5159,8 @@
                     "IC": "格拉利昂（帝王历）",
                     "CE": "未定义（公历纪年法）",
                     "AR": "格拉利昂（艾巴萨罗姆纪元）",
-                    "AD": "地球（公历纪年法）"
+                    "AD": "地球（公历纪年法）",
+                    "AG": "Pact Standard (After Gap)"
                 }
             },
             "CampaignFeats": {
@@ -5533,7 +5598,7 @@
         "TabDetailsLabel": "详情",
         "TabEffectsLabel": "效果",
         "TabFeatsLabel": "专长",
-        "TabInventoryLabel": "物品",
+        "TabInventoryLabel": "物品栏",
         "TabManageTabsLabel": "管理标签",
         "TabPathfinderSociety": "开拓者协会",
         "TabSkillsLabel": "技能",
@@ -5753,7 +5818,7 @@
         "TraitDescriptionAphorite": "公理裔是起源于守序位面都市轴心城的位面族裔。",
         "TraitDescriptionArcane": "这个魔法源于奥术法术根源，是建立在逻辑和合理性上的特征，拥有此特征的法术称作魔法。拥有此特征的生物基本是由奥术魔法构成，或与奥术魔法有强烈联系。",
         "TraitDescriptionArchetype": "这个专长属于一个变体。",
-        "TraitDescriptionAttached": "附着武器必须和另一件装备结合才能使用。此特性会列出它必须与哪种类型的物品附着。你必须持用或穿戴这个武器附着的物品才能用它进行攻击。举例来说，附着盾牌的盾刺允许你用盾刺而非盾击进行攻击。附着武器往往被固定或内建在它所附着的物品上，而且通常来说，一个物品只能安装一件附着武器。一件附着武器可以花费10分钟，通过DC 10 的手艺技能检定来安装，如果需要这还包括从上一件物品上拆卸的时间。若物品被破坏，仍有机会救回它上头附着的武器。",
+        "TraitDescriptionAttached": "附着武器必须和另一件装备结合才能使用。此特性会列出它必须与哪种类型的物品附着。你必须持用或穿戴这个武器附着的物品才能用它进行攻击。举例来说，附着盾牌的盾刺允许你用盾刺而非盾击进行攻击。附着武器往往被固定或内建在它所附着的物品上，而且通常来说，一个物品只能安装一件附着武器。一件附着武器可以花费10分钟，通过DC 10 的手艺技能检定来安装，如果需要这还包括从上一件物品上拆卸的时间。若物品被破坏，仍有机会救回它上头附着的武器。当附着物品处于破损状态时，该武器通常无法使用。",
         "TraitDescriptionAttack": "如果你在同一轮中使用攻击特性的动作超过一次，第一次之后的攻击都要承受多重攻击减值。",
         "TraitDescriptionAuditory": "听觉动作和效果依赖于声音。具有听觉特征的动作只有在使用动作的生物能说话或发声时才可以成功生效。听觉法术依赖于声音。具有听觉特征的法术只有当目标能够听到它时才会生效。这与音波效果不同，目标即使无法听见音波效果（例如耳聋的目标），音波效果也会生效，只要该效果能发出音波。",
         "TraitDescriptionAura": "灵光由你周身持续散发，影响一定辐射范围内的生物。灵光同时也出现在一些强大的魔法物品上.",
@@ -5922,7 +5987,7 @@
         "TraitDescriptionParry": "此武器能够用来防御、格挡攻击。当你持用此武器时，你可以花费一个动作将武器摆在防守位置上，使AC获得+1环境加值，直到你下轮开始。",
         "TraitDescriptionPlant": "植物生物具有植物特征。它们不同于普通植物。具有这种特征的魔法效果以某种方式操纵或召唤植物或植物体。那些操纵植物的能力在没有植物的地区会失效。",
         "TraitDescriptionPoison": "具有该特征的效果能够传递毒素或造成毒素伤害。具有该特征的物品有毒，并可能造成苦难。",
-        "TraitDescriptionPolymorph": "这类效果能将目标完全变成一个新的形态。同一个目标无法同时受到超过一个变形效果的影响。如果有第二个变形效果施加在目标身上，第二个效果会试图反制第一个。如果反制成功，则第二个生效；如果失败，该法术无效。由变形效果提供的所有打击都是魔法的。除非特别说明，否则变形法术无法然目标变成一个特定生物的准确外貌，只能变成只能变成这类生物或族裔的常见外貌。如果你使用变形法术变成一种战斗形态，这些特殊的数值只能被环境加值、状态加值和减值调整。除非特别指明，否则战斗形态会阻止你施法、说话、使用大多数需要手的操作动作。（如果你对你是否能使用某个动作有疑惑，问你的GM。）你的装备被吸收进身体中；装备的持续属性依然生效，但你无法启动任何物品。如果一个变形效果会使你体型变大，你必须有能变大的空间否则效果失效。",
+        "TraitDescriptionPolymorph": "这类效果能将目标完全变成一个新的形态。同一个目标无法同时受到超过一个变形效果的影响。如果有第二个变形效果施加在目标身上，第二个效果会试图反制第一个。如果反制成功，则第二个生效；如果失败，该法术无效。由变形效果提供的所有打击都是魔法的。除非特别说明，否则变形法术无法然目标变成一个特定生物的准确外貌。如果你使用变形法术变成一种战斗形态，这些特殊的数值只能被环境加值、状态加值和减值调整。除非特别指明，否则战斗形态会阻止你施法、说话、使用大多数需要手的操作动作。（如果你对你是否能使用某个动作有疑惑，问你的GM。）你的装备被吸收进身体中；装备的持续属性依然生效，但你无法启动任何物品。你失去自身速度并获得战斗形态的速度。如果一个变形效果会使你体型变大，你必须有能变大的空间否则效果失效。",
         "TraitDescriptionPortable": "便携式攻城武器适应性更强，比如攻城锤，这种武器携带更方便，在大规模战争、小型冲突甚至探险中都能发挥重要作用。",
         "TraitDescriptionPoppet": "具有这种特征的生物是人偶族裔的成员。",
         "TraitDescriptionPositive": "具有该特征的效果可以以正能量治疗活的生物，对不死生物造成正能量伤害，或操作正能量。",
@@ -5956,7 +6021,7 @@
         "TraitDescriptionSleep": "这种效果会导致生物入睡或昏昏欲睡。",
         "TraitDescriptionSonic": "具有音波特征的效果只在它发出声音时才会生效，这意味着在沉默区域或真空中不产生任何效果。这与听觉法术不同，后者只在目标能听见法术时才会生效。音波效果可能会造成音波伤害。",
         "TraitDescriptionSorcerer": "这表示该能力来自术士职业。",
-        "TraitDescriptionSplash": "当你使用一件带有溅射特征的投掷武器时，你无法将你的力量调整值添加至伤害投骰。如果一件溅射武器的攻击失败、成功或大成功，所有在目标周围5尺内的生物（包括目标自身）都会受到武器列出的溅射伤害。当大失败时，炸弹会完全失手并且不造成任何伤害。在适用目标的抗力或弱点前，将溅射伤害与对目标造成的初始伤害叠加计算。溅射伤害不会在重击时翻倍。",
+        "TraitDescriptionSplash": "某些武器和效果（例如炼金炸弹）具有溅射特征。对于任何具有溅射特征的投掷武器（即使该物品不具有炸弹特征），你在伤害检定中不添加力量调整值。如果一件溅射武器的攻击失败、成功或大成功，所有在目标周围5尺内的生物（包括目标自身）都会受到武器列出的溅射伤害。当大失败时，炸弹会完全失手并且不造成任何伤害。在适用目标的抗力或弱点前，将溅射伤害与对目标造成的初始伤害叠加计算。溅射伤害不会在重击时翻倍。",
         "TraitDescriptionSplash10": "当你使用具有溅射特征的投掷武器，你不会将力量调整值加入伤害骰。如果溅射武器的攻击结果是失败、成功或大成功，所有距离目标10尺内的生物（包括目标）都需要承受描述中列出的溅射伤害。攻击失败时（但不是大失败），攻击的目标仍然需要承受溅射伤害。将溅射伤害与初始伤害叠加视作一次伤害以应用目标的弱点或抗力。在暴击时，你不能将溅射伤害翻倍。",
         "TraitDescriptionSprite": "一个与原始魔法有着紧密联系的小型飞行精类族裔。",
         "TraitDescriptionStance": "架势是一种通用的战斗策略，你需要使用一个具有架势特征的动作以进入架势，接着你能在一段时间内保持架势。架势会在以下任一情况发生时终止：你被击败、架势可能存在的需求未能满足、遭遇结束、你进入了一个新的架势。当你使用了一个具有架势特征的动作，你在一轮的时间内都不能使用另一个。你只能在遭遇模式中进入架势。",
@@ -6920,7 +6985,9 @@
                 "hammer": "锤子",
                 "launcher": "发射器",
                 "phase-cutlass": "相位弯刀",
-                "puzzleblade": "拼装刃"
+                "puzzleblade": "拼装刃",
+                "injection-rifle": "Injection Rifle",
+                "needler-pistol": "Needler Pistol"
             }
         },
         "WeaponAbilityLabel": "武器能力",
@@ -7904,7 +7971,8 @@
             "NoPlayerCharacters": "没有可供分发的玩家角色",
             "AllowConversion": "允许转换铸币类型",
             "NothingToDistribute": "没有物品可供分发",
-            "DistributeMessage": "{share}已从{container}分发给{recipients}。"
+            "DistributeMessage": "{share}已从{container}分发给{recipients}。",
+            "DistributeEachMessage": "{share}从{container}分配至{recipients}。"
         },
         "vehicle": {
             "VehicleString": "载具",
@@ -7947,7 +8015,7 @@
             "CreatureType": "生物种类",
             "Perception": "察觉",
             "Defenses": "防御",
-            "ArmorClass": "防护等级",
+            "ArmorClass": "护甲等级",
             "Offenses": "进攻",
             "AttackRoll": "攻击骰",
             "Skills": "技能",
@@ -8008,7 +8076,9 @@
                     "Pull": "<p><strong>需求</strong> 怪物的最后一个动作是成功的打击并且在伤害条目中列出了拉拽</p><hr /><p><strong>效果</strong> 怪物尝试对生物进行@UUID[Compendium.pf2e.actionspf2e.Item.lOE4yjUnETTdaf2T]{移位 Reposition}，将其拉向怪物。这次尝试既不适用于也不计入怪物的多重攻击减值。如果拉拽列出了距离，在成功时变为生物被拉拽至该距离。</p>",
                     "GolemAntimagic": "<p>魔像免疫法术和魔法能力，魔像自身所拥有的除外。但是每种魔像都会被少数几个特定法术以特殊方式影响。这些效果在魔像的具体数据里会以缩写的方式给出，这里则是详细解释。如果列出的条目包含多种类型（例如“寒冷和水”）则这些类型的法术都能对魔像产生影响。</p><ul><li><strong>被伤害</strong> 任意该种类的魔法以该魔像为目标时，都能对该魔像造成所列伤害（该伤害无伤害类型），并取代原本的法术效果。如果魔像开始回合时位于该种类型的范围魔法效果中，或受到该种魔法的持续性效果影响，则受到括号内所标明的伤害值。</li><li><strong>被治疗</strong> 任意该种类的魔法以该魔像为目标时，都能解除该魔像的缓慢效果并治疗魔像相当于法术伤害一半的HP。如果魔像开始回合时位于该种类型的范围魔法效果中，则获得括号内所列的生命值。</li><li><strong>被减速</strong> 任意该种类的魔法以该魔像为目标时，都能让魔像陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续[[/gmr 2d6 #rounds]]{2d6轮}，并取代原本的法术效果。如果魔像开始回合时位于该种类型的范围魔法效果中，则魔像在该轮中陷入缓慢1。</li><li><strong>法术弱点</strong> 每种魔像都会有针对某一种或几种特定的法术的弱点，具体效果会描述在数据中。</li></ul>",
                     "ChangeFormation": "<p>部队重新编队以采用他们所知的以下其中一种阵型。再次使用此动作将结束之前的阵型效果，部队还可以使用此动作恢复到默认阵型，避免任何优势和劣势的影响。</p><ul><li><strong>松散阵型 Loose</strong> 部队成员分散开来覆盖更多地面。<strong>优势</strong> 部队对区域和溅射伤害的弱点被压制。<strong>劣势</strong> 敌对单位对部队伤害效果的豁免掷骰成功度比他们掷出的骰子高一阶。</li><li><strong>行军纵队 Marching Column</strong> 此阵型可以更快地穿越长距离。<strong>优势</strong> 部队获得对所有速度的+10尺环境加值。<strong>劣势</strong> 部队处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，反射豁免获得-2减值。</li><li><strong>龟壳阵型 Turtle Shell</strong> 部队将盾牌相互锁定。只有拥有盾牌的群体才能使用此阵型。<strong>优势</strong> 部队在对远程攻击的AC和对反射豁免上获得+2的环境加值。<strong>劣势</strong> 部队所有速度减10尺。</li><li><strong>楔形阵型 Wedge</strong> 部队将自己排列在一位强大的指挥官身后。<strong>优势</strong> 部队可以选择一个相邻的没有部队特性的盟友生物跟在后面。每次所选生物行进时，部队作为一个免费动作跟随，行进以保持所选生物相邻。<strong>劣势</strong> 部队失去一些自主性。他们受到缓慢1，且不能自愿离开他们的领导者。</li></ul>",
-                    "TroopMovement": "<p>每当一支部队移动时，你都会移动其中一个部分，其他部分则跟随其后。移动结束后，你可以根据自己的喜好，将其他部分聚集到与你移动的部分相邻，前提是这些部分的移动距离都不能超过移动的部分。如果你选择不将部队移动任何距离，你可以改为重新调整所有部分的位置，只要其中一个部分保持不动即可。</p>"
+                    "TroopMovement": "<p>每当一支部队移动时，你都会移动其中一个部分，其他部分则跟随其后。移动结束后，你可以根据自己的喜好，将其他部分聚集到与你移动的部分相邻，前提是这些部分的移动距离都不能超过移动的部分。如果你选择不将部队移动任何距离，你可以改为重新调整所有部分的位置，只要其中一个部分保持不动即可。</p>",
+                    "Hover": "当怪物的陆地速度注明其可悬浮时，其陆地速度代表该生物在距离坚实表面 5 英尺内悬浮移动的速度。悬浮生物不被视为飞行状态，但根据 GM 的判断，可能能够避开某些困难或危险地形。",
+                    "NoBreath": "该怪物无需呼吸，且免疫需要呼吸的效果。"
                 }
             },
             "ActionsList": {
@@ -8069,7 +8139,7 @@
                     "QuantityLabel": "数量"
                 }
             },
-            "InventoryTab": "物品",
+            "InventoryTab": "物品栏",
             "SavesExtraInfoLabelPlaceholder": "附加在所有豁免...",
             "SensesLabel": "感官",
             "SpeedExtraInfoLabelPlaceholder": "速度详细...",
@@ -8109,7 +8179,7 @@
         "TraitAmp": "增幅",
         "TraitDarvakka": "达尔瓦卡",
         "TraitDescriptionAftermath": "这一特征描述了在经历离奇与致命的危险遭遇后获得的特殊能力。",
-        "TraitDescriptionAmp": "增幅是一种能调整心能戏法的特殊思维形式。具有增幅特征的专长会提供额外的增幅选项，能用来替换心能戏法的常规增幅。",
+        "TraitDescriptionAmp": "增幅是特殊的思维形态，可修改你的心灵戏法的属性。你只能对心灵戏法施加增幅，并以自由动作消耗 1 点聚能点。若你的下一个动作是施放心灵戏法，则获得其增幅效果。若该法术是反应动作或触发的自由动作，则改为在该动作中消耗聚能点以添加增幅效果。增幅心灵戏法所需的专注力意味着：除非另有说明，否则每个心灵戏法只能施加一种增幅，且不能同时将增幅与法术塑形能力作用于同一戏法。若增幅与增幅后的戏法造成同类型伤害，则在计算抗性与弱点时将两者伤害合并计算。带有增幅特征的专长可提供不同的增幅，用以替代心灵戏法的常规增幅。若增幅本身具有独立效果，其环级与增幅后的戏法相同。",
         "TraitDescriptionDarvakka": "熵的不死生物被阴影位面和虚能位面扭曲。",
         "TraitDescriptionDeviant": "这种特征描述了奇异的超自然现象或超自然能力。",
         "TraitDescriptionEnvironment": "具有此特征的危害是大自然危险的一部分，例如流沙和害菌。",
@@ -8195,7 +8265,7 @@
         "DeleteSpellcastEntryTitle": "删除施法能力",
         "TraitDeadly": "致命",
         "TraitCapacity": "弹容",
-        "TraitDescriptionJousting": "这种武器适用于骑乘战斗。当你上马时，如果你在攻击动作前移动了至少10英尺，那么该攻击的伤害增加一个等于武器的伤害骰子数量的环境加值。此外，当骑乘时，你可以单手使用武器，将伤害骰更改所列值。",
+        "TraitDescriptionJousting": "这种武器适用于骑乘战斗。当你上马时，如果你在攻击动作前移动了至少10尺，那么该攻击的伤害增加一个等于武器的伤害骰子数量的环境加值。此外，当骑乘时，你可以单手使用武器，将伤害骰更改所列值。",
         "TraitReload": "装填",
         "SpellNonCantripLabel": "非戏法",
         "TraitFatalAim": "夺命瞄准",
@@ -8779,7 +8849,7 @@
         "TraitDescriptionWandering": "游移是一种新特征，用于区分那些需要附灵特定类型精魄的灵媒专长。这专长可能需要你在选择时附灵满足需求的精魄，代表从该特定羁绊中提取的知识和能力。当你进行每日准备时，你可以将任意已掌握的游移专长重训成任意你在获取被替换专长等级可用的游移专长（和通常情况一致，包括更低等级的游移专长）。你必须满足新专长的其他先决条件。",
         "TraitDescriptionPersonaLeader": "公众认为你是队伍的领袖，但也有人认为你太鲁莽甚至自负。",
         "TraitDescriptionPersonaFlirt": "在公众眼中，你是队伍里中最罗曼蒂克的一个，你也可能会被认为是一个勾引者或一个靠外表混饭吃、对队伍毫无贡献的愚蠢伪装者。",
-        "TraitDescriptionPersonaGuardian": "公众认为你是队伍的治疗者和保护者，但也有人认为你心肠太软，温顺得不像“真正的英雄”。",
+        "TraitDescriptionPersonaGuardian": "公众认为你是队伍的治疗者和保护者，但也有人认为你心肠太软，温顺得不像“真正的英雄”",
         "TraitDescriptionPersonaScholar": "公众认为你是解决问题的能手，是队伍的大脑，但也有人认为你傲慢或不能胜任体力劳动。",
         "TraitDescriptionPersonaWarrior": "公众认为你是队伍中的强者，是战斗中的佼佼者，但有时也被认为残忍、粗鲁，甚至是一个恶霸。",
         "TraitDescriptionPersonaWildcard": "公众认为你是队伍中奇思妙想、鬼点子和喜剧的源泉，但这种名声是一把双刃剑，因为有些人也认为你是个累赘或不可靠的人。",
@@ -8833,7 +8903,7 @@
         "TraitBlight": "荒疫",
         "TraitDescriptionEnvironmental": "具有此特征的危害是大自然危险的一部分，例如流沙和害菌。",
         "TraitResilient3": "韧性 +3",
-        "TraitDescriptionMortic": "死灵裔是与亡灵有着密切联系的活体类人生物。他们拥有黑暗视觉、负能量治疗能力，对地上神国有弱点，并且可以通过屏住呼吸变成不死生物。",
+        "TraitDescriptionMortic": "死灵裔是与亡灵有着密切联系的活体类人生物。他们拥有黑暗视觉、虚能治疗能力，对地上神国有弱点，并且可以通过屏住呼吸变成不死生物。",
         "TraitAffixedOrHeldInOneHand": "附着或单手持握",
         "TraitDescriptionShade": "残影是凡人的灵魂，他们被审判，然后转化为其他层面的生物。残影们能够在其故乡位面的基础环境效果中生存。",
         "TraitBrandish": "挥旗",
@@ -9154,7 +9224,62 @@
         "TraitNovian": "新星族",
         "TraitXenometricAndroid": "异种仿生人",
         "TraitDescriptionBrandish": "挥旗特征表示一种需要你挥动或以其他方式主动展示旗帜的能力。要使用具有挥旗特征的能力，你必须用一只手持握旗帜，或持用附着有旗帜的武器。由于在使用具有挥旗特征的战术时，你必须主动用旗帜向队友发出信号以指挥他们，因此除非特别注明，否则你无法使用被赋予的自由动作或反应动作作为挥旗战术的一部分。",
-        "TraitDescriptionCompact": "你可以在持盾手为空手或者持握一件轻型的非武器物体时，使用举起盾牌动作来举起具有袖珍特征的盾牌。"
+        "TraitDescriptionCompact": "你可以在持盾手为空手或者持握一件轻型的非武器物体时，使用举起盾牌动作来举起具有袖珍特征的盾牌。",
+        "TraitCaster": "Caster",
+        "TraitCeramic": "陶瓷",
+        "TraitDescriptionArchaic": "此武器采用传统工艺与材料制作，但无法有效对抗现代护甲。所有源自《开拓者角色扮演游戏》的武器均具有\"陈旧\"特征。武器符文在陈旧武器上可正常生效。",
+        "TraitDescriptionCritical": "该武器使用所列武器类型的重击专精特性，而非其自身的重击专精特性。",
+        "TraitDescriptionCycle": "Actions with the cycle trait change your current stellar attunement to its opposite state. When you take such an action with this trait, you benefit from the additional effect of your current attunement if the action had the attuned trait, but once you complete the action, your attunement changes to its counterpart (so graviton-attuned if you were photon-attuned before taking the action, or vice versa).",
+        "TraitAffixedToASlashingWeapon": "附着在一把挥砍武器上",
+        "TraitBantrid": "Bantrid",
+        "TraitBrenneri": "Brenneri",
+        "TraitCopaxi": "Copaxi",
+        "TraitDescriptionCaster": "This weapon can be modified by Casting a Spell (including a cantrip) with 2 or more actions. If you do, resolve the spell normally. Once the spell is cast, if it had the acid, cold, fire, electricity, sonic, spirit, vitality, or void trait, the weapon deals damage of that type instead of its usual damage until the end of your next turn. If the weapon has the aeon trait and a spell gem installed, this lasts 1 minute. If the spell deals more than one type of damage, choose one when you fire the weapon.",
+        "TraitDescriptionCosmic": "Creatures with this trait can survive in the harsh vacuum of space and the vast distances between planets and stars. They don't breathe while in space or in a vacuum. Creatures with this trait can use their fly Speed to Fly normally in a vacuum or zero gravity environment. Unless the creature possesses a bespoke ability (such as No Breath), they remain susceptible to effects that require breathing while in normal atmosphere.",
+        "TraitDescriptionDirective": "Actions with this trait are special orders that provide benefits for your allies if they follow them. Your allies must be able to sense you to benefit from your directives. This action has the auditory or visual trait depending on how you inspire your allies.",
+        "TraitDescriptionDisharmony": "Actions with the disharmony trait change your current stellar attunement to being unattuned. When you take such an action with this trait, you benefit from the additional effect of your current attunement if the action had the attuned trait, but once you complete the action, you become unattuned.",
+        "TraitDescriptionExposed": "This armor doesn't come with environmental protections. All armor from Pathfinder has the exposed trait.",
+        "TraitDescriptionGirtablilu": "Girtablilus have humanoid upper bodies and the lower bodies of massive scorpions.",
+        "TraitDescriptionGrenade": "Weapons with this trait can be thrown as a single action using the Area Fire action as though it had the area (burst) trait.",
+        "TraitDescriptionInstalled": "Some shields aren't held but are installed as armor or weapon upgrades. You can Raise a Shield installed as an armor upgrade as normal. Shields can be installed only into weapons with the parry trait. When you use a parry weapon with a shield upgrade to get a bonus to your AC, the shield upgrade emits an inertial dampening barrier and you automatically Raise a Shield. If you use the weapon for any other purpose, the shield is no longer raised, and you no longer receive a bonus to your AC. You can't Raise a Shield installed as an upgrade in any other way.",
+        "TraitDescriptionMaftet": "Maftets have humanoid upper bodies, leonine lower bodies, and hawk-like wings.",
+        "TraitDescriptionNightmare": "Nightmare hazards are unique to Leng. In many ways, nightmare hazards resemble a haunt, and the dire truth might not reveal itself to potential victims until they discover that attempts to disable it through exorcism are ineffective.",
+        "TraitDescriptionPowered": "This melee weapon uses a battery. You can activate or deactivate a powered weapon with an Interact action or as part of drawing or stowing it. This weapon comes with a commercial battery installed and uses 1 charge per day (rather than 1 charge per attack). If you try to attack with a powered weapon that's out of charges or is deactivated, it functions as an improvised weapon.",
+        "TraitDescriptionProfessional": "A weapon with this trait can be used as a tool for the listed skill. Add the weapon's item bonus to attack rolls as an item bonus to skill checks using the listed skill. For purposes of proficiency, you can choose to treat this martial weapon as a simple weapon or this advanced weapon as a martial weapon, up to your proficiency with the listed skill.",
+        "TraitDescriptionRangedShove": "该武器可以通过运动技能来@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]一个位于武器第一射程增量内的目标。该次技能检定承受-2环境减值。你可以将武器在攻击骰上的物品加值也加入摔绊检定中。",
+        "TraitDescriptionResilient": "This armor has been developed with several integrated recalibration and defensive systems. While wearing this armor, you gain an item bonus to saving throws equal to the listed value.",
+        "TraitDescriptionRetractable": "This shield can collapse into a smaller form attached to an armguard, gauntlet, glove, or jewelry for ease of travel and to free up hands. You can use an Interact action to deploy or retract the shield. You can't Raise a Shield if the shield is retracted. While the shield is deployed, it has the compact trait.",
+        "TraitDescriptionSerum": "These are pharmaceutical serums; they are technological, or perhaps hybrid in some cases, but can be crafted using a laboratory and don't incorporate significant magic. You can activate a serum with an Interact action as you drink it or feed it to another creature. You can feed a serum only to a creature that is within reach and willing or otherwise so helpless that it can't resist. You usually need only one appendage to activate a serum.",
+        "TraitDescriptionSuppressed": "Creatures a soldier suppresses might receive additional conditions and other negative effects using feats with the suppressed trait; a soldier can only apply one such feat each time they use an action that confers the suppressed trait",
+        "TraitDescriptionTactic": "Tactics are special abilities that involve you signaling your allies to perform predetermined maneuvers. To use a tactic ability, you must have one or more willing allies you have instructed beforehand during your daily preparations, called squadmates. Your squadmates must also be able to perceive your signal, either when you speak or shout it (in which case the tactic action gains the auditory trait), or by physically signaling them, typically by waving your banner (in which case it gains the visual trait). While you can use multiple tactic actions in a round, a character cannot respond to more than one tactic per round, regardless of source. You can't Ready a tactic. Tactics often grant actions or abilities that can be used as a free action; these can be used outside the squadmate's turn just like reactions.",
+        "TraitDescriptionThought": "Weapons with this trait are living creatures that can be communicated with using telepathy. When you wield this weapon and are capable of communicating with it, you can ignore any of the other traits the weapon normally has; this only applies to the other traits listed in the weapon entry, not traits the weapon or actions receive from the use of other abilities or effects. If you can communicate with this weapon, your proficiency with this weapon is equal to your proficiency with simple weapons.",
+        "TraitDescriptionTracking": "This weapon has been developed with several integrated targeting, stabilizing, and homing systems. Attack rolls with this weapon gain an item bonus equal to the listed value. Area attacks with this weapon gain an item bonus equal to the listed value to the class DCs of saves.",
+        "TraitDescriptionTransfer": "These actions reduce Hit Points from your vitality network. You must have Hit Points in your vitality network equal to or greater than the transfer cost to use these actions. If you can't pay the cost, the action is disrupted.",
+        "TraitDescriptionUnwieldy": "Weapons with this trait are large and awkward, can't be fired without cooling down first, or are otherwise difficult to use with repeated attacks. You can't use an unwieldy weapon more than once per round and can't use it to Strike as part of a reaction, such as Reactive Strike.",
+        "TraitDescriptionUpgrade": "Weapons can be customized with upgrades, which include technological weapon modifications and weapon fusions. This indicates how many upgrades the weapon can utilize.",
+        "TraitDescriptionVirtual": "Items with the virtual trait are programs that must be installed on other computers, such as comm units. They require the Programmer feat to craft.",
+        "TraitEntuColony": "Entu Colony",
+        "TraitGapTouched": "Gap-touched",
+        "TraitHeldInOneHandHungOnACordOrAttachedToClothing": "Held in 1 hand, hung on a cord, or attached to clothing",
+        "TraitIjtikri": "Ijtikri",
+        "TraitInstalledInADatapad": "Installed in a datapad",
+        "TraitIzalguun": "Izalguun",
+        "TraitKothama": "Kothama",
+        "TraitMadrosarai": "Madrosarai",
+        "TraitMaraquoi": "Maraquoi",
+        "TraitMoyishuu": "Moyishuu",
+        "TraitOrocoran": "Orocoran",
+        "TraitOsharu": "Osharu",
+        "TraitPolymer": "Polymer",
+        "TraitRaxilite": "Raxilite",
+        "TraitTalphi": "Talphi",
+        "TraitTransfer": "Transfer",
+        "TraitTrox": "Trox",
+        "TraitUpgrade": "Upgrade",
+        "TraitUrog": "Urog",
+        "TraitVirtual": "Virtual",
+        "TraitWorlanisi": "Worlanisi",
+        "WeaponGroupPoison": "Poison"
     },
     "DOCUMENT": {
         "Combat": "遭遇",

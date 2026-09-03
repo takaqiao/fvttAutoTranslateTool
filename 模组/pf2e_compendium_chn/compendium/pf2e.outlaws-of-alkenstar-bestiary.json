@@ -99,7 +99,7 @@
                 },
                 "Focus Gaze": {
                     "name": "集中凝视 Focus Gaze",
-                    "description": "<p>美杜莎将她们的目光聚焦在30尺内的一名生物上。目标必须立即对抗美杜莎的石化凝视进行@Check[fortitude|dc:25|options:inflicts:slowed,inflicts:petrified]豁免。如果该生物在尝试此次豁免前已经因石化凝视而被@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]了，豁免失败将导致其被永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>在尝试了豁免之后，该生物会暂时免疫，直到美杜莎的下个回合开始。</p>"
+                    "description": "<p>美杜莎将她们的目光聚焦在30尺内的一名生物上。目标必须立即对抗美杜莎的石化凝视进行@Check[fortitude|dc:25|options:inflicts:slowed,inflicts:petrified]豁免。如果该生物在尝试此次豁免前已经因石化凝视而被@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]了，豁免失败将导致其被永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]。</p>\n<p>在尝试了豁免之后，该生物会临时免疫，直到美杜莎的下个回合开始。</p>"
                 },
                 "Serpent Venom": {
                     "name": "蛇毒 Serpent Venom",
@@ -311,7 +311,7 @@
                 },
                 "Misaligned Gears": {
                     "name": "齿轮偏位 Misaligned Gears",
-                    "description": "<p>陀螺百夫长失去它失去加快转速（Rev Up）能力，并且如果它每轮行走超过1次，则受到@Damage[1d10[untyped]]伤害。 </p>"
+                    "description": "<p>陀螺百夫长失去它失去加快转速（Rev Up）能力，并且如果它每轮行走超过一次，则受到@Damage[1d10[untyped]]伤害。 </p>"
                 },
                 "Top-Heavy": {
                     "name": "头重脚轻 Top-Heavy",
@@ -331,7 +331,7 @@
                 },
                 "Whirling Death": {
                     "name": "旋转杀戮 Whirling Death",
-                    "description": "<p>陀螺百夫长在原地疯狂旋转，刀刃切割周围的所有生物。它最多能发动5次刀片打击，在一次技能期间，任何一个单一的生物都只能成为1次打击的目标。这些攻击计入陀螺百夫长的多重攻击减值，但多重攻击减值在所有打击都完成后才会增加。</p>"
+                    "description": "<p>陀螺百夫长在原地疯狂旋转，刀刃切割周围的所有生物。它最多能发动5次刀片打击，在一次技能期间，任何一个单一的生物都只能成为一次打击的目标。这些攻击计入陀螺百夫长的多重攻击减值，但多重攻击减值在所有打击都完成后才会增加。</p>"
                 },
                 "Whirling Fire": {
                     "name": "旋转开火 Whirling Fire",
@@ -1485,7 +1485,7 @@
                     "description": "<p><strong>触发</strong> 一个生物接近小魔怪群30尺内</p>\n<hr />\n<p><strong>效果</strong> 30尺内所有火器全部哑火。如果生物正持握火器，他能尝试@Check[will|dc:27]豁免，如果成功则能避免此效果。然后危害投掷先攻。</p>"
                 },
                 "Hardness 15 (While Inside the Centurion)": {
-                    "name": "硬度15 Hardness 15 （当躲藏在百夫长内部时）"
+                    "name": "硬度15 Hardness 15（当躲藏在百夫长内部时）"
                 }
             },
             "prototypeToken": {
@@ -1656,7 +1656,7 @@
         },
         "Ioton (F6)": {
             "name": "窃思灵云 Ioton (F6)",
-            "publicNotes": "<p>偶尔，星界中碰撞的杂念会相互纠缠在一起，形成一个具有初步智力的缠结。这些被称为窃思灵云的生物缺乏展现出物理身体的意志力，更没有足够塑造物理身体的自我意识和远见卓识。取而代之的是，它们表现为幽灵般的云状小团，在他们本能地处理周围的环境的同事，会歇性地形成某种短暂的特征，如异形的眼睛、不说话的嘴巴或闪闪发光的符号。它们可能独自会在银海（Silver Sea）中漂流多年。</p>\n<p>群居寄生的窃思灵云能感知有思想的生物，并聚集在他们周围，渴望撕下生物的杂念，利用收获的精神能量清晰地思考并形成肉体。窃思灵云可能会理解这个过程会给它的受害者带来痛苦的头痛，但它通常不在乎。不仅大多数这些思诞族陶醉于他们新发现的精神力量并且不愿意放弃这些刚捕获的思维，而且归还被它们窃取的思维本身也剥夺了它们用来判别对错是非所必需的精神带宽。这有时会导致一个痛苦的循环，它反复窃取思想，道歉地放弃它们，然后愉快地重新窃取新思维。</p>\n<hr />\n<p>逐渐积累和巩固足够的精神潜力的窃思灵云能形成永久的身体，转化为一种其他类型的思诞族。</p>\n<p> 星界是主位面的交汇点，将内环位面和外环位面连接起来，这是一个拥有无尽的银色物质的领域，斥着来自整个浩瀚众界的精神本质。星界里的大多数生物都是过客——试图从灵魂之河（River of Souls）偷猎的捕食者，防范此类入侵的招魂者，以及监控位面之间原始精华流向的御衡者。然而，这个位面本身产生了一些以奇怪电流和旋涡维生的生物，其中最重要的是由思想产生的生物族类，被称为思诞族。</p>\n<p>思诞族在物理形态体现了它所代表的思想和目的。一些思诞族拥有相同的理想和目标，因此他们的形态也较为接近。</p>",
+            "publicNotes": "<p>偶尔，星界中碰撞的杂念会相互纠缠在一起，形成一个具有初步智力的缠结。这些被称为窃思灵云的生物缺乏展现出物理身体的意志力，更没有足够塑造物理身体的自我意识和远见卓识。取而代之的是，它们表现为幽灵般的云状小团，在他们本能地处理周围的环境的同事，会歇性地形成某种短暂的特征，如异形的眼睛、不说话的嘴巴或闪闪发光的符号。它们可能独自会在银海（Silver Sea）中漂流多年。</p>\n<p>群居寄生的窃思灵云能感知有思想的生物，并聚集在他们周围，渴望撕下生物的杂念，利用收获的精神能量清晰地思考并形成肉体。窃思灵云可能会理解这个过程会给它的受害者带来痛苦的头痛，但它通常不在乎。不仅大多数这些思诞族陶醉于他们新发现的精神力量并且不愿意放弃这些刚捕获的思维，而且归还被它们窃取的思维本身也剥夺了它们用来判别对错是非所必需的精神带宽。这有时会导致一个痛苦的循环，它反复窃取思想，道歉地放弃它们，然后愉快地重新窃取新思维。</p>\n<hr />\n<p>逐渐积累和巩固足够的精神潜力的窃思灵云能形成永久的身体，转化为一种其他类型的思诞族。</p>\n<p>星界是主位面的交汇点，将内环位面和外环位面连接起来，这是一个拥有无尽的银色物质的领域，斥着来自整个浩瀚众界的精神本质。星界里的大多数生物都是过客——试图从灵魂之河（River of Souls）偷猎的捕食者，防范此类入侵的招魂者，以及监控位面之间原始精华流向的御衡者。然而，这个位面本身产生了一些以奇怪电流和旋涡维生的生物，其中最重要的是由思想产生的生物族类，被称为思诞族。</p>\n<p>思诞族在物理形态体现了它所代表的思想和目的。一些思诞族拥有相同的理想和目标，因此他们的形态也较为接近。</p>",
             "items": {
                 "Absorbed Language": {
                     "name": "吸纳语言 Absorbed Language",
@@ -1664,7 +1664,7 @@
                 },
                 "Leech Thought": {
                     "name": "榨取思想 Leech Thought",
-                    "description": "<p>当一个生物受到来自窃思灵云的持续心灵伤害时，窃思灵云会变成目标熟悉的生物的形状，例如熟人、宠物或普通动物，但是外观不够完美，而且在乔装成某个生物时并不能带来任何好处。</p>\n<p>在变形状态下，窃思灵云失去它的虚体特征、免疫和抗力，但它获得一次无武装近战打击，具有+6攻击调整值，造成@Damage[(1d8+2)[bludgeoning]]伤害。一旦生物不再遭受持续性精神伤害，窃思灵云会立即恢复其原始形态。</p>"
+                    "description": "<p>当一个生物受到来自窃思灵云的持续心灵伤害时，窃思灵云会变成目标熟悉的生物的形状，例如熟人、宠物或普通动物，但是外观不够完美，而且在@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]成某个生物时并不能带来任何好处。</p>\n<p>在变形状态下，窃思灵云失去它的虚体特征、免疫和抗力，但它获得一次无武装近战打击，具有+6攻击调整值，造成1d8+2钝击伤害。一旦生物不再遭受持续性精神伤害，窃思灵云会立即恢复其原始形态。</p>"
                 },
                 "Seeking Alchemical Knowledge": {
                     "name": "渴求炼金术知识 Seeking Alchemical Knowledge",
@@ -1926,7 +1926,7 @@
                 },
                 "Tongue Grab": {
                     "name": "舌卷 Tongue Grab",
-                    "description": "<p>被巨蟾蜍以舌头命中的生物会自动被巨蟾蜍@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]。生物不会被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，但是无法离开巨蟾蜍舌头的触及范围。生物能以一次至少造成@Damage[6[slashing]]伤害的近战打击砍断舌头，舌头AC15。</p>\n<p>这不会对巨蟾蜍造成伤害，但是在它的舌头恢复之前无法再使用舌头打击，恢复时间需要一周。</p>"
+                    "description": "<p>被巨蟾蜍以舌头命中的生物会自动被巨蟾蜍@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]。生物不会被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，但是无法离开巨蟾蜍舌头的触及范围。生物能以一次至少造成6点挥砍伤害的近战打击砍断舌头，舌头AC15。</p>\n<p>这不会对巨蟾蜍造成伤害，但是在它的舌头恢复之前无法再使用舌头打击，恢复时间需要一周。</p>"
                 }
             },
             "prototypeToken": {
@@ -1970,7 +1970,7 @@
             "blurb": "男性被支配的鬣狗人射手",
             "items": {
                 "equipment-Scimitar Sheath (Empty)": {
-                    "name": "弯刀鞘 Scimitar Sheath （空）"
+                    "name": "弯刀鞘 Scimitar Sheath（空）"
                 },
                 "Crack Shot": {
                     "name": "射爆 Crack Shot",
@@ -2109,7 +2109,7 @@
                 },
                 "Speed Surge": {
                     "name": "速度激增 Speed Surge",
-                    "description": "<p><strong>频率</strong> 每天三次</p>\n<hr />\n<p><strong>效果</strong> 草原龙兽行走或掘进两次。</p>"
+                    "description": "<p><strong>频率</strong> 每天三次</p>\n<hr />\n<p><strong>效果</strong> 草原龙兽行走或掘地两次。</p>"
                 },
                 "Tremorsense (Imprecise) 30 feet": {
                     "name": "震颤感知（模糊感官）30尺 Tremorsense (Imprecise) 30 feet",
@@ -2231,7 +2231,7 @@
                 },
                 "Speed Surge": {
                     "name": "速度激增 Speed Surge",
-                    "description": "<p><strong>频率</strong> 每天三次</p>\n<hr />\n<p><strong>效果</strong> 草原龙兽行走或掘进两次。</p>"
+                    "description": "<p><strong>频率</strong> 每天三次</p>\n<hr />\n<p><strong>效果</strong> 草原龙兽行走或掘地两次。</p>"
                 },
                 "Whipping Wing": {
                     "name": "翅膀抽打 Whipping Wing",
@@ -2271,7 +2271,7 @@
                 },
                 "Tetanus": {
                     "name": "破伤风 Tetanus",
-                    "description": "<p>破伤风是一种通过伤口创面引起的感染，它会造成僵硬和肌肉痉挛，其强度甚至可能导致骨折，并让患者最终死亡。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>潜伏期</strong> 10天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} （1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> 因肌肉痉挛而陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
+                    "description": "<p>破伤风是一种通过伤口创面引起的感染，它会造成僵硬和肌肉痉挛，其强度甚至可能导致骨折，并让患者最终死亡。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>潜伏期</strong> 10天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> 因肌肉痉挛而陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
                 }
             },
             "prototypeToken": {
@@ -2413,7 +2413,7 @@
                 },
                 "Infused Items": {
                     "name": "灌注物品 Infused Items",
-                    "description": "<p>利泽留斯携带2瓶@UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]、2瓶@UUID[Compendium.pf2e.equipment-srd.Item.97QyNEOAyYLdGaYc]、2瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]、6瓶中等利泽元素，和2个@UUID[Compendium.pf2e.equipment-srd.Item.T6Appwwl6nUl56Xj]。这些物品持续24 小时，或直到他下次进行日常准备。他能花费一个动作创造额外的这些炼金物品，或任何他炼金配方簿中所列出的物品。</p>"
+                    "description": "<p>利泽留斯携带2瓶@UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]、2瓶@UUID[Compendium.pf2e.equipment-srd.Item.97QyNEOAyYLdGaYc]、2瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]、6瓶中等利泽元素，和2个@UUID[Compendium.pf2e.equipment-srd.Item.T6Appwwl6nUl56Xj]。这些物品持续24 小时，或直到他下次进行每日准备。他能花费一个动作创造额外的这些炼金物品，或任何他炼金配方簿中所列出的物品。</p>"
                 },
                 "Low-light vision": {
                     "name": "昏暗视觉 Low-light vision"
@@ -2479,7 +2479,7 @@
             "items": {
                 "Camouflage": {
                     "name": "伪装 Camouflage",
-                    "description": "<p>巨变色龙可以改变自己的颜色以适应环境。当它尝试以隐秘检定进行@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]时，不需要掩蔽。</p>"
+                    "description": "<p>巨变色龙可以改变自己的颜色以适应环境。当它尝试以隐秘检定进行[[/act hide]]时，不需要掩蔽。</p>"
                 },
                 "Tongue Grab": {
                     "name": "舌卷 Tongue Grab",
@@ -2700,7 +2700,7 @@
         },
         "Swee Pup": {
             "name": "扫弟 Swee Pup",
-            "publicNotes": "<p>缚魂娃娃是怪诞的人体模型或娃娃，被灌注了一小片已故凡人的灵魂。这些小小的构装体是由于各种各样的原因被创造出来的——比如说作为同伴或仆人——但是他们的自由意志意味着它们对于他们的创造者并非必然服从。法莱斯玛（Pharasma）的信徒常常憎恶缚魂娃娃，认为这是对灵魂自然循环的扭曲，而墓地女士（Lady of Graves）的崇拜者乐意看到缚魂偶的破灭而不考虑其阵营，会将复灭缚魂偶作为对伟大彼岸的重要服务。在一系列缚魂构装体中，缚魂娃娃的制造是最简单的，这些构装体包括人形的缚魂人偶，强大的缚魂躯壳，和作为卫兵的缚魂兵马俑。如果娃娃的灵魂提供者是邪恶的，并且非自愿，则它可以抵抗这个过程，通过一次意志检定来对抗创造者的制造 DC，如果不能阻止灵魂提供者的死亡，则会毁掉娃娃。如果灵魂的提供者是非邪恶的，则它死前必须自愿提供灵魂。</p>\n<p>冒险者遇到的缚魂娃娃通常是某种类型的守护者；虽然它们尺寸很小，但是由于灵魂碎片的力量，它们的拳头比想象中更为危险。此外，根据娃娃的阵营不同，它还能赋予娃娃一个独特的异能法术。由于他们的自主意识和卓越的智能，它们的创造者往往会让它们管理更强大但无心智的构装体，例如魔像（golems），这让这些娃娃能掌握远超自身实力的防御能力。虽然缚魂娃娃包包含一名刚死不久的人的一小部分灵魂，但其实这不影响死者复活，或直接前往来世。这种灵魂提取的过程对活人来说则是致命的，尽管有传言说，有一种更加昂贵的方法，可以让活人捐献灵魂碎片而不受任何影响。</p>\n<p>灵魂碎片会注入一个镶嵌在娃娃胸部或脖子的灵魂聚焦宝石（soul focus gem，硬度10）。灵魂碎片并非一成不变的，娃娃会从初始状态开始不断学习，这意味着它的性格和能力可以改变，可能会变得更像灵魂提供者，也可能在自己的道路上越走越远。即使缚魂娃娃被摧毁，它的灵魂聚焦宝石也能保留娃娃的记忆。如果被摧毁的缚魂娃娃的灵魂聚焦宝石是完好的，那么它可以被一些精于缚魂操作的人重新放置到一个新娃娃的身体里，通过这种方法可以很有效的让缚魂娃娃重生。</p>",
+            "publicNotes": "<p>缚魂娃娃是怪诞的人体模型或娃娃，被灌注了一小片已故凡人的灵魂。这些小小的构装体是由于各种各样的原因被创造出来的——比如说作为同伴或仆人——但是他们的自由意志意味着它们对于他们的创造者并非必然服从。法莱斯玛的信徒常常憎恶缚魂娃娃，认为这是对灵魂自然循环的扭曲，而墓土女士的崇拜者乐意看到缚魂偶的破灭而不考虑其阵营，会将复灭缚魂偶作为对伟大彼岸的重要服务。在一系列缚魂构装体中，缚魂娃娃的制造是最简单的，这些构装体包括人形的缚魂人偶，强大的缚魂躯壳，和作为卫兵的缚魂兵马俑。如果娃娃的灵魂提供者是邪恶的，并且非自愿，则它可以抵抗这个过程，通过一次意志检定来对抗创造者的制造 DC，如果不能阻止灵魂提供者的死亡，则会毁掉娃娃。如果灵魂的提供者是非邪恶的，则它死前必须自愿提供灵魂。</p>\n<p>冒险者遇到的缚魂娃娃通常是某种类型的守护者；虽然它们尺寸很小，但是由于灵魂碎片的力量，它们的拳头比想象中更为危险。此外，根据娃娃的阵营不同，它还能赋予娃娃一个独特的异能法术。由于他们的自主意识和卓越的智能，它们的创造者往往会让它们管理更强大但无心智的构装体，例如魔像，这让这些娃娃能掌握远超自身实力的防御能力。虽然缚魂娃娃包包含一名刚死不久的人的一小部分灵魂，但其实这不影响死者复活，或直接前往来世。这种灵魂提取的过程对活人来说则是致命的，尽管有传言说，有一种更加昂贵的方法，可以让活人捐献灵魂碎片而不受任何影响。</p>\n<p>灵魂碎片会注入一个镶嵌在娃娃胸部或脖子的灵魂聚焦宝石（soul focus gem，硬度10）。灵魂碎片并非一成不变的，娃娃会从初始状态开始不断学习，这意味着它的性格和能力可以改变，可能会变得更像灵魂提供者，也可能在自己的道路上越走越远。即使缚魂娃娃被摧毁，它的灵魂聚焦宝石也能保留娃娃的记忆。如果被摧毁的缚魂娃娃的灵魂聚焦宝石是完好的，那么它可以被一些精于缚魂操作的人重新放置到一个新娃娃的身体里，通过这种方法可以很有效的让缚魂娃娃重生。</p>",
             "blurb": "自定义缚魂娃娃",
             "items": {
                 "Broken Legs": {
@@ -2733,7 +2733,7 @@
                 },
                 "Ripping Gaze": {
                     "name": "撕裂凝视 Ripping Gaze",
-                    "description": "<p>30尺。廷达罗斯猎犬的眼睛凶恶地发光，在被其可怕的凝视盯着的生物的身体上造成疼痛但不会流血的伤口。当一个生物在灵光范围内结束回合，它将受到@Damage[6d6[slashing]]伤害（@Check[fortitude|dc:29|basic]豁免）。</p>\n<p>豁免大成功的生物将暂时免疫24小时。</p>"
+                    "description": "<p>30尺。廷达罗斯猎犬的眼睛凶恶地发光，在被其可怕的凝视盯着的生物的身体上造成疼痛但不会流血的伤口。当一个生物在灵光范围内结束回合，它将受到@Damage[6d6[slashing]]伤害（@Check[fortitude|dc:29|basic]豁免）。</p>\n<p>豁免大成功的生物将临时免疫24小时。</p>"
                 },
                 "Vulnerable to Curved Space": {
                     "name": "曲线空间易伤 Vulnerable to Curved Space",
@@ -2820,7 +2820,7 @@
             "disable": "<p>三次@Check[acrobatics|dc:20|name:Sort and separate the ingredients|traits:alchemical,hazard,complex,environmental]或@Check[crafting|dc:20|name:Sort and separate the ingredients|traits:alchemical,hazard,complex,environmental]将装有挥发性试剂的瓶子分门别类地放好。</p>",
             "hazarddescription": "<p>药水瓶、蒸馏器具和各种烈性试剂混合在一起时意外产生了剧烈的爆炸。</p>",
             "reset": "<p>实验室里有足够多的材料，在耗尽之前，危害最多能持续1分钟。或者，一旦小滑头缩小到正常大小，危害就会被重置。</p>",
-            "routine": "<p>（1动作）盖特比实验室内一块随机10 尺方格发生爆炸，对区域内的生物和物体造成[[/r 2d6]]伤害（@Check[reflex|dc:18|basic|traits:alchemical,hazard,complex,environmental])。伤害类型每轮随机决定：酸蚀、寒冷、电击、火焰、挥砍或音波。</p>",
+            "routine": "<p>（1动作）盖特比实验室内随机一块@Template[square|distance:10]发生爆炸，对区域内的生物和物体造成2d6伤害（@Check[reflex|dc:18|basic|options:area-effect|traits:alchemical,hazard,complex,environmental]）。伤害类型每轮随机决定：@Damage[2d6[acid]|options:area-damage]{酸蚀}、@Damage[2d6[cold]|options:area-damage]{寒冷}、@Damage[2d6[electricity]|options:area-damage]{电击}、@Damage[2d6[fire]|options:area-damage]{火焰}、@Damage[2d6[slashing]|options:area-damage]{挥砍}或@Damage[2d6[sonic]|options:area-damage]{音波}。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Explosive Catalyst": {
@@ -2886,7 +2886,7 @@
             "items": {
                 "Versatile Performance": {
                     "name": "多才表演 Versatile Performance",
-                    "description": "<p> 幕后黑手在[[/act make-an-impression statistic=performance]]时可以用表演来代替交涉，或在[[/act demoralize statistic=performance]]时可以用表演代替威吓。</p>\n<p>幕后黑手在[[/act impersonate statistic=performance]]时也能以表演来代替欺骗。</p>"
+                    "description": "<p>幕后黑手在[[/act make-an-impression statistic=performance]]时可以用表演来代替交涉，或在[[/act demoralize statistic=performance]]时可以用表演代替威吓。</p>\n<p>幕后黑手在[[/act impersonate statistic=performance]]时也能以表演来代替欺骗。</p>"
                 },
                 "Sneak Attack": {
                     "name": "偷袭 Sneak Attack",

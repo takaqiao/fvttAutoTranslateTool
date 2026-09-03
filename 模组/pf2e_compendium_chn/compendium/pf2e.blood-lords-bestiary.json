@@ -103,10 +103,10 @@
                 },
                 "Hunger Pangs": {
                     "name": "Hunger Pangs",
-                    "description": "<p>A creature damaged by the afziaka's fangs must succeed at a @Check[fortitude|dc:22] save or become @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} for 1 minute. The creature can remove this condition earlier by consuming at least a handful of raw meat.</p>"
+                    "description": "<p>A creature damaged by the afziaka's fangs must succeed at a @Check[fortitude|dc:22|options:inflicts:enfeebled] save or become @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} for 1 minute. The creature can remove this condition earlier by consuming at least a handful of raw meat.</p>"
                 },
                 "Trample": {
-                    "name": "Trample",
+                    "name": "践踏 Trample",
                     "description": "<p>Medium or smaller, hoof, @Check[reflex|dc:23|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 }
             },
@@ -135,10 +135,10 @@
                 },
                 "Hunger Pangs": {
                     "name": "Hunger Pangs",
-                    "description": "<p>A creature damaged by the afziaka's fangs must succeed at a @Check[fortitude|dc:30] save or become @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} for 1 hour. The creature can remove this condition earlier by consuming at least a handful of raw meat.</p>"
+                    "description": "<p>A creature damaged by the afziaka's fangs must succeed at a @Check[fortitude|dc:30|options:inflicts:enfeebled] save or become @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} for 1 hour. The creature can remove this condition earlier by consuming at least a handful of raw meat.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Slip Between": {
@@ -196,7 +196,7 @@
                     "description": "<p>The Agorron guard makes a Strike with their scythe. A creature damaged by this attack takes @Damage[3d6[bleed]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -237,7 +237,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any creature hit by the skaveling's Strikes must attempt a @Check[fortitude|dc:36] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each save.</p>"
+                    "description": "<p>Any creature hit by the skaveling's Strikes must attempt a @Check[fortitude|dc:36|options:inflicts:slowed,inflicts:paralyzed] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each save.</p>"
                 }
             },
             "publicNotes": "<p>Hideous necromantic rituals give rise to skavelings, or ghoul bats, monstrosities that are not true ghouls but instead are specifically crafted undead creatures. Their creators are the bloodsucking urdefhans of the Darklands, who create skavelings from giant bats specially raised on diets of toxic fungus and the flesh of ghouls-especially brains harvested from these undead. Upon reaching maturity, these giant bats are ritually slain via the use of cytillesh oil. While this poison simply rots away the flesh of most creatures, one of these specially prepared bats will immediately rise from death as a skaveling after succumbing to its effects.</p>\n<p>Despite its tattered wings and sagging skin, a skaveling is more than capable of flight, even when carrying a creature mounted on its back-urdefhans often use skavelings as mounts in this way. Their intelligence is more advanced than that of the typical giant bat, and in combat they function more as allies than as mere mounts, capable of making their own tactical decisions. Yet even though they can reason and think, skavelings remain loyal to the urdefhans who created them, and they never take actions in a fight that would knowingly put their masters in harm's way.</p>",
@@ -271,14 +271,14 @@
             },
             "publicNotes": "<p>Many animated objects have useful functions but become dangers when uncontrolled.</p>",
             "blurb": "Variant animated furnace",
-            "ac": "(20 when broken); construct armor",
+            "ac": "（破损时20）；构装护甲",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Construct Armor (Hardness 7)": {
-                    "name": "Construct Armor (Hardness 7)",
+                    "name": "构装护甲 Construct Armor（硬度7）",
                     "description": "<p>Like normal objects, the animated fireplace has Hardness. This Hardness reduces any damage the fireplace takes by 7. Once the animated fireplace is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its Armor Class to 20.</p>"
                 },
                 "Bellow Soot": {
@@ -304,7 +304,7 @@
         },
         "Animated Tea Cart": {
             "name": "Animated Tea Cart",
-            "ac": "(24 when broken), construct armor",
+            "ac": "（破损时24）；构装护甲",
             "items": {
                 "equipment-Dishes": {
                     "name": "Dishes"
@@ -314,7 +314,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Construct Armor (Hardness 8)": {
-                    "name": "Construct Armor (Hardness 8)",
+                    "name": "构装护甲 Construct Armor（硬度8）",
                     "description": "<p>Like normal objects, an animated tea cart has Hardness. This Hardness reduces any damage the tea cart takes by an amount equal to the Hardness. Once an animated tea cart is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its Armor Class to 24.</p>"
                 },
                 "Scald": {
@@ -352,7 +352,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>A creature hit by the ooze's pseudopod is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF] unless it succeeds at a @Check[fortitude|dc:19] save. A victim can attempt a new save to recover at the end of each of its turns.</p>"
+                    "description": "<p>A creature hit by the ooze's pseudopod is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} unless it succeeds at a @Check[fortitude|dc:19|options:inflicts:paralyzed] save. A victim can attempt a new save to recover at the end of each of its turns.</p>"
                 },
                 "Grab": {
                     "name": "擒获 Grab",
@@ -406,7 +406,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Knockdown]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -481,7 +481,7 @@
             "blurb": "变体精英伏行之手",
             "items": {
                 "Tremorsense (Imprecise) 30 feet": {
-                    "name": "震颤感知 （模糊）30尺",
+                    "name": "震颤感知（模糊）30尺",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
                 "Lifesense 30 feet": {
@@ -529,7 +529,7 @@
                 }
             },
             "disable": "<p>@Check[occultism|dc:44] (master) to disrupt and counteract the shadow magic animating the ashes, or @Check[religion|dc:42] (master) to exorcise the animating spirit. Disabling the trap requires three successful checks, in any combination of Occultism and Religion checks.</p>",
-            "routine": "<p>(1 动作） The shadowy shape sends streams of scouring ash toward the mouth, eyes, and nose of each creature in the room, dealing @Damage[(3d12+20)[slashing]] damage and requiring a @Check[fortitude|dc:42] save. Creatures that don't need breathe can't be sickened by the haunt and creatures that don't see can't be @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded} by it.</p>\n<hr>\n<p><strong>大成功</strong> The creature takes no damage and is blinded for 1 round.</p>\n<p><strong>成功</strong> The creature takes half damage, is blinded for 1 round, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}.</p>\n<p><strong>失败</strong> The creature takes full damage, is blinded for 1 minute, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}.</p>\n<p><strong>大失败</strong> The creature takes full damage, is blinded for 1 minute, is sickened 2, and is unable to use any spells or abilities with the verbal trait while it is sickened.</p>",
+            "routine": "<p>（1动作）The shadowy shape sends streams of scouring ash toward the mouth, eyes, and nose of each creature in the room, dealing @Damage[(3d12+20)[slashing]] damage and requiring a @Check[fortitude|dc:42] save. Creatures that don't need breathe can't be sickened by the haunt and creatures that don't see can't be @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded} by it.</p>\n<hr>\n<p><strong>大成功</strong> The creature takes no damage and is blinded for 1 round.</p>\n<p><strong>成功</strong> The creature takes half damage, is blinded for 1 round, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}.</p>\n<p><strong>失败</strong> The creature takes full damage, is blinded for 1 minute, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}.</p>\n<p><strong>大失败</strong> The creature takes full damage, is blinded for 1 minute, is sickened 2, and is unable to use any spells or abilities with the verbal trait while it is sickened.</p>",
             "prototypeToken": {
                 "name": "Ashes of Despair"
             }
@@ -648,7 +648,7 @@
                     "description": "<p><strong>Frequency</strong> until recharged</p>\n<hr />\n<p><strong>效果</strong> The bloodshroud channels a spell that takes 1 or 2 actions to cast and requires a spell attack roll into a claw or greatsword Strike. The effects of the spell don't occur immediately but are imbued into the bloodshroud's attack instead. The bloodshroud makes a melee Strike with a weapon or claw. The spell is coupled with the bloodshroud's attack, using the attack roll result to determine the effects of both the Strike and the spell. This counts as two attacks for the purposes of determining the bloodshroud's multiple attack penalty, but the penalty is not applied until after the Spellstrike. Using Bloodshift automatically recharges the bloodshroud's Spellstrike.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -750,7 +750,7 @@
                 },
                 "Malevolent Mishaps": {
                     "name": "恶性事故 Malevolent Mishaps",
-                    "description": "<p>10尺。受烹恶鬼会让它附近的人变得笨拙且犹疑。所有在灵光内开始回合的生物必须进行@Check[will|dc:21]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物临时免疫本灵光1 分钟；</p>\n<p><strong>失败</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，直至他的下一回合开始。若该生物还是活物，则受烹恶鬼对其使用灌输恐惧能力；</p>\n<p><strong>大失败</strong> 如同失败，但是获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
+                    "description": "<p>10尺。受烹恶鬼会让它附近的人变得笨拙且犹疑。所有在灵光内开始回合的生物必须进行@Check[will|dc:21]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物临时免疫本灵光1分钟；</p>\n<p><strong>失败</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，直至他的下一回合开始。若该生物还是活物，则受烹恶鬼对其使用灌输恐惧能力；</p>\n<p><strong>大失败</strong> 如同失败，但是获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
                 },
                 "Create Spawn": {
                     "name": "创造衍体 Create Spawn",
@@ -761,7 +761,7 @@
                     "description": "<p>被受烹恶鬼的幽灵厨具打击命中的活物，或在对抗恶性事故灵光的豁免中失败的生物，必须进行@Check[will|dc:21]豁免。被本能力影响的生物，每日可以尝试一次新的豁免来结束本能力的效果。</p>\n<hr />\n<p><strong>成功</strong> 该生物临时免疫本能力24小时；</p>\n<p><strong>失败</strong> 该生物在摄入任何物品或准备食物或饮料时都会获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}</p>\n<p><strong>大失败</strong> 如同失败，但是获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}，且该生物无法将惊惧值降到1 以下。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -871,7 +871,7 @@
                     "description": "<p>一个典型的骨砾群必须留在它的发源的定居点，并且只能在离定居点不超过1英里的地方移动而不至于散成碎片，如果它的碎片被送回这个区域，它就会复活。偶尔，骨砾群会被束缚在一个特定的建筑、道路或行政区，而不是一个定居点。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -911,7 +911,7 @@
                     "description": "<p>A creeping crone can spend 1 day enchanting her walking stick with the powers of a <em>+2 striking greater staff of necromancy</em>. A crone replaces any material component of an occult spell she casts by using the walking stick as a focus component instead. The walking stick's magic functions only for the crone who created it; for anyone else, it's a mundane stick. If the crone enchants a new walking stick, the previous stick loses all its powers.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The creeping crone can take on the appearance of any Medium humanoid woman, changing her walking stick to suit her new appearance. This doesn't change her Speed or Strikes, but it might change the damage type her Strikes deal (typically to bludgeoning).</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Negative Healing": {
@@ -927,7 +927,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> The creeping crone critically hits a good creature with her walking stick Strike</p>\n<hr />\n<p><strong>Effect</strong> The target takes @Damage[2d8[bleed]] damage.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -995,14 +995,14 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Coven": {
-                    "name": "Coven",
+                    "name": "巫团 Coven",
                     "description": "<p>A rust hag adds @UUID[Compendium.pf2e.spells-srd.Item.B3eLlbaPxOYHcs1o]{Curse of Lost Time}, @UUID[Compendium.pf2e.spells-srd.Item.0fYE64odlKqISzft]{Rusting Grasp}, and @UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa]{Summon Construct} to her coven's spells.</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The rust hag can take on the appearance of any Medium female humanoid. This doesn't change her Speed or her Strikes, but might change the damage type her Strikes deal (typically to bludgeoning).</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Hagshot": {
@@ -1077,7 +1077,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -1271,7 +1271,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>10 feet. A creature entering the aura or starting its turn in the aura must succeed at a @Check[fortitude|dc:26|options:area-effect,inflicts:sickened,inflicts:slowed] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} as long as it's sickened on a critical failure).</p>\n<p>While within the aura, the creature takes a -2 circumstance penalty to saves against disease and to recover from the sickened condition. A creature that succeeds at its save is temporarily immune for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]{Effect: Stench}</p>"
                 },
                 "Consume Flesh": {
@@ -1284,7 +1284,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:26] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:26|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Sneak Attack": {
                     "name": "Sneak Attack",
@@ -1295,7 +1295,7 @@
                     "description": "<p>The ghast jumps up to half its Speed. This movement doesn't trigger reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -1480,7 +1480,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul antipaladin's attack must succeed at a @Check[fortitude|dc:25] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul antipaladin's attack must succeed at a @Check[fortitude|dc:25|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
@@ -1534,7 +1534,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Aquatic Ambush": {
-                    "name": "Aquatic Ambush",
+                    "name": "水下伏击 Aquatic Ambush",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
                 },
                 "Consume Flesh": {
@@ -1551,14 +1551,14 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living non-elf creature hit by a ghoul crocodile's tail must succeed at a @Check[fortitude|dc:20] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living non-elf creature hit by a ghoul crocodile's tail must succeed at a @Check[fortitude|dc:20|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Grab": {
                     "name": "擒获 Grab",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -1595,7 +1595,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul gnawer's attack must succeed at a @Check[fortitude|dc:27] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul gnawer's attack must succeed at a @Check[fortitude|dc:27|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Swift Leap": {
                     "name": "Swift Leap",
@@ -1618,7 +1618,7 @@
             "items": {
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:31] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:31|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Sneak Attack": {
                     "name": "Sneak Attack",
@@ -1857,7 +1857,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Coven": {
-                    "name": "Coven",
+                    "name": "巫团 Coven",
                     "description": "<p>A grave hag adds @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{Harm}, @UUID[Compendium.pf2e.spells-srd.Item.xlRv8vCTHh1NeMpw]{Mimic Undead}, and the @UUID[Compendium.pf2e.spells-srd.Item.gsYEuWv04XTDxe91]{Call Spirit} ritual to her coven's spells.</p>"
                 },
                 "At-Will Spells": {
@@ -1985,7 +1985,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Negative Healing": {
@@ -2005,7 +2005,7 @@
                     "description": "<p>All vampires possess the following weaknesses.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures of strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless it is transported while it hides within its coffin, nor can it enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions-a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome its compulsion just as it does its revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a non-evil deity. To brandish garlic or a religious symbol, a creature must Interact to do so for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of its revulsion, it gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of its revulsion until it ends an action beyond 10 feet. After 1 round of being exposed to the subject of its revulsion, a vampire can attempt a @Check[will|dc:25|name:Overcome Revulsion] save as a single action, which has the concentrate trait. On a success, it overcomes its revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents it from healing above 0 HP, even in its coffin. Staking a vampire requires three actions and works only if the vampire is unconscious. If the stake is removed, the vampire can heal above 0 HP again, and if it's in its coffin the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with <em>@UUID[Compendium.pf2e.equipment-srd.Item.z9T4c1hXwOotsMCp]{Holy Water}</em> while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends its turn in sunlight. If the vampire loses all its actions in this way, it is destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors.</li>\n</ul>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul><li><strong>Bat</strong> Harmony changes into a @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.xnpuGO8jEMba9wy5]{Giant Bat}. She gains echolocation 40 feet, a land Speed of 20 feet and a fly Speed of 30 feet, and a fangs Strike +26 for 3d8+10 piercing</li></ul><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Spawn": {
@@ -2143,7 +2143,7 @@
                     "name": "Divided Faith"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<p>Use the options in the @UUID[Compendium.pf2e.spells-srd.Item.NzXpEzcZAjuDTZjK]{Aerial Form} and @UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{Animal Form} spells as guidelines.</p><ul><li><strong>Bat</strong> The vampire changes into a @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarm} or @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.xnpuGO8jEMba9wy5]{Giant Bat}. It gains echolocation 40 feet, a land Speed of 20 feet and a fly Speed of 30 feet, and a fangs Strike with a +28 attack modifier. These fangs deal 3d12+16 piercing damage.</li></ul><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Spawn": {
@@ -2175,7 +2175,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
                 "Fast Healing 15": {
-                    "name": "Fast Healing 15",
+                    "name": "快速治疗 Fast Healing 15",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Negative Healing": {
@@ -2211,7 +2211,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -2233,7 +2233,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Coven": {
-                    "name": "Coven",
+                    "name": "巫团 Coven",
                     "description": "<p>Iron Taviah adds @UUID[Compendium.pf2e.spells-srd.Item.gPvtmKMRpg9I9D7H]{Earthbind}, @UUID[Compendium.pf2e.spells-srd.Item.115Xp9E38CJENhNS]{Magic Passage}, and @UUID[Compendium.pf2e.spells-srd.Item.8Umt1AzYfFbC4fui]{Spellwrack} to her coven's spells.</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -2248,11 +2248,11 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> Iron Taviah can cause a cage built of cold iron fingernails to spring from nothingness around a target at a range of up to 30 feet, attempting an Athletics check to [[/act grapple]] against the target's Fortitude DC; if the target has a weakness to cold iron, Taviah gains a +2 circumstance bonus to this check. Unlike a normal Grapple, Taviah doesn't need to be within reach and can move as she pleases, and a successful attempt lasts until the creature [[/act escape dc=24]]{Escapes}, causing the cage to crumble into rust. Any creature can attempt to destroy the cage by attacking it; the cage has an AC of 19, Hardness 10, and 40 Hit Points.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Iron Taviah can take on the appearance of any Medium female humanoid. This doesn't change her Speed, or her attack and damage bonuses with her Strikes, but might change the damage type her Strikes deal (typically to bludgeoning).</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Ritual Specialist": {
@@ -2261,7 +2261,7 @@
                 },
                 "Scattered Coven": {
                     "name": "Scattered Coven",
-                    "description": "<p>When the characters meet Iron Taviah, the Graveclaw is at the height of its power. As a scattered coven, the Graveclaw grants Taviah the ability to cast the following spells as 3rd-rank occult spells, once per day each, without requiring help from her fellow coven members:@UUID[Compendium.pf2e.spells-srd.Item.f8hRqLJaxBVhF1u0]{Acid Arrow}, @UUID[Compendium.pf2e.spells-srd.Item.B3eLlbaPxOYHcs1o]{Curse of Lost Time}, @UUID[Compendium.pf2e.spells-srd.Item.gPvtmKMRpg9I9D7H]{Earthbind}, @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{Harm}, @UUID[Compendium.pf2e.spells-srd.Item.xlRv8vCTHh1NeMpw]{Mimic Undead}, @UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa]{Summon Construct}, and @UUID[Compendium.pf2e.spells-srd.Item.Seaah9amXg70RKw2]{Water Walk}.</p>"
+                    "description": "<p>When the characters meet Iron Taviah, the Graveclaw is at the height of its power. As a scattered coven, the Graveclaw grants Taviah the ability to cast the following spells as 3rd-rank occult spells, once per day each, without requiring help from her fellow coven members: @UUID[Compendium.pf2e.spells-srd.Item.f8hRqLJaxBVhF1u0]{Acid Arrow}, @UUID[Compendium.pf2e.spells-srd.Item.B3eLlbaPxOYHcs1o]{Curse of Lost Time}, @UUID[Compendium.pf2e.spells-srd.Item.gPvtmKMRpg9I9D7H]{Earthbind}, @UUID[Compendium.pf2e.spells-srd.Item.wdA52JJnsuQWeyqz]{Harm}, @UUID[Compendium.pf2e.spells-srd.Item.xlRv8vCTHh1NeMpw]{Mimic Undead}, @UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa]{Summon Construct}, and @UUID[Compendium.pf2e.spells-srd.Item.Seaah9amXg70RKw2]{Water Walk}.</p>"
                 },
                 "Grab": {
                     "name": "擒获 Grab",
@@ -2341,7 +2341,7 @@
                     "description": "<p><strong>触发</strong> A creature casts a spell Kelganth has prepared</p>\n<hr />\n<p><strong>效果</strong> Kelganth expends a prepared spell to counter the triggering creature's casting of that same spell. Kelganth loses his spell slot as if he had cast the triggering spell.</p>"
                 },
                 "Frightful Presence": {
-                    "name": "Frightful Presence",
+                    "name": "恐怖威压 Frightful Presence",
                     "description": "<p>60尺，@Check[will|dc:43|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
                 },
                 "Rejuvenation": {
@@ -2358,10 +2358,10 @@
                 },
                 "Quickened Casting": {
                     "name": "Quickened Casting",
-                    "description": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>效果</strong> If Kelganth's next action is to cast an cantrip or spell that is 8th level or less, reduce the number of actions to cast it by 1 (minimum 1 action).</p>"
+                    "description": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> If Kelganth's next action is to cast an cantrip or spell that is 8th level or less, reduce the number of actions to cast it by 1 (minimum 1 action).</p>"
                 },
                 "Steady Spellcasting": {
-                    "name": "Steady Spellcasting",
+                    "name": "镇定施法 Steady Spellcasting",
                     "description": "<p>If a reaction would disrupt Kelganth's spellcasting action, he attempts a @Check[flat|dc:15]. On a success, the action isn't disrupted.</p>"
                 },
                 "Throw Rock": {
@@ -2376,7 +2376,7 @@
                     "name": "+1 Status to All Saves vs. Vitality"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -2391,7 +2391,7 @@
             "blurb": "女性替换儿人类死灵师",
             "items": {
                 "equipment-Familiar (Rat Named Iskessous)": {
-                    "name": "魔宠（一只名叫伊斯克苏斯的老鼠） Familiar (Rat Named Iskessous)"
+                    "name": "魔宠（一只名叫伊斯克苏斯的老鼠）Familiar (Rat Named Iskessous)"
                 },
                 "Cackling Coven": {
                     "description": "<p><strong>触发</strong> 凯普格达的回合开始</p>\n<p><strong>需求</strong> 凯普格达距离她的哀鸣坩埚30尺或更近</p>\n<hr />\n<p><strong>效果</strong> 凯普格达汲取她死去的姐妹们的灵魂以获得一次异能能量迸发，但要付出代价。凯普格达受到@Damage[10[mental]]伤害，然后从下列三项中选择一个：</p>\n<ul>\n<li>凯普格达进行维持法术动作。若她的下个动作是施展一个女巫巫术，则该巫术的DC加1；</li>\n<li>凯普格达将她的@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]状态值降至0；</li>\n<li>若凯普格达在接下来的一分钟开始施展@UUID[Compendium.pf2e.spells-srd.Item.c3b6LdLlQDPngNIb]仪式，当仪式完成时，她会尝试进行@Check[flat|dc:18]检定；如果成功，她所创造的不死生物会比仪式能提供的等级高3级（例如，创造一个@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.WioQ6rOeMRuTOliY]，而不是一个@UUID[Compendium.pf2e.pathfinder-monster-core.Actor.Xo4IGzw28hivgMmM]）。</li>\n</ul>",
@@ -2445,7 +2445,7 @@
                     "description": "<p><strong>触发</strong> 除了凯普格达外的一个生物身处距离坩埚15尺及以内的区域至少1轮</p>\n<hr />\n<p><strong>效果</strong> 尖叫声陡然加剧，一团由魅影般、只有三指、生着铁质锐甲的手掌组成的旋风自锅中喷涌而出，摧残位于<strong>E13</strong>区的生物。在房间内的所有生物必须进行@Check[will|dc:23]豁免，其结果如下。由于凯普格达喜爱坩埚的尖叫，她免疫作祟的效果</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响</p>\n<p><strong>成功</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}，惊惧持续时@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]</p>\n<p><strong>大失败</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}，惊惧持续时被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>"
                 }
             },
-            "routine": "<p>(1 动作） 幽魂般的手掌向外探出，擒抱<strong>E13</strong>区中所有凯普格达的敌人。该区域中的所有生物因幽魂利爪的袭扰各受到@Damage[3d6[mental]]伤害（@Check[will|dc:20|basic]豁免）。因本效果受到心灵伤害的生物在他们的下个回合结束时无法降低惊惧值</p>",
+            "routine": "<p>（1动作）幽魂般的手掌向外探出，擒获<strong>E13</strong>区中所有凯普格达的敌人。该区域中的所有生物因幽魂利爪的袭扰各受到@Damage[3d6[mental]]伤害（@Check[will|dc:20|basic]豁免）。因本效果受到心灵伤害的生物在他们的下个回合结束时无法降低惊惧值。</p>",
             "prototypeToken": {
                 "name": "凯普格达的哀鸣坩埚"
             }
@@ -2546,7 +2546,7 @@
                     "description": "<p>Once per day when Lasheeli takes damage that would reduce her to 0 Hit Points, a radiant, holy shield flashes over her, negating all of the attack's spirit damage and half of any other damage the attack deals. If the attacker is within 60 feet, divine aegis deals the attacker the same amount of damage it prevented (of the same type, except that if divine aegis prevents spirit damage, it deals the attacker spirit damage instead).</p>"
                 },
                 "Steady Spellcasting": {
-                    "name": "Steady Spellcasting",
+                    "name": "镇定施法 Steady Spellcasting",
                     "description": "<p>If a reaction would disrupt Lasheeli's spellcasting, she attempts a @Check[flat|dc:15]; on a success, the spell isn't disrupted.</p>"
                 }
             },
@@ -2567,18 +2567,18 @@
                 },
                 "Divine Destruction": {
                     "name": "Divine Destruction",
-                    "description": "<p>When the divine warden is reduced to 0 HP, it erupts with divine energy in a @Template[emanation|distance:30], dealing @Damage[5d6[void]|options:area-damage] damage. Each creature in the area must attempt a @Check[will|dc:20|options:area-effect,damaging-effect] save with the following outcomes.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature takes half damage.</p>\n<p><strong>Success</strong> The creature takes full damage.</p>\n<p><strong>Failure</strong> The creature takes full damage and becomes temporarily cursed by the patron deity. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 1 day; this is a curse effect that uses the Will save DC as the counteract DC.</p>\n<p><strong>Critical Failure</strong> As failure, except the creature becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}.</p>"
+                    "description": "<p>When the divine warden is reduced to 0 HP, it erupts with divine energy in a @Template[emanation|distance:30], dealing @Damage[5d6[void]|options:area-damage] damage. Each creature in the area must attempt a @Check[will|dc:20|options:area-effect,damaging-effect,inflicts:enfeebled,inflicts:stupefied] save with the following outcomes.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature takes half damage.</p>\n<p><strong>Success</strong> The creature takes full damage.</p>\n<p><strong>Failure</strong> The creature takes full damage and becomes temporarily cursed by the patron deity. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 1 day; this is a curse effect that uses the Will save DC as the counteract DC.</p>\n<p><strong>Critical Failure</strong> As failure, except the creature becomes @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}.</p>"
                 },
                 "Faith Bound": {
                     "name": "Faith Bound",
-                    "description": "<p>A divine warden can't attack a creature that openly wears or displays the religious symbol of the divine warden's patron deity unless that creature uses a hostile action against the divine warden first. If the divine warden is intelligent, it can also attack a creature it believes isn't faithful to its deity or who wears the religious symbol as a ruse (typically after succeeding at a Perception check to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}).</p>"
+                    "description": "<p>A divine warden can't attack a creature that openly wears or displays the religious symbol of the divine warden's patron deity unless that creature uses a hostile action against the divine warden first. If the divine warden is intelligent, it can also attack a creature it believes isn't faithful to its deity or who wears the religious symbol as a ruse (typically after succeeding at a Perception check to [[/act sense-motive]]).</p>"
                 },
                 "Golem Antimagic": {
                     "name": "Golem Antimagic",
                     "description": "<p>Harmed by fire (@Damage[4d6[untyped]], @Damage[1d8[untyped]] from areas or persistent damage); healed by electricity (area @Damage[1d6[healing]] HP); slowed by cold</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.GolemAntimagic]</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>40 feet. A creature entering the aura or starting its turn in the aura must succeed at a @Check[fortitude|dc:19|options:area-effect,inflicts:sickened,inflicts:slowed] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for as long as it's sickened on a critical failure). While within the aura, affected creatures take a -2 circumstance penalty to saves against disease and to recover from the sickened condition. A creature that succeeds at its save is temporarily immune for 1 minute.</p>"
                 },
                 "Vulnerable to Gentle Repose": {
@@ -2608,14 +2608,14 @@
                 "placeHolder": "placeHolder"
             },
             "blurb": "Variant animated statue",
-            "ac": "(18 when broken); construct armor",
+            "ac": "（破损时18）；构装护甲",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Construct Armor (Hardness 8)": {
-                    "name": "Construct Armor (Hardness 8)",
+                    "name": "构装护甲 Construct Armor（硬度8）",
                     "description": "<p>Like normal objects, a mechanical laborer has Hardness. This Hardness reduces any damage it takes by 8. Once a mechanical laborer is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks. It loses its Hardness, and its Armor Class is reduced to 18.</p>"
                 },
                 "Grab": {
@@ -2657,7 +2657,7 @@
                 },
                 "Slow": {
                     "name": "缓慢 Slow",
-                    "description": "<p>僵尸永远陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}且无法使用反应动作。</p>"
+                    "description": "<p>丧尸永远陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}且无法使用反应动作。</p>"
                 },
                 "Negative Healing": {
                     "name": "虚能治疗 虚能治疗 Void Healing",
@@ -2672,7 +2672,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Knockdown]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -2713,7 +2713,7 @@
                     "description": "<p>This disease and any damage from it can't be healed until this curse is removed. A creature killed by mummy rot turns to dust and can't be resurrected except by a 7th-rank @UUID[Compendium.pf2e.spells-srd.Item.kqhPt9344UkcGVYO]{Resurrect} ritual or similar magic.</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:22]</p>\n<hr />\n<p><strong>Stage 1</strong> carrier with no ill effect (1 minute)</p>\n<p><strong>Stage 2</strong> @Damage[4d6[void]] damage and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} (1 day)</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -2727,7 +2727,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "虚能治疗, 再生15 （酸蚀使其失效）",
+            "hp": "虚能治疗, 再生15（酸蚀使其失效）",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
@@ -2776,7 +2776,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "虚能治疗, 再生15 （被酸无效）",
+            "hp": "虚能治疗, 再生15（被酸无效）",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
@@ -2803,7 +2803,7 @@
                     "description": "<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p><strong>Effect</strong> The necrohulk draws upon alchemical stores to push its body into overdrive. It becomes @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened} for [[/gmr 1d4 #Quickened Duration]]{1d4 rounds}. It can use this extra action to Step, Stride, or Strike.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Fist</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Smashing Blow": {
@@ -2819,7 +2819,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedPush]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -3034,7 +3034,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 }
             },
             "publicNotes": "<p>当一个鲜活、有知觉的生物被暴露于超自然邪恶的极端表现下时，这种经历会不可挽回地诅咒这名受害者，并通过一种骇人且亵渎的转化来碾碎他们的心智、撕裂他们的灵魂，其结果是一种诅咒生命的“生物”——波达尸。</p>\n<p>从这种绝对的腐化中幸存下来的身体碎屑只会让这个类人生物的外表进一步令人不安。波达尸的身体严重扭曲，仿佛它被束缚于痛苦与恐惧所带来的痉挛中。它那干瘪无毛的肉体散发着不属于凡间的珍珠样光泽，绷在一副畸形的骨架上，令它步履蹒跚。但在这其中最令人不安的，是它那镶嵌在一张低垂、融化，几乎没有留下什么生前结构的面孔上的眼睛。这双眼睛，尽管深陷于眼窝中，却散发着秽恶的光，瞳孔中放出的凝视包含着无尽的恶意，而它的眼眶中不断地泣出有毒的蒸汽。</p>\n<p>生前生活的记忆碎片经由对生者的仇恨所过滤，促使波达尸尝试回到那些它曾经了解的地方。如果成功了，他就会用凶残的凝视和装点着恶毒的咒骂、控告、谴责的胡言乱语来袭击从前的朋友、点头之交和爱人——此类袭击常常令受害者复活为新的波达尸。</p>",
@@ -3048,7 +3048,7 @@
                 "placeHolder": "placeHolder"
             },
             "disable": "<p>@Check[athletics|dc:18|name:Topple the Mound]（受训）来推倒并摧毁骨丘。</p>",
-            "routine": "<p>(1 动作） 危害对最近的一个生物进行一次酸液喷吐打击。</p>",
+            "routine": "<p>（1动作）危害对最近的一个生物进行一次酸液喷吐打击。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Skittering Surge": {
@@ -3094,7 +3094,7 @@
                 }
             },
             "disable": "<p>Three @Check[athletics|dc:35|name:Move Barricade], @Check[crafting|dc:35|name:Construct Barricade], or @Check[survival|dc:35|name:Construct Barricade] checks to move or construct barricades strong enough to create a shelter from the flood. While this creates a safe place to stand, creatures outside of the barricaded area may still be in danger depending on the nature and the source of the flood.</p>",
-            "routine": "<p>(1 动作） The flood advances forward 60 feet, crashing into all creatures within its area. Each creature must attempt a @Check[fortitude|dc:30] save as the floodwaters pummel them and pull them downstream. The amount and type of damage dealt are based on the nature of the flood, and certain types of floods impose additional effects. The turbulent waters mean creatures within the area of the flood must attempt a @Check[athletics|dc:20|name:Swim|traits:action:swim] check to Swim in order to move, and those who do not succeed at a check to Swim each round may drown.</p>\n<p>This caustic flood dissolves flesh as it moves, dealing @Damage[1d12[bludgeoning],(1d12+8)[acid]]{1d12 bludgeoning damage and 1d12+8 acid damage}. Additionally, it deals @Damage[2d6[persistent,acid]] damage to creatures who critically fail their Fortitude saves.</p>\n<hr>\n<p><strong>大成功</strong> The creature takes no damage.</p>\n<p><strong>成功</strong> The creature takes half damage.</p>\n<p><strong>失败</strong> The creature takes full damage and is moved 10 feet along with the water.</p>\n<p><strong>大失败</strong> The creature takes double damage and is moved 20 feet along with the water.</p>",
+            "routine": "<p>（1动作）The flood advances forward 60 feet, crashing into all creatures within its area. Each creature must attempt a @Check[fortitude|dc:30] save as the floodwaters pummel them and pull them downstream. The amount and type of damage dealt are based on the nature of the flood, and certain types of floods impose additional effects. The turbulent waters mean creatures within the area of the flood must attempt a @Check[athletics|dc:20|name:Swim|traits:action:swim] check to Swim in order to move, and those who do not succeed at a check to Swim each round may drown.</p>\n<p>This caustic flood dissolves flesh as it moves, dealing @Damage[1d12[bludgeoning],(1d12+8)[acid]]{1d12 bludgeoning damage and 1d12+8 acid damage}. Additionally, it deals @Damage[2d6[persistent,acid]] damage to creatures who critically fail their Fortitude saves.</p>\n<hr>\n<p><strong>大成功</strong> The creature takes no damage.</p>\n<p><strong>成功</strong> The creature takes half damage.</p>\n<p><strong>失败</strong> The creature takes full damage and is moved 10 feet along with the water.</p>\n<p><strong>大失败</strong> The creature takes double damage and is moved 20 feet along with the water.</p>",
             "prototypeToken": {
                 "name": "Perilous Flash Flood"
             }
@@ -3121,7 +3121,7 @@
                 },
                 "Consume Flesh": {
                     "name": "啃食尸体 Consume Flesh",
-                    "description": "<p><strong>需求</strong> 佩斯伽希与刚死亡1小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 佩斯伽希吞食一大块尸体并恢复@Damage[2d6[healing]]点生命值。</p>\n<p>它只能从每具尸体上获取1次生命值恢复。</p>"
+                    "description": "<p><strong>需求</strong> 佩斯伽希与刚死亡1小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 佩斯伽希吞食一大块尸体并恢复@Damage[2d6[healing]]点生命值。</p>\n<p>它只能从每具尸体上获取一次生命值恢复。</p>"
                 },
                 "Ghoul Fever": {
                     "name": "食尸鬼热 Ghoul Fever",
@@ -3129,7 +3129,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的非精灵生物在受到佩斯伽希的攻击时必须成功通过@Check[fortitude|dc:19]豁免，失败则陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在每个自己的回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的非精灵生物在受到佩斯伽希的攻击时必须成功通过@Check[fortitude|dc:19|options:inflicts:paralyzed]豁免，失败则陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在每个自己的回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Quick Bomber": {
                     "name": "高速投弹手 Quick Bomber",
@@ -3140,7 +3140,7 @@
                     "description": "<p>佩斯伽希跳跃至多以半速跳跃。这次移动不会触发反应动作。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -3221,7 +3221,7 @@
                     "description": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> Pokmit sizes up the defenses of a creature within 30 feet; he must know the creature is near, but need not be able to see it. Until the start of Pokmit's next turn, Pokmit's attacks against the target ignore any flat check required due to the target being @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} or @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -3541,10 +3541,10 @@
                 },
                 "Change Shape": {
                     "description": "<p>The rust hag can take on the appearance of any Medium female humanoid. This doesn't change her Speed or her Strikes, but might change the damage type her Strikes deal (typically to bludgeoning).</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
-                    "name": "Change Shape"
+                    "name": "变身 Change Shape"
                 },
                 "Coven": {
-                    "name": "Coven",
+                    "name": "巫团 Coven",
                     "description": "<p>A rust hag adds @UUID[Compendium.pf2e.spells-srd.Item.B3eLlbaPxOYHcs1o]{Curse of Lost Time}, @UUID[Compendium.pf2e.spells-srd.Item.0fYE64odlKqISzft]{Rusting Grasp}, and @UUID[Compendium.pf2e.spells-srd.Item.lKcsmeOrgHtK4xQa]{Summon Construct} to her coven's spells.</p>"
                 }
             },
@@ -3565,7 +3565,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Coven": {
-                    "name": "Coven",
+                    "name": "巫团 Coven",
                     "description": "<p>Sahni adds @UUID[Compendium.pf2e.spells-srd.Item.f8hRqLJaxBVhF1u0]{Acid Arrow}, @UUID[Compendium.pf2e.spells-srd.Item.z2mfh3oPnfYqXflY]{Mariner's Curse}, and @UUID[Compendium.pf2e.spells-srd.Item.Seaah9amXg70RKw2]{Water Walk} to her coven's spells.</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -3679,14 +3679,14 @@
                 "placeHolder": "placeHolder"
             },
             "blurb": "Variant elite giant animated statue",
-            "ac": "(24 when broken); construct armor",
+            "ac": "（破损时24）；构装护甲",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Construct Armor (Hardness 10)": {
-                    "name": "Construct Armor (Hardness 10)",
+                    "name": "构装护甲 Construct Armor（硬度10）",
                     "description": "<p>Like normal objects, the statue has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once the statue is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 24.</p>"
                 },
                 "Clinging Gloom": {
@@ -3755,7 +3755,7 @@
                 },
                 "Gaping Chomp": {
                     "name": "Gaping Chomp",
-                    "description": "<p>The shimmernewt chews on a creature that it has @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}. The target creature must attempt a @Check[fortitude|dc:24] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature takes no damage.</p>\n<p><strong>Success</strong> The creature takes @Damage[1d10[piercing]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[2d10[piercing]] damage and @Damage[1d6[bleed]] damage.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[4d10[piercing]] damage, @Damage[1d6[bleed]] damage, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} by the pain of the chomp.</p>"
+                    "description": "<p>The shimmernewt chews on a creature that it has @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}. The target creature must attempt a @Check[fortitude|dc:24|options:damaging-effect,inflicts:sickened] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature takes no damage.</p>\n<p><strong>Success</strong> The creature takes @Damage[1d10[piercing]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[2d10[piercing],1d6[bleed]] damage.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[4d10[piercing],1d6[bleed]] damage, and is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} by the pain of the chomp.</p>"
                 },
                 "Shimmer Step": {
                     "name": "Shimmer Step",
@@ -3822,7 +3822,7 @@
                     "description": "<p>The skeletal knight uses a lance in one hand, even when it isn't mounted. If the skeletal knight critically hits a creature with its lance Strike, the target is @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} until the start of the skeletal knight's next turn.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -3962,7 +3962,7 @@
                     "description": "<p>Sorvinaesen's Strikes deal an additional @Damage[2d10[mental]] damage to doomed creatures as visions of their impending deaths fill their minds.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -4004,7 +4004,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:26] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:26|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Rock Tunneler": {
                     "name": "Rock Tunneler",
@@ -4058,7 +4058,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>A living creature hit by Sulvik's tongue Strike must succeed at a @Check[fortitude|dc:28] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each attempt.</p>"
+                    "description": "<p>A living creature hit by Sulvik's tongue Strike must succeed at a @Check[fortitude|dc:28|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. The creature can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each attempt.</p>"
                 },
                 "Grab": {
                     "name": "擒获 Grab",
@@ -4158,7 +4158,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 },
                 "Attack of Opportunity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>",
@@ -4263,7 +4263,7 @@
                 }
             },
             "hazarddescription": "<p>The spectral figure of a handsome, well-dressed man flees down the stairs, clutching a wound in his side with one hand and making a shoving motion with the other. His shout drives creatures back.</p>",
-            "routine": "<p>(1 动作） (divine, evocation, incapacitation, sonic) The spectral figure shouts, dealing @Damage[4d10[sonic]] damage to all creatures within 60 feet of the secret door (@Check[will|dc:28|basic|traits:divine,evocation,incapacitation,sonic]). A creature that fails its save is also @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF] for 1 round.</p>",
+            "routine": "<p>（1动作）(divine, evocation, incapacitation, sonic) The spectral figure shouts, dealing @Damage[4d10[sonic]] damage to all creatures within 60 feet of the secret door (@Check[will|dc:28|basic|traits:divine,evocation,incapacitation,sonic]). A creature that fails its save is also @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF] for 1 round.</p>",
             "prototypeToken": {
                 "name": "The Flight"
             }
@@ -4310,7 +4310,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Lifesense]</p>"
                 },
                 "All-Around Vision": {
-                    "name": "All-Around Vision",
+                    "name": "全域视野 All-Around Vision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
                 },
                 "Catharsis": {
@@ -4336,7 +4336,7 @@
         },
         "Tombstone Troll": {
             "name": "墓碑巨魔 Tombstone Troll",
-            "hp": "再生 5 （酸，火焰或命能使其失效）",
+            "hp": "再生 5（酸，火焰或命能使其失效）",
             "items": {
                 "Darkvision": {
                     "name": "黑暗视觉 Darkvision",
@@ -4393,8 +4393,8 @@
                     "description": "<p><strong>触发</strong> 一个生物看了眼桌上的东西</p>\n<hr />\n<p><strong>效果</strong> 作祟将摆在桌上的盘碗中的食物隐藏于一个令观察者认为它们很美味的幻象中，引诱周围的生物吃下它们。身处<strong>D5</strong>区的所有生物必须进行一次@Check[will|dc:21]豁免检定。接着，作祟骰先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该生物完全识破了幻象，并在1分钟内临时免疫作祟的流程。</p>\n<p><strong>成功</strong> 该生物未被食物引诱。</p>\n<p><strong>失败</strong> 该生物认为食物十分诱人，并被驱使着去食用它们。该生物会因咀嚼锯齿状的骨骼和虫壳而受到@Damage[(4d4+4)[slashing]]伤害。</p>\n<p><strong>大失败</strong> 如同失败，但该生物受到双倍伤害并@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]1轮，因为作祟正不断地引诱他。</p>"
                 }
             },
-            "disable": "<p>@Check[religion|dc:18|name:Recite a Prayer to Urgathoa]（受训）来向厄伽图娅祈祷，并让作祟暂时安息至其下一次重置，@Check[occultism|dc:22|name:Commune with the Manager's Spirit]（受训）来与银行经理的魂魄沟通并说服她永久离世，从而解除作祟。</p>",
-            "routine": "<p>(1 动作） 作祟发出一股席卷整个房间的灰尘与骨片云。尘土和碎骨猛击房间里的所有生物，造成@Damage[4d6[bludgeoning]]伤害（@Check[reflex|dc:21|basic]豁免）。豁免失败的生物会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}1轮（大失败则为1分钟）。</p>",
+            "disable": "<p>@Check[religion|dc:18|name:Recite a Prayer to Urgathoa]（受训）来向厄加图娅祈祷，并让作祟暂时安息至其下一次重置，@Check[occultism|dc:22|name:Commune with the Manager's Spirit]（受训）来与银行经理的魂魄沟通并说服她永久离世，从而解除作祟。</p>",
+            "routine": "<p>（1动作）作祟发出一股席卷整个房间的灰尘与骨片云。尘土和碎骨猛击房间里的所有生物，造成@Damage[4d6[bludgeoning]]伤害（@Check[reflex|dc:21|basic]豁免）。豁免失败的生物会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}1轮（大失败则为1分钟）。</p>",
             "prototypeToken": {
                 "name": "泰拉格穆特的最后一餐"
             }
@@ -4444,7 +4444,7 @@
                     "description": "<p>The umbraex Flies, shrieking as it passes its enemies. Creatures within 20 feet of the umbraex's flight path take @Damage[22d6[mental]] damage depending on their @Check[fortitude|dc:45] save.</p>\n<hr />\n<p><strong>大成功</strong> The creature is unaffected.</p>\n<p><strong>成功</strong> The creature takes half damage and is @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}.</p>\n<p><strong>失败</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2}.</p>\n<p><strong>大失败</strong> The creature takes double damage and is drained 2 and @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Regeneration 20 (Deactivated by Fire or Holy)": {
@@ -4540,7 +4540,7 @@
                     "description": "<p>Jaws only.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity (Jaws Only)": {
@@ -4628,7 +4628,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -4644,7 +4644,7 @@
                     "description": "<p>All vampires possess the following weaknesses.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures of strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless it is transported while it hides within its coffin, nor can it enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions-a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome its compulsion just as it does its revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a non-evil deity. To brandish garlic or a religious symbol, a creature must Interact to do so for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of its revulsion, it gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of its revulsion until it ends an action beyond 10 feet. After 1 round of being exposed to the subject of its revulsion, a vampire can attempt a @Check[will|dc:25|name:Overcome Revulsion] save as a single action, which has the concentrate trait. On a success, it overcomes its revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents it from healing above 0 HP, even in its coffin. Staking a vampire requires three actions and works only if the vampire is unconscious. If the stake is removed, the vampire can heal above 0 HP again, and if it's in its coffin the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with <em>@UUID[Compendium.pf2e.equipment-srd.Item.z9T4c1hXwOotsMCp]{Holy Water}</em> while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}. The slowed value increases by 1 each time the vampire ends its turn in sunlight. If the vampire loses all its actions in this way, it is destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors.</li>\n</ul>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<p>Use the options in the @UUID[Compendium.pf2e.spells-srd.Item.NzXpEzcZAjuDTZjK]{Aerial Form} and @UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{Animal Form} spells as guidelines.</p><ul><li><strong>Bat</strong> The vampire changes into a @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarm} or @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.xnpuGO8jEMba9wy5]{Giant Bat}. It gains echolocation 40 feet, a land Speed of 20 feet and a fly Speed of 30 feet, and a fangs Strike with a +21 attack bonus. These fangs deal the same amount of damage as the vampire's claws, but deal piercing damage rather than slashing damage.</li></ul><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Spawn": {
@@ -4676,7 +4676,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -4706,7 +4706,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Negative Healing": {
@@ -4746,7 +4746,7 @@
                     "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within Taviah's reach</p>\n<hr />\n<p><strong>Effect</strong> Taviah seizes a creature and consumes its memories. This requires an @Check[athletics|defense:fortitude] check against the victim's Fortitude DC if the victim is grabbed and is automatic for any of the other conditions. The victim is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} (@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2} if Taviah's Athletics check is a critical success), and Taviah regains @Damage[18[healing]] Hit Points, gaining any excess as temporary Hit Points. Draining Thoughts from a creature that is already stupefied doesn't restore any HP to Taviah but increases the victim's stupefied value by 1. Additionally, Taviah views one of the victim's memories, and can choose to alter, enhance, or erase the memory she views as a 4th-rank @UUID[Compendium.pf2e.spells-srd.Item.FhOaQDTSnsY7tiam]{Rewrite Memory} spell. A victim's stupefied condition value decreases by 1 every week.</p>\n<p>A victim that becomes @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 5} in this way is rendered comatose until Taviah is destroyed, becoming permanently unconscious. While unconscious, its stupefied condition doesn't decrease.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -4782,7 +4782,7 @@
                     "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:25]</p>\n<hr />\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>阶段1</strong> @Damage[2d8[poison]] damage (1 round)</p>\n<p><strong>阶段2</strong> @Damage[3d8[poison]] damage (1 round)</p>\n<p><strong>阶段3</strong> @Damage[4d8[poison]] damage (1 round)</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -4823,7 +4823,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -4874,7 +4874,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Negative Healing": {
@@ -4886,7 +4886,7 @@
                     "description": "<p>Unlike other undead, a vampire isn't destroyed at 0 HP. Instead, it falls @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}. If its body rests in its coffin for 1 hour, the vampire gains 1 HP, after which its fast healing begins to function normally.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul><li><strong>Bat</strong> Jack changes into a @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.xnpuGO8jEMba9wy5]{Giant Bat}. He gains echolocation 40 feet, a land Speed of 20 feet and a fly Speed of 30 feet, and a fangs Strike +25 for 2d8+13 piercing</li></ul><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Spawn": {
@@ -5014,7 +5014,7 @@
                     "description": "<p>A creature can't remove the @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} condition while infected</p>\n<p><strong>Saving Throw</strong> @Check[fortitude|dc:23]</p>\n<p><strong>Onset</strong> 1 day</p>\n<p><strong>Stage 1</strong> fatigued (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} and fatigued (1 day)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 3}, fatigued, and take @Damage[1d6[bleed]] damage every [[/br 1d20 #Minutes]] minutes (1 day)</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Yshula can take the appearance of any Small or Medium humanoid or animal. This doesn't change his Speed or his attack and damage modifiers with the Strikes, but it might change the damage type his strikes deal.</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Cottage-Drained": {
@@ -5050,7 +5050,7 @@
                     "description": "<p><strong>Trigger</strong> Yulthruk succeeds at a saving throw against an arcane spell cast by another creature</p>\n<hr />\n<p><strong>Effect</strong> Yulthruk inhales some of the averted energy and becomes @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened} until the start of his next turn. He can use this extra action to Cast a Spell or Sustain a Spell</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>10 feet. A creature entering the aura or starting its turn in the aura must succeed at a @Check[fortitude|dc:28|options:area-effect,inflicts:sickened,inflicts:slowed] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} as long as it's sickened on a critical failure).</p>\n<p>While within the aura, the creature takes a -2 circumstance penalty to saves against disease and to recover from the sickened condition. A creature that succeeds at its save is temporarily immune for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]{Effect: Stench}</p>"
                 },
                 "Consume Flesh": {
@@ -5067,7 +5067,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:28] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:28|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Swift Leap": {
                     "name": "Swift Leap",
@@ -5109,7 +5109,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:32] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:32|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Recall Memory": {
                     "name": "Recall Memory",
@@ -5120,7 +5120,7 @@
                     "description": "<p>The ghoul jumps up to half its Speed. This movement doesn't trigger reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -5169,7 +5169,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -5208,7 +5208,7 @@
                     "description": "<p>若丧尸马与@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物、或者死亡不超过1小时的已死生物相邻的话，丧尸能够吞食该生物的血肉来治疗自身。这将恢复@Damage[1[healing]]HP。若该生物是活物，丧尸会对其造成等同于啃咬打击的伤害。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -5244,7 +5244,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Knockdown]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -5713,7 +5713,7 @@
             "disable": "<p>@Check[thievery|dc:48] (legendary) to disable each tether or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (10th rank, counteract DC 48) to counteract each tether</p>",
             "hazarddescription": "<p>Three shadow tethers form when a creature reaches the hall's midpoint; each lashes, grabs, and crushes creatures in the hall.</p>",
             "routine": "<p>(six actions) This trap loses 2 actions each turn for each disabled shadow tether. Each shadow tether has 2 actions it can use to either Strike a creature or Constrict a @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} creature, in any combination.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Constrict": {
                     "name": "Constrict",
@@ -6814,7 +6814,7 @@
             },
             "name": "Keystone Repulsion",
             "hazarddescription": "<p>Four magic keystones repel creatures when one is damaged or tampered with.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Repel": {
                     "name": "Repel",
@@ -6864,7 +6864,7 @@
             },
             "disable": "<p>@Check[arcana|dc:46] (legendary) to drain the magic from each shadow lash or @Check[thievery|dc:48] (legendary) to disable each shadow lash</p>",
             "routine": "<p>(8 actions) This trap loses 2 actions each turn for each disabled shadow lash. Each shadow lash has 2 actions it can use to perform the following actions.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "prototypeToken": {
                 "name": "Shadow Lash"
             }
@@ -6893,7 +6893,7 @@
             "name": "Urgathoa's Ire",
             "hp": "Per Eye",
             "hazarddescription": "<p>A statue of Urgathoa fires eye beams at intruders.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Glare": {
                     "name": "Glare",
@@ -6901,7 +6901,7 @@
                 }
             },
             "disable": "<p>@Check[religion|dc:48] (legendary) to disenchant each eye through prayer or @Check[thievery|dc:48] (legendary) to disable each eye</p>",
-            "routine": "<p>(1 动作） The trap shoots a concentrated beam of fire at a random intruder. The trap makes an eye beam Strike. If one of Urgathoa's eyes has been disabled, this Strike deals half damage.</p>",
+            "routine": "<p>（1动作）The trap shoots a concentrated beam of fire at a random intruder. The trap makes an eye beam Strike. If one of Urgathoa's eyes has been disabled, this Strike deals half damage.</p>",
             "prototypeToken": {
                 "name": "Urgathoa's Ire"
             }
@@ -7256,7 +7256,7 @@
             "name": "Psychic Wave",
             "disable": "<p>@Check[arcana|dc:50] (legendary) to stymie the psychic energy before it manifests</p>",
             "reset": "<p>1 hour.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Psychic Assault": {
                     "name": "Psychic Assault",
@@ -7275,7 +7275,7 @@
             "name": "Unstable Fiendflame Cage",
             "hazarddescription": "<p>The Fiendflame Cage is uncontrolled, releasing holy light and hellfire in the area.</p>",
             "reset": "<p>The trap resets after 24 hours.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "disable": "<p>@Check[arcana|dc:48], @Check[nature|dc:48], @Check[occultism|dc:48], or @Check[religion|dc:48] (master) four times on the Fiendflame Cage to calm it through ritual incantations</p>",
             "routine": "<p>(2 actions) On its initiative, the Fiendflame Cage uses 1 action to release a wave of hellfire, dealing @Damage[(2d10+12)[spirit],(2d10+12)[fire]|traits:unholy]{2d10+12 spirit damage and 2d10+12 fire damage} to all creatures in a @Template[burst|distance:15]{15-foot-radius burst} (@Check[reflex|dc:47|basic]). The Fiendflame Cage uses its second action to release a wave of holy light, dealing @Damage[(2d10+12)[spirit],(2d10+12)[fire]|traits:holy]{2d10+12 spirit damage and 2d10+12 fire damage} to all creatures in a @Template[burst|distance:15]{15-foot-radius burst} (@Check[reflex|dc:47|basic]).</p>",
             "items": {
@@ -7402,22 +7402,22 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Necromancer Troop",
-            "hp": "troop defenses",
+            "hp": "部队防御",
             "items": {
                 "Form Up": {
                     "name": "Form Up",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FormUp]</p>"
                 },
                 "Troop Defenses": {
-                    "name": "Troop Defenses",
+                    "name": "部队防御 Troop Defenses",
                     "description": "<p><strong>Thresholds</strong> 180 (3 segments), 90 (2 segments)</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
                 },
                 "Teach You a Lesson": {
                     "name": "Teach You a Lesson",
-                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The members of the mob wildly swing their textbooks and supplies—primarily spellbooks and staves—in a chaotic attack at each enemy adjacent to the troop (@Check[reflex|dc:41|basic]). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(2d12+14)[bludgeoning]] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d12+14)[bludgeoning]] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d12+14)[bludgeoning]] damage</p>"
+                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The members of the mob wildly swing their textbooks and supplies—primarily spellbooks and staves—in a chaotic attack at each enemy adjacent to the troop (@Check[reflex|dc:41|basic]). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(2d12+14)[bludgeoning]]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d12+14)[bludgeoning]]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d12+14)[bludgeoning]]伤害</p>"
                 },
                 "Troop Movement": {
-                    "name": "Troop Movement",
+                    "name": "部队移动 Troop Movement",
                     "description": "<p>Whenever the troop Strides, they first Form Up as a free action to condense into a 20-foot-by-20-foot area (minus any missing squares), then moves up to their Speed. This works just like a Gargantuan creature moving; for instance, if any square of the troop enters difficult terrain, the extra movement cost applies to the whole troop.</p>"
                 },
                 "Troop Spellcasting": {
@@ -7538,8 +7538,8 @@
                     "description": "<p><strong>Requirements</strong> The soul slime is using Soul Facsimile to adopt a creature's form</p>\n<hr />\n<p><strong>Effect</strong> The soul slime releases an incoherent wail composed of countless overlapping noises made by the creatures whose souls it has siphoned. This disturbing cacophony deals @Damage[6d10[mental],6d10[sonic]|options:area-damage]{6d10 mental damage and 6d10 sonic damage} to each creature in a @Template[burst|distance:30]{30-foot-radius burst} centered on the soul slime (@Check[will|dc:37|basic|options:area-effect]). On a failed save, a creature is additionally @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2}. The soul slime can't use Disturbing Wail again for [[/gmr 1d4 #Recharge Disturbing Wail]]{1d4 rounds}.</p>"
                 },
                 "Engulf": {
-                    "name": "Engulf",
-                    "description": "<p>@Check[reflex|dc:40], @Damage[5d10[bludgeoning]] damage, [[/act escape dc=40]], Rupture 20</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "name": "包卷 Engulf",
+                    "description": "<p>@Check[reflex|dc:40|options:damaging-effect,inflicts:grabbed,inflicts:slowed], @Damage[5d10[bludgeoning]] damage, [[/act escape dc=40]], Rupture 20</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "Soul Facsimile": {
                     "name": "Soul Facsimile",
@@ -7595,7 +7595,7 @@
             },
             "disable": "<p>@Check[thievery|dc:48] (master) to deface the script without triggering, @Check[arcana|dc:47] (master) to redirect the magical energy, or @Check[religion|dc:46] (master) to quote Pharasmin prayers</p>",
             "hazarddescription": "<p>The hall's entry and exit seal with a force barrier, then waves of force surge through the hall.</p>",
-            "routine": "<p>(1 动作） A wave of force flows down the hall from north to south, dealing @Damage[(3d10+20)[force]] damage to each creature in the corridor. Each creature must attempt a @Check[reflex|dc:40|basic]. On a failure, a creature is pushed back 5 feet (10 feet on a critical failure). If this movement would cause a creature to hit another creature, both creatures take @Damage[1d6[bludgeoning]] damage. If this movement would cause a creature to hit a force barrier, the creature takes @Damage[2d6[bludgeoning]] damage. Animals, plants, and worshippers of Pharasma are immune to this force damage.</p>",
+            "routine": "<p>（1动作）A wave of force flows down the hall from north to south, dealing @Damage[(3d10+20)[force]] damage to each creature in the corridor. Each creature must attempt a @Check[reflex|dc:40|basic]. On a failure, a creature is pushed back 5 feet (10 feet on a critical failure). If this movement would cause a creature to hit another creature, both creatures take @Damage[1d6[bludgeoning]] damage. If this movement would cause a creature to hit a force barrier, the creature takes @Damage[2d6[bludgeoning]] damage. Animals, plants, and worshippers of Pharasma are immune to this force damage.</p>",
             "prototypeToken": {
                 "name": "Cleansing Hall"
             }
@@ -7967,7 +7967,7 @@
             "name": "Soul-Drinking Spirit Collectors",
             "disable": "<p>@Check[religion|dc:47] (legendary) to sever the connection between Urgathoa and each spirit collector, @Check[thievery|dc:50] (legendary) to deactivate each spirit collector, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (9th rank; counteract DC 50) to counteract each spirit collector</p>",
             "hazarddescription": "<p>Four spirit collectors drain the souls from nearby creatures.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Repulse": {
                     "name": "Repulse",
@@ -8327,7 +8327,7 @@
             "name": "Shadow Hooks",
             "disable": "<p>@Check[thievery|dc:50] (legendary) to disable the trap's sensors</p>",
             "hazarddescription": "<p>Hooks of solidified shadow extend from the walls, hook into creatures, and pull, tearing them open.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Tearing Hooks": {
                     "name": "Tearing Hooks",
@@ -8562,7 +8562,7 @@
             "name": "Compression Tunnel",
             "disable": "<p>@Check[athletics|dc:46] (legendary) twice to push back the shadows or @Check[thievery|dc:48] (legendary) three times to pierce through the shadows</p>",
             "hazarddescription": "<p>This shadow tunnel compresses when creatures pass through.</p>",
-            "stealthdetails": "<p>(legendary)</p>",
+            "stealthdetails": "<p>（传奇）</p>",
             "items": {
                 "Shudder": {
                     "name": "Shudder",
@@ -8764,7 +8764,7 @@
                     "description": "<p>The ectoplasmic amalgam releases a burst of ectoplasm that deals @Damage[16d6[bludgeoning]|options:area-damage] damage in a @Template[cone|distance:60] (@Check[reflex|dc:36|basic|options:area-effect,inflicts:stunned]). On a failed save, a creature is additionally @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} (or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2} on a critical failure). Spew Ectoplasm functions as a force effect for the purposes of affecting incorporeal creatures. The ectoplasmic amalgam can't use Spew Ectoplasm again for [[/gmr 1d4 #Recharge Spew Ectoplasm]]{1d4 rounds}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -8845,7 +8845,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 }
             },
             "prototypeToken": {
@@ -8972,7 +8972,7 @@
                     "description": "<p>A drowned mummy's Strikes deal an additional 2d6 damage against creatures in the same body of water as the drowned mummy.</p>"
                 },
                 "Aquatic Ambush": {
-                    "name": "Aquatic Ambush",
+                    "name": "水下伏击 Aquatic Ambush",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
                 },
                 "Rancid Bloat": {
@@ -8984,7 +8984,7 @@
                     "description": "<p><strong>Requirements</strong> The drowned mummy is underwater</p>\n<hr />\n<p><strong>Effect</strong> The drowned mummy commands the water to churn, creating a powerful whirlpool centered on itself. Each creature within a @Template[emanation|distance:30] centered on the drowned mummy takes @Damage[14d8[bludgeoning]|options:area-damage] damage (@Check[reflex|dc:38|basic|options:area-effect,forced-movement,inflicts:prone]) as the powerful current batters them around. A creature that fails this save is pushed 20 feet away from the mummy and also falls @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} on a critical failure. The drowned mummy can't use Whirlpool again for [[/gmr 1d4 #Recharge Whirlpool]]{1d4 rounds}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -9219,7 +9219,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>需求</strong> The necromancer hasn't acted yet on this turn</p>\n<hr />\n<p><strong>效果</strong> The necromancer expends the power stored in their dagger. This gives them the ability to cast one prepared spell they prepared today and already cast, without spending a spell slot.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -9264,7 +9264,7 @@
                     "name": "Cold Beyond Cold"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -9366,7 +9366,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Frightful Presence": {
-                    "name": "Frightful Presence",
+                    "name": "恐怖威压 Frightful Presence",
                     "description": "<p>20尺，@Check[will|dc:34|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
                 },
                 "Infuse Weapon": {
@@ -9433,7 +9433,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 }
             },
             "data": {
@@ -9471,7 +9471,7 @@
                     "description": "<p>With a flourish, a celebrant shrouds themself in a puff of smoke, glitter, or colorful ribbons. If the celebrant is adjacent to an enemy, they attempt to @UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{Feint} that adjacent enemy. The celebrant Steps or Strides; they're @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} during this movement.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -9516,7 +9516,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 },
                 "Attack of Opportunity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>",
@@ -9588,7 +9588,7 @@
                     "description": "<p>The graveknight has access to the critical specialization effects of any weapons it wields.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -9624,7 +9624,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>需求</strong> The necromancer hasn't acted yet on this turn</p>\n<hr />\n<p><strong>效果</strong> The necromancer expends the power stored in their dagger. This gives them the ability to cast one prepared spell they prepared today and already cast, without spending a spell slot.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -9650,7 +9650,7 @@
                     "description": "<p>Kemnebi senses all non-mindless creatures within 100 feet as a precise sense.</p>"
                 },
                 "Fast Healing 20": {
-                    "name": "Fast Healing 20",
+                    "name": "快速治疗 Fast Healing 20",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Enlightened Mind": {

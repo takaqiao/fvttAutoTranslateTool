@@ -46,7 +46,7 @@
     "entries": {
         "Abyssal Firestorm Surge (7-8)": {
             "name": "Abyssal Firestorm Surge (7-8)",
-            "disable": "<p>@Check[arcana|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[nature|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[occultism|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], or @Check[religion|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical] （受训） to redirect the storm surge or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 23) to nullify it。</p>",
+            "disable": "<p>@Check[arcana|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[nature|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[occultism|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], or @Check[religion|dc:27|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical]（受训）to redirect the storm surge or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 23) to nullify it。</p>",
             "hazarddescription": "<p>High winds and forest fires intensified by Abyssal energy batters everything in the surge's path。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -68,7 +68,7 @@
         },
         "Abyssal Firestorm Surge (9-10)": {
             "name": "Abyssal Firestorm Surge (9-10)",
-            "disable": "<p>@Check[arcana|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[nature|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[occultism|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], or @Check[religion|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical] （受训） to redirect the storm surge or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (5th level, counteract DC 26) to nullify it。</p>",
+            "disable": "<p>@Check[arcana|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[nature|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], @Check[occultism|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical], or @Check[religion|dc:33|name:Redirect the Storm Surge|traits:rare,fire,environmental,hazard,magical]（受训）to redirect the storm surge or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (5th level, counteract DC 26) to nullify it。</p>",
             "hazarddescription": "<p>High winds and forest fires intensified by Abyssal energy batters everything in the surge's path。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -119,10 +119,10 @@
             "prototypeToken": {
                 "name": "Anatomical Model (1-2)"
             },
-            "ac": "(13 when broken); construct armor",
+            "ac": "（破损时13）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 3)": {
-                    "name": "Construct Armor (Hardness 3)",
+                    "name": "构装护甲 Construct Armor（硬度3）",
                     "description": "<p>Like normal objects, the anatomical model has Hardness. This Hardness reduces any damage the model takes by an amount equal to the Hardness.</p>\n<p>Once an anatomical model is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its Armor Class to 13.</p>"
                 },
                 "Slimy Guts": {
@@ -139,10 +139,10 @@
             "prototypeToken": {
                 "name": "Anatomical Model (3-4)"
             },
-            "ac": "(17 when broken); construct armor",
+            "ac": "（破损时17）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 5)": {
-                    "name": "Construct Armor (Hardness 5)",
+                    "name": "构装护甲 Construct Armor（硬度5）",
                     "description": "<p>Like normal objects, the anatomical model has Hardness. This Hardness reduces any damage the model takes by an amount equal to the Hardness.</p>\n<p>Once an anatomical model is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its Armor Class to 17.</p>"
                 },
                 "Slimy Guts": {
@@ -177,14 +177,14 @@
             },
             "items": {
                 "Guardian Construct Armor (Hardness 3)": {
-                    "name": "守卫构装装甲 Guardian Construct Armor （硬度3)",
+                    "name": "守卫构装护甲 Guardian Construct Armor（硬度3）",
                     "description": "<p>和普通物品一样，活化守卫具有硬度。这种硬度可以减少与硬度相等的伤害。</p>\n<p>一旦一个活化守卫的HP降低到一半以下，或者受到重击，其护甲立即被损坏，AC也会降低到11。它同时失去硬度。</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Animated Guardian"
             },
-            "ac": "(11 when broken); guardian construct armor"
+            "ac": "（破损时11）；守卫构装护甲"
         },
         "Animated Guardian Warrior": {
             "name": "活化战士 Animated Guardian Warrior",
@@ -193,14 +193,14 @@
             },
             "items": {
                 "Guardian Construct Armor (Hardness 6)": {
-                    "name": "守卫构装装甲 Guardian Construct Armor （硬度6)",
+                    "name": "守卫构装护甲 Guardian Construct Armor（硬度6）",
                     "description": "<p>和普通物品一样，活化守卫具有硬度。这种硬度可以减少与硬度相等的伤害。</p>\n<p>一旦一个活化守卫的HP降低到一半以下，或者受到重击，其护甲立即被损坏，AC也会降低到15。它同时失去硬度。</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Animated Guardian Warrior"
             },
-            "ac": "(15 when broken); guardian construct armor"
+            "ac": "（破损时15）；守卫构装护甲"
         },
         "Archis Peers (1-2)": {
             "name": "Archis Peers (1-2)",
@@ -306,14 +306,14 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Ash Form": {
                     "name": "Ash Form",
                     "description": "<p>The ash skeleton crumbles to ash or reforms in a standing position. While ash, the ash skeleton is @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobile}, @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}, and has an automatic result of 26 on Deception checks and DCs to pass as an inanimate pile of ash or layer of soot.</p>\n<p>The ash skeleton can remain in this ash form indefinitely.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Crumble": {
@@ -321,7 +321,7 @@
                     "description": "<p><strong>Trigger</strong> The ash skeleton is critically hit</p>\n<hr />\n<p><strong>Effect</strong> The ash skeleton crumbles to ash, and the attack deals only normal damage</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -337,14 +337,14 @@
             "prototypeToken": {
                 "name": "Ash Skeleton (3-4)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Crumble": {
                     "name": "Crumble",
                     "description": "<p><strong>Trigger</strong> The ash skeleton is critically hit</p>\n<hr />\n<p><strong>Effect</strong> The ash skeleton crumbles to ash, and the attack deals only normal damage</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Ash Form": {
@@ -352,7 +352,7 @@
                     "description": "<p>The ash skeleton crumbles to ash or reforms in a standing position. While ash, the ash skeleton is @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobile}, @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard}, and has an automatic result of 28 on Deception checks and DCs to pass as an inanimate pile of ash or layer of soot.</p>\n<p>The ash skeleton can remain in this ash form indefinitely.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 }
             }
@@ -431,7 +431,7 @@
             },
             "items": {
                 "All-Around Vision": {
-                    "name": "All-Around Vision",
+                    "name": "全域视野 All-Around Vision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
                 },
                 "Tongue Grab": {
@@ -440,7 +440,7 @@
                 },
                 "Camouflage": {
                     "name": "Camouflage",
-                    "description": "<p>The giant chameleon can change its coloration to match its surroundings. It doesn't need cover to attempt to @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} with a Stealth check.</p>"
+                    "description": "<p>The giant chameleon can change its coloration to match its surroundings. It doesn't need cover to attempt to [[/act hide]] with a Stealth check.</p>"
                 }
             },
             "prototypeToken": {
@@ -569,7 +569,7 @@
                     "description": "<p>The quasit's link to a mortal soul gave it birth, but it presents a vulnerability. Once per round, a creature can present an object related to something virtuous or good in the life of the quasit's creator (such as a beloved daughter's doll) as an Interact action to automatically deal the quasit @Damage[2d6[mental]] damage.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul>\n<ul>\n<li><strong>Bat</strong>\n<ul>\n<li><strong>Senses</strong> Echolocation 40 feet</li>\n<li><strong>Speed</strong> 15 feet, fly 30 feet</li>\n<li><strong>Melee</strong> fangs [[/r 1d20+10 #Fangs]]{+10}/[[/r 1d20+6 #Fangs]]{+6}/[[/r 1d20+2 #Fangs]]{+2} (agile), <strong>Damage</strong> @Damage[1d8[piercing]] damage</li>\n<li><strong>Melee</strong> wing [[/r 1d20+10 #Wing]]{+10}/[[/r 1d20+6 #Wing]]{+6}/[[/r 1d20+2 #Wing]]{+2} (agile), <strong>Damage</strong> @Damage[1d6[bludgeoning]] damage</li>\n</ul>\n</li>\n<li><strong>Centipede</strong>\n<ul>\n<li><strong>Speed</strong> 10 feet, climb 10 feet</li>\n<li><strong>Melee</strong> mandibles [[/r 1d20+10 #Mandibles]]{+10}/[[/r 1d20+5 #Mandibles]]{+5}/[[/r 1d20 #Mandibles]]{+0} (poison), <strong>Damage</strong> @Damage[2[piercing],1d6[poison]]{2 piercing damage + 1d6 poison damage}</li>\n</ul>\n</li>\n<li><strong>Toad</strong>\n<ul>\n<li><strong>Senses</strong> @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r]{Scent} (Imprecise) 30 feet</li>\n<li><strong>Speed</strong> 5 feet</li>\n<li><strong>Melee</strong> jaws [[/r 1d20+10 #Jaws]]{+10}/[[/r 1d20+5#Jaws]]{+5}/[[/r 1d20 #Jaws]]{+0}, <strong>Damage</strong> @Damage[2[bludgeoning]] damage</li>\n</ul>\n</li>\n<li><strong>Wolf</strong>\n<ul>\n<li><strong>Size</strong> Medium</li>\n<li><strong>Senses</strong> @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r]{Scent} (Imprecise) 30 feet</li>\n<li><strong>Speed</strong> 40 feet, climb 10 feet</li>\n<li><strong>Melee</strong> jaws [[/r 1d20+10 #Jaws]]{+10}/[[/r 1d20+5 #Jaws]]{+5}/[[/r 1d20 #Jaws]]{+0}, <strong>Damage</strong> @Damage[2d6[piercing]] damage plus @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.BCLvAx4Pz4MLa2pu]{Knockdown}</li>\n</ul>\n</li>\n</ul>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Abyssal Knowledge": {
@@ -604,7 +604,7 @@
                 },
                 "Change Shape": {
                     "description": "<p>The blighted fungus leshy transforms into a Small, sickly-looking giant mushroom or patch of fungi. This ability otherwise uses the effects of @UUID[Compendium.pf2e.spells-srd.Item.dileJ0Yxqg76LMvu]{One with Plants}.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
-                    "name": "Change Shape"
+                    "name": "变身 Change Shape"
                 },
                 "Spore Cloud": {
                     "name": "Spore Cloud",
@@ -623,7 +623,7 @@
             },
             "items": {
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The blighted leaf leshy transforms into a Small gnarled, rotted tree. This ability otherwise uses the effects of @UUID[Compendium.pf2e.spells-srd.Item.dileJ0Yxqg76LMvu]{One with Plants}.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Blightburst": {
@@ -653,7 +653,7 @@
                     "description": "<p>The shark can smell blood in the water from up to 1 mile away.</p>"
                 },
                 "Savage": {
-                    "description": "<p><strong>Requirements</strong> The shark hit with a jaws Strike on its most recent action this turn.</p>\n<hr />\n<p><strong>Effect</strong> The creature the shark hit takes @Damage[1d10[slashing]] damage</p>",
+                    "description": "<p><strong>Requirements</strong> The shark hit with a jaws Strike on its most recent action this turn.</p>\n<hr />\n<p><strong>Effect</strong> The creature the shark hit takes @Damage[1d10[slashing]]伤害</p>",
                     "name": "Savage"
                 },
                 "Breach": {
@@ -664,7 +664,7 @@
         },
         "Bloody Vortex (3-4)": {
             "name": "Bloody Vortex (3-4)",
-            "disable": "<p>Slay Silaqui, or @Check[thievery|dc:17|traits:action:disable-a-device] （受训） to pry the gem out of Silaqui followed by disrupting the gem's power by either breaking it (AC 15, Hardness 5, HP 25, BT 13) or using @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 15)</p>",
+            "disable": "<p>Slay Silaqui, or @Check[thievery|dc:17|traits:action:disable-a-device]（受训）to pry the gem out of Silaqui followed by disrupting the gem's power by either breaking it (AC 15, Hardness 5, HP 25, BT 13) or using @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 15)</p>",
             "hazarddescription": "",
             "routine": "<p>All creatures within 40 feet of the vortex except Silaqui are drawn toward it. They must attempt either a @Check[fortitude|dc:14] save or an @Check[athletics|dc:14|traits:action:swim] check to Swim with a DC of 14, with the following results。</p>\n<hr />\n<p><strong>成功</strong> The creature is not moved。</p>\n<p><strong>失败</strong> The creature is moved 10 feet closer to the center of the vortex. If this causes the creature to reach the center square of the vortex, they are exposed to Consuming Maelstrom。</p>\n<p><strong>大失败</strong> As failure, except the creature is moved 20 feet closer to the center of the vortex。</p>",
             "stealthdetails": "",
@@ -687,7 +687,7 @@
         },
         "Bloody Vortex (5-6)": {
             "name": "Bloody Vortex (5-6)",
-            "disable": "<p>Slay Silaqui, or @Check[thievery|dc:20|traits:action:disable-a-device] （受训） to pry the gem out of Silaqui followed by disrupting the gem's power by either breaking it (AC 18, Hardness 10, HP 45, BT 23) or using @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 19)</p>",
+            "disable": "<p>Slay Silaqui, or @Check[thievery|dc:20|traits:action:disable-a-device]（受训）to pry the gem out of Silaqui followed by disrupting the gem's power by either breaking it (AC 18, Hardness 10, HP 45, BT 23) or using @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 19)</p>",
             "hazarddescription": "<p>A bloody vortex violently draining into a crack of raw elemental energy, fueled by the curse of a sea devil oracle。</p>",
             "routine": "<p>All creatures within 40 feet of the vortex except Silaqui are drawn toward it. They must attempt either a @Check[fortitude|dc:17] save or an @Check[athletics|dc:17|traits:action:swim] check to Swim with a DC of 17, with the following results。</p>\n<hr />\n<p><strong>成功</strong> The creature is not moved。</p>\n<p><strong>失败</strong> The creature is moved 10 feet closer to the center of the vortex. If this causes the creature to reach the center square of the vortex, they are exposed to Consuming Maelstrom。</p>\n<p><strong>大失败</strong> As failure, except the creature is moved 20 feet closer to the center of the vortex。</p>",
             "stealthdetails": "",
@@ -724,11 +724,11 @@
                     "description": "<p>A ravener senses the spiritual essence of living and undead creatures within the listed range. Creatures whose material bodies are one unit with their souls, like celestials and fiends, appear brighter to this sense.</p>"
                 },
                 "Frightful Presence": {
-                    "name": "Frightful Presence",
+                    "name": "恐怖威压 Frightful Presence",
                     "description": "<p>90尺，@Check[will|dc:27|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Breath Weapon": {
@@ -739,7 +739,7 @@
             "prototypeToken": {
                 "name": "Brittle Ravener Husk"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Brittle Skeletal Horse": {
             "name": "Brittle Skeletal Horse",
@@ -748,14 +748,14 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Gallop": {
                     "description": "<p>The horse Strides twice, with its Speed increased by 10 feet.</p>",
                     "name": "Gallop"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Undead Steed": {
@@ -811,7 +811,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Burning Grasp": {
@@ -835,7 +835,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             },
@@ -857,7 +857,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             }
@@ -891,7 +891,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p><strong>Claw</strong></p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 }
             },
@@ -902,7 +902,7 @@
         },
         "Chaotic Door (1-2)": {
             "name": "Chaotic Door (1-2)",
-            "disable": "<p>@Check[athletics|dc:17|name:Hold the Door Shut|traits:chaotic,hazard,magical,trap] （受训） to hold the door shut against the force, or @Check[thievery|dc:18|name:Relieve Door Pressure|traits:chaotic,hazard,magical,trap] （受训） to deftly relieve pressure from the door。</p>",
+            "disable": "<p>@Check[athletics|dc:17|name:Hold the Door Shut|traits:chaotic,hazard,magical,trap]（受训）to hold the door shut against the force, or @Check[thievery|dc:18|name:Relieve Door Pressure|traits:chaotic,hazard,magical,trap]（受训）to deftly relieve pressure from the door。</p>",
             "hazarddescription": "<p>The frame splinters as the door flings open, the force hitting those nearby。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -920,7 +920,7 @@
         },
         "Chaotic Door (3-4)": {
             "name": "Chaotic Door (3-4)",
-            "disable": "<p>@Check[athletics|dc:20|name:Hold the Door Shut|traits:chaotic,hazard,magical,trap] （受训） to hold the door shut against the force, or @Check[thievery|dc:21|name:Relieve Door Pressure|traits:chaotic,hazard,magical,trap] （受训） to deftly relieve pressure from the door。</p>",
+            "disable": "<p>@Check[athletics|dc:20|name:Hold the Door Shut|traits:chaotic,hazard,magical,trap]（受训）to hold the door shut against the force, or @Check[thievery|dc:21|name:Relieve Door Pressure|traits:chaotic,hazard,magical,trap]（受训）to deftly relieve pressure from the door。</p>",
             "hazarddescription": "<p>The frame splinters as the door flings open, the force hitting those nearby。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -1034,7 +1034,7 @@
             "disable": "<p>@Check[nature|dc:14|name:Clear mold|traits:uncommon,complex,environmental,fire]或@Check[survival|dc:14|name:Clear mold|traits:uncommon,complex,environmental,fire]或@Check[thievery|dc:17|name:Clear mold|traits:uncommon,complex,environmental,fire]清除你所在位置和所有触及范围内的霉菌。飞溅的岩浆不会伤害到处于没有霉菌的区域内的生物，但只有清除所有霉菌才能解除危害。</p>",
             "hazarddescription": "<p>褐色霉菌和熔岩之间的平衡被扰乱，熔岩中冒出气泡，不断爆裂并飞溅出火花。</p>",
             "reset": "<p>如果没有完全破坏，霉菌每天会扩散到离熔岩10尺范围内的一个方格，直到它完全再生并恢复平衡状态。如果所有的霉菌都被清除，危害就被破坏了。</p>",
-            "routine": "<p>（1动作） 对区域内随机一个生物使用熔岩飞溅攻击。</p>",
+            "routine": "<p>（1动作）对区域内随机一个生物使用熔岩飞溅攻击。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -1063,7 +1063,7 @@
             "disable": "<p>@Check[nature|dc:17|name:Clear mold|traits:uncommon,complex,environmental,fire]或@Check[survival|dc:17|name:Clear mold|traits:uncommon,complex,environmental,fire]或@Check[thievery|dc:20|name:Clear mold|traits:uncommon,complex,environmental,fire]清除你所在位置和所有触及范围内的霉菌。飞溅的岩浆不会伤害到处于没有霉菌的区域内的生物，但只有清除所有霉菌才能解除危害。</p>",
             "hazarddescription": "<p>褐色霉菌和熔岩之间的平衡被扰乱，熔岩中冒出气泡，不断爆裂并飞溅出火花。</p>",
             "reset": "<p>如果没有完全破坏，霉菌每天会扩散到离熔岩10尺范围内的一个方格，直到它完全再生并恢复平衡状态。如果所有的霉菌都被清除，危害就被破坏了。</p>",
-            "routine": "<p>（1动作） 对区域内随机一个生物使用熔岩飞溅攻击。</p>",
+            "routine": "<p>（1动作）对区域内随机一个生物使用熔岩飞溅攻击。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -1122,7 +1122,7 @@
                     "description": "<p>If exposed to direct sunlight, Clouded Quartz immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions or Trample. The slowed value increases by 1 each time she ends her turn in sunlight. If Clouded Quartz's actions are reduced to 0 in this way, she becomes @UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{Petrified} until she spends at least 1 minute in darkness. Spells like @UUID[Compendium.pf2e.spells-srd.Item.a3aQxCpoj1q1NQxC]{Sunburst} that create magical sunlight cannot petrify Clouded Quartz, but she's slowed 1 for [[/gmr 1d4 #rounds]]{1d4 rounds} after being exposed to such an effect.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Rock Tunneler": {
@@ -1168,7 +1168,7 @@
                     "description": "<p>If exposed to direct sunlight, Clouded Quartz immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions or Trample. The slowed value increases by 1 each time she ends her turn in sunlight. If Clouded Quartz's actions are reduced to 0 in this way, she becomes @UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{Petrified} until she spends at least 1 minute in darkness. Spells like @UUID[Compendium.pf2e.spells-srd.Item.a3aQxCpoj1q1NQxC]{Sunburst} that create magical sunlight cannot petrify Clouded Quartz, but she is slowed 1 for [[/gmr 1d4 #rounds]]{1d4 rounds} after being exposed to such an effect.</p>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Rock Tunneler": {
@@ -1211,7 +1211,7 @@
         },
         "Collapsing Cabinet (1-2)": {
             "name": "倒塌的柜子 Collapsing Cabinet (1-2)",
-            "disable": "<p>@Check[thievery|dc:15|name:Support Cabinet|traits:mechanical,trap] （受训）将支撑物轻轻撑在柜子下面。</p>",
+            "disable": "<p>@Check[thievery|dc:15|name:Support Cabinet|traits:mechanical,trap]（受训）将支撑物轻轻撑在柜子下面。</p>",
             "hazarddescription": "<p>从烧杯中泄漏出来的液体腐蚀了橱柜的支架。</p>\n<p>此陷阱的BT是5，不是10。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -1229,7 +1229,7 @@
         },
         "Collapsing Cabinet (3-4)": {
             "name": "倒塌的柜子 Collapsing Cabinet (3-4)",
-            "disable": "<p>@Check[thievery|dc:18|name:Support Cabinet|traits:mechanical,trap] （受训）将支撑物轻轻撑在柜子下面。</p>",
+            "disable": "<p>@Check[thievery|dc:18|name:Support Cabinet|traits:mechanical,trap]（受训）将支撑物轻轻撑在柜子下面。</p>",
             "hazarddescription": "<p>从烧杯中泄漏出来的液体腐蚀了橱柜的支架。</p>\n<p>此陷阱的BT是10，不是20。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -1265,7 +1265,7 @@
         },
         "Collapsing Ramp (7-8)": {
             "name": "Collapsing Ramp (7-8)",
-            "disable": "<p>@Check[crafting|dc:28] （专家） to stabilize the masonry. Each attempt takes 2 actions。</p>",
+            "disable": "<p>@Check[crafting|dc:28]（专家）to stabilize the masonry. Each attempt takes 2 actions。</p>",
             "hazarddescription": "<p>Abyssal fire hits the stone beneath the ramp, causing a 15-foot-long section of it to collapse。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -1283,7 +1283,7 @@
         },
         "Collapsing Ramp (9-10)": {
             "name": "Collapsing Ramp (9-10)",
-            "disable": "<p>@Check[crafting|dc:31] （专家） to stabilize the masonry. Each attempt takes 2 actions。</p>",
+            "disable": "<p>@Check[crafting|dc:31]（专家）to stabilize the masonry. Each attempt takes 2 actions。</p>",
             "hazarddescription": "<p>Abyssal fire hits the stone beneath the ramp, causing a 15-foot-long section of it to collapse。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
@@ -1400,7 +1400,7 @@
             "prototypeToken": {
                 "name": "Crumbling Ravener Husk"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Soulsense 60 feet": {
                     "name": "Soulsense 60 feet",
@@ -1411,11 +1411,11 @@
                     "description": "<p><strong>Trigger</strong> The ravener husk takes bludgeoning damage</p><hr />\n<p><strong>Effect</strong> The ravener's brittle bones shatter, spraying bone shards everywhere. Every creature within a @Template[emanation|distance:10] of the ravener husk takes @Damage[5d6[piercing]|options:area-damage] damage (@Check[reflex|dc:25|basic|options:area-effect] save).</p>"
                 },
                 "Frightful Presence": {
-                    "name": "Frightful Presence",
+                    "name": "恐怖威压 Frightful Presence",
                     "description": "<p>90尺，@Check[will|dc:25|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Breath Weapon": {
@@ -1433,7 +1433,7 @@
             "prototypeToken": {
                 "name": "Cyclops Bodak"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Flash of Insight": {
                     "name": "Flash of Insight",
@@ -1448,7 +1448,7 @@
                     "description": "<p>The cyclops bodak stares at a living creature within 30 feet that it can sense with its @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.sebk9XseMCRkDqRg]{Lifesense}. That creature must attempt a @Check[fortitude|dc:25] save. If the target becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained}, the bodak gains a number of temporary Hit Points equal to 5 times the value of the drained condition the target gained.</p>\n<p>Multiple exposures to this ability can increase a creature's drained condition to a maximum of 4. If the cyclops bodak is destroyed, any @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed} condition a creature has gained from Death Gaze are removed.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1} and @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2}.</p>\n<p><strong>Critical Failure</strong> The creature is doomed 1 and @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 4}.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Bodak Spawn": {
@@ -1599,7 +1599,7 @@
                     "description": "<p><strong>Trigger</strong> A creature makes a successful melee attack against the spirit or makes a successful Acrobatics check to @UUID[Compendium.pf2e.actionspf2e.Item.21WIfSu7Xd7uKqV8]{Tumble Through} the spirit's space</p>\n<hr />\n<p><strong>Effect</strong> The spirit emits a brief pulse of void energy that deals @Damage[5d6[void]] damage to the triggering creature (@Check[reflex|dc:26|basic] save).</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Ritual Transformation": {
@@ -1608,7 +1608,7 @@
                 }
             },
             "allSaves": "+1 to all saves vs. vitality",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "ac": "(26 if rune is disabled)"
         },
         "Demoniac Spirit (9-10)": {
@@ -1616,7 +1616,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "ac": "(29 if rune is disabled)",
             "items": {
                 "+1 Status to All Saves vs. Vitality": {
@@ -1627,7 +1627,7 @@
                     "description": "<p><strong>Trigger</strong> A creature makes a successful melee attack against the spirit or makes a successful Acrobatics check to Tumble Through the spirit's space</p><hr /><p><strong>Effect</strong> The spirit emits a brief pulse of void energy that deals @Damage[5d6[void]] damage to the triggering creature (@Check[reflex|dc:28|basic] save).</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Abyssal Spite": {
@@ -1655,7 +1655,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Demonplague": {
@@ -1670,7 +1670,7 @@
             "prototypeToken": {
                 "name": "Demonplague Zombie"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Desiccated Giant Crawling Hand": {
             "name": "干燥的伏行之手 Desiccated Giant Crawling Hand",
@@ -1691,14 +1691,14 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Desiccated Giant Crawling Hand"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Disciple of Urxehl (7-8)": {
             "name": "Disciple of Urxehl (7-8)",
@@ -1707,7 +1707,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Channel Firestorm": {
@@ -1726,7 +1726,7 @@
                 "name": "Disciple of Urxehl (7-8)"
             },
             "allSaves": "+1 Status to All Saves vs. Magic",
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Disciple of Urxehl (9-10)": {
             "name": "Disciple of Urxehl (9-10)",
@@ -1750,11 +1750,11 @@
                     "description": "<p><strong>Trigger</strong> Urxehl's firestorm targets a creature</p>\n<hr />\n<p><strong>Effect</strong> The Disciple of Urxehl redirects the firestorm, causing it to target a different creature of the Disciple's choice.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Dragon Forest Rot": {
             "name": "Dragon Forest Rot",
@@ -1774,7 +1774,7 @@
                     "description": "<p><strong>Trigger</strong> An adjacent creature damages the dragon forest rot.</p>\n<hr />\n<p><strong>Effect</strong> The dragon forest rot sprays spores on the triggering creature. The spores deal @Damage[(2d4+5)[piercing]] damage with a @Check[fortitude|dc:19|basic] save. On a critical failure, the triggering creature gains weakness to slashing 5 for the next 4 rounds.</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>20 feet. A creature that enters or starts its turn in the emanation must succeed at a @Check[fortitude|dc:19|options:area-effect,inflicts:sickened] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. On a critical failure, the creature also takes a –5-foot status penalty to its Speeds for 1 round. While within the aura, the creature takes a -2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to the of all dragon forest rots for 1 minute.</p>"
                 },
                 "Breath Weapon": {
@@ -1785,7 +1785,7 @@
         },
         "Dragon's Death (1-2)": {
             "name": "Dragon's Death (1-2)",
-            "disable": "<p>@Check[religion|dc:20|name:Exorcise the Spirit|traits:haunt] （受训） to exorcise the spirit (two actions), or @Check[diplomacy|dc:23|name:Calm the Spirit|traits:haunt] （受训） to calm the spirit momentarily (two actions)。</p>",
+            "disable": "<p>@Check[religion|dc:20|name:Exorcise the Spirit|traits:haunt]（受训）to exorcise the spirit (two actions), or @Check[diplomacy|dc:23|name:Calm the Spirit|traits:haunt]（受训）to calm the spirit momentarily (two actions)。</p>",
             "hazarddescription": "<p>The pile of bones transforms into a Large silver dragon, while the PCs appear to transform into dark, shadowy figures of alien physique. The dragon's flesh appears to slowly dissolve into lines of black smoke, which trail away toward the PCs and appear to be absorbed into their bodies. Once the dragon is stripped of flesh, its skeleton explodes in a shower of bone fragments。</p>",
             "reset": "<p>1 minute, as the bone fragments slowly move back into a neat pile with the skull on top。</p>",
             "routine": "<p><strong>触发</strong> A creature comes within 15 feet of the dragon skull</p>\n<hr />\n<p><strong>效果</strong> All living creatures within 20 feet of the nest are peppered with bone shards and take @Damage[(2d10+7)[slashing]]伤害 (@Check[reflex|dc:20|basic|name:Dragon's Death|traits:haunt,divine,necromancy]豁免）。</p>",
@@ -1799,7 +1799,7 @@
         },
         "Dragon's Death (3-4)": {
             "name": "Dragon's Death (3-4)",
-            "disable": "<p>@Check[religion|dc:23|name:Exorcise the Spirit|traits:haunt] （受训） to exorcise the spirit (two actions), or @Check[diplomacy|dc:26|name:Calm the Spirit|traits:haunt] （受训） to calm the spirit momentarily (two actions)。</p>",
+            "disable": "<p>@Check[religion|dc:23|name:Exorcise the Spirit|traits:haunt]（受训）to exorcise the spirit (two actions), or @Check[diplomacy|dc:26|name:Calm the Spirit|traits:haunt]（受训）to calm the spirit momentarily (two actions)。</p>",
             "hazarddescription": "<p>The pile of bones transforms into a Large silver dragon, while the PCs appear to transform into dark, shadowy figures of alien physique. The dragon's flesh appears to slowly dissolve into lines of black smoke, which trail away toward the PCs and appear to be absorbed into their bodies. Once the dragon is stripped of flesh, its skeleton explodes in a shower of bone fragments。</p>",
             "reset": "<p>1 minute, as the bone fragments slowly move back into a neat pile with the skull on top。</p>",
             "routine": "<p><strong>触发</strong> A creature comes within 15 feet of the dragon skull</p>\n<hr />\n<p><strong>效果</strong> All living creatures within 20 feet of the nest are peppered with bone shards and take @Damage[(4d8+10)[slashing]]伤害 (@Check[reflex|dc:22|basic|name:Dragon's Death|traits:haunt,divine,necromancy]豁免）。</p>\n<p>On a critical failure, 生物@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for [[/gmr 1d4 #hours]]{1d4 hours}。</p>",
@@ -1952,7 +1952,7 @@
                     "description": "<p>A creature that slays a draugr is subjected to a @UUID[Compendium.pf2e.spells-srd.Item.z2mfh3oPnfYqXflY]{Mariner's Curse} spell with a save DC of 20. The curse ends if the draugr is buried in a calm sea or after 1 week passes.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Grotesque Gift": {
@@ -1963,7 +1963,7 @@
             "prototypeToken": {
                 "name": "Draugr Raider"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Duergar Raider": {
             "name": "灰矮人劫掠者 Duergar Raider",
@@ -1976,10 +1976,10 @@
                 },
                 "Shackle": {
                     "name": "枷锁 Shackle",
-                    "description": "<p><strong>需求</strong> 劫掠者持用镣铐，和目标生物相邻；</p>\n<hr />\n<p><strong>效果</strong> 劫掠者投掷攻击骰，用[[/r 1d20+8 #Shackle Attack]]{+8调整值}对抗目标生物的AC。成功时，目标手腕或脚踝被戴上镣铐。</p>"
+                    "description": "<p><strong>需求</strong> 劫掠者持用镣铐，和目标生物相邻</p>\n<hr />\n<p><strong>效果</strong> 劫掠者投掷攻击骰，用@Check[shackle|against:ac]{+8}调整值对抗目标生物的AC。成功时，目标手腕或脚踝被戴上镣铐。</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "+2 Status to All Saves vs. Magic": {
@@ -1993,7 +1993,7 @@
         },
         "Electric Lock Rune": {
             "name": "Electric Lock Rune",
-            "disable": "<p>@Check[thievery|dc:20|name:Scratch Out the Rune] （专家） to scratch out the rune without allowing electricity to flow, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 18) to counteract the rune</p>",
+            "disable": "<p>@Check[thievery|dc:20|name:Scratch Out the Rune]（专家）to scratch out the rune without allowing electricity to flow, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 18) to counteract the rune</p>",
             "hazarddescription": "<p>An invisible rune imprinted on a chest's lock releases a powerful electrical discharge。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -2017,10 +2017,10 @@
             "prototypeToken": {
                 "name": "Elite Anatomical Model (3-4)"
             },
-            "ac": "(19 when broken); construct armor",
+            "ac": "（破损时19）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 5)": {
-                    "name": "Construct Armor (Hardness 5)",
+                    "name": "构装护甲 Construct Armor（硬度5）",
                     "description": "<p>Like normal objects, the anatomical model has Hardness. This Hardness reduces any damage the model takes by an amount equal to the Hardness.</p>\n<p>Once an anatomical model is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its Armor Class to 19.</p>"
                 },
                 "Slimy Guts": {
@@ -2094,20 +2094,20 @@
                     "description": "<p>当骷髅被摧毁时，它的骨头会破碎然后爆炸，和支撑它的死灵能量一并放射出去。相邻的生物受到@Damage[1d6[slashing]]伤害，@Check[reflex|dc:15|basic]豁免。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Exploding Skeleton Guard"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Explosive Monolith (3-4)": {
             "name": "Explosive Monolith (3-4)",
             "disable": "<p>@Check[arcana|dc:17], @Check[occultism|dc:17], or @Check[religion|dc:17] to magically alter the runes, or @Check[thievery|dc:20] to physically alter them. A PC that can read Abyssal or Cyclops is better able to identify key runes, gaining a +1 circumstance bonus to these check (+2 if they speak both).</span></p>\n<p>Each check requires two actions, and disabling the monolith requires three successful checks. A PC that critically succeeds earns two success. On a failed check, the attempting PC is exposed to the burning flames wreathing the monolith, taking @Damage[2d6[fire]] damage(@Check[reflex|dc:17|basic|name:Explosive Monolith])。</p>",
             "hazarddescription": "<p>A burst of abyssal energy ignites the sap in a nearby bruorsivi, which explodes in a burst of fiery splinters。</p>",
-            "routine": "<p>（1动作） On the hazard's turn, randomly select a PC within 40 feet of the monolith. A tree near that PC explodes in a @Template[burst|distance:10], dealing [[/r {1d6[piercing],1d6[fire]}]]{1d6 piercing damage and 1d6 fire伤害}. Each creature in the area must attempt a @Check[reflex|dc:17|name:Explosive Monolith|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受伤害。</p>\n<p><strong>成功</strong> The creature takes half damage。</p>\n<p><strong>失败</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round。</p>\n<p><strong>大失败</strong> The creature takes double damage and is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round。</p>",
+            "routine": "<p>（1动作）On the hazard's turn, randomly select a PC within 40 feet of the monolith. A tree near that PC explodes in a @Template[burst|distance:10], dealing [[/r {1d6[piercing],1d6[fire]}]]{1d6 piercing damage and 1d6 fire伤害}. Each creature in the area must attempt a @Check[reflex|dc:17|name:Explosive Monolith|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受伤害。</p>\n<p><strong>成功</strong> The creature takes half damage。</p>\n<p><strong>失败</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round。</p>\n<p><strong>大失败</strong> The creature takes double damage and is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2126,7 +2126,7 @@
             "name": "Explosive Monolith (5-6)",
             "disable": "<p>@Check[arcana|dc:20], @Check[occultism|dc:20], or @Check[religion|dc:20] to magically alter the runes, or @Check[thievery|dc:23] to physically alter them. A PC that can read Abyssal or Cyclops is better able to identify key runes, gaining a +1 circumstance bonus to these check (+2 if they speak both)。</p>\n<p>Each check requires two actions, and disabling the monolith requires three successful checks. A PC that critically succeeds earns two success. On a failed check, the attempting PC is exposed to the burning flames wreathing the monolith, taking @Damage[2d6[fire]]伤害 (@Check[reflex|dc:20|basic|name:Explosive Monolith])。</p>",
             "hazarddescription": "<p>A burst of abyssal energy ignites the sap in a nearby bruorsivi, which explodes in a burst of fiery splinters。</p>",
-            "routine": "<p>（1动作） On the hazard's turn, randomly select a PC within 40 feet of the monolith. A tree near that PC explodes in a @Template[burst|distance:10], dealing [[/r {2d6[piercing],2d6[fire]}]]{2d6 piercing damage and 2d6 fire伤害}. Each creature in the area must attempt a @Check[reflex|dc:20|name:Explosive Monolith|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受伤害。</p>\n<p><strong>成功</strong> The creature takes half damage。</p>\n<p><strong>失败</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round。</p>\n<p><strong>大失败</strong> The creature takes double damage and is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round。</p>",
+            "routine": "<p>（1动作）On the hazard's turn, randomly select a PC within 40 feet of the monolith. A tree near that PC explodes in a @Template[burst|distance:10], dealing [[/r {2d6[piercing],2d6[fire]}]]{2d6 piercing damage and 2d6 fire伤害}. Each creature in the area must attempt a @Check[reflex|dc:20|name:Explosive Monolith|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物不受伤害。</p>\n<p><strong>成功</strong> The creature takes half damage。</p>\n<p><strong>失败</strong> The creature takes full damage and is @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 round。</p>\n<p><strong>大失败</strong> The creature takes double damage and is @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2155,7 +2155,7 @@
                 },
                 "Adhesive": {
                     "name": "Adhesive",
-                    "description": "<p>The mimic is coated in an adhesive slime. Any creature that hits the mimic, is hit by the mimic, or otherwise touches the mimic must succeed at a @Check[reflex|dc:21] save or become @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} ([[/act escape dc=21]]). A weapon that hits the mimic is stuck to the mimic and can be removed with a successful @Check[athletics|dc:23] check (made as a single action).</p>\n<p>A mimic can have any number of objects or creatures stuck to it at a time. The mimic can release a stuck creature or object by using a single action, and the adhesive dissolves 1 minute after the mimic dies, releasing all stuck objects and creatures.</p>"
+                    "description": "<p>The mimic is coated in an adhesive slime. Any creature that hits the mimic, is hit by the mimic, or otherwise touches the mimic must succeed at a @Check[reflex|dc:21|options:inflicts:grabbed] save or become @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} ([[/act escape dc=21]]). A weapon that hits the mimic is stuck to the mimic and can be removed with a successful @Check[athletics|dc:23] check (made as a single action).</p>\n<p>A mimic can have any number of objects or creatures stuck to it at a time. The mimic can release a stuck creature or object by using a single action, and the adhesive dissolves 1 minute after the mimic dies, releasing all stuck objects and creatures.</p>"
                 },
                 "Mimic Object": {
                     "name": "Mimic Object",
@@ -2202,7 +2202,7 @@
             "prototypeToken": {
                 "name": "Ferocious Zombie Grindylow"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Slow": {
                     "name": "Slow",
@@ -2221,7 +2221,7 @@
                     "name": "Clinging Suckers"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -2233,7 +2233,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Slow": {
@@ -2252,7 +2252,7 @@
             "prototypeToken": {
                 "name": "Fire-Eye Cyclops Zombie (1-2)"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Fire-Eye Cyclops Zombie (3-4)": {
             "name": "Fire-Eye Cyclops Zombie (3-4)",
@@ -2261,7 +2261,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Slow": {
@@ -2281,7 +2281,7 @@
                     "description": "<p>The fire-eye cyclops zombie makes a spiked club Strike and compares the attack roll result to the AC of up to two foes, each of whom must be within the Strike's reach. This attack counts as two attacks for the fire-eye zombie's multiple attack penalty.</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Fire-Eye Cyclops Zombie (3-4)"
             }
@@ -2324,7 +2324,7 @@
         },
         "Flames of Verakivhan (3-4)": {
             "name": "Flames of Verakivhan (3-4)",
-            "disable": "<p>@Check[nature|dc:17]或@Check[performance|dc:17] （受训） to remind the Finadar forest of its true self; or @Check[religion|dc:17], @Check[occultism|dc:17], or @Check[demon-lore|dc:17]{Demon Lore}（受训） to disrupt the connection to the imposed realm and extinguish one of the five sections of flames on the map. These checks can only be attempted by creatures adjacent to the section, and each attempt takes 2 actions. An extinguished fire still emits concealing smoke for 1 additional round but is no longer hot enough to deal damage. A @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} spell or a spell with the water trait (2nd level; counteract DC 15) extinguishes a section of flames. If the PCs disable three of the five sections of the flames of Verakivhan, the hazard is too weakened to sustain itself, and the remaining flames disappear. If there are no demons or elementals remaining in the area, the hazard is automatically disabled。</p>",
+            "disable": "<p>@Check[nature|dc:17]或@Check[performance|dc:17]（受训）to remind the Finadar forest of its true self; or @Check[religion|dc:17], @Check[occultism|dc:17], or @Check[demon-lore|dc:17]{Demon Lore}（受训）to disrupt the connection to the imposed realm and extinguish one of the five sections of flames on the map. These checks can only be attempted by creatures adjacent to the section, and each attempt takes 2 actions. An extinguished fire still emits concealing smoke for 1 additional round but is no longer hot enough to deal damage. A @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} spell or a spell with the water trait (2nd level; counteract DC 15) extinguishes a section of flames. If the PCs disable three of the five sections of the flames of Verakivhan, the hazard is too weakened to sustain itself, and the remaining flames disappear. If there are no demons or elementals remaining in the area, the hazard is automatically disabled。</p>",
             "hazarddescription": "<p>The demon lord Urxehl manifests upon Golarion a small region of his Abyssal realm, filled with constantly burning forests lashed by fierce storms and unholy rain that only further feeds the flames. This is a mystical fire, fueled by the presence of Urxehl's minions. Any flames on the map emit concealing smoke in a 10-foot radius around the fire。</p>",
             "routine": "<p>(3 actions) Any creature within the flames takes @Damage[(1d6+3)[fire]] damage, and any creature adjacent to the flames takes @Damage[1d6[fire]]伤害 (@Check[reflex|dc:17|basic|name:Flames of Verakivhan|traits:fire] save). Additionally, the flames call down a fiery rain that deals @Damage[(1d6+3)[fire]] damage to a random PC within the planar overlay (@Check[reflex|dc:17|basic|name:Flames of Verakivhan|traits:fire] save). If any PCs attempted to disable the hazard that turn, the fiery rain chooses one of them as its target。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -2343,7 +2343,7 @@
         },
         "Flames of Verakivhan (5-6)": {
             "name": "Flames of Verakivhan (5-6)",
-            "disable": "<p>@Check[nature|dc:20]或@Check[performance|dc:20] （受训） to remind the Finadar forest of its true self; or @Check[religion|dc:20], @Check[occultism|dc:20], or @Check[demon-lore|dc:20]{Demon Lore}（受训） to disrupt the connection to the imposed realm and extinguish one of the five sections of flames on the map. These checks can only be attempted by creatures adjacent to the section, and each attempt takes 2 actions. An extinguished fire still emits concealing smoke for 1 additional round but is no longer hot enough to deal damage. A @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} spell or a spell with the water trait (2nd level; counteract DC 17) extinguishes a section of flames. If the PCs disable three of the five sections of the flames of Verakivhan, the hazard is too weakened to sustain itself, and the remaining flames disappear. If there are no demons or elementals remaining in the area, the hazard is automatically disabled。</p>",
+            "disable": "<p>@Check[nature|dc:20]或@Check[performance|dc:20]（受训）to remind the Finadar forest of its true self; or @Check[religion|dc:20], @Check[occultism|dc:20], or @Check[demon-lore|dc:20]{Demon Lore}（受训）to disrupt the connection to the imposed realm and extinguish one of the five sections of flames on the map. These checks can only be attempted by creatures adjacent to the section, and each attempt takes 2 actions. An extinguished fire still emits concealing smoke for 1 additional round but is no longer hot enough to deal damage. A @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} spell or a spell with the water trait (2nd level; counteract DC 17) extinguishes a section of flames. If the PCs disable three of the five sections of the flames of Verakivhan, the hazard is too weakened to sustain itself, and the remaining flames disappear. If there are no demons or elementals remaining in the area, the hazard is automatically disabled。</p>",
             "hazarddescription": "<p>The demon lord Urxehl manifests upon Golarion a small region of his Abyssal realm, filled with constantly burning forests lashed by fierce storms and unholy rain that only further feeds the flames. This is a mystical fire, fueled by the presence of Urxehl's minions. Any flames on the map emit concealing smoke in a 10-foot radius around the fire。</p>",
             "routine": "<p>(3 actions) Any creature within the flames takes @Damage[(1d10+6)[fire]] damage, and any creature adjacent to the flames takes @Damage[1d10[fire]]伤害 (@Check[reflex|dc:20|basic|name:Flames of Verakivhan|traits:fire]). Additionally, the flames call down a fiery rain that deals @Damage[(1d10+6)[fire]] damage to a random PC within the planar overlay (@Check[reflex|dc:20|basic|name:Flames of Verakivhan|traits:fire] save). If any PCs attempted to disable the hazard that turn, the fiery rain chooses one of them as its target。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -2365,14 +2365,14 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Explode": {
                     "name": "Explode",
                     "description": "<p>When the flaming eye dies, it explodes in a violent burst of flame, dealing @Damage[1d6[fire]|options:area-damage] damage (@Check[reflex|dc:14|basic|options:area-effect] save) to creatures in a @Template[burst|distance:5].</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -2388,14 +2388,14 @@
             "prototypeToken": {
                 "name": "Flaming Eye (3-4)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Explode": {
                     "name": "Explode",
                     "description": "<p>When the flaming eye dies, it explodes in a violent burst of flame, dealing @Damage[2d6[fire]|options:area-damage] damage (@Check[reflex|dc:16|basic|options:area-effect] save) to creatures in a @Template[burst|distance:5].</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -2416,7 +2416,7 @@
                 },
                 "Smoldering Stench": {
                     "name": "阴燃臭气 Smoldering Stench",
-                    "description": "<p>@Template[emanation|distance:5]{5尺} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.v61oEQaDdcRpaZ9X]{灵光}</p>\n<hr />\n<p>进入灵光范围或在灵光中开始回合的生物必须进行@Check[fortitude|dc:19]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响，并暂时免疫阴燃臭气1分钟。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</p>"
+                    "description": "<p>@Template[emanation|distance:5]{5尺} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.v61oEQaDdcRpaZ9X]{灵光}</p>\n<hr />\n<p>进入灵光范围或在灵光中开始回合的生物必须进行@Check[fortitude|dc:19]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响，并临时免疫阴燃臭气1分钟。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</p>"
                 }
             },
             "prototypeToken": {
@@ -2427,7 +2427,7 @@
             "name": "Flooding Monolith (3-4)",
             "disable": "<p>@Check[arcana|dc:18], @Check[occultism|dc:18], or @Check[religion|dc:18] to magically alter the runes, or @Check[thievery|dc:21] to physically alter them. A PC that can read Abyssal or Cyclops is better able to identify key runes, gaining a +1 circumstance bonus to these check (+2 if they speak both)。</p>\n<p>Each check requires two actions, and disabling the monolith requires three successful checks. A PC that critically succeeds earns two success. On a failed check, the attempting PC is exposed to the burning flames wreathing the monolith, taking @Damage[2d6[fire]]伤害 (@Check[reflex|dc:18|basic|name:Flooding Monolith]豁免）。</p>",
             "hazarddescription": "<p>A surge of abyssal energy creates a powerful wave pushing away from the monolith。</p>",
-            "routine": "<p>（1动作） On the hazard's turn it sends a wave of water along the fork of the river (North, South, or East) that contains the nearest PC. Any creature along that fork in or on the surface of the water must attempt a @Check[fortitude|dc:18|name:Flooding Monolith]豁免。</p>\n<p>The monolith's guardians are accustomed to these surges and are immune to this effect。</p>\n<hr />\n<p><strong>大成功</strong> The creature takes advantage of the undertow after the surge to reposition themselves. The creature can Step, ignoring difficult terrain caused by the water。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> The creature is pushed 10 feet away from the monolith。</p>\n<p><strong>大失败</strong> The creature is pushed 15 feet away from the monolith and knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}。</p>",
+            "routine": "<p>（1动作）On the hazard's turn it sends a wave of water along the fork of the river (North, South, or East) that contains the nearest PC. Any creature along that fork in or on the surface of the water must attempt a @Check[fortitude|dc:18|name:Flooding Monolith]豁免。</p>\n<p>The monolith's guardians are accustomed to these surges and are immune to this effect。</p>\n<hr />\n<p><strong>大成功</strong> The creature takes advantage of the undertow after the surge to reposition themselves. The creature can Step, ignoring difficult terrain caused by the water。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> The creature is pushed 10 feet away from the monolith。</p>\n<p><strong>大失败</strong> The creature is pushed 15 feet away from the monolith and knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2446,7 +2446,7 @@
             "name": "Flooding Monolith (5-6)",
             "disable": "<p>@Check[arcana|dc:22], @Check[occultism|dc:22], or @Check[religion|dc:22] to magically alter the runes, or @Check[thievery|dc:25] to physically alter them. A PC that can read Abyssal or Cyclops is better able to identify key runes, gaining a +1 circumstance bonus to these check (+2 if they speak both). Each check requires two actions, and disabling the monolith requires three successful checks. A PC that critically succeeds earns two success. On a failed check, the attempting PC is exposed to the burning flames wreathing the monolith, taking @Damage[2d6[fire]]伤害 (@Check[reflex|dc:22|basic]豁免）。</p>",
             "hazarddescription": "<p>A surge of abyssal energy creates a powerful wave pushing away from the monolith。</p>",
-            "routine": "<p>（1动作） On the hazard's turn it sends a wave of water along the fork of the river (North, South, or East) that contains the nearest PC. Any creature along that fork in or on the surface of the water must attempt a @Check[fortitude|dc:22|name:Flooding Monolith]豁免。</p>\n<p>The monolith's guardians are accustomed to these surges and are immune to this effect。</p>\n<hr />\n<p><strong>大成功</strong> The creature takes advantage of the undertow after the surge to reposition themselves. The creature can Step, ignoring difficult terrain caused by the water。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> The creature is pushed 10 feet away from the monolith。</p>\n<p><strong>大失败</strong> The creature is pushed 15 feet away from the monolith and knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}。</p>",
+            "routine": "<p>（1动作）On the hazard's turn it sends a wave of water along the fork of the river (North, South, or East) that contains the nearest PC. Any creature along that fork in or on the surface of the water must attempt a @Check[fortitude|dc:22|name:Flooding Monolith]豁免。</p>\n<p>The monolith's guardians are accustomed to these surges and are immune to this effect。</p>\n<hr />\n<p><strong>大成功</strong> The creature takes advantage of the undertow after the surge to reposition themselves. The creature can Step, ignoring difficult terrain caused by the water。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> The creature is pushed 10 feet away from the monolith。</p>\n<p><strong>大失败</strong> The creature is pushed 15 feet away from the monolith and knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2463,7 +2463,7 @@
         },
         "Foretold Ruin (1-2)": {
             "name": "Foretold Ruin (1-2)",
-            "disable": "<p>@Check[thievery|dc:17|name:Disable Thievery] （受训） to scratch out a pillar's runes, @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (1st level; counteract DC 15) to counteract a pillar's magic, or @Check[athletics|dc:18|name:Disable Athletics|traits:action:force-open]{Athletics (Force Open)} to push a pillar over. Disabling a pillar requires two actions. Disabling all four pillars or slaying Sezruth disables the trap</p>",
+            "disable": "<p>@Check[thievery|dc:17|name:Disable Thievery]（受训）to scratch out a pillar's runes, @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (1st level; counteract DC 15) to counteract a pillar's magic, or @Check[athletics|dc:18|name:Disable Athletics|traits:action:force-open]{Athletics (Force Open)} to push a pillar over. Disabling a pillar requires two actions. Disabling all four pillars or slaying Sezruth disables the trap</p>",
             "hazarddescription": "<p>Daemonic curses slither and crawl through malevolent runes carved in four stone pillars. HP is per-pillar。</p>",
             "routine": "<p><strong>Routine (4 actions)</strong> The trap loses 1 action each turn for each disabled pillar. On its initiative, the trap uses each action to afflict a different non-evil creature in the room with thirst. The creature must attempt a @Check[fortitude|dc:17|name:Foretold Ruin|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> The creature is temporarily immune to additional negative effects from the <em>foretold ruin</em> hazard's reaction for 24 hours. The hazard has no awareness of this immunity and continues to target this creature。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} until they drink water. If the creature was already fatigued, they take [[/r 1d6 #nonlethal mental]]{1d6 nonlethal mental伤害}。</p>\n<p><strong>大失败</strong> The creature is fatigued until they drink water and takes [[/r 1d6 #nonlethal mental]]{1d6 nonlethal mental伤害}. If the creature was already fatigued, they instead take [[/r 2d6 #nonlethal mental]]{2d6 nonlethal mental伤害}。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -2482,7 +2482,7 @@
         },
         "Foretold Ruin (3-4)": {
             "name": "Foretold Ruin (3-4)",
-            "disable": "<p>@Check[thievery|dc:20|name:Disable Thievery] （受训） to scratch out a pillar's runes, @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 18) to counteract a pillar's magic, or @Check[athletics|dc:21|name:Disable Athletics|traits:action:force-open]{Athletics (Force Open)} to push a pillar over. Disabling a pillar requires two actions. Disabling all four pillars or slaying Sezruth disables the trap</p>",
+            "disable": "<p>@Check[thievery|dc:20|name:Disable Thievery]（受训）to scratch out a pillar's runes, @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level; counteract DC 18) to counteract a pillar's magic, or @Check[athletics|dc:21|name:Disable Athletics|traits:action:force-open]{Athletics (Force Open)} to push a pillar over. Disabling a pillar requires two actions. Disabling all four pillars or slaying Sezruth disables the trap</p>",
             "hazarddescription": "<p>Daemonic curses slither and crawl through malevolent runes carved in four stone pillars. HP is per-pillar。</p>",
             "routine": "<p><strong>Routine (4 actions)</strong> The trap loses 1 action each turn for each disabled pillar. On its initiative, the trap uses each action to afflict a different non-evil creature in the room with thirst. The creature must attempt a @Check[fortitude|dc:20|name:Foretold Ruin|traits:damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> The creature is temporarily immune to additional negative effects from the <em>foretold ruin</em> hazard's reaction for 24 hours. The hazard has no awareness of this immunity and continues to target this creature。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} until they drink water. If the creature was already fatigued, they take [[/r 1d6 #nonlethal mental]]{1d6 nonlethal mental伤害}。</p>\n<p><strong>大失败</strong> The creature is fatigued until they drink water and takes [[/r 1d6 #nonlethal mental]]{1d6 nonlethal mental伤害}. If the creature was already fatigued, they instead take [[/r 2d6 #nonlethal mental]]{2d6 nonlethal mental伤害}。</p>",
             "stealthdetails": "",
@@ -2506,7 +2506,7 @@
             },
             "items": {
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Regeneration 15 (Deactivated by Acid or Fire)": {
@@ -2566,7 +2566,7 @@
             "items": {
                 "Haul Away": {
                     "name": "Haul Away",
-                    "description": "<p><strong>Requirements</strong> The giant worker ant has a Large or smaller creature grabbed</p>\n<hr />\n<p><strong>Effect</strong> The giant worker ant Strides up to its full Speed, carrying the grabbed creature with it. It is @UUID[Compendium.pf2e.conditionitems.Item.D5mg6Tc7Jzrj6ro7]{Encumbered} if the grabbed creature is Medium or larger.</p>"
+                    "description": "<p><strong>Requirements</strong> The giant worker ant has a Large or smaller creature @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}</p>\n<hr />\n<p><strong>Effect</strong> The giant worker ant Strides up to its full Speed, carrying the grabbed creature with it. It is @UUID[Compendium.pf2e.conditionitems.Item.D5mg6Tc7Jzrj6ro7]{Encumbered} if the grabbed creature is Medium or larger.</p>"
                 }
             }
         },
@@ -2597,10 +2597,10 @@
             "prototypeToken": {
                 "name": "Goblin Skeleton"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -2634,7 +2634,7 @@
             "hp": "regeneration 5 (deactivated by holy)",
             "items": {
                 "Grasping Fingers": {
-                    "description": "<p>The hand of Urxehl begins with 4 fingers embedded outside of the rift. At the beginning of the encounter, the hand is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1}, and can use this additional action to make grasping claw Strikes. For every 45 damage the hand of Urxehl takes, one of these fingers recedes and the hand loses 1 action, first losing the quickened condition, then becoming @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} before being defeated at 0 Hit Points.</p>",
+                    "description": "<p>The hand of Urxehl begins with 4 fingers embedded outside of the rift. At the beginning of the encounter, the hand is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened}, and can use this additional action to make grasping claw Strikes. For every 45 damage the hand of Urxehl takes, one of these fingers recedes and the hand loses 1 action, first losing the quickened condition, then becoming @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} before being defeated at 0 Hit Points.</p>",
                     "name": "Grasping Fingers"
                 },
                 "Dominating Will": {
@@ -2670,7 +2670,7 @@
                 },
                 "Grasping Fingers": {
                     "name": "Grasping Fingers",
-                    "description": "<p>The hand of Urxehl begins with 4 fingers embedded outside of the rift. At the beginning of the encounter, the hand is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1}, and can use this additional action to make grasping claw Strikes. For every 60 damage the hand of Urxehl takes, one of these fingers recedes and the hand loses 1 action, first losing the quickened condition, then becoming @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} before being defeated at 0 Hit Points.</p>"
+                    "description": "<p>The hand of Urxehl begins with 4 fingers embedded outside of the rift. At the beginning of the encounter, the hand is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened}, and can use this additional action to make grasping claw Strikes. For every 60 damage the hand of Urxehl takes, one of these fingers recedes and the hand loses 1 action, first losing the quickened condition, then becoming @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} before being defeated at 0 Hit Points.</p>"
                 },
                 "Thrash About": {
                     "name": "Thrash About",
@@ -2681,10 +2681,10 @@
         },
         "Hands of Slow Death": {
             "name": "Hands of Slow Death",
-            "disable": "<p>@Check[religion|dc:15|name:Administer Burial Rites|traits:haunt] （受训） to speak the proper burial rites, @Check[occultism|dc:15|name:Exorcise Spirits|traits:haunt] （受训） to exorcise the lingering souls, or @Check[intimidation|dc:17|name:Scare Away Spirits|traits:haunt] to scare the fearful souls away。</p>\n<p>These actions have the verbal trait. Each check to disable the hazard requires 2 actions, and two total successes are required to disable the haunt。</p>",
+            "disable": "<p>@Check[religion|dc:15|name:Administer Burial Rites|traits:haunt]（受训）to speak the proper burial rites, @Check[occultism|dc:15|name:Exorcise Spirits|traits:haunt]（受训）to exorcise the lingering souls, or @Check[intimidation|dc:17|name:Scare Away Spirits|traits:haunt] to scare the fearful souls away。</p>\n<p>These actions have the verbal trait. Each check to disable the hazard requires 2 actions, and two total successes are required to disable the haunt。</p>",
             "hazarddescription": "<p>A pile of dust and bone meal, several inches deep and 10 feet across on each side, blocks the tunnel to the surface. It is suffused with the despair of the slowly dying, and summons vengeful skeletal hands to hunt down anyone who dares attempt to leave the area。</p>",
             "reset": "<p>The haunt deactivates if no creatures remain within 30 feet but resets immediately thereafter unless disabled. If tthe haunt is disabled, it resets after 24 hours。</p>",
-            "routine": "<p>（1动作） Spectral hands grasp at creatures in the area. Each creature within 30 feet of the dust pile takes @Damage[1d4[void]]伤害 (@Check[will|dc:17|basic|name:Grasping Hands] save; creatures that critically fail this saving throw are @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for 1轮）。</p>",
+            "routine": "<p>（1动作）Spectral hands grasp at creatures in the area. Each creature within 30 feet of the dust pile takes @Damage[1d4[void]]伤害 (@Check[will|dc:17|basic|name:Grasping Hands] save; creatures that critically fail this saving throw are @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for 1轮）。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2726,7 +2726,7 @@
             "prototypeToken": {
                 "name": "Hobgoblin Skeleton"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "ac": "(19 with shield raised)",
             "items": {
                 "Attack of Opportunity": {
@@ -2734,7 +2734,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -2782,7 +2782,7 @@
             "items": {
                 "Slip and Slide": {
                     "name": "Slip and Slide",
-                    "description": "<p><strong>Trigger</strong> A creature walks onto the ice slick</p>\n<hr />\n<p><strong>Effect</strong> The target must attempt a @Check[acrobatics|dc:15|name:Balance|traits:environmental]{Athletics} check to @UUID[Compendium.pf2e.action-macros.Macro.55mxH0w8UkY1o3Xv]{Balance}. If it fails this check, it falls @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} and slides 10 feet in the direction it was moving when this reaction was triggered. If this movement is stopped by a wall, the target takes 1d6 bludgeoning damage per 5 feet of prevented movement. If this forced movement moves the target through another creature's space, that other creature must succeed at a @Check[reflex|dc:14|name:Tripped by Sliding Ally] save or be knocked prone as well.</p>\n<hr />\n<p>5 foot damage: @Damage[1d6[bludgeoning]] damage</p>\n<p>10 foot damage: @Damage[2d6[bludgeoning]] damage</p>"
+                    "description": "<p><strong>Trigger</strong> A creature walks onto the ice slick</p>\n<hr />\n<p><strong>Effect</strong> The target must attempt a @Check[acrobatics|dc:15|name:Balance|traits:environmental]{Athletics} check to @UUID[Compendium.pf2e.action-macros.Macro.55mxH0w8UkY1o3Xv]{Balance}. If it fails this check, it falls @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} and slides 10 feet in the direction it was moving when this reaction was triggered. If this movement is stopped by a wall, the target takes 1d6 bludgeoning damage per 5 feet of prevented movement. If this forced movement moves the target through another creature's space, that other creature must succeed at a @Check[reflex|dc:14|name:Tripped by Sliding Ally] save or be knocked prone as well.</p>\n<hr />\n<p>5 foot damage: @Damage[1d6[bludgeoning]]伤害</p>\n<p>10 foot damage: @Damage[2d6[bludgeoning]]伤害</p>"
                 }
             },
             "prototypeToken": {
@@ -2808,7 +2808,7 @@
                     "description": "<p><strong>Trigger</strong> An adjacent creature damages the dragon forest rot.</p>\n<hr />\n<p><strong>Effect</strong> The dragon forest rot sprays spores on the triggering creature. The spores deal @Damage[(2d6+9)[piercing]] damage with a @Check[fortitude|dc:23|basic] save. On a critical failure, the triggering creature gains weakness to slashing 5 for the next 4 rounds.</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>20 feet. A creature that enters or starts its turn in the emanation must succeed at a @Check[fortitude|dc:23|options:area-effect,inflicts:sickened] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. On a critical failure, the creature also takes a –5-foot status penalty to its Speeds for 1 round. While within the aura, the creature takes a -2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to the of all dragon forest rots for 1 minute.</p>"
                 }
             },
@@ -2830,7 +2830,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Requirements</strong> Iverri's last action was a successful thorn spike Strike that damaged the target</p>\n<hr />\n<p><strong>Effect</strong> Iverri transforms the thorns into burrowing maggots, infusing the target with a fell curse to bind it to her. The target must attempt a @Check[will|dc:22] save to resist the curse; on a failure, this binding lasts until the end of Iverri's next turn.</p>\n<p>While the binding is active, Iverri takes only half damage from all effects that deal Hit Point damage, and the target takes the remainder of the damage. When the target takes damage from the bond, it doesn't apply any resistances, weaknesses, or other abilities it has to that damage.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -2851,7 +2851,7 @@
             "items": {
                 "Constant Spells": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
-                    "name": "Constant Spells"
+                    "name": "常驻法术 Constant Spells"
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "+1 Status to All Saves vs. Magic"
@@ -2938,7 +2938,7 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Boar Charge": {
@@ -2960,7 +2960,7 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Daeodon Charge": {
@@ -2977,14 +2977,14 @@
             "prototypeToken": {
                 "name": "Kayajima Guardian Dogu (3-4)"
             },
-            "ac": "(20 when broken); construct armor",
+            "ac": "（破损时20）；构装护甲",
             "items": {
                 "Sudden Charge": {
                     "description": "<p>The Kayajima guardian propels itself with jets of blue energy from its feet, dashing up to a foe and swinging its fist. It Strides twice. If it ends its movement within melee range of at least one enemy, it can make an energized fist Strike against that enemy.</p>",
                     "name": "Sudden Charge"
                 },
                 "Construct Armor": {
-                    "name": "Construct Armor",
+                    "name": "构装护甲 Construct Armor",
                     "description": "<p>Like normal objects, the guardian dogu has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once the guardian is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 20.</p>"
                 },
                 "Ley Line Surge": {
@@ -3004,7 +3004,7 @@
                     "description": "<p>The Kayajima guardian propels itself with jets of blue energy from its feet, dashing up to a foe and swinging its fist. It Strides twice. If it ends its movement within melee range of at least one enemy, it can make an energized fist Strike against that enemy.</p>"
                 },
                 "Construct Armor": {
-                    "name": "Construct Armor",
+                    "name": "构装护甲 Construct Armor",
                     "description": "<p>Like normal objects, the guardian dogu has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once the guardian is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 22.</p>"
                 },
                 "Ley Line Surge": {
@@ -3015,7 +3015,7 @@
             "prototypeToken": {
                 "name": "Kayajima Guardian Dogu (5-6)"
             },
-            "ac": "(22 when broken); construct armor"
+            "ac": "（破损时22）；构装护甲"
         },
         "Kobold Warrior (PFS 2-11)": {
             "name": "Kobold Warrior (PFS 2-11)",
@@ -3058,14 +3058,14 @@
                     "description": "<p>大量的铅会造成头痛、难以集中注意力和关节疼痛。死灵魔法增强了骷髅表面的铅，使之生效速度远远快于一般的铅中毒。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:18]</p>\n<hr />\n<p><strong>最大持续时间</strong> 4轮</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害，呆滞1和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（2轮）</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Leaded Skeleton"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Lesser Bruorsivi Mandragora": {
             "name": "弱化的血松曼德拉 Lesser Bruorsivi Mandragora",
@@ -3124,14 +3124,14 @@
                     "description": "<p>巨人行进并且使用爪抓打击，这次爪抓打击在伤害上拥有+2环境加值。如果打击命中，巨人对目标尝试一次@UUID[Compendium.pf2e.action-macros.Macro.nEwqNNWX6scLt4sc]{挫败士气}。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Lesser Skeletal Cyclops"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Lion (PFS 2-13)": {
             "name": "Lion (PFS 2-13)",
@@ -3223,7 +3223,7 @@
         },
         "Mechanical Jaws (3-4)": {
             "name": "Mechanical Jaws (3-4)",
-            "disable": "<p>@Check[thievery|dc:16] （受训） on the jaw mechanism。</p>",
+            "disable": "<p>@Check[thievery|dc:16]（受训）on the jaw mechanism。</p>",
             "hazarddescription": "<p>Mechanical jaws bolted to the stone beneath a camouflaged floor tile。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -3250,7 +3250,7 @@
                     "name": "Swarming Claws"
                 },
                 "Fast Healing 2": {
-                    "name": "Fast Healing 2",
+                    "name": "快速治疗 Fast Healing 2",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Breath Weapon": {
@@ -3261,7 +3261,7 @@
             "prototypeToken": {
                 "name": "Mephit Swarm (5-6)"
             },
-            "hp": "fast healing 2"
+            "hp": "快速治疗2"
         },
         "Mephit Swarm (7-8)": {
             "name": "Mephit Swarm (7-8)",
@@ -3278,14 +3278,14 @@
                     "description": "<p>Each enemy in the swarm's space takes @Damage[3d6[piercing]] damage (@Check[reflex|dc:22|basic] save).</p>"
                 },
                 "Fast Healing 2": {
-                    "name": "Fast Healing 2",
+                    "name": "快速治疗 Fast Healing 2",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Mephit Swarm (7-8)"
             },
-            "hp": "fast healing 2"
+            "hp": "快速治疗2"
         },
         "Mercenary Trapper (1-2)": {
             "name": "Mercenary Trapper (1-2)",
@@ -3499,9 +3499,9 @@
         },
         "Mushroom Ring (1-2)": {
             "name": "Mushroom Ring (1-2)",
-            "disable": "<p>@Check[thievery|dc:15|traits:action:disable-device] （受训） or @Check[nature|dc:18] to rearrange the mushrooms to disrupt the portal (two actions); three successes are required to disable the portal</p>",
+            "disable": "<p>@Check[thievery|dc:15|traits:action:disable-device]（受训）or @Check[nature|dc:18] to rearrange the mushrooms to disrupt the portal (two actions); three successes are required to disable the portal</p>",
             "hazarddescription": "<p>This <em>mushroom ring</em> forms a portal to the First World, allowing the Thorned Monarch's reinforcements into the Material Plane. When the PCs approach, a creature emerges. Creatures continue to emerge until the mushroom ring is disabled. Disabling the mushroom ring also causes any creatures that have emerged to disappear。</p>",
-            "routine": "<p>（1动作） A @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.jnmUcTs4hn1c5bz9]{Pugwampi} emerges from the <em>mushroom ring</em> and defends it. All pugwampis use the <em>mushroom ring's</em> initiative。</p>",
+            "routine": "<p>（1动作）A @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.jnmUcTs4hn1c5bz9]{Pugwampi} emerges from the <em>mushroom ring</em> and defends it. All pugwampis use the <em>mushroom ring's</em> initiative。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3518,9 +3518,9 @@
         },
         "Mushroom Ring (3-4)": {
             "name": "Mushroom Ring (3-4)",
-            "disable": "<p>@Check[thievery|dc:22|traits:action:disable-device] （受训） or @Check[nature|dc:22] to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level, counteract DC 20) to counteract the magical properties; three successes are required to disable the portal</p>",
+            "disable": "<p>@Check[thievery|dc:22|traits:action:disable-device]（受训）or @Check[nature|dc:22] to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (2nd level, counteract DC 20) to counteract the magical properties; three successes are required to disable the portal</p>",
             "hazarddescription": "<p>This <em>mushroom ring</em> forms a portal to the First World, allowing the Thorned Monarch's reinforcements into the Material Plane. When the PCs approach, a creature emerges. Creatures continue to emerge until the mushroom ring is disabled. Disabling the mushroom ring also causes any creatures that have emerged to disappear。</p>",
-            "routine": "<p>（1动作） A @UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.bpwaqRoO1wYo15T5]{Nuglub} emerges from the <em>mushroom ring</em> and defends it. All nuglubs use the <em>mushroom ring's</em> initiative。</p>",
+            "routine": "<p>（1动作）A @UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.bpwaqRoO1wYo15T5]{Nuglub} emerges from the <em>mushroom ring</em> and defends it. All nuglubs use the <em>mushroom ring's</em> initiative。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3537,9 +3537,9 @@
         },
         "Mushroom Ring (5-6)": {
             "name": "Mushroom Ring (5-6)",
-            "disable": "<p>@Check[thievery|dc:21|traits:action:disable-device] （专家） or @Check[nature|dc:25] （受训） to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd level, counteract DC 23) to counteract the magical properties; three successes are required to disable the portal</p>",
+            "disable": "<p>@Check[thievery|dc:21|traits:action:disable-device]（专家）or @Check[nature|dc:25]（受训）to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd level, counteract DC 23) to counteract the magical properties; three successes are required to disable the portal</p>",
             "hazarddescription": "<p>This <em>mushroom ring</em> forms a portal to the First World, allowing the Thorned Monarch's reinforcements into the Material Plane. When the PCs approach, a creature emerges. Creatures continue to emerge until the mushroom ring is disabled. Disabling the mushroom ring also causes any creatures that have emerged to disappear。</p>",
-            "routine": "<p>（1动作） A @UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.xIvv8vKBa0YsTEzt]{Korred} emerges from the <em>mushroom ring</em> and defends it. All korreds use the <em>mushroom ring's</em> initiative。</p>",
+            "routine": "<p>（1动作）A @UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.xIvv8vKBa0YsTEzt]{Korred} emerges from the <em>mushroom ring</em> and defends it. All korreds use the <em>mushroom ring's</em> initiative。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3556,9 +3556,9 @@
         },
         "Mushroom Ring (7-8)": {
             "name": "Mushroom Ring (7-8)",
-            "disable": "<p>@Check[thievery|dc:24|traits:action:disable-device] （专家） or @Check[nature|dc:28] （专家） to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 26) to counteract the magical properties; three successes are required to disable the portal</p>",
+            "disable": "<p>@Check[thievery|dc:24|traits:action:disable-device]（专家）or @Check[nature|dc:28]（专家）to rearrange the mushrooms to disrupt the portal (two actions) or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 26) to counteract the magical properties; three successes are required to disable the portal</p>",
             "hazarddescription": "<p>This <em>mushroom ring</em> forms a portal to the First World, allowing the Thorned Monarch's reinforcements into the Material Plane. When the PCs approach, a creature emerges. Creatures continue to emerge until the mushroom ring is disabled. Disabling the mushroom ring also causes any creatures that have emerged to disappear。</p>",
-            "routine": "<p>（1动作） A @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.8uXLbKKzxN5O0ZhM]{Elananx} emerges from the <em>mushroom ring</em> and defends it. All elananxes use the <em>mushroom ring's</em> initiative。</p>",
+            "routine": "<p>（1动作）A @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.8uXLbKKzxN5O0ZhM]{Elananx} emerges from the <em>mushroom ring</em> and defends it. All elananxes use the <em>mushroom ring's</em> initiative。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3771,7 +3771,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Wavesense]</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Vortex": {
@@ -3779,7 +3779,7 @@
                     "description": "<p>40 feet. Water in the aura's emanation that is also in the same body of water as Perizia is difficult terrain for swimming creatures. Creatures with the water trait are immune.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Perizia can take on the appearance of any water elemental or humanoid. This ability doesn't change her Speed or her attack and damage bonuses with her Strikes.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Improvised Wishcraft": {
@@ -3805,7 +3805,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Wavesense]</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "It's My Desire": {
@@ -3821,7 +3821,7 @@
                     "description": "<p>Perizia makes a trident Strike, dealing an extra @Damage[1d4[bleed]] on a hit (@Damage[2d4[bleed]] on a critical hit).</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Perizia can take on the appearance of any water elemental or humanoid. This ability doesn't change her Speed or her attack and damage bonuses with her Strikes.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Improvised Wishcraft": {
@@ -3859,14 +3859,14 @@
             "prototypeToken": {
                 "name": "Plague Zombie (PFS 2-15)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Slow": {
                     "name": "Slow",
                     "description": "<p>A zombie is permanently @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Zombie Rot": {
@@ -3877,10 +3877,10 @@
         },
         "Planar Cracks (5-6)": {
             "name": "Planar Cracks (5-6)",
-            "disable": "<p>@Check[thievery|dc:24|name:Assemble a Seal|traits:environmental,magical] （受训） twice to assemble a seal using objects strongly grounded to the Material Plane, @Check[arcana|dc:22|name:Invoke Incantations|traits:environmental,magical] （受训） twice to invoke incantations to seal the cracks, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd level, counteract DC 20) to counteract the cracks。</p>",
+            "disable": "<p>@Check[thievery|dc:24|name:Assemble a Seal|traits:environmental,magical]（受训）twice to assemble a seal using objects strongly grounded to the Material Plane, @Check[arcana|dc:22|name:Invoke Incantations|traits:environmental,magical]（受训）twice to invoke incantations to seal the cracks, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd level, counteract DC 20) to counteract the cracks。</p>",
             "hazarddescription": "<p>The cracks scintillate and shift between the elemental planes, leaking perilous energy with each shift。</p>",
             "reset": "<p>The cracks re-form after 1 hour。</p>",
-            "routine": "<p>（1动作） A surge of energy strikes a random non-mephit creature in the foyer. Roll [[/r 1d4]] to determine the element of the energy surge。</p>\n<p>1-Energy from the Plane of Air: the creature takes @Damage[2d8[electricity]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:air,electricity] save); on a failure, the creature is pushed back 10 feet toward the entryway. The hazard gains the air and electricity traits for this round。</p>\n<p>2-Energy from the Plane of Earth: the creature takes @Damage[2d8[bludgeoning]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:earth] save); on a failed save, the creature is knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. The hazard gains the earth trait for this round。</p>\n<p>3-Energy from the Plane of Fire: the creature takes @Damage[(2d8+7)[fire]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:fire] save). The hazard gains the fire trait for this round。</p>\n<p>4-Energy from the Plane of Water: the creature takes @Damage[2d8[cold]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:water,cold] save); on a failed save, the creature's lungs fill with water, making them @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}. The hazard gains the cold and water traits for this round。</p>",
+            "routine": "<p>（1动作）A surge of energy strikes a random non-mephit creature in the foyer. Roll [[/r 1d4]] to determine the element of the energy surge。</p>\n<p>1-Energy from the Plane of Air: the creature takes @Damage[2d8[electricity]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:air,electricity] save); on a failure, the creature is pushed back 10 feet toward the entryway. The hazard gains the air and electricity traits for this round。</p>\n<p>2-Energy from the Plane of Earth: the creature takes @Damage[2d8[bludgeoning]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:earth] save); on a failed save, the creature is knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. The hazard gains the earth trait for this round。</p>\n<p>3-Energy from the Plane of Fire: the creature takes @Damage[(2d8+7)[fire]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:fire] save). The hazard gains the fire trait for this round。</p>\n<p>4-Energy from the Plane of Water: the creature takes @Damage[2d8[cold]]伤害 (@Check[reflex|dc:22|basic|name:Planar Cracks|traits:water,cold] save); on a failed save, the creature's lungs fill with water, making them @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}. The hazard gains the cold and water traits for this round。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3897,10 +3897,10 @@
         },
         "Planar Cracks (7-8)": {
             "name": "Planar Cracks (7-8)",
-            "disable": "<p>@Check[thievery|dc:28|name:Assemble a Seal|traits:environmental,magical] （专家） twice to assemble a seal using objects strongly grounded to the Material Plane, @Check[arcana|dc:26|name:Invoke Incantations|traits:environmental,magical] （受训） twice to invoke incantations to seal the cracks, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 22) to counteract the cracks。</p>",
+            "disable": "<p>@Check[thievery|dc:28|name:Assemble a Seal|traits:environmental,magical]（专家）twice to assemble a seal using objects strongly grounded to the Material Plane, @Check[arcana|dc:26|name:Invoke Incantations|traits:environmental,magical]（受训）twice to invoke incantations to seal the cracks, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th level, counteract DC 22) to counteract the cracks。</p>",
             "hazarddescription": "<p>The cracks scintillate and shift between the elemental planes, leaking perilous energy with each shift。</p>",
             "reset": "<p>The cracks re-form after 1 hour。</p>",
-            "routine": "<p>（1动作） A surge of energy strikes a random non-mephit creature in the foyer. Roll [[/r 1d4]] to determine the element of the energy surge。</p>\n<p>1-Energy from the Plane of Air: the creature takes @Damage[(2d10+3)[electricity]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:air,electricity] save); on a failure, the creature is pushed back 10 feet toward the entryway. The hazard gains the air and electricity traits for this round。</p>\n<p>2-Energy from the Plane of Earth: the creature takes @Damage[(2d10+3)[bludgeoning]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:earth] save); on a failed save, the creature is knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. The hazard gains the earth trait for this round。</p>\n<p>3-Energy from the Plane of Fire: the creature takes @Damage[(2d10+9)[fire]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:fire] save). The hazard gains the fire trait for this round。</p>\n<p>4-Energy from the Plane of Water: the creature takes @Damage[(2d10+3)[cold]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:water,cold] save); on a failed save, the creature's lungs fill with water, making them @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}. The hazard gains the cold and water traits for this round。</p>",
+            "routine": "<p>（1动作）A surge of energy strikes a random non-mephit creature in the foyer. Roll [[/r 1d4]] to determine the element of the energy surge。</p>\n<p>1-Energy from the Plane of Air: the creature takes @Damage[(2d10+3)[electricity]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:air,electricity] save); on a failure, the creature is pushed back 10 feet toward the entryway. The hazard gains the air and electricity traits for this round。</p>\n<p>2-Energy from the Plane of Earth: the creature takes @Damage[(2d10+3)[bludgeoning]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:earth] save); on a failed save, the creature is knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. The hazard gains the earth trait for this round。</p>\n<p>3-Energy from the Plane of Fire: the creature takes @Damage[(2d10+9)[fire]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:fire] save). The hazard gains the fire trait for this round。</p>\n<p>4-Energy from the Plane of Water: the creature takes @Damage[(2d10+3)[cold]]伤害 (@Check[reflex|dc:25|basic|name:Planar Cracks|traits:water,cold] save); on a failed save, the creature's lungs fill with water, making them @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}. The hazard gains the cold and water traits for this round。</p>",
             "stealthdetails": "",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3940,7 +3940,7 @@
         },
         "Pressurized Bottle (1-2)": {
             "name": "充满压力的烧瓶 Pressurized Bottle (1-2)",
-            "disable": "<p>@Check[thievery|dc:17|name:Pressurized Bottle|traits:mechanical,trap] （受训）小心地用桶或碗把烧瓶扣在下面。</p>",
+            "disable": "<p>@Check[thievery|dc:17|name:Pressurized Bottle|traits:mechanical,trap]（受训）小心地用桶或碗把烧瓶扣在下面。</p>",
             "hazarddescription": "<p>这瓶药水已经发酵成了毒药，内部还产生了巨大的压力。如果处理不当，瓶子会瞬间爆裂，碎片横飞。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -3962,7 +3962,7 @@
         },
         "Pressurized Bottle (3-4)": {
             "name": "充满压力的烧瓶 Pressurized Bottle (3-4)",
-            "disable": "<p>@Check[thievery|dc:20|name:Pressurized Bottle|traits:mechanical,trap] （受训）小心地用桶或碗把烧瓶扣在下面。</p>",
+            "disable": "<p>@Check[thievery|dc:20|name:Pressurized Bottle|traits:mechanical,trap]（受训）小心地用桶或碗把烧瓶扣在下面。</p>",
             "hazarddescription": "<p>这瓶药水已经发酵成了毒药，内部还产生了巨大的压力。如果处理不当，瓶子会瞬间爆裂，碎片横飞。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -4030,7 +4030,7 @@
                 },
                 "Constant Spells": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
-                    "name": "Constant Spells"
+                    "name": "常驻法术 Constant Spells"
                 },
                 "Flutter": {
                     "name": "Flutter",
@@ -4062,10 +4062,10 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Drain Life": {
@@ -4097,10 +4097,10 @@
             "prototypeToken": {
                 "name": "Ragewight (5-6)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Drain Life": {
@@ -4147,11 +4147,11 @@
             },
             "items": {
                 "Guardian Construct Armor (Hardness 5)": {
-                    "name": "守卫构装装甲 Guardian Construct Armor （硬度5)",
+                    "name": "守卫构装护甲 Guardian Construct Armor（硬度5）",
                     "description": "<p>和普通物品一样，活化守卫具有硬度。这种硬度可以减少与硬度相等的伤害。</p>\n<p>一旦一个活化守卫的HP降低到一半以下，或者受到重击，其护甲立即被损坏，AC也会降低到13。它同时失去硬度。</p>"
                 }
             },
-            "ac": "(13 when broken); guardian construct armor",
+            "ac": "（破损时13）；守卫构装护甲",
             "prototypeToken": {
                 "name": "Reinforced Animated Guardian"
             }
@@ -4161,7 +4161,7 @@
             "disable": "<p>@Check[diplomacy|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]、@Check[intimidation|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]或@Check[religion|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]使不安的灵魂冷静下来，@Check[athletics|dc:20|name:Wrestle Spirits into Order|traits:unique,complex,haunt]指挥灵魂有序行动。需要两次成功的检定才可解除，每次尝试需要两个动作。</p>",
             "hazarddescription": "<p>房间剧烈地震动，就像大分裂发生时一样，几十个矮人的灵魂疯狂地冲向安全地带，他们的恐惧显而易见。</p>",
             "reset": "<p>如果没有被解除，作祟会在所有生物离开该区域1分钟后消失并立即重置。如果被解除，作祟会在24小时后重置。</p>",
-            "routine": "<p>（1动作） 矮人的鬼魂冲向出口，对区域内的每个生物造成@Damage[(1d10+4)[bludgeoning]]伤害（@Check[reflex|dc:20|basic|name:Trampled by Spirits|traits:complex,haunt,unique]豁免。大失败时，生物@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。</p>\n<p>尝试在作祟区域内站起来的生物必须通过@Check[flat|dc:11]，否则会再次因鬼魂的践踏而倒地。</p>",
+            "routine": "<p>（1动作）矮人的鬼魂冲向出口，对区域内的每个生物造成@Damage[(1d10+4)[bludgeoning]]伤害（@Check[reflex|dc:20|basic|name:Trampled by Spirits|traits:complex,haunt,unique]豁免。大失败时，生物@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。</p>\n<p>尝试在作祟区域内站起来的生物必须通过@Check[flat|dc:11]，否则会再次因鬼魂的践踏而倒地。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -4182,7 +4182,7 @@
             "disable": "<p>@Check[diplomacy|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]、@Check[intimidation|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]或@Check[religion|dc:18|name:Calm the Spirits|traits:unique,complex,haunt]使不安的灵魂冷静下来，@Check[athletics|dc:20|name:Wrestle Spirits into Order|traits:unique,complex,haunt]指挥灵魂有序行动。需要两次成功的检定才可解除，每次尝试需要两个动作。</p>",
             "hazarddescription": "<p>房间剧烈地震动，就像大分裂发生时一样，几十个矮人的灵魂疯狂地冲向安全地带，他们的恐惧显而易见。</p>",
             "reset": "<p>如果没有被解除，作祟会在所有生物离开该区域1分钟后消失并立即重置。如果被解除，作祟会在24小时后重置。</p>",
-            "routine": "<p>（1动作） 矮人的鬼魂冲向出口，对区域内的每个生物造成@Damage[(2d8+5)[bludgeoning]]伤害（@Check[reflex|dc:23|basic|name:Trampled by Spirits|traits:complex,haunt,unique]豁免。大失败时，生物@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。</p>\n<p>尝试在作祟区域内站起来的生物必须通过@Check[flat|dc:11]，否则会再次因鬼魂的践踏而倒地。</p>",
+            "routine": "<p>（1动作）矮人的鬼魂冲向出口，对区域内的每个生物造成@Damage[(2d8+5)[bludgeoning]]伤害（@Check[reflex|dc:23|basic|name:Trampled by Spirits|traits:complex,haunt,unique]豁免。大失败时，生物@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。</p>\n<p>尝试在作祟区域内站起来的生物必须通过@Check[flat|dc:11]，否则会再次因鬼魂的践踏而倒地。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -4209,7 +4209,7 @@
                     "description": "<p><strong>Requirements</strong> The burned-out efreeti has one hand free</p>\n<hr />\n<p><strong>Effect</strong> The burned-out efreeti makes a melee Strike while keeping one hand free. If the Strike hits, the target is @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} in the efreeti's free hand.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Burning Grasp": {
@@ -4231,7 +4231,7 @@
                     "name": "俄罗斯帝国军装 Russian Imperial Army uniform"
                 },
                 "equipment-Junk Mosin-Nagant rifle with attached bayonet (can't fire)": {
-                    "name": "装有刺刀的莫辛纳甘步枪（损坏,无法开火） Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
+                    "name": "装有刺刀的莫辛纳甘步枪（损坏，无法开火）Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
                 },
                 "strike-Bayonet": {
                     "name": "刺刀 Bayonet"
@@ -4259,7 +4259,7 @@
                     "name": "俄罗斯帝国军装 Russian Imperial Army uniform"
                 },
                 "equipment-Junk Mosin-Nagant rifle with attached bayonet (can't fire)": {
-                    "name": "装有刺刀的莫辛纳甘步枪（损坏,无法开火） Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
+                    "name": "装有刺刀的莫辛纳甘步枪（损坏，无法开火）Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
                 },
                 "strike-Bayonet": {
                     "name": "刺刀 Bayonet"
@@ -4317,7 +4317,7 @@
             },
             "items": {
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "Rock Tunneler": {
@@ -4388,7 +4388,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Hamstring": {
@@ -4415,7 +4415,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Hamstring": {
@@ -4438,7 +4438,7 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Hunt Prey": {
@@ -4454,7 +4454,7 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Hunt Prey": {
@@ -4485,7 +4485,7 @@
                     "description": "<p>Scorched Earth orcs deal an extra 2d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             },
@@ -4507,7 +4507,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Sneak Attack": {
@@ -4573,7 +4573,7 @@
                     "name": "俄罗斯帝国军装 Russian Imperial Army uniform"
                 },
                 "equipment-Junk Mosin-Nagant rifle with attached bayonet (can't fire)": {
-                    "name": "装有刺刀的莫辛纳甘步枪（损坏,无法开火） Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
+                    "name": "装有刺刀的莫辛纳甘步枪（损坏，无法开火）Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
                 },
                 "strike-Bayonet": {
                     "name": "刺刀 Bayonet"
@@ -4605,7 +4605,7 @@
                     "name": "俄罗斯帝国军装 Russian Imperial Army uniform"
                 },
                 "equipment-Junk Mosin-Nagant rifle with attached bayonet (can't fire)": {
-                    "name": "装有刺刀的莫辛纳甘步枪（损坏,无法开火） Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
+                    "name": "装有刺刀的莫辛纳甘步枪（损坏，无法开火）Junk Mosin-Nagant rifle with attached bayonet (can't fire)"
                 },
                 "strike-Bayonet": {
                     "name": "刺刀 Bayonet"
@@ -4639,7 +4639,7 @@
             "items": {
                 "Empowered Blood": {
                     "name": "Empowered Blood",
-                    "description": "<p>The Usij cultists' blood magic strengthens Sezruth. He begins with 2 Blood Points from sacrifices just before the PCs arrived, and gains 1 additional Blood Point for each time the empowered blood hazard is activated in area B. The adjustments are not cumulative.</p>\n<p><strong>1-2 Blood Points</strong> Sezruth gains 5 temporary Hit Points.</p>\n<p><strong>3-4 Blood Points</strong> Sezruth gains 5 temporary Hit Points. Sezruth is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1} and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score.</p>\n<p><strong>5 or more Blood Points</strong> Sezruth gains 10 temporary Hit Points. Sezruth is quickened 1 and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score</p>"
+                    "description": "<p>The Usij cultists' blood magic strengthens Sezruth. He begins with 2 Blood Points from sacrifices just before the PCs arrived, and gains 1 additional Blood Point for each time the empowered blood hazard is activated in area B. The adjustments are not cumulative.</p>\n<p><strong>1-2 Blood Points</strong> Sezruth gains 5 temporary Hit Points.</p>\n<p><strong>3-4 Blood Points</strong> Sezruth gains 5 temporary Hit Points. Sezruth is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened} and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score.</p>\n<p><strong>5 or more Blood Points</strong> Sezruth gains 10 temporary Hit Points. Sezruth is quickened 1 and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "+1 Status to All Saves vs. Magic"
@@ -4681,7 +4681,7 @@
                 },
                 "Empowered Blood": {
                     "name": "Empowered Blood",
-                    "description": "<p>The Usij cultists' blood magic strengthens Sezruth. He begins with 2 Blood Points from sacrifices just before the PCs arrived, and gains 1 additional Blood Point for each time the empowered blood hazard is activated in area B. The adjustments are not cumulative.</p>\n<p><strong>1-2 Blood Points</strong> Sezruth gains 10 temporary Hit Points.</p>\n<p><strong>3-4 Blood Points</strong> Sezruth gains 10 temporary Hit Points. Sezruth is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened 1} and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score.</p>\n<p><strong>5 or more Blood Points</strong> Sezruth gains 15 temporary Hit Points. Sezruth is quickened 1 and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score</p>"
+                    "description": "<p>The Usij cultists' blood magic strengthens Sezruth. He begins with 2 Blood Points from sacrifices just before the PCs arrived, and gains 1 additional Blood Point for each time the empowered blood hazard is activated in area B. The adjustments are not cumulative.</p>\n<p><strong>1-2 Blood Points</strong> Sezruth gains 10 temporary Hit Points.</p>\n<p><strong>3-4 Blood Points</strong> Sezruth gains 10 temporary Hit Points. Sezruth is @UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{Quickened} and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score.</p>\n<p><strong>5 or more Blood Points</strong> Sezruth gains 15 temporary Hit Points. Sezruth is quickened 1 and can use the extra action to Stride toward or Strike the foe it is aware of with the highest Charisma score</p>"
                 }
             },
             "allSaves": "+1 status to all saves vs. magic",
@@ -4760,14 +4760,14 @@
                     "description": "<p>巨人行进并且使用爪抓打击，这次爪抓打击在伤害上拥有+4环境加值。如果打击命中，巨人对目标尝试一次@UUID[Compendium.pf2e.action-macros.Macro.nEwqNNWX6scLt4sc]{挫败士气}。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Skeletal Cyclops"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Skeletal Reveler": {
             "name": "骷髅狂欢者 Skeletal Reveler",
@@ -4788,18 +4788,18 @@
                     "name": "Serving Tray"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Skeletal Reveler"
             }
         },
         "Sliding Statue (1-2)": {
             "name": "Sliding Statue (1-2)",
-            "disable": "<p>@Check[athletics|dc:20|name:Hold Back Statue|traits:complex,hazard,magical,trap] to hold it back, @Check[crafting|dc:17|name:Break Statue|traits:complex,hazard,magical,trap] （受训） to break the statue by exploiting a flaw, @Check[occultism|dc:16|name:Dispel Planar Energies|traits:complex,hazard,magical,trap] （受训） to dispel the planar energies。</p>",
+            "disable": "<p>@Check[athletics|dc:20|name:Hold Back Statue|traits:complex,hazard,magical,trap] to hold it back, @Check[crafting|dc:17|name:Break Statue|traits:complex,hazard,magical,trap]（受训）to break the statue by exploiting a flaw, @Check[occultism|dc:16|name:Dispel Planar Energies|traits:complex,hazard,magical,trap]（受训）to dispel the planar energies。</p>",
             "hazarddescription": "<p>With a rumble, this statue of a former Pathfinder slides across the schoolyard. Its legs pump up and down as it advances。</p>",
             "routine": "<p>(3 actions) The trap uses its three actions for its Trample activity。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -4812,7 +4812,7 @@
                 },
                 "Slide": {
                     "name": "Slide",
-                    "description": "<p><strong>触发</strong> A creature approaches within 10 feet of the trap。</p>\n<hr />\n<p><strong>效果</strong> The statue Strides up to 30 feet in the direction of the triggering creature. It deals [[/r {1d6+3}]]{1d6+3伤害} (@Check[reflex|dc:17|basic|traits:complex,hazard,magical,trap] save) to each creature whose space it enters。</p>"
+                    "description": "<p><strong>Trigger</strong> A creature approaches within 10 feet of the trap.</p>\n<hr />\n<p><strong>Effect</strong> The statue Strides up to 30 feet in the direction of the triggering creature. It deals @Damage[(1d6+3)[untyped]] damage (@Check[reflex|dc:17|basic|traits:complex,hazard,magical,trap] save) to each creature whose space it enters.</p>"
                 },
                 "strike-Crushing Feet": {
                     "name": "Crushing Feet"
@@ -4828,7 +4828,7 @@
         },
         "Sliding Statue (3-4)": {
             "name": "Sliding Statue (3-4)",
-            "disable": "<p>@Check[athletics|dc:23|name:Hold Back Statue|traits:complex,hazard,magical,trap] to hold it back, @Check[crafting|dc:20|name:Break Statue|traits:complex,hazard,magical,trap] （受训） to break the statue by exploiting a flaw, @Check[occultism|dc:18|name:Dispel Planar Energies|traits:complex,hazard,magical,trap] （受训） to dispel the planar energies。</p>",
+            "disable": "<p>@Check[athletics|dc:23|name:Hold Back Statue|traits:complex,hazard,magical,trap] to hold it back, @Check[crafting|dc:20|name:Break Statue|traits:complex,hazard,magical,trap]（受训）to break the statue by exploiting a flaw, @Check[occultism|dc:18|name:Dispel Planar Energies|traits:complex,hazard,magical,trap]（受训）to dispel the planar energies。</p>",
             "hazarddescription": "<p>With a rumble, this statue of a former Pathfinder slides across the schoolyard. Its legs pump up and down as it advances。</p>",
             "routine": "<p>(3 actions) The trap uses its three actions for its Trample activity。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -4841,7 +4841,7 @@
                 },
                 "Slide": {
                     "name": "Slide",
-                    "description": "<p><strong>触发</strong> A creature approaches within 10 feet of the trap。</p>\n<hr />\n<p><strong>效果</strong> The statue Strides up to 30 feet in the direction of the triggering creature. It deals [[/r {1d10+6}]]{1d10+6伤害} (@Check[reflex|dc:20|basic|traits:complex,hazard,magical,trap] save) to each creature whose space it enters。</p>"
+                    "description": "<p><strong>Trigger</strong> A creature approaches within 10 feet of the trap.</p>\n<hr />\n<p><strong>Effect</strong> The statue Strides up to 30 feet in the direction of the triggering creature. It deals @Damage[(1d10+6)[untyped]] damage (@Check[reflex|dc:20|basic|traits:complex,hazard,magical,trap] save) to each creature whose space it enters.</p>"
                 },
                 "strike-Crushing Feet": {
                     "name": "Crushing Feet"
@@ -4898,7 +4898,7 @@
                 },
                 "Smoldering Stench": {
                     "name": "阴燃臭气 Smoldering Stench",
-                    "description": "<p>@Template[emanation|distance:5]{5尺} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.v61oEQaDdcRpaZ9X]{灵光}</p>\n<hr />\n<p>进入灵光范围或在灵光中开始回合的生物必须进行@Check[fortitude|dc:17]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响，并暂时免疫阴燃臭气1分钟。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</p>"
+                    "description": "<p>@Template[emanation|distance:5]{5尺} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.v61oEQaDdcRpaZ9X]{灵光}</p>\n<hr />\n<p>进入灵光范围或在灵光中开始回合的生物必须进行@Check[fortitude|dc:17]豁免。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响，并临时免疫阴燃臭气1分钟。</p>\n<p><strong>失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>\n<p><strong>大失败</strong> 生物@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。</p>"
                 }
             },
             "prototypeToken": {
@@ -5016,7 +5016,7 @@
         },
         "Sticky Web Lurker Noose": {
             "name": "Sticky Web Lurker Noose",
-            "disable": "<p>@Check[survival|dc:20] （受训） or @Check[thievery|dc:20] （专家） to rearrange the webbing。</p>",
+            "disable": "<p>@Check[survival|dc:20]（受训）or @Check[thievery|dc:20]（专家）to rearrange the webbing。</p>",
             "hazarddescription": "<p>Discreet webbing at throat level snags a creature that walks into it。</p>",
             "stealthdetails": "",
             "data": {
@@ -5037,7 +5037,7 @@
             "disable": "<p>@Check[deception|dc:22] to appear to be a defender of Storasta, @Check[diplomacy|dc:22] to demonstrate benign intentions, or @Check[occultism|dc:20]或@Check[religion|dc:20] to ward off the malevolent spiritual energies. Two successful checks are required to disable the haunt, and each attempt requires two actions。</p>",
             "hazarddescription": "<p>A ghostly host of god callers and their eidolons manifests to defend the barrow against intruders, and the strains of a battle song fill the air。</p>",
             "reset": "<p>The haunt dissipates 1 minute after all living creatures leave area C1. Its spiritual energies re-form after 24 hours。</p>",
-            "routine": "<p>（1动作） (illusion, mental, occult) The haunt attacks what it believes is a demonic incursion, dealing [[/r {(1d8+3)[mental],1d8[good]}]]{1d8+3 mental and 1d8 good伤害} to each living creature in the area (@Check[will|dc:21|basic|name:Storasta's Last Stand|traits:illusion,mental,occult]豁免）。</p>",
+            "routine": "<p>（1动作）(illusion, mental, occult) The haunt attacks what it believes is a demonic incursion, dealing [[/r {(1d8+3)[mental],1d8[good]}]]{1d8+3 mental and 1d8 good伤害} to each living creature in the area (@Check[will|dc:21|basic|name:Storasta's Last Stand|traits:illusion,mental,occult]豁免）。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5057,7 +5057,7 @@
             "disable": "<p>@Check[deception|dc:25] to appear to be a defender of Storasta, @Check[diplomacy|dc:25] to demonstrate benign intentions, or @Check[occultism|dc:22]或@Check[religion|dc:22] to ward off the malevolent spiritual energies. Two successful checks are required to disable the haunt, and each attempt requires two actions。</p>",
             "hazarddescription": "<p>A ghostly host of god callers and their eidolons manifests to defend the barrow against intruders, and the strains of a battle song fill the air。</p>",
             "reset": "<p>The haunt dissipates 1 minute after all living creatures leave area C1. Its spiritual energies re-form after 24 hours。</p>",
-            "routine": "<p>（1动作） (illusion, mental, occult) The haunt attacks what it believes is a demonic incursion, dealing @Damage[(1d8+9)[mental]]伤害和@Damage[1d8[good]]伤害（@Check[will|dc:24|basic|name:Storasta's Last Stand]豁免）。</p>",
+            "routine": "<p>（1动作）(illusion, mental, occult) The haunt attacks what it believes is a demonic incursion, dealing @Damage[(1d8+9)[mental]]伤害和@Damage[1d8[good]]伤害（@Check[will|dc:24|basic|name:Storasta's Last Stand]豁免）。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5129,7 +5129,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             },
@@ -5144,12 +5144,12 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
                 "Infused Items": {
                     "name": "Infused Items",
-                    "description": "<p>Strak carries the following infused items, which last for 24 hours, or until the next time he makes his daily preparations:@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]{Elixir of Life (Lesser)}, @UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]{Acid Flask (Moderate)}, @UUID[Compendium.pf2e.equipment-srd.Item.gWr4q4HiyGhETA8H]{Alchemist's Fire (Moderate)} (12), and @UUID[Compendium.pf2e.equipment-srd.Item.ehss8yPTXxiUdVlJ]{Smokestick (Greater)}.</p>"
+                    "description": "<p>Strak carries the following infused items, which last for 24 hours, or until the next time he makes his daily preparations: @UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]{Elixir of Life (Lesser)}, @UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]{Acid Flask (Moderate)}, @UUID[Compendium.pf2e.equipment-srd.Item.gWr4q4HiyGhETA8H]{Alchemist's Fire (Moderate)} (12), and @UUID[Compendium.pf2e.equipment-srd.Item.ehss8yPTXxiUdVlJ]{Smokestick (Greater)}.</p>"
                 },
                 "Attack of Opportunity": {
                     "name": "Attack of Opportunity",
@@ -5170,7 +5170,7 @@
         },
         "Stranded Melody (5-6)": {
             "name": "Stranded Melody (5-6)",
-            "disable": "<p>@Check[performance|dc:24|name:Duplicate the Melody|traits:environmental,magical] （专家） twice to duplicate the melody and appease the elemental, or @Check[arcana|dc:27|name:Guide the Elemental|traits:environmental,magical] （专家） and then @Check[diplomacy|dc:24|name:Guide the Elemental|traits:environmental,magical] （受训） to guide the elemental through a planar tear elsewhere in the manor. Each attempt to Disable the hazard requires two actions, and each successful check to Disable removes one action from the hazard's routine。</p>",
+            "disable": "<p>@Check[performance|dc:24|name:Duplicate the Melody|traits:environmental,magical]（专家）twice to duplicate the melody and appease the elemental, or @Check[arcana|dc:27|name:Guide the Elemental|traits:environmental,magical]（专家）and then @Check[diplomacy|dc:24|name:Guide the Elemental|traits:environmental,magical]（受训）to guide the elemental through a planar tear elsewhere in the manor. Each attempt to Disable the hazard requires two actions, and each successful check to Disable removes one action from the hazard's routine。</p>",
             "hazarddescription": "<p>Planar winds summoned from beyond sweep through the room, song and sound carried adrift on their current. This air elemental is trapped on the Material Plane and can't escape。</p>",
             "reset": "<p>The melody remains for 1 minute, after which it disperses into several holes in the walls. It returns after an hour unless disabled。</p>",
             "routine": "<p>(2 actions) For each action in the routine, the melody makes a solid refrain Strike against one creature in its area. This trap doesn't take a multiple attack penalty。</p>",
@@ -5194,7 +5194,7 @@
         },
         "Stranded Melody (7-8)": {
             "name": "Stranded Melody (7-8)",
-            "disable": "<p>@Check[performance|dc:27|name:Duplicate the Melody|traits:environmental,magical] （专家） twice to duplicate the melody and appease the elemental, or @Check[arcana|dc:30|name:Guide the Elemental|traits:environmental,magical] （专家） and then @Check[diplomacy|dc:27|name:Guide the Elemental|traits:environmental,magical] （受训） to guide the elemental through a planar tear elsewhere in the manor. Each attempt to Disable the hazard requires two actions, and each successful check to Disable removes one action from the hazard's routine。</p>",
+            "disable": "<p>@Check[performance|dc:27|name:Duplicate the Melody|traits:environmental,magical]（专家）twice to duplicate the melody and appease the elemental, or @Check[arcana|dc:30|name:Guide the Elemental|traits:environmental,magical]（专家）and then @Check[diplomacy|dc:27|name:Guide the Elemental|traits:environmental,magical]（受训）to guide the elemental through a planar tear elsewhere in the manor. Each attempt to Disable the hazard requires two actions, and each successful check to Disable removes one action from the hazard's routine。</p>",
             "hazarddescription": "<p>Planar winds summoned from beyond sweep through the room, song and sound carried adrift on their current. This air elemental is trapped on the Material Plane and can't escape。</p>",
             "reset": "<p>The melody remains for 1 minute, after which it disperses into several holes in the walls. It returns after an hour unless disabled。</p>",
             "routine": "<p>(2 actions) For each action in the routine, the melody makes a solid refrain Strike against one creature in its area. This trap doesn't take a multiple attack penalty。</p>",
@@ -5380,7 +5380,7 @@
             "items": {
                 "Fast Healing 1": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>",
-                    "name": "Fast Healing 1"
+                    "name": "快速治疗 Fast Healing 1"
                 },
                 "Text Immersion": {
                     "name": "Text Immersion",
@@ -5395,7 +5395,7 @@
                     "description": "<p>An akizendri can anticipate the most likely location of a creature through their supernatural insight into the forces of chaotic probabilities and chance. This grants the Scholar the ability to sense creatures within the listed range. A creature under the effects of @UUID[Compendium.pf2e.spells-srd.Item.EoKBlgf6Smt8opaU]{Veil of Privacy} or that is otherwise shielded from divinations and predictions cannot be noticed via entropy sense.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Protean Anatomy 6": {
@@ -5403,7 +5403,7 @@
                     "description": "<p>幻蛇的要害器官会不断地变形和改变位置。当幻蛇承受酸蚀、电击或音波伤害后，它会立即获得抗力数据中所列数值的对应伤害抗力。这会持续1小时或直至幻蛇承受上述伤害类型中的其他种类为止（在这种情况下，幻蛇的抗力会再度变换并与该类型相匹配），以较先发生者为准。</p>\n<p>除非幻蛇自身自愿，否则它对变形效果免疫。若陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]或@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]，幻蛇会在它的下个回合结束时自动恢复，因为新的感受器官已经形成并取代了受损的器官。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.c6SiBB3mzV8lZUQr]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The Scholar takes on the appearance of any Small or smaller creature. This doesn't change its Speed or its attack and damage bonuses with its Strikes, but might change the damage type its Strikes deal.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Constrict": {
@@ -5418,7 +5418,7 @@
             "prototypeToken": {
                 "name": "The Scholar of Sorts (1-2)"
             },
-            "hp": "fast healing 1"
+            "hp": "快速治疗1"
         },
         "The Scholar of Sorts (3-4)": {
             "name": "The Scholar of Sorts (3-4)",
@@ -5426,19 +5426,19 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "fast healing 3",
+            "hp": "快速治疗3",
             "items": {
                 "Entropy Sense (Imprecise) 30 feet": {
                     "name": "Entropy Sense (Imprecise) 30 feet",
                     "description": "<p>An akizendri can anticipate the most likely location of a creature through their supernatural insight into the forces of chaotic probabilities and chance. This grants the Scholar the ability to sense creatures within the listed range. A creature under the effects of @UUID[Compendium.pf2e.spells-srd.Item.EoKBlgf6Smt8opaU]{Veil of Privacy} or that is otherwise shielded from divinations and predictions cannot be noticed via entropy sense.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Change Shape": {
                     "description": "<p>The Scholar takes on the appearance of any Small or smaller creature. This doesn't change its Speed or its attack and damage bonuses with its Strikes, but might change the damage type its Strikes deal.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
-                    "name": "Change Shape"
+                    "name": "变身 Change Shape"
                 },
                 "Constrict": {
                     "name": "Constrict",
@@ -5461,7 +5461,7 @@
                     "description": "<p>A creature hit by the Scholar's bite Strike must attempt a @Check[will|dc:22] save.</p>\n<hr />\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for [[/gmr 1d4 #rounds]]{1d4 rounds}.</p>\n<p><strong>Critical Failure</strong> As failure, but the creature is also @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 round.</p>"
                 },
                 "Fast Healing 3": {
-                    "name": "Fast Healing 3",
+                    "name": "快速治疗 Fast Healing 3",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 }
             },
@@ -5490,14 +5490,14 @@
                     "description": "<p>大量的铅会造成头痛、难以集中注意力和关节疼痛。死灵魔法增强了骷髅表面的铅，使之生效速度远远快于一般的铅中毒。</p>\n<hr />\n<p><strong>豁免检定</strong> @Check[fortitude|dc:20]</p>\n<p><strong>最大持续时间</strong> 4轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]伤害，呆滞1和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}和@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（2轮）</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Tough Leaded Skeleton"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Tough Skeletal Reveler": {
             "name": "强壮骷髅狂欢者 Tough Skeletal Reveler",
@@ -5518,11 +5518,11 @@
                     "name": "Serving Tray"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Tough Skeletal Reveler"
             }
@@ -5569,7 +5569,7 @@
                     "description": "<p>枝节妖从体内发射大量裂片和荆棘，对@Template[cone|distance:15]范围内造成@Damage[4d6[piercing]]伤害（@Check[reflex|dc:20|basic]豁免）。</p>\n<p>枝节妖在[[/gmr 1d4 #rounds]]{1d4轮}内无法再次使用裂片飞溅。</p>"
                 },
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             },
@@ -5586,7 +5586,7 @@
             "prototypeToken": {
                 "name": "Unkillable Zombie Shambler"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Slow": {
                     "name": "Slow",
@@ -5597,7 +5597,7 @@
                     "description": "<p>This zombie is nigh unkillable. The zombie loses its weakness to slashing and gains resistance against all damage equal to its level (minimum 3), and it gains weakness equal to twice its level (minimum 6) to critical hits.</p>\n<p>Increase the zombie's level by 1 if you give it this ability.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -5757,7 +5757,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Flash of Insight": {
@@ -5776,7 +5776,7 @@
             "prototypeToken": {
                 "name": "Valgomorus (1-2)"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Valgomorus (3-4)": {
             "name": "Valgomorus (3-4)",
@@ -5796,7 +5796,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> Valgomorus is about to roll a d20</p>\n<hr />\n<p><strong>Effect</strong> Valgomorus peers into an occluded spectrum of possible futures. He gets a success (but not a critical success) on the roll instead of rolling.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Drain Life": {
@@ -5808,7 +5808,7 @@
                     "description": "<p>Valgomorus makes a melee Strike and compares the attack roll result to the AC of up to two foes, each of whom must be within his melee reach and adjacent to each other. Roll damage only once and apply it to each creature hit. A counts as two attacks for the multiple attack penalty, though the penalty does not increase until after both attacks are resolved.</p>"
                 }
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Vermlek Centaur (3-4)": {
             "name": "Vermlek Centaur (3-4)",
@@ -5824,7 +5824,7 @@
                     "name": "Speed: 40, Burrow: 0 if Inhabiting a Centaur body"
                 },
                 "Trample": {
-                    "name": "Trample",
+                    "name": "践踏 Trample",
                     "description": "<p>Medium or Smaller; Hoof; @Check[reflex|dc:21|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 },
                 "Recoil from Wasted Opportunities": {
@@ -5871,7 +5871,7 @@
                     "name": "Speed: 40, Burrow: 0 if Inhabiting a Centaur body"
                 },
                 "Trample": {
-                    "name": "Trample",
+                    "name": "践踏 Trample",
                     "description": "<p>Medium or Smaller; Hoof; @Check[reflex|dc:23|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 },
                 "Unsettling Movement": {
@@ -6215,7 +6215,7 @@
             "items": {
                 "Constant Spells": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
-                    "name": "Constant Spells"
+                    "name": "常驻法术 Constant Spells"
                 },
                 "Bay": {
                     "name": "Bay",
@@ -6243,7 +6243,7 @@
             },
             "items": {
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul>\n<li><strong>Boar</strong>\n<ul>\n<li><strong>Size</strong> Medium</li>\n<li>@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r]{Scent (Imprecise) 30 feet}</li>\n<li><strong>Speed</strong> 40 feet</li>\n<li><strong>Melee</strong> tusk [[/r 1d20+9 #Tusk]]{+9}/[[/r 1d20+4 #Tusk]]{+4}/[[/r 1d20-1 #Tusk]]{-1} (finesse), <strong>Damage</strong> @Damage[(1d10-1)[piercing]] damage</li>\n</ul>\n</li>\n<li><strong>Giant Spider</strong>\n<ul>\n<li><strong>Size</strong> Medium</li>\n<li><strong>Speed</strong> 25 feet, climb 25 feet</li>\n<li><strong>Melee</strong> fangs [[/r 1d20+9 #Fangs]]{+9}/[[/r 1d20+4 #Fangs]]{+4}/[[/r 1d20-1 #Fangs]]{-1} (finesse, poison), <strong>Damage</strong> @Damage[(1d6-1)[piercing],1d4[poison]]{1d6-1 piercing damage plus 1d4 poison damage}</li>\n</ul>\n</li>\n<li><strong>Rat</strong>\n<ul>\n<li>@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r]{Scent}</li>\n<li><strong>Speed</strong> 20 feet</li>\n<li><strong>Melee</strong> jaws [[/r 1d20+9 #Jaws]]{+9}/[[/r 1d20+5 #Jaws]]{+5}/[[/r 1d20+1 #Jaws]]{+1} (agile, finesse), <strong>Damage</strong> @Damage[1[piercing]] damage</li>\n</ul>\n</li>\n<li><strong>Raven</strong>\n<ul>\n<li>@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r]{Scent}</li>\n<li><strong>Speed</strong> 10 feet, fly 40 feet</li>\n<li><strong>Melee</strong> beak [[/r 1d20+9 #Beak]]{+9}/[[/r 1d20+4 #Beak]]{+4}/[[/r 1d20-1 #Beak]]{-1} (finesse), <strong>Damage</strong> @Damage[1[piercing]] damage</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Infernal Temptation": {
@@ -6288,7 +6288,7 @@
             "prototypeToken": {
                 "name": "Zombie Grindylow"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Slow": {
                     "name": "Slow",
@@ -6299,7 +6299,7 @@
                     "description": "<p><strong>Trigger</strong> <span class=\"fontstyle2\">A creature attempts a melee attack against a zombie grindylow with a bludgeoning or slashing weapon</span></p>\n<hr />\n<p><strong>Effect</strong> <span class=\"fontstyle2\">The creature must succeed at a @Check[reflex|dc:13] saving throw or become tangled in the kelp that surrounds the zombie grindylow, giving the creature a -10 circumstance penalty to its Speeds until it spends a manipulate action to remove the kelp.</span></p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }

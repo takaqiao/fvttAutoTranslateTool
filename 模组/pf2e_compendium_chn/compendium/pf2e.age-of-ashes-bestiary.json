@@ -463,7 +463,7 @@
                 },
                 "Engulf": {
                     "name": "包卷 Engulf",
-                    "description": "<p>@Check[reflex|dc:28|traits:damaging-effect], @Damage[2d6[slashing]]伤害，[[/act escape dc=28]]，破裂25（仅钝击）。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "description": "<p>@Check[reflex|dc:28|options:damaging-effect,inflicts:grabbed,inflicts:slowed]，@Damage[2d6[slashing]]伤害，[[/act escape dc=28]]，破裂25（仅钝击）。</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "Freeze": {
                     "name": "晶化 Freeze",
@@ -651,7 +651,7 @@
             "name": "达哈克之颅 Dahak's Skull",
             "disable": "<p>两次@Check[thievery|dc:27|name:Pry Out the Embedded Gems|traits:complex,magical,fire,trap,hazard（专家）可以在不触发感受器的前提下撬开嵌在颅骨眼窝深处的宝石，或者对着双眼使用两次@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级；反制DC22）。</p>",
             "hazarddescription": "<p>龙类颅骨的眼窝中放着一对魔法宝石，作为范围为半径30尺的魔法感受器。</p>",
-            "routine": "<p>（2动作） 轮到危害的先攻时，达哈克之颅发射两道眼棱射线；每次攻击它都必须选择不同的生物作为目标。达哈克之颅不能将颅骨正下方的生物作为眼棱射线的目标。</p>",
+            "routine": "<p>（2动作）轮到危害的先攻时，达哈克之颅发射两道眼棱射线；每次攻击它都必须选择不同的生物作为目标。达哈克之颅不能将颅骨正下方的生物作为眼棱射线的目标。</p>",
             "stealthdetails": "<p>but @Check[perception|dc:24|name:Notice Lights in Eyes|traits:complex,magical,fire,trap,hazard]注意到颅骨眼窝中的炽热光芒似乎在环视房间。</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -708,7 +708,7 @@
             "hazarddescription": "<p>一名身着长袍的精灵女性站在水中。她会引诱任何进入房间的人和她一同在池中共浴。</p>",
             "reset": "<p>当妲茉迪尔被摧毁或者她设法将一个生物的生命值降低至0点时，她的魂魄会暂时平息下来。她将会在1分钟后再度归来</p>",
             "routine": "<p>（3动作）作祟尝试以匕首进行打击。</p>",
-            "stealthdetails": "<p>（传奇）或DC47来注意到池中的匕首开始自行活动起来。</p>",
+            "stealthdetails": "<p>（传奇）或@Check[perception|dc:47]来注意到池中的匕首开始自行活动起来。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -778,7 +778,7 @@
                 },
                 "Twin Parry": {
                     "name": "双重招架 Twin Parry",
-                    "description": "<p><strong>需求</strong> 狄米利正持有2柄近战武器，每柄需在不同手中。</p>\n<hr />\n<p>狄米利使用两柄武器来格挡攻击。直到她下回合开始，她在AC上得到+1环境加值，若两柄武器中至少一柄有格挡特征，则为+2环境加值。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.eu2HidLHaGKe4MPn]{效果：双重招架}</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.EDpjey6SCdvIYqEc]{效果：双重招架 （格挡特征）}</p>"
+                    "description": "<p><strong>需求</strong> 狄米利正持有2柄近战武器，每柄需在不同手中。</p>\n<hr />\n<p>狄米利使用两柄武器来格挡攻击。直到她下回合开始，她在AC上得到+1环境加值，若两柄武器中至少一柄有格挡特征，则为+2环境加值。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.eu2HidLHaGKe4MPn]{效果：双重招架}</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.EDpjey6SCdvIYqEc]{效果：双重招架（格挡特征）}</p>"
                 },
                 "Twin Takedown": {
                     "name": "双重攻击 Twin Takedown",
@@ -913,18 +913,18 @@
                 },
                 "Breath-Seared Sword": {
                     "name": "龙息巨剑 Breath-Seared Sword",
-                    "description": "<p>龙疤亡者的武器经过了龙的吐息魔法炙烤。当被生前就携带它的龙疤亡者使用时，这把剑会造成额外的@Damage[2d6[void]]伤害和@Damage[3d6[fire]]伤害。在其他任何生物手中，它只是一把破损巨剑。</p>"
+                    "description": "<p>龙疤亡者的武器经过了龙的吐息魔法炙烤。当被生前就携带它的龙疤亡者使用时，这把剑会造成额外的2d6虚能呵3d6火焰伤害。在其他任何生物手中，它只是一把破损巨剑。</p>"
                 },
                 "Glare of Rage": {
                     "name": "目光如炬 Glare of Rage",
-                    "description": "<p>龙疤亡者将其无尽的挫败感凝聚于它的双眼，然后将视线投向30尺内它能看到的一个生物。该生物必须进行@Check[will|dc:30]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 此生物不受影响。</p>\n<p><strong>成功</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]1轮。</p>\n<p><strong>大失败</strong> 此生物震慑[[/gmr 1d4 #rounds]]{1d4轮}，并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]。</p>"
+                    "description": "<p>龙疤亡者将其无尽的挫败感凝聚于它的双眼，然后将视线投向30尺内它能看到的一个生物。该生物必须进行@Check[will|dc:30|options:inflicts:stunned,inflicts:fatigued]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 此生物不受影响。</p>\n<p><strong>成功</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。</p>\n<p><strong>失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]1轮。</p>\n<p><strong>大失败</strong> 此生物震慑[[/gmr 1d4 #rounds]]{1d4轮}，并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]。</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "对魔法的豁免获得+1状态加值 +1 Status to All Saves vs. Magic"
                 },
                 "Regeneration 20 (Deactivated by Cold)": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
-                    "name": "再生20（寒冷使其无效） Regeneration 20 (Deactivated by Cold)"
+                    "name": "再生20（寒冷使其无效）Regeneration 20 (Deactivated by Cold)"
                 }
             },
             "allSaves": "对魔法的豁免获得+1状态加值",
@@ -946,7 +946,7 @@
                 },
                 "Breath Weapon": {
                     "name": "吐息 Breath Weapon",
-                    "description": "<p>构装使用下列中的一种吐息，它在[[/gmr 1d4 #Recharge Breath Weapon]]{1d4轮}内无法再使用吐息武器。。</p>\n<p>- 烈焰 Flame （奥术，塑能系，火焰） 迸发出的火焰对@Template[cone|distance:60]范围内的生物造成@Damage[15d10[fire]|options:area-damage]伤害（@Check[reflex|dc:45|basic|options:area-effect]豁免）。这股火焰伤害不会伤害物体或构装体。</p>\n<p>- 衰弱气体 Weakening Gas （奥术，死灵系） 一团闪着金点的气体强迫@Template[cone|distance:60]范围内的所有生物进行@Check[fortitude|dc:45]豁免；此效果持续1分钟。</p>\n<hr />\n<p><strong>大成功</strong> 此生物不受影响。</p>\n<p><strong>成功</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p>\n<p><strong>失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 5}。</p>\n<p><strong>大失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 8}。</p>"
+                    "description": "<p>构装使用下列中的一种吐息，它在[[/gmr 1d4 #Recharge Breath Weapon]]{1d4轮}内无法再使用吐息武器。。</p>\n<p>- 烈焰 Flame（奥术，塑能系，火焰）迸发出的火焰对@Template[cone|distance:60]范围内的生物造成@Damage[15d10[fire]|options:area-damage]伤害（@Check[reflex|dc:45|basic|options:area-effect]豁免）。这股火焰伤害不会伤害物体或构装体。</p>\n<p>- 衰弱气体 Weakening Gas（奥术，死灵系）一团闪着金点的气体强迫@Template[cone|distance:60]范围内的所有生物进行@Check[fortitude|dc:45]豁免；此效果持续1分钟。</p>\n<hr />\n<p><strong>大成功</strong> 此生物不受影响。</p>\n<p><strong>成功</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p>\n<p><strong>失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 5}。</p>\n<p><strong>大失败</strong> 此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 8}。</p>"
                 },
                 "Reverberating Revenge": {
                     "name": "折射反击 Reverberating Revenge",
@@ -1007,7 +1007,7 @@
             "items": {
                 "Dragonstorm Blade": {
                     "name": "龙灾之刃 Dragonstorm Blade",
-                    "description": "<p>龙灾火巨人用手指向天空，将龙灾能量引导至另一只手持握的剑刃上。巨人做出1次具有-2环境减值的巨剑打击，对抗其触及范围内的每个生物。他仅需要投掷1次攻击检定，并将该结果与每名生物的AC相比较。此次打击造成额外1d8酸蚀，1d8寒冷，1d8电击，1d8火焰和1d8毒素伤害，在判断巨人的多重攻击减值时，这被视为两次攻击。</p>"
+                    "description": "<p>龙灾火巨人用手指向天空，将龙灾能量引导至另一只手持握的剑刃上。巨人做出一次具有-2环境减值的巨剑打击，对抗其触及范围内的每个生物。他仅需要投掷一次攻击检定，并将该结果与每名生物的AC相比较。此次打击造成额外1d8酸蚀，1d8寒冷，1d8电击，1d8火焰和1d8毒素伤害，在判断巨人的多重攻击减值时，这被视为两次攻击。</p>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -1160,7 +1160,7 @@
             "disable": "<p>@Check[occultism|dc:38|name:Calm the Restless Energies|traits:haunt,magical]（大师）或@Check[religion|dc:38|name:Calm the Restless Energies|traits:haunt,magical]（大师））能安抚这些不安的能量，并在1小时内压制作祟；大成功能永久消除作祟。</p>",
             "hazarddescription": "<p>让角色们着迷的作祟壁画会迅速抽干他们的活力。</p>",
             "reset": "<p>作祟会继续执行其流程，直至距离房间30尺的范围内没有目标了为止。之后它会花1分钟来重置，并且变得可以再次启动</p>",
-            "routine": "<p>（2动作） 作祟使用勾魂诱惑进入区域A2的生物。若有动作未被用在勾魂上，便会使用生涯千载吸取房间内的一名活物。</p>",
+            "routine": "<p>（2动作）作祟使用勾魂诱惑进入区域A2的生物。若有动作未被用在勾魂上，便会使用生涯千载吸取房间内的一名活物。</p>",
             "stealthdetails": "<p>（大师）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -1212,7 +1212,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任何被法洛克的攻击命中的活物必须成功通过@Check[fortitude|dc:34]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任何被法洛克的攻击命中的活物必须成功通过@Check[fortitude|dc:34|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Scoundrel": {
                     "name": "无赖 Scoundrel",
@@ -1314,6 +1314,9 @@
                 },
                 "Grapeshot": {
                     "name": "霰弹 Grapeshot"
+                },
+                "equipment-Gunpowder": {
+                    "name": "火药 Gunpowder"
                 }
             },
             "prototypeToken": {
@@ -1555,7 +1558,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 伊斯拉手上持握镣铐，并且和一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 伊斯拉尝试用镣铐束缚该生物的手腕或脚踝。若伊斯拉成功通过[[/r 1d20+30 #attack]]{+30}调整值的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
+                    "description": "<p><strong>需求</strong> 伊斯拉手上持握镣铐，并且和一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 伊斯拉尝试用镣铐束缚该生物的手腕或脚踝。若伊斯拉成功通过@Check[efficient-capture|against:ac]{+30}调整值的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
                 },
                 "Hammer the Chained": {
                     "name": "链锤合击 Hammer the Chained",
@@ -1606,7 +1609,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
                 "Regeneration 15 (Deactivated by Holy)": {
-                    "name": "再生15（圣洁使其无效） Regeneration 15 (Deactivated by Holy)",
+                    "name": "再生15（圣洁使其无效）Regeneration 15 (Deactivated by Holy)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 }
             },
@@ -1985,7 +1988,7 @@
                 },
                 "Engulf": {
                     "name": "包卷 Engulf",
-                    "description": "<p>@Check[reflex|dc:22|traits:damaging-effect]豁免，@Damage[2d6[acid]]伤害，[[/act escape dc=24]]，破裂10</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "description": "<p>@Check[reflex|dc:22|options:damaging-effect,inflicts:grabbed,inflicts:slowed]豁免，@Damage[2d6[acid]]伤害，[[/act escape dc=24]]，破裂10</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "Entangling Residue": {
                     "name": "缠裹残液 Entangling Residue",
@@ -2008,7 +2011,7 @@
             "items": {
                 "Radiant Explosion": {
                     "name": "辉煌爆破 Radiant Explosion",
-                    "description": "<p><strong>触发</strong> 有生物碰触石门；</p>\n<hr />\n<p><strong>效果</strong> 所有距离石门20尺范围内的生物会被辉煌之光所灼伤，承受@Damage[20d6[fire]]伤害（@Check[reflex|dc:40|basic]豁免）。在此豁免中失败的生物会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}1小时（大失败时为永久目盲）。</p>"
+                    "description": "<p><strong>触发</strong> 有生物碰触石门</p>\n<hr />\n<p><strong>效果</strong> 所有距离石门20尺范围内的生物会被辉煌之光所灼伤，承受@Damage[20d6[fire]|options:area-damage]伤害（@Check[reflex|dc:40|basic|options:area-effect,inflicts:blinded]豁免）。在此豁免中失败的生物会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1小时（大失败时为永久目盲）。</p>"
                 }
             },
             "prototypeToken": {
@@ -2142,7 +2145,7 @@
                 },
                 "Breath Weapon": {
                     "name": "吐息 Breath Weapon",
-                    "description": "<p>蒙哥卡瑞从两种方式中选择一种吐息。他在经过[[/gmr 1d4 #Recharge Breath Weapon]]{1d4轮}之前无法再次使用吐息。</p>\n<ul>\n<li><strong>烈焰 Flame</strong>（奥术，塑能系，火焰） 龙喷出一片烈焰，对@Template[cone|distance:80]区域内的生物造成@Damage[24d6[fire]|options:area-damage]伤害（@Check[reflex|dc:46|basic|name:Breath Weapon (Flame)|traits:arcane,evocation,fire|options:area-effect]豁免）。</li>\n<li><strong>衰弱气体 Weakening Gas</strong>（奥术，死灵系） 龙喷出一片能使人衰弱的气体。每个处于@Template[cone|distance:30]区域内的生物必须成功通过一次@Check[fortitude|dc:46|name:Breath Weapon (Weakening Gas)|traits:arcane,necromancy|options:area-effect,inflicts:enfeebled]检定，否则将会在1分钟内@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 4}（在大失败时则为@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 5}）。</li>\n</ul>"
+                    "description": "<p>蒙哥卡瑞从两种方式中选择一种吐息。他在经过[[/gmr 1d4 #Recharge Breath Weapon]]{1d4轮}之前无法再次使用吐息。</p>\n<ul>\n<li><strong>烈焰 Flame</strong>（奥术，塑能系，火焰）龙喷出一片烈焰，对@Template[cone|distance:80]区域内的生物造成@Damage[24d6[fire]|options:area-damage]伤害（@Check[reflex|dc:46|basic|name:Breath Weapon (Flame)|traits:arcane,evocation,fire|options:area-effect]豁免）。</li>\n<li><strong>衰弱气体 Weakening Gas</strong>（奥术，死灵系）龙喷出一片能使人衰弱的气体。每个处于@Template[cone|distance:30]区域内的生物必须成功通过一次@Check[fortitude|dc:46|name:Breath Weapon (Weakening Gas)|traits:arcane,necromancy|options:area-effect,inflicts:enfeebled]检定，否则将会在1分钟内@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 4}（在大失败时则为@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 5}）。</li>\n</ul>"
                 },
                 "Change Shape": {
                     "name": "变身 Change Shape",
@@ -2424,7 +2427,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 有镣铐在探子的手上且探子与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 探子尝试用镣铐束缚该生物的手腕或脚踝。若探子成功通过[[/r 1d20+24]]{+24调整值}的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
+                    "description": "<p><strong>需求</strong> 有镣铐在探子的手上且探子与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 探子尝试用镣铐束缚该生物的手腕或脚踝。若探子成功通过@Check[efficient-capture|against:ac]{+24}调整值的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
                 },
                 "Precise Debilitations": {
                     "name": "精准削弱 Precise Debilitations",
@@ -2482,7 +2485,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 执行者的手中有镣铐而且与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 执行者尝试用镣铐束缚该生物的手腕或脚踝。若执行者成功通过一次[[/r 1d20+30 #Manacles]]{+30调整值}的攻击检定来对抗目标的AC，就可以将镣铐应用至该生物身上。</p>"
+                    "description": "<p><strong>需求</strong> 执行者的手中有镣铐而且与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 执行者尝试用镣铐束缚该生物的手腕或脚踝。若执行者成功通过一次@Check[efficient-capture|against:ac]{+30}调整值的攻击检定来对抗目标的AC，就可以将镣铐应用至该生物身上。</p>"
                 }
             },
             "prototypeToken": {
@@ -2520,7 +2523,7 @@
                 },
                 "Personal Quake": {
                     "name": "个体震颤 Personal Quake",
-                    "description": "<p>被震颤火矛轰击的生物会由于身体发生无法自控的抖动而陷入持续1轮的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3}。大成功时，目标必须成功通过@Check[fortitude|dc:39]豁免，失败则会被@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]{石化 Petrified}1分钟，豁免大失败时则会被永久石化。</p>"
+                    "description": "<p>被震颤火矛轰击的生物会由于身体发生无法自控的抖动而陷入持续1轮的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3}。大成功时，目标必须成功通过@Check[fortitude|dc:39|options:inflicts:petrified]豁免，失败则会被@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]1分钟，豁免大失败时则会被永久石化。</p>"
                 },
                 "strike-Seismic Spear": {
                     "name": "震颤火矛 Seismic Spear",
@@ -2672,7 +2675,7 @@
             },
             "items": {
                 "Site Bound (Jewelgate Way Station)": {
-                    "name": "束缚之地 Site Bound （宝石中转站）",
+                    "name": "束缚之地 Site Bound（宝石中转站）",
                     "description": "<p>宝石中转站</p>\n<hr />\n<p>典型的灵魂通常只能距离在他被杀死或作祟的地点很近的区域逗留。这个限制一般为120尺远。部分幽灵会被限制在对他来说具有特殊意义的房间、建筑、物品或生物上，而非具体的某个地点。</p>"
                 },
                 "Rejuvenation": {
@@ -2686,6 +2689,10 @@
                 "Telekinetic Crystalline Assault": {
                     "name": "感灵水晶侵袭 Telekinetic Crystalline Assault",
                     "description": "<p>塔兰米拉让空中充满旋转的水晶，对@Template[emanation|distance:30]区域内的所有生物造成@Damage[7d6[slashing]|options:area-damage]伤害（@Check[reflex|dc:33|basic|options:area-effect]豁免）。</p>"
+                },
+                "Void Healing": {
+                    "name": "虚能治疗 Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "hp": "虚能治疗，复生",
@@ -2695,7 +2702,7 @@
         },
         "Tarrasque, The Armageddon Engine": {
             "name": "泰拉斯奎，末日引擎 Tarrasque, The Armageddon Engine",
-            "publicNotes": "<p>最强大的子嗣当属泰拉斯奎，有关它的传说传遍了格拉利昂外无数的世界。它摧毁了国度--宁沙巴，并于-632 AR 横穿了阿维斯坦，最终在其被封印于一个遥远的洞穴前摧毁了硕理帝国的浮空城——镐城（Kho）。</p>\n<hr />\n<p>这些子嗣们是泰坦般的惧物，它们有着巨大的身躯和力量，活着的唯一目的就是毁灭。泰拉斯奎（Tarrasque）和佐坦尼（Xotani）并非洛瓦古格的所有孩子。其他的，包括坎姆诺西特-蠕虫君王（Chemnosit [the Monarch Worm]），科索伽兹-不协之舞（Kothogaz [the Dance of Disharmony] ） 和斡那古尔- 终焉歌者（Volnagur [the End-Singer]）在不同地区的历史上都记下了恐怖的一笔，但最著名的是乌伦那忒-亵渎长子（Ulunat [the Unholy First]），它那甲虫般的残骸散落于索西斯，奥斯里昂的首都。</p>",
+            "publicNotes": "<p>最强大的子嗣当属泰拉斯奎，有关它的传说传遍了格拉利昂外无数的世界。它摧毁了国度--宁沙巴，并于-632 AR 横穿了阿维斯坦，最终在其被封印于一个遥远的洞穴前摧毁了硕理帝国的浮空城——镐城（Kho）。</p>\n<hr />\n<p>这些子嗣们是泰坦般的惧物，它们有着巨大的身躯和力量，活着的唯一目的就是毁灭。泰拉斯奎（Tarrasque）和佐坦尼（Xotani）并非洛瓦古格的所有孩子。其他的，包括坎姆诺西特-蠕虫君王（Chemnosit [the Monarch Worm]），科索伽兹-不协之舞（Kothogaz [the Dance of Disharmony] ）和斡那古尔- 终焉歌者（Volnagur [the End-Singer]）在不同地区的历史上都记下了恐怖的一笔，但最著名的是乌伦那忒-亵渎长子（Ulunat [the Unholy First]），它那甲虫般的残骸散落于索西斯，奥斯里昂的首都。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2838,7 +2845,7 @@
             },
             "items": {
                 "Web Sense (Imprecise) 60 feet": {
-                    "name": "蛛网感 （模糊） 60尺",
+                    "name": "蛛网感知 Web Sense（模糊感官）60尺",
                     "description": "<p>猎蛛怪能通过自己触碰的蛛网来感受到同样触碰到这张网的生物所产生的震动。</p>"
                 },
                 "Swallow Whole": {
@@ -2883,11 +2890,11 @@
                 },
                 "Punish Imperfection": {
                     "name": "惩罚弱者 Punish Imperfection",
-                    "description": "<p><strong>触发</strong> 乌里触及范围内的一个生物，在攻击骰、豁免骰或技能检定中失败；</p>\n<hr />\n<p><strong>效果</strong> 乌里对触发的生物进行一次无武装打击。如果打击命中，目标必须通过@Check[fortitude|dc:41]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}，直到它的下个回合结束（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 4}）。</p>"
+                    "description": "<p><strong>触发</strong> 乌里触及范围内的一个生物，在攻击骰、豁免骰或技能检定中失败；</p>\n<hr />\n<p><strong>效果</strong> 乌里对触发的生物进行一次无武装打击。如果打击命中，目标必须通过@Check[fortitude|dc:41|options:inflicts:enfeebled]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}，直到它的下个回合结束（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 4}）。</p>"
                 },
                 "Reactionary": {
                     "name": "大反派 Reactionary",
-                    "description": "<p>乌里每轮能使用两个反应动作，但每种反应动作只能执行1次。</p>"
+                    "description": "<p>乌里每轮能使用两个反应动作，但每种反应动作只能执行一次。</p>"
                 },
                 "Slash and Slam": {
                     "name": "连砍带砸 Slash and Slam",
@@ -2895,7 +2902,7 @@
                 },
                 "Swift Capture": {
                     "name": "快速俘获 Swift Capture",
-                    "description": "<p><strong>需求</strong> 乌里拥有@UUID[Compendium.pf2e.equipment-srd.Item.5zkoqnp6X5yPCXVy]{镣铐 Manacles}并且和一个生物相邻；</p>\n<hr />\n<p><strong>效果</strong> 乌里收起所持握的一把武器，然后尝试用@UUID[Compendium.pf2e.equipment-srd.Item.5zkoqnp6X5yPCXVy]{镣铐 Manacles}束缚目标的手腕或脚踝。乌里进行一次[[/r 1d20+36 #Manacles]]{+36调整值}的攻击，如果成功对抗目标AC，目标将被@UUID[Compendium.pf2e.equipment-srd.Item.5zkoqnp6X5yPCXVy]{镣铐 Manacles}铐住。</p>"
+                    "description": "<p><strong>需求</strong> 乌里拥有镣铐并且和一个生物相邻</p>\n<hr />\n<p><strong>效果</strong> 乌里收起所持握的一把武器，然后尝试用镣铐束缚目标的手腕或脚踝。乌里进行一次@Check[swift-capture|against:ac]{+36}调整值的攻击，如果成功对抗目标AC，目标将被镣铐铐住。</p>"
                 },
                 "Swift Slash": {
                     "name": "快速劈砍 Swift Slash",
@@ -2936,7 +2943,7 @@
                 },
                 "Redirect Portal": {
                     "name": "重定向传送门 Redirect Portal",
-                    "description": "<p>瓦兹戈卢可以花费10 分钟与一个魔法传送门接触，从而将它重定向至瓦兹戈卢的半位面巢穴。为了做到这一点，瓦兹戈卢必须成功通过[[/r 1d20+41 #Redirect Portal]]{传送门学识}检定中（DC 要么等于创造传送门的施法者的法术DC，要么由传送门的等级决定；如果涉及的传送门没有列出等级，就将其视作一个20级的传送门）。</p>"
+                    "description": "<p>瓦兹戈卢可以花费10分钟与一个魔法传送门接触，从而将它重定向至瓦兹戈卢的半位面巢穴。为了做到这一点，瓦兹戈卢必须成功通过[[/r 1d20+41 #Redirect Portal]]{传送门学识}检定中（DC 要么等于创造传送门的施法者的法术DC，要么由传送门的等级决定；如果涉及的传送门没有列出等级，就将其视作一个20级的传送门）。</p>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -3007,7 +3014,7 @@
             "disable": "<p>@Check[religion|dc:26|name:Counteract Dahak With Prayers|traits:complex,fire,magical,trap,hazard]（专家）向着非邪恶神祇进行祈祷能反制达哈克的化身；若角色在宗教技能上的熟练度仅仅只是受训的话，则作出此检定的祈祷对象必须是阿普苏（Apsu），@Check[thievery|dc:30|name:Divert the Hazard's Energy Back|traits:complex,fire,magical,trap,hazard]（专家）能将危害的能量转移回其本身，或者成功进行@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]（4环级；反制DC26）。</p>",
             "hazarddescription": "<p>通道墙壁上喷出的火焰与浓烟融合在一起，构成了熊熊燃烧着的达哈克本尊；成功通过@Check[religion|dc:20|name:Recognize Depiction of Dahak|traits:hazard,complex,fire,magical,trap,action:recall-knowledge]检定回忆知识能注意到，这头火焰之龙与毁灭龙神传说中的形象十分相似。</p>",
             "reset": "<p>当猎手门中转站内没有任何生物时，达哈克之影便会消失并自动重置。</p>",
-            "routine": "<p>（2动作） 达哈克之影出现在距离中转站正中心最近的生物旁边，之后对着尽可能覆盖更多目标的方向使用它的喷吐武器。</p>",
+            "routine": "<p>（2动作）达哈克之影出现在距离中转站正中心最近的生物旁边，之后对着尽可能覆盖更多目标的方向使用它的喷吐武器。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3085,7 +3092,7 @@
             },
             "items": {
                 "equipment-History of the Bumblebrashers in Isger": {
-                    "name": "《来自伊斯嘉的吵闹踉跄鬼部落的历史》 History of the Bumblebrashers in Isger"
+                    "name": "《来自依斯嘉的吵闹踉跄鬼部落的历史》 History of the Bumblebrashers in Isger"
                 },
                 "Goblin Scuttle": {
                     "name": "地精快步 Goblin Scuttle",
@@ -3130,7 +3137,7 @@
                 },
                 "Regeneration 30 (Deactivated by Cold Iron)": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>",
-                    "name": "再生30（寒铁使其无效） Regeneration 30 (Deactivated by Cold Iron)"
+                    "name": "再生30（寒铁使其无效）Regeneration 30 (Deactivated by Cold Iron)"
                 }
             },
             "allSaves": "对魔法的豁免获得+1状态加值",
@@ -3173,7 +3180,7 @@
             "items": {
                 "Eerie Flexibility": {
                     "name": "怪异柔韧 Eerie Flexibility",
-                    "description": "<p>与其体型无关，塞瓦洛格的诸多关节允许它如同中型生物一般通过狭窄的空间。当挤入时，它能以全速移动。</p>"
+                    "description": "<p>与其体型无关，塞瓦洛格的诸多关节允许它如同中型生物一般通过狭窄的空间。当@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]时，它能以全速移动。</p>"
                 },
                 "Furious Claws": {
                     "name": "狂怒利爪 Furious Claws",
@@ -3202,7 +3209,7 @@
         },
         "Xotani, The Firebleeder": {
             "name": "佐坦尼，滴焰者 Xotani, The Firebleeder",
-            "publicNotes": "<p>一条由火焰与岩浆组成的畸怪，佐坦尼可能是洛瓦古格的子嗣中最弱的一个，但它仍然是一个令人畏惧的威胁。佐坦尼在2104 AR 被一个施法者联盟所杀，但最近它那死亡般的沉睡被人打搅。它的尸体开始抽搐，表明它回归的那一日正在临近。</p>\n<hr />\n<p>这些子嗣们是泰坦般的惧物，它们有着巨大的身躯和力量，活着的唯一目的就是毁灭。泰拉斯奎（Tarrasque）和佐坦尼（Xotani）并非洛瓦古格的所有孩子。其他的，包括坎姆诺西特-蠕虫君王（Chemnosit [the Monarch Worm]），科索伽兹-不协之舞（ Kothogaz [the Dance of Disharmony] ） 和斡那古尔- 终焉歌者（Volnagur [the End-Singer]）在不同地区的历史上都记下了恐怖的一笔，但最著名的是乌伦那忒-亵渎长子（Ulunat [the Unholy First]），它那甲虫般的残骸散落于索西斯，奥斯里昂的首都。</p>",
+            "publicNotes": "<p>一条由火焰与岩浆组成的畸怪，佐坦尼可能是洛瓦古格的子嗣中最弱的一个，但它仍然是一个令人畏惧的威胁。佐坦尼在2104 AR 被一个施法者联盟所杀，但最近它那死亡般的沉睡被人打搅。它的尸体开始抽搐，表明它回归的那一日正在临近。</p>\n<hr />\n<p>这些子嗣们是泰坦般的惧物，它们有着巨大的身躯和力量，活着的唯一目的就是毁灭。泰拉斯奎（Tarrasque）和佐坦尼（Xotani）并非洛瓦古格的所有孩子。其他的，包括坎姆诺西特-蠕虫君王（Chemnosit [the Monarch Worm]），科索伽兹-不协之舞（ Kothogaz [the Dance of Disharmony] ）和斡那古尔- 终焉歌者（Volnagur [the End-Singer]）在不同地区的历史上都记下了恐怖的一笔，但最著名的是乌伦那忒-亵渎长子（Ulunat [the Unholy First]），它那甲虫般的残骸散落于索西斯，奥斯里昂的首都。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -3304,7 +3311,7 @@
                 },
                 "Heat Surge": {
                     "name": "热能激增 Heat Surge",
-                    "description": "<p>当佐坦尼之嗣受到重击时，它的身躯陡然升温，其壳内炉膛能力造成的伤害增加至@Damage[10d8[persistent,fire]]，直至其下个回合开始。</p>"
+                    "description": "<p>当佐坦尼之嗣受到重击时，它的身躯陡然升温，其壳内炉膛能力造成的伤害增加至10d8，直至其下个回合开始。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.eRxSdMi6Y2XTQWql]</p>"
                 },
                 "Tremorsense": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>",
@@ -3363,7 +3370,7 @@
             "items": {
                 "Infused Items": {
                     "name": "灌注物品 Infused Items",
-                    "description": "<p>祖菲利安的灌注物品持续24小时，或直到她下一次日常准备。</p>"
+                    "description": "<p>祖菲利安的灌注物品持续24小时，或直到她下一次每日准备。</p>"
                 },
                 "Alchemical Formulas": {
                     "name": "炼金配方 Alchemical Formulas",
@@ -3409,7 +3416,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 巴鲁沙克的手中有镣铐而且与 1 名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 巴鲁沙克尝试用镣铐束缚该生物的手腕或脚踝。他必须成功通过一次调整值为[[/r 1d20+21 #Manacles]]{+21}的攻击检定对抗目标的AC。</p>"
+                    "description": "<p><strong>需求</strong> 巴鲁沙克的手中有镣铐而且与 1 名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 巴鲁沙克尝试用镣铐束缚该生物的手腕或脚踝。他必须成功通过一次调整值为@Check[efficient-capture|against:ac]{+21}的攻击检定对抗目标的AC。</p>"
                 },
                 "Fiend Summoner": {
                     "name": "魔族召唤师 Fiend Summoner",
@@ -3417,7 +3424,7 @@
                 },
                 "Superlative Summoner": {
                     "name": "高阶召唤师 Superlative Summoner",
-                    "description": "<p>若其他生物的反应动作将要打断巴鲁沙克的施法动作，巴鲁沙克能尝试1次@Check[flat|dc:15]检定。若他检定成功，则该次法术不会被打断。</p>"
+                    "description": "<p>若其他生物的反应动作将要打断巴鲁沙克的施法动作，巴鲁沙克能尝试一次@Check[flat|dc:15]检定。若他检定成功，则该次法术不会被打断。</p>"
                 }
             },
             "prototypeToken": {
@@ -3432,7 +3439,7 @@
             "disable": "<p>@Check[religion|dc:24|name:Exorcise the Hounds|traits:complex,haunt,hazard]（专家）来驱魔（这么做需要两个动作）</p>",
             "hazarddescription": "<p>对除了受害者以外所有人来说都是隐形的地狱犬将会焚烧他们的目标</p>",
             "reset": "<p>若指定目标死亡或者猎犬无法在一回合内触及到指定目标，猎犬便会消失在令人生厌的烟雾中，但它们会在下次日落之后再次出现在这座城市的其他地点</p>",
-            "routine": "<p>（2动作） 猎犬会使用它的第一个动作行走，若指定目标在它的触及范围，则用第二个动作对其指定目标作出啃咬打击。若目标不在触及范围内，猎犬便会重置。</p>",
+            "routine": "<p>（2动作）猎犬会使用它的第一个动作行走，若指定目标在它的触及范围，则用第二个动作对其指定目标作出啃咬打击。若目标不在触及范围内，猎犬便会重置。</p>",
             "items": {
                 "Begin the Hunt": {
                     "description": "<p><strong>触发</strong> 一名没有公开佩戴阿斯莫蒂斯（Asmodeus）徽记的生物进入距离作祟初始位置60尺范围内</p>\n<hr />\n<p><strong>效果</strong> 猎犬出现在被选择的目标面前，并开始疯狂地嚎叫并追赶该生物。作祟投掷先攻。其他人无法听到或看到狂吠的猎犬而且必须进行@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]{搜索 Seek}来判断猎犬的位置。</p>",
@@ -3450,7 +3457,7 @@
             },
             "items": {
                 "Tongue Grab": {
-                    "description": "<p>若贝尔玛佐格用蛙舌命中1个生物，那么该生物会被他@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱 Grabbed}。与一般的擒获不同，该生物不会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，但是他也无法移动至贝尔玛佐格的蛙舌触及范围之外。生物可以通过命中AC25并造成至少8点挥砍伤害来切开蛙舌。尽管这么做不会对贝尔玛佐格造成伤害，但它可以使贝尔玛佐格无法再次使用蛙舌打击，直至贝尔玛佐格通过1星期的休息才能够重新使用蛙舌。</p>",
+                    "description": "<p>若贝尔玛佐格用蛙舌命中1个生物，那么该生物会被他@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{擒抱 Grabbed}。与一般的擒获不同，该生物不会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，但是他也无法移动至贝尔玛佐格的蛙舌触及范围之外。生物可以通过命中AC25并造成至少8点挥砍伤害来切开蛙舌。尽管这么做不会对贝尔玛佐格造成伤害，但它可以使贝尔玛佐格无法再次使用蛙舌打击，直至贝尔玛佐格通过1周的休息才能够重新使用蛙舌。</p>",
                     "name": "蛙舌擒获 Tongue Grab"
                 },
                 "Nul-Acrumi Vazghul Ritual": {
@@ -3463,7 +3470,7 @@
                 },
                 "Drowning Drone": {
                     "name": "淹没之音 Drowning Drone",
-                    "description": "<p><strong>触发</strong> 贝尔玛佐格或他的60尺内的1名盟友尝试豁免检定对抗听觉或音波效果。</p>\n<hr />\n<p><strong>效果</strong> 贝尔玛佐格会发出低沉的鸣叫压过其他声音。她投掷1次表演检定。贝尔玛佐格和她位于区域内的沼蜍盟友可以进行选择，在沼泽先知的表演检定和他们的豁免结果中取较高的数值，并以此来对抗听觉或音波效果。</p>"
+                    "description": "<p><strong>触发</strong> 贝尔玛佐格或他的60尺内的1名盟友尝试豁免检定对抗听觉或音波效果。</p>\n<hr />\n<p><strong>效果</strong> 贝尔玛佐格会发出低沉的鸣叫压过其他声音。她投掷一次表演检定。贝尔玛佐格和她位于区域内的沼蜍盟友可以进行选择，在沼泽先知的表演检定和他们的豁免结果中取较高的数值，并以此来对抗听觉或音波效果。</p>"
                 },
                 "Swamp Stride": {
                     "name": "沼泽奔行 Swamp Stride",
@@ -3530,7 +3537,7 @@
                 },
                 "Twisting Tail": {
                     "name": "卷尾 Twisting Tail",
-                    "description": "<p><strong>触发</strong> 有生物在龙牧师的尾扫触及范围内使用移动动作或者在他使用的 1 次移动动作的过程中离开一个方格</p>\n<hr />\n<p><strong>效果</strong> 龙牧师对该生物作出1次承受-2减值的尾扫打击。若命中，则会中断该生物的动作。</p>"
+                    "description": "<p><strong>触发</strong> 有生物在龙牧师的尾扫触及范围内使用移动动作或者在他使用的 1 次移动动作的过程中离开一个方格</p>\n<hr />\n<p><strong>效果</strong> 龙牧师对该生物作出一次承受-2减值的尾扫打击。若命中，则会中断该生物的动作。</p>"
                 },
                 "Thrown Weapon Mastery": {
                     "name": "投掷武器精通 Thrown Weapon Mastery",
@@ -3552,7 +3559,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Stench": {
-                    "description": "<p>10尺。有生物进入灵光区域或在其回合开始时位于灵光区域内时，必须成功通过@Check[fortitude|dc:26|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时只要处于它的恶心状态就会附加@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。</p>\n<p>在处于灵光内时，受影响的生物在对抗疾病的豁免以及从恶心状态恢复的豁免中承受-2 环境减值。成功通过豁免的生物会在 1 分钟内临时免疫该效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]</p>",
+                    "description": "<p>10尺。有生物进入灵光区域或在其回合开始时位于灵光区域内时，必须成功通过@Check[fortitude|dc:26|options:area-effect,inflicts:sickened,inflicts:slowed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时只要处于它的恶心状态就会附加@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。</p>\n<p>在处于灵光内时，受影响的生物在对抗疾病的豁免以及从恶心状态恢复的豁免中承受-2环境减值。成功通过豁免的生物会在1分钟内临时免疫该效果。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]</p>",
                     "name": "恶臭 Stench"
                 },
                 "Ghast Fever": {
@@ -3561,7 +3568,7 @@
                 },
                 "Consume Flesh": {
                     "name": "啃肉 Consume Flesh",
-                    "description": "<p><strong>需求</strong> 惨白穴熊与某个在过去1小时内死亡的生物的尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 惨白穴熊啃下一大块尸体并恢复@Damage[6d6[healing]]生命值。</p>\n<p>它只能从每个尸体恢复1次生命值。</p>"
+                    "description": "<p><strong>需求</strong> 惨白穴熊与某个在过去1小时内死亡的生物的尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 惨白穴熊啃下一大块尸体并恢复@Damage[6d6[healing]]生命值。</p>\n<p>它只能从每个尸体恢复一次生命值。</p>"
                 },
                 "Mauler": {
                     "name": "擅长搏击 Mauler",
@@ -3569,7 +3576,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任何被惨白穴熊的攻击命中的活物必须成功进行@Check[fortitude|dc:26]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物能够在每次自身回合结束时尝试一次新的豁免，每次尝试上述豁免都会使得 DC 累计降低 1 点。</p>"
+                    "description": "<p>任何被惨白穴熊的攻击命中的活物必须成功进行@Check[fortitude|dc:26|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物能够在每次自身回合结束时尝试一次新的豁免，每次尝试上述豁免都会使得DC累计降低1点。</p>"
                 }
             },
             "hp": "虚能治疗",
@@ -3625,7 +3632,7 @@
                     "description": "<p>当巫妖被摧毁时，其灵魂会立即转移到<em>@UUID[Compendium.pf2e.equipment-srd.Item.NEbr7nKuiluJgBHT]{命匣 Soul Cage}</em>内。只有先找到并摧毁巫妖的<em>命匣</em>，才能永久摧毁该命匣对应的巫妖。</p>"
                 },
                 "Paralyzing Touch": {
-                    "description": "<p>被贾伽基的手摸打击所伤害的生物必须通过@Check[fortitude|dc:29]豁免。</p>\n<p>失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，持续 1 轮。大失败时，该生物会被永久麻痹，@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]且看起来与死了无异。通过@Check[medicine|dc:25|name:Diagnose Paralysis]检定能揭示出该受害者还活着。</p>",
+                    "description": "<p>被贾伽基的手摸打击所伤害的生物必须通过@Check[fortitude|dc:29]豁免。</p>\n<p>失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，持续1轮。大失败时，该生物会被永久麻痹，@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]且看起来与死了无异。通过@Check[medicine|dc:25|name:Diagnose Paralysis]检定能揭示出该受害者还活着。</p>",
                     "name": "麻痹之触 Paralyzing Touch"
                 },
                 "Bones of Stone": {
@@ -3697,7 +3704,7 @@
                     "name": "钥匙串（用来打开蔽夏花岗岩采石场内的锁）"
                 },
                 "Efficient Capture": {
-                    "description": "<p><strong>需求</strong> 拉斯伦手里持握镣铐，并且和一个生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 拉斯伦试图用镣铐绑住该生物的手腕或腿部。她进行一次调整值[[/r 1d20+28 #Manacles]]{+28}攻击骰，对抗目标的AC，如果成功，她将用镣铐捆缚该生物的手腕或腿部。</p>",
+                    "description": "<p><strong>需求</strong> 拉斯伦手里持握镣铐，并且和一个生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 拉斯伦试图用镣铐绑住该生物的手腕或腿部。她进行一次调整值@Check[efficient-capture|against:ac]{+28}攻击骰，对抗目标的AC，如果成功，她将用镣铐捆缚该生物的手腕或腿部。</p>",
                     "name": "高效抓捕 Efficient Capture"
                 },
                 "Reactive Strike (Special)": {
@@ -3769,7 +3776,7 @@
                 },
                 "Deny Advantage": {
                     "name": "否决优势 Deny Advantage",
-                    "description": "<p>当米拉瑞被10级以下的生物夹击或突然袭击（Surprise Attack） 时，不会陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
+                    "description": "<p>当米拉瑞被10级以下的生物夹击或突然袭击 时，不会陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>"
                 },
                 "Ranged Legerdemain": {
                     "name": "远程手法 Ranged Legerdemain",
@@ -3844,7 +3851,7 @@
             "disable": "<p>@Check[religion|dc:27|name:Recite Against the Power of Hell|traits:auditory,complex,haunt,sonic,hazard]（专家）来吟诵经文打破诅咒，对抗来自地狱的钟声（需要两个动作），或者@Check[performance|dc:22|name:Perform an Opposing Composition|traits:auditory,complex,haunt,sonic,hazard]（专家）来表演以对抗这些声音</p>",
             "hazarddescription": "<p>恶魔般的丧钟鸣响回荡，喧嚣的回响使人骨骼震荡</p>",
             "reset": "<p>若30尺范围内没有活物，丧钟便会停止鸣响</p>",
-            "routine": "<p>（1 个动作） 丧钟鸣响，对@Template[emanation|distance:30]{30尺}内的每名活物造成@Damage[4d6[sonic]]伤害（@Check[fortitude|dc:24|basic|name:Phantom Bells Toll|traits:auditory,complex,haunt,sonic,hazard]豁免）</p>",
+            "routine": "<p>（1动作）丧钟鸣响，对@Template[emanation|distance:30]{30尺}内的每名活物造成@Damage[4d6[sonic]]伤害（@Check[fortitude|dc:24|basic|name:Phantom Bells Toll|traits:auditory,complex,haunt,sonic,hazard]豁免）</p>",
             "items": {
                 "Distant Ringing": {
                     "name": "悠远钟鸣 Distant Ringing",
@@ -3890,7 +3897,7 @@
                     "name": "对魔法的豁免获得+1状态加值 +1 Status to All Saves vs. Magic"
                 },
                 "Regeneration 25 (Deactivated by Holy or Silver)": {
-                    "name": "再生25（圣洁或银使其无效） Regeneration 25 (Deactivated by Holy or Silver)",
+                    "name": "再生25（圣洁或银使其无效）Regeneration 25 (Deactivated by Holy or Silver)",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
                 "Unnerving Gaze": {
@@ -3910,7 +3917,7 @@
             "disable": "<p>2次@Check[thievery|dc:28|name:Close a Sluice|traits:complex,mechanical,trap,hazard]（专家）来关闭一个水闸门（大成功时可以立即关闭一个水闸门）</p>",
             "hazarddescription": "<p>6个水闸门打开，数千加仑的水开始涌入房间。水在房间内搅动，并顺着房间南段的3个向下倾斜的水槽流出</p>",
             "reset": "<p>6 个泄水道都关闭之后陷阱将会重置。若此情况发生之时水库的水已经被排干了，则需要数月的时间重新补充水库的存水。</p>",
-            "routine": "<p>(6个动作） 每个被解除或被摧毁的泄水道会让陷阱失去 1 个动作。每当轮到陷阱的动作时，从水闸奔流而出的水会流经这个房间，形成一条湍急的河流，使得房间内积下数英寸深的水，将房间内的地板变为困难地形。房间内的水流不会高于当前高度，因为水流会从房间南侧的斜向水槽流出，并开始灌入采石坑（区域<strong>J2</strong>）。在陷阱的第二个回合，水流开始涌入区域<strong>J2</strong> 的四个奴隶坑。陷阱的每个动作会让坑内涌入4英寸深（若所有泄水道都在运作则为每轮2尺深）的水。若奴隶坑内涌入了等同于其总深度的12尺深的水流，且奴隶坑上的格栅没有被开启的话，奴隶们便会开始溺水，若5轮内没有被救出便会陷入濒死。在奴隶坑被填满后，水流便会在1小时内缓慢填满采石场的中心区域，直至水库的水被净空并且将区域<strong>J2</strong>淹没至 15尺深为止。</p>\n<p>根据你的判断，解除或摧毁泄水道之外的其他选项也可以防止洪水淹没采石场。</p>",
+            "routine": "<p>（6动作）每个被解除或被摧毁的泄水道会让陷阱失去1个动作。每当轮到陷阱的动作时，从水闸奔流而出的水会流经这个房间，形成一条湍急的河流，使得房间内积下数英寸深的水，将房间内的地板变为困难地形。房间内的水流不会高于当前高度，因为水流会从房间南侧的斜向水槽流出，并开始灌入采石坑（区域<strong>J2</strong>）。在陷阱的第二个回合，水流开始涌入区域<strong>J2</strong> 的四个奴隶坑。陷阱的每个动作会让坑内涌入4英寸深（若所有泄水道都在运作则为每轮2尺深）的水。若奴隶坑内涌入了等同于其总深度的12尺深的水流，且奴隶坑上的格栅没有被开启的话，奴隶们便会开始溺水，若5轮内没有被救出便会陷入濒死。在奴隶坑被填满后，水流便会在1小时内缓慢填满采石场的中心区域，直至水库的水被净空并且将区域<strong>J2</strong>淹没至 15尺深为止。</p>\n<p>根据你的判断，解除或摧毁泄水道之外的其他选项也可以防止洪水淹没采石场。</p>",
             "items": {
                 "Opened Sluices": {
                     "name": "开启水闸 Opened Sluices",
@@ -3986,7 +3993,7 @@
             },
             "items": {
                 "Efficient Capture": {
-                    "description": "<p><strong>需求</strong> 红三一莽汉的手中有镣铐而且与1名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 红三一莽汉尝试用镣铐束缚该生物的手腕或脚踝。他必须成功通过一次调整值[[/r 1d20+23 #Manacles]]{+23}的攻击检定对抗目标的 AC。</p>",
+                    "description": "<p><strong>需求</strong> 红三一莽汉的手中有镣铐而且与1名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 红三一莽汉尝试用镣铐束缚该生物的手腕或脚踝。他必须成功通过一次@Check[efficient-capture|against:ac]{+23}的攻击检定对抗目标的 AC。</p>",
                     "name": "高效抓捕 Efficient Capture"
                 },
                 "Batter the Fallen": {
@@ -4003,7 +4010,7 @@
                 },
                 "Pummeling Flurry": {
                     "name": "狂怒连打 Pummeling Flurry",
-                    "description": "<p><strong>频率</strong> 每回合一次</p>\n<hr />\n<p><strong>效果</strong> 红三一莽汉作出1次巨棒打击和1次脚踢打击。若这2次命中了相同的生物，则在判断抗力以及弱点时将二者的伤害合并起来进行计算。</p>"
+                    "description": "<p><strong>频率</strong> 每回合一次</p>\n<hr />\n<p><strong>效果</strong> 红三一莽汉作出一次巨棒打击和一次脚踢打击。若这2次命中了相同的生物，则在判断抗力以及弱点时将二者的伤害合并起来进行计算。</p>"
                 },
                 "Attack of Opportunity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>",
@@ -4025,7 +4032,7 @@
                 },
                 "Running Poison Strike": {
                     "name": "疾行毒击 Running Poison Strike",
-                    "description": "<p><strong>频率</strong> 每日三次</p>\n<hr />\n<p><strong>效果</strong> 投毒者行走，在移动的过程中给武器涂毒。投毒者移动至多等同于其速度的距离，之后作出1次会造成@Damage[2d8[poison]]伤害的近战打击。这对已经能造成毒素伤害的打击没有效果。</p>"
+                    "description": "<p><strong>频率</strong> 每日三次</p>\n<hr />\n<p><strong>效果</strong> 投毒者行走，在移动的过程中给武器涂毒。投毒者移动至多等同于其速度的距离，之后作出一次会造成@Damage[2d8[poison]]伤害的近战打击。这对已经能造成毒素伤害的打击没有效果。</p>"
                 },
                 "+1 Status to All Saves vs. Poison": {
                     "name": "对毒素的豁免+1状态加值 +1 Status to All Saves vs. Poison"
@@ -4067,7 +4074,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 有镣铐在探子的手上且探子与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 探子尝试用镣铐束缚该生物的手腕或脚踝。若探子成功通过[[/r 1d20+16 #Manacles]]{+16}调整值的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
+                    "description": "<p><strong>需求</strong> 有镣铐在探子的手上且探子与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 探子尝试用镣铐束缚该生物的手腕或脚踝。若探子成功通过@Check[efficient-capture|against:ac]{+16}调整值的攻击检定对抗目标的AC，则对其应用镣铐。</p>"
                 }
             },
             "prototypeToken": {
@@ -4093,7 +4100,7 @@
                 },
                 "Backshot": {
                     "name": "拉弓回击 Backshot",
-                    "description": "<p><strong>触发</strong> 有个狙击手能看到的生物对狙击手进行远程武器打击并失手</p>\n<hr />\n<p><strong>效果</strong> 狙击手对触发生物尝试1次远程打击，此次打击会承受-2减值。</p>"
+                    "description": "<p><strong>触发</strong> 有个狙击手能看到的生物对狙击手进行远程武器打击并失手</p>\n<hr />\n<p><strong>效果</strong> 狙击手对触发生物尝试一次远程打击，此次打击会承受-2减值。</p>"
                 },
                 "Swiftness": {
                     "name": "身手灵敏 Swiftness",
@@ -4126,7 +4133,7 @@
                 },
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 有镣铐在暴徒的手上且暴徒与一名生物相邻。</p>\n<hr />\n<p><strong>效果</strong> 暴徒尝试用镣铐束缚该生物的手腕或脚踝。暴徒必须成功通过[[/r 1d20+18 #Manacles]]{+18}调整值的攻击检定对抗目标的 AC。</p>"
+                    "description": "<p><strong>需求</strong> 有镣铐在暴徒的手上且暴徒与一名生物相邻</p>\n<hr />\n<p><strong>效果</strong> 暴徒尝试用镣铐束缚该生物的手腕或脚踝。暴徒必须成功通过@Check[efficient-capture|against:ac]{+18}调整值的攻击检定对抗目标的AC。</p>"
                 },
                 "Pack Attack": {
                     "name": "围攻 Pack Attack",
@@ -4146,7 +4153,7 @@
             "stealthdetails": "<p>（专家）; @Check[perception|dc:29|name:Notice the Line of Cord|traits:complex,mechanical,trap,hazard] 能注意到有一条线绳从机床的触发器上一直延伸至通往区域<strong>A2</strong>的门后。</p>",
             "disable": "<p>@Check[thievery|dc:31|name:Release the Spring Tension|traits:complex,mechanical,trap,hazard]（专家）能够在车床上的弹簧张力施放掉的同时却不触动上面的刀片和齿轮。</p>",
             "hazarddescription": "<p>这台动力机床上的弹簧绷得很紧，当它被推撞或触发时，机床会一下子松开，将刀片、齿轮和锋利的金属片一股脑向着房间各处迸射。</p>",
-            "routine": "<p>（4个动作） 机床尝试4次尖锐零件攻击对抗房间内的生物，从区域A1 内所有可选目标中随机选择一个目标。陷阱的任何攻击都不会承受多重攻击减值。随着弹簧的力量被释放出来变得越来越松，陷阱每个回合会失去一个动作，最终在只具有0个动作时便会被解除。</p>",
+            "routine": "<p>（4动作）机床尝试4次尖锐零件攻击对抗房间内的生物，从区域A1 内所有可选目标中随机选择一个目标。陷阱的任何攻击都不会承受多重攻击减值。随着弹簧的力量被释放出来变得越来越松，陷阱每个回合会失去一个动作，最终在只具有0个动作时便会被解除。</p>",
             "items": {
                 "Unleash Fragments": {
                     "name": "零件喷发 Unleash Fragments",
@@ -4171,7 +4178,7 @@
             "disable": "<p>@Check[athletics|dc:25|name:Force Open a Branch|traits:complex,magical,trap,hazard,action:force-open]或@Check[thievery|dc:25|name:Lever Open a Branch|traits:complex,magical,trap,hazard]（受训）能够用蛮力或用杠杆的方式撬开单根树枝，解除这根树枝并解放被困于其中的任何生物。@Check[thievery|dc:29|name:Disrupt the Tree's Magical Animation|traits:complex,magical,trap,hazard]（专家）能够扰乱柳树的魔法流通，关闭它，并释放所有被困的生物。将<em>梦境石</em>安置在树干上需要两个交互动作，而这会使陷阱关闭，释放所有被困的生物。若将区域<em>B4</em>内的<strong>被诅咒的梦境石</strong>放置到树干上反而会将柳树每个回合的动作增加到4个，并使它在所有豁免检定以及攻击检定中获得+2物品加值。</p>",
             "hazarddescription": "<p>柳树雕塑活化起来，它的枝条试图抓住区域<strong>B2</strong>内的任何人。</p>",
             "reset": "<p>当没有生物被陷阱@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]，房间内也没有生物可供攻击时，则陷阱关闭并重置。若未被诅咒的<em>梦境石</em>被安置在树干上，该雕像就不会被再次激活。</p>",
-            "routine": "<p>(3个动作） 雕像会使用每个动作来尝试树枝打击对抗一名房间内还未被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]的随机生物。若没有生物可供攻击，但至少有一名生物被擒抱的话，它会使用紧勒取代树枝打击动作。该陷阱至多擒抱6名生物。</p>",
+            "routine": "<p>（3动作）雕像会使用每个动作来尝试树枝打击对抗一名房间内还未被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]的随机生物。若没有生物可供攻击，但至少有一名生物受擒的话，它会使用紧勒取代树枝打击动作。该陷阱至多使6名生物受擒。</p>",
             "items": {
                 "Constrict": {
                     "name": "紧勒 Constrict",
@@ -4182,7 +4189,7 @@
                     "description": "<p>恐怖梦境之树每轮至多能够尝试6次反应打击。</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Terrifying Visions": {
-                    "description": "<p>若生物的回合开始时受擒于陷阱的话，会体验生动的真实事件的扭曲幻象，必须成功通过@Check[will|dc:31|traits:damaging-effect]豁免，失败则会承受@Damage[4d8[mental]]伤害。大失败时，该生物还会陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}。成功通过豁免的生物会获得持续 24 小时的临时免疫。</p>",
+                    "description": "<p>若生物的回合开始时受擒于陷阱的话，会体验生动的真实事件的扭曲幻象，必须成功通过@Check[will|dc:31|traits:damaging-effect]豁免，失败则会承受@Damage[4d8[mental]]伤害。大失败时，该生物还会陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}。成功通过豁免的生物会获得持续24小时的临时免疫。</p>",
                     "name": "Terrifying Visions 恐怖幻象"
                 },
                 "Independent Limbs": {

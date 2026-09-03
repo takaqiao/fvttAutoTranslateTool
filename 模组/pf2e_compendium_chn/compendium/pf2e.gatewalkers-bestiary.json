@@ -200,7 +200,7 @@
                 },
                 "Tetanus": {
                     "name": "破伤风 Tetanus",
-                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>潜伏期</strong> 10天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} （1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> 因肌肉痉挛而陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>潜伏期</strong> 10天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> 因肌肉痉挛而陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
                 }
             },
             "prototypeToken": {
@@ -320,12 +320,12 @@
         "Haunted Aiudara": {
             "name": "作祟的艾厄达拉 Haunted Aiudara",
             "hazarddescription": "<p>死去许久的探险家们的精神印记作祟于这个<em>艾厄达拉</em>，表现为三人一组嫉妒地守护着传送门的星界缚灵。</p>",
-            "routine": "<p>(3个动作；咒法系，神术，传送） 使用幽灵鬼爪，艾厄达拉缚灵能越过时间和空间攻击闯入者。三个缚灵每个都有一个动作，能用来对60尺内的一个生物进行力场之手打击。每次对解除作祟的成功检定都将让作祟损失1动作。</p>\n<p>当作祟在打击生物时掷出重击，该生物将被立即传送到30尺内一个未被占据空间内。由作祟选择生物被传送的空间。</p>",
+            "routine": "<p>（3动作；咒法系，神术，传送）使用幽灵鬼爪，艾厄达拉缚灵能越过时间和空间攻击闯入者。三个缚灵每个都有一个动作，能用来对60尺内的一个生物进行力场之手打击。每次对解除作祟的成功检定都将让作祟损失1动作。</p><p>当作祟在打击生物时掷出重击，该生物将被立即传送到30尺内一个未被占据空间内。由作祟选择生物被传送的空间。</p>",
             "reset": "<p>1分钟后艾厄达拉缚灵便会消散，但作祟会在24小时后重置。</p>",
             "items": {
                 "Forceful Screech": {
                     "name": "力场尖叫 Forceful Screech",
-                    "description": "<p><strong>触发</strong> 一个生物走进艾厄达拉30尺内</p>\n<hr />\n<p><strong>效果</strong> 三个艾厄达拉缚灵齐声尖叫并显形，以保护拱门。30尺内的每个生物必须尝试一次@Check[will|dc:27]豁免。作祟掷骰先攻。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物受到@Damage[(2d8+9)[force]]伤害。</p>\n<p><strong>大失败</strong> 生物受到4d8+9@Damage[(4d8+9)[force]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]状态。</p>"
+                    "description": "<p><strong>触发</strong> 一个生物走进<em>艾厄达拉</em>30尺内</p><hr /><p><strong>效果</strong> 三个艾厄达拉缚灵齐声尖叫并显形，以保护拱门。@Template[emanation|distance:30]内的每个生物必须尝试一次@Check[will|dc:27|options:area-effect,damaging-effect,inflicts:fatigued]豁免。作祟掷骰先攻。</p>\n<p><strong>成功</strong> 生物不受影响。</p>\n<p><strong>失败</strong> 生物受到@Damage[(2d8+9)[force]]伤害。</p>\n<p><strong>大失败</strong> 生物受到@Damage[(4d8+9)[force]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]状态。</p>"
                 },
                 "No MAP": {
                     "description": "<p>力场之手打击无多重攻击减值。</p>",
@@ -338,7 +338,8 @@
             "disable": "<p>@Check[religion|dc:25]（受训）来驱除其中一个缚灵或@Check[occultism|dc:25]（专家）来抹除其中一个缚灵的星界记号；要解除作祟必须成功通过三次检定。</p>",
             "prototypeToken": {
                 "name": "作祟的艾厄达拉"
-            }
+            },
+            "stealthdetails": "<p>（专家）</p>"
         },
         "Immolis": {
             "name": "焚身兽 Immolis",
@@ -511,7 +512,7 @@
             },
             "disable": "<p>@Check[survival|dc:20]（受训）或@Check[occultism|dc:20]（受训）以呼吸装在袋中或布中的安全空气。</p>",
             "hazarddescription": "<p>阿克腾的有毒魔法大气对星球上的活物有着怪异的影响。</p>",
-            "routine": "<p>（1动作；幻术系，心灵，异能） 大气继续影响区域内的所有生物，需要在每轮为剧毒大气进行一次新的强韧豁免检定。一名屏住呼吸的生物对该豁免具有+2环境加值。</p>",
+            "routine": "<p>（1动作；幻术系，心灵，异能）大气继续影响区域内的所有生物，需要在每轮为剧毒大气进行一次新的强韧豁免检定。一名屏住呼吸的生物对该豁免具有+2环境加值。</p>",
             "stealthdetails": "<p>（专家）以确认突如其来的呕吐感的源头</p>",
             "items": {
                 "Poisonous Atmosphere": {
@@ -528,7 +529,7 @@
             "items": {
                 "Construct Armor (Hardness 4)": {
                     "description": "<p>与普通物品一样，采矿构装体也具有硬度。其硬度将会使其受到的任何伤害减少等同于硬度的数值。一旦采矿构装体的生命值被减少到一半以下，或是当其受到一次重击的伤害后，它的构装护甲就会破损并使其AC减少至14。</p>",
-                    "name": "构装护甲 Construct Armor （硬度 4)"
+                    "name": "构装护甲 Construct Armor（硬度4）"
                 }
             },
             "data": {
@@ -804,7 +805,7 @@
                 },
                 "Camouflage": {
                     "name": "伪装 Camouflage",
-                    "description": "<p>微光藤能在自然环境里躲藏，即使没有掩蔽。</p>"
+                    "description": "<p>微光藤能在自然环境里[[/act hide]]，即使没有掩蔽。</p>"
                 },
                 "Constrict": {
                     "name": "紧勒 Constrict",
@@ -985,7 +986,7 @@
             "items": {
                 "Frightful Presence": {
                     "description": "<p>90尺，@Check[will|dc:22|options:area-effect,inflicts:frightened]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FrightfulPresence]</p>",
-                    "name": "Frightful Presence"
+                    "name": "恐怖威压 Frightful Presence"
                 },
                 "Dream Step": {
                     "name": "Dream Step",
@@ -1076,7 +1077,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
                 },
                 "Ley Line Sense (Imprecise)": {
-                    "name": "地脉感知（模糊） Ley Line Sense (Imprecise)",
+                    "name": "地脉感知（模糊）Ley Line Sense (Imprecise)",
                     "description": "<p>秘络龙可以感知到1里以内任何地脉的存在，方位与强度。</p>"
                 },
                 "Reactive Strike (Fangs Only)": {
@@ -1084,7 +1085,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Resistance 5 to Physical Near a Ley Line": {
-                    "name": "物理抗力5（靠近地脉时） Resistance 5 to Physical Near a Ley Line",
+                    "name": "物理抗力5（靠近地脉时）Resistance 5 to Physical Near a Ley Line",
                     "description": "<p>秘络龙在处于地脉的500尺范围内时获得5点物理抗力。</p>"
                 },
                 "Draconic Frenzy": {
@@ -1191,14 +1192,14 @@
             "name": "Ancient Tupilaq",
             "publicNotes": "<p>A tupilaq is an artistically crafted construct carved from animal bones (typically whale or walrus) and imbued with the express purpose of eviscerating its creator's enemies. A tupilaq manifests from hateful magic-a thing that can be created only by someone who believes they were grievously wronged. When a terrible, unforgivable crime is committed against someone with great skill at carving and who has knowledge of the proper ritual, the aggrieved can channel their grief and hate through whispered incantations to bring a tupilaq to life.</p>\n<p>Sadly, the same emotions used to create a tupilaq often lead to even greater tragedies. Functionally immortal but built for vengeance a tupilaq lacks the reason or discernment to do anything other than pursue the goal imbued by its creator. A wish to utterly destroy an enemy can lead a tupilaq to slaughter an entire clan or settlement, killing until it has slain everyone even remotely related to the original offender. There are many stories where a tupilaq ends up causing more tragedy for its creator than the crime that precipitated its creation. The most common tales feature the tupilaq eventually murdering its creator's spouse or family members due to a distant relationship to the original target that no one knew about.</p>\n<p>Tupilaqs' animating energies aren't tied to their original functions, and the creatures typically long outlast their creators, their victims, and often any who recall the reason for their creation. They might fall into a sort of hibernation once they've achieved immediate vengeance, but they frequently reawaken to continue their rampage against unsuspecting targets ignorant of their involvement.</p>\n<p>Spellcasters might occasionally summon these constructs. Summoned tupilaqs, hauled unceremoniously from their vengeance, become near-frenzied combatants, unleashing every offensive ability in their arsenal to break free. These reactions aren't strategic or considered, but an instinctual, almost programmed need to return to their true purpose. Conjurers should be wary about tupilaqs employing spells that might be turned against their summoners, such as a fireball spell \"accidentally\" placed such that it incinerates the spellcaster and returns these creatures from whence they came.</p>",
             "blurb": "Variant tupilaq",
-            "ac": "(28 when broken); construct armor",
+            "ac": "（破损时28）；构装护甲",
             "items": {
                 "Darkvision": {
                     "name": "Darkvision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
                 "Construct Armor (Hardness 11)": {
-                    "name": "Construct Armor (Hardness 11)",
+                    "name": "构装护甲 Construct Armor（硬度11）",
                     "description": "<p>Like normal objects, a tupilaq has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once a tupilaq is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks, it loses its Hardness, and its Armor Class is reduced to 28.</p>"
                 },
                 "Carver's Curse": {
@@ -1655,17 +1656,17 @@
                     "name": "Attack of Opportunity (Tentacle Only)"
                 },
                 "+1 Status Bonus to Saves Against Holy Spells and Effects": {
-                    "name": "+1 Status Bonus to Saves Against Holy Spells and Effects"
+                    "name": "对抗圣洁法术和效果的豁免+1状态加值 +1 Status Bonus to Saves Against Holy Spells and Effects"
                 }
             },
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "name": "Ainamuuren",
-            "allSaves": "+1 status bonus to saves against holy spells and effects",
-            "blurb": "Male saumen kar last scion",
+            "name": "艾纳穆伦 Ainamuuren",
+            "allSaves": "对抗圣洁法术和效果的豁免+1状态加值",
+            "blurb": "男性最后的苏门卡尔",
             "prototypeToken": {
-                "name": "Ainamuuren"
+                "name": "艾纳穆伦"
             }
         },
         "Ogmunzorius": {
@@ -1843,8 +1844,8 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
-                    "description": "<p>30 feet. @Check[fortitude|dc:19|options:area-effect,inflicts:sickened,inflicts:slowed]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
+                    "name": "恶臭 Stench",
+                    "description": "<p>30尺。@Check[fortitude|dc:19|options:area-effect,inflicts:sickened,inflicts:slowed]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
                 },
                 "Constrict": {
                     "name": "Constrict",
@@ -2115,7 +2116,7 @@
             "items": {
                 "Construct Armor (Hardness 10)": {
                     "description": "<p>Like normal objects, an apothecary's cabinet has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once an apothecary's cabinet is reduced to fewer than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 20.</p>",
-                    "name": "Construct Armor (Hardness 10)"
+                    "name": "构装护甲 Construct Armor（硬度10）"
                 },
                 "Poison Stock": {
                     "name": "Poison Stock",
@@ -2127,7 +2128,7 @@
                 }
             },
             "name": "Apothecary's Cabinet",
-            "ac": "(20 when broken); construct armor",
+            "ac": "（破损时20）；构装护甲",
             "prototypeToken": {
                 "name": "Apothecary's Cabinet"
             }
@@ -2325,7 +2326,7 @@
                     "description": "<p>15 feet. The glow of the crownbound constellation creates dim light. It can suppress or resume this ability as a free action.</p>"
                 },
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Dazzling Assault": {
@@ -2338,7 +2339,7 @@
                 },
                 "Starburst": {
                     "name": "Starburst",
-                    "description": "<p>A creature that takes damage from a crownbound constellation's attack must succeed at a @Check[fortitude|dc:23] save or be @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute.</p>"
+                    "description": "<p>A creature that takes damage from a crownbound constellation's attack must succeed at a @Check[fortitude|dc:23|options:inflicts:dazzled] save or be @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute.</p>"
                 },
                 "Swarm Shape": {
                     "name": "Swarm Shape",
@@ -2541,7 +2542,7 @@
                 },
                 "Frostbite": {
                     "name": "Frostbite",
-                    "description": "<p>A creature that takes persistent cold damage from the trap's frost jet Strike must attempt a @Check[fortitude|dc:18] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature isn't affected and is immune to this frostbite effect for 24 hours.</p>\n<p><strong>Success</strong> The creature isn't affected.</p>\n<p><strong>Failure</strong> The creature can't stop shivering and becomes @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}.</p>\n<p><strong>Critical Failure</strong> As failure, and the creature becomes @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}.</p>"
+                    "description": "<p>A creature that takes persistent cold damage from the trap's frost jet Strike must attempt a @Check[fortitude|dc:18|options:inflicts:clumsy,inflicts:fatigued] save.</p><hr /><p><strong>Critical Success</strong> The creature isn't affected and is immune to this frostbite effect for 24 hours.</p>\n<p><strong>Success</strong> The creature isn't affected.</p>\n<p><strong>Failure</strong> The creature can't stop shivering and becomes @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}.</p>\n<p><strong>Critical Failure</strong> As failure, and the creature becomes @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}.</p>"
                 }
             },
             "disable": "<p>@Check[thievery|dc:24] (expert) to erase a rune, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd rank; counteract DC 24) to dispel a rune; all three runes must be erased or dispelled to disable the trap.</p>",
@@ -2830,6 +2831,9 @@
                 "Harvester Poison": {
                     "name": "Harvester Poison",
                     "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:24]</p>\n<hr />\n<p><strong>最大持续时间</strong> 4 rounds</p>\n<p><strong>阶段1</strong> @Damage[2d6[poison]] damage（1轮）</p>\n<p><strong>阶段2</strong> @Damage[3d6[poison]] damage（1轮）</p>"
+                },
+                "equipment-Keys": {
+                    "name": "Keys"
                 }
             },
             "prototypeToken": {
@@ -2869,7 +2873,7 @@
                     "description": "<p>30 feet. On a failed save, the target is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} for this turn and whenever it begins its turn within 30 feet of the naiad queen for the next 24 hours, even if it can't see her on subsequent turns.</p>\n<hr />\n<p>Creatures that start their turn in the aura must succeed at a @Check[will|dc:23|options:area-effect,inflicts:stunned] save or suffer an effect described in the nymph queen's entry.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Nymph queens can transform between their original form, which looks much like a typical nymph of their kind, and any Small or Medium humanoid form, typically choosing a more humanoid-looking version of their natural form.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Focus Beauty": {
@@ -3095,7 +3099,7 @@
                     "description": "<p>An eshmok's wrathful infestations defines them, and forcing peace upon them wrenches at their soul. If they fail a save against calm or a similar effect forcing them to be peaceful, an eshmok takes @Damage[4d6[mental]] damage.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The eshmok turns into their fungus form or back into their normal humanoid wasp form. In fungus form, they lose their fly Speed and can't make stinger Strikes. In fungus form, they gain a tendril melee Strike (+21 for 2d8+9 slashing plus eshmok infection); the tendril strike has the agile, magical, reach 10 feet, and unholy traits.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 }
             },
@@ -3257,7 +3261,7 @@
                     "description": "<p>An earthen destrier can @UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]{Burrow} through earthen matter, including rock. When it does so, it moves at its full burrow Speed, leaving no tunnels or signs of its passing.</p>"
                 },
                 "Trample": {
-                    "name": "Trample",
+                    "name": "践踏 Trample",
                     "description": "<p>Medium or smaller, hoof, @Check[reflex|dc:20|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 },
                 "Lancing Charge": {

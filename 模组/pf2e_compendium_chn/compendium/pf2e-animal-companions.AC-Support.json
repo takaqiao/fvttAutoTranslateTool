@@ -1,13 +1,13 @@
 {
-    "label": "动物伙伴支援增益 Support Benefits",
+    "label": "支援增益 Support Benefits",
     "entries": {
         "Ape Support Benefit": {
             "name": "猿-支援增益 Ape Support Benefit",
             "description": "<p>你的猿伙伴用充满威胁性的咆哮威吓敌人。直至你的下个回合开始为止，若你命中1个生物并造成伤害，且该生物在猿伙伴的触及范围内时，该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.DXhqZ1oa1LxPH0fG]</p>"
         },
         "Arboreal Sapling Support Benefit": {
-            "name": "树人幼苗-支援增益 Arboreal Sapling Support Benefit",
-            "description": "<p>你的树人幼苗在敌人周遭种植根须，阻碍对方的移动。直至你的下个回合开始为止，若你命中一个生物并造成伤害，且该生物在树人幼苗的触及范围内时，该生物在受到伤害之后移动进入的第一个方格是困难地形。</p>"
+            "name": "树精幼苗-支援增益 Arboreal Sapling Support Benefit",
+            "description": "<p>你的树精幼苗在敌人周遭种植根须，阻碍对方的移动。直至你的下个回合开始为止，若你命中一个生物并造成伤害，且该生物在树精幼苗的触及范围内时，该生物在受到伤害之后移动进入的第一个方格是困难地形。</p>"
         },
         "Badger Support Benefit": {
             "name": "獾-支援增益 Badger Support Benefit",
@@ -71,7 +71,7 @@
         },
         "Horse Support Benefit": {
             "name": "马-支援增益 Horse Support Benefit",
-            "description": "<p>马儿为你的冲锋增添威势。直到你下一回合开始，如果你在打击前以某个动作移动至少10尺，那么在这次打击的伤害上增加等同于伤害骰子数量两倍的环境加值。如果你的武器已经具有骑战武器特征，则骑战特征为每个骰子提供的伤害加值再提升2点。</p>"
+            "description": "<p>马儿为你的冲锋增添威势。直到你下一回合开始，如果你在打击前以某个动作移动至少10尺，那么在这次打击的伤害上增加等同于伤害骰子数量两倍的环境加值。如果你的武器已经具有骑战武器特征，则骑战特征为每个骰子提供的伤害加值再提升2点。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.xe5pfyTYOWMYG1T8]</p>"
         },
         "Hyena Support Benefit": {
             "name": "鬣狗-支援增益 Hyena Support Benefit",
@@ -107,7 +107,7 @@
         },
         "Shadow Hound Support Benefit": {
             "name": "暗影猎犬-支援增益 Shadow Hound Support Benefit",
-            "description": "<p>在你打开缺口时，你的暗影猎犬将你的敌人用幽影覆盖。直到你的下回合开始，当你使用了1次打击伤害了1个生物，且该生物位于暗影猎犬的触及内，你和暗影猎犬相对该生物来说都处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，直到你的下一回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Go7Tbyf3vpAW6rFs]</p>"
+            "description": "<p>在你打开缺口时，你的暗影猎犬将你的敌人用幽影覆盖。直到你的下回合开始，当你使用了一次打击伤害了1个生物，且该生物位于暗影猎犬的触及内，你和暗影猎犬相对该生物来说都处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，直到你的下一回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.Go7Tbyf3vpAW6rFs]</p>"
         },
         "Shark Support Benefit": {
             "name": "鲨鱼-支援增益 Shark Support Benefit",
@@ -159,7 +159,7 @@
         },
         "Vulture Support Benefit": {
             "name": "兀鹫-支援增益 Vulture Support Benefit",
-            "description": "<p>兀鹫对10尺内的敌人呕吐。直到你的下个回合开始前，如果你击中目标并对其造成伤害，目标必须通过@Check[fortitude|against:vulture-support]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。强韧豁免的DC为12+你的等级+兀鹫的体质调整值（如果兀鹫为特化动物伙伴，则DC为14+你的等级+兀鹫的体质调整值）。</p>"
+            "description": "<p>兀鹫对10尺内的敌人呕吐。直到你的下个回合开始前，如果你击中目标并对其造成伤害，目标必须通过@Check[fortitude|against:vulture-support]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。强韧豁免的DC为12+你的等级+兀鹫的体质调整值（如果兀鹫为特化动物伙伴，则DC为14+你的等级+兀鹫的体质调整值）。</p>"
         },
         "Water Wraith Support Benefit": {
             "name": "水缚灵-支援增益 Water Wraith Support Benefit",
@@ -223,7 +223,7 @@
         },
         "Giant Eel Support Benefit": {
             "name": "巨鳗鱼-支援增益 Giant Eel Support Benefit",
-            "description": "<p> 你的巨鳗鱼突然混乱的游动。直到你下个回合开始前，在确定你和你的伙伴是否处于夹击位置时，它可以视为在其空间或你选择的10尺内的空置空间中；你可以为每次攻击选择不同的空间。</p>"
+            "description": "<p>你的巨鳗鱼突然混乱的游动。直到你下个回合开始前，在确定你和你的伙伴是否处于夹击位置时，它可以视为在其空间或你选择的10尺内的空置空间中；你可以为每次攻击选择不同的空间。</p>"
         },
         "Giant Frog Support Benefit": {
             "name": "巨青蛙-支援增益 Giant Frog Support Benefit",
@@ -326,16 +326,56 @@
             "description": "<p>直到你下个回合开始，尝试近战攻击牦角马或其骑手的下一个生物，会被牦角马的恶臭所淹没，必须尝试一次@Check[fortitude]豁免。此豁免DC等于你的职业DC或法术DC中较高者。若豁免失败，攻击者在其攻击骰上受到-2环境减值。此能力具有嗅觉特征。</p>"
         },
         "Bacallia Support Benefit": {
-            "name": "巴卡利亚兽-支援增益 Bacallia Support Benefit"
+            "name": "巴卡利亚兽-支援增益 Bacallia Support Benefit",
+            "description": "<p>你的巴卡利亚兽那闪耀的皮毛将光线反射进敌人的眼中。直至你下一回合开始前，所有位于你巴卡利亚兽触及范围内且被你用打击造成伤害的生物都将陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.IcevV2CAx0WlQaLF]</p>"
         },
         "Cragstone Bear Support Benefit": {
-            "name": "峭壁岩熊-支援增益 Cragstone Bear Support Benefit"
+            "name": "峭壁岩熊-支援增益 Cragstone Bear Support Benefit",
+            "description": "<p>你的峭壁岩熊急切地想要保护你。直至你的下个回合开始为止，只要你的峭壁岩熊与你相邻，你的AC就会获得+1环境加值。若你的峭壁岩熊是灵敏或狂怒动物伙伴，该加值会提升至+2。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.33LFnwNIIHChfZz8]</p>"
         },
         "Gray Bladeling Support Benefit": {
-            "name": "灰刃灵-支援增益 Gray Bladeling Support Benefit"
+            "name": "灰刃灵-支援增益 Gray Bladeling Support Benefit",
+            "description": "<p>当你在战斗中打出敌人破绽时，灰刃灵会追加一次凶狠的斩击。直到你下个回合开始前，当你命中了灰刃灵威胁范围内的敌人时，该敌人会受到 @Damage[1d4[persistent,bleed]] 伤害。若敌人已经处于持续流血状态，则会陷入 @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。若灰刃灵已被特化，持续流血伤害提升至1d8。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.jHISsCN6eVEYNtrw]</p>"
         },
         "Severed Head Support Benefit": {
-            "name": "断头-支援增益 Severed Head Support Benefit"
+            "name": "断头-支援增益 Severed Head Support Benefit",
+            "description": "<p>当你在战斗中打出敌人破绽时，断头会顺势发动颚咬，对其反应进行干扰并拖慢其移动速度。直到你下个回合开始前，当你命中了断头威胁范围内的敌人，其速度会受到-5状态减值。且若对方试图对你的攻击使用反应，则必须通过一次 @Check[flat|dc:5] 。若检定失败，则该反应将浪费。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.IReZWo5PdAe4F9IH]</p>"
+        },
+        "Chetamog Support Benefit": {
+            "name": "切塔莫格松鼠-支援增益 Chetamog Support Benefit",
+            "description": "<p>切塔莫格松鼠无视由非魔法植被形成的困难地形与高等困难地形。</p>"
+        },
+        "Riding Dragonet Support Benefit": {
+            "name": "骑乘微龙-支援增益 Riding Dragonet Support Benefit",
+            "description": "<p>微龙的双翼快速扇动，搅乱你们周围的气流。直至你的下个回合开始为止，每当你在骑乘微龙之时作出的打击命中生物，且该生物还身处在微龙的触及范围内的话，该生物会由于微龙双翼的冲击而承受1d4点钝击伤害。若你的微龙是灵敏或狂怒伙伴的话，钝击伤害会增加至2d4点.</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.W0umjrZCgfSo0qh6]</p>"
+        },
+        "Giant Rock Tuatara Support Benefit": {
+            "name": "巨岩蜥-支援增益 Giant Rock Tuatara Support Benefit",
+            "description": "<p>当你制造空当后，你的巨岩蜥能绊倒你的敌人。直到你的下个回合开始前，你的打击若对位于你的巨岩蜥触及之内的生物造成伤害，目标便会陷入 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续至你的下个回合结束为止。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.bNnxaqaQ1cR6SXnR]</p>"
+        },
+        "Keulia Support Benefit": {
+            "name": "科利亚蜥-支援增益 Keulia Support Benefit",
+            "description": "<p>当你制造出进攻机会时，你的科利亚蜥会凭借由硬物构成的坚硬外壳猛冲向敌人。直至你下一回合开始前，每次你用打击命中一个在科利亚蜥触及范围内的生物并造成物理伤害时，该生物还会受到来自科利亚蜥的1d8点钝击伤害。若你的科利亚蜥为灵敏动物伙伴或者狂怒动物伙伴，则钝击伤害提升至2d8点。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.rscC2NYGHUs3PQUV]</p>"
+        },
+        "Isgeri Boarhound Support Benefit": {
+            "name": "依斯嘉猎猪犬-支援增益 Isgeri Boarhound Support Benefit",
+            "description": "<p>你的猎猪犬是一个忠诚的狩猎伙伴。你下次用于打击一个位于你猎猪犬触及内敌人的攻击掷骰获得+1环境加值。此加值持续到你首次使用或直到你的下个回合开始，以先满足者为准。如果你对一个拥有与你猎猪犬所指定敌人相符特征的生物造成伤害，该生物受到来自猎猪犬额外1d6点精准伤害。如果你的猎猪犬是灵敏或狂怒伙伴，该伤害提升至2d6。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.otgQvXBTGIEGbJJP]</p>"
+        },
+        "War Pig Support Benefit": {
+            "name": "战猪-支援增益 Support Benefit",
+            "description": "<p>你的战猪会阻拦你的敌人，让它们因冲撞而变得迟钝。直至你的下个回合开始为止，由你作出的打击造成伤害的生物若处于你的战猪的触及范围内，会让该目标陷入 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续至你的下个回合结束为止。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.EutUqr7s9d9bRy9b]</p>"
+        },
+        "Skeletal Bird of Prey Support Benefit": {
+            "name": "骷髅猛禽-支援增益 Skeletal Bird of Prey Support Benefit",
+            "description": "<p>你的鸟飞来飞去，让敌人失去平衡。直到你的下个回合开始，当你的打击对鸟触及范围内的敌人造成伤害时，该生物会陷入 @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你的下个回合结束。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.tyTTl3B8OWtWYhcX]</p>"
+        },
+        "Ravenous Drake Support Benefit": {
+            "name": "贪食龙兽-支援增益 Ravenous Drake Support Benefit",
+            "description": "<p>你的贪食龙兽不断尝试着将敌人或其随身物品拽到它那伺机待发的嘴巴里。若你尝试以任何运动检定 [[/act disarm]]、[[/act reposition]]、[[/act shove]]、或 [[/act trip]] 的敌人与你的贪食龙兽相邻的话，那么你会在该检定上获得+1环境加值。</p><p>@UUID[Compendium.pf2e-animal-companions.AC-effects.Item.vZarTalIYKxQ0Pgr]</p>"
+        },
+        "Combat Squox Support Benefit": {
+            "name": "战斗松鼠狐-支援增益 Combat Squox Support Benefit",
+            "description": "<p>你的松鼠狐与你合作，在战斗中制造破绽。直到你的下回合开始，如果你的打击对松鼠狐触及范围内的生物造成了伤害，松鼠狐可以使用特技而非运动对目标尝试 [[/act disarm]]。</p>"
         }
     },
     "mapping": {

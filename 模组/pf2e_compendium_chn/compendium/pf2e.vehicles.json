@@ -101,7 +101,7 @@
                 },
                 "Open Portholes": {
                     "name": "打开舷窗 Open Portholes",
-                    "description": "<p> 一名组员拉动操纵杆打开两个舷窗，让组员能看到载具外面的情况，但外面的生物同样也能看到看到里面。组员能再次拉动操纵杆来关闭舷窗。</p>"
+                    "description": "<p>一名组员拉动操纵杆打开两个舷窗，让组员能看到载具外面的情况，但外面的生物同样也能看到看到里面。组员能再次拉动操纵杆来关闭舷窗。</p>"
                 },
                 "Submersible": {
                     "name": "潜水器 Submersible",
@@ -185,14 +185,18 @@
             }
         },
         "Bone Ship": {
-            "name": "Bone Ship",
+            "name": "骸骨战舰 Bone Ship",
             "description": "<p>Rarely does anything living remain after a bone ship's passing-only death, destruction, and waves red as blood that clash and foam in its wake. When a bone ship forms, necromantic magic dredges great bones from the seabed and slowly bends them into place with malicious intent. Whales' ribs typically form the timbers of the hull, and their great spinal columns twist into towering masts. Muscles and tendons lash the ship together, tightening and loosening to precisely turn the ship as it sails.</p>\n<p>When a bone ship encounters another vessel or finds some other opportunity to sow death, smaller corpses strewn throughout the ship animate to form a crew and boarding party. Each crew member resembles a humanoid skeleton, but they might be made of bones from multiple creatures. For battle, the ship also creates magical cannons formed of bone that propel bone shards and debris with blasts of magic. The small black gemstones stippled across the ship's structure hold the souls of a drowned crew, for a bone ship is the cursed legacy of dead sailors.</p>\n<p>When mass death happens at sea-often from an entire ship sinking far from shore-the anguish of the dying victims can spawn a bone ship. This event might occur when a sailor makes a final plea to a dark god or when a deity takes the opportunity to bind many dead sailors' souls together as a destructive show of divine power. When not created through divine intervention, a bone ship can grow slowly and organically from one of the ships piloted by the undead sailors known as @UUID[Compendium.pf2e.pathfinder-bestiary-2.Actor.48agy7vl9fQW1LLA]{Draugr}. As draugr ships plague the seas and sink other vessels, they can collect more souls and bones, eventually becoming bone ships. These vessels look different from many other bone ships with patchwork or asymmetrical appearances.</p>\n<p>A bone ship is almost gluttonous, possessing an unceasing appetite for death, destruction, and new souls to add to its number. These desires stem from an underlying cause, either placed within the ship by its creator or accreted from the scattered final wishes of its component dead souls. For example, a deity might send a bone ship on a special mission to carry a message or dispose of a particularly persistent adversary or annoyance. Though bone ships usually travel upon the waves, they have no need to breathe and can carry out underwater missions at the behest of their creator.</p>\n<p>Bone ships hold a legendary reputation among sailors. These undead can appear out of nowhere to wreak destruction, and if a crew's bodies are absent from a shipwreck, the calamity might be blamed on a bone ship. The sea can bring death suddenly in many ways, but eternal enslavement of the soul presents a more terrifying fate than death alone.</p>",
             "crew": "1驾驶员，组员*12",
-            "pilotingCheck": "航海学识（DC 40），Religion （DC 38）; the ship's propulsion is wind if 航海学识is used，or magical if Religion is used",
+            "pilotingCheck": "航海学识（DC40），宗教（DC38）；如果使用航海学识，船的推动力是风，如果使用宗教，则是魔法",
             "speed": "游泳40尺",
             "data": {
                 "placeHolder": "placeHolder"
-            }
+            },
+            "prototypeToken": {
+                "name": "骸骨战舰"
+            },
+            "hazarddescription": "<p>几乎没有活物能在骸骨战舰经过后幸存——在它的尾流中只有死亡、毁灭和殷红如血的波涛碰撞、起泡。在一艘骸骨战舰成型时，死灵魔法自海底采捞出巨大的骨骸，然后满怀恶意地将它慢慢弯曲成型。巨鲸的肋骨通常充当船体的龙骨，而它们那巨大的脊柱则扭曲成高耸的桅杆。某些罕见的情况下，巨齿鲨、海蛇、甚至水栖龙类的骨骼也会用于骸骨战舰的主体构材。肌肉和肌腱将这些怪诞的船体结构捆到一起，在航行时收缩舒张以精确修正船的航向。</p>\n<p>当一艘骸骨战舰发现另一艘船舶或找到其他机会来散布死亡时，散落在整艘船上的小号尸骸会复活并组成船员和登船队。每位船员看上去都像一具类人骷髅，但它们可能是由多具尸骨拼合而成。为了作战，战舰还会创造出骨制的魔法大炮，通过魔法爆炸来发射骨片与残骸。环缀于船体上的黑色小宝石里困着溺亡船员的灵魂，骸骨战舰便是这已故船员留下的受诅遗物。</p>\n<p>当在海上发生大规模死亡的时候——通常是整艘船在远离海岸的地方沉没——濒死受害者的痛苦会催生出一艘骸骨战舰。这种事会在一位水手向黑暗之神提出最后的恳求，或一个神性存在找到机会将许多死去水手的灵魂束缚到一起，从而展现祂神力的破坏性时发生。若骸骨战舰并并非诞生于神力干预，它们则可能从被称为@UUID[Compendium.pf2e.pathfinder-monster-core-2.Actor.lCDygpomjUnutb5b]的不死水手驾驶的船中缓慢而有机地成长。伴随着朽战尸的舰船在大海上肆虐并击沉其他船只，它们可以搜集更多的灵魂和骸骨，最终转变成一艘骸骨战舰。这类船只的外观大多与其他骸骨战舰不同，呈现出拼凑或不对称的形态。</p>\n<p>一艘骸骨战舰近乎称得上贪食无厌，在死亡、毁灭、和增加它的灵魂船员上有着永无止境的胃口。这些欲望源于某深层原因，这要么是由创造者植入船中，要么是由组成它的亡魂们散落的遗愿累积而成。例如，一位神性存在可能会派一艘骸骨战舰执行特殊任务，在危险的水域传递信息。，或者一名死灵师可能会打造战舰来除掉一个顽固的麻烦。尽管骸骨战舰通常在海浪上航行，但它们不需要呼吸，可以按照其创造者的要求执行水下任务。</p>\n<p>骸骨战舰在水手间享有传奇级的声誉。这类聚合不死生物可以凭空出现，肆意破坏，随后消失无踪。每当发现一艘沉船却不见船员们的踪迹时，这场灾难往往就被归咎于骸骨战舰。大海能以多种方式在瞬息间带来死亡，但灵魂被永世奴役的命运远比死亡更可怕。</p>"
         },
         "Carriage": {
             "name": "驿马车 Carriage",
@@ -267,7 +271,7 @@
             "items": {
                 "Adamantine Drill": {
                     "name": "精金钻头 Adamantine Drill",
-                    "description": "<p>大多数情况下，掘进速度能让一个生物或载具在松软的泥土中前进，但该载具装备的精金钻头能以每分钟5尺的速度挖穿基岩和岩石。</p>"
+                    "description": "<p>大多数情况下，掘地速度能让一个生物或载具在松软的泥土中前进，但该载具装备的精金钻头能以每分钟5尺的速度挖穿基岩和岩石。</p>"
                 },
                 "Pivoting Seats": {
                     "name": "旋轴座椅 Pivoting Seats",
@@ -442,7 +446,7 @@
             "name": "烟火高跷 Firework Pogo",
             "crew": "1驾驶员",
             "pilotingCheck": "手艺（DC 21）或驾驶学识（DC 19）",
-            "speed": "跳跃急冲 （炼金）",
+            "speed": "跳跃急冲（炼金）",
             "items": {
                 "Jump Jet": {
                     "name": "跳跃急冲 Jump Jet",
@@ -585,7 +589,7 @@
             "items": {
                 "Shard Trail": {
                     "name": "碎渣尾迹 Shard Trail",
-                    "description": "<p>潜沙器只能在沙子里@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]{掘地 Burrow}，利用来自炼金核心的热量和火焰慢慢挖出一条通道来。当它在沙子中挖洞时，它排出的炼金气体会留在地下，会将沙子转变为类似玻璃样的副产物。如果有生物在掘进时，穿过了载具过去24小时内的挖掘路线，将会因为玻璃渣而受到@Damage[1d12[piercing]]伤害（@Check[fortitude|dc:17|basic|name:Avoid shards]豁免）。如果生物沿着潜沙器掘进路径的同一空间掘进，就必须在每轮第一次掘进时尝试此豁免检定。</p>"
+                    "description": "<p>潜沙器只能在沙子里@UUID[Compendium.pf2e.actionspf2e.Item.H6v1VgowHaKHnVlG]{掘地 Burrow}，利用来自炼金核心的热量和火焰慢慢挖出一条通道来。当它在沙子中挖洞时，它排出的炼金气体会留在地下，会将沙子转变为类似玻璃样的副产物。如果有生物在掘地时，穿过了载具过去24小时内的挖掘路线，将会因为玻璃渣而受到@Damage[1d12[piercing]]伤害（@Check[fortitude|dc:17|basic|name:Avoid shards]豁免）。如果生物沿着潜沙器掘地路径的同一空间掘地，就必须在每轮第一次掘地时尝试此豁免检定。</p>"
                 },
                 "Sluggish": {
                     "name": "笨重 Sluggish",
@@ -1149,7 +1153,12 @@
             "prototypeToken": {
                 "name": "战斗飞艇"
             },
-            "name": "战斗飞艇 Battle Dirigible"
+            "name": "战斗飞艇 Battle Dirigible",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Raft": {
             "data": {
@@ -1167,7 +1176,12 @@
             "prototypeToken": {
                 "name": "炊事车"
             },
-            "name": "炊事车 Cook's Caravan"
+            "name": "炊事车 Cook's Caravan",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Air Cycle": {
             "data": {
@@ -1212,7 +1226,12 @@
             "prototypeToken": {
                 "name": "飞行要塞"
             },
-            "name": "飞行要塞 Flying Fortress"
+            "name": "飞行要塞 Flying Fortress",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Hot Air Balloon": {
             "data": {
@@ -1235,7 +1254,12 @@
             "prototypeToken": {
                 "name": "破冰船"
             },
-            "name": "破冰船 Ice Breaker"
+            "name": "破冰船 Ice Breaker",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Bunta": {
             "data": {
@@ -1304,7 +1328,12 @@
             "prototypeToken": {
                 "name": "战斗双体船"
             },
-            "name": "战斗双体船 Combat Catamaran"
+            "name": "战斗双体船 Combat Catamaran",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Cavern Crawler": {
             "data": {
@@ -1313,7 +1342,12 @@
             "prototypeToken": {
                 "name": "洞穴爬行者"
             },
-            "name": "洞穴爬行者 Cavern Crawler"
+            "name": "洞穴爬行者 Cavern Crawler",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Flying Submersible": {
             "data": {
@@ -1322,7 +1356,12 @@
             "prototypeToken": {
                 "name": "飞行潜艇"
             },
-            "name": "飞行潜艇 Flying Submersible"
+            "name": "飞行潜艇 Flying Submersible",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Steelstone Assault Engine": {
             "data": {
@@ -1340,7 +1379,12 @@
             "prototypeToken": {
                 "name": "战斗运输艇"
             },
-            "name": "战斗运输艇 Combat Transport"
+            "name": "战斗运输艇 Combat Transport",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "Sky Chariot (Medium)": {
             "data": {
@@ -1376,7 +1420,12 @@
             "prototypeToken": {
                 "name": "铁甲舰"
             },
-            "name": "铁甲舰 Ironclad"
+            "name": "铁甲舰 Ironclad",
+            "items": {
+                "Space": {
+                    "name": "占据空间 Space"
+                }
+            }
         },
         "War Wagon": {
             "data": {
@@ -1432,6 +1481,159 @@
                 "name": "攻城塔"
             },
             "name": "攻城塔 Siege Tower"
+        },
+        "Duskwood Corvette": {
+            "prototypeToken": {
+                "name": "夕木护卫舰"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "夕木护卫舰 Duskwood Corvette",
+            "speed": "游泳40尺（划桨，风力）",
+            "hazarddescription": "<p>这种三桅战舰主要由从安多安的暗月谷运来的坚固夕木所打造。海军舰长必须先证明自身的价值，才能在如此珍贵的舰船上任职。</p>",
+            "crew": "1驾驶员，10船员，10桨手",
+            "pilotingCheck": "航海学识（DC28），交涉（DC31）或威吓（DC31）",
+            "items": {
+                "Stealthy": {
+                    "name": "隐蔽 Stealthy",
+                    "description": "<p>由于其乌黑的色泽，夕木护卫舰在特定情况下很难被发现。它在昏暗光照下处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。</p>"
+                },
+                "Weapon Mounts": {
+                    "name": "武器挂点 Weapon Mounts",
+                    "description": "<p>此种载具拥有2个武器挂点，载具的一边各一个。购买此载具时，这些武器挂点都是空的初始状态。为挂点安装或卸载武器都需要1天的时间，一次成功的@Check[crafting|dc:28]检定，以及1件适合的武器。该武器挂点可以装备超大型或更小的远程攻城武器。</p>"
+                }
+            }
+        },
+        "Augustana's Pride": {
+            "prototypeToken": {
+                "name": "奥古斯塔娜之荣"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "奥古斯塔娜之荣 Augustana's Pride",
+            "speed": "游泳35尺（风力）",
+            "hazarddescription": "<p>宏伟的<em>奥古斯塔娜之荣</em>通常停靠在与其同名的港口内，但在有急需时也会亲自上阵。这艘战舰几乎全部由夕木打造，点缀着安多安蓝金两色的纹饰，堪称海军王冠上的明珠。</p>",
+            "crew": "1驾驶员，50组员",
+            "pilotingCheck": "航海学识（DC40），交涉（DC42）或威吓（DC42）",
+            "items": {
+                "Inspiring Presence": {
+                    "name": "鼓舞存在 Inspiring Presence",
+                    "description": "<p>300尺。目睹安多安海军旗舰的英姿能提振舰队及其组员的士气。在其回合开始或进入灵光范围内时，船只上的盟友及进入@Template[type:emanation|distance:300]区域内且能看见船只的友方生物，在攻击检定，伤害掷骰和对抗恐惧的豁免检定上获得1轮+1的状态加值。</p>"
+                },
+                "Weapon Mounts": {
+                    "name": "武器挂点 Weapon Mounts",
+                    "description": "<p>此种载具拥有6个武器挂点，载具的一边各三个。购买此载具时，这些武器挂点都是空的初始状态。为挂点安装或卸载武器都需要1天的时间，一次成功的@Check[crafting|dc:40]检定，以及1件适合的武器。该武器挂点可以装备超大型或更小的远程攻城武器。</p>"
+                }
+            }
+        },
+        "Hellclad Trireme": {
+            "prototypeToken": {
+                "name": "地狱铁甲三桨舰"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "地狱铁甲三桨舰 Hellclad Trireme",
+            "speed": "游泳30尺（划桨，风力）",
+            "hazarddescription": "<p>当布满尖刺的焦黑铁板降下，覆盖住划桨口时，这艘威风凛凛的战舰便会化身为铁甲巨兽，这种变形能力也正是它所闻名的原因。多数地狱铁甲三桨舰都装有形如尖叫魔的骇人船首像。</p>",
+            "crew": "1驾驶员，10组员，10桨手",
+            "pilotingCheck": "航海学识（DC31），交涉（DC33）或威吓（DC33）",
+            "items": {
+                "Armor of Nessus": {
+                    "name": "奈瑟斯之甲 Armor of Nessus",
+                    "description": "<p>在一分钟的时间里，船员们将带刺的金属板降下，覆盖住船体的关键部位。船只的AC获得+2的环境加值和对精准伤害的免疫。其碰撞的伤害类型变为穿刺伤害。其火焰弱点减少至5，但其游泳速度也降至15且无法使用划桨为动力。船员们可以再花费一分钟将板子收回来。</p>"
+                },
+                "Weapon Mounts": {
+                    "name": "武器挂点 Weapon Mounts",
+                    "description": "<p>此种载具拥有2个武器挂点，载具的一边各一个。购买此载具时，这些武器挂点都是空的初始状态。为挂点安装或卸载武器都需要1天的时间，一次成功的@Check[crafting|dc:31]检定，以及1件适合的武器。该武器挂点可以装备超大型或更小的远程攻城武器。</p>"
+                }
+            }
+        },
+        "The Dark Prince": {
+            "prototypeToken": {
+                "name": "黑暗亲王号"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "黑暗亲王号 The Dark Prince",
+            "speed": "游泳20尺（风力）",
+            "hazarddescription": "<p><em>黑暗亲王号</em>是一艘巨大的红黑相间的战舰，其船首装有令人望而生畏的阿斯摩蒂斯像，船舷两侧则雕刻着可怖的面孔。它巡逻于奥罗登拱桥附近，确保这片海域不受海盗与敌人的侵扰。</p>",
+            "crew": "1驾驶员，50组员",
+            "pilotingCheck": "航海学识（DC40），交涉（DC42）或威吓（DC42）",
+            "items": {
+                "Dreadful Aura": {
+                    "name": "绝望灵光 Dreadful Aura",
+                    "description": "<p>切利亚斯海军的旗舰散发着一种恶意的气场。在其回合开始或进入该光环范围时，位于舰船上的敌人以及@Template[type:emanation|distance:300]范围内能看见该舰船的敌人，都必须成功通过一次@Check[will|dc:39]豁免，否则将获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（若大失败则为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。无论豁免结果如何，该生物都会对这道光环临时免疫1分钟。不过，位于舰船上的敌人无法将其惊惧状态降低至1以下，直至其离开该舰。</p>"
+                },
+                "Weapon Mounts": {
+                    "name": "武器挂点 Weapon Mounts",
+                    "description": "<p>此种载具拥有6个武器挂点，载具的一边各三个。购买此载具时，这些武器挂点都是空的初始状态。为挂点安装或卸载武器都需要1天的时间，一次成功的@Check[crafting|dc:40]检定，以及1件适合的武器。该武器挂点可以装备超大型或更小的远程攻城武器。</p>"
+                }
+            }
+        },
+        "Smuggler's Speronara": {
+            "prototypeToken": {
+                "name": "走私者的斯佩罗纳拉船"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "走私者的斯佩罗纳拉船 Smuggler's Speronara",
+            "speed": "游泳30尺（划桨，风力）",
+            "hazarddescription": "<p>这种商船没有甲板，只有一根桅杆。它的船体相对较浅，用于储存货物，但也有多处隐蔽隔间，用来走私违禁品。</p>",
+            "crew": "1驾驶员，2组员，4桨手",
+            "pilotingCheck": "航海学识（DC23），交涉（DC25）或威吓（DC25）",
+            "items": {
+                "Maneuverable": {
+                    "name": "机动性 Maneuverable",
+                    "description": "<p>当配有数量充足且熟练的桨手时，划桨的斯佩罗纳拉船能够快速转向，原地掉头，甚至可以向后划行。在不足一个船身长的距离内，其每完成90度转向，就需要额外消耗5尺的移动速度。它向后划行的速度不能超过其速度的一半，且在向后划行时无法转向。</p>"
+                },
+                "Smuggling Compartments": {
+                    "name": "走私隔间 Smuggling Compartments",
+                    "description": "<p>这艘斯佩罗纳拉船的秘密隔间最多可容纳20负载的物品。要发现这些隔间，需要成功通过一次@Check[perception|dc:23]检定。</p>"
+                }
+            }
+        },
+        "Undersurf Boat": {
+            "prototypeToken": {
+                "name": "潜水船"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "潜水船 Undersurf Boat",
+            "speed": "游泳30尺（划桨）",
+            "hazarddescription": "<p>这种潜水小艇的设计类似于配有可关闭舱门的大型划桨皮艇，由阿扎克缇造船匠设计，在水上水下均可使用。</p>",
+            "crew": "1驾驶员，2桨手",
+            "pilotingCheck": "航海学识（DC20），交涉（DC22），威吓（DC22）或自然（DC22）",
+            "items": {
+                "Submersible": {
+                    "name": "潜航 Submersible",
+                    "description": "<p>此载具可于水面之下航行，通常下潜深度不超过60尺。它虽然是封闭结构，但并没有水密性，因此船员与乘客必须屏住呼吸或具备水下呼吸能力。</p>"
+                }
+            }
+        },
+        "Yellow-Sailed Schooner": {
+            "prototypeToken": {
+                "name": "黄帆纵帆船"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "黄帆纵帆船 Yellow-Sailed Schooner",
+            "speed": "游泳30尺（风力）",
+            "hazarddescription": "<p>这种纵帆船来自欧克诺，其直到驶入接舷距离，展开藏红花色的船帆前，往往会隐藏自己所效忠的阵营。</p>",
+            "crew": "1驾驶员，10组员",
+            "pilotingCheck": "航海学识（DC26），交涉（DC28）或威吓（DC28）",
+            "items": {
+                "Unfurl Yellow Sails": {
+                    "name": "展开黄帆 Unfurl Yellow Sails",
+                    "description": "<p>随着拉动绳索，驾驶员或某位船员展开那令欧克诺海盗恶名远扬的黄色船帆。@Template[type:emanation|distance:100]范围内且能看见这些船帆的每个敌人都必须成功通过一次@Check[will|dc:26]豁免，否则获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败则为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。无论豁免结果如何，该生物都会对此能力临时免疫24小时。</p>"
+                }
+            }
         }
     }
 }

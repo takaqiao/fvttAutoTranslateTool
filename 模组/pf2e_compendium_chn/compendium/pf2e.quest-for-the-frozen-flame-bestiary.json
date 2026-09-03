@@ -50,7 +50,7 @@
             "disable": "<p>@Check[survival|dc:22|name:Find a Safe Location|traits:hazard,complex,environmental]（受训）找到一个树木够不到的地方，或@Check[religion|dc:24|name:Cast Out the Fiendish Energy|traits:hazard,complex,environmental]来吟唱祷文暂时放逐树丛中某一棵树体内的邪恶能量，解除其能力1分钟。被解除或被摧毁的树可以创造出5尺见方的安全区域。</p>",
             "hazarddescription": "<p>一整片森林中扭曲的树木挥舞着枝条、移动着树根，攻击和绊倒位于腐化树丛（区域<strong>A21</strong>）中的生物。</p>",
             "reset": "<p>腐化树丛内没有任何活的生物之后1分钟后，被深渊扭曲的树木就会停止移动。它们会立即重置。被解除的树在1分钟后重新活化。被摧毁的树在1个月后重新长出。</p>",
-            "routine": "<p>(4动作） 被深渊扭曲的树木使用每轮第一个动作摆动根部；位于腐化树丛内的每个生物都必须通过@Check[reflex|dc:21|traits:hazard,complex,environmental]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。树木用第二、三、四个动作对腐化树丛内最多三个不同的生物进行树枝打击。</p>",
+            "routine": "<p>（4动作）被深渊扭曲的树木使用每轮第一个动作摆动根部；位于腐化树丛内的每个生物都必须通过@Check[reflex|dc:21|traits:hazard,complex,environmental]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]。树木用第二、三、四个动作对腐化树丛内最多三个不同的生物进行树枝打击。</p>",
             "stealthdetails": "<p>（受训）来发现树木会动</p>",
             "items": {
                 "Shift Roots": {
@@ -91,12 +91,12 @@
             "name": "活化武器 Animated Blade",
             "items": {
                 "Construct Armor (Hardness 4)": {
-                    "name": "构装护甲 Construct Armor （硬度4)",
+                    "name": "构装护甲 Construct Armor（硬度4）",
                     "description": "<p>与普通的物体一样，活化武器同样拥有硬度。硬度可以减少其所受到的任何伤害，其数值等同于硬度的数值。一旦活化扫帚的生命值降低至一半以下，或是受到重击伤害后，其构装护甲将会破损，其AC降低至14。</p>"
                 },
                 "Tetanus": {
                     "name": "破伤风 Tetanus",
-                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:15]</p>\n<p><strong>潜伏期</strong> 1周</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} （1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且不能说话（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
+                    "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:15]</p>\n<p><strong>潜伏期</strong> 1周</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且不能说话（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
                 }
             },
             "data": {
@@ -136,11 +136,11 @@
             "items": {
                 "Mesmerizing Sigil": {
                     "name": "迷人徽记 Mesmerizing Sigil",
-                    "description": "<p><strong>触发</strong> 一个生物将阿迪萨作为近战打击的目标；</p>\n<hr />\n<p><strong>效果</strong> 阿迪萨在空中绘出一个炫目的符号。该生物必须尝试@Check[will|dc:20]豁免。然后该生物暂时免疫该效应1分钟。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 直到阿迪萨的下一个回合开始之前，阿迪萨对该生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>\n<p><strong>大失败</strong> 直到阿迪萨的下一个回合结束之前，阿迪萨对该生物视为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]。</p>"
+                    "description": "<p><strong>触发</strong> 一个生物将阿迪萨作为近战打击的目标；</p>\n<hr />\n<p><strong>效果</strong> 阿迪萨在空中绘出一个炫目的符号。该生物必须尝试@Check[will|dc:20]豁免。然后该生物临时免疫该效应1分钟。</p>\n<hr />\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 直到阿迪萨的下一个回合开始之前，阿迪萨对该生物视为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。</p>\n<p><strong>大失败</strong> 直到阿迪萨的下一个回合结束之前，阿迪萨对该生物视为@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]。</p>"
                 },
                 "Drain Bonded Item": {
                     "name": "汲取连结物品 Drain Bonded Item",
-                    "description": "<p><strong>频率</strong> 每天两次</p>\n<hr />\n<p><strong>效果</strong> 阿迪萨重新获得施放一个她已经施放过的法术的能力。她必须照常采取施放法术行动。她可以使用该能力1次恢复一个1环级法术，使用该能力一次恢复一个2环级法术。她通常会使用该能力恢复@UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{力场飞弹 Force Barrage}法术。</p>"
+                    "description": "<p><strong>频率</strong> 每天两次</p>\n<hr />\n<p><strong>效果</strong> 阿迪萨重新获得施放一个她已经施放过的法术的能力。她必须照常采取施放法术行动。她可以使用该能力一次恢复一个1环级法术，使用该能力一次恢复一个2环级法术。她通常会使用该能力恢复@UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{力场飞弹 Force Barrage}法术。</p>"
                 }
             },
             "data": {
@@ -623,7 +623,7 @@
             "disable": "<p>@Check[religion|dc:23|name:Dissipate One of the Threads|traits:hazard,magical,trap,complex]（专家）或@Check[performance|dc:21|name:Dissipate One of the Threads|traits:hazard,magical,trap,complex]（受训）解除四道魔法中的一道。在参加埃瓦爷爷的葬礼时表演检定失败或大失败的角色会想起这段经历。这些角色在解除该陷阱的表演检定上获得+2环境加值。</p>\n<p>四道魔法都被解除之后，陷阱即被摧毁。</p>",
             "hazarddescription": "<p>四道短暂的魔法组成的旋风驱散不死生物，将生者笼罩在无尽的睡眠中。</p>",
             "reset": "<p>当100尺范围内没有活物或不死生物后，陷阱停止活动，然后重置。</p>",
-            "routine": "<p>(4动作） 每道能量随机穿过60尺范围内的一个活物或不死生物，造成4d6伤害（@Check[will|dc:22|basic|name:Death's Slumber Ward|traits:hazard,magical,trap,complex]豁免）。对活物造成的是@Damage[4d6[void]]{虚能伤害}，对不死生物造成的是@Damage[4d6[vitality]]伤害。每道能量会尽可能穿过不同的随机生物。每解除一道魔法，陷阱的动作数量-1。</p>",
+            "routine": "<p>（4动作）每道能量随机穿过60尺范围内的一个活物或不死生物，造成4d6伤害（@Check[will|dc:22|basic|name:Death's Slumber Ward|traits:hazard,magical,trap,complex]豁免）。对活物造成的是@Damage[4d6[void]]{虚能伤害}，对不死生物造成的是@Damage[4d6[vitality]]伤害。每道能量会尽可能穿过不同的随机生物。每解除一道魔法，陷阱的动作数量-1。</p>",
             "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Breath of Pharasma": {
@@ -709,7 +709,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任何被永燃猛犸的噬咬打击命中的非活物生物都必须通过@Check[fortitude|dc:23]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。它可以在自身每个回合结束时再次尝试豁免，每次DC下降1点。</p>"
+                    "description": "<p>任何被永燃猛犸的噬咬打击命中的非活物生物都必须通过@Check[fortitude|dc:23|options:inflicts:paralyzed]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。它可以在自身每个回合结束时再次尝试豁免，每次DC下降1点。</p>"
                 }
             },
             "prototypeToken": {
@@ -887,7 +887,7 @@
             }
         },
         "Giant Tapir (Snared)": {
-            "name": "巨貘 Giant Tapir （落入陷阱）",
+            "name": "巨貘 Giant Tapir（落入陷阱）",
             "speed": "宽阔脚趾",
             "publicNotes": "<p>笨拙但可以用于抓握的鼻子，加上蹲坐的姿态，让貘看起来像是大象和野猪的杂交品种，尽管它们实际上与马和犀牛的关系更近。貘生活在松散的畜群中，以河流和湖泊附近的草地为食。貘喜欢淡水，不仅是因为它们需要大量进食沿岸生长的茂盛植物，也是为了在水中寻求庇护。当掠食者靠近时，貘会退到水中躲藏起来，将鼻子伸出几乎和 水面平齐的位置来呼吸。同样，伴随着小溪和河流的微风和气味掩盖了貘沿着这些水道旅行时散发出的体味。尽管它们的动作笨拙，但貘的脚步非常稳健，由于脚趾宽阔，它们很容易穿越泥泞和类似的地形。</p>\n<p>类人生物经常猎杀巨貘，以获取它们的肉和耐用的兽皮。然而，狩猎它们往往空手而归；貘至少可以跑得和它们的猎人一样快，而且大多数巨貘会在走投无路时拼死抵抗。这些温驯的巨兽会尽其所能地避免冲突。如果它们感觉到危险临近，巨貘会发出响亮的口哨声，以警告其他同类有掠食者。与一群貘成为朋友或驯化它们的社区可以使用这种口哨声作为防止入侵敌人的警报系统。</p>\n<p>巨貘通常很平静，但一旦被激怒就会变得可怕。它们长着獠牙的门牙适合用来给攻击者开瓢，貘只要咬到敌人的胳膊或腿，就能用钝臼齿把肉磨成糊状。貘具有良好的听力和极好的嗅觉，但像许多猎物一样，它们的视力很差。在与多个敌人战斗的混乱中，巨型貘可能会变得不知所措和困惑，同时猛殴敌人和盟友，或者完全逃离现场。</p>",
             "items": {
@@ -996,7 +996,7 @@
                     "description": "<p>霜巨人进行一次单独的巨斧打击，并和触及范围内最多两名敌人的AC相比较。此攻击在计入霜巨人的多重攻击减值时算作两次攻击。</p>"
                 },
                 "equipment-Sack with 10 Firebombs (see Throw Bomb)": {
-                    "name": "装有10枚燃烧弹的袋子（见投掷炸弹） Sack with 10 Firebombs (see Throw Bomb)"
+                    "name": "装有10枚燃烧弹的袋子（见投掷炸弹）Sack with 10 Firebombs (see Throw Bomb)"
                 }
             },
             "prototypeToken": {
@@ -1358,11 +1358,11 @@
             "items": {
                 "Unflappable Self-Importance": {
                     "name": "镇定自负 Unflappable Self-Importance",
-                    "description": "<p>当洛洛比河精成功尝试意志检定，以对抗情绪效果或将会导致它被控制的效果时，它得到大成功的结果。如果它在对抗上述效果时大失败，它得到失败的结果。</p>\n<p>但是，洛洛比河精对马屁没有任何抵抗力。当有人尝试用欺骗或交涉检定对其撒谎、@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]{建立印象 Make an Impression}、提出请求时，它们的意志DC和察觉DC有-4环境减值。</p>"
+                    "description": "<p>当洛洛比河精成功尝试意志检定，以对抗情绪效果或将会导致它被控制的效果时，它得到大成功的结果。如果它在对抗上述效果时大失败，它得到失败的结果。</p>\n<p>但是，洛洛比河精对马屁没有任何抵抗力。当有人尝试用欺骗或交涉检定对其@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]、@UUID[Compendium.pf2e.actionspf2e.Item.OX4fy22hQgUHDr0q]、@UUID[Compendium.pf2e.actionspf2e.Item.DCb62iCBrJXy0Ik6]时，它们的意志DC和察觉DC有-4环境减值。</p>"
                 },
                 "Arrogant Preen": {
                     "name": "傲慢自大 Arrogant Preen",
-                    "description": "<p>洛洛比河精整理自己的羽冠，让自己看起来非常高贵。@Template[emanation|distance:30]{30尺}内每个非精类的生物必须尝试@Check[will|dc:17]豁免，然后对傲慢自大临时免疫1小时。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标被分神，直到它的下个回合开始，它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标被洛洛比河精@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂 Fascinated}，并且无法使用反应动作1分钟。</p>\n<p><strong>大失败</strong> 类似失败。此外，当生物被迷魂时，洛洛比河精的任何敌对动作不会解除迷魂状态，但这允许目标在它的回合开始时尝试一次新的意志豁免来结束此效果。</p>"
+                    "description": "<p>洛洛比河精整理自己的羽冠，让自己看起来非常高贵。@Template[emanation|distance:30]内每个非精类的生物必须尝试@Check[will|dc:17|options:area-effect,inflicts:fascinated]豁免，然后对傲慢自大临时免疫1小时。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标被分神，直到它的下个回合开始，它无法使用反应动作。</p>\n<p><strong>失败</strong> 目标被洛洛比河精@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]，并且无法使用反应动作1分钟。</p>\n<p><strong>大失败</strong> 类似失败。此外，当生物被迷魂时，洛洛比河精的任何敌对动作不会解除迷魂状态，但这允许目标在它的回合开始时尝试一次新的意志豁免来结束此效果。</p>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -1523,7 +1523,7 @@
                 },
                 "Dual Soul": {
                     "name": "双魂 Dual Soul",
-                    "description": "<p>一个名为希勒里亚的恶魔与梅图阿克的灵魂相联结。二者使用同一个身体，在被作为目标和结算区域效果时视为一个生物。梅图阿克和希勒里亚分别有120HP，二者分别计算伤害。希勒里亚的HP只能通过力场伤害、精魂伤害、命能伤害、寒铁武器、<em>幽冥</em>符文武器和由<em>原初之火</em>产生的伤害来降低。其他伤害都会降低梅图阿克的HP。梅图阿克和希勒里亚必须HP都降低至0，才能让梅图阿克死亡、希勒里亚被摧毁。如果在梅图阿克的回合开始时，二者之一的HP被降低至0，但另一方没有降低至0，则二者分别回复15HP。</p>"
+                    "description": "<p>一个名为希勒里亚的恶魔与梅图阿克的灵魂相联结。二者使用同一个身体，在被作为目标和结算区域效果时视为一个生物。梅图阿克和希勒里亚分别有120HP，二者分别计算伤害。希勒里亚的HP只能通过力场伤害、精魂伤害、命能伤害、寒铁武器、<em>幽冥</em>符文武器和由<em>原初之火</em>产生的伤害来降低。其他伤害都会降低梅图阿克的HP。</p>\n<p>梅图阿克和希勒里亚必须HP都降低至0，才能让梅图阿克死亡、希勒里亚被摧毁。如果在梅图阿克的回合开始时，二者之一的HP被降低至0，但另一方没有降低至0，则二者分别回复@Damage[15[healing]]HP。</p>"
                 },
                 "Shadow Blend": {
                     "name": "融身于影 Shadow Blend",
@@ -1531,24 +1531,30 @@
                 },
                 "Soul Swipe": {
                     "name": "灵魂猛击 Soul Swipe",
-                    "description": "<p>梅图阿克进行一次短柄斧或爪击打击，将结果与最多4个敌人的AC比较，这些敌人需要在他的触及范围内。他投掷一次伤害，将结果应用于每个他击中的生物。灵魂猛击在计算多重攻击减值时视为两次攻击。梅图阿克的短柄斧的横扫特性适用于全部四个目标。</p>"
+                    "description": "<p>梅图阿克进行一次短柄斧或爪击打击，将结果与最多4个敌人的AC比较，这些敌人需要在他的触及范围内。他投掷一次伤害，将结果应用于每个他击中的生物。灵魂猛击在计算多重攻击减值时视为两次攻击。梅图阿克的短柄斧的横扫特征适用于全部四个目标。</p>"
                 },
                 "Terrifying Howl": {
                     "name": "骇人嚎叫 Terrifying Howl",
-                    "description": "<p>梅图阿克发出可怕的嚎叫，试图对30尺内的每一个生物进行挫败士气。这些生物此后免疫骇人嚎叫1分钟。</p>"
+                    "description": "<p>梅图阿克发出可怕的嚎叫，试图对@Template[emanation|distance:30]内的每一个生物进行[[/act demoralize options=area-effect]]。这些生物此后免疫骇人嚎叫1分钟。</p>"
                 },
                 "Attack of Opportunity": {
                     "name": "反应打击 Reactive Strike",
                     "description": "<p>[反应]</p>"
+                },
+                "+1 to All Saves vs. Magic": {
+                    "name": "+1 to All Saves vs. Magic"
                 }
             },
             "prototypeToken": {
                 "name": "梅图阿克"
-            }
+            },
+            "allSaves": "+1 to all saves vs. magic",
+            "hp": "(dual soul; 120 each for Metuak and Xeleria)",
+            "blurb": "Male demon-possessed human hero"
         },
         "Necrohusk": {
             "name": "死灵躯壳 Necrohusk",
-            "publicNotes": "<p>死灵躯壳是一种跳跃的不死怪物，是类人生物通过死灵实验被故意扭曲成一个新的生物时产生的。与畸肉体和成功的亡灵移植体不同，成为死灵躯壳的都是没能活过实验过程的。在被复活后，它们就成为了狡诈的、动物一般的生物，只会无条件服从造主的命令。</p>\n<p>创造死灵躯壳非常困难，容易出错的地方很多。大多数尝试的结果都是无用的、腐烂的泥浆或畸形的不死生物，它们并不比普通的僵尸更聪明或危险。时间成本、实验对象和昂贵的法术材料使得一些死灵法师认为，这些成果不值得他们冒这个风险。有时，施法者可以在实验过程中利用虚能位面减少金钱成本，但同时会极大增加危险，最终往往会产生反冲，造成施法者死亡，留下一个没有主人的死灵躯壳。</p>\n<p>在苏塔基人中，只有灰沼和他的副手图凯克与阿兹拥有经常性地创造死灵躯壳的知识和技能。不过图凯克的兴趣经常把他引向别处，而不进行如此残忍的行为。死灵躯壳的材料来自灰沼教派的志愿者，或是背叛灰沼的苏塔基人。灰沼希望以这种可怖的命运来惩罚他们。</p>",
+            "publicNotes": "<p>死灵躯壳是一种跳跃的不死怪物，是类人生物通过死灵实验被故意扭曲成一个新的生物时产生的。与畸肉体和成功的亡灵移植体不同，成为死灵躯壳的都是没能活过实验过程的。在被复活后，它们就成为了狡诈的、动物一般的生物，只会无条件服从造主的命令。</p>\n<p>创造死灵躯壳非常困难，容易出错的地方很多。大多数尝试的结果都是无用的、腐烂的泥浆或畸形的不死生物，它们并不比普通的丧尸更聪明或危险。时间成本、实验对象和昂贵的法术材料使得一些死灵法师认为，这些成果不值得他们冒这个风险。有时，施法者可以在实验过程中利用虚能位面减少金钱成本，但同时会极大增加危险，最终往往会产生反冲，造成施法者死亡，留下一个没有主人的死灵躯壳。</p>\n<p>在苏塔基人中，只有灰沼和他的副手图凯克与阿兹拥有经常性地创造死灵躯壳的知识和技能。不过图凯克的兴趣经常把他引向别处，而不进行如此残忍的行为。死灵躯壳的材料来自灰沼教派的志愿者，或是背叛灰沼的苏塔基人。灰沼希望以这种可怖的命运来惩罚他们。</p>",
             "items": {
                 "strike-Ichor Spit": {
                     "name": "脓液喷吐 Ichor Spit"
@@ -1639,7 +1645,7 @@
             }
         },
         "Pakano (Level 12)": {
-            "name": "帕卡诺（12级） Pakano (Level 12)",
+            "name": "帕卡诺（12级）Pakano (Level 12)",
             "blurb": "雄性霜虫",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2029,7 +2035,7 @@
                 },
                 "Engulf": {
                     "name": "包卷 Engulf",
-                    "description": "<p>@Check[reflex|dc:29|traits:damaging-effect]，@Damage[6d6[bludgeoning]]，[[/act escape dc=29]]，破裂 17</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "description": "<p>@Check[reflex|dc:29|options:damaging-effect,inflicts:grabbed,inflicts:slowed]，@Damage[6d6[bludgeoning]]伤害，[[/act escape dc=29]]，破裂17</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 }
             },
             "data": {
@@ -2156,7 +2162,7 @@
                 },
                 "Spotlight": {
                     "name": "聚光 Spotlight",
-                    "description": "<p>盲蛙眼睛里发出的光芒在@Template[emanation|distance:30]范围中提供明亮光照（同时在60尺范围内创造昏暗光照）。每个当盲蛙使用此动作时处于明亮光照范围内的生物，或是在光照持续时间内进入此范围的生物，必须尝试一次@Check[fortitude|dc:18]豁免。而后该生物暂时免疫1小时。这种光照会一直持续，直至盲蛙再次使用此动作来使眼睛变暗。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮。</p>\n<p><strong>失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}[[/gmr 1d4 #rounds]]{1d4轮}。</p>\n<p><strong>大失败</strong> 该生物目盲1小时。</p>"
+                    "description": "<p>盲蛙眼睛里发出的光芒在@Template[emanation|distance:30]范围中提供明亮光照（同时在60尺范围内创造昏暗光照）。每个当盲蛙使用此动作时处于明亮光照范围内的生物，或是在光照持续时间内进入此范围的生物，必须尝试一次@Check[fortitude|dc:18]豁免。而后该生物临时免疫1小时。这种光照会一直持续，直至盲蛙再次使用此动作来使眼睛变暗。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮。</p>\n<p><strong>失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}[[/gmr 1d4 #rounds]]{1d4轮}。</p>\n<p><strong>大失败</strong> 该生物目盲1小时。</p>"
                 }
             },
             "data": {

@@ -88,7 +88,9 @@
                 "FlameHair": "炎发",
                 "HurledDebris": "投掷碎片",
                 "FlamingSword": "炽焰长剑",
-                "CarapaceFist": "硬壳拳击"
+                "CarapaceFist": "硬壳拳击",
+                "Beam": "射线",
+                "Spit": "呕吐"
             },
             "Note": {
                 "GrabbingTrunk": {
@@ -614,8 +616,9 @@
                     },
                     "Chalice": {
                         "Adept": {
-                            "Note": "如果你或一个30尺内的盟友从一个敌人的重击中承受了穿刺伤害或挥砍伤害、或承受了持续流血伤害，在你下一回合结束前进行饮杯能为受伤的生物提供更强的复原力以弥补其损失的活力。小啜时，提供给该生物的临时生命提升至2+你的魅力调整值+你的等级。豪饮时，你每有一个等级，杯都会治疗该生物5点生命值。@UUID[Compendium.pf2e.feat-effects.Item.Sq558879cgEc1lGC]",
-                            "DescriptionAlteration": "小啜时，提供给该生物的临时生命提升至2+你的魅力调整值+你的等级。豪饮时，杯会治疗该生物你每个等级5点生命值。"
+                            "Note": "如果你或一个30尺内的盟友从一个敌人的重击中承受了穿刺伤害或挥砍伤害、或承受了持续流血伤害，在你下一回合结束前进行饮杯能为受伤的生物提供更强的复原力以弥补其损失的活力。<p>小啜时，提供给该生物的临时生命提升至2+你的魅力调整值+你的等级。豪饮时，你每有一个等级，杯都会治疗该生物5点生命值。</p>",
+                            "DescriptionAlteration": "如果你或一个30尺内的盟友从一个敌人的重击中承受了穿刺伤害或挥砍伤害、或承受了持续流血伤害，在你下一回合结束前进行饮杯能为受伤的生物提供更强的复原力以弥补其损失的活力。小啜时，提供给该生物的临时生命提升至@Damage[(5 * @actor.level)[healing,vitality]|shortLabel|traits:healing,vitality]（虚能治疗则为@Damage[(5 * @actor.level)[healing,void]|traits:healing,void]）。",
+                            "Prompt": "杯的行家增益生效吗？"
                         },
                         "Label": "杯"
                     },
@@ -728,7 +731,7 @@
                     },
                     "ContagiousIdea": "你可以选择将思维从第二个目标扩散到第三个目标，其方式与从第一个目标扩散到第二个目标相同。欢愉思维会给予两倍的临时生命值（10，每升一环额外增加2）。",
                     "TelekineticHand": {
-                        "Base": "你创造出复数念动之手抓住一个生物并使其移动。你可以将一个中等或更小体型的生物而非物体作为目标。你试图对目标进行@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}，沿着你选择的方向，用法术攻击骰而非运动检定来对抗它的强韧DC，该生物的速度会受到-10英尺的环境减值，直到法术结束。从你施法的那一轮开始，在你每一轮第一次维持这个法术时，你可以再次尝试推撞该生物。",
+                        "Base": "你创造出复数念动之手抓住一个生物并使其移动。你可以将一个中等或更小体型的生物而非物体作为目标。你试图对目标进行@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}，沿着你选择的方向，用法术攻击骰而非运动检定来对抗它的强韧DC，该生物的速度会受到-10尺的环境减值，直到法术结束。从你施法的那一轮开始，在你每一轮第一次维持这个法术时，你可以再次尝试推撞该生物。",
                         "Heightened": "你可以尝试对该生物进行@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武 Disarm}，而不是尝试@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞 Shove}它。如果你以这种方式将物品从生物的手掌中夺出，念动之手会立即抓住它。念动之手对该生物的任何影响会立刻结束，而该法术现在会抓住该物品，就像你用未增幅的念动之手拿起了它一样。"
                     },
                     "WhisperingSteps": "选择一个敌人作为该法术的目标。如果该敌人的豁免失败或被法术击中，你就能在该生物的脑海中低语，迫使它朝你选择的方向快步；由于这是强制移动，你不能强迫该生物进入危险地形、跳下栏杆或类似的行动。在它快步之后，该生物会在24小时内暂时对这个增幅免疫。",
@@ -776,7 +779,7 @@
                         "Base": "你用更强的力量投掷物品，以飞雹般的射弹将敌人击退。成功时，你将目标从你的方向推离5尺。大成功时，你在造成双倍伤害之外还能将目标推离10尺。",
                         "Heightened": "伤害提升2d6而非1d6。"
                     },
-                    "AstralRain": "范围变为@Template[burst|distance:5]，你可以维持法术最多1分钟。在每回合第一次维持法术时，你可以将爆发范围移动20英尺。",
+                    "AstralRain": "范围变为@Template[burst|distance:5]，你可以维持法术最多1分钟。在每回合第一次维持法术时，你可以将爆发范围移动20尺。",
                     "Toggle": "增幅心能戏法",
                     "ThermalStasis": "该法术的持续时间变为1分钟。",
                     "Ignition": {
@@ -803,7 +806,7 @@
                     "WarpSpace": "选择30尺内一个你有视线和效果线的方格。从该位置决定法术的效果线和视线，也决定生物相对该法术是否具有掩蔽。该法术可以超过根据你原本位置测量的常规射程，只要法术目标到你选择的方格的距离在其常规射程内。",
                     "AlternateAmp": "额外增幅",
                     "DistortionLens": "透镜不仅可以干涉攻击，还可以干涉生物行动。当一个中体型或更小的盟友生物移动时，它可以移入或移出透镜所在方格而不将该方格计算在总移动距离中。同时，透镜所在方格对你的敌人成为困难地形。",
-                    "MindsLightCirclet": "你将一些来自心灵之光头环的魔法光辉转移给一只生物。选择一个被法术目标的生物或在其范围内的生物。直到你下个回合开始之前，该生物在20尺半径内散发出明亮光照（并在下一个20英尺内散发昏暗光照），并且无法@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。如果该生物处于@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]状态，它在发光时被视为隐蔽状态，而不是@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]状态。"
+                    "MindsLightCirclet": "你将一些来自心灵之光头环的魔法光辉转移给一只生物。选择一个被法术目标的生物或在其范围内的生物。直到你下个回合开始之前，该生物在20尺半径内散发出明亮光照（并在下一个20尺内散发昏暗光照），并且无法@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。如果该生物处于@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]状态，它在发光时被视为隐蔽状态，而不是@UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]状态。"
                 },
                 "PsiCantripLabels": {
                     "DistortionLens": "曲折透镜",
@@ -835,7 +838,7 @@
                     "Message": "你的传讯不受障碍阻隔。该法术可以旅行120尺，绕过墙壁和障碍物传达到目标，这意味着只要你不需要效果线或视觉系来施展该法术，只要你知道目标的位置且有一条未被阻挡并不长于120尺的路径到达目标。",
                     "PhaseBolt": "你的相位矢能暂时将命中目标的掩护移位。在成功时，降低目标的AC环境加值（如果有）1点，直到你的下一回合开始。",
                     "Frostbite": "你可以从更远的地方冻结目标。你的冻伤范围增加到120尺。",
-                    "Guidance": "你的眼睛无处不在，使你能够从远程给予指引。神导术的距离增加到120英尺。",
+                    "Guidance": "你的眼睛无处不在，使你能够从远程给予指引。神导术的距离增加到120尺。",
                     "Ignition": "你可以在远处大幅增加目标的热量。使用引火术作为远程攻击时，将范围增加到60尺。使用引火术作为近战攻击时，你的攻击范围增加5尺。",
                     "TelekineticHand": "你的念动之手可以拿起1负载的物体。如果该戏法升阶到3环或以上，负载上限提升到2负载。如果该戏法升阶到7环或以上，负载上限提升到3负载。",
                     "Figment": "你的小幻象变幻莫测。虚构幻术的范围增加到60尺。当你维持法术时，你可以将明显的声音或视觉移动最多15尺。然后你可以像往常一样尝试@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{分神 Create a Diversion}。那些已经识破幻术的生物不会受到分神的影响。",
@@ -872,7 +875,7 @@
                 "Modification": {
                     "Initial": {
                         "AllowedDrops": "1级发明家职业特性",
-                        "Prompt": "选择一种初始改装"
+                        "Prompt": "选择一种初始改进。"
                     },
                     "NonlethalBluntShot": "非致命钝头弹射击",
                     "NonlethalModularHead": "非致命模块化头部",
@@ -881,7 +884,7 @@
                     "Breakthrough": {
                         "Prompt": "选择一个突破性改进。",
                         "AllowedDrops": "7级或者更低的发明家职业特性",
-                        "EnhancedResistancePrompt": "选择要增强的初始改修。"
+                        "EnhancedResistancePrompt": "选择要增强的初始改进。"
                     },
                     "Revolutionary": {
                         "Prompt": "选择一种革命性改进。",
@@ -950,7 +953,7 @@
                 "Standard": "标准",
                 "Greater": "高等",
                 "Prone": "倒地",
-                "Prompt": "选择掩蔽等级"
+                "Prompt": "选择掩蔽等级。"
             },
             "PreciseStrike": {
                 "Finisher": "终结技"
@@ -968,7 +971,16 @@
                 "Blacksmithing": "铁匠",
                 "Bookmaking": "书籍装订",
                 "Glassmaking": "吹制玻璃",
-                "Prompt": "选择专攻方向。"
+                "Prompt": "选择专攻方向。",
+                "Armorsmithing": "Armorsmithing",
+                "Automotives": "Automotives",
+                "Chemicals": "Chemicals",
+                "Computer": "Computer",
+                "Engineering": "Engineering",
+                "Gunsmithing": "Gunsmithing",
+                "LifeScience": "Life Science",
+                "Robotics": "Robotics",
+                "Textiles": "Textiles"
             },
             "Elf": {
                 "BrightnessSeeker": {
@@ -1197,7 +1209,7 @@
             },
             "AncientElf": {
                 "AllowedDrops": "兼职入门专长",
-                "Prompt": "选择一个兼职入门专长"
+                "Prompt": "选择一个兼职入门专长。"
             },
             "Beastkin": {
                 "Senses": {
@@ -1208,12 +1220,12 @@
                     "TremorsensePrecise": "将震颤感知提升为精确感官"
                 },
                 "AnimalSenses": {
-                    "Prompt": "选择一种你的本源动物具有的感官"
+                    "Prompt": "选择一种你的本源动物具有的感官。"
                 }
             },
             "Alchemist": {
                 "ResearchField": {
-                    "Prompt": "选择一个研究课题",
+                    "Prompt": "选择一个研究课题。",
                     "Bomber": {
                         "FieldBenefit": "当投掷带有溅射特征的炼金炸弹时，你可以放弃通常的溅射区域，只对你的主要目标造成溅射伤害。",
                         "GreaterFieldDiscovery": "你可以提升炸弹的溅射范围，让它对周围10尺的生物造成溅射伤害，或者如果你具有溅射扩展专长，则为15尺。",
@@ -1229,7 +1241,7 @@
                     "FieldVials": "课题制剂",
                     "Mutagenist": {
                         "FieldVials": {
-                            "Description": "你可以喝下你的万用制剂来压制当前正在生效的一种突变药剂的缺陷，持续到你的下个回合开始。如此使用的制剂会失去酸特征、炸弹特征和溅射特征，并获得灵药特征。如果由于@UUID[Compendium.pf2e.feats-srd.Item.jSkJIWPfSZZzvYzq]或类似能力同时有不止一个缺陷正在影响你，喝下万用制剂会压制你所选的一项缺陷。"
+                            "Description": "你可以喝下你的万用制剂来压制当前正在生效的一种突变药剂的缺陷，持续1分钟。如此使用的制剂会失去酸特征、炸弹特征和溅射特征，并获得灵药特征。如果由于@UUID[Compendium.pf2e.feats-srd.Item.jSkJIWPfSZZzvYzq]或类似能力同时有不止一个缺陷正在影响你，喝下万用制剂会压制你所选的一项缺陷。"
                         },
                         "FieldBenefit": {
                             "Description": "当你使用一瓶突变药剂时，你会获得等同你的智力调整值（最低为0）加上你等级一半的临时生命值。这些临时生命值持续一分钟或者直到突变药剂持续结束，取其先者。你在接下来1分钟内无法再度通过这一方式获得临时生命值。"
@@ -1247,7 +1259,7 @@
                     "AdvancedVials": "进阶制剂"
                 },
                 "AlchemicalCrossbow": {
-                    "Prompt": "选择装填到弩上的炸弹"
+                    "Prompt": "选择装填到弩上的炸弹。"
                 },
                 "Alchemy": {
                     "IdentifyAlchemy": "你可以自动辨识出掌握了配方的炼金物品。"
@@ -1292,16 +1304,16 @@
                 }
             },
             "Aid": {
-                "Prompt": "选择协助带来的加值"
+                "Prompt": "选择协助带来的加值。"
             },
             "Barbarian": {
                 "Dragon": {
-                    "Prompt": "选择一种龙",
+                    "Prompt": "选择一种龙类。",
                     "NormalRageDamage": "造成正常的狂暴伤害",
                     "ToggleLabel": "龙类狂暴"
                 },
                 "Animal": {
-                    "Prompt": "选择一种动物",
+                    "Prompt": "选择一种动物。",
                     "Frog": "蛙",
                     "Deer": "鹿",
                     "Cat": "猫",
@@ -1327,7 +1339,7 @@
                     "Crocodile": "鳄鱼"
                 },
                 "Instinct": {
-                    "Prompt": "选择一种本能",
+                    "Prompt": "选择一种本能。",
                     "Drops": "1级野蛮人职业特性"
                 },
                 "Giant": {
@@ -1397,7 +1409,7 @@
             },
             "Bard": {
                 "Muse": {
-                    "Prompt": "选择一种缪斯",
+                    "Prompt": "选择一种缪斯。",
                     "Enigma": "谜团 Enigma",
                     "Maestro": "大师 Maestro",
                     "Polymath": "博学 Polymath",
@@ -1412,7 +1424,7 @@
             },
             "Automaton": {
                 "ArcaneLocomotion": {
-                    "Prompt": "选择一种移动类型"
+                    "Prompt": "选择一种移动类型。"
                 },
                 "HunterAutomaton": {
                     "ToggleLabel": "四足奔跑"
@@ -1442,13 +1454,13 @@
                     "CriticalHit": "重击时，目标受到等于武器伤害骰数的持续火焰伤害。你的眼部射线不会添加重击专精效果。"
                 },
                 "MagicalResistance": {
-                    "Prompt": "选择一种能量类型"
+                    "Prompt": "选择一种能量伤害类型。"
                 },
                 "AutomatonArmament": {
                     "Prompt": "选择一种无武装打击。"
                 },
                 "CoreCannon": {
-                    "AttackNote": "你需要将最高的潜能符文加成手动加成到此次攻击检定上",
+                    "AttackNote": "你需要将最高的潜能符文加成手动应用至此次攻击检定上。",
                     "CriticalHit": "重击时，目标受到@Damage[10[persistent,fire]]伤害。你的核心火炮不会添加重击专精效果。</p>"
                 },
                 "Enhancement": {
@@ -1472,7 +1484,7 @@
             },
             "AncestralParagon": {
                 "AllowedDrops": "1级族裔专长",
-                "Prompt": "选择一个1级族裔专长"
+                "Prompt": "选择一个1级族裔专长。"
             },
             "AnimalSkin": {
                 "BracersOfArmor": "野兽之肤w/盔甲护腕",
@@ -1480,7 +1492,7 @@
                 "MageArmor": "野兽之肤w/法术护甲"
             },
             "DancingShield": {
-                "Prompt": "选择盾牌AC加值"
+                "Prompt": "选择盾牌AC加值。"
             },
             "DeityAndCause": {
                 "AllowedDrops": "1级神卫职业特性",
@@ -1859,6 +1871,21 @@
                 },
                 "LieutenantsSash": {
                     "ToggleLabel": "中尉绶带 - AC和对抗反应的豁免获得加值"
+                },
+                "Banner": {
+                    "CommandersBanner": "魔法统帅旗帜"
+                },
+                "DaredevilBoots": {
+                    "TumbleThroughLabel": "{item}（翻滚）"
+                },
+                "DragonEye": {
+                    "Addendum": "当你施放3环级或更高环级的_燃烧之息_法术时，法术区域内的生物必须进行@Check[will|basic]豁免而非基础反射豁免；若豁免失败，除承受法术正常伤害外，还会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}状态。这会为法术添加情绪、恐惧和心灵特性。"
+                },
+                "ScaldingGauntlet": {
+                    "Basic": "你在穿戴该铁手套时擒抱或束缚的生物必须成功通过@Check[fortitude|dc:26|options:damaging-effect,inflicts:sickened|showDC:all]豁免，否则承受@Damage[2d6[persistent,fire]]伤害并因疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}；他之后会在1小时内临时免疫来自<em>灼热铁手套</em>的恶心。",
+                    "Greater": "你在穿戴该铁手套时擒抱或束缚的生物必须成功通过@Check[fortitude|dc:28|options:damaging-effect,inflicts:sickened|showDC:all]豁免，否则承受@Damage[2d6[persistent,fire]]伤害并因疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}；他之后会在1小时内临时免疫来自<em>灼热铁手套</em>的恶心。",
+                    "Major": "你在穿戴该铁手套时擒抱或束缚的生物必须成功通过@Check[fortitude|dc:32|options:damaging-effect,inflicts:sickened|showDC:all]豁免，否则承受@Damage[3d6[persistent,fire]]伤害并因疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}；他之后会在1小时内临时免疫来自<em>灼热铁手套</em>的恶心。",
+                    "True": "你在穿戴该铁手套时擒抱或束缚的生物必须成功通过@Check[fortitude|dc:36|options:damaging-effect,inflicts:sickened|showDC:all]豁免，否则承受@Damage[4d6[persistent,fire]]伤害并因疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}；他之后会在1小时内临时免疫来自<em>灼热铁手套</em>的恶心。"
                 }
             },
             "FighterWeaponMasteryLegend": {
@@ -1975,7 +2002,10 @@
                 "Defense": "选择一种防御。",
                 "Sense": "选择一种感官。",
                 "Weakness": "选择一个弱点。",
-                "Ability": "选择一个能力。"
+                "Ability": "选择一个能力。",
+                "Rank": "选择一个环级。",
+                "SecondAbility": "选择一个第二能力。",
+                "WeaponDamageDice": "选择武器伤害骰数。"
             },
             "SterlingDynamo": {
                 "Label": "纹银机铠士",
@@ -2011,7 +2041,7 @@
             "ChromaticArmor": {
                 "Force": "紫(力场)",
                 "Mental": "靛(心灵)",
-                "Prompt": "选择一种颜色",
+                "Prompt": "选择一种颜色。",
                 "Acid": "橙(酸)",
                 "Electricity": "黄(电击)",
                 "Fire": "红(火焰)",
@@ -2026,6 +2056,14 @@
                 "FinalShot": {
                     "Note": "不管你的掷骰结果如何，在本次打击之后直到你的下个回合开始你陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]并且获得@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。",
                     "NoteFailure": "该武器哑火。"
+                },
+                "FleshWound": {
+                    "ToggleLabel": "无血不休 — 减少打击伤害"
+                },
+                "SwordAndPistol": {
+                    "MeleeNote": "当你成功对于一名敌人使用单手近战武器进行了一次打击时，你使用单手火器或单手弩对该敌人进行的下一次远程打击就不会触发那些只对远程攻击而不会对近战攻击触发的反应动作，诸如反应打击。你获得的枪剑击鸣的所有好处如果未被使用，会在你的下个回合结束时消失。",
+                    "RangedNote": "当你对于一个近战触及范围内的敌人使用一把单手火器或单手弩进行了一次成功的远程打击，当你下一次用单手武器做出近战攻击时该敌人会处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的状态。你获得的枪剑击鸣的所有好处如果未被使用，会在你的下个回合结束时消失。",
+                    "RollOptionLabel": "枪剑击鸣 — 敌人在触及范围内"
                 }
             },
             "Oracle": {
@@ -2226,14 +2264,17 @@
                     "Prompt": "选择一种猎手优势",
                     "FirstAttack": "这一轮首次攻击猎杀目标",
                     "Flurry": {
-                        "Label": "连击"
+                        "Label": "连击",
+                        "Description": "你回合内对标记生物的第二次攻击的多重攻击减值为-2（若用灵巧攻击则为-1）而非通常的-5。该回合第三次或后续攻击为-4（灵巧为-2）而非-10。"
                     },
                     "Outwit": {
-                        "Label": "机智"
+                        "Label": "机智",
+                        "Description": "在对抗你的猎物的攻击时，你的AC获得+1环境加值；并且在与猎物相关的欺骗检定、威吓检定、隐秘检定以及与回忆知识相关的任意检定中获得+2环境加值。"
                     },
                     "Precision": {
                         "Label": "精准",
-                        "ToggleLabel": "精准 - 命中猎杀目标"
+                        "ToggleLabel": "精准 - 命中猎杀目标",
+                        "Description": "你每轮第一次命中你的猎杀目标时，还会造成1d8点额外精准伤害。（精准伤害会增加你原本造成的伤害，使用相同的伤害类型，但是对没有致命器官或者薄弱点的目标无效）。在11级时，这一额外伤害提升到2d8点精准伤害，19级时，这一额外伤害提升到3d8点精准伤害。"
                     }
                 },
                 "HamstringingStrike": {
@@ -2260,6 +2301,21 @@
                 "TheHarderTheyFall": {
                     "CriticalSuccess": "大成功时，你的目标受到@Damage[(ternary(gte(@actor.system.skills.athletics.rank,3),4,2))d8[bludgeoning]]伤害。",
                     "Success": "成功时，你的目标承受@Damage[(ternary(gte(@actor.system.skills.athletics.rank,3),2,1))d8[bludgeoning]]伤害。"
+                },
+                "AnimalCompanion": {
+                    "HuntPreyAddendum": "当你猎杀目标，你的动物伙伴获得动作的增益及你的猎手优势增益（如果你有的话）。"
+                },
+                "DoublePrey": {
+                    "HuntPreyAddendum": "当你使用猎杀目标动作时，你可以指定两个生物作为你的猎物。"
+                },
+                "MasterfulCompanion": {
+                    "HuntPreyAddendum": "当你使用猎杀目标时，你的动物伙伴得到你的猎手优势的大师猎手增益，而非普通的猎手增益。"
+                },
+                "SharedPrey": {
+                    "HuntPreyAddendum": "当你使用猎杀目标且仅选取了1个猎物时，则除了让自身获得各种好处之外，你还能让1名盟友也获得你的猎杀目标以及猎手优势带来的好处。该名盟友会保留这些好处，持续至你再次使用猎杀目标为止。"
+                },
+                "TripleThreat": {
+                    "HuntPreyAddendum": "当你使用猎杀目标的时候，你可以选择：指定三个狩猎目标，指定两个狩猎目标并与一个盟友分享效果（如同共享猎物），或者指定一个狩猎目标并与两个盟友分享效果。"
                 }
             },
             "TOTMToggle": {
@@ -2304,6 +2360,11 @@
                     "ShieldingFormation": {
                         "ResistanceToggle": "防御阵型- 终止AC加值来获得抗力"
                     }
+                },
+                "ImprovedFamiliarAttunement": {
+                    "Description": "你吸取存储在你魔宠身上的魔法力量。这个回合内，你无需消耗法术位就能施放一个你今天准备过并且已经施放过的法术。你仍然需要进行施法动作并且满足该法术的其他要求。",
+                    "Name": "汲取魔宠",
+                    "Requirements": "你的魔宠在你身上。"
                 }
             },
             "Rogue": {
@@ -2492,10 +2553,10 @@
                     "SaveNote": "你在对抗诅咒与由女巫或鬼婆施放的法术而进行的豁免骰中成功时，结果变为大成功。"
                 },
                 "SaocAstrology": {
-                    "Prompt": "选择你通过索克占星术动作获得的环境减值或加值"
+                    "Prompt": "选择你通过索克占星术动作获得的环境减值或加值。"
                 },
                 "VikingShieldbearer": {
-                    "Prompt": "选择你要获得受训熟练度的武器"
+                    "Prompt": "选择你要获得受训熟练度的武器。"
                 }
             },
             "HuntPrey": {
@@ -2629,7 +2690,7 @@
                     "FamiliarAbility": {
                         "OngoingMisery": {
                             "Title": "长痛魔宠",
-                            "Description": "你的魔宠似乎对除你之外的所有生物充满敌意，如果他们靠近就会对他们嘶吼。当你施放或维持巫术时，你的魔宠可以诅咒其15尺内的一个生物，延长其受到的任何负面状态持续时间1轮。这是一个诅咒效果。这只会延长具有持续时间的状态（例如“1轮”或“直到你下回合结束”），且不会阻止状态被其他方式移除。"
+                            "Description": "当你施放或维持一个巫术时，你的魔宠可以诅咒其15尺内的一个生物，延长其受到的一个由你选择的负面状态的持续时间1轮。这是一个诅咒效果。这只会延长具有持续时间的状态（例如“1轮”或“直到你下回合结束”），且不会阻止状态被其他方式移除。"
                         },
                         "KeenSenses": {
                             "Title": "锐感魔宠",
@@ -2738,7 +2799,7 @@
                 }
             },
             "CelestialResistance": {
-                "Prompt": "选择一种和你的血统关联的能量"
+                "Prompt": "选择一种和你的血统关联的能量。"
             },
             "SoulWarden": {
                 "SafeguardSoul": {
@@ -2750,7 +2811,7 @@
                 "UndeadNearby": "附近有不死生物"
             },
             "ToggleProperty": {
-                "GourdHead": "Gourd Head: 增加察觉DC",
+                "GourdHead": "Gourd Head：增加察觉DC",
                 "TagTeam": "和另一个秘密结社成员夹击",
                 "Triangulate": "观察手能看到目标"
             },
@@ -2835,7 +2896,8 @@
                 "Percussion": "打击乐",
                 "Singing": "歌唱",
                 "Strings": "弦乐",
-                "Winds": "管乐"
+                "Winds": "管乐",
+                "Synths": "合成器"
             },
             "UndeadSlayer": {
                 "SlayersBlessing": {
@@ -2858,23 +2920,23 @@
                 "Note": "当你使用震慑拳时，取代豁免造成震慑，你可以选择改为让目标进行一次@Check[fortitude|against:class]豁免对抗你的职业DC，对照下列结果。你必须在目标掷豁免骰之前选择。</p><hr><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标的肌肉会暂时变弱1轮，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，并且它在尝试使用具有操作特征的动作时，除非成功通过一次DC为5+力竭状态值的纯骰检定，否则被打断。</p><p><strong>失败</strong> 同成功，但持续时间为1分钟。</p><p><strong>大失败</strong> 同成功，但持续时间为1分钟，纯骰DC为11，且目标在持续时间内所有速度承受-10尺状态减值。</p>"
             },
             "BlessingOfDefiance": {
-                "Prompt": "选择一种豁免"
+                "Prompt": "选择一种豁免。"
             },
             "ClanWeapon": {
                 "Label": "氏族武器",
                 "ClanPistol": "氏族手枪（族裔专长）",
-                "Prompt": "选择一种氏族武器"
+                "Prompt": "选择一种氏族武器。"
             },
             "Cleric": {
                 "Doctrine": {
-                    "Prompt": "选择一种信条",
+                    "Prompt": "选择一种信条。",
                     "AllowedDrops": "1级牧师职业特性"
                 },
                 "SharedReplenishment": {
                     "Note": "你可以将战时补给赋予的临时生命值给予10尺内的一个盟友，代替自己获得。"
                 },
                 "ReplenishmentOfWar": {
-                    "Note": "当你使用你的神祇的偏好武器，通过普通攻击伤害一个生物，你获得等于你的等级一半的临时生命值，如果普通攻击重击，则等于你的等级。@UUID[Compendium.pf2e.feat-effects.Item.BJc494USeyM011p3]{Effect: 战时补给}"
+                    "Note": "当你使用你的神祇的偏好武器，通过普通攻击伤害一个生物，你获得等于你的等级一半的临时生命值，如果普通攻击重击，则等于你的等级。@UUID[Compendium.pf2e.feat-effects.Item.BJc494USeyM011p3]{Effect：战时补给}"
                 },
                 "DivineRebuttal": {
                     "Note": "若你的打击命中，你所有盟友对触发的豁免检定中获得+2环境加值（重击时获得+3环境加值）。@UUID[Compendium.pf2e.feat-effects.Item.jMQi2kDirzGgddti]{效果：神力抗驳}"
@@ -2944,7 +3006,7 @@
             },
             "Druid": {
                 "DruidicOrder": {
-                    "Prompt": "选择德鲁伊派系"
+                    "Prompt": "选择德鲁伊教派"
                 }
             },
             "Goblin": {
@@ -2994,14 +3056,14 @@
                     "GuidingLuck": "如果你拥有幸运指引专长，你不能在使用共享幸运为盟友增益时使用幸运指引来重投盟友的攻击检定或是察觉检定。"
                 },
                 "IncredibleLuck": {
-                    "Base": "你可以每小时使用1次半身人幸运，而不是1天1次。",
+                    "Base": "你可以每小时使用一次半身人幸运，而不是每日一次。",
                     "GuidingLuck": "如果你有幸运指引专长，你依旧只能以每日一次的频率在察觉检定或攻击检定失败时使用半身人幸运。（不过你可以在你使用半身人幸运的同一个小时里使用幸运指引）",
                     "SharedLuck": "如果你有分享幸运专长，你依旧只能以每日一次的频率给你的盟友使用半身人幸运。"
                 }
             },
             "Investigator": {
                 "Methodology": {
-                    "Prompt": "选择一种方法论"
+                    "Prompt": "选择一种方法论。"
                 },
                 "PursueALead": {
                     "Label": "追查方向 — 调查加值"
@@ -3052,7 +3114,8 @@
                     "Revitalizing": "赋生",
                     "Stumbling": "踉跄",
                     "TwirlingThrow": "回旋投掷",
-                    "TwirlingThrowNote": "该武器会在攻击后飞回你的手上"
+                    "TwirlingThrowNote": "该武器会在攻击后飞回你的手上",
+                    "DualSecondAttackLabel": "双发终结 — 第二次攻击"
                 },
                 "GoadingFeint": {
                     "Note": "虚招成功时，取代虚招的通常效果，直到目标的下个回合结束，其对你的下一次攻击骰受到-2环境减值。@UUID[Compendium.pf2e.feat-effects.Item.rflbFzV44Fd6aBLE]"
@@ -3061,6 +3124,12 @@
                 "TheBiggerTheyAre": {
                     "CriticalSuccess": "大成功时，如果你成功穿过了目标占据的方格，目标获得对你的精准伤害弱点，持续到你的回合结束。@UUID[Compendium.pf2e.feat-effects.Item.SLXhPgaeKB0W3k1D]",
                     "Success": "成功时，如果你成功穿过了目标占据的方格，目标在你下次攻击时获得对你的精准伤害弱点。@UUID[Compendium.pf2e.feat-effects.Item.SLXhPgaeKB0W3k1D]"
+                },
+                "ElegantBuckler": {
+                    "RollOptionLabel": "优雅圆盾 — 正使用小圆盾"
+                },
+                "ExtravagantParry": {
+                    "Prompt": "你有空闲手或正持握一把有格挡特征的武器吗？"
                 }
             },
             "Gnome": {
@@ -3080,7 +3149,7 @@
                 "DivineSmite": {
                     "Label": "神圣制裁"
                 },
-                "BladeAllyRune": "为利刃盟友选择一个性能符文",
+                "BladeAllyRune": "为利刃盟友选择一个性能符文。",
                 "TargetReaction": "目标触发了你的神卫反应",
                 "EvilDamage": "精魂伤害",
                 "NegativeDamage": "虚能伤害",
@@ -3108,7 +3177,7 @@
                     "Grandeur": "除了受到辉煌闪耀影响的敌人之外，身处你神卫灵光范围内的其他敌人也会在1轮内受到_显光尘_法术的影响。",
                     "Obedience": "除了触发反应的生物之外，所有身处你神卫灵光范围内的敌人同样必须选择@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]或者承受心灵伤害（每个敌人分别选择）。这些生物只会受到最小值的伤害（通常为@Damage[(ternary(gte(@actor.level,19),6,ternary(gte(@actor.level,16),5,ternary(gte(@actor.level,12),4,ternary(gte(@actor.level,11),3)))))[mental]]伤害），并且其承受的效果不会被任何针对你严酷铁律的改变所影响。举例而言，除了触发反应的生物外，残酷回响专长无法将其他生物受到的伤害转变为持续心灵伤害。",
                     "Iniquity": "除了触发反应的生物外，你同时对神卫灵光范围内的其他敌人造成伤害，数值等同于对触发反应的生物造成伤害的一半。",
-                    "Liberation": "除了受到解放踏步影响的盟友之外，你和其他身处你神卫灵光范围内的盟友也能以一个自由动作进行快步。即使受益于解放踏步的盟友无法移动，你和其他盟友依然能获得上述增益。",
+                    "Liberation": "除了受到解放踏步影响的盟友之外，你和其他身处你神卫灵光范围内的盟友也能以一个自由动作进行快步。即使受益于解放踏步的盟友无法移动，你和其他盟友依然能获得上述增益",
                     "Redemption": "如果敌人选择抗拒，你可以选择给予自身以及身处你神卫灵光范围内的所有盟友（包括触发反应的盟友）抗力。如果你这样做，所有人获得的抗力减少2点。@UUID[Compendium.pf2e.feat-effects.Item.GFLiTESBmoyQ3sLx]{效果：激昂反应 (救赎)}",
                     "Desecration": "直到你下一轮开始为止，所有身处你神卫灵光范围内的敌人在针对你的攻击投骰上获得-1状态减值。@UUID[Compendium.pf2e.feat-effects.Item.Ef63SlxSKlZmHosM]{效果：激昂反应 (亵渎)}"
                 },
@@ -3136,8 +3205,8 @@
                 "RelentlessReaction": {
                     "Grandeur": "触发反应的敌人同时受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]|traits:holy]伤害，在受到来自于辉煌闪耀的_显光尘_影响期间，其无法从该持续伤害中恢复。",
                     "Iniquity": "受到该反应动作初始伤害的敌人也会受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]|traits:unholy]伤害。",
-                    "Liberation": "你惩戒那些使你的盟友陷入困境的敌人。如果触发反应的敌人在你启动解放踏步时，通过任何效果使你的盟友陷入受擒、束缚、禁足或麻痹，这名敌人受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]]伤害。",
-                    "ObedienceRedemption": "如果这名敌人抗命，其承受@Damage[(@actor.abilities.cha.mod)[persistent,spirit]]伤害。",
+                    "Liberation": "你惩戒那些使你的盟友陷入困境的敌人。如果触发反应的敌人在你启动解放踏步时，通过任何效果使你的盟友陷入受擒、束缚、禁足或麻痹，这名敌人受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]]伤害",
+                    "ObedienceRedemption": "如果这名敌人抗命，其承受@Damage[(@actor.abilities.cha.mod)[persistent,spirit]]伤害",
                     "LiberationHoly": "你惩戒那些使你的盟友陷入困境的敌人。如果触发反应的敌人在你启动解放踏步时，通过任何效果使你的盟友陷入受擒、束缚、禁足或麻痹，这名敌人受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]|traits:holy]伤害",
                     "LiberationUnholy": "你惩戒那些使你的盟友陷入困境的敌人。如果触发反应的敌人在你启动解放踏步时，通过任何效果使你的盟友陷入受擒、束缚、禁足或麻痹，这名敌人受到@Damage[(@actor.abilities.cha.mod)[persistent,spirit]|traits:unholy]伤害",
                     "ObedienceRedemptionHoly": "如果这名敌人抗命，其承受@Damage[(@actor.abilities.cha.mod)[persistent,spirit]|traits:holy]伤害",
@@ -3161,31 +3230,31 @@
             },
             "DeviantAbilities": {
                 "AwakenedPower": {
-                    "BoneSpikesPoison": "骨刺: 毒液",
-                    "ConsumeEnergyRange": "吞噬能量: 增加范围",
-                    "ConsumeEnergyStrikes": "吞噬能量: 增强打击",
-                    "DistantWanderingFly": "神游: 飞行",
-                    "DistantWanderingQuick": "神游: 迅捷",
-                    "EerieFlickerTerrify": "怪异闪烁: 可怕影子",
-                    "EerieFlickerCompress": "怪异闪烁: 凝聚闪烁",
-                    "TectonicStompStun": "地震重踏: 震慑敌人",
-                    "BlastingBeamsLine": "爆炸射线: 60尺线形",
-                    "BlastingBeamsAgile": "爆炸射线: 灵巧打击",
-                    "BoneSpikesReach": "骨刺: 长触及",
-                    "EnervatingWailSilent": "衰弱哭嚎: 无声哭嚎",
-                    "PropulsiveLeapWeapon": "助推飞跃: 推进武器",
-                    "StormingBreathProne": "风暴吐息: 击倒",
-                    "EnervatingWailEnfeebling": "衰弱哭嚎: 削弱哭嚎",
-                    "GhostlyGraspGrab": "幽冥鬼爪: 擒抱",
-                    "GhostlyGraspPush": "幽冥鬼爪: 推离",
+                    "BoneSpikesPoison": "骨刺：毒液",
+                    "ConsumeEnergyRange": "吞噬能量：增加范围",
+                    "ConsumeEnergyStrikes": "吞噬能量：增强打击",
+                    "DistantWanderingFly": "神游：飞行",
+                    "DistantWanderingQuick": "神游：迅捷",
+                    "EerieFlickerTerrify": "怪异闪烁：可怕影子",
+                    "EerieFlickerCompress": "怪异闪烁：凝聚闪烁",
+                    "TectonicStompStun": "地震重踏：震慑敌人",
+                    "BlastingBeamsLine": "爆炸射线：60尺线形",
+                    "BlastingBeamsAgile": "爆炸射线：灵巧打击",
+                    "BoneSpikesReach": "骨刺：长触及",
+                    "EnervatingWailSilent": "衰弱哭嚎：无声哭嚎",
+                    "PropulsiveLeapWeapon": "助推飞跃：推进武器",
+                    "StormingBreathProne": "风暴吐息：击倒",
+                    "EnervatingWailEnfeebling": "衰弱哭嚎：削弱哭嚎",
+                    "GhostlyGraspGrab": "幽冥鬼爪：擒抱",
+                    "GhostlyGraspPush": "幽冥鬼爪：推离",
                     "HighSpeedRegenerationDeath": "高速再生: 紧急再生",
-                    "HighSpeedRegenerationSpeed": "高速再生: 速度增加",
+                    "HighSpeedRegenerationSpeed": "高速再生：速度增加",
                     "Prompt": "为特异专长选择一种觉醒能力。",
-                    "PropulsiveLeapSpeed": "助推飞跃: 速度增加",
-                    "StormingBreathEscape": "风暴吐息: 快速逃脱",
-                    "TectonicStompStone": "地震重踏: 石块掩护",
-                    "TitanSwingProne": "泰坦挥击: 推离",
-                    "TitanSwingBleed": "泰坦挥击: 流血",
+                    "PropulsiveLeapSpeed": "助推飞跃：速度增加",
+                    "StormingBreathEscape": "风暴吐息：快速逃脱",
+                    "TectonicStompStone": "地震重踏：石块掩护",
+                    "TitanSwingProne": "泰坦挥击：推离",
+                    "TitanSwingBleed": "泰坦挥击：流血",
                     "AwakenedLabel": "觉醒",
                     "HighSpeedRegenerationRecovery": "高速再生：紧急再生",
                     "VineLashCone": "藤蔓鞭打：30尺锥形",
@@ -3286,7 +3355,7 @@
                     "Fervor": "你在意志豁免上获得 +1 状态加值。如果你施展一个法术让你的情绪焦点获得好处，这个加值会增加到 +3，直到你的下一个回合开始。法术：@UUID[Compendium.pf2e.spells-srd.Item.szIyEsvihc5e1w8n]",
                     "Focus": "@UUID[Compendium.pf2e.spells-srd.Item.YGRpHU5yxw73mls8]",
                     "Label": "爱",
-                    "Trigger": "你的情绪焦点在距离你 30 尺的范围内受到敌人伤害。"
+                    "Trigger": "你的情绪焦点在距离你30尺的范围内受到敌人伤害。"
                 },
                 "Anger": {
                     "Activation": "如果你@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]，你可以尝试@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]。如果成功，对你施加状态的生物或危害（若适用）会受到等同于你角色等级的力场伤害。",
@@ -3331,7 +3400,7 @@
                     "Fervor": "你的情绪焦点对你@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，并且在对抗你的法术时豁免检定受到 –2 状态减值。你也对自己的情绪焦点措手不及，且对抗他的豁免检定也承受 –2 状态减值。法术：@UUID[Compendium.pf2e.spells-srd.Item.TaaMEYdZXQXF0Sks]",
                     "Focus": "@UUID[Compendium.pf2e.spells-srd.Item.0H1ozccQGGFLUwFI]",
                     "Label": "仇恨",
-                    "Trigger": "在与你的情绪焦点，或是他的一个追随者的遭遇中，开始你的第一个回合。如果遭遇中包括多个符合条件的追随者，但不包括你真正的情绪焦点，请选择其中一个追随者作为这次遭遇的情绪焦点（或直到你真正的情绪焦点出现）。"
+                    "Trigger": "在与你的情绪焦点，或是他的一个追随者的遭遇中，开始你的第一个回合。如果遭遇中包括多个符合条件的追随者，但不包括你真正的情绪焦点，请选择其中一个追随者作为这次遭遇的情绪焦点（或直到你真正的情绪焦点出现）"
                 },
                 "Joy": {
                     "Activation": "你现有的任何@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]或@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied}的状态值降低 1，并结束现正遭受的任何持续心灵伤害。",
@@ -3743,6 +3812,9 @@
                 },
                 "ConsumePower": {
                     "ResistanceToggle": "吞噬元能 — 抗力"
+                },
+                "DesertWind": {
+                    "DamageToggle": "沙漠之风 — 额外伤害"
                 }
             },
             "Genie": {
@@ -3957,6 +4029,15 @@
                 "SkillfulTail": {
                     "Geniekin": "你生来就有一条尾巴，通过练习，你学会了如何用它执行简单的互动动作，比如打开一扇未上锁的门。你无法以尾巴进行需要手指或要求精密操作的动作，包括任何需要进行检定的动作，你也不得以尾巴持握物品。",
                     "Nephilim": "你生来就有一条尾巴，几经训练后你的尾巴终于具备了暴露心情之外的其它功用。你可以尾巴进行简单的交互动作，例如打开未上锁的门。你无法以尾巴进行需要手指或要求精密操作的动作，包括任何需要进行检定才能完成的动作，你也不得以尾巴持握物品。"
+                },
+                "DisturbingKnowledge": {
+                    "CriticalFailure": "你被你自己说出的话吓到了，你获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。",
+                    "CriticalSuccess": "目标@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮并且获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。",
+                    "Failure": "目标不受影响。",
+                    "Success": "目标获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。"
+                },
+                "LegendaryCodebreaker": {
+                    "Note": "若你花费通常解译文书所需的完整时间，并在检定中成功，则改为获得大成功。若你花费通常情况需要的完整时间，并获得大成功，则可几乎逐字逐句地细致理解文本。"
                 }
             },
             "SaveCriticalFailureToFailure": {
@@ -4040,7 +4121,7 @@
                 },
                 "DiskRider": {
                     "Description": "当你施放浮碟术时，你可以将其持续时间修改为维持，最多10分钟。如果你这样做，在它的效果上增加以下的升阶条目。",
-                    "DescriptionHeightened": "该盘可以承载最多10负载。如果你骑在浮碟上，法术不再结束（但如果任何其他生物骑在浮碟上，包括该生物骑在你身上，法术仍会结束）。如果你骑在浮碟上，它就会改变其载重力以承载你，再加上相当于你可以携带并不被超载的最大额外负载。当你骑在浮碟上，每次你维持法术时可以指示它沿着地面移动，最多 30 英尺或你的速度，以较慢者为准。当你骑在它上面，只要它在坚实的地面上结束其运动，圆盘就可以穿过液体表面移动。如果它在不能支撑它的表面上结束运动，则法术结束。"
+                    "DescriptionHeightened": "该盘可以承载最多10负载。如果你骑在浮碟上，法术不再结束（但如果任何其他生物骑在浮碟上，包括该生物骑在你身上，法术仍会结束）。如果你骑在浮碟上，它就会改变其载重力以承载你，再加上相当于你可以携带并不被超载的最大额外负载。当你骑在浮碟上，每次你维持法术时可以指示它沿着地面移动，最多30尺或你的速度，以较慢者为准。当你骑在它上面，只要它在坚实的地面上结束其运动，圆盘就可以穿过液体表面移动。如果它在不能支撑它的表面上结束运动，则法术结束。"
                 },
                 "DrenchingMist": {
                     "Description": "当你施放隐雾术时，你可以对它进行修改，使其效果上增加以下的升阶条目。",
@@ -4128,7 +4209,8 @@
                     "First": "第一",
                     "Second": "第二",
                     "Third": "第三"
-                }
+                },
+                "Zero": "零"
             },
             "ShadowSignet": {
                 "Note": "如果你的下一个动作是施放需要对抗AC掷法术攻击骰的法术，选择强韧DC或反射DC。你改为使用你的法术攻击骰来对抗该防御属性，而非AC。"
@@ -4273,7 +4355,7 @@
                 "FamiliarsResolve": "如果你接下来的行动是施展法术，那么你或你30尺范围内的任意一名盟友在1轮内对抗那些会使你或盟友陷入毁灭或惊惧状态的豁免检定获得+2状态加值。在14级时，你或盟友在针对这些效果的豁免检定将获得+3状态加值。@UUID[Compendium.pf2e.feat-effects.Item.6I4qWkHzxj4MAt6g]{效果：魔宠决意}",
                 "GoldenDragonsBounty": "如果你接下来的动作是施展一个造成钝击、穿刺或挥砍伤害的法术，那么该伤害的类型可以由你选择为寒铁、银或钢，用于弱点、抗力、易伤等。在14级时，将精金加入到金属选择列表中。该法术获得金特征。",
                 "PitchPerfectProjection": "若你本轮的下一个动作是施法或使用一个拥有射程的听觉效果，则射程增加30尺。",
-                "SeneschalSpell": "如果你的下一个动作是施放法术，且你的受监护人在30英尺内，你可以让法术从你的受监护人身上发出。该生物可以使用其反应来大致完成法术的吟唱，这会使法术对你（而不是对它们）而言具有晦匿特征，因为法术的外观仅围绕你的受监护人出现。",
+                "SeneschalSpell": "如果你的下一个动作是施放法术，且你的受监护人在30尺内，你可以让法术从你的受监护人身上发出。该生物可以使用其反应来大致完成法术的吟唱，这会使法术对你（而不是对它们）而言具有晦匿特征，因为法术的外观仅围绕你的受监护人出现。",
                 "KaleidoscopicEntreaty": {
                     "Success": "生物@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮。",
                     "CriticalFailure": "生物@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]1轮并目眩1分钟。",
@@ -4552,23 +4634,23 @@
                 "Label": "启动共鸣反射",
                 "ReflectionOfStone": {
                     "Title": "石之反射",
-                    "Description": "你以一个内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.2BV2yYPfVJ5zirZt]，将法术环阶升高到等同于你等级一半（向上取整）。"
+                    "Description": "你以一个内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.2BV2yYPfVJ5zirZt]，将法术环级升高到等同于你等级一半（向上取整）。"
                 },
                 "ReflectionOfStorm": {
                     "Title": "风暴反射",
                     "Description": "你可以以 8 环内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.4MOew29Z1oCX8O28]（仅自身），并恢复 1 聚能点。"
                 },
                 "ReflectionOfLife": {
-                    "Description": "你获得快速治疗 3， 持续1分钟。 超过 5 级后，你每升 2 级，快速治疗量就增加 1。</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.DOxl0FDd21VMDOMP]{效果: 生命共鸣 (快速治疗)}.",
+                    "Description": "你获得快速治疗 3， 持续1分钟。 超过 5 级后，你每升 2 级，快速治疗量就增加 1。</p>\n<p>@UUID[Compendium.pf2e.campaign-effects.Item.DOxl0FDd21VMDOMP]{效果：生命共鸣 (快速治疗)}.",
                     "Title": "生命共鸣"
                 },
                 "ReflectionOfLight": {
                     "Title": "光之反射",
-                    "Description": "你以一个内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.DyiD239dNS7RIxZE]，将法术环阶升高到等同于你等级一半（向上取整）。"
+                    "Description": "你以一个内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.DyiD239dNS7RIxZE]，将法术环级升高到等同于你等级一半（向上取整）。"
                 },
                 "ReflectionOfWater": {
                     "Title": "水之反射",
-                    "Description": "你以一个 5 环内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.zfn5RqAdF63neqpP]。在 10 级后你每拥有 2 级等级，你控制的水域的长度和宽度就增加 10 尺。"
+                    "Description": "你以一个 5 环内在神术法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.zfn5RqAdF63neqpP]。在 10 级后你每拥有 2 级等级，你控制的水域的长度和宽度就增加10尺。"
                 }
             },
             "Summoner": {
@@ -4704,6 +4786,9 @@
                     },
                     "guardian": {
                         "Description": "有时候，进攻就是最好的防御。你在简易武器、军用武器和无武装攻击上的熟练度提升至专家。"
+                    },
+                    "thaumaturge": {
+                        "Description": "你学会了让武器更有效的秘密手段。你在无武装攻击、简易武器和军用武器上的熟练度提升至专家。"
                     }
                 },
                 "FortitudeExpertise": {
@@ -4721,6 +4806,9 @@
                     },
                     "swashbuckler": {
                         "Description": "你的肉体在冒险途中变得愈发强壮。你在强韧豁免上的熟练度提升至专家。"
+                    },
+                    "psychic": {
+                        "Description": "你的心灵塑造了身体的潜在图像。你强韧豁免的熟练度提升至专家。"
                     }
                 },
                 "SimpleWeaponExpertise": {
@@ -4866,7 +4954,7 @@
                 "Success": "器官视域 — 医疗检定成功"
             },
             "FrenziedRevelry": {
-                "Note": "每当从该加值中受益者对抗敌方心灵效果时在豁免骰上取得大成功，其疯狂加剧，在攻击和伤害骰获得+1状态加值，持续1轮。@UUID[Compendium.pf2e.spell-effects.Item.ldl1aU5ovTQMUHJ2]{法术效果: 迷乱狂欢 (大成功)}"
+                "Note": "每当从该加值中受益者对抗敌方心灵效果时在豁免骰上取得大成功，其疯狂加剧，在攻击和伤害骰获得+1状态加值，持续1轮。@UUID[Compendium.pf2e.spell-effects.Item.ldl1aU5ovTQMUHJ2]{法术效果：迷乱狂欢 (大成功)}"
             },
             "WingedWarrior": {
                 "Dedication": {
@@ -4956,7 +5044,8 @@
                     },
                     "WhoseCryIsThunder": {
                         "Description": "当你神火解放时，你可以使自身充满电流，直到你下回合开始。在你充满电流时，任何触摸你，用无武装攻击或非触及近战武器伤害你的生物会受到@Damage[1d6[electricity]]伤害。@UUID[Compendium.pf2e.feat-effects.Item.nP3k4N52NzrR3KKf]",
-                        "CriticalSpecialization": "你在一次打击中大成功时会激发雷霆震响。目标必须通过@Check[fortitude|against:exemplar|traits:sonic]检定对抗你的职业DC，失败时，他会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]并@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1分钟，这是个音波效果。"
+                        "CriticalSpecialization": "你在一次打击中大成功时会激发雷霆震响。目标必须通过@Check[fortitude|against:exemplar|traits:sonic]检定对抗你的职业DC，失败时，他会被击@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]并@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1分钟，这是个音波效果。",
+                        "DamageNote": "攻击者承受@Damage[1d6[electricity]]伤害"
                     },
                     "TheMournful": {
                         "Description": "在你进行神火解放时，你的行动有着辛酸的悲壮色彩，使30尺内的一个敌人由于眼中打转的泪水和闪现回忆而@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]；这一个是心灵和情绪效果，持续到你的下回合开始，该敌人在随后10分钟内免疫这一效果。"
@@ -5125,7 +5214,8 @@
                 }
             },
             "EnvenomCompanion": {
-                "DamageNote": "被此毒素伤害的生物必须尝试一次@Check[fortitude|traits:poison]豁免。在失败时，它也会获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} ，持续1轮。"
+                "DamageNote": "被此毒素伤害的生物必须尝试一次@Check[fortitude|traits:poison]豁免。在失败时，它也会获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} ，持续1轮。",
+                "RollOptionLabel": "淬毒伙伴 — 每轮第一次命中"
             },
             "ImpeccableFlow": {
                 "Note": "如果你受此法术影响的任何检定大失败，加值将终止，并且在法术剩余时间内所有检定都有-1状态减值。",
@@ -5133,7 +5223,7 @@
             },
             "SixthPillar": {
                 "SixthPillarMastery": {
-                    "AttackNote": "当你在对敌人的一次无武装攻击成功时，在你的下回合开始前他们对抗你的法术的豁免受到-1状态减值。@UUID[Compendium.pf2e.feat-effects.Item.DX6v0lcI2uA99Yjv]{效果: 第六柱精通}",
+                    "AttackNote": "当你在对敌人的一次无武装攻击成功时，在你的下回合开始前他们对抗你的法术的豁免受到-1状态减值。@UUID[Compendium.pf2e.feat-effects.Item.DX6v0lcI2uA99Yjv]{效果：第六柱精通}",
                     "SpellNote": "当你使用法术位施放一个法术时，你在下回合开始前无武装攻击的攻击骰获得+1状态加值。"
                 }
             },
@@ -5370,6 +5460,12 @@
                     "InnerSea": "内海元素论",
                     "ElementalCycle": "五行循环",
                     "Prompt": "选择一种元素哲学。"
+                },
+                "Sorcerer": {
+                    "ElementalFocusPrompt": {
+                        "Advanced": "将你的进阶血统法术替换为进阶元素聚能法术吗？",
+                        "Initial": "将你的初始血统法术替换为初始元素聚能法术吗？"
+                    }
                 }
             },
             "SpellEffectTheFourHunters": {
@@ -5689,6 +5785,64 @@
                     "EffectNote": "你必须成功通过@Check[flat|dc:5]检定否则法术被打断。",
                     "StrikeNote": "当持续流血伤害存在时，你每次施放圣洁法术时都需成功通过一次DC5的纯骰检定，否则法术被打断。@UUID[Compendium.pf2e.feat-effects.Item.vG11WE95sDmDcip4]"
                 }
+            },
+            "AvengingRunelord": {
+                "ShiningRunes": {
+                    "Note": "你在你下回合开始前@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。"
+                }
+            },
+            "Dandy": {
+                "DoYouKnowWhoIAm": {
+                    "City": "城市",
+                    "Metropolis": "大都市"
+                },
+                "IvyPlayhouseStrike": {
+                    "Note": "目标陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，直到你下回合结束。"
+                }
+            },
+            "FireworkTechnician": {
+                "GoblinJubilee": {
+                    "ToggleLabel": "地精狂欢 — 消耗2剂万用制剂"
+                }
+            },
+            "OstilliHostDedication": {
+                "VersatileMutation": {
+                    "RollOptionLabel": "Split Ambient Damage Type"
+                }
+            },
+            "SkillFeat": {
+                "RecognizeSpell": {
+                    "RollOptionLabel": "辨识法术时大成功"
+                },
+                "ScareToDeath": {
+                    "CriticalFailure": "目标不受影响。",
+                    "CriticalSuccess": "目标必须尝试@Check[fortitude|against:intimidation]豁免对抗你的威吓DC。大失败时它会死亡。取得其它结果时，它陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}并@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]1轮。大失败效果具有死亡特征。",
+                    "Failure": "目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。",
+                    "Success": "目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。"
+                }
+            },
+            "SpellEffectLevitate": {
+                "RollOptionLabel": "浮空术 — 本回合已稳定自身"
+            },
+            "SpellEffectMindSwap": {
+                "RollOptionLabel": "交换思维 — 乔装成彼此"
+            },
+            "SpellEffectPrismaticShield": {
+                "RollOptionLabel": "虹光护盾 — 被大的远程武器攻击时"
+            },
+            "SpellEffectSparkleskin": {
+                "DamageNote": "当你受到伤害时，伤口会发出闪光，@Template[emanation|distance:5]范围内的生物必须尝试强韧豁免。\n失败时该生物在1轮内陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]。\n大失败时3轮内陷入目眩。"
+            },
+            "SpellEffectSpiritOfTheBeast": {
+                "AspectOfInsight": "内省之相",
+                "AspectOfMight": "威猛之相",
+                "AspectOfSwiftness": "迅捷之相"
+            },
+            "StormHammer": {
+                "Electrify": "风暴锤 — 电击"
+            },
+            "UnderseaPrivateer": {
+                "RollOptionLabel": "正在水中或水下战斗"
             }
         },
         "RuleElement": {
@@ -6127,8 +6281,8 @@
             "SovereignDragon": {
                 "InspireEnvoyDragonChoice": "龙赐予的效果",
                 "InspireEnvoyEffectAttack": "攻击加值",
-                "InspireEnvoyDragonAdult": "成年龙王",
-                "InspireEnvoyDragonAncient": "古龙王",
+                "InspireEnvoyDragonAdult": "成年君龙",
+                "InspireEnvoyDragonAncient": "古君龙",
                 "InspireEnvoyEffectAC": "AC加值",
                 "InspireEnvoyEffectChoice": "赐予效果",
                 "InspireEnvoyEffectPercWillCha": "意志、察觉以及基于魅力的技能检定加值"
@@ -6267,9 +6421,9 @@
                     "AttackOfOpportunity": "反应打击",
                     "AbilityPrompt": "选择乔装变形能力",
                     "Armored": "着甲 Armored",
-                    "Commander": "指挥者 Commander",
-                    "ElementalAttack": "元素攻击 Elemental Attack",
-                    "ShieldCarrier": "持盾者 Shield Carrier",
+                    "Commander": "指挥者",
+                    "ElementalAttack": "元素攻击",
+                    "ShieldCarrier": "持盾者",
                     "WeaponPerk": "武器提升 Weapon Perk",
                     "WeaponPerkPrompt": "选择一种武器提升"
                 }
@@ -6280,7 +6434,8 @@
                         "Label": "具现骨制棍棒",
                         "New": "新的骨制棍棒",
                         "ShatteredLabel": "破碎骨制棍棒",
-                        "Shattered": "破碎骨制棍棒"
+                        "Shattered": "破碎骨制棍棒",
+                        "NewLabel": "骨棒"
                     }
                 }
             },
@@ -6416,7 +6571,18 @@
                     "Raven": "渡鸦",
                     "SublimeBreath": "崇高之息",
                     "Miastrilek": "Miastrilek",
-                    "RacoonDog": "狸猫"
+                    "RacoonDog": "狸猫",
+                    "Devil": {
+                        "Insidiator": "Insidiator"
+                    },
+                    "Drude": "Drude",
+                    "Object": {
+                        "Inanimate": "无生命物品",
+                        "InanimateTiny": "超小型无生命物品"
+                    },
+                    "Swarm": {
+                        "Flies": "蝇群"
+                    }
                 },
                 "Label": "当前形态",
                 "AlterationNotes": {
@@ -6444,7 +6610,7 @@
                         "Label": "猛击符文",
                         "Text": "该武器命中时，巨人能@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]{击退 Push}目标10尺（重击则击退20尺）。"
                     },
-                    "Prompt": "选择一种符文"
+                    "Prompt": "选择一种符文。"
                 }
             },
             "ShockerLizard": {
@@ -6486,8 +6652,8 @@
             },
             "Hadrinnex": {
                 "RapidEvolution": {
-                    "EnergyGland": "Rapid Evolution — Energy Gland",
-                    "Husk": "Rapid Evolution — Husk"
+                    "EnergyGland": "快速进化—能量腺体",
+                    "Husk": "快速进化—外壳"
                 }
             },
             "SoulfiredPot": {
@@ -6615,7 +6781,10 @@
                 }
             },
             "Shieldmarshal": {
-                "LawbringerSpeedLabel": "圣使裔 - 向目标前进"
+                "LawbringerSpeedLabel": "圣使裔 - 向目标前进",
+                "EquitableDefense": {
+                    "ResistanceToggle": "合理防御 — 重击抗力"
+                }
             },
             "Asper": {
                 "Aura": {
@@ -6805,11 +6974,12 @@
             "MixedMartialArtist": {
                 "StanceShift": {
                     "CrossElbow": "Cross Elbow",
-                    "ElbowKnockoutStance": "金刚架肘势 Elbow Knockout Stance",
+                    "ElbowKnockoutStance": "金刚架肘势",
                     "GrapplingLimb": "Grappling Limb",
-                    "SecureGrappleStance": "银丝锁蛟势 Secure Grapple Stance",
-                    "ThrashingBarrageStance": "刚风摧山势 Thrashing Barrage Stance",
-                    "ThrashingFist": "Thrashing Fist"
+                    "SecureGrappleStance": "银丝锁蛟势",
+                    "ThrashingBarrageStance": "刚风摧山势",
+                    "ThrashingFist": "Thrashing Fist",
+                    "ConstantFeintStance": "常驻虚招架势"
                 }
             },
             "AethusasPrison": {
@@ -6836,6 +7006,56 @@
             "FortuneDragon": {
                 "ChimericNature": {
                     "Label": "嵌合体质—伤害类型"
+                }
+            },
+            "FangwoodSentinel": {
+                "ThusAlwaysToTyrants": {
+                    "Enemy": "敌人",
+                    "Ally": "盟友"
+                }
+            },
+            "Belimarius": {
+                "MythicAlteration": "This ability cannot be used until Belimarius ascends."
+            },
+            "CaetoVulaunex": {
+                "LawbreakersBane": {
+                    "Criminal": "目标已知违反了法律",
+                    "Hellbreaker": "目标已知为一名破狱者"
+                }
+            },
+            "IllcaynaAlonnor": {
+                "ReapersSigh": "Illcayna was Critically Hit by a Slashing Weapon"
+            },
+            "Nasurgeth": {
+                "MidnightDepths": {
+                    "InWater": "Midnight Depths — In Water"
+                }
+            },
+            "OrtMob": {
+                "Subservience": {
+                    "Hustle": "Hustle",
+                    "Kill": "Kill",
+                    "Rally": "Rally",
+                    "Work": "Work"
+                }
+            },
+            "PeacockPhoenix": {
+                "RadiantWing": "Radiant Wing"
+            },
+            "Sykever": {
+                "ArmSpike": "Arm Spike",
+                "Bipedal": "Bipedal",
+                "Quadrupedal": "Quadrupedal"
+            },
+            "SwarmingBites": {
+                "Note": "如果你在感染时尝试一个专注或者操作动作，你必须成功通过一次@Check[flat|dc:5|name:Swarming Bites|showDC:all]检定否则丢失动作；在动作被花费后效果生效前骰检定。"
+            },
+            "VizierDragon": {
+                "Dragontongue": {
+                    "ImmunityLabel": "龙之巧舌"
+                },
+                "PowerfulUtterance": {
+                    "ImmunityLabel": "强力言辞"
                 }
             }
         },
@@ -6867,7 +7087,7 @@
                     "AlreadyHasItem": "{actor} 已有 {item}，因此没有再次添加。"
                 },
                 "EffectTarget": {
-                    "Prompt": "选择此效果的目标"
+                    "Prompt": "选择此效果的目标。"
                 },
                 "TokenMark": {
                     "TargetToken": "鼠标悬浮在某个指示物上，按T选定该指示物为目标，按Esc取消。",
@@ -7155,7 +7375,8 @@
             "Desert": "沙漠",
             "Forest": "林地",
             "Mountain": "山脉",
-            "Plains": "平原"
+            "Plains": "平原",
+            "Space": "太空"
         },
         "AmmunitionNotes": {
             "ExplosiveAmmunition": {
@@ -7228,6 +7449,10 @@
                     "Text": "生物会受到-15尺速度减值和@Damage[4d4[persistent,acid]]伤害，直到效果结束。目标可以通过@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]（DC38）粘性泡沫来结束效果。其他生物也可以提供这些动作，尽管这样做会对帮忙的生物造成一半的持续性酸蚀伤害。结束效果的生物依然会受到本回合的持续性伤害。@UUID[Compendium.pf2e.equipment-effects.Item.m77YnEX1T7bdk7Qa]",
                     "Title": "上等泥怪弹药"
                 }
+            },
+            "GlueBullet": {
+                "Text": "当击中时，目标的速度承受-10尺环境减值，持续[[/r 2d4 #rounds]]{2d4轮}。如果大成功，目标还会被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。@UUID[Compendium.pf2e.equipment-effects.Item.dBjXvsLFezo2fGRa]。",
+                "Title": "粘胶子弹"
             }
         },
         "IWR": {
@@ -7251,7 +7476,7 @@
                 "PhysicalRangedAttacks": "物理远程攻击",
                 "MagicalDuskwood": "魔法夕木",
                 "VoidZonKuthonFollowers": "宗-库山信徒造成的虚能伤害",
-                "ImpulseFireFrom": "从{origin}来源涌动火焰",
+                "ImpulseFireFrom": "来自{origin}的涌动火焰",
                 "AllDamageFromSpells": "来自法术的全部伤害",
                 "AllDamageFromArcaneSpells": "所有奥术法术造成的伤害",
                 "AllStrikeDamageFromUndeadCreatures": "所有不死生物的打击造成的伤害",
@@ -7281,13 +7506,14 @@
                 "Bronze": "青铜",
                 "SpellsFromAllTraditions": "所有根源的法术",
                 "WispVulnerabilities": "wisp vulnerabilities",
-                "InhaledPoisons": "吸入毒素",
+                "InhaledPoisons": "吸入型毒素",
                 "ElementalInstinct": "damage dealt by instinct element creatures",
                 "HarvestBlood": "damage dealt by last Harvest Blood target",
                 "AttacksFromSuppressed": "来自被压制目标的攻击",
                 "RadiationPoison": "辐射毒素",
                 "Radiation": "辐射",
-                "PrimalSpells": "原能法术"
+                "PrimalSpells": "原能法术",
+                "Decapitation": "斩首"
             }
         },
         "Color": {
@@ -7357,12 +7583,17 @@
             "Vorpal": "斩首龙",
             "Wailing": "哀嚎龙",
             "Whisper": "低语龙",
-            "Requiem": "安魂龙"
+            "Requiem": "安魂龙",
+            "Abysium": "Abysium Dragon",
+            "Akashic": "Akashic Dragon",
+            "Cosmic": "Cosmic Dragon",
+            "Host": "Host Dragon"
         },
         "FeatDescription": {
             "Frequency": {
                 "OncePerTurn": "每回合一次",
-                "OncePerHour": "每小时一次"
+                "OncePerHour": "每小时一次",
+                "OncePerDay": "每日一次"
             },
             "Requirements": {
                 "Label": "需求"
@@ -7397,7 +7628,8 @@
                 "First": "首次打击"
             },
             "Resist": {
-                "ForcedMovement": "对抗受迫移动"
+                "ForcedMovement": "对抗受迫移动",
+                "Mental": "心灵抗力"
             },
             "Check": {
                 "SavingThrow": "豁免检定",
@@ -7433,7 +7665,7 @@
                         "label": "模式"
                     },
                     "predicate": {
-                        "label": "谓词"
+                        "label": "谓语"
                     },
                     "selector": {
                         "label": "选择器"
@@ -7498,7 +7730,7 @@
                             "gm": "仅GM",
                             "owner": "物品所有者"
                         },
-                        "hint": "当这个笔记被发送到聊天栏时，对谁可见？（默认对所有用户可见）",
+                        "hint": "当这个笔记被发送至聊天时，对谁可见？（默认对所有用户可见）。",
                         "label": "可见"
                     }
                 }
@@ -7507,6 +7739,240 @@
         "HazardAbility": {
             "HauntedForge": {
                 "StrikeNote": "目标@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。"
+            }
+        }
+    },
+    "SF2E": {
+        "NPCAbility": {
+            "AeonGuard": {
+                "Commander": {
+                    "RallyTheTroops": {
+                        "Prompt": "Did the aeon guard end their movement adjacent to another aeon guard?"
+                    }
+                },
+                "Trooper": {
+                    "CoordinatedFire": {
+                        "Note": "Your target becomes @UUID[Compendium.sf2e.conditions.Item.enA7BxAjBb7ns1iF]{Suppressed} until the end of your next turn."
+                    }
+                }
+            },
+            "Arqsheth": {
+                "ArmamentOfTheArchons": {
+                    "StrikeLabel": "Arqsheth"
+                }
+            },
+            "Atlapak": {
+                "AerialBuoyancy": {
+                    "Atmosphere": "Atmosphere",
+                    "None": "None",
+                    "Normal": "Normal",
+                    "Thick": "Thick",
+                    "Thin": "Thin"
+                }
+            },
+            "Coposirix": {
+                "SeepIn": {
+                    "MaterialPrompt": "伤害由一把特殊材质的武器造成？"
+                }
+            },
+            "CorpseFleet": {
+                "LeadSalvo": {
+                    "RollOptionLabel": "Lead Salvo — Additional number of d4s"
+                },
+                "JuniorOfficer": {
+                    "RallyTheTroops": {
+                        "Prompt": "Did your movement end next to the officer?"
+                    }
+                }
+            },
+            "Hardlight": {
+                "TouchingProjectorLabel": "Touching Projector"
+            },
+            "Ignurso": {
+                "Lavaproof": {
+                    "ImmunityLabel": "lavaproof"
+                }
+            },
+            "Illumantula": {
+                "RelativityField": {
+                    "WeaknessLabel": "fortune"
+                }
+            },
+            "Paradox17": {
+                "NaturalInvisibility": {
+                    "ResistanceException": "from creatures observing it"
+                }
+            },
+            "ParadoxicalSolipsist": {
+                "PerceiveUnreality": {
+                    "ResistanceException": "source of damage is hidden to them"
+                }
+            },
+            "RallyTheTroops": {
+                "Ally": "Next to Ally",
+                "Commander": "Next to Commander"
+            },
+            "SihedronGuardThunderstriker": {
+                "NavigationalSpellshape": {
+                    "Alteration": "If the next action the aeon guard uses is to Cast a Spell that has a range, increase that spell's range by 30 feet. In addition, if the spell requires an attack roll or a Reflex save, any targets of the spell that have lesser cover reduce the bonuses they gain from cover by 1 against the spell."
+                }
+            },
+            "Vorthuul": {
+                "QuantumDuality": {
+                    "AbsoluteTranquility": "Absolute Tranquility",
+                    "EverburningAgony": "Everburning Agony"
+                }
+            },
+            "WaywardWarp": {
+                "WarpField": {
+                    "Cosmic": "Cosmic",
+                    "Earth": "Earth",
+                    "Frozen": "Frozen",
+                    "Inferno": "Inferno",
+                    "Storm": "Storm",
+                    "Water": "Water"
+                }
+            }
+        },
+        "SpecificRule": {
+            "Android": {
+                "MachineSaboteur": {
+                    "Note": "The target becomes @UUID[Compendium.sf2e.conditions.Item.6A2QDy8wRGCVQsSd]{Glitching 1}."
+                }
+            },
+            "Astrazoan": {
+                "DigestiveOutburst": {
+                    "Label": "Stomach"
+                }
+            },
+            "Barathu": {
+                "AdaptativeLocomotion": {
+                    "Flippers": "Flippers",
+                    "HookedPseudopods": "Hooked Pseudopods",
+                    "Prompt": "Select an adaptation"
+                },
+                "ConvergentEvolution": {
+                    "Prompt": "Select a 5th-level or lower ancestry feat."
+                },
+                "ManifoldEvolution": {
+                    "Prompt": "Select a 17th-level or lower ancestry feat."
+                }
+            },
+            "CairnForm": {
+                "CriticalHit": "The target must succeed at a @Check[fortitude|against:class] or become @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1} for 1 round."
+            },
+            "Contemplative": {
+                "IntensifiedPsychicShock": {
+                    "ExtendedShock": "Extended Shock",
+                    "MindCrusher": "Mind Crusher",
+                    "PeerPressure": {
+                        "Label": "Peer Pressure",
+                        "Note": "Your psychic shock gains the arc trait, but it deals mental damage rather than electricity damage."
+                    },
+                    "PsychicWave": "Psychic Wave"
+                },
+                "Mindrender": {
+                    "Label": "Psychic Shock"
+                },
+                "OverwhelmingEgo": {
+                    "Label": "First Psychic Shock strike this round"
+                },
+                "Telepredict": {
+                    "Toggle": "Telepredict — Dealt mental damage"
+                }
+            },
+            "Corpsefolk": {
+                "BoneShards": {
+                    "Label": "Bone Shards"
+                }
+            },
+            "Dragonkin": {
+                "DragonkinBreath": {
+                    "Acid": "Acid (Corrosive)",
+                    "Bludgeoning": "Bludgeoning (Hammer)",
+                    "Cold": "Cold (Cryo)",
+                    "Electricity": "Electricity (Shock)",
+                    "Fire": "Fire (Flame)",
+                    "Piercing": "Piercing (Spear)",
+                    "Slashing": "Slashing (Knife)",
+                    "Sonic": "Sonic (Sonic)"
+                },
+                "DragonsTenacity": {
+                    "InflictsParalyzed": "Dragon's Tenacity — Effect makes you Paralyzed",
+                    "MagicEffect": "Dragon's Tenacity — Magic effect makes you Paralyzed"
+                },
+                "Moodscales": {
+                    "Modifier": "Moodscales — Against emotion effects",
+                    "Note": "If you roll a success on a saving throw against an emotion effect, you get a critical success instead."
+                },
+                "WeaponFamiliarity": {
+                    "AdvancedWeapons": "Advanced Dragonkin Weapons",
+                    "MartialWeapons": "Martial Dragonkin Weapons"
+                }
+            },
+            "Envoy": {
+                "CutEmDeep": {
+                    "Note": "When you successfully Demoralize the target of your @UUID[Compendium.sf2e.actions.Item.cmCtfURzpbzkxWsy]{Get 'Em!}, the target doesn't become immune to your further attempts to Demoralize them."
+                },
+                "Directive": {
+                    "LeadByExample": {
+                        "DescriptionAlteration": "When you use an act of leadership after issuing one or more envoy directives earlier that turn, you can choose one envoy directive you activated. You grant the lead by example benefits for that directive even if you didn't meet the usual requirements to lead by example. You can do this once per turn.",
+                        "Prompt": "Lead by Example?"
+                    }
+                },
+                "EffortlessInfluencer": {
+                    "Note": "<p>When you succeed at a check with Deception, Diplomacy, or Intimidation, allies within 60 feet who witnessed your success gain a +1 status bonus to the next check they attempt with that skill within 1 minute (or a +2 bonus if your check was a critical success).</p><p>@UUID[Compendium.sf2e.feat-effects.Item.ZQM4vfHEKgxvNJik]{Effect: Effortless Influencer}</p>"
+                },
+                "GetEm": {
+                    "LeadByExample": {
+                        "ToggleLabel": "Get Em! — Initial Lead by Example Strike"
+                    }
+                },
+                "HangInThere": {
+                    "CriticalSuccess": "The target gains temporary Hit Points equal to double their level plus your Charisma modifier. @UUID[Compendium.sf2e.feat-effects.Item.B4JhFkbk5WHmWcOZ]{Effect: Hang In There!}",
+                    "Prompt": "What proficiency DC was used?",
+                    "Success": "The target gains temporary Hit Points their level plus your Charisma modifier. @UUID[Compendium.sf2e.feat-effects.Item.B4JhFkbk5WHmWcOZ]{Effect: Hang In There!}"
+                },
+                "HiddenAgenda": {
+                    "ToggleLabel": "Save against thought-or-emotion-revealing effect"
+                },
+                "LeadershipStyle": {
+                    "Prompt": "Select a leadership style."
+                },
+                "PardonMe": {
+                    "Note": "When you successfully Tumble Through using Deception, the foe whose space you passed through is @UUID[Compendium.sf2e.conditions.Item.enA7BxAjBb7ns1iF]{Suppressed} until the end of its next turn."
+                },
+                "SavvyInfluencer": {
+                    "Note": "<p>The first time per day when you roll a natural 1 on a Deception, Diplomacy, or Intimidation check, you don't automatically reduce your degree of success (you get a critical failure only if your result is 10 lower than the DC).</p>"
+                },
+                "SmoothDiversions": {
+                    "Failure": "Creatures only become aware you were trying to trick them if you critically fail to Create a Diversion. Otherwise the creature assumes that your diversion was part of your regular bravado.",
+                    "Success": "When you succeed at an attempt to @UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]{Create a Diversion}, you can immediately @UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{Sneak} or Step as a free action."
+                },
+                "TakeEmAlive": {
+                    "ToggleLabel": "Take 'Em Alive — Add charisma to Strike damage"
+                }
+            },
+            "Equipment": {
+                "Augmentations": {
+                    "VenomSpur": {
+                        "Label": "Venom Spur"
+                    }
+                },
+                "CommUnit": {
+                    "Flashlight": "Comm Unit — Flashlight"
+                },
+                "Flashlight": {
+                    "Lit": "Flashlight Lit"
+                },
+                "ForceField": {
+                    "Advanced": "尝试一次@Check[flat|dc:19]检定。成功时，该重击变为普通命中。",
+                    "Elite": "尝试一次@Check[flat|dc:17]检定。成功时，该重击变为普通命中。",
+                    "Paragon": "尝试一次@Check[flat|dc:15]检定。成功时，该重击变为普通命中。",
+                    "Superior": "尝试一次@Check[flat|dc:18]检定。成功时，该重击变为普通命中。",
+                    "Tactical": "尝试一次@Check[flat|dc:20]检定。成功时，该重击变为普通命中。",
+                    "Ultimate": "尝试一次@Check[flat|dc:16]检定。成功时，该重击变为普通命中。"
+                }
             }
         }
     }

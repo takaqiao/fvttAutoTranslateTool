@@ -61,7 +61,7 @@
                 },
                 "Trick Item": {
                     "name": "巧取物品 Trick Item",
-                    "description": "<p>阿伯里丹进行宗教检定试图巧取法杖或卷轴，DC为上文所列物品巧取DC。</p>\n<hr />\n<p><strong>成功</strong> 在他回合的剩余时间，阿伯里丹可以以动作启动法杖或卷轴，如同正常使用。</p>\n<p><strong>失败</strong> 阿伯里丹本回合无法使用该物品或尝试再次巧取，但接下来的回合中可以再次尝试。</p>\n<p><strong>大失败</strong> 阿伯里丹无法使用该物品，在下次日出日常准备前也无法再次尝试巧取。</p>\n<hr />\n<p>阿伯里丹的巧取道具DC：</p>\n<ul>\n<li><strong>上等治疗法杖 Major Staff of Healing</strong> @Check[religion|dc:30]</li>\n<li><strong>目盲术卷轴 Scroll of Blindness</strong> @Check[religion|dc:20]</li>\n<li><strong>信念崩塌卷轴 Scroll of Crisis of Faith</strong> @Check[religion|dc:20]</li>\n<li><strong>治疗术卷轴 Scroll of Heal</strong> @Check[religion|dc:26]</li>\n<li><strong>焰击术 Scroll of Flame Strike</strong> @Check[religion|dc:26]</li>\n<li><strong>音鸣爆卷轴 Scroll of Sound Burst</strong> @Check[religion|dc:23]</li>\n</ul>"
+                    "description": "<p>阿伯里丹进行宗教检定试图巧取法杖或卷轴，DC为上文所列物品巧取DC。</p>\n<hr />\n<p><strong>成功</strong> 在他回合的剩余时间，阿伯里丹可以以动作启动法杖或卷轴，如同正常使用。</p>\n<p><strong>失败</strong> 阿伯里丹本回合无法使用该物品或尝试再次巧取，但接下来的回合中可以再次尝试。</p>\n<p><strong>大失败</strong> 阿伯里丹无法使用该物品，在下次日出每日准备前也无法再次尝试巧取。</p>\n<hr />\n<p>阿伯里丹的巧取道具DC：</p>\n<ul>\n<li><strong>上等治疗法杖 Major Staff of Healing</strong> @Check[religion|dc:30]</li>\n<li><strong>目盲术卷轴 Scroll of Blindness</strong> @Check[religion|dc:20]</li>\n<li><strong>信念崩塌卷轴 Scroll of Crisis of Faith</strong> @Check[religion|dc:20]</li>\n<li><strong>治疗术卷轴 Scroll of Heal</strong> @Check[religion|dc:26]</li>\n<li><strong>焰击术 Scroll of Flame Strike</strong> @Check[religion|dc:26]</li>\n<li><strong>音鸣爆卷轴 Scroll of Sound Burst</strong> @Check[religion|dc:23]</li>\n</ul>"
                 },
                 "equipment-Key Ring": {
                     "name": "钥匙串 Key Ring",
@@ -111,7 +111,7 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "斯特里戈伊弱点 Strigoi Weaknesses",
-                    "description": "<p>所有斯特里戈伊都有以下弱点。</p>\n<ul>\n<li><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]可以注意到这一点。</li>\n<li><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。法术如@UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</li>\n<li><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p></li></ul>"
                 },
                 "Create Spawn": {
                     "name": "创造子嗣 Create Spawn",
@@ -123,7 +123,7 @@
                 },
                 "Drink Essence": {
                     "name": "吸吮精华 Drink Essence",
-                    "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]或自愿的生物身处斯特里戈伊的触及范围内</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，斯特里戈伊回复@Damage[21[healing]]，多余的则会变为临时生命。从已经获得流失或呆滞状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中更小者增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
+                    "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]或自愿的生物身处斯特里戈伊的触及范围内</p><hr /><p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，斯特里戈伊回复@Damage[21[healing]]，多余的则会变为临时生命。从已经获得流失或呆滞状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中更小者增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
                 },
                 "Thassilonian Necromancer": {
                     "name": "瑟西隆死灵法师 Thassilonian Necromancer",
@@ -136,6 +136,10 @@
                 "Void Healing": {
                     "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Create Servitor": {
+                    "name": "Create Servitor",
+                    "description": "<p>If a creature dies after being reduced to 0 HP by Drink Essence or Domain of Dusk, the vampire can turn this victim into a vampire by donating some of its own blood to the victim and burying the victim in earth for 3 nights.</p>\n<p>If the new vampire is lower level than its creator, it is under the creator's control. If a vampire controls too many spawn at once (as determined by the GM), strong-willed spawn can free themselves by succeeding at a @Check[will|against:will|name:Escape Thralldom] saving throw against the vampire's Will DC.</p>\n<p>A victim that is 8th level or higher becomes a strigoi servant, while a lower-level victim instead becomes a moroi vampire</p>"
                 }
             },
             "hp": "寝于棺木，快速治疗15，虚能治疗",
@@ -160,7 +164,7 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "斯特里戈伊弱点 Strigoi Weaknesses",
-                    "description": "<p>所有斯特里戈伊都有以下弱点。</p>\n<ul>\n<li><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]可以注意到这一点。</li>\n<li><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。法术如@UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</li>\n<li><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p></li></ul>"
                 },
                 "Blasphemous Invocation": {
                     "name": "亵渎祈祷 Blasphemous Invocation",
@@ -224,7 +228,7 @@
                 },
                 "Profane Paralysis": {
                     "name": "渎神麻痹 Profane Paralysis",
-                    "description": "<p>任何被伊比里克攻击命中的非精灵的活物都必须进行@Check[fortitude|dc:33]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，自身每回合结束时可以再次尝试豁免，每次豁免DC下降1。</p>"
+                    "description": "<p>任何被伊比里克攻击命中的非精灵的活物都必须进行@Check[fortitude|dc:33|options:inflicts:slowed,inflicts:paralyzed]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，自身每回合结束时可以再次尝试豁免，每次豁免DC下降1。</p>"
                 }
             },
             "prototypeToken": {
@@ -261,7 +265,7 @@
                 },
                 "Blood Feast": {
                     "name": "鲜血盛宴 Blood Feast",
-                    "description": "<p>如果一个生物受到尖牙打击的伤害，必须通过@Check[fortitude|dc:33]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败为力竭1加@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}）。躯壳进入@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态1轮，额外动作只能用于使用尖牙打击正在承受持续流血伤害的生物。躯壳后续造成的伤害，豁免失败则增加1级力竭，最多力竭4。</p>"
+                    "description": "<p>如果一个生物受到尖牙打击的伤害，必须通过@Check[fortitude|dc:33|options:inflicts:enfeebled,inflicts:drained]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败为力竭1加@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}）。躯壳进入@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态1轮，额外动作只能用于使用尖牙打击正在承受持续流血伤害的生物。躯壳后续造成的伤害，豁免失败则增加1级力竭，最多力竭4。</p>"
                 },
                 "Void Healing": {
                     "name": "虚能治疗 Void Healing",
@@ -360,7 +364,7 @@
                 },
                 "Arcane Spellcaster": {
                     "name": "奥术施法者 Arcane Spellcaster",
-                    "description": "<p>只要洛萨克特有一个以此形式准备的奥术法术，所有的奥术法术都视作在他的法术列表中，这让他能够激活卷轴、魔杖和法杖等道具。他能用自己的奥术法术位来为威力法杖再充能，如同准备施法者。他在1到8环级各有一个法术位来准备奥术法术，并能在日常准备时在这些法术位上准备任何常见奥术法术。上表列出的法术代表了他最常准备的那些，但只要有时间，他能根据手头的任务需要来调整。</p>"
+                    "description": "<p>只要洛萨克特有一个以此形式准备的奥术法术，所有的奥术法术都视作在他的法术列表中，这让他能够激活卷轴、魔杖和法杖等道具。他能用自己的奥术法术位来为威力法杖再充能，如同准备施法者。他在1到8环级各有一个法术位来准备奥术法术，并能在每日准备时在这些法术位上准备任何常见奥术法术。上表列出的法术代表了他最常准备的那些，但只要有时间，他能根据手头的任务需要来调整。</p>"
                 },
                 "Scholastic Masquerade": {
                     "name": "学术伪装 Scholastic Masquerade",
@@ -391,7 +395,7 @@
             "items": {
                 "Slicing Shadows": {
                     "name": "阴影切割 Slicing Shadows",
-                    "description": "<p><strong>触发</strong> 矛盾引擎受到伤害，或生物在解除过程中检定失败</p>\n<hr />\n<p><strong>效果</strong> 匣子侧面的板条打开，发射出如刀刃般锋利的冰冷的黑暗，横扫整个区域<strong>C5</strong>，并向南延伸10尺到区域<strong>C4</strong>；该区域内没有阴影特性的生物均承受@Damage[5d6[slashing]]伤害和@Damage[5d6[cold]]伤害（@Check[reflex|dc:34|basic]豁免）。</p>"
+                    "description": "<p><strong>触发</strong> 矛盾引擎受到伤害，或生物在解除过程中检定失败</p>\n<hr />\n<p><strong>效果</strong> 匣子侧面的板条打开，发射出如刀刃般锋利的冰冷的黑暗，横扫整个区域<strong>C5</strong>，并向南延伸10尺到区域<strong>C4</strong>；该区域内没有阴影特征的生物均承受@Damage[5d6[slashing]]伤害和@Damage[5d6[cold]]伤害（@Check[reflex|dc:34|basic]豁免）。</p>"
                 }
             },
             "prototypeToken": {
@@ -411,7 +415,7 @@
                 },
                 "Profane Paralysis": {
                     "name": "渎神麻痹 Profane Paralysis",
-                    "description": "<p>任何被渎神食尸鬼攻击命中的非精灵的活物都必须进行@Check[fortitude|dc:29]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，自身每回合结束时可以再次尝试豁免，每次豁免DC下降1。</p>"
+                    "description": "<p>任何被渎神食尸鬼攻击命中的非精灵的活物都必须进行@Check[fortitude|dc:29|options:inflicts:slowed,inflicts:paralyzed]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，自身每回合结束时可以再次尝试豁免，每次豁免DC下降1。</p>"
                 },
                 "Profane Whispers": {
                     "name": "渎神低语 Profane Whispers",
@@ -451,11 +455,11 @@
                 },
                 "Eerie Flexibility": {
                     "name": "怪异柔韧 Eerie Flexibility",
-                    "description": "<p>猩红行者能如一个中型生物一般通过狭窄的空间。当挤入时，它能以全速移动。</p>"
+                    "description": "<p>猩红行者能如一个中型生物一般通过狭窄的空间。当@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]时，它能以全速移动。</p>"
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>被猩红行者的触须打击命中的非猩红行者的活物必须进行一次强韧@Check[fortitude|dc:29]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]1轮，并在恢复后获得缓慢1，持续1轮。</p>\n<p><strong>大失败</strong> 如同失败，但麻痹不会在1轮后自动结束；该生物可以在自己的每个回合结束时尝试一次新的豁免来结束麻痹，每次此豁免的DC都会递减1点。</p>\n<hr />\n<p><em>注意：Paizo未给此能力设置DC，此处DC为根据游戏掌控者指南中按生物等级设置的适中DC。</em></p>"
+                    "description": "<p>被猩红行者的触须打击命中的非猩红行者的活物必须进行一次@Check[fortitude|dc:29|options:inflicts:slowed,inflicts:paralyzed]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>失败</strong> 该生物@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]1轮，并在恢复后获得缓慢1，持续1轮。</p>\n<p><strong>大失败</strong> 如同失败，但麻痹不会在1轮后自动结束；该生物可以在自己的每个回合结束时尝试一次新的豁免来结束麻痹，每次此豁免的DC都会递减1点。</p>\n<hr />\n<p><em>注意：Paizo未给此能力设置DC，此处DC为根据游戏掌控者指南中按生物等级设置的适中DC。</em></p>"
                 },
                 "Constant Spells": {
                     "name": "常驻法术 Constant Spells",
@@ -472,7 +476,7 @@
         },
         "Strigoi Progenitor": {
             "name": "斯特里戈伊始祖 Strigoi Progenitor",
-            "publicNotes": "<p>最强大的斯特里戈伊是那些在很久以前被有意召唤进自愿的宿主体内的家伙。由于这个过程的仪式已经随着时间的流逝而佚失，如今几乎没有几个斯特里戈伊始祖存在。那几个还存在的，它们的“生命”能够追溯到一万多年前的瑟西隆、阿兹兰特（Azlant）、或是类似的远古帝国。一名斯特里戈伊始祖或许看上去还有着生命的活力，但是仔细观察就会发现它们的尖牙、极微弱的腐烂气味、以及它们的影子那奇怪而令人不安的微移。在其生前，下面这个斯特里戈伊始祖是符文领主索珊统治的国度尤瑞斯尼亚一位强大的先知和顾问。</p>\n<hr />\n<p>所有的吸血鬼中，最古老的当属斯特里戈伊。它们现世的时间比诺斯费拉图（nosferatu）还早，并将莫罗伊（moroi）视作一群稚嫩的孩子。然而，它们的起源在时间的蹂躏下消失的无影无踪，以至于时至今日没多少人听说过它们，更没多少人直到它们的真实本性。许多最古老的吸血鬼传说都能追溯到斯特里戈伊，而几乎所有其他种类的吸血鬼所具有的特征都源于这些强大的古老生物。</p>\n<p>斯特里戈伊的真实形态是原生于影界/阴影位面（Shadow Plane）的无实体生物，无法与物质世界互动，只作为一种纯粹的恶意之力存在。当这股恶意通过古老的仪式被邀请进一具肉身之后，斯特里戈伊就会变得更为危险。该仪式所需的这一要求——一名生者必须依照自己的自由意志进行仪式，将斯特里戈伊吸入自己的灵魂中——很可能就是莫罗伊（moroi）在没有得到邀请之前不得跨入任何家门的原因。</p>\n<p>有些神话故事指认厄伽图娅（Urgathoa）创造了那允许施法者转变为斯特里戈伊的仪式，有的则认为这方法是由祖拉（Zura，恶魔领主）的邪教传播的。不管源头为何，这个失传已久的仪式并不是一扇通往力量的大门，而是一个陷阱，让斯特里戈伊栖息在曾经活着的宿主的阴影和灵魂中。这样，它们就找到了在有血有肉的世界生存的方法。让一只斯特里戈伊栖息于一个活物的影子会导致该宿主染病并迅速死亡，在那之后斯特里戈伊会与宿主的灵魂结合，并与这具躯体融为一体。它们中的第一个就是这样入侵了生者的世界，第一批吸血鬼就是这样行走于黑夜之中。</p>",
+            "publicNotes": "<p>最强大的斯特里戈伊是那些在很久以前被有意召唤进自愿的宿主体内的家伙。由于这个过程的仪式已经随着时间的流逝而佚失，如今几乎没有几个斯特里戈伊始祖存在。那几个还存在的，它们的“生命”能够追溯到一万多年前的瑟西隆、阿兹兰特（Azlant）、或是类似的远古帝国。一名斯特里戈伊始祖或许看上去还有着生命的活力，但是仔细观察就会发现它们的尖牙、极微弱的腐烂气味、以及它们的影子那奇怪而令人不安的微移。在其生前，下面这个斯特里戈伊始祖是符文领主索珊统治的国度尤瑞斯尼亚一位强大的先知和顾问。</p>\n<hr />\n<p>所有的吸血鬼中，最古老的当属斯特里戈伊。它们现世的时间比诺斯费拉图（nosferatu）还早，并将莫罗伊（moroi）视作一群稚嫩的孩子。然而，它们的起源在时间的蹂躏下消失的无影无踪，以至于时至今日没多少人听说过它们，更没多少人直到它们的真实本性。许多最古老的吸血鬼传说都能追溯到斯特里戈伊，而几乎所有其他种类的吸血鬼所具有的特征都源于这些强大的古老生物。</p>\n<p>斯特里戈伊的真实形态是原生于影界/阴影位面（Shadow Plane）的无实体生物，无法与物质世界互动，只作为一种纯粹的恶意之力存在。当这股恶意通过古老的仪式被邀请进一具肉身之后，斯特里戈伊就会变得更为危险。该仪式所需的这一要求——一名生者必须依照自己的自由意志进行仪式，将斯特里戈伊吸入自己的灵魂中——很可能就是莫罗伊（moroi）在没有得到邀请之前不得跨入任何家门的原因。</p>\n<p>有些神话故事指认厄加图娅（Urgathoa）创造了那允许施法者转变为斯特里戈伊的仪式，有的则认为这方法是由祖拉（Zura，恶魔领主）的邪教传播的。不管源头为何，这个失传已久的仪式并不是一扇通往力量的大门，而是一个陷阱，让斯特里戈伊栖息在曾经活着的宿主的阴影和灵魂中。这样，它们就找到了在有血有肉的世界生存的方法。让一只斯特里戈伊栖息于一个活物的影子会导致该宿主染病并迅速死亡，在那之后斯特里戈伊会与宿主的灵魂结合，并与这具躯体融为一体。它们中的第一个就是这样入侵了生者的世界，第一批吸血鬼就是这样行走于黑夜之中。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -495,7 +499,7 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "斯特里戈伊弱点 Strigoi Weaknesses",
-                    "description": "<p>所有斯特里戈伊都有以下弱点。</p>\n<ul>\n<li><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]可以注意到这一点。</li>\n<li><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。法术如@UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</li>\n<li><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
                 },
                 "Create Spawn": {
                     "name": "创造子嗣 Create Spawn",
@@ -520,6 +524,10 @@
                 "Void Healing": {
                     "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "(Vampire, Strigoi Progenitor) Domain of Dusk": {
+                    "name": "(Vampire, Strigoi Progenitor) Domain of Dusk",
+                    "description": "<p>With a wave of their hand, the strigoi calls forth vile ruination from the surrounding shadows, causing coils of darkness and shadowy bats, rats, and wolves to lash out at living targets in a @Template[type:emanation|distance:30]. Living creatures in this area take @Damage[floor(1 + @actor.level/2)d6[void]|options:area-damage] with a @Check[fortitude|dc:31|basic|options:area-effect,inflicts:dazzled,inflicts:blinded] save against the DC of the strigoi's level. A creature that fails this save is also @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} by the darkness for 1 round (or @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round and then dazzled for 1 round on a critical failure).</p>"
                 }
             },
             "prototypeToken": {
@@ -529,7 +537,7 @@
         },
         "Strigoi Servant": {
             "name": "斯特里戈伊下仆 Strigoi Servant",
-            "publicNotes": "<p>所有的吸血鬼中，最古老的当属斯特里戈伊。它们现世的时间比诺斯费拉图（nosferatu）还早，并将莫罗伊（moroi）视作一群稚嫩的孩子。然而，它们的起源在时间的蹂躏下消失的无影无踪，以至于时至今日没多少人听说过它们，更没多少人直到它们的真实本性。许多最古老的吸血鬼传说都能追溯到斯特里戈伊，而几乎所有其他种类的吸血鬼所具有的特征都源于这些强大的古老生物。</p>\n<p>斯特里戈伊的真实形态是原生于影界/阴影位面（Shadow Plane）的无实体生物，无法与物质世界互动，只作为一种纯粹的恶意之力存在。当这股恶意通过古老的仪式被邀请进一具肉身之后，斯特里戈伊就会变得更为危险。该仪式所需的这一要求——一名生者必须依照自己的自由意志进行仪式，将斯特里戈伊吸入自己的灵魂中——很可能就是莫罗伊（moroi）在没有得到邀请之前不得跨入任何家门的原因。</p>\n<p>有些神话故事指认厄伽图娅（Urgathoa）创造了那允许施法者转变为斯特里戈伊的仪式，有的则认为这方法是由祖拉（Zura，恶魔领主）的邪教传播的。不管源头为何，这个失传已久的仪式并不是一扇通往力量的大门，而是一个陷阱，让斯特里戈伊栖息在曾经活着的宿主的阴影和灵魂中。这样，它们就找到了在有血有肉的世界生存的方法。让一只斯特里戈伊栖息于一个活物的影子会导致该宿主染病并迅速死亡，在那之后斯特里戈伊会与宿主的灵魂结合，并与这具躯体融为一体。它们中的第一个就是这样入侵了生者的世界，第一批吸血鬼就是这样行走于黑夜之中。</p>",
+            "publicNotes": "<p>所有的吸血鬼中，最古老的当属斯特里戈伊。它们现世的时间比诺斯费拉图（nosferatu）还早，并将莫罗伊（moroi）视作一群稚嫩的孩子。然而，它们的起源在时间的蹂躏下消失的无影无踪，以至于时至今日没多少人听说过它们，更没多少人直到它们的真实本性。许多最古老的吸血鬼传说都能追溯到斯特里戈伊，而几乎所有其他种类的吸血鬼所具有的特征都源于这些强大的古老生物。</p>\n<p>斯特里戈伊的真实形态是原生于影界/阴影位面（Shadow Plane）的无实体生物，无法与物质世界互动，只作为一种纯粹的恶意之力存在。当这股恶意通过古老的仪式被邀请进一具肉身之后，斯特里戈伊就会变得更为危险。该仪式所需的这一要求——一名生者必须依照自己的自由意志进行仪式，将斯特里戈伊吸入自己的灵魂中——很可能就是莫罗伊（moroi）在没有得到邀请之前不得跨入任何家门的原因。</p>\n<p>有些神话故事指认厄加图娅（Urgathoa）创造了那允许施法者转变为斯特里戈伊的仪式，有的则认为这方法是由祖拉（Zura，恶魔领主）的邪教传播的。不管源头为何，这个失传已久的仪式并不是一扇通往力量的大门，而是一个陷阱，让斯特里戈伊栖息在曾经活着的宿主的阴影和灵魂中。这样，它们就找到了在有血有肉的世界生存的方法。让一只斯特里戈伊栖息于一个活物的影子会导致该宿主染病并迅速死亡，在那之后斯特里戈伊会与宿主的灵魂结合，并与这具躯体融为一体。它们中的第一个就是这样入侵了生者的世界，第一批吸血鬼就是这样行走于黑夜之中。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -544,7 +552,7 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "斯特里戈伊弱点 Strigoi Weaknesses",
-                    "description": "<p>所有斯特里戈伊都有以下弱点。</p>\n<ul>\n<li><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]可以注意到这一点。</li>\n<li><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。法术如@UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</li>\n<li><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
                 },
                 "Drink Essence": {
                     "name": "吸吮精华 Drink Essence",

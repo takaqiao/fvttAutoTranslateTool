@@ -93,7 +93,7 @@
             "items": {
                 "Consume Tattooed Flesh": {
                     "name": "啃食刺青尸体 Consume Tattooed Flesh",
-                    "description": "<p><strong>需求</strong> 阿勒与一块刺青的肉或刚死亡一小时内的生物尸体相邻；</p>\n<p>阿勒吞食一大块尸体并恢复@Damage[4d6[healing]]生命值，如果吞食刺青的肉，他还会额外获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened 1}效果，并且能用此动作进行爪抓或啃咬打击。</p>\n<p>阿勒在[[/gmr 1d4 #Recharge Consume Flesh]]{1d4轮}内无法再次吞食尸体（或肉），并且他身上只携带有一块刺青的肉。</p>"
+                    "description": "<p><strong>需求</strong> 阿勒与一块刺青的肉或刚死亡一小时内的生物尸体相邻；</p>\n<p>阿勒吞食一大块尸体并恢复@Damage[4d6[healing]]生命值，如果吞食刺青的肉，他还会额外获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]效果，并且能用此动作进行爪抓或啃咬打击。</p>\n<p>阿勒在[[/gmr 1d4 #Recharge Consume Flesh]]{1d4轮}内无法再次吞食尸体（或肉），并且他身上只携带有一块刺青的肉。</p>"
                 },
                 "Ghoul Fever": {
                     "name": "食尸鬼热 Ghoul Fever",
@@ -101,7 +101,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到阿勒的攻击时必须成功通过@Check[fortitude|dc:22]失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到阿勒的攻击时必须成功通过@Check[fortitude|dc:22|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "name": "迅捷跳跃 Swift Leap",
@@ -134,7 +134,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到奥雷格尔的攻击时必须成功通过@Check[fortitude|dc:20]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到奥雷格尔的攻击时必须成功通过@Check[fortitude|dc:20|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Sneak Attack": {
                     "name": "偷袭 Sneak Attack",
@@ -369,7 +369,7 @@
                 },
                 "Haunted Lighthouse": {
                     "name": "作祟灯塔 Haunted Lighthouse",
-                    "description": "<p><strong>频率</strong> 每10分钟1次；</p>\n<hr />\n<p><strong>效果</strong> 贝科拉将她的存在延伸到凄凉灯塔的最低三层，直到她的下回合结束。她能得到@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.9qV49KjZujZnSp6w]{全域视野 All-Around Vision}的好处，并且能以该区域的任何表面作为源点进行幽灵之手打击或使用特殊能力。</p>"
+                    "description": "<p><strong>频率</strong> 每10分钟一次；</p>\n<hr />\n<p><strong>效果</strong> 贝科拉将她的存在延伸到凄凉灯塔的最低三层，直到她的下回合结束。她能得到@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.9qV49KjZujZnSp6w]{全域视野 All-Around Vision}的好处，并且能以该区域的任何表面作为源点进行幽灵之手打击或使用特殊能力。</p>"
                 },
                 "Quickened Casting": {
                     "name": "迅捷施法 Quickened Casting",
@@ -622,7 +622,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到溃烂教徒的攻击时必须成功通过@Check[fortitude|dc:20]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.6uEgoh53GbXuHpTF]{麻痹 Paralyzed}。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到溃烂教徒的攻击时必须成功通过@Check[fortitude|dc:20|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "name": "迅捷跳跃 Swift Leap",
@@ -800,7 +800,7 @@
                 },
                 "Rusty Chains": {
                     "name": "锈蚀锁链 Rusty Chains",
-                    "description": "<p>当克拉托尼斯以她的刺链伤害一个生物，包括因为刺链穿刺的持续性流血造成的伤害时，该生物都必须通过@Check[fortitude|dc:21|traits:disease,virulent]豁免检定，否则会感染一种被称为“链魔破伤风”的严重疾病。</p>\n<hr /><p>链魔有时候会让它们的铁链携带危险的疾病，例如这种致命的破伤风。破伤风会导致肌肉僵硬、痉挛，其强度足以折断骨头，最终导致死亡。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:21|traits:disease,virulent]</p>\n<hr />\n<p><strong>潜伏期</strong> [[/gmr 1d4 #Velstrac Tetanus Onset]]{1d4天}</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1星期）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
+                    "description": "<p>当克拉托尼斯以她的刺链伤害一个生物，包括因为刺链穿刺的持续性流血造成的伤害时，该生物都必须通过@Check[fortitude|dc:21|traits:disease,virulent]豁免检定，否则会感染一种被称为“链魔破伤风”的严重疾病。</p>\n<hr /><p>链魔有时候会让它们的铁链携带危险的疾病，例如这种致命的破伤风。破伤风会导致肌肉僵硬、痉挛，其强度足以折断骨头，最终导致死亡。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:21|traits:disease,virulent]</p>\n<hr />\n<p><strong>潜伏期</strong> [[/gmr 1d4 #Velstrac Tetanus Onset]]{1d4天}</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1} (1周）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}并且无法说话（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]（1天）</p>\n<p><strong>阶段4</strong> 死亡</p>"
                 },
                 "Reactive Strike": {
                     "name": "Reactive Strike",
@@ -1316,7 +1316,7 @@
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
-                    "description": "<p>杜拉克可以释放其随意法术任意多次，而无需花费法术位。</p>"
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 }
             },
             "prototypeToken": {
@@ -1409,7 +1409,7 @@
                 },
                 "Innocuous": {
                     "name": "无害 Innocuous",
-                    "description": "<p>对于陷入困惑状态的生物来说，闪火的外观看起来会变得很奇妙。陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}的生物不会把闪火作为攻击目标，除非该生物在过去的24小时内被闪火的放电攻击伤害过。</p>"
+                    "description": "<p>对于陷入困惑状态的生物来说，闪火的外观看起来会变得很奇妙。陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]的生物不会把闪火作为攻击目标，除非该生物在过去的24小时内被闪火的放电攻击伤害过。</p>"
                 },
                 "Magic Immunity": {
                     "name": "魔法免疫 Magic Immunity",
@@ -1421,7 +1421,7 @@
                 },
                 "Flicker": {
                     "name": "闪动 Flicker",
-                    "description": "<p>闪火在空中围绕着一个相邻生物头部的飞行，留下令人眼花缭乱的残影。</p>\n<p>生物必须通过@Check[will|dc:18]检定，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮（大失败则困惑2轮）。如果大成功，目标在24小时内对该能力临时免疫。</p>"
+                    "description": "<p>闪火在空中围绕着一个相邻生物头部的飞行，留下令人眼花缭乱的残影。</p>\n<p>生物必须通过@Check[will|dc:18|options:inflicts:confused]检定，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮（大失败则困惑2轮）。如果大成功，目标在24小时内对该能力临时免疫。</p>"
                 }
             },
             "prototypeToken": {
@@ -1562,7 +1562,7 @@
                 },
                 "Show the Looming Moon": {
                     "name": "展现徘徊之月 Show the Looming Moon",
-                    "description": "<p><strong>需求</strong> 格罗图斯烛火@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}；</p>\n<hr />\n<p><strong>效果</strong> 格罗图斯烛火结束隐形并闪烁冰冷的光辉。20尺内能看见格罗图斯烛火的生物必须通过@Check[fortitude|dc:24|traits:concentrate]豁免，否则@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮（大失败1分钟）。</p>"
+                    "description": "<p><strong>需求</strong> 格罗图斯烛火@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}；</p>\n<hr />\n<p><strong>效果</strong> 格罗图斯烛火结束隐形并闪烁冰冷的光辉。@Template[emanation|distance:20]内能看见格罗图斯烛火的生物必须通过@Check[fortitude|dc:24|options:area-effect,inflicts:dazzled]豁免，否则@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮（大失败1分钟）。</p>"
                 }
             },
             "prototypeToken": {
@@ -1651,7 +1651,7 @@
                 },
                 "Infused Items": {
                     "name": "灌注物品 Infused Items",
-                    "description": "<p>贾法基携带以下灌注物品：2瓶@UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]{中等强酸瓶 Moderate Acid Flasks}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.97QyNEOAyYLdGaYc]{中等瓶装闪电 Moderate Bottled Lightnings}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.qpzL9UnTi4cDhy6J]{中等认知突变药剂 Moderate Cognitive Mutagens}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]{次等生命灵药 Lesser Elixirs of Life}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.Ax8XcBd0rRd1Z7hN]{中等雾化灵药 Moderate Mistform Elixirs}，2剂@UUID[Compendium.pf2e.equipment-srd.Item.WL4O32qFifxnMj0H]{双足飞龙毒 Wyvern Poison}（其中一剂已经涂在了细剑上）。这些灌注物品存在24小时，或直到贾法基下次进行日常准备。</p>"
+                    "description": "<p>贾法基携带以下灌注物品：2瓶@UUID[Compendium.pf2e.equipment-srd.Item.SgtqZxt26BdjUmEB]{中等强酸瓶 Moderate Acid Flasks}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.97QyNEOAyYLdGaYc]{中等瓶装闪电 Moderate Bottled Lightnings}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.qpzL9UnTi4cDhy6J]{中等认知突变药剂 Moderate Cognitive Mutagens}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.TZUskLT7yvP7N2co]{次等生命灵药 Lesser Elixirs of Life}，2瓶@UUID[Compendium.pf2e.equipment-srd.Item.Ax8XcBd0rRd1Z7hN]{中等雾化灵药 Moderate Mistform Elixirs}，2剂@UUID[Compendium.pf2e.equipment-srd.Item.WL4O32qFifxnMj0H]{双足飞龙毒 Wyvern Poison}（其中一剂已经涂在了细剑上）。这些灌注物品存在24小时，或直到贾法基下次进行每日准备。</p>"
                 },
                 "Command Confusion": {
                     "name": "命令困惑 Command Confusion",
@@ -1659,7 +1659,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:23]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮；如果成功，该生物对此临时免疫1分钟。</p>\n<p>贾法基能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:23|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。</p>\n<p>贾法基能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -1691,6 +1691,14 @@
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "equipment-Round Key": {
+                    "name": "Round Key",
+                    "description": "<p>This unusual key has a round shaft tipped with several teeth of varying length.</p>"
+                },
+                "equipment-Four-pronged Key": {
+                    "name": "Four-pronged Key",
+                    "description": "<p>This elaborate key has a four-pronged design.</p>"
                 }
             },
             "allSaves": "对魔法的豁免+1状态加值",
@@ -1907,7 +1915,7 @@
         },
         "Mister Beak": {
             "name": "喙先生 Mister Beak",
-            "publicNotes": "<p>缚魂娃娃是怪诞的人体模型或娃娃，被灌注了一小片已故凡人的灵魂。这些小小的构装体是由于各种各样的原因被创造出来的——比如说作为同伴或仆人——但是他们的自由意志意味着它们对于他们的创造者并非必然服从。法莱斯玛的信徒常常憎恶缚魂娃娃，认为这是对灵魂自然循环的扭曲，而墓地女士的崇拜者乐意看到缚魂偶的破灭而不考虑其阵营，会将复灭缚魂偶作为对伟大彼岸的重要服务。在一系列缚魂构装体中，缚魂娃娃的制造是最简单的，这些构装体包括人形的缚魂人偶，强大的缚魂躯壳，和作为卫兵的缚魂兵马俑。如果娃娃的灵魂提供者是邪恶的，并且非自愿，则它可以抵抗这个过程，通过一次意志检定来对抗创造者的制造 DC，如果不能阻止灵魂提供者的死亡，则会毁掉娃娃。如果灵魂的提供者是非邪恶的，则它死前必须自愿提供灵魂。</p>\n<p>冒险者遇到的缚魂娃娃通常是某种类型的守护者；虽然它们尺寸很小，但是由于灵魂碎片的力量，它们的拳头比想象中更为危险。此外，根据娃娃的阵营不同，它还能赋予娃娃一个独特的异能法术。由于他们的自主意识和卓越的智能，它们的创造者往往会让它们管理更强大但无心智的构装体，例如魔像（golems），这让这些娃娃能掌握远超自身实力的防御能力。虽然缚魂娃娃包包含一名刚死不久的人的一小部分灵魂，但其实这不影响死者复活，或直接前往来世。这种灵魂提取的过程对活人来说则是致命的，尽管有传言说，有一种更加昂贵的方法，可以让活人捐献灵魂碎片而不受任何影响。</p>\n<p>灵魂碎片会注入一个镶嵌在娃娃胸部或脖子的灵魂聚焦宝石（硬度10）。灵魂碎片并非一成不变的，娃娃会从初始状态开始不断学习，这意味着它的性格和能力可以改变，可能会变得更像灵魂提供者，也可能在自己的道路上越走越远。即使缚魂娃娃被摧毁，它的灵魂聚焦宝石也能保留娃娃的记忆。如果被摧毁的缚魂娃娃的灵魂聚焦宝石是完好的，那么它可以被一些精于缚魂操作的人重新放置到一个新娃娃的身体里，通过这种方法可以很有效的让缚魂娃娃重生。</p>",
+            "publicNotes": "<p>缚魂娃娃是怪诞的人体模型或娃娃，被灌注了一小片已故凡人的灵魂。这些小小的构装体是由于各种各样的原因被创造出来的——比如说作为同伴或仆人——但是他们的自由意志意味着它们对于他们的创造者并非必然服从。法莱斯玛的信徒常常憎恶缚魂娃娃，认为这是对灵魂自然循环的扭曲，而墓土女士的崇拜者乐意看到缚魂偶的破灭而不考虑其阵营，会将复灭缚魂偶作为对伟大彼岸的重要服务。在一系列缚魂构装体中，缚魂娃娃的制造是最简单的，这些构装体包括人形的缚魂人偶，强大的缚魂躯壳，和作为卫兵的缚魂兵马俑。如果娃娃的灵魂提供者是邪恶的，并且非自愿，则它可以抵抗这个过程，通过一次意志检定来对抗创造者的制造 DC，如果不能阻止灵魂提供者的死亡，则会毁掉娃娃。如果灵魂的提供者是非邪恶的，则它死前必须自愿提供灵魂。</p>\n<p>冒险者遇到的缚魂娃娃通常是某种类型的守护者；虽然它们尺寸很小，但是由于灵魂碎片的力量，它们的拳头比想象中更为危险。此外，根据娃娃的阵营不同，它还能赋予娃娃一个独特的异能法术。由于他们的自主意识和卓越的智能，它们的创造者往往会让它们管理更强大但无心智的构装体，例如魔像，这让这些娃娃能掌握远超自身实力的防御能力。虽然缚魂娃娃包包含一名刚死不久的人的一小部分灵魂，但其实这不影响死者复活，或直接前往来世。这种灵魂提取的过程对活人来说则是致命的，尽管有传言说，有一种更加昂贵的方法，可以让活人捐献灵魂碎片而不受任何影响。</p>\n<p>灵魂碎片会注入一个镶嵌在娃娃胸部或脖子的灵魂聚焦宝石（硬度10）。灵魂碎片并非一成不变的，娃娃会从初始状态开始不断学习，这意味着它的性格和能力可以改变，可能会变得更像灵魂提供者，也可能在自己的道路上越走越远。即使缚魂娃娃被摧毁，它的灵魂聚焦宝石也能保留娃娃的记忆。如果被摧毁的缚魂娃娃的灵魂聚焦宝石是完好的，那么它可以被一些精于缚魂操作的人重新放置到一个新娃娃的身体里，通过这种方法可以很有效的让缚魂娃娃重生。</p>",
             "blurb": "变体缚魂娃娃",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2147,7 +2155,7 @@
                 },
                 "Consume Masterpiece": {
                     "name": "啃食杰作 Consume Masterpiece",
-                    "description": "<p><strong>需求</strong> 纳卡扎林与<strong>C34</strong>区域内腐烂的贝科拉塑像相邻；</p>\n<hr />\n<p><strong>效果</strong> 纳卡扎林从雕像上吞食一大块腐肉，恢复@Damage[3d6[healing]]生命值，并且获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened 1}，持续1轮。她只能使用此额外动作来进行啃咬打击或施法。</p>\n<p>她每天只能使用一次啃食杰作能力。</p>"
+                    "description": "<p><strong>需求</strong> 纳卡扎林与<strong>C34</strong>区域内腐烂的贝科拉塑像相邻</p>\n<hr />\n<p><strong>效果</strong> 纳卡扎林从雕像上吞食一大块腐肉，恢复@Damage[3d6[healing]]生命值，并且获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]，持续1轮。她只能使用此额外动作来进行啃咬打击或施法。</p>\n<p>她每天只能使用一次啃食杰作能力。</p>"
                 },
                 "Ghoul Fever": {
                     "name": "食尸鬼热 Ghoul Fever",
@@ -2155,7 +2163,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到纳卡扎林的攻击时必须成功通过@Check[fortitude|dc:22]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到纳卡扎林的攻击时必须成功通过@Check[fortitude|dc:22|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "name": "迅捷跳跃 Swift Leap",
@@ -2185,7 +2193,7 @@
                 },
                 "Spell Reflection": {
                     "name": "法术反弹 Spell Reflection",
-                    "description": "<p><strong>触发</strong> 玻璃魔像被法术作为目标。</p>\n<hr />\n<p><strong>效果</strong> 玻璃魔像将法术反弹给施法者。它尝试1次@Check[acrobatics]检定对法术进行反制。如果成功反制该法术，效果会反噬施法者自己。</p>"
+                    "description": "<p><strong>触发</strong> 玻璃魔像被法术作为目标。</p>\n<hr />\n<p><strong>效果</strong> 玻璃魔像将法术反弹给施法者。它尝试一次@Check[acrobatics]检定对法术进行反制。如果成功反制该法术，效果会反噬施法者自己。</p>"
                 },
                 "Vulnerable to Shatter": {
                     "name": "法术弱点-粉碎音波 Vulnerable to Shatter",
@@ -2250,7 +2258,7 @@
                 },
                 "Rejuvenation": {
                     "name": "复生 Rejuvenation",
-                    "description": "<p>将四件代表玫瑰团成员的遗珍放在<strong>D13</strong>区域的祭坛上能让奥塔里前往来世。</p>\n<hr />\n<p>当幽灵被摧毁时，他会在[[/br 2d4 #days]]{2d4天}后在被束缚的地点重新生成，生命值全满。只有在有人确定了幽灵存在的成因并纠正任何阻止幽灵安息的因素时，幽灵才能被永久摧毁。</p>"
+                    "description": "<p>将四件代表玫瑰团成员的遗珍放在<strong>D13</strong>区域的祭坛上能让奥塔里前往来世。</p>\n<hr />\n<p>当幽灵被摧毁时，他会在[[/gmr 2d4 #days]]{2d4天}后在被束缚的地点重新生成，生命值全满。只有在有人确定了幽灵存在的成因并纠正任何阻止幽灵安息的因素时，幽灵才能被永久摧毁。</p>"
                 },
                 "Filth Fever": {
                     "name": "腐热症 Filth Fever",
@@ -2307,6 +2315,9 @@
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
+                },
+                "equipment-Key": {
+                    "name": "Key"
                 }
             },
             "hp": "死之白焰",
@@ -2413,6 +2424,9 @@
                 },
                 "equipment-Quara's Key": {
                     "name": "库娅拉的钥匙 Quara's Key"
+                },
+                "equipment-Key": {
+                    "name": "Key"
                 }
             },
             "allSaves": "对抗魔法时豁免+1状态加值，对抗心灵效果时豁免+2状态加值",
@@ -2437,7 +2451,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>被尘菌的触手击中的生物必须成功通过@Check[fortitude|dc:28]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。麻痹的生物可以在它的每回合结束时尝试一次新的豁免。</p>"
+                    "description": "<p>被尘菌的触手击中的生物必须成功通过@Check[fortitude|dc:28|options:inflicts:paralyzed]豁免，否则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。麻痹的生物可以在它的每回合结束时尝试一次新的豁免。</p>"
                 },
                 "Skull Rot": {
                     "name": "颅骨热疫 Skull Rot",
@@ -2569,6 +2583,9 @@
                 "Attack of Opportunity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>",
                     "name": "反应打击 Reactive Strike"
+                },
+                "equipment-Key": {
+                    "name": "Key"
                 }
             },
             "allSaves": "对抗魔法时豁免+1状态加值，对抗心灵效果时豁免+2状态加值",
@@ -2645,7 +2662,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}惑1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -2685,7 +2702,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:25]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:25|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -2733,7 +2750,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -2813,7 +2830,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -2895,7 +2912,7 @@
             "items": {
                 "Sapping Squeeze": {
                     "name": "压榨 Sapping Squeeze",
-                    "description": "<p><strong>需求</strong> 畸肉残渣正擒抱一个生物；</p>\n<hr />\n<p><strong>效果</strong> 畸肉残渣挤榨出这个生物的生命精华，造成@Damage[(1d6+5)[bludgeoning]]和@Damage[1d4[bleed]]伤害 (@Check[fortitude|dc:18|basic]豁免）。</p>\n<p>畸肉残渣获得等同于单个生物所受钝击伤害一半的临时生命；临时生命持续1分钟。</p>"
+                    "description": "<p><strong>需求</strong> 畸肉残渣正使一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 畸肉残渣挤榨出这个生物的生命精华，造成@Damage[(1d6+5)[bludgeoning]]和@Damage[1d4[bleed]]伤害 (@Check[fortitude|dc:18|basic]豁免）。</p>\n<p>畸肉残渣获得等同于单个生物所受钝击伤害一半的临时生命；临时生命持续1分钟。</p>"
                 },
                 "Shred Flesh": {
                     "name": "撕肉 Shred Flesh",
@@ -2926,7 +2943,7 @@
         },
         "Shuffling Scythe Blades": {
             "name": "换位镰刃 Shuffling Scythe Blades",
-            "disable": "<p>@Check[thievery|dc:26|name:Disable Each Blade]（专家）解除每把镰刃；或说出魔法口令（只有查夫肯姆知道）让陷阱在10 分钟内暂时失效。</p>",
+            "disable": "<p>@Check[thievery|dc:26|name:Disable Each Blade]（专家）解除每把镰刃；或说出魔法口令（只有查夫肯姆知道）让陷阱在10分钟内暂时失效。</p>",
             "hazarddescription": "<p>六把长镰刃隐藏在房间和地板的凹槽里。当走廊汇聚处的大厅里的压力板被触发时，伸出的镰刃会以之字形路线扫过走廊各处。大厅里有很多压力板，只要在大厅里移动就不可能完全避开它们。镰刃在扫完之后会退回到地板中，通过隐藏的凹槽移动，换个位置再次从墙上伸出。</p>",
             "reset": "<p>当<strong>E20</strong>区域内不再有生物时，陷阱会重置。被伤害或被摧毁的镰刃不会在陷阱重置时自动修复。</p>",
             "routine": "<p>(7动作）陷阱的每把镰刃都占用一个动作；每把镰刃都会对当前所在区域内的每个生物进行一次镰刃打击。在陷阱的最后一个动作是进行镰刃换位动作。每破坏一把镰刃，陷阱可用动作就减少一个。</p>",
@@ -3045,7 +3062,7 @@
                 },
                 "Feed on Magic": {
                     "name": "吞噬魔法 Feed on Magic",
-                    "description": "<p><strong>需求</strong> 一个可以施法的生物在法力虚空的15尺内。</p>\n<hr />\n<p><strong>效果</strong> 法力虚空以该生物的魔法为食。法力虚空重新获得@Damage[2d8[healing]]生命值，目标必须尝试@Check[will|dc:24]豁免。</p>\n<p>目标会在1小时内暂时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 在法力虚空下一回合开始前，目标第一次施放法术时，该法术会被干扰，除非目标成功通过@Check[flat|dc:15]检定。</p>\n<p><strong>失败</strong> 和成功一样，但效果适用于目标在下一分钟内第一次施放法术时。</p>\n<p><strong>大失败</strong> 和成功一样，但在接下来的一分钟内，目标每次施放法术时都会产生效果。此外，法力虚空获得的生命值翻倍。</p>"
+                    "description": "<p><strong>需求</strong> 一个可以施法的生物在法力虚空的15尺内。</p>\n<hr />\n<p><strong>效果</strong> 法力虚空以该生物的魔法为食。法力虚空重新获得@Damage[2d8[healing]]生命值，目标必须尝试@Check[will|dc:24]豁免。</p>\n<p>目标会在1小时内临时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 在法力虚空下一回合开始前，目标第一次施放法术时，该法术会被干扰，除非目标成功通过@Check[flat|dc:15]检定。</p>\n<p><strong>失败</strong> 和成功一样，但效果适用于目标在下一分钟内第一次施放法术时。</p>\n<p><strong>大失败</strong> 和成功一样，但在接下来的一分钟内，目标每次施放法术时都会产生效果。此外，法力虚空获得的生命值翻倍。</p>"
                 },
                 "Go Dark": {
                     "name": "变暗 Go Dark",
@@ -3110,7 +3127,7 @@
                 },
                 "Wicked Bite": {
                     "name": "秽恶之啮 Wicked Bite",
-                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:26] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[10[healing]]生命值 （大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[20[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong> （死灵系） @Check[fortitude|dc:26|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
+                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:26] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[10[healing]]生命值（大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[20[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong>（死灵系）@Check[fortitude|dc:26|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -3147,7 +3164,7 @@
                 },
                 "Wicked Bite": {
                     "name": "秽恶之啮 Wicked Bite",
-                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:24] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[5[healing]]生命值 （大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[10[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong> （死灵系）@Check[fortitude|dc:24|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
+                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:24] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[5[healing]]生命值（大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[10[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong>（死灵系）@Check[fortitude|dc:24|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -3184,7 +3201,7 @@
                 },
                 "Wicked Bite": {
                     "name": "秽恶之啮 Wicked Bite",
-                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:25] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[10[healing]]生命值 （大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[20[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong> （死灵系）@Check[fortitude|dc:25|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
+                    "description": "<p><strong>需求</strong> 透肌魔人最后一次动作是用它的啃咬打击命中一个生物。</p>\n<hr />\n<p><strong>效果</strong> 透肌魔人紧咬不放，使生物受伤部位周围的皮肤呈半透明状态。透肌魔人从下列两个选项中选择一个，每个选项都需要进行强韧豁免。如果啃咬造成重击，该生物将同时受到两种效果，对这两种效果使用同一个豁免结果。</p>\n<ul>\n<li><strong>啜饮鲜血 Drain Blood</strong> @Check[fortitude|dc:25] 透肌魔人饮下这个生物的一点鲜血。此生物在豁免失败时获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}，透肌魔人恢复@Damage[10[healing]]生命值（大失败生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，透肌魔人恢复@Damage[20[healing]]生命值）。</li>\n<li><strong>啜饮活力 Drain Vitality</strong>（死灵系）@Check[fortitude|dc:25|traits:necromancy] 透肌魔人抽出了此生物的一点生命精华。豁免失败则此生物获得@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}），持续1小时。</li>\n</ul>"
                 },
                 "At-Will Spells": {
                     "name": "随意施法 At-Will Spells",
@@ -3361,7 +3378,7 @@
             },
             "items": {
                 "Constrict (Grabbed by Claws only)": {
-                    "name": "紧勒 Constrict （仅限爪子擒抱时）",
+                    "name": "紧勒 Constrict（仅限爪子擒抱时）",
                     "description": "<p>@Damage[(1d8+12)[bludgeoning]]伤害，@Check[fortitude|dc:28|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
                 },
                 "Draining Venom": {
@@ -3378,7 +3395,7 @@
                 },
                 "Tentacle Transfer": {
                     "name": "触手转移 Tentacle Transfer",
-                    "description": "<p><strong>需求</strong> 甲伏怪擒抱一个生物；</p>\n<hr />\n<p><strong>效果</strong> 甲伏怪把擒获的生物从爪子转移到它的触手上，或者反过来。当一个生物被转移到触须上时，就会暴露在流失毒液的影响下，并且在甲伏怪每个回合开始时，只要生物一直被触手擒获，都会暴露在流失毒液的影响下。</p>"
+                    "description": "<p><strong>需求</strong> 甲伏怪使一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 甲伏怪把擒获的生物从爪子转移到它的触手上，或者反过来。当一个生物被转移到触须上时，就会暴露在流失毒液的影响下，并且在甲伏怪每个回合开始时，只要生物一直被触手擒获，都会暴露在流失毒液的影响下。</p>"
                 },
                 "Tremorsense (Imprecise) 30 feet": {
                     "name": "震颤感知（模糊感官）30尺 Tremorsense (Imprecise) 30 feet",
@@ -3425,7 +3442,7 @@
                 },
                 "Feed on Fear": {
                     "name": "吞食恐惧 Feed on Fear",
-                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 一个位于虚空暴食者25尺之内的敌人被恐惧效果影响，或陷入惊惧、濒死状态；</p>\n<hr />\n<p><strong>效果</strong> 虚空暴食者以该生物的恐惧为食。它恢复@Damage[3d4[healing]]生命值，如果它的光芒已经熄灭，则会重新开始发光。</p>\n<p>它在[[/gmr 1d4 #Recharge Consume Light]]{1d4轮}内无法再次使用吞噬光亮能力，因为它太过于渴求恐惧，会难以抑制地发光。</p>"
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 一个位于虚空暴食者25尺之内的敌人被恐惧效果影响，或陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]或@UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]状态</p>\n<hr />\n<p><strong>效果</strong> 虚空暴食者以该生物的恐惧为食。它恢复@Damage[3d4[healing]]生命值，如果它的光芒已经熄灭，则会重新开始发光。</p>\n<p>它在[[/gmr 1d4 #Recharge Consume Light]]{1d4轮}内无法再次使用吞噬光亮能力，因为它太过于渴求恐惧，会难以抑制地发光。</p>"
                 },
                 "Magic Immunity": {
                     "name": "魔法免疫 Magic Immunity",
@@ -3713,7 +3730,7 @@
                 },
                 "Devastating Blast": {
                     "name": "毁灭爆震 Devastating Blast",
-                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]能量。区域内的生物受到@Damage[6d12[cold]|options:area-damage]伤害（@Check[reflex|dc:29|basic|options:area-effect]豁免）。</p>\n<p>死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]{1d4轮}只能使用1次该能力。</p>"
+                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]能量。区域内的生物受到@Damage[6d12[cold]|options:area-damage]伤害（@Check[reflex|dc:29|basic|options:area-effect]豁免）。</p>\n<p>死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]{1d4轮}只能使用一次该能力。</p>"
                 },
                 "Graveknight's Curse": {
                     "name": "死墓骑士诅咒 Graveknight's Curse",
@@ -3738,6 +3755,9 @@
                 "Attack of Opportunity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>",
                     "name": "反应打击 Reactive Strike"
+                },
+                "equipment-Keys": {
+                    "name": "Keys"
                 }
             },
             "blurb": "男性死墓骑士",
@@ -3876,7 +3896,7 @@
                 },
                 "Drover's Band": {
                     "name": "赶畜皮环 Drover's Band",
-                    "description": "<p><strong>启动</strong> 命令</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 胡须魔将意识施加到30尺内的一个无心智生物上。如果目标是一个等级不超过 3 级的无心智生物，它必须尝试一次@Check[will|dc:20|options:inflicts:controlled,inflicts:slowed]豁免，且目标的豁免结果的成功度将下降一级。</p><hr /><p><strong>大成功</strong> 目标生物不受影响。</p>\n<p><strong>成功</strong> 由于被胡须魔的命令扰乱，目标生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续 1 轮。</p>\n<p><strong>失败</strong> 目标生物在1小时内@UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{被控制 Controlled}于胡须魔，但它不会遵从明显会导致自我毁灭的命令。</p>\n<p><strong>大失败</strong> 同失败，但是持续时间为1日。</p>"
+                    "description": "<p><strong>启动</strong> 命令</p>\n<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 胡须魔将意识施加到30尺内的一个无心智生物上。如果目标是一个等级不超过 3 级的无心智生物，它必须尝试一次@Check[will|dc:20|options:inflicts:controlled,inflicts:slowed]豁免，且目标的豁免结果的成功度将下降一级。</p><hr /><p><strong>大成功</strong> 目标生物不受影响。</p>\n<p><strong>成功</strong> 由于被胡须魔的命令扰乱，目标生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>失败</strong> 目标生物在1小时内@UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{被控制 Controlled}于胡须魔，但它不会遵从明显会导致自我毁灭的命令。</p>\n<p><strong>大失败</strong> 同失败，但是持续时间为1日。</p>"
                 },
                 "Attack of Opportunity": {
                     "name": "反应打击 Reactive Strike",
@@ -3997,6 +4017,9 @@
                 },
                 "+2 Status to All Saves vs. Mental": {
                     "name": "对抗心灵效果时豁免+2状态加值 +2 Status to All Saves vs. Mental"
+                },
+                "equipment-Keys": {
+                    "name": "Keys"
                 }
             },
             "allSaves": "对抗魔法时豁免+1状态加值，对抗心灵效果时豁免+2状态加值",
@@ -4027,7 +4050,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}惑1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:21|options:area-effect,inflicts:confused]，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。双尾虫怪能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Envenom Weapon": {
                     "name": "武器涂毒 Envenom Weapon",
@@ -4047,6 +4070,9 @@
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
+                },
+                "equipment-Key": {
+                    "name": "Key"
                 }
             },
             "allSaves": "对魔法的豁免+1状态加值",
@@ -4063,7 +4089,7 @@
             },
             "items": {
                 "Telepathy (with spectral thralls only)": {
-                    "name": "心灵感应 Telepathy （只能与幽魂之奴沟通）",
+                    "name": "心灵感应 Telepathy（只能与幽魂之奴沟通）",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Telepathy]</p>"
                 },
                 "Frightful Presence": {
@@ -4184,7 +4210,7 @@
             "items": {
                 "Eerie Flexibility": {
                     "name": "怪异柔韧 Eerie Flexibility",
-                    "description": "<p> 尽管是大体型，古革巨人的诸多关节允许它如同一个中型生物一般通过狭窄的空间。当@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{挤入 Squeezing}时，它能以全速移动。</p>"
+                    "description": "<p>尽管是大体型，古革巨人的诸多关节允许它如同一个中型生物一般通过狭窄的空间。当@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{挤入 Squeezing}时，它能以全速移动。</p>"
                 },
                 "Furious Claws": {
                     "name": "狂怒利爪 Furious Claws",
@@ -4217,11 +4243,11 @@
             "items": {
                 "Instinctual Tinker": {
                     "name": "修修补补 Instinctual Tinker",
-                    "description": "<p>摩洛克尝试修理一件相邻的构装体或机械陷阱。它尝试1次@Check[crafting]检定，对抗该构装体或陷阱的强韧DC。如果目标的等级为摩洛克的2倍以上，摩洛克就无法得到比失败更好的结果。</p>\n<hr />\n<p><strong>大成功</strong> 目标恢复@Damage[4d6[healing]]生命值并且在1分钟之内，攻击检定有+1环境加值。</p>\n<p><strong>成功</strong> 目标恢复@Damage[2d6[healing]]生命值。</p>\n<p><strong>大失败</strong> 摩洛克弄伤它自己，受到@Damage[2d6[untyped]]伤害（一般是钝击、穿刺或挥砍，但是GM可以自由决定其他伤害类型）。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.TEzLEXBZzNCp6flg]</p>"
+                    "description": "<p>摩洛克尝试修理一件相邻的构装体或机械陷阱。它尝试一次@Check[crafting]检定，对抗该构装体或陷阱的强韧DC。如果目标的等级为摩洛克的2倍以上，摩洛克就无法得到比失败更好的结果。</p>\n<hr />\n<p><strong>大成功</strong> 目标恢复@Damage[4d6[healing]]生命值并且在1分钟之内，攻击检定有+1环境加值。</p>\n<p><strong>成功</strong> 目标恢复@Damage[2d6[healing]]生命值。</p>\n<p><strong>大失败</strong> 摩洛克弄伤它自己，受到@Damage[2d6[untyped]]伤害（一般是钝击、穿刺或挥砍，但是GM可以自由决定其他伤害类型）。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.TEzLEXBZzNCp6flg]</p>"
                 },
                 "Leap Attack": {
                     "name": "跳跃攻击 Leap Attack",
-                    "description": "<p>摩洛克以最多2倍速度行走，在此期间它尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}。在它的这次行动中的任何一点，摩洛克都能对其触及范围内的敌人进行1次近战打击。</p>\n<p>摩洛克在1轮内无法再次进行跳跃攻击。</p>"
+                    "description": "<p>摩洛克以最多2倍速度行走，在此期间它尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.2HJ4yuEFY1Cast4h]{跳高 High Jump}或@UUID[Compendium.pf2e.actionspf2e.Item.JUvAvruz7yRQXfz2]{跳远 Long Jump}。在它的这次行动中的任何一点，摩洛克都能对其触及范围内的敌人进行一次近战打击。</p>\n<p>摩洛克在1轮内无法再次进行跳跃攻击。</p>"
                 },
                 "Sneak Attack": {
                     "name": "偷袭 Sneak Attack",
@@ -4258,7 +4284,7 @@
                     "description": "<p>30尺。在该区域内开始回合的生物会感觉自己的肺部似乎充满了水，并必须通过@Check[fortitude|dc:28]豁免，否则将无法说话或呼吸。该生物仍然可以屏息，并能在其回合结束时尝试一次新的豁免。豁免成功的生物在24小时内临时免疫沼泽之息。</p>"
                 },
                 "Rise Up": {
-                    "description": "<p><strong>触发</strong> 一个生物在沼泽木乃伊埋藏的泥浆或泥炭上行走</p>\n<p><strong>需求</strong> 尚未骰先攻</p>\n<hr />\n<p><strong>效果</strong> 沼泽木乃伊自动注意到这个生物，并在骰先攻前进行掘进。</p>",
+                    "description": "<p><strong>触发</strong> 一个生物在沼泽木乃伊埋藏的泥浆或泥炭上行走</p>\n<p><strong>需求</strong> 尚未骰先攻</p>\n<hr />\n<p><strong>效果</strong> 沼泽木乃伊自动注意到这个生物，并在骰先攻前进行掘地。</p>",
                     "name": "掘起 Rise Up"
                 },
                 "Bog Rot": {

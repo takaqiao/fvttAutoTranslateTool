@@ -1,7 +1,7 @@
 {
     "entries": {
         "Erissa": {
-            "hp": "void healing, rejuvenation",
+            "hp": "虚能治疗，复生",
             "blurb": "Variant poltergeist",
             "items": {
                 "Bound by Frustration": {
@@ -21,7 +21,7 @@
                     "description": "<p><strong>Trigger</strong> A creature approaches within 10 feet of the poltergeist</p>\n<hr />\n<p><strong>Effect</strong> The poltergeist makes a telekinetic object Strike against the triggering creature.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Frighten": {
@@ -56,7 +56,7 @@
                     "name": "Children of the Night"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -72,11 +72,11 @@
                     "description": "<p>In addition to the typical vampire vulnerabilities, Nalushae can be driven to distraction by the destruction of her beloved vampire nettles in area <strong>N12</strong>. If she sees someone within 30 feet brandish a mangled vampire nettle, Nalushae must attempt a @Check[will|dc:25] save.</p><hr /><p><strong>Critical Success</strong> Nalushae is unaffected and is immune to the sight of mangled vampire nettles until the end of her next turn.</p>\n<p><strong>Success</strong> Nalushae is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}.</p>\n<p><strong>Failure</strong> Nalushae is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} and @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2} until the end of her next turn. Creatures that have been dominated by her can attempt a new saving throw to escape the effect.</p>\n<p><strong>Critical Failure</strong> As failure, but @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 3} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} as long as she remains sickened.</p><hr /><p>All vampires possess the following vulnerabilities.</p><ul><li><strong>Compulsions</strong> Vampires are creatures with strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless they're transported while they hide within their coffin, nor can they enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions—a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome their compulsion just as they do their revulsion.</li><li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a deity with a holy sanctification option. To brandish garlic or a religious symbol, a creature must Interact to do so, and it remains brandished for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of their revulsion, they gain the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of their revulsion until they end an action beyond 10 feet. After 1 round of being exposed to the subject of their revulsion, a vampire can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, they overcome their revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li><li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents them from healing above 0 HP, even in their coffin. Staking a vampire requires 3 actions and works only if the vampire is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If the stake is removed, the vampire can heal above 0 HP again, and if they're in their coffin, the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with holy water while the stake is in place, the vampire is destroyed.</li><li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends their turn in sunlight, and the condition ends when they're no longer in sunlight. If the vampire loses all their actions in this way, they're destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors</li></ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<p>Use the options in the @UUID[Compendium.pf2e.spells-srd.Item.NzXpEzcZAjuDTZjK]{Aerial Form} and @UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]{Animal Form} spells as guidelines.</p><ul><li><strong>Bat</strong> The vampire changes into a @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarm} or @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.xnpuGO8jEMba9wy5]{Giant Bat}. They gain echolocation 40 feet, a land Speed of 20 feet and a fly Speed of 30 feet, and a fangs Strike with the same attack bonus as their highest melee attack. These fangs deal the same amount of damage as the vampire's claws, but deal piercing damage rather than slashing damage.</li></ul><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Servitor": {
@@ -99,13 +99,13 @@
                     "name": "Key"
                 }
             },
-            "hp": "coffin restoration, fast healing 10, void healing",
+            "hp": "寝于棺木，快速治疗10，虚能治疗",
             "blurb": "Female human vampire sorcerer"
         },
         "Ilnaphrae": {
             "items": {
                 "Fast Healing 7": {
-                    "name": "Fast Healing 7",
+                    "name": "快速治疗 Fast Healing 7",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Mist Escape": {
@@ -129,11 +129,11 @@
                     "description": "<p>All vampires possess the following vulnerabilities.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures with strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless they're transported while they hide within their coffin, nor can they enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions—a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome their compulsion just as they do their revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a deity with a holy sanctification option. To brandish garlic or a religious symbol, a creature must Interact to do so, and it remains brandished for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of their revulsion, they gain the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of their revulsion until they end an action beyond 10 feet. After 1 round of being exposed to the subject of their revulsion, a vampire can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, they overcome their revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents them from healing above 0 HP, even in their coffin. Staking a vampire requires 3 actions and works only if the vampire is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If the stake is removed, the vampire can heal above 0 HP again, and if they're in their coffin, the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with holy water while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends their turn in sunlight, and the condition ends when they're no longer in sunlight. If the vampire loses all their actions in this way, they're destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors\n</li>\n</ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<ul>\n<li><strong>Giant Bat</strong>\n<ul>\n<li><strong>Senses</strong> echolocation 40 feet,</li>\n<li><strong>Speed</strong> 20 feet, fly 30 feet,</li>\n<li><strong>Melee</strong> fangs +15 <strong>Damage</strong> 1d8+9 piercing</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Servitor": {
@@ -157,7 +157,7 @@
             },
             "name": "Ilnaphrae",
             "publicNotes": "<p>Vampire counts rule their demesnes and subjects through a mix of fear and cruelty.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 7, void healing",
+            "hp": "寝于棺木，快速治疗7，虚能治疗",
             "blurb": "Elite vampire counts"
         },
         "Web Grub": {
@@ -192,7 +192,7 @@
                     "description": "<p><strong>Trigger</strong> The vrykolakas is reduced to 0 Hit Points, and an animal is within 100 feet</p><hr /><p><strong>Effect</strong> Unlike most other undead, a vrykolakas isn't destroyed when it reaches 0 HP. Instead, it attempts to cast its spirit into an animal within 100 feet, which must attempt @Check[will|dc:24] save. On a failure, the animal is possessed. This has the effects of the @UUID[Compendium.pf2e.spells-srd.Item.wU6hNzK8Yfqdmc8m]{Possession} spell, but it lasts a number of days equal to the vrykolakas's level. This possession can't be counteracted with magic (though remove curse works against it normally).</p>\n<p>If the animal succeeds at its save, the vrykolakas can attempt to possess a different animal within 100 feet. If at any point an animal critically succeeds at its save or no animal is within 100 feet, the vrykolakas fails to possess anything and is destroyed.</p>\n<p>A vrykolakas possessing an animal seeks out its burial site (see Burial Site Bound below) immediately, burying itself there. While the vrykolakas is in this state of recovery, its animal host is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, and beheading it destroys the vrykolakas and kills its host. Removing the curse destroys the vrykolakas and returns the animal to normal.</p>\n<p>After [[/gmr 1d4 #days]]{1d4 days}, if the vrykolakas hasn't been destroyed, the animal dies and the vrykolakas rises in a new body that's identical to its previous one, formed from the animal's remains.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Vrykolakas Vulnerabilities": {
@@ -200,7 +200,7 @@
                     "description": "<p>Idebilor must return to his burial site (area <strong>N11</strong>) once per week and bury himself there for 24 hours, during which time he is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} and can be beheaded. If he's unable to return to this site, he's reduced to 0 Hit Points and attempts to use Feral Corruption. If the host animal can't reach the burial site before the possession effect ends, Idebilor is destroyed and the animal returns to normal.</p>\n<p>If he is beheaded, Idebilor can't use Feral Corruption, and a beheaded corpse cannot rise as a vrykolakas.</p>\n<p>Vrykolakas all have the following vulnerabilities.</p><ul><li><strong>Burial Site Bound</strong> A vrykolakas is bound to the place of its death or interment. It must return to this location once per week and bury itself in the earth for 24 hours, during which time it is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} and can be beheaded. If it is unable to return to this site, it is reduced to 0 Hit Points and attempts to use Feral Corruption; if this host animal can't return to the burial site before the possession effect ends, the vrykolakas is destroyed and the animal host returns to normal.</li><li><strong>Vulnerable to Decapitation</strong> A vrykolakas that is beheaded can't use its Feral Possession, and a beheaded corpse cannot rise as a vrykolakas.</li></ul>"
                 },
                 "Rend": {
-                    "name": "Rend",
+                    "name": "撕裂 Rend",
                     "description": "<p>Claw</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Rend]</p>"
                 },
                 "equipment-Key": {
@@ -231,7 +231,7 @@
             },
             "name": "Idebilor",
             "publicNotes": "<p>Vrykolakas unleash their spawn upon the world to spread terror, plague, and suffering and to draw attention away from their masters.</p>",
-            "hp": "(void healing)",
+            "hp": "（虚能治疗）",
             "blurb": "Variant human vrykolakas cleric of Zura"
         },
         "Xarbaene": {
@@ -245,7 +245,7 @@
                     "description": "<p>The vampire's presence brings forth creatures of the night to do the master's bidding. These typically include @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6wPW2dvpt86Ou6bL]{Rat Swarms}, @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarms}, and @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.BN5Lb6IsQ9Wyu3rL]{Wolves}, but can include other creatures.</p>\n<p>The vampire can give telepathic orders to these creatures as long as they are within 100 feet, but they can't communicate back.</p>"
                 },
                 "Fast Healing 7": {
-                    "name": "Fast Healing 7",
+                    "name": "快速治疗 Fast Healing 7",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -257,11 +257,11 @@
                     "description": "<p><strong>Trigger</strong> The vampire is reduced to 0 HP.</p>\n<hr />\n<p><strong>Effect</strong> The vampire uses Turn to Mist. They can take move actions to move toward its coffin even though it's at 0 HP. While at 0 HP in this form, the vampire is unaffected by further damage.</p>\n<p>They automatically returns to its corporeal form, unconscious, if they reaches their coffin or after 2 hours, whichever comes first.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<ul>\n<li><strong>Giant Bat</strong>\n<ul>\n<li><strong>Senses</strong> echolocation 40 feet,</li>\n<li><strong>Speed</strong> 20 feet, fly 30 feet,</li>\n<li><strong>Melee</strong> fangs +15 <strong>Damage</strong> 1d8+9 piercing</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Servitor": {
@@ -289,7 +289,7 @@
             },
             "name": "Xarbaene",
             "publicNotes": "<p>Vampire counts rule their demesnes and subjects through a mix of fear and cruelty.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 7, void healing",
+            "hp": "寝于棺木，快速治疗7，虚能治疗",
             "blurb": "Elite vampire counts"
         },
         "Vye": {
@@ -354,7 +354,7 @@
             "name": "Keeper of Ancorato",
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Keeper's Ward": {
@@ -408,7 +408,7 @@
             },
             "name": "Kaba",
             "publicNotes": "<p>Vampire counts rule their demesnes and subjects through a mix of fear and cruelty.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 7, void healing",
+            "hp": "寝于棺木，快速治疗7，虚能治疗",
             "blurb": "Vampire count",
             "items": {
                 "Children of the Night": {
@@ -416,7 +416,7 @@
                     "description": "<p>The vampire's presence brings forth creatures of the night to do the master's bidding. These typically include @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6wPW2dvpt86Ou6bL]{Rat Swarms}, @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarms}, and @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.BN5Lb6IsQ9Wyu3rL]{Wolves}, but can include other creatures.</p>\n<p>The vampire can give telepathic orders to these creatures as long as they are within 100 feet, but they can't communicate back.</p>"
                 },
                 "Fast Healing 7": {
-                    "name": "Fast Healing 7",
+                    "name": "快速治疗 Fast Healing 7",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -432,11 +432,11 @@
                     "description": "<p>All vampires possess the following vulnerabilities.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures with strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless they're transported while they hide within their coffin, nor can they enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions—a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome their compulsion just as they do their revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a deity with a holy sanctification option. To brandish garlic or a religious symbol, a creature must Interact to do so, and it remains brandished for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of their revulsion, they gain the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of their revulsion until they end an action beyond 10 feet. After 1 round of being exposed to the subject of their revulsion, a vampire can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, they overcome their revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents them from healing above 0 HP, even in their coffin. Staking a vampire requires 3 actions and works only if the vampire is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If the stake is removed, the vampire can heal above 0 HP again, and if they're in their coffin, the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with holy water while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends their turn in sunlight, and the condition ends when they're no longer in sunlight. If the vampire loses all their actions in this way, they're destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors\n</li>\n</ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<ul>\n<li><strong>Giant Bat</strong>\n<ul>\n<li><strong>Senses</strong> echolocation 40 feet,</li>\n<li><strong>Speed</strong> 20 feet, fly 30 feet,</li>\n<li><strong>Melee</strong> fangs +15 <strong>Damage</strong> 1d8+9 piercing</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Servitor": {
@@ -484,7 +484,7 @@
         "Romi Bracken": {
             "items": {
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul><li><p><strong>Human</strong></p><ul><li><strong>Melee</strong> fist +10 <strong>Damage</strong> 1d6+4</li></ul></li><li><strong>Animal</strong></li></ul><hr /><p>The werecreature changes into its humanoid, hybrid, or animal shape. Each shape has a specific, persistent appearance. A true werecreature's natural form is its hybrid shape.</p>\n<p>In humanoid shape, the werecreature uses its original humanoid size, loses its jaws and claws Strikes, and gains a melee fist Strike that deals bludgeoning damage equal to the slashing damage dealt by its claw.</p>\n<p>In animal shape, its Speed and size change to that of the animal, it gains any special Strike effects of the animal that it didn't already have (such as Grab), and it loses its weapon Strikes.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "equipment-Intake Skeleton Key": {
@@ -597,11 +597,11 @@
         "Vampire Servant": {
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Fast Healing 5": {
-                    "name": "Fast Healing 5",
+                    "name": "快速治疗 Fast Healing 5",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -629,7 +629,7 @@
             },
             "name": "Vampire Servant",
             "publicNotes": "<p>Vampires use their servitor pawns for infiltration and reconnaissance.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 5, void healing",
+            "hp": "寝于棺木，快速治疗5，虚能治疗",
             "blurb": "Variant vampire servitor"
         },
         "Anvaca": {
@@ -702,14 +702,14 @@
             }
         },
         "Okoa": {
-            "hp": "coffin restoration, fast healing 10, void healing",
+            "hp": "寝于棺木，快速治疗10，虚能治疗",
             "blurb": "Female strix strigoi",
             "items": {
                 "equipment-Beaded Earrings": {
                     "name": "Beaded Earrings"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -722,15 +722,15 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "Strigoi Weaknesses",
-                    "description": "<p>All strigoi possess the following weaknesses:</p>\n<ul>\n<li><strong>Revulsion</strong> Strigoi are uncomfortable near mirrors or sources of bright light. Only a strigoi's shadow reflects in a mirror, and this often compels them to cover or destroy mirrors in their presence rather than risk their true nature being displayed. A strigoi can't voluntarily come within 10 feet of a brandished mirror or source of bright light. To brandish a mirror or light source, a creature must Interact to do so for 1 round (similar to Raising a Shield). If the strigoi involuntarily comes within 10 feet of a brandished mirror or light source, it gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the brandished object until it ends an action beyond 10 feet. After 1 round of being exposed to the subject of its revulsion, a strigoi can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, it overcomes its revulsions for [[/gmr 1d6 #Overcome Revulsions Duration]]{1d6 rounds} (or 1 hour on a critical success). A strigoi can move normally around mirrors or bright light sources that are not brandished, although doing so causes them discomfort that can be noticed with a successful Perception check to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}.</li>\n<li><strong>Sunlight</strong> When exposed to direct sunlight, a strigoi immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious} and falls to the ground. It appears to be dead: it doesn't breathe, its body temperature matches its surroundings, and it doesn't react to pain or other stimuli. A successful @Check[perception|against:reflex] check against the strigoi's Reflex DC is enough to note one anomaly: the shadow cast by its \"dead\" body shifts and moves slightly, its edges twisting and active. Spells like @UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]{Detect Alignment}, senses like lifesense, and the \"corpse\" taking damage from vitality energy still function normally, and could reveal the truth without needing a successful Perception check. Viewing the \"corpse\" in a mirror's reflection can also reveal the truth, for only the body's shadow reflects. While in sunlight and unconscious, the strigoi loses its resistance to physical damage. If the strigoi takes enough damage that it would be reduced to 0 Hit Points, its body quickly decomposes, and the strigoi is destroyed.</li>\n<li><strong>Water Revulsion</strong> A strigoi cannot cross a significant source of running water (such as a creek, river, or waves on a seashore). A strigoi capable of flight can cross running water provided it approaches no closer than 10 feet to the liquid's surface. If forced into running water against its will, the strigoi becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and gains the fleeing condition as long as it remains in the water. At the end of any turn in which the strigoi remains in running water, it must succeed at a @Check[flat|dc:5] or be destroyed.</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Drink Essence": {
                     "name": "Drink Essence",
-                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|defense:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and Okoa regains @Damage[13[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP, but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
+                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|against:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and Okoa regains @Damage[13[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
                 },
                 "Strafing Strike": {
                     "name": "Strafing Strike",
@@ -756,7 +756,7 @@
                     "description": "<p>24 hours, [[/act disable-device dc=26]], standby</p><hr /><p>For a clockwork to act, it must be wound with a unique key by another creature. This takes 1 minute. Once wound, it remains operational for the listed amount of time, usually 24 hours, after which time it becomes unaware of its surroundings and can't act until it's wound again. Some clockworks' abilities require them to spend some of their remaining operational time. They can't spend more than they have and shut down immediately once they have 0 time remaining. If it's unclear when a clockwork was last wound, most clockwork keepers wind all their clockworks at a set time, typically 8 a.m.</p>\n<p>A clockwork that lists standby in its wind-up entry can enter standby mode as a 3-action activity. Its operational time doesn't decrease in standby, but it can sense its surroundings (with a -2 penalty to Perception). It can't act, with one exception: when it perceives a creature, it can exit standby as a reaction (rolling initiative if appropriate).</p>\n<p>A creature can attempt to Disable a Device to wind a clockwork down (with a DC listed in the wind-up entry). For each success, the clockwork loses 1 hour of operational time. This can be done even if the clockwork is in standby mode.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Sudden Seize": {
@@ -828,7 +828,7 @@
             "blurb": "Variant male morlock rogue",
             "items": {
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "+2 Status to All Saves vs. Disease and Poison": {
@@ -916,7 +916,7 @@
                     "name": "+1 Status to All Saves vs. Magic"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Rejection Vulnerability": {
@@ -928,12 +928,12 @@
                     "description": "<p>10 feet.</p>\n<p>Any creature in the aura that could be sexually attracted to a succubus takes a –2 circumstance penalty to checks and DCs to oppose the succubus's mental spells, Deception, and Diplomacy.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The succubus can take on the appearance of any Small or Medium humanoid. This doesn't change their Speed or their attack and damage modifiers with their Strikes, but it might change the damage type their Strikes deal (typically to bludgeoning).</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Embrace": {
                     "name": "Embrace",
-                    "description": "<p>The succubus attempts to [[/act grapple skill=diplomacy]]{Grapple} a creature using their Diplomacy bonus instead of Athletics. If the creature is willing, the succubus automatically succeeds.</p>"
+                    "description": "<p>The succubus attempts to [[/act grapple skill=diplomacy]] a creature using their Diplomacy bonus instead of Athletics. If the creature is willing, the succubus automatically succeeds.</p>"
                 },
                 "Passionate Kiss": {
                     "name": "Passionate Kiss",
@@ -988,7 +988,7 @@
             "name": "Paralysis Trap",
             "disable": "<p>@Check[thievery|dc:28] (expert) to scratch out the magical symbols, @Check[arcana|dc:28] (expert) to safely siphon the magical energy, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (4th rank; counteract DC 26)</p><p><strong>Bypass</strong> Anyone other than Mirida turns the door handle three times to the right and once to the left in quick succession.</p>",
             "hazarddescription": "<p>Magical symbols carved in the doorframe magically ward this door; anyone attempting to pick the lock is @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed} and wracked with pain. Disabling or breaking the trap does not disable or break the lock.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Debilitating Pain": {
                     "name": "Debilitating Pain",
@@ -997,7 +997,7 @@
             }
         },
         "Vikandian": {
-            "hp": "fast healing 10, void healing, plagued coffin restoration",
+            "hp": "快速治疗10，虚能治疗，寝于疫土之棺",
             "items": {
                 "Drink Blood": {
                     "name": "Drink Blood",
@@ -1015,7 +1015,7 @@
                     "name": "Key"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Nosferatu Vulnerabilities": {
@@ -1031,7 +1031,7 @@
                     "description": "<p>If he's reduced to 0 HP, Vikandian disperses into an immense number of individual rats that flee in every direction in an attempt to return to his coffin in area <strong>N6</strong>. If even a single rat enters this coffin, he reforms in his body and is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If his body rests in his coffin for 1 hour, Vikandian gains 1 HP, after which his fast healing begins to function normally. If his coffin doesn't contain plagued grave dirt, he instead needs to rest in his coffin for 1 day before he gains 1 HP and regains his fast healing.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Bleeding Finisher": {
@@ -1039,7 +1039,7 @@
                     "description": "<p><strong>Requirements</strong> Vikandian has panache</p><hr /><p><strong>Effect</strong> Vikandian attempts a sword cane Strike. If he hits, the target also takes 3d6 persistent bleed damage. He then loses his panache and can't use actions that have the attack trait for the rest of his turn.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Vikandian transforms into a swarm of rats. He gains a land Speed of 30 feet and a climb Speed of 10 feet, and he becomes Large. Each enemy in his space takes @Damage[2d10[piercing]] damage (@Check[reflex|dc:26|basic] save). A creature that fails the save is exposed to plague of ancients.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Command Thrall": {
@@ -1068,7 +1068,7 @@
         "Batkin Guard": {
             "items": {
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The batkin changes into their humanoid or hybrid shape. Each shape has a specific, persistent appearance. In hybrid shape, the batkin appears as a mix between human and a bat. While in hybrid shape, they gain a jaws unarmed Strike resembling a bat's fangs. In their humanoid shape, they retain the appearance of their original ancestry.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Quick Change": {
@@ -1168,7 +1168,7 @@
                     "name": "Key"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+2 Status to All Saves Vs. Auditory and Visual": {
@@ -1220,18 +1220,18 @@
                     "description": "<p><strong>Trigger</strong> The thrall ends their turn more than 30 feet away from Vikandian</p><hr /><p><strong>Effect</strong> The thrall Strides up to their Speed toward Vikandian.</p>"
                 },
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "+2 Status to All Saves vs. Disease and Poison": {
                     "name": "+2 Status to All Saves vs. Disease and Poison"
                 },
                 "Fast Healing 5": {
-                    "name": "Fast Healing 5",
+                    "name": "快速治疗 Fast Healing 5",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Mindbound": {
@@ -1264,7 +1264,7 @@
             "name": "Morlock Thrall",
             "publicNotes": "<p>Nosferatu thralls are mortals bound to a nosferatu's will. While thralls aren't undead, they stay alive through unnatural means: feeding on the blood of their masters.</p>\n<hr />\n<p>Among the most ancient of vampires are the nosferatus, twisted remnants of mortals who died in great plagues of old. Perhaps because of their age, nosferatus can no longer create more of their kind. Yet they still lurk among the living, manipulating the hearts and minds of their prey to either serve them beyond the limits of natural life or to become sustenance for the nosferatu like so many others before.</p>",
             "allSaves": "+2 status to all saves vs. disease and poison",
-            "hp": "fast healing 5",
+            "hp": "快速治疗5",
             "blurb": "Male variant morlock nosferatu thrall"
         },
         "Zovi": {
@@ -1382,7 +1382,7 @@
                 },
                 "Focus Gaze": {
                     "name": "Focus Gaze",
-                    "description": "<p>The velstrac conductor stares at a creature they can see within 30 feet. The creature must immediately attempt a Will save against the velstrac conductor's horrifying accompaniment aura. In addition, if the creature was already frightened, on a failed save the creature takes @Damage[1d6[persistent,mental]] damage. After attempting this save, the creature is then temporarily immune for 1 hour.</p>"
+                    "description": "<p>The velstrac conductor stares at a creature they can see within 30 feet. The creature must immediately attempt a Will save against the velstrac conductor's horrifying accompaniment aura. In addition, if the creature was already @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}, on a failed save the creature takes @Damage[1d6[persistent,mental]] damage. After attempting this save, the creature is then temporarily immune for 1 hour.</p>"
                 },
                 "equipment-Conductor's Baton": {
                     "name": "Conductor's Baton"
@@ -1392,7 +1392,7 @@
                     "description": "<p>A velstrac automatically knows whether a creature it sees has any of the @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed}, @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{Dying}, and @UUID[Compendium.pf2e.conditionitems.Item.Yl48xTdMh3aeQYL2]{Wounded} conditions, as well as the value of those conditions.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -1404,7 +1404,7 @@
                 },
                 "Horrifying Accompaniment": {
                     "name": "Horrifying Accompaniment",
-                    "description": "<p>30 feet. When a creature ends its turn in the aura, it hears every scream the velstrac conductor's victims have ever uttered. The creature must succeed at a @Check[will|dc:25] save or become @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} (@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4} on a critical failure).</p>"
+                    "description": "<p>30 feet. When a creature ends its turn in the aura, it hears every scream the velstrac conductor's victims have ever uttered. The creature must succeed at a @Check[will|dc:25|options:area-effect,inflicts:frightened] save or become @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} (@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4} on a critical failure).</p>"
                 },
                 "Scream for Me": {
                     "name": "Scream for Me",
@@ -1458,7 +1458,7 @@
             "hazarddescription": "<p>A tiny spark of Nin's will drains the blood from living intruders.</p>",
             "routine": "<p>(1 action) On its initiative, the trap continues to drain blood, dealing @Damage[(2d6+8)[void]] damage to all living creatures in the room (@Check[fortitude|dc:26|basic] save). On a failure, a creature increases the value of their drained condition by 1.</p>",
             "reset": "<p>The trap automatically deactivates after 1 minute. It resets in 1 hour.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Drain Blood": {
                     "name": "Drain Blood",
@@ -1495,7 +1495,7 @@
             "hazarddescription": "<p>A golden guardrail sprays magical, flesh-eating acid throughout the stairwell.</p>",
             "routine": "<p>(1 action) On its initiative, the trap continues to spray acid, dealing @Damage[(2d8+9)[acid]] damage to all living creatures on the stairs (@Check[reflex|dc:25|basic] save).</p>",
             "reset": "<p>The trap automatically deactivates after 1 minute. It resets in 1 hour.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Spray Acid": {
                     "name": "Spray Acid",
@@ -1513,7 +1513,7 @@
             "name": "Blood-Draining Lock",
             "disable": "<p>@Check[thievery|dc:31] (expert) on the spring mechanism</p>",
             "hazarddescription": "<p>A spring-loaded blade hidden in the door's handle stabs anyone attempting to turn it, dealing unholy wounds that bleed profusely. Disabling or breaking the trap does not disable or break the lock.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Spring": {
                     "name": "Spring",
@@ -1531,7 +1531,7 @@
             "name": "Breakaway Ladder",
             "disable": "<p>@Check[thievery|dc:25] (trained) or @Check[crafting|dc:22] (trained) to secure the ladder's anchors so they won't break</p>",
             "hazarddescription": "<p>The rope ladder rips free from its anchors and drops into the pit.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Rip Free": {
                     "name": "Rip Free",
@@ -1564,10 +1564,10 @@
             },
             "name": "Vampire Servitor",
             "publicNotes": "<p>Vampires use their servitor pawns for infiltration and reconnaissance.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 5, void healing",
+            "hp": "寝于棺木，快速治疗5，虚能治疗",
             "items": {
                 "Fast Healing 5": {
-                    "name": "Fast Healing 5",
+                    "name": "快速治疗 Fast Healing 5",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -1579,7 +1579,7 @@
                     "description": "<p>All vampires possess the following vulnerabilities.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures with strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless they're transported while they hide within their coffin, nor can they enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions—a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome their compulsion just as they do their revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a deity with a holy sanctification option. To brandish garlic or a religious symbol, a creature must Interact to do so, and it remains brandished for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of their revulsion, they gain the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of their revulsion until they end an action beyond 10 feet. After 1 round of being exposed to the subject of their revulsion, a vampire can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, they overcome their revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents them from healing above 0 HP, even in their coffin. Staking a vampire requires 3 actions and works only if the vampire is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If the stake is removed, the vampire can heal above 0 HP again, and if they're in their coffin, the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with holy water while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends their turn in sunlight, and the condition ends when they're no longer in sunlight. If the vampire loses all their actions in this way, they're destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors\n</li>\n</ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Drink Blood": {
@@ -1602,7 +1602,7 @@
             "name": "Collapsing Cell",
             "disable": "<p>@Check[thievery|dc:22] (trained) or @Check[crafting|dc:25] (trained) to use a loose iron bar to shore up the ceiling.</p>",
             "hazarddescription": "<p>A section of ceiling and iron cell bars collapse inward.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Collapse": {
                     "name": "Collapse",
@@ -1647,7 +1647,7 @@
             "hazarddescription": "<p>A magical mural threatens uncooperative inmates, causing mental trauma.</p>",
             "routine": "<p>(1 action) On its turn, the trap threatens all living creatures in the room, dealing @Damage[(3d6+5)[mental]] damage (@Check[will|dc:22|basic] save).</p>",
             "reset": "<p>1 hour.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Final Warning": {
                     "name": "Final Warning",
@@ -1666,7 +1666,7 @@
             "disable": "<p>@Check[thievery|dc:26] (expert) to scratch out the religious iconography, @Check[religion|dc:24] (trained) to pray for safe passage, @Check[diplomacy|dc:28] (expert) to soothe the emotions powering the magical ward, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd rank; counteract DC 24) to counteract the magical energy</p>",
             "hazarddescription": "<p>Religious sigils of Scal carefully carved into the doorframe capture Tokainen's suppressed anger and frustration, unleashing it in a destructive explosion when a creature attempts to open the door.</p>",
             "reset": "<p>The trap resets after 1 minute.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Furious Explosion": {
                     "name": "Furious Explosion",
@@ -1724,7 +1724,7 @@
                     "description": "<p><strong>Trigger</strong> An adjacent enemy damages the werebat</p><hr /><p><strong>Effect</strong> The werebat makes one or two wing Strikes, each against a different adjacent creature.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<ul><li><p><strong>Human</strong></p><ul><li><strong>Melee</strong> fist +11 <strong>Damage</strong> 1d4+2</li></ul></li><li><strong>Animal</strong></li></ul><hr /><p>The werecreature changes into its humanoid, hybrid, or animal shape. Each shape has a specific, persistent appearance. A true werecreature's natural form is its hybrid shape.</p>\n<p>In humanoid shape, the werecreature uses its original humanoid size, loses its jaws and claws Strikes, and gains a melee fist Strike that deals bludgeoning damage equal to the slashing damage dealt by its claw.</p>\n<p>In animal shape, its Speed and size change to that of the animal, it gains any special Strike effects of the animal that it didn't already have (such as Grab), and it loses its weapon Strikes.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Curse of the Werebat": {
@@ -1749,14 +1749,14 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Rukh",
-            "hp": "coffin restoration, fast healing 10, void healing",
+            "hp": "寝于棺木，快速治疗10，虚能治疗",
             "blurb": "Male strix strigoi",
             "items": {
                 "equipment-Beaded Amulet": {
                     "name": "Beaded Amulet"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -1769,10 +1769,10 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "Strigoi Weaknesses",
-                    "description": "<p>All strigoi possess the following weaknesses:</p>\n<ul>\n<li><strong>Revulsion</strong> Strigoi are uncomfortable near mirrors or sources of bright light. Only a strigoi's shadow reflects in a mirror, and this often compels them to cover or destroy mirrors in their presence rather than risk their true nature being displayed. A strigoi can't voluntarily come within 10 feet of a brandished mirror or source of bright light. To brandish a mirror or light source, a creature must Interact to do so for 1 round (similar to Raising a Shield). If the strigoi involuntarily comes within 10 feet of a brandished mirror or light source, it gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the brandished object until it ends an action beyond 10 feet. After 1 round of being exposed to the subject of its revulsion, a strigoi can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, it overcomes its revulsions for [[/gmr 1d6 #Overcome Revulsions Duration]]{1d6 rounds} (or 1 hour on a critical success). A strigoi can move normally around mirrors or bright light sources that are not brandished, although doing so causes them discomfort that can be noticed with a successful Perception check to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}.</li>\n<li><strong>Sunlight</strong> When exposed to direct sunlight, a strigoi immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious} and falls to the ground. It appears to be dead: it doesn't breathe, its body temperature matches its surroundings, and it doesn't react to pain or other stimuli. A successful @Check[perception|against:reflex] check against the strigoi's Reflex DC is enough to note one anomaly: the shadow cast by its \"dead\" body shifts and moves slightly, its edges twisting and active. Spells like @UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]{Detect Alignment}, senses like lifesense, and the \"corpse\" taking damage from vitality energy still function normally, and could reveal the truth without needing a successful Perception check. Viewing the \"corpse\" in a mirror's reflection can also reveal the truth, for only the body's shadow reflects. While in sunlight and unconscious, the strigoi loses its resistance to physical damage. If the strigoi takes enough damage that it would be reduced to 0 Hit Points, its body quickly decomposes, and the strigoi is destroyed.</li>\n<li><strong>Water Revulsion</strong> A strigoi cannot cross a significant source of running water (such as a creek, river, or waves on a seashore). A strigoi capable of flight can cross running water provided it approaches no closer than 10 feet to the liquid's surface. If forced into running water against its will, the strigoi becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and gains the fleeing condition as long as it remains in the water. At the end of any turn in which the strigoi remains in running water, it must succeed at a @Check[flat|dc:5] or be destroyed.</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Bleed Out": {
@@ -1785,7 +1785,7 @@
                 },
                 "Drink Essence": {
                     "name": "Drink Essence",
-                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|defense:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and Rukh regains @Damage[13[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP, but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
+                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|against:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and Rukh regains @Damage[13[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
                 },
                 "Reach Spell": {
                     "name": "Reach Spell",
@@ -1869,7 +1869,7 @@
                     "name": "Intake Skeleton Key"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Alzira changes into her humanoid or hybrid shape. Each shape has a specific, persistent appearance. In hybrid shape, Alzira appears as a mix between her elf ancestry and a bat. She gains a jaws unarmed Strike resembling a bat's fangs. In her humanoid shape, she retains the appearance of her original ancestry.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Harming Hands": {
@@ -1901,7 +1901,7 @@
                     "description": "<p><strong>Trigger</strong> A creature attacks the palace guard's liege, and the liege is within the guard's melee reach</p><hr /><p><strong>Effect</strong> The liege gains a +2 circumstance bonus to AC against the triggering attack, and the palace guard gains a +2 circumstance bonus to attack and damage rolls until the end of their next turn.</p><hr /><p>@UUID[Compendium.pf2e.bestiary-effects.Item.vGW3GPd2HO2ecgJX]{Effect: Guard's Parry (Guard)}</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.57gVKu4lxbGhBpQf]{Effect: Guard's Parry (Liege)}</p>"
                 },
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
                 },
                 "Crowd Control": {
@@ -1954,7 +1954,7 @@
             "hazarddescription": "<p>Four magical prisms integrated into an aeon stone matrix fire energy beams at intruders. The trap doesn't target creatures wearing <em>security badges</em>, or in the custody of a creature wearing a <em>security badge</em>.</p>",
             "routine": "<p>(4 actions) Each prism uses 1 action to make an energy ray Strike against the nearest creature who is not wearing a <em>security badge</em> or in the custody of a creature wearing a <em>security badge</em>. This trap doesn't take a multiple attack penalty. This trap loses 1 action for each prism disabled or destroyed.</p>",
             "reset": "<p>The trap deactivates and resets when there are no viable targets in area <strong>A1</strong>. Damaged prisms are fully repaired after 24 hours.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Opening Shot": {
                     "name": "Opening Shot",
@@ -1971,7 +1971,7 @@
             },
             "name": "Tokainen",
             "allSaves": "+2 circumstance to all saves vs. disease",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "blurb": "Conflicted dhampir priest",
             "items": {
                 "+2 Circumstance to All Saves Vs. Disease": {
@@ -1982,7 +1982,7 @@
                     "description": "<p><strong>Trigger</strong> Tokainen would be damage by an adjacent creature</p><hr /><p><strong>Effect</strong> Tokainen's flesh flares with scouring flames, dealing @Damage[1d4[fire]] damage to all adjacent enemies (@Check[reflex|dc:28|basic] save; increased to @Damage[2d8[fire]] damage if Tokainen is using Channel the Cataclysm stance).</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Calculated Bloodletting": {
@@ -2011,7 +2011,7 @@
             "hazarddescription": "<p>Eight pillars composed of jagged bones spin, damaging anyone adjacent who doesn't worship Zon-Kuthon.</p>",
             "routine": "<p>(8 actions) Each of the functioning bone pillars makes a bone spur Strike against an adjacent creature. This trap doesn't take a multiple attack penalty. This trap loses one action for each disabled or destroyed pillar.</p>",
             "reset": "<p>The trap deactivates and resets after 1 minute. The trap is automatically destroyed if all the velstracs on this floor are killed.</p>",
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Spin": {
                     "name": "Spin",
@@ -2035,7 +2035,7 @@
                 },
                 "Phlegm Spray": {
                     "name": "Phlegm Spray",
-                    "description": "<p>The tormonshild swarm sprays globules of mucus and water in every direction, dealing @Damage[3d6[bludgeoning]] damage (@Check[reflex|dc:20|basic] save) to all creatures within 10 feet. Creatures that fail the save are covered in mucus and become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute. A creature covered in mucus can end the condition by using an Interact action to remove the mucus.</p>"
+                    "description": "<p>The tormonshild swarm sprays globules of mucus and water in every direction, dealing @Damage[3d6[bludgeoning]|options:area-damage] damage (@Check[reflex|dc:20|basic|options:area-effect,inflicts:dazzled] save) to all creatures within @Template[emanation|distance:10]{10 feet}. Creatures that fail the save are covered in mucus and become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute. A creature covered in mucus can end the condition by using an Interact action to remove the mucus.</p>"
                 },
                 "Swarming Leap": {
                     "name": "Swarming Leap",
@@ -2043,7 +2043,7 @@
                 },
                 "Torrent of Bites": {
                     "name": "Torrent of Bites",
-                    "description": "<p>Each enemy in the tormonshild swarm's space takes @Damage[2d6[piercing]] damage (@Check[reflex|dc:20|basic] save).</p>"
+                    "description": "<p>Each enemy in the tormonshild swarm's space takes @Damage[2d6[piercing]|options:area-damage] damage (@Check[reflex|dc:20|basic|options:area-effect] save).</p>"
                 }
             }
         },
@@ -2057,7 +2057,7 @@
             "name": "Tokainen's Chosen",
             "items": {
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p><strong>触发</strong> 你触及范围内的一个生物使用操作或移动动作，进行远程攻击，或者使用移动动作时离开一个方格。</p>\n<hr />\n<p>你攻击露出破绽的敌人。对触发此动作的目标进行一次近战打击。如果该攻击为重击，并且触发此动作的是一个操作动作，则打断此动作。这次打击不计入你的多重攻击减值，你的多重攻击减值也不应用于此次打击。</p>"
                 },
                 "Cataclysm Brand": {
@@ -2082,7 +2082,7 @@
             "hazarddescription": "<p>Magical sensors trigger clockwork cryomisters to expel frigid air, freezing intruders and potentially encasing them in a block of ice.</p>",
             "routine": "<p>(1 action) On its turn, the trap fills the area with frigid air, which deals @Damage[(2d8+7)[cold]] damage to creatures in the area. Creatures damaged must attempt a @Check[fortitude|dc:22] save. Clockwork soldiers and any creatures wearing a security badge are immune to this damage. The accumulating ice causes the floor in the area to become difficult terrain that lasts for 1 minute after the trap's routine ends.</p><hr><p><strong>Critical Success</strong> The target is unaffected.</p><p><strong>Success</strong> The target takes half damage and increases its @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed} condition by 1.</p><p><strong>Failure</strong> The target takes full damage and increases its slowed condition by 1.</p><p><strong>Critical Failure</strong> The target takes double damage and increases its slowed condition by 2.</p><hr><p>Once a creature's actions are reduced to 0 by this slowed condition, the creature is completely encased in ice. The ice has Hardness 5 and 20 Hit Points, and its DC to @UUID[Compendium.pf2e.actionspf2e.Item.SjmKHgI7a5Z9JzBx]{Force Open} is DC 22. Breaking the ice frees the creature and reduces their slowed condition by 1. Each round a creature is encased in ice, they take @Damage[(1d8+7)[cold]] damage (@Check[fortitude|dc:22|basic] save).</p>",
             "reset": "<p>The trap resets after 10 minutes.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Cryo Mist": {
                     "name": "Cryo Mist",
@@ -2098,10 +2098,10 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Animated Treasure Swarm",
-            "ac": "(21 when broken), construct armor",
+            "ac": "（破损时21）；构装护甲",
             "items": {
                 "Construct Armor": {
-                    "name": "Construct Armor",
+                    "name": "构装护甲 Construct Armor",
                     "description": "<p>Like normal objects, an animated treasure swarm has Hardness. This Hardness reduces any damage the swarm takes by an amount equal to its Hardness. Once an animated treasure swarm is reduced to fewer than half its Hit Points, or immediately upon becoming damaged by a critical hit, its construct armor breaks, removing the Hardness and reducing its AC to 21.</p>"
                 },
                 "Blade Storm": {
@@ -2200,7 +2200,7 @@
             "hazarddescription": "<p>Bodiless screams arise as the room rumbles and shakes, as if in the grip of an earthquake.</p>",
             "routine": "<p>(1 action; illusion, mental) A thunderous explosion rocks the room as the ceiling appears to split open and collapse. This cave-in is an illusion formed from the memories of the dead, but it can inflict real damage. All creatures in the room must attempt a @Check[will|dc:22|traits:illusion,mental] save.</p><hr><p><strong>Critical Success</strong> The creature is unaffected.</p><p><strong>Success</strong> The creature takes @Damage[1d10[mental]] damage.</p><p><strong>Failure</strong> The creature takes @Damage[(1d10+6)[mental]] damage and believes the room is filling with rubble—they're @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until the start of their next turn as they spend their energy navigating the illusory rockfall.</p><p><strong>Critical Failure</strong> The creature takes @Damage[(2d10+12)[mental]] damage and believes they're pinned by rubble—they're @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} until the start of their next turn.</p>",
             "reset": "<p>The haunt deactivates once no living creatures are in the cave at the end of a round, then resets 1 hour later as the spiritual energy rebuilds to a breaking point.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Final Cries of Horror": {
                     "name": "Final Cries of Horror",
@@ -2220,7 +2220,7 @@
             "ac": "全域视野",
             "items": {
                 "All-Around Vision": {
-                    "name": "All-Around Vision",
+                    "name": "全域视野 All-Around Vision",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
                 },
                 "Biting Snakes": {
@@ -2252,7 +2252,7 @@
             "disable": "<p>@Check[thievery|dc:26] (expert) to scratch out the rune without triggering a mental assault, or @UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{Dispel Magic} (3rd rank; counteract DC 24) to counteract the rune</p>",
             "hazarddescription": "<p>A rune hidden in the door's decorative carvings delivers a telepathic jolt, draining will and muddling the mind.</p>",
             "reset": "<p>The trap resets after 1 minute.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Telepathic Jolt": {
                     "name": "Telepathic Jolt",
@@ -2305,7 +2305,7 @@
             "blurb": "Ogre Boss",
             "items": {
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
                 },
                 "Bellowing Command": {
@@ -2330,13 +2330,13 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Shocking Malfunction",
-            "disable": "<p>@Check[crafting|dc:25] or @Check[thievery|dc:25] (master) to ground the device, or @Check[arcana|dc:25], @Check[nature|dc:25], @Check[occultism|dc:25], or @Check[religion|dc:25] (master) to safely vent the magical energy; three total successes in any combination to disable</p><p><strong>Special</strong> Disabling the shocking malfunction does not disable the shadow beacon.</p>",
+            "disable": "<p>@Check[crafting|dc:25] or @Check[thievery|dc:25] (master) to ground the device, or @Check[arcana|dc:25], @Check[nature|dc:25], @Check[occultism|dc:25], or @Check[religion|dc:25] (master) to safely vent the magical energy; three total successes in any combination to disable</p><p><strong>Special</strong> Disabling the shocking malfunction does not disable the <em>shadow beacon</em>.</p>",
             "hazarddescription": "<p>The <em>shadow beacon</em> malfunctions, firing bolts of electricity across the battlefield.</p>",
-            "routine": "<p>(3 actions) The shadow beacon makes three electric bolt Strikes at random creatures within 100 feet. One of these Strikes targets either Deg or Nizca, and the other two target PCs. The trap loses 1 action for each successful disable.</p>",
+            "routine": "<p>(3 actions) The <em>shadow beacon</em> makes three electric bolt Strikes at random creatures within 100 feet. One of these Strikes targets either Deg or Nizca, and the other two target PCs. The trap loses 1 action for each successful disable.</p>",
             "items": {
                 "Shockwave": {
                     "name": "Shockwave",
-                    "description": "<p><strong>Trigger</strong> The fourth round of combat begins</p><hr /><p><strong>Effect</strong> The shadow beacon malfunctions, releasing a shock wave of energy. All creatures within 100 feet of the shadow beacon must succeed at a @Check[reflex|dc:29] save or be knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. Creatures who are flying are instead knocked down 15 feet on a failure, taking @Damage[(1d10+5)[bludgeoning]] damage and landing prone if they collide with a solid object during this movement. The trap then rolls initiative.</p>"
+                    "description": "<p><strong>Trigger</strong> The fourth round of combat begins</p><hr /><p><strong>Effect</strong> The <em>shadow beacon</em> malfunctions, releasing a shock wave of energy. All creatures within 100 feet of the <em>shadow beacon</em> must succeed at a @Check[reflex|dc:29|options:area-effect,inflicts:prone] save or be knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}. Creatures who are flying are instead knocked down 15 feet on a failure, taking @Damage[(1d10+5)[bludgeoning]] damage and landing prone if they collide with a solid object during this movement. The trap then rolls initiative.</p>"
                 }
             }
         },
@@ -2350,7 +2350,7 @@
             "name": "Glormungost",
             "publicNotes": "<p>Among the subtler of the alghollthu creations were the ugothols—also known as faceless stalkers. These twisted beings used shapeshifting to infiltrate settlements and assassinate key targets. They sowed discord and replaced leaders, causing unwanted organizations to implode and bothersome people to lose face and eventually disappear.</p>\n<hr />\n<p>In bygone millennia, aquatic monsters known as alghollthus used their occult powers to conquer and rule vast swaths of the world. Alghollthus shaped their servitors and other creatures using mental manipulation and physically transformative magic. The rulers of the alghollthus, the so-called \"veiled masters,\" further shaped entire societies by assuming the forms of those they controlled.</p>\n<p>In time, the alghollthus grew frustrated with upstart surface societies and meddling gods. They used incredible magical power to call forth a cataclysm, hoping to destroy the rebellious societies they'd manipulated. Yet they miscalculated the will to survive of those they treated as their pawns, and in time the world recovered, this time free of alghollthu influence.</p>\n<p>Today, the alghollthus have mostly remained within the deep aquatic realms where they still rule without question. Yet they have not abandoned their plots entirely, and the reemergence of servitors like faceless stalkers suggests that the alghollthus have turned their hateful eyes to the surface once again.</p>",
             "allSaves": "+2 status to all saves vs. auditory and visual",
-            "hp": "coffin restoration, fast healing 7, void healing",
+            "hp": "寝于棺木，快速治疗7，虚能治疗",
             "blurb": "Agender ugothol vampire alchemist",
             "items": {
                 "Blood Bombs": {
@@ -2358,14 +2358,14 @@
                     "description": "<p>Glormungost carries 6 glass vials filled with alchemically treated blood that deal persistent bleed damage, and 2 splash slashing damage. Glormungost replenishes these bombs each day using blood drawn from prisoners.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+2 Status to All Saves vs. Auditory and Visual": {
                     "name": "+2 Status to All Saves vs. Auditory and Visual"
                 },
                 "Fast Healing 7": {
-                    "name": "Fast Healing 7",
+                    "name": "快速治疗 Fast Healing 7",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -2373,7 +2373,7 @@
                     "description": "<p>Unlike other undead, a vampire isn't destroyed at 0 HP. Instead, it falls @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If its body rests in its coffin for 1 hour, the vampire gains 1 HP, after which its fast healing begins to function normally.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Assume Form": {
@@ -2467,7 +2467,7 @@
             "name": "Trapped Gate",
             "disable": "<p>@Check[thievery|dc:15] (trained) to disable the thin trigger that snaps when attempting to open the gate.</p>",
             "hazarddescription": "<p>A hair trigger rings an alarm and launches a small assortment of wooden spikes to impale anyone attempting to open the gate incorrectly.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Impale Trespasser": {
                     "name": "Impale Trespasser",
@@ -2487,7 +2487,7 @@
             "blurb": "Ogre Boss",
             "items": {
                 "Reactive Strike": {
-                    "name": "Reactive Strike",
+                    "name": "反应打击 Reactive Strike",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ReactiveStrike]</p>"
                 },
                 "Bellowing Command": {
@@ -2513,18 +2513,18 @@
             },
             "name": "Viper Bat",
             "publicNotes": "<p>Strange creatures dwell in the lightless reaches of the Darklands. With its serpentine body, batlike wings and head, and glowing red eyes, it's hard to tell whether this creature is more bat or snake, and those who consider the viper bat a dumb beast are invariably shocked upon hearing its rasping voice. Though a viper bat's fur is naturally pale, it often appears nearly black as a result of the slick, rancid oil that oozes from the creature's flesh.</p>\n<p>Viper bats gather in colonies where they eagerly share stories gathered from those they feed upon, for to be digested by a viper bat is to surrender your secrets to them. Scholars wonder if this eerie side effect points to some ancient link to a ghoul's ability to retain knowledge from the bodies of those they eat, though in the case of a viper bat, once a creature is dead, it can no longer transfer its memories to them. In fact, dead flesh is unpalatable to a viper bat—they crave only living bodies, regurgitating their food into deep crevasses that serve as middens once they can no longer absorb knowledge from a meal.</p><h2>Friends to Undeath</h2><p>Although living, viper bats have a strong affinity with undeath. They are healed by void energy and share many immunities with the undead. Ghouls and vampires have a particular fondness for viper bats, with the latter often feeding their viper bat allies living prisoners who refuse to give up their secrets, in hopes that the viper bat digests those hidden truths.</p>",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Oily Coils": {
                     "name": "Oily Coils",
                     "description": "<p>A viper bat gains a +4 circumstance bonus on @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escape} checks and to its Fortitude DC against attempts to @UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{Grapple} them.</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>30 feet. @Check[fortitude|dc:16|options:area-effect,inflicts:sickened,inflicts:slowed]. Undead are immune to viper bat stench.</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Stench]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Digest Mind": {
@@ -2549,11 +2549,11 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Nizca Iricol",
-            "hp": "coffin restoration, fast healing 10, void healing",
+            "hp": "寝于棺木，快速治疗10，虚能治疗",
             "blurb": "Nonbinary Azlanti human strigoi cleric of Nin",
             "items": {
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "(Vampire, Strigoi) Shadow Form": {
@@ -2566,10 +2566,10 @@
                 },
                 "Strigoi Weaknesses": {
                     "name": "Strigoi Weaknesses",
-                    "description": "<p>All strigoi possess the following weaknesses:</p>\n<ul>\n<li><strong>Revulsion</strong> Strigoi are uncomfortable near mirrors or sources of bright light. Only a strigoi's shadow reflects in a mirror, and this often compels them to cover or destroy mirrors in their presence rather than risk their true nature being displayed. A strigoi can't voluntarily come within 10 feet of a brandished mirror or source of bright light. To brandish a mirror or light source, a creature must Interact to do so for 1 round (similar to Raising a Shield). If the strigoi involuntarily comes within 10 feet of a brandished mirror or light source, it gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the brandished object until it ends an action beyond 10 feet. After 1 round of being exposed to the subject of its revulsion, a strigoi can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, it overcomes its revulsions for [[/gmr 1d6 #Overcome Revulsions Duration]]{1d6 rounds} (or 1 hour on a critical success). A strigoi can move normally around mirrors or bright light sources that are not brandished, although doing so causes them discomfort that can be noticed with a successful Perception check to @UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{Sense Motive}.</li>\n<li><strong>Sunlight</strong> When exposed to direct sunlight, a strigoi immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious} and falls to the ground. It appears to be dead: it doesn't breathe, its body temperature matches its surroundings, and it doesn't react to pain or other stimuli. A successful @Check[perception|against:reflex] check against the strigoi's Reflex DC is enough to note one anomaly: the shadow cast by its \"dead\" body shifts and moves slightly, its edges twisting and active. Spells like @UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]{Detect Alignment}, senses like lifesense, and the \"corpse\" taking damage from vitality energy still function normally, and could reveal the truth without needing a successful Perception check. Viewing the \"corpse\" in a mirror's reflection can also reveal the truth, for only the body's shadow reflects. While in sunlight and unconscious, the strigoi loses its resistance to physical damage. If the strigoi takes enough damage that it would be reduced to 0 Hit Points, its body quickly decomposes, and the strigoi is destroyed.</li>\n<li><strong>Water Revulsion</strong> A strigoi cannot cross a significant source of running water (such as a creek, river, or waves on a seashore). A strigoi capable of flight can cross running water provided it approaches no closer than 10 feet to the liquid's surface. If forced into running water against its will, the strigoi becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and gains the fleeing condition as long as it remains in the water. At the end of any turn in which the strigoi remains in running water, it must succeed at a @Check[flat|dc:5] or be destroyed.</li>\n</ul>"
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p></li></ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Calculated Escape": {
@@ -2582,7 +2582,7 @@
                 },
                 "Drink Essence": {
                     "name": "Drink Essence",
-                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|defense:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and the strigoi regains @Damage[15[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP, but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
+                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|against:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and the strigoi regains @Damage[15[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
                 },
                 "Reach Spell": {
                     "name": "Reach Spell",
@@ -2595,6 +2595,10 @@
                 "Spiteful Escape": {
                     "name": "Spiteful Escape",
                     "description": "<p><strong>Trigger</strong> Nizca is reduced to 0 Hit Points</p><hr /><p><strong>Effect</strong> Nizca uses Shadow Form, then flies into the shadow beacon even though they're at 0 Hit Points. While at 0 Hit Points in this form, Nizca is unaffected by further damage. Once they reach the shadow beacon, their spirit becomes permanently fused with it and is destroyed only when the shadow beacon is destroyed.</p>"
+                },
+                "Shadow Form": {
+                    "name": "Shadow Form",
+                    "description": "<p>The strigoi reverts to pure shadow and absorbs its body and its gear into the darkness, or it shifts back to its physical form. In shadow form, the strigoi gains a climb Speed equal to its land Speed and can move through any gap that isn't airtight. However, it can only move along solid surfaces that aren't highly reflective, not liquid or mirrored surfaces. If the surface it's on is destroyed, the strigoi returns to physical form and is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}. The strigoi loses fast healing while in shadow form but can remain in shadow form indefinitely.</p>\n<p>A strigoi that is exposed to sunlight while in shadow form becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and must attempt a @Check[flat|dc:16] at the end of each of its turns. If it fails this flat check, it is destroyed, the shadow vanishing with a blood-curdling wail.</p>"
                 }
             }
         },
@@ -2608,9 +2612,9 @@
             "name": "Camazotz's Swarm",
             "disable": "<p>@Check[nature|dc:17] (trained) to disperse the swarm or @Check[religion|dc:15] (trained) to disrupt Camazotz's connection, which disperses the swarm</p>",
             "hazarddescription": "<p>A massive swarm of bats flies throughout the room, hampering vision, attacking foes, and magically restoring Camazotz's followers.</p>",
-            "routine": "<p>(2 actions) The swarm uses its first action to move up to 30 feet to envelop as many enemies as possible within its @Template[type:burst|distance:30] space. All enemies in the swarm's space become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} while within the swarm. It then uses its second action to bite all enemies, dealing @Damage[(1d6+3)[piercing]|options:area-damage] damage (@Check[reflex|dc:17|basic] save) to all enemies in the space.</p>",
+            "routine": "<p>(2 actions) The swarm uses its first action to move up to 30 feet to envelop as many enemies as possible within its @Template[type:burst|distance:30] space. All enemies in the swarm's space become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} while within the swarm. It then uses its second action to bite all enemies, dealing @Damage[(1d6+3)[piercing]|options:area-damage] damage (@Check[reflex|dc:17|basic|options:area-effect] save) to all enemies in the space.</p>",
             "reset": "<p>The swarm disperses and returns to roost throughout the room 1 minute after all enemies leave the room. The swarm recovers 5 Hit Points per day thanks the power of Camazotz.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Swarming Descent": {
                     "name": "Swarming Descent",
@@ -2631,7 +2635,7 @@
             },
             "name": "Kalakaigh",
             "publicNotes": "<p>A kalakaigh is above all else a killer—a fiendish incarnation of the sin of murder. They typically form from the souls of mortals who, in life, pursued murder as an obsession, killing simply for the thrill of killing.</p><h2>Servants of Slaughter</h2><p>Kalakaighs often serve the demon lords Shax and Zura, but some remain stubbornly devoted to Nocticula, a legacy from her time spent as a patron of assassins. These demons cling to the hope that Nocticula will return as their queen, if only they can murder enough innocents in her name.</p>",
-            "allSaves": " +1 to all saves vs. magic",
+            "allSaves": "+1 to all saves vs. magic",
             "items": {
                 "Fear Scent": {
                     "name": "Fear Scent",
@@ -2649,7 +2653,7 @@
                     "description": "<p>A kalakaigh deals 1d6 extra precision damage and 1d6 extra persistent bleed damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The kalakaigh can take on the appearance of any Medium humanoid, but when they do so, they always appear to be wearing dark clothing, black gloves, and some sort of obscuring cover over their face or head. These \"clothes\" are in fact part of the demon's new body. Their new form doesn't change their Speed or their weapon attack and damage modifiers with their Strikes, but it does prevent them from making horn Strikes.</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Shocking Reveal": {
@@ -2738,7 +2742,7 @@
                     "description": "<p><strong>Trigger</strong> A construct within 60 feet of Anoreth is damaged</p><hr /><p><strong>Effect</strong> Anoreth clenches their fist, magically seizing the raw materials damaged by the triggering Strike and drawing it toward themself. These materials orbit Anoreth in a defensive ward, granting them 10 Temporary Hit points until the end of their next turn.</p>"
                 },
                 "Steady Spellcasting": {
-                    "name": "Steady Spellcasting",
+                    "name": "镇定施法 Steady Spellcasting",
                     "description": "<p>If a reaction would disrupt Anoreth's spellcasting action, they attempt a @Check[flat|dc:15]; if they succeed, their action isn't disrupted.</p>"
                 },
                 "Familiar": {
@@ -2798,7 +2802,7 @@
             "disable": "<p>Crafting or @Check[thievery|dc:28] (expert) to disconnect the fence from its magitech power source</p>",
             "hazarddescription": "<p>A locked, wrought iron fence with bars spaced inches apart is magically electrified.</p>",
             "reset": "<p>The trap automatically resets. If deactivated or disabled, the trap doesn't reset.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Shock": {
                     "name": "Shock",
@@ -2815,7 +2819,7 @@
             },
             "name": "Losko",
             "publicNotes": "<p>These skeletons retain the cunning they possessed in life.</p>\n<hr />\n<p>Animated skeletons are among the most common types of undead.</p>",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "blurb": "Variant skeletal champion",
             "items": {
                 "Site Bound": {
@@ -2831,7 +2835,7 @@
                     "description": "<p>The sight of Erissa's badge (see area <strong>B8</strong>) distracts Losko. If a PC visibly wears this essence charm, Losko must succeed at a @Check[will|dc:20] save at the start of his turn. On a failure, he accuses the charm's wearer of being Erissa's stooge and threatens them with all manner of torment, spending enough time ranting that he becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} until he can no longer see the charm.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Frustrated Rage": {
@@ -2853,7 +2857,7 @@
             },
             "name": "Shankfingers",
             "publicNotes": "<p>Redcaps are sadistic and capricious fey who thrill in bloodletting and murder. While they are most famous for appearing as wizened, bearded men, redcaps of other genders are no less fearsome or cruel. However, redcaps are ultimately craven bullies, cowed by anything more powerful than themselves, a trait that leads them to fear and despise the symbols of deities.</p>\n<p>Many fairy tales explain how the redcaps draw power from dipping the hats for which they are named in fresh blood. Just as iconic to these cruel little fey are their iron-clad boots, and the clanging sound of their metal soles clanking on stone floors is both discordant and disconcerting—especially to those who recognize the sound for what it is. Redcaps typically stand only 3 feet tall, with hunched frames, pointed ears, crooked teeth, and long, white, tangled hair.</p>\n<p>Though unlikely to share true affection, redcaps find camaraderie in murder. Small troupes of redcaps travel together, sharing bloody kills and reminiscing on their brutal exploits. They loathe the company of most other creatures, with the notable exception of the feline fey called elananxes.</p>",
-            "hp": "fast healing 10",
+            "hp": "快速治疗10",
             "blurb": "Elite redcap",
             "items": {
                 "equipment-Iron Boots": {
@@ -2870,7 +2874,7 @@
                     "description": "<p>A redcap's woolen hat is dyed with the blood of their victims. If the redcap loses their cap, they no longer benefit from fast healing and take a –4 status penalty to their damage rolls. They can create a new cap in 10 minutes, but that cap doesn't grant them powers until the redcap has turned it red with Blood Soak. A cap has no benefit for creatures other than the redcap who made it.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.s5mS7CyE0oOYlecv]{Effect: Lost Red Cap}</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Divine Revulsion": {
@@ -2922,7 +2926,7 @@
             "hazarddescription": "<p>Pressure plates in the floor, wall, and ceiling of this hall trigger silver blades to protrude from the ceiling, slashing anything passing through the hall.</p>",
             "routine": "<p>(2 actions) The maze of blades continues to spin, jab, and slash, dealing @Damage[(2d10+13)[slashing]|traits:magical|options:damage:material:silver,area-damage] damage (magic, silver) to all creatures in the area (@Check[reflex|dc:28|basic] save).</p>",
             "reset": "<p>The trap deactivates after 1 minute and can be manually reset.</p>",
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Sudden Strikes": {
                     "name": "Sudden Strikes",
@@ -2942,7 +2946,7 @@
             "hazarddescription": "<p>A flurry of scattered flower petals flies through the area, as psychic impressions of pain, sorrow, and being trapped assail the living—Mirida's scattered memories.</p>",
             "routine": "<p>(1 action) The flower petals surge through the room, dealing @Damage[(2d10+13)[slashing]|options:area-damage] damage to all creatures in the area (@Check[reflex|dc:32|basic] save). A creature that fails is additionally @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} (@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4} on a critical failure).</p>",
             "reset": "<p>The petals disperse after 1 minute and reset after 1 day.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Scattered Memories": {
                     "name": "Scattered Memories",
@@ -2959,7 +2963,7 @@
             },
             "name": "Freileth",
             "publicNotes": "<p>Vampire masterminds are evil wizards who control entire cabals of the undead and instill fear in the hearts of mortals far and wide.</p>\n<hr />\n<p>Vampires are undead creatures that feed on the blood of the living.</p>",
-            "hp": "coffin restoration, fast healing 10, void healing",
+            "hp": "寝于棺木，快速治疗10，虚能治疗",
             "items": {
                 "equipment-Signet Ring": {
                     "name": "Signet Ring"
@@ -2969,7 +2973,7 @@
                     "description": "<p>The vampire's presence brings forth creatures of the night to do the master's bidding. These typically include @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.6wPW2dvpt86Ou6bL]{Rat Swarms}, @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.2mg30nJR6P3HJDSd]{Bat Swarms}, and @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.BN5Lb6IsQ9Wyu3rL]{Wolves}, but can include other creatures.</p>\n<p>The vampire can give telepathic orders to these creatures as long as they are within 100 feet, but they can't communicate back.</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Coffin Restoration": {
@@ -2985,11 +2989,11 @@
                     "description": "<p>All vampires possess the following vulnerabilities.</p>\n<ul>\n<li><strong>Compulsions</strong> Vampires are creatures with strange and unknowable compulsions. A typical vampire can't voluntarily cross running water unless they're transported while they hide within their coffin, nor can they enter a private dwelling unless invited in by someone with the authority to do so. At your discretion, vampires might have different compulsions—a pirate vampire might not be able to set foot on solid ground without being invited, for example. The vampire can still be forced to do these things and might be able to overcome their compulsion just as they do their revulsion.</li>\n<li><strong>Revulsion</strong> A vampire can't voluntarily come within 10 feet of brandished garlic or a brandished religious symbol of a deity with a holy sanctification option. To brandish garlic or a religious symbol, a creature must Interact to do so, and it remains brandished for 1 round (similar to Raising a Shield). If the vampire involuntarily comes within 10 feet of an object of their revulsion, they gain the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition, running from the object of their revulsion until they end an action beyond 10 feet. After 1 round of being exposed to the subject of their revulsion, a vampire can attempt a @Check[will|dc:25] save as a single action, which has the concentrate trait. On a success, they overcome their revulsions for [[/gmr 1d6 #rounds]]{1d6 rounds} (or 1 hour on a critical success).</li>\n<li><strong>Stake</strong> A wooden stake driven through a vampire's heart drops the vampire to 0 HP and prevents them from healing above 0 HP, even in their coffin. Staking a vampire requires 3 actions and works only if the vampire is @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If the stake is removed, the vampire can heal above 0 HP again, and if they're in their coffin, the 1-hour rest period begins once the stake is removed. If the vampire's head is severed and anointed with holy water while the stake is in place, the vampire is destroyed.</li>\n<li><strong>Sunlight</strong> If exposed to direct sunlight, a vampire immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1}. The slowed value increases by 1 each time the vampire ends their turn in sunlight, and the condition ends when they're no longer in sunlight. If the vampire loses all their actions in this way, they're destroyed. Due to their supernatural aversion to light, vampires don't cast shadows or show a reflection in mirrors\n</li>\n</ul>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The vampire transforms into one of its animal forms or back into its normal form. Most vampires can turn into a bat, but some can turn into a different creature, such as a rat or a wolf.</p>\n<ul>\n<li><strong>Giant Bat</strong>\n<ul>\n<li><strong>Senses</strong> echolocation 40 feet,</li>\n<li><strong>Speed</strong> 20 feet, fly 30 feet,</li>\n<li><strong>Melee</strong> fangs +19 <strong>Damage</strong> 2d8+9 piercing</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Create Servitor": {
@@ -3009,7 +3013,7 @@
                     "description": "<p><strong>Requirement</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the vampire's reach.</p>\n<hr />\n<p><strong>Effect</strong> The vampire sinks its fangs into that creature to drink its blood. This requires an @Check[athletics|defense:fortitude] check against the victim's Fortitude DC if the victim is grabbed and is automatic for any of the other conditions.</p>\n<p>The victim is @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2} and the vampire regains @Damage[10[healing]]{10 HP}, gaining any excess HP as temporary Hit Points. Drinking Blood from a creature that's already drained doesn't restore any HP to the vampire but increases the victim's drained value by 1, killing the victim when it reaches drained 5. A vampire can also consume blood that's been emptied into a vessel for sustenance, but it gains no HP from doing so.</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a @Check[medicine|dc:20|name:Blood Transfusion] check and sufficient blood or a blood donor, reduces the drain by 1 after 10 minutes.</p>"
                 },
                 "Steady Spellcasting": {
-                    "name": "Steady Spellcasting",
+                    "name": "镇定施法 Steady Spellcasting",
                     "description": "<p>If another creature's reaction would disrupt the vampire mastermind's spellcasting action, the vampire attempts a @Check[flat|dc:15]. If the vampire succeeds, their action isn't disrupted.</p>"
                 },
                 "Turn to Mist": {
@@ -3047,6 +3051,100 @@
                 "Swallow Whole": {
                     "name": "Swallow Whole",
                     "description": "<p>Medium, @Damage[(2d6+6)[bludgeoning]], Rupture 12</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                }
+            }
+        },
+        "Strigoi Servant": {
+            "prototypeToken": {
+                "name": "Strigoi Servant"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "Strigoi Servant",
+            "publicNotes": "<p>A strigoi servant typically serves at the command of a strigoi progenitor.</p><hr /><p>The oldest of all vampires are the strigoi. They predate ancient nosferatus and view moroi as infantile children, yet their own origins are so far lost to the ravages of time that few today have heard of them and fewer still know their true nature. Many of the oldest tales about vampires trace back to the strigoi, and nearly every other vampire carries traits that ultimately have their roots in these powerful, ancient creatures.</p>\n<p>Strigoi, in their true form, are bodiless entities native to the Netherworld, incapable of interacting with the physical world, existing only as pure forces of malevolence. When this malevolence is invited into a physical body through ancient rituals, a strigoi becomes much more dangerous. This requirement—that a living creature perform a rite of their own free will to draw the strigoi into their soul—may well be the source of a moro</p>",
+            "hp": "coffin restoration, fast healing 10, void healing",
+            "items": {
+                "Fast Healing 10": {
+                    "name": "Fast Healing 10",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+                },
+                "Coffin Restoration": {
+                    "name": "Coffin Restoration",
+                    "description": "<p>Unlike other undead, a vampire isn't destroyed at 0 HP. Instead, it falls @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If its body rests in its coffin for 1 hour, the vampire gains 1 HP, after which its fast healing begins to function normally.</p>"
+                },
+                "Shadow Form": {
+                    "name": "Shadow Form",
+                    "description": "<p>The strigoi reverts to pure shadow and absorbs its body and its gear into the darkness, or it shifts back to its physical form. In shadow form, the strigoi gains a climb Speed equal to its land Speed and can move through any gap that isn't airtight. However, it can only move along solid surfaces that aren't highly reflective, not liquid or mirrored surfaces. If the surface it's on is destroyed, the strigoi returns to physical form and is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}. The strigoi loses fast healing while in shadow form but can remain in shadow form indefinitely.</p>\n<p>A strigoi that is exposed to sunlight while in shadow form becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and must attempt a @Check[flat|dc:16] at the end of each of its turns. If it fails this flat check, it is destroyed, the shadow vanishing with a blood-curdling wail.</p>"
+                },
+                "Strigoi Weaknesses": {
+                    "name": "Strigoi Weaknesses",
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
+                },
+                "Void Healing": {
+                    "name": "Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Drink Essence": {
+                    "name": "Drink Essence",
+                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|against:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and the strigoi regains @Damage[13[healing]] hit points, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
+                },
+                "Sneak Attack": {
+                    "name": "Sneak Attack",
+                    "description": "<p>The strigoi servant deals 1d6 extra precision damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
+                }
+            }
+        },
+        "Strigoi Progenitor": {
+            "prototypeToken": {
+                "name": "Strigoi Progenitor"
+            },
+            "data": {
+                "placeHolder": "placeHolder"
+            },
+            "name": "Strigoi Progenitor",
+            "publicNotes": "<p>These strigoi are intentionally summoned into willing hosts via foul magic rituals.</p><hr /><p>The oldest of all vampires are the strigoi. They predate ancient nosferatus and view moroi as infantile children, yet their own origins are so far lost to the ravages of time that few today have heard of them and fewer still know their true nature. Many of the oldest tales about vampires trace back to the strigoi, and nearly every other vampire carries traits that ultimately have their roots in these powerful, ancient creatures.</p>\n<p>Strigoi, in their true form, are bodiless entities native to the Netherworld, incapable of interacting with the physical world, existing only as pure forces of malevolence. When this malevolence is invited into a physical body through ancient rituals, a strigoi becomes much more dangerous. This requirement—that a living creature perform a rite of their own free will to draw the strigoi into their soul—may well be the source of a moroi's compulsion not to enter a home without first being invited.</p>",
+            "hp": "coffin restoration, fast healing 10, void healing",
+            "items": {
+                "Fast Healing 10": {
+                    "name": "Fast Healing 10",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+                },
+                "Coffin Restoration": {
+                    "name": "Coffin Restoration",
+                    "description": "<p>Unlike other undead, a vampire isn't destroyed at 0 HP. Instead, it falls @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}. If its body rests in its coffin for 1 hour, the vampire gains 1 HP, after which its fast healing begins to function normally.</p>"
+                },
+                "Domain of Dusk": {
+                    "name": "Domain of Dusk",
+                    "description": "<p><strong>Frequency</strong> once per minute</p><hr /><p><strong>Effect</strong> With a wave of their hand, the strigoi calls forth vile ruination from the surrounding shadows, causing coils of darkness and shadowy bats, rats, and wolves to lash out at living targets in a @Template[type:emanation|distance:30]. Living creatures in this area take @Damage[floor(1 + @actor.level/2)d6[void]|options:area-damage] damage with a @Check[fortitude|dc:31|basic|options:area-effect,inflicts:dazzled,inflicts:blinded] save against the DC of the strigoi's level. A creature that fails this save is also @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} by the darkness for 1 round (or @UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{Blinded} for 1 round and then dazzled for 1 round on a critical failure).</p>"
+                },
+                "Shadow Escape": {
+                    "name": "Shadow Escape",
+                    "description": "<p><strong>Trigger</strong> The strigoi is reduced to 0 HP</p>\n<hr />\n<p><strong>Effect</strong> The strigoi uses Shadow Form. It can take move actions to move toward its coffin even though it's at 0 HP. While at 0 HP in this form, the strigoi is unaffected by further damage. Once the strigoi reaches its coffin, or if it hasn't done so within 2 hours, it automatically returns to its physical form, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}.</p>"
+                },
+                "Shadow Form": {
+                    "name": "Shadow Form",
+                    "description": "<p>The strigoi reverts to pure shadow and absorbs its body and its gear into the darkness, or it shifts back to its physical form. In shadow form, the strigoi gains a climb Speed equal to its land Speed and can move through any gap that isn't airtight. However, it can only move along solid surfaces that aren't highly reflective, not liquid or mirrored surfaces. If the surface it's on is destroyed, the strigoi returns to physical form and is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}. The strigoi loses fast healing while in shadow form but can remain in shadow form indefinitely.</p>\n<p>A strigoi that is exposed to sunlight while in shadow form becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 2} and must attempt a @Check[flat|dc:16] at the end of each of its turns. If it fails this flat check, it is destroyed, the shadow vanishing with a blood-curdling wail.</p>"
+                },
+                "Strigoi Weaknesses": {
+                    "name": "Strigoi Weaknesses",
+                    "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p>\n</li></ul>"
+                },
+                "Void Healing": {
+                    "name": "Void Healing",
+                    "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "Create Servitor": {
+                    "name": "Create Servitor",
+                    "description": "<p>If a creature dies after being reduced to 0 HP by Domain of Dusk or Drink Essence, the strigoi can turn this victim into a vampire servitor by donating some of their own blood to the victim and burying the victim in earth for 3 nights.</p>\n<p>A victim that's 8th level or higher becomes a strigoi servant, while a lower-level victim instead becomes a moroi vampire.</p>\n<p>A vampiric servitor is compelled to obey its creator, but if a vampire controls too many vampiric servitors at once (as determined by the GM), or if the servitor is a higher level than the vampire that created it, strong-willed servitors can free themselves by succeeding at a @Check[will|defense:will] saving throw against the vampire's Will DC.</p>"
+                },
+                "Dominate": {
+                    "name": "Dominate",
+                    "description": "<p>The vampire can cast @UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]{Dominate} at will as a divine innate spell. Casting it requires staring into the target's eyes, giving the spell the visual trait (@Check[will|dc:33|traits:visual]). A creature that succeeds is temporarily immune to that vampire's Dominate for 24 hours.</p>\n<p>Fully destroying the vampire ends the domination, but merely reducing the vampire to 0 HP is insufficient to break the spell.</p>"
+                },
+                "Drink Essence": {
+                    "name": "Drink Essence",
+                    "description": "<p><strong>Requirements</strong> A @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}, or willing creature is within the strigoi's reach</p><hr /><p><strong>Effect</strong> The strigoi progenitor sinks their fangs into the targeted creature to drink its blood and draw out its vital essence. This requires an @Check[athletics|against:fortitude] check against the creature's Fortitude DC if the creature is grabbed and is automatic for any of the other conditions. The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2} and @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}, and the strigoi regains @Damage[18[healing]] HP, gaining any excess HP as temporary Hit Points. Drinking Essence from a creature that's already drained or stupefied doesn't restore any HP, but increases either the creature's drained condition value or its stupefied condition value by 1 (whichever value is lesser is increased; if both values are equal, then the strigoi chooses which condition to increase the value of).</p>\n<p>A victim's drained condition decreases by 1 per week. A blood transfusion, which requires a successful @Check[medicine|dc:20] check and sufficient blood or a blood donor, reduces the drained value by 1 after 10 minutes.</p>\n<p>A victim's stupefied condition decreases by 1 per day after performing daily preparations. If the daily preparations are done in full sunlight, the stupefied condition is removed entirely.</p>"
                 }
             }
         }

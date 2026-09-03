@@ -111,7 +111,7 @@
             "disable": "<p>对喷泉进行一次@Check[thievery|dc:26|name:Disable the Fountain|traits:complex,mechanical,trap]（专家）使其停止喷射酸蚀，或通过一次@Check[thievery|dc:22|name:Disable a Fountain Nozzle|traits:complex,mechanical,trap]（专家）拆掉一个喷嘴并使陷阱的动作数减少1。当动作数减少到0时喷泉被解除。</p>",
             "hazarddescription": "<p>一个带有三个喷嘴的隐藏的酸性喷泉连接着房间中的八个压力垫。</p>",
             "reset": "<p>陷阱会在1分钟后停止运作，那时它的酸液库已经耗尽了。在酸液库被重新注满之前无法重新激活。</p>",
-            "routine": "<p>（3动作） 在陷阱的先攻轮，它每有一个动作，就对房间里随机一个生物进行一次酸雾打击。</p>",
+            "routine": "<p>（3动作）在陷阱的先攻轮，它每有一个动作，就对房间里随机一个生物进行一次酸雾打击。</p>",
             "stealthdetails": "<p>（专家）注意到隐藏的喷泉</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -164,7 +164,7 @@
             "name": "Aeon Nexus (3-4)",
             "disable": "<p>@Check[thievery|dc:23|name:Remove Aeon Stone|traits:magical,trap]（受训）to remove one nexus aeon stone from the center</p>",
             "hazarddescription": "<p>A small cluster of aeon stones floats two feet off the ground, orbiting by shards of shattered aeon stones that crackle with electricity。</p>",
-            "routine": "<p>（3动作） The trap loses one action each turn for each nexus aeon stone removed from its center. On each action, it shoots a jet of electrified, razor-sharp aeon stone shards at a different creature within 30 feet, dealing @Damage[1d8[piercing]]伤害 and @Damage[1d8[electricity]]伤害 (@Check[reflex|dc:21|basic|name:Aeon Nexus])。</p>",
+            "routine": "<p>（3动作）The trap loses one action each turn for each nexus aeon stone removed from its center. On each action, it shoots a jet of electrified, razor-sharp aeon stone shards at a different creature within 30 feet, dealing @Damage[1d8[piercing]]伤害 and @Damage[1d8[electricity]]伤害 (@Check[reflex|dc:21|basic|name:Aeon Nexus])。</p>",
             "stealthdetails": "<p>(DC 20 to find the cluster of aeon stones at the center of the nexus in the fog)</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -183,7 +183,7 @@
             "name": "Aeon Nexus (5-6)",
             "disable": "<p>@Check[thievery|dc:26|name:Remove Aeon Stone|traits:magical,trap]（受训）to remove one nexus aeon stone from the center</p>",
             "hazarddescription": "<p>A small cluster of aeon stones floats two feet off the ground, orbiting by shards of shattered aeon stones that crackle with electricity。</p>",
-            "routine": "<p>（3动作） The trap loses one action each turn for each nexus aeon stone removed from its center. On each action, it shoots a jet of electrified, razor-sharp aeon stone shards at a different creature within 30 feet, dealing @Damage[(1d8+3)[piercing]]伤害 and @Damage[(1d8+3)[electricity]]伤害 (@Check[reflex|dc:23|basic|name:Aeon Nexus])。</p>",
+            "routine": "<p>（3动作）The trap loses one action each turn for each nexus aeon stone removed from its center. On each action, it shoots a jet of electrified, razor-sharp aeon stone shards at a different creature within 30 feet, dealing @Damage[(1d8+3)[piercing]]伤害 and @Damage[(1d8+3)[electricity]]伤害 (@Check[reflex|dc:23|basic|name:Aeon Nexus])。</p>",
             "stealthdetails": "<p>(DC 23 to find the cluster of aeon stones at the center of the nexus in the fog)</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -229,7 +229,7 @@
                     "description": "<p>阿克希瓦呼出一阵绿色的瘴气。@Template[cone|distance:15]范围内的生物都受到衰竭体液的影响（正常进行豁免）。她在[[/gmr 1d4 #rounds]]{1d4轮}之内无法再次使用该能力。</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -272,7 +272,7 @@
                     "description": "<p>阿克希瓦呼出一阵绿色的瘴气。@Template[cone|distance:15]范围内的生物都受到衰竭体液的影响（正常进行豁免）。她在[[/gmr 1d4 #rounds]]{1d4轮}之内无法再次使用该能力。</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -597,7 +597,7 @@
             },
             "items": {
                 "equipment-Inkwell (bonded item)": {
-                    "name": "墨水池 Inkwell （连结物品）"
+                    "name": "墨水池 Inkwell（连结物品）"
                 },
                 "Counterspell": {
                     "name": "反制法术 Counterspell",
@@ -616,7 +616,7 @@
             },
             "items": {
                 "equipment-Inkwell (bonded item)": {
-                    "name": "墨水池 Inkwell （连结物品）"
+                    "name": "墨水池 Inkwell（连结物品）"
                 },
                 "Counterspell": {
                     "name": "反制法术 Counterspell",
@@ -636,7 +636,7 @@
             "items": {
                 "Infused Items": {
                     "name": "灌注物品 Infused Items",
-                    "description": "<p>每个炼金术士携带2个灌注中级强酸瓶，2个灌注中级瓶装闪电，2个灌注中级寒霜瓶。这些物品会持续24小时，或者直到下次炼金术士进行日常准备。</p>"
+                    "description": "<p>每个炼金术士携带2个灌注中级强酸瓶，2个灌注中级瓶装闪电，2个灌注中级寒霜瓶。这些物品会持续24小时，或者直到下次炼金术士进行每日准备。</p>"
                 },
                 "Alchemist Goggles": {
                     "name": "炼金护目镜 Alchemist Goggles",
@@ -944,7 +944,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Drain Life": {
                     "description": "<p>When the wight damages a living creature with its claw Strike, the wight gains 3 temporary Hit Points and the creature must succeed at a @Check[fortitude|dc:17|options:inflicts:drained] save or become @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}. Further damage dealt by the wraith increases the amount of drain by 1 on a failed save to a maximum of drained 4.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.LRIYUFQ7FE9H4RWD]{Effect: Drain Life}</p>",
@@ -959,7 +959,7 @@
                     "description": "<p><strong>Trigger</strong> The wight is reduced to 0 Hit Points.</p>\n<hr />\n<p><strong>Effect</strong> The wight makes a Strike before being destroyed. It doesn't gain any temporary HP from drain life on this Strike.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -1197,7 +1197,7 @@
             "disable": "<p>在人群中已经动摇或者承受伤害的的人数超过了剩余站着的人群领头人数量，人群会散开。对于影响一个区域的效果，将每一格记为一个人群的成员。</p>",
             "hazarddescription": "<p>愤怒的人群向冒犯者投掷夜壶，但还没到以身犯险的程度。该人群充满九个连续的方格，并且能够改变形状填充街区。角色能够移动穿过人群，但是被人群占据的位置是困难地形。</p>",
             "reset": "<p>在人群中已经动摇或者承受伤害的的人数超过了剩余站着的人群领头人数量，人群会散开。对于影响一个区域的效果，将每一格记为一个人群的成员。</p>",
-            "routine": "<p>（3动作） 该人群使用其第一个动作来行走以远离任何和他们相邻的敌人（或者以靠近到30尺内），之后使用每个剩余的动作来对一个不同的目标尝试一次夜壶打击。</p>",
+            "routine": "<p>（3动作）该人群使用其第一个动作来行走以远离任何和他们相邻的敌人（或者以靠近到30尺内），之后使用每个剩余的动作来对一个不同的目标尝试一次夜壶打击。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -1219,7 +1219,7 @@
             "disable": "<p>在人群中已经动摇或者承受伤害的的人数超过了剩余站着的人群领头人数量，人群会散开。对于影响一个区域的效果，将每一格记为一个人群的成员。</p>",
             "hazarddescription": "<p>愤怒的人群向冒犯者投掷垃圾，但还没到以身犯险的程度。该人群充满九个连续的方格，并且能够改变形状填充街区。角色能够移动穿过人群，但是被人群占据的位置是困难地形。</p>",
             "reset": "<p>在人群中已经动摇或者承受伤害的的人数超过了剩余站着的人群领头人数量，人群会散开。对于影响一个区域的效果，将每一格记为一个人群的成员。</p>",
-            "routine": "<p>（3动作） 该人群使用其第一个动作来行走以远离任何和他们相邻的敌人（或者以靠近到30尺内），之后使用每个剩余的动作来对一个不同的目标尝试一次垃圾打击。</p>",
+            "routine": "<p>（3动作）该人群使用其第一个动作来行走以远离任何和他们相邻的敌人（或者以靠近到30尺内），之后使用每个剩余的动作来对一个不同的目标尝试一次垃圾打击。</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -1263,11 +1263,11 @@
             "items": {
                 "Alchemical Rupture": {
                     "name": "炼金破裂 Alchemical Rupture",
-                    "description": "<p>当炼金魔像受到重击伤害或受到@UUID[Compendium.pf2e.spells-srd.Item.1xbFBQDRs0hT5xZ9]{粉碎音波 Shatter}魔法影响时，身上的一个玻璃容器会碎裂，对@Template[emanation|distance:5]{5尺弥漫}范围喷出炼金液体。</p>\n<p>投掷1d6并参考下表决定破裂的炼金仓，任何被击中的生物受到如表影响 (@Check[reflex|dc:24])。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>当炼金魔像受到重击伤害或受到@UUID[Compendium.pf2e.spells-srd.Item.1xbFBQDRs0hT5xZ9]{粉碎音波 Shatter}魔法影响时，身上的一个玻璃容器会碎裂，对@Template[emanation|distance:5]{5尺弥漫}范围喷出炼金液体。</p>\n<p>投掷1d6并参考下表决定破裂的炼金仓，任何被击中的生物受到如表影响 (@Check[reflex|dc:24])。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 },
                 "Altered Alchemical Chambers": {
                     "name": "异变试剂 Altered Alchemical Chambers",
-                    "description": "<p>在漫长的时间里，炼金魔像体内的试剂发生了未知的变化。当魔像的能力触发异变试剂的影响时，投掷1d6确定试剂效果（如果投掷结果指向一个已经破裂的炼金仓，则什么也不会发生）。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>在漫长的时间里，炼金魔像体内的试剂发生了未知的变化。当魔像的能力触发异变试剂的影响时，投掷1d6确定试剂效果（如果投掷结果指向一个已经破裂的炼金仓，则什么也不会发生）。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 },
                 "Golem Antimagic": {
                     "name": "魔像抗魔 Golem Antimagic",
@@ -1275,7 +1275,7 @@
                 },
                 "Alchemical Injection": {
                     "name": "炼金注射 Alchemical Injection",
-                    "description": "<p>当炼金魔像以注射器打击击中一个生物，投1d6并查阅炼金容器表来决定额外效果。</p>\n<p>注射器让目标暴露在投掷结果决定的效果下。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>当炼金魔像以注射器打击击中一个生物，投1d6并查阅炼金容器表来决定额外效果。</p>\n<p>注射器让目标暴露在投掷结果决定的效果下。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:19]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 }
             },
             "prototypeToken": {
@@ -1352,7 +1352,7 @@
         },
         "Deeply Flawed Ritual": {
             "name": "有严重缺陷的仪式 Deeply Flawed Ritual",
-            "disable": "<p>仪式环内出现了七个缺陷，如影子的火焰般跳动着。每位清醒的塔夫瓦尔的助手保持一个缺陷受控，但其他的必须在塔夫瓦尔失去意识前修复。</p>\n<p>每个缺陷可以通过一次成功的@Check[occultism|dc:24]检定或者对应缺陷初始原因的DC20（受训）技能检定（见后文表仪式缺陷和解决）。无论成功与否，尝试神秘检定来解除危害的PC会了解到缺陷的成因，以及克服它可以使用的技能。</p>\n<p>每当使用这些其他的技能修复缺陷的检定成功时，使用神秘检定修复一个缺陷的DC减少2。每当击败一个幽影微灵，PC修复一个缺陷。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>d4</th>\n<th>缺陷的成因</th>\n<th>用以克服的技能</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>被骚扰（在奥秘学院“要么发文要么死”的传统，使得塔夫瓦尔被迫在仪式执行中投机取巧，所以一些符文没有正确绘制）</td>\n<td>@Check[arcana|dc:20] （受训）或@Check[thievery|dc:20] （受训）</td>\n</tr>\n<tr>\n<td>2</td>\n<td>情感错位（塔夫瓦尔来自奈达尔，潜意识里希望这仪式能显出她故乡的一些优点；她在符文中加入了一些阴影语，并增强了能量）</td>\n<td>@Check[society|dc:20] （受训）或@Check[religion|dc:20] （受训）</td>\n</tr>\n<tr>\n<td>3</td>\n<td>与世隔绝（塔夫瓦尔没有做多少现场工作，并且把符文用的墨水中所需要的一种蘑菇搞错了）</td>\n<td>@Check[crafting|dc:20] （受训）或@Check[nature|dc:20] （受训）</td>\n</tr>\n<tr>\n<td>4</td>\n<td>束手束脚（塔夫瓦尔自身的犹豫和自我怀疑让仪式逐渐脱离她的控制）</td>\n<td>@Check[deception|dc:20] （受训）或@Check[diplomacy|dc:20] （受训）</td>\n</tr>\n</tbody>\n</table>",
+            "disable": "<p>仪式环内出现了七个缺陷，如影子的火焰般跳动着。每位清醒的塔夫瓦尔的助手保持一个缺陷受控，但其他的必须在塔夫瓦尔失去意识前修复。</p>\n<p>每个缺陷可以通过一次成功的@Check[occultism|dc:24]检定或者对应缺陷初始原因的DC20（受训）技能检定（见后文表仪式缺陷和解决）。无论成功与否，尝试神秘检定来解除危害的PC会了解到缺陷的成因，以及克服它可以使用的技能。</p>\n<p>每当使用这些其他的技能修复缺陷的检定成功时，使用神秘检定修复一个缺陷的DC减少2。每当击败一个幽影微灵，PC修复一个缺陷。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>d4</th>\n<th>缺陷的成因</th>\n<th>用以克服的技能</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>被骚扰（在奥秘学院“要么发文要么死”的传统，使得塔夫瓦尔被迫在仪式执行中投机取巧，所以一些符文没有正确绘制）</td>\n<td>@Check[arcana|dc:20]（受训）或@Check[thievery|dc:20]（受训）</td>\n</tr>\n<tr>\n<td>2</td>\n<td>情感错位（塔夫瓦尔来自奈达尔，潜意识里希望这仪式能显出她故乡的一些优点；她在符文中加入了一些阴影语，并增强了能量）</td>\n<td>@Check[society|dc:20]（受训）或@Check[religion|dc:20]（受训）</td>\n</tr>\n<tr>\n<td>3</td>\n<td>与世隔绝（塔夫瓦尔没有做多少现场工作，并且把符文用的墨水中所需要的一种蘑菇搞错了）</td>\n<td>@Check[crafting|dc:20]（受训）或@Check[nature|dc:20]（受训）</td>\n</tr>\n<tr>\n<td>4</td>\n<td>束手束脚（塔夫瓦尔自身的犹豫和自我怀疑让仪式逐渐脱离她的控制）</td>\n<td>@Check[deception|dc:20]（受训）或@Check[diplomacy|dc:20]（受训）</td>\n</tr>\n</tbody>\n</table>",
             "hazarddescription": "<p>一个有缺陷的仪式，释放出幽影能量，并撕开了一个影界的裂口。</p>",
             "routine": "<p>（1动作）在其每一回合的开始，该仪式释放一股幽影能量，对在上一轮中参与仪式的每个角色造成@Damage[4d6[void]]伤害（@Check[fortitude|dc:22|basic|name:Flawed Ritual]豁免）（包括塔夫瓦尔和她的助手，以及任何尝试技能检定来接触危害的PC）。非参与者能以一个反应动作站到参与者前方。这会阻挡对仪式施法者造成的伤害，但是此非参与者必须尝试这次强韧豁免。</p><p>除了造成伤害意外，该仪式的能量涌动也会将一个@UUID[Compendium.pf2e.pfs-season-1-bestiary.3fctnHmcLQM3KrZj]送入房间内。如果房间内已经有两个微灵，该仪式不再创造新的微灵，而是恢复每个微灵@Damage[10[healing]]生命值。</p>",
             "data": {
@@ -1383,7 +1383,7 @@
                     "description": "<p>Whenever the krooth is damaged by a critical hit, it gains a +2 status bonus to attack and damage rolls until the end of its next turn. It can't use reactions while this frenzy lasts.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.tJx9B2e3AET6PbJD]{Effect: Pain Frenzy}</p>"
                 },
                 "Aquatic Ambush": {
-                    "name": "Aquatic Ambush",
+                    "name": "水下伏击 Aquatic Ambush",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AquaticAmbush]</p>"
                 },
                 "Poison Tooth": {
@@ -1401,7 +1401,7 @@
         },
         "Desert Wind": {
             "name": "沙漠之风 Desert Wind",
-            "blurb": "特殊: 坐骑",
+            "blurb": "特殊：坐骑 Mount",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -1427,11 +1427,11 @@
             "items": {
                 "Alchemical Rupture": {
                     "name": "炼金破裂 Alchemical Rupture",
-                    "description": "<p>当炼金魔像受到重击伤害或受到@UUID[Compendium.pf2e.spells-srd.Item.1xbFBQDRs0hT5xZ9]{粉碎音波 Shatter}魔法影响时，身上的一个玻璃容器会碎裂，对@Template[emanation|distance:5]{5尺弥漫}范围喷出炼金液体。</p>\n<p>投掷1d6并参考下表决定破裂的炼金仓，任何被击中的生物受到如表影响 (@Check[reflex|dc:16])。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>当炼金魔像受到重击伤害或受到@UUID[Compendium.pf2e.spells-srd.Item.1xbFBQDRs0hT5xZ9]{粉碎音波 Shatter}魔法影响时，身上的一个玻璃容器会碎裂，对@Template[emanation|distance:5]{5尺弥漫}范围喷出炼金液体。</p>\n<p>投掷1d6并参考下表决定破裂的炼金仓，任何被击中的生物受到如表影响 (@Check[reflex|dc:16])。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 },
                 "Altered Alchemical Chambers": {
                     "name": "异变试剂 Altered Alchemical Chambers",
-                    "description": "<p>在漫长的时间里，炼金魔像体内的试剂发生了未知的变化。当魔像的能力触发异变试剂的影响时，投掷1d6确定试剂效果（如果投掷结果指向一个已经破裂的炼金仓，则什么也不会发生）。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>在漫长的时间里，炼金魔像体内的试剂发生了未知的变化。当魔像的能力触发异变试剂的影响时，投掷1d6确定试剂效果（如果投掷结果指向一个已经破裂的炼金仓，则什么也不会发生）。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 },
                 "Golem Antimagic": {
                     "name": "魔像抗魔 Golem Antimagic",
@@ -1439,7 +1439,7 @@
                 },
                 "Alchemical Injection": {
                     "name": "炼金注射 Alchemical Injection",
-                    "description": "<p>当炼金魔像以注射器打击击中一个生物，投1d6并查阅炼金容器表来决定额外效果。</p>\n<p>注射器让目标暴露在投掷结果决定的效果下。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1} （大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
+                    "description": "<p>当炼金魔像以注射器打击击中一个生物，投1d6并查阅炼金容器表来决定额外效果。</p>\n<p>注射器让目标暴露在投掷结果决定的效果下。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>[[/gmr 1d6[Alchemical Effect] #Alchemical Chambers]]{1d6}</th>\n<th>炼金效果</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-2</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2})</td>\n</tr>\n<tr>\n<td>3-4</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2})</td>\n</tr>\n<tr>\n<td>5-6</td>\n<td>@Check[fortitude|dc:15]或@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed}持续一轮（大失败时缓慢持续两轮）</td>\n</tr>\n</tbody>\n</table>"
                 }
             },
             "prototypeToken": {
@@ -1465,7 +1465,7 @@
                     "description": "<p><strong>需求</strong> 凶暴灰烬狼用颚@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]着一个敌人；</p>\n<hr />\n<p><strong>效果</strong> 凶暴灰烬狼猛烈甩动被利齿咬住的生物，造成[[/r {(1d10+2)[piercing],1[fire]}]]{1d10+2穿刺伤害+1火焰伤害}（@Check[fortitude|dc:20|basic]豁免）。</p>"
                 },
                 "Buck": {
-                    "name": "Buck",
+                    "name": "甩脱 Buck",
                     "description": "<p>@Check[reflex|dc:20]</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Buck]</p>"
                 }
             },
@@ -1522,7 +1522,7 @@
             },
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "+2 Circumstance to All Saves vs. Disease": {
@@ -1533,7 +1533,7 @@
                 "name": "Doctor Velshun (5-6)"
             },
             "allSaves": "+2 circumstance to all saves vs. disease",
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Doctor Velshun (7-8)": {
             "name": "Doctor Velshun (7-8)",
@@ -1544,13 +1544,13 @@
                 "name": "Doctor Velshun (7-8)"
             },
             "allSaves": "+2 circumstance bonus to all saves vs. disease",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "+2 Circumstance to All Saves vs. Disease": {
                     "name": "+2 Circumstance to All Saves vs. Disease"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -1598,7 +1598,7 @@
                     "description": "<p>The dryad can use Diplomacy to [[/act make-an-impression]] on and make very simple [[/act request]]{Requests} of animals and plants.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Tree Dependent": {
@@ -1627,14 +1627,14 @@
                     "description": "<p>巨人行进并且使用角抵打击，这次角抵打击在伤害上拥有+4环境加值。</p>\n<p>如果打击命中，巨人对目标尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize}。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Eerie Skeletal Giant"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Elderly Giant Tarantula": {
             "name": "Elderly Giant Tarantula",
@@ -1733,7 +1733,7 @@
                     "description": "<p>Duergar taskmasters automatically disbelieve all illusions of 1st level or lower.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>When first exposed to bright light, the duergar is blinded until the end of their next turn. After this exposure, light doesn't blind them again until after they spend 1 hour in darkness. However, as long as the duergar is in an area of bright light, they're dazzled.</p>"
                 },
                 "Take Them Down!": {
@@ -1755,10 +1755,10 @@
             "items": {
                 "Stench": {
                     "description": "<p>10 feet. A creature entering the aura or starting its turn in the aura must succeed at a @Check[fortitude|dc:18|options:area-effect,inflicts:sickened,inflicts:slowed] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} as long as it's sickened on a critical failure).</p>\n<p>While within the aura, the creature takes a -2 circumstance penalty to saves against disease and to recover from the sickened condition. A creature that succeeds at its save is temporarily immune for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]{Effect: Stench}</p>",
-                    "name": "Stench"
+                    "name": "恶臭 Stench"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Consume Flesh": {
@@ -1775,10 +1775,10 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:18] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living creature hit by a ghast's attack must succeed at a @Check[fortitude|dc:18|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 }
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Elite Glass River Midge": {
             "name": "精英琉璃河蠓 Elite Glass River Midge",
@@ -1799,7 +1799,7 @@
                 },
                 "Camouflage": {
                     "name": "伪装 Camouflage",
-                    "description": "<p>在自然环境中，即使没有掩蔽，琉璃河蠓也可以@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}。</p>"
+                    "description": "<p>在自然环境中，即使没有掩蔽，琉璃河蠓也可以[[/act hide]]。</p>"
                 }
             },
             "prototypeToken": {
@@ -1814,7 +1814,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 }
             },
@@ -1881,11 +1881,11 @@
                     "description": "<p>巨人行进并且使用角抵打击，这次角抵打击在伤害上拥有+4环境加值。</p>\n<p>如果打击命中，巨人对目标尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.2u915NdUyQan6uKF]{挫败士气 Demoralize}。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Elite Skeletal Giant (PFS 1-18)"
             }
@@ -1925,7 +1925,7 @@
             "items": {
                 "Swarming Claws": {
                     "name": "Swarming Claws",
-                    "description": "<p>Each enemy in the raven swarm's space takes @Damage[2d8[piercing]] damage (@Check[reflex|dc:21|basic] save). Creatures that fail this save also take @Damage[3[bleed]] damage</p>\n<p>damage.</p>"
+                    "description": "<p>Each enemy in the raven swarm's space takes @Damage[2d8[piercing]] damage (@Check[reflex|dc:21|basic] save). Creatures that fail this save also take @Damage[3[bleed]]伤害</p>\n<p>damage.</p>"
                 }
             }
         },
@@ -2010,14 +2010,14 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Flaming Skull Skeletal Champion"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "ac": "(21 with shield raised)"
         },
         "Flaming Skull Skeleton Guard": {
@@ -2029,10 +2029,10 @@
             "prototypeToken": {
                 "name": "Flaming Skull Skeleton Guard"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Screaming Skull": {
@@ -2043,7 +2043,7 @@
         },
         "Flawed Ritual": {
             "name": "有缺陷的仪式 Flawed Ritual",
-            "disable": "<p>仪式环内出现了七个缺陷，如影子的火焰般跳动着。三位塔夫瓦尔的助手如果或者，他们各令一个缺陷受控，而塔夫瓦尔自己则负责避免仪式爆炸，如下文仪式锚能力所述。</p>\n<p>每个缺陷可以通过一次成功的@Check[occultism|dc:22]检定或者对应缺陷初始原因的DC18（受训）技能检定（见后文表仪式缺陷和解决）。无论成功与否，尝试神秘（Occultism）检定来解除危害的PC会了解到缺陷的成因，以及克服它可以使用的技能。</p>\n<p>每当使用这些其他的技能修复缺陷的检定成功时，使用神秘检定修复一个缺陷的DC减少2。PC可以改为强行令仪式稳定，而非使用技能检定。击败一个幽影微灵的PC自动修复一个缺陷。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>d4</th>\n<th>缺陷成因</th>\n<th>用以克服的技能</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>被骚扰（在奥秘学院“要么发文要么死”的传统，使得塔夫瓦尔被迫在仪式执行中投机取巧，所以一些符文没有正确绘制）</td>\n<td>@Check[arcana|dc:18] （受训）或@Check[thievery|dc:18] （受训）</td>\n</tr>\n<tr>\n<td>2</td>\n<td>情感错位（塔夫瓦尔来自奈达尔，潜意识里希望这仪式能显出她故乡的一些优点；她在符文中加入了一些阴影语，并增强了能量）</td>\n<td>@Check[society|dc:18] （受训）或@Check[religion|dc:18] （受训）</td>\n</tr>\n<tr>\n<td>3</td>\n<td>与世隔绝（塔夫瓦尔没有做多少现场工作，并且把符文用的墨水中所需要的一种蘑菇搞错了）</td>\n<td>@Check[crafting|dc:18] （受训）或@Check[nature|dc:18] （受训）</td>\n</tr>\n<tr>\n<td>4</td>\n<td>束手束脚（塔夫瓦尔自身的犹豫和自我怀疑让仪式逐渐脱离她的控制）</td>\n<td>@Check[deception|dc:18] （受训）或@Check[diplomacy|dc:18] （受训）</td>\n</tr>\n</tbody>\n</table>",
+            "disable": "<p>仪式环内出现了七个缺陷，如影子的火焰般跳动着。三位塔夫瓦尔的助手如果或者，他们各令一个缺陷受控，而塔夫瓦尔自己则负责避免仪式爆炸，如下文仪式锚能力所述。</p>\n<p>每个缺陷可以通过一次成功的@Check[occultism|dc:22]检定或者对应缺陷初始原因的DC18（受训）技能检定（见后文表仪式缺陷和解决）。无论成功与否，尝试神秘（Occultism）检定来解除危害的PC会了解到缺陷的成因，以及克服它可以使用的技能。</p>\n<p>每当使用这些其他的技能修复缺陷的检定成功时，使用神秘检定修复一个缺陷的DC减少2。PC可以改为强行令仪式稳定，而非使用技能检定。击败一个幽影微灵的PC自动修复一个缺陷。</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>d4</th>\n<th>缺陷成因</th>\n<th>用以克服的技能</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>被骚扰（在奥秘学院“要么发文要么死”的传统，使得塔夫瓦尔被迫在仪式执行中投机取巧，所以一些符文没有正确绘制）</td>\n<td>@Check[arcana|dc:18]（受训）或@Check[thievery|dc:18]（受训）</td>\n</tr>\n<tr>\n<td>2</td>\n<td>情感错位（塔夫瓦尔来自奈达尔，潜意识里希望这仪式能显出她故乡的一些优点；她在符文中加入了一些阴影语，并增强了能量）</td>\n<td>@Check[society|dc:18]（受训）或@Check[religion|dc:18]（受训）</td>\n</tr>\n<tr>\n<td>3</td>\n<td>与世隔绝（塔夫瓦尔没有做多少现场工作，并且把符文用的墨水中所需要的一种蘑菇搞错了）</td>\n<td>@Check[crafting|dc:18]（受训）或@Check[nature|dc:18]（受训）</td>\n</tr>\n<tr>\n<td>4</td>\n<td>束手束脚（塔夫瓦尔自身的犹豫和自我怀疑让仪式逐渐脱离她的控制）</td>\n<td>@Check[deception|dc:18]（受训）或@Check[diplomacy|dc:18]（受训）</td>\n</tr>\n</tbody>\n</table>",
             "hazarddescription": "<p>一个有缺陷的仪式，释放出幽影能量，并撕开了一个影界的裂口。</p>",
             "routine": "<p>（1动作）在其每一回合的开始，该仪式释放一股幽影能量，对在上一轮中参与仪式的每个角色造成@Damage[2d6[void]]伤害（@Check[fortitude|dc:18|basic]豁免）（包括塔夫瓦尔和她的助手，以及任何尝试技能检定来接触危害的PC）。非参与者能以一个反应动作站到参与者前方。这会阻挡对仪式施法者造成的伤害，但是此非参与者必须尝试这次强韧豁免。</p><p>除了造成伤害意外，该仪式的能量涌动也会将一个@UUID[Compendium.pf2e.pfs-season-1-bestiary.mjW1q98gMnEmZJKt]送入房间内。微灵在该仪式的回合结束行动。如果房间内已经有两个幽影微灵，该仪式不再创造新的微灵，而是恢复每个微灵@Damage[10[healing]]生命值。</p>",
             "data": {
@@ -2087,7 +2087,7 @@
             }
         },
         "Fleshforge Dreg (Acid Spit)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （酸性唾液）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（酸性唾液）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2101,7 +2101,7 @@
             }
         },
         "Fleshforge Dreg (Breath Weapon)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （喷吐武器）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（喷吐武器）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2116,7 +2116,7 @@
             }
         },
         "Fleshforge Dreg (Leaping Charge)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （跳跃冲锋）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（跳跃冲锋）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2131,7 +2131,7 @@
             }
         },
         "Fleshforge Dreg (Reach)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （长触及）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（长触及）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2140,7 +2140,7 @@
             }
         },
         "Fleshforge Dreg (Roots)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （根）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（根）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2155,7 +2155,7 @@
             }
         },
         "Fleshforge Dreg (Shield)": {
-            "name": "血肉熔炉渣油 Fleshforge Dreg （盾牌）",
+            "name": "血肉熔炉渣油 Fleshforge Dreg（盾牌）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2171,7 +2171,7 @@
             "ac": "(21 with shield raised)"
         },
         "Fleshforge Prototype (Acid Spit)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （酸性唾液）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（酸性唾液）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2185,7 +2185,7 @@
             }
         },
         "Fleshforge Prototype (Breath Weapon)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （喷吐武器）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（喷吐武器）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2200,7 +2200,7 @@
             }
         },
         "Fleshforge Prototype (Leaping Charge)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （跳跃冲锋）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（跳跃冲锋）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2215,7 +2215,7 @@
             }
         },
         "Fleshforge Prototype (Reach)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （长触及）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（长触及）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2224,7 +2224,7 @@
             }
         },
         "Fleshforge Prototype (Roots)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （根）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（根）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2239,7 +2239,7 @@
             }
         },
         "Fleshforge Prototype (Shield)": {
-            "name": "血肉熔炉原型 Fleshforge Prototype （盾）",
+            "name": "血肉熔炉原型 Fleshforge Prototype（盾）",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -2278,10 +2278,10 @@
             "prototypeToken": {
                 "name": "Ghost Of Diggen Thrune (1-2)"
             },
-            "hp": "void healing, rejuvenation",
+            "hp": "虚能治疗，复生",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Site Bound": {
@@ -2310,7 +2310,7 @@
             "prototypeToken": {
                 "name": "Ghost Of Diggen Thrune (3-4)"
             },
-            "hp": "void healing, rejuvenation",
+            "hp": "虚能治疗，复生",
             "items": {
                 "Site Bound": {
                     "name": "Site Bound",
@@ -2325,7 +2325,7 @@
                     "description": "<p>Setting Diggen free from his contractual obligations with Nashaxian allows him to move on to the afterlife.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Frightful Moan": {
@@ -2373,7 +2373,7 @@
             "items": {
                 "Mauling Throw": {
                     "name": "撕扯投掷 Mauling Throw",
-                    "description": "<p><strong>需求</strong> 巨短面熊擒抱一个生物；</p>\n<hr />\n<p><strong>效果</strong> 巨短面熊将擒抱目标朝任意方向扔出至多20尺远，并对目标造成爪抓的伤害。</p>"
+                    "description": "<p><strong>需求</strong> 巨短面熊使一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 巨短面熊将擒抱目标朝任意方向扔出至多20尺远，并对目标造成爪抓的伤害。</p>"
                 },
                 "Rush": {
                     "name": "猛冲 Rush",
@@ -2422,7 +2422,7 @@
                 },
                 "Camouflage": {
                     "name": "伪装 Camouflage",
-                    "description": "<p>在自然环境中，即使没有掩蔽，琉璃河蠓也可以@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{躲藏 Hide}。</p>"
+                    "description": "<p>在自然环境中，即使没有掩蔽，琉璃河蠓也可以[[/act hide]]。</p>"
                 }
             },
             "prototypeToken": {
@@ -2478,7 +2478,7 @@
             "name": "Grasping Limbs (5-6)",
             "disable": "<p>@Check[thievery|dc:21|name:Immobilize Limbs] (trained) or @Check[engineering-lore|dc:19|name:Immobilize Limbs]{Engineering Lore} or @Check[azlant-lore|dc:19|name:Immobilize Limbs]{Azlant Lore} twice to immobilize the limbs, or @Check[deception|dc:18|name:Trick Limbs]{Deception} twice to trick the limbs into grasping each other.</p>",
             "hazarddescription": "<p>The limbs of smashed constructs line the bottom of the fissure, beneath the water. They desperately grab anything that gets too close。</p>",
-            "routine": "<p>（2动作） The grasping limbs try to Grapple all creatures in the water (Athletics [[/r 1d20 +12 #Athletics]]{+12}). They then tighten around all creatures they have grabbed or restrained, dealing @Damage[2d8[bludgeoning]]伤害 (@Check[fortitude|dc:20|basic|name:Grasping Limbs])。</p>",
+            "routine": "<p>（2动作）The grasping limbs try to Grapple all creatures in the water (Athletics [[/r 1d20 +12 #Athletics]]{+12}). They then tighten around all creatures they have grabbed or restrained, dealing @Damage[2d8[bludgeoning]]伤害 (@Check[fortitude|dc:20|basic|name:Grasping Limbs])。</p>",
             "stealthdetails": "<p>（受训）; @Check[perception|dc:23|traits:action:seek]（专家）to notice the construct limbs at the bottom of the pit。</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -2534,7 +2534,7 @@
             },
             "items": {
                 "Metal Sense (Imprecise) 60 feet": {
-                    "name": "金属感知 （模糊） 60 feet",
+                    "name": "金属感知（模糊）60 feet",
                     "description": "<p>金属苔犬能够感知到60尺内的金属物体，如同使用嗅觉能力。</p>"
                 },
                 "Earth Glide": {
@@ -2568,14 +2568,14 @@
                     "description": "<p><strong>需求</strong> 该微灵附着在一个活物上。</p>\n<hr />\n<p><strong>效果</strong> 该幽影微灵钻入被附着的生物的影子，对其造成@Damage[1d6[void]]伤害。它可以使用被附着生物的影子，对另一个至多距离10尺的目标进行一次幽影触须打击。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Greater Shadow Wisp"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Greater Steel Mephit": {
             "name": "高等钢魔蝠 Greater Steel Mephit",
@@ -2844,7 +2844,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Tanglebloom": {
@@ -2872,7 +2872,7 @@
             "items": {
                 "Constant Spells": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>",
-                    "name": "Constant Spells"
+                    "name": "常驻法术 Constant Spells"
                 },
                 "Virulent Burst": {
                     "name": "Virulent Burst",
@@ -3010,10 +3010,10 @@
             "prototypeToken": {
                 "name": "Iloise (5-6)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Infused Items": {
@@ -3050,7 +3050,7 @@
             "prototypeToken": {
                 "name": "Iloise (7-8)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Infused Items": {
                     "name": "Infused Items",
@@ -3070,7 +3070,7 @@
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 },
                 "Death Gasp": {
                     "name": "Death Gasp",
@@ -3132,7 +3132,7 @@
                     "description": "<p>The otyugh attempts to move all creatures that it has grabbed into other spaces within the reach of its tentacles, rolling a single Athletics check and comparing the result against each creature's Fortitude DC. On a failure, the creature remains in place, and on a critical failure, the creature is no longer grabbed.</p>"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>30 feet. A creature entering the aura must succeed at a @Check[fortitude|dc:17|options:area-effect,inflicts:sickened,inflicts:slowed] save or be @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for the same duration on a critical failure). On a success, the creature is temporarily immune to the sickened and slowed effects of this stench for 1 hour. Regardless of the save, while within the aura, creatures take a -2 circumstance penalty to saves against diseases. An otyugh's stench is due to the offal and refuse that it wallows in, so cleaning the creature thoroughly (with create water and sufficient scrubbing, for example) deactivates the aura, while a sufficiently plugged nose allows an individual to avoid exposure to the stench.</p>"
                 },
                 "Constrict": {
@@ -3167,10 +3167,10 @@
         },
         "Jury-Rigged Annihilator": {
             "name": "Jury-Rigged Annihilator",
-            "disable": "<p>@Check[thievery|dc:23]（专家）to successfully disable the annihilator at the control box on the northwest ledge, @Check[thievery|dc:20] （受训）或@Check[engineering-lore|dc:15]（受训）to jam the mechanics of either of the two chain guns, or the \"tail\" mechanism where the plasma lance is mounted, preventing it from firing. Jamming the guns or tail requires first getting on top of the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} annihilator, which counts as difficult terrain. All attempts take 2 actions。</p>",
+            "disable": "<p>@Check[thievery|dc:23]（专家）to successfully disable the annihilator at the control box on the northwest ledge, @Check[thievery|dc:20]（受训）或@Check[engineering-lore|dc:15]（受训）to jam the mechanics of either of the two chain guns, or the \"tail\" mechanism where the plasma lance is mounted, preventing it from firing. Jamming the guns or tail requires first getting on top of the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} annihilator, which counts as difficult terrain. All attempts take 2 actions。</p>",
             "hazarddescription": "<p>A gargantuan scorpion-like robot, covered in signs of damage, has been bolted into the canyon's rock walls。</p>\n<hr />\n<p><strong>Integrated Chain Gun</strong> Hardness 10, HP 40 (BT 20) per integrated chain gun</p>\n<p><strong>Plasma Lance </strong>Hardness 10, Plasma Lance HP 20 (BT 10)</p>",
-            "routine": "<p>（2动作） When the plasma lance is ready, the annihilator uses it to attack as many PCs as it can, otherwise it attacks with its two integrated chain guns while the plasma lance recharges, spending one action for each of its two integrated chain guns that is still functional. This trap doesn't take a multiple attack penalty. If Synthetic Khismar is destroyed, the annihilator attacks as many creatures as possible。</p>",
-            "stealthdetails": "（受训） to notice it's still functional; noticing the annihilator is automatic",
+            "routine": "<p>（2动作）When the plasma lance is ready, the annihilator uses it to attack as many PCs as it can, otherwise it attacks with its two integrated chain guns while the plasma lance recharges, spending one action for each of its two integrated chain guns that is still functional. This trap doesn't take a multiple attack penalty. If Synthetic Khismar is destroyed, the annihilator attacks as many creatures as possible。</p>",
+            "stealthdetails": "（受训）to notice it's still functional; noticing the annihilator is automatic",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -3545,7 +3545,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Claws from Below": {
@@ -3572,7 +3572,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Vitality Transfer": {
@@ -3597,7 +3597,7 @@
             "items": {
                 "Mauling Throw": {
                     "name": "撕扯投掷 Mauling Throw",
-                    "description": "<p><strong>需求</strong> 巨短面熊擒抱一个生物；</p>\n<hr />\n<p><strong>效果</strong> 巨短面熊将擒抱目标朝任意方向扔出至多20尺远，并对目标造成爪抓的伤害。</p>"
+                    "description": "<p><strong>需求</strong> 巨短面熊正使一个生物@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]</p>\n<hr />\n<p><strong>效果</strong> 巨短面熊将擒抱目标朝任意方向扔出至多20尺远，并对目标造成爪抓的伤害。</p>"
                 },
                 "Rush": {
                     "name": "猛冲 Rush",
@@ -3622,7 +3622,7 @@
                     "name": "挥击 Slam"
                 },
                 "Construct Armor (Hardness 2)": {
-                    "name": "构装护甲 Construct Armor （硬度2)",
+                    "name": "构装护甲 Construct Armor（硬度2）",
                     "description": "<p>如同普通物体，守护者雕像也具有硬度。此硬度可等值减少受到的所有伤害。</p>\n<p>一旦守护者雕像的生命值降低到其HP的一半以下，或是其受到了一次重击，它的构装护甲就会破损，失去此效果，且AC降低到14。</p>"
                 },
                 "Follow Trespasser": {
@@ -3633,7 +3633,7 @@
             "prototypeToken": {
                 "name": "Lesser Guardian Statue"
             },
-            "ac": "(14 when broken); construct armor"
+            "ac": "（破损时14）；构装护甲"
         },
         "Lightning Platform (5-6)": {
             "name": "Lightning Platform (5-6)",
@@ -3769,10 +3769,10 @@
         },
         "Malfunctioning Annihilator": {
             "name": "Malfunctioning Annihilator",
-            "disable": "<p>@Check[thievery|dc:26]（专家）to successfully disable the annihilator at the control box on the northwest ledge, @Check[thievery|dc:23] （受训）或@Check[engineering-lore|dc:18] to jam the mechanics of either of the two chain guns, or the \"tail\" mechanism where the plasma lance is mounted, preventing it from firing. Jamming the guns or tail require first getting on top of the immobilized annihilator, which counts as difficult terrain. All attempts take 2 actions。</p>",
+            "disable": "<p>@Check[thievery|dc:26]（专家）to successfully disable the annihilator at the control box on the northwest ledge, @Check[thievery|dc:23]（受训）或@Check[engineering-lore|dc:18] to jam the mechanics of either of the two chain guns, or the \"tail\" mechanism where the plasma lance is mounted, preventing it from firing. Jamming the guns or tail require first getting on top of the immobilized annihilator, which counts as difficult terrain. All attempts take 2 actions。</p>",
             "hazarddescription": "<p>A gargantuan scorpion-like robot, covered in signs of damage, has been bolted into the canyon's rock walls。</p>\n<hr />\n<p><strong>Integrated Chain Gun</strong> Hardness 10, HP 50 (BT 25) per integrated chain gun</p>\n<p><strong>Plasma Lance</strong> Hardness 10, Plasma Lance HP 26 (BT 13)</p>",
-            "routine": "<p>（2动作） When the plasma lance is ready, the annihilator uses it to attack as many PCs as it can, otherwise it attacks with its two integrated chain guns while the plasma lance recharges, spending one action for each chain gun that is still functional. This trap doesn't take a multiple attack penalty. If Synthetic Khismar is destroyed, the annihilator attacks as many creatures as possible。</p>",
-            "stealthdetails": "（受训） to notice it's still functional; noticing the annihilator is automatic",
+            "routine": "<p>（2动作）When the plasma lance is ready, the annihilator uses it to attack as many PCs as it can, otherwise it attacks with its two integrated chain guns while the plasma lance recharges, spending one action for each chain gun that is still functional. This trap doesn't take a multiple attack penalty. If Synthetic Khismar is destroyed, the annihilator attacks as many creatures as possible。</p>",
+            "stealthdetails": "（受训）to notice it's still functional; noticing the annihilator is automatic",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -3789,9 +3789,9 @@
         },
         "Malicious Spirits": {
             "name": "恶毒精魂 Malicious Spirits",
-            "disable": "<p>两次@Check[occultism|dc:23|name:Exorcise the Haunt|traits:hazard,haunt,complex]或@Check[religion|dc:23|name:Exorcise the Haunt|traits:hazard,haunt,complex] （受训）可以驱散精魂。一个角色也能以以下方式对精魂造成4点心灵伤害，或是使驱散检定的DC永久降低1点。这些方式包括安抚精魂的@Check[diplomacy|dc:20|name:Calm the Spirits|traits:hazard,haunt,complex]，念诵社神守护咒的@Check[nature|dc:20|name:Ward Against the Spirits|traits:hazard,haunt,complex]，说破精魂由来的@Check[occultism|dc:20|name:Leverage Haunt Lore|traits:hazard,haunt,complex]，进行小型驱魔法的@Check[religion|dc:20|name:Lesser Exorcism to Weaken the Haunt|traits:hazard,haunt,complex]。任何被精魂惊吓到的生物都会成为对精魂造成的伤害的潜在目标，力场和类似伤害会同时伤害精魂和宿主，心灵伤害和命能伤害则仅在宿主主动接受时才会对宿主生效。</p>",
+            "disable": "<p>两次@Check[occultism|dc:23|name:Exorcise the Haunt|traits:hazard,haunt,complex]或@Check[religion|dc:23|name:Exorcise the Haunt|traits:hazard,haunt,complex]（受训）可以驱散精魂。一个角色也能以以下方式对精魂造成4点心灵伤害，或是使驱散检定的DC永久降低1点。这些方式包括安抚精魂的@Check[diplomacy|dc:20|name:Calm the Spirits|traits:hazard,haunt,complex]，念诵社神守护咒的@Check[nature|dc:20|name:Ward Against the Spirits|traits:hazard,haunt,complex]，说破精魂由来的@Check[occultism|dc:20|name:Leverage Haunt Lore|traits:hazard,haunt,complex]，进行小型驱魔法的@Check[religion|dc:20|name:Lesser Exorcism to Weaken the Haunt|traits:hazard,haunt,complex]。任何被精魂惊吓到的生物都会成为对精魂造成的伤害的潜在目标，力场和类似伤害会同时伤害精魂和宿主，心灵伤害和命能伤害则仅在宿主主动接受时才会对宿主生效。</p>",
             "hazarddescription": "<p>一群邪恶的灵魂袭击那些穿行于森林中旅客的心灵。这些精魂首先用自己死亡时内脏的幻象折磨其宿主，然后强迫他们对自己造成一样的创伤重现其死亡。被精魂惊吓到的生物仿佛在一瞬间戴上了面具，那面具上长着角和獠牙，还有黄色的眼睛。</p>",
-            "routine": "<p>（3动作） 在其先攻顺序上，精魂使用前两个动作以尝试恐吓区域内尚未受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened}状态的随机目标。目标必须进行@Check[will|dc:20|name:Resist Terror|traits:emotion,fear,mental,hazard,haunt]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受惊惧且免疫此精魂24小时。</p>\n<p><strong>成功</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 目标受到惊惧1，在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<p><strong>大失败</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<hr />\n<p>随后精魂花费1个动作强迫已受惊惧的生物用森林残骸伤害自己。生物必须通过@Check[will|dc:20|name:Resist Attacking Yourself|traits:emotion,fear,mental,hazard,haunt]豁免否则在其下个回合中的第一个动作必须用来打击自己。这种力量为精魂所推动，用精魂的下列数据进行检定。请注意，惊惧状态同时作用于攻击检定和AC，所以不会影响攻击自己的命中率。</p>",
+            "routine": "<p>（3动作）在其先攻顺序上，精魂使用前两个动作以尝试恐吓区域内尚未受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened}状态的随机目标。目标必须进行@Check[will|dc:20|name:Resist Terror|traits:emotion,fear,mental,hazard,haunt]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受惊惧且免疫此精魂24小时。</p>\n<p><strong>成功</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 目标受到惊惧1，在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<p><strong>大失败</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<hr />\n<p>随后精魂花费1个动作强迫已受惊惧的生物用森林残骸伤害自己。生物必须通过@Check[will|dc:20|name:Resist Attacking Yourself|traits:emotion,fear,mental,hazard,haunt]豁免否则在其下个回合中的第一个动作必须用来打击自己。这种力量为精魂所推动，用精魂的下列数据进行检定。请注意，惊惧状态同时作用于攻击检定和AC，所以不会影响攻击自己的命中率。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -3805,14 +3805,14 @@
                     "name": "残骸 Debris"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Malicious Spirits"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Manifestation of Qxal (3-4)": {
             "name": "Manifestation of Qxal (3-4)",
@@ -3894,21 +3894,21 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:15] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:15|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Swift Leap": {
                     "description": "<p>The ghoul jumps up to half its Speed. This movement doesn't trigger reactions.</p>",
                     "name": "Swift Leap"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Marcon Tinol (1-2)"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Marcon Tinol (3-4)": {
             "name": "Marcon Tinol (3-4)",
@@ -3918,15 +3918,15 @@
             "prototypeToken": {
                 "name": "Marcon Tinol (3-4)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>10 feet. A creature entering the aura or starting its turn in the aura must succeed at a @Check[fortitude|dc:18|options:area-effect,inflicts:sickened,inflicts:slowed] save or become @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} (plus @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} as long as it's sickened on a critical failure).</p>\n<p>While within the aura, the creature takes a -2 circumstance penalty to saves against disease and to recover from the sickened condition. A creature that succeeds at its save is temporarily immune for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]{Effect: Stench}</p>"
                 },
                 "Void Healing": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>",
-                    "name": "Void Healing"
+                    "name": "虚能治疗 Void Healing"
                 },
                 "Ghast Fever": {
                     "name": "Ghast Fever",
@@ -3938,7 +3938,7 @@
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:18] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living, non-elf creature hit by a ghoul's attack must succeed at a @Check[fortitude|dc:18|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Consume Flesh": {
                     "name": "Consume Flesh",
@@ -4025,7 +4025,7 @@
             },
             "items": {
                 "Metal Sense (Imprecise) 60 feet": {
-                    "name": "金属感知 （模糊） 60尺",
+                    "name": "金属感知（模糊）60尺",
                     "description": "<p>金属苔犬能够感知到60尺内的金属物体，如同使用嗅觉能力。</p>"
                 },
                 "Earth Glide": {
@@ -4039,7 +4039,7 @@
         },
         "Minor Summoning Rune": {
             "name": "Minor Summoning Rune",
-            "disable": "<p>@Check[acrobatics|dc:13]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:15] （受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}(1st level; counteract DC 13) to counteract the rune</p>",
+            "disable": "<p>@Check[acrobatics|dc:13]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:15]（受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}(1st level; counteract DC 13) to counteract the rune</p>",
             "hazarddescription": "<p>A cloud of invisible magical sensors covers four squares on the map. One of these hazards is in the squares directly above each of the four yellow runes on the map, and the other is in the squares directly above each of the four blue runes on the map。</p>",
             "reset": "<p>The trap resets each day at dawn。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -4172,7 +4172,7 @@
         },
         "Moldy Foodstuffs (1-2)": {
             "name": "发霉食品 Moldy Foodstuffs (1-2)",
-            "disable": "<p>@Check[survival|dc:14|name:Remove Mold] （受训）可以在不触发孢子的情况下清除食物上的霉菌。</p>",
+            "disable": "<p>@Check[survival|dc:14|name:Remove Mold]（受训）可以在不触发孢子的情况下清除食物上的霉菌。</p>",
             "hazarddescription": "<p>一个霉菌云团从变质的食物中溢出并开始扩散。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -4181,7 +4181,7 @@
             "items": {
                 "Foodborn Spores": {
                     "name": "厨余孢子 Foodborn Spores",
-                    "description": "<p>（吸入，毒素） 在毒素的影响结束后，流失效果会持续存在。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>最大持续时间</strong> 2轮</p>\n<p><strong>阶段1</strong> 1d6毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1轮）</p>\n<p><strong>阶段2</strong> 1d8毒素伤害和流失1（1轮）</p>"
+                    "description": "<p>（吸入，毒素）在毒素的影响结束后，流失效果会持续存在。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:14]</p>\n<p><strong>最大持续时间</strong> 2轮</p>\n<p><strong>阶段1</strong> 1d6毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1轮）</p>\n<p><strong>阶段2</strong> 1d8毒素伤害和流失1（1轮）</p>"
                 },
                 "Spore Puff": {
                     "name": "孢子喷出 Spore Puff",
@@ -4194,7 +4194,7 @@
         },
         "Moldy Foodstuffs (3-4)": {
             "name": "发霉食品 Moldy Foodstuffs (3-4)",
-            "disable": "<p>@Check[survival|dc:16|name:Remove Mold] （受训）可以在不触发孢子的情况下清除食物上的霉菌。</p>",
+            "disable": "<p>@Check[survival|dc:16|name:Remove Mold]（受训）可以在不触发孢子的情况下清除食物上的霉菌。</p>",
             "hazarddescription": "<p>一个霉菌云团从变质的食物中溢出并开始扩散。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -4203,7 +4203,7 @@
             "items": {
                 "Foodborn Spores": {
                     "name": "厨余孢子 Foodborn Spores",
-                    "description": "<p>（吸入，毒素） 在毒素的影响结束后，流失效果会持续存在。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:16]</p>\n<p><strong>最大持续时间</strong> 2轮</p>\n<p><strong>阶段1</strong> 1d8毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1轮）</p>\n<p><strong>阶段2</strong> 1d12毒素伤害和流失2（1轮）</p>"
+                    "description": "<p>（吸入，毒素）在毒素的影响结束后，流失效果会持续存在。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:16]</p>\n<p><strong>最大持续时间</strong> 2轮</p>\n<p><strong>阶段1</strong> 1d8毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1轮）</p>\n<p><strong>阶段2</strong> 1d12毒素伤害和流失2（1轮）</p>"
                 },
                 "Spore Puff": {
                     "name": "孢子喷出 Spore Puff",
@@ -4241,18 +4241,18 @@
             "prototypeToken": {
                 "name": "Mr. Chitters (5-6)"
             },
-            "hp": "fast healing 1",
+            "hp": "快速治疗1",
             "items": {
                 "Entropy Sense (Imprecise) 30 feet": {
                     "name": "Entropy Sense (Imprecise) 30 feet",
                     "description": "<p>A voidworm can anticipate the most likely presence of a creature through a supernatural insight into chaotic probabilities and chance. This grants it the ability to sense creatures within the listed range. A creature under the effects of @UUID[Compendium.pf2e.spells-srd.Item.EoKBlgf6Smt8opaU]{Veil of Privacy} or that is otherwise shielded from divinations and predictions cannot be noticed via entropy sense.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Fast Healing 1": {
-                    "name": "Fast Healing 1",
+                    "name": "快速治疗 Fast Healing 1",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Protean Anatomy 5": {
@@ -4264,7 +4264,7 @@
                     "description": "<p>A creature hit by the voidworm's tail Strike is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 1 round (@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2} on a critical hit). A successful @Check[will|dc:19] save negates this effect and grants temporary immunity to confounding lash for 1 minute.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The voidworm takes on the appearance of a Tiny animal. This doesn't change its Speed or its attack and damage bonuses with its Strikes, but might change the damage type its Strikes deal.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 }
             }
@@ -4280,11 +4280,11 @@
                     "name": "Entropy Sense (Imprecise) 30 feet"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Fast Healing 2": {
-                    "name": "Fast Healing 2",
+                    "name": "快速治疗 Fast Healing 2",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Protean Anatomy 5": {
@@ -4292,7 +4292,7 @@
                     "description": "<p>幻蛇的要害器官会不断地变形和改变位置。当幻蛇承受酸蚀、电击或音波伤害后，它会立即获得抗力数据中所列数值的对应伤害抗力。这会持续1小时或直至幻蛇承受上述伤害类型中的其他种类为止（在这种情况下，幻蛇的抗力会再度变换并与该类型相匹配），以较先发生者为准。</p>\n<p>除非幻蛇自身自愿，否则它对变形效果免疫。若陷入@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]或@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]，幻蛇会在它的下个回合结束时自动恢复，因为新的感受器官已经形成并取代了受损的器官。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.c6SiBB3mzV8lZUQr]</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The voidworm takes on the appearance of a Tiny animal. This doesn't change its Speed or its attack and damage bonuses with its Strikes, but might change the damage type its Strikes deal.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Confounding Lash": {
@@ -4307,7 +4307,7 @@
             "prototypeToken": {
                 "name": "Mr. Chitters (7-8)"
             },
-            "hp": "fast healing 2"
+            "hp": "快速治疗2"
         },
         "Mummy Brute": {
             "name": "残暴木乃伊 Mummy Brute",
@@ -4324,14 +4324,14 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedPush]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Mummy Brute"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Mummy Shambler": {
             "name": "蹒跚木乃伊 Mummy Shambler",
@@ -4348,11 +4348,11 @@
                     "description": "<p>木乃伊具有永久性的@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}且无法使用反应动作。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Mummy Shambler"
             }
@@ -4372,14 +4372,14 @@
                     "description": "<p>姆拉席扑灭@Template[emanation|distance:5]范围内的火焰。她可以自动熄灭所有非魔法火焰，并尝试熄灭魔法火焰([[/r 1d20+10 #Counteract]]{+10反制调整值})。</p>"
                 },
                 "Fast Healing 2 (while underwater)": {
-                    "name": "Fast Healing 2 (while underwater)",
+                    "name": "快速治疗 Fast Healing 2（在水下）",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Muraxi (3-4)"
             },
-            "hp": "fast healing 2 (while underwater)"
+            "hp": "快速治疗2（在水下）"
         },
         "Muraxi (5-6)": {
             "name": "姆拉席 Muraxi (5-6)",
@@ -4396,14 +4396,14 @@
                     "description": "<p>姆拉席扑灭@Template[emanation|distance:5]范围内的火焰。她可以自动熄灭所有非魔法火焰，并尝试熄灭魔法火焰([[/r 1d20+10 #Counteract]]{+10反制调整值})。</p>"
                 },
                 "Fast Healing 2 (while underwater)": {
-                    "name": "Fast Healing 2 (while underwater)",
+                    "name": "快速治疗 Fast Healing 2（在水下）",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Muraxi (5-6)"
             },
-            "hp": "fast healing 2 (while underwater)"
+            "hp": "快速治疗2（在水下）"
         },
         "Murderous Bathhouse (3-4)": {
             "name": "Murderous Bathhouse (3-4)",
@@ -4600,7 +4600,7 @@
                     "name": "+3 Status to All Saves vs. Divine Magic"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Nevashi takes on the appearance of any Small humanoid. This doesn't change the dandasuka's Speed or its attack and damage modifiers with its Strikes, but it might change the damage type its Strikes deal. The type changes to bludgeoning when disguised as Rindle.</p>\n<p>He typically loses his fangs Strike unless the humanoid form has fangs or a similar unarmed attack, which Rindle does not.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Sneak Attack": {
@@ -4626,7 +4626,7 @@
                     "name": "+3 Status to All Saves vs. Divine Magic"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>Nevashi takes on the appearance of any Small humanoid. This doesn't change the dandasuka's Speed or its attack and damage modifiers with its Strikes, but it might change the damage type its Strikes deal. The type changes to bludgeoning when disguised as Rindle.</p>\n<p>He typically loses his fangs Strike unless the humanoid form has fangs or a similar unarmed attack, which Rindle does not.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Sneak Attack": {
@@ -4650,7 +4650,7 @@
                 },
                 "Throw Drink": {
                     "name": "投酒 Throw Drink",
-                    "description": "<p>被冒犯的赌徒抓起附近的酒，将其丢到10尺内一个生物的脸上。该生物必须尝试进行@Check[fortitude|dc:15]豁免检定，失败将@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮（大失败则会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}）。受影响生物在其回合可以耗用一个交互动作来终止这个目眩或目盲状态。</p>"
+                    "description": "<p>被冒犯的赌徒抓起附近的酒，将其丢到10尺内一个生物的脸上。该生物必须尝试进行@Check[fortitude|dc:15|options:inflicts:dazzled,inflicts:blinded]豁免检定，失败将@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮（大失败则会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]）。受影响生物在其回合可以耗用一个交互动作来终止这个目眩或目盲状态。</p>"
                 }
             },
             "prototypeToken": {
@@ -4672,7 +4672,7 @@
                 },
                 "Throw Drink": {
                     "name": "投酒 Throw Drink",
-                    "description": "<p>豪赌者抓起附近的酒，将其丢到10尺内一个生物的脸上。该生物必须尝试进行@Check[fortitude|dc:18]豁免检定，失败将@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩 Dazzled}1轮（大失败则会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲 Blinded}）。受影响生物在其回合可以耗用一个交互动作来终止这个目眩或目盲状态。</p>"
+                    "description": "<p>豪赌者抓起附近的酒，将其丢到10尺内一个生物的脸上。该生物必须尝试进行@Check[fortitude|dc:18|options:inflicts:dazzled,inflicts:blinded]豁免检定，失败将@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮（大失败则会@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]）。受影响生物在其回合可以耗用一个交互动作来终止这个目眩或目盲状态。</p>"
                 }
             },
             "prototypeToken": {
@@ -4720,7 +4720,7 @@
             "items": {
                 "Ferocity": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>",
-                    "name": "Ferocity"
+                    "name": "凶猛 Ferocity"
                 }
             },
             "prototypeToken": {
@@ -4806,7 +4806,7 @@
         },
         "Phoenix Rune (1-2)": {
             "name": "凤凰符文 Phoenix Rune (1-2)",
-            "disable": "<p>@Check[acrobatics|dc:15|name:Approach the Rune]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:16|name:Erase the Rune|traits:action:disable-a-device] （受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic} （1环级；反制DC15)反制符文。</p>",
+            "disable": "<p>@Check[acrobatics|dc:15|name:Approach the Rune]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:16|name:Erase the Rune|traits:action:disable-a-device]（受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}（1环级；反制DC15)反制符文。</p>",
             "hazarddescription": "<p>墙上或地板上的一个隐形符文，周围有5尺见方的隐形魔法感应区。</p>",
             "reset": "<p>正如同名生物一样，凤凰符文难以被摧毁。在凤凰符文被触发后，只要未被解除，它就可以立即在120尺内的墙壁或地板上重置。这种情况发生时，成功进行@Check[perception|dc:13|name:Spot the Phoenix Rune]的PC可以发现一个小凤凰形状的阴影沿着墙壁或地板，从符文的原始位置“飞向”新的位置。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -4825,7 +4825,7 @@
         },
         "Phoenix Rune (3-4)": {
             "name": "凤凰符文 Phoenix Rune (3-4)",
-            "disable": "<p>@Check[acrobatics|dc:18|name:Approach the Rune]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:18|name:Erase the Rune|traits:action:disable-a-device] （受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic} （1环级；反制DC18)反制符文。</p>",
+            "disable": "<p>@Check[acrobatics|dc:18|name:Approach the Rune]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:18|name:Erase the Rune|traits:action:disable-a-device]（受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}（1环级；反制DC18)反制符文。</p>",
             "hazarddescription": "<p>墙上或地板上的一个隐形符文，周围有5尺见方的隐形魔法感应区。</p>",
             "reset": "<p>正如同名生物一样，凤凰符文难以被摧毁。在凤凰符文被触发后，只要未被解除，它就可以立即在120尺内的墙壁或地板上重置。这种情况发生时，成功进行@Check[perception|dc:16|name:Spot the Phoenix Rune]的PC可以发现一个小凤凰形状的阴影沿着墙壁或地板，从符文的原始位置“飞向”新的位置。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -4844,7 +4844,7 @@
         },
         "Pile of Fireworks (3-4)": {
             "name": "烟花堆 Pile of Fireworks (3-4)",
-            "disable": "<p>@Check[crafting|dc:18|name:Remove Lit Firework] （受训）、@Check[engineering-lore|dc:16|name:Remove Lit Firework] （受训）或@Check[explosives-lore|dc:16|name:Remove Lit Firework]（受训）以安全地移除点燃的烟火堆。或是@Check[thievery|dc:18|name:Remove Lit Fuse|traits:action:disable-a-device] （受训）以从烟火堆中取走被点燃的引线。</p>",
+            "disable": "<p>@Check[crafting|dc:18|name:Remove Lit Firework]（受训）、@Check[engineering-lore|dc:16|name:Remove Lit Firework]（受训）或@Check[explosives-lore|dc:16|name:Remove Lit Firework]（受训）以安全地移除点燃的烟火堆。或是@Check[thievery|dc:18|name:Remove Lit Fuse|traits:action:disable-a-device]（受训）以从烟火堆中取走被点燃的引线。</p>",
             "hazarddescription": "<p>一堆不稳定的烟火。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -4866,7 +4866,7 @@
         },
         "Pile of Fireworks (5-6)": {
             "name": "烟花堆 Pile of Fireworks (5-6)",
-            "disable": "<p>@Check[crafting|dc:21|name:Remove Lit Firework] （受训）、@Check[engineering-lore|dc:19|name:Remove Lit Firework] （受训）或@Check[explosives-lore|dc:19|name:Remove Lit Firework]（受训）以安全地移除点燃的烟火堆。或是@Check[thievery|dc:21|name:Remove Lit Fuse|traits:action:disable-a-device] （受训）以从烟火堆中取走被点燃的引线。</p>",
+            "disable": "<p>@Check[crafting|dc:21|name:Remove Lit Firework]（受训）、@Check[engineering-lore|dc:19|name:Remove Lit Firework]（受训）或@Check[explosives-lore|dc:19|name:Remove Lit Firework]（受训）以安全地移除点燃的烟火堆。或是@Check[thievery|dc:21|name:Remove Lit Fuse|traits:action:disable-a-device]（受训）以从烟火堆中取走被点燃的引线。</p>",
             "hazarddescription": "<p>一堆不稳定的烟火。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -4915,7 +4915,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Virulent Burst": {
@@ -4938,7 +4938,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Virulent Burst": {
@@ -4952,10 +4952,10 @@
             }
         },
         "Port Peril Bar Fight (Last Catch) (1-2)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （最后的收获） (1-2)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（最后的收获）(1-2)",
             "disable": "<p>@Check[intimidation|dc:17|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:20|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -4979,10 +4979,10 @@
             }
         },
         "Port Peril Bar Fight (Last Catch) (3-4)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （最后的收获） (3-4)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（最后的收获）(3-4)",
             "disable": "<p>@Check[intimidation|dc:22|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:25|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5006,10 +5006,10 @@
             }
         },
         "Port Peril Bar Fight (Rivanti's Bar) (1-2)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （利凡提的酒吧） (1-2)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（利凡提的酒吧）(1-2)",
             "disable": "<p>@Check[intimidation|dc:17|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:20|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5033,10 +5033,10 @@
             }
         },
         "Port Peril Bar Fight (Rivanti's Bar) (3-4)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （利凡提的酒吧） (3-4)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（利凡提的酒吧）(3-4)",
             "disable": "<p>@Check[intimidation|dc:22|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:25|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5060,10 +5060,10 @@
             }
         },
         "Port Peril Bar Fight (The Watchtower) (1-2)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （哨塔） (1-2)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（哨塔）(1-2)",
             "disable": "<p>@Check[intimidation|dc:17|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:20|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5087,10 +5087,10 @@
             }
         },
         "Port Peril Bar Fight (The Watchtower) (3-4)": {
-            "name": "亡命港酒吧斗殴 Port Peril Bar Fight （哨塔） (3-4)",
+            "name": "亡命港酒吧斗殴 Port Peril Bar Fight（哨塔）(3-4)",
             "disable": "<p>@Check[intimidation|dc:22|name:Cow the Crowd]以吓阻一部分人群，或@Check[diplomacy|dc:25|name:Disperse the Crowd]以尝试平息斗殴。</p>",
             "hazarddescription": "<p>在一家亡命港酒馆的六个区域，一场酒吧斗殴爆发了，各色人等用互相挥拳，扔瓶子，以及其他形式加入骚乱。</p>",
-            "routine": "<p>（2动作） 酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
+            "routine": "<p>（2动作）酒吧斗殴的第一个动作是对未被解除的区域内所有生物进行一次大乱斗打击。对该区域的每个敌人进行一次打击，所有目标受到的伤害只需骰一次。酒吧斗殴的第二个动作是使用亡命港特色。</p>",
             "stealthdetails": "<p>-10，发现它无最低熟练度要求</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -5123,7 +5123,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Attack of Opportunity": {
@@ -5142,7 +5142,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Attack of Opportunity": {
@@ -5161,7 +5161,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 }
             }
@@ -5176,14 +5176,14 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 }
             }
         },
         "Protoplasmic Extruder": {
             "name": "泥怪挤出机 Protoplasmic Extruder",
-            "disable": "<p>两次@Check[occultism|dc:22|name:Disable Extruder|traits:complex,mechanical,magical,trap]（专家）或一次@Check[thievery|dc:24|name:Disable Extruder|traits:complex,mechanical,magical,trap]（专家）使其在下一回合失去动作。两次成功（或一次大成功）会使其完全失效；@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic} （3环级；反制DC20)会使泥怪挤出机在下一回合失去动作，但不会使其失效。</p>",
+            "disable": "<p>两次@Check[occultism|dc:22|name:Disable Extruder|traits:complex,mechanical,magical,trap]（专家）或一次@Check[thievery|dc:24|name:Disable Extruder|traits:complex,mechanical,magical,trap]（专家）使其在下一回合失去动作。两次成功（或一次大成功）会使其完全失效；@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic}（3环级；反制DC20)会使泥怪挤出机在下一回合失去动作，但不会使其失效。</p>",
             "hazarddescription": "<p><em>泥怪挤出机</em>是一个由金属和加固软管组成的直径20尺的球形装置，能够从匡提姆的下水道吸取奥法泥浆，并将其转化成危险的泥怪。</p>",
             "reset": "<p><em>泥怪挤出机</em>必须用24小时提纯下水道的奥法泥浆才能重新激活。</p>",
             "routine": "<p>（1动作）在陷阱的先攻轮，它会在一个相邻的未占据方格里制造一只泥怪。当<em>泥怪挤出机</em>第一次使用这个动作时，会制造出一个@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.TZcDdN5o7s4alZNE]，它会立即行动，之后在<em>泥怪挤出机</em>的先攻轮行动。在接下来的轮次中，<em>泥怪挤出机</em>改为制造@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.Hkq9ZS2J2iKnT7vT]，并以相同方式行动。</p>\n<p>泥怪挤出机产生的泥怪呈珍珠绿色；胶质怪失去了透明能力。所有由<em>泥怪挤出机</em>产生的泥怪都忠于欧何拉维兄妹并按照他们的命令行事。</p>\n<p><em>泥怪挤出机</em>在失效和重置前最多只能产生4只泥怪。</p>",
@@ -5226,7 +5226,7 @@
             "items": {
                 "Efficient Capture": {
                     "name": "高效抓捕 Efficient Capture",
-                    "description": "<p><strong>需求</strong> 普提罗手持镣铐，并且和一个生物相邻；</p>\n<hr />\n<p><strong>效果</strong> 普提罗尝试用镣铐捆住该生物的双手或双脚。普提罗进行一次[[/r 1d20+9 #Manacles]]{+9调整值}的攻击检定对抗目标的AC，如果成功，则目标被套上镣铐。</p>"
+                    "description": "<p><strong>需求</strong> 普提罗手持镣铐，并且和一个生物相邻；</p>\n<hr />\n<p><strong>效果</strong> 普提罗尝试用镣铐捆住该生物的双手或双脚。普提罗进行一次@Check[efficient-capture|against:ac]{+9}调整值的攻击检定对抗目标的AC，如果成功，则目标被套上镣铐。</p>"
                 },
                 "Intimidating Strike": {
                     "name": "胁迫打击 Intimidating Strike",
@@ -5499,7 +5499,7 @@
             "disable": "<p>@Check[religion|dc:20|name:Exorcize the Spirits]（受训）来安抚精魂。</p>",
             "hazarddescription": "<p>幻象手从地板撕出，抓向受害者的腿，并造成真实的伤口。</p>",
             "reset": "<p>潜在的精魂留存此处，在每个午夜重置作祟，直到这里发生的事情被公开为止。</p>",
-            "stealthdetails": "<p>（受训） 以听见地板下的抓挠声</p>",
+            "stealthdetails": "<p>（受训）以听见地板下的抓挠声</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -5573,7 +5573,7 @@
             "disable": "<p>@Check[religion|dc:16|name:Exorcize the Spirits]（受训）来安抚精魂。</p>",
             "hazarddescription": "<p>幻象手从地板撕出，抓向受害者的腿，并造成真实的伤口。</p>",
             "reset": "<p>潜在的精魂留存此处，在每个午夜重置作祟，直到这里发生的事情被公开为止。</p>",
-            "stealthdetails": "<p>（受训） 以听见地板下的抓挠声</p>",
+            "stealthdetails": "<p>（受训）以听见地板下的抓挠声</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -5714,14 +5714,14 @@
                     "description": "<p><strong>需求</strong> 该微灵附着在一个活物上。</p>\n<hr />\n<p><strong>效果</strong> 该幽影微灵钻入被附着的生物的影子，对其造成@Damage[1d6[void]]伤害。它可以使用被附着生物的影子，对另一个至多距离10尺的目标进行一次幽影触须打击。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Shadow Wisp"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Skeletal Gladiator": {
             "name": "骷髅角斗士 Skeletal Gladiator",
@@ -5731,7 +5731,7 @@
             "prototypeToken": {
                 "name": "Skeletal Gladiator"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "ac": "(23 with shield raised)",
             "items": {
                 "Attack of Opportunity": {
@@ -5739,7 +5739,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             }
@@ -5763,14 +5763,14 @@
                     "description": "<p>骷髅法师能令其施放的下一个法术影响更大范围。若其下一个动作将施放区域为爆发、锥形或直线，且没有持续时间的法术，则增加该法术的区域。为原本具有至少10尺半径的爆发区域增加5尺半径（原本半径更小则无效）、为原本长度不超过15尺的锥形和直线区域增加5尺长度、为原本半径更大的锥形和直线区域增加10尺长度。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Skeletal Mage"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Skeletal Mount": {
             "name": "骷髅坐骑 Skeletal Mount",
@@ -5791,14 +5791,14 @@
                     "description": "<p>不死生物与其盟友无需进行技能检定就可以指挥骷髅坐骑。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Skeletal Mount"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Skeleton Captain": {
             "name": "骷髅上尉 Skeleton Captain",
@@ -5811,7 +5811,7 @@
                     "description": "<p>当骷髅被摧毁时，它的骨头会破碎然后爆炸，和支撑它的死灵能量一并放射出去。</p>\n<p>相邻的生物受到@Damage[2d6[slashing]]伤害，@Check[reflex|dc:13|basic]豁免。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Attack of Opportunity": {
@@ -5823,7 +5823,7 @@
             "prototypeToken": {
                 "name": "Skeleton Captain"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Skeleton Corporal": {
             "name": "骷髅下士 Skeleton Corporal",
@@ -5836,7 +5836,7 @@
                     "description": "<p>这个骷髅浑身覆盖着鲜血，获得@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.fJSNOw4zHGbIm4bZ]{快速治疗 Fast Healing 1}。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -5856,14 +5856,14 @@
                     "description": "<p>当骷髅被摧毁时，它的骨头会破碎然后爆炸，和支撑它的死灵能量一并放射出去。</p>\n<p>相邻的生物受到@Damage[1d6[slashing]]伤害 @Check[reflex|dc:10|basic]豁免。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Skeleton Soldier"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Smoldering Forest Fire": {
             "name": "Smoldering Forest Fire",
@@ -5880,7 +5880,7 @@
         },
         "Sodden Floor": {
             "name": "浸水地板 Sodden Floor",
-            "disable": "<p>@Check[crafting|dc:16|name:Reinforce Compromised Floorboards] （受训）强化受损的地板。</p>",
+            "disable": "<p>@Check[crafting|dc:16|name:Reinforce Compromised Floorboards]（受训）强化受损的地板。</p>",
             "hazarddescription": "<p>这里的地板已经腐烂软化了，走上去的人会掉进洞里。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
@@ -5978,7 +5978,7 @@
                     "name": "挥击 Slam"
                 },
                 "Construct Armor (Hardness 6)": {
-                    "name": "构装护甲 Construct Armor （硬度6)",
+                    "name": "构装护甲 Construct Armor（硬度6）",
                     "description": "<p>如同普通物体，精魂守护者雕像也具有硬度。此硬度可等值减少受到的所有伤害。</p>\n<p>一旦精魂守护者雕像的生命值降低到其HP的一半以下，或是其受到了一次重击，它的构装护甲就会破损，失去此效果，且AC降低到16。</p>"
                 },
                 "Follow Trespasser": {
@@ -5989,13 +5989,13 @@
             "prototypeToken": {
                 "name": "Spirit Guardian Statue"
             },
-            "ac": "(16 when broken); construct armor"
+            "ac": "（破损时16）；构装护甲"
         },
         "Spitting Acid 'Bushes' (5-6)": {
             "name": "Spitting Acid 'Bushes' (5-6)",
             "disable": "<p>@Check[thievery|dc:20|trait:disable-device]或@Check[engineering-lore|dc:20|trait:disable-device]（受训）on each bush to collapse its acid pump into component parts (2 actions per bush)。</p>",
             "hazarddescription": "<p>Four techno-organic \"bush\" structures featuring mini-acid pumps activate. The first lashes out with sharp \"branches\" as it activates, and then all of the bushes spit acid at movement nearby。</p>\n<p>HP is 10 per bush with a BT of 5</p>",
-            "routine": "<p>（3动作） The trap loses 1 action each turn for each bush disabled. On each of the hazard's actions, one of the functional pumps spits acid at a creature within range. The bushes sense movement, only targeting creatures that moved from their space on their most recent turn. This trap does not attack any single creature more than once per round. It does not take a multiple attack penalty。</p>",
+            "routine": "<p>（3动作）The trap loses 1 action each turn for each bush disabled. On each of the hazard's actions, one of the functional pumps spits acid at a creature within range. The bushes sense movement, only targeting creatures that moved from their space on their most recent turn. This trap does not attack any single creature more than once per round. It does not take a multiple attack penalty。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -6015,7 +6015,7 @@
             "name": "Spitting Acid 'Bushes' (7-8)",
             "disable": "<p>@Check[thievery|dc:23|trait:action:disable-device]或@Check[engineering-lore|dc:23|trait:action:disable-device]（受训）on each bush to collapse its acid pump into component parts (2 actions per bush)。</p>",
             "hazarddescription": "<p>Four techno-organic \"bush\"; structures featuring mini-acid pumps activate. The first lashes out with sharp \"branches\" as it activates, and then all of the bushes spit acid at movement nearby。</p>\n<p>HP is 14 per bush with a BT of 7</p>",
-            "routine": "<p>（3动作） The trap loses 1 action each turn for each bush disabled. On each of the hazard's actions, one of the functional pumps spits acid at a creature within range. The bushes sense movement, and they only target creatures that moved from their space on their most recent turn. This trap does not attack any single creature more than once per round. It does not take a multiple attack penalty。</p>",
+            "routine": "<p>（3动作）The trap loses 1 action each turn for each bush disabled. On each of the hazard's actions, one of the functional pumps spits acid at a creature within range. The bushes sense movement, and they only target creatures that moved from their space on their most recent turn. This trap does not attack any single creature more than once per round. It does not take a multiple attack penalty。</p>",
             "stealthdetails": "（受训）",
             "data": {
                 "placeHolder": "placeHolder"
@@ -6061,8 +6061,8 @@
                     "name": "燃煤 Flaming Coal （火盆熄灭）"
                 },
                 "Construct Armor (Hardness 10)": {
-                    "name": "构装护甲 Construct Armor （硬度10)",
-                    "description": "<p>L和普通物品一样，赛特雕像具有硬度。硬度可降低它受到的任何伤害，降低数值等于硬度值。</p>\n<p>一旦雕像的生命值被降到一半以下，或者受到重击的伤害，其构装盔甲便会破损，防御等级降低到20点。</p>"
+                    "name": "构装护甲 Construct Armor（硬度10)",
+                    "description": "<p>L和普通物品一样，赛特雕像具有硬度。硬度可降低它受到的任何伤害，降低数值等于硬度值。</p>\n<p>一旦雕像的生命值被降到一半以下，或者受到重击的伤害，其构装盔甲便会破损，护甲等级降低到20点。</p>"
                 },
                 "Brazier": {
                     "name": "火盆 Brazier",
@@ -6076,7 +6076,7 @@
             "prototypeToken": {
                 "name": "Statue Of Set"
             },
-            "ac": "(20 when broken); construct armor"
+            "ac": "（破损时20）；构装护甲"
         },
         "Steaming Fields (5-6)": {
             "name": "Steaming Fields (5-6)",
@@ -6193,7 +6193,7 @@
         },
         "Summoning Rune (PFS 1-11)": {
             "name": "Summoning Rune (PFS 1-11)",
-            "disable": "<p>@Check[acrobatics|dc:15]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:17] （受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic} (1st level; counteract DC 15) to counteract the rune</p>",
+            "disable": "<p>@Check[acrobatics|dc:15]以在不触发陷阱的情况下接近，然后@Check[thievery|dc:17]（受训）以抹除符文，或用@UUID[Compendium.pf2e.spells-srd.Item.9HpwDN4MYQJnW0LG]{解除魔法 Dispel Magic} (1st level; counteract DC 15) to counteract the rune</p>",
             "hazarddescription": "<p>A cloud of invisible magical sensors covers four squares on the map. One of these hazards is in the squares directly above each of the four yellow runes on the map, and the other is in the squares directly above each of the four blue runes on the map。</p>",
             "reset": "<p>The trap resets each day at dawn。</p>",
             "stealthdetails": "<p>（受训）</p>",
@@ -6218,10 +6218,10 @@
             "prototypeToken": {
                 "name": "Synthetic Khismar (5-6)"
             },
-            "ac": "20 when broken, construct armor",
+            "ac": "（破损时20）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 10)": {
-                    "name": "Construct Armor (Hardness 10)",
+                    "name": "构装护甲 Construct Armor（硬度10）",
                     "description": "<p>Like normal objects, Synthetic Khismar has Hardness. This Hardness reduces any damage he takes by an amount equal to his Hardness. Once Synthetic Khismar is reduced to fewer than half his Hit Points, or immediately upon being damaged by a critical hit, his construct armor breaks and his AC is reduced to 20.</p>"
                 },
                 "Overcharge": {
@@ -6261,7 +6261,7 @@
                     "description": "<p>Synthetic Khismar makes two storm-fist Strikes against a single target. If either of the attacks deals damage, the target is @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the beginning of Synthetic Khismar's next turn. His multiple attack penalty increases after making both attacks.</p>"
                 },
                 "Construct Armor (Hardness 10)": {
-                    "name": "Construct Armor (Hardness 10)",
+                    "name": "构装护甲 Construct Armor（硬度10）",
                     "description": "<p>Like normal objects, Synthetic Khismar has Hardness. This Hardness reduces any damage he takes by an amount equal to his Hardness. Once Synthetic Khismar is reduced to fewer than half his Hit Points, or immediately upon being damaged by a critical hit, his construct armor breaks and his AC is reduced to 23.</p>"
                 },
                 "Self-Destruct": {
@@ -6272,7 +6272,7 @@
             "prototypeToken": {
                 "name": "Synthetic Khismar (7-8)"
             },
-            "ac": "23 when broken, construct armor"
+            "ac": "（破损时23）；构装护甲"
         },
         "Technic Zombie (3-4)": {
             "name": "Technic Zombie (3-4)",
@@ -6323,7 +6323,7 @@
                     "name": "Furious Wings"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 to All Saves vs. Magic": {
@@ -6350,7 +6350,7 @@
             "allSaves": "+1 to all saves vs. magic",
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 to All Saves vs. Magic": {
@@ -6498,7 +6498,7 @@
             "name": "Trapmaster Tok's Surprise (3-4)",
             "disable": "<p>@Check[thievery|dc:23|name:Disable Floor Panels|traits:mechanical,trap] (trained) on the floor panels before the barrel falls</p>",
             "hazarddescription": "<p>Pressure sensitive panels in the floor connect to a barrel of debris hidden in the hallway's ceiling</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -6558,11 +6558,11 @@
                     "description": "<p>笨重丧尸可以用血肉团块进行一次打击，并用攻击结果与至多2个敌人进行比较，每个被攻击的目标都必须在打击的触及范围内。此次攻击在计算笨重丧尸的多重攻击减值时被视为2次攻击。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Unkillable Zombie Brute (PFS 1-01)"
             }
@@ -6576,14 +6576,14 @@
             "prototypeToken": {
                 "name": "Unkillable Zombie Brute (PFS 1-13)"
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Slow": {
                     "name": "Slow",
                     "description": "<p>A zombie is permanently @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Improved Push": {
@@ -6624,9 +6624,9 @@
         },
         "Vengeful Spirits": {
             "name": "复仇精魂 Vengeful Spirits",
-            "disable": "<p>两次@Check[occultism|dc:26|name:Exorcise the Haunt|traits:hazard,haunt,complex]或@Check[religion|dc:26|name:Exorcise the Haunt|traits:hazard,haunt,complex] （受训）可以驱散精魂。一个角色也能以以下方式对精魂造成4点心灵伤害，或是使驱散检定的DC永久降低1点。这些方式包括安抚精魂的@Check[diplomacy|dc:22|name:Calm the Spirits|traits:hazard,haunt,complex]，念诵社神守护咒的@Check[nature|dc:22|name:Ward Against the Spirits|traits:hazard,haunt,complex]，说破精魂由来的@Check[occultism|dc:20|name:Leverage Haunt Lore|traits:hazard,haunt,complex]，进行小型驱魔法的@Check[religion|dc:22|name:Lesser Exorcism to Weaken the Haunt|traits:hazard,haunt,complex]。任何被精魂惊吓到的生物都会成为对精魂造成的伤害的潜在目标，力场和类似伤害会同时伤害精魂和宿主，心灵伤害和命能伤害则仅在宿主主动接受时才会对宿主生效。</p>",
+            "disable": "<p>两次@Check[occultism|dc:26|name:Exorcise the Haunt|traits:hazard,haunt,complex]或@Check[religion|dc:26|name:Exorcise the Haunt|traits:hazard,haunt,complex]（受训）可以驱散精魂。一个角色也能以以下方式对精魂造成4点心灵伤害，或是使驱散检定的DC永久降低1点。这些方式包括安抚精魂的@Check[diplomacy|dc:22|name:Calm the Spirits|traits:hazard,haunt,complex]，念诵社神守护咒的@Check[nature|dc:22|name:Ward Against the Spirits|traits:hazard,haunt,complex]，说破精魂由来的@Check[occultism|dc:20|name:Leverage Haunt Lore|traits:hazard,haunt,complex]，进行小型驱魔法的@Check[religion|dc:22|name:Lesser Exorcism to Weaken the Haunt|traits:hazard,haunt,complex]。任何被精魂惊吓到的生物都会成为对精魂造成的伤害的潜在目标，力场和类似伤害会同时伤害精魂和宿主，心灵伤害和命能伤害则仅在宿主主动接受时才会对宿主生效。</p>",
             "hazarddescription": "<p>一群邪恶的灵魂袭击那些穿行于森林中旅客的心灵。这些精魂首先用自己死亡时内脏的幻象折磨其宿主，然后强迫他们对自己造成一样的创伤重现其死亡。被精魂惊吓到的生物仿佛在一瞬间戴上了面具，那面具上长着角和獠牙，还有黄色的眼睛。</p>",
-            "routine": "<p>（3动作） 在其先攻顺序上，精魂使用前两个动作以尝试恐吓区域内尚未受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened}状态的随机目标。目标必须进行@Check[will|dc:22|name:Resist Terror|traits:emotion,fear,mental,hazard,haunt]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受惊惧且免疫此精魂24小时。</p>\n<p><strong>成功</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 目标受到惊惧1，在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<p><strong>大失败</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<hr />\n<p>随后精魂花费1个动作强迫已受惊惧的生物用森林残骸伤害自己。生物必须通过@Check[will|dc:22|name:Resist Attacking Yourself|traits:emotion,fear,mental,hazard,haunt]豁免否则在其下个回合中的第一个动作必须用来打击自己。这种力量为精魂所推动，用精魂的下列数据进行检定。请注意，惊惧状态同时作用于攻击检定和AC，所以不会影响攻击自己的命中率。</p>",
+            "routine": "<p>（3动作）在其先攻顺序上，精魂使用前两个动作以尝试恐吓区域内尚未受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened}状态的随机目标。目标必须进行@Check[will|dc:22|name:Resist Terror|traits:emotion,fear,mental,hazard,haunt]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受惊惧且免疫此精魂24小时。</p>\n<p><strong>成功</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 目标受到惊惧1，在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<p><strong>大失败</strong> 目标受到@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。在目标回合结束时，所受惊惧的数值不会自动减少1点。改为目标在回合结束时进行@Check[will|dc:18|name:Reduce Frightened|traits:emotion,fear,mental,hazard,haunt]豁免，成功则移除此状态。</p>\n<hr />\n<p>随后精魂花费1个动作强迫已受惊惧的生物用森林残骸伤害自己。生物必须通过@Check[will|dc:22|name:Resist Attacking Yourself|traits:emotion,fear,mental,hazard,haunt]豁免否则在其下个回合中的第一个动作必须用来打击自己。这种力量为精魂所推动，用精魂的下列数据进行检定。请注意，惊惧状态同时作用于攻击检定和AC，所以不会影响攻击自己的命中率。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
@@ -6640,14 +6640,14 @@
                     "name": "残骸 Debris"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Vengeful Spirits"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Veteran Guard Captain": {
             "name": "Veteran Guard Captain",
@@ -6719,14 +6719,14 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "hp": "fast healing 2",
+            "hp": "快速治疗2",
             "items": {
                 "Entropy Sense (Imprecise) 30 feet": {
                     "name": "Entropy Sense (Imprecise) 30 feet",
                     "description": "<p>A voidworm can anticipate the most likely presence of a creature through a supernatural insight into chaotic probabilities and chance. This grants it the ability to sense creatures within the listed range. A creature under the effects of @UUID[Compendium.pf2e.spells-srd.Item.EoKBlgf6Smt8opaU]{Veil of Privacy} or that is otherwise shielded from divinations and predictions cannot be noticed via entropy sense.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The voidworm takes on the appearance of a Tiny animal. This doesn't change its Speed or its attack and damage bonuses with its Strikes, but might change the damage type its Strikes deal.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Confounding Lash": {
@@ -6738,11 +6738,11 @@
                     "description": "<p>In any round the voidworm ouroboros has less than half its total Hit Points, it can split into two standard @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.ciLdEf6sld8h2a2j]{Voidworms} which assume normal statistics for that creature.</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Fast Healing 2": {
-                    "name": "Fast Healing 2",
+                    "name": "快速治疗 Fast Healing 2",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Protean Anatomy 5": {
@@ -6824,7 +6824,7 @@
                     "description": "<p>当仆役邪魔的咬打击或爪打击成功时，仆役邪魔会恶毒地撕裂猎物，它的身躯上会出现类似的伤口。目标受到额外1d6伤害，仆役邪魔也受到同样的额外伤害。</p>\n<p>如果该额外伤害因为重击变为双倍，则仆役邪魔同样受到双倍伤害。</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 }
             },
@@ -6864,7 +6864,7 @@
                     "description": "<p>绿鬼婆呼出一阵绿色的瘴气。@Template[cone|distance:15]范围内的生物都受到衰竭体液的影响（正常进行豁免）。</p>\n<p>她在[[/gmr 1d4 #rounds]]{1d4轮}之内无法再次使用该能力。</p>"
                 },
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
@@ -6993,7 +6993,7 @@
         },
         "Whispering Spirits": {
             "name": "低语精魂 Whispering Spirits",
-            "disable": "<p>@Check[religion|dc:16|name:Supress the Spirits] （受训）来抑制住精魂，或者@Check[performance|dc:16|name:Drown Out the Spirits] （受训）把它们拉出幻觉。</p>",
+            "disable": "<p>@Check[religion|dc:16|name:Supress the Spirits]（受训）来抑制住精魂，或者@Check[performance|dc:16|name:Drown Out the Spirits]（受训）把它们拉出幻觉。</p>",
             "hazarddescription": "<p>迷惘的幽灵低语着，展现着他们的最后时刻，并将生者拖入他们的幻觉中。</p>",
             "reset": "<p>潜在的精魂留存此处，在每个午夜重置作祟，直到这里发生的事情被公开为止。</p>",
             "stealthdetails": "<p>（受训）以从远处听见低语声</p>",
@@ -7021,7 +7021,7 @@
             },
             "items": {
                 "Constant Spells": {
-                    "name": "Constant Spells",
+                    "name": "常驻法术 Constant Spells",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
                 "Force Bolt": {
@@ -7044,7 +7044,7 @@
             },
             "items": {
                 "Ferocity": {
-                    "name": "Ferocity",
+                    "name": "凶猛 Ferocity",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 }
             }
@@ -7151,7 +7151,7 @@
                     "description": "<p>10尺。丧尸散发着腐烂和疾病的气息，使伤口溃烂化脓。</p>\n<p>在丧尸10尺内且生命值不满的生物在回合开始时会因伤口溃烂受到@Damage[1d6[untyped]]伤害。被丧尸重击的生物也会立即承受此伤害。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Improved Push 5 feet": {
@@ -7162,7 +7162,7 @@
             "prototypeToken": {
                 "name": "Zombie Brute (PFS 1-18)"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Zombie Charger": {
             "name": "丧尸进击者 Zombie Charger",
@@ -7179,14 +7179,14 @@
                     "description": "<p>10尺。丧尸散发着腐烂和疾病的气息，使伤口溃烂化脓。</p>\n<p>在丧尸10尺内且生命值不满的生物在回合开始时会因伤口溃烂受到@Damage[1d6[untyped]]伤害。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Zombie Charger"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Zombie Minihulk": {
             "name": "Zombie Minihulk",
@@ -7203,7 +7203,7 @@
                     "description": "<p>A zombie is permanently @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Wide Swing": {
@@ -7214,7 +7214,7 @@
             "prototypeToken": {
                 "name": "Zombie Minihulk"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Zombie Riding Horse": {
             "name": "丧尸骑乘马 Zombie Riding Horse",
@@ -7239,14 +7239,14 @@
                     "description": "<p>丧尸骑乘马行走两次，在这些行走中有一个10尺的环境加值。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
             "prototypeToken": {
                 "name": "Zombie Riding Horse"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Zombie Shambler (PFS 1-03)": {
             "name": "蹒跚丧尸 Zombie Shambler (PFS 1-03)",
@@ -7264,11 +7264,11 @@
                     "description": "<p>丧尸具有永久性的@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}且无法使用反应动作。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "prototypeToken": {
                 "name": "Zombie Shambler (PFS 1-03)"
             }
@@ -7296,7 +7296,7 @@
                     "description": "<p>丧尸战马行走两次，在这些行走中有一个10尺的环境加值。</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Improved Push 5 feet": {
@@ -7307,7 +7307,7 @@
             "prototypeToken": {
                 "name": "Zombie Warhorse"
             },
-            "hp": "void healing"
+            "hp": "虚能治疗"
         }
     }
 }

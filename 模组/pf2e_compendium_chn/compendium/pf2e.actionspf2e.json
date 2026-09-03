@@ -11,7 +11,7 @@
         },
         "Act Together": {
             "name": "同步行动 Act Together",
-            "description": "<p><strong>频率</strong>每轮一次</p>\n<p>你和你的幻灵如一人般同时行动。你或你的幻灵使用动作数量等同于同步行动所花费动作数量的动作或行动，且另一方使用一个单动作。</p>\n<p>例如，如果你花费2动作进行同步行动，你可以施展 @UUID[Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t]{燃烧之息 Breathe Fire} （2动作）且你的幻灵可以打击（1动作）；或者你的幻灵可以使用他的喷吐武器（2动作）且你可以行走（1动作）。</p>\n<p>这也让你们彼此可以在旅行时使用不同的探索行动，例如 @UUID[Compendium.pf2e.actionspf2e.Item.IE2nThCmoyhQA0Jn]{回避注意} 。</p>"
+            "description": "<p><span class=\"action-glyph\">1</span>至<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每轮一次</p><hr /><p>你和你的幻灵如一人般同时行动。你或你的幻灵使用动作数量等同于同步行动所花费动作数量的动作或行动，且另一方使用一个单动作。</p>\n<p>例如，如果你花费2动作进行同步行动，你可以施展@UUID[Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t]（2动作）而你的幻灵可以打击（1动作）；或者你的幻灵可以使用他的@UUID[Compendium.pf2e.actionspf2e.Item.Vr3w3t028ZKDg0mO]（2动作）而你可以行走（1动作）。</p>"
         },
         "Administer First Aid": {
             "name": "急救 Administer First Aid",
@@ -43,7 +43,7 @@
         },
         "Arcane Cascade": {
             "name": "奥术奔涌 Arcane Cascade",
-            "description": "<p><strong>需求</strong> 你最近的一个动作是施放法术或进行@UUID[Compendium.pf2e.actionspf2e.Item.QDW9H8XLIjuW2fE4]。只需在进入架势时满足此要求，而非保持架势。</p><hr /><p>你转换一部分法术的魔法力量并通过使用特化的架势、吐纳和步法，让其在你的躯体和武器间循环。 当你处于架势中时，你的近战打击造成1点额外力场伤害。如果你具有武器专精，这个伤害增加到2。如果你具有高等武器专精，则增加到3。任何受益于此的打击都获得奥术特征，使其魔法化。</p>\n<p>如果你进入架势前最近的法术是可以造成伤害的法术，来自于架势给与的额外伤害改为和这个法术相同的伤害类型（如果法术可以造成多种类型的伤害，则选择一种类型）。</p>"
+            "description": "<p>通过特定的姿势、吐纳或步法，你让奥术能量在身躯与武器间循环。当你处于该架势时，你的近战打击获得奥术特征（使其变为魔法攻击），额外造成1点力场伤害，并获得对抗法术伤害的1点抗力。如果你拥有@UUID[Compendium.pf2e.classfeatures.Item.9EqIasqfI8YIM3Pt]，则伤害与抗力提升至2点；拥有@UUID[Compendium.pf2e.classfeatures.Item.Z7HX6TeFsaup7Dx9]，则提升至3点。</p>\n<p>如果你在同一回合内施放法术且随后进入奥术奔涌，则可以将该架势的伤害改为该法术所能造成的任一伤害类型，替代力场伤害。</p>"
         },
         "Armor Up!": {
             "name": "上战甲！ Armor Up!",
@@ -71,7 +71,7 @@
         },
         "Banshee Cry": {
             "name": "女妖之嚎 Banshee Cry",
-            "description": "<p><strong>触发</strong> 30尺范围内有1个生物施法，或使用专注启动来启动物品</p><hr /><p><strong>效果</strong> 你发射烟火让其在生物周边爆炸并引起尖锐的声响。该生物必须尝试1次@Check[will|against:class-spell]豁免。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物必须在触发动作或行动上使用一个额外动作，否贼该动作将被打断。</p>\n<p><strong>大失败</strong> 触发动作被打断。</p>"
+            "description": "<p><strong>触发</strong> 30尺范围内有1个生物施法，或使用专注启动来启动物品</p><hr /><p><strong>效果</strong> 你发射烟火让其在生物周边爆炸并引起尖锐的声响。该生物必须尝试一次@Check[will|against:class-spell]豁免。</p>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物必须在触发动作或行动上使用一个额外动作，否贼该动作将被打断。</p>\n<p><strong>大失败</strong> 触发动作被打断。</p>"
         },
         "Barbed Quills": {
             "name": "带刺羽尖 Barbed Quills",
@@ -82,8 +82,8 @@
             "description": "<p>你作出一次优雅且致命的攻击。作出一次打击；若命中且你的武器符合@UUID[Compendium.pf2e.classfeatures.Item.RQH6vigvhmiYKKjg]{精确打击 Precise Strike}的先决条件，那么你会通过精确打击造成完整的[[/r (1d6}]]{1d6点伤害}。</p>"
         },
         "Beast's Charge": {
-            "name": "野兽冲锋 Beast's Charge",
-            "description": "<p>你的幻灵向前冲刺，并借助动能增加幻灵的攻击的力量。你的幻灵行走两次，并在之后进行打击，只要幻灵从起始位置远离了至少20尺，且完全走在一条直线上，则这次攻击骰上获得+1环境加值。</p>"
+            "name": "魔兽冲锋 Beast's Charge",
+            "description": "<p>你的幻灵向前冲刺，并借助动能增加幻灵的攻击的力量。你的幻灵行走两次，并在之后进行打击，只要幻灵从起始位置远离了至少20尺，且完全走在一条直线上，则这次攻击骰获得+1环境加值。</p>"
         },
         "Bend Time": {
             "name": "扭曲时间 Bend Time",
@@ -99,7 +99,7 @@
         },
         "Boarding Assault": {
             "name": "登船袭击 Boarding Assault",
-            "description": "<p>你进行2次行走或尝试1次@Check[acrobatics]检定（DC由GM决定，但通常为DC20）来顺着绳索或类似物体摆荡至多2倍于你的速度的距离，然后进行打击。</p>\n<p>若你在此移动过程中登上或者离开船只或类似载具，则该打击额外获得一枚武器伤害骰。</p>"
+            "description": "<p>你进行2次行走或尝试一次@Check[acrobatics]检定（DC由GM决定，但通常为DC20）来顺着绳索或类似物体摆荡至多2倍于你的速度的距离，然后进行打击。</p>\n<p>若你在此移动过程中登上或者离开船只或类似载具，则该打击额外获得一枚武器伤害骰。</p>"
         },
         "Borrow an Arcane Spell": {
             "name": "借阅奥术法术 Borrow an Arcane Spell",
@@ -219,7 +219,7 @@
         },
         "Cleanse Soul Path": {
             "name": "拂拭灵魂道途 Cleanse Soul Path",
-            "description": "<p>你通过冥想、祈祷或其他方式来加强你的灵魂与魂铸武装之间的连结。这需要10分钟。尝试反制你的<em>魂铸腐化</em>。反制等级相当于你等级的一半，向上取整，而反制检定调整值为你的宗教技能调整值。如果成功，将你的<em>魂铸腐化</em>阶段下降1（最小为1）。</p>"
+            "description": "<p>你冥想、祈祷，或通过其他方式强化灵魂与兵器的联结。此过程耗时10分钟。尝试反制你的<em>魂铸腐化</em>。反制环级等于你等级的一半（向上取整），反制检定调整值为你的宗教调整值。若成功，将<em>魂铸腐化</em>阶段降低1（最低为阶段1）。</p>"
         },
         "Clear a Path": {
             "name": "扫清障碍 Clear a Path",
@@ -231,15 +231,15 @@
         },
         "Clue In": {
             "name": "提供线索 Clue In",
-            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p><strong>触发</strong> 另一个生物尝试进行一次检定且其能帮你靠近你一个主动调查的核心问题</p><hr /><p>你和触发的生物分享资讯。其在触发的检定上获得与你追查方向相同的环境加值。GM可以根据情况在这个反应动作中加入任何相关的特性，例如，如果你用口头传达信息，则可以加入听觉和语言。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.vhSYlQiAQMLuXqoc]</p>"
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p><strong>触发</strong> 另一个生物尝试进行一次检定且其能帮你靠近你一个主动调查的核心问题</p><hr /><p>你和触发的生物分享资讯。其在触发的检定上获得与你追查方向相同的环境加值。GM可以根据情况在这个反应动作中加入任何相关的特征，例如，如果你用口头传达信息，则可以加入听觉和语言。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.vhSYlQiAQMLuXqoc]</p>"
         },
         "Coerce": {
             "name": "胁迫 Coerce",
-            "description": "<p>你使用明里或暗里的威胁来胁迫一个生物按你的意愿行事。你必须话至少1分钟时间与该生物交谈。对话结束时，进行[[/act coerce]]检定对抗目标的意志DC，GM可以决定附加任意环境加值。</p><hr /><p><strong>大成功</strong> 目标向你吐露你想要的信息，或同意遵循你的指令，只要该指令不会以任何方式伤害到目标。目标会在GM决定的时间里继续遵守指令，但不会超过1天，之后目标的态度变为不友善（如果之前还未变为不友善或敌对）。然而目标会因为太过害怕你而不敢采取报复行动，至少短期内是这样。</p>\n<p><strong>成功</strong> 类似大成功，但只要目标变为不友善，他们就可能会决定对你采取行动，比如向官方机构举报你或者是帮助你的敌人。</p>\n<p><strong>失败</strong> 目标不会按照你说的去做，如果他们之前态度还未变为不友善或敌对，现在就会变为不友善。</p>\n<p><strong>大失败</strong> 目标拒绝服从，如果他们之前态度还未变为敌对，现在就会变为敌对，并且至少在1周内暂时免疫你的胁迫。</p><hr /><h2>改变态度 Changing Attitudes</h2><p>你对NPC的影响由态度衡量，这也体现了他们如何看待你的角色。当然这也只是对这个生物个性的简要总结。GM会根据与你互动角色的历史和信仰引入一些细微差别，这些角色的态度可能会随着故事推进而变化。状态附录中详细说明了各种态度的含义，这里也会对其简要总结。</p><ul><li><strong>乐于帮助 Helpful:</strong> 愿意帮助你，会积极回应你的请求。</li><li><strong>友善 Friendly:</strong> 对你态度很好，但不一定会主动上门来帮助你。</li><li><strong>不关心 Indifferent:</strong> 你或好或坏他都不在乎。（大多数NPC的起始态度为不关心。）</li><li><strong>不友善 Unfriendly:</strong> 不喜欢你，也不愿意帮助你。</li><li><strong>敌对 Hostile:</strong> 会积极反对你，可能仅仅因为不喜欢就攻击你。</li></ul><p>用这些技能无法改变玩家的态度。你可以与玩家角色进行角色扮演互动，如果玩家愿意，你也可以使用交涉掷骰的结果让他们对一个角色的说服力或魅力有个大致了解，但玩家会对自己角色的反应做出最终决定。</p>"
+            "description": "<p>你使用明里或暗里的威胁来胁迫一个生物按你的意愿行事。你必须话至少1分钟时间与该生物交谈。对话结束时，进行[[/act coerce]]检定对抗目标的意志DC，GM可以决定附加任意环境加值。</p><hr /><p><strong>大成功</strong> 目标向你吐露你想要的信息，或同意遵循你的指令，只要该指令不会以任何方式伤害到目标。目标会在GM决定的时间里继续遵守指令，但不会超过1天，之后目标的态度变为不友善（如果之前还未变为不友善或敌对）。然而目标会因为太过害怕你而不敢采取报复行动，至少短期内是这样。</p>\n<p><strong>成功</strong> 类似大成功，但只要目标变为不友善，他们就可能会决定对你采取行动，比如向官方机构举报你或者是帮助你的敌人。</p>\n<p><strong>失败</strong> 目标不会按照你说的去做，如果他们之前态度还未变为不友善或敌对，现在就会变为不友善。</p>\n<p><strong>大失败</strong> 目标拒绝服从，如果他们之前态度还未变为敌对，现在就会变为敌对，并且至少在1周内临时免疫你的胁迫。</p><hr /><h2>改变态度 Changing Attitudes</h2><p>你对NPC的影响由态度衡量，这也体现了他们如何看待你的角色。当然这也只是对这个生物个性的简要总结。GM会根据与你互动角色的历史和信仰引入一些细微差别，这些角色的态度可能会随着故事推进而变化。状态附录中详细说明了各种态度的含义，这里也会对其简要总结。</p><ul><li><strong>乐于帮助 Helpful:</strong> 愿意帮助你，会积极回应你的请求。</li><li><strong>友善 Friendly:</strong> 对你态度很好，但不一定会主动上门来帮助你。</li><li><strong>不关心 Indifferent:</strong> 你或好或坏他都不在乎。（大多数NPC的起始态度为不关心。）</li><li><strong>不友善 Unfriendly:</strong> 不喜欢你，也不愿意帮助你。</li><li><strong>敌对 Hostile:</strong> 会积极反对你，可能仅仅因为不喜欢就攻击你。</li></ul><p>用这些技能无法改变玩家的态度。你可以与玩家角色进行角色扮演互动，如果玩家愿意，你也可以使用交涉掷骰的结果让他们对一个角色的说服力或魅力有个大致了解，但玩家会对自己角色的反应做出最终决定。</p>"
         },
         "Command an Animal": {
             "name": "指挥动物 Command an Animal",
-            "description": "<p>你向一只动物发出指令。进行[[/act command-an-animal]]检定对抗该动物的意志DC。如果该动物对你的态度较好，你提出了该动物乐于采取的行动，或者你愿意用食物招待该动物，那么GM可能会调整DC。</p>\n<p>如果该动物对你的态度是敌对或不友善，你的尝试会自动失败。如果该动物对你的态度为乐于帮助，你的成功等级会提升一级。诸如@UUID[Compendium.pf2e.feats-srd.Item.Rq5wkA8DtsmbzoGV]的专长也可以让你更容易就能命令动物。</p>\n<p>大多数动物都理解@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]、@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]、@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]、@UUID[Compendium.pf2e.actionspf2e.Item.OdIUybJ3ddfL7wzj]，@UUID[Compendium.pf2e.actionspf2e.Item.Bcxarzksqt9ezrs6]和@UUID[Compendium.pf2e.actionspf2e.Item.VjxZFuUXrCU94MWR]基本动作。如果该动物理解一项行动，例如马的飞奔，你就可以命令该动物执行这一行动，但必须在命令动物上花费与该行动数量相同的动作点数。你也可以花费多个动作命令动物在下一回合执行该数量的基本动作。例如，你可以花费3个动作命令一只动物行走三次，或者行走两次然后打击一次。</p><hr /><p><strong>成功</strong> 该动物会在它的下一回合按照你的指令行事。</p>\n<p><strong>失败</strong> 该动物犹豫不决或抗拒命令，什么都不会做。</p>\n<p><strong>大失败</strong> 该动物执行了错误的动作或误解了你的指令，由GM决定它会执行哪些动作。</p>"
+            "description": "<p>你向一只动物发出指令。进行[[/act command-an-animal]]检定对抗该动物的意志DC。如果该动物对你的态度较好，你提出了该动物乐于采取的行动，或者你愿意用食物招待该动物，那么GM可能会调整DC。</p>\n<p>如果该动物对你的态度是敌对或不友善，你的尝试会自动失败。如果该动物对你的态度为乐于帮助，你的成功等级会提升一级。诸如@UUID[Compendium.pf2e.feats-srd.Item.Rq5wkA8DtsmbzoGV]的专长也可以让你更容易就能命令动物。</p>\n<p>大多数动物都理解@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]、@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]、@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]、@UUID[Compendium.pf2e.actionspf2e.Item.OdIUybJ3ddfL7wzj]，@UUID[Compendium.pf2e.actionspf2e.Item.Bcxarzksqt9ezrs6]和@UUID[Compendium.pf2e.actionspf2e.Item.VjxZFuUXrCU94MWR]基础动作。如果该动物理解一项行动，例如马的飞奔，你就可以命令该动物执行这一行动，但必须在命令动物上花费与该行动数量相同的动作点数。你也可以花费多个动作命令动物在下一回合执行该数量的基础动作。例如，你可以花费3个动作命令一只动物行走三次，或者行走两次然后打击一次。</p><hr /><p><strong>成功</strong> 该动物会在它的下一回合按照你的指令行事。</p>\n<p><strong>失败</strong> 该动物犹豫不决或抗拒命令，什么都不会做。</p>\n<p><strong>大失败</strong> 该动物执行了错误的动作或误解了你的指令，由GM决定它会执行哪些动作。</p>"
         },
         "Conceal an Object": {
             "name": "隐藏物件 Conceal an Object",
@@ -271,11 +271,11 @@
         },
         "Craft": {
             "name": "制作 Craft",
-            "description": "<p>你可以使用材料制作一件物品。拥有@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]技能专长才能制作炼金物品，拥有@UUID[Compendium.pf2e.feats-srd.Item.xWY5omyIcILNR7y1]专长才能制作魔法物品。</p>\n<p>要制作物品，你必须满足以下需求：</p><ul><li>该物品等级小于等于你的等级。未列出等级的物品为0级。如果物品等级大于等于9级，就需要在手艺上获得大师熟练度，如果物品等级大于等于17级，则需要传奇熟练度。</li><li>你该物品的稀有度必须为常见，或者通过其他途径解锁了该物品。</li><li>你必须有一套合适的工具，多数情况下还需要拥有工坊。例如，你需要在铁匠铺里锻造金属盾牌，或者在@UUID[Compendium.pf2e.equipment-srd.Item.k6xZkDUpF7E1Totd]里生产炼金物品。</li><li>你必须准备至少等于该物品价格一半的原材料。如果你制作成功，你就会将这些原材料消耗掉。你位于定居点时通常都可以用货币购买你需要的材料，除非它是稀有的珍贵材料。</li></ul><p>你花费2天时间进行准备工作，然后尝试<span data-pf2-action=\"craft\">手艺</span>技能检定，如果你拥有该物品的配方，则只花费1天。GM会根据等级、稀有度和其他情况决定制作该物品的DC。</p>\n<p>如果制作物品的尝试成功了，你就会消耗掉准备的材料。你可以支付该物品价格剩余部分的材料来立刻完成制作，也可以额外花费休整期继续工作。每多花一天，完成物品所需材料的价格就会降低一些。降低的数额根据所赚收入表中你的手艺熟练度和你的等级（而非任务等级）来计算。</p>\n<p>经历数天的休整期后，你还可以支付剩余的材料价格来立刻完成制作。如果你的休整期被打断，你也可以稍后返回继续中断的工作来完成该物品。</p><hr /><p><strong>大成功</strong> 你的尝试获得了成功。每多花一天制作时间，就可以根据你的等级+1和你的手艺熟练度来减少完成物品所需的材料。</p>\n<p><strong>成功</strong> 你的尝试获得了成功。每多花一天制作时间，就可以根据你的等级和你的手艺熟练度来减少完成物品所需的材料。</p>\n<p><strong>失败</strong> 你未能完成该物品。你可以将准备的材料全部回收。如果你想再试一次就必须重新开始。</p>\n<p><strong>大失败</strong> 你未能完成该物品。你毁掉了所准备的10%的材料，但还能挽救剩余的材料。如果你想再试一次就必须重新开始。</p>"
+            "description": "<p>你可以使用材料制作一件物品。拥有@UUID[Compendium.pf2e.feats-srd.Item.is3Oz9wt11lNq62K]技能专长才能制作炼金物品，拥有@UUID[Compendium.pf2e.feats-srd.Item.xWY5omyIcILNR7y1]专长才能制作魔法物品。</p>\n<p>要制作物品，你必须满足以下需求：</p><ul><li>该物品等级小于等于你的等级。未列出等级的物品为0级。如果物品等级大于等于9级，就需要在手艺上获得大师熟练度，如果物品等级大于等于17级，则需要传奇熟练度。</li><li>你该物品的稀有度必须为常见，或者通过其他途径解锁了该物品。</li><li>你必须有一套合适的工具，多数情况下还需要拥有工坊。例如，你需要在铁匠铺里锻造金属盾牌，或者在@UUID[Compendium.pf2e.equipment-srd.Item.k6xZkDUpF7E1Totd]里生产炼金物品。</li><li>你必须准备至少等于该物品价格一半的原材料。如果你制作成功，你就会将这些原材料消耗掉。你位于定居点时通常都可以用货币购买你需要的材料，除非它是稀有的珍贵材料。</li></ul><p>你花费2天时间进行准备工作，然后尝试@Check[crafting]检定，如果你拥有该物品的配方，则只花费1天。GM会根据等级、稀有度和其他情况决定制作该物品的DC。</p>\n<p>如果制作物品的尝试成功了，你就会消耗掉准备的材料。你可以支付该物品价格剩余部分的材料来立刻完成制作，也可以额外花费休整期继续工作。每多花一天，完成物品所需材料的价格就会降低一些。降低的数额根据所赚收入表中你的手艺熟练度和你的等级（而非任务等级）来计算。</p>\n<p>经历数天的休整期后，你还可以支付剩余的材料价格来立刻完成制作。如果你的休整期被打断，你也可以稍后返回继续中断的工作来完成该物品。</p><hr /><p><strong>大成功</strong> 你的尝试获得了成功。每多花一天制作时间，就可以根据你的等级+1和你的手艺熟练度来减少完成物品所需的材料。</p>\n<p><strong>成功</strong> 你的尝试获得了成功。每多花一天制作时间，就可以根据你的等级和你的手艺熟练度来减少完成物品所需的材料。</p>\n<p><strong>失败</strong> 你未能完成该物品。你可以将准备的材料全部回收。如果你想再试一次就必须重新开始。</p>\n<p><strong>大失败</strong> 你未能完成该物品。你毁掉了所准备的10%的材料，但还能挽救剩余的材料。如果你想再试一次就必须重新开始。</p>"
         },
         "Craft Disharmonic Instrument": {
-            "name": "Craft Disharmonic Instrument",
-            "description": "<p><strong>Requirements</strong> Legendary in Crafting</p>\n<hr />\n<p>You use legendary Vudran techniques to craft a disharmonic instrument that incorporates pieces of Kothogaz's heart. This is likely a tanpura, but legends mention other instruments and even voice enhancers. A disharmonic instrument is a virtuoso musical instrument.</p>\n<p>This activity requires seven disharmonic heartslivers, the formula for a disharmonic instrument, 55,000 gp worth of rare materials, and 7 days of work. At the end of the 7 days, attempt a @Check[crafting|dc:40|traits:action:craft] check to Craft.</p>\n<hr />\n<p><strong>Critical Success</strong> You masterfully complete the disharmonic instrument. Holding the instrument grants immunity to Kothogaz's tympanic heartbeat and many-eyed blight.</p>\n<p><strong>Success</strong> You complete the disharmonic instrument.</p>\n<p><strong>Failure</strong> You don't complete the disharmonic instrument, and you contract many-eyed blight from the heartslivers.</p>\n<p><strong>Critical Failure</strong> As failure, and whenever you're on the same plane as Kothogaz, it can immediately teleport to you with its Disharmonic Door ability.</p>"
+            "name": "制作不协乐器 Craft Disharmonic Instrument",
+            "description": "<p><strong>需求</strong> 手艺技能传奇</p>\n<hr />\n<p>你使用传说中的伏陀罗技艺来制作一件融入了科索伽兹心脏碎片的不协乐器。</p>\n<p>这项活动需要七片不协心脏碎片、不协乐器的配方、价值 55000gp的稀有材料以及七天的工作。在七天结束时，尝试一次@Check[crafting|dc:40|traits:action:craft]检定来进行制作。</p>\n<hr />\n<p><strong>大成功</strong> 你完美地制作出了不协乐器。手持这件乐器时，你免疫科索伽兹的鼓膜心音和多眼枯化病。</p>\n<p><strong>成功</strong> 你完成了不协乐器。</p>\n<p><strong>失败</strong> 你未能完成不协乐器，并因心脏碎片而感染多眼枯化病。</p>\n<p><strong>大失败</strong> 同失败，并且只要你与科索伽兹处于同一位面，它就能使用其不协之门能力立刻传送到你身边。</p>"
         },
         "Cram": {
             "name": "突击应考 Cram",
@@ -323,7 +323,7 @@
         },
         "Demoralize": {
             "name": "挫败士气 Demoralize",
-            "description": "<p>你突然发出一声呐喊、一句恰到好处的嘲弄或是一句尖刻的讽刺，就有可能动摇敌人的决心。选择一个距离你30尺以内的生物。进行[[/act demoralize]]检定对抗目标的意志DC。如果目标听不懂你说的语言，或者你不使用任何语言，你就会受到-4的环境减值。无论结果如何，目标在10分钟内都暂时免疫你的挫败士气。</p><hr /><p><strong>大成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>"
+            "description": "<p>你突然发出一声呐喊、一句恰到好处的嘲弄或是一句尖刻的讽刺，就有可能动摇敌人的决心。选择一个距离你30尺以内的生物。进行[[/act demoralize]]检定对抗目标的意志DC。如果目标听不懂你说的语言，或者你不使用任何语言，你就会受到-4的环境减值。无论结果如何，目标在10分钟内都临时免疫你的挫败士气。</p><hr /><p><strong>大成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>成功</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>"
         },
         "Destructive Vengeance": {
             "name": "毁灭复仇 Destructive Vengeance",
@@ -355,11 +355,11 @@
         },
         "Divert Lightning": {
             "name": "吸引闪电 Divert Lightning",
-            "description": "<p><strong>需求</strong> 你并不免疫电击伤害</p>\n<p><strong>触发</strong> 一个距你不超过30尺的生物被一个电击效果作为目标，或位于电击效果的范围中</p>\n<hr />\n<p><strong>效果</strong> 你将电击引向自己来保护目标。如果触发的效果需要选取目标，则你代替触发生物成为新的目标。如果触发的效果是个范围效果，则它会从触发生物的空间跳转到你所在的空间。这不会影响被电击效果当做目标的其他生物，或位于电击效果范围内的其他生物。你将自动被电击效果命中，或在对抗该效果的豁免检定中自动失败。你在[[/r 1d4 #rounds]]{1d4 轮}内无法再次吸引闪电。</p>"
+            "description": "<p><strong>需求</strong> 你并不免疫电击伤害</p>\n<p><strong>触发</strong> 一个距你不超过30尺的生物被一个电击效果作为目标，或位于电击效果的范围中</p>\n<hr />\n<p><strong>效果</strong> 你将电击引向自己来保护目标。如果触发的效果需要选取目标，则你代替触发生物成为新的目标。如果触发的效果是个范围效果，则它会从触发生物的空间跳转到你所在的空间。这不会影响被电击效果当做目标的其他生物，或位于电击效果范围内的其他生物。你将自动被电击效果命中，或在对抗该效果的豁免检定中自动失败。你在[[/r 1d4 #rounds]]{1d4轮}内无法再次吸引闪电。</p>"
         },
         "Draconic Frenzy": {
             "name": "龙之狂怒 Draconic Frenzy",
-            "description": "<p>你的幻灵用主要无武装攻击进行一次打击，并用次要无武装攻击进行两次打击（顺序任意）。如果这些攻击中的任意一个对敌人造成重击，幻灵立刻恢复喷吐武器的使用能力。</p>"
+            "description": "<p>你的幻灵用主要无武装攻击进行一次打击，并用次要无武装攻击进行两次打击（顺序任意）。如果这些攻击中的任意一个对敌人造成了重击，幻灵立刻恢复龙息的使用。</p>"
         },
         "Drain Bonded Item": {
             "name": "汲取连结物品 Drain Bonded Item",
@@ -375,7 +375,7 @@
         },
         "Drive": {
             "name": "驾驶 Drive",
-            "description": "<p><strong>需求</strong> 你正在驾驶一辆载具</p>\n<p>你驾驶你的载具来移动。在移动前，决定你准备在驾驶上使用几个动作。驾驶效果取决于消耗的动作数量。你无法驾驶通过被其他生物占据的空间，即便他们是你的盟友。</p>\n<p><span class=\"action-glyph\">1</span> 尝试一次驾驶检定。成功时，载具移动等同于其移动速度的距离，可以正常转向。失败时，载具直线移动等同于其移动速度的距离。大失败时，载具直线以东等于其移动速度的距离，并且失去控制。</p>\n<p><span class=\"action-glyph\">2</span> （鲁莽） 载具向着当前行进方向，直线移动等于两倍其移动速度的距离。</p>\n<p><span class=\"action-glyph\">3</span> （鲁莽） 你进行一次-5的驾驶检定，以维持对载具的控制。载具向着当前行进方向，直线移动等于三倍其移动速度的距离。</p>"
+            "description": "<p><strong>需求</strong> 你正在驾驶一辆载具</p>\n<p>你驾驶你的载具来移动。在移动前，决定你准备在驾驶上使用几个动作。驾驶效果取决于消耗的动作数量。你无法驾驶通过被其他生物占据的空间，即便他们是你的盟友。</p>\n<p><span class=\"action-glyph\">1</span> 尝试一次驾驶检定。成功时，载具移动等同于其移动速度的距离，可以正常转向。失败时，载具直线移动等同于其移动速度的距离。大失败时，载具直线以东等于其移动速度的距离，并且失去控制。</p>\n<p><span class=\"action-glyph\">2</span>（鲁莽）载具向着当前行进方向，直线移动等于两倍其移动速度的距离。</p>\n<p><span class=\"action-glyph\">3</span>（鲁莽）你进行一次-5的驾驶检定，以维持对载具的控制。载具向着当前行进方向，直线移动等于三倍其移动速度的距离。</p>"
         },
         "Drop Prone": {
             "name": "趴下 Drop Prone",
@@ -383,11 +383,11 @@
         },
         "Dutiful Retaliation": {
             "name": "尽忠反击 Dutiful Retaliation",
-            "description": "<p><strong>触发</strong> 离你15尺内的一名敌人用一次打击命中了你，并对你造成了伤害</p>\n<p><strong>需求</strong> 你的幻灵在你的15尺范围内</p>\n<p>你的幻灵本能地放出灵质能量，允许他对胆敢伤害你的敌人回敬一次打击。你的幻灵对触发的敌人进行一次近战无武装打击，即使该敌人不在幻灵的触及内。</p>"
+            "description": "<p><strong>触发</strong> 你15尺内的一个敌人以一次打击命中你并对你造成伤害</p>\n<p><strong>需求</strong> 你的幻灵在你15尺内</p><hr /><p><strong>效果</strong> 你的幻灵本能地放出灵质能量，他对胆敢伤害你的敌人回敬一次打击。你的幻灵对触发的敌人进行一次近战无武装打击，即使该敌人不在幻灵的触及内。</p>"
         },
         "Earn Income": {
             "name": "赚取收入 Earn Income",
-            "description": "<p>你可以在休整期使用技能赚钱。你需要相应技能受训才能这么做。赚钱需要花费时间，而收入取决于你的熟练度和你能找到的任务是否有利可图。由于这个过程需要花费大量时间，还要持续记录冒险进展之外的事情，所以并不是每个战役里都会用到这个技能。赚取收入的典型方式：</p><ul><li>制作商品（手艺）</li><li>专业工作（学识）</li><li>登台演出（表演）</li></ul><p>GM可能会要求你使用不同的技能从事不同的专业工作来赚取收入。通常来说，在修道院里研习旧书这种学术性的工作使用宗教技能，但在教堂里布道则不能使用宗教，而是使用表演技能。你也可以利用肉体技能来赚钱，比如使用特技在马戏团表演杂技，或者使用贼活扒窃。如果你使用手艺、学识或表演之外的技能，那么DC就会提升许多。</p><h2 class=\"title\">赚取收入 Earn Income</h2><section class=\"traits\"><p title=\"An activity with this trait takes a day or more, and can be used only during downtime.\">休整期</p></section><hr /><p>你使用一项技能在休整期尝试赚钱。GM会设定一个代表最有利可图的工作的任务等级。你可以寻找较低级别的任务，由GM决定能否找到。有时你可以尝试找到比一开始提供的那份报酬更好的工作，但需要花费时间，并且需要使用交涉技能搜集信息，或者进行一些研究和社交方面的努力。</p>\n<p>如果你接受一份工作，GM就会秘密设置你的技能检定DC。你需要在第一天工作后进行检定来确定收入。根据检定结果、任务等级和熟练度（如所赚收入表所示），你将获得一定的收入。</p>\n<p>你可以在接下来几天继续执行该任务，无需再次检定。第一天之后的每一天收入都与第一天相同，直至任务完成。GM决定你可以在该任务中工作多次时间。大多数任务持续一两周，但有些任务可能需要几个月甚至几年的时间。</p><h2>所赚收入 Income Earned</h2><table class=\"pf2e remaster\"><thead><tr><th>任务等级 Task Level</th><th>失败 Failure</th><th>受训 Trained</th><th>专家 Expert</th><th>大师 Master</th><th>传奇 Legendary</th></tr></thead><tbody><tr><td>0</td><td>1 cp</td><td>5 cp</td><td>5 cp</td><td>5 cp</td><td>5 cp</td></tr><tr><td>1</td><td>2 cp</td><td>2 sp</td><td>2 sp</td><td>2 sp</td><td>2 sp</td></tr><tr><td>2</td><td>4 cp</td><td>3 sp</td><td>3 sp</td><td>3 sp</td><td>3 sp</td></tr><tr><td>3</td><td>8 cp</td><td>5 sp</td><td>5 sp</td><td>5 sp</td><td>5 sp</td></tr><tr><td>4</td><td>1 sp</td><td>7 sp</td><td>8 sp</td><td>8 sp</td><td>8 sp</td></tr><tr><td>5</td><td>2 sp</td><td>9 sp</td><td>1 gp</td><td>1 gp</td><td>1 gp</td></tr><tr><td>6</td><td>3 sp</td><td>1 gp, 5 sp</td><td>2 gp</td><td>2 gp</td><td>2 gp</td></tr><tr><td>7</td><td>4 sp</td><td>2 gp</td><td>2 gp, 5 sp</td><td>2 gp, 5 sp</td><td>2 gp, 5 sp</td></tr><tr><td>8</td><td>5 sp</td><td>2 gp, 5 sp</td><td>3 gp</td><td>3 gp</td><td>3 gp</td></tr><tr><td>9</td><td>6 sp</td><td>3 gp</td><td>4 gp</td><td>4 gp</td><td>4 gp</td></tr><tr><td>10</td><td>7 sp</td><td>4 gp</td><td>5 gp</td><td>6 gp</td><td>6 gp</td></tr><tr><td>11</td><td>8 sp</td><td>5 gp</td><td>6 gp</td><td>8 gp</td><td>8 gp</td></tr><tr><td>12</td><td>9 sp</td><td>6 gp</td><td>8 gp</td><td>10 gp</td><td>10 gp</td></tr><tr><td>13</td><td>1 gp</td><td>7 gp</td><td>10 gp</td><td>15 gp</td><td>15 gp</td></tr><tr><td>14</td><td>1 gp, 5 sp</td><td>8 gp</td><td>15 gp</td><td>20 gp</td><td>20 gp</td></tr><tr><td>15</td><td>2 gp</td><td>10 gp</td><td>20 gp</td><td>28 gp</td><td>28 gp</td></tr><tr><td>16</td><td>2 gp, 5 sp</td><td>13 gp</td><td>25 gp</td><td>36 gp</td><td>40 gp</td></tr><tr><td>17</td><td>3 gp</td><td>15 gp</td><td>30 gp</td><td>45 gp</td><td>55 gp</td></tr><tr><td>18</td><td>4 gp</td><td>20 gp</td><td>45 gp</td><td>70 gp</td><td>90 gp</td></tr><tr><td>19</td><td>6 gp</td><td>30 gp</td><td>60 gp</td><td>100 gp</td><td>130 gp</td></tr><tr><td>20</td><td>8 gp</td><td>40 gp</td><td>75 gp</td><td>150 gp</td><td>200 gp</td></tr><tr><td>20 （大成功）</td><td>-</td><td>50 gp</td><td>90 gp</td><td>175 gp</td><td>300 gp</td></tr></tbody></table><p><strong>大成功</strong> 你工作得非常出色。获得任务等级+1且对应你技能熟练度的现金数量。</p>\n<p><strong>成功</strong> 你工作得很称职。获得任务等级且对应你技能熟练度的现金数量。</p>\n<p><strong>失败</strong> 你工作得敷衍潦草，只能在这段时间里得到最低限度的报酬。获得任务等级且对应失败所列出的现金数量。GM可能会降低你继续进行任务的时间。</p>\n<p><strong>大失败</strong> 你在工作中一无所获并且立刻会被解雇。你无法再继续进行该任务。你的声誉受损，可能导致未来很难在这个社区找到回报可观的工作。</p><section class=\"sample-tasks\"><h2>赚取收入任务范例 Sample Earn Income Tasks</h2><p>以下范例使用酒类学识在酒吧工作，或使用法律学识从事法律工作。</p><ul><li><strong>受训 Trained</strong> 调酒师，从事法律研究</li><li><strong>专家 Expert</strong> 进行饮料选择策划，在法庭上处理小案件</li><li><strong>大师 Master</strong> 管理一家大型酿酒厂，在法庭上处理重要案件</li><li><strong>传奇 Legendary</strong> 管理一家国际酿酒特许经营公司，在地狱法庭上提起诉讼</li></ul><h2 class=\"title\">制作商品 Crafting Goods for the Market [手艺]</h2><p>你使用手艺技能制作普通商品供市场销售。通常来说，找到一份制作基础物品的工作非常容易，这些基础物品的等级会比你的定居点等级低1到2级。</p>\n<p>更高等级的任务意味着接到了特殊委托，可能需要你使用制作这项休整期行动来制作特定物品，并以全价出售给买家。这种几乎不会经常出现，而且可能会有特殊限制——如果你让一位知名客户感到失望，就可能会导致严重后果。</p><h2 class=\"title\">专业工作 Practicing a Trade [学识]</h2><p>你可以利用自己某项学识的能力在休整期从事专业工作。诸如商贸、法律或航海这样的学识尤为有效，因为这些专业有大量的人力需求。如果你试图使用晦涩难懂的学识技能赚取收入，GM可能会增加DC，或者判定你只能找到低级任务。要承担这种工作，你可能还需要专业的工具，比如在矿场工作需要采矿工具，或者拥有商人使用的磅秤才能在市场上交易贵重物品。</p><h2 class=\"title\">登台演出 Staging a Performance [表演]</h2><p>你为观众表演来赚取报酬。观众的类型决定你任务的等级，给眼光刁钻的观众留下深刻印象更难，但带来的回报也更大。GM根据受众类型确定任务等级。在大街上为普通观众表演是一项0级人物，但为一群品味更高雅的工匠表演则可能是一项2级或3级任务，而对于商人、贵族和皇室来说，任务的等级会逐渐递增。</p>\n<p>你的成功等级决定你能否打动观众，迎面而来的究竟是掌声还是烂水果。</p><hr /><h2>结束或中断任务 Ending or Interrupting Tasks</h2><p>当你完成了手头的任务，或者需要中途停止任务，如果还想继续保持收入，通常来说就得找到新的任务。比如说，如果你辞去了码头的工作，就需要另找一个工作场所，而不能从你中途离开的地方重新开始。通常需要花费1天或更长的休整期时间来寻找新工作。</p>\n<p>然而你也可能会因为冒险或事件的缘故需要暂停任务，这并不会导致你无法回归原来的工作。GM可能会裁定，假设在你缺席的情况下其他人尚未能完成任务，你可以从暂停的地方重新开始。重新开始任务是否需要再次进行技能检定也取决于GM。一般来说，如果你一开始的检定结果不错，你可以重新掷骰，但如果你一开始的检定结果欠佳，那就不能通过暂停下来做其他事情来尝试掷出更好的点数。如果你的人物数据在中断期间发生了变化（通常是因为你在冒险期间升级了），那么你可以尝试重新进行检定。</p></section>"
+            "description": "<p>你可以在休整期使用技能赚钱。你需要相应技能受训才能这么做。赚钱需要花费时间，而收入取决于你的熟练度和你能找到的任务是否有利可图。由于这个过程需要花费大量时间，还要持续记录冒险进展之外的事情，所以并不是每个战役里都会用到这个技能。赚取收入的典型方式：</p><ul><li>制作商品（手艺）</li><li>专业工作（学识）</li><li>登台演出（表演）</li></ul><p>GM可能会要求你使用不同的技能从事不同的专业工作来赚取收入。通常来说，在修道院里研习旧书这种学术性的工作使用宗教技能，但在教堂里布道则不能使用宗教，而是使用表演技能。你也可以利用肉体技能来赚钱，比如使用特技在马戏团表演杂技，或者使用贼活扒窃。如果你使用手艺、学识或表演之外的技能，那么DC就会提升许多。</p><h2 class=\"title\">赚取收入 Earn Income</h2><section class=\"traits\"><p title=\"An activity with this trait takes a day or more, and can be used only during downtime.\">休整期</p></section><hr /><p>你使用一项技能在休整期尝试赚钱。GM会设定一个代表最有利可图的工作的任务等级。你可以寻找较低级别的任务，由GM决定能否找到。有时你可以尝试找到比一开始提供的那份报酬更好的工作，但需要花费时间，并且需要使用交涉技能搜集信息，或者进行一些研究和社交方面的努力。</p>\n<p>如果你接受一份工作，GM就会秘密设置你的技能检定DC。你需要在第一天工作后进行检定来确定收入。根据检定结果、任务等级和熟练度（如所赚收入表所示），你将获得一定的收入。</p>\n<p>你可以在接下来几天继续执行该任务，无需再次检定。第一天之后的每一天收入都与第一天相同，直至任务完成。GM决定你可以在该任务中工作多次时间。大多数任务持续一两周，但有些任务可能需要几个月甚至几年的时间。</p><h2>所赚收入 Income Earned</h2><table class=\"pf2e remaster\"><thead><tr><th>任务等级 Task Level</th><th>失败 Failure</th><th>受训 Trained</th><th>专家 Expert</th><th>大师 Master</th><th>传奇 Legendary</th></tr></thead><tbody><tr><td>0</td><td>1 cp</td><td>5 cp</td><td>5 cp</td><td>5 cp</td><td>5 cp</td></tr><tr><td>1</td><td>2 cp</td><td>2 sp</td><td>2 sp</td><td>2 sp</td><td>2 sp</td></tr><tr><td>2</td><td>4 cp</td><td>3 sp</td><td>3 sp</td><td>3 sp</td><td>3 sp</td></tr><tr><td>3</td><td>8 cp</td><td>5 sp</td><td>5 sp</td><td>5 sp</td><td>5 sp</td></tr><tr><td>4</td><td>1 sp</td><td>7 sp</td><td>8 sp</td><td>8 sp</td><td>8 sp</td></tr><tr><td>5</td><td>2 sp</td><td>9 sp</td><td>1 gp</td><td>1 gp</td><td>1 gp</td></tr><tr><td>6</td><td>3 sp</td><td>1 gp, 5 sp</td><td>2 gp</td><td>2 gp</td><td>2 gp</td></tr><tr><td>7</td><td>4 sp</td><td>2 gp</td><td>2 gp, 5 sp</td><td>2 gp, 5 sp</td><td>2 gp, 5 sp</td></tr><tr><td>8</td><td>5 sp</td><td>2 gp, 5 sp</td><td>3 gp</td><td>3 gp</td><td>3 gp</td></tr><tr><td>9</td><td>6 sp</td><td>3 gp</td><td>4 gp</td><td>4 gp</td><td>4 gp</td></tr><tr><td>10</td><td>7 sp</td><td>4 gp</td><td>5 gp</td><td>6 gp</td><td>6 gp</td></tr><tr><td>11</td><td>8 sp</td><td>5 gp</td><td>6 gp</td><td>8 gp</td><td>8 gp</td></tr><tr><td>12</td><td>9 sp</td><td>6 gp</td><td>8 gp</td><td>10 gp</td><td>10 gp</td></tr><tr><td>13</td><td>1 gp</td><td>7 gp</td><td>10 gp</td><td>15 gp</td><td>15 gp</td></tr><tr><td>14</td><td>1 gp, 5 sp</td><td>8 gp</td><td>15 gp</td><td>20 gp</td><td>20 gp</td></tr><tr><td>15</td><td>2 gp</td><td>10 gp</td><td>20 gp</td><td>28 gp</td><td>28 gp</td></tr><tr><td>16</td><td>2 gp, 5 sp</td><td>13 gp</td><td>25 gp</td><td>36 gp</td><td>40 gp</td></tr><tr><td>17</td><td>3 gp</td><td>15 gp</td><td>30 gp</td><td>45 gp</td><td>55 gp</td></tr><tr><td>18</td><td>4 gp</td><td>20 gp</td><td>45 gp</td><td>70 gp</td><td>90 gp</td></tr><tr><td>19</td><td>6 gp</td><td>30 gp</td><td>60 gp</td><td>100 gp</td><td>130 gp</td></tr><tr><td>20</td><td>8 gp</td><td>40 gp</td><td>75 gp</td><td>150 gp</td><td>200 gp</td></tr><tr><td>20（大成功）</td><td>-</td><td>50 gp</td><td>90 gp</td><td>175 gp</td><td>300 gp</td></tr></tbody></table><p><strong>大成功</strong> 你工作得非常出色。获得任务等级+1且对应你技能熟练度的现金数量。</p>\n<p><strong>成功</strong> 你工作得很称职。获得任务等级且对应你技能熟练度的现金数量。</p>\n<p><strong>失败</strong> 你工作得敷衍潦草，只能在这段时间里得到最低限度的报酬。获得任务等级且对应失败所列出的现金数量。GM可能会降低你继续进行任务的时间。</p>\n<p><strong>大失败</strong> 你在工作中一无所获并且立刻会被解雇。你无法再继续进行该任务。你的声誉受损，可能导致未来很难在这个社区找到回报可观的工作。</p><section class=\"sample-tasks\"><h2>赚取收入任务范例 Sample Earn Income Tasks</h2><p>以下范例使用酒类学识在酒吧工作，或使用法律学识从事法律工作。</p><ul><li><strong>受训 Trained</strong> 调酒师，从事法律研究</li><li><strong>专家 Expert</strong> 进行饮料选择策划，在法庭上处理小案件</li><li><strong>大师 Master</strong> 管理一家大型酿酒厂，在法庭上处理重要案件</li><li><strong>传奇 Legendary</strong> 管理一家国际酿酒特许经营公司，在地狱法庭上提起诉讼</li></ul><h2 class=\"title\">制作商品 Crafting Goods for the Market [手艺]</h2><p>你使用手艺技能制作普通商品供市场销售。通常来说，找到一份制作基础物品的工作非常容易，这些基础物品的等级会比你的定居点等级低1到2级。</p>\n<p>更高等级的任务意味着接到了特殊委托，可能需要你使用制作这项休整期行动来制作特定物品，并以全价出售给买家。这种几乎不会经常出现，而且可能会有特殊限制——如果你让一位知名客户感到失望，就可能会导致严重后果。</p><h2 class=\"title\">专业工作 Practicing a Trade [学识]</h2><p>你可以利用自己某项学识的能力在休整期从事专业工作。诸如商贸、法律或航海这样的学识尤为有效，因为这些专业有大量的人力需求。如果你试图使用晦涩难懂的学识技能赚取收入，GM可能会增加DC，或者判定你只能找到低级任务。要承担这种工作，你可能还需要专业的工具，比如在矿场工作需要采矿工具，或者拥有商人使用的磅秤才能在市场上交易贵重物品。</p><h2 class=\"title\">登台演出 Staging a Performance [表演]</h2><p>你为观众表演来赚取报酬。观众的类型决定你任务的等级，给眼光刁钻的观众留下深刻印象更难，但带来的回报也更大。GM根据受众类型确定任务等级。在大街上为普通观众表演是一项0级人物，但为一群品味更高雅的工匠表演则可能是一项2级或3级任务，而对于商人、贵族和皇室来说，任务的等级会逐渐递增。</p>\n<p>你的成功等级决定你能否打动观众，迎面而来的究竟是掌声还是烂水果。</p><hr /><h2>结束或中断任务 Ending or Interrupting Tasks</h2><p>当你完成了手头的任务，或者需要中途停止任务，如果还想继续保持收入，通常来说就得找到新的任务。比如说，如果你辞去了码头的工作，就需要另找一个工作场所，而不能从你中途离开的地方重新开始。通常需要花费1天或更长的休整期时间来寻找新工作。</p>\n<p>然而你也可能会因为冒险或事件的缘故需要暂停任务，这并不会导致你无法回归原来的工作。GM可能会裁定，假设在你缺席的情况下其他人尚未能完成任务，你可以从暂停的地方重新开始。重新开始任务是否需要再次进行技能检定也取决于GM。一般来说，如果你一开始的检定结果不错，你可以重新掷骰，但如果你一开始的检定结果欠佳，那就不能通过暂停下来做其他事情来尝试掷出更好的点数。如果你的人物数据在中断期间发生了变化（通常是因为你在冒险期间升级了），那么你可以尝试重新进行检定。</p></section>"
         },
         "Eldritch Shot": {
             "name": "魔弹射击 Eldritch Shot",
@@ -395,7 +395,7 @@
         },
         "Encouraging Words": {
             "name": "信心喊话 Encouraging Words",
-            "description": "<p><strong>先决条件</strong> 交涉技能熟练度为受训</p>\n<p><strong>需求</strong> 目标盟友在上一轮间损失过耐力值</p>\n<hr />\n<p>你向30尺内的1名盟友进行信心喊话，提振其精神。进行交涉技能检定。此检定的DC一般为15，但GM可依照情境调整之。若你在交涉上有专家熟练，你可改为尝试DC 20的交涉检定，来使成功时回复的耐力点提升+5。若你在交涉上有大师熟练，你可改为尝试DC 30的交涉检定，来使成功时回复的耐力点提升+15。若你在交涉上有传奇熟练，你可改为尝试DC 40的交涉检定，来使成功时回复的耐力点提升+25。不论检定成功与否，直到该盟友下次进行@UUID[Compendium.pf2e.actionspf2e.Item.qc0VsZ0UesnurUUB]{小憩一刻 Take a Breather}行动或完整休息，他暂时免疫信心喊话。</p>\n<hr />\n<p><strong>大成功</strong> 该盟友回复[[/r {2d8} #Stamina Points]]{2d8耐力值}。</p>\n<p><strong>成功</strong> 该盟友回复[[/r {1d8} #Stamina Points]]{1d8耐力值}。</p>\n<p><strong>大失败</strong> 该盟友承受@Damage[1d8[mental]]伤害，此伤害只会扣减耐力值，永不影响生命值。</p>"
+            "description": "<p><strong>先决条件</strong> 交涉技能熟练度为受训</p>\n<p><strong>需求</strong> 目标盟友在上一轮间损失过耐力值</p>\n<hr />\n<p>你向30尺内的1名盟友进行信心喊话，提振其精神。进行交涉技能检定。此检定的DC一般为15，但GM可依照情境调整之。若你在交涉上有专家熟练，你可改为尝试DC 20的交涉检定，来使成功时回复的耐力点提升+5。若你在交涉上有大师熟练，你可改为尝试DC 30的交涉检定，来使成功时回复的耐力点提升+15。若你在交涉上有传奇熟练，你可改为尝试DC 40的交涉检定，来使成功时回复的耐力点提升+25。不论检定成功与否，直到该盟友下次进行@UUID[Compendium.pf2e.actionspf2e.Item.qc0VsZ0UesnurUUB]{小憩一刻 Take a Breather}行动或完整休息，他临时免疫信心喊话。</p>\n<hr />\n<p><strong>大成功</strong> 该盟友回复[[/r {2d8} #Stamina Points]]{2d8耐力值}。</p>\n<p><strong>成功</strong> 该盟友回复[[/r {1d8} #Stamina Points]]{1d8耐力值}。</p>\n<p><strong>大失败</strong> 该盟友承受@Damage[1d8[mental]]伤害，此伤害只会扣减耐力值，永不影响生命值。</p>"
         },
         "Energy Emanation": {
             "name": "能量爆发 Energy Emanation",
@@ -431,7 +431,7 @@
         },
         "Field of Roots": {
             "name": "根生领域 Field of Roots",
-            "description": "<p>你的幻灵将根植入地底，纠缠并可能伤害所有附近的敌人。所有在幻灵触及内的敌人承受伤害，类型和数值相当于幻灵伤害最高的打击，且具体效果根据反射豁免（对抗你的法术DC）结果确定。任何持续性的豁免效果持续到敌人成功逃脱或离开了幻灵的触及。</p>\n<p>使用根生领域后，你的幻灵陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，直到它进行了一个具有操作特征的单动作与地面分离；这也会终止敌人身上来自根生领域的剩余效果。</p><hr /><p><strong>大成功</strong> 敌人不受影响。</p>\n<p><strong>成功</strong> 敌人不承受伤害，但在速度上承受-10尺环境减值。</p>\n<p><strong>失败</strong> 敌人承受一半的伤害，速度承受-10尺环境减值，以及，在他的每个回合结束时，再次承受一半的伤害。</p>\n<p><strong>大失败</strong> 敌人被禁足，承受完整的伤害，以及，在他的每个回合结束时，再次承受完整的伤害。</p>"
+            "description": "<p>你的幻灵将根植入地底，纠缠并可能伤害所有附近的敌人。所有在幻灵触及内的敌人承受伤害，类型和数值相当于幻灵伤害最高的打击，具体结果取决于它们对抗你的法术DC所进行的@Check[reflex|options:area-effect,damaging-effect]豁免。任何持续性的豁免效果持续到敌人成功逃脱或离开幻灵的触及。使用根生领域后，你的幻灵陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，直到它进行一次交互动作与地面分离；这也会终止敌人身上来自根生领域的剩余效果。</p><hr /><p><strong>大成功</strong> 敌人不受影响。</p>\n<p><strong>成功</strong> 敌人不承受伤害，但在速度上承受-10尺环境减值。</p>\n<p><strong>失败</strong> 敌人承受一半的伤害，速度承受-10尺环境减值，以及，在他的每个回合结束时，再次承受一半的伤害。</p>\n<p><strong>大失败</strong> 敌人被禁足，承受完整的伤害，并在他的每个回合结束时，再次承受完整的伤害。</p>"
         },
         "Fight with Fear": {
             "name": "恐惧为武 Fight with Fear",
@@ -471,7 +471,7 @@
         },
         "Furious Strike": {
             "name": "狂怒打击 Furious Strike",
-            "description": "<p>你的幻灵将愤怒引导进一次狂怒的攻击。它进行一次近战打击，且在计算多重攻击减值时记为两次攻击。如果这次打击命中，你的幻灵造成一个额外的武器伤害骰，并在伤害掷骰上获得+1环境加值。</p>\n<p>如果你有至少10级，提升至额外两个骰子以及+2环境加值；如果你有至少18级，提升至额外三个骰子以及+3环境加值。</p>"
+            "description": "<p>你的幻灵进行一次近战打击。在计算你的多重攻击减值时，这算作两次攻击。如果这次打击命中，你的幻灵会额外造成1个武器伤害骰，并在伤害掷骰上获得+1环境加值。</p>\n<p>如果你至少10级，则改为额外造成2个伤害骰，并获得+2环境加值；如果你至少18级，则改为额外造成3个伤害骰，并获得+3环境加值。</p>"
         },
         "Gather Information": {
             "name": "搜集信息 Gather Information",
@@ -483,7 +483,7 @@
         },
         "Glimpse of Redemption": {
             "name": "救赎瞥视 Glimpse of Redemption",
-            "description": "<p><strong>触发</strong> 一名敌人对你的盟友造成伤害，并且二者都身处你的神卫灵光范围内</p><hr /><p><strong>效果</strong> 你的敌人脑海中闪过赎罪的幻象，使其在罪孽的重压下犹豫不决。这名敌人必须选择忏悔或抗拒，效果如下所述。如果敌人没有思想或因其他理由无法忏悔，使用抗拒的结果。</p><ul><li><strong>忏悔</strong> 盟友免受触发反应的伤害。</li><li><p><strong>抗拒</strong> 盟友针对触发反应的伤害获得适用于所有伤害类型的抗力，数值等同于2+你的等级。在上述伤害适用后，该名敌人直到其下回合结束为止陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p></li></ul><p>@UUID[Compendium.pf2e.feat-effects.Item.DawVHfoPKbPJsz4k]{效果：神卫抗力}</p>"
+            "description": "<p><strong>触发</strong> 一名敌人对你的盟友造成伤害，并且二者都身处你的神卫灵光范围内</p><hr /><p><strong>效果</strong> 你的敌人脑海中闪过赎罪的幻象，使其在罪孽的重压下犹豫不决。这名敌人必须选择忏悔或抗拒，效果如下所述。如果敌人没有思想或因其他理由无法忏悔，使用抗拒的结果。</p><ul><li><p><strong>忏悔</strong> 盟友免受触发反应的伤害。</p></li><li><p><strong>抗拒</strong> 盟友针对触发反应的伤害获得适用于所有伤害类型的抗力，数值等同于2+你的等级。在上述伤害适用后，该名敌人直到其下回合结束为止陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}。</p></li></ul><p>@UUID[Compendium.pf2e.feat-effects.Item.DawVHfoPKbPJsz4k]</p>"
         },
         "Goblin Jubilee": {
             "name": "地精狂欢 Goblin Jubilee",
@@ -518,7 +518,7 @@
             "description": "<p>你指定一个生物为猎杀目标，专注于攻击该生物。你必须能够看到或者听到你的目标，或者在探索时追踪这一猎物。</p>\n<p>你在@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]你的猎杀目标的察觉检定上获得+2环境加值，你在@UUID[Compendium.pf2e.actionspf2e.Item.EA5vuSgJfiHH7plD]你的猎杀目标的生存检定上获得+2环境加值。你还会在对抗你的猎杀目标时忽略远程攻击的第二个射程增量减值。</p>\n<p>你同一时间只能指定一个猎物。如果你在已经指定了一个生物之后对另一个生物使用猎杀目标，你会失去对之前生物的目标指定，而新的生物成为你的目标。你的指定持续到第二次进行每日准备。</p>"
         },
         "Hustle": {
-            "name": "飞奔 Hustle",
+            "name": "强行军 Hustle",
             "description": "<p>你竭力以自身旅行速度的两倍进行移动。你能够强行军的分钟数等同于你的体质调整值 x 10（最低10分钟）。若你们组成队伍来进行强行军的话，则使用其中最低体质调整值的人来判断该队伍能够一同以多快的速度来进行强行军。</p>"
         },
         "Identify Alchemy": {
@@ -623,11 +623,11 @@
         },
         "Manifest Eidolon": {
             "name": "显现幻灵 Manifest Eidolon",
-            "description": "<p>你的幻灵出现在一个邻接的开放区域，并可以进行一个单动作。如果你的幻灵已经显现，你改为将其隐没。</p>\n<p>让你的幻灵得以显现的灵渠同时也是你们之间的拴绳。你的幻灵必须时刻保持在你的100尺距离内，无法自愿打破限制。如果它被强迫超越距离，或如果你降到0HP，你的幻灵的物理形态消散：你的幻灵隐没，且你需要使用显现幻灵将其再次显现。</p>\n<hr />\n<p><strong>特殊</strong> 这个动作有着与幻灵根源匹配的特征（奥术，神术，异能或原能）</p>"
+            "description": "<p>你的幻灵出现在一个邻接的开放区域，并可以进行一个单动作。如果你的幻灵已经显现，你改为将其隐没。让你的幻灵得以显现的灵渠同时也是你们之间的拴绳。你的幻灵必须时刻保持在你的100尺距离内，无法自愿打破限制。如果它被强迫超越距离，或如果你降到0HP，或你的幻灵死亡，你的幻灵的物理形态消散：你的幻灵隐没，且你需要使用显现幻灵将其再次显现。</p><hr /><p><strong>特殊</strong> 这个动作有着与幻灵根源匹配的特征（奥术，神术，异能或原能）。</p>"
         },
         "Manifest Soulforged Armament": {
-            "name": "显现魂铸武装 Manifest Soulforged Armament",
-            "description": "<p><strong>需求</strong> 如果你召唤一件武器或盾牌，你需要有空闲的手来持握它；如果召唤盔甲，你必须未穿戴任何盔甲；</p>\n<hr />\n<p><strong>效果</strong> 你立即持握或穿戴上与你连结的魂铸武装。魂铸武装会保持显现，直到你解消这个效果。</p>\n<p>每日一次，当你使用这个能力时，你可以显现武装的魂粹形态。你获得武装的魂粹威能直到其被解消。1分钟后，武装的魂粹形态会自动解消。</p>"
+            "name": "显现魂铸兵器 Manifest Soulforged Armament",
+            "description": "<p><strong>需求</strong> 若召唤魂铸武器或盾牌，你需要有空闲的手来持握它；若召唤魂铸护甲，则你不能穿着任何盔甲</p><hr /><p><strong>效果</strong> 你立即持握或穿上与你绑定的魂铸兵器。魂铸兵器保持显现状态，直至你解消此效果。</p>\n<p>每日一次，当你使用此能力时，你可以显现兵器的本源形态。你获得该兵器的魂粹威能，直至其被消解。1分钟后，本源形态兵器自动消解。</p>"
         },
         "Mark for Death": {
             "name": "死亡标记 Mark for Death",
@@ -655,7 +655,7 @@
         },
         "Mutagenic Flashback": {
             "name": "突变闪回 Mutagenic Flashback",
-            "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你会经历一次短暂的突变药剂的回溯。选择一瓶从你最近一次日常准备以后你已消耗掉的突变药剂。你获得该突变药剂的效果1分钟。</p>"
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>你会经历一次短暂的突变药剂的回溯。选择一瓶从你最近一次每日准备以后你已消耗掉的突变药剂。你获得该突变药剂的效果1分钟。</p>"
         },
         "One Shot, One Kill": {
             "name": "一发毙命 One Shot, One Kill",
@@ -695,7 +695,7 @@
         },
         "Pointed Question": {
             "name": "针对讯问 Pointed Question",
-            "description": "<p>你问的问题恰好迷惑或刺痛了他人。对一位你看得到的非盟友生物问个问题。进行一次@Check[diplomacy|against:will]检定对抗该生物的意志DC。该生物之后会暂时免疫此能力一小时。</p><hr /><p><strong>大成功</strong> 目标必须直接回答你的问题。他不一定要诚实回答，但如果该生物想对你@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]，你在你的察觉DC上获得+4环境加值。</p>\n<p>无论其是否诚实回答问题，你依旧能从其肢体语言中收集信息，在你回合结束前，其对你@UUID[Compendium.pf2e.actionspf2e.Item.m0f2B7G9eaaTmhFL]的打击视为@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>\n<p><strong>成功</strong> 如大成功，但察觉DC的环境加值只有+2。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.SScln8qRQgVC6Brz]</p>\n<p><strong>失败</strong> 目标可以拒绝回答你的问题。</p>\n<p><strong>大失败</strong> 目标可以拒绝回答你的问题，并且因为你恶意的关注，致使他对你的态度降低一阶。</p>"
+            "description": "<p>你问的问题恰好迷惑或刺痛了他人。对一位你看得到的非盟友生物问个问题。进行一次@Check[diplomacy|against:will]检定对抗该生物的意志DC。该生物之后会临时免疫此能力一小时。</p><hr /><p><strong>大成功</strong> 目标必须直接回答你的问题。他不一定要诚实回答，但如果该生物想对你@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]，你在你的察觉DC上获得+4环境加值。</p>\n<p>无论其是否诚实回答问题，你依旧能从其肢体语言中收集信息，在你回合结束前，其对你@UUID[Compendium.pf2e.actionspf2e.Item.m0f2B7G9eaaTmhFL]的打击视为@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>\n<p><strong>成功</strong> 如大成功，但察觉DC的环境加值只有+2。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.SScln8qRQgVC6Brz]</p>\n<p><strong>失败</strong> 目标可以拒绝回答你的问题。</p>\n<p><strong>大失败</strong> 目标可以拒绝回答你的问题，并且因为你恶意的关注，致使他对你的态度降低一阶。</p>"
         },
         "Practical Research": {
             "name": "实践研究 Practical Research",
@@ -703,7 +703,7 @@
         },
         "Primal Roar": {
             "name": "原始咆哮 Primal Roar",
-            "description": "<p>你的幻灵释放出原始的怒吼或其他与幻灵形态相符的令人恐惧的噪音。你的幻灵对能听见咆哮的30尺内的每个敌人进行威吓检定以[[/act demoralize]]。这次挫败士气不会因语言不通而承受减值。</p>"
+            "description": "<p>你的幻灵能够进行恐怖的怒吼，或任何符合其形态的其他可怖声响。你的幻灵对每个能听到怒吼的生物[[/act demoralize]]，进行一次威吓检定对抗每个目标的意志DC。即使双方不共享语言，这次检定也不会因不共享语言而承受减值。</p>"
         },
         "Prophecy's Pawn": {
             "name": "预言之卒 Prophecy's Pawn",
@@ -711,7 +711,7 @@
         },
         "Pursue a Lead": {
             "name": "追查方向 Pursue a Lead",
-            "description": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p>你声明一个被你觉得涉及一大谜团的细节并花费1分钟时间验证之。该细节可以是已知的，又或者是你从@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]、@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]、@UUID[Compendium.pf2e.actionspf2e.Item.plBGdZhqq5JBl1D8]及类似行动中所得知的信息。在这一分钟过后，GM将确认该谜团是否存在，又或是没有更多信息能被获取（该细节可能无关或你已获知全部相关信息）。若该谜团确实存在，你将不能在10分钟内再次追查方向，但你可选择展开一场调查。为此，需定义该谜团之中的核心问题，例如「本应挂在此处的无价艺术品被带到哪里去了？」或「是谁/什么东西杀死了这位牧师？」。若有需要，可与你的GM一起完善该问题。你还可能给该调查起个名称以便更好的追查下去（例如「地精诈骗案」或「剥皮谋杀案」）。</p>\n<p><strong>调查增益</strong> 每当你尝试一次察觉或技能检定，且其能让你进一步地解答主动调查的核心问题時，你在该检定上获得+1的环境加值。具体的检定方式取决于你如何调查，并由GM决定，但调查通常是察觉，或者使用基于智力、感知或魅力的技能检定。</p>\n<p><strong>主动调查</strong> 同一时间你只能维持两个主动调查。如果你维持两个后再次进行追查方向，该案件需与已有调查不同（至少据你所知是不同的），并由你选择放弃一个既存調查。一旦你放弃一个调查，在你下次日常准备之前，你不能再次对其追查方向。</p>\n<p><strong>完成调查</strong> 当你能解答调查的核心问题时，GM会提醒你该问题已被解决。在你再次追查方向或是你自愿解消该效果之前，你不会失去加值或其他增益。若你的发现指向一个更大的谜团，你可与你的GM一起调整该调查的问题和名称以适应新情报。</p>"
+            "description": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p>你声明一个被你觉得涉及一大谜团的细节并花费1分钟时间验证之。该细节可以是已知的，又或者是你从@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]、@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]、@UUID[Compendium.pf2e.actionspf2e.Item.plBGdZhqq5JBl1D8]及类似行动中所得知的信息。在这一分钟过后，GM将确认该谜团是否存在，又或是没有更多信息能被获取（该细节可能无关或你已获知全部相关信息）。若该谜团确实存在，你将不能在10分钟内再次追查方向，但你可选择展开一场调查。为此，需定义该谜团之中的核心问题，例如「本应挂在此处的无价艺术品被带到哪里去了？」或「是谁/什么东西杀死了这位牧师？」。若有需要，可与你的GM一起完善该问题。你还可能给该调查起个名称以便更好的追查下去（例如「地精诈骗案」或「剥皮谋杀案」）。</p>\n<p><strong>调查增益</strong> 每当你尝试一次察觉或技能检定，且其能让你进一步地解答主动调查的核心问题時，你在该检定上获得+1的环境加值。具体的检定方式取决于你如何调查，并由GM决定，但调查通常是察觉，或者使用基于智力、感知或魅力的技能检定。</p>\n<p><strong>主动调查</strong> 同一时间你只能维持两个主动调查。如果你维持两个后再次进行追查方向，该案件需与已有调查不同（至少据你所知是不同的），并由你选择放弃一个既存調查。一旦你放弃一个调查，在你下次每日准备之前，你不能再次对其追查方向。</p>\n<p><strong>完成调查</strong> 当你能解答调查的核心问题时，GM会提醒你该问题已被解决。在你再次追查方向或是你自愿解消该效果之前，你不会失去加值或其他增益。若你的发现指向一个更大的谜团，你可与你的GM一起调整该调查的问题和名称以适应新情报。</p>"
         },
         "Quick Alchemy": {
             "name": "高速炼金 Quick Alchemy",
@@ -811,11 +811,11 @@
         },
         "Resist Magic": {
             "name": "抵抗魔法 Resist Magic",
-            "description": "<p><strong>触发</strong> 你尝试一次对抗有害法术效果的豁免检定但还未掷骰。</p><hr /><p>你的内在魔力护佑了你。你在触发效果的豁免检定上获得+1环境加值。额外的，如果触发效果为奥秘且你获得成功，你以大成功取代掷骰结果。</p>"
+            "description": "<p><strong>触发</strong> 你尝试一次对抗有害魔法效果的豁免检定但还未掷骰。</p><hr /><p>你的内在魔力护佑了你。你在触发效果的豁免检定上获得+1环境加值。额外的，如果触发效果为奥术且你获得成功，你以大成功取代掷骰结果。</p>"
         },
         "Retraining": {
             "name": "重训 Retraining",
-            "description": "<p>重训提供了一种调整角色选择的方式，当你想要把角色引导至新的方向或者认为之前作出的选择未能达到自身期待时十分有用。你能重训专长、技能以及部分可选的职业特性。你无法重训角色的族裔、传承、背景、职业或属性。你无法在重训时执行其他休整行动。</p>\n<p>重训通常需要你耗费时间去向老师学习，无论是进行体能训练、在图书馆学习、还是一同陷入神游的魔法冥想。由你的GM是否能够得到合适的训练或者某些内容是否能够被重训。在某些情况下，你需要向指导者支付佣金。有些能力可能很难甚至无法被重训（举例说明，女巫只有在极端特殊的情况下才能够重训庇护主）。</p>\n<p>在重训中选择想要重训的原选项时，你会经常遇到无法选择该选项（进行重训）的情况。举例说明，你不能把你2级时学的技能专长和4级的技能专长交换，或者你选择的原专长在被获取时还未满足某个选项所要求的先决条件。若你不记得想要重训的某个选项在原本选取时是否满足新选项的先决条件，则可以询问GM让她决定。若由于你进行重训而导致角色不再满足某个能力的先决条件的话，你就无法在此情况下使用该能力。为了获取所有你想要的新能力，你可能需要逐次依序重训数个能力才能达成。</p><h3>专长 Feats</h3><p>你能花费1星期的休整模式时间来重训，用于更换角色的一个专长。移除旧专长并用相同类型的其他专长进行替换。举例说明：你能将技能专长更换为另一个技能专长，但是无法把它换成法师专长。</p><h3>技能 Skills</h3><p>你能花费1星期的休整模式时间来重训，用于更换角色的一次技能提升。让失去技能提升的技能熟练度下降一阶，并让另一个技能的熟练度提升一阶。新熟练度必须与你转移的熟练度相同或更低。举例说明：若你的吟游诗人在表演和隐秘上都是大师熟练度，神秘是专家，你能够将隐秘的熟练度降到专家，让神秘变为大师，但是你不能把技能提升分配到表演上把表演变为传奇熟练度。当你重新分配技能提升时请注意角色的等级；你的技能熟练度发生改变的等级会影响‘重训带有技能熟练度的专长’的能力。</p>\n<p>你还能够花费1星期时间来重训一项在创建角色期间获得的初始受训技能。</p><h3>职业特性 Class Features</h3><p>你能够重训需要进行选择的职业特性，用不同的选项来替换它。比如替换一个你法术库力的法术需要一周。GM会告诉你像德鲁伊教派或是法术学派这样的较大重训需要多久，通常至少要一个月。</p>"
+            "description": "<p>重训提供了一种调整角色选择的方式，当你想要把角色引导至新的方向或者认为之前作出的选择未能达到自身期待时十分有用。你能重训专长、技能以及部分可选的职业特性。你无法重训角色的族裔、传承、背景、职业或属性。你无法在重训时执行其他休整行动。</p>\n<p>重训通常需要你耗费时间去向老师学习，无论是进行体能训练、在图书馆学习、还是一同陷入神游的魔法冥想。由你的GM是否能够得到合适的训练或者某些内容是否能够被重训。在某些情况下，你需要向指导者支付佣金。有些能力可能很难甚至无法被重训（举例说明，女巫只有在极端特殊的情况下才能够重训庇护主）。</p>\n<p>在重训中选择想要重训的原选项时，你会经常遇到无法选择该选项（进行重训）的情况。举例说明，你不能把你2级时学的技能专长和4级的技能专长交换，或者你选择的原专长在被获取时还未满足某个选项所要求的先决条件。若你不记得想要重训的某个选项在原本选取时是否满足新选项的先决条件，则可以询问GM让她决定。若由于你进行重训而导致角色不再满足某个能力的先决条件的话，你就无法在此情况下使用该能力。为了获取所有你想要的新能力，你可能需要逐次依序重训数个能力才能达成。</p><h3>专长 Feats</h3><p>你能花费1周的休整模式时间来重训，用于更换角色的一个专长。移除旧专长并用相同类型的其他专长进行替换。举例说明：你能将技能专长更换为另一个技能专长，但是无法把它换成法师专长。</p><h3>技能 Skills</h3><p>你能花费1周的休整模式时间来重训，用于更换角色的一次技能提升。让失去技能提升的技能熟练度下降一阶，并让另一个技能的熟练度提升一阶。新熟练度必须与你转移的熟练度相同或更低。举例说明：若你的吟游诗人在表演和隐秘上都是大师熟练度，神秘是专家，你能够将隐秘的熟练度降到专家，让神秘变为大师，但是你不能把技能提升分配到表演上把表演变为传奇熟练度。当你重新分配技能提升时请注意角色的等级；你的技能熟练度发生改变的等级会影响‘重训带有技能熟练度的专长’的能力。</p>\n<p>你还能够花费1周时间来重训一项在创建角色期间获得的初始受训技能。</p><h3>职业特性 Class Features</h3><p>你能够重训需要进行选择的职业特性，用不同的选项来替换它。其中一些，比如改变你的法术库里的一个法术，需要花费1周。GM会告诉你像德鲁伊教派或是法术学派这样的较大重训需要多久，通常至少要一个月。</p>"
         },
         "Retributive Strike": {
             "name": "报应打击 Retributive Strike",
@@ -823,7 +823,7 @@
         },
         "Run Over": {
             "name": "碾压 Run Over",
-            "description": "<p><strong>需求</strong> 你正在驾驶一辆载具</p>\n<p>（鲁莽） 你试图用你的载具碾过生物，可能同时撞到一个更大的生物或物体。如果你保持对载具的控制，载具会在当前行进方向直线上以两倍的速度移动。你尝试在你的行进路径中碾过任何比车辆小两个体型或更多的生物，并且你可以尝试撞击你行进路径上的一个比载具小一个体型或更多的生物或物体。</p>\n<p>每个你路径上的生物，包括被撞击生物都承受载具的碰撞伤害（基础反射豁免，使用载具的碰撞DC)。如果被撞击的目标是一辆载具，它的驾驶员可以进行一次驾驶检定取代反射豁免，不影响结果等级的判断。如果你撞击的目标受到伤害，你和你的载具均受到碰撞伤害（无豁免），且你的移动结束。</p>"
+            "description": "<p><strong>需求</strong> 你正在驾驶一辆载具</p>\n<p>（鲁莽）你试图用你的载具碾过生物，可能同时撞到一个更大的生物或物体。如果你保持对载具的控制，载具会在当前行进方向直线上以两倍的速度移动。你尝试在你的行进路径中碾过任何比车辆小两个体型或更多的生物，并且你可以尝试撞击你行进路径上的一个比载具小一个体型或更多的生物或物体。</p>\n<p>每个你路径上的生物，包括被撞击生物都承受载具的碰撞伤害（基础反射豁免，使用载具的碰撞DC)。如果被撞击的目标是一辆载具，它的驾驶员可以进行一次驾驶检定取代反射豁免，不影响结果等级的判断。如果你撞击的目标受到伤害，你和你的载具均受到碰撞伤害（无豁免），且你的移动结束。</p>"
         },
         "Salt Wound": {
             "name": "伤口涂盐 Salt Wound",
@@ -843,7 +843,7 @@
         },
         "Seething Frenzy": {
             "name": "沸腾狂怒 Seething Frenzy",
-            "description": "<p>你的幻灵的愤怒沸腾成了一种鲁莽、失控的狂怒。狂怒中，你的幻灵受到<em>激励幻灵</em>的影响，并获得等同于你等级的临时生命值，但在AC上承受-2减值。你的幻灵无法自愿终止狂怒，或者在狂怒中开始另一个狂怒。</p>\n<p>暴怒持续1分钟，之后它会@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]1分钟，而且在1分钟内无法开始另一个狂怒。</p>"
+            "description": "<p>你幻灵的怒火喷涌而出，化作一种鲁莽而失控的狂怒。狂怒中，你的幻灵受到@UUID[Compendium.pf2e.spells-srd.Item.HStu2Yhw3iQER9tY]的影响，并获得等同于你等级的临时生命值，但在AC上承受-1减值。你的幻灵无法自愿终止狂怒，或者在狂怒中开始另一个狂怒。狂怒及其伴随的临时生命值持续1分钟，或直到你的幻灵不再显现，以先发生者为准；在此之后，它1分钟内不能再次开启狂怒。</p>\n<p>当你的幻灵在沸腾狂怒期间使用狂怒打击时，来自激励幻灵的状态加值变为每个伤害骰+3。狂怒打击提供的额外伤害骰不计入<em>激励幻灵</em>的加值，这与能力附加武器伤害骰的通常规则一致。</p>"
         },
         "Selfish Shield": {
             "name": "自私卫盾 Selfish Shield",
@@ -867,7 +867,7 @@
         },
         "Sever Conduit": {
             "name": "切断通道 Sever Conduit",
-            "description": "<p><strong>触发</strong> 你的幻灵承受会令你生命值变为0的伤害，并且来自于死亡效果以外的效果</p>\n<hr />\n<p><strong>效果</strong> 你迅速切断和你的幻灵的链接之间的缓冲，令你在倒下之前，让你联结的盟友立即消失不见。你的幻灵隐没（unmanifest），并且你在1分钟内无法显现（Manifest）你的幻灵。作为交换，你不会承受触发的伤害，但你的幻灵依然会承受其他伴随伤害的负面效果。</p>"
+            "description": "<p><strong>触发</strong> 你的幻灵承受伤害将会让你的生命值降低至0点，并且该伤害并非来源于死亡效果</p><hr /><p><strong>效果</strong> 你快速熄灭与幻灵间的联系，让你的联结盟友在你被击败前立即消失。你的幻灵隐没，并且你在1分钟内无法显现你的幻灵。作为交换，你不会承受触发伤害，不过你的幻灵仍会承受该伤害伴随的任何不利效果。</p>"
         },
         "Share Life": {
             "name": "护卫分命 Share Life",
@@ -875,7 +875,7 @@
         },
         "Share Senses": {
             "name": "共享感官 Share Senses",
-            "description": "<p><strong>需求</strong> 你的幻灵已显现</p>\n<p>你将自己的感官投射到幻灵之中，让你可以通过他来观察。当你这么做时，你失去了所有本体的感官情报，但能透过幻灵的身体进行感知，持续最多1分钟。你可以 @UUID[Compendium.pf2e.actionspf2e.Item.AjLSHZSWQ90exdLo]{解消} 这个效果。</p>\n<hr />\n<p><strong>特殊</strong> 这个动作有着与幻灵根源匹配的特征（奥术，神术，异能或原能）。你的幻灵也可以使用这个能力。当他这么做时，他将他的感官投射到你的身体里。</p>"
+            "description": "<p><strong>需求</strong> 你的幻灵已显现</p><hr /><p>你将自己的感官投射到幻灵之中，让你可以通过他来观察。当你这么做时，你失去了所有本体的感官情报，但能透过幻灵的身体使用感官，持续最多1分钟。你可以@UUID[Compendium.pf2e.actionspf2e.Item.AjLSHZSWQ90exdLo]这个效果。</p><hr /><p><strong>特殊</strong> 这个动作有着与幻灵根源匹配的特征（奥术，神术，异能或原能）。你的幻灵也可以使用这个能力。当他这么做时，他将他的感官投射到你的身体里。</p>"
         },
         "Shootist's Draw": {
             "name": "射手快拔 Shootist's Draw",
@@ -907,7 +907,7 @@
         },
         "Spellstrike": {
             "name": "法术打击 Spellstrike",
-            "description": "<p><strong>频率</strong> 直到被再充能（见下）</p><hr /><p>你注入法术力量到拳头或剑尖中，以进行一次混合攻击。你施放那些花费1个或2个动作并需要一次法术攻击骰或豁免骰的法术。你将法术的效果注入攻击中，而不是正常执行法术。使用武器或无武装攻击进行一次近战打击。在计算多重攻击减值时，这一动作被计算为两次攻击，但是你不会应用这一减值直到你完成法术打击后为止。灌注而入的法术能量赋予你的打击奥术特征，使其魔法化。如果法术需要进行法术攻击骰，使用你的打击结果来决定打击和法术的效果。如果需要豁免，打击的目标如常掷骰其豁免，但如果你的打击大失败，目标则不受影响。</p>\n<p>在你使用法术打击后，直到你使用一个具有专注特征的单动作来再充能你的法术打击为止，你都不能再次使用。当你释放一个需要花费至少一个动作释放的汇聚法术时，你也可以再充能你的法术打击；释放一个其他类型的聚能法术不能再充能你的法术打击。</p>"
+            "description": "<p><strong>频率</strong> 直到被再充能（见下）</p><hr /><p>你将法术灌注于拳头或剑尖之上，以发动一次融合攻击。你施放花费1个或2个动作并需要进行法术攻击掷骰或豁免检定的法术。你将法术的效果注入攻击中，而非正常执行法术。使用武器或无武装攻击进行一次近战打击。该动作在计算多重攻击减值时计为两次攻击，但直到你完成本次法术打击后，你才承受这一减值。灌注的法术能量令你的打击获得奥术特征，并使其变为魔法攻击。如果法术需要法术攻击掷骰，使用你的打击结果来决定打击和法术的效果。如果法术需要豁免，则无论你的攻击骰结果如何，打击目标如常骰掷其豁免；但若你的打击大失败，则法术将被打断。在计算抗力与弱点时，将打击与法术的伤害合并计算。</p>\n<p>在使用法术打击后，直到花费一个具有专注特征的单动作为法术打击充能前，你都不能再次使用它。当你施放至少花费1动作的汇聚法术时，也可以为法术打击充能；施放其他类型的聚能法术无法为法术打击充能。</p>"
         },
         "Spin Tale": {
             "name": "编故事 Spin Tale",
@@ -995,7 +995,7 @@
         },
         "Tendril Strike": {
             "name": "藤条打击 Tendril Strike",
-            "description": "<p>你的幻灵将身体伸展到极限，攻击通常无法触及到的敌人。你的幻灵进行一次近战无武装打击，将这次打击的触及延伸5尺。</p>\n<p>如果这个无武装打击具有卸武、猛推或摔绊特征，幻灵也可以使用对应的动作取代打击。</p>"
+            "description": "<p>你的幻灵将身体伸展到极限，攻击通常无法触及到的敌人。你的幻灵进行1次近战无武装打击，将这次打击的触及延伸5尺。如果这个无武装打击具有卸武、推撞或摔绊特征，幻灵也可以使用对应的动作取代打击。</p>"
         },
         "That's My Number": {
             "name": "就这个数！ That's My Number",
@@ -1047,7 +1047,7 @@
         },
         "Visions of Sin": {
             "name": "罪恶异象 Visions of Sin",
-            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<p>你的幻灵在30尺内一个目标生物的心中召唤出其罪恶的景象，折磨并扰乱目标。目标必须进行一个意志豁免对抗你的法术DC，效果如下所示。该效果持续到你的下一回合结束，但你的幻灵可以使用一个具有专注特征的单动作将效果延长到你的再下一个回合结束（如维持法术），直到1分钟的最大持续时间。 </p>\n<p>如果目标邪恶，则在豁免骰中承受-2环境减值。无论是否成功，目标都获得1天的临时免疫。</p>\n<hr />\n<p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标无法使用反应。</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}而且无法使用反应</p>\n<p><strong>大失败</strong> 和失败一样，而且目标也@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑 Confused}1轮。困惑无法被延长，但其他效果可以。</p>"
+            "description": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p><strong>效果</strong> 你的幻灵在30尺内1个目标生物的心中召唤出其罪恶的景象，折磨并扰乱目标。目标必须进行一次意志豁免对抗你的法术DC，效果如下所示。该效果持续到你的下一回合结束，但你的幻灵可以通过维持这些效果，将持续时间延长至最长1分钟。如果目标是邪秽生物，其豁免承受–2环境减值。无论是否豁免成功，目标都在1天内临时免疫。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p>\n<p><strong>成功</strong> 目标无法使用反应。</p>\n<p><strong>失败</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}而且无法使用反应。</p>\n<p><strong>大失败</strong> 同失败，且目标同时@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮。困惑无法被延长，但其他效果可以。</p>"
         },
         "Vital Shot": {
             "name": "要害射击 Vital Shot",
@@ -1059,7 +1059,7 @@
         },
         "Whirlwind Maul": {
             "name": "旋风撕咬 Whirlwind Maul",
-            "description": "<p>你的幻灵对所有方向同时发动攻击。它对触及内的最多4名敌人进行一次近战无武装打击。幻灵可以对每个敌人选择不同的无武装攻击。每次攻击都会算入你的多重攻击减值，但直到幻灵完成全部攻击之前，减值都不会提升。</p>"
+            "description": "<p>你的幻灵对所有方向同时发动攻击。它对触及内的最多4名敌人进行1次近战无武装打击。幻灵可以对每个敌人选择不同的无武装攻击。每次攻击都会计入多重攻击减值，但直到幻灵完成全部攻击之前，减值都不会提升。</p>"
         },
         "Wish for Luck": {
             "name": "期望好运 Wish for Luck",
@@ -1091,7 +1091,7 @@
         },
         "Restore the Mind": {
             "name": "心灵再造 Restore the Mind",
-            "description": "<p>你解放的心力使你与战友的情绪更加紧密链接起来，让你投射慰藉与力量以恢复他们的身心。选择以下两种效果之一授予30尺内你能见到的一个盟友。随后该盟友对此效果暂时免疫10分钟：</p><ul><li>该盟友获得针对心灵效果豁免上的+1状态加值，直到你的心力解放结束。</li><li>该盟友恢复等于@Damage[(2+2*@actor.level)[healing]]{你的等级*2+2}的生命值。</li></ul>"
+            "description": "<p>你解放的心力使你与战友的情绪更加紧密链接起来，让你投射慰藉与力量以恢复他们的身心。选择以下两种效果之一授予30尺内你能见到的一个盟友。随后该盟友对此效果临时免疫10分钟：</p><ul><li>该盟友获得针对心灵效果豁免上的+1状态加值，直到你的心力解放结束。</li><li>该盟友恢复等于@Damage[(2+2*@actor.level)[healing]]{你的等级*2+2}的生命值。</li></ul>"
         },
         "Unleash Psyche": {
             "name": "心力解放 Unleash Psyche",
@@ -1103,7 +1103,7 @@
         },
         "Drink from the Chalice": {
             "name": "饮杯 Drink from the Chalice",
-            "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 你持握着你的杯奇具。</p><hr /><p>你饮用了杯中缓慢收集的液体，或将其喂给一个邻接的盟友。饮用者可以选择小啜或豪饮。</p><ul><li><p><strong>小啜 Sip</strong> 小啜能为饮用者提供临时生命值，数值等于你的等级（最少为3），持续到你下一回合结束。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.gjxSQgN3MopLxM35]</p></li><li><strong>豪饮 Drain</strong> （治疗、命能）大量饮用改为治疗饮用者，治疗量为@Damage[(3*@actor.level)[healing,vitality]|traits:healing,vitality]{每个等级3点生命值}。在杯经过豪饮之后，其中只剩下缓慢收集的沉淀物；杯无法再次被豪饮，但仍然可以被小啜。在没有任何人从杯中饮用的情况下经过了10分钟后，它会填满自己并可以再次被豪饮。如果饮用者有@Damage[(3*@actor.level)[healing,void]|traits:healing,void]{虚能治疗}，它仍然可以通过这种方式获得治疗，且该效果改为获得虚能特征而非治疗和命能特征。</li></ul>"
+            "description": "<p><strong>频率</strong> 每轮一次</p>\n<p><strong>需求</strong> 你持握着你的杯奇具。</p><hr /><p>你饮用了杯中缓慢收集的液体，或将其喂给一个邻接的盟友。饮用者可以选择小啜或豪饮。</p><ul><li><p><strong>小啜 Sip</strong> 小啜能为饮用者提供临时生命值，数值等于你的等级（最少为3），持续到你下一回合结束。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.gjxSQgN3MopLxM35]</p></li><li><strong>豪饮 Drain</strong>（治疗、命能）大量饮用改为治疗饮用者，治疗量为@Damage[(3*@actor.level)[healing,vitality]|traits:healing,vitality]{每个等级3点生命值}。在杯经过豪饮之后，其中只剩下缓慢收集的沉淀物；杯无法再次被豪饮，但仍然可以被小啜。在没有任何人从杯中饮用的情况下经过了10分钟后，它会填满自己并可以再次被豪饮。如果饮用者有@Damage[(3*@actor.level)[healing,void]|traits:healing,void]{虚能治疗}，它仍然可以通过这种方式获得治疗，且该效果改为获得虚能特征而非治疗和命能特征。</li></ul>"
         },
         "Exploit Vulnerability": {
             "name": "弱点发掘 Exploit Vulnerability",
@@ -1191,7 +1191,7 @@
         },
         "Psychic Defense": {
             "name": "心能防御 Psychic Defense",
-            "description": "<p><strong>触发</strong> 你的对手使用一种心能显化现象对抗你。</p>\n<p><strong>需求</strong> 你处于心灵决斗中，并具有心能集中状态。</p>\n<hr />\n<p>你获得与你心能集中状态相应的增益效果对抗触发的显化现象。随后你的心能集中状态被消耗。</p>\n<p><strong>顿悟铠甲（察觉） Armor of Insight (Perception)</strong> 感知到来临的攻击，你获得数值等于你等级一半的心灵伤害抗力（最小为1）对抗触发的效应。如果你在察觉上具有大师熟练度，则抗力变为双倍，如果为传奇熟练度，则为三倍。</p>\n<p><strong>移情并轨（交涉） Empathic Orbit (Diplomacy)</strong> 展现同理之心，你在攻击者心中播撒怀疑的种子，减弱他们心灵决斗的决心。直到其回合结束前，对手获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}状态，如果你在交涉上具有传奇熟练度，则为@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>\n<p><strong>愤怒利矛（威吓） Ire's Spear (Intimidation)</strong> 你的心中燃起熊熊怒火，对伤害你的人进行反击。如果显化现象对你造成伤害，对手受到数值等于其对你所使用的显化现象反制等级的伤害。如果你在威吓上具有大师熟练度，则抗力变为双倍，如果为传奇熟练度，则为三倍。</p>\n<p><strong>理性迷宫（神秘） Rational Labyrinth (Occultism)</strong> 将攻击理性分析拆解，你重整心灵防御，让其成为迷惑攻击的谜题。你的意志豁免和意志DC获得+2状态加值，如果触发效果具有情绪特征则为+4状态加值。</p>\n<p><strong>感观幻想（欺骗） Sensory Phantasm (Deception)</strong> 利用你的诡计，你通过与敌人的心灵链接传输心灵幻想，使你的身形难以确定。直到其回合结束前，你相对敌人获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}。</p>"
+            "description": "<p><strong>触发</strong> 你的对手使用一种心能显化现象对抗你。</p>\n<p><strong>需求</strong> 你处于心灵决斗中，并具有心能集中状态。</p>\n<hr />\n<p>你获得与你心能集中状态相应的增益效果对抗触发的显化现象。随后你的心能集中状态被消耗。</p>\n<p><strong>顿悟铠甲（察觉）Armor of Insight (Perception)</strong> 感知到来临的攻击，你获得数值等于你等级一半的心灵伤害抗力（最小为1）对抗触发的效应。如果你在察觉上具有大师熟练度，则抗力变为双倍，如果为传奇熟练度，则为三倍。</p>\n<p><strong>移情并轨（交涉）Empathic Orbit (Diplomacy)</strong> 展现同理之心，你在攻击者心中播撒怀疑的种子，减弱他们心灵决斗的决心。直到其回合结束前，对手获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}状态，如果你在交涉上具有传奇熟练度，则为@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>\n<p><strong>愤怒利矛（威吓）Ire's Spear (Intimidation)</strong> 你的心中燃起熊熊怒火，对伤害你的人进行反击。如果显化现象对你造成伤害，对手受到数值等于其对你所使用的显化现象反制等级的伤害。如果你在威吓上具有大师熟练度，则抗力变为双倍，如果为传奇熟练度，则为三倍。</p>\n<p><strong>理性迷宫（神秘）Rational Labyrinth (Occultism)</strong> 将攻击理性分析拆解，你重整心灵防御，让其成为迷惑攻击的谜题。你的意志豁免和意志DC获得+2状态加值，如果触发效果具有情绪特征则为+4状态加值。</p>\n<p><strong>感观幻想（欺骗）Sensory Phantasm (Deception)</strong> 利用你的诡计，你通过与敌人的心灵链接传输心灵幻想，使你的身形难以确定。直到其回合结束前，你相对敌人获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed}。</p>"
         },
         "Recenter": {
             "name": "再集中 Recenter",
@@ -1323,7 +1323,7 @@
         },
         "Accept Echo": {
             "name": "接纳余响 Accept Echo",
-            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你让余响占据你的躯体，身体周边散发灵光，虹膜闪耀浅绿色光芒，嗓音产生共鸣，并且魂魄的轮廓环绕你周身，这一切让所有人一目了然。处于这个状态，你在所选武器上获得受训熟练度并且所选技能上获得专家熟练度。另外，当你处于这个状态，回响可以使用你的躯体与物质位面交谈和交互，并且你在对抗所有占据效果的豁免骰上获得+4状态加值，因为占据你的魂魄会保护你免受其他事物占据。</p>\n<p>这个状态持续10分钟，随后直到你的下一次日常准备前余响都会消失不见。你可以解消这个效果。</p>\n<p>7级时，你在所选技能上获得大师熟练度，13级时，你在所选武器上获得专家熟练度，并且15级时，在所选技能上获得传奇熟练度。</p>"
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你让余响占据你的躯体，身体周边散发灵光，虹膜闪耀浅绿色光芒，嗓音产生共鸣，并且魂魄的轮廓环绕你周身，这一切让所有人一目了然。处于这个状态，你在所选武器上获得受训熟练度并且所选技能上获得专家熟练度。另外，当你处于这个状态，回响可以使用你的躯体与物质位面交谈和交互，并且你在对抗所有占据效果的豁免骰上获得+4状态加值，因为占据你的魂魄会保护你免受其他事物占据。</p>\n<p>这个状态持续10分钟，随后直到你的下一次每日准备前余响都会消失不见。你可以解消这个效果。</p>\n<p>7级时，你在所选技能上获得大师熟练度，13级时，你在所选武器上获得专家熟练度，并且15级时，在所选技能上获得传奇熟练度。</p>"
         },
         "Reclaim Destiny": {
             "name": "开拓命运 Reclaim Destiny",
@@ -1363,7 +1363,7 @@
         },
         "Envenom": {
             "name": "下毒 Envenom",
-            "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>通过使用唾液或血液，你可以将蝮血裔毒液涂到你的武器或弹药上。要使用你的血液，你必须受伤，或者作为行动的一部分对自己造成@Damage[1[slashing]]伤害。在你的下一回合结束之前，或者直到你因为命中或大失败消耗掉毒液，蝮血裔毒液会一直保持效力。</p>\n<p><strong>次等蝮血裔毒液</strong> （伤口，毒素）</p>\n<hr />\n<p><strong>豁免检定</strong> @Check[fortitude|against:class-spell|traits:injury,poison,damaging-effect]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d4[poison]]伤害（1轮）</p>"
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p>通过使用唾液或血液，你可以将蝮血裔毒液涂到你的武器或弹药上。要使用你的血液，你必须受伤，或者作为行动的一部分对自己造成@Damage[1[slashing]]伤害。在你的下一回合结束之前，或者直到你因为命中或大失败消耗掉毒液，蝮血裔毒液会一直保持效力。</p>\n<p><strong>次等蝮血裔毒液</strong>（伤口，毒素）</p>\n<hr />\n<p><strong>豁免检定</strong> @Check[fortitude|against:class-spell|traits:injury,poison,damaging-effect]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d4[poison]]伤害（1轮）</p>"
         },
         "Venom Draw": {
             "name": "涂毒备战 Venom Draw",
@@ -1402,7 +1402,7 @@
             "name": "尖啸之颅 Screaming Skull"
         },
         "Drain Life": {
-            "description": "<p>你的幻灵攻击一个生物并汲取其部分生命力以反哺你们共有的链接。你的幻灵打击一个活着的敌人。如果打击命中并造成伤害，目标必须进行一次强韧豁免，以决定后续效果。一旦重击，敌人使用比其掷骰结果差一级的结果。</p>\n<p><strong>大成功</strong> 无效果。</p>\n<p><strong>成功</strong> 你的幻灵汲取了少量生命力。敌人额外受到数值等于你等级一半的虚能伤害。</p>\n<p><strong>失败</strong> 你的幻灵汲取了足以让其满足的生命力。敌人额外受到数值等于你等级一半的虚能伤害，并@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。你的幻灵获得等于敌人等级数值的临时生命值，持续1分钟。</p>\n<p><strong>大失败</strong> 你的幻灵获得了不可估量的生命力，让其精力爆发。如同失败，但是敌人@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}并且临时生命值等于两倍敌人等级的数值。</p>",
+            "description": "<p>你的幻灵攻击一个生物并汲取其部分生命力以反哺你们共有的链接。你的幻灵打击一个活着的敌人。如果打击命中并造成伤害，目标必须进行一次对抗你的法术DC的@Check[fortitude|options:damaging-effect,inflicts:drained]豁免，并产生下列效果。如果重击，敌人使用比其掷骰结果差一级的结果。</p><hr /><p><strong>大成功</strong> 无效果。</p>\n<p><strong>成功</strong> 你的幻灵汲取了少量生命力。敌人额外受到数值等于你等级一半的额外虚能伤害。</p>\n<p><strong>失败</strong> 你的幻灵汲取了足以让其满足的生命力。敌人额外受到数值等于你等级一半的额外虚能伤害，并且@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}。你的幻灵获得等于敌人等级数值的临时生命值，持续1分钟。</p>\n<p><strong>大失败</strong> 你的幻灵获得了不可估量的生命力，让其精力爆发。如同失败，但是敌人@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，并且临时生命值等于两倍敌人等级的数值。</p>",
             "name": "汲取生命 Drain Life"
         },
         "Take a Taste": {
@@ -1455,7 +1455,7 @@
         },
         "Tenacious Stance": {
             "name": "顽强架势 Tenacious Stance",
-            "description": "<p><strong>需求</strong> 你穿戴护甲</p>\n<hr />\n<p><strong>效果</strong> 你稳定自身，如岩石般坚韧不拔。你获得等同于等级一半的临时生命值（最小为1），且在对抗推撞或摔绊时在DC上获得+2环境加值。但是，你不再无效你的护甲带来的检定或速度减值，因为处于此架势时需要维持较高的力量。在你脱离顽强架势时，你失去所有从此架势获得的剩余临时生命值，你对从顽强架势中获得临时生命值暂时免疫1分钟。</p>"
+            "description": "<p><strong>需求</strong> 你穿戴护甲</p>\n<hr />\n<p><strong>效果</strong> 你稳定自身，如岩石般坚韧不拔。你获得等同于等级一半的临时生命值（最小为1），且在对抗推撞或摔绊时在DC上获得+2环境加值。但是，你不再无效你的护甲带来的检定或速度减值，因为处于此架势时需要维持较高的力量。在你脱离顽强架势时，你失去所有从此架势获得的剩余临时生命值，你对从顽强架势中获得临时生命值临时免疫1分钟。</p>"
         },
         "Elemental Blast": {
             "name": "元素冲击 Elemental Blast",
@@ -1507,7 +1507,7 @@
         },
         "Primal Howl": {
             "name": "原始嚎叫 Primal Howl",
-            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 你的动物伙伴发出经由自然魔法赋能的尖啸或嚎叫。@Template[cone|distance:30]范围内的所有生物受到你的伙伴每两级@Damage[(floor(@actor.level/2))d6[sonic]|options:area-damage]伤害，且有一个等同于你法术DC的@Check[fortitude|against:spell|basic|options:area-effect]豁免。在豁免中失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}，大失败则改为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。施加该惊惧状态是一种情绪，恐惧以及心灵效应。</p>"
+            "description": "<p><strong>频率</strong> 每小时一次</p><hr /><p><strong>效果</strong> 你的动物伙伴发出经由自然魔法赋能的尖啸或嚎叫。@Template[cone|distance:30]范围内的所有生物受到你的伙伴每两级@Damage[(floor(@actor.level/2))d6[sonic]|options:area-damage]伤害，且有一个等同于你法术DC的@Check[fortitude|against:spell|basic|options:area-effect]豁免。在豁免中失败的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}，大失败则改为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。施加该惊惧状态是一种情绪，恐惧以及心灵效果。</p>"
         },
         "Inspired Stratagem": {
             "name": "启发策略 Inspired Stratagem",
@@ -1526,11 +1526,11 @@
             "name": "汲取魔宠 Drain Familiar"
         },
         "Shed Spirit": {
-            "description": "<p><strong>频率</strong> 每10分钟1次</p>\n<hr />\n<p><strong>效果</strong> 你魔宠的灵魂离开其躯体，留下一具空壳，随后飞向20尺内的一个敌人，造成@Damage[(6+max(0,(ceil((@actor.level -8)/2)*2)))d6[spirit]]伤害，进行@Check[will|basic]豁免对抗你的法术DC。如果魔宠造成伤害，它随后飞向该敌人30尺内的一个盟友，恢复其造成伤害一半的生命值。你的魔宠之后在原方格重塑形态。在9级以及随后的每2级，此攻击多造成2d6伤害。</p>",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p><strong>效果</strong> 你魔宠的灵魂离开其躯体，留下一具空壳，随后飞向20尺内的一个敌人，造成@Damage[(6+max(0,(ceil((@actor.level -8)/2)*2)))d6[spirit]]伤害，进行@Check[will|basic]豁免对抗你的法术DC。如果魔宠造成伤害，它随后飞向该敌人30尺内的一个盟友，恢复其造成伤害一半的生命值。你的魔宠之后在原方格重塑形态。在9级以及随后的每2级，此攻击多造成2d6伤害。</p>",
             "name": "精魂出窍 Shed Spirit"
         },
         "Stitching Strike": {
-            "description": "<p><strong>频率</strong> 每10分钟1次</p>\n<hr />\n<p><strong>效果</strong> 你的魔宠分解成魔法纤维，包围30尺内的一个敌人，造成@Damage[(6+max(0,(ceil((@actor.level -8)/2)*2)))d6[slashing]]伤害，进行@Check[reflex|basic]豁免对抗你的法术DC。如果豁免失败，目标还将陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]一轮，或直到其@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escapes}对抗你的法术DC。你的魔宠之后在原方格重塑形态。在9级以及随后的每2级，此攻击多造成2d6伤害。</p>",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p><strong>效果</strong> 你的魔宠分解成魔法纤维，包围30尺内的一个敌人，造成@Damage[(6+max(0,(ceil((@actor.level -8)/2)*2)))d6[slashing]]伤害，进行@Check[reflex|basic]豁免对抗你的法术DC。如果豁免失败，目标还将陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]一轮，或直到其@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱 Escapes}对抗你的法术DC。你的魔宠之后在原方格重塑形态。在9级以及随后的每2级，此攻击多造成2d6伤害。</p>",
             "name": "缝合打击 Stitching Strike"
         },
         "Sustain": {
@@ -1622,8 +1622,8 @@
             "name": "环境魔法幕帘 Drape Ambient Magic"
         },
         "Harvest Heartsliver": {
-            "description": "<p><strong>Requirements</strong> You're inside Kothogaz's body.</p>\n<hr />\n<p>You attempt to steal a section of Kothogaz's heart. Attempt an attack roll or a @Check[acrobatics|dc:40], @Check[athletics|dc:40], @Check[medicine|dc:40], @Check[nature|dc:40], @Check[occultism|dc:40], or @Check[religion|dc:40] check.</p>\n<hr />\n<p><strong>Critical Success</strong> You steal a small disharmonic heartsliver, stow it on your person, and can exit Kothogaz's body.</p>\n<p><strong>Success</strong> As critical success, but you can't exit.</p>\n<p><strong>Failure</strong> You take Kothogaz's Swallow Whole damage.</p>\n<p><strong>Critical Failure</strong> You take double Kothogaz's Swallow Whole damage and are @UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]{Deafened} by its heartbeat for 1 minute.</p>",
-            "name": "Harvest Heartsliver"
+            "description": "<p><strong>需求</strong> 你正在科索伽兹的体内</p>\n<hr />\n<p>你试图摘取科索伽兹心脏的一部分。尝试一次攻击检定，或一次@Check[acrobatics|dc:40]、@Check[athletics|dc:40]、@Check[medicine|dc:40]、@Check[nature|dc:40]、@Check[occultism|dc:40]或@Check[religion|dc:40]检定。</p>\n<hr />\n<p><strong>大成功</strong> 你摘取了一小片不协心脏碎片，将其藏于身上，并可以离开科索伽兹体内。</p>\n<p><strong>成功</strong> 同大成功，但你不能离开。</p>\n<p><strong>失败</strong> 你受到科索伽兹的活吞伤害。</p>\n<p><strong>大失败</strong> 你受到两倍科索伽兹的活吞伤害，并因它的心跳陷入@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]，持续1分钟。</p>",
+            "name": "摘取心脏碎片 Harvest Heartsliver"
         },
         "Flash of Grandeur": {
             "description": "<p><strong>触发</strong> 一名敌人对你的盟友造成伤害，并且二者都处于你的神卫灵光范围内</p><hr /><p><strong>效果</strong> 你闪烁出刺目的神圣光芒环绕你的敌人。这名盟友针对触发反应的伤害获得适用于所有伤害类型的抗力，数值等同于2+你的等级。你下回合结束前，攻击者受到@UUID[Compendium.pf2e.spells-srd.Item.0qaqksrGGDj74HXE]的影响。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.DawVHfoPKbPJsz4k]</p>",
@@ -2023,7 +2023,7 @@
         },
         "Opportunistic Accusation": {
             "name": "借机指控 Opportunistic Accusation",
-            "description": "<p><strong>触发</strong> 你注意到一个在你30尺内的恶魔因其罪恶易伤受到影响或在对抗心灵效果的豁免检定中大失败。</p><hr /><p>你对利用了恶魔短暂的劣势对其发出尖锐的斥责。恶魔必须进行@Check[will|against:class]豁免对抗你的职业DC。</p><hr /><p><strong>大成功</strong> 恶魔未受影响，并可能从此开始在战斗中将注意力集中在你身上。</p>\n<p><strong>成功</strong> 恶魔受到@Damage[2d6[mental]]伤害。</p>\n<p><strong>失败</strong> 恶魔受到@Damage[4d6[mental]]伤害，并在其下一个回合开始之前处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态。</p>\n<p><strong>大失败</strong> 与失败相同，但措手不及状态持续到下一轮结束。恶魔还会受到@Damage[2d6[persistent,mental]]伤害。</p>"
+            "description": "<p><strong>触发</strong> 你注意到一个在你30尺内的恶魔因其罪恶易伤受到影响或在对抗心灵效果的豁免检定中大失败。</p><hr /><p>你对利用了恶魔短暂的劣势对其发出尖锐的斥责。恶魔必须进行@Check[will|against:class]豁免对抗你的职业DC。</p><hr /><p><strong>大成功</strong> 恶魔未受影响，并可能从此开始在战斗中将注意力集中在你身上。</p>\n<p><strong>成功</strong> 恶魔受到@Damage[2d6[mental]]伤害。</p>\n<p><strong>失败</strong> 恶魔受到@Damage[4d6[mental]]伤害，并在其下一个回合开始之前处于@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态。</p>\n<p><strong>大失败</strong> 同失败，但措手不及状态持续到下一轮结束。恶魔还会受到@Damage[2d6[persistent,mental]]伤害。</p>"
         },
         "Timely Dodge": {
             "description": "<p><strong>触发</strong> 你是一次打击的目标</p><hr /><p><strong>效果</strong> 你纵身向侧面闪开，AC获得+1环境加值，然后在打击判定之后进行快步。</p>",
@@ -2043,7 +2043,7 @@
         },
         "Launch Fireworks": {
             "name": "发射烟火 Launch Fireworks",
-            "description": "<p><strong>消耗</strong> 1剂万用制剂</p>\n<p><strong>需求</strong> 你正持握或穿戴一个@UUID[Compendium.pf2e.equipment-srd.Item.4ftXXUCBHcf4b0MH]且有一只空闲手</p><hr /><p><strong>效果</strong> 你进行烟火表演。你可以发射普通烟火，在20尺内产生视觉或听觉信号，也可以选择以下其中一种特殊效果。你可以使用彗星，礼花，或鸣响烟火表演，并且专长能添加更多选项。特定烟火表演需要花费所列动作数量来发射，且具有所列特征。</p>\n<p><strong>彗星 Comet</strong> <span class=\"action-glyph\">1</span> （视觉）你沿着@Template[line|distance:60]发射一道闪光。所有位于线形区域的空间都会被明亮光照照亮，持续至你的下个回合开始为止。作为该动作的一部分，你还能够对线形区域上的单个生物作出@UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]，而且你的盟友不需要听到或者理解你。</p>\n<p><strong>礼花 Flower</strong> <span class=\"action-glyph\">1</span> （视觉）你点亮了一道光环，在空中创造出能够让人联想到花朵的形状。距离你@Template[emanation|distance:20]范围内的每个敌人都必须尝试一次@Check[fortitude|against:class-spell|options:area-effect,inflicts:dazzled]豁免。失败时，该敌人会陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮，大失败时他们会陷入目眩2轮。</p>\n<p><strong>鸣响 Salute</strong> <span class=\"action-glyph\">1</span> （听觉）你创造出了一声惊人的巨响或哨声。当你发射鸣响表演时，能够选择60尺范围内的一名陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]或@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]的盟友。若你选择的盟友被迷魂了，这强烈的响声会被该生物的迷魂状态视同为一次敌对效果（尽管该效果本身并没有任何负面影响），并自动终止大多数迷魂状态的应用。若盟友陷入了困惑，这猛烈的声响则有可能使得盟友摆脱困惑。他能够立即尝试一次纯骰检定来试着移除困惑状态，就如同该生物在受到伤害时发生的情况一般。若困惑状态自身具有特殊规则，移除了受到伤害时作出的纯骰检定或者让纯骰检定的难度提高，那么这些规则也适用于鸣响表演。</p>"
+            "description": "<p><strong>消耗</strong> 1剂万用制剂</p>\n<p><strong>需求</strong> 你正持握或穿戴一个@UUID[Compendium.pf2e.equipment-srd.Item.4ftXXUCBHcf4b0MH]且有一只空闲手</p><hr /><p><strong>效果</strong> 你进行烟火表演。你可以发射普通烟火，在20尺内产生视觉或听觉信号，也可以选择以下其中一种特殊效果。你可以使用彗星，礼花，或鸣响烟火表演，并且专长能添加更多选项。特定烟火表演需要花费所列动作数量来发射，且具有所列特征。</p>\n<p><strong>彗星 Comet</strong> <span class=\"action-glyph\">1</span>（视觉）你沿着@Template[line|distance:60]发射一道闪光。所有位于线形区域的空间都会被明亮光照照亮，持续至你的下个回合开始为止。作为该动作的一部分，你还能够对线形区域上的单个生物作出@UUID[Compendium.pf2e.actionspf2e.Item.sn2hIy1iIJX9Vpgj]，而且你的盟友不需要听到或者理解你。</p>\n<p><strong>礼花 Flower</strong> <span class=\"action-glyph\">1</span>（视觉）你点亮了一道光环，在空中创造出能够让人联想到花朵的形状。距离你@Template[emanation|distance:20]范围内的每个敌人都必须尝试一次@Check[fortitude|against:class-spell|options:area-effect,inflicts:dazzled]豁免。失败时，该敌人会陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]1轮，大失败时他们会陷入目眩2轮。</p>\n<p><strong>鸣响 Salute</strong> <span class=\"action-glyph\">1</span>（听觉）你创造出了一声惊人的巨响或哨声。当你发射鸣响表演时，能够选择60尺范围内的一名陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]或@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]的盟友。若你选择的盟友被迷魂了，这强烈的响声会被该生物的迷魂状态视同为一次敌对效果（尽管该效果本身并没有任何负面影响），并自动终止大多数迷魂状态的应用。若盟友陷入了困惑，这猛烈的声响则有可能使得盟友摆脱困惑。他能够立即尝试一次纯骰检定来试着移除困惑状态，就如同该生物在受到伤害时发生的情况一般。若困惑状态自身具有特殊规则，移除了受到伤害时作出的纯骰检定或者让纯骰检定的难度提高，那么这些规则也适用于鸣响表演。</p>"
         },
         "Offer Story": {
             "description": "<p>你与30尺内的一个生物分享你的旅行故事。你获得伊斯特拉雷的祝福，以AC和意志豁免获得+1状态加值的形式，直到你的下个回合结束。在你分享故事的生物的下个回合，他可以使用一个具有听觉，专注，语言和心灵特征的单动作，以他自己的故事作为回应，以获得相同的祝福，直到再下一个回合的结束。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.dzYnksinvWvfgBVt]</p>",
@@ -2086,7 +2086,7 @@
             "description": "<p><strong>频率</strong> 每游戏团期一次</p>\n<p><strong>触发</strong> 你在使用神话熟练度的攻击、检定、豁免检定中将要失败或大失败时</p><hr /><p><strong>效果</strong> 你恢复1点神话点。</p>"
         },
         "Dragon Breath (Dragon Form)": {
-            "name": "龙息（巨龙形态） Dragon Breath (Dragon Form)",
+            "name": "龙息（巨龙形态）Dragon Breath (Dragon Form)",
             "description": "<p>你向一个区域内呼出致命的魔法能量，对区域中每个生物造成@Damage[10d6[untyped]|options:area-damage]伤害，这有一次基础豁免，对抗你的法术DC。形态、伤害类型和豁免类型与你选择的龙的吐息攻击对应。如果选择的龙的吐息能造成多余一种伤害类型，当你施放<em>巨龙形态</em>时选择一种。该形状为@Template[type:cone|distance:30]或者@Template[type:line|distance:100]。在启动后，龙息在[[/gmr 1d4 #Recharge Dragon Breath]]{1d4轮}内不能再被使用。龙息具有和对应龙类型的根源特征，以对应其伤害类型的伤害特征，如果适用。</p>"
         },
         "Crescent Spray": {
@@ -2103,7 +2103,7 @@
         },
         "Brandish the Gorgon's Gaze": {
             "name": "释放戈耳工之凝视 Brandish the Gorgon's Gaze",
-            "description": "<p> 你举起@UUID[Compendium.pf2e.classfeatures.Item.lJAQPRT2t8IABR4v]，但它似乎失去了往日的光泽，取而代之的是石头的黯淡。如果你在下个回合开始前使用月镜盾@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]了一次近战攻击，戈尔工的眼睛会闪向触发生物，该生物必须尝试一次@Check[fortitude|against:exemplar|options:inflicts:slowed]豁免对抗你的职业DC。如果失败，随着身体部分石化，他陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。无论结果如何，该生物临时免疫此效果24小时。</p>"
+            "description": "<p>你举起@UUID[Compendium.pf2e.classfeatures.Item.lJAQPRT2t8IABR4v]，但它似乎失去了往日的光泽，取而代之的是石头的黯淡。如果你在下个回合开始前使用月镜盾@UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]了一次近战攻击，戈尔工的眼睛会闪向触发生物，该生物必须尝试一次@Check[fortitude|against:exemplar|options:inflicts:slowed]豁免对抗你的职业DC。如果失败，随着身体部分石化，他陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。无论结果如何，该生物临时免疫此效果24小时。</p>"
         },
         "Protective Screen": {
             "name": "防御屏障 Protective Screen",
@@ -2186,7 +2186,7 @@
             "description": "<p><strong>需求</strong> 你和你的盟友目前人数多于在战场上的敌人，且你或一名队友在你上个回合开始后将一名敌人减至0生命值。</p><hr /><p>当你宣布胜利已在眼前时，你的盟友们会以威严的脚步向前迈进，将敌人吓得四散奔逃。向所有处于你旗帜灵光范围内的队友发出信号；你和每名盟友可以用自由动作朝一名敌对生物直线快步。位于你或一名队友10尺内的任意敌对生物在此次移动后必须尝试一次@Check[will|against:commander|options:area-effect,inflicts:fleeing,inflicts:frightened|traits:emotion,fear,mental]豁免对抗你的职业DC；失败时，其将陷入@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态1轮，大失败时，其将陷入逃跑状态1轮以及@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。这是一个情绪，恐惧，心灵效果。</p>"
         },
         "Raise the Horde": {
-            "description": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p><strong>效果</strong> 你的军队出现在30尺内未被占据的空间。选择军队由骷髅或是僵尸组成，这将影响集团攻势造成的伤害类型。你的军队持续存在至你下一回合结束，但你可以将效果维持至多1分钟。若你在距离军队120尺外结束回合，效果也会终止。当你首次使用唤起军势及每次维持效果时，你可以指挥军队进行行走动作。</p>\n<p>当唤起军势的效果结束时，构成军队的不死生物会倒地失去活力并快速腐烂。它们无法再被指定为目标或用于执行动作。</p>",
+            "description": "<p><strong>频率</strong> 每10分钟一次</p><hr /><p><strong>效果</strong> 你的军队出现在30尺内未被占据的空间。选择军队由骷髅或是丧尸组成，这将影响集团攻势造成的伤害类型。你的军队持续存在至你下一回合结束，但你可以将效果维持至多1分钟。若你在距离军队120尺外结束回合，效果也会终止。当你首次使用唤起军势及每次维持效果时，你可以指挥军队进行行走动作。</p>\n<p>当唤起军势的效果结束时，构成军队的不死生物会倒地失去活力并快速腐烂。它们无法再被指定为目标或用于执行动作。</p>",
             "name": "唤起军势 Raise the Horde"
         },
         "Reload!": {
@@ -2239,11 +2239,11 @@
         },
         "Spread Propaganda": {
             "name": "广泛宣传 Spread Propaganda",
-            "description": "<p>你传播关于某个派系（这可以是某支军队、某个组织或者其他特定人群）的宣传。这么做花费的时间通常与你在搜集信息时花费的时间相同（通常为2小时）。在这段时间结束时，GM投掷1次秘密欺骗检定来判断你在广泛宣传中的成效。</p><hr /><p><strong>大成功</strong> 你的宣传高效地传播开来，在接下来的1个月里，成功通过搜集信息检定的生物，会了解到你传播的对于该对象的宣传，而非事实真相。这不会追溯到你本人。你还会了解到一些信息，就如同你在对于该派系的@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]检定中得到了成功一般。</p>\n<p><strong>成功</strong> 同大成功，但是宣传会持续1个星期，而且若有角色在搜集信息的技能检定中得到大成功的话，此人还能追溯到你。</p>\n<p><strong>失败</strong> 你的宣传未能奏效。</p>\n<p><strong>大失败</strong> 你的宣传效果非常糟糕，在接下来的1星期内，你对相同对象进行广泛宣传时，欺骗检定会承受-4点环境减值。此外，该对象及其敌人会意识到你试图进行广泛宣传。</p>"
+            "description": "<p>你传播关于某个派系（这可以是某支军队、某个组织或者其他特定人群）的宣传。这么做花费的时间通常与你在搜集信息时花费的时间相同（通常为2小时）。在这段时间结束时，GM投掷一次秘密欺骗检定来判断你在广泛宣传中的成效。</p><hr /><p><strong>大成功</strong> 你的宣传高效地传播开来，在接下来的1个月里，成功通过搜集信息检定的生物，会了解到你传播的对于该对象的宣传，而非事实真相。这不会追溯到你本人。你还会了解到一些信息，就如同你在对于该派系的@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]检定中得到了成功一般。</p>\n<p><strong>成功</strong> 同大成功，但是宣传会持续1个星期，而且若有角色在搜集信息的技能检定中得到大成功的话，此人还能追溯到你。</p>\n<p><strong>失败</strong> 你的宣传未能奏效。</p>\n<p><strong>大失败</strong> 你的宣传效果非常糟糕，在接下来的1周内，你对相同对象进行广泛宣传时，欺骗检定会承受-4点环境减值。此外，该对象及其敌人会意识到你试图进行广泛宣传。</p>"
         },
         "Mobbing Assault": {
             "name": "集团攻势 Mobbing Assault",
-            "description": "<p><strong>需求</strong> 你的军队已被唤起</p><hr /><p><strong>效果</strong> 军队周边@Template[type:emanation|distance:5]范围内的每个敌人承受@Damage[(ternary(gte(@actor.level,18),8,ternary(gte(@actor.level,14),6,ternary(gte(@actor.level,10),4,2))))d6[bludgeoning]|options:area-damage]伤害（若军队为僵尸）或@Damage[(ternary(gte(@actor.level,18),8,ternary(gte(@actor.level,14),6,ternary(gte(@actor.level,10),4,2))))d6[slashing]|options:area-damage]伤害（若军队为骷髅），对抗你的法术DC进行一次@Check[reflex|against:spell|basic|options:area-effect]豁免。10级起及之后每4级，伤害增加2d6。</p>"
+            "description": "<p><strong>需求</strong> 你的军队已被唤起</p><hr /><p><strong>效果</strong> 军队周边@Template[type:emanation|distance:5]范围内的每个敌人承受@Damage[(ternary(gte(@actor.level,18),8,ternary(gte(@actor.level,14),6,ternary(gte(@actor.level,10),4,2))))d6[bludgeoning]|options:area-damage]伤害（若军队为丧尸）或@Damage[(ternary(gte(@actor.level,18),8,ternary(gte(@actor.level,14),6,ternary(gte(@actor.level,10),4,2))))d6[slashing]|options:area-damage]伤害（若军队为骷髅），对抗你的法术DC进行一次@Check[reflex|against:spell|basic|options:area-effect]豁免。10级起及之后每4级，伤害增加2d6。</p>"
         },
         "Alley-Oop": {
             "name": "空中接力 Alley-Oop",
@@ -2275,7 +2275,7 @@
         },
         "Makes Me Stronger": {
             "name": "让我更强 Makes Me Stronger",
-            "description": "<p><strong>触发</strong> 你因英雄弱点而受到伤害，且该伤害未使你生命值降至0 （至少保留 1 点生命值）。</p><hr /><p><strong>效果</strong> 你展现出克服弱点的力量，不论是肌肉的贲张、挑衅的怒吼、不屑的狂笑，或是完全无视伤害的姿态。你的法术在对触发该效果的生物造成伤害时，获得等同于法术环级两倍的状态加值；该效果持续至你下次使用该反应为止。此外，那个以英雄弱点伤害到你的生物，必须以你的职业DC或施法DC（取较高者）进行一次意志豁免，以避免陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。</p>"
+            "description": "<p><strong>触发</strong> 你因英雄弱点而受到伤害，且该伤害未使你生命值降至0（至少保留 1 点生命值）。</p><hr /><p><strong>效果</strong> 你展现出克服弱点的力量，不论是肌肉的贲张、挑衅的怒吼、不屑的狂笑，或是完全无视伤害的姿态。你的法术在对触发该效果的生物造成伤害时，获得等同于法术环级两倍的状态加值；该效果持续至你下次使用该反应为止。此外，那个以英雄弱点伤害到你的生物，必须以你的职业DC或施法DC（取较高者）进行一次意志豁免，以避免陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。</p>"
         },
         "Restore the Moment": {
             "description": "<p><strong>触发</strong> 你的回合开始</p><hr /><p><strong>效果</strong> 消耗1点神话点。如凝时留影中所记录的一般，你依照相同顺序重复执行相同动作，并使用相同的掷骰结果进行判定，但应用当前存在的调整值（而非记录循环时的调整值），且以神话熟练度计算。你在复现动作时具体的执行细节可以有所改变——例如，你可以选择在重复的行走中不按原路线移动，或不必对同一名敌人进行重复打击，但你必须使用相同类型的移动来完成行走，并必须用相同类型的武器进行打击。如果在回合中你无法完成循环中的下一个动作，你的回合立即结束，并陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}。例如，若你在与食人魔的战斗轮中复现上述对抗火巨蟒的动作，且无法将使用长剑对食人魔进行打击作为第二个动作，那么你会陷入震慑1。同样地，如果你在回合结束时没有可以尝试攀爬的地方，你也会陷入震慑1。你可以定格并复现一次施放法术动作，但若你在回溯流影时未施放相同的法术，你仍会陷入震慑1（你能够以不同环级施放同一个法术）。</p>",
@@ -2402,20 +2402,20 @@
             "description": "<p>Your eidolon temporarily shifts its form into a swirling vortex of elemental matter and rampages through their foes. Your eidolon Strides. During their movement, they can attempt a Strike against each enemy that is within their reach. If an enemy comes within your eidolon's reach more than once, your eidolon makes only a single Strike against a given enemy. These attacks all count towards your eidolon's multiple attack penalty, but the penalty doesn't increase until after all the attacks. If your eidolon has the appropriate Speed, they can Climb, Fly, or Swim instead of Stride.</p>"
         },
         "Command a Construct": {
-            "description": "<p>You instruct your construct companion to act as you instruct it, and according to its programming. Your construct companion gains 2 actions during this turn. See the minion trait for details.</p>",
-            "name": "Command a Construct"
+            "description": "<p>你命令构装伙伴按你的指示行动，并遵循其编程设定。你的构装伙伴在本回合内获得2个动作。详情见仆从特征。</p>",
+            "name": "指挥构装体 Command a Construct"
         },
         "Hellbreaker Strike": {
             "description": "<p>Make a weapon or unarmed Strike. This counts as two attacks when determining your multiple attack penalty. If your Strike hits, you deal an additional 2d8 spirit damage. At 18th level, this increases to 3d8 spirit damage.</p>",
             "name": "Hellbreaker Strike"
         },
         "Twist Design": {
-            "description": "<p>You transform your tattoo to a different form of approximately the same size. You can Dismiss this effect.</p>",
-            "name": "Twist Design"
+            "description": "<p>你将你的刺青变成大致相同大小的另一种形态。你可以解消此效果。</p>",
+            "name": "扭曲图案 Twist Design"
         },
         "Size Up": {
-            "description": "<p>You designate a single, non-mindless creature as your focus and assess its motivations. You must be able to see and hear the creature. You gain a +2 circumstance bonus to Perception checks when you Sense the Motive of your focus and a +2 circumstance bonus to your Perception DC should your focus attempt to Lie or [[/act feint]] against you. You gain a +2 circumstance bonus to Deception, Diplomacy, and Intimidation checks against your focus. You can only have one creature designated as your focus at a time. If you use Size Up against a creature when you already have a creature designated, the prior creature loses the designation and the new focus gains the designation. Your designation otherwise lasts until your next daily preparations.</p>",
-            "name": "Size Up"
+            "description": "<p>你指定一个有心智生物作为你的目标，并评估其动机。你必须能够看到该生物并听到它的声音。当你对目标进行@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]时，你在察觉检定上获得+2环境加值；当你的目标尝试对你进行@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]或@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]时，你在察觉DC上获得+2环境加值。你在对抗目标进行的欺骗、交涉和威吓检定上获得+2环境加值。你在同一时间只能指定一个生物作为目标。如果你对一个生物使用评估时已经指定了一个目标，前一个生物将失去该指定，新的目标获得指定。除此之外，你的指定持续到你的下一次每日准备。</p>",
+            "name": "评估 Size Up"
         },
         "Warding Shift": {
             "description": "<p><strong>需求</strong> 你与自愿盟友相邻</p><hr /><p><strong>效果</strong> 你将相邻的自愿盟友向着任意方向移动5尺，并且能够快步进入盟友腾出的空间。</p>",
@@ -2426,12 +2426,128 @@
             "name": "刺穿血肉 Puncture Flesh"
         },
         "Liberate Self": {
-            "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Requirements</strong> You're @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}, or @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}</p><hr /><p><strong>Effect</strong> Attempt to Escape, rolling the check twice and taking the better result.</p>",
-            "name": "Liberate Self"
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 你@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]</p><hr /><p><strong>效果</strong> 你尝试进行逃脱，该检定掷骰两次并取较高的结果。</p>",
+            "name": "解放自我 Liberate Self"
         },
         "Adopt Persona": {
-            "description": "<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> Your tattoo helps you create a temporary cover to infiltrate a protected area or escape a dangerous situation. It casts 2nd-rank @UUID[Compendium.pf2e.spells-srd.Item.i35dpZFI7jZcRoBo]{Illusory Disguise} and 2nd-rank @UUID[Compendium.pf2e.spells-srd.Item.yV7Ouzaoe7DHLESI]{Ventriloquism} on you. The duration of both effects is 10 minutes.</p>",
-            "name": "Adopt Persona"
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你的刺青帮助你创建一个临时的伪装，以潜入受保护的区域或从危险的局势中逃脱。它对你施放2环级的@UUID[Compendium.pf2e.spells-srd.Item.i35dpZFI7jZcRoBo]和2环级的@UUID[Compendium.pf2e.spells-srd.Item.yV7Ouzaoe7DHLESI]。两种效果的持续时间均为10分钟。</p>",
+            "name": "采用人设 Adopt Persona"
+        },
+        "Disengage": {
+            "description": "<p><strong>Requirements</strong> You are piloting a sea vehicle during boarding combat.</p><hr /><p>You attempt to break your ship free and escape the battle. Attempt a check to pilot against a very hard DC. This is typically a Sailing Lore check against the standard DC of the vessel's level + 5 (for the very hard adjustment).</p>\n<p><strong>Success</strong> The vehicle pulls free and moves up to its Speed. It can turn normally provided it moves away from the ship it disengaged from.</p>\n<p><strong>Failure</strong> The boarding combat continues.</p>",
+            "name": "Disengage"
+        },
+        "For Talmandor! For Freedom!": {
+            "description": "<p><strong>Frequency</strong> once per day</p><hr /><p>You raise your banner high with a reminder of what you and your allies truly fight for, granting them unshakable conviction. For yourself and each squadmate in your banner's aura when you use this tactic, you can attempt to counteract one effect affecting that creature. Your counteract modifier is your Warfare Lore modifier. The effect must have the mental trait or impose the clumsy, controlled, @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing}, frightened, @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed}, @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained}, slowed, or stunned condition.</p>",
+            "name": "For Talmandor! For Freedom!"
+        },
+        "Wait For It...": {
+            "description": "<p>Your team intuitively keeps their guard up even while waiting for the ideal moment to act. Signal up to two squadmates within the aura of your commander's banner; while these squadmates Delay or Ready an action, they gain a +1 circumstance bonus to AC and saving throws. A squadmate's bonus lasts until the end of your next turn, until they stop Delaying, or until the end of the current creature's turn when the squadmate uses the designated action they Readied, whichever happens first. In addition, you can grant one of the squadmates an extra reaction from your drilled reactions class feature, but it can be used only to perform a designated action they Readied.</p>",
+            "name": "Wait For It..."
+        },
+        "Scrappy Defiance": {
+            "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> Your turn begins, and you are commanding a troop</p><hr /><p><strong>Effect</strong> You encourage your followers to persevere against all hardships. The troop you command gains temporary Hit Points equal to twice your level which last for 1 minutes. If your troop's size would be reduced due to damage, you can attempt a @Check[flat|dc:16]; on a success, your troop's size isn't reduced at that threshold until the end of your next turn.</p>",
+            "name": "Scrappy Defiance"
+        },
+        "Relentless Assault": {
+            "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> A creature would succeed or critically succeed at a saving throw against the offensive ability of a troop you command</p><hr /><p><strong>Effect</strong> With an encouraging command, you direct your troop to make a few additional attacks. The triggering creature rerolls its saving throw and uses the worse result.</p>",
+            "name": "Relentless Assault"
+        },
+        "For My House!": {
+            "description": "<p><strong>Frequency</strong> once per minute</p><hr /><p><strong>Effect</strong> You announce your house affiliation, either by declaring it aloud (giving this ability the auditory trait) or openly displaying your house heraldry (giving this ability the visual trait). Until the beginning of your next turn, your weapon Strikes and spells deal an additional 1 damage to any creature that witnessed the display. If you're an expert in Cheliax Lore, Genealogy Lore, Heraldry Lore, Performance, or Warfare Lore, the additional damage increases to 2. The damage increases to 3 if you're a master in the skill or 4 if you're legendary in the skill.</p>",
+            "name": "For My House!"
+        },
+        "Shadows in the Moonlight": {
+            "description": "<p>Your commands help your team evade notice. Signal all squadmates within your banner's aura; until the end of your next turn, you and each ally count as Following the Expert for any checks to [[/act hide]] or [[/act sneak]] and can ignore the noisy trait on any armor you wear. If you spend 2 actions to use this tactic, up to two squadmates within your banner's aura can also either Hide or Sneak as a free action.</p><hr /><p><strong>Special</strong> If you have this tactic prepared, you can use Warfare Lore in place of Stealth for checks you attempt to Hide and Sneak.</p>",
+            "name": "Shadows in the Moonlight"
+        },
+        "Seek and Destroy": {
+            "description": "<p><strong>Frequency</strong> once per 10 minutes</p><hr /><p>You direct your team to uncover hidden foes and exploit newly discovered weaknesses. Signal up to two squadmates within the aura of your commander's banner; they can immediately [[/act seek]] as a free action. Afterward, each can spend a reaction to either Point Out an enemy, Stride toward an enemy they're observing, or attempt to Strike an enemy they're observing. Each of the squadmates deals additional precision damage equal to half your level with their next successful Strike before the end of your next turn against a creature that has become observed by them from a successful Perception check to Seek.</p>",
+            "name": "Seek and Destroy"
+        },
+        "Corpse Crenellation": {
+            "description": "<p><strong>Frequency</strong> once per 10 minutes</p><hr /><p>With methodical, shocking efficiency, some Chelaxian and Hellknight squads can turn the corpses of their slain foes into temporary earthworks. Signal up to two squadmates within the aura of your commander's banner. These squadmates can Stride up to half their Speed and attempt a melee or ranged Strike against one enemy you designate as a reaction. If the enemy is reduced to 0 Hit Points by these Strikes, the enemy's body provides lesser cover to all squadmates in or adjacent to the enemy's space until the end of your next turn or until the enemy is no longer @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious} or dead. During this time, any squadmate who Takes Cover can also first Stride up to half their Speed, but they must end this movement in or adjacent to the fallen enemy's space. A squadmate who's at least two sizes smaller than the fallen enemy instead gains standard cover.</p><hr /><p><strong>Special</strong> If one of your squadmates knows or has prepared a cantrip that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the designated enemy instead of taking the other actions normally granted by this tactic, gaining all other listed benefits.</p>",
+            "name": "Corpse Crenellation"
+        },
+        "Consume Thrall": {
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 你的聚能点为0，且至少有一名奴仆距你30尺内</p><hr /><p><strong>效果</strong> 你摧毁30尺内的一个仆从并重获1点聚能点。你只能将这个聚能点用于施放坟墓法术。</p>",
+            "name": "吞噬奴仆 Consume Thrall"
+        },
+        "Overflowing Blade": {
+            "description": "<p><strong>需求</strong> 你正处于满溢状态</p><hr /><p><strong>效果</strong> 你引导内在枢纽中的魔力，使其覆盖在你的武器或无武装打击上，赋予它魔法能量来产生毁灭性的攻击。作出一次近战打击。若打击命中，你造成额外@Damage[1d4[force]]伤害。在10级时，额外伤害增加至@Damage[2d4[force]]伤害。在18级时，额外伤害增加至@Damage[3d4[force]]伤害。你不再处于满溢状态。</p>",
+            "name": "满溢之刃 Overflowing Blade"
+        },
+        "Trace Rune": {
+            "description": "<p><span class=\"action-glyph\">1</span>或<span class=\"action-glyph\">2</span></p>\n<p><strong>需求</strong> 你持握或穿戴着@UUID[Compendium.pf2e.equipment-srd.Item.y34yjumCFakrbtdw]</p><hr /><p>你的手指舞动，闪耀着光芒留下符文的图像。你可将一个符文应用于与符文用法条目相符的一个相邻目标。你同时可以拥有任意数量描画的符文，但每个符文只会保留到你的下个回合结束。</p>\n<p>如果你花费2个动作来描画符文，你会在空中绘制符文，并使其出现在30尺内的一个目标身上。</p>",
+            "name": "描画符文 Trace Rune"
+        },
+        "Shift Spell": {
+            "description": "<p><strong>需求</strong> 你位于一个持续法术的影响区域内，或能够物理接触一个正受法术影响的生物或物体，且你正持握着自己的引法器。</p><hr /><p><strong>效果</strong> 选择一种易咒，并进行一次对抗该法术DC的奥法检定（若该法术通常没有DC，则对抗施法者的法术DC）。施法者会立即察觉你正在尝试易转其法术，并本能地知晓此次易转可能产生的效果，但不会知晓你技能检定的结果。若施法者自愿配合，则你的检定结果成功度提升一级。检定的具体效果取决于你所选择的易咒。无论结果如何，该法术在接下来的24小时内免疫你的易转法术。</p>",
+            "name": "易转法术 Shift Spell"
+        },
+        "Rouse the World": {
+            "description": "<p>在30尺内的@Template[type:burst|distance:10]区域中的动植物和元素开始活动起来，协助你和你的盟友，并且开始在你耳边低语。这片区域被称为你的苏醒界域（waking world）。你和你的盟友位于你的苏醒界域之中时，运动和特技检定会获得+1点环境加值，而且当你以自然检定@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]来回忆该区域内的生物或危害时，会获得+1点环境加值。</p>\n<p>该效果会持续10分钟，不过你可以解消它。在随后的回合中每轮1次，你能维持该能力来使得爆发区域的大小增加10尺。同一时间你仅能对一片区域唤醒世界；若你再次使用该能力，先前唤醒的区域将恢复正常。</p>",
+            "name": "唤醒世界 Rouse the World"
+        },
+        "Command a Thrall": {
+            "name": "命令奴仆 Command a Thrall",
+            "description": "<p>你让你的一名奴仆爬行、趴下、逃脱、交互、站立 、行走或打击。一个奴仆只能进行简单的交互动作，该动作不能有技能需求或涉及复杂移动。不过，它们可以用你的法术攻击调整值来进行@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]检定。使用这种方式逃脱会应用并计入你的多重攻击减值。</p>"
+        },
+        "Invoke Rune": {
+            "description": "<p>你念出至多两个在你30尺内符文的名字，每个符文迸发出强大的力量，应用其激发条目中的效果。然后符文就会消散，它的任务完成了。虽然你可以通过单次激发符文动作激发至多两个符文，但将会受到多个相同符文影响的生物只会受到一次影响，和正常的重复效果规则一致。</p>",
+            "name": "激发符文 Invoke Rune"
+        },
+        "Reloading Cascade": {
+            "description": "<p>你使用@UUID[Compendium.pf2e.actionspf2e.Item.HbejhIywqIufrmVM]，并以交互动作装填一把火器。</p>",
+            "name": "填弹奔涌 Reloading Cascade"
+        },
+        "Inevitable Return": {
+            "description": "<p><strong>触发</strong> 距离你30尺内有一个体型为小型或中型的敌人死亡</p><hr /><p>你身旁之人的死亡只会壮大你的不死军团。你在触发尸体的空间内召唤一个奴仆。这个奴仆的体型与触发生物的体型相同。</p>",
+            "name": "注定归来 Inevitable Return"
+        },
+        "Solitary Invocation": {
+            "description": "<p>你念出30尺内某个符文的名字，使其焕发出炽烈能量，应用其激发条目的效果。然后符文就会消散，它的任务完成了。</p>",
+            "name": "单独激发 Solitary Invocation"
+        },
+        "Spiritual Scar": {
+            "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You would take spirit damage from a fiend</p><hr /><p><strong>Effect</strong> You gain resistance to spirit damage equal to twice your level plus your Charisma modifier against the triggering damage. If this resistance prevents you from taking any damage at all, the spiritual backlash against the fiend who attempted to damage you forces them to attempt a @Check[will|against:class|options:inflicts:slowed] save against your class DC to avoid being @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for one round.</p>",
+            "name": "Spiritual Scar"
+        },
+        "Absorb Magic": {
+            "description": "<p><strong>需求</strong> 你还未处于满溢状态</p>\n<p><strong>触发</strong> 30尺内有其他生物施放法术或者使用具有奥术、神术、魔法、异能或原能特征的动作、行动或反应动作</p><hr /><p><strong>效果</strong> 吸入了触发效果产生的一小部分魔力，将其储存到了你的内在枢纽中。你获得满溢状态。在储存的魔法能量消散之前，你能在满溢状态中持续至多1分钟。当你处于满溢状态中，在对抗具有奥术、神术、魔法、异能和原能特征的效果时，豁免检定会获得+1点状态加值。该加值在15级时提升至+2点。</p>",
+            "name": "吸收魔力 Absorb Magic"
+        },
+        "Double Spellstrike": {
+            "description": "<p><strong>频率</strong> 每日一次</p>\n<p><strong>需求</strong> 你的@UUID[Compendium.pf2e.actionspf2e.Item.QDW9H8XLIjuW2fE4]已充能</p><hr /><p>你进行法术打击，但施放两个法术而非一个。这两个法术的环级总和不得超过10，且均须满足法术打击的常规施法条件。</p>",
+            "name": "双重法术打击 Double Spellstrike"
+        },
+        "Surprising Anatomy": {
+            "description": "<p><strong>Trigger</strong> An enemy adjacent to your eidolon deals damage to your eidolon</p><hr /><p><strong>Effect</strong> Your eidolon's form shifts horribly to retaliate against the attacker. Your eidolon makes a melee unarmed Strike against the triggering enemy.</p>",
+            "name": "Surprising Anatomy"
+        },
+        "Part the Veil": {
+            "description": "<p><strong>需求</strong> 你不对任何敌人可见</p><hr /><p><strong>效果</strong> 你将自身相移进入间隙，将自身遮蔽于物理现实之外。你获得@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]。由于你脱离现实，他人难以集中注意力于你，因此你可以利用该隐蔽进行[[/act hide]]或[[/act sneak]]。若你采取敌对动作，此效果会在该动作完成后结束；否则其会持续1分钟。</p>",
+            "name": "拨开帷幕 Part the Veil"
+        },
+        "Fuel Impossible Spell": {
+            "description": "<p>你把更多的自我押上，以引出奇迹法术背后潜藏的力量。依照该法术说明中的具体描述，你进一步强化一道仍在生效的奇迹法术。当你为奇迹法术供能时，你陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}；若你已经处于毁灭状态，则你的毁灭状态值增加1。</p>",
+            "name": "为奇迹法术供能 Fuel Impossible Spell"
+        },
+        "Empower Breath": {
+            "name": "Empower Breath",
+            "description": "<p><strong>Frequency</strong> once per minute</p><hr /><p><strong>Effect</strong> Your eidolon gathers the power of the mightiest archdragons to make their magical breath even more spectacular. If your eidolon's next action is to use @UUID[Compendium.pf2e.actionspf2e.Item.Vr3w3t028ZKDg0mO]{Dragon Breath}, both the number of damage dice and area of Dragon Breath are doubled.</p>"
+        },
+        "Plaintive Plea": {
+            "description": "<p><strong>频率</strong> 每日一次</p><hr /><p><strong>效果</strong> 你在一场外交场合中做出动之以情的恳求，以说服某人。若你的下一个行动是尝试进行交涉检定以[[/act make-an-impression]]或提出请求（Request），或是在影响力遭遇中尝试影响一个生物，则你可以骰两次并取较好的结果。</p>",
+            "name": "哀切恳求 Plaintive Plea"
+        },
+        "Flowing Engulf": {
+            "description": "<p>你的幻灵最多以两倍速度行走，并且可以移动穿越路径上任何生物所占据的空间。所有体型不大于该幻灵且其所在空间被你的幻灵穿越的生物都会被吞没，除非其成功通过一次对抗你法术DC的@Check[reflex|options:inflicts:grabbed,inflicts:slowed]豁免。你的幻灵在一次流动吞没中，只能尝试吞没同一生物一次，并且它可以容纳任意数量、只要能放入其空间内的生物。\n被吞没的生物会被拉入你的幻灵体内。它处于@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]状态，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，并且只要仍被吞没，就会随你的幻灵一起移动。它可以通过对抗你的法术DC进行@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]，移动到一个它选择的、与你的幻灵邻接的空间。</p>",
+            "name": "流动吞没 Flowing Engulf"
+        },
+        "Dragon Breath (Eidolon)": {
+            "description": "<p>你的幻灵喷出破坏性的能量波，对区域内的所有生物造成@Damage[(ceil(@actor.level / 2))d6[untyped]|options:area-damage]伤害（基础反射豁免，豁免DC为你的法术DC）。之后，你的幻灵在接下来的[[/r 1d4 #rounds]]{1d4轮}内不能再次使用龙息。在3级以及此后每2级时，该伤害增加1d6。</p>\n<p>当幻灵获得此能力时，你选择其作用范围——@Template[type:line|distance:60]或@Template[type:cone|distance:30]——以及伤害类型——酸蚀、寒冷、电击、火焰、穿刺、毒素或虚能。若你的幻灵具有奥术特征，你也可以选择力场；若具有神术特征，你也可以选择精魂；若具有异能特征，你也可以选择心灵。若你将幻灵塑造成某种特定龙类，GM也可能允许你从额外的伤害类型中选择。</p>\n<p>龙息具有你幻灵对应根源的特征，以及与所选伤害类型相对应的特征（除非你选择穿刺伤害）。</p>",
+            "name": "龙息（幻灵） Dragon Breath (Eidolon)"
         }
     },
     "folders": {

@@ -110,7 +110,7 @@
             "description": "<p>当死墓骑士被摧毁时，其护甲会在[[/gmr 1d10]]天内重塑身体——若护甲被活着的宿主穿戴则会更加迅速（见后文中的死墓骑士护甲）。若身体在此之前被破坏，重塑过程将重新开始。</p>\n<p>只有摧毁护甲（比如使用@UUID[Compendium.pf2e.spells-srd.Item.r7ihOgKv19eJQnik]{解离术 Disintegrate}）、把死墓骑士传送至创生熔炉、或者丢进火山之中才能够永久摧毁死墓骑士。</p>"
         },
         "(Graveknight) Portentous Glare": {
-            "name": "（死墓骑士）不详怒视 (Graveknight) Portentous Glare",
+            "name": "（死墓骑士）不祥怒视 Portentous Glare",
             "description": "<p>30尺。死墓骑士的面容带来了势不可挡的骇人气氛。当一个生物在灵光范围内结束回合时，他必须进行一次@Check[will|dc:]豁免。豁免失败的生物获得@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}（大失败获得毁灭1和@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}）。死墓骑士可以通过一个交互动作开关头盔面罩进而开关此能力。</p>"
         },
         "(Graveknight) Ruinous Weapons": {
@@ -130,7 +130,7 @@
             "name": "（吸血鬼，诺斯费拉图霸主）惊惶爪 (Vampire, Nosferatu Overlord) Paralytic Fear"
         },
         "(Vampire, Nosferatu) Change Shape": {
-            "description": "<p> 诺斯费拉图变成一群浅灰色的老鼠。它们获得30尺陆地速度和10尺攀爬速度，体型变为大型。处于这个集群形态时，诺斯费拉图能用一个动作对位于集群内部的敌人造成@Damage[2d10[piercing]|options:area-damage]伤害，@Check[reflex|basic|options:area-effect]豁免，DC取诺斯费拉图等级对应的\"强\"DC。豁免失败的生物会暴露于远古瘟疫中。</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
+            "description": "<p>诺斯费拉图变成一群浅灰色的老鼠。它们获得30尺陆地速度和10尺攀爬速度，体型变为大型。处于这个集群形态时，诺斯费拉图能用一个动作对位于集群内部的敌人造成@Damage[2d10[piercing]|options:area-damage]伤害，@Check[reflex|basic|options:area-effect]豁免，DC取诺斯费拉图等级对应的\"强\"DC。豁免失败的生物会暴露于远古瘟疫中。</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>",
             "name": "（吸血鬼，诺斯费拉图）变身 (Vampire, Nosferatu) Change Shape"
         },
         "(Vampire, Nosferatu) Dominate": {
@@ -138,7 +138,7 @@
             "name": "（吸血鬼，诺斯费拉图）支配 (Vampire, Nosferatu) Dominate"
         },
         "(Vampire, Nosferatu) Plague of Ancients": {
-            "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:] （用诺斯费拉图的等级对应的强DC)</p>\n<hr />\n<p><strong>潜伏期</strong> 1天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1日）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}（1日）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}，@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 3}和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}（1日）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 2}，流失3和力竭3（1日）</p>\n<p><strong>阶段5</strong> @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]（1日）</p>\n<p><strong>阶段6</strong> 死亡</p>",
+            "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:]（用诺斯费拉图的等级对应的强DC)</p>\n<hr />\n<p><strong>潜伏期</strong> 1天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（1日）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}（1日）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}，@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 3}和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3}（1日）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 2}，流失3和力竭3（1日）</p>\n<p><strong>阶段5</strong> @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]（1日）</p>\n<p><strong>阶段6</strong> 死亡</p>",
             "name": "（吸血鬼，诺斯费拉图）远古瘟疫 (Vampire, Nosferatu) Plague of Ancients"
         },
         "(Vampire, Strigoi Progenitor) Create Spawn": {
@@ -195,7 +195,7 @@
         },
         "(Vampire, Jiang-Shi, Basic) Rigor Mortis": {
             "name": "（吸血鬼，僵尸，基础）尸僵 Rigor Mortis",
-            "description": "<p>僵尸无视困难地形和会令它@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的效果。僵尸不能进行@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{趴下 Drop Prone}基本动作。每当僵尸@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}时，它不会触发通常会因移动动作触发的反应，例如反应打击。</p>"
+            "description": "<p>僵尸无视困难地形和会令它@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]的效果。僵尸不能进行@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{趴下 Drop Prone}基础动作。每当僵尸@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃 Leap}时，它不会触发通常会因移动动作触发的反应，例如反应打击。</p>"
         },
         "(Vampire, Jiang-Shi, Basic) Warped Fulu": {
             "name": "（吸血鬼，僵尸，基础）扭曲的符箓 Warped Fulu",
@@ -231,15 +231,15 @@
         },
         "(Vampire, Strigoi Progenitor) Drink Essence": {
             "name": "（吸血鬼，斯特里戈伊始祖）吸吮精华 Drink Essence",
-            "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}或自愿的生物身处斯特里戈伊的触及范围内。</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，斯特里戈伊回复等同于其最大生命值10%的生命值，多余的则会变为临时生命。从已经获得流失(drained)或呆滞(stupefied)状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中小的增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
+            "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]或自愿的生物身处斯特里戈伊的触及范围内。</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|against:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，斯特里戈伊回复等同于其最大生命值10%的生命值，多余的则会变为临时生命。从已经获得流失或呆滞状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中小的增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
         },
         "(Vampire, Strigoi Progenitor) Shadow Escape": {
             "name": "（吸血鬼，斯特里戈伊始祖）影遁 Shadow Escape",
-            "description": "<p><strong>触发</strong> 斯特里戈伊的HP降至0</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊使用阴影形态能力。它能使用移动动作朝着它的棺材移动，哪怕HP为0。当它身处阴影形态且HP为0时，斯特里戈伊不会受到进一步伤害的影响。一旦斯特里戈伊抵达自己的棺材，或者它没能在2小时内抵达棺材，它就自动变为物质形态，@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}。</p>"
+            "description": "<p><strong>触发</strong> 斯特里戈伊的HP降至0</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊使用阴影形态能力。它能使用移动动作朝着它的棺材移动，哪怕HP为0。当它身处阴影形态且HP为0时，斯特里戈伊不会受到进一步伤害的影响。一旦斯特里戈伊抵达自己的棺材，或者它没能在2小时内抵达棺材，它就自动变为物质形态，@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]。</p>"
         },
         "(Vampire, Strigoi) Strigoi Weaknesses": {
             "name": "（吸血鬼，斯特里戈伊）斯特里戈伊弱点 Strigoi Weaknesses",
-            "description": "<p>所有斯特里戈伊都有以下弱点：</p>\n<ul>\n<li><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]可以注意到这一点。</li>\n<li><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应。一个成功对抗斯特里戈伊的反射DC的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。法术如@UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</li>\n<li><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</li>\n</ul>"
+            "description": "<p>所有斯特里戈伊都有以下弱点。</p><ul><li><p><strong>厌恶 Revulsion</strong> 斯特里戈伊在镜子和明亮光源附近会感到不自在。只有斯特里戈伊的影子会映在镜子里，这通常迫使它们掩盖或摧毁自己面前镜子，而不是冒着暴露真实本性的风险。斯特里戈伊不能主动接近一个被挥舞着的镜子或是明亮光源10尺以内，生物必须以一个交互动作挥舞镜子或者光源，并且这只会起效一轮（类似举起盾牌）。如果斯特里戈伊非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下一轮之后，斯特里戈伊可以花费一个拥有专注特征的动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #Overcome Revulsions Duration]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。斯特里戈伊能在没被挥舞的镜子或的明亮光源周围正常移动，尽管这样做会令它们感到不适，通过一个成功的察觉检定来[[/act sense-motive]]可以注意到这一点。</p></li><li><p><strong>阳光 Sunlight</strong> 当其暴露于阳光时，斯特里戈伊立刻@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]并倒在地上。它看上去好像死了：它不会呼吸，体温和周围环境相同，也不会对疼痛或其他刺激做出反应.一个成功对抗斯特里戈伊的@Check[perception|against:reflex]检定能发现一个反常现象：这具“尸体”投下的影子在轻微地变化移动，它的边缘扭动活跃着。特定的侦测法术，感官如生命感知，以及这具“尸体”会受到的命能伤害照常生效，并可能在不需要察觉检定的前提下揭示真相。观察“尸体”在镜子里的投影也能揭示真相，因为只有躯体的影子会映照在镜子里。身处阳光下且失去意识的时候，斯特里戈伊失去对物理伤害的抗力。若斯特里戈伊受到了足以将它的HP降至0的伤害，它的身体迅速分解，斯特里戈伊也就被摧毁了。</p></li><li><p><strong>厌恶流水 Water Revulsion</strong> 斯特里戈伊无法穿越一些明显的流水（如小溪、河流、或者海滨上的波浪）。能飞行的斯特里戈伊能够跨过流水，前提是它离水面至少10尺远。若违背斯特里戈伊的意愿强迫它们呆在水里，它们会获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}状态，且只要还在水中就会获得获得逃跑状态。在它的任何回合结束时，若斯特里戈伊停留在流水中，它就必须通过@Check[flat|dc:5]检定，否则将被摧毁。</p></li></ul>"
         },
         "(Vampire, True) Drink Blood": {
             "name": "（吸血鬼，纯血）吸血 Drink Blood",
@@ -271,7 +271,7 @@
         },
         "(Vampire, Vrykolakas Master) Bubonic Plague": {
             "name": "（吸血鬼，维克拉卡斯尊主）黑死病 Bubonic Plague",
-            "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:|name:Bubonic Plague|traits:disease] （用它的的等级对应的强DC)</p>\n<p><strong>潜伏期</strong> 1天</p>\n<hr />\n<p><strong>阶段1</strong>@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1天）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和疲乏（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3},疲乏, 每过[[/br {1d20} #minutes]]{1d20分钟}受到@Damage[1d6[bleed]]伤害（1天）</p>"
+            "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:|name:Bubonic Plague|traits:disease]（用它的的等级对应的强DC)</p>\n<p><strong>潜伏期</strong> 1天</p>\n<hr />\n<p><strong>阶段1</strong>@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1天）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和疲乏（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 3},疲乏, 每过[[/br {1d20} #minutes]]{1d20分钟}受到@Damage[1d6[bleed]]伤害（1天）</p>"
         },
         "(Vampire, Vrykolakas Master) Dominate Animal": {
             "name": "（吸血鬼，维克拉卡斯尊主）支配动物 Dominate Animal",
@@ -295,7 +295,7 @@
         },
         "(Vampire, Jiang-Shi, Minister) Dark Enlightenment": {
             "name": "（吸血鬼，僵尸，宰主）黑暗启蒙 Dark Enlightenment",
-            "description": "<p>僵尸不再局限于凭呼吸感知来“看见”生物，也不再拥有厌恶弱点。它们可以通过黑暗视觉或呼吸感知来正常地察觉生物，它们还能进行@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{趴下 Drop Prone}基本动作。</p>"
+            "description": "<p>僵尸不再局限于凭呼吸感知来“看见”生物，也不再拥有厌恶弱点。它们可以通过黑暗视觉或呼吸感知来正常地察觉生物，它们还能进行@UUID[Compendium.pf2e.actionspf2e.Item.HYNhdaPtF1QmQbR3]{趴下 Drop Prone}基础动作。</p>"
         },
         "(Vampire, Jiang-Shi, Minister) Distant Steps": {
             "name": "（吸血鬼，僵尸，宰主）虎跃 (Vampire, Jiang-Shi, Minister) Distant Steps",
@@ -327,7 +327,7 @@
         },
         "(Vampire, Strigoi) Drink Essence": {
             "name": "（吸血鬼，斯特里戈伊）吸吮精华 Drink Essence",
-            "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识 Unconscious}或自愿的生物身处斯特里戈伊的触及范围内</p>\n<hr />\n<p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|defense:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，斯特里戈伊回复等同于其最大生命值10%的生命值，多余的则会变为临时生命。从已经获得流失(drained)或呆滞(stupefied)状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中小的增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
+            "description": "<p><strong>需求</strong> 一个被@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]、@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]或自愿的生物身处斯特里戈伊的触及范围内</p><hr /><p><strong>效果</strong> 斯特里戈伊将它的尖牙埋入目标生物的体内，饮下他的血并抽出生命精华。如果目标被擒抱，吸血鬼需要进行一次@Check[athletics|against:fortitude]检定对抗受害者的强韧DC；在其他情况下则都将自动成功。该生物获得@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，斯特里戈伊回复等同于其最大生命值10%的生命值，多余的则会变为临时生命。从已经获得流失(drained)或呆滞(stupefied)状态的生物身上吸血不会回复任何生命值，但会使受害者的流失值或呆滞值加1（两个中小的增加；若两个状态值相等，则由斯特里戈伊选择增加哪个）。</p>\n<p>受害者的流失状态每周减少1点。在拥有足够的血液或是一名献血者的情况下，可以通过一次@Check[medicine|dc:20]检定进行一次输血，并在10分钟后减少1点流失状态值。</p>\n<p>受害者的呆滞值在其完成每日准备后减少1，如果每日准备是在充足的阳光照射下完成的，那么呆滞状态会完全消除。</p>"
         },
         "(Vampire, Strigoi) Levitation": {
             "name": "（吸血鬼，斯特里戈伊）悬浮 Levitation",
@@ -403,7 +403,7 @@
         },
         "(Nymph Queen) Focus Beauty": {
             "name": "（宁芙仙后）美之焦点 Focus Beauty",
-            "description": "<p> 宁芙仙后将她的美丽聚焦在一个目标上，该生物必须尝试一次豁免来抵抗她的光环（@Check[will|dc:0]豁免）。如果其失败且已经受到了灵光效果，则将遭受宁芙仙后条目中所描述的上级效果的影响。</p>\n<p>一名宁芙仙后每轮对一个生物仅能使用一次美之焦点。</p>"
+            "description": "<p>宁芙仙后将她的美丽聚焦在一个目标上，该生物必须尝试一次豁免来抵抗她的光环（@Check[will|dc:0]豁免）。如果其失败且已经受到了灵光效果，则将遭受宁芙仙后条目中所描述的上级效果的影响。</p>\n<p>一名宁芙仙后每轮对一个生物仅能使用一次美之焦点。</p>"
         },
         "(Nymph Queen) Inspiration": {
             "name": "（宁芙仙后）启迪灵感 Inspiration",
@@ -447,7 +447,7 @@
         },
         "(Ghast) Paralysis": {
             "name": "（妖鬼）麻痹 Paralysis",
-            "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+            "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
         },
         "(Ghast) Stench": {
             "name": "（妖鬼）恶臭 Stench",
@@ -511,7 +511,7 @@
         },
         "(Ghoul) Paralysis": {
             "name": "（食尸鬼）麻痹 Paralysis",
-            "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+            "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
         },
         "(Ghoul) Swift Leap": {
             "name": "（食尸鬼）迅捷跳跃 Swift Leap",
@@ -619,7 +619,7 @@
         },
         "(Zombie) Putrid Stench": {
             "name": "（丧尸）腐烂恶臭 Putrid Stench",
-            "description": "<p>15尺。这只丧尸的烂肉极其难闻。一个进入此范围的生物必须进行@Check[fortitude|dc:]豁免。失败时，这个生物获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，若大失败则在一轮内额外获得速度-5尺状态减值。只要在灵光范围内，该生物在从恶心状态中恢复的豁免获得-2环境减值。一个成功通过豁免的生物在1分钟内暂时免疫所有丧尸的腐烂恶臭。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.xmES7HVxM7L3j1EN]</p>"
+            "description": "<p>15尺。这只丧尸的烂肉极其难闻。一个进入此范围的生物必须进行@Check[fortitude|dc:]豁免。失败时，这个生物获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}，若大失败则在一轮内额外获得速度-5尺状态减值。只要在灵光范围内，该生物在从恶心状态中恢复的豁免获得-2环境减值。一个成功通过豁免的生物在1分钟内临时免疫所有丧尸的腐烂恶臭。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.xmES7HVxM7L3j1EN]</p>"
         },
         "(Zombie) Rotting Aura": {
             "name": "（丧尸）腐败灵光 Rotting Aura",
@@ -655,7 +655,7 @@
         },
         "(Zombie) Tearing Grapple": {
             "name": "（丧尸）撕裂擒拿 Tearing Grapple",
-            "description": "<p>丧尸成群结队地将敌人撕成碎片。每当一只具有此能力的丧尸成功@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapples}一个已经被另一个具有此能力的丧尸@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的敌人时，它会猛烈地摇晃可怜的受害者，对其造成拳头打击的伤害（如果丧尸没有拳头打击，则会造成类似打击的伤害）如果擒抱大成功，目标会受到双倍伤害并且不再被任何其他生物擒抱或束缚。如果僵尸有@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]怪物通用能力，使用擒获会对目标造成一半的拳头打击伤害。</p>"
+            "description": "<p>丧尸成群结队地将敌人撕成碎片。每当一只具有此能力的丧尸成功@UUID[Compendium.pf2e.actionspf2e.Item.PMbdMWc2QroouFGD]{擒拿 Grapples}一个已经被另一个具有此能力的丧尸@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的敌人时，它会猛烈地摇晃可怜的受害者，对其造成拳头打击的伤害（如果丧尸没有拳头打击，则会造成类似打击的伤害）如果擒抱大成功，目标会受到双倍伤害并且不再被任何其他生物擒抱或束缚。如果丧尸有@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]怪物通用能力，使用擒获会对目标造成一半的拳头打击伤害。</p>"
         },
         "(Zombie) Unholy Speed": {
             "name": "（丧尸）不洁之速 Unholy Speed",
@@ -754,8 +754,8 @@
             "description": "<p>巫团成员能够以一个带有专注特征的双动作感受到另一名巫团成员的感官，无视距离，即使他们身处其他位面。</p>"
         },
         "(Cryptid, Experimental) Augmented": {
-            "name": "（实验性神秘生物）增强 Augmented",
-            "description": "<p>实验性神秘生物有部分身体是人造的，其设计目的是为了防止生物感受疼痛或突然死亡。生物在对抗死亡效果、疾病和毒素的豁免骰上有+2环境加值。</p>"
+            "name": "（实验性神秘生物）人工增强 Augmented",
+            "description": "<p>实验性神秘生物有部分身体是人造的，其设计目的是为了防止生物感受疼痛或突然死亡。生物在对抗死亡效果、疾病和毒素的豁免上获得+2环境加值。</p>"
         },
         "(Cryptid, Experimental) Clobber": {
             "name": "（实验性神秘生物）痛击 Clobber",
@@ -766,7 +766,7 @@
             "description": "<p>实验性神秘生物释放@Template[line|distance:30]能量，该能量类型是实验性神秘生物特有的（通常是电击或火焰）。该区域内的生物受到神秘生物@Damage[1d6[damagetype]|options:area-damage]{每个等级1d6的伤害}，@Check[reflex|dc:|basic|options:area-effect]豁免。实验性神秘生物每过[[/gmr 1d4 #Recharge Energy Wave]]{1d4轮}能使用一次此能力。该动作具有和对应伤害类型的特征。如果塑造该生物的实验是魔法实验，该动作还具有塑能系特征以及和该次实验的魔法根源相匹配的特征（奥术、神术、异能或原能）。</p>"
         },
         "(Cryptid, Experimental) Operational Flaw": {
-            "name": "（实验性神秘生物）调整缺陷 Operational Flaw",
+            "name": "（实验性神秘生物）构造缺陷 Operational Flaw",
             "description": "<p>实验性神秘生物的构造中存在缺陷，这可以通过成功的察觉检定，用[[/act seek]]对抗生物等级的困难DC来判别。如果攻击者成功判别了实验性神秘生物的缺陷，则实验性神秘生物将获得等同于它等级数值的弱点。</p>"
         },
         "(Cryptid, Experimental) Power Surge": {
@@ -806,11 +806,11 @@
             "description": "<p>30尺。进入弥漫范围或在弥漫范围中开始回合的生物必须成功通过@Check[fortitude|dc:]豁免，对抗神秘生物等级的标准难度DC，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（如果大失败，在恶心持续期间还会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}）。在灵光范围中时，受到影响的生物在对抗疾病的豁免骰和恶心状态的恢复检定中有-2环境减值。豁免成功的生物临时免疫1分钟。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wX9L6fbqVMLP05hn]{效果：恶臭}</p>"
         },
         "(Cryptid, Rumored) Burning Eyes": {
-            "name": "（传闻神秘生物）燃烧双眼 Burning Eyes",
+            "name": "（传闻神秘生物）双目如炬 Burning Eyes",
             "description": "<p>神秘生物的双眼与众不同；也许他们在漆黑的夜晚燃烧着鲜红色。传闻神秘生物获得黑暗视觉。如果它已经拥有黑暗视觉，则获得高等黑暗视觉。</p>"
         },
         "(Cryptid, Rumored) Creature Obscura": {
-            "name": "（传闻神秘生物）生物传闻 Creature Obscura",
+            "name": "（传闻神秘生物）生物怪谈 Creature Obscura",
             "description": "<p>神秘生物出现在许多都市传说中，除了通常的技能外，还可以使用社群或与附近定居点相关的学识技能来鉴别它。但是，关于它的许多已知信息都是可疑的。识别传闻神秘生物的DC为极端困难难度，而不是稀有生物通常的非常困难难度，但是所有针对传闻神秘生物进行识别的失败尝试都会获得@UUID[Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P]{可疑知识 Dubious Knowledge}技能专长的效果。</p>"
         },
         "(Cryptid, Rumored) Howl": {
@@ -822,7 +822,7 @@
             "description": "<p>随着故事不断扩展，神秘生物的化形会更类似某种特定的动物。传闻神秘生物获得等同于其陆地速度的掘地、攀爬或游泳速度。</p>"
         },
         "(Cryptid, Rumored) Obscura Vulnerability": {
-            "name": "（传闻神秘生物）传闻易伤 Obscura Vulnerability",
+            "name": "（传闻神秘生物）揭秘易伤 Obscura Vulnerability",
             "description": "<p>那些寻求真相的人会削弱神秘生物。每当一个生物成功通过回忆知识检定来鉴别传闻神秘生物时，传闻神秘生物就会陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 1}（如果回忆知识大成功陷入@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}）。</p>"
         },
         "(Cryptid, Rumored) Shifting Form": {
@@ -839,7 +839,7 @@
         },
         "(Divine Warden) Divine Destruction": {
             "name": "（神圣守卫）神圣毁灭 Divine Destruction",
-            "description": "<p>当神圣守卫的生命值减少至0时，它在@Template[type:emanation|distance:30]范围内爆发出神圣能量，造成每个等级@Damage[1d6[spirit]|options:area-damage]伤害。范围内的每个生物都必须尝试一次@Check[will|dc:0]豁免。</p><hr /><p><strong>大成功</strong> 生物受到一半伤害。</p>\n<p><strong>成功</strong> 生物受到全伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害，并且受到守护神的临时诅咒。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1日；这是一个诅咒效果，使用神圣守卫的意志DC作为其反制DC。</p>\n<p><strong>大失败</strong> 类似失败，只是生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
+            "description": "<p>当神圣守卫的生命值减少至0时，它在@Template[type:emanation|distance:30]范围内爆发出神圣能量，造成每个等级@Damage[1d6[spirit]|options:area-damage]伤害。范围内的每个生物都必须尝试一次@Check[will|dc:0|options:area-effect,damaging-effect,inflicts:enfeebled,inflicts:stupefied]豁免。</p><hr /><p><strong>大成功</strong> 生物受到一半伤害。</p>\n<p><strong>成功</strong> 生物受到全伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害，并且受到守护神的临时诅咒。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1日；这是一个诅咒效果，使用神圣守卫的意志DC作为其反制DC。</p>\n<p><strong>大失败</strong> 类似失败，只是生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>"
         },
         "(Divine Warden) Divine Domain Spells": {
             "name": "（神圣守卫）神术领域法术 (Divine Warden) Divine Domain Spells",
@@ -851,7 +851,7 @@
         },
         "(Divine Warden) Faith Bound": {
             "name": "（神圣守卫）信仰束缚 Faith Bound",
-            "description": "<p>神圣守卫无法攻击那些公开穿戴或展示其守护神圣徽的生物，除非该生物先对神圣守护者做出敌对动作。如果神圣守卫具有智慧，它也可能会对那些它认为信仰不够虔诚或仅仅是穿戴圣徽来骗自己的生物发动攻击（通常是通过一次察觉检定来进行@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]{察言观色 Sense Motive}动作）。</p>"
+            "description": "<p>神圣守卫无法攻击那些公开穿戴或展示其守护神圣徽的生物，除非该生物先对神圣守护者做出敌对动作。如果神圣守卫具有智慧，它也可能会对那些它认为信仰不够虔诚或仅仅是穿戴圣徽来骗自己的生物发动攻击（通常是通过一次察觉检定来进行[[/act sense-motive]]动作）。</p>"
         },
         "(Divine Warden) Faithful Weapon": {
             "description": "<p>神圣守卫总是持握着守护神祇的偏好武器。如果该武器为远程武器，神圣守卫每次进行远程攻击的时候会自动生成弹药。如果神圣守卫的等级达到4级以上，当神圣守卫持握着偏好武器时，该武器自动获得<em>强击</em>符文；12级以上则为<em>高等强击</em>符文，19级以上则为 <em>上等强击</em>符文。</p>",
@@ -942,7 +942,7 @@
         },
         "(Visitant) Visitant Spells": {
             "name": "（还魂怨兽）还魂怨兽的法术 Visitant Spells",
-            "description": "<p>一些还魂怨兽可以施放以下内在异能法术。如果你给一个还魂怨兽施法能力，考虑移除它的其他特殊能力。</p>\n<p><strong>异能内在法术</strong></p>\n<p><strong>DC</strong> 可变</p>\n<p><strong>法术攻击加值</strong> 可变</p>\n<p><strong>1环级</strong> @UUID[Compendium.pf2e.spells-srd.Item.4koZzrnMXhhosn0D]{恐惧术 Fear}，@UUID[Compendium.pf2e.spells-srd.Item.J7Y7tl0bbdz7TcCc]{衰弱术 Enfeeble}</p>\n<p><strong>常驻法术 （1环级）</strong> @UUID[Compendium.pf2e.spells-srd.Item.QnTtGCAvdWRU4spv]{侦测阵营 Detect Alignment}</p>"
+            "description": "<p>一些还魂怨兽可以施放以下内在异能法术。如果你给一个还魂怨兽施法能力，考虑移除它的其他特殊能力。</p>\n<p><strong>异能内在法术</strong></p>\n<p><strong>DC</strong> 可变</p>\n<p><strong>法术攻击加值</strong> 可变</p>\n<p><strong>1环级</strong> @UUID[Compendium.pf2e.spells-srd.Item.4koZzrnMXhhosn0D]，@UUID[Compendium.pf2e.spells-srd.Item.J7Y7tl0bbdz7TcCc]</p>\n<p><strong>常驻法术（1环级）</strong> 侦测阵营</p>"
         },
         "(Visitant) Wrestle": {
             "name": "（还魂怨兽）角力 Wrestle",
@@ -981,7 +981,7 @@
             "description": "<p>所有吸血鬼都具有以下易伤。</p>\n<ul>\n<li><strong>禁制 Compulsions</strong> 吸血鬼受制于某些奇妙而又无法解释的禁制。典型的吸血鬼除非被藏在它的棺椁中，否则无法自愿穿过流水，也无法进入私宅，除非受到房主邀请。根据你的裁定，吸血鬼可能还会拥有不同的禁制——例如一只海盗吸血鬼可能无法在未受邀的情况下踏上陆地。吸血鬼仍可能受迫去做这些事情，并且可能如同克服厌恶（见下文）那样克服禁制。</li>\n<li><strong>厌恶 Revulsion</strong> 吸血鬼不能自愿接近被挥舞着的大蒜或是具有圣洁祝佑选项的神祇的圣徽10尺以内。生物必须以一个交互动作挥舞大蒜或者圣徽，并且起效1轮（类似举起盾牌）。如果吸血鬼非自愿地来到了厌恶对象的10尺范围内，它获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态，逃离至其厌恶对象的10尺以外。在暴露于其厌恶之物下的一轮之后，吸血鬼可以花费一个具有专注特征的单动作尝试一次@Check[will|dc:25]检定。一旦成功，它能在[[/gmr 1d6 #rounds]]{1d6轮}内克服其厌恶（如果大成功则改为1小时）。</li>\n<li><strong>木桩 Stake</strong> 一根刺穿吸血鬼心脏的木桩能够将吸血鬼的HP降至0点，并且阻止其被治疗到0HP以上，就算它躺在棺椁中也是如此。用木桩刺穿吸血鬼需要花费3动作，并且仅能在吸血鬼@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的时候才能如此做。如果木桩被移除，吸血鬼可以再次被治疗到0HP以上，且如果它处于棺椁中时，1小时休息时间会在木桩被移除时开始计算。如果在血鬼在被木桩钉穿时被斩首并涂抹上圣水，吸血鬼将被摧毁。</li>\n<li><strong>阳光Sunlight</strong> 如果暴露于阳光直射下，吸血鬼将立即陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}。每次吸血鬼在阳光下结束其回合，缓慢状态值增加1。如果吸血鬼因此失去了其所有动作，它被摧毁。由于吸血鬼对于光的超自然的厌恶，它们不会投下影子，也不会照映在镜子里。\n</li>\n</ul>"
         },
         "(Vampire, True) Create Servitor": {
-            "description": "<p> 如果某个生物在被吸血后生命值降低到0而死亡，吸血鬼可以通过将自身的些许血液赐予这名受害者并将其埋入地下3夜，以此将受害者转化为一只吸血鬼仆从。</p>\n<p>吸血鬼仆从被强迫服从于其创造者，但如果吸血鬼同时控制了太多吸血鬼仆从（由GM判断），或则如果仆从等级高于创造它的吸血鬼，意志坚强的仆从可以成功通过一次意志豁免对抗吸血鬼的意志DC来解放自身。</p>",
+            "description": "<p>如果某个生物在被吸血后生命值降低到0而死亡，吸血鬼可以通过将自身的些许血液赐予这名受害者并将其埋入地下3夜，以此将受害者转化为一只吸血鬼仆从。</p>\n<p>吸血鬼仆从被强迫服从于其创造者，但如果吸血鬼同时控制了太多吸血鬼仆从（由GM判断），或则如果仆从等级高于创造它的吸血鬼，意志坚强的仆从可以成功通过一次意志豁免对抗吸血鬼的意志DC来解放自身。</p>",
             "name": "（吸血鬼，纯血）创造仆从 Create Servitor"
         },
         "(Bulwark) Serpentstone Breath": {
@@ -989,7 +989,7 @@
             "description": "<p>石垒像喷出@Template[cone|distance:60]的绿色气体。区域内每个生物必须尝试一次@Check[fortitude|dc:34|options:area-effect,inflicts:slowed,inflicts:petrified]豁免。石垒像不能在[[/gmr 1d4 #Recharge Serpentstone Breath]]{1d4轮}内再次使用蛇石吐息。</p><hr /><p><strong>大成功</strong> 生物不受影响。</p>\n<p><strong>成功</strong> 生物的身体变硬，使其陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>失败</strong> 生物陷入@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]1分钟。它能够在其每回合结束时尝试一次新的豁免。</p>\n<p><strong>大失败</strong> 生物永久陷入石化。</p>"
         },
         "(Ghoul) Ghoul Whispers": {
-            "description": "<p><strong>需求</strong> 一个@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物正处于食尸鬼的触及内</p><hr /><p><strong>效果</strong> 食尸鬼在生物耳畔低语着黑暗的念头与卑劣的渴望。该生物必须进行豁免来对抗禁忌渴望诅咒。</p>\n<p><strong>禁忌渴望 Forbidden Cravings</strong> （诅咒）被此诅咒的恶心状态影响时，生物仍然可以吃喝</p>\n<p><strong>豁免骰</strong> @Check[will|dc:|traits:curse]，使用食尸鬼等级的高法术DC</p>\n<p><strong>阶段1</strong> 携带诅咒但没有不良效果（1日）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}直至他吃下生肉（1日）</p>\n<p><strong>阶段3</strong> 如同阶段2</p>\n<p><strong>阶段4</strong> 同阶段2，除非该生物在过去24小时内吃过生肉，那样他会转而受到@Damage[4d6[void]]伤害且获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}直至他吃下生肉（1日）</p>\n<p><strong>阶段5</strong> 如果该生物在过去24小时内吃过生肉，他死亡并复活为食尸鬼，否则诅咒退回阶段4</p>",
+            "description": "<p><strong>需求</strong> 一个@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]的生物正处于食尸鬼的触及内</p><hr /><p><strong>效果</strong> 食尸鬼在生物耳畔低语着黑暗的念头与卑劣的渴望。该生物必须进行豁免来对抗禁忌渴望诅咒。</p>\n<p><strong>禁忌渴望 Forbidden Cravings</strong>（诅咒）被此诅咒的恶心状态影响时，生物仍然可以吃喝</p>\n<p><strong>豁免骰</strong> @Check[will|dc:|traits:curse]，使用食尸鬼等级的高法术DC</p>\n<p><strong>阶段1</strong> 携带诅咒但没有不良效果（1日）</p>\n<p><strong>阶段2</strong> @Damage[2d6[void]]伤害，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}直至他吃下生肉（1日）</p>\n<p><strong>阶段3</strong> 如同阶段2</p>\n<p><strong>阶段4</strong> 同阶段2，除非该生物在过去24小时内吃过生肉，那样他会转而受到@Damage[4d6[void]]伤害且获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}直至他吃下生肉（1日）</p>\n<p><strong>阶段5</strong> 如果该生物在过去24小时内吃过生肉，他死亡并复活为食尸鬼，否则诅咒退回阶段4</p>",
             "name": "（食尸鬼）食尸鬼低语 (Ghoul）Ghoul Whispers"
         },
         "(Ghoul) Grave Knowledge": {
@@ -1105,32 +1105,32 @@
             "name": "（荒野守护者）自然之声 Voice of Nature"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Inubrix)": {
-            "name": "（星腑多头蛇）天金蜕变（虚铅） (Stargut Hydra) Skymetal Metamorphosis (Inubrix)",
+            "name": "（星腑多头蛇）天金蜕变（虚铅）Skymetal Metamorphosis (Inubrix)",
             "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>虚铅</strong> 星腑多头蛇的打击忽视金属护甲的护甲专精效果带来的伤害抗力，且不会触发盾牌格挡反应动作，或是来自护甲性能符文的反应动作。</p>"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Orichalcum)": {
-            "name": "（星腑多头蛇）天金蜕变（山铜） (Stargut Hydra) Skymetal Metamorphosis (Orichalcum)",
+            "name": "（星腑多头蛇）天金蜕变（山铜）Skymetal Metamorphosis (Orichalcum)",
             "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>山铜</strong> 当星腑多头蛇只剩下两颗头时，它会获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态。它只能用此额外动作进行行走或打击。</p>"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Adamantine)": {
             "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>精金</strong> 星腑多头蛇的打击能绕开硬度，并视作为精金。星腑多头蛇获得对物理伤害的抗力10（精金除外）。</p>",
-            "name": "（星腑多头蛇）天金蜕变（精金） (Stargut Hydra) Skymetal Metamorphosis (Adamantine)"
+            "name": "（星腑多头蛇）天金蜕变（精金）Skymetal Metamorphosis (Adamantine)"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Djezet)": {
-            "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>血汞</strong> （魔法） 星腑多头蛇对抗魔法时豁免获得+1状态加值。</p>",
-            "name": "（星腑多头蛇）天金蜕变（血汞） (Stargut Hydra) Skymetal Metamorphosis (Djezet)"
+            "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>血汞</strong>（魔法）星腑多头蛇对抗魔法时豁免获得+1状态加值。</p>",
+            "name": "（星腑多头蛇）天金蜕变（血汞）Skymetal Metamorphosis (Djezet)"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Siccatite)": {
             "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>漠石</strong> 星腑多头蛇受到火焰伤害时，它会变得过热，获得免疫火焰，以及对寒冷的弱点10。在处于过热时，寒冷伤害可以用于灼烧断颈。在星腑多头蛇受到寒冷伤害后，它会变得冰冷，获得免疫寒冷，以及对火焰的弱点10。</p>",
-            "name": "（星腑多头蛇）天金蜕变（漠石） (Stargut Hydra) Skymetal Metamorphosis (Siccatite)"
+            "name": "（星腑多头蛇）天金蜕变（漠石）Skymetal Metamorphosis (Siccatite)"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Abysium)": {
-            "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>渊铀</strong> （灵光，毒素） 星腑多头蛇以体内的渊铀发出令人作呕辐射的灵光。任何在星腑多头蛇30尺内开始回合的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>",
-            "name": "（星腑多头蛇）天金蜕变（渊铀） (Stargut Hydra) Skymetal Metamorphosis (Abysium)"
+            "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>渊铀</strong>（灵光，毒素）星腑多头蛇以体内的渊铀发出令人作呕辐射的灵光。任何在星腑多头蛇30尺内开始回合的生物陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>",
+            "name": "（星腑多头蛇）天金蜕变（渊铀）Skymetal Metamorphosis (Abysium)"
         },
         "(Stargut Hydra) Skymetal Metamorphosis (Noqual)": {
             "description": "<p>每条星腑多头蛇至少蜕变一次，会通过吞下一种特定的天金，内化其性质。如果你考虑给予一条星腑多头蛇一种以上的蜕变，则应提高其等级并修改其数据。</p>\n<p><strong>零晶</strong> 星腑多头蛇的打击和能力对有能力施放法术的生物造成的伤害获得+2状态加值。</p>",
-            "name": "（星腑多头蛇）天金蜕变（零晶） (Stargut Hydra) Skymetal Metamorphosis (Noqual)"
+            "name": "（星腑多头蛇）天金蜕变（零晶）Skymetal Metamorphosis (Noqual)"
         },
         "(Blight) Blight Domination": {
             "description": "<p>所有荒疫都可以作为原能内在法术施放@UUID[Compendium.pf2e.spells-srd.Item.OsOhx3TGIZ7AhD0P]，但只能针对位于其诅咒领域内的动物、魔兽、真菌、泥怪、植物或不死生物。如果受此法术支配的生物离开了诅咒领域，<em>支配术</em>效果立即结束，但只要被支配的生物仍然处于诅咒领域内，持续时间将是无限的。当荒疫将无意识的真菌、软泥或植物作为目标时，其<em>支配术</em>将失去心灵特征。</p>",
@@ -1207,7 +1207,7 @@
         },
         "(Conspirator Dragon) Obscure Revelations": {
             "description": "<p>当诡谋龙成为侦测、揭示或探知效果的目标时，GM 秘密进行一次反制检定，反制环级为诡谋龙等级的一半（向上取整），调整值等同诡谋龙的意志调整值。诡谋龙会察觉到以此方式被反制的效果及其来源，并可为这些效果提供由其自行编造的虚假信息。</p>",
-            "name": "（诡谋龙）晦匿启示 (Conspirator Dragon) Obscure Revelations"
+            "name": "（诡谋龙）隐匿启示 Obscure Revelations"
         },
         "(Conspirator Dragon) Apex Paranoids": {
             "description": "<p>诡谋龙远比自己愿意承认的更为惧怕失控；掌握权力，也伴随着权力失落或被夺走的恐惧。诡谋龙获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]状态，且额外的动作仅能用于[[/act feint]]、[[/act seek]]和[[/act sense-motive]]动作。</p>",
@@ -1250,7 +1250,7 @@
             "name": "（精金龙）斥力迸发 (Adamantine Dragon) Repelling Blast"
         },
         "(Adamantine Dragon) Petrifying Blow": {
-            "description": "<p>精金龙的攻击能将生物变成雕塑，以此充实它的宝库。被精金龙的爪或颚打击造成重击的生物必须尝试@Check[fortitude|dc:|options:inflicts:petrified,inflicts:slowed]豁免，DC等同于精金龙的恐怖威压。如果豁免成功，该生物在1分钟内暂时免疫石化打击。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}</p>\n<p><strong>大失败</strong> 该生物被永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]为精金。</p>",
+            "description": "<p>精金龙的攻击能将生物变成雕塑，以此充实它的宝库。被精金龙的爪或颚打击造成重击的生物必须尝试@Check[fortitude|dc:|options:inflicts:petrified,inflicts:slowed]豁免，DC等同于精金龙的恐怖威压。如果豁免成功，该生物在1分钟内临时免疫石化打击。</p><hr /><p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}</p>\n<p><strong>失败</strong> 该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}</p>\n<p><strong>大失败</strong> 该生物被永久@UUID[Compendium.pf2e.conditionitems.Item.dTwPJuKgBQCMxixg]为精金。</p>",
             "name": "（精金龙）石化打击 (Adamantine Dragon) Petrifying Blow"
         },
         "(Adamantine Dragon) Cratering Smash": {
@@ -1259,7 +1259,7 @@
         },
         "(Despair Dragon) Cursed Memories": {
             "description": "<p>90尺。绝望龙附近的生物无法信任自己的心智。当灵光内任何生物尝试进行@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]的技能检定时，它必须双骰并取较低结果。</p>",
-            "name": "（绝望龙）诅咒记忆 (Despair Dragon) Cursed Memories"
+            "name": "（绝望龙）受诅记忆 Cursed Memories"
         },
         "(Despair Dragon) Lights Out": {
             "description": "<p>绝望龙喷吐出一片不可穿透的黑暗，覆盖@Template[type:emanation|distance:30]范围。光线无法进入这片区域，任何非魔法光源（例如火把或灯）在区域内时不发出任何光亮，即便其光亮半径本应延伸至黑暗之外。此外，环级等于或低于巨龙等级一半的魔法光亮也会被压制。光线无法穿透，因此除了巨龙之外，区域内的所有生物都无法看到外界。</p>",
@@ -1322,7 +1322,7 @@
             "name": "（兆命龙）连结命运 (Omen Dragon) Link Fates"
         },
         "(Omen Dragon) Forewarned and Forearmed": {
-            "description": "<p>每日开始时，兆命龙可以进行一个10分钟的仪式，为即将到来的一天的战斗做好准备。兆命龙选择以下效果之一，持续24小时。</p><ul><li><p><strong>确凿命运</strong> （幸运） 当兆命龙投掷先攻时，它可以不进行投掷，而是选择结果为13+其先攻调整值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.ggqCmAH0a7cmAdA3]</p></li><li><p><strong>本能挑战</strong> 在遭遇中，兆命龙在它的回合开始时获得一个额外的反应动作，该动作仅能用于挑战命运。</p></li></ul>",
+            "description": "<p>每日开始时，兆命龙可以进行一个10分钟的仪式，为即将到来的一天的战斗做好准备。兆命龙选择以下效果之一，持续24小时。</p><ul><li><p><strong>确凿命运</strong>（幸运）当兆命龙投掷先攻时，它可以不进行投掷，而是选择结果为13+其先攻调整值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.ggqCmAH0a7cmAdA3]</p></li><li><p><strong>本能挑战</strong> 在遭遇中，兆命龙在它的回合开始时获得一个额外的反应动作，该动作仅能用于挑战命运。</p></li></ul>",
             "name": "（兆命龙）有备无患 (Omen Dragon) Forewarned and Forearmed"
         },
         "(Requiem Dragon) Die Together": {
@@ -1394,6 +1394,86 @@
         "(Kallas Devil) Waterfall Torrent": {
             "description": "<p>卡拉斯魔能操控她接触到的任何水体。当卡拉斯魔在水中时，她可以随意施放@UUID[Compendium.pf2e.spells-srd.Item.jfVCuOpzC6mUrf6f]作为异能内在法术。</p>",
             "name": "（卡拉斯魔）瀑布激流 (Kallas Devil) Waterfall Torrent"
+        },
+        "(Melfesh Monster) Swell": {
+            "description": "<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> 梅尔菲什怪物充气膨胀1分钟。它成长为超大型，并且其触及增加到15尺。它还获得12点临时生命值，对钝击的抗力5，以及伤害检定的+2状态加值，但它陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}。当梅尔菲什怪物在膨胀状态下受到伤害时，15尺内的所有生物都会吸入留在其体内1分钟的孢子。此能力替换恐怖孢子和孢子云。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.JlaO7fgm53Om1DxB]</p>",
+            "name": "（梅尔菲什怪物）膨胀 (Melfesh Monster) Swell"
+        },
+        "(Melfesh Monster) Burrowing Grasp": {
+            "description": "<p>梅尔菲什怪物进行两次掘地。在此次移动的任何时刻，它可以脱落一条临时的真菌附肢，抓住10尺内的一个生物。该生物必须成功通过一次@Check[reflex|dc:21|name:Burrowing Grasp|options:inflicts:immobilized]豁免，否则将被@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]1轮（大失败为2轮），或直到其[[/act escape dc=21]]。此能力赋予梅尔菲什怪物15尺的掘地速度，并替换其飞行速度和吞没。</p>",
+            "name": "（梅尔菲什怪物）掘地之手 (Melfesh Monster) Burrowing Grasp"
+        },
+        "(Melfesh Monster) False Synapses": {
+            "description": "<p>梅尔菲什怪物部分控制60尺内一个吸入了其孢子的生物。这会产生命令术的效果（@Check[will|dc:24|name:False Synapses]豁免）。此能力替换孢子视野和孢子云。</p>",
+            "name": "（梅尔菲什怪物）虚假突触 (Melfesh Monster) False Synapses"
+        },
+        "(Melfesh Monster) Smolderstench": {
+            "description": "<p>60尺。梅尔菲什怪物散发出燃烧和腐烂物质的压倒性恶臭。进入或在该区域开始其回合的生物会吸入孢子，并必须尝试一次@Check[fortitude|dc:21|name:Smolderstench]豁免。豁免失败时，该生物受到@Damage[2d4[poison]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}；豁免大失败时，该生物还会受到@Damage[4[persistent,poison]]伤害并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}。豁免成功的生物将临时免疫闷烧恶臭1分钟。此能力替换恐怖孢子。</p>",
+            "name": "（梅尔菲什怪物）闷烧恶臭 (Melfesh Monster) Smolderstench"
+        },
+        "(Melfesh Monster) Vent Flames": {
+            "description": "<p><strong>触发</strong> 梅尔菲什怪物在相邻生物旁边结束移动，或受到来自相邻生物的伤害</p>\n<hr />\n<p><strong>效果</strong> 梅尔菲什怪物身体的裂缝喷出燃烧的气体。触发生物必须成功通过一次@Check[reflex|dc:21|name:Vent Flames|traits:damaging-effect]豁免，否则吸入孢子，这些孢子留在其体内1分钟，受到@Damage[2d6[fire]]伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时，伤害加倍且陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。此能力替换反应性生长。</p>",
+            "name": "（梅尔菲什怪物）喷发火焰 (Melfesh Monster) Vent Flames"
+        },
+        "(Melfesh Monster) Corpse Bomb": {
+            "description": "<p>梅尔菲什怪物在10分钟内将孢子注入生物的尸体，使其准备爆炸。这些孢子持续1天，且梅尔菲什怪物一次只能准备三具尸体；如果它准备另一具，最旧的尸体炸弹就会无害地失效。在进行搜寻或调查时成功通过@Check[perception|dc:21|name:Notice Corpse Bomb|traits:action:seek,action:investigate,secret]检定的生物会注意到尸体炸弹的爆炸性。生物可以尝试使用@Check[nature|dc:21|name:Disable Corpse Bomb (Nature)|traits:action:disable-a-device]、@Check[survival|dc:21|name:Disable Corpse Bomb (Survival)|traits:action:disable-a-device]或@Check[thievery|dc:21|name:Disable Corpse Bomb (Thievery)|traits:action:disable-a-device]检定进行解除装置来解除尸体炸弹。如果有生物进入5尺范围内，或者梅尔菲什怪物使用一个动作引爆（每轮可用一次），尸体炸弹会在@Template[burst|distance:10]范围内爆炸。这会造成@Damage[2d8[fire],2d8[poison]|options:area-damage]伤害（@Check[reflex|dc:21|basic|name:Corpse Bomb|options:area-effect]豁免），并留下一团持续存在的10尺半径孢子云。进入或在云中开始其回合的生物会吸入孢子，孢子留在其体内1分钟。此能力替换孢子云。</p>",
+            "name": "（梅尔菲什怪物）尸体炸弹 (Melfesh Monster) Corpse Bomb"
+        },
+        "(Melfesh Monster) Torrential Advance": {
+            "description": "<p>梅尔菲什怪物溶解成一团真菌菌丝并向前涌动。它@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3]（中型或更小，附肢，@Check[reflex|dc:21|basic|name:Trample]），在它移动过的方格留下孢子云，持续到其下个回合结束。进入或在云中开始其回合的生物会吸入孢子，必须成功通过一次@Check[fortitude|dc:21|name:Torrential Advance]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。此能力替换吞没和孢子云。</p>",
+            "name": "（梅尔菲什怪物）倾泻突进 (Melfesh Monster) Torrential Advance"
+        },
+        "(Melfesh Monster) Flame Lash": {
+            "description": "<p>梅尔菲什怪物喷射火焰气体，覆盖@Template[cone|distance:15]或@Template[line|distance:30]范围。区域内的生物受到@Damage[4d6[fire]|options:area-damage]伤害（@Check[reflex|dc:21|basic|name:Flame Lash|options:area-effect]豁免）。此能力替换火焰长矛远程打击。</p>",
+            "name": "（梅尔菲什怪物）火焰鞭笞 (Melfesh Monster) Flame Lash"
+        },
+        "(Melfesh Monster) Mycelial Tomb": {
+            "description": "<p><strong>需求</strong> 一个生物在梅尔菲什怪物90尺内且站在地面上</p>\n<hr />\n<p><strong>效果</strong> 真菌菌丝从地面爆出。该生物必须成功通过一次@Check[reflex|dc:21|name:Mycelial Tomb]豁免，否则将吸入留在其体内1分钟的梅尔菲什孢子，被包裹在菌丝体中，并陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 2}。菌丝体具有硬度8和16点生命值，破拆它们的DC为21。打破菌丝体可以释放该生物并结束缓慢效果。如果除被包裹生物之外的人从外部打破菌丝体，该生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，并受到破拆效果造成的、超过菌丝体生命值部分的任何伤害。这替换了吞没能力。</p>",
+            "name": "（梅尔菲什怪物）菌丝坟墓 (Melfesh Monster) Mycelial Tomb"
+        },
+        "(Melfesh Monster) Death Throes": {
+            "description": "<p><strong>触发</strong> 梅尔菲什怪物死亡</p><hr /><p><strong>效果</strong> 梅尔菲什怪物在@Template[burst|distance:30]范围内爆炸。区域内的生物受到@Damage[3d8[fire],3d8[poison]|options:area-damage]伤害（@Check[reflex|dc:24|basic|name:Death Throes|options:area-effect]豁免）。此能力替换反应性生长。</p>",
+            "name": "（梅尔菲什怪物）垂死挣扎 (Melfesh Monster) Death Throes"
+        },
+        "(Kuworsys) Rapid Bombardment": {
+            "description": "<p>库沃西斯的投石索变为装填0武器，而不是装填1。</p>",
+            "name": "（库沃西斯）快速轰炸 (Kuworsys) Rapid Bombardment"
+        },
+        "(Kuworsys) Careless Block": {
+            "description": "<p><strong>触发</strong> 一个生物尝试对库沃西斯进行打击</p>\n<hr />\n<p><strong>效果</strong> 库沃西斯通过挥动它的投石索或偷来的武器，摆出格挡姿势来格挡触发的打击。伤害首先结算在库沃西斯的武器上。若该武器会因此被摧毁，则剩余的伤害由库沃西斯承受。</p>",
+            "name": "（库沃西斯）草率格挡 (Kuworsys) Careless Block"
+        },
+        "(Kuworsys) Smash and Grab": {
+            "description": "<p>库沃西斯行走最多两倍于其速度的距离。在移动结束时，它可以进行一次近战附肢打击。若打击成功，该目标会@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]，直到库沃西斯的下回合结束。</p>",
+            "name": "（库沃西斯）猛砸攫抓 (Kuworsys) Smash and Grab"
+        },
+        "(Kuworsys) Rain Blows": {
+            "description": "<p><strong>需求</strong> 库沃西斯处于后腿直立</p>\n<hr />\n<p><strong>效果</strong> 库沃西斯对其触及内的每个生物各进行一次打击，最多进行四次打击（每条可用附肢一次）。它可以进行附肢打击或武器打击，包括使用远程武器，但每种武器只能使用一次。每次攻击都计入库沃西斯的多重攻击减值，但在它进行完所有攻击之前，多重攻击减值不会增加。</p>",
+            "name": "（库沃西斯）乱击如雨 (Kuworsys) Rain Blows"
+        },
+        "(Ulgrem-Axaan) Ichor Coating": {
+            "description": "<p>在乌格瑞姆-阿克萨骨头和冰层的缝隙下，流淌着它那粘稠的生命体液残骸。与该液体发生物理接触的生物必须成功通过一次@Check[fortitude|dc:22|name:Ichor Coating]豁免，否则将感染@UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.N7UV5CZXtcoxDxCF]。</p>",
+            "name": "（乌格瑞姆-阿克萨）脓液涂层 (Ulgrem-Axaan) Ichor Coating"
+        },
+        "(Ulgrem-Axaan) Befouling Odor": {
+            "description": "<p>15尺。进入弥漫区域或在其中开始其回合的生物，必须成功通过一次@Check[fortitude|dc:20|name:Befouling Odor]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}（大失败时为@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 2}）。成功豁免的生物临时免疫污秽气味1分钟。</p>",
+            "name": "（乌格瑞姆-阿克萨）污秽气味 (Ulgrem-Axaan) Befouling Odor"
+        },
+        "(Ulgrem-Axaan) Fallen Victim": {
+            "description": "<p><strong>需求</strong> 在乌格瑞姆-阿克萨触及范围内有一个倒地的生物，且乌格瑞姆-阿克萨目前没有擒获另一个生物</p>\n<hr />\n<p><strong>效果</strong> 乌格瑞姆-阿克萨尝试对该生物进行一次颚打击。如果成功，乌格瑞姆-阿克萨立即@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]该生物，且该生物额外受到@Damage[2d10[bludgeoning]]伤害。</p>",
+            "name": "（乌格瑞姆-阿克萨）倒地受害者 (Ulgrem-Axaan) Fallen Victim"
+        },
+        "(Ulgrem-Axaan) Ichor Trail": {
+            "description": "<p>任何乌格瑞姆-阿克萨移入的方格都会被其身体流出的融化液体所覆盖，并变为困难地形。一小时后，脓液干涸，效果结束。</p>",
+            "name": "（乌格瑞姆-阿克萨）脓液轨迹 (Ulgrem-Axaan) Ichor Trail"
+        },
+        "(Ulgrem-Axaan) Crocodile Tears": {
+            "description": "<p>乌格瑞姆-阿克萨可以尝试一次欺骗检定来说谎，以模仿受伤猎物的声音。它在此次检定中获得+4环境加值。</p>",
+            "name": "（乌格瑞姆-阿克萨）鳄鱼的眼泪 (Ulgrem-Axaan) Crocodile Tears"
+        },
+        "(Ulgrem-Axaan) Crushing Weight": {
+            "description": "<p><strong>需求</strong> 乌格瑞姆-阿克萨用尾使一个生物陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]状态</p>\n<hr />\n<p><strong>效果</strong> 乌格瑞姆-阿克萨用尾夹紧该生物，造成@Damage[(2d4+8)[bludgeoning]]伤害（@Check[fortitude|dc:25|basic|name:Crushing Weight]豁免）。</p>",
+            "name": "（乌格瑞姆-阿克萨）碾压重量 (Ulgrem-Axaan) Crushing Weight"
         }
     }
 }

@@ -51,18 +51,18 @@
         },
         "Shootist's Draw": {
             "name": "射手快拔 Shootist's Draw",
-            "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 你以一个交互动作拔出@UUID[Compendium.pf2e.equipment-srd.Item.XyA6PKV46aNlLXOd]{手弩 Hand Crossbow}然后用它进行1次打击，或者你以一把已经上弦的、持握中的手弩进行打击，然后以一个交互动作收起它。</p>"
+            "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 你以一个交互动作拔出@UUID[Compendium.pf2e.equipment-srd.Item.XyA6PKV46aNlLXOd]{手弩 Hand Crossbow}然后用它进行一次打击，或者你以一把已经上弦的、持握中的手弩进行打击，然后以一个交互动作收起它。</p>"
         },
         "De-Animating Gestures (True)": {
             "description": "<p>你指定一个在30尺内你能看到或听到的构装体。这个构装体会陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1分钟。</p>",
-            "name": "解除动力手势 De-Animating Gestures （真）"
+            "name": "解除动力手势 De-Animating Gestures（真）"
         },
         "Spin Tale": {
             "description": "<p><strong>频率</strong> 每10分钟一次</p>\n<hr />\n<p><strong>效果</strong> 你讲述一个故事，指定你的一个盟友（不包括你自己）作为故事中的“英雄”，指定一个敌人作为故事中的“反派”；二者必须都距离你60尺以内。直到你下回合开始前，“英雄”对“反派”的攻击骰和豁免骰获得+1状态加值。如果你在下回合继续编故事，故事将会延续到下一轮，最多延续10轮。当故事持续的时候，微小的、粗糙的幻象会在你所在的空间里出现。这些奥术幻象除了作为你故事的动态图解以外没有任何其他作用。</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.UzIamWcEJTOjwfoA]{效果：编故事}</p>"
         },
         "De-Animating Gestures (False)": {
-            "description": "<p>指定一个在30尺内你能看到或听到的构装体。这个构装体会获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]{迅捷 Quickened 1}，持续1分钟，并在24小时内免疫该效果。它只能用它的额外动作来行走或打击。</p>",
-            "name": "解除动力手势 De-Animating Gestures （假）"
+            "description": "<p>指定一个在30尺内你能看到或听到的构装体。这个构装体会获得@UUID[Compendium.pf2e.conditionitems.Item.nlCjDvLMf2EkV2dl]，持续1分钟，并在24小时内免疫该效果。它只能用它的额外动作来行走或打击。</p>",
+            "name": "解除动力手势 De-Animating Gestures（假）"
         },
         "Exhale Poison": {
             "name": "呼吐毒素 Exhale Poison"
@@ -156,7 +156,7 @@
         },
         "Righteous Call": {
             "name": "正义召唤 Righteous Call",
-            "description": "<p><strong>性相</strong> 天族赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> （专注，操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 神圣的魔法充满了你的武器，使之成为对抗邪恶的真正利器。在1分钟内，你的武器和无武装攻击获得圣洁武器符文武器符文。如果一把武器的性能符文数量达到了上限，你可以选择让其中一个性能符文暂时休眠来激活圣洁符文的效果。此外，当你的盟友在你30尺范围内时，其攻击会附带圣洁特征。</p>"
+            "description": "<p><strong>性相</strong> 天族赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（专注，操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 神圣的魔法充满了你的武器，使之成为对抗邪恶的真正利器。在1分钟内，你的武器和无武装攻击获得圣洁武器符文武器符文。如果一把武器的性能符文数量达到了上限，你可以选择让其中一个性能符文暂时休眠来激活圣洁符文的效果。此外，当你的盟友在你30尺范围内时，其攻击会附带圣洁特征。</p>"
         },
         "Wind Barrier": {
             "description": "<p><strong>性相</strong> 气赋礼</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 专注</p>\n<hr />\n<p><strong>效果</strong> 产生一道隐形的空气屏障，可以偏转受到的远程攻击。直到你下回合开始前，你的AC在针对远程攻击时获得+2环境加值。达到13级时，该加值提升为+3。</p>",
@@ -191,7 +191,7 @@
             "description": "<p><strong>需求</strong> 你正站在具有充足松软泥土的区域内</p>\n<hr />\n<p>通过用你的脚扬起或踢起尘土，你把一团灰土扬到相邻的空间内。尝试@Check[acrobatics|dc:15]或@Check[athletics|dc:15]检定。扬起灰土的规模取决于你的检定结果。</p>\n<hr />\n<p><strong>大成功</strong> 尘土填满了@Template[cone|distance:15]区域。锥形区域内的生物在2轮内会被尘土覆盖，被尘土覆盖的生物为@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态而非@UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]状态。以1个动作，该生物能尝试@Check[reflex|dc:15]豁免来抖掉尘土。</p>\n<p><strong>成功</strong> 如同大成功，但是尘土会填满@Template[cone|distance:10]区域。</p>\n<p><strong>失败</strong> 你只踢起了些微的尘土。</p>\n<p><strong>大失败</strong> 你误判了踢腿的力度，这搞得你跌跌撞撞并陷入了@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，持续至你的下个回合开始为止。</p>"
         },
         "Linguistic Nexus": {
-            "description": "<p><strong>性相</strong> 心智</p>\n<hr />\n<p>你的圣物赋予你强大的神经可塑性，结果是你可以更容易地学习语言。圣物每有2个等级，你就可以学习1种额外语言（至少1种）。你只需要花费1周的修整期就能通过圣物重训一种语言。</p>",
+            "description": "<p><strong>性相</strong> 心智</p>\n<hr />\n<p>你的圣物赋予你强大的神经可塑性，结果是你可以更容易地学习语言。圣物每有2个等级，你就可以学习1种额外语言（至少1种）。你只需要花费1周的休整期就能通过圣物重训一种语言。</p>",
             "name": "语言链接 Linguistic Nexus"
         },
         "Ease Burden": {
@@ -220,11 +220,11 @@
         },
         "Shattered Earth": {
             "name": "破碎之地 Shattered Earth",
-            "description": "<p><strong>性相</strong> 土</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> S你圣物发出的地震脉冲在附近的地面上激起涟漪，让地面冒出许多尖刺。60尺内的一片半径为10尺的石头或泥土会成为困难地形。在移动动作期间进入效果范围内的生物必须通过1次特技检定或反射检定，否则受到@Damage[1d6[piercing]]伤害；每次移动即使穿过了多个受影响的方格，也只需进行1次检定。在6级时，并且之后每升4级，伤害都会增加1d6。</p>"
+            "description": "<p><strong>性相</strong> 土</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 命令，交互</p>\n<p><strong>频率</strong> 每小时一次</p>\n<hr />\n<p><strong>效果</strong> S你圣物发出的地震脉冲在附近的地面上激起涟漪，让地面冒出许多尖刺。60尺内的一片半径为10尺的石头或泥土会成为困难地形。在移动动作期间进入效果范围内的生物必须通过一次特技检定或反射检定，否则受到@Damage[1d6[piercing]]伤害；每次移动即使穿过了多个受影响的方格，也只需进行一次检定。在6级时，并且之后每升4级，伤害都会增加1d6。</p>"
         },
         "Obscure": {
             "name": "融入黑暗 Obscure",
-            "description": "<p><strong>性相</strong> 阴影</p>\n<hr />\n<p>你的圣物吸收周围光线，用阴影将你包裹，使你隐藏在黑暗中。只要你位于阴影下的昏暗环境中，你就能尝试1次隐蔽检定来@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]，即使你并没有对目标生物@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，例如一个具有黑暗视觉的生物。</p>"
+            "description": "<p><strong>性相</strong> 阴影</p>\n<hr />\n<p>你的圣物吸收周围光线，用阴影将你包裹，使你隐藏在黑暗中。只要你位于阴影下的昏暗环境中，你就能尝试一次隐蔽检定来@UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]，即使你并没有对目标生物@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，例如一个具有黑暗视觉的生物。</p>"
         },
         "Propelling Winds": {
             "name": "推进之风 Propelling Winds",

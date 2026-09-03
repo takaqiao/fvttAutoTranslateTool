@@ -26,7 +26,7 @@
             "description": "<p>源自罪孽的腐化削弱了目标的防御，目标于1轮内在AC上受到-1状态减值。</p>"
         },
         "Effect: Diabolic Blood Magic (Self)": {
-            "name": "效果：魔鬼血统奥秘（自身） Diabolic Blood Magic (Self)",
+            "name": "效果：魔鬼血统奥秘（自身）Diabolic Blood Magic (Self)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.o39zQMIdERWtmBSB]</p>\n<p>你于1轮内在欺骗检定上获得+2状态加值。</p>"
         },
         "Effect: Disruptive Stare": {
@@ -38,7 +38,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.ZHabYxSgYK0XbjhM]</p>\n<p>你或目标身上在短时间里长出了些许龙鳞，在AC上获得+1状态加值，持续1轮。</p>"
         },
         "Effect: Elemental Blood Magic (Self)": {
-            "name": "效果：元素血统奥秘（自身） Elemental Blood Magic (Self)",
+            "name": "效果：元素血统奥秘（自身）Elemental Blood Magic (Self)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.RXRnJcG4XSabZ35a]{血脉：元素}</p>\n<p>你在威吓检定上获得+2状态加值。</p>"
         },
         "Effect: Fey Blood Magic": {
@@ -82,7 +82,7 @@
             "name": "效果：派头 Panache"
         },
         "Effect: Psychopomp Blood Magic (Self)": {
-            "name": "效果：招魂者血统奥秘（自身） Psychopomp Blood Magic (Self)",
+            "name": "效果：招魂者血统奥秘（自身）Psychopomp Blood Magic (Self)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.PpzH9tJULk5ksX9w]</p>\n<p>你在强韧豁免上获得+2状态加值。</p>"
         },
         "Effect: Renewed Vigor": {
@@ -107,7 +107,7 @@
         },
         "Stance: Arcane Cascade": {
             "name": "架势：奥术奔涌 Arcane Cascade",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.HbejhIywqIufrmVM]</p>\n<p>你的近战打击造成1点额外力场伤害。如果你具有武器专精，这个伤害增加到2。如果你具有高等武器专精，则增加到3。任何受益于此的打击都获得奥术特征，使其魔法化。</p>\n<p>如果你进入架势前最近的法术是可以造成伤害的法术，来自于架势给与的额外伤害改为和这个法术相同的伤害类型（如果法术可以造成多种类型的伤害，则选择一种类型）。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.HbejhIywqIufrmVM]</p>\n<p>你的近战打击获得奥术特征，额外造成1点力场伤害，并获得对抗法术伤害的1点抗力。如果你拥有@UUID[Compendium.pf2e.classfeatures.Item.9EqIasqfI8YIM3Pt]，则伤害与抗力提升至2点；拥有@UUID[Compendium.pf2e.classfeatures.Item.Z7HX6TeFsaup7Dx9]，则提升至3点。</p>\n<p>如果你在同一回合内施放法术且随后进入奥术奔涌，则可以将该架势的伤害改为该法术所能造成的任一伤害类型，替代力场伤害。</p>"
         },
         "Stance: Reflective Ripple Stance": {
             "name": "架势：波纹架势 Reflective Ripple Stance",
@@ -146,11 +146,11 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.BQzExsEZrwGsJD66]{地域性草药 Endemic Herbs}</p>\n<p>持续1小时，将环境的寒冷效果视为比正常弱1级。</p>"
         },
         "Effect: Armor Tampered With (Critical Success)": {
-            "name": "效果：护甲篡改（大成功） Armor Tampered With (Critical Success)",
+            "name": "效果：护甲篡改（大成功）Armor Tampered With (Critical Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.SheifYobjKqyK3Fv]</p>\n<p>你@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]且在速度上承受-10尺减值。</p>"
         },
         "Effect: Armor Tampered With (Success)": {
-            "name": "效果：护甲篡改（成功） Armor Tampered With (Success)",
+            "name": "效果：护甲篡改（成功）Armor Tampered With (Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.SheifYobjKqyK3Fv]</p>\n<p>你@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]且在速度上承受-10尺减值。</p>"
         },
         "Effect: Assisting Shot": {
@@ -278,19 +278,19 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.bvOsJNeI0ewvQsFa]</p>\n<p>你在攻击检定和对抗心灵效果的豁免检定上获得+1状态加值。</p>"
         },
         "Effect: Liberating Step (vs. Aberration)": {
-            "name": "效果：自由快步（对抗异怪） Liberating Step (vs. Aberration)",
+            "name": "效果：自由快步（对抗异怪）Liberating Step (vs. Aberration)",
             "description": "<p>效果来自秘教誓约（解放者）</p>\n<p>如果你使用 自由快步 且触发的是邪恶异怪，你的盟友在检定上从自由快步那获得+4环境加值，且之后你的盟友可以快步两次。</p>"
         },
         "Effect: Liberating Step (vs. Dragon)": {
-            "name": "效果：自由快步(vs.龙） Liberating Step (vs. Dragon)",
+            "name": "效果：自由快步(vs.龙）Liberating Step (vs. Dragon)",
             "description": "<p>效果来自屠龙誓约（解放者）</p>\n<p>如果你使用由邪恶龙类触发的自由快步，你的盟友会在自由快步所给予的检定上获得+4的环境加值，这名盟友在之后还可以进行两次快步。</p>"
         },
         "Effect: Liberating Step (vs. Fiend)": {
-            "name": "效果：自由快步(vs.魔族） Liberating Step (vs. Fiend)",
+            "name": "效果：自由快步(vs.魔族）Liberating Step (vs. Fiend)",
             "description": "<p>效果来自驱魔誓约（解放者）</p>\n<p>如果你使用由魔族触发的自由快步，你的盟友会在自由快步所给予的检定上获得+4的环境加值，这名盟友在之后还可以进行两次快步。</p>"
         },
         "Effect: Liberating Step (vs. Undead)": {
-            "name": "效果：自由快步(vs. 不死） Liberating Step (vs. Undead)",
+            "name": "效果：自由快步(vs. 不死）Liberating Step (vs. Undead)",
             "description": "<p>效果来自光辉誓约（解放者）</p>\n<p>如果你使用由不死生物触发的自由快步，你的盟友会在自由快步所给予的检定上获得+4的环境加值，这名盟友在之后还可以进行两次快步。</p>"
         },
         "Effect: Life-Giving Magic": {
@@ -335,7 +335,7 @@
         },
         "Effect: Rampaging Form": {
             "name": "效果：炽怒型态 Rampaging Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Zl6vDXJEM7Lbp8JQ]</p>\n<p>你变形进入结冰形态，持续一分钟，直到你变回原形。你的战斗形态为超大型，并具有以下数据：</p>\n<ul>\n<li>AC=18+你的等级。忽略护甲检定减值和速度减少。</li>\n<li>20临时生命值。</li>\n<li>昏暗视觉，以及灵敏嗅觉（模糊）30尺。</li>\n<li>速度30尺，飞行速度40尺，无需呼吸</li>\n<li><strong>近战</strong> <span class=\"action-glyph\">a</span> 啃咬 Jaws，<strong>伤害</strong> 2d8穿刺+1d4火焰伤害。</li>\n<li>你的无武装打击额外造成1d4火焰伤害，你的火焰法术造成额外一个伤害骰的火焰伤害（和火焰法术相同的骰面）。</li>\n<li>你能以内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.6DfLZBl8wKIV03Iq]，施放动作缩减为单动作，而非正常的2动作。</li>\n<li>任何以无武装打击或非触及近战武器接触你的生物受到@Damage[3d6[fire]]伤害。</li>\n<li>运动调整值+20，除非你自身的调整值更高。</li>\n</ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Zl6vDXJEM7Lbp8JQ]</p>\n<p>你变形进入结冰形态，持续一分钟，直到你变回原形。你的战斗形态为超大型，并具有以下数据：</p><ul><li><p>AC=18+你的等级。忽略护甲检定减值和速度减少。</p></li><li><p>20临时生命值。</p></li><li><p>昏暗视觉，以及灵敏嗅觉（模糊）30尺。</p></li><li><p>速度30尺，飞行速度40尺，无需呼吸</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">a</span> 啃咬（Jaws），<strong>伤害</strong> 2d8穿刺+1d4火焰伤害。</p></li><li><p>你的无武装打击额外造成1d4火焰伤害，你的火焰法术造成额外一个伤害骰的火焰伤害（和火焰法术相同的骰面）。</p></li><li><p>你能以内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.6DfLZBl8wKIV03Iq]，施放动作缩减为单动作，而非正常的2动作。</p></li><li><p>任何以无武装打击或非触及近战武器接触你的生物受到@Damage[3d6[fire]]伤害。</p></li><li><p>运动调整值+20，除非你自身的调整值更高。</p></li><li><p>雪狐：</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">a</span> 啃咬（Jaws），<strong>伤害</strong> 2d8穿刺+1d4寒冷</p></li><li><p>你的无武装打击额外造成1d4寒冷伤害，你的寒冷法术造成额外一个伤害骰的寒冷伤害（和法术相同的骰面）</p></li><li><p>你可以以内在法术的形式施放@UUID[Compendium.pf2e.spells-srd.Item.gYjPm7YwGtEa1oxh]，施放动作缩减为单动作而非通常的2动作。</p></li><li><p>任何以无武装打击或非触及近战武器接触你的生物受到@Damage[3d6[cold]]伤害。</p></li></ul>"
         },
         "Effect: Rampaging Form (Frozen Winds Kitsune)": {
             "name": "效果：炽怒型态（雪狐） Rampaging Form (Frozen Winds Kitsune)",
@@ -366,11 +366,11 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.YeVDITJplindA27l]</p>\n<p>你获得等同于你体质调整的临时生命值直到你下一轮结束。</p>"
         },
         "Effect: Weapon Tampered With (Critical Success)": {
-            "name": "效果：武器篡改（大成功） Weapon Tampered With (Critical Success)",
+            "name": "效果：武器篡改（大成功）Weapon Tampered With (Critical Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.SheifYobjKqyK3Fv]{篡改 Tamper}</p>\n<p>你的武器被篡改了！你在使用该武器进行的攻击骰和伤害骰上承受-2环境减值。效果持续到你用@UUID[Compendium.pf2e.actionspf2e.Item.pvQ5rY2zrtPI614F]{交互 Interact}动作移除它为止。</p>"
         },
         "Effect: Weapon Tampered With (Success)": {
-            "name": "效果：武器篡改（成功） Weapon Tampered With (Success)",
+            "name": "效果：武器篡改（成功）Weapon Tampered With (Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.SheifYobjKqyK3Fv]{篡改 Tamper}</p>\n<p>你的武器被篡改了！你在使用该武器进行的攻击骰和伤害骰上承受-2环境减值。效果持续到发明家下回合开始，火你用@UUID[Compendium.pf2e.actionspf2e.Item.pvQ5rY2zrtPI614F]{交互 Interact}动作移除它为止。</p>"
         },
         "Effect: Worldly Mentor Boon (PFS)": {
@@ -398,7 +398,7 @@
             "description": "<p>如果你拥有@UUID[Compendium.pf2e.feats-srd.Item.Veyt4x2Kb5YcPGTv]{传奇怪物猎手 Legendary Monster Hunter}专长，则获得此来自@UUID[Compendium.pf2e.feats-srd.Item.YTTJqRKH8QZl6al2]{怪物猎手 Monster Hunter}的效果。</p>\n<p>你在下一次对抗该猎物的攻击骰上获得+2环境加值。</p>"
         },
         "Effect: Reckless Abandon (Goblin)": {
-            "name": "效果：侥幸活命（地精） Reckless Abandon (Goblin)",
+            "name": "效果：侥幸活命（地精）Reckless Abandon (Goblin)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fqw1ELaqavuKLHIj]</p>\n<p>若你对抗有害效果的豁免检定失败或大失败，改为获得成功。</p>"
         },
         "Effect: Repair Module": {
@@ -735,7 +735,7 @@
         },
         "Effect: Core Cannon": {
             "name": "效果：核心火炮 Core Cannon",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zeyrLJr6b7hPdx4w]</p>\n<p>选择一个潜力符文。你获得一种打击，造成3d8火焰和3d6力场伤害，在20级时增加到4d8火焰和4d6力场伤害。该打击拥有所选符文的物品加值，射程增量为120尺，重击时对目标造成10点持续火焰伤害。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zeyrLJr6b7hPdx4w]</p>\n<p>选择一个潜能符文。你获得一种打击，造成3d8火焰和3d6力场伤害，在20级时增加到4d8火焰和4d6力场伤害。该打击拥有所选符文的物品加值，射程增量为120尺，重击时对目标造成10点持续火焰伤害。</p>"
         },
         "Effect: Flamboyant Cruelty": {
             "name": "效果：棒打落水狗 Flamboyant Cruelty",
@@ -839,7 +839,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fzERYW7BJQoxlvoD]{ 猎尸人的蔑视 Corpse-Killer's Defiance}</p>\n<p>对不死生物的攻击骰和伤害骰获得+2状态加值。</p>"
         },
         "Effect: Corpse-Killer's Defiance (Lower Level)": {
-            "name": "效果：猎尸人的蔑视（低等级） Corpse-Killer's Defiance (Lower Level)",
+            "name": "效果：猎尸人的蔑视（低等级）Corpse-Killer's Defiance (Lower Level)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fzERYW7BJQoxlvoD]{猎尸人的蔑视 Corpse-Killer's Defiance}</p>\n<p>对不死生物的攻击骰和伤害骰获得+1状态加值。</p>"
         },
         "Effect: Hunter's Edge, Outwit": {
@@ -864,7 +864,7 @@
         },
         "Effect: Catfolk Dance": {
             "name": "效果：猫族怪舞 Catfolk Dance",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Iqv8qj7ym63YjexN]</p>\n<p>目标生物在反射豁免上承受-2环境减值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Iqv8qj7ym63YjexN]</p>\n<p>你在反射豁免上承受-2环境减值。大成功时，你还陷入措手不及。</p>"
         },
         "Effect: Life Curse": {
             "name": "效果：生命秘示域诅咒 Life Curse"
@@ -914,7 +914,7 @@
         },
         "Effect: Saoc Astrology": {
             "name": "效果：索克占星术 Saoc Astrology",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.csoGdGuWasEw3boD]</p>\n<p>你在所选技能的检定上获得环境加值或减值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.csoGdGuWasEw3boD]</p>\n<p>你在技能检定上获得环境加值或减值。</p>"
         },
         "Effect: Nanite Surge": {
             "name": "效果：纳米机械激增 Nanite Surge",
@@ -1100,7 +1100,7 @@
         },
         "Stance: Stoked Flame Stance": {
             "name": "架势：燃焰架势 Stoked Flame Stance",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feat-effects.Item.rp1YauUSULuqW8rs]</p>\n<p>你可以进行烁焰攻击，造成1d8挥砍伤害。它属于搏击武器组，具备蓄力、非致命、横扫和无武装特征。如果你发动了烁焰攻击的重击专精效果，你可以使用另一种效果：若你的重击造成伤害，目标额外受到1d6持续火焰伤害。</p>\n<p>你的速度额外获得5尺状态加值。如果你拥有高速移动特性，其加值提升至15尺，且在3级之后的每4级提升5尺。</p><hr /><p><strong>特殊</strong> 此专长获得神术或异能特征，以匹配你真气法术的根源，如果你有的话。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feat-effects.Item.rp1YauUSULuqW8rs]</p>\n<p>你可以进行烁焰攻击，造成1d8挥砍伤害。它属于搏击武器组，具备叠劲、非致命、横扫和无武装特征。如果你发动了烁焰攻击的重击专精效果，你可以使用另一种效果：若你的重击造成伤害，目标额外受到1d6持续火焰伤害。</p>\n<p>你的速度额外获得5尺状态加值。如果你拥有高速移动特性，其加值提升至15尺，且在3级之后的每4级提升5尺。</p><hr /><p><strong>特殊</strong> 此专长获得神术或异能特征，以匹配你真气法术的根源，如果你有的话。</p>"
         },
         "Stance: Dragon Stance": {
             "name": "架势：狂龙架势 Dragon Stance",
@@ -1131,7 +1131,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.AkV4Jyllo6nlK2Sl]</p>\n<p>你唯一能进行的打击就是蛇牙无武装攻击。这造成1d4点穿刺伤害；属于搏击武器组；拥有灵巧、致命d10、娴熟、毒素和无武装特征。</p>\n<p>你在强韧豁免与强韧DC上获得+1环境加值，你还获得等级一半的毒素抗力。</p>"
         },
         "Stance: Cobra Stance (Cobra Envenom)": {
-            "name": "架势：蛇拳架势（毒蛇出洞） Cobra Stance (Cobra Envenom)",
+            "name": "架势：蛇拳架势（毒蛇出洞）Cobra Stance (Cobra Envenom)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.AkV4Jyllo6nlK2Sl]。如果你拥有@UUID[Compendium.pf2e.feats-srd.Item.xQuNswWB3eg1UM28]专长，强韧豁免还有强韧DC上赋予的环境加值从+1变成+2。</p>\n<p>你唯一能进行的打击就是蛇牙无武装攻击。这造成1d4点毒素伤害；属于搏击武器组；拥有灵巧、致命d10、娴熟、非致命、毒素和无武装特征。</p>\n<p>你在强韧豁免与强韧DC上获得+2环境加值，你还获得等级一半的毒素抗力。</p>"
         },
         "Stance: Sky and Heaven Stance": {
@@ -1147,7 +1147,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.DqD7htz8Sd1dh3BT]</p>\n<p>你唯一能进行的打击就是猩猩无武装攻击的挥击。这能造成1d8点钝击伤害；属于搏击武器组；拥有回摆、叠劲、擒拿、非致命与无武装特征。</p>\n<p>你在攀爬的运动检定上获得+2环境加值，如果你在攀爬的运动检定上骰出成功，你算做大成功。</p>"
         },
         "Stance: Gorilla Stance (Gorilla Pound)": {
-            "name": "架势：金刚式（金刚重捶） Gorilla Stance (Gorilla Pound)",
+            "name": "架势：金刚式（金刚重捶）Gorilla Stance (Gorilla Pound)",
             "description": "<p>如果你拥有@UUID[Compendium.pf2e.feats-srd.Item.nRjyyDulHnP5OewA]专长，处于@UUID[Compendium.pf2e.feats-srd.Item.DqD7htz8Sd1dh3BT]时你额外获得15尺攀爬速度。</p>\n<p>你唯一能进行的打击就是猩猩无武装攻击的挥击。这能造成1d8点钝击伤害；属于搏击武器组；拥有回摆、叠劲、擒拿、非致命与无武装特征。</p>\n<p>你获得15尺攀爬速度。并且，当你进行攀爬的运动检定成功时，视为大成功。</p>"
         },
         "Stance: Ironblood Stance": {
@@ -1167,7 +1167,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.jK0hjx4qsRyKnpBd]</p>\n<p>你获得7点穿刺、钝击和挥砍抗力。你还能在20尺范围内发出明亮光照（在之后的20尺范围发出昏暗光照）。</p>\n<p>当你到达17级时，抗力增加到10。</p>"
         },
         "Effect: Encroaching Presence": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.6RAHnACKReBW68Sa]</p>\n<p><strong>轻微反噬</strong> 你陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}。</p>\n<p><strong>中度反噬</strong> 所有生物都对你具有@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，因为它们被一层只有你能看到的视觉扭曲所覆盖。</p>\n<p><strong>严重反噬</strong> 你陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，直到下次日常准备。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.6RAHnACKReBW68Sa]</p>\n<p><strong>轻微反噬</strong> 你陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}。</p>\n<p><strong>中度反噬</strong> 所有生物都对你具有@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]，因为它们被一层只有你能看到的视觉扭曲所覆盖。</p>\n<p><strong>严重反噬</strong> 你陷入@UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{毁灭 Doomed 1}和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 Drained 2}，直到下次每日准备。</p>",
             "name": "效果：理智侵蚀 Encroaching Presence"
         },
         "Effect: Energetic Meltdown": {
@@ -1196,7 +1196,7 @@
         },
         "Effect: Consume Energy (Augment Strike)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.9Jbl71C5C6MnOqxV]</p>\n<p>所选的武器或无武装攻击能造成额外1d6能量伤害，伤害类型和你吞噬的能量相一致。</p>",
-            "name": "效果：吞噬能量（觉醒打击） Consume Energy (Augment Strike)"
+            "name": "效果：吞噬能量（觉醒打击）Consume Energy (Augment Strike)"
         },
         "Effect: Propulsive Leap": {
             "name": "效果：助推飞跃 Propulsive Leap",
@@ -1204,7 +1204,7 @@
         },
         "Effect: Hybrid Shape (Beastkin)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.34E7k2YRcsOU5uyl]。</p>\n<p>当你处于混合形态时，你获得啃咬作为无武装打击，这取决于你所选的本源动物（蝙蝠为尖牙、鹰为鸟喙、黄蜂为虫颚，以此类推）。你的啃咬造成1d4穿刺伤害，拥有灵巧、娴熟和无武装特征，并且属于搏击武器组。</p>",
-            "name": "效果：混合形态（兽化裔） Hybrid Shape (Beastkin)"
+            "name": "效果：混合形态（兽化裔）Hybrid Shape (Beastkin)"
         },
         "Effect: Deteriorated": {
             "name": "效果：躯体劣化 Deteriorated",
@@ -1259,7 +1259,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.tDWc2LQNl0Op1Auq]</p>\n<p>视你总是以@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]动作举着小圆盾。</p>"
         },
         "Stance: Disruptive Stance": {
-            "name": "架势：破坏姿态 Disruptive Stance",
+            "name": "架势：打断架势 Disruptive Stance",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.OEGhbRgW6wRbccns]</p>\n<p>你可以在一个生物在你的触及范围内使用专注动作，而不仅是移动与操纵动作时使用反应打击。</p>\n<p>除此之外，若此次攻击命中（而不仅是大成功），你破坏触发此动作的专注与操纵动作。</p>"
         },
         "Stance: Fane's Fourberie": {
@@ -1268,7 +1268,7 @@
         },
         "Stance: Graceful Poise": {
             "name": "架势：优雅姿态 Graceful Poise",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.rFaUJtB46scuAidY]</p>\n<p>当你使用灵巧特性武器来做出你双重切割的第二次打击时，双重切割在计算你的多重攻击减值时仅计为一次攻击。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.rFaUJtB46scuAidY]</p>\n<p>当你使用灵巧武器来做出你双重切割的第二次打击时，双重切割在计算你的多重攻击减值时仅计为一次攻击。</p>"
         },
         "Stance: Impassable Wall Stance": {
             "name": "架势：城垣架势 Impassable Wall Stance",
@@ -1376,7 +1376,7 @@
         },
         "Effect: Mountain Strategy (Critically Hit)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.UFn85K7uDsZj5Hep]</p>\n<p>标记重击你的目标。</p>",
-            "name": "效果：岿然坚山（重击） Mountain Strategy (Critically Hit)"
+            "name": "效果：岿然坚山（重击）Mountain Strategy (Critically Hit)"
         },
         "Effect: Divine Wings": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.vtCrMziYxNyj8kP7]{神翼 Divine Wings}</p>\n<p>你获得等同于你速度的飞行速度。</p>",
@@ -1451,7 +1451,7 @@
             "name": "效果：肠卜师的预示 Portents of the Haruspex"
         },
         "Effect: Pinpoint Poisoner": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.XtIPmZ3Ihq5NJHP2]</p>\n<p>该生物在对抗该毒素的初始豁免上获得-2环境减值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.XtIPmZ3Ihq5NJHP2]</p>\n<p>你在对抗该毒素的第一次豁免上承受-2环境减值。</p>",
             "name": "效果：狡诈毒师 Pinpoint Poisoner"
         },
         "Effect: Overdrive": {
@@ -1502,7 +1502,7 @@
         },
         "Effect: Goblin Song (Critical Success)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.QZb0Utg0WFPf2Qg0]</p>\n<p>该生物在察觉检定和意志豁免上获得-1状态减值。</p>",
-            "name": "效果：地精小调（大成功） Goblin Song (Critical Success)"
+            "name": "效果：地精小调 Goblin Song（大成功）"
         },
         "Effect: Familiar of Keen Senses": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.familiar-abilities.Item.onye3PN84lmca11D]</p>\n<p>你的魔宠获得由你选择的一项模糊感官，震颤感知，或水波感知，具有60尺范围。</p>",
@@ -1513,19 +1513,19 @@
             "name": "效果：新鲜果蔬 Fresh Produce"
         },
         "Effect: Goblin Song (Success)": {
-            "name": "效果：地精小调（成功） Goblin Song (Success)",
+            "name": "效果：地精小调 Goblin Song（成功）",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.QZb0Utg0WFPf2Qg0]</p>\n<p>该生物的察觉检定和意志豁免获得-1状态减值。</p>"
         },
         "Effect: Methodical Debilitations (Cover)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.CkK7WwaWnrLXK9sW]</p>\n<p>你不能从举起盾牌、次等掩蔽或标准掩蔽中获得AC的环境加值。</p>",
-            "name": "效果：循序衰弱（掩蔽） Methodical Debilitations (Cover)"
+            "name": "效果：循序衰弱（掩蔽）Methodical Debilitations (Cover)"
         },
         "Effect: Deity's Protection": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.DUb1VWSbTjdsbAkQ]</p>\n<p>你获得对所有伤害的抗力。</p>",
             "name": "效果：神祇庇佑 Deity's Protection"
         },
         "Effect: Methodical Debilitations (Flanking)": {
-            "name": "效果：循序衰弱（夹击） Methodical Debilitations (Flanking)",
+            "name": "效果：循序衰弱（夹击）Methodical Debilitations (Flanking)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.CkK7WwaWnrLXK9sW]</p>\n<p>你无法夹击，也无法帮助队友夹击。</p>"
         },
         "Effect: Undead Blood Magic": {
@@ -1534,7 +1534,7 @@
         },
         "Effect: Hot Foot (Critical Success)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.dtPXuS8MiWrz5UNK]</p>\n<p>你陷入措手不及并在反射豁免上承受-2环境减值。</p>",
-            "name": "效果：跳跃反射（大成功） Hot Foot (Critical Success)"
+            "name": "效果：跳跃反射 Hot Foot（大成功）"
         },
         "Effect: Enjoy the Show": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Igt8Ml5YIdxueMlF]</p>\n<p>你对你以外的生物的攻击骰获得环境减值，或对你的攻击骰获得+1环境加值。</p>",
@@ -1633,7 +1633,7 @@
             "name": "效果：炎拳 Spark Fist"
         },
         "Effect: Terrain Attunement (Mountain)": {
-            "name": "效果：地形同调（山脉） Terrain Attunement (Mountain)",
+            "name": "效果：地形同调（山脉）Terrain Attunement (Mountain)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.E8SDesgMD6Zbye2j]</p>\n<p>你获得对抗物理伤害的抗力（精金除外），数值等同于法术的环级，持续1轮。</p>"
         },
         "Effect: Bolera's Interrogation": {
@@ -1657,11 +1657,11 @@
             "name": "效果：战斗预感 Combat Premonition"
         },
         "Effect: Terrain Attunement (Arctic)": {
-            "name": "效果：地形同调（极地） Terrain Attunement (Arctic)",
+            "name": "效果：地形同调（极地）Terrain Attunement (Arctic)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.E8SDesgMD6Zbye2j]</p>\n<p>你在速度上承受-5尺状态减值（大失败为-10尺）。</p>"
         },
         "Effect: Terrain Attunement (Aquatic)": {
-            "name": "效果：地形同调（水域） Terrain Attunement (Aquatic)",
+            "name": "效果：地形同调（水域）Terrain Attunement (Aquatic)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.E8SDesgMD6Zbye2j]</p>\n<p>你获得等同于你陆地速度的游泳速度。</p>"
         },
         "Effect: Oracular Warning": {
@@ -1682,15 +1682,15 @@
         },
         "Effect: Exemplary Finisher (Rascal)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.KxpaxUSuBC7hr4F7]</p>\n<p>该敌人直到你的下回合开始在速度上受到-10尺环境减值。</p>",
-            "name": "效果：典范终结（轻狡无赖） Exemplary Finisher (Rascal)"
+            "name": "效果：典范终结（轻狡无赖）Exemplary Finisher (Rascal)"
         },
         "Effect: Terrain Attunement (Plains)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.E8SDesgMD6Zbye2j]</p>\n<p>你获得等同于法术的环级的临时生命值。</p>",
-            "name": "效果：地形同调（平原） Terrain Attunement (Plains)"
+            "name": "效果：地形同调（平原）Terrain Attunement (Plains)"
         },
         "Effect: Terrain Attunement (Underground)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.E8SDesgMD6Zbye2j]</p>\n<p>你获得黑暗视觉以及15尺范围的模糊震颤感知。</p>",
-            "name": "效果：地形同调（地底） Terrain Attunement (Underground)"
+            "name": "效果：地形同调（地底）Terrain Attunement (Underground)"
         },
         "Effect: Vigorous Anthem": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.4SKech3n0F38HrR5]</p>\n<p>你获得等同于3+效果来源魅力调整值的临时生命值。</p>",
@@ -1698,7 +1698,7 @@
         },
         "Effect: Exemplary Finisher (Wit)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.KxpaxUSuBC7hr4F7]</p>\n<p>直到你下一回合开始，该敌人在对抗你的攻击骰上会有-2环境减值。</p>",
-            "name": "效果：典范终结（风趣之徒） Exemplary Finisher (Wit)"
+            "name": "效果：典范终结（风趣之徒）Exemplary Finisher (Wit)"
         },
         "Effect: Living Fortification": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.9MJcQEMVVrmMyGyq]</p>\n<p>直至你下回合开始前，你的AC获得+1环境加值。</p>",
@@ -1714,7 +1714,7 @@
         },
         "Effect: Curse of Engulfing Flames": {
             "name": "效果：烈焰秘示域诅咒 Curse of Engulfing Flames",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.GTSvbFb36InvuH0w]</p>\n<h3>焚尽烈焰诅咒 Curse of Engulfing Flames</h3>\n<p>所见之处尽皆烟火。所见烈焰或为想象，或为宇宙间无处不在的超自然异位面火焰——但你能看到它们。火光（并不危险）占据了你的视野，偶尔你身上会飘出烟灰，你的身体总会烫到难以触摸。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>烟尘、热浪和火光占据了你所有的感官的部分。</p>\n<p>30尺外的生物对你来说是@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。你不会从忽视和削弱隐蔽状态的效果中受益，作为先知诅咒效果处理。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>烟尘和焰尾愈加充斥着你的视界，无害的闪光和火花开始出现在你的周围。</p>\n<p>你对其它生物而言处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，不过因其它生物未受先知诅咒，他们可以正常从忽视和削弱隐蔽状态的效果中受益。所有生物和物品对你来说都无视距离变为隐蔽状态，但当你对30尺内的目标施放火焰法术时，你在因该诅咒产生的隐蔽进行的纯骰检定中自动成功。</p>\n<p>对于30尺外的事物，你的所有感官都会变成模糊感官，意味着30尺外所有生物对你而言都是@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态。</p>\n<h4>高阶诅咒（11级） Major Curse (11th)</h4>\n<p>环绕周身的火焰不再是幻觉了。</p>\n<p>你获得一个@Template[emanation|distance:10]范围的火焰灵光，在你的回合结束时，对所有位于灵光范围内的其它生物造成@Damage[4d6[fire]]伤害（基础反射豁免）。每轮你自己回合结束时，你无豁免失去[[/r 1d6]]点HP；若你对火焰有弱点，失去的HP会增加弱点点数。</p>\n<p>你可用一个动作将灵光压制到你下一回合开始，该动作有专注特征，压制后火焰缩小，暂时不会对灵光内的生物和你造成伤害。当你再聚能减弱先知诅咒时，你可以自动压制火焰，使再聚能中不因此损失HP。你@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]后火焰亦会平息，但苏醒后会继续弥漫，直到你休息足够长时间，诅咒减弱后才会停歇。和其它先知诅咒相同，你无法用任何方法减少和抵抗因此火焰损失的HP，不过你可以在损失后正常进行治疗。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.GTSvbFb36InvuH0w]</p>\n<h3>焚尽烈焰诅咒 Curse of Engulfing Flames</h3>\n<p>所见之处尽皆烟火。所见烈焰或为想象，或为宇宙间无处不在的超自然异位面火焰——但你能看到它们。火光（并不危险）占据了你的视野，偶尔你身上会飘出烟灰，你的身体总会烫到难以触摸。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>烟尘、热浪和火光占据了你所有的感官的部分。</p>\n<p>30尺外的生物对你来说是@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态。你不会从忽视和削弱隐蔽状态的效果中受益，作为先知诅咒效果处理。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>烟尘和焰尾愈加充斥着你的视界，无害的闪光和火花开始出现在你的周围。</p>\n<p>你对其它生物而言处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，不过因其它生物未受先知诅咒，他们可以正常从忽视和削弱隐蔽状态的效果中受益。所有生物和物品对你来说都无视距离变为隐蔽状态，但当你对30尺内的目标施放火焰法术时，你在因该诅咒产生的隐蔽进行的纯骰检定中自动成功。</p>\n<p>对于30尺外的事物，你的所有感官都会变成模糊感官，意味着30尺外所有生物对你而言都是@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]状态。</p>\n<h4>高阶诅咒（11级）Major Curse (11th)</h4>\n<p>环绕周身的火焰不再是幻觉了。</p>\n<p>你获得一个@Template[emanation|distance:10]范围的火焰灵光，在你的回合结束时，对所有位于灵光范围内的其它生物造成@Damage[4d6[fire]]伤害（基础反射豁免）。每轮你自己回合结束时，你无豁免失去[[/r 1d6]]点HP；若你对火焰有弱点，失去的HP会增加弱点点数。</p>\n<p>你可用一个动作将灵光压制到你下一回合开始，该动作有专注特征，压制后火焰缩小，暂时不会对灵光内的生物和你造成伤害。当你再聚能减弱先知诅咒时，你可以自动压制火焰，使再聚能中不因此损失HP。你@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]后火焰亦会平息，但苏醒后会继续弥漫，直到你休息足够长时间，诅咒减弱后才会停歇。和其它先知诅咒相同，你无法用任何方法减少和抵抗因此火焰损失的HP，不过你可以在损失后正常进行治疗。</p>"
         },
         "Effect: Living Fortification (Parry Trait)": {
             "name": "效果：肉身工事（格挡特征） Living Fortification (Parry Trait)",
@@ -1725,11 +1725,11 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.YRanyv890fLiyaOY]</p>\n<p>你获得等同于御能灵光范围的震颤感知（模糊）。</p>\n<p>13级后震颤感知变为精确感官。</p>"
         },
         "Effect: Favored Terrain (Increase Climb Speed)": {
-            "name": "效果：偏好地形（增加攀爬速度） Favored Terrain (Increase Climb Speed)",
+            "name": "效果：偏好地形（增加攀爬速度）Favored Terrain (Increase Climb Speed)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.sgo7J9BVofBqwlsF]中，如果你有@UUID[Compendium.pf2e.classfeatures.Item.RlwE99yKnhq8FUuy]职业专长，在森林，山地或地底且你已经具有攀爬速度的时候。</p>\n<p>你的攀爬速度获得+10尺状态加值。</p>"
         },
         "Effect: Favored Terrain (Gain Swim Speed)": {
-            "name": "效果：偏好地形（获得游泳速度） Favored Terrain (Gain Swim Speed)",
+            "name": "效果：偏好地形（获得游泳速度）Favored Terrain (Gain Swim Speed)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.sgo7J9BVofBqwlsF]中，如果你有@UUID[Compendium.pf2e.classfeatures.Item.RlwE99yKnhq8FUuy]职业专长，在水域里且你不具有游泳速度的时候。</p>\n<p>你获得等于你速度的游泳速度。</p>"
         },
         "Effect: Sanctify Armament": {
@@ -1738,7 +1738,7 @@
         },
         "Effect: Overdrive Ally (Shared Overdrive)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.U0XX0Mm2MbZcuNK2]</p>\n<p>在一个给定的超载效果期间，你第一次使用超载盟友时，该效果的持续时间即为你的超载的剩余持续时间，而非仅持续到目标的下回合结束。</p>",
-            "name": "效果：超载盟友（共享超载） Overdrive Ally (Shared Overdrive)"
+            "name": "效果：超载盟友（共享超载）Overdrive Ally (Shared Overdrive)"
         },
         "Effect: Divine Infusion": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.JcXzKwrdMkNszrJQ]</p>\n<p>你的近战武器或无武装攻击造成额外伤害。若你施放的是<em>伤害术</em>，则该伤害的类型为虚能，若是<em>治疗术</em>则为命能。</p>",
@@ -1746,23 +1746,23 @@
         },
         "Effect: Expel Maelstrom (Misfortune)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.IV8sgoLO6ShD3DCJ]</p>\n<p>该生物必须在它的下一次豁免骰或技能检定中投骰两次，并选择更低的结果。</p>",
-            "name": "效果：驱逐漩涡（厄运） Expel Maelstrom (Misfortune)"
+            "name": "效果：驱逐漩涡 Expel Maelstrom（厄运）"
         },
         "Effect: Curse of Outpouring Life": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.o1gGG36wpn9mxeop]</p>\n<h3>命数漏尽诅咒 Curse of Outpouring Life</h3>\n<p>生命力从你体内流出，与广袤大众性命相连，消耗你自身的命数。你的出现就能安慰病痛伤患，使恐惧者心安，让新芽生长，周遭的一切都染上了你的生命。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>随着生命开始流出，控制身体运行变得有所困难。应用在你身上的恢复HP的效果，在为你恢复HP时，获得等于你等级一半（最低为1）的状态减值。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>流逝的生命力无法挽回。</p>\n<p>在低阶诅咒效果之外，你无法被来源并非自己的魔法效果治疗。不过，若你失去意识，魔法效果可以将你恢复至1HP（无法更高）。你能正常受到治疗灵药、药水和道具的恢复。</p>\n<p>当你施放@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]且所有目标都是活物时，你可将D8骰替换为D12骰来决定治疗术的效果。</p>\n<p>当你施放完一个非戏法法术后，你可选择法术目标之一或最靠近你的生物之一，恢复等同法术环级的HP。你无法用此法治疗自己。该次治疗拥有治疗、死灵系、命能特征，同时拥有触发法术对应的根源特征。</p>\n<h4>高阶诅咒（11级） Major Curse (11th)</h4>\n<p>生命力的扩散增幅了你的魔力。你的某些法术会附带上命能。</p>\n<p>每当你使用法术位施放一个至少需要2动作的5环级或更高环法术时，溢散出的命能对@Template[burst|distance:30]{30尺爆发范围}造成一个3动作<em>治疗术</em>效果，该<em>治疗术</em>等效环级为你所施放法术的环级-4。这次治疗在你施放法术完毕后立刻生效。你不会从这次治疗中获得恢复，相反，你会失去该次治疗术治疗量双倍的HP。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.o1gGG36wpn9mxeop]</p>\n<h3>命数漏尽诅咒 Curse of Outpouring Life</h3>\n<p>生命力从你体内流出，与广袤大众性命相连，消耗你自身的命数。你的出现就能安慰病痛伤患，使恐惧者心安，让新芽生长，周遭的一切都染上了你的生命。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>随着生命开始流出，控制身体运行变得有所困难。应用在你身上的恢复HP的效果，在为你恢复HP时，获得等于你等级一半（最低为1）的状态减值。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>流逝的生命力无法挽回。</p>\n<p>在低阶诅咒效果之外，你无法被来源并非自己的魔法效果治疗。不过，若你失去意识，魔法效果可以将你恢复至1HP（无法更高）。你能正常受到治疗灵药、药水和道具的恢复。</p>\n<p>当你施放@UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]且所有目标都是活物时，你可将D8骰替换为D12骰来决定治疗术的效果。</p>\n<p>当你施放完一个非戏法法术后，你可选择法术目标之一或最靠近你的生物之一，恢复等同法术环级的HP。你无法用此法治疗自己。该次治疗拥有治疗、死灵系、命能特征，同时拥有触发法术对应的根源特征。</p>\n<h4>高阶诅咒（11级）Major Curse (11th)</h4>\n<p>生命力的扩散增幅了你的魔力。你的某些法术会附带上命能。</p>\n<p>每当你使用法术位施放一个至少需要2动作的5环级或更高环法术时，溢散出的命能对@Template[burst|distance:30]{30尺爆发范围}造成一个3动作<em>治疗术</em>效果，该<em>治疗术</em>等效环级为你所施放法术的环级-4。这次治疗在你施放法术完毕后立刻生效。你不会从这次治疗中获得恢复，相反，你会失去该次治疗术治疗量双倍的HP。</p>",
             "name": "效果：命数漏尽诅咒 Curse of Outpouring Life"
         },
         "Effect: Expel Maelstrom (Success)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.IV8sgoLO6ShD3DCJ]</p>\n<p>该生物在所有豁免骰和技能检定上承受-1状态减值，持续1分钟。</p>",
-            "name": "效果：驱逐漩涡（成功） Expel Maelstrom (Success)"
+            "name": "效果：驱逐漩涡 Expel Maelstrom（成功）"
         },
         "Stance: Desert Wind": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.ti6rPcSBsCuyEHqy]</p>\n<p>当你使用伤害性的 气元素涌动，并且效果至少伤害了1个位于你灵光范围内的生物，该涌动会造成额外的挥砍伤害，如果涌动是单目标的，则该额外挥砍伤害翻倍。</p>",
             "name": "架势：沙漠之风 Desert Wind"
         },
         "Effect: Volatile Grease (Failure)": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.vKFg7HMNu4cCDD8b]</p>\n<p>目标获得火焰弱点2，持续1分钟</p><hr /><p><strong>升阶（+2）</strong> 弱点增加1</p>",
-            "name": "效果：易燃油脂（失败） Volatile Grease (Failure)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.vKFg7HMNu4cCDD8b]</p>\n<p>目标获得火焰弱点2，持续1分钟。</p><hr /><p><strong>升阶（+2）</strong>弱点增加1。</p>",
+            "name": "效果：易燃油脂 Volatile Grease（失败）"
         },
         "Effect: Disrupting Strikes": {
             "name": "效果：瓦解打击 Disrupting Strikes",
@@ -1778,18 +1778,18 @@
         },
         "Effect: Crimson Shroud (AC)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.M2V1vqAziOkWV30B]</p>\n<p>你在AC上获得+1环境加值。</p>",
-            "name": "效果：猩红寿衣（AC） Crimson Shroud (AC)"
+            "name": "效果：猩红寿衣 Crimson Shroud（AC）"
         },
         "Effect: Lava Leap": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.OFCeTaAX99YbXOu0]</p>\n<p>你在AC上获得+2环境加值。</p>",
             "name": "效果：熔岩跳跃 Lava Leap"
         },
         "Effect: Volatile Grease (Success)": {
-            "name": "效果：易燃油脂（成功） Volatile Grease (Success)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.vKFg7HMNu4cCDD8b]</p>\n<p>目标获得火焰弱点2，直到你下一回合结束。</p>\n<hr />\n<p><strong>升阶(+2)</strong> 弱点增加1</p>"
+            "name": "效果：易燃油脂 Volatile Grease（成功）",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.vKFg7HMNu4cCDD8b]</p>\n<p>目标获得火焰弱点2，直到你下一回合结束。</p>\n<hr />\n<p><strong>升阶（+2）</strong>弱点增加1。</p>"
         },
         "Effect: Favored Terrain (Gain Climb Speed)": {
-            "name": "效果：偏好地形（获得攀爬速度） Favored Terrain (Gain Climb Speed)",
+            "name": "效果：偏好地形（获得攀爬速度）Favored Terrain (Gain Climb Speed)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.sgo7J9BVofBqwlsF]中，如果你有@UUID[Compendium.pf2e.classfeatures.Item.RlwE99yKnhq8FUuy]职业专长，在森林，山地或地底且你不具有攀爬速度的时候。</p>\n<p>你获得等同于你的速度的攀爬速度。</p>"
         },
         "Effect: Wyrmblessed Blood Magic": {
@@ -1814,7 +1814,7 @@
         },
         "Effect: Oracular Warning (Initiative)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Gcliatty0MGYbTVV]</p>\n<p>位于你20尺内的每个盟友在他们的先攻检定上获得+2的状态加值。当你在@UUID[Compendium.pf2e.conditionitems.Item.zXZjC8HLaRoLR17U]{咒缚 Cursebound 2}时使用灵性预警，加值提升到+3，如果你在咒缚3时使用，加值提升到+4。</p>",
-            "name": "效果：灵性预警（先攻） Oracular Warning (Initiative)"
+            "name": "效果：灵性预警（先攻）Oracular Warning (Initiative)"
         },
         "Effect: Upstage": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.F0JgJR2rXKOg9k1z]</p>\n<p>你在攻击检定、察觉检定、豁免检定和技能检定上获得+1状态加值，这些加值持续至你的下个回合结束为止。</p>",
@@ -1826,7 +1826,7 @@
         },
         "Effect: Curse of the Perpetual Storm": {
             "name": "效果：风暴秘示域诅咒 Curse of the Perpetual Storm",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.W9cF7wZztLDb1WGY]</p>\n<h3>无尽风暴诅咒 Curse of the Perpetual Storm</h3>\n<p>你就是这个小型风暴的暴风眼，你越是深入使用元素力量，环绕你的雨和风就越强大。即便是休息的时候，你的毛发和衣服也会飘扬而起，浑身潮气，你的触摸也总是带有微弱的电击。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>一股旋风灵光在你周围@Template[emanation|distance:5]{5尺弥漫}范围中不断旋转。在你点燃或靠近小型非魔法火焰1轮后，火焰会自动熄灭。</p>\n<p>这股风雨产生了电能，将你变成了发光棒；你获得2点电击弱点，对穿戴持握金属的目标有额外效果的法术或效果会将你视为穿戴有金属而产生额外效果。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>低阶诅咒的灵光范围扩大到@Template[emanation|distance:10]{10尺弥漫}，且携带有雨水。瞄准你或以你为源点的物理弹药远程攻击因该风雨灵光受到-2环境减值。</p>\n<p>你获得5点或等级一半的电击弱点，取其高者，不过与此同时风雨也提供给你等量的火焰抗力。</p>\n<h4>高阶诅咒（11级） Major Curse (11th)</h4>\n<p>低阶诅咒的灵光范围扩大到了@Template[emanation|distance:15]{15尺弥漫}，愈加强烈。你身上迸发出的风力能够阻止人物靠近。对于站在地面的大型或更小生物而言，和对于飞行的超大或更小生物而言，灵光内为困难地形。你不受自己的灵光困难地形影响。</p>\n<p>你身上的电弧已十分危险，任何触碰（包括法术接触攻击或近战无武装攻击）你的生物都会受到@Damage[1d6[electricity]]伤害。正常来说，这不影响你碰触的生物。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.W9cF7wZztLDb1WGY]</p>\n<h3>无尽风暴诅咒 Curse of the Perpetual Storm</h3>\n<p>你就是这个小型风暴的暴风眼，你越是深入使用元素力量，环绕你的雨和风就越强大。即便是休息的时候，你的毛发和衣服也会飘扬而起，浑身潮气，你的触摸也总是带有微弱的电击。</p>\n<h4>低阶诅咒 Minor Curse</h4>\n<p>一股旋风灵光在你周围@Template[emanation|distance:5]{5尺弥漫}范围中不断旋转。在你点燃或靠近小型非魔法火焰1轮后，火焰会自动熄灭。</p>\n<p>这股风雨产生了电能，将你变成了发光棒；你获得2点电击弱点，对穿戴持握金属的目标有额外效果的法术或效果会将你视为穿戴有金属而产生额外效果。</p>\n<h4>中阶诅咒 Moderate Curse</h4>\n<p>低阶诅咒的灵光范围扩大到@Template[emanation|distance:10]{10尺弥漫}，且携带有雨水。瞄准你或以你为源点的物理弹药远程攻击因该风雨灵光受到-2环境减值。</p>\n<p>你获得5点或等级一半的电击弱点，取其高者，不过与此同时风雨也提供给你等量的火焰抗力。</p>\n<h4>高阶诅咒（11级）Major Curse (11th)</h4>\n<p>低阶诅咒的灵光范围扩大到了@Template[emanation|distance:15]{15尺弥漫}，愈加强烈。你身上迸发出的风力能够阻止人物靠近。对于站在地面的大型或更小生物而言，和对于飞行的超大或更小生物而言，灵光内为困难地形。你不受自己的灵光困难地形影响。</p>\n<p>你身上的电弧已十分危险，任何触碰（包括法术接触攻击或近战无武装攻击）你的生物都会受到@Damage[1d6[electricity]]伤害。正常来说，这不影响你碰触的生物。</p>"
         },
         "Effect: Command Attention": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.N0gJ4Q69nslbdXHg]</p>\n<p>当你尝试豁免检定对抗其他视觉效果时，你会得到比自身投掷出的成功度更好1级的结果。</p>",
@@ -1854,7 +1854,7 @@
         },
         "Effect: Field Discovery (Chirurgeon)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.eNZnx4LISDNftbx2]</p>\n<p>该生物获得等同你智力调整值的临时生命值。</p>",
-            "name": "效果：课题发现（医学专家） Field Discovery (Chirurgeon)"
+            "name": "效果：课题发现（医学专家）Field Discovery (Chirurgeon)"
         },
         "Effect: Gunpowder Gauntlet": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.FbzbZc4LGUTcz9tA]</p>\n<p>你对效果来源以外生物的攻击骰承受-1状态减值。</p>",
@@ -1866,11 +1866,11 @@
         },
         "Effect: Roll the Bones of Fate (Good)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.7Q7HWETkvOM9pYwV]</p>\n<p>你在下一次攻击检定或技能检定上掷骰两次，并取更高的结果。</p>",
-            "name": "效果：掷骨成运（吉） Roll the Bones of Fate (Good)"
+            "name": "效果：掷骨成运（吉）Roll the Bones of Fate (Good)"
         },
         "Effect: Favored Terrain (Increase Swim Speed)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.sgo7J9BVofBqwlsF]中，如果你有@UUID[Compendium.pf2e.classfeatures.Item.RlwE99yKnhq8FUuy]职业专长，在水域里且你已经具有游泳速度的时候。</p>\n<p>你的游泳速度获得+10尺状态加值。</p>",
-            "name": "效果：偏好地形（增加游泳速度） Favored Terrain (Increase Swim Speed)"
+            "name": "效果：偏好地形（增加游泳速度）Favored Terrain (Increase Swim Speed)"
         },
         "Effect: Can't Fall Here": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.XJfUj2o4HdL5waZL]</p>\n<p>你获得等同于来源的等级的临时生命值。</p>",
@@ -1878,7 +1878,7 @@
         },
         "Effect: Expel Maelstrom (Failure or Critical Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.IV8sgoLO6ShD3DCJ]</p>\n<p>该生物在所有豁免骰和技能检定上承受-2状态减值，持续10分钟。</p>",
-            "name": "效果：驱逐漩涡（失败或大失败） Expel Maelstrom (Failure or Critical Failure)"
+            "name": "效果：驱逐漩涡 Expel Maelstrom（失败或大失败）"
         },
         "Stance: Shattershields": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.QOnyOjncnw4tkTQp]</p>\n<p>你和你御能灵光中的盟友在AC上有+1环境加值。</p>",
@@ -1889,7 +1889,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.MFqFvuiYDAoADcft]</p>\n<p>你的所有近战武器和无武装攻击获得10尺触及。</p>"
         },
         "Effect: Aura Junction (Water)": {
-            "name": "效果：灵光汇流（水） Aura Junction (Water)",
+            "name": "效果：灵光汇流（水）Aura Junction (Water)",
             "description": "<p>你获得等于你御能师等级一般的火焰抗力。</p>"
         },
         "Effect: Root Magic": {
@@ -1898,7 +1898,7 @@
         },
         "Effect: Elementalist Dedication": {
             "name": "效果：元素使入门 Elementalist Dedication",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.tx9pkrpmtqe4FnvS]</p>\n<p>每日当你进行日常准备时，能够让自身与一种来自你元素哲学的元素同调。你在对抗与你同调的元素特征的效果造成的伤害时，获得等同于你自身等级一半的抗力（最低1点抗力）。这种同调会持续至你下一次进行日常准备为止。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.tx9pkrpmtqe4FnvS]</p>\n<p>每日当你进行每日准备时，能够让自身与一种来自你元素哲学的元素同调。你在对抗与你同调的元素特征的效果造成的伤害时，获得等同于你自身等级一半的抗力（最低1点抗力）。这种同调会持续至你下一次进行每日准备为止。</p>"
         },
         "Stance: Devrin's Cunning Stance": {
             "name": "架势：德夫林的诡诈架势 Devrin's Cunning Stance",
@@ -1918,11 +1918,11 @@
         },
         "Effect: Aura Junction (Wood)": {
             "description": "<p>任何在灵光中开始回合的盟友都获得1点临时生命值，持续到下个回合开始。如果你有10级或更高，这将增加到2点临时生命值，如果你有15级或更高，这将增加到3点临时生命值。</p>",
-            "name": "效果：灵光汇流（木） Aura Junction (Wood)"
+            "name": "效果：灵光汇流（木）Aura Junction (Wood)"
         },
         "Effect: Aura Junction (Air)": {
             "description": "<p>你在陆地和飞行速度上获得+10尺状态加值。</p>",
-            "name": "效果：灵光汇流（气） Aura Junction (Air)"
+            "name": "效果：灵光汇流（气）Aura Junction (Air)"
         },
         "Stance: Tenacious Stance": {
             "name": "架势：顽强架势 Tenacious Stance",
@@ -1933,7 +1933,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.REgTwIVgI3j1FQiJ]</p>\n<p>在你的下一个回合开始前，你获得对非精金的3点物理抗力。</p>"
         },
         "Effect: Aura Junction (Fire)": {
-            "name": "效果：灵光汇流（火） Aura Junction (Fire)",
+            "name": "效果：灵光汇流（火）Aura Junction (Fire)",
             "description": "<p>你御能灵光内的敌人，对你的火元素涌动拥有火焰弱点。该弱点等于你当前等级的一半（最小弱点1）</p>"
         },
         "Stance: Winter Sleet": {
@@ -1982,7 +1982,7 @@
         },
         "Effect: Aura Junction (Metal)": {
             "description": "<p>金特征的生物在AC上承受-1状态减值。</p>",
-            "name": "效果：灵光汇流（金） Aura Junction (Metal)"
+            "name": "效果：灵光汇流（金）Aura Junction (Metal)"
         },
         "Effect: Spirit's Mercy": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.SPtzUNatWJvTK61y]</p>\n<p>你获得对抗触发效果的命能和虚能伤害抗力（或是在来自作祟或虚体不死生物时给予全伤害抗力）。如果你消耗一缕魂火，抗力等同于你等级的两倍。如果你消耗一缕残魂，抗力等同于你获取残魂来源的虚体不死生物或作祟等级的三倍。</p>",
@@ -2233,7 +2233,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.yg02rHaDPpGSgkrk]</p>\n<p>你获得等于你等级的快速治疗。</p>"
         },
         "Effect: Nanite Surge (Bonus)": {
-            "name": "效果：纳米机械激增（加值） Nanite Surge (Bonus)",
+            "name": "效果：纳米机械激增（加值）Nanite Surge (Bonus)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.JS24EjgLYcHB9E3T]</p>\n<p>你在触发的技能检定上获得+2状态加值。</p>"
         },
         "Effect: Kinetic Aura": {
@@ -2258,7 +2258,7 @@
         },
         "Effect: Predictable! (Saving Throw)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.cErltcAC7OVnIyO1]</p>\n<p>你在对抗目标的下一次豁免骰上获得环境加值。大失败时，你反而获得-1环境减值。</p>",
-            "name": "效果：不出所料！（豁免骰） Predictable! (Saving Throw)"
+            "name": "效果：不出所料！（豁免骰）Predictable! (Saving Throw)"
         },
         "Effect: Strategist Stance": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fJwsZM6WXwP8EStV]</p>\n<p>你的战将灵光使你和你的盟友在反射豁免上获得+1状态加值。</p>",
@@ -2370,7 +2370,7 @@
         },
         "Effect: Surgical Shock (Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zzjfENthtRBAjqjQ]</p>\n<p>你在回合结束前对目标的下一个攻击动作获得+1环境加值。</p>",
-            "name": "效果：休克手术（失败） Surgical Shock (Failure)"
+            "name": "效果：休克手术 Surgical Shock（失败）"
         },
         "Effect: Spell Parry": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.X9AkydrMdFwg7qIn]</p>\n<p>你做好防守姿势，AC和对抗以你为目标的法术的豁免骰获得+1环境加值。</p>",
@@ -2382,7 +2382,7 @@
         },
         "Effect: Ghosts in the Storm (Move)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.ABL4daQ7c65d0tEM]</p>\n<p>你获得隐蔽，且打击获得<em>电击</em>符文。</p>",
-            "name": "效果：风暴之灵（移动） Ghosts in the Storm (Move)"
+            "name": "效果：风暴之灵（移动）Ghosts in the Storm (Move)"
         },
         "Effect: Nymph Blood Magic": {
             "name": "效果：宁芙血统奥秘 Nymph Blood Magic",
@@ -2429,7 +2429,7 @@
             "name": "效果：保湿浴 Moisture Bath"
         },
         "Effect: Boaster's Challenge (Critical Success)": {
-            "name": "效果：嘲讽挑战（大成功） Boaster's Challenge (Critical Success)",
+            "name": "效果：嘲讽挑战（大成功）Boaster's Challenge (Critical Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.UtUT6JngJbQRHySX]</p>\n<p>你对挑战敌人的武器或无武装攻击的伤害骰上获得状态加值。</p>"
         },
         "Effect: Bold Defiance": {
@@ -2501,7 +2501,7 @@
             "name": "效果：星辉变身 Starlit Transformation"
         },
         "Effect: Come and Get Me (Circumstance Bonus)": {
-            "name": "效果：舍命相搏（环境加值） Come and Get Me (Circumstance Bonus)",
+            "name": "效果：舍命相搏（环境加值）Come and Get Me (Circumstance Bonus)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Z9gzWFk3qom2z904]</p>\n<p>你在伤害骰上获得+2环境加值。</p>"
         },
         "Effect: Blessed Swiftness": {
@@ -2509,7 +2509,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.Z6E1O8X7CFcyczB1]</p>\n<p>你因移动而触发敌人的反应动作时，其在对抗该反应的所有防御上获得+2状态加值。</p>"
         },
         "Effect: Come and Get Me (Temporary Hit Points)": {
-            "name": "效果：舍命相搏（临时生命值） Come and Get Me (Temporary Hit Points)",
+            "name": "效果：舍命相搏（临时生命值）Come and Get Me (Temporary Hit Points)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Z9gzWFk3qom2z904]</p>\n<p>你获得等于你体质调整值的临时生命值，重击时翻倍。这些临时生命值持续到你狂暴结束。</p>"
         },
         "Effect: Steel Yourself!": {
@@ -2614,7 +2614,7 @@
         },
         "Effect: Scout (Incredible Scout)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.aFoVHsuInMOkTZoQ]</p>\n<p>你在你的先攻骰上获得+2环境加值。</p>",
-            "name": "效果：侦察（大侦查兵） Scout (Incredible Scout)"
+            "name": "效果：侦察（大侦查兵）Scout (Incredible Scout)"
         },
         "Effect: Victor's Wreath": {
             "name": "效果：胜者的桂冠 Victor's Wreath",
@@ -2634,11 +2634,11 @@
         },
         "Effect: Game Hunter (Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.CowQy8gXP9POjuxq]</p>\n<p>你的速度减少10尺。</p>",
-            "name": "效果：巨兽猎手（失败） Game Hunter (Failure)"
+            "name": "效果：巨兽猎手（失败）Game Hunter (Failure)"
         },
         "Effect: Game Hunter (Critical Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.CowQy8gXP9POjuxq]</p>\n<p>你的速度减少10尺。</p>",
-            "name": "效果：巨兽猎手（大失败） Game Hunter (Critical Failure)"
+            "name": "效果：巨兽猎手（大失败）Game Hunter (Critical Failure)"
         },
         "Effect: Crash Against Me": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Cu7P7NB3XH67mi1N]</p>\n<p>你获得所选伤害类型的等于你等级的抗力。</p>",
@@ -2646,7 +2646,7 @@
         },
         "Effect: Crash Against Me (Clang)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Cu7P7NB3XH67mi1N]</p>\n<p>你陷入措手不及且在用该武器的攻击上承受-2环境减值。</p>",
-            "name": "效果：万毁难敌此身（弹开） Crash Against Me (Clang)"
+            "name": "效果：万毁难敌此身（弹开）Crash Against Me (Clang)"
         },
         "Effect: The Bigger They Are": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.azF1RvMTwCPaJr1F]</p>\n<p>你获得对来源的精准伤害的弱点。</p>",
@@ -2766,7 +2766,7 @@
         },
         "Effect: Mythic Allies (Circumstance Bonus)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Lx7JtAhIn3aJ6WbP]</p>\n<p>你在你下次攻击骰上获得+4环境加值。</p>",
-            "name": "效果：神话盟友（环境加值） Mythic Allies (Circumstance Bonus)"
+            "name": "效果：神话盟友（环境加值）Mythic Allies (Circumstance Bonus)"
         },
         "Effect: Mythic Allies": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Lx7JtAhIn3aJ6WbP]</p>\n<p>你在攻击骰上获得+2的状态加值，在所有防御上获得+2的状态加值，并获得等同于效果来源等级数量的额外生命值。你下一次进行的打击在攻击骰上获得+4的环境加值。</p>",
@@ -2818,7 +2818,7 @@
         },
         "Effect: Divine Invulnerability (Domain Spell)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.frPdltbxoYtAHpPX]</p>\n<p>你获得对所有伤害的等于你等级的抗力。</p>",
-            "name": "效果：神性无瑕（领域法术） Divine Invulnerability (Domain Spell)"
+            "name": "效果：神性无瑕（领域法术）Divine Invulnerability (Domain Spell)"
         },
         "Effect: Amulet's Abeyance": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Or6RLXeoZkN8CLdi]</p>\n<p>你获得对所有伤害的抗力。</p>",
@@ -2845,7 +2845,7 @@
             "name": "效果：额外炼金 Extra Alchemy"
         },
         "Effect: Gird Champion (Hierophant)": {
-            "name": "效果：拔擢神卫（使徒） Gird Champion (Hierophant)",
+            "name": "效果：拔擢神卫（使徒）Gird Champion (Hierophant)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.pGIJ6iXyg2CRzQxb]</p>\n<p>你在处理熟练度时，将效果来源的偏好武器视为简易武器。你获得该武器的重击专精效果并且用该武器的打击额外造成1d6伤害。</p>"
         },
         "Effect: Aegis for the Innocent": {
@@ -2898,10 +2898,10 @@
         },
         "Effect: Fling Magic (Adept Cold)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.04VQuQih77pxX06q]</p>\n<p>你在所有速度上承受-10尺状态减值。</p>",
-            "name": "效果：杖掷（行家寒冷） Fling Magic (Adept Cold)"
+            "name": "效果：杖掷（行家寒冷）Fling Magic (Adept Cold)"
         },
         "Effect: Chalice Adept Benefit (Self)": {
-            "name": "效果：杯行家增益（自身） Chalice Adept Benefit (Self)",
+            "name": "效果：杯行家增益（自身）Chalice Adept Benefit (Self)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.1vgFGSnn0DIBmK7j]</p>\n<p>饮杯的临时生命提升至2+你的魅力调整值+你的等级。治疗量提升至你每个等级5点生命值。</p>"
         },
         "Effect: Tome Adept Benefit": {
@@ -2922,7 +2922,7 @@
         },
         "Effect: Force of Nature (Silver Damage)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.jIL0dobpVmCrmSj1]</p>\n<p>你的快速治疗失效。</p>",
-            "name": "效果：自然之力（银伤害） Force of Nature (Silver Damage)"
+            "name": "效果：自然之力（银伤害）Force of Nature (Silver Damage)"
         },
         "Effect: Chosen Ward": {
             "name": "效果：选定监护 Chosen Ward",
@@ -2942,7 +2942,7 @@
         },
         "Effect: Celestial Armaments (Allies)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.hSm66XVNVjPdbL2c]</p>\n<p>你的武器如同火炬般散发出光亮，并能造成额外1d6精魂伤害，你获得该武器的重击专精效果。</p>",
-            "name": "效果：天界武备（盟友） Celestial Armaments (Allies)"
+            "name": "效果：天界武备（盟友）Celestial Armaments (Allies)"
         },
         "Effect: Abjure Harm": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.oYdfO7j3vnNG7SYN]</p>\n<p>你获得等于你等级的物理伤害抗力。</p>",
@@ -2966,15 +2966,15 @@
         },
         "Effect: Destined Victory (Note)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Q0A9V0zoY7MMXEqE]</p>",
-            "name": "效果：天命决胜（记录） Destined Victory (Note)"
+            "name": "效果：天命决胜（记录）Destined Victory (Note)"
         },
         "Effect: Crash Against Me (Note)": {
-            "name": "效果：万毁难敌此身（记录） Crash Against Me (Note)",
+            "name": "效果：万毁难敌此身（记录）Crash Against Me (Note)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Cu7P7NB3XH67mi1N]</p>"
         },
         "Effect: Creature of Myth (Energy Aegis)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.FQzAifYHaMd9Qf1R]</p>\n<p>你对所选类型的伤害免疫。你在对抗具有所选特征的效果或法术，或对抗具有所选特征的生物时在AC和豁免上获得+1状态加值。</p>",
-            "name": "效果：神话造物（能量之盾） Creature of Myth (Energy Aegis)"
+            "name": "效果：神话造物（能量之盾）Creature of Myth (Energy Aegis)"
         },
         "Effect: Regalia": {
             "name": "效果：帜 Regalia",
@@ -3001,7 +3001,7 @@
             "name": "效果：冷静评估 Unfazed Assessment"
         },
         "Effect: Amulet's Abeyance (Adept)": {
-            "name": "效果：符止（行家） Amulet's Abeyance (Adept)",
+            "name": "效果：符止（行家）Amulet's Abeyance (Adept)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Or6RLXeoZkN8CLdi]</p>\n<p>你选择触发攻击的伤害的一种，获得对其的抗力。</p>"
         },
         "Stance: Immovable Object": {
@@ -3037,7 +3037,7 @@
             "name": "效果：提供故事 Offer Story"
         },
         "Effect: Snap Out of It! (Marshal)": {
-            "name": "效果：振作！（战将） Snap Out of It! (Marshal)",
+            "name": "效果：振作！（战将）Snap Out of It! (Marshal)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zbnL5OP4zVaNFcq8]</p>\n<p>你在意志豁免上获得+1环境加值。</p>"
         },
         "Effect: Coven Spell": {
@@ -3057,8 +3057,8 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.JYi4MnsdFu618hPm]</p>\n<p>你指定了一个生物位你的猎杀目标。</p>"
         },
         "Effect: Ruthless Orator (Enemy)": {
-            "description": "<p>效果来自无情演说家</p>\n<p>你在对抗效果来源的攻击骰和法术攻击骰上承受-2环境减值。</p>",
-            "name": "效果：无情演说家（敌人） Ruthless Orator (Enemy)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.7HZaOlJ43QxkDrmO]</p>\n<p>你在对抗效果来源的攻击骰和法术攻击骰上承受-2环境减值。</p>",
+            "name": "效果：无情演说家（敌人）Ruthless Orator (Enemy)"
         },
         "Effect: Walking the Cardinal Paths": {
             "name": "Effect: Walking the Cardinal Paths",
@@ -3110,7 +3110,7 @@
         },
         "Effect: Lepidstadt Surgeon Dedication (Stop Bleeding)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.8KxcNpQhmUOj3vuV]</p>\n<p>你可以进行两次从持续流血伤害里恢复的纯骰检定并取较高的结果。</p>",
-            "name": "效果：勒彼得外科医生入门（阻止流血） Lepidstadt Surgeon Dedication (Stop Bleeding)"
+            "name": "效果：勒彼得外科医生入门（阻止流血）Lepidstadt Surgeon Dedication (Stop Bleeding)"
         },
         "Effect: Turn Aside Ambient Magic": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.5g0gCXJnUVipYtW0]</p>\n<p>选择酸蚀，寒冷，电击，火焰或音波伤害。直到你的下回合开始，你获得对所选伤害类型的抗力，等同于你等级的一半。</p>",
@@ -3118,7 +3118,7 @@
         },
         "Effect: Terrain Attunement (Gravelands)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Ogso0WqodeFG27L1]</p>\n<p>你在对抗作祟和不死生物的法术和能力时，豁免检定获得+1状态加值。</p>",
-            "name": "效果：地形同调（死坟末土） Terrain Attunement (Gravelands)"
+            "name": "效果：地形同调（死坟末土）Terrain Attunement (Gravelands)"
         },
         "Effect: Glimpse Vulnerability": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Yfl6q6Pi42FttDRE]</p>\n<p>你在对抗效果来源的无武装和武器打击时获得弱点2。</p>",
@@ -3142,7 +3142,7 @@
         },
         "Effect: Rallying Charge (Marshal)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.df4cBV3qZn3qNUmP]</p>\n<p>你获得等于效果来源魅力调整值的临时生命值。</p>",
-            "name": "效果：振奋冲锋（战将） Rallying Charge (Marshal)"
+            "name": "效果：振奋冲锋（战将）Rallying Charge (Marshal)"
         },
         "Effect: Animalistic Brutality": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.L1fnOLZQX68kTmHF]</p>\n<p>你来自兽性狂暴的无武装攻击直到你狂暴结束为止获得以下特征中的一个：回摆，叠劲，格挡，拆毁或横扫。</p>",
@@ -3161,7 +3161,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.ein1K7P51cs3Qusw]</p>\n<p>当你持用一把需要双手且不具有长触及的武器时，该武器获得10尺长触及。</p>"
         },
         "Effect: The Bigger They Are (Commander)": {
-            "name": "效果：以小博大（统帅） The Bigger They Are (Commander)",
+            "name": "效果：以小博大（统帅）The Bigger They Are (Commander)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.Czcdh3pPzQ7y1cV7]</p>\n<p>你在移位，推撞或摔绊的检定上获得环境加值。</p>"
         },
         "Effect: All-Consuming Hunger": {
@@ -3217,7 +3217,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.ZI7TLmmUu7fYLrP0]</p>\n<p>你在你的强韧豁免上承受环境减值。</p>"
         },
         "Effect: Play to the Crowd (Temporary Hit Points)": {
-            "name": "效果：愚弄人群（临时生命值） Play to the Crowd (Temporary Hit Points)",
+            "name": "效果：愚弄人群（临时生命值）Play to the Crowd (Temporary Hit Points)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.KrYvJ5n06yHCipCZ]</p>\n<p>你获得等于你角色等级的临时生命值。</p>"
         },
         "Effect: Called Shot": {
@@ -3226,18 +3226,18 @@
         },
         "Effect: Play to the Crowd (AC Bonus)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.KrYvJ5n06yHCipCZ]</p>\n<p>你在AC上获得+1环境加值。</p>",
-            "name": "效果：愚弄人群（AC加值） Play to the Crowd (AC Bonus)"
+            "name": "效果：愚弄人群（AC加值）Play to the Crowd (AC Bonus)"
         },
         "Effect: Gladiator Dedication": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Dm0YMEvSY0qg0jA0]</p>\n<p>你获得等于你等级的临时生命值。</p>",
             "name": "效果：角斗士入门 Gladiator Dedication"
         },
         "Effect: Targeting Finisher (Critical)": {
-            "name": "效果：狙击终结（重击） Targeting Finisher (Critical)",
+            "name": "效果：狙击终结（重击）Targeting Finisher (Critical)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.DLkMoVb8qb4qxnx3]</p>\n<p>你根据选择的身体部分获得不同效果。</p><ul><li><strong>手臂（或其他用以攻击的肢体，例如触手）</strong> 你力竭1</li><li><strong>头部</strong> 你呆滞1</li><li><strong>腿部</strong> 你在速度上承受-5状态减值</li></ul>"
         },
         "Effect: Soul Well (Additional Damage)": {
-            "name": "效果：灵魂井（额外伤害） Soul Well (Additional Damage)",
+            "name": "效果：灵魂井（额外伤害）Soul Well (Additional Damage)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.B8MKXr7mMzOHhTQH]</p>\n<p>在你下回合结束前，你的灵体匕首会额外造成1个武器骰的伤害。</p>"
         },
         "Effect: Hunter's Aim": {
@@ -3250,10 +3250,10 @@
         },
         "Effect: Share Hunter's Edge (Flurry, Masterful)": {
             "description": "<p>效果来自有@UUID[Compendium.pf2e.feats-srd.Item.AwxJcaIrutqMcUC8]的@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]</p>\n<p>你回合内对标记生物的第二次攻击的多重攻击减值为-2（若用灵巧攻击则为-1）而非通常的-5。该回合第三次或后续攻击为-4（灵巧为-2）而非-10。</p>",
-            "name": "效果：共享猎手优势（连击，大师） Share Hunter's Edge (Flurry, Masterful)"
+            "name": "效果：共享猎手优势（连击，大师）Share Hunter's Edge (Flurry, Masterful)"
         },
         "Effect: Martyr's Parry": {
-            "description": "<p>效果来自殉道者的招架</p>\n<p>你的AC获得+2环境加值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fGwd5g6yHzcyeCG1]</p>\n<p>你的AC获得+2环境加值。</p>",
             "name": "效果：殉道者的招架 Martyr's Parry"
         },
         "Effect: Relinquish Control": {
@@ -3262,7 +3262,7 @@
         },
         "Effect: Play to the Crowd (Attack Roll Bonus)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.KrYvJ5n06yHCipCZ]</p>\n<p>你在你的下次攻击骰上获得+1环境加值。</p>",
-            "name": "效果：愚弄人群（攻击骰加值） Play to the Crowd (Attack Roll Bonus)"
+            "name": "效果：愚弄人群（攻击骰加值）Play to the Crowd (Attack Roll Bonus)"
         },
         "Effect: Tough Cookie": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.RNBr91uB7lX9DldN]</p>\n<p>你获得等于你最大生命值一半的临时生命值，持续1分钟。</p>",
@@ -3321,7 +3321,7 @@
             "name": "效果：信念灵光 Aura of Confidence"
         },
         "Effect: Aesir Blood Magic": {
-            "description": "<p>效果来自血脉：亚萨</p>\n<p>你在反射豁免上获得+2状态加值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.TFihgf3jDhmKd0fa]</p>\n<p>你在反射豁免上获得+2状态加值。</p>",
             "name": "效果：亚萨血统奥秘 Aesir Blood Magic"
         },
         "Effect: Dismal Harvest": {
@@ -3346,14 +3346,14 @@
         },
         "Effect: Share Hunter's Edge (Outwit, Masterful)": {
             "description": "<p>效果来自有@UUID[Compendium.pf2e.feats-srd.Item.AwxJcaIrutqMcUC8]的@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]</p>\n<p>你在欺骗检定，威吓检定，隐秘检定和其他有关标记的生物的回忆知识检定上获得+4环境加值。你在对标记生物的攻击骰以及对抗标记生物攻击的AC上获得+2环境加值。</p>",
-            "name": "效果：共享猎手优势（机智，大师） Share Hunter's Edge (Outwit, Masterful)"
+            "name": "效果：共享猎手优势（机智，大师）Share Hunter's Edge (Outwit, Masterful)"
         },
         "Effect: Called Shot (Critical)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.b7KZ7Fg5u5z2gqvt]</p>\n<p>你根据选择的身体部位获得对应效果</p><ul><li><strong>手部（或者其他由于攻击的肢体，比如触手）</strong> 你力竭1</li><li><strong>头部</strong> 你呆滞1</li><li><strong>腿部</strong> 你在速度上承受-5尺状态减值</li></ul>",
-            "name": "效果：制控射击（重击） Called Shot (Critical)"
+            "name": "效果：制控射击（重击）Called Shot (Critical)"
         },
         "Effect: Grief's Fury": {
-            "description": "<p>效果来自悲恸之怒</p>\n<p>你在对过去1分钟内曾攻击或对你的伙伴造成伤害的生物进行攻击检定时，获得+2状态加值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.S6X3zFOCLVgRY2gd]</p>\n<p>你在对过去1分钟内曾攻击或对你的伙伴造成伤害的生物进行攻击检定时，获得+2状态加值。</p>",
             "name": "效果：悲恸之怒 Grief's Fury"
         },
         "Effect: Plant Banner": {
@@ -3365,27 +3365,27 @@
             "name": "效果：海军训练 Naval Training"
         },
         "Effect: Share Hunter's Edge (Vindication)": {
-            "name": "效果：共享猎手优势（卫道者） Share Hunter's Edge (Vindication)",
+            "name": "效果：共享猎手优势（卫道者）Share Hunter's Edge (Vindication)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]，@UUID[Compendium.pf2e.feats-srd.Item.Aqhsx5duEpBgaPB0]，@UUID[Compendium.pf2e.feats-srd.Item.EHorYedQ8r05qAtk]，@UUID[Compendium.pf2e.feats-srd.Item.oHra9QanDFpAZ4hh]</p>\n<p>你在对标记生物的法术攻击骰上获得+1状态加值。其在对抗你施放的神术法术的豁免骰上承受-1状态减值。</p>"
         },
         "Effect: Share Hunter's Edge (Precision, Masterful)": {
-            "name": "效果：共享猎手优势（精准，大师） Share Hunter's Edge (Precision, Masterful)",
+            "name": "效果：共享猎手优势（精准，大师）Share Hunter's Edge (Precision, Masterful)",
             "description": "<p>效果来自有@UUID[Compendium.pf2e.feats-srd.Item.AwxJcaIrutqMcUC8]的@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]</p>\n<p>你每轮第一次命中标记生物时，你额外造成2d8精准伤害。19级时，额外伤害增加到3d8。</p>\n<p>你每轮第二次命中标记生物时，你也造成1d8精准伤害。19级时，额外伤害增加到2d8，且第三次命中时也能额外造成1d8精准伤害。</p>"
         },
         "Effect: Share Hunter's Edge (Outwit)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]，@UUID[Compendium.pf2e.feats-srd.Item.Aqhsx5duEpBgaPB0]，@UUID[Compendium.pf2e.feats-srd.Item.EHorYedQ8r05qAtk]，@UUID[Compendium.pf2e.feats-srd.Item.oHra9QanDFpAZ4hh]</p>\n<p>你在对标记生物的欺骗，威吓，隐秘和回忆知识检定上获得+2环境加值。在对标记生物的攻击骰以及对抗标记生物攻击的AC上获得+1环境加值。</p>",
-            "name": "效果：共享猎手优势（机智） Share Hunter's Edge (Outwit)"
+            "name": "效果：共享猎手优势（机智）Share Hunter's Edge (Outwit)"
         },
         "Effect: Share Hunter's Edge (Precision)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]，@UUID[Compendium.pf2e.feats-srd.Item.Aqhsx5duEpBgaPB0]，@UUID[Compendium.pf2e.feats-srd.Item.EHorYedQ8r05qAtk]，@UUID[Compendium.pf2e.feats-srd.Item.oHra9QanDFpAZ4hh]</p>\n<p>每轮第一次你命中标记生物时，你额外造成1d8精准伤害。11级时额外伤害提升至2d8，19级时提升至3d8。</p>",
-            "name": "效果：共享猎手优势（精准） Share Hunter's Edge (Precision)"
+            "name": "效果：共享猎手优势（精准）Share Hunter's Edge (Precision)"
         },
         "Effect: Shield Paragon Benefit": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.Swy3rjQsdO0wu2kU]</p>\n<p>你在AC上获得效果来源的盾牌的环境加值。</p>",
             "name": "效果：盾模范增益 Shield Paragon Benefit"
         },
         "Effect: Change Shape (Werecreature)": {
-            "name": "效果：化形（化形生物） Change Shape (Werecreature)",
+            "name": "效果：化形（化形生物）Change Shape (Werecreature)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.actionspf2e.Item.34E7k2YRcsOU5uyl]</p>\n<p>你变为你的混合或动物形态。你的装备随你变形且继续提供加值，但你的动物形态不能使用武器，盾牌或是其他需要持用的物品，且不能使用操作动作。你根据你的化形类型获得对应的移动速度，无武装攻击或其他能力。这些无武装攻击属于搏击武器组。你可以解消效果来恢复你的类人形态。如果你生命值降为0，你自动恢复你的类人形态。</p>"
         },
         "Effect: Sympathetic Strike": {
@@ -3422,7 +3422,7 @@
         },
         "Effect: Hunt the Razer's Pawn (Ephemeral)": {
             "description": "<p>临时效果</p>\n<p>你在对抗效果来源的法术或效果的豁免上承受-1环境减值。如果其有圣洁特征，减值提升至-2。</p>",
-            "name": "效果：猎杀毁木者的爪牙（临时） Hunt the Razer's Pawn (Ephemeral)"
+            "name": "效果：猎杀毁木者的爪牙（临时）Hunt the Razer's Pawn (Ephemeral)"
         },
         "Effect: Lesson of the Broken Wing": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.CyvXimmSlpbOlBhX]</p>\n<p>你过你是效果来源，你在对抗标记生物的打击的AC上承受-1减值。否则，你在对抗该生物的打击上获得+1环境加值。</p>",
@@ -3457,7 +3457,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.d2InKGKNEdVnPfNf]</p>\n<p>选择一项：</p><ul><li><p>你无法获得环境或状态加值。</p></li><li><p>你获得10点精魂弱点。</p></li></ul>"
         },
         "Effect: Share Hunter's Edge (Flurry)": {
-            "name": "效果：共享猎手优势（连击） Share Hunter's Edge (Flurry)",
+            "name": "效果：共享猎手优势（连击）Share Hunter's Edge (Flurry)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1JnERVwnPtX620f2]，@UUID[Compendium.pf2e.feats-srd.Item.Aqhsx5duEpBgaPB0]，@UUID[Compendium.pf2e.feats-srd.Item.EHorYedQ8r05qAtk]，@UUID[Compendium.pf2e.feats-srd.Item.oHra9QanDFpAZ4hh]</p>\n<p>你回合内对标记生物的第二下攻击的多重攻击减值为-3（灵巧则为-2）而非通常的-5，第三下及以后的攻击为-6（灵巧为-4）而非通常的-10。</p>"
         },
         "Effect: Even the Odds": {
@@ -3542,7 +3542,7 @@
         },
         "Effect: Panache (Temporary)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.TnYHtN9gQASqOnii]，@UUID[Compendium.pf2e.feats-srd.Item.WcY7H7mRiK2VDquV]，@UUID[Compendium.pf2e.feats-srd.Item.C5tSxOwDILefw4zq]，@UUID[Compendium.pf2e.feats-srd.Item.DkoxNw9tsFFXrfJY]，@UUID[Compendium.pf2e.feats-srd.Item.YJIzE2RhGRGfbt9j]，以及虚势动作失败时。</p>\n<p>你获得派头。</p>",
-            "name": "效果：派头（临时） Panache (Temporary)"
+            "name": "效果：派头（临时）Panache (Temporary)"
         },
         "Effect: Consume Power": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.2pJhI6FL9hvXhXUZ]</p>\n<p>你的金元素涌动的伤害获得等于你等级一半的状态加值。</p>",
@@ -3566,14 +3566,14 @@
         },
         "Effect: Even the Odds (Eagle Knight)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.ccLpjnWjl62Ehegc]</p>\n<p>你获得25点临时生命值。</p>",
-            "name": "效果：扭转劣势（雄鹰骑士） Even the Odds (Eagle Knight)"
+            "name": "效果：扭转劣势（雄鹰骑士）Even the Odds (Eagle Knight)"
         },
         "Effect: Blood and Spirit": {
-            "description": "<p>效果来自血与灵</p>\n<p>选举一把你正在持用的一把穿刺或挥砍武器。你以此武器发动的打击造成额外1d6点精魂伤害，该伤害的附带特征为圣洁或邪秽，取决于你所选的特征。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.iqgAmntmu3udEgEI]</p>\n<p>选举一把你正在持用的一把穿刺或挥砍武器。你以此武器发动的打击造成额外1d6点精魂伤害，该伤害的附带特征为圣洁或邪秽，取决于你所选的特征。</p>",
             "name": "效果：血与灵 Blood and Spirit"
         },
         "Effect: Energize Bite": {
-            "description": "<p>效果来自赋能咬击</p>\n<p>你的颚无武装攻击额外造成1d6点伤害，伤害类型与你的龙类庇主相匹配。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.3Xc0jsbXBsF4FSui]</p>\n<p>你的颚无武装攻击额外造成1d6点伤害，伤害类型与你的龙类庇主相匹配。</p>",
             "name": "效果：赋能咬击 Energize Bite"
         },
         "Effect: Trance of Celerity": {
@@ -3613,7 +3613,7 @@
             "name": "灵光：愤怒威势 Wrathful Presence"
         },
         "Effect: Hell's Bane": {
-            "description": "<p>When you critically succeed at a skill check to Recall Knowledge about a devil or Hellknight, you gain a +4 status bonus to damage against that creature for 1 minute.</p>",
+            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.0YtidWmL4GTpONkq]{Hell's Bane}</p>\n<p>You gain a +4 status bonus to damage against the marked creature.</p>",
             "name": "Effect: Hell's Bane"
         },
         "Effect: Mineral Deposits": {
@@ -3627,20 +3627,20 @@
             "name": "效果：预知未来 Prescience"
         },
         "Effect: Sheltering Wing": {
-            "description": "<p>效果来自翼庇</p>\n<p>你在AC和对抗法术的豁免骰上获得+1环境加值。如果你有龙之飞行专长，加值增加为+2。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.iY08DGiUW8MVBR5k]</p>\n<p>你在AC和对抗法术的豁免骰上获得+1环境加值。如果你有龙之飞行专长，加值增加为+2。</p>",
             "name": "效果：翼庇 Sheltering Wing"
         },
         "Effect: Edict of Mortality": {
-            "description": "<p>Grabted by Edict of Mortality</p>\n<p>if you attempt to Cast a Spell with the divine trait, you must succeed at a flat check or the action is lost.</p>",
-            "name": "Effect: Edict of Mortality"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.pYYSLNUWGMYxYNkG]</p>\n<p>如果你尝试施放一个神术特征的法术，你必须成功通过一个纯骰检定否则丢失该动作。</p>",
+            "name": "效果：凡躯敕令 Edict of Mortality"
         },
         "Effect: Form a Flock": {
-            "description": "<p>效果来自聚集成群</p>\n<p>你陷入目眩</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.VaxsPPPsgXzNxQVI]</p>\n<p>你陷入目眩</p>",
             "name": "效果：聚集成群 Form a Flock"
         },
         "Effect: Watch Your Back (Golden Legionnaire)": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zZCyJhsaugHB6mZW]</p>\n<p>你不会因夹击而陷入<a class=\"content-link\" draggable=\"true\" data-link=\"\" data-uuid=\"Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg\" data-id=\"AJh5ex99aV6VTggg\" data-type=\"Item\" data-pack=\"pf2e.conditionitems\" data-tooltip=\"Item\" data-tooltip-text=\"Condition Item\">措手不及</a>。</p>",
-            "name": "Effect: Watch Your Back (Golden Legionnaire)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.zZCyJhsaugHB6mZW]</p>\n<p>你不会因夹击而陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]。</p>",
+            "name": "效果：小心背后（黄金军团）Watch Your Back (Golden Legionnaire)"
         },
         "Stance: Anchor Stance": {
             "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.9nT7E44aTosTrzhb]{Anchor Stance}</p>\n<p>You gain a +2 circumstance bonus to your Fortitude or Reflex DC against attempts to Reposition or Shove you. This bonus also applies to saving throws against spells or effects that attempt to force you to move.</p>",
@@ -3651,8 +3651,8 @@
             "name": "效果：剥皮切割 Flensing Slice"
         },
         "Effect: Rose Warden Dedication": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.LlV0KHIebzdczgyD]{Rose Warden Dedication}</p>\n<p>You gain a +1 circumstance bonus to your Fortitude DC and saving throws against being confused, controlled, grabbed, immobilized, or restrained by a figure of authority</p>",
-            "name": "Effect: Rose Warden Dedication"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.LlV0KHIebzdczgyD]</p>\n<p>你在强韧DC以及对抗该当权者使你陷入困惑、被控制、受擒、禁足或束缚状态的豁免检定上获得+1环境加值。</p>",
+            "name": "效果：玫瑰卫士入门 Rose Warden Dedication"
         },
         "Effect: Resounding Cascade": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.mB7ENhF10qoOwQyG]</p>\n<p>你散发5尺弥漫的灵光。如果你不是效果来源，你的近战打击造成额外伤害，伤害类型和效果来源的奥术奔涌伤害相同。</p>",
@@ -3663,12 +3663,12 @@
             "name": "效果：紧急医疗援助 Emergency Medical Assistance"
         },
         "Effect: Rend Armor": {
-            "description": "<p>The creature takes a –2 circumstance penalty to their AC that lasts until they can take 10 minutes to repair their armor. The creature can also Interact to adjust their armor, which removes this penalty for 1 minute.</p>",
+            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Q35r2ssLpGUBRksE]{Rend Armor}</p>\n<p>You take a –2 circumstance penalty to your AC.</p>",
             "name": "Effect: Rend Armor"
         },
         "Effect: Gather Disciples": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.O5EQnF6Iqs8uD64X]{Gather Disciples}</p>\n<p>You gain a +2 circumstance bonus to the first skill check you attempt when acting on the favor.</p>",
-            "name": "Effect: Gather Disciples"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.O5EQnF6Iqs8uD64X]</p>\n<p>你在进行的首次技能检定上获得+2环境加值。</p>",
+            "name": "效果：聚集信徒 Gather Disciples"
         },
         "Effect: Pearl Dragonet Breath": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.RaqjaXp2miOq4Bis]</p>\n<p>如果效果来源的吐息给予好运，你在下次攻击骰或技能检定上获得+1状态加值。如果效果来源的吐息给予厄运，你在下次攻击骰或技能检定上承受-1状态减值。</p>",
@@ -3684,7 +3684,7 @@
         },
         "Effect: Aldori Swordlord (Temporary Hit Points)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.BEgz2GnG2MKmmaZX]</p>\n<p>你获得临时生命值。</p>",
-            "name": "效果：奥多里剑爵（临时生命值） Aldori Swordlord (Temporary Hit Points)"
+            "name": "效果：奥多里剑爵（临时生命值）Aldori Swordlord (Temporary Hit Points)"
         },
         "Effect: Dedication of the Five": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.UHejQS4uCNGRI45t]</p>\n<p>你获得等于你聚能法术环级两倍的临时生命值。</p>",
@@ -3692,14 +3692,14 @@
         },
         "Effect: Panache (Ephemeral Note)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.TnYHtN9gQASqOnii]，@UUID[Compendium.pf2e.feats-srd.Item.WcY7H7mRiK2VDquV]，为临时效果</p>\n<p>如果你的打击未命中，则效果来源获得派头。</p>",
-            "name": "效果：派头（临时效果） Panache (Ephemeral Note)"
+            "name": "效果：派头（临时效果）Panache (Ephemeral Note)"
         },
         "Effect: Extravagant Parry": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.WcY7H7mRiK2VDquV]</p>\n<p>你在AC上获得+1环境加值，持续到你下回合开始。如果你有一支空闲手或正持握一把带有格挡特征的武器，则加值变为+2。</p>",
             "name": "效果：奢华拨挡 Extravagant Parry"
         },
         "Effect: High Alert": {
-            "description": "<p>You gain a +1 circumstance bonus to their AC and Reflex saving throws against devils and creatures allied with the Chelaxian government (as determined by the GM) until the beginning of your next turn.</p>",
+            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Ilh66megcbP7ahMN]{High Alert}</p>\n<p>You gain a +1 circumstance bonus to your AC and Reflex saving throws against devils and creatures allied with the Chelaxian government (as determined by the GM).</p>",
             "name": "Effect: High Alert"
         },
         "Effect: Unbreaking Castle": {
@@ -3707,15 +3707,15 @@
             "name": "效果：固若金汤 Unbreaking Castle"
         },
         "Effect: Such a Disgrace!": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.ACVze8hUm9L5Slrg]{Such a Disgrace!}</p>\n<p>You gain a +1 circumstance bonus to reroll a Will saving throw.</p>",
-            "name": "Effect: Such a Disgrace!"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.ACVze8hUm9L5Slrg]</p>\n<p>你在重骰的意志豁免上获得+1环境加值。</p>",
+            "name": "效果：真是失礼！ Such a Disgrace!"
         },
         "Effect: Bloom Cabaret Entrance": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.bgchp6d8tRwo1Uj2]{Bloom Cabaret Entrance}</p>\n<p>You gain a +2 circumstance bonus to the first Deception, Diplomacy, or Intimidation check you attempt.</p>",
-            "name": "Effect: Bloom Cabaret Entrance"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.bgchp6d8tRwo1Uj2]</p>\n<p>你在第一次欺骗，交涉或威吓检定上获得+2环境加值。</p>",
+            "name": "效果：盛放卡巴莱式登场 Bloom Cabaret Entrance"
         },
         "Effect: Whose Cry is Thunder": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.pgqhlWAJ18FXaHeO]</p>\n<p>当你充满电流时，任何触碰你或是用非武装攻击或非长触及近战武器伤害了你的生物承受1d6电击伤害。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.classfeatures.Item.pgqhlWAJ18FXaHeO]</p>\n<p>当你充满电流时，任何触碰你或是用无武装攻击或非长触及近战武器伤害了你的生物承受1d6电击伤害。</p>",
             "name": "效果：雷震天声 Whose Cry is Thunder"
         },
         "Effect: Trailblazing Stride": {
@@ -3723,12 +3723,12 @@
             "name": "效果：开拓步伐 Trailblazing Stride"
         },
         "Effect: Iomedae's Valor (AC Bonus)": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.RmAl2BfBkFj8RC1S]{Iomedae's Valor}</p>\n<p>You gain a +1 status bonus to AC.</p>",
-            "name": "Effect: Iomedae's Valor (AC Bonus)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.RmAl2BfBkFj8RC1S]</p>\n<p>你的AC获得+1状态加值。</p>",
+            "name": "效果：艾奥梅黛之英勇（AC加值）Iomedae's Valor (AC Bonus)"
         },
         "Effect: Liberated Mind": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.kF7dYvDYcoBABmLA]{Liberated Mind}</p>\n<p>You gain a +2 status bonus to reroll a saving throw to avoid the confused or controlled conditions.</p>",
-            "name": "Effect: Liberated Mind"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.kF7dYvDYcoBABmLA]</p>\n<p>你在回避困惑或控制状态的重骰豁免上获得+2状态加值。</p>",
+            "name": "效果：自由之心 Liberated Mind"
         },
         "Effect: Righteous Resistance": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.Kz4E8heU12IGcYoi]</p>",
@@ -3747,32 +3747,40 @@
             "name": "效果：终命生息契约 Pact of the Final Breath"
         },
         "Aura: Form a Flock": {
-            "description": "<p>效果来自聚集成群</p>\n<p>你获得一个10尺弥漫灵光，25点临时生命值，以及对范围伤害和溅射伤害的5点弱点。灵光里的敌人陷入目眩。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.VaxsPPPsgXzNxQVI]</p>\n<p>你获得一个10尺弥漫灵光，25点临时生命值，以及对范围伤害和溅射伤害的5点弱点。灵光里的敌人陷入目眩。</p>",
             "name": "灵光：聚集成群 Form a Flock"
         },
         "Effect: Hellbreaker's Resolve": {
-            "description": "<p>Granted by Hellbreaker's Resolve.</p>\n<p>You gain a number of temporary Hit Points equal to your level that last for 1 minute. While you have those temporary Hit Points, you gain a +1 status bonus to Will saves.</p>",
+            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.24LBBYT1op52Pm4J]{Hellbreaker's Resolve}</p>\n<p>You gain a number of temporary Hit Points equal to your level. While you have those temporary Hit Points, you gain a +1 status bonus to Will saves.</p>",
             "name": "Effect: Hellbreaker's Resolve"
         },
         "Effect: Starstone Aspirant Dedication": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.2tF5kSGaSEmhQg1i]{Starstone Aspirant Dedication}</p>\n<p>You can choose a skill you're untrained in. You can attempt skill actions that normally require you to be trained in that skill, and you gain a circumstance bonus to checks with that skill.</p>",
-            "name": "Effect: Starstone Aspirant Dedication"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.2tF5kSGaSEmhQg1i]</p>\n<p>选择一项你未受训的技能。你可以尝试通常要求你受训于该技能才能进行的技能动作，并且该技能的检定获得环境加值。</p>",
+            "name": "效果：星石誓愿者入门 Starstone Aspirant Dedication"
         },
         "Effect: Sense Iniquity": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.3XFKXB3ffeIkrQYe]</p>\n<p>你在对抗[[/act create-a-diversion]]，[[/act feint]]或[[/act lie]]的察觉DC上获得+2状态加值。在此期间，若你以[[/act seek]]来定位藏匿的生物、或者用于看穿生物的@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]尝试时，会在察觉检定中获得+2点状态加值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.3XFKXB3ffeIkrQYe]</p>\n<p>你在对抗@UUID[Compendium.pf2e.actionspf2e.Item.GkmbTGfg8KcgynOA]，@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]或@UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]的察觉DC上获得+2状态加值。在此期间，若你以@UUID[Compendium.pf2e.actionspf2e.Item.BlAOM2X92SI6HMtJ]来定位@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]的生物、或者用于看穿生物的@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]尝试时，会在察觉检定中获得+2状态加值。</p>",
             "name": "效果：感知罪孽 Sense Iniquity"
         },
         "Effect: Rise Up!": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.fOwArAHixZsrpUMM]{Rise Up!}</p>\n<p>You gain a fly Speed equal to their Speed or 20 feet, whichever is greater.</p>",
-            "name": "Effect: Rise Up!"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.fOwArAHixZsrpUMM]</p>\n<p>你获得等于你原速度或20尺的飞行速度（取较高者）。</p>",
+            "name": "效果：起义！ Rise Up!"
         },
         "Effect: Size Up": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.actionspf2e.Item.b7yAKSmZ7famsENr]{Size Up}</p>\n<p>You gain a +2 circumstance bonus to Perception checks when you Sense the Motive of your focus and a +2 circumstance bonus to your Perception DC should your focus attempt to Lie or Feint against you. You gain a +2 circumstance bonus to Deception, Diplomacy, and Intimidation checks against your focus</p>",
+            "description": "<p>Granted by @UUID[Compendium.pf2e.actionspf2e.Item.b7yAKSmZ7famsENr]{Size Up}</p>\n<p>You gain a +2 circumstance bonus to Perception checks when you Sense the Motive of your focus and a +2 circumstance bonus to your Perception DC should your focus attempt to Lie or Feint against you. You gain a +2 circumstance bonus to Deception, Diplomacy, and Intimidation checks against your focus.</p>",
             "name": "Effect: Size Up"
         },
         "Effect: Iomedae's Valor (Temporary Hit Points)": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.RmAl2BfBkFj8RC1S]{Iomedae's Valor}</p>\n<p>You gain a number of temporary Hit Points equal to your level.</p>",
-            "name": "Effect: Iomedae's Valor (Temporary Hit Points)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.RmAl2BfBkFj8RC1S]</p>\n<p>你获得等于你等级的临时生命值。</p>",
+            "name": "效果：艾奥梅黛之英勇（临时生命值）Iomedae's Valor (Temporary Hit Points)"
+        },
+        "Effect: Commitment to Protection": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.gCUJYnWPQ9VM8eXk]</p>\n<p>你在对抗目标的下次攻击时AC获得一个环境加值或减值。</p>",
+            "name": "效果：守护誓言 Commitment to Protection"
+        },
+        "Effect: Commitment to Protection (Lasting Protection)": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.7JneFz4asWtotVfy]</p>\n<p>你在对抗目标的下一次攻击时AC获得环境加值或减值。</p>",
+            "name": "效果：守护誓言（持久护卫）Commitment to Protection (Lasting Protection)"
         }
     }
 }

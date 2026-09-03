@@ -13,7 +13,7 @@
                     "name": "妖鬼热 Ghast Fever"
                 },
                 "Paralysis": {
-                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:22]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>",
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:22|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>",
                     "name": "麻痹 Paralysis"
                 },
                 "Swift Leap": {
@@ -68,7 +68,7 @@
             "items": {
                 "Power of the Haunt": {
                     "name": "作祟之力 Power of the Haunt",
-                    "description": "<p>如果一个阴魂位于一个并未被解除或摧毁的作祟100尺内，它的AC会获得+2状态加值，且啃咬打击额外造成@Damage[1d6[void]]伤害。一个成功通过@Check[perception|dc:20|traits:action:seek]检定来进行搜索基本动作或回忆知识技能动作的生物，会看到阴魂斗篷上的触手越接近作祟就会变得越浓密而躁动。</p>"
+                    "description": "<p>如果一个阴魂位于一个并未被解除或摧毁的作祟100尺内，它的AC会获得+2状态加值，且啃咬打击额外造成@Damage[1d6[void]]伤害。一个成功通过@Check[perception|dc:20|traits:action:seek]检定来进行搜索基础动作或回忆知识技能动作的生物，会看到阴魂斗篷上的触手越接近作祟就会变得越浓密而躁动。</p>"
                 },
                 "Void Healing": {
                     "name": "虚能治疗 Void Healing",
@@ -164,10 +164,10 @@
             "blurb": "变体蛇人白骨先知"
         },
         "Divine Warden Of Haagenti": {
-            "publicNotes": "<p>这具神圣守卫服务于@UUID[Compendium.pf2e.deities.Item.9EKyWmjLUu42evxC]，中立的魔法之神。它使用它的神圣馈赠来守护内西斯的庙宇或神龛。</p>\n<hr />\n<p>神圣守卫是宗教信徒通过复杂的仪式创造的，被灌注了某个特定神祇的神卫或牧师的一部分能量。这神圣的火花允许神圣守卫作为庙宇、神殿或其他圣地的保护者。这些守卫者本质上并非被束缚在一个固定的地点，但很少离开它们看守之处。</p>\n<p>大部分神圣守卫是用黏土、石头、木头或类似的材料制成的，通常具有神祇或神使的特征。神圣守卫通常具有那些构装体所具有常见特征，例如装甲板、伪装成雕像的能力，或其他类似的好处。</p>\n<p>制作神圣守卫的忠实信徒通常会使用一种特殊的仪式来激活构装体，在这种仪式中，追随者恳求他们的神祇赐予神圣守卫力量。这种由神祇赋予的神圣使命也允许哨兵识别其神祇的敌人，并防止构装体攻击其他相同信仰的信徒，除非这些守护者先受到对方的攻击。</p>\n<p>在极少数情况下或特别危急的时刻，神明可能会通过直接激活现有的雕像或构装体来创造神圣守卫去帮助忠实的追随者。这些神圣守卫最有可能离开它们初始的位置，协助那些流离失所的会众或追捕可能伤害信徒的人。</p>",
+            "publicNotes": "<p>这具神圣守卫服务于@UUID[Compendium.pf2e.deities.Item.9EKyWmjLUu42evxC]，中立的魔法之神。它使用它的神圣馈赠来守护内希斯的庙宇或神龛。</p>\n<hr />\n<p>神圣守卫是宗教信徒通过复杂的仪式创造的，被灌注了某个特定神祇的神卫或牧师的一部分能量。这神圣的火花允许神圣守卫作为庙宇、神殿或其他圣地的保护者。这些守卫者本质上并非被束缚在一个固定的地点，但很少离开它们看守之处。</p>\n<p>大部分神圣守卫是用黏土、石头、木头或类似的材料制成的，通常具有神祇或神使的特征。神圣守卫通常具有那些构装体所具有常见特征，例如装甲板、伪装成雕像的能力，或其他类似的好处。</p>\n<p>制作神圣守卫的忠实信徒通常会使用一种特殊的仪式来激活构装体，在这种仪式中，追随者恳求他们的神祇赐予神圣守卫力量。这种由神祇赋予的神圣使命也允许哨兵识别其神祇的敌人，并防止构装体攻击其他相同信仰的信徒，除非这些守护者先受到对方的攻击。</p>\n<p>在极少数情况下或特别危急的时刻，神明可能会通过直接激活现有的雕像或构装体来创造神圣守卫去帮助忠实的追随者。这些神圣守卫最有可能离开它们初始的位置，协助那些流离失所的会众或追捕可能伤害信徒的人。</p>",
             "items": {
                 "Divine Destruction": {
-                    "description": "<p>当神圣守卫的生命值减少至0时，它在@Template[emanation|distance:30]范围内爆发出神圣能量，造成@Damage[4d6[void]|options:area-damage]伤害。范围内的每个生物都必须尝试一次@Check[will|dc:17|options:area-effect,damaging-effect]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物受到一半伤害。</p>\n<p><strong>成功</strong> 生物受到全伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害，并且受到守护神的临时诅咒。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1日；这是一个诅咒效果，使用神圣守卫的意志DC作为其反制DC。</p>\n<p><strong>大失败</strong> 类似失败，只是生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>",
+                    "description": "<p>当神圣守卫的生命值减少至0时，它在@Template[emanation|distance:30]范围内爆发出神圣能量，造成@Damage[4d6[void]|options:area-damage]伤害。范围内的每个生物都必须尝试一次@Check[will|dc:17|options:area-effect,damaging-effect,inflicts:enfeebled,inflicts:stupefied]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 生物受到一半伤害。</p>\n<p><strong>成功</strong> 生物受到全伤害。</p>\n<p><strong>失败</strong> 生物受到全伤害，并且受到守护神的临时诅咒。该生物陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续1日；这是一个诅咒效果，使用神圣守卫的意志DC作为其反制DC。</p>\n<p><strong>大失败</strong> 类似失败，只是生物会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}。</p>",
                     "name": "神圣毁灭 Divine Destruction"
                 },
                 "Instrument of Faith": {
@@ -176,7 +176,7 @@
                 },
                 "Faith Bound": {
                     "name": "信仰束缚 Faith Bound",
-                    "description": "<p>神圣守卫无法攻击那些公开穿戴或展示其守护神圣徽的生物，除非该生物先对神圣守护者做出敌对动作。如果神圣守卫具有智慧，它也可能会对那些它认为信仰不够虔诚或仅仅是穿戴圣徽来骗自己的生物发动攻击（通常是通过一次察觉检定来进行@UUID[Compendium.pf2e.actionspf2e.Item.1xRFPTFtWtGJ9ELw]动作）。</p>"
+                    "description": "<p>神圣守卫无法攻击那些公开穿戴或展示其守护神圣徽的生物，除非该生物先对神圣守护者做出敌对动作。如果神圣守卫具有智慧，它也可能会对那些它认为信仰不够虔诚或仅仅是穿戴圣徽来骗自己的生物发动攻击（通常是通过一次察觉检定来[[/act sense-motive]]）。</p>"
                 },
                 "Faithful Weapon": {
                     "name": "信仰武器 Faithful Weapon",
@@ -248,7 +248,7 @@
                 },
                 "Mindfog Aura": {
                     "name": "迷心灵光 Mindfog Aura",
-                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:25]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。姆诺戈斯能以一个带有专注特征的单动作启动或压制此灵光。</p>"
+                    "description": "<p>20尺。在灵光范围内开始回合的生物必须通过@Check[will|dc:25|options:area-effect,inflicts:confused]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]1轮；如果成功，该生物对此临时免疫1分钟。姆诺戈斯能以一个带有专注特征的单动作启动或压制此灵光。</p>"
                 },
                 "Seugathi Venom": {
                     "description": "<p><strong>豁免检定</strong> @Check[fortitude|dc:28]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}（1轮）</p>",
@@ -396,7 +396,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "镰牙长腿蛛 Sicklefang Longlegs",
-            "publicNotes": "<p>镰牙长腿蛛的体型比巨型长腿蛛还要大一些，因其异常巨大、弯曲的颚部而得名，它们用颚部以致命的高效来给猎物放血。</p>\n<hr />\n<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多（Taldor）聚居地的地下，而在西边的切利亚斯（Cheliax），体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原（The Mwangi EXPanse）。</p>"
+            "publicNotes": "<p>镰牙长腿蛛的体型比巨型长腿蛛还要大一些，因其异常巨大、弯曲的颚部而得名，它们用颚部以致命的高效来给猎物放血。</p>\n<hr />\n<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多聚居地的地下，而在西边的切利亚斯，体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原。</p>"
         },
         "Isphinn": {
             "publicNotes": "<p>土巨灵诞生自土元素位面，是骄傲且坚硬的巨灵。他们重视身体技巧，喜欢讨价还价，概率游戏，以及金工和石工。</p>\n<hr />\n<p>在凡人有史之前，巨灵是物质宇宙中最早拥有自由意志的造物之一。他们由元素物质组成，他们行遍物质宇宙和六大元素位面：气、土、火、金、水还有木。随着时间的推移，留在每个元素位面的巨灵发现他们的物质被这些元素所取代。金元素的金巨灵和木元素的木巨灵则见元素之怒。</p>",
@@ -414,7 +414,7 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Push]</p>"
                 },
                 "Tremorsense (Imprecise) 60 feet": {
-                    "name": "震颤感知（模糊） 60尺 Tremorsense (Imprecise) 60 feet",
+                    "name": "震颤感知（模糊）60尺 Tremorsense (Imprecise) 60 feet",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
                 "Constant Spells": {
@@ -502,7 +502,7 @@
             "blurb": "男性人类战士",
             "items": {
                 "equipment-Clockwork Songbird Component (Legs & Tail)": {
-                    "name": "发条鸣鸟部件（腿&尾巴） Clockwork Songbird Component (Legs & Tail)"
+                    "name": "发条鸣鸟部件（腿&尾巴）Clockwork Songbird Component (Legs & Tail)"
                 },
                 "Attack of Opportunity": {
                     "name": "反应打击 Reactive Strike",
@@ -514,11 +514,11 @@
                 },
                 "Exacting Strike": {
                     "name": "精确打击 Exacting Strike",
-                    "description": "<p>切图斯进行1次打击，如果这次打击失败，这次攻击不计入他的多重攻击减值。</p>"
+                    "description": "<p>切图斯进行一次打击，如果这次打击失败，这次攻击不计入他的多重攻击减值。</p>"
                 },
                 "Lunge": {
                     "name": "突刺 Lunge",
-                    "description": "<p>切图斯用他的拳头进行1次打击，此次打击的触及范围提升5尺。</p>"
+                    "description": "<p>切图斯用他的拳头进行一次打击，此次打击的触及范围提升5尺。</p>"
                 },
                 "Pummeling Flurry": {
                     "name": "碎拳连击 Pummeling Flurry",
@@ -657,7 +657,7 @@
                     "name": "提取恐惧 Extract Fear"
                 },
                 "Focus Gaze": {
-                    "description": "<p>天蛾人将它的视线放到30尺内它能看到的一个生物上。该目标必须立即尝试一次意志豁免以对抗天蛾人的不详注视（Portentous Gaze）。</p>\n<p>如果该生物在尝试此豁免时已经处于惊惧状态，则在失败时，它在惊惧效果之外，还会额外陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续24小时。</p>\n<p>尝试豁免后，该生物临时免疫1分钟。</p>",
+                    "description": "<p>天蛾人将它的视线放到30尺内它能看到的一个生物上。该目标必须立即尝试一次意志豁免以对抗天蛾人的不详注视（Portentous Gaze）。</p>\n<p>如果该生物在尝试此豁免时已经处于@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]状态，则在失败时，它在惊惧效果之外，还会额外陷入@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}，持续24小时。</p>\n<p>尝试豁免后，该生物临时免疫1分钟。</p>",
                     "name": "集中视线 Focus Gaze"
                 },
                 "Change Shape": {
@@ -749,7 +749,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:25]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:25|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "description": "<p>妖鬼能跳跃至多自身速度一半的距离。这次移动不会触发反应动作。</p>",
@@ -786,7 +786,7 @@
                     "description": "<p>真菌暴君可以与所有形态的真菌对话，无论是真菌生物还是其他的真菌。大多数普通真菌无法识别生物的细节，也不了解它们周围以外的世界。真菌暴君在对真菌生物进行欺骗、交涉或威吓检定时会获得+3环境加值。</p>"
                 },
                 "Create Spawn": {
-                    "description": "<p>如果一个生物因为一个真菌暴君的噬智之吻降至0生命值后死亡，真菌暴君可以将自己的一些真菌物质转移给受害者，让他们在一块真菌中\"熟成\"24小时，从而将受害者变成孢子奴仆。24小时后，该生物将重获新生，但会获得真菌特征并成为孢子奴仆。这将阻止生物的灵魂进入来世，其方式与不死生物被带出轮回的方式类似—因此，那些将轮回奉为神圣的人（尤其是法莱斯玛（Pharasma）的信徒）认为孢子奴仆与不死生物一样糟糕，尽管它们是活着的生物。如果这个新孢子奴仆的等级低于它的创造者，那么它就会受到创造者的控制。如果真菌暴君同时控制了太多的孢子奴仆（由GM决定），意志坚强的孢子奴仆可以通过@Check[will|dc:28]豁免检定来解放自己。通常情况下，真菌暴君会避免从那些强大到无法控制的倒下的敌人中制造孢子奴仆，因为他们非常清楚这些受害者可能会对剥夺了他们来世的人怀有复仇的冲动。</p>",
+                    "description": "<p>如果一个生物因为一个真菌暴君的噬智之吻降至0生命值后死亡，真菌暴君可以将自己的一些真菌物质转移给受害者，让他们在一块真菌中\"熟成\"24小时，从而将受害者变成孢子奴仆。24小时后，该生物将重获新生，但会获得真菌特征并成为孢子奴仆。这将阻止生物的灵魂进入来世，其方式与不死生物被带出轮回的方式类似—因此，那些将轮回奉为神圣的人（尤其是法莱斯玛的信徒）认为孢子奴仆与不死生物一样糟糕，尽管它们是活着的生物。如果这个新孢子奴仆的等级低于它的创造者，那么它就会受到创造者的控制。如果真菌暴君同时控制了太多的孢子奴仆（由GM决定），意志坚强的孢子奴仆可以通过@Check[will|dc:28]豁免检定来解放自己。通常情况下，真菌暴君会避免从那些强大到无法控制的倒下的敌人中制造孢子奴仆，因为他们非常清楚这些受害者可能会对剥夺了他们来世的人怀有复仇的冲动。</p>",
                     "name": "创造子嗣 Create Spawn"
                 },
                 "Grow Sporepod": {
@@ -886,7 +886,7 @@
         },
         "Ziradini": {
             "name": "齐拉迪尼 Ziradini",
-            "blurb": "男性颠儒牧师",
+            "blurb": "男性癫儒牧师",
             "items": {
                 "Vulnerable to Sunlight": {
                     "name": "阳光易伤 Vulnerable to Sunlight",
@@ -941,7 +941,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "蝇魔 Coloxus",
-            "publicNotes": "<p>虽然蝇魔长着怪物般的像苍蝇一样的狰狞头颅，但这些恶魔却非常勤快、爱干净，总是穿着时尚的衣服，身上没有一点瑕疵。蝇魔是操盘手和阴谋家，诞生于极端虚荣的灵魂。恶人们喜欢让他们担任使者或间谍，但他们也是出色的杀手。即使是作为谋杀者，蝇魔也装模做样地保持着礼貌与端庄，沉醉于在得体礼仪的掩盖下持续如此滔天罪行的讽刺意味，就好像这是一种精致的交涉活动一样。</p>\n<h2>污物之敌 Enemies Of Filth</h2>\n<p>在深渊（Abyss）中，污物往往是随处可见的，因此蝇魔特别渴望被召唤离开深渊，到更干净的环境中继续他们的邪恶事业。当使用<em>异界盟友</em>或<em>异界誓缚</em>召唤蝇魔时，将它召唤到一个干净的环境中，并保证不会强迫它在肮脏的条件下工作，可能会让你更容易和蝇魔议价。根据GM的裁定，蝇魔可能会同意为你服务更长时间，或者以比正常情况更低的代价为你服务。</p>",
+            "publicNotes": "<p>虽然蝇魔长着怪物般的像苍蝇一样的狰狞头颅，但这些恶魔却非常勤快、爱干净，总是穿着时尚的衣服，身上没有一点瑕疵。蝇魔是操盘手和阴谋家，诞生于极端虚荣的灵魂。恶人们喜欢让他们担任使者或间谍，但他们也是出色的杀手。即使是作为谋杀者，蝇魔也装模做样地保持着礼貌与端庄，沉醉于在得体礼仪的掩盖下持续如此滔天罪行的讽刺意味，就好像这是一种精致的交涉活动一样。</p>\n<h2>污物之敌 Enemies Of Filth</h2>\n<p>在深渊中，污物往往是随处可见的，因此蝇魔特别渴望被召唤离开深渊，到更干净的环境中继续他们的邪恶事业。当使用<em>异界盟友</em>或<em>异界誓缚</em>召唤蝇魔时，将它召唤到一个干净的环境中，并保证不会强迫它在肮脏的条件下工作，可能会让你更容易和蝇魔议价。根据GM的裁定，蝇魔可能会同意为你服务更长时间，或者以比正常情况更低的代价为你服务。</p>",
             "allSaves": "对抗魔法的全豁免+1状态加值"
         },
         "Iazmilor": {
@@ -1248,7 +1248,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:32]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的生物在受到妖鬼的攻击时必须成功通过@Check[fortitude|dc:32|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 }
             }
         },
@@ -1341,7 +1341,7 @@
             "ac": "（破损时19）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 7)": {
-                    "name": "构装护甲（硬度7） Construct Armor (Hardness 7)",
+                    "name": "构装护甲 Construct Armor（硬度7）",
                     "description": "<p>与普通的物体一样，活化雕像同样拥有硬度。硬度可以减少其所受到的任何伤害，其数值等同于硬度的数值。</p>\n<p>一旦活化雕像的生命值降低至一半以下，或是受到重击伤害后，其构装护甲将会破损，其AC降低至15。</p>"
                 }
             },
@@ -1383,7 +1383,7 @@
             "hp": "虚能治疗",
             "items": {
                 "Consume Flesh": {
-                    "description": "<p><strong>需求</strong> 食尸鬼与刚死亡1小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取1次生命值恢复。</p>",
+                    "description": "<p><strong>需求</strong> 食尸鬼与刚死亡1小时内的生物尸体相邻</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取一次生命值恢复。</p>",
                     "name": "啃食尸体 Consume Flesh"
                 },
                 "Ghoul Fever": {
@@ -1392,7 +1392,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:21]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:21|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "name": "迅捷跳跃 Swift Leap",
@@ -1422,7 +1422,7 @@
                 },
                 "Devastating Blast": {
                     "name": "毁灭爆震 Devastating Blast",
-                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]的能量。区域内的生物承受@Damage[4d12[fire]|options:area-damage]伤害，进行@Check[reflex|dc:24|basic|options:area-effect]豁免。</p>\n<p>死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]轮只能使用该能力1次。</p>"
+                    "description": "<p>死墓骑士释放出@Template[cone|distance:30]的能量。区域内的生物承受@Damage[4d12[fire]|options:area-damage]伤害，进行@Check[reflex|dc:24|basic|options:area-effect]豁免。</p>\n<p>死墓骑士每[[/gmr 1d4 #Recharge Devastating Blast]]轮只能使用该能力一次。</p>"
                 },
                 "Dogslicer Cruelty": {
                     "name": "犬刃残暴 Dogslicer Cruelty",
@@ -1488,7 +1488,7 @@
                 },
                 "Distracting Whistle": {
                     "name": "干扰哨声 Distracting Whistle",
-                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 图奇的哨声具有一种特殊效果，能使声音在别处显现，从而可能分散敌人的注意力。图奇可以选择他视线范围内30尺内的一个目标，该目标必须进行一次@Check[will|dc:22]豁免检定，否则将因听起来似乎来自其背后的干扰哨声而陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，这种状态将持续到图奇的下一个回合开始。之后，该目标将在1小时内对干扰哨声技能暂时免疫。</p>"
+                    "description": "<p><strong>频率</strong> 每轮一次</p>\n<hr />\n<p><strong>效果</strong> 图奇的哨声具有一种特殊效果，能使声音在别处显现，从而可能分散敌人的注意力。图奇可以选择他视线范围内30尺内的一个目标，该目标必须进行一次@Check[will|dc:22]豁免检定，否则将因听起来似乎来自其背后的干扰哨声而陷入@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]状态，这种状态将持续到图奇的下一个回合开始。之后，该目标将在1小时内对干扰哨声技能临时免疫。</p>"
                 }
             }
         },
@@ -1573,7 +1573,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:15]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:15|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Swift Leap": {
                     "name": "迅捷跳跃 Swift Leap",
@@ -1681,7 +1681,7 @@
                 },
                 "Rip and Tear": {
                     "name": "连撕带咬 Rip and Tear",
-                    "description": "<p>豪达格以任意顺序作出2次爪抓打击和1次啃咬打击。</p>"
+                    "description": "<p>豪达格以任意顺序作出2次爪抓打击和一次啃咬打击。</p>"
                 },
                 "Sickly": {
                     "name": "虚弱 Sickly",
@@ -1701,7 +1701,7 @@
             "data": {
                 "placeHolder": "placeHolder"
             },
-            "publicNotes": "<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<hr />\n<p>虽然这些看起来令人不安的蛛形纲动物（在当地被称为收割者（Harvesters）、痒痒蛛（Tickle Spiders）或长腿爸爸（Daddy Longlegs））的小体型品种是无害的，但它们更大的表亲，也就是人们所熟知的长腿蛛，却并非如此。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多（Taldor）聚居地的地下，而在西边的切利亚斯（Cheliax），体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原（The Mwangi EXPanse）。</p>",
+            "publicNotes": "<p>长腿蛛中最广为人知的是巨型长腿蛛，这种动物的身体和狗一样大，削瘦的长腿让它看起来更加吓人。</p>\n<hr />\n<p>虽然这些看起来令人不安的蛛形纲动物（在当地被称为收割者（Harvesters）、痒痒蛛（Tickle Spiders）或长腿爸爸（Daddy Longlegs））的小体型品种是无害的，但它们更大的表亲，也就是人们所熟知的长腿蛛，却并非如此。</p>\n<h2>长腿蛛的品种 Longlegs Species</h2>\n<p>除了这里介绍的两种常见类型外，在格拉利昂还能找到许多其他种类的长腿蛛，但极地地区除外，因为在那里长腿蛛无法生存。它们通常生活在城市的外围，潜伏在下水道或废墟中，因为那里很适合捕猎。下水道长腿蛛群（Swarms Of Sewer Longlegs）尤其危险，它们出没于许多塔尔多聚居地的地下，而在西边的切利亚斯，体型大得多的刽子手长腿蛛（Executor Longlegs）更喜欢生活在斯戎家族高压统治下的贫民窟屋顶上。不过，在所有长腿蛛中，体型最大的是可怕（幸好很少见）的树脚收割者（Treeleg Harvester），这种长腿蛛分布在芒吉莽原。</p>",
             "items": {
                 "Cluster": {
                     "name": "群聚 Cluster",
@@ -1942,9 +1942,14 @@
         "allSaves": "system.attributes.allSaves.value",
         "senses": "system.traits.senses.value",
         "hp": "system.attributes.hp.details",
+        "disable": "system.details.disable",
+        "hazarddescription": "system.details.description",
+        "reset": "system.details.reset",
+        "routine": "system.details.routine",
         "blurb": "system.details.blurb",
         "speed": "system.attributes.speed.details",
         "languages": "system.traits.languages.custom",
+        "stealthdetails": "system.attributes.stealth.details",
         "ac": "system.attributes.ac.details",
         "di": "system.traits.di.custom",
         "prototypeToken": {

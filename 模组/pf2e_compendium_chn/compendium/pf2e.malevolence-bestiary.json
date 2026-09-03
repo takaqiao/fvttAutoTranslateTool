@@ -61,7 +61,7 @@
                 },
                 "Soul Cage": {
                     "name": "灵魂囚笼 Soul Cage",
-                    "description": "<p>被疯狂乱啄击中的虚体不死生物必须尝试一次@Check[will|dc:30]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 不死生物不受影响且在24 小时内临时免疫。</p>\n<p><strong>成功</strong> 不死生物的速度在1 轮内遭受-10 尺状态减值。</p>\n<p><strong>失败</strong> 类似成功，但是不死生物陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]1轮，它可以尝试一次逃脱检定（DC30）。</p>\n<p><strong>大失败</strong> 不死生物被束缚1 轮。悲苦鸦群可以尝试携带@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的不死生物进行异界传送，即使是在对方非自愿的情况下。非自愿的不死生物能尝试一次意志豁免来抵抗@UUID[Compendium.pf2e.spells-srd.Item.5bTt2CvYHPvaR7QQ]。如果成功，悲苦鸦群自身进行异界传送，但是不死生物将被留在原地，并且不再被束缚。</p>"
+                    "description": "<p>被疯狂乱啄击中的虚体不死生物必须尝试一次@Check[will|dc:30]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 不死生物不受影响且在24 小时内临时免疫。</p>\n<p><strong>成功</strong> 不死生物的速度在1轮内遭受-10 尺状态减值。</p>\n<p><strong>失败</strong> 类似成功，但是不死生物陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]1轮，它可以尝试一次逃脱检定（DC30）。</p>\n<p><strong>大失败</strong> 不死生物被束缚1轮。悲苦鸦群可以尝试携带@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]的不死生物进行异界传送，即使是在对方非自愿的情况下。非自愿的不死生物能尝试一次意志豁免来抵抗@UUID[Compendium.pf2e.spells-srd.Item.5bTt2CvYHPvaR7QQ]。如果成功，悲苦鸦群自身进行异界传送，但是不死生物将被留在原地，并且不再被束缚。</p>"
                 },
                 "+1 Status to All Saves vs. Magic": {
                     "name": "对魔法的豁免+1状态加值 +1 Status to All Saves vs. Magic"
@@ -88,7 +88,7 @@
                 },
                 "Aura of Sobs": {
                     "name": "啜泣灵光 Aura of Sobs",
-                    "description": "<p>10尺。安尼托里·诺斯特莱玛用偷来声音将自己围绕。进入灵光范围或在灵光范围内开始回合的每个生物都必须通过@Check[will|dc:21]豁免，否则会变得紧张不安，痛苦的啜泣让他们心烦意乱，只要它们一直呆在灵光范围内就获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}效果。豁免成功的生物在小时内对灵光临时免疫。</p>\n<p>安尼托里·诺斯特莱玛可以通过一个自由动作启动或关闭灵光，此动作具有专注特性。</p>"
+                    "description": "<p>10尺。安尼托里·诺斯特莱玛用偷来声音将自己围绕。进入灵光范围或在灵光范围内开始回合的每个生物都必须通过@Check[will|dc:21]豁免，否则会变得紧张不安，痛苦的啜泣让他们心烦意乱，只要它们一直呆在灵光范围内就获得@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}效果。豁免成功的生物在小时内对灵光临时免疫。</p>\n<p>安尼托里·诺斯特莱玛可以通过一个自由动作启动或关闭灵光，此动作具有专注特征。</p>"
                 },
                 "Steal Breath": {
                     "name": "偷窃呼吸 Steal Breath",
@@ -115,7 +115,7 @@
             "disable": "<p>@Check[performance|dc:21|name:Distract the Haunt]（受训）来分散鬼魂的注意力，并娱乐他们，直到它被安抚，或者@Check[religion|dc:25|name:Exorcise Haunt]（受训）来驱除作祟。</p>",
             "hazarddescription": "<p>一对幽灵青少年，即夏尔文双胞胎，痛苦地喊叫着，同时他们的脑子被复位到头里。仿佛创伤发生了逆转，他们最初的痛苦消失了，表现出对玩耍的渴望。</p>",
             "reset": "<p>作祟在被打败后1小时自动重置，或在该区域没有活物可供玩耍后自动重置。从E9 区的集脑怪雕像中取出马尼和米拉的大脑，就能摧毁作祟。</p>",
-            "routine": "<p>（2 个动作）建筑师（米拉·夏尔文）使用“回忆束缚”使得一名随机目标周围涌现出一个类似房子的、由固体外质构成的怪异笼子。这栋房子与目标生活长大的家有着惊人的相似程度。然后猎人（马尼·夏尔文）尝试对该目标进行狩猎射击来打击目标。</p>",
+            "routine": "<p>（2动作）建筑师（米拉·夏尔文）使用“回忆束缚”使得一名随机目标周围涌现出一个类似房子的、由固体外质构成的怪异笼子。这栋房子与目标生活长大的家有着惊人的相似程度。然后猎人（马尼·夏尔文）尝试对该目标进行狩猎射击来打击目标。</p>",
             "items": {
                 "Brain Pain": {
                     "name": "脑痛 Brain Pain",
@@ -147,7 +147,7 @@
             "items": {
                 "Psychopomp Dirge": {
                     "name": "招魂者挽歌 Psychopomp Dirge",
-                    "description": "<p><strong>触发</strong> 三个或更多生物进入D2区，或者任何人试图收集或摧毁鸟的残骸。</p>\n<hr />\n<p><strong>效果</strong> 腐尸漩涡使D2区域充满了听起来像成千上万只三声夜莺鸟的叫声，但这种嘈杂声在这间房间之外是听不到的。D2 区的生物必须尝试一次@Check[will|dc:21]豁免（法莱斯玛的信徒或那些与招魂者有联系的人在这次豁免中获得+4 环境加值）。然后，作祟骰先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该PC 理解了这首哀歌也是一种警告和对赦免的绝望请求。该PC可以感知到D5和E4区腐化招魂者的存在，如同受到定位术影响，持续24 小时。只要这个效果持续存在，角色在对这些区域的腐化招魂者进行的攻击检定、豁免和技能检定中获得+1状态加值。</p>\n<p><strong>成功</strong> 同大成功一样，但定位术只持续10 分钟。该生物因内心充满悲伤和绝望的感觉而受到@Damage[2d8[mental]]伤害。</p>\n<p><strong>失败</strong> 该生物因内心充满悲伤和绝望的感觉而受到@Damage[4d8[mental]]伤害。</p>\n<p><strong>大失败</strong> 该生物因内心充满悲伤和绝望情绪而受到@Damage[6d8[mental]]伤害，并且只要作祟仍处于激活状态，并且他们仍在D2区域，该角色获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，因为他们要被迫每轮用一个动作啜泣。</p>"
+                    "description": "<p><strong>触发</strong> 三个或更多生物进入D2区，或者任何人试图收集或摧毁鸟的残骸。</p>\n<hr />\n<p><strong>效果</strong> 腐尸漩涡使D2区域充满了听起来像成千上万只三声夜莺鸟的叫声，但这种嘈杂声在这间房间之外是听不到的。D2 区的生物必须尝试一次@Check[will|dc:21]豁免（法莱斯玛的信徒或那些与招魂者有联系的人在这次豁免中获得+4 环境加值）。然后，作祟骰先攻。</p>\n<hr />\n<p><strong>大成功</strong> 该PC 理解了这首哀歌也是一种警告和对赦免的绝望请求。该PC可以感知到D5和E4区腐化招魂者的存在，如同受到定位术影响，持续24小时。只要这个效果持续存在，角色在对这些区域的腐化招魂者进行的攻击检定、豁免和技能检定中获得+1状态加值。</p>\n<p><strong>成功</strong> 同大成功一样，但定位术只持续10分钟。该生物因内心充满悲伤和绝望的感觉而受到@Damage[2d8[mental]]伤害。</p>\n<p><strong>失败</strong> 该生物因内心充满悲伤和绝望的感觉而受到@Damage[4d8[mental]]伤害。</p>\n<p><strong>大失败</strong> 该生物因内心充满悲伤和绝望情绪而受到@Damage[6d8[mental]]伤害，并且只要作祟仍处于激活状态，并且他们仍在D2区域，该角色获得@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，因为他们要被迫每轮用一个动作啜泣。</p>"
                 }
             },
             "data": {
@@ -189,7 +189,7 @@
             "items": {
                 "Consume Flesh": {
                     "name": "啃食尸体 Consume Flesh",
-                    "description": "<p><strong>需求</strong> 埃斯波克食尸鬼与刚死亡1小时内的生物尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取1次生命值恢复。</p>"
+                    "description": "<p><strong>需求</strong> 埃斯波克食尸鬼与刚死亡1小时内的生物尸体相邻。</p>\n<hr />\n<p><strong>效果</strong> 食尸鬼吞食一大块尸体并恢复@Damage[3d6[healing]]生命值。</p>\n<p>食尸鬼从每具尸体上只能获取一次生命值恢复。</p>"
                 },
                 "Corrupted Touch": {
                     "name": "腐化之触 Corrupted Touch",
@@ -201,7 +201,7 @@
                 },
                 "Paralysis": {
                     "name": "麻痹 Paralysis",
-                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:22]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。</p>\n<p>被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
+                    "description": "<p>任意活着的、非精灵生物在受到食尸鬼的攻击时必须成功通过@Check[fortitude|dc:22|options:inflicts:paralyzed]豁免，失败则会陷入@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]。</p>\n<p>被麻痹的生物可以在自己的每个回合结束时尝试一次新的豁免，每次此豁免的DC都会递减1点。</p>"
                 },
                 "Pounce": {
                     "name": "猛扑 Pounce",
@@ -262,7 +262,7 @@
                 },
                 "Incite Insurrection": {
                     "name": "鼓动叛乱 Incite Insurrection",
-                    "description": "<p><strong>触发</strong> 一个在约瑟夫30 尺范围内的生物对抗他的法术时豁免检定失败。</p>\n<hr />\n<p><strong>效果</strong> 约瑟夫将他死亡的痛苦注入法术的魔力。除了触发法术自身所造成的任何影响外，目标还必须尝试@Check[fortitude|dc:28|traits:disease]豁免，失败就会感染五内俱乱阶段1（大失败则为阶段2）。</p>\n<p><strong>五内俱乱</strong> （疾病）；<strong>7级</strong></p>\n<p>目标无法移除笨拙状态，除非该疾病被治愈。</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1天）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} 和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]（1天）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3} and@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]（1天）</p>\n<p><strong>阶段5</strong> 并且目标的身体在临死前会裂成一大堆碎肉各自向10 尺弥漫范围扩散，只剩下一具倒在血泊中的骸骨。</p>"
+                    "description": "<p><strong>触发</strong> 一个在约瑟夫30 尺范围内的生物对抗他的法术时豁免检定失败。</p>\n<hr />\n<p><strong>效果</strong> 约瑟夫将他死亡的痛苦注入法术的魔力。除了触发法术自身所造成的任何影响外，目标还必须尝试@Check[fortitude|dc:28|traits:disease]豁免，失败就会感染五内俱乱阶段1（大失败则为阶段2）。</p>\n<p><strong>五内俱乱</strong>（疾病）；<strong>7级</strong></p>\n<p>目标无法移除笨拙状态，除非该疾病被治愈。</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}（1天）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}（1天）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2} 和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]（1天）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 3} and@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]（1天）</p>\n<p><strong>阶段5</strong> 并且目标的身体在临死前会裂成一大堆碎肉各自向10 尺弥漫范围扩散，只剩下一具倒在血泊中的骸骨。</p>"
                 },
                 "Malevolent Possession": {
                     "name": "恶意占据 Malevolent Possession",
@@ -302,7 +302,7 @@
                 },
                 "Eviscerate": {
                     "name": "摘除内脏 Eviscerate",
-                    "description": "<p>伊西里兹米德向一个被擒抱或束缚，或是处于禁足状态的生物施展一次迅速而痛苦的手术，尝试一次@Check[medicine|defense:fortitude]检定对抗目标的强韧DC 。无论结果如何，目标都将暂时免疫24小时。</p>\n<hr />\n<p><strong>大成功</strong> 目标受到@Damage[8d6[slashing]]伤害，陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 一轮，且24小时内陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，或是@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（由米戈选择）。</p>\n<p><strong>成功</strong> 目标受到@Damage[5d6[slashing]]伤害且因为疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}一轮。</p>\n<p><strong>失败</strong> 目标受到@Damage[3d6[slashing]]伤害。</p>\n<p><strong>大失败</strong> 目标不受伤害。</p>"
+                    "description": "<p>伊西里兹米德向一个被擒抱或束缚，或是处于禁足状态的生物施展一次迅速而痛苦的手术，尝试一次@Check[medicine|defense:fortitude]检定对抗目标的强韧DC 。无论结果如何，目标都将临时免疫24小时。</p>\n<hr />\n<p><strong>大成功</strong> 目标受到@Damage[8d6[slashing]]伤害，陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1} 一轮，且24小时内陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}、@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}，或是@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 1}（由米戈选择）。</p>\n<p><strong>成功</strong> 目标受到@Damage[5d6[slashing]]伤害且因为疼痛而陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}一轮。</p>\n<p><strong>失败</strong> 目标受到@Damage[3d6[slashing]]伤害。</p>\n<p><strong>大失败</strong> 目标不受伤害。</p>"
                 },
                 "Tremorsense (Precise) 30 feet": {
                     "name": "震颤感知（精确感官）30尺 Tremorsense (Precise) 30 feet",
@@ -380,6 +380,9 @@
                 "Void Healing": {
                     "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "equipment-Key Ring": {
+                    "name": "Key Ring"
                 }
             },
             "data": {
@@ -401,15 +404,15 @@
                 },
                 "Ectoplasmic Filament": {
                     "name": "灵质纤维 Ectoplasmic Filament",
-                    "description": "<p><strong>触发</strong> 一个在纠缠骨堆触及范围内的生物，进行一个带有操作或移动特征的动作，或在移动过程中离开一个方格。</p>\n<hr />\n<p><strong>效果</strong> 一条黑色的沾满了油的灵质纤维猛击触发的生物，造成@Damage[(2d8+8)[slashing]]伤害（@Check[reflex|dc:25|basic]豁免）。如果纤维造成伤害，缠结骨堆获得[[/r 2d8 #Temporary Hit Points]]临时生命值。</p>"
+                    "description": "<p><strong>触发</strong> 一个在纠缠骨堆触及范围内的生物，进行一个带有操作或移动特征的动作，或在移动过程中离开一个方格。</p>\n<hr />\n<p><strong>效果</strong> 一条黑色的沾满了油的灵质纤维猛击触发的生物，造成@Damage[(2d8+8)[slashing]]伤害（@Check[reflex|dc:25|basic]豁免）。如果纤维造成伤害，缠结骨堆获得[[/gmr 2d8 #Temporary Hit Points]]临时生命值。</p>"
                 },
                 "Eerie Flexibility": {
                     "name": "怪诞弹性 Eerie Flexibility",
-                    "description": "<p>缠结骨堆可以调整自己的外形来适应更狭小的空间。这能让它在通过狭小空间时被视作中型生物。当它挤入时，能以满速度移动。</p>"
+                    "description": "<p>缠结骨堆可以调整自己的外形来适应更狭小的空间。这能让它在通过狭小空间时被视作中型生物。当它@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]时，能以满速度移动。</p>"
                 },
                 "Gnaw": {
                     "name": "啃噬 Gnaw",
-                    "description": "<p><strong>需求</strong> 纠缠骨堆擒抱一个敌人；</p>\n<hr />\n<p><strong>效果</strong>纠缠骨堆用它的众多骨头啃咬被擒抱的敌人，造成@Damage[(2d6+8)[piercing]]伤害（@Check[fortitude|dc:23|basic]豁免）。如果大失败，生物还会因为疼痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
+                    "description": "<p><strong>需求</strong> 纠缠骨堆擒抱一个敌人；</p>\n<hr />\n<p><strong>效果</strong>纠缠骨堆用它的众多骨头啃咬被擒抱的敌人，造成@Damage[(2d6+8)[piercing]]伤害（@Check[fortitude|dc:23|basic|options:inflicts:sickened]豁免）。如果大失败，生物还会因为疼痛陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。</p>"
                 },
                 "Skeletal Storm": {
                     "name": "骸骨风暴 Skeletal Storm",
@@ -525,7 +528,7 @@
             "disable": "<p>@Check[religion|dc:25|name:Exorcise Painting]检定可以驱除其中一幅画（大成功可以同时驱除所有的画），或者@Check[thievery|dc:21|name:Cover a Painting|traits:action:disable-a-device]迅速用斗篷盖住一幅画，或者把它取下并转过去面对墙。</p>",
             "hazarddescription": "<p>画作突然开始流血，位置在约瑟夫夏尔文的左手腕处，其他三位夏尔文则是穿过眉毛的一条线，同时观看者会感受到家族承受的精神创伤。</p>",
             "reset": "<p>1小时；让夏尔文的鬼魂安息会永远摧毁这个作祟。</p>",
-            "routine": "<p>（4 个动作）作祟最多使用4个动作，在B22区域的不同生物身上施加流血的伤口。这些流血伤口显现在目标会从“施加痛苦”中感受到疼痛的地方，不管他们是否成功地抵抗了该效果。一个生物不能被这个流程作为目标超过一次。每个受影响生物都必须尝试@Check[fortitude|dc:24|traits:emotion,fear,mental,necromancy,occult]豁免。</p>\n<p>每一幅画被解除或毁掉，作祟就会失去一个动作。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[(1d8+3)[slashing]]伤害，并因确信这些伤口是由所爱之人造成而获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 和成功一样，但受到@Damage[(2d8+6)[slashing]]伤害，@Damage[1d6[bleed]]伤害，并获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 与失败相同，但受到@Damage[(4d8+12)[slashing]]伤害，@Damage[2d6[bleed]]伤害，并获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}。将角色的咒怨状态值增加1。</p>",
+            "routine": "<p>（4动作）作祟最多使用4个动作，在B22区域的不同生物身上施加流血的伤口。这些流血伤口显现在目标会从“施加痛苦”中感受到疼痛的地方，不管他们是否成功地抵抗了该效果。一个生物不能被这个流程作为目标超过一次。每个受影响生物都必须尝试@Check[fortitude|dc:24|traits:emotion,fear,mental,necromancy,occult]豁免。</p>\n<p>每一幅画被解除或毁掉，作祟就会失去一个动作。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响。</p>\n<p><strong>成功</strong> 该生物受到@Damage[(1d8+3)[slashing]]伤害，并因确信这些伤口是由所爱之人造成而获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 1}。</p>\n<p><strong>失败</strong> 和成功一样，但受到@Damage[(2d8+6)[slashing]]伤害，@Damage[1d6[bleed]]伤害，并获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 2}。</p>\n<p><strong>大失败</strong> 与失败相同，但受到@Damage[(4d8+12)[slashing]]伤害，@Damage[2d6[bleed]]伤害，并获得@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 Frightened 3}。将角色的咒怨状态值增加1。</p>",
             "items": {
                 "Inflict Agony": {
                     "name": "施加痛苦 Inflict Agony",
@@ -587,11 +590,11 @@
             "items": {
                 "Unnerving Presence": {
                     "name": "可怖存在 Unnerving Presence",
-                    "description": "<p>30尺。在灵光内开始其回合的生物必须尝试@Check[will|dc:22|basic]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响，并在24 小时内暂时免疫于可怖存在。</p>\n<p><strong>成功</strong> 该生物的攻击检定承受-1状态减值，持续1回合。</p>\n<p><strong>失败</strong> 该生物感觉到厌阴的无眼目光在注视着他们，而且知道还有更危险和更可怕的东西在通过这些空洞的眼眶注视着他们。这种外星智能生物的可怕存在导致生物在恐惧中颤抖，因而变为@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>大失败</strong> 如同失败，但该生物改为@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，并且知道了通过那些空洞的眼睛里看着他们的东西的名字：切库斯。</p>"
+                    "description": "<p>30尺。在灵光内开始其回合的生物必须尝试@Check[will|dc:22|basic]豁免。</p>\n<hr />\n<p><strong>大成功</strong> 该生物不受影响，并在24 小时内临时免疫于可怖存在。</p>\n<p><strong>成功</strong> 该生物的攻击检定承受-1状态减值，持续1回合。</p>\n<p><strong>失败</strong> 该生物感觉到厌阴的无眼目光在注视着他们，而且知道还有更危险和更可怕的东西在通过这些空洞的眼眶注视着他们。这种外星智能生物的可怕存在导致生物在恐惧中颤抖，因而变为@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 Slowed 1}，持续1轮。</p>\n<p><strong>大失败</strong> 如同失败，但该生物改为@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{震慑 Stunned 1}，并且知道了通过那些空洞的眼睛里看着他们的东西的名字：切库斯。</p>"
                 },
                 "Compel Condemned": {
                     "name": "致命诱惑 Compel Condemned",
-                    "description": "<p>厌阴通过心灵感应强迫30尺内的生物靠近并允许厌阴亲吻他们，以准备使用死亡之吻。 目标必须尝试@Check[will|dc:25]豁免。</p>\n<p><strong>成功</strong> 该生物不受影响，并且在 24 小时内暂时免疫致命诱惑。</p>\n<p><strong>失败</strong> 该生物必须用它的每一个动作尽可能快地靠近厌阴，同时避免明显的危险。 如果被强迫的生物与厌阴相邻，它会保持停止并且不行动。 如果该生物受到任何伤害，则该效果结束并且该生物在 24 小时内暂时免疫致命诱惑。 此效果持续1轮，但如果厌阴在随后的几轮中再次使用此能力，它会将所有受影响的生物的持续时间延长1轮。</p>\n<p><strong>大失败</strong> 如同失败，但伤害不会结束效果。</p>"
+                    "description": "<p>厌阴通过心灵感应强迫30尺内的生物靠近并允许厌阴亲吻他们，以准备使用死亡之吻。 目标必须尝试@Check[will|dc:25]豁免。</p>\n<p><strong>成功</strong> 该生物不受影响，并且在24小时内临时免疫致命诱惑。</p>\n<p><strong>失败</strong> 该生物必须用它的每一个动作尽可能快地靠近厌阴，同时避免明显的危险。 如果被强迫的生物与厌阴相邻，它会保持停止并且不行动。 如果该生物受到任何伤害，则该效果结束并且该生物在24小时内临时免疫致命诱惑。 此效果持续1轮，但如果厌阴在随后的几轮中再次使用此能力，它会将所有受影响的生物的持续时间延长1轮。</p>\n<p><strong>大失败</strong> 如同失败，但伤害不会结束效果。</p>"
                 },
                 "Corrupted Touch": {
                     "name": "腐化之触 Corrupted Touch",

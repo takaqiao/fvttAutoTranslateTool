@@ -1,5 +1,5 @@
 {
-    "label": "危害（规则书） Hazards (Rulebooks)",
+    "label": "危害（规则书）Hazards (Rulebooks)",
     "mapping": {
         "name": "name",
         "portrait": {
@@ -434,7 +434,7 @@
         },
         "Hammer Of Forbiddance": {
             "name": "禁止之锤 Hammer Of Forbiddance",
-            "hp": "铰链HP：64 (BT 32), 铰链硬度：16",
+            "hp": "铰链HP：64（BT32），铰链硬度：16",
             "hazarddisable": "<p>@Check[thievery|dc:28|name:Prevent Hammer from Swinging|traits:action:disable-a-device] （专家）一次解除锤子本身，再一次解除锤子的铰链来防止锤子摆动。</p>",
             "hazarddescription": "<p>一个巨大的锤子在建筑物的入口处摆荡下来，伤害进入此区域的生物，把它推回去并阻止它进一步前进。</p>",
             "hazardreset": "<p>陷阱会在整个回合结束后重置，暂停1回合后准备再次摆动。</p>",
@@ -537,7 +537,7 @@
             "prototypeToken": {
                 "name": "Jealous Abjurer"
             },
-            "reset": "<p>1 hour</p>",
+            "reset": "<p>1小时</p>",
             "disable": "<p>@Check[arcana|dc:36|name:Convince the Spirit], @Check[nature|dc:36|name:Convince the Spirit], @Check[occultism|dc:36|name:Convince the Spirit], or @Check[religion|dc:36|name:Convince the Spirit] (master) to convince the spirit that the target's magical knowledge is too great to be trifled with</p>"
         },
         "Lava Flume Tube": {
@@ -672,7 +672,7 @@
             "prototypeToken": {
                 "name": "Plummeting Doom"
             },
-            "reset": "<p>1 hour</p>",
+            "reset": "<p>1小时</p>",
             "disable": "<p>@Check[athletics|dc:40|name:Forcefully Push Spirits Back] (trained) to push back so forcefully that the spirits fear being thrown off the cliff, or @Check[religion|dc:40|name:Seal the Spirits] (expert) to temporarily seal the spirits away</p>"
         },
         "Poisoned Dart Gallery": {
@@ -1236,7 +1236,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Poisonous Mold",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "prototypeToken": {
                 "name": "Poisonous Mold"
             },

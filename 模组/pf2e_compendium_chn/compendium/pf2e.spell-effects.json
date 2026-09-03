@@ -3,7 +3,7 @@
     "entries": {
         "Spell Effect: Agile Feet": {
             "name": "法术效果：灵活脚步 Agile Feet",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.cOjlzWerBwbPWVkX]{灵活脚步 Agile Feet}。</p>\n<p>你在速度上获得+5尺状态加值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.cOjlzWerBwbPWVkX]</p>\n<p>你在速度上获得+5尺状态加值，且忽视困难地形。</p>"
         },
         "Spell Effect: Animal Form (Bear)": {
             "name": "法术效果：动物形态-熊 Animal Form (Bear)",
@@ -79,7 +79,7 @@
         },
         "Spell Effect: Bless": {
             "name": "法术效果：祝福术 Bless",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]</p>\n<p>你在攻击骰上获得+1状态加值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.XSujb7EsSwKl19Uu]</p>\n<p>你和你的盟友在弥漫范围内时攻击骰获得+1状态加值。之后的每轮里一次，你可以维持该法术来时弥漫范围增加10尺。</p>"
         },
         "Spell Effect: Blessing of Defiance": {
             "name": "法术效果：不屈祝福 Blessing of Defiance",
@@ -94,7 +94,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.zR67Rt3UMHKC5evy]{闪现术 Blink}</p>"
         },
         "Spell Effect: Blood Vendetta (Failure)": {
-            "name": "法术效果：溢血深仇（失败） Blood Vendetta (Failure)",
+            "name": "法术效果：溢血深仇 Blood Vendetta（失败）",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.TaaMEYdZXQXF0Sks]</p>\n<p>直到流血停止，你获得对穿刺和挥砍伤害的1点弱点。</p>"
         },
         "Spell Effect: Blood Ward": {
@@ -102,7 +102,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dFejDNEmVj3CwYLL]</p>\n<p>你在对抗你选择特征的生物时，豁免骰和AC获得+1状态加值。</p>"
         },
         "Spell Effect: Blunt the Final Blade (Critical Success)": {
-            "name": "法术效果：钝化终结之刃（大成功） Blunt the Final Blade (Critical Success)",
+            "name": "法术效果：钝化终结之刃 Blunt the Final Blade（大成功）",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.LEMfFL551YB120RN]</p>\n<p>你在对抗死亡和恐惧效果的豁免检定上获得+2状态加值。</p>"
         },
         "Spell Effect: Boost Eidolon": {
@@ -178,7 +178,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.ykyKclKTCMp2SFXa]</p>\n<p>你不会被夹击。当你在搜索动作上获得成功时，取而代之获得大成功。</p>"
         },
         "Spell Effect: Daemon Form (Ceustodaemon)": {
-            "name": "法术效果：邪魔形态（仆役邪魔） Daemon Form (Ceustodaemon)",
+            "name": "法术效果：邪魔形态（仆役邪魔）Daemon Form (Ceustodaemon)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.aSDfGcUOUVGU5m1g]</p>\n<p>你转变为大型邪魔战斗形态。处于该形态时，你获得邪魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</li><li>15临时生命值，以及对圣洁伤害的弱点5。</li><li>对抗所有死亡效果的豁免上+2状态加值。</li><li>对毒素抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+21，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的邪魔类型获得特定能力：</p><ul><li><p><strong>仆役恶魔 Ceustodaemon</strong> 速度25尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 啃咬（触及10尺），<strong>伤害</strong> 2d10+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，触及10尺），<strong>伤害</strong> 2d6挥砍加上1d6精魂；</li><li>任何成功的啃咬或者爪抓打击造成额外1d6伤害，并且你承受相同数量的伤害。</li></ul></li></ul>"
         },
         "Spell Effect: Daemon Form (Leukodaemon)": {
@@ -190,7 +190,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.aSDfGcUOUVGU5m1g]</p>\n<p>你转变为大型邪魔战斗形态。处于该形态时，你获得邪魔和魔族特征，且具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</li><li>15临时生命值，以及对圣洁伤害的弱点5。</li><li>对抗所有死亡效果的豁免上+2状态加值。</li><li>对毒素抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+21，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的邪魔类型获得特定能力：</p><ul><li><p><strong>饥馑邪魔 Meladaemon</strong> 速度25尺，飞行40尺；</p><ul><li><strong>近战</strong><span class=\"action-glyph\">1</span> 啃咬（触及10尺），<strong>伤害</strong> 2d10+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，触及10尺），<strong>伤害</strong> 1d8挥砍加上1d6精魂以及1d6虚能，并且你可以在命中后花费一个动作擒抱目标。</li></ul></li></ul>"
         },
         "Spell Effect: Daemon Form (Piscodaemon)": {
-            "name": "法术效果：邪魔形态（残虐邪魔） Daemon Form (Piscodaemon)",
+            "name": "法术效果：邪魔形态（残虐邪魔）Daemon Form (Piscodaemon)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.aSDfGcUOUVGU5m1g]</p>\n<p>你转变为大型邪魔战斗形态。处于该形态时，你获得邪魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</li><li>15临时生命值，以及对圣洁伤害的弱点5。</li><li>对抗所有死亡效果的豁免上+2状态加值。</li><li>对毒素抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+21，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的邪魔类型获得特定能力：</p><ul><li><p><strong>残虐邪魔 Piscodaemon</strong> 速度25尺，游泳40尺</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓，<strong>伤害</strong> 2d10+10穿刺加上1d6精魂以及1d6持续流血，并且你可以在命中后花费一个动作擒抱目标</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 触手（灵巧），<strong>伤害</strong> 2d6钝击加上1d6精魂以及1d6毒素。</li></ul></li></ul>"
         },
         "Spell Effect: Dancing Shield": {
@@ -202,7 +202,7 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.pZTqGY1MLRjgKasV]</p>\n<p>你获得黑暗视觉。</p>"
         },
         "Spell Effect: Darkvision (24 hours)": {
-            "name": "法术效果：黑暗视觉（24小时） Darkvision (24 hours)",
+            "name": "法术效果：黑暗视觉 Darkvision（24小时）",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.pZTqGY1MLRjgKasV]</p>\n<p>你获得黑暗视觉。</p>"
         },
         "Spell Effect: Death Ward": {
@@ -210,31 +210,31 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.YvXKGlHOt7mdW2jZ]{防死结界 Death Ward}。</p>\n<p>你从虚能的侵袭中被保护，在对抗死亡和虚能效果的豁免上获得+4状态加值。</p>"
         },
         "Spell Effect: Demon Form (Babau)": {
-            "name": "法术效果：恶魔形态（暴怖魔） Demon Form (Babau)",
+            "name": "法术效果：恶魔形态（暴怖魔）Demon Form (Babau)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为中型恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征，且具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值，对寒铁的弱点5，以及对圣洁的弱点5。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的恶魔类型获得特定能力：</p><ul><li><p><strong>暴怖魔 Babau</strong> 速度25尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 长矛（触及10尺），<strong>伤害</strong> 2d8+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 2d10+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧），<strong>伤害</strong> 2d4+10挥砍加上1d6精魂；</li><li>所有打击对@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]的生物造成2d6额外精准伤害。</li></ul></li></ul>"
         },
         "Spell Effect: Demon Form (Hezrou)": {
-            "name": "法术效果：恶魔形态（涸泽魔） Demon Form (Hezrou)",
+            "name": "法术效果：恶魔形态（涸泽魔）Demon Form (Hezrou)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为大型恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值，对寒铁的弱点5，以及对圣洁的弱点5。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的恶魔类型获得特定能力：</p><ul><li><p><strong>涸泽魔 Hezrou</strong> 速度30尺，游泳30尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（触及10尺），<strong>伤害</strong> 2d12+10穿刺加1d6精魂，且可以在击中后花费一个动作来擒获目标；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪击（灵巧，触及10尺），<strong>伤害</strong> 2d8挥砍加1d6精魂。</li></ul></li></ul>"
         },
         "Spell Effect: Demon Form (Nabasu)": {
-            "name": "法术效果：恶魔形态（食魂魔） Demon Form (Nabasu)",
+            "name": "法术效果：恶魔形态（食魂魔）Demon Form (Nabasu)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为中型恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值，对寒铁的弱点5，以及对圣洁的弱点5。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的恶魔类型获得特定能力：</p><ul><li><p><strong>食魂魔 Nabasu</strong> 速度25尺，飞行40尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 2d10+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1 </span>爪（灵巧），<strong>伤害</strong> 2d6+10挥砍加上1d6精魂。</li></ul></li></ul>"
         },
         "Spell Effect: Demon Form (Vrock)": {
-            "name": "法术效果：恶魔形态（鹫魔） Demon Form (Vrock)",
+            "name": "法术效果：恶魔形态（鹫魔）Demon Form (Vrock)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为中型恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值，对寒铁的弱点5，以及对圣洁的弱点5。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的恶魔类型获得特定能力：</p><ul><li><p><strong>鹫魔 Vrock</strong> 速度25尺，飞行35尺；对电击抗力10；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 喙，<strong>伤害</strong> 2d8+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧），<strong>伤害</strong> 2d6+10挥砍加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧），<strong>伤害</strong> 2d6+10挥砍加上1d6精魂。</li></ul></li></ul>"
         },
         "Spell Effect: Devil Form (Barbazu)": {
-            "name": "法术效果：魔鬼形态（胡须魔） Devil Form (Barbazu)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为中型魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值，对物理伤害的抗力5（除了银），以及对圣洁的弱点5。</li><li>对火焰抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的魔鬼类型获得特定能力：</p><ul><li><p><strong>胡须魔 Barbazu</strong> 速度35尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 大砍刀（致命d8，蓄力，触及10尺），<strong>伤害</strong> 2d8+10挥砍加上1d6精魂以及1d6持续流血；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 胡须，<strong>伤害</strong> 3d8+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧） <strong>伤害</strong> 3d6+10挥砍加上1d6精魂。</li></ul></li></ul>"
+            "name": "法术效果：魔鬼形态（胡须魔）Devil Form (Barbazu)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为中型魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值，对物理伤害的抗力5（除了银），以及对圣洁的弱点5。</li><li>对火焰抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的魔鬼类型获得特定能力：</p><ul><li><p><strong>胡须魔 Barbazu</strong> 速度35尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 大砍刀（致命d8，叠劲，触及10尺），<strong>伤害</strong> 2d8+10挥砍加上1d6精魂以及1d6持续流血；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 胡须，<strong>伤害</strong> 3d8+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧）<strong>伤害</strong> 3d6+10挥砍加上1d6精魂。</li></ul></li></ul>"
         },
         "Spell Effect: Devil Form (Erinys)": {
-            "name": "法术效果：魔鬼形态（狂怒魔） Devil Form (Erinys)",
+            "name": "法术效果：魔鬼形态（狂怒魔）Devil Form (Erinys)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为中型魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值，对物理伤害的抗力5（除了银），以及对圣洁的弱点5。</li><li>对火焰抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的魔鬼类型获得特定能力：</p><ul><li><p><strong>狂怒魔 Erinys</strong> 速度25尺，飞行40尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 长剑（多用P），<strong>伤害</strong> 1d8+10挥砍加上1d6精魂以及1d6火焰；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 复合长弓（致命d10，射程增量100尺，远射），<strong>伤害</strong> 1d8+10穿刺加上1d6精魂以及1d6火焰。</li></ul></li></ul>"
         },
         "Spell Effect: Devil Form (Osyluth)": {
-            "name": "法术效果：魔鬼形态（骨魔） Devil Form (Osyluth)",
+            "name": "法术效果：魔鬼形态（骨魔）Devil Form (Osyluth)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为大型魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值，对物理伤害的抗力5（除了银），以及对圣洁的弱点5。</li><li>对火焰抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的魔鬼类型获得特定能力：</p><ul><li><p><strong>骨魔 Osyluth</strong> 速度35尺，飞行30尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 2d10+10穿刺加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧，触及10尺），<strong>伤害</strong> 2d6+10挥砍加上1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 毒刺（触及15尺），<strong>伤害</strong> 1d10穿刺加上1d6精魂以及1d6毒素；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 骨片（射程增量30尺），<strong>伤害</strong> 2d6+10穿刺加上1d6精魂。</li></ul></li></ul>"
         },
         "Spell Effect: Devil Form (Sarglagon)": {
@@ -382,7 +382,7 @@
             "description": "<p>生物在对除你以外的生物的攻击骰上承受-1状态减值。</p>"
         },
         "Spell Effect: Draw Ire (Success)": {
-            "name": "法术效果：吸引怒火（成功） Draw Ire (Success)",
+            "name": "法术效果：吸引怒火 Draw Ire（成功）",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.jsWthW1Qy6tg3SwD]</p>\n<p>生物在对除你以外的生物的攻击骰上承受-1状态减值。该法术在目标的下个回合的结束时结束。</p>"
         },
         "Spell Effect: Draw the Lightning": {
@@ -406,20 +406,20 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.caehfpQz7yp9yNzz]</p>\n<p>你在对抗目标生物以外的生物的攻击骰，伤害骰和技能检定上获得-1状态减值。</p>"
         },
         "Spell Effect: Element Embodied (Air)": {
-            "name": "法术效果：元素具身（气） Element Embodied (Air)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>气元素 Air Elemental</strong> 飞行速度80尺；</p><ul><li><strong>狂风</strong> （气，灵光）30尺。对于没有气特征的飞行生物，该弥漫范围内的空气是困难地形；</li><li><strong>迅捷</strong> 你的移动不会触发反应动作；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 狂风（触及25尺），<strong>伤害</strong> 3d12+11钝击加上@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]10尺；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 闪电抽打（射程增量80尺），<strong>伤害</strong> 3d12+4电击。</li></ul></li></ul>"
+            "name": "法术效果：元素具身（气）Element Embodied (Air)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和气特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>气元素 Air Elemental</strong> 速度 飞行80尺</p><ul><li><p><strong>狂风</strong>（气，灵光）30尺。对于没有气特征的飞行生物，该弥漫范围内的空气是困难地形</p></li><li><p><strong>迅捷</strong> 你的移动不会触发反应动作</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 狂风（触及25尺），<strong>伤害</strong> 3d12钝击加上@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]10尺</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 闪电抽打（射程增量80尺），<strong>伤害</strong> 3d10电击。</p></li></ul></li></ul>"
         },
         "Spell Effect: Element Embodied (Earth)": {
-            "name": "法术效果：元素具身（土） Element Embodied (Earth)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>土元素 Earth Elemental</strong> 30尺，掘地20尺； 对物理抗力5；</p><ul><li><strong>刺石地表 Spike Stones</strong> （灵光，土）30尺。该区域是困难地形和危险地形。没有土特征的生物在该区域的地面上移动时，每移动该区域中的5尺承受5穿刺伤害；</li><li><strong>坚如磐石 Rocky Toughness</strong> 你选择此形态时获得40临时生命，而非30；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（触及25尺）， <strong>伤害</strong> 3d12+15钝击；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 石块（射程增量40尺）， <strong>伤害</strong> 4d8+6钝击。</li></ul></li></ul>"
+            "name": "法术效果：元素具身（土）Element Embodied (Earth)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和土特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>土元素 Earth Elemental</strong> 速度30尺，掘地20尺；对物理抗力5</p><ul><li><p><strong>刺石地表 Spike Stones</strong>（灵光，土）30尺。该区域是困难地形和危险地形。没有土特征的生物在该区域的地面上移动时，每移动该区域中的5尺承受5穿刺伤害</p></li><li><p><strong>坚如磐石 Rocky Toughness</strong> 你选择此形态时获得40临时生命，而非30</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（触及25尺），<strong>伤害</strong> 3d12钝击</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 石块（射程增量40尺），<strong>伤害</strong> 3d8钝击。</p></li></ul></li></ul>"
         },
         "Spell Effect: Element Embodied (Fire)": {
-            "name": "法术效果：元素具身（火） Element Embodied (Fire)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>火元素 Fire Elemental</strong> 50尺；免疫火焰；对寒冷弱点10；</p><ul><li><strong>酷热 Intense Heat</strong> （灵光，火焰）30尺。进入该灵光的生物，或者在该灵光中开始回合的生物承受@Damage[5d6[fire]]伤害，这有一次@Check[reflex|against:spell|basic]豁免。每个生物每轮只会从该灵光中承受一次伤害；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 触须（触及25尺）， <strong>伤害</strong> 3d10+12火焰加上2d6持续火焰；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 火尘（射程增量60尺）， <strong>伤害</strong> 4d8+6钝击。</li></ul></li></ul>"
+            "name": "法术效果：元素具身（火）Element Embodied (Fire)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和火特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>火元素 Fire Elemental</strong> 速度50尺；免疫火焰；对寒冷弱点10</p><ul><li><p><strong>酷热 Intense Heat</strong>（灵光，火焰）30尺。进入该灵光的生物，或者在该灵光中开始回合的生物承受5d6火焰伤害，需进行对抗你法术DC的基础反射豁免。每个生物每轮只会从该灵光中承受一次伤害</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 触须（触及25尺），<strong>伤害</strong> 3d10火焰加上2d6持续火焰</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 火尘（射程增量60尺），<strong>伤害</strong> 3d8火焰。</p></li></ul></li></ul>"
         },
         "Spell Effect: Element Embodied (Water)": {
-            "name": "法术效果：元素具身（水） Element Embodied (Water)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>水元素 Water Elemental</strong> 40尺，游泳80尺；对火焰抗力10；</p><ul><li><strong>涡流 Vortex</strong> （灵光，水）30尺。对于没有水特征的游泳生物，该范围内的和你所在水体相连的水域是困难地形；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 巨浪（触及25尺）， <strong>伤害</strong> 3d12+18钝击加上推离 或拉近10尺；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 水流喷射（射程增量60尺）， <strong>伤害</strong> 4d8+6钝击。</li></ul></li></ul>"
+            "name": "法术效果：元素具身（水）Element Embodied (Water)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和水特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>水元素 Water Elemental</strong> 速度40尺，游泳80尺；对火焰抗力10</p><ul><li><p><strong>涡流 Vortex</strong>（灵光，水）30尺。对于没有水特征的游泳生物，该范围内的和你所在水体相连的水域是困难地形</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 巨浪（触及25尺），<strong>伤害</strong> 3d12钝击加上推离或拉近10尺（怪物核心359页）</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 水流喷射（射程增量60尺），<strong>伤害</strong> 3d8钝击。</p></li></ul></li></ul>"
         },
         "Spell Effect: Elemental Absorption": {
             "name": "法术效果：元素吸收 Elemental Absorption",
@@ -575,7 +575,7 @@
         },
         "Spell Effect: Fiery Body": {
             "name": "法术效果：火焰之躯 Fiery Body",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.XS7Wyh5YC0NWeWyB]</p>\n<p>你获得火焰免疫，对精准伤害的10点抗力，对寒冷和水的5点弱点，以及40尺飞行速度。任何触碰到你或用无武装攻击或非长处级的近战武器伤害你的生物承受3d6火焰伤害。</p>\n<p>你的无武装攻击造成额外1d4火焰伤害，并且你的火焰法术造成额外一个骰子的火焰伤害（如同法术本身的伤害骰）。</p><hr /><p><strong>升阶（9环级）</strong> 碰到你的生物承受4d6火焰伤害，你的无武装攻击造成2d4额外火焰伤害，你具有飞行速度60尺。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.XS7Wyh5YC0NWeWyB]</p>\n<p>你获得火焰免疫，对精准伤害的10点抗力，对寒冷和水的5点弱点，以及40尺飞行速度。任何触碰到你或用无武装攻击或非长触及的近战武器伤害你的生物承受3d6火焰伤害。</p>\n<p>你的无武装攻击造成额外1d4火焰伤害，并且你的火焰法术造成额外一个骰子的火焰伤害（如同法术本身的伤害骰）。</p><hr /><p><strong>升阶（9环级）</strong> 碰到你的生物承受4d6火焰伤害，你的无武装攻击造成2d4额外火焰伤害，你具有飞行速度60尺。</p>"
         },
         "Spell Effect: Fiery Body (9th Level)": {
             "name": "法术效果：火焰之躯（9环级） Fiery Body (9th Level)",
@@ -623,7 +623,7 @@
         },
         "Spell Effect: Girzanje's March": {
             "name": "法术效果：哲尔赞吉进行曲 Girzanje's March",
-            "description": "<p>效果来自哲尔赞吉进行曲。</p>\n<p>能够听到并理解你的盟友在攻击骰、强韧豁免和对抗心灵效果的意志豁免上获得+1状态加值。</p><hr /><p><strong>升阶（7环级）</strong> 状态加值提高到+2。</p>\n<p><strong>升阶（10环级）</strong> 状态加成提高到+3。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.pLEhF3f7KRxFo0vp]</p>\n<p>能够听到并理解你的盟友在攻击骰、强韧豁免和对抗心灵效果的意志豁免上获得+1状态加值。</p><hr /><p><strong>升阶（7环级）</strong> 状态加值提高到+2。</p>\n<p><strong>升阶（10环级）</strong> 状态加成提高到+3。</p>"
         },
         "Spell Effect: Glutton's Jaw": {
             "name": "法术效果：暴食巨颚 Glutton's Jaw",
@@ -694,27 +694,27 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.bH0kPuf7UKxRvi2P]{激发防御 Inspire Defense}</p>\n<p>你和区域内的盟友在AC豁免上获得+1状态加值，并且获得物理伤害抗力，等同于施法者等级的一半。</p>"
         },
         "Spell Effect: Inspire Heroics (Courage, +2)": {
-            "name": "法术效果：强音组曲-勇气, +2 Inspire Heroics (Courage, +2)",
+            "name": "法术效果：强音组曲 Inspire Heroics（勇气+2）",
             "description": "<p>此状态由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}增强@UUID[Compendium.pf2e.spells-srd.Item.IAjvwqgiDr3qGYxY]{英勇颂歌 Courageous Anthem}。</p>\n<p>你被鼓舞的语言或旋律激励了。你在攻击骰、伤害骰和对抗恐惧的豁免骰上获得+2状态加值。</p>"
         },
         "Spell Effect: Inspire Heroics (Courage, +3)": {
-            "name": "法术效果：强音组曲-勇气, +3 Inspire Heroics (Courage, +3)",
+            "name": "法术效果：强音组曲 Inspire Heroics（勇气+3）",
             "description": "<p>此效果由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}大成功，以增强@UUID[Compendium.pf2e.spells-srd.Item.IAjvwqgiDr3qGYxY]{英勇颂歌 Courageous Anthem}。</p>\n<p>你被鼓舞的语言或旋律激励了。你在攻击骰、伤害骰和对抗恐惧的豁免骰上获得+3状态加值。</p>"
         },
         "Spell Effect: Inspire Heroics (Defense, +2)": {
-            "name": "法术效果：强音组曲-防御, +2 Inspire Heroics (Defense, +2)",
+            "name": "法术效果：强音组曲 Inspire Heroics（防御+2）",
             "description": "<p>此状态由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}增强@UUID[Compendium.pf2e.spells-srd.Item.bH0kPuf7UKxRvi2P]{集结颂歌 Rallying Anthem}。</p>\n<p>你激励盟友更为有效的保护自己。你和区域内的盟友在AC和豁免上获得+2状态加值，并且获得物理伤害抗力，等同于法术环级的一半。</p>\n<p><em>注意: 抗力未自动化。</em></p>"
         },
         "Spell Effect: Inspire Heroics (Defense, +3)": {
-            "name": "法术效果：强音组曲-防御, +3 Inspire Heroics (Defense, +3)",
+            "name": "法术效果：强音组曲 Inspire Heroics（防御+3）",
             "description": "<p>此效果由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}大成功，以增强@UUID[Compendium.pf2e.spells-srd.Item.bH0kPuf7UKxRvi2P]{集结颂歌 Rallying Anthem}。</p>\n<p>你激励盟友更为有效的保护自己。你和区域内的盟友在AC和豁免上获得+3状态加值，并且获得物理伤害抗力，等同于法术环级的一半。</p>\n<p><em>注意: 抗力未自动化。</em></p>"
         },
         "Spell Effect: Inspire Heroics (Strength, +2)": {
-            "name": "法术效果：强音组曲-力量, +2 Inspire Heroics (Strength, +2)",
+            "name": "法术效果：强音组曲 Inspire Heroics（力量+2）",
             "description": "<p>此状态由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}增强@UUID[Compendium.pf2e.spells-srd.Item.Xxdwkt0EEDgP1LGc]{力量曲 Song of Strength}</p>\n<p>你用发自内心的劝勉激发盟友的体能。你和你的盟友在运动检定、以及运动技能动作的DC上（比如卸武，推撞和摔绊）获得+2状态加值。</p>\n<p><em>注意: DC加值未自动化。</em></p>"
         },
         "Spell Effect: Inspire Heroics (Strength, +3)": {
-            "name": "法术效果：强音组曲-力量, +3 Inspire Heroics (Strength, +3)",
+            "name": "法术效果：强音组曲 Inspire Heroics（力量+3）",
             "description": "<p>此效果由以下方式获得：使用@UUID[Compendium.pf2e.spells-srd.Item.kF0rs9mCPvJGfAZE]{强音组曲 Fortissimo Composition}大成功，以增强@UUID[Compendium.pf2e.spells-srd.Item.Xxdwkt0EEDgP1LGc]{力量曲 Song of Strength}</p>\n<p>你用发自内心的劝勉激发盟友的体能。你和你的盟友在运动检定、以及运动技能动作的DC上（比如卸武，推撞和摔绊）获得+3状态加值。</p>\n<p><em>注意: DC加值未自动化。</em></p>"
         },
         "Spell Effect: Instant Armor": {
@@ -842,7 +842,7 @@
             "description": "<p>强大的防护保护一个生物免疫预言魔法。该目标在对抗心灵效果的豁免上获得+4状态加值。心灵屏障会尝试反制任何侦测，揭示，以及探知效果，且其法术环级视为比其本来环级高1。成功时，该预言效果如常生效，但是不会侦测到任何关于目标及其所有物的信息。例如，侦测魔法仍会侦测到区域中的其他魔法，但不含任何目标身上的魔法。</p>"
         },
         "Spell Effect: Mind Swap (Critical Success)": {
-            "name": "法术效果：交换思维（大成功） Mind Swap (Critical Success)",
+            "name": "法术效果：交换思维（大成功）Mind Swap (Critical Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.RWwiFnjxoJXn7H6D]</p>\n<p>你在乔装成彼此的欺骗检定中获得+4环境加值。</p>"
         },
         "Spell Effect: Mirecloak": {
@@ -1350,11 +1350,11 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.kRsmUlSWhi6PJvZ7]</p>\n<p>你获得等于你速度的飞行速度。你的翅膀产生30尺范围的明亮光照。</p>"
         },
         "Spell Effect: Angel Form (Monadic Deva)": {
-            "name": "法术效果：天使形态（元素使徒） Angel Form (Monadic Deva)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.E3zIZ4pjlOuWeGRz]</p>\n<p>你变形为中型天使战斗形态。你获得天使和天族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>40临时生命值，以及对邪秽伤害的弱点10。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你使用列出的伤害。近战攻击基于力量（例如对于力竭的情况），所有的远程攻击都基于敏捷。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+25，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的天使的类型获得特定能力：</p><ul><li><p><strong>元素使徒 Monadic Deva</strong> 速度30尺，飞行40尺；对抗死亡效果和操控灵魂的效果的豁免+2状态加值；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 神圣硬头锤（猛推），<strong>伤害</strong> 2d6+12钝击加上1d6力场和1d6精魂。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你的战斗形态为大型。你必须有空间扩大体型，否则你会失去法术。你改为获得60临时生命值、对邪秽伤害弱点15、攻击调整值+30、伤害加值+20、运动+33。</p>"
+            "name": "法术效果：天使形态（元素使徒）Angel Form (Monadic Deva)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.E3zIZ4pjlOuWeGRz]</p>\n<p>你变形为中型天使战斗形态。你获得天使和天族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>40临时生命值，以及对邪秽伤害的弱点10。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你使用列出的伤害。近战攻击基于力量（例如对于力竭的情况），所有的远程攻击都基于敏捷。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+25，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的天使的类型获得特定能力：</p><ul><li><p><strong>元素使徒 Monadic Deva</strong> 速度30尺，飞行40尺；对抗死亡效果和操控灵魂的效果的豁免+2状态加值；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 神圣硬头锤（推撞），<strong>伤害</strong> 2d6+12钝击加上1d6力场和1d6精魂。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你的战斗形态为大型。你必须有空间扩大体型，否则你会失去法术。你改为获得60临时生命值、对邪秽伤害弱点15、攻击调整值+30、伤害加值+20、运动+33。</p>"
         },
         "Spell Effect: Angel Form (Movanic Deva)": {
-            "name": "法术效果：天使形态（光暗使徒） Angel Form (Movanic Deva)",
+            "name": "法术效果：天使形态（光暗使徒）Angel Form (Movanic Deva)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.E3zIZ4pjlOuWeGRz]</p>\n<p>你变形为中型天使战斗形态。你获得天使和天族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>40临时生命值，以及对邪秽伤害的弱点10。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你使用列出的伤害。近战攻击基于力量（例如对于力竭的情况），所有的远程攻击都基于敏捷。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+25，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的天使的类型获得特定能力：</p><ul><li><p><strong>光暗使徒 Movanic Deva</strong> 速度30尺，飞行40尺；虚能抗力10；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 重剑（双手d12），<strong>伤害</strong> 1d8+12挥砍加上1d6火焰和1d6精魂。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你的战斗形态为大型。你必须有空间扩大体型，否则你会失去法术。你改为获得60临时生命值、对邪秽伤害弱点15、攻击调整值+30、伤害加值+20、运动+33。</p>"
         },
         "Spell Effect: Angel Form (Balisse)": {
@@ -1511,7 +1511,7 @@
         },
         "Spell Effect: Illusory Shroud": {
             "name": "法术效果：幻象遮罩 Illusory Shroud",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.kLyyJayja75K9rXX]</p>\n<p>你在躲藏或潜行的隐匿检定上获得+1状态加值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.kLyyJayja75K9rXX]</p>\n<p>你在躲藏或潜行的隐秘检定上获得+1状态加值。</p>"
         },
         "Spell Effect: Tempest Cloak": {
             "name": "法术效果：风暴披身 Tempest Cloak",
@@ -1670,7 +1670,7 @@
             "name": "效果：灰烬预视 Cinder Gaze"
         },
         "Spell Effect: Mantle of the Unwavering Heart": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.3526YUgCvB5ZsKuX]</p>\n<p>在下列选项里选2项。以一个专注单动作，你可以将一个已选项换为另一个。</p><ul><li><strong>常青活力</strong> 你获得快速治疗3，并且在对抗毒素和疾病时，豁免检定获得+2加值。这些效果具有治疗和活力特征。</li><li><strong>强烈芳香</strong> （灵光 嗅觉）一团浓郁的花香围绕着你，影响@Template[emanation|distance:15]区域。灵光内的生物无法从灵敏嗅觉能力中获益，并且只要处于灵光区域内，就会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。这种恶心是疾病效果。</li><li><strong>巍峨巨木</strong> 你的体型增加至大型。你陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}。你的触及增加5尺（若你的起始体型为超小型则增加10尺），你获得抓握树枝无武装攻击；这种攻击属于搏击武器组，造成@Damage[2d8[bludgeoning]]伤害外加擒获。</li><li><strong>不屈意志</strong> 你免疫@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]，而且你在对抗心灵效果时豁免和DC都会获得+1加值。</li></ul>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.3526YUgCvB5ZsKuX]</p>\n<p>在下列选项里选2项。以一个专注单动作，你可以将一个已选项换为另一个。</p><ul><li><strong>常青活力</strong> 你获得快速治疗3，并且在对抗毒素和疾病时，豁免检定获得+2加值。这些效果具有治疗和活力特征。</li><li><strong>强烈芳香</strong>（灵光，嗅觉）一团浓郁的花香围绕着你，影响@Template[emanation|distance:15]区域。灵光内的生物无法从灵敏嗅觉能力中获益，并且只要处于灵光区域内，就会陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 Sickened 1}。这种恶心是疾病效果。</li><li><strong>巍峨巨木</strong> 你的体型增加至大型。你陷入@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}。你的触及增加5尺（若你的起始体型为超小型则增加10尺），你获得抓握树枝无武装攻击；这种攻击属于搏击武器组，造成@Damage[2d8[bludgeoning]]伤害外加擒获。</li><li><strong>不屈意志</strong> 你免疫@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]，而且你在对抗心灵效果时豁免和DC都会获得+1加值。</li></ul>",
             "name": "法术效果：木躯韧心 Mantle of the Unwavering Heart"
         },
         "Spell Effect: Anima Invocation": {
@@ -1782,8 +1782,8 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.cNnHV97gPqxJ3Rrr]{窥视弱点 Glimpse Weakness}</p>\n<p>你会造成1+法术环级的额外精准伤害，随后该法术结束。</p>"
         },
         "Spell Effect: Element Embodied (Metal)": {
-            "name": "法术效果：元素具身（金） Element Embodied (Metal)",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>金元素 Metal Elemental</strong> 40尺，飞行40尺；电击抗力10；</p><ul><li><strong>电弧 Arcing Electricity</strong> （灵光，电击，金） 30尺。进入灵光或在灵光范围内开始回合生物受到@Damage[2d12[electricity]]伤害，进行基础反射豁免对抗你的法术DC；由金属制成，具有金特征，或穿戴金属护甲的生物在此豁免上承受-1环境减值。生物每轮只会受到一次来自该灵光的伤害； </li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 刀刃（触及25尺，多用挥砍）, <strong>伤害</strong> 3d12+15穿刺；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 金属碎片（射程增量40尺，多用挥砍），<strong>伤害</strong> 4d8+6穿刺</li></ul></li></ul>"
+            "name": "法术效果：元素具身（金）Element Embodied (Metal)",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和金特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>金元素 Metal Elemental</strong> 速度40尺，飞行40尺；电击抗力10</p><ul><li><p><strong>电弧 Arcing Electricity</strong>（灵光，电击，金）30尺。进入灵光或在灵光范围内开始回合的生物受到2d12电击伤害，进行对抗你法术DC的基础反射豁免；由金属制成、具有金特征或穿戴金属护甲的生物在此豁免上承受-1环境减值。生物每轮只会受到一次来自该灵光的伤害</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 刀刃（触及25尺，多用S），<strong>伤害</strong> 3d12穿刺</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 金属碎片（射程增量40尺，多用S），<strong>伤害</strong> 3d8穿刺。</p></li></ul></li></ul>"
         },
         "Spell Effect: Fungal Infestation": {
             "name": "法术效果：菌皮疫 Fungal Infestation",
@@ -1822,8 +1822,8 @@
             "name": "法术效果：元素形态 Elemental Form"
         },
         "Spell Effect: Element Embodied (Wood)": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征以及你选择的元素对应的特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。如果你选择气元素或者火元素，这些攻击基于敏捷，或如果你选择土元素或者水元素，基于力量。（这种区别不会改变数据，但除了例如力竭和笨拙的状态）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>对于气元素或火元素的特技调整值+36，对于土元素或水元素的运动调整值+36，除非你自身调整值更高。</li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>木元素 Wood Elemental</strong> 30尺，攀爬 35尺；物理抗力5；斧弱点10；</p><ul><li><strong>繁郁生长 Lush Growth</strong> （灵光，木） 30尺。区域内地面为困难地形，任何时候区域内的生物从治疗命能效果中恢复HP时，灵光给予治疗+5状态加值；</li><li><strong>木之坚韧 Woody Toughness</strong> 你选择此形态时获得40临时生命值而非30；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 枝条（触及25尺）, <strong>伤害</strong> 3d10+18穿刺；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 种子（射程增量40尺）, <strong>伤害</strong> 4d8+6钝击。</li></ul></li></ul>",
-            "name": "法术效果：元素具身（木） Element Embodied (Wood)"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.vQMAdnIwnV9prPiG]</p>\n<p>你转变为一个巨型元素战斗形态。处于该形态时，你获得元素特征和木特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你的伤害加值是+15。如果你选择气元素、火元素或者金元素，这些攻击基于敏捷，或如果你选择土元素、水元素或者木元素，基于力量。（这种区别不会改变数据，但例如对于力竭和笨拙状态而言是有影响的）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>对于气元素、火元素或金元素的特技调整值+36，或对于土元素、水元素或木元素的运动调整值+36，除非你自身调整值更高。</p></li></ul><p>你也会根据你选择的元素类型获得特定能力：</p><ul><li><p><strong>木元素 Wood Elemental</strong> 速度30尺，攀爬35尺；物理抗力5；对斧弱点10</p><ul><li><p><strong>繁郁生长 Lush Growth</strong>（灵光，木）30尺。区域内地面为困难地形，任何时候区域内的生物从治疗命能效果中恢复HP时，灵光给予治疗+5状态加值</p></li><li><p><strong>木之坚韧 Woody Toughness</strong> 你选择此形态时获得40临时生命值而非30</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 枝条（触及25尺），<strong>伤害</strong> 3d10钝击</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 种子（射程增量40尺），<strong>伤害</strong> 3d8钝击。</p>\n</li></ul></li></ul>",
+            "name": "法术效果：元素具身（木）Element Embodied (Wood)"
         },
         "Spell Effect: Hallowed Ground": {
             "name": "法术效果：祝佑之地 Hallowed Ground",
@@ -1950,7 +1950,7 @@
             "name": "法术效果：镜影术 Mirror Image"
         },
         "Spell Effect: Monstrosity Form (Kaiju)": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1ul2dasQBdlaMEC5]</p>\n<p>你变形成怪兽，该战斗形态为巨型，拥有以下特殊能力。</p>\n<p><strong>怪兽</strong> 40尺；物理抗力 5；</p>\n<p><strong>近战 </strong> <span class=\"action-glyph\">1</span> 颚咬（触及20 尺）, <strong>伤害</strong> 3d12+20穿刺</p>\n<p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧, 触及20尺）， <strong>伤害</strong> 3d8+20挥砍</p>\n<p><strong>吐息武器</strong><span class=\"action-glyph\">2</span> （塑能系，原能）60尺锥形范围内所有生物受到15d6伤害（伤害类型由你选择），进行一次基础反射豁免对抗你的法术DC。启动后，你的吐息武器不能在1d4轮内再次使用。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.1ul2dasQBdlaMEC5]</p>\n<p>你变形成怪兽，该战斗形态为巨型，拥有以下特殊能力。</p>\n<p><strong>怪兽</strong> 40尺；物理抗力 5；</p>\n<p><strong>近战 </strong> <span class=\"action-glyph\">1</span> 颚咬（触及20 尺）, <strong>伤害</strong> 3d12+20穿刺</p>\n<p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧, 触及20尺）， <strong>伤害</strong> 3d8+20挥砍</p>\n<p><strong>吐息武器</strong><span class=\"action-glyph\">2</span>（塑能系，原能）60尺锥形范围内所有生物受到15d6伤害（伤害类型由你选择），进行一次基础反射豁免对抗你的法术DC。启动后，你的吐息武器不能在1d4轮内再次使用。</p>",
             "name": "法术效果：魔兽之形-怪兽 Monstrosity Form (Kaiju)"
         },
         "Spell Effect: Precious Metals": {
@@ -1958,7 +1958,7 @@
             "name": "法术效果：化铁为金 Precious Metals"
         },
         "Spell Effect: Nature Incarnate": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.ZXwxs5tRjEGrjAJT]</p>\n<p>你变形为自然的化身，选择绿境公或者怪兽。如果是绿境公，你的战斗形态为中型，如果是怪兽，你的战斗形态为巨型（30尺宽30尺长的空间）。处于该形态时，你获得植物特征（对于绿境公）或者怪兽特征（对于怪兽）。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你的打击中仅能使用的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。这些攻击基于力量（例如对于@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+36，除非你本身调整值更高。</li></ul><p>你会根据你选择的化身获得特定能力：</p><ul><li><p><strong>绿境公</strong></p><ul><li>速度40尺，攀爬速度40尺；</li><li><strong>近战</strong><span class=\"action-glyph\">1</span> 藤蔓（触及30尺，多用穿刺），<strong>伤害</strong> 6d8+12钝击；</li><li><strong>远程</strong><span class=\"action-glyph\">1</span> 棘刺（射程100尺），<strong>伤害</strong> 6d6+6穿刺；</li><li><strong>自然之吻 Green Caress</strong> （灵光，原能） 60尺。除了植物以外的敌人必须成功通过对抗你的法术DC的@Check[fortitude|against:spell]豁免，否则会获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}持续1轮（大失败时@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}）。</li></ul></li></ul><ul><li><p><strong>怪兽</strong></p><ul><li>速度50尺；对物理伤害抗力5；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 啃咬（触及30尺），<strong>伤害</strong> 6d10+10穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，触及30尺），<strong>伤害</strong> 6d8+8挥砍；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 足踩（灵巧，触及15尺）<strong>伤害</strong> 6d6+10钝击；</li><li><strong>煞破天劫 Unstoppable</strong> 你免疫@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，并且忽略困难地形和高等困难地形；</li><li><strong>践踏 Trample</strong><span class=\"action-glyph\">3</span> 你移动你双倍速度的距离，并且能穿过超大型或者更小的生物，同时践踏你进入其位置的每一个生物。被践踏的生物承受足的伤害，且有@Check[reflex|against:spell|basic]豁免，对抗你的法术DC。</li></ul></li></ul>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.ZXwxs5tRjEGrjAJT]</p>\n<p>你变形为自然的化身，选择绿境公或者怪兽。如果是绿境公，你的战斗形态为中型，如果是怪兽，你的战斗形态为巨型（30尺宽30尺长的空间）。处于该形态时，你获得植物特征（对于绿境公）或者怪兽特征（对于怪兽）。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=25+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击，这是你的打击中仅能使用的攻击。你对这些攻击受训。你的攻击调整值是+34，并且你使用列出的伤害。这些攻击基于力量（例如对于@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+36，除非你本身调整值更高。</li></ul><p>你会根据你选择的化身获得特定能力：</p><ul><li><p><strong>绿境公</strong></p><ul><li>速度40尺，攀爬速度40尺；</li><li><strong>近战</strong><span class=\"action-glyph\">1</span> 藤蔓（触及30尺，多用穿刺），<strong>伤害</strong> 6d8+12钝击；</li><li><strong>远程</strong><span class=\"action-glyph\">1</span> 棘刺（射程100尺），<strong>伤害</strong> 6d6+6穿刺；</li><li><strong>自然之吻 Green Caress</strong>（灵光，原能）60尺。除了植物以外的敌人必须成功通过对抗你的法术DC的@Check[fortitude|against:spell]豁免，否则会获得@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}持续1轮（大失败时@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 2}）。</li></ul></li></ul><ul><li><p><strong>怪兽</strong></p><ul><li>速度50尺；对物理伤害抗力5；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 啃咬（触及30尺），<strong>伤害</strong> 6d10+10穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，触及30尺），<strong>伤害</strong> 6d8+8挥砍；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 足踩（灵巧，触及15尺）<strong>伤害</strong> 6d6+10钝击；</li><li><strong>煞破天劫 Unstoppable</strong> 你免疫@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，并且忽略困难地形和高等困难地形；</li><li><strong>践踏 Trample</strong><span class=\"action-glyph\">3</span> 你移动你双倍速度的距离，并且能穿过超大型或者更小的生物，同时践踏你进入其位置的每一个生物。被践踏的生物承受足的伤害，且有@Check[reflex|against:spell|basic]豁免，对抗你的法术DC。</li></ul></li></ul>",
             "name": "法术效果：生界化身 Nature Incarnate"
         },
         "Spell Effect: Rousing Splash": {
@@ -2131,7 +2131,7 @@
         },
         "Spell Effect: Shields of the Spirit (Security)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.YAr465ZVQ4blqDzT]</p>\n<p>你的ac获得+1状态加值。</p><hr /><p>效果来自@UUID[Compendium.pf2e.feats-srd.Item.3aolZmAj0ue8vc6q]</p>\n<p>如果神卫已举起盾牌，你也会获得盾牌给予的AC加值。</p>",
-            "name": "法术效果：精魂之盾（卫戎） Shields of the Spirit (Security)"
+            "name": "法术效果：精魂之盾（卫戎）Shields of the Spirit (Security)"
         },
         "Effect: Revel in Retribution (Temp HP)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Eed8QBWBtpufl1iP]</p>\n<p>当你以@UUID[Compendium.pf2e.actionspf2e.Item.KAVf7AmRnbCAHrkT]成功命中时，你获得临时生命值。</p>",
@@ -2163,10 +2163,10 @@
         },
         "Spell Effect: Mind of Menace": {
             "name": "法术效果：危惧心智 Mind of Menace",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.fPlFRu4dp09qJs3K]</p>\n<p>你获得@UUID[Compendium.pf2e.actionspf2e.Item.hi56uHG1aAb84Zzu]反应动作。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.fPlFRu4dp09qJs3K]</p>\n<p>你获得恐惧为武反应动作。</p>"
         },
         "Spell Effect: Warding Aggression (Critical Success)": {
-            "name": "法术效果：攻性防护（大成功） Warding Aggression (Critical Success)",
+            "name": "法术效果：攻性防护（大成功）Warding Aggression (Critical Success)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.CIjj9CU5ekeq1oLT]</p>\n<p>你在对抗敌人时AC获得+3状态加值。</p>"
         },
         "Spell Effect: Warding Aggression": {
@@ -2191,7 +2191,7 @@
         },
         "Spell Effect: Charged Javelin (Attacker)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.g1eY1vN44mgluE33]</p>\n<p>你在使用金属武器的攻击骰或对抗效果来源的电击效果上获得+1状态加值。</p>",
-            "name": "法术效果：雷霆标枪（攻击者） Charged Javelin (Attacker)"
+            "name": "法术效果：雷霆标枪（攻击者）Charged Javelin (Attacker)"
         },
         "Spell Effect: Albatross Curse": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j]</p>\n<p>你和目标30尺内的盟友在对目标的攻击上获得+1环境加值。</p>",
@@ -2223,7 +2223,7 @@
         },
         "Spell Effect: Corrosive Body (Temp HP)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.9aFg4EuOBVz0i3Lb]</p>\n<p>你获得临时生命值。</p>",
-            "name": "法术效果：酸蚀之躯（临时生命值） Corrosive Body (Temp HP)"
+            "name": "法术效果：酸蚀之躯（临时生命值）Corrosive Body (Temp HP)"
         },
         "Spell Effect: Distracting Decoy": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.z8bHh8KVttslQIU9]</p>\n<p><strong>失败</strong> 目标陷入措手不及，持续至你的下个回合开始为止。</p>\n<p><strong>大失败</strong> 同失败，但是该生物在处于措手不及时攻击还会承受-2环境减值。</p>",
@@ -2235,19 +2235,19 @@
         },
         "Spell Effect: Frenzied Revelry (Critical)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.fxRaWoeOGyi6THYH]</p>\n<p>你在攻击骰和伤害骰上获得+1状态加值。</p>",
-            "name": "法术效果：迷乱狂欢（大成功） Frenzied Revelry (Critical)"
+            "name": "法术效果：迷乱狂欢（大成功）Frenzied Revelry (Critical)"
         },
         "Spell Effect: Glutton's Jaws": {
             "name": "法术效果：暴食巨颚 Glutton's Jaws",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.SdXFiQ4Py8761sNO]</p>\n<p>你获得临时生命值。</p>"
         },
         "Spell Effect: Shield (Amped)": {
-            "name": "法术效果：护盾术（增幅） Shield (Amped)",
+            "name": "法术效果：护盾术（增幅）Shield (Amped)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.TVKNbcgTee19PXZR]</p>\n<p>你的AC获得+1环境加值。当你用此法术进行格挡时，三层盾牌中的一层会被打破，你将不再获得AC加值，但法术并没有结束。你可以继续使用该法术，直到最后一层被打破；一旦最后一层破裂，该法术结束，你在10分钟内不能再施放护盾术或增幅护盾术。当你用增幅护盾术进行格挡时，你可以选择破坏多层护盾以提高你的防御力。如果你破坏了两层而不是一层盾，那么盾的格挡硬度会增加到正常值的1.5倍（1级为7，3级为15，5级为22，7级为30，9级为37）。如果你破坏了所有三层，那么硬度将增加到正常值的两倍。</p>"
         },
         "Spell Effect: Albatross Curse (Circumstance Bonus)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j]</p>\n<p>你在对信天翁诅咒目标的攻击上获得+1环境加值。</p>",
-            "name": "法术效果：信天翁诅咒（环境加值） Albatross Curse (Circumstance Bonus)"
+            "name": "法术效果：信天翁诅咒（环境加值）Albatross Curse (Circumstance Bonus)"
         },
         "Spell Effect: Charged Javelin": {
             "name": "法术效果：雷霆标枪 Charged Javelin",
@@ -2258,7 +2258,7 @@
             "name": "法术效果：强音组曲 Fortissimo Composition"
         },
         "Spell Effect: Inside Ropes (3rd Rank)": {
-            "name": "法术效果：内脏绳索（3环级） Inside Ropes (3rd Rank)",
+            "name": "法术效果：内脏绳索（3环级）Inside Ropes (3rd Rank)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Einy9RNTGVq1kY3j]</p>\n<p>该生物在使用内脏进行攀爬的运动检定上获得+1物品加值。</p>"
         },
         "Spell Effect: Anointed Ground": {
@@ -2313,7 +2313,7 @@
             "name": "法术效果：诘难术 Malediction"
         },
         "Spell Effect: Benediction": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.HGSCofGACf1TVH55]</p>\n<p>你和你的盟友身处弥漫区域内时，AC获得+1状态加值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.HGSCofGACf1TVH55]</p>\n<p>你和你的盟友身处弥漫区域内时，AC获得+1状态加值。之后的每轮里一次，你可以维持法术来使弥漫范围增加10尺。</p>",
             "name": "法术效果：祝佑术 Benediction"
         },
         "Spell Effect: Roar of the Dragon": {
@@ -2369,7 +2369,7 @@
             "name": "法术效果：闪现冲锋 Blink Charge"
         },
         "Spell Effect: Cinder Gaze": {
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.mOUwbIN1SUp8FyPR]</p><ol><li><strong>可怕危险 Terrible Danger</strong> 你在下次先攻骰上获得+2状态加值。</li><li><strong>崭新生命 New Life</strong> 你下次受到伤害时，在承受伤害前，你获得临时生命值。</li><li><strong>明晰洞察 Vivid Insight</strong> （幸运） 你下一次尝试回忆知识时，掷骰两次并采用更高的结果。</li><li><strong>好运来临 Good Fortune</strong> （幸运）你下一次尝试豁免骰时，掷骰两次并采用更高的结果。</li></ol>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.mOUwbIN1SUp8FyPR]</p><ol><li><strong>可怕危险 Terrible Danger</strong> 你在下次先攻骰上获得+2状态加值。</li><li><strong>崭新生命 New Life</strong> 你下次受到伤害时，在承受伤害前，你获得临时生命值。</li><li><strong>明晰洞察 Vivid Insight</strong>（幸运）你下一次尝试回忆知识时，掷骰两次并采用更高的结果。</li><li><strong>好运来临 Good Fortune</strong>（幸运）你下一次尝试豁免骰时，掷骰两次并采用更高的结果。</li></ol>",
             "name": "法术效果：灰烬预视 Cinder Gaze"
         },
         "Spell Effect: Overwhelming Perfume": {
@@ -2381,7 +2381,7 @@
             "name": "法术效果：刻印符文 Runic Impression"
         },
         "Spell Effect: Revel in Retribution (Temp HP)": {
-            "name": "法术效果：纵狂报复（临时生命值） Revel in Retribution (Temp HP)",
+            "name": "法术效果：纵狂报复（临时生命值）Revel in Retribution (Temp HP)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Eed8QBWBtpufl1iP]</p>\n<p>你获得临时生命值。</p>"
         },
         "Spell Effect: Vindicator's Mark": {
@@ -2398,7 +2398,7 @@
         },
         "Spell Effect: Oaken Resilience (Arboreal's Revenge)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.equipment-srd.Item.4kyf3ScoJ4TvhPG3]施放的@UUID[Compendium.pf2e.spells-srd.Item.YWrfKetOqDwVFut7]</p>\n<p>你获得对钝击和穿刺伤害的2点抗力和对火焰的8点弱点。</p>",
-            "name": "法术效果：橡肤术（树精的复仇） Oaken Resilience (Arboreal's Revenge)"
+            "name": "法术效果：橡肤术（树精的复仇）Oaken Resilience (Arboreal's Revenge)"
         },
         "Spell Effect: Cauterize Wounds": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.sBSalosrt7C4IXas]</p>\n<p>你能够尝试从自身的持续流血伤害中恢复过来，且由于获得极为有效的援助而使用较低的DC。</p>",
@@ -2414,7 +2414,7 @@
         },
         "Spell Effect: Albatross Curse (Critical Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j]</p>\n<p>你下次意志豁免必须投两次并使用更坏的那个作为结果。</p>",
-            "name": "法术效果：信天翁诅咒（大失败） Albatross Curse (Critical Failure)"
+            "name": "法术效果：信天翁诅咒（大失败）Albatross Curse (Critical Failure)"
         },
         "Spell Effect: Enlarge Companion": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.8rj45fKzCFcB0fxs]</p>\n<p>你变为大型。你的装备也会变大，但法术失效后也会变回。你陷入笨拙1，触及增加5尺（或10尺如果你本来是超小型），近战伤害获得+2状态加值。这个法术对大型或更大的生物无效。</p>\n<p><strong>升阶（4环级）</strong> 你变为超大型替代原本的效果。近战伤害的状态加值变为+4，触及增加10尺（或15尺如果你是超小型）。这个法术对超大型或更大的生物无效。</p>",
@@ -2422,7 +2422,7 @@
         },
         "Spell Effect: Albatross Curse (Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j]</p>\n<p>你下次意志豁免必须骰两次并选择更坏的那个作为结果。</p>",
-            "name": "法术效果：信天翁诅咒（失败） Albatross Curse (Failure)"
+            "name": "法术效果：信天翁诅咒（失败）Albatross Curse (Failure)"
         },
         "Spell Effect: Animal Form (Crab)": {
             "name": "法术效果：动物形态-螃蟹 Animal Form (Crab)",
@@ -2486,7 +2486,7 @@
         },
         "Spell Effect: Infectious Melody (Success)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.mUz3wqbMQ5JQ06M5]</p>\n<p>你在语言威吓检定上承受-2状态减值。</p>",
-            "name": "法术效果：妙曲传唱（成功） Infectious Melody (Success)"
+            "name": "法术效果：妙曲传唱（成功）Infectious Melody (Success)"
         },
         "Spell Effect: Dragon Wings": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.HWJODX2zPg5cg34F]</p>\n<p>你获得等于你速度或60尺的飞行速度，取较高者。</p>",
@@ -2514,7 +2514,7 @@
         },
         "Spell Effect: Infectious Melody (Critical Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.mUz3wqbMQ5JQ06M5]</p>\n<p>你在语言威吓检定上承受-2状态减值。</p>",
-            "name": "法术效果：妙曲传唱（大失败） Infectious Melody (Critical Failure)"
+            "name": "法术效果：妙曲传唱（大失败）Infectious Melody (Critical Failure)"
         },
         "Spell Effect: Infectious Melody (Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.mUz3wqbMQ5JQ06M5]</p>\n<p>你在语言威吓检定上承受-2状态减值。</p>",
@@ -2522,10 +2522,10 @@
         },
         "Spell Effect: Animal Form (Seal)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]</p>\n<p>你变形为中型动物战斗形态。</p>\n<p>处于该形态时，你获得动物特征。</p>\n<p>你会根据你选择的动物获得特定能力：</p><ul><li>AC = 16 + 你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值。</li><li>昏暗视觉和模糊嗅觉30尺。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你的打击中仅能使用的攻击。你对这些攻击受训。你的攻击调整值为+9、你的伤害加值为+1。这些攻击基于力量（例如对于@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]状态而言）。如果你的无武装攻击加值更高，你能改为使用该加值。</li><li>运动调整值+9，除非你本身调整值更高。</li></ul><p>你也会根据你选择的动物获得特定能力：</p><ul><li><p><strong>海豹</strong></p><ul><li>速度20尺，游泳速度30尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（擒拿），<strong>伤害</strong> 2d6穿刺；</li><li>变形期间可以屏息。</li></ul></li></ul><hr /><p><strong>升阶（3环级）</strong> 你改为获得10临时生命值，AC=17+你的等级，攻击调整值+14，伤害加值+5，运动+14。</p>\n<p><strong>升阶（4环级）</strong> 你的战斗形态为大型，并且你的攻击具有10尺触及。你必须有足够空间扩大体型，否则你会失去法术。你改为获得15临时生命值、AC=18+你的等级、攻击调整值+16、伤害加值+9、运动+16。</p>\n<p><strong>升阶（5环级）</strong> 你的战斗形态为超大型，并且你的攻击具有15尺触及。你必须有足够空间扩大体型，否则你会失去法术。你改为获得20临时生命值、AC=18+你的等级、攻击调整值+18、伤害加值+7且伤害骰子数量翻倍、运动+20。</p>",
-            "name": "法术效果：动物形态（海豹） Animal Form (Seal)"
+            "name": "法术效果：动物形态（海豹）Animal Form (Seal)"
         },
         "Spell Effect: Animal Form (Orca)": {
-            "name": "法术效果：动物形态（虎鲸） Animal Form (Orca)",
+            "name": "法术效果：动物形态（虎鲸）Animal Form (Orca)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.wp09USMB3GIW1qbp]</p>\n<p>你变形为中型动物战斗形态。</p>\n<p>处于该形态时，你获得动物特征。</p>\n<p>你会根据你选择的动物获得特定能力：</p><ul><li>AC = 16 + 你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值。</li><li>昏暗视觉和模糊嗅觉30尺。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你的打击中仅能使用的攻击。你对这些攻击受训。你的攻击调整值为+9、你的伤害加值为+1。这些攻击基于力量（例如对于@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]状态而言）。如果你的无武装攻击加值更高，你能改为使用该加值。</li><li>运动调整值+9，除非你本身调整值更高。</li></ul><p>你也会根据你选择的动物获得特定能力：</p><ul><li><p><strong>虎鲸</strong></p><ul><li>游泳速度35尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬，<strong>伤害</strong> 2d8穿刺；</li><li>变形期间可以屏息。</li></ul></li></ul><hr /><p><strong>升阶（3环级）</strong> 你改为获得10临时生命值，AC=17+你的等级，攻击调整值+14，伤害加值+5，运动+14。</p>\n<p><strong>升阶（4环级）</strong> 你的战斗形态为大型，并且你的攻击具有10尺触及。你必须有足够空间扩大体型，否则你会失去法术。你改为获得15临时生命值、AC=18+你的等级、攻击调整值+16、伤害加值+9、运动+16。</p>\n<p><strong>升阶（5环级）</strong> 你的战斗形态为超大型，并且你的攻击具有15尺触及。你必须有足够空间扩大体型，否则你会失去法术。你改为获得20临时生命值、AC=18+你的等级、攻击调整值+18、伤害加值+7且伤害骰子数量翻倍、运动+20。</p>"
         },
         "Spell Effect: Forge (Critical Failure)": {
@@ -2538,10 +2538,10 @@
         },
         "Effect: Bone Flense (Reaction)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.V4IpjSlefultlOuY]</p>\n<p>你可以使用@UUID[Compendium.pf2e.actionspf2e.Item.wfUIsKBxCBfXi1TF]反应动作。</p>",
-            "name": "效果：剥皮去骨（反应） Bone Flense (Reaction)"
+            "name": "效果：剥皮去骨（反应）Bone Flense (Reaction)"
         },
         "Effect: Bone Flense (Damage)": {
-            "name": "效果：剥皮去骨（伤害） Bone Flense (Damage)",
+            "name": "效果：剥皮去骨（伤害）Bone Flense (Damage)",
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.V4IpjSlefultlOuY]</p>\n<p>目标在被灌入的武器的打击伤害时额外受到1d6持续流血伤害。</p>"
         },
         "Spell Effect: Scintillating Safeguard": {
@@ -2550,19 +2550,19 @@
         },
         "Spell Effect: Threefold Limb (Ice)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.3DY4vbXj0BYSWA7z]</p>\n<p>你在你的速度上承受-10尺状态减值。</p>",
-            "name": "法术效果：三态肢体（冰） Threefold Limb (Ice)"
+            "name": "法术效果：三态肢体（冰）Threefold Limb (Ice)"
         },
         "Spell Effect: Kgalaserke's Axes": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.yo1eB5Xz21AYfWCI]</p>\n<p>你对一个伤害过你的生物的攻击骰上获得+1状态加值，伤害骰上获得+2环境加值。</p>",
             "name": "法术效果：加菈瑟克之斧 Kgalaserke's Axes"
         },
         "Spell Effect: Veil of Spirits": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.lQbfgAu9uVJQC7x4]{Veil of Spirits}</p>\n<p>You are dazzled. On a failure or critical failure, you gain a weakness to spirit damage.</p>",
-            "name": "Spell Effect: Veil of Spirits"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.lQbfgAu9uVJQC7x4]</p>\n<p>你陷入目眩。若豁免结果为失败或大失败，你获得对精魂伤害的弱点。</p>",
+            "name": "法术效果：精魂纱帐 Veil of Spirits"
         },
         "Spell Effect: Spirit Ward": {
-            "description": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.MFtXn7t5vApQXqlq]{Spirit Ward}</p>\n<p>You gain a status bonus to saving throws against spells and effects caused by creatures that have the spirit trait and haunts.</p>",
-            "name": "Spell Effect: Spirit Ward"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.MFtXn7t5vApQXqlq]</p>\n<p>你在对抗由生物造成的具有精魂特征的法术和效果，以及对抗作祟时的豁免上获得状态加值。</p>",
+            "name": "法术效果：护魂结界 Spirit Ward"
         },
         "Spell Effect: Valiant Anthem": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.nRsBM1zkhMmV3VST]</p>\n<p>你在所有速度上获得+10尺状态加值，在攻击骰上获得+1状态加值。</p>",
@@ -2593,7 +2593,7 @@
             "name": "法术效果：怒仇风暴 Wrathful Storm"
         },
         "Spell Effect: Wings of the Valkyrie": {
-            "description": "<p>效果来自女武神之翼</p>\n<p>你获得等同于你速度的飞行速度</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.9ZwpT9RDwCxhYQXd]</p>\n<p>你获得等同于你速度的飞行速度</p>",
             "name": "法术效果：女武神之翼 Wings of the Valkyrie"
         },
         "Spell Effect: Honeyed Words": {
@@ -2618,7 +2618,7 @@
         },
         "Spell Effect: Demon Form": {
             "name": "法术效果：恶魔形态 Demon Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>30临时生命值，对寒铁的弱点5，对圣洁的弱点5。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你会根据你选择的恶魔获得特定能力：</p><ul><li><p><strong>憎美魔 Abrikandilu</strong> 速度25尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，邪秽），<strong>伤害</strong> 2d6+12穿刺，且在重击时笨拙1，持续1分钟；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法， 邪秽），<strong>伤害</strong> 2d6+12挥砍；</li><li><strong>远程</strong><span class=\"action-glyph\">1</span> 投掷碎片（射程增量20尺，邪秽），伤害2d6+6钝击。</li></ul></li><li><p><strong>爆燃魔 Brimorak</strong> 速度30尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 炽焰剑（魔法，邪秽），<strong>伤害</strong> 2d8+10挥砍加1d6火焰；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧，邪秽），<strong>伤害</strong> 2d4+10钝击加1d6火焰。</li></ul></li><li><p><strong>扼豸魔 Kithangian</strong> 速度30尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 钳子（魔法，触及10尺，邪秽），<strong>伤害</strong> 1d12+12挥砍，且你可以在命中后花费1个动作来尝试擒获目标</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 尾刺（灵巧，魔法，触及10尺，邪秽），<strong>伤害</strong> 1d8+12穿刺；所有近战打击对动物额外造成2d6精准伤害。</li></ul></li><li><p><strong>食魂厉魔 Vloriak</strong> 速度25尺；对酸蚀10点抗力；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（邪秽），伤害 2d6+12穿刺+1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 舌击（灵巧，触及10尺，邪秽），伤害 1d6+12酸蚀加1d6精魂。</li></ul></li></ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dKbv80rlAWVpz83C]</p>\n<p>你转变为恶魔战斗形态。处于该形态时，你获得恶魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>30临时生命值，对寒铁的弱点5，对圣洁的弱点5。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你使用的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+22，并且你的伤害加值是+12。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</p></li><li><p>运动调整值+23，除非你自身的调整值更高。</p></li></ul><p>你会根据你选择的恶魔获得特定能力：</p><ul><li><p><strong>憎美魔 Abrikandilu</strong> 速度25尺</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，无武装，邪秽），<strong>伤害</strong> 2d6穿刺，且在重击时@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 Clumsy 1}，持续1分钟</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，无武装，邪秽），<strong>伤害</strong> 2d6挥砍</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 投掷碎片（射程增量20尺，邪秽），<strong>伤害</strong> 2d6钝击。</p></li></ul></li><li><p><strong>爆燃魔 Brimorak</strong> 速度30尺</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 炽焰剑（魔法，邪秽），<strong>伤害</strong> 2d8挥砍加1d6火焰</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧，无武装，邪秽），<strong>伤害</strong> 2d4钝击加1d6火焰。</p></li></ul></li><li><p><strong>扼豸魔 Kithangian</strong> 速度30尺</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 钳子（魔法，触及10尺，无武装，邪秽），<strong>伤害</strong> 1d12挥砍，且在成功打击后，你可以花费一个动作来尝试擒获目标（怪物核心359页）</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 尾刺（灵巧，魔法，触及10尺，无武装，邪秽），<strong>伤害</strong> 1d8穿刺；所有近战打击对动物额外造成2d6精准伤害。</p></li></ul></li><li><p><strong>食魂厉魔 Vloriak</strong> 速度25尺；对酸蚀10点抗力</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（无武装，邪秽），<strong>伤害</strong> 2d6穿刺加1d6精魂</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 舌击（灵巧，触及10尺，无武装，邪秽），<strong>伤害</strong> 1d6酸蚀加1d6精魂。</p></li></ul></li></ul>"
         },
         "Spell Effect: Outcast's Curse (Failure)": {
             "name": "法术效果：流放诅咒-失败 Outcast's Curse (Failure)",
@@ -2626,11 +2626,11 @@
         },
         "Spell Effect: Wings of the Valkyrie (Heightened)": {
             "name": "法术效果：女武神之翼·升阶 Wings of the Valkyrie (Heightened)",
-            "description": "<p>效果来自女武神之翼</p>\n<p>你获得等同于你速度的飞行速度。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.9ZwpT9RDwCxhYQXd]</p>\n<p>你获得等同于你速度的飞行速度。</p>"
         },
         "Spell Effect: Conquering Soldiers (Depart)": {
             "name": "法术效果：征服之军-离去 Conquering Soldiers (Depart)",
-            "description": "<p>效果来自征服之军</p>\n<p>你在攻击、豁免、技能检定与DC上获得+2状态加值。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.ion3VOiLan6ga3QC]</p>\n<p>你在攻击、豁免、技能检定与DC上获得+2状态加值。</p>"
         },
         "Spell Effect: Helpful Reload": {
             "name": "法术效果：援助装填 Helpful Reload",
@@ -2702,10 +2702,10 @@
         },
         "Spell Effect: Devil Form": {
             "name": "法术效果：魔鬼形态 Devil Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>5临时生命值，对物理伤害的抗力5（除了银），对圣洁的弱点5。</li><li>对火焰抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你会根据你选择的魔鬼获得特定能力：</p><ul><li><p><strong>堕天魔（Coarti）</strong> 速度25尺，飞行速度40尺；</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 钉头锤（魔法，邪秽，多用P），<strong>伤害</strong> 2d6+12钝击加1d6精魂；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 翼击（灵巧，邪秽，多用P），<strong>伤害</strong> 1d6+12钝击加1d6火焰。</li></ul></li><li><p><strong>好战魔（Levaloch）</strong> 速度30尺，攀爬速度30尺；对抗推撞和其他将要违背你意愿的移动时强韧DC+2环境加值；</p><ul><li><strong>体型</strong> 大型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，邪秽），<strong>伤害</strong> 2d8+10穿刺；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，投掷20尺，邪秽），<strong>伤害</strong> 2d8+10穿刺；所有近战打击对处于笨拙，力竭，禁足或手缚的生物造成额外2d6精准伤害。</li></ul></li><li><p><strong>丧沦魔（Sarglagon）</strong> 速度25尺，飞行速度25尺，游泳速度30尺；</p><ul><li><strong>体型</strong> 大型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 牙咬（魔法，邪秽），<strong>伤害</strong> 2d10+10穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 触须手臂（灵巧，魔法，邪秽），<strong>伤害</strong> 1d8+10钝击加1d6毒素。</li></ul></li><li><p><strong>军团魔（Vordine）</strong> 速度25尺；</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，邪秽），<strong>伤害</strong> 2d8+12穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧，魔法，邪秽），<strong>伤害</strong> 1d4+12钝击加1d6火焰</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 鞭打（卸武，魔法，非致命，触及10尺，摔绊，邪秽），<strong>伤害</strong> 2d4+10挥砍；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，投掷20尺，邪秽），<strong>伤害</strong> 2d8+12穿刺</li></ul></li></ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.dR53f0p15EW7D0xC]</p>\n<p>你转变为魔鬼战斗形态。处于该形态时，你获得魔鬼和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>5临时生命值，对物理伤害的抗力5（除了银），对圣洁的弱点5。</p></li><li><p>对火焰抗力10。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你使用的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+20，并且你的伤害加值是+12。这些攻击基于力量（例如对于力竭状态而言）。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</p></li><li><p>运动调整值+23，除非你自身的调整值更高。</p></li></ul><p>你会根据你选择的魔鬼获得特定能力：</p><ul><li><p><strong>堕天魔（Coarti）</strong> 速度25尺，飞行速度40尺</p><ul><li><p><strong>体型</strong> 中型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 钉头锤（魔法，邪秽，多用P），<strong>伤害</strong> 2d6钝击加1d6精魂</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 翼击（灵巧，无武装，邪秽，多用P），<strong>伤害</strong> 1d6钝击加1d6火焰。</p></li></ul></li><li><p><strong>好战魔（Levaloch）</strong> 速度30尺，攀爬速度30尺；对抗推撞和其他将要违背你意愿的移动时强韧DC+2环境加值</p><ul><li><p><strong>体型</strong> 大型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，邪秽），<strong>伤害</strong> 2d8穿刺</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，投掷20尺，邪秽），<strong>伤害</strong> 2d8穿刺；所有近战打击对处于笨拙，力竭，禁足或手缚的生物造成额外2d6精准伤害。</p></li></ul></li><li><p><strong>丧沦魔（Sarglagon）</strong> 速度25尺，飞行速度25尺，游泳速度30尺</p><ul><li><p><strong>体型</strong> 大型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 牙咬（魔法，无武装，邪秽），<strong>伤害</strong> 2d10穿刺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 触须手臂（灵巧，魔法，无武装，邪秽），<strong>伤害</strong> 1d8钝击加1d6毒素。</p></li></ul></li><li><p><strong>军团魔（Vordine）</strong> 速度25尺</p><ul><li><p><strong>体型</strong> 中型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，邪秽），<strong>伤害</strong> 2d8穿刺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧，魔法，无武装，邪秽），<strong>伤害</strong> 1d4钝击加1d6火焰</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 鞭打（卸武，魔法，非致命，触及10尺，摔绊，邪秽），<strong>伤害</strong> 2d4挥砍</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 三叉戟（魔法，投掷20尺，邪秽），<strong>伤害</strong> 2d8穿刺。</p></li></ul></li></ul>"
         },
         "Spell Effect: Ash-Strewn Ending": {
-            "description": "<p>效果来自灰烬终末</p>\n<p>你获得虚能伤害抗力，以及在对抗死亡效果的豁免检定上获得状态加值。如果仪式大失败，则你代替获得对应弱点与相应检定的状态减值。</p>",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.QqMlN9VSHfD2v4Qv]</p>\n<p>你获得虚能伤害抗力，以及在对抗死亡效果的豁免检定上获得状态加值。如果仪式大失败，则你代替获得对应弱点与相应检定的状态减值。</p>",
             "name": "法术效果：灰烬终末 Ash-Strewn Ending"
         },
         "Spell Effect: Humanoid Form": {
@@ -2718,11 +2718,11 @@
         },
         "Spell Effect: Angel Form": {
             "name": "法术效果：天使形态 Angel Form",
-            "description": "</strong><p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.E3zIZ4pjlOuWeGRz]</p>\n<p>你变形为中型天使战斗形态。处于该形态时，你获得天使和天族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=22+你的等级。忽略你的护甲检定减值和速度减值。</li><li>40点临时生命值，对邪秽的弱点10。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你使用列出的伤害。近战攻击基于力量（例如对于力竭状态而言），所有的远程攻击都基于敏捷。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</li><li>运动调整值+25，除非你自身的调整值更高。</li></ul><p>你会根据你选择的天使获得特定能力：</p><ul><li><p><strong>巴利斯 Balisse</strong> 速度30尺，飞行速度40尺；侦测谎言和幻术的察觉调整值+26，除非你的调整值更高；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 弯刀（火焰，叠劲，圣洁，魔法，横扫），<strong>伤害</strong> 2d6+12挥砍加2d6火焰。</li></ul></li><li><p><strong>科洛 Choral</strong> 速度30尺，飞行速度40尺；对抗音波和听觉效果的AC和豁免+1状态加值</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧），<strong>伤害</strong> 2d6+12钝击加1d6精魂；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 刺耳圣歌（射程90尺），<strong>伤害</strong> 1d6+12音波加1d6精魂，并且重击时@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1轮。</li></ul></li><li><p><strong>基路伯 Kuribu</strong> 速度25尺，飞行速度40尺；对电击和火焰10点抗力</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧，圣洁，魔法），<strong>伤害</strong> 3d4+12钝击。</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 复合长弓（致命2d10，圣洁，魔法，助进，射程增量60尺），<strong>伤害</strong> 3d6+12穿刺</li></ul></li><li><p><strong>天人 Tennin</strong> 速度30尺，飞行速度60尺；可以快步进入困难地形并且可以使用陆地和飞行速度进行快步；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧，圣洁，魔法，非致命），<strong>伤害</strong> 1d6+12钝击加1d6寒冷加1d6精魂。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你的战斗形态为大型。你必须有空间扩大体型，否则你会失去法术。你改为获得60点临时生命值、对邪秽弱点15、攻击调整值+30、伤害加值+20、运动+33。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.E3zIZ4pjlOuWeGRz]</p>\n<p>你变形为天使战斗形态。你获得天使、天族和圣洁特征。处于该战斗形态时，你具有手。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=22+你的等级。忽略你的护甲检定减值和速度减值。40点临时生命值，对邪秽的弱点10。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你的伤害加值是+12。近战攻击基于力量（例如对于力竭状态而言），所有的远程攻击都基于敏捷。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</p></li><li><p>运动调整值+25，除非你自身的调整值更高。</p></li></ul><p>你会根据你选择的天使获得特定能力：</p><ul><li><p><strong>巴利斯 Balisse</strong></p><ul><li><p>速度30尺，飞行速度40尺</p></li><li><p>侦测谎言和幻术的察觉调整值+26，除非你自身的调整值更高</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 弯刀（火焰，叠劲，圣洁，魔法，横扫），<strong>伤害</strong> 2d6挥砍加2d6火焰。</p></li></ul></li><li><p><strong>科洛 Choral</strong></p><ul><li><p>速度30尺，飞行速度40尺</p></li><li><p>对抗听觉和音波的AC和豁免+1状态加值</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧，圣洁，魔法，无武装），<strong>伤害</strong> 2d6钝击</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 刺耳圣歌（圣洁，魔法，射程90尺），<strong>伤害</strong> 3d6音波，并且重击时@UUID[Compendium.pf2e.conditionitems.Item.9PR9y0bi4JPKnHPR]1轮。</p></li></ul></li><li><p><strong>基路伯 Kuribu</strong></p><ul><li><p>速度25尺，飞行速度40尺</p></li><li><p>对电击和火焰10点抗力</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧，圣洁，魔法，无武装），<strong>伤害</strong> 3d4钝击</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 复合短弓（致命2d10，圣洁，魔法，助进，射程增量60尺），<strong>伤害</strong> 3d6穿刺</p></li></ul></li><li><p><strong>天人 Tennin</strong></p><ul><li><p>速度30尺，飞行速度60尺</p></li><li><p>可以快步进入困难地形并且可以使用陆地和飞行速度进行快步</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳击（灵巧，圣洁，魔法，非致命，无武装），<strong>伤害</strong> 1d6钝击加1d6寒冷和1d6精魂。</p></li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 如果你选择巴利斯或天人，你的战斗形态为大型。你必须有空间扩大体型，否则你会失去法术。你改为获得AC=22+你的等级、60点临时生命值、对邪秽弱点15、攻击调整值+30、伤害加值+20、运动+33。</p>"
         },
         "Spell Effect: Daemon Form": {
             "name": "法术效果：邪魔形态 Daemon Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.aSDfGcUOUVGU5m1g]</p>\n<p>你转变为大型邪魔战斗形态。处于该形态时，你获得邪魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</li><li>15临时生命值，对圣洁的弱点5。</li><li>对抗所有死亡效果的豁免上+2状态加值。</li><li>对毒素抗力10。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+21，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+23，除非你自身的调整值更高。</li></ul><p>你会根据你选择的邪魔获得特定能力：</p><ul><li><p><strong>孤独邪魔 Lacridaemon</strong>速度25尺，飞行速度40尺，10点对寒冷的抗力</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，邪秽），<strong>伤害</strong> 1d8+12穿刺加1d6寒冷加1d4毒素</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，邪秽），<strong>伤害</strong> 1d6+12挥砍加1d6寒冷。</li></ul></li><li><p><strong>疫病邪魔 Leukodaemon</strong>速度25尺，飞行速度40尺，对抗疾病的豁免获得+2状态加值</p><ul><li><strong>体型</strong> 大型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，触及10尺，邪秽），<strong>伤害</strong> 2d10+12穿刺</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，触及10尺，邪秽），<strong>伤害</strong> 2d6+12挥砍；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 复合长弓（致命1d10，魔法，助进，射程增量100尺，邪秽，远射），<strong>伤害</strong> 2d8+12穿刺。</li></ul></li><li><p><strong>饥馑邪魔 Meladaemon</strong>速度25尺，飞行速度40尺</p><ul><li><strong>体型</strong> 大型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，触及10尺，邪秽），<strong>伤害</strong> 2d10+12穿刺</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，触及10尺，邪秽，虚能），<strong>伤害</strong> 1d6+12挥砍加1d6虚能，且你可以在命中后用一个动作来尝试擒获目标目标。</li></ul></li><li><p><strong>秘法邪魔 Venedaemon</strong>速度25尺，能够以模糊感官感知60尺内的魔法物品和启动的法术</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 触手（灵巧，魔法，触及10尺，邪秽），<strong>伤害</strong> 2d6+12钝击。</li></ul></li></ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.aSDfGcUOUVGU5m1g]</p>\n<p>你转变为邪魔战斗形态。处于该形态时，你获得邪魔和魔族特征。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li><p>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>20临时生命值，对圣洁的弱点5。</p></li><li><p>对抗所有死亡效果的豁免上+2状态加值。</p></li><li><p>对毒素抗力10。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你使用的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+21，并且你的伤害加值是+12。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>运动调整值+23，除非你自身的调整值更高。</p></li></ul><p>你会根据你选择的邪魔获得特定能力：</p><ul><li><p><strong>孤独邪魔 Lacridaemon</strong> 速度25尺，飞行速度40尺；10点对寒冷的抗力</p><ul><li><p><strong>体型</strong> 中型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，邪秽），<strong>伤害</strong> 1d8穿刺加1d6寒冷和1d4毒素</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，邪秽），<strong>伤害</strong> 1d6挥砍加1d6寒冷。</p></li></ul></li><li><p><strong>疫病邪魔 Leukodaemon</strong> 速度25尺，飞行速度40尺；对抗疾病的豁免获得+2状态加值</p><ul><li><p><strong>体型</strong> 大型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，触及10尺，邪秽），<strong>伤害</strong> 2d10穿刺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，触及10尺，邪秽），<strong>伤害</strong> 2d6挥砍；</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 复合长弓（致命d10，魔法，射程增量100尺，邪秽，远射），<strong>伤害</strong> 2d8穿刺。</p></li></ul></li><li><p><strong>饥馑邪魔 Meladaemon</strong> 速度25尺，飞行速度40尺</p><ul><li><p><strong>体型</strong> 大型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬（魔法，触及10尺，邪秽），<strong>伤害</strong> 2d10穿刺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪抓（灵巧，魔法，触及10尺，邪秽，虚能），<strong>伤害</strong> 1d6挥砍加1d6虚能，且在成功打击后，你可以花费一个动作来尝试@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]目标。</p></li></ul></li><li><p><strong>秘法邪魔 Venedaemon</strong> 速度25尺；能够以模糊感官感知60尺内的魔法物品和启动的法术</p><ul><li><p><strong>体型</strong> 中型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 触手（灵巧，魔法，触及10尺，邪秽），<strong>伤害</strong> 2d6钝击。</p></li></ul></li></ul>"
         },
         "Spell Effect: Shielding Formation": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.6QEWTuCKRQQTyoeS]</p>\n<p>你在AC上获得+1环境加值。你可以终止该加值，并获得针对该次伤害的全伤害抗力10。</p>",
@@ -2730,11 +2730,11 @@
         },
         "Spell Effect: Aberrant Form": {
             "name": "法术效果：异怪形态 Aberrant Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Fu8Ml47ZfXpSYe7E]</p>\n<p>你将自己转变为一个大型异怪。处于该形态时，你获得异怪特征。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=18+你的等级。忽略你的护甲检定减值和速度减值。</li><li>13临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+18，并且你使用列出的伤害。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+20，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的异怪类型获得特定能力：</p><ul><li><p><strong>甲伏怪 Chuul</strong></p><ul><li>速度30尺，游泳速度25尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（触及10尺），<strong>伤害</strong> 2d8+8钝击，并且你可以在命中后花费一个动作擒抱目标。</li></ul></li><li><p><strong>高基特斯 Gogiteth</strong></p><ul><li>速度40尺，攀爬速度30尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 2d10+8穿刺，并且你可以在命中后花费一个动作擒抱目标；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 腿（灵巧，触及10尺），<strong>伤害</strong> 2d6+8穿刺。</li></ul></li><li><p><strong>古革巨人 Gug</strong></p><ul><li>速度40尺，攀爬速度20尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧，触及10尺），<strong>伤害</strong> 2d8+8挥砍；</li><li>你的数个关节让你能如同中型生物一般进入狭窄空间。</li></ul></li><li><p><strong>食腐怪 Otyugh</strong></p><ul><li>对抗疾病豁免+2环境加值；</li><li>速度 20尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 3d6+8穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 触手（灵巧，触及10尺），<strong>伤害</strong> 2d6+8钝击</li></ul></li></ul><hr /><p><strong>升阶（6环级）</strong> 你的战斗形态为超大型，并你的攻击的触及增加5尺。你必须有空间扩大体型，否则你会失去法术。你改为获得AC=21+你的等级、26临时生命、攻击调整值+22、伤害加值+13、以及运动+23。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Fu8Ml47ZfXpSYe7E]</p>\n<p>你将自己转变为一个大型异怪。你获得异怪特征，以及后续数据和能力：</p><ul><li><p>AC=18+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>13临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的无武装近战攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+18，并且你的伤害加值是+8。这些攻击基于力量（例如对于力竭状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>运动调整值+20，除非你自身的调整值更高。</p></li></ul><p>你也会根据你选择的异怪类型获得特定能力：</p><ul><li><p><strong>甲伏怪 Chuul</strong></p><ul><li><p>速度30尺，游泳速度25尺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（触及10尺），<strong>伤害</strong> 2d8钝击，且在成功打击后，你可以花费一个动作来尝试@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]目标。</p></li></ul></li><li><p><strong>高基特斯 Gogiteth</strong></p><ul><li><p>速度40尺，攀爬速度30尺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬，<strong>伤害</strong> 2d10穿刺，且在成功打击后，你可以花费一个动作来尝试@UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr]目标</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 腿（灵巧，触及10尺），<strong>伤害</strong> 2d6+8穿刺。</p></li></ul></li><li><p><strong>古革巨人 Gug</strong></p><ul><li><p>速度40尺，攀爬速度20尺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬（触及10尺），<strong>伤害</strong> 2d12穿刺</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧，触及10尺），<strong>伤害</strong> 2d8+8挥砍</p></li><li><p>你的数个关节让你能如同中型生物一般进入狭窄空间。</p></li></ul></li><li><p><strong>残渣怪 Ofalth</strong></p><ul><li><p>速度30尺；</p></li><li><p>对抗疾病和毒素的豁免+2环境加值</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（触及10尺），<strong>伤害</strong> 2d12钝击。</p></li></ul></li></ul><hr /><p><strong>升阶（6环级）</strong> 你的战斗形态为超大型，并且你的攻击的触及增加5尺。你必须有空间扩大体型，否则你会失去法术。你改为获得AC=21+你的等级、26临时生命值、攻击调整值+22、伤害加值+13、以及运动+23。</p>"
         },
         "Spell Effect: Monstrosity Form": {
             "name": "法术效果：巨兽形态 Monstrosity Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]</p>\n<p>你变形为传奇怪物，化作超大型战斗形态。处于该形态时，你获得怪兽特征（对于凤凰）或者动物特征（对于穴虫和海蛇）。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>20临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+28，并且你使用列出的伤害。这些攻击基于力量（例如对于 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7] 状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+30，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的怪物类型获得特定能力：</p><ul><li><p><strong>穴虫（Cave Worm）</strong></p><ul><li>速度40尺，掘地30尺，游泳20尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬（触及10尺），<strong>伤害</strong> 2d12+20 穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 毒刺（灵巧，触及10尺），<strong>伤害</strong> 2d8+15穿刺加2d6持续毒素伤害；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 躯体（触及10尺） <strong>伤害</strong> 2d8+20钝击；</li><li><strong>势不可挡 Inexorable</strong> 在你的回合结束，你自动从@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]，@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]中恢复。你同时免疫@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，并且忽视困难地形和艰难地形。</li></ul></li></ul><ul><li><p><strong>凤凰（Phoenix）</strong></p><ul><li>速度30尺，飞行90尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 喙（触及15尺），<strong>伤害</strong> 2d6+12穿刺加2d4火焰和2d4持续火焰伤害；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧，触及15尺），<strong>伤害</strong> 2d8+12挥砍；</li><li><strong>火焰帷幕 Shroud of Flame</strong> （灵光，火焰，原能）20尺。你获得从你自身发出的灵光。进入其中或者在其中结束回合的生物承受2d6火焰伤害。一个生物每轮仅会承受该伤害一次。你可以通过一个维持动作来激活或者关闭该灵光。</li></ul></li><li><p><strong>海蛇（Sea Serpent）</strong></p><ul><li>速度 20尺，游泳 90尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬（触及15尺），<strong>伤害</strong> 2d12+20穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 尾（触及25尺），<strong>伤害</strong> 2d8+20钝击；</li><li><strong>脊刺耙扫 Spine Rake</strong> <span class=\"action-glyph\">2</span> （移动） 你延长自身的棘刺，并且游泳或者行走。在你移动中的任一点与你相邻的生物承受4d8+10挥砍伤害（基础反射，对抗你的法术DC）。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你改为获得AC=22+你的等级，25临时生命，攻击调整值+31，增加伤害一个伤害骰，以及运动+33。</p>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.8AMvNVOUEtxBCDvJ]</p>\n<p>你变形为传奇怪物，化作超大型战斗形态。处于该形态时，你获得怪兽特征（对于凤凰）或者动物特征（对于穴虫和海蛇）。你获得后续数据和能力，无论你选择哪种战斗形态：</p><ul><li>AC=20+你的等级。忽略你的护甲检定减值和速度减值。</li><li>20临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你仅能使用的打击。你对这些攻击受训。你的攻击调整值是+28，并且你使用列出的伤害。这些攻击基于力量（例如对于 @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7] 状态而言）。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+30，除非你自身的调整值更高。</li></ul><p>你也会根据你选择的怪物类型获得特定能力：</p><ul><li><p><strong>穴虫（Cave Worm）</strong></p><ul><li>速度40尺，掘地30尺，游泳20尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬（触及10尺），<strong>伤害</strong> 2d12+20 穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 毒刺（灵巧，触及10尺），<strong>伤害</strong> 2d8+15穿刺加2d6持续毒素伤害；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 躯体（触及10尺）<strong>伤害</strong> 2d8+20钝击；</li><li><strong>势不可挡 Inexorable</strong> 在你的回合结束，你自动从@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]，@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]中恢复。你同时免疫@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]，并且忽视困难地形和艰难地形。</li></ul></li></ul><ul><li><p><strong>凤凰（Phoenix）</strong></p><ul><li>速度30尺，飞行90尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 喙（触及15尺），<strong>伤害</strong> 2d6+12穿刺加2d4火焰和2d4持续火焰伤害；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪（灵巧，触及15尺），<strong>伤害</strong> 2d8+12挥砍；</li><li><strong>火焰帷幕 Shroud of Flame</strong>（灵光，火焰，原能）20尺。你获得从你自身发出的灵光。进入其中或者在其中结束回合的生物承受2d6火焰伤害。一个生物每轮仅会承受该伤害一次。你可以通过一个维持动作来激活或者关闭该灵光。</li></ul></li><li><p><strong>海蛇（Sea Serpent）</strong></p><ul><li>速度 20尺，游泳 90尺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 咬（触及15尺），<strong>伤害</strong> 2d12+20穿刺；</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 尾（触及25尺），<strong>伤害</strong> 2d8+20钝击；</li><li><strong>脊刺耙扫 Spine Rake</strong> <span class=\"action-glyph\">2</span>（移动）你延长自身的棘刺，并且游泳或者行走。在你移动中的任一点与你相邻的生物承受4d8+10挥砍伤害（基础反射，对抗你的法术DC）。</li></ul></li></ul><hr /><p><strong>升阶（9环级）</strong> 你改为获得AC=22+你的等级，25临时生命，攻击调整值+31，增加伤害一个伤害骰，以及运动+33。</p>"
         },
         "Spell Effect: Curse of Recoil (Failure)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.9uSBfK8EUVBrcNYx]</p>\n<p>你的远程攻击受到-1状态减值。</p>",
@@ -2746,7 +2746,7 @@
         },
         "Spell Effect: Cosmic Form": {
             "name": "法术效果：星体形态 Cosmic Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.IHUs4qn27RrdFQ5Y]</p>\n<p>你转变为大型战斗形态。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</li><li>20临时生命值。</li><li>黑暗视觉。</li><li>一个或多个由你使用的战斗形态决定的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你使用列出的伤害。这些近战攻击基于力量（例如对于力竭的情况），并且远程攻击基于敏捷。如果你的无武装攻击调整值更高，你能改为使用该调整值。</li><li>运动调整值+25，除非你本身调整值更高。</li></ul><p>你也会根据星体获得特定能力：</p><ul><li><p><strong>月亮（Moon）</strong> 速度 30尺，飞行 50尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（灵巧，触及10尺），<strong>伤害</strong> 2d4+10钝击加1d6火焰；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 月亮射线（射程90尺），<strong>伤害</strong> 2d4+10火焰；这种火焰伤害对于抗力和弱点以及类似效果而言为银；</li><li>任两者任一种打击重击时，目标@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1轮。</li></ul></li><li><p><strong>太阳（Sun）</strong> 速度30尺，飞行50尺；</p><ul><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（灵巧，触及10尺），<strong>伤害</strong> 2d6+10火焰加1d6持续火焰伤害；</li><li><strong>远程</strong> <span class=\"action-glyph\">1</span> 太阳射线（射程90尺），<strong>伤害</strong> 1d6+10火焰加1d6持续火焰伤害；</li><li>任两者任一种打击重击时，目标 @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]，持续1轮。</li></ul></li></ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.IHUs4qn27RrdFQ5Y]</p>\n<p>你转变为大型战斗形态。处于该战斗形态时，你具有手并且可以使用操作动作。你获得后续数据和能力，无论你选择哪种形态：</p><ul><li><p>AC=21+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>20临时生命值。</p></li><li><p>黑暗视觉。</p></li><li><p>一个或多个由你使用的战斗形态决定的攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+25，并且你的伤害加值是+10。近战攻击基于力量（例如对于力竭状态而言），并且远程攻击基于敏捷。如果你的无武装攻击调整值更高，你能改为使用该调整值。</p></li><li><p>运动调整值+25，除非你本身调整值更高。</p></li></ul><p>你也会根据星体获得特定能力：</p><ul><li><p><strong>月亮（Moon）</strong> 速度30尺，飞行50尺</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（灵巧，触及10尺，无武装），<strong>伤害</strong> 2d4钝击加1d6火焰</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 月亮射线（射程90尺），<strong>伤害</strong> 2d4火焰；这种火焰伤害对于抗力和弱点以及类似效果而言为银</p></li><li><p>以任一种打击重击时，目标@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 Stupefied 2}，持续1轮。</p></li></ul></li><li><p><strong>太阳（Sun）</strong> 速度30尺，飞行50尺</p><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 拳（灵巧，触及10尺，无武装），<strong>伤害</strong> 2d6火焰加1d6持续火焰</p></li><li><p><strong>远程</strong> <span class=\"action-glyph\">1</span> 太阳射线（射程90尺），<strong>伤害</strong> 1d6火焰加1d6持续火焰</p></li><li><p>以任一种打击重击时，目标@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]，持续1轮。</p></li></ul></li></ul>"
         },
         "Spell Effect: Funeral Flames": {
             "name": "法术效果：葬礼之火 Funeral Flames",
@@ -2762,7 +2762,7 @@
         },
         "Spell Effect: Fey Form": {
             "name": "法术效果：精类形态 Fey Form",
-            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Qu4IThrk1wpONwjT]</p>\n<p>你变形为中型精类战斗形态。处于该形态时，你获得精类特征。处于该战斗形态时，你具有手并且可以使用操作动作。</p>\n<p>你获得后续数据和能力，无论你选择哪种形态：</p><ul><li>AC=19+你的等级。忽略你的护甲检定减值和速度减值。</li><li>15临时生命值，以及对寒铁伤害的弱点5。</li><li>昏暗视觉。</li><li>一个或多个由你选择的战斗形态决定的无武装近战攻击，这是你仅能用于打击的攻击。你对这些攻击受训。你的攻击调整值是+16，并且你使用列出的伤害。这些攻击基于敏捷属性。如果给出的无武装攻击或者武器，你的的攻击调整值更高，你能改为使用该加值。</li><li>特技调整值+16，除非你自身调整值更高。</li></ul><p>你也会根据精类类型获得特定能力：</p><ul><li><p><strong>木林仙女 Dryad</strong> 获得的临时生命增加到30</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 树枝，<strong>伤害</strong> 1d12+8钝击</li></ul></li><li><p><strong>林焰猞猁 Elananx</strong> 速度 30尺；对火焰抗力5</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬，<strong>伤害</strong> 1d6+8穿刺加1d6火焰</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪击（灵巧），<strong>伤害</strong> 1d6+8挥砍</li></ul></li><li><p><strong>水泽仙女 Naiad</strong> 速度25尺， 游泳25尺；对火焰抗力5</p><ul><li><strong>体型</strong> 中型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 水之拳（水），<strong>伤害</strong> 1d8+8钝击</li></ul></li><li><p><strong>红帽精 Redcap</strong> 速度40尺</p><ul><li><strong>体型</strong> 小型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 镰刀（致命D10，摔绊），<strong>伤害</strong> 1d10+8挥砍</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 铁靴子（灵巧，多用B），<strong>伤害</strong> 1d6+8穿刺</li></ul></li><li><p><strong>独角兽 Unicorn</strong> 除了精类也获得魔兽特征；速度40尺；对毒素抗力5</p><ul><li><strong>体型</strong> 大型</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 角顶，<strong>伤害</strong> 1d10+8穿刺加1精魂</li><li><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧），<strong>伤害</strong> 1d8+8钝击；所有打击都具有<em>@UUID[Compendium.pf2e.equipment-srd.Item.JQdwHECogcTzdd8R]</em>符文效果。</li></ul></li></ul>"
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Qu4IThrk1wpONwjT]</p>\n<p>你变形为中型精类战斗形态。处于该形态时，你获得精类特征。除非你选择林焰猞猁或独角兽，你在该战斗形态下具有手并且可以使用操作动作。</p>\n<p>你获得后续数据和能力，无论你选择哪种形态：</p><ul><li><p>AC=19+你的等级。忽略你的护甲检定减值和速度减值。</p></li><li><p>15临时生命值，以及对寒铁伤害的弱点5。</p></li><li><p>昏暗视觉。</p></li><li><p>一个或多个由你选择的战斗形态决定的无武装近战攻击，这些攻击是你唯一能用于进行打击的攻击。你对这些攻击受训。你的攻击调整值是+16，并且你的伤害加值是+8。这些攻击基于敏捷属性。如果给出的无武装攻击或者武器，你的攻击调整值更高，你能改为使用该加值。</p></li><li><p>特技调整值+16，除非你自身调整值更高。</p></li></ul><p>你也会根据精类类型获得特定能力：</p><ul><li><p><strong>木林仙女 Dryad</strong> 速度25尺；对火焰弱点5；获得的临时生命值增加到30</p><ul><li><p><strong>体型</strong> 中型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 树枝，伤害 1d12钝击。</p></li></ul></li><li><p><strong>林焰猞猁 Elananx</strong> 速度30尺；对火焰抗力5</p><ul><li><p><strong>体型</strong> 中型</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 颚咬，伤害 1d6穿刺加1d6火焰</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 爪击（灵巧），<strong>伤害</strong> 1d6挥砍。</p></li></ul></li><li><p><strong>水泽仙女 Naiad</strong> 速度25尺，游泳25尺；对火焰抗力5</p><ul><li><p><strong>体型</strong> 中型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 水之拳（水），<strong>伤害</strong> 1d8钝击。</p></li></ul></li><li><p><strong>红帽精 Redcap</strong> 速度40尺</p><ul><li><p><strong>体型</strong> 小型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 镰刀（致命d10，摔绊），<strong>伤害</strong> 1d10挥砍</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 铁靴子（灵巧，多用B），<strong>伤害</strong> 1d6穿刺。</p></li></ul></li><li><p><strong>独角兽 Unicorn</strong> 速度40尺；对毒素抗力5；除了精类特征也获得魔兽和圣洁特征</p><ul><li><p><strong>体型</strong> 大型</p></li></ul><ul><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 角顶（圣洁），<strong>伤害</strong> 1d10穿刺加1精魂</p></li><li><p><strong>近战</strong> <span class=\"action-glyph\">1</span> 蹄击（灵巧），<strong>伤害</strong> 1d8钝击；所有打击都具有@UUID[Compendium.pf2e.equipment-srd.Item.JQdwHECogcTzdd8R]符文效果。</p></li></ul></li></ul>"
         },
         "Spell Effect: Equal Footing (Success)": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.Z2oSFY2fT8zLkK4P]</p>\n<p>你的所有速度受到-10尺状态减值。</p>",
@@ -2789,8 +2789,8 @@
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.jXcsCpko8qNrWZ4x]</p>\n<p>你从治疗效果获得额外的生命值。</p>"
         },
         "Spell Effect: Spiritual Renewal": {
-            "name": "Spell Effect: Spiritual Renewal",
-            "description": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.tBC1QmB33KWIuBFX]{Spiritual Renewal}</p>\n<p>You gain fast healing.</p>"
+            "name": "法术效果：精魂愈疗 Spiritual Renewal",
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.tBC1QmB33KWIuBFX]</p>\n<p>你获得快速治疗。</p>"
         },
         "Spell Effect: Song of Silver": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.HYXyMFsH0K80etBI]</p>\n<p>你在所有对抗心灵效果的豁免检定上获得+2状态加值；此加值在对抗恐惧效果时增加至+4状态加值。若仪式大成功，则你持握的所有武器视为银制武器。</p>",
@@ -2855,6 +2855,37 @@
         "Spell Effect: Frozen Fog": {
             "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.nOVSmPZsCm1C1sI3]</p>\n<p>你陷入笨拙1（大失败时笨拙2），且速度承受-10尺状态减值。</p>",
             "name": "法术效果：寒霜迷雾 Frozen Fog"
+        },
+        "Spell Effect: Muscle Barrier": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.lbQCmM0e89Y4ou7F]</p>\n<p>你获得临时生命值，并在运动检定上获得+1状态加值。当失去全部临时生命时，法术就会结束。</p>",
+            "name": "法术效果：肌肉屏障 Muscle Barrier"
+        },
+        "Spell Effect: Song of the Soul": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.oRKmyZPwGafCaFT2]</p>\n<p>你获得快速治疗。</p>",
+            "name": "法术效果：愈魂之歌 Song of the Soul"
+        },
+        "Spell Effect: Undertow": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.4VsCGrIz07NrMaZA]</p>\n<p>你在游泳的运动检定上承受-2环境减值，若你拥有游泳速度，还会在游泳速度上承受-10尺环境减值。</p>",
+            "name": "法术效果：暗潮术 Undertow"
+        },
+        "Spell Effect: Fishing Spot": {
+            "name": "法术效果：魔鱼钓台 Fishing Spot"
+        },
+        "Spell Effect: Fulminating Impact (Initial Strike)": {
+            "description": "<p>进行一次近战打击。若打击命中，你额外造成1d6点电击伤害和1d6点音波伤害。</p>",
+            "name": "法术效果：轰雷冲击 Fulminating Impact（首次打击）"
+        },
+        "Spell Effect: Murmuration": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.4EmLum6EdvXxbxCj]</p>\n<p>你在攻击掷骰或敌对技能检定上承受-2环境减值。</p>",
+            "name": "法术效果：群鸟掠心 Murmuration"
+        },
+        "Spell Effects: Divine Dragon's Watch": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.BBiO9ZdwyEJ581ES]</p>\n<p>你获得龙魂守护反应动作。</p>",
+            "name": "法术效果：神龙之护 Divine Dragon's Watch"
+        },
+        "Spell Effect: Sparkleskin": {
+            "description": "<p>效果来自@UUID[Compendium.pf2e.spells-srd.Item.KAWQ5x2j4tUJ91ry]</p>\n<p>你在尝试分神和虚招时的欺骗检定，以及尝试具有视觉特征的演出时的表演检定上获得+2状态加值。</p>\n<p>当你受到伤害时，5尺弥漫范围内的生物必须尝试一次强韧豁免。</p>\n<p><strong>失败</strong> 生物陷入目眩1轮。</p>\n<p><strong>大失败</strong> 生物陷入目眩3轮。</p>",
+            "name": "法术效果：闪光皮肤 Sparkleskin"
         }
     }
 }

@@ -33,7 +33,7 @@
             "prototypeToken": {
                 "name": "Unbreakable Sorrow"
             },
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Mourn": {
                     "name": "Mourn",
@@ -93,9 +93,9 @@
                 "placeHolder": "placeHolder"
             },
             "name": "暴动的阿格杜骡群 Ornery Augdunars",
-            "disable": "<p>以任意组合成功通过4次后述检定：@Check[nature|dc:14]（受训）来安抚动物，@Check[intimidation|dc:16]（未受训）来吓跑阿格杜骡，@Check[will|dc:18]（受训）来稳住阵脚并表现出自信心，从而使得阿格杜骡转向离开。对于每次成功，危害都会在攻击检定中承受累计-1点减值。</p>",
+            "disable": "<p>以任意组合成功通过4次后述检定：@Check[nature|dc:14]（受训）来安抚动物，@Check[intimidation|dc:16]（未受训）来吓跑阿格杜骡，@Check[will|dc:18]（受训）来稳住阵脚并表现出自信心，从而使得阿格杜骡转向离开。对于每次成功，危害都会在攻击检定中承受累计-1减值。</p>",
             "hazarddescription": "<p>受惊的阿格杜骡在围场内失控地狂奔，在奔跑途中又咬又踢。</p>",
-            "routine": "<p>（2个动作）阿格杜骡群使用一个动作来对一个目标进行啃咬打击，然后它们使用另一个动作对一个不同的目标进行@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]（运动[[/r 1d20+9 #Athletics]]{+9}）。若阿格杜骡群从自身的上个回合开始承受过伤害的话，它们会使用首个动作使用兽蹄踢踏，然后在第二个动作中尝试啃咬打击或摔绊。</p>",
+            "routine": "<p>（2动作）阿格杜骡群使用一个动作来对一个目标进行啃咬打击，然后它们使用另一个动作对一个不同的目标进行@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]（运动[[/r 1d20+9 #Athletics]]{+9}）。若阿格杜骡群从自身的上个回合开始承受过伤害的话，它们会使用首个动作使用兽蹄踢踏，然后在第二个动作中尝试啃咬打击或摔绊。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Rile": {
@@ -176,7 +176,7 @@
                     "description": "<p><strong>Requirements</strong> An enemy is under an emotion effect within 20 feet of the unfeeling empath</p>\n<hr />\n<p><strong>Effect</strong> The unfeeling empath regains @Damage[1d4[healing]] Hit Points and becomes emotionally excited for 3 rounds. While excited, the unfeeling empath takes a –1 penalty to AC, gains a +1 status bonus to attack rolls, and deals an additional @Damage[1d4[mental]] damage with its melee Strikes.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.wL4QI1h4YvdHoOuG]{Effect: Drink Emotions}</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Cathartic Howl": {
@@ -184,7 +184,7 @@
                     "description": "<p><strong>Requirements</strong> The unfeeling empath is under an emotion effect</p>\n<hr />\n<p><strong>Effect</strong> The unfeeling empath attempts to counteract the emotion effect, with a counteract modifier of [[/r 1d20+11 #Counteract]]{+11}. It then howls, projecting those emotions in a @Template[cone|distance:15] (or a @Template[cone|distance:30] if the unfeeling empath successfully counteracted the emotion effect). Creatures in the area take @Damage[2d8[mental]|options:area-damage] damage (@Check[will|dc:18|basic|options:area-effect] save). A creature that critically fails this saving throw also takes @Damage[1d4[mental,persistent]] damage.</p>"
                 }
             },
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "publicNotes": "<p>The soul of a gnome killed by tragedy sometimes becomes so entangled in conflicting emotions that it becomes trapped and reanimates its own corpse. Known as unfeeling empaths, these undead wander in search of others' emotions. When they find thinking prey, they relentlessly goad that creature to elicit and consume their feelings. Though initially harmless, feeding drives an unfeeling empath into an expressive frenzy as they overload the victim's mind, resuming their senses only after their prey is dead.</p>\n<h2>Misery Loves Company</h2>\n<p>Unfeeling empaths appreciate any companions who can endure their outbursts. Lost souls and beings who prey on emotions sometimes adopt an unfeeling empath out of solidarity or because the undead gnomes are easy to torment. Thus, where these creatures appear, a sakhil, will-o'-wisp, or ghost is often nearby.</p>"
         },
         "Giant Leech": {
@@ -203,7 +203,7 @@
                 },
                 "Parasitizing": {
                     "name": "寄生 Parasitizing",
-                    "description": "<p>当处于钻进闪耀钳女士体内的状态时，巨水蛭获得掩蔽，无法作出攻击，但可以撕咬（Gnash）。若巨水蛭陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]，其它生物就能花费单动作来移除水蛭，这具有攻击和操作特征，尝试1次@Check[athletics|against:fortitude|rollerRole:target]或@Check[medicine|against:fortitude|rollerRole:target]检定对抗巨水蛭的强韧DC。成功时，该生物把水蛭抽出，使得闪耀钳女士的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]状态降低1点，并将水蛭安置在与该生物以及闪耀钳女士相邻的空间内。</p>"
+                    "description": "<p>当处于钻进闪耀钳女士体内的状态时，巨水蛭获得掩蔽，无法作出攻击，但可以撕咬（Gnash）。若巨水蛭陷入@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]、@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]或@UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]，其它生物就能花费单动作来移除水蛭，这具有攻击和操作特征，尝试一次@Check[athletics|against:fortitude|rollerRole:target]或@Check[medicine|against:fortitude|rollerRole:target]检定对抗巨水蛭的强韧DC。成功时，该生物把水蛭抽出，使得闪耀钳女士的@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]状态降低1点，并将水蛭安置在与该生物以及闪耀钳女士相邻的空间内。</p>"
                 }
             },
             "prototypeToken": {
@@ -254,7 +254,7 @@
                     "description": "<p><em>Relics are a special type of magic item that can grow in power as their wielders unlock additional abilities. The full rules for relics and their aspects begin on page 94 of the Gamemastery Guide.</em></p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Death Gaze": {
@@ -286,7 +286,7 @@
             },
             "name": "Corrupted Blade Spirit",
             "publicNotes": "<p>Creatures that once held particular items dear can be bound to them after death, their souls inhabiting the item from within. These might be the faithful haunting symbols of their faith, warriors clinging to their old weapons, or the greedy inhabiting their precious wealth. These spirits' physical bodies have long since degraded, but they keep their corrupted relics pristine. The spirits manifest on the unsuspecting or curious, determined to destroy anyone who would dare show any interest in their one precious possession.</p>\n<p>Though rare, there are several kinds of corrupted relics. The bound spirit can manifest in different ways, from animating an ancient weapon to possessing anyone who dons the item. Destroying the relic often ends up being the simplest, most direct way to banish the haunt itself. Destroying or dispelling the spirit without destroying the relic, however, can sometimes leave priceless treasure behind.</p>\n<p>The amulet shown here has the air and death aspects. Its minor gifts, deadly spark and death gaze, power some of the spirit's abilities. Someone who claims the relic might gain different gifts from those aspects.</p>",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "blurb": "Variant Corrupted Relic"
         },
         "Soulbound Mauler (Neutral Good)": {
@@ -439,7 +439,7 @@
         },
         "Avernal Flashback": {
             "disable": "<p>@Check[athletics|dc:22], @Check[occultism|dc:22], or @Check[religion|dc:22]; it takes three successful checks to weaken the haunt or erect supports that brace the ceiling. A PC who speaks Dwarven can attempt @Check[diplomacy|dc:22] (trained) checks to calm the phantasmal cave worm.</p>",
-            "stealthdetails": "<p>(trained)</p>",
+            "stealthdetails": "<p>（受训）</p>",
             "data": {
                 "placeHolder": "placeHolder"
             },
@@ -515,7 +515,7 @@
                 "placeHolder": "placeHolder"
             },
             "hazarddescription": "<p>Enchanted carvings of animals transform any creatures who damage the door into the animal they harmed.</p>",
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Animal Form": {
                     "name": "Animal Form",
@@ -572,7 +572,7 @@
                     "name": "Sneak Attack"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Surprise Attack": {
@@ -760,7 +760,7 @@
                 },
                 "Swallow Whole": {
                     "name": "Swallow Whole",
-                    "description": "<p>Large, @Damage[6d6[bludgeoning],2d6[fire]]{6d6 bludgeoning plus 2d6 fire} and devour magic, Rupture 40</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+                    "description": "<p>Large, @Damage[6d6[bludgeoning],2d6[fire]] and devour magic, Rupture 40</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
                 },
                 "+10 to Detect Lies and Illusions": {
                     "name": "+10 to Detect Lies and Illusions"
@@ -786,7 +786,7 @@
                 },
                 "Measure Soul": {
                     "name": "Measure Soul",
-                    "description": "<p>Stoneriver mentally pries through the mind of a creature within 60 feet, dealing @Damage[10d8[mental]] damage (@Check[will|dc:29|basic] save). Stoneriver can choose to make this damage nonlethal or choose not to damage the creature at all. For 1 minute, Stoneriver gains a +1 circumstance bonus to attack rolls, damage rolls, and Perception checks against that creature. If the creature is evil and it failed its save, the creature is additionally @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} (@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4} on a critical failure). Stoneriver can't use Measure Soul again for 1d4 rounds.</p>"
+                    "description": "<p>Stoneriver mentally pries through the mind of a creature within 60 feet, dealing @Damage[10d8[mental]] damage (@Check[will|dc:29|basic] save). Stoneriver can choose to make this damage nonlethal or choose not to damage the creature at all. For 1 minute, Stoneriver gains a +1 circumstance bonus to attack rolls, damage rolls, and Perception checks against that creature. If the creature is evil and it failed its save, the creature is additionally @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} (@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4} on a critical failure). Stoneriver can't use Measure Soul again for [[/gmr 1d4 #Recharge Measure Soul]]{1d4 rounds}.</p>"
                 }
             },
             "data": {
@@ -857,7 +857,7 @@
                     "description": "<p>Mumkuh is nigh unkillable. She loses her weakness to slashing and gains resistance 3 against all damage, and she gains weakness 6 to critical hits.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 }
             },
@@ -868,7 +868,7 @@
                 "placeHolder": "placeHolder"
             },
             "publicNotes": "<p>Cunning zombie lords command their lesser kin, which they can use in unexpected ways. They have been known to direct or collaborate with husk and withered zombies, creating cells of intelligent zombies hiding within the ranks of mindless undead.</p>\n<hr />\n<p>Simple to create and varied in purpose, these shambling undead are often used for their strength and endless stamina to conduct boring, repetitive tasks.</p>",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "blurb": "Female elite zombie lord"
         },
         "Larval Cave Worm Brood (Rock)": {
@@ -914,7 +914,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The statue disgorges a @UUID[Compendium.pf2e.pathfinder-bestiary-3.Actor.aQusm2Uh1tw00IVb]{Bore Worm Swarm} into an adjacent 10-foot-by-10-foot space. Creatures in the swarm's area are immediately affected by the bore worm swarm's Swarming Bites, after which the bore worm swarm rolls initiative and acts independently before disappearing after [[/gmr 1d6 #Minutes]]{1d6 minutes}.</p>"
                 },
                 "Construct Armor": {
-                    "name": "Construct Armor",
+                    "name": "构装护甲 Construct Armor",
                     "description": "<p>Like normal objects, a crimson worm statue has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness. Once a crimson worm statue is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 22.</p>"
                 }
             },
@@ -925,7 +925,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Crimson Worm Statue",
-            "ac": "(22 when broken); construct armor"
+            "ac": "（破损时22）；构装护甲"
         },
         "Spitter Pods": {
             "prototypeToken": {
@@ -937,7 +937,7 @@
             "name": "吐毒孢囊 Spitter Pods",
             "disable": "<p>@Check[crafting|dc:18]来向真菌的储存罐中添加破坏性的化学制剂，@Check[nature|dc:18]（受训）来识别如何限制化学制剂的流动，或者@Check[deception|dc:20]（受训）来散布能扰乱真菌的孢子；需要合计3次成功才能解除陷阱。</p>",
             "hazarddescription": "<p>特殊的孢子囊，能排出毒液球并从炼金储存罐中补充毒液。</p>",
-            "routine": "<p>（3个动作）吐毒孢囊交替进行作出打击和装填动作。每个成功的解除陷阱检定都会使得吐毒孢囊失去1个动作。</p>",
+            "routine": "<p>（3动作）吐毒孢囊交替进行作出打击和装填动作。每个成功的解除陷阱检定都会使得吐毒孢囊失去1个动作。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Unfurl": {
@@ -992,16 +992,16 @@
             "hp": "Thresholds 48 (3 segments), 24 (2 segments)",
             "items": {
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>30 feet. A creature that enters the area must attempt a @Check[fortitude|dc:21|options:area-effect,inflicts:sickened] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}, and on a critical failure, the creature also takes a –5 status penalty to its Speeds for 1 round. While within the aura, the creature takes a –2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to all xulgaths stenches for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uB3CVn3momZO9h0L]{Effect: Xulgath Stench}</p>"
                 },
                 "Troop Defenses": {
-                    "name": "Troop Defenses",
+                    "name": "部队防御 Troop Defenses",
                     "description": "<p><strong>Thresholds</strong> 48 (3 segments), 24 (2 segments)</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
                 },
                 "Fang and Claw": {
                     "name": "Fang and Claw",
-                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The xulgath ravening lashes out at enemies within 5 feet (@Check[reflex|dc:21|basic|options:area-effect] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[1d6[slashing]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(1d6+5)[slashing]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d6+5)[slashing]|options:area-damage] damage</p>"
+                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The xulgath ravening lashes out at enemies within 5 feet (@Check[reflex|dc:21|basic|options:area-effect] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[1d6[slashing]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(1d6+5)[slashing]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d6+5)[slashing]|options:area-damage]伤害</p>"
                 },
                 "Infected Wounds": {
                     "name": "Infected Wounds",
@@ -1012,7 +1012,7 @@
                     "description": "<p>The troop fires a ranged attack in the form of a @Template[burst|distance:5] within 50 feet that deals @Damage[3d6[piercing]|options:area-damage] damage (@Check[reflex|dc:18|basic|options:area-effect] save), then the troop either Steps or Strides up to 15 feet toward the area they attacked.</p>"
                 },
                 "Troop Movement": {
-                    "name": "Troop Movement",
+                    "name": "部队移动 Troop Movement",
                     "description": "<p>Whenever a troop Strides, it first Forms Up as a free action to condense into a 20-foot-by-20-foot area (minus any missing squares), then moves up to its Speed. This works just like a Gargantuan creature moving; for instance, if any square of the troop enters difficult terrain, the extra movement cost applies to the whole troop.</p>"
                 }
             },
@@ -1045,7 +1045,7 @@
             "publicNotes": "<p>When not being controlled and manipulated by alghollthus, ulat-kinis have found they can develop formidable psychic powers. Those who master this craft are dubbed \"mindreavers\" by their awestruck kin.</p>\n<h2>Ulat-Kini Culture</h2>\n<p>The creatures who surface humanoids consider scum still hold grand empires beneath the waves. While some ulat-kinis still revere the alghollthu who created them and others have learned to hate their creators, there are ulat-kinis who have found a new way forward. They have developed their own culture outside of alghollthu influence, founding new underwater traditions and creating new cultural standards.</p>"
         },
         "Angry Dead": {
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Howl of Agony": {
                     "name": "Howl of Agony",
@@ -1076,12 +1076,12 @@
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Troop Defenses": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>",
-                    "name": "Troop Defenses"
+                    "name": "部队防御 Troop Defenses"
                 },
                 "Bolt Barrage": {
                     "name": "Bolt Barrage",
@@ -1089,14 +1089,14 @@
                 },
                 "General Melee": {
                     "name": "General Melee",
-                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The hryngar breccia squad engages in a coordinated attack with its melee weapons against each enemy in a @Template[emanation|distance:5] (@Check[reflex|dc:28|basic|options:area-effect] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d8+6)[bludgeoning]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d8+10)[bludgeoning]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d8+14)[bludgeoning]|options:area-damage] damage</p>"
+                    "description": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The hryngar breccia squad engages in a coordinated attack with its melee weapons against each enemy in a @Template[emanation|distance:5] (@Check[reflex|dc:28|basic|options:area-effect] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d8+6)[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d8+10)[bludgeoning]|options:area-damage]伤害</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(3d8+14)[bludgeoning]|options:area-damage]伤害</p>"
                 },
                 "Raise Shields": {
                     "name": "Raise Shields",
                     "description": "<p>The hryngar breccia squad raises steel shields, with the effects of Raise a Shield.</p>\n<hr />\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.2YgXoHvJfrDHucMr]{Effect: Raise a Shield}</p>"
                 },
                 "Troop Movement": {
-                    "name": "Troop Movement",
+                    "name": "部队移动 Troop Movement",
                     "description": "<p>Whenever the hryngar breccia squad Strides, it first Forms Up as a free action to condense into a 20-foot-by-20-foot area (minus any missing squares), then moves up to its Speed. This works just like a Gargantuan creature moving; for instance, if any square of the hryngar breccia squad enters difficult terrain, the extra movement cost applies to the entire hryngar breccia squad.</p>"
                 },
                 "Push Back": {
@@ -1129,7 +1129,7 @@
             },
             "name": "Cave-In",
             "hazarddescription": "<p>The rubble shifts and the cavern ceiling collapses.</p>",
-            "stealthdetails": "<p>(trained)</p>"
+            "stealthdetails": "<p>（受训）</p>"
         },
         "Skibrellon": {
             "prototypeToken": {
@@ -1147,7 +1147,7 @@
                 },
                 "Spore Burst": {
                     "name": "孢子迸发 Spore Burst",
-                    "description": "<p>当菌丝暴君死亡时，一股原能能量从它体内迸发出来影响@Template[emanation|distance:30]区域，为区域内的每个真菌生物恢复3d8点并对每个非真菌生物造成@Damage[3d8[void]|options:area-damage]伤害（@Check[fortitude|dc:20|basic|options:area-effect]豁免）。该区域会遍布真菌，成为困难地形。</p>"
+                    "description": "<p>当菌丝暴君死亡时，一股原能能量从它体内迸发出来影响@Template[emanation|distance:30]区域，为区域内的每个真菌生物恢复@Damage[3d8[healing]]点并对每个非真菌生物造成@Damage[3d8[void]|options:area-damage]伤害（@Check[fortitude|dc:20|basic|options:area-effect]豁免）。该区域会遍布真菌，成为困难地形。</p>"
                 },
                 "Change Shape": {
                     "name": "变形 Change Shape",
@@ -1178,7 +1178,7 @@
                     "description": "<p><strong>Requirements</strong> The battlepriest is mounted on a creature with a Trample ability</p>\n<hr />\n<p><strong>Effect</strong> The battlepriest commands their mount. Until the beginning of the battlepriest's next turn, the saving throw DC of the mount's Trample increases to @Check[reflex|dc:26|basic], and the Trample deals an additional @Damage[3d6[spirit]] damage.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Sheltered Command": {
@@ -1208,7 +1208,7 @@
                 }
             },
             "hazarddescription": "<p>A shockwave of energy surges out from the room's center.</p>",
-            "stealthdetails": "<p>(master)</p>"
+            "stealthdetails": "<p>（大师）</p>"
         },
         "Explosive Entrance": {
             "prototypeToken": {
@@ -1219,7 +1219,7 @@
             },
             "name": "Explosive Entrance",
             "hazarddescription": "<p>An alchemical bombs explodes when the rubble is shifted, filling the hall with flame.</p>",
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Collapse": {
                     "name": "Collapse",
@@ -1283,7 +1283,7 @@
                 },
                 "Stinky Sweat": {
                     "name": "Stinky Sweat",
-                    "description": "<p>10 feet. When a slime puppeteer takes fire damage, they form a layer of pungent slime on their skin that remains until washed away. While the layer is present, creatures adjacent to the slime puppeteer must attempt a @Check[fortitude|dc:24] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. A creature that succeeds at its save is immune to the puppeteer's sweat for 1 minute.</p>"
+                    "description": "<p>10 feet. When a slime puppeteer takes fire damage, they form a layer of pungent slime on their skin that remains until washed away. While the layer is present, creatures adjacent to the slime puppeteer must attempt a @Check[fortitude|dc:24|options:area-effect,inflicts:sickened] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. A creature that succeeds at its save is immune to the puppeteer's sweat for 1 minute.</p>"
                 },
                 "Envelop": {
                     "name": "Envelop",
@@ -1302,7 +1302,7 @@
         },
         "Plague Zombie": {
             "publicNotes": "<p>Plague zombies are infested with hideous contagions.</p>\n<hr />\n<p>A zombie's only desire is to consume the living. Unthinking and ever-shambling harbingers of death, zombies stop only when they're destroyed.</p>",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "blurb": "Variant Plague Zombie",
             "items": {
                 "Slow": {
@@ -1310,7 +1310,7 @@
                     "description": "<p>A zombie is permanently @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Zombie Rot": {
@@ -1365,7 +1365,7 @@
                     "description": "<p>Krohan has very limited access to Rivethun magic, able to cast spells only when experiencing pain or distress.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Righthand Man": {
@@ -1380,7 +1380,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Krohan (Possessed)",
-            "hp": "Void Healing",
+            "hp": "虚能治疗 Void Healing",
             "ac": "(19 with shield raised)"
         },
         "Gray Worm": {
@@ -1402,12 +1402,12 @@
                     "description": "<p>The gray worm recovers from the @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed}, and @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned} conditions at the end of its turn. It's also immune to penalties to its Speeds and the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} condition, and it ignores difficult terrain and greater difficult terrain.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Paralysis": {
                     "name": "Paralysis",
-                    "description": "<p>Any living creature hit by a gray worm's stinger Strike must succeed at a @Check[fortitude|dc:27] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
+                    "description": "<p>Any living creature hit by a gray worm's stinger Strike must succeed at a @Check[fortitude|dc:27|options:inflicts:paralyzed] save or become @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}. It can attempt a new save at the end of each of its turns, and the DC cumulatively decreases by 1 on each such save.</p>"
                 },
                 "Thrash": {
                     "name": "Thrash",
@@ -1422,7 +1422,7 @@
             },
             "name": "Gray Worm",
             "publicNotes": "<p>One subspecies that some call unnatural is the gray worm. It is theorized that these cave worms hatched near the corpses of thousands of graves, perhaps deep in the layers of the Darklands that once held large populations at the moment of Starfall. The void energy associated with the collective extinction of so much life has warped these worms so that they embody the misery and death caused by the cataclysm. They are unique among cave worms in that they prefer not to swallow prey alive, but to eat only dead flesh.</p>",
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Hryngar Skull Collector": {
             "blurb": "Variant Executioner",
@@ -1439,7 +1439,7 @@
                     "description": "<p><strong>Requirements</strong> The executioner is adjacent to a dying creature or a creature specifically prepared for a killing blow</p>\n<hr />\n<p><strong>Effect</strong> The executioner Strikes the creature with their greataxe. On a hit, in addition to taking damage, the target must attempt a @Check[fortitude|dc:24] save or be reduced to 0 HP and become @UUID[Compendium.pf2e.conditionitems.Item.yZRUzMqrMmfLu0V1]{Dying 1}. If the creature was already dying (including if it was reduced to 0 HP by the Strike's damage), the creature's dying value increases by 1, in addition to any increase from the Strike. On a critical failure, the creature dies instantly.</p>\n<p>If the executioner's Strike was a critical hit, the target uses the outcome for one degree of success worse than the result of their saving throw.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Intimidating Strike": {
@@ -1502,7 +1502,7 @@
             },
             "name": "遭冒犯的墓志铭 Offended Epitaphs",
             "disable": "<p>三次@Check[diplomacy|dc:20]，@Check[occultism|dc:20]或@Check[religion|dc:20]用于斥退这些抱怨不停地精魂</p>",
-            "routine": "<p>（2个动作）先祖精魂们出现在区域<strong>D1</strong>和区域<strong>D2</strong>，每个精魂都会在现身数轮后消散，然后有其他精魂取而代之。</p>",
+            "routine": "<p>（2动作）先祖精魂们出现在区域<strong>D1</strong>和区域<strong>D2</strong>，每个精魂都会在现身数轮后消散，然后有其他精魂取而代之。</p>",
             "stealthdetails": "<p>（受训）</p>",
             "items": {
                 "Growing Grumbles": {
@@ -1568,7 +1568,7 @@
                     "name": "Attack of Opportunity"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Rage": {
@@ -1643,7 +1643,7 @@
                     "description": "<p><strong>Requirements</strong> The hryngar king's agent is holding manacles and is adjacent to a creature who is @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}, @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, or @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}</p>\n<hr />\n<p><strong>Effect</strong> The hryngar king's agent applies the manacles.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Nerve Strike": {
@@ -1653,6 +1653,9 @@
                 "Sneak Attack": {
                     "name": "Sneak Attack",
                     "description": "<p>The hryngar king's agent deals an additional 2d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} creatures.</p>"
+                },
+                "equipment-Manacles Key": {
+                    "name": "Manacles Key"
                 }
             }
         },
@@ -1664,7 +1667,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Larval Cave Worm Brood (Grey)",
-            "hp": "void healing",
+            "hp": "虚能治疗",
             "items": {
                 "Tremorsense (Imprecise) 100 Feet": {
                     "name": "Tremorsense (Imprecise) 100 Feet",
@@ -1679,7 +1682,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> The larval cave worm brood would be affected by a condition or adverse effect (such as @UUID[Compendium.pf2e.spells-srd.Item.dN8QBNuTiaBHCKUe]{Cursed Metamorphosis})</p><hr /><p><strong>Effect</strong> The larval brood negates the triggering condition or effect. Effects from artifacts, deities, or a similarly powerful source can't be avoided in this way.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Ferocious Gnaw": {
@@ -1756,7 +1759,7 @@
                     "name": "+2 Status To Saves Vs. Petrifying Gaze"
                 },
                 "Stench": {
-                    "name": "Stench",
+                    "name": "恶臭 Stench",
                     "description": "<p>30 feet. A creature that enters the area must attempt a @Check[fortitude|dc:21|options:area-effect,inflicts:sickened] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}, and on a critical failure, the creature also takes a –5 status penalty to its Speeds for 1 round. While within the aura, the creature takes a –2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to all xulgaths stenches for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.uB3CVn3momZO9h0L]{Effect: Xulgath Stench}</p>"
                 },
                 "Far-Reaching Fear": {
@@ -1831,7 +1834,7 @@
                 "placeHolder": "placeHolder"
             },
             "name": "Redcap Cavalry",
-            "hp": "fast healing 10",
+            "hp": "快速治疗10",
             "prototypeToken": {
                 "name": "Redcap Cavalry"
             },
@@ -1852,7 +1855,7 @@
                     "description": "<p>A redcap's woolen hat is dyed with the blood of its victims. If the redcap loses its cap, it no longer benefits from fast healing and takes a –4 status penalty to its damage rolls. It can create a new cap in 10 minutes, but that cap doesn't grant its powers until the redcap has turned it red with Blood Soak. A cap has no benefit for creatures other than the redcap who made it.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.s5mS7CyE0oOYlecv]{Effect: Lost Red Cap}</p>"
                 },
                 "Fast Healing 10": {
-                    "name": "Fast Healing 10",
+                    "name": "快速治疗 Fast Healing 10",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
                 "Divine Revulsion": {
@@ -1884,7 +1887,7 @@
                     "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> The juvenile cave worm would be affected by a condition or adverse effect (such as @UUID[Compendium.pf2e.spells-srd.Item.dN8QBNuTiaBHCKUe]{Cursed Metamorphosis})</p>\n<hr />\n<p><strong>Effect</strong> The juvenile cave worm negates the triggering condition or effect. Effects from artifacts, deities, or a similarly powerful source can't be avoided in this way.</p>"
                 },
                 "Void Healing": {
-                    "name": "Void Healing",
+                    "name": "虚能治疗 Void Healing",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
                 "Clumsy Leap": {
@@ -1912,7 +1915,7 @@
             },
             "name": "Juvenile Cave Worm (Gray)",
             "publicNotes": "<p>A juvenile cave worm has left its brood or eaten them, and has started to establish its own territory, hunting in regular intervals. These young worms tend to be more aggressive towards other life forms than their relatively mellow adult kin.</p>\n<hr />\n<p>Cave worms are gigantic scavengers who shape their environment as they bore through rock, ice, or other substances on their search for food. These behemoths consume everything in their path. Though they usually prefer soil, minerals, and occasionally constructed buildings, they will also eat living creatures, plants, and other organic materials. There are numerous species of cave worms, each a different color and perfectly adapted to their surrounding environment. Cave worms rarely exceed a typical animal's intelligence. They're also poor parents that lay a clutch of eggs sealed in a protein shell before abandoning them. After a short incubation period, the young hatch, forming a swarming mass of ravenous larval cave worms. When nearing maturity or when starved of sufficiently rich soil, these larval worms turn on one another. They fight for dominance or flee until only a few remain. The survivors grow quickly, rapidly becoming juvenile cave worms.</p>\n<h2>Brood Variance</h2>\n<p>The cave worms presented here are typical of standard rock worms. For crimson worms, use the elite adjustment and add immunity to fire. For azure worms, increase their swim Speed to 40. Gray worms gain void healing and a weakness to vitality energy 5. Glacial worms gain immunity to cold.</p>\n<h2>Early Hatchling</h2>\n<p>A single cave worm egg can produce several thousand larval cave worms when it slowly matures over a millennia. However, if a cave worm egg is disturbed or damaged before its natural cycle completes, the egg enters a rapid stage of maturation. Only a few hundred worms survive this process, creating significantly fewer offspring than when allowed to mature slowly.</p>",
-            "hp": "void healing"
+            "hp": "虚能治疗"
         },
         "Hryngar Officer": {
             "data": {
@@ -1941,7 +1944,7 @@
                     "description": "<p>When the captain of the guard rolls a success on a Will save against a fear effect, they get a critical success instead. In addition, any time they gain the @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened} condition, reduce its value by 1.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 }
             },
@@ -2022,7 +2025,7 @@
                     "description": "<p>Royal guards automatically disbelieve all illusions of 2nd level or lower.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 }
             },
@@ -2067,7 +2070,7 @@
             "hazarddescription": "<p>Runes hidden in the door's carvings blast lightning down the hall.</p>",
             "name": "Electrified Hall",
             "reset": "<p>automatic</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Synaptic Jolt": {
                     "name": "Synaptic Jolt",
@@ -2094,7 +2097,7 @@
                 },
                 "Camouflage": {
                     "name": "Camouflage",
-                    "description": "<p>The assassin vine can @UUID[Compendium.pf2e.actionspf2e.Item.XMcnh4cSI32tljXa]{Hide} in natural environments even if it doesn't have cover.</p>"
+                    "description": "<p>The assassin vine can [[/act hide]] in natural environments even if it doesn't have cover.</p>"
                 },
                 "Chemical Fertilizer": {
                     "name": "Chemical Fertilizer",
@@ -2148,7 +2151,7 @@
                 },
                 "Luminous Pattern": {
                     "name": "Luminous Pattern",
-                    "description": "<p>The sprites glow brightly, flying in a shifting pattern of light. All creatures within 20 feet become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute (@Check[will|dc:16] negates).</p>"
+                    "description": "<p>The sprites glow brightly, flying in a shifting pattern of light. All creatures within @Template[emanation|distance:20]{20 feet} become @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} for 1 minute (@Check[will|dc:16|options:area-effect,inflicts:dazzled] negates).</p>"
                 },
                 "Spark Bombardment": {
                     "name": "Spark Bombardment",
@@ -2187,7 +2190,7 @@
                     "description": "<p>When the gang leader rolls a success on a Reflex save, they get a critical success instead.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Nimble Dodge": {
@@ -2227,7 +2230,7 @@
             "items": {
                 "Adhesive": {
                     "name": "Adhesive",
-                    "description": "<p>The mimic is coated in an adhesive slime. Any creature that hits the mimic, is hit by the mimic, or otherwise touches the mimic must succeed at a @Check[reflex|dc:23] save or become @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} ([[/act escape dc=23]]). A weapon that hits the mimic is stuck to the mimic and can be removed with a successful @Check[athletics|dc:23] check (made as a single action).</p>\n<p>A mimic can have any number of objects or creatures stuck to it at a time. The mimic can release a stuck creature or object by using a single action, and the adhesive dissolves 1 minute after the mimic dies, releasing all stuck objects and creatures.</p>"
+                    "description": "<p>The mimic is coated in an adhesive slime. Any creature that hits the mimic, is hit by the mimic, or otherwise touches the mimic must succeed at a @Check[reflex|dc:23|options:inflicts:grabbed] save or become @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} ([[/act escape dc=23]]). A weapon that hits the mimic is stuck to the mimic and can be removed with a successful @Check[athletics|dc:23] check (made as a single action).</p>\n<p>A mimic can have any number of objects or creatures stuck to it at a time. The mimic can release a stuck creature or object by using a single action, and the adhesive dissolves 1 minute after the mimic dies, releasing all stuck objects and creatures.</p>"
                 },
                 "Mimic Object": {
                     "description": "<p>The mimic assumes the shape of any Medium object. This doesn't change the mimic's texture or overall size but can alter its coloration and visual appearance. It has an automatic result of 28 on Deception checks and DCs to pass as the object that it's mimicking.</p>",
@@ -2381,7 +2384,7 @@
             },
             "items": {
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Toil is Strength": {
@@ -2487,7 +2490,7 @@
                     "description": "<p>If Narseigus' next action is to cast an occult spontaneous cantrip or an occult spontaneous spell of 4th level or lower, he reduces the number of actions to cast it by 1 (minimum 1 action).</p>"
                 },
                 "Steady Spellcasting": {
-                    "name": "Steady Spellcasting",
+                    "name": "镇定施法 Steady Spellcasting",
                     "description": "<p>If a reaction would disrupt Narseigus' spellcasting action, he attempts a @Check[flat|dc:15]. On a success, the action isn't disrupted.</p>"
                 },
                 "+2 Status to All Saves vs. Magic": {
@@ -2498,7 +2501,7 @@
                     "description": "<p>When Narseigus gains the @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed}, or @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned} condition, roll a @Check[flat|dc:15]. On a success, he ignores the condition.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Worm Form": {
@@ -2546,7 +2549,7 @@
             "items": {
                 "Spore Burst": {
                     "name": "Spore Burst",
-                    "description": "<p>When a hyphae tyrant dies, a burst of primal energy explodes from its body in a @Template[emanation|distance:30], restoring 3d8 to each fungus creature and dealing @Damage[3d8[void]|options:area-damage] damage (@Check[fortitude|dc:20|basic|options:area-effect] save) to each non-fungus creature in the area. This area is filled with fungus, becoming difficult terrain.</p>"
+                    "description": "<p>When a hyphae tyrant dies, a burst of primal energy explodes from its body in a @Template[emanation|distance:30], restoring @Damage[3d8[healing]] to each fungus creature and dealing @Damage[3d8[void]|options:area-damage] damage (@Check[fortitude|dc:20|basic|options:area-effect] save) to each non-fungus creature in the area. This area is filled with fungus, becoming difficult terrain.</p>"
                 },
                 "Spores": {
                     "name": "Spores",
@@ -2557,7 +2560,7 @@
                     "description": "<p>A hyphae tyrant intuitively senses and tracks all nearby fungi. The sense can distinguish between fungus creatures, features made of fungus, and creatures covered in spores.</p>"
                 },
                 "Change Shape": {
-                    "name": "Change Shape",
+                    "name": "变身 Change Shape",
                     "description": "<p>The hyphae tyrant transforms into a Small fungus. This ability otherwise uses the effects of @UUID[Compendium.pf2e.spells-srd.Item.dileJ0Yxqg76LMvu]{One with Plants}.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.ChangeShape]</p>"
                 },
                 "Spore Cloud": {
@@ -2625,7 +2628,7 @@
                     "name": "Speed 20 feet (west only)"
                 }
             },
-            "stealthdetails": "<p>(trained)</p>"
+            "stealthdetails": "<p>（受训）</p>"
         },
         "Hrungul Ironeye": {
             "prototypeToken": {
@@ -2760,7 +2763,7 @@
                     "description": "<p>Ashrin is a puppet of the demon Kaivirris. He's harmed by spirit damage as if he were a fiend.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Fiendish Infusion": {
@@ -2785,7 +2788,7 @@
             "hazarddescription": "<p>Variant confounding betrayal</p>\n<p>Allies appear to shed their skin, transforming into either giant worm monsters or masses of wriggling worms.</p>",
             "routine": "<p>(1 action, illusion, incapacitation, occult) The haunt continues to confound victims' senses and inspire them to commit violence against each other. Each creature in the haunt's area must attempt a @Check[will|dc:26].</p>\n<p><strong>Critical Success</strong> The creature is unaffected and temporarily immune for 1 minute.</p>\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature is confused for 1 round.</p>\n<p><strong>Critical Failure</strong> The creature is confused for 1 minute.</p>",
             "reset": "<p>The haunt deactivates 1 minute after all creatures leave the area but resets immediately thereafter.</p>",
-            "stealthdetails": "<p>(expert)</p>",
+            "stealthdetails": "<p>（专家）</p>",
             "items": {
                 "Unmask": {
                     "name": "Unmask",
@@ -2883,7 +2886,7 @@
             "disable": "<p>@Check[crafting|dc:28] (master) to neutralize the acid or @Check[thievery|dc:30] (master) to disable the pressure plates</p>",
             "hazarddescription": "<p>Pressure plates in the hall trigger the release of caustic gas.</p>",
             "reset": "<p>A 10-minute Interact activity and a new supply of caustic gas.</p>",
-            "stealthdetails": "<p>(master)</p>",
+            "stealthdetails": "<p>（大师）</p>",
             "items": {
                 "Collapse": {
                     "name": "Collapse",
@@ -2920,10 +2923,10 @@
             "items": {
                 "Troop Defenses": {
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>",
-                    "name": "Troop Defenses"
+                    "name": "部队防御 Troop Defenses"
                 },
                 "Troop Movement": {
-                    "name": "Troop Movement",
+                    "name": "部队移动 Troop Movement",
                     "description": "<p>Whenever a troop Strides, it first Forms Up as a free action to condense into a 20-foot-by–20-foot area (minus any missing squares), then moves up to its Speed. See <em>Bestiary 3</em> for further details.</p>"
                 },
                 "Wild Swing": {
@@ -3019,7 +3022,7 @@
                     "description": "<p>The assassin isn't @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} to creatures of 8th level or lower that are @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden}, undetected, flanking, or using surprise attack.</p>"
                 },
                 "Light Blindness": {
-                    "name": "Light Blindness",
+                    "name": "强光致盲 Light Blindness",
                     "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LightBlindness]</p>"
                 },
                 "Quick Draw": {
@@ -3050,10 +3053,10 @@
             "name": "Ancestor Statue",
             "publicNotes": "<p>活化雕像通常都被用于守护墓穴、小型神庙、或是政府大楼中的某些区域，它们通常都会混杂在其他普通雕像之中，借此隐藏它们作为活化生物的特性，直到它们因为入侵者而被激怒。许多不那么谨慎的妄想雕像会活化并发动攻击的冒险者，会砸碎他们所遇到的一切雕像，从而使得那些无害的古老的文物惨遭破坏。</p>\n<hr />\n<p>通过某些仪式或是其他怪异的魔法，活物物体有着诸多形态和多种用途。这类生物中有很大一部分都被作为守卫，对那些毫无戒心的冒险者发起突然袭击。剩下的则是作为土豪们的玩物，被用于处理一些零活，诸如此类。</p>",
             "blurb": "Elite animated statue",
-            "ac": "(17 when broken); construct armor",
+            "ac": "（破损时17）；构装护甲",
             "items": {
                 "Construct Armor (Hardness 6)": {
-                    "name": "Construct Armor (Hardness 6)",
+                    "name": "构装护甲 Construct Armor（硬度6）",
                     "description": "<p>Like normal objects, an animated statue has Hardness. This Hardness reduces any damage it takes by an amount equal to the Hardness.</p>\n<p>Once an elite animated statue is reduced to less than half its Hit Points, or immediately upon being damaged by a critical hit, its construct armor breaks and its Armor Class is reduced to 17.</p>"
                 }
             }
