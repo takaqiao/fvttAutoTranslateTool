@@ -42,11 +42,19 @@
  8  repair_html_prefix.py   补回被丢掉的开标签
  9  normalize_enricher_labels.py   {label} 中文化
 10  scan_latin_nouns.py     正文里残留的英文词
-11  normalize_terms.py      术语归一（_terms.json）
-12  set_pack_labels.py      包 label（_pack_labels.json）
-13  scan_pack_binding.py    绑定门（EXCLUSIONS.binding.json）
-14  check_pack_targets.py   文件定位门
+11  strip_english_suffix.py 标签序列切分看不见的双语残留（判据：整叶以英文基线结尾）
+12  repair_bracket_bodies.py  --from-baseline  方括号内的机器件按英文基线重建
+13  normalize_uuid_labels.py  同一 @UUID 目标只留一个中文标签
+14  normalize_name_format.py  name 类叶子的 中文
+English -> 一个半角空格
+15  apply_path_patches.py   同形异义（只能靠路径区分的那几条）
+16  normalize_terms.py      术语归一（_terms.json）
+17  set_pack_labels.py      包 label（_pack_labels.json）
+18  gate.py                 8 项检查，唯一会非零退出的入口
 ```
+
+`gate.py` 就是验收：targets / binding / html / markup / bilingual / names / terms / patches。
+它固定在 `qa/reports` 下运行，其余脚本只报告、不退出。
 
 模组自带的 i18n（AV:E）走 `normalize_lang.py`，之后同样过 9/11。
 
@@ -63,6 +71,10 @@
 | `qa/_oversize_patches.json` | 超大叶子（Audio Credits）里只该译的那几句 |
 | `qa/_dead_fields.json` | 目标路径已失效的 mapping 字段（senses） |
 | `qa/EXCLUSIONS.binding.json` | 绑定门的归档豁免，每条附证据 |
+| `qa/EXCLUSIONS.bilingual.json` | 允许保留长段英文的叶子（署名 / OGL），逐条写明理由 |
+| `qa/_path_patches.json` | 同形异义的逐路径改写；`_not_patched` 记「故意不改」的那些 |
+| `qa/_uuid_labels.json` | 链接标签的人工裁定（术语库对该目标给错答案时） |
+| `qa/_gmguide_terms.json` | GM 指南的术语表（译名一律取 AV 语料里已有的） |
 
 ## 踩过的坑（别再踩）
 
@@ -85,6 +97,26 @@
    `system.perception.senses`，旧路径在 405 个 actor 上全为 null。
 8. **发版是 CI 干的**，推 `X.Y.Z` tag 触发；`RELEASE_PROCESS.md` 旧版 §5–§7 的手工打包
    漏了 `inject-lang.js` 与 `lang/`，已改写。
+
+9. **方括号内被译成中文 = 富文本失效**，而所有覆盖率指标照样满分：
+   `@Damage[4d4[治疗]]`、`@Check[意志|dc:22]`、`traits:机械,陷阱`、
+   `@Localize[PF2E.NPC.Abilities.Glossary.紧勒]` 全都不会渲染成中文，只会解析失败。
+   上游 `pf2e_compendium_chn` 自己也从不翻译它们。唯独 `name:` 是给玩家看的标签，必须中文。
+10. **按位置对齐两个叶子的 enricher 是不安全的**：叶子数量相同不代表是同一批。
+    实测会把 `[[/r 1d20+17 #Grapple]]` 换成一个 `@UUID[...]` ——完全静默的损坏。
+    必须先比对「括号种类序列」（`@UUID[` / `@Damage[` / `[[/r`）一致才能按位合并。
+11. **同一个 @UUID 目标可以有几十种中文标签**（`Enfeebled` 一度有 24 种）。
+    权威不是语料里的多数票，而是「英文基线在同一位置的标签 + 术语库」——
+    这样 Remaster 改名（`Magic Missile` -> `Force Barrage`）才跟得上。
+12. **从标签里剥英文尾巴要先确认它有中文头**：对纯英文标签剥一次，
+    `Shield Block` 会变成 `Shield`，再查术语库就得到「护盾术」（法术）而不是「盾牌格挡」（专长）。
+13. **术语库给出语料里没人用过的译名时要人审**（`tm-new`）：19 条里有 2 条是错的
+    （`Invisibility` 的 wiki 页是符文不是法术；`Jaul Mezmin` 的「尓」是别字）。
+14. **房间号里的数字不是等级数字**：给「尾部数字」加空格的规则会把 `区域 C15` 改成 `区域 C1 5`；
+    后瞻断言必须同时排除字母和数字。
+15. **离线 wiki 的「增量重抓」曾是空转**：`dump_parsed_v2_concurrent.py` 的续跑判据只看
+    pageid 在不在 done 集合里，改过的页永远不会重抓。本轮实测 64% 的页面已被编辑。
+    修法见 `pf2wiki-scraper/invalidate_stale_v2.py`。
 
 ## 下一轮升级
 
